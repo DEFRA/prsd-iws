@@ -1,10 +1,10 @@
 ﻿namespace EA.Iws.Requests.WasteType
 {
     using System;
+    using Authorization;
     using Core.Authorization;
     using Core.Authorization.Permissions;
     using Prsd.Core.Mediator;
-    using Security;
 
     [NotificationReadOnlyAuthorize]
     [RequestAuthorization(ExportNotificationPermissions.CanEditExportNotification)]
@@ -16,6 +16,7 @@
             NotificationId = notificationId;
             IsDocumentAttached = isDocumentAttached;
         }
+
         public string Process { get; private set; }
         public Guid NotificationId { get; private set; }
         public bool IsDocumentAttached { get; private set; }

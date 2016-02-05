@@ -2,7 +2,7 @@
 {
     using System.Threading.Tasks;
     using Prsd.Core.Mediator;
-    using Requests.Security;
+    using Requests.Authorization;
 
     public class AuthorizationService
     {

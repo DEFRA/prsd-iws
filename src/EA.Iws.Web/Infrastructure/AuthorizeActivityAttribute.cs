@@ -4,7 +4,7 @@
     using System.Web;
     using System.Web.Mvc;
     using Prsd.Core.Mediator;
-    using Requests.Security;
+    using Requests.Authorization;
 
     public class AuthorizeActivityAttribute : AuthorizeAttribute
     {

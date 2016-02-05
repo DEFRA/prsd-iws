@@ -6,7 +6,7 @@
     using Domain.NotificationApplication;
     using Domain.NotificationAssessment;
     using Prsd.Core.Mediator;
-    using Requests.Security;
+    using Requests.Authorization;
 
     internal class NotificationReadOnlyAuthorizeDecorator<TRequest, TResponse> : IRequestHandler<TRequest, TResponse>
         where TRequest : IRequest<TResponse>

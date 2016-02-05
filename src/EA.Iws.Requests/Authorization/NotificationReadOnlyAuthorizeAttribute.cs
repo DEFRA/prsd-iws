@@ -1,4 +1,4 @@
-﻿namespace EA.Iws.Requests.Security
+﻿namespace EA.Iws.Requests.Authorization
 {
     using System;
 

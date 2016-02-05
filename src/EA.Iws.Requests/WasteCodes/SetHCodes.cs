@@ -2,9 +2,9 @@
 {
     using System;
     using System.Collections.Generic;
+    using Authorization;
     using Core.Authorization;
     using Core.Authorization.Permissions;
-    using Security;
 
     [NotificationReadOnlyAuthorize]
     [RequestAuthorization(ExportNotificationPermissions.CanEditExportNotification)]

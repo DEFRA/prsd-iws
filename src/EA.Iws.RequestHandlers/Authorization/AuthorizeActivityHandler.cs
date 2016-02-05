@@ -1,10 +1,9 @@
-﻿namespace EA.Iws.RequestHandlers.Security
+﻿namespace EA.Iws.RequestHandlers.Authorization
 {
     using System.Threading.Tasks;
-    using Authorization;
     using Prsd.Core.Domain;
     using Prsd.Core.Mediator;
-    using Requests.Security;
+    using Requests.Authorization;
 
     internal class AuthorizeActivityHandler : IRequestHandler<AuthorizeActivity, bool>
     {
