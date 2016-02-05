@@ -2,9 +2,9 @@
 {
     using System;
     using System.Threading.Tasks;
+    using Core.Notification;
     using Core.Shared;
     using DataAccess;
-    using Domain;
     using Domain.NotificationApplication;
     using Domain.TransportRoute;
     using FakeItEasy;

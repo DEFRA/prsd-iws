@@ -749,7 +749,6 @@
     <Content Include="Areas\AdminExportMovement\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\AdminExportMovement\Views\_ViewStart.cshtml" />
     <Content Include="Areas\AdminExportMovement\Views\Home\_NotificationSwitcher.cshtml" />
-    <Content Include="Areas\AdminExportAssessment\Views\Home\_InternalMenuExport.cshtml" />
     <Content Include="Areas\AdminImportAssessment\Views\web.config" />
     <Content Include="Areas\AdminImportAssessment\Views\KeyDates\Index.cshtml" />
     <Content Include="Areas\AdminImportAssessment\Views\_ViewStart.cshtml" />

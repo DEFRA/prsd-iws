@@ -3,6 +3,7 @@
     using System;
     using System.Threading.Tasks;
     using Core.ComponentRegistration;
+    using Core.Notification;
     using Core.Shared;
     using Prsd.Core;
     using Prsd.Core.Domain;

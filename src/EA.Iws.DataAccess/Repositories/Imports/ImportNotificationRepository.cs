@@ -50,11 +50,11 @@
         public async Task<IEnumerable<ImportNotification>> SearchByNumber(string number)
         {
             var user = await internalUserRepository.GetByUserId(userContext.UserId);
-            var competentAuthority = user.CompetentAuthority.Value;
+            var competentAuthority = user.CompetentAuthority;
 
             var notifications =
                 await context.ImportNotifications
-                .Where(n => n.CompetentAuthority.Value == competentAuthority && n.NotificationNumber.Contains(number))
+                .Where(n => n.CompetentAuthority == competentAuthority && n.NotificationNumber.Contains(number))
                 .ToArrayAsync();
 
             return notifications;

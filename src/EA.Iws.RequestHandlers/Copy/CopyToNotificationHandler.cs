@@ -7,8 +7,8 @@
     using System.Data.Entity.Infrastructure;
     using System.Linq;
     using System.Threading.Tasks;
+    using Core.Notification;
     using DataAccess;
-    using Domain;
     using Domain.FinancialGuarantee;
     using Domain.NotificationApplication;
     using Domain.NotificationApplication.Annexes;

@@ -4,8 +4,8 @@
     using System.Data.Entity;
     using System.Linq;
     using System.Threading.Tasks;
+    using Core.Notification;
     using Core.NotificationAssessment;
-    using Domain;
     using Domain.NotificationApplication;
 
     internal class ExportNotificationOwnerDisplayRepository : IExportNotificationOwnerDisplayRepository
@@ -20,7 +20,7 @@
         public async Task<IEnumerable<ExportNotificationOwnerDisplay>> GetInternalUnsubmittedByCompetentAuthority(UKCompetentAuthority competentAuthority)
         {
             var query = from Notification in context.NotificationApplications
-                            where Notification.CompetentAuthority.Value == competentAuthority.Value
+                            where Notification.CompetentAuthority == competentAuthority
                         from Exporter in context.Exporters
                             .Where(e => Notification.Id == e.NotificationId).DefaultIfEmpty()
                         from Importer in context.Importers

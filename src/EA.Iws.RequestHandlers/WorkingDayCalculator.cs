@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using Core.ComponentRegistration;
+    using Core.Notification;
     using DataAccess;
     using Domain;
 
@@ -13,7 +14,6 @@
     [AutoRegister]
     internal class WorkingDayCalculator : IWorkingDayCalculator
     {
-        private static readonly UKCompetentAuthority DefaultAuthority = UKCompetentAuthority.England;
         private readonly IList<BankHoliday> bankHolidays;
 
         public WorkingDayCalculator(IwsContext context)
@@ -22,13 +22,12 @@
         }
 
         public int GetWorkingDays(DateTime start, DateTime end, bool includeStartDay,
-            UKCompetentAuthority competentAuthority = null)
+            UKCompetentAuthority competentAuthority = UKCompetentAuthority.England)
         {
             start = start.Date;
             end = end.Date;
 
             var negativeTimeSpan = start > end;
-            competentAuthority = competentAuthority ?? DefaultAuthority;
 
             var workingDays = negativeTimeSpan
                 ? GetWorkingDaysLogic(end, start, competentAuthority)
@@ -43,14 +42,12 @@
         }
 
         public DateTime AddWorkingDays(DateTime start, int days, bool includeStartDay,
-            UKCompetentAuthority competentAuthority = null)
+            UKCompetentAuthority competentAuthority = UKCompetentAuthority.England)
         {
             if (days == 0)
             {
                 return start;
             }
-
-            competentAuthority = competentAuthority ?? DefaultAuthority;
 
             var negativeDays = days < 0;
 

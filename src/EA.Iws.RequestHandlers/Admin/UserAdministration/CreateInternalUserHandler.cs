@@ -18,8 +18,10 @@
 
         public async Task<Guid> HandleAsync(CreateInternalUser message)
         {
-            var internalUser = new InternalUser(message.UserId, message.JobTitle,
-                UKCompetentAuthority.FromCompetentAuthority(message.CompetentAuthority), message.LocalAreaId);
+            var internalUser = new InternalUser(message.UserId,
+                message.JobTitle,
+                message.CompetentAuthority,
+                message.LocalAreaId);
 
             context.InternalUsers.Add(internalUser);
 

@@ -7,7 +7,7 @@
 
     public class EnterNumberViewModel : IValidatableObject
     {
-        public CompetentAuthority CompetentAuthority { get; set; }
+        public UKCompetentAuthority CompetentAuthority { get; set; }
 
         public NotificationType NotificationType { get; set; }
 
@@ -22,19 +22,19 @@
                 yield return new ValidationResult("The notification number must be greater than or equal to 1", new[] { "Number" });
             }
 
-            if (CompetentAuthority == CompetentAuthority.England && Number >= 5000)
+            if (CompetentAuthority == UKCompetentAuthority.England && Number >= 5000)
             {
                 yield return new ValidationResult("The notification number must be less than 5000", new[] { "Number" });
             }
-            else if (CompetentAuthority == CompetentAuthority.Scotland && Number >= 500)
+            else if (CompetentAuthority == UKCompetentAuthority.Scotland && Number >= 500)
             {
                 yield return new ValidationResult("The notification number must be less than 500", new[] { "Number" });
             }
-            else if (CompetentAuthority == CompetentAuthority.NorthernIreland && Number >= 1000)
+            else if (CompetentAuthority == UKCompetentAuthority.NorthernIreland && Number >= 1000)
             {
                 yield return new ValidationResult("The notification number must be less than 1000", new[] { "Number" });
             }
-            else if (CompetentAuthority == CompetentAuthority.Wales && Number >= 100)
+            else if (CompetentAuthority == UKCompetentAuthority.Wales && Number >= 100)
             {
                 yield return new ValidationResult("The notification number must be less than 100", new[] { "Number" });
             }

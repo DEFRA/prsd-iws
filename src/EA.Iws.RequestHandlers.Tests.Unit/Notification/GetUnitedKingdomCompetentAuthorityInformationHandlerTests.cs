@@ -38,17 +38,17 @@
 
             context.UnitedKingdomCompetentAuthorities.AddRange(new List<UnitedKingdomCompetentAuthority>
             {
-                new TestUnitedKingdomCompetentAuthority((int)Core.Notification.CompetentAuthority.England),
-                new TestUnitedKingdomCompetentAuthority((int)Core.Notification.CompetentAuthority.Scotland) 
+                new TestUnitedKingdomCompetentAuthority((int)Core.Notification.UKCompetentAuthority.England),
+                new TestUnitedKingdomCompetentAuthority((int)Core.Notification.UKCompetentAuthority.Scotland) 
             });
         }
 
         [Fact]
         public async Task ReturnsCompetentAuthorityWithCorrectId()
         {
-            var result = await handler.HandleAsync(new GetUnitedKingdomCompetentAuthorityInformation(Core.Notification.CompetentAuthority.England));
+            var result = await handler.HandleAsync(new GetUnitedKingdomCompetentAuthorityInformation(Core.Notification.UKCompetentAuthority.England));
 
-            Assert.Equal((int)Core.Notification.CompetentAuthority.England, result.Id);
+            Assert.Equal((int)Core.Notification.UKCompetentAuthority.England, result.Id);
         }
 
         [Fact]
@@ -56,7 +56,7 @@
         {
             var result =
                 await
-                    handler.HandleAsync(new GetUnitedKingdomCompetentAuthorityInformation(Core.Notification.CompetentAuthority.Scotland));
+                    handler.HandleAsync(new GetUnitedKingdomCompetentAuthorityInformation(Core.Notification.UKCompetentAuthority.Scotland));
 
             A.CallTo(() => bacsMap.Map(A<CompetentAuthorityBacsDetails>.Ignored)).MustHaveHappened(Repeated.Exactly.Once);
         }

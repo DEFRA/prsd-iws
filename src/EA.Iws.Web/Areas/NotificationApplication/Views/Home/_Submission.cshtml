@@ -49,7 +49,7 @@
             }
 
             <div class="noti-links">
-                @if (Model.CompetentAuthority == CompetentAuthority.Scotland)
+                @if (Model.CompetentAuthority == UKCompetentAuthority.Scotland)
                 {
                     @Html.ActionLink("Bank Guarantee template", "GenerateBankGuaranteeDocument", "Home", new { area = "FinancialGuarantee" }, null)
                     <br/>

@@ -22,7 +22,7 @@
                 Id = source.Id,
                 NotificationNumber = source.NotificationNumber,
                 NotificationType = source.NotificationType,
-                CompetentAuthority = (Core.Notification.CompetentAuthority)source.CompetentAuthority.Value,
+                CompetentAuthority = source.CompetentAuthority,
                 UnitedKingdomCompetentAuthorityData = competentAuthorityMap.Map(parameter)
             };
         }

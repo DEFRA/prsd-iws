@@ -3,10 +3,10 @@
     using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
+    using Core.Notification;
     using Core.Shared;
     using Core.WasteType;
     using DataAccess;
-    using Domain;
     using Domain.NotificationApplication;
     using Domain.NotificationApplication.Exporter;
     using RequestHandlers.Copy;

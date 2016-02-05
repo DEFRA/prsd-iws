@@ -3,6 +3,7 @@
     using System;
     using System.Linq;
     using Core.Admin;
+    using Core.Notification;
     using Events;
     using TestHelpers.Helpers;
     using Xunit;
@@ -13,7 +14,7 @@
             (user, status) => ObjectInstantiator<InternalUser>.SetProperty(u => u.Status, status, user);
 
         private readonly InternalUser anyUser =
-            InternalUserFactory.Create(new Guid("5F09CFBF-9287-4DDD-9B73-6F9008A7E121"),  UserFactory.Create(new Guid("FB282058-6C3C-4B4B-94B4-BDDA2889E89B"), "first",
+            InternalUserFactory.Create(new Guid("5F09CFBF-9287-4DDD-9B73-6F9008A7E121"), UserFactory.Create(new Guid("FB282058-6C3C-4B4B-94B4-BDDA2889E89B"), "first",
                 "last", "123", "email@address.com"));
 
         [Fact]

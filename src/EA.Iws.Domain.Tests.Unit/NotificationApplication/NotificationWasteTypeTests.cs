@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using Core.Notification;
     using Core.Shared;
     using Core.WasteType;
     using Domain.NotificationApplication;
@@ -61,7 +62,7 @@
 
             Assert.Equal(ChemicalComposition.SRF, notification.WasteType.ChemicalCompositionType);
         }
-        
+
         [Fact]
         public void CanChangeChemicalCompositionTypeMultipleTimes()
         {

@@ -1,6 +1,7 @@
 ﻿namespace EA.Iws.Domain.Tests.Unit.ImportNotification
 {
     using System;
+    using Core.Notification;
     using Core.OperationCodes;
     using Core.Shared;
     using Domain.ImportNotification;

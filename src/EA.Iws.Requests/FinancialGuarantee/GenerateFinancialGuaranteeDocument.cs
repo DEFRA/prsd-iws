@@ -8,9 +8,9 @@
     [RequestAuthorization(ExportNotificationPermissions.CanReadExportNotification)]
     public class GenerateFinancialGuaranteeDocument : IRequest<byte[]>
     {
-        public CompetentAuthority CompetentAuthority { get; private set; }
+        public UKCompetentAuthority CompetentAuthority { get; private set; }
 
-        public GenerateFinancialGuaranteeDocument(CompetentAuthority competentAuthority)
+        public GenerateFinancialGuaranteeDocument(UKCompetentAuthority competentAuthority)
         {
             CompetentAuthority = competentAuthority;
         }

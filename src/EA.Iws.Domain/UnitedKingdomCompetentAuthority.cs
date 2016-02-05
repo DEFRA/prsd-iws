@@ -1,7 +1,7 @@
 ﻿namespace EA.Iws.Domain
 {
+    using Core.Notification;
     using NotificationApplication;
-    using CompetentAuthorityEnum = Core.Notification.CompetentAuthority;
 
     public class UnitedKingdomCompetentAuthority
     {
@@ -30,14 +30,14 @@
 
         public CompetentAuthorityBacsDetails BacsDetails { get; protected set; }
 
-        public bool Equals(CompetentAuthorityEnum competentAuthority)
+        public bool Equals(UKCompetentAuthority competentAuthority)
         {
             return (int)competentAuthority == this.Id;
         }
 
-        public CompetentAuthorityEnum AsCompetentAuthority()
+        public UKCompetentAuthority AsCompetentAuthority()
         {
-            return (CompetentAuthorityEnum)this.Id;
+            return (UKCompetentAuthority)this.Id;
         }
     }
 }

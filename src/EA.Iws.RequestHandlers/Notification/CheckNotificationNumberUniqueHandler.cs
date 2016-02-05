@@ -1,7 +1,6 @@
 ﻿namespace EA.Iws.RequestHandlers.Notification
 {
     using System.Threading.Tasks;
-    using Domain;
     using Domain.NotificationApplication;
     using Prsd.Core.Mediator;
     using Requests.Notification;
@@ -19,7 +18,7 @@
         {
             return !await notificationApplicationRepository.NotificationNumberExists(
                 message.NotificationNumber,
-                UKCompetentAuthority.FromCompetentAuthority(message.CompetentAuthority));
+                message.CompetentAuthority);
         }
     }
 }

@@ -1,8 +1,8 @@
 ﻿namespace EA.Iws.DataAccess.Tests.Integration.Notification
 {
     using System;
-    using System.Linq;
     using System.Threading.Tasks;
+    using Core.Notification;
     using Core.Shared;
     using Domain;
     using Domain.NotificationApplication;

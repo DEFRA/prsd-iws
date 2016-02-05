@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using Core.FinancialGuarantee;
+    using Core.Notification;
     using Prsd.Core;
     using Prsd.Core.Domain;
     using Prsd.Core.Extensions;
@@ -11,7 +12,7 @@
     public class FinancialGuarantee : Entity
     {
         private const int WorkingDaysUntilDecisionRequired = 20;
-        
+
         public Guid NotificationApplicationId { get; protected set; }
 
         private StateMachine<FinancialGuaranteeStatus, Trigger>.TriggerWithParameters<DateTime> receivedTrigger;
@@ -45,7 +46,7 @@
 
             if (CompletedDate.HasValue)
             {
-                returnDate = workingDayCalculator.AddWorkingDays(CompletedDate.Value, WorkingDaysUntilDecisionRequired, false);
+                returnDate = workingDayCalculator.AddWorkingDays(CompletedDate.Value, WorkingDaysUntilDecisionRequired, false, competentAuthority);
             }
 
             return returnDate;

@@ -3,6 +3,7 @@
     using System;
     using System.Linq;
     using System.Threading.Tasks;
+    using Core.Notification;
     using Core.Shared;
     using DataAccess;
     using Domain;
@@ -34,7 +35,7 @@
         {
             this.context = new TestIwsContext();
             var repository = A.Fake<ITransportRouteRepository>();
-           
+
             anyNotification = NotificationApplicationFactory.Create(TestIwsContext.UserId, NotificationType.Recovery, UKCompetentAuthority.England, 0);
             EntityHelper.SetEntityId(anyNotification, notificationId);
 
@@ -52,8 +53,8 @@
                 nonEuCountry
             });
 
-            stateOfExport = new StateOfExport(country, 
-                CompetentAuthorityFactory.Create(AnyGuid, country), 
+            stateOfExport = new StateOfExport(country,
+                CompetentAuthorityFactory.Create(AnyGuid, country),
                 EntryOrExitPointFactory.Create(AnyGuid, country));
 
             stateOfImportNonEu = new StateOfImport(nonEuCountry,
@@ -69,8 +70,8 @@
         public async Task NotificationExistsButDoesNotRequireCustomsOffice_Throws()
         {
             var request = new SetExitCustomsOfficeForNotificationById(notificationId,
-                AnyName, 
-                AnyAddress, 
+                AnyName,
+                AnyAddress,
                 country.Id);
 
             await Assert.ThrowsAsync<InvalidOperationException>(() => handler.HandleAsync(request));

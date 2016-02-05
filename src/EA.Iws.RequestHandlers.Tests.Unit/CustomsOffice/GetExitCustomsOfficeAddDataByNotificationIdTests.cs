@@ -2,6 +2,7 @@
 {
     using System;
     using System.Threading.Tasks;
+    using Core.Notification;
     using Core.Shared;
     using DataAccess;
     using Domain;

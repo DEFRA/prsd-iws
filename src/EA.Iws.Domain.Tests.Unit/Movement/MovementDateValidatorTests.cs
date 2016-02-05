@@ -3,6 +3,7 @@
     using System;
     using System.Threading.Tasks;
     using Core.Movement;
+    using Core.Notification;
     using Core.Shared;
     using Domain.Movement;
     using Domain.NotificationApplication;

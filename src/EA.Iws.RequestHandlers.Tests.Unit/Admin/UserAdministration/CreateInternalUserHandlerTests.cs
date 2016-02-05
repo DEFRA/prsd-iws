@@ -24,7 +24,7 @@
         public async void AddsNewIntneralUser()
         {
             var message = new CreateInternalUser(userId, "job title",
-                localAreaId, CompetentAuthority.England);
+                localAreaId, UKCompetentAuthority.England);
 
             await handler.HandleAsync(message);
 
@@ -35,7 +35,7 @@
         public async void SaveChangesIsCalled()
         {
             var message = new CreateInternalUser(userId, "job title",
-                localAreaId, CompetentAuthority.England);
+                localAreaId, UKCompetentAuthority.England);
 
             await handler.HandleAsync(message);
 

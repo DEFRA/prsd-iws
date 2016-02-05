@@ -27,7 +27,7 @@
                 NotificationId = source.Notification.Id,
                 NotificationType = source.Notification.NotificationType,
                 NotificationNumber = source.Notification.NotificationNumber,
-                CompetentAuthority = (CompetentAuthority)source.Notification.CompetentAuthority.Value,
+                CompetentAuthority = source.Notification.CompetentAuthority,
                 Progress = source.Progress,
                 ShipmentOverview = mapper.Map<ShipmentOverview>(source.Notification),
                 WasteClassificationOverview = mapper.Map<WasteClassificationOverview>(source.Notification),

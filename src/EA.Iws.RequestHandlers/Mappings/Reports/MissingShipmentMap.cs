@@ -1,6 +1,7 @@
 ﻿namespace EA.Iws.RequestHandlers.Mappings.Reports
 {
     using Core.Admin.Reports;
+    using Core.Notification;
     using Core.Shared;
     using Domain;
     using Domain.Reports;
@@ -40,14 +41,14 @@
 
         private decimal? GetTonnes(MissingShipment source)
         {
-            if (!source.Units.HasValue 
-                || !source.QuantityReceived.HasValue 
+            if (!source.Units.HasValue
+                || !source.QuantityReceived.HasValue
                 || ShipmentQuantityUnitsMetadata.IsVolumeUnit(source.Units.Value))
             {
                 return null;
             }
 
-            return ShipmentQuantityUnitConverter.ConvertToTarget(source.Units.Value, 
+            return ShipmentQuantityUnitConverter.ConvertToTarget(source.Units.Value,
                 ShipmentQuantityUnits.Tonnes,
                 source.QuantityReceived.Value,
                 false);
@@ -70,7 +71,7 @@
 
         private bool GetWasPrenotifiedThreeWorkingDaysBeforeActualDate(MissingShipment source, UKCompetentAuthority competentAuthority)
         {
-            if (!source.PrenotificationDate.HasValue 
+            if (!source.PrenotificationDate.HasValue
                 || !source.ActualDateOfShipment.HasValue)
             {
                 return false;

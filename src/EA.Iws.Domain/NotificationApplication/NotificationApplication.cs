@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using Core.Notification;
     using Core.Shared;
     using Prsd.Core.Domain;
     using Prsd.Core.Extensions;

@@ -1,6 +1,7 @@
 ﻿namespace EA.Iws.TestHelpers.Helpers
 {
     using System;
+    using Core.Notification;
     using Domain;
 
     public static class InternalUserFactory

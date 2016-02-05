@@ -8,9 +8,9 @@
     [RequestAuthorization(ExportNotificationPermissions.CanReadExportNotification)]
     public class GeneratePostageLabel : IRequest<byte[]>
     {
-        public CompetentAuthority CompetentAuthority { get; private set; }
+        public UKCompetentAuthority CompetentAuthority { get; private set; }
 
-        public GeneratePostageLabel(CompetentAuthority competentAuthority)
+        public GeneratePostageLabel(UKCompetentAuthority competentAuthority)
         {
             CompetentAuthority = competentAuthority;
         }

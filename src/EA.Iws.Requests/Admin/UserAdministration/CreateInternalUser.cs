@@ -10,7 +10,7 @@
     public class CreateInternalUser : IRequest<Guid>
     {
         public CreateInternalUser(string userId, string jobTitle, Guid localAreaId,
-            CompetentAuthority competentAuthority)
+            UKCompetentAuthority competentAuthority)
         {
             UserId = userId;
             JobTitle = jobTitle;
@@ -24,6 +24,6 @@
 
         public Guid LocalAreaId { get; private set; }
 
-        public CompetentAuthority CompetentAuthority { get; private set; }
+        public UKCompetentAuthority CompetentAuthority { get; private set; }
     }
 }

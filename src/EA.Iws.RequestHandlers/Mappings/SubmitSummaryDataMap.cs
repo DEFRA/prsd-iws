@@ -22,7 +22,7 @@
             return new SubmitSummaryData
             {
                 NotificationId = notification.Id,
-                CompetentAuthority = notification.CompetentAuthority.AsCompetentAuthority(),
+                CompetentAuthority = notification.CompetentAuthority,
                 CreatedDate = notification.CreatedDate.Date,
                 NotificationNumber = notification.NotificationNumber,
                 Status = status,

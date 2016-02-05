@@ -52,7 +52,7 @@
         {
             var model = new NotificationTypeViewModel
             {
-                CompetentAuthority = ca.GetValueFromDisplayName<CompetentAuthority>()
+                CompetentAuthority = ca.GetValueFromDisplayName<UKCompetentAuthority>()
             };
 
             if (!string.IsNullOrWhiteSpace(nt))

@@ -64,7 +64,7 @@
         }
 
         [HttpGet]
-        public async Task<ActionResult> GenerateFinancialGuaranteeDocument(CompetentAuthority competentAuthority)
+        public async Task<ActionResult> GenerateFinancialGuaranteeDocument(UKCompetentAuthority competentAuthority)
         {
             try
             {

@@ -13,7 +13,7 @@
 
     public class NotificationOptionsViewModel
     {
-        public CompetentAuthority CompetentAuthority { get; set; }
+        public UKCompetentAuthority CompetentAuthority { get; set; }
 
         public NotificationStatus NotificationStatus { get; set; }
 

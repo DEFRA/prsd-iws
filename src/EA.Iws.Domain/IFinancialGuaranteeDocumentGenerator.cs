@@ -2,7 +2,7 @@
 {
     public interface IFinancialGuaranteeDocumentGenerator
     {
-        byte[] GenerateFinancialGuaranteeDocument(Core.Notification.CompetentAuthority competentAuthority);
+        byte[] GenerateFinancialGuaranteeDocument(Core.Notification.UKCompetentAuthority competentAuthority);
         byte[] GenerateBankGuaranteeDocument();
         byte[] GenerateParentCompanyTemplate();
     }
