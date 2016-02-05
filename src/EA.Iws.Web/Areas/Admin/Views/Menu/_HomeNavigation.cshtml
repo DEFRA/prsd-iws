@@ -1,4 +1,5 @@
-﻿<div id="accordion" class="accordion-general">
+﻿@model EA.Iws.Web.Areas.Admin.ViewModels.Menu.AdminLinksViewModel
+<div id="accordion" class="accordion-general">
     <ul>
         <li class="active">
             <h3 class="current">
@@ -17,16 +18,19 @@
                 <span></span>
                 Reporting
             </h3>
-            @Html.Partial("~/Areas/Admin/Views/Menu/_ReportingLinks.cshtml")
+            @Html.Partial("~/Areas/Admin/Views/Menu/_ReportingLinks.cshtml", Model)
         </li>
 
-        <li class="">
-            <h3 class="">
-                <span></span>
-                Account services
-            </h3>
-            @Html.Partial("~/Areas/Admin/Views/Menu/_AdminLinks.cshtml")
-        </li>
+        @if (Model.CanAddNewEntryOrExitPoint || Model.CanApproveNewInternalUser)
+        {
+            <li class="">
+                <h3 class="">
+                    <span></span>
+                    Account services
+                </h3>
+                @Html.Partial("~/Areas/Admin/Views/Menu/_AdminLinks.cshtml", Model)
+            </li>
+        }
 
     </ul>
 </div>

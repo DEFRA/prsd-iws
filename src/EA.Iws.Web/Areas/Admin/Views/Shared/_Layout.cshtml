@@ -4,7 +4,7 @@
 
 <div class="grid-row">
     <aside class="column-third">
-        @Html.Partial("~/Areas/Admin/Views/Menu/_HomeNavigation.cshtml")
+        @Html.Action("HomeNavigation", "Menu", new { area = "Admin" })
     </aside>
 
     <div class="column-two-thirds">

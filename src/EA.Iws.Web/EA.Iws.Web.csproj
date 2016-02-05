@@ -1259,6 +1259,7 @@
     </Compile>
     <Compile Include="Areas\Admin\ViewModels\ImportNotification\NotificationTypeViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\ImportNotification\NotificationReceivedDateViewModel.cs" />
+    <Compile Include="Areas\Admin\ViewModels\Menu\AdminLinksViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\Menu\ExportNavigationViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\Menu\ImportNavigationViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\TestEmail\TestEmailViewModel.cs" />

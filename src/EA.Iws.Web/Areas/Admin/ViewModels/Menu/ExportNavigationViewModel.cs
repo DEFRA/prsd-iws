@@ -7,6 +7,8 @@
     {
         public NotificationAssessmentSummaryInformationData Data { get; set; }
 
+        public AdminLinksViewModel AdminLinksModel { get; set; }
+
         public ExportNavigationSection ActiveSection { get; set; }
     }
 }
