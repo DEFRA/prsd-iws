@@ -367,7 +367,7 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.Options {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Upload a signed prenotification.
+        ///   Looks up a localized string similar to Upload/download movement documents.
         /// </summary>
         public static string UploadPrenotification {
             get {

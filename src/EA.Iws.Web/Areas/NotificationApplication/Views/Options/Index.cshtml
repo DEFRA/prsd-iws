@@ -120,20 +120,22 @@ else if (status != MovementStatus.Cancelled)
 
                         @Html.ActionLink(Resource.UploadPrenotification, "Index", "UploadChoice", new { notificationId = Model.NotificationId, area = "NotificationMovements" }, null)
 
-                        @Html.ActionLink(Resource.EditPrenotification, "Index", "Edit", new { notificationId = Model.NotificationId, area = "NotificationMovements" }, null)
-
-                        @Html.ActionLink(Resource.CancelPrenotification, "Index", "CancelMovement", new { notificationId = Model.NotificationId, area = "NotificationMovements" }, null)
-
-                        @Html.ActionLink(Resource.Reject, "Index", "Reject", new { notificationId = Model.NotificationId, area = "NotificationMovements" }, null)
-
                         @Html.ActionLink(Resource.CertificateOfReceipt, "Index", "ReceiveMovement", new { notificationId = Model.NotificationId, area = "NotificationMovements" }, null)
 
                         @Html.ActionLink(certificateLinkText, "Index", "Complete", new { notificationId = Model.NotificationId, area = "NotificationMovements" }, null)
+
+                        @Html.ActionLink(Resource.CancelPrenotification, "Index", "CancelMovement", new { notificationId = Model.NotificationId, area = "NotificationMovements" }, null)
+
+                        @Html.ActionLink(Resource.EditPrenotification, "Index", "Edit", new { notificationId = Model.NotificationId, area = "NotificationMovements" }, null)
+
+                        @Html.ActionLink(Resource.Reject, "Index", "Reject", new { notificationId = Model.NotificationId, area = "NotificationMovements" }, null)
 
                         @if (Model.ShowGenerateInterimDocumentLink)
                         {
                             @Html.ActionLink(Resource.GenerateInterimDoc, "GenerateInterimMovementDocument", "Home", new { id = Model.NotificationId, area = "NotificationApplication" }, null)
                         }
+                        
+
                     </nav>
                 </div>
             </div>

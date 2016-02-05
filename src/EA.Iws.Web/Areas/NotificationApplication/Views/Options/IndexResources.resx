@@ -166,7 +166,7 @@
     <value>Total quantity remaining:</value>
   </data>
   <data name="UploadPrenotification" xml:space="preserve">
-    <value>Upload a signed prenotification</value>
+    <value>Upload/download movement documents</value>
   </data>
   <data name="ShipmentOptionsTitle" xml:space="preserve">
     <value>Shipment options</value>
