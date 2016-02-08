@@ -178,7 +178,7 @@ namespace EA.Iws.Web.Views.Applicant {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Your notifications.
+        ///   Looks up a localized string similar to Homepage.
         /// </summary>
         public static string Title {
             get {

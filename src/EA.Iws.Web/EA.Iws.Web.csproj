@@ -423,6 +423,7 @@
     <Content Include="Scripts\govuk_toolkit\vendor\polyfills\bind.js" />
     <Content Include="Scripts\helpers.js" />
     <Content Include="Scripts\internal-facility-table.js" />
+    <Content Include="Scripts\iws-tracking.js" />
     <Content Include="Scripts\jquery-ui-autocomplete-html-extension.js" />
     <Content Include="Scripts\address-book.js" />
     <Content Include="Scripts\application.js" />

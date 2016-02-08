@@ -12,11 +12,13 @@
             @HomeResources.Start <a href="https://www.gov.uk/importing-and-exporting-waste" target="_blank" title=@HomeResources.TitleSupportingInfo>@HomeResources.SupportingInfo</a> @HomeResources.First
             <span class="visuallyhidden">@HomeResources.Message</span>
             <br/>
-            @HomeResources.OrYouCan @Html.ActionLink(HomeResources.CopyNotification, "CompetentAuthority", "NewNotification", new { cfp = 1 }, null)
+            @HomeResources.OrYouCan @Html.ActionLink(HomeResources.CopyNotification, "CompetentAuthority", "NewNotification", new { cfp = 1 },
+                                   new { data_track = "link", data_category = "Export notification", data_action = "Copy from previous" })
         </p>
 
         <p id="get-started" class="get-started group">
-            @Html.ActionLink(HomeResources.StartNewNotification, "CompetentAuthority", "NewNotification", null, new { @class = "button" })
+            @Html.ActionLink(HomeResources.StartNewNotification, "CompetentAuthority", "NewNotification", null, 
+                new { @class = "button", data_track = "link", data_category = "Export notification", data_action = "Start new" })
         </p>
         
     </div>
