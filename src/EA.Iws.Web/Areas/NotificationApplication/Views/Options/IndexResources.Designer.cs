@@ -232,7 +232,7 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.Options {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Record a shipment rejection.
+        ///   Looks up a localized string similar to Record a rejected shipment.
         /// </summary>
         public static string Reject {
             get {

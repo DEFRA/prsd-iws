@@ -142,7 +142,7 @@
     <value>Number of shipments used:</value>
   </data>
   <data name="Reject" xml:space="preserve">
-    <value>Record a shipment rejection</value>
+    <value>Record a rejected shipment</value>
   </data>
   <data name="SummaryCaption" xml:space="preserve">
     <value>Shipment summary</value>
