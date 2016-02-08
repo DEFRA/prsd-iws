@@ -74,6 +74,7 @@
     <Compile Include="Authorization\Permissions\SystemConfigurationPermissions.cs" />
     <Compile Include="Authorization\Permissions\UserAdministrationPermissions.cs" />
     <Compile Include="Authorization\RequestAuthorizationAttribute.cs" />
+    <Compile Include="Authorization\RequestAuthorizationAttributeCache.cs" />
     <Compile Include="Authorization\RequestAuthorizationException.cs" />
     <Compile Include="Authorization\UserRole.cs" />
     <Compile Include="Carriers\CarrierData.cs" />

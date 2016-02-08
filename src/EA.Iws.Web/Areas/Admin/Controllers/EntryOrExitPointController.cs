@@ -3,7 +3,7 @@
     using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Mvc;
-    using Infrastructure;
+    using Infrastructure.Authorization;
     using Prsd.Core.Mediator;
     using Requests.Admin.EntryOrExitPoints;
     using Requests.Shared;

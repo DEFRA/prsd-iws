@@ -1,7 +1,6 @@
-﻿namespace EA.Iws.Web.Infrastructure
+﻿namespace EA.Iws.Web.Infrastructure.Authorization
 {
     using System;
-    using System.Reflection;
     using System.Threading.Tasks;
     using Core.Authorization;
     using Prsd.Core.Mediator;
@@ -9,11 +8,14 @@
 
     public class AuthorizationService
     {
+        private readonly RequestAuthorizationAttributeCache attributeCache;
         private readonly IMediator mediator;
 
-        public AuthorizationService(IMediator mediator)
+        public AuthorizationService(IMediator mediator, 
+            RequestAuthorizationAttributeCache attributeCache)
         {
             this.mediator = mediator;
+            this.attributeCache = attributeCache;
         }
 
         public async Task<bool> AuthorizeActivity(string activity)
@@ -23,13 +25,13 @@
 
         public async Task<bool> AuthorizeActivity(Type requestType)
         {
-            var attr = requestType.GetCustomAttribute<RequestAuthorizationAttribute>();
+            var attribute = attributeCache.Get(requestType);
 
-            if (attr != null)
+            if (attribute != null)
             {
-                var activity = attr.Name;
+                var activity = attribute.Name;
 
-                return await mediator.SendAsync(new AuthorizeActivity(activity));
+                return await AuthorizeActivity(activity);
             }
             else
             {

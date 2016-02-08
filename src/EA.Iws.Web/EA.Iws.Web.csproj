@@ -1788,8 +1788,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>IndexResources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Infrastructure\AuthorizationService.cs" />
-    <Compile Include="Infrastructure\AuthorizeActivityAttribute.cs" />
+    <Compile Include="Infrastructure\Authorization\AuthorizationService.cs" />
+    <Compile Include="Infrastructure\Authorization\AuthorizeActivityAttribute.cs" />
     <Compile Include="Infrastructure\ExportNavigationSection.cs" />
     <Compile Include="Infrastructure\FileAccess.cs" />
     <Compile Include="Infrastructure\FileReader.cs" />

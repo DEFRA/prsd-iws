@@ -6,7 +6,7 @@
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Core.Admin;
-    using Infrastructure;
+    using Infrastructure.Authorization;
     using Prsd.Core.Mediator;
     using Requests.Admin.UserAdministration;
     using ViewModels.UserAdministration;

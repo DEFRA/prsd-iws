@@ -5,6 +5,7 @@
     using System.Web.Mvc;
     using Core.ImportNotificationAssessment;
     using Infrastructure;
+    using Infrastructure.Authorization;
     using Prsd.Core.Mediator;
     using Requests.Admin.EntryOrExitPoints;
     using Requests.Admin.UserAdministration;
