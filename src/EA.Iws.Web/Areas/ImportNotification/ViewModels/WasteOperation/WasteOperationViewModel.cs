@@ -22,9 +22,11 @@
             ImportNotificationId = details.ImportNotificationId;
             NotificationType = details.NotificationType;
 
+            var selectedCodes = data.OperationCodes ?? new OperationCode[0];
+
             Codes =
                 OperationCodeMetadata.GetCodesForOperation(details.NotificationType)
-                    .Select(c => new KeyValuePairViewModel<OperationCode, bool>(c, data.OperationCodes.Contains(c)))
+                    .Select(c => new KeyValuePairViewModel<OperationCode, bool>(c, selectedCodes.Contains(c)))
                     .ToList();
 
             TechnologyEmployed = data.TechnologyEmployed;
