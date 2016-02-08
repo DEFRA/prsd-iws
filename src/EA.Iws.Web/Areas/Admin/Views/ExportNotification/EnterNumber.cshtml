@@ -20,6 +20,7 @@
     @Html.HiddenFor(m => m.NotificationType)
 
     <div class="form-group @Html.Gds().FormGroupClass(m => m.Number)">
+        @Html.Gds().LabelFor(m => m.Number, new { @class = "visually-hidden" })
         @Html.Gds().ValidationMessageFor(m => m.Number)
         @GetNumberPrefix() &nbsp; @Html.Gds().TextBoxFor(m => m.Number)
     </div>
