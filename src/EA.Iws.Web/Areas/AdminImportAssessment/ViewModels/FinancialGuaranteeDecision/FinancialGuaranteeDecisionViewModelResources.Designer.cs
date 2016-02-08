@@ -62,7 +62,7 @@ namespace EA.Iws.Web.Areas.AdminImportAssessment.ViewModels.FinancialGuaranteeDe
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Decision.
+        ///   Looks up a localized string similar to Select decision.
         /// </summary>
         public static string Decision {
             get {
@@ -71,7 +71,7 @@ namespace EA.Iws.Web.Areas.AdminImportAssessment.ViewModels.FinancialGuaranteeDe
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Decision date.
+        ///   Looks up a localized string similar to Date decision made.
         /// </summary>
         public static string DecisionDate {
             get {

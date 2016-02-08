@@ -77,7 +77,7 @@
                 await mediator.SendAsync(new SetCompletedDate(id, model.CompletedDate.AsDateTime().Value));
             }
 
-            return RedirectToAction("Index", "KeyDates");
+            return RedirectToAction("Index", "FinancialGuaranteeDecision");
         } 
     }
 }
