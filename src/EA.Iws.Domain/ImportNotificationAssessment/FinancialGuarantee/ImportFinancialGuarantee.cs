@@ -124,18 +124,11 @@
             Release
         }
 
-        internal ImportFinancialGuaranteeApproval Approve(DateTime date, DateRange validDates, int activeLoads, string reference)
+        internal ImportFinancialGuaranteeApproval Approve(DateTime date, string reference)
         {
             stateMachine.Fire(Trigger.Approve);
 
-            return ImportFinancialGuaranteeApproval.CreateApproval(ImportNotificationId, date, validDates, activeLoads, reference);
-        }
-
-        internal ImportFinancialGuaranteeApproval ApproveBlanketBond(DateTime date, DateTime validFrom, int activeLoads, string bondReference)
-        {
-            stateMachine.Fire(Trigger.Approve);
-
-            return ImportFinancialGuaranteeApproval.CreateBlanketBondApproval(ImportNotificationId, date, validFrom, activeLoads, bondReference);
+            return new ImportFinancialGuaranteeApproval(ImportNotificationId, date, reference);
         }
 
         public ImportFinancialGuaranteeRelease Release(DateTime date)

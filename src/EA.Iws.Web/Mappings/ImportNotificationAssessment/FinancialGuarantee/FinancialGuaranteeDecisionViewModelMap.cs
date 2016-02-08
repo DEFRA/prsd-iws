@@ -14,20 +14,8 @@
             switch (source.Decision)
             {
                 case FinancialGuaranteeDecision.Approved:
-                    if (source.IsBlanketBond.GetValueOrDefault())
-                    {
-                        return new ApproveBlanketBondFinancialGuarantee(parameter, 
-                            source.DecisionDate.AsDateTime().Value, 
-                            source.ReferenceNumber, 
-                            source.ActiveLoadsPermitted.Value,
-                            source.ValidFrom.AsDateTime().Value);
-                    }
-
                     return new ApproveFinancialGuarantee(parameter, source.DecisionDate.AsDateTime().Value,
-                        source.ReferenceNumber,
-                        source.ActiveLoadsPermitted.Value,
-                        source.ValidFrom.AsDateTime().Value,
-                        source.ValidTo.AsDateTime().Value);
+                        source.ReferenceNumber);
                 case FinancialGuaranteeDecision.Refused:
                     return new RefuseFinancialGuarantee(parameter, source.DecisionDate.AsDateTime().Value,
                         source.RefusalReason);

@@ -2,7 +2,6 @@
 {
     using System.Threading.Tasks;
     using DataAccess;
-    using Domain;
     using Domain.ImportNotificationAssessment.FinancialGuarantee;
     using Prsd.Core.Mediator;
     using Requests.ImportNotificationAssessment.FinancialGuarantee;
@@ -22,8 +21,6 @@
         {
             await
                 approveFinancialGuarantee.Approve(new DecisionData(message.ImportNotificationId, message.DecisionDate),
-                    new DateRange(message.ValidFrom, message.ValidTo),
-                    message.ActiveLoadsPermitted,
                     message.Reference);
 
             await context.SaveChangesAsync();
