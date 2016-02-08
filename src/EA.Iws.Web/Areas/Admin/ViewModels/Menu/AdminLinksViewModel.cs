@@ -2,8 +2,8 @@
 {
     public class AdminLinksViewModel
     {
-        public bool CanApproveNewInternalUser { get; set; }
+        public bool ShowApproveNewInternalUserLink { get; set; }
 
-        public bool CanAddNewEntryOrExitPoint { get; set; }
+        public bool ShowAddNewEntryOrExitPointLink { get; set; }
     }
 }

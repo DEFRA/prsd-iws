@@ -3,10 +3,11 @@
     using System;
     using System.Threading.Tasks;
     using System.Web.Mvc;
-    using Core.Authorization.Permissions;
     using Core.ImportNotificationAssessment;
     using Infrastructure;
     using Prsd.Core.Mediator;
+    using Requests.Admin.EntryOrExitPoints;
+    using Requests.Admin.UserAdministration;
     using Requests.ImportNotification;
     using Requests.NotificationAssessment;
     using ViewModels.Menu;
@@ -26,18 +27,18 @@
         [AcceptVerbs(HttpVerbs.Get | HttpVerbs.Post)]
         public ActionResult HomeNavigation()
         {
-            var canApproveNewInternalUser = Task.Run(() => 
-                authorizationService.AuthorizeActivity(UserAdministrationPermissions.CanApproveNewInternalUser))
-                .Result;
+            var showApproveNewInternalUserLink = Task.Run(() =>
+                        authorizationService.AuthorizeActivity(typeof(SetUserApprovals)))
+                    .Result;
 
-            var canAddNewEntryOrExitPoint = Task.Run(() => 
-                authorizationService.AuthorizeActivity(SystemConfigurationPermissions.CanAddNewEntryOrExitPoint))
-                .Result;
+            var showAddNewEntryOrExitPointLink = Task.Run(() =>
+                        authorizationService.AuthorizeActivity(typeof(AddEntryOrExitPoint)))
+                    .Result;
 
             var model = new AdminLinksViewModel
             {
-                CanApproveNewInternalUser = canApproveNewInternalUser,
-                CanAddNewEntryOrExitPoint = canAddNewEntryOrExitPoint
+                ShowApproveNewInternalUserLink = showApproveNewInternalUserLink,
+                ShowAddNewEntryOrExitPointLink = showAddNewEntryOrExitPointLink
             };
 
             return PartialView("_HomeNavigation", model);
@@ -48,13 +49,13 @@
         {
             var details = Task.Run(() => mediator.SendAsync(new GetNotificationDetails(id))).Result;
 
-            var canApproveNewInternalUser = Task.Run(() =>
-                authorizationService.AuthorizeActivity(UserAdministrationPermissions.CanApproveNewInternalUser))
-                .Result;
+            var showApproveNewInternalUserLink = Task.Run(() =>
+                        authorizationService.AuthorizeActivity(typeof(SetUserApprovals)))
+                    .Result;
 
-            var canAddNewEntryOrExitPoint = Task.Run(() =>
-                authorizationService.AuthorizeActivity(SystemConfigurationPermissions.CanAddNewEntryOrExitPoint))
-                .Result;
+            var showAddNewEntryOrExitPointLink = Task.Run(() =>
+                        authorizationService.AuthorizeActivity(typeof(AddEntryOrExitPoint)))
+                    .Result;
 
             var model = new ImportNavigationViewModel
             {
@@ -63,8 +64,8 @@
                 ShowImportSections = details.Status == ImportNotificationStatus.NotificationReceived,
                 AdminLinksModel = new AdminLinksViewModel
                 {
-                    CanApproveNewInternalUser = canApproveNewInternalUser,
-                    CanAddNewEntryOrExitPoint = canAddNewEntryOrExitPoint
+                    ShowApproveNewInternalUserLink = showApproveNewInternalUserLink,
+                    ShowAddNewEntryOrExitPointLink = showAddNewEntryOrExitPointLink
                 }
             };
 
@@ -76,13 +77,13 @@
         {
             var data = Task.Run(() => mediator.SendAsync(new GetNotificationAssessmentSummaryInformation(id))).Result;
 
-            var canApproveNewInternalUser = Task.Run(() =>
-                authorizationService.AuthorizeActivity(UserAdministrationPermissions.CanApproveNewInternalUser))
-                .Result;
+            var showApproveNewInternalUserLink = Task.Run(() =>
+                        authorizationService.AuthorizeActivity(typeof(SetUserApprovals)))
+                    .Result;
 
-            var canAddNewEntryOrExitPoint = Task.Run(() =>
-                authorizationService.AuthorizeActivity(SystemConfigurationPermissions.CanAddNewEntryOrExitPoint))
-                .Result;
+            var showAddNewEntryOrExitPointLink = Task.Run(() =>
+                        authorizationService.AuthorizeActivity(typeof(AddEntryOrExitPoint)))
+                    .Result;
 
             var model = new ExportNavigationViewModel
             {
@@ -90,8 +91,8 @@
                 ActiveSection = section,
                 AdminLinksModel = new AdminLinksViewModel
                 {
-                    CanApproveNewInternalUser = canApproveNewInternalUser,
-                    CanAddNewEntryOrExitPoint = canAddNewEntryOrExitPoint
+                    ShowApproveNewInternalUserLink = showApproveNewInternalUserLink,
+                    ShowAddNewEntryOrExitPointLink = showAddNewEntryOrExitPointLink
                 }
             };
 
