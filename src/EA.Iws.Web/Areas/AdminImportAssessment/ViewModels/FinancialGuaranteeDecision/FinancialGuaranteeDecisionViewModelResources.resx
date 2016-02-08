@@ -118,10 +118,10 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Decision" xml:space="preserve">
-    <value>Decision</value>
+    <value>Select decision</value>
   </data>
   <data name="DecisionDate" xml:space="preserve">
-    <value>Decision date</value>
+    <value>Date decision made</value>
   </data>
   <data name="DecisionDateRequired" xml:space="preserve">
     <value>Please provide a decision date</value>
