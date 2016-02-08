@@ -4,9 +4,9 @@
     using System.Web.Mvc;
     using Prsd.Core.Web.ApiClient;
 
-    public class HandleApiErrorFilter : HandleErrorAttribute
+    public class HandleApiErrorFilter : FilterAttribute, IExceptionFilter
     {
-        public override void OnException(ExceptionContext filterContext)
+        public void OnException(ExceptionContext filterContext)
         {
             var apiException = GetApiException(filterContext);
             if (!filterContext.ExceptionHandled && apiException != null)
@@ -17,7 +17,6 @@
 
                 filterContext.ExceptionHandled = true;
             }
-            base.OnException(filterContext);
         }
 
         private static ApiException GetApiException(ExceptionContext filterContext)
