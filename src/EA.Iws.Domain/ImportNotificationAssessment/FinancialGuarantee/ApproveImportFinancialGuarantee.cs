@@ -1,6 +1,5 @@
 ﻿namespace EA.Iws.Domain.ImportNotificationAssessment.FinancialGuarantee
 {
-    using System;
     using System.Threading.Tasks;
     using Core.ComponentRegistration;
 
@@ -17,22 +16,11 @@
             this.approvalRepository = approvalRepository;
         }
 
-        public async Task<ImportFinancialGuaranteeApproval> Approve(DecisionData decision, DateRange validDates, int activeLoads, string reference)
+        public async Task<ImportFinancialGuaranteeApproval> Approve(DecisionData decision, string reference)
         {
             var guarantee = await financialGuaranteeRepository.GetByNotificationId(decision.ImportNotificationId);
 
-            var approval = guarantee.Approve(decision.Date, validDates, activeLoads, reference);
-
-            approvalRepository.Add(approval);
-
-            return approval;
-        }
-
-        public async Task<ImportFinancialGuaranteeApproval> ApproveBlanketBond(DecisionData decision, DateTime validFrom, int activeLoads, string bondReference)
-        {
-            var guarantee = await financialGuaranteeRepository.GetByNotificationId(decision.ImportNotificationId);
-
-            var approval = guarantee.ApproveBlanketBond(decision.Date, validFrom, activeLoads, bondReference);
+            var approval = guarantee.Approve(decision.Date, reference);
 
             approvalRepository.Add(approval);
 

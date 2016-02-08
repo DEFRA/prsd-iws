@@ -62,24 +62,6 @@ namespace EA.Iws.Web.Areas.AdminImportAssessment.ViewModels.FinancialGuaranteeDe
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Active loads.
-        /// </summary>
-        public static string ActiveLoads {
-            get {
-                return ResourceManager.GetString("ActiveLoads", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Please provide the number of active loads.
-        /// </summary>
-        public static string ActiveLoadsRequired {
-            get {
-                return ResourceManager.GetString("ActiveLoadsRequired", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Decision.
         /// </summary>
         public static string Decision {
@@ -116,20 +98,11 @@ namespace EA.Iws.Web.Areas.AdminImportAssessment.ViewModels.FinancialGuaranteeDe
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Is blanket bond.
+        ///   Looks up a localized string similar to Reference number.
         /// </summary>
-        public static string IsBlanketBond {
+        public static string ReferenceNumber {
             get {
-                return ResourceManager.GetString("IsBlanketBond", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Please choose whether this is a blanket bond.
-        /// </summary>
-        public static string IsBlanketBondRequired {
-            get {
-                return ResourceManager.GetString("IsBlanketBondRequired", resourceCulture);
+                return ResourceManager.GetString("ReferenceNumber", resourceCulture);
             }
         }
         
@@ -157,51 +130,6 @@ namespace EA.Iws.Web.Areas.AdminImportAssessment.ViewModels.FinancialGuaranteeDe
         public static string RefusalReasonRequired {
             get {
                 return ResourceManager.GetString("RefusalReasonRequired", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Valid from.
-        /// </summary>
-        public static string ValidFrom {
-            get {
-                return ResourceManager.GetString("ValidFrom", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Please provide a guarantee valid from date.
-        /// </summary>
-        public static string ValidFromRequired {
-            get {
-                return ResourceManager.GetString("ValidFromRequired", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Valid to.
-        /// </summary>
-        public static string ValidTo {
-            get {
-                return ResourceManager.GetString("ValidTo", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Please provide a valid to date which is after the valid from date.
-        /// </summary>
-        public static string ValidToBeforeValidFrom {
-            get {
-                return ResourceManager.GetString("ValidToBeforeValidFrom", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Please provide a guarantee valid to date.
-        /// </summary>
-        public static string ValidToRequired {
-            get {
-                return ResourceManager.GetString("ValidToRequired", resourceCulture);
             }
         }
     }
