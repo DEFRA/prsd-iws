@@ -15,5 +15,8 @@ INSERT INTO [Identity].[AspNetUserClaims]
      VALUES
            (N'E7D9AB70-84FC-45C3-99A7-B437D1336402'
            ,'http://schemas.microsoft.com/ws/2008/06/identity/claims/role'
-           ,'internal')
+           ,'internal'),
+           (N'E7D9AB70-84FC-45C3-99A7-B437D1336402'
+           ,'http://schemas.microsoft.com/ws/2008/06/identity/claims/role'
+           ,'administrator')
 GO
