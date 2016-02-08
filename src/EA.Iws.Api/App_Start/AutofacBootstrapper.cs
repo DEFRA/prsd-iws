@@ -10,7 +10,6 @@
     using Microsoft.AspNet.Identity;
     using Prsd.Core.Autofac;
     using RequestHandlers;
-    using RequestHandlers.Authorization;
 
     public class AutofacBootstrapper
     {
