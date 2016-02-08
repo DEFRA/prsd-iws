@@ -1,5 +1,7 @@
 ﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.WasteOperations.OperationCodesViewModel
 
+@Html.HiddenFor(m => m.NotificationType)
+
 <div>
     <div class="form-group @Html.Gds().FormGroupClass(m => m.PossibleCodes)">
         @Html.Gds().ValidationMessageFor(m => m.PossibleCodes)
