@@ -3,6 +3,7 @@
     using System;
     using System.Threading.Tasks;
     using Core.ComponentRegistration;
+    using Core.ImportNotificationAssessment;
     using Core.Shared;
     using ImportNotification;
 
@@ -31,7 +32,10 @@
             {
                 var assessment = await assessmentRepository.GetByNotification(notificationId);
 
-                assessment.PaymentComplete(date);
+                if (assessment.Status == ImportNotificationStatus.AwaitingPayment)
+                {
+                    assessment.PaymentComplete(date);
+                }
             }
         }
     }
