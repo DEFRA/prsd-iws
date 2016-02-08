@@ -33,7 +33,7 @@
             var notification = await context.GetNotificationApplication(message.Id);
 
             var competentAuthority = await context.UnitedKingdomCompetentAuthorities.SingleAsync(
-                        n => n.Id == notification.CompetentAuthority.Value);
+                        n => n.Id == (int)notification.CompetentAuthority);
 
             var result = map.Map(notification, competentAuthority);
 

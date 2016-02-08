@@ -2,6 +2,7 @@
 {
     using System;
     using Core.Movement;
+    using Core.Notification;
     using Core.Shared;
     using Domain.Movement;
     using Domain.NotificationApplication;
@@ -21,9 +22,9 @@
         public MovementTests()
         {
             var notification = new NotificationApplication(
-                Guid.NewGuid(), 
-                NotificationType.Recovery, 
-                UKCompetentAuthority.England, 
+                Guid.NewGuid(),
+                NotificationType.Recovery,
+                UKCompetentAuthority.England,
                 0);
 
             movement = new Movement(1, notification.Id, AnyDate);

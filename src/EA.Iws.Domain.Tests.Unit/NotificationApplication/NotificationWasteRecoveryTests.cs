@@ -2,6 +2,7 @@
 {
     using System;
     using System.Linq;
+    using Core.Notification;
     using Core.Shared;
     using Domain.NotificationApplication;
     using Domain.NotificationApplication.WasteRecovery;

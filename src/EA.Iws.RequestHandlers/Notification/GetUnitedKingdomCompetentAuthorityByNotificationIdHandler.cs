@@ -9,12 +9,14 @@
     using Prsd.Core.Mediator;
     using Requests.Notification;
 
-    internal class GetUnitedKingdomCompetentAuthorityByNotificationIdHandler : IRequestHandler<GetUnitedKingdomCompetentAuthorityByNotificationId, UnitedKingdomCompetentAuthorityData>
+    internal class GetUnitedKingdomCompetentAuthorityByNotificationIdHandler : 
+        IRequestHandler<GetUnitedKingdomCompetentAuthorityByNotificationId, UnitedKingdomCompetentAuthorityData>
     {
         private readonly IwsContext context;
         private readonly IMap<UnitedKingdomCompetentAuthority, UnitedKingdomCompetentAuthorityData> competentAuthorityMap;
 
-        public GetUnitedKingdomCompetentAuthorityByNotificationIdHandler(IwsContext context, IMap<UnitedKingdomCompetentAuthority, UnitedKingdomCompetentAuthorityData> competentAuthorityMap)
+        public GetUnitedKingdomCompetentAuthorityByNotificationIdHandler(IwsContext context, 
+            IMap<UnitedKingdomCompetentAuthority, UnitedKingdomCompetentAuthorityData> competentAuthorityMap)
         {
             this.context = context;
             this.competentAuthorityMap = competentAuthorityMap;
@@ -27,7 +29,7 @@
             var competentAuthority =
                 await
                     context.UnitedKingdomCompetentAuthorities.SingleAsync(
-                        c => c.Id == notification.CompetentAuthority.Value);
+                        c => c.Id == (int)notification.CompetentAuthority);
 
             return competentAuthorityMap.Map(competentAuthority);
         }

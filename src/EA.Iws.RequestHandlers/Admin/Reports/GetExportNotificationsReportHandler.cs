@@ -3,7 +3,7 @@
     using System.Linq;
     using System.Threading.Tasks;
     using Core.Admin.Reports;
-    using Domain;
+    using Core.Notification;
     using Domain.Reports;
     using Prsd.Core.Domain;
     using Prsd.Core.Mapper;
@@ -15,12 +15,12 @@
         private readonly IExportNotificationsRepository exportNotificationsRepository;
         private readonly IMapWithParameter<DataExportNotification, UKCompetentAuthority, DataExportNotificationData> mapper;
         private readonly IUserContext userContext;
-        private readonly IInternalUserRepository internalUserRepository;
+        private readonly Domain.IInternalUserRepository internalUserRepository;
 
         public GetExportNotificationsReportHandler(IExportNotificationsRepository exportNotificationsRepository,
             IMapWithParameter<DataExportNotification, UKCompetentAuthority, DataExportNotificationData> mapper,
             IUserContext userContext,
-            IInternalUserRepository internalUserRepository)
+            Domain.IInternalUserRepository internalUserRepository)
         {
             this.exportNotificationsRepository = exportNotificationsRepository;
             this.mapper = mapper;

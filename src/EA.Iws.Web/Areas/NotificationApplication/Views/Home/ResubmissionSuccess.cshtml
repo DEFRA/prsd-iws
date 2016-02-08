@@ -8,20 +8,20 @@
     ViewBag.Title = "Notification resubmitted";
 }
 
-@helper GetAssessmentText(CompetentAuthority competentAuthority)
+@helper GetAssessmentText(UKCompetentAuthority competentAuthority)
 {
     switch (competentAuthority)
     {
-        case CompetentAuthority.England:
+        case UKCompetentAuthority.England:
             @ResubmissionSuccessResources.EaAssessment;
             break;
-        case CompetentAuthority.Scotland:
+        case UKCompetentAuthority.Scotland:
             @ResubmissionSuccessResources.SepaAssessment;
             break;
-        case CompetentAuthority.NorthernIreland:
+        case UKCompetentAuthority.NorthernIreland:
             @ResubmissionSuccessResources.NieaAssessment;
             break;
-        case CompetentAuthority.Wales:
+        case UKCompetentAuthority.Wales:
             @ResubmissionSuccessResources.NrwAssessment;
             break;
         default:

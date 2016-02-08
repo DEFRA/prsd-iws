@@ -4,7 +4,7 @@
     using System.Data.Entity;
     using System.Linq;
     using System.Threading.Tasks;
-    using Domain;
+    using Core.Notification;
     using Domain.NotificationApplication;
     using Domain.Security;
 

@@ -5,6 +5,7 @@
     using System.Linq;
     using System.Threading.Tasks;
     using Core.Admin.Search;
+    using Core.Notification;
     using Core.NotificationAssessment;
     using Core.Shared;
     using Domain;
@@ -97,7 +98,7 @@
         {
             var user = UserFactory.Create(new Guid("ac795e26-1563-4833-b8f9-0529eb9e66ae"), "Name", "Surname", "123456", "test@test.com");
 
-            var internalUser = InternalUserFactory.Create(new Guid("9C67BFF3-6991-4188-9D8B-C989ADCE6E32"),  user);
+            var internalUser = InternalUserFactory.Create(new Guid("9C67BFF3-6991-4188-9D8B-C989ADCE6E32"), user);
             ObjectInstantiator<InternalUser>.SetProperty(u => u.CompetentAuthority, UKCompetentAuthority.England, internalUser);
 
             var users = new[]
@@ -132,7 +133,7 @@
             var notificationApplication = NotificationApplicationFactory.Create(Guid.NewGuid(), NotificationType.Recovery, competentAuthority, 0);
 
             EntityHelper.SetEntityId(notificationApplication, id);
-            
+
             notificationApplication.SetWasteType(wasteType);
 
             return notificationApplication;

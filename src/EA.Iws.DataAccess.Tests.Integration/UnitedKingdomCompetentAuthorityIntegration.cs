@@ -23,7 +23,7 @@
         {
             var result = await context.UnitedKingdomCompetentAuthorities.ToArrayAsync();
 
-            Assert.Equal("England", result.Single(ca => ca.Id == (int)CompetentAuthority.England).UnitedKingdomCountry);
+            Assert.Equal("England", result.Single(ca => ca.Id == (int)UKCompetentAuthority.England).UnitedKingdomCountry);
         }
     }
 }

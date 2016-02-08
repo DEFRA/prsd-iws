@@ -7,6 +7,6 @@
     {
         public Guid Id { get; set; }
 
-        public CompetentAuthority CompetentAuthority { get; set; }
+        public UKCompetentAuthority CompetentAuthority { get; set; }
     }
 }

@@ -121,7 +121,7 @@
     <value> and print it out. Please make sure you sign and date  block 17 of the document.</value>
   </data>
   <data name="DownloadLinkText" xml:space="preserve">
-    <value>Download you notification</value>
+    <value>Download your notification</value>
   </data>
   <data name="NotificationOptionLinkText" xml:space="preserve">
     <value>Go to notification options</value>

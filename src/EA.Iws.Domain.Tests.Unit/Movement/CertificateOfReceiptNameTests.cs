@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
+    using Core.Notification;
     using Core.Shared;
     using Domain.Movement;
     using Domain.NotificationApplication;
@@ -46,6 +47,6 @@
                 new object[] { UKCompetentAuthority.NorthernIreland, 5, 6, "GB0003000005-shipment-6-receipt" },
                 new object[] { UKCompetentAuthority.Wales, 222222, 4, "GB0004222222-shipment-4-receipt" }
             };
-        } 
+        }
     }
 }

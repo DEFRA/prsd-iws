@@ -2,6 +2,7 @@
 {
     using System;
     using Core.Admin.Reports;
+    using Core.Notification;
     using Domain;
     using Domain.NotificationAssessment;
     using Domain.Reports;

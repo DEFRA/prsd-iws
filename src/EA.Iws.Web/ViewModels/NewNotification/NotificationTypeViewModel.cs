@@ -17,7 +17,7 @@
         [Required(ErrorMessage = "Please answer this question")]
         public NotificationType? SelectedNotificationType { get; set; }
 
-        public CompetentAuthority CompetentAuthority { get; set; }
+        public UKCompetentAuthority CompetentAuthority { get; set; }
 
         public string CompetentAuthorityContactInfo
         {
@@ -25,13 +25,13 @@
             {
                 switch (CompetentAuthority)
                 {
-                    case CompetentAuthority.England:
+                    case UKCompetentAuthority.England:
                         return "Environment Agency - Tel: 01925 542265";
-                    case CompetentAuthority.Scotland:
+                    case UKCompetentAuthority.Scotland:
                         return "Scottish Environment Protection Agency - Tel: 01786 457700";
-                    case CompetentAuthority.NorthernIreland:
+                    case UKCompetentAuthority.NorthernIreland:
                         return "Northern Ireland Environment Agency - Tel: 028 9056 9742";
-                    case CompetentAuthority.Wales:
+                    case UKCompetentAuthority.Wales:
                         return "Natural Resources Wales - Tel: 03000 65 3000";
                     default:
                         return string.Empty;

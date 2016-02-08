@@ -1,6 +1,7 @@
 ﻿namespace EA.Iws.Domain.NotificationAssessment
 {
     using System;
+    using Core.Notification;
 
     public interface IDecisionRequiredByCalculator
     {

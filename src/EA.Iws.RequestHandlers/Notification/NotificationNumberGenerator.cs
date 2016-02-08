@@ -3,10 +3,10 @@
     using System.Text;
     using System.Threading.Tasks;
     using Core.ComponentRegistration;
+    using Core.Notification;
     using DataAccess;
-    using Domain;
     using Domain.NotificationApplication;
-
+    using Prsd.Core.Helpers;
     [AutoRegister]
     internal class NotificationNumberGenerator : INotificationNumberGenerator
     {
@@ -27,7 +27,7 @@
         {
             var stringBuilder = new StringBuilder();
             stringBuilder.Append("SELECT NEXT VALUE FOR ");
-            stringBuilder.AppendFormat(NotificationNumberSequenceFormat, competentAuthority.ShortName);
+            stringBuilder.AppendFormat(NotificationNumberSequenceFormat, EnumHelper.GetShortName(competentAuthority));
             return stringBuilder.ToString();
         }
     }

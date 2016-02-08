@@ -18,27 +18,9 @@
             @Resource.AfterDownloadLinkText
         </div>
 
-        <div class="form-group">
-            @if (Model.CompetentAuthority == CompetentAuthority.England)
-            {
-                @Html.Partial("_EaBlock17Disclosure")
-            }
-
-            @if (Model.CompetentAuthority == CompetentAuthority.NorthernIreland)
-            {
-                @Html.Partial("_NieaBlock17Disclosure")
-            }
-
-            @if (Model.CompetentAuthority == CompetentAuthority.Scotland)
-            {
-                @Html.Partial("_SepaBlock17Disclosure")
-            }
-
-            @if (Model.CompetentAuthority == CompetentAuthority.Wales)
-            {
-                @Html.Partial("_NrwBlock17Disclosure")
-            }
-        </div>
+	    <div class="form-group">
+		        @Html.Partial("_Block17Disclosure")
+	    </div>
 
         <div>@Resource.ReferenceAnnexesTitle</div>
 

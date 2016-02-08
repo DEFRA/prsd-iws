@@ -97,7 +97,7 @@
             const string ValidPassword = "P@ssword1";
             const string ValidName = "ValidName";
             const string ValidSurname = "ValidSurname";
-            const CompetentAuthority ValidCA = CompetentAuthority.England;
+            const UKCompetentAuthority ValidCA = UKCompetentAuthority.England;
             const string ValidJobTitle = "Title";
             Guid validLocalAreaId = new Guid("BA16D091-6C2A-410A-84CE-8689D2CE2EFF");
 

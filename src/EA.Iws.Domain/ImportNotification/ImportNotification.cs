@@ -1,5 +1,6 @@
 ﻿namespace EA.Iws.Domain.ImportNotification
 {
+    using Core.Notification;
     using Core.Shared;
     using Prsd.Core;
     using Prsd.Core.Domain;
@@ -17,11 +18,11 @@
         }
 
         public ImportNotification(NotificationType notificationType,
-            UKCompetentAuthority competentAuthority, 
+            UKCompetentAuthority competentAuthority,
             string notificationNumber)
         {
             Guard.ArgumentNotNullOrEmpty(() => notificationNumber, notificationNumber);
-            Guard.ArgumentNotNull(() => competentAuthority, competentAuthority);
+            Guard.ArgumentNotDefaultValue(() => competentAuthority, competentAuthority);
             Guard.ArgumentNotDefaultValue(() => notificationType, notificationType);
 
             NotificationType = notificationType;

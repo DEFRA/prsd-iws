@@ -2,6 +2,6 @@
 {
     public interface IPostageLabelGenerator
     {
-        byte[] GeneratePostageLabel(Core.Notification.CompetentAuthority competentAuthority);
+        byte[] GeneratePostageLabel(Core.Notification.UKCompetentAuthority competentAuthority);
     }
 }

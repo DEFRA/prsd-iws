@@ -18,16 +18,14 @@
                 return;
             }
 
-            var identity = (ClaimsIdentity)filterContext.HttpContext.User.Identity;
+            var principal = (ClaimsPrincipal)filterContext.HttpContext.User;
 
-            var isAdmin = identity.HasClaim(ClaimTypes.Role, "internal");
-
-            if (!isAdmin)
+            if (!principal.IsInternalUser())
             {
                 return;
             }
 
-            RedirectInternalUser(filterContext, identity);
+            RedirectInternalUser(filterContext, (ClaimsIdentity)principal.Identity);
         }
 
         private void RedirectInternalUser(AuthorizationContext filterContext, ClaimsIdentity identity)

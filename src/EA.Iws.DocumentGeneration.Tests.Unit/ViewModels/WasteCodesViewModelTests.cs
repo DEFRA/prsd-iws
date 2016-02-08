@@ -13,6 +13,7 @@
     public class WasteCodesViewModelTests
     {
         private const string NotApplicable = "Not applicable";
+        private const string NotListed = "Not listed";
         private const string AnyString = "Any string";
         private const string AnyCode = "AC0D3";
 
@@ -42,7 +43,7 @@
             var result = (codeType == CodeType.Basel) ? viewModel.Basel : viewModel.Oecd;
             var other = (codeType == CodeType.Basel) ? viewModel.Oecd : viewModel.Basel;
 
-            Assert.Equal(NotApplicable, result);
+            Assert.Equal(NotListed, result);
             Assert.Equal(string.Empty, other);
         }
 

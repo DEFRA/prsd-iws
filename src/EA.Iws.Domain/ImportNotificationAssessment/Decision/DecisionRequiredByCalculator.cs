@@ -2,6 +2,7 @@ namespace EA.Iws.Domain.ImportNotificationAssessment.Decision
 {
     using System;
     using Core.ComponentRegistration;
+    using Core.Notification;
 
     [AutoRegister]
     public class DecisionRequiredByCalculator : IDecisionRequiredByCalculator

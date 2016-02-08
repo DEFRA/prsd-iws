@@ -4,8 +4,8 @@
     using System.Data.Entity;
     using System.Linq;
     using System.Threading.Tasks;
+    using Core.Notification;
     using Core.NotificationAssessment;
-    using Domain;
     using Domain.NotificationAssessment;
 
     internal class NotificationAttentionSummaryRepository : INotificationAttentionSummaryRepository
@@ -28,7 +28,7 @@
                     assessment => assessment.NotificationApplicationId,
                     notification => notification.Id,
                     (a, n) => new { Assessment = a, Notification = n })
-                .Where(x => x.Notification.CompetentAuthority.Value == competentAuthority.Value)
+                .Where(x => x.Notification.CompetentAuthority == competentAuthority)
                 .Select(x => new
                 {
                     x.Notification.Id,

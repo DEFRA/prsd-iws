@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
     using System.Linq;
+    using Core.Notification;
     using Core.Shared;
     using Core.WasteCodes;
     using Domain.NotificationApplication;
@@ -675,7 +676,7 @@
         public void CanSetCustomsCode()
         {
             var customsCode = WasteCodeInfo.CreateWasteCodeInfo(GetTestWasteCode(new Guid("E1B62673-35C2-4120-87C4-F6986C8C1E2F"), CodeType.CustomsCode));
-           
+
             notification.SetCustomsCode(customsCode);
 
             Assert.NotNull(notification.CustomsCode);

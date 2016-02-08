@@ -14,7 +14,7 @@
                 .HasForeignKey(x => x.UserId);
 
             Property(x => x.JobTitle).IsRequired().HasMaxLength(256);
-            Property(x => x.CompetentAuthority.Value).IsRequired();
+            Property(x => x.CompetentAuthority).IsRequired();
 
             HasRequired(x => x.LocalArea)
                 .WithMany()

@@ -60,7 +60,7 @@
             bool isInterim = facilityCollection.IsInterim.HasValue ? facilityCollection.IsInterim.Value : facilityCollection.HasMultipleFacilities;
 
             var pricingStructure = pricingStructures.Single(p =>
-                p.CompetentAuthority.Value == notification.CompetentAuthority.Value
+                p.CompetentAuthority == notification.CompetentAuthority
                 && p.Activity.TradeDirection == TradeDirection.Export
                 && p.Activity.NotificationType == notification.NotificationType
                 && p.Activity.IsInterim == isInterim

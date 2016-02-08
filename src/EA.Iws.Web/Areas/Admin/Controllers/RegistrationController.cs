@@ -44,7 +44,7 @@
 
         private async Task<AdminRegistrationViewModel> GetModelData(AdminRegistrationViewModel model)
         {
-            var competentAuthorities = EnumHelper.GetValues(typeof(CompetentAuthority))
+            var competentAuthorities = EnumHelper.GetValues(typeof(UKCompetentAuthority))
                 .Select(p => new SelectListItem() { Text = p.Value, Value = p.Key.ToString() });
 
             model.CompetentAuthorities = new SelectList(competentAuthorities, "Value", "Text");

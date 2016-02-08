@@ -26,7 +26,7 @@
             var assessment =
                 await notificationAssessmentRepository.GetByNotificationId(message.Id);
 
-            var competentAuthority = notification.CompetentAuthority.AsCompetentAuthority();
+            var competentAuthority = notification.CompetentAuthority;
             
             return new SubmitSummaryData
             {

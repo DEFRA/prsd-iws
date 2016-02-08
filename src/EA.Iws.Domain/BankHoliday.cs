@@ -1,7 +1,8 @@
 ﻿namespace EA.Iws.Domain
 {
     using System;
-
+    using Core.Notification;
+    
     public class BankHoliday
     {
         public Guid Id { get; private set; }

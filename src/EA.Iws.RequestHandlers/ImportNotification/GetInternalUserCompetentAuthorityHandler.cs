@@ -4,15 +4,15 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
+    using Core.Notification;
     using Core.Shared;
     using Domain;
     using Prsd.Core.Domain;
     using Prsd.Core.Mapper;
     using Prsd.Core.Mediator;
     using Requests.ImportNotification;
-    using CompetentAuthority = Core.Notification.CompetentAuthority;
 
-    internal class GetInternalUserCompetentAuthorityHandler : IRequestHandler<GetInternalUserCompetentAuthority, Tuple<CompetentAuthority, CompetentAuthorityData>>
+    internal class GetInternalUserCompetentAuthorityHandler : IRequestHandler<GetInternalUserCompetentAuthority, Tuple<UKCompetentAuthority, CompetentAuthorityData>>
     {
         private readonly IInternalUserRepository internalUserRepository;
         private readonly ICountryRepository countryRepository;
@@ -20,15 +20,15 @@
         private readonly IMapper mapper;
         private readonly IUserContext userContext;
 
-        private static readonly Dictionary<CompetentAuthority, string> AuthorityCodes = new Dictionary<CompetentAuthority, string>
+        private static readonly Dictionary<UKCompetentAuthority, string> AuthorityCodes = new Dictionary<UKCompetentAuthority, string>
         {
-            { CompetentAuthority.England, "GB01" },
-            { CompetentAuthority.Scotland, "GB02" },
-            { CompetentAuthority.NorthernIreland, "GB03" },
-            { CompetentAuthority.Wales, "GB04" }
-        }; 
+            { UKCompetentAuthority.England, "GB01" },
+            { UKCompetentAuthority.Scotland, "GB02" },
+            { UKCompetentAuthority.NorthernIreland, "GB03" },
+            { UKCompetentAuthority.Wales, "GB04" }
+        };
 
-        public GetInternalUserCompetentAuthorityHandler(IInternalUserRepository internalUserRepository, 
+        public GetInternalUserCompetentAuthorityHandler(IInternalUserRepository internalUserRepository,
             ICountryRepository countryRepository,
             ICompetentAuthorityRepository competentAuthorityRepository,
             IMapper mapper,
@@ -41,19 +41,19 @@
             this.userContext = userContext;
         }
 
-        public async Task<Tuple<CompetentAuthority, CompetentAuthorityData>> HandleAsync(GetInternalUserCompetentAuthority message)
+        public async Task<Tuple<UKCompetentAuthority, CompetentAuthorityData>> HandleAsync(GetInternalUserCompetentAuthority message)
         {
             var user = await internalUserRepository.GetByUserId(userContext.UserId);
 
-            var enumAuthority = user.CompetentAuthority.AsCompetentAuthority();
+            var userAuthority = user.CompetentAuthority;
 
             var countryId = await countryRepository.GetUnitedKingdomId();
 
             var lookupAuthority = await competentAuthorityRepository.GetCompetentAuthorities(countryId);
 
-            return new Tuple<CompetentAuthority, CompetentAuthorityData>(enumAuthority,
+            return new Tuple<UKCompetentAuthority, CompetentAuthorityData>(userAuthority,
                 mapper.Map<CompetentAuthorityData>(
-                    lookupAuthority.Single(ca => ca.Code == AuthorityCodes[enumAuthority])));
+                    lookupAuthority.Single(ca => ca.Code == AuthorityCodes[userAuthority])));
         }
     }
 }

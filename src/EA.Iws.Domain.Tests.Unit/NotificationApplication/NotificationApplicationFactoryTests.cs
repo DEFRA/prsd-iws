@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
+    using Core.Notification;
     using Core.Shared;
     using Domain.NotificationApplication;
     using FakeItEasy;

@@ -12,7 +12,7 @@
 
 <div class="form-group">An approved financial guarantee must be in place before any shipments can be made.</div>
 
-@if (Model.CompetentAuthority == CompetentAuthority.Scotland)
+@if (Model.CompetentAuthority == UKCompetentAuthority.Scotland)
 {
     @Html.Partial("_SepaFinancialGuarantee")
 }

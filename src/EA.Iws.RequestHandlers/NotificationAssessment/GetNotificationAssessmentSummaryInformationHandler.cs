@@ -25,16 +25,16 @@
                 nas => nas.NotificationApplicationId,
                 (application, assessment) => new 
                 {
-                    Id = application.Id,
+                    application.Id,
                     Number = application.NotificationNumber,
-                    CompetentAuthority = application.CompetentAuthority,
-                    Status = assessment.Status
+                    application.CompetentAuthority,
+                    assessment.Status
                 }).SingleAsync(o => o.Id == message.Id);
 
             return new NotificationAssessmentSummaryInformationData
             {
                 Id = data.Id,
-                CompetentAuthority = data.CompetentAuthority.AsCompetentAuthority(),
+                CompetentAuthority = data.CompetentAuthority,
                 Number = data.Number,
                 Status = data.Status
             };

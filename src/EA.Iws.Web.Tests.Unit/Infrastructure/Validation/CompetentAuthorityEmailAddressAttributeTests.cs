@@ -26,12 +26,12 @@
         }
 
         [Theory]
-        [InlineData(CompetentAuthority.England, "valid@environment-agency.gov.uk")]
-        [InlineData(CompetentAuthority.NorthernIreland, "valid@doeni.gov.uk")]
-        [InlineData(CompetentAuthority.Scotland, "valid@sepa.org.uk")]
-        [InlineData(CompetentAuthority.Wales, "valid@cyfoethnaturiolcymru.gov.uk")]
-        [InlineData(CompetentAuthority.Wales, "valid@naturalresourceswales.gov.uk")]
-        public void ValidAgencyEmailAddresses(CompetentAuthority competentAuthority, string email)
+        [InlineData(UKCompetentAuthority.England, "valid@environment-agency.gov.uk")]
+        [InlineData(UKCompetentAuthority.NorthernIreland, "valid@doeni.gov.uk")]
+        [InlineData(UKCompetentAuthority.Scotland, "valid@sepa.org.uk")]
+        [InlineData(UKCompetentAuthority.Wales, "valid@cyfoethnaturiolcymru.gov.uk")]
+        [InlineData(UKCompetentAuthority.Wales, "valid@naturalresourceswales.gov.uk")]
+        public void ValidAgencyEmailAddresses(UKCompetentAuthority competentAuthority, string email)
         {
             viewModel.CompetentAuthority = competentAuthority;
             viewModel.Email = email;
@@ -41,11 +41,11 @@
         }
 
         [Theory]
-        [InlineData(CompetentAuthority.England, "invalid@email.com")]
-        [InlineData(CompetentAuthority.NorthernIreland, "invalid@email.com")]
-        [InlineData(CompetentAuthority.Scotland, "invalid@email.com")]
-        [InlineData(CompetentAuthority.Wales, "invalid@email.com")]
-        public void InvalidAgencyEmailAddresses(CompetentAuthority competentAuthority, string email)
+        [InlineData(UKCompetentAuthority.England, "invalid@email.com")]
+        [InlineData(UKCompetentAuthority.NorthernIreland, "invalid@email.com")]
+        [InlineData(UKCompetentAuthority.Scotland, "invalid@email.com")]
+        [InlineData(UKCompetentAuthority.Wales, "invalid@email.com")]
+        public void InvalidAgencyEmailAddresses(UKCompetentAuthority competentAuthority, string email)
         {
             viewModel.CompetentAuthority = competentAuthority;
             viewModel.Email = email;
@@ -55,11 +55,11 @@
         }
 
         [Theory]
-        [InlineData(CompetentAuthority.England, "invalid@email.com")]
-        [InlineData(CompetentAuthority.NorthernIreland, "invalid@email.com")]
-        [InlineData(CompetentAuthority.Scotland, "invalid@email.com")]
-        [InlineData(CompetentAuthority.Wales, "invalid@email.com")]
-        public void CanHaveInvalidAgencyEmailAddressesesWhenNotLiveEnvironment(CompetentAuthority competentAuthority,
+        [InlineData(UKCompetentAuthority.England, "invalid@email.com")]
+        [InlineData(UKCompetentAuthority.NorthernIreland, "invalid@email.com")]
+        [InlineData(UKCompetentAuthority.Scotland, "invalid@email.com")]
+        [InlineData(UKCompetentAuthority.Wales, "invalid@email.com")]
+        public void CanHaveInvalidAgencyEmailAddressesesWhenNotLiveEnvironment(UKCompetentAuthority competentAuthority,
             string email)
         {
             A.CallTo(() => dependencyResolver.GetService(typeof(AppConfiguration))).Returns(
@@ -77,7 +77,7 @@
 
         private class TestViewModel
         {
-            public CompetentAuthority? CompetentAuthority { get; set; }
+            public UKCompetentAuthority? CompetentAuthority { get; set; }
 
             [CompetentAuthorityEmailAddress("CompetentAuthority")]
             public string Email { get; set; }

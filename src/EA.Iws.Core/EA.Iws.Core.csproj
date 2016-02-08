@@ -61,6 +61,7 @@
     <Compile Include="Admin\Reports\FinanceReportData.cs" />
     <Compile Include="Admin\Reports\MissingShipmentData.cs" />
     <Compile Include="Admin\Search\ImportSearchResult.cs" />
+    <Compile Include="Admin\UserAdministration\UserApproval.cs" />
     <Compile Include="Annexes\AnnexFileData.cs" />
     <Compile Include="Annexes\AnnexStatus.cs" />
     <Compile Include="Annexes\AnnexUpload.cs" />
@@ -174,7 +175,7 @@
     <Compile Include="Rules\RuleResult.cs" />
     <Compile Include="Shared\TransactionRecordData.cs" />
     <Compile Include="NotificationAssessment\TransactionType.cs" />
-    <Compile Include="Notification\CompetentAuthority.cs" />
+    <Compile Include="Notification\UKCompetentAuthority.cs" />
     <Compile Include="NotificationAssessment\NotificationAssessmentDecisionRecord.cs" />
     <Compile Include="NotificationAssessment\FinancialGuaranteeDecisionData.cs" />
     <Compile Include="Annexes\ExportNotification\ProvidedAnnexesData.cs" />

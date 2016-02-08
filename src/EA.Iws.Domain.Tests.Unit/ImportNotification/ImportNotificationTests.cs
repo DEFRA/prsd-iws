@@ -1,6 +1,7 @@
 ﻿namespace EA.Iws.Domain.Tests.Unit.ImportNotification
 {
     using System;
+    using Core.Notification;
     using Core.Shared;
     using Domain.ImportNotification;
     using Xunit;
@@ -18,7 +19,7 @@
         [Fact]
         public void NotificationTypeCantBeDefault()
         {
-            Assert.Throws<ArgumentException>("notificationType", 
+            Assert.Throws<ArgumentException>("notificationType",
                 () => new ImportNotification(default(NotificationType), UKCompetentAuthority.England, "DE 001 12345"));
         }
 
@@ -34,13 +35,6 @@
         {
             Assert.Throws<ArgumentException>("notificationNumber",
                 () => new ImportNotification(NotificationType.Recovery, UKCompetentAuthority.England, string.Empty));
-        }
-
-        [Fact]
-        public void CompetentAuthorityCantBeNull()
-        {
-            Assert.Throws<ArgumentNullException>("competentAuthority",
-                () => new ImportNotification(NotificationType.Recovery, null, "DE 001 12345"));
         }
     }
 }

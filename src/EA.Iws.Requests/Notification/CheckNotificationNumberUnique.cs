@@ -8,7 +8,7 @@
     [RequestAuthorization(ExportNotificationPermissions.CanReadExportNotification)]
     public class CheckNotificationNumberUnique : IRequest<bool>
     {
-        public CheckNotificationNumberUnique(int notificationNumber, CompetentAuthority competentAuthority)
+        public CheckNotificationNumberUnique(int notificationNumber, UKCompetentAuthority competentAuthority)
         {
             NotificationNumber = notificationNumber;
             CompetentAuthority = competentAuthority;
@@ -16,6 +16,6 @@
 
         public int NotificationNumber { get; private set; }
 
-        public CompetentAuthority CompetentAuthority { get; private set; }
+        public UKCompetentAuthority CompetentAuthority { get; private set; }
     }
 }

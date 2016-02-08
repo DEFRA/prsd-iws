@@ -393,6 +393,7 @@
     <Content Include="Areas\AdminImportAssessment\Views\FinancialGuaranteeDecision\_Refuse.cshtml" />
     <Content Include="Areas\AdminImportAssessment\Views\FinancialGuaranteeDecision\_Release.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\Options\DownloadUnavailable.cshtml" />
+    <Content Include="Areas\NotificationApplication\Views\WhatToDoNext\_Block17Disclosure.cshtml" />
     <None Include="Content\iws\_panels.scss" />
     <Content Include="Content\select2\select2-spinner.gif" />
     <Content Include="Content\select2\select2.css" />
@@ -749,7 +750,6 @@
     <Content Include="Areas\AdminExportMovement\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\AdminExportMovement\Views\_ViewStart.cshtml" />
     <Content Include="Areas\AdminExportMovement\Views\Home\_NotificationSwitcher.cshtml" />
-    <Content Include="Areas\AdminExportAssessment\Views\Home\_InternalMenuExport.cshtml" />
     <Content Include="Areas\AdminImportAssessment\Views\web.config" />
     <Content Include="Areas\AdminImportAssessment\Views\KeyDates\Index.cshtml" />
     <Content Include="Areas\AdminImportAssessment\Views\_ViewStart.cshtml" />

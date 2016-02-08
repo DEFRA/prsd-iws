@@ -2,26 +2,31 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
+    using System.Linq;
+    using Core.Movement;
+    using Web.ViewModels.Shared;
 
-    public class UploadChoiceViewModel : IValidatableObject
+    public class UploadChoiceViewModel
     {
         public Guid NotificationId { get; set; }
 
-        [Display(Name = "Number", ResourceType = typeof(UploadChoiceViewModelResources))]
-        public int? Number { get; set; }
+        public StringGuidRadioButtons RadioButtons { get; set; }
 
-        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+        public UploadChoiceViewModel()
         {
-            if (!Number.HasValue)
-            {
-                yield return new ValidationResult(UploadChoiceViewModelResources.Number, new[] { "Number" });
-            }
+        }
 
-            if (Number.GetValueOrDefault(0) <= 0)
-            {
-                yield return new ValidationResult(UploadChoiceViewModelResources.ValidatePositive, new[] { "Number" });
-            }
+        public UploadChoiceViewModel(Guid id, IEnumerable<MovementData> model)
+        {
+            RadioButtons = new StringGuidRadioButtons(model
+                .OrderBy(d => d.Number)
+                .Select(d => new KeyValuePair<string, Guid>("Shipment " + d.Number, d.Id)));
+            NotificationId = id;
+        }
+
+        public bool NoMovementsToList
+        {
+            get { return RadioButtons == null || RadioButtons.PossibleValues.Count == 0; }
         }
     }
 }

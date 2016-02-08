@@ -49,7 +49,7 @@
                     mediator.SendAsync(A<GetNotificationBasicInfo>.That.Matches(p => p.NotificationId == notificationId)))
                 .Returns(new NotificationBasicInfo
                 {
-                    CompetentAuthority = CompetentAuthority.England,
+                    CompetentAuthority = UKCompetentAuthority.England,
                     NotificationId = notificationId,
                     NotificationNumber = "GB 0001 002000",
                     NotificationType = NotificationType.Recovery
