@@ -1,10 +1,10 @@
 ﻿@model EA.Iws.Web.Areas.Admin.ViewModels.Menu.AdminLinksViewModel
 <ul>
-    @if (Model.CanApproveNewInternalUser)
+    @if (Model.ShowApproveNewInternalUserLink)
     {
         <li>@Html.ActionLink("Manage new users", "ManageNewUsers", "UserAdministration", new { area = "Admin" }, null)</li>
     }
-    @if (Model.CanAddNewEntryOrExitPoint)
+    @if (Model.ShowAddNewEntryOrExitPointLink)
     {
         <li>@Html.ActionLink("New ports or border crossings", "Index", "EntryOrExitPoint", new { area = "Admin" }, null)</li>
     }

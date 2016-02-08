@@ -21,7 +21,8 @@
             @Html.Partial("~/Areas/Admin/Views/Menu/_ReportingLinks.cshtml", Model)
         </li>
 
-        @if (Model.CanAddNewEntryOrExitPoint || Model.CanApproveNewInternalUser)
+        @if (Model.ShowAddNewEntryOrExitPointLink 
+            || Model.ShowApproveNewInternalUserLink)
         {
             <li class="">
                 <h3 class="">
