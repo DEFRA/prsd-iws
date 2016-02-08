@@ -16,7 +16,7 @@
             else if (Model.ShowDisabledSubmitButtonAndGuidanceText)
             {
                 <a href="#" class="button" disabled="disabled">Submit notification</a>
-                <div>You can submit this notification once you've completed all sections</div>
+                <p>You can submit this notification once you've completed all sections</p>
             }
 
             else if (Model.ShowResubmitButton)
@@ -66,14 +66,13 @@
                 }
             </div>
         </div>
-
-        @if (!Model.IsNotificationComplete)
-        {
-            <div class="noti-alert">
-                <em>ALERT:</em>
-                You need to address the highlighted section(s)
-            </div>
-        }
-
     </div>
+
+    @if (!Model.IsNotificationComplete)
+    {
+        <div class="noti-alert">
+            <em>ALERT:</em> You need to address the highlighted section(s)
+        </div>
+    }
+
 </section>

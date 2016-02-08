@@ -16,35 +16,29 @@
 
 @helper DisplayDate(DateTime? date, MovementStatus status)
 {
-if (date.HasValue && status != MovementStatus.New && status != MovementStatus.Cancelled)
-{
+    if (date.HasValue && status != MovementStatus.New && status != MovementStatus.Cancelled)
+    {
         @date.Value.ToString("d MMM yyyy")
-}
-else if (status != MovementStatus.Cancelled)
-{
+    }
+    else if (status != MovementStatus.Cancelled)
+    {
         @:- -
     }
 }
 
 @helper DisplayQuantity(decimal? quantity, ShipmentQuantityUnits? unit, MovementStatus status)
 {
-if (quantity.HasValue && status != MovementStatus.New && status != MovementStatus.Cancelled)
-{
+    if (quantity.HasValue && status != MovementStatus.New && status != MovementStatus.Cancelled)
+    {
         @(quantity.Value.ToString("G29") + " " + EnumHelper.GetShortName(unit.GetValueOrDefault()))
-}
-else if (status != MovementStatus.Cancelled)
-{
+    }
+    else if (status != MovementStatus.Cancelled)
+    {
         @:- -
     }
 }
 
 <div class="shipping-home">
-
-    <section class="noti-switch" id="">
-        <div>
-            <button class="button note" type="button">@Model.NotificationNumber</button>
-        </div>
-    </section>
 
     <div class="grid-row">
         <div class="column-two-thirds">
@@ -57,15 +51,13 @@ else if (status != MovementStatus.Cancelled)
                 @Html.ActionLink(@Resource.ContinueWithButtonText, "Index", "Home", new { id = Model.NotificationId, area = "NotificationApplication" }, new { @class = "button" })
             }
         </div>
-
     </div>
 
     @if (Model.NotificationStatus == NotificationStatus.NotSubmitted)
     {
         <hr />
     }
-
-
+    
     <div class="grid-row">
         <div class="column-half">
             <h2 class="heading-medium">@Resource.CurrentNotificationTitle @Model.NotificationNumber</h2>
@@ -107,7 +99,9 @@ else if (status != MovementStatus.Cancelled)
             </div>
         </div>
     </div>
+
     <hr />
+
     <div class="grid-row">
 
         @if (Model.ShowShipmentOptions)
@@ -117,25 +111,16 @@ else if (status != MovementStatus.Cancelled)
                 <div class="nav-bloc">
                     <nav>
                         @Html.ActionLink(Resource.CreatePrenotification, "ShipmentDate", "Create", new { notificationId = Model.NotificationId, area = "NotificationMovements" }, null)
-
                         @Html.ActionLink(Resource.UploadPrenotification, "Index", "UploadChoice", new { notificationId = Model.NotificationId, area = "NotificationMovements" }, null)
-
                         @Html.ActionLink(Resource.CertificateOfReceipt, "Index", "ReceiveMovement", new { notificationId = Model.NotificationId, area = "NotificationMovements" }, null)
-
                         @Html.ActionLink(certificateLinkText, "Index", "Complete", new { notificationId = Model.NotificationId, area = "NotificationMovements" }, null)
-
                         @Html.ActionLink(Resource.CancelPrenotification, "Index", "CancelMovement", new { notificationId = Model.NotificationId, area = "NotificationMovements" }, null)
-
                         @Html.ActionLink(Resource.EditPrenotification, "Index", "Edit", new { notificationId = Model.NotificationId, area = "NotificationMovements" }, null)
-
                         @Html.ActionLink(Resource.Reject, "Index", "Reject", new { notificationId = Model.NotificationId, area = "NotificationMovements" }, null)
-
                         @if (Model.ShowGenerateInterimDocumentLink)
                         {
                             @Html.ActionLink(Resource.GenerateInterimDoc, "GenerateInterimMovementDocument", "Home", new { id = Model.NotificationId, area = "NotificationApplication" }, null)
                         }
-                        
-
                     </nav>
                 </div>
             </div>
@@ -251,7 +236,7 @@ else if (status != MovementStatus.Cancelled)
                 </table>
             </div>
         </section>
-                            }
+    }
 </div>
 
 @section scripts {
