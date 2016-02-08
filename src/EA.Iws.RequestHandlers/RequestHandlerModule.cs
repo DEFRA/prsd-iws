@@ -6,6 +6,7 @@
     using Aspose.Words;
     using Authorization;
     using Autofac;
+    using Core.Authorization;
     using Core.ComponentRegistration;
     using Core.Movement;
     using Decorators;
