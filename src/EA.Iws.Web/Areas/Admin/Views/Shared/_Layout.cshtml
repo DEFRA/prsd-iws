@@ -3,10 +3,12 @@
 }
 
 <div class="grid-row">
-    <aside class="column-third">
-        @Html.Action("HomeNavigation", "Menu", new { area = "Admin" })
-    </aside>
-
+    @if (User.Identity.IsAuthenticated)
+    {
+        <aside class="column-third">
+            @Html.Action("HomeNavigation", "Menu", new { area = "Admin" })
+        </aside>
+    }
     <div class="column-two-thirds">
         @RenderBody()
     </div>
