@@ -1701,6 +1701,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>IndexResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Areas\NotificationApplication\Views\WhatToDoNext\PaymentResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PaymentResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Areas\NotificationApplication\Views\WhatToDoNext\PrintResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -3435,6 +3440,10 @@
     <EmbeddedResource Include="Areas\NotificationApplication\Views\WhatToDoNext\IndexResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\NotificationApplication\Views\WhatToDoNext\PaymentResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>PaymentResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\NotificationApplication\Views\WhatToDoNext\PrintResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
