@@ -31,11 +31,11 @@
             {
                 yield return new ValidationResult(BaselOecdCodeResources.CodeRequired, new[] { "NotListed" });
             }
+        }
 
-            if (NotListed && SelectedCode.HasValue)
-            {
-                yield return new ValidationResult(BaselOecdCodeResources.DoNotSelectNA, new[] { "NotListed" });
-            }
+        public Guid? GetCode()
+        {
+            return NotListed ? null : SelectedCode;
         }
     }
 }
