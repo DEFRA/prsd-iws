@@ -1,7 +1,5 @@
 ﻿namespace EA.Iws.Web.Infrastructure
 {
-    using System;
-    using System.Linq;
     using System.Security.Claims;
     using System.Web.Mvc;
     using AuthorizationContext = System.Web.Mvc.AuthorizationContext;
@@ -16,6 +14,7 @@
                 return;
             }
 
+            var principal = (ClaimsPrincipal)filterContext.HttpContext.User;
             var identity = (ClaimsIdentity)filterContext.HttpContext.User.Identity;
 
             if (!identity.IsAuthenticated)
@@ -25,10 +24,7 @@
 
             var organisationRegistered = identity.HasClaim(c => c.Type.Equals(ClaimTypes.OrganisationId));
 
-            bool hasRoleClaim = identity.HasClaim(c => c.Type.Equals(System.Security.Claims.ClaimTypes.Role));
-            bool isAdmin = hasRoleClaim && identity.Claims.Single(c => c.Type.Equals(System.Security.Claims.ClaimTypes.Role)).Value.Equals("internal", StringComparison.InvariantCultureIgnoreCase);
-
-            if (isAdmin)
+            if (principal.IsInternalUser())
             {
                 return;
             }
