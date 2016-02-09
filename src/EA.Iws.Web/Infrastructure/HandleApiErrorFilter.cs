@@ -12,7 +12,6 @@
             if (!filterContext.ExceptionHandled && apiException != null)
             {
                 filterContext.HttpContext.Response.Clear();
-                filterContext.HttpContext.Response.TrySkipIisCustomErrors = true;
                 filterContext.HttpContext.Response.StatusCode = (int)apiException.StatusCode;
 
                 filterContext.ExceptionHandled = true;

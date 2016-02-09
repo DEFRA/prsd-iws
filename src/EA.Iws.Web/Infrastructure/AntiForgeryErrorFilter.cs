@@ -11,7 +11,6 @@ namespace EA.Iws.Web.Infrastructure
             if (context.Exception is HttpAntiForgeryException)
             {
                 context.HttpContext.Response.Clear();
-                context.HttpContext.Response.TrySkipIisCustomErrors = true;
                 context.HttpContext.Response.StatusCode = 400;
 
                 context.Result = new ViewResult
