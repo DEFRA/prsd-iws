@@ -46,17 +46,17 @@
                 return View(model);
             }
 
-            var codeType = (model.SelectedCode.HasValue)
-                ? model.WasteCodes.Single(wc => wc.Id == model.SelectedCode.Value).CodeType
+            var codeType = (model.GetCode().HasValue)
+                ? model.WasteCodes.Single(wc => wc.Id == model.GetCode().Value).CodeType
                 : CodeType.Basel;
 
             await
                 mediator.SendAsync(new SetBaselOecdCodeForNotification(id,
                         codeType,
                         model.NotListed,
-                        model.SelectedCode));
+                        model.GetCode()));
 
-            return (backToOverview) ? RedirectToAction("Index", "Home", new { id })
+            return backToOverview ? RedirectToAction("Index", "Home", new { id })
                 : RedirectToAction("Index", "EwcCode", new { id });
         }
     }

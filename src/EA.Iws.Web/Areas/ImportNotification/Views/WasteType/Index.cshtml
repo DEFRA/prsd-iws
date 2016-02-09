@@ -170,11 +170,19 @@
     <script>
         $('button[data-action="add"]').click(function () {
             addCode(this);
-        })
+        });
 
-        $('button[data-action="remove"]').click(function () {
+        $('button[data-action="remove"]').click(function() {
             removeCode(this);
-        })
+        });
+
+        $('#BaselCodeNotListed').click(function() {
+            if ($(this).is(":checked")) {
+                $("#@Html.NameFor(m => m.SelectedBaselCode)")
+                    .select2().val(null)
+                    .trigger("change");
+            }
+        });
 
         function addCode(callingButton) {
             var currentCodesJsonId = $(callingButton).data('json-codes-id');
@@ -222,7 +230,7 @@
             var codes = $(jsonCodeId);
            
             var elems = [];
-            if (codes.val() != '') {
+            if (codes.val() !== '') {
                 elems = JSON.parse(codes.val());
                 var indexInArray = $.inArray(codeId, elems);
                 if (indexInArray !== -1) {

@@ -52,40 +52,42 @@
 
 @section scripts{
     <script>
-        $(function () {
-            $("#@Html.NameFor(m => m.SelectedCode)").on("change", function () {
+    function setTableText(text) {
+        $("#descriptionTextArea div").html(text);
+    }
+
+    $(function () {
+        $("#@Html.NameFor(m => m.SelectedCode)").on("change", function () {
                 if ($("#NotListed").is(":checked")) {
-                    $("#descriptionTextArea div").html("Not listed");
+                    setTableText("Not listed");
                     return;
                 }
 
                 var inputToFind = "#description-" + $(this).find(":selected").attr("value");
                 var description = $(inputToFind).val();
                 if (description === undefined) {
-                    $("#descriptionTextArea div").html("No code selected");
+                    setTableText("No code selected");
                 }
                 else {
-                    $("#descriptionTextArea div").html(description);
+                    setTableText(description);
                 }
             });
 
             $("#NotListed").change(function () {
                 if ($(this).is(":checked")) {
-                    // clear the selected drop-down option.
-                    $("#code-list option[value='']").attr("selected", true);
-
-                    // clear the visible input box.
-                    $("input.ui-autocomplete-input").val('').change();
-
+                    $("#@Html.NameFor(m => m.SelectedCode)")
+                        .select2().val(null)
+                        .trigger("change");
+                    
                     // Put not listed in the table
-                    $("#descriptionTextArea div").html("Not listed");
+                    setTableText("Not listed");
                 }
                 else {
-                    $("#descriptionTextArea div").html("No code selected");
+                    setTableText("No code selected");
                 }
             });
 
             $("#@Html.NameFor(m => m.SelectedCode)").trigger("change");
-        });
+    });
     </script>
 }
