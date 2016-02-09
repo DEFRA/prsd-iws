@@ -2421,7 +2421,7 @@
     <Compile Include="Controllers\ErrorsController.cs" />
     <Compile Include="Controllers\NewNotificationController.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\CustomWasteCode\CustomWasteCodesViewModel.cs" />
-    <Compile Include="Infrastructure\AdminApprovalRequired.cs" />
+    <Compile Include="Infrastructure\AdminApprovalRequiredAttribute.cs" />
     <Compile Include="Infrastructure\AntiForgeryErrorFilter.cs" />
     <Compile Include="Infrastructure\AreaRegistrationContextExtensions.cs" />
     <Compile Include="Infrastructure\Navigation.cs" />

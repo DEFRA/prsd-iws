@@ -14,7 +14,7 @@
             filters.Add(new RequireHttpsAttribute(), order: 1);
             filters.Add(new EmailVerificationRequiredAttribute(), order: 2);
             filters.Add(new OrganisationRequiredAttribute(), order: 3);
-            filters.Add(new AdminApprovalRequired(), order: 4);
+            filters.Add(new AdminApprovalRequiredAttribute(), order: 4);
 
             // Error filters run after actions, so higher order will run first
             filters.Add(new HandleErrorAttribute() { View = "~/Views/Errors/InternalError.cshtml" }, order: 5);
