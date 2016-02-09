@@ -4,6 +4,7 @@
     using System.Linq;
     using System.Security.Claims;
     using System.Web.Mvc;
+    using System.Web.Routing;
     using Thinktecture.IdentityModel.Client;
     using AuthorizationContext = System.Web.Mvc.AuthorizationContext;
 
@@ -11,7 +12,7 @@
     {
         public override void OnAuthorization(AuthorizationContext filterContext)
         {
-            if (filterContext.SkipAuthorisation())
+            if (filterContext.IsChildAction || filterContext.SkipAuthorisation())
             {
                 return;
             }
@@ -26,10 +27,10 @@
                     && c.Value.Equals("false", StringComparison.InvariantCultureIgnoreCase)))                
             {
                 var redirectAddress = principal.IsInternalUser() 
-                    ? "~/Admin/Registration/AdminEmailVerificationRequired" 
-                    : "~/Account/EmailVerificationRequired";
+                    ? new RouteValueDictionary(new { controller = "Registration", action = "AdminEmailVerificationRequired", area = "Admin" })
+                    : new RouteValueDictionary(new { controller = "Account", action = "EmailVerificationRequired", area = string.Empty });
 
-                filterContext.Result = new RedirectResult(redirectAddress);
+                filterContext.Result = new RedirectToRouteResult(redirectAddress);
             }
         }
     }

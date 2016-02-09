@@ -2,6 +2,7 @@
 {
     using System.Security.Claims;
     using System.Web.Mvc;
+    using System.Web.Routing;
     using AuthorizationContext = System.Web.Mvc.AuthorizationContext;
     using ClaimTypes = Core.Shared.ClaimTypes;
 
@@ -9,7 +10,7 @@
     {
         public override void OnAuthorization(AuthorizationContext filterContext)
         {
-            if (filterContext.SkipAuthorisation())
+            if (filterContext.IsChildAction || filterContext.SkipAuthorisation())
             {
                 return;
             }
@@ -31,7 +32,8 @@
 
             if (!organisationRegistered)
             {
-                filterContext.Result = new RedirectResult("~/Registration/CreateNewOrganisation");
+                filterContext.Result = new RedirectToRouteResult(
+                    new RouteValueDictionary(new { controller = "Registration", action = "CreateNewOrganisation", area = string.Empty }));
             }
         }
     }
