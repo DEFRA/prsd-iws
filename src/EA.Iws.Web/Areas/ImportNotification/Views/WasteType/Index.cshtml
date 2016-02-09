@@ -179,7 +179,7 @@
         $('#BaselCodeNotListed').click(function() {
             if ($(this).is(":checked")) {
                 $("#@Html.NameFor(m => m.SelectedBaselCode)")
-                    .select2().val(null)
+                    .val(null)
                     .trigger("change");
             }
         });

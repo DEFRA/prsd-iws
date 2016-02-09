@@ -76,7 +76,7 @@
             $("#NotListed").change(function () {
                 if ($(this).is(":checked")) {
                     $("#@Html.NameFor(m => m.SelectedCode)")
-                        .select2().val(null)
+                        .val(null)
                         .trigger("change");
                     
                     // Put not listed in the table
@@ -86,8 +86,6 @@
                     setTableText("No code selected");
                 }
             });
-
-            $("#@Html.NameFor(m => m.SelectedCode)").trigger("change");
     });
     </script>
 }
