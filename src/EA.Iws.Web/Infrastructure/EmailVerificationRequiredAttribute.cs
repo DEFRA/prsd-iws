@@ -16,14 +16,19 @@
                 return;
             }
 
-            var identity = (ClaimsIdentity)filterContext.HttpContext.User.Identity;
-            var hasEmailVerifiedClaim = identity.HasClaim(c => c.Type.Equals(JwtClaimTypes.EmailVerified));
-            bool hasRoleClaim = identity.HasClaim(c => c.Type.Equals(ClaimTypes.Role));
-            bool isAdmin = hasRoleClaim && identity.Claims.Single(c => c.Type.Equals(ClaimTypes.Role)).Value.Equals("admin", StringComparison.InvariantCultureIgnoreCase);
+            var principal = (ClaimsPrincipal)filterContext.HttpContext.User;
+            var identity = (ClaimsIdentity)principal.Identity;
 
-            if (hasEmailVerifiedClaim && identity.Claims.Single(c => c.Type.Equals(JwtClaimTypes.EmailVerified)).Value.Equals("false", StringComparison.InvariantCultureIgnoreCase))
+            var hasEmailVerifiedClaim = identity.HasClaim(c => c.Type.Equals(JwtClaimTypes.EmailVerified));
+
+            if (hasEmailVerifiedClaim && identity.Claims.Any(c => 
+                    c.Type.Equals(JwtClaimTypes.EmailVerified) 
+                    && c.Value.Equals("false", StringComparison.InvariantCultureIgnoreCase)))                
             {
-                var redirectAddress = isAdmin ? "~/Admin/Registration/AdminEmailVerificationRequired" : "~/Account/EmailVerificationRequired";
+                var redirectAddress = principal.IsInternalUser() 
+                    ? "~/Admin/Registration/AdminEmailVerificationRequired" 
+                    : "~/Account/EmailVerificationRequired";
+
                 filterContext.Result = new RedirectResult(redirectAddress);
             }
         }
