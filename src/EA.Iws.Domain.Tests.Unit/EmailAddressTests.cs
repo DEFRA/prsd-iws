@@ -109,7 +109,7 @@
         {
             var email = new EmailAddress("email@address.com");
 
-            Assert.True("email@address.com" == email);
+            Assert.True(email == "email@address.com");
         }
     }
 }

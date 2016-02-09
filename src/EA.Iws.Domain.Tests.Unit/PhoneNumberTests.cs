@@ -96,7 +96,7 @@
         {
             var phoneNumber = new PhoneNumber("01234 567890");
 
-            Assert.True("01234 567890" == phoneNumber);
+            Assert.True(phoneNumber == "01234 567890");
         }
     }
 }

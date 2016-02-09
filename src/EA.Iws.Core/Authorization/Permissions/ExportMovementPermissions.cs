@@ -11,6 +11,5 @@
         public const string CanEditExportMovements = "Can Edit Export Movements";
 
         public const string CanEditExportMovementsInternal = "Can Edit Export Movements Internal";
-
     }
 }
