@@ -3,12 +3,13 @@
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Core.AddressBook;
+    using Infrastructure.Authorization;
     using Newtonsoft.Json;
     using Newtonsoft.Json.Converters;
     using Prsd.Core.Mediator;
     using Requests.AddressBook;
 
-    [Authorize]
+    [AuthorizeActivity(typeof(SearchAddressRecords))]
     public class SearchController : Controller
     {
         private const string JsonContentType = "application/json";
