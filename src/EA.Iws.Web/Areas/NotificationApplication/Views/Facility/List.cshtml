@@ -1,7 +1,9 @@
-﻿@using EA.Iws.Web.Areas.NotificationApplication.Views.Facility
+﻿@using EA.Iws.Core.Shared
+@using EA.Iws.Web.Areas.NotificationApplication.Views.Facility
 @model EA.Iws.Web.Areas.NotificationApplication.ViewModels.Facility.MultipleFacilitiesViewModel
 @{
-    ViewBag.Title = ListFacilityResources.Title;
+    ViewBag.Title = Model.NotificationType == NotificationType.Recovery 
+        ? ListFacilityResources.RecoveryTitle : ListFacilityResources.DisposalTitle;
     var notificationType = Model.NotificationType.ToString();
 }
 

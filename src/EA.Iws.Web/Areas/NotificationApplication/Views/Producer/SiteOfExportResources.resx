@@ -130,7 +130,7 @@
     <value>Site of export</value>
   </data>
   <data name="SiteOfExportRequired" xml:space="preserve">
-    <value>Please select the site of export</value>
+    <value>Please choose the site of export</value>
   </data>
   <data name="TableTitle" xml:space="preserve">
     <value>List of producers for set site of export</value>
@@ -142,7 +142,7 @@
     <value>Organisation name</value>
   </data>
   <data name="ThSiteOfExport" xml:space="preserve">
-    <value>Site of export?</value>
+    <value>Site of export</value>
   </data>
   <data name="Title" xml:space="preserve">
     <value>Site of export</value>

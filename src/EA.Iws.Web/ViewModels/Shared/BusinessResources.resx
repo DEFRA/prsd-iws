@@ -124,7 +124,7 @@
     <value>Companies House number</value>
   </data>
   <data name="CompanyHouseDescription" xml:space="preserve">
-    <value>Your Companies House number is on your organisation's certificate of incorporation. You can also get the number from your organisation's accountant or accounts department, or &lt;a href="https://beta.companieshouse.gov.uk/" target="_blank"&gt;search the Companies House online services&lt;/a&gt;</value>
+    <value>Your Companies House number is on your organisation's certificate of incorporation. You can also get the number from your organisation's accountant or accounts department, or &lt;a href="https://beta.companieshouse.gov.uk/" target="_blank"&gt;search the Companies House online services&lt;/a&gt;.</value>
   </data>
   <data name="CompanyHouseRequired" xml:space="preserve">
     <value>Companies house number is required</value>
@@ -142,7 +142,7 @@
     <value>Please choose the type of organisation</value>
   </data>
   <data name="OtherOrgType" xml:space="preserve">
-    <value>Enter your organisation type</value>
+    <value>Organisation type</value>
   </data>
   <data name="OtherOrgTypeRequired" xml:space="preserve">
     <value>Please describe this type of organisation</value>
@@ -169,6 +169,6 @@
     <value>The registration number cannot be greater than 100 characters</value>
   </data>
   <data name="FormHint" xml:space="preserve">
-    <value>If none of these options apply, please select "Other" and add details.</value>
+    <value>If none of these options apply, please select "Other" and add details</value>
   </data>
 </root>

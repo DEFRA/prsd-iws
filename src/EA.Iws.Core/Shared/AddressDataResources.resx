@@ -145,7 +145,7 @@
     <value>County</value>
   </data>
   <data name="Postcode" xml:space="preserve">
-    <value>Postcode</value>
+    <value>Post code</value>
   </data>
   <data name="PostcodeRequired" xml:space="preserve">
     <value>Please enter the post code</value>

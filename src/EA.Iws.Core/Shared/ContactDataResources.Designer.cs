@@ -79,7 +79,7 @@ namespace EA.Iws.Core.Shared {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Enter the full fax number including the international dialling code for example +44  1709389201.
+        ///   Looks up a localized string similar to Enter the full fax number including the international dialling code, for example +44  1709389201.
         /// </summary>
         public static string FaxHint {
             get {
@@ -169,7 +169,7 @@ namespace EA.Iws.Core.Shared {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Enter the full telephone number including the international dialling code for example +44  1709389201.
+        ///   Looks up a localized string similar to Enter the full telephone number including the international dialling code, for example +44  1709389201.
         /// </summary>
         public static string TelephoneHint {
             get {

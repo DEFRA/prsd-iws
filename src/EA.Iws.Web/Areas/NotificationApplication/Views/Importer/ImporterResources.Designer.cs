@@ -70,7 +70,7 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.Importer {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This should be the correspondence address for the importer - consignee..
+        ///   Looks up a localized string similar to This should be the correspondence address for the importer - consignee.
         /// </summary>
         public static string AddressDescription {
             get {
@@ -88,7 +88,7 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.Importer {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This should be the contact person for the importer - consignee..
+        ///   Looks up a localized string similar to This should be the contact person for the importer - consignee.
         /// </summary>
         public static string ContactDescription {
             get {
@@ -97,7 +97,7 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.Importer {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Who is the importer-consignee?.
+        ///   Looks up a localized string similar to Who is the importer - consignee?.
         /// </summary>
         public static string Header {
             get {
@@ -115,7 +115,7 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.Importer {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Who is the importer-consignee?.
+        ///   Looks up a localized string similar to Who is the importer - consignee?.
         /// </summary>
         public static string Title {
             get {
