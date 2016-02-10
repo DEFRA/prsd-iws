@@ -17,12 +17,12 @@
     [NotificationReadOnlyFilter]
     public class ProducerController : Controller
     {
-        private readonly IMediator client;
+        private readonly IMediator mediator;
         private readonly IMap<AddProducerViewModel, AddAddressBookEntry> producerAddressBookMap;
 
-        public ProducerController(IMediator client, IMap<AddProducerViewModel, AddAddressBookEntry> producerAddressBookMap)
+        public ProducerController(IMediator mediator, IMap<AddProducerViewModel, AddAddressBookEntry> producerAddressBookMap)
         {
-            this.client = client;
+            this.mediator = mediator;
             this.producerAddressBookMap = producerAddressBookMap;
         }
 
@@ -31,7 +31,7 @@
         {
             var model = new AddProducerViewModel { NotificationId = id };
 
-            await this.BindCountryList(client);
+            await this.BindCountryList(mediator);
             model.Address.DefaultCountryId = this.GetDefaultCountryId();
 
             return View(model);
@@ -43,7 +43,7 @@
         {
             if (!ModelState.IsValid)
             {
-                await this.BindCountryList(client);
+                await this.BindCountryList(mediator);
                 return View(model);
             }
 
@@ -51,11 +51,11 @@
             {
                 var request = model.ToRequest();
 
-                await client.SendAsync(request);
+                await mediator.SendAsync(request);
 
                 if (model.IsAddedToAddressBook)
                 {
-                    await client.SendAsync(producerAddressBookMap.Map(model));
+                    await mediator.SendAsync(producerAddressBookMap.Map(model));
                 }
 
                 return RedirectToAction("List", "Producer",
@@ -70,7 +70,7 @@
                     throw;
                 }
             }
-            await this.BindCountryList(client);
+            await this.BindCountryList(mediator);
             return View(model);
         }
 
@@ -78,11 +78,11 @@
         public async Task<ActionResult> Edit(Guid id, Guid entityId, bool? backToOverview = null)
         {
             var producer =
-                await client.SendAsync(new GetProducerForNotification(id, entityId));
+                await mediator.SendAsync(new GetProducerForNotification(id, entityId));
 
             var model = new EditProducerViewModel(producer);
 
-            await this.BindCountryList(client);
+            await this.BindCountryList(mediator);
             model.Address.DefaultCountryId = this.GetDefaultCountryId();
             return View(model);
         }
@@ -93,7 +93,7 @@
         {
             if (!ModelState.IsValid)
             {
-                await this.BindCountryList(client);
+                await this.BindCountryList(mediator);
                 return View(model);
             }
 
@@ -101,11 +101,11 @@
             {
                 var request = model.ToRequest();
 
-                await client.SendAsync(request);
+                await mediator.SendAsync(request);
 
                 if (model.IsAddedToAddressBook)
                 {
-                    await client.SendAsync(producerAddressBookMap.Map(model));
+                    await mediator.SendAsync(producerAddressBookMap.Map(model));
                 }
 
                 return RedirectToAction("List", "Producer",
@@ -120,7 +120,7 @@
                     throw;
                 }
             }
-            await this.BindCountryList(client);
+            await this.BindCountryList(mediator);
             return View(model);
         }
 
@@ -129,7 +129,7 @@
         {
             ViewBag.BackToOverview = backToOverview.GetValueOrDefault();
 
-            var response = await client.SendAsync(new GetProducersByNotificationId(id));
+            var response = await mediator.SendAsync(new GetProducersByNotificationId(id));
             var producer = response.Single(p => p.Id == entityId);
 
             var model = new RemoveProducerViewModel
@@ -157,7 +157,7 @@
         {
             try
             {
-                await client.SendAsync(new DeleteProducerForNotification(model.ProducerId, model.NotificationId));
+                await mediator.SendAsync(new DeleteProducerForNotification(model.ProducerId, model.NotificationId));
                 return RedirectToAction("List", "Producer", new { id = model.NotificationId, backToOverview });
             }
             catch (ApiBadRequestException ex)
@@ -179,7 +179,7 @@
 
             var model = new MultipleProducersViewModel();
             var response =
-                await client.SendAsync(new GetProducersByNotificationId(id));
+                await mediator.SendAsync(new GetProducersByNotificationId(id));
 
             model.NotificationId = id;
             model.ProducerData = response;
@@ -193,7 +193,7 @@
             ViewBag.BackToOverview = backToOverview.GetValueOrDefault();
 
             var response =
-                await client.SendAsync(new GetProducersByNotificationId(id));
+                await mediator.SendAsync(new GetProducersByNotificationId(id));
 
             var model = new SiteOfExportViewModel
             {
@@ -206,36 +206,36 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> SiteOfExport(SiteOfExportViewModel model, bool? backToList,
+        public async Task<ActionResult> SiteOfExport(SiteOfExportViewModel model,
+            bool? backToList,
             bool? backToOverview = null)
         {
-            try
+            if (!ModelState.IsValid)
             {
-                await
-                    client.SendAsync(new SetSiteOfExport(model.SelectedSiteOfExport.GetValueOrDefault(),
-                        model.NotificationId));
+                ViewBag.BackToOverview = backToOverview.GetValueOrDefault();
 
-                if (backToList.GetValueOrDefault())
-                {
-                    return RedirectToAction("List", "Producer", new { id = model.NotificationId, backToOverview });
-                }
-                if (backToOverview.GetValueOrDefault())
-                {
-                    return RedirectToAction("Index", "Home", new { id = model.NotificationId });
-                }
-                return RedirectToAction("Index", "Importer", new { id = model.NotificationId });
-            }
-            catch (ApiBadRequestException ex)
-            {
-                this.HandleBadRequest(ex);
+                var response = await mediator.SendAsync(new GetProducersByNotificationId(model.NotificationId));
 
-                if (ModelState.IsValid)
-                {
-                    throw;
-                }
+                model.Producers = response;
+
+                return View(model);
             }
 
-            return View(model);
+            await mediator.SendAsync(new SetSiteOfExport(
+                model.SelectedSiteOfExport.GetValueOrDefault(),
+                model.NotificationId));
+
+            if (backToList.GetValueOrDefault())
+            {
+                return RedirectToAction("List", "Producer", new { id = model.NotificationId, backToOverview });
+            }
+
+            if (backToOverview.GetValueOrDefault())
+            {
+                return RedirectToAction("Index", "Home", new { id = model.NotificationId });
+            }
+
+            return RedirectToAction("Index", "Importer", new { id = model.NotificationId });
         }
     }
 }
