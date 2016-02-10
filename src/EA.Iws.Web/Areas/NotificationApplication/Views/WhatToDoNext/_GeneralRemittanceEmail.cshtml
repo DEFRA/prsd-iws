@@ -1,5 +1,8 @@
-﻿@model EA.Iws.Requests.Notification.WhatToDoNextPaymentData
+﻿@using EA.Iws.Core.Notification
+@model EA.Iws.Requests.Notification.WhatToDoNextPaymentData
 
-<p>You must also email your remittance to:</p>
-<p>@Html.DisplayFor(m => m.UnitedKingdomCompetentAuthorityData.BacsDetails.Email)</p>
-<p>Or by fax: @Html.DisplayFor(m => m.UnitedKingdomCompetentAuthorityData.BacsDetails.Fax)</p>
+<p>You must also email your remittance to: @Html.DisplayFor(m => m.UnitedKingdomCompetentAuthorityData.BacsDetails.Email)</p>
+@if (Model.CompetentAuthority != UKCompetentAuthority.England)
+{
+    <p>Or by fax: @Html.DisplayFor(m => m.UnitedKingdomCompetentAuthorityData.BacsDetails.Fax)</p>
+}

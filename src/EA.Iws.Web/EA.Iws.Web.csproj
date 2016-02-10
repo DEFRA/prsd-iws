@@ -394,6 +394,7 @@
     <Content Include="Areas\AdminImportAssessment\Views\FinancialGuaranteeDecision\_Release.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\Options\DownloadUnavailable.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\WhatToDoNext\_Block17Disclosure.cshtml" />
+    <Content Include="Areas\NotificationApplication\Views\WhatToDoNext\_RemittancePost.cshtml" />
     <None Include="Content\iws\_panels.scss" />
     <Content Include="Content\select2\select2-spinner.gif" />
     <Content Include="Content\select2\select2.css" />

@@ -18,7 +18,8 @@
                 Fax = source.Fax,
                 Iban = source.Iban,
                 SortCode = source.SortCode,
-                SwiftBic = source.SwiftBic
+                SwiftBic = source.SwiftBic,
+                RemittanceAddress = source.RemittanceAddress
             };
         }
     }

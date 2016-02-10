@@ -20,6 +20,8 @@
 
         public string Fax { get; protected set; }
 
+        public string RemittanceAddress { get; protected set; }
+
         protected CompetentAuthorityBacsDetails()
         {
         }

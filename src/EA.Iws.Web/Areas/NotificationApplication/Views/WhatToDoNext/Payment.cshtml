@@ -1,6 +1,5 @@
 ﻿@using System.Globalization
 @using EA.Iws.Core.Notification
-@using EA.Iws.Core.NotificationAssessment
 @using Resources = EA.Iws.Web.Areas.NotificationApplication.Views.WhatToDoNext.PaymentResources
 @model EA.Iws.Requests.Notification.WhatToDoNextPaymentData
 
@@ -22,7 +21,7 @@
             <h1 class="heading-large">@Resources.MainHeading</h1>
         </header>
 
-        @if (Model.Status == NotificationStatus.NotSubmitted)
+        @if (Model.Charge == 0)
         {
             <div class="form-group">
                 <div class="noti-alert no-margin">
@@ -114,7 +113,9 @@ else
     @Html.Partial("_GeneralRemittanceEmail")
 }
 
-<h4 class="heading-small">By post</h4>
+@Html.Partial("_RemittancePost")
+
+<h4 class="heading-small">@Resources.Post</h4>
 @Html.Partial("_GeneralPost")
 
 @Html.Action("CardPaymentInformation", new { competentAuthority = Model.CompetentAuthority })

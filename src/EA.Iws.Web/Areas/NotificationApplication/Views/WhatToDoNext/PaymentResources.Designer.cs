@@ -124,6 +124,24 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.WhatToDoNext {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Pay by post.
+        /// </summary>
+        public static string Post {
+            get {
+                return ResourceManager.GetString("Post", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The postal address for your remittance advice is:.
+        /// </summary>
+        public static string RemittancePost {
+            get {
+                return ResourceManager.GetString("RemittancePost", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Payment and charges information.
         /// </summary>
         public static string Title {
