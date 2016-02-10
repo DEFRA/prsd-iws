@@ -14,7 +14,8 @@
         </header>
 
         <div class="form-group">
-            @Html.ActionLink(@Resource.DownloadLinkText, "GenerateNotificationDocument", "Home", new { id = Model.Id, area = "NotificationApplication" }, null)
+            @Html.ActionLink(@Resource.DownloadLinkText, "GenerateNotificationDocument", "Home", new { id = Model.Id, area = "NotificationApplication" },
+                new { data_track = "link", data_category = "Export notification", data_action = "Download" })
             @Resource.AfterDownloadLinkText
         </div>
 
