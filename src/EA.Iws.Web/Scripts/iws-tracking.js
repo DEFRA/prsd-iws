@@ -3,12 +3,10 @@
     // Send ga event when a user opens a progressive disclosure
     $('[data-track="disclosure"]').each(function () {
         $(this).click(function () {
-            if ($(this).parents("details").first().attr("open") === "open") {
 
-                
+            var state = $(this).parent().next().attr('aria-hidden') === "false" ? true : false;
 
-                console.log(Category($(this)) + " " + Action($(this)) + " " + Label($(this)) + " " + Value($(this)) + " ");
-
+            if (state) {
                 ga("send", "event", Category($(this)), Action($(this)), Label($(this)), Value($(this)));
             }
         });
@@ -18,9 +16,6 @@
     // Send ga event when a user clicks an element - for example, a checkbox
     $('[data-track="element"]').each(function() {
         $(this).click(function () {
-
-            console.log(Category($(this)) + " " + Action($(this)) + " " + Label($(this)) + " " + Value($(this)) + " ");
-
             ga("send", "event", Category($(this)), Action($(this)), Label($(this)), Value($(this)));
         });
     });
@@ -30,7 +25,6 @@
         $(this).submit(function (event) {
             event.preventDefault();
 
-            console.log("1 " + Category($(this)) + " " + Action($(this)) + " " + Label($(this)) + " " + Value($(this)) + " ");
             var form = this;
             ga("send", "event", Category($(this)), Action($(this)), Label($(this)), Value($(this)), {
                 hitCallback: createFunctionWithTimeout(function () {
@@ -46,8 +40,6 @@
             event.preventDefault();
 
             var href = $(this).attr("href");
-
-            console.log(2 + Category($(this)) + " " + Action($(this)) + " " + Label($(this)) + " " + Value($(this)) + " " + href);
 
             ga("send", "event", Category($(this)), Action($(this)), Label($(this)), Value($(this)), {
                 hitCallback: createFunctionWithTimeout(function () {
