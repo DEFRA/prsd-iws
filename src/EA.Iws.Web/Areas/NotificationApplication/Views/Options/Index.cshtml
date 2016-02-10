@@ -70,7 +70,7 @@
                         @Html.ActionLink(@Resource.PrintNotification, "DownloadUnavailable", "Options", new { id = Model.NotificationId, area = "NotificationApplication" }, null)
                         @Html.ActionLink(@Resource.PrintLabel, "Unavailable", "Options", new { id = Model.NotificationId, area = "NotificationApplication" }, null)
                         @Html.ActionLink(@Resource.CompleteFG, "Unavailable", "Options", new { id = Model.NotificationId, area = "NotificationApplication" }, null)
-                        @Html.ActionLink(@Resource.CostInfo, "Unavailable", "Options", new { id = Model.NotificationId, area = "NotificationApplication" }, null)
+                        @Html.ActionLink(@Resource.CostInfo, "Payment", "WhatToDoNext", new { id = Model.NotificationId, area = "NotificationApplication" }, null)
                         @Html.ActionLink(@Resource.UploadAnnexes, "Unavailable", "Options", new { id = Model.NotificationId, area = "NotificationApplication" }, null)
                     }
                     else

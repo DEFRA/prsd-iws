@@ -18,6 +18,7 @@
             Property(x => x.SwiftBic).HasColumnName(ColumnPrefix + "SwiftBic").IsRequired().HasMaxLength(256);
             Property(x => x.Email).HasColumnName(ColumnPrefix + "Email").HasMaxLength(256);
             Property(x => x.Fax).HasColumnName(ColumnPrefix + "Fax").HasMaxLength(128);
+            Property(x => x.RemittanceAddress).HasColumnName("RemittancePostalAddress").HasMaxLength(4000);
         }
     }
 }

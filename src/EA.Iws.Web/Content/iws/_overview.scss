@@ -159,6 +159,10 @@
     } 
 } 
 
+.no-margin{
+    margin: 0px 0px 0px 0px;
+}
+
 .over-alert{ 
     border: 2px solid $error-colour; 
     td{ padding-left: 10px; 

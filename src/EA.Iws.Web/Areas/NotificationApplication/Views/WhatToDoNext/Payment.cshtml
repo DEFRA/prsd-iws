@@ -1,9 +1,10 @@
 ﻿@using System.Globalization
 @using EA.Iws.Core.Notification
+@using Resources = EA.Iws.Web.Areas.NotificationApplication.Views.WhatToDoNext.PaymentResources
 @model EA.Iws.Requests.Notification.WhatToDoNextPaymentData
 
 @{
-    ViewBag.Title = "Payment and charges information";
+    ViewBag.Title = Resources.Title;
     Layout = "~/Views/Shared/_Layout.GovUK.Sections.cshtml";
 }
 
@@ -17,8 +18,17 @@
     <div class="column-two-thirds">
 
         <header class="hgroup">
-            <h1 class="heading-large">Your notification charges and payment information</h1>
+            <h1 class="heading-large">@Resources.MainHeading</h1>
         </header>
+
+        @if (Model.Charge == 0)
+        {
+            <div class="form-group">
+                <div class="noti-alert no-margin">
+                    <em>@Resources.AlertText</em> @Resources.ChargesNotShownAlert
+                </div>
+            </div>
+        }
 
         <div class="grid-row">
             <div class="column-half">
@@ -38,10 +48,10 @@
 
         <br/>
         <br/>
-        <p>You can pay us by bank transfer, post, or credit or debit card. All Payments must be made in sterling.</p>
+        <p>@Resources.ListAvailablePaymentMethods</p>
         <br/>
-        <h4 class="heading-small">Pay by bank transfers</h4>
-        <p>Please use the correct payment reference. An incorrect payment reference could delay the notification.</p>
+        <h4 class="heading-small">@Resources.BankTransfer</h4>
+        <p>@Resources.BankTransferReferenceDisclaimer</p>
     </div>
 </div>
 
@@ -80,7 +90,7 @@
     </table>
 
 
-    <p>If you are paying from outside the United Kingdom, please include these international banking references.</p>
+    <p>@Resources.BankTransferInternational</p>
     <table class="table-pad-bottom" title="International banking details">
         <tr>
             <td>IBAN</td>
@@ -103,7 +113,9 @@ else
     @Html.Partial("_GeneralRemittanceEmail")
 }
 
-<h4 class="heading-small">By post</h4>
+@Html.Partial("_RemittancePost")
+
+<h4 class="heading-small">@Resources.Post</h4>
 @Html.Partial("_GeneralPost")
 
 @Html.Action("CardPaymentInformation", new { competentAuthority = Model.CompetentAuthority })
