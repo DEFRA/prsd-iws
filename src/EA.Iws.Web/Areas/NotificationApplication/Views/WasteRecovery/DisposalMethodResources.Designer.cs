@@ -62,7 +62,7 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.WasteRecovery {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Please describe the planned method of disposal (maximum 40 characters).
+        ///   Looks up a localized string similar to Please describe the planned method of disposal (maximum 40 characters)..
         /// </summary>
         public static string DisposalMethod {
             get {
@@ -98,7 +98,7 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.WasteRecovery {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Method of Disposal for Recoverable Material.
+        ///   Looks up a localized string similar to Method of disposal for recoverable material.
         /// </summary>
         public static string Title {
             get {

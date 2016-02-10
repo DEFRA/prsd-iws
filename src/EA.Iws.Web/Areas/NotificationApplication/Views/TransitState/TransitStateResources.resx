@@ -133,7 +133,7 @@
     <value>Country</value>
   </data>
   <data name="CountryHint" xml:space="preserve">
-    <value>Enter the country or state the waste passes through on its journey</value>
+    <value>Enter the country or state which the waste passes through on its journey</value>
   </data>
   <data name="CountryList" xml:space="preserve">
     <value>Country list</value>
@@ -163,7 +163,7 @@
     <value>Where is the waste travelling through?</value>
   </data>
   <data name="Title" xml:space="preserve">
-    <value>Transit State</value>
+    <value>Transit state</value>
   </data>
   <data name="TransitCountryRequired" xml:space="preserve">
     <value>Please select the country of transit</value>

@@ -151,7 +151,7 @@
     <value>What is the technology employed?</value>
   </data>
   <data name="TechnologyDescription" xml:space="preserve">
-    <value>Give a brief description of the technologies and processes used to treat the waste on site.</value>
+    <value>Give a brief description of the technologies and processes used to treat the waste on site</value>
   </data>
   <data name="TechnologyHint" xml:space="preserve">
     <value>Please limit your answer to 70 characters or less</value>

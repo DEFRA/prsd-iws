@@ -157,7 +157,7 @@
     <value>Min constituent</value>
   </data>
   <data name="OtherCodesHintText" xml:space="preserve">
-    <value>To remove any codes that are no longer required delete the name and the minimum and maximium values or enter "NA" for each of the minimum and maximium values</value>
+    <value>To remove any constituents that you no longer need, delete the name and the minimum and maximum values, or enter "NA" for each of its values.</value>
   </data>
   <data name="OtherConstituent" xml:space="preserve">
     <value>Other constituent</value>

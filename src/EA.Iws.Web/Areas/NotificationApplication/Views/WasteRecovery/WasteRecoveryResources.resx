@@ -124,7 +124,7 @@
     <value>In this section, we'll ask you questions around the amount, value, and cost of your waste's recovery. We may also need details of the possible methods and costs of any non-recoverable waste disposal.</value>
   </data>
   <data name="Desc3" xml:space="preserve">
-    <value>Please note: Should your importer-consignee be sending through the recovery information, it will still remain your responsibility to ensure we receive it.</value>
+    <value>Please note: Should your importer - consignee be sending through the recovery information, it will still remain your responsibility to ensure we receive it.</value>
   </data>
   <data name="Header" xml:space="preserve">
     <value>Tell us about your waste's recovery</value>

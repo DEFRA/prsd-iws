@@ -7,7 +7,7 @@
         [Description("I will provide this")]
         Notifier = 1,
 
-        [Description("My importer-consignee will provide it directly to you")]
+        [Description("My importer - consignee will provide it directly to you")]
         Importer = 2
     }
 }

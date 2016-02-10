@@ -48,13 +48,13 @@
                 if (string.IsNullOrEmpty(WasteComposition[i].MinConcentration) || string.IsNullOrEmpty(WasteComposition[i].MaxConcentration))
                 {
                     yield return new ValidationResult(string.Format(ChemicalCompositionResources.MinMaxRequired,
-                         EnumHelper.GetDescription(WasteComposition[i].WasteInformationType)), new[] { "WasteComposition[" + i + "]" });
+                         EnumHelper.GetDescription(WasteComposition[i].WasteInformationType).ToLower()), new[] { "WasteComposition[" + i + "]" });
                 }
                 else if ((!IsDecimal(WasteComposition[i].MinConcentration) && !WasteComposition[i].MinConcentration.ToUpper().Equals(ChemicalCompositionResources.NA))
                     || (!IsDecimal(WasteComposition[i].MaxConcentration) && !WasteComposition[i].MaxConcentration.ToUpper().Equals(ChemicalCompositionResources.NA)))
                 {
                     yield return new ValidationResult(string.Format(ChemicalCompositionResources.MinMaxValid,
-                        EnumHelper.GetDescription(WasteComposition[i].WasteInformationType)), new[] { "WasteComposition[" + i + "]" });
+                        EnumHelper.GetDescription(WasteComposition[i].WasteInformationType).ToLower()), new[] { "WasteComposition[" + i + "]" });
                 }
 
                 if (IsDecimal(WasteComposition[i].MinConcentration) && IsDecimal(WasteComposition[i].MaxConcentration))
@@ -65,17 +65,17 @@
                     if (minConcentrationValue < 0 || minConcentrationValue > 100 && IsPercentageQuantity(WasteComposition[i]))
                     {
                         yield return new ValidationResult(string.Format(ChemicalCompositionResources.MinRange,
-                            EnumHelper.GetDescription(WasteComposition[i].WasteInformationType)), new[] { "WasteComposition[" + i + "]" });
+                            EnumHelper.GetDescription(WasteComposition[i].WasteInformationType).ToLower()), new[] { "WasteComposition[" + i + "]" });
                     }
                     if (maxConcentrationValue < 0 || maxConcentrationValue > 100 && IsPercentageQuantity(WasteComposition[i]))
                     {
                         yield return new ValidationResult(string.Format(ChemicalCompositionResources.MaxRange,
-                            EnumHelper.GetDescription(WasteComposition[i].WasteInformationType)), new[] { "WasteComposition[" + i + "]" });
+                            EnumHelper.GetDescription(WasteComposition[i].WasteInformationType).ToLower()), new[] { "WasteComposition[" + i + "]" });
                     }
                     if (minConcentrationValue > maxConcentrationValue)
                     {
                         yield return new ValidationResult(string.Format(ChemicalCompositionResources.MinShouldBeLowerThanMax,
-                            EnumHelper.GetDescription(WasteComposition[i].WasteInformationType)), new[] { "WasteComposition[" + i + "]" });
+                            EnumHelper.GetDescription(WasteComposition[i].WasteInformationType).ToLower()), new[] { "WasteComposition[" + i + "]" });
                     }
                 }
 
@@ -85,7 +85,7 @@
                         || (!WasteComposition[i].MinConcentration.ToUpper().Equals(ChemicalCompositionResources.NA) && WasteComposition[i].MaxConcentration.ToUpper().Equals(ChemicalCompositionResources.NA)))
                     {
                         yield return new ValidationResult(string.Format(ChemicalCompositionResources.FieldShouldHaveNaOrNumber,
-                            EnumHelper.GetDescription(WasteComposition[i].WasteInformationType)), new[] { "WasteComposition[" + i + "]" });
+                            EnumHelper.GetDescription(WasteComposition[i].WasteInformationType).ToLower()), new[] { "WasteComposition[" + i + "]" });
                     }
                 }
             }

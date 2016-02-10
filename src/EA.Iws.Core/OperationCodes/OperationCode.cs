@@ -49,11 +49,11 @@ namespace EA.Iws.Core.OperationCodes
         R10 = 10,
 
         [OperationCodeType(NotificationType.Recovery)]
-        [Display(Name = "R11", Description = "Uses of residual materials obtained from any of the operations numbered R1-R10")]
+        [Display(Name = "R11", Description = "Uses of residual materials obtained from any of the operations numbered R1 - R10")]
         R11 = 11,
 
         [OperationCodeType(NotificationType.Recovery)]
-        [Display(Name = "R12", Description = "Exchange of wastes for submission to any of the operations numbered R1-R11")]
+        [Display(Name = "R12", Description = "Exchange of wastes for submission to any of the operations numbered R1 - R11")]
         R12 = 12,
 
         [OperationCodeType(NotificationType.Recovery)]

@@ -161,7 +161,7 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.WasteOperations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Give a brief description of the technologies and processes used to treat the waste on site..
+        ///   Looks up a localized string similar to Give a brief description of the technologies and processes used to treat the waste on site.
         /// </summary>
         public static string TechnologyDescription {
             get {

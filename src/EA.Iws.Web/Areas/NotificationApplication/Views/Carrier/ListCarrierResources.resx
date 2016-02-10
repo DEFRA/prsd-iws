@@ -131,7 +131,7 @@
   </data>
   <data name="HeaderDescription" xml:space="preserve">
     <value>Add details of all the intended carriers for the whole journey. 
-    After you've added your first carrier, you can add several more by selecting "Add another carrier"</value>
+    After you've added your first carrier, you can add several more by selecting "Add another carrier".</value>
   </data>
   <data name="Remove" xml:space="preserve">
     <value>Remove</value>
@@ -143,6 +143,6 @@
     <value>Organisation name</value>
   </data>
   <data name="Title" xml:space="preserve">
-    <value>List Carriers</value>
+    <value>Intended carriers</value>
   </data>
 </root>

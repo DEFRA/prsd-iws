@@ -71,7 +71,7 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.CustomWasteCode {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Please enter a customs code or select not applicable.
+        ///   Looks up a localized string similar to Please enter a customs code or select &quot;Not applicable&quot;.
         /// </summary>
         public static string CustomsCodeRequired {
             get {
@@ -98,7 +98,7 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.CustomWasteCode {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Please enter a national code in country of export or select not applicable.
+        ///   Looks up a localized string similar to Please enter a national code in country of export or select &quot;Not applicable&quot;.
         /// </summary>
         public static string ExportNationalCodeRequired {
             get {
@@ -116,7 +116,7 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.CustomWasteCode {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Enter any other codes which are relevant to your waste. If no codes are relevant then tick not applicable.
+        ///   Looks up a localized string similar to Enter any other codes which are relevant to your waste. If no codes are relevant, then tick &quot;Not applicable&quot;..
         /// </summary>
         public static string HeaderDescription {
             get {
@@ -134,7 +134,7 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.CustomWasteCode {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Please enter a national code in country of import or select not applicable.
+        ///   Looks up a localized string similar to Please enter a national code in country of import or select &quot;Not applicable&quot;.
         /// </summary>
         public static string ImportNationalCodeRequired {
             get {
@@ -161,7 +161,7 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.CustomWasteCode {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to If useful or required by the relevant competent authority add any other code to help identify the waste.
+        ///   Looks up a localized string similar to If useful or required by the relevant competent authority, add any other code to help identify the waste.
         /// </summary>
         public static string OtherCodeHint {
             get {
@@ -170,7 +170,7 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.CustomWasteCode {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Please enter other code(s) or select not applicable.
+        ///   Looks up a localized string similar to Please enter other code(s) or select &quot;Not applicable&quot;.
         /// </summary>
         public static string OtherCodeRequired {
             get {
