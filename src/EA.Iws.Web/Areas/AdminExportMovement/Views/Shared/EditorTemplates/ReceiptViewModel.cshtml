@@ -49,12 +49,12 @@
             @Html.Gds().ValidationMessageFor(m => m.Units)
             <div class="grid-row">
                 <div class="column-third">
-                    @Html.Gds().TextBoxFor(m => m.ActualQuantity, new { type = "number", min = 0, @class = "form-control form-control-wide" })
+                    @Html.Gds().TextBoxFor(m => m.ActualQuantity, new { type = "number", min = 0, step = "any", @class = "form-control form-control-wide" })
                 </div>
                 <div class="column-third">
                     @Html.Gds().DropDownListFor(m => m.Units, Model.UnitSelectList, new { @class = "form-control form-control-wide" })
                     @for (int i = 0; i < Model.PossibleUnits.Count; i++)
-            {
+                    {
                         @Html.HiddenFor(m => m.PossibleUnits[i])
                     }
                 </div>
