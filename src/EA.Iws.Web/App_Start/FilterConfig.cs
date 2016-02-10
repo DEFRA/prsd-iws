@@ -17,10 +17,9 @@
             filters.Add(new AdminApprovalRequiredAttribute(), order: 4);
 
             // Error filters run after actions, so higher order will run first
-            filters.Add(new HandleErrorAttribute() { View = "~/Views/Errors/InternalError.cshtml" }, order: 5);
-            filters.Add(new HandleApiErrorFilter(), order: 6);
-            filters.Add(new AntiForgeryErrorFilter(), order: 7);
-            filters.Add(new VirusFoundFilter(), order: 8);
+            filters.Add(new HandleApiErrorFilter(), order: 5);
+            filters.Add(new AntiForgeryErrorFilter(), order: 6);
+            filters.Add(new VirusFoundFilter(), order: 7);
         }
     }
 }
