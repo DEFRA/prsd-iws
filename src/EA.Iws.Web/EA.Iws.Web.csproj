@@ -1696,6 +1696,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>_PortNotListedDisclosureResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Areas\NotificationApplication\Views\Submit\DisclaimerResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DisclaimerResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Areas\NotificationApplication\Views\WhatToDoNext\IndexResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -3358,6 +3363,10 @@
     <EmbeddedResource Include="Areas\NotificationApplication\Views\StateOfImport\StateOfImportResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>StateOfImportResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\NotificationApplication\Views\Submit\DisclaimerResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>DisclaimerResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\NotificationApplication\Views\TransitState\TransitStateResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
