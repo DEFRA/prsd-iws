@@ -6,7 +6,7 @@
         @Html.Gds().LabelFor(m => m.SelectedCode, false)
         @Html.Gds().ValidationMessageFor(m => m.SelectedCode)
         @Html.Gds().DropDownListFor(m => m.SelectedCode, Model.Codes, string.Empty, new { id = "code-list", title="code list", data_select_box = "true", tabindex = 1 })
-        <button type="submit" name="command" value="addcode"  tabindex=2>Insert this code into table below</button>
+        <button type="submit" name="command" value="addcode" tabindex="2" class="button-secondary">Insert this code into table below</button>
     </div>
     <div class="form-group @Html.Gds().FormGroupClass(m => m.IsNotApplicable)">
         <label for="EnterWasteCodesViewModel_IsNotApplicable">
