@@ -22,9 +22,9 @@
                 yield return new ValidationResult("The notification number must be greater than or equal to 1", new[] { "Number" });
             }
 
-            if (CompetentAuthority == UKCompetentAuthority.England && Number >= 5000)
+            if (CompetentAuthority == UKCompetentAuthority.England && Number >= 6000)
             {
-                yield return new ValidationResult("The notification number must be less than 5000", new[] { "Number" });
+                yield return new ValidationResult("The notification number must be less than 6000", new[] { "Number" });
             }
             else if (CompetentAuthority == UKCompetentAuthority.Scotland && Number >= 500)
             {

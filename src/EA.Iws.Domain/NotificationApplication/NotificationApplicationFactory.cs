@@ -11,7 +11,7 @@
     [AutoRegister]
     public class NotificationApplicationFactory
     {
-        private const int EaNumberSystemStart = 5000;
+        private const int EaNumberSystemStart = 6000;
         private const int SepaNumberSystemStart = 500;
         private const int NieaNumberSystemStart = 1000;
         private const int NrwNumberSystemStart = 100;
