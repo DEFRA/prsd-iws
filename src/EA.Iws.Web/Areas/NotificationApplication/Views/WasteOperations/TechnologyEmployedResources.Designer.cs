@@ -71,15 +71,6 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.WasteOperations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You have chosen the following operation codes:.
-        /// </summary>
-        public static string ChosenCodes {
-            get {
-                return ResourceManager.GetString("ChosenCodes", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Display name for details.
         /// </summary>
         public static string Details {
@@ -152,7 +143,7 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.WasteOperations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Which technologies and processes were used to treat the waste on site?.
+        ///   Looks up a localized string similar to Which technologies and processes are used to treat the waste on site?.
         /// </summary>
         public static string Header {
             get {
@@ -179,7 +170,7 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.WasteOperations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to What is the technology employed?.
+        ///   Looks up a localized string similar to Technology employed.
         /// </summary>
         public static string Title {
             get {

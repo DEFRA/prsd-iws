@@ -120,9 +120,6 @@
   <data name="AnnexProvided" xml:space="preserve">
     <value>I'll provide my details in an annex when I submit my notification</value>
   </data>
-  <data name="ChosenCodes" xml:space="preserve">
-    <value>You have chosen the following operation codes:</value>
-  </data>
   <data name="Details" xml:space="preserve">
     <value>Display name for details</value>
   </data>
@@ -148,7 +145,7 @@
     <value>Further details</value>
   </data>
   <data name="Header" xml:space="preserve">
-    <value>Which technologies and processes were used to treat the waste on site?</value>
+    <value>Which technologies and processes are used to treat the waste on site?</value>
   </data>
   <data name="TechnologyDescription" xml:space="preserve">
     <value>Give a brief description</value>
@@ -157,6 +154,6 @@
     <value>Please limit your answer to 70 characters or less</value>
   </data>
   <data name="Title" xml:space="preserve">
-    <value>What is the technology employed?</value>
+    <value>Technology employed</value>
   </data>
 </root>
