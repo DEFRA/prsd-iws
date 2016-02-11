@@ -2,18 +2,18 @@
 @model EA.Iws.Web.Areas.ExportMovement.ViewModels.Complete.SuccessViewModel
 
 @{
-    ViewBag.Title = "Certificate of receipt upload successful";
     bool isRecovery = (Model.NotificationType == NotificationType.Recovery);
+    var text = isRecovery ? "recovery" : "disposal";
+    ViewBag.Title = "Certificate of " + text + " successful";
 }
 
 <div class="grid-row">
     <section class="column-two-thirds">
         <header class="hgroup">
-            <h1 class="heading-large">Thank you. Your certificate of @(isRecovery ? "recovery" : "disposal")  is now uploaded.</h1>
+            <h1 class="heading-large">You've successfully recorded the @(text) of the shipment</h1>
         </header>
         @Html.HiddenFor(m => m.NotificationId)
 
-        <p>Your shipment is recorded as received and @(isRecovery ? "recovered" : "disposed of").</p>
 
         <p>
             @Html.ActionLink("Go to notification options", "Index", "Options",

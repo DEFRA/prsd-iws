@@ -118,27 +118,27 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ActiveLoadsPermitted" xml:space="preserve">
-    <value>Active loads permitted</value>
+    <value>Active loads permitted:</value>
   </data>
   <data name="CurrentActiveLoads" xml:space="preserve">
-    <value>Current active loads</value>
+    <value>Current active loads:</value>
   </data>
   <data name="QuantityReceived" xml:space="preserve">
-    <value>Total quantity received</value>
+    <value>Total quantity received:</value>
   </data>
   <data name="QuantityRemaining" xml:space="preserve">
-    <value>Total quantity remaining</value>
+    <value>Total quantity remaining:</value>
   </data>
   <data name="ShipmentNumber" xml:space="preserve">
-    <value>Shipment number</value>
+    <value>Shipment number:</value>
   </data>
   <data name="ShipmentNumbers" xml:space="preserve">
-    <value>Shipment numbers</value>
+    <value>Shipment numbers:</value>
   </data>
   <data name="ShipmentNumbersRangeFormat" xml:space="preserve">
     <value>{0} to {1}</value>
   </data>
   <data name="TotalShipments" xml:space="preserve">
-    <value>Total number of shipments</value>
+    <value>Total number of shipments:</value>
   </data>
 </root>

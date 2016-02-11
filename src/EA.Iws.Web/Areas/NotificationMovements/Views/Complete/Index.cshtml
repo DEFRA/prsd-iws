@@ -1,7 +1,7 @@
 ﻿@using EA.Iws.Core.Shared
 @model EA.Iws.Web.Areas.NotificationMovements.ViewModels.Complete.CompleteMovementViewModel
 @{
-    ViewBag.Title = "Select a prenotification to " + (Model.NotificationType == NotificationType.Recovery ? "recover" : "dispose of");
+    ViewBag.Title = "Select a shipment to " + (Model.NotificationType == NotificationType.Recovery ? "recover" : "dispose of");
 }
 
 <h1 class="heading-large">Which shipment has been @(Model.NotificationType == NotificationType.Recovery ? "recovered" : "disposed of")?</h1>

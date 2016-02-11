@@ -5,7 +5,7 @@
 
     public class NumberOfCarriersViewModel
     {
-        [Required]
+        [Required(ErrorMessage = "Please enter the number of carriers")]
         [Display(Name = "Number of carriers")]
         [Range(1, 100, ErrorMessage = "Number of carriers must be between 1 and 100")]
         public int? Number { get; set; }

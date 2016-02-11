@@ -61,7 +61,7 @@ namespace EA.Iws.Web.Areas.NotificationMovements.Views.UploadChoice {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to All your prenotification have been uploaded.
+        ///   Looks up a localized string similar to All your prenotifications have been uploaded..
         /// </summary>
         public static string NoMovementText {
             get {
