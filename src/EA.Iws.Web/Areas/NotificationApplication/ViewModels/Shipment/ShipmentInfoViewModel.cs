@@ -176,7 +176,8 @@
 
             decimal quantity;
             return Decimal.TryParse(Quantity, Style, CultureInfo.CurrentCulture, out quantity)
-                && decimal.Round(quantity, ShipmentQuantityUnitsMetadata.Precision[Units.Value]) == quantity;
+                && decimal.Round(quantity, ShipmentQuantityUnitsMetadata.Precision[Units.Value]) == quantity
+                && quantity > 0;
         }
 
         public SetIntendedShipmentInfoForNotification ToRequest()
