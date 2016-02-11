@@ -94,7 +94,7 @@
             <div class="nav-bloc">
                 <nav>
                     @Html.ActionLink(@Resource.StartNewNotification, "CompetentAuthority", "NewNotification", new { area = string.Empty },
-                        new { @class = "button", data_track = "link", data_category = "Export notification", data_action = "Start new" })
+                        new { data_track = "link", data_category = "Export notification", data_action = "Start new" })
                     @Html.ActionLink(@Resource.CopyFromPrevious, "CompetentAuthority", "NewNotification", new { cfp = 1, area = string.Empty },
                         new { data_track = "link", data_category = "Export notification", data_action = "Create from previous" })
                     <a href="https://www.gov.uk/importing-and-exporting-waste" target="_blank" id="supportingInfo-link" title=@Resource.TitleSupportingInfo
