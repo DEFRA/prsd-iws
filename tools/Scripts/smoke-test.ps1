@@ -13,7 +13,10 @@ param
     [string]$password = $null,
 
     [Parameter(Mandatory=$true)]
-    [string]$testEmail = $null
+    [string]$testEmail = $null,
+
+    [Parameter(Mandatory=$false)]
+    [bool]$ignoreSslErrors = $false
 )
 
 $failedTests = @();
@@ -21,6 +24,45 @@ $smokeTestUrl = New-Object System.Uri($url, "admin/smoke-test");
 $loginUrl = New-Object System.Uri($url, "account/login");
 $testEmailUrl = New-Object System.Uri($url, "admin/test-email");
 $testEmailSuccessUrl = New-Object System.Uri($url, "admin/test-email/success");
+
+### Ignore SSL errors ###
+
+Add-Type @"
+    using System.Collections.Generic;
+    using System.Net;
+    using System.Net.Security;
+    using System.Security.Cryptography.X509Certificates;
+
+    public static class SSLValidator
+    {
+        private static Stack<RemoteCertificateValidationCallback> funcs = new Stack<RemoteCertificateValidationCallback>();
+
+        private static bool OnValidateCertificate(object sender, X509Certificate certificate, X509Chain chain,
+                                                    SslPolicyErrors sslPolicyErrors)
+        {
+            return true;
+        }
+
+        public static void OverrideValidation()
+        {
+            funcs.Push(ServicePointManager.ServerCertificateValidationCallback);
+            ServicePointManager.ServerCertificateValidationCallback =
+                OnValidateCertificate;
+        }
+
+        public static void RestoreValidation()
+        {
+            if (funcs.Count > 0) {
+                ServicePointManager.ServerCertificateValidationCallback = funcs.Pop();
+            }
+        }
+    }
+"@;
+
+if ($ignoreSslErrors)
+{
+    [SSLValidator]::OverrideValidation();
+}
 
 ### Smoke test ###
 try 
@@ -80,4 +122,9 @@ if ($failedTests.Length -gt 0)
 else
 {
     Write-Host "[SUCCESS] : All smoke tests successful!";
+}
+
+if ($ignoreSslErrors)
+{
+    [SSLValidator]::RestoreValidation();
 }
