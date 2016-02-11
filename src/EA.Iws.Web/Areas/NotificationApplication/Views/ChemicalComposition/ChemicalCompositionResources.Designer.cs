@@ -134,7 +134,7 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.ChemicalComposition {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Max concentration should be in range from 0 to 100 for {0}.
+        ///   Looks up a localized string similar to The maximum concentration should be in range from 0 to 100 for {0}.
         /// </summary>
         public static string MaxRange {
             get {

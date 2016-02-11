@@ -55,7 +55,7 @@
             var result = ValidateViewModel(vm);
 
             Assert.NotEmpty(result);
-            Assert.True(result.First().ErrorMessage.StartsWith("Please enter a value for Energy"));
+            Assert.True(result.First().ErrorMessage.StartsWith("Please enter a value for the energy"));
         }
 
         [Fact]
@@ -102,7 +102,7 @@
             var result = ValidateViewModel(viewModel);
 
             Assert.NotEmpty(result);
-            Assert.True(result.First().ErrorMessage.StartsWith("Min concentration should be lower than the Max concentration"));
+            Assert.True(result.First().ErrorMessage.StartsWith("The minimum concentration level should be lower than the maximum concentration"));
         }
          
         [Theory]
@@ -124,7 +124,7 @@
             var result = ValidateViewModel(viewModel);
 
             Assert.NotEmpty(result);
-            Assert.True(result.First().ErrorMessage.StartsWith("Max concentration should be in range from 0 to 100"));
+            Assert.True(result.First().ErrorMessage.StartsWith("The maximum concentration should be in range from 0 to 100"));
         }
 
         [Fact]
@@ -143,7 +143,7 @@
             var result = ValidateViewModel(viewModel);
 
             Assert.NotEmpty(result);
-            Assert.True(result.First().ErrorMessage.StartsWith("Please enter a Min and Max concentration for"));
+            Assert.True(result.First().ErrorMessage.StartsWith("Please enter a minimum and maximum concentration"));
         }
 
         [Fact]
@@ -162,7 +162,7 @@
             var result = ValidateViewModel(viewModel);
 
             Assert.NotEmpty(result);
-            Assert.True(result.First().ErrorMessage.StartsWith("Please enter a Min and Max concentration for"));
+            Assert.True(result.First().ErrorMessage.StartsWith("Please enter a minimum and maximum concentration"));
         }
 
         [Theory]

@@ -142,7 +142,7 @@
     <value>This may be its commercial name</value>
   </data>
   <data name="MaxRange" xml:space="preserve">
-    <value>Max concentration should be in range from 0 to 100 for {0}</value>
+    <value>The maximum concentration should be in range from 0 to 100 for {0}</value>
   </data>
   <data name="MinMaxRequired" xml:space="preserve">
     <value>Please enter a minimum and maximum concentration for {0}</value>

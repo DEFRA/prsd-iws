@@ -11,6 +11,7 @@
     public class ShipmentControllerTests
     {
         private readonly ShipmentController shipmentController;
+        private readonly string numberOfShipments = "1";
 
         public ShipmentControllerTests()
         {
@@ -21,6 +22,8 @@
         public async Task Post_BackToOverviewTrue_RedirectsToOverview()
         {
             var model = new ShipmentInfoViewModel();
+            model.NumberOfShipments = numberOfShipments;
+
             var result = await shipmentController.Index(model, true) as RedirectToRouteResult;
             RouteAssert.RoutesTo(result.RouteValues, "Index", "Home");
         }
@@ -29,6 +32,8 @@
         public async Task Post_BackToOverviewFalse_RedirectsToChemicalComposition()
         {
             var model = new ShipmentInfoViewModel();
+            model.NumberOfShipments = numberOfShipments;
+
             var result = await shipmentController.Index(model, false) as RedirectToRouteResult;
             RouteAssert.RoutesTo(result.RouteValues, "Index", "ChemicalComposition");
         }
