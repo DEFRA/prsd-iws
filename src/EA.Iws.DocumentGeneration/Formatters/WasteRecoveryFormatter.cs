@@ -6,6 +6,8 @@
 
     internal class WasteRecoveryFormatter
     {
+        private const string NotApplicable = "N/A";
+
         public string NullableDecimalAsPercentage(decimal? value)
         {
             if (value.HasValue)
@@ -20,7 +22,7 @@
         {
             if (wasteRecovery == null)
             {
-                return string.Empty;
+                return NotApplicable;
             }
 
             return string.Format("£{0} per {1}", valuePerWeight(wasteRecovery).Amount, valuePerWeight(wasteRecovery).Units);
@@ -30,7 +32,7 @@
         {
             if (wasteDisposal == null || disposalCost(wasteDisposal) == null)
             {
-                return string.Empty;
+                return NotApplicable;
             }
 
             return string.Format("£{0} per {1}", disposalCost(wasteDisposal).Amount, disposalCost(wasteDisposal).Units);

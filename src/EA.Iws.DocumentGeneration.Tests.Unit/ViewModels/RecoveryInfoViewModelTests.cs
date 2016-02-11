@@ -18,7 +18,7 @@
         {
             var model = new WasteRecoveryViewModel(null, null, null, wasteRecoveryFormatter);
 
-            AssertAllModelStringAreEmpty(model);
+            AssertAllModelStringsAreDefault(model);
         }
 
         [Fact]
@@ -26,7 +26,10 @@
         {
             var model = new WasteRecoveryViewModel(new TestableNotificationApplication(), null, null, wasteRecoveryFormatter);
 
-            AssertAllModelStringAreEmpty(model);
+            Assert.Equal(string.Empty, model.PercentageRecoverable);
+            Assert.Equal("N/A", model.CostAmountText);
+            Assert.Equal("N/A", model.EstimatedAmountText);
+            Assert.Equal("N/A", model.DisposalAmountText);
         }
 
         [Fact]
@@ -41,7 +44,7 @@
 
             AssertAnnexMessageEmpty(model);
             Assert.Equal("100%", model.PercentageRecoverable);
-            Assert.Equal(string.Empty, model.MethodOfDisposal);
+            Assert.Equal("N/A", model.MethodOfDisposal);
         }
 
         [Fact]
@@ -82,7 +85,7 @@
             Assert.Equal("100%", model.PercentageRecoverable);
             Assert.Equal("£100 per Kilogram", model.CostAmountText);
             Assert.Equal("£250 per Tonne", model.EstimatedAmountText);
-            Assert.Equal(string.Empty, model.DisposalAmountText);
+            Assert.Equal("N/A", model.DisposalAmountText);
         }
 
         [Fact]
@@ -109,9 +112,9 @@
             Assert.Equal("£110 per Tonne", model.EstimatedAmountText);
         }
 
-        private void AssertAllModelStringAreEmpty(WasteRecoveryViewModel model)
+        private void AssertAllModelStringsAreDefault(WasteRecoveryViewModel model)
         {
-            Assert.Equal(string.Empty, model.MethodOfDisposal);
+            Assert.Equal("N/A", model.MethodOfDisposal);
             AssertAllWasteRecoveryStringsAreEmpty(model);
             AssertAnnexMessageEmpty(model);
             Assert.Equal(string.Empty, model.PercentageRecoverable);

@@ -6,7 +6,7 @@
 
     internal class WasteRecoveryViewModel
     {
-        private string methodOfDisposal = string.Empty;
+        private string methodOfDisposal = "N/A";
         public string MethodOfDisposal
         {
             get { return methodOfDisposal; }
