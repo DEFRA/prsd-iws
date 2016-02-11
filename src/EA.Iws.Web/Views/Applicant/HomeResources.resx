@@ -124,10 +124,13 @@
     <value>Address book</value>
   </data>
   <data name="CopyNotification" xml:space="preserve">
-    <value>create a new notification based on a previous one.</value>
+    <value>create a new notification based on a previous one</value>
   </data>
   <data name="First" xml:space="preserve">
     <value> first.</value>
+  </data>
+  <data name="FullStop" xml:space="preserve">
+    <value>.</value>
   </data>
   <data name="Header" xml:space="preserve">
     <value>Your homepage</value>

@@ -14,7 +14,7 @@
         {
             var viewModel = new SuccessViewModel(AnyGuid, new List<int> { 1 });
 
-            Assert.Equal("You've now cancelled shipment 1", viewModel.HeadingText);
+            Assert.Equal("You've successfully cancelled shipment 1", viewModel.HeadingText);
         }
 
         [Fact]
@@ -22,7 +22,7 @@
         {
             var viewModel = new SuccessViewModel(AnyGuid, new List<int> { 1, 5 });
 
-            Assert.Equal("You've now cancelled shipments 1 and 5", viewModel.HeadingText);
+            Assert.Equal("You've successfully cancelled shipments 1 and 5", viewModel.HeadingText);
         }
 
         [Fact]
@@ -30,7 +30,7 @@
         {
             var viewModel = new SuccessViewModel(AnyGuid, new List<int> { 1, 5, 9, 21 });
 
-            Assert.Equal("You've now cancelled shipments 1, 5, 9 and 21", viewModel.HeadingText);
+            Assert.Equal("You've successfully cancelled shipments 1, 5, 9 and 21", viewModel.HeadingText);
         }
     }
 }

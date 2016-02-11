@@ -118,12 +118,12 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="MainHeading" xml:space="preserve">
-    <value>Your annex(es) is/are now uploaded</value>
+    <value>You've successfully uploaded this annex</value>
   </data>
   <data name="Thankyou" xml:space="preserve">
     <value>Thank you</value>
   </data>
   <data name="Title" xml:space="preserve">
-    <value>Upload successful</value>
+    <value>Annex upload successful</value>
   </data>
 </root>

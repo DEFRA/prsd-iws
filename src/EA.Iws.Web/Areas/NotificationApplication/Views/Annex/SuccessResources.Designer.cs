@@ -61,7 +61,7 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.Annex {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Your annex(es) is/are now uploaded.
+        ///   Looks up a localized string similar to You&apos;ve successfully uploaded this annex.
         /// </summary>
         public static string MainHeading {
             get {
@@ -79,7 +79,7 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.Annex {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Upload successful.
+        ///   Looks up a localized string similar to Annex upload successful.
         /// </summary>
         public static string Title {
             get {

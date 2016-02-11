@@ -79,7 +79,7 @@ namespace EA.Iws.Web.Views.Applicant {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to create a new notification based on a previous one..
+        ///   Looks up a localized string similar to create a new notification based on a previous one.
         /// </summary>
         public static string CopyNotification {
             get {
@@ -93,6 +93,15 @@ namespace EA.Iws.Web.Views.Applicant {
         public static string First {
             get {
                 return ResourceManager.GetString("First", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ..
+        /// </summary>
+        public static string FullStop {
+            get {
+                return ResourceManager.GetString("FullStop", resourceCulture);
             }
         }
         
