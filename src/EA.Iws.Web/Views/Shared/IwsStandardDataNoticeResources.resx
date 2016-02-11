@@ -117,46 +117,49 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="DataNotice1" xml:space="preserve">
-    <value>We, the Environment Agency, will process the information you provide so that we can:</value>
+  <data name="CarryOutResearch" xml:space="preserve">
+    <value>carry out research and development work on environmental issues</value>
   </data>
-  <data name="DataNotice2" xml:space="preserve">
-    <value>We may also process or release the information to:</value>
+  <data name="ConditionsOfLicence" xml:space="preserve">
+    <value>make sure you keep to the conditions of the licence, permit or registration</value>
   </data>
-  <data name="DataNotice3" xml:space="preserve">
-    <value>We may pass the information on to our agents or representatives to do these things for us.</value>
+  <data name="ConsultThePublic" xml:space="preserve">
+    <value>consult the public, public organisations and other organisations (for example the Health and Safety Executive) on environmental issues</value>
+  </data>
+  <data name="CustomerSatisfaction" xml:space="preserve">
+    <value>assess whether customers are satisfied with our service, and improve our service</value>
+  </data>
+  <data name="DealWithApplication" xml:space="preserve">
+    <value>deal with your application</value>
   </data>
   <data name="Header" xml:space="preserve">
     <value>Read our standard data notice</value>
   </data>
-  <data name="PersonalInfo" xml:space="preserve">
+  <data name="OfferYouDocuments" xml:space="preserve">
+    <value>offer you documents or services relating to environmental matters</value>
+  </data>
+  <data name="PassInformationToAgents" xml:space="preserve">
+    <value>We may pass the information on to our agents or representatives to do these things for us.</value>
+  </data>
+  <data name="PersonalInfoHeading" xml:space="preserve">
     <value>How we will use your personal information</value>
   </data>
-  <data name="ProcessListItem1" xml:space="preserve">
-    <value>deal with your application;</value>
+  <data name="PersonalInfoIntro" xml:space="preserve">
+    <value>We, the Environment Agency, will process the information you provide so that we can:</value>
   </data>
-  <data name="ProcessListItem2" xml:space="preserve">
-    <value>make sure you keep to the conditions of the licence, permit or registration; and</value>
+  <data name="PreventLawBreaking" xml:space="preserve">
+    <value>prevent anyone from breaking environmental law, investigate cases where environmental law may have been broken, and take any action that is needed</value>
   </data>
-  <data name="ProcessListItem3" xml:space="preserve">
-    <value>process renewals.</value>
+  <data name="ProcessRenewals" xml:space="preserve">
+    <value>process renewals</value>
   </data>
-  <data name="ReleaseInfoListItem1" xml:space="preserve">
-    <value>offer you documents or services relating to environmental matters;</value>
+  <data name="ReadCarefully" xml:space="preserve">
+    <value>Please read carefully, accept and proceed.</value>
   </data>
-  <data name="ReleaseInfoListItem2" xml:space="preserve">
-    <value>consult the public, public organisations and other organisations (for example, the Health and Safety Executive, local authorities, the emergency services, the Department for Environment, Food and Rural Affairs) on environmental issues;</value>
+  <data name="RequestsForInformation" xml:space="preserve">
+    <value>respond to information requests under the Freedom of Information Act 2000 and the Environmental Information Regulations 2004 (if the Data Protection Act allows)</value>
   </data>
-  <data name="ReleaseInfoListItem3" xml:space="preserve">
-    <value>carry out research and development work on environmental issues;</value>
-  </data>
-  <data name="ReleaseInfoListItem4" xml:space="preserve">
-    <value>prevent anyone from breaking environmental law, investigate cases where environmental law may have been broken, and take any action that is needed;</value>
-  </data>
-  <data name="ReleaseInfoListItem5" xml:space="preserve">
-    <value>assess whether customers are satisfied with our service, and to improve our service; and</value>
-  </data>
-  <data name="ReleaseInfoListItem6" xml:space="preserve">
-    <value>respond to requests for information under the Freedom of Information Act 2000 and the Environmental Information Regulations 2004 (if the Data Protection Act allows).</value>
+  <data name="WeMayAlsoHeading" xml:space="preserve">
+    <value>We may also process or release the information to:</value>
   </data>
 </root>
