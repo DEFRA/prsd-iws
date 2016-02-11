@@ -77,12 +77,14 @@
                     {
                         @Html.ActionLink(@Resource.PrintNotification, "Print", "WhatToDoNext", new { id = Model.NotificationId, area = "NotificationApplication" }, null)
                         @Html.ActionLink(@Resource.PrintLabel, "PostageLabel", "WhatToDoNext", new { id = Model.NotificationId, area = "NotificationApplication" }, null)
-                        @Html.ActionLink(@Resource.CompleteFG, "FinancialGuarantee", "WhatToDoNext", new { id = Model.NotificationId, area = "NotificationApplication" }, null)
+                        @Html.ActionLink(@Resource.CompleteFG, "FinancialGuarantee", "WhatToDoNext", new { id = Model.NotificationId, area = "NotificationApplication" },
+                            new { data_track = "link", data_category = "Export notification", data_action = "FG link" })
                         @Html.ActionLink(@Resource.CostInfo, "Payment", "WhatToDoNext", new { id = Model.NotificationId, area = "NotificationApplication" }, null)
                         @Html.ActionLink(@Resource.UploadAnnexes, "Index", "Annex", new { id = Model.NotificationId, area = "NotificationApplication" }, null)
                     }
 
-                    @Html.ActionLink(@Resource.ViewDates, "Index", "KeyDates", new { id = Model.NotificationId, area = "NotificationApplication" }, null)
+                    @Html.ActionLink(@Resource.ViewDates, "Index", "KeyDates", new { id = Model.NotificationId, area = "NotificationApplication" },
+                        new { data_track = "link", data_category = "Export notification", data_action = "Key dates" })
                 </nav>
             </div>
         </div>
@@ -91,9 +93,14 @@
             <h2 class="heading-medium">@Resource.NewNotificationTitle</h2>
             <div class="nav-bloc">
                 <nav>
-                    @Html.ActionLink(@Resource.StartNewNotification, "CompetentAuthority", "NewNotification", new { area = string.Empty }, null)
-                    @Html.ActionLink(@Resource.CopyFromPrevious, "CompetentAuthority", "NewNotification", new { cfp = 1, area = string.Empty }, null)
-                    <a href="https://www.gov.uk/importing-and-exporting-waste" target="_blank" title=@Resource.TitleSupportingInfo>@Resource.SupportingInfoLink</a>
+                    @Html.ActionLink(@Resource.StartNewNotification, "CompetentAuthority", "NewNotification", new { area = string.Empty },
+                        new { @class = "button", data_track = "link", data_category = "Export notification", data_action = "Start new" })
+                    @Html.ActionLink(@Resource.CopyFromPrevious, "CompetentAuthority", "NewNotification", new { cfp = 1, area = string.Empty },
+                        new { data_track = "link", data_category = "Export notification", data_action = "Create from previous" })
+                    <a href="https://www.gov.uk/importing-and-exporting-waste" target="_blank" id="supportingInfo-link" title=@Resource.TitleSupportingInfo
+                       data-track="link" data-category="Export notification" data-action="Supporting information">
+                        @Resource.SupportingInfoLink
+                    </a>
                     <span class="visuallyhidden">@Resource.SupportingInfoMessage</span>
                 </nav>
             </div>

@@ -20,6 +20,7 @@
             bundles.Add(new ScriptBundle("~/bundles/helpers").Include(
                 "~/Scripts/helpers.js",
                 "~/Scripts/address-book.js",
+                "~/Scripts/iws-tracking.js",
                 "~/Scripts/decision-dropdown.js",
                 "~/Scripts/internal-facility-table.js"));
 

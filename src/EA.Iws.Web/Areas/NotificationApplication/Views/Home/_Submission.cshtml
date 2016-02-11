@@ -25,7 +25,7 @@
                 {
                     @Html.AntiForgeryToken()
 
-                    <input type="submit" class="button" value="Resubmit notification"/>
+                    <input type="submit" class="button" value="Resubmit notification" data-track="submit" data-category="Export notification" data-action="Resubmit" />
                 }
             }
         </div>
@@ -62,7 +62,8 @@
                 <br/>
                 @if (Model.Status != NotificationStatus.NotSubmitted)
                 {
-                    @Html.ActionLink("Download notification", "GenerateNotificationDocument", "Home", new { id = Model.NotificationId }, null)
+                    @Html.ActionLink("Download notification", "GenerateNotificationDocument", "Home", new { id = Model.NotificationId },
+                        new { data_track = "link", data_category = "Export notification", data_action = "Download" })
                 }
             </div>
         </div>
