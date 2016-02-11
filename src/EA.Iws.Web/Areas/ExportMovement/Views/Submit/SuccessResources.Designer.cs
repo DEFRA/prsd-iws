@@ -61,7 +61,7 @@ namespace EA.Iws.Web.Areas.ExportMovement.Views.Submit {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Your prenotification is now complete.
+        ///   Looks up a localized string similar to Your prenotification is now complete..
         /// </summary>
         public static string BodyText {
             get {

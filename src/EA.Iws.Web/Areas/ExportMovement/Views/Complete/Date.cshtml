@@ -1,7 +1,7 @@
 ﻿@using EA.Iws.Core.Shared
 @model EA.Iws.Web.Areas.ExportMovement.ViewModels.Complete.DateViewModel
 @{
-    ViewBag.Title = "Date complete";
+    ViewBag.Title = "Date " + (Model.NotificationType == NotificationType.Recovery ? "recovered" : "disposed of");
 }
 
 <header class="hgroup">

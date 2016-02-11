@@ -124,7 +124,7 @@ namespace EA.Iws.Web.Views.Applicant {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Exporter notifier.
+        ///   Looks up a localized string similar to Exporter - notifier.
         /// </summary>
         public static string ThExporter {
             get {
@@ -133,7 +133,7 @@ namespace EA.Iws.Web.Views.Applicant {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Importer consignee.
+        ///   Looks up a localized string similar to Importer - consignee.
         /// </summary>
         public static string ThImporter {
             get {

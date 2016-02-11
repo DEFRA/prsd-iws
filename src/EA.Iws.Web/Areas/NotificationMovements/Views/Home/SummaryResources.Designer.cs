@@ -61,7 +61,7 @@ namespace EA.Iws.Web.Areas.NotificationMovements.Views.Home {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Active loads permitted.
+        ///   Looks up a localized string similar to Active loads permitted:.
         /// </summary>
         public static string ActiveLoadsPermitted {
             get {
@@ -70,7 +70,7 @@ namespace EA.Iws.Web.Areas.NotificationMovements.Views.Home {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Current active loads.
+        ///   Looks up a localized string similar to Current active loads:.
         /// </summary>
         public static string CurrentActiveLoads {
             get {
@@ -79,7 +79,7 @@ namespace EA.Iws.Web.Areas.NotificationMovements.Views.Home {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Total quantity received.
+        ///   Looks up a localized string similar to Total quantity received:.
         /// </summary>
         public static string QuantityReceived {
             get {
@@ -88,7 +88,7 @@ namespace EA.Iws.Web.Areas.NotificationMovements.Views.Home {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Total quantity remaining.
+        ///   Looks up a localized string similar to Total quantity remaining:.
         /// </summary>
         public static string QuantityRemaining {
             get {
@@ -97,7 +97,7 @@ namespace EA.Iws.Web.Areas.NotificationMovements.Views.Home {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Shipment number.
+        ///   Looks up a localized string similar to Shipment number:.
         /// </summary>
         public static string ShipmentNumber {
             get {
@@ -106,7 +106,7 @@ namespace EA.Iws.Web.Areas.NotificationMovements.Views.Home {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Shipment numbers.
+        ///   Looks up a localized string similar to Shipment numbers:.
         /// </summary>
         public static string ShipmentNumbers {
             get {
@@ -124,7 +124,7 @@ namespace EA.Iws.Web.Areas.NotificationMovements.Views.Home {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Total number of shipments.
+        ///   Looks up a localized string similar to Total number of shipments:.
         /// </summary>
         public static string TotalShipments {
             get {

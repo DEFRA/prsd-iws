@@ -13,11 +13,11 @@
 
         public DateTime ReceiptDate { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Please enter the day")]
         public int? Day { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Please enter the month")]
         public int? Month { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Please enter the year")]
         public int? Year { get; set; }
 
         public DateViewModel()
