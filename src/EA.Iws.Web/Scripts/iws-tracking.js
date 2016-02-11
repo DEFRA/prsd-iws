@@ -7,7 +7,7 @@
             var state = $(this).parent().next().attr('aria-hidden') === "false" ? true : false;
 
             if (state) {
-                ga("send", "event", Category($(this)), Action($(this)), Label($(this)), Value($(this)));
+                ga("send", "event", category($(this)), action($(this)), label($(this)), value($(this)));
             }
         });
     });
@@ -16,7 +16,7 @@
     // Send ga event when a user clicks an element - for example, a checkbox
     $('[data-track="element"]').each(function() {
         $(this).click(function () {
-            ga("send", "event", Category($(this)), Action($(this)), Label($(this)), Value($(this)));
+            ga("send", "event", category($(this)), action($(this)), label($(this)), value($(this)));
         });
     });
 
@@ -26,7 +26,7 @@
             event.preventDefault();
 
             var form = this;
-            ga("send", "event", Category($(this)), Action($(this)), Label($(this)), Value($(this)), {
+            ga("send", "event", category($(this)), action($(this)), label($(this)), value($(this)), {
                 hitCallback: createFunctionWithTimeout(function () {
                     $(form).unbind("submit").submit();
                 })
@@ -41,7 +41,7 @@
 
             var href = $(this).attr("href");
 
-            ga("send", "event", Category($(this)), Action($(this)), Label($(this)), Value($(this)), {
+            ga("send", "event", category($(this)), action($(this)), label($(this)), value($(this)), {
                 hitCallback: createFunctionWithTimeout(function () {
                     window.location.href = href;
                 })
@@ -61,18 +61,18 @@ function createFunctionWithTimeout(callback, optTimeout) {
     }
 }
 
-function Category(element) {
+function category(element) {
     return element.data("category") ? element.data("category") : "";
 }
 
-function Action(element) {
+function action(element) {
     return element.data("action") ? element.data("action") : "";
 }
 
-function Label(element) {
+function label(element) {
     return element.data("label") ? element.data("label") : document.title;
 }
 
-function Value(element) {
+function value(element) {
     return element.data("value") ? element.data("value") : "";
 }
