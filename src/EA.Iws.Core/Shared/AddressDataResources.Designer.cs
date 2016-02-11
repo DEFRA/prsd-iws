@@ -142,7 +142,7 @@ namespace EA.Iws.Core.Shared {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Postcode.
+        ///   Looks up a localized string similar to Post code.
         /// </summary>
         public static string Postcode {
             get {

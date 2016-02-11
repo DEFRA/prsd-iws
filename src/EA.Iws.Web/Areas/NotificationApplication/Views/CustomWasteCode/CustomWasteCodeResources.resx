@@ -121,7 +121,7 @@
     <value>Customs code</value>
   </data>
   <data name="CustomsCodeRequired" xml:space="preserve">
-    <value>Please enter a customs code or select not applicable</value>
+    <value>Please enter a customs code or select "Not applicable"</value>
   </data>
   <data name="DoNotEnterCodeIfNASelected" xml:space="preserve">
     <value>If not applicable is selected please do not enter a code</value>
@@ -130,19 +130,19 @@
     <value>National code in country of export</value>
   </data>
   <data name="ExportNationalCodeRequired" xml:space="preserve">
-    <value>Please enter a national code in country of export or select not applicable</value>
+    <value>Please enter a national code in country of export or select "Not applicable"</value>
   </data>
   <data name="Header" xml:space="preserve">
     <value>What other codes apply to the waste?</value>
   </data>
   <data name="HeaderDescription" xml:space="preserve">
-    <value>Enter any other codes which are relevant to your waste. If no codes are relevant then tick not applicable</value>
+    <value>Enter any other codes which are relevant to your waste. If no codes are relevant, then tick "Not applicable".</value>
   </data>
   <data name="ImportNationalCode" xml:space="preserve">
     <value>National code in country of import</value>
   </data>
   <data name="ImportNationalCodeRequired" xml:space="preserve">
-    <value>Please enter a national code in country of import or select not applicable</value>
+    <value>Please enter a national code in country of import or select "Not applicable"</value>
   </data>
   <data name="NotApplicable" xml:space="preserve">
     <value>Not applicable</value>
@@ -151,10 +151,10 @@
     <value>Other code(s)</value>
   </data>
   <data name="OtherCodeHint" xml:space="preserve">
-    <value>If useful or required by the relevant competent authority add any other code to help identify the waste</value>
+    <value>If useful or required by the relevant competent authority, add any other code to help identify the waste</value>
   </data>
   <data name="OtherCodeRequired" xml:space="preserve">
-    <value>Please enter other code(s) or select not applicable</value>
+    <value>Please enter other code(s) or select "Not applicable"</value>
   </data>
   <data name="Title" xml:space="preserve">
     <value>Waste Identification</value>

@@ -80,7 +80,7 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.WasteRecovery {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Please enter the amount in GBP(£) for the estimated value.
+        ///   Looks up a localized string similar to Please enter the cost of  GBP(£) for the estimated value.
         /// </summary>
         public static string AmountRequired {
             get {

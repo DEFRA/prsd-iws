@@ -118,9 +118,9 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="FinancialGuaranteeForm" xml:space="preserve">
-    <value>Financial Guarantee form</value>
+    <value>financial guarantee form</value>
   </data>
   <data name="PrintMessage" xml:space="preserve">
-    <value>Print and complete a {0}. An approved Financial Guarantee must be in place before any shipments can be made</value>
+    <value>Print and complete a {0}. An approved financial guarantee must be in place before any shipments can be made.</value>
   </data>
 </root>

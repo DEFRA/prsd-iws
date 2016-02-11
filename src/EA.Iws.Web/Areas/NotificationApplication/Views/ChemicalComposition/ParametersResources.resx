@@ -130,7 +130,7 @@
     <value>Energy</value>
   </data>
   <data name="EnergyEfficiency" xml:space="preserve">
-    <value>Energy Efficiency</value>
+    <value>Energy efficiency</value>
   </data>
   <data name="FormulaTitle" xml:space="preserve">
     <value>Formula parameters description</value>

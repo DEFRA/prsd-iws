@@ -121,21 +121,21 @@
     <value>Address</value>
   </data>
   <data name="AddressDescription" xml:space="preserve">
-    <value>This should be the correspondence address for the importer - consignee.</value>
+    <value>This should be the correspondence address for the importer - consignee</value>
   </data>
   <data name="Contact" xml:space="preserve">
     <value>Contact person</value>
   </data>
   <data name="ContactDescription" xml:space="preserve">
-    <value>This should be the contact person for the importer - consignee.</value>
+    <value>This should be the contact person for the importer - consignee</value>
   </data>
   <data name="Header" xml:space="preserve">
-    <value>Who is the importer-consignee?</value>
+    <value>Who is the importer - consignee?</value>
   </data>
   <data name="Message" xml:space="preserve">
     <value>This information may be obtained from your importer – consignee. Enter "Not applicable" when no relevant registration number applies.</value>
   </data>
   <data name="Title" xml:space="preserve">
-    <value>Who is the importer-consignee?</value>
+    <value>Who is the importer - consignee?</value>
   </data>
 </root>

@@ -107,7 +107,7 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.TransitState {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Enter the country or state the waste passes through on its journey.
+        ///   Looks up a localized string similar to Enter the country or state which the waste passes through on its journey.
         /// </summary>
         public static string CountryHint {
             get {
@@ -197,7 +197,7 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.TransitState {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Transit State.
+        ///   Looks up a localized string similar to Transit state.
         /// </summary>
         public static string Title {
             get {

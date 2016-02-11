@@ -80,7 +80,7 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.ChemicalComposition {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Please enter a value for Energy.
+        ///   Looks up a localized string similar to Please enter a value for the energy efficiency.
         /// </summary>
         public static string EnergyRequired {
             get {
@@ -107,7 +107,7 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.ChemicalComposition {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to If you select that you are providing the details in a separate annex do not enter any details here.
+        ///   Looks up a localized string similar to If you select that you&apos;re providing the details in a separate annex, please do not enter any details here.
         /// </summary>
         public static string FurtherInfoValidation {
             get {
@@ -134,7 +134,7 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.ChemicalComposition {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Max concentration should be in range from 0 to 100 for {0}.
+        ///   Looks up a localized string similar to The maximum concentration should be in range from 0 to 100 for {0}.
         /// </summary>
         public static string MaxRange {
             get {
@@ -143,7 +143,7 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.ChemicalComposition {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Please enter a Min and Max concentration for {0}.
+        ///   Looks up a localized string similar to Please enter a minimum and maximum concentration for {0}.
         /// </summary>
         public static string MinMaxRequired {
             get {
@@ -152,7 +152,7 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.ChemicalComposition {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Please enter a valid Min and Max concentration for {0}.
+        ///   Looks up a localized string similar to Please enter a valid minimum and maximum concentration for {0}.
         /// </summary>
         public static string MinMaxValid {
             get {
@@ -161,7 +161,7 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.ChemicalComposition {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Min concentration should be in range from 0 to 100 for {0}.
+        ///   Looks up a localized string similar to The minimum concentration level should be in range from 0 to 100 for {0}.
         /// </summary>
         public static string MinRange {
             get {
@@ -170,7 +170,7 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.ChemicalComposition {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Min concentration should be lower than the Max concentration - {0}.
+        ///   Looks up a localized string similar to The minimum concentration level should be lower than the maximum concentration - {0}.
         /// </summary>
         public static string MinShouldBeLowerThanMax {
             get {

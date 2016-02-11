@@ -124,13 +124,13 @@
     <value>Address</value>
   </data>
   <data name="AddressDescription" xml:space="preserve">
-    <value>This should be the site address for the waste generator-producer.</value>
+    <value>This should be the site address for the waste generator-producer</value>
   </data>
   <data name="Contact" xml:space="preserve">
     <value>Contact person</value>
   </data>
   <data name="Header" xml:space="preserve">
-    <value>Add waste generator - producer</value>
+    <value>Add a waste generator - producer</value>
   </data>
   <data name="OrganisationName" xml:space="preserve">
     <value>Organisation name</value>
@@ -145,7 +145,7 @@
     <value>Please choose the type of organisation</value>
   </data>
   <data name="OtherOrgType" xml:space="preserve">
-    <value>Enter your organisation type</value>
+    <value>Organisation type</value>
   </data>
   <data name="OtherOrgTypeDescriptionRequired" xml:space="preserve">
     <value>Please describe this type of organisation</value>

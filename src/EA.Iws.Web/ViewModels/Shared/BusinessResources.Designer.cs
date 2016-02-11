@@ -88,7 +88,7 @@ namespace EA.Iws.Web.ViewModels.Shared {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Your Companies House number is on your organisation&apos;s certificate of incorporation. You can also get the number from your organisation&apos;s accountant or accounts department, or &lt;a href=&quot;https://beta.companieshouse.gov.uk/&quot; target=&quot;_blank&quot;&gt;search the Companies House online services&lt;/a&gt;.
+        ///   Looks up a localized string similar to Your Companies House number is on your organisation&apos;s certificate of incorporation. You can also get the number from your organisation&apos;s accountant or accounts department, or &lt;a href=&quot;https://beta.companieshouse.gov.uk/&quot; target=&quot;_blank&quot;&gt;search the Companies House online services&lt;/a&gt;..
         /// </summary>
         public static string CompanyHouseDescription {
             get {
@@ -106,7 +106,7 @@ namespace EA.Iws.Web.ViewModels.Shared {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to If none of these options apply, please select &quot;Other&quot; and add details..
+        ///   Looks up a localized string similar to If none of these options apply, please select &quot;Other&quot; and add details.
         /// </summary>
         public static string FormHint {
             get {
@@ -151,7 +151,7 @@ namespace EA.Iws.Web.ViewModels.Shared {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Enter your organisation type.
+        ///   Looks up a localized string similar to Organisation type.
         /// </summary>
         public static string OtherOrgType {
             get {

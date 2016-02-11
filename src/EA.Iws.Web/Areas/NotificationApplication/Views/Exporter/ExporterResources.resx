@@ -118,16 +118,16 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="AddressDescription" xml:space="preserve">
-    <value>This should be the correspondence address for the exporter - notifier.</value>
+    <value>This should be the correspondence address for the exporter - notifier</value>
   </data>
   <data name="AddressHeader" xml:space="preserve">
     <value>Address</value>
   </data>
   <data name="CompanyRegistrationNumber" xml:space="preserve">
-    <value>This should be your Companies House number.</value>
+    <value>This should be your Companies House number</value>
   </data>
   <data name="ContactDescription" xml:space="preserve">
-    <value>This should be the contact person for the exporter - notifier.</value>
+    <value>This should be the contact person for the exporter - notifier</value>
   </data>
   <data name="ContactHeader" xml:space="preserve">
     <value>Contact person</value>
@@ -140,7 +140,7 @@
             For sole trader, partnership or any other organisation type, if you are acting on behalf of the waste generator-producer, this will be your waste broker licence number.</value>
   </data>
   <data name="RegistrationNumberGeneralMessage" xml:space="preserve">
-    <value>If you are acting on behalf of the waste generator-producer, this will be your waste broker license number</value>
+    <value>If you're acting on behalf of the waste generator - producer, this will be your waste broker license number</value>
   </data>
   <data name="Title" xml:space="preserve">
     <value>Who is the exporter-notifier?</value>

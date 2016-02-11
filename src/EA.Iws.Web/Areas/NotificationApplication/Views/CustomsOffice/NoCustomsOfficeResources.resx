@@ -120,4 +120,7 @@
   <data name="Header" xml:space="preserve">
     <value>Your transit route doesn't require any customs details</value>
   </data>
+  <data name="TabTitle" xml:space="preserve">
+    <value>Customs details</value>
+  </data>
 </root>

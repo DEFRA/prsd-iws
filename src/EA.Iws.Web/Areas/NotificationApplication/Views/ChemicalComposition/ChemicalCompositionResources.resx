@@ -124,7 +124,7 @@
     <value>Description is required</value>
   </data>
   <data name="EnergyRequired" xml:space="preserve">
-    <value>Please enter a value for Energy</value>
+    <value>Please enter a value for the energy efficiency</value>
   </data>
   <data name="FieldShouldHaveNaOrNumber" xml:space="preserve">
     <value>Both fields must either contain 'NA' or a number - {0}</value>
@@ -133,7 +133,7 @@
     <value>Both fields must either contain 'NA' or a value - {0}</value>
   </data>
   <data name="FurtherInfoValidation" xml:space="preserve">
-    <value>If you select that you are providing the details in a separate annex do not enter any details here</value>
+    <value>If you select that you're providing the details in a separate annex, please do not enter any details here</value>
   </data>
   <data name="Header" xml:space="preserve">
     <value>What type of waste is it?</value>
@@ -142,19 +142,19 @@
     <value>This may be its commercial name</value>
   </data>
   <data name="MaxRange" xml:space="preserve">
-    <value>Max concentration should be in range from 0 to 100 for {0}</value>
+    <value>The maximum concentration should be in range from 0 to 100 for {0}</value>
   </data>
   <data name="MinMaxRequired" xml:space="preserve">
-    <value>Please enter a Min and Max concentration for {0}</value>
+    <value>Please enter a minimum and maximum concentration for {0}</value>
   </data>
   <data name="MinMaxValid" xml:space="preserve">
-    <value>Please enter a valid Min and Max concentration for {0}</value>
+    <value>Please enter a valid minimum and maximum concentration for {0}</value>
   </data>
   <data name="MinRange" xml:space="preserve">
-    <value>Min concentration should be in range from 0 to 100 for {0}</value>
+    <value>The minimum concentration level should be in range from 0 to 100 for {0}</value>
   </data>
   <data name="MinShouldBeLowerThanMax" xml:space="preserve">
-    <value>Min concentration should be lower than the Max concentration - {0}</value>
+    <value>The minimum concentration level should be lower than the maximum concentration - {0}</value>
   </data>
   <data name="NA" xml:space="preserve">
     <value>NA</value>

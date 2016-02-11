@@ -124,12 +124,12 @@
     <value>Change site of {0}</value>
   </data>
   <data name="Header" xml:space="preserve">
-    <value>Remove {0} facility</value>
+    <value>Remove a {0} facility</value>
   </data>
   <data name="RemoveMessage" xml:space="preserve">
-    <value>You are about to remove {0} as a facility from this notification.</value>
+    <value>You're about to remove "{0}" as a facility from this notification.</value>
   </data>
   <data name="Title" xml:space="preserve">
-    <value>Remove Facility</value>
+    <value>Remove a facility</value>
   </data>
 </root>

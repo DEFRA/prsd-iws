@@ -118,18 +118,18 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="BankGuaranteeTemplate" xml:space="preserve">
-    <value>Bank Guarantee template</value>
+    <value>bank guarantee template</value>
   </data>
   <data name="NeedFG" xml:space="preserve">
     <value>You will need a financial guarantee in place before any shipments can be made.</value>
   </data>
   <data name="ParentCompanyTemplate" xml:space="preserve">
-    <value>Parent Company template</value>
+    <value>parent company template</value>
   </data>
   <data name="PrintMessage" xml:space="preserve">
     <value>If you intend to submit a bank or parent company guarantee, print either the {0} or {1} and ask your bank or parent company to complete the guarantee.</value>
   </data>
   <data name="SubmitFG" xml:space="preserve">
-    <value>Ensure you submit your original Financial Guarantee with your notification package.</value>
+    <value>Ensure you submit your original financial guarantee with your notification package.</value>
   </data>
 </root>

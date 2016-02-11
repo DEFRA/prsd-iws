@@ -79,7 +79,7 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.Producer {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This should be the site address for the waste generator-producer..
+        ///   Looks up a localized string similar to This should be the site address for the waste generator-producer.
         /// </summary>
         public static string AddressDescription {
             get {
@@ -97,7 +97,7 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.Producer {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Add waste generator - producer.
+        ///   Looks up a localized string similar to Add a waste generator - producer.
         /// </summary>
         public static string Header {
             get {
@@ -142,7 +142,7 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.Producer {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Enter your organisation type.
+        ///   Looks up a localized string similar to Organisation type.
         /// </summary>
         public static string OtherOrgType {
             get {

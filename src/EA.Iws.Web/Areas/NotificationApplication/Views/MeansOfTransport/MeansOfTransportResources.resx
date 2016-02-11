@@ -121,7 +121,7 @@
     <value>Which means of transport will be used?</value>
   </data>
   <data name="HeaderDescription" xml:space="preserve">
-    <value>Enter each of the transport methods that will be used for the whole journey in the order in which they will occur</value>
+    <value>Enter each of the transport methods that will be used for the whole journey in the order in which they will occur.</value>
   </data>
   <data name="SelectedMeans" xml:space="preserve">
     <value>Means of transport</value>

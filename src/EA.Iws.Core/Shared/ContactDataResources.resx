@@ -124,7 +124,7 @@
     <value>Please enter the email address</value>
   </data>
   <data name="FaxHint" xml:space="preserve">
-    <value>Enter the full fax number including the international dialling code for example +44  1709389201</value>
+    <value>Enter the full fax number including the international dialling code, for example +44  1709389201</value>
   </data>
   <data name="FaxInvalid" xml:space="preserve">
     <value>Please enter the valid fax number</value>
@@ -154,7 +154,7 @@
     <value>Please enter the last name</value>
   </data>
   <data name="TelephoneHint" xml:space="preserve">
-    <value>Enter the full telephone number including the international dialling code for example +44  1709389201</value>
+    <value>Enter the full telephone number including the international dialling code, for example +44  1709389201</value>
   </data>
   <data name="TelephoneInvalid" xml:space="preserve">
     <value>Please enter the valid telephone number</value>

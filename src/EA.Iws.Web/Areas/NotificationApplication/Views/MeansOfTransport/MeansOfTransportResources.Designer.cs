@@ -71,7 +71,7 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.MeansOfTransport {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Enter each of the transport methods that will be used for the whole journey in the order in which they will occur.
+        ///   Looks up a localized string similar to Enter each of the transport methods that will be used for the whole journey in the order in which they will occur..
         /// </summary>
         public static string HeaderDescription {
             get {

@@ -1,5 +1,4 @@
 ﻿@using EA.Iws.Web.Areas.NotificationApplication.Views.WasteOperations
-@using EnumHelper = EA.Prsd.Core.Helpers.EnumHelper
 @model EA.Iws.Web.Areas.NotificationApplication.ViewModels.WasteOperations.TechnologyEmployedViewModel
 @{
     ViewBag.Title = TechnologyEmployedResources.Title;
@@ -16,18 +15,8 @@
             <h1 class="heading-large">@TechnologyEmployedResources.Header</h1>
         </header>
 
-        <div class="form-group">
-            <p>@TechnologyEmployedResources.ChosenCodes</p>
-
-            @for (int i = 0; i < Model.OperationCodes.Count; i++)
-            {
-                <span class="operation-code-list">@EnumHelper.GetDisplayName(Model.OperationCodes[i])</span>
-                @Html.HiddenFor(m => m.OperationCodes[i])
-            }
-        </div>
-
         <div class="form-group @Html.Gds().FormGroupClass(m => m.Details)">
-            @Html.LabelFor(m => m.Details, new { @class = "heading-medium" })
+            @Html.LabelFor(m => m.Details)
             @Html.Gds().ValidationMessageFor(m => m.Details)
             @Html.Gds().HintParagraph(TechnologyEmployedResources.TechnologyHint)
             @Html.TextBoxFor(m => m.Details, new { @class = "full-width", @MaxLength = 70, @title = TechnologyEmployedResources.DetailsTitle })

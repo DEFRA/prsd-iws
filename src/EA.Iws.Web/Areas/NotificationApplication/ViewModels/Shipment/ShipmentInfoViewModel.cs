@@ -189,7 +189,7 @@
 
             return new SetIntendedShipmentInfoForNotification(
                 NotificationId,
-                Convert.ToInt32(NumberOfShipments),
+                int.Parse(NumberOfShipments, NumberStyles.AllowThousands),
                 Convert.ToDecimal(Quantity),
                 Units.GetValueOrDefault(),
                 startDate,

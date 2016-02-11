@@ -62,7 +62,7 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.WasteOperations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to I&apos;ll provide my details in an annex when I submit my notification..
+        ///   Looks up a localized string similar to I&apos;ll provide my details in an annex when I submit my notification.
         /// </summary>
         public static string AnnexProvided {
             get {
@@ -116,7 +116,7 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.WasteOperations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Providing more information.
+        ///   Looks up a localized string similar to Provide more information.
         /// </summary>
         public static string FurtherDetails {
             get {
@@ -125,7 +125,7 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.WasteOperations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to If you&apos;d like to include images or other files in your description, you can upload your own annex when you submit your notification. Otherwise, you can go into more detail by entering text here..
+        ///   Looks up a localized string similar to Enter more detail here, or upload supporting information as a separate annex when you submit your notification.
         /// </summary>
         public static string FurtherDetailsDescription {
             get {
@@ -152,7 +152,7 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.WasteOperations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to What is the technology employed?.
+        ///   Looks up a localized string similar to Which technologies and processes were used to treat the waste on site?.
         /// </summary>
         public static string Header {
             get {
@@ -161,7 +161,7 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.WasteOperations {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Give a brief description of the technologies and processes used to treat the waste on site..
+        ///   Looks up a localized string similar to Give a brief description.
         /// </summary>
         public static string TechnologyDescription {
             get {

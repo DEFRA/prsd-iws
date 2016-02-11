@@ -64,32 +64,32 @@
                     if (minConcentrationValue > maxConcentrationValue)
                     {
                         yield return new ValidationResult(string.Format(ChemicalCompositionResources.MinShouldBeLowerThanMax,
-                            EnumHelper.GetDescription(WasteComposition[i].ChemicalCompositionCategory)), new[] { "WasteComposition[" + i + "]" });
+                            EnumHelper.GetDescription(WasteComposition[i].ChemicalCompositionCategory).ToLower()), new[] { "WasteComposition[" + i + "]" });
                     }
 
                     if (maxConcentrationValue < 0 || maxConcentrationValue > 100)
                     {
                         yield return new ValidationResult(string.Format(ChemicalCompositionResources.MaxRange,
-                            EnumHelper.GetDescription(WasteComposition[i].ChemicalCompositionCategory)), new[] { "WasteComposition[" + i + "]" });
+                            EnumHelper.GetDescription(WasteComposition[i].ChemicalCompositionCategory).ToLower()), new[] { "WasteComposition[" + i + "]" });
                     }
 
                     if (minConcentrationValue < 0 || minConcentrationValue > 100)
                     {
                         yield return new ValidationResult(string.Format(ChemicalCompositionResources.MinRange,
-                            EnumHelper.GetDescription(WasteComposition[i].ChemicalCompositionCategory)), new[] { "WasteComposition[" + i + "]" });
+                            EnumHelper.GetDescription(WasteComposition[i].ChemicalCompositionCategory).ToLower()), new[] { "WasteComposition[" + i + "]" });
                     }
                 }
 
                 if (string.IsNullOrEmpty(WasteComposition[i].MinConcentration) || string.IsNullOrEmpty(WasteComposition[i].MaxConcentration))
                 {
                     yield return new ValidationResult(string.Format(ChemicalCompositionResources.MinMaxRequired,
-                        EnumHelper.GetDescription(WasteComposition[i].ChemicalCompositionCategory)), new[] { "WasteComposition[" + i + "]" });
+                        EnumHelper.GetDescription(WasteComposition[i].ChemicalCompositionCategory).ToLower()), new[] { "WasteComposition[" + i + "]" });
                 }
                 else if ((!IsDecimal(WasteComposition[i].MinConcentration) && !WasteComposition[i].MinConcentration.ToUpper().Equals(ChemicalCompositionResources.NA))
                     || (!IsDecimal(WasteComposition[i].MaxConcentration) && !WasteComposition[i].MaxConcentration.ToUpper().Equals(ChemicalCompositionResources.NA)))
                 {
                     yield return new ValidationResult(string.Format(ChemicalCompositionResources.MinMaxValid,
-                        EnumHelper.GetDescription(WasteComposition[i].ChemicalCompositionCategory)), new[] { "WasteComposition[" + i + "]" });
+                        EnumHelper.GetDescription(WasteComposition[i].ChemicalCompositionCategory).ToLower()), new[] { "WasteComposition[" + i + "]" });
                 }
 
                 if (!string.IsNullOrEmpty(WasteComposition[i].MinConcentration) && !string.IsNullOrEmpty(WasteComposition[i].MaxConcentration))
@@ -98,7 +98,7 @@
                     || (!WasteComposition[i].MinConcentration.ToUpper().Equals(ChemicalCompositionResources.NA) && WasteComposition[i].MaxConcentration.ToUpper().Equals(ChemicalCompositionResources.NA)))
                     {
                         yield return new ValidationResult(string.Format(ChemicalCompositionResources.FieldShouldHaveNaOrValue,
-                            EnumHelper.GetDescription(WasteComposition[i].ChemicalCompositionCategory)), new[] { "WasteComposition[" + i + "]" });
+                            EnumHelper.GetDescription(WasteComposition[i].ChemicalCompositionCategory).ToLower()), new[] { "WasteComposition[" + i + "]" });
                     }
                 }
             }
@@ -113,32 +113,32 @@
                     if (minConcentrationValue < 0 || minConcentrationValue > 100)
                     {
                         yield return new ValidationResult(string.Format(ChemicalCompositionResources.MinRange, 
-                            EnumHelper.GetDescription(OtherCodes[i].ChemicalCompositionCategory)), new[] { "OtherCodes[" + i + "]" });
+                            EnumHelper.GetDescription(OtherCodes[i].ChemicalCompositionCategory).ToLower()), new[] { "OtherCodes[" + i + "]" });
                     }
 
                     if (maxConcentrationValue < 0 || maxConcentrationValue > 100)
                     {
                         yield return new ValidationResult(string.Format(ChemicalCompositionResources.MaxRange, 
-                            EnumHelper.GetDescription(OtherCodes[i].ChemicalCompositionCategory)), new[] { "OtherCodes[" + i + "]" });
+                            EnumHelper.GetDescription(OtherCodes[i].ChemicalCompositionCategory).ToLower()), new[] { "OtherCodes[" + i + "]" });
                     }
 
                     if (minConcentrationValue > maxConcentrationValue)
                     {
                         yield return new ValidationResult(string.Format(ChemicalCompositionResources.MinShouldBeLowerThanMax, 
-                            EnumHelper.GetDescription(OtherCodes[i].ChemicalCompositionCategory)), new[] { "OtherCodes[" + i + "]" });
+                            EnumHelper.GetDescription(OtherCodes[i].ChemicalCompositionCategory).ToLower()), new[] { "OtherCodes[" + i + "]" });
                     }
                 }
 
                 if (!string.IsNullOrEmpty(OtherCodes[i].Constituent) && (string.IsNullOrEmpty(OtherCodes[i].MinConcentration) || string.IsNullOrEmpty(OtherCodes[i].MaxConcentration)))
                 {
                     yield return new ValidationResult(string.Format(ChemicalCompositionResources.MinMaxRequired, 
-                        EnumHelper.GetDescription(OtherCodes[i].ChemicalCompositionCategory)), new[] { "OtherCodes[" + i + "]" });
+                        EnumHelper.GetDescription(OtherCodes[i].ChemicalCompositionCategory).ToLower()), new[] { "OtherCodes[" + i + "]" });
                 }
 
                 if (string.IsNullOrEmpty(OtherCodes[i].Constituent) && (!string.IsNullOrEmpty(OtherCodes[i].MinConcentration) || !string.IsNullOrEmpty(OtherCodes[i].MaxConcentration)))
                 {
                     yield return new ValidationResult(string.Format(ChemicalCompositionResources.OtherNameRequired, 
-                        EnumHelper.GetDescription(OtherCodes[i].ChemicalCompositionCategory)), new[] { "OtherCodes[" + i + "]" });
+                        EnumHelper.GetDescription(OtherCodes[i].ChemicalCompositionCategory).ToLower()), new[] { "OtherCodes[" + i + "]" });
                 }
 
                 if (!string.IsNullOrEmpty(OtherCodes[i].MinConcentration) && !string.IsNullOrEmpty(OtherCodes[i].MaxConcentration))
@@ -147,7 +147,7 @@
                         || (!OtherCodes[i].MinConcentration.ToUpper().Equals(ChemicalCompositionResources.NA) && OtherCodes[i].MaxConcentration.ToUpper().Equals(ChemicalCompositionResources.NA)))
                     {
                         yield return new ValidationResult(string.Format(ChemicalCompositionResources.FieldShouldHaveNaOrValue,
-                            EnumHelper.GetDescription(OtherCodes[i].ChemicalCompositionCategory)), new[] { "OtherCodes[" + i + "]" });
+                            EnumHelper.GetDescription(OtherCodes[i].ChemicalCompositionCategory).ToLower()), new[] { "OtherCodes[" + i + "]" });
                     }
                 }
             }

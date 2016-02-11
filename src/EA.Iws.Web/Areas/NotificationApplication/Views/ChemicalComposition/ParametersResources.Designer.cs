@@ -98,7 +98,7 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.ChemicalComposition {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Energy Efficiency.
+        ///   Looks up a localized string similar to Energy efficiency.
         /// </summary>
         public static string EnergyEfficiency {
             get {

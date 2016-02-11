@@ -3,16 +3,12 @@
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-    using System.Linq;
-    using Core.OperationCodes;
     using Core.TechnologyEmployed;
     using Views.WasteOperations;
 
     public class TechnologyEmployedViewModel : IValidatableObject
     {
         public Guid NotificationId { get; set; }
-
-        public IList<OperationCode> OperationCodes { get; set; }
 
         [Display(Name = "AnnexProvided", ResourceType = typeof(TechnologyEmployedResources))]
         public bool AnnexProvided { get; set; }
@@ -38,8 +34,6 @@
                 FurtherDetails = technologyEmployedData.FurtherDetails;
                 AnnexProvided = technologyEmployedData.AnnexProvided;
             }
-
-            OperationCodes = technologyEmployedData.OperationCodes.OrderBy(o => o).ToList();
         }
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)

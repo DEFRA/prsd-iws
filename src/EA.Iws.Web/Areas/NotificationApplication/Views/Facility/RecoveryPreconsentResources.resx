@@ -130,7 +130,7 @@
     <value>No</value>
   </data>
   <data name="NoDescription" xml:space="preserve">
-    <value>This notification will allow intended shipment dates to cover up to a 12 month period.</value>
+    <value>This notification will allow intended shipment dates to cover up to a 12-month period.</value>
   </data>
   <data name="Title" xml:space="preserve">
     <value>Is Recovery Facility Pre-consented?</value>
@@ -139,6 +139,6 @@
     <value>Yes</value>
   </data>
   <data name="YesDescription" xml:space="preserve">
-    <value>This notification may benefit from having intended shipment dates to cover up to a 3 year period. For the one or more recovery facilities entered, you must send evidence of the pre-consent status with your notification submission. This may be the pre-consent certificate or letter issued by the relevant competent authority to the recovery facility.</value>
+    <value>This notification may benefit from having intended shipment dates that cover up to a 3-year period. You must send evidence of the pre-consent status for all the recovery facilities you may have entered. This could include the pre-consent certificate or the letter issued by the relevant competent authority to the recovery facility.</value>
   </data>
 </root>
