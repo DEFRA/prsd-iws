@@ -61,7 +61,7 @@ namespace EA.Iws.Web.Areas.AdminImportAssessment.Views.KeyDates {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Dates.
+        ///   Looks up a localized string similar to Date / detail.
         /// </summary>
         public static string DateColumnHeader {
             get {
@@ -70,7 +70,7 @@ namespace EA.Iws.Web.Areas.AdminImportAssessment.Views.KeyDates {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Activites.
+        ///   Looks up a localized string similar to Activity.
         /// </summary>
         public static string DateNameColumnHeader {
             get {
