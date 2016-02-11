@@ -4,6 +4,7 @@
     using System.Linq;
     using System.Security.Claims;
     using System.Web.Mvc;
+    using System.Web.Routing;
     using Thinktecture.IdentityModel.Client;
     using AuthorizationContext = System.Web.Mvc.AuthorizationContext;
 
@@ -11,20 +12,25 @@
     {
         public override void OnAuthorization(AuthorizationContext filterContext)
         {
-            if (filterContext.SkipAuthorisation())
+            if (filterContext.IsChildAction || filterContext.SkipAuthorisation())
             {
                 return;
             }
 
-            var identity = (ClaimsIdentity)filterContext.HttpContext.User.Identity;
-            var hasEmailVerifiedClaim = identity.HasClaim(c => c.Type.Equals(JwtClaimTypes.EmailVerified));
-            bool hasRoleClaim = identity.HasClaim(c => c.Type.Equals(ClaimTypes.Role));
-            bool isAdmin = hasRoleClaim && identity.Claims.Single(c => c.Type.Equals(ClaimTypes.Role)).Value.Equals("admin", StringComparison.InvariantCultureIgnoreCase);
+            var principal = (ClaimsPrincipal)filterContext.HttpContext.User;
+            var identity = (ClaimsIdentity)principal.Identity;
 
-            if (hasEmailVerifiedClaim && identity.Claims.Single(c => c.Type.Equals(JwtClaimTypes.EmailVerified)).Value.Equals("false", StringComparison.InvariantCultureIgnoreCase))
+            var hasEmailVerifiedClaim = identity.HasClaim(c => c.Type.Equals(JwtClaimTypes.EmailVerified));
+
+            if (hasEmailVerifiedClaim && identity.Claims.Any(c => 
+                    c.Type.Equals(JwtClaimTypes.EmailVerified) 
+                    && c.Value.Equals("false", StringComparison.InvariantCultureIgnoreCase)))                
             {
-                var redirectAddress = isAdmin ? "~/Admin/Registration/AdminEmailVerificationRequired" : "~/Account/EmailVerificationRequired";
-                filterContext.Result = new RedirectResult(redirectAddress);
+                var redirectAddress = principal.IsInternalUser() 
+                    ? new RouteValueDictionary(new { controller = "Registration", action = "AdminEmailVerificationRequired", area = "Admin" })
+                    : new RouteValueDictionary(new { controller = "Account", action = "EmailVerificationRequired", area = string.Empty });
+
+                filterContext.Result = new RedirectToRouteResult(redirectAddress);
             }
         }
     }

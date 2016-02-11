@@ -1,4 +1,5 @@
 ﻿@using EA.Iws.Core.Admin
+@using EA.Iws.Core.Authorization
 @model EA.Iws.Web.Areas.Admin.ViewModels.UserAdministration.NewUsersListViewModel
 @{
     ViewBag.Title = "Manage users";
@@ -23,12 +24,13 @@
             <th>Email</th>
             <th>Action</th>
             <th></th>
+            <th>Assign role</th>
         </tr>
         </thead>
         <tbody>
         @for (int i = 0; i < Model.Users.Count; i++)
         {
-            <tr>
+            <tr class="@Html.Gds().FormGroupClass(m => m.Users[i])">
                 <td>@Html.DisplayFor(m => m.Users[i].UserData.FullName)</td>
                 <td>@Html.DisplayFor(m => m.Users[i].UserData.Email)</td>
                 <td>
@@ -56,9 +58,19 @@
                         <i class="fa fa-question-circle status-circle grey-text"></i>
                     }
                 </td>
+                <td>
+                    @if (Model.Users[i].Action == ApprovalAction.Approve)
+                    {
+
+                    }
+                    else
+                    {
+                        @Html.Gds().DropDownListFor(m => m.Users[i].AssignedRole, Model.UserRolesList, string.Empty, new { @class = "role-dropdown form-control-wide form-control visually-hidden", disabled = "disabled" })
+                    }
+                </td>
             </tr>
         }
-        </tbody>
+</tbody>
     </table>
 
     <div class="form-group">
@@ -66,17 +78,37 @@
     </div>
 }
 
+
+<style>
+    .role-dropdown:disabled {
+         background: royalblue;
+    }
+</style>
+
 @section scripts{
     <script>
+        function disableRoleDropdown(roleDropdown) {
+            roleDropdown.addClass("visually-hidden");
+            roleDropdown.attr("disabled", "disabled");
+        }
+
         $(function () {
             $(".action-dropdown").change(function () {
                 var itemToAppend = "<i class='fa fa-question-circle status-circle grey-text'></i>";
+                var roleBox = $(this).parent().parent().find(".role-dropdown");
+
+                disableRoleDropdown(roleBox);
 
                 if (this.value === "0") {
                     itemToAppend = "<i class='fa fa-times-circle status-circle red-text'></i>";
                 }
                 else if (this.value === "1") {
+                    // Approved
                     itemToAppend = "<i class='fa fa-check-circle status-circle green-text'></i>";
+
+                    roleBox.removeAttr("disabled");
+                    roleBox.removeClass("visually-hidden");
+                    roleBox.val("@UserRole.Internal");
                 }
 
                 var statusBox = $(this).parent().next();

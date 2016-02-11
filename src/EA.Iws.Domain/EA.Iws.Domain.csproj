@@ -104,6 +104,7 @@
     <Compile Include="ImportNotificationAssessment\ImportNotificationAssessment.cs" />
     <Compile Include="ImportNotificationAssessment\ImportNotificationStatusChange.cs" />
     <Compile Include="ImportNotificationAssessment\ImportNotificationStatusChangeEvent.cs" />
+    <Compile Include="ImportNotificationAssessment\ImportNotificationSubmittedEvent.cs" />
     <Compile Include="ImportNotificationAssessment\Transactions\IImportNotificationTransactionCalculator.cs" />
     <Compile Include="ImportNotificationAssessment\Transactions\IImportNotificationTransactionRepository.cs" />
     <Compile Include="ImportNotificationAssessment\Transactions\ImportNotificationTransaction.cs" />

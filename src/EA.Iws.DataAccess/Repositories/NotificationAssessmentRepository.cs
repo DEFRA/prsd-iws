@@ -4,6 +4,7 @@
     using System.Data.Entity;
     using System.Linq;
     using System.Threading.Tasks;
+    using Core.NotificationAssessment;
     using Domain.NotificationAssessment;
 
     internal class NotificationAssessmentRepository : INotificationAssessmentRepository
@@ -29,6 +30,15 @@
                .Where(r => r.AssessmentId == notificationAssessmentId)
                .Select(r => r.Number)
                .SingleAsync();
+        }
+
+        public async Task<NotificationStatus> GetStatusByNotificationId(Guid notificationId)
+        {
+            return
+                await
+                    context.NotificationAssessments.Where(n => n.NotificationApplicationId == notificationId)
+                        .Select(n => n.Status)
+                        .SingleAsync();
         }
     }
 }

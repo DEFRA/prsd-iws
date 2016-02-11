@@ -117,17 +117,11 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="ActiveLoads" xml:space="preserve">
-    <value>Active loads</value>
-  </data>
-  <data name="ActiveLoadsRequired" xml:space="preserve">
-    <value>Please provide the number of active loads</value>
-  </data>
   <data name="Decision" xml:space="preserve">
-    <value>Decision</value>
+    <value>Select decision</value>
   </data>
   <data name="DecisionDate" xml:space="preserve">
-    <value>Decision date</value>
+    <value>Date decision made</value>
   </data>
   <data name="DecisionDateRequired" xml:space="preserve">
     <value>Please provide a decision date</value>
@@ -135,11 +129,8 @@
   <data name="DecisionRequired" xml:space="preserve">
     <value>Please provide a decision</value>
   </data>
-  <data name="IsBlanketBond" xml:space="preserve">
-    <value>Is blanket bond</value>
-  </data>
-  <data name="IsBlanketBondRequired" xml:space="preserve">
-    <value>Please choose whether this is a blanket bond</value>
+  <data name="ReferenceNumber" xml:space="preserve">
+    <value>Reference number</value>
   </data>
   <data name="ReferenceNumberRequired" xml:space="preserve">
     <value>Please provide a guarantee reference number</value>
@@ -149,20 +140,5 @@
   </data>
   <data name="RefusalReasonRequired" xml:space="preserve">
     <value>Please provide a reason for refusal</value>
-  </data>
-  <data name="ValidFrom" xml:space="preserve">
-    <value>Valid from</value>
-  </data>
-  <data name="ValidFromRequired" xml:space="preserve">
-    <value>Please provide a guarantee valid from date</value>
-  </data>
-  <data name="ValidTo" xml:space="preserve">
-    <value>Valid to</value>
-  </data>
-  <data name="ValidToBeforeValidFrom" xml:space="preserve">
-    <value>Please provide a valid to date which is after the valid from date</value>
-  </data>
-  <data name="ValidToRequired" xml:space="preserve">
-    <value>Please provide a guarantee valid to date</value>
   </data>
 </root>

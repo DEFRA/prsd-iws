@@ -70,18 +70,22 @@
 }
 
 .noti-overview{
+    margin-bottom: 30px;
+
     .heading-medium{
         font-weight: normal;
         color: $secondary-text-colour;
-        margin-bottom: 0;
         margin-top: 30px;
     }
+
     .heading-large{
         margin-top: 0;
     }
+
     span{
         display: inline-block;
     }
+
     .status{
         float: right;
         clear: right;
@@ -102,21 +106,24 @@
             font-weight: bold;
             
         }
+
         .vat-message{
             font-weight: normal;
             font-size: 0.75em;
         }
     }
+
     .noti-links{
         float: right;
         clear: right;
         padding: 15px 0px 15px 0px;
+
         a{
             display: block;
             float: right;
-            
         }
     }
+
     .status, .noti-charge, .noti-links{
       &:after {
         visibility: hidden;
@@ -151,6 +158,10 @@
         font-weight: bold; 
     } 
 } 
+
+.no-margin{
+    margin: 0px 0px 0px 0px;
+}
 
 .over-alert{ 
     border: 2px solid $error-colour; 

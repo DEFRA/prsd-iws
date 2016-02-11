@@ -4,10 +4,11 @@
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Core.AddressBook;
+    using Infrastructure.Authorization;
     using Prsd.Core.Mediator;
     using Requests.AddressBook;
 
-    [Authorize]
+    [AuthorizeActivity(typeof(DeleteAddressBookRecord))]
     public class DeleteController : Controller
     {
         private readonly IMediator mediator;

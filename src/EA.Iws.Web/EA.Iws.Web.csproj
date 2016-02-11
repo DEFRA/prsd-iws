@@ -394,6 +394,7 @@
     <Content Include="Areas\AdminImportAssessment\Views\FinancialGuaranteeDecision\_Release.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\Options\DownloadUnavailable.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\WhatToDoNext\_Block17Disclosure.cshtml" />
+    <Content Include="Areas\NotificationApplication\Views\WhatToDoNext\_RemittancePost.cshtml" />
     <None Include="Content\iws\_panels.scss" />
     <Content Include="Content\select2\select2-spinner.gif" />
     <Content Include="Content\select2\select2.css" />
@@ -1260,6 +1261,7 @@
     </Compile>
     <Compile Include="Areas\Admin\ViewModels\ImportNotification\NotificationTypeViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\ImportNotification\NotificationReceivedDateViewModel.cs" />
+    <Compile Include="Areas\Admin\ViewModels\Menu\AdminLinksViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\Menu\ExportNavigationViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\Menu\ImportNavigationViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\TestEmail\TestEmailViewModel.cs" />
@@ -1696,10 +1698,30 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>_PortNotListedDisclosureResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Areas\NotificationApplication\Views\Submit\DisclaimerResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DisclaimerResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\NotificationApplication\Views\WhatToDoNext\FinancialGuaranteeResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FinancialGuaranteeResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\NotificationApplication\Views\WhatToDoNext\GeneralPostResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GeneralPostResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Areas\NotificationApplication\Views\WhatToDoNext\IndexResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>IndexResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\NotificationApplication\Views\WhatToDoNext\PaymentResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PaymentResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Areas\NotificationApplication\Views\WhatToDoNext\PrintResources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -1788,8 +1810,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>IndexResources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Infrastructure\AuthorizationService.cs" />
-    <Compile Include="Infrastructure\AuthorizeActivityAttribute.cs" />
+    <Compile Include="Infrastructure\Authorization\AuthorizationService.cs" />
+    <Compile Include="Infrastructure\Authorization\AuthorizeActivityAttribute.cs" />
     <Compile Include="Infrastructure\ExportNavigationSection.cs" />
     <Compile Include="Infrastructure\FileAccess.cs" />
     <Compile Include="Infrastructure\FileReader.cs" />
@@ -2421,7 +2443,7 @@
     <Compile Include="Controllers\ErrorsController.cs" />
     <Compile Include="Controllers\NewNotificationController.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\CustomWasteCode\CustomWasteCodesViewModel.cs" />
-    <Compile Include="Infrastructure\AdminApprovalRequired.cs" />
+    <Compile Include="Infrastructure\AdminApprovalRequiredAttribute.cs" />
     <Compile Include="Infrastructure\AntiForgeryErrorFilter.cs" />
     <Compile Include="Infrastructure\AreaRegistrationContextExtensions.cs" />
     <Compile Include="Infrastructure\Navigation.cs" />
@@ -3359,6 +3381,10 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>StateOfImportResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Areas\NotificationApplication\Views\Submit\DisclaimerResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>DisclaimerResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Areas\NotificationApplication\Views\TransitState\TransitStateResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>TransitStateResources.Designer.cs</LastGenOutput>
@@ -3432,9 +3458,21 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>WasteRecoveryResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Areas\NotificationApplication\Views\WhatToDoNext\FinancialGuaranteeResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>FinancialGuaranteeResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\NotificationApplication\Views\WhatToDoNext\GeneralPostResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>GeneralPostResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Areas\NotificationApplication\Views\WhatToDoNext\IndexResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\NotificationApplication\Views\WhatToDoNext\PaymentResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>PaymentResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\NotificationApplication\Views\WhatToDoNext\PrintResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

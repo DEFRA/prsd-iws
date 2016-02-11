@@ -21,3 +21,7 @@
     @include core-19;
     background-color: $light-blue;
 }
+
+.button-secondary {
+    @include button($grey-3);
+}

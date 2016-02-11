@@ -8,6 +8,7 @@
     public class AddressData : IValidatableObject
     {
         private const string DefaultCountryName = "United Kingdom";
+        private const string Delimiter = ", ";
 
         [Required(ErrorMessageResourceType = typeof(AddressDataResources), ErrorMessageResourceName = "Address1Required")]
         [Display(Name = "Address1", ResourceType = typeof(AddressDataResources))]
@@ -42,6 +43,31 @@
             {
                 yield return new ValidationResult(AddressDataResources.CountrySelect, new[] { "CountryId" });
             }
+        }
+
+        public override string ToString()
+        {
+
+            var address = StreetOrSuburb + Delimiter;
+
+            if (!string.IsNullOrWhiteSpace(Address2))
+            {
+                address += Address2 + Delimiter;
+            }
+
+            address += TownOrCity + Delimiter;
+
+            if (!string.IsNullOrWhiteSpace(Region))
+            {
+                address += Region;
+            }
+
+            if (!string.IsNullOrWhiteSpace(CountryName))
+            {
+                address += Delimiter + CountryName;
+            }
+
+            return address;
         }
     }
 }

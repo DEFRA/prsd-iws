@@ -1,9 +1,8 @@
 ﻿namespace EA.Iws.Web.Infrastructure
 {
-    using System;
-    using System.Linq;
     using System.Security.Claims;
     using System.Web.Mvc;
+    using System.Web.Routing;
     using AuthorizationContext = System.Web.Mvc.AuthorizationContext;
     using ClaimTypes = Core.Shared.ClaimTypes;
 
@@ -11,11 +10,12 @@
     {
         public override void OnAuthorization(AuthorizationContext filterContext)
         {
-            if (filterContext.SkipAuthorisation())
+            if (filterContext.IsChildAction || filterContext.SkipAuthorisation())
             {
                 return;
             }
 
+            var principal = (ClaimsPrincipal)filterContext.HttpContext.User;
             var identity = (ClaimsIdentity)filterContext.HttpContext.User.Identity;
 
             if (!identity.IsAuthenticated)
@@ -25,17 +25,15 @@
 
             var organisationRegistered = identity.HasClaim(c => c.Type.Equals(ClaimTypes.OrganisationId));
 
-            bool hasRoleClaim = identity.HasClaim(c => c.Type.Equals(System.Security.Claims.ClaimTypes.Role));
-            bool isAdmin = hasRoleClaim && identity.Claims.Single(c => c.Type.Equals(System.Security.Claims.ClaimTypes.Role)).Value.Equals("internal", StringComparison.InvariantCultureIgnoreCase);
-
-            if (isAdmin)
+            if (principal.IsInternalUser())
             {
                 return;
             }
 
             if (!organisationRegistered)
             {
-                filterContext.Result = new RedirectResult("~/Registration/CreateNewOrganisation");
+                filterContext.Result = new RedirectToRouteResult(
+                    new RouteValueDictionary(new { controller = "Registration", action = "CreateNewOrganisation", area = string.Empty }));
             }
         }
     }

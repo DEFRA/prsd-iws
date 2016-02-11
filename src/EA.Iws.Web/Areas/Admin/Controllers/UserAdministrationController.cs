@@ -1,16 +1,15 @@
 ﻿namespace EA.Iws.Web.Areas.Admin.Controllers
 {
-    using System;
-    using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Mvc;
-    using Core.Admin;
+    using Core.Admin.UserAdministration;
+    using Infrastructure.Authorization;
     using Prsd.Core.Mediator;
     using Requests.Admin.UserAdministration;
     using ViewModels.UserAdministration;
 
-    [Authorize(Roles = "internal")]
+    [AuthorizeActivity(typeof(SetUserApprovals))]
     public class UserAdministrationController : Controller
     {
         private readonly IMediator mediator;
@@ -43,7 +42,7 @@
             var message = new SetUserApprovals(
                 model.Users
                     .Where(u => u.Action.HasValue)
-                    .Select(u => new KeyValuePair<Guid, ApprovalAction>(u.UserData.Id, u.Action.Value))
+                    .Select(u => new UserApproval(u.UserData.Id, u.Action.Value, u.AssignedRole))
                     .ToList());
 
             await mediator.SendAsync(message);

@@ -1,9 +1,8 @@
-﻿namespace EA.Iws.RequestHandlers.Authorization
+﻿namespace EA.Iws.Core.Authorization
 {
     using System;
     using System.Collections.Concurrent;
     using System.Reflection;
-    using Core.Authorization;
 
     public class RequestAuthorizationAttributeCache
     {

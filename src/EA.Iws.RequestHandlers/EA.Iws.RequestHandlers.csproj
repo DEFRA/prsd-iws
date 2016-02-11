@@ -141,7 +141,6 @@
     <Compile Include="Copy\WasteCodeCopy.cs" />
     <Compile Include="Copy\WasteRecoveryToWasteRecoveryCopy.cs" />
     <Compile Include="Decorators\RequestAuthorizationDecorator.cs" />
-    <Compile Include="Authorization\RequestAuthorizationAttributeCache.cs" />
     <Compile Include="Documents\AsposePdfGenerator.cs" />
     <Compile Include="Documents\IPdfGenerator.cs" />
     <Compile Include="Feedback\FeedbackDataRequestHandler.cs" />
@@ -157,7 +156,7 @@
     <Compile Include="ImportMovement\Reject\RecordRejectionHandler.cs" />
     <Compile Include="ImportNotificationAssessment\ConsentHandler.cs" />
     <Compile Include="ImportNotificationAssessment\Events\ChangeImportNotificationAssessmentStatus.cs" />
-    <Compile Include="ImportNotificationAssessment\FinancialGuarantee\ApproveBlanketBondFinancialGuaranteeHandler.cs" />
+    <Compile Include="ImportNotificationAssessment\Events\CheckImportNotificationPaymentStatus.cs" />
     <Compile Include="ImportNotificationAssessment\FinancialGuarantee\ApproveFinancialGuaranteeHandler.cs" />
     <Compile Include="ImportNotificationAssessment\FinancialGuarantee\AuditStatusChange.cs" />
     <Compile Include="ImportNotificationAssessment\FinancialGuarantee\CreateFinancialGuaranteeHandler.cs" />

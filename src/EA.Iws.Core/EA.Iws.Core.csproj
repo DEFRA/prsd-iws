@@ -61,6 +61,7 @@
     <Compile Include="Admin\Reports\FinanceReportData.cs" />
     <Compile Include="Admin\Reports\MissingShipmentData.cs" />
     <Compile Include="Admin\Search\ImportSearchResult.cs" />
+    <Compile Include="Admin\UserAdministration\UserApproval.cs" />
     <Compile Include="Annexes\AnnexFileData.cs" />
     <Compile Include="Annexes\AnnexStatus.cs" />
     <Compile Include="Annexes\AnnexUpload.cs" />
@@ -74,6 +75,7 @@
     <Compile Include="Authorization\Permissions\SystemConfigurationPermissions.cs" />
     <Compile Include="Authorization\Permissions\UserAdministrationPermissions.cs" />
     <Compile Include="Authorization\RequestAuthorizationAttribute.cs" />
+    <Compile Include="Authorization\RequestAuthorizationAttributeCache.cs" />
     <Compile Include="Authorization\RequestAuthorizationException.cs" />
     <Compile Include="Authorization\UserRole.cs" />
     <Compile Include="Carriers\CarrierData.cs" />

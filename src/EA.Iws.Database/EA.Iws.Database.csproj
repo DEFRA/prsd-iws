@@ -249,6 +249,8 @@
     <Content Include="scripts\Update\Sprint26\20160128-141516-export-producer-collection.sql" />
     <Content Include="scripts\Update\Sprint26\20160203-174000-claims-for-internal-external.sql" />
     <Content Include="scripts\Update\Sprint26\20160203-133700-create-means-of-transport.sql" />
+    <Content Include="scripts\Update\Sprint26\20160208-163900-edit-financial-guarantee-approval.sql" />
+    <Content Include="scripts\Update\Sprint27\20160209-142700-update-bacs-details-environment-agency.sql" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="scripts\TestData\20150522-171900-link-test-user-to-org.sql" />

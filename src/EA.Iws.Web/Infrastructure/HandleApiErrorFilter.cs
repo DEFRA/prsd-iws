@@ -4,20 +4,38 @@
     using System.Web.Mvc;
     using Prsd.Core.Web.ApiClient;
 
-    public class HandleApiErrorFilter : HandleErrorAttribute
+    public class HandleApiErrorFilter : FilterAttribute, IExceptionFilter
     {
-        public override void OnException(ExceptionContext filterContext)
+        public void OnException(ExceptionContext filterContext)
         {
-            var apiException = GetApiException(filterContext);
-            if (!filterContext.ExceptionHandled && apiException != null)
+            if (filterContext == null)
             {
-                filterContext.HttpContext.Response.Clear();
-                filterContext.HttpContext.Response.TrySkipIisCustomErrors = true;
-                filterContext.HttpContext.Response.StatusCode = (int)apiException.StatusCode;
-
-                filterContext.ExceptionHandled = true;
+                throw new ArgumentNullException("filterContext");
             }
-            base.OnException(filterContext);
+
+            if (filterContext.IsChildAction)
+            {
+                return;
+            }
+
+            // If custom errors are disabled, we need to let the normal ASP.NET exception handler
+            // execute so that the user can see useful debugging information.
+            if (filterContext.ExceptionHandled || !filterContext.HttpContext.IsCustomErrorEnabled)
+            {
+                return;
+            }
+
+            var apiException = GetApiException(filterContext);
+
+            if (apiException == null)
+            {
+                return;
+            }
+
+            filterContext.ExceptionHandled = true;
+            filterContext.HttpContext.Response.Clear();
+            filterContext.HttpContext.Response.StatusCode = (int)apiException.StatusCode;
+            filterContext.HttpContext.Response.TrySkipIisCustomErrors = true;
         }
 
         private static ApiException GetApiException(ExceptionContext filterContext)

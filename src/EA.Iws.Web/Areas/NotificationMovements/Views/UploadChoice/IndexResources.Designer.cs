@@ -88,7 +88,7 @@ namespace EA.Iws.Web.Areas.NotificationMovements.Views.UploadChoice {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Which prenotification are you uploading?.
+        ///   Looks up a localized string similar to Which prenotification would you like to upload?.
         /// </summary>
         public static string Title {
             get {

@@ -1,6 +1,5 @@
 ﻿namespace EA.Iws.RequestHandlers.Decorators
 {
-    using System.Security;
     using System.Threading.Tasks;
     using Authorization;
     using Core.Authorization;
@@ -44,7 +43,7 @@
                 return true;
             }
 
-            var context = new AuthorizationContext(userContext.Principal, 
+            var context = new AuthorizationContext(userContext.Principal,
                 requestAuthorizationAttribute.Name);
 
             return await authorizationManager.CheckAccessAsync(context).ConfigureAwait(true);

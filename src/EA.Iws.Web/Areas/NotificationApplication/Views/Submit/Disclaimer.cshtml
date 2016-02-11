@@ -1,6 +1,7 @@
-﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.NotificationApplication.DisclaimerViewModel
+﻿@using EA.Iws.Web.Areas.NotificationApplication.Views.Submit
+@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.NotificationApplication.DisclaimerViewModel
 @{
-    ViewBag.Title = "Disclaimer";
+    ViewBag.Title = DisclaimerResources.Title;
     Layout = "~/Views/Shared/_Layout.GovUK.Sections.cshtml";
 }
 
@@ -11,31 +12,30 @@
     @Html.HiddenFor(m => m.Id)
 
     <header class="hgroup">
-        <h1 class="heading-large">Please read carefully, accept and proceed</h1>
+        <h1 class="heading-large">@DisclaimerResources.Header</h1>
     </header>
+
+    <p class="text">
+        @DisclaimerResources.Paragraph1
+    </p>
+    <p class="text">
+        @DisclaimerResources.Paragraph2
+    </p>
 
     <div class="form-group">
         @Html.Partial("_IwsStandardDataNotice")
-        <details>
-            <summary><h2 class="summary heading-xsmall">Read disclaimer</h2></summary>
-            <div class="panel-indent">
-                <b>Disclaimer</b>
-                <p>
-                    Place Holder Text
-                </p>
-            </div>
-        </details>
     </div>
+    
     <div class="form-group @Html.Gds().FormGroupClass(m => m.TermsAndConditions)">
         <fieldset>
             <div>@Html.Gds().ValidationMessageFor(m => m.TermsAndConditions)</div>
             <label class="block-label @Html.Gds().FormGroupClass(m => m.TermsAndConditions)">
                 @Html.CheckBoxFor(m => m.TermsAndConditions, new { data_track = "element", data_category = "Terms and conditions", data_action = "Accept" })
-                Accept standard data notice and disclaimer
+                @DisclaimerResources.Accept
             </label>
         </fieldset>
     </div>
     <div class="form-group">
-        <input type="submit" class="button" value="Confirm your submission" />
+        <input type="submit" class="button" value="@DisclaimerResources.Confirm" />
     </div>
 }

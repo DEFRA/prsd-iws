@@ -9,6 +9,8 @@
 
         public NotificationDetails Details { get; set; }
 
+        public AdminLinksViewModel AdminLinksModel { get; set; }
+
         public bool ShowImportSections { get; set; }
     }
 }

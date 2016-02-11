@@ -3,12 +3,13 @@
     using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Mvc;
+    using Infrastructure.Authorization;
     using Prsd.Core.Mediator;
     using Requests.Admin.EntryOrExitPoints;
     using Requests.Shared;
     using ViewModels.EntryOrExitPoint;
 
-    [Authorize(Roles = "internal")]
+    [AuthorizeActivity(typeof(AddEntryOrExitPoint))]
     public class EntryOrExitPointController : Controller
     {
         private readonly IMediator mediator;

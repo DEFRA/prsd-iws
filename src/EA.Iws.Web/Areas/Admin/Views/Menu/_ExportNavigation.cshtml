@@ -67,13 +67,17 @@
             @Html.Partial("~/Areas/Admin/Views/Menu/_ReportingLinks.cshtml")
         </li>
 
-        <li class="">
-            <h3 class="">
-                <span></span>
-                Account services
-            </h3>
-            @Html.Partial("~/Areas/Admin/Views/Menu/_AdminLinks.cshtml")
-        </li>
+        @if (Model.AdminLinksModel.ShowAddNewEntryOrExitPointLink 
+            || Model.AdminLinksModel.ShowApproveNewInternalUserLink)
+        {
+            <li class="">
+                <h3 class="">
+                    <span></span>
+                    Account services
+                </h3>
+                @Html.Partial("~/Areas/Admin/Views/Menu/_AdminLinks.cshtml", Model.AdminLinksModel)
+            </li>
+        }
 
         <li class="@GetClassForSection(ExportNavigationSection.ChangeOwner, "active")">
             <h3 class="@GetClassForSection(ExportNavigationSection.ChangeOwner, "current")">

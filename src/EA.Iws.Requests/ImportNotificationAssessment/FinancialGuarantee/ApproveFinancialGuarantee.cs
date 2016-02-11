@@ -9,25 +9,13 @@
     {
         public string Reference { get; private set; }
 
-        public int ActiveLoadsPermitted { get; private set; }
-
-        public DateTime ValidFrom { get; private set; }
-        
-        public DateTime ValidTo { get; private set; }
-
         public ApproveFinancialGuarantee(Guid importNotificationId,
             DateTime decisionDate,
-            string reference,
-            int activeLoadsPermitted,
-            DateTime validFrom,
-            DateTime validTo)
+            string reference)
         {
             ImportNotificationId = importNotificationId;
             Reference = reference;
-            ActiveLoadsPermitted = activeLoadsPermitted;
-            ValidFrom = validFrom;
             DecisionDate = decisionDate;
-            ValidTo = validTo;
         }
     }
 }

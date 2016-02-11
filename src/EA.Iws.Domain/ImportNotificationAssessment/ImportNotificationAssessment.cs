@@ -12,6 +12,7 @@
     using Prsd.Core.Domain;
     using Prsd.Core.Extensions;
     using Stateless;
+    using Transactions;
 
     public class ImportNotificationAssessment : Entity
     {
@@ -203,6 +204,8 @@
         public void Submit()
         {
             stateMachine.Fire(Trigger.Submit);
+
+            RaiseEvent(new ImportNotificationSubmittedEvent(this));
         }
 
         public void PaymentComplete(DateTime date)
