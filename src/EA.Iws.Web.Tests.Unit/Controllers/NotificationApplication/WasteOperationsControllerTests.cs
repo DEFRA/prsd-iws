@@ -1,13 +1,10 @@
 ﻿namespace EA.Iws.Web.Tests.Unit.Controllers.NotificationApplication
 {
     using System;
-    using System.Collections.Generic;
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Areas.NotificationApplication.Controllers;
     using Areas.NotificationApplication.ViewModels.WasteOperations;
-    using Core.OperationCodes;
-    using Core.TechnologyEmployed;
     using FakeItEasy;
     using Prsd.Core.Mediator;
     using Requests.TechnologyEmployed;
@@ -22,12 +19,6 @@
         {
             var mediator = A.Fake<IMediator>();
             wasteOperationsController = new WasteOperationsController(mediator);
-
-            A.CallTo(() => mediator.SendAsync(A<GetTechnologyEmployed>.Ignored))
-                .Returns(new TechnologyEmployedData
-                {
-                    OperationCodes = new List<OperationCode>()
-                });
 
             A.CallTo(() => mediator.SendAsync(A<SetTechnologyEmployed>.Ignored))
                 .Returns(Guid.Empty);

@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="AnnexProvided" xml:space="preserve">
-    <value>I'll provide my details in an annex when I submit my notification.</value>
+    <value>I'll provide my details in an annex when I submit my notification</value>
   </data>
   <data name="ChosenCodes" xml:space="preserve">
     <value>You have chosen the following operation codes:</value>
@@ -136,10 +136,10 @@
     <value>Details</value>
   </data>
   <data name="FurtherDetails" xml:space="preserve">
-    <value>Providing more information</value>
+    <value>Provide more information</value>
   </data>
   <data name="FurtherDetailsDescription" xml:space="preserve">
-    <value>If you'd like to include images or other files in your description, you can upload your own annex when you submit your notification. Otherwise, you can go into more detail by entering text here.</value>
+    <value>Enter more detail here, or upload supporting information as a separate annex when you submit your notification</value>
   </data>
   <data name="FurtherDetailsRequired" xml:space="preserve">
     <value>If you select that you are providing the details in a separate annex do not enter any details here</value>
@@ -148,10 +148,10 @@
     <value>Further details</value>
   </data>
   <data name="Header" xml:space="preserve">
-    <value>What is the technology employed?</value>
+    <value>Which technologies and processes were used to treat the waste on site?</value>
   </data>
   <data name="TechnologyDescription" xml:space="preserve">
-    <value>Give a brief description of the technologies and processes used to treat the waste on site</value>
+    <value>Give a brief description</value>
   </data>
   <data name="TechnologyHint" xml:space="preserve">
     <value>Please limit your answer to 70 characters or less</value>
