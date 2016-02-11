@@ -61,29 +61,47 @@ namespace EA.Iws.Web.Views.Shared {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to We, the Environment Agency, will process the information you provide so that we can:.
+        ///   Looks up a localized string similar to carry out research and development work on environmental issues.
         /// </summary>
-        public static string DataNotice1 {
+        public static string CarryOutResearch {
             get {
-                return ResourceManager.GetString("DataNotice1", resourceCulture);
+                return ResourceManager.GetString("CarryOutResearch", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to We may also process or release the information to:.
+        ///   Looks up a localized string similar to make sure you keep to the conditions of the licence, permit or registration.
         /// </summary>
-        public static string DataNotice2 {
+        public static string ConditionsOfLicence {
             get {
-                return ResourceManager.GetString("DataNotice2", resourceCulture);
+                return ResourceManager.GetString("ConditionsOfLicence", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to We may pass the information on to our agents or representatives to do these things for us..
+        ///   Looks up a localized string similar to consult the public, public organisations and other organisations (for example the Health and Safety Executive) on environmental issues.
         /// </summary>
-        public static string DataNotice3 {
+        public static string ConsultThePublic {
             get {
-                return ResourceManager.GetString("DataNotice3", resourceCulture);
+                return ResourceManager.GetString("ConsultThePublic", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to assess whether customers are satisfied with our service, and improve our service.
+        /// </summary>
+        public static string CustomerSatisfaction {
+            get {
+                return ResourceManager.GetString("CustomerSatisfaction", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to deal with your application.
+        /// </summary>
+        public static string DealWithApplication {
+            get {
+                return ResourceManager.GetString("DealWithApplication", resourceCulture);
             }
         }
         
@@ -97,92 +115,83 @@ namespace EA.Iws.Web.Views.Shared {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to offer you documents or services relating to environmental matters.
+        /// </summary>
+        public static string OfferYouDocuments {
+            get {
+                return ResourceManager.GetString("OfferYouDocuments", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to We may pass the information on to our agents or representatives to do these things for us..
+        /// </summary>
+        public static string PassInformationToAgents {
+            get {
+                return ResourceManager.GetString("PassInformationToAgents", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to How we will use your personal information.
         /// </summary>
-        public static string PersonalInfo {
+        public static string PersonalInfoHeading {
             get {
-                return ResourceManager.GetString("PersonalInfo", resourceCulture);
+                return ResourceManager.GetString("PersonalInfoHeading", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to deal with your application;.
+        ///   Looks up a localized string similar to We, the Environment Agency, will process the information you provide so that we can:.
         /// </summary>
-        public static string ProcessListItem1 {
+        public static string PersonalInfoIntro {
             get {
-                return ResourceManager.GetString("ProcessListItem1", resourceCulture);
+                return ResourceManager.GetString("PersonalInfoIntro", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to make sure you keep to the conditions of the licence, permit or registration; and.
+        ///   Looks up a localized string similar to prevent anyone from breaking environmental law, investigate cases where environmental law may have been broken, and take any action that is needed.
         /// </summary>
-        public static string ProcessListItem2 {
+        public static string PreventLawBreaking {
             get {
-                return ResourceManager.GetString("ProcessListItem2", resourceCulture);
+                return ResourceManager.GetString("PreventLawBreaking", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to process renewals..
+        ///   Looks up a localized string similar to process renewals.
         /// </summary>
-        public static string ProcessListItem3 {
+        public static string ProcessRenewals {
             get {
-                return ResourceManager.GetString("ProcessListItem3", resourceCulture);
+                return ResourceManager.GetString("ProcessRenewals", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to offer you documents or services relating to environmental matters;.
+        ///   Looks up a localized string similar to Please read carefully, accept and proceed..
         /// </summary>
-        public static string ReleaseInfoListItem1 {
+        public static string ReadCarefully {
             get {
-                return ResourceManager.GetString("ReleaseInfoListItem1", resourceCulture);
+                return ResourceManager.GetString("ReadCarefully", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to consult the public, public organisations and other organisations (for example, the Health and Safety Executive, local authorities, the emergency services, the Department for Environment, Food and Rural Affairs) on environmental issues;.
+        ///   Looks up a localized string similar to respond to information requests under the Freedom of Information Act 2000 and the Environmental Information Regulations 2004 (if the Data Protection Act allows).
         /// </summary>
-        public static string ReleaseInfoListItem2 {
+        public static string RequestsForInformation {
             get {
-                return ResourceManager.GetString("ReleaseInfoListItem2", resourceCulture);
+                return ResourceManager.GetString("RequestsForInformation", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to carry out research and development work on environmental issues;.
+        ///   Looks up a localized string similar to We may also process or release the information to:.
         /// </summary>
-        public static string ReleaseInfoListItem3 {
+        public static string WeMayAlsoHeading {
             get {
-                return ResourceManager.GetString("ReleaseInfoListItem3", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to prevent anyone from breaking environmental law, investigate cases where environmental law may have been broken, and take any action that is needed;.
-        /// </summary>
-        public static string ReleaseInfoListItem4 {
-            get {
-                return ResourceManager.GetString("ReleaseInfoListItem4", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to assess whether customers are satisfied with our service, and to improve our service; and.
-        /// </summary>
-        public static string ReleaseInfoListItem5 {
-            get {
-                return ResourceManager.GetString("ReleaseInfoListItem5", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to respond to requests for information under the Freedom of Information Act 2000 and the Environmental Information Regulations 2004 (if the Data Protection Act allows)..
-        /// </summary>
-        public static string ReleaseInfoListItem6 {
-            get {
-                return ResourceManager.GetString("ReleaseInfoListItem6", resourceCulture);
+                return ResourceManager.GetString("WeMayAlsoHeading", resourceCulture);
             }
         }
     }
