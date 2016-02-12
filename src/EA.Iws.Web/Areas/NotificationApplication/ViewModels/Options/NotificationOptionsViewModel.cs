@@ -109,8 +109,11 @@
         {
             get
             {
-                return NotificationStatus == NotificationStatus.Consented ||
-                       NotificationStatus == NotificationStatus.ConsentWithdrawn;
+                return (NotificationStatus == NotificationStatus.Consented ||
+                        NotificationStatus == NotificationStatus.ConsentWithdrawn)
+                       &&
+                       (FinancialGuaranteeStatus == FinancialGuaranteeStatus.Approved ||
+                        FinancialGuaranteeStatus == FinancialGuaranteeStatus.Released);
             }
         }
 
