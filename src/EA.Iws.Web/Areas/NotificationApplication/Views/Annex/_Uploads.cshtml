@@ -2,7 +2,20 @@
 @using Resource = EA.Iws.Web.Areas.NotificationApplication.Views.Annex.IndexResources
 
 <p>@Resource.Paragraph1</p>
-<p>@Resource.Paragraph2</p>
+
+<h2 class="heading-small">@Resource.Subtitle</h2>
+
+<ol class="list list-number">
+    <li>
+        @Resource.FirstListItemA
+        @Html.ActionLink(@Resource.PackLinkText, "GenerateNotificationDocument", "Home", new { id = Model.NotificationId, area = "NotificationApplication" },
+                new { data_track = "link", data_category = "Export notification", data_action = "Download" }) 
+        @Resource.FirstListItemB
+    </li>
+    <li>
+        @Resource.SecondListItem
+    </li>
+</ol>
 
 @using (Html.BeginForm("Index", "Annex", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
@@ -90,6 +103,18 @@
     </table>
 
     <div class="form-group">
+        @Resource.OptionsLinkPainTextA
+        @Html.ActionLink(@Resource.OptionsLinkText, "Index", "Options", new { id = Model.NotificationId, area = "NotificationApplication" }, null)
+        @Resource.OptionsLinkPainTextB
+    </div>
+
+
+    <div class="form-group">
         <button class="button" type="submit">@Constants.ContinueButtonText</button>
+    
+        <p>@Html.ActionLink("Go to notification options", "Index", "Options", new { id = Model.NotificationId, area = "NotificationApplication" }, null)</p>
+
+        @Html.ActionLink(@Resource.DownloadPackLinkText, "GenerateNotificationDocument", "Home", new { id = Model.NotificationId, area = "NotificationApplication" },
+                new { data_track = "link", data_category = "Export notification", data_action = "Download" })
     </div>
 }

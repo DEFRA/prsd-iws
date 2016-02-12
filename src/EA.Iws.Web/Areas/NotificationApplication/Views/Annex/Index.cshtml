@@ -17,10 +17,10 @@
         else
         {
             @Html.Partial("_NoAnnexesRequired")
+
+            <div>
+                @Html.ActionLink("Go to notification options", "Index", "Options", new { id = Model.NotificationId, area = "NotificationApplication" }, null)
+            </div>
         }
     </div>
-</div>
-
-<div>
-    @Html.ActionLink("Go to notification options", "Index", "Options", new { id = Model.NotificationId, area = "NotificationApplication" }, null)
 </div>

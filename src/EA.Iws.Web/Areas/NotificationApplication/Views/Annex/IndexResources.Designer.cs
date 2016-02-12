@@ -115,7 +115,34 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.Annex {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Upload your annexes.
+        ///   Looks up a localized string similar to Download your notification pack.
+        /// </summary>
+        public static string DownloadPackLinkText {
+            get {
+                return ResourceManager.GetString("DownloadPackLinkText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Check your .
+        /// </summary>
+        public static string FirstListItemA {
+            get {
+                return ResourceManager.GetString("FirstListItemA", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to  for the instructions which you&apos;ll need to reference your separate annexes.
+        /// </summary>
+        public static string FirstListItemB {
+            get {
+                return ResourceManager.GetString("FirstListItemB", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reference and upload your annexes.
         /// </summary>
         public static string MainHeading {
             get {
@@ -138,6 +165,42 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.Annex {
         public static string NoAnnexesRequired {
             get {
                 return ResourceManager.GetString("NoAnnexesRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You can also complete this step from the .
+        /// </summary>
+        public static string OptionsLinkPainTextA {
+            get {
+                return ResourceManager.GetString("OptionsLinkPainTextA", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to  page..
+        /// </summary>
+        public static string OptionsLinkPainTextB {
+            get {
+                return ResourceManager.GetString("OptionsLinkPainTextB", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to notification options.
+        /// </summary>
+        public static string OptionsLinkText {
+            get {
+                return ResourceManager.GetString("OptionsLinkText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to notification pack.
+        /// </summary>
+        public static string PackLinkText {
+            get {
+                return ResourceManager.GetString("PackLinkText", resourceCulture);
             }
         }
         
@@ -165,6 +228,24 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.Annex {
         public static string ProcessOfGeneration {
             get {
                 return ResourceManager.GetString("ProcessOfGeneration", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Insert your separate annexes in the right numerical order in amongst the system-generated annexes.
+        /// </summary>
+        public static string SecondListItem {
+            get {
+                return ResourceManager.GetString("SecondListItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to How to do this:.
+        /// </summary>
+        public static string Subtitle {
+            get {
+                return ResourceManager.GetString("Subtitle", resourceCulture);
             }
         }
         
