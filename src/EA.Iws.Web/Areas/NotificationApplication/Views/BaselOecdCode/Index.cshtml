@@ -57,35 +57,39 @@
     }
 
     $(function () {
-        $("#@Html.NameFor(m => m.SelectedCode)").on("change", function () {
-                if ($("#NotListed").is(":checked")) {
-                    setTableText("Not listed");
-                    return;
-                }
+        var codeDropdownSelector = "#@Html.NameFor(m => m.SelectedCode)";
+        
+        $(codeDropdownSelector).on("change", function () {
+            if ($("#NotListed").is(":checked")) {
+                setTableText("Not listed");
+                return;
+            }
 
-                var inputToFind = "#description-" + $(this).find(":selected").attr("value");
-                var description = $(inputToFind).val();
-                if (description === undefined) {
-                    setTableText("No code selected");
-                }
-                else {
-                    setTableText(description);
-                }
-            });
+            var inputToFind = "#description-" + $(this).find(":selected").attr("value");
+            var description = $(inputToFind).val();
+            if (description === undefined) {
+                setTableText("No code selected");
+            }
+            else {
+                setTableText(description);
+            }
+        });
 
-            $("#NotListed").change(function () {
-                if ($(this).is(":checked")) {
-                    $("#@Html.NameFor(m => m.SelectedCode)")
-                        .val(null)
-                        .trigger("change");
-                    
-                    // Put not listed in the table
-                    setTableText("Not listed");
-                }
-                else {
-                    setTableText("No code selected");
-                }
-            });
+        $("#NotListed").change(function () {
+            if ($(this).is(":checked")) {
+                $(codeDropdownSelector)
+                    .val(null)
+                    .trigger("change");
+
+                // Put not listed in the table
+                setTableText("Not listed");
+            }
+            else {
+                setTableText("No code selected");
+            }
+        });
+
+        $(codeDropdownSelector).trigger("change");
     });
     </script>
 }
