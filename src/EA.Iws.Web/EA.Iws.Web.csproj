@@ -1003,8 +1003,9 @@
     <Content Include="Views\Feedback\FeedbackSent.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\NotificationSwitcherViewModel.cshtml" />
     <Content Include="Views\NotificationSwitch\NotFound.cshtml" />
-    <Content Include="Views\Registration\_RegistrationTermsAndConditions.cshtml" />
     <Content Include="Views\Errors\VirusDetected.cshtml" />
+    <Content Include="Views\Shared\_IwsTermsAndConditions.cshtml" />
+    <Content Include="Views\NewUser\TermsAndConditions.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -2698,11 +2699,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>EditOrganisationDetailsResources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Views\Registration\RegistrationTermsAndConditionsResources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>RegistrationTermsAndConditionsResources.resx</DependentUpon>
-    </Compile>
     <Compile Include="Views\Registration\SelectOrganisationResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -3731,10 +3727,6 @@
     <EmbeddedResource Include="Views\Registration\EditOrganisationDetailsResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>EditOrganisationDetailsResources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Views\Registration\RegistrationTermsAndConditionsResources.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>RegistrationTermsAndConditionsResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\Registration\SelectOrganisationResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
