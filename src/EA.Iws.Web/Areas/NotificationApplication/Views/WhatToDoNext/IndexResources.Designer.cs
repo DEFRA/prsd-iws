@@ -133,7 +133,7 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.WhatToDoNext {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to upload your annexes.
+        ///   Looks up a localized string similar to reference and upload your annexes.
         /// </summary>
         public static string WhatToDoNextListItem4 {
             get {

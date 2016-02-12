@@ -135,14 +135,35 @@
   <data name="CompositionOfWaste" xml:space="preserve">
     <value>Composition of waste</value>
   </data>
+  <data name="DownloadPackLinkText" xml:space="preserve">
+    <value>Download your notification pack</value>
+  </data>
+  <data name="FirstListItemA" xml:space="preserve">
+    <value>Check your </value>
+  </data>
+  <data name="FirstListItemB" xml:space="preserve">
+    <value> for the instructions which you'll need to reference your separate annexes</value>
+  </data>
   <data name="MainHeading" xml:space="preserve">
-    <value>Upload your annexes</value>
+    <value>Reference and upload your annexes</value>
   </data>
   <data name="NoAnnexesButton" xml:space="preserve">
     <value>Continue</value>
   </data>
   <data name="NoAnnexesRequired" xml:space="preserve">
     <value>You have indicated that there are no annexes required for your notification.</value>
+  </data>
+  <data name="OptionsLinkPainTextA" xml:space="preserve">
+    <value>You can also complete this step from the </value>
+  </data>
+  <data name="OptionsLinkPainTextB" xml:space="preserve">
+    <value> page.</value>
+  </data>
+  <data name="OptionsLinkText" xml:space="preserve">
+    <value>notification options</value>
+  </data>
+  <data name="PackLinkText" xml:space="preserve">
+    <value>notification pack</value>
   </data>
   <data name="Paragraph1" xml:space="preserve">
     <value>Earlier in the notification process, you indicated that you'd like to provide more information separately. You can upload these files here as annexes.</value>
@@ -152,6 +173,12 @@
   </data>
   <data name="ProcessOfGeneration" xml:space="preserve">
     <value>Process of generation</value>
+  </data>
+  <data name="SecondListItem" xml:space="preserve">
+    <value>Insert your separate annexes in the right numerical order in amongst the system-generated annexes</value>
+  </data>
+  <data name="Subtitle" xml:space="preserve">
+    <value>How to do this:</value>
   </data>
   <data name="TechnologyEmployed" xml:space="preserve">
     <value>Technology employed</value>

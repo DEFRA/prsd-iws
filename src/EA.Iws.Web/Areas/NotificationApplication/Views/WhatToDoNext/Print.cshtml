@@ -29,7 +29,17 @@
             <details>
                 <summary><h2 class="summary heading-xsmall">@Resource.ReferenceAnnexesDisclosureTitle</h2></summary>
                 <div class="panel-indent">
-                    @Resource.ReferenceAnnexesDisclosureText
+                    <ol class="list list-number">
+                        <li>
+                            @Resource.FirstListItemA
+                            @Html.ActionLink(@Resource.PackLinkText, "GenerateNotificationDocument", "Home", new { id = Model.Id, area = "NotificationApplication" },
+                                new { data_track = "link", data_category = "Export notification", data_action = "Download" })
+                            @Resource.FirstListItemB
+                        </li>
+                        <li>
+                            @Resource.SecondListItem
+                        </li>
+                    </ol>
                 </div>
             </details>
         </div>
