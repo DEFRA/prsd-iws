@@ -54,7 +54,14 @@
     </div>
 
     <div class="form-group">
-        @Html.Partial("_RegistrationTermsAndConditions")
+        <details>
+            <summary>
+                <h2 class="summary heading-xsmall" data-track="disclosure" data-category="Terms and conditions" data-action="Read">@ApplicantRegistrationResources.TermsAndConditionsHeader</h2>
+            </summary>
+            <div class="panel-indent">
+                @Html.Partial("_IwsTermsAndConditions")
+            </div>
+        </details>
         @Html.Partial("_IwsStandardDataNotice")
     </div>
 

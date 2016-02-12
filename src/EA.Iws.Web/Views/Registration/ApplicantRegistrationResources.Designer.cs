@@ -286,6 +286,15 @@ namespace EA.Iws.Web.Views.Registration {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Read full terms and conditions of use.
+        /// </summary>
+        public static string TermsAndConditionsHeader {
+            get {
+                return ResourceManager.GetString("TermsAndConditionsHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Register for International Waste Shipping.
         /// </summary>
         public static string Title {

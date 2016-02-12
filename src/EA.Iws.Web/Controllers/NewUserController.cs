@@ -10,5 +10,12 @@
         {
             return View();
         }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public ActionResult TermsAndConditions()
+        {
+            return View();
+        }
     }
 }
