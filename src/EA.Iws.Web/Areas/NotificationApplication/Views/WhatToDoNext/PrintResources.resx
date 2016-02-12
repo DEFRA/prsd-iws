@@ -123,8 +123,17 @@
   <data name="DownloadLinkText" xml:space="preserve">
     <value>Download your notification</value>
   </data>
+  <data name="FirstListItemA" xml:space="preserve">
+    <value>Check your</value>
+  </data>
+  <data name="FirstListItemB" xml:space="preserve">
+    <value>for the instructions which you'll need to reference your separate annexes</value>
+  </data>
   <data name="NotificationOptionLinkText" xml:space="preserve">
     <value>Go to notification options</value>
+  </data>
+  <data name="PackLinkText" xml:space="preserve">
+    <value>notification pack</value>
   </data>
   <data name="ReferenceAnnexesDisclosureText" xml:space="preserve">
     <value>If the notifier and original producer aren't the same person, then both the original and new producers need to sign. However, this may not be practicable when there are several producers. Definitions around this practicability can be found in national legislation.</value>
@@ -134,6 +143,9 @@
   </data>
   <data name="ReferenceAnnexesTitle" xml:space="preserve">
     <value>You can also start to reference your annexes.</value>
+  </data>
+  <data name="SecondListItem" xml:space="preserve">
+    <value>Insert your separate annexes in the right numerical order in amongst the system-generated annexes</value>
   </data>
   <data name="TabTitle" xml:space="preserve">
     <value>Download notification</value>

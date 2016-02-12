@@ -79,11 +79,38 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.WhatToDoNext {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Check your.
+        /// </summary>
+        public static string FirstListItemA {
+            get {
+                return ResourceManager.GetString("FirstListItemA", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to for the instructions which you&apos;ll need to reference your separate annexes.
+        /// </summary>
+        public static string FirstListItemB {
+            get {
+                return ResourceManager.GetString("FirstListItemB", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Go to notification options.
         /// </summary>
         public static string NotificationOptionLinkText {
             get {
                 return ResourceManager.GetString("NotificationOptionLinkText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to notification pack.
+        /// </summary>
+        public static string PackLinkText {
+            get {
+                return ResourceManager.GetString("PackLinkText", resourceCulture);
             }
         }
         
@@ -111,6 +138,15 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.WhatToDoNext {
         public static string ReferenceAnnexesTitle {
             get {
                 return ResourceManager.GetString("ReferenceAnnexesTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Insert your separate annexes in the right numerical order in amongst the system-generated annexes.
+        /// </summary>
+        public static string SecondListItem {
+            get {
+                return ResourceManager.GetString("SecondListItem", resourceCulture);
             }
         }
         
