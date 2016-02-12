@@ -61,20 +61,20 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.Annex {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You&apos;ve successfully uploaded this annex.
+        ///   Looks up a localized string similar to You&apos;ve successfully uploaded these annexes.
         /// </summary>
-        public static string MainHeading {
+        public static string MainHeadingMultiple {
             get {
-                return ResourceManager.GetString("MainHeading", resourceCulture);
+                return ResourceManager.GetString("MainHeadingMultiple", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Thank you.
+        ///   Looks up a localized string similar to You&apos;ve successfully uploaded this annex.
         /// </summary>
-        public static string Thankyou {
+        public static string MainHeadingSingle {
             get {
-                return ResourceManager.GetString("Thankyou", resourceCulture);
+                return ResourceManager.GetString("MainHeadingSingle", resourceCulture);
             }
         }
         

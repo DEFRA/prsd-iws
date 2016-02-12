@@ -8,7 +8,15 @@
 
 <div class="grid-row form-group">
     <div class="column-two-thirds">
-        <h1 class="heading-large">@Resource.Thankyou <br/> @Resource.MainHeading</h1>
+        @if (Model.AnnexesUploaded > 1)
+        {
+            <h1 class="heading-large">@Resource.MainHeadingMultiple</h1>
+        }
+        else
+        {
+            <h1 class="heading-large">@Resource.MainHeadingSingle</h1>
+        }
+        
     </div>
 </div>
 

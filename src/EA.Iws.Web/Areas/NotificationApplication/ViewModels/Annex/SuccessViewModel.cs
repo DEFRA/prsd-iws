@@ -5,5 +5,7 @@
     public class SuccessViewModel
     {
         public Guid NotificationId { get; set; }
+
+        public int AnnexesUploaded { get; set; }
     }
 }

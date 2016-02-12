@@ -52,12 +52,15 @@
                 return RedirectToAction("Index");
             }
 
+            int numberOfAnnexes = 0;
+
             if (model.ProcessOfGeneration != null && model.ProcessOfGenerationStatus.IsRequired)
             {
                 await
                 mediator.SendAsync(
                     new SetProcessOfGenerationAnnex(new AnnexUpload(await fileReader.GetFileBytes(model.ProcessOfGeneration),
                         Path.GetExtension(model.ProcessOfGeneration.FileName), id)));
+                numberOfAnnexes++;
             }
 
             if (model.TechnologyEmployed != null && model.TechnologyEmployedStatus.IsRequired)
@@ -66,6 +69,7 @@
                     mediator.SendAsync(
                         new SetTechnologyEmployedAnnex(new AnnexUpload(await fileReader.GetFileBytes(model.TechnologyEmployed),
                             Path.GetExtension(model.TechnologyEmployed.FileName), id)));
+                numberOfAnnexes++;
             }
 
             if (model.Composition != null && model.WasteCompositionStatus.IsRequired)
@@ -74,20 +78,25 @@
                     mediator.SendAsync(
                         new SetWasteCompositionAnnex(new AnnexUpload(await fileReader.GetFileBytes(model.Composition),
                             Path.GetExtension(model.Composition.FileName), id)));
+                numberOfAnnexes++;
             }
 
             if (model.Composition != null || model.TechnologyEmployed != null || model.ProcessOfGeneration != null)
             {
-                return RedirectToAction("Success");
+                return RedirectToAction("Success", new { numberOfAnnexes });
             }
 
             return RedirectToAction("Index", "Options");
         }
 
         [HttpGet]
-        public ActionResult Success(Guid id)
+        public ActionResult Success(Guid id, int numberOfAnnexes)
         {
-            var model = new SuccessViewModel{ NotificationId = id };
+            var model = new SuccessViewModel
+            {
+                NotificationId = id,
+                AnnexesUploaded = numberOfAnnexes
+            };
 
             return View(model);
         }
