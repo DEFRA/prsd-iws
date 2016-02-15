@@ -151,7 +151,7 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.WhatToDoNext {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to post the notification.
+        ///   Looks up a localized string similar to post the notification to us.
         /// </summary>
         public static string WhatToDoNextListItem6 {
             get {
