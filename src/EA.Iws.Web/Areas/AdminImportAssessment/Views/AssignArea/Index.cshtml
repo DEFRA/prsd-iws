@@ -1,10 +1,11 @@
-﻿@model EA.Iws.Web.Areas.AdminExportAssessment.ViewModels.AssignArea.AssignAreaViewModel
+﻿@model EA.Iws.Web.Areas.AdminImportAssessment.ViewModels.AssignArea.AssignAreaViewModel
+@using Resourse = EA.Iws.Web.Areas.AdminImportAssessment.Views.AssignArea.IndexResources
 
 @{
-    ViewBag.Title = "Assign an area";
+    ViewBag.Title = @Resourse.TabTitle;
 }
 
-<h1 class="heading-large">Select the area for this notification</h1>
+<h1 class="heading-large">@Resourse.Heading</h1>
 
 @using (Html.BeginForm())
 {
@@ -24,5 +25,5 @@
 }
 
 @section menu {
-    @Html.Action("ExportNavigation", "Menu", new { area = "Admin", section = ExportNavigationSection.Assessment })
+    @Html.Action("ImportNavigation", "Menu", new { area = "Admin", section = ImportNavigationSection.Assessment })
 }

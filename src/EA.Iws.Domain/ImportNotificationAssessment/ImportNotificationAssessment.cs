@@ -57,6 +57,13 @@
 
         protected virtual ICollection<ImportNotificationStatusChange> StatusChangeCollection { get; private set; }
 
+        public Guid? LocalAreaId { get; private set; }
+
+        public void SetLocalAreaId(Guid id)
+        {
+            LocalAreaId = id;
+        }
+
         public IEnumerable<ImportNotificationStatusChange> StatusChanges
         {
             get { return StatusChangeCollection.ToSafeIEnumerable(); }
