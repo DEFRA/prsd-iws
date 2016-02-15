@@ -97,6 +97,15 @@ namespace EA.Iws.Web.Areas.AdminImportAssessment.Views.AccountManagement {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Go to Key dates.
+        /// </summary>
+        public static string KeyDatesLinkText {
+            get {
+                return ResourceManager.GetString("KeyDatesLinkText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Account management.
         /// </summary>
         public static string MainHeading {

@@ -129,6 +129,9 @@
   <data name="HistoryHeading" xml:space="preserve">
     <value>Payment history</value>
   </data>
+  <data name="KeyDatesLinkText" xml:space="preserve">
+    <value>Go to Key dates</value>
+  </data>
   <data name="MainHeading" xml:space="preserve">
     <value>Account management</value>
   </data>

@@ -99,6 +99,8 @@
     }
 </div>
 
+@Html.ActionLink(Resource.KeyDatesLinkText, "Index", "Keydates")
+
 @section menu {
     @Html.Action("ImportNavigation", "Menu", new { area = "Admin", section = ImportNavigationSection.Finance })
 }
