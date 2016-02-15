@@ -379,7 +379,6 @@
     <Content Include="Areas\AdminImportAssessment\Views\FinancialGuaranteeDates\ReceivedDate.cshtml" />
     <Content Include="Areas\AdminImportAssessment\Views\FinancialGuaranteeDates\ReceivedAndCompletedDate.cshtml" />
     <Content Include="Areas\AdminImportNotificationMovements\Views\Shipments\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\ExportNotification\CompetentAuthority.cshtml" />
     <Content Include="Areas\Admin\Views\ExportNotification\NotificationType.cshtml" />
     <Content Include="Areas\Admin\Views\ExportNotification\NewOrExistingNotification.cshtml" />
     <Content Include="Areas\Admin\Views\ExportNotification\EnterNumber.cshtml" />
@@ -1239,7 +1238,6 @@
     </Compile>
     <Compile Include="Areas\Admin\ViewModels\EntryOrExitPoint\SuccessViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\ExportNotifications\ExportNotificationsViewModel.cs" />
-    <Compile Include="Areas\Admin\ViewModels\ExportNotification\CompetentAuthorityChoiceViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\ExportNotification\EnterNumberViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\ExportNotification\NewOrExistingNotificationViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\ExportNotification\NotificationTypeViewModel.cs" />
@@ -1310,11 +1308,6 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>IndexResources.resx</DependentUpon>
-    </Compile>
-    <Compile Include="Areas\Admin\Views\ExportNotification\CompetentAuthorityResources.Designer.cs">
-      <DependentUpon>CompetentAuthorityResources.resx</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Areas\Admin\Views\ExportNotification\EnterNumberResources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -2910,10 +2903,6 @@
     <EmbeddedResource Include="Areas\Admin\Views\ExportNotifications\IndexResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Areas\Admin\Views\ExportNotification\CompetentAuthorityResources.resx">
-      <LastGenOutput>CompetentAuthorityResources.Designer.cs</LastGenOutput>
-      <Generator>PublicResXFileCodeGenerator</Generator>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\Admin\Views\ExportNotification\EnterNumberResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
