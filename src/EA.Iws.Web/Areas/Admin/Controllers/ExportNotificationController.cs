@@ -4,8 +4,8 @@
     using System.Web.Mvc;
     using Core.Notification;
     using Core.Shared;
-    using Prsd.Core.Extensions;
     using Prsd.Core.Mediator;
+    using Requests.Admin;
     using Requests.Notification;
     using ViewModels.ExportNotification;
 
@@ -23,40 +23,12 @@
         }
 
         [HttpGet]
-        public ActionResult CompetentAuthority()
+        public async Task<ActionResult> NotificationType()
         {
-            var model = new CompetentAuthorityChoiceViewModel();
-
-            return View(model);
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult CompetentAuthority(CompetentAuthorityChoiceViewModel model)
-        {
-            if (!ModelState.IsValid)
+            return View(new NotificationTypeViewModel
             {
-                return View(model);
-            }
-
-            TempData[SelectedCompetentAuthority] = model.CompetentAuthorities.SelectedValue.GetValueFromDisplayName<UKCompetentAuthority>();
-
-            return RedirectToAction("NotificationType");
-        }
-
-        [HttpGet]
-        public ActionResult NotificationType()
-        {
-            object competentAuthority;
-            if (TempData.TryGetValue(SelectedCompetentAuthority, out competentAuthority))
-            {
-                return View(new NotificationTypeViewModel
-                {
-                    CompetentAuthority = (UKCompetentAuthority)competentAuthority
-                });
-            }
-
-            return RedirectToAction("CompetentAuthority");
+                CompetentAuthority = await mediator.SendAsync(new GetUserCompetentAuthority())
+            });
         }
 
         [HttpPost]
