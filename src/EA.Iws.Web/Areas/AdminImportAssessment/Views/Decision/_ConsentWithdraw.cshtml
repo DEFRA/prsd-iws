@@ -1,4 +1,9 @@
-﻿@model EA.Iws.Web.Areas.AdminImportAssessment.ViewModels.Decision.DecisionViewModel
+﻿@using Resource = EA.Iws.Web.Areas.AdminImportAssessment.Views.Decision.IndexResources
+@model EA.Iws.Web.Areas.AdminImportAssessment.ViewModels.Decision.DecisionViewModel
+
+<div class="form-group">
+    @Resource.SingleDateWarning
+</div>
 
 <div class="form-group @Html.Gds().FormGroupClass(m => m.ConsentWithdrawnDate) @Html.Gds().FormGroupClass(m => m.ConsentWithdrawnDate.Day) @Html.Gds().FormGroupClass(m => m.ConsentWithdrawnDate.Month) @Html.Gds().FormGroupClass(m => m.ConsentWithdrawnDate.Year)">
     <label class="heading-medium">@Html.DisplayNameFor(m => m.ConsentWithdrawnDate)</label>

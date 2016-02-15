@@ -79,6 +79,15 @@ namespace EA.Iws.Web.Areas.AdminImportAssessment.Views.Decision {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Please note: you can&apos;t change these dates once you&apos;ve committed them to the system. Please make sure that you enter the right dates..
+        /// </summary>
+        public static string MultipleDateWarning {
+            get {
+                return ResourceManager.GetString("MultipleDateWarning", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to This notification is in a status of {0}..
         /// </summary>
         public static string NoAvailableDecisionsParagraphOne {
@@ -93,6 +102,15 @@ namespace EA.Iws.Web.Areas.AdminImportAssessment.Views.Decision {
         public static string NoAvailableDecisionsParagraphTwo {
             get {
                 return ResourceManager.GetString("NoAvailableDecisionsParagraphTwo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please note: you can&apos;t change this date once you&apos;ve committed it to the system. Please make sure that you enter the right date..
+        /// </summary>
+        public static string SingleDateWarning {
+            get {
+                return ResourceManager.GetString("SingleDateWarning", resourceCulture);
             }
         }
         
