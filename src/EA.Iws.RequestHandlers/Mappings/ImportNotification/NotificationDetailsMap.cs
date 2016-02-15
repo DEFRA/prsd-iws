@@ -14,6 +14,7 @@
                 ImportNotificationId = source.Id,
                 NotificationType = source.NotificationType,
                 NotificationNumber = source.NotificationNumber,
+                CompetentAuthority = source.CompetentAuthority,
                 Status = parameter
             };
         }

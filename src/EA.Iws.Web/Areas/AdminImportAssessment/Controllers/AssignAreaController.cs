@@ -1,11 +1,11 @@
-﻿namespace EA.Iws.Web.Areas.AdminExportAssessment.Controllers
+﻿namespace EA.Iws.Web.Areas.AdminImportAssessment.Controllers
 {
     using System;
     using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Prsd.Core.Mediator;
-    using Requests.Admin.NotificationAssessment;
+    using Requests.ImportNotificationAssessment;
     using Requests.NotificationAssessment;
     using ViewModels.AssignArea;
 
@@ -26,7 +26,7 @@
             {
                 NotificationId = id,
                 Areas = await GetAreas(),
-                LocalAreaId = await mediator.SendAsync(new GetExportNotificationLocalAreaId(id))
+                LocalAreaId = await mediator.SendAsync(new GetImportNotificationLocalAreaId(id))
             };
 
             return View(model);
@@ -43,9 +43,9 @@
                 return View(model);
             }
 
-            await mediator.SendAsync(new SetExportNotificationLocalAreaId(model.NotificationId, model.LocalAreaId.GetValueOrDefault()));
+            await mediator.SendAsync(new SetImportNotificationLocalAreaId(model.NotificationId, model.LocalAreaId.GetValueOrDefault()));
 
-            return RedirectToAction("Index", "KeyDates", new { id = model.NotificationId, area = "AdminExportAssessment" });
+            return RedirectToAction("Index", "KeyDates", new { id = model.NotificationId, area = "AdminImportAssessment" });
         }
 
         private async Task<SelectList> GetAreas()

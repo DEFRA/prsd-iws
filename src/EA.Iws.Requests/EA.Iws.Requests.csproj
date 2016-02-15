@@ -57,11 +57,11 @@
     <Compile Include="Admin\NotificationAssessment\AcceptChanges.cs" />
     <Compile Include="Admin\NotificationAssessment\GetDates.cs" />
     <Compile Include="Admin\NotificationAssessment\GetDecisionHistory.cs" />
-    <Compile Include="Admin\NotificationAssessment\GetNotificationLocalAreaId.cs" />
+    <Compile Include="Admin\NotificationAssessment\GetExportNotificationLocalAreaId.cs" />
     <Compile Include="Admin\NotificationAssessment\RejectChanges.cs" />
     <Compile Include="Admin\NotificationAssessment\SetCommencedDate.cs" />
     <Compile Include="Admin\NotificationAssessment\SetNotificationCompleteDate.cs" />
-    <Compile Include="Admin\NotificationAssessment\SetNotificationLocalAreaId.cs" />
+    <Compile Include="Admin\NotificationAssessment\SetExportNotificationLocalAreaId.cs" />
     <Compile Include="Admin\NotificationAssessment\SetNotificationTransmittedDate.cs" />
     <Compile Include="Admin\NotificationAssessment\SetNotificationAcknowledgedDate.cs" />
     <Compile Include="Admin\NotificationAssessment\SetNotificationReceivedDate.cs" />
@@ -117,10 +117,12 @@
     <Compile Include="ImportNotificationAssessment\FinancialGuarantee\SetCompletedDate.cs" />
     <Compile Include="ImportNotificationAssessment\FinancialGuarantee\SetReceivedAndCompletedDate.cs" />
     <Compile Include="ImportNotificationAssessment\GetImportNotificationAssessmentDecisionData.cs" />
+    <Compile Include="ImportNotificationAssessment\GetImportNotificationLocalAreaId.cs" />
     <Compile Include="ImportNotificationAssessment\ObjectToImportNotification.cs" />
     <Compile Include="ImportNotificationAssessment\SetAcknowlegedDate.cs" />
     <Compile Include="ImportNotificationAssessment\SetAssessmentStartedDate.cs" />
     <Compile Include="ImportNotificationAssessment\GetKeyDates.cs" />
+    <Compile Include="ImportNotificationAssessment\SetImportNotificationLocalAreaId.cs" />
     <Compile Include="ImportNotificationAssessment\SetNotificationCompletedDate.cs" />
     <Compile Include="ImportNotificationAssessment\SetReceivedDate.cs" />
     <Compile Include="ImportNotificationAssessment\Transactions\AddNotificationPayment.cs" />

@@ -2,6 +2,7 @@
 {
     using System;
     using ImportNotificationAssessment;
+    using Notification;
     using Shared;
 
     public class NotificationDetails
@@ -13,5 +14,7 @@
         public string NotificationNumber { get; set; }
 
         public ImportNotificationStatus Status { get; set; }
+
+        public UKCompetentAuthority CompetentAuthority { get; set; }
     }
 }

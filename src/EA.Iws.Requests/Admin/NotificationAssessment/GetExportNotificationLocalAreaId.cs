@@ -6,9 +6,9 @@
     using Prsd.Core.Mediator;
 
     [RequestAuthorization(ExportNotificationPermissions.CanReadExportNotificationAssessment)]
-    public class GetNotificationLocalAreaId : IRequest<Guid>
+    public class GetExportNotificationLocalAreaId : IRequest<Guid>
     {
-        public GetNotificationLocalAreaId(Guid notificationId)
+        public GetExportNotificationLocalAreaId(Guid notificationId)
         {
             NotificationId = notificationId;
         }
