@@ -5,6 +5,10 @@
     var boldLabelClass = "form-label-bold";
 }
 
+<div class="form-group">
+    @Resource.MultipleDateWarning
+</div>
+
 <div class="form-group @Html.Gds().FormGroupClass(m => m.ConsentGivenDate)  @Html.Gds().FormGroupClass(m => m.ConsentGivenDate.Day)  @Html.Gds().FormGroupClass(m => m.ConsentGivenDate.Month) @Html.Gds().FormGroupClass(m => m.ConsentGivenDate.Year)">
     <fieldset>
         <div class="form-date">

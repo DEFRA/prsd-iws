@@ -1037,6 +1037,11 @@
     <Compile Include="Areas\AdminExportAssessment\Controllers\MarkAsInterimController.cs" />
     <Compile Include="Areas\AdminExportAssessment\Controllers\OverviewController.cs" />
     <Compile Include="Areas\AdminExportAssessment\ViewModels\MarkAsInterimViewModel.cs" />
+    <Compile Include="Areas\AdminExportAssessment\Views\Decision\DecisionResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DecisionResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Areas\AdminImportAssessment\AdminImportAssessmentAreaRegistration.cs" />
     <Compile Include="Areas\AdminImportAssessment\Controllers\AccountManagementController.cs" />
     <Compile Include="Areas\AdminImportAssessment\Controllers\DecisionController.cs" />
@@ -2738,6 +2743,10 @@
     <Folder Include="Areas\FinancialGuarantee\Views\Shared\" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Areas\AdminExportAssessment\Views\Decision\DecisionResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>DecisionResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Areas\AdminImportAssessment\ViewModels\Decision\DecisionViewModelResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>DecisionViewModelResources.Designer.cs</LastGenOutput>

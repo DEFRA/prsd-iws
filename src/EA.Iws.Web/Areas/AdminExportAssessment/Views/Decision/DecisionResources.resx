@@ -117,25 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="DecisionHeading" xml:space="preserve">
-    <value>Decision</value>
-  </data>
-  <data name="MainHeading" xml:space="preserve">
-    <value>Notification assessment decision</value>
-  </data>
   <data name="MultipleDateWarning" xml:space="preserve">
     <value>Please note: you can't change these dates once you've committed them to the system. Please make sure that you enter the right dates.</value>
   </data>
-  <data name="NoAvailableDecisionsParagraphOne" xml:space="preserve">
-    <value>This notification is in a status of {0}.</value>
-  </data>
-  <data name="NoAvailableDecisionsParagraphTwo" xml:space="preserve">
-    <value>No further decisions are available.</value>
-  </data>
   <data name="SingleDateWarning" xml:space="preserve">
     <value>Please note: you can't change this date once you've committed it to the system. Please make sure that you enter the right date.</value>
-  </data>
-  <data name="Title" xml:space="preserve">
-    <value>Assessment decision</value>
   </data>
 </root>

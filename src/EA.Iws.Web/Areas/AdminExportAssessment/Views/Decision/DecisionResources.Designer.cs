@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace EA.Iws.Web.Areas.AdminImportAssessment.Views.Decision {
+namespace EA.Iws.Web.Areas.AdminExportAssessment.Views.Decision {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace EA.Iws.Web.Areas.AdminImportAssessment.Views.Decision {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class IndexResources {
+    public class DecisionResources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal IndexResources() {
+        internal DecisionResources() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace EA.Iws.Web.Areas.AdminImportAssessment.Views.Decision {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EA.Iws.Web.Areas.AdminImportAssessment.Views.Decision.IndexResources", typeof(IndexResources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EA.Iws.Web.Areas.AdminExportAssessment.Views.Decision.DecisionResources", typeof(DecisionResources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,24 +61,6 @@ namespace EA.Iws.Web.Areas.AdminImportAssessment.Views.Decision {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Decision.
-        /// </summary>
-        public static string DecisionHeading {
-            get {
-                return ResourceManager.GetString("DecisionHeading", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Notification assessment decision.
-        /// </summary>
-        public static string MainHeading {
-            get {
-                return ResourceManager.GetString("MainHeading", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Please note: you can&apos;t change these dates once you&apos;ve committed them to the system. Please make sure that you enter the right dates..
         /// </summary>
         public static string MultipleDateWarning {
@@ -88,38 +70,11 @@ namespace EA.Iws.Web.Areas.AdminImportAssessment.Views.Decision {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This notification is in a status of {0}..
-        /// </summary>
-        public static string NoAvailableDecisionsParagraphOne {
-            get {
-                return ResourceManager.GetString("NoAvailableDecisionsParagraphOne", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to No further decisions are available..
-        /// </summary>
-        public static string NoAvailableDecisionsParagraphTwo {
-            get {
-                return ResourceManager.GetString("NoAvailableDecisionsParagraphTwo", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Please note: you can&apos;t change this date once you&apos;ve committed it to the system. Please make sure that you enter the right date..
         /// </summary>
         public static string SingleDateWarning {
             get {
                 return ResourceManager.GetString("SingleDateWarning", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Assessment decision.
-        /// </summary>
-        public static string Title {
-            get {
-                return ResourceManager.GetString("Title", resourceCulture);
             }
         }
     }
