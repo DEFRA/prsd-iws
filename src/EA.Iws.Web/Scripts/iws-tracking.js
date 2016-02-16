@@ -14,6 +14,7 @@
 
 
     // Send ga event when a user clicks an element - for example, a checkbox
+    // or a link that goes to an external site
     $('[data-track="element"]').each(function() {
         $(this).click(function () {
             ga("send", "event", category($(this)), action($(this)), label($(this)), value($(this)));
@@ -34,7 +35,7 @@
         });
     });
 
-    // Send ga event when a user clicks a link to another page
+    // Send ga event when a user clicks a link to another internal page
     $('[data-track="link"]').each(function () {
         $(this).click(function (event) {
             event.preventDefault();

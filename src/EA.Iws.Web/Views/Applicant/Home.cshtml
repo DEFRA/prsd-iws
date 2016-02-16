@@ -10,9 +10,9 @@
         <h2 class="heading-medium">@HomeResources.HeaderStartNew</h2>
         <p>
             @HomeResources.Start <a href="https://www.gov.uk/importing-and-exporting-waste" target="_blank" title=@HomeResources.TitleSupportingInfo
-                                    data-track="link" data-category="Export notification" data-action="Supporting information">
-                @HomeResources.SupportingInfo
-            </a> @HomeResources.First
+                                    data-track="element" data-category="Export notification" data-action="Supporting information">@HomeResources.SupportingInfo</a>
+            @HomeResources.First
+
             <span class="visuallyhidden">@HomeResources.Message</span>
             <br/>
             @HomeResources.OrYouCan @Html.ActionLink(HomeResources.CopyNotification, "CompetentAuthority", "NewNotification", new { cfp = 1 },
