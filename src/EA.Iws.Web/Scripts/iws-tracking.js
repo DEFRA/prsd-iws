@@ -75,5 +75,5 @@ function label(element) {
 }
 
 function value(element) {
-    return element.data("value") ? element.data("value") : "";
+    return element.data("value") ? element.data("value") : "1";
 }
