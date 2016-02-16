@@ -24,6 +24,7 @@ $smokeTestUrl = New-Object System.Uri($url, "admin/smoke-test");
 $loginUrl = New-Object System.Uri($url, "account/login");
 $testEmailUrl = New-Object System.Uri($url, "admin/test-email");
 $testEmailSuccessUrl = New-Object System.Uri($url, "admin/test-email/success");
+$exitCode = 0;
 
 ### Ignore SSL errors ###
 
@@ -112,6 +113,7 @@ if ($testEmailPostResult.BaseResponse.ResponseUri -ne $testEmailSuccessUrl -and 
 ### Report success or failure ###
 if ($failedTests.Length -gt 0)
 {
+    $exitCode = -1;
     Write-Host "[FAILURE] : Smoke tests failed!";
 
     foreach ($failure in $failedTests)
@@ -128,3 +130,5 @@ if ($ignoreSslErrors)
 {
     [SSLValidator]::RestoreValidation();
 }
+
+exit $exitCode;
