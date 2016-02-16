@@ -21,20 +21,6 @@
         });
     });
 
-    // Send ga event when a user submits a form
-    $('[data-track="submit"]').each(function () {
-        $(this).submit(function (event) {
-            event.preventDefault();
-
-            var form = this;
-            ga("send", "event", category($(this)), action($(this)), label($(this)), value($(this)), {
-                hitCallback: createFunctionWithTimeout(function () {
-                    $(form).unbind("submit").submit();
-                })
-            });
-        });
-    });
-
     // Send ga event when a user clicks a link to another internal page
     $('[data-track="link"]').each(function () {
         $(this).click(function (event) {

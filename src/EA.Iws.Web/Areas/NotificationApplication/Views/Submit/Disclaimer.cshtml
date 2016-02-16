@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/_Layout.GovUK.Sections.cshtml";
 }
 
-@using (Html.BeginForm("Disclaimer", "Submit", FormMethod.Post, new { data_track = "submit", data_category = "Export notification", data_action = "Submit" }))
+@using (Html.BeginForm("Disclaimer", "Submit", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
     @Html.Gds().ValidationSummary()
@@ -30,7 +30,7 @@
         <fieldset>
             <div>@Html.Gds().ValidationMessageFor(m => m.TermsAndConditions)</div>
             <label class="block-label @Html.Gds().FormGroupClass(m => m.TermsAndConditions)">
-                @Html.CheckBoxFor(m => m.TermsAndConditions, new { data_track = "element", data_category = "Terms and conditions", data_action = "Accept" })
+                @Html.CheckBoxFor(m => m.TermsAndConditions)
                 @DisclaimerResources.Accept
             </label>
         </fieldset>

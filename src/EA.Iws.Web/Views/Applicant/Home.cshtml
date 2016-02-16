@@ -15,14 +15,12 @@
 
             <span class="visuallyhidden">@HomeResources.Message</span>
             <br/>
-            @HomeResources.OrYouCan @Html.ActionLink(HomeResources.CopyNotification, "CompetentAuthority", "NewNotification", new { cfp = 1 },
-                                   new { data_track = "link", data_category = "Export notification", data_action = "Create from previous" })
+            @HomeResources.OrYouCan @Html.ActionLink(HomeResources.CopyNotification, "CompetentAuthority", "NewNotification", new { cfp = 1 }, null)
             @HomeResources.FullStop
         </p>
 
         <p id="get-started" class="get-started group">
-            @Html.ActionLink(HomeResources.StartNewNotification, "CompetentAuthority", "NewNotification", null, 
-                new { @class = "button", data_track = "link", data_category = "Export notification", data_action = "Start new" })
+            @Html.ActionLink(HomeResources.StartNewNotification, "CompetentAuthority", "NewNotification", null,  null)
         </p>
         
     </div>
