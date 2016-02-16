@@ -54,6 +54,7 @@
                         s.Assessment.Status,
                         s.Notification.CompetentAuthority
                     })
+                .OrderBy(x => x.NotificationNumber)
                 .ToListAsync();
 
             return result.Select(s => ConvertToSearchResults(
