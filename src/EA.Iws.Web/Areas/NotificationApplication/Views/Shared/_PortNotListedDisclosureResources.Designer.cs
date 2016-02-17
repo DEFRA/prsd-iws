@@ -62,7 +62,7 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.Shared {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Contact us to add it. Phone the IWS team on 03708 506506 or email us at askshipments@environment-agency.gov.uk.
+        ///   Looks up a localized string similar to Contact us to add it. Phone the IWS team on 03708 506506 or email us at &lt;a href=&quot;mailto:askshipments@environment-agency.gov.uk&quot;&gt;askshipments@environment-agency.gov.uk&lt;/a&gt;..
         /// </summary>
         public static string PortNotListedText {
             get {
