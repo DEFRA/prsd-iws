@@ -39,7 +39,9 @@
                     Exporter = exporter
                 };
 
-            var data = await query.ToArrayAsync();
+            var data = await query
+                .OrderBy(x => x.Notification.NotificationNumber)
+                .ToListAsync();
 
             return data.Select(x => new ImportNotificationSearchResult(x.Notification.Id,
                 x.Notification.NotificationNumber,
