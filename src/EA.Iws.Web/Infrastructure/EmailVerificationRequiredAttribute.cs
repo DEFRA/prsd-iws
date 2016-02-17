@@ -5,7 +5,7 @@
     using System.Security.Claims;
     using System.Web.Mvc;
     using System.Web.Routing;
-    using Thinktecture.IdentityModel.Client;
+    using IdentityModel;
     using AuthorizationContext = System.Web.Mvc.AuthorizationContext;
 
     public class EmailVerificationRequiredAttribute : AuthorizeAttribute

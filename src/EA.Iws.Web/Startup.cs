@@ -10,10 +10,10 @@ namespace EA.Iws.Web
     using System.Web.Mvc;
     using Autofac;
     using Autofac.Integration.Mvc;
+    using IdentityModel;
     using Infrastructure;
     using Owin;
     using Services;
-    using Thinktecture.IdentityModel.Client;
 
     public partial class Startup
     {
