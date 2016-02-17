@@ -1,10 +1,10 @@
 ﻿namespace EA.Iws.Api.IdSrv
 {
+    using IdentityServer3.Core.Configuration;
+    using IdentityServer3.Core.Services;
+    using IdentityServer3.Core.Services.InMemory;
+    using IdentityServer3.EntityFramework;
     using Services;
-    using Thinktecture.IdentityServer.Core.Configuration;
-    using Thinktecture.IdentityServer.Core.Services;
-    using Thinktecture.IdentityServer.Core.Services.InMemory;
-    using Thinktecture.IdentityServer.EntityFramework;
 
     internal static class Factory
     {

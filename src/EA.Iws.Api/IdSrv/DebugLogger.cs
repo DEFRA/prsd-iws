@@ -1,29 +1,27 @@
 ﻿namespace EA.Iws.Api.IdSrv
 {
     using System.Diagnostics;
-    using Thinktecture.IdentityServer.Core.Logging;
+    using System.IO;
+    using Serilog.Core;
+    using Serilog.Events;
+    using Serilog.Formatting.Display;
 
-    internal class DebugLogger : ILogProvider
+    internal class DebugLogger : ILogEventSink
     {
-        public ILog GetLogger(string name)
+        private readonly MessageTemplateTextFormatter formatter;
+
+        public DebugLogger(MessageTemplateTextFormatter formatter)
         {
-            return new DebugLog();
+            this.formatter = formatter;
         }
 
-        public class DebugLog : ILog
+        public void Emit(LogEvent logEvent)
         {
-            public bool Log(LogLevel logLevel, System.Func<string> messageFunc, System.Exception exception = null)
-            {
-                if (messageFunc != null)
-                {
-                    Debug.WriteLine(messageFunc());
-                }
-                if (exception != null)
-                {
-                    Debug.WriteLine(exception.ToString());
-                }
-                return true;
-            }
+            var sr = new StringWriter();
+            formatter.Format(logEvent, sr);
+            var text = sr.ToString().Trim();
+
+            Debug.WriteLine(text);
         }
     }
 }

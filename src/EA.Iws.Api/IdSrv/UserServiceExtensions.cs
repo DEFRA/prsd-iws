@@ -4,6 +4,8 @@
     using DataAccess;
     using DataAccess.Identity;
     using Identity;
+    using IdentityServer3.Core.Configuration;
+    using IdentityServer3.Core.Services;
     using Microsoft.AspNet.Identity;
     using Microsoft.Owin.Security;
     using Microsoft.Owin.Security.DataProtection;
@@ -11,8 +13,6 @@
     using Prsd.Core.Domain;
     using RequestHandlers.Authorization;
     using Services;
-    using Thinktecture.IdentityServer.Core.Configuration;
-    using Thinktecture.IdentityServer.Core.Services;
 
     public static class UserServiceExtensions
     {
