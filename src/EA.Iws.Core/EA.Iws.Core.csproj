@@ -98,6 +98,7 @@
     <Compile Include="ImportMovement\ImportMovementReceiptData.cs" />
     <Compile Include="ImportMovement\MovementRejectionReasons.cs" />
     <Compile Include="ImportMovement\ImportMovementStatus.cs" />
+    <Compile Include="ImportNotificationAssessment\ConsultationData.cs" />
     <Compile Include="ImportNotificationAssessment\FinancialGuarantee\AvailableDecisionsData.cs" />
     <Compile Include="ImportNotificationAssessment\FinancialGuarantee\ImportFinancialGuaranteeStatus.cs" />
     <Compile Include="ImportNotificationAssessment\FinancialGuarantee\ReceivedAndCompletedDateData.cs" />

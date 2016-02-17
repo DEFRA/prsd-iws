@@ -119,12 +119,12 @@
     <Compile Include="ImportNotificationAssessment\FinancialGuarantee\SetCompletedDate.cs" />
     <Compile Include="ImportNotificationAssessment\FinancialGuarantee\SetReceivedAndCompletedDate.cs" />
     <Compile Include="ImportNotificationAssessment\GetImportNotificationAssessmentDecisionData.cs" />
-    <Compile Include="ImportNotificationAssessment\GetImportNotificationLocalAreaId.cs" />
+    <Compile Include="ImportNotificationAssessment\GetImportNotificationConsultation.cs" />
     <Compile Include="ImportNotificationAssessment\ObjectToImportNotification.cs" />
     <Compile Include="ImportNotificationAssessment\SetAcknowlegedDate.cs" />
     <Compile Include="ImportNotificationAssessment\SetAssessmentStartedDate.cs" />
     <Compile Include="ImportNotificationAssessment\GetKeyDates.cs" />
-    <Compile Include="ImportNotificationAssessment\SetImportNotificationLocalAreaId.cs" />
+    <Compile Include="ImportNotificationAssessment\SetImportNotificationConsultation.cs" />
     <Compile Include="ImportNotificationAssessment\SetNotificationCompletedDate.cs" />
     <Compile Include="ImportNotificationAssessment\SetReceivedDate.cs" />
     <Compile Include="ImportNotificationAssessment\Transactions\AddNotificationPayment.cs" />

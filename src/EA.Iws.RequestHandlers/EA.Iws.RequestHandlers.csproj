@@ -170,12 +170,12 @@
     <Compile Include="ImportNotificationAssessment\FinancialGuarantee\SetCompletedDateHandler.cs" />
     <Compile Include="ImportNotificationAssessment\FinancialGuarantee\SetReceivedAndCompletedDateHandler.cs" />
     <Compile Include="ImportNotificationAssessment\GetImportNotificationAssessmentDecisionDataHandler.cs" />
-    <Compile Include="ImportNotificationAssessment\GetImportNotificationLocalAreaIdHandler.cs" />
+    <Compile Include="ImportNotificationAssessment\GetImportNotificationConsultationHandler.cs" />
     <Compile Include="ImportNotificationAssessment\GetKeyDatesHandler.cs" />
     <Compile Include="ImportNotificationAssessment\ObjectToImportNotificationHandler.cs" />
     <Compile Include="ImportNotificationAssessment\SetAcknowlegedDateHandler.cs" />
     <Compile Include="ImportNotificationAssessment\SetAssessmentStartedDateHandler.cs" />
-    <Compile Include="ImportNotificationAssessment\SetImportNotificationLocalAreaIdHandler.cs" />
+    <Compile Include="ImportNotificationAssessment\SetImportNotificationConsultationHandler.cs" />
     <Compile Include="ImportNotificationAssessment\SetNotificationCompletedDateHandler.cs" />
     <Compile Include="ImportNotificationAssessment\SetReceivedDateHandler.cs" />
     <Compile Include="ImportNotificationAssessment\Transactions\AddNotificationPaymentHandler.cs" />
@@ -311,6 +311,7 @@
     <Compile Include="Mappings\ExportNotificationOwnerDisplayMap.cs" />
     <Compile Include="Mappings\ImportMovement\MovementDataMap.cs" />
     <Compile Include="Mappings\ImportMovement\MovementTableDataMap.cs" />
+    <Compile Include="Mappings\ImportNotificationAssessment\ConsultationMap.cs" />
     <Compile Include="Mappings\ImportNotificationAssessment\ImportNotificationTransactionMap.cs" />
     <Compile Include="Mappings\ImportNotification\AddressMap.cs" />
     <Compile Include="Mappings\ImportNotification\ContactMap.cs" />
