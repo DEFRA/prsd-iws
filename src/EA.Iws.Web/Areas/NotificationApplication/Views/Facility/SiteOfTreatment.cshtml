@@ -69,7 +69,12 @@
 else
 {
     <p>@string.Format(SiteOfTreatmentResources.NoFacility, (Model.NotificationType == NotificationType.Recovery ? "recovered" : "disposed"))</p>
-    <p>@Html.ActionLink(SiteOfTreatmentResources.BackToFacilities, "List", "Facility", new { id = Model.NotificationId, backToOverview = ViewBag.BackToOverview }, null)</p>
+    <p>@Html.ActionLink(Model.NotificationType == NotificationType.Recovery 
+          ? SiteOfTreatmentResources.BackToRecoveryFacilities 
+          : SiteOfTreatmentResources.BackToDisposalFacilities, 
+          "List", 
+          "Facility", 
+          new { id = Model.NotificationId, backToOverview = ViewBag.BackToOverview }, null)</p>
     if (ViewBag.BackToOverview)
     {
         @Html.ActionLink(Constants.ContinueButtonText, "Index", "Home", new { id = Model.NotificationId }, new { @class = "button" })

@@ -133,10 +133,10 @@
     <value>Please enter your first name</value>
   </data>
   <data name="GoBackToMyAccount" xml:space="preserve">
-    <value>Go back to My account</value>
+    <value>Go to your homepage</value>
   </data>
   <data name="Header" xml:space="preserve">
-    <value>Your sign in details</value>
+    <value>Your sign-in details</value>
   </data>
   <data name="LastName" xml:space="preserve">
     <value>Last name</value>

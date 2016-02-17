@@ -106,7 +106,7 @@ namespace EA.Iws.Web.Views.Registration {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Go back to My account.
+        ///   Looks up a localized string similar to Go to your homepage.
         /// </summary>
         public static string GoBackToMyAccount {
             get {
@@ -115,7 +115,7 @@ namespace EA.Iws.Web.Views.Registration {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Your sign in details.
+        ///   Looks up a localized string similar to Your sign-in details.
         /// </summary>
         public static string Header {
             get {

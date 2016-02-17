@@ -61,7 +61,7 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.Producer {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Back to producers.
+        ///   Looks up a localized string similar to Go to waste generator - producers.
         /// </summary>
         public static string BackToProducers {
             get {
