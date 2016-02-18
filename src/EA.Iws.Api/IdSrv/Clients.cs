@@ -1,8 +1,9 @@
 ﻿namespace EA.Iws.Api.IdSrv
 {
     using System.Collections.Generic;
+    using IdentityServer3.Core.Models;
     using Services;
-    using Thinktecture.IdentityServer.Core.Models;
+    using Client = IdentityServer3.Core.Models.Client;
 
     internal static class Clients
     {
@@ -17,10 +18,11 @@
                     Enabled = true,
                     AccessTokenType = AccessTokenType.Reference,
                     Flow = Flows.ResourceOwner,
-                    ClientSecrets = new List<ClientSecret>
+                    ClientSecrets = new List<Secret>
                     {
-                        new ClientSecret(config.ApiSecret.Sha256())
-                    }
+                        new Secret(config.ApiSecret.Sha256())
+                    },
+                    AllowAccessToAllScopes = true
                 }
             };
         }

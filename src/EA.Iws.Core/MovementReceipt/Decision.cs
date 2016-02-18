@@ -4,9 +4,9 @@
 
     public enum Decision
     {
-        [Display(Name="Accepted")]
+        [Display(Name = "Accepted")]
         Accepted = 1,
-        [Display(Name="Rejected")]
+        [Display(Name = "Rejected")]
         Rejected = 2
     }
 }

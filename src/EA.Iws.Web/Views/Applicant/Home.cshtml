@@ -9,18 +9,22 @@
 
         <h2 class="heading-medium">@HomeResources.HeaderStartNew</h2>
         <p>
-            @HomeResources.Start <a href="https://www.gov.uk/importing-and-exporting-waste" target="_blank" title=@HomeResources.TitleSupportingInfo
-                                    data-track="element" data-category="Export notification" data-action="Supporting information">@HomeResources.SupportingInfo</a>
+            @HomeResources.Start <a href="https://www.gov.uk/importing-and-exporting-waste" 
+                                    target="_blank" 
+                                    title="@HomeResources.TitleSupportingInfo"
+                                    rel="external"
+                                    data-track="element" 
+                                    data-category="Export notification" 
+                                    data-action="Supporting information">@HomeResources.SupportingInfo</a>
             @HomeResources.First
 
             <span class="visuallyhidden">@HomeResources.Message</span>
             <br/>
-            @HomeResources.OrYouCan @Html.ActionLink(HomeResources.CopyNotification, "CompetentAuthority", "NewNotification", new { cfp = 1 }, null)
-            @HomeResources.FullStop
+            @HomeResources.OrYouCan @Html.ActionLink(HomeResources.CopyNotification, "CompetentAuthority", "NewNotification", new { cfp = 1 }, null)@HomeResources.FullStop
         </p>
 
         <p id="get-started" class="get-started group">
-            @Html.ActionLink(HomeResources.StartNewNotification, "CompetentAuthority", "NewNotification", null,  null)
+            @Html.ActionLink(HomeResources.StartNewNotification, "CompetentAuthority", "NewNotification", null, new { @class = "button"})
         </p>
         
     </div>

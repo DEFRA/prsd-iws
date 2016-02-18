@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="DisposalMessage" xml:space="preserve">
-    <value>If you are shipping for disposal then we advise you to contact your relevant competent authority before completing your notification application.</value>
+    <value>If you're shipping for disposal, we advise you to contact your relevant competent authority before completing your notification application.</value>
   </data>
   <data name="Header" xml:space="preserve">
     <value>What type of waste shipment notification are you applying for?</value>

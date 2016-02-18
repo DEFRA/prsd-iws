@@ -47,7 +47,6 @@
 
         public override string ToString()
         {
-
             var address = StreetOrSuburb + Delimiter;
 
             if (!string.IsNullOrWhiteSpace(Address2))

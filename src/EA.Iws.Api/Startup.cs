@@ -11,14 +11,15 @@ namespace EA.Iws.Api
     using Autofac;
     using Autofac.Integration.WebApi;
     using Elmah.Contrib.WebApi;
+    using IdentityServer3.AccessTokenValidation;
+    using IdentityServer3.Core.Configuration;
     using IdSrv;
     using Microsoft.Owin.Security.DataProtection;
     using Newtonsoft.Json.Serialization;
     using Owin;
+    using Serilog;
+    using Serilog.Formatting.Display;
     using Services;
-    using Thinktecture.IdentityServer.AccessTokenValidation;
-    using Thinktecture.IdentityServer.Core.Configuration;
-    using Thinktecture.IdentityServer.Core.Logging;
 
     public class Startup
     {
@@ -27,10 +28,15 @@ namespace EA.Iws.Api
             var config = new HttpConfiguration();
             var configurationService = new ConfigurationService();
 #if DEBUG
-            LogProvider.SetCurrentLogProvider(new DebugLogger());
+            Log.Logger = new LoggerConfiguration()
+                .WriteTo.Sink(new DebugLogger(new MessageTemplateTextFormatter("{Message}{NewLine}{Exception}", null)))
+                .CreateLogger();
+
             config.Services.Add(typeof(IExceptionLogger), new DebugExceptionLogger());
 #else
-            LogProvider.SetCurrentLogProvider(new ElmahLogger());
+            Log.Logger = new LoggerConfiguration()
+                .WriteTo.Sink(new ElmahLogger())
+                .CreateLogger();
 #endif
             // Autofac
             var builder = new ContainerBuilder();
@@ -54,7 +60,8 @@ namespace EA.Iws.Api
             app.UseIdentityServerBearerTokenAuthentication(new IdentityServerBearerTokenAuthenticationOptions
             {
                 Authority = configurationService.CurrentConfiguration.SiteRoot,
-                RequiredScopes = new[] { "api1" }
+                RequiredScopes = new[] { "api1" },
+                ValidationMode = ValidationMode.ValidationEndpoint
             });
 
             app.UseAutofacMiddleware(container);

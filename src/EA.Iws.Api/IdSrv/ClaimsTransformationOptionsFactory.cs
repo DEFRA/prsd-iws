@@ -6,7 +6,7 @@
     using Autofac;
     using Autofac.Integration.Owin;
     using Identity;
-    using Thinktecture.IdentityModel.Owin;
+    using IdentityModel.Owin.ClaimsTransformation;
 
     internal static class ClaimsTransformationOptionsFactory
     {

@@ -10,45 +10,47 @@
 
 @using (Html.BeginForm("EditOrganisationDetails", "Registration"))
 {
-    @Html.AntiForgeryToken()
-    @Html.Gds().ValidationSummary()
-    @Html.HiddenFor(m => m.OrganisationId)
-    @Html.HiddenFor(m => m.Name)
+    <div class="text">
+        @Html.AntiForgeryToken()
+        @Html.Gds().ValidationSummary()
+        @Html.HiddenFor(m => m.OrganisationId)
+        @Html.HiddenFor(m => m.Name)
 
-    <div class="form-group @Html.Gds().FormGroupClass(m => m.Address1)">
-        @Html.Gds().LabelFor(m => m.Address1)
-        @Html.Gds().ValidationMessageFor(m => m.Address1)
-        @Html.Gds().TextBoxFor(m => m.Address1)
-    </div>
-    <div class="form-group @Html.Gds().FormGroupClass(m => m.Address2)">
-        @Html.Gds().LabelFor(m => m.Address2)
-        @Html.Gds().ValidationMessageFor(m => m.Address2)
-        @Html.Gds().TextBoxFor(m => m.Address2)
-    </div>
-    <div class="form-group @Html.Gds().FormGroupClass(m => m.TownOrCity)">
-        @Html.Gds().LabelFor(m => m.TownOrCity)
-        @Html.Gds().ValidationMessageFor(m => m.TownOrCity)
-        @Html.Gds().TextBoxFor(m => m.TownOrCity)
-    </div>
-    <div class="form-group @Html.Gds().FormGroupClass(m => m.Region)">
-        @Html.Gds().LabelFor(m => m.Region)
-        @Html.Gds().ValidationMessageFor(m => m.Region)
-        @Html.Gds().TextBoxFor(m => m.Region)
-    </div>
-    <div class="form-group @Html.Gds().FormGroupClass(m => m.Postcode)">
-        @Html.Gds().LabelFor(m => m.Postcode, EditOrganisationDetailsResources.PostcodeOptional)
-        @Html.Gds().ValidationMessageFor(m => m.Postcode)
-        @Html.Gds().TextBoxFor(m => m.Postcode)
-    </div>
-    <div class="form-group @Html.Gds().FormGroupClass(m => m.CountryId)">
-        @Html.Gds().LabelFor(m => m.CountryId)
-        @Html.Gds().ValidationMessageFor(m => m.CountryId)
-        @Html.Gds().DropDownListFor(m => m.CountryId, (SelectList)ViewBag.Countries, new { data_select_box = "true" })
-        @Html.HiddenFor(m => m.DefaultCountryId)
-    </div>
+        <div class="form-group @Html.Gds().FormGroupClass(m => m.Address1)">
+            @Html.Gds().LabelFor(m => m.Address1)
+            @Html.Gds().ValidationMessageFor(m => m.Address1)
+            @Html.Gds().TextBoxFor(m => m.Address1)
+        </div>
+        <div class="form-group @Html.Gds().FormGroupClass(m => m.Address2)">
+            @Html.Gds().LabelFor(m => m.Address2)
+            @Html.Gds().ValidationMessageFor(m => m.Address2)
+            @Html.Gds().TextBoxFor(m => m.Address2)
+        </div>
+        <div class="form-group @Html.Gds().FormGroupClass(m => m.TownOrCity)">
+            @Html.Gds().LabelFor(m => m.TownOrCity)
+            @Html.Gds().ValidationMessageFor(m => m.TownOrCity)
+            @Html.Gds().TextBoxFor(m => m.TownOrCity)
+        </div>
+        <div class="form-group @Html.Gds().FormGroupClass(m => m.Region)">
+            @Html.Gds().LabelFor(m => m.Region)
+            @Html.Gds().ValidationMessageFor(m => m.Region)
+            @Html.Gds().TextBoxFor(m => m.Region)
+        </div>
+        <div class="form-group @Html.Gds().FormGroupClass(m => m.Postcode)">
+            @Html.Gds().LabelFor(m => m.Postcode, EditOrganisationDetailsResources.PostcodeOptional)
+            @Html.Gds().ValidationMessageFor(m => m.Postcode)
+            @Html.Gds().TextBoxFor(m => m.Postcode)
+        </div>
+        <div class="form-group @Html.Gds().FormGroupClass(m => m.CountryId)">
+            @Html.Gds().LabelFor(m => m.CountryId)
+            @Html.Gds().ValidationMessageFor(m => m.CountryId)
+            @Html.Gds().DropDownListFor(m => m.CountryId, (SelectList)ViewBag.Countries, new { data_select_box = "true" })
+            @Html.HiddenFor(m => m.DefaultCountryId)
+        </div>
 
-    <div class="form-group">
-        <input type="submit" class="button" value="@EditOrganisationDetailsResources.Update"/>
+        <div class="form-group">
+            <input type="submit" class="button" value="@EditOrganisationDetailsResources.Update" />
+        </div>
+        <p>@Html.ActionLink(EditOrganisationDetailsResources.GoBackToMyAccount, "Home", "Applicant", new { id = User.GetUserId(), area = string.Empty }, null)</p>
     </div>
-    <p>@Html.ActionLink(EditOrganisationDetailsResources.GoBackToMyAccount, "Home", "Applicant", new { id = User.GetUserId(), area = string.Empty }, null)</p>
 }

@@ -93,10 +93,14 @@
                 <nav>
                     @Html.ActionLink(@Resource.StartNewNotification, "CompetentAuthority", "NewNotification", new { area = string.Empty }, null)
                     @Html.ActionLink(@Resource.CopyFromPrevious, "CompetentAuthority", "NewNotification", new { cfp = 1, area = string.Empty }, null)
-                    <a href="https://www.gov.uk/importing-and-exporting-waste" target="_blank" id="supportingInfo-link" title=@Resource.TitleSupportingInfo
-                       data-track="element" data-category="Export notification" data-action="Supporting information">
-                        @Resource.SupportingInfoLink
-                    </a>
+                    <a href="https://www.gov.uk/importing-and-exporting-waste"
+                       target="_blank"
+                       id="supportingInfo-link" 
+                       title=@Resource.TitleSupportingInfo
+                       rel="external"
+                       data-track="element"
+                       data-category="Export notification" 
+                       data-action="Supporting information">@Resource.SupportingInfoLink</a>
                     <span class="visuallyhidden">@Resource.SupportingInfoMessage</span>
                 </nav>
             </div>

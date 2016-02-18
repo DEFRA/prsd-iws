@@ -51,7 +51,7 @@
                 ImporterName = n.importer,
                 WasteName = n.waste.ChemicalCompositionType == ChemicalComposition.Other ?
                 n.waste.ChemicalCompositionName : EnumHelper.GetShortName(n.waste.ChemicalCompositionType)
-            }).ToArray();
+            }).OrderBy(x => x.Number).ToArray();
         }
     }
 }

@@ -6,16 +6,19 @@
     using Prsd.Core.Mediator;
 
     [RequestAuthorization(ImportNotificationPermissions.CanEditImportNotificationAssessment)]
-    public class SetImportNotificationLocalAreaId : IRequest<Guid>
+    public class SetImportNotificationConsultation : IRequest<Guid>
     {
-        public SetImportNotificationLocalAreaId(Guid notificationId, Guid localAreaId)
+        public SetImportNotificationConsultation(Guid notificationId, Guid localAreaId, DateTime? receivedDate)
         {
             LocalAreaId = localAreaId;
             NotificationId = notificationId;
+            ReceivedDate = receivedDate;
         }
 
         public Guid LocalAreaId { get; private set; }
 
         public Guid NotificationId { get; private set; }
+
+        public DateTime? ReceivedDate { get; private set; }
     }
 }

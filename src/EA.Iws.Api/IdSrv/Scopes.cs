@@ -1,7 +1,7 @@
 ﻿namespace EA.Iws.Api.IdSrv
 {
     using System.Collections.Generic;
-    using Thinktecture.IdentityServer.Core.Models;
+    using IdentityServer3.Core.Models;
 
     internal static class Scopes
     {

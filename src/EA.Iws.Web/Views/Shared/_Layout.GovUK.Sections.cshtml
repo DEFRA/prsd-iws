@@ -30,25 +30,23 @@
 }
 
 @section footer_top {
-    <div class="footer-categories">
-        @Html.Partial("_IwsHelpline")
-        <hr />
-    </div>
+    @Html.Partial("_IwsHelpline")
+    <hr />
 }
 
 @section footer_support_links {
     <ul>
         <li>
-            <a href="https://www.gov.uk/help" target="_blank">Help</a>
+            <a href="https://www.gov.uk/help">Help</a>
         </li>
         <li>
-            @Html.ActionLink("Feedback", "Index", "Feedback", new { area = string.Empty }, new { target = "_blank" })
+            @Html.ActionLink("Feedback", "Index", "Feedback", new { area = string.Empty }, null)
         </li>
         <li>
-            @Html.ActionLink("Cookies", "Cookies", "NewUser", new { area = string.Empty }, new { target = "_blank" })
+            @Html.ActionLink("Cookies", "Cookies", "NewUser", new { area = string.Empty }, null)
         </li>
         <li>
-            @Html.ActionLink("Terms and conditions", "TermsAndConditions", "NewUser", new { area = string.Empty }, new { target = "_blank" })
+            @Html.ActionLink("Terms and conditions", "TermsAndConditions", "NewUser", new { area = string.Empty }, null)
         </li>
     </ul>
 }

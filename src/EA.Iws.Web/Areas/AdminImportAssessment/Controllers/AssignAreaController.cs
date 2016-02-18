@@ -22,11 +22,13 @@
         [HttpGet]
         public async Task<ActionResult> Index(Guid id)
         {
-            var model = new AssignAreaViewModel
+            var consultation = await mediator.SendAsync(new GetImportNotificationConsultation(id));
+
+            var model = new AssignAreaViewModel(consultation.ReceivedDate)
             {
                 NotificationId = id,
                 Areas = await GetAreas(),
-                LocalAreaId = await mediator.SendAsync(new GetImportNotificationLocalAreaId(id))
+                LocalAreaId = consultation.LocalAreaId
             };
 
             return View(model);
@@ -43,7 +45,10 @@
                 return View(model);
             }
 
-            await mediator.SendAsync(new SetImportNotificationLocalAreaId(model.NotificationId, model.LocalAreaId.GetValueOrDefault()));
+            await mediator.SendAsync(new SetImportNotificationConsultation(
+                model.NotificationId, 
+                model.LocalAreaId.GetValueOrDefault(), 
+                model.ReceivedDate.AsDateTime()));
 
             return RedirectToAction("Index", "KeyDates", new { id = model.NotificationId, area = "AdminImportAssessment" });
         }

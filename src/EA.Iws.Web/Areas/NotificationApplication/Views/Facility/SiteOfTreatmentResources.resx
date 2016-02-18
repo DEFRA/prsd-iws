@@ -120,8 +120,11 @@
   <data name="ActualSite" xml:space="preserve">
     <value>Actual site of treatment?</value>
   </data>
-  <data name="BackToFacilities" xml:space="preserve">
-    <value>Back to facilities</value>
+  <data name="BackToDisposalFacilities" xml:space="preserve">
+    <value>Go to disposal facilities</value>
+  </data>
+  <data name="BackToRecoveryFacilities" xml:space="preserve">
+    <value>Go to recovery facilities</value>
   </data>
   <data name="Header" xml:space="preserve">
     <value>Where will the waste be finally {0}</value>

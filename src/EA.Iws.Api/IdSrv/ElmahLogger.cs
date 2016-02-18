@@ -1,28 +1,14 @@
 ﻿namespace EA.Iws.Api.IdSrv
 {
-    using System;
     using Elmah;
-    using Thinktecture.IdentityServer.Core.Logging;
+    using Serilog.Core;
+    using Serilog.Events;
 
-    internal class ElmahLogger : ILogProvider
+    internal class ElmahLogger : ILogEventSink
     {
-        public ILog GetLogger(string name)
+        public void Emit(LogEvent logEvent)
         {
-            return new ElmahLog();
-        }
-
-        public class ElmahLog : ILog
-        {
-            public bool Log(LogLevel logLevel, Func<string> messageFunc, Exception exception = null)
-            {
-                if (exception != null)
-                {
-                    ErrorSignal.FromCurrentContext().Raise(exception);
-                    return true;
-                }
-
-                return false;
-            }
+            ErrorSignal.FromCurrentContext().Raise(logEvent.Exception);
         }
     }
 }

@@ -15,10 +15,12 @@
         @Html.HiddenFor(m => m.NotificationId)
 
 
-        <p>
+        <div class="form-group">
             @Html.ActionLink("Go to notification options", "Index", "Options",
                 new { id = Model.NotificationId, area = "NotificationApplication" },
                 new { @class = "button" })
-        </p>
+        </div>
+
+        @Html.FeedbackLink()
     </section>
 </div>

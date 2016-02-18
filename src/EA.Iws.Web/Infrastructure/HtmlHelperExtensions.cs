@@ -1,6 +1,7 @@
 ﻿namespace EA.Iws.Web.Infrastructure
 {
     using System.Web.Mvc;
+    using System.Web.Mvc.Html;
     using Prsd.Core;
 
     public static class HtmlHelperExtensions
@@ -37,6 +38,17 @@
             }
 
             return new MvcHtmlString(string.Format("{0:dddd d}{1} {0:MMMM}", today, suffix));
+        }
+
+        /// <summary>
+        /// Returns a link to the feedback page
+        /// </summary>
+        /// <param name="helper"></param>
+        /// <returns></returns>
+        public static MvcHtmlString FeedbackLink(this HtmlHelper helper)
+        {
+            return helper.ActionLink(FeedbackLinkResources.LinkText, "Index", "Feedback",
+                new { area = string.Empty }, null);
         }
     }
 }
