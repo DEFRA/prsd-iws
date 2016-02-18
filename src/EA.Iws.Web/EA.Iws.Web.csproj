@@ -1821,6 +1821,11 @@
     <Compile Include="Infrastructure\Authorization\AuthorizationService.cs" />
     <Compile Include="Infrastructure\Authorization\AuthorizeActivityAttribute.cs" />
     <Compile Include="Infrastructure\ExportNavigationSection.cs" />
+    <Compile Include="Infrastructure\FeedbackLinkResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FeedbackLinkResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Infrastructure\FileAccess.cs" />
     <Compile Include="Infrastructure\FileReader.cs" />
     <Compile Include="Infrastructure\HandleApiErrorFilter.cs" />
@@ -3624,6 +3629,10 @@
     <EmbeddedResource Include="Areas\Reports\Views\MissingShipments\IndexResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Infrastructure\FeedbackLinkResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>FeedbackLinkResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Infrastructure\Validation\RestrictToAllowedUploadTypesAttributeResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

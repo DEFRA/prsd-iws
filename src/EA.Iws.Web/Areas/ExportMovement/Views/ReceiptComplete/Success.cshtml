@@ -10,13 +10,15 @@
             <h1 class="heading-large">You've successfully recorded the receipt of this shipment</h1>
         </header>
         @Html.HiddenFor(m => m.NotificationId)
-        
-        
 
-        <p>
-            @Html.ActionLink("Go to notification options", "Index", "Options", 
-                new { area = "NotificationApplication", id = Model.NotificationId }, 
+
+
+        <div class="form-group">
+            @Html.ActionLink("Go to notification options", "Index", "Options",
+                new { area = "NotificationApplication", id = Model.NotificationId },
                 new { @class = "button" })
-        </p>
+        </div>
+
+        @Html.FeedbackLink()
     </section>
 </div>

@@ -22,6 +22,10 @@
     </ol>
 </div>
 
-@Html.ActionLink(Constants.ContinueButtonText, "Index", "Options",
-        new { area = "NotificationApplication", id = ViewContext.RouteData.Values["notificationId"] },
-        new { @class = "button" })
+<div class="form-group">
+    @Html.ActionLink(Constants.ContinueButtonText, "Index", "Options",
+            new { area = "NotificationApplication", id = ViewContext.RouteData.Values["notificationId"] },
+            new { @class = "button" })
+</div>
+
+@Html.FeedbackLink()
