@@ -3,12 +3,13 @@
     using System;
     using Core.Authorization;
     using Core.Authorization.Permissions;
+    using Core.NotificationAssessment;
     using Prsd.Core.Mediator;
 
     [RequestAuthorization(ExportNotificationPermissions.CanReadExportNotificationAssessment)]
-    public class GetExportNotificationLocalAreaId : IRequest<Guid>
+    public class GetExportNotificationConsultation : IRequest<ConsultationData>
     {
-        public GetExportNotificationLocalAreaId(Guid notificationId)
+        public GetExportNotificationConsultation(Guid notificationId)
         {
             NotificationId = notificationId;
         }

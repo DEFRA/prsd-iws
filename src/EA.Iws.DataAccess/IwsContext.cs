@@ -106,6 +106,8 @@
 
         public virtual DbSet<MeansOfTransport> MeansOfTransports { get; set; }
 
+        public virtual DbSet<Consultation> Consultations { get; set; }
+
         public async Task<NotificationApplication> GetNotificationApplication(Guid notificationId)
         {
             //TODO: Remove this method and replace usages with repositories

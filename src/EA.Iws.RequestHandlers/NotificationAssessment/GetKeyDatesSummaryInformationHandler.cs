@@ -12,6 +12,7 @@
 
     internal class GetKeyDatesSummaryInformationHandler : IRequestHandler<GetKeyDatesSummaryInformation, KeyDatesSummaryData>
     {
+        private readonly IConsultationRepository consultationRepository;
         private readonly INotificationApplicationRepository notificationRepository;
         private readonly INotificationAssessmentRepository assessmentRepository;
         private readonly IFinancialGuaranteeDecisionRepository financialGuaranteeDecisionRepository;
@@ -20,12 +21,13 @@
         private readonly IFacilityRepository facilityRepository;
         private readonly IMapper mapper;
 
-        public GetKeyDatesSummaryInformationHandler(INotificationApplicationRepository notificationRepository, 
+        public GetKeyDatesSummaryInformationHandler(INotificationApplicationRepository notificationRepository,
             INotificationAssessmentRepository assessmentRepository,
             IFinancialGuaranteeDecisionRepository financialGuaranteeDecisionRepository,
             INotificationAssessmentDatesSummaryRepository datesSummaryRepository,
             INotificationAssessmentDecisionRepository decisionRepository,
             IFacilityRepository facilityRepository,
+            IConsultationRepository consultationRepository,
             IMapper mapper)
         {
             this.notificationRepository = notificationRepository;
@@ -35,6 +37,7 @@
             this.decisionRepository = decisionRepository;
             this.facilityRepository = facilityRepository;
             this.mapper = mapper;
+            this.consultationRepository = consultationRepository;
         }
 
         public async Task<KeyDatesSummaryData> HandleAsync(GetKeyDatesSummaryInformation message)
@@ -51,10 +54,12 @@
 
             var facilityCollection = await facilityRepository.GetByNotificationId(message.NotificationId);
 
+            var consultation = await consultationRepository.GetByNotificationId(message.NotificationId);
+
             return new KeyDatesSummaryData
             {
                 CompetentAuthority = notification.CompetentAuthority,
-                IsLocalAreaSet = assessment.LocalAreaId.HasValue,
+                IsLocalAreaSet = consultation != null && consultation.LocalAreaId.HasValue,
                 FinancialGuaranteeDecisions =
                     financialGuaranteeDecisions.Select(x => mapper.Map<FinancialGuaranteeDecisionData>(x)).ToArray(),
                 Dates = mapper.Map<NotificationDatesData>(dates),
