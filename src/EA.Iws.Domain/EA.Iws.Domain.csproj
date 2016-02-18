@@ -76,6 +76,7 @@
     <Compile Include="ImportNotificationAssessment\Consent\ConsentImportNotification.cs" />
     <Compile Include="ImportNotificationAssessment\Consent\IImportConsentRepository.cs" />
     <Compile Include="ImportNotificationAssessment\Consent\ImportConsent.cs" />
+    <Compile Include="ImportNotificationAssessment\Consultation.cs" />
     <Compile Include="ImportNotificationAssessment\Decision\DecisionRequiredBy.cs" />
     <Compile Include="ImportNotificationAssessment\Decision\DecisionRequiredByCalculator.cs" />
     <Compile Include="ImportNotificationAssessment\Decision\IDecisionRequiredByCalculator.cs" />
@@ -99,6 +100,7 @@
     <Compile Include="ImportNotificationAssessment\FinancialGuarantee\ImportFinancialGuaranteeStatusChangeEvent.cs" />
     <Compile Include="ImportNotificationAssessment\FinancialGuarantee\RefuseImportFinancialGuarantee.cs" />
     <Compile Include="ImportNotificationAssessment\FinancialGuarantee\ReleaseImportFinancialGuarantee.cs" />
+    <Compile Include="ImportNotificationAssessment\IConsultationRepository.cs" />
     <Compile Include="ImportNotificationAssessment\IImportNotificationChargeCalculator.cs" />
     <Compile Include="ImportNotificationAssessment\ImportNotificationChargeCalculator.cs" />
     <Compile Include="ImportNotificationAssessment\ImportNotificationDates.cs" />

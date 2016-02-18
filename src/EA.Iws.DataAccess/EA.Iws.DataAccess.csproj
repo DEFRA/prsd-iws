@@ -109,6 +109,7 @@
     <Compile Include="Mappings\Exports\TechnologyEmployedAnnexMapping.cs" />
     <Compile Include="Mappings\Exports\ProcessOfGenerationAnnexMapping.cs" />
     <Compile Include="Mappings\Imports\AddressMapping.cs" />
+    <Compile Include="Mappings\Imports\ConsultationMapping.cs" />
     <Compile Include="Mappings\Imports\ImportFinancialGuaranteeApprovalMapping.cs" />
     <Compile Include="Mappings\Imports\ImportFinancialGuaranteeMapping.cs" />
     <Compile Include="Mappings\Imports\ImportFinancialGuaranteeRefusalMapping.cs" />
@@ -211,6 +212,7 @@
     <Compile Include="Repositories\FinancialGuaranteeDecisionRepository.cs" />
     <Compile Include="Repositories\FinancialGuaranteeRepository.cs" />
     <Compile Include="Repositories\ImporterRepository.cs" />
+    <Compile Include="Repositories\Imports\ConsultationRepository.cs" />
     <Compile Include="Repositories\Imports\ExporterRepository.cs" />
     <Compile Include="Repositories\Imports\FacilityRepository.cs" />
     <Compile Include="Repositories\Imports\ImportConsentRepository.cs" />
