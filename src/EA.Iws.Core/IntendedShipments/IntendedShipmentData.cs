@@ -1,6 +1,7 @@
 ﻿namespace EA.Iws.Core.IntendedShipments
 {
     using System;
+    using NotificationAssessment;
     using Shared;
 
     public class IntendedShipmentData
@@ -20,5 +21,7 @@
         public ShipmentQuantityUnits Units { get; set; }
 
         public decimal Quantity { get; set; }
+
+        public NotificationStatus Status { get; set; }
     }
 }

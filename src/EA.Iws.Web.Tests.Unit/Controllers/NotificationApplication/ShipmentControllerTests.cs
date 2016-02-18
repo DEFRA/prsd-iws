@@ -1,5 +1,6 @@
 ﻿namespace EA.Iws.Web.Tests.Unit.Controllers.NotificationApplication
 {
+    using System;
     using Areas.NotificationApplication.Controllers;
     using Areas.NotificationApplication.ViewModels.Shipment;
     using FakeItEasy;
@@ -24,7 +25,7 @@
             var model = new ShipmentInfoViewModel();
             model.NumberOfShipments = numberOfShipments;
 
-            var result = await shipmentController.Index(model, true) as RedirectToRouteResult;
+            var result = await shipmentController.Index(Guid.Empty, model, true) as RedirectToRouteResult;
             RouteAssert.RoutesTo(result.RouteValues, "Index", "Home");
         }
 
@@ -34,7 +35,7 @@
             var model = new ShipmentInfoViewModel();
             model.NumberOfShipments = numberOfShipments;
 
-            var result = await shipmentController.Index(model, false) as RedirectToRouteResult;
+            var result = await shipmentController.Index(Guid.Empty, model, false) as RedirectToRouteResult;
             RouteAssert.RoutesTo(result.RouteValues, "Index", "ChemicalComposition");
         }
     }

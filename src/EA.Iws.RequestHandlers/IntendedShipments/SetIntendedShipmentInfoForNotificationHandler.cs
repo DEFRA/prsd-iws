@@ -6,6 +6,7 @@
     using Domain;
     using Domain.NotificationApplication;
     using Domain.NotificationApplication.Shipment;
+    using Domain.NotificationAssessment;
     using Prsd.Core.Mediator;
     using Requests.IntendedShipments;
 
@@ -14,21 +15,25 @@
     {
         private readonly IwsContext context;
         private readonly IFacilityRepository facilityRepository;
+        private readonly INotificationAssessmentRepository assessmentRepository;
         private readonly IShipmentInfoRepository shipmentInfoRepository;
 
         public SetIntendedShipmentInfoForNotificationHandler(IwsContext context,
             IShipmentInfoRepository shipmentInfoRepository,
-            IFacilityRepository facilityRepository)
+            IFacilityRepository facilityRepository,
+            INotificationAssessmentRepository assessmentRepository)
         {
             this.context = context;
             this.shipmentInfoRepository = shipmentInfoRepository;
             this.facilityRepository = facilityRepository;
+            this.assessmentRepository = assessmentRepository;
         }
 
         public async Task<Guid> HandleAsync(SetIntendedShipmentInfoForNotification command)
         {
             var facilityCollection = await facilityRepository.GetByNotificationId(command.NotificationId);
             var shipmentInfo = await shipmentInfoRepository.GetByNotificationId(command.NotificationId);
+            var status = await assessmentRepository.GetStatusByNotificationId(command.NotificationId);
 
             var shipmentPeriod = new ShipmentPeriod(
                 command.StartDate,
@@ -51,7 +56,7 @@
             else
             {
                 shipmentInfo.UpdateNumberOfShipments(command.NumberOfShipments);
-                shipmentInfo.UpdateShipmentPeriod(shipmentPeriod);
+                shipmentInfo.UpdateShipmentPeriod(shipmentPeriod, status);
                 shipmentInfo.UpdateQuantity(shipmentQuantity);
             }
 

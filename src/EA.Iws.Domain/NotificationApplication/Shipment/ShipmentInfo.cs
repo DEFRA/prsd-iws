@@ -1,6 +1,7 @@
 ﻿namespace EA.Iws.Domain.NotificationApplication.Shipment
 {
     using System;
+    using Core.NotificationAssessment;
     using Core.Shared;
     using Prsd.Core;
     using Prsd.Core.Domain;
@@ -17,7 +18,7 @@
         {
             NotificationId = notificationId;
             UpdateQuantity(shipmentQuantity);
-            UpdateShipmentPeriod(shipmentPeriod);
+            UpdateShipmentPeriod(shipmentPeriod, NotificationStatus.NotSubmitted);
             UpdateNumberOfShipments(numberOfShipments);
         }
 
@@ -45,9 +46,9 @@
             Units = shipmentQuantity.Units;
         }
 
-        public void UpdateShipmentPeriod(ShipmentPeriod shipmentPeriod)
+        public void UpdateShipmentPeriod(ShipmentPeriod shipmentPeriod, NotificationStatus status)
         {
-            if (shipmentPeriod.FirstDate < SystemTime.Now.Date)
+            if (shipmentPeriod.FirstDate < SystemTime.UtcNow.Date && status == NotificationStatus.NotSubmitted)
             {
                 throw new InvalidOperationException(string.Format(
                     "The start date cannot be in the past on shipment info {0}", Id));

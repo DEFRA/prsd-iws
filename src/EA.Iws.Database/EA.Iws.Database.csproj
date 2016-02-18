@@ -253,6 +253,7 @@
     <Content Include="scripts\Update\Sprint27\20160209-142700-update-bacs-details-environment-agency.sql" />
     <Content Include="scripts\Update\Sprint27\20160211-145300-update-ewc-code-descriptions.sql" />
     <Content Include="scripts\Update\Sprint27\20160215-121042-add-local-area-id-to-import-assessmemt.sql" />
+    <Content Include="scripts\Update\Sprint27\20160216-165000-update-competent-authorities.sql" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="scripts\TestData\20150522-171900-link-test-user-to-org.sql" />

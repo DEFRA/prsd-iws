@@ -457,7 +457,7 @@ WHERE  [name] = 'Germany';
 
 SELECT @CAId = id
 FROM   [Lookup].[competentauthority]
-WHERE  [code] = 'DE 023';
+WHERE  [code] = 'DE023';
 
 SELECT @ExitId = id
 FROM   [Notification].[entryorexitpoint]
@@ -481,7 +481,7 @@ WHERE  [name] = 'France';
 
 SELECT @CAId = id
 FROM   [Lookup].[competentauthority]
-WHERE  [code] = 'FR999';
+WHERE  [code] = 'FR';
 
 SELECT @EntryId = id
 FROM   [Notification].[entryorexitpoint]
