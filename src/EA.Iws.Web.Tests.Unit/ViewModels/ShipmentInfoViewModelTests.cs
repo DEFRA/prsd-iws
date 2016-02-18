@@ -3,6 +3,7 @@
     using System;
     using System.Linq;
     using Areas.NotificationApplication.ViewModels.Shipment;
+    using Core.NotificationAssessment;
     using Core.Shared;
     using Prsd.Core;
     using TestHelpers;
@@ -116,8 +117,10 @@
         }
 
         [Fact]
-        public void StartDateCantBeInPast()
+        public void StartDateCantBeInPastForNotSubmitted()
         {
+            model.Status = NotificationStatus.NotSubmitted;
+
             model.StartDay = 1;
             model.StartMonth = 1;
             model.StartYear = 2015;
@@ -129,6 +132,24 @@
             var errors = ViewModelValidator.ValidateViewModel(model);
 
             Assert.True(errors.Any(p => p.ErrorMessage == "The first departure date cannot be in the past"));
+        }
+
+        [Fact]
+        public void StartDateCanBeInPastForSubmitted()
+        {
+            model.Status = NotificationStatus.Submitted;
+
+            model.StartDay = 1;
+            model.StartMonth = 1;
+            model.StartYear = 2015;
+
+            model.EndDay = 1;
+            model.EndMonth = 12;
+            model.EndYear = 2015;
+
+            var errors = ViewModelValidator.ValidateViewModel(model);
+
+            Assert.Empty(errors);
         }
 
         [Fact]
