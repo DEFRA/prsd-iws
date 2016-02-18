@@ -58,16 +58,9 @@
         public Guid NotificationApplicationId { get; private set; }
 
         public NotificationStatus Status { get; private set; }
-
-        public Guid? LocalAreaId { get; private set; }
-
+        
         protected virtual ICollection<NotificationStatusChange> StatusChangeCollection { get; set; }
-
-        public void SetLocalAreaId(Guid id)
-        {
-            LocalAreaId = id;
-        }
-
+        
         public IEnumerable<NotificationStatusChange> StatusChanges
         {
             get { return StatusChangeCollection.ToSafeIEnumerable(); }

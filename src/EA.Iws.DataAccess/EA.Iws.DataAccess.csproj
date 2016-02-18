@@ -101,6 +101,7 @@
     <Compile Include="Mappings\Common\CompetentAuthorityBacsDetailsMapping.cs" />
     <Compile Include="Mappings\Common\DisposalCostMapping.cs" />
     <Compile Include="Mappings\Common\EmailAddressMapping.cs" />
+    <Compile Include="Mappings\Exports\ConsultationMapping.cs" />
     <Compile Include="Mappings\Exports\FacilityCollectionMapping.cs" />
     <Compile Include="Mappings\Exports\MeansOfTransportMapping.cs" />
     <Compile Include="Mappings\Exports\ProducerCollectionMapping.cs" />
@@ -204,6 +205,7 @@
     <Compile Include="Repositories\AnnexCollectionRepository.cs" />
     <Compile Include="Repositories\CarrierRepository.cs" />
     <Compile Include="Repositories\CompetentAuthorityRepository.cs" />
+    <Compile Include="Repositories\ConsultationRepository.cs" />
     <Compile Include="Repositories\CountryRepository.cs" />
     <Compile Include="Repositories\EntryOrExitPointRepository.cs" />
     <Compile Include="Repositories\ExporterRepository.cs" />

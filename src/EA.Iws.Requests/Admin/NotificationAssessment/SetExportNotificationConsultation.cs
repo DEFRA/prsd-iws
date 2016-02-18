@@ -6,16 +6,19 @@
     using Prsd.Core.Mediator;
 
     [RequestAuthorization(ExportNotificationPermissions.CanEditExportNotificationAssessment)]
-    public class SetExportNotificationLocalAreaId : IRequest<Guid>
+    public class SetExportNotificationConsultation : IRequest<Guid>
     {
-        public SetExportNotificationLocalAreaId(Guid notificationId, Guid localAreaId)
+        public SetExportNotificationConsultation(Guid notificationId, Guid localAreaId, DateTime? receivedDate)
         {
             LocalAreaId = localAreaId;
             NotificationId = notificationId;
+            ReceivedDate = receivedDate;
         }
 
         public Guid LocalAreaId { get; private set; }
 
         public Guid NotificationId { get; private set; }
+
+        public DateTime? ReceivedDate { get; private set; }
     }
 }

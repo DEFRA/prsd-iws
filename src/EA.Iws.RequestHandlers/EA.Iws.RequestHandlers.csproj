@@ -92,11 +92,11 @@
     <Compile Include="Admin\NotificationAssessment\AcceptChangesHandler.cs" />
     <Compile Include="Admin\NotificationAssessment\GetDatesHandler.cs" />
     <Compile Include="Admin\NotificationAssessment\GetDecisionHistoryHandler.cs" />
-    <Compile Include="Admin\NotificationAssessment\GetExportNotificationLocalAreaIdHandler.cs" />
+    <Compile Include="Admin\NotificationAssessment\GetExportNotificationConsultationHandler.cs" />
     <Compile Include="Admin\NotificationAssessment\RejectChangesHandler.cs" />
     <Compile Include="Admin\NotificationAssessment\SetCommencedDateHandler.cs" />
     <Compile Include="Admin\NotificationAssessment\SetNotificationCompleteDateHandler.cs" />
-    <Compile Include="Admin\NotificationAssessment\SetExportNotificationLocalAreaIdHandler.cs" />
+    <Compile Include="Admin\NotificationAssessment\SetExportNotificationConsultationHandler.cs" />
     <Compile Include="Admin\NotificationAssessment\SetNotificationReceivedDateHandler.cs" />
     <Compile Include="Admin\NotificationAssessment\SetNotificationTransmittedDateHandler.cs" />
     <Compile Include="Admin\NotificationAssessment\SetNotificationAcknowledgedDateHandler.cs" />
@@ -330,6 +330,7 @@
     <Compile Include="Mappings\ImportNotification\WasteTypeMap.cs" />
     <Compile Include="Mappings\Movement\MovementMap.cs" />
     <Compile Include="Mappings\NotificationAssessment\AccountManageDataMap.cs" />
+    <Compile Include="Mappings\NotificationAssessment\ConsultationMap.cs" />
     <Compile Include="Mappings\NotificationAssessment\FinancialGuaranteeDecisionMap.cs" />
     <Compile Include="Mappings\Reports\DataExportNotificationMap.cs" />
     <Compile Include="Mappings\Reports\FinanceMap.cs" />
