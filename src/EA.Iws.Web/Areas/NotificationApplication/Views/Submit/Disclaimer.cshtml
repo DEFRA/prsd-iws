@@ -6,7 +6,7 @@
 }
 
 @using (Html.BeginForm())
- {
+{
     @Html.AntiForgeryToken()
     @Html.Gds().ValidationSummary()
     @Html.HiddenFor(m => m.Id)
