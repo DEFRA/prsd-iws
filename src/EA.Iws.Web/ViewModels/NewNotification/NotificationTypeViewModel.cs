@@ -26,7 +26,7 @@
                 switch (CompetentAuthority)
                 {
                     case UKCompetentAuthority.England:
-                        return "Environment Agency - Telephone: 01925 542265";
+                        return "Environment Agency - Telephone: 03708 506 506";
                     case UKCompetentAuthority.Scotland:
                         return "Scottish Environment Protection Agency - Telephone: 01786 457700";
                     case UKCompetentAuthority.NorthernIreland:
