@@ -24,7 +24,19 @@
             var movementsSummary = await mediator.SendAsync(new GetSummaryAndTable(id, (MovementStatus?)status));
 
             var model = new NotificationOptionsViewModel(id, movementsSummary);
-            model.SelectedMovementStatus = (MovementStatus?)status;
+
+            if (status == 0)
+            {
+                model.SelectedMovementStatus = null;
+            }
+            else if (status == null)
+            {
+                model.SelectedMovementStatus = MovementStatus.Submitted;
+            }
+            else
+            {
+                model.SelectedMovementStatus = (MovementStatus?)status;
+            }
 
             return View(model);
         }
