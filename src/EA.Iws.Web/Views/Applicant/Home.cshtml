@@ -20,11 +20,13 @@
 
             <span class="visuallyhidden">@HomeResources.Message</span>
             <br/>
-            @HomeResources.OrYouCan @Html.ActionLink(HomeResources.CopyNotification, "CompetentAuthority", "NewNotification", new { cfp = 1 }, null)@HomeResources.FullStop
+            @HomeResources.OrYouCan @Html.ActionLink(HomeResources.CopyNotification, "CompetentAuthority", "NewNotification", new { cfp = 1 },
+                                   new { data_track = "element", data_category = "Export notification", data_action = "Copy" })@HomeResources.FullStop
         </p>
 
         <p id="get-started" class="get-started group">
-            @Html.ActionLink(HomeResources.StartNewNotification, "CompetentAuthority", "NewNotification", null, new { @class = "button"})
+            @Html.ActionLink(HomeResources.StartNewNotification, "CompetentAuthority", "NewNotification", null,
+                new { @class = "button", data_track = "element", data_category = "Export notification", data_action = "Start" })
         </p>
         
     </div>
