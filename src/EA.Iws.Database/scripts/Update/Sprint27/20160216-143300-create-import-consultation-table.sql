@@ -28,4 +28,9 @@ SELECT
 FROM
 	[ImportNotification].[NotificationAssessment] NA
 WHERE
-	[LocalAreaId] IS NOT NULL
+	[LocalAreaId] IS NOT NULL;
+GO
+
+ALTER TABLE [ImportNotification].[NotificationAssessment]
+DROP COLUMN [LocalAreaId];
+GO
