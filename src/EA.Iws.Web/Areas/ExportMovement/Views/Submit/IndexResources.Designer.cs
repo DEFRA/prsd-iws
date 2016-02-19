@@ -61,6 +61,15 @@ namespace EA.Iws.Web.Areas.ExportMovement.Views.Submit {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Please make sure your prenotification is signed before you upload it..
+        /// </summary>
+        public static string Paragraph {
+            get {
+                return ResourceManager.GetString("Paragraph", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Go to notification options.
         /// </summary>
         public static string ReturnToNotificationOptions {

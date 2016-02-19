@@ -8,6 +8,8 @@
     <h1 class="heading-large">@Resource.Title</h1>
 </header>
 
+<p>@Resource.Paragraph</p>
+
 @using (Html.BeginForm(null, "Submit", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
@@ -16,7 +18,7 @@
     @Html.Gds().ValidationSummary()
 
     <div class="form-group @Html.Gds().FormGroupClass(m => m.File)">
-        @Html.Gds().LabelFor(m => m.File, showOptionalLabel: false)
+        <label for="@Html.NameFor(m => m.File)" class="visually-hidden">@Html.DisplayNameFor(m => m.File)</label>
         @Html.Gds().ValidationMessageFor(m => m.File)
         @Html.Gds().TextBoxFor(m => m.File, new { type = "file" })
     </div>
@@ -34,4 +36,3 @@
             null)
     </p>
 </div>
-
