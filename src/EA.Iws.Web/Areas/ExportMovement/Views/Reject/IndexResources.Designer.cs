@@ -79,7 +79,7 @@ namespace EA.Iws.Web.Areas.ExportMovement.Views.Reject {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Reject shipment.
+        ///   Looks up a localized string similar to Reject shipment - more information.
         /// </summary>
         public static string Title {
             get {

@@ -121,7 +121,7 @@
     <value>Which shipment has been rejected?</value>
   </data>
   <data name="None" xml:space="preserve">
-    <value>You have no active shipments to record rejection of.</value>
+    <value>You currently have no active shipments to record as rejected.</value>
   </data>
   <data name="ReturnToSummary" xml:space="preserve">
     <value>Go to shipment summary</value>

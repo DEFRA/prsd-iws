@@ -70,7 +70,7 @@ namespace EA.Iws.Web.Areas.NotificationMovements.Views.Reject {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You have no active shipments to record rejection of..
+        ///   Looks up a localized string similar to You currently have no active shipments to record as rejected..
         /// </summary>
         public static string None {
             get {

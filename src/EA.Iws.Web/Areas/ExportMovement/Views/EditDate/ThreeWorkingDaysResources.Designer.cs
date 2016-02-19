@@ -61,7 +61,7 @@ namespace EA.Iws.Web.Areas.ExportMovement.Views.EditDate {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You should prenotify all the necessary competent authorities and the consignee at least three working days before the actual date of shipment.
+        ///   Looks up a localized string similar to You should prenotify all the necessary competent authorities and the consignee at least three working days before the actual date of shipment..
         /// </summary>
         public static string Body {
             get {
@@ -89,6 +89,15 @@ namespace EA.Iws.Web.Areas.ExportMovement.Views.EditDate {
         
         /// <summary>
         ///   Looks up a localized string similar to If you consign this shipment, you may be committing an offence.
+        /// </summary>
+        public static string Heading {
+            get {
+                return ResourceManager.GetString("Heading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Shipment warning.
         /// </summary>
         public static string Title {
             get {

@@ -79,7 +79,7 @@ namespace EA.Iws.Web.Areas.NotificationMovements.Views.Edit {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Which shipment.
+        ///   Looks up a localized string similar to Which shipment do you want to edit?.
         /// </summary>
         public static string PageTitle {
             get {

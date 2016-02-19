@@ -124,7 +124,7 @@
     <value>You have no prenotified shipments available to edit.</value>
   </data>
   <data name="PageTitle" xml:space="preserve">
-    <value>Which shipment</value>
+    <value>Which shipment do you want to edit?</value>
   </data>
   <data name="ShipmentSummaryLinkText" xml:space="preserve">
     <value>Go to notification options</value>

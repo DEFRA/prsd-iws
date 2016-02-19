@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Body" xml:space="preserve">
-    <value>You should prenotify all the necessary competent authorities and the consignee at least three working days before the actual date of shipment</value>
+    <value>You should prenotify all the necessary competent authorities and the consignee at least three working days before the actual date of shipment.</value>
   </data>
   <data name="ChangeDateOption" xml:space="preserve">
     <value>I'd like to change the actual date of shipment before I continue</value>
@@ -126,7 +126,10 @@
   <data name="ContinueAnywayOption" xml:space="preserve">
     <value>I understand, and would like to continue consigning this shipment</value>
   </data>
-  <data name="Title" xml:space="preserve">
+  <data name="Heading" xml:space="preserve">
     <value>If you consign this shipment, you may be committing an offence</value>
+  </data>
+  <data name="Title" xml:space="preserve">
+    <value>Shipment warning</value>
   </data>
 </root>
