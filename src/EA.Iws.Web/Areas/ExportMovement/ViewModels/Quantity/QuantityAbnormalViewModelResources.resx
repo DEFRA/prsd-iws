@@ -121,7 +121,7 @@
     <value>Confirm</value>
   </data>
   <data name="IsCorrectRequired" xml:space="preserve">
-    <value>Please answer this question</value>
+    <value>Please confirm whether you entered the right quantity of waste received or not</value>
   </data>
   <data name="Quantity" xml:space="preserve">
     <value>Quantity</value>

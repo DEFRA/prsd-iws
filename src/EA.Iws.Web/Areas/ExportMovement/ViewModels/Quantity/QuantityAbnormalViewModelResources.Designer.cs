@@ -71,7 +71,7 @@ namespace EA.Iws.Web.Areas.ExportMovement.ViewModels.Quantity {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Please answer this question.
+        ///   Looks up a localized string similar to Please confirm whether you entered the right quantity of waste received or not.
         /// </summary>
         public static string IsCorrectRequired {
             get {

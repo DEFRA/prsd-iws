@@ -6,9 +6,27 @@
     ViewBag.Title = Resource.Title;
 }
 
+@helper DisplayMessage()
+{
+    string message;
+    switch (Model.Tolerance)
+    {
+        case QuantityReceivedTolerance.BelowTolerance:
+            message = Resource.BelowTolerance;
+            break;
+        case QuantityReceivedTolerance.AboveTolerance:
+            message = Resource.AboveTolerance;
+            break;
+        default:
+            throw new ArgumentOutOfRangeException();
+    }
+
+    <p>@Html.Raw(string.Format(message, string.Format("{0} {1}", Model.Quantity, EnumHelper.GetDisplayName(Model.Unit).ToLower())))</p>
+}
+
 <header class="hgroup">
     <h1 class="heading-large">@Resource.MainHeading</h1>
-    <p>@Html.Raw(string.Format(Resource.LeadParagraph, Model.Quantity, EnumHelper.GetDisplayName(Model.Unit).ToLower(), (Model.Tolerance == QuantityReceivedTolerance.AboveTolerance) ? "more" : "less"))</p>
+    @DisplayMessage()
 </header>
 
 @using (Html.BeginForm())
