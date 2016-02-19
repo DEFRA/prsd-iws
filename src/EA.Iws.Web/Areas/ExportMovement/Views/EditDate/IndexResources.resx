@@ -121,10 +121,7 @@
     <value>For example, 31 3 2015</value>
   </data>
   <data name="GuidanceParagraph1" xml:space="preserve">
-    <value>The new date must be no more than 10 working days from the original date of shipment.</value>
-  </data>
-  <data name="GuidanceParagraph2" xml:space="preserve">
-    <value>If it is, then cancel this shipment and generate a new prenotification.</value>
+    <value>The new date must be no more than 10 working days from the original date of shipment. If it is, then cancel this shipment and generate a new prenotification.</value>
   </data>
   <data name="MainHeading" xml:space="preserve">
     <value>Enter a new actual date of shipment</value>

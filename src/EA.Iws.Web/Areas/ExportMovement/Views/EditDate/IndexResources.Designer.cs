@@ -70,20 +70,11 @@ namespace EA.Iws.Web.Areas.ExportMovement.Views.EditDate {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The new date must be no more than 10 working days from the original date of shipment..
+        ///   Looks up a localized string similar to The new date must be no more than 10 working days from the original date of shipment. If it is, then cancel this shipment and generate a new prenotification..
         /// </summary>
         public static string GuidanceParagraph1 {
             get {
                 return ResourceManager.GetString("GuidanceParagraph1", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to If it is, then cancel this shipment and generate a new prenotification..
-        /// </summary>
-        public static string GuidanceParagraph2 {
-            get {
-                return ResourceManager.GetString("GuidanceParagraph2", resourceCulture);
             }
         }
         

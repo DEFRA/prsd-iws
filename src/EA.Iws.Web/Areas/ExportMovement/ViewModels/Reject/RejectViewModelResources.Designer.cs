@@ -79,7 +79,7 @@ namespace EA.Iws.Web.Areas.ExportMovement.ViewModels.Reject {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Upload the signed copy of the receipt.
+        ///   Looks up a localized string similar to Upload the signed certificate of receipt.
         /// </summary>
         public static string FileName {
             get {
@@ -88,7 +88,7 @@ namespace EA.Iws.Web.Areas.ExportMovement.ViewModels.Reject {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Please provide the prenotification document.
+        ///   Looks up a localized string similar to Please provide the signed certificate of receipt.
         /// </summary>
         public static string FileRequired {
             get {

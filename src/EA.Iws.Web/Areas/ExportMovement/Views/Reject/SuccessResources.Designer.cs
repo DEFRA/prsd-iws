@@ -61,6 +61,15 @@ namespace EA.Iws.Web.Areas.ExportMovement.Views.Reject {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Continue.
+        /// </summary>
+        public static string ContinueButtonText {
+            get {
+                return ResourceManager.GetString("ContinueButtonText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Go to notification options.
         /// </summary>
         public static string LinkTextGoToNotificationOptions {
@@ -88,7 +97,7 @@ namespace EA.Iws.Web.Areas.ExportMovement.Views.Reject {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Rejected shipment sucess.
+        ///   Looks up a localized string similar to Rejected shipment success.
         /// </summary>
         public static string Title {
             get {

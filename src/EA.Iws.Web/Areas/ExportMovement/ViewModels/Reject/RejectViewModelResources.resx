@@ -124,10 +124,10 @@
     <value>Please enter the date the waste was rejected</value>
   </data>
   <data name="FileName" xml:space="preserve">
-    <value>Upload the signed copy of the receipt</value>
+    <value>Upload the signed certificate of receipt</value>
   </data>
   <data name="FileRequired" xml:space="preserve">
-    <value>Please provide the prenotification document</value>
+    <value>Please provide the signed certificate of receipt</value>
   </data>
   <data name="RejectionReasonTitle" xml:space="preserve">
     <value>Why was this waste rejected?</value>
