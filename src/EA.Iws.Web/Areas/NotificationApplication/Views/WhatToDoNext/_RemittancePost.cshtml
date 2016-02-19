@@ -3,4 +3,4 @@
 
 <p>@Resources.RemittancePost
 <br/>
-@Html.Raw(Model.UnitedKingdomCompetentAuthorityData.BacsDetails.RemittanceAddress ?? Model.UnitedKingdomCompetentAuthorityData.Address.ToString())</p>
+@Html.Raw(Model.UnitedKingdomCompetentAuthorityData.BacsDetails.RemittanceAddress ?? Model.UnitedKingdomCompetentAuthorityData.Address.ToString().Replace(", ,", ","))</p>

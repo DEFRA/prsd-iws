@@ -133,7 +133,7 @@
     <value>Charges are not shown as notification is still in progress</value>
   </data>
   <data name="ListAvailablePaymentMethods" xml:space="preserve">
-    <value>You can pay us by bank transfer, post, or credit or debit card. All Payments must be made in sterling.</value>
+    <value>You can pay us by bank transfer, post, or credit or debit card. All payments must be made in sterling.</value>
   </data>
   <data name="MainHeading" xml:space="preserve">
     <value>Your notification charges and payment information</value>
