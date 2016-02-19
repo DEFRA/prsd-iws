@@ -27,12 +27,19 @@
                     N.Id,
                     N.NotificationNumber,
                     NA.Status,
+                    COALESCE(NS.ChangeDate, N.CreatedDate) AS StatusDate,
                     E.Name AS Exporter,
                     I.Name AS Importer,
                     P.Name AS Producer
                 FROM 
                     [Notification].[Notification] N
                     INNER JOIN [Notification].[NotificationAssessment] NA ON N.Id = NA.NotificationApplicationId
+                    OUTER APPLY (
+                        SELECT TOP 1 ChangeDate
+                        FROM [Notification].[NotificationStatusChange] NS
+                        WHERE NS.NotificationAssessmentId = NA.Id
+                        ORDER BY ChangeDate DESC
+                    ) NS
                     LEFT JOIN [Notification].[Exporter] E ON N.Id = E.NotificationId
                     LEFT JOIN [Notification].[Importer] I ON N.Id = I.NotificationId
                     LEFT JOIN [Notification].[ProducerCollection] PC ON N.Id = PC.NotificationId
