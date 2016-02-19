@@ -33,14 +33,14 @@
         <div class="grid-row">
             <div class="column-half">
                 <div class="noti-price">
-                    <span class="text">Notification<br />Charges</span>
+                    <span class="text">Notification<br />charges</span>
                     <span class="price">@Html.Raw(Model.Charge.ToString("C0", nfi))</span>
                 </div>
             </div>
 
             <div class="column-half">
                 <div class="noti-price">
-                    <span class="text">Amount<br />Paid</span>
+                    <span class="text">Amount<br />paid</span>
                     <span class="price">@Html.Raw(Model.AmountPaid.ToString("C0", nfi))</span>
                 </div>
             </div>
@@ -59,31 +59,31 @@
     <table class="table-pad-bottom" title="Bank details">
         <tbody>
             <tr>
-                <td>Payment Reference</td>
+                <td>Payment reference</td>
                 <td>@Html.DisplayFor(m => m.NotificationNumber)</td>
             </tr>
             <tr>
-                <td>Payment Due</td>
+                <td>Payment due</td>
                 <td>@Html.Raw(due.ToString("C"))</td>
             </tr>
             <tr>
-                <td>Account Name</td>
+                <td>Account name</td>
                 <td>@Html.DisplayFor(m => m.UnitedKingdomCompetentAuthorityData.BacsDetails.AccountName)</td>
             </tr>
             <tr>
-                <td>Bank Name</td>
+                <td>Bank name</td>
                 <td>@Html.DisplayFor(m => m.UnitedKingdomCompetentAuthorityData.BacsDetails.Bank)</td>
             </tr>
             <tr>
-                <td>Bank Address</td>
+                <td>Bank address</td>
                 <td>@Html.DisplayFor(m => m.UnitedKingdomCompetentAuthorityData.BacsDetails.BankAddress)</td>
             </tr>
             <tr>
-                <td>Sort Code</td>
+                <td>Sort code</td>
                 <td>@Html.DisplayFor(m => m.UnitedKingdomCompetentAuthorityData.BacsDetails.SortCode)</td>
             </tr>
             <tr>
-                <td>Account Number</td>
+                <td>Account number</td>
                 <td>@Html.DisplayFor(m => m.UnitedKingdomCompetentAuthorityData.BacsDetails.AccountNumber)</td>
             </tr>
         </tbody>

@@ -106,7 +106,7 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.WhatToDoNext {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You can pay us by bank transfer, post, or credit or debit card. All Payments must be made in sterling..
+        ///   Looks up a localized string similar to You can pay us by bank transfer, post, or credit or debit card. All payments must be made in sterling..
         /// </summary>
         public static string ListAvailablePaymentMethods {
             get {
