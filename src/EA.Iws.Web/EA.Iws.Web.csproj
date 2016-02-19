@@ -1533,6 +1533,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>WasteTypeViewModelResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Areas\ImportNotification\Views\Complete\IndexResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IndexResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Areas\ImportNotification\Views\Exporter\IndexResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -1637,6 +1642,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>TableResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\ImportNotification\Views\Validate\IndexResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IndexResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Areas\ImportNotification\Views\WasteOperation\IndexResources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -3072,6 +3082,10 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>WasteTypeViewModelResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Areas\ImportNotification\Views\Complete\IndexResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Areas\ImportNotification\Views\Exporter\IndexResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
@@ -3155,6 +3169,10 @@
     <EmbeddedResource Include="Areas\ImportNotification\Views\TransitState\TableResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>TableResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\ImportNotification\Views\Validate\IndexResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\ImportNotification\Views\WasteOperation\IndexResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

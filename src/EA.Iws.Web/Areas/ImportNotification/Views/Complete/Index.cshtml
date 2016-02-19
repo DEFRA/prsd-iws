@@ -1,7 +1,9 @@
-﻿
+﻿@using Resource = EA.Iws.Web.Areas.ImportNotification.Views.Complete.IndexResources
 @{
-    ViewBag.Title = "Import notification completed";
+    ViewBag.Title = Resource.TabTitle;
 }
 
-<h1 class="heading-large">Your notification has been completed</h1>
+<h1 class="heading-large">@Resource.Heading</h1>
+
+<p class="text">@Resource.Guidance</p>
 

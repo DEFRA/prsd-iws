@@ -117,121 +117,13 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="BaselTitle" xml:space="preserve">
-    <value>Basel or OECD code</value>
+  <data name="Guidance" xml:space="preserve">
+    <value>Now you’ve acknowledged this notification, you’ll need to input the key dates.</value>
   </data>
-  <data name="EWCTitle" xml:space="preserve">
-    <value>EWC Codes</value>
-  </data>
-  <data name="ExporterTitle" xml:space="preserve">
-    <value>Exporter-notifier</value>
-  </data>
-  <data name="FacilityTitle" xml:space="preserve">
-    <value>Recovery facilities</value>
-  </data>
-  <data name="HTitle" xml:space="preserve">
-    <value>H or HP Codes</value>
-  </data>
-  <data name="ImporterTitle" xml:space="preserve">
-    <value>Importer-consignee</value>
-  </data>
-  <data name="NoTransitStatesChoice" xml:space="preserve">
-    <value>There are no transit states</value>
-  </data>
-  <data name="OrganisationsTitle" xml:space="preserve">
-    <value>Organisations involved</value>
-  </data>
-  <data name="False" xml:space="preserve">
-    <value>No</value>
-  </data>
-  <data name="PreconsentedTitle" xml:space="preserve">
-    <value>Are all facilities pre-consented?</value>
-  </data>
-  <data name="True" xml:space="preserve">
-    <value>Yes</value>
-  </data>
-  <data name="ProducerTitle" xml:space="preserve">
-    <value>Generator-producer</value>
-  </data>
-  <data name="OperationCodesTitle" xml:space="preserve">
-    <value>codes</value>
-  </data>
-  <data name="SectionIncompleteText" xml:space="preserve">
-    <value>Section incomplete</value>
-  </data>
-  <data name="ShipmentInfoTitle" xml:space="preserve">
-    <value>Amounts and dates</value>
-  </data>
-  <data name="ShipmentsTitle" xml:space="preserve">
-    <value>Intended shipments</value>
-  </data>
-  <data name="StateOfExportTitle" xml:space="preserve">
-    <value>State of export</value>
-  </data>
-  <data name="StateOfImportTitle" xml:space="preserve">
-    <value>State of import</value>
+  <data name="Heading" xml:space="preserve">
+    <value>This notification has now been acknowledged</value>
   </data>
   <data name="TabTitle" xml:space="preserve">
-    <value>Notification overview</value>
-  </data>
-  <data name="TechnologyTitle" xml:space="preserve">
-    <value>Technology employed</value>
-  </data>
-  <data name="Title" xml:space="preserve">
-    <value>Notification overview</value>
-  </data>
-  <data name="TransitStatesTitle" xml:space="preserve">
-    <value>Transit states</value>
-  </data>
-  <data name="TransportRouteTitle" xml:space="preserve">
-    <value>The journey</value>
-  </data>
-  <data name="UnansweredQuestionPlaceholder" xml:space="preserve">
-    <value>Not selected</value>
-  </data>
-  <data name="UNTitle" xml:space="preserve">
-    <value>UN Classes</value>
-  </data>
-  <data name="WasteCodeTitle" xml:space="preserve">
-    <value>Waste codes</value>
-  </data>
-  <data name="YTitle" xml:space="preserve">
-    <value>Y Codes</value>
-  </data>
-  <data name="MultipleProducersQuestion" xml:space="preserve">
-    <value>Are there mulitple producers?</value>
-  </data>
-  <data name="ShipmentDatesTitle" xml:space="preserve">
-    <value>Intended dates of departure:</value>
-  </data>
-  <data name="ShipmentNotEnteredText" xml:space="preserve">
-    <value>Not entered</value>
-  </data>
-  <data name="ShipmentNumberTitle" xml:space="preserve">
-    <value>Total intended number of shipments:</value>
-  </data>
-  <data name="ShipmentQuantityTitle" xml:space="preserve">
-    <value>Total intended quantity:</value>
-  </data>
-  <data name="CodesNotApplicableText" xml:space="preserve">
-    <value>Not applicable</value>
-  </data>
-  <data name="CompetentAuthorityText" xml:space="preserve">
-    <value>Competent authority:</value>
-  </data>
-  <data name="CountryText" xml:space="preserve">
-    <value>Country:</value>
-  </data>
-  <data name="EntryPointText" xml:space="preserve">
-    <value>Entry point:</value>
-  </data>
-  <data name="ExitPointText" xml:space="preserve">
-    <value>Exit point:</value>
-  </data>
-  <data name="ButtonText" xml:space="preserve">
-    <value>Ready to be acknowledged</value>
-  </data>
-  <data name="GuidanceText" xml:space="preserve">
-    <value>Select "Ready to be acknowledged" once you've entered all of the necessary information for this notification.</value>
+    <value>Import notification acknowledged</value>
   </data>
 </root>
