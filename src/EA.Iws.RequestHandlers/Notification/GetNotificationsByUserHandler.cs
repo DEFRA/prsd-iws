@@ -1,8 +1,7 @@
 ﻿namespace EA.Iws.RequestHandlers.Notification
 {
     using System.Collections.Generic;
-    using System.Data.Entity;
-    using System.Linq;
+    using System.Data.SqlClient;
     using System.Threading.Tasks;
     using DataAccess;
     using Prsd.Core.Domain;
@@ -23,40 +22,33 @@
 
         public async Task<IList<NotificationApplicationSummaryData>> HandleAsync(GetNotificationsByUser message)
         {
-            var query = from application in context.NotificationApplications
-                where application.UserId == userContext.UserId
-                from exporter in context.Exporters.Where(e => e.NotificationId == application.Id).DefaultIfEmpty()
-                from importer in context.Importers.Where(e => e.NotificationId == application.Id).DefaultIfEmpty()
-                from producerCollection in context.Producers.Where(e => e.NotificationId == application.Id).DefaultIfEmpty()
-                from assessment in context.NotificationAssessments
-                where assessment.NotificationApplicationId == application.Id
-                orderby application.NotificationNumber
-                select new
-                {
-                    Notification = application,
-                    Exporter = exporter,
-                    Importer = importer,
-                    Assessment = assessment,
-                    ProducerCollection = producerCollection
-                };
-
-            return
-                (await query.ToListAsync())
-                    .Select(n => new NotificationApplicationSummaryData
-                    {
-                        Id = n.Notification.Id,
-                        NotificationNumber = n.Notification.NotificationNumber,
-                        StatusDate =
-                            n.Assessment.StatusChanges.OrderByDescending(p => p.ChangeDate).FirstOrDefault() == null
-                                ? n.Notification.CreatedDate.UtcDateTime
-                                : n.Assessment.StatusChanges.OrderByDescending(p => p.ChangeDate)
-                                    .FirstOrDefault()
-                                    .ChangeDate.UtcDateTime,
-                        Status = n.Assessment.Status,
-                        Exporter = n.Exporter == null ? null : n.Exporter.Business.Name,
-                        Importer = n.Importer == null ? null : n.Importer.Business.Name,
-                        Producer = n.ProducerCollection.Producers.Where(p => p.IsSiteOfExport).Select(p => p.Business.Name).SingleOrDefault() ?? string.Empty
-                    }).ToList();
+            return await context.Database.SqlQuery<NotificationApplicationSummaryData>(@"
+                SELECT 
+                    N.Id,
+                    N.NotificationNumber,
+                    NA.Status,
+                    COALESCE(NS.ChangeDate, N.CreatedDate) AS StatusDate,
+                    E.Name AS Exporter,
+                    I.Name AS Importer,
+                    P.Name AS Producer
+                FROM 
+                    [Notification].[Notification] N
+                    INNER JOIN [Notification].[NotificationAssessment] NA ON N.Id = NA.NotificationApplicationId
+                    OUTER APPLY (
+                        SELECT TOP 1 ChangeDate
+                        FROM [Notification].[NotificationStatusChange] NS
+                        WHERE NS.NotificationAssessmentId = NA.Id
+                        ORDER BY ChangeDate DESC
+                    ) NS
+                    LEFT JOIN [Notification].[Exporter] E ON N.Id = E.NotificationId
+                    LEFT JOIN [Notification].[Importer] I ON N.Id = I.NotificationId
+                    LEFT JOIN [Notification].[ProducerCollection] PC ON N.Id = PC.NotificationId
+                    LEFT JOIN [Notification].[Producer] P ON PC.Id = P.ProducerCollectionId AND P.IsSiteOfExport = 1
+                WHERE 
+                    N.UserId = @Id
+                ORDER BY
+                    N.NotificationNumber ASC", 
+                new SqlParameter("@Id", userContext.UserId)).ToListAsync();
         }
     }
 }
