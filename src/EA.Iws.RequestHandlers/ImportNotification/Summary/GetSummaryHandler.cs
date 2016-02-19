@@ -57,7 +57,7 @@
 
             if (status == ImportNotificationStatus.NotificationReceived)
             {
-                //TODO: refactor this into the summaryRepository.GetFromDraft() method
+                var data = await draftRepository.Get(message.Id);
 
                 var notification = await importNotificationRepository.Get(message.Id);
 
@@ -71,18 +71,18 @@
                     Type = notification.NotificationType,
                     Number = notification.NotificationNumber,
                     Status = status,
-                    Exporter = await GetExporter(message.Id),
-                    Facilities = await GetFacilities(message.Id),
-                    Importer = await GetImporter(message.Id),
-                    Producer = await GetProducer(message.Id),
-                    IntendedShipment = await GetIntendedShipment(message.Id),
+                    Exporter = GetExporter(data),
+                    Facilities = GetFacilities(data),
+                    Importer = GetImporter(data),
+                    Producer = GetProducer(data),
+                    IntendedShipment = GetIntendedShipment(data),
                     StateOfExport = transportRoute.StateOfExport,
                     StateOfImport = transportRoute.StateOfImport,
                     TransitStates = transportRoute.TransitStates,
                     HasNoTransitStates = transportRoute.HasNoTransitStates,
-                    WasteOperation = await GetWasteOperation(message.Id),
+                    WasteOperation = GetWasteOperation(data),
                     WasteType = await wasteTypeSummary.GetWasteType(message.Id),
-                    AreFacilitiesPreconsented = await GetFacilityPreconsent(message.Id)
+                    AreFacilitiesPreconsented = GetFacilityPreconsent(data)
                 };
             }
             else
@@ -91,88 +91,76 @@
             }
         }
 
-        private async Task<Producer> GetProducer(Guid id)
+        private Producer GetProducer(Draft.ImportNotification notification)
         {
-            var producer = await draftRepository.GetDraftData<Draft.Producer>(id);
-
             return new Producer
             {
-                Address = ConvertAddress(producer.Address),
-                Name = producer.BusinessName,
-                Contact = Contact.FromDraftContact(producer.Contact),
-                AreMultiple = producer.AreMultiple
+                Address = ConvertAddress(notification.Producer.Address),
+                Name = notification.Producer.BusinessName,
+                Contact = Contact.FromDraftContact(notification.Producer.Contact),
+                AreMultiple = notification.Producer.AreMultiple
             };
         }
 
-        private async Task<Exporter> GetExporter(Guid id)
+        private Exporter GetExporter(Draft.ImportNotification notification)
         {
-            var exporter = await draftRepository.GetDraftData<Draft.Exporter>(id);
-
             return new Exporter
             {
-                Address = ConvertAddress(exporter.Address),
-                Name = exporter.BusinessName,
-                Contact = Contact.FromDraftContact(exporter.Contact)
+                Address = ConvertAddress(notification.Exporter.Address),
+                Name = notification.Exporter.BusinessName,
+                Contact = Contact.FromDraftContact(notification.Exporter.Contact)
             };
         }
 
-        private async Task<Importer> GetImporter(Guid id)
+        private Importer GetImporter(Draft.ImportNotification notification)
         {
-            var importer = await draftRepository.GetDraftData<Draft.Importer>(id);
-
             return new Importer
             {
-                Address = ConvertAddress(importer.Address),
-                BusinessType = importer.Type,
-                Contact = Contact.FromDraftContact(importer.Contact),
-                Name = importer.BusinessName,
-                RegistrationNumber = importer.RegistrationNumber
+                Address = ConvertAddress(notification.Importer.Address),
+                BusinessType = notification.Importer.Type,
+                Contact = Contact.FromDraftContact(notification.Importer.Contact),
+                Name = notification.Importer.BusinessName,
+                RegistrationNumber = notification.Importer.RegistrationNumber
             };
         }
 
-        private async Task<IList<Facility>> GetFacilities(Guid id)
+        private IList<Facility> GetFacilities(Draft.ImportNotification notification)
         {
-            var facilitiesCollection = await draftRepository.GetDraftData<Draft.FacilityCollection>(id);
-
-            if (facilitiesCollection.Facilities == null)
+            if (notification.Facilities.Facilities == null)
             {
                 return new Facility[0];
             }
 
-            return facilitiesCollection.Facilities.Select(f =>
-            new Facility
-            {
-                Address = ConvertAddress(f.Address),
-                Contact = Contact.FromDraftContact(f.Contact),
-                Name = f.BusinessName,
-                BusinessType = f.Type,
-                RegistrationNumber = f.RegistrationNumber,
-                IsActualSite = f.IsActualSite
-            }).ToArray();
+            return notification.Facilities.Facilities.Select(f =>
+                new Facility
+                {
+                    Address = ConvertAddress(f.Address),
+                    Contact = Contact.FromDraftContact(f.Contact),
+                    Name = f.BusinessName,
+                    BusinessType = f.Type,
+                    RegistrationNumber = f.RegistrationNumber,
+                    IsActualSite = f.IsActualSite
+                }).ToArray();
         }
 
-        private async Task<IntendedShipment> GetIntendedShipment(Guid id)
+        private static IntendedShipment GetIntendedShipment(Draft.ImportNotification notification)
         {
-            var intendedShipment = await draftRepository.GetDraftData<Draft.Shipment>(id);
-
             return new IntendedShipment
             {
-                TotalShipments = intendedShipment.TotalShipments,
-                Start = intendedShipment.StartDate,
-                End = intendedShipment.EndDate,
-                Quantity = intendedShipment.Quantity,
-                Units = intendedShipment.Unit
+                TotalShipments = notification.Shipment.TotalShipments,
+                Start = notification.Shipment.StartDate,
+                End = notification.Shipment.EndDate,
+                Quantity = notification.Shipment.Quantity,
+                Units = notification.Shipment.Unit
             };
         }
 
-        private async Task<WasteOperation> GetWasteOperation(Guid id)
+        private static WasteOperation GetWasteOperation(Draft.ImportNotification notification)
         {
-            var wasteOperation = await draftRepository.GetDraftData<Draft.WasteOperation>(id);
-
             return new WasteOperation
             {
-                OperationCodes = wasteOperation.OperationCodes,
-                TechnologyEmployed = wasteOperation.TechnologyEmployed
+                OperationCodes = notification.WasteOperation.OperationCodes,
+                TechnologyEmployed = notification.WasteOperation.TechnologyEmployed
             };
         }
 
@@ -208,11 +196,9 @@
             return string.Empty;
         }
 
-        private async Task<bool?> GetFacilityPreconsent(Guid id)
+        private static bool? GetFacilityPreconsent(Draft.ImportNotification notification)
         {
-            var preconsent = await draftRepository.GetDraftData<Draft.Preconsented>(id);
-
-            return preconsent.AllFacilitiesPreconsented;
+            return notification.Preconsented.AllFacilitiesPreconsented;
         }
     }
 }

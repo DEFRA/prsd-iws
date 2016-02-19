@@ -1,6 +1,7 @@
 ﻿namespace EA.Iws.DataAccess.Draft
 {
     using System;
+    using System.Collections.Generic;
     using System.Data.Entity;
     using System.Linq;
     using System.Threading.Tasks;
@@ -47,9 +48,36 @@
                 .Select(p => p.Value)
                 .SingleOrDefaultAsync();
 
-            if (data != null)
+            return DeserializeDraftObject<TData>(importNotificationId, data);
+        }
+
+        public async Task<ImportNotification> Get(Guid importNotificationId)
+        {
+            var data = await context.Imports
+                .Where(i => i.ImportNotificationId == importNotificationId)
+                .ToListAsync();
+
+            return new ImportNotification
             {
-                return JsonConvert.DeserializeObject<TData>(data);
+                Exporter = GetDraftData<Exporter>(data, importNotificationId),
+                Importer = GetDraftData<Importer>(data, importNotificationId),
+                Facilities = GetDraftData<FacilityCollection>(data, importNotificationId),
+                Preconsented = GetDraftData<Preconsented>(data, importNotificationId),
+                Producer = GetDraftData<Producer>(data, importNotificationId),
+                Shipment = GetDraftData<Shipment>(data, importNotificationId),
+                StateOfExport = GetDraftData<StateOfExport>(data, importNotificationId),
+                StateOfImport = GetDraftData<StateOfImport>(data, importNotificationId),
+                TransitStates = GetDraftData<TransitStateCollection>(data, importNotificationId),
+                WasteOperation = GetDraftData<WasteOperation>(data, importNotificationId),
+                WasteType = GetDraftData<WasteType>(data, importNotificationId)
+            };
+        }
+
+        private static TData DeserializeDraftObject<TData>(Guid importNotificationId, string json)
+        {
+            if (json != null)
+            {
+                return JsonConvert.DeserializeObject<TData>(json);
             }
             else if (typeof(IDraftEntity).IsAssignableFrom(typeof(TData)))
             {
@@ -61,22 +89,13 @@
             }
         }
 
-        public async Task<ImportNotification> Get(Guid importNotificationId)
+        private static TData GetDraftData<TData>(IEnumerable<Import> importData, Guid importNotificationId)
         {
-            return new ImportNotification
-            {
-                Exporter = await GetDraftData<Exporter>(importNotificationId),
-                Importer = await GetDraftData<Importer>(importNotificationId),
-                Facilities = await GetDraftData<FacilityCollection>(importNotificationId),
-                Preconsented = await GetDraftData<Preconsented>(importNotificationId),
-                Producer = await GetDraftData<Producer>(importNotificationId),
-                Shipment = await GetDraftData<Shipment>(importNotificationId),
-                StateOfExport = await GetDraftData<StateOfExport>(importNotificationId),
-                StateOfImport = await GetDraftData<StateOfImport>(importNotificationId),
-                TransitStates = await GetDraftData<TransitStateCollection>(importNotificationId),
-                WasteOperation = await GetDraftData<WasteOperation>(importNotificationId),
-                WasteType = await GetDraftData<WasteType>(importNotificationId)
-            };
+            var typeName = typeof(TData).FullName;
+
+            var data = importData.SingleOrDefault(x => x.Type == typeName);
+
+            return DeserializeDraftObject<TData>(importNotificationId, data == null ? null : data.Value);
         }
     }
 }
