@@ -54,21 +54,16 @@
 
         private async Task<decimal> GetPrice(ShipmentInfo shipmentInfo, NotificationApplication notification)
         {
-            var pricingStructures = await pricingStructureRepository.Get();
-
             var facilityCollection = await facilityRepository.GetByNotificationId(notification.Id);
             bool isInterim = facilityCollection.IsInterim.HasValue ? facilityCollection.IsInterim.Value : facilityCollection.HasMultipleFacilities;
 
-            var pricingStructure = pricingStructures.Single(p =>
-                p.CompetentAuthority == notification.CompetentAuthority
-                && p.Activity.TradeDirection == TradeDirection.Export
-                && p.Activity.NotificationType == notification.NotificationType
-                && p.Activity.IsInterim == isInterim
-                && (p.ShipmentQuantityRange.RangeFrom <= shipmentInfo.NumberOfShipments
-                    && (p.ShipmentQuantityRange.RangeTo == null
-                    || p.ShipmentQuantityRange.RangeTo >= shipmentInfo.NumberOfShipments)));
+            var result = await pricingStructureRepository
+                .GetExport(notification.CompetentAuthority, 
+                notification.NotificationType, 
+                shipmentInfo.NumberOfShipments, 
+                isInterim);
 
-            return pricingStructure.Price;
+            return result.Price;
         }
     }
 }
