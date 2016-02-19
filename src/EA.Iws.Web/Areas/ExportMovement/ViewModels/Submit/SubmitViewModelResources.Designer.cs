@@ -61,7 +61,7 @@ namespace EA.Iws.Web.Areas.ExportMovement.ViewModels.Submit {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Please make sure your prenotification is signed before you upload it.
+        ///   Looks up a localized string similar to Upload the signed copy of the prenotification document.
         /// </summary>
         public static string File {
             get {

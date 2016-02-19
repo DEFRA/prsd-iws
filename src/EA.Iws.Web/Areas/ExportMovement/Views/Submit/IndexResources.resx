@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Paragraph" xml:space="preserve">
+    <value>Please make sure your prenotification is signed before you upload it.</value>
+  </data>
   <data name="ReturnToNotificationOptions" xml:space="preserve">
     <value>Go to notification options</value>
   </data>
