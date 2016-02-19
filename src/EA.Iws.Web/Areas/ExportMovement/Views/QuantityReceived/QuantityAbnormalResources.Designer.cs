@@ -61,7 +61,25 @@ namespace EA.Iws.Web.Areas.ExportMovement.Views.QuantityReceived {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to I’ve entered the right amount as the quantity of waste received.
+        ///   Looks up a localized string similar to Please note: You entered {0} as the quantity of waste received, however that’s over 50% more than the actual quantity..
+        /// </summary>
+        public static string AboveTolerance {
+            get {
+                return ResourceManager.GetString("AboveTolerance", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please note: You entered {0} as the quantity of waste received, however that’s over 50% less than the actual quantity..
+        /// </summary>
+        public static string BelowTolerance {
+            get {
+                return ResourceManager.GetString("BelowTolerance", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Yes - I’ve entered the right quantity of waste received.
         /// </summary>
         public static string Confirm {
             get {
@@ -70,16 +88,7 @@ namespace EA.Iws.Web.Areas.ExportMovement.Views.QuantityReceived {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You entered {0} {1} as the quantity of waste received, but this is over 50% {2} than the actual quantity..
-        /// </summary>
-        public static string LeadParagraph {
-            get {
-                return ResourceManager.GetString("LeadParagraph", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The quantity of waste received is very different to the actual quantity.
+        ///   Looks up a localized string similar to Are you sure you&apos;ve entered the right quantity?.
         /// </summary>
         public static string MainHeading {
             get {
@@ -97,7 +106,7 @@ namespace EA.Iws.Web.Areas.ExportMovement.Views.QuantityReceived {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to I’d like to alter the quantity of waste received before I continue.
+        ///   Looks up a localized string similar to No - I’d like to correct the quantity of waste received.
         /// </summary>
         public static string Reject {
             get {

@@ -117,20 +117,23 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Confirm" xml:space="preserve">
-    <value>I’ve entered the right amount as the quantity of waste received</value>
+  <data name="AboveTolerance" xml:space="preserve">
+    <value>Please note: You entered {0} as the quantity of waste received, however that’s over 50% more than the actual quantity.</value>
   </data>
-  <data name="LeadParagraph" xml:space="preserve">
-    <value>You entered {0} {1} as the quantity of waste received, but this is over 50% {2} than the actual quantity.</value>
+  <data name="BelowTolerance" xml:space="preserve">
+    <value>Please note: You entered {0} as the quantity of waste received, however that’s over 50% less than the actual quantity.</value>
+  </data>
+  <data name="Confirm" xml:space="preserve">
+    <value>Yes - I’ve entered the right quantity of waste received</value>
   </data>
   <data name="MainHeading" xml:space="preserve">
-    <value>The quantity of waste received is very different to the actual quantity</value>
+    <value>Are you sure you've entered the right quantity?</value>
   </data>
   <data name="QuantityLabel" xml:space="preserve">
     <value>Quantity received in {0}</value>
   </data>
   <data name="Reject" xml:space="preserve">
-    <value>I’d like to alter the quantity of waste received before I continue</value>
+    <value>No - I’d like to correct the quantity of waste received</value>
   </data>
   <data name="Title" xml:space="preserve">
     <value>Quantity received</value>
