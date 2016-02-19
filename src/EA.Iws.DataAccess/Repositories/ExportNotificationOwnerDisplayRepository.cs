@@ -1,7 +1,9 @@
 ﻿namespace EA.Iws.DataAccess.Repositories
 {
+    using System;
     using System.Collections.Generic;
     using System.Data.Entity;
+    using System.Data.SqlClient;
     using System.Linq;
     using System.Threading.Tasks;
     using Core.Notification;
@@ -19,36 +21,28 @@
 
         public async Task<IEnumerable<ExportNotificationOwnerDisplay>> GetInternalUnsubmittedByCompetentAuthority(UKCompetentAuthority competentAuthority)
         {
-            var query = from Notification in context.NotificationApplications
-                            where Notification.CompetentAuthority == competentAuthority
-                        from Exporter in context.Exporters
-                            .Where(e => Notification.Id == e.NotificationId).DefaultIfEmpty()
-                        from Importer in context.Importers
-                            .Where(i => Notification.Id == i.NotificationId).DefaultIfEmpty()
-                        join ProducerCollection in context.Producers 
-                            on Notification.Id equals ProducerCollection.NotificationId
-                        join InternalUser in context.InternalUsers 
-                            on Notification.UserId.ToString() equals InternalUser.UserId
-                        join Assessment in context.NotificationAssessments.Where(a => a.Status == NotificationStatus.NotSubmitted) 
-                            on Notification.Id equals Assessment.NotificationApplicationId
-                        select new
-                        {
-                            Notification.Id,
-                            Notification.NotificationNumber,
-                            Exporter,
-                            Importer,
-                            ProducerCollection,
-                            InternalUser
-                        };
-
-            var result = await query.ToArrayAsync();
-
-            return result.Select(x => ExportNotificationOwnerDisplay.Load(x.Id,
-                x.NotificationNumber,
-                x.Exporter,
-                x.Importer,
-                x.ProducerCollection.Producers.SingleOrDefault(p => p.IsSiteOfExport),
-                x.InternalUser.User.FullName));
+            return await context.Database.SqlQuery<ExportNotificationOwnerDisplay>(@"
+                SELECT 
+                    N.Id AS NotificationId,
+                    N.NotificationNumber AS Number,
+                    E.Name AS ExporterName,
+                    I.Name AS ImporterName,
+                    P.Name AS ProducerName,
+                    ANU.FirstName + ' ' + ANU.Surname AS OwnerName
+                FROM 
+                    [Notification].[Notification] N
+                    INNER JOIN [Notification].[NotificationAssessment] NA ON N.Id = NA.NotificationApplicationId AND NA.Status = 1
+                    LEFT JOIN [Notification].[Exporter] E ON N.Id = E.NotificationId
+                    LEFT JOIN [Notification].[Importer] I ON N.Id = I.NotificationId
+                    LEFT JOIN [Notification].[ProducerCollection] PC ON N.Id = PC.NotificationId
+                    LEFT JOIN [Notification].[Producer] P ON PC.Id = P.ProducerCollectionId AND P.IsSiteOfExport = 1
+                    INNER JOIN [Person].[InternalUser] IU ON IU.UserId = N.UserId
+                    INNER JOIN [Identity].[AspNetUsers] ANU ON ANU.Id = IU.UserId
+                WHERE 
+                    N.CompetentAuthority = @Ca
+                ORDER BY
+                    N.NotificationNumber ASC",
+                new SqlParameter("@Ca", competentAuthority)).ToListAsync();
         }
     }
 }
