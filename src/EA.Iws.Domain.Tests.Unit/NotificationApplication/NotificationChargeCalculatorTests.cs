@@ -79,6 +79,7 @@
             A.CallTo(() => shipmentInfoRepository.GetByNotificationId(notificationId)).Returns(shipmentInfo);
             A.CallTo(() => notificationApplicationRepository.GetById(notificationId)).Returns(notificationApplication);
             A.CallTo(() => pricingStructureRepository.Get()).Returns(GetPricingStructures());
+            A.CallTo(() => pricingStructureRepository.GetExport(UKCompetentAuthority.England, NotificationType.Recovery, A<int>.Ignored, A<bool>.Ignored)).Returns(GetPricingStructure());
             A.CallTo(() => facilityRepository.GetByNotificationId(notificationId)).Returns(GetFacilityCollection());
 
             var result = await chargeCalculator.GetValue(notificationId);
@@ -87,6 +88,18 @@
         }
 
         private IEnumerable<PricingStructure> GetPricingStructures()
+        {
+            var pricingStructure = GetPricingStructure();
+
+            var p = new List<PricingStructure>
+            {
+                pricingStructure
+            };
+
+            return p;
+        }
+
+        private PricingStructure GetPricingStructure()
         {
             var pricingStructure = ObjectInstantiator<PricingStructure>.CreateNew();
 
@@ -107,12 +120,7 @@
 
             ObjectInstantiator<PricingStructure>.SetProperty(x => x.Price, NotificationPrice, pricingStructure);
 
-            var p = new List<PricingStructure>
-            {
-                pricingStructure
-            };
-
-            return p;
+            return pricingStructure;
         }
 
         private void SetupNotification()
