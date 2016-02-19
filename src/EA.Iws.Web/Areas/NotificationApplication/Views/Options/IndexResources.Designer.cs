@@ -295,7 +295,7 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.Options {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Shipment key dates - based on status.
+        ///   Looks up a localized string similar to Shipment key dates - based on status..
         /// </summary>
         public static string TableTitle {
             get {

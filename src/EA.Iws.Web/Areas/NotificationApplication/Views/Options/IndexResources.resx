@@ -148,7 +148,7 @@
     <value>Shipment summary</value>
   </data>
   <data name="TableTitle" xml:space="preserve">
-    <value>Shipment key dates - based on status</value>
+    <value>Shipment key dates - based on status.</value>
   </data>
   <data name="TabTitle" xml:space="preserve">
     <value>Notification options</value>
