@@ -37,7 +37,7 @@
                     LEFT JOIN [Notification].[ProducerCollection] PC ON N.Id = PC.NotificationId
                     LEFT JOIN [Notification].[Producer] P ON PC.Id = P.ProducerCollectionId AND P.IsSiteOfExport = 1
                     INNER JOIN [Person].[InternalUser] IU ON IU.UserId = N.UserId
-                    LEFT JOIN [Identity].[AspNetUsers] ANU ON ANU.Id = IU.UserId
+                    INNER JOIN [Identity].[AspNetUsers] ANU ON ANU.Id = IU.UserId
                 WHERE 
                     N.CompetentAuthority = @Ca
                 ORDER BY
