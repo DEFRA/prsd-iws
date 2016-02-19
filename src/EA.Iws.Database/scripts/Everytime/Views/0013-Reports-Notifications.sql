@@ -43,9 +43,12 @@ AS
 
     INNER JOIN	[Lookup].[NotificationStatus] AS NS
     ON			[NS].[Id] = [NA].[Status]
+	
+	LEFT JOIN	[Notification].[Consultation] AS CON
+	ON			[CON].[NotificationId] = [N].[Id]
 
     LEFT JOIN	[Lookup].[LocalArea] AS LA
-    ON			[NA].[LocalAreaId] = [LA].[Id]
+    ON			[CON].[LocalAreaId] = [LA].[Id]
 
     INNER JOIN	[Notification].[ShipmentInfo] AS SI
     ON			[SI].[NotificationId] = [N].[Id]
