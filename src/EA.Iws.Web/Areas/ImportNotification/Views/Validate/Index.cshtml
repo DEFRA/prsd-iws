@@ -1,13 +1,14 @@
 ﻿@model EA.Iws.Web.Areas.ImportNotification.ViewModels.Validate.ValidateViewModel
+@using Resource = EA.Iws.Web.Areas.ImportNotification.Views.Validate.IndexResources
 @{
-    ViewBag.Title = "Validate import notification";
+    ViewBag.Title = Resource.TabTitle;
 }
 
 @if (Model.HasErrors)
 {
-    <h1 class="heading-large">Your notification looks incomplete</h1>
+    <h1 class="heading-large">@Resource.HeadingIncomplete</h1>
 
-    <p>Missing data from each section of the notification is listed below.</p>
+    <p class="text">@Resource.GuidanceIncomplete</p>
 
     foreach (var validationResult in Model.ValidationResults)
     {
@@ -26,11 +27,17 @@
 }
 else
 {
-    <h1 class="heading-large">Your notification is ready to complete</h1>
+    <h1 class="heading-large">@Resource.HeadingComplete</h1>
+
+    <p class="text">@Resource.GuidanceComplete</p>
 
     using (Html.BeginForm("Save", "Validate"))
     {
         @Html.AntiForgeryToken()
-        <button type="submit" class="button">@Constants.ContinueButtonText</button>
+        <div class="form-group">
+            <button type="submit" class="button">@Constants.ContinueButtonText</button>
+        </div>
+
+        @Html.ActionLink(Resource.ReturnLinkText, "Index", "Home")
     }
 }
