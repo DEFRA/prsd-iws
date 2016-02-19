@@ -57,8 +57,7 @@
             var facilityCollection = await facilityRepository.GetByNotificationId(notification.Id);
             bool isInterim = facilityCollection.IsInterim.HasValue ? facilityCollection.IsInterim.Value : facilityCollection.HasMultipleFacilities;
 
-            var result = await pricingStructureRepository
-                .GetExport(notification.CompetentAuthority, 
+            var result = await pricingStructureRepository.GetExport(notification.CompetentAuthority, 
                 notification.NotificationType, 
                 shipmentInfo.NumberOfShipments, 
                 isInterim);
