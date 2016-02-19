@@ -228,4 +228,10 @@
   <data name="ExitPointText" xml:space="preserve">
     <value>Exit point:</value>
   </data>
+  <data name="ButtonText" xml:space="preserve">
+    <value>Ready to be acknowledged</value>
+  </data>
+  <data name="GuidanceText" xml:space="preserve">
+    <value>Select "Ready to be acknowledged" once you've entered all of the necessary information for this notification.</value>
+  </data>
 </root>

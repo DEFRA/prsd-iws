@@ -70,6 +70,15 @@ namespace EA.Iws.Web.Areas.ImportNotification.Views.Home {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Ready to be acknowledged.
+        /// </summary>
+        public static string ButtonText {
+            get {
+                return ResourceManager.GetString("ButtonText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Not applicable.
         /// </summary>
         public static string CodesNotApplicableText {
@@ -147,6 +156,15 @@ namespace EA.Iws.Web.Areas.ImportNotification.Views.Home {
         public static string False {
             get {
                 return ResourceManager.GetString("False", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select &quot;Ready to be acknowledged&quot; once you&apos;ve entered all of the necessary information for this notification..
+        /// </summary>
+        public static string GuidanceText {
+            get {
+                return ResourceManager.GetString("GuidanceText", resourceCulture);
             }
         }
         

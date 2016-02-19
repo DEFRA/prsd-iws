@@ -11,7 +11,9 @@
 
 @if (Model.Details.Status == ImportNotificationStatus.NotificationReceived)
 {
-    @Html.ActionLink("Complete notification", "Index", "Validate", null, new { @class = "button" })
+    @Html.ActionLink(Resource.ButtonText, "Index", "Validate", null, new { @class = "button" })
+
+    <p class="text">@Resource.GuidanceText</p>
 }
 
 @Html.Partial("_SummaryTableContainer")
