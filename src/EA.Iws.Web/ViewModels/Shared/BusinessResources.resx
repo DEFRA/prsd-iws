@@ -124,7 +124,7 @@
     <value>Companies House number</value>
   </data>
   <data name="CompanyHouseDescription" xml:space="preserve">
-    <value>Your Companies House number is on your organisation's certificate of incorporation. You can also get the number from your organisation's accountant or accounts department, or &lt;a href="https://beta.companieshouse.gov.uk/" target="_blank"&gt;search the Companies House online services&lt;/a&gt;.</value>
+    <value>Your Companies House number is on your organisation's certificate of incorporation. You can also get the number from your organisation's accountant or accounts department, or &lt;a href="https://beta.companieshouse.gov.uk/" target="_blank" rel="external"&gt;search the Companies House online services&lt;/a&gt;.</value>
   </data>
   <data name="CompanyHouseRequired" xml:space="preserve">
     <value>Companies house number is required</value>
