@@ -64,5 +64,29 @@
 
             return View(model);
         }
+
+        [HttpGet]
+        public ActionResult PostageLabelUnavailable(Guid id)
+        {
+            var model = new UnavailableViewModel { NotificationId = id };
+
+            return View(model);
+        }
+
+        [HttpGet]
+        public ActionResult FinancialGuaranteeUnavailable(Guid id)
+        {
+            var model = new UnavailableViewModel { NotificationId = id };
+
+            return View(model);
+        }
+
+        [HttpGet]
+        public ActionResult AnnexUploadUnavailable(Guid id)
+        {
+            var model = new UnavailableViewModel { NotificationId = id };
+
+            return View(model);
+        }
     }
 }

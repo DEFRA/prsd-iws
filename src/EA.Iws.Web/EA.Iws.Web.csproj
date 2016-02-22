@@ -396,6 +396,9 @@
     <Content Include="Areas\NotificationApplication\Views\WhatToDoNext\_Block17Disclosure.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\WhatToDoNext\_RemittancePost.cshtml" />
     <Content Include="Areas\AdminImportAssessment\Views\AssignArea\Index.cshtml" />
+    <Content Include="Areas\NotificationApplication\Views\Options\PostageLabelUnavailable.cshtml" />
+    <Content Include="Areas\NotificationApplication\Views\Options\FinancialGuaranteeUnavailable.cshtml" />
+    <Content Include="Areas\NotificationApplication\Views\Options\AnnexUploadUnavailable.cshtml" />
     <None Include="Content\iws\_panels.scss" />
     <Content Include="Content\select2\select2-spinner.gif" />
     <Content Include="Content\select2\select2.css" />
@@ -1701,10 +1704,30 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ResubmissionSuccessResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Areas\NotificationApplication\Views\Options\AnnexUploadUnavailableResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AnnexUploadUnavailableResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Areas\NotificationApplication\Views\Options\DownloadUnavailableResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>DownloadUnavailableResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\NotificationApplication\Views\Options\FinancialGuaranteeUnavailableResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FinancialGuaranteeUnavailableResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\NotificationApplication\Views\Options\PostageLabelUnavailableResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PostageLabelUnavailableResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\NotificationApplication\Views\Options\UnavailableResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>UnavailableResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Areas\NotificationApplication\Views\Shared\CountryNotListedDisclosureResources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -3355,13 +3378,29 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>MeansOfTransportResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Areas\NotificationApplication\Views\Options\AnnexUploadUnavailableResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AnnexUploadUnavailableResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Areas\NotificationApplication\Views\Options\DownloadUnavailableResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>DownloadUnavailableResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Areas\NotificationApplication\Views\Options\FinancialGuaranteeUnavailableResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>FinancialGuaranteeUnavailableResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Areas\NotificationApplication\Views\Options\IndexResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\NotificationApplication\Views\Options\PostageLabelUnavailableResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>PostageLabelUnavailableResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\NotificationApplication\Views\Options\UnavailableResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>UnavailableResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\NotificationApplication\Views\PackagingTypes\PackagingTypesResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

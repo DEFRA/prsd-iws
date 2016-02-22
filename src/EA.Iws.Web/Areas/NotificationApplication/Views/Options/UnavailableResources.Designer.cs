@@ -22,14 +22,14 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.Options {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class DownloadUnavailableResources {
+    public class UnavailableResources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal DownloadUnavailableResources() {
+        internal UnavailableResources() {
         }
         
         /// <summary>
@@ -39,8 +39,7 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.Options {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EA.Iws.Web.Areas.NotificationApplication.Views.Options.DownloadUnavailableResourc" +
-                            "es", typeof(DownloadUnavailableResources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EA.Iws.Web.Areas.NotificationApplication.Views.Options.UnavailableResources", typeof(UnavailableResources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -62,29 +61,11 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.Options {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Notification download unavailable.
+        ///   Looks up a localized string similar to This action is not available because the notification has not been submitted.
         /// </summary>
-        public static string Tab {
+        public static string Heading {
             get {
-                return ResourceManager.GetString("Tab", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to While this notification is incomplete, you won&apos;t be able to download or print it. Once you have completed and submitted it online, you can download, print, sign and post it to us..
-        /// </summary>
-        public static string Text {
-            get {
-                return ResourceManager.GetString("Text", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to You can&apos;t download or print your notification yet.
-        /// </summary>
-        public static string Title {
-            get {
-                return ResourceManager.GetString("Title", resourceCulture);
+                return ResourceManager.GetString("Heading", resourceCulture);
             }
         }
     }
