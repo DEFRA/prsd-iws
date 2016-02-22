@@ -88,6 +88,15 @@ namespace EA.Iws.Web.Views.Applicant {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Error retrieving notifications, please try again..
+        /// </summary>
+        public static string ErrorMessage {
+            get {
+                return ResourceManager.GetString("ErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to  first..
         /// </summary>
         public static string First {
@@ -102,6 +111,15 @@ namespace EA.Iws.Web.Views.Applicant {
         public static string FullStop {
             get {
                 return ResourceManager.GetString("FullStop", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You have generated the following notifications.
+        /// </summary>
+        public static string GeneratedMessage {
+            get {
+                return ResourceManager.GetString("GeneratedMessage", resourceCulture);
             }
         }
         
@@ -142,11 +160,29 @@ namespace EA.Iws.Web.Views.Applicant {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Choose.
+        /// </summary>
+        public static string LinkChoose {
+            get {
+                return ResourceManager.GetString("LinkChoose", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You currently have no notifications..
+        /// </summary>
+        public static string MessageNoNotification {
+            get {
+                return ResourceManager.GetString("MessageNoNotification", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to This link opens in a new browser tab.
         /// </summary>
-        public static string Message {
+        public static string NewBrowserMessage {
             get {
-                return ResourceManager.GetString("Message", resourceCulture);
+                return ResourceManager.GetString("NewBrowserMessage", resourceCulture);
             }
         }
         
@@ -156,6 +192,15 @@ namespace EA.Iws.Web.Views.Applicant {
         public static string OrYouCan {
             get {
                 return ResourceManager.GetString("OrYouCan", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Producer (site&amp;nbsp;of&amp;nbsp;export).
+        /// </summary>
+        public static string ProducerTableHeader {
+            get {
+                return ResourceManager.GetString("ProducerTableHeader", resourceCulture);
             }
         }
         
@@ -187,11 +232,83 @@ namespace EA.Iws.Web.Views.Applicant {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Notifications.
+        /// </summary>
+        public static string TableCaption {
+            get {
+                return ResourceManager.GetString("TableCaption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Action.
+        /// </summary>
+        public static string ThAction {
+            get {
+                return ResourceManager.GetString("ThAction", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Exporter - notifier.
+        /// </summary>
+        public static string ThExporter {
+            get {
+                return ResourceManager.GetString("ThExporter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Importer - consignee.
+        /// </summary>
+        public static string ThImporter {
+            get {
+                return ResourceManager.GetString("ThImporter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Notification number.
+        /// </summary>
+        public static string ThNotificationNumber {
+            get {
+                return ResourceManager.GetString("ThNotificationNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Status.
+        /// </summary>
+        public static string ThStatus {
+            get {
+                return ResourceManager.GetString("ThStatus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Status date.
+        /// </summary>
+        public static string ThStatusDate {
+            get {
+                return ResourceManager.GetString("ThStatusDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Homepage.
         /// </summary>
         public static string Title {
             get {
                 return ResourceManager.GetString("Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Manage Notifications.
+        /// </summary>
+        public static string TitleManageNotifications {
+            get {
+                return ResourceManager.GetString("TitleManageNotifications", resourceCulture);
             }
         }
         

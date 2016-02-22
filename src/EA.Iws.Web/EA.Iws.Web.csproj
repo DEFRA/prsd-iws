@@ -936,7 +936,6 @@
     <Content Include="Views\NewNotification\Created.cshtml" />
     <Content Include="Views\Applicant\Home.cshtml" />
     <Content Include="Views\Home\LandingPage.cshtml" />
-    <Content Include="Views\Applicant\_GetUserNotifications.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\Producer\Add.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\Exporter\Index.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\Importer\Index.cshtml" />
@@ -2636,11 +2635,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>VerifyEmailResources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Views\Applicant\GetUserNotificationsResources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>GetUserNotificationsResources.resx</DependentUpon>
-    </Compile>
     <Compile Include="Views\Applicant\HomeResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -3721,10 +3715,6 @@
     <EmbeddedResource Include="Views\Account\VerifyEmailResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>VerifyEmailResources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Views\Applicant\GetUserNotificationsResources.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>GetUserNotificationsResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\Applicant\HomeResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
