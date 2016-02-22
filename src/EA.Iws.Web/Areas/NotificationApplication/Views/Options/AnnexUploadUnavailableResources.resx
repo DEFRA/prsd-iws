@@ -118,12 +118,12 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Tab" xml:space="preserve">
-    <value>Notification download unavailable</value>
+    <value>Annex upload unavailable</value>
   </data>
   <data name="Text" xml:space="preserve">
-    <value>While this notification is incomplete, you won't be able to download or print it. Once you have completed and submitted it online, you can download, print, sign and post it to us.</value>
+    <value>Your notification is still incomplete. Once you've completed it, and if you indicated that you'd like to provide more information separately, you can upload your annexes here.</value>
   </data>
   <data name="Title" xml:space="preserve">
-    <value>You can't download or print your notification yet</value>
+    <value>Upload your annexes later</value>
   </data>
 </root>

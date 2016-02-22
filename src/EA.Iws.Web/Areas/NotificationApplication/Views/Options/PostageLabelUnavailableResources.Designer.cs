@@ -22,14 +22,14 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.Options {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class DownloadUnavailableResources {
+    public class PostageLabelUnavailableResources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal DownloadUnavailableResources() {
+        internal PostageLabelUnavailableResources() {
         }
         
         /// <summary>
@@ -39,8 +39,8 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.Options {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EA.Iws.Web.Areas.NotificationApplication.Views.Options.DownloadUnavailableResourc" +
-                            "es", typeof(DownloadUnavailableResources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EA.Iws.Web.Areas.NotificationApplication.Views.Options.PostageLabelUnavailableRes" +
+                            "ources", typeof(PostageLabelUnavailableResources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -62,7 +62,7 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.Options {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Notification download unavailable.
+        ///   Looks up a localized string similar to Postage label unavailable.
         /// </summary>
         public static string Tab {
             get {
@@ -71,7 +71,7 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.Options {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to While this notification is incomplete, you won&apos;t be able to download or print it. Once you have completed and submitted it online, you can download, print, sign and post it to us..
+        ///   Looks up a localized string similar to Your notification is still incomplete. Once you&apos;ve completed it, you will be able to download your postage label here..
         /// </summary>
         public static string Text {
             get {
@@ -80,7 +80,7 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.Options {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You can&apos;t download or print your notification yet.
+        ///   Looks up a localized string similar to Print your postage label later.
         /// </summary>
         public static string Title {
             get {

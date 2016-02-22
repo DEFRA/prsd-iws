@@ -50,7 +50,7 @@
         }
 
         [HttpGet]
-        public ActionResult Unavailable(Guid id)
+        public ActionResult DownloadUnavailable(Guid id)
         {
             var model = new UnavailableViewModel { NotificationId = id };
 
@@ -58,7 +58,23 @@
         }
 
         [HttpGet]
-        public ActionResult DownloadUnavailable(Guid id)
+        public ActionResult PostageLabelUnavailable(Guid id)
+        {
+            var model = new UnavailableViewModel { NotificationId = id };
+
+            return View(model);
+        }
+
+        [HttpGet]
+        public ActionResult FinancialGuaranteeUnavailable(Guid id)
+        {
+            var model = new UnavailableViewModel { NotificationId = id };
+
+            return View(model);
+        }
+
+        [HttpGet]
+        public ActionResult AnnexUploadUnavailable(Guid id)
         {
             var model = new UnavailableViewModel { NotificationId = id };
 
