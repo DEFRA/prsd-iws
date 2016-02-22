@@ -4,21 +4,16 @@
     ViewBag.Title = "Certificate of receipt upload successful";
 }
 
-<div class="grid-row">
-    <section class="column-two-thirds">
-        <header class="hgroup">
-            <h1 class="heading-large">You've successfully recorded the receipt of this shipment</h1>
-        </header>
-        @Html.HiddenFor(m => m.NotificationId)
 
+<header class="hgroup">
+    <h1 class="heading-large">You've successfully recorded the receipt of this shipment</h1>
+</header>
+@Html.HiddenFor(m => m.NotificationId)
 
-
-        <div class="form-group">
-            @Html.ActionLink("Go to notification options", "Index", "Options",
-                new { area = "NotificationApplication", id = Model.NotificationId },
-                new { @class = "button" })
-        </div>
-
-        @Html.FeedbackLink()
-    </section>
+<div class="form-group">
+    @Html.ActionLink("Go to notification options", "Index", "Options",
+        new { area = "NotificationApplication", id = Model.NotificationId },
+        new { @class = "button" })
 </div>
+
+@Html.FeedbackLink()
