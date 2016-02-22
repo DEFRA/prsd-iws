@@ -795,7 +795,6 @@
     <Content Include="Areas\NotificationApplication\Views\WhatToDoNext\_SepaAddress.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\WhatToDoNext\_NieaAddress.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\WhatToDoNext\_NrwAddress.cshtml" />
-    <Content Include="Areas\NotificationApplication\Views\Options\Unavailable.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\Annex\Index.cshtml" />
     <Content Include="Areas\ExportMovement\Views\Reject\Success.cshtml" />
     <Content Include="Areas\AdminExportAssessment\Views\Overview\Sections\_BaselOecdCode.cshtml" />
@@ -1723,11 +1722,6 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>PostageLabelUnavailableResources.resx</DependentUpon>
-    </Compile>
-    <Compile Include="Areas\NotificationApplication\Views\Options\UnavailableResources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>UnavailableResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Areas\NotificationApplication\Views\Shared\CountryNotListedDisclosureResources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -3397,10 +3391,6 @@
     <EmbeddedResource Include="Areas\NotificationApplication\Views\Options\PostageLabelUnavailableResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>PostageLabelUnavailableResources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Areas\NotificationApplication\Views\Options\UnavailableResources.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>UnavailableResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\NotificationApplication\Views\PackagingTypes\PackagingTypesResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
