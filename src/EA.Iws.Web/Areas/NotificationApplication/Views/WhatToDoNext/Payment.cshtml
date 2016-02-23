@@ -1,5 +1,6 @@
 ﻿@using System.Globalization
 @using EA.Iws.Core.Notification
+@using EA.Iws.Core.NotificationAssessment
 @using Resources = EA.Iws.Web.Areas.NotificationApplication.Views.WhatToDoNext.PaymentResources
 @model EA.Iws.Requests.Notification.WhatToDoNextPaymentData
 
@@ -105,31 +106,42 @@
 
 <div class="grid-row column-two-thirds">
     @if (Model.CompetentAuthority == UKCompetentAuthority.Wales)
-{
-    @Html.Partial("_NrwRemittanceEmail")
-}
-else
-{
-    @Html.Partial("_GeneralRemittanceEmail")
-}
+    {
+        @Html.Partial("_NrwRemittanceEmail")
+    }
+    else
+    {
+        @Html.Partial("_GeneralRemittanceEmail")
+    }
 
-@Html.Partial("_RemittancePost")
+    @Html.Partial("_RemittancePost")
 
-<h4 class="heading-small">@Resources.Post</h4>
-@Html.Partial("_GeneralPost")
+    <h4 class="heading-small">@Resources.Post</h4>
+    @Html.Partial("_GeneralPost")
 
-@Html.Action("CardPaymentInformation", new { competentAuthority = Model.CompetentAuthority })
-
-
+    @Html.Action("CardPaymentInformation", new { competentAuthority = Model.CompetentAuthority })
 
 
-<br/><br/>
 
-<div class="form-group">
-    @Html.ActionLink("Continue", "Index", "Annex", new { id = Model.Id, area = "NotificationApplication" }, new { @class = "button" })
-</div>
 
-<div>
-    @Html.ActionLink("Go to notification options", "Index", "Options", new { id = Model.Id, area = "NotificationApplication" }, null)
-</div>
+    <br/><br/>
+
+    @if (Model.Status == NotificationStatus.NotSubmitted)
+    {
+        <div class="form-group">
+            @Html.ActionLink("Continue", "Index", "Options", new { id = Model.Id, area = "NotificationApplication" }, new { @class = "button" })
+        </div>
+    }
+    else
+    {
+        <div class="form-group">
+            @Html.ActionLink("Continue", "Index", "Annex", new { id = Model.Id, area = "NotificationApplication" }, new { @class = "button" })
+        </div>
+
+        <div>
+            @Html.ActionLink("Go to notification options", "Index", "Options", new { id = Model.Id, area = "NotificationApplication" }, null)
+        </div>
+    }
+
+    
 </div>
