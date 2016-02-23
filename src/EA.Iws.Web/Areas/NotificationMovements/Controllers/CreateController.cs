@@ -9,13 +9,14 @@
     using Core.PackagingType;
     using Core.Rules;
     using Core.Shared;
+    using Infrastructure.Authorization;
     using Prsd.Core.Mediator;
     using Requests.Movement;
     using Requests.NotificationMovements;
     using Requests.NotificationMovements.Create;
     using ViewModels.Create;
 
-    [Authorize]
+    [AuthorizeActivity(typeof(CreateMovementAndDetails))]
     public class CreateController : Controller
     {
         private readonly IMediator mediator;

@@ -4,12 +4,13 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
     using System.Web.Mvc;
+    using Infrastructure.Authorization;
     using Prsd.Core.Mediator;
     using Requests.Movement;
     using Requests.NotificationMovements;
     using ViewModels.UploadChoice;
 
-    [Authorize]
+    [AuthorizeActivity(typeof(GetNewMovementIdsByNotificationId))]
     public class UploadChoiceController : Controller
     {
         private static readonly Dictionary<MovementNumberStatus, string> ValidationMessages = new Dictionary<MovementNumberStatus, string>

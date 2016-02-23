@@ -3,11 +3,12 @@
     using System;
     using System.Threading.Tasks;
     using System.Web.Mvc;
+    using Infrastructure.Authorization;
     using Prsd.Core.Mediator;
     using Requests.NotificationMovements;
     using ViewModels.Complete;
 
-    [Authorize]
+    [AuthorizeActivity(typeof(GetReceivedMovements))]
     public class CompleteController : Controller
     {
         private readonly IMediator mediator;
