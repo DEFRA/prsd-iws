@@ -4,6 +4,7 @@
     using System.Threading.Tasks;
     using System.Web;
     using System.Web.Mvc;
+    using Prsd.Core;
 
     public class AuthorizeActivityAttribute : AuthorizeAttribute
     {
@@ -15,11 +16,15 @@
 
         public AuthorizeActivityAttribute(Type requestType)
         {
+            Guard.ArgumentNotNull(() => requestType, requestType);
+
             this.requestType = requestType;
         }
 
         public AuthorizeActivityAttribute(string activity)
         {
+            Guard.ArgumentNotNullOrEmpty(() => activity, activity);
+
             this.activity = activity;
         }
 
