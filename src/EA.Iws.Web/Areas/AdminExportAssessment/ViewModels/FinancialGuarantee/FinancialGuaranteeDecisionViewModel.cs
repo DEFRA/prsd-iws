@@ -31,7 +31,7 @@
                 var values = Enum.GetValues(typeof(FinancialGuaranteeDecision))
                     .Cast<FinancialGuaranteeDecision>()
                     .Select(e => new KeyValuePair<string, FinancialGuaranteeDecision>(
-                        EnumHelper.GetDisplayName(e),
+                        EnumHelper.GetShortName(e),
                         e));
 
                 return new SelectList(values, "Value", "Key");

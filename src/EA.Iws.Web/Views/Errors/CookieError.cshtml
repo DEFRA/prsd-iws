@@ -1,15 +1,20 @@
 ﻿@{
-    Page.Title = "Invalid Request";
+    ViewBag.Title = "Invalid request";
     Response.StatusCode = 400;
 }
 
 
-<h1 class="heading-large">Error: Invalid Request</h1>
+<h1 class="heading-large">We can’t process your request</h1>
 <p>
-    We can't process your request because your browser sent an invalid request. This is likely because you have disabled Cookies in your browser.
-    Please enable cookies in your browser settings and try your request again.
+    A system error is preventing us from processing your request. 
+    This is likely because you’ve disabled cookies in your browser. 
+    Please enable cookies in your browser settings and try your request again. 
 </p>
 
-<h2 class="heading-medium">What now?</h2>
-
-@Html.Partial("_WhatNow")
+<p>
+    <ul id="proposition-links">
+        <li>
+            <a href="@Request.Url.PathAndQuery">Try this request again</a>
+        </li>
+    </ul>
+</p>

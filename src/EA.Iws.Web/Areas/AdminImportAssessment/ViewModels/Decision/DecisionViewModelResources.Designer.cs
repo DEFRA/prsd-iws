@@ -71,7 +71,7 @@ namespace EA.Iws.Web.Areas.AdminImportAssessment.ViewModels.Decision {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Decision date.
+        ///   Looks up a localized string similar to Date decision made.
         /// </summary>
         public static string ConsentGiven {
             get {
@@ -134,7 +134,7 @@ namespace EA.Iws.Web.Areas.AdminImportAssessment.ViewModels.Decision {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Date.
+        ///   Looks up a localized string similar to Date decision made.
         /// </summary>
         public static string ConsentWithdrawnDateLabel {
             get {
@@ -170,7 +170,7 @@ namespace EA.Iws.Web.Areas.AdminImportAssessment.ViewModels.Decision {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Date.
+        ///   Looks up a localized string similar to Date decision made.
         /// </summary>
         public static string ObjectedDateLabel {
             get {
@@ -242,7 +242,7 @@ namespace EA.Iws.Web.Areas.AdminImportAssessment.ViewModels.Decision {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Date.
+        ///   Looks up a localized string similar to Date decision made.
         /// </summary>
         public static string WithdrawnDateLabel {
             get {

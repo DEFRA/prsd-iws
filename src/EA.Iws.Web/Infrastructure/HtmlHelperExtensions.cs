@@ -67,7 +67,7 @@
                 case UKCompetentAuthority.NorthernIreland:
                     return new MvcHtmlString("028 90569742");
                 case UKCompetentAuthority.Wales:
-                    return new MvcHtmlString("03000 653073");
+                    return new MvcHtmlString("03000 653 073");
                 default:
                     throw new ArgumentException(
                         string.Format("No helpline number for {0} found", competentAuthority), "competentAuthority");

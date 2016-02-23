@@ -3,13 +3,13 @@
         @if (User.IsInternalUser())
         {
             <li>
-                @Html.ActionLink(linkText: "Return to the home page.", actionName: "Index", controllerName: "Home", routeValues: new { area = "Admin" }, htmlAttributes: null)
+                @Html.ActionLink(linkText: "Go to your homepage", actionName: "Index", controllerName: "Home", routeValues: new { area = "Admin" }, htmlAttributes: null)
             </li>
         }
         else
         {
             <li>
-                @Html.ActionLink(linkText: "Return to the home page.", actionName: "Home", controllerName: "Applicant", routeValues: new { area = string.Empty }, htmlAttributes: null)
+                @Html.ActionLink(linkText: "Go to your homepage", actionName: "Home", controllerName: "Applicant", routeValues: new { area = string.Empty }, htmlAttributes: null)
             </li>
         }
     </ul>

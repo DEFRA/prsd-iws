@@ -1007,6 +1007,7 @@
     <Content Include="Views\Errors\VirusDetected.cshtml" />
     <Content Include="Views\Shared\_IwsTermsAndConditions.cshtml" />
     <Content Include="Views\NewUser\TermsAndConditions.cshtml" />
+    <Content Include="Views\Errors\_GenericError.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
