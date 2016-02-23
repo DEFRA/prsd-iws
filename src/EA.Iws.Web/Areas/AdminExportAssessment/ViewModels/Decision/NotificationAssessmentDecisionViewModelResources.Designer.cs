@@ -125,7 +125,7 @@ namespace EA.Iws.Web.Areas.AdminExportAssessment.ViewModels.Decision {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Date.
+        ///   Looks up a localized string similar to Date decision made.
         /// </summary>
         public static string ConsentWithdrawnDateLabel {
             get {
