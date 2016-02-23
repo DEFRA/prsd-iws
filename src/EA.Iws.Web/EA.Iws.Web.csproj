@@ -2762,7 +2762,6 @@
     <Folder Include="Areas\Admin\Views\SmokeTest\" />
     <Folder Include="Areas\FinancialGuarantee\ViewModels\" />
     <Folder Include="Areas\FinancialGuarantee\Views\Shared\" />
-    <Folder Include="ViewModels\Applicant\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Areas\AdminExportAssessment\Views\Decision\DecisionResources.resx">

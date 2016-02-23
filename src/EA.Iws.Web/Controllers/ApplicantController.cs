@@ -1,9 +1,9 @@
 ﻿namespace EA.Iws.Web.Controllers
 {
-    using Infrastructure.Authorization;
     using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Mvc;
+    using Infrastructure.Authorization;
     using Prsd.Core.Mediator;
     using Requests.Notification;
 
