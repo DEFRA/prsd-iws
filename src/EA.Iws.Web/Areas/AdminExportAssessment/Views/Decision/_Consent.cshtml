@@ -5,7 +5,7 @@
     @Resourse.MultipleDateWarning
 </div>
 
-<h2 class="heading-medium">Consented date</h2>
+<h2 class="heading-medium">Date decision made</h2>
 
 <div class="form-group @Html.Gds().FormGroupClass(m => m.ConsentedDate)  @Html.Gds().FormGroupClass(m => m.ConsentedDate.Day) @Html.Gds().FormGroupClass(m => m.ConsentedDate.Year)">
     <fieldset>
@@ -16,7 +16,7 @@
     </fieldset>
 </div>
 
-<h2 class="heading-medium">Consent valid from</h2>
+<h2 class="heading-medium">Valid from</h2>
 
 <div class="form-group @Html.Gds().FormGroupClass(m => m.ConsentValidFromDate)  @Html.Gds().FormGroupClass(m => m.ConsentValidFromDate.Day) @Html.Gds().FormGroupClass(m => m.ConsentValidFromDate.Year)">
     <fieldset>
@@ -27,7 +27,7 @@
     </fieldset>
 </div>
 
-<h2 class="heading-medium">Consent valid to</h2>
+<h2 class="heading-medium">Valid to</h2>
 
 <div class="form-group @Html.Gds().FormGroupClass(m => m.ConsentValidToDate)  @Html.Gds().FormGroupClass(m => m.ConsentValidToDate.Day) @Html.Gds().FormGroupClass(m => m.ConsentValidToDate.Year)">
     <fieldset>
@@ -38,7 +38,7 @@
     </fieldset>
 </div>
 
-<h2 class="heading-medium">Conditions of consent (Optional)</h2>
+<h2 class="heading-medium">Conditions of consent (optional)</h2>
 
 <div class="form-group @Html.Gds().FormGroupClass(m =>m.ConsentConditions)">
     @Html.Gds().ValidationMessageFor(m => m.ConsentConditions)

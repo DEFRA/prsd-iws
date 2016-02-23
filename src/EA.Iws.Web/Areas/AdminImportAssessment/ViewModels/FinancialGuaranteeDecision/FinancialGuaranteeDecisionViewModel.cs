@@ -26,7 +26,7 @@
             get
             {
                 return new SelectList(AvailableDecisions.Select(d => 
-                    new KeyValuePair<string, FinancialGuaranteeDecision>(EnumHelper.GetDisplayName(d), d)),
+                    new KeyValuePair<string, FinancialGuaranteeDecision>(EnumHelper.GetShortName(d), d)),
                     "Value",
                     "Key");
             }

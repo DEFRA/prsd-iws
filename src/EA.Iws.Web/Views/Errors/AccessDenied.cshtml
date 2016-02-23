@@ -1,13 +1,11 @@
 ﻿@{
-    Page.Title = "Access Denied";
+    ViewBag.Title = "Access denied";
     Response.StatusCode = 403;
 }
 
 
-<h1 class="heading-large">Access Denied</h1>
+<h1 class="heading-large">Access denied</h1>
 
-<p>Sorry, you are not authorised to access this page.</p>
-
-<h2 class="heading-medium">What now?</h2>
+<p>Sorry, you're not authorised to access this page.</p>
 
 @Html.Partial("_WhatNow")

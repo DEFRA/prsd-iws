@@ -1,167 +1,159 @@
 ﻿@using EA.Iws.Core.NotificationAssessment
 @model EA.Iws.Web.Areas.NotificationApplication.ViewModels.KeyDates.KeyDatesViewModel
 @{
-    ViewBag.Title = "Notification status history";
+    ViewBag.Title = "Key dates and notification status ";
     Layout = "~/Views/Shared/_Layout.GovUK.Sections.cshtml";
 }
 
 <div class="column-two-thirds">
 
-<header class="hgroup">
-    <h1 class="heading-large">Notification status history</h1>
-</header>
+    <header class="hgroup">
+        <h1 class="heading-large">Key dates and notification status </h1>
+    </header>
 
-@Html.HiddenFor(m => m.NotificationId)
+    @Html.HiddenFor(m => m.NotificationId)
 
-@{
-    var nullMarker = "- -";
-}
-
-<div class="form-group">
-    These are the dates so far:
-
-    <table title="Assessment dates currently recorded">
-        <tr>
-            <th>Activities</th>
-            <th>Dates</th>
-            <th></th>
-        </tr>
-        <tr>
-            <td>Notification received</td>
-            <td>
-                @if (Model.NotificationReceivedDate.HasValue)
-                {
-                    @Html.Gds().DisplayDateFor(m => m.NotificationReceivedDate.GetValueOrDefault())
-                }
-                else
-                {
-                    @nullMarker
-                }
-            </td>
-            <td></td>
-        </tr>
-
-        <tr>
-            <td>Payment received</td>
-            <td>
-                @if (Model.PaymentReceivedDate.HasValue)
-                {
-                    @Html.Gds().DisplayDateFor(m => m.PaymentReceivedDate.GetValueOrDefault())
-                }
-                else
-                {
-                    @nullMarker
-                }
-            </td>
-            <td></td>
-        </tr>
-
-        <tr>
-            <td>Assessment started</td>
-            <td>
-                @if (Model.CommencementDate.HasValue)
-                {
-                    @Html.Gds().DisplayDateFor(m => m.CommencementDate.GetValueOrDefault())
-                }
-                else
-                {
-                    @nullMarker
-                }
-            </td>
-            <td></td>
-        </tr>
-
-        <tr>
-            <td>Notification complete</td>
-            <td>
-                @if (Model.CompletedDate.HasValue)
-                {
-                    @Html.Gds().DisplayDateFor(m => m.CompletedDate.GetValueOrDefault())
-                }
-                else
-                {
-                    @nullMarker
-                }
-            </td>
-            <td></td>
-        </tr>
-
-        <tr>
-            <td>Transmitted on</td>
-            <td>
-                @if (Model.TransmittedDate.HasValue)
-                {
-                    @Html.Gds().DisplayDateFor(m => m.TransmittedDate.GetValueOrDefault())
-                }
-                else
-                {
-                    @nullMarker
-                }
-            </td>
-            <td></td>
-        </tr>
-
-        <tr>
-            <td>Acknowledged on</td>
-            <td>
-                @if (Model.AcknowledgedDate.HasValue)
-                {
-                    @Html.Gds().DisplayDateFor(m => m.AcknowledgedDate.GetValueOrDefault())
-                }
-                else
-                {
-                    @nullMarker
-                }
-            </td>
-            <td></td>
-        </tr>
-
-        <tr>
-            <td>Decision required by</td>
-            <td>
-                @if (Model.DecisionRequiredDate.HasValue)
-                {
-                    @Html.Gds().DisplayDateFor(m => m.DecisionRequiredDate.GetValueOrDefault())
-                }
-                else
-                {
-                    @nullMarker
-                }
-            </td>
-            <td></td>
-        </tr>
-
-        @for (int i = 0; i < Model.Decisions.Count; i++)
-        {
-            <tr>
-                <td>
-                    @EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(Model.Decisions[i].Status)
-                </td>
-                <td>
-                    @Html.Gds().DisplayDateFor(m => m.Decisions[i].Date)
-                </td>
-                <td>
-
-                    @if (Model.Decisions[i].Status == NotificationStatus.Consented)
+    @{
+        var nullMarker = "- -";
+    }
+    @if (Model.CurrentStatus == NotificationStatus.NotSubmitted)
+    {
+        <p>Once you've completed and submitted your notification, you will be able to view updates on the notification's status here.</p>
+    }
+    else
+    {
+        <div class="form-group">
+            <p>These are the key dates for this notification so far:</p>
+            <table title="Assessment dates currently recorded">
+                <tr>
+                    <th>Activities</th>
+                    <th>Dates</th>
+                    <th></th>
+                </tr>
+                <tr>
+                    <td>Notification received</td>
+                    <td>
+                        @if (Model.NotificationReceivedDate.HasValue)
                     {
-                        @Html.Gds().DisplayShortDateRangeFor(m => m.Decisions[i].ConsentedFrom.GetValueOrDefault(), m => m.Decisions[i].ConsentedTo.GetValueOrDefault())
-                    }
-                </td>
-            </tr>
-        }
+                            @Html.Gds().DisplayDateFor(m => m.NotificationReceivedDate.GetValueOrDefault())
+                        }
+                        else
+                        {
+                            @nullMarker
+                        }
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Payment received</td>
+                    <td>
+                        @if (Model.PaymentReceivedDate.HasValue)
+                        {
+                            @Html.Gds().DisplayDateFor(m => m.PaymentReceivedDate.GetValueOrDefault())
+                        }
+                        else
+                        {
+                            @nullMarker
+                        }
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Assessment started</td>
+                    <td>
+                        @if (Model.CommencementDate.HasValue)
+                        {
+                            @Html.Gds().DisplayDateFor(m => m.CommencementDate.GetValueOrDefault())
+                        }
+                        else
+                        {
+                            @nullMarker
+                        }
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Notification complete</td>
+                    <td>
+                        @if (Model.CompletedDate.HasValue)
+                        {
+                            @Html.Gds().DisplayDateFor(m => m.CompletedDate.GetValueOrDefault())
+                        }
+                        else
+                        {
+                            @nullMarker
+                        }
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Transmitted on</td>
+                    <td>
+                        @if (Model.TransmittedDate.HasValue)
+                        {
+                            @Html.Gds().DisplayDateFor(m => m.TransmittedDate.GetValueOrDefault())
+                        }
+                        else
+                        {
+                            @nullMarker
+                        }
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Acknowledged on</td>
+                    <td>
+                        @if (Model.AcknowledgedDate.HasValue)
+                        {
+                            @Html.Gds().DisplayDateFor(m => m.AcknowledgedDate.GetValueOrDefault())
+                        }
+                        else
+                        {
+                            @nullMarker
+                        }
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Decision required by</td>
+                    <td>
+                        @if (Model.DecisionRequiredDate.HasValue)
+                        {
+                            @Html.Gds().DisplayDateFor(m => m.DecisionRequiredDate.GetValueOrDefault())
+                        }
+                        else
+                        {
+                            @nullMarker
+                        }
+                    </td>
+                    <td></td>
+                </tr>
+                @for (int i = 0; i < Model.Decisions.Count; i++)
+                {
+                    <tr>
+                        <td>
+                            @EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(Model.Decisions[i].Status)
+                        </td>
+                        <td>
+                            @Html.Gds().DisplayDateFor(m => m.Decisions[i].Date)
+                        </td>
+                        <td>
+                            @if (Model.Decisions[i].Status == NotificationStatus.Consented)
+                            {
+                                @Html.Gds().DisplayShortDateRangeFor(m => m.Decisions[i].ConsentedFrom.GetValueOrDefault(), m => m.Decisions[i].ConsentedTo.GetValueOrDefault())
+                            }
+                        </td>
+                    </tr>
+                }
+            </table>
+        </div>
+    }
 
-    </table>
-
-</div>
-
-
-
-<p>
-    @Html.ActionLink("Go to notification options",
-        "Index",
-        "Options",
-        new { area = "NotificationApplication", id = Model.NotificationId },
-        new { @class = "button" })
-</p>
-
+    <p>
+        @Html.ActionLink("Continue",
+            "Index",
+            "Options",
+            new { area = "NotificationApplication", id = Model.NotificationId },
+            new { @class = "button" })
+    </p>
 </div>

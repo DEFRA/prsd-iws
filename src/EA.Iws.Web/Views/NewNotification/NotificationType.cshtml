@@ -10,16 +10,7 @@
 @helper ContactInfo(UKCompetentAuthority competentAuthority)
 {
     @EA.Prsd.Core.Helpers.EnumHelper.GetDescription(competentAuthority)
-    @: - Telephone: 
-    switch (competentAuthority)
-    {
-        case UKCompetentAuthority.Wales:
-            @:03000 65 3000
-            break;
-        default:
-            @Html.CompetentAuthorityHelpline(competentAuthority)
-            break;
-    }
+    @: - Telephone: @Html.CompetentAuthorityHelpline(competentAuthority)
 }
 
 <header class="hgroup text">

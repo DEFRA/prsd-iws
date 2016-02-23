@@ -16,7 +16,11 @@
             AcknowledgedDate = dates.AcknowledgedDate;
             DecisionRequiredDate = dates.DecisionRequiredDate;
             Decisions = new List<NotificationAssessmentDecision>();
+            CurrentStatus = dates.CurrentStatus;
         }
+
+        public NotificationStatus CurrentStatus { get; set; }
+
         public Guid NotificationId { get; set; }
 
         public DateTime? NotificationReceivedDate { get; set; }

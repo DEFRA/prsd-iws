@@ -121,7 +121,7 @@
     <value>Conditions of consent</value>
   </data>
   <data name="ConsentGiven" xml:space="preserve">
-    <value>Decision date</value>
+    <value>Date decision made</value>
   </data>
   <data name="ConsentGivenRequired" xml:space="preserve">
     <value>Please provide the date of decision</value>
@@ -142,7 +142,7 @@
     <value>Please provide the date consent is valid until</value>
   </data>
   <data name="ConsentWithdrawnDateLabel" xml:space="preserve">
-    <value>Date</value>
+    <value>Date decision made</value>
   </data>
   <data name="ConsentWithdrawnDateRequired" xml:space="preserve">
     <value>Please enter the date the consent was withdrawn</value>
@@ -154,7 +154,7 @@
     <value>Please provide a notification decision</value>
   </data>
   <data name="ObjectedDateLabel" xml:space="preserve">
-    <value>Date</value>
+    <value>Date decision made</value>
   </data>
   <data name="ObjectedDateRequired" xml:space="preserve">
     <value>Please enter the date the objection was made</value>
@@ -178,7 +178,7 @@
     <value>The reason for withdrawal is required</value>
   </data>
   <data name="WithdrawnDateLabel" xml:space="preserve">
-    <value>Date</value>
+    <value>Date decision made</value>
   </data>
   <data name="WithdrawnDateRequired" xml:space="preserve">
     <value>Please provide the date withdrawn</value>
