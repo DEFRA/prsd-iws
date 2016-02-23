@@ -5,13 +5,14 @@
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Infrastructure;
+    using Infrastructure.Authorization;
     using Prsd.Core.Mediator;
     using Requests.Movement;
     using Requests.Movement.Reject;
     using ViewModels;
     using ViewModels.Reject;
 
-    [Authorize]
+    [AuthorizeActivity(typeof(SetMovementRejected))]
     public class RejectController : Controller
     {
         private readonly IMediator mediator;

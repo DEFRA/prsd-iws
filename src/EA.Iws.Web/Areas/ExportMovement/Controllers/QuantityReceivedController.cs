@@ -5,12 +5,13 @@
     using System.Web.Mvc;
     using Core.Movement;
     using Core.Shared;
+    using Infrastructure.Authorization;
     using Prsd.Core.Mediator;
     using Requests.Movement;
     using Requests.Movement.Receive;
     using ViewModels.Quantity;
 
-    [Authorize]
+    [AuthorizeActivity(typeof(GetMovementUnitsByMovementId))]
     public class QuantityReceivedController : Controller
     {
         private readonly IMediator mediator;

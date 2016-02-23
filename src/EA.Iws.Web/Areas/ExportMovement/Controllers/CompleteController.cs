@@ -5,13 +5,14 @@
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Infrastructure;
+    using Infrastructure.Authorization;
     using Prsd.Core.Mediator;
     using Requests.Movement;
     using Requests.Movement.Complete;
     using Requests.Notification;
     using ViewModels.Complete;
 
-    [Authorize]
+    [AuthorizeActivity(typeof(SaveMovementCompletedReceipt))]
     public class CompleteController : Controller
     {
         private readonly IMediator mediator;

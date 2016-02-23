@@ -6,7 +6,7 @@
     using Core.Shared;
     using Prsd.Core.Mediator;
 
-    [RequestAuthorization(ExportMovementPermissions.CanReadExportMovements)]
+    [RequestAuthorization(ExportMovementPermissions.CanReadExportMovementsExternal)]
     public class GetMovementUnitsByMovementId : IRequest<ShipmentQuantityUnits>
     {
         public Guid Id { get; private set; }

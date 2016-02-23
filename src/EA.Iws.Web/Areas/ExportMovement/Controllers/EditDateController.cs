@@ -4,13 +4,14 @@
     using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Mvc;
+    using Infrastructure.Authorization;
     using Prsd.Core.Mediator;
     using Requests.Movement;
     using Requests.Movement.Edit;
     using Requests.NotificationMovements;
     using ViewModels.EditDate;
 
-    [Authorize]
+    [AuthorizeActivity(typeof(UpdateMovementDate))]
     public class EditDateController : Controller
     {
         private readonly IMediator mediator;

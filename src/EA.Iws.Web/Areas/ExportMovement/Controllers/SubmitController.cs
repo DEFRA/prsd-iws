@@ -5,12 +5,13 @@
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Infrastructure;
+    using Infrastructure.Authorization;
     using Prsd.Core.Mediator;
     using Requests.Movement;
     using ViewModels;
     using ViewModels.Submit;
 
-    [Authorize]
+    [AuthorizeActivity(typeof(SetMovementFileId))]
     public class SubmitController : Controller
     {
         private readonly IMediator mediator;

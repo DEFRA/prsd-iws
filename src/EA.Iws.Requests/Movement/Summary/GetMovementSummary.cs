@@ -6,7 +6,7 @@
     using Core.Movement;
     using Prsd.Core.Mediator;
 
-    [RequestAuthorization(ExportMovementPermissions.CanReadExportMovements)]
+    [RequestAuthorization(ExportMovementPermissions.CanReadExportMovementsExternal)]
     public class GetMovementSummary : IRequest<MovementSummary>
     {
         public Guid Id { get; private set; }

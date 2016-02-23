@@ -5,7 +5,7 @@
     using Core.Authorization.Permissions;
     using Prsd.Core.Mediator;
 
-    [RequestAuthorization(ExportMovementPermissions.CanEditExportMovements)]
+    [RequestAuthorization(ExportMovementPermissions.CanEditExportMovementsExternal)]
     public class UpdateMovementDate : IRequest<bool>
     {
         public Guid MovementId { get; private set; }

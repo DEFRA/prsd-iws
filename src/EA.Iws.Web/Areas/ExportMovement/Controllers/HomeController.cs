@@ -4,10 +4,11 @@
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Infrastructure;
+    using Infrastructure.Authorization;
     using Prsd.Core.Mediator;
     using Requests.Movement;
 
-    [Authorize]
+    [AuthorizeActivity(typeof(GetMovementSummary))]
     public class HomeController : Controller
     {
         private readonly IMediator mediator;

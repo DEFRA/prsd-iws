@@ -3,11 +3,12 @@
     using System;
     using System.Threading.Tasks;
     using System.Web.Mvc;
+    using Infrastructure.Authorization;
     using Prsd.Core.Mediator;
     using Requests.Movement;
     using ViewModels;
 
-    [Authorize]
+    [AuthorizeActivity(typeof(GetMovementDateByMovementId))]
     public class DateReceivedController : Controller
     {
         private readonly IMediator mediator;

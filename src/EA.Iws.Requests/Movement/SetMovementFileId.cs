@@ -5,7 +5,7 @@
     using Core.Authorization.Permissions;
     using Prsd.Core.Mediator;
 
-    [RequestAuthorization(ExportMovementPermissions.CanEditExportMovements)]
+    [RequestAuthorization(ExportMovementPermissions.CanEditExportMovementsExternal)]
     public class SetMovementFileId : IRequest<Guid>
     {
         public SetMovementFileId(Guid movementId, byte[] movementBytes, string fileType)
