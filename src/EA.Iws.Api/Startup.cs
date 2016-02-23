@@ -36,7 +36,6 @@ namespace EA.Iws.Api
 #else
             Log.Logger = new LoggerConfiguration()
                 .WriteTo.Elmah()
-                .WriteTo.EventLog(typeof(Startup).Namespace)
                 .CreateLogger();
 #endif
             // Autofac
