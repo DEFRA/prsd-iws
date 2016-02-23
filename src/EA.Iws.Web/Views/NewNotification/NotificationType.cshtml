@@ -1,9 +1,25 @@
 ﻿@using EA.Iws.Core.Shared
+@using EA.Iws.Core.Notification
 @using EA.Iws.Web.Views.NewNotification
 @model EA.Iws.Web.ViewModels.NewNotification.NotificationTypeViewModel
 
 @{
     ViewBag.Title = NotificationTypeResources.Title;
+}
+
+@helper ContactInfo(UKCompetentAuthority competentAuthority)
+{
+    @EA.Prsd.Core.Helpers.EnumHelper.GetDescription(competentAuthority)
+    @: - Telephone: 
+    switch (competentAuthority)
+    {
+        case UKCompetentAuthority.Wales:
+            @:03000 65 3000
+            break;
+        default:
+            @Html.CompetentAuthorityHelpline(competentAuthority)
+            break;
+    }
 }
 
 <header class="hgroup text">
@@ -29,11 +45,12 @@
                     @Html.RadioButtonFor(m => m.SelectedNotificationType, notificationType, new { @id = labelFor })
                     @Html.DisplayFor(m => m.NotificationTypes[i])
                 </label>
+
                 if (isDisposal)
                 {
                     <div class="panel-indent js-hidden" id="disposal-message">
-                        @NotificationTypeResources.DisposalMessage
-                        <p>@Model.CompetentAuthorityContactInfo</p>
+                        <p>@NotificationTypeResources.DisposalMessage</p>
+                        <p>@ContactInfo(Model.CompetentAuthority)</p>
                     </div>
                 }
             }

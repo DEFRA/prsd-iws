@@ -1,9 +1,14 @@
 ﻿@using EA.Iws.Web.Areas.NotificationApplication.Views.Shared
+@using EA.Iws.Core.Notification
 <div class="form-group">
     <details>
         <summary><h2 class="summary heading-xsmall">@_PortNotListedDisclosureResources.PortNotListedTitle</h2></summary>
         <div class="panel-indent">
-            <p>@Html.Raw(_PortNotListedDisclosureResources.PortNotListedText)</p>
+            <p>
+                @Html.Raw(string.Format(_PortNotListedDisclosureResources.PortNotListedText, 
+                    Html.CompetentAuthorityHelpline(UKCompetentAuthority.England), 
+                    Html.IwsContactEmail()))
+            </p>
         </div>
     </details>
 </div>

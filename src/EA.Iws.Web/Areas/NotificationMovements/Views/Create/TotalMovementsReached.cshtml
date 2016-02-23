@@ -9,9 +9,7 @@
 
 <ol class="list-number">
     <li>@TotalMovementsReachedResources.ListItem1</li>
-    <li>@TotalMovementsReachedResources.ListItem2
-        <a href="mailto:@(TotalMovementsReachedResources.ContactEmail)">@TotalMovementsReachedResources.ContactEmail</a>
-    </li>
+    <li>@TotalMovementsReachedResources.ListItem2 @Html.IwsContactEmail()</li>
 </ol>
 
 <p>@TotalMovementsReachedResources.PleaseNoteParagraph</p>

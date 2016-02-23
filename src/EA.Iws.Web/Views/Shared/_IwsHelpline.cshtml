@@ -1,4 +1,5 @@
-﻿<div class="footer-agencies">
+﻿@using EA.Iws.Core.Notification;
+<div class="footer-agencies">
     <h2 class="heading-medium">Contact details</h2>
     <div class="grid-row">
         <div class="column-half">
@@ -6,13 +7,13 @@
             <p>
                 Environment Agency 
                 <br /> International Waste Shipments Team
-                <br /> Telephone: 03708 506 506
+                <br /> Telephone: @Html.CompetentAuthorityHelpline(UKCompetentAuthority.England)
             </p>
             <h3 class="heading-small">Scotland</h3>
             <p>
                 Scottish Environment Protection Agency 
                 <br /> Producer Compliance and Waste Shipment Unit
-                <br /> Telephone: 01786 457 700
+                <br /> Telephone: @Html.CompetentAuthorityHelpline(UKCompetentAuthority.Scotland)
             </p>
         </div>
         <div class="column-half">
@@ -20,13 +21,13 @@
             <p>
                 Northern Ireland Environment Agency 
                 <br /> Hazardous Waste/TFS Section 
-                <br /> Telephone: 028 90569742
+                <br /> Telephone: @Html.CompetentAuthorityHelpline(UKCompetentAuthority.NorthernIreland)
             </p>
             <h3 class="heading-small">Wales</h3>
             <p>
                 Natural Resources Wales 
                 <br /> Waste Shipment Unit
-                <br /> Telephone: 03000 653073
+                <br /> Telephone: @Html.CompetentAuthorityHelpline(UKCompetentAuthority.Wales)
             </p>
         </div>
     </div>
