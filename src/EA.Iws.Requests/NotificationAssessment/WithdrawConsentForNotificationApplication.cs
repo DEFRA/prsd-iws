@@ -12,9 +12,12 @@ namespace EA.Iws.Requests.NotificationAssessment
 
         public Guid Id { get; private set; }
 
-        public WithdrawConsentForNotificationApplication(Guid id, string reasonsForConsentWithdrawal)
+        public DateTime Date { get; private set; }
+
+        public WithdrawConsentForNotificationApplication(Guid id, string reasonsForConsentWithdrawal, DateTime date)
         {
             ReasonsForConsentWithdrawal = reasonsForConsentWithdrawal;
+            Date = date;
             Id = id;
         }
     }

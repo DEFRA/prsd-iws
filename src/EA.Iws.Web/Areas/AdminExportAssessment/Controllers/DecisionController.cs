@@ -67,7 +67,8 @@
 
         private async Task PostConsentWithdrawn(NotificationAssessmentDecisionViewModel model)
         {
-            var request = new WithdrawConsentForNotificationApplication(model.NotificationId, model.ReasonsForConsentWithdrawal);
+            var date = new DateTime(model.ConsentWithdrawnDate.Year.GetValueOrDefault(), model.ConsentWithdrawnDate.Month.GetValueOrDefault(), model.ConsentWithdrawnDate.Day.GetValueOrDefault());
+            var request = new WithdrawConsentForNotificationApplication(model.NotificationId, model.ReasonsForConsentWithdrawal, date);
             await mediator.SendAsync(request);
         }
 
