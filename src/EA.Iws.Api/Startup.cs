@@ -14,11 +14,11 @@ namespace EA.Iws.Api
     using IdentityServer3.AccessTokenValidation;
     using IdentityServer3.Core.Configuration;
     using IdSrv;
+    using Infrastructure;
     using Microsoft.Owin.Security.DataProtection;
     using Newtonsoft.Json.Serialization;
     using Owin;
     using Serilog;
-    using Serilog.Formatting.Display;
     using Services;
 
     public class Startup
@@ -29,13 +29,14 @@ namespace EA.Iws.Api
             var configurationService = new ConfigurationService();
 #if DEBUG
             Log.Logger = new LoggerConfiguration()
-                .WriteTo.Sink(new DebugLogger(new MessageTemplateTextFormatter("{Message}{NewLine}{Exception}", null)))
+                .WriteTo.Debug()
                 .CreateLogger();
 
             config.Services.Add(typeof(IExceptionLogger), new DebugExceptionLogger());
 #else
             Log.Logger = new LoggerConfiguration()
-                .WriteTo.Sink(new ElmahLogger())
+                .WriteTo.Elmah()
+                .WriteTo.EventLog(typeof(Startup).Namespace)
                 .CreateLogger();
 #endif
             // Autofac
@@ -44,6 +45,7 @@ namespace EA.Iws.Api
             builder.Register(c => configurationService).As<ConfigurationService>().SingleInstance();
             builder.Register(c => configurationService.CurrentConfiguration).As<AppConfiguration>().SingleInstance();
             builder.Register(c => HttpContext.Current.GetOwinContext().Authentication).InstancePerRequest();
+            builder.Register(c => Log.Logger).As<ILogger>().SingleInstance();
 
             var container = AutofacBootstrapper.Initialize(builder, config);
 

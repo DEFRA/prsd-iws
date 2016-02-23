@@ -7,21 +7,23 @@
     using System.Threading.Tasks;
     using System.Web.Http;
     using Core.Authorization;
-    using Elmah;
     using Infrastructure;
     using Newtonsoft.Json;
     using Prsd.Core.Mediator;
     using Prsd.Core.Web.ApiClient;
     using Prsd.Core.Web.Converters;
+    using Serilog;
 
     [RoutePrefix("api")]
     public class MediatorController : ApiController
     {
         private readonly IMediator mediator;
+        private readonly ILogger logger;
 
-        public MediatorController(IMediator mediator)
+        public MediatorController(IMediator mediator, ILogger logger)
         {
             this.mediator = mediator;
+            this.logger = logger;
         }
 
         /// <summary>
@@ -33,29 +35,35 @@
         [Route("Send")]
         public async Task<IHttpActionResult> Send(ApiRequest apiRequest)
         {
-            var typeInformation = new RequestTypeInformation(apiRequest);
-
-            var result = JsonConvert.DeserializeObject(apiRequest.RequestJson, typeInformation.RequestType, new EnumerationConverter());
-
             try
             {
+                var typeInformation = new RequestTypeInformation(apiRequest);
+
+                var result = JsonConvert.DeserializeObject(apiRequest.RequestJson, typeInformation.RequestType,
+                    new EnumerationConverter());
+
                 var response = await mediator.SendAsync(result, typeInformation.ResponseType);
                 return Ok(response);
             }
             catch (AuthenticationException ex)
             {
-                ErrorSignal.FromCurrentContext().Raise(ex);
+                logger.Error(ex, "Authentication error");
                 return this.StatusCode(HttpStatusCode.Unauthorized, new HttpError(ex, includeErrorDetail: true));
             }
             catch (SecurityException ex)
             {
-                ErrorSignal.FromCurrentContext().Raise(ex);
+                logger.Error(ex, "Authorization error");
                 return this.StatusCode(HttpStatusCode.Forbidden, new HttpError(ex, includeErrorDetail: true));
             }
             catch (RequestAuthorizationException ex)
             {
-                ErrorSignal.FromCurrentContext().Raise(ex);
+                logger.Error(ex, "Request authorization error");
                 return this.StatusCode(HttpStatusCode.Forbidden, new HttpError(ex, includeErrorDetail: true));
+            }
+            catch (Exception ex)
+            {
+                logger.Error(ex, "Unhandled error");
+                throw;
             }
         }
 
