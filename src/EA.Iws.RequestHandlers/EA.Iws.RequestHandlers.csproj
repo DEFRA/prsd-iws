@@ -571,7 +571,7 @@
     <Compile Include="Notification\CreateNotificationApplicationHandler.cs" />
     <Compile Include="Producers\AddProducerToNotificationHandler.cs" />
     <Compile Include="Notification\GenerateNotificationDocumentHandler.cs" />
-    <Compile Include="Notification\GetNotificationsByUserHandler.cs" />
+    <Compile Include="Notification\GetExportNotificationsByUserHandler.cs" />
     <Compile Include="Organisations\FindMatchingOrganisationsHandler.cs" />
     <Compile Include="Organisations\OrganisationByIdHandler.cs" />
     <Compile Include="Producers\SetSiteOfExportHandler.cs" />

@@ -8,19 +8,19 @@
     using Prsd.Core.Mediator;
     using Requests.Notification;
 
-    internal class GetNotificationsByUserHandler :
-        IRequestHandler<GetNotificationsByUser, IList<NotificationApplicationSummaryData>>
+    internal class GetExportNotificationsByUserHandler :
+        IRequestHandler<GetExportNotificationsByUser, IList<NotificationApplicationSummaryData>>
     {
         private readonly IwsContext context;
         private readonly IUserContext userContext;
 
-        public GetNotificationsByUserHandler(IwsContext context, IUserContext userContext)
+        public GetExportNotificationsByUserHandler(IwsContext context, IUserContext userContext)
         {
             this.context = context;
             this.userContext = userContext;
         }
 
-        public async Task<IList<NotificationApplicationSummaryData>> HandleAsync(GetNotificationsByUser message)
+        public async Task<IList<NotificationApplicationSummaryData>> HandleAsync(GetExportNotificationsByUser message)
         {
             return await context.Database.SqlQuery<NotificationApplicationSummaryData>(@"
                 SELECT 

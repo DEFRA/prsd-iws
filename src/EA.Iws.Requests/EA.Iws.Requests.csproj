@@ -296,7 +296,7 @@
     <Compile Include="Producers\DeleteProducerForNotification.cs" />
     <Compile Include="Notification\GenerateNotificationDocument.cs" />
     <Compile Include="Exporters\GetExporterByNotificationId.cs" />
-    <Compile Include="Notification\GetNotificationsByUser.cs" />
+    <Compile Include="Notification\GetExportNotificationsByUser.cs" />
     <Compile Include="Producers\GetProducersByNotificationId.cs" />
     <Compile Include="Notification\NotificationApplicationSummaryData.cs" />
     <Compile Include="Shared\GetCompetentAuthoritiesByCountry.cs" />
