@@ -1,7 +1,7 @@
 ﻿@using EA.Iws.Core.Notification
 @model EA.Iws.Requests.Notification.WhatToDoNextPaymentData
 
-<p>You must also email your remittance to: <a href="mailto:@(Model.UnitedKingdomCompetentAuthorityData.BacsDetails.Email)">@Html.DisplayFor(m => m.UnitedKingdomCompetentAuthorityData.BacsDetails.Email)</a></p>
+<p>You must also email your remittance to: @Html.MailtoLink(Model.UnitedKingdomCompetentAuthorityData.BacsDetails.Email)</p>
 @if (Model.CompetentAuthority != UKCompetentAuthority.England)
 {
     <p>Or by fax: @Html.DisplayFor(m => m.UnitedKingdomCompetentAuthorityData.BacsDetails.Fax)</p>

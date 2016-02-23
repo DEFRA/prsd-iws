@@ -1,7 +1,9 @@
 ﻿namespace EA.Iws.Web.Infrastructure
 {
+    using System;
     using System.Web.Mvc;
     using System.Web.Mvc.Html;
+    using Core.Notification;
     using Prsd.Core;
 
     public static class HtmlHelperExtensions
@@ -49,6 +51,47 @@
         {
             return helper.ActionLink(FeedbackLinkResources.LinkText, "Index", "Feedback",
                 new { area = string.Empty }, null);
+        }
+
+        /// <summary>
+        /// Returns the helpline number for the specified CA
+        /// </summary>
+        public static MvcHtmlString CompetentAuthorityHelpline(this HtmlHelper helper, UKCompetentAuthority competentAuthority)
+        {
+            switch (competentAuthority)
+            {
+                case UKCompetentAuthority.England:
+                    return new MvcHtmlString("03708 506 506");
+                case UKCompetentAuthority.Scotland:
+                    return new MvcHtmlString("01786 457 700");
+                case UKCompetentAuthority.NorthernIreland:
+                    return new MvcHtmlString("028 90569742");
+                case UKCompetentAuthority.Wales:
+                    return new MvcHtmlString("03000 653073");
+                default:
+                    throw new ArgumentException(
+                        string.Format("No helpline number for {0} found", competentAuthority), "competentAuthority");
+            }
+        }
+
+        /// <summary>
+        /// Returns a mailto link to askshipments@environment-agency.gov.uk
+        /// </summary>
+        public static MvcHtmlString IwsContactEmail(this HtmlHelper helper)
+        {
+            return helper.MailtoLink("askshipments@environment-agency.gov.uk");
+        }
+
+        /// <summary>
+        /// Returns a mailto link to the specified email address
+        /// </summary>
+        public static MvcHtmlString MailtoLink(this HtmlHelper helper, string emailAddress)
+        {
+            var builder = new TagBuilder("a");
+            builder.MergeAttribute("href", "mailto:" + emailAddress);
+            builder.SetInnerText(emailAddress);
+
+            return MvcHtmlString.Create(builder.ToString());
         }
     }
 }

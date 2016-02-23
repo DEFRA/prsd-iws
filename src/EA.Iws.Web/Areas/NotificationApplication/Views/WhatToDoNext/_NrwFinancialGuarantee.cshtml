@@ -3,8 +3,8 @@
 <h3 class="heading-medium">Step 4: Complete the Financial Guarantee form</h3>
 <p>
     Download and complete the Financial Guarantee template and send to Natural Resources Wales,
-    either by email to <a href="mailto:waste-shipments@naturalresourceswales.gov.uk">waste-shipments@naturalresourceswales.gov.uk</a>
-    or <a href="mailto:cludiant-gwastraff@cyfoethnaturiolcymru.gov.uk">cludiant-gwastraff@cyfoethnaturiolcymru.gov.uk</a> or by post (to address shown below).
+    either by email to @Html.MailtoLink("waste-shipments@naturalresourceswales.gov.uk") 
+    or @Html.MailtoLink("cludiant-gwastraff@cyfoethnaturiolcymru.gov.uk") or by post (to address shown below).
 </p>
 <p>@Html.ActionLink("Print Financial Guarantee form", "GenerateFinancialGuaranteeDocument", "Home", new { area = "FinancialGuarantee" }, null)</p>
 <p>An approved Financial Guarantee must be in place before any shipments can be made.</p>
