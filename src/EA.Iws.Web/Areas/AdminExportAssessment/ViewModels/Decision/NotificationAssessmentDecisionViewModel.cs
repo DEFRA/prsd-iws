@@ -57,6 +57,9 @@
         [Display(Name = "ReasonWithdrawnLabel", ResourceType = typeof(NotificationAssessmentDecisionViewModelResources))]
         public string ReasonForWithdrawal { get; set; }
 
+        [Display(Name = "ConsentWithdrawnDateLabel", ResourceType = typeof(NotificationAssessmentDecisionViewModelResources))]
+        public OptionalDateInputViewModel ConsentWithdrawnDate { get; set; }
+
         public NotificationAssessmentDecisionViewModel()
         {
             ConsentValidFromDate = new OptionalDateInputViewModel();
@@ -66,6 +69,7 @@
             DecisionTypes = new List<DecisionType>();
             ObjectionDate = new OptionalDateInputViewModel(true);
             WithdrawnDate = new OptionalDateInputViewModel(true);
+            ConsentWithdrawnDate = new OptionalDateInputViewModel(true);
         }
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
@@ -127,6 +131,11 @@
             {
                 yield return new ValidationResult(NotificationAssessmentDecisionViewModelResources.ReasonConsentWithdrawnRequired,
                     new[] { "ReasonsForConsentWithdrawal" });
+            }
+
+            if (!ConsentWithdrawnDate.IsCompleted)
+            {
+                yield return new ValidationResult(NotificationAssessmentDecisionViewModelResources.ConsentWithdrawnDateRequired, new[] { "ConsentWithdrawnDate" });
             }
         }
 

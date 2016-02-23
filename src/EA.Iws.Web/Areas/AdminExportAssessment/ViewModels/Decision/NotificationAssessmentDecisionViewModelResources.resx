@@ -171,4 +171,10 @@
   <data name="WithdrawnDateRequired" xml:space="preserve">
     <value>Please enter the date the notificaiton was withdrawn</value>
   </data>
+  <data name="ConsentWithdrawnDateLabel" xml:space="preserve">
+    <value>Date</value>
+  </data>
+  <data name="ConsentWithdrawnDateRequired" xml:space="preserve">
+    <value>Please enter the date the notification consent was withdrawn</value>
+  </data>
 </root>
