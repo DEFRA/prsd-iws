@@ -13,7 +13,7 @@
     using Requests.Movement.Receive;
     using ViewModels.CancelMovement;
 
-    [AuthorizeActivity(ExportMovementPermissions.CanReadExportMovementsExternal)]
+    [AuthorizeActivity(ExportMovementPermissions.CanEditExportMovementsExternal)]
     public class CancelMovementController : Controller
     {
         private readonly IMediator mediator;
