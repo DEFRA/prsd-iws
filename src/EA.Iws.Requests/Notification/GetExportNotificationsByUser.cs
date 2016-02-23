@@ -5,8 +5,8 @@
     using Core.Authorization.Permissions;
     using Prsd.Core.Mediator;
 
-    [RequestAuthorization(ExportNotificationPermissions.CanReadExportNotification)]
-    public class GetNotificationsByUser : IRequest<IList<NotificationApplicationSummaryData>>
+    [RequestAuthorization(ExportNotificationPermissions.CanGetNotificationsForApplicantHome)]
+    public class GetExportNotificationsByUser : IRequest<IList<NotificationApplicationSummaryData>>
     {
     }
 }

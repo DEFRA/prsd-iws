@@ -936,7 +936,6 @@
     <Content Include="Views\NewNotification\Created.cshtml" />
     <Content Include="Views\Applicant\Home.cshtml" />
     <Content Include="Views\Home\LandingPage.cshtml" />
-    <Content Include="Views\Applicant\_GetUserNotifications.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\Producer\Add.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\Exporter\Index.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\Importer\Index.cshtml" />
@@ -991,7 +990,6 @@
     <Content Include="Views\Shared\DisplayTemplates\ContactData.cshtml" />
     <Content Include="Views\NewNotification\_GeneralFinancialGuarantee.cshtml" />
     <Content Include="Views\NewNotification\_SepaFinancialGuarantee.cshtml" />
-    <Content Include="Views\Applicant\ApprovedNotification.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\StringIntRadioButtons.cshtml" />
     <Content Include="Views\Account\EmailVerificationResent.cshtml" />
     <Content Include="Views\Shared\_WhatNow.cshtml" />
@@ -2537,7 +2535,6 @@
     <Compile Include="Areas\NotificationApplication\ViewModels\Exporter\ExporterViewModel.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\Facility\AddFacilityViewModel.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\Facility\EditFacilityViewModel.cs" />
-    <Compile Include="ViewModels\Applicant\ApprovedNotificationViewModel.cs" />
     <Compile Include="ViewModels\CopyFromNotification\CopyFromNotificationViewModel.cs" />
     <Compile Include="ViewModels\Home\IndexViewModel.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\MeansOfTransport\MeansOfTransportViewModel.cs" />
@@ -2637,16 +2634,6 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>VerifyEmailResources.resx</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Applicant\ApprovedNotificationResources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>ApprovedNotificationResources.resx</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Applicant\GetUserNotificationsResources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>GetUserNotificationsResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Views\Applicant\HomeResources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -3727,14 +3714,6 @@
     <EmbeddedResource Include="Views\Account\VerifyEmailResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>VerifyEmailResources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Views\Applicant\ApprovedNotificationResources.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>ApprovedNotificationResources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Views\Applicant\GetUserNotificationsResources.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>GetUserNotificationsResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\Applicant\HomeResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

@@ -36,6 +36,7 @@
             { ExportNotificationPermissions.CanEditExportNotificationAssessment, new[] { UserRole.Internal, UserRole.Administrator } },
             { ExportNotificationPermissions.CanChangeExportNotificationOwner, new[] { UserRole.Internal, UserRole.Administrator } },
             { ExportNotificationPermissions.CanCreateLegacyExportNotification, new[] { UserRole.Internal, UserRole.Administrator } },
+            { ExportNotificationPermissions.CanGetNotificationsForApplicantHome, new[] { UserRole.External } },
             { ExportMovementPermissions.CanCreateExportMovements, new[] { UserRole.External, UserRole.Internal, UserRole.Administrator } },
             { ExportMovementPermissions.CanReadExportMovements, new[] { UserRole.Internal, UserRole.External, UserRole.Administrator } },
             { ExportMovementPermissions.CanEditExportMovements, new[] { UserRole.External, UserRole.Internal, UserRole.Administrator } },
