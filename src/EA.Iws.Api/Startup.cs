@@ -14,6 +14,7 @@ namespace EA.Iws.Api
     using IdentityServer3.AccessTokenValidation;
     using IdentityServer3.Core.Configuration;
     using IdSrv;
+    using Infrastructure;
     using Microsoft.Owin.Security.DataProtection;
     using Newtonsoft.Json.Serialization;
     using Owin;
@@ -29,7 +30,7 @@ namespace EA.Iws.Api
             var configurationService = new ConfigurationService();
 #if DEBUG
             Log.Logger = new LoggerConfiguration()
-                .WriteTo.Sink(new DebugLogger(new MessageTemplateTextFormatter("{Message}{NewLine}{Exception}", null)))
+                .WriteTo.Sink(new DebugLogSink(new MessageTemplateTextFormatter("{Message}{NewLine}{Exception}", null)))
                 .CreateLogger();
 
             config.Services.Add(typeof(IExceptionLogger), new DebugExceptionLogger());

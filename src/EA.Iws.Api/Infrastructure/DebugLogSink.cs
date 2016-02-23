@@ -1,4 +1,4 @@
-﻿namespace EA.Iws.Api.IdSrv
+﻿namespace EA.Iws.Api.Infrastructure
 {
     using System.Diagnostics;
     using System.IO;
@@ -6,11 +6,11 @@
     using Serilog.Events;
     using Serilog.Formatting.Display;
 
-    internal class DebugLogger : ILogEventSink
+    internal class DebugLogSink : ILogEventSink
     {
         private readonly MessageTemplateTextFormatter formatter;
 
-        public DebugLogger(MessageTemplateTextFormatter formatter)
+        public DebugLogSink(MessageTemplateTextFormatter formatter)
         {
             this.formatter = formatter;
         }

@@ -243,8 +243,8 @@
     <Compile Include="Controllers\RegistrationController.cs" />
     <Compile Include="Identity\UserContext.cs" />
     <Compile Include="IdSrv\Clients.cs" />
-    <Compile Include="IdSrv\DebugLogger.cs" />
-    <Compile Include="IdSrv\ElmahLogger.cs" />
+    <Compile Include="Infrastructure\DebugLogSink.cs" />
+    <Compile Include="Infrastructure\ElmahLogSink.cs" />
     <Compile Include="IdSrv\Factory.cs" />
     <Compile Include="IdSrv\Scopes.cs" />
     <Compile Include="IdSrv\UserService.cs" />
