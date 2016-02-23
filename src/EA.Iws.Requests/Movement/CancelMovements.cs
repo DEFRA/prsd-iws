@@ -7,7 +7,7 @@
     using Core.Movement;
     using Prsd.Core.Mediator;
 
-    [RequestAuthorization(ExportMovementPermissions.CanReadExportMovements)]
+    [RequestAuthorization(ExportMovementPermissions.CanEditExportMovements)]
     public class CancelMovements : IRequest<bool>
     {
         public IEnumerable<MovementData> CancelledMovements { get; private set; }

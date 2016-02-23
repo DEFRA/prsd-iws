@@ -7,7 +7,7 @@
     using Core.Movement;
     using Prsd.Core.Mediator;
 
-    [RequestAuthorization(ExportMovementPermissions.CanReadExportMovements)]
+    [RequestAuthorization(ExportMovementPermissions.CanReadExportMovementsExternal)]
     public class GetNewMovementIdsByNotificationId : IRequest<IList<MovementData>>
     {
         public Guid Id { get; private set; }

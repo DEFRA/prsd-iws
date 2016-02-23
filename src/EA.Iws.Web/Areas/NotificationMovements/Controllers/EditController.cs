@@ -3,11 +3,12 @@
     using System;
     using System.Threading.Tasks;
     using System.Web.Mvc;
+    using Infrastructure.Authorization;
     using Prsd.Core.Mediator;
     using Requests.NotificationMovements.Edit;
     using ViewModels.Edit;
 
-    [Authorize]
+    [AuthorizeActivity(typeof(GetEditableMovements))]
     public class EditController : Controller
     {
         private readonly IMediator mediator;

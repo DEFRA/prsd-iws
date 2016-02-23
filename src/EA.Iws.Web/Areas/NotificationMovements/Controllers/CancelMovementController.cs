@@ -5,13 +5,15 @@
     using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Mvc;
+    using Core.Authorization.Permissions;
     using Core.Movement;
+    using Infrastructure.Authorization;
     using Prsd.Core.Mediator;
     using Requests.Movement;
     using Requests.Movement.Receive;
     using ViewModels.CancelMovement;
 
-    [Authorize]
+    [AuthorizeActivity(ExportMovementPermissions.CanEditExportMovementsExternal)]
     public class CancelMovementController : Controller
     {
         private readonly IMediator mediator;

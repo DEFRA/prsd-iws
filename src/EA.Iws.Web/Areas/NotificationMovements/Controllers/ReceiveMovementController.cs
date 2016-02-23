@@ -3,12 +3,12 @@
     using System;
     using System.Threading.Tasks;
     using System.Web.Mvc;
+    using Infrastructure.Authorization;
     using Prsd.Core.Mediator;
-    using Requests.Movement;
     using Requests.Movement.Receive;
     using ViewModels.ReceiveMovement;
 
-    [Authorize]
+    [AuthorizeActivity(typeof(GetSubmittedMovementsByNotificationId))]
     public class ReceiveMovementController : Controller
     {
         private readonly IMediator mediator;

@@ -6,12 +6,13 @@
     using System.Web.Mvc;
     using Core.Shared;
     using Infrastructure;
+    using Infrastructure.Authorization;
     using Prsd.Core.Mediator;
     using Requests.Movement;
     using Requests.Movement.Receive;
     using ViewModels;
 
-    [Authorize]
+    [AuthorizeActivity(typeof(SaveCertificateOfReceiptFile))]
     public class ReceiptCompleteController : Controller
     {
         private readonly IMediator mediator;
