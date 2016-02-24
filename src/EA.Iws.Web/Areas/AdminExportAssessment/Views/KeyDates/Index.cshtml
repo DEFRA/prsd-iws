@@ -383,7 +383,7 @@ else
             @Html.HiddenFor(m => m.NotificationId)
             @Html.AntiForgeryToken()
 
-            <input type="submit" class="button" value="Accept changes"/>
+            <input type="submit" class="button" value="Accept changes" data-track = "element" data-category = "Export notification assessment" data-action = "Accept changes"/>
         }
 
         @using (Html.BeginForm("RejectChanges", "KeyDates", FormMethod.Post, new { id = Model.NotificationId }))
@@ -392,7 +392,7 @@ else
 
             @Html.AntiForgeryToken()
 
-            <input type="submit" class="button" value="Reject changes"/>
+            <input type="submit" class="button" value="Reject changes" data-track = "element" data-category = "Export notification assessment" data-action = "Reject changes"/>
         }
     </div>
 }

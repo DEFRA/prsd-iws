@@ -70,7 +70,7 @@
            <fieldset>
                <div>@Html.Gds().ValidationMessageFor(m => m.TermsAndConditions)</div>
                <label class="block-label" for="@Html.NameFor(m => m.TermsAndConditions)">
-                   @Html.CheckBoxFor(m => m.TermsAndConditions, new { data_track = "element", data_category = "Terms and conditions", data_action = "accept" })
+                   @Html.CheckBoxFor(m => m.TermsAndConditions, new { data_track = "element", data_category = "Terms and conditions", data_action = "Accept" })
                    @ApplicantRegistrationResources.AcceptTnCs
                </label>
            </fieldset>
