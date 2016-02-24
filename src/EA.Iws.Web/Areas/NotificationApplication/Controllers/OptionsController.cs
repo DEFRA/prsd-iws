@@ -3,12 +3,14 @@
     using System;
     using System.Threading.Tasks;
     using System.Web.Mvc;
+    using Core.Authorization.Permissions;
     using Core.Movement;
+    using Infrastructure.Authorization;
     using Prsd.Core.Mediator;
     using Requests.NotificationMovements;
     using ViewModels.Options;
 
-    [Authorize]
+    [AuthorizeActivity(ExportMovementPermissions.CanEditExportMovementsExternal)]
     public class OptionsController : Controller
     {
         private readonly IMediator mediator;
