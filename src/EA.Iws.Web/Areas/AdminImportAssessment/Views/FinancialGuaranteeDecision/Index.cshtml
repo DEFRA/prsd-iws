@@ -31,7 +31,7 @@ else
             var selectedDropdownSelector = dropdownId + " :selected";
 
             $(dropdownId).change(function () {
-                var selected = $(selectedDropdownSelector).text();
+                var selected = $(selectedDropdownSelector).val();
 
                 $(".guarantee-decision").addClass("js-hidden");
 
