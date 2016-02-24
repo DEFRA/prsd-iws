@@ -23,7 +23,7 @@
 
             A.CallTo(() => userContext.UserId).Returns(new Guid("246D5402-C835-4448-AFF0-37940B9ED436"));
             A.CallTo(() => numberGenerator.GetNextNotificationNumber(UKCompetentAuthority.England))
-                .Returns(5000);
+                .Returns(6000);
 
             factory = new NotificationApplicationFactory(userContext, numberGenerator);
         }
@@ -76,8 +76,8 @@
         {
             return new[]
             {
-                new object[] { NotificationType.Recovery, UKCompetentAuthority.England, 5000 },
-                new object[] { NotificationType.Recovery, UKCompetentAuthority.England, 5001 },
+                new object[] { NotificationType.Recovery, UKCompetentAuthority.England, 6000 },
+                new object[] { NotificationType.Recovery, UKCompetentAuthority.England, 6001 },
                 new object[] { NotificationType.Recovery, UKCompetentAuthority.Scotland, 500 },
                 new object[] { NotificationType.Recovery, UKCompetentAuthority.Scotland, 501 },
                 new object[] { NotificationType.Recovery, UKCompetentAuthority.NorthernIreland, 1000 },
