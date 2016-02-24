@@ -1,6 +1,7 @@
 ﻿namespace EA.Iws.Domain.Tests.Unit.NotificationApplication
 {
     using System;
+    using Core.NotificationAssessment;
     using Core.Shared;
     using Domain.NotificationApplication.Shipment;
     using Prsd.Core;
@@ -254,7 +255,7 @@
             var newLastDate = new DateTime(2016, 05, 31);
             var newShipmentPeriod = new ShipmentPeriod(newFirstDate, newLastDate, true);
 
-            shipmentInfo.UpdateShipmentPeriod(newShipmentPeriod);
+            shipmentInfo.UpdateShipmentPeriod(newShipmentPeriod, NotificationStatus.NotSubmitted);
 
             Assert.Equal(newFirstDate, shipmentInfo.ShipmentPeriod.FirstDate);
             Assert.Equal(newLastDate, shipmentInfo.ShipmentPeriod.LastDate);

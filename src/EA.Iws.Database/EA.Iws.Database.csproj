@@ -255,6 +255,7 @@
     <Content Include="scripts\Update\Sprint27\20160211-161500-change-ea-number-sequence-start-number.sql" />
     <Content Include="scripts\Update\Sprint27\20160211-145300-update-ewc-code-descriptions.sql" />
     <Content Include="scripts\Update\Sprint27\20160215-121042-add-local-area-id-to-import-assessmemt.sql" />
+    <Content Include="scripts\Update\Sprint27\20160216-165000-update-competent-authorities.sql" />
     <Content Include="scripts\Update\Sprint27\20160216-143300-create-import-consultation-table.sql" />
     <Content Include="scripts\Update\Sprint27\20160218-104500-create-export-consultation-table.sql" />
   </ItemGroup>

@@ -221,7 +221,7 @@ WHERE  [name] = 'Germany';
 DECLARE @CAId UNIQUEIDENTIFIER;
 SELECT @CAId = id
 FROM   [Lookup].[competentauthority]
-WHERE  [code] = 'DE 023';
+WHERE  [code] = 'DE018';
 
 DECLARE @ExitId UNIQUEIDENTIFIER;
 SELECT @ExitId = id
@@ -268,7 +268,7 @@ WHERE  [name] = 'France';
 
 SELECT @CAId = id
 FROM   [Lookup].[competentauthority]
-WHERE  [code] = 'FR999';
+WHERE  [code] = 'FR';
 
 SELECT @EntryId = id
 FROM   [Notification].[entryorexitpoint]

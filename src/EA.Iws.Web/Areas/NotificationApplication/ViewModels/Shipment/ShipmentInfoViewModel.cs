@@ -7,6 +7,7 @@
     using System.Text.RegularExpressions;
     using System.Web.Mvc;
     using Core.IntendedShipments;
+    using Core.NotificationAssessment;
     using Core.Shared;
     using Prsd.Core;
     using Prsd.Core.Helpers;
@@ -24,7 +25,6 @@
 
         public ShipmentInfoViewModel(IntendedShipmentData intendedShipmentData)
         {
-            NotificationId = intendedShipmentData.NotificationId;
             UnitsSelectList = new SelectList(EnumHelper.GetValues(typeof(ShipmentQuantityUnits)), "Key", "Value");
             IsPreconsentedRecoveryFacility = intendedShipmentData.IsPreconsentedRecoveryFacility;
 
@@ -39,11 +39,10 @@
                 StartMonth = intendedShipmentData.FirstDate.Month;
                 StartYear = intendedShipmentData.FirstDate.Year;
                 Units = intendedShipmentData.Units;
+                Status = intendedShipmentData.Status;
             }
         }
-
-        public Guid NotificationId { get; set; }
-
+        
         public bool IsPreconsentedRecoveryFacility { get; set; }
 
         [Required(ErrorMessageResourceName = "NumberOfShipmentsRequired", ErrorMessageResourceType = typeof(ShipmentResources))]
@@ -88,6 +87,8 @@
         [Range(2015, 3000, ErrorMessageResourceName = "YearError", ErrorMessageResourceType = typeof(ShipmentResources))]
         public int? EndYear { get; set; }
 
+        public NotificationStatus Status { get; set; }
+
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             if (!IsNumberOfShipmentsValid())
@@ -121,7 +122,7 @@
                 yield break;
             }
 
-            if (startDate < SystemTime.Now.Date)
+            if (startDate < SystemTime.Now.Date && Status == NotificationStatus.NotSubmitted)
             {
                 yield return new ValidationResult(ShipmentResources.FirstDeparturePastDate);
             }
@@ -180,7 +181,7 @@
                 && quantity > 0;
         }
 
-        public SetIntendedShipmentInfoForNotification ToRequest()
+        public SetIntendedShipmentInfoForNotification ToRequest(Guid notificationId)
         {
             DateTime startDate;
             SystemTime.TryParse(StartYear.GetValueOrDefault(), StartMonth.GetValueOrDefault(), StartDay.GetValueOrDefault(), out startDate);
@@ -189,7 +190,7 @@
             SystemTime.TryParse(EndYear.GetValueOrDefault(), EndMonth.GetValueOrDefault(), EndDay.GetValueOrDefault(), out endDate);
 
             return new SetIntendedShipmentInfoForNotification(
-                NotificationId,
+                notificationId,
                 int.Parse(NumberOfShipments, NumberStyles.AllowThousands),
                 Convert.ToDecimal(Quantity),
                 Units.GetValueOrDefault(),

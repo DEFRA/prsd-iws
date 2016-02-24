@@ -8,8 +8,8 @@
 {
     @Html.AntiForgeryToken()
     @Html.Gds().ValidationSummary()
-
-    @Html.HiddenFor(m => m.NotificationId)
+    
+    @Html.HiddenFor(m => m.Status)
     @Html.HiddenFor(m => m.IsPreconsentedRecoveryFacility)
 
     <h1 class="heading-large">@ShipmentResources.HeaderNumber</h1>

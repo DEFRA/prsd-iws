@@ -22,47 +22,34 @@
         }
 
         [HttpGet]
-        public async Task<ActionResult> Index(Guid id, bool? backToOverview = null)
+        public async Task<ActionResult> Index(Guid id)
         {
             var shipmentData =
                 await
                     mediator.SendAsync(new GetIntendedShipmentInfoForNotification(id));
 
             var model = new ShipmentInfoViewModel(shipmentData);
+
             return View(model);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Index(ShipmentInfoViewModel model, bool? backToOverview = null)
+        public async Task<ActionResult> Index(Guid id, ShipmentInfoViewModel model, bool? backToOverview = null)
         {
             if (!ModelState.IsValid)
             {
                 return View(model);
             }
 
-            try
+            await mediator.SendAsync(model.ToRequest(id));
+
+            if (backToOverview.GetValueOrDefault())
             {
-                await mediator.SendAsync(model.ToRequest());
-
-                if (backToOverview.GetValueOrDefault())
-                {
-                    return RedirectToAction("Index", "Home", new { id = model.NotificationId });
-                }
-
-                return RedirectToAction("Index", "ChemicalComposition", new { id = model.NotificationId });
-            }
-            catch (ApiBadRequestException ex)
-            {
-                this.HandleBadRequest(ex);
-
-                if (ModelState.IsValid)
-                {
-                    throw;
-                }
+                return RedirectToAction("Index", "Home");
             }
 
-            return View(model);
+            return RedirectToAction("Index", "ChemicalComposition");
         }
     }
 }
