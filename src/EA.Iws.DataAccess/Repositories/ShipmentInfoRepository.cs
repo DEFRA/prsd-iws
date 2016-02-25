@@ -29,27 +29,37 @@
         {
             await notificationApplicationAuthorization.EnsureAccessAsync(notificationId);
 
-            var data = await context.ShipmentInfos.Where(s => s.NotificationId == notificationId)
-                .Join(context.Facilities,
-                    s => s.NotificationId,
-                    f => f.NotificationId, (s, f) => new { s, f })
+            var facilityStatusData = await context.Facilities.Where(f => f.NotificationId == notificationId)
                 .Join(context.NotificationAssessments,
-                    x => x.s.NotificationId,
+                    f => f.NotificationId,
                     a => a.NotificationApplicationId,
-                    (x, a) => new { Shipment = x.s, FacilityCollection = x.f, a.Status })
-                .SingleAsync();
+                    (f, a) => new { IsPreconsented = f.AllFacilitiesPreconsented, a.Status })
+                    .SingleAsync();
+
+            var shipment = await context.ShipmentInfos.SingleOrDefaultAsync(s => s.NotificationId == notificationId);
+
+            if (shipment == null)
+            {
+                return new IntendedShipmentData
+                {
+                    Status = facilityStatusData.Status,
+                    NotificationId = notificationId,
+                    IsPreconsentedRecoveryFacility = facilityStatusData.IsPreconsented.GetValueOrDefault(),
+                    HasShipmentData = false
+                };
+            }
 
             return new IntendedShipmentData
             {
                 NotificationId = notificationId,
-                Units = data.Shipment.Units,
-                FirstDate = data.Shipment.ShipmentPeriod.FirstDate,
-                LastDate = data.Shipment.ShipmentPeriod.LastDate,
+                Units = shipment.Units,
+                FirstDate = shipment.ShipmentPeriod.FirstDate,
+                LastDate = shipment.ShipmentPeriod.LastDate,
                 HasShipmentData = true,
-                IsPreconsentedRecoveryFacility = data.FacilityCollection.AllFacilitiesPreconsented.GetValueOrDefault(),
-                NumberOfShipments = data.Shipment.NumberOfShipments,
-                Quantity = data.Shipment.Quantity,
-                Status = data.Status
+                IsPreconsentedRecoveryFacility = facilityStatusData.IsPreconsented.GetValueOrDefault(),
+                NumberOfShipments = shipment.NumberOfShipments,
+                Quantity = shipment.Quantity,
+                Status = facilityStatusData.Status
             };
         }
     }
