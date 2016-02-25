@@ -27,6 +27,7 @@
         {
             UnitsSelectList = new SelectList(EnumHelper.GetValues(typeof(ShipmentQuantityUnits)), "Key", "Value");
             IsPreconsentedRecoveryFacility = intendedShipmentData.IsPreconsentedRecoveryFacility;
+            Status = intendedShipmentData.Status;
 
             if (intendedShipmentData.HasShipmentData)
             {
@@ -39,7 +40,6 @@
                 StartMonth = intendedShipmentData.FirstDate.Month;
                 StartYear = intendedShipmentData.FirstDate.Year;
                 Units = intendedShipmentData.Units;
-                Status = intendedShipmentData.Status;
             }
         }
         
@@ -124,7 +124,7 @@
 
             if (startDate < SystemTime.Now.Date && Status == NotificationStatus.NotSubmitted)
             {
-                yield return new ValidationResult(ShipmentResources.FirstDeparturePastDate);
+                yield return new ValidationResult(ShipmentResources.FirstDeparturePastDate, new[] { "StartDay" });
             }
 
             if (startDate > endDate)
