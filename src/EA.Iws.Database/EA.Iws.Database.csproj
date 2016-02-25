@@ -258,6 +258,7 @@
     <Content Include="scripts\Update\Sprint27\20160216-165000-update-competent-authorities.sql" />
     <Content Include="scripts\Update\Sprint27\20160216-143300-create-import-consultation-table.sql" />
     <Content Include="scripts\Update\Sprint27\20160218-104500-create-export-consultation-table.sql" />
+    <Content Include="scripts\Update\Sprint27\20160225-090100-update-competent-authorities.sql" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="scripts\TestData\20150522-171900-link-test-user-to-org.sql" />
