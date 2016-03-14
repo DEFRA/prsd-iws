@@ -97,7 +97,7 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.Home {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You&apos;ve successfully resubmited notification {0}.
+        ///   Looks up a localized string similar to You&apos;ve successfully resubmitted notification {0}.
         /// </summary>
         public static string Title {
             get {

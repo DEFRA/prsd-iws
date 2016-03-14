@@ -130,6 +130,6 @@
     <value>The Scottish Environment Protection Agency will now continue with their assessment of this notification. During this time, you can't make any further amendments to it.</value>
   </data>
   <data name="Title" xml:space="preserve">
-    <value>You've successfully resubmited notification {0}</value>
+    <value>You've successfully resubmitted notification {0}</value>
   </data>
 </root>
