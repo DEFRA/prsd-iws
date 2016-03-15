@@ -917,7 +917,6 @@
     <Content Include="Scripts\vendor\modernizr.custom.77028.js" />
     <Content Include="Scripts\jquery-2.1.3.min.map" />
     <Content Include="Views\_ViewStart.cshtml" />
-    <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Web.config" />
     <Content Include="Views\Shared\_Layout.GovUK.Sections.cshtml" />
     <Content Include="Views\Shared\_FeedbackBanner.cshtml" />
@@ -935,7 +934,6 @@
     <Content Include="Views\NewNotification\NotificationType.cshtml" />
     <Content Include="Views\NewNotification\Created.cshtml" />
     <Content Include="Views\Applicant\Home.cshtml" />
-    <Content Include="Views\Home\LandingPage.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\Producer\Add.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\Exporter\Index.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\Importer\Index.cshtml" />
@@ -2537,7 +2535,6 @@
     <Compile Include="Areas\NotificationApplication\ViewModels\Facility\AddFacilityViewModel.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\Facility\EditFacilityViewModel.cs" />
     <Compile Include="ViewModels\CopyFromNotification\CopyFromNotificationViewModel.cs" />
-    <Compile Include="ViewModels\Home\IndexViewModel.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\MeansOfTransport\MeansOfTransportViewModel.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\Importer\ImporterViewModel.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\Facility\MultipleFacilitiesViewModel.cs" />
@@ -2660,16 +2657,6 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>FeedbackSentResources.resx</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Home\Index.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Index.resx</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Home\LandingPageResources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>LandingPageResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Views\NewNotification\CompetentAuthorityResources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -3735,14 +3722,6 @@
     <EmbeddedResource Include="Views\Feedback\FeedbackSentResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>FeedbackSentResources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Views\Home\Index.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Index.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Views\Home\LandingPageResources.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>LandingPageResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\NewNotification\CompetentAuthorityResources.resx" />
     <EmbeddedResource Include="Views\NewNotification\CreatedResources.resx" />
