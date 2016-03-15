@@ -62,7 +62,7 @@
 
                 var ukcompAuth = context.UnitedKingdomCompetentAuthorities.Single(ca => ca.Id == (int)notification.CompetentAuthority);
 
-                data.StateOfExport.Country = countryMapper.Map(countries.Single(c => c.Name == ukcompAuth.CountryName));
+                data.StateOfExport.Country = countryMapper.Map(countries.Single(c => c.Name == UnitedKingdomCompetentAuthority.CountryName));
 
                 data.StateOfExport.CompetentAuthority = competentAuthorityMapper.Map(context.CompetentAuthorities.Single(ca => ca.Id == ukcompAuth.CompetentAuthority.Id));
             }

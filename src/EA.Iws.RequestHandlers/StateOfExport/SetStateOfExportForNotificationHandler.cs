@@ -1,12 +1,13 @@
 ﻿namespace EA.Iws.RequestHandlers.StateOfExport
 {
-    using System;
-    using System.Data.Entity;
-    using System.Threading.Tasks;
     using DataAccess;
+    using Domain;
     using Domain.TransportRoute;
     using Prsd.Core.Mediator;
     using Requests.StateOfExport;
+    using System;
+    using System.Data.Entity;
+    using System.Threading.Tasks;
 
     internal class SetStateOfExportForNotificationHandler : IRequestHandler<SetStateOfExportForNotification, Guid>
     {
@@ -32,7 +33,7 @@
 
             var ukcompAuth = await context.UnitedKingdomCompetentAuthorities.SingleAsync(ca => ca.Id == (int)notification.CompetentAuthority);
 
-            var country = await context.Countries.SingleAsync(c => c.Name == ukcompAuth.CountryName);
+            var country = await context.Countries.SingleAsync(c => c.Name == UnitedKingdomCompetentAuthority.CountryName);
 
             var caid = ukcompAuth.CompetentAuthority.Id;
             var competentAuthority = await context.CompetentAuthorities.SingleAsync(ca => ca.Id == caid);

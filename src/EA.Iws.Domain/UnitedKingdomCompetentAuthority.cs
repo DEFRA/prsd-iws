@@ -5,6 +5,8 @@
 
     public class UnitedKingdomCompetentAuthority
     {
+        public const string CountryName = "United Kingdom";
+
         protected UnitedKingdomCompetentAuthority()
         {
         }
@@ -13,20 +15,7 @@
 
         public virtual CompetentAuthority CompetentAuthority { get; protected set; }
 
-        public string CountryName
-        {
-            get { return Address.Country; }
-        }
-
         public string UnitedKingdomCountry { get; protected set; }
-
-        public string BusinessUnit { get; protected set; }
-
-        public string Building { get; protected set; }
-
-        public Address Address { get; protected set; }
-
-        public string Telephone { get; protected set; }
 
         public CompetentAuthorityBacsDetails BacsDetails { get; protected set; }
 
