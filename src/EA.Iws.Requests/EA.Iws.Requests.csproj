@@ -307,7 +307,6 @@
     <Compile Include="Shared\GetCountries.cs" />
     <Compile Include="Registration\LinkUserToOrganisation.cs" />
     <Compile Include="Registration\Users\UserById.cs" />
-    <Compile Include="Shared\GetUnitedKingdomCompetentAuthorityInformation.cs" />
     <Compile Include="IntendedShipments\SetIntendedShipmentInfoForNotification.cs" />
     <Compile Include="PackagingType\GetPackagingInfoForNotification.cs" />
     <Compile Include="IntendedShipments\GetIntendedShipmentInfoForNotification.cs" />
