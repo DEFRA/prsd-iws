@@ -1,4 +1,10 @@
-﻿@using EA.Iws.Web.Views.Shared
+﻿@using EA.Iws.Core.Notification
+@using EA.Iws.Web.Views.Shared
+
+@{
+    var ca = (UKCompetentAuthority?)ViewData["CompetentAuthority"];
+}
+
 <details>
     <summary>
         <h2 class="summary heading-xsmall" data-track="disclosure" data-category="Data notice" data-action="Read">@IwsStandardDataNoticeResources.Header</h2>
@@ -10,7 +16,30 @@
 
         <h2 class="heading-small">@IwsStandardDataNoticeResources.PersonalInfoHeading</h2>
         <p>
-            @IwsStandardDataNoticeResources.PersonalInfoIntro
+            @if (ca == null)
+            {
+                @IwsStandardDataNoticeResources.PersonalInfoIntroEa
+            }
+            else
+            {
+                switch (ca.Value)
+                {
+                    case UKCompetentAuthority.England:
+                        @IwsStandardDataNoticeResources.PersonalInfoIntroEa
+                        break;
+                    case UKCompetentAuthority.Scotland:
+                        @IwsStandardDataNoticeResources.PersonalInfoIntroSepa
+                        break;
+                    case UKCompetentAuthority.NorthernIreland:
+                        @IwsStandardDataNoticeResources.PersonalInfoIntroNiea
+                        break;
+                    case UKCompetentAuthority.Wales:
+                        @IwsStandardDataNoticeResources.PersonalInfoIntroNrw
+                        break;
+                    default:
+                        throw new ArgumentOutOfRangeException();
+                }
+            }
 
             <ul class="list-bullet">
                 <li>@IwsStandardDataNoticeResources.DealWithApplication</li>

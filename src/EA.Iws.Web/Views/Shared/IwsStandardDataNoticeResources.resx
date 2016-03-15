@@ -144,8 +144,17 @@
   <data name="PersonalInfoHeading" xml:space="preserve">
     <value>How we will use your personal information</value>
   </data>
-  <data name="PersonalInfoIntro" xml:space="preserve">
+  <data name="PersonalInfoIntroEa" xml:space="preserve">
     <value>We, the Environment Agency, will process the information you provide so that we can:</value>
+  </data>
+  <data name="PersonalInfoIntroNiea" xml:space="preserve">
+    <value>We, the Northern Ireland Environment Agency, will process the information you provide so that we can:</value>
+  </data>
+  <data name="PersonalInfoIntroNrw" xml:space="preserve">
+    <value>We, Natural Resources Wales, will process the information you provide so that we can:</value>
+  </data>
+  <data name="PersonalInfoIntroSepa" xml:space="preserve">
+    <value>We, the Scottish Environmental Protection Agency, will process the information you provide so that we can:</value>
   </data>
   <data name="PreventLawBreaking" xml:space="preserve">
     <value>prevent anyone from breaking environmental law, investigate cases where environmental law may have been broken, and take any action that is needed</value>

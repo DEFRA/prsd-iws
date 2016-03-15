@@ -29,7 +29,11 @@
 
             if (status == NotificationStatus.NotSubmitted)
             {
-                var model = new DisclaimerViewModel { Id = id };
+                var model = new DisclaimerViewModel
+                {
+                    Id = id,
+                    CompetentAuthority = assessmentInfo.CompetentAuthority
+                };
                 return View(model);
             }
 
