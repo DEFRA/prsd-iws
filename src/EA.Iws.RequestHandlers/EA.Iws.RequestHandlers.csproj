@@ -472,7 +472,6 @@
     <Compile Include="WasteRecovery\SetWasteDisposalHandler.cs" />
     <Compile Include="Registration\CreateAddressHandler.cs" />
     <Compile Include="Shared\GetCountryHandler.cs" />
-    <Compile Include="Submit\GetUnitedKingdomCompetentAuthorityInformationHandler.cs" />
     <Compile Include="UserExtensions.cs" />
     <Compile Include="WasteCodes\GetAllWasteCodesForNotificationHandler.cs" />
     <Compile Include="WasteCodes\GetWasteCodeLookupAndNotificationDataByTypesHandler.cs" />
