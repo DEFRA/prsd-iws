@@ -3,6 +3,9 @@
 @{
     ViewBag.Title = "Key dates and notification status ";
     Layout = "~/Views/Shared/_Layout.GovUK.Sections.cshtml";
+
+    var nullMarker = "- -";
+    var byText = " by ";
 }
 
 <div class="column-two-thirds">
@@ -13,9 +16,6 @@
 
     @Html.HiddenFor(m => m.NotificationId)
 
-    @{
-        var nullMarker = "- -";
-    }
     @if (Model.CurrentStatus == NotificationStatus.NotSubmitted)
     {
         <p>Once you've completed and submitted your notification, you will be able to view updates on the notification's status here.</p>
@@ -64,6 +64,8 @@
                         @if (Model.CommencementDate.HasValue)
                         {
                             @Html.Gds().DisplayDateFor(m => m.CommencementDate.GetValueOrDefault())
+                            @byText
+                            @Html.DisplayFor(m => m.NameOfOfficer)
                         }
                         else
                         {
