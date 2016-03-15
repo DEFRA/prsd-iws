@@ -17,6 +17,7 @@
             DecisionRequiredDate = dates.DecisionRequiredDate;
             Decisions = new List<NotificationAssessmentDecision>();
             CurrentStatus = dates.CurrentStatus;
+            NameOfOfficer = dates.NameOfOfficer;
         }
 
         public NotificationStatus CurrentStatus { get; set; }
@@ -36,6 +37,8 @@
         public DateTime? AcknowledgedDate { get; set; }
 
         public DateTime? DecisionRequiredDate { get; set; }
+
+        public string NameOfOfficer { get; set; }
 
         public IList<NotificationAssessmentDecision> Decisions { get; set; }
     }
