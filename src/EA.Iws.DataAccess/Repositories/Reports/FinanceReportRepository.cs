@@ -2,7 +2,9 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Data.SqlClient;
     using System.Threading.Tasks;
+    using Core.Notification;
     using Domain.Reports;
 
     internal class FinanceReportRepository : IFinanceReportRepository
@@ -14,7 +16,7 @@
             this.context = context;
         }
 
-        public async Task<IEnumerable<Finance>> GetFinanceReport(DateTime endDate)
+        public async Task<IEnumerable<Finance>> GetFinanceReport(DateTime endDate, UKCompetentAuthority competentAuthority)
         {
             return await context.Database.SqlQuery<Finance>(
                 @"SELECT
@@ -42,7 +44,10 @@
                     [ConsentTo],
                     [Status]                    
                   FROM
-                    [Reports].[Finance]").ToArrayAsync();
+                    [Reports].[Finance]
+                  WHERE
+                    [CompetentAuthorityId] = @ca",
+                new SqlParameter("@ca", (int)competentAuthority)).ToArrayAsync();
         }
     }
 }

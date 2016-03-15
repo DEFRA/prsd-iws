@@ -27,7 +27,8 @@ AS
         CAST(NO.HasMultipleFacilities AS BIT) AS [HasMultipleFacilities],
         NA.ConsentFrom,
         NA.ConsentTo,
-        NA.Status
+        NA.Status,
+        N.CompetentAuthorityId
     FROM [Reports].[NotificationOrganisations] NO
     INNER JOIN [Reports].[NotificationAssessment] NA ON NO.Id = NA.NotificationId
     INNER JOIN [Reports].[Notification] N ON NO.Id = N.Id
