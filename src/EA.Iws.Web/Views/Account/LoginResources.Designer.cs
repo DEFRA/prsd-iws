@@ -70,7 +70,16 @@ namespace EA.Iws.Web.Views.Account {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Email.
+        ///   Looks up a localized string similar to Create a user account.
+        /// </summary>
+        public static string CreateUserAccount {
+            get {
+                return ResourceManager.GetString("CreateUserAccount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Email address.
         /// </summary>
         public static string Email {
             get {

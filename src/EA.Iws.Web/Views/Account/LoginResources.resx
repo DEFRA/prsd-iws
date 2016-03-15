@@ -120,8 +120,11 @@
   <data name="Continue" xml:space="preserve">
     <value>Continue</value>
   </data>
+  <data name="CreateUserAccount" xml:space="preserve">
+    <value>Create a user account</value>
+  </data>
   <data name="Email" xml:space="preserve">
-    <value>Email</value>
+    <value>Email address</value>
   </data>
   <data name="EmailFormatValidation" xml:space="preserve">
     <value>Please enter a valid email address</value>

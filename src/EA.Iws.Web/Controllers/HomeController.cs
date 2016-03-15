@@ -1,11 +1,9 @@
 ﻿namespace EA.Iws.Web.Controllers
 {
-    using System;
     using System.Linq;
     using System.Security.Claims;
     using System.Web.Mvc;
     using Infrastructure;
-    using ViewModels.Shared;
 
     public class HomeController : Controller
     {
@@ -23,33 +21,7 @@
                 return RedirectToAction(actionName: "Home", controllerName: "Applicant");
             }
 
-            return View();
-        }
-
-        [HttpGet]
-        [AllowAnonymous]
-        public ActionResult LandingPage()
-        {
-            var model = new YesNoChoiceViewModel();
-            return View(model);
-        }
-
-        [HttpPost]
-        [AllowAnonymous]
-        [ValidateAntiForgeryToken]
-        public ActionResult LandingPage(YesNoChoiceViewModel model)
-        {
-            if (!ModelState.IsValid)
-            {
-                return View(model);
-            }
-
-            if (model.Choices.SelectedValue.Equals("Yes", StringComparison.InvariantCultureIgnoreCase))
-            {
-                return RedirectToAction("Login", "Account");
-            }
-
-            return RedirectToAction("ApplicantRegistration", "Registration");
+            return RedirectToAction("Login", "Account");
         }
 
         [AllowAnonymous]
