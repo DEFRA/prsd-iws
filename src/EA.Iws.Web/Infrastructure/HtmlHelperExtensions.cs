@@ -65,7 +65,7 @@
                 case UKCompetentAuthority.Scotland:
                     return new MvcHtmlString("01786 457 700");
                 case UKCompetentAuthority.NorthernIreland:
-                    return new MvcHtmlString("028 90569742");
+                    return new MvcHtmlString("028 9056 9742");
                 case UKCompetentAuthority.Wales:
                     return new MvcHtmlString("03000 653 073");
                 default:

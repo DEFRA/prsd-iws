@@ -169,7 +169,7 @@
     <value>Please enter a valid number in the 'Month' field</value>
   </data>
   <data name="NumberHint" xml:space="preserve">
-    <value>The amount can be entered with or without commas as thousand separtors. For example, 3,333 or 3333</value>
+    <value>The amount can be entered with or without commas as thousand separators. For example, 3,333 or 3333</value>
   </data>
   <data name="NumberOfShipments" xml:space="preserve">
     <value>Number of shipments</value>

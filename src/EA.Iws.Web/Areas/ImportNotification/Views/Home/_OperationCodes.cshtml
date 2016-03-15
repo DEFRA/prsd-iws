@@ -1,16 +1,11 @@
 ﻿@using EA.Iws.Core.Shared
 @model EA.Iws.Web.Areas.ImportNotification.ViewModels.Home.SummaryTableContainerViewModel
 
-@{
-    var prefix = Model.Details.Type == NotificationType.Disposal ? "D" : "R";
-}
-
-
 <div class="overview-block">
         @if (Model.Details.WasteOperation.OperationCodes != null && Model.Details.WasteOperation.OperationCodes.Any())
         {
             <div class="overview-block-element">
-                @string.Join(", ", Model.Details.WasteOperation.OperationCodes.Select(c => prefix + c))
+                @string.Join(", ", Model.Details.WasteOperation.OperationCodes)
             </div>
         }
         else

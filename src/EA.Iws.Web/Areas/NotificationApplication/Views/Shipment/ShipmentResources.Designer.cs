@@ -214,7 +214,7 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.Shipment {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The amount can be entered with or without commas as thousand separtors. For example, 3,333 or 3333.
+        ///   Looks up a localized string similar to The amount can be entered with or without commas as thousand separators. For example, 3,333 or 3333.
         /// </summary>
         public static string NumberHint {
             get {
