@@ -27,5 +27,7 @@
 
         [DefaultValue(1000)]
         public int FileSafeTimerMilliseconds { get; set; }
+
+        public string DonePageUrl { get; set; }
     }
 }
