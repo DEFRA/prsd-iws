@@ -23,7 +23,7 @@
     </p>
 
     <div class="form-group">
-        @Html.Partial("_IwsStandardDataNotice")
+        @Html.Partial("_IwsStandardDataNotice", new ViewDataDictionary(ViewData) { { "CompetentAuthority", Model.CompetentAuthority } })
     </div>
     
     <div class="form-group @Html.Gds().FormGroupClass(m => m.TermsAndConditions)">

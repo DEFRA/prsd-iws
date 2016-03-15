@@ -1,6 +1,7 @@
 ﻿namespace EA.Iws.Web.Areas.NotificationApplication.ViewModels.NotificationApplication
 {
     using System;
+    using Core.Notification;
     using Prsd.Core.Validation;
 
     public class DisclaimerViewModel
@@ -9,5 +10,7 @@
 
         [MustBeTrue(ErrorMessage = "Please confirm that you have read standard data notice and disclaimer")]
         public bool TermsAndConditions { get; set; }
+
+        public UKCompetentAuthority CompetentAuthority { get; set; }
     }
 }

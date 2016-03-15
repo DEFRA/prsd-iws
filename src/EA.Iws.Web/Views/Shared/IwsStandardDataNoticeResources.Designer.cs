@@ -144,9 +144,36 @@ namespace EA.Iws.Web.Views.Shared {
         /// <summary>
         ///   Looks up a localized string similar to We, the Environment Agency, will process the information you provide so that we can:.
         /// </summary>
-        public static string PersonalInfoIntro {
+        public static string PersonalInfoIntroEa {
             get {
-                return ResourceManager.GetString("PersonalInfoIntro", resourceCulture);
+                return ResourceManager.GetString("PersonalInfoIntroEa", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to We, the Northern Ireland Environment Agency, will process the information you provide so that we can:.
+        /// </summary>
+        public static string PersonalInfoIntroNiea {
+            get {
+                return ResourceManager.GetString("PersonalInfoIntroNiea", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to We, Natural Resources Wales, will process the information you provide so that we can:.
+        /// </summary>
+        public static string PersonalInfoIntroNrw {
+            get {
+                return ResourceManager.GetString("PersonalInfoIntroNrw", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to We, the Scottish Environmental Protection Agency, will process the information you provide so that we can:.
+        /// </summary>
+        public static string PersonalInfoIntroSepa {
+            get {
+                return ResourceManager.GetString("PersonalInfoIntroSepa", resourceCulture);
             }
         }
         
