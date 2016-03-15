@@ -3,21 +3,29 @@
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Prsd.Core.Mediator;
+    using Services;
     using ViewModels.NewUser;
 
     public class FeedbackController : Controller
     {
         private readonly IMediator mediator;
+        private readonly AppConfiguration config;
 
-        public FeedbackController(IMediator mediator)
+        public FeedbackController(IMediator mediator, AppConfiguration config)
         {
             this.mediator = mediator;
+            this.config = config;
         }
 
         [HttpGet]
         [AllowAnonymous]
         public ActionResult Index()
         {
+            if (!string.IsNullOrWhiteSpace(config.DonePageUrl))
+            {
+                return Redirect(config.DonePageUrl);
+            }
+
             var model = new FeedbackViewModel();
             return View(model);
         }
