@@ -121,7 +121,7 @@
     <value>Continue</value>
   </data>
   <data name="CreateUserAccount" xml:space="preserve">
-    <value>Create a user account</value>
+    <value>Register for a user account</value>
   </data>
   <data name="Email" xml:space="preserve">
     <value>Email address</value>
