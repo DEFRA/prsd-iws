@@ -2,6 +2,7 @@
 {
     using System;
     using System.Net;
+    using System.Threading.Tasks;
     using Infrastructure;
     using Microsoft.Owin;
     using Microsoft.Owin.Security.Cookies;
@@ -22,10 +23,16 @@
                 ExpireTimeSpan = TimeSpan.FromHours(2),
                 Provider = new CookieAuthenticationProvider
                 {
-                    OnValidateIdentity = context => IdentityValidationHelper.OnValidateIdentity(context),
+                    OnValidateIdentity = context => OnValidateIdentity(context),
                     OnApplyRedirect = context => OnApplyRedirect(context)
                 }
             });
+        }
+
+        private static async Task OnValidateIdentity(CookieValidateIdentityContext context)
+        {
+            await IdentityValidationHelper.UpdateAccessToken(context);
+            await IdentityValidationHelper.TransformClaims(context);
         }
 
         private static void OnApplyRedirect(CookieApplyRedirectContext context)
