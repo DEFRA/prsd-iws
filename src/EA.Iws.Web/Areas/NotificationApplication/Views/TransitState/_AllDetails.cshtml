@@ -21,6 +21,7 @@
     @Html.Gds().HintParagraph(TransitStateResources.EntryPortHint)
     @Html.Gds().ValidationMessageFor(m => m.EntryPointId)
     @Html.Gds().DropDownListFor(m => m.EntryPointId, Model.EntryOrExitPoints, string.Empty, new { title = TransitStateResources.EntryPoint, data_select_box = "true" })
+    @Html.HiddenFor(m => m.NotificationCompetentAuthority)
 </div>
 
 @Html.Partial("_PortNotListedDisclosure", new ViewDataDictionary { { "ca", Model.NotificationCompetentAuthority } })

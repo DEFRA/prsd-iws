@@ -4,6 +4,8 @@
 <div class="form-group @Html.Gds().FormGroupClass(m => m.CountryId)">
     @Html.Gds().LabelFor(m => m.CountryId, new { @class = "form-label-bold" })
     @Html.Gds().HintParagraph(TransitStateResources.CountryHint)
+    @Html.HiddenFor(m => m.NotificationCompetentAuthority)
+
     @if (Model.CountryId != null)
     {
         @Html.Gds().DropDownListFor(m => m.CountryId, Model.Countries, new { data_select_box = "true" })
