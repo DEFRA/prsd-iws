@@ -9,7 +9,7 @@ AS
         N.[TypeId] AS [NotificationType],
         N.[CompetentAuthorityId],
         N.[Preconsented],
-        NA.[StatusId] AS [Status],
+        NA.[ExportStatusId] AS [Status],
         NA.[ReceivedDate] AS [NotificationReceived],
         NA.[PaymentReceivedDate] AS [PaymentReceived],
         NA.[CommencementDate] AS [AssessmentStarted],
@@ -27,5 +27,5 @@ AS
     ON			[N].[Id] = [NA].[NotificationId]
 
     WHERE		[NA].[ImportOrExport] = 'Export'
-    AND			[NA].[StatusId] <> 1
+    AND			[NA].[ExportStatusId] <> 1
 GO
