@@ -1,10 +1,11 @@
 ﻿namespace EA.Iws.Web.Areas.NotificationApplication.ViewModels.TransitState
 {
+    using Core.Notification;
+    using Prsd.Core.Validation;
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.Web.Mvc;
-    using Prsd.Core.Validation;
     using Views.TransitState;
     using Web.ViewModels.Shared;
 
@@ -39,6 +40,8 @@
         public IList<Guid> TransitStateCountryIds { get; set; }
 
         public Guid? StateOfExportCountryId { get; set; }
+
+        public UKCompetentAuthority NotificationCompetentAuthority { get; set; }
 
         public TransitStateViewModel()
         {

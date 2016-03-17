@@ -22,7 +22,7 @@
         @Html.Gds().DropDownListFor(m => m.EntryOrExitPointId, Model.ExitPoints, string.Empty, new { @title = StateOfExportResources.ExitPoint, data_select_box = "true" })
     </div>
 
-    @Html.Partial("_PortNotListedDisclosure")
+    @Html.Partial("_PortNotListedDisclosure", new ViewDataDictionary { { "ca", Model.NotificationCompetentAuthority } })
 
     <div class="form-group">
         <button class="button" type="submit" value="submit" name="submit">@Constants.ContinueButtonText</button>

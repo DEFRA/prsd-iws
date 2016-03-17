@@ -1,16 +1,17 @@
 ﻿namespace EA.Iws.Web.Areas.NotificationApplication.Controllers
 {
+    using Infrastructure;
+    using Prsd.Core.Mapper;
+    using Prsd.Core.Mediator;
+    using Prsd.Core.Web.ApiClient;
+    using Requests.Notification;
+    using Requests.TransitState;
+    using Requests.TransportRoute;
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Mvc;
-    using Infrastructure;
-    using Prsd.Core.Mapper;
-    using Prsd.Core.Mediator;
-    using Prsd.Core.Web.ApiClient;
-    using Requests.TransitState;
-    using Requests.TransportRoute;
     using ViewModels.TransitState;
     using Web.ViewModels.Shared;
 
@@ -39,7 +40,10 @@
                     await
                         mediator.SendAsync(new GetTransitStateWithTransportRouteDataByNotificationId(id, entityId));
 
+            var notificationCompetentAuthority = await mediator.SendAsync(new GetUnitedKingdomCompetentAuthorityByNotificationId(id));
+
             var model = transitStateMapper.Map(result);
+            model.NotificationCompetentAuthority = notificationCompetentAuthority.AsUKCompetantAuthority();
 
             return View(model);
         }

@@ -1859,6 +1859,7 @@
     <Compile Include="Infrastructure\MimeTypes.cs" />
     <Compile Include="Infrastructure\ExportStatus.cs" />
     <Compile Include="Infrastructure\ExportStatusExtensions.cs" />
+    <Compile Include="Infrastructure\UKCompetentAuthorityDetails.cs" />
     <Compile Include="Infrastructure\Validation\RestrictToAllowedUploadTypesAttribute.cs" />
     <Compile Include="Infrastructure\ImportNavigationSection.cs" />
     <Compile Include="Infrastructure\Validation\RestrictToAllowedUploadTypesAttributeResources.Designer.cs">

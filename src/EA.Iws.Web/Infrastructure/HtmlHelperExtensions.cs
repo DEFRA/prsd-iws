@@ -58,20 +58,7 @@
         /// </summary>
         public static MvcHtmlString CompetentAuthorityHelpline(this HtmlHelper helper, UKCompetentAuthority competentAuthority)
         {
-            switch (competentAuthority)
-            {
-                case UKCompetentAuthority.England:
-                    return new MvcHtmlString("03708 506 506");
-                case UKCompetentAuthority.Scotland:
-                    return new MvcHtmlString("01786 457 700");
-                case UKCompetentAuthority.NorthernIreland:
-                    return new MvcHtmlString("028 9056 9742");
-                case UKCompetentAuthority.Wales:
-                    return new MvcHtmlString("03000 653 073");
-                default:
-                    throw new ArgumentException(
-                        string.Format("No helpline number for {0} found", competentAuthority), "competentAuthority");
-            }
+            return UKCompetentAuthorityDetails.ForCompetentAuthority(competentAuthority).HelplineNumber;
         }
 
         /// <summary>
