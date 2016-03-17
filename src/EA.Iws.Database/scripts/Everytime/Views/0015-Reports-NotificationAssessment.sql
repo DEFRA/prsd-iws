@@ -7,7 +7,8 @@ AS
     SELECT
         NA.[Id] AS Id,
         NA.[NotificationApplicationId] AS NotificationId,
-        NA.[Status] AS [StatusId],
+        NA.[Status] AS [ExportStatusId],
+        NULL AS [ImportStatusId],
         S.[Description] AS [Status],
         CAST(D.[PaymentReceivedDate] AS DATE) AS [PaymentReceivedDate],
         CAST(D.[AcknowledgedDate] AS DATE) AS [AcknowlegedDate],
@@ -50,7 +51,8 @@ AS
         SELECT
         NA.[Id] AS Id,
         NA.[NotificationApplicationId] AS NotificationId,
-        NA.[Status] AS [StatusId],
+        NULL AS [ExportStatusId],
+        NA.[Status] AS [ImportStatusId],
         S.[Description] AS [Status],
         CAST(D.[PaymentReceivedDate] AS DATE) AS [PaymentReceivedDate],
         CAST(D.[AcknowledgedDate] AS DATE) AS [AcknowlegedDate],

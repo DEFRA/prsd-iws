@@ -70,7 +70,7 @@ namespace EA.Iws.Web.Views.Account {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Create a user account.
+        ///   Looks up a localized string similar to Register for a user account.
         /// </summary>
         public static string CreateUserAccount {
             get {

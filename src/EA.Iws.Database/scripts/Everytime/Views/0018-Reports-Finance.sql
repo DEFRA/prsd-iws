@@ -33,5 +33,7 @@ AS
     INNER JOIN [Reports].[NotificationAssessment] NA ON NO.Id = NA.NotificationId
     INNER JOIN [Reports].[Notification] N ON NO.Id = N.Id
     LEFT JOIN [Reports].[Payments] P ON NO.Id = P.NotificationId
-    WHERE NA.[StatusId] <> 1
+    WHERE 
+        (NA.[ExportStatusId] IS NULL OR NA.[ExportStatusId] <> 1)
+        AND (NA.[ImportStatusId] IS NULL OR NA.[ImportStatusId] > 2)
 GO
