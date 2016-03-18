@@ -5,7 +5,7 @@
     using Core.Authorization.Permissions;
     using Prsd.Core.Mediator;
 
-    [RequestAuthorization(ImportNotificationPermissions.CanEditImportNotificationAssessment)]
+    [RequestAuthorization(ImportNotificationPermissions.CanMakeImportNotificationAssessmentDecision)]
     public class WithdrawImportNotification : IRequest<bool>
     {
         public Guid ImportNotificationId { get; private set; }

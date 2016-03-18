@@ -50,7 +50,10 @@
             </h3>
             <ul>
                 <li>@Html.ActionLink("Key dates", "Index", "KeyDates", new { area = "AdminImportAssessment", id }, null)</li>
-                <li>@Html.ActionLink("Assessment decision", "Index", "Decision", new { area = "AdminImportAssessment", id }, null)</li>
+                @if (Model.ShowAssessmentDecision)
+                {
+                    <li>@Html.ActionLink("Assessment decision", "Index", "Decision", new { area = "AdminImportAssessment", id }, null)</li>
+                }
                 @if (Model.Details.CompetentAuthority == UKCompetentAuthority.England)
                 {
                     <li>@Html.ActionLink("Assign an area", "Index", "AssignArea", new { area = "AdminImportAssessment", id}, null)</li>

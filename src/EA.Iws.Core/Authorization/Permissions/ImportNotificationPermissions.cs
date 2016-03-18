@@ -13,5 +13,7 @@
         public const string CanReadImportNotificationAssessment = "Can Read Import Notification Assessment";
 
         public const string CanEditImportNotificationAssessment = "Can Edit Import Notification Assessment";
+
+        public const string CanMakeImportNotificationAssessmentDecision = "Can Make Import Notification Assessment Decision";
     }
 }

@@ -21,5 +21,7 @@
         public const string CanCreateLegacyExportNotification = "Can Create Legacy Export Notification";
 
         public const string CanGetNotificationsForApplicantHome = "Can Get Notifications For Applicant Home";
+
+        public const string CanMakeExportNotificationAssessmentDecision = "Can Make Export Notification Assessment Decision";
     }
 }

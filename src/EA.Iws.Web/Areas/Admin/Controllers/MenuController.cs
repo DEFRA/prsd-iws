@@ -3,6 +3,7 @@
     using System;
     using System.Threading.Tasks;
     using System.Web.Mvc;
+    using Core.Authorization.Permissions;
     using Core.ImportNotificationAssessment;
     using Infrastructure;
     using Infrastructure.Authorization;
@@ -58,6 +59,11 @@
                         authorizationService.AuthorizeActivity(typeof(AddEntryOrExitPoint)))
                     .Result;
 
+            var showAssessmentDecision = Task.Run(() =>
+                authorizationService.AuthorizeActivity(
+                    ImportNotificationPermissions.CanMakeImportNotificationAssessmentDecision))
+                .Result;
+
             var model = new ImportNavigationViewModel
             {
                 Details = details,
@@ -67,7 +73,8 @@
                 {
                     ShowApproveNewInternalUserLink = showApproveNewInternalUserLink,
                     ShowAddNewEntryOrExitPointLink = showAddNewEntryOrExitPointLink
-                }
+                },
+                ShowAssessmentDecision = showAssessmentDecision
             };
 
             return PartialView("_ImportNavigation", model);
@@ -86,6 +93,11 @@
                         authorizationService.AuthorizeActivity(typeof(AddEntryOrExitPoint)))
                     .Result;
 
+            var showAssessmentDecision = Task.Run(() =>
+                authorizationService.AuthorizeActivity(
+                    ExportNotificationPermissions.CanMakeExportNotificationAssessmentDecision))
+                .Result;
+
             var model = new ExportNavigationViewModel
             {
                 Data = data,
@@ -94,7 +106,8 @@
                 {
                     ShowApproveNewInternalUserLink = showApproveNewInternalUserLink,
                     ShowAddNewEntryOrExitPointLink = showAddNewEntryOrExitPointLink
-                }
+                },
+                ShowAssessmentDecision = showAssessmentDecision
             };
 
             return PartialView("_ExportNavigation", model);
