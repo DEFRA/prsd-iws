@@ -5,7 +5,7 @@
     using Core.Authorization.Permissions;
     using Prsd.Core.Mediator;
 
-    [RequestAuthorization(ImportNotificationPermissions.CanEditImportNotificationAssessment)]
+    [RequestAuthorization(ImportNotificationPermissions.CanMakeImportNotificationAssessmentDecision)]
     public class ObjectToImportNotification : IRequest<bool>
     {
         public string ReasonsForObjection { get; private set; }

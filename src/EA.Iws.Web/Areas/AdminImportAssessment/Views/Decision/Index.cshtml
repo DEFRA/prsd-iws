@@ -22,15 +22,15 @@
 
 
     if (!Model.PossibleDecisions.Any())
-     {
-         <h2 class="heading-medium">@Resource.DecisionHeading</h2>
-         <p>
-             @Html.Raw(string.Format(Resource.NoAvailableDecisionsParagraphOne, EnumHelper.GetDisplayName(Model.Status)))
-         </p>
-         <p>
-             @Resource.NoAvailableDecisionsParagraphTwo
-         </p>
-     }
+    {
+        <h2 class="heading-medium">@Resource.DecisionHeading</h2>
+        <p>
+            @Html.Raw(string.Format(Resource.NoAvailableDecisionsParagraphOne, EnumHelper.GetDisplayName(Model.Status)))
+        </p>
+        <p>
+            @Resource.NoAvailableDecisionsParagraphTwo
+        </p>
+    }
     else
     {
         <div class="form-group @Html.Gds().FormGroupClass(m => m.Decision)">

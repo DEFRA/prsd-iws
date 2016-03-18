@@ -4,13 +4,15 @@
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Core.Admin;
+    using Core.Authorization.Permissions;
     using Core.NotificationAssessment;
+    using Infrastructure.Authorization;
     using Prsd.Core.Mapper;
     using Prsd.Core.Mediator;
     using Requests.NotificationAssessment;
     using ViewModels.Decision;
 
-    [Authorize(Roles = "internal")]
+    [AuthorizeActivity(ExportNotificationPermissions.CanMakeExportNotificationAssessmentDecision)]
     public class DecisionController : Controller
     {
         private readonly IMediator mediator;
@@ -27,7 +29,8 @@
         public async Task<ActionResult> Index(Guid id)
         {
             var data = await mediator.SendAsync(new GetNotificationAssessmentDecisionData(id));
-            return View(decisionMap.Map(data));
+            var model = decisionMap.Map(data);
+            return View(model);
         }
 
         [HttpPost]

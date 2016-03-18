@@ -12,5 +12,7 @@
         public AdminLinksViewModel AdminLinksModel { get; set; }
 
         public bool ShowImportSections { get; set; }
+
+        public bool ShowAssessmentDecision { get; set; }
     }
 }

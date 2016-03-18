@@ -5,7 +5,7 @@ namespace EA.Iws.Requests.NotificationAssessment
     using Core.Authorization.Permissions;
     using Prsd.Core.Mediator;
 
-    [RequestAuthorization(ExportNotificationPermissions.CanEditExportNotificationAssessment)]
+    [RequestAuthorization(ExportNotificationPermissions.CanMakeExportNotificationAssessmentDecision)]
     public class WithdrawConsentForNotificationApplication : IRequest<bool>
     {
         public string ReasonsForConsentWithdrawal { get; private set; }
