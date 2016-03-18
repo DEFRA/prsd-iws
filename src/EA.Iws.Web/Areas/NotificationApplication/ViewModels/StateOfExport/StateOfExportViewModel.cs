@@ -1,5 +1,6 @@
 ﻿namespace EA.Iws.Web.Areas.NotificationApplication.ViewModels.StateOfExport
 {
+    using Core.Notification;
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
@@ -21,6 +22,8 @@
         public IList<Guid> TransitStateCountryIds { get; set; }
 
         public SelectList ExitPoints { get; set; }
+
+        public UKCompetentAuthority NotificationCompetentAuthority { get; set; }
 
         public StateOfExportViewModel()
         {

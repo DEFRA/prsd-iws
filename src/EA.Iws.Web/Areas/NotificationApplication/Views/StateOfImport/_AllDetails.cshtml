@@ -21,9 +21,10 @@
     @Html.Gds().HintParagraph(StateOfImportResources.PortHint)
     @Html.Gds().ValidationMessageFor(m => m.EntryOrExitPointId)
     @Html.Gds().DropDownListFor(m => m.EntryOrExitPointId, Model.EntryPoints, string.Empty, new { title = StateOfImportResources.EntryPoint, data_select_box = "true" })
+    @Html.HiddenFor(m => m.NotificationCompetentAuthority)
 </div>
 
-@Html.Partial("_PortNotListedDisclosure")
+@Html.Partial("_PortNotListedDisclosure", new ViewDataDictionary { { "ca", Model.NotificationCompetentAuthority } })
 
 <div class="form-group">
     <button class="button" type="submit" value="submit" name="submit">@Constants.ContinueButtonText</button>

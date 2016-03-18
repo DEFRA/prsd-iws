@@ -1,10 +1,11 @@
 ﻿namespace EA.Iws.Web.Areas.NotificationApplication.ViewModels.StateOfImport
 {
+    using Core.Notification;
+    using Prsd.Core.Validation;
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.Web.Mvc;
-    using Prsd.Core.Validation;
     using Views.StateOfImport;
     using Web.ViewModels.Shared;
 
@@ -31,6 +32,8 @@
         public SelectList Countries { get; set; }
 
         public SelectList EntryPoints { get; set; }
+
+        public UKCompetentAuthority NotificationCompetentAuthority { get; set; }
 
         public StateOfImportViewModel()
         {

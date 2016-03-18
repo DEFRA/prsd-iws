@@ -62,7 +62,7 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.Shared {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Contact us to add it. Phone the IWS team on {0} or email us at {1}..
+        ///   Looks up a localized string similar to Contact us to add it. Phone the {0} on {1} or email us at {2}..
         /// </summary>
         public static string PortNotListedText {
             get {

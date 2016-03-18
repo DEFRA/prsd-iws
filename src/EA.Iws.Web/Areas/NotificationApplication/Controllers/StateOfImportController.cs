@@ -1,16 +1,17 @@
 ﻿namespace EA.Iws.Web.Areas.NotificationApplication.Controllers
 {
+    using Infrastructure;
+    using Prsd.Core.Mapper;
+    using Prsd.Core.Mediator;
+    using Requests.Notification;
+    using Requests.Shared;
+    using Requests.StateOfImport;
+    using Requests.TransportRoute;
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Mvc;
-    using Infrastructure;
-    using Prsd.Core.Mapper;
-    using Prsd.Core.Mediator;
-    using Requests.Shared;
-    using Requests.StateOfImport;
-    using Requests.TransportRoute;
     using ViewModels.StateOfImport;
     using Web.ViewModels.Shared;
 
@@ -35,7 +36,10 @@
         {
             var stateOfImportSetData = await mediator.SendAsync(new GetStateOfImportWithTransportRouteDataByNotificationId(id));
 
+            var notificationCompetentAuthority = await mediator.SendAsync(new GetUnitedKingdomCompetentAuthorityByNotificationId(id));
+
             var model = mapper.Map(stateOfImportSetData);
+            model.NotificationCompetentAuthority = notificationCompetentAuthority.AsUKCompetantAuthority();
 
             return View(model);
         }

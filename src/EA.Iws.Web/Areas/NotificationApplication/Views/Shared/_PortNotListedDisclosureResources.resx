@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="PortNotListedText" xml:space="preserve">
-    <value>Contact us to add it. Phone the IWS team on {0} or email us at {1}.</value>
+    <value>Contact us to add it. Phone the {0} on {1} or email us at {2}.</value>
   </data>
   <data name="PortNotListedTitle" xml:space="preserve">
     <value>Port or border crossing not in the list?</value>
