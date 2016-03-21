@@ -32,9 +32,9 @@
 
         public DateTime? LatestRefundDate { get; protected set; }
 
-        public int IntendedNumberOfShipments { get; protected set; }
+        public int? IntendedNumberOfShipments { get; protected set; }
 
-        public int TotalShipmentsMade { get; protected set; }
+        public int? TotalShipmentsMade { get; protected set; }
 
         public string ImportOrExport { get; protected set; }
 
