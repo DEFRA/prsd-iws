@@ -8,6 +8,8 @@
     <h1 class="heading-large">@Resource.Title</h1>
 </header>
 
+<p>@Resource.RedownloadParagraph
+   @Html.ActionLink(Resource.DownloadLink, "GenerateMovementDocument", "Home", new { id = Model.MovementId, area = "ExportMovement" }, new { })</p>
 <p>@Resource.Paragraph</p>
 
 @using (Html.BeginForm(null, "Submit", FormMethod.Post, new { enctype = "multipart/form-data" }))
