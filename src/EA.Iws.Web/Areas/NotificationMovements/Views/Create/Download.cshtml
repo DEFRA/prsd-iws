@@ -5,25 +5,28 @@
 }
 
 <header class="hgroup">
-    <h1 class="heading-large">Download and print your prenotification</h1>
+    <h1 class="heading-large">What to do next with this prenotification</h1>
 </header>
 
-<p>Before we can consider your prenotification, you'll need to:</p>
+<p>Before we can consider your prenotification, you still have to sign and submit the documentation. This is a four-step process:</p>
 
 <div class="form-group">
     <ol class="list-number">
         <li>
             download the
-            @Html.ActionLink("IWS Movement", "GenerateMovementDocument", "Home", new { id = Model.MovementId, area = "ExportMovement" }, new { })
-            (.pdf) file
+            @Html.ActionLink("IWS movement", "GenerateMovementDocument", "Home", new { id = Model.MovementId, area = "ExportMovement" }, new { })
+            file
         </li>
         <li>print the file</li>
         <li>sign it</li>
+        <li>upload the signed file</li>
     </ol>
 </div>
 
+<p>You can either upload the signed file now, or choose to upload it later. You'll be able to do this from the 'Notification options' page.</p>
+
 <div class="form-group">
-    @Html.ActionLink(Constants.ContinueButtonText, "Index", "Options",
+    @Html.ActionLink(Constants.ContinueOnlyButtonText, "Index", "Options",
             new { area = "NotificationApplication", id = ViewContext.RouteData.Values["notificationId"] },
             new { @class = "button" })
 </div>
