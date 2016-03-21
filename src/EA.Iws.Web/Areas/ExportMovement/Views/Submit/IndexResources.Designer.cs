@@ -61,11 +61,29 @@ namespace EA.Iws.Web.Areas.ExportMovement.Views.Submit {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to click here.
+        /// </summary>
+        public static string DownloadLink {
+            get {
+                return ResourceManager.GetString("DownloadLink", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Please make sure your prenotification is signed before you upload it..
         /// </summary>
         public static string Paragraph {
             get {
                 return ResourceManager.GetString("Paragraph", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to If you need another copy of this prenotification document,.
+        /// </summary>
+        public static string RedownloadParagraph {
+            get {
+                return ResourceManager.GetString("RedownloadParagraph", resourceCulture);
             }
         }
         
