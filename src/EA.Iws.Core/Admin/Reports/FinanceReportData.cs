@@ -32,9 +32,9 @@
 
         public DateTime? LatestRefundDate { get; set; }
 
-        public int IntendedNumberOfShipments { get; set; }
+        public int? IntendedNumberOfShipments { get; set; }
 
-        public int TotalShipmentsMade { get; set; }
+        public int? TotalShipmentsMade { get; set; }
 
         public string NotificationType { get; set; }
 
