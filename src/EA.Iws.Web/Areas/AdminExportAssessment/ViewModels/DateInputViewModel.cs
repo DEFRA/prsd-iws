@@ -89,6 +89,8 @@
 
         public bool? IsInterim { get; set; }
 
+        public bool ShowAssessmentDecisionLink { get; set; }
+
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             if (!NewDate.IsCompleted)
