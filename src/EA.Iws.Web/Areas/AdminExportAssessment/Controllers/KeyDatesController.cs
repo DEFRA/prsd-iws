@@ -3,6 +3,8 @@
     using System;
     using System.Threading.Tasks;
     using System.Web.Mvc;
+    using Core.Authorization.Permissions;
+    using Infrastructure.Authorization;
     using Prsd.Core.Mediator;
     using Requests.Admin.NotificationAssessment;
     using Requests.NotificationAssessment;
@@ -12,10 +14,12 @@
     public class KeyDatesController : Controller
     {
         private readonly IMediator mediator;
+        private readonly AuthorizationService authorizationService;
 
-        public KeyDatesController(IMediator mediator)
+        public KeyDatesController(IMediator mediator, AuthorizationService authorizationService)
         {
             this.mediator = mediator;
+            this.authorizationService = authorizationService;
         }
 
         [HttpGet]
@@ -38,6 +42,11 @@
                 AddRelevantDateToNewDate(model);
             }
 
+            model.ShowAssessmentDecisionLink =
+                await
+                    authorizationService.AuthorizeActivity(
+                        ExportNotificationPermissions.CanMakeExportNotificationAssessmentDecision);
+
             return View(model);
         }
 
@@ -47,6 +56,11 @@
         {
             if (!ModelState.IsValid)
             {
+                model.ShowAssessmentDecisionLink =
+                    await
+                        authorizationService.AuthorizeActivity(
+                            ExportNotificationPermissions.CanMakeExportNotificationAssessmentDecision);
+
                 return View(model);
             }
 
