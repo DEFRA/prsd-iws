@@ -262,6 +262,7 @@
     <Content Include="scripts\Update\Sprint27\20160225-090100-update-competent-authorities.sql" />
     <Content Include="scripts\Update\Sprint28\20160315-111500-remove-unused-uk-ca-columns.sql" />
     <Content Include="scripts\Update\Sprint28\20160316-1138-insert-uk-ca-remittance-address.sql" />
+    <Content Include="scripts\Update\Sprint28\20160322-114300-update-competent-authority.sql" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="scripts\TestData\20150522-171900-link-test-user-to-org.sql" />
