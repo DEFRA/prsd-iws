@@ -13,6 +13,7 @@
     using Prsd.Core.Mediator;
     using Requests.Admin.NotificationAssessment;
     using Requests.NotificationAssessment;
+    using Web.Infrastructure.Authorization;
     using Web.ViewModels.Shared;
     using Xunit;
 
@@ -28,10 +29,12 @@
         private readonly DateTime transmittedDate = new DateTime(2015, 8, 21);
         private readonly DateTime acknowledgedDate = new DateTime(2015, 8, 22);
         private readonly DateTime decisionRequiredDate = new DateTime(2015, 8, 22);
+        private readonly AuthorizationService authorizationService;
 
         public KeyDatesControllerTests()
         {
             mediator = A.Fake<IMediator>();
+            authorizationService = A.Fake<AuthorizationService>();
 
             A.CallTo(
                 () => mediator.SendAsync(A<GetKeyDatesSummaryInformation>.That.Matches(p => p.NotificationId == notificationId)))
@@ -47,7 +50,7 @@
                     }
                 });
 
-            controller = new KeyDatesController(mediator);
+            controller = new KeyDatesController(mediator, authorizationService);
         }
 
         [Fact]
@@ -73,8 +76,6 @@
         [Fact]
         public async Task Index_SetsNotificationReceivedDateIfPopulated()
         {
-            var controller = new KeyDatesController(mediator);
-
             var result = await controller.Index(notificationId, 0) as ViewResult;
 
             Assert.Equal(notificationReceivedDate, ((DateInputViewModel)result.Model).NotificationReceivedDate.AsDateTime());
@@ -83,8 +84,6 @@
         [Fact]
         public async Task Index_SetsPaymentReceivedDateIfPopulated()
         {
-            var controller = new KeyDatesController(mediator);
-
             var result = await controller.Index(notificationId, 0) as ViewResult;
 
             Assert.Equal(paymentReceivedDate, ((DateInputViewModel)result.Model).PaymentReceivedDate);
@@ -93,8 +92,6 @@
         [Fact]
         public async Task Index_SetsAcknowledgedDateIfPopulated()
         {
-            var controller = new KeyDatesController(mediator);
-
             var result = await controller.Index(notificationId, 0) as ViewResult;
 
             Assert.Equal(acknowledgedDate, ((DateInputViewModel)result.Model).NotificationAcknowledgedDate.AsDateTime());
@@ -103,8 +100,6 @@
         [Fact]
         public async Task Index_SetsDecisionRequiredByDateIfPopulated()
         {
-            var controller = new KeyDatesController(mediator);
-
             var result = await controller.Index(notificationId, 0) as ViewResult;
 
             Assert.Equal(decisionRequiredDate, ((DateInputViewModel)result.Model).DecisionDate.AsDateTime());
@@ -322,7 +317,7 @@
 
         private KeyDatesController GetMockAssessmentController(object viewModel)
         {
-            var assessmentController = new KeyDatesController(mediator);
+            var assessmentController = new KeyDatesController(mediator, authorizationService);
             // Mimic the behaviour of the model binder which is responsible for Validating the Model
             var validationContext = new ValidationContext(viewModel, null, null);
             var validationResults = new List<ValidationResult>();
