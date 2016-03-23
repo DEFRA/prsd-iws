@@ -118,13 +118,13 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Header" xml:space="preserve">
-    <value>What is the amount of recovered material in relation to the non-recoverable waste?</value>
+    <value>What percentage of the waste is recovered?</value>
   </data>
   <data name="PercentageRange" xml:space="preserve">
     <value>The percentage (%) must be between 0 and 100</value>
   </data>
   <data name="PercentageRecoverable" xml:space="preserve">
-    <value>Please enter this amount as a percentage</value>
+    <value>Percentage recoverable</value>
   </data>
   <data name="PercentageRecoverableValid" xml:space="preserve">
     <value>The percentage (%) of recoverable material must be a number with a maximum of 2 decimal places. Please ensure your number doesn't include any special characters like %, &lt; or £.</value>

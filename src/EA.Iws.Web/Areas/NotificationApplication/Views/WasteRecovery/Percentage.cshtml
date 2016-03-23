@@ -15,7 +15,7 @@
     @Html.Gds().ValidationSummary()
     
     <div class="form-group @Html.Gds().FormGroupClass(m => m.PercentageRecoverable)">
-        @Html.Gds().LabelFor(m => m.PercentageRecoverable)
+        @Html.Gds().LabelFor(m => m.PercentageRecoverable, new { @class = "visually-hidden" })
         @Html.Gds().ValidationMessageFor(m => m.PercentageRecoverable)
         @Html.Gds().TextBoxFor(m => m.PercentageRecoverable, new { type = "number", min = 0, max = 100, step = 0.01, @class ="form-control form-control-1-4" })&nbsp;%
     </div>
