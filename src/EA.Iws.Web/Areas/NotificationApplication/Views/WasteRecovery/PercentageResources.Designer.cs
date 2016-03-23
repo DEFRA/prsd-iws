@@ -61,7 +61,7 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.WasteRecovery {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to What is the amount of recovered material in relation to the non-recoverable waste?.
+        ///   Looks up a localized string similar to What percentage of the waste is recovered?.
         /// </summary>
         public static string Header {
             get {
@@ -79,7 +79,7 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.WasteRecovery {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Please enter this amount as a percentage.
+        ///   Looks up a localized string similar to Percentage recoverable.
         /// </summary>
         public static string PercentageRecoverable {
             get {
