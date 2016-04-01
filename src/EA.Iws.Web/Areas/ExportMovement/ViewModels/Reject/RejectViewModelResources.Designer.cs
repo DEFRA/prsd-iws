@@ -79,7 +79,7 @@ namespace EA.Iws.Web.Areas.ExportMovement.ViewModels.Reject {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Upload the signed certificate of receipt.
+        ///   Looks up a localized string similar to Upload the signed movement document to confirm the shipment has been rejected.
         /// </summary>
         public static string FileName {
             get {

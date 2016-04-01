@@ -124,7 +124,7 @@
     <value>Please enter the date the waste was rejected</value>
   </data>
   <data name="FileName" xml:space="preserve">
-    <value>Upload the signed certificate of receipt</value>
+    <value>Upload the signed movement document to confirm the shipment has been rejected</value>
   </data>
   <data name="FileRequired" xml:space="preserve">
     <value>Please provide the signed certificate of receipt</value>
