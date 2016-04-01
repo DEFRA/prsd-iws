@@ -62,7 +62,7 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.WasteRecovery {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Estimated value (£).
+        ///   Looks up a localized string similar to Estimated cost (£).
         /// </summary>
         public static string Amount {
             get {
