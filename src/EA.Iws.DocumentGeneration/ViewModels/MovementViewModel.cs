@@ -131,7 +131,6 @@
             ActualDate = dateTimeFormatter.DateTimeToDocumentFormatString(movement.Date);
             SetQuantity(movementDetails, quantityFormatter);
             PackagingTypes = packagingTypesFormatter.PackagingTypesToCommaDelimitedString(movementDetails.PackagingInfos);
-            NumberOfPackages = movementDetails.NumberOfPackages.ToString();
         }
 
         private void SetQuantity(MovementDetails movementDetails, QuantityFormatter quantityFormatter)

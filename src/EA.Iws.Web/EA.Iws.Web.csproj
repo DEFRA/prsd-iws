@@ -541,7 +541,6 @@
     <Content Include="Areas\NotificationMovements\Views\Create\ShipmentDate.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\Shared\NotificationSummarySections\_CodeDefinitionList.cshtml" />
     <Content Include="Areas\NotificationMovements\Views\Create\PackagingTypes.cshtml" />
-    <Content Include="Areas\NotificationMovements\Views\Create\NumberOfPackages.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\Shared\NotificationSummarySections\_Exporter.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\Shared\NotificationSummarySections\_Producer.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\Shared\NotificationSummarySections\_SiteOfExport.cshtml" />
@@ -581,8 +580,6 @@
     <Content Include="Areas\AdminExportAssessment\Views\Overview\_WasteCodes.cshtml" />
     <Content Include="Areas\AdminExportAssessment\Views\Overview\_WasteRecovery.cshtml" />
     <Content Include="Areas\AdminExportAssessment\Views\Overview\_SummaryTableContainer.cshtml" />
-    <Content Include="Areas\NotificationMovements\Views\Create\NumberOfCarriers.cshtml" />
-    <Content Include="Areas\NotificationMovements\Views\Create\Carriers.cshtml" />
     <Content Include="Areas\NotificationMovements\Views\Create\_MeansOfTransport.cshtml" />
     <Content Include="Content\iws\_movement.scss" />
     <Content Include="Areas\ExportMovement\Views\DateReceived\Index.cshtml" />
@@ -2294,7 +2291,6 @@
     <Compile Include="Areas\NotificationMovements\ViewModels\CancelMovement\ConfirmCancelMovementsViewModel.cs" />
     <Compile Include="Areas\NotificationMovements\ViewModels\CancelMovement\CancelMovementsViewModel.cs" />
     <Compile Include="Areas\AdminExportNotificationMovements\ViewModels\CaptureMovement\CreateViewModel.cs" />
-    <Compile Include="Areas\NotificationMovements\ViewModels\Create\CarrierViewModel.cs" />
     <Compile Include="Areas\NotificationMovements\ViewModels\Create\DownloadViewModel.cs" />
     <Compile Include="Areas\NotificationMovements\ViewModels\Create\MeansOfTransportViewModel.cs" />
     <Compile Include="Areas\ExportMovement\ViewModels\Complete\DateViewModel.cs" />
@@ -2396,8 +2392,6 @@
     <Compile Include="Mappings\NotificationAssessment\NotificationAssessmentDecisionDataMap.cs" />
     <Compile Include="ViewModels\Account\ResetPasswordViewModel.cs" />
     <Compile Include="ViewModels\Movement\MovementsViewModel.cs" />
-    <Compile Include="Areas\NotificationMovements\ViewModels\Create\NumberOfCarriersViewModel.cs" />
-    <Compile Include="Areas\NotificationMovements\ViewModels\Create\NumberOfPackagesViewModel.cs" />
     <Compile Include="Areas\ExportMovement\ViewModels\Quantity\QuantityReceivedViewModel.cs" />
     <Compile Include="Areas\ExportMovement\MovementAreaRegistration.cs" />
     <Compile Include="Areas\NotificationApplication\Controllers\BaseWasteCodeController.cs" />

@@ -15,7 +15,7 @@
         public MovementCarrierBlock(IList<MergeField> mergeFields, MovementDetails movementDetails)
         {
             CorrespondingMergeFields = MergeFieldLocator.GetCorrespondingFieldsForBlock(mergeFields, TypeName);
-            data = new MovementCarriersViewModel(movementDetails.Carriers.ToList());
+            data = new MovementCarriersViewModel(new List<MovementCarrier>());
             AnnexMergeFields = MergeFieldLocator.GetAnnexMergeFields(mergeFields, TypeName);
         }
 
