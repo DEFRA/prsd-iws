@@ -79,8 +79,7 @@
             }
 
             if (PercentageRecoverable < 0 
-                || PercentageRecoverable > 100
-                || EstimatedValueAmount < 0)
+                || PercentageRecoverable > 100)
             {
                 yield return new ValidationResult(RecoveryCostResources.InvalidData, new[] { "Amount" });
             }

@@ -203,3 +203,6 @@ FakesAssemblies/
 .fake
 tools/FAKE/
 tools/xunit.runner.console/
+
+# License files
+*.lic

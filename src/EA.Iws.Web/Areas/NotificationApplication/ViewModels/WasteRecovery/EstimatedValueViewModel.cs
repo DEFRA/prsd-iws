@@ -1,17 +1,15 @@
 ﻿namespace EA.Iws.Web.Areas.NotificationApplication.ViewModels.WasteRecovery
 {
     using System;
-    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.Linq;
     using System.Web.Mvc;
     using Core.Shared;
-    using Infrastructure;
     using Infrastructure.Validation;
     using Prsd.Core.Helpers;
     using Views.WasteRecovery;
 
-    public class EstimatedValueViewModel : IValidatableObject
+    public class EstimatedValueViewModel
     {
         public decimal PercentageRecoverable { get; set; }
 
@@ -66,14 +64,6 @@
 
             Amount = string.Empty;
             SelectedUnits = units;
-        }
-                
-        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
-        {
-            if (Amount.ToMoneyDecimal() < 0)
-            {
-                yield return new ValidationResult(EstimatedValueResources.AmountCannotBeNegative, new[] { "Amount" });
-            }
         }
     }
 }
