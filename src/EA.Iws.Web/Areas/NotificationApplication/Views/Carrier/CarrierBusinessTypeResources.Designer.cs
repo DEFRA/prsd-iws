@@ -71,7 +71,7 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.Carrier {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This may be the waste carrier licence number that allows the intended carrier to transport waste across land. If this carrier has more than one license (for example, for different stages of the journey), enter each licence number separated by a comma. Enter &quot;Not applicable&quot; where no relevant registration number applies..
+        ///   Looks up a localized string similar to This may be the waste carrier licence number that allows the intended carrier to transport waste across land. If this carrier has more than one licence (for example, for different stages of the journey), enter each licence number separated by a comma. Enter &quot;Not applicable&quot; where no relevant registration number applies..
         /// </summary>
         public static string RegNoHint {
             get {

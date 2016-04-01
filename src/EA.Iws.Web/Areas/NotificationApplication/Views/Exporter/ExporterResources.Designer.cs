@@ -125,7 +125,7 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.Exporter {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to If you&apos;re acting on behalf of the waste generator - producer, this will be your waste broker license number.
+        ///   Looks up a localized string similar to If you&apos;re acting on behalf of the waste generator - producer, this will be your waste broker licence number.
         /// </summary>
         public static string RegistrationNumberGeneralMessage {
             get {
