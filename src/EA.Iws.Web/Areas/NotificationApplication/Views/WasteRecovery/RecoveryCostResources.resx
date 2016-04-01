@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Amount" xml:space="preserve">
-    <value>Estimated value (£)</value>
+    <value>Estimated cost (£)</value>
   </data>
   <data name="AmountCannotBeNegative" xml:space="preserve">
     <value>The amount entered cannot be negative</value>
