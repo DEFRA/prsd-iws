@@ -43,14 +43,11 @@
 
             var newMovementDetails = message.NewMovementDetails;
             var shipmentQuantity = new ShipmentQuantity(newMovementDetails.Quantity, newMovementDetails.Units);
-            var carriers = await GetCarriers(message.NotificationId, newMovementDetails.OrderedCarriers);
             var packagingInfos = await GetPackagingInfos(message.NotificationId, newMovementDetails.PackagingTypes);
 
             var movementDetails = await movementDetailsFactory.Create(
                 movement,
                 shipmentQuantity,
-                newMovementDetails.NumberOfPackages,
-                carriers,
                 packagingInfos);
 
             context.MovementDetails.Add(movementDetails);

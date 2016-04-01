@@ -16,8 +16,7 @@
             this.movementsQuantity = movementsQuantity;
         }
 
-        public async Task<MovementDetails> Create(Movement movement, ShipmentQuantity shipmentQuantity, int numberOfPackages,
-            IEnumerable<MovementCarrier> carriers, IEnumerable<PackagingInfo> packages)
+        public async Task<MovementDetails> Create(Movement movement, ShipmentQuantity shipmentQuantity, IEnumerable<PackagingInfo> packages)
         {
             var remaining = await movementsQuantity.Remaining(movement.NotificationId);
 
@@ -27,7 +26,7 @@
                     "Cannot create new movement details for movement {0} as the quantity exceeds what is remaining", movement.Id));
             }
 
-            return new MovementDetails(movement.Id, shipmentQuantity, numberOfPackages, carriers, packages);
+            return new MovementDetails(movement.Id, shipmentQuantity, packages);
         }
     }
 }

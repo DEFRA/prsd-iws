@@ -53,11 +53,7 @@
         [Fact]
         public async Task QuantityExceedsRemaining_Throws()
         {
-            await Assert.ThrowsAsync<InvalidOperationException>(() => factory.Create(movement, new ShipmentQuantity(100, ShipmentQuantityUnits.Kilograms), 1,
-                new[]
-                {
-                    new TestableMovementCarrier()
-                },
+            await Assert.ThrowsAsync<InvalidOperationException>(() => factory.Create(movement, new ShipmentQuantity(100, ShipmentQuantityUnits.Kilograms), 
                 new[]
                 {
                     new TestablePackagingInfo()
@@ -67,11 +63,7 @@
         [Fact]
         public async Task QuantityWithinRemaining_CreatesDetails()
         {
-            var details = await factory.Create(movement, new ShipmentQuantity(20, ShipmentQuantityUnits.Kilograms), 1,
-                new[]
-                {
-                    new TestableMovementCarrier()
-                },
+            var details = await factory.Create(movement, new ShipmentQuantity(20, ShipmentQuantityUnits.Kilograms), 
                 new[]
                 {
                     new TestablePackagingInfo()

@@ -25,8 +25,6 @@
         private const string QuantityKey = "QuantityKey";
         private const string UnitKey = "UnitKey";
         private const string PackagingTypesKey = "PackagingTypesKey";
-        private const string NumberOfCarriersKey = "NumberOfCarriersKey";
-        private const string NumberOfPackagesKey = "NumberOfPackagesKey";
 
         public CreateController(IMediator mediator)
         {
@@ -244,7 +242,7 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult PackagingTypes(Guid notificationId, PackagingTypesViewModel model)
+        public async Task<ActionResult> PackagingTypes(Guid notificationId, PackagingTypesViewModel model)
         {
             TempData[MovementNumberKey] = model.MovementNumber;
             TempData[PackagingTypesKey] = model.SelectedValues;
@@ -255,131 +253,14 @@
                 return View(model);
             }
 
-            return RedirectToAction("NumberOfPackages", "Create");
-        }
-
-        [HttpGet]
-        public ActionResult NumberOfPackages(Guid notificationId)
-        {
-            object result;
-            if (TempData.TryGetValue(MovementNumberKey, out result))
-            {
-                var movementNumber = (int)result;
-
-                ViewBag.MovementNumber = movementNumber;
-                var model = new NumberOfPackagesViewModel(movementNumber);
-
-                return View(model);
-            }
-
-            return RedirectToAction("ShipmentDate", "Create");
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult NumberOfPackages(Guid notificationId, NumberOfPackagesViewModel model)
-        {
-            TempData[MovementNumberKey] = model.MovementNumber;
-            TempData[NumberOfPackagesKey] = model.Number;
-
-            if (!ModelState.IsValid)
-            {
-                ViewBag.MovementNumber = model.MovementNumber;
-                return View(model);
-            }
-
-            return RedirectToAction("NumberOfCarriers", "Create");
-        }
-
-        [HttpGet]
-        public async Task<ActionResult> NumberOfCarriers(Guid notificationId)
-        {
-            object result;
-            if (TempData.TryGetValue(MovementNumberKey, out result))
-            {
-                var movementsNumber = (int)result;
-                var meansOfTransport = await mediator.SendAsync(new GetMeansOfTransport(notificationId));
-
-                ViewBag.MovementNumber = movementsNumber;
-                var meansOfTransportViewModel = new MeansOfTransportViewModel { NotificationMeansOfTransport = meansOfTransport };
-                var model = new NumberOfCarriersViewModel(meansOfTransportViewModel, movementsNumber);
-
-                return View(model);
-            }
-
-            return RedirectToAction("ShipmentDate", "Create");
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> NumberOfCarriers(Guid notificationId, NumberOfCarriersViewModel model)
-        {
-            TempData[MovementNumberKey] = model.MovementNumber;
-            TempData[NumberOfCarriersKey] = model.Number;
-
-            if (!ModelState.IsValid)
-            {
-                ViewBag.MovementNumber = model.MovementNumber;
-                var meansOfTransport = await mediator.SendAsync(new GetMeansOfTransport(notificationId));
-                model.MeansOfTransportViewModel = new MeansOfTransportViewModel { NotificationMeansOfTransport = meansOfTransport };
-
-                return View(model);
-            }
-
-            return RedirectToAction("Carriers", "Create");
-        }
-
-        [HttpGet]
-        public async Task<ActionResult> Carriers(Guid notificationId)
-        {
-            object movementNumberResult;
-            object numberOfCarriersResult;
-            if (TempData.TryGetValue(MovementNumberKey, out movementNumberResult)
-                && TempData.TryGetValue(NumberOfCarriersKey, out numberOfCarriersResult))
-            {
-                var movementNumber = (int)movementNumberResult;
-                var numberOfCarriers = (int)numberOfCarriersResult;
-                var meansOfTransport = await mediator.SendAsync(new GetMeansOfTransport(notificationId));
-                var notificationCarriers = await mediator.SendAsync(new GetCarriers(notificationId));
-
-                ViewBag.MovementNumber = movementNumber;
-                var meansOfTransportViewModel = new MeansOfTransportViewModel { NotificationMeansOfTransport = meansOfTransport };
-                var model = new CarrierViewModel(notificationCarriers, numberOfCarriers, meansOfTransportViewModel, movementNumber);
-
-                TempData[MovementNumberKey] = movementNumber;
-                TempData[NumberOfCarriersKey] = numberOfCarriers;
-
-                return View(model);
-            }
-
-            return RedirectToAction("ShipmentDate", "Create");
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Carriers(Guid notificationId, CarrierViewModel model)
-        {
-            if (!ModelState.IsValid)
-            {
-                ViewBag.MovementNumber = model.MovementNumber;
-                model.MeansOfTransportViewModel = new MeansOfTransportViewModel
-                {
-                    NotificationMeansOfTransport = await mediator.SendAsync(new GetMeansOfTransport(notificationId))
-                };
-                
-                return View(model);
-            }
-
             object shipmentDateResult;
             object quantityResult;
             object unitResult;
-            object numberOfPackagesResult;
             object packagingTypesResult;
 
             var tempDataExists = TempData.TryGetValue(ShipmentDateKey, out shipmentDateResult);
             tempDataExists &= TempData.TryGetValue(QuantityKey, out quantityResult);
             tempDataExists &= TempData.TryGetValue(UnitKey, out unitResult);
-            tempDataExists &= TempData.TryGetValue(NumberOfPackagesKey, out numberOfPackagesResult);
             tempDataExists &= TempData.TryGetValue(PackagingTypesKey, out packagingTypesResult);
 
             if (tempDataExists)
@@ -387,23 +268,13 @@
                 var shipmentDate = (DateTime)shipmentDateResult;
                 var quantity = Convert.ToDecimal(quantityResult);
                 var unit = (ShipmentQuantityUnits)unitResult;
-                var numberOfPackages = (int)numberOfPackagesResult;
                 var packagingTypes = (IList<PackagingType>)packagingTypesResult;
-
-                var selectedCarriers = new Dictionary<int, Guid>();
-
-                for (int i = 0; i < model.SelectedItems.Count; i++)
-                {
-                    selectedCarriers.Add(i, model.SelectedItems[i].Value);
-                }
 
                 var newMovementDetails = new NewMovementDetails
                 {
                     Quantity = quantity,
                     Units = unit,
-                    PackagingTypes = packagingTypes,
-                    NumberOfPackages = numberOfPackages,
-                    OrderedCarriers = selectedCarriers
+                    PackagingTypes = packagingTypes
                 };
 
                 var newMovementId = await mediator.SendAsync(new CreateMovementAndDetails(notificationId, shipmentDate, newMovementDetails));
