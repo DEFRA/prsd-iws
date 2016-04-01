@@ -9,7 +9,7 @@
         }
 
         public EstimatedValue(ValuePerWeightUnits units, decimal amount)
-            : base(units, amount)
+            : base(units, amount, canHaveNegativeAmount: true)
         {
         }
     }

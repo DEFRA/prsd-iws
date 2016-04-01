@@ -5,6 +5,8 @@
 
     public class ValuePerWeight
     {
+        private readonly bool canHaveNegativeAmount;
+
         public ValuePerWeightUnits Units { get; private set; }
         public decimal Amount { get; private set; }
 
@@ -12,8 +14,9 @@
         {
         }
 
-        public ValuePerWeight(ValuePerWeightUnits units, decimal amount)
+        protected ValuePerWeight(ValuePerWeightUnits units, decimal amount, bool canHaveNegativeAmount = false)
         {
+            this.canHaveNegativeAmount = canHaveNegativeAmount;
             CheckIsValid(units, amount);
             Units = units;
             Amount = amount;
@@ -21,7 +24,7 @@
 
         private void CheckIsValid(ValuePerWeightUnits units, decimal amount)
         {
-            if (amount < 0)
+            if (!canHaveNegativeAmount && amount < 0)
             {
                 throw new InvalidOperationException("The amount cannot be negative");
             }

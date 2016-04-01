@@ -5,6 +5,13 @@
 
     public static class StringExtensions
     {
+        private static readonly Regex regex;
+
+        static StringExtensions()
+        {
+            regex = new Regex(@"^(-)?(?=[\d.])\d{0,3}(?:\d*|(?:,\d{3})*)(?:\.\d{1,2})?$");
+        }
+
         public static bool IsValidMoneyDecimal(this string value)
         {
             if (string.IsNullOrWhiteSpace(value))
@@ -12,9 +19,7 @@
                 return false;
             }
 
-            Regex rgx = new Regex(@"^(?=[\d.])\d{0,3}(?:\d*|(?:,\d{3})*)(?:\.\d{1,2})?$");
-
-            return rgx.IsMatch(value);
+            return regex.IsMatch(value);
         }
 
         public static decimal ToMoneyDecimal(this string value)
