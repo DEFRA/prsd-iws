@@ -121,6 +121,6 @@
     <value>If none of these options apply, please select "Other" and add details</value>
   </data>
   <data name="RegNoHint" xml:space="preserve">
-    <value>This may be the waste carrier licence number that allows the intended carrier to transport waste across land. If this carrier has more than one license (for example, for different stages of the journey), enter each licence number separated by a comma. Enter "Not applicable" where no relevant registration number applies.</value>
+    <value>This may be the waste carrier licence number that allows the intended carrier to transport waste across land. If this carrier has more than one licence (for example, for different stages of the journey), enter each licence number separated by a comma. Enter "Not applicable" where no relevant registration number applies.</value>
   </data>
 </root>
