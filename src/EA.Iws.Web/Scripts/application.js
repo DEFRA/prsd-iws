@@ -160,6 +160,11 @@ $(document).ready(function () {
                 return 0;
             });
         }
+    }).each(function() {
+        var selectBox = $(this);
+        $("a[href='#" + selectBox.attr("id") + "'").click(function () {
+            selectBox.select2("focus");
+        });
     });
 
     // Menu
