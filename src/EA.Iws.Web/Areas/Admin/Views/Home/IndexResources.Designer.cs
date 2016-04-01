@@ -214,7 +214,7 @@ namespace EA.Iws.Web.Areas.Admin.Views.Home {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Your search returned {0} export notifications.
+        ///   Looks up a localized string similar to Your search returned {0} export notification(s).
         /// </summary>
         public static string ResultsCount {
             get {

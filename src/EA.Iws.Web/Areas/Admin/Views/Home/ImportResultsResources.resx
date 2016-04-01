@@ -127,7 +127,7 @@
     <value>Notification type</value>
   </data>
   <data name="ResultsCount" xml:space="preserve">
-    <value>Your search returned {0} import notifications</value>
+    <value>Your search returned {0} import notification(s)</value>
   </data>
   <data name="Subheading" xml:space="preserve">
     <value>Import notifications</value>
