@@ -5,6 +5,7 @@ GO
 ALTER VIEW [Reports].[RdfSrfWood]
 AS
     SELECT 
+        N.[CompetentAuthorityId],
         O.[Exporter] AS [NotifierName],
         O.[ExporterAddress] AS [NotifierAddress],
         O.[Producer] AS [ProducerName],

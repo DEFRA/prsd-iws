@@ -5,6 +5,7 @@
     using System.Data.SqlClient;
     using System.Threading.Tasks;
     using Core.Admin.Reports;
+    using Core.Notification;
     using Core.WasteType;
     using Domain.Reports;
 
@@ -18,7 +19,7 @@
         }
 
         public async Task<IEnumerable<RdfSrfWoodData>> Get(DateTime from, DateTime to,
-            ChemicalComposition chemicalComposition)
+            ChemicalComposition chemicalComposition, UKCompetentAuthority competentAuthority)
         {
             return await context.Database.SqlQuery<RdfSrfWoodData>(
                 @"SELECT 
@@ -37,7 +38,8 @@
                 FROM 
                     [Reports].[RdfSrfWood]
                 WHERE 
-                    [ChemicalCompositionTypeId] = @chemicalComposition
+                    [CompetentAuthorityId] = @competentAuthority
+                    AND [ChemicalCompositionTypeId] = @chemicalComposition
                     AND [ReceivedDate] BETWEEN @from AND @to
                 GROUP BY
                     [NotifierName],
@@ -53,7 +55,8 @@
                     [QuantityReceivedUnit]",
                 new SqlParameter("@from", from),
                 new SqlParameter("@to", to),
-                new SqlParameter("@chemicalComposition", (int)chemicalComposition)).ToArrayAsync();
+                new SqlParameter("@chemicalComposition", (int)chemicalComposition),
+                new SqlParameter("@competentAuthority", (int)competentAuthority)).ToArrayAsync();
         }
     }
 }
