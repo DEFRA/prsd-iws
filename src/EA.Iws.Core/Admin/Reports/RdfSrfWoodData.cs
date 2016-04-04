@@ -1,6 +1,6 @@
-namespace EA.Iws.Domain.Reports
+namespace EA.Iws.Core.Admin.Reports
 {
-    public class RdfSrfWood
+    public class RdfSrfWoodData
     {
         public string NotifierName { get; set; }
 
@@ -24,6 +24,6 @@ namespace EA.Iws.Domain.Reports
 
         public decimal QuantityReceived { get; set; }
 
-        public string QuanitytReceivedUnit { get; set; }
+        public string QuantityReceivedUnit { get; set; }
     }
 }

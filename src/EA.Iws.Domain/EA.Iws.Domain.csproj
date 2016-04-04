@@ -341,7 +341,6 @@
     <Compile Include="Reports\IMissingShipmentsRepository.cs" />
     <Compile Include="Reports\IRdfSrfWoodRepository.cs" />
     <Compile Include="Reports\MissingShipment.cs" />
-    <Compile Include="Reports\RdfSrfWood.cs" />
     <Compile Include="Security\IMovementAuthorization.cs" />
     <Compile Include="Security\INotificationApplicationAuthorization.cs" />
     <Compile Include="ShipmentPeriod.cs" />

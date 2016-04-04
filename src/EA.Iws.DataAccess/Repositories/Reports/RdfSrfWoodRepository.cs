@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.Data.SqlClient;
     using System.Threading.Tasks;
+    using Core.Admin.Reports;
     using Core.WasteType;
     using Domain.Reports;
 
@@ -16,10 +17,10 @@
             this.context = context;
         }
 
-        public async Task<IEnumerable<RdfSrfWood>> Get(DateTime from, DateTime to,
+        public async Task<IEnumerable<RdfSrfWoodData>> Get(DateTime from, DateTime to,
             ChemicalComposition chemicalComposition)
         {
-            return await context.Database.SqlQuery<RdfSrfWood>(
+            return await context.Database.SqlQuery<RdfSrfWoodData>(
                 @"SELECT 
                     [NotifierName],
                     [NotifierAddress],
