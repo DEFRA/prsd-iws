@@ -12,6 +12,7 @@
     using Requests.Admin.Reports;
     using ViewModels.RdfSrfWood;
 
+    [Authorize(Roles = "internal")]
     public class RdfSrfWoodController : Controller
     {
         private readonly IMediator mediator;
