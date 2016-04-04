@@ -16,30 +16,7 @@
 
         <h2 class="heading-small">@IwsStandardDataNoticeResources.PersonalInfoHeading</h2>
         <p>
-            @if (ca == null)
-            {
-                @IwsStandardDataNoticeResources.PersonalInfoIntroEa
-            }
-            else
-            {
-                switch (ca.Value)
-                {
-                    case UKCompetentAuthority.England:
-                        @IwsStandardDataNoticeResources.PersonalInfoIntroEa
-                        break;
-                    case UKCompetentAuthority.Scotland:
-                        @IwsStandardDataNoticeResources.PersonalInfoIntroSepa
-                        break;
-                    case UKCompetentAuthority.NorthernIreland:
-                        @IwsStandardDataNoticeResources.PersonalInfoIntroNiea
-                        break;
-                    case UKCompetentAuthority.Wales:
-                        @IwsStandardDataNoticeResources.PersonalInfoIntroNrw
-                        break;
-                    default:
-                        throw new ArgumentOutOfRangeException();
-                }
-            }
+            @IwsStandardDataNoticeResources.PersonalInfoIntro
 
             <ul class="list-bullet">
                 <li>@IwsStandardDataNoticeResources.DealWithApplication</li>

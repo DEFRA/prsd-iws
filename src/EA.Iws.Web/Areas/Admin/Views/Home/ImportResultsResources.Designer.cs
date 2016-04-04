@@ -88,7 +88,7 @@ namespace EA.Iws.Web.Areas.Admin.Views.Home {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Your search returned {0} import notifications.
+        ///   Looks up a localized string similar to Your search returned {0} import notification(s).
         /// </summary>
         public static string ResultsCount {
             get {
