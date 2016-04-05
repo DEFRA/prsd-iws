@@ -133,38 +133,20 @@ namespace EA.Iws.Core.Shared {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to First name.
+        ///   Looks up a localized string similar to Full name.
         /// </summary>
-        public static string FirstName {
+        public static string FullName {
             get {
-                return ResourceManager.GetString("FirstName", resourceCulture);
+                return ResourceManager.GetString("FullName", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Please enter the first name.
+        ///   Looks up a localized string similar to Please enter the full name.
         /// </summary>
-        public static string FirstNameRequired {
+        public static string FullNameRequired {
             get {
-                return ResourceManager.GetString("FirstNameRequired", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Last name.
-        /// </summary>
-        public static string LastName {
-            get {
-                return ResourceManager.GetString("LastName", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Please enter the last name.
-        /// </summary>
-        public static string LastNameRequired {
-            get {
-                return ResourceManager.GetString("LastNameRequired", resourceCulture);
+                return ResourceManager.GetString("FullNameRequired", resourceCulture);
             }
         }
         

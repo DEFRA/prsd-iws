@@ -6,16 +6,10 @@
 
     public class TestableContact : Contact
     {
-        public new string FirstName
+        public new string FullName
         {
-            get { return base.FirstName; }
-            set { ObjectInstantiator<Contact>.SetProperty(x => x.FirstName, value, this); }
-        }
-
-        public new string LastName
-        {
-            get { return base.LastName; }
-            set { ObjectInstantiator<Contact>.SetProperty(x => x.LastName, value, this); }
+            get { return base.FullName; }
+            set { ObjectInstantiator<Contact>.SetProperty(x => x.FullName, value, this); }
         }
 
         public new string Telephone
@@ -42,8 +36,7 @@
             {
                 return new TestableContact
                 {
-                    FirstName = "Billy",
-                    LastName = "Knuckles",
+                    FullName = "Billy Knuckles",
                     Email = "billyk@mail.com",
                     Telephone = "+4401858425"
                 };
@@ -56,8 +49,7 @@
             {
                 return new TestableContact
                 {
-                    FirstName = "Mike",
-                    LastName = "Merry",
+                    FullName = "Mike Merry",
                     Email = "mike@murrays.com",
                     Telephone = "+4453119321",
                     Fax = "+4423465403"
@@ -71,8 +63,7 @@
             {
                 return new TestableContact
                 {
-                    FirstName = "Sinclair",
-                    LastName = "Simms",
+                    FullName = "Sinclair Simms",
                     Email = "sinclairsimms@mailinator.com",
                     Telephone = "+35456513"
                 };

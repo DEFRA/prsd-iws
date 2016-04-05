@@ -11,7 +11,7 @@
         {
             Name = producer.Business.Name;
             address = new AddressViewModel(producer.Address);
-            ContactPerson = producer.Contact.FirstName + " " + producer.Contact.LastName;
+            ContactPerson = producer.Contact.FullName;
             Telephone = producer.Contact.Telephone.ToFormattedContact();
             Fax = producer.Contact.Fax.ToFormattedContact();
             Email = producer.Contact.Email;

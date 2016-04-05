@@ -76,7 +76,7 @@
                 return;
             }
 
-            ContactPerson = contact.FirstName + " " + contact.LastName;
+            ContactPerson = contact.FullName;
             Telephone = contact.Telephone ?? string.Empty;
             Fax = contact.Fax ?? string.Empty;
             Email = contact.Email ?? string.Empty;

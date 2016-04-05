@@ -17,8 +17,7 @@
         {
             Email = AnyString,
             Fax = AnyString,
-            FirstName = AnyString,
-            LastName = AnyString,
+            FullName = AnyString,
             Telephone = AnyString
         };
 
@@ -31,26 +30,13 @@
         [InlineData(null)]
         [InlineData("")]
         [InlineData(TestString)]
-        public void MapFirstName(string firstName)
+        public void MapFullName(string fullName)
         {
-            contact.FirstName = firstName;
+            contact.FullName = fullName;
 
             var result = contactMap.Map(contact);
 
-            Assert.Equal(firstName, result.FirstName);
-        }
-
-        [Theory]
-        [InlineData(null)]
-        [InlineData("")]
-        [InlineData(TestString)]
-        public void MapLastName(string lastName)
-        {
-            contact.LastName = lastName;
-
-            var result = contactMap.Map(contact);
-
-            Assert.Equal(lastName, result.LastName);
+            Assert.Equal(fullName, result.FullName);
         }
 
         [Theory]

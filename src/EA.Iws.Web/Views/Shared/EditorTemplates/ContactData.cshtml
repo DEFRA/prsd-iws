@@ -1,16 +1,10 @@
 ﻿@using EA.Iws.Core.Shared
 @model EA.Iws.Core.Shared.ContactData
 
-<div class="form-group @Html.Gds().FormGroupClass(m => m.FirstName)">
-    @Html.Gds().LabelFor(model => model.FirstName)
-    @Html.Gds().ValidationMessageFor(model => model.FirstName)
-    @Html.Gds().TextBoxFor(model => model.FirstName)
-</div>
-
-<div class="form-group @Html.Gds().FormGroupClass(m => m.LastName)">
-    @Html.Gds().LabelFor(model => model.LastName)
-    @Html.Gds().ValidationMessageFor(model => model.LastName)
-    @Html.Gds().TextBoxFor(model => model.LastName)
+<div class="form-group @Html.Gds().FormGroupClass(m => m.FullName)">
+    @Html.Gds().LabelFor(model => model.FullName)
+    @Html.Gds().ValidationMessageFor(model => model.FullName)
+    @Html.Gds().TextBoxFor(model => model.FullName)
 </div>
 
 <div class="form-group @Html.Gds().FormGroupClass(m => m.Telephone) @Html.Gds().FormGroupClass(m => m.TelephonePrefix)">

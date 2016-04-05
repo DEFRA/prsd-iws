@@ -23,7 +23,7 @@
 
             if (argumentType == typeof(Contact))
             {
-                return new Contact(name, AnyString, AnyString, AnyString, AnyString) as TComplexType;
+                return new Contact(name, AnyString, AnyString, AnyString) as TComplexType;
             }
 
             if (argumentType == typeof(ProducerBusiness))

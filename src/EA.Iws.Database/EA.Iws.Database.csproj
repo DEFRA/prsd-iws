@@ -266,6 +266,9 @@
     <Content Include="scripts\Update\Sprint28\20160322-114300-update-competent-authority.sql" />
     <Content Include="scripts\Update\Sprint28\20160323-171100-update-un-code.sql" />
     <Content Include="scripts\Update\Sprint29\20160401-144400-alter-movement-details.sql" />
+    <Content Include="scripts\Update\Sprint29\20160401-1727-concatinate-firstname-and-lastname.sql" />
+    <Content Include="scripts\Update\Sprint29\20160404-1450-concatenate-firstname-and-lastname-importer-exporter.sql" />
+    <Content Include="scripts\Update\Sprint29\20160404-1809-concatenate-firstname-and-lastname-organisation-etc.sql" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="scripts\TestData\20150522-171900-link-test-user-to-org.sql" />

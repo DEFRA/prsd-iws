@@ -20,8 +20,7 @@
             return x.Email == y.Email
                    && x.Fax == y.Fax
                    && x.FaxPrefix == y.FaxPrefix
-                   && x.FirstName == y.FirstName
-                   && x.LastName == y.LastName
+                   && x.FullName == y.FullName
                    && x.Telephone == y.Telephone
                    && x.TelephonePrefix == y.TelephonePrefix;
         }

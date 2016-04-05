@@ -54,8 +54,7 @@
 
             ReturnContact = new ContactData
             {
-                FirstName = AnyString,
-                LastName = AnyString,
+                FullName = AnyString,
                 Email = AnyString,
                 Fax = AnyString,
                 FaxPrefix = AnyString,

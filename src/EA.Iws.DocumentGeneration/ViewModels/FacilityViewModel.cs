@@ -10,7 +10,7 @@
         {
             Name = facility.Business.Name;
             address = new AddressViewModel(facility.Address);
-            ContactPerson = facility.Contact.FirstName + " " + facility.Contact.LastName;
+            ContactPerson = facility.Contact.FullName;
             Telephone = facility.Contact.Telephone.ToFormattedContact();
             Fax = facility.Contact.Fax.ToFormattedContact();
             Email = facility.Contact.Email;

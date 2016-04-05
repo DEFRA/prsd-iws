@@ -11,8 +11,7 @@
         {
             var contactData = new ContactData
             {
-                FirstName = source.FirstName,
-                LastName = source.LastName,
+                FullName = source.FullName,
                 Fax = source.Fax,
                 Email = source.Email
             };
