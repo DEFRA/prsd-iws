@@ -23,15 +23,6 @@
         [HttpGet]
         public async Task<ActionResult> Index(Guid id, int? status)
         {
-            if (status == null)
-            {
-                status = (int)MovementStatus.Submitted;
-            }
-            else if (status == 0)
-            {
-                status = null;
-            }
-
             var movementsSummary = await mediator.SendAsync(new GetSummaryAndTable(id, (MovementStatus?)status));
 
             var model = new NotificationOptionsViewModel(id, movementsSummary);
