@@ -10,5 +10,7 @@
 
         [MustBeTrue(ErrorMessage = "Please confirm that you have read standard data notice and disclaimer")]
         public bool TermsAndConditions { get; set; }
+
+        public UKCompetentAuthority CompetentAuthority { get; set; }
     }
 }

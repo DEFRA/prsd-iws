@@ -1004,6 +1004,7 @@
     <Content Include="Views\Shared\_IwsTermsAndConditions.cshtml" />
     <Content Include="Views\NewUser\TermsAndConditions.cshtml" />
     <Content Include="Views\Errors\_GenericError.cshtml" />
+    <Content Include="Views\Shared\_IwsSepaStandardDataNotice.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -2732,6 +2733,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ThreeWorkingDaysResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Views\Shared\IwsSepaStandardDataNoticeResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IwsSepaStandardDataNoticeResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Views\Shared\IwsStandardDataNoticeResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -3774,6 +3780,10 @@
     <EmbeddedResource Include="Views\Registration\SelectOrganisationResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>SelectOrganisationResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Shared\IwsSepaStandardDataNoticeResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>IwsSepaStandardDataNoticeResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\Shared\IwsStandardDataNoticeResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
