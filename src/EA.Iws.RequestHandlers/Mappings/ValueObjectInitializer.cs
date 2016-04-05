@@ -26,7 +26,7 @@
             {
                 contact.Fax = contact.FaxPrefix + "-" + contact.Fax;
             }
-            return new Contact(contact.FirstName, contact.LastName, contact.Telephone, contact.Email, contact.Fax);
+            return new Contact(contact.FullName, contact.Telephone, contact.Email, contact.Fax);
         }
 
         public static Address CreateAddress(AddressData address, string countryName)

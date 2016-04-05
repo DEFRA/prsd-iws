@@ -31,8 +31,7 @@
                 var hashCode = 19;
                 hashCode = (hashCode * 397) ^ (obj.Email != null ? obj.Email.GetHashCode() : 0);
                 hashCode = (hashCode * 397) ^ (obj.Fax != null ? obj.Fax.GetHashCode() : 0);
-                hashCode = (hashCode * 397) ^ (obj.FirstName != null ? obj.FirstName.GetHashCode() : 0);
-                hashCode = (hashCode * 397) ^ (obj.LastName != null ? obj.LastName.GetHashCode() : 0);
+                hashCode = (hashCode * 397) ^ (obj.FullName != null ? obj.FullName.GetHashCode() : 0);
                 hashCode = (hashCode * 397) ^ (obj.Telephone != null ? obj.Telephone.GetHashCode() : 0);
                 return hashCode;
             }
@@ -42,8 +41,7 @@
         {
             return string.Equals(x.Email, y.Email)
                    && string.Equals(x.Fax, y.Fax)
-                   && string.Equals(x.FirstName, y.FirstName)
-                   && string.Equals(x.LastName, y.LastName)
+                   && string.Equals(x.FullName, y.FullName)
                    && string.Equals(x.Telephone, y.Telephone);
         }
     }

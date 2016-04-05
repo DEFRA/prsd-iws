@@ -103,8 +103,7 @@
         {
             var result = new CarrierViewModel(firstCarrier, string.Empty);
 
-            Assert.Equal(string.Format("{0} {1}", firstCarrier.Contact.FirstName, firstCarrier.Contact.LastName),
-                result.ContactPerson);
+            Assert.Equal(firstCarrier.Contact.FullName, result.ContactPerson);
         }
 
         [Theory]
@@ -119,8 +118,7 @@
             {
                 Email = AnyString,
                 Fax = inputFax,
-                FirstName = AnyString,
-                LastName = AnyString,
+                FullName = AnyString,
                 Telephone = AnyString
             };
 
@@ -141,8 +139,7 @@
             {
                 Email = AnyString,
                 Telephone = inputPhone,
-                FirstName = AnyString,
-                LastName = AnyString,
+                FullName = AnyString,
                 Fax = AnyString
             };
 

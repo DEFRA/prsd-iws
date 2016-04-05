@@ -37,8 +37,7 @@
             {
                 Email = "atestemailaddress@atestdomain.com",
                 Fax = "1234567890",
-                FirstName = "John",
-                LastName = "Botham",
+                FullName = "John Botham",
                 Telephone = "2233445566"
             };
         }

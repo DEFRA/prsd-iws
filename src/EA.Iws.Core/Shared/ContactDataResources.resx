@@ -141,17 +141,11 @@
   <data name="FaxRequired" xml:space="preserve">
     <value>Please enter the fax number</value>
   </data>
-  <data name="FirstName" xml:space="preserve">
-    <value>First name</value>
+  <data name="FullName" xml:space="preserve">
+    <value>Full name</value>
   </data>
-  <data name="FirstNameRequired" xml:space="preserve">
-    <value>Please enter the first name</value>
-  </data>
-  <data name="LastName" xml:space="preserve">
-    <value>Last name</value>
-  </data>
-  <data name="LastNameRequired" xml:space="preserve">
-    <value>Please enter the last name</value>
+  <data name="FullNameRequired" xml:space="preserve">
+    <value>Please enter the full name</value>
   </data>
   <data name="TelephoneHint" xml:space="preserve">
     <value>Enter the full telephone number including the international dialling code, for example +44  1709389201</value>

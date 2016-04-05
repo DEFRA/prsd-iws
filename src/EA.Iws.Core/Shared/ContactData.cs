@@ -5,13 +5,9 @@
 
     public class ContactData : IValidatableObject
     {
-        [Required(ErrorMessageResourceType = typeof(ContactDataResources), ErrorMessageResourceName = "FirstNameRequired")]
-        [Display(Name = "FirstName", ResourceType = typeof(ContactDataResources))]
-        public string FirstName { get; set; }
-
-        [Required(ErrorMessageResourceType = typeof(ContactDataResources), ErrorMessageResourceName = "LastNameRequired")]
-        [Display(Name = "LastName", ResourceType = typeof(ContactDataResources))]
-        public string LastName { get; set; }
+        [Required(ErrorMessageResourceType = typeof(ContactDataResources), ErrorMessageResourceName = "FullNameRequired")]
+        [Display(Name = "FullName", ResourceType = typeof(ContactDataResources))]
+        public string FullName { get; set; }
 
         [Required(ErrorMessageResourceType = typeof(ContactDataResources), ErrorMessageResourceName = "TelephoneNumberRequired")]
         [Display(Name = "TelephoneNumber", ResourceType = typeof(ContactDataResources))]

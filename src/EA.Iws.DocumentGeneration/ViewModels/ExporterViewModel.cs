@@ -10,7 +10,7 @@
         {
             Name = exporter.Business.Name;
             address = new AddressViewModel(exporter.Address);
-            ContactPerson = exporter.Contact.FirstName + " " + exporter.Contact.LastName;
+            ContactPerson = exporter.Contact.FullName;
             Telephone = exporter.Contact.Telephone.ToFormattedContact();
             Fax = exporter.Contact.Fax.ToFormattedContact();
             Email = exporter.Contact.Email;

@@ -71,8 +71,7 @@
                 Contact = new ContactData
                 {
                     Email = "email@address.com",
-                    FirstName = "first",
-                    LastName = "last",
+                    FullName = "first last",
                     Telephone = "123"
                 },
                 NotificationId = notificationId
@@ -102,8 +101,7 @@
                 Contact = new ContactData
                 {
                     Email = "email@address.com",
-                    FirstName = "first",
-                    LastName = "last",
+                    FullName = "first last",
                     Telephone = "123"
                 },
                 NotificationId = notificationId,

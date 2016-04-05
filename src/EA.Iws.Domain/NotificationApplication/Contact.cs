@@ -4,19 +4,16 @@
 
     public class Contact
     {
-        public Contact(string firstName,
-            string lastName,
+        public Contact(string fullName,
             string telephone,
             string email,
             string fax = null)
         {
-            Guard.ArgumentNotNull(() => firstName, firstName);
-            Guard.ArgumentNotNull(() => lastName, lastName);
+            Guard.ArgumentNotNull(() => fullName, fullName);
             Guard.ArgumentNotNull(() => telephone, telephone);
             Guard.ArgumentNotNull(() => email, email);
 
-            FirstName = firstName;
-            LastName = lastName;
+            FullName = fullName;
             Telephone = telephone;
             Email = email;
             Fax = fax;
@@ -26,9 +23,7 @@
         {
         }
 
-        public string FirstName { get; private set; }
-
-        public string LastName { get; private set; }
+        public string FullName { get; private set; }
 
         public string Telephone { get; private set; }
 
