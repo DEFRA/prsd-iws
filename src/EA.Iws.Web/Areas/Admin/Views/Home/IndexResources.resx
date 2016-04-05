@@ -169,7 +169,7 @@
     <value>Reports</value>
   </data>
   <data name="ResultsCount" xml:space="preserve">
-    <value>Your search returned {0} export notifications</value>
+    <value>Your search returned {0} export notification(s)</value>
   </data>
   <data name="Search" xml:space="preserve">
     <value>Search for a notification</value>

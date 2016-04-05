@@ -117,19 +117,25 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="NoResults" xml:space="preserve">
-    <value>No matching results found</value>
+  <data name="FromDate" xml:space="preserve">
+    <value>From date</value>
   </data>
-  <data name="NotificationNumberTableHeading" xml:space="preserve">
-    <value>Notification number</value>
+  <data name="FromDateBeforeToDate" xml:space="preserve">
+    <value>The from date must be before the to date</value>
   </data>
-  <data name="NotificationTypeTableHeading" xml:space="preserve">
-    <value>Notification type</value>
+  <data name="FromDateRequired" xml:space="preserve">
+    <value>Please enter the from date</value>
   </data>
-  <data name="ResultsCount" xml:space="preserve">
-    <value>Your search returned {0} import notification(s)</value>
+  <data name="ToDate" xml:space="preserve">
+    <value>To date</value>
   </data>
-  <data name="Subheading" xml:space="preserve">
-    <value>Import notifications</value>
+  <data name="ToDateRequired" xml:space="preserve">
+    <value>Please enter the to date</value>
+  </data>
+  <data name="WasteType" xml:space="preserve">
+    <value>Waste type</value>
+  </data>
+  <data name="WasteTypeRequired" xml:space="preserve">
+    <value>Please select the waste type</value>
   </data>
 </root>

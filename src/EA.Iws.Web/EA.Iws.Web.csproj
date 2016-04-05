@@ -399,6 +399,7 @@
     <Content Include="Areas\NotificationApplication\Views\Options\PostageLabelUnavailable.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\Options\FinancialGuaranteeUnavailable.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\Options\AnnexUploadUnavailable.cshtml" />
+    <Content Include="Areas\Reports\Views\RdfSrfWood\Index.cshtml" />
     <None Include="Content\iws\_panels.scss" />
     <Content Include="Content\select2\select2-spinner.gif" />
     <Content Include="Content\select2\select2.css" />
@@ -1817,6 +1818,7 @@
     <Compile Include="Areas\Reports\Controllers\ExportNotificationsController.cs" />
     <Compile Include="Areas\Reports\Controllers\FinanceController.cs" />
     <Compile Include="Areas\Reports\Controllers\MissingShipmentsController.cs" />
+    <Compile Include="Areas\Reports\Controllers\RdfSrfWoodController.cs" />
     <Compile Include="Areas\Reports\ViewModels\ExportNotifications\IndexViewModel.cs" />
     <Compile Include="Areas\Reports\ViewModels\ExportNotifications\IndexViewModelResources.Designer.cs">
       <DependentUpon>IndexViewModelResources.resx</DependentUpon>
@@ -1829,12 +1831,23 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>IndexViewModelResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Areas\Reports\ViewModels\RdfSrfWood\IndexViewModel.cs" />
+    <Compile Include="Areas\Reports\ViewModels\RdfSrfWood\IndexViewModelResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IndexViewModelResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Areas\Reports\Views\ExportNotifications\IndexResources.Designer.cs">
       <DependentUpon>IndexResources.resx</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Areas\Reports\Views\MissingShipments\IndexResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IndexResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Reports\Views\RdfSrfWood\IndexResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>IndexResources.resx</DependentUpon>
@@ -3640,11 +3653,19 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>IndexViewModelResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Areas\Reports\ViewModels\RdfSrfWood\IndexViewModelResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>IndexViewModelResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Areas\Reports\Views\ExportNotifications\IndexResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\Reports\Views\MissingShipments\IndexResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\Reports\Views\RdfSrfWood\IndexResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>

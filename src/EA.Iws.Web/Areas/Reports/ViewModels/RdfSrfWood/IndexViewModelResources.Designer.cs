@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace EA.Iws.Web.Areas.Admin.Views.Home {
+namespace EA.Iws.Web.Areas.Reports.ViewModels.RdfSrfWood {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace EA.Iws.Web.Areas.Admin.Views.Home {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class ImportResultsResources {
+    public class IndexViewModelResources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal ImportResultsResources() {
+        internal IndexViewModelResources() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace EA.Iws.Web.Areas.Admin.Views.Home {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EA.Iws.Web.Areas.Admin.Views.Home.ImportResultsResources", typeof(ImportResultsResources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EA.Iws.Web.Areas.Reports.ViewModels.RdfSrfWood.IndexViewModelResources", typeof(IndexViewModelResources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,47 +61,65 @@ namespace EA.Iws.Web.Areas.Admin.Views.Home {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to No matching results found.
+        ///   Looks up a localized string similar to From date.
         /// </summary>
-        public static string NoResults {
+        public static string FromDate {
             get {
-                return ResourceManager.GetString("NoResults", resourceCulture);
+                return ResourceManager.GetString("FromDate", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Notification number.
+        ///   Looks up a localized string similar to The from date must be before the to date.
         /// </summary>
-        public static string NotificationNumberTableHeading {
+        public static string FromDateBeforeToDate {
             get {
-                return ResourceManager.GetString("NotificationNumberTableHeading", resourceCulture);
+                return ResourceManager.GetString("FromDateBeforeToDate", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Notification type.
+        ///   Looks up a localized string similar to Please enter the from date.
         /// </summary>
-        public static string NotificationTypeTableHeading {
+        public static string FromDateRequired {
             get {
-                return ResourceManager.GetString("NotificationTypeTableHeading", resourceCulture);
+                return ResourceManager.GetString("FromDateRequired", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Your search returned {0} import notification(s).
+        ///   Looks up a localized string similar to To date.
         /// </summary>
-        public static string ResultsCount {
+        public static string ToDate {
             get {
-                return ResourceManager.GetString("ResultsCount", resourceCulture);
+                return ResourceManager.GetString("ToDate", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Import notifications.
+        ///   Looks up a localized string similar to Please enter the to date.
         /// </summary>
-        public static string Subheading {
+        public static string ToDateRequired {
             get {
-                return ResourceManager.GetString("Subheading", resourceCulture);
+                return ResourceManager.GetString("ToDateRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Waste type.
+        /// </summary>
+        public static string WasteType {
+            get {
+                return ResourceManager.GetString("WasteType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please select the waste type.
+        /// </summary>
+        public static string WasteTypeRequired {
+            get {
+                return ResourceManager.GetString("WasteTypeRequired", resourceCulture);
             }
         }
     }

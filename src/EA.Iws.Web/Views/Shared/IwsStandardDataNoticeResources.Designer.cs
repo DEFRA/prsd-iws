@@ -70,7 +70,7 @@ namespace EA.Iws.Web.Views.Shared {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to make sure you keep to the conditions of the licence, permit or registration.
+        ///   Looks up a localized string similar to make sure you comply with the notification.
         /// </summary>
         public static string ConditionsOfLicence {
             get {
@@ -97,7 +97,7 @@ namespace EA.Iws.Web.Views.Shared {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to deal with your application.
+        ///   Looks up a localized string similar to deal with your notification.
         /// </summary>
         public static string DealWithApplication {
             get {
@@ -142,38 +142,11 @@ namespace EA.Iws.Web.Views.Shared {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to We, the Environment Agency, will process the information you provide so that we can:.
+        ///   Looks up a localized string similar to We, the Competent Authority, will process the information you provide so that we can:.
         /// </summary>
-        public static string PersonalInfoIntroEa {
+        public static string PersonalInfoIntro {
             get {
-                return ResourceManager.GetString("PersonalInfoIntroEa", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to We, the Northern Ireland Environment Agency, will process the information you provide so that we can:.
-        /// </summary>
-        public static string PersonalInfoIntroNiea {
-            get {
-                return ResourceManager.GetString("PersonalInfoIntroNiea", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to We, Natural Resources Wales, will process the information you provide so that we can:.
-        /// </summary>
-        public static string PersonalInfoIntroNrw {
-            get {
-                return ResourceManager.GetString("PersonalInfoIntroNrw", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to We, the Scottish Environmental Protection Agency, will process the information you provide so that we can:.
-        /// </summary>
-        public static string PersonalInfoIntroSepa {
-            get {
-                return ResourceManager.GetString("PersonalInfoIntroSepa", resourceCulture);
+                return ResourceManager.GetString("PersonalInfoIntro", resourceCulture);
             }
         }
         
@@ -205,7 +178,7 @@ namespace EA.Iws.Web.Views.Shared {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to respond to information requests under the Freedom of Information Act 2000 and the Environmental Information Regulations 2004 (if the Data Protection Act allows).
+        ///   Looks up a localized string similar to respond to information requests under applicable freedom of information legislation (if the Data Protection Act allows).
         /// </summary>
         public static string RequestsForInformation {
             get {

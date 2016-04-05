@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace EA.Iws.Web.Areas.Admin.Views.Home {
+namespace EA.Iws.Web.Areas.Reports.Views.RdfSrfWood {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace EA.Iws.Web.Areas.Admin.Views.Home {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class ImportResultsResources {
+    public class IndexResources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal ImportResultsResources() {
+        internal IndexResources() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace EA.Iws.Web.Areas.Admin.Views.Home {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EA.Iws.Web.Areas.Admin.Views.Home.ImportResultsResources", typeof(ImportResultsResources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EA.Iws.Web.Areas.Reports.Views.RdfSrfWood.IndexResources", typeof(IndexResources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,47 +61,38 @@ namespace EA.Iws.Web.Areas.Admin.Views.Home {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to No matching results found.
+        ///   Looks up a localized string similar to Generate report.
         /// </summary>
-        public static string NoResults {
+        public static string ButtonText {
             get {
-                return ResourceManager.GetString("NoResults", resourceCulture);
+                return ResourceManager.GetString("ButtonText", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Notification number.
+        ///   Looks up a localized string similar to FOI Report.
         /// </summary>
-        public static string NotificationNumberTableHeading {
+        public static string Heading {
             get {
-                return ResourceManager.GetString("NotificationNumberTableHeading", resourceCulture);
+                return ResourceManager.GetString("Heading", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Notification type.
+        ///   Looks up a localized string similar to Return to reports home.
         /// </summary>
-        public static string NotificationTypeTableHeading {
+        public static string ReturnHome {
             get {
-                return ResourceManager.GetString("NotificationTypeTableHeading", resourceCulture);
+                return ResourceManager.GetString("ReturnHome", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Your search returned {0} import notification(s).
+        ///   Looks up a localized string similar to FOI Report.
         /// </summary>
-        public static string ResultsCount {
+        public static string Title {
             get {
-                return ResourceManager.GetString("ResultsCount", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Import notifications.
-        /// </summary>
-        public static string Subheading {
-            get {
-                return ResourceManager.GetString("Subheading", resourceCulture);
+                return ResourceManager.GetString("Title", resourceCulture);
             }
         }
     }

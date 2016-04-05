@@ -31,8 +31,7 @@
             {
                 var model = new DisclaimerViewModel
                 {
-                    Id = id,
-                    CompetentAuthority = assessmentInfo.CompetentAuthority
+                    Id = id
                 };
                 return View(model);
             }
