@@ -1,0 +1,48 @@
+﻿@using EA.Iws.Web.Views.Shared
+
+<details>
+    <summary>
+        <h2 class="summary heading-xsmall" data-track="disclosure" data-category="Data notice" data-action="Read">@IwsSepaStandardDataNoticeResources.Header</h2>
+    </summary>
+    <div class="panel-indent">
+        <p>
+            @IwsSepaStandardDataNoticeResources.ReadCarefully
+        </p>
+
+        <h2 class="heading-small">@IwsSepaStandardDataNoticeResources.PersonalInfoHeading</h2>
+        <p>
+            @IwsSepaStandardDataNoticeResources.PersonalInfoIntro
+
+            <ul class="list-bullet">
+                <li>@IwsSepaStandardDataNoticeResources.DealWithApplication</li>
+                <li>@IwsSepaStandardDataNoticeResources.ConditionsOfLicence</li>
+                <li>@IwsSepaStandardDataNoticeResources.ProcessRenewals</li>
+            </ul>
+        </p>
+
+        <h2 class="heading-small">@IwsSepaStandardDataNoticeResources.WeMayAlsoHeading</h2>
+
+        <p>
+            <ul class="list-bullet">
+                <li>@IwsSepaStandardDataNoticeResources.OfferYouDocuments</li>
+                <li>@IwsSepaStandardDataNoticeResources.ConsultThePublic</li>
+                <li>@IwsSepaStandardDataNoticeResources.CarryOutResearch</li>
+                <li>@IwsSepaStandardDataNoticeResources.PreventLawBreaking</li>
+                <li>@IwsSepaStandardDataNoticeResources.CustomerSatisfaction</li>
+                <li>@IwsSepaStandardDataNoticeResources.RequestsForInformation</li>
+            </ul>
+        </p>
+
+        <p>
+            @IwsSepaStandardDataNoticeResources.PassInformationToAgents
+        </p>
+
+        <p>
+            @IwsSepaStandardDataNoticeResources.RetainDetails
+        </p>
+
+        <p>
+            @Html.Raw(string.Format(IwsSepaStandardDataNoticeResources.AddressQuestions, Html.MailtoLink(IwsSepaStandardDataNoticeResources.AddressQuestionsEmail)))
+        </p>
+    </div>
+</details>
