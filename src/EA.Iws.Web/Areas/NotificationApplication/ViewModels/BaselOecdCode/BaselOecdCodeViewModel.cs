@@ -29,7 +29,7 @@
         {
             if (!NotListed && !SelectedCode.HasValue)
             {
-                yield return new ValidationResult(BaselOecdCodeResources.CodeRequired, new[] { "NotListed" });
+                yield return new ValidationResult(BaselOecdCodeResources.CodeRequired, new[] { "SelectedCode" });
             }
         }
 
