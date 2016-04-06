@@ -79,7 +79,7 @@ namespace EA.Iws.Web.Areas.ImportNotification.ViewModels.Shared {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to First and last name.
+        ///   Looks up a localized string similar to Full name.
         /// </summary>
         public static string Name {
             get {
