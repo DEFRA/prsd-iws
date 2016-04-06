@@ -124,7 +124,7 @@
     <value>Please enter a valid email address</value>
   </data>
   <data name="Name" xml:space="preserve">
-    <value>First and last name</value>
+    <value>Full name</value>
   </data>
   <data name="Telephone" xml:space="preserve">
     <value>Telephone number</value>
