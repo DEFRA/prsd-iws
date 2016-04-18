@@ -1,0 +1,69 @@
+﻿#form-menu {
+    padding-bottom: 15px;
+    margin-top: 45px;
+
+    p {
+        margin-bottom: 0;
+    }
+
+    h4 {
+        padding: 20px 0px 0px 0px;
+        font-weight: bold;
+    }
+
+    span.number {
+        display: block;
+        padding-bottom: 15px;
+        font-size: 24px;
+        font-weight: 700;
+    }
+
+    span {
+        padding: 20px 0px 0px 0px;
+        font-weight: bold;
+        display: block;
+    }
+
+    a {
+        display: block;
+        text-decoration: none;
+        padding-top: 6px;
+        font-size: 16px;
+        color: $link-colour;
+        border-bottom: 2px solid $page-colour;
+        background: $page-colour;
+
+        &:visited {
+            color: $link-colour;
+        }
+
+        &:hover {
+            color: $link-hover-colour;
+            border-bottom: 2px solid $link-hover-colour;
+        }
+
+        &.active {
+            color: $text-colour;
+            border-bottom: 2px solid $text-colour;
+        }
+
+        i {
+            color: $button-colour;
+            padding-left: 10px;
+        }
+    }
+
+    em {
+        padding-top: 10px;
+        display: block;
+    }
+}
+
+.internal-side-nav {
+    border-bottom: 10px solid #005ea5 !important;
+    margin-bottom: 15px;
+
+    p:last-child {
+        margin-bottom: 15px !important;
+    }
+}

@@ -1,0 +1,28 @@
+﻿@using EnumHelper = EA.Prsd.Core.Helpers.EnumHelper
+@using Resource = EA.Iws.Web.Areas.ExportMovement.Views.QuantityReceived.IndexResources
+@model EA.Iws.Web.Areas.ExportMovement.ViewModels.Quantity.QuantityReceivedViewModel
+@{
+    ViewBag.Title = Resource.Title;
+}
+
+<header class="hgroup">
+    <h1 class="heading-large">@Resource.MainHeading</h1>
+    <p>@Resource.LeadParagraph</p>
+</header>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.Gds().ValidationSummary()
+    
+    @Html.HiddenFor(m => m.Unit)
+    @Html.HiddenFor(m => m.DateReceived)
+    
+    <div class="form-group @Html.Gds().FormGroupClass(m => m.Quantity)">
+        <label class="form-label" for="Quantity">@Html.Raw(string.Format(Resource.QuantityLabel, EnumHelper.GetDisplayName(Model.Unit)))</label>
+        @Html.Gds().ValidationMessageFor(m => m.Quantity)
+        @Html.Gds().TextBoxFor(m => m.Quantity)
+    </div>
+
+    <button class="button" type="submit">@Constants.ContinueButtonText</button>
+}

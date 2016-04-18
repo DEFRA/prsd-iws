@@ -1,0 +1,46 @@
+﻿@model EA.Iws.Web.Areas.ImportNotification.ViewModels.Home.SummaryTableContainerViewModel
+@using Resource = EA.Iws.Web.Areas.ImportNotification.Views.Home.IndexResources
+
+<div class="overview-block">
+    @if (Model.Details.Producer != null && !Model.Details.Producer.IsEmpty())
+    {
+        <div class="overview-block-element">
+            @if (!string.IsNullOrWhiteSpace(Model.Details.Producer.Name))
+            {
+                @Html.DisplayFor(m => m.Details.Producer.Name)<br />
+            }
+
+            @if (!Model.Details.Producer.Address.IsEmpty())
+            {
+                @Html.DisplayFor(m => m.Details.Producer.Address.AddressLine1)<text>, </text>
+                @Html.DisplayFor(m => m.Details.Producer.Address.TownOrCity)<text> </text>
+                @Html.DisplayFor(m => m.Details.Producer.Address.PostalCode)<text>, </text>
+                @Html.DisplayFor(m => m.Details.Producer.Address.Country)
+            }
+
+        </div>
+
+        if (!Model.Details.Producer.Contact.IsEmpty())
+        {
+            <div class="overview-block-element">
+                @Html.DisplayFor(m => m.Details.Producer.Contact)
+            </div>
+        }
+
+        <div class="overview-block-element">
+            @Resource.MultipleProducersQuestion 
+            @if (Model.Details.Producer.AreMultiple)
+            {
+                @Resource.True
+            }
+            else
+            {
+                @Resource.False
+            }
+        </div>
+    }
+    else
+    {
+        <div class="overview-block-element"> @ViewBag.SectionIncompleteText</div>
+    }
+</div>

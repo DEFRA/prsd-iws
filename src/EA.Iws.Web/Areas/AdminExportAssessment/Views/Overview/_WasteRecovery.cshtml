@@ -1,0 +1,17 @@
+﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.NotificationApplication.WasteRecoveryViewModel
+@{
+    var viewLocation = Constants.InternalExportNotificationOverviewSectionsLocation;
+}
+
+<table class="overview-table">
+    <thead>
+        <tr>
+            <th colspan="2">
+                <h2 class="heading-medium">Waste recovery</h2>
+            </th>
+        </tr>
+    </thead>
+    
+    @Html.Partial(viewLocation + "_RecoveryInformation.cshtml")
+            
+</table>

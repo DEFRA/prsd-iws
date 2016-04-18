@@ -1,0 +1,26 @@
+﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.Annex.AnnexViewModel
+@using Resource = EA.Iws.Web.Areas.NotificationApplication.Views.Annex.IndexResources
+
+@{
+    ViewBag.Title = Resource.Title;
+    Layout = "~/Views/Shared/_Layout.GovUK.Sections.cshtml";
+}
+
+<div class="grid-row">
+    <div class="column-two-thirds">
+        <h1 class="heading-large">@Resource.MainHeading</h1>
+
+        @if (Model.AreAnnexesRequired)
+        {
+            @Html.Partial("_Uploads")
+        }
+        else
+        {
+            @Html.Partial("_NoAnnexesRequired")
+
+            <div>
+                @Html.ActionLink("Go to notification options", "Index", "Options", new { id = Model.NotificationId, area = "NotificationApplication" }, null)
+            </div>
+        }
+    </div>
+</div>

@@ -1,0 +1,62 @@
+﻿@using EA.Iws.Core.AddressBook
+@using EA.Iws.Web.Areas.AddressBook.Views
+@using EA.Iws.Web.Areas.NotificationApplication.Views.Facility
+@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.Facility.AddFacilityViewModel
+@{
+    ViewBag.Title = AddEditFacilityResources.TitleAdd;
+
+    var facilityType = Model.NotificationType.ToString().ToLowerInvariant();
+    var message = string.Format(AddEditFacilityResources.Message, facilityType);
+
+    ViewBag.SoleTraderRegistrationNumber = message;
+    ViewBag.PartnershipRegistrationNumber = message;
+    ViewBag.CompanyRegistrationNumber = message;
+    ViewBag.SoleTraderRegistrationNumber = message;
+    ViewBag.OtherRegistrationNumber = message;
+    ViewBag.NonJavascriptMessage = message;
+    ViewBag.AddressType = AddressRecordType.Facility;
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.Gds().ValidationSummary()
+    @Html.HiddenFor(m => m.NotificationId)
+    @Html.HiddenFor(m => m.NotificationType)
+
+    <header class="hgroup">
+        <h1 class="heading-large">@string.Format(AddEditFacilityResources.Header, facilityType)</h1>
+    </header>
+
+    <fieldset>
+        <legend class="visuallyhidden">@AddEditFacilityResources.FacilityDetails</legend>
+        @Html.EditorFor(m => m.Business)
+    </fieldset>
+
+    <h2 class="heading-medium">@AddEditFacilityResources.Address</h2>
+    <hr />
+    <p>@string.Format(AddEditFacilityResources.AddressDescription, facilityType)</p>
+
+    <fieldset>
+        <legend class="visuallyhidden">@AddEditFacilityResources.Address</legend>
+        @Html.EditorFor(m => m.Address)
+    </fieldset>
+
+    <h2 class="heading-medium">@AddEditFacilityResources.Contact</h2>
+    <hr />
+    <p>@string.Format(AddEditFacilityResources.ContactDescription, facilityType)</p>
+
+    <fieldset>
+        <legend class="visuallyhidden">@AddEditFacilityResources.Contact</legend>
+        @Html.EditorFor(m => m.Contact)
+    </fieldset>
+
+    <div class="form-group no-js-hidden">
+        <label class="block-label" for="addressBook">
+            @Html.CheckBoxFor(m => m.IsAddedToAddressBook, new { id = "addressBook" })
+            @AddressBookResources.AddToAddressBook
+        </label>
+    </div>
+
+    <button class="button" type="submit">@Constants.ContinueButtonText</button>
+}

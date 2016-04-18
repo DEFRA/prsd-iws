@@ -1,0 +1,48 @@
+﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.NotificationApplication.JourneyViewModel
+
+<div class="overview-block">
+    @if (!string.IsNullOrWhiteSpace(Model.ExitCustomsOffice.Name) || !string.IsNullOrWhiteSpace(Model.EntryCustomsOffice.Name))
+    {
+        if (!string.IsNullOrWhiteSpace(Model.ExitCustomsOffice.Name))
+        {
+            <div class="overview-block-element">
+                <div class="grid-row">
+                    <div class="column-half">Exit customs office:</div>
+                    <div class="column-half">
+                        @Html.DisplayFor(m => m.ExitCustomsOffice.Name),
+                        @Html.DisplayFor(m => m.ExitCustomsOffice.Country.Name)
+                    </div>
+                </div>
+                <div class="grid-row">
+                    <div class="column-half">Address:</div>
+                    <div class="column-half">@Html.DisplayFor(m => m.ExitCustomsOffice.Address)</div>
+                </div>
+            </div>
+        }
+        if (!string.IsNullOrWhiteSpace(Model.EntryCustomsOffice.Name))
+        {
+            <div class="overview-block-element">
+                <div class="grid-row">
+                    <div class="column-half">Entry customs office:</div>
+                    <div class="column-half">
+                        @Html.DisplayFor(m => m.EntryCustomsOffice.Name),
+                        @Html.DisplayFor(m => m.EntryCustomsOffice.Country.Name)
+                    </div>
+                </div>
+                <div class="grid-row">
+                    <div class="column-half">Address:</div>
+                    <div class="column-half">@Html.DisplayFor(m => m.EntryCustomsOffice.Address)</div>
+                </div>
+            </div>
+        }
+    }
+    else if (Model.IsCustomsOfficeCompleted)
+    {
+
+        <div class="overview-block-element">Not applicable</div>
+    }
+    else
+    {
+        <div class="overview-block-element">@ViewBag.SectionIncompleteText</div>
+    }
+</div>

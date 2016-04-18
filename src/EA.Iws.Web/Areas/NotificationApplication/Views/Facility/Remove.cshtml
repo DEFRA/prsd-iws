@@ -1,0 +1,32 @@
+﻿@using EA.Iws.Web.Areas.NotificationApplication.Views.Facility
+@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.Facility.RemoveFacilityViewModel
+@{
+    ViewBag.Title = RemoveFacilityResources.Title;
+}
+
+<h1 class="heading-large">@string.Format(RemoveFacilityResources.Header, @Model.NotificationType.ToString().ToLowerInvariant())</h1>
+
+@if (string.IsNullOrWhiteSpace(ViewBag.Error))
+{
+    using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.Gds().ValidationSummary()
+        @Html.HiddenFor(m => m.NotificationId)
+        @Html.HiddenFor(m => m.FacilityId)
+
+        <p>@Html.Raw(string.Format(RemoveFacilityResources.RemoveMessage, Model.FacilityName))</p>
+
+        <button class="button" type="submit">@Constants.ContinueButtonText</button>
+    }
+}
+else
+{
+    <p>@ViewBag.Error</p>
+    <p>
+        @Html.ActionLink(string.Format(RemoveFacilityResources.ChangeSite, Model.NotificationType.ToString().ToLowerInvariant()), "SiteOfTreatment", "Facility",
+            new { id = Model.NotificationId, backToList = true, backToOverview = ViewBag.BackToOverview }, new { @class = "button" })
+    </p>
+}
+
+<p>@Html.ActionLink(RemoveFacilityResources.BackToFacilities, "List", "Facility", new { id = Model.NotificationId, backToOverview = ViewBag.BackToOverview }, null)</p>

@@ -1,0 +1,22 @@
+﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.NotificationApplication.WasteCodeOverviewViewModel
+@{
+    var codeDefinitionListPartialName = Constants.ExternalNotificationOverviewSectionsLocation + "_CodeDefinitionList.cshtml";
+}
+
+<div class="overview-block">
+    @if (Model.AreHCodesCompleted)
+    {
+        if (Model.AreHCodesNotApplicable)
+        {
+            <div class="overview-block-element">Not applicable</div>
+        }
+        else
+        {
+            @Html.Partial(codeDefinitionListPartialName, Model.HCodes)
+        }
+    }
+    else
+    {
+        <div class="overview-block-element">@ViewBag.SectionIncompleteText</div>
+    }
+</div>

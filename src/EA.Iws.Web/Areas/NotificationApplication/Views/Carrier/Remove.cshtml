@@ -1,0 +1,22 @@
+﻿@using EA.Iws.Web.Areas.NotificationApplication.Views.Carrier
+@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.Carrier.RemoveCarrierViewModel
+
+@{
+    ViewBag.Title = RemoveCarrierResources.Title;
+}
+
+<h2 class="heading-large">@RemoveCarrierResources.Header</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.Gds().ValidationSummary()
+    @Html.HiddenFor(m => m.NotificationId)
+    @Html.HiddenFor(m => m.CarrierId)
+    
+    <p>@string.Format(RemoveCarrierResources.RemoveMessage, Model.CarrierName)</p>
+
+    <button class="button" type="submit">@Constants.ContinueButtonText</button>
+}
+
+<p>@Html.ActionLink(RemoveCarrierResources.BackToCarriers, "List", "Carrier", new { id = Model.NotificationId }, null)</p>

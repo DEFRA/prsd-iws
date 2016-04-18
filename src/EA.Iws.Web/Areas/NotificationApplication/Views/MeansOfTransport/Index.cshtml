@@ -1,0 +1,46 @@
+﻿@using EA.Iws.Web.Areas.NotificationApplication.Views.MeansOfTransport
+@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.MeansOfTransport.MeansOfTransportViewModel
+@{
+    ViewBag.Title = MeansOfTransportResources.Title;
+}
+
+<h1 class="heading-large">@MeansOfTransportResources.Header</h1>
+<p>@MeansOfTransportResources.HeaderDescription</p>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.Gds().ValidationSummary()
+
+    <div class="form-group">
+        <table title="Transport methods">
+            <caption class="visuallyhidden">Transport methods</caption>
+            <thead>
+            <tr>
+                <th>@MeansOfTransportResources.ThSymbol</th>
+                <th>@MeansOfTransportResources.ThTransportMethods</th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach (var means in Model.PossibleMeans)
+            {
+                <tr>
+                    <td>@EA.Prsd.Core.Helpers.EnumHelper.GetShortName(means)</td>
+                    <td>@EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(means)</td>
+                </tr>
+            }
+            </tbody>
+        </table>
+    </div>
+
+    <div class="form-group @Html.Gds().FormGroupClass(m => m.SelectedMeans)">
+        @Html.Gds().LabelFor(m => m.SelectedMeans)
+        @Html.Gds().HintSpan(MeansOfTransportResources.SelectedMeansHint)
+        @Html.Gds().ValidationMessageFor(m => m.SelectedMeans)
+        @Html.Gds().TextBoxFor(m => m.SelectedMeans)
+    </div>
+
+    <div class="form-group">
+        <button type="submit" class="button" value="Submit" name="submit">@Constants.ContinueButtonText</button>
+    </div>
+}

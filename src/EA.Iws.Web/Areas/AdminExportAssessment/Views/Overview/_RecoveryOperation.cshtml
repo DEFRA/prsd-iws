@@ -1,0 +1,56 @@
+﻿@using EA.Iws.Core.Shared
+@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.NotificationApplication.RecoveryOperationViewModel
+@{
+    var viewLocation = Constants.InternalExportNotificationOverviewSectionsLocation;
+}
+
+<table class="overview-table">
+    <thead>
+        <tr>
+            <th colspan="2">
+                <h2 class="heading-medium">@(Model.NotificationType == NotificationType.Recovery ? "Recovery operation" : "Disposal operation")</h2>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                @(Model.NotificationType == NotificationType.Recovery ? "Recovery codes" : "Disposal codes")
+            </td>
+            <td>
+                @Html.Partial(viewLocation + "_OperationCodes.cshtml")
+            </td>
+            
+        </tr>
+        @if (Model.NotificationType == NotificationType.Recovery)
+        {
+            <tr>
+                <td>
+                    Pre-consented facility
+                </td>
+                <td>
+                    @Html.Partial(viewLocation + "_PreconsentStatus.cshtml")
+                </td>
+                
+            </tr>
+        }
+        <tr>
+            <td>
+                @(Model.NotificationType == NotificationType.Recovery ? "Recovery technology" : "Disposal technology")
+            </td>
+            <td>
+                @Html.Partial(viewLocation + "_TechnologyEmployed.cshtml")
+            </td>
+            
+        </tr>
+        <tr>
+            <td>
+                Reason for export
+            </td>
+            <td>
+                @Html.Partial(viewLocation + "_ReasonForExport.cshtml")
+            </td>
+            
+        </tr>
+    </tbody>
+</table>

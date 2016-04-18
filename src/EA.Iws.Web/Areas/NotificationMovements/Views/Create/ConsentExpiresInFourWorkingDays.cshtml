@@ -1,0 +1,13 @@
+﻿@using Resource = EA.Iws.Web.Areas.NotificationMovements.Views.Create.ConsentExpiresInFourWorkingDaysResources
+@{
+    ViewBag.Title = Resource.Title;
+}
+
+<h1 class="heading-large">@Resource.Title</h1>
+
+<p>@Resource.Body</p>
+
+<p>@Resource.Warning</p>
+
+
+@Html.ActionLink("Continue", "RedirectToShipmentDate", "Create", new { area = "NotificationMovements", id = ViewContext.RouteData.Values["notificationId"] }, new { @class = "button" })

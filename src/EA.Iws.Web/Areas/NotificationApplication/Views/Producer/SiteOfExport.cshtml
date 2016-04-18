@@ -1,0 +1,70 @@
+﻿@using EA.Iws.Web.Areas.NotificationApplication.Views.Producer
+@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.Producer.SiteOfExportViewModel
+@{
+    ViewBag.Title = SiteOfExportResources.Title;
+}
+
+<h1 class="heading-large">@SiteOfExportResources.Header</h1>
+
+@if (Model.Producers.Any())
+{
+    using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.Gds().ValidationSummary()
+        @Html.HiddenFor(m => m.NotificationId)
+
+        <div class="form-group @Html.Gds().FormGroupClass(m => m.SelectedSiteOfExport)">
+            <table title=@SiteOfExportResources.TableTitle>
+                <thead>
+                    <tr>
+                        <th>@SiteOfExportResources.ThOrganisationName</th>
+                        <th>@SiteOfExportResources.ThAddress</th>
+                        <th>@SiteOfExportResources.ThSiteOfExport</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (var i = 0; i < Model.Producers.Count; i++)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(m => m.Producers[i].Business.Name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(m => m.Producers[i].Address.StreetOrSuburb),
+                                @Html.DisplayFor(m => m.Producers[i].Address.TownOrCity)
+                            </td>
+                            <td>
+                                @{
+                                    var htmlAttr = new Dictionary<string, object> { { "id", Html.NameFor(m => m.Producers[i].Id) } };
+                                    htmlAttr.Add("title", SiteOfExportResources.ThSiteOfExport);
+                                    if (@Model.Producers[i].IsSiteOfExport)
+                                    {
+                                        htmlAttr.Add("checked", "checked");
+                                    }
+                                    @Html.RadioButtonFor(m => m.SelectedSiteOfExport, Model.Producers[i].Id, htmlAttr)
+                                }
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+        <button class="button" type="submit">@Constants.ContinueButtonText</button>
+    }
+}
+else
+{
+    ViewBag.Title = SiteOfExportResources.TitleAddFirst;
+    <p>@SiteOfExportResources.NoProducers</p>
+    <p>@Html.ActionLink(SiteOfExportResources.BackToProducers, "List", "Producer", new { id = Model.NotificationId, backToOverview = ViewBag.BackToOverview }, null)</p>
+    if (ViewBag.BackToOverview)
+    {
+        @Html.ActionLink(Constants.ContinueButtonText, "Index", "Home", new { id = Model.NotificationId }, new { @class = "button" })
+    }
+    else
+    {
+        @Html.ActionLink(Constants.ContinueButtonText, "Index", "Importer", new { id = Model.NotificationId }, new { @class = "button" })
+    }
+}

@@ -1,0 +1,57 @@
+﻿@model EA.Iws.Core.AddressBook.AddressBookData
+@{
+    ViewBag.Title = "Address Book - " + Model.Type;
+}
+
+<header>
+    <h1 class="heading-large">Your address book</h1>
+    <p class="subtitle">Manage your address book</p>
+</header>
+
+@Html.Partial("_Navigation")
+
+@if (Model.AddressRecords.Count > 0)
+{
+    <div class="form-group table-container">
+        <table title="Address book records">
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Address</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            @for (int i = 0; i < Model.AddressRecords.Count; i++)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(m => m.AddressRecords[i].BusinessData.Name)</td>
+                    <td>
+                        @Html.DisplayFor(m => m.AddressRecords[i].AddressData.StreetOrSuburb),
+                        @if (Model.AddressRecords[i].AddressData.Address2 != null)
+                        {
+                            @Html.DisplayFor(m => m.AddressRecords[i].AddressData.Address2)<text>,</text>
+                        }
+                        @Html.DisplayFor(m => m.AddressRecords[i].AddressData.TownOrCity),
+                        @Html.DisplayFor(m => m.AddressRecords[i].AddressData.PostalCode)
+                    </td>
+                    <td>@Html.ActionLink("Delete", "Index", "Delete", new { id = Model.AddressRecords[i].Id, type = Model.Type }, null)</td>
+                </tr>
+            }
+            </tbody>
+        </table>
+    </div>
+} 
+
+@if (Model.AddressRecords.Count == 0)
+{
+    <p>You have no address records for this business type.</p>
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="form-group">
+        <button class="button" type="submit">Continue</button>
+    </div>
+}

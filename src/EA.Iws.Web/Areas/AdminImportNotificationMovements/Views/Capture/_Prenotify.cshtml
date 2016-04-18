@@ -1,0 +1,25 @@
+﻿@model EA.Iws.Web.Areas.AdminImportNotificationMovements.ViewModels.Capture.CreateViewModel
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(m => m.Number)
+    @Html.Gds().ValidationSummary()
+
+    <div class="form-group @Html.Gds().FormGroupClass(m => m.PrenotificationDate) @Html.Gds().FormGroupClass(m => m.PrenotificationDate.Day) @Html.Gds().FormGroupClass(m => m.PrenotificationDate.Month) @Html.Gds().FormGroupClass(m => m.PrenotificationDate.Year)">
+        @Html.LabelFor(m => m.PrenotificationDate, new { @class = "heading-small" })
+        @Html.Gds().ValidationMessageFor(m => m.PrenotificationDate)
+        @Html.EditorFor(m => m.PrenotificationDate)
+    </div>
+
+    <div class="form-group @Html.Gds().FormGroupClass(m => m.ActualShipmentDate) @Html.Gds().FormGroupClass(m => m.ActualShipmentDate.Day) @Html.Gds().FormGroupClass(m => m.ActualShipmentDate.Month) @Html.Gds().FormGroupClass(m => m.ActualShipmentDate.Year)">
+        @Html.LabelFor(m => m.ActualShipmentDate, new { @class = "heading-small" })
+        @Html.Gds().ValidationMessageFor(m => m.ActualShipmentDate)
+        @Html.EditorFor(m => m.ActualShipmentDate)
+    </div>
+
+    <div class="form-group">
+        <button type="submit" class="button">@Constants.ContinueButtonText</button>
+    </div>
+}
+

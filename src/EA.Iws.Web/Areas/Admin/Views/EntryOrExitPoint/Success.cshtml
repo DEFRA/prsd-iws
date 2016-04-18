@@ -1,0 +1,13 @@
+﻿@using Resource = EA.Iws.Web.Areas.Admin.Views.EntryOrExitPoint.Success
+@model EA.Iws.Web.Areas.Admin.ViewModels.EntryOrExitPoint.SuccessViewModel
+
+@{
+    ViewBag.Title = Resource.TabTitle;
+}
+
+<h1 class="heading-large">@Html.Raw(string.Format(Resource.Title, Model.PortName, Model.CountryName))</h1>
+
+
+    <div class="form-group">
+        @Html.ActionLink("Continue", "Index", "EntryOrExitPoint", null, new { @class = "button"})
+    </div>

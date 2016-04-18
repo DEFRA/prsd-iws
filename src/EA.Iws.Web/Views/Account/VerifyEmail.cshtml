@@ -1,0 +1,17 @@
+﻿@using EA.Iws.Web.Views.Account
+@{
+    ViewBag.Title = VerifyEmailResources.Title;
+}
+
+<h1 class="heading-large">@VerifyEmailResources.Header</h1>
+
+<p>@VerifyEmailResources.HeaderDescription</p>
+
+@if (User.Identity.IsAuthenticated)
+{
+    @Html.ActionLink(Constants.ContinueButtonText, "Index", "Home", null, new { @class = "button" })
+}
+else
+{
+    @Html.ActionLink(VerifyEmailResources.LogInLinktext, "Index", "Home")
+}

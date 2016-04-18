@@ -1,0 +1,14 @@
+﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.NotificationApplication.ClassifyYourWasteViewModel
+
+<div class="overview-block">
+    <div class="overview-block-element">
+        @if (Model.IsProcessOfGenerationCompleted)
+        {
+            @Html.DisplayFor(m => m.ProcessOfGeneration)
+        }
+        else
+        {
+            @ViewBag.SectionIncompleteText
+        }
+    </div>
+</div>

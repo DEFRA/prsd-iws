@@ -1,0 +1,19 @@
+﻿@using EA.Iws.Core.ImportNotificationAssessment;
+@using Resource = EA.Iws.Web.Areas.ImportNotification.Views.Home.IndexResources
+@model EA.Iws.Web.Areas.ImportNotification.ViewModels.Home.SummaryTableContainerViewModel
+
+@{
+    ViewBag.Title = Resource.TabTitle;
+}
+
+<h1 class="heading-large">@Resource.Title</h1>
+<hr/>
+
+@if (Model.Details.Status == ImportNotificationStatus.NotificationReceived)
+{
+    @Html.ActionLink(Resource.ButtonText, "Index", "Validate", null, new { @class = "button" })
+
+    <p class="text">@Resource.GuidanceText</p>
+}
+
+@Html.Partial("_SummaryTableContainer")

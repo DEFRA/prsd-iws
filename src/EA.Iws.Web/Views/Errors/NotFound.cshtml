@@ -1,0 +1,22 @@
+﻿@{
+    ViewBag.Title = "Page not found";
+    var errorPath = Request.QueryString["aspxerrorpath"];
+
+    if (String.IsNullOrEmpty(errorPath))
+    {
+        errorPath = Request.RawUrl;
+    }
+
+    errorPath = Path.GetFileNameWithoutExtension(errorPath);
+    Response.StatusCode = 404;
+}
+
+
+<h1 class="heading-large">This page can't be found</h1>
+
+<p>Please check that you have entered the correct web address, or try:</p>
+
+<ul class="list-bullet text">
+    <li>@Html.ActionLink("IWS homepage", "Index", "Home", new { area = "" }, null)</li>
+    <li><a href="http://www.gov.uk">GOV.UK homepage</a></li>
+</ul>

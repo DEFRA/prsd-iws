@@ -1,0 +1,43 @@
+﻿@using EnumHelper = EA.Prsd.Core.Helpers.EnumHelper
+@using Resource = EA.Iws.Web.Areas.Admin.Views.Home.ImportResultsResources
+@model EA.Iws.Web.Areas.Admin.ViewModels.Home.BasicSearchViewModel
+
+@if (Model.ImportSearchResults != null && Model.HasSearched)
+{
+    if (Model.ImportSearchResults.Count > 0)
+    {
+<h2 class="heading-medium">@Resource.Subheading</h2>
+
+        @Html.Raw(string.Format(Resource.ResultsCount, Model.ImportSearchResults.Count))
+
+<table title="Search results">
+    <thead>
+        <tr>
+            <th>@Resource.NotificationNumberTableHeading</th>
+            <th>Status</th>
+            <th>@Resource.NotificationTypeTableHeading</th>
+        </tr>
+    </thead>
+    <tbody>
+        @for (int i = 0; i < Model.ImportSearchResults.Count; i++)
+        {
+        <tr>
+            <td>
+                @Html.ActionLink(linkText: @Html.DisplayFor(m => m.ImportSearchResults[i].NotificationNumber).ToString(),
+                actionName: "Index",
+                controllerName: "Home",
+                routeValues: new { id = Model.ImportSearchResults[i].Id, area = "ImportNotification" },
+                htmlAttributes: null)
+            </td>
+            <td>
+                @Html.Raw(EnumHelper.GetDisplayName(Model.ImportSearchResults[i].Status))
+            </td>
+            <td>
+                @Html.DisplayFor(m => m.ImportSearchResults[i].NotificationType)
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
+    }
+}

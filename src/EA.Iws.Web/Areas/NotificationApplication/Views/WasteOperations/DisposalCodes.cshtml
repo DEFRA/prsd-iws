@@ -1,0 +1,21 @@
+﻿@using EA.Iws.Web.Areas.NotificationApplication.Views.WasteOperations
+@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.WasteOperations.OperationCodesViewModel
+@{
+    ViewBag.Title = DisposalCodesResources.Title;
+}
+
+<header class="hgroup">
+    <h1 class="heading-large">@DisposalCodesResources.Header</h1>
+</header>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.Gds().ValidationSummary()
+
+    @Html.Partial("_OperationCodes", Model)
+    
+    <div class="form-group">
+        <input type="submit" class="button" value="@Constants.ContinueButtonText">
+    </div>
+}

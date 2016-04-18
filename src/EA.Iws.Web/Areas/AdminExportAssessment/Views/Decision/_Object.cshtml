@@ -1,0 +1,18 @@
+﻿@model EA.Iws.Web.Areas.AdminExportAssessment.ViewModels.Decision.NotificationAssessmentDecisionViewModel
+@using Resourse = EA.Iws.Web.Areas.AdminExportAssessment.Views.Decision.DecisionResources
+
+<div class="form-group">
+    @Resourse.SingleDateWarning
+</div>
+
+<div class="form-group @Html.Gds().FormGroupClass(m => m.ObjectionDate) @Html.Gds().FormGroupClass(m => m.ObjectionDate.Day) @Html.Gds().FormGroupClass(m => m.ObjectionDate.Month) @Html.Gds().FormGroupClass(m => m.ObjectionDate.Year)">
+    <label class="heading-medium">@Html.DisplayNameFor(m => m.ObjectionDate)</label>
+    @Html.Gds().ValidationMessageFor(m => m.ObjectionDate)
+    @Html.EditorFor(m => m.ObjectionDate)
+</div>
+
+<div class="form-group @Html.Gds().FormGroupClass(m => m.ReasonForObjection)">
+    <label class="heading-medium">@Html.DisplayNameFor(m => m.ReasonForObjection)</label>
+    @Html.Gds().ValidationMessageFor(m => m.ReasonForObjection)
+    @Html.TextAreaFor(m => m.ReasonForObjection, new { @class = "text-area two-thirds", @MaxLength = "4000" })
+</div>

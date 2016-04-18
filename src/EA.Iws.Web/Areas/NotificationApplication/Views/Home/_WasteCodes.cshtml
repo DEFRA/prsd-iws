@@ -1,0 +1,131 @@
+﻿@using EA.Iws.Core.WasteCodes
+@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.NotificationApplication.WasteCodeOverviewViewModel
+@{
+    var id = Model.NotificationId;
+    var viewLocation = Constants.ExternalNotificationOverviewSectionsLocation;
+    var headerColspan = ViewBag.CanEditNotification ? 3 : 2;
+    var codeDefinitionListPartialName = Constants.NotificationSummaryViewLocation + "_CodeDefinitionList.cshtml";
+    var baselOrOecdType = (Model.BaselOecdCode != null && Model.BaselOecdCode.Length > 0)
+        ? EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(Model.BaselOecdCode[0].CodeType) :
+        EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(CodeType.Basel) + "/" + EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(CodeType.Oecd);
+}
+
+@{
+    var baselClass = Model.IsBaselOecdCodeCompleted ? string.Empty : "over-alert";
+    var ewcClass = Model.AreEwcCodesCompleted ? string.Empty : "over-alert";
+    var yClass = Model.AreYCodesCompleted ? string.Empty : "over-alert";
+    var hClass = Model.AreHCodesCompleted ? string.Empty : "over-alert";
+    var unClass = Model.AreUnClassesCompleted ? string.Empty : "over-alert";
+    var unNumberClass = Model.AreUnNumbersCompleted ? string.Empty : "over-alert";
+    var OtherClass = Model.AreOtherCodesCompleted ? string.Empty : "over-alert";
+}
+
+<table class="overview-table">
+    <thead>
+        <tr>
+            <th colspan="@headerColspan">
+                <h2 class="heading-medium">Waste codes</h2>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr class = @baselClass>
+            <td>
+                @baselOrOecdType code
+            </td>
+            <td>
+                @Html.Partial(viewLocation + "_BaselOecdCode.cshtml")
+            </td>
+            @if (ViewBag.CanEditNotification)
+            {
+                <td class="change">
+                    @Html.ActionLink("Change", "Index", "BaselOecdCode", new { id, backToOverview = true }, null)
+                </td>
+            }
+        </tr>
+        <tr class = @ewcClass>
+            <td>
+                @(Model.AreEwcCodesCompleted ? (Model.EwcCodes.Length > 1 ? "EWC codes" : "EWC code") : "EWC code(s)")
+            </td>
+            <td>
+                @Html.Partial(viewLocation + "_EwcCodes.cshtml")
+            </td>
+            @if (ViewBag.CanEditNotification)
+            {
+                <td class="change">
+                    @Html.ActionLink("Change", "Index", "EwcCode", new { id, backToOverview = true }, null)
+                </td>
+            }
+        </tr>
+        <tr class = @yClass>
+            <td>
+                @(Model.AreYCodesCompleted ? (Model.YCodes.Length > 1 ? "Y codes" : "Y code") : "Y code(s)")
+            </td>
+            <td>
+                @Html.Partial(viewLocation + "_YCodes.cshtml")
+            </td>
+            @if (ViewBag.CanEditNotification)
+            {
+                <td class="change">
+                    @Html.ActionLink("Change", "Index", "YCode", new { id, backToOverview = true }, null)
+                </td>
+            }
+        </tr>
+        <tr class = @hClass>
+            <td>
+                @(Model.AreHCodesCompleted ? (Model.HCodes.Length > 1 ? "H or HP codes" : "H or HP code") : "H or HP code(s)")
+            </td>
+            <td>
+                @Html.Partial(viewLocation + "_HCodes.cshtml")
+            </td>
+            @if (ViewBag.CanEditNotification)
+            {
+                <td class="change">
+                    @Html.ActionLink("Change", "Index", "HCode", new { id, backToOverview = true }, null)
+                </td>
+            }
+        </tr>
+        <tr class = @unClass>
+            <td>
+                @(Model.AreUnClassesCompleted ? (Model.UnClass.Length > 1 ? "UN classes" : "UN class") : "UN class(es)")
+            </td>
+            <td>
+                @Html.Partial(viewLocation + "_UNClasses.cshtml")
+            </td>
+            @if (ViewBag.CanEditNotification)
+            {
+                <td class="change">
+                    @Html.ActionLink("Change", "Index", "UnClass", new { id, backToOverview = true }, null)
+                </td>
+            }
+        </tr>
+        <tr class = @unNumberClass>
+            <td>
+                @(Model.AreUnNumbersCompleted ? (Model.UnNumber.Length > 1 ? "UN numbers" : "UN number") : "UN number(s)")
+            </td>
+            <td>
+                @Html.Partial(viewLocation + "_UNNumbers.cshtml")
+            </td>
+            @if (ViewBag.CanEditNotification)
+            {
+                <td class="change">
+                    @Html.ActionLink("Change", "Index", "UnNumber", new { id, backToOverview = true }, null)
+                </td>
+            }
+        </tr>
+        <tr class = @OtherClass>
+            <td>
+                Other codes
+            </td>
+            <td>
+                @Html.Partial(viewLocation + "_OtherCodes.cshtml")
+            </td>
+            @if (ViewBag.CanEditNotification)
+            {
+                <td class="change">
+                    @Html.ActionLink("Change", "Index", "CustomWasteCode", new { id, backToOverview = true }, null)
+                </td>
+            }
+        </tr>
+    </tbody>
+</table>

@@ -1,0 +1,27 @@
+﻿@using EA.Iws.Core.WasteCodes
+@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.NotificationApplication.WasteCodeOverviewViewModel
+
+@{
+    var baselOrOecdType = (Model.BaselOecdCode != null && Model.BaselOecdCode.Length > 0)
+        ? EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(Model.BaselOecdCode[0].CodeType) :
+        EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(CodeType.Basel) + "/" + EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(CodeType.Oecd);
+    var codeDefinitionListPartialName = Constants.NotificationSummaryViewLocation + "_CodeDefinitionList.cshtml";
+}
+
+@if (Model.IsBaselOecdCodeCompleted)
+{
+    <h3 class="heading-small">@baselOrOecdType code</h3>
+
+    if (Model.IsBaselOecdCodeNotApplicable)
+    {
+        <p>Not listed</p>
+    }
+    else
+    {
+        @Html.Partial(codeDefinitionListPartialName, Model.BaselOecdCode)
+    }
+}
+else
+{
+    <p>@ViewBag.SectionIncompleteText</p>
+}

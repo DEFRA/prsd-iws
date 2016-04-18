@@ -1,0 +1,239 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\xunit.runner.visualstudio.2.1.0\build\net20\xunit.runner.visualstudio.props" Condition="Exists('..\packages\xunit.runner.visualstudio.2.1.0\build\net20\xunit.runner.visualstudio.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{BD4A4188-DE05-44EB-A470-42AC15D61CD1}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>EA.Iws.RequestHandlers.Tests.Unit</RootNamespace>
+    <AssemblyName>EA.Iws.RequestHandlers.Tests.Unit</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EA.Prsd.Core, Version=1.0.16077.1, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\EA.Prsd.Core.1.0.16077-develop1\lib\net452\EA.Prsd.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="FakeItEasy, Version=2.0.0.0, Culture=neutral, PublicKeyToken=eff28e2146d5fd2c, processorArchitecture=MSIL">
+      <HintPath>..\packages\FakeItEasy.2.0.0-beta010\lib\net40\FakeItEasy.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="FluentValidation, Version=6.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\FluentValidation.6.1.0.0\lib\Net45\FluentValidation.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.1\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="xunit.abstractions, Version=2.0.0.0, Culture=neutral, PublicKeyToken=8d05b1bb7a6fdb6c, processorArchitecture=MSIL">
+      <HintPath>..\packages\xunit.abstractions.2.0.0\lib\net35\xunit.abstractions.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="xunit.assert, Version=2.1.0.3179, Culture=neutral, PublicKeyToken=8d05b1bb7a6fdb6c, processorArchitecture=MSIL">
+      <HintPath>..\packages\xunit.assert.2.1.0\lib\dotnet\xunit.assert.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="xunit.core, Version=2.1.0.3179, Culture=neutral, PublicKeyToken=8d05b1bb7a6fdb6c, processorArchitecture=MSIL">
+      <HintPath>..\packages\xunit.extensibility.core.2.1.0\lib\dotnet\xunit.core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="xunit.execution.desktop, Version=2.1.0.3179, Culture=neutral, PublicKeyToken=8d05b1bb7a6fdb6c, processorArchitecture=MSIL">
+      <HintPath>..\packages\xunit.extensibility.execution.2.1.0\lib\net45\xunit.execution.desktop.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Admin\NotificationAssessment\AddNotificationTransactionHandlerTests.cs" />
+    <Compile Include="Admin\NotificationAssessment\SetCommencedDateHandlerTests.cs" />
+    <Compile Include="Admin\NotificationAssessment\SetNotificationAcknowledgedDateHandlerTests.cs" />
+    <Compile Include="Admin\NotificationAssessment\SetNotificationReceivedDateHandlerTests.cs" />
+    <Compile Include="Admin\NotificationAssessment\SetNotificationTransmittedDateHandlerTests.cs" />
+    <Compile Include="Admin\UserAdministration\CreateInternalUserHandlerTests.cs" />
+    <Compile Include="Admin\FinancialGuarantee\ReleaseFinancialGuaranteeHandlerTests.cs" />
+    <Compile Include="Admin\FinancialGuarantee\RefuseFinancialGuaranteeHandlerTests.cs" />
+    <Compile Include="Admin\FinancialGuarantee\ApproveFinancialGuaranteeHandlerTests.cs" />
+    <Compile Include="Admin\FinancialGuarantee\FinancialGuaranteeDecisionTests.cs" />
+    <Compile Include="Admin\FinancialGuarantee\FinancialGuaranteeStatusChangeEventHandlerTests.cs" />
+    <Compile Include="Admin\FinancialGuarantee\GetFinancialGuaranteeDataByNotificationApplicationIdHandlerTests.cs" />
+    <Compile Include="Admin\NotificationAssessment\NotificationStatusChangeEventHandlerTests.cs" />
+    <Compile Include="Admin\FinancialGuarantee\SetFinancialGuaranteeDatesHandlerTests.cs" />
+    <Compile Include="Admin\UserAdministration\SetUserApprovalsHandlerTests.cs" />
+    <Compile Include="Admin\UserAdministration\GetNewInternalUsersHandlerTests.cs" />
+    <Compile Include="Admin\UserAdministration\InternalUserCollection.cs" />
+    <Compile Include="Copy\GetNotificationsToCopyForUserHandlerTests.cs" />
+    <Compile Include="Helpers\TestDbSet.cs" />
+    <Compile Include="Helpers\AddressDataEqualityComparer.cs" />
+    <Compile Include="ImportNotification\Draft\TransitStateCollectionTests.cs" />
+    <Compile Include="ImportNotification\Summary\TransportRouteIdContainerTests.cs" />
+    <Compile Include="ImportNotification\Validate\AddressTestData.cs" />
+    <Compile Include="ImportNotification\Validate\AddressValidatorTests.cs" />
+    <Compile Include="ImportNotification\Validate\ContactTestData.cs" />
+    <Compile Include="ImportNotification\Validate\ContactValidatorTests.cs" />
+    <Compile Include="ImportNotification\Validate\ExporterValidatorTests.cs" />
+    <Compile Include="ImportNotification\Validate\FacilityCollectionValidatorTests.cs" />
+    <Compile Include="ImportNotification\Validate\FacilityValidatorTests.cs" />
+    <Compile Include="ImportNotification\Validate\ImporterValidatorTests.cs" />
+    <Compile Include="ImportNotification\Validate\ImportNotificationValidatorTests.cs" />
+    <Compile Include="ImportNotification\Validate\PreconsentedValidatorTests.cs" />
+    <Compile Include="ImportNotification\Validate\ProducerValidatorTests.cs" />
+    <Compile Include="ImportNotification\Validate\ShipmentValidatorTests.cs" />
+    <Compile Include="ImportNotification\Validate\StateOfImportValidatorTests.cs" />
+    <Compile Include="ImportNotification\Validate\TransitStateValidatorTests.cs" />
+    <Compile Include="ImportNotification\Validate\TransitStateCollectionTests.cs" />
+    <Compile Include="ImportNotification\Validate\WasteOperationValidatorTests.cs" />
+    <Compile Include="ImportNotification\Validate\StateOfExportValidatorTests.cs" />
+    <Compile Include="ImportNotification\Validate\WasteTypeValidatorTests.cs" />
+    <Compile Include="Mappings\AddressMapTests.cs" />
+    <Compile Include="Helpers\BusinessInfoDataEqualityComparer.cs" />
+    <Compile Include="Mappings\BusinessInfoMapTests.cs" />
+    <Compile Include="Mappings\BusinessMapTests.cs" />
+    <Compile Include="Helpers\ContactDataEqualityComparer.cs" />
+    <Compile Include="Mappings\ContactMapTests.cs" />
+    <Compile Include="Mappings\ExporterMapTests.cs" />
+    <Compile Include="Mappings\BusinessTestBase.cs" />
+    <Compile Include="Mappings\WasteAdditionalInformationMapTests.cs" />
+    <Compile Include="Mappings\WasteCodeMapTests.cs" />
+    <Compile Include="MovementReceipt\GetMovementDateByMovementIdHandlerTests.cs" />
+    <Compile Include="Movement\DoesQuantityReceivedExceedToleranceHandlerTests.cs" />
+    <Compile Include="Movement\GetSubmittedMovementsHandlerTests.cs" />
+    <Compile Include="Movement\GetNotificationIdByMovementIdHandlerTests.cs" />
+    <Compile Include="Movement\RecordMovementStatusChangeTest.cs" />
+    <Compile Include="NotificationMovements\Capture\CreateMovementInternalHandlerTests.cs" />
+    <Compile Include="NotificationMovements\Capture\EnsureMovementNumberAvailableHandlerTests.cs" />
+    <Compile Include="Notification\NotificationCreatedEventHandlerTests.cs" />
+    <Compile Include="Notification\SubmitNotificationHandlerTests.cs" />
+    <Compile Include="Organisations\GetOrganisationDetailsByUserHandlerTests.cs" />
+    <Compile Include="Organisations\UpdateOrganisationDetailsHandlerTests.cs" />
+    <Compile Include="RequestAuthorizationAttributeTests.cs" />
+    <Compile Include="WasteRecovery\DeleteWasteDisposalWhenRecoverablePercentageChangedToMaxTests.cs" />
+    <Compile Include="WasteRecovery\GetEstimatedValueHandlerTests.cs" />
+    <Compile Include="WasteRecovery\GetRecoverablePercentageHandlerTests.cs" />
+    <Compile Include="WasteRecovery\GetRecoveryCostHandlerTests.cs" />
+    <Compile Include="WasteRecovery\GetWasteRecoveryProviderHandlerTests.cs" />
+    <Compile Include="WasteRecovery\DeleteWasteRecoveryWhenProviderChangesToImporterTests.cs" />
+    <Compile Include="WasteRecovery\SaveWasteRecoveryHandlerTests.cs" />
+    <Compile Include="WasteRecovery\SetWasteRecoveryProviderHandlerTests.cs" />
+    <Compile Include="TestBase.cs" />
+    <Compile Include="TestBaseTests.cs" />
+    <Compile Include="TestIwsContext.cs" />
+    <Compile Include="TestUserContext.cs" />
+    <Compile Include="CustomsOffice\GetCustomsOfficeRequiredStatusByNotificationIdHandlerTests.cs" />
+    <Compile Include="CustomsOffice\GetExitCustomsOfficeAddDataByNotificationIdTests.cs" />
+    <Compile Include="CustomsOffice\SetExitCustomsOfficeForNotificationByIdHandlerTests.cs" />
+    <Compile Include="Helpers\SharedObjectFactory.cs" />
+    <Compile Include="Helpers\TestDbAsyncEnumerable.cs" />
+    <Compile Include="Helpers\TestDbAsyncEnumerator.cs" />
+    <Compile Include="Helpers\TestDbAsyncQueryProvider.cs" />
+    <Compile Include="Admin\SearchExportNotificationsHandlerTests.cs" />
+    <Compile Include="Organisations\FindMatchingCompaniesHandlerTests.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TransitState\RemoveTransitStateForNotificationHandlerTests.cs" />
+    <Compile Include="TransportRoute\GetCompetentAuthoritiesAndEntryOrExitPointsByCountryIdHandlerTests.cs" />
+    <Compile Include="WasteCodes\BaseSetCodesTests.cs" />
+    <Compile Include="WasteCodes\GetWasteCodeLookupAndNotificationDataByTypesHandlerTests.cs" />
+    <Compile Include="WasteCodes\SetBaselOecdCodeForNotificationHandlerTests.cs" />
+    <Compile Include="WasteCodes\WasteCodeHandlerTests.cs" />
+    <Compile Include="WorkingDayCalculatorTests.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\EA.Iws.Core\EA.Iws.Core.csproj">
+      <Project>{dd2a73a4-a652-4ecc-87ee-24239ce45ad4}</Project>
+      <Name>EA.Iws.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EA.Iws.DataAccess\EA.Iws.DataAccess.csproj">
+      <Project>{46300373-D7AE-40AA-BF96-3FC3889825A4}</Project>
+      <Name>EA.Iws.DataAccess</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EA.Iws.Domain\EA.Iws.Domain.csproj">
+      <Project>{a987fff6-5386-419e-af0a-e6c74e3323cf}</Project>
+      <Name>EA.Iws.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EA.Iws.RequestHandlers\EA.Iws.RequestHandlers.csproj">
+      <Project>{575a5355-b008-422a-b9b6-535ca2b5cc26}</Project>
+      <Name>EA.Iws.RequestHandlers</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EA.Iws.Requests\EA.Iws.Requests.csproj">
+      <Project>{87fbb5cc-a732-4363-a158-39dbf3707407}</Project>
+      <Name>EA.Iws.Requests</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EA.Iws.TestHelpers\EA.Iws.TestHelpers.csproj">
+      <Project>{dec3021a-32cf-4b84-a59c-77503378ed67}</Project>
+      <Name>EA.Iws.TestHelpers</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="AddressBook\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\StyleCop.Error.MSBuild.1.0.0\build\StyleCop.Error.MSBuild.Targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\StyleCop.Error.MSBuild.1.0.0\build\StyleCop.Error.MSBuild.Targets'))" />
+    <Error Condition="!Exists('..\packages\xunit.runner.visualstudio.2.1.0\build\net20\xunit.runner.visualstudio.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\xunit.runner.visualstudio.2.1.0\build\net20\xunit.runner.visualstudio.props'))" />
+    <Error Condition="!Exists('..\packages\StyleCop.MSBuild.4.7.50.0\build\StyleCop.MSBuild.Targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\StyleCop.MSBuild.4.7.50.0\build\StyleCop.MSBuild.Targets'))" />
+  </Target>
+  <Import Project="..\packages\StyleCop.Error.MSBuild.1.0.0\build\StyleCop.Error.MSBuild.Targets" Condition="Exists('..\packages\StyleCop.Error.MSBuild.1.0.0\build\StyleCop.Error.MSBuild.Targets')" />
+  <Import Project="..\packages\StyleCop.MSBuild.4.7.50.0\build\StyleCop.MSBuild.Targets" Condition="Exists('..\packages\StyleCop.MSBuild.4.7.50.0\build\StyleCop.MSBuild.Targets')" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

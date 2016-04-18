@@ -1,0 +1,33 @@
+﻿@using EA.Iws.Web.Areas.NotificationApplication.Views.StateOfImport
+@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.StateOfImport.StateOfImportViewModel
+@{
+    ViewBag.Title = StateOfImportResources.Title;
+}
+<h1 class="heading-large">@StateOfImportResources.Header</h1>
+
+@using (Html.BeginForm())
+{
+    @Html.Gds().ValidationSummary()
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(m => m.NotificationCompetentAuthority)
+
+    if (!Model.ShowNextSection)
+    {
+        @Html.Partial("_CountryOnly", Model)
+    }
+    else
+    {
+        @Html.HiddenFor(m => m.ShowNextSection)
+
+        @Html.Partial("_AllDetails", Model)
+    }
+
+    for (int i = 0; i < Model.TransitStateCountryIds.Count; i++)
+    {
+        @Html.HiddenFor(m => m.TransitStateCountryIds[i])
+    }
+    if (Model.StateOfExportCountryId.HasValue)
+    {
+        @Html.HiddenFor(m => m.StateOfExportCountryId)
+    }
+}

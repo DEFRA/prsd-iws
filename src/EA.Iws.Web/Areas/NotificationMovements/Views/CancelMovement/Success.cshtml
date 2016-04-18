@@ -1,0 +1,21 @@
+﻿@model EA.Iws.Web.Areas.NotificationMovements.ViewModels.CancelMovement.SuccessViewModel
+@{
+    Layout = "~/Areas/NotificationMovements/Views/Shared/_SummaryLayout.cshtml";
+    ViewBag.Title = "Prenotification cancellation confirmed";
+}
+
+<header class="hgroup">
+    <h1 class="heading-large">@Model.HeadingText</h1>
+</header>
+
+<div class="form-group">
+    @Html.ActionLink("Continue", "Index", "Options", new { id = Model.NotificationId, area = "NotificationApplication" }, new { @class = "button" })
+</div>
+
+<div class="form-group">
+    @Html.ActionLink("Return to notification options", 
+        "Index", 
+        "Options", 
+        new { area = "NotificationApplication", id = Model.NotificationId }, 
+        null)
+</div>

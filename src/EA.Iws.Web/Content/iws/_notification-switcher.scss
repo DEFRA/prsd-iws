@@ -1,0 +1,69 @@
+﻿.top-content-box>#top-content-box-container>.noti-switch{
+    float: left;
+    span{
+        display: inline-block;
+        font-weight: bold;
+        margin-right: 7px;
+    }
+    div{
+        float: right;
+        margin-bottom: -5px;
+        margin-right: -12px;
+        .noti-number{
+            background: #2B8CC4;
+            border: 1px solid #005EA5;
+            color: $white;
+            margin-right: 15px;
+            
+            &:focus{
+                background: $white;
+                outline: none;
+                border: 1px solid $grey-2;
+                color: $black;
+            }
+        }
+        i{
+            display: inline-block;
+            color: #6F777B;
+            margin: 10px 6px 0px -10px;
+        }
+        .switch{
+            background: #DEE0E2;
+            border: 1px solid #BFC1C3;
+            color: #6F777B;
+            cursor: pointer;
+
+            &:hover{
+                background: #BFC1C3;
+                color: #fff;
+                cursor: pointer;
+            }
+        } 
+        .noti-number,
+        .switch{
+            padding: .3em .6em .2em .6em;
+            font-size: 20px;
+            -moz-box-shadow: 0px 0px 0px rgba(0,0,0,0);
+            -webkit-box-shadow: 0px 0px 0px rgba(0,0,0,0);
+            box-shadow: 0px 0px 0px rgba(0,0,0,0);
+
+            filter: progid:DXImageTransform.Microsoft.Blur(PixelRadius=0,MakeShadow=true,ShadowOpacity=0.1);
+            -ms-filter: "progid:DXImageTransform.Microsoft.Blur(PixelRadius=0,MakeShadow=true,ShadowOpacity=0.1)";
+            zoom: 1;
+        }
+    }
+    &:after {
+     visibility: hidden;
+     display: block;
+     font-size: 0;
+     content: " ";
+     clear: both;
+     height: 0;
+     }
+
+}
+
+.top-content-box{
+    border-bottom: 1px solid $border-colour;
+    margin-bottom: 1px;
+}

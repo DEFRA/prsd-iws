@@ -1,0 +1,15 @@
+﻿@{
+    ViewBag.Title = "Pending approval";
+}
+
+<h2 class="heading-large">IWS registration</h2>
+
+<p>Thank you for registering. Your request is now pending; we will email you once your access has been approved.</p>
+
+@using (Html.BeginForm("LogOff", "Account", routeValues: new { area = string.Empty }, method: FormMethod.Post, htmlAttributes: new { id = "logoutForm" }))
+{
+    @Html.AntiForgeryToken()
+    <button class="button" type="submit">Sign out</button>
+}
+
+

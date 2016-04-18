@@ -1,0 +1,34 @@
+﻿/* Global footer */
+
+$footer-grey: #454a4c;
+
+#footer {
+       
+    .footer-agencies {
+        color: $footer-grey;
+
+        @include media(tablet) {
+            padding: 0px 15px 60px 15px;
+        }
+
+        @include media(mobile) {
+            padding: 0px 15px 60px 15px;
+        }
+
+        @include media(desktop) {
+            width: 100%;
+            padding: 0px 30px 0px 30px;
+        }
+    }
+
+    hr {
+        clear: both;
+        margin: 0 15px 30px;
+        border: 1px solid $border-colour;
+        border-width: 1px 0 0 0;
+
+        @include media(tablet) {
+            margin-bottom: 0;
+        }
+    }
+}

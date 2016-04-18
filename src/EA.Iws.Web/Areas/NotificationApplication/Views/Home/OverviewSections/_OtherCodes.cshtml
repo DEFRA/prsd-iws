@@ -1,0 +1,63 @@
+﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.NotificationApplication.WasteCodeOverviewViewModel
+
+<div class="overview-block">
+    @if (Model.AreOtherCodesCompleted)
+    {
+        <div class="overview-block-element grid-row">
+            <div class="column-third">Other code:</div>
+            <div class="column-two-thirds">
+                @if (Model.OtherCodes.First().IsNotApplicable)
+                {
+                    <text>Not applicable</text>
+                }
+                else
+                {
+                    <span>@string.Join(", ", Model.OtherCodes.Select(c => c.CustomCode).ToList())</span>
+                }
+            </div>
+        </div>
+        <div class="overview-block-element grid-row">
+            <div class="column-third">National code in country of export:</div>
+            <div class="column-two-thirds">
+                @if (Model.NationExportCode.First().IsNotApplicable)
+                {
+                    <text>Not applicable</text>
+                }
+                else
+                {
+                    <span>@string.Join(", ", Model.NationExportCode.Select(c => c.CustomCode).ToList())</span>
+                }
+            </div>
+        </div>
+        <div class="overview-block-element grid-row">
+            <div class="column-third">National code in country of import:</div>
+            <div class="column-two-thirds">
+                @if (Model.NationImportCode.First().IsNotApplicable)
+                {
+                    <text>Not applicable</text>
+                }
+                else
+                {
+                    <span>@string.Join(", ", Model.NationImportCode.Select(c => c.CustomCode).ToList())</span>
+                }
+            </div>
+        </div>
+        <div class="overview-block-element grid-row">
+            <div class="column-third">Customs code(s):</div>
+            <div class="column-two-thirds">
+                @if (Model.CustomCodes.First().IsNotApplicable)
+                {
+                    <text>Not applicable</text>
+                }
+                else
+                {
+                    <span>@string.Join(", ", Model.CustomCodes.Select(c => c.CustomCode).ToList())</span>
+                }
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="overview-block-element">@ViewBag.SectionIncompleteText</div>
+    }
+</div>

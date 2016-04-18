@@ -1,0 +1,21 @@
+﻿@using EA.Iws.Web.Views.CopyFromNotification
+@{
+    ViewBag.Title = ResultResources.Title;
+}
+
+<div class="grid-row">
+    <section class="column-two-thirds">
+        <header class="hgroup ">
+            <h1 class="heading-large">@ResultResources.Header</h1>
+            <p>@ResultResources.HeaderDescription</p>
+        </header>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            <div class="form-group">
+                <button class="button" type="submit">@Constants.ContinueButtonText</button>
+            </div>
+        }
+    </section>
+</div>

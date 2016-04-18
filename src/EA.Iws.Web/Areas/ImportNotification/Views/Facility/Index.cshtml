@@ -1,0 +1,45 @@
+﻿@using Resource = EA.Iws.Web.Areas.ImportNotification.Views.Facility.IndexResources
+@model EA.Iws.Web.Areas.ImportNotification.ViewModels.Facility.MultipleFacilitiesViewModel
+
+@{
+    ViewBag.Title = Resource.TabTitle;
+    var addLinkText = string.Empty;
+}
+
+<h1 class="heading-large">@string.Format(Resource.Title, Model.NotificationType.ToString().ToLower())</h1>
+
+@if (Model.Facilities.Any())
+{
+    using (Html.BeginForm())
+    {
+        @Html.Gds().ValidationSummary()
+        @Html.HiddenFor(m => m.NotificationId)
+        @Html.HiddenFor(m => m.NotificationType)
+        
+        <div>
+            @Html.Partial("_FacilityTable", Model)
+        </div>
+
+        addLinkText = string.Format(Resource.AddAnotherLink, Model.NotificationType.ToString().ToLower());
+        <div class="form-group">
+            @Html.ActionLink(addLinkText, "Add", "Facility")
+        </div>
+
+        <button class="button" type="submit">@Constants.ContinueButtonText</button>
+    }
+}
+else
+{
+    <div class="form-group">
+        <h2 class="heading-small">@Resource.NoFacilitiesText</h2>
+    </div>
+
+    addLinkText = string.Format(Resource.AddMoreButton, Model.NotificationType.ToString().ToLower());
+    <div class="form-group">
+        @Html.ActionLink(addLinkText, "Add", "Facility")
+    </div>
+
+    <div class="form-group">
+        @Html.ActionLink(Constants.ContinueOnlyButtonText, "Index", "Shipment", null, new { @class = "button" })
+    </div>
+}

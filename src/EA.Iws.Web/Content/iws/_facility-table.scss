@@ -1,0 +1,20 @@
+﻿.facility-header {
+    display: block;
+    border-top: 1px solid $border-colour;
+    border-bottom: 1px solid $border-colour;
+    padding: $gutter-half 7px;
+    cursor: pointer;
+    margin-top: -1px;
+
+    a{
+        font-weight: bold;
+    }
+}
+
+.form-control-full {
+    width: 100%;
+}
+
+.right-float {
+    float: right;
+}

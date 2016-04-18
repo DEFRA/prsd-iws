@@ -1,0 +1,112 @@
+﻿@using EA.Iws.Core.ImportNotificationAssessment
+@using EA.Iws.Core.Notification
+@using EA.Iws.Core.Shared
+
+@model EA.Iws.Web.Areas.Admin.ViewModels.Menu.ImportNavigationViewModel
+
+@{
+    var id = Model.Details.ImportNotificationId;
+}
+
+@helper GetClassForSection(ImportNavigationSection section, string className)
+{
+    @(Model.ActiveSection == section ? className : string.Empty)
+}
+
+<div id="accordion" class="accordion-import">
+    <p class="bold-medium">&nbsp;@Model.Details.NotificationNumber</p>
+    <ul>
+        <li class="@GetClassForSection(ImportNavigationSection.Notification, "active")">
+            <h3 class="@GetClassForSection(ImportNavigationSection.Notification, "current")">
+                <span></span>
+                Import Notification
+            </h3>
+            <ul>
+                <li>@Html.ActionLink("Overview", "Index", "Home", new { area = "ImportNotification", id }, null)</li>
+                @if (Model.ActiveSection == ImportNavigationSection.Notification && Model.ShowImportSections)
+                {
+                    if (Model.Details.NotificationType != NotificationType.Disposal)
+                    {
+                        <li>@Html.ActionLink("Pre-consent", "Index", "Preconsented", new { area = "ImportNotification", id }, null)</li>
+                    }
+                    <li>@Html.ActionLink("Exporter notifier", "Index", "Exporter", new { area = "ImportNotification", id }, null)</li>
+                    <li>@Html.ActionLink("Importer consignee", "Index", "Importer", new { area = "ImportNotification", id }, null)</li>
+                    <li>@Html.ActionLink("Waste generator producer", "Index", "Producer", new { area = "ImportNotification", id }, null)</li>
+                    <li>@Html.ActionLink("Facility", "Index", "Facility", new { area = "ImportNotification", id }, null)</li>
+                    <li>@Html.ActionLink("Intended shipments", "Index", "Shipment", new { area = "ImportNotification", id }, null)</li>
+                    <li>@Html.ActionLink("Waste operation", "Index", "WasteOperation", new { area = "ImportNotification", id }, null)</li>
+                    <li>@Html.ActionLink("Waste type and codes", "Index", "WasteType", new { area = "ImportNotification", id }, null)</li>
+                    <li>@Html.ActionLink("Transport route export", "Index", "StateOfExport", new { area = "ImportNotification", id }, null)</li>
+                    <li>@Html.ActionLink("Transport route import", "Index", "StateOfImport", new { area = "ImportNotification", id }, null)</li>
+                    <li>@Html.ActionLink("Transport route transits", "Index", "TransitState", new { area = "ImportNotification", id }, null)</li>
+                }
+            </ul>
+        </li>
+
+        <li class="@GetClassForSection(ImportNavigationSection.Assessment, "active")">
+            <h3 class="@GetClassForSection(ImportNavigationSection.Assessment, "current")">
+                <span></span>
+                Assessment
+            </h3>
+            <ul>
+                <li>@Html.ActionLink("Key dates", "Index", "KeyDates", new { area = "AdminImportAssessment", id }, null)</li>
+                @if (Model.ShowAssessmentDecision)
+                {
+                    <li>@Html.ActionLink("Assessment decision", "Index", "Decision", new { area = "AdminImportAssessment", id }, null)</li>
+                }
+                @if (Model.Details.CompetentAuthority == UKCompetentAuthority.England)
+                {
+                    <li>@Html.ActionLink("Assign an area", "Index", "AssignArea", new { area = "AdminImportAssessment", id}, null)</li>
+                }
+                <li>@Html.ActionLink("FG dates", "ReceivedDate", "FinancialGuaranteeDates", new { area = "AdminImportAssessment", id }, null)</li>
+                <li>@Html.ActionLink("FG decision", "Index", "FinancialGuaranteeDecision", new { area = "AdminImportAssessment", id }, null)</li>
+            </ul>
+        </li>
+
+        <li class="@GetClassForSection(ImportNavigationSection.Finance, "active")">
+            <h3 class="@GetClassForSection(ImportNavigationSection.Finance, "current")">
+                <span></span>
+                Finance
+            </h3>
+            <ul>
+                <li>@Html.ActionLink("Account management", "Index", "AccountManagement", new { area = "AdminImportAssessment", id }, null)</li>
+                <li>@Html.ActionLink("Payment details", "Index", "PaymentDetails", new { area = "AdminImportAssessment", id }, null)</li>
+            </ul>
+        </li>
+
+        @if (Model.Details.Status == ImportNotificationStatus.Consented || Model.Details.Status == ImportNotificationStatus.ConsentWithdrawn)
+        {
+            <li class="@GetClassForSection(ImportNavigationSection.Shipments, "active")">
+                <h3 class="@GetClassForSection(ImportNavigationSection.Shipments, "current")">
+                    <span></span>
+                    Shipments
+                </h3>
+                <ul>
+                    <li>@Html.ActionLink("Shipment summary", "Index", "Home", new { area = "AdminImportNotificationMovements", id }, null)</li>
+                    <li>@Html.ActionLink("Record a shipment", "Index", "Capture", new { area = "AdminImportNotificationMovements", id }, null)</li>
+                    <li>@Html.ActionLink("View shipments table", "Index", "Shipments", new { area = "AdminImportNotificationMovements", id }, null)</li>
+                </ul>
+            </li>
+        }
+
+        <li class="">
+            <h3 class="">
+                <span></span>
+                Reporting
+            </h3>
+            @Html.Partial("~/Areas/Admin/Views/Menu/_ReportingLinks.cshtml")
+        </li>
+
+        @if (Model.AdminLinksModel.ShowAddNewEntryOrExitPointLink
+            || Model.AdminLinksModel.ShowApproveNewInternalUserLink)
+        {
+            <li class="">
+                <h3 class="">
+                    <span></span>
+                    Account services
+                </h3>
+                @Html.Partial("~/Areas/Admin/Views/Menu/_AdminLinks.cshtml", Model.AdminLinksModel)
+            </li>
+        }
+    </ul>
+</div>

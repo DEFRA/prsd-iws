@@ -1,0 +1,30 @@
+﻿@using EA.Iws.Web.Areas.NotificationApplication.Views.TransportRoute
+@model EA.Iws.Core.StateOfImport.StateOfImportData
+           
+<h2 class="heading-medium">@StateOfImportSummaryResources.Header</h2>
+@if (Model == null)
+{
+    <p>@StateOfImportSummaryResources.NoStateOfImport</p>
+    <p>@Html.ActionLink("Add state of import", "Index", "StateOfImport", new { id = ViewData["Id"] }, null)</p>
+}
+else
+{
+    <table>
+        <thead>
+            <tr>
+                <th>@StateOfImportSummaryResources.ThCountry</th>
+                <th>@StateOfImportSummaryResources.ThCA</th>
+                <th>@StateOfImportSummaryResources.ThPort</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>@Html.DisplayFor(m => m.Country.Name)</td>
+                <td>@Html.DisplayFor(m => m.CompetentAuthority.Code) - @Html.DisplayFor(m => m.CompetentAuthority.Name)</td>
+                <td>@Html.DisplayFor(m => m.EntryPoint.Name)</td>
+                <th>@Html.ActionLink(StateOfImportSummaryResources.Edit, "Index", "StateOfImport", new { id = ViewData["Id"], backToOverview = ViewData["BackToOverview"] }, null)</th>
+            </tr>
+        </tbody>
+    </table>
+}

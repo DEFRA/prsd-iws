@@ -1,0 +1,44 @@
+﻿@model EA.Iws.Web.Areas.ExportMovement.ViewModels.Reject.RejectViewModel
+@using Resource = EA.Iws.Web.Areas.ExportMovement.Views.Reject.IndexResources
+
+@{
+    ViewBag.Title = Resource.Title;
+}
+
+<h1 class="heading-large">@Resource.MainHeading</h1>
+
+@using (Html.BeginForm("Index", "Reject", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.Gds().ValidationSummary()
+    @Html.HiddenFor(m => m.NotificationId)
+
+    <div class="form-group @Html.Gds().FormGroupClass(m => m.RejectionDate) @Html.Gds().FormGroupClass(m => m.RejectionDate.Day) @Html.Gds().FormGroupClass(m => m.RejectionDate.Month) @Html.Gds().FormGroupClass(m => m.RejectionDate.Year)">
+        @Html.LabelFor(m => m.RejectionDate, new { @class = "heading-small" })
+        @Html.EditorFor(m => m.RejectionDate)
+    </div>
+
+    <div class="form-group @Html.Gds().FormGroupClass(m => m.RejectionReason)">
+        @Html.LabelFor(m => m.RejectionReason, new { @class = "heading-small" })
+        @Html.Gds().HintParagraph(Resource.RejectionReasonHint)
+        @Html.Gds().ValidationMessageFor(m => m.RejectionReason)
+        @Html.TextAreaFor(m => m.RejectionReason, new { MaxLength = 200, style = "width: 100%; height: 110px", title = "Rejection reason" })
+    </div>
+
+    <div class="form-group @Html.Gds().FormGroupClass(m => m.File)">
+        @Html.LabelFor(m => m.File, new { @class = "heading-small" })
+        <br />
+        @Html.Gds().ValidationMessageFor(m => m.File)
+        @Html.Gds().TextBoxFor(m => m.File, new { type = "file" })
+    </div>
+
+    <div class="form-group">
+        <button class="button" type="submit">@Constants.ContinueButtonText</button>
+    </div>
+}
+
+<div class="form-group">
+    @Html.ActionLink("Go to notification options", "Index", "Options",
+        new { id = Model.NotificationId, area = "NotificationApplication" },
+        null)
+</div>

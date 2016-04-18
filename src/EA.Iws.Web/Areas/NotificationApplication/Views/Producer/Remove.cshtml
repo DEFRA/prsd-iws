@@ -1,0 +1,32 @@
+﻿@using EA.Iws.Web.Areas.NotificationApplication.Views.Producer
+@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.Producer.RemoveProducerViewModel
+@{
+    ViewBag.Title = RemoveProducerResources.Title;
+}
+
+<h1 class="heading-large">@RemoveProducerResources.Header</h1>
+
+@if (string.IsNullOrWhiteSpace(ViewBag.Error))
+{
+    using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.Gds().ValidationSummary()
+        @Html.HiddenFor(m => m.NotificationId)
+        @Html.HiddenFor(m => m.ProducerId)
+
+        <p>@string.Format(RemoveProducerResources.Description, Model.ProducerName)</p>
+
+        <button class="button" type="submit">@Constants.ContinueButtonText</button>
+    }
+}
+else
+{
+    <p>@ViewBag.Error</p>
+    <p>
+        @Html.ActionLink(RemoveProducerResources.ChangeSiteOfExport, "SiteOfExport", "Producer",
+        new { id = Model.NotificationId, backToList = true, backToOverview = ViewBag.BackToOverview }, new { @class = "button" })
+    </p>
+}
+
+<p>@Html.ActionLink(RemoveProducerResources.BackToProducers, "List", "Producer", new { id = Model.NotificationId, backToOverview = ViewBag.BackToOverview }, null)</p>

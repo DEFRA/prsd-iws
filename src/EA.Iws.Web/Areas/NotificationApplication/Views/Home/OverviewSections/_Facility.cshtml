@@ -1,0 +1,17 @@
+﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.NotificationApplication.OrganisationsInvolvedViewModel
+
+<div class="overview-block">
+    @if (Model.IsFacilityCompleted)
+    {
+        for (int i = 0; i < Model.Facilities.Count; i++)
+        {
+            <div class="overview-block-element">
+                @Html.DisplayFor(m => m.Facilities[i].Business.Name)
+            </div>
+        }
+    }
+    else
+    {
+        <div class="overview-block-element">@ViewBag.SectionIncompleteText</div>
+    }
+</div>

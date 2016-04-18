@@ -1,0 +1,44 @@
+﻿@model EA.Iws.Web.Areas.AdminExportAssessment.ViewModels.ChangeNotificationOwner.ConfirmViewModel
+@using Resource = EA.Iws.Web.Areas.AdminExportAssessment.Views.ChangeNotificationOwner.ConfirmResources
+
+@{
+    ViewBag.Title = @Resource.Title;
+}
+
+<div>
+    <h1 class="heading-large">@Html.Raw(string.Format(Resource.Title, Model.NotificationNumber.Replace(" ", "&nbsp;")))</h1>
+
+    <h2 class="heading-medium">@Resource.SubTitleNewOwner</h2>
+    <div class="form-group">
+        @Model.NewUser.FullName <br/>
+        @Model.NewUser.Email <br/>
+        @Model.NewUser.OrganisationName <br/>
+    </div>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.Gds().ValidationSummary()
+        @Html.HiddenFor(m => m.NotificationId)
+        @Html.HiddenFor(m => m.NewUser.UserId)
+        @Html.HiddenFor(m => m.NewUser.Email)
+        @Html.HiddenFor(m => m.NewUser.FirstName)
+        @Html.HiddenFor(m => m.NewUser.LastName)
+        @Html.HiddenFor(m => m.NewUser.OrganisationName)
+        @Html.HiddenFor(m => m.NewUser.PhoneNumber)
+        @Html.HiddenFor(m => m.NotificationNumber)
+
+        <div class="form-group">
+            <button class="button" type="submit">@Constants.ContinueOnlyButtonText</button>
+        </div>
+    }
+
+    <div class="form-group">
+        @Html.ActionLink(Resource.CancelButtonText, "Index", "Overview", new { id = Model.NotificationId, area = "AdminExportAssessment" })
+    </div>
+
+</div>
+
+@section menu {
+    @Html.Action("ExportNavigation", "Menu", new { area = "Admin", section = ExportNavigationSection.ChangeOwner })
+}

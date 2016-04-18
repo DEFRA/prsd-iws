@@ -1,0 +1,58 @@
+﻿@using EA.Iws.Web.Areas.AddressBook.Views
+@using EA.Iws.Web.Areas.NotificationApplication.Views.Importer
+@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.Importer.ImporterViewModel
+@{
+    ViewBag.Title = ImporterResources.Title;
+
+    var message = ImporterResources.Message;
+
+    ViewBag.SoleTraderRegistrationNumber = message;
+    ViewBag.PartnershipRegistrationNumber = message;
+    ViewBag.CompanyRegistrationNumber = message;
+    ViewBag.SoleTraderRegistrationNumber = message;
+    ViewBag.OtherRegistrationNumber = message;
+    ViewBag.NonJavascriptMessage = message;
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.Gds().ValidationSummary()
+    @Html.HiddenFor(m => m.NotificationId)
+
+    <header class="hgroup">
+        <h1 class="heading-large">@ImporterResources.Header</h1>
+    </header>
+
+    <fieldset>
+        <legend class="visuallyhidden">@ImporterResources.Header</legend>
+        @Html.EditorFor(m => m.Business)
+    </fieldset>
+
+    <h2 class="heading-medium">@ImporterResources.Address</h2>
+    <hr />
+    <span class="form-hint">@ImporterResources.AddressDescription</span>
+
+    <fieldset>
+        <legend class="visuallyhidden">@ImporterResources.Address</legend>
+        @Html.EditorFor(m => m.Address)
+    </fieldset>
+
+    <h2 class="heading-medium">@ImporterResources.Contact</h2>
+    <hr />
+    <span class="form-hint">@ImporterResources.ContactDescription</span>
+
+    <fieldset>
+        <legend class="visuallyhidden">@ImporterResources.Contact</legend>
+        @Html.EditorFor(m => m.Contact)
+    </fieldset>
+
+    <div class="form-group no-js-hidden">
+        <label class="block-label" for="addressBook">
+            @Html.CheckBoxFor(m => m.IsAddedToAddressBook, new { id = "addressBook" })
+            @AddressBookResources.AddToAddressBook
+        </label>
+    </div>
+
+    <button class="button" type="submit">@Constants.ContinueButtonText</button>
+}

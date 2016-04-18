@@ -1,0 +1,120 @@
+﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.Annex.AnnexViewModel
+@using Resource = EA.Iws.Web.Areas.NotificationApplication.Views.Annex.IndexResources
+
+<p>@Resource.Paragraph1</p>
+
+<h2 class="heading-small">@Resource.Subtitle</h2>
+
+<ol class="list list-number">
+    <li>
+        @Resource.FirstListItemA
+        @Html.ActionLink(@Resource.PackLinkText, "GenerateNotificationDocument", "Home", new { id = Model.NotificationId, area = "NotificationApplication" },
+                new { data_track = "link", data_category = "Export notification", data_action = "Download" }) 
+        @Resource.FirstListItemB
+    </li>
+    <li>
+        @Resource.SecondListItem
+    </li>
+</ol>
+
+@using (Html.BeginForm("Index", "Annex", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.Gds().ValidationSummary()
+
+    @Html.HiddenFor(m => m.NotificationId)
+    @Html.HiddenFor(m => m.TechnologyEmployedStatus.IsRequired)
+    @Html.HiddenFor(m => m.TechnologyEmployedStatus.FileId)
+    @Html.HiddenFor(m => m.WasteCompositionStatus.IsRequired)
+    @Html.HiddenFor(m => m.WasteCompositionStatus.FileId)
+    @Html.HiddenFor(m => m.ProcessOfGenerationStatus.IsRequired)
+    @Html.HiddenFor(m => m.ProcessOfGenerationStatus.FileId)
+
+    <table class="form-group">
+        <thead>
+            <tr>
+                <th>@Resource.AnnexNameColumnTitle</th>
+                <th>@Resource.AnnexColumnTitle</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model.ProcessOfGenerationStatus.IsRequired)
+            {
+                <tr>
+                    <td>@Html.LabelFor(m => m.ProcessOfGeneration, Resource.ProcessOfGeneration)</td>
+                    @if (Model.ProcessOfGenerationStatus.FileId.HasValue)
+                    {
+                        <td>
+                            @Html.ActionLink("View", "ViewAnnex", new { fileId = Model.ProcessOfGenerationStatus.FileId.Value })
+                            |
+                            <button type="submit" name="delete" value="@Model.ProcessOfGenerationStatus.FileId.Value" class="link-submit-xsmall">Delete</button>
+                        </td>
+                    }
+                    else
+                    {
+                        <td>
+                            @Html.Gds().TextBoxFor(m => m.ProcessOfGeneration, new { type = "file", @class = "form-control form-control-wide" })
+                        </td>
+                    }
+                </tr>
+            }
+            @if (Model.TechnologyEmployedStatus.IsRequired)
+            {
+                <tr>
+                    <td>@Html.LabelFor(m => m.TechnologyEmployed, Resource.TechnologyEmployed)</td>
+                    @if (Model.TechnologyEmployedStatus.FileId.HasValue)
+                    {
+                        <td>
+                            @Html.ActionLink("View", "ViewAnnex", new { fileId = Model.TechnologyEmployedStatus.FileId.Value })
+                            |
+                            <button type="submit" name="delete" value="@Model.TechnologyEmployedStatus.FileId.Value" class="link-submit-xsmall">Delete</button>
+                        </td>
+                    }
+                    else
+                    {
+                        <td>
+                            @Html.Gds().TextBoxFor(m => m.TechnologyEmployed, new { type = "file", @class = "form-control form-control-wide" })
+                        </td>
+                    }
+                </tr>
+            }
+            @if (Model.WasteCompositionStatus.IsRequired)
+            {
+                <tr>
+                    <td>@Html.LabelFor(m => m.Composition, Resource.CompositionOfWaste)</td>
+                    @if (Model.WasteCompositionStatus.FileId.HasValue)
+                    {
+                        <td>
+                            @Html.ActionLink("View", "ViewAnnex", new { fileId = Model.WasteCompositionStatus.FileId.Value })
+                            |
+                            <button type="submit" name="delete" value="@Model.WasteCompositionStatus.FileId.Value" class="link-submit-xsmall">Delete</button>
+                        </td>
+                    }
+                    else
+                    {
+                        <td>
+                            @Html.Gds().TextBoxFor(m => m.Composition, new { type = "file", @class = "form-control form-control-wide" })
+                        </td>
+                    }
+                </tr>
+            }
+        </tbody>
+
+    </table>
+
+    <div class="form-group">
+        @Resource.OptionsLinkPainTextA
+        @Html.ActionLink(@Resource.OptionsLinkText, "Index", "Options", new { id = Model.NotificationId, area = "NotificationApplication" }, null)
+        @Resource.OptionsLinkPainTextB
+    </div>
+
+
+    <div class="form-group">
+        <button class="button" type="submit">@Constants.ContinueButtonText</button>
+    
+        <p>@Html.ActionLink("Go to notification options", "Index", "Options", new { id = Model.NotificationId, area = "NotificationApplication" }, null)</p>
+
+        @Html.ActionLink(@Resource.DownloadPackLinkText, "GenerateNotificationDocument", "Home", new { id = Model.NotificationId, area = "NotificationApplication" },
+                new { data_track = "link", data_category = "Export notification", data_action = "Download" })
+    </div>
+}

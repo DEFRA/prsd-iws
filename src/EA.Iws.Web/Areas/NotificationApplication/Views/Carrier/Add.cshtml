@@ -1,0 +1,38 @@
+﻿@using EA.Iws.Web.Areas.AddressBook.Views
+@using EA.Iws.Web.Areas.NotificationApplication.Views.Carrier
+@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.Carrier.AddCarrierViewModel
+@{
+    ViewBag.Title = AddEditCarrierResources.Title;
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.Gds().ValidationSummary()
+    @Html.HiddenFor(m => m.NotificationId)
+
+    <header class="hgroup">
+        <h1 class="heading-large">@AddEditCarrierResources.Header</h1>
+    </header>
+
+    @Html.Partial("CarrierBusinessTypeViewModel", Model)
+
+    <h2 class="heading-medium">@AddEditCarrierResources.Address</h2>
+    <hr />
+
+    @Html.EditorFor(m => m.Address)
+
+    <h2 class="heading-medium">@AddEditCarrierResources.Contact</h2>
+    <hr />
+
+    @Html.EditorFor(m => m.Contact)
+
+    <div class="form-group no-js-hidden">
+        <label class="block-label" for="addressBook">
+            @Html.CheckBoxFor(m => m.IsAddedToAddressBook, new { id = "addressBook" })
+            @AddressBookResources.AddToAddressBook
+        </label>
+    </div>
+
+    <button class="button" type="submit">@Constants.ContinueButtonText</button>
+}

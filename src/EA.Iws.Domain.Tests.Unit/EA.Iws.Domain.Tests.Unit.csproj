@@ -1,0 +1,203 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\xunit.runner.visualstudio.2.1.0\build\net20\xunit.runner.visualstudio.props" Condition="Exists('..\packages\xunit.runner.visualstudio.2.1.0\build\net20\xunit.runner.visualstudio.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{AD40571C-6C48-4BF1-A459-1EF57ADE6406}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>EA.Iws.Domain.Tests.Unit</RootNamespace>
+    <AssemblyName>EA.Iws.Domain.Tests.Unit</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EA.Prsd.Core, Version=1.0.16077.1, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\EA.Prsd.Core.1.0.16077-develop1\lib\net452\EA.Prsd.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="FakeItEasy, Version=2.0.0.0, Culture=neutral, PublicKeyToken=eff28e2146d5fd2c, processorArchitecture=MSIL">
+      <HintPath>..\packages\FakeItEasy.2.0.0-beta010\lib\net40\FakeItEasy.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="xunit.abstractions, Version=2.0.0.0, Culture=neutral, PublicKeyToken=8d05b1bb7a6fdb6c, processorArchitecture=MSIL">
+      <HintPath>..\packages\xunit.abstractions.2.0.0\lib\net35\xunit.abstractions.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="xunit.assert, Version=2.1.0.3179, Culture=neutral, PublicKeyToken=8d05b1bb7a6fdb6c, processorArchitecture=MSIL">
+      <HintPath>..\packages\xunit.assert.2.1.0\lib\dotnet\xunit.assert.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="xunit.core, Version=2.1.0.3179, Culture=neutral, PublicKeyToken=8d05b1bb7a6fdb6c, processorArchitecture=MSIL">
+      <HintPath>..\packages\xunit.extensibility.core.2.1.0\lib\dotnet\xunit.core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="xunit.execution.desktop, Version=2.1.0.3179, Culture=neutral, PublicKeyToken=8d05b1bb7a6fdb6c, processorArchitecture=MSIL">
+      <HintPath>..\packages\xunit.extensibility.execution.2.1.0\lib\net45\xunit.execution.desktop.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AddressTests.cs" />
+    <Compile Include="BusinessTests.cs" />
+    <Compile Include="DaysRemainingCalculatorTests.cs" />
+    <Compile Include="EmailAddressTests.cs" />
+    <Compile Include="FinancialGuarantee\FinancialGuaranteeApproveTests.cs" />
+    <Compile Include="FinancialGuarantee\FinancialGuaranteeCompletedTests.cs" />
+    <Compile Include="FinancialGuarantee\FinancialGuaranteeReceivedTests.cs" />
+    <Compile Include="FinancialGuarantee\FinancialGuaranteeRefuseTests.cs" />
+    <Compile Include="FinancialGuarantee\FinancialGuaranteeReleaseTests.cs" />
+    <Compile Include="FinancialGuarantee\FinancialGuaranteeTests.cs" />
+    <Compile Include="FinancialGuarantee\FinancialGuaranteeUpdateDateTests.cs" />
+    <Compile Include="ImportNotificationAssessment\ImportNotificationAssessmentTests.cs" />
+    <Compile Include="ImportNotificationAssessment\Transactions\ImportNotificationTransactionCalculatorTests.cs" />
+    <Compile Include="ImportNotification\AddressBuilderTests.cs" />
+    <Compile Include="ImportNotification\ContactTests.cs" />
+    <Compile Include="ImportNotification\FacilityCollectionTests.cs" />
+    <Compile Include="ImportNotification\FacilityListTests.cs" />
+    <Compile Include="ImportNotification\FacilityTests.cs" />
+    <Compile Include="ImportNotification\OperationCodesListTests.cs" />
+    <Compile Include="ImportNotification\StateOfExportTests.cs" />
+    <Compile Include="ImportNotification\StateOfImportTests.cs" />
+    <Compile Include="ImportNotification\TransitStateListTests.cs" />
+    <Compile Include="ImportNotification\TransitStateTests.cs" />
+    <Compile Include="ImportNotification\TransportRouteTests.cs" />
+    <Compile Include="ImportNotification\WasteOperationTests.cs" />
+    <Compile Include="ImportNotification\ProducerTests.cs" />
+    <Compile Include="ImportNotification\ExporterTests.cs" />
+    <Compile Include="ImportNotification\ImporterTests.cs" />
+    <Compile Include="ImportNotification\ImportNotificationTests.cs" />
+    <Compile Include="ImportNotification\ShipmentTests.cs" />
+    <Compile Include="ImportNotification\WasteTypeTests.cs" />
+    <Compile Include="InternalUserTests.cs" />
+    <Compile Include="Movement\CertificateOfReceiptNameTests.cs" />
+    <Compile Include="Movement\CertificateOfRecoveryNameTests.cs" />
+    <Compile Include="Movement\GetOriginalDateTests.cs" />
+    <Compile Include="Movement\MovementDateHistoryTests.cs" />
+    <Compile Include="Movement\MovementDateTests.cs" />
+    <Compile Include="Movement\MovementDateValidatorTests.cs" />
+    <Compile Include="Movement\MovementDetailsTests.cs" />
+    <Compile Include="Movement\MovementFactoryTests.cs" />
+    <Compile Include="Movement\CapturedMovementFactoryTests.cs" />
+    <Compile Include="Movement\MovementInternalStatusTests.cs" />
+    <Compile Include="Movement\MovementNumberGeneratorTests.cs" />
+    <Compile Include="Movement\MovementNumberValidatorTests.cs" />
+    <Compile Include="Movement\MovementQuantityTests.cs" />
+    <Compile Include="Movement\MovementsDetailsFactoryTests.cs" />
+    <Compile Include="Movement\MovementStatusTests.cs" />
+    <Compile Include="Movement\MovementTests.cs" />
+    <Compile Include="Movement\NextAvailableMovementNumberGeneratorTests.cs" />
+    <Compile Include="Movement\NumberOfActiveLoadsTests.cs" />
+    <Compile Include="Movement\NumberOfMovementsTests.cs" />
+    <Compile Include="Movement\ShipmentQuantityUnitConverterTests.cs" />
+    <Compile Include="NotificationApplication\Annexes\RequiredAnnexesTests.cs" />
+    <Compile Include="NotificationApplication\CreateNotificationTests.cs" />
+    <Compile Include="NotificationApplication\CustomsOfficeTests.cs" />
+    <Compile Include="NotificationApplication\NotificationApplicationFactoryTests.cs" />
+    <Compile Include="NotificationApplication\NotificationApplicationTests.cs" />
+    <Compile Include="NotificationApplication\NotificationChargeCalculatorTests.cs" />
+    <Compile Include="NotificationApplication\NotificationCustomsOfficeTests.cs" />
+    <Compile Include="NotificationApplication\NotificationCarrierTests.cs" />
+    <Compile Include="NotificationApplication\NotificationFacilityTests.cs" />
+    <Compile Include="NotificationApplication\NotificationImporterTests.cs" />
+    <Compile Include="NotificationApplication\NotificationOperationCodesTests.cs" />
+    <Compile Include="NotificationApplication\NotificationPackagingTests.cs" />
+    <Compile Include="NotificationApplication\NotificationPhysicalCharacteristicsTests.cs" />
+    <Compile Include="NotificationApplication\NotificationProducerTests.cs" />
+    <Compile Include="NotificationApplication\NotificationReasonForExportTests.cs" />
+    <Compile Include="NotificationApplication\NotificationWasteRecoveryTests.cs" />
+    <Compile Include="NotificationApplication\NotificationShipmentTests.cs" />
+    <Compile Include="NotificationApplication\NotificationTechnologyEmployedTests.cs" />
+    <Compile Include="NotificationApplication\NotificationSpecialHandlingTests.cs" />
+    <Compile Include="NotificationApplication\NotificationTransitStateTests.cs" />
+    <Compile Include="NotificationApplication\NotificationTransportRouteTests.cs" />
+    <Compile Include="NotificationApplication\NotificationWasteCodeTests.cs" />
+    <Compile Include="NotificationApplication\NotificationWasteGenerationProcessTests.cs" />
+    <Compile Include="NotificationApplication\NotificationWasteTypeTests.cs" />
+    <Compile Include="NotificationAssessment\CompleteNotificationTests.cs" />
+    <Compile Include="NotificationAssessment\FinancialGuaranteeDecisionRequiredTests.cs" />
+    <Compile Include="NotificationAssessment\NotificationAssessmentEditableTests.cs" />
+    <Compile Include="NotificationAssessment\NotificationAssessmentStatusTests.cs" />
+    <Compile Include="NotificationAssessment\NotificationInterimTests.cs" />
+    <Compile Include="OrganisationTests.cs" />
+    <Compile Include="PhoneNumberTests.cs" />
+    <Compile Include="ProducerBusinessTests.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ShipmentQuantityTests.cs" />
+    <Compile Include="StateOfExportTests.cs" />
+    <Compile Include="TransportRoute\RequiredCustomsOfficesTests.cs" />
+    <Compile Include="UserTests.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\EA.Iws.Core\EA.Iws.Core.csproj">
+      <Project>{dd2a73a4-a652-4ecc-87ee-24239ce45ad4}</Project>
+      <Name>EA.Iws.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EA.Iws.Domain\EA.Iws.Domain.csproj">
+      <Project>{a987fff6-5386-419e-af0a-e6c74e3323cf}</Project>
+      <Name>EA.Iws.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EA.Iws.RequestHandlers\EA.Iws.RequestHandlers.csproj">
+      <Project>{575A5355-B008-422A-B9B6-535CA2B5CC26}</Project>
+      <Name>EA.Iws.RequestHandlers</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EA.Iws.TestHelpers\EA.Iws.TestHelpers.csproj">
+      <Project>{dec3021a-32cf-4b84-a59c-77503378ed67}</Project>
+      <Name>EA.Iws.TestHelpers</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\StyleCop.Error.MSBuild.1.0.0\build\StyleCop.Error.MSBuild.Targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\StyleCop.Error.MSBuild.1.0.0\build\StyleCop.Error.MSBuild.Targets'))" />
+    <Error Condition="!Exists('..\packages\xunit.runner.visualstudio.2.1.0\build\net20\xunit.runner.visualstudio.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\xunit.runner.visualstudio.2.1.0\build\net20\xunit.runner.visualstudio.props'))" />
+    <Error Condition="!Exists('..\packages\StyleCop.MSBuild.4.7.50.0\build\StyleCop.MSBuild.Targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\StyleCop.MSBuild.4.7.50.0\build\StyleCop.MSBuild.Targets'))" />
+  </Target>
+  <Import Project="..\packages\StyleCop.Error.MSBuild.1.0.0\build\StyleCop.Error.MSBuild.Targets" Condition="Exists('..\packages\StyleCop.Error.MSBuild.1.0.0\build\StyleCop.Error.MSBuild.Targets')" />
+  <Import Project="..\packages\StyleCop.MSBuild.4.7.50.0\build\StyleCop.MSBuild.Targets" Condition="Exists('..\packages\StyleCop.MSBuild.4.7.50.0\build\StyleCop.MSBuild.Targets')" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

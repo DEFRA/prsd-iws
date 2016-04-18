@@ -1,0 +1,40 @@
+﻿@using EA.Iws.Web.Areas.NotificationApplication.Views.TransitState
+@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.TransitState.TransitStateViewModel
+
+<div class="form-group @Html.Gds().FormGroupClass(m => m.CountryId)">
+    @Html.Gds().LabelFor(m => m.CountryId, new { @class = "form-label-bold" })
+    @Html.Gds().HintParagraph(TransitStateResources.TransitHint)
+    @Html.HiddenFor(m => m.CountryId)
+    @Html.Gds().DropDownListFor(m => m.CountryId, Model.Countries, new { disabled = "disabled" })
+    <button class="link-submit force-newline" type="submit" value="changeCountry" name="submit">@TransitStateResources.ChangeCountry</button>
+</div>
+
+<div class="form-group @Html.Gds().FormGroupClass(m => m.CompetentAuthorities.Selected)">
+    @Html.Gds().LabelFor(m => m.CompetentAuthorities, new { @class = "form-label-bold" })
+    @Html.Gds().HintParagraph(TransitStateResources.CAHint)
+    @Html.Gds().ValidationMessageFor(m => m.CompetentAuthorities.SelectedValue)
+    @Html.EditorFor(m => m.CompetentAuthorities)
+</div>
+
+<div class="form-group @Html.Gds().FormGroupClass(m => m.EntryPointId)">
+    @Html.Gds().LabelFor(m => m.EntryPointId, new { @class = "form-label-bold" })
+    @Html.Gds().HintParagraph(TransitStateResources.EntryPortHint)
+    @Html.Gds().ValidationMessageFor(m => m.EntryPointId)
+    @Html.Gds().DropDownListFor(m => m.EntryPointId, Model.EntryOrExitPoints, string.Empty, new { title = TransitStateResources.EntryPoint, data_select_box = "true" })
+    @Html.HiddenFor(m => m.NotificationCompetentAuthority)
+</div>
+
+@Html.Partial("_PortNotListedDisclosure", new ViewDataDictionary { { "ca", Model.NotificationCompetentAuthority } })
+
+<div class="form-group @Html.Gds().FormGroupClass(m => m.ExitPointId)">
+    @Html.Gds().LabelFor(m => m.ExitPointId, new { @class = "form-label-bold" })
+    @Html.Gds().HintParagraph(TransitStateResources.ExitPortHint)
+    @Html.Gds().ValidationMessageFor(m => m.ExitPointId)
+    @Html.Gds().DropDownListFor(m => m.ExitPointId, Model.EntryOrExitPoints, string.Empty, new { title = TransitStateResources.ExitPoint, data_select_box = "true" })
+</div>
+
+@Html.Partial("_PortNotListedDisclosure", new ViewDataDictionary { { "ca", Model.NotificationCompetentAuthority } })
+
+<div class="form-group">
+    <button class="button" type="submit" value="submit" name="submit">@Constants.ContinueButtonText</button>
+</div>

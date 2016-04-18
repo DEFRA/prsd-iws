@@ -1,0 +1,19 @@
+﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.NotificationApplication.RecoveryOperationViewModel
+           
+@if (Model.IsTechnologyEmployedCompleted)
+{
+    <dl>
+        <dt>Description:</dt>
+        <dd>@Html.DisplayFor(m => m.TechnologyEmployed.Details)</dd>
+
+        @if (!Model.TechnologyEmployed.AnnexProvided)
+        {
+            <dt>Further details:</dt>
+            <dd>@Html.DisplayFor(m => m.TechnologyEmployed.FurtherDetails)</dd>
+        }
+    </dl>
+}
+else
+{
+    <p>@ViewBag.SectionIncompleteText</p>
+}

@@ -1,0 +1,77 @@
+﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.NotificationApplication.JourneyViewModel
+@{
+    var id = Model.NotificationId;
+    var viewLocation = Constants.ExternalNotificationOverviewSectionsLocation;
+    var headerColspan = ViewBag.CanEditNotification ? 3 : 2;
+
+}
+
+@{
+    var exportClass = Model.IsStateOfExportCompleted ? string.Empty : "over-alert";
+    var importClass = Model.IsStateOfImportCompleted ? string.Empty : "over-alert";
+    var customsClass = Model.IsCustomsOfficeCompleted ? string.Empty : "over-alert";
+}
+
+<table class="overview-table">
+    <thead>
+        <tr>
+            <th colspan="@headerColspan">
+                <h2 class="heading-medium">The journey</h2>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr class = @exportClass>
+            <td>
+                Export route
+            </td>
+            <td>
+                @Html.Partial(viewLocation + "_StateOfExport.cshtml")
+            </td>
+            @if (ViewBag.CanEditNotification)
+            {
+                <td class="change">
+                    @Html.ActionLink("Change", "Index", "StateOfExport", new { id, backToOverview = true }, null)
+                </td>
+            }
+        </tr>
+        <tr class = @importClass>
+            <td>
+                Import route
+            </td>
+            <td>
+                @Html.Partial(viewLocation + "_StateOfImport.cshtml")
+            </td>
+            @if (ViewBag.CanEditNotification)
+            {
+                <td class="change">
+                    @Html.ActionLink("Change", "Index", "StateOfImport", new { id, backToOverview = true }, null)
+                </td>
+            }
+        </tr>
+        <tr>
+            <td>
+                Transits
+            </td>
+            <td>
+                @Html.Partial(viewLocation + "_TransitStates.cshtml")
+            </td>
+            @if (ViewBag.CanEditNotification)
+            {
+                <td class="change">@Html.ActionLink("Change", "Summary", "TransportRoute", new { id, backToOverview = true }, null)</td>
+            }
+        </tr>
+        <tr class = @customsClass>
+            <td>
+                Customs office
+            </td>
+            <td>
+                @Html.Partial(viewLocation + "_CustomsOffice.cshtml")
+            </td>
+            @if (ViewBag.CanEditNotification)
+            {
+                <td class="change">@Html.ActionLink("Change", "Index", "CustomsOffice", new { id }, null)</td>
+            }
+        </tr>
+    </tbody>
+</table>

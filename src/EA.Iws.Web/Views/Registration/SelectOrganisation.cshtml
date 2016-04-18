@@ -1,0 +1,48 @@
+﻿@using EA.Iws.Web.Views.Registration
+@model EA.Iws.Web.ViewModels.Registration.SelectOrganisationViewModel
+@{
+    ViewBag.Title = SelectOrganisationResources.Title;
+}
+
+<h1 class="heading-large">@SelectOrganisationResources.Header</h1>
+@if (Model.Organisations != null && Model.Organisations.Count > 0)
+{
+    <p>@SelectOrganisationResources.HeaderDescription</p>
+
+    using (Html.BeginForm(actionName: "SelectOrganisation", controllerName: "Registration", method: FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        @Html.Gds().ValidationMessageFor(m => m.Selected)
+        @Html.HiddenFor(m => m.Name)
+
+        for (int i = 0; i < Model.Organisations.Count; i++)
+        {
+            bool shouldBeANewRow = i % 2 == 0;
+
+            if (shouldBeANewRow)
+            {
+                @:<div class="grid-row">
+             }
+
+            <div class="column-half">
+                <h3 class="heading-small">@SelectOrganisationResources.Organisation @(i + 1)</h3>
+                @Html.HiddenFor(m => m.Organisations[i].Id)
+                <ul>
+                    <li>
+                        @Html.HiddenFor(m => m.Organisations[i].Name)
+                        <span class="bold-small">@Html.DisplayFor(m => m.Organisations[i].Name)</span>
+                    </li>
+                </ul>
+                <button type="submit" name="submitButton" value="@Html.Raw(Model.Organisations[i].Id)" class="link-submit">@SelectOrganisationResources.ButtonText</button>
+            </div>
+
+            if (!shouldBeANewRow || i == Model.Organisations.Count - 1)
+            {
+                @:</div>
+            }
+        }
+    }
+}
+<hr />
+<h2 class="heading-medium">@SelectOrganisationResources.AddNewOrg</h2>
+@Html.ActionLink(linkText: "Add new", actionName: "CreateNewOrganisation", controllerName: "Registration", routeValues: new { organisationName = Model.Name }, htmlAttributes: new { @class = "button" })<br />

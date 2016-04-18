@@ -1,0 +1,379 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{756BF689-A8AB-4CA7-869C-7ED95D7AA80B}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>EA.Iws.Database</RootNamespace>
+    <AssemblyName>EA.Iws.Database</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EA.Prsd.Core, Version=1.0.16077.1, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\EA.Prsd.Core.1.0.16077-develop1\lib\net452\EA.Prsd.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Content Include="scripts\Everytime\Views\0019-Reports-RdfSrfWood.sql" />
+    <Content Include="scripts\Update\Sprint28\20160316-1233-fix-bank-address-typo.sql" />
+    <Content Include="Readme.txt" />
+    <Content Include="scripts\AliaSQL.exe" />
+    <Content Include="scripts\Create\placeholder.txt" />
+    <Content Include="scripts\Everytime\Functions\0002-Reports-PotentialRefund.sql" />
+    <Content Include="scripts\Everytime\Functions\0001-Reports-ConcatenateAddress.sql" />
+    <Content Include="scripts\Everytime\Permissions\0002-Permissions-Grants.sql" />
+    <Content Include="scripts\Everytime\Permissions\0001-Permissions-AppRole.sql" />
+    <Content Include="scripts\Everytime\placeholder.txt" />
+    <Content Include="scripts\Everytime\StoredProcedures\uspNotificationProgress.sql" />
+    <Content Include="scripts\Everytime\Views\0001-Reports-WasteCodes.sql" />
+    <Content Include="scripts\Everytime\Views\0011-Reports-ExportStats.sql" />
+    <Content Include="scripts\Everytime\Views\0002-Reports-Movements.sql" />
+    <Content Include="scripts\Everytime\Views\0003-Reports-OperationCodes.sql" />
+    <Content Include="scripts\Everytime\Views\0004-Reports-OperationCodesConcat.sql" />
+    <Content Include="scripts\Everytime\Views\0005-Reports-PhysicalCharacteristics.sql" />
+    <Content Include="scripts\Everytime\Views\0006-Reports-PhysicalCharacteristicsConcat.sql" />
+    <Content Include="scripts\Everytime\Views\0007-Reports-TransitStates.sql" />
+    <Content Include="scripts\Everytime\Views\0008-Reports-TransitStatesConcat.sql" />
+    <Content Include="scripts\Everytime\Views\0009-Reports-TransportRoute.sql" />
+    <Content Include="scripts\Everytime\Views\0010-Reports-WasteType.sql" />
+    <Content Include="scripts\Everytime\Views\0012-Reports-NotificationOrganisations.sql" />
+    <Content Include="scripts\Everytime\Views\0013-Reports-Notifications.sql" />
+    <Content Include="scripts\Everytime\Views\0014-Reports-NotificationShipmentDataMissingShipments.sql" />
+    <Content Include="scripts\Everytime\Views\0015-Reports-NotificationAssessment.sql" />
+    <Content Include="scripts\Everytime\Views\0016-Reports-DataExportNotifications.sql" />
+    <Content Include="scripts\Everytime\Views\0017-Reports-Payments.sql" />
+    <Content Include="scripts\Everytime\Views\0018-Reports-Finance.sql" />
+    <Content Include="scripts\TestData\20150907-145000-create-submitted-notification.sql" />
+    <Content Include="scripts\TestData\20150723-101500-add-approved-internal-user.sql" />
+    <Content Include="scripts\TestData\20150714-create-test-notification.sql" />
+    <Content Include="scripts\TestData\20150825-143456-add-address-to-test-user.sql" />
+    <Content Include="scripts\TestData\20151023-084000-create-consented-notification-2503.sql" />
+    <Content Include="scripts\TestData\20150921-145000-create-submitted-notification-2501.sql" />
+    <Content Include="scripts\TestData\20150928-145000-create-submitted-notification-disposal-2502.sql" />
+    <Content Include="scripts\TestData\20151231-084100-create-test-data-annex-collections.sql" />
+    <Content Include="scripts\TestData\20151026-180000-create-consented-notification-2504.sql" />
+    <Content Include="scripts\TestData\2016-01-29-102149-create-consented-import-notification.sql" />
+    <Content Include="scripts\TestData\20160205-114600-test-user-claims.sql" />
+    <Content Include="scripts\TestData\placeholder.txt" />
+    <Content Include="scripts\Update\placeholder.txt" />
+    <Content Include="scripts\Update\Sprint10\20150625-103000-add-us-competent-authority.sql" />
+    <Content Include="scripts\Update\Sprint10\20150626-163000-link-waste-code-info-to-notification.sql" />
+    <Content Include="scripts\Update\Sprint10\20150626-764539-add-not-applicable-to-un-waste-codes.sql" />
+    <Content Include="scripts\Update\Sprint10\20150629-091012-Add-WasteAdditionalInformation-Table.sql" />
+    <Content Include="scripts\Update\Sprint10\20150630-110000-Add-OtherDescription-Column.sql" />
+    <Content Include="scripts\Update\Sprint10\20150630-094600-update-waste-code-info.sql" />
+    <Content Include="scripts\Update\Sprint11\20150702-171300-create-pricing-structure.sql" />
+    <Content Include="scripts\Update\Sprint11\20150714-122323-updated-technology-employed-table.sql" />
+    <Content Include="scripts\Update\Sprint12\20150716-153345-updated-asp-net-users-table.sql" />
+    <Content Include="scripts\Update\Sprint12\20150720-090000-update-h-code-description.sql" />
+    <Content Include="scripts\Update\Sprint12\20150721-161745-add-name-claims-to-users-table.sql" />
+    <Content Include="scripts\Update\Sprint12\20150721-132500-change-internal-user-status-column.sql" />
+    <Content Include="scripts\Update\Sprint12\20150722-113000-delete-existing-claims.sql" />
+    <Content Include="scripts\Update\Sprint12\20150722-120000-rename-IsAdmin-column.sql" />
+    <Content Include="scripts\Update\Sprint12\20150724-132324-create-notification-assessment-table.sql" />
+    <Content Include="scripts\Update\Sprint12\20150727-120000-create-financial-guarantee-table.sql" />
+    <Content Include="scripts\Update\Sprint12\20150728-100423-add-decision-columns-to-notification-assessment.sql" />
+    <Content Include="scripts\Update\Sprint13\20150730-120000-insert-data-into-ca-entry-exit-point.sql" />
+    <Content Include="scripts\Update\Sprint13\20150730-160300-remove-gb-transit-authority.sql" />
+    <Content Include="scripts\Update\Sprint13\20150803-162300-rename-database-column.sql" />
+    <Content Include="scripts\Update\Sprint13\20150803-163300-create-notification-status-table.sql" />
+    <Content Include="scripts\Update\Sprint13\20150803-152000-bank-holidays.sql" />
+    <Content Include="scripts\Update\Sprint13\20150804-154400-split-notification-assessment.sql" />
+    <Content Include="scripts\Update\Sprint13\20150804-170200-update-financial-guarantee-fk.sql" />
+    <Content Include="scripts\Update\Sprint13\20150805-141800-create-notification-assessment-records.sql" />
+    <Content Include="scripts\Update\Sprint13\20150807-120000-insert-data-into-ca-for-missing-countries.sql" />
+    <Content Include="scripts\Update\Sprint13\20150806-114000-create-financial-guarantee-records.sql" />
+    <Content Include="scripts\Update\Sprint13\20150807-093600-add-financial-guarantee-columns.sql" />
+    <Content Include="scripts\Update\Sprint13\20150807-154500-create-united-kingdom-competent-authority-table.sql" />
+    <Content Include="scripts\Update\Sprint13\20150810-120000-delete-data-for-food-for-wood-chemical-composition.sql" />
+    <Content Include="scripts\Update\Sprint13\20150811-093245-add-local-area-table.sql" />
+    <Content Include="scripts\Update\Sprint13\20150811-093300-add-indexes-to-some-foreign-keys.sql" />
+    <Content Include="scripts\Update\Sprint14\20150813-120000-update-local-area.sql" />
+    <Content Include="scripts\Update\Sprint14\20150814-093432-update-waste-code-information.sql" />
+    <Content Include="scripts\Update\Sprint14\20150814-145800-create-internal-user-table.sql" />
+    <Content Include="scripts\Update\Sprint14\20150817-103000-add-code-type-columns.sql" />
+    <Content Include="scripts\Update\Sprint14\20150818-095623-remove-multiple-customs-codes.sql" />
+    <Content Include="scripts\Update\Sprint14\20150819-094100-link-notification-dates-to-assessment.sql" />
+    <Content Include="scripts\Update\Sprint14\20150820-153500-delete-custom-codes-waste-code-link.sql" />
+    <Content Include="scripts\Update\Sprint14\20150821-103600-move-business-to-notification-schema.sql" />
+    <Content Include="scripts\Update\Sprint14\20150824-143000-rename-shipment-number-column.sql" />
+    <Content Include="scripts\Update\Sprint14\20150825-092345-add-address-table.sql" />
+    <Content Include="scripts\Update\Sprint14\20150821-114800-add-actual-shipment-data-table.sql" />
+    <Content Include="scripts\Update\Sprint14\20150825-112700-add-movement-packaging-info-table.sql" />
+    <Content Include="scripts\Update\Sprint15\20150902-141500-generate-missing-financial-guarantees.sql" />
+    <Content Include="scripts\Update\Sprint15\20150903-140200-add-movement-carrier-table.sql" />
+    <Content Include="scripts\Update\Sprint15\20150908-093500-resize-waste-additional-information-columns.sql" />
+    <Content Include="scripts\Update\Sprint16\20150914-092400-add-movement-receipt-table.sql" />
+    <Content Include="scripts\Update\Sprint16\20150914-141500-add-units-for-movement.sql" />
+    <Content Include="scripts\Update\Sprint16\20150918-144000-round-existing-quantities.sql" />
+    <Content Include="scripts\Update\Sprint16\20150918_105600_add_movement_operation_receipt_table.sql" />
+    <Content Include="scripts\Update\Sprint16\20150918-000000-update-column-type-from-string-to-int-with-data-migration.sql" />
+    <Content Include="scripts\Update\Sprint16\20150922-100000-remove-display-units-column.sql" />
+    <Content Include="scripts\Update\Sprint16\20150922-160000-fix-any-missed-conversions.sql" />
+    <Content Include="scripts\Update\Sprint17\20150923-170000-add-address-book.sql" />
+    <Content Include="scripts\Update\Sprint17\20150924-094000-create-transport-route-table.sql" />
+    <Content Include="scripts\Update\Sprint17\20150928-104547-add-disposal-info-table.sql" />
+    <Content Include="scripts\Update\Sprint17\20150928-114734-migrate-disposal-info-data.sql" />
+    <Content Include="scripts\Update\Sprint17\20150929-144444-update-providers-where-recovery-info-exists.sql" />
+    <Content Include="scripts\Update\Sprint17\20151001-135000-add-address-type.sql" />
+    <Content Include="scripts\Update\Sprint17\20150929-164000-migrate-percentage-recoverable-to-recovery-info.sql" />
+    <Content Include="scripts\Update\Sprint17\20151001-163000-create-filestore-table.sql" />
+    <Content Include="scripts\Update\Sprint17\20151002-113000-rename-consent-date-columns.sql" />
+    <Content Include="scripts\Update\Sprint17\20151001-164500-create-consent-table.sql" />
+    <Content Include="scripts\Update\Sprint17\20151002-141734-remove-old-disposal-data-columns.sql" />
+    <Content Include="scripts\Update\Sprint17\20151001-162600-create-filestore-filegroup.sql" />
+    <Content Include="scripts\Update\Sprint17\20151002-143100-add-fileid-movement-recepit.sql" />
+    <Content Include="scripts\Update\Sprint18\20151012-154000-add-withdrawn-date.sql" />
+    <Content Include="scripts\Update\Sprint18\20151012-170000-add-lookup-tables-with-insert-data.sql" />
+    <Content Include="scripts\Update\Sprint18\20151013-121600-add-fileid-movement-operation-receipt.sql" />
+    <Content Include="scripts\Update\Sprint18\20151014-101500-add-movement-status.sql" />
+    <Content Include="scripts\Update\Sprint18\20151014-102700-add-transit-state-to-ca.sql" />
+    <Content Include="scripts\Update\Sprint18\20151013-142200-add-fileid-to-movement.sql" />
+    <Content Include="scripts\Update\Sprint18\20151014-134651-add-movement-status-history.sql" />
+    <Content Include="scripts\Update\Sprint18\20151016-170000-update-ukca-ea-address.sql" />
+    <Content Include="scripts\Update\Sprint18\20151015-115300-add-objected-date-column.sql" />
+    <Content Include="scripts\Update\Sprint18\20151016-140700-update-movement-operation-receipt-table.sql" />
+    <Content Include="scripts\Update\Sprint18\20151016-085800-add-import-notification-table.sql" />
+    <Content Include="scripts\Update\Sprint18\20151020-145845-update-movement-operation-receipt-fileid-to-not-null.sql" />
+    <Content Include="scripts\Update\Sprint19\20151026-150000-remove-kielcanal-from-entryexitpoint.sql" />
+    <Content Include="scripts\Update\Sprint19\20151028-150000-update-Brunsbuttel-from-entryexitpoint.sql" />
+    <Content Include="scripts\Update\Sprint19\20151022-150700-remove-assessment-status.sql" />
+    <Content Include="scripts\Update\Sprint19\20151029-113600-change-schema-of-entry-exit-points.sql" />
+    <Content Include="scripts\Update\Sprint19\20151102-105000-make-consent-conditions-optional.sql" />
+    <Content Include="scripts\Update\Sprint19\20151030-134200-draft-import-notification.sql" />
+    <Content Include="scripts\Update\Sprint20\20151113-164400-add-unique-constraint-to-movement-number.sql" />
+    <Content Include="scripts\Update\Sprint20\20151112-114500-add-units-to-movement-receipt.sql" />
+    <Content Include="scripts\Update\Sprint20\20151109-111925-add-transaction-table.sql" />
+    <Content Include="scripts\Update\Sprint20\20151111-165400-add-movement-details-table.sql" />
+    <Content Include="scripts\Update\Sprint20\20151116-160200-update-registration-number-columns.sql" />
+    <Content Include="scripts\Update\Sprint20\20151117-095400-add-ca-import-notification.sql" />
+    <Content Include="scripts\Update\Sprint20\20151117-161600-add-movement-date-history-table.sql" />
+    <Content Include="scripts\Update\Sprint21\20151119-164000-add-consent-withdrawn-columns.sql" />
+    <Content Include="scripts\Update\Sprint21\20151120-173000-add-captured-shipment-status.sql" />
+    <Content Include="scripts\Update\Sprint21\20151125-112500-fix-waste-code-spaces.sql" />
+    <Content Include="scripts\Update\Sprint21\20151125-141500-add-prenotification-date-column.sql" />
+    <Content Include="scripts\Update\Sprint21\20151125-161047-add-blanket-bond-ref-column.sql" />
+    <Content Include="scripts\Update\Sprint21\20151125-160000-migrate-prenotification-date-data.sql" />
+    <Content Include="scripts\Update\Sprint21\20151126-121500-add-movement-rejection-table.sql" />
+    <Content Include="scripts\Update\Sprint21\20151127-093307-add-consented-date-column.sql" />
+    <Content Include="scripts\Update\Sprint21\20151127-133000-make-fileid-nullable-delete-rejection-reason-from-receipt.sql" />
+    <Content Include="scripts\Update\Sprint21\20151126-142800-create-report-schema.sql" />
+    <Content Include="scripts\Update\Sprint21\20151126-154000-create-operation-codes-lookup.sql" />
+    <Content Include="scripts\Update\Sprint21\20151130-120743-add-local-area-column-to-notification-assessment.sql" />
+    <Content Include="scripts\Update\Sprint22\20151211-144500-create-import-facility-tables.sql" />
+    <Content Include="scripts\Update\Sprint22\20151210-095700-create-import-producer-table.sql" />
+    <Content Include="scripts\Update\Sprint22\20151209-160000-add-import-movement-receipt.sql" />
+    <Content Include="scripts\Update\Sprint22\20151207-111000-add-import-movement-dates.sql" />
+    <Content Include="scripts\Update\Sprint22\20151203-140000-add-import-movement.sql" />
+    <Content Include="scripts\Update\Sprint21\20151201-154438-add-competentAuthorityId-column-to-local-area-lookup-table.sql" />
+    <Content Include="scripts\Update\Sprint22\20151208-094700-create-import-notification-schema.sql" />
+    <Content Include="scripts\Update\Sprint22\20151208-095700-create-import-importer-table.sql" />
+    <Content Include="scripts\Update\Sprint22\20151208-133800-create-import-exporter-table.sql" />
+    <Content Include="scripts\Update\Sprint22\20151208-163109-add-reason-column-for-objection-and-withdrawn.sql" />
+    <Content Include="scripts\Update\Sprint22\20151210-152300-create-waste-operation-tables.sql" />
+    <Content Include="scripts\Update\Sprint22\20151211-135200-add-import-notification-shipment-table.sql" />
+    <Content Include="scripts\Update\Sprint22\20151211-153400-add-unique-constraints-import-movements.sql" />
+    <Content Include="scripts\Update\Sprint22\20151214-115000-create-import-transport-route-tables.sql" />
+    <Content Include="scripts\Update\Sprint22\20151214-120000-drop-export-organisations-view.sql" />
+    <Content Include="scripts\Update\Sprint22\20151214-120400-import-facility-actual-site.sql" />
+    <Content Include="scripts\Update\Sprint22\20151214-140400-import-producer-is-only-producer.sql" />
+    <Content Include="scripts\Update\Sprint22\20151214-160300-add-waste-type-table.sql" />
+    <Content Include="scripts\Update\Sprint22\20151214-144027-add-charge-column-to-notification.sql" />
+    <Content Include="scripts\Update\Sprint22\20151214-161100-add-waste-codes-table.sql" />
+    <Content Include="scripts\Update\Sprint22\20151215-111000-remove-code-type-from-waste-codes.sql" />
+    <Content Include="scripts\Update\Sprint22\20151215-141400-allow-registration-number-null.sql" />
+    <Content Include="scripts\Update\Sprint23\20151216-164000-add-import-notification-assessment.sql" />
+    <Content Include="scripts\Update\Sprint23\20151217-170700-add-import-notification-notification-received-status.sql" />
+    <Content Include="scripts\Update\Sprint23\20151217-140600-add-refund-to-pricing-structure.sql" />
+    <Content Include="scripts\Update\Sprint23\20151218-154500-add-fg-release-date-column.sql" />
+    <Content Include="scripts\Update\Sprint23\20152312-161712-add-amount-covered-column.sql" />
+    <Content Include="scripts\Update\Sprint23\20151222-162000-add-annex-collection-table.sql" />
+    <Content Include="scripts\Update\Sprint24\20151230-120600-add-import-notification-transaction.sql" />
+    <Content Include="scripts\Update\Sprint24\20151231-115800-add-import-submitted-status.sql" />
+    <Content Include="scripts\Update\Sprint24\20160105-101000-add-import-ready-to-acknowledge-status.sql" />
+    <Content Include="scripts\Update\Sprint24\20160106-114900-set-import-number-of-shipments-where-missing.sql" />
+    <Content Include="scripts\Update\Sprint24\20160105-122300-add-import-consent.sql" />
+    <Content Include="scripts\Update\Sprint24\20160104-145200-add-import-in-assessment-status.sql" />
+    <Content Include="scripts\Update\Sprint24\20160104-165500-delete-multiple-import-submissions.sql" />
+    <Content Include="scripts\Update\Sprint24\20160112-132655-add-enum-tables.sql" />
+    <Content Include="scripts\Update\Sprint25\20160114-143700-add-unlocked-status.sql" />
+    <Content Include="scripts\Update\Sprint25\20160115-100700-export-facility-collection.sql" />
+    <Content Include="scripts\Update\Sprint25\20160115-110800-add-reassessment-status.sql" />
+    <Content Include="scripts\Update\Sprint25\20160118-144356-add-export-notification-change-user-table.sql" />
+    <Content Include="scripts\Update\Sprint25\20160119-092623-add-consent-withdrawn-columns-for-import-notification.sql" />
+    <Content Include="scripts\Update\Sprint25\20160120-170300-standardise-date-storage.sql" />
+    <Content Include="scripts\Update\Sprint25\20160120-172500-remove-notification-decision.sql" />
+    <Content Include="scripts\Update\Sprint26\20160126-115800-export-carrier-collection.sql" />
+    <Content Include="scripts\Update\Sprint26\20160128-104600-add-import-notification-interim-status-table.sql" />
+    <Content Include="scripts\Update\Sprint26\20160128-135000-add-import-financial-guarantee-table.sql" />
+    <Content Include="scripts\Update\Sprint26\20160202-115500-change-import-financial-guarantee-status-type.sql" />
+    <Content Include="scripts\Update\Sprint26\20160201-110400-add-import-financial-guarantee-status-change-table.sql" />
+    <Content Include="scripts\Update\Sprint26\20160203-110200-add-import-financial-guarantee-approved-table.sql" />
+    <Content Include="scripts\Update\Sprint26\20160128-135000-add-import-withdrawn-table.sql" />
+    <Content Include="scripts\Update\Sprint26\20160128-081837-changes-fg-table.sql" />
+    <Content Include="scripts\Update\Sprint26\20160129-110000-add-import-withdrawn-status.sql" />
+    <Content Include="scripts\Update\Sprint26\20160128-141516-export-producer-collection.sql" />
+    <Content Include="scripts\Update\Sprint26\20160203-174000-claims-for-internal-external.sql" />
+    <Content Include="scripts\Update\Sprint26\20160203-133700-create-means-of-transport.sql" />
+    <Content Include="scripts\Update\Sprint26\20160208-163900-edit-financial-guarantee-approval.sql" />
+    <Content Include="scripts\Update\Sprint27\20160209-142700-update-bacs-details-environment-agency.sql" />
+    <Content Include="scripts\Update\Sprint27\20160211-161500-change-ea-number-sequence-start-number.sql" />
+    <Content Include="scripts\Update\Sprint27\20160211-145300-update-ewc-code-descriptions.sql" />
+    <Content Include="scripts\Update\Sprint27\20160215-121042-add-local-area-id-to-import-assessmemt.sql" />
+    <Content Include="scripts\Update\Sprint27\20160216-165000-update-competent-authorities.sql" />
+    <Content Include="scripts\Update\Sprint27\20160216-143300-create-import-consultation-table.sql" />
+    <Content Include="scripts\Update\Sprint27\20160218-104500-create-export-consultation-table.sql" />
+    <Content Include="scripts\Update\Sprint27\20160225-090100-update-competent-authorities.sql" />
+    <Content Include="scripts\Update\Sprint28\20160315-111500-remove-unused-uk-ca-columns.sql" />
+    <Content Include="scripts\Update\Sprint28\20160316-1138-insert-uk-ca-remittance-address.sql" />
+    <Content Include="scripts\Update\Sprint28\20160322-114300-update-competent-authority.sql" />
+    <Content Include="scripts\Update\Sprint28\20160323-171100-update-un-code.sql" />
+    <Content Include="scripts\Update\Sprint29\20160401-144400-alter-movement-details.sql" />
+    <Content Include="scripts\Update\Sprint29\20160401-1727-concatinate-firstname-and-lastname.sql" />
+    <Content Include="scripts\Update\Sprint29\20160404-1450-concatenate-firstname-and-lastname-importer-exporter.sql" />
+    <Content Include="scripts\Update\Sprint29\20160404-1809-concatenate-firstname-and-lastname-organisation-etc.sql" />
+    <Content Include="scripts\Update\Sprint29\20160407-155400-insert-hp14-waste-code.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="scripts\TestData\20150522-171900-link-test-user-to-org.sql" />
+    <Content Include="scripts\TestData\20150529-112400-email-verified-test-user.sql" />
+    <Content Include="scripts\TestData\20150529-093400-test-user-org-claim.sql" />
+    <Content Include="scripts\Update\Sprint06\20150424-152702-EA.Iws.sql" />
+    <Content Include="scripts\Update\Sprint06\20150424-164300-AspNetIdentity.sql" />
+    <Content Include="scripts\Update\Sprint06\20150429-150715-EA.Iws.sql" />
+    <Content Include="scripts\Update\Sprint06\20150430-104718-EA.Iws.sql" />
+    <Content Include="scripts\Update\Sprint06\20150430-115148-EA.Iws.sql" />
+    <Content Include="scripts\Update\Sprint06\20150501-112343-CountryData.sql" />
+    <Content Include="scripts\Update\Sprint06\20150501-154209-EA.Iws.sql" />
+    <Content Include="scripts\Update\Sprint06\20150505-095059-EA.Iws.sql" />
+    <Content Include="scripts\Update\Sprint06\20150505-144700-EA.Iws.sql" />
+    <Content Include="scripts\Update\Sprint07\20150508-095646-EA.Iws.sql" />
+    <Content Include="scripts\Update\Sprint07\20150508-161516-EA.Iws.sql" />
+    <Content Include="scripts\Update\Sprint07\20150508-214414-EA.Iws.sql" />
+    <Content Include="scripts\Update\Sprint07\20150511-091545-EA.Iws.sql" />
+    <Content Include="scripts\Update\Sprint07\20150512-121114-EA.Iws.sql" />
+    <Content Include="scripts\Update\Sprint07\20150513-152000-Notification-ExporterId.sql" />
+    <Content Include="scripts\Update\Sprint07\20150514-093139-NotificationProducer-table.sql" />
+    <Content Include="scripts\Update\Sprint07\20150514-110531-Remove-NotificationId-from-Producer.sql" />
+    <Content Include="scripts\Update\Sprint07\20150514-115543-Rename-CompanyHouseNumber-in-Exporter.sql" />
+    <Content Include="scripts\Update\Sprint07\20150514-122432-Add-Columns-to-flatten-database.sql" />
+    <Content Include="scripts\Update\Sprint07\20150514-145256-Change-Registration-column-names.sql" />
+    <Content Include="scripts\Update\Sprint07\20150515-093436-Flatten-DB.sql" />
+    <Content Include="scripts\Update\Sprint07\20150515-100120-Added-primary-key-to-NotificationProducer.sql" />
+    <Content Include="scripts\Update\Sprint07\20150515-134647-Add-Importer.sql" />
+    <Content Include="scripts\Update\Sprint07\20150515-145639-Add-Facility-Rename-Waste-Action.sql" />
+    <Content Include="scripts\Update\Sprint07\20150520-164530-Move-Table-Schemas.sql" />
+    <Content Include="scripts\Update\Sprint08\20150522-082922-Mapping-Constraints-rationalisations.sql" />
+    <Content Include="scripts\Update\Sprint08\20150522-123533-Add-OrganisationId-Claims-To-ApplicationUsers.sql" />
+    <Content Include="scripts\Update\Sprint08\20150522-160905-Add-ShipmentInfo-Table.sql" />
+    <Content Include="scripts\Update\Sprint08\20150522-162200-move-foreign-keys-for-notification.sql" />
+    <Content Include="scripts\Update\Sprint10\20150619-1987374-Add-columns-to-notification-for-recovery-percentage.sql" />
+    <Content Include="scripts\Update\Sprint08\20150522-191333-Carrier.sql" />
+    <Content Include="scripts\Update\Sprint08\20150526-110946-Add-IsSpecialHandling-To-ShipmentInfo.sql" />
+    <Content Include="scripts\Update\Sprint08\20150526-141010-Resize-Name-Columns.sql" />
+    <Content Include="scripts\Update\Sprint08\20150528-134949-Add-PackagingInfo-Table.sql" />
+    <Content Include="scripts\Update\Sprint08\20150529-174001-Add-IsPreconsented-To-Notification.sql" />
+    <Content Include="scripts\Update\Sprint08\20150601-111845-Modify-ShipmentInfo-Table.sql" />
+    <Content Include="scripts\Update\Sprint08\20150604-120543-postcode-optional.sql" />
+    <Content Include="scripts\Update\Sprint08\29052015-143800-Drop-fk-countryid-from-facility.sql" />
+    <Content Include="scripts\Update\Sprint09\04062015-1000-Add-entryorexitpoint-Change-Competent-Authority.sql" />
+    <Content Include="scripts\Update\Sprint09\04062015-1100-Add-Competent-Authority-partial-data.sql" />
+    <Content Include="scripts\Update\Sprint09\20150602-162611-Add-operation-codes-table.sql" />
+    <Content Include="scripts\Update\Sprint09\20150605-110500-Add-other-description-column.sql" />
+    <Content Include="scripts\Update\Sprint09\20150609-123118-Table-WasteType-WasteComposition.sql" />
+    <Content Include="scripts\Update\Sprint09\20150609-152127-Add-WasteGenerationProcess-To-WasteType-Table.sql" />
+    <Content Include="scripts\Update\Sprint09\20150609-152223-Add-PhysicalCharacteristicsInfo-Table.sql" />
+    <Content Include="scripts\Update\Sprint09\20150609-161233-Add-ReasonForExport-To-Notification-Table.sql" />
+    <Content Include="scripts\Update\Sprint09\20150609-174000-Ordinal-Position-Column.sql" />
+    <Content Include="scripts\Update\Sprint09\20150610-15875-Add-Technology-Employed-Table.sql" />
+    <Content Include="scripts\Update\Sprint09\20150611-112342-Add-WasteCode-Table.sql" />
+    <Content Include="scripts\Update\Sprint09\20150611-160000-Add-Competent-Authorities-And-EntryExitPoints.sql" />
+    <Content Include="scripts\Update\Sprint09\20150611-165300-add-notification-id-to-packaging-info.sql" />
+    <Content Include="scripts\Update\Sprint09\20150612-103300-move-special-handling-to-notification.sql" />
+    <Content Include="scripts\Update\Sprint09\20150612-103423-Add-Waste-Codes.sql" />
+    <Content Include="scripts\Update\Sprint09\20150612-112054-Add-WasteCode-To-WasteType-Table.sql" />
+    <Content Include="scripts\Update\Sprint09\20150615-102500-shipment-info-columns-not-null.sql" />
+    <Content Include="scripts\Update\Sprint09\20150616-090122-Add-WasteCodeInfo-Table.sql" />
+    <Content Include="scripts\Update\Sprint09\20150616-090425-Add-EWC-Codes-To-WasteCode.sql" />
+    <Content Include="scripts\Update\Sprint09\20150616-143000-add-netherlands-data-to-lookup.sql" />
+    <Content Include="scripts\Update\Sprint10\20150622-140000-add-customs-office-tables.sql" />
+    <Content Include="scripts\Update\Sprint10\20150623-113600-drop-unused-tables-and-columns.sql" />
+    <Content Include="scripts\Update\Sprint10\20150617-161000-add-means-of-transport-column.sql" />
+    <Content Include="scripts\Update\Sprint10\20150623-090511-Add-Optional-Waste-Codes.sql" />
+    <Content Include="scripts\Update\Sprint10\20150623-090512-Add-UN-Waste-Codes.sql" />
+    <Content Include="scripts\Update\Sprint10\20150615-347600-add-y-codes.sql" />
+    <Content Include="scripts\Update\Sprint10\20150615-746500-add-un-classes.sql" />
+    <Content Include="scripts\Update\Sprint10\20150615-987300-add-h-codes.sql" />
+    <Content Include="scripts\Update\Sprint10\20150623-120000-set-eu-members.sql" />
+    <Content Include="scripts\Update\Sprint10\20150626-112400-move-waste-generation-to-notification.sql" />
+    <Content Include="scripts\Update\Sprint10\20150626-140800-link-physical-characteristics-to-notification.sql" />
+    <None Include="App.config" />
+    <None Include="packages.config" />
+    <None Include="schema_compare.ps1" />
+    <Content Include="scripts\TestData\20150511-092300-Sunil-test-user.sql" />
+    <Content Include="scripts\TestData\20150511-164100-SFW-test-organisation.sql" />
+    <None Include="scripts\Update\placeholder.txt.vsspell">
+      <DependentUpon>placeholder.txt</DependentUpon>
+    </None>
+    <None Include="scripts\Update\Sprint10\20150624-141556-add-table-recovery-info.sql" />
+    <None Include="scripts\Update\Sprint14\20150814-144111-delete-column-building-org-exporter-producer-importer-facility-carrier.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\StyleCop.Error.MSBuild.1.0.0\build\StyleCop.Error.MSBuild.Targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\StyleCop.Error.MSBuild.1.0.0\build\StyleCop.Error.MSBuild.Targets'))" />
+    <Error Condition="!Exists('..\packages\StyleCop.MSBuild.4.7.50.0\build\StyleCop.MSBuild.Targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\StyleCop.MSBuild.4.7.50.0\build\StyleCop.MSBuild.Targets'))" />
+  </Target>
+  <Import Project="..\packages\StyleCop.Error.MSBuild.1.0.0\build\StyleCop.Error.MSBuild.Targets" Condition="Exists('..\packages\StyleCop.Error.MSBuild.1.0.0\build\StyleCop.Error.MSBuild.Targets')" />
+  <Import Project="..\packages\StyleCop.MSBuild.4.7.50.0\build\StyleCop.MSBuild.Targets" Condition="Exists('..\packages\StyleCop.MSBuild.4.7.50.0\build\StyleCop.MSBuild.Targets')" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,35 @@
+﻿@using EA.Iws.Web.Areas.Admin.Views.ExportNotifications;
+@model EA.Iws.Web.Areas.Admin.ViewModels.ExportNotifications.ExportNotificationsViewModel
+@{
+    ViewBag.Title = IndexResources.Title;
+}
+
+<h1 class="heading-large">@IndexResources.Heading</h1>
+
+<p>@IndexResources.IntroParagraph</p>
+
+<table class="odd-table">
+    <thead>
+        <tr>
+            <th>@IndexResources.ThNotificationNumber</th>
+            <th>@IndexResources.ThExporter</th>
+            <th>@IndexResources.ThProducer</th>
+            <th>@IndexResources.ThImporter</th>
+            <th>@IndexResources.ThOwner</th>
+            <th>@IndexResources.ThAction</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var ownerData in Model.TableData)
+        {
+            <tr>
+                <td>@ownerData.Number</td>
+                <td>@ownerData.ExporterName</td>
+                <td>@ownerData.ProducerName</td>
+                <td>@ownerData.ImporterName</td>
+                <td>@ownerData.OwnerName</td>
+                <td>@Html.ActionLink(IndexResources.ChooseLink, "Index", "Home", new { area = "NotificationApplication", id = ownerData.NotificationId }, null)</td>
+            </tr>
+        }
+    </tbody>
+</table>

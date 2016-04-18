@@ -1,0 +1,22 @@
+﻿@using EA.Iws.Core.Notification
+@using EA.Iws.Web.Areas.NotificationApplication.Views.WhatToDoNext
+@model EA.Iws.Requests.Notification.WhatToDoNextPaymentData
+<p>
+    @switch (Model.CompetentAuthority)
+    {
+        case UKCompetentAuthority.England:
+            @GeneralPostResources.EnvironmentAgency
+            break;
+        case UKCompetentAuthority.Scotland:
+            @GeneralPostResources.Sepa
+            break;
+        case UKCompetentAuthority.NorthernIreland:
+            @GeneralPostResources.Niea
+            break;
+        case UKCompetentAuthority.Wales:
+            @GeneralPostResources.Nrw
+            break;
+        default:
+            throw new ArgumentOutOfRangeException();
+    }
+</p>

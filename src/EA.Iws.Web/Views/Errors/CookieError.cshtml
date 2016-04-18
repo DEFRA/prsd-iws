@@ -1,0 +1,20 @@
+﻿@{
+    ViewBag.Title = "Invalid request";
+    Response.StatusCode = 400;
+}
+
+
+<h1 class="heading-large">We can’t process your request</h1>
+<p>
+    A system error is preventing us from processing your request. 
+    This is likely because you’ve disabled cookies in your browser. 
+    Please enable cookies in your browser settings and try your request again. 
+</p>
+
+<p>
+    <ul id="proposition-links">
+        <li>
+            <a href="@Request.Url.PathAndQuery">Try this request again</a>
+        </li>
+    </ul>
+</p>

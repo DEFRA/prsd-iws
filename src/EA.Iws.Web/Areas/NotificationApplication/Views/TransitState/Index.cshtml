@@ -1,0 +1,37 @@
+﻿@using EA.Iws.Web.Areas.NotificationApplication.Views.TransitState
+@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.TransitState.TransitStateViewModel
+@{
+    ViewBag.Title = TransitStateResources.Title;
+}
+<h1 class="heading-large">@TransitStateResources.Header</h1>
+
+@using (Html.BeginForm())
+{
+    @Html.Gds().ValidationSummary()
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(m => m.NotificationCompetentAuthority)
+
+    if (!Model.ShowNextSection)
+    {
+        @Html.Partial("_CountryOnly", Model)
+    }
+    else
+    {
+        @Html.HiddenFor(m => m.ShowNextSection)
+
+        @Html.Partial("_AllDetails", Model)
+    }
+
+    for (int i = 0; i < Model.TransitStateCountryIds.Count; i++)
+    {
+        @Html.HiddenFor(m => m.TransitStateCountryIds[i])
+    }
+    if (Model.StateOfExportCountryId.HasValue)
+    {
+        @Html.HiddenFor(m => m.StateOfExportCountryId)
+    }
+    if (Model.StateOfImportCountryId.HasValue)
+    {
+        @Html.HiddenFor(m => m.StateOfImportCountryId)
+    }
+}

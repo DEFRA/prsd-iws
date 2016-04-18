@@ -1,0 +1,9 @@
+﻿@model EA.Iws.Web.Areas.AdminImportAssessment.ViewModels.FinancialGuaranteeDecision.FinancialGuaranteeDecisionViewModel
+
+<div>
+    <div class="form-group @Html.Gds().FormGroupClass(m => m.ReferenceNumber)">
+        @Html.Gds().ValidationMessageFor(m => m.ReferenceNumber)
+        @Html.Gds().LabelFor(m => m.ReferenceNumber, false)
+        @Html.Gds().TextBoxFor(m => m.ReferenceNumber, new { @MaxLength = "70" })
+    </div>
+</div>

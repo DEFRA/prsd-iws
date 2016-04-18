@@ -1,0 +1,19 @@
+﻿ALTER TABLE [Business].[Importer]
+ALTER COLUMN [Name] NVARCHAR(3000) NOT NULL
+
+GO
+
+ALTER TABLE [Business].[Exporter]
+ALTER COLUMN [Name] NVARCHAR(3000) NOT NULL
+
+GO
+
+ALTER TABLE [Business].[Producer]
+ALTER COLUMN [Name] NVARCHAR(3000) NOT NULL
+
+GO
+
+ALTER TABLE [Business].[Facility]
+ALTER COLUMN [Name] NVARCHAR(3000) NOT NULL
+
+GO

@@ -1,0 +1,93 @@
+﻿@using EA.Iws.Core.Shared
+@using EA.Iws.Web.Areas.NotificationApplication.Views.Facility
+@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.Facility.SiteOfTreatmentViewModel
+@{
+    ViewBag.Title = SiteOfTreatmentResources.Title;
+}
+
+<h1 class="heading-large">@string.Format(SiteOfTreatmentResources.Header, (Model.NotificationType == NotificationType.Recovery ? "recovered?" : "disposed?"))</h1>
+
+@if (Model.Facilities.Any())
+{
+    using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.Gds().ValidationSummary()
+        @Html.HiddenFor(m => m.NotificationId)
+        @Html.HiddenFor(m => m.NotificationType)
+
+        <div class="form-group @Html.Gds().FormGroupClass(m => m.SelectedSiteOfTreatment)">
+            <table title=@SiteOfTreatmentResources.TableTitle>
+                <thead>
+                    <tr>
+                        <th>@SiteOfTreatmentResources.ThOrgName</th>
+                        <th>@SiteOfTreatmentResources.ThAddress</th>
+                        <th>@string.Format(SiteOfTreatmentResources.ThActualSite, Model.NotificationType.ToString().ToLowerInvariant())</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (var i = 0; i < Model.Facilities.Count; i++)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(m => m.Facilities[i].Business.Name)
+
+                                @Html.HiddenFor(m => m.Facilities[i].Business.Name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(m => m.Facilities[i].Address.StreetOrSuburb),
+                                @Html.DisplayFor(m => m.Facilities[i].Address.TownOrCity)
+
+                                @Html.HiddenFor(m => m.Facilities[i].Address.StreetOrSuburb)
+                                @Html.HiddenFor(m => m.Facilities[i].Address.CountryName)
+                                @Html.HiddenFor(m => m.Facilities[i].Address.CountryId)
+                                @Html.HiddenFor(m => m.Facilities[i].Address.TownOrCity)
+                            </td>
+                            <td>
+                                @{
+                                    var htmlAttr = new Dictionary<string, object> { { "id", Html.NameFor(m => m.Facilities[i].Id) } };
+                                    htmlAttr.Add("title", SiteOfTreatmentResources.ActualSite);
+                                    if (@Model.Facilities[i].IsActualSiteOfTreatment)
+                                    {
+                                        htmlAttr.Add("checked", "checked");
+                                    }
+                                    @Html.RadioButtonFor(m => m.SelectedSiteOfTreatment, Model.Facilities[i].Id, htmlAttr)
+                                }
+
+                                @Html.HiddenFor(m => m.Facilities[i].IsActualSiteOfTreatment)
+                                @Html.HiddenFor(m => m.Facilities[i].Id)
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+        <button class="button" type="submit">@Constants.ContinueButtonText</button>
+    }
+}
+else
+{
+    <p>@string.Format(SiteOfTreatmentResources.NoFacility, (Model.NotificationType == NotificationType.Recovery ? "recovered" : "disposed"))</p>
+    <p>@Html.ActionLink(Model.NotificationType == NotificationType.Recovery 
+          ? SiteOfTreatmentResources.BackToRecoveryFacilities 
+          : SiteOfTreatmentResources.BackToDisposalFacilities, 
+          "List", 
+          "Facility", 
+          new { id = Model.NotificationId, backToOverview = ViewBag.BackToOverview }, null)</p>
+    if (ViewBag.BackToOverview)
+    {
+        @Html.ActionLink(Constants.ContinueButtonText, "Index", "Home", new { id = Model.NotificationId }, new { @class = "button" })
+    }
+    else
+    {
+        if (Model.NotificationType == NotificationType.Recovery)
+        {
+            @Html.ActionLink(Constants.ContinueButtonText, "RecoveryPreconsent", "Facility", new { id = Model.NotificationId }, new { @class = "button" })
+        }
+        else
+        {
+            @Html.ActionLink(Constants.ContinueButtonText, "OperationCodes", "WasteOperations", new { id = Model.NotificationId }, new { @class = "button" })
+        }
+    }
+}

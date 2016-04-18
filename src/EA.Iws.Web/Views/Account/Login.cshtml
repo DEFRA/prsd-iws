@@ -1,0 +1,34 @@
+﻿@using EA.Iws.Web.Views.Account
+@model EA.Iws.Web.ViewModels.Account.LoginViewModel
+@{
+    ViewBag.Title = LoginResources.Title;
+}
+<div class="grid-row">
+    <section class="column-two-thirds">
+        <h1 class="heading-large">@LoginResources.Header</h1>
+        <p class="heading-large"></p>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            @Html.Gds().ValidationSummary()
+
+            <div class="form-group @Html.Gds().FormGroupClass(m => m.Email)">
+                @Html.Gds().LabelFor(m => m.Email)
+                @Html.Gds().ValidationMessageFor(m => m.Email)
+                @Html.Gds().TextBoxFor(m => m.Email, new { autocomplete = "off" })
+            </div>
+            <div class="form-group @Html.Gds().FormGroupClass(m => m.Password)">
+                @Html.Gds().LabelFor(m => m.Password)
+                @Html.Gds().ValidationMessageFor(m => m.Password)
+                @Html.Gds().PasswordFor(m => m.Password)
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="@LoginResources.Continue" class="button" />
+            </div>
+            <p>@Html.ActionLink(LoginResources.CreateUserAccount, "ApplicantRegistration", "Registration")</p>
+            <p>@Html.ActionLink(LoginResources.ForgottenPassword, "ForgotPassword", "Account")</p>
+        }
+    </section>
+</div>

@@ -1,0 +1,59 @@
+﻿@using EA.Iws.Core.Notification
+@using EA.Iws.Web.Areas.NotificationApplication.Views.WhatToDoNext
+@model EA.Iws.Requests.Notification.WhatToDoNextData
+
+@{
+    ViewBag.Title = "Download your Financial Guarantee";
+    Layout = "~/Views/Shared/_Layout.GovUK.Sections.cshtml";
+}
+
+@helper ContactDetails()
+{
+    <p class="text">
+        @switch (Model.CompetentAuthority)
+        {
+            case UKCompetentAuthority.England:
+                @FinancialGuaranteeResources.EnvironmentAgency
+                break;
+            case UKCompetentAuthority.Scotland:
+                @FinancialGuaranteeResources.Sepa
+                break;
+            case UKCompetentAuthority.NorthernIreland:
+                @FinancialGuaranteeResources.Niea
+                break;
+            case UKCompetentAuthority.Wales:
+                @FinancialGuaranteeResources.Nrw
+                break;
+            default:
+                throw new ArgumentOutOfRangeException();
+        }
+    </p>
+}
+
+<header class="hgroup text">
+    <h1 class="heading-large">@FinancialGuaranteeResources.DownloadHeading</h1>
+</header>
+
+<p class="text">@FinancialGuaranteeResources.ApprovedFGParagraph</p>
+
+@if (Model.CompetentAuthority == UKCompetentAuthority.Scotland)
+{
+    @Html.Partial("_SepaFinancialGuarantee")
+}
+
+@ContactDetails()
+
+@if (Model.CompetentAuthority != UKCompetentAuthority.Scotland)
+{
+    <div class="form-group">
+        @Html.ActionLink(FinancialGuaranteeResources.DownloadLink, "GenerateFinancialGuaranteeDocument", "Home", new { competentAuthority = Model.CompetentAuthority, area = "FinancialGuarantee" }, null)
+    </div>
+}
+
+<div class="form-group">
+    @Html.ActionLink(Constants.ContinueOnlyButtonText, "Payment", "WhatToDoNext", new { id = Model.Id, area = "NotificationApplication" }, new { @class = "button" })
+</div>
+
+<div>
+    @Html.ActionLink(FinancialGuaranteeResources.GoToNotificationOptions, "Index", "Options", new { id = Model.Id, area = "NotificationApplication" }, null)
+</div>

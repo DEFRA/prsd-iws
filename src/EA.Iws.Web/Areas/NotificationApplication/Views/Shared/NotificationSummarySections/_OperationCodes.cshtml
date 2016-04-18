@@ -1,0 +1,10 @@
+﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.NotificationApplication.RecoveryOperationViewModel
+           
+@if (Model.OperationCodes.Any())
+{
+    <p>@string.Join(", ", Model.OperationCodes)</p>
+}
+else
+{
+    <p>@ViewBag.SectionIncompleteText</p>
+}

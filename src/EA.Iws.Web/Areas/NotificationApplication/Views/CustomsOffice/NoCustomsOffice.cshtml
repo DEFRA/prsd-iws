@@ -1,0 +1,13 @@
+﻿@using EA.Iws.Web.Areas.NotificationApplication.Views.CustomsOffice
+
+@{
+    ViewBag.Title = @NoCustomsOfficeResources.TabTitle;
+}
+
+<div class="grid-row">
+    <header class="hgroup">
+        <h1 class="heading-large">@NoCustomsOfficeResources.Header</h1>
+    </header>
+
+    @Html.ActionLink(Constants.ContinueOnlyButtonText, "Index", "Shipment", null, htmlAttributes: new { @class = "button" })
+</div>

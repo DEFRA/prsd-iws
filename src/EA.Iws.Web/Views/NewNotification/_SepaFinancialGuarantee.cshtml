@@ -1,0 +1,14 @@
+﻿@using EA.Iws.Web.Views.NewNotification
+@model EA.Iws.Web.ViewModels.NewNotification.CreatedViewModel
+
+<p>
+    @SepaFinancialGuaranteeResources.NeedFG
+</p>
+<p>
+    @SepaFinancialGuaranteeResources.SubmitFG
+</p>
+<p>
+    @Html.Raw(string.Format(SepaFinancialGuaranteeResources.PrintMessage,
+        Html.ActionLink(SepaFinancialGuaranteeResources.BankGuaranteeTemplate, "GenerateBankGuaranteeDocument", "Home", new { area = "FinancialGuarantee" }, null),
+        Html.ActionLink(SepaFinancialGuaranteeResources.ParentCompanyTemplate, "GenerateParentCompanyDocument", "Home", new { area = "FinancialGuarantee" }, null)))
+</p>

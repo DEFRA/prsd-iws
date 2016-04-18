@@ -1,0 +1,52 @@
+﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.NotificationApplication.JourneyViewModel
+@{
+    var viewLocation = Constants.InternalExportNotificationOverviewSectionsLocation;
+}
+
+<table class="overview-table">
+    <thead>
+        <tr>
+            <th colspan="2">
+                <h2 class="heading-medium">The journey</h2>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                Export route
+            </td>
+            <td>
+                @Html.Partial(viewLocation + "_StateOfExport.cshtml")
+            </td>
+            
+        </tr>
+        <tr>
+            <td>
+                Import route
+            </td>
+            <td>
+                @Html.Partial(viewLocation + "_StateOfImport.cshtml")
+            </td>
+            
+        </tr>
+        <tr>
+            <td>
+                Transits
+            </td>
+            <td>
+                @Html.Partial(viewLocation + "_TransitStates.cshtml")
+            </td>
+            
+        </tr>
+        <tr>
+            <td>
+                Customs office
+            </td>
+            <td>
+                @Html.Partial(viewLocation + "_CustomsOffice.cshtml")
+            </td>
+            
+        </tr>
+    </tbody>
+</table>

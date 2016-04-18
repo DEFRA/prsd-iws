@@ -1,0 +1,44 @@
+﻿@using EA.Iws.Web.Areas.NotificationApplication.Views.TransportRoute
+@model IList<EA.Iws.Core.TransitState.TransitStateData>
+
+<h2 class="heading-medium">@TransitStatesSummaryResources.Header</h2>
+@if (Model == null || Model.Count == 0)
+{
+    <p>@TransitStatesSummaryResources.NoTransitState</p>
+    <p>@Html.ActionLink(TransitStatesSummaryResources.Add, "Index", "TransitState", new { id = ViewData["Id"], backToOverview = ViewData["BackToOverview"] }, null)</p>
+}
+else
+{
+    using (Html.BeginForm("Delete", "TransitState", new { backToOverview = ViewBag.BackToOverview } ,FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        <table>
+            <thead>
+                <tr>
+                    <th>@TransitStatesSummaryResources.ThOrder</th>
+                    <th>@TransitStatesSummaryResources.ThCountry</th>
+                    <th>@TransitStatesSummaryResources.ThCA</th>
+                    <th>@TransitStatesSummaryResources.ThPortEntry</th>
+                    <th>@TransitStatesSummaryResources.ThPortExit</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (int i = 0; i < Model.Count; i++)
+                {
+                    <tr>
+                        <td>@Html.Raw(Model[i].OrdinalPosition)</td>
+                        <td>@Html.Raw(Model[i].Country.Name)</td>
+                        <td>@Html.Raw(Model[i].CompetentAuthority.Code) - @Html.Raw(Model[i].CompetentAuthority.Name)</td>
+                        <td>@Html.Raw(Model[i].EntryPoint.Name)</td>
+                        <td>@Html.Raw(Model[i].ExitPoint.Name)</td>
+                        <th>@Html.ActionLink(TransitStatesSummaryResources.Edit, "Index", "TransitState", new { id = ViewData["Id"], entityId = Model[i].Id, backToOverview = ViewData["BackToOverview"] }, null) |
+                        <button type="submit" class="link-submit in-table" name="delete" value="@Model[i].Id">@TransitStatesSummaryResources.Delete</button></th>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+
+    <p style="margin-top: 10px;">@Html.ActionLink(TransitStatesSummaryResources.AddAnother, "Index", "TransitState", new { id = ViewData["Id"], backToOverview = ViewData["BackToOverview"] }, null)</p>
+}

@@ -1,0 +1,274 @@
+﻿@using Resource = EA.Iws.Web.Areas.AdminImportAssessment.Views.KeyDates.IndexResources
+@using EA.Iws.Core.NotificationAssessment
+@using EA.Iws.Web.Areas.AdminImportAssessment.ViewModels.KeyDates
+@using EA.Prsd.Core.Web.Mvc.RazorHelpers
+@model KeyDatesViewModel
+
+@{
+    ViewBag.Title = Resource.Title;
+    var nullMarker = "- -";
+    var byText = " by ";
+}
+
+<h1 class="heading-large">@Resource.MainHeading</h1>
+
+<div>
+    @Resource.FirstParagraph
+
+    <table title="Assessment dates currently recorded" class="form-group">
+        <tr>
+            <th>@Resource.DateNameColumnHeader</th>
+            <th>@Resource.DateColumnHeader</th>
+            <th>@Resource.LinkColumnHeader</th>
+        </tr>
+        <tr>
+            <td>@Html.DisplayNameFor(m => m.NotificationReceivedDate)</td>
+            <td>
+                @if (Model.NotificationReceivedDate.IsCompleted)
+                {
+                    @Html.Gds().DisplayDateFor(m => m.NotificationReceivedDate.AsDateTime().GetValueOrDefault())
+                }
+                else
+                {
+                    @nullMarker
+                }
+            </td>
+            <td>
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                Interim or non-interim
+            </td>
+            <td>
+                @if (Model.IsInterim)
+                {
+                    <text>Interim</text>
+                }
+                else
+                {
+                    <text>Non-interim</text>
+                }
+            </td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td>Payment received</td>
+            <td>
+                @if (Model.PaymentReceivedDate.HasValue)
+                {
+                    @Html.Gds().DisplayDateFor(m => m.PaymentReceivedDate.GetValueOrDefault())
+
+                    var text = string.Empty;
+
+                    if(!Model.PaymentIsComplete)
+                    {
+                        text = " (partial payment)";
+                        @text
+                    }
+                }
+                else
+                {
+                    @nullMarker
+                }
+            </td>
+            <td></td>
+        </tr>
+
+        <tr>
+            <td>Assessment started</td>
+            <td>
+                @if (Model.AssessmentStartedDate.IsCompleted)
+                {
+                    @Html.Gds().DisplayDateFor(m => m.AssessmentStartedDate.AsDateTime().GetValueOrDefault())
+                    @byText
+                    @Html.DisplayFor(m => m.NameOfOfficer)
+                }
+                else
+                {
+                    @nullMarker
+                }
+            </td>
+            <td>
+                @if (Model.PaymentIsComplete)
+                {
+                    @(Model.AssessmentStartedDate.IsCompleted ? Html.Raw(string.Empty)
+                                  : Html.ActionLink("Add", "Index", "KeyDates", new { command = KeyDatesCommand.BeginAssessment }, null))
+                }
+            </td>
+
+        </tr>
+
+        <tr>
+            <td>Notification complete</td>
+            <td>
+                @if (Model.NotificationCompleteDate.IsCompleted)
+                {
+                    @Html.Gds().DisplayDateFor(m => m.NotificationCompleteDate.AsDateTime().GetValueOrDefault())
+                }
+                else
+                {
+                    @nullMarker
+                }
+            </td>
+            <td>
+                @if (Model.AssessmentStartedDate.IsCompleted)
+                {
+                    @(Model.NotificationCompleteDate.IsCompleted ? Html.Raw(string.Empty)
+                                  : Html.ActionLink("Add", "Index", "KeyDates", new { command = KeyDatesCommand.NotificationComplete }, null))
+                }
+            </td>
+        </tr>
+
+        <tr>
+            <td>Acknowledged on</td>
+            <td>
+                @if (Model.NotificationAcknowledgedDate.IsCompleted)
+                {
+                    @Html.Gds().DisplayDateFor(m => m.NotificationAcknowledgedDate.AsDateTime().GetValueOrDefault())
+                }
+                else
+                {
+                    @nullMarker
+                }
+            </td>
+            <td>
+                @if (Model.NotificationCompleteDate.IsCompleted)
+                {
+                    @(Model.NotificationAcknowledgedDate.IsCompleted ? Html.Raw(string.Empty)
+                                  : Html.ActionLink("Add", "Index", "KeyDates", new { command = KeyDatesCommand.NotificationAcknowledged }, null))
+                }
+            </td>
+
+        </tr>
+
+        <tr>
+            <td>Decision required by</td>
+            <td>
+                @if (Model.DecisionDate.IsCompleted)
+                {
+                    @Html.Gds().DisplayDateFor(m => m.DecisionDate.AsDateTime().GetValueOrDefault())
+                }
+                else
+                {
+                    @nullMarker
+                }
+            </td>
+            <td>
+            </td>
+        </tr>
+
+        @for (int i = 0; i < Model.Decisions.Count; i++)
+        {
+            <tr>
+                <td>
+                    @EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(Model.Decisions[i].Status)
+                </td>
+                <td>
+                    @Html.Gds().DisplayDateFor(m => m.Decisions[i].Date)
+                </td>
+                <td>
+                    @if (Model.Decisions[i].Status == NotificationStatus.Consented)
+                    {
+                        @Html.Gds().DisplayShortDateRangeFor(m => m.Decisions[i].ConsentedFrom.GetValueOrDefault(), m => m.Decisions[i].ConsentedTo.GetValueOrDefault())
+                    }
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>
+
+@if (Model.Command != 0)
+{
+    using (Html.BeginForm("Index", "KeyDates", FormMethod.Post))
+    {
+        @Html.Gds().ValidationSummary()
+        @Html.HiddenFor(m => m.NotificationId)
+        @Html.HiddenFor(m => m.Command)
+        @Html.HiddenFor(m => m.NotificationReceivedDate.Day)
+        @Html.HiddenFor(m => m.NotificationReceivedDate.Month)
+        @Html.HiddenFor(m => m.NotificationReceivedDate.Year)
+        @Html.HiddenFor(m => m.AssessmentStartedDate.Day)
+        @Html.HiddenFor(m => m.AssessmentStartedDate.Month)
+        @Html.HiddenFor(m => m.AssessmentStartedDate.Year)
+        @Html.HiddenFor(m => m.NotificationCompleteDate.Day)
+        @Html.HiddenFor(m => m.NotificationCompleteDate.Month)
+        @Html.HiddenFor(m => m.NotificationCompleteDate.Year)
+        @Html.HiddenFor(m => m.NotificationAcknowledgedDate.Day)
+        @Html.HiddenFor(m => m.NotificationAcknowledgedDate.Month)
+        @Html.HiddenFor(m => m.NotificationAcknowledgedDate.Year)
+        @Html.HiddenFor(m => m.DecisionDate.Day)
+        @Html.HiddenFor(m => m.DecisionDate.Month)
+        @Html.HiddenFor(m => m.DecisionDate.Year)
+
+        @Html.AntiForgeryToken()
+
+        <br /><br />
+        <fieldset>
+            <div class="form-group @Html.Gds().FormGroupClass(m => m.NewDate) @Html.Gds().FormGroupClass(m => m.NewDate.Day) @Html.Gds().FormGroupClass(m => m.NewDate.Month) @Html.Gds().FormGroupClass(m => m.NewDate.Year)">
+                @EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(@Model.Command) date<br>
+                @Html.Gds().ValidationMessageFor(m => m.NewDate)
+                @Html.Gds().HintParagraph("For example, 31 3 2015")
+                @Html.EditorFor(m => m.NewDate)
+            </div>
+        </fieldset>
+
+        if (Model.Command == KeyDatesCommand.BeginAssessment)
+        {
+            <fieldset>
+                <div class="form-group @Html.Gds().FormGroupClass(m => m.NameOfOfficer)">
+                    @Html.Gds().LabelFor(m => m.NameOfOfficer, false)
+                    @Html.Gds().ValidationMessageFor(m => m.NameOfOfficer)
+                    @Html.Gds().TextBoxFor(m => m.NameOfOfficer, new { @Maxlength = 30 })
+                </div>
+            </fieldset>
+        }
+        else
+        {
+            @Html.HiddenFor(m => m.NameOfOfficer)
+        }
+
+
+        <br />
+        <div class="form-group">
+            <input type="submit" class="button" value="Submit date" />
+        </div>
+
+    }
+
+    @section scripts{
+        <script>
+            $(function () {
+                // On page load with a date input, moves the cursor to the first input box.
+                var input = $("form #NewDate_Day");
+
+                if (input) {
+                    input.focus();
+                }
+            });
+        </script>
+    }
+}
+else
+{
+    @section scripts{
+        <script>
+            $(function() {
+                var link = $("td a").filter(function (i) { return $(this).text() === "Add" });
+
+                if (link) {
+                    link.focus();
+                }
+            })
+        </script>
+    }
+}
+
+@Html.ActionLink(Resource.HomeLink, "Index", "Home", new { area = "ImportNotification" }, null)
+
+@section menu {
+    @Html.Action("ImportNavigation", "Menu", new { area = "Admin", section = ImportNavigationSection.Assessment })
+}

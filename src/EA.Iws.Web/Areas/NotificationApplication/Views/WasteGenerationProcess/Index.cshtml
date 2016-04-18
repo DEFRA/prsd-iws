@@ -1,0 +1,34 @@
+﻿@using EA.Iws.Web.Areas.NotificationApplication.Views.WasteGenerationProcess
+@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.WasteGenerationProcess.WasteGenerationProcessViewModel
+@{
+    ViewBag.Title = WasteGenerationProcessResources.Title;
+}
+<header class="hgroup">
+    <h1 class="heading-large">@WasteGenerationProcessResources.Header</h1>
+</header>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.Gds().ValidationSummary()
+    @Html.HiddenFor(m => m.NotificationId)
+    <div>
+        <fieldset>
+            <div class="form-group @Html.Gds().FormGroupClass(m => m.ProcessDescription)">
+                @Html.Gds().ValidationMessageFor(m => m.ProcessDescription)<br />
+                @Html.TextAreaFor(m => m.ProcessDescription, new { @id = "other-label", @class = "text-area full-width", @title = WasteGenerationProcessResources.ProcessDescription })
+            </div>
+            <div class="form-group @Html.Gds().FormGroupClass(m => m.IsDocumentAttached)">
+                <fieldset>
+                    <div>@Html.Gds().ValidationMessageFor(m => m.IsDocumentAttached)</div>
+                    <label class="block-label" for="checkbox-1">
+                        @Html.CheckBoxFor(m => m.IsDocumentAttached, new { @id = "checkbox-1" })
+                        @WasteGenerationProcessResources.Detail
+                    </label>
+                </fieldset>
+            </div>
+        </fieldset>
+    </div>
+    <div class="form-group">
+        <button class="button" type="submit">@Constants.ContinueButtonText</button>
+    </div>
+}

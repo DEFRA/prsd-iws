@@ -1,0 +1,89 @@
+﻿@using EA.Iws.Web.Views.CopyFromNotification
+@model EA.Iws.Web.ViewModels.CopyFromNotification.CopyFromNotificationViewModel
+
+@{
+    ViewBag.Title = CopyFromNotificationResources.Title;
+}
+
+@if (Model.Notifications.Any())
+{
+    <header class="hgroup">
+        <h1 class="heading-large">@CopyFromNotificationResources.Header</h1>
+        <p>@CopyFromNotificationResources.HeaderDescription</p>
+    </header>
+
+    using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.Gds().ValidationSummary()
+
+        <div class="form-group @Html.Gds().FormGroupClass(m => m.SelectedNotification)">
+            <table title=@CopyFromNotificationResources.TableTitleForNotificationSummary class="odd-table">
+                <thead>
+                    <tr>
+                        <th>
+                            @CopyFromNotificationResources.ThNotificationNumber
+                        </th>
+                        <th>
+                            @CopyFromNotificationResources.ThExporter
+                        </th>
+                        <th>
+                            @CopyFromNotificationResources.ThImporter
+                        </th>
+                        <th>
+                            @CopyFromNotificationResources.ThWasteType
+                        </th>
+                        <th>
+                            @CopyFromNotificationResources.ThSelect
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (int i = 0; i < Model.Notifications.Count; i++)
+                    {
+                        var radioId = "radio" + i;
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(m => m.Notifications[i].Number)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(m => m.Notifications[i].ExporterName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(m => m.Notifications[i].ImporterName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(m => m.Notifications[i].WasteName)
+                            </td>
+                            <td>
+                                @Html.RadioButtonFor(m => m.SelectedNotification, Model.Notifications[i].Id, new { id = radioId, title = Model.Notifications[i].Number })
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+
+        for (int i = 0; i < Model.Notifications.Count; i++)
+        {
+            @Html.HiddenFor(m => m.Notifications[i].Id)
+            @Html.HiddenFor(m => m.Notifications[i].ExporterName)
+            @Html.HiddenFor(m => m.Notifications[i].ImporterName)
+            @Html.HiddenFor(m => m.Notifications[i].Number)
+            @Html.HiddenFor(m => m.Notifications[i].WasteName)
+        }
+
+        <div class="form-group">
+            <button class="button" type="submit">@Constants.ContinueButtonText</button>
+        </div>
+    }
+}
+else
+{
+    <h2 class="heading-large">@CopyFromNotificationResources.NoNotificationsAvailable</h2>
+    <p>
+        @CopyFromNotificationResources.NoNotificationsAvailableDescription
+    </p>
+
+    @Html.ActionLink(Constants.ContinueButtonText, "Index", "Exporter", new { area = "NotificationApplication" }, new { @class = "button" })
+}

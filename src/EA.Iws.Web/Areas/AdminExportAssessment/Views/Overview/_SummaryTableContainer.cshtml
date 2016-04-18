@@ -1,0 +1,42 @@
+﻿@using EA.Iws.Core.Shared
+@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.NotificationApplication.NotificationOverviewViewModel
+@{ViewBag.SectionIncompleteText = "Section incomplete";}
+<header class="hgroup">
+        <h1 class="heading-large">Notification overview</h1>
+</header>
+<hr />
+
+<div>
+    @Html.Partial("_OrganisationsInvolved", Model.OrganisationsInvolvedViewModel)
+</div>
+
+<div>
+    @Html.Partial("_RecoveryOperation", Model.RecoveryOperationViewModel)
+</div>
+
+<div>
+    @Html.Partial("_Transportation", Model.TransportationViewModel)
+</div>
+
+<div>
+    @Html.Partial("_Journey", Model.JourneyViewModel)
+</div>
+
+<div>
+    @Html.Partial("_AmountsAndDates", Model.AmountsAndDatesViewModel)
+</div>
+
+<div>
+    @Html.Partial("_ClassifyYourWaste", Model.ClassifyYourWasteViewModel)
+</div>
+
+<div>
+    @Html.Partial("_WasteCodes", Model.WasteCodeOverviewViewModel)
+</div>
+
+@if (Model.NotificationType == NotificationType.Recovery)
+{
+    <div>
+        @Html.Partial("_WasteRecovery", Model.WasteRecoveryViewModel)
+    </div>
+}

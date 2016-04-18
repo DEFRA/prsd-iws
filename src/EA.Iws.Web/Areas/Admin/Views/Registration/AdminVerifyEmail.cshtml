@@ -1,0 +1,15 @@
+﻿@{
+    ViewBag.Title = "Email verified";
+}
+
+<h2 class="heading-medium">Your email has been verified successfully.</h2>
+
+
+@if (User.Identity.IsAuthenticated)
+{
+    @Html.ActionLink(Constants.ContinueButtonText, "AwaitApproval", "Registration", null, new { @class = "button" })
+}
+else
+{
+    @Html.ActionLink("Log in to continue using International Waste Shipments", "Index", "Home")
+}

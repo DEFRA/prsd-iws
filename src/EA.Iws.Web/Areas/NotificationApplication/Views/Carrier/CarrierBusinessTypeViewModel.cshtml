@@ -1,0 +1,52 @@
+﻿@using EA.Iws.Core.Shared
+@using EA.Iws.Web.Areas.NotificationApplication.Views.Carrier
+@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.Carrier.AddCarrierViewModel
+
+<div class="form-group @Html.Gds().FormGroupClass(m => m.Business.Name)">
+    @Html.Gds().LabelFor(m => m.Business.Name)
+    @Html.Gds().ValidationMessageFor(m => m.Business.Name)
+    @Html.Gds().TextBoxFor(m => m.Business.Name, new
+    {
+        data_addressbook_url = Url.Action("Index", "Search", new { area = "AddressBook" }),
+        data_addressbook_type = "Carrier"
+    })
+</div>
+
+<div class="form-group @Html.Gds().FormGroupClass(m => m.Business.BusinessType)">
+    @{if (ViewBag.Title != "Exporter - notifier")
+    {<span class="form-hint">@CarrierBusinessTypeResources.OthersHint</span>}}
+
+    @Html.Gds().ValidationMessageFor(m => m.Business.BusinessType)
+
+    <label class="block-label" data-target="sole-trader-number" for="SoleTrader">
+        @Html.RadioButtonFor(m => m.Business.BusinessType, "SoleTrader", new { @class = "", @id = "SoleTrader" }) @EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(BusinessType.SoleTrader)
+    </label>
+
+    <label class="block-label" data-target="partnership-number" for="Partnership">
+        @Html.RadioButtonFor(m => m.Business.BusinessType, "Partnership", new { @class = "", @id = "Partnership" }) @EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(BusinessType.Partnership)
+    </label>
+
+    <label class="block-label" data-target="companies-house-number" for="LimitedCompany">
+        @Html.RadioButtonFor(m => m.Business.BusinessType, "LimitedCompany", new { @class = "", @id = "LimitedCompany" }) @EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(BusinessType.LimitedCompany)
+    </label>
+
+    <label class="block-label" data-target="other-description" for="Other">
+        @Html.RadioButtonFor(m => m.Business.BusinessType, BusinessType.Other, new { @class = "", @id = "Other" }) @EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(BusinessType.Other)
+    </label>
+    <div class="panel-indent @(Model.Business.BusinessType != null && Model.Business.BusinessType == BusinessType.Other ? "" : "js-hidden")" id="other-description">
+        <div class="form-group @Html.Gds().FormGroupClass(m => m.Business.OtherDescription)">
+            @Html.Gds().LabelFor(m => m.Business.OtherDescription)
+            @Html.Gds().ValidationMessageFor(m => m.Business.OtherDescription)
+            @Html.Gds().TextBoxFor(m => m.Business.OtherDescription)
+        </div>
+    </div>
+</div>
+
+<div class="form-group @Html.Gds().FormGroupClass(m => m.Business.RegistrationNumber)" data-validation-behaviour="ignore-parent">
+    @Html.Gds().LabelFor(m => m.Business.RegistrationNumber)
+    <span class="form-hint">
+        @CarrierBusinessTypeResources.RegNoHint
+    </span>
+    @Html.Gds().ValidationMessageFor(m => m.Business.RegistrationNumber)
+    @Html.Gds().TextBoxFor(m => m.Business.RegistrationNumber)
+</div>

@@ -1,0 +1,22 @@
+﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.NotificationApplication.OrganisationsInvolvedViewModel
+
+<div class="overview-block">
+    @if (Model.IsImporterCompleted)
+    {
+        <div class="overview-block-element">
+            @Html.DisplayFor(m => m.Importer.Business.Name)
+            <br />
+            @Html.DisplayFor(m => m.Importer.Address.StreetOrSuburb),
+            @Html.DisplayFor(m => m.Importer.Address.TownOrCity)
+            @Html.DisplayFor(m => m.Importer.Address.PostalCode),
+            @Html.DisplayFor(m => m.Importer.Address.CountryName)
+        </div>
+        <div class="overview-block-element">
+            @Html.DisplayFor(m => m.Importer.Contact)
+        </div>
+    }
+    else
+    {
+        <div class="overview-block-element">@ViewBag.SectionIncompleteText</div>
+    }
+</div>

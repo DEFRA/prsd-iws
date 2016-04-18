@@ -1,0 +1,39 @@
+td.upper-line 
+{ 
+    border-top:solid 1px black; 
+    text-align:center;
+}
+    
+table.fraction 
+{ 
+    text-align: center; 
+    vertical-align: middle;
+    margin-top:0.5em; 
+    margin-bottom:0.5em; 
+    line-height: 2em;
+    width:auto; 
+    td
+    {
+        text-align: center;
+        border-bottom: none
+    }
+}
+
+/* ******* Table Rows ********* */
+.odd-table{
+    border-collapse: separate;
+        border-top: 1px solid $grey-2;
+    
+    th{
+        background: $grey-3; 
+        padding-left: 10px;
+    }
+    tr{
+        &:nth-child(2n+1) {  
+        background: $grey-4;
+        } 
+    }
+    td{
+        padding-left: 10px;
+    }
+}

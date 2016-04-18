@@ -1,0 +1,48 @@
+﻿@model EA.Iws.Web.Areas.ImportNotification.ViewModels.Home.SummaryTableContainerViewModel
+
+<div class="overview-block">
+    @if (Model.Details.Facilities != null && Model.Details.Facilities.Count > 0)
+    {
+        for (int i = 0; i < Model.Details.Facilities.Count; i++)
+        {
+            <div class="overview-block-element">
+                @if (!string.IsNullOrWhiteSpace(Model.Details.Facilities[i].Name))
+                {
+                    if (Model.Details.Facilities[i].IsActualSite)
+                    {
+                        <text>Actual site of recovery</text>
+                        <br/><br />
+                    }
+                    
+                    @Html.DisplayFor(m => m.Details.Facilities[i].Name)
+                    <br />
+                }
+
+                @if (!Model.Details.Facilities[i].Address.IsEmpty())
+                {
+                    @Html.DisplayFor(m => m.Details.Facilities[i].Address.AddressLine1)<text>, </text>
+                    @Html.DisplayFor(m => m.Details.Facilities[i].Address.TownOrCity)<text> </text>
+                    @Html.DisplayFor(m => m.Details.Facilities[i].Address.PostalCode)<text>, </text>
+                    @Html.DisplayFor(m => m.Details.Facilities[i].Address.Country)
+                }
+
+            </div>
+
+            if (!Model.Details.Facilities[i].Contact.IsEmpty())
+            {
+                <div class="overview-block-element">
+                    @Html.DisplayFor(m => m.Details.Facilities[i].Contact)
+                </div>
+            }
+
+            if (i < (Model.Details.Facilities.Count - 1))
+            {
+                <hr />
+            }
+        }
+    }
+    else
+    {
+        <div class="overview-block-element"> @ViewBag.SectionIncompleteText</div>
+    }
+</div>

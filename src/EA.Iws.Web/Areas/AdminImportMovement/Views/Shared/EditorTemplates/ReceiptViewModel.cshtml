@@ -1,0 +1,68 @@
+﻿@using Resource = EA.Iws.Web.Areas.AdminImportMovement.Views.Shared.EditorTemplates.ReceiptResources
+@model EA.Iws.Web.Areas.AdminImportMovement.ViewModels.Home.ReceiptViewModel
+
+
+<details>
+    <summary class="heading-medium">
+        @Resource.MainHeading
+    </summary>
+    <div>
+
+        <div class="form-group @Html.Gds().FormGroupClass(m => m.ReceivedDate.Day) @Html.Gds().FormGroupClass(m => m.ReceivedDate.Month) @Html.Gds().FormGroupClass(m => m.ReceivedDate.Year)">
+            @Html.LabelFor(m => m.ReceivedDate, new { @class = "heading-small" })
+            @Html.Gds().ValidationMessageFor(m => m.ReceivedDate)
+            @Html.EditorFor(m => m.ReceivedDate)
+        </div>
+
+        <div class="form-group @Html.Gds().FormGroupClass(m => m.WasAccepted)">
+            @Html.LabelFor(m => m.WasAccepted, new { @class = "heading-small" })
+            @Html.Gds().ValidationMessageFor(m => m.WasAccepted)
+            <fieldset>
+                <label class="block-label" for="yes">
+                    @Html.RadioButtonFor(m => m.WasAccepted, true, new { id = "yes" }) Yes
+                </label>
+                <label class="block-label" data-target="rejected" for="no">
+                    @Html.RadioButtonFor(m => m.WasAccepted, false, new { id = "no" }) No
+                </label>
+                <div class="panel-indent @(Model.WasAccepted ? "js-hidden" : string.Empty)" id="rejected">
+
+                    <div class="form-group @Html.Gds().FormGroupClass(m => m.RejectionReason)">
+                        @Html.LabelFor(m => m.RejectionReason, new { @class = "form-label-bold" })
+                        @Html.Gds().ValidationMessageFor(m => m.RejectionReason)
+                        @Html.Gds().DropDownListFor(m => m.RejectionReason, Model.RejectionReasonsSelectList, string.Empty)
+                    </div>
+
+                    <div class="form-group @Html.Gds().FormGroupClass(m => m.RejectionFurtherInformation)">
+                        @Html.LabelFor(m => m.RejectionFurtherInformation, new { @class = "form-label" })
+                        @Html.Gds().ValidationMessageFor(m => m.RejectionFurtherInformation)
+                        @Html.TextAreaFor(m => m.RejectionFurtherInformation, new { @class = "form-control-wide", rows = 10 })
+                    </div>
+
+                </div>
+            </fieldset>
+        </div>
+
+        <div class="form-group @Html.Gds().FormGroupClass(m => m.ActualQuantity) @Html.Gds().FormGroupClass(m => m.Units)">
+            <h3 class="heading-small" style="margin-top: 0">@Resource.ActualQuantityQuestion</h3>
+            <p>@Resource.ActualQuantityHint</p>
+            @Html.LabelFor(m => m.ActualQuantity, new { @class = "form-label" })
+            @Html.Gds().ValidationMessageFor(m => m.ActualQuantity)
+            @Html.Gds().ValidationMessageFor(m => m.Units)
+            <div class="grid-row">
+                <div class="column-third">
+                    @Html.Gds().TextBoxFor(m => m.ActualQuantity, new { type = "number", min = 0, step = "any", @class = "form-control form-control-wide" })
+                </div>
+                <div class="column-third">
+                    @Html.Gds().DropDownListFor(m => m.Units, Model.UnitSelectList, new { @class = "form-control form-control-wide" })
+                    @for (int i = 0; i < Model.PossibleUnits.Count; i++)
+                    {
+                        @Html.HiddenFor(m => m.PossibleUnits[i])
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</details>
+
+
+

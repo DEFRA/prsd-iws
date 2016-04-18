@@ -1,0 +1,66 @@
+﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.NotificationApplication.ClassifyYourWasteViewModel
+@{
+    var id = Model.NotificationId;
+    var viewLocation = Constants.ExternalNotificationOverviewSectionsLocation;
+    var headerColspan = ViewBag.CanEditNotification ? 3 : 2;
+}
+
+@{
+    var chemicalClass = Model.IsChemicalCompositionCompleted ? string.Empty : "over-alert";
+    var processClass = Model.IsProcessOfGenerationCompleted ? string.Empty : "over-alert";
+    var physicalClass = Model.ArePhysicalCharacteristicsCompleted ? string.Empty : "over-alert";
+}
+
+<table class="overview-table">
+    <thead>
+        <tr>
+            <th colspan="@headerColspan">
+                <h2 class="heading-medium">Waste classification</h2>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr class = @chemicalClass>
+            <td>
+                Chemical composition
+            </td>
+            <td>
+                @Html.Partial(viewLocation + "_ChemicalComposition.cshtml")
+            </td>
+            @if (ViewBag.CanEditNotification)
+            {
+                <td class="change">
+                    @Html.ActionLink("Change", "Index", "ChemicalComposition", new { id, backToOverview = true }, null)
+                </td>
+            }
+        </tr>
+        <tr class = @processClass>
+            <td>
+                Process of generation
+            </td>
+            <td>
+                @Html.Partial(viewLocation + "_ProcessOfGeneration.cshtml")
+            </td>
+            @if (ViewBag.CanEditNotification)
+            {
+                <td class="change">
+                    @Html.ActionLink("Change", "Index", "WasteGenerationProcess", new { id, backToOverview = true }, null)
+                </td>
+            }
+        </tr>
+        <tr class = @physicalClass>
+            <td>
+                Physical characteristics
+            </td>
+            <td>
+                @Html.Partial(viewLocation + "_PhysicalCharacteristics.cshtml")
+            </td>
+            @if (ViewBag.CanEditNotification)
+            {
+                <td class="change">
+                    @Html.ActionLink("Change", "Index", "PhysicalCharacteristics", new { id, backToOverview = true }, null)
+                </td>
+            }
+        </tr>
+    </tbody>
+</table>

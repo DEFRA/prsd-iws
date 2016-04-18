@@ -1,0 +1,25 @@
+﻿@using EA.Iws.Web.Views.NewNotification
+@model EA.Iws.Web.ViewModels.NewNotification.CompetentAuthorityChoiceViewModel
+@{
+    ViewBag.Title = CompetentAuthorityResources.Title;
+}
+
+<header class="hgroup text">
+    <h1 class="heading-large">@CompetentAuthorityResources.Header</h1>
+    <p>@CompetentAuthorityResources.HeaderDescription</p>
+</header>
+
+@using (Html.BeginForm())
+{
+    @Html.Gds().ValidationSummary()
+    @Html.AntiForgeryToken()
+
+    <div class="form-group @Html.Gds().FormGroupClass(m => m.CompetentAuthorities.SelectedValue)">
+        @Html.Gds().ValidationMessageFor(model => model.CompetentAuthorities.SelectedValue)
+        @Html.EditorFor(m => m.CompetentAuthorities)
+    </div>
+
+    <div class="form-group">
+        <button class="button" type="submit">@Constants.ContinueButtonText</button>
+    </div>
+}

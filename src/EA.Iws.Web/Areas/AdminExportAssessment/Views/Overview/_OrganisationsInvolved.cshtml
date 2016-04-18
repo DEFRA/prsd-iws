@@ -1,0 +1,73 @@
+﻿@using EA.Iws.Core.Shared
+@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.NotificationApplication.OrganisationsInvolvedViewModel
+@{
+    var id = Model.NotificationId;
+    var disposalOrRecovery = Model.NotificationType;
+    var viewLocation = Constants.InternalExportNotificationOverviewSectionsLocation;
+}
+
+<table class="overview-table">
+    <thead>
+        <tr>
+            <th colspan="2">
+                <h2 class="heading-medium">Organisations involved</h2>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                Exporter
+            </td>
+            <td>
+                @Html.Partial(viewLocation + "_Exporter.cshtml")
+            </td>
+            
+        </tr>
+        <tr>
+            <td>
+                Producers
+            </td>
+            <td>
+                @Html.Partial(viewLocation + "_Producer.cshtml")
+            </td>
+            
+        </tr>
+        <tr>
+            <td>
+                Site of export
+            </td>
+            <td>
+                @Html.Partial(viewLocation + "_SiteOfExport.cshtml")
+            </td>
+            
+        </tr>
+        <tr>
+            <td>
+                Importer
+            </td>
+            <td>
+                @Html.Partial(viewLocation + "_Importer.cshtml")
+            </td>
+            
+        </tr>
+        <tr>
+            <td>
+                @(Model.NotificationType == NotificationType.Recovery ? "Recovery facilities" : "Disposal facilities")
+            </td>
+            <td>
+                @Html.Partial(viewLocation + "_Facility.cshtml")
+            </td>
+            
+        </tr>
+        <tr>
+            <td>
+                @(Model.NotificationType == NotificationType.Recovery ? "Recovery site" : "Disposal site")
+            </td>
+            <td>
+                @Html.Partial(viewLocation + "_SiteOfRecovery.cshtml")
+            </td>
+            
+        </tr>
+    </tbody>
+</table>

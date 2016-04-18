@@ -1,0 +1,44 @@
+﻿@using EA.Iws.Web.Areas.NotificationApplication.Views.YCode
+@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.YCode.YCodeViewModel
+
+@{
+    ViewBag.Title = YCodeResources.Title;
+}
+
+<div class="grid-row">
+    <header class="hgroup">
+        <h1 class="heading-large">@YCodeResources.Header</h1>
+    </header>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.Gds().ValidationSummary()
+
+        @Html.EditorFor(m => m.EnterWasteCodesViewModel)
+
+        <div class="form-group">
+            <button class="button" type="submit" name="command" value="continue">@Constants.ContinueButtonText</button>
+        </div>
+    }
+
+</div>
+
+@section scripts{
+    <script>
+        (function($) {
+
+            $("#EnterWasteCodesViewModel_IsNotApplicable").change(function() {
+
+                var not = "<td colspan=\"4\">Not applicable</td>";
+                var await = "<td colspan=\"4\">Awaiting code...</td>";
+
+                var c = @Model.EnterWasteCodesViewModel.SelectedWasteCodes.Count();
+
+                if (c == 0) {
+                    var t = this.checked ? not : await;
+                    $("#codeTable tr").eq(1).html(t);
+                }
+            });
+        })(jQuery);
+    </script>
+}

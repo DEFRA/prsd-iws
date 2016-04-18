@@ -1,0 +1,39 @@
+﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.NotificationApplication.WasteRecoveryViewModel
+
+@if (Model.IsWasteRecoveryInformationCompleted)
+{
+    <dl>
+        @if (Model.IsProvidedByImporter)
+        {
+            <dt>Details:</dt>
+            <dd>The importer-consignee will provide the details</dd>
+        }
+        else
+        {
+            <dt>Percentage recoverable:</dt>
+            <dd>@Html.DisplayFor(m => m.PercentageRecoverable)%</dd>
+
+            if (Model.HasDisposalPortion)
+            {
+                <dt>Disposal method:</dt>
+                <dd>@Html.DisplayFor(m => m.MethodOfDisposal)</dd>
+            }
+
+            <dt>Estimated value of recoverable material (per @Html.DisplayFor(m => m.EstimatedUnit)):</dt>
+            <dd>£@Html.DisplayFor(m => m.EstimatedAmount)</dd>
+
+            <dt>Cost of recovery (per @Html.DisplayFor(m => m.CostUnit)):</dt>
+            <dd>£@Html.DisplayFor(m => m.CostAmount)</dd>
+
+            if (Model.HasDisposalPortion)
+            {
+                <dt>Cost of disposal (per @Html.DisplayFor(m => m.DisposalUnit)):</dt>
+                <dd>£@Html.DisplayFor(m => m.DisposalAmount)</dd>
+            }
+        }
+    </dl>
+}
+else
+{
+    <p>@ViewBag.SectionIncompleteText</p>
+}

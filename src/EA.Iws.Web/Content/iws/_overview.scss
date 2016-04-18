@@ -1,0 +1,306 @@
+﻿.overview-block div.overview-block-element:not(:last-child) {
+    margin-bottom: 15px;
+}
+
+.overview-block div.overview-sub-block:not(:last-child) {
+    margin-bottom: 30px;
+}
+
+.overview-block-element .non-breaking {
+    white-space: nowrap;
+}
+
+.overview-block-element .sub-title {
+    color: $secondary-text-colour;
+}
+
+.overview-block-element .sub-text {
+    margin-bottom: 0.5em;
+}
+
+.overview-table {
+    td {
+        vertical-align: top;
+    }
+
+    td:first-child {
+        width: 30%;
+    }
+
+    .change {
+        text-align: right;
+        width: 10%;
+
+        a {
+            font-weight: bold;
+            font-size: 19px;
+            text-decoration: none;
+        }
+    }
+
+    th.change {
+        width: auto;
+        vertical-align: bottom;
+    }
+
+    h2 {
+        margin-bottom: 0px;
+    }
+}
+
+.noti-price{
+    background: $light-blue;
+        color: $white;
+        padding: 10px 10px 5px 10px;
+        font-weight: bold;
+        clear: right;
+        
+        .price{
+            font-size: 40px;
+            font-weight: bold;
+            float: right;
+        }
+        .text{
+            font-size: 19px;
+            line-height:normal;
+        }
+        span{
+            display: inline-block;
+        }
+}
+
+.noti-overview{
+    margin-bottom: 30px;
+
+    .heading-medium{
+        font-weight: normal;
+        color: $secondary-text-colour;
+        margin-top: 30px;
+    }
+
+    .heading-large{
+        margin-top: 0;
+    }
+
+    span{
+        display: inline-block;
+    }
+
+    .status{
+        float: right;
+        clear: right;
+        margin-top: 30px;
+        margin-bottom: 10px;
+    }
+    
+    .noti-charge{
+        background: $light-blue;
+        color: $white;
+        padding: 10px 10px 5px 10px;
+        font-weight: bold;
+        float: right;
+        clear: right;
+        
+        .price{
+           font-size: 40px;
+            font-weight: bold;
+            
+        }
+
+        .vat-message{
+            font-weight: normal;
+            font-size: 0.75em;
+        }
+    }
+
+    .noti-links{
+        float: right;
+        clear: right;
+        padding: 15px 0px 15px 0px;
+
+        a{
+            display: block;
+            float: right;
+        }
+    }
+
+    .status, .noti-charge, .noti-links{
+      &:after {
+        visibility: hidden;
+        display: block;
+        font-size: 0;
+        content: " ";
+        clear: both;
+        height: 0;
+     }  
+    }
+    &:after {
+        border-bottom: 1px solid $grey-2;
+        display: block;
+        font-size: 0;
+        content: " ";
+        clear: both;
+        height: 0;
+        margin: 30px 15px 10px 15px;
+     }
+}
+
+.noti-alert{ 
+    clear: both; 
+    border: 2px solid $error-colour; 
+    padding: 10px 10px 6px 10px; 
+    margin: 0px 15px 0px 15px; 
+    em{ 
+        color: $error-colour; 
+        display: inline-block; 
+        font-style: normal; 
+        padding-right: 5px; 
+        font-weight: bold; 
+    } 
+} 
+
+.no-margin{
+    margin: 0px 0px 0px 0px;
+}
+
+.over-alert{ 
+    border: 2px solid $error-colour; 
+    td{ padding-left: 10px; 
+    } 
+}
+
+/*** All Status ***/
+.statusbox {
+    text-transform: capitalize;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 4px 10px 3px 10px;
+    display: inline-block;
+}
+
+.statusbox.table {
+    width: 90%;
+    text-align: center;
+}
+
+.statusbox.s-blue {
+    color: $light-blue;
+    border: 1px solid $light-blue;
+}
+.statusbox.s-orange {
+    color: $orange;
+    border: 1px solid $orange;
+}
+.statusbox.s-green {
+    color: $turquoise; 
+    border: 1px solid $turquoise;
+}
+.statusbox.s-red {
+    color: $red;
+    border: 1px solid $red;
+}
+
+/*** Internal overview ***/
+
+#submit-side-bar {
+    h3:first-of-type {
+        border-top: 10px solid $link-colour;
+        padding-top: 0.4em;
+        margin-bottom: 0.5em;
+    }
+
+    a {
+        display: inline-block;
+        margin-bottom: 5px;
+    }
+
+    a.button {
+        margin-top: 20px;
+    }
+
+    p {
+        margin-bottom: 0.3em;
+    }
+
+    .squash-margin {
+        margin-top: 1em;
+        margin-bottom: 0;
+    }
+
+    #charge {
+        font-size: 40px;
+        font-weight: 700;
+        margin-top: 0;
+    }
+
+    .line {
+        display: block;
+    }
+
+    .text-fade {
+        color: $secondary-text-colour;
+    }
+}
+
+#submit-overview-area {
+
+    details {
+        margin-bottom: 15px;
+
+        .expanded-details {
+            padding-bottom: 10px;
+        }
+
+        .panel-indent {
+            padding-top: 0;
+            padding-bottom: 0;
+            margin-bottom: 0;
+        }
+
+        dl dt {
+            margin: 15px 0 3px 0;
+            color: $secondary-text-colour;
+        }
+
+        hr {
+            display: block;
+            height: 1px;
+            border: 0;
+            border-top: 1px solid #BFC1C3;
+            margin: 15px 0 3px 0;
+        }
+
+        .definition-indent {
+            margin-left: 10px;
+        }
+
+        dt.definition-indent {
+            margin-left: 10px;
+            margin-top: 7px;
+        }
+
+        > summary {
+            display: block;
+
+            > .edit-link-container {
+                float: right;
+            }
+        }
+
+        p {
+            word-wrap: break-word;
+        }
+
+        dd {
+            word-wrap: break-word;
+        }
+    }
+
+    hr {
+        margin-bottom: 10px;
+    }
+
+    h2 {
+        display: inline-block;
+    }
+}

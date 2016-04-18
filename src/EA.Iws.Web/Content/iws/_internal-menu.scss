@@ -1,0 +1,147 @@
+﻿@mixin accordion($menu-colour) {
+    /*heading styles*/
+    margin-top: 2.7em;
+    border-top: 10px solid $menu-colour;
+    border-bottom: 10px solid $menu-colour;
+    background: $grey-4;
+    padding-top: 15px;
+    padding-bottom: 15px;
+
+    h3 {
+        cursor: pointer;
+        color: $black;
+        padding: 7px 0px 5px 10px;
+        cursor: pointer;
+        font-weight: bold;
+        font-size: 19px;
+        /*heading hover effect*/
+        &:link {
+        }
+
+        &:hover {
+            background: $menu-colour;
+            color: $white;
+
+            span {
+                border-color: transparent transparent $white transparent;
+            }
+        }
+        /*Arrows*/
+        span {
+            content: '';
+            margin-right: 5px;
+            display: inline-block;
+            cursor: pointer;
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 0 6px 12px 6px;
+            border-color: transparent transparent $black transparent;
+            -webkit-transform: translateY(0%) rotate(90deg);
+            -moz-transform: translateY(0%) rotate(90deg);
+            -ms-transform: translateY(0%) rotate(90deg);
+            -o-transform: translateY(0%) rotate(90deg);
+            transform: translateY(0%) rotate(90deg);
+        }
+    }
+
+    .current {
+        background: $menu-colour;
+        color: $white;
+
+        span {
+            content: '';
+            border-color: transparent transparent $white transparent;
+            -webkit-transform: translateY(0%) rotate(180deg);
+            -moz-transform: translateY(0%) rotate(180deg);
+            -ms-transform: translateY(0%) rotate(180deg);
+            -o-transform: translateY(0%) rotate(180deg);
+            transform: translateY(0%) rotate(180deg);
+        }
+    }
+    /*list items*/
+    li {
+        list-style-type: none;
+    }
+    /*links*/
+    ul {
+        ul {
+            padding: 10px 0px 0px 0px;
+            background: $white;
+
+            &:after {
+                content: '';
+                display: block;
+                border-bottom: 5px solid $menu-colour;
+                margin-top: 10px;
+                margin-bottom: 10px;
+                height: 0px;
+                width: 100%;
+            }
+
+            li {
+                padding: 3px 0px 3px 15px;
+                color: $link-colour;
+                text-decoration: none;
+                cursor: pointer;
+                font-size: 16px;
+
+                &:active {
+                    color: $link-colour;
+                    background: none;
+                }
+
+                &:hover {
+                    color: $black;
+                    background: $panel-colour;
+                }
+
+                &:active {
+                    color: $black;
+                    background: $panel-colour;
+                }
+
+                &:focus {
+                    color: $black;
+                    background: $panel-colour;
+                    outline: none;
+                }
+
+                a {
+                    display: block;
+                    text-decoration: none;
+                    color: $black;
+                    /*transition for smooth hover animation*/
+                    transition: all 0.15s;
+                    /*hover effect on links*/
+                    &:hover {
+                        text-decoration: none;
+                        color: $black;
+                    }
+                }
+            }
+        }
+    }
+    /*Lets hide the non active LIs by default*/
+    ul {
+        ul {
+            display: none;
+        }
+    }
+
+    li.active ul {
+        display: block;
+    }
+}
+
+.accordion-import {
+    @include accordion($internal-import-colour);
+}
+
+.accordion-export {
+    @include accordion($internal-export-colour);
+}
+
+.accordion-general {
+    @include accordion($internal-colour);
+}

@@ -1,0 +1,40 @@
+﻿@using EA.Iws.Web.Areas.NotificationApplication.Views.Facility
+@model EA.Iws.Web.ViewModels.Shared.TrueFalseViewModel
+@{
+    ViewBag.Title = RecoveryPreconsentResources.Title;
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.Gds().ValidationSummary()
+
+    <header class="hgroup">
+        <h1 class="heading-large">@RecoveryPreconsentResources.Header</h1>
+    </header>
+    <p>@RecoveryPreconsentResources.HeaderDescription</p>
+
+    <div class="form-group @Html.Gds().FormGroupClass(m => m.Value)">
+        @Html.Gds().ValidationMessageFor(model => model.Value)
+        <fieldset>
+            <label class="block-label" for="rdoYes" data-target="yes-message">
+                @Html.RadioButtonFor(m => m.Value, true, new { id = "rdoYes" })
+                @RecoveryPreconsentResources.Yes
+            </label>
+            <div class="panel-indent @(Model.Value.GetValueOrDefault() ? "" : "js-hidden")" id="yes-message">
+                <p>@RecoveryPreconsentResources.YesDescription</p>
+            </div>
+            <label class="block-label" for="rdoNo" data-target="no-message">
+                @Html.RadioButtonFor(m => m.Value, false, new { id = "rdoNo" })
+                @RecoveryPreconsentResources.No
+            </label>
+            <div class="panel-indent @((Model.Value.HasValue && !Model.Value.Value) ? "" : "js-hidden")" id="no-message" id="no-message">
+                <p>@RecoveryPreconsentResources.NoDescription</p>
+            </div>
+        </fieldset>
+    </div>
+
+    <div class="form-group">
+        <button class="button" type="submit">@Constants.ContinueButtonText</button>
+    </div>
+}

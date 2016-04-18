@@ -1,0 +1,27 @@
+﻿.button {
+    margin: 0 $gutter-half $gutter-half 0; // This was removed from GOV.UK Elements...
+}
+
+.button-start,
+.button-get-started {
+  background-image: file-url("icon-pointer.png");
+
+  @include device-pixel-ratio {
+    background-image: file-url("icon-pointer-2x.png");
+  }
+
+  @include ie(6) {
+    background-image: file-url("icon-pointer-2x.png");
+  }
+}
+
+.button.blue{
+    box-shadow: none;
+    -webkit-box-shadow: none;
+    @include core-19;
+    background-color: $light-blue;
+}
+
+.button-secondary {
+    @include button($grey-3);
+}

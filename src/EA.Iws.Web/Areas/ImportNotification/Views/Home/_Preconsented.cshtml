@@ -1,0 +1,24 @@
+﻿@model EA.Iws.Web.Areas.ImportNotification.ViewModels.Home.SummaryTableContainerViewModel
+@using Resource = EA.Iws.Web.Areas.ImportNotification.Views.Home.IndexResources
+
+<div class="overview-block">
+    <div class="overview-block-element">
+        @if (Model.Details.AreFacilitiesPreconsented.HasValue)
+        {
+            if (Model.Details.AreFacilitiesPreconsented.Value)
+            {
+                @Resource.True
+            }
+            else
+            {
+                @Resource.False
+            }
+        }
+        else
+        {
+            @ViewBag.SectionIncompleteText
+        }
+
+    </div>
+</div>
+

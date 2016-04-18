@@ -1,0 +1,36 @@
+﻿#carrier-select-lists .carrier-list select {
+    width: 100% !important;
+}
+
+#carrier-select-lists .form-group:last-child {
+    margin-bottom: 30px;
+}
+
+#carrier-select-lists .form-group {
+    border-top: 1px solid $border-colour;
+    margin: 0;
+    padding: 0;
+}
+
+#carrier-select-lists .error {
+    border-left: 0px;
+}
+
+#carrier-select-lists .error .carrier-list {
+    padding-bottom: 12px;
+}
+
+.carrier-list {
+    padding-top: 15px;
+}
+
+#carrier-list-heading {
+    margin-top: 1.25em;
+    padding: 1.25em 0 .5625em 0;
+    font-weight: 700;
+    font-size: 16px;
+}
+
+#form-menu .summary-list-receipt{
+    border-bottom: 0px !important;
+}

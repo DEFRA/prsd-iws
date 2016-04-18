@@ -1,0 +1,42 @@
+﻿@using EA.Iws.Core.Shared
+@using EA.Iws.Web.Areas.NotificationApplication.Views.WasteRecovery
+@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.WasteRecovery.WasteRecoveryViewModel
+@{
+    ViewBag.Title = WasteRecoveryResources.Title;
+}
+
+<header class="hgroup">
+    <h1 class="heading-large">@WasteRecoveryResources.Header</h1>
+</header>
+
+@using (Html.BeginForm())
+{
+    <div class="text">
+        @Html.AntiForgeryToken()
+        @Html.Gds().ValidationSummary()
+
+        <p>@WasteRecoveryResources.Desc1</p>
+
+        <p>@WasteRecoveryResources.Desc2</p>
+
+        <h2 class="heading-small">@WasteRecoveryResources.Header2</h2>
+
+        <div class="form-group">
+            <label class="block-label" for="rdoNotifier">
+                @Html.RadioButtonFor(m => m.ProvidedBy, ProvidedBy.Notifier, new { @class = "", @id = "rdoNotifier" }) @EA.Prsd.Core.Helpers.EnumHelper.GetDescription(ProvidedBy.Notifier)
+            </label>
+
+            <label class="block-label" data-target="importer-note" for="rdoImporter">
+                @Html.RadioButtonFor(m => m.ProvidedBy, ProvidedBy.Importer, new { @class = "", @id = "rdoImporter" }) @EA.Prsd.Core.Helpers.EnumHelper.GetDescription(ProvidedBy.Importer)
+            </label>
+
+            <div class="panel-indent @(Model.ProvidedBy != null && Model.ProvidedBy == ProvidedBy.Importer ? string.Empty : "js-hidden")" id="importer-note">
+                <p>@WasteRecoveryResources.Desc3</p>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <button class="button" type="submit">@Constants.ContinueButtonText</button>
+        </div>
+    </div>
+}

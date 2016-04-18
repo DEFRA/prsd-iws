@@ -1,0 +1,17 @@
+﻿@model IList<EA.Iws.Core.ImportNotification.Summary.WasteCode>
+
+@foreach (var c in Model)
+{
+    <div class="overview-block-element">
+        @c.Name<br/>
+
+        @if (!string.IsNullOrWhiteSpace(c.Description))
+        {
+            @c.Description
+        }
+        @if (c != Model.Last())
+        {
+            <hr/>
+        }
+    </div>
+}

@@ -1,0 +1,20 @@
+﻿@model EA.Iws.Core.WasteCodes.WasteCodeData[]
+
+@foreach (var c in Model)
+{
+    <dl>
+        <dt>Code:</dt>
+        <dd>@c.Code</dd>
+
+        @if (!string.IsNullOrWhiteSpace(c.Description))
+        {
+            <dt>Description:</dt>
+            <dd>@c.Description</dd>
+        }
+    </dl>
+
+    if (c != Model.Last())
+    {
+        <hr />
+    }
+}

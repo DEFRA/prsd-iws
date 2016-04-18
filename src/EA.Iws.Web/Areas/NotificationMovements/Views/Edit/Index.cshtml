@@ -1,0 +1,36 @@
+﻿@using EA.Iws.Web.Areas.NotificationMovements.Views.Edit;
+@model EA.Iws.Web.Areas.NotificationMovements.ViewModels.Edit.EditViewModel
+@{
+    ViewBag.Title = IndexResources.PageTitle;
+}
+
+<header><h1 class="heading-large">@IndexResources.MainHeading</h1></header>
+
+@if (Model.Shipments == null || !Model.Shipments.PossibleValues.Any())
+{
+    <p>@IndexResources.NoShipmentsParagraph</p>
+
+    @Html.ActionLink(Constants.ContinueButtonText, "Index", "Options", 
+        new { area = "NotificationApplication", id = ViewContext.RouteData.Values["notificationId"] }, 
+        new { @class = "button" })
+}
+else
+{
+    using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.Gds().ValidationSummary()
+
+        <div class="form-group">
+            @Html.Gds().ValidationMessageFor(m => m.Shipments.SelectedValue)
+            @Html.EditorFor(m => m.Shipments)
+        </div>
+
+        <div class="form-group-compound">
+            <button class="button" type="submit">@Constants.ContinueButtonText</button>
+        </div>
+
+        @Html.ActionLink(IndexResources.ShipmentSummaryLinkText, "Index", "Options",
+            new { area = "NotificationApplication", id = ViewContext.RouteData.Values["notificationId"] }, null)
+    }
+}

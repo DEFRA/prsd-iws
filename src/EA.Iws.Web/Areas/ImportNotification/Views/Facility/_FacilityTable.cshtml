@@ -1,0 +1,50 @@
+﻿@model EA.Iws.Web.Areas.ImportNotification.ViewModels.Facility.MultipleFacilitiesViewModel
+@using Resourse = EA.Iws.Web.Areas.ImportNotification.Views.Facility._FacilityTableResources 
+
+@Html.AntiForgeryToken()
+@Html.Gds().ValidationSummary()
+
+@if (Model != null && Model.Facilities.Any())
+{
+    <div class="form-group">
+        <table title=@Resourse.TableTitle>
+            <thead>
+                <tr>
+                    <th>@Resourse.ThOrgName</th>
+                    <th>@Resourse.ThAddress</th>
+                    <th></th>
+                    <th>@Html.Raw(string.Format(Resourse.ThActualSite, Model.NotificationType.ToString().ToLower()))</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (var i = 0; i < Model.Facilities.Count; i++)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(m => m.Facilities[i].BusinessName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(m => m.Facilities[i].Address.AddressLine1),
+                            @Html.DisplayFor(m => m.Facilities[i].Address.TownOrCity)
+                        </td>
+                        <td>
+                            @Html.ActionLink(Resourse.Edit, "Edit", "Facility", new { id = Model.NotificationId, facilityId = Model.Facilities[i].Id }, null)
+                            <span class="table-divider">|</span>
+                            @Html.ActionLink(Resourse.Remove, "Remove", "Facility", new { id = Model.NotificationId, facilityId = Model.Facilities[i].Id }, null)
+                        </td>
+                        <td>
+                            @{
+                                var htmlAttr = new Dictionary<string, object> { { "id", Html.NameFor(m => m.Facilities[i].Id) } };
+                                if (@Model.Facilities[i].IsActualSite)
+                                {
+                                    htmlAttr.Add("checked", "checked");
+                                }
+                                @Html.RadioButtonFor(m => m.SelectedSiteOfTreatment, Model.Facilities[i].Id, htmlAttr)
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}

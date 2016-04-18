@@ -1,0 +1,54 @@
+﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.NotificationApplication.TransportationViewModel
+@{
+    var viewLocation = Constants.InternalExportNotificationOverviewSectionsLocation;
+}
+
+
+
+<table class="overview-table">
+    <thead>
+        <tr>
+            <th colspan="2">
+                <h2 class="heading-medium">Transportation</h2>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                Intended carriers
+            </td>
+            <td>
+                @Html.Partial(viewLocation + "_Carrier.cshtml")
+            </td>
+            
+        </tr>
+        <tr>
+            <td>
+                Means of transport
+            </td>
+            <td>
+                @Html.Partial(viewLocation + "_MeansOfTransport.cshtml")
+            </td>
+            
+        </tr>
+        <tr>
+            <td>
+                Packaging types
+            </td>
+            <td>
+                @Html.Partial(viewLocation + "_PackagingTypes.cshtml")
+            </td>
+            
+        </tr>
+        <tr>
+            <td>
+                Special handling requirements
+            </td>
+            <td>
+                @Html.Partial(viewLocation + "_SpecialHandling.cshtml")
+            </td>
+            
+        </tr>
+    </tbody>
+</table>

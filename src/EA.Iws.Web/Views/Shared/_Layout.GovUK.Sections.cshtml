@@ -1,0 +1,79 @@
+﻿@{
+    ViewBag.CookieMessage = "<p>GOV.UK uses cookies to make the site simpler. Find out more about " +
+                            Html.ActionLink("cookies", "Cookies", "NewUser", new { area = string.Empty }, new { target = "_blank" }) + "</p>";
+    ViewBag.HeaderClass = "with-proposition";
+    Layout = "~/Views/Shared/_Layout.GovUK.cshtml";
+}
+
+@* Implement sections here *@
+
+@section top_of_page {
+
+}
+
+@section head {
+    @Html.Partial("_IwsHead")
+    @Html.Partial("_IwsTracking")
+    @RenderSection("head", required: false)
+}
+
+@section inside_header {
+
+}
+
+@section proposition_header {
+    @Html.Partial("_IwsNavigation")
+}
+
+@section after_header {
+
+}
+
+@section footer_top {
+    @Html.Partial("_IwsHelpline")
+    <hr />
+}
+
+@section footer_support_links {
+    <ul>
+        <li>
+            <a href="https://www.gov.uk/help">Help</a>
+        </li>
+        <li>
+            @Html.ActionLink("Cookies", "Cookies", "NewUser", new { area = string.Empty }, null)
+        </li>
+        <li>
+            @Html.ActionLink("Terms and conditions", "TermsAndConditions", "NewUser", new { area = string.Empty }, null)
+        </li>
+    </ul>
+}
+
+@section body_end {
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jquery-ui")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/govuk_toolkit")
+    @Scripts.Render("~/bundles/govuk_iws")
+    @Scripts.Render("~/bundles/helpers")
+    @RenderSection("scripts", required: false)
+}
+
+<main id="content">
+    @Html.Partial("_FeedbackBanner")
+    @if (User.Identity.IsAuthenticated)
+    {
+        <div class="top-content-box font-xsmall">
+            <div id="homepage-link-container">
+                @if (!User.IsInternalUser())
+                {
+                    @Html.ActionLink("Go to your homepage", "Home", "Applicant", new { area = string.Empty }, null)
+                }
+            </div>
+            <div id="top-content-box-container">
+                @RenderSection("top_content_box", false)
+                @Html.Action("_IwsTitle", "Home", new { area = string.Empty })
+            </div>
+        </div>
+    }
+    @RenderBody()
+</main>

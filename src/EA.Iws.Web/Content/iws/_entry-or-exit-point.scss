@@ -1,0 +1,13 @@
+﻿.country-row {
+    background: #EEE;
+    cursor: pointer;
+    
+    td {
+        font-weight: bold;
+        padding-left: 12px;
+    }
+}
+
+.country-row:hover {
+    background: #DDD;
+}

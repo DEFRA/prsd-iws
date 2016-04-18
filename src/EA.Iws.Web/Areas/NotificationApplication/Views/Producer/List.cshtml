@@ -1,0 +1,59 @@
+﻿@using EA.Iws.Web.Areas.NotificationApplication.Views.Producer
+@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.Producer.MultipleProducersViewModel
+@{
+    ViewBag.Title = ListProducerResources.Title;
+}
+<h1 class="heading-large">@ListProducerResources.Header</h1>
+<p>@ListProducerResources.HeaderDescription</p>
+
+@if (Model != null && Model.ProducerData.Any())
+{
+    <div class="form-group">
+        <table title=@ListProducerResources.TableTitle>
+            <thead>
+                <tr>
+                    <th>@ListProducerResources.ThOrganisationName</th>
+                    <th>@ListProducerResources.ThAddress</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (var i = 0; i < Model.ProducerData.Count; i++)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(m => m.ProducerData[i].Business.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(m => m.ProducerData[i].Address.StreetOrSuburb),
+                            @Html.DisplayFor(m => m.ProducerData[i].Address.TownOrCity)
+                        </td>
+                        <td>
+                            @Html.ActionLink(ListProducerResources.Edit, "Edit", "Producer",
+                                new { id = Model.ProducerData[i].NotificationId, entityId = Model.ProducerData[i].Id, backToOverview = ViewBag.BackToOverview }, null)
+                            <span class="table-divider">|</span>
+                            @Html.ActionLink(ListProducerResources.Remove, "Remove", "Producer",
+                                new { id = Model.ProducerData[i].NotificationId, entityId = Model.ProducerData[i].Id, backToOverview = ViewBag.BackToOverview }, null)
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}
+
+ @{
+     var buttonText = Model.ProducerData.Count > 0 ? ListProducerResources.AddAnother : ListProducerResources.AddFirst;
+     <div class="form-group">
+         @Html.ActionLink(buttonText, "Add", "Producer", new { id = Model.NotificationId, backToOverview = ViewBag.BackToOverview }, null)
+     </div>
+ }
+
+@if (ViewBag.BackToOverview)
+{
+    @Html.ActionLink(Constants.ContinueButtonText, "Index", "Home", new { id = Model.NotificationId }, new { @class = "button" })
+}
+else
+{
+    @Html.ActionLink(Constants.ContinueButtonText, "SiteOfExport", "Producer", new { id = Model.NotificationId }, new { @class = "button" })
+}

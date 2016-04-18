@@ -1,0 +1,24 @@
+﻿@using EA.Iws.Web.Areas.NotificationApplication.Views.ChemicalComposition
+@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.ChemicalComposition.OtherWasteViewModel
+@{
+    ViewBag.Title = OtherWasteResources.Title;
+}
+<header class="hgroup">
+    <h1 class="heading-large">@OtherWasteResources.Header</h1>
+</header>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.Gds().ValidationSummary()
+    @Html.HiddenFor(m => m.NotificationId)
+    <div>@OtherWasteResources.DescriptionMessage</div>
+    <div class="form-group">
+        @Html.Gds().ValidationMessageFor(m => m.Description)
+        @Html.Gds().HintSpan(OtherWasteResources.DescriptionHint)
+        @Html.Gds().TextBoxFor(m => m.Description, new { @MaxLength = 70, @title = OtherWasteResources.Description })
+    </div>
+    <div class="form-group">
+        <button class="button" name="Command" value="continue" type="submit">@Constants.ContinueButtonText</button>
+    </div>
+}

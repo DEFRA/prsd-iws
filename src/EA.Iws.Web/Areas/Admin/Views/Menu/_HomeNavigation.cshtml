@@ -1,0 +1,37 @@
+﻿@model EA.Iws.Web.Areas.Admin.ViewModels.Menu.AdminLinksViewModel
+<div id="accordion" class="accordion-general">
+    <ul>
+        <li class="active">
+            <h3 class="current">
+                <span></span>
+                Notifications
+            </h3>
+            <ul>
+                <li>@Html.ActionLink("Create import notification", "Number", "ImportNotification", new { area = "Admin" }, null)</li>
+                <li>@Html.ActionLink("Create export notification", "NotificationType", "ExportNotification", new { area = "Admin" }, null)</li>
+                <li>@Html.ActionLink("Unsubmitted export notifications", "Index", "ExportNotifications", new { area = "Admin" }, null)</li>
+            </ul>
+        </li>
+
+        <li class="">
+            <h3 class="">
+                <span></span>
+                Reporting
+            </h3>
+            @Html.Partial("~/Areas/Admin/Views/Menu/_ReportingLinks.cshtml", Model)
+        </li>
+
+        @if (Model.ShowAddNewEntryOrExitPointLink 
+            || Model.ShowApproveNewInternalUserLink)
+        {
+            <li class="">
+                <h3 class="">
+                    <span></span>
+                    Account services
+                </h3>
+                @Html.Partial("~/Areas/Admin/Views/Menu/_AdminLinks.cshtml", Model)
+            </li>
+        }
+
+    </ul>
+</div>

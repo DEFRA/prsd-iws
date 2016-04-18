@@ -1,0 +1,10 @@
+﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.NotificationApplication.RecoveryOperationViewModel
+           
+@if (Model.IsReasonForExportCompleted)
+{
+    <p>@Html.DisplayFor(m => m.ReasonForExport)</p>
+}
+else
+{
+    <p>@ViewBag.SectionIncompleteText</p>
+}

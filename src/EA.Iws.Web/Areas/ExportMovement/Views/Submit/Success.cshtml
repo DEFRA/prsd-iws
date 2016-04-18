@@ -1,0 +1,30 @@
+﻿@using Resource = EA.Iws.Web.Areas.ExportMovement.Views.Submit.SuccessResources
+@model EA.Iws.Web.Areas.ExportMovement.ViewModels.SuccessViewModel
+@{
+    ViewBag.Title = Resource.Title;
+}
+
+<header class="hgroup">
+    <h1 class="heading-large">@Resource.MainHeading @Model.MovementNumber</h1>
+</header>
+<p>@Resource.BodyText</p>
+
+@Html.HiddenFor(m => m.NotificationId)
+
+
+    <p>
+        @Html.ActionLink("Continue",
+            "Index",
+            "Options",
+            new { area = "NotificationApplication", id = Model.NotificationId },
+            new { @class = "button"})
+    </p>
+
+
+    <p>
+        @Html.ActionLink(Resource.NavigationLink,
+            "Index",
+            "UploadChoice",
+            new { area = "NotificationMovements", notificationId = Model.NotificationId },
+            null)
+    </p>

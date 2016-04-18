@@ -1,0 +1,19 @@
+﻿@using EA.Iws.Web.Areas.ExportMovement.Views.Home;
+@model EA.Iws.Core.Movement.MovementSummary
+
+<p>
+    <span>@Html.Raw(Model.SummaryData.NotificationNumber)</span>
+</p>
+
+<ul class="summary-list">
+    <li><span class="grey-text">@SummaryResources.ShipmentNumber</span> @Html.Raw(Model.MovementNumber)</li>
+    <li> <span class="grey-text">@SummaryResources.TotalShipments</span> @Html.Raw(Model.SummaryData.TotalShipments)</li>
+    <li><span class="grey-text">@SummaryResources.ActiveLoadsPermitted</span> @Html.Raw(Model.SummaryData.ActiveLoadsPermitted)</li>
+    <li><span class="grey-text">@SummaryResources.CurrentActiveLoads</span> @Html.Raw(Model.SummaryData.CurrentActiveLoads)</li>
+    <li><span class="grey-text">@SummaryResources.QuantityReceived</span> 
+        @Html.Raw(Model.SummaryData.QuantityReceived.ToString("G29"))&nbsp;@Html.Raw(EA.Prsd.Core.Helpers.EnumHelper.GetShortName(Model.SummaryData.DisplayUnit))
+    </li>
+    <li><span class="grey-text">@SummaryResources.QuantityRemaining</span> 
+        @Html.Raw(Model.SummaryData.QuantityRemaining.ToString("G29"))&nbsp;@Html.Raw(EA.Prsd.Core.Helpers.EnumHelper.GetShortName(Model.SummaryData.DisplayUnit))
+    </li>
+</ul>

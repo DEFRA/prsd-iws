@@ -1,0 +1,26 @@
+﻿@model EA.Iws.Web.Areas.Admin.ViewModels.ImportNotification.NotificationReceivedDateViewModel
+@using Resource = EA.Iws.Web.Areas.Admin.Views.ImportNotification.ReceivedDateResources
+@{
+    ViewBag.Title = Resource.Title;
+}
+
+<h1 class="heading-large">@Resource.MainHeading</h1>
+
+@using (Html.BeginForm())
+{
+    @Html.Gds().ValidationSummary()
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(m => m.NotificationNumber)
+
+    <div class="form-group @Html.Gds().FormGroupClass(m => m.NotificationReceived) @Html.Gds().FormGroupClass(m => m.NotificationReceived.Day) @Html.Gds().FormGroupClass(m => m.NotificationReceived.Month) @Html.Gds().FormGroupClass(m => m.NotificationReceived.Year)">
+        @Html.LabelFor(m => m.NotificationReceived, new { @class = "form-label-bold" })
+        @Html.Gds().ValidationMessageFor(m => m.NotificationReceived)
+        @Html.EditorFor(m => m.NotificationReceived)
+    </div>
+
+    <div class="form-group">
+        <button class="button" type="submit">
+            @Constants.ContinueButtonText
+        </button>
+    </div>
+}

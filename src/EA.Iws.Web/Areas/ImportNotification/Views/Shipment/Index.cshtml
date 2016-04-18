@@ -1,0 +1,52 @@
+﻿@using EA.Iws.Web.Areas.ImportNotification.Views.Shipment;
+@model EA.Iws.Web.Areas.ImportNotification.ViewModels.Shipment.ShipmentViewModel
+@{
+    ViewBag.Title = IndexResources.Title;
+}
+
+<header><h1 class="heading-large">@IndexResources.MainHeading</h1></header>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-group @Html.Gds().FormGroupClass(m => m.TotalShipments)">
+        <div class="grid-row">
+            <div class="column-half">
+                @Html.Gds().LabelFor(m => m.TotalShipments, showOptionalLabel: false)
+                @Html.Gds().TextBoxFor(m => m.TotalShipments)
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group @Html.Gds().FormGroupClass(m => m.TotalQuantity)">
+        <div class="grid-row">
+            <div class="column-half">
+                @Html.Gds().LabelFor(m => m.TotalQuantity, showOptionalLabel: false)
+                @Html.Gds().TextBoxFor(m => m.TotalQuantity)
+            </div>
+            <div class="column-half">
+                @Html.Gds().LabelFor(m => m.Units, showOptionalLabel: false)
+                @Html.Gds().DropDownListFor(m => m.Units, Model.UnitsSelectList)
+            </div>
+        </div>
+    </div>
+
+    <p>@IndexResources.IntendedDatesHeading</p>
+
+    <div class="form-group @Html.Gds().FormGroupClass(m => m.StartDate)">
+        <div class="grid-row">
+            <div class="column-half">
+                <label>@Html.DisplayNameFor(m => m.StartDate)</label>
+                @Html.EditorFor(m => m.StartDate)
+            </div>
+            <div class="column-half">
+                <label>@Html.DisplayNameFor(m => m.EndDate)</label>
+                @Html.EditorFor(m => m.EndDate)
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <button type="submit" class="button">@Constants.ContinueButtonText</button>
+    </div>
+}

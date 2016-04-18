@@ -1,0 +1,49 @@
+﻿@using EA.Iws.Core.Notification
+@using EA.Iws.Web.Areas.NotificationApplication.Views.Submit
+@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.NotificationApplication.DisclaimerViewModel
+@{
+    ViewBag.Title = DisclaimerResources.Title;
+    Layout = "~/Views/Shared/_Layout.GovUK.Sections.cshtml";
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.Gds().ValidationSummary()
+    @Html.HiddenFor(m => m.Id)
+
+    <header class="hgroup">
+        <h1 class="heading-large">@DisclaimerResources.Header</h1>
+    </header>
+
+    <p class="text">
+        @DisclaimerResources.Paragraph1
+    </p>
+    <p class="text">
+        @DisclaimerResources.Paragraph2
+    </p>
+
+    <div class="form-group">
+        @if (Model.CompetentAuthority == UKCompetentAuthority.Scotland)
+        {
+            @Html.Partial("_IwsSepaStandardDataNotice")
+        }
+        else
+        {
+            @Html.Partial("_IwsStandardDataNotice")
+        }
+    </div>
+    
+    <div class="form-group @Html.Gds().FormGroupClass(m => m.TermsAndConditions)">
+        <fieldset>
+            <div>@Html.Gds().ValidationMessageFor(m => m.TermsAndConditions)</div>
+            <label class="block-label">
+                @Html.CheckBoxFor(m => m.TermsAndConditions)
+                @DisclaimerResources.Accept
+            </label>
+        </fieldset>
+    </div>
+    <div class="form-group">
+        <input type="submit" class="button" value="@DisclaimerResources.Confirm" data-track = "element" data-category = "Export notification" data-action = "Submit"/>
+    </div>
+}

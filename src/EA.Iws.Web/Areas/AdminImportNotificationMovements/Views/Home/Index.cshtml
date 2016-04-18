@@ -1,0 +1,62 @@
+﻿@model EA.Iws.Web.Areas.AdminImportNotificationMovements.ViewModels.Home.MovementSummaryViewModel
+@using Resource = EA.Iws.Web.Areas.AdminImportNotificationMovements.Views.Home.IndexResources
+
+@{
+    ViewBag.Title = @Resource.TabTitle;
+}
+
+
+<div class="shipping-home">
+
+    <h1 class="heading-large">
+        @Resource.ShipmentSummaryTitle
+    </h1>
+
+    <div class="form-group">
+        <div class="grid-row">
+
+            <div class="column-two-thirds">
+                @if (Model.ShowShipmentOptions())
+                {
+                    <div>
+
+                        <table class="odd-table">
+                            <caption class="visuallyhidden">@Resource.SummaryCaption</caption>
+                            <tbody>
+                                <tr>
+                                    <td>@Resource.TotalNumber</td>
+                                    <td>@Model.IntendedShipments</td>
+                                </tr>
+                                <tr>
+                                    <td>@Resource.NumberUsed</td>
+                                    <td>@Model.UsedShipments</td>
+                                </tr>
+                                <tr>
+                                    <td>@Resource.TotalQuantityReceived</td>
+                                    <td>@Model.QuantityReceivedTotal</td>
+                                </tr>
+                                <tr>
+                                    <td>@Resource.TotalQuantityRemaining</td>
+                                    <td>@Model.QuantityRemainingTotal</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                }
+                else
+                {
+                    <div class="column-two-thirds bold-small">
+                        @Resource.NoShipmentDataText
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+
+    
+    <div class="form-group">
+        @Html.ActionLink("View shipments table", "Index", "Shipments",
+            null,
+            new { @class = "button" })
+    </div>
+</div>

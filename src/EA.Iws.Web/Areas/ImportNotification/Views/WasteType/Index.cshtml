@@ -1,0 +1,252 @@
+﻿@using EA.Iws.Web.Areas.ImportNotification.Views.WasteType;
+@using EA.Iws.Web.Areas.ImportNotification.ViewModels.Shared;
+@model EA.Iws.Web.Areas.ImportNotification.ViewModels.WasteType.WasteTypeViewModel
+@{
+    ViewBag.Title = IndexResources.Title;
+}
+@helper DisplayCodeTable(string tableId, string tableHeading, string jsonCodesId, IList<WasteCodeViewModel> selectedCodesForDisplay)
+{
+    <table id="@tableId" class="import-draft-codes-table">
+        <thead>
+            <tr>
+                <th colspan="2">@tableHeading</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (!selectedCodesForDisplay.Any())
+            {
+                <tr data-content="empty" class="empty"><td>@IndexResources.NoCodes</td><td>&nbsp;</td></tr>
+            }
+            @foreach (var item in selectedCodesForDisplay)
+            {
+                <tr id="row-@item.Id">
+                    <td>@item.Name</td>
+                    <td class="remove">
+                        <button data-action="remove" data-code-id="@item.Id" data-json-codes-id="@jsonCodesId" type="button">
+                            @IndexResources.RemoveCodeButton
+                        </button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+<header class="hgroup"><h1 class="heading-large">@IndexResources.MainHeading</h1></header>
+
+<div id="import-waste-codes">
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(m => m.ImportNotificationId)
+
+        <div class="form-group @Html.Gds().FormGroupClass(m => m.Name)">
+            @Html.Gds().LabelFor(m => m.Name, showOptionalLabel: false)
+            @Html.Gds().TextBoxFor(m => m.Name, new { maxLength = 70 })
+        </div>
+
+        <div class="form-group">
+            <div class="form-group-compound @Html.Gds().FormGroupClass(m => m.SelectedBaselCode)">
+                @Html.Gds().LabelFor(m => m.SelectedBaselCode, showOptionalLabel: false)
+                @Html.Gds().DropDownListFor(m => m.SelectedBaselCode, Model.BaselCodes, string.Empty, new { data_select_box = "true" })
+            </div>
+
+            <div class="form-group-compound @Html.Gds().FormGroupClass(m => m.BaselCodeNotListed)">
+                <label for="BaselCodeNotListed">
+                    @Html.CheckBoxFor(m => m.BaselCodeNotListed)
+                    @Html.DisplayNameFor(m => m.BaselCodeNotListed)
+                </label>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="form-group-compound @Html.Gds().FormGroupClass(m => m.SelectedEwcCode)">
+                @Html.Gds().LabelFor(m => m.SelectedEwcCode, showOptionalLabel: false)
+                @Html.Gds().DropDownListFor(m => m.SelectedEwcCode, Model.EwcCodes, string.Empty, new { data_select_box = "true" })
+                @Html.HiddenFor(model => Model.SelectedEwcCodesJson)
+                <button type="button"
+                        class="add"
+                        data-action="add"
+                        data-json-codes-id="#SelectedEwcCodesJson"
+                        data-selected-code-id="#SelectedEwcCode"
+                        data-table-id="#ewc-codes-table">
+                    Add
+                </button>
+            </div>
+
+            <div class="form-group">
+                @DisplayCodeTable("ewc-codes-table", IndexResources.EwcCodesTableHeading, "#SelectedEwcCodesJson", Model.SelectedEwcCodesDisplay)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="form-group-compound @Html.Gds().FormGroupClass(m => m.SelectedHCode)">
+                @Html.Gds().LabelFor(m => m.SelectedHCode, showOptionalLabel: false)
+                @Html.Gds().DropDownListFor(m => m.SelectedHCode, Model.HCodes, string.Empty, new { data_select_box = "true" })
+                @Html.HiddenFor(model => Model.SelectedHCodesJson)
+                <button type="button"
+                        class="add"
+                        data-action="add"
+                        data-json-codes-id="#SelectedHCodesJson"
+                        data-selected-code-id="#SelectedHCode"
+                        data-table-id="#h-codes-table">
+                    Add
+                </button>
+            </div>
+
+            <div class="form-group-compound @Html.Gds().FormGroupClass(m => m.HCodeNotApplicable)">
+                <label for="HCodeNotApplicable">
+                    @Html.CheckBoxFor(m => m.HCodeNotApplicable)
+                    @Html.DisplayNameFor(m => m.HCodeNotApplicable)
+                </label>
+            </div>
+
+            <div class="form-group">
+                @DisplayCodeTable("h-codes-table", IndexResources.HCodesTableHeading, "#SelectedHCodesJson", Model.SelectedHCodesDisplay)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="form-group-compound @Html.Gds().FormGroupClass(m => m.SelectedYCode)">
+                @Html.Gds().LabelFor(m => m.SelectedYCode, showOptionalLabel: false)
+                @Html.Gds().DropDownListFor(m => m.SelectedYCode, Model.YCodes, string.Empty, new { data_select_box = "true" })
+                @Html.HiddenFor(model => Model.SelectedYCodesJson)
+                <button type="button"
+                        class="add"
+                        data-action="add"
+                        data-json-codes-id="#SelectedYCodesJson"
+                        data-selected-code-id="#SelectedYCode"
+                        data-table-id="#y-codes-table">
+                    Add
+                </button>
+            </div>
+
+            <div class="form-group-compound @Html.Gds().FormGroupClass(m => m.YCodeNotApplicable)">
+                <label for="YCodeNotApplicable">
+                    @Html.CheckBoxFor(m => m.YCodeNotApplicable)
+                    @Html.DisplayNameFor(m => m.YCodeNotApplicable)
+                </label>
+            </div>
+
+            <div class="form-group">
+                @DisplayCodeTable("y-codes-table", IndexResources.YCodesTableHeading, "#SelectedYCodesJson", Model.SelectedYCodesDisplay)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="form-group-compound @Html.Gds().FormGroupClass(m => m.SelectedUnClass)">
+                @Html.Gds().LabelFor(m => m.SelectedUnClass, showOptionalLabel: false)
+                @Html.Gds().DropDownListFor(m => m.SelectedUnClass, Model.UnClasses, string.Empty, new { data_select_box = "true" })
+                @Html.HiddenFor(model => Model.SelectedUnClassesJson)
+                <button type="button"
+                        class="add"
+                        data-action="add"
+                        data-json-codes-id="#SelectedUnClassesJson"
+                        data-selected-code-id="#SelectedUnClass"
+                        data-table-id="#un-classes-table">
+                    Add
+                </button>
+            </div>
+
+            <div class="form-group-compound @Html.Gds().FormGroupClass(m => m.UnClassNotApplicable)">
+                <label for="UnClassNotApplicable">
+                    @Html.CheckBoxFor(m => m.UnClassNotApplicable)
+                    @Html.DisplayNameFor(m => m.UnClassNotApplicable)
+                </label>
+            </div>
+
+            <div class="form-group">
+                @DisplayCodeTable("un-classes-table", IndexResources.UnClassesTableHeading, "#SelectedUnClassesJson", Model.SelectedUnClassesDisplay)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <button type="submit" class="button">@Constants.ContinueButtonText</button>
+        </div>
+    }
+</div>
+
+@section scripts{
+    <script>
+        $('button[data-action="add"]').click(function () {
+            addCode(this);
+        });
+
+        $('button[data-action="remove"]').click(function() {
+            removeCode(this);
+        });
+
+        $('#BaselCodeNotListed').click(function() {
+            if ($(this).is(":checked")) {
+                $("#@Html.NameFor(m => m.SelectedBaselCode)")
+                    .val(null)
+                    .trigger("change");
+            }
+        });
+
+        function addCode(callingButton) {
+            var currentCodesJsonId = $(callingButton).data('json-codes-id');
+            var selectedCodeId = $(callingButton).data('selected-code-id');
+            var codeTableId = $(callingButton).data('table-id');
+
+            var elems = [];
+            var currentVals = $(currentCodesJsonId).val();
+
+            if (currentVals !== '') {
+                //read the current hidden field into JSON array
+                elems = JSON.parse(currentVals);
+            }
+
+            var newValue = $(selectedCodeId).val();
+
+            if (newValue !== '' && $.inArray(newValue, elems) == -1) {
+                //update the JSON hidden field
+                elems.push(newValue);
+                $(currentCodesJsonId).val(JSON.stringify(elems));
+
+                //update the display table
+                $(codeTableId + ' tr[data-content="empty"]').remove();
+
+                $(codeTableId + ' > tbody:last-child').append('<tr id="row-' + newValue + '"><td>'
+                    + $(selectedCodeId + ' option:selected').text()
+                    + '</td><td class="remove"><button type="button" data-action="remove" '
+                    + 'id="remove-' + newValue + '" data-code-id="' + newValue + '" data-json-codes-id="' + currentCodesJsonId + '">'
+                    + '@IndexResources.RemoveCodeButton</button></td></tr>');
+
+                //add 'remove' event handler to new button
+                $('#remove-' + newValue).click(function () {
+                    removeCode(this);
+                })
+
+                //clear the input field
+                $(selectedCodeId).val('').change();
+                $(selectedCodeId).next('input.ui-autocomplete-input').val('').change();
+            }
+        }
+
+        function removeCode(callingButton) {
+            var codeId = $(callingButton).data('code-id');
+            var jsonCodeId = $(callingButton).data('json-codes-id');
+            var codes = $(jsonCodeId);
+           
+            var elems = [];
+            if (codes.val() !== '') {
+                elems = JSON.parse(codes.val());
+                var indexInArray = $.inArray(codeId, elems);
+                if (indexInArray !== -1) {
+                    elems.splice(indexInArray, 1);
+                    codes.val(JSON.stringify(elems));
+                }
+            }
+
+            var row = $('#row-' + codeId);
+
+            if (row.parent().children().length == 1) {
+                row.parent(':last-child').append('<tr data-content="empty" class="empty"><td>'
+                    + '@IndexResources.NoCodes</td><td>&nbsp;</td></tr>')
+            }
+
+            row.remove();
+        }
+    </script>
+}

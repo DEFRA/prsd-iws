@@ -1,0 +1,10 @@
+﻿@using EA.Iws.Web.Views.Account
+@{
+    ViewBag.Title = EmailVerificationResentResources.Title;
+}
+
+<h1 class="heading-large">@EmailVerificationResentResources.Header</h1>
+
+<p>@string.Format(EmailVerificationResentResources.PAnotherEmailSent, ViewBag.Email)</p>
+<p>@EmailVerificationResentResources.PActivationLink</p>
+<p>@EmailVerificationResentResources.PInstructions</p>

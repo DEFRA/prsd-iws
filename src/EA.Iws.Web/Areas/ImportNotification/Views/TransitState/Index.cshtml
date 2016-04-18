@@ -1,0 +1,30 @@
+﻿@using Resource = EA.Iws.Web.Areas.ImportNotification.Views.TransitState.IndexResources
+@model EA.Iws.Web.Areas.ImportNotification.ViewModels.TransitState.TransitStateCollectionViewModel
+@{
+    ViewBag.Title = Resource.TabTitle;
+}
+
+<h1 class="heading-large">@Resource.Title</h1>
+
+@using (Html.BeginForm("Index", "TransitState", FormMethod.Post, new { id = "form" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.Gds().ValidationSummary()
+
+    <div id="ajax-table">
+        @Html.Partial("_Table")
+    </div>
+
+    <button class="button" type="submit">@Constants.ContinueButtonText</button>
+}
+
+@section scripts{
+    <script>
+        function deletePost(event) {
+            var id = $(event.target).attr("value");
+            postAjax('@Url.Action("Delete")' + '?deleteId=' + id, event, "#form", function (data) {
+                $("#ajax-table").html(data);
+            });
+        }
+    </script>
+}

@@ -1,0 +1,33 @@
+﻿@model EA.Iws.Web.Areas.ImportNotification.ViewModels.Home.SummaryTableContainerViewModel
+
+<div class="overview-block">
+    @if (Model.Details.Importer != null && !Model.Details.Importer.IsEmpty())
+    {
+        <div class="overview-block-element">
+            @if (!string.IsNullOrWhiteSpace(Model.Details.Importer.Name))
+            {
+                @Html.DisplayFor(m => m.Details.Importer.Name)<br />
+            }
+
+            @if (!Model.Details.Exporter.Address.IsEmpty())
+            {
+                @Html.DisplayFor(m => m.Details.Importer.Address.AddressLine1)<text>, </text>
+                @Html.DisplayFor(m => m.Details.Importer.Address.TownOrCity)<text> </text>
+                @Html.DisplayFor(m => m.Details.Importer.Address.PostalCode)<text>, </text>
+                @Html.DisplayFor(m => m.Details.Importer.Address.Country)
+            }
+
+        </div>
+
+        if (!Model.Details.Importer.Contact.IsEmpty())
+        {
+            <div class="overview-block-element">
+                @Html.DisplayFor(m => m.Details.Importer.Contact)
+            </div>
+        }
+    }
+    else
+    {
+        <div class="overview-block-element"> @ViewBag.SectionIncompleteText</div>
+    }
+</div>

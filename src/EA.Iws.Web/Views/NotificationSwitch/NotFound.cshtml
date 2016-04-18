@@ -1,0 +1,17 @@
+﻿@using EA.Iws.Web.Views.NotificationSwitch
+@model EA.Iws.Web.ViewModels.NotificationSwitch.NotFoundViewModel
+    
+@{
+    ViewBag.Title = NotFoundResources.Title;
+}
+
+<h1 class="heading-large">@NotFoundResources.Header</h1>
+
+<p>@NotFoundResources.NoMatchingNotification</p>
+<p>@NotFoundResources.ReturnText</p>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <button class="button" type="submit">Continue</button>
+}

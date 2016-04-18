@@ -1,0 +1,23 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.GovUK.Sections.cshtml";
+}
+
+<div class="grid-row">
+    @if (User.Identity.IsAuthenticated)
+    {
+        <aside class="column-third">
+            @Html.Action("HomeNavigation", "Menu", new { area = "Admin" })
+        </aside>
+    }
+    <div class="column-two-thirds">
+        @RenderBody()
+    </div>
+</div>
+
+@section head {
+    @RenderSection("head", required: false)
+}
+
+@section scripts {
+    @RenderSection("scripts", required: false)
+}

@@ -1,0 +1,77 @@
+﻿@using EA.Iws.Web.Areas.NotificationApplication.Views.CustomWasteCode
+@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.CustomWasteCode.CustomWasteCodesViewModel
+@{
+    ViewBag.Title = CustomWasteCodeResources.Title;
+}
+
+<header class="hgroup">
+    <h1 class="heading-large">@CustomWasteCodeResources.Header</h1>
+    <div>@CustomWasteCodeResources.HeaderDescription</div>
+</header>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.Gds().ValidationSummary()
+    @Html.HiddenFor(m => m.NotificationId)
+    <div class="wastecode-block">
+        <div class="form-group-compound @Html.Gds().FormGroupClass(m => m.ExportNationalCode)">
+            @Html.Gds().LabelFor(m => m.ExportNationalCode)
+            @Html.Gds().ValidationMessageFor(m => m.ExportNationalCode)
+            @Html.Gds().TextBoxFor(m => m.ExportNationalCode)
+        </div>
+        <div class="form-group @Html.Gds().FormGroupClass(m => m.ExportNationalCodeNotApplicable)">
+            @Html.Gds().ValidationMessageFor(m => m.ExportNationalCodeNotApplicable)
+            <label for="ExportNationalCodeNotApplicable">
+                @Html.CheckBoxFor(m => m.ExportNationalCodeNotApplicable)
+                @Html.DisplayNameFor(m => m.ExportNationalCodeNotApplicable)
+            </label>
+        </div>
+    </div>
+    <div class="wastecode-block">
+        <div class="form-group-compound @Html.Gds().FormGroupClass(m => m.ImportNationalCode)">
+            @Html.Gds().LabelFor(m => m.ImportNationalCode)
+            @Html.Gds().ValidationMessageFor(m => m.ImportNationalCode)
+            @Html.Gds().TextBoxFor(m => m.ImportNationalCode)
+        </div>
+        <div class="form-group @Html.Gds().FormGroupClass(m => m.ImportNationalCodeNotApplicable)">
+            @Html.Gds().ValidationMessageFor(m => m.ImportNationalCodeNotApplicable)
+            <label for="ImportNationalCodeNotApplicable">
+                @Html.CheckBoxFor(m => m.ImportNationalCodeNotApplicable)
+                @Html.DisplayNameFor(m => m.ImportNationalCodeNotApplicable)
+            </label>
+        </div>
+    </div>
+    <div class="wastecode-block">
+        <div class="form-group-compound @Html.Gds().FormGroupClass(m => m.CustomsCode)">
+            @Html.Gds().LabelFor(m => m.CustomsCode, false)
+            @Html.Gds().ValidationMessageFor(m => m.CustomsCode)
+            @Html.Gds().TextBoxFor(m => m.CustomsCode)
+        </div>
+        <div class="form-group @Html.Gds().FormGroupClass(m => m.CustomsCodeNotApplicable)">
+            @Html.Gds().ValidationMessageFor(m => m.CustomsCodeNotApplicable)
+            <label for="CustomsCodeNotApplicable">
+                @Html.CheckBoxFor(m => m.CustomsCodeNotApplicable)
+                @Html.DisplayNameFor(m => m.CustomsCodeNotApplicable)
+            </label>
+        </div>
+    </div>
+    <div class="wastecode-block">
+        <div class="form-group-compound @Html.Gds().FormGroupClass(m => m.OtherCode)">
+            @Html.Gds().LabelFor(m => m.OtherCode, false)
+            @Html.Gds().HintParagraph(CustomWasteCodeResources.OtherCodeHint)
+            @Html.Gds().ValidationMessageFor(m => m.OtherCode)
+            @Html.Gds().TextBoxFor(m => m.OtherCode)
+        </div>
+        <div class="form-group @Html.Gds().FormGroupClass(m => m.OtherCodeNotApplicable)">
+            @Html.Gds().ValidationMessageFor(m => m.OtherCodeNotApplicable)
+            <label for="OtherCodeNotApplicable">
+                @Html.CheckBoxFor(m => m.OtherCodeNotApplicable)
+                @Html.DisplayNameFor(m => m.OtherCodeNotApplicable)
+            </label>
+        </div>
+    </div>
+    <div class="form-group">
+        <button class="button" type="submit">@Constants.ContinueButtonText</button>
+    </div>
+}

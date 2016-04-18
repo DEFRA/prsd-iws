@@ -1,0 +1,33 @@
+﻿<script>
+        $(function() {
+            $("#selectAllCheckboxLabel").show();
+
+            $('#selectAllCheckbox').click(function () {
+                if (this.checked) {
+                    $('input[type=checkbox]').each(function () {
+                        this.checked = true;
+                        $(this).parent().addClass('selected');
+                        $('#selectAllCheckbox').parent().addClass('selected focused');
+                    });
+                } else {
+                    $('input[type=checkbox]').each(function () {
+                        this.checked = false;
+                        $(this).parent().removeClass('selected');
+                    });
+                }
+            });
+
+            $('input[type=checkbox]').click(function () {
+
+                if ($('#selectAllCheckbox').is(':checked')) {
+                    if ($(this).is('#selectAllCheckbox')) {
+
+                    }
+                    else {
+                        $('#selectAllCheckbox').attr('checked', false);
+                        $('#selectAllCheckbox').parent().removeClass('selected');
+                    }
+                }
+            });
+        });
+</script>

@@ -1,0 +1,31 @@
+﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.NotificationApplication.OrganisationsInvolvedViewModel
+     
+<div class="overview-block">
+    @if (Model.HasActualSiteOfTreatment)
+    {
+        <div class="overview-block-element">
+            @Html.DisplayFor(m => m.Facilities.Single(f => f.IsActualSiteOfTreatment).Business.Name)
+            <br />
+            @Html.DisplayFor(m => m.Facilities.Single(f => f.IsActualSiteOfTreatment).Address.StreetOrSuburb),
+            @Html.DisplayFor(m => m.Facilities.Single(f => f.IsActualSiteOfTreatment).Address.TownOrCity)
+            @Html.DisplayFor(m => m.Facilities.Single(f => f.IsActualSiteOfTreatment).Address.PostalCode),
+            @Html.DisplayFor(m => m.Facilities.Single(f => f.IsActualSiteOfTreatment).Address.CountryName)
+        </div>
+
+        <div class="overview-block-element">
+            Organisation type:
+            @EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(Model.Facilities.Single(f => f.IsActualSiteOfTreatment).Business.BusinessType)
+            <br />
+            Company registration:
+            @Html.DisplayFor(m => m.Facilities.Single(f => f.IsActualSiteOfTreatment).Business.RegistrationNumber)
+        </div>
+
+        <div class="overview-block-element">
+            @Html.DisplayFor(m => m.Facilities.Single(f => f.IsActualSiteOfTreatment).Contact)
+        </div>
+    }
+    else
+    {
+        <div class="overview-block-element">@ViewBag.SectionIncompleteText</div>
+    }
+</div>

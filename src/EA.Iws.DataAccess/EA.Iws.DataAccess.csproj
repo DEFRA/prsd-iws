@@ -1,0 +1,312 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{46300373-D7AE-40AA-BF96-3FC3889825A4}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>EA.Iws.DataAccess</RootNamespace>
+    <AssemblyName>EA.Iws.DataAccess</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|AnyCPU'">
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Autofac, Version=3.5.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.3.5.2\lib\net40\Autofac.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EA.Prsd.Core, Version=1.0.16077.1, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\EA.Prsd.Core.DataAccess.1.0.16077-develop1\lib\net452\EA.Prsd.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EA.Prsd.Core.DataAccess, Version=1.0.16077.1, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\EA.Prsd.Core.DataAccess.1.0.16077-develop1\lib\net452\EA.Prsd.Core.DataAccess.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.1\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.8.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ConfigurationRegistrarExtensions.cs" />
+    <Compile Include="Draft\DraftContext.cs" />
+    <Compile Include="Draft\DraftImportNotificationRepository.cs" />
+    <Compile Include="Draft\IDraftImportNotificationRepository.cs" />
+    <Compile Include="Draft\Import.cs" />
+    <Compile Include="EntityFrameworkModule.cs" />
+    <Compile Include="Filestore\DbFileRepository.cs" />
+    <Compile Include="Filestore\IwsFileStoreContext.cs" />
+    <Compile Include="Identity\ApplicationUser.cs" />
+    <Compile Include="Identity\ApplicationUserStore.cs" />
+    <Compile Include="Identity\IwsIdentityContext.cs" />
+    <Compile Include="ContextBase.cs" />
+    <Compile Include="ImportNotificationContext.cs" />
+    <Compile Include="IwsContext.cs" />
+    <Compile Include="Mappings\Common\ActivityMapping.cs" />
+    <Compile Include="Mappings\Common\DateTimeOffsetRangeMapping.cs" />
+    <Compile Include="Mappings\Exports\AddressBookMapping.cs" />
+    <Compile Include="Mappings\Exports\AddressBookRecordMapping.cs" />
+    <Compile Include="Mappings\Common\DateRangeMapping.cs" />
+    <Compile Include="Mappings\Exports\AddressMapping.cs" />
+    <Compile Include="Mappings\Common\BankHolidayMapping.cs" />
+    <Compile Include="Mappings\Exports\AnnexCollectionMapping.cs" />
+    <Compile Include="Mappings\Exports\CarrierCollectionMapping.cs" />
+    <Compile Include="Mappings\Exports\ConsentMapping.cs" />
+    <Compile Include="Mappings\Common\CompetentAuthorityBacsDetailsMapping.cs" />
+    <Compile Include="Mappings\Common\DisposalCostMapping.cs" />
+    <Compile Include="Mappings\Common\EmailAddressMapping.cs" />
+    <Compile Include="Mappings\Exports\ConsultationMapping.cs" />
+    <Compile Include="Mappings\Exports\FacilityCollectionMapping.cs" />
+    <Compile Include="Mappings\Exports\MeansOfTransportMapping.cs" />
+    <Compile Include="Mappings\Exports\ProducerCollectionMapping.cs" />
+    <Compile Include="Mappings\Exports\UserHistoryMapping.cs" />
+    <Compile Include="Mappings\Exports\WasteCompositionAnnexMapping.cs" />
+    <Compile Include="Mappings\Exports\TechnologyEmployedAnnexMapping.cs" />
+    <Compile Include="Mappings\Exports\ProcessOfGenerationAnnexMapping.cs" />
+    <Compile Include="Mappings\Imports\AddressMapping.cs" />
+    <Compile Include="Mappings\Imports\ConsultationMapping.cs" />
+    <Compile Include="Mappings\Imports\ImportFinancialGuaranteeApprovalMapping.cs" />
+    <Compile Include="Mappings\Imports\ImportFinancialGuaranteeMapping.cs" />
+    <Compile Include="Mappings\Imports\ImportFinancialGuaranteeRefusalMapping.cs" />
+    <Compile Include="Mappings\Imports\ImportFinancialGuaranteeReleaseMapping.cs" />
+    <Compile Include="Mappings\Imports\ImportFinancialGuaranteeStatusChange.cs" />
+    <Compile Include="Mappings\Imports\ImportObjectionMapping.cs" />
+    <Compile Include="Mappings\Imports\ImportWithdrawnMapping.cs" />
+    <Compile Include="Mappings\Imports\ImportConsentMapping.cs" />
+    <Compile Include="Mappings\Imports\ContactMapping.cs" />
+    <Compile Include="Mappings\Imports\FacilityCollectionMapping.cs" />
+    <Compile Include="Mappings\Imports\FacilityMapping.cs" />
+    <Compile Include="Mappings\Imports\InterimStatusMapping.cs" />
+    <Compile Include="Mappings\Imports\ImportNotificationAssessmentMapping.cs" />
+    <Compile Include="Mappings\Imports\ImportNotificationDatesMapping.cs" />
+    <Compile Include="Mappings\Imports\ImportNotificationStatusChangeMapping.cs" />
+    <Compile Include="Mappings\Imports\ImportNotificationTransactionMapping.cs" />
+    <Compile Include="Mappings\Imports\StateOfExportMapping.cs" />
+    <Compile Include="Mappings\Imports\StateOfImportMapping.cs" />
+    <Compile Include="Mappings\Imports\TransitStateMapping.cs" />
+    <Compile Include="Mappings\Imports\TransportRouteMapping.cs" />
+    <Compile Include="Mappings\Imports\WasteOperationCodeMapping.cs" />
+    <Compile Include="Mappings\Imports\WasteOperationMapping.cs" />
+    <Compile Include="Mappings\Imports\ProducerMapping.cs" />
+    <Compile Include="Mappings\Imports\ExporterMapping.cs" />
+    <Compile Include="Mappings\Imports\ImporterMapping.cs" />
+    <Compile Include="Mappings\Imports\ImportMovementMapping.cs" />
+    <Compile Include="Mappings\Imports\ImportMovementCompletedReceiptMapping.cs" />
+    <Compile Include="Mappings\Imports\ImportMovementRejectionMapping.cs" />
+    <Compile Include="Mappings\Imports\ImportMovementReceiptMapping.cs" />
+    <Compile Include="Mappings\Imports\ImportNotificationMapping.cs" />
+    <Compile Include="Mappings\Exports\MovementDateHistoryMapping.cs" />
+    <Compile Include="Mappings\Exports\MovementDetailsMapping.cs" />
+    <Compile Include="Mappings\Exports\MovementRejectionMapping.cs" />
+    <Compile Include="Mappings\Exports\MovementStatusChangeMapping.cs" />
+    <Compile Include="Mappings\Exports\NotificationTransactionMapping.cs" />
+    <Compile Include="Mappings\Common\PhoneNumberMapping.cs" />
+    <Compile Include="Mappings\Exports\WasteDisposalMapping.cs" />
+    <Compile Include="Mappings\Common\EstimatedValueMapping.cs" />
+    <Compile Include="Mappings\Exports\FinancialGuaranteeStatusChangeMapping.cs" />
+    <Compile Include="Mappings\Exports\FinancialGuaranteeMapping.cs" />
+    <Compile Include="Mappings\Exports\InternalUserMapping.cs" />
+    <Compile Include="Mappings\Common\LocalAreaMapping.cs" />
+    <Compile Include="Mappings\Exports\MovementCarrierMapping.cs" />
+    <Compile Include="Mappings\Exports\MovementMapping.cs" />
+    <Compile Include="Mappings\Exports\MovementCompletedReceiptMapping.cs" />
+    <Compile Include="Mappings\Exports\MovementReceiptMapping.cs" />
+    <Compile Include="Mappings\Exports\NotificationAssessmentMapping.cs" />
+    <Compile Include="Mappings\Exports\NotificationDatesMapping.cs" />
+    <Compile Include="Mappings\Exports\NotificationStatusChangeMapping.cs" />
+    <Compile Include="Mappings\Exports\ProducerBusinessMapping.cs" />
+    <Compile Include="Mappings\Exports\BusinessMapping.cs" />
+    <Compile Include="Mappings\Common\CompetentAuthorityMapping.cs" />
+    <Compile Include="Mappings\Exports\ExitCustomsOfficeMapping.cs" />
+    <Compile Include="Mappings\Exports\EntryCustomsOfficeMapping.cs" />
+    <Compile Include="Mappings\Exports\PhysicalCharacteristicsInfoMapping.cs" />
+    <Compile Include="Mappings\Common\PricingStructureMapping.cs" />
+    <Compile Include="Mappings\Common\RecoveryCostMapping.cs" />
+    <Compile Include="Mappings\Exports\WasteRecoveryMapping.cs" />
+    <Compile Include="Mappings\Common\ShipmentPeriodMapping.cs" />
+    <Compile Include="Mappings\Common\ShipmentQuantityRangeMapping.cs" />
+    <Compile Include="Mappings\Exports\TechnologyEmployedMapping.cs" />
+    <Compile Include="Mappings\Exports\TransitStateMapping.cs" />
+    <Compile Include="Mappings\Exports\StateOfImportMapping.cs" />
+    <Compile Include="Mappings\Exports\StateOfExportMapping.cs" />
+    <Compile Include="Mappings\Exports\EntryOrExitPointMapping.cs" />
+    <Compile Include="Mappings\Exports\PackagingInfoMapping.cs" />
+    <Compile Include="Mappings\Exports\ContactMapping.cs" />
+    <Compile Include="Mappings\Common\CountryMapping.cs" />
+    <Compile Include="Mappings\Exports\ExporterMapping.cs" />
+    <Compile Include="Mappings\Exports\FacilityMapping.cs" />
+    <Compile Include="Mappings\Exports\ImporterMapping.cs" />
+    <Compile Include="Mappings\Exports\NotificationApplicationMapping.cs" />
+    <Compile Include="Mappings\Exports\OrganisationMapping.cs" />
+    <Compile Include="Mappings\Exports\CarrierMapping.cs" />
+    <Compile Include="Mappings\Exports\ProducerMapping.cs" />
+    <Compile Include="Mappings\Exports\OperationCodesEntityMapping.cs" />
+    <Compile Include="Mappings\Exports\ShipmentInfoMapping.cs" />
+    <Compile Include="Mappings\Exports\TransportRouteMapping.cs" />
+    <Compile Include="Mappings\Exports\UnitedKingdomCompetentAuthorityMapping.cs" />
+    <Compile Include="Mappings\Exports\UserAddressMapping.cs" />
+    <Compile Include="Mappings\Exports\UserMapping.cs" />
+    <Compile Include="Mappings\Exports\WasteAdditionalInformationMapping.cs" />
+    <Compile Include="Mappings\Common\WasteCodeMapping.cs" />
+    <Compile Include="Mappings\Exports\WasteCodeInfoMapping.cs" />
+    <Compile Include="Mappings\Exports\WasteComposition.cs" />
+    <Compile Include="Mappings\Exports\WasteTypeMapping.cs" />
+    <Compile Include="Mappings\Imports\ShipmentMapping.cs" />
+    <Compile Include="Mappings\Imports\WasteTypeMapping.cs" />
+    <Compile Include="Mappings\Imports\WasteTypeWasteCodeMapping.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\AddressBookRepository.cs" />
+    <Compile Include="Repositories\AnnexCollectionRepository.cs" />
+    <Compile Include="Repositories\CarrierRepository.cs" />
+    <Compile Include="Repositories\CompetentAuthorityRepository.cs" />
+    <Compile Include="Repositories\ConsultationRepository.cs" />
+    <Compile Include="Repositories\CountryRepository.cs" />
+    <Compile Include="Repositories\EntryOrExitPointRepository.cs" />
+    <Compile Include="Repositories\ExporterRepository.cs" />
+    <Compile Include="Repositories\ExportNotificationOwnerDisplayRepository.cs" />
+    <Compile Include="Repositories\FacilityRepository.cs" />
+    <Compile Include="Repositories\FinancialGuaranteeDecisionRepository.cs" />
+    <Compile Include="Repositories\FinancialGuaranteeRepository.cs" />
+    <Compile Include="Repositories\ImporterRepository.cs" />
+    <Compile Include="Repositories\Imports\ConsultationRepository.cs" />
+    <Compile Include="Repositories\Imports\ExporterRepository.cs" />
+    <Compile Include="Repositories\Imports\FacilityRepository.cs" />
+    <Compile Include="Repositories\Imports\ImportConsentRepository.cs" />
+    <Compile Include="Repositories\Imports\ImporterRepository.cs" />
+    <Compile Include="Repositories\Imports\ImportFinancialGuaranteeApprovalRepository.cs" />
+    <Compile Include="Repositories\Imports\ImportFinancialGuaranteeRefusalRepository.cs" />
+    <Compile Include="Repositories\Imports\ImportFinancialGuaranteeReleaseRepository.cs" />
+    <Compile Include="Repositories\Imports\ImportFinancialGuaranteeRepository.cs" />
+    <Compile Include="Repositories\Imports\ImportMovementCompletedReceiptRepository.cs" />
+    <Compile Include="Repositories\Imports\ImportMovementReceiptRepository.cs" />
+    <Compile Include="Repositories\Imports\ImportMovementRejectionRepository.cs" />
+    <Compile Include="Repositories\Imports\ImportMovementRepository.cs" />
+    <Compile Include="Repositories\Imports\ImportMovementsSummaryRepository.cs" />
+    <Compile Include="Repositories\Imports\ImportMovementSummaryRepository.cs" />
+    <Compile Include="Repositories\Imports\ImportMovementTableDataRepository.cs" />
+    <Compile Include="Repositories\Imports\ImportNotificationAssessmentRepository.cs" />
+    <Compile Include="Repositories\Imports\ImportNotificationRepository.cs" />
+    <Compile Include="Repositories\Imports\ImportNotificationSearchRepository.cs" />
+    <Compile Include="Repositories\Imports\ImportNotificationOverviewRepository.cs" />
+    <Compile Include="Repositories\Imports\ImportNotificationTransactionRepository.cs" />
+    <Compile Include="Repositories\Imports\InterimStatusRepository.cs" />
+    <Compile Include="Repositories\Imports\ImportObjectionRepository.cs" />
+    <Compile Include="Repositories\Imports\ImportWithdrawnRepository.cs" />
+    <Compile Include="Repositories\Imports\TransportRouteRepository.cs" />
+    <Compile Include="Repositories\Imports\WasteOperationRepository.cs" />
+    <Compile Include="Repositories\Imports\ProducerRepository.cs" />
+    <Compile Include="Repositories\Imports\ShipmentRepository.cs" />
+    <Compile Include="Repositories\Imports\WasteTypeRepository.cs" />
+    <Compile Include="Repositories\InternalUserRepository.cs" />
+    <Compile Include="Repositories\MeansOfTransportRepository.cs" />
+    <Compile Include="Repositories\MovementDateHistoryRepository.cs" />
+    <Compile Include="Repositories\MovementDetailsRepository.cs" />
+    <Compile Include="Repositories\MovementRejectionRepository.cs" />
+    <Compile Include="Repositories\MovementRepository.cs" />
+    <Compile Include="Repositories\NotificationAssessmentDatesSummaryRepository.cs" />
+    <Compile Include="Repositories\NotificationAssessmentDecisionRepository.cs" />
+    <Compile Include="Repositories\NotificationAttentionSummaryRepository.cs" />
+    <Compile Include="Repositories\NotificationConsentRepository.cs" />
+    <Compile Include="Repositories\NotificationApplicationOverviewRepository.cs" />
+    <Compile Include="Repositories\NotificationMovementsSummaryRepository.cs" />
+    <Compile Include="Repositories\NotificationTransactionRepository.cs" />
+    <Compile Include="Repositories\NotificationUserRepository.cs" />
+    <Compile Include="Repositories\PricingStructureRepository.cs" />
+    <Compile Include="Repositories\ProducerRepository.cs" />
+    <Compile Include="Repositories\Reports\ExportStatsRepository.cs" />
+    <Compile Include="Repositories\Reports\ExportNotificationsRepository.cs" />
+    <Compile Include="Repositories\Reports\FinanceReportRepository.cs" />
+    <Compile Include="Repositories\Reports\MissingShipmentsRepository.cs" />
+    <Compile Include="Repositories\Reports\RdfSrfWoodRepository.cs" />
+    <Compile Include="Repositories\UserHistoryRepository.cs" />
+    <Compile Include="Repositories\WasteCodeRepository.cs" />
+    <Compile Include="Repositories\WasteDisposalRepository.cs" />
+    <Compile Include="Repositories\NotificationApplicationRepository.cs" />
+    <Compile Include="Repositories\WasteRecoveryRepository.cs" />
+    <Compile Include="Repositories\NotificationAssessmentRepository.cs" />
+    <Compile Include="Repositories\TransportRouteRepository.cs" />
+    <Compile Include="Security\MovementAuthorization.cs" />
+    <Compile Include="Security\NotificationApplicationAuthorization.cs" />
+    <Compile Include="Repositories\ShipmentInfoRepository.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\EA.Iws.Core\EA.Iws.Core.csproj">
+      <Project>{DD2A73A4-A652-4ECC-87EE-24239CE45AD4}</Project>
+      <Name>EA.Iws.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EA.Iws.Domain\EA.Iws.Domain.csproj">
+      <Project>{a987fff6-5386-419e-af0a-e6c74e3323cf}</Project>
+      <Name>EA.Iws.Domain</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\StyleCop.Error.MSBuild.1.0.0\build\StyleCop.Error.MSBuild.Targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\StyleCop.Error.MSBuild.1.0.0\build\StyleCop.Error.MSBuild.Targets'))" />
+    <Error Condition="!Exists('..\packages\StyleCop.MSBuild.4.7.50.0\build\StyleCop.MSBuild.Targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\StyleCop.MSBuild.4.7.50.0\build\StyleCop.MSBuild.Targets'))" />
+  </Target>
+  <Import Project="..\packages\StyleCop.Error.MSBuild.1.0.0\build\StyleCop.Error.MSBuild.Targets" Condition="Exists('..\packages\StyleCop.Error.MSBuild.1.0.0\build\StyleCop.Error.MSBuild.Targets')" />
+  <Import Project="..\packages\StyleCop.MSBuild.4.7.50.0\build\StyleCop.MSBuild.Targets" Condition="Exists('..\packages\StyleCop.MSBuild.4.7.50.0\build\StyleCop.MSBuild.Targets')" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

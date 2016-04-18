@@ -1,0 +1,32 @@
+﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.NotificationApplication.OrganisationsInvolvedViewModel
+    
+@if (Model.IsExporterCompleted)
+{
+    <div class="grid-row">
+        <div class="column-half">
+            <dl>
+                <dt>Organisation name:</dt>
+                <dd>@Html.DisplayFor(m => m.Exporter.Business.Name)</dd>
+
+                <dt>Address:</dt>
+                <dd>@Html.DisplayFor(m => m.Exporter.Address)</dd>
+            </dl>
+        </div>
+        <div class="column-half">
+            <dl>
+                <dt>Organisation type:</dt>
+                <dd>@EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(Model.Exporter.Business.BusinessType)</dd>
+
+                <dt>Company registration:</dt>
+                <dd>@Html.DisplayFor(m => m.Exporter.Business.RegistrationNumber)</dd>
+
+                <dt>Contact:</dt>
+                <dd>@Html.DisplayFor(m => m.Exporter.Contact)</dd>
+            </dl>
+        </div>
+    </div>
+}
+else
+{
+    <p>@ViewBag.SectionIncompleteText</p>
+}

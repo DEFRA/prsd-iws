@@ -1,0 +1,14 @@
+﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.NotificationApplication.OrganisationsInvolvedViewModel
+           
+<div class="overview-block">
+    <div class="overview-block-element">
+        @if (Model.HasActualSiteOfTreatment)
+        {
+            @Html.DisplayFor(m => m.Facilities.Single(f => f.IsActualSiteOfTreatment).Business.Name)
+        }
+        else
+        {
+            @ViewBag.SectionIncompleteText
+        }
+    </div>
+</div>

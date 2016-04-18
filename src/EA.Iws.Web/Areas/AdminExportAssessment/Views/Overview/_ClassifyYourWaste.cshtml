@@ -1,0 +1,44 @@
+﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.NotificationApplication.ClassifyYourWasteViewModel
+@{
+    var id = Model.NotificationId;
+    var viewLocation = Constants.InternalExportNotificationOverviewSectionsLocation;
+}
+
+<table class="overview-table">
+    <thead>
+        <tr>
+            <th colspan="2">
+                <h2 class="heading-medium">Waste classification</h2>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                Chemical composition
+            </td>
+            <td>
+                @Html.Partial(viewLocation + "_ChemicalComposition.cshtml")
+            </td>
+            
+        </tr>
+        <tr>
+            <td>
+                Process of generation
+            </td>
+            <td>
+                @Html.Partial(viewLocation + "_ProcessOfGeneration.cshtml")
+            </td>
+            
+        </tr>
+        <tr>
+            <td>
+                Physical characteristics
+            </td>
+            <td>
+                @Html.Partial(viewLocation + "_PhysicalCharacteristics.cshtml")
+            </td>
+            
+        </tr>
+    </tbody>
+</table>

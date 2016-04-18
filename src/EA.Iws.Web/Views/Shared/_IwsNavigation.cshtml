@@ -1,0 +1,19 @@
+﻿<div class="header-proposition">
+    <div class="content">
+        <a href="#proposition-links" class="js-header-toggle menu">Menu</a>
+        <nav id="proposition-menu">
+            <a href="/" id="proposition-name">International Waste Shipments (IWS)</a>
+            @if (Request.IsAuthenticated)
+            {
+                <ul id="proposition-links">
+                    @if (User.IsInternalUser())
+                    {
+                        <li>
+                            @Html.ActionLink(linkText: "Home", actionName: "Index", controllerName: "Home", routeValues: new { area = "Admin" }, htmlAttributes: null)
+                        </li>
+                    }
+                </ul>
+            }
+        </nav>
+    </div>
+</div>

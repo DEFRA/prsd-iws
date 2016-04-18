@@ -1,0 +1,33 @@
+﻿@using EA.Iws.Web.Views.Registration
+@model EA.Iws.Web.ViewModels.Registration.ChangeAccountDetailsViewModel
+@{
+    ViewBag.Title = ChangeAccountDetailsResources.Title;
+}
+
+<div class="grid-row">
+    <section class="column-two-thirds">
+        <h1 class="heading-large">@ChangeAccountDetailsResources.Header</h1>
+
+        @using (Html.BeginForm("ChangeAccountDetails", "Registration"))
+        {
+            @Html.AntiForgeryToken()
+            @Html.Gds().ValidationSummary()
+
+            <div class="form-group @Html.Gds().FormGroupClass(m => m.ChangeOptions)">
+                @Html.Gds().ValidationMessageFor(m => m.ChangeOptions)
+                <fieldset>
+                    <label class="block-label" for="rdoOrganisationDetails">
+                        @Html.RadioButtonFor(m => m.ChangeOptions, true, new { id = "rdoOrganisationDetails" })@ChangeAccountDetailsResources.OrgOption
+                    </label>
+                    <label class="block-label" for="rdoPersonalDetails">
+                        @Html.RadioButtonFor(m => m.ChangeOptions, false, new { id = "rdoPersonalDetails" })@ChangeAccountDetailsResources.ApplicantOption
+                    </label>
+                </fieldset>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" class="button" value="@ChangeAccountDetailsResources.Continue" />
+            </div>
+        }
+    </section>
+</div>

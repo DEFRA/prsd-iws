@@ -1,0 +1,25 @@
+﻿@using EA.Iws.Web.Areas.NotificationApplication.Views.EntryCustomsOffice
+@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.CustomsOffice.CustomsOfficeViewModel
+
+@{
+    ViewBag.Title = EntryCustomsOfficeResources.Title;
+}
+<header class="hgroup">
+    @if (Model.Steps > 1)
+    {
+        <div class="form-group">
+            @Html.Gds().HintParagraph("Step 2 of " + @Model.Steps)
+        </div>
+    }
+    <h2 class="heading-large">@EntryCustomsOfficeResources.Header</h2>
+    <p>@EntryCustomsOfficeResources.HeaderDescription</p>
+</header>
+
+@using (Html.BeginForm())
+{
+    @Html.Gds().ValidationSummary()
+    @Html.AntiForgeryToken()
+    @Html.Partial("~/Areas/NotificationApplication/Views/CustomsOffice/_Index.cshtml", Model)
+    <button class="button" type="submit">@Constants.ContinueButtonText</button>
+}
+

@@ -1,0 +1,58 @@
+﻿@using EA.Iws.Core.NotificationAssessment
+@model EA.Iws.Web.Areas.AdminExportAssessment.ViewModels.MarkAsInterimViewModel
+@{
+    ViewBag.Title = "Is this an interim notification?";
+}
+
+<h1 class="heading-large">Is this an interim notification?</h1>
+
+@if (Model.NotificationStatus != NotificationStatus.InAssessment)
+{
+    if (Model.IsInterim.HasValue)
+    {
+        if (Model.IsInterim.Value)
+        {
+            <p>The notification is marked as interim</p>
+        }
+        else
+        {
+            <p>The notification is marked as non-interim</p>
+        }
+    }
+    else
+    {
+        <p>Can't set as interim unless the notification is "in assessment"</p>
+    }
+}
+else
+{
+    using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(m => m.NotificationId)
+        @Html.HiddenFor(m => m.NotificationStatus)
+
+        @Html.Gds().ValidationSummary()
+
+        <div class="form-group @Html.Gds().FormGroupClass(m => m.IsInterim)">
+            @Html.Gds().ValidationMessageFor(m => m.IsInterim)
+
+            <fieldset>
+                <label class="block-label" for="yes">
+                    @Html.RadioButtonFor(m => m.IsInterim, true, new { id = "yes" })
+                    Yes
+                </label>
+                <label class="block-label" for="no">
+                    @Html.RadioButtonFor(m => m.IsInterim, false, new { id = "no" })
+                    No
+                </label>
+            </fieldset>
+        </div>
+
+        <button type="submit" class="button">@Constants.ContinueButtonText</button>
+    }
+}
+
+@section menu {
+    @Html.Action("ExportNavigation", "Menu", new { area = "Admin", section = ExportNavigationSection.Assessment })
+}

@@ -1,0 +1,12 @@
+﻿@using EA.Iws.Web.Areas.NotificationMovements.Views.Create
+
+
+@{
+    ViewBag.Title = TotalIntendedQuantityExceededResources.Title;
+}
+
+<h1 class="heading-large">@TotalIntendedQuantityExceededResources.Title</h1>
+
+<p>@TotalIntendedQuantityExceededResources.Paragraph</p>
+
+@Html.ActionLink("Continue", "Index", "Options", new { area = "NotificationApplication", id = ViewContext.RouteData.Values["notificationId"] }, new { @class = "button" })

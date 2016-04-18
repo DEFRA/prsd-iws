@@ -1,0 +1,11 @@
+﻿@using EA.Iws.Web.Areas.NotificationApplication.Views.SpecialHandling
+@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.SpecialHandling.SpecialHandlingViewModel
+
+@{
+    ViewBag.Title = SpecialHandlingResources.Title;
+}
+
+@using (Html.BeginForm())
+{
+    @Html.Partial("_SpecialHandling")
+}

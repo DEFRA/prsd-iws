@@ -1,0 +1,423 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{A987FFF6-5386-419E-AF0A-E6C74E3323CF}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>EA.Iws.Domain</RootNamespace>
+    <AssemblyName>EA.Iws.Domain</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EA.Prsd.Core, Version=1.0.16077.1, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\EA.Prsd.Core.1.0.16077-develop1\lib\net452\EA.Prsd.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Stateless, Version=2.5.36.0, Culture=neutral, PublicKeyToken=93038f0927583c9a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Stateless.2.5.36.0\lib\portable-net40+sl50+win+wp80+MonoAndroid10+xamarinios10+MonoTouch10\Stateless.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DateTimeOffsetRange.cs" />
+    <Compile Include="EmailAddress.cs" />
+    <Compile Include="FinancialGuarantee\FinancialGuaranteeDecision.cs" />
+    <Compile Include="FinancialGuarantee\IFinancialGuaranteeDecisionRepository.cs" />
+    <Compile Include="FinancialGuarantee\IFinancialGuaranteeRepository.cs" />
+    <Compile Include="IInterimMovementDocumentGenerator.cs" />
+    <Compile Include="ImportMovement\CompleteImportMovement.cs" />
+    <Compile Include="ImportMovement\ICompleteImportMovement.cs" />
+    <Compile Include="ImportMovement\IImportMovementCompletedReceiptRepository.cs" />
+    <Compile Include="ImportMovement\IImportMovementReceiptRepository.cs" />
+    <Compile Include="ImportMovement\IImportMovementRejectionRepository.cs" />
+    <Compile Include="ImportMovement\IImportMovementsSummaryRepository.cs" />
+    <Compile Include="ImportMovement\IImportMovementSummaryRepository.cs" />
+    <Compile Include="ImportMovement\IImportMovementTableDataRepository.cs" />
+    <Compile Include="ImportMovement\ImportMovementReceipt.cs" />
+    <Compile Include="ImportMovement\ImportMovementRejection.cs" />
+    <Compile Include="ImportMovement\ImportMovementCompletedReceipt.cs" />
+    <Compile Include="ImportMovement\ImportMovementSummary.cs" />
+    <Compile Include="ImportMovement\IReceiveImportMovement.cs" />
+    <Compile Include="ImportMovement\IRejectImportMovement.cs" />
+    <Compile Include="ImportMovement\MovementTableData.cs" />
+    <Compile Include="ImportMovement\ReceiveImportMovement.cs" />
+    <Compile Include="ImportMovement\RejectImportMovement.cs" />
+    <Compile Include="ImportNotificationAssessment\Consent\ConsentImportNotification.cs" />
+    <Compile Include="ImportNotificationAssessment\Consent\IImportConsentRepository.cs" />
+    <Compile Include="ImportNotificationAssessment\Consent\ImportConsent.cs" />
+    <Compile Include="ImportNotificationAssessment\Consultation.cs" />
+    <Compile Include="ImportNotificationAssessment\Decision\DecisionRequiredBy.cs" />
+    <Compile Include="ImportNotificationAssessment\Decision\DecisionRequiredByCalculator.cs" />
+    <Compile Include="ImportNotificationAssessment\Decision\IDecisionRequiredByCalculator.cs" />
+    <Compile Include="ImportNotificationAssessment\Decision\IImportObjectionRepository.cs" />
+    <Compile Include="ImportNotificationAssessment\Decision\IImportWithdrawnRepository.cs" />
+    <Compile Include="ImportNotificationAssessment\Decision\ImportObjection.cs" />
+    <Compile Include="ImportNotificationAssessment\Decision\ImportWithdrawn.cs" />
+    <Compile Include="ImportNotificationAssessment\Decision\ObjectImportNotification.cs" />
+    <Compile Include="ImportNotificationAssessment\Decision\WithdrawImportNotification.cs" />
+    <Compile Include="ImportNotificationAssessment\FinancialGuarantee\ApproveImportFinancialGuarantee.cs" />
+    <Compile Include="ImportNotificationAssessment\FinancialGuarantee\Decision.cs" />
+    <Compile Include="ImportNotificationAssessment\FinancialGuarantee\IImportFinancialGuaranteeRefusalRepository.cs" />
+    <Compile Include="ImportNotificationAssessment\FinancialGuarantee\IImportFinancialGuaranteeApprovalRepository.cs" />
+    <Compile Include="ImportNotificationAssessment\FinancialGuarantee\IImportFinancialGuaranteeReleaseRepository.cs" />
+    <Compile Include="ImportNotificationAssessment\FinancialGuarantee\ImportFinancialGuaranteeRelease.cs" />
+    <Compile Include="ImportNotificationAssessment\FinancialGuarantee\ImportFinancialGuaranteeRefusal.cs" />
+    <Compile Include="ImportNotificationAssessment\FinancialGuarantee\ImportFinancialGuaranteeApproval.cs" />
+    <Compile Include="ImportNotificationAssessment\FinancialGuarantee\IImportFinancialGuaranteeRepository.cs" />
+    <Compile Include="ImportNotificationAssessment\FinancialGuarantee\ImportFinancialGuarantee.cs" />
+    <Compile Include="ImportNotificationAssessment\FinancialGuarantee\ImportFinancialGuaranteeStatusChange.cs" />
+    <Compile Include="ImportNotificationAssessment\FinancialGuarantee\ImportFinancialGuaranteeStatusChangeEvent.cs" />
+    <Compile Include="ImportNotificationAssessment\FinancialGuarantee\RefuseImportFinancialGuarantee.cs" />
+    <Compile Include="ImportNotificationAssessment\FinancialGuarantee\ReleaseImportFinancialGuarantee.cs" />
+    <Compile Include="ImportNotificationAssessment\IConsultationRepository.cs" />
+    <Compile Include="ImportNotificationAssessment\IImportNotificationChargeCalculator.cs" />
+    <Compile Include="ImportNotificationAssessment\ImportNotificationChargeCalculator.cs" />
+    <Compile Include="ImportNotificationAssessment\ImportNotificationDates.cs" />
+    <Compile Include="ImportNotificationAssessment\ImportNotificationAssessment.cs" />
+    <Compile Include="ImportNotificationAssessment\ImportNotificationStatusChange.cs" />
+    <Compile Include="ImportNotificationAssessment\ImportNotificationStatusChangeEvent.cs" />
+    <Compile Include="ImportNotificationAssessment\ImportNotificationSubmittedEvent.cs" />
+    <Compile Include="ImportNotificationAssessment\Transactions\IImportNotificationTransactionCalculator.cs" />
+    <Compile Include="ImportNotificationAssessment\Transactions\IImportNotificationTransactionRepository.cs" />
+    <Compile Include="ImportNotificationAssessment\Transactions\ImportNotificationTransaction.cs" />
+    <Compile Include="ImportNotificationAssessment\Transactions\ImportNotificationTransactionCalculator.cs" />
+    <Compile Include="ImportNotificationAssessment\Transactions\ImportPaymentTransaction.cs" />
+    <Compile Include="ImportNotification\Address.cs" />
+    <Compile Include="ImportNotification\AddressBuilder.cs" />
+    <Compile Include="ImportNotification\Contact.cs" />
+    <Compile Include="ImportNotification\Exporter.cs" />
+    <Compile Include="ImportNotification\FacilityCollection.cs" />
+    <Compile Include="ImportNotification\FacilityList.cs" />
+    <Compile Include="ImportNotification\IExporterRepository.cs" />
+    <Compile Include="ImportNotification\IFacilityRepository.cs" />
+    <Compile Include="ImportNotification\IImporterRepository.cs" />
+    <Compile Include="ImportNotification\Facility.cs" />
+    <Compile Include="ImportNotification\IImportNotificationAssessmentRepository.cs" />
+    <Compile Include="ImportNotification\IImportNotificationSearchRepository.cs" />
+    <Compile Include="ImportNotification\IImportNotificationOverviewRepository.cs" />
+    <Compile Include="ImportNotification\IInterimStatusRepository.cs" />
+    <Compile Include="ImportNotification\Importer.cs" />
+    <Compile Include="ImportNotification\ImportNotificationCreatedEvent.cs" />
+    <Compile Include="ImportNotification\ImportNotificationOverview.cs" />
+    <Compile Include="ImportNotification\ImportNotificationSearchResult.cs" />
+    <Compile Include="ImportNotification\InterimStatus.cs" />
+    <Compile Include="ImportNotification\ITransportRouteRepository.cs" />
+    <Compile Include="ImportNotification\IWasteOperationRepository.cs" />
+    <Compile Include="ImportNotification\IProducerRepository.cs" />
+    <Compile Include="ImportNotification\StateOfExport.cs" />
+    <Compile Include="ImportNotification\StateOfImport.cs" />
+    <Compile Include="ImportNotification\TransitState.cs" />
+    <Compile Include="ImportNotification\TransitStateList.cs" />
+    <Compile Include="ImportNotification\TransportRoute.cs" />
+    <Compile Include="ImportNotification\IWasteTypeRepository.cs" />
+    <Compile Include="ImportNotification\WasteCodes\BaselOecdCode.cs" />
+    <Compile Include="ImportNotification\WasteCodes\EwcCode.cs" />
+    <Compile Include="ImportNotification\WasteCodes\HCode.cs" />
+    <Compile Include="ImportNotification\WasteCodes\UnClass.cs" />
+    <Compile Include="ImportNotification\WasteCodes\WasteTypeWasteCode.cs" />
+    <Compile Include="ImportNotification\WasteCodes\YCode.cs" />
+    <Compile Include="ImportNotification\WasteType.cs" />
+    <Compile Include="ImportNotification\WasteOperation.cs" />
+    <Compile Include="ImportNotification\OperationCodesList.cs" />
+    <Compile Include="ImportNotification\IShipmentRepository.cs" />
+    <Compile Include="ImportNotification\Producer.cs" />
+    <Compile Include="ImportNotification\WasteOperationCode.cs" />
+    <Compile Include="ImportNotification\Shipment.cs" />
+    <Compile Include="INotificationUserRepository.cs" />
+    <Compile Include="IPostageLabelGenerator.cs" />
+    <Compile Include="Movement\MovementDetailsFactory.cs" />
+    <Compile Include="Movement\NumberOfActiveLoads.cs" />
+    <Compile Include="Movement\ConsentPeriod.cs" />
+    <Compile Include="Movement\IMovementDateValidator.cs" />
+    <Compile Include="Movement\MovementDateOutOfRangeException.cs" />
+    <Compile Include="Movement\MovementDateOutOfRangeOfOriginalDateException.cs" />
+    <Compile Include="Movement\MovementDateOutsideConsentPeriodException.cs" />
+    <Compile Include="Movement\MovementDateValidator.cs" />
+    <Compile Include="Movement\NumberOfMovements.cs" />
+    <Compile Include="NotificationApplication\Address.cs" />
+    <Compile Include="AddressBook\AddressBookRecordComparer.cs" />
+    <Compile Include="AddressBook\IAddressBookRespository.cs" />
+    <Compile Include="NotificationApplication\Annexes\Annex.cs" />
+    <Compile Include="NotificationApplication\Annexes\AnnexCollection.cs" />
+    <Compile Include="NotificationApplication\Annexes\AnnexFactory.cs" />
+    <Compile Include="NotificationApplication\Annexes\AnnexRequirements.cs" />
+    <Compile Include="NotificationApplication\Annexes\DeleteAnnexEvent.cs" />
+    <Compile Include="NotificationApplication\Annexes\IAnnexCollectionRepository.cs" />
+    <Compile Include="NotificationApplication\Annexes\IAnnexNameGenerator.cs" />
+    <Compile Include="NotificationApplication\Annexes\ProcessOfGenerationAnnex.cs" />
+    <Compile Include="NotificationApplication\Annexes\TechnologyEmployedNameGenerator.cs" />
+    <Compile Include="NotificationApplication\Annexes\WasteCompositionNameGenerator.cs" />
+    <Compile Include="NotificationApplication\Annexes\ProcessOfGenerationNameGenerator.cs" />
+    <Compile Include="NotificationApplication\Annexes\RequiredAnnexes.cs" />
+    <Compile Include="NotificationApplication\Annexes\TechnologyEmployedAnnex.cs" />
+    <Compile Include="NotificationApplication\Annexes\WasteCompositionAnnex.cs" />
+    <Compile Include="NotificationApplication\CarrierCollection.cs" />
+    <Compile Include="NotificationApplication\ContactComparer.cs" />
+    <Compile Include="NotificationApplication\BusinessComparer.cs" />
+    <Compile Include="NotificationApplication\AddressComparer.cs" />
+    <Compile Include="BankHoliday.cs" />
+    <Compile Include="NotificationApplication\Business.cs" />
+    <Compile Include="CompetentAuthority.cs" />
+    <Compile Include="CompetentAuthorityBacsDetails.cs" />
+    <Compile Include="NotificationApplication\Contact.cs" />
+    <Compile Include="Country.cs" />
+    <Compile Include="DateRange.cs" />
+    <Compile Include="DisposalCost.cs" />
+    <Compile Include="EstimatedValue.cs" />
+    <Compile Include="FileStore\File.cs" />
+    <Compile Include="FileStore\IFileRepository.cs" />
+    <Compile Include="FinancialGuarantee\ApproveDates.cs" />
+    <Compile Include="FinancialGuarantee\FinancialGuarantee.cs" />
+    <Compile Include="Events\RegistrationApprovedEvent.cs" />
+    <Compile Include="FinancialGuarantee\FinancialGuaranteeStatusChange.cs" />
+    <Compile Include="FinancialGuarantee\FinancialGuaranteeStatusChangeEvent.cs" />
+    <Compile Include="ICompetentAuthorityRepository.cs" />
+    <Compile Include="ICountryRepository.cs" />
+    <Compile Include="IFinancialGuaranteeDocumentGenerator.cs" />
+    <Compile Include="IInternalUserRepository.cs" />
+    <Compile Include="IMovementDocumentGenerator.cs" />
+    <Compile Include="ImportMovement\IImportMovementFactory.cs" />
+    <Compile Include="ImportMovement\IImportMovementNumberValidator.cs" />
+    <Compile Include="ImportMovement\IImportMovementRepository.cs" />
+    <Compile Include="ImportMovement\ImportMovement.cs" />
+    <Compile Include="ImportMovement\ImportMovementFactory.cs" />
+    <Compile Include="ImportMovement\ImportMovementNumberValidator.cs" />
+    <Compile Include="ImportNotification\IImportNotificationRepository.cs" />
+    <Compile Include="ImportNotification\ImportNotification.cs" />
+    <Compile Include="InternalUser.cs" />
+    <Compile Include="IWorkingDayCalculator.cs" />
+    <Compile Include="LocalArea.cs" />
+    <Compile Include="Movement\OriginalMovementDate.cs" />
+    <Compile Include="Movement\IMovementDateHistoryRepository.cs" />
+    <Compile Include="Movement\IUpdatedMovementDateValidator.cs" />
+    <Compile Include="Movement\MovementDateException.cs" />
+    <Compile Include="Movement\UpdatedMovementDateValidator.cs" />
+    <Compile Include="Movement\IMovementDetailsRepository.cs" />
+    <Compile Include="Movement\ICapturedMovementFactory.cs" />
+    <Compile Include="Movement\IMovementNumberGenerator.cs" />
+    <Compile Include="Movement\IMovementNumberValidator.cs" />
+    <Compile Include="Movement\IMovementRejectionRepository.cs" />
+    <Compile Include="Movement\INextAvailableMovementNumberGenerator.cs" />
+    <Compile Include="Movement\IRejectMovement.cs" />
+    <Compile Include="Movement\MovementDateChangeEvent.cs" />
+    <Compile Include="Movement\MovementDateHistory.cs" />
+    <Compile Include="Movement\MovementDetails.cs" />
+    <Compile Include="Movement\CapturedMovementFactory.cs" />
+    <Compile Include="Movement\MovementNumberException.cs" />
+    <Compile Include="Movement\MovementNumberGenerator.cs" />
+    <Compile Include="Movement\IMovementRepository.cs" />
+    <Compile Include="Movement\CertificateFactory.cs" />
+    <Compile Include="Movement\CertificateOfReceiptNameGenerator.cs" />
+    <Compile Include="Movement\CertificateOfRecoveryNameGenerator.cs" />
+    <Compile Include="Movement\ICertificateNameGenerator.cs" />
+    <Compile Include="Movement\INotificationMovementsSummaryRepository.cs" />
+    <Compile Include="Movement\MovementFileNameGenerator.cs" />
+    <Compile Include="Movement\MovementCompletedReceipt.cs" />
+    <Compile Include="Movement\MovementNumberValidator.cs" />
+    <Compile Include="Movement\MovementReceipt.cs" />
+    <Compile Include="Movement\MovementCarrier.cs" />
+    <Compile Include="Movement\MovementFactory.cs" />
+    <Compile Include="Movement\MovementRejection.cs" />
+    <Compile Include="Movement\NextAvailableMovementNumberGenerator.cs" />
+    <Compile Include="Movement\NotificationMovementsSummary.cs" />
+    <Compile Include="Movement\NotificationMovementsQuantity.cs" />
+    <Compile Include="Movement\MovementStatusChange.cs" />
+    <Compile Include="Movement\MovementStatusChangeEvent.cs" />
+    <Compile Include="Movement\RejectMovement.cs" />
+    <Compile Include="Finance\Activity.cs" />
+    <Compile Include="NotificationApplication\IMeansOfTransportRepository.cs" />
+    <Compile Include="NotificationApplication\MeansOfTransport.cs" />
+    <Compile Include="NotificationApplication\NotificationApplicationFactory.cs" />
+    <Compile Include="NotificationApplication\Exporter\IExporterRepository.cs" />
+    <Compile Include="NotificationApplication\ICarrierRepository.cs" />
+    <Compile Include="NotificationApplication\ExportNotificationOwnerDisplay.cs" />
+    <Compile Include="NotificationApplication\IExportNotificationOwnerDisplayRepository.cs" />
+    <Compile Include="NotificationApplication\IFacilityRepository.cs" />
+    <Compile Include="NotificationApplication\Importer\IImporterRepository.cs" />
+    <Compile Include="NotificationApplication\INotificationApplicationOverviewRepository.cs" />
+    <Compile Include="NotificationApplication\INotificationApplicationRepository.cs" />
+    <Compile Include="NotificationApplication\INotificationChargeCalculator.cs" />
+    <Compile Include="NotificationApplication\INotificationProgressService.cs" />
+    <Compile Include="NotificationApplication\IPricingStructureRepository.cs" />
+    <Compile Include="NotificationApplication\IProducerRepository.cs" />
+    <Compile Include="NotificationApplication\IUserHistoryRepository.cs" />
+    <Compile Include="NotificationApplication\NotificationApplicationOverview.cs" />
+    <Compile Include="NotificationApplication\IWasteCodeRepository.cs" />
+    <Compile Include="NotificationApplication\ChangeNotificationUser.cs" />
+    <Compile Include="NotificationApplication\NotificationNumberFormatter.cs" />
+    <Compile Include="NotificationApplication\ProducerCollection.cs" />
+    <Compile Include="NotificationApplication\SetAllFacilitiesPreconsented.cs" />
+    <Compile Include="NotificationApplication\UserHistory.cs" />
+    <Compile Include="NotificationApplication\NotificationUserChangedEvent.cs" />
+    <Compile Include="NotificationApplication\WasteRecovery\PercentageChangedEvent.cs" />
+    <Compile Include="NotificationApplication\WasteRecovery\ProviderChangedEvent.cs" />
+    <Compile Include="NotificationApplication\NotificationReadOnlyException.cs" />
+    <Compile Include="NotificationApplication\WasteRecovery\WasteDisposal.cs" />
+    <Compile Include="NotificationApplication\WasteRecovery\IWasteDisposalRepository.cs" />
+    <Compile Include="NotificationApplication\Shipment\IShipmentInfoRepository.cs" />
+    <Compile Include="NotificationApplication\NotificationChargeCalculator.cs" />
+    <Compile Include="NotificationApplication\NotificationCreatedEvent.cs" />
+    <Compile Include="NotificationApplication\WasteRecovery\IWasteRecoveryRepository.cs" />
+    <Compile Include="NotificationAssessment\CompleteNotification.cs" />
+    <Compile Include="NotificationAssessment\Consultation.cs" />
+    <Compile Include="NotificationAssessment\DecisionRequiredByCalculator.cs" />
+    <Compile Include="NotificationAssessment\FinancialGuaranteeDecisionRequired.cs" />
+    <Compile Include="NotificationAssessment\IConsultationRepository.cs" />
+    <Compile Include="NotificationAssessment\IDecisionRequiredByCalculator.cs" />
+    <Compile Include="DaysRemainingCalculator.cs" />
+    <Compile Include="NotificationAssessment\INotificationAttentionSummaryRepository.cs" />
+    <Compile Include="NotificationAssessment\NotificationAttentionSummary.cs" />
+    <Compile Include="NotificationAssessment\NotificationInterim.cs" />
+    <Compile Include="NotificationAssessment\NotificationIsInterimSetEvent.cs" />
+    <Compile Include="NotificationAssessment\NotificationTransmittedEvent.cs" />
+    <Compile Include="NotificationAssessment\Transaction.cs" />
+    <Compile Include="NotificationAssessment\DecisionRequiredBy.cs" />
+    <Compile Include="NotificationAssessment\INotificationAssessmentDatesSummaryRepository.cs" />
+    <Compile Include="NotificationAssessment\INotificationAssessmentDecisionRepository.cs" />
+    <Compile Include="NotificationAssessment\INotificationTransactionCalculator.cs" />
+    <Compile Include="NotificationAssessment\INotificationTransactionRepository.cs" />
+    <Compile Include="NotificationAssessment\NotificationDatesSummary.cs" />
+    <Compile Include="NotificationAssessment\NotificationTransaction.cs" />
+    <Compile Include="NotificationAssessment\NotificationTransactionCalculator.cs" />
+    <Compile Include="NotificationConsent\Consent.cs" />
+    <Compile Include="NotificationAssessment\INotificationAssessmentRepository.cs" />
+    <Compile Include="NotificationAssessment\NotificationDates.cs" />
+    <Compile Include="NotificationAssessment\NotificationStatusChange.cs" />
+    <Compile Include="NotificationAssessment\NotificationAssessment.cs" />
+    <Compile Include="Events\RegistrationRejectedEvent.cs" />
+    <Compile Include="NotificationApplication\INotificationNumberGenerator.cs" />
+    <Compile Include="NotificationApplication\NotificationApplication.PhysicalCharacteristics.cs" />
+    <Compile Include="NotificationApplication\NotificationApplication.WasteCodes.cs" />
+    <Compile Include="NotificationApplication\NotificationApplication.WasteGenerationProcess.cs" />
+    <Compile Include="Finance\PricingStructure.cs" />
+    <Compile Include="Finance\ShipmentQuantityRange.cs" />
+    <Compile Include="NotificationApplication\WasteAdditionalInformation.cs" />
+    <Compile Include="NotificationAssessment\NotificationStatusChangeEvent.cs" />
+    <Compile Include="NotificationAssessment\NotificationSubmittedEvent.cs" />
+    <Compile Include="NotificationConsent\ConsentNotification.cs" />
+    <Compile Include="NotificationConsent\INotificationConsentRepository.cs" />
+    <Compile Include="Percentage.cs" />
+    <Compile Include="NotificationApplication\ProducerBusiness.cs" />
+    <Compile Include="Movement\Movement.cs" />
+    <Compile Include="AddressBook\AddressBook.cs" />
+    <Compile Include="PhoneNumber.cs" />
+    <Compile Include="Reports\DataExportNotification.cs" />
+    <Compile Include="Reports\ExportStats.cs" />
+    <Compile Include="Reports\Finance.cs" />
+    <Compile Include="Reports\IExportNotificationsRepository.cs" />
+    <Compile Include="Reports\IExportStatsRepository.cs" />
+    <Compile Include="Reports\IFinanceReportRepository.cs" />
+    <Compile Include="Reports\IMissingShipmentsRepository.cs" />
+    <Compile Include="Reports\IRdfSrfWoodRepository.cs" />
+    <Compile Include="Reports\MissingShipment.cs" />
+    <Compile Include="Security\IMovementAuthorization.cs" />
+    <Compile Include="Security\INotificationApplicationAuthorization.cs" />
+    <Compile Include="ShipmentPeriod.cs" />
+    <Compile Include="AddressBook\AddressBookRecord.cs" />
+    <Compile Include="RecoveryCost.cs" />
+    <Compile Include="ShipmentQuantity.cs" />
+    <Compile Include="ShipmentQuantityUnitConverter.cs" />
+    <Compile Include="NotificationApplication\NotificationApplication.PackagingInfo.cs" />
+    <Compile Include="NotificationApplication\NotificationApplication.TechnologyEmployed.cs" />
+    <Compile Include="NotificationApplication\NotificationApplication.SpecialHandling.cs" />
+    <Compile Include="NotificationApplication\PhysicalCharacteristicsInfo.cs" />
+    <Compile Include="NotificationApplication\WasteRecovery\WasteRecovery.cs" />
+    <Compile Include="NotificationApplication\TechnologyEmployed.cs" />
+    <Compile Include="NotificationApplication\WasteCode.cs" />
+    <Compile Include="NotificationApplication\WasteCodeInfo.cs" />
+    <Compile Include="NotificationApplication\NotificationApplication.WasteType.cs" />
+    <Compile Include="NotificationApplication\WasteComposition.cs" />
+    <Compile Include="NotificationApplication\WasteType.cs" />
+    <Compile Include="NotificationApplication\Facility.cs" />
+    <Compile Include="NotificationApplication\Carrier.cs" />
+    <Compile Include="NotificationApplication\Exporter\Exporter.cs" />
+    <Compile Include="NotificationApplication\Importer\Importer.cs" />
+    <Compile Include="NotificationApplication\FacilityCollection.cs" />
+    <Compile Include="NotificationApplication\NotificationApplication.cs" />
+    <Compile Include="NotificationApplication\NotificationApplication.OperationCode.cs" />
+    <Compile Include="NotificationApplication\PackagingInfo.cs" />
+    <Compile Include="NotificationApplication\OperationInfo.cs" />
+    <Compile Include="Organisation.cs" />
+    <Compile Include="INotificationDocumentGenerator.cs" />
+    <Compile Include="NotificationApplication\Producer.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="NotificationApplication\Shipment\ShipmentInfo.cs" />
+    <Compile Include="TransportRoute\AllTransitStatesInEUEvent.cs" />
+    <Compile Include="TransportRoute\CustomsOffice.cs" />
+    <Compile Include="TransportRoute\EntryCustomsOffice.cs" />
+    <Compile Include="TransportRoute\EntryOrExitPoint.cs" />
+    <Compile Include="TransportRoute\ExitCustomsOffice.cs" />
+    <Compile Include="TransportRoute\IEntryOrExitPointRepository.cs" />
+    <Compile Include="TransportRoute\IEntryPoint.cs" />
+    <Compile Include="TransportRoute\IExitPoint.cs" />
+    <Compile Include="TransportRoute\IState.cs" />
+    <Compile Include="TransportRoute\ITransportRouteRepository.cs" />
+    <Compile Include="TransportRoute\RequiredCustomsOffices.cs" />
+    <Compile Include="TransportRoute\StateOfExport.cs" />
+    <Compile Include="TransportRoute\StateOfImport.cs" />
+    <Compile Include="TransportRoute\TransitState.cs" />
+    <Compile Include="TransportRoute\TransportRoute.cs" />
+    <Compile Include="UnitedKingdomCompetentAuthority.cs" />
+    <Compile Include="User.cs" />
+    <Compile Include="UserAddress.cs" />
+    <Compile Include="ValuePerWeight.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\EA.Iws.Core\EA.Iws.Core.csproj">
+      <Project>{DD2A73A4-A652-4ECC-87EE-24239CE45AD4}</Project>
+      <Name>EA.Iws.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\StyleCop.Error.MSBuild.1.0.0\build\StyleCop.Error.MSBuild.Targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\StyleCop.Error.MSBuild.1.0.0\build\StyleCop.Error.MSBuild.Targets'))" />
+    <Error Condition="!Exists('..\packages\StyleCop.MSBuild.4.7.50.0\build\StyleCop.MSBuild.Targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\StyleCop.MSBuild.4.7.50.0\build\StyleCop.MSBuild.Targets'))" />
+  </Target>
+  <Import Project="..\packages\StyleCop.Error.MSBuild.1.0.0\build\StyleCop.Error.MSBuild.Targets" Condition="Exists('..\packages\StyleCop.Error.MSBuild.1.0.0\build\StyleCop.Error.MSBuild.Targets')" />
+  <Import Project="..\packages\StyleCop.MSBuild.4.7.50.0\build\StyleCop.MSBuild.Targets" Condition="Exists('..\packages\StyleCop.MSBuild.4.7.50.0\build\StyleCop.MSBuild.Targets')" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

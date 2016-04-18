@@ -1,0 +1,21 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.GovUK.Sections.cshtml";
+}
+
+<div class="grid-row">
+    <aside id="form-menu" class="column-third form-status">
+        @Html.Action("_Navigation", "Home")
+    </aside>
+
+    <div class="column-two-thirds">
+        @RenderBody()
+    </div>
+</div>
+
+@section head {
+    @RenderSection("head", required: false)
+}
+
+@section scripts {
+    @RenderSection("scripts", required: false)
+}

@@ -1,0 +1,6 @@
+﻿@using Resources = EA.Iws.Web.Areas.NotificationApplication.Views.WhatToDoNext.PaymentResources
+@model EA.Iws.Requests.Notification.WhatToDoNextPaymentData
+
+<p>@Resources.RemittancePost
+<br/>
+@Html.Raw(Model.UnitedKingdomCompetentAuthorityData.BacsDetails.RemittanceAddress)</p>

@@ -1,0 +1,50 @@
+﻿@using EA.Iws.Core.Notification
+@model EA.Iws.Requests.Notification.WhatToDoNextData
+
+@{
+    ViewBag.Title = "Download your postage label";
+    Layout = "~/Views/Shared/_Layout.GovUK.Sections.cshtml";
+}
+
+<header class="hgroup">
+    <h1 class="heading-large">Download your postage label</h1>
+</header>
+
+<div class="form-group">You can download and print a label with our address on.</div>
+
+<div class="form-group">
+    @Html.ActionLink("Download a postage label (PDF)", "GetPostageLabel", "WhatToDoNext", new { competentAuthority = Model.CompetentAuthority, area = "NotificationApplication" }, null)
+</div>
+
+<div class="form-group">If you don't want to download a label, post your notification pack to:</div>
+
+<p>
+    @if (Model.CompetentAuthority == UKCompetentAuthority.England)
+    {
+        @Html.Partial("_EaAddress")
+    }
+
+    @if (Model.CompetentAuthority == UKCompetentAuthority.NorthernIreland)
+    {
+        @Html.Partial("_NieaAddress")
+    }
+
+    @if(Model.CompetentAuthority == UKCompetentAuthority.Scotland)
+    {
+        @Html.Partial("_SepaAddress")
+    }
+
+    @if(Model.CompetentAuthority == UKCompetentAuthority.Wales)
+    {
+        @Html.Partial("_NrwAddress")
+    }
+</p>
+
+
+<div class="form-group">
+    @Html.ActionLink("Continue", "FinancialGuarantee", "WhatToDoNext", new { id = Model.Id, area = "NotificationApplication" }, new { @class = "button" })
+</div>
+
+<div>
+    @Html.ActionLink("Go to notification options", "Index", "Options", new { id = Model.Id, area = "NotificationApplication" }, null)
+</div>

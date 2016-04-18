@@ -1,0 +1,48 @@
+﻿@model EA.Iws.Web.Areas.ImportNotification.ViewModels.Home.SummaryTableContainerViewModel
+
+@using Resource = EA.Iws.Web.Areas.ImportNotification.Views.Home.IndexResources
+
+
+<div class="overview-block">
+    <div class="overview-block-element">
+        @if (Model.Details.StateOfImport != null && !Model.Details.StateOfImport.IsEmpty())
+        {
+            
+            <div class="sub-title">@Resource.CountryText</div>
+            if (!string.IsNullOrWhiteSpace(Model.Details.StateOfImport.CountryName))
+            {
+                <div class="sub-text">@Model.Details.StateOfImport.CountryName</div>
+            }
+            else
+            {
+                <div class="sub-text">@Resource.UnansweredQuestionPlaceholder</div>
+            }
+
+            <div class="sub-title">@Resource.CompetentAuthorityText</div>
+            if (!string.IsNullOrWhiteSpace(Model.Details.StateOfImport.CompetentAuthorityName))
+            {
+                <div class="sub-text">@Model.Details.StateOfImport.CompetentAuthorityCode - @Model.Details.StateOfImport.CompetentAuthorityName</div>
+            }
+            else
+            {
+                <div class="sub-text">@Resource.UnansweredQuestionPlaceholder</div>
+            }
+
+            <div class="sub-title">@Resource.EntryPointText</div>
+            if (!string.IsNullOrWhiteSpace(Model.Details.StateOfImport.EntryPointName))
+            {
+                <div class="sub-text">@Model.Details.StateOfImport.EntryPointName</div>
+            }
+            else
+            {
+                <div class="sub-text">@Resource.UnansweredQuestionPlaceholder</div>
+            }
+            
+        }
+        else
+        {
+            @ViewBag.SectionIncompleteText
+        }
+
+    </div>
+</div>

@@ -1,0 +1,50 @@
+﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.NotificationApplication.JourneyViewModel
+
+<div class="overview-block">
+    @if (Model.AreTransitStatesCompleted && Model.TransitStates.Any())
+    {
+        foreach (var transitState in Model.TransitStates.OrderBy(ts => ts.OrdinalPosition))
+        {
+            <div class="overview-block-element">
+                <div class="grid-row">
+                    <div class="column-half">
+                        Entry point:
+                    </div>
+                    <div class="column-half">
+                        @transitState.EntryPoint.Name,
+                        @transitState.Country.Name
+                    </div>
+                </div>
+                <div class="grid-row">
+                    <div class="column-half">
+                        Exit point:
+                    </div>
+                    <div class="column-half">
+                        @transitState.ExitPoint.Name,
+                        @transitState.Country.Name
+                    </div>
+                </div>
+                <div class="grid-row">
+                    <div class="column-half">
+                        Competent authority:
+                    </div>
+                    <div class="column-half">
+                        @transitState.CompetentAuthority.Code
+                        -
+                        @transitState.CompetentAuthority.Name
+                    </div>
+                </div>
+            </div>
+            if (transitState != Model.TransitStates.OrderBy(ts => ts.OrdinalPosition).Last())
+            {
+                <hr />
+            }
+        }
+    }
+    else
+    {
+        <div class="overview-block-element">
+            There are no transit states
+        </div>
+    }
+</div>

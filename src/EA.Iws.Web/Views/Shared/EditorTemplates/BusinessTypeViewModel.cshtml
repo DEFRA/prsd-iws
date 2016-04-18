@@ -1,0 +1,141 @@
+﻿@using EA.Iws.Core.AddressBook
+@using EA.Iws.Core.Shared
+@using EA.Iws.Web.ViewModels.Shared
+@model EA.Iws.Web.ViewModels.Shared.BusinessTypeViewModel
+
+@{
+    string soleTraderRegistrationNumber = ViewBag.SoleTraderRegistrationNumber;
+    string soleTraderAdditionalRegistrationNumber = ViewBag.SoleTraderAdditionalRegistrationNumber;
+    string partnershipRegistrationNumber = ViewBag.PartnershipRegistrationNumber;
+    string partnershipAdditionalRegistrationNumber = ViewBag.PartnershipAdditionalRegistrationNumber;
+    string companyRegistrationNumber = ViewBag.CompanyRegistrationNumber;
+    string companyAdditionalRegistrationNumber = ViewBag.CompanyAdditionalRegistrationNumber;
+    string otherRegistrationNumber = ViewBag.OtherRegistrationNumber;
+    string otherAdditionalRegistrationNumber = ViewBag.OtherAdditionalRegistrationNumber;
+    string nonJavascriptMessage = ViewBag.NonJavascriptMessage;
+    AddressRecordType? addressType = ViewBag.AddressType;
+}
+
+<div class="form-group @Html.Gds().FormGroupClass(m => m.Name)">
+    @Html.Gds().LabelFor(m => m.Name)
+    @Html.Gds().ValidationMessageFor(m => m.Name)
+    @if (addressType.HasValue)
+    {
+        @Html.Gds().TextBoxFor(m => m.Name, new
+   {
+       data_addressbook_url = Url.Action("Index", "Search", new { area = "AddressBook" }),
+       data_addressbook_type = addressType.Value.ToString()
+   })
+    }
+    else
+    {
+        @Html.Gds().TextBoxFor(m => m.Name)
+    }
+</div>
+
+<div class="form-group @Html.Gds().FormGroupClass(m => m.BusinessType)">
+    @{
+        if (ViewBag.Title != "Exporter - notifier")
+        {
+            <span class="form-hint">@BusinessResources.FormHint</span>
+        }
+    }
+
+    @Html.Gds().ValidationMessageFor(m => m.BusinessType)
+
+    <label class="block-label" data-target="sole-trader-number" for="SoleTrader">
+        @Html.RadioButtonFor(m => m.BusinessType, "SoleTrader", new { @class = "business-type-radio-button", @id = "SoleTrader" }) @EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(BusinessType.SoleTrader)
+    </label>
+    <div class="panel-indent hide-for-initial-load @(Model.BusinessType != null && Model.BusinessType.Equals("Sole trader") ? "" : "js-hidden")" id="sole-trader-number">
+        @if (!string.IsNullOrWhiteSpace(soleTraderRegistrationNumber))
+        {
+            <span class="form-hint">@soleTraderRegistrationNumber</span>
+        }
+        @if (!string.IsNullOrWhiteSpace(soleTraderAdditionalRegistrationNumber))
+        {
+            <span class="form-hint" data-name="additional-hint">@soleTraderAdditionalRegistrationNumber</span>
+        }
+    </div>
+
+    <label class="block-label" data-target="partnership-number" for="Partnership">
+        @Html.RadioButtonFor(m => m.BusinessType, "Partnership", new { @class = "business-type-radio-button", @id = "Partnership" }) @EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(BusinessType.Partnership)
+    </label>
+    <div class="panel-indent hide-for-initial-load @(Model.BusinessType != null && Model.BusinessType.Equals("Partnership") ? "" : "js-hidden")" id="partnership-number">
+        @if (!string.IsNullOrWhiteSpace(partnershipRegistrationNumber))
+        {
+            <span class="form-hint">@partnershipRegistrationNumber</span>
+        }
+        @if (!string.IsNullOrWhiteSpace(partnershipAdditionalRegistrationNumber))
+        {
+            <span class="form-hint" data-name="additional-hint">@partnershipAdditionalRegistrationNumber</span>
+        }
+    </div>
+
+    <label class="block-label" data-target="companies-house-number" for="LimitedCompany">
+        @Html.RadioButtonFor(m => m.BusinessType, "LimitedCompany", new { @class = "business-type-radio-button", @id = "LimitedCompany" }) @EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(BusinessType.LimitedCompany)
+    </label>
+    <div class="panel-indent hide-for-initial-load @(Model.BusinessType != null && Model.BusinessType.Equals("Limited company") ? "" : "js-hidden")" id="companies-house-number">
+        @if (!string.IsNullOrWhiteSpace(companyRegistrationNumber))
+        {
+            <span class="form-hint">@companyRegistrationNumber</span>
+        }
+        @if (!string.IsNullOrWhiteSpace(companyAdditionalRegistrationNumber))
+        {
+            <span class="form-hint" data-name="additional-hint">@companyAdditionalRegistrationNumber</span>
+        }
+    </div>
+
+    <label class="block-label" data-target="other-description" for="Other">
+        @Html.RadioButtonFor(m => m.BusinessType, BusinessType.Other, new { @class = "business-type-radio-button", @id = "Other" }) @EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(BusinessType.Other)
+    </label>
+    <div class="panel-indent hide-for-initial-load @(Model.BusinessType != null && Model.BusinessType == BusinessType.Other ? "" : "js-hidden")" id="other-description">
+        <div class="form-group @Html.Gds().FormGroupClass(m => m.OtherDescription)">
+            @Html.Gds().LabelFor(m => m.OtherDescription)
+            @Html.Gds().ValidationMessageFor(m => m.OtherDescription)
+            @Html.Gds().TextBoxFor(m => m.OtherDescription)
+        </div>
+        @if (!string.IsNullOrWhiteSpace(otherRegistrationNumber))
+        {
+            <span class="form-hint">@otherRegistrationNumber</span>
+        }
+        @if (!string.IsNullOrWhiteSpace(otherAdditionalRegistrationNumber))
+        {
+            <span class="form-hint" data-name="additional-hint">@otherAdditionalRegistrationNumber</span>
+        }
+    </div>
+</div>
+
+<div class="js-hidden" id="registration-block">
+    <div class="form-group @Html.Gds().FormGroupClass(m => m.RegistrationNumber)" data-validation-behaviour="ignore-parent">
+        @Html.Gds().LabelFor(m => m.RegistrationNumber)
+        @if (!string.IsNullOrWhiteSpace(nonJavascriptMessage))
+        {
+            <span class="form-hint js-hidden">@nonJavascriptMessage</span>
+        }
+        @Html.Gds().ValidationMessageFor(m => m.RegistrationNumber)
+        @Html.Gds().TextBoxFor(m => m.RegistrationNumber)
+
+        @if (Model.DisplayCompaniesHouseHint)
+        {
+            <details data-target="companies-house-number" class="margin-top-15">
+                <summary><h2 class="summary heading-xsmall">@BusinessResources.WhereToFindCompanyHouse</h2></summary>
+                <div class="panel-indent">
+                    <p>
+                        @Html.Raw(BusinessResources.CompanyHouseDescription)
+                    </p>
+                </div>
+                @Html.HiddenFor(m => m.DisplayCompaniesHouseHint)
+            </details>
+        }
+    </div>
+
+    @if (Model.DisplayAdditionalNumber)
+    {
+        <div class="form-group @Html.Gds().FormGroupClass(m => m.AdditionalRegistrationNumber)">
+            @Html.Gds().LabelFor(m => m.AdditionalRegistrationNumber)
+            @Html.Gds().ValidationMessageFor(model => model.AdditionalRegistrationNumber)
+            @Html.Gds().TextBoxFor(m => m.AdditionalRegistrationNumber)
+            @Html.HiddenFor(m => m.DisplayAdditionalNumber)
+        </div>
+    }
+</div>

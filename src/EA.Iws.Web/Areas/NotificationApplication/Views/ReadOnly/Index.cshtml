@@ -1,0 +1,16 @@
+﻿@{
+    ViewBag.Title = "Notification read-only";
+    Layout = "~/Views/Shared/_Layout.GovUK.Sections.cshtml";
+}
+
+<header class="hgroup text">
+    <h1 class="heading-large">Your notification is now read-only</h1>
+</header>
+
+<p class="text">
+    Now that we've assessed your notification, it has moved on to your destination's competent authority. You can't
+    edit it anymore.
+</p>
+<p>
+    @Html.ActionLink("Continue", "Index", "Options", null, new { @class = "button" })
+</p>

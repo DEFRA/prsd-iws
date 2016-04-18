@@ -1,0 +1,10 @@
+﻿@using Resources = EA.Iws.Web.Areas.AdminImportAssessment.Views.FinancialGuaranteeDecision.NotCompletedResources
+@model EA.Iws.Web.Areas.AdminImportAssessment.ViewModels.FinancialGuaranteeDecision.FinancialGuaranteeDecisionViewModel
+
+<p>@Resources.Explanation</p>
+
+<div class="form-group-compound">
+    @Html.ActionLink(Resources.GoToCompletedDate, "ReceivedAndCompletedDate", "FinancialGuaranteeDates", null, new { @class = "button" })
+</div>
+
+@Html.ActionLink(Resources.ReturnToKeyDates, "Index", "KeyDates")

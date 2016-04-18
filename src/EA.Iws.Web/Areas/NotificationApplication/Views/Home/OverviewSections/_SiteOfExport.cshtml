@@ -1,0 +1,14 @@
+﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.NotificationApplication.OrganisationsInvolvedViewModel
+
+<div class="overview-block">
+    <div class="overview-block-element">
+        @if (Model.HasSiteOfExport)
+        {
+            @Html.DisplayFor(m => m.Producers.Single(p => p.IsSiteOfExport).Business.Name)
+        }
+        else
+        {
+            @ViewBag.SectionIncompleteText
+        }
+    </div>
+</div>

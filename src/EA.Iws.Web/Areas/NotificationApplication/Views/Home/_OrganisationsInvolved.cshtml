@@ -1,0 +1,110 @@
+﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.NotificationApplication.OrganisationsInvolvedViewModel
+@using EA.Iws.Core.Shared;
+@{
+    var id = Model.NotificationId;
+    var viewLocation = Constants.ExternalNotificationOverviewSectionsLocation;
+    var headerColspan = ViewBag.CanEditNotification ? 3 : 2;
+}
+
+@{
+    var exporterClass = Model.IsExporterCompleted ? string.Empty : "over-alert";
+    var producerClass = Model.IsProducerCompleted ? string.Empty : "over-alert";
+    var siteOfExportClass = Model.HasSiteOfExport ? string.Empty : "over-alert";
+    var importerClass = Model.IsImporterCompleted ? string.Empty : "over-alert";
+    var facilitiesClass = Model.IsFacilityCompleted ? string.Empty : "over-alert";
+    var actualSiteClass = Model.HasActualSiteOfTreatment ? string.Empty : "over-alert";
+}
+
+<table class="overview-table">
+    <thead>
+        <tr>
+            <th colspan="@headerColspan">
+                <h2 class="heading-medium">Organisations involved</h2>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr class = @exporterClass>
+            <td>
+                Exporter
+            </td>
+            <td>
+                @Html.Partial(viewLocation + "_Exporter.cshtml")
+            </td>
+            @if (ViewBag.CanEditNotification)
+            {
+                <td class="change">
+                    @Html.ActionLink("Change", "Index", "Exporter", new { id, backToOverview = true }, null)
+                </td>
+            }
+        </tr>
+        <tr class = @producerClass>
+            <td>
+                Producers
+            </td>
+            <td>
+                @Html.Partial(viewLocation + "_Producer.cshtml")
+            </td>
+            @if (ViewBag.CanEditNotification)
+            {
+                <td class="change">
+                    @Html.ActionLink("Change", "List", "Producer", new { id, backToOverview = true }, null)
+                </td>
+            }
+        </tr>
+        <tr class = @siteOfExportClass>
+            <td>
+                Site of export
+            </td>
+            <td>
+                @Html.Partial(viewLocation + "_SiteOfExport.cshtml")
+            </td>
+            @if (ViewBag.CanEditNotification)
+            {
+                <td class="change">
+                    @Html.ActionLink("Change", "SiteOfExport", "Producer", new { id, backToOverview = true }, null)
+                </td>
+            }
+        </tr>
+        <tr class = @importerClass>
+            <td>
+                Importer
+            </td>
+            <td>
+                @Html.Partial(viewLocation + "_Importer.cshtml")
+            </td>
+            @if (ViewBag.CanEditNotification)
+            {
+                <td class="change">@Html.ActionLink("Change", "Index", "Importer", new { id, backToOverview = true }, null)</td>
+            }
+        </tr>
+        <tr class = @facilitiesClass>
+            <td>
+                @(Model.NotificationType == NotificationType.Recovery ? "Recovery facilities" : "Disposal facilities")
+            </td>
+            <td>
+                @Html.Partial(viewLocation + "_Facility.cshtml")
+            </td>
+            @if (ViewBag.CanEditNotification)
+            {
+                <td class="change">
+                    @Html.ActionLink("Change", "List", "Facility", new { id, backToOverview = true }, null)
+                </td>
+            }
+        </tr>
+        <tr class = @actualSiteClass>
+            <td>
+                @(Model.NotificationType == NotificationType.Recovery ? "Recovery site" : "Disposal site")
+            </td>
+            <td>
+                @Html.Partial(viewLocation + "_SiteOfRecovery.cshtml")
+            </td>
+            @if (ViewBag.CanEditNotification)
+            {
+                <td class="change">
+                    @Html.ActionLink("Change", "SiteOfTreatment", "Facility", new { id, backToOverview = true }, null)
+                </td>
+            }
+        </tr>
+    </tbody>
+</table>

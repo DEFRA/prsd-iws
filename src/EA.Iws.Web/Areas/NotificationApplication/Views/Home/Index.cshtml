@@ -1,0 +1,29 @@
+﻿@using EA.Iws.Core.Shared
+@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.NotificationApplication.NotificationOverviewViewModel
+@{
+    ViewBag.SectionIncompleteText = "Section incomplete";
+    ViewBag.CanEditNotification = Model.CanEditNotification;
+    ViewBag.Title = "Submit notification";
+    Layout = "~/Views/Shared/_Layout.GovUK.Sections.cshtml";
+}
+
+@Html.Partial("_Submission", Model.SubmitSideBarViewModel)
+
+@Html.Partial("_OrganisationsInvolved", Model.OrganisationsInvolvedViewModel)
+
+@Html.Partial("_RecoveryOperation", Model.RecoveryOperationViewModel)
+
+@Html.Partial("_Transportation", Model.TransportationViewModel)
+
+@Html.Partial("_Journey", Model.JourneyViewModel)
+
+@Html.Partial("_AmountsAndDates", Model.AmountsAndDatesViewModel)
+
+@Html.Partial("_ClassifyYourWaste", Model.ClassifyYourWasteViewModel)
+
+@Html.Partial("_WasteCodes", Model.WasteCodeOverviewViewModel)
+
+@if (Model.NotificationType == NotificationType.Recovery)
+{
+    @Html.Partial("_WasteRecovery", Model.WasteRecoveryViewModel)
+}

@@ -1,0 +1,141 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{DEC3021A-32CF-4B84-A59C-77503378ED67}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>EA.Iws.TestHelpers</RootNamespace>
+    <AssemblyName>EA.Iws.TestHelpers</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EA.Prsd.Core, Version=1.0.16077.1, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\EA.Prsd.Core.1.0.16077-develop1\lib\net452\EA.Prsd.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DomainFakes\TestableAddressBook.cs" />
+    <Compile Include="DomainFakes\TestableAddressBookRecord.cs" />
+    <Compile Include="DomainFakes\TestableBusiness.cs" />
+    <Compile Include="DomainFakes\TestableAddress.cs" />
+    <Compile Include="DomainFakes\TestableCarrierCollection.cs" />
+    <Compile Include="DomainFakes\TestableImporter.cs" />
+    <Compile Include="DomainFakes\TestableFacility.cs" />
+    <Compile Include="DomainFakes\TestableMovementDetails.cs" />
+    <Compile Include="DomainFakes\TestableMovementOperationReceipt.cs" />
+    <Compile Include="DomainFakes\TestableMovementReceipt.cs" />
+    <Compile Include="DomainFakes\TestableProducer.cs" />
+    <Compile Include="DomainFakes\TestableExporter.cs" />
+    <Compile Include="DomainFakes\TestableCarrier.cs" />
+    <Compile Include="DomainFakes\TestableCompetentAuthority.cs" />
+    <Compile Include="DomainFakes\TestableContact.cs" />
+    <Compile Include="DomainFakes\TestableCountry.cs" />
+    <Compile Include="DomainFakes\TestableEntryOrExitPoint.cs" />
+    <Compile Include="DomainFakes\TestableFinancialGuarantee.cs" />
+    <Compile Include="DomainFakes\TestableInternalUser.cs" />
+    <Compile Include="DomainFakes\TestableMovement.cs" />
+    <Compile Include="DomainFakes\TestableMovementCarrier.cs" />
+    <Compile Include="DomainFakes\TestableNotificationApplication.cs" />
+    <Compile Include="DomainFakes\TestableNotificationAssessment.cs" />
+    <Compile Include="DomainFakes\TestableOperationInfo.cs" />
+    <Compile Include="DomainFakes\TestableWasteRecovery.cs" />
+    <Compile Include="DomainFakes\TestablePackagingInfo.cs" />
+    <Compile Include="DomainFakes\TestableShipmentInfo.cs" />
+    <Compile Include="DomainFakes\TestableStateOfImport.cs" />
+    <Compile Include="DomainFakes\TestableStateOfExport.cs" />
+    <Compile Include="DomainFakes\TestableTechnologyEmployed.cs" />
+    <Compile Include="DomainFakes\TestableTransitState.cs" />
+    <Compile Include="DomainFakes\TestableTransportRoute.cs" />
+    <Compile Include="DomainFakes\TestableWasteCode.cs" />
+    <Compile Include="DomainFakes\TestableWasteCodeInfo.cs" />
+    <Compile Include="DomainFakes\TestableWasteType.cs" />
+    <Compile Include="Helpers\ComplexTypeFactory.cs" />
+    <Compile Include="Helpers\CompetentAuthorityFactory.cs" />
+    <Compile Include="Helpers\CountryFactory.cs" />
+    <Compile Include="Helpers\EntityHelper.cs" />
+    <Compile Include="Helpers\EntryOrExitPointFactory.cs" />
+    <Compile Include="Helpers\FinancialGuaranteeFactory.cs" />
+    <Compile Include="Helpers\InternalUserFactory.cs" />
+    <Compile Include="Helpers\NotificationApplicationFactory.cs" />
+    <Compile Include="Helpers\ObjectFactory.cs" />
+    <Compile Include="Helpers\ObjectInstantiator.cs" />
+    <Compile Include="Helpers\ImporterFactory.cs" />
+    <Compile Include="Helpers\ExporterFactory.cs" />
+    <Compile Include="Helpers\ProducerFactory.cs" />
+    <Compile Include="Helpers\TestMapper.cs" />
+    <Compile Include="Helpers\TransitStateFactory.cs" />
+    <Compile Include="Helpers\TransportRouteFactory.cs" />
+    <Compile Include="Helpers\UserFactory.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\EA.Iws.Core\EA.Iws.Core.csproj">
+      <Project>{DD2A73A4-A652-4ECC-87EE-24239CE45AD4}</Project>
+      <Name>EA.Iws.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EA.Iws.DataAccess\EA.Iws.DataAccess.csproj">
+      <Project>{46300373-D7AE-40AA-BF96-3FC3889825A4}</Project>
+      <Name>EA.Iws.DataAccess</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EA.Iws.Domain\EA.Iws.Domain.csproj">
+      <Project>{A987FFF6-5386-419E-AF0A-E6C74E3323CF}</Project>
+      <Name>EA.Iws.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EA.Iws.RequestHandlers\EA.Iws.RequestHandlers.csproj">
+      <Project>{575A5355-B008-422A-B9B6-535CA2B5CC26}</Project>
+      <Name>EA.Iws.RequestHandlers</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\StyleCop.Error.MSBuild.1.0.0\build\StyleCop.Error.MSBuild.Targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\StyleCop.Error.MSBuild.1.0.0\build\StyleCop.Error.MSBuild.Targets'))" />
+    <Error Condition="!Exists('..\packages\StyleCop.MSBuild.4.7.50.0\build\StyleCop.MSBuild.Targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\StyleCop.MSBuild.4.7.50.0\build\StyleCop.MSBuild.Targets'))" />
+  </Target>
+  <Import Project="..\packages\StyleCop.Error.MSBuild.1.0.0\build\StyleCop.Error.MSBuild.Targets" Condition="Exists('..\packages\StyleCop.Error.MSBuild.1.0.0\build\StyleCop.Error.MSBuild.Targets')" />
+  <Import Project="..\packages\StyleCop.MSBuild.4.7.50.0\build\StyleCop.MSBuild.Targets" Condition="Exists('..\packages\StyleCop.MSBuild.4.7.50.0\build\StyleCop.MSBuild.Targets')" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,49 @@
+﻿@using EA.Iws.Core.Shared
+@using EA.Iws.Web.Views.Registration
+@model EA.Iws.Web.ViewModels.Registration.CreateNewOrganisationViewModel
+@{
+    ViewBag.Title = CreateNewOrganisationResources.Title;
+}
+
+<h1 class="heading-large">@CreateNewOrganisationResources.Header</h1>
+<p>@CreateNewOrganisationResources.HeaderDescription</p>
+
+@using (Html.BeginForm("CreateNewOrganisation", "Registration"))
+{
+    @Html.AntiForgeryToken()
+    @Html.Gds().ValidationSummary()
+
+    <div class="form-group @Html.Gds().FormGroupClass(m => m.Name)">
+        @Html.Gds().LabelFor(m => m.Name)
+        @Html.Gds().ValidationMessageFor(m => m.Name)
+        @Html.Gds().TextBoxFor(m => m.Name)
+    </div>
+    
+    <div class="form-group @Html.Gds().FormGroupClass(m => m.BusinessType)">
+        <label class="form-label">@CreateNewOrganisationResources.OrganisationType</label>
+        @Html.Gds().ValidationMessageFor(m => m.BusinessType)
+        <label class="block-label">
+            @Html.RadioButtonFor(m => m.BusinessType, "SoleTrader") @CreateNewOrganisationResources.SoleTrader
+        </label>
+        <label class="block-label">
+            @Html.RadioButtonFor(m => m.BusinessType, "Partnership") @CreateNewOrganisationResources.Partnership
+        </label>
+        <label class="block-label" data-target="companies-house-number">
+            @Html.RadioButtonFor(m => m.BusinessType, "LimitedCompany") @CreateNewOrganisationResources.LimitedCompany
+        </label>
+        <label class="block-label" data-target="other-description">
+            @Html.RadioButtonFor(m => m.BusinessType, BusinessType.Other, new { @class = "business-type-radio-button" }) @EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(BusinessType.Other)
+        </label>
+        <div class="panel-indent @(Model.BusinessType != null && Model.BusinessType == BusinessType.Other ? "" : "js-hidden")" id="other-description">
+            <div class="form-group @Html.Gds().FormGroupClass(m => m.OtherDescription)">
+                @Html.Gds().LabelFor(m => m.OtherDescription)
+                @Html.Gds().ValidationMessageFor(m => m.OtherDescription)
+                @Html.Gds().TextBoxFor(m => m.OtherDescription)
+            </div>
+        </div>
+    </div>
+    
+    <div class="form-group">
+        <input type="submit" class="button" value="@CreateNewOrganisationResources.Continue" />
+    </div>
+}

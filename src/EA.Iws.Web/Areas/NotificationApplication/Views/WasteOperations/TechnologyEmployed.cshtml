@@ -1,0 +1,60 @@
+﻿@using EA.Iws.Web.Areas.NotificationApplication.Views.WasteOperations
+@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.WasteOperations.TechnologyEmployedViewModel
+@{
+    ViewBag.Title = TechnologyEmployedResources.Title;
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.Gds().ValidationSummary()
+    @Html.HiddenFor(m => m.NotificationId)
+
+    <div>
+        <header class="hgroup">
+            <h1 class="heading-large">@TechnologyEmployedResources.Header</h1>
+        </header>
+
+        <div class="form-group @Html.Gds().FormGroupClass(m => m.Details)">
+            @Html.LabelFor(m => m.Details)
+            @Html.Gds().ValidationMessageFor(m => m.Details)
+            @Html.Gds().HintParagraph(TechnologyEmployedResources.TechnologyHint)
+            @Html.TextBoxFor(m => m.Details, new { @class = "full-width", @MaxLength = 70, @title = TechnologyEmployedResources.DetailsTitle })
+        </div>
+
+        <div class="form-group @Html.Gds().FormGroupClass(m => m.FurtherDetails)">
+            @Html.Gds().LabelFor(m => m.FurtherDetails)
+            @Html.Gds().HintParagraph(@TechnologyEmployedResources.FurtherDetailsDescription)
+            @Html.Gds().ValidationMessageFor(m => m.FurtherDetails)
+            @Html.TextAreaFor(m => m.FurtherDetails, new { @style = "width: 100%; height: 200px", @title = TechnologyEmployedResources.FurtherDetailsTitle })
+        </div>
+
+        <div class="form-group @Html.Gds().FormGroupClass(m => m.AnnexProvided)">
+            <label class="block-label" for="AnnexProvided">
+                @Html.CheckBoxFor(m => m.AnnexProvided, new { @id = "AnnexProvided" })
+                @Html.DisplayNameFor(m => m.AnnexProvided)
+            </label>
+        </div>
+
+        <div class="form-group">
+            <input type="submit" class="button" value="@Constants.ContinueButtonText" />
+        </div>
+    </div>
+}
+
+@section scripts
+{
+    <script>
+        $('#AnnexProvided').click(function () {
+            if ($('#AnnexProvided').is(':checked')) {
+                $('#FurtherDetails').attr('readonly', true);
+                $('#FurtherDetails').css('background-color', '#DEDEDE');
+                $('#FurtherDetails').css('color', 'gray');
+            } else {
+                $('#FurtherDetails').attr('readonly', false);
+                $('#FurtherDetails').css('background-color', 'white');
+                $('#FurtherDetails').css('color', 'black');
+            }
+        });
+    </script>
+}

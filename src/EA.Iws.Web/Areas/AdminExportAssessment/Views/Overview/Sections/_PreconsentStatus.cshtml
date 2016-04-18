@@ -1,0 +1,14 @@
+﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.NotificationApplication.RecoveryOperationViewModel
+           
+<div class="overview-block">
+    <div class="overview-block-element">
+        @if (Model.IsPreconsentStatusChosen)
+        {
+            @Html.DisplayFor(m => m.PreconstedAnswer)
+        }
+        else
+        {
+            @ViewBag.SectionIncompleteText
+        }
+    </div>
+</div>

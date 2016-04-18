@@ -1,0 +1,17 @@
+﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.Options.UnavailableViewModel
+@using Resources = EA.Iws.Web.Areas.NotificationApplication.Views.Options.FinancialGuaranteeUnavailableResources
+
+@{
+    ViewBag.Title = Resources.Tab;
+    Layout = "~/Views/Shared/_Layout.GovUK.Sections.cshtml";
+}
+
+<div class="grid-row column-two-thirds">
+    <h1 class="heading-large">@Resources.Title</h1>
+
+    <div class="form-group">@Resources.Text</div>
+
+    <div class="form-group">
+        @Html.ActionLink(Constants.ContinueOnlyButtonText, "Index", "Options", new { id = Model.NotificationId, area = "NotificationApplication" }, new { @class = "button"})
+    </div>
+</div>

@@ -1,0 +1,44 @@
+﻿@using EA.Iws.Core.Shared
+@using EA.Iws.Web.Areas.ImportNotification.Views.WasteOperation
+@model EA.Iws.Web.Areas.ImportNotification.ViewModels.WasteOperation.WasteOperationViewModel
+@{
+    ViewBag.Title = IndexResources.Title;
+}
+
+<h1 class="heading-large">@IndexResources.MainHeading</h1>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.Gds().ValidationSummary()
+
+    <h2 class="heading-medium">
+        @(Model.NotificationType == NotificationType.Recovery ? IndexResources.RecoveryCodesHeading : IndexResources.DisposalCodesHeading)
+    </h2>
+
+    <div class="form-group inline @Html.Gds().FormGroupClass(m => m.Codes)">
+        <fieldset>
+            @for (int i = 0; i < Model.Codes.Count; i++)
+            {
+                var id = Model.Codes[i].Key.ToString();
+                @Html.HiddenFor(m => m.Codes[i].Key)
+                    
+                <label class="block-label" for="@id">
+                    @Html.CheckBoxFor(m => m.Codes[i].Value, new { id })
+                    @Html.Raw(Model.CodeDisplay[i])
+                </label>
+            }  
+        </fieldset>
+
+    </div>
+
+    <h2 class="heading-medium">@IndexResources.TechnologyEmployedHeading</h2>
+
+    <div class="form-group @Html.Gds().FormGroupClass(m => m.TechnologyEmployed)">
+        @Html.Gds().LabelFor(m => m.TechnologyEmployed)
+        @Html.Gds().ValidationMessageFor(m => m.TechnologyEmployed)
+        @Html.Gds().TextBoxFor(m => m.TechnologyEmployed, new { @class = "full-width" })
+    </div>
+
+    <button class="button" type="submit">@Constants.ContinueButtonText</button>
+}

@@ -1,0 +1,57 @@
+﻿@using Resource = EA.Iws.Web.Areas.AdminImportMovement.Views.Home.IndexResources
+@model EA.Iws.Web.Areas.AdminImportMovement.ViewModels.Home.HomeViewModel
+@{
+    ViewBag.Title = "Index";
+}
+
+<h1 class="heading-large">@Resource.MainHeading</h1>
+
+<p>@Html.Raw(string.Format(Resource.CurrentlyDisplaying, Model.Number))</p>
+
+<table>
+    <thead>
+        <tr>
+            <th>@Resource.TableDateHeader</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>@Resource.PrenotificationDateRow</td>
+            <td>
+                @if (Model.PrenotificationDate.HasValue)
+                {
+                    @Html.Gds().DisplayDate(Model.PrenotificationDate.Value)
+                }
+                else
+                {
+                    <text>@Resource.PrenotificationDateNotSet</text>
+                }
+            </td>
+        </tr>
+        <tr>
+            <td>@Resource.ActualDateRow</td>
+            <td>@Html.Gds().DisplayDate(Model.ActualShipmentDate)</td>
+        </tr>
+    </tbody>
+</table>
+
+@using (Html.BeginForm())
+{
+    @Html.Gds().ValidationSummary()
+    @Html.AntiForgeryToken()
+
+    @Html.HiddenFor(m => m.Number)
+    @Html.HiddenFor(m => m.ActualShipmentDate)
+    @Html.HiddenFor(m => m.PrenotificationDate)
+    @Html.HiddenFor(m => m.NotificationId)
+    @Html.HiddenFor(m => m.IsOperationCompleted)
+    @Html.HiddenFor(m => m.IsReceived)
+
+    @Html.EditorFor(m => m.Receipt)
+    @Html.EditorFor(m => m.Recovery)
+
+    <button class="button" type="submit">@Constants.ContinueButtonText</button>
+}
+
+@Html.ActionLink(Resource.ReturnToSummary, "Index", "Home", new { area = "AdminImportNotificationMovements", id = Model.NotificationId }, null)

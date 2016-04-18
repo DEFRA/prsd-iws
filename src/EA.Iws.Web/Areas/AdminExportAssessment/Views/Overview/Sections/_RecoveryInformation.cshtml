@@ -1,0 +1,147 @@
+﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.NotificationApplication.WasteRecoveryViewModel
+
+@if (Model.IsWasteRecoveryInformationCompleted)
+{
+    <tbody>
+        <tr>
+            <td>
+                Details provided by importer
+            </td>
+            <td>
+                <div class="overview-block">
+                    <div class="overview-block-element">
+                        @if (Model.IsWasteRecoveryInformationCompleted)
+                        {
+                            @(Model.IsProvidedByImporter ? "Yes" : "No")
+                        }
+                        else
+                        {
+                            @ViewBag.SectionIncompleteText
+                        }
+                    </div>
+                </div>
+            </td>
+        </tr>
+        @if (!Model.IsProvidedByImporter)
+        {
+            <tr>
+                <td>
+                    Recoverable percentage
+                </td>
+                <td>
+                    <div class="overview-block">
+                        <div class="overview-block-element">
+                            @if (Model.IsWasteRecoveryInformationCompleted)
+                            {
+                                @Html.DisplayFor(m => m.PercentageRecoverable)@:%
+                            }
+                            else
+                            {
+                                @ViewBag.SectionIncompleteText
+                            }
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            if (Model.HasDisposalPortion)
+            {
+                <tr>
+                    <td>
+                        Disposal method
+                    </td>
+                    <td>
+                        <div class="overview-block">
+                            <div class="overview-block-element">
+                                @if (Model.IsWasteRecoveryInformationCompleted)
+                                {
+                                    @Html.DisplayFor(m => m.MethodOfDisposal)
+                                }
+                                else
+                                {
+                                    @ViewBag.SectionIncompleteText
+                                }
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            }
+            <tr>
+                <td>
+                    Estimated&nbsp;value&nbsp;of&nbsp;recoverable material
+                    @(Model.IsWasteRecoveryInformationCompleted
+                            ? string.Format("({0})", EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(Model.EstimatedUnit))
+                            : string.Empty)
+                </td>
+                <td>
+                    <div class="overview-block">
+                        <div class="overview-block-element">
+                            @if (Model.IsWasteRecoveryInformationCompleted)
+                            {
+                                @:&pound;@Html.DisplayFor(m => m.EstimatedAmount)
+                            }
+                            else
+                            {
+                                @ViewBag.SectionIncompleteText
+                            }
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Recovery cost @(Model.IsWasteRecoveryInformationCompleted
+                            ? string.Format("({0})", EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(Model.CostUnit))
+                            : string.Empty)
+                </td>
+                <td>
+                    <div class="overview-block">
+                        <div class="overview-block-element">
+                            @if (Model.IsWasteRecoveryInformationCompleted)
+                            {
+                                @:&pound;@Html.DisplayFor(m => m.CostAmount)
+	                        }
+                            else
+                            {
+                                @ViewBag.SectionIncompleteText
+                            }
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            if (Model.HasDisposalPortion)
+            {
+                <tr>
+                    <td>
+                        Disposal cost @(Model.IsWasteRecoveryInformationCompleted
+                            ? string.Format("({0})", EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(Model.DisposalUnit))
+                            : string.Empty)
+                    </td>
+                    <td>
+                        <div class="overview-block">
+                            <div class="overview-block-element">
+                                @if (Model.IsWasteRecoveryInformationCompleted)
+                                {
+                                    @:&pound;@Html.DisplayFor(m => m.DisposalAmount)
+                                }
+                                else
+                                {
+                                    @ViewBag.SectionIncompleteText
+                                }
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+}
+else
+{
+    <tbody>
+    <tr>
+        <td>
+            <div class="overview-block"><div class="overview-block-element">@ViewBag.SectionIncompleteText</div></div>
+        </td>
+    </tr>
+    </tbody>
+}

@@ -1,0 +1,12 @@
+﻿@model EA.Iws.Core.ImportNotification.Summary.Address
+
+<address>
+    <span>@Html.DisplayFor(m => m.AddressLine1)</span>
+    @if (!string.IsNullOrWhiteSpace(Model.AddressLine2))
+    {
+        <span>@Html.DisplayFor(m => m.AddressLine2)</span>
+    }
+    <span>@Html.DisplayFor(m => m.TownOrCity)</span>
+    <span>@Html.DisplayFor(m => m.PostalCode)</span>
+    <span>@Html.DisplayFor(m => m.Country)</span>
+</address>

@@ -1,0 +1,83 @@
+﻿@using EA.Iws.Core.WasteCodes
+@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.NotificationApplication.WasteCodeOverviewViewModel
+@{
+    var viewLocation = Constants.InternalExportNotificationOverviewSectionsLocation;
+    var baselOrOecdType = (Model.BaselOecdCode != null && Model.BaselOecdCode.Length > 0)
+        ? EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(Model.BaselOecdCode[0].CodeType) :
+        EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(CodeType.Basel) + "/" + EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(CodeType.Oecd);
+}
+
+<table class="overview-table">
+    <thead>
+        <tr>
+            <th colspan="2">
+                <h2 class="heading-medium">Waste codes</h2>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                @baselOrOecdType code
+            </td>
+            <td>
+                @Html.Partial(viewLocation + "_BaselOecdCode.cshtml")
+            </td>
+            
+        </tr>
+        <tr>
+            <td>
+                @(Model.AreEwcCodesCompleted ? (Model.EwcCodes.Length > 1 ? "EWC codes" : "EWC code") : "EWC code(s)")
+            </td>
+            <td>
+                @Html.Partial(viewLocation + "_EwcCodes.cshtml")
+            </td>
+            
+        </tr>
+        <tr>
+            <td>
+                @(Model.AreYCodesCompleted ? (Model.YCodes.Length > 1 ? "Y codes" : "Y code") : "Y code(s)")
+            </td>
+            <td>
+                @Html.Partial(viewLocation + "_YCodes.cshtml")
+            </td>
+            
+        </tr>
+        <tr>
+            <td>
+                @(Model.AreHCodesCompleted ? (Model.HCodes.Length > 1 ? "H or HP codes" : "H or HP code") : "H or HP code(s)")
+            </td>
+            <td>
+                @Html.Partial(viewLocation + "_HCodes.cshtml")
+            </td>
+            
+        </tr>
+        <tr>
+            <td>
+                @(Model.AreUnClassesCompleted ? (Model.UnClass.Length > 1 ? "UN classes" : "UN class") : "UN class(es)")
+            </td>
+            <td>
+                @Html.Partial(viewLocation + "_UNClasses.cshtml")
+            </td>
+            
+        </tr>
+        <tr>
+            <td>
+                @(Model.AreUnNumbersCompleted ? (Model.UnNumber.Length > 1 ? "UN numbers" : "UN number") : "UN number(s)")
+            </td>
+            <td>
+                @Html.Partial(viewLocation + "_UNNumbers.cshtml")
+            </td>
+            
+        </tr>
+        <tr>
+            <td>
+                Other codes
+            </td>
+            <td>
+                @Html.Partial(viewLocation + "_OtherCodes.cshtml")
+            </td>
+            
+        </tr>
+    </tbody>
+</table>

@@ -1,0 +1,17 @@
+﻿@model EA.Iws.Core.Shared.ContactData
+
+<dl>
+    <dd>Contact: @Html.DisplayFor(m => m.FullName)</dd>
+    <dd>
+        Tel: +@Html.DisplayFor(m => m.TelephonePrefix)
+        @Html.DisplayFor(m => m.Telephone)
+    </dd>
+    @if (!string.IsNullOrWhiteSpace(Model.Fax))
+    {
+        <dd>
+            Fax: +@Html.DisplayFor(m => m.FaxPrefix)
+            @Html.DisplayFor(m => m.Fax)
+        </dd>
+    }
+    <dd>Email: @Html.DisplayFor(m => m.Email)</dd>
+</dl>

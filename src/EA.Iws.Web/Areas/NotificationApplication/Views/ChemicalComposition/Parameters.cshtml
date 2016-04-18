@@ -1,0 +1,104 @@
+﻿@using EA.Iws.Core.WasteType
+@using EA.Iws.Web.Areas.NotificationApplication.Views.ChemicalComposition
+@using EnumHelper = EA.Prsd.Core.Helpers.EnumHelper
+@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.ChemicalComposition.ChemicalCompositionViewModel
+@{
+    ViewBag.Title = ParametersResources.Title;
+}
+
+<header class="hgroup">
+    <h1 class="heading-large">@ParametersResources.Header</h1>
+    <p>@ParametersResources.HeaderDescription</p>
+</header>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.Gds().ValidationSummary()
+    @Html.HiddenFor(m => m.NotificationId)
+    @Html.HiddenFor(m => m.ChemicalCompositionType)
+
+    if (Model.ChemicalCompositionType == ChemicalComposition.Wood)
+    {
+        <div>@ParametersResources.DescriptionHeader</div>
+        <div class="form-group @Html.Gds().FormGroupClass(m => m.Description)">
+            @Html.Gds().ValidationMessageFor(m => m.Description)
+            @Html.Gds().HintSpan(ParametersResources.DescriptionHint)
+            @Html.Gds().TextBoxFor(m => m.Description, new { @MaxLength = 70, @title = ParametersResources.DescriptionTitle })
+        </div>
+    }
+
+    <div>
+        @for (var i = 0; i < Model.WasteComposition.Count; i++)
+        {
+            var hintText = ParametersResources.HintText;
+
+            if (Model.WasteComposition[i].WasteInformationType == WasteInformationType.NetCalorificValue)
+            {
+                hintText = ParametersResources.Megajoules;
+            }
+
+            if (Model.WasteComposition[i].WasteInformationType == WasteInformationType.HeavyMetals)
+            {
+                hintText = ParametersResources.Milligrams;
+            }
+
+            var idText = "WasteComposition_" + i + "_";
+
+            <div class="form-group @Html.Gds().FormGroupClass(m => m.WasteComposition[i])">
+                @Html.Gds().ValidationMessageFor(m => m.WasteComposition[i])
+                <div>
+                    <div>
+                        @EnumHelper.GetDescription(@Model.WasteComposition[i].WasteInformationType)
+                        @Html.Gds().HintParagraph(hintText)
+                    </div>
+                </div>
+                <div class="grid-row">
+                    <div class="column-half">
+                        <div class="grid-row">
+                            @{
+                                var placeholderText = (Model.WasteComposition[i].WasteInformationType == WasteInformationType.NetCalorificValue
+                                                       || Model.WasteComposition[i].WasteInformationType == WasteInformationType.HeavyMetals) ? "" : " %";
+                                var sectionTitle = @EnumHelper.GetDescription(@Model.WasteComposition[i].WasteInformationType);
+                            }
+                            <div class="column-half">
+                                <label class="visuallyhidden">@(sectionTitle + ParametersResources.MinConcentration)</label>
+                                @Html.Gds().TextBoxFor(m => m.WasteComposition[i].MinConcentration, new { placeholder = ParametersResources.Min + placeholderText, title = sectionTitle + ParametersResources.MinConcentration, id = idText })
+                                @Html.Gds().TextBoxFor(m => m.WasteComposition[i].WasteInformationType, new { type = "hidden" })
+                            </div>
+                            <div class="column-half">
+                                <label class="visuallyhidden">@(sectionTitle + ParametersResources.MaxConcentration)</label>
+                                @Html.Gds().TextBoxFor(m => m.WasteComposition[i].MaxConcentration, new { placeholder = ParametersResources.Max + placeholderText, title = sectionTitle + ParametersResources.MaxConcentration })
+                                @Html.Gds().TextBoxFor(m => m.WasteComposition[i].Constituent, new { type = "hidden", @Value = EnumHelper.GetDescription(@Model.WasteComposition[i].WasteInformationType) })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+
+    if (Model.ChemicalCompositionType != ChemicalComposition.Wood)
+    {
+        <div class="grid-row">
+            <div class="form-group @Html.Gds().FormGroupClass(m => m.Energy) column-two-thirds">
+                @Html.Gds().ValidationMessageFor(m => m.Energy)
+                @ParametersResources.EnergyEfficiency
+                <details>
+                    <summary>
+                        <h2 class="summary heading-xsmall">@ParametersResources.GuidanceNotesTitle</h2>
+                    </summary>
+                    <div class="panel-indent">
+                        <p>@ParametersResources.GuidanceTextFirstPara</p>
+                        
+                        <p>@ParametersResources.GuidanceTextSecondPara</p>
+                    </div>
+                </details>
+                @Html.Gds().TextBoxFor(m => m.Energy, new { @class = "two-thirds", @title = ParametersResources.Energy })
+            </div>
+        </div>
+    }
+    <div class="form-group">
+        <button class="button" type="submit">@Constants.ContinueButtonText</button>
+    </div>
+}
