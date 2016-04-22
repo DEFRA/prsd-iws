@@ -69,5 +69,14 @@ namespace EA.Iws.Web.Areas.ImportNotification.ViewModels.WasteOperation {
                 return ResourceManager.GetString("TechnologyEmployed", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This description cannot be longer than 70 characters.
+        /// </summary>
+        public static string TechnologyEmployedMaxLength {
+            get {
+                return ResourceManager.GetString("TechnologyEmployedMaxLength", resourceCulture);
+            }
+        }
     }
 }
