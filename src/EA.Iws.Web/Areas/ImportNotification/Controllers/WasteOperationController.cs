@@ -34,6 +34,11 @@
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Index(Guid id, WasteOperationViewModel model)
         {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
             var wasteOperation = new WasteOperation(id)
             {
                 OperationCodes = model.SelectedCodes.ToArray(),

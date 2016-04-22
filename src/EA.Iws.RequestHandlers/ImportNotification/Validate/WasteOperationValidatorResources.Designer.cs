@@ -78,5 +78,14 @@ namespace EA.Iws.RequestHandlers.ImportNotification.Validate {
                 return ResourceManager.GetString("OperationCodesOfSameType", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to technology employed must be no more than 70 characters.
+        /// </summary>
+        public static string TechnologyEmployedMaxLength {
+            get {
+                return ResourceManager.GetString("TechnologyEmployedMaxLength", resourceCulture);
+            }
+        }
     }
 }

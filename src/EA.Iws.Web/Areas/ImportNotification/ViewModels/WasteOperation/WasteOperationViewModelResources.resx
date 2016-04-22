@@ -120,4 +120,7 @@
   <data name="TechnologyEmployed" xml:space="preserve">
     <value>Brief description of the technologies and processes</value>
   </data>
+  <data name="TechnologyEmployedMaxLength" xml:space="preserve">
+    <value>This description cannot be longer than 70 characters</value>
+  </data>
 </root>

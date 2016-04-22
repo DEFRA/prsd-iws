@@ -15,6 +15,10 @@
                 .WithLocalizedMessage(() => WasteOperationValidatorResources.OperationCodesNotEmpty)
                 .Must(BeOfSameType)
                 .WithLocalizedMessage(() => WasteOperationValidatorResources.OperationCodesOfSameType);
+
+            RuleFor(x => x.TechnologyEmployed)
+                .Length(0, 70)
+                .WithLocalizedMessage(() => WasteOperationValidatorResources.TechnologyEmployedMaxLength);
         }
 
         private static bool BeOfSameType(OperationCode[] operationCodes)

@@ -49,6 +49,7 @@
         public IList<KeyValuePairViewModel<OperationCode, bool>> Codes { get; set; }
 
         [Display(Name = "TechnologyEmployed", ResourceType = typeof(WasteOperationViewModelResources))]
+        [StringLength(70, ErrorMessageResourceName = "TechnologyEmployedMaxLength", ErrorMessageResourceType = typeof(WasteOperationViewModelResources))]
         public string TechnologyEmployed { get; set; }
     }
 }
