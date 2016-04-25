@@ -58,6 +58,16 @@
         }
 
         [Fact]
+        public void TechnologyEmployedGreaterThan70_ResultIsInvalid()
+        {
+            var wasteOperation = GetValidWasteOperation();
+            wasteOperation.TechnologyEmployed =
+                "123245678901232456789012324567890123245678901232456789012324567890123245678901232456789012324567890123245678901";
+
+            validator.ShouldHaveValidationErrorFor(x => x.TechnologyEmployed, wasteOperation);
+        }
+
+        [Fact]
         public void OperationCodesNull_ResultIsInvalid()
         {
             var wasteOperation = GetValidWasteOperation();
