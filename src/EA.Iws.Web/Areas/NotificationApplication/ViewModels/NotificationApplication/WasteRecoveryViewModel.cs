@@ -43,7 +43,7 @@
                 CostUnit = wasteRecovery.RecoveryCost.Unit;
                 CostAmount = wasteRecovery.RecoveryCost.Amount;
 
-                if (HasDisposalPortion)
+                if (HasDisposalPortion && wasteDisposal != null)
                 {
                     MethodOfDisposal = wasteDisposal.DisposalMethod;
                     DisposalUnit = wasteDisposal.DisposalCost.Unit;
