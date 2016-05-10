@@ -1,6 +1,7 @@
 ﻿@using EA.Iws.Core.Shared
 @model EA.Iws.Web.Areas.NotificationMovements.ViewModels.Complete.CompleteMovementViewModel
 @{
+    Layout = "~/Areas/NotificationMovements/Views/Shared/_SummaryLayout.cshtml";
     ViewBag.Title = "Select a shipment to " + (Model.NotificationType == NotificationType.Recovery ? "recover" : "dispose of");
 }
 
