@@ -221,7 +221,8 @@
         {
             progress.HasRecoveryData = progressResult.Notification.IsRecoveryPercentageDataProvidedByImporter.HasValue
                 && (progressResult.Notification.IsRecoveryPercentageDataProvidedByImporter.Value
-                || progressResult.Notification.RecoveryInfoId.HasValue);
+                || (progressResult.Notification.RecoveryInfoId.HasValue 
+                    && (progressResult.Notification.PercentageRecoverable == 100 || progressResult.Notification.DisposalInfoId.HasValue)));
 
             return progress.HasRecoveryData;
         }
@@ -256,6 +257,7 @@
             public Guid? PackagingInfoId { get; set; }
             public Guid? PhysicalCharacteristicsId { get; set; }
             public Guid? RecoveryInfoId { get; set; }
+            public decimal? PercentageRecoverable { get; set; }
             public Guid? DisposalInfoId { get; set; }
             public Guid? ShipmentInfoId { get; set; }
             public Guid? WasteTypeId { get; set; }
