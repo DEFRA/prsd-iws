@@ -9,7 +9,7 @@ $.deserializeIntoNamedInputs = function (prefix, json) {
     $.each(json, function (key, value) {
         var prefixedWithPropertyName = $("#" + prefix + "_" + key);
         if (prefixedWithPropertyName.length) {
-            prefixedWithPropertyName.val(value);
+            prefixedWithPropertyName.val(decodeEntities(value));
         }
         else if ($("#" + value).length && $("#" + value).is(":radio")) {
             $("#" + value).prop('checked', true);
@@ -24,6 +24,12 @@ function getSearchUrlForAddressBook(url, term, type) {
 
 function autocompleteListEntriesForData(data) {
     return $.map(data, autocompleteHtmlForAddressBookRecord);
+}
+
+function decodeEntities(encodedString) {
+    var textArea = document.createElement('textarea');
+    textArea.innerHTML = encodedString;
+    return textArea.value;
 }
 
 /*
@@ -51,7 +57,7 @@ function selectAutocompleteData(event, ui) {
         var data = JSON.parse($(ui.item.value).last().html());
 
         // Do not put the html content in the box.
-        $("#Business_Name").val(data.BusinessData.Name);
+        $("#Business_Name").val(decodeEntities(data.BusinessData.Name));
 
         // Select2 changes the way we can access the values of the country.
         var countryInput = $("#Address_CountryId");
@@ -94,7 +100,7 @@ $(function () {
     focus: function (event, ui) {
         var data = JSON.parse($(ui.item.value).last().html());
 
-        $("#Business_Name").val(data.BusinessData.Name);
+        $("#Business_Name").val(decodeEntities(data.BusinessData.Name));
 
         event.preventDefault ? event.preventDefault() : event.returnValue = false;
     }
