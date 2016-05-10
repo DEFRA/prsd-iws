@@ -748,7 +748,7 @@ INSERT [Notification].[wasteadditionalinformation]
         [wastetypeid],
         [wasteinformationtype])
 VALUES (NEWID(),
-        N'Net calorific value (Megajoules per kg)',
+        N'Net calorific value',
         Cast(2.00 AS DECIMAL(5, 2)),
         Cast(5.00 AS DECIMAL(5, 2)),
         @WasteTypeId,
@@ -762,7 +762,7 @@ INSERT [Notification].[wasteadditionalinformation]
         [wastetypeid],
         [wasteinformationtype])
 VALUES (NEWID(),
-        N'Heavy metals (Megajoules per kg)',
+        N'Heavy metals',
         Cast(2.00 AS DECIMAL(5, 2)),
         Cast(5.00 AS DECIMAL(5, 2)),
         @WasteTypeId,
