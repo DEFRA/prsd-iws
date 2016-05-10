@@ -31,5 +31,34 @@
                 "The details will be provided in a separate document" : classifyYourWasteInfo.ProcessOfGeneration.Process;
             PhysicalCharacteristics = classifyYourWasteInfo.PhysicalCharacteristics;
         }
+
+        public string ConstituentTitle(WoodInformationData woodInformationData)
+        {
+            var name = woodInformationData.Constituent;
+
+            if (woodInformationData.WasteInformationType == WasteInformationType.HeavyMetals)
+            {
+                name = name + " (" + Views.ChemicalComposition.ParametersResources.Milligrams.Replace(" ", "&nbsp;") + ")";
+            }
+
+            if (woodInformationData.WasteInformationType == WasteInformationType.NetCalorificValue)
+            {
+                name = name + " (" + Views.ChemicalComposition.ParametersResources.Megajoules.Replace(" ", "&nbsp;") + ")";
+            }
+
+            return name;
+        }
+
+        public string ConstituentUnits(WoodInformationData woodInformationData)
+        {
+            var units = "%";
+
+            if (woodInformationData.WasteInformationType == WasteInformationType.HeavyMetals || woodInformationData.WasteInformationType == WasteInformationType.NetCalorificValue)
+            {
+                units = string.Empty;
+            }
+
+            return units;
+        }
     }
 }
