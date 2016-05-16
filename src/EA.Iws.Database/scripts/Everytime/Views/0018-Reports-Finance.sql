@@ -16,7 +16,7 @@ AS
         N.Charge AS [TotalBillable],
         P.TotalPaid,
         P.LatestPaymentDate,
-        CASE WHEN P.TotalPaid IS NULL THEN NULL ELSE [Reports].[PotentialRefund](N.Id) END AS AmountToRefund,
+        CASE WHEN P.TotalPaid IS NULL THEN NULL ELSE (SELECT PotentialRefund FROM [Reports].[PricingInfo](N.Id)) END AS AmountToRefund,
         P.TotalRefunded,
         P.LatestRefundDate,
         N.NumberOfShipments AS [IntendedNumberOfShipments],

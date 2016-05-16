@@ -28,7 +28,7 @@ AS
         C.[To] AS [ConsentTo],
         FC.[AllFacilitiesPreconsented] AS [Preconsented],
         'Export' AS [ImportOrExport],
-        N.Charge
+        CASE WHEN N.Charge IS NULL THEN (SELECT Price FROM [Reports].[PricingInfo](N.Id)) ELSE N.Charge END AS [Charge]
 
     FROM		[Notification].[Notification] AS N
 
@@ -77,23 +77,35 @@ AS
             WHEN CA.UnitedKingdomCountry = 'Wales' THEN 'NRW'
         END AS [CompetentAuthority],
         CA.[Id] AS [CompetentAuthorityId],
-        'New' AS [Status],		-- TODO
-        NULL AS [LocalArea],	-- TODO
+        NS.[Description] AS [Status],		
+        LA.[Name] AS [LocalArea],	
         S.[FirstDate] AS [IntendedFrom],
         S.[LastDate] AS [IntendedTo],
         S.[Quantity] AS [IntendedQuantity],
         S.[NumberOfShipments] AS [NumberOfShipments],
         U.[Description] AS [Units],
-        NULL AS [ConsentFrom],	-- TODO
-        NULL AS [ConsentTo],	-- TODO
+        C.[From] AS [ConsentFrom],
+        C.[To] AS [ConsentTo],
         0 AS [Preconsented],
         'Import' AS [ImportOrExport],
-        NULL AS Charge -- TODO
+        (SELECT Price FROM [Reports].[PricingInfo](N.Id)) AS [Charge]
 
     FROM [ImportNotification].[Notification] AS N
 
     INNER JOIN	[Lookup].[NotificationType] AS NT
     ON			[NT].[Id] = [N].[NotificationType]
+
+	INNER JOIN  [ImportNotification].[NotificationAssessment] NA
+	ON			[NA].NotificationApplicationId = [N].Id
+
+	INNER JOIN  [Lookup].[ImportNotificationStatus] NS
+	ON			[NA].[Status] = [NS].[Id]
+
+	LEFT JOIN	[ImportNotification].[Consultation] AS CON
+	ON			[CON].[NotificationId] = [N].[Id]
+
+	LEFT JOIN	[Lookup].[LocalArea] AS LA
+    ON			[CON].[LocalAreaId] = [LA].[Id]
 
     INNER JOIN	[Lookup].[UnitedKingdomCompetentAuthority] AS [CA]
     ON			[CA].[Id] = [N].[CompetentAuthority]
@@ -103,4 +115,7 @@ AS
 
     LEFT JOIN	[Lookup].[ShipmentQuantityUnit] AS U
     ON			[S].[Units] = [U].[Id]
+
+	LEFT JOIN	[ImportNotification].[Consent] AS C
+    ON			[N].[Id] = [C].[NotificationId]
 GO
