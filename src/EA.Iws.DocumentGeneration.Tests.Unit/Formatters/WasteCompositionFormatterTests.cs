@@ -216,14 +216,13 @@
         }
 
         [Theory]
-        [InlineData("broccoli", 5, 7, WasteInformationType.Chlorine, true)]
-        [InlineData("silence", 5.15, 1064, WasteInformationType.HeavyMetals, false)]
-        [InlineData("bricks", 0, 1064, WasteInformationType.NetCalorificValue, false)]
+        [InlineData("broccoli", 5, 7, WasteInformationType.Chlorine)]
+        [InlineData("silence", 5.15, 1064, WasteInformationType.HeavyMetals)]
+        [InlineData("bricks", 0, 1064, WasteInformationType.NetCalorificValue)]
         public void GetWasteAdditionalInformationCompositonPercentages_ReturnExpectedResult(string constituent,
             decimal min,
             decimal max,
-            WasteInformationType type,
-            bool includeUnits)
+            WasteInformationType type)
         {
             wasteType.WasteAdditionalInformation = new List<WasteAdditionalInformation>
             {
@@ -233,8 +232,8 @@
 
             var result =
                 formatter.GetAdditionalInformationChemicalCompositionPercentages(wasteType.WasteAdditionalInformation);
-            
-            AssertExpectedCompositionPercentage(constituent, max, min, result.Single(), includeUnits);
+
+            AssertExpectedCompositionPercentageUnits(constituent, max, min, type, result.Single());
         }
 
         private void AssertExpectedCompositionPercentage(string constituent, 
@@ -248,6 +247,31 @@
             if (constituent != null)
             {
                 name = includeUnits ? constituent + " wt/wt %" : constituent;
+            }
+
+            Assert.Equal(name, result.Name);
+            Assert.Equal(max.ToString("N"), result.Max);
+            Assert.Equal(min.ToString("N"), result.Min);
+        }
+
+        private void AssertExpectedCompositionPercentageUnits(string constituent,
+            decimal max,
+            decimal min,
+            WasteInformationType wasteInformationType,
+            ChemicalCompositionPercentages result)
+        {
+            var name = string.Empty;
+
+            if (wasteInformationType == WasteInformationType.HeavyMetals ||
+                wasteInformationType == WasteInformationType.NetCalorificValue)
+            {
+                name = wasteInformationType == WasteInformationType.HeavyMetals
+                    ? constituent + " mg/kg"
+                    : constituent + " MJ/kg";
+            }
+            else
+            {
+                name = constituent + " wt/wt %";
             }
 
             Assert.Equal(name, result.Name);

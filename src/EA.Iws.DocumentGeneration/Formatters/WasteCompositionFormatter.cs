@@ -68,10 +68,14 @@
 
         public string GetChemicalConstituentName(WasteAdditionalInformation wasteAdditionalInformation)
         {
-            if (wasteAdditionalInformation.WasteInformationType == WasteInformationType.HeavyMetals
-                || wasteAdditionalInformation.WasteInformationType == WasteInformationType.NetCalorificValue)
+            if (wasteAdditionalInformation.WasteInformationType == WasteInformationType.HeavyMetals)
             {
-                return wasteAdditionalInformation.Constituent;
+                return wasteAdditionalInformation.Constituent + " mg/kg";
+            }
+
+            if (wasteAdditionalInformation.WasteInformationType == WasteInformationType.NetCalorificValue)
+            {
+                return wasteAdditionalInformation.Constituent + " MJ/kg";
             }
 
             return GetConstituentWithUnits(wasteAdditionalInformation.Constituent);
