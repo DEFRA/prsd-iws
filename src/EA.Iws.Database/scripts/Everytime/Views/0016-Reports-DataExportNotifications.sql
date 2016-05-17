@@ -16,7 +16,12 @@ AS
         NA.[CompleteDate] AS [ApplicationCompleted],
         NA.[TransmittedDate] AS [Transmitted],
         NA.[AcknowlegedDate] AS [Acknowledged],
-		NA.[ConsentedDate] as [Consented],
+		-- If the notification is consented before the consent period begins 
+		-- then the consented date is the start of the consent period
+		CASE
+			WHEN NA.[ConsentedDate] < C.[From] THEN C.[From]
+			ELSE NA.[ConsentedDate]
+		END AS [Consented],
 		NA.[Officer],
         -- Decision date will be the date it was withdrawn, objected or consented and it will only be one of these.
         CAST(COALESCE(NA.WithdrawnDate, COALESCE(NA.ObjectedDate, NA.ConsentedDate)) AS DATE) AS [DecisionDate]
@@ -25,6 +30,9 @@ AS
 
     INNER JOIN	[Reports].[Notification] AS N
     ON			[N].[Id] = [NA].[NotificationId]
+
+	LEFT JOIN	[Notification].[Consent] AS C
+	ON			[NA].[NotificationId] = [C].[NotificationApplicationId]
 
     WHERE		[NA].[ImportOrExport] = 'Export'
     AND			[NA].[ExportStatusId] <> 1
