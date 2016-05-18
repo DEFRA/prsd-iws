@@ -16,12 +16,7 @@ AS
         NA.[CompleteDate] AS [ApplicationCompleted],
         NA.[TransmittedDate] AS [Transmitted],
         NA.[AcknowlegedDate] AS [Acknowledged],
-		-- If the notification is consented before the consent period begins 
-		-- then the consented date is the start of the consent period
-		CASE
-			WHEN NA.[ConsentedDate] < C.[From] THEN C.[From]
-			ELSE NA.[ConsentedDate]
-		END AS [Consented],
+		C.[From] AS [Consented],
 		NA.[Officer],
         -- Decision date will be the date it was withdrawn, objected or consented and it will only be one of these.
         CAST(COALESCE(NA.WithdrawnDate, COALESCE(NA.ObjectedDate, NA.ConsentedDate)) AS DATE) AS [DecisionDate]
