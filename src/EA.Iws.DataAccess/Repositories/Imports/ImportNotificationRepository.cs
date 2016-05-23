@@ -5,15 +5,18 @@
     using System.Threading.Tasks;
     using Core.Shared;
     using Domain.ImportNotification;
+    using Domain.Security;
     using Prsd.Core;
 
     internal class ImportNotificationRepository : IImportNotificationRepository
     {
         private readonly ImportNotificationContext context;
+        private readonly IImportNotificationApplicationAuthorization authorization;
 
-        public ImportNotificationRepository(ImportNotificationContext context)
+        public ImportNotificationRepository(ImportNotificationContext context, IImportNotificationApplicationAuthorization authorization)
         {
             this.context = context;
+            this.authorization = authorization;
         }
 
         public async Task<bool> NotificationNumberExists(string number)
@@ -25,6 +28,7 @@
 
         public async Task<ImportNotification> Get(Guid id)
         {
+            await authorization.EnsureAccessAsync(id);
             return await context.ImportNotifications.SingleAsync(n => n.Id == id);
         }
 
@@ -41,6 +45,7 @@
 
         public async Task<NotificationType> GetTypeById(Guid id)
         {
+            await authorization.EnsureAccessAsync(id);
             return (await context.ImportNotifications.SingleAsync(n => n.Id == id)).NotificationType;
         }
     }
