@@ -13,8 +13,6 @@
 
         Task Add(ImportNotification notification);
 
-        Task<IEnumerable<ImportNotification>> SearchByNumber(string number);
-
         Task<NotificationType> GetTypeById(Guid id);
     }
 }

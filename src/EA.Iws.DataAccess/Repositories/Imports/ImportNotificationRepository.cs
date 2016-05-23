@@ -1,27 +1,19 @@
 ﻿namespace EA.Iws.DataAccess.Repositories.Imports
 {
     using System;
-    using System.Collections.Generic;
     using System.Data.Entity;
-    using System.Linq;
     using System.Threading.Tasks;
     using Core.Shared;
-    using Domain;
     using Domain.ImportNotification;
     using Prsd.Core;
-    using Prsd.Core.Domain;
 
     internal class ImportNotificationRepository : IImportNotificationRepository
     {
         private readonly ImportNotificationContext context;
-        private readonly IUserContext userContext;
-        private readonly IInternalUserRepository internalUserRepository;
 
-        public ImportNotificationRepository(ImportNotificationContext context, IUserContext userContext, IInternalUserRepository internalUserRepository)
+        public ImportNotificationRepository(ImportNotificationContext context)
         {
             this.context = context;
-            this.userContext = userContext;
-            this.internalUserRepository = internalUserRepository;
         }
 
         public async Task<bool> NotificationNumberExists(string number)
@@ -45,19 +37,6 @@
             }
 
             context.ImportNotifications.Add(notification);
-        }
-
-        public async Task<IEnumerable<ImportNotification>> SearchByNumber(string number)
-        {
-            var user = await internalUserRepository.GetByUserId(userContext.UserId);
-            var competentAuthority = user.CompetentAuthority;
-
-            var notifications =
-                await context.ImportNotifications
-                .Where(n => n.CompetentAuthority == competentAuthority && n.NotificationNumber.Contains(number))
-                .ToArrayAsync();
-
-            return notifications;
         }
 
         public async Task<NotificationType> GetTypeById(Guid id)
