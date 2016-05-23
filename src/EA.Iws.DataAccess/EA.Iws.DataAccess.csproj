@@ -271,6 +271,8 @@
     <Compile Include="Repositories\WasteRecoveryRepository.cs" />
     <Compile Include="Repositories\NotificationAssessmentRepository.cs" />
     <Compile Include="Repositories\TransportRouteRepository.cs" />
+    <Compile Include="Security\ImportNotificationApplicationAuthorization.cs" />
+    <Compile Include="Security\IwsContextSecurityExtensions.cs" />
     <Compile Include="Security\MovementAuthorization.cs" />
     <Compile Include="Security\NotificationApplicationAuthorization.cs" />
     <Compile Include="Repositories\ShipmentInfoRepository.cs" />
