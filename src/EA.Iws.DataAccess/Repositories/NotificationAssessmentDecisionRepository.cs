@@ -7,18 +7,22 @@
     using System.Threading.Tasks;
     using Core.NotificationAssessment;
     using Domain.NotificationAssessment;
+    using Domain.Security;
 
     public class NotificationAssessmentDecisionRepository : INotificationAssessmentDecisionRepository
     {
         private readonly IwsContext context;
+        private readonly INotificationApplicationAuthorization authorization;
 
-        public NotificationAssessmentDecisionRepository(IwsContext context)
+        public NotificationAssessmentDecisionRepository(IwsContext context, INotificationApplicationAuthorization authorization)
         {
             this.context = context;
+            this.authorization = authorization;
         }
 
         public async Task<IList<NotificationAssessmentDecision>> GetByNotificationId(Guid notificationId)
         {
+            await authorization.EnsureAccessAsync(notificationId);
             var assessment = await context.NotificationAssessments.SingleOrDefaultAsync(n => n.NotificationApplicationId == notificationId);
             var consent = await context.Consents.SingleOrDefaultAsync(n => n.NotificationApplicationId == notificationId);
             var result = new List<NotificationAssessmentDecision>();

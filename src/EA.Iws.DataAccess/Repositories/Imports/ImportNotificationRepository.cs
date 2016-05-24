@@ -1,27 +1,22 @@
 ﻿namespace EA.Iws.DataAccess.Repositories.Imports
 {
     using System;
-    using System.Collections.Generic;
     using System.Data.Entity;
-    using System.Linq;
     using System.Threading.Tasks;
     using Core.Shared;
-    using Domain;
     using Domain.ImportNotification;
+    using Domain.Security;
     using Prsd.Core;
-    using Prsd.Core.Domain;
 
     internal class ImportNotificationRepository : IImportNotificationRepository
     {
         private readonly ImportNotificationContext context;
-        private readonly IUserContext userContext;
-        private readonly IInternalUserRepository internalUserRepository;
+        private readonly IImportNotificationApplicationAuthorization authorization;
 
-        public ImportNotificationRepository(ImportNotificationContext context, IUserContext userContext, IInternalUserRepository internalUserRepository)
+        public ImportNotificationRepository(ImportNotificationContext context, IImportNotificationApplicationAuthorization authorization)
         {
             this.context = context;
-            this.userContext = userContext;
-            this.internalUserRepository = internalUserRepository;
+            this.authorization = authorization;
         }
 
         public async Task<bool> NotificationNumberExists(string number)
@@ -33,6 +28,7 @@
 
         public async Task<ImportNotification> Get(Guid id)
         {
+            await authorization.EnsureAccessAsync(id);
             return await context.ImportNotifications.SingleAsync(n => n.Id == id);
         }
 
@@ -47,21 +43,9 @@
             context.ImportNotifications.Add(notification);
         }
 
-        public async Task<IEnumerable<ImportNotification>> SearchByNumber(string number)
-        {
-            var user = await internalUserRepository.GetByUserId(userContext.UserId);
-            var competentAuthority = user.CompetentAuthority;
-
-            var notifications =
-                await context.ImportNotifications
-                .Where(n => n.CompetentAuthority == competentAuthority && n.NotificationNumber.Contains(number))
-                .ToArrayAsync();
-
-            return notifications;
-        }
-
         public async Task<NotificationType> GetTypeById(Guid id)
         {
+            await authorization.EnsureAccessAsync(id);
             return (await context.ImportNotifications.SingleAsync(n => n.Id == id)).NotificationType;
         }
     }

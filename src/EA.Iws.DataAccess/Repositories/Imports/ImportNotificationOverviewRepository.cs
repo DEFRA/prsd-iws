@@ -5,18 +5,23 @@
     using System.Linq;
     using System.Threading.Tasks;
     using Domain.ImportNotification;
+    using Domain.Security;
 
     internal class ImportNotificationOverviewRepository : IImportNotificationOverviewRepository
     {
         private readonly ImportNotificationContext context;
+        private readonly IImportNotificationApplicationAuthorization authorization;
 
-        public ImportNotificationOverviewRepository(ImportNotificationContext context)
+        public ImportNotificationOverviewRepository(ImportNotificationContext context, IImportNotificationApplicationAuthorization authorization)
         {
             this.context = context;
+            this.authorization = authorization;
         }
 
         public async Task<ImportNotificationOverview> Get(Guid notificationId)
         {
+            await authorization.EnsureAccessAsync(notificationId);
+
             var data = await context.ImportNotifications
                 .Join(context.ImportNotificationAssessments,
                     n => n.Id,

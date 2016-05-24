@@ -10,18 +10,23 @@
     using Domain;
     using Domain.ImportMovement;
     using Domain.ImportNotification;
+    using Domain.Security;
 
     internal class ImportMovementsSummaryRepository : IImportMovementsSummaryRepository
     {
         private readonly ImportNotificationContext context;
+        private readonly IImportNotificationApplicationAuthorization authorization;
 
-        public ImportMovementsSummaryRepository(ImportNotificationContext context)
+        public ImportMovementsSummaryRepository(ImportNotificationContext context, IImportNotificationApplicationAuthorization authorization)
         {
             this.context = context;
+            this.authorization = authorization;
         }
 
         public async Task<Summary> GetById(Guid importNotificationId)
         {
+            await authorization.EnsureAccessAsync(importNotificationId);
+
             var totalMovements = await context.ImportMovements.Where(m => m.NotificationId == importNotificationId).CountAsync();
 
             var shipment = await context.Shipments.Where(s => s.ImportNotificationId == importNotificationId).SingleAsync();
@@ -40,6 +45,8 @@
 
         private async Task<ShipmentQuantity> TotalQuantityReceived(Guid importNotificationId, Shipment shipment)
         {
+            await authorization.EnsureAccessAsync(importNotificationId);
+
             var movements = await context.ImportMovements.Where(m => m.NotificationId == importNotificationId).ToArrayAsync();
 
             var allMovementReceipts = new List<ImportMovementReceipt>();

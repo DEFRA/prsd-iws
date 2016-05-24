@@ -5,18 +5,23 @@
     using System.Linq;
     using System.Threading.Tasks;
     using Domain.ImportMovement;
+    using Domain.Security;
 
     internal class ImportMovementSummaryRepository : IImportMovementSummaryRepository
     {
         private readonly ImportNotificationContext context;
+        private readonly IImportMovementAuthorization authorization;
 
-        public ImportMovementSummaryRepository(ImportNotificationContext context)
+        public ImportMovementSummaryRepository(ImportNotificationContext context, IImportMovementAuthorization authorization)
         {
             this.context = context;
+            this.authorization = authorization;
         }
 
         public async Task<ImportMovementSummary> Get(Guid movementId)
         {
+            await authorization.EnsureAccessAsync(movementId);
+
             var query = from movement in context.ImportMovements
                 where movement.Id == movementId
                 from notification 

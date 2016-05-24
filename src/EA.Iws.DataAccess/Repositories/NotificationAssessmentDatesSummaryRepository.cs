@@ -4,6 +4,7 @@
     using System.Threading.Tasks;
     using Domain.NotificationApplication;
     using Domain.NotificationAssessment;
+    using Domain.Security;
 
     public class NotificationAssessmentDatesSummaryRepository : INotificationAssessmentDatesSummaryRepository
     {
@@ -11,20 +12,24 @@
         private readonly INotificationAssessmentRepository notificationAssessmentRepository;
         private readonly INotificationApplicationRepository notificationApplicationRepository;
         private readonly INotificationTransactionCalculator transactionCalculator;
+        private readonly INotificationApplicationAuthorization authorization;
 
         public NotificationAssessmentDatesSummaryRepository(DecisionRequiredBy decisionRequiredBy,
             INotificationAssessmentRepository notificationAssessmentRepository,
             INotificationApplicationRepository notificationApplicationRepository,
-            INotificationTransactionCalculator transactionCalculator)
+            INotificationTransactionCalculator transactionCalculator,
+            INotificationApplicationAuthorization authorization)
         {
             this.decisionRequiredBy = decisionRequiredBy;
             this.notificationApplicationRepository = notificationApplicationRepository;
             this.notificationAssessmentRepository = notificationAssessmentRepository;
             this.transactionCalculator = transactionCalculator;
+            this.authorization = authorization;
         }
 
         public async Task<NotificationDatesSummary> GetById(Guid notificationId)
         {
+            await authorization.EnsureAccessAsync(notificationId);
             var assessment = await notificationAssessmentRepository.GetByNotificationId(notificationId);
             var notification = await notificationApplicationRepository.GetById(notificationId);
 

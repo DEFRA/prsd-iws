@@ -5,25 +5,31 @@
     using System.Linq;
     using System.Threading.Tasks;
     using Domain.NotificationApplication;
+    using Domain.Security;
 
     internal class NotificationApplicationOverviewRepository : INotificationApplicationOverviewRepository
     {
         private readonly INotificationProgressService progressService;
+        private readonly INotificationApplicationAuthorization authorization;
         private readonly INotificationChargeCalculator chargeCalculator;
         private readonly IwsContext db;
 
         public NotificationApplicationOverviewRepository(
             IwsContext db,
             INotificationChargeCalculator chargeCalculator,
-            INotificationProgressService progressService)
+            INotificationProgressService progressService,
+            INotificationApplicationAuthorization authorization)
         {
             this.db = db;
             this.chargeCalculator = chargeCalculator;
             this.progressService = progressService;
+            this.authorization = authorization;
         }
 
         public async Task<NotificationApplicationOverview> GetById(Guid notificationId)
         {
+            await authorization.EnsureAccessAsync(notificationId);
+
             var query =
                 from notification in db.NotificationApplications
                 where notification.Id == notificationId
