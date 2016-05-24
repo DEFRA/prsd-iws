@@ -9,7 +9,7 @@
         public string Name { get; set; }
         
         [Display(Name = "Telephone", ResourceType = typeof(ContactViewModelResources))]
-        [RegularExpression(@"[\+]*[\d]+[\d\s]+[\d]+", ErrorMessageResourceType = typeof(ContactViewModelResources), ErrorMessageResourceName = "TelephoneInvalid")]
+        [RegularExpression(@"^[+]?[\d]+(( |-)?[\d]+)+?$", ErrorMessageResourceType = typeof(ContactViewModelResources), ErrorMessageResourceName = "TelephoneInvalid")]
         public string Telephone { get; set; }
 
         [EmailAddress(ErrorMessageResourceType = typeof(ContactViewModelResources), ErrorMessageResourceName = "EmailInvalid", ErrorMessage = null)]
