@@ -53,6 +53,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Content Include="scripts\Everytime\Functions\0003-Reports-PricingInfo.sql" />
     <Content Include="scripts\Everytime\Views\0019-Reports-RdfSrfWood.sql" />
+    <Content Include="scripts\Everytime\Views\0020-Reports-DataImportNotifications.sql" />
     <Content Include="scripts\Update\Sprint28\20160316-1233-fix-bank-address-typo.sql" />
     <Content Include="Readme.txt" />
     <Content Include="scripts\AliaSQL.exe" />
