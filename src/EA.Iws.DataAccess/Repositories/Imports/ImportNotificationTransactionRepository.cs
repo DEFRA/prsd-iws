@@ -6,18 +6,22 @@
     using System.Linq;
     using System.Threading.Tasks;
     using Domain.ImportNotificationAssessment.Transactions;
+    using Domain.Security;
 
     internal class ImportNotificationTransactionRepository : IImportNotificationTransactionRepository
     {
         private readonly ImportNotificationContext context;
+        private readonly IImportNotificationApplicationAuthorization authorization;
 
-        public ImportNotificationTransactionRepository(ImportNotificationContext context)
+        public ImportNotificationTransactionRepository(ImportNotificationContext context, IImportNotificationApplicationAuthorization authorization)
         {
             this.context = context;
+            this.authorization = authorization;
         }
 
         public async Task<IEnumerable<ImportNotificationTransaction>> GetTransactions(Guid importNotificationId)
         {
+            await authorization.EnsureAccessAsync(importNotificationId);
             return
                 await
                     context.ImportNotificationTransactions.Where(t => t.NotificationId == importNotificationId)

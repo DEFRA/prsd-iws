@@ -7,14 +7,17 @@
     using System.Threading.Tasks;
     using Core.NotificationAssessment;
     using Domain.NotificationAssessment;
+    using Domain.Security;
 
     internal class NotificationTransactionRepository : INotificationTransactionRepository
     {
         private readonly IwsContext context;
+        private readonly INotificationApplicationAuthorization authorization;
 
-        public NotificationTransactionRepository(IwsContext context)
+        public NotificationTransactionRepository(IwsContext context, INotificationApplicationAuthorization authorization)
         {
             this.context = context;
+            this.authorization = authorization;
         }
 
         public void Add(NotificationTransactionData notificationTransactionData)
@@ -24,6 +27,7 @@
 
         public async Task<IList<NotificationTransaction>> GetTransactions(Guid notificationId)
         {
+            await authorization.EnsureAccessAsync(notificationId);
             return await context.NotificationTransactions.Where(n => n.NotificationId == notificationId).ToListAsync();
         }
     }

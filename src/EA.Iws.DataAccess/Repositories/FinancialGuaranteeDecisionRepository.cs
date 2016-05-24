@@ -6,18 +6,23 @@
     using System.Threading.Tasks;
     using Core.FinancialGuarantee;
     using Domain.FinancialGuarantee;
+    using Domain.Security;
 
     internal class FinancialGuaranteeDecisionRepository : IFinancialGuaranteeDecisionRepository
     {
         private readonly IwsContext context;
+        private readonly INotificationApplicationAuthorization authorization;
 
-        public FinancialGuaranteeDecisionRepository(IwsContext context)
+        public FinancialGuaranteeDecisionRepository(IwsContext context, INotificationApplicationAuthorization authorization)
         {
             this.context = context;
+            this.authorization = authorization;
         }
 
         public async Task<IEnumerable<FinancialGuaranteeDecision>> GetByNotificationId(Guid notificationId)
         {
+            await authorization.EnsureAccessAsync(notificationId);
+
             var financialGuarantee = await context.FinancialGuarantees.SingleOrDefaultAsync(fg => fg.NotificationApplicationId == notificationId);
 
             var result = new List<FinancialGuaranteeDecision>();

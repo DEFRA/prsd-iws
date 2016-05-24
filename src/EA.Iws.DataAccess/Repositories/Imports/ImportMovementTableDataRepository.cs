@@ -6,18 +6,23 @@
     using System.Linq;
     using System.Threading.Tasks;
     using Domain.ImportMovement;
+    using Domain.Security;
 
     internal class ImportMovementTableDataRepository : IImportMovementTableDataRepository
     {
         private readonly ImportNotificationContext context;
+        private readonly IImportNotificationApplicationAuthorization authorization;
 
-        public ImportMovementTableDataRepository(ImportNotificationContext context)
+        public ImportMovementTableDataRepository(ImportNotificationContext context, IImportNotificationApplicationAuthorization authorization)
         {
             this.context = context;
+            this.authorization = authorization;
         }
 
         public async Task<IEnumerable<MovementTableData>> GetById(Guid importNotificationId)
         {
+            await authorization.EnsureAccessAsync(importNotificationId);
+
             var movements = await context.ImportMovements.Where(m => m.NotificationId == importNotificationId).ToArrayAsync();
 
             var result = new List<MovementTableData>();
