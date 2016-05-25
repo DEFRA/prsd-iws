@@ -61,10 +61,10 @@ AS
         CAST(D.[NotificationCompletedDate] AS DATE) AS [CompleteDate],
         CAST(D.[NotificationReceivedDate] AS DATE) AS [ReceivedDate],
         NULL AS [TransmittedDate],
-        CAST(D.[WithdrawnDate] AS DATE) AS [WithdrawnDate],
-        D.[WithdrawnReason],
-        CAST(D.[ObjectedDate] AS DATE) AS [ObjectedDate],
-        D.[ObjectionReason],
+        CAST(W.[Date] AS DATE) AS [WithdrawnDate],
+        W.[Reasons] AS [WithdrawnReason],
+        CAST(O.[Date] AS DATE) AS [ObjectedDate],
+        O.[Reasons] AS [ObjectionReason],
         CAST(C.[From] AS DATE) AS [ConsentFrom],
         CAST(C.[To] AS DATE) AS [ConsentTo],
         CAST(D.[ConsentedDate] AS DATE) AS [ConsentedDate],
@@ -89,4 +89,10 @@ AS
 
     LEFT JOIN	[ImportNotification].[Consent] AS C
     ON			[NA].[NotificationApplicationId] = [C].[NotificationId]
+
+	LEFT JOIN	[ImportNotification].[Objection] AS O
+	ON			[NA].[NotificationApplicationId] = [O].[NotificationId]
+
+	LEFT JOIN	[ImportNotification].[Withdrawn] AS W
+	ON			[NA].[NotificationApplicationId] = [W].[NotificationId]
 GO
