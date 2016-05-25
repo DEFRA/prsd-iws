@@ -11,20 +11,19 @@
     internal class ImportMovementRepository : IImportMovementRepository
     {
         private readonly ImportNotificationContext context;
-        private readonly IImportMovementAuthorization authorization;
         private readonly IImportNotificationApplicationAuthorization notificationAuthorization;
 
-        public ImportMovementRepository(ImportNotificationContext context, IImportMovementAuthorization authorization, IImportNotificationApplicationAuthorization notificationAuthorization)
+        public ImportMovementRepository(ImportNotificationContext context, IImportNotificationApplicationAuthorization notificationAuthorization)
         {
             this.context = context;
-            this.authorization = authorization;
             this.notificationAuthorization = notificationAuthorization;
         }
 
         public async Task<ImportMovement> Get(Guid id)
         {
-            await authorization.EnsureAccessAsync(id);
-            return await context.ImportMovements.SingleAsync(m => m.Id == id);
+            var movement = await context.ImportMovements.SingleAsync(m => m.Id == id);
+            await notificationAuthorization.EnsureAccessAsync(movement.NotificationId);
+            return movement;
         }
 
         public async Task<ImportMovement> GetByNumberOrDefault(Guid importNotificationId, int number)
@@ -34,7 +33,7 @@
 
             if (movement != null)
             {
-                await authorization.EnsureAccessAsync(movement.Id);
+                await notificationAuthorization.EnsureAccessAsync(movement.NotificationId);
             }
 
             return movement;
