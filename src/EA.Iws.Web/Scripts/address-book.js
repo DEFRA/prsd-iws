@@ -27,6 +27,9 @@ function autocompleteListEntriesForData(data) {
 }
 
 function decodeEntities(encodedString) {
+    if (encodedString === null) {
+        return "";
+    }
     var textArea = document.createElement('textarea');
     textArea.innerHTML = encodedString;
     return textArea.value;
