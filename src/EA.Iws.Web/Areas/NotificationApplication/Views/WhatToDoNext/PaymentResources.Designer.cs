@@ -149,5 +149,32 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.WhatToDoNext {
                 return ResourceManager.GetString("Title", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please ensure your BACS payment includes your company name and the invoice number. Failure to do so may prevent us from updating your account correctly..
+        /// </summary>
+        public static string WalesBacsParagraph {
+            get {
+                return ResourceManager.GetString("WalesBacsParagraph", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please contact the Income Team should you require any further information..
+        /// </summary>
+        public static string WalesContactParagraph {
+            get {
+                return ResourceManager.GetString("WalesContactParagraph", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Where possible please submit a remittance advice to ensure sufficient and accurate processing of your payment..
+        /// </summary>
+        public static string WalesRemittanceParagraph {
+            get {
+                return ResourceManager.GetString("WalesRemittanceParagraph", resourceCulture);
+            }
+        }
     }
 }

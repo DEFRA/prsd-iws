@@ -273,6 +273,7 @@
     <Content Include="scripts\Update\Sprint29\20160404-1809-concatenate-firstname-and-lastname-organisation-etc.sql" />
     <Content Include="scripts\Update\Sprint29\20160407-155400-insert-hp14-waste-code.sql" />
     <Content Include="scripts\Update\Sprint29\20160504-121100-update-niea-refund-amount.sql" />
+    <Content Include="scripts\Update\Sprint29\20160608-140800-update-nrw-payment-details.sql" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="scripts\TestData\20150522-171900-link-test-user-to-org.sql" />

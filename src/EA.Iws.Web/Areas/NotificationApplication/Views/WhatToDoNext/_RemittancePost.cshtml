@@ -1,6 +1,22 @@
-﻿@using Resources = EA.Iws.Web.Areas.NotificationApplication.Views.WhatToDoNext.PaymentResources
+﻿@using EA.Iws.Core.Notification
+@using Resources = EA.Iws.Web.Areas.NotificationApplication.Views.WhatToDoNext.PaymentResources
 @model EA.Iws.Requests.Notification.WhatToDoNextPaymentData
 
-<p>@Resources.RemittancePost
-<br/>
-@Html.Raw(Model.UnitedKingdomCompetentAuthorityData.BacsDetails.RemittanceAddress)</p>
+<p>
+    @Resources.RemittancePost
+<br />
+@Html.Raw(Model.UnitedKingdomCompetentAuthorityData.BacsDetails.RemittanceAddress)
+</p>
+
+@if (Model.CompetentAuthority == UKCompetentAuthority.Wales)
+{
+    <p>
+        @Resources.WalesBacsParagraph
+    </p>
+    <p>
+        <b class="bold-small">@Resources.WalesRemittanceParagraph</b>
+    </p>
+    <p>
+        @Resources.WalesContactParagraph
+    </p>
+}
