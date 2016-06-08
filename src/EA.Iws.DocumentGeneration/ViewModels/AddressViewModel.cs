@@ -39,27 +39,14 @@
             switch (numberOfLines)
             {
                 case (AddressLines.Two):
-                    return Convert(new[]
-                    {
-                        MergeLines(addressLine1, addressLine2, townOrCity),
-                        MergeLines(region, postcode, country)
-                    });
-                case (AddressLines.Three):
+                    return MergeLines(addressLine1, addressLine2, townOrCity, region, postcode, country);
+                default:
                     return Convert(new[]
                     {
                         MergeLines(addressLine1, addressLine2),
                         MergeLines(townOrCity, region),
                         MergeLines(postcode, country)
                     });
-                default:
-                    return
-                        Convert(new[]
-                        {
-                            MergeLines(addressLine1),
-                            MergeLines(addressLine2, townOrCity),
-                            MergeLines(region, postcode),
-                            MergeLines(country)
-                        });
             }
         }
 
