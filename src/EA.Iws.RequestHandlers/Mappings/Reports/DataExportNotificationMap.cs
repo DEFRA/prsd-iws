@@ -43,12 +43,14 @@
 
         private int? GetAssessmentStartedElapsedWorkingDays(DataExportNotification source, UKCompetentAuthority parameter)
         {
-            if (!source.PaymentReceived.HasValue || !source.AssessmentStarted.HasValue)
+            if (!source.PaymentReceived.HasValue || !source.AssessmentStarted.HasValue || !source.NotificationReceived.HasValue)
             {
                 return null;
             }
 
-            return workingDayCalculator.GetWorkingDays(source.PaymentReceived.Value, source.AssessmentStarted.Value,
+            return workingDayCalculator.GetWorkingDays(
+                source.PaymentReceived.Value > source.NotificationReceived.Value ? source.PaymentReceived.Value : source.NotificationReceived.Value, 
+                source.AssessmentStarted.Value,
                 false, parameter);
         }
 
