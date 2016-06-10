@@ -147,4 +147,13 @@
   <data name="Title" xml:space="preserve">
     <value>Payment and charges information</value>
   </data>
+  <data name="WalesBacsParagraph" xml:space="preserve">
+    <value>Please ensure your BACS payment includes your company name and the invoice number. Failure to do so may prevent us from updating your account correctly.</value>
+  </data>
+  <data name="WalesContactParagraph" xml:space="preserve">
+    <value>Please contact the Income Team should you require any further information.</value>
+  </data>
+  <data name="WalesRemittanceParagraph" xml:space="preserve">
+    <value>Where possible please submit a remittance advice to ensure sufficient and accurate processing of your payment.</value>
+  </data>
 </root>
