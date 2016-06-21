@@ -13,17 +13,17 @@
 
         public string FirstAddress
         {
-            get { return firstAddress.Address(AddressLines.Three); }
+            get { return firstAddress.Address(AddressLines.Single); }
         }
 
         public string SecondAddress
         {
-            get { return secondAddress.Address(AddressLines.Three); }
+            get { return secondAddress.Address(AddressLines.Single); }
         }
 
         public string LastAddress
         {
-            get { return lastAddress.Address(AddressLines.Three); }
+            get { return lastAddress.Address(AddressLines.Single); }
         }
 
         public string FirstReg { get; private set; }

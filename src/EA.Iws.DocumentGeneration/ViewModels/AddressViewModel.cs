@@ -3,7 +3,6 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
-    using Domain;
     using Domain.NotificationApplication;
 
     internal class AddressViewModel
@@ -38,7 +37,7 @@
         {
             switch (numberOfLines)
             {
-                case (AddressLines.Two):
+                case (AddressLines.Single):
                     return MergeLines(addressLine1, addressLine2, townOrCity, region, postcode, country);
                 default:
                     return Convert(new[]

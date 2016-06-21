@@ -21,7 +21,7 @@
 
         public string Address
         {
-            get { return address.Address(AddressLines.Four); }
+            get { return address.Address(AddressLines.Multiple); }
         }
 
         public string RegistrationNumber { get; private set; }

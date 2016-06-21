@@ -28,7 +28,7 @@
 
         public string Address
         {
-            get { return address.Address(AddressLines.Two); }
+            get { return address.Address(AddressLines.Single); }
         }
 
         public string RegistrationNumber { get; private set; }
