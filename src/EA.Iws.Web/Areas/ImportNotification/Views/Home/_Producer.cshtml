@@ -13,6 +13,7 @@
             @if (!Model.Details.Producer.Address.IsEmpty())
             {
                 @Html.DisplayFor(m => m.Details.Producer.Address.AddressLine1)<text>, </text>
+                @Html.DisplayFor(m => m.Details.Producer.Address.AddressLine2)<text>, </text>
                 @Html.DisplayFor(m => m.Details.Producer.Address.TownOrCity)<text> </text>
                 @Html.DisplayFor(m => m.Details.Producer.Address.PostalCode)<text>, </text>
                 @Html.DisplayFor(m => m.Details.Producer.Address.Country)

@@ -7,7 +7,8 @@
             @Html.DisplayFor(m => m.Facilities.Single(f => f.IsActualSiteOfTreatment).Business.Name)
             <br />
             @Html.DisplayFor(m => m.Facilities.Single(f => f.IsActualSiteOfTreatment).Address.StreetOrSuburb),
-            @Html.DisplayFor(m => m.Facilities.Single(f => f.IsActualSiteOfTreatment).Address.TownOrCity)
+            @Html.DisplayFor(m => m.Facilities.Single(f => f.IsActualSiteOfTreatment).Address.Address2),
+            @Html.DisplayFor(m => m.Facilities.Single(f => f.IsActualSiteOfTreatment).Address.TownOrCity),
             @Html.DisplayFor(m => m.Facilities.Single(f => f.IsActualSiteOfTreatment).Address.PostalCode),
             @Html.DisplayFor(m => m.Facilities.Single(f => f.IsActualSiteOfTreatment).Address.CountryName)
         </div>
