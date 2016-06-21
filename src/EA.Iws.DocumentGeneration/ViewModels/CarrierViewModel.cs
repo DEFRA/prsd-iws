@@ -90,7 +90,7 @@
 
         public string Address
         {
-            get { return address.Address(AddressLines.Three); }
+            get { return address.Address(AddressLines.Single); }
         }
 
         public string RegistrationNumber

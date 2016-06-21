@@ -17,7 +17,7 @@
             {
                 if (AddressViewModel != null)
                 {
-                    return AddressViewModel.Address(AddressLines.Four);
+                    return AddressViewModel.Address(AddressLines.Multiple);
                 }
                 else
                 {
