@@ -8,7 +8,8 @@
             @Html.DisplayFor(m => m.Producers.Single(p => p.IsSiteOfExport).Business.Name)
             <br/>
             @Html.DisplayFor(m => m.Producers.Single(p => p.IsSiteOfExport).Address.StreetOrSuburb),
-            @Html.DisplayFor(m => m.Producers.Single(p => p.IsSiteOfExport).Address.TownOrCity)
+            @Html.DisplayFor(m => m.Producers.Single(p => p.IsSiteOfExport).Address.Address2),
+            @Html.DisplayFor(m => m.Producers.Single(p => p.IsSiteOfExport).Address.TownOrCity),
             @Html.DisplayFor(m => m.Producers.Single(p => p.IsSiteOfExport).Address.PostalCode),
             @Html.DisplayFor(m => m.Producers.Single(p => p.IsSiteOfExport).Address.CountryName)
         </div>

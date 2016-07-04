@@ -12,6 +12,7 @@
             @if (!Model.Details.Exporter.Address.IsEmpty())
             {
                 @Html.DisplayFor(m => m.Details.Exporter.Address.AddressLine1)<text>, </text>
+                @Html.DisplayFor(m => m.Details.Exporter.Address.AddressLine2)<text>, </text>
                 @Html.DisplayFor(m => m.Details.Exporter.Address.TownOrCity)<text> </text>
                 @Html.DisplayFor(m => m.Details.Exporter.Address.PostalCode)<text>, </text>
                 @Html.DisplayFor(m => m.Details.Exporter.Address.Country)

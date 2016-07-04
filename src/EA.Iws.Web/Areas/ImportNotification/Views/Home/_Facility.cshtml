@@ -21,6 +21,7 @@
                 @if (!Model.Details.Facilities[i].Address.IsEmpty())
                 {
                     @Html.DisplayFor(m => m.Details.Facilities[i].Address.AddressLine1)<text>, </text>
+                    @Html.DisplayFor(m => m.Details.Facilities[i].Address.AddressLine2)<text>, </text>
                     @Html.DisplayFor(m => m.Details.Facilities[i].Address.TownOrCity)<text> </text>
                     @Html.DisplayFor(m => m.Details.Facilities[i].Address.PostalCode)<text>, </text>
                     @Html.DisplayFor(m => m.Details.Facilities[i].Address.Country)
