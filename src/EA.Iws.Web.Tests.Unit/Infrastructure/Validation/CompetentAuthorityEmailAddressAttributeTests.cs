@@ -27,7 +27,7 @@
 
         [Theory]
         [InlineData(UKCompetentAuthority.England, "valid@environment-agency.gov.uk")]
-        [InlineData(UKCompetentAuthority.NorthernIreland, "valid@doeni.gov.uk")]
+        [InlineData(UKCompetentAuthority.NorthernIreland, "valid@daera-ni.gov.uk")]
         [InlineData(UKCompetentAuthority.Scotland, "valid@sepa.org.uk")]
         [InlineData(UKCompetentAuthority.Wales, "valid@cyfoethnaturiolcymru.gov.uk")]
         [InlineData(UKCompetentAuthority.Wales, "valid@naturalresourceswales.gov.uk")]
