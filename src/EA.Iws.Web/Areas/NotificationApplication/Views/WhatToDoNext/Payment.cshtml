@@ -49,7 +49,15 @@
 
         <br/>
         <br/>
-        <p>@Resources.ListAvailablePaymentMethods</p>
+        @if (Model.CompetentAuthority == UKCompetentAuthority.NorthernIreland)
+        {
+            <p>@Resources.ListAvailablePaymentMethodsNIEA</p>
+        }
+        else
+        {
+            <p>@Resources.ListAvailablePaymentMethods</p>
+        }
+        
         <br/>
         <h4 class="heading-small">@Resources.BankTransfer</h4>
         <p>@Resources.BankTransferReferenceDisclaimer</p>

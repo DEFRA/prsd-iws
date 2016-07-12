@@ -135,6 +135,9 @@
   <data name="ListAvailablePaymentMethods" xml:space="preserve">
     <value>You can pay us by bank transfer, post, or credit or debit card. All payments must be made in sterling.</value>
   </data>
+  <data name="ListAvailablePaymentMethodsNIEA" xml:space="preserve">
+    <value>You can pay us by bank transfer or by post. All payments must be made in sterling.</value>
+  </data>
   <data name="MainHeading" xml:space="preserve">
     <value>Your notification charges and payment information</value>
   </data>

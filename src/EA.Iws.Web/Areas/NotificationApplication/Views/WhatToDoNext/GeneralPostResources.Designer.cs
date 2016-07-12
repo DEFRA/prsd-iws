@@ -70,7 +70,7 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.WhatToDoNext {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Write your company name and notification number on the reverse of your cheque or postal order, and send it with your notification package to the Hazardous Waste/TFS Section. Cheques and postal orders should be made payable to Northern Ireland Environment Agency (DOENI)..
+        ///   Looks up a localized string similar to Write your company name and notification number on the reverse of your cheque or postal order, and send it with your notification package to the Hazardous Waste/TFS Section. Cheques and postal orders should be made payable to Department of Agriculture, Environment and Rural Affairs..
         /// </summary>
         public static string Niea {
             get {
