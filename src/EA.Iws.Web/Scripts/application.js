@@ -162,7 +162,7 @@ $(document).ready(function () {
         }
     }).each(function() {
         var selectBox = $(this);
-        $("a[href='#" + selectBox.attr("id") + "'").click(function () {
+        $("a[href='#" + selectBox.attr("id") + "']").click(function () {
             selectBox.select2("focus");
         });
     });
