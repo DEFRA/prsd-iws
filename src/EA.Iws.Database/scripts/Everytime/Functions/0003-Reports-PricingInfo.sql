@@ -72,6 +72,9 @@ BEGIN
             N.NotificationType,
             I.IsInterim) AS DATA;
 
+    DECLARE @numberOfShipmentsMade INT;
+    SELECT  @numberOfShipmentsMade = COUNT(MovementId) FROM [Reports].[Movements] WHERE NotificationId = @notificationId;
+
     DECLARE @activityId UNIQUEIDENTIFIER;
     DECLARE @shipmentQuantityRangeId UNIQUEIDENTIFIER;
 
@@ -97,7 +100,7 @@ BEGIN
 
     SELECT
         @price = [Price],
-        @potentialRefund = [PotentialRefund]
+        @potentialRefund = CASE WHEN @numberOfShipmentsMade > 0 THEN 0 ELSE [PotentialRefund] END
     FROM
         [Lookup].[PricingStructure]
     WHERE
