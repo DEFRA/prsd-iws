@@ -43,11 +43,14 @@
                 return new ChemicalCompositionPercentages[0];
             }
 
-            return wasteAdditionalInformations.Where(wc => !(wc.MaxConcentration == 0 && wc.MinConcentration == 0)).Select(wi => new ChemicalCompositionPercentages
+            return wasteAdditionalInformations
+                .OrderBy(x => x.WasteInformationType)
+                .Where(x => !(x.MaxConcentration == 0 && x.MinConcentration == 0))
+                .Select(x => new ChemicalCompositionPercentages
             {
-                Min = wi.MinConcentration.ToString("N"),
-                Max = wi.MaxConcentration.ToString("N"),
-                Name = GetChemicalConstituentName(wi)
+                Min = x.MinConcentration.ToString("N"),
+                Max = x.MaxConcentration.ToString("N"),
+                Name = GetChemicalConstituentName(x)
             }).ToArray();
         }
 
@@ -58,12 +61,15 @@
                 return new ChemicalCompositionPercentages[0];
             }
             
-            return wasteType.WasteCompositions.Where(wc => !(wc.MaxConcentration == 0 && wc.MinConcentration == 0)).Select(wc => new ChemicalCompositionPercentages
-            {
-                Min = wc.MinConcentration.ToString("N"),
-                Max = wc.MaxConcentration.ToString("N"),
-                Name = GetConstituentWithUnits(wc.Constituent)
-            }).ToArray();
+            return wasteType.WasteCompositions
+                .OrderBy(x => x.ChemicalCompositionType)
+                .Where(x => !(x.MaxConcentration == 0 && x.MinConcentration == 0))
+                .Select(x => new ChemicalCompositionPercentages
+                {
+                    Min = x.MinConcentration.ToString("N"),
+                    Max = x.MaxConcentration.ToString("N"),
+                    Name = GetConstituentWithUnits(x.Constituent)
+                }).ToArray();
         }
 
         public string GetChemicalConstituentName(WasteAdditionalInformation wasteAdditionalInformation)
