@@ -275,6 +275,7 @@
     <Content Include="scripts\Update\Sprint29\20160504-121100-update-niea-refund-amount.sql" />
     <Content Include="scripts\Update\Sprint29\20160608-140800-update-nrw-payment-details.sql" />
     <Content Include="scripts\Update\Sprint29\20160617-152000-update-area-names.sql" />
+    <Content Include="scripts\Update\Sprint29\20160919-162100-update-niea-address.sql" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="scripts\TestData\20150522-171900-link-test-user-to-org.sql" />

@@ -115,6 +115,15 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.WhatToDoNext {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You can pay us by bank transfer or by post. All payments must be made in sterling..
+        /// </summary>
+        public static string ListAvailablePaymentMethodsNIEA {
+            get {
+                return ResourceManager.GetString("ListAvailablePaymentMethodsNIEA", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Your notification charges and payment information.
         /// </summary>
         public static string MainHeading {
