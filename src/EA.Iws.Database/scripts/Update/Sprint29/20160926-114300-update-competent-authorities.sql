@@ -1,7 +1,7 @@
 ﻿-- Update CAs
 UPDATE [Lookup].[CompetentAuthority]
 SET Code = 'CZ15'
-WHERE Code = 'CA';
+WHERE Code = 'CZ';
 
 UPDATE [Lookup].[CompetentAuthority]
 SET Code = 'DK001'
