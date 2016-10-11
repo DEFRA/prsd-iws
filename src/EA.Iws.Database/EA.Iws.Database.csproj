@@ -54,6 +54,7 @@
     <Content Include="scripts\Everytime\Functions\0003-Reports-PricingInfo.sql" />
     <Content Include="scripts\Everytime\Views\0019-Reports-RdfSrfWood.sql" />
     <Content Include="scripts\Everytime\Views\0020-Reports-DataImportNotifications.sql" />
+    <Content Include="scripts\Everytime\Views\0021-Search-Notifications.sql" />
     <Content Include="scripts\Update\0001-Release1\Sprint28\20160316-1233-fix-bank-address-typo.sql" />
     <Content Include="Readme.txt" />
     <Content Include="scripts\AliaSQL.exe" />
@@ -95,6 +96,7 @@
     <Content Include="scripts\TestData\20160205-114600-test-user-claims.sql" />
     <Content Include="scripts\TestData\placeholder.txt" />
     <Content Include="scripts\Update\0002-CI\Sprint1\20161012-141300-delete-notification-charge-column.sql" />
+    <Content Include="scripts\Update\0002-CI\Sprint1\20161011-145600-create-search-schema.sql" />
     <Content Include="scripts\Update\0002-CI\Sprint1\20161013-170500-import-movement-iscancelled.sql" />
     <Content Include="scripts\Update\placeholder.txt" />
     <Content Include="scripts\Update\0001-Release1\Sprint10\20150625-103000-add-us-competent-authority.sql" />
