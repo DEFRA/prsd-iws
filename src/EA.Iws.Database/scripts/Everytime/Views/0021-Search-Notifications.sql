@@ -14,7 +14,7 @@ AS
         P.Name AS ProducerName,
         I.Name AS ImporterName,
         SOI_C.Name AS CountryOfImport,
-        LA.Name AS Area,
+        C.LocalAreaId,
         CON.[From] AS ConsentValidFrom,
         CON.[To] AS ConsentValidTo
     FROM
@@ -30,9 +30,7 @@ AS
             LEFT JOIN [Notification].[StateOfImport] SOI ON TR.Id = SOI.TransportRouteId
             INNER JOIN [Lookup].[Country] SOI_C ON SOI.CountryId = SOI_C.Id
         ON N.Id = TR.NotificationId
-        LEFT JOIN [Notification].[Consultation] C
-            LEFT JOIN [Lookup].[LocalArea] LA ON C.LocalAreaId = LA.Id
-        ON N.Id = C.NotificationId
+        LEFT JOIN [Notification].[Consultation] C ON N.Id = C.NotificationId
         LEFT JOIN [Notification].[Consent] CON ON N.Id = CON.NotificationApplicationId
 
     UNION
@@ -47,7 +45,7 @@ AS
         P.Name AS ProducerName,
         I.Name AS ImporterName,
         SOI_C.Name AS CountryOfImport,
-        LA.Name AS Area,
+        C.LocalAreaId,
         CON.[From] AS ConsentValidFrom,
         CON.[To] AS ConsentValidTo
     FROM
@@ -63,8 +61,6 @@ AS
             INNER JOIN [Notification].[EntryOrExitPoint] EEP ON SOI.EntryPointId = EEP.Id
             INNER JOIN [Lookup].[Country] SOI_C ON EEP.CountryId = SOI_C.Id
         ON N.Id = TR.ImportNotificationId
-        LEFT JOIN [ImportNotification].[Consultation] C
-            LEFT JOIN [Lookup].[LocalArea] LA ON C.LocalAreaId = LA.Id
-        ON N.Id = C.NotificationId
+        LEFT JOIN [ImportNotification].[Consultation] C ON N.Id = C.NotificationId
         LEFT JOIN [ImportNotification].[Consent] CON ON N.Id = CON.NotificationId
 GO
