@@ -113,6 +113,7 @@
     <Compile Include="ImportNotificationAssessment\Transactions\ImportNotificationTransaction.cs" />
     <Compile Include="ImportNotificationAssessment\Transactions\ImportNotificationTransactionCalculator.cs" />
     <Compile Include="ImportNotificationAssessment\Transactions\ImportPaymentTransaction.cs" />
+    <Compile Include="ImportNotificationAssessment\Transactions\ImportRefundTransaction.cs" />
     <Compile Include="ImportNotification\Address.cs" />
     <Compile Include="ImportNotification\AddressBuilder.cs" />
     <Compile Include="ImportNotification\Contact.cs" />
