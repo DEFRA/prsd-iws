@@ -17,5 +17,9 @@
         public string ReasonForObjection { get; set; }
 
         public string ReasonWithdrawn { get; set; }
+
+        public DateTime AcknowledgedOnDate { get; set; }
+
+        public bool IsPreconsented { get; set; }
     }
 }

@@ -9,6 +9,8 @@
     using Infrastructure.Authorization;
     using Prsd.Core.Mapper;
     using Prsd.Core.Mediator;
+    using Requests.Facilities;
+    using Requests.Notification;
     using Requests.NotificationAssessment;
     using ViewModels.Decision;
 
@@ -46,11 +48,18 @@
 
                 return View(model);
             }
-
+            
             switch (model.SelectedDecision)
             {
                 case DecisionType.Consent:
-                    await PostConsent(model);
+                    if (await ConsentDatesAreValid(model))
+                    {
+                        await PostConsent(model);
+                    }
+                    else
+                    {
+                        return View(model);
+                    }
                     break;
                 case DecisionType.Withdraw:
                     await PostWithdrawn(model);
@@ -100,6 +109,58 @@
 
             var request = new ObjectNotificationApplication(model.NotificationId, date, model.ReasonForObjection);
             await mediator.SendAsync(request);
+        }
+
+        private async Task<bool> ConsentDatesAreValid(NotificationAssessmentDecisionViewModel model)
+        {
+            bool areValid = true;
+            var data = await mediator.SendAsync(new GetNotificationAssessmentDecisionData(model.NotificationId));
+
+            if (model.ConsentedDate.AsDateTime() > DateTime.UtcNow)
+            {
+                ModelState.AddModelError("ConsentedDate", DecisionControllerResources.ConsentedNotInFuture);
+                areValid = false;
+            }
+
+            if (model.ConsentedDate.AsDateTime() < data.AcknowledgedOnDate)
+            {
+                ModelState.AddModelError("ConsentedDate", DecisionControllerResources.ConsentedNotBeforeAcknowledged);
+                areValid = false;
+            }
+
+            if (model.ConsentValidFromDate.AsDateTime() > DateTime.UtcNow)
+            {
+                ModelState.AddModelError("ConsentValidFromDate", DecisionControllerResources.ValidFromNotInFuture);
+                areValid = false;
+            }
+
+            if (model.ConsentValidFromDate.AsDateTime() < data.AcknowledgedOnDate)
+            {
+                ModelState.AddModelError("ConsentValidFromDate", DecisionControllerResources.ValidFromNotBeforeAcknowledged);
+                areValid = false;
+            }
+
+            if (model.ConsentValidToDate.AsDateTime() <= DateTime.Today)
+            {
+                ModelState.AddModelError("ConsentValidToDate", DecisionControllerResources.ValidToMustBeInFuture);
+                areValid = false;
+            }
+
+            DateTime validFromDate = model.ConsentValidFromDate.AsDateTime().GetValueOrDefault();
+
+            if (data.IsPreconsented && model.ConsentValidToDate.AsDateTime() > validFromDate.AddYears(3))
+            {
+                ModelState.AddModelError("ConsentValidToDate", DecisionControllerResources.ValidFromPreconsented);
+                areValid = false;
+            }
+
+            if ((!data.IsPreconsented) && model.ConsentValidToDate.AsDateTime() > validFromDate.AddYears(1))
+            {
+                ModelState.AddModelError("ConsentValidToDate", DecisionControllerResources.ValidFromNotPreconsented);
+                areValid = false;
+            }
+
+            return areValid;
         }
     }
 }
