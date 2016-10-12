@@ -6,7 +6,5 @@
     public interface INotificationChargeCalculator
     {
         Task<decimal> GetValue(Guid notificationId);
-
-        Task<decimal> GetCalculatedValue(Guid notificationId);
     }
 }

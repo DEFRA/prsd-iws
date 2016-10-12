@@ -16,7 +16,6 @@
     public class NotificationChargeCalculatorTests
     {
         private const decimal NotificationPrice = 25.75m;
-        private const decimal NotificationSetPrice = 1234.56m;
         private const int LowerRange = 5;
         private const int MidRange = 10;
         private const int UpperRange = 15;
@@ -53,22 +52,6 @@
             var result = await chargeCalculator.GetValue(notificationId);
 
             Assert.Equal(0m, result);
-        }
-
-        [Fact]
-        public async Task ChargeSet_ReturnsSetCharge()
-        {
-            SetupNotification();
-            ObjectInstantiator<ShipmentInfo>.SetProperty(x => x.NumberOfShipments, MidRange, shipmentInfo);
-            A.CallTo(() => shipmentInfoRepository.GetByNotificationId(notificationId)).Returns(shipmentInfo);
-            A.CallTo(() => notificationApplicationRepository.GetById(notificationId)).Returns(notificationApplication);
-            A.CallTo(() => pricingStructureRepository.Get()).Returns(GetPricingStructures());
-
-            notificationApplication.SetCharge(NotificationSetPrice);
-
-            var result = await chargeCalculator.GetValue(notificationId);
-
-            Assert.Equal(NotificationSetPrice, result);
         }
 
         [Fact]

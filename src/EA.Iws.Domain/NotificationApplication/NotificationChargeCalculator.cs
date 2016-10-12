@@ -1,10 +1,8 @@
 ﻿namespace EA.Iws.Domain.NotificationApplication
 {
     using System;
-    using System.Linq;
     using System.Threading.Tasks;
     using Core.ComponentRegistration;
-    using Core.Shared;
     using Shipment;
 
     [AutoRegister]
@@ -27,18 +25,6 @@
         }
         
         public async Task<decimal> GetValue(Guid notificationId)
-        {
-            var notification = await notificationApplicationRepository.GetById(notificationId);
-
-            if (notification.Charge != null)
-            {
-                return notification.Charge.GetValueOrDefault();
-            }
-            
-            return await GetCalculatedValue(notificationId);
-        }
-
-        public async Task<decimal> GetCalculatedValue(Guid notificationId)
         {
             var shipmentInfo = await shipmentInfoRepository.GetByNotificationId(notificationId);
 

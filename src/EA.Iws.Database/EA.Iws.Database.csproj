@@ -94,6 +94,7 @@
     <Content Include="scripts\TestData\2016-01-29-102149-create-consented-import-notification.sql" />
     <Content Include="scripts\TestData\20160205-114600-test-user-claims.sql" />
     <Content Include="scripts\TestData\placeholder.txt" />
+    <Content Include="scripts\Update\0002-CI\Sprint1\20161012-141300-delete-notification-charge-column.sql" />
     <Content Include="scripts\Update\placeholder.txt" />
     <Content Include="scripts\Update\0001-Release1\Sprint10\20150625-103000-add-us-competent-authority.sql" />
     <Content Include="scripts\Update\0001-Release1\Sprint10\20150626-163000-link-waste-code-info-to-notification.sql" />
@@ -365,9 +366,7 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="scripts\Update\0002-CI\Sprint1\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
