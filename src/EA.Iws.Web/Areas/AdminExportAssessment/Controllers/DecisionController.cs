@@ -9,6 +9,8 @@
     using Infrastructure.Authorization;
     using Prsd.Core.Mapper;
     using Prsd.Core.Mediator;
+    using Requests.Facilities;
+    using Requests.Notification;
     using Requests.NotificationAssessment;
     using ViewModels.Decision;
 
@@ -46,11 +48,18 @@
 
                 return View(model);
             }
-
+            
             switch (model.SelectedDecision)
             {
                 case DecisionType.Consent:
-                    await PostConsent(model);
+                    if (await ConsentDatesAreValid(model))
+                    {
+                        await PostConsent(model);
+                    }
+                    else
+                    {
+                        return View(model);
+                    }
                     break;
                 case DecisionType.Withdraw:
                     await PostWithdrawn(model);
@@ -100,6 +109,58 @@
 
             var request = new ObjectNotificationApplication(model.NotificationId, date, model.ReasonForObjection);
             await mediator.SendAsync(request);
+        }
+
+        private async Task<bool> ConsentDatesAreValid(NotificationAssessmentDecisionViewModel model)
+        {
+            bool areValid = true;
+            var data = await mediator.SendAsync(new GetNotificationAssessmentDecisionData(model.NotificationId));
+
+            if (model.ConsentedDate.AsDateTime() > DateTime.UtcNow)
+            {
+                ModelState.AddModelError("ConsentedDate", "The 'decision made' date cannot be in the future. Please enter a different date.");
+                areValid = false;
+            }
+
+            if (model.ConsentedDate.AsDateTime() < data.AcknowledgedOnDate)
+            {
+                ModelState.AddModelError("ConsentedDate", "The 'decision made' date cannot be before the 'acknowledged on' date. Please enter a different date.");
+                areValid = false;
+            }
+
+            if (model.ConsentValidFromDate.AsDateTime() > DateTime.UtcNow)
+            {
+                ModelState.AddModelError("ConsentValidFromDate", "The 'valid from' date cannot be in the future. Please enter a different date.");
+                areValid = false;
+            }
+
+            if (model.ConsentValidFromDate.AsDateTime() < data.AcknowledgedOnDate)
+            {
+                ModelState.AddModelError("ConsentValidFromDate", "The 'valid from' date cannot be before the 'acknowledged on' date. Please enter a different date.");
+                areValid = false;
+            }
+
+            if (model.ConsentValidToDate.AsDateTime() <= DateTime.Today)
+            {
+                ModelState.AddModelError("ConsentValidToDate", "The 'valid to' date cannot be in the past or include today’s date. Please enter the correct future date.");
+                areValid = false;
+            }
+
+            DateTime validFromDate = model.ConsentValidFromDate.AsDateTime().GetValueOrDefault();
+
+            if (data.IsPreconsented && model.ConsentValidToDate.AsDateTime() > validFromDate.AddYears(3))
+            {
+                ModelState.AddModelError("ConsentValidToDate", "This 'valid to' date cannot be more than three calendar years away from the 'valid from' date. Please enter a different date.");
+                areValid = false;
+            }
+
+            if ((!data.IsPreconsented) && model.ConsentValidToDate.AsDateTime() > validFromDate.AddYears(1))
+            {
+                ModelState.AddModelError("ConsentValidToDate", "This 'valid to' date cannot be more than one calendar year away from the 'valid from' date. Please enter a different date.");
+                areValid = false;
+            }
+
+            return areValid;
         }
     }
 }
