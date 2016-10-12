@@ -1037,6 +1037,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>AddressBookResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Areas\AdminExportAssessment\Controllers\DecisionControllerResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DecisionControllerResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Areas\AdminExportAssessment\Controllers\MarkAsInterimController.cs" />
     <Compile Include="Areas\AdminExportAssessment\Controllers\OverviewController.cs" />
     <Compile Include="Areas\AdminExportAssessment\ViewModels\MarkAsInterimViewModel.cs" />
@@ -2771,6 +2776,10 @@
     <Folder Include="Areas\FinancialGuarantee\Views\Shared\" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Areas\AdminExportAssessment\Controllers\DecisionControllerResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>DecisionControllerResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Areas\AdminExportAssessment\Views\Decision\DecisionResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>DecisionResources.Designer.cs</LastGenOutput>

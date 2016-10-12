@@ -118,31 +118,31 @@
 
             if (model.ConsentedDate.AsDateTime() > DateTime.UtcNow)
             {
-                ModelState.AddModelError("ConsentedDate", "The 'decision made' date cannot be in the future. Please enter a different date.");
+                ModelState.AddModelError("ConsentedDate", DecisionControllerResources.ConsentedNotInFuture);
                 areValid = false;
             }
 
             if (model.ConsentedDate.AsDateTime() < data.AcknowledgedOnDate)
             {
-                ModelState.AddModelError("ConsentedDate", "The 'decision made' date cannot be before the 'acknowledged on' date. Please enter a different date.");
+                ModelState.AddModelError("ConsentedDate", DecisionControllerResources.ConsentedNotBeforeAcknowledged);
                 areValid = false;
             }
 
             if (model.ConsentValidFromDate.AsDateTime() > DateTime.UtcNow)
             {
-                ModelState.AddModelError("ConsentValidFromDate", "The 'valid from' date cannot be in the future. Please enter a different date.");
+                ModelState.AddModelError("ConsentValidFromDate", DecisionControllerResources.ValidFromNotInFuture);
                 areValid = false;
             }
 
             if (model.ConsentValidFromDate.AsDateTime() < data.AcknowledgedOnDate)
             {
-                ModelState.AddModelError("ConsentValidFromDate", "The 'valid from' date cannot be before the 'acknowledged on' date. Please enter a different date.");
+                ModelState.AddModelError("ConsentValidFromDate", DecisionControllerResources.ValidFromNotBeforeAcknowledged);
                 areValid = false;
             }
 
             if (model.ConsentValidToDate.AsDateTime() <= DateTime.Today)
             {
-                ModelState.AddModelError("ConsentValidToDate", "The 'valid to' date cannot be in the past or include today’s date. Please enter the correct future date.");
+                ModelState.AddModelError("ConsentValidToDate", DecisionControllerResources.ValidToMustBeInFuture);
                 areValid = false;
             }
 
@@ -150,13 +150,13 @@
 
             if (data.IsPreconsented && model.ConsentValidToDate.AsDateTime() > validFromDate.AddYears(3))
             {
-                ModelState.AddModelError("ConsentValidToDate", "This 'valid to' date cannot be more than three calendar years away from the 'valid from' date. Please enter a different date.");
+                ModelState.AddModelError("ConsentValidToDate", DecisionControllerResources.ValidFromPreconsented);
                 areValid = false;
             }
 
             if ((!data.IsPreconsented) && model.ConsentValidToDate.AsDateTime() > validFromDate.AddYears(1))
             {
-                ModelState.AddModelError("ConsentValidToDate", "This 'valid to' date cannot be more than one calendar year away from the 'valid from' date. Please enter a different date.");
+                ModelState.AddModelError("ConsentValidToDate", DecisionControllerResources.ValidFromNotPreconsented);
                 areValid = false;
             }
 
