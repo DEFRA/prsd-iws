@@ -1,3 +1,14 @@
 .no-js-hidden {
     display: none;
 }
+
+// Hide, only when JavaScript is enabled
+.js-enabled .js-hidden {
+  display: none;
+}
+
+// Hide for both screenreaders and browsers
+.hidden {
+  display: none;
+  visibility: hidden;
+}
