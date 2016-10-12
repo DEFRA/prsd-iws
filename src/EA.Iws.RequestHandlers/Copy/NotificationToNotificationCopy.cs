@@ -25,8 +25,6 @@
                 .SetValue(source, destination.CompetentAuthority, null);
             typeof(NotificationApplication).GetProperty("NotificationType")
                 .SetValue(source, destination.NotificationType, null);
-            typeof(NotificationApplication).GetProperty("Charge")
-                .SetValue(source, destination.Charge, null);
 
             // This should not be needed however is a precaution to prevent overwriting the source data.
             typeof(Entity).GetProperty("Id").SetValue(source, Guid.Empty, null);

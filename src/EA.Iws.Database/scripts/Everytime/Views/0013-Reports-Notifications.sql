@@ -28,7 +28,7 @@ AS
         C.[To] AS [ConsentTo],
         FC.[AllFacilitiesPreconsented] AS [Preconsented],
         'Export' AS [ImportOrExport],
-        CASE WHEN N.Charge IS NULL THEN (SELECT Price FROM [Reports].[PricingInfo](N.Id)) ELSE N.Charge END AS [Charge]
+        (SELECT Price FROM [Reports].[PricingInfo](N.Id)) AS [Charge]
 
     FROM		[Notification].[Notification] AS N
 

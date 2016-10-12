@@ -452,7 +452,6 @@
     <Compile Include="Notification\NotificationProgressService.cs" />
     <Compile Include="Notification\ResubmitNotificationHandler.cs" />
     <Compile Include="Notification\RecordUserChange.cs" />
-    <Compile Include="Notification\SetChargeHandler.cs" />
     <Compile Include="Authorization\AuthorizeActivityHandler.cs" />
     <Compile Include="TransitState\DeleteCustomsOfficesWhenAllTransitStatesInEU.cs" />
     <Compile Include="TransportRoute\GetAllCountriesHavingCompetentAuthoritiesHandler.cs" />

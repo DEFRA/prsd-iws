@@ -52,18 +52,11 @@
 
         public bool? WasteRecoveryInformationProvidedByImporter { get; private set; }
 
-        public decimal? Charge { get; private set; }
-
         public void SetWasteRecoveryInformationProvider(ProvidedBy providedBy)
         {
             this.WasteRecoveryInformationProvidedByImporter = providedBy == ProvidedBy.Importer;
 
             RaiseEvent(new ProviderChangedEvent(this.Id, providedBy));
-        }
-
-        public void SetCharge(decimal charge)
-        {
-            Charge = charge;
         }
 
         public void ChangeUser(Guid newUserId)
