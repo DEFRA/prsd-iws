@@ -128,12 +128,6 @@
                 areValid = false;
             }
 
-            if (model.ConsentValidFromDate.AsDateTime() > DateTime.UtcNow)
-            {
-                ModelState.AddModelError("ConsentValidFromDate", DecisionControllerResources.ValidFromNotInFuture);
-                areValid = false;
-            }
-
             if (model.ConsentValidFromDate.AsDateTime() < data.AcknowledgedOnDate)
             {
                 ModelState.AddModelError("ConsentValidFromDate", DecisionControllerResources.ValidFromNotBeforeAcknowledged);
@@ -150,13 +144,13 @@
 
             if (data.IsPreconsented && model.ConsentValidToDate.AsDateTime() > validFromDate.AddYears(3))
             {
-                ModelState.AddModelError("ConsentValidToDate", DecisionControllerResources.ValidFromPreconsented);
+                ModelState.AddModelError("ConsentValidToDate", DecisionControllerResources.ValidToPreconsented);
                 areValid = false;
             }
 
             if ((!data.IsPreconsented) && model.ConsentValidToDate.AsDateTime() > validFromDate.AddYears(1))
             {
-                ModelState.AddModelError("ConsentValidToDate", DecisionControllerResources.ValidFromNotPreconsented);
+                ModelState.AddModelError("ConsentValidToDate", DecisionControllerResources.ValidToNotPreconsented);
                 areValid = false;
             }
 

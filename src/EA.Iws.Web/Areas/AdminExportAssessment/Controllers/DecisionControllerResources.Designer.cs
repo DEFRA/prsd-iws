@@ -88,38 +88,29 @@ namespace EA.Iws.Web.Areas.AdminExportAssessment.Controllers {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The &apos;valid from&apos; date cannot be in the future. Please enter a different date..
+        ///   Looks up a localized string similar to The &apos;valid to&apos; date cannot be in the past or include today’s date. Please enter the correct future date..
         /// </summary>
-        public static string ValidFromNotInFuture {
+        public static string ValidToMustBeInFuture {
             get {
-                return ResourceManager.GetString("ValidFromNotInFuture", resourceCulture);
+                return ResourceManager.GetString("ValidToMustBeInFuture", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to This &apos;valid to&apos; date cannot be more than one calendar year away from the &apos;valid from&apos; date. Please enter a different date..
         /// </summary>
-        public static string ValidFromNotPreconsented {
+        public static string ValidToNotPreconsented {
             get {
-                return ResourceManager.GetString("ValidFromNotPreconsented", resourceCulture);
+                return ResourceManager.GetString("ValidToNotPreconsented", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to This &apos;valid to&apos; date cannot be more than three calendar years away from the &apos;valid from&apos; date. Please enter a different date..
         /// </summary>
-        public static string ValidFromPreconsented {
+        public static string ValidToPreconsented {
             get {
-                return ResourceManager.GetString("ValidFromPreconsented", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The &apos;valid to&apos; date cannot be in the past or include today’s date. Please enter the correct future date..
-        /// </summary>
-        public static string ValidToMustBeInFuture {
-            get {
-                return ResourceManager.GetString("ValidToMustBeInFuture", resourceCulture);
+                return ResourceManager.GetString("ValidToPreconsented", resourceCulture);
             }
         }
     }
