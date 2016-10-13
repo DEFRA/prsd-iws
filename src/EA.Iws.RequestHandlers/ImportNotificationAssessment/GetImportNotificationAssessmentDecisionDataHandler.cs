@@ -10,20 +10,25 @@
     internal class GetImportNotificationAssessmentDecisionDataHandler : IRequestHandler<GetImportNotificationAssessmentDecisionData, ImportNotificationAssessmentDecisionData>
     {
         private readonly IImportNotificationAssessmentRepository assessmentRepository;
+        private readonly IFacilityRepository facilityRepository;
 
-        public GetImportNotificationAssessmentDecisionDataHandler(IImportNotificationAssessmentRepository assessmentRepository)
+        public GetImportNotificationAssessmentDecisionDataHandler(IImportNotificationAssessmentRepository assessmentRepository, IFacilityRepository facilityRepository)
         {
             this.assessmentRepository = assessmentRepository;
+            this.facilityRepository = facilityRepository;
         }
 
         public async Task<ImportNotificationAssessmentDecisionData> HandleAsync(GetImportNotificationAssessmentDecisionData message)
         {
+            var isPreconsented = (await facilityRepository.GetByNotificationId(message.ImportNotificationId)).AllFacilitiesPreconsented;
             var assessment = await assessmentRepository.GetByNotification(message.ImportNotificationId);
 
             return new ImportNotificationAssessmentDecisionData
             {
                 Status = assessment.Status,
-                AvailableDecisions = assessment.GetAvailableDecisions().ToArray()
+                AvailableDecisions = assessment.GetAvailableDecisions().ToArray(),
+                AcknowledgedOnDate = assessment.Dates.AcknowledgedDate.GetValueOrDefault(),
+                IsPreconsented = isPreconsented
             };
         }
     }

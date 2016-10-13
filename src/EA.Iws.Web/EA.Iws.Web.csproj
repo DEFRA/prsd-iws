@@ -1063,6 +1063,11 @@
     <Compile Include="Areas\AdminImportAssessment\Controllers\AccountManagementController.cs" />
     <Compile Include="Areas\AdminImportAssessment\Controllers\AssignAreaController.cs" />
     <Compile Include="Areas\AdminImportAssessment\Controllers\DecisionController.cs" />
+    <Compile Include="Areas\AdminImportAssessment\Controllers\DecisionControllerResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DecisionControllerResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Areas\AdminImportAssessment\Controllers\FinancialGuaranteeDatesController.cs" />
     <Compile Include="Areas\AdminImportAssessment\Controllers\FinancialGuaranteeDecisionController.cs" />
     <Compile Include="Areas\AdminImportAssessment\Controllers\KeyDatesController.cs" />
@@ -2792,6 +2797,10 @@
     <EmbeddedResource Include="Areas\AdminExportAssessment\Views\Decision\DecisionResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>DecisionResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\AdminImportAssessment\Controllers\DecisionControllerResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>DecisionControllerResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\AdminImportAssessment\ViewModels\Decision\DecisionViewModelResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
