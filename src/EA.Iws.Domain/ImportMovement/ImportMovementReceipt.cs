@@ -14,7 +14,7 @@
 
         public ShipmentQuantityUnits Unit { get; private set; }
 
-        public ImportMovementReceipt()
+        protected ImportMovementReceipt()
         {
         }
 
