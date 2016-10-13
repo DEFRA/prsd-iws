@@ -40,7 +40,14 @@
             switch (model.Decision)
             {
                 case DecisionType.Consent:
-                    await PostConsent(id, model);
+                    if (await ConsentDatesAreValid(id, model))
+                    {
+                        await PostConsent(id, model);
+                    }
+                    else
+                    {
+                        return View(model);
+                    }
                     break;
                 case DecisionType.ConsentWithdraw:
                     await PostConsentWithdrawn(id, model);
@@ -61,31 +68,77 @@
         private async Task PostConsent(Guid id, DecisionViewModel model)
         {
             await mediator.SendAsync(new Consent(id,
-                model.ConsentValidFromDate.AsDateTime().Value,
-                model.ConsentValidToDate.AsDateTime().Value,
+                model.ConsentValidFromDate.AsDateTime().GetValueOrDefault(),
+                model.ConsentValidToDate.AsDateTime().GetValueOrDefault(),
                 model.ConsentConditions,
-                model.ConsentGivenDate.AsDateTime().Value));
+                model.ConsentGivenDate.AsDateTime().GetValueOrDefault()));
         }
 
         private async Task PostConsentWithdrawn(Guid id, DecisionViewModel model)
         {
             await mediator.SendAsync(new WithdrawConsentForImportNotification(id, 
                 model.ReasonsForConsentWithdrawal, 
-                model.ConsentWithdrawnDate.AsDateTime().Value));
+                model.ConsentWithdrawnDate.AsDateTime().GetValueOrDefault()));
         }
 
         private async Task PostObjection(Guid id, DecisionViewModel model)
         {
             await mediator.SendAsync(new ObjectToImportNotification(id, 
                 model.ReasonForObjection, 
-                model.ObjectionDate.AsDateTime().Value));
+                model.ObjectionDate.AsDateTime().GetValueOrDefault()));
         }
 
         private async Task Postwithdrawn(Guid id, DecisionViewModel model)
         {
             await mediator.SendAsync(new WithdrawImportNotification(id,
                 model.ReasonForWithdrawal, 
-                model.WithdrawnDate.AsDateTime().Value));
+                model.WithdrawnDate.AsDateTime().GetValueOrDefault()));
+        }
+
+        private async Task<bool> ConsentDatesAreValid(Guid id, DecisionViewModel model)
+        {
+            bool areValid = true;
+            var data = await mediator.SendAsync(new GetImportNotificationAssessmentDecisionData(id));
+
+            if (model.ConsentGivenDate.AsDateTime() > DateTime.UtcNow)
+            {
+                ModelState.AddModelError("ConsentGivenDate", DecisionControllerResources.ConsentedNotInFuture);
+                areValid = false;
+            }
+
+            if (model.ConsentGivenDate.AsDateTime() < data.AcknowledgedOnDate)
+            {
+                ModelState.AddModelError("ConsentGivenDate", DecisionControllerResources.ConsentedNotBeforeAcknowledged);
+                areValid = false;
+            }
+
+            if (model.ConsentValidFromDate.AsDateTime() < data.AcknowledgedOnDate)
+            {
+                ModelState.AddModelError("ConsentValidFromDate", DecisionControllerResources.ValidFromNotBeforeAcknowledged);
+                areValid = false;
+            }
+
+            if (model.ConsentValidToDate.AsDateTime() <= DateTime.Today)
+            {
+                ModelState.AddModelError("ConsentValidToDate", DecisionControllerResources.ValidToMustBeInFuture);
+                areValid = false;
+            }
+
+            DateTime validFromDate = model.ConsentValidFromDate.AsDateTime().GetValueOrDefault();
+
+            if (data.IsPreconsented && model.ConsentValidToDate.AsDateTime() > validFromDate.AddYears(3))
+            {
+                ModelState.AddModelError("ConsentValidToDate", DecisionControllerResources.ValidFromPreconsented);
+                areValid = false;
+            }
+
+            if ((!data.IsPreconsented) && model.ConsentValidToDate.AsDateTime() > validFromDate.AddYears(1))
+            {
+                ModelState.AddModelError("ConsentValidToDate", DecisionControllerResources.ValidFromNotPreconsented);
+                areValid = false;
+            }
+
+            return areValid;
         }
     }
 }
