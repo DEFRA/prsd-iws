@@ -1,10 +1,13 @@
 ﻿namespace EA.Iws.Requests.ImportNotificationAssessment.Transactions
 {
     using System;
+    using Core.Authorization;
+    using Core.Authorization.Permissions;
     using Prsd.Core;
     using Prsd.Core.Mediator;
 
-    public class AddNotificationRefund : IRequest<bool>, IRequest
+    [RequestAuthorization(ImportNotificationPermissions.CanEditImportNotificationAssessment)]
+    public class AddNotificationRefund : IRequest<bool>
     {
         public AddNotificationRefund(Guid importNotificationId, decimal amount, DateTime date, string comments)
         {

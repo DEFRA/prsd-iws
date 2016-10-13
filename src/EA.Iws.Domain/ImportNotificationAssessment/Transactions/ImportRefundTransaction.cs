@@ -38,11 +38,6 @@
 
             var assessment = await assessmentRepository.GetByNotification(notificationId);
 
-            if (!assessment.Dates.PaymentReceivedDate.HasValue)
-            {
-                throw new InvalidOperationException(string.Format("A refund cannot be made until a payment has been made for notification {0}", notificationId));
-            }
-
             if (date < assessment.Dates.PaymentReceivedDate.Value)
             {
                 throw new InvalidOperationException(string.Format("Refund date cannot be before the payment received date for notification {0}", notificationId));
