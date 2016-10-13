@@ -102,13 +102,34 @@
             {
                 if (string.IsNullOrWhiteSpace(NameOfOfficer))
                 {
-                    yield return new ValidationResult("Please enter the name of the officer", new[] { "NameOfOfficer" });
+                    yield return new ValidationResult(DateInputViewModelResources.NameOfOfficer, new[] { "NameOfOfficer" });
                 }
                 else if (NameOfOfficer.Count() > 256)
                 {
-                    yield return
-                        new ValidationResult("The name of the officer cannot be more than 256 characters in length",
-                            new[] { "NameOfOfficer" });
+                    yield return new ValidationResult(DateInputViewModelResources.NameOfOfficerLength, new[] { "NameOfOfficer" });
+                }
+            }
+
+            if (Command == KeyDatesStatusEnum.NotificationAcknowledged)
+            {
+                if (NewDate.AsDateTime() > DateTime.UtcNow)
+                {
+                    yield return new ValidationResult(DateInputViewModelResources.AcknowledgedInFuture, new[] { "NewDate" });
+                }
+
+                if (NotificationReceivedDate == null || PaymentReceivedDate == null || CommencementDate == null ||
+                    NotificationCompleteDate == null || NotificationTransmittedDate == null)
+                {
+                    yield return new ValidationResult(DateInputViewModelResources.AcknowledgedOtherDatesRequired, new[] { "NewDate" });
+                }
+
+                if ((NotificationReceivedDate != null && NewDate.AsDateTime() < NotificationReceivedDate.AsDateTime()) ||
+                    (PaymentReceivedDate != null && NewDate.AsDateTime() < PaymentReceivedDate) ||
+                    (CommencementDate != null && NewDate.AsDateTime() < CommencementDate.AsDateTime()) ||
+                    (NotificationCompleteDate != null && NewDate.AsDateTime() < NotificationCompleteDate.AsDateTime()) ||
+                    (NotificationTransmittedDate != null && NewDate.AsDateTime() < NotificationTransmittedDate.AsDateTime()))
+                {
+                    yield return new ValidationResult(DateInputViewModelResources.AcknowledgedNotBefore, new[] { "NewDate" });
                 }
             }
         }

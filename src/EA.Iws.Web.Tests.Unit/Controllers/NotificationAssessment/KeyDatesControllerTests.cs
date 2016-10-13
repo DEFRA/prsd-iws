@@ -262,8 +262,8 @@
         [Fact]
         public async Task NotificationAcknowledged_ValidInput_NoValidationError()
         {
-            var model = new DateInputViewModel();
-            model.NewDate = new OptionalDateInputViewModel(acknowledgedDate);
+            var model = GetValidViewModel();
+            model.NewDate = new OptionalDateInputViewModel(DateTime.UtcNow);
             model.Command = KeyDatesStatusEnum.NotificationAcknowledged;
 
             var controller = GetMockAssessmentController(model);
@@ -289,8 +289,8 @@
         [Fact]
         public async Task NotificationAcknowledged_ValidInput_CallsClient()
         {
-            var model = new DateInputViewModel();
-            model.NewDate = new OptionalDateInputViewModel(acknowledgedDate);
+            var model = GetValidViewModel();
+            model.NewDate = new OptionalDateInputViewModel(DateTime.UtcNow);
             model.Command = KeyDatesStatusEnum.NotificationAcknowledged;
 
             var controller = GetMockAssessmentController(model);
@@ -301,6 +301,175 @@
                 .That.Matches(p => p.NotificationId == model.NotificationId &&
                                 p.AcknowledgedDate == model.NewDate.AsDateTime().Value)))
                 .MustHaveHappened(Repeated.Exactly.Once);
+        }
+
+        [Fact]
+        public async Task NotificationAcknowledged_InFuture_Invalid()
+        {
+            var model = GetValidViewModel();
+            model.NewDate = new OptionalDateInputViewModel(DateTime.UtcNow.AddDays(1));
+            model.Command = KeyDatesStatusEnum.NotificationAcknowledged;
+
+            var controller = GetMockAssessmentController(model);
+
+            await controller.Index(model);
+
+            Assert.True(controller.ModelState.ContainsKey("NewDate"));
+        }
+
+        [Fact]
+        public async Task NotificationAcknowledged_NotificationReceivedDate_MustBePresent()
+        {
+            var model = GetValidViewModel();
+            model.NotificationAcknowledgedDate = null;
+            model.NotificationReceivedDate = null;
+            model.NewDate = new OptionalDateInputViewModel(DateTime.UtcNow);
+            model.Command = KeyDatesStatusEnum.NotificationAcknowledged;
+
+            var controller = GetMockAssessmentController(model);
+
+            await controller.Index(model);
+
+            Assert.True(controller.ModelState.ContainsKey("NewDate"));
+        }
+
+        [Fact]
+        public async Task NotificationAcknowledged_PaymentReceivedDate_MustBePresent()
+        {
+            var model = GetValidViewModel();
+            model.NotificationAcknowledgedDate = null;
+            model.PaymentReceivedDate = null;
+            model.NewDate = new OptionalDateInputViewModel(DateTime.UtcNow);
+            model.Command = KeyDatesStatusEnum.NotificationAcknowledged;
+
+            var controller = GetMockAssessmentController(model);
+
+            await controller.Index(model);
+
+            Assert.True(controller.ModelState.ContainsKey("NewDate"));
+        }
+
+        [Fact]
+        public async Task NotificationAcknowledged_AssessmentStartedDate_MustBePresent()
+        {
+            var model = GetValidViewModel();
+            model.NotificationAcknowledgedDate = null;
+            model.CommencementDate = null;
+            model.NewDate = new OptionalDateInputViewModel(DateTime.UtcNow);
+            model.Command = KeyDatesStatusEnum.NotificationAcknowledged;
+
+            var controller = GetMockAssessmentController(model);
+
+            await controller.Index(model);
+
+            Assert.True(controller.ModelState.ContainsKey("NewDate"));
+        }
+
+        [Fact]
+        public async Task NotificationAcknowledged_NotificationCompleteDate_MustBePresent()
+        {
+            var model = GetValidViewModel();
+            model.NotificationAcknowledgedDate = null;
+            model.NotificationCompleteDate = null;
+            model.NewDate = new OptionalDateInputViewModel(DateTime.UtcNow);
+            model.Command = KeyDatesStatusEnum.NotificationAcknowledged;
+
+            var controller = GetMockAssessmentController(model);
+
+            await controller.Index(model);
+
+            Assert.True(controller.ModelState.ContainsKey("NewDate"));
+        }
+
+        [Fact]
+        public async Task NotificationAcknowledged_TransmittedOnDate_MustBePresent()
+        {
+            var model = GetValidViewModel();
+            model.NotificationAcknowledgedDate = null;
+            model.NotificationTransmittedDate = null;
+            model.NewDate = new OptionalDateInputViewModel(DateTime.UtcNow);
+            model.Command = KeyDatesStatusEnum.NotificationAcknowledged;
+
+            var controller = GetMockAssessmentController(model);
+
+            await controller.Index(model);
+
+            Assert.True(controller.ModelState.ContainsKey("NewDate"));
+        }
+
+        [Fact]
+        public async Task NotificationAcknowledged_NotBefore_NotificationReceivedDate()
+        {
+            var model = GetValidViewModel();
+            model.NotificationAcknowledgedDate = null;
+            model.NewDate = new OptionalDateInputViewModel(new DateTime(2015, 7, 2));
+            model.Command = KeyDatesStatusEnum.NotificationAcknowledged;
+
+            var controller = GetMockAssessmentController(model);
+
+            await controller.Index(model);
+
+            Assert.True(controller.ModelState.ContainsKey("NewDate"));
+        }
+
+        [Fact]
+        public async Task NotificationAcknowledged_NotBefore_PaymentReceivedDate()
+        {
+            var model = GetValidViewModel();
+            model.NotificationAcknowledgedDate = null;
+            model.NewDate = new OptionalDateInputViewModel(new DateTime(2015, 8, 1));
+            model.Command = KeyDatesStatusEnum.NotificationAcknowledged;
+
+            var controller = GetMockAssessmentController(model);
+
+            await controller.Index(model);
+
+            Assert.True(controller.ModelState.ContainsKey("NewDate"));
+        }
+
+        [Fact]
+        public async Task NotificationAcknowledged_NotBefore_AssessmentStartedDate()
+        {
+            var model = GetValidViewModel();
+            model.NotificationAcknowledgedDate = null;
+            model.NewDate = new OptionalDateInputViewModel(new DateTime(2015, 8, 2));
+            model.Command = KeyDatesStatusEnum.NotificationAcknowledged;
+
+            var controller = GetMockAssessmentController(model);
+
+            await controller.Index(model);
+
+            Assert.True(controller.ModelState.ContainsKey("NewDate"));
+        }
+
+        [Fact]
+        public async Task NotificationAcknowledged_NotBefore_NotificationCompleteDate()
+        {
+            var model = GetValidViewModel();
+            model.NotificationAcknowledgedDate = null;
+            model.NewDate = new OptionalDateInputViewModel(new DateTime(2015, 8, 19));
+            model.Command = KeyDatesStatusEnum.NotificationAcknowledged;
+
+            var controller = GetMockAssessmentController(model);
+
+            await controller.Index(model);
+
+            Assert.True(controller.ModelState.ContainsKey("NewDate"));
+        }
+
+        [Fact]
+        public async Task NotificationAcknowledged_NotBefore_TransmittedOnDate()
+        {
+            var model = GetValidViewModel();
+            model.NotificationAcknowledgedDate = null;
+            model.NewDate = new OptionalDateInputViewModel(new DateTime(2015, 8, 20));
+            model.Command = KeyDatesStatusEnum.NotificationAcknowledged;
+
+            var controller = GetMockAssessmentController(model);
+
+            await controller.Index(model);
+
+            Assert.True(controller.ModelState.ContainsKey("NewDate"));
         }
 
         private DateInputViewModel GetDecisionRequiredDateModel(int day, int month, int year)
@@ -335,6 +504,20 @@
             return "A string longer than 256 characters asdfasdf asdfasdf asfasdf asdfasdf asdfasdfs sdfas alksdfjh asdkfhj " +
                    "asdklfhj  alksdhf alskdf asdf asd fa sdf a sdf as df asdfa as df asdf a sdf asdf  asdf a sdf asdf asdf " +
                    "asdf asdf asd fa sdf as df asdf a sdf asdfasdfasd7";
+        }
+
+        private DateInputViewModel GetValidViewModel()
+        {
+            var model = new DateInputViewModel();
+
+            model.NotificationReceivedDate = new OptionalDateInputViewModel(notificationReceivedDate);
+            model.PaymentReceivedDate = paymentReceivedDate;
+            model.CommencementDate = new OptionalDateInputViewModel(commencementDate);
+            model.NotificationCompleteDate = new OptionalDateInputViewModel(completeDate);
+            model.NotificationTransmittedDate = new OptionalDateInputViewModel(transmittedDate);
+            model.NewDate = new OptionalDateInputViewModel(DateTime.UtcNow.AddDays(1));
+
+            return model;
         }
     }
 }
