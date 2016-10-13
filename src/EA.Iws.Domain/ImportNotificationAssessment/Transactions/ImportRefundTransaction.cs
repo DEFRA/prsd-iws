@@ -24,7 +24,7 @@
 
         public async Task Save(Guid notificationId, DateTime date, decimal amount, string comments)
         {
-            if (date > SystemTime.Now)
+            if (date > SystemTime.UtcNow.Date)
             {
                 throw new InvalidOperationException(string.Format("Refund date cannot be in the future for notification {0}", notificationId));
             }
