@@ -131,7 +131,7 @@
         }
 
         [Fact]
-        public async Task ValidFromDate_InFuture_Invalid()
+        public async Task ValidFromDate_InFuture_Valid()
         {
             var model = new NotificationAssessmentDecisionViewModel();
             model.SelectedDecision = DecisionType.Consent;
@@ -139,7 +139,7 @@
 
             await decisionController.Index(notificationId, model);
 
-            Assert.True(decisionController.ModelState.ContainsKey("ConsentValidFromDate"));
+            Assert.True(decisionController.ModelState.IsValid);
         }
 
         [Fact]

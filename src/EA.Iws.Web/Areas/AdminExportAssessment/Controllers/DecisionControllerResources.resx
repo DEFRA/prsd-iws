@@ -126,16 +126,13 @@
   <data name="ValidFromNotBeforeAcknowledged" xml:space="preserve">
     <value>The 'valid from' date cannot be before the 'acknowledged on' date. Please enter a different date.</value>
   </data>
-  <data name="ValidFromNotInFuture" xml:space="preserve">
-    <value>The 'valid from' date cannot be in the future. Please enter a different date.</value>
-  </data>
-  <data name="ValidFromNotPreconsented" xml:space="preserve">
-    <value>This 'valid to' date cannot be more than one calendar year away from the 'valid from' date. Please enter a different date.</value>
-  </data>
-  <data name="ValidFromPreconsented" xml:space="preserve">
-    <value>This 'valid to' date cannot be more than three calendar years away from the 'valid from' date. Please enter a different date.</value>
-  </data>
   <data name="ValidToMustBeInFuture" xml:space="preserve">
     <value>The 'valid to' date cannot be in the past or include today’s date. Please enter the correct future date.</value>
+  </data>
+  <data name="ValidToNotPreconsented" xml:space="preserve">
+    <value>This 'valid to' date cannot be more than one calendar year away from the 'valid from' date. Please enter a different date.</value>
+  </data>
+  <data name="ValidToPreconsented" xml:space="preserve">
+    <value>This 'valid to' date cannot be more than three calendar years away from the 'valid from' date. Please enter a different date.</value>
   </data>
 </root>
