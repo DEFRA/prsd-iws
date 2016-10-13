@@ -18,7 +18,7 @@
 
         public GetKeyDatesHandler(IImportNotificationAssessmentRepository notificationAssessmentRepository,
             IInterimStatusRepository interimStatusRepository,
-           DecisionRequiredBy decisionRequiredBy,
+            DecisionRequiredBy decisionRequiredBy,
             IImportNotificationTransactionCalculator transactionCalculator)
         {
             this.notificationAssessmentRepository = notificationAssessmentRepository;
