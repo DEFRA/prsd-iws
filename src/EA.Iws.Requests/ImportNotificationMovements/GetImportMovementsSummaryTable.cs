@@ -3,7 +3,6 @@
     using System;
     using Core.Authorization;
     using Core.Authorization.Permissions;
-    using Core.ImportMovement;
     using Core.ImportNotificationMovements;
     using Prsd.Core.Mediator;
 
@@ -12,12 +11,9 @@
     {
         public Guid ImportNotificationId { get; private set; }
 
-        public ImportMovementStatus? Status { get; private set; }
-
-        public GetImportMovementsSummaryTable(Guid importNotificationId, ImportMovementStatus? status)
+        public GetImportMovementsSummaryTable(Guid importNotificationId)
         {
             ImportNotificationId = importNotificationId;
-            Status = status;
         }
     }
 }

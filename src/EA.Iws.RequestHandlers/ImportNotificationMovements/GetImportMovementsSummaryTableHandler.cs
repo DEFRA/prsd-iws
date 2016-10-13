@@ -30,11 +30,6 @@
             var type = await notificationRepository.GetTypeById(message.ImportNotificationId);
             var tableData = await tableDataRepository.GetById(message.ImportNotificationId);
 
-            if (message.Status.HasValue)
-            {
-                tableData = tableData.Where(u => u.Status == message.Status);
-            }
-
             var movementsSummary = new MovementsSummary
             {
                 ImportNotificationId = message.ImportNotificationId,

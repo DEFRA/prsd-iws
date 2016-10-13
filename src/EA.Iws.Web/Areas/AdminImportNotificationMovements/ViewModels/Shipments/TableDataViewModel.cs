@@ -1,7 +1,6 @@
 ﻿namespace EA.Iws.Web.Areas.AdminImportNotificationMovements.ViewModels.Shipments
 {
     using System;
-    using Core.ImportMovement;
     using Core.ImportNotificationMovements;
     using Core.Shared;
 
@@ -17,7 +16,6 @@
             Unit = data.Unit;
             Rejected = data.Rejected;
             RecoveredOrDisposedOf = data.RecoveredOrDisposedOf;
-            Status = data.Status;
         }
 
         public int Number { get; set; }
@@ -37,7 +35,5 @@
         public ShipmentQuantityUnits? Unit { get; set; }
 
         public DateTime? RecoveredOrDisposedOf { get; set; }
-
-        public ImportMovementStatus Status { get; set; }
     }
 }

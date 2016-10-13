@@ -22,8 +22,6 @@
 
         public DateTime? RecoveredOrDisposedOf { get; private set; }
 
-        public ImportMovementStatus Status { get; private set; }
-
         public static MovementTableData Load(ImportMovement movement,
             ImportMovementReceipt movementReceipt,
             ImportMovementRejection movementRejection,
