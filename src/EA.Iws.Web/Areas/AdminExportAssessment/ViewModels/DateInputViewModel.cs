@@ -132,6 +132,26 @@
                     yield return new ValidationResult(DateInputViewModelResources.AcknowledgedNotBefore, new[] { "NewDate" });
                 }
             }
+
+            if (Command == KeyDatesStatusEnum.NotificationComplete)
+            {
+                if (NewDate.AsDateTime() > DateTime.UtcNow)
+                {
+                    yield return new ValidationResult(DateInputViewModelResources.CompleteInFuture, new[] { "NewDate" });
+                }
+
+                if (NotificationReceivedDate == null || PaymentReceivedDate == null || CommencementDate == null)
+                {
+                    yield return new ValidationResult(DateInputViewModelResources.CompleteOtherDatesRequired, new[] { "NewDate" });
+                }
+
+                if ((NotificationReceivedDate != null && NewDate.AsDateTime() < NotificationReceivedDate.AsDateTime()) ||
+                    (PaymentReceivedDate != null && NewDate.AsDateTime() < PaymentReceivedDate) ||
+                    (CommencementDate != null && NewDate.AsDateTime() < CommencementDate.AsDateTime()))
+                {
+                    yield return new ValidationResult(DateInputViewModelResources.CompleteNotBefore, new[] { "NewDate" });
+                }
+            }
         }
     }
 }
