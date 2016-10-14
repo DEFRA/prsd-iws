@@ -18,7 +18,7 @@
     <div class="form-group">
         @Html.EditorFor(m => m.PhysicalCharacteristics)
         <fieldset>
-            <div class="form-group form-group-compound">
+            <div id="list-item-other-container" class="form-group form-group-compound">
                 <label class="block-label" for="other-option-check" data-target="other-option">
                     @Html.CheckBoxFor(m => m.OtherSelected, new { id = "other-option-check" })
                     @((int)PhysicalCharacteristicType.Other) - @PhysicalCharacteristicsResources.Other
