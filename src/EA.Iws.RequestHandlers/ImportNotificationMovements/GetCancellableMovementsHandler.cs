@@ -25,7 +25,8 @@
         {
             return (await movementRepository.GetPrenotifiedForNotification(message.ImportNotificationId))
                 .Where(x => !x.IsCancelled)
-                .Select(x => mapper.Map<ImportCancellableMovement>(x));
+                .Select(x => mapper.Map<ImportCancellableMovement>(x))
+                .ToArray();
         }
     }
 }
