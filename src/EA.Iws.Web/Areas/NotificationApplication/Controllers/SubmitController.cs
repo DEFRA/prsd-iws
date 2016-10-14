@@ -4,6 +4,7 @@
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Core.NotificationAssessment;
+    using Infrastructure;
     using Prsd.Core.Mediator;
     using Requests.Notification;
     using Requests.NotificationAssessment;
@@ -51,6 +52,12 @@
             }
 
             await mediator.SendAsync(new SubmitNotification(model.Id));
+
+            if (User.IsInternalUser())
+            {
+                return RedirectToAction("Index", "KeyDates", new { area = "AdminExportAssessment", id = model.Id });
+            }
+
             return RedirectToAction("Index", "WhatToDoNext", new { id = model.Id });
         }
     }
