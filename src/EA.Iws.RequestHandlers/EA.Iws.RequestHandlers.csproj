@@ -149,6 +149,7 @@
     <Compile Include="Feedback\FeedbackDataRequestHandler.cs" />
     <Compile Include="Feedback\FeedbackInformation.cs" />
     <Compile Include="FinancialGuarantee\GenerateParentCompanyDocumentHandler.cs" />
+    <Compile Include="ImportMovement\Cancel\CancelImportMovementHandler.cs" />
     <Compile Include="ImportMovement\Capture\CreateImportMovementHandler.cs" />
     <Compile Include="ImportMovement\Capture\GetImportMovementDatesHandler.cs" />
     <Compile Include="ImportMovement\Capture\GetImportMovementIdIfExistsHandler.cs" />
@@ -185,6 +186,7 @@
     <Compile Include="ImportNotificationAssessment\Transactions\GetImportNotificationAccountOverviewHandler.cs" />
     <Compile Include="ImportNotificationAssessment\WithdrawConsentForImportNotificationHandler.cs" />
     <Compile Include="ImportNotificationAssessment\WithdrawImportNotificationHandler.cs" />
+    <Compile Include="ImportNotificationMovements\GetCancellableMovementsHandler.cs" />
     <Compile Include="ImportNotificationMovements\GetImportMovementsSummaryHandler.cs" />
     <Compile Include="ImportNotificationMovements\GetImportMovementsSummaryTableHandler.cs" />
     <Compile Include="ImportNotification\CheckImportNumberUniqueHandler.cs" />
@@ -311,6 +313,7 @@
     <Compile Include="Mappings\AddressBook\AddressBookMap.cs" />
     <Compile Include="Mappings\AddressBook\AddressBookRecordMap.cs" />
     <Compile Include="Mappings\ExportNotificationOwnerDisplayMap.cs" />
+    <Compile Include="Mappings\ImportMovement\CancellableMovementMap.cs" />
     <Compile Include="Mappings\ImportMovement\MovementDataMap.cs" />
     <Compile Include="Mappings\ImportMovement\MovementTableDataMap.cs" />
     <Compile Include="Mappings\ImportNotificationAssessment\ConsultationMap.cs" />

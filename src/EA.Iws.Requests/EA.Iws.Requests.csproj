@@ -100,6 +100,7 @@
     <Compile Include="FinancialGuarantee\GenerateParentCompanyDocument.cs" />
     <Compile Include="FinancialGuarantee\GenerateBankGuaranteeDocument.cs" />
     <Compile Include="FinancialGuarantee\GenerateFinancialGuaranteeDocument.cs" />
+    <Compile Include="ImportMovement\Cancel\CancelImportMovement.cs" />
     <Compile Include="ImportMovement\Capture\CreateImportMovement.cs" />
     <Compile Include="ImportMovement\Capture\GetImportMovementDates.cs" />
     <Compile Include="ImportMovement\Capture\GetImportMovementIdIfExists.cs" />
@@ -134,6 +135,7 @@
     <Compile Include="ImportNotificationAssessment\Transactions\GetImportNotificationAccountOverview.cs" />
     <Compile Include="ImportNotificationAssessment\WithdrawConsentForImportNotification.cs" />
     <Compile Include="ImportNotificationAssessment\WithdrawImportNotification.cs" />
+    <Compile Include="ImportNotificationMovements\GetCancellableMovements.cs" />
     <Compile Include="ImportNotificationMovements\GetImportMovementsSummary.cs" />
     <Compile Include="ImportNotificationMovements\GetImportMovementsSummaryTable.cs" />
     <Compile Include="ImportNotification\CompleteDraftImportNotification.cs" />
