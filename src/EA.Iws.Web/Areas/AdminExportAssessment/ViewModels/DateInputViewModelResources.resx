@@ -153,4 +153,13 @@
   <data name="ReceivedInFuture" xml:space="preserve">
     <value>The 'notification received' date cannot be in the future. Please enter a different date.</value>
   </data>
+  <data name="TransmittedInFuture" xml:space="preserve">
+    <value>The 'transmitted on' date cannot be in the future. Please enter a different date.</value>
+  </data>
+  <data name="TransmittedNotBefore" xml:space="preserve">
+    <value>The 'transmitted on' date cannot be before the previous key dates. Please enter a different date.</value>
+  </data>
+  <data name="TransmittedOtherDatesRequired" xml:space="preserve">
+    <value>You need to enter previous key dates before you can continue</value>
+  </data>
 </root>

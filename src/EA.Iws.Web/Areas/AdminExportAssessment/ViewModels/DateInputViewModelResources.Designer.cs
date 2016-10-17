@@ -167,5 +167,32 @@ namespace EA.Iws.Web.Areas.AdminExportAssessment.ViewModels {
                 return ResourceManager.GetString("ReceivedInFuture", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The &apos;transmitted on&apos; date cannot be in the future. Please enter a different date..
+        /// </summary>
+        public static string TransmittedInFuture {
+            get {
+                return ResourceManager.GetString("TransmittedInFuture", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The &apos;transmitted on&apos; date cannot be before the previous key dates. Please enter a different date..
+        /// </summary>
+        public static string TransmittedNotBefore {
+            get {
+                return ResourceManager.GetString("TransmittedNotBefore", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You need to enter previous key dates before you can continue.
+        /// </summary>
+        public static string TransmittedOtherDatesRequired {
+            get {
+                return ResourceManager.GetString("TransmittedOtherDatesRequired", resourceCulture);
+            }
+        }
     }
 }

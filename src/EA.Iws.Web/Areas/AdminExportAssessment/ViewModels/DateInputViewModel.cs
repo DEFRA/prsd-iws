@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using System.Data;
     using System.Linq;
     using Core.Notification;
     using Core.NotificationAssessment;
@@ -151,6 +152,28 @@
                     (CommencementDate != null && NewDate.AsDateTime() < CommencementDate.AsDateTime()))
                 {
                     yield return new ValidationResult(DateInputViewModelResources.CompleteNotBefore, new[] { "NewDate" });
+                }
+            }
+
+            if (Command == KeyDatesStatusEnum.NotificationTransmitted)
+            {
+                if (NewDate.AsDateTime() > DateTime.UtcNow)
+                {
+                    yield return new ValidationResult(DateInputViewModelResources.TransmittedInFuture, new[] { "NewDate" });
+                }
+
+                if (NotificationReceivedDate == null || PaymentReceivedDate == null || CommencementDate == null ||
+                    NotificationCompleteDate == null)
+                {
+                    yield return new ValidationResult(DateInputViewModelResources.TransmittedOtherDatesRequired, new[] { "NewDate" });
+                }
+
+                if ((NotificationReceivedDate != null && NewDate.AsDateTime() < NotificationReceivedDate.AsDateTime()) ||
+                    (PaymentReceivedDate != null && NewDate.AsDateTime() < PaymentReceivedDate) ||
+                    (CommencementDate != null && NewDate.AsDateTime() < CommencementDate.AsDateTime()) ||
+                    (NotificationCompleteDate != null && NewDate.AsDateTime() < NotificationCompleteDate.AsDateTime()))
+                {
+                    yield return new ValidationResult(DateInputViewModelResources.TransmittedNotBefore, new[] { "NewDate" });
                 }
             }
 
