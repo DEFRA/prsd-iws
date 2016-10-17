@@ -123,4 +123,7 @@
   <data name="NotificationReceivedRequired" xml:space="preserve">
     <value>Please enter the date the notification was received</value>
   </data>
+  <data name="ReceivedNotInFuture" xml:space="preserve">
+    <value>The "notification received" date cannot be in the future. Please enter a different date.</value>
+  </data>
 </root>
