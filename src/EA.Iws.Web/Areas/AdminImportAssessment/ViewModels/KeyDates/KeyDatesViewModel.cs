@@ -90,6 +90,21 @@
                 {
                     yield return new ValidationResult(KeyDatesViewModelResources.NameOfOfficerLengthError, new[] { "NameOfOfficer" });
                 }
+
+                if (NewDate.AsDateTime() > DateTime.UtcNow)
+                {
+                    yield return new ValidationResult(KeyDatesViewModelResources.CommencementNotInFuture, new[] { "NewDate" });
+                }
+
+                if (NotificationReceivedDate == null)
+                {
+                    yield return new ValidationResult(KeyDatesViewModelResources.CommencementOthersRequired, new[] { "NewDate" });
+                }
+
+                if ((NotificationReceivedDate != null && NewDate.AsDateTime() < NotificationReceivedDate.AsDateTime()))
+                {
+                    yield return new ValidationResult(KeyDatesViewModelResources.CommencementNotBeforeOthers, new[] { "NewDate" });
+                }
             }
         }
     }

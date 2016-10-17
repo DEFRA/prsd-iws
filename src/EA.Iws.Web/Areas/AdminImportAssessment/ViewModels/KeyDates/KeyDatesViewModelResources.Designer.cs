@@ -71,6 +71,33 @@ namespace EA.Iws.Web.Areas.AdminImportAssessment.ViewModels.KeyDates {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The &apos;assessment started&apos; date cannot be before “notification received” date. Please enter a different date..
+        /// </summary>
+        public static string CommencementNotBeforeOthers {
+            get {
+                return ResourceManager.GetString("CommencementNotBeforeOthers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The &apos;assessment started&apos; date cannot be in the future. Please enter a different date..
+        /// </summary>
+        public static string CommencementNotInFuture {
+            get {
+                return ResourceManager.GetString("CommencementNotInFuture", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You need to enter a &apos;notification received&apos; date before you can continue.
+        /// </summary>
+        public static string CommencementOthersRequired {
+            get {
+                return ResourceManager.GetString("CommencementOthersRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Please enter a valid date.
         /// </summary>
         public static string DateRequiredError {
