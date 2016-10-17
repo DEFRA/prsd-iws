@@ -88,6 +88,33 @@ namespace EA.Iws.Web.Areas.AdminExportAssessment.ViewModels {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The &apos;assessment started&apos; date cannot be in the future. Please enter a different date..
+        /// </summary>
+        public static string CommencedInFuture {
+            get {
+                return ResourceManager.GetString("CommencedInFuture", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The &apos;assessment started&apos; date cannot be before the previous key dates. Please enter a different date..
+        /// </summary>
+        public static string CommencedNotBefore {
+            get {
+                return ResourceManager.GetString("CommencedNotBefore", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You need to enter previous key dates before you can continue.
+        /// </summary>
+        public static string CommencedOtherDatesRequired {
+            get {
+                return ResourceManager.GetString("CommencedOtherDatesRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The &apos;notification complete&apos; date cannot be in the future. Please enter a different date.
         /// </summary>
         public static string CompleteInFuture {

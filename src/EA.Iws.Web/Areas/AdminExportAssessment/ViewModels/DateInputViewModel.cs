@@ -116,6 +116,22 @@
                 {
                     yield return new ValidationResult(DateInputViewModelResources.NameOfOfficerLength, new[] { "NameOfOfficer" });
                 }
+
+                if (NewDate.AsDateTime() > DateTime.UtcNow)
+                {
+                    yield return new ValidationResult(DateInputViewModelResources.CommencedInFuture, new[] { "NewDate" });
+                }
+
+                if (NotificationReceivedDate == null || PaymentReceivedDate == null)
+                {
+                    yield return new ValidationResult(DateInputViewModelResources.CommencedOtherDatesRequired, new[] { "NewDate" });
+                }
+
+                if ((NotificationReceivedDate != null && NewDate.AsDateTime() < NotificationReceivedDate.AsDateTime()) ||
+                    (PaymentReceivedDate != null && NewDate.AsDateTime() < PaymentReceivedDate))
+                {
+                    yield return new ValidationResult(DateInputViewModelResources.CommencedNotBefore, new[] { "NewDate" });
+                }
             }
 
             if (Command == KeyDatesStatusEnum.NotificationComplete)

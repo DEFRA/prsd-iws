@@ -126,6 +126,15 @@
   <data name="AcknowledgedOtherDatesRequired" xml:space="preserve">
     <value>You need to enter previous key dates before you can continue</value>
   </data>
+  <data name="CommencedInFuture" xml:space="preserve">
+    <value>The 'assessment started' date cannot be in the future. Please enter a different date.</value>
+  </data>
+  <data name="CommencedNotBefore" xml:space="preserve">
+    <value>The 'assessment started' date cannot be before the previous key dates. Please enter a different date.</value>
+  </data>
+  <data name="CommencedOtherDatesRequired" xml:space="preserve">
+    <value>You need to enter previous key dates before you can continue</value>
+  </data>
   <data name="CompleteInFuture" xml:space="preserve">
     <value>The 'notification complete' date cannot be in the future. Please enter a different date</value>
   </data>
