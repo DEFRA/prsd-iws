@@ -93,15 +93,33 @@
         }
 
         [Fact]
-        public async Task CompleteCommenced_NotificationReceivedDate_MustBePresent()
+        public async Task Complete_NotificationReceivedDate_MustBePresent()
         {
             await NotificationReceivedDate_MustBePresent(KeyDatesCommand.NotificationComplete);
         }
 
         [Fact]
-        public async Task CompleteCommenced_NotBefore_NotificationReceivedDate()
+        public async Task Complete_NotBefore_NotificationReceivedDate()
         {
             await NotBefore_NotificationReceivedDate(KeyDatesCommand.NotificationComplete);
+        }
+
+        [Fact]
+        public async Task Acknowledged_InFuture_Invalid()
+        {
+            await Date_InFuture_Invalid(KeyDatesCommand.NotificationAcknowledged);
+        }
+
+        [Fact]
+        public async Task Acknowledged_NotificationReceivedDate_MustBePresent()
+        {
+            await NotificationReceivedDate_MustBePresent(KeyDatesCommand.NotificationAcknowledged);
+        }
+
+        [Fact]
+        public async Task Acknowledged_NotBefore_NotificationReceivedDate()
+        {
+            await NotBefore_NotificationReceivedDate(KeyDatesCommand.NotificationAcknowledged);
         }
 
         private async Task NotificationReceivedDate_MustBePresent(KeyDatesCommand command)

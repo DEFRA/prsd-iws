@@ -117,11 +117,20 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AcknowledgedNotBeforeOthers" xml:space="preserve">
+    <value>The 'acknowledged on' date cannot be before 'notification received' date. Please enter a different date.</value>
+  </data>
+  <data name="AcknowledgedNotInFuture" xml:space="preserve">
+    <value>The 'acknowledged on' date cannot be in the future. Please enter a different date.</value>
+  </data>
+  <data name="AcknowledgedOthersRequired" xml:space="preserve">
+    <value>You need to enter a 'notification received' date before you can continue</value>
+  </data>
   <data name="CommencementDate" xml:space="preserve">
     <value>Assessment Started</value>
   </data>
   <data name="CommencementNotBeforeOthers" xml:space="preserve">
-    <value>The 'assessment started' date cannot be before “notification received” date. Please enter a different date.</value>
+    <value>The 'assessment started' date cannot be before 'notification received' date. Please enter a different date.</value>
   </data>
   <data name="CommencementNotInFuture" xml:space="preserve">
     <value>The 'assessment started' date cannot be in the future. Please enter a different date.</value>
@@ -130,7 +139,7 @@
     <value>You need to enter a 'notification received' date before you can continue</value>
   </data>
   <data name="CompletedNotBeforeOthers" xml:space="preserve">
-    <value>The 'notification complete' date cannot be before “notification received” date. Please enter a different date.</value>
+    <value>The 'notification complete' date cannot be before 'notification received' date. Please enter a different date.</value>
   </data>
   <data name="CompletedNotInFuture" xml:space="preserve">
     <value>The 'notification complete' date cannot be in the future. Please enter a different date.</value>

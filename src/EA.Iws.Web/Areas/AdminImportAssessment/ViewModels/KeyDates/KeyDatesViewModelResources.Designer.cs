@@ -62,6 +62,33 @@ namespace EA.Iws.Web.Areas.AdminImportAssessment.ViewModels.KeyDates {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The &apos;acknowledged on&apos; date cannot be before &apos;notification received&apos; date. Please enter a different date..
+        /// </summary>
+        public static string AcknowledgedNotBeforeOthers {
+            get {
+                return ResourceManager.GetString("AcknowledgedNotBeforeOthers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The &apos;acknowledged on&apos; date cannot be in the future. Please enter a different date..
+        /// </summary>
+        public static string AcknowledgedNotInFuture {
+            get {
+                return ResourceManager.GetString("AcknowledgedNotInFuture", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You need to enter a &apos;notification received&apos; date before you can continue.
+        /// </summary>
+        public static string AcknowledgedOthersRequired {
+            get {
+                return ResourceManager.GetString("AcknowledgedOthersRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Assessment Started.
         /// </summary>
         public static string CommencementDate {
@@ -71,7 +98,7 @@ namespace EA.Iws.Web.Areas.AdminImportAssessment.ViewModels.KeyDates {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The &apos;assessment started&apos; date cannot be before “notification received” date. Please enter a different date..
+        ///   Looks up a localized string similar to The &apos;assessment started&apos; date cannot be before &apos;notification received&apos; date. Please enter a different date..
         /// </summary>
         public static string CommencementNotBeforeOthers {
             get {
@@ -98,7 +125,7 @@ namespace EA.Iws.Web.Areas.AdminImportAssessment.ViewModels.KeyDates {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The &apos;notification complete&apos; date cannot be before “notification received” date. Please enter a different date..
+        ///   Looks up a localized string similar to The &apos;notification complete&apos; date cannot be before &apos;notification received&apos; date. Please enter a different date..
         /// </summary>
         public static string CompletedNotBeforeOthers {
             get {
