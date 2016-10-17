@@ -131,5 +131,14 @@ namespace EA.Iws.Web.Areas.AdminExportAssessment.ViewModels {
                 return ResourceManager.GetString("NameOfOfficerLength", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The &apos;notification received&apos; date cannot be in the future. Please enter a different date..
+        /// </summary>
+        public static string ReceivedInFuture {
+            get {
+                return ResourceManager.GetString("ReceivedInFuture", resourceCulture);
+            }
+        }
     }
 }

@@ -141,4 +141,7 @@
   <data name="NameOfOfficerLength" xml:space="preserve">
     <value>The name of the officer cannot be more than 256 characters in length</value>
   </data>
+  <data name="ReceivedInFuture" xml:space="preserve">
+    <value>The 'notification received' date cannot be in the future. Please enter a different date.</value>
+  </data>
 </root>

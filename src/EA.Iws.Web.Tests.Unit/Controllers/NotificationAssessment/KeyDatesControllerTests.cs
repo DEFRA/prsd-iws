@@ -133,6 +133,20 @@
         }
 
         [Fact]
+        public async Task NotificationReceived_InFuture_Invalid()
+        {
+            var model = GetValidViewModel();
+            model.NewDate = new OptionalDateInputViewModel(DateTime.UtcNow.AddDays(1));
+            model.Command = KeyDatesStatusEnum.NotificationReceived;
+
+            var controller = GetMockAssessmentController(model);
+
+            await controller.Index(model);
+
+            Assert.True(controller.ModelState.ContainsKey("NewDate"));
+        }
+
+        [Fact]
         public async Task PaymentReceived_InvalidInput_ValidationError()
         {
             var model = new DateInputViewModel();
