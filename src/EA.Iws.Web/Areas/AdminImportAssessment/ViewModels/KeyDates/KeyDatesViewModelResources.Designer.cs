@@ -98,6 +98,33 @@ namespace EA.Iws.Web.Areas.AdminImportAssessment.ViewModels.KeyDates {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The &apos;notification complete&apos; date cannot be before “notification received” date. Please enter a different date..
+        /// </summary>
+        public static string CompletedNotBeforeOthers {
+            get {
+                return ResourceManager.GetString("CompletedNotBeforeOthers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The &apos;notification complete&apos; date cannot be in the future. Please enter a different date..
+        /// </summary>
+        public static string CompletedNotInFuture {
+            get {
+                return ResourceManager.GetString("CompletedNotInFuture", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You need to enter a &apos;notification received&apos; date before you can continue.
+        /// </summary>
+        public static string CompletedOthersRequired {
+            get {
+                return ResourceManager.GetString("CompletedOthersRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Please enter a valid date.
         /// </summary>
         public static string DateRequiredError {

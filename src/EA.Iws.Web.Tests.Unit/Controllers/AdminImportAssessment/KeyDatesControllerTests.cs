@@ -71,25 +71,46 @@
         [Fact]
         public async Task AssessmentCommenced_InFuture_Invalid()
         {
-            var model = GetValidViewModel();
-            model.NewDate = new OptionalDateInputViewModel(DateTime.UtcNow.AddDays(1));
-            model.Command = KeyDatesCommand.BeginAssessment;
-
-            var controller = GetMockAssessmentController(model);
-
-            await controller.Index(notificationId, model);
-
-            Assert.True(controller.ModelState.ContainsKey("NewDate"));
+            await Date_InFuture_Invalid(KeyDatesCommand.BeginAssessment);
         }
 
         [Fact]
         public async Task AssessmentCommenced_NotificationReceivedDate_MustBePresent()
         {
+            await NotificationReceivedDate_MustBePresent(KeyDatesCommand.BeginAssessment);
+        }
+
+        [Fact]
+        public async Task AssessmentCommenced_NotBefore_NotificationReceivedDate()
+        {
+            await NotBefore_NotificationReceivedDate(KeyDatesCommand.BeginAssessment);
+        }
+
+        [Fact]
+        public async Task Complete_InFuture_Invalid()
+        {
+            await Date_InFuture_Invalid(KeyDatesCommand.NotificationComplete);
+        }
+
+        [Fact]
+        public async Task CompleteCommenced_NotificationReceivedDate_MustBePresent()
+        {
+            await NotificationReceivedDate_MustBePresent(KeyDatesCommand.NotificationComplete);
+        }
+
+        [Fact]
+        public async Task CompleteCommenced_NotBefore_NotificationReceivedDate()
+        {
+            await NotBefore_NotificationReceivedDate(KeyDatesCommand.NotificationComplete);
+        }
+
+        private async Task NotificationReceivedDate_MustBePresent(KeyDatesCommand command)
+        {
             var model = GetValidViewModel();
             model.NotificationCompleteDate = null;
             model.NotificationReceivedDate = null;
             model.NewDate = new OptionalDateInputViewModel(DateTime.UtcNow);
-            model.Command = KeyDatesCommand.BeginAssessment;
+            model.Command = command;
 
             var controller = GetMockAssessmentController(model);
 
@@ -98,13 +119,25 @@
             Assert.True(controller.ModelState.ContainsKey("NewDate"));
         }
 
-        [Fact]
-        public async Task AssessmentCommenced_NotBefore_NotificationReceivedDate()
+        public async Task NotBefore_NotificationReceivedDate(KeyDatesCommand command)
         {
             var model = GetValidViewModel();
             model.NotificationCompleteDate = null;
             model.NewDate = new OptionalDateInputViewModel(new DateTime(2015, 7, 2));
-            model.Command = KeyDatesCommand.BeginAssessment;
+            model.Command = command;
+
+            var controller = GetMockAssessmentController(model);
+
+            await controller.Index(notificationId, model);
+
+            Assert.True(controller.ModelState.ContainsKey("NewDate"));
+        }
+
+        private async Task Date_InFuture_Invalid(KeyDatesCommand command)
+        {
+            var model = GetValidViewModel();
+            model.NewDate = new OptionalDateInputViewModel(DateTime.UtcNow.AddDays(1));
+            model.Command = command;
 
             var controller = GetMockAssessmentController(model);
 

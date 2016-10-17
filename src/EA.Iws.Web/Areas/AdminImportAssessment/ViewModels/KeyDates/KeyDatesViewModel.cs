@@ -106,6 +106,24 @@
                     yield return new ValidationResult(KeyDatesViewModelResources.CommencementNotBeforeOthers, new[] { "NewDate" });
                 }
             }
+
+            if (Command == KeyDatesCommand.NotificationComplete)
+            {
+                if (NewDate.AsDateTime() > DateTime.UtcNow)
+                {
+                    yield return new ValidationResult(KeyDatesViewModelResources.CompletedNotInFuture, new[] { "NewDate" });
+                }
+
+                if (NotificationReceivedDate == null)
+                {
+                    yield return new ValidationResult(KeyDatesViewModelResources.CompletedOthersRequired, new[] { "NewDate" });
+                }
+
+                if ((NotificationReceivedDate != null && NewDate.AsDateTime() < NotificationReceivedDate.AsDateTime()))
+                {
+                    yield return new ValidationResult(KeyDatesViewModelResources.CompletedNotBeforeOthers, new[] { "NewDate" });
+                }
+            }
         }
     }
 }

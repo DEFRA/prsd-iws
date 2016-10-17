@@ -129,6 +129,15 @@
   <data name="CommencementOthersRequired" xml:space="preserve">
     <value>You need to enter a 'notification received' date before you can continue</value>
   </data>
+  <data name="CompletedNotBeforeOthers" xml:space="preserve">
+    <value>The 'notification complete' date cannot be before “notification received” date. Please enter a different date.</value>
+  </data>
+  <data name="CompletedNotInFuture" xml:space="preserve">
+    <value>The 'notification complete' date cannot be in the future. Please enter a different date.</value>
+  </data>
+  <data name="CompletedOthersRequired" xml:space="preserve">
+    <value>You need to enter a 'notification received' date before you can continue</value>
+  </data>
   <data name="DateRequiredError" xml:space="preserve">
     <value>Please enter a valid date</value>
   </data>
