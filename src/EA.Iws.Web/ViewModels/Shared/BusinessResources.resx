@@ -171,4 +171,7 @@
   <data name="FormHint" xml:space="preserve">
     <value>If none of these options apply, please select "Other" and add details</value>
   </data>
+  <data name="OrgNameHint" xml:space="preserve">
+    <value>‘Organisation Name Limited’, for ‘trading as’ names record it as ‘Organisation Name Limited T/A Name of Organisation’</value>
+  </data>
 </root>

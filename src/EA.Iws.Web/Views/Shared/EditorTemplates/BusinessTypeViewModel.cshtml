@@ -19,6 +19,7 @@
 <div class="form-group @Html.Gds().FormGroupClass(m => m.Name)">
     @Html.Gds().LabelFor(m => m.Name)
     @Html.Gds().ValidationMessageFor(m => m.Name)
+    @Html.Gds().HintSpan(BusinessResources.OrgNameHint)
     @if (addressType.HasValue)
     {
         @Html.Gds().TextBoxFor(m => m.Name, new
