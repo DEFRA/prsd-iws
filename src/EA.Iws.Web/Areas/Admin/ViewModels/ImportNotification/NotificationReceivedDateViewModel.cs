@@ -1,5 +1,6 @@
 ﻿namespace EA.Iws.Web.Areas.Admin.ViewModels.ImportNotification
 {
+    using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using Infrastructure.Validation;
@@ -20,7 +21,10 @@
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
-            return new ValidationResult[0];
+            if (NotificationReceived.AsDateTime() > DateTime.UtcNow)
+            {
+                yield return new ValidationResult(NotificationReceivedDateViewModelResources.ReceivedNotInFuture, new[] { "NotificationReceived" });
+            }
         }
     }
 }

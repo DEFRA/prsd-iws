@@ -153,6 +153,7 @@
   <ItemGroup>
     <Compile Include="Controllers\AccountControllerTests.cs" />
     <Compile Include="Controllers\AdminImportAssessment\DecisionControllerTests.cs" />
+    <Compile Include="Controllers\AdminImportAssessment\KeyDatesControllerTests.cs" />
     <Compile Include="Controllers\Admin\AdminRegistrationControllerTests.cs" />
     <Compile Include="Controllers\Admin\HomeControllerTests.cs" />
     <Compile Include="Controllers\Admin\ImportNotificationControllerTests.cs" />

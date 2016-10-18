@@ -90,6 +90,57 @@
                 {
                     yield return new ValidationResult(KeyDatesViewModelResources.NameOfOfficerLengthError, new[] { "NameOfOfficer" });
                 }
+
+                if (NewDate.AsDateTime() > DateTime.UtcNow)
+                {
+                    yield return new ValidationResult(KeyDatesViewModelResources.CommencementNotInFuture, new[] { "NewDate" });
+                }
+
+                if (NotificationReceivedDate == null)
+                {
+                    yield return new ValidationResult(KeyDatesViewModelResources.CommencementOthersRequired, new[] { "NewDate" });
+                }
+
+                if ((NotificationReceivedDate != null && NewDate.AsDateTime() < NotificationReceivedDate.AsDateTime()))
+                {
+                    yield return new ValidationResult(KeyDatesViewModelResources.CommencementNotBeforeOthers, new[] { "NewDate" });
+                }
+            }
+
+            if (Command == KeyDatesCommand.NotificationComplete)
+            {
+                if (NewDate.AsDateTime() > DateTime.UtcNow)
+                {
+                    yield return new ValidationResult(KeyDatesViewModelResources.CompletedNotInFuture, new[] { "NewDate" });
+                }
+
+                if (NotificationReceivedDate == null)
+                {
+                    yield return new ValidationResult(KeyDatesViewModelResources.CompletedOthersRequired, new[] { "NewDate" });
+                }
+
+                if ((NotificationReceivedDate != null && NewDate.AsDateTime() < NotificationReceivedDate.AsDateTime()))
+                {
+                    yield return new ValidationResult(KeyDatesViewModelResources.CompletedNotBeforeOthers, new[] { "NewDate" });
+                }
+            }
+
+            if (Command == KeyDatesCommand.NotificationAcknowledged)
+            {
+                if (NewDate.AsDateTime() > DateTime.UtcNow)
+                {
+                    yield return new ValidationResult(KeyDatesViewModelResources.AcknowledgedNotInFuture, new[] { "NewDate" });
+                }
+
+                if (NotificationReceivedDate == null)
+                {
+                    yield return new ValidationResult(KeyDatesViewModelResources.AcknowledgedOthersRequired, new[] { "NewDate" });
+                }
+
+                if ((NotificationReceivedDate != null && NewDate.AsDateTime() < NotificationReceivedDate.AsDateTime()))
+                {
+                    yield return new ValidationResult(KeyDatesViewModelResources.AcknowledgedNotBeforeOthers, new[] { "NewDate" });
+                }
             }
         }
     }
