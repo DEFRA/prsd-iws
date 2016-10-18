@@ -148,6 +148,9 @@
     <value>print a postage label</value>
   </data>
   <data name="WhatToDoNextListItem6" xml:space="preserve">
+    <value>ensure there is a contract in place and send a copy to us</value>
+  </data>
+  <data name="WhatToDoNextListItem7" xml:space="preserve">
     <value>post the notification to us</value>
   </data>
 </root>

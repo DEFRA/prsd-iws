@@ -151,11 +151,20 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.WhatToDoNext {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to post the notification to us.
+        ///   Looks up a localized string similar to ensure there is a contract in place and send a copy to us.
         /// </summary>
         public static string WhatToDoNextListItem6 {
             get {
                 return ResourceManager.GetString("WhatToDoNextListItem6", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to post the notification to us.
+        /// </summary>
+        public static string WhatToDoNextListItem7 {
+            get {
+                return ResourceManager.GetString("WhatToDoNextListItem7", resourceCulture);
             }
         }
     }
