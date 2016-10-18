@@ -18,8 +18,7 @@
             ToDate = new OptionalDateInputViewModel(SystemTime.Now, true);
 
             ChemicalCompositions = new SelectList(
-                EnumHelper.GetValues(typeof(ChemicalComposition))
-                    .Where(p => p.Key != (int)ChemicalComposition.Other),
+                EnumHelper.GetValues(typeof(ChemicalComposition)),
                 "Key",
                 "Value",
                 null);
