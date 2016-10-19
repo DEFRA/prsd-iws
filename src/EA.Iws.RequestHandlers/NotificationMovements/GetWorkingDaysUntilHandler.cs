@@ -4,6 +4,7 @@
     using System.Threading.Tasks;
     using Domain;
     using Domain.NotificationApplication;
+    using Prsd.Core;
     using Prsd.Core.Mediator;
     using Requests.NotificationMovements;
 
@@ -21,7 +22,7 @@
         public async Task<int> HandleAsync(GetWorkingDaysUntil message)
         {
             var ca = (await notificationApplicationRepository.GetById(message.NotificationId)).CompetentAuthority;
-            return workingDayCalculator.GetWorkingDays(DateTime.UtcNow, message.Date, false, ca);
+            return workingDayCalculator.GetWorkingDays(SystemTime.UtcNow, message.Date, false, ca);
         }
     }
 }

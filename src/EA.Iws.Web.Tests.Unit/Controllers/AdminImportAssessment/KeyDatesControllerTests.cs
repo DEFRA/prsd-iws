@@ -9,6 +9,7 @@
     using Areas.AdminImportAssessment.ViewModels.KeyDates;
     using Core.ImportNotificationAssessment;
     using FakeItEasy;
+    using Prsd.Core;
     using Prsd.Core.Mediator;
     using Requests.ImportNotificationAssessment;
     using Web.ViewModels.Shared;
@@ -127,7 +128,7 @@
             var model = GetValidViewModel();
             model.NotificationCompleteDate = null;
             model.NotificationReceivedDate = null;
-            model.NewDate = new OptionalDateInputViewModel(DateTime.UtcNow);
+            model.NewDate = new OptionalDateInputViewModel(SystemTime.UtcNow);
             model.Command = command;
 
             var controller = GetMockAssessmentController(model);
@@ -154,7 +155,7 @@
         private async Task Date_InFuture_Invalid(KeyDatesCommand command)
         {
             var model = GetValidViewModel();
-            model.NewDate = new OptionalDateInputViewModel(DateTime.UtcNow.AddDays(1));
+            model.NewDate = new OptionalDateInputViewModel(SystemTime.UtcNow.AddDays(1));
             model.Command = command;
 
             var controller = GetMockAssessmentController(model);

@@ -9,6 +9,7 @@
     using Core.NotificationAssessment;
     using FakeItEasy;
     using Mappings.NotificationAssessment;
+    using Prsd.Core;
     using Prsd.Core.Mediator;
     using Requests.NotificationAssessment;
     using Web.ViewModels.Shared;
@@ -19,7 +20,7 @@
         private readonly IMediator mediator;
         private readonly DecisionController decisionController;
         private readonly Guid notificationId = new Guid("4AB23CDF-9B24-4598-A302-A69EBB5F2152");
-        private static readonly DateTime Today = DateTime.UtcNow;
+        private static readonly DateTime Today = SystemTime.UtcNow;
         private readonly DateTime acknowledgedOnDate = Today.AddMonths(-1);
 
         public DecisionControllerTests()

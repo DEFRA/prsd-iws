@@ -7,6 +7,7 @@
     using Core.Authorization.Permissions;
     using Core.NotificationAssessment;
     using Infrastructure.Authorization;
+    using Prsd.Core;
     using Prsd.Core.Mapper;
     using Prsd.Core.Mediator;
     using Requests.Facilities;
@@ -116,7 +117,7 @@
             bool areValid = true;
             var data = await mediator.SendAsync(new GetNotificationAssessmentDecisionData(model.NotificationId));
 
-            if (model.ConsentedDate.AsDateTime() > DateTime.UtcNow)
+            if (model.ConsentedDate.AsDateTime() > SystemTime.UtcNow)
             {
                 ModelState.AddModelError("ConsentedDate", DecisionControllerResources.ConsentedNotInFuture);
                 areValid = false;
@@ -134,7 +135,7 @@
                 areValid = false;
             }
 
-            if (model.ConsentValidToDate.AsDateTime() <= DateTime.Today)
+            if (model.ConsentValidToDate.AsDateTime() <= SystemTime.UtcNow.Date)
             {
                 ModelState.AddModelError("ConsentValidToDate", DecisionControllerResources.ValidToMustBeInFuture);
                 areValid = false;

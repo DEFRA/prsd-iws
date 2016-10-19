@@ -9,6 +9,7 @@
     using Areas.Admin.Controllers;
     using Areas.Admin.ViewModels.ImportNotification;
     using FakeItEasy;
+    using Prsd.Core;
     using Prsd.Core.Mediator;
     using Web.ViewModels.Shared;
     using Xunit;
@@ -46,7 +47,7 @@
         public void ReceivedDate_InFuture_NotValid()
         {
             NotificationReceivedDateViewModel model = new NotificationReceivedDateViewModel();
-            model.NotificationReceived = new OptionalDateInputViewModel(DateTime.UtcNow.AddDays(1));
+            model.NotificationReceived = new OptionalDateInputViewModel(SystemTime.UtcNow.AddDays(1));
 
             var controller = GetMockAssessmentController(model);
 
@@ -59,7 +60,7 @@
         public void ReceivedDate_Today_Valid()
         {
             NotificationReceivedDateViewModel model = new NotificationReceivedDateViewModel();
-            model.NotificationReceived = new OptionalDateInputViewModel(DateTime.UtcNow);
+            model.NotificationReceived = new OptionalDateInputViewModel(SystemTime.UtcNow);
 
             var controller = GetMockAssessmentController(model);
 
@@ -72,7 +73,7 @@
         public void ReceivedDate_InPast_Valid()
         {
             NotificationReceivedDateViewModel model = new NotificationReceivedDateViewModel();
-            model.NotificationReceived = new OptionalDateInputViewModel(DateTime.UtcNow.AddDays(-1));
+            model.NotificationReceived = new OptionalDateInputViewModel(SystemTime.UtcNow.AddDays(-1));
 
             var controller = GetMockAssessmentController(model);
 

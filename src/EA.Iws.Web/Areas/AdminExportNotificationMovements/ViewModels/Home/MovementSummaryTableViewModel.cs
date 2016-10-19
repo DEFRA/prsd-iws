@@ -3,6 +3,7 @@
     using System;
     using Core.Movement;
     using Core.Shared;
+    using Prsd.Core;
 
     public class MovementSummaryTableViewModel
     {
@@ -36,7 +37,7 @@
 
         public bool IsShipped()
         {
-            return Status == MovementStatus.Submitted && ShipmentDate < DateTime.UtcNow;
+            return Status == MovementStatus.Submitted && ShipmentDate < SystemTime.UtcNow;
         }
     }
 }

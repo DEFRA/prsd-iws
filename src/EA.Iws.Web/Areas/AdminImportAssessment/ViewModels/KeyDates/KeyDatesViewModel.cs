@@ -5,6 +5,7 @@
     using System.ComponentModel.DataAnnotations;
     using Core.ImportNotificationAssessment;
     using Core.NotificationAssessment;
+    using Prsd.Core;
     using Web.ViewModels.Shared;
 
     public class KeyDatesViewModel : IValidatableObject
@@ -91,7 +92,7 @@
                     yield return new ValidationResult(KeyDatesViewModelResources.NameOfOfficerLengthError, new[] { "NameOfOfficer" });
                 }
 
-                if (NewDate.AsDateTime() > DateTime.UtcNow)
+                if (NewDate.AsDateTime() > SystemTime.UtcNow)
                 {
                     yield return new ValidationResult(KeyDatesViewModelResources.CommencementNotInFuture, new[] { "NewDate" });
                 }
@@ -109,7 +110,7 @@
 
             if (Command == KeyDatesCommand.NotificationComplete)
             {
-                if (NewDate.AsDateTime() > DateTime.UtcNow)
+                if (NewDate.AsDateTime() > SystemTime.UtcNow)
                 {
                     yield return new ValidationResult(KeyDatesViewModelResources.CompletedNotInFuture, new[] { "NewDate" });
                 }
@@ -127,7 +128,7 @@
 
             if (Command == KeyDatesCommand.NotificationAcknowledged)
             {
-                if (NewDate.AsDateTime() > DateTime.UtcNow)
+                if (NewDate.AsDateTime() > SystemTime.UtcNow)
                 {
                     yield return new ValidationResult(KeyDatesViewModelResources.AcknowledgedNotInFuture, new[] { "NewDate" });
                 }
