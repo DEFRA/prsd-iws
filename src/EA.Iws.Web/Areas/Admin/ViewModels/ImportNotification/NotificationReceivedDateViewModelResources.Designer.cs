@@ -78,5 +78,14 @@ namespace EA.Iws.Web.Areas.Admin.ViewModels.ImportNotification {
                 return ResourceManager.GetString("NotificationReceivedRequired", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The &quot;notification received&quot; date cannot be in the future. Please enter a different date..
+        /// </summary>
+        public static string ReceivedNotInFuture {
+            get {
+                return ResourceManager.GetString("ReceivedNotInFuture", resourceCulture);
+            }
+        }
     }
 }
