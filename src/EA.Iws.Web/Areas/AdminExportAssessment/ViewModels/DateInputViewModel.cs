@@ -7,6 +7,7 @@
     using System.Linq;
     using Core.Notification;
     using Core.NotificationAssessment;
+    using Prsd.Core;
     using Web.ViewModels.Shared;
 
     public class DateInputViewModel : IValidatableObject
@@ -101,7 +102,7 @@
 
             if (Command == KeyDatesStatusEnum.NotificationReceived)
             {
-                if (NewDate.AsDateTime() > DateTime.UtcNow)
+                if (NewDate.AsDateTime() > SystemTime.UtcNow)
                 {
                     yield return new ValidationResult(DateInputViewModelResources.ReceivedInFuture, new[] { "NewDate" });
                 }
@@ -118,7 +119,7 @@
                     yield return new ValidationResult(DateInputViewModelResources.NameOfOfficerLength, new[] { "NameOfOfficer" });
                 }
 
-                if (NewDate.AsDateTime() > DateTime.UtcNow)
+                if (NewDate.AsDateTime() > SystemTime.UtcNow)
                 {
                     yield return new ValidationResult(DateInputViewModelResources.CommencedInFuture, new[] { "NewDate" });
                 }
@@ -137,7 +138,7 @@
 
             if (Command == KeyDatesStatusEnum.NotificationComplete)
             {
-                if (NewDate.AsDateTime() > DateTime.UtcNow)
+                if (NewDate.AsDateTime() > SystemTime.UtcNow)
                 {
                     yield return new ValidationResult(DateInputViewModelResources.CompleteInFuture, new[] { "NewDate" });
                 }
@@ -157,7 +158,7 @@
 
             if (Command == KeyDatesStatusEnum.NotificationTransmitted)
             {
-                if (NewDate.AsDateTime() > DateTime.UtcNow)
+                if (NewDate.AsDateTime() > SystemTime.UtcNow)
                 {
                     yield return new ValidationResult(DateInputViewModelResources.TransmittedInFuture, new[] { "NewDate" });
                 }
@@ -179,7 +180,7 @@
 
             if (Command == KeyDatesStatusEnum.NotificationAcknowledged)
             {
-                if (NewDate.AsDateTime() > DateTime.UtcNow)
+                if (NewDate.AsDateTime() > SystemTime.UtcNow)
                 {
                     yield return new ValidationResult(DateInputViewModelResources.AcknowledgedInFuture, new[] { "NewDate" });
                 }

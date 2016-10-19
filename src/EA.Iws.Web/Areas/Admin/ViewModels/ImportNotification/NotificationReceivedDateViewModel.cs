@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using Infrastructure.Validation;
+    using Prsd.Core;
     using Web.ViewModels.Shared;
 
     public class NotificationReceivedDateViewModel : IValidatableObject
@@ -21,7 +22,7 @@
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
-            if (NotificationReceived.AsDateTime() > DateTime.UtcNow)
+            if (NotificationReceived.AsDateTime() > SystemTime.UtcNow)
             {
                 yield return new ValidationResult(NotificationReceivedDateViewModelResources.ReceivedNotInFuture, new[] { "NotificationReceived" });
             }

@@ -10,6 +10,7 @@
     using Areas.AdminExportAssessment.ViewModels;
     using Core.NotificationAssessment;
     using FakeItEasy;
+    using Prsd.Core;
     using Prsd.Core.Mediator;
     using Requests.Admin.NotificationAssessment;
     using Requests.NotificationAssessment;
@@ -129,7 +130,7 @@
         public async Task NotificationReceived_InFuture_Invalid()
         {
             var model = GetValidViewModel();
-            model.NewDate = new OptionalDateInputViewModel(DateTime.UtcNow.AddDays(1));
+            model.NewDate = new OptionalDateInputViewModel(SystemTime.UtcNow.AddDays(1));
             model.Command = KeyDatesStatusEnum.NotificationReceived;
 
             var controller = GetMockAssessmentController(model);
@@ -192,7 +193,7 @@
         public async Task AssessmentCommenced_InFuture_Invalid()
         {
             var model = GetValidViewModel();
-            model.NewDate = new OptionalDateInputViewModel(DateTime.UtcNow.AddDays(1));
+            model.NewDate = new OptionalDateInputViewModel(SystemTime.UtcNow.AddDays(1));
             model.Command = KeyDatesStatusEnum.AssessmentCommenced;
 
             var controller = GetMockAssessmentController(model);
@@ -208,7 +209,7 @@
             var model = GetValidViewModel();
             model.NotificationCompleteDate = null;
             model.NotificationReceivedDate = null;
-            model.NewDate = new OptionalDateInputViewModel(DateTime.UtcNow);
+            model.NewDate = new OptionalDateInputViewModel(SystemTime.UtcNow);
             model.Command = KeyDatesStatusEnum.AssessmentCommenced;
 
             var controller = GetMockAssessmentController(model);
@@ -224,7 +225,7 @@
             var model = GetValidViewModel();
             model.NotificationCompleteDate = null;
             model.PaymentReceivedDate = null;
-            model.NewDate = new OptionalDateInputViewModel(DateTime.UtcNow);
+            model.NewDate = new OptionalDateInputViewModel(SystemTime.UtcNow);
             model.Command = KeyDatesStatusEnum.AssessmentCommenced;
 
             var controller = GetMockAssessmentController(model);
@@ -288,7 +289,7 @@
         public async Task NotificationComplete_InFuture_Invalid()
         {
             var model = GetValidViewModel();
-            model.NewDate = new OptionalDateInputViewModel(DateTime.UtcNow.AddDays(1));
+            model.NewDate = new OptionalDateInputViewModel(SystemTime.UtcNow.AddDays(1));
             model.Command = KeyDatesStatusEnum.NotificationComplete;
 
             var controller = GetMockAssessmentController(model);
@@ -304,7 +305,7 @@
             var model = GetValidViewModel();
             model.NotificationCompleteDate = null;
             model.NotificationReceivedDate = null;
-            model.NewDate = new OptionalDateInputViewModel(DateTime.UtcNow);
+            model.NewDate = new OptionalDateInputViewModel(SystemTime.UtcNow);
             model.Command = KeyDatesStatusEnum.NotificationComplete;
 
             var controller = GetMockAssessmentController(model);
@@ -320,7 +321,7 @@
             var model = GetValidViewModel();
             model.NotificationCompleteDate = null;
             model.PaymentReceivedDate = null;
-            model.NewDate = new OptionalDateInputViewModel(DateTime.UtcNow);
+            model.NewDate = new OptionalDateInputViewModel(SystemTime.UtcNow);
             model.Command = KeyDatesStatusEnum.NotificationComplete;
 
             var controller = GetMockAssessmentController(model);
@@ -336,7 +337,7 @@
             var model = GetValidViewModel();
             model.NotificationCompleteDate = null;
             model.CommencementDate = null;
-            model.NewDate = new OptionalDateInputViewModel(DateTime.UtcNow);
+            model.NewDate = new OptionalDateInputViewModel(SystemTime.UtcNow);
             model.Command = KeyDatesStatusEnum.NotificationComplete;
 
             var controller = GetMockAssessmentController(model);
@@ -432,7 +433,7 @@
         public async Task NotificationTransmitted_InFuture_Invalid()
         {
             var model = GetValidViewModel();
-            model.NewDate = new OptionalDateInputViewModel(DateTime.UtcNow.AddDays(1));
+            model.NewDate = new OptionalDateInputViewModel(SystemTime.UtcNow.AddDays(1));
             model.Command = KeyDatesStatusEnum.NotificationTransmitted;
 
             var controller = GetMockAssessmentController(model);
@@ -448,7 +449,7 @@
             var model = GetValidViewModel();
             model.NotificationAcknowledgedDate = null;
             model.NotificationReceivedDate = null;
-            model.NewDate = new OptionalDateInputViewModel(DateTime.UtcNow);
+            model.NewDate = new OptionalDateInputViewModel(SystemTime.UtcNow);
             model.Command = KeyDatesStatusEnum.NotificationTransmitted;
 
             var controller = GetMockAssessmentController(model);
@@ -464,7 +465,7 @@
             var model = GetValidViewModel();
             model.NotificationAcknowledgedDate = null;
             model.PaymentReceivedDate = null;
-            model.NewDate = new OptionalDateInputViewModel(DateTime.UtcNow);
+            model.NewDate = new OptionalDateInputViewModel(SystemTime.UtcNow);
             model.Command = KeyDatesStatusEnum.NotificationTransmitted;
 
             var controller = GetMockAssessmentController(model);
@@ -480,7 +481,7 @@
             var model = GetValidViewModel();
             model.NotificationAcknowledgedDate = null;
             model.CommencementDate = null;
-            model.NewDate = new OptionalDateInputViewModel(DateTime.UtcNow);
+            model.NewDate = new OptionalDateInputViewModel(SystemTime.UtcNow);
             model.Command = KeyDatesStatusEnum.NotificationTransmitted;
 
             var controller = GetMockAssessmentController(model);
@@ -496,7 +497,7 @@
             var model = GetValidViewModel();
             model.NotificationAcknowledgedDate = null;
             model.NotificationCompleteDate = null;
-            model.NewDate = new OptionalDateInputViewModel(DateTime.UtcNow);
+            model.NewDate = new OptionalDateInputViewModel(SystemTime.UtcNow);
             model.Command = KeyDatesStatusEnum.NotificationTransmitted;
 
             var controller = GetMockAssessmentController(model);
@@ -570,7 +571,7 @@
         public async Task NotificationAcknowledged_ValidInput_NoValidationError()
         {
             var model = GetValidViewModel();
-            model.NewDate = new OptionalDateInputViewModel(DateTime.UtcNow);
+            model.NewDate = new OptionalDateInputViewModel(SystemTime.UtcNow);
             model.Command = KeyDatesStatusEnum.NotificationAcknowledged;
 
             var controller = GetMockAssessmentController(model);
@@ -590,7 +591,7 @@
         public async Task NotificationAcknowledged_ValidInput_CallsClient()
         {
             var model = GetValidViewModel();
-            model.NewDate = new OptionalDateInputViewModel(DateTime.UtcNow);
+            model.NewDate = new OptionalDateInputViewModel(SystemTime.UtcNow);
             model.Command = KeyDatesStatusEnum.NotificationAcknowledged;
 
             var controller = GetMockAssessmentController(model);
@@ -607,7 +608,7 @@
         public async Task NotificationAcknowledged_InFuture_Invalid()
         {
             var model = GetValidViewModel();
-            model.NewDate = new OptionalDateInputViewModel(DateTime.UtcNow.AddDays(1));
+            model.NewDate = new OptionalDateInputViewModel(SystemTime.UtcNow.AddDays(1));
             model.Command = KeyDatesStatusEnum.NotificationAcknowledged;
 
             var controller = GetMockAssessmentController(model);
@@ -623,7 +624,7 @@
             var model = GetValidViewModel();
             model.NotificationAcknowledgedDate = null;
             model.NotificationReceivedDate = null;
-            model.NewDate = new OptionalDateInputViewModel(DateTime.UtcNow);
+            model.NewDate = new OptionalDateInputViewModel(SystemTime.UtcNow);
             model.Command = KeyDatesStatusEnum.NotificationAcknowledged;
 
             var controller = GetMockAssessmentController(model);
@@ -639,7 +640,7 @@
             var model = GetValidViewModel();
             model.NotificationAcknowledgedDate = null;
             model.PaymentReceivedDate = null;
-            model.NewDate = new OptionalDateInputViewModel(DateTime.UtcNow);
+            model.NewDate = new OptionalDateInputViewModel(SystemTime.UtcNow);
             model.Command = KeyDatesStatusEnum.NotificationAcknowledged;
 
             var controller = GetMockAssessmentController(model);
@@ -655,7 +656,7 @@
             var model = GetValidViewModel();
             model.NotificationAcknowledgedDate = null;
             model.CommencementDate = null;
-            model.NewDate = new OptionalDateInputViewModel(DateTime.UtcNow);
+            model.NewDate = new OptionalDateInputViewModel(SystemTime.UtcNow);
             model.Command = KeyDatesStatusEnum.NotificationAcknowledged;
 
             var controller = GetMockAssessmentController(model);
@@ -671,7 +672,7 @@
             var model = GetValidViewModel();
             model.NotificationAcknowledgedDate = null;
             model.NotificationCompleteDate = null;
-            model.NewDate = new OptionalDateInputViewModel(DateTime.UtcNow);
+            model.NewDate = new OptionalDateInputViewModel(SystemTime.UtcNow);
             model.Command = KeyDatesStatusEnum.NotificationAcknowledged;
 
             var controller = GetMockAssessmentController(model);
@@ -687,7 +688,7 @@
             var model = GetValidViewModel();
             model.NotificationAcknowledgedDate = null;
             model.NotificationTransmittedDate = null;
-            model.NewDate = new OptionalDateInputViewModel(DateTime.UtcNow);
+            model.NewDate = new OptionalDateInputViewModel(SystemTime.UtcNow);
             model.Command = KeyDatesStatusEnum.NotificationAcknowledged;
 
             var controller = GetMockAssessmentController(model);
@@ -815,7 +816,7 @@
             model.CommencementDate = new OptionalDateInputViewModel(commencementDate);
             model.NotificationCompleteDate = new OptionalDateInputViewModel(completeDate);
             model.NotificationTransmittedDate = new OptionalDateInputViewModel(transmittedDate);
-            model.NewDate = new OptionalDateInputViewModel(DateTime.UtcNow.AddDays(1));
+            model.NewDate = new OptionalDateInputViewModel(SystemTime.UtcNow.AddDays(1));
 
             return model;
         }

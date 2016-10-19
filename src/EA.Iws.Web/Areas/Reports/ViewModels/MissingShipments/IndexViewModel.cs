@@ -4,6 +4,7 @@
     using System.ComponentModel.DataAnnotations;
     using System.Linq;
     using System.Web.Mvc;
+    using Prsd.Core;
 
     public class IndexViewModel
     {
@@ -17,7 +18,7 @@
 
         public IndexViewModel()
         {
-            Years = new SelectList(Enumerable.Range(MinYear, DateTime.UtcNow.Year + 1 - MinYear));
+            Years = new SelectList(Enumerable.Range(MinYear, SystemTime.UtcNow.Year + 1 - MinYear));
         }
     }
 }
