@@ -124,6 +124,15 @@ namespace EA.Iws.Web.ViewModels.Shared {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ‘Organisation Name Limited’, for ‘trading as’ names record it as ‘Organisation Name Limited T/A Name of Organisation’.
+        /// </summary>
+        public static string OrgNameHint {
+            get {
+                return ResourceManager.GetString("OrgNameHint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Please enter the organisation&apos;s name.
         /// </summary>
         public static string OrgNameRequired {
