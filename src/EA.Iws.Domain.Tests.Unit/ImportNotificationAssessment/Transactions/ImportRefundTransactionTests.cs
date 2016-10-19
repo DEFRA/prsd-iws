@@ -33,6 +33,7 @@
             ObjectInstantiator<ImportNotificationAssessment>.SetProperty(x => x.Dates, dates, assessment);
 
             A.CallTo(() => assessmentRepository.GetByNotification(notificationId)).Returns(assessment);
+            A.CallTo(() => transactionCalculator.TotalPaid(notificationId)).Returns(100);
 
             SystemTime.Freeze(new DateTime(2016, 1, 1));
         }
@@ -45,8 +46,6 @@
         [Fact]
         public async Task RefundAmountCannotExceedAmountPaid()
         {
-            A.CallTo(() => transactionCalculator.TotalPaid(notificationId)).Returns(100);
-
             Func<Task> testCode = () => refundTransaction.Save(notificationId, new DateTime(2016, 1, 1), 101, "comment");
 
             await Assert.ThrowsAsync<InvalidOperationException>(testCode);
@@ -55,8 +54,6 @@
         [Fact]
         public async Task RefundAmountCanEqualAmountPaid()
         {
-            A.CallTo(() => transactionCalculator.TotalPaid(notificationId)).Returns(100);
-
             await refundTransaction.Save(notificationId, new DateTime(2016, 1, 1), 100, "comment");
 
             A.CallTo(() => transactionRepository.Add(A<ImportNotificationTransaction>.Ignored))
@@ -66,8 +63,6 @@
         [Fact]
         public async Task RefundAmountCanBeLessThanAmountPaid()
         {
-            A.CallTo(() => transactionCalculator.TotalPaid(notificationId)).Returns(100);
-
             await refundTransaction.Save(notificationId, new DateTime(2016, 1, 1), 99, "comment");
 
             A.CallTo(() => transactionRepository.Add(A<ImportNotificationTransaction>.Ignored))
@@ -77,8 +72,6 @@
         [Fact]
         public async Task RefundDateCanBeToday()
         {
-            A.CallTo(() => transactionCalculator.TotalPaid(notificationId)).Returns(100);
-
             await refundTransaction.Save(notificationId, new DateTime(2016, 1, 1), 99, "comment");
 
             A.CallTo(() => transactionRepository.Add(A<ImportNotificationTransaction>.Ignored))
@@ -88,8 +81,6 @@
         [Fact]
         public async Task RefundDateCanBeInThePast()
         {
-            A.CallTo(() => transactionCalculator.TotalPaid(notificationId)).Returns(100);
-
             await refundTransaction.Save(notificationId, new DateTime(2015, 12, 31), 99, "comment");
 
             A.CallTo(() => transactionRepository.Add(A<ImportNotificationTransaction>.Ignored))
@@ -99,8 +90,6 @@
         [Fact]
         public async Task RefundDateCannotBeInTheFuture()
         {
-            A.CallTo(() => transactionCalculator.TotalPaid(notificationId)).Returns(100);
-
             Func<Task> testCode = () => refundTransaction.Save(notificationId, new DateTime(2016, 1, 2), 99, "comment");
 
             await Assert.ThrowsAsync<InvalidOperationException>(testCode);
@@ -109,8 +98,6 @@
         [Fact]
         public async Task RefundDateCannotBeBeforePaymentReceivedDate()
         {
-            A.CallTo(() => transactionCalculator.TotalPaid(notificationId)).Returns(100);
-
             Func<Task> testCode = () => refundTransaction.Save(notificationId, new DateTime(2015, 11, 30), 99, "comment");
 
             await Assert.ThrowsAsync<InvalidOperationException>(testCode);
@@ -119,9 +106,19 @@
         [Fact]
         public async Task CommentsCanBeNull()
         {
-            A.CallTo(() => transactionCalculator.TotalPaid(notificationId)).Returns(100);
-
             await refundTransaction.Save(notificationId, new DateTime(2015, 12, 31), 99, null);
+
+            A.CallTo(() => transactionRepository.Add(A<ImportNotificationTransaction>.Ignored))
+                .MustHaveHappened(Repeated.Exactly.Once);
+        }
+
+        [Fact]
+        public async Task CanRefundWithoutAssessmentDates()
+        {
+            var assessment = new ImportNotificationAssessment(notificationId);
+            A.CallTo(() => assessmentRepository.GetByNotification(notificationId)).Returns(assessment);
+
+            await refundTransaction.Save(notificationId, new DateTime(2016, 1, 1), 100, "comment");
 
             A.CallTo(() => transactionRepository.Add(A<ImportNotificationTransaction>.Ignored))
                 .MustHaveHappened(Repeated.Exactly.Once);
