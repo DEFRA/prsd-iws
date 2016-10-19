@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using System.Data;
     using System.Linq;
     using Core.Notification;
     using Core.NotificationAssessment;
@@ -98,6 +99,14 @@
                 yield return new ValidationResult("Please enter a valid date", new[] {"NewDate"});
             }
 
+            if (Command == KeyDatesStatusEnum.NotificationReceived)
+            {
+                if (NewDate.AsDateTime() > DateTime.UtcNow)
+                {
+                    yield return new ValidationResult(DateInputViewModelResources.ReceivedInFuture, new[] { "NewDate" });
+                }
+            }
+
             if (Command == KeyDatesStatusEnum.AssessmentCommenced)
             {
                 if (string.IsNullOrWhiteSpace(NameOfOfficer))
@@ -107,6 +116,64 @@
                 else if (NameOfOfficer.Count() > 256)
                 {
                     yield return new ValidationResult(DateInputViewModelResources.NameOfOfficerLength, new[] { "NameOfOfficer" });
+                }
+
+                if (NewDate.AsDateTime() > DateTime.UtcNow)
+                {
+                    yield return new ValidationResult(DateInputViewModelResources.CommencedInFuture, new[] { "NewDate" });
+                }
+
+                if (NotificationReceivedDate == null || PaymentReceivedDate == null)
+                {
+                    yield return new ValidationResult(DateInputViewModelResources.CommencedOtherDatesRequired, new[] { "NewDate" });
+                }
+
+                if ((NotificationReceivedDate != null && NewDate.AsDateTime() < NotificationReceivedDate.AsDateTime()) ||
+                    (PaymentReceivedDate != null && NewDate.AsDateTime() < PaymentReceivedDate))
+                {
+                    yield return new ValidationResult(DateInputViewModelResources.CommencedNotBefore, new[] { "NewDate" });
+                }
+            }
+
+            if (Command == KeyDatesStatusEnum.NotificationComplete)
+            {
+                if (NewDate.AsDateTime() > DateTime.UtcNow)
+                {
+                    yield return new ValidationResult(DateInputViewModelResources.CompleteInFuture, new[] { "NewDate" });
+                }
+
+                if (NotificationReceivedDate == null || PaymentReceivedDate == null || CommencementDate == null)
+                {
+                    yield return new ValidationResult(DateInputViewModelResources.CompleteOtherDatesRequired, new[] { "NewDate" });
+                }
+
+                if ((NotificationReceivedDate != null && NewDate.AsDateTime() < NotificationReceivedDate.AsDateTime()) ||
+                    (PaymentReceivedDate != null && NewDate.AsDateTime() < PaymentReceivedDate) ||
+                    (CommencementDate != null && NewDate.AsDateTime() < CommencementDate.AsDateTime()))
+                {
+                    yield return new ValidationResult(DateInputViewModelResources.CompleteNotBefore, new[] { "NewDate" });
+                }
+            }
+
+            if (Command == KeyDatesStatusEnum.NotificationTransmitted)
+            {
+                if (NewDate.AsDateTime() > DateTime.UtcNow)
+                {
+                    yield return new ValidationResult(DateInputViewModelResources.TransmittedInFuture, new[] { "NewDate" });
+                }
+
+                if (NotificationReceivedDate == null || PaymentReceivedDate == null || CommencementDate == null ||
+                    NotificationCompleteDate == null)
+                {
+                    yield return new ValidationResult(DateInputViewModelResources.TransmittedOtherDatesRequired, new[] { "NewDate" });
+                }
+
+                if ((NotificationReceivedDate != null && NewDate.AsDateTime() < NotificationReceivedDate.AsDateTime()) ||
+                    (PaymentReceivedDate != null && NewDate.AsDateTime() < PaymentReceivedDate) ||
+                    (CommencementDate != null && NewDate.AsDateTime() < CommencementDate.AsDateTime()) ||
+                    (NotificationCompleteDate != null && NewDate.AsDateTime() < NotificationCompleteDate.AsDateTime()))
+                {
+                    yield return new ValidationResult(DateInputViewModelResources.TransmittedNotBefore, new[] { "NewDate" });
                 }
             }
 
@@ -130,26 +197,6 @@
                     (NotificationTransmittedDate != null && NewDate.AsDateTime() < NotificationTransmittedDate.AsDateTime()))
                 {
                     yield return new ValidationResult(DateInputViewModelResources.AcknowledgedNotBefore, new[] { "NewDate" });
-                }
-            }
-
-            if (Command == KeyDatesStatusEnum.NotificationComplete)
-            {
-                if (NewDate.AsDateTime() > DateTime.UtcNow)
-                {
-                    yield return new ValidationResult(DateInputViewModelResources.CompleteInFuture, new[] { "NewDate" });
-                }
-
-                if (NotificationReceivedDate == null || PaymentReceivedDate == null || CommencementDate == null)
-                {
-                    yield return new ValidationResult(DateInputViewModelResources.CompleteOtherDatesRequired, new[] { "NewDate" });
-                }
-
-                if ((NotificationReceivedDate != null && NewDate.AsDateTime() < NotificationReceivedDate.AsDateTime()) ||
-                    (PaymentReceivedDate != null && NewDate.AsDateTime() < PaymentReceivedDate) ||
-                    (CommencementDate != null && NewDate.AsDateTime() < CommencementDate.AsDateTime()))
-                {
-                    yield return new ValidationResult(DateInputViewModelResources.CompleteNotBefore, new[] { "NewDate" });
                 }
             }
         }

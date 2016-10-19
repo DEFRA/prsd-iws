@@ -88,6 +88,33 @@ namespace EA.Iws.Web.Areas.AdminExportAssessment.ViewModels {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The &apos;assessment started&apos; date cannot be in the future. Please enter a different date..
+        /// </summary>
+        public static string CommencedInFuture {
+            get {
+                return ResourceManager.GetString("CommencedInFuture", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The &apos;assessment started&apos; date cannot be before the previous key dates. Please enter a different date..
+        /// </summary>
+        public static string CommencedNotBefore {
+            get {
+                return ResourceManager.GetString("CommencedNotBefore", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You need to enter previous key dates before you can continue.
+        /// </summary>
+        public static string CommencedOtherDatesRequired {
+            get {
+                return ResourceManager.GetString("CommencedOtherDatesRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The &apos;notification complete&apos; date cannot be in the future. Please enter a different date.
         /// </summary>
         public static string CompleteInFuture {
@@ -129,6 +156,42 @@ namespace EA.Iws.Web.Areas.AdminExportAssessment.ViewModels {
         public static string NameOfOfficerLength {
             get {
                 return ResourceManager.GetString("NameOfOfficerLength", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The &apos;notification received&apos; date cannot be in the future. Please enter a different date..
+        /// </summary>
+        public static string ReceivedInFuture {
+            get {
+                return ResourceManager.GetString("ReceivedInFuture", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The &apos;transmitted on&apos; date cannot be in the future. Please enter a different date..
+        /// </summary>
+        public static string TransmittedInFuture {
+            get {
+                return ResourceManager.GetString("TransmittedInFuture", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The &apos;transmitted on&apos; date cannot be before the previous key dates. Please enter a different date..
+        /// </summary>
+        public static string TransmittedNotBefore {
+            get {
+                return ResourceManager.GetString("TransmittedNotBefore", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You need to enter previous key dates before you can continue.
+        /// </summary>
+        public static string TransmittedOtherDatesRequired {
+            get {
+                return ResourceManager.GetString("TransmittedOtherDatesRequired", resourceCulture);
             }
         }
     }
