@@ -117,43 +117,22 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Dropdown" xml:space="preserve">
-    <value>Choose what you would like to view</value>
+  <data name="AbortCancel" xml:space="preserve">
+    <value>No I don't want to cancel these shipments</value>
   </data>
-  <data name="NoShipmentDataText" xml:space="preserve">
-    <value>There are no shipments recorded for this notification</value>
+  <data name="ConfirmCancellation" xml:space="preserve">
+    <value>Confirm cancellation</value>
   </data>
-  <data name="SummaryCaption" xml:space="preserve">
-    <value>Shipment summary</value>
+  <data name="EditList" xml:space="preserve">
+    <value>I would like to edit this list</value>
   </data>
-  <data name="TabTitle" xml:space="preserve">
-    <value>Shipment dates</value>
+  <data name="Heading" xml:space="preserve">
+    <value>Are you sure you want to cancel these prenotifications?</value>
   </data>
-  <data name="thNumber" xml:space="preserve">
-    <value>No.</value>
-  </data>
-  <data name="thPrenotified" xml:space="preserve">
-    <value>Prenotified</value>
-  </data>
-  <data name="thQuantity" xml:space="preserve">
-    <value>Quantity</value>
-  </data>
-  <data name="thReceived" xml:space="preserve">
-    <value>Received</value>
-  </data>
-  <data name="thRecovered" xml:space="preserve">
-    <value>Recovered</value>
-  </data>
-  <data name="thShipmentDue" xml:space="preserve">
-    <value>Shipment due</value>
-  </data>
-  <data name="thStatus" xml:space="preserve">
-    <value>Status</value>
+  <data name="SubHeading" xml:space="preserve">
+    <value>Shipments</value>
   </data>
   <data name="Title" xml:space="preserve">
-    <value>Shipment key dates</value>
-  </data>
-  <data name="Cancelled" xml:space="preserve">
-    <value>Cancelled</value>
+    <value>Confirm cancellation</value>
   </data>
 </root>

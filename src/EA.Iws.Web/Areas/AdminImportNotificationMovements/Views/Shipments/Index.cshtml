@@ -65,7 +65,16 @@
                         <tr>
                             <td>@Model.TableData[i].Number</td>
                             <td>@DisplayDate(Model.TableData[i].PreNotification)</td>
-                            <td>@DisplayDate(Model.TableData[i].ShipmentDate)</td>
+                            <td>
+                                @if (Model.TableData[i].IsCancelled)
+                                {
+                                    @Resource.Cancelled
+                                }
+                                else
+                                {
+                                    @DisplayDate(Model.TableData[i].ShipmentDate)
+                                }
+                            </td>
                             <td>@DisplayDate(Model.TableData[i].Received)</td>
                             <td>@DisplayQuantity(Model.TableData[i].Quantity, Model.TableData[i].Unit)</td>
                             <td>@DisplayDate(Model.TableData[i].RecoveredOrDisposedOf)</td>

@@ -18,7 +18,8 @@
                 Quantity = i.Quantity,
                 Unit = i.Unit,
                 Rejected = i.Rejected,
-                RecoveredOrDisposedOf = i.RecoveredOrDisposedOf
+                RecoveredOrDisposedOf = i.RecoveredOrDisposedOf,
+                IsCancelled = i.IsCancelled
             }).ToList();
         }
     }

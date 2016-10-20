@@ -2,7 +2,9 @@
 {
     using System;
     using System.Threading.Tasks;
+    using Core.ComponentRegistration;
 
+    [AutoRegister]
     public class CancelImportMovement
     {
         private readonly IImportMovementCompletedReceiptRepository completedReceiptRepository;

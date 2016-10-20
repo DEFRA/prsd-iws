@@ -28,7 +28,10 @@
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
-            throw new NotImplementedException();
+            if (!CancellableMovements.Any(m => m.IsSelected))
+            {
+                yield return new ValidationResult(CancelResources.SelectPrenotificationsToCancel, new[] { "CancellableMovements" });
+            }
         }
 
         public class CancellableMovementViewModel

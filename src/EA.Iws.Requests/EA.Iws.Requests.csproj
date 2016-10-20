@@ -100,7 +100,7 @@
     <Compile Include="FinancialGuarantee\GenerateParentCompanyDocument.cs" />
     <Compile Include="FinancialGuarantee\GenerateBankGuaranteeDocument.cs" />
     <Compile Include="FinancialGuarantee\GenerateFinancialGuaranteeDocument.cs" />
-    <Compile Include="ImportMovement\Cancel\CancelImportMovement.cs" />
+    <Compile Include="ImportMovement\Cancel\CancelImportMovements.cs" />
     <Compile Include="ImportMovement\Capture\CreateImportMovement.cs" />
     <Compile Include="ImportMovement\Capture\GetImportMovementDates.cs" />
     <Compile Include="ImportMovement\Capture\GetImportMovementIdIfExists.cs" />

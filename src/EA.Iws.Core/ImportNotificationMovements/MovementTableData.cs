@@ -21,5 +21,7 @@
         public DateTime? Rejected { get; set; }
 
         public DateTime? RecoveredOrDisposedOf { get; set; }
+
+        public bool IsCancelled { get; set; }
     }
 }

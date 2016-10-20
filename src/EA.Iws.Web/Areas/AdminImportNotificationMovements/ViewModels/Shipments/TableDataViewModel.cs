@@ -16,6 +16,7 @@
             Unit = data.Unit;
             Rejected = data.Rejected;
             RecoveredOrDisposedOf = data.RecoveredOrDisposedOf;
+            IsCancelled = data.IsCancelled;
         }
 
         public int Number { get; set; }
@@ -35,5 +36,7 @@
         public ShipmentQuantityUnits? Unit { get; set; }
 
         public DateTime? RecoveredOrDisposedOf { get; set; }
+
+        public bool IsCancelled { get; set; }
     }
 }

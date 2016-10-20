@@ -1,11 +1,12 @@
 ﻿@model EA.Iws.Web.Areas.AdminImportNotificationMovements.ViewModels.Cancel.CancellableMovementsViewModel
+@using Resources = EA.Iws.Web.Areas.AdminImportNotificationMovements.Views.Cancel.IndexResources
 @{
-    ViewBag.Title = "Select prenotification to cancel";
+    ViewBag.Title = Resources.Title;
 }
 
 <header class="hgroup">
-    <h1 class="heading-large">Which prenotifications would you like to cancel?</h1>
-    You can only cancel a prenotified shipment if it hasn't been shipped yet.
+    <h1 class="heading-large">@Resources.Heading</h1>
+    @Resources.SubHeading
 </header>
 
 @using (Html.BeginForm())
@@ -14,29 +15,29 @@
     @Html.AntiForgeryToken()
 
     <div class="form-group">
-        <h2 class="heading-medium">These prenotifications can be cancelled:</h2>
+        <h2 class="heading-medium">@Resources.PrenotificationsToCancelHeading</h2>
 
         @if (!Model.CancellableMovements.Any())
         {
-            <p>There are no prenotifications to cancel.</p>
+            <p>@Resources.NoPrenotificaitonsToCancel</p>
         }
         else
         {
             <div class="form-group @Html.Gds().FormGroupClass(m => m.CancellableMovements)">
-                <table id="SubmittedMovements" title="Select prenotifications to cancel">
+                <table id="SubmittedMovements" title="@Resources.SelectPrenotificationsToCancel">
                     <thead>
                         <tr>
                             <th>
-                                Number
+                                @Resources.Number
                             </th>
                             <th>
-                                Date prenotified
+                                @Resources.DatePrenotified
                             </th>
                             <th>
-                                Shipment due
+                                @Resources.ShipmentDue
                             </th>
                             <th>
-                                <label class="visuallyhidden">Cancel</label>
+                                <label class="visuallyhidden">@Resources.Cancel</label>
                             </th>
                         </tr>
                     </thead>

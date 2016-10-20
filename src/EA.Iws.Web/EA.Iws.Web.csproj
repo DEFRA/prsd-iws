@@ -440,6 +440,8 @@
     <Content Include="Content\govuk_toolkit\stylesheets\colours\_organisation.scss" />
     <Content Include="Areas\AdminImportAssessment\Views\RefundDetails\Index.cshtml" />
     <Content Include="Areas\AdminImportNotificationMovements\Views\Cancel\Index.cshtml" />
+    <Content Include="Areas\AdminImportNotificationMovements\Views\Cancel\Confirm.cshtml" />
+    <Content Include="Areas\AdminImportNotificationMovements\Views\Cancel\Success.cshtml" />
     <None Include="Content\iws\_panels.scss" />
     <Content Include="Content\nta-extended.css" />
     <Content Include="Content\select2\select2-spinner.gif" />
@@ -1215,6 +1217,13 @@
     <Compile Include="Areas\AdminImportNotificationMovements\Controllers\HomeController.cs" />
     <Compile Include="Areas\AdminImportNotificationMovements\Controllers\ShipmentsController.cs" />
     <Compile Include="Areas\AdminImportNotificationMovements\ViewModels\Cancel\CancellableMovementsViewModel.cs" />
+    <Compile Include="Areas\AdminImportNotificationMovements\ViewModels\Cancel\CancelResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CancelResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\AdminImportNotificationMovements\ViewModels\Cancel\ConfirmViewModel.cs" />
+    <Compile Include="Areas\AdminImportNotificationMovements\ViewModels\Cancel\SuccessViewModel.cs" />
     <Compile Include="Areas\AdminImportNotificationMovements\ViewModels\Capture\CreateViewModel.cs" />
     <Compile Include="Areas\AdminImportNotificationMovements\ViewModels\Capture\CreateViewModelResources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -1231,6 +1240,21 @@
     <Compile Include="Areas\AdminImportNotificationMovements\ViewModels\Home\MovementSummaryViewModel.cs" />
     <Compile Include="Areas\AdminImportNotificationMovements\ViewModels\Shipments\ShipmentsTableViewModel.cs" />
     <Compile Include="Areas\AdminImportNotificationMovements\ViewModels\Shipments\TableDataViewModel.cs" />
+    <Compile Include="Areas\AdminImportNotificationMovements\Views\Cancel\ConfirmResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ConfirmResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\AdminImportNotificationMovements\Views\Cancel\IndexResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IndexResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\AdminImportNotificationMovements\Views\Cancel\SuccessResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SuccessResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Areas\AdminImportNotificationMovements\Views\Capture\CreateResources.Designer.cs">
       <DependentUpon>CreateResources.resx</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -2919,6 +2943,10 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>RecoveryResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Areas\AdminImportNotificationMovements\ViewModels\Cancel\CancelResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>CancelResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Areas\AdminImportNotificationMovements\ViewModels\Capture\CreateViewModelResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>CreateViewModelResources.Designer.cs</LastGenOutput>
@@ -2926,6 +2954,18 @@
     <EmbeddedResource Include="Areas\AdminImportNotificationMovements\ViewModels\Capture\SearchViewModelResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>SearchViewModelResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\AdminImportNotificationMovements\Views\Cancel\ConfirmResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ConfirmResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\AdminImportNotificationMovements\Views\Cancel\IndexResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\AdminImportNotificationMovements\Views\Cancel\SuccessResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>SuccessResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\AdminImportNotificationMovements\Views\Capture\CreateResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
