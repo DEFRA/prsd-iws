@@ -1,0 +1,87 @@
+﻿@model EA.Iws.Web.Areas.AdminImportNotificationMovements.ViewModels.Cancel.CancellableMovementsViewModel
+@{
+    ViewBag.Title = "Select prenotification to cancel";
+}
+
+<header class="hgroup">
+    <h1 class="heading-large">Which prenotifications would you like to cancel?</h1>
+    You can only cancel a prenotified shipment if it hasn't been shipped yet.
+</header>
+
+@using (Html.BeginForm())
+{
+    @Html.Gds().ValidationSummary()
+    @Html.AntiForgeryToken()
+
+    <div class="form-group">
+        <h2 class="heading-medium">These prenotifications can be cancelled:</h2>
+
+        @if (!Model.CancellableMovements.Any())
+        {
+            <p>There are no prenotifications to cancel.</p>
+        }
+        else
+        {
+            <div class="form-group @Html.Gds().FormGroupClass(m => m.CancellableMovements)">
+                <table id="SubmittedMovements" title="Select prenotifications to cancel">
+                    <thead>
+                        <tr>
+                            <th>
+                                Number
+                            </th>
+                            <th>
+                                Date prenotified
+                            </th>
+                            <th>
+                                Shipment due
+                            </th>
+                            <th>
+                                <label class="visuallyhidden">Cancel</label>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @for (int i = 0; i < Model.CancellableMovements.Count; i++)
+                        {
+                            MvcHtmlString idForThisCheckBox = Html.NameFor(m => m.CancellableMovements[i].IsSelected);
+
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(m => m.CancellableMovements[i].Number)
+                                    @Html.HiddenFor(m => m.CancellableMovements[i].Number)
+                                </td>
+                                <td>
+                                    @if (Model.CancellableMovements[i].PrenotificationDate.HasValue)
+                                    {
+                                        @Html.Gds().DisplayShortDateFor(m => m.CancellableMovements[i].PrenotificationDate.Value)
+                                    }
+                                    else
+                                    {
+                                        @:- -
+                                    }
+                                </td>
+                                <td>
+                                    @Html.Gds().DisplayShortDateFor(m => m.CancellableMovements[i].ActualShipmentDate)
+                                </td>
+                                <td>
+                                    <label for="@idForThisCheckBox">
+                                        @Html.HiddenFor(m => m.CancellableMovements[i].MovementId)
+                                        @Html.CheckBoxFor(m => m.CancellableMovements[i].IsSelected, new { id = idForThisCheckBox })
+                                        Cancel
+                                    </label>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <div class="form-group">
+                <button class="button" type="submit">@Constants.ContinueButtonText</button>
+            </div>
+        }
+    </div>
+}
+
+<div class="form-group">
+    @Html.ActionLink("Go to shipment summary", "Index", "Home")
+</div>

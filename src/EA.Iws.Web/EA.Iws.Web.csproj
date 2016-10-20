@@ -439,6 +439,7 @@
     <Content Include="Content\govuk_toolkit\stylesheets\colours\_palette.scss" />
     <Content Include="Content\govuk_toolkit\stylesheets\colours\_organisation.scss" />
     <Content Include="Areas\AdminImportAssessment\Views\RefundDetails\Index.cshtml" />
+    <Content Include="Areas\AdminImportNotificationMovements\Views\Cancel\Index.cshtml" />
     <None Include="Content\iws\_panels.scss" />
     <Content Include="Content\nta-extended.css" />
     <Content Include="Content\select2\select2-spinner.gif" />
@@ -1209,9 +1210,11 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Areas\AdminImportNotificationMovements\AdminImportNotificationMovementsAreaRegistration.cs" />
+    <Compile Include="Areas\AdminImportNotificationMovements\Controllers\CancelController.cs" />
     <Compile Include="Areas\AdminImportNotificationMovements\Controllers\CaptureController.cs" />
     <Compile Include="Areas\AdminImportNotificationMovements\Controllers\HomeController.cs" />
     <Compile Include="Areas\AdminImportNotificationMovements\Controllers\ShipmentsController.cs" />
+    <Compile Include="Areas\AdminImportNotificationMovements\ViewModels\Cancel\CancellableMovementsViewModel.cs" />
     <Compile Include="Areas\AdminImportNotificationMovements\ViewModels\Capture\CreateViewModel.cs" />
     <Compile Include="Areas\AdminImportNotificationMovements\ViewModels\Capture\CreateViewModelResources.Designer.cs">
       <AutoGen>True</AutoGen>

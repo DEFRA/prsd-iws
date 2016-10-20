@@ -12,7 +12,9 @@
             {
                 MovementId = source.Id,
                 Number = source.Number,
-                NotificationId = source.NotificationId
+                NotificationId = source.NotificationId,
+                ActualShipmentDate = source.ActualShipmentDate,
+                PrenotificationDate = source.PrenotificationDate
             };
         }
     }
