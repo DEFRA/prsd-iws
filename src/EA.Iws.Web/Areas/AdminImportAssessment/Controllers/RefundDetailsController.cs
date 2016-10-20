@@ -1,8 +1,10 @@
 ﻿namespace EA.Iws.Web.Areas.AdminImportAssessment.Controllers
 {
     using System;
+    using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Mvc;
+    using Core.NotificationAssessment;
     using Prsd.Core.Mediator;
     using Requests.ImportNotificationAssessment.Transactions;
     using ViewModels.RefundDetails;
@@ -22,11 +24,15 @@
         {
             var accountOverview = await mediator.SendAsync(new GetImportNotificationAccountOverview(id));
 
+            var firstPayment =
+                accountOverview.Transactions.OrderBy(x => x.Date)
+                    .FirstOrDefault(x => x.Transaction == TransactionType.Payment);
+
             var model = new RefundDetailsViewModel
             {
                 NotificationId = id,
                 Limit = accountOverview.TotalPaid,
-                PaymentReceivedDate = accountOverview.PaymentReceived
+                FirstPaymentReceivedDate = firstPayment == null ? (DateTime?)null : firstPayment.Date
             };
 
             return View(model);
