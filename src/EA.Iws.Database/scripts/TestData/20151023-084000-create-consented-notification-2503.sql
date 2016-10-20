@@ -810,12 +810,12 @@ VALUES
 	(SELECT Cast(Cast(Newid() AS BINARY(10))
                            + Cast(Getdate() AS BINARY(6)) AS UNIQUEIDENTIFIER)),
 	@NotificationAssessmentId,
+	'2016-10-17',
+	'2016-10-17',
+	'2016-10-18',
+	'2016-10-18',
+	'2016-10-19',
 	'2016-10-20',
-	'2016-10-20',
-	'2016-10-21',
-	'2016-10-21',
-	'2016-10-22',
-	'2016-10-23',
 	'Jane'
 )
 
@@ -832,8 +832,8 @@ VALUES
 (
 	(SELECT Cast(Cast(Newid() AS BINARY(10))
                            + Cast(Getdate() AS BINARY(6)) AS UNIQUEIDENTIFIER)),
-	'2016-10-23',
-	'2017-10-22',
+	'2016-10-20',
+	'2017-10-29',
 	'Let me win at chess',
 	(SELECT [Id] FROM [Identity].[AspNetUsers] WHERE [Email] LIKE 'superuser@environment-agency.gov.uk'),
 	@NotificationId
@@ -858,12 +858,12 @@ VALUES
 	(SELECT Cast(Cast(Newid() AS BINARY(10))
 					+ Cast(Getdate() AS BINARY(6)) AS UNIQUEIDENTIFIER)),
 	4,
-	'2016-10-16',
-	'2016-10-16',
+	'2016-10-13',
+	'2016-10-13',
 	GETDATE(),
 	@NotificationId,
-	'2016-10-23',
-	'2016-10-23',
-	'2018-10-23',
+	'2016-10-20',
+	'2016-10-20',
+	'2018-10-20',
 	520
 )
