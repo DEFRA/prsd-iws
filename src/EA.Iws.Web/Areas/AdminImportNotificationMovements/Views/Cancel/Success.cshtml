@@ -1,0 +1,13 @@
+﻿@model EA.Iws.Web.Areas.AdminImportNotificationMovements.ViewModels.Cancel.SuccessViewModel
+@using Resources = EA.Iws.Web.Areas.AdminImportNotificationMovements.Views.Cancel.SuccessResources
+@{
+    ViewBag.Title = Resources.Title;
+}
+
+<header class="hgroup">
+    <h1 class="heading-large">@Model.HeadingText</h1>
+</header>
+
+<div class="form-group">
+    @Html.ActionLink("Continue", "Index", "Home", null, new { @class = "button" })
+</div>

@@ -1,7 +1,6 @@
 ﻿namespace EA.Iws.Domain.ImportMovement
 {
     using System;
-    using Core.ImportMovement;
     using Core.Shared;
 
     public class MovementTableData
@@ -22,7 +21,7 @@
 
         public DateTime? RecoveredOrDisposedOf { get; private set; }
 
-        public ImportMovementStatus Status { get; private set; }
+        public bool IsCancelled { get; private set; }
 
         public static MovementTableData Load(ImportMovement movement,
             ImportMovementReceipt movementReceipt,
@@ -36,6 +35,7 @@
                 data.Number = movement.Number;
                 data.PreNotification = movement.PrenotificationDate;
                 data.ShipmentDate = movement.ActualShipmentDate;
+                data.IsCancelled = movement.IsCancelled;
             }
 
             if (movementReceipt != null)

@@ -22,6 +22,6 @@
 
         public DateTime? RecoveredOrDisposedOf { get; set; }
 
-        public ImportMovementStatus Status { get; set; }
+        public bool IsCancelled { get; set; }
     }
 }

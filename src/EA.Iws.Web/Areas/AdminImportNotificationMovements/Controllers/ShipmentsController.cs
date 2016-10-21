@@ -19,12 +19,11 @@
         }
 
         [HttpGet]
-        public async Task<ActionResult> Index(Guid id, int? status)
+        public async Task<ActionResult> Index(Guid id)
         {
-            var data = await mediator.SendAsync(new GetImportMovementsSummaryTable(id, (ImportMovementStatus?)status));
+            var data = await mediator.SendAsync(new GetImportMovementsSummaryTable(id));
 
             var model = new ShipmentsTableViewModel(data);
-            model.SelectedMovementStatus = (ImportMovementStatus?)status;
 
             return View(model);
         }

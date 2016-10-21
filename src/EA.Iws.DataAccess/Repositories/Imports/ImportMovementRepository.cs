@@ -45,6 +45,15 @@
             return await context.ImportMovements.Where(m => m.NotificationId == importNotificationId).ToArrayAsync();
         }
 
+        public async Task<IEnumerable<ImportMovement>> GetPrenotifiedForNotification(Guid importNotificationId)
+        {
+            await notificationAuthorization.EnsureAccessAsync(importNotificationId);
+            return await context.ImportMovements.Where(m => m.NotificationId == importNotificationId)
+                .Where(m => !context.ImportMovementReceipts.Any(r => r.MovementId == m.Id))
+                .Where(m => !context.ImportMovementCompletedReceipts.Any(r => r.MovementId == m.Id))
+                .ToArrayAsync();
+        }
+
         public void Add(ImportMovement movement)
         {
             context.ImportMovements.Add(movement);

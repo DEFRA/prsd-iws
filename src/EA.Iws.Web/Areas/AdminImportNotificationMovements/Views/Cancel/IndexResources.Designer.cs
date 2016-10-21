@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace EA.Iws.Web.Areas.AdminImportNotificationMovements.Views.Shipments {
+namespace EA.Iws.Web.Areas.AdminImportNotificationMovements.Views.Cancel {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace EA.Iws.Web.Areas.AdminImportNotificationMovements.Views.Shipments {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EA.Iws.Web.Areas.AdminImportNotificationMovements.Views.Shipments.IndexResources", typeof(IndexResources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EA.Iws.Web.Areas.AdminImportNotificationMovements.Views.Cancel.IndexResources", typeof(IndexResources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,115 +61,88 @@ namespace EA.Iws.Web.Areas.AdminImportNotificationMovements.Views.Shipments {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Cancelled.
+        ///   Looks up a localized string similar to Cancel.
         /// </summary>
-        public static string Cancelled {
+        public static string Cancel {
             get {
-                return ResourceManager.GetString("Cancelled", resourceCulture);
+                return ResourceManager.GetString("Cancel", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Choose what you would like to view.
+        ///   Looks up a localized string similar to Date prenotified.
         /// </summary>
-        public static string Dropdown {
+        public static string DatePrenotified {
             get {
-                return ResourceManager.GetString("Dropdown", resourceCulture);
+                return ResourceManager.GetString("DatePrenotified", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to There are no shipments recorded for this notification.
+        ///   Looks up a localized string similar to Which prenotifications would you like to cancel?.
         /// </summary>
-        public static string NoShipmentDataText {
+        public static string Heading {
             get {
-                return ResourceManager.GetString("NoShipmentDataText", resourceCulture);
+                return ResourceManager.GetString("Heading", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Shipment summary.
+        ///   Looks up a localized string similar to There are no prenotifications to cancel..
         /// </summary>
-        public static string SummaryCaption {
+        public static string NoPrenotificaitonsToCancel {
             get {
-                return ResourceManager.GetString("SummaryCaption", resourceCulture);
+                return ResourceManager.GetString("NoPrenotificaitonsToCancel", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Shipment dates.
+        ///   Looks up a localized string similar to Number.
         /// </summary>
-        public static string TabTitle {
+        public static string Number {
             get {
-                return ResourceManager.GetString("TabTitle", resourceCulture);
+                return ResourceManager.GetString("Number", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to No..
+        ///   Looks up a localized string similar to These prenotifications can be cancelled:.
         /// </summary>
-        public static string thNumber {
+        public static string PrenotificationsToCancelHeading {
             get {
-                return ResourceManager.GetString("thNumber", resourceCulture);
+                return ResourceManager.GetString("PrenotificationsToCancelHeading", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Prenotified.
+        ///   Looks up a localized string similar to Select prenotifications to cancel.
         /// </summary>
-        public static string thPrenotified {
+        public static string SelectPrenotificationsToCancel {
             get {
-                return ResourceManager.GetString("thPrenotified", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Quantity.
-        /// </summary>
-        public static string thQuantity {
-            get {
-                return ResourceManager.GetString("thQuantity", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Received.
-        /// </summary>
-        public static string thReceived {
-            get {
-                return ResourceManager.GetString("thReceived", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Recovered.
-        /// </summary>
-        public static string thRecovered {
-            get {
-                return ResourceManager.GetString("thRecovered", resourceCulture);
+                return ResourceManager.GetString("SelectPrenotificationsToCancel", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Shipment due.
         /// </summary>
-        public static string thShipmentDue {
+        public static string ShipmentDue {
             get {
-                return ResourceManager.GetString("thShipmentDue", resourceCulture);
+                return ResourceManager.GetString("ShipmentDue", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Status.
+        ///   Looks up a localized string similar to You can only cancel a prenotified shipment if it hasn&apos;t been shipped yet..
         /// </summary>
-        public static string thStatus {
+        public static string SubHeading {
             get {
-                return ResourceManager.GetString("thStatus", resourceCulture);
+                return ResourceManager.GetString("SubHeading", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Shipment key dates.
+        ///   Looks up a localized string similar to Select prenotification to cancel.
         /// </summary>
         public static string Title {
             get {

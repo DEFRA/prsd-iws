@@ -19,7 +19,7 @@
                 Unit = i.Unit,
                 Rejected = i.Rejected,
                 RecoveredOrDisposedOf = i.RecoveredOrDisposedOf,
-                Status = i.Status
+                IsCancelled = i.IsCancelled
             }).ToList();
         }
     }

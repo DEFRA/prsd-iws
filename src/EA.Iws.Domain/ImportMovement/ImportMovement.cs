@@ -13,11 +13,14 @@
 
         public DateTime? PrenotificationDate { get; private set; }
 
+        public bool IsCancelled { get; private set; }
+
         internal ImportMovement(Guid notificationId, int number, DateTime actualDate)
         {
             ActualShipmentDate = actualDate;
             NotificationId = notificationId;
             Number = number;
+            IsCancelled = false;
         }
 
         private ImportMovement()
@@ -47,6 +50,16 @@
         public ImportMovementCompletedReceipt Complete(DateTime date)
         {
             return new ImportMovementCompletedReceipt(Id, date);
+        }
+
+        internal void Cancel()
+        {
+            if (IsCancelled)
+            {
+                throw new InvalidOperationException(string.Format("Movement {0} is already cancelled", Id));
+            }
+
+            IsCancelled = true;
         }
     }
 }
