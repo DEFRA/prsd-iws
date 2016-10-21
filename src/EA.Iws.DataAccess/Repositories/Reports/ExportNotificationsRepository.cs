@@ -20,22 +20,25 @@
         {
             return await context.Database.SqlQuery<DataExportNotification>(
                 @"SELECT	[NotificationNumber],
-		                    [NotificationType],
-		                    [Status],
-		                    [NotificationReceived],
-		                    [PaymentReceived],
-		                    [AssessmentStarted],
-		                    [ApplicationCompleted],
-		                    [Transmitted],
-		                    [Acknowledged],
-		                    [DecisionDate],
+                            [NotificationType],
+                            [Status],
+                            [NotificationReceived],
+                            [PaymentReceived],
+                            [AssessmentStarted],
+                            [ApplicationCompleted],
+                            [Transmitted],
+                            [Acknowledged],
+                            [DecisionDate],
                             [Consented],
                             [Officer]
 
                     FROM	[Reports].[DataExportNotifications]
 
-                    WHERE	[CompetentAuthorityId] = @ca",
-                new SqlParameter("@ca", (int)competentAuthority)).ToArrayAsync();
+                    WHERE	[CompetentAuthorityId] = @ca
+                    AND     [NotificationReceived] BETWEEN @from AND @to",
+                new SqlParameter("@ca", (int)competentAuthority),
+                new SqlParameter("@from", from),
+                new SqlParameter("@to", to)).ToArrayAsync();
         }
     }
 }
