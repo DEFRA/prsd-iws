@@ -7,6 +7,7 @@ AS
     SELECT
         N.[Id] AS Id,
         N.[NotificationNumber],
+		N.[UserId],
         NT.[Description] AS [Type],
         NT.Id AS [TypeId],
         CA.[UnitedKingdomCountry] AS [CompetentAuthorityCountry],
@@ -67,6 +68,7 @@ AS
     SELECT 
         N.[Id] AS Id,
         N.[NotificationNumber],
+		NULL AS [UserId],
         NT.[Description] AS [Type],
         NT.[Id] AS [TypeId],
         CA.[UnitedKingdomCountry] AS [CompetentAuthorityCountry],

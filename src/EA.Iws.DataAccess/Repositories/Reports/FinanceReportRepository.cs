@@ -21,6 +21,7 @@
             return await context.Database.SqlQuery<Finance>(
                 @"SELECT
                     [NotificationNumber],
+                    [CreatedBy],
                     [Notifier],
                     [NotifierAddress],
                     [Consignee],

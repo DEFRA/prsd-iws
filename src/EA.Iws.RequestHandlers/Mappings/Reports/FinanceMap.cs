@@ -16,6 +16,7 @@
                 ConsentTo = source.ConsentTo,
                 Consignee = source.Consignee,
                 ConsigneeAddress = source.ConsigneeAddress,
+                CreatedBy = source.CreatedBy,
                 Facility = source.Facility,
                 FacilityAddress = source.FacilityAddress,
                 IntendedNumberOfShipments = source.IntendedNumberOfShipments,
