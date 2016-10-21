@@ -23,7 +23,7 @@ AS
     FROM
         [Reports].[Notification] N
         INNER JOIN [Reports].[NotificationOrganisations] O ON N.Id = O.Id
-        INNER JOIN [Reports].[WasteType] WT ON N.Id = WT.NotificationId AND WT.ChemicalCompositionTypeId IN (1, 2, 3)
+        INNER JOIN [Reports].[WasteType] WT ON N.Id = WT.NotificationId
         INNER JOIN [Reports].[Movements] M ON N.Id = M.NotificationId
         INNER JOIN [Reports].[TransportRoute] TR ON N.Id = TR.NotificationId
         LEFT JOIN [Reports].[WasteCodes] WC_EWC ON N.Id = WC_EWC.NotificationId AND WC_EWC.CodeType = 3
