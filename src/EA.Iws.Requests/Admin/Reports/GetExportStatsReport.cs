@@ -1,5 +1,6 @@
 ﻿namespace EA.Iws.Requests.Admin.Reports
 {
+    using System;
     using Core.Admin.Reports;
     using Core.Authorization;
     using Core.Authorization.Permissions;
@@ -8,11 +9,14 @@
     [RequestAuthorization(ReportingPermissions.CanViewExportStatsReport)]
     public class GetExportStatsReport : IRequest<ExportStatsData[]>
     {
-        public GetExportStatsReport(int year)
+        public GetExportStatsReport(DateTime @from, DateTime to)
         {
-            Year = year;
+            From = @from;
+            To = to;
         }
 
-        public int Year { get; private set; }
+        public DateTime From { get; private set; }
+
+        public DateTime To { get; private set; }
     }
 }

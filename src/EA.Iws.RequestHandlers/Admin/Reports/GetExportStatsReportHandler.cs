@@ -28,7 +28,7 @@
         public async Task<ExportStatsData[]> HandleAsync(GetExportStatsReport message)
         {
             var user = await internalUserRepository.GetByUserId(userContext.UserId);
-            var report = await exportStatsRepository.GetExportStats(message.Year, user.CompetentAuthority);
+            var report = await exportStatsRepository.GetExportStats(message.From, message.To, user.CompetentAuthority);
 
             return report.Select(p => mapper.Map<ExportStatsData>(p)).ToArray();
         }

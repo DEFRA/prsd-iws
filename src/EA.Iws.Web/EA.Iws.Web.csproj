@@ -1890,6 +1890,12 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="Areas\Reports\ViewModels\ExportStats\IndexViewModel.cs" />
+    <Compile Include="Areas\Reports\ViewModels\ExportStats\IndexViewModelResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IndexViewModelResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Areas\Reports\ViewModels\MissingShipments\IndexViewModel.cs" />
     <Compile Include="Areas\Reports\ViewModels\MissingShipments\IndexViewModelResources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -3752,6 +3758,10 @@
       <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\Reports\ViewModels\ExportNotifications\IndexViewModelResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>IndexViewModelResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\Reports\ViewModels\ExportStats\IndexViewModelResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>IndexViewModelResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
