@@ -141,13 +141,16 @@
   <data name="Date" xml:space="preserve">
     <value>Date refunded</value>
   </data>
-  <data name="DateNotBeforePaymentReceived" xml:space="preserve">
-    <value>The refund date cannot be before the payment received date</value>
+  <data name="DateNotBeforeFirstPayment" xml:space="preserve">
+    <value>The refund date cannot be before the first payment date</value>
   </data>
   <data name="DateNotInFuture" xml:space="preserve">
     <value>The refund date cannot be in the future</value>
   </data>
   <data name="DateRequiredError" xml:space="preserve">
     <value>Please provide the date the refund was made</value>
+  </data>
+  <data name="NoPaymentsMade" xml:space="preserve">
+    <value>A refund cannot be made as no payments have been made yet</value>
   </data>
 </root>

@@ -2,12 +2,10 @@
 {
     using System;
     using System.Threading.Tasks;
-    using Domain.ImportNotification;
-    using Domain.ImportNotificationAssessment;
+    using Core.Shared;
     using Domain.ImportNotificationAssessment.Transactions;
     using FakeItEasy;
     using Prsd.Core;
-    using TestHelpers.Helpers;
     using Xunit;
 
     public class ImportRefundTransactionTests : IDisposable
@@ -15,25 +13,22 @@
         private readonly ImportRefundTransaction refundTransaction;
         private readonly IImportNotificationTransactionRepository transactionRepository;
         private readonly IImportNotificationTransactionCalculator transactionCalculator;
-        private readonly IImportNotificationAssessmentRepository assessmentRepository;
         private readonly Guid notificationId;
 
         public ImportRefundTransactionTests()
         {
             transactionRepository = A.Fake<IImportNotificationTransactionRepository>();
             transactionCalculator = A.Fake<IImportNotificationTransactionCalculator>();
-            assessmentRepository = A.Fake<IImportNotificationAssessmentRepository>();
-            refundTransaction = new ImportRefundTransaction(transactionRepository, transactionCalculator, assessmentRepository);
+            refundTransaction = new ImportRefundTransaction(transactionRepository, transactionCalculator);
             notificationId = new Guid("DB476D01-2870-4322-8284-520B34D9667B");
 
-            var dates = new ImportNotificationDates();
-            dates.PaymentReceivedDate = new DateTime(2015, 12, 1);
-
-            var assessment = new ImportNotificationAssessment(notificationId);
-            ObjectInstantiator<ImportNotificationAssessment>.SetProperty(x => x.Dates, dates, assessment);
-
-            A.CallTo(() => assessmentRepository.GetByNotification(notificationId)).Returns(assessment);
             A.CallTo(() => transactionCalculator.TotalPaid(notificationId)).Returns(100);
+            A.CallTo(() => transactionRepository.GetTransactions(notificationId))
+                .Returns(new[]
+                {
+                    ImportNotificationTransaction.PaymentRecord(notificationId, new DateTime(2015, 12, 1), 100,
+                        PaymentMethod.Cheque, "12345", "comments"),
+                });
 
             SystemTime.Freeze(new DateTime(2016, 1, 1));
         }
@@ -96,7 +91,7 @@
         }
 
         [Fact]
-        public async Task RefundDateCannotBeBeforePaymentReceivedDate()
+        public async Task RefundDateCannotBeBeforeFirstPaymentDate()
         {
             Func<Task> testCode = () => refundTransaction.Save(notificationId, new DateTime(2015, 11, 30), 99, "comment");
 
@@ -113,15 +108,14 @@
         }
 
         [Fact]
-        public async Task CanRefundWithoutAssessmentDates()
+        public async Task CantRefundWhenNoPaymentsMade()
         {
-            var assessment = new ImportNotificationAssessment(notificationId);
-            A.CallTo(() => assessmentRepository.GetByNotification(notificationId)).Returns(assessment);
+            A.CallTo(() => transactionRepository.GetTransactions(notificationId))
+                .Returns(new ImportNotificationTransaction[] { });
 
-            await refundTransaction.Save(notificationId, new DateTime(2016, 1, 1), 100, "comment");
+            Func<Task> testCode = () => refundTransaction.Save(notificationId, new DateTime(2015, 12, 2), 99, "comment");
 
-            A.CallTo(() => transactionRepository.Add(A<ImportNotificationTransaction>.Ignored))
-                .MustHaveHappened(Repeated.Exactly.Once);
+            await Assert.ThrowsAsync<InvalidOperationException>(testCode);
         }
     }
 }

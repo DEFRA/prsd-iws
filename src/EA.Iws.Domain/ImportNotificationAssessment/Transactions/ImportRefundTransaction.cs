@@ -1,25 +1,22 @@
 ﻿namespace EA.Iws.Domain.ImportNotificationAssessment.Transactions
 {
     using System;
+    using System.Linq;
     using System.Threading.Tasks;
     using Core.ComponentRegistration;
-    using ImportNotification;
     using Prsd.Core;
 
     [AutoRegister]
     public class ImportRefundTransaction
     {
-        private readonly IImportNotificationAssessmentRepository assessmentRepository;
         private readonly IImportNotificationTransactionCalculator transactionCalculator;
         private readonly IImportNotificationTransactionRepository transactionRepository;
 
         public ImportRefundTransaction(IImportNotificationTransactionRepository transactionRepository,
-            IImportNotificationTransactionCalculator transactionCalculator,
-            IImportNotificationAssessmentRepository assessmentRepository)
+            IImportNotificationTransactionCalculator transactionCalculator)
         {
             this.transactionRepository = transactionRepository;
             this.transactionCalculator = transactionCalculator;
-            this.assessmentRepository = assessmentRepository;
         }
 
         public async Task Save(Guid notificationId, DateTime date, decimal amount, string comments)
@@ -38,14 +35,20 @@
                     string.Format("Refund amount cannot exceed total amount paid for notification {0}", notificationId));
             }
 
-            var assessment = await assessmentRepository.GetByNotification(notificationId);
+            var firstPayment = (await transactionRepository.GetTransactions(notificationId))
+                .OrderBy(x => x.Date)
+                .FirstOrDefault(x => x.Credit != null);
 
-            if (assessment.Dates != null
-                && assessment.Dates.PaymentReceivedDate.HasValue
-                && date < assessment.Dates.PaymentReceivedDate.Value)
+            if (firstPayment == null)
             {
                 throw new InvalidOperationException(
-                    string.Format("Refund date cannot be before the payment received date for notification {0}",
+                    string.Format("Can't make a refund for notification {0} when no payments have been made", notificationId));
+            }
+
+            if (date < firstPayment.Date)
+            {
+                throw new InvalidOperationException(
+                    string.Format("Refund date cannot be before the first payment date for notification {0}",
                         notificationId));
             }
 

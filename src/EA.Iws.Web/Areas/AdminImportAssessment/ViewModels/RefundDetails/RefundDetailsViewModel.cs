@@ -19,7 +19,7 @@
 
         public decimal Limit { get; set; }
 
-        public DateTime? PaymentReceivedDate { get; set; }
+        public DateTime? FirstPaymentReceivedDate { get; set; }
 
         [Required(ErrorMessageResourceName = "AmountRefundedError",
             ErrorMessageResourceType = typeof(RefundDetailsViewModelResources))]
@@ -67,11 +67,20 @@
                             new[] { "Date" }));
                 }
 
-                if (PaymentReceivedDate.HasValue && Date.AsDateTime().Value < PaymentReceivedDate.Value)
+                if (FirstPaymentReceivedDate.HasValue)
+                {
+                    if (Date.AsDateTime().Value < FirstPaymentReceivedDate.Value)
+                    {
+                        results.Add(
+                            new ValidationResult(RefundDetailsViewModelResources.DateNotBeforeFirstPayment,
+                                new[] { "Date" }));
+                    }    
+                }
+                else
                 {
                     results.Add(
-                        new ValidationResult(RefundDetailsViewModelResources.DateNotBeforePaymentReceived,
-                            new[] { "Date" }));
+                            new ValidationResult(RefundDetailsViewModelResources.NoPaymentsMade,
+                                new[] { "Date" }));
                 }
             }
 

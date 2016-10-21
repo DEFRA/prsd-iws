@@ -134,11 +134,11 @@ namespace EA.Iws.Web.Areas.AdminImportAssessment.ViewModels.RefundDetails {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The refund date cannot be before the payment received date.
+        ///   Looks up a localized string similar to The refund date cannot be before the first payment date.
         /// </summary>
-        public static string DateNotBeforePaymentReceived {
+        public static string DateNotBeforeFirstPayment {
             get {
-                return ResourceManager.GetString("DateNotBeforePaymentReceived", resourceCulture);
+                return ResourceManager.GetString("DateNotBeforeFirstPayment", resourceCulture);
             }
         }
         
@@ -157,6 +157,15 @@ namespace EA.Iws.Web.Areas.AdminImportAssessment.ViewModels.RefundDetails {
         public static string DateRequiredError {
             get {
                 return ResourceManager.GetString("DateRequiredError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A refund cannot be made as no payments have been made yet.
+        /// </summary>
+        public static string NoPaymentsMade {
+            get {
+                return ResourceManager.GetString("NoPaymentsMade", resourceCulture);
             }
         }
     }
