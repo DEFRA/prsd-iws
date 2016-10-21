@@ -7,7 +7,7 @@ AS
 
 SELECT
 	SUM(QuantityReceived) AS QuantityReceived,
-	[Year],
+	[ReceivedDate],
 	[CompetentAuthority],
 	CASE 
 		WHEN YCode IS NULL AND BaselOecd IS NULL THEN 'BASEL WASTE, Y CODE UNASSIGNED'
@@ -27,7 +27,7 @@ SELECT
 FROM (
 	SELECT
 		M.QuantityReceived,
-		YEAR(M.ReceivedDate) AS Year,
+		M.ReceivedDate,
 		N.[CompetentAuthority],
 		WT.Description AS WasteStreams,
 		TR.ImportCountryCode AS [CountryOfImport],
@@ -84,7 +84,7 @@ FROM (
 		M.Status IN (3, 4)
 ) DATA
 GROUP BY
-	[Year],
+	[ReceivedDate],
 	[CompetentAuthority],
 	YCode,
 	WasteStreams,

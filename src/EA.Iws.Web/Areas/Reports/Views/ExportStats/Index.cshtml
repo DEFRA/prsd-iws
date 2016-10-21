@@ -1,8 +1,28 @@
-﻿
+﻿@model EA.Iws.Web.Areas.Reports.ViewModels.ExportStats.IndexViewModel
 @{
     ViewBag.Title = "Export stats";
 }
 
 <h1 class="heading-large">Export stats</h1>
 
-@Html.ActionLink("Download for 2015", "Download", new { year = 2015 }, new { @class = "button" })
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.Gds().ValidationSummary()
+
+    <div class="form-group @Html.Gds().FormGroupClass(m => m.From) @Html.Gds().FormGroupClass(m => m.From.Day) @Html.Gds().FormGroupClass(m => m.From.Month) @Html.Gds().FormGroupClass(m => m.From.Year)">
+        @Html.LabelFor(m => m.From)
+        @Html.Gds().ValidationMessageFor(m => m.From)
+        @Html.EditorFor(m => m.From)
+    </div>
+
+    <div class="form-group @Html.Gds().FormGroupClass(m => m.To) @Html.Gds().FormGroupClass(m => m.To.Day) @Html.Gds().FormGroupClass(m => m.To.Month) @Html.Gds().FormGroupClass(m => m.To.Year)">
+        @Html.LabelFor(m => m.To)
+        @Html.Gds().ValidationMessageFor(m => m.To)
+        @Html.EditorFor(m => m.To)
+    </div>
+
+    <div class="form-group">
+        <button class="button" type="submit">Generate report</button>
+    </div>
+}

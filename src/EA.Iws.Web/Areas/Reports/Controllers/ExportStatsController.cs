@@ -7,6 +7,7 @@
     using Infrastructure;
     using Prsd.Core.Mediator;
     using Requests.Admin.Reports;
+    using ViewModels.ExportStats;
 
     [Authorize(Roles = "internal")]
     public class ExportStatsController : Controller
@@ -21,15 +22,24 @@
         [HttpGet]
         public ActionResult Index()
         {
-            return View();
+            return View(new IndexViewModel());
         }
 
-        [HttpGet]
-        public async Task<ActionResult> Download(int year)
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Index(IndexViewModel model)
         {
-            var report = await mediator.SendAsync(new GetExportStatsReport(year));
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
 
-            var fileName = string.Format("export-stats-{0}.csv", year);
+            var from = model.From.AsDateTime().Value;
+            var to = model.To.AsDateTime().Value;
+
+            var report = await mediator.SendAsync(new GetExportStatsReport(from, to));
+
+            var fileName = string.Format("export-stats-{0}-{1}.csv", from.ToShortDateString(), to.ToShortDateString());
 
             return new CsvActionResult<ExportStatsData>(report.ToList(), fileName);
         }
