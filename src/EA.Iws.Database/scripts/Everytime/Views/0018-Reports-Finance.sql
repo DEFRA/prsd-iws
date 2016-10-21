@@ -6,6 +6,7 @@ ALTER VIEW [Reports].[Finance]
 AS
     SELECT 
         NO.NotificationNumber,
+        CASE WHEN IU.Id IS NULL THEN 'External' ELSE 'Internal' END AS CreatedBy,
         NO.Exporter AS [Notifier],
         NO.ExporterAddress AS [NotifierAddress],
         NO.Importer AS [Consignee],
@@ -33,7 +34,8 @@ AS
     INNER JOIN [Reports].[NotificationAssessment] NA ON NO.Id = NA.NotificationId
     INNER JOIN [Reports].[Notification] N ON NO.Id = N.Id
     LEFT JOIN [Reports].[Payments] P ON NO.Id = P.NotificationId
+    LEFT JOIN [Person].[InternalUser] IU ON N.[UserId] = IU.[UserId]
     WHERE 
-        (NA.[ExportStatusId] IS NULL OR NA.[ExportStatusId] <> 1)
+        (NA.[ExportStatusId] IS NULL OR NA.[ExportStatusId] <> 1 OR (NA.[ExportStatusId] = 1 AND IU.[UserId] IS NOT NULL))
         AND (NA.[ImportStatusId] IS NULL OR NA.[ImportStatusId] > 2)
 GO

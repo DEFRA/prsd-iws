@@ -6,6 +6,8 @@
     {
         public string NotificationNumber { get; protected set; }
 
+        public string CreatedBy { get; set; }
+
         public string Notifier { get; protected set; }
 
         public string NotifierAddress { get; protected set; }
