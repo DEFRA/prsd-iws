@@ -121,13 +121,13 @@
     <value>Address</value>
   </data>
   <data name="AddressDescription" xml:space="preserve">
-    <value>This should be the site address for the {0}.</value>
+    <value>This should be the site address for the {0} facility.</value>
   </data>
   <data name="Contact" xml:space="preserve">
     <value>Contact person</value>
   </data>
   <data name="ContactDescription" xml:space="preserve">
-    <value>This should be the contact person for the {0}.</value>
+    <value>This should be the contact person for the {0} facility.</value>
   </data>
   <data name="FacilityDetails" xml:space="preserve">
     <value>Facility details</value>
