@@ -9,21 +9,21 @@
 
     internal class GetTechnologyEmployedHandler : IRequestHandler<GetTechnologyEmployed, TechnologyEmployedData>
     {
-        private readonly INotificationApplicationRepository notificationRepository;
-        private readonly IMap<NotificationApplication, TechnologyEmployedData> mapper;
+        private readonly ITechnologyEmployedRepository technologyEmployedRepository;
+        private readonly IMap<TechnologyEmployed, TechnologyEmployedData> mapper;
 
-        public GetTechnologyEmployedHandler(INotificationApplicationRepository notificationRepository,
-            IMap<NotificationApplication, TechnologyEmployedData> mapper)
+        public GetTechnologyEmployedHandler(ITechnologyEmployedRepository technologyEmployedRepository,
+            IMap<TechnologyEmployed, TechnologyEmployedData> mapper)
         {
-            this.notificationRepository = notificationRepository;
+            this.technologyEmployedRepository = technologyEmployedRepository;
             this.mapper = mapper;
         }
 
         public async Task<TechnologyEmployedData> HandleAsync(GetTechnologyEmployed message)
         {
-            var notification = await notificationRepository.GetById(message.NotificationId);
+            var technologyEmployed = await technologyEmployedRepository.GetByNotificaitonId(message.NotificationId);
 
-            return mapper.Map(notification);
+            return mapper.Map(technologyEmployed);
         }
     }
 }

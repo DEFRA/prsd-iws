@@ -13,27 +13,31 @@
         private readonly TestableNotificationApplication notification;
 
         private readonly RequiredAnnexes requiredAnnexes;
+        private TechnologyEmployed technologyEmployed;
+        private readonly Guid notificationId = new Guid("F1105BF7-5119-43AA-8157-444F605332E6");
+        private ITechnologyEmployedRepository technologyEmployedRepository;
 
         public RequiredAnnexesTests()
         {
             var notificationApplicationRepository = A.Fake<INotificationApplicationRepository>();
+            technologyEmployedRepository = A.Fake<ITechnologyEmployedRepository>();
 
             notification = new TestableNotificationApplication();
+            notification.Id = notificationId;
+            technologyEmployed = TechnologyEmployed.CreateTechnologyEmployedWithFurtherDetails(notificationId, "details", "further details");
 
-            A.CallTo(() => notificationApplicationRepository.GetById(A<Guid>.Ignored)).Returns(notification);
+            A.CallTo(() => notificationApplicationRepository.GetById(notificationId)).Returns(notification);
 
-            requiredAnnexes = new RequiredAnnexes(notificationApplicationRepository);
+            A.CallTo(() => technologyEmployedRepository.GetByNotificaitonId(notificationId))
+                .Returns(technologyEmployed);
+
+            requiredAnnexes = new RequiredAnnexes(notificationApplicationRepository, technologyEmployedRepository);
         }
 
         [Fact]
         public async Task NoAnnexesRequired()
         {
-            notification.TechnologyEmployed = new TestableTechnologyEmployed
-            {
-                AnnexProvided = false
-            };
-
-            var result = await requiredAnnexes.Get(Guid.Empty);
+            var result = await requiredAnnexes.Get(notificationId);
 
             Assert.False(result.IsProcessOfGenerationRequired);
             Assert.False(result.IsTechnologyEmployedRequired);
@@ -43,12 +47,15 @@
         [Fact]
         public async Task TechnologyEmployedRequired()
         {
-            notification.TechnologyEmployed = new TestableTechnologyEmployed
+            technologyEmployed = new TestableTechnologyEmployed
             {
                 AnnexProvided = true
             };
 
-            var result = await requiredAnnexes.Get(Guid.Empty);
+            A.CallTo(() => technologyEmployedRepository.GetByNotificaitonId(notificationId))
+                .Returns(technologyEmployed);
+
+            var result = await requiredAnnexes.Get(notificationId);
 
             Assert.True(result.IsTechnologyEmployedRequired);
         }
@@ -61,7 +68,7 @@
                 HasAnnex = true
             };
 
-            var result = await requiredAnnexes.Get(Guid.Empty);
+            var result = await requiredAnnexes.Get(notificationId);
 
             Assert.True(result.IsWasteCompositionRequired);
         }
@@ -71,7 +78,7 @@
         {
             notification.IsWasteGenerationProcessAttached = true;
             
-            var result = await requiredAnnexes.Get(Guid.Empty);
+            var result = await requiredAnnexes.Get(notificationId);
 
             Assert.True(result.IsProcessOfGenerationRequired);
         } 

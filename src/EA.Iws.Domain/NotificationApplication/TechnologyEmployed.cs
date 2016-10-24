@@ -6,8 +6,10 @@
 
     public class TechnologyEmployed : Entity
     {
-        private TechnologyEmployed(bool annexProvided, string details, string furtherDetails)
+        private TechnologyEmployed(Guid notificationId, bool annexProvided, string details, string furtherDetails)
         {
+            Guard.ArgumentNotDefaultValue(() => notificationId, notificationId);
+
             if (annexProvided && !string.IsNullOrEmpty(furtherDetails))
             {
                 throw new InvalidOperationException(string.Format("NotificationId {0} - If AnnexProvided is selected then Further Details must not contain any text", Id));
@@ -23,6 +25,7 @@
                 throw new InvalidOperationException(string.Format("NotificationId {0} - Details must not be more than 70 characters", Id));
             }
 
+            NotificationId = notificationId;
             AnnexProvided = annexProvided;
             Details = details;
             FurtherDetails = furtherDetails;
@@ -32,19 +35,37 @@
         {
         }
 
+        public Guid NotificationId { get; private set; }
+
         public bool AnnexProvided { get; private set; }
         public string Details { get; private set; }
         public string FurtherDetails { get; private set; }
 
-        public static TechnologyEmployed CreateTechnologyEmployedWithAnnex(string details)
-        {
-            return new TechnologyEmployed(true, details, null);
-        }
-
-        public static TechnologyEmployed CreateTechnologyEmployedWithFurtherDetails(string details, string furtherDetails)
+        public void SetWithAnnex(string details)
         {
             Guard.ArgumentNotNullOrEmpty(() => details, details);
-            return new TechnologyEmployed(false, details, furtherDetails);
+            AnnexProvided = true;
+            Details = details;
+            FurtherDetails = null;
+        }
+
+        public void SetWithFurtherDetails(string details, string furtherDetails)
+        {
+            Guard.ArgumentNotNullOrEmpty(() => details, details);
+            AnnexProvided = false;
+            Details = details;
+            FurtherDetails = furtherDetails;
+        }
+
+        public static TechnologyEmployed CreateTechnologyEmployedWithAnnex(Guid notificationId, string details)
+        {
+            return new TechnologyEmployed(notificationId, true, details, null);
+        }
+
+        public static TechnologyEmployed CreateTechnologyEmployedWithFurtherDetails(Guid notificationId, string details, string furtherDetails)
+        {
+            Guard.ArgumentNotNullOrEmpty(() => details, details);
+            return new TechnologyEmployed(notificationId, false, details, furtherDetails);
         }
     }
 }

@@ -4,26 +4,25 @@
     using Domain.NotificationApplication;
     using Prsd.Core.Mapper;
 
-    internal class TechnologyEmployedMap : IMap<NotificationApplication, TechnologyEmployedData>
+    internal class TechnologyEmployedMap : IMap<TechnologyEmployed, TechnologyEmployedData>
     {
-        public TechnologyEmployedData Map(NotificationApplication source)
+        public TechnologyEmployedData Map(TechnologyEmployed source)
         {
-            if (source.HasTechnologyEmployed)
+            if (source != null)
             {
                 return new TechnologyEmployedData
                 {
-                    AnnexProvided = source.TechnologyEmployed.AnnexProvided,
-                    Details = source.TechnologyEmployed.Details,
-                    NotificationId = source.Id,
-                    FurtherDetails = source.TechnologyEmployed.FurtherDetails,
+                    AnnexProvided = source.AnnexProvided,
+                    Details = source.Details,
+                    NotificationId = source.NotificationId,
+                    FurtherDetails = source.FurtherDetails,
                     HasTechnologyEmployed = true,
                 };
             }
 
             return new TechnologyEmployedData
             {
-                NotificationId = source.Id,
-                HasTechnologyEmployed = false,
+                HasTechnologyEmployed = false
             };
         }
     }

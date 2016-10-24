@@ -270,9 +270,12 @@
             var copiedNotification = GetCopied();
             var sourceNotification = GetSource();
 
+            var sourceTech = await context.TechnologiesEmployed.SingleAsync(x => x.NotificationId == sourceNotification.Id);
+            var destTech = await context.TechnologiesEmployed.SingleAsync(x => x.NotificationId == copiedNotification.Id);
+
             Assert.Equal(sourceNotification.OperationInfos.Select(oi => oi.OperationCode).OrderBy(oc => oc),
                 copiedNotification.OperationInfos.Select(oi => oi.OperationCode).OrderBy(oc => oc));
-            Assert.Equal(sourceNotification.TechnologyEmployed.Details, copiedNotification.TechnologyEmployed.Details);
+            Assert.Equal(sourceTech.Details, destTech.Details);
             Assert.Equal(sourceNotification.ReasonForExport, copiedNotification.ReasonForExport);
         }
 

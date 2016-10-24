@@ -259,6 +259,7 @@
     <Compile Include="Movement\RejectMovement.cs" />
     <Compile Include="Finance\Activity.cs" />
     <Compile Include="NotificationApplication\IMeansOfTransportRepository.cs" />
+    <Compile Include="NotificationApplication\ITechnologyEmployedRepository.cs" />
     <Compile Include="NotificationApplication\MeansOfTransport.cs" />
     <Compile Include="NotificationApplication\NotificationApplicationFactory.cs" />
     <Compile Include="NotificationApplication\Exporter\IExporterRepository.cs" />
@@ -353,7 +354,6 @@
     <Compile Include="ShipmentQuantity.cs" />
     <Compile Include="ShipmentQuantityUnitConverter.cs" />
     <Compile Include="NotificationApplication\NotificationApplication.PackagingInfo.cs" />
-    <Compile Include="NotificationApplication\NotificationApplication.TechnologyEmployed.cs" />
     <Compile Include="NotificationApplication\NotificationApplication.SpecialHandling.cs" />
     <Compile Include="NotificationApplication\PhysicalCharacteristicsInfo.cs" />
     <Compile Include="NotificationApplication\WasteRecovery\WasteRecovery.cs" />

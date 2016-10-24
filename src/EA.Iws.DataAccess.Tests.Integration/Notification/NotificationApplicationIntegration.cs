@@ -177,23 +177,6 @@
         }
 
         [Fact]
-        public async Task CanAddTechnologyEmployed()
-        {
-            var notification = NotificationApplicationFactory.Create(Guid.NewGuid(), NotificationType.Recovery, UKCompetentAuthority.England, 0);
-
-            context.NotificationApplications.Add(notification);
-
-            notification.SetTechnologyEmployed(TechnologyEmployed.CreateTechnologyEmployedWithFurtherDetails("text area contents", "details"));
-            await context.SaveChangesAsync();
-
-            Assert.True(notification.HasTechnologyEmployed);
-
-            context.DeleteOnCommit(notification.TechnologyEmployed);
-            context.DeleteOnCommit(notification);
-            await context.SaveChangesAsync();
-        }
-
-        [Fact]
         public async Task CanAddSpecialHandlingDetails()
         {
             var notification = NotificationApplicationFactory.Create(Guid.NewGuid(), NotificationType.Recovery,

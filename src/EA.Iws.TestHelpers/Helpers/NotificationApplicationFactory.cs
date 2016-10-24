@@ -94,8 +94,6 @@
                     WasteInformationType.AshContent)
             });
 
-            notification.SetTechnologyEmployed(TechnologyEmployed.CreateTechnologyEmployedWithFurtherDetails("cheddar", "cheese"));
-
             notification.SetOperationCodes(new[] { OperationCode.R1, OperationCode.R7 });
             notification.ReasonForExport = "recovery";
 

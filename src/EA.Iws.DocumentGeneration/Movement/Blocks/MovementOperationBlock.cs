@@ -8,8 +8,8 @@
 
     internal class MovementOperationBlock : OperationBlock
     {
-        public MovementOperationBlock(IList<MergeField> mergeFields, NotificationApplication notification) 
-            : base(mergeFields, notification)
+        public MovementOperationBlock(IList<MergeField> mergeFields, NotificationApplication notification, TechnologyEmployed technologyEmployed) 
+            : base(mergeFields, notification, technologyEmployed)
         {
         }
 

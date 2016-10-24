@@ -10,25 +10,42 @@
     public class SetTechnologyEmployedHandler : IRequestHandler<SetTechnologyEmployed, Guid>
     {
         private readonly IwsContext context;
+        private readonly ITechnologyEmployedRepository technologyEmployedRepository;
 
-        public SetTechnologyEmployedHandler(IwsContext context)
+        public SetTechnologyEmployedHandler(IwsContext context, ITechnologyEmployedRepository technologyEmployedRepository)
         {
             this.context = context;
+            this.technologyEmployedRepository = technologyEmployedRepository;
         }
 
         public async Task<Guid> HandleAsync(SetTechnologyEmployed command)
         {
-            var notification = await context.GetNotificationApplication(command.NotificationId);
+            var technologyEmployed = await technologyEmployedRepository.GetByNotificaitonId(command.NotificationId);
 
-            var technologyEmployed = command.AnnexProvided
-                ? TechnologyEmployed.CreateTechnologyEmployedWithAnnex(command.Details)
-                : TechnologyEmployed.CreateTechnologyEmployedWithFurtherDetails(command.Details, command.FurtherDetails);
+            if (technologyEmployed == null)
+            {
+                technologyEmployed = command.AnnexProvided
+                    ? TechnologyEmployed.CreateTechnologyEmployedWithAnnex(command.NotificationId, command.Details)
+                    : TechnologyEmployed.CreateTechnologyEmployedWithFurtherDetails(command.NotificationId,
+                        command.Details, command.FurtherDetails);
 
-            notification.SetTechnologyEmployed(technologyEmployed);
+                context.TechnologiesEmployed.Add(technologyEmployed);
+            }
+            else
+            {
+                if (command.AnnexProvided)
+                {
+                    technologyEmployed.SetWithAnnex(command.Details);
+                }
+                else
+                {
+                    technologyEmployed.SetWithFurtherDetails(command.Details, command.FurtherDetails);
+                }
+            }
 
             await context.SaveChangesAsync();
 
-            return notification.TechnologyEmployed.Id;
+            return technologyEmployed.Id;
         }
     }
 }

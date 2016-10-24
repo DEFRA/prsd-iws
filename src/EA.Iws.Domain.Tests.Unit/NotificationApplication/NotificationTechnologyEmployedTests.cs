@@ -1,54 +1,40 @@
 ﻿namespace EA.Iws.Domain.Tests.Unit.NotificationApplication
 {
     using System;
-    using Core.Notification;
-    using Core.Shared;
     using Domain.NotificationApplication;
     using Xunit;
 
     public class NotificationTechnologyEmployedTests
     {
-        private readonly NotificationApplication notification;
-
-        private static NotificationApplication CreateNotification()
-        {
-            var notification = new NotificationApplication(Guid.NewGuid(), NotificationType.Disposal,
-                UKCompetentAuthority.England, 0);
-            return notification;
-        }
-
-        public NotificationTechnologyEmployedTests()
-        {
-            notification = CreateNotification();
-        }
+        private readonly Guid notificationId = new Guid("DBCE5E1B-A535-4693-A808-D2168D157D4F");
 
         [Fact]
         public void CanAddTechnologyEmployedDetails()
         {
-            notification.SetTechnologyEmployed(TechnologyEmployed.CreateTechnologyEmployedWithFurtherDetails("text area contents", "further details"));
+            var technologyEmployed = TechnologyEmployed.CreateTechnologyEmployedWithFurtherDetails(notificationId, "text area contents", "further details");
 
-            Assert.Equal(notification.TechnologyEmployed.Details, "text area contents");
+            Assert.Equal(technologyEmployed.Details, "text area contents");
         }
 
         [Fact]
         public void AddTechnologyEmployedDetails_AnnexProvidedIsFalse()
         {
-            notification.SetTechnologyEmployed(TechnologyEmployed.CreateTechnologyEmployedWithFurtherDetails("text area contents", "further details"));
-            Assert.False(notification.TechnologyEmployed.AnnexProvided);
+            var technologyEmployed = TechnologyEmployed.CreateTechnologyEmployedWithFurtherDetails(notificationId, "text area contents", "further details");
+            Assert.False(technologyEmployed.AnnexProvided);
         }
 
         [Fact]
         public void CanAddTechnologyDetailsInAnnex()
         {
-            notification.SetTechnologyEmployed(TechnologyEmployed.CreateTechnologyEmployedWithAnnex("details"));
+            var technologyEmployed = TechnologyEmployed.CreateTechnologyEmployedWithAnnex(notificationId, "details");
 
-            Assert.True(notification.TechnologyEmployed.AnnexProvided);
+            Assert.True(technologyEmployed.AnnexProvided);
         }
 
         [Fact]
         public void TechnologyDetailsCannotBeNull()
         {
-            Action createTechnologyEmployed = () => TechnologyEmployed.CreateTechnologyEmployedWithFurtherDetails(null, null);
+            Action createTechnologyEmployed = () => TechnologyEmployed.CreateTechnologyEmployedWithFurtherDetails(notificationId, null, null);
 
             Assert.Throws<ArgumentNullException>("details", createTechnologyEmployed);
         }
@@ -56,7 +42,7 @@
         [Fact]
         public void TechnologyDetailsCannotBeEmpty()
         {
-            Action createTechnologyEmployed = () => TechnologyEmployed.CreateTechnologyEmployedWithFurtherDetails(string.Empty, string.Empty);
+            Action createTechnologyEmployed = () => TechnologyEmployed.CreateTechnologyEmployedWithFurtherDetails(notificationId, string.Empty, string.Empty);
 
             Assert.Throws<ArgumentException>("details", createTechnologyEmployed);
         }
@@ -64,26 +50,26 @@
         [Fact]
         public void CanUpdateTechnologyEmployedDetails()
         {
-            notification.SetTechnologyEmployed(TechnologyEmployed.CreateTechnologyEmployedWithFurtherDetails("details", "further details"));
-            notification.SetTechnologyEmployed(TechnologyEmployed.CreateTechnologyEmployedWithFurtherDetails("new details", "further details"));
+            var technologyEmployed = TechnologyEmployed.CreateTechnologyEmployedWithFurtherDetails(notificationId, "details", "further details");
+            technologyEmployed.SetWithFurtherDetails("new details", "further details");
 
-            Assert.Equal("new details", notification.TechnologyEmployed.Details);
+            Assert.Equal("new details", technologyEmployed.Details);
         }
 
         [Fact]
         public void CanUpdateTechnologyEmployedAnnexProvided()
         {
-            notification.SetTechnologyEmployed(TechnologyEmployed.CreateTechnologyEmployedWithFurtherDetails("details", "further details"));
-            notification.SetTechnologyEmployed(TechnologyEmployed.CreateTechnologyEmployedWithAnnex("details"));
+            var technologyEmployed = TechnologyEmployed.CreateTechnologyEmployedWithFurtherDetails(notificationId, "details", "further details");
+            technologyEmployed.SetWithAnnex("details");
 
-            Assert.Equal(true, notification.TechnologyEmployed.AnnexProvided);
+            Assert.Equal(true, technologyEmployed.AnnexProvided);
         }
 
         [Fact]
         public void TechnologyDetailsCannotBeMoreThan70CharactersLong()
         {
             const string longString = "ABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZABCDEFGHIJKLMNOPQRSTUVWXYZ";
-            Action createTechnologyEmployed = () => TechnologyEmployed.CreateTechnologyEmployedWithFurtherDetails(longString, "Details");
+            Action createTechnologyEmployed = () => TechnologyEmployed.CreateTechnologyEmployedWithFurtherDetails(notificationId, longString, "Details");
 
             Assert.Throws<InvalidOperationException>(createTechnologyEmployed);
         }

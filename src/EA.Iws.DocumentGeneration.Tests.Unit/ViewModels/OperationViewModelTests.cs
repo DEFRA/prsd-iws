@@ -32,15 +32,14 @@
             notification = new TestableNotificationApplication
             {
                 ReasonForExport = "Washing",
-                OperationInfos = operationInfos,
-                TechnologyEmployed = technologyEmployed
+                OperationInfos = operationInfos
             };
         }
 
         [Fact]
         public void SetsAllFieldsToEmptyStringOrFalseWhereNotificationIsNull()
         {
-            var model = new OperationViewModel(null, formatter);
+            var model = new OperationViewModel(null, null, formatter);
 
             Assert.Equal(string.Empty, model.AnnexProvided);
             Assert.Equal(string.Empty, model.FurtherDetails);
@@ -57,7 +56,7 @@
         {
             technologyEmployed.AnnexProvided = isAnnexProvided;
 
-            var model = new OperationViewModel(notification, formatter);
+            var model = new OperationViewModel(notification, technologyEmployed, formatter);
 
             Assert.Equal(isAnnexProvided, model.IsAnnexProvided);
         }
@@ -65,7 +64,7 @@
         [Fact]
         public void SetsReasonForExportWhereGiven()
         {
-            var model = new OperationViewModel(notification, formatter);
+            var model = new OperationViewModel(notification, technologyEmployed, formatter);
 
             Assert.Equal(notification.ReasonForExport, model.ReasonForExport);
         }
@@ -75,7 +74,7 @@
         {
             notification.ReasonForExport = null;
 
-            var model = new OperationViewModel(notification, formatter);
+            var model = new OperationViewModel(notification, technologyEmployed, formatter);
 
             Assert.Equal(string.Empty, model.ReasonForExport);
         }
@@ -83,7 +82,7 @@
         [Fact]
         public void SetsTechnologyEmployedDetailsWhereGiven()
         {
-            var model = new OperationViewModel(notification, formatter);
+            var model = new OperationViewModel(notification, technologyEmployed, formatter);
 
             Assert.Equal(technologyEmployed.Details, model.TechnologyEmployedDetails);
         }
@@ -93,7 +92,7 @@
         {
             technologyEmployed.Details = null;
 
-            var model = new OperationViewModel(notification, formatter);
+            var model = new OperationViewModel(notification, technologyEmployed, formatter);
 
             Assert.Equal(string.Empty, model.TechnologyEmployedDetails);
         }
@@ -101,9 +100,7 @@
         [Fact]
         public void SetsTechnologyEmployedDetailsEmptyStringWhereTechnologyEmployedIsNull()
         {
-            notification.TechnologyEmployed = null;
-
-            var model = new OperationViewModel(notification, formatter);
+            var model = new OperationViewModel(notification, null, formatter);
 
             Assert.Equal(string.Empty, model.TechnologyEmployedDetails);
         }
@@ -111,7 +108,7 @@
         [Fact]
         public void SetsFurtherDetailsWhereGiven()
         {
-            var model = new OperationViewModel(notification, formatter);
+            var model = new OperationViewModel(notification, technologyEmployed, formatter);
 
             Assert.Equal(technologyEmployed.FurtherDetails, model.FurtherDetails);
         }
@@ -121,7 +118,7 @@
         {
             technologyEmployed.FurtherDetails = null;
 
-            var model = new OperationViewModel(notification, formatter);
+            var model = new OperationViewModel(notification, technologyEmployed, formatter);
 
             Assert.Equal(string.Empty, model.FurtherDetails);
         }
@@ -129,9 +126,7 @@
         [Fact]
         public void SetsFurtherDetailsEmptyStringWhereTechnologyEmployedIsNull()
         {
-            notification.TechnologyEmployed = null;
-
-            var model = new OperationViewModel(notification, formatter);
+            var model = new OperationViewModel(notification, null, formatter);
 
             Assert.Equal(string.Empty, model.FurtherDetails);
         }
@@ -139,7 +134,7 @@
         [Fact]
         public void SetsAnnexProvidedToEmptyString()
         {
-            var model = new OperationViewModel(notification, formatter);
+            var model = new OperationViewModel(notification, technologyEmployed, formatter);
 
             Assert.Equal(string.Empty, model.AnnexProvided);
         }

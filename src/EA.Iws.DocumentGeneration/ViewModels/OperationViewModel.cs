@@ -21,7 +21,7 @@
             annexProvided = GetAnnexProvidedText(model, annexNumber);
         }
 
-        public OperationViewModel(NotificationApplication notification, OperationInfoFormatter formatter)
+        public OperationViewModel(NotificationApplication notification, TechnologyEmployed technologyEmployed, OperationInfoFormatter formatter)
         {
             if (notification == null)
             {
@@ -31,11 +31,11 @@
             reasonForExport = notification.ReasonForExport ?? string.Empty;
             OperationCodes = formatter.OperationInfosToCommaDelimitedList(notification.OperationInfos);
 
-            if (notification.TechnologyEmployed != null)
+            if (technologyEmployed != null)
             {
-                IsAnnexProvided = notification.TechnologyEmployed.AnnexProvided;
-                technologyEmployedDetails = notification.TechnologyEmployed.Details ?? string.Empty;
-                furtherDetails = notification.TechnologyEmployed.FurtherDetails ?? string.Empty;
+                IsAnnexProvided = technologyEmployed.AnnexProvided;
+                technologyEmployedDetails = technologyEmployed.Details ?? string.Empty;
+                furtherDetails = technologyEmployed.FurtherDetails ?? string.Empty;
             }
         }
 
