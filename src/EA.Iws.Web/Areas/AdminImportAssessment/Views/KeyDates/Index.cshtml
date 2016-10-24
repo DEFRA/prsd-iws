@@ -15,7 +15,7 @@
 <div>
     @Resource.FirstParagraph
 
-    <table title="Assessment dates currently recorded" class="form-group">
+    <table title="Assessment dates currently recorded">
         <tr>
             <th>@Resource.DateNameColumnHeader</th>
             <th>@Resource.DateColumnHeader</th>
@@ -267,7 +267,9 @@ else
     }
 }
 
-@Html.ActionLink(Resource.HomeLink, "Index", "Home", new { area = "ImportNotification" }, null)
+<p>
+    @Html.ActionLink(Resource.HomeLink, "Index", "Home", new { area = "ImportNotification" }, null)
+</p>
 
 @section menu {
     @Html.Action("ImportNavigation", "Menu", new { area = "Admin", section = ImportNavigationSection.Assessment })
