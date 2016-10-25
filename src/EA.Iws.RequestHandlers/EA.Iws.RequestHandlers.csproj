@@ -106,6 +106,7 @@
     <Compile Include="Admin\Reports\GetFinanceReportHandler.cs" />
     <Compile Include="Admin\Reports\GetMissingShipmentsReportHandler.cs" />
     <Compile Include="Admin\Reports\GetRdfSrfWoodReportHandler.cs" />
+    <Compile Include="Admin\Search\NotificaitonsAdvancedSearchHandler.cs" />
     <Compile Include="Admin\Search\SearchImportNotificationsHandler.cs" />
     <Compile Include="Admin\SendTestEmailHandler.cs" />
     <Compile Include="Admin\SmokeTestHandler.cs" />
