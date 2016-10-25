@@ -2,11 +2,9 @@
 {
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-    using System.Linq;
     using System.Web.Mvc;
     using Core.WasteType;
     using Infrastructure.Validation;
-    using Prsd.Core;
     using Prsd.Core.Helpers;
     using Web.ViewModels.Shared;
 
@@ -14,8 +12,8 @@
     {
         public IndexViewModel()
         {
-            FromDate = new OptionalDateInputViewModel(SystemTime.Now.AddMonths(-1), true);
-            ToDate = new OptionalDateInputViewModel(SystemTime.Now, true);
+            FromDate = new OptionalDateInputViewModel(true);
+            ToDate = new OptionalDateInputViewModel(true);
 
             ChemicalCompositions = new SelectList(
                 EnumHelper.GetValues(typeof(ChemicalComposition)),
