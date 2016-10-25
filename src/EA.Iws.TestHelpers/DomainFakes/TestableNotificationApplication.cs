@@ -56,12 +56,6 @@
             get { return base.ReasonForExport; }
             set { ObjectInstantiator<NotificationApplication>.SetProperty(x => x.ReasonForExport, value, this); }
         }
-
-        public new TechnologyEmployed TechnologyEmployed
-        {
-            get { return base.TechnologyEmployed; }
-            set { ObjectInstantiator<NotificationApplication>.SetProperty(x => x.TechnologyEmployed, value, this); }
-        }
         
         public new bool? HasSpecialHandlingRequirements
         {

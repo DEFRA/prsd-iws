@@ -2,6 +2,7 @@
 {
     using System.Collections.Generic;
     using System.Linq;
+    using System.Threading.Tasks;
     using Core.Notification.Overview;
     using Core.OperationCodes;
     using Core.Shared;
@@ -12,18 +13,24 @@
     internal class RecoveryOperationInfoMap : IMap<NotificationApplication, RecoveryOperation>
     {
         private readonly IMap<NotificationApplication, string> preconsentedAnswerMap;
-        private readonly IMap<NotificationApplication, TechnologyEmployedData> technologyEmployedMap;
+        private readonly IMap<TechnologyEmployed, TechnologyEmployedData> technologyEmployedMap;
+        private readonly ITechnologyEmployedRepository technologyEmployedRepository;
 
         public RecoveryOperationInfoMap(
             IMap<NotificationApplication, string> preconsentedAnswerMap,
-            IMap<NotificationApplication, TechnologyEmployedData> technologyEmployedMap)
+            IMap<TechnologyEmployed, TechnologyEmployedData> technologyEmployedMap,
+            ITechnologyEmployedRepository technologyEmployedRepository)
         {
             this.preconsentedAnswerMap = preconsentedAnswerMap;
             this.technologyEmployedMap = technologyEmployedMap;
+            this.technologyEmployedRepository = technologyEmployedRepository;
         }
 
         public RecoveryOperation Map(NotificationApplication notification)
         {
+            var technologyEmployed =
+                Task.Run(() => technologyEmployedRepository.GetByNotificaitonId(notification.Id)).Result;
+
             return new RecoveryOperation
             {
                 NotificationId = notification.Id,
@@ -31,7 +38,7 @@
                         ? NotificationType.Disposal
                         : NotificationType.Recovery,
                 PreconstedAnswer = preconsentedAnswerMap.Map(notification),
-                TechnologyEmployed = technologyEmployedMap.Map(notification),
+                TechnologyEmployed = technologyEmployedMap.Map(technologyEmployed),
                 ReasonForExport = notification.ReasonForExport ?? string.Empty,
                 OperationCodes = GetOperationCodes(notification)
             };

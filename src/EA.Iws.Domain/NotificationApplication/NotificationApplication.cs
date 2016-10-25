@@ -48,8 +48,6 @@
 
         public virtual WasteType WasteType { get; private set; }
 
-        public virtual TechnologyEmployed TechnologyEmployed { get; private set; }
-
         public bool? WasteRecoveryInformationProvidedByImporter { get; private set; }
 
         public void SetWasteRecoveryInformationProvider(ProvidedBy providedBy)

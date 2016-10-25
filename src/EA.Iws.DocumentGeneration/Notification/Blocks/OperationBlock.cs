@@ -15,10 +15,10 @@
             get { return data; }
         }
 
-        public OperationBlock(IList<MergeField> mergeFields, NotificationApplication notification)
+        public OperationBlock(IList<MergeField> mergeFields, NotificationApplication notification, TechnologyEmployed technologyEmployed)
         {
             CorrespondingMergeFields = MergeFieldLocator.GetCorrespondingFieldsForBlock(mergeFields, TypeName);
-            data = new OperationViewModel(notification, new OperationInfoFormatter());
+            data = new OperationViewModel(notification, technologyEmployed, new OperationInfoFormatter());
 
             AnnexMergeFields = MergeFieldLocator.GetAnnexMergeFields(mergeFields, TypeName);
         }

@@ -152,6 +152,7 @@
             await carrierCopier.CopyAsync(context, sourceId, clone.Id);
             await producerCopier.CopyAsync(context, sourceId, clone.Id);
             await meansOfTransportCopier.CopyAsync(context, sourceId, clone.Id);
+            await CloneTechnologyEmployed(sourceId, clone.Id);
 
             context.AnnexCollections.Add(new AnnexCollection(clone.Id));
 
@@ -173,7 +174,6 @@
             var clone = await context.Set<NotificationApplication>()
                 .AsNoTracking()
                 .Include("OperationInfosCollection")
-                .Include(n => n.TechnologyEmployed)
                 .Include("PackagingInfosCollection")
                 .Include("WasteType.WasteCompositionCollection")
                 .Include("WasteType.WasteAdditionalInformationCollection")
@@ -248,6 +248,33 @@
             await context.SaveChangesAsync();
 
             return destinationTransportRoute;
+        }
+
+        private async Task CloneTechnologyEmployed(Guid sourceNotificationId, Guid destinationNotificationId)
+        {
+            var technologyEmployed =
+                await context.TechnologiesEmployed.SingleAsync(p => p.NotificationId == sourceNotificationId);
+
+            TechnologyEmployed destinationTechnologyEmployed;
+
+            if (technologyEmployed.AnnexProvided)
+            {
+                destinationTechnologyEmployed =
+                    TechnologyEmployed.CreateTechnologyEmployedWithAnnex(destinationNotificationId,
+                        technologyEmployed.Details);
+            }
+            else
+            {
+                destinationTechnologyEmployed = 
+                    TechnologyEmployed.CreateTechnologyEmployedWithFurtherDetails(
+                        destinationNotificationId,
+                        technologyEmployed.Details,
+                        technologyEmployed.FurtherDetails);
+            }
+
+            context.TechnologiesEmployed.Add(destinationTechnologyEmployed);
+
+            await context.SaveChangesAsync();
         }
     }
 }
