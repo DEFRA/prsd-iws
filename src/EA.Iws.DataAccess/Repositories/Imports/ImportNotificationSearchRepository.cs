@@ -59,8 +59,7 @@
                 x.Assessment.Status,
                 x.Exporter == null ? string.Empty : x.Exporter.Name,
                 x.Importer == null ? string.Empty : x.Importer.Name,
-                x.Notification.NotificationType,
-                x.Assessment.Dates.PaymentReceivedDate.HasValue));
+                x.Notification.NotificationType));
         }
     }
 }

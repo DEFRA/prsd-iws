@@ -13,8 +13,7 @@
                 Id = source.NotificationId,
                 NotificationType = source.NotificationType,
                 NotificationNumber = source.Number,
-                Status = source.Status,
-                IsPaymentFullyReceived = source.IsPaymentFullyReceived
+                Status = source.Status
             };
         }
     }

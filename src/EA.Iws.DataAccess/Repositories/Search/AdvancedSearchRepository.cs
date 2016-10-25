@@ -7,7 +7,6 @@
     using System.Threading.Tasks;
     using Core.Admin.Search;
     using Core.Notification;
-    using Domain.ImportNotification;
     using Domain.Search;
 
     internal class AdvancedSearchRepository : IAdvancedSearchRepository
@@ -31,7 +30,7 @@
             this.context = context;
         }
 
-        public async Task<IEnumerable<BasicSearchResult>> SearchExportNotificationsByCriteria(AdvancedSearchCriteria criteria, UKCompetentAuthority competentAuthority)
+        public async Task<IEnumerable<ExportAdvancedSearchResult>> SearchExportNotificationsByCriteria(AdvancedSearchCriteria criteria, UKCompetentAuthority competentAuthority)
         {
             var result = await GetSearchResults(criteria, competentAuthority, "Export");
 
@@ -58,14 +57,36 @@
 
             var query = string.Format(queryFormat, string.Join(",", parameters.Select(x => x.ParameterName)));
 
-            return await context.Database.SqlQuery<BasicSearchResult>(query, parameters).ToListAsync();
+            return await context.Database.SqlQuery<ExportAdvancedSearchResult>(query, parameters).ToListAsync();
         }
 
-        public async Task<IEnumerable<ImportNotificationSearchResult>> SearchImportNotificationsByCriteria(AdvancedSearchCriteria criteria, UKCompetentAuthority competentAuthority)
+        public async Task<IEnumerable<ImportAdvancedSearchResult>> SearchImportNotificationsByCriteria(AdvancedSearchCriteria criteria, UKCompetentAuthority competentAuthority)
         {
             var result = await GetSearchResults(criteria, competentAuthority, "Import");
 
-            return new ImportNotificationSearchResult[] { };
+            var parameters = result.Select((x, i) => new SqlParameter("@id" + i, x)).ToArray();
+
+            var queryFormat = @"
+                SELECT
+                    N.[Id],
+                    N.[NotificationNumber] AS [Number],
+                    NA.[Status],
+                    E.Name AS [Exporter],
+                    CASE WHEN WT.BaselOecdCodeNotListed = 1 THEN 'Not listed' ELSE WC.Code END AS BaselOecdCode
+                FROM
+                    [ImportNotification].[Notification] N
+                    INNER JOIN [ImportNotification].[NotificationAssessment] NA ON N.Id = NA.NotificationApplicationId
+                    INNER JOIN [ImportNotification].[Exporter] E ON N.Id = E.ImportNotificationId
+                    INNER JOIN [ImportNotification].[WasteType] WT ON N.Id = WT.ImportNotificationId
+                    LEFT JOIN [ImportNotification].[WasteCode] W 
+                        INNER JOIN [Lookup].[WasteCode] WC ON W.WasteCodeId = WC.Id
+                        ON WT.Id = W.WasteTypeId AND WC.CodeType IN (1, 2)
+                WHERE
+                    N.[Id] IN ({0})";
+
+            var query = string.Format(queryFormat, string.Join(",", parameters.Select(x => x.ParameterName)));
+
+            return await context.Database.SqlQuery<ImportAdvancedSearchResult>(query, parameters).ToListAsync();
         }
 
         private async Task<Guid[]> GetSearchResults(AdvancedSearchCriteria criteria, UKCompetentAuthority competentAuthority, string importOrExport)
