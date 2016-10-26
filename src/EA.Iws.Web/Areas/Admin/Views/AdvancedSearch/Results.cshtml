@@ -1,0 +1,97 @@
+﻿@using Resources = EA.Iws.Web.Areas.Admin.Views.AdvancedSearch.ResultsResources
+@model EA.Iws.Web.Areas.Admin.ViewModels.AdvancedSearch.ResultsViewModel
+@{
+    ViewBag.Title = Resources.Heading;
+}
+
+<h1 class="heading-large">
+    @Resources.Heading
+</h1>
+
+@Html.ActionLink(Resources.BackToSearch, "Index")
+
+<h2 class="heading-medium">@Resources.ExportNotificationsHeading</h2>
+
+@if (Model.HasExportResults)
+{
+    <table title="@Resources.ExportTableTitle">
+        <thead>
+            <tr>
+                <th>@Resources.NotificationNumberTableHeading</th>
+                <th>@Resources.StatusTableHeading</th>
+                <th>@Resources.CompanyNameTableHeading</th>
+                <th>@Resources.WasteTypeTableHeading</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (int i = 0; i < Model.ExportResults.Length; i++)
+                {
+                <tr>
+                    <td>
+                        @Html.ActionLink(linkText: @Html.DisplayFor(m => m.ExportResults[i].NotificationNumber).ToString(),
+                                actionName: "Index",
+                                controllerName: "Home",
+                                routeValues: new { id = Model.ExportResults[i].Id, area = "AdminExportAssessment" },
+                                htmlAttributes: null)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(m => m.ExportResults[i].NotificationStatus)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(m => m.ExportResults[i].ExporterName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(m => m.ExportResults[i].WasteType)
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>@Resources.NoResults</p>
+}
+
+<h2 class="heading-medium">@Resources.ImportNotificationsHeading</h2>
+
+@if (Model.HasImportResults)
+{
+    <table title="@Resources.ImportTableTitle">
+        <thead>
+            <tr>
+                <th>@Resources.NotificationNumberTableHeading</th>
+                <th>@Resources.StatusTableHeading</th>
+                <th>@Resources.CompanyNameTableHeading</th>
+                <th>@Resources.BaselCodeTableHeading</th>
+            </tr>
+        </thead>
+        <tbody>
+            @for (int i = 0; i < Model.ImportResults.Length; i++)
+                {
+                <tr>
+                    <td>
+                        @Html.ActionLink(linkText: @Html.DisplayFor(m => m.ImportResults[i].NotificationNumber).ToString(),
+                                actionName: "Index",
+                                controllerName: "Home",
+                                routeValues: new { id = Model.ImportResults[i].Id, area = "ImportNotification" },
+                                htmlAttributes: null)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(m => m.ImportResults[i].Status)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(m => m.ImportResults[i].Exporter)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(m => m.ImportResults[i].BaselOecdCode)
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>@Resources.NoResults</p>
+}

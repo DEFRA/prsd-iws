@@ -56,7 +56,13 @@
         {
             var results = await mediator.SendAsync(new NotificaitonsAdvancedSearch(criteria));
 
-            return View();
+            var model = new ResultsViewModel
+            {
+                ExportResults = results.ExportResults.ToArray(),
+                ImportResults = results.ImportResults.ToArray()
+            };
+
+            return View(model);
         }
 
         private async Task<SelectList> GetAreas()

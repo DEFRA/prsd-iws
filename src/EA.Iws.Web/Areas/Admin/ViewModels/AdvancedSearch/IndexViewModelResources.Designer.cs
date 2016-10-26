@@ -115,6 +115,15 @@ namespace EA.Iws.Web.Areas.Admin.ViewModels.AdvancedSearch {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Please complete at least one search criteria.
+        /// </summary>
+        public static string NoSearchCriteriaCompleted {
+            get {
+                return ResourceManager.GetString("NoSearchCriteriaCompleted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Producer.
         /// </summary>
         public static string ProducerName {
