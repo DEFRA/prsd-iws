@@ -80,12 +80,13 @@
                 SELECT
                     N.[Id],
                     N.[NotificationNumber],
-                    NA.[Status],
+                    S.[Description] AS [Status],
                     E.Name AS [Exporter],
                     CASE WHEN WT.BaselOecdCodeNotListed = 1 THEN 'Not listed' ELSE WC.Code END AS [BaselOecdCode]
                 FROM
                     [ImportNotification].[Notification] N
                     INNER JOIN [ImportNotification].[NotificationAssessment] NA ON N.Id = NA.NotificationApplicationId
+                    INNER JOIN [Lookup].[ImportNotificationStatus] S ON NA.[Status] = S.Id
                     INNER JOIN [ImportNotification].[Exporter] E ON N.Id = E.ImportNotificationId
                     INNER JOIN [ImportNotification].[WasteType] WT ON N.Id = WT.ImportNotificationId
                     LEFT JOIN [ImportNotification].[WasteCode] W 
