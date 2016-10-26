@@ -442,6 +442,7 @@
     <Content Include="Areas\AdminImportNotificationMovements\Views\Cancel\Index.cshtml" />
     <Content Include="Areas\AdminImportNotificationMovements\Views\Cancel\Confirm.cshtml" />
     <Content Include="Areas\AdminImportNotificationMovements\Views\Cancel\Success.cshtml" />
+    <Content Include="Areas\Admin\Views\AdvancedSearch\Index.cshtml" />
     <None Include="Content\iws\_panels.scss" />
     <Content Include="Content\nta-extended.css" />
     <Content Include="Content\select2\select2-spinner.gif" />
@@ -908,6 +909,7 @@
     <Content Include="Content\fonts\fontawesome-webfont.woff" />
     <Content Include="Content\fonts\fontawesome-webfont.ttf" />
     <Content Include="Content\fonts\fontawesome-webfont.eot" />
+    <Content Include="Content\iws\_search.scss" />
     <None Include="Scripts\jquery-2.1.3.intellisense.js" />
     <Content Include="Scripts\govuk\govuk-template.js" />
     <Content Include="Scripts\govuk\ie.js" />
@@ -1280,6 +1282,7 @@
     </Compile>
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\AdminExportAssessment\Controllers\ChangeNotificationOwnerController.cs" />
+    <Compile Include="Areas\Admin\Controllers\AdvancedSearchController.cs" />
     <Compile Include="Areas\Admin\Controllers\ConfigurationController.cs" />
     <Compile Include="Areas\Admin\Controllers\EntryOrExitPointController.cs" />
     <Compile Include="Areas\Admin\Controllers\EntryOrExitPointControllerResources.Designer.cs">
@@ -1306,6 +1309,12 @@
       <DependentUpon>ChangeNotificationOwnerViewModelResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Areas\AdminExportAssessment\ViewModels\ChangeNotificationOwner\SuccessViewModel.cs" />
+    <Compile Include="Areas\Admin\ViewModels\AdvancedSearch\IndexViewModel.cs" />
+    <Compile Include="Areas\Admin\ViewModels\AdvancedSearch\IndexViewModelResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IndexViewModelResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Areas\Admin\ViewModels\EntryOrExitPoint\AddEntryOrExitPointViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\EntryOrExitPoint\AddEntryOrExitPointViewModelResources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -1359,6 +1368,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>SuccessResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Admin\Views\AdvancedSearch\IndexResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IndexResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Areas\Admin\Views\Configuration\Index.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -3001,6 +3015,10 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>ChangeNotificationOwnerViewModelResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Areas\Admin\ViewModels\AdvancedSearch\IndexViewModelResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>IndexViewModelResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Areas\Admin\ViewModels\EntryOrExitPoint\AddEntryOrExitPointViewModelResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>AddEntryOrExitPointViewModelResources.Designer.cs</LastGenOutput>
@@ -3033,6 +3051,10 @@
     <EmbeddedResource Include="Areas\AdminExportAssessment\Views\ChangeNotificationOwner\SuccessResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>SuccessResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\Admin\Views\AdvancedSearch\IndexResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\Admin\Views\Configuration\Index.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

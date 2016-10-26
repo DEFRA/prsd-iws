@@ -63,6 +63,10 @@
     <Compile Include="Admin\Reports\FinanceReportData.cs" />
     <Compile Include="Admin\Reports\MissingShipmentData.cs" />
     <Compile Include="Admin\Reports\RdfSrfWoodData.cs" />
+    <Compile Include="Admin\Search\AdvancedSearchCriteria.cs" />
+    <Compile Include="Admin\Search\AdvancedSearchResult.cs" />
+    <Compile Include="Admin\Search\ExportAdvancedSearchResult.cs" />
+    <Compile Include="Admin\Search\ImportAdvancedSearchResult.cs" />
     <Compile Include="Admin\Search\ImportSearchResult.cs" />
     <Compile Include="Admin\UserAdministration\UserApproval.cs" />
     <Compile Include="Annexes\AnnexFileData.cs" />

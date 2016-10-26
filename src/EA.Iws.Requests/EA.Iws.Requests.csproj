@@ -73,6 +73,7 @@
     <Compile Include="Admin\Reports\GetFinanceReport.cs" />
     <Compile Include="Admin\Reports\GetMissingShipmentsReport.cs" />
     <Compile Include="Admin\Reports\GetRdfSrfWoodReport.cs" />
+    <Compile Include="Admin\Search\NotificaitonsAdvancedSearch.cs" />
     <Compile Include="Admin\Search\SearchImportNotifications.cs" />
     <Compile Include="Admin\SendTestEmail.cs" />
     <Compile Include="Admin\SmokeTest.cs" />

@@ -1,0 +1,2 @@
+﻿CREATE SCHEMA [Search] AUTHORIZATION [dbo];
+GO

@@ -16,6 +16,8 @@ namespace EA.Iws.Web.ViewModels.Shared
 
         public bool AllowPastDates { get; set; }
 
+        public bool ShowLabels { get; set; }
+
         public bool IsCompleted
         {
             get 
@@ -28,16 +30,18 @@ namespace EA.Iws.Web.ViewModels.Shared
             }
         }
 
-        public OptionalDateInputViewModel(bool allowPastDates = false)
+        public OptionalDateInputViewModel(bool allowPastDates = false, bool showLabels = true)
         {
             AllowPastDates = allowPastDates;
+            ShowLabels = showLabels;
             IsAutoTabEnabled = true;
         }
 
-        public OptionalDateInputViewModel(DateTime? date, bool allowPastDates = false)
+        public OptionalDateInputViewModel(DateTime? date, bool allowPastDates = false, bool showLabels = true)
         {
             IsAutoTabEnabled = true;
             AllowPastDates = allowPastDates;
+            ShowLabels = showLabels;
             if (date.HasValue)
             {
                 Day = date.Value.Day;

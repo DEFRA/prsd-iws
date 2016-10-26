@@ -70,6 +70,15 @@ namespace EA.Iws.Web.Areas.Admin.Views.Home {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Advanced search.
+        /// </summary>
+        public static string AdvancedSearch {
+            get {
+                return ResourceManager.GetString("AdvancedSearch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Company name.
         /// </summary>
         public static string CompanyNameTableHeading {

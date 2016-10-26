@@ -2,16 +2,17 @@
 {
     using System;
     using ImportNotificationAssessment;
-    using Shared;
 
-    public class ImportSearchResult
+    public class ImportAdvancedSearchResult
     {
         public Guid Id { get; set; }
 
         public string NotificationNumber { get; set; }
 
-        public NotificationType NotificationType { get; set; }
-
         public ImportNotificationStatus Status { get; set; }
+
+        public string Exporter { get; set; }
+
+        public string BaselOecdCode { get; set; }
     }
 }

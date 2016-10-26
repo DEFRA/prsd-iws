@@ -117,82 +117,25 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AcknowledgedTableHeading" xml:space="preserve">
-    <value>Acknowledged</value>
+  <data name="ConsentValidFrom" xml:space="preserve">
+    <value>Consent "valid from" date</value>
   </data>
-  <data name="AdvancedSearch" xml:space="preserve">
-    <value>Advanced search</value>
+  <data name="ConsentValidTo" xml:space="preserve">
+    <value>Consent "valid to" date</value>
   </data>
-  <data name="CompanyNameTableHeading" xml:space="preserve">
-    <value>Company name</value>
+  <data name="EwcCode" xml:space="preserve">
+    <value>EWC Code</value>
   </data>
-  <data name="DaysRemainingTableHeading" xml:space="preserve">
-    <value>Days remaining</value>
+  <data name="ImportCountryName" xml:space="preserve">
+    <value>Country of import</value>
   </data>
-  <data name="DecisionRequiredTableHeading" xml:space="preserve">
-    <value>Decision required</value>
+  <data name="ImporterName" xml:space="preserve">
+    <value>Consignee (importer)</value>
   </data>
-  <data name="ExportNotificationLink" xml:space="preserve">
-    <value>Create a new export notification</value>
+  <data name="LocalArea" xml:space="preserve">
+    <value>Area</value>
   </data>
-  <data name="ImportNotificationNumberLink" xml:space="preserve">
-    <value>Create a new import notification</value>
-  </data>
-  <data name="MainHeading" xml:space="preserve">
-    <value>Your homepage</value>
-  </data>
-  <data name="ManageNewUsersLink" xml:space="preserve">
-    <value>Manage new users</value>
-  </data>
-  <data name="NavigationLinksHeading" xml:space="preserve">
-    <value>Account services</value>
-  </data>
-  <data name="NoResultsMessage" xml:space="preserve">
-    <value>No matching results were found</value>
-  </data>
-  <data name="NotificationAttentionHeading" xml:space="preserve">
-    <value>Notifications requiring attention</value>
-  </data>
-  <data name="NotificationAttentionNoneText" xml:space="preserve">
-    <value>There are no notifications that require attention.</value>
-  </data>
-  <data name="NotificationAttentionText" xml:space="preserve">
-    <value>These notifications are approaching their decision required date.</value>
-  </data>
-  <data name="NotificationNumberAttentionTableHeading" xml:space="preserve">
-    <value>Notification number</value>
-  </data>
-  <data name="NotificationNumberTableHeading" xml:space="preserve">
-    <value>Notification number</value>
-  </data>
-  <data name="OfficerAttentionTableHeading" xml:space="preserve">
-    <value>Officer</value>
-  </data>
-  <data name="Reports" xml:space="preserve">
-    <value>Reports</value>
-  </data>
-  <data name="ResultsCount" xml:space="preserve">
-    <value>Your search returned {0} export notification(s)</value>
-  </data>
-  <data name="Search" xml:space="preserve">
-    <value>Search for a notification</value>
-  </data>
-  <data name="SearchPlaceholder" xml:space="preserve">
-    <value>Enter notification number or organisation name</value>
-  </data>
-  <data name="StatusTableHeading" xml:space="preserve">
-    <value>Status</value>
-  </data>
-  <data name="Subheading" xml:space="preserve">
-    <value>Export notifications</value>
-  </data>
-  <data name="SystemConfigurationLink" xml:space="preserve">
-    <value>System configuration</value>
-  </data>
-  <data name="TabTitle" xml:space="preserve">
-    <value>Admin Users - Basic Search</value>
-  </data>
-  <data name="WasteTypeTableHeading" xml:space="preserve">
-    <value>Waste type</value>
+  <data name="ProducerName" xml:space="preserve">
+    <value>Producer</value>
   </data>
 </root>

@@ -1,0 +1,65 @@
+﻿@using Resources = EA.Iws.Web.Areas.Admin.Views.AdvancedSearch.IndexResources
+@model EA.Iws.Web.Areas.Admin.ViewModels.AdvancedSearch.IndexViewModel
+@{
+    ViewBag.Title = Resources.Heading;
+}
+
+<h1 class="heading-large">
+    @Resources.Heading
+</h1>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.Gds().ValidationSummary()
+
+    <div id="advanced-search-container" class="grid-row">
+
+        <div class="column-one-half">
+
+            <div class="form-group @Html.Gds().FormGroupClass(m => m.EwcCode)">
+                @Html.Gds().LabelFor(m => m.EwcCode, showOptionalLabel: false)
+                @Html.Gds().ValidationMessageFor(m => m.EwcCode)
+                @Html.Gds().TextBoxFor(m => m.EwcCode)
+            </div>
+
+            <div class="form-group @Html.Gds().FormGroupClass(m => m.ProducerName)">
+                @Html.Gds().LabelFor(m => m.ProducerName, showOptionalLabel: false)
+                @Html.Gds().ValidationMessageFor(m => m.ProducerName)
+                @Html.Gds().TextBoxFor(m => m.ProducerName)
+            </div>
+
+            <div class="form-group @Html.Gds().FormGroupClass(m => m.ImporterName)">
+                @Html.Gds().LabelFor(m => m.ImporterName, showOptionalLabel: false)
+                @Html.Gds().ValidationMessageFor(m => m.ImporterName)
+                @Html.Gds().TextBoxFor(m => m.ImporterName)
+            </div>
+
+        </div>
+
+        <div class="column-one-half">
+
+            <div class="form-group @Html.Gds().FormGroupClass(m => m.ImportCountryName)">
+                @Html.Gds().LabelFor(m => m.ImportCountryName, showOptionalLabel: false)
+                @Html.Gds().ValidationMessageFor(m => m.ImportCountryName)
+                @Html.Gds().TextBoxFor(m => m.ImportCountryName)
+            </div>
+
+            <div class="form-group @Html.Gds().FormGroupClass(m => m.LocalAreaId)">
+                @Html.Gds().LabelFor(m => m.LocalAreaId, showOptionalLabel: false)
+                @Html.Gds().ValidationMessageFor(m => m.LocalAreaId)
+                @Html.Gds().DropDownListFor(m => m.LocalAreaId, Model.Areas, string.Empty, new { data_select_box = "true", data_select_allow_clear = "true" })
+            </div>
+
+            <div class="form-group @Html.Gds().FormGroupClass(m => m.ConsentValidTo)">
+                @Html.Gds().LabelFor(m => m.ConsentValidTo, showOptionalLabel: false)
+                @Html.Gds().ValidationMessageFor(m => m.ConsentValidTo)
+                @Html.EditorFor(m => m.ConsentValidTo)
+            </div>
+
+        </div>
+
+    </div>
+
+    <button type="submit" class="button">@Resources.Search</button>
+}
