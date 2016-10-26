@@ -34,6 +34,11 @@
         {
             var result = await GetSearchResults(criteria, competentAuthority, "Export");
 
+            if (!result.Any())
+            {
+                return Enumerable.Empty<ExportAdvancedSearchResult>();
+            }
+
             var parameters = result.Select((x, i) => new SqlParameter("@id" + i, x)).ToArray();
 
             var queryFormat = @"
@@ -63,6 +68,11 @@
         public async Task<IEnumerable<ImportAdvancedSearchResult>> SearchImportNotificationsByCriteria(AdvancedSearchCriteria criteria, UKCompetentAuthority competentAuthority)
         {
             var result = await GetSearchResults(criteria, competentAuthority, "Import");
+
+            if (!result.Any())
+            {
+                return Enumerable.Empty<ImportAdvancedSearchResult>();
+            }
 
             var parameters = result.Select((x, i) => new SqlParameter("@id" + i, x)).ToArray();
 
