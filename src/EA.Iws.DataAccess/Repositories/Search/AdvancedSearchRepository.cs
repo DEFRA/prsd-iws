@@ -79,10 +79,10 @@
             var queryFormat = @"
                 SELECT
                     N.[Id],
-                    N.[NotificationNumber] AS [Number],
+                    N.[NotificationNumber],
                     NA.[Status],
                     E.Name AS [Exporter],
-                    CASE WHEN WT.BaselOecdCodeNotListed = 1 THEN 'Not listed' ELSE WC.Code END AS BaselOecdCode
+                    CASE WHEN WT.BaselOecdCodeNotListed = 1 THEN 'Not listed' ELSE WC.Code END AS [BaselOecdCode]
                 FROM
                     [ImportNotification].[Notification] N
                     INNER JOIN [ImportNotification].[NotificationAssessment] NA ON N.Id = NA.NotificationApplicationId
