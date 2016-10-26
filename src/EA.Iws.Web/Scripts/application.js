@@ -167,6 +167,10 @@ $(document).ready(function () {
         });
     });
 
+    $("select[data-select-allow-clear='true']").select2({
+        allowClear: true
+    });
+
     // Menu
     $("#accordion h3").click(function() {
         if ($(this).hasClass("current")) {
