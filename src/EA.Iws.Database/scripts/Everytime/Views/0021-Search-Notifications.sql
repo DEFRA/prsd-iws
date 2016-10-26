@@ -19,6 +19,8 @@ AS
         CON.[To] AS ConsentValidTo
     FROM
         [Notification].[Notification] N
+        INNER JOIN [Notification].[NotificationAssessment] NA ON N.Id = NA.NotificationApplicationId
+            AND NA.[Status] <> 1
         LEFT JOIN [Notification].[WasteCodeInfo] WCI 
             INNER JOIN [Lookup].[WasteCode] WC ON WCI.WasteCodeId = WC.Id
         ON N.Id = WCI.NotificationId

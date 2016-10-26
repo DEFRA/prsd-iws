@@ -9,7 +9,7 @@
 
         public string NotificationNumber { get; set; }
 
-        public ImportNotificationStatus Status { get; set; }
+        public string Status { get; set; }
 
         public string Exporter { get; set; }
 

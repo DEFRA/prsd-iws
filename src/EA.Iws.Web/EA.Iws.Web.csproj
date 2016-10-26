@@ -443,6 +443,7 @@
     <Content Include="Areas\AdminImportNotificationMovements\Views\Cancel\Confirm.cshtml" />
     <Content Include="Areas\AdminImportNotificationMovements\Views\Cancel\Success.cshtml" />
     <Content Include="Areas\Admin\Views\AdvancedSearch\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\AdvancedSearch\Results.cshtml" />
     <None Include="Content\iws\_panels.scss" />
     <Content Include="Content\nta-extended.css" />
     <Content Include="Content\select2\select2-spinner.gif" />
@@ -1315,6 +1316,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>IndexViewModelResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Areas\Admin\ViewModels\AdvancedSearch\ResultsViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\EntryOrExitPoint\AddEntryOrExitPointViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\EntryOrExitPoint\AddEntryOrExitPointViewModelResources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -1373,6 +1375,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>IndexResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Admin\Views\AdvancedSearch\ResultsResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ResultsResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Areas\Admin\Views\Configuration\Index.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -3055,6 +3062,10 @@
     <EmbeddedResource Include="Areas\Admin\Views\AdvancedSearch\IndexResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\Admin\Views\AdvancedSearch\ResultsResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ResultsResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\Admin\Views\Configuration\Index.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

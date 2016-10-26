@@ -15,7 +15,7 @@
                     FROM	[Search].[Notifications]
                     WHERE	[CompetentAuthority] = @ca
                     AND     [ImportOrExport] = @importOrExport
-                    AND     (@ewc IS NULL OR ([CodeType] = 3 AND [Code] LIKE '%@ewc%'))
+                    AND     (@ewc IS NULL OR ([CodeType] = 3 AND [Code] LIKE '%' + @ewc + '%'))
                     AND     (@producerName IS NULL OR [ProducerName] LIKE '%' + @producerName + '%')
                     AND     (@importerName IS NULL OR [ImporterName] LIKE '%' + @importerName + '%')
                     AND     (@importCountryName IS NULL OR [CountryOfImport] LIKE '%' + @importCountryName + '%')
@@ -79,13 +79,14 @@
             var queryFormat = @"
                 SELECT
                     N.[Id],
-                    N.[NotificationNumber] AS [Number],
-                    NA.[Status],
+                    N.[NotificationNumber],
+                    S.[Description] AS [Status],
                     E.Name AS [Exporter],
-                    CASE WHEN WT.BaselOecdCodeNotListed = 1 THEN 'Not listed' ELSE WC.Code END AS BaselOecdCode
+                    CASE WHEN WT.BaselOecdCodeNotListed = 1 THEN 'Not listed' ELSE WC.Code END AS [BaselOecdCode]
                 FROM
                     [ImportNotification].[Notification] N
                     INNER JOIN [ImportNotification].[NotificationAssessment] NA ON N.Id = NA.NotificationApplicationId
+                    INNER JOIN [Lookup].[ImportNotificationStatus] S ON NA.[Status] = S.Id
                     INNER JOIN [ImportNotification].[Exporter] E ON N.Id = E.ImportNotificationId
                     INNER JOIN [ImportNotification].[WasteType] WT ON N.Id = WT.ImportNotificationId
                     LEFT JOIN [ImportNotification].[WasteCode] W 
