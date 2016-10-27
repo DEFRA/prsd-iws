@@ -90,34 +90,32 @@
     </table>
 </div>
 
-<h2 class="heading-medium">@IndexResources.CommentSectionHeading</h2>
 
 <div class="form-group">
+    <details role="group">
 
-    @for (var i = 0; i < Model.TableData.Count(); i++)
-    {
-        if (!string.IsNullOrWhiteSpace(Model.TableData[i].Comments))
-        {
-            var trans = (TransactionType)Model.TableData[i].Transaction;
+        <summary role="button"><span class="summary">@IndexResources.CommentSectionHeading</span></summary>
 
-            <details>
-                <summary>
-                    <span class="summary">
-                        @trans
-                        &nbsp;
-                        @Model.TableData[i].Date.ToString("dd/MM/yyyy")
-                    </span>
-                </summary>
+        <div class="panel-border-narrow">
 
-                <div class="panel-indent">
+            @for (var i = 0; i < Model.TableData.Count(); i++)
+            {
+                if (!string.IsNullOrWhiteSpace(Model.TableData[i].Comments))
+                {
+                    var trans = (TransactionType)Model.TableData[i].Transaction;
+
+                    <span>@trans &nbsp; @Model.TableData[i].Date.ToString("dd/MM/yyyy")</span>
                     <p>@Model.TableData[i].Comments</p>
-                </div>
-            </details>
-        }
-    }
+                }
+            }
+        </div>
+
+    </details>
 </div>
 
-@Html.ActionLink(IndexResources.KeyDatesLinkText, "Index", "Keydates")
+<div>
+    @Html.ActionLink(IndexResources.KeyDatesLinkText, "Index", "Keydates")
+</div>
 
 @section menu {
     @Html.Action("ExportNavigation", "Menu", new { area = "Admin", section = ExportNavigationSection.Finance })
