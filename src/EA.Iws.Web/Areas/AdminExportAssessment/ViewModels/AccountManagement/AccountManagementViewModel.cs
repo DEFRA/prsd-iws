@@ -17,6 +17,11 @@
 
         public decimal Balance { get; set; }
 
+        public decimal AmountRemaining
+        {
+            get { return this.TotalBillable - this.Balance; }  
+        }
+
         public IList<TransactionRecordData> TableData { get; set; }
     }
 }
