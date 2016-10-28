@@ -20,8 +20,6 @@
 
         public Guid NotificationId { get; set; }
 
-        public decimal ChargeDue { get; set; }
-
         [Required(ErrorMessageResourceName = "AmountPaidError", ErrorMessageResourceType = typeof(PaymentDetailsViewModelResources))]
         [Display(Name = "AmountPaidLabel", ResourceType = typeof(PaymentDetailsViewModelResources))]
         [IsValidMoneyDecimal]

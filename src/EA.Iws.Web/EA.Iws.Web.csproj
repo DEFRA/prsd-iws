@@ -444,6 +444,7 @@
     <Content Include="Areas\AdminImportNotificationMovements\Views\Cancel\Success.cshtml" />
     <Content Include="Areas\Admin\Views\AdvancedSearch\Index.cshtml" />
     <Content Include="Areas\Admin\Views\AdvancedSearch\Results.cshtml" />
+    <Content Include="Areas\AdminExportAssessment\Views\AccountManagement\_PaymentDetails.cshtml" />
     <None Include="Content\iws\_panels.scss" />
     <Content Include="Content\nta-extended.css" />
     <Content Include="Content\select2\select2-spinner.gif" />
@@ -728,7 +729,6 @@
     <Content Include="Content\iws\_facility-table.scss" />
     <Content Include="Areas\ImportNotification\Views\Shared\EditorTemplates\FacilityAddressViewModel.cshtml" />
     <Content Include="Areas\ImportNotification\Views\Shared\EditorTemplates\FacilityContactViewModel.cshtml" />
-    <Content Include="Areas\AdminExportAssessment\Views\PaymentDetails\Index.cshtml" />
     <Content Include="Areas\AdminExportAssessment\Views\RefundDetails\Index.cshtml" />
     <Content Include="Areas\ImportNotification\Views\WasteType\Index.cshtml" />
     <Content Include="Areas\ImportNotification\Views\StateOfExport\Index.cshtml" />
@@ -1062,6 +1062,11 @@
       <DependentUpon>DateInputViewModelResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Areas\AdminExportAssessment\ViewModels\MarkAsInterimViewModel.cs" />
+    <Compile Include="Areas\AdminExportAssessment\Views\AccountManagement\PaymentDetailsResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PaymentDetailsResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Areas\AdminExportAssessment\Views\Decision\DecisionResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -2330,7 +2335,6 @@
     <Compile Include="Areas\ExportMovement\ViewModels\SuccessViewModel.cs" />
     <Compile Include="Areas\NotificationApplication\Controllers\KeyDatesController.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\KeyDates\KeyDatesViewModel.cs" />
-    <Compile Include="Areas\AdminExportAssessment\Controllers\PaymentDetailsController.cs" />
     <Compile Include="Areas\AdminExportAssessment\Controllers\RefundDetailsController.cs" />
     <Compile Include="Areas\AdminExportNotificationMovements\Controllers\HomeController.cs" />
     <Compile Include="Areas\AdminExportAssessment\ViewModels\AccountManagement\AccountManagementViewModel.cs" />
@@ -2355,11 +2359,6 @@
     </Compile>
     <Compile Include="Areas\AdminExportNotificationMovements\ViewModels\Home\MovementSummaryTableViewModel.cs" />
     <Compile Include="Areas\AdminExportNotificationMovements\ViewModels\Home\MovementSummaryViewModel.cs" />
-    <Compile Include="Areas\AdminExportAssessment\Views\PaymentDetails\IndexResources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>IndexResources.resx</DependentUpon>
-    </Compile>
     <Compile Include="Areas\AdminExportAssessment\Views\RefundDetails\IndexResources.Designer.cs">
       <DependentUpon>IndexResources.resx</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -2865,6 +2864,10 @@
     <EmbeddedResource Include="Areas\AdminExportAssessment\ViewModels\DateInputViewModelResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>DateInputViewModelResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\AdminExportAssessment\Views\AccountManagement\PaymentDetailsResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>PaymentDetailsResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\AdminExportAssessment\Views\Decision\DecisionResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -3681,10 +3684,6 @@
     <EmbeddedResource Include="Areas\AdminExportAssessment\ViewModels\RefundDetails\RefundDetailsViewModelResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>RefundDetailsViewModelResources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Areas\AdminExportAssessment\Views\PaymentDetails\IndexResources.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\AdminExportAssessment\Views\RefundDetails\IndexResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

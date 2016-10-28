@@ -10,6 +10,8 @@
 
 <h1 class="heading-large">@IndexResources.MainHeading</h1>
 
+@Html.Gds().ValidationSummary()
+
 <div class="grid-row">
 
     <div class="column-one-third">
@@ -90,6 +92,17 @@
     </table>
 </div>
 
+<div class="form-group">
+    <details id="paymentDetails">
+
+        <summary><span class="summary">@IndexResources.EnterPaymentHeading</span></summary>
+
+        <div class="panel-border-narrow">
+            @Html.Partial("_PaymentDetails", Model.PaymentViewModel)
+        </div>
+
+    </details>
+</div>
 
 <div class="form-group">
     <details role="group">
@@ -120,4 +133,29 @@
 
 @section menu {
     @Html.Action("ExportNavigation", "Menu", new { area = "Admin", section = ExportNavigationSection.Finance })
+}
+
+@section scripts
+{
+    <script>
+
+        $(function () {
+
+            var show = @Model.ShowPaymentDetails.ToString().ToLower();
+
+            if (show) {
+                $("#paymentDetails").attr("open", "open");
+            }
+        });
+
+        $('#PaymentMethod').change(function ()
+        {
+            if ($('#PaymentMethod option:selected').text() === 'Cheque') {
+                $('#receiptArea').show();
+            } else {
+                $('#receiptArea').hide();
+            }
+
+        });
+    </script>
 }

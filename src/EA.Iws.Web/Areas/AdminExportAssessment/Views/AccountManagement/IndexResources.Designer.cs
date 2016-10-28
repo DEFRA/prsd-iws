@@ -88,6 +88,15 @@ namespace EA.Iws.Web.Areas.AdminExportAssessment.Views.AccountManagement {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Enter a payment.
+        /// </summary>
+        public static string EnterPaymentHeading {
+            get {
+                return ResourceManager.GetString("EnterPaymentHeading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Payment history.
         /// </summary>
         public static string HistoryHeading {

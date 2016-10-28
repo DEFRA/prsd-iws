@@ -3,6 +3,7 @@
     using System.Collections.Generic;
     using Core.NotificationAssessment;
     using Core.Shared;
+    using PaymentDetails;
 
     public class AccountManagementViewModel
     {
@@ -23,5 +24,9 @@
         }
 
         public IList<TransactionRecordData> TableData { get; set; }
+
+        public PaymentDetailsViewModel PaymentViewModel { get; set; }
+
+        public bool ShowPaymentDetails { get; set; }
     }
 }

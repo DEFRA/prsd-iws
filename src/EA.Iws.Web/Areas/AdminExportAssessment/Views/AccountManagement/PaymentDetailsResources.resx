@@ -123,4 +123,7 @@
   <data name="PaymentDue" xml:space="preserve">
     <value>Payment due</value>
   </data>
+  <data name="SubmitButton" xml:space="preserve">
+    <value>Save payment</value>
+  </data>
 </root>

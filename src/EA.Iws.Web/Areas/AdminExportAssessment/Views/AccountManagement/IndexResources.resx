@@ -126,6 +126,9 @@
   <data name="CurrencySymbol" xml:space="preserve">
     <value>£</value>
   </data>
+  <data name="EnterPaymentHeading" xml:space="preserve">
+    <value>Enter a payment</value>
+  </data>
   <data name="HistoryHeading" xml:space="preserve">
     <value>Payment history</value>
   </data>
