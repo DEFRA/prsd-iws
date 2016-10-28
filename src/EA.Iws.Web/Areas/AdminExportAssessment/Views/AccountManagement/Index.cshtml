@@ -74,7 +74,7 @@
                     type = (PaymentMethod)Model.TableData[i].Type;
                 }
 
-                var comment = string.IsNullOrWhiteSpace(Model.TableData[i].Comments) ? "No" : "Yes";
+                var comment = string.IsNullOrWhiteSpace(Model.TableData[i].Comments) ? "No" : "<a href=\"#comment-" + i + "\">Yes</a>";
 
                 <tr>
                     <td>@trans</td>
@@ -82,7 +82,7 @@
                     <td>@Model.TableData[i].Amount.ToString("C")</td>
                     <td>@EnumHelper.GetDescription(type)</td>
                     <td>@Model.TableData[i].ReceiptNumber</td>
-                    <td>@comment</td>
+                    <td>@Html.Raw(comment)</td>
                 </tr>
             }
         }
@@ -103,9 +103,10 @@
                 if (!string.IsNullOrWhiteSpace(Model.TableData[i].Comments))
                 {
                     var trans = (TransactionType)Model.TableData[i].Transaction;
+                    var commentId = "id=comment-" + i;
 
-                    <span>@trans &nbsp; @Model.TableData[i].Date.ToString("dd/MM/yyyy")</span>
-                    <p>@Model.TableData[i].Comments</p>
+                    <span>@trans&nbsp;&nbsp;&nbsp;@Model.TableData[i].Date.ToString("dd/MM/yyyy")</span>
+                    <p @commentId>@Model.TableData[i].Comments</p>
                 }
             }
         </div>
