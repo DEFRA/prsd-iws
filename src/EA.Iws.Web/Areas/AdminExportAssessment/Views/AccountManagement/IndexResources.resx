@@ -138,6 +138,9 @@
   <data name="MainHeading" xml:space="preserve">
     <value>Finance management</value>
   </data>
+  <data name="RefundHeading" xml:space="preserve">
+    <value>Enter a refund</value>
+  </data>
   <data name="RemainingHeading" xml:space="preserve">
     <value>Amount remaining</value>
   </data>

@@ -105,6 +105,18 @@
 </div>
 
 <div class="form-group">
+    <details id="refundDetails">
+
+        <summary><span class="summary">@IndexResources.RefundHeading</span></summary>
+
+        <div class="panel-border-narrow">
+            @Html.Partial("_RefundDetails", Model.RefundViewModel)
+        </div>
+
+    </details>
+</div>
+
+<div class="form-group">
     <details role="group">
 
         <summary role="button"><span class="summary">@IndexResources.CommentSectionHeading</span></summary>
@@ -139,13 +151,13 @@
 {
     <script>
 
-        $(function () {
+        $(function () 
+        {
+            var showPayment = @Model.ShowPaymentDetails.ToString().ToLower();
+            if (showPayment) { $("#paymentDetails").attr("open", "open"); }
 
-            var show = @Model.ShowPaymentDetails.ToString().ToLower();
-
-            if (show) {
-                $("#paymentDetails").attr("open", "open");
-            }
+            var showRefund = @Model.ShowRefundDetails.ToString().ToLower();
+            if (showRefund) { $("#refundDetails").attr("open", "open"); }
         });
 
         $('#PaymentMethod').change(function ()

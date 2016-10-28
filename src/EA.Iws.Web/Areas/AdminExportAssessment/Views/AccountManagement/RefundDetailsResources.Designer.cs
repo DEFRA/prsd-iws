@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace EA.Iws.Web.Areas.AdminExportAssessment.Views.RefundDetails {
+namespace EA.Iws.Web.Areas.AdminExportAssessment.Views.AccountManagement {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace EA.Iws.Web.Areas.AdminExportAssessment.Views.RefundDetails {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class IndexResources {
+    public class RefundDetailsResources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal IndexResources() {
+        internal RefundDetailsResources() {
         }
         
         /// <summary>
@@ -39,7 +39,8 @@ namespace EA.Iws.Web.Areas.AdminExportAssessment.Views.RefundDetails {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EA.Iws.Web.Areas.AdminExportAssessment.Views.RefundDetails.IndexResources", typeof(IndexResources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EA.Iws.Web.Areas.AdminExportAssessment.Views.AccountManagement.RefundDetailsResou" +
+                            "rces", typeof(RefundDetailsResources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,20 +62,20 @@ namespace EA.Iws.Web.Areas.AdminExportAssessment.Views.RefundDetails {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Refund details.
-        /// </summary>
-        public static string MainHeading {
-            get {
-                return ResourceManager.GetString("MainHeading", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Return to account management.
         /// </summary>
         public static string ReturnToAccountManagement {
             get {
                 return ResourceManager.GetString("ReturnToAccountManagement", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save refund.
+        /// </summary>
+        public static string SubmitButton {
+            get {
+                return ResourceManager.GetString("SubmitButton", resourceCulture);
             }
         }
     }

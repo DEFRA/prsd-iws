@@ -124,6 +124,15 @@ namespace EA.Iws.Web.Areas.AdminExportAssessment.Views.AccountManagement {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Enter a refund.
+        /// </summary>
+        public static string RefundHeading {
+            get {
+                return ResourceManager.GetString("RefundHeading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Amount remaining.
         /// </summary>
         public static string RemainingHeading {
