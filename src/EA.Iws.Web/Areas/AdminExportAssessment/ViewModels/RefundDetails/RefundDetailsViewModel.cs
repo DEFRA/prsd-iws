@@ -16,18 +16,18 @@
         [Required(ErrorMessageResourceName = "AmountRefundedError", ErrorMessageResourceType = typeof(RefundDetailsViewModelResources))]
         [Display(Name = "AmountRefundedLabel", ResourceType = typeof(RefundDetailsViewModelResources))]
         [IsValidMoneyDecimal]
-        public string Amount { get; set; }
+        public string RefundAmount { get; set; }
 
         [RequiredDateInput(ErrorMessageResourceName = "DateRequiredError", ErrorMessageResourceType = typeof(RefundDetailsViewModelResources))]
         [Display(Name = "Date", ResourceType = typeof(RefundDetailsViewModelResources))]
-        public OptionalDateInputViewModel Date { get; set; }
+        public OptionalDateInputViewModel RefundDate { get; set; }
 
         [Display(Name = "CommentsLabel", ResourceType = typeof(RefundDetailsViewModelResources))]
         public string Comments { get; set; }
 
         public RefundDetailsViewModel()
         {
-            Date = new OptionalDateInputViewModel(true);
+            RefundDate = new OptionalDateInputViewModel(true);
         }
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
@@ -39,12 +39,12 @@
                 results.Add(new ValidationResult(RefundDetailsViewModelResources.CommentsLengthError, new[] { "Comments" }));
             }
 
-            if (Amount.ToMoneyDecimal() < 0)
+            if (RefundAmount.ToMoneyDecimal() < 0)
             {
                 results.Add(new ValidationResult(RefundDetailsViewModelResources.AmountCannotBeNegative, new[] { "Amount" }));
             }
 
-            if (Amount.ToMoneyDecimal() > Limit)
+            if (RefundAmount.ToMoneyDecimal() > Limit)
             {
                 results.Add(new ValidationResult(string.Format(RefundDetailsViewModelResources.AmountCannotExceedLimit, Limit), new[] { "Amount" }));
             }

@@ -69,9 +69,9 @@
 
             var paymentData = new NotificationTransactionData
             {
-                Date = model.Date.AsDateTime().Value,
+                Date = model.PaymentDate.AsDateTime().Value,
                 NotificationId = model.NotificationId,
-                Credit = Convert.ToDecimal(model.Amount),
+                Credit = Convert.ToDecimal(model.PaymentAmount),
                 PaymentMethod = model.PaymentMethod,
                 ReceiptNumber = model.Receipt,
                 Comments = model.Comments
@@ -99,9 +99,9 @@
 
             var refundData = new NotificationTransactionData
             {
-                Date = model.Date.AsDateTime().Value,
+                Date = model.RefundDate.AsDateTime().Value,
                 NotificationId = model.NotificationId,
-                Debit = Convert.ToDecimal(model.Amount),
+                Debit = Convert.ToDecimal(model.RefundAmount),
                 Comments = model.Comments,
                 ReceiptNumber = "NA"
             };

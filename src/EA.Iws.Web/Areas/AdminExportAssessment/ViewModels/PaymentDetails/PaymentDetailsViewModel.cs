@@ -15,7 +15,7 @@
         public PaymentDetailsViewModel() 
         {
             PaymentMethodsSelectList = new SelectList(EnumHelper.GetValues(typeof(PaymentMethod)), "Key", "Value");
-            Date = new OptionalDateInputViewModel(true);
+            PaymentDate = new OptionalDateInputViewModel(true);
         }
 
         public Guid NotificationId { get; set; }
@@ -23,7 +23,7 @@
         [Required(ErrorMessageResourceName = "AmountPaidError", ErrorMessageResourceType = typeof(PaymentDetailsViewModelResources))]
         [Display(Name = "AmountPaidLabel", ResourceType = typeof(PaymentDetailsViewModelResources))]
         [IsValidMoneyDecimal]
-        public string Amount { get; set; }
+        public string PaymentAmount { get; set; }
 
         [Display(Name = "PaymentMethodLabel", ResourceType = typeof(PaymentDetailsViewModelResources))]
         public PaymentMethod PaymentMethod { get; set; }
@@ -35,7 +35,7 @@
 
         [Display(Name = "DateLabel", ResourceType = typeof(PaymentDetailsViewModelResources))]
         [RequiredDateInput(ErrorMessageResourceName = "DateRequiredError", ErrorMessageResourceType = typeof(PaymentDetailsViewModelResources))]
-        public OptionalDateInputViewModel Date { get; set; }
+        public OptionalDateInputViewModel PaymentDate { get; set; }
         
         [Display(Name = "CommentsLabel", ResourceType = typeof(PaymentDetailsViewModelResources))]
         public string Comments { get; set; }
@@ -59,7 +59,7 @@
                 results.Add(new ValidationResult(PaymentDetailsViewModelResources.CommentsLengthError, new[] { "Comments" }));
             }
 
-            if (Amount.ToMoneyDecimal() < 0)
+            if (PaymentAmount.ToMoneyDecimal() < 0)
             {
                 results.Add(new ValidationResult(PaymentDetailsViewModelResources.AmountCannotBeNegative, new[] { "Amount" }));
             }
