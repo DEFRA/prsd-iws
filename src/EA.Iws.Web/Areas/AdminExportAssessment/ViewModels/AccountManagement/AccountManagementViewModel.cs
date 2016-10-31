@@ -3,6 +3,8 @@
     using System.Collections.Generic;
     using Core.NotificationAssessment;
     using Core.Shared;
+    using PaymentDetails;
+    using RefundDetails;
 
     public class AccountManagementViewModel
     {
@@ -17,6 +19,19 @@
 
         public decimal Balance { get; set; }
 
+        public decimal AmountRemaining
+        {
+            get { return this.TotalBillable - this.Balance; }  
+        }
+
         public IList<TransactionRecordData> TableData { get; set; }
+
+        public PaymentDetailsViewModel PaymentViewModel { get; set; }
+
+        public bool ShowPaymentDetails { get; set; }
+
+        public RefundDetailsViewModel RefundViewModel { get; set; }
+
+        public bool ShowRefundDetails { get; set; }
     }
 }

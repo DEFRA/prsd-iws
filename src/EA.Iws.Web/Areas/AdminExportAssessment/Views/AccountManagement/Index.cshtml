@@ -10,18 +10,38 @@
 
 <h1 class="heading-large">@IndexResources.MainHeading</h1>
 
-<h2 class="heading-medium">@IndexResources.TotalHeading</h2>
+@Html.Gds().ValidationSummary()
 
-<div class="heading-large">
-    @Model.TotalBillable.ToString("C")
+<div class="grid-row">
+
+    <div class="column-one-third">
+        <p class="bold-xsmall">@IndexResources.TotalHeading</p>
+    </div>
+
+    <div class="column-one-third">
+        <p class="bold-xsmall">@IndexResources.BalanceHeading</p>
+    </div>
+
+    <div class="column-one-third">
+        <p class="bold-xsmall">@IndexResources.RemainingHeading</p>
+    </div>
+
 </div>
 
-<hr>
+<div class="grid-row">
 
-<h2 class="heading-medium">@IndexResources.BalanceHeading</h2>
+    <div class="column-one-third bold-medium">
+            @Model.TotalBillable.ToString("C")
+    </div>
 
-<div class="heading-large">
-    @Model.Balance.ToString("C")
+    <div class="column-one-third bold-medium">
+            @Model.Balance.ToString("C")
+    </div>
+
+    <div class="column-one-third bold-medium">
+            @Model.AmountRemaining.ToString("C")
+    </div>
+
 </div>
 
 <hr>
@@ -56,7 +76,7 @@
                     type = (PaymentMethod)Model.TableData[i].Type;
                 }
 
-                var comment = string.IsNullOrWhiteSpace(Model.TableData[i].Comments) ? "No" : "Yes";
+                var comment = string.IsNullOrWhiteSpace(Model.TableData[i].Comments) ? "No" : "<a href=\"#comment-" + i + "\">Yes</a>";
 
                 <tr>
                     <td>@trans</td>
@@ -64,7 +84,7 @@
                     <td>@Model.TableData[i].Amount.ToString("C")</td>
                     <td>@EnumHelper.GetDescription(type)</td>
                     <td>@Model.TableData[i].ReceiptNumber</td>
-                    <td>@comment</td>
+                    <td>@Html.Raw(comment)</td>
                 </tr>
             }
         }
@@ -72,35 +92,82 @@
     </table>
 </div>
 
-<h2 class="heading-medium">@IndexResources.CommentSectionHeading</h2>
-
 <div class="form-group">
+    <details id="paymentDetails">
 
-    @for (var i = 0; i < Model.TableData.Count(); i++)
-    {
-        if (!string.IsNullOrWhiteSpace(Model.TableData[i].Comments))
-        {
-            var trans = (TransactionType)Model.TableData[i].Transaction;
+        <summary><span class="summary">@IndexResources.EnterPaymentHeading</span></summary>
 
-            <details>
-                <summary>
-                    <span class="summary">
-                        @trans
-                        &nbsp;
-                        @Model.TableData[i].Date.ToString("dd/MM/yyyy")
-                    </span>
-                </summary>
+        <div class="panel-border-narrow">
+            @Html.Partial("_PaymentDetails", Model.PaymentViewModel)
+        </div>
 
-                <div class="panel-indent">
-                    <p>@Model.TableData[i].Comments</p>
-                </div>
-            </details>
-        }
-    }
+    </details>
 </div>
 
-@Html.ActionLink(IndexResources.KeyDatesLinkText, "Index", "Keydates")
+<div class="form-group">
+    <details id="refundDetails">
+
+        <summary><span class="summary">@IndexResources.RefundHeading</span></summary>
+
+        <div class="panel-border-narrow">
+            @Html.Partial("_RefundDetails", Model.RefundViewModel)
+        </div>
+
+    </details>
+</div>
+
+<div class="form-group">
+    <details role="group">
+
+        <summary role="button"><span class="summary">@IndexResources.CommentSectionHeading</span></summary>
+
+        <div class="panel-border-narrow">
+
+            @for (var i = 0; i < Model.TableData.Count(); i++)
+            {
+                if (!string.IsNullOrWhiteSpace(Model.TableData[i].Comments))
+                {
+                    var trans = (TransactionType)Model.TableData[i].Transaction;
+                    var commentId = "id=comment-" + i;
+
+                    <span>@trans&nbsp;&nbsp;&nbsp;@Model.TableData[i].Date.ToString("dd/MM/yyyy")</span>
+                    <p @commentId>@Model.TableData[i].Comments</p>
+                }
+            }
+        </div>
+
+    </details>
+</div>
+
+<div>
+    @Html.ActionLink(IndexResources.KeyDatesLinkText, "Index", "Keydates")
+</div>
 
 @section menu {
     @Html.Action("ExportNavigation", "Menu", new { area = "Admin", section = ExportNavigationSection.Finance })
+}
+
+@section scripts
+{
+    <script>
+
+        $(function () 
+        {
+            var showPayment = @Model.ShowPaymentDetails.ToString().ToLower();
+            if (showPayment) { $("#paymentDetails").attr("open", "open"); }
+
+            var showRefund = @Model.ShowRefundDetails.ToString().ToLower();
+            if (showRefund) { $("#refundDetails").attr("open", "open"); }
+        });
+
+        $('#PaymentMethod').change(function ()
+        {
+            if ($('#PaymentMethod option:selected').text() === 'Cheque') {
+                $('#receiptArea').show();
+            } else {
+                $('#receiptArea').hide();
+            }
+
+        });
+    </script>
 }

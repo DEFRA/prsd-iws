@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace EA.Iws.Web.Areas.AdminExportAssessment.Views.PaymentDetails {
+namespace EA.Iws.Web.Areas.AdminExportAssessment.Views.AccountManagement {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace EA.Iws.Web.Areas.AdminExportAssessment.Views.PaymentDetails {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class IndexResources {
+    public class PaymentDetailsResources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal IndexResources() {
+        internal PaymentDetailsResources() {
         }
         
         /// <summary>
@@ -39,7 +39,8 @@ namespace EA.Iws.Web.Areas.AdminExportAssessment.Views.PaymentDetails {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EA.Iws.Web.Areas.AdminExportAssessment.Views.PaymentDetails.IndexResources", typeof(IndexResources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EA.Iws.Web.Areas.AdminExportAssessment.Views.AccountManagement.PaymentDetailsReso" +
+                            "urces", typeof(PaymentDetailsResources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -75,6 +76,15 @@ namespace EA.Iws.Web.Areas.AdminExportAssessment.Views.PaymentDetails {
         public static string PaymentDue {
             get {
                 return ResourceManager.GetString("PaymentDue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save payment.
+        /// </summary>
+        public static string SubmitButton {
+            get {
+                return ResourceManager.GetString("SubmitButton", resourceCulture);
             }
         }
     }

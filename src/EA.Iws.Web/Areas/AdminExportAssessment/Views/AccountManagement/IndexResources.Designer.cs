@@ -88,6 +88,15 @@ namespace EA.Iws.Web.Areas.AdminExportAssessment.Views.AccountManagement {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Enter a payment.
+        /// </summary>
+        public static string EnterPaymentHeading {
+            get {
+                return ResourceManager.GetString("EnterPaymentHeading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Payment history.
         /// </summary>
         public static string HistoryHeading {
@@ -106,11 +115,29 @@ namespace EA.Iws.Web.Areas.AdminExportAssessment.Views.AccountManagement {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Account management.
+        ///   Looks up a localized string similar to Finance management.
         /// </summary>
         public static string MainHeading {
             get {
                 return ResourceManager.GetString("MainHeading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter a refund.
+        /// </summary>
+        public static string RefundHeading {
+            get {
+                return ResourceManager.GetString("RefundHeading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Amount remaining.
+        /// </summary>
+        public static string RemainingHeading {
+            get {
+                return ResourceManager.GetString("RemainingHeading", resourceCulture);
             }
         }
         

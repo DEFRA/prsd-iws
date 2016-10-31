@@ -117,10 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="MainHeading" xml:space="preserve">
-    <value>Payment details</value>
+  <data name="ReturnToAccountManagement" xml:space="preserve">
+    <value>Return to account management</value>
   </data>
-  <data name="PaymentDue" xml:space="preserve">
-    <value>Payment due</value>
+  <data name="SubmitButton" xml:space="preserve">
+    <value>Save refund</value>
   </data>
 </root>
