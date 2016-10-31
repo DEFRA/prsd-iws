@@ -133,7 +133,10 @@
     <value>Go to Key dates</value>
   </data>
   <data name="MainHeading" xml:space="preserve">
-    <value>Account management</value>
+    <value>Finance management</value>
+  </data>
+  <data name="RemainingHeading" xml:space="preserve">
+    <value>Amount remaining</value>
   </data>
   <data name="StatusLabel" xml:space="preserve">
     <value>Status: </value>

@@ -106,11 +106,20 @@ namespace EA.Iws.Web.Areas.AdminImportAssessment.Views.AccountManagement {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Account management.
+        ///   Looks up a localized string similar to Finance management.
         /// </summary>
         public static string MainHeading {
             get {
                 return ResourceManager.GetString("MainHeading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Amount remaining.
+        /// </summary>
+        public static string RemainingHeading {
+            get {
+                return ResourceManager.GetString("RemainingHeading", resourceCulture);
             }
         }
         

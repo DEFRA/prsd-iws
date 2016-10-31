@@ -10,18 +10,36 @@
 
 <h1 class="heading-large">@Resource.MainHeading</h1>
 
-<h2 class="heading-medium">@Resource.TotalHeading</h2>
+<div class="grid-row">
 
-<div class="heading-large">
-    @Model.TotalCharge.ToString("C")
+    <div class="column-one-third">
+        <p class="bold-xsmall">@Resource.TotalHeading</p>
+    </div>
+
+    <div class="column-one-third">
+        <p class="bold-xsmall">@Resource.BalanceHeading</p>
+    </div>
+
+    <div class="column-one-third">
+        <p class="bold-xsmall">@Resource.RemainingHeading</p>
+    </div>
+
 </div>
 
-<hr>
+<div class="grid-row">
 
-<h2 class="heading-medium">@Resource.BalanceHeading</h2>
+    <div class="column-one-third bold-medium">
+        @Model.TotalCharge.ToString("C")
+    </div>
 
-<div class="heading-large">
-    @Model.TotalPaid.ToString("C")
+    <div class="column-one-third bold-medium">
+        @Model.TotalPaid.ToString("C")
+    </div>
+
+    <div class="column-one-third bold-medium">
+        @Model.AmountRemaining.ToString("C")
+    </div>
+
 </div>
 
 <hr>
