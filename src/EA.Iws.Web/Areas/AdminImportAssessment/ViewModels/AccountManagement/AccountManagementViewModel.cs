@@ -3,6 +3,8 @@
     using System.Collections.Generic;
     using Core.ImportNotificationAssessment.Transactions;
     using Core.Shared;
+    using PaymentDetails;
+    using RefundDetails;
 
     public class AccountManagementViewModel
     {
@@ -23,5 +25,13 @@
         {
             get { return TotalCharge - TotalPaid; }
         }
+
+        public PaymentDetailsViewModel PaymentViewModel { get; set; }
+
+        public bool ShowPaymentDetails { get; set; }
+
+        public RefundDetailsViewModel RefundViewModel { get; set; }
+
+        public bool ShowRefundDetails { get; set; }
     }
 }

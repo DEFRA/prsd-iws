@@ -12,20 +12,20 @@
     {
         [Display(Name = "Date", ResourceType = typeof(PaymentDetailsViewModelResources))]
         [RequiredDateInput(ErrorMessageResourceName = "DateRequiredError", ErrorMessageResourceType = typeof(PaymentDetailsViewModelResources))]
-        public OptionalDateInputViewModel Date { get; set; }
+        public OptionalDateInputViewModel PaymentDate { get; set; }
 
         [Display(Name = "PaymentMethod", ResourceType = typeof(PaymentDetailsViewModelResources))]
         public PaymentMethod PaymentMethod { get; set; }
 
         [Display(Name = "Amount", ResourceType = typeof(PaymentDetailsViewModelResources))]
         [Required(ErrorMessageResourceName = "AmountRequiredError", ErrorMessageResourceType = typeof(PaymentDetailsViewModelResources))]
-        public decimal? Amount { get; set; }
+        public decimal? PaymentAmount { get; set; }
 
         [Display(Name = "ReceiptNumber", ResourceType = typeof(PaymentDetailsViewModelResources))]
         public string ReceiptNumber { get; set; }
 
         [Display(Name = "Comments", ResourceType = typeof(PaymentDetailsViewModelResources))]
-        public string Comments { get; set; }
+        public string PaymentComments { get; set; }
         
         public SelectList PaymentMethodsList
         {
@@ -39,7 +39,7 @@
 
         public PaymentDetailsViewModel()
         {
-            Date = new OptionalDateInputViewModel(true);
+            PaymentDate = new OptionalDateInputViewModel(true);
             PaymentMethod = PaymentMethod.Cheque;
         }
 
@@ -55,9 +55,9 @@
                 yield return new ValidationResult(PaymentDetailsViewModelResources.ReceiptLengthError, new[] { "ReceiptNumber" });
             }
 
-            if (Comments != null && Comments.Length > 500)
+            if (PaymentComments != null && PaymentComments.Length > 500)
             {
-                yield return new ValidationResult(PaymentDetailsViewModelResources.CommentsLengthError, new[] { "Comments" });
+                yield return new ValidationResult(PaymentDetailsViewModelResources.CommentsLengthError, new[] { "PaymentComments" });
             }
         }
     }

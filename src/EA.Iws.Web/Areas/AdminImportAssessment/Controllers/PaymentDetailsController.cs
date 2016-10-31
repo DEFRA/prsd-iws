@@ -40,11 +40,11 @@
             }
 
             await mediator.SendAsync(new AddNotificationPayment(id,
-                model.Amount.Value,
+                model.PaymentAmount.Value,
                 model.PaymentMethod,
-                model.Date.AsDateTime().Value,
+                model.PaymentDate.AsDateTime().Value,
                 model.ReceiptNumber,
-                model.Comments));
+                model.PaymentComments));
 
             return RedirectToAction("Index", "AccountManagement");
         } 
