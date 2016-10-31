@@ -12,7 +12,7 @@
     {
         public RefundDetailsViewModel()
         {
-            Date = new OptionalDateInputViewModel(true);
+            RefundDate = new OptionalDateInputViewModel(true);
         }
 
         public Guid NotificationId { get; set; }
@@ -25,62 +25,62 @@
             ErrorMessageResourceType = typeof(RefundDetailsViewModelResources))]
         [Display(Name = "AmountRefundedLabel", ResourceType = typeof(RefundDetailsViewModelResources))]
         [IsValidMoneyDecimal]
-        public string Amount { get; set; }
+        public string RefundAmount { get; set; }
 
         [RequiredDateInput(ErrorMessageResourceName = "DateRequiredError",
             ErrorMessageResourceType = typeof(RefundDetailsViewModelResources))]
         [Display(Name = "Date", ResourceType = typeof(RefundDetailsViewModelResources))]
-        public OptionalDateInputViewModel Date { get; set; }
+        public OptionalDateInputViewModel RefundDate { get; set; }
 
         [Display(Name = "CommentsLabel", ResourceType = typeof(RefundDetailsViewModelResources))]
-        public string Comments { get; set; }
+        public string RefundComments { get; set; }
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             var results = new List<ValidationResult>();
 
-            if (Comments != null && Comments.Length > 500)
+            if (RefundComments != null && RefundComments.Length > 500)
             {
                 results.Add(new ValidationResult(RefundDetailsViewModelResources.CommentsLengthError,
-                    new[] { "Comments" }));
+                    new[] { "RefundComments" }));
             }
 
-            if (Amount.ToMoneyDecimal() < 0)
+            if (RefundAmount.ToMoneyDecimal() < 0)
             {
                 results.Add(new ValidationResult(RefundDetailsViewModelResources.AmountCannotBeNegative,
-                    new[] { "Amount" }));
+                    new[] { "RefundAmount" }));
             }
 
-            if (Amount.ToMoneyDecimal() > Limit)
+            if (RefundAmount.ToMoneyDecimal() > Limit)
             {
                 results.Add(
                     new ValidationResult(string.Format(RefundDetailsViewModelResources.AmountCannotExceedLimit, Limit),
-                        new[] { "Amount" }));
+                        new[] { "RefundAmount" }));
             }
 
-            if (Date.AsDateTime().HasValue)
+            if (RefundDate.AsDateTime().HasValue)
             {
-                if (Date.AsDateTime().Value > SystemTime.UtcNow.Date)
+                if (RefundDate.AsDateTime().Value > SystemTime.UtcNow.Date)
                 {
                     results.Add(
                         new ValidationResult(RefundDetailsViewModelResources.DateNotInFuture,
-                            new[] { "Date" }));
+                            new[] { "RefundDate" }));
                 }
 
                 if (FirstPaymentReceivedDate.HasValue)
                 {
-                    if (Date.AsDateTime().Value < FirstPaymentReceivedDate.Value)
+                    if (RefundDate.AsDateTime().Value < FirstPaymentReceivedDate.Value)
                     {
                         results.Add(
                             new ValidationResult(RefundDetailsViewModelResources.DateNotBeforeFirstPayment,
-                                new[] { "Date" }));
+                                new[] { "RefundDate" }));
                     }    
                 }
                 else
                 {
                     results.Add(
                             new ValidationResult(RefundDetailsViewModelResources.NoPaymentsMade,
-                                new[] { "Date" }));
+                                new[] { "RefundDate" }));
                 }
             }
 

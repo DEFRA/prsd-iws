@@ -1,17 +1,10 @@
 ﻿@using EA.Iws.Web.Areas.AdminImportAssessment.ViewModels.RefundDetails
-@using EA.Iws.Web.Areas.AdminImportAssessment.Views.RefundDetails
 @model RefundDetailsViewModel
 
-@{
-    ViewBag.Title = @IndexResources.MainHeading;
-}
 
-<h1 class="heading-large">@IndexResources.MainHeading</h1>
-
-@using (Html.BeginForm())
+@using (Html.BeginForm("AddRefund", "AccountManagement", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
-    @Html.Gds().ValidationSummary()
     @Html.HiddenFor(m => m.NotificationId)
     @Html.HiddenFor(m => m.Limit)
     @Html.HiddenFor(m => m.FirstPaymentReceivedDate)
@@ -27,8 +20,6 @@
                     </div>
                 </div>
             </div>
-
-            <hr>
 
             <div class="form-group @Html.Gds().FormGroupClass(m => m.RefundDate) @Html.Gds().FormGroupClass(m => m.RefundDate.Day) @Html.Gds().FormGroupClass(m => m.RefundDate.Month) @Html.Gds().FormGroupClass(m => m.RefundDate.Year)">
                 @Html.LabelFor(m => m.RefundDate, new { @class = "form-label-bold" })
@@ -46,13 +37,7 @@
 
     <div class="form-group">
         <p>
-            <button class="button" type="submit">@Constants.ContinueButtonText</button>
+            <button class="button" type="submit">@RefundDetailsViewModelResources.SubmitButton</button>
         </p>
     </div>
-
-    @Html.ActionLink(IndexResources.ReturnToAccountManagement, "Index", "AccountManagement")
-}
-
-@section menu {
-    @Html.Action("ImportNavigation", "Menu", new { area = "Admin", section = ImportNavigationSection.Finance })
 }

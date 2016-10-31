@@ -153,4 +153,7 @@
   <data name="NoPaymentsMade" xml:space="preserve">
     <value>A refund cannot be made as no payments have been made yet</value>
   </data>
+  <data name="SubmitButton" xml:space="preserve">
+    <value>Save refund</value>
+  </data>
 </root>

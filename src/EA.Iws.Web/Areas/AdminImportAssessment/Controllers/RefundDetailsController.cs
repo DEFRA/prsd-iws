@@ -47,8 +47,8 @@
                 return View(model);
             }
 
-            var refundData = new AddNotificationRefund(model.NotificationId, Convert.ToDecimal(model.Amount),
-                model.Date.AsDateTime().Value, model.Comments);
+            var refundData = new AddNotificationRefund(model.NotificationId, Convert.ToDecimal(model.RefundAmount),
+                model.RefundDate.AsDateTime().Value, model.RefundComments);
 
             await mediator.SendAsync(refundData);
 

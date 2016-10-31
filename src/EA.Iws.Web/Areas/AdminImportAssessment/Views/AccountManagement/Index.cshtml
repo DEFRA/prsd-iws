@@ -105,6 +105,18 @@
 </div>
 
 <div class="form-group">
+    <details id="refundDetails">
+
+        <summary><span class="summary">@Resource.EnterRefundHeading</span></summary>
+
+        <div class="panel-border-narrow">
+            @Html.Partial("_RefundDetails", Model.RefundViewModel)
+        </div>
+
+    </details>
+</div>
+
+<div class="form-group">
     <details role="group">
 
         <summary role="button"><span class="summary">@Resource.CommentSectionHeading</span></summary>
