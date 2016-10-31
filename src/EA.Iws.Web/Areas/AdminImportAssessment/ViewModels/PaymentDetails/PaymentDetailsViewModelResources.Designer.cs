@@ -168,5 +168,14 @@ namespace EA.Iws.Web.Areas.AdminImportAssessment.ViewModels.PaymentDetails {
                 return ResourceManager.GetString("ReceiptNumberRequiredError", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save payment.
+        /// </summary>
+        public static string SubmitButton {
+            get {
+                return ResourceManager.GetString("SubmitButton", resourceCulture);
+            }
+        }
     }
 }

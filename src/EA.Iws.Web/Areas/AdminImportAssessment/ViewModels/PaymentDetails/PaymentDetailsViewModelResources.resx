@@ -153,4 +153,7 @@
   <data name="ReceiptNumberRequiredError" xml:space="preserve">
     <value>Please enter the receipt number</value>
   </data>
+  <data name="SubmitButton" xml:space="preserve">
+    <value>Save payment</value>
+  </data>
 </root>

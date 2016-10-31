@@ -2,7 +2,7 @@
 @using EA.Iws.Core.Shared
 @using EnumHelper = EA.Prsd.Core.Helpers.EnumHelper
 @using Resource = EA.Iws.Web.Areas.AdminImportAssessment.Views.AccountManagement.IndexResources
-@model EA.Iws.Core.ImportNotificationAssessment.Transactions.AccountOverviewData
+@model EA.Iws.Web.Areas.AdminImportAssessment.ViewModels.AccountManagement.AccountManagementViewModel
 
 @{
     ViewBag.Title = Resource.MainHeading;
@@ -10,18 +10,38 @@
 
 <h1 class="heading-large">@Resource.MainHeading</h1>
 
-<h2 class="heading-medium">@Resource.TotalHeading</h2>
+@Html.Gds().ValidationSummary()
 
-<div class="heading-large">
-    @Model.TotalCharge.ToString("C")
+<div class="grid-row">
+
+    <div class="column-one-third">
+        <p class="bold-xsmall">@Resource.TotalHeading</p>
+    </div>
+
+    <div class="column-one-third">
+        <p class="bold-xsmall">@Resource.BalanceHeading</p>
+    </div>
+
+    <div class="column-one-third">
+        <p class="bold-xsmall">@Resource.RemainingHeading</p>
+    </div>
+
 </div>
 
-<hr>
+<div class="grid-row">
 
-<h2 class="heading-medium">@Resource.BalanceHeading</h2>
+    <div class="column-one-third bold-medium">
+        @Model.TotalCharge.ToString("C")
+    </div>
 
-<div class="heading-large">
-    @Model.TotalPaid.ToString("C")
+    <div class="column-one-third bold-medium">
+        @Model.TotalPaid.ToString("C")
+    </div>
+
+    <div class="column-one-third bold-medium">
+        @Model.AmountRemaining.ToString("C")
+    </div>
+
 </div>
 
 <hr>
@@ -56,7 +76,7 @@
                     type = (PaymentMethod)Model.Transactions[i].Type;
                 }
 
-                var comment = string.IsNullOrWhiteSpace(Model.Transactions[i].Comments) ? "No" : "Yes";
+                var comment = string.IsNullOrWhiteSpace(Model.Transactions[i].Comments) ? "No" : "<a href=\"#comment-" + i + "\">Yes</a>";
 
                 <tr>
                     <td>@trans</td>
@@ -64,7 +84,7 @@
                     <td>@Model.Transactions[i].Amount.ToString("C")</td>
                     <td>@EnumHelper.GetDescription(type)</td>
                     <td>@Model.Transactions[i].ReceiptNumber</td>
-                    <td>@comment</td>
+                    <td>@Html.Raw(comment)</td>
                 </tr>
             }
         }
@@ -72,35 +92,77 @@
     </table>
 </div>
 
-<h2 class="heading-medium">@Resource.CommentSectionHeading</h2>
+<div class="form-group">
+    <details id="paymentDetails">
+
+        <summary><span class="summary">@Resource.EnterPaymentHeading</span></summary>
+
+        <div class="panel-border-narrow">
+            @Html.Partial("_PaymentDetails", Model.PaymentViewModel)
+        </div>
+
+    </details>
+</div>
 
 <div class="form-group">
+    <details id="refundDetails">
 
-    @for (var i = 0; i < Model.Transactions.Count(); i++)
-    {
-        if (!string.IsNullOrWhiteSpace(Model.Transactions[i].Comments))
-        {
-            var trans = (TransactionType)Model.Transactions[i].Transaction;
+        <summary><span class="summary">@Resource.EnterRefundHeading</span></summary>
 
-            <details>
-                <summary>
-                    <span class="summary">
-                        @trans
-                        &nbsp;
-                        @Model.Transactions[i].Date.ToString("dd/MM/yyyy")
-                    </span>
-                </summary>
+        <div class="panel-border-narrow">
+            @Html.Partial("_RefundDetails", Model.RefundViewModel)
+        </div>
 
-                <div class="panel-indent">
-                    <p>@Model.Transactions[i].Comments</p>
-                </div>
-            </details>
-        }
-    }
+    </details>
+</div>
+
+<div class="form-group">
+    <details role="group">
+
+        <summary role="button"><span class="summary">@Resource.CommentSectionHeading</span></summary>
+
+        <div class="panel-border-narrow">
+
+            @for (var i = 0; i < Model.Transactions.Count(); i++)
+            {
+                if (!string.IsNullOrWhiteSpace(Model.Transactions[i].Comments))
+                {
+                    var trans = (TransactionType)Model.Transactions[i].Transaction;
+                    var commentId = "id=comment-" + i;
+
+                    <span>@trans&nbsp;&nbsp;&nbsp;@Model.Transactions[i].Date.ToString("dd/MM/yyyy")</span>
+                    <p @commentId>@Model.Transactions[i].Comments</p>
+                }
+            }
+        </div>
+
+    </details>
 </div>
 
 @Html.ActionLink(Resource.KeyDatesLinkText, "Index", "Keydates")
 
 @section menu {
     @Html.Action("ImportNavigation", "Menu", new { area = "Admin", section = ImportNavigationSection.Finance })
+}
+
+@section scripts
+{
+    <script>
+        $(function ()
+        {
+            var showPayment = @Model.ShowPaymentDetails.ToString().ToLower();
+            if (showPayment) { $("#paymentDetails").attr("open", "open"); }
+
+            var showRefund = @Model.ShowRefundDetails.ToString().ToLower();
+            if (showRefund) { $("#refundDetails").attr("open", "open"); }
+        });
+
+        $('#PaymentMethod').change(function () {
+            if ($('#PaymentMethod option:selected').text() === 'Cheque') {
+                $('#receiptArea').show();
+            } else {
+                $('#receiptArea').hide();
+            }
+        });
+    </script>
 }

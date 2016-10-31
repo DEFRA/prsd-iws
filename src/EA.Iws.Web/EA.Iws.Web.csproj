@@ -438,7 +438,6 @@
     <Content Include="Content\govuk_toolkit\stylesheets\design-patterns\_alpha-beta.scss" />
     <Content Include="Content\govuk_toolkit\stylesheets\colours\_palette.scss" />
     <Content Include="Content\govuk_toolkit\stylesheets\colours\_organisation.scss" />
-    <Content Include="Areas\AdminImportAssessment\Views\RefundDetails\Index.cshtml" />
     <Content Include="Areas\AdminImportNotificationMovements\Views\Cancel\Index.cshtml" />
     <Content Include="Areas\AdminImportNotificationMovements\Views\Cancel\Confirm.cshtml" />
     <Content Include="Areas\AdminImportNotificationMovements\Views\Cancel\Success.cshtml" />
@@ -447,6 +446,8 @@
     <Content Include="Areas\AdminExportAssessment\Views\KeyDatesOverride\Index.cshtml" />
     <Content Include="Areas\AdminExportAssessment\Views\AccountManagement\_PaymentDetails.cshtml" />
     <Content Include="Areas\AdminExportAssessment\Views\AccountManagement\_RefundDetails.cshtml" />
+    <Content Include="Areas\AdminImportAssessment\Views\AccountManagement\_PaymentDetails.cshtml" />
+    <Content Include="Areas\AdminImportAssessment\Views\AccountManagement\_RefundDetails.cshtml" />
     <None Include="Content\iws\_panels.scss" />
     <Content Include="Content\nta-extended.css" />
     <Content Include="Content\select2\select2-spinner.gif" />
@@ -845,7 +846,6 @@
     <Content Include="Areas\NotificationApplication\Views\Annex\Index.cshtml" />
     <Content Include="Areas\ExportMovement\Views\Reject\Success.cshtml" />
     <Content Include="Areas\AdminExportAssessment\Views\Overview\Sections\_BaselOecdCode.cshtml" />
-    <Content Include="Areas\AdminImportAssessment\Views\PaymentDetails\Index.cshtml" />
     <Content Include="Areas\AdminExportAssessment\Views\Overview\Sections\_Carrier.cshtml" />
     <Content Include="Areas\AdminExportAssessment\Views\Overview\Sections\_ChemicalComposition.cshtml" />
     <Content Include="Areas\AdminExportAssessment\Views\Overview\Sections\_CodeDefinitionList.cshtml" />
@@ -1102,7 +1102,7 @@
     <Compile Include="Areas\AdminImportAssessment\Controllers\FinancialGuaranteeDatesController.cs" />
     <Compile Include="Areas\AdminImportAssessment\Controllers\FinancialGuaranteeDecisionController.cs" />
     <Compile Include="Areas\AdminImportAssessment\Controllers\KeyDatesController.cs" />
-    <Compile Include="Areas\AdminImportAssessment\Controllers\RefundDetailsController.cs" />
+    <Compile Include="Areas\AdminImportAssessment\ViewModels\AccountManagement\AccountManagementViewModel.cs" />
     <Compile Include="Areas\AdminImportAssessment\ViewModels\AssignArea\AssignAreaViewModel.cs" />
     <Compile Include="Areas\AdminImportAssessment\ViewModels\Decision\DecisionViewModel.cs" />
     <Compile Include="Areas\AdminImportAssessment\ViewModels\Decision\DecisionViewModelResources.Designer.cs">
@@ -1129,7 +1129,6 @@
       <DependentUpon>FinancialGuaranteeDecisionViewModelResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Areas\AdminImportAssessment\ViewModels\KeyDates\KeyDatesViewModel.cs" />
-    <Compile Include="Areas\AdminImportAssessment\Controllers\PaymentDetailsController.cs" />
     <Compile Include="Areas\AdminImportAssessment\ViewModels\KeyDates\KeyDatesCommand.cs" />
     <Compile Include="Areas\AdminImportAssessment\ViewModels\KeyDates\KeyDatesViewModelResources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -1197,16 +1196,6 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>PaymentDetailsViewModelResources.resx</DependentUpon>
-    </Compile>
-    <Compile Include="Areas\AdminImportAssessment\Views\PaymentDetails\IndexResources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>IndexResources.resx</DependentUpon>
-    </Compile>
-    <Compile Include="Areas\AdminImportAssessment\Views\RefundDetails\IndexResources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>IndexResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Areas\AdminImportMovement\Controllers\HomeController.cs" />
     <Compile Include="Areas\AdminImportMovement\ViewModels\Home\HomeViewModel.cs" />
@@ -2961,19 +2950,11 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>NotReceivedResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Areas\AdminImportAssessment\Views\PaymentDetails\IndexResources.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
     <EmbeddedResource Include="Areas\AdminImportAssessment\ViewModels\KeyDates\KeyDatesViewModelResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>KeyDatesViewModelResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\AdminImportAssessment\Views\KeyDates\IndexResources.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Areas\AdminImportAssessment\Views\RefundDetails\IndexResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>

@@ -126,6 +126,12 @@
   <data name="CurrencySymbol" xml:space="preserve">
     <value>£</value>
   </data>
+  <data name="EnterPaymentHeading" xml:space="preserve">
+    <value>Enter a payment</value>
+  </data>
+  <data name="EnterRefundHeading" xml:space="preserve">
+    <value>Enter a refund</value>
+  </data>
   <data name="HistoryHeading" xml:space="preserve">
     <value>Payment history</value>
   </data>
@@ -133,7 +139,10 @@
     <value>Go to Key dates</value>
   </data>
   <data name="MainHeading" xml:space="preserve">
-    <value>Account management</value>
+    <value>Finance management</value>
+  </data>
+  <data name="RemainingHeading" xml:space="preserve">
+    <value>Amount remaining</value>
   </data>
   <data name="StatusLabel" xml:space="preserve">
     <value>Status: </value>

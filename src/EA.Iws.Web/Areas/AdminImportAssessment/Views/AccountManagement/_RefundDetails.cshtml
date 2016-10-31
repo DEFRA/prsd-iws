@@ -1,0 +1,43 @@
+﻿@using EA.Iws.Web.Areas.AdminImportAssessment.ViewModels.RefundDetails
+@model RefundDetailsViewModel
+
+
+@using (Html.BeginForm("AddRefund", "AccountManagement", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(m => m.NotificationId)
+    @Html.HiddenFor(m => m.Limit)
+    @Html.HiddenFor(m => m.FirstPaymentReceivedDate)
+
+    <div class="grid-row">
+        <div class="column-two-thirds">
+            <div class="grid-row">
+                <div class="column-half">
+                    <div class="form-group @Html.Gds().FormGroupClass(m => m.RefundAmount)">
+                        @Html.Gds().LabelFor(m => m.RefundAmount)
+                        @Html.Gds().ValidationMessageFor(m => m.RefundAmount)
+                        @Html.Gds().TextBoxFor(m => m.RefundAmount, new { @class = "form-control form-control-wide", @title = RefundDetailsViewModelResources.AmountRefundedLabel })
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group @Html.Gds().FormGroupClass(m => m.RefundDate) @Html.Gds().FormGroupClass(m => m.RefundDate.Day) @Html.Gds().FormGroupClass(m => m.RefundDate.Month) @Html.Gds().FormGroupClass(m => m.RefundDate.Year)">
+                @Html.LabelFor(m => m.RefundDate, new { @class = "form-label-bold" })
+                @Html.Gds().ValidationMessageFor(m => m.RefundDate)
+                @Html.EditorFor(m => m.RefundDate)
+            </div>
+
+            <div class="form-group @Html.Gds().FormGroupClass(m => m.RefundComments)">
+                @Html.Gds().LabelFor(m => m.RefundComments)
+                @Html.Gds().ValidationMessageFor(m => m.RefundComments)
+                @Html.TextAreaFor(m => m.RefundComments, new { @MaxLength = 500, @style = "width: 100%; height: 200px", @title = RefundDetailsViewModelResources.CommentsLabel })
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <p>
+            <button class="button" type="submit">@RefundDetailsViewModelResources.SubmitButton</button>
+        </p>
+    </div>
+}
