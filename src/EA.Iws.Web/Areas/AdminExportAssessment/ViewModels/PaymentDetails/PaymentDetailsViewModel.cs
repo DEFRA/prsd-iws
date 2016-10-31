@@ -61,7 +61,7 @@
 
             if (PaymentAmount.ToMoneyDecimal() < 0)
             {
-                results.Add(new ValidationResult(PaymentDetailsViewModelResources.AmountCannotBeNegative, new[] { "Amount" }));
+                results.Add(new ValidationResult(PaymentDetailsViewModelResources.AmountCannotBeNegative, new[] { "PaymentAmount" }));
             }
 
             return results;

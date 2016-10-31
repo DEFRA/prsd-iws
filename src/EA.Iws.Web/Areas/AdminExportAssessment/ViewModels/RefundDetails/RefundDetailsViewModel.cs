@@ -41,12 +41,12 @@
 
             if (RefundAmount.ToMoneyDecimal() < 0)
             {
-                results.Add(new ValidationResult(RefundDetailsViewModelResources.AmountCannotBeNegative, new[] { "Amount" }));
+                results.Add(new ValidationResult(RefundDetailsViewModelResources.AmountCannotBeNegative, new[] { "RefundAmount" }));
             }
 
             if (RefundAmount.ToMoneyDecimal() > Limit)
             {
-                results.Add(new ValidationResult(string.Format(RefundDetailsViewModelResources.AmountCannotExceedLimit, Limit), new[] { "Amount" }));
+                results.Add(new ValidationResult(string.Format(RefundDetailsViewModelResources.AmountCannotExceedLimit, Limit), new[] { "RefundAmount" }));
             }
 
             return results;
