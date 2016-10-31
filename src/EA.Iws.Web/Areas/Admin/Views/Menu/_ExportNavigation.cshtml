@@ -18,6 +18,10 @@
             <ul>
                 <li>@Html.ActionLink("Notification overview", "Index", "Overview", new { area = "AdminExportAssessment", Model.Data.Id }, null)</li>
                 <li>@Html.ActionLink("Key dates", "Index", "KeyDates", new { area = "AdminExportAssessment", Model.Data.Id }, null)</li>
+                @if (Model.ShowKeyDatesOverride)
+                {
+                    <li>@Html.ActionLink("Update key dates", "Index", "KeyDatesOverride", new { area = "AdminExportAssessment", Model.Data.Id }, null)</li>
+                }
                 @if (Model.ShowAssessmentDecision)
                 {
                     <li>@Html.ActionLink("Assessment decision", "Index", "Decision", new { area = "AdminExportAssessment", Model.Data.Id }, null)</li>

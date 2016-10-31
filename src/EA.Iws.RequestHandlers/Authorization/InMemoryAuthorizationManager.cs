@@ -61,6 +61,7 @@
             { UserAdministrationPermissions.CanCreateInternalUser, new[] { UserRole.Internal, UserRole.Administrator } },
             { UserAdministrationPermissions.CanReadInternalUserData, new[] { UserRole.Internal, UserRole.Administrator } },
             { UserAdministrationPermissions.CanApproveNewInternalUser, new[] { UserRole.Administrator } },
+            { UserAdministrationPermissions.CanOverrideKeyDates, new[] { UserRole.Administrator } },
             { ImportFinancialGuaranteePermissions.CanEditImportFinancialGuarantee, new[] { UserRole.Internal, UserRole.Administrator } }
         };
 
