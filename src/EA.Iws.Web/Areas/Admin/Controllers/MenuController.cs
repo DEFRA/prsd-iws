@@ -98,6 +98,11 @@
                     ExportNotificationPermissions.CanMakeExportNotificationAssessmentDecision))
                 .Result;
 
+            var showKeyDatesOverride = Task.Run(() =>
+                authorizationService.AuthorizeActivity(
+                    UserAdministrationPermissions.CanOverrideKeyDates))
+                .Result;
+
             var model = new ExportNavigationViewModel
             {
                 Data = data,
@@ -107,7 +112,8 @@
                     ShowApproveNewInternalUserLink = showApproveNewInternalUserLink,
                     ShowAddNewEntryOrExitPointLink = showAddNewEntryOrExitPointLink
                 },
-                ShowAssessmentDecision = showAssessmentDecision
+                ShowAssessmentDecision = showAssessmentDecision,
+                ShowKeyDatesOverride = showKeyDatesOverride
             };
 
             return PartialView("_ExportNavigation", model);

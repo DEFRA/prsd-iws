@@ -444,6 +444,7 @@
     <Content Include="Areas\AdminImportNotificationMovements\Views\Cancel\Success.cshtml" />
     <Content Include="Areas\Admin\Views\AdvancedSearch\Index.cshtml" />
     <Content Include="Areas\Admin\Views\AdvancedSearch\Results.cshtml" />
+    <Content Include="Areas\AdminExportAssessment\Views\KeyDatesOverride\Index.cshtml" />
     <None Include="Content\iws\_panels.scss" />
     <Content Include="Content\nta-extended.css" />
     <Content Include="Content\select2\select2-spinner.gif" />
@@ -1054,6 +1055,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DecisionControllerResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Areas\AdminExportAssessment\Controllers\KeyDatesOverrideController.cs" />
     <Compile Include="Areas\AdminExportAssessment\Controllers\MarkAsInterimController.cs" />
     <Compile Include="Areas\AdminExportAssessment\Controllers\OverviewController.cs" />
     <Compile Include="Areas\AdminExportAssessment\ViewModels\DateInputViewModelResources.Designer.cs">
@@ -1061,11 +1063,22 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DateInputViewModelResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Areas\AdminExportAssessment\ViewModels\KeyDatesOverride\IndexViewModel.cs" />
+    <Compile Include="Areas\AdminExportAssessment\ViewModels\KeyDatesOverride\IndexViewModelResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IndexViewModelResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Areas\AdminExportAssessment\ViewModels\MarkAsInterimViewModel.cs" />
     <Compile Include="Areas\AdminExportAssessment\Views\Decision\DecisionResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>DecisionResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\AdminExportAssessment\Views\KeyDatesOverride\IndexResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IndexResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Areas\AdminImportAssessment\AdminImportAssessmentAreaRegistration.cs" />
     <Compile Include="Areas\AdminImportAssessment\Controllers\AccountManagementController.cs" />
@@ -2866,9 +2879,17 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>DateInputViewModelResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Areas\AdminExportAssessment\ViewModels\KeyDatesOverride\IndexViewModelResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>IndexViewModelResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Areas\AdminExportAssessment\Views\Decision\DecisionResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>DecisionResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\AdminExportAssessment\Views\KeyDatesOverride\IndexResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\AdminImportAssessment\Controllers\DecisionControllerResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

@@ -6,7 +6,7 @@
     using Prsd.Core.Mediator;
 
     [RequestAuthorization(UserAdministrationPermissions.CanOverrideKeyDates)]
-    public class SetExportKeyDatesOverride : IRequest
+    public class SetExportKeyDatesOverride : IRequest<Unit>
     {
         public SetExportKeyDatesOverride(KeyDatesOverrideData data)
         {

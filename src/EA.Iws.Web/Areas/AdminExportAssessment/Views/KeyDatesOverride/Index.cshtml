@@ -1,0 +1,112 @@
+﻿@model EA.Iws.Web.Areas.AdminExportAssessment.ViewModels.KeyDatesOverride.IndexViewModel
+@using Resources = EA.Iws.Web.Areas.AdminExportAssessment.Views.KeyDatesOverride.IndexResources
+@{
+    ViewBag.Title = Resources.Title;
+}
+
+<h1 class="heading-large">@Resources.Heading</h1>
+
+@using (Html.BeginForm())
+{
+    @Html.Gds().ValidationSummary()
+    @Html.AntiForgeryToken()
+
+    <fieldset>
+        @if (Model.NotificationReceivedDate.IsCompleted)
+        {
+            <div class="form-group @Html.Gds().FormGroupClass(m => m.NotificationReceivedDate) @Html.Gds().FormGroupClass(m => m.NotificationReceivedDate.Day) @Html.Gds().FormGroupClass(m => m.NotificationReceivedDate.Month) @Html.Gds().FormGroupClass(m => m.NotificationReceivedDate.Year)">
+                @Html.Gds().LabelFor(m => m.NotificationReceivedDate, showOptionalLabel: false)
+                @Html.Gds().ValidationMessageFor(m => m.NotificationReceivedDate)
+                @Html.EditorFor(m => m.NotificationReceivedDate)
+            </div>
+        }
+
+        @if (Model.CommencementDate.IsCompleted)
+        {
+            <div class="form-group @Html.Gds().FormGroupClass(m => m.CommencementDate) @Html.Gds().FormGroupClass(m => m.CommencementDate.Day) @Html.Gds().FormGroupClass(m => m.CommencementDate.Month) @Html.Gds().FormGroupClass(m => m.CommencementDate.Year)">
+                @Html.Gds().LabelFor(m => m.CommencementDate, showOptionalLabel: false)
+                @Html.Gds().ValidationMessageFor(m => m.CommencementDate)
+                @Html.EditorFor(m => m.CommencementDate)
+            </div>
+        }
+
+        @if (Model.CompleteDate.IsCompleted)
+        {
+            <div class="form-group @Html.Gds().FormGroupClass(m => m.CompleteDate) @Html.Gds().FormGroupClass(m => m.CompleteDate.Day) @Html.Gds().FormGroupClass(m => m.CompleteDate.Month) @Html.Gds().FormGroupClass(m => m.CompleteDate.Year)">
+                @Html.Gds().LabelFor(m => m.CompleteDate, showOptionalLabel: false)
+                @Html.Gds().ValidationMessageFor(m => m.CompleteDate)
+                @Html.EditorFor(m => m.CompleteDate)
+            </div>
+        }
+
+        @if (Model.TransmittedDate.IsCompleted)
+        {
+            <div class="form-group @Html.Gds().FormGroupClass(m => m.TransmittedDate) @Html.Gds().FormGroupClass(m => m.TransmittedDate.Day) @Html.Gds().FormGroupClass(m => m.TransmittedDate.Month) @Html.Gds().FormGroupClass(m => m.TransmittedDate.Year)">
+                @Html.Gds().LabelFor(m => m.TransmittedDate, showOptionalLabel: false)
+                @Html.Gds().ValidationMessageFor(m => m.TransmittedDate)
+                @Html.EditorFor(m => m.TransmittedDate)
+            </div>
+        }
+
+        @if (Model.AcknowledgedDate.IsCompleted)
+        {
+            <div class="form-group @Html.Gds().FormGroupClass(m => m.AcknowledgedDate) @Html.Gds().FormGroupClass(m => m.AcknowledgedDate.Day) @Html.Gds().FormGroupClass(m => m.AcknowledgedDate.Month) @Html.Gds().FormGroupClass(m => m.AcknowledgedDate.Year)">
+                @Html.Gds().LabelFor(m => m.AcknowledgedDate, showOptionalLabel: false)
+                @Html.Gds().ValidationMessageFor(m => m.AcknowledgedDate)
+                @Html.EditorFor(m => m.AcknowledgedDate)
+            </div>
+        }
+
+        @if (Model.WithdrawnDate.IsCompleted)
+        {
+            <div class="form-group @Html.Gds().FormGroupClass(m => m.WithdrawnDate) @Html.Gds().FormGroupClass(m => m.WithdrawnDate.Day) @Html.Gds().FormGroupClass(m => m.WithdrawnDate.Month) @Html.Gds().FormGroupClass(m => m.WithdrawnDate.Year)">
+                @Html.Gds().LabelFor(m => m.WithdrawnDate, showOptionalLabel: false)
+                @Html.Gds().ValidationMessageFor(m => m.WithdrawnDate)
+                @Html.EditorFor(m => m.WithdrawnDate)
+            </div>
+        }
+
+        @if (Model.ObjectedDate.IsCompleted)
+        {
+            <div class="form-group @Html.Gds().FormGroupClass(m => m.ObjectedDate) @Html.Gds().FormGroupClass(m => m.ObjectedDate.Day) @Html.Gds().FormGroupClass(m => m.ObjectedDate.Month) @Html.Gds().FormGroupClass(m => m.ObjectedDate.Year)">
+                @Html.Gds().LabelFor(m => m.ObjectedDate, showOptionalLabel: false)
+                @Html.Gds().ValidationMessageFor(m => m.ObjectedDate)
+                @Html.EditorFor(m => m.ObjectedDate)
+            </div>
+        }
+
+        @if (Model.ConsentedDate.IsCompleted)
+        {
+            <div class="form-group @Html.Gds().FormGroupClass(m => m.ConsentedDate) @Html.Gds().FormGroupClass(m => m.ConsentedDate.Day) @Html.Gds().FormGroupClass(m => m.ConsentedDate.Month) @Html.Gds().FormGroupClass(m => m.ConsentedDate.Year)">
+                @Html.Gds().LabelFor(m => m.ConsentedDate, showOptionalLabel: false)
+                @Html.Gds().ValidationMessageFor(m => m.ConsentedDate)
+                @Html.EditorFor(m => m.ConsentedDate)
+            </div>
+        }
+
+        @if (Model.ConsentValidFromDate.IsCompleted)
+        {
+            <div class="form-group @Html.Gds().FormGroupClass(m => m.ConsentValidFromDate) @Html.Gds().FormGroupClass(m => m.ConsentValidFromDate.Day) @Html.Gds().FormGroupClass(m => m.ConsentValidFromDate.Month) @Html.Gds().FormGroupClass(m => m.ConsentValidFromDate.Year)">
+                @Html.Gds().LabelFor(m => m.ConsentValidFromDate, showOptionalLabel: false)
+                @Html.Gds().ValidationMessageFor(m => m.ConsentValidFromDate)
+                @Html.EditorFor(m => m.ConsentValidFromDate)
+            </div>
+        }
+
+        @if (Model.ConsentValidToDate.IsCompleted)
+        {
+            <div class="form-group @Html.Gds().FormGroupClass(m => m.ConsentValidToDate) @Html.Gds().FormGroupClass(m => m.ConsentValidToDate.Day) @Html.Gds().FormGroupClass(m => m.ConsentValidToDate.Month) @Html.Gds().FormGroupClass(m => m.ConsentValidToDate.Year)">
+                @Html.Gds().LabelFor(m => m.ConsentValidToDate, showOptionalLabel: false)
+                @Html.Gds().ValidationMessageFor(m => m.ConsentValidToDate)
+                @Html.EditorFor(m => m.ConsentValidToDate)
+            </div>
+        }
+
+    </fieldset>
+
+    <button class="button" type="submit">@Constants.ContinueButtonText</button>
+}
+
+@section menu {
+    @Html.Action("ExportNavigation", "Menu", new { area = "Admin", section = ExportNavigationSection.Assessment })
+}
