@@ -74,7 +74,7 @@
                     type = (PaymentMethod)Model.Transactions[i].Type;
                 }
 
-                var comment = string.IsNullOrWhiteSpace(Model.Transactions[i].Comments) ? "No" : "Yes";
+                var comment = string.IsNullOrWhiteSpace(Model.Transactions[i].Comments) ? "No" : "<a href=\"#comment-" + i + "\">Yes</a>";
 
                 <tr>
                     <td>@trans</td>
@@ -82,7 +82,7 @@
                     <td>@Model.Transactions[i].Amount.ToString("C")</td>
                     <td>@EnumHelper.GetDescription(type)</td>
                     <td>@Model.Transactions[i].ReceiptNumber</td>
-                    <td>@comment</td>
+                    <td>@Html.Raw(comment)</td>
                 </tr>
             }
         }
@@ -90,31 +90,27 @@
     </table>
 </div>
 
-<h2 class="heading-medium">@Resource.CommentSectionHeading</h2>
-
 <div class="form-group">
+    <details role="group">
 
-    @for (var i = 0; i < Model.Transactions.Count(); i++)
-    {
-        if (!string.IsNullOrWhiteSpace(Model.Transactions[i].Comments))
-        {
-            var trans = (TransactionType)Model.Transactions[i].Transaction;
+        <summary role="button"><span class="summary">@Resource.CommentSectionHeading</span></summary>
 
-            <details>
-                <summary>
-                    <span class="summary">
-                        @trans
-                        &nbsp;
-                        @Model.Transactions[i].Date.ToString("dd/MM/yyyy")
-                    </span>
-                </summary>
+        <div class="panel-border-narrow">
 
-                <div class="panel-indent">
-                    <p>@Model.Transactions[i].Comments</p>
-                </div>
-            </details>
-        }
-    }
+            @for (var i = 0; i < Model.Transactions.Count(); i++)
+            {
+                if (!string.IsNullOrWhiteSpace(Model.Transactions[i].Comments))
+                {
+                    var trans = (TransactionType)Model.Transactions[i].Transaction;
+                    var commentId = "id=comment-" + i;
+
+                    <span>@trans&nbsp;&nbsp;&nbsp;@Model.Transactions[i].Date.ToString("dd/MM/yyyy")</span>
+                    <p @commentId>@Model.Transactions[i].Comments</p>
+                }
+            }
+        </div>
+
+    </details>
 </div>
 
 @Html.ActionLink(Resource.KeyDatesLinkText, "Index", "Keydates")
