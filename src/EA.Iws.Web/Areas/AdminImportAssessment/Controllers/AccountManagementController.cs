@@ -5,6 +5,7 @@
     using System.Web.Mvc;
     using Prsd.Core.Mediator;
     using Requests.ImportNotificationAssessment.Transactions;
+    using ViewModels.AccountManagement;
 
     [Authorize(Roles = "internal")]
     public class AccountManagementController : Controller
@@ -20,8 +21,9 @@
         public async Task<ActionResult> Index(Guid id)
         {
             var data = await mediator.SendAsync(new GetImportNotificationAccountOverview(id));
+            var model = new AccountManagementViewModel(data);
 
-            return View(data);
+            return View(model);
         } 
     }
 }
