@@ -103,6 +103,7 @@
     <Compile Include="ImportNotificationAssessment\FinancialGuarantee\ReleaseImportFinancialGuarantee.cs" />
     <Compile Include="ImportNotificationAssessment\IConsultationRepository.cs" />
     <Compile Include="ImportNotificationAssessment\IImportNotificationChargeCalculator.cs" />
+    <Compile Include="ImportNotificationAssessment\IKeyDatesOverrideRepository.cs" />
     <Compile Include="ImportNotificationAssessment\ImportNotificationChargeCalculator.cs" />
     <Compile Include="ImportNotificationAssessment\ImportNotificationDates.cs" />
     <Compile Include="ImportNotificationAssessment\ImportNotificationAssessment.cs" />

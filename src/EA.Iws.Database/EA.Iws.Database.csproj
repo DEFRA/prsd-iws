@@ -52,6 +52,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Content Include="scripts\Everytime\Functions\0003-Reports-PricingInfo.sql" />
+    <Content Include="scripts\Everytime\StoredProcedures\0003-uspUpdateImportNotificationKeyDates.sql" />
     <Content Include="scripts\Everytime\StoredProcedures\0002-uspUpdateExportNotificationKeyDates.sql" />
     <Content Include="scripts\Everytime\Views\0019-Reports-RdfSrfWood.sql" />
     <Content Include="scripts\Everytime\Views\0020-Reports-DataImportNotifications.sql" />
