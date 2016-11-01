@@ -1,5 +1,6 @@
 ﻿namespace EA.Iws.DataAccess.Repositories.Reports
 {
+    using System;
     using System.Collections.Generic;
     using System.Data.SqlClient;
     using System.Threading.Tasks;
@@ -15,7 +16,7 @@
             this.context = context;
         }
 
-        public async Task<IEnumerable<MissingShipment>> Get(int year, UKCompetentAuthority competentAuthority)
+        public async Task<IEnumerable<MissingShipment>> Get(DateTime from, DateTime to, UKCompetentAuthority competentAuthority)
         {
             return await context.Database.SqlQuery<MissingShipment>(
                 @"SELECT 
@@ -36,8 +37,9 @@
                     [LocalArea]
                 FROM [Reports].[NotificationShipmentDataMissingShipments]
                 WHERE [CompetentAuthorityId] = @ca
-                AND YEAR(COALESCE([PrenotificationDate], [ActualDateOfShipment])) = @year",
-                new SqlParameter("@year", year),
+                AND COALESCE([PrenotificationDate], [ActualDateOfShipment]) BETWEEN @from AND @to",
+                new SqlParameter("@from", from),
+                new SqlParameter("@to", to),
                 new SqlParameter("@ca", (int)competentAuthority)).ToArrayAsync();
         }
     }

@@ -34,9 +34,12 @@
                 return View(model);
             }
 
-            var report = await mediator.SendAsync(new GetMissingShipmentsReport(model.Year.Value));
+            var from = model.From.AsDateTime().GetValueOrDefault();
+            var to = model.To.AsDateTime().GetValueOrDefault();
 
-            var fileName = string.Format("missing-shipments-{0}.csv", model.Year.Value);
+            var report = await mediator.SendAsync(new GetMissingShipmentsReport(from, to));
+
+            var fileName = string.Format("missing-shipments-{0}-{1}.csv", from.ToShortDateString(), to.ToShortDateString());
 
             return new CsvActionResult<MissingShipmentData>(report.ToList(), fileName);
         } 

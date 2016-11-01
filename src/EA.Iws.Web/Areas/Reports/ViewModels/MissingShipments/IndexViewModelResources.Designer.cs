@@ -61,20 +61,38 @@ namespace EA.Iws.Web.Areas.Reports.ViewModels.MissingShipments {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Reporting year.
+        ///   Looks up a localized string similar to From.
         /// </summary>
-        public static string Year {
+        public static string From {
             get {
-                return ResourceManager.GetString("Year", resourceCulture);
+                return ResourceManager.GetString("From", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Please select a reporting year.
+        ///   Looks up a localized string similar to Please provide the from date.
         /// </summary>
-        public static string YearRequired {
+        public static string FromRequired {
             get {
-                return ResourceManager.GetString("YearRequired", resourceCulture);
+                return ResourceManager.GetString("FromRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to To.
+        /// </summary>
+        public static string To {
+            get {
+                return ResourceManager.GetString("To", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please provide the to date.
+        /// </summary>
+        public static string ToRequired {
+            get {
+                return ResourceManager.GetString("ToRequired", resourceCulture);
             }
         }
     }
