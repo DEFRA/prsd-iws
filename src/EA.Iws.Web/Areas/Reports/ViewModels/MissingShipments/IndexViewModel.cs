@@ -1,24 +1,25 @@
 ﻿namespace EA.Iws.Web.Areas.Reports.ViewModels.MissingShipments
 {
-    using System;
     using System.ComponentModel.DataAnnotations;
-    using System.Linq;
-    using System.Web.Mvc;
-    using Prsd.Core;
+    using Infrastructure.Validation;
+    using Web.ViewModels.Shared;
 
     public class IndexViewModel
     {
-        private const int MinYear = 2005;
-
-        [Display(Name = "Year", ResourceType = typeof(IndexViewModelResources))]
-        [Required(ErrorMessageResourceName = "YearRequired", ErrorMessageResourceType = typeof(IndexViewModelResources))]
-        public int? Year { get; set; }
-
-        public SelectList Years { get; private set; }
-
         public IndexViewModel()
         {
-            Years = new SelectList(Enumerable.Range(MinYear, SystemTime.UtcNow.Year + 1 - MinYear));
+            From = new OptionalDateInputViewModel(true);
+            To = new OptionalDateInputViewModel(true);
         }
+
+        [Display(Name = "From", ResourceType = typeof(ExportStats.IndexViewModelResources))]
+        [RequiredDateInput(ErrorMessageResourceName = "FromRequired",
+            ErrorMessageResourceType = typeof(ExportStats.IndexViewModelResources))]
+        public OptionalDateInputViewModel From { get; set; }
+
+        [Display(Name = "To", ResourceType = typeof(ExportStats.IndexViewModelResources))]
+        [RequiredDateInput(ErrorMessageResourceName = "ToRequired",
+            ErrorMessageResourceType = typeof(ExportStats.IndexViewModelResources))]
+        public OptionalDateInputViewModel To { get; set; }
     }
 }

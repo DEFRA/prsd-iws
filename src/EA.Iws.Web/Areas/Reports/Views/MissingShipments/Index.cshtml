@@ -12,10 +12,16 @@
     @Html.AntiForgeryToken()
     @Html.Gds().ValidationSummary()
 
-    <div class="form-group @Html.Gds().FormGroupClass(m => m.Year)">
-        @Html.Gds().LabelFor(m => m.Year)
-        @Html.Gds().ValidationMessageFor(m => m.Year)
-        @Html.Gds().DropDownListFor(m => m.Year, Model.Years, string.Empty, new { @class = "form-control form-control-1-4" })
+    <div class="form-group @Html.Gds().FormGroupClass(m => m.From) @Html.Gds().FormGroupClass(m => m.From.Day) @Html.Gds().FormGroupClass(m => m.From.Month) @Html.Gds().FormGroupClass(m => m.From.Year)">
+        @Html.LabelFor(m => m.From)
+        @Html.Gds().ValidationMessageFor(m => m.From)
+        @Html.EditorFor(m => m.From)
+    </div>
+
+    <div class="form-group @Html.Gds().FormGroupClass(m => m.To) @Html.Gds().FormGroupClass(m => m.To.Day) @Html.Gds().FormGroupClass(m => m.To.Month) @Html.Gds().FormGroupClass(m => m.To.Year)">
+        @Html.LabelFor(m => m.To)
+        @Html.Gds().ValidationMessageFor(m => m.To)
+        @Html.EditorFor(m => m.To)
     </div>
 
     <div class="form-group">
