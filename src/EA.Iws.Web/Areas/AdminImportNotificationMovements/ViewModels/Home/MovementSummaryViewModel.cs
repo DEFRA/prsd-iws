@@ -1,7 +1,9 @@
 ﻿namespace EA.Iws.Web.Areas.AdminImportNotificationMovements.ViewModels.Home
 {
     using System;
+    using System.Collections.Generic;
     using Core.ImportNotificationMovements;
+    using Core.NotificationAssessment;
     using Core.Shared;
     using Prsd.Core.Helpers;
 
@@ -25,6 +27,8 @@
 
         public int ActiveLoadsCurrent { get; set; }
 
+        public List<MovementsSummaryTableViewModel> TableData { get; set; }
+
         public MovementSummaryViewModel()
         {
         }
@@ -38,11 +42,17 @@
             UsedShipments = data.UsedShipments;
             QuantityReceivedTotal = data.QuantityReceivedTotal.ToString("G29") + " " + EnumHelper.GetDisplayName(data.DisplayUnit);
             QuantityRemainingTotal = data.QuantityRemainingTotal.ToString("G29") + " " + EnumHelper.GetDisplayName(data.DisplayUnit);
+            TableData = new List<MovementsSummaryTableViewModel>();
         }
 
         public bool ShowShipmentOptions()
         {
             return true;
+        }
+
+        public bool ShowShipments()
+        {
+            return TableData != null && TableData.Count > 0;
         }
     }
 }

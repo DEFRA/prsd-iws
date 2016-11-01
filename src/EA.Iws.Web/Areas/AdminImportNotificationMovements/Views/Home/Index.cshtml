@@ -1,62 +1,142 @@
 ﻿@model EA.Iws.Web.Areas.AdminImportNotificationMovements.ViewModels.Home.MovementSummaryViewModel
+@using EA.Iws.Core.NotificationAssessment
+@using EA.Iws.Core.Shared
+@using EnumHelper = EA.Prsd.Core.Helpers.EnumHelper
 @using Resource = EA.Iws.Web.Areas.AdminImportNotificationMovements.Views.Home.IndexResources
 
 @{
     ViewBag.Title = @Resource.TabTitle;
+
+    var operationTitle = Model.NotificationType == NotificationType.Disposal ? "Disposed" : "Recovered";
 }
 
+@helper DisplayDate(DateTime? date)
+{
+if (date.HasValue)
+{
+        @date.Value.ToString("d MMM yyyy")
+}
+else
+{
+        @:- -
+    }
+}
 
-<div class="shipping-home">
+@helper DisplayQuantity(decimal? quantity, ShipmentQuantityUnits? unit)
+{
+if (quantity.HasValue)
+{
+        @(quantity.Value.ToString("G29") + " " + EnumHelper.GetShortName(unit.GetValueOrDefault()))
+}
+else
+{
+        @:- -
+    }
+}
 
-    <h1 class="heading-large">
-        @Resource.ShipmentSummaryTitle
-    </h1>
+<div class="form-group">
+    <div class="shipping-home">
 
-    <div class="form-group">
+        <h1 class="heading-large">
+            @Resource.ShipmentSummaryTitle
+        </h1>
+
         <div class="grid-row">
-
             <div class="column-two-thirds">
-                @if (Model.ShowShipmentOptions())
-                {
-                    <div>
+                <table class="odd-table">
+                    <caption class="visuallyhidden">@Resource.SummaryCaption</caption>
+                    <tbody>
+                        <tr>
+                            <td>@Resource.TotalNumber</td>
+                            <td>@Model.IntendedShipments</td>
+                        </tr>
+                        <tr>
+                            <td>@Resource.NumberUsed</td>
+                            <td>@Model.UsedShipments</td>
+                        </tr>
+                        <tr>
+                            <td>@Resource.TotalQuantityReceived</td>
+                            <td>@Model.QuantityReceivedTotal</td>
+                        </tr>
+                        <tr>
+                            <td>@Resource.TotalQuantityRemaining</td>
+                            <td>@Model.QuantityRemainingTotal</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="column-one-third nav-bloc">
+                <h2 class="heading-small">@Resource.ShipingOptions</h2>
+                <nav>
+                    @Html.ActionLink(@Resource.Record, "Index", "Capture")
 
-                        <table class="odd-table">
-                            <caption class="visuallyhidden">@Resource.SummaryCaption</caption>
-                            <tbody>
-                                <tr>
-                                    <td>@Resource.TotalNumber</td>
-                                    <td>@Model.IntendedShipments</td>
-                                </tr>
-                                <tr>
-                                    <td>@Resource.NumberUsed</td>
-                                    <td>@Model.UsedShipments</td>
-                                </tr>
-                                <tr>
-                                    <td>@Resource.TotalQuantityReceived</td>
-                                    <td>@Model.QuantityReceivedTotal</td>
-                                </tr>
-                                <tr>
-                                    <td>@Resource.TotalQuantityRemaining</td>
-                                    <td>@Model.QuantityRemainingTotal</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                }
-                else
-                {
-                    <div class="column-two-thirds bold-small">
-                        @Resource.NoShipmentDataText
-                    </div>
-                }
+                    @Html.ActionLink(@Resource.Cancel, "Index", "Cancel")
+                </nav>
             </div>
         </div>
-    </div>
 
-    
-    <div class="form-group">
-        @Html.ActionLink("View shipments table", "Index", "Shipments",
-            null,
-            new { @class = "button" })
     </div>
+</div>
+
+<div class="form-group">
+
+    @if (Model.ShowShipments())
+    {
+        <h2 class="heading-small">@Resource.TableTitle</h2>
+
+        <table class="odd-table">
+            <caption class="visuallyhidden">@Resource.SummaryCaption</caption>
+
+            <thead>
+            <tr>
+                <th>@Resource.thNumber</th>
+                <th>@Resource.thPrenotified</th>
+                <th>@Resource.thShipmentDue</th>
+                <th>@Resource.thReceived</th>
+                <th>@Resource.thQuantity</th>
+                <th>@operationTitle</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            @{
+                for (int i = 0; i < Model.TableData.Count; i++)
+                {
+                    <tr>
+                        <td>@Model.TableData[i].Number</td>
+                        <td>@DisplayDate(Model.TableData[i].PreNotification)</td>
+                        <td>
+                            @if (Model.TableData[i].IsCancelled)
+                            {
+                                @Resource.Cancelled
+                            }
+                            else
+                            {
+                                @DisplayDate(Model.TableData[i].ShipmentDate)
+                            }
+                        </td>
+                        <td>@DisplayDate(Model.TableData[i].Received)</td>
+                        <td>@DisplayQuantity(Model.TableData[i].Quantity, Model.TableData[i].Unit)</td>
+                        <td>@DisplayDate(Model.TableData[i].RecoveredOrDisposedOf)</td>
+                    </tr>
+                }
+            }
+            </tbody>
+        </table>
+
+    }
+    else
+    {
+        <div class="bold-small">
+            @Resource.NoShipmentDataText
+        </div>
+    }
+</div>
+
+<div class="form-group">
+    @Html.ActionLink(@Resource.GoToOverview,
+            "Index",
+            "Home",
+            new { area = "ImportNotification", id = Model.NotificationId },
+            new { @class = "button" })
 </div>

@@ -1251,6 +1251,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>SearchViewModelResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Areas\AdminImportNotificationMovements\ViewModels\Home\MovementsSummaryTableViewModel.cs" />
     <Compile Include="Areas\AdminImportNotificationMovements\ViewModels\Home\MovementSummaryTableRowViewModel.cs" />
     <Compile Include="Areas\AdminImportNotificationMovements\ViewModels\Home\MovementSummaryViewModel.cs" />
     <Compile Include="Areas\AdminImportNotificationMovements\ViewModels\Shipments\ShipmentsTableViewModel.cs" />

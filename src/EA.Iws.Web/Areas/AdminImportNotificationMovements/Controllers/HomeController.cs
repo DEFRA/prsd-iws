@@ -1,6 +1,7 @@
 ﻿namespace EA.Iws.Web.Areas.AdminImportNotificationMovements.Controllers
 {
     using System;
+    using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Prsd.Core.Mediator;
@@ -20,9 +21,13 @@
         [HttpGet]
         public async Task<ActionResult> Index(Guid id)
         {
-            var result = await mediator.SendAsync(new GetImportMovementsSummary(id));
+            var movementData = await mediator.SendAsync(new GetImportMovementsSummary(id));
+            var tableData = await mediator.SendAsync(new GetImportMovementsSummaryTable(id));
 
-            return View(new MovementSummaryViewModel(result));
+            var model = new MovementSummaryViewModel(movementData);
+            model.TableData = tableData.TableData.OrderByDescending(d => d.Number).Select(d => new MovementsSummaryTableViewModel(d)).ToList();
+
+            return View(model);
         } 
     }
 }
