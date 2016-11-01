@@ -26,13 +26,13 @@ BEGIN
 
     UPDATE [Notification].[NotificationDates]
        SET [NotificationReceivedDate] = CASE WHEN [NotificationReceivedDate] IS NULL THEN NULL ELSE ISNULL(@NotificationReceivedDate, [NotificationReceivedDate]) END
-          ,[CommencementDate] = CASE WHEN [NotificationReceivedDate] IS NULL THEN NULL ELSE ISNULL(@CommencementDate, [CommencementDate]) END
-          ,[CompleteDate] = CASE WHEN [NotificationReceivedDate] IS NULL THEN NULL ELSE ISNULL(@CompleteDate, [CompleteDate]) END
-          ,[TransmittedDate] = CASE WHEN [NotificationReceivedDate] IS NULL THEN NULL ELSE ISNULL(@TransmittedDate, [TransmittedDate]) END
-          ,[AcknowledgedDate] = CASE WHEN [NotificationReceivedDate] IS NULL THEN NULL ELSE ISNULL(@AcknowledgedDate, [AcknowledgedDate]) END
-          ,[WithdrawnDate] = CASE WHEN [NotificationReceivedDate] IS NULL THEN NULL ELSE ISNULL(@WithdrawnDate, [WithdrawnDate]) END
-          ,[ObjectedDate] = CASE WHEN [NotificationReceivedDate] IS NULL THEN NULL ELSE ISNULL(@ObjectedDate, [ObjectedDate]) END
-          ,[ConsentedDate] = CASE WHEN [NotificationReceivedDate] IS NULL THEN NULL ELSE ISNULL(@ConsentedDate, [ConsentedDate]) END
+          ,[CommencementDate] = CASE WHEN [CommencementDate] IS NULL THEN NULL ELSE ISNULL(@CommencementDate, [CommencementDate]) END
+          ,[CompleteDate] = CASE WHEN [CompleteDate] IS NULL THEN NULL ELSE ISNULL(@CompleteDate, [CompleteDate]) END
+          ,[TransmittedDate] = CASE WHEN [TransmittedDate] IS NULL THEN NULL ELSE ISNULL(@TransmittedDate, [TransmittedDate]) END
+          ,[AcknowledgedDate] = CASE WHEN [AcknowledgedDate] IS NULL THEN NULL ELSE ISNULL(@AcknowledgedDate, [AcknowledgedDate]) END
+          ,[WithdrawnDate] = CASE WHEN [WithdrawnDate] IS NULL THEN NULL ELSE ISNULL(@WithdrawnDate, [WithdrawnDate]) END
+          ,[ObjectedDate] = CASE WHEN [ObjectedDate] IS NULL THEN NULL ELSE ISNULL(@ObjectedDate, [ObjectedDate]) END
+          ,[ConsentedDate] = CASE WHEN [ConsentedDate] IS NULL THEN NULL ELSE ISNULL(@ConsentedDate, [ConsentedDate]) END
      WHERE [NotificationAssessmentId] = @NotificationAssessmentId;
 
      UPDATE [Notification].[Consent]
