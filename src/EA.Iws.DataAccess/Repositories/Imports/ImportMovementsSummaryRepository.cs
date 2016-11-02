@@ -39,7 +39,8 @@
                 UsedShipments = totalMovements,
                 DisplayUnit = shipment.Quantity.Units,
                 QuantityReceivedTotal = received.Quantity,
-                QuantityRemainingTotal = shipment.Quantity.Quantity - received.Quantity
+                QuantityRemainingTotal = shipment.Quantity.Quantity - received.Quantity,
+                Id = importNotificationId
             };
         }
 

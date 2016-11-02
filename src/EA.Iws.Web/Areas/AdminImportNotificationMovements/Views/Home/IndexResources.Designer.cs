@@ -70,11 +70,38 @@ namespace EA.Iws.Web.Areas.AdminImportNotificationMovements.Views.Home {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cancel a prenotification.
+        /// </summary>
+        public static string Cancel {
+            get {
+                return ResourceManager.GetString("Cancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cancelled.
+        /// </summary>
+        public static string Cancelled {
+            get {
+                return ResourceManager.GetString("Cancelled", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Current active loads:.
         /// </summary>
         public static string CurrentActiveLoads {
             get {
                 return ResourceManager.GetString("CurrentActiveLoads", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Go to notification overview.
+        /// </summary>
+        public static string GoToOverview {
+            get {
+                return ResourceManager.GetString("GoToOverview", resourceCulture);
             }
         }
         
@@ -97,6 +124,24 @@ namespace EA.Iws.Web.Areas.AdminImportNotificationMovements.Views.Home {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Record shipment data.
+        /// </summary>
+        public static string Record {
+            get {
+                return ResourceManager.GetString("Record", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Shipping options.
+        /// </summary>
+        public static string ShipingOptions {
+            get {
+                return ResourceManager.GetString("ShipingOptions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Shipment summary.
         /// </summary>
         public static string ShipmentSummaryTitle {
@@ -115,11 +160,83 @@ namespace EA.Iws.Web.Areas.AdminImportNotificationMovements.Views.Home {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Shipment details.
+        /// </summary>
+        public static string TableTitle {
+            get {
+                return ResourceManager.GetString("TableTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Shipment summary.
         /// </summary>
         public static string TabTitle {
             get {
                 return ResourceManager.GetString("TabTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No..
+        /// </summary>
+        public static string thNumber {
+            get {
+                return ResourceManager.GetString("thNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Prenotified.
+        /// </summary>
+        public static string thPrenotified {
+            get {
+                return ResourceManager.GetString("thPrenotified", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Quantity.
+        /// </summary>
+        public static string thQuantity {
+            get {
+                return ResourceManager.GetString("thQuantity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Received.
+        /// </summary>
+        public static string thReceived {
+            get {
+                return ResourceManager.GetString("thReceived", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Recovered.
+        /// </summary>
+        public static string thRecovered {
+            get {
+                return ResourceManager.GetString("thRecovered", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Shipment due.
+        /// </summary>
+        public static string thShipmentDue {
+            get {
+                return ResourceManager.GetString("thShipmentDue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Status.
+        /// </summary>
+        public static string thStatus {
+            get {
+                return ResourceManager.GetString("thStatus", resourceCulture);
             }
         }
         

@@ -5,17 +5,23 @@
     ViewBag.Title = Resource.Title;
 }
 
-<h1 class="heading-large">@Resource.MainHeading</h1>
+<div class="column-two-thirds">
+    <h1 class="heading-large">@Resource.MainHeading</h1>
 
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-    @Html.Gds().ValidationSummary()
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.Gds().ValidationSummary()
 
-    <div class="form-group @Html.Gds().FormGroupClass(m => m.Number)">
-        @Html.Gds().LabelFor(m => m.Number)
-        @Html.Gds().ValidationMessageFor(m => m.Number)
-        @Html.Gds().TextBoxFor(m => m.Number, new { type = "number", min = 1, max = int.MaxValue })
-        &nbsp;&nbsp;&nbsp;<button type="submit" class="button">@Resource.ButtonText</button>
-    </div>
+        <div class="form-group @Html.Gds().FormGroupClass(m => m.Number)">
+            @Html.Gds().LabelFor(m => m.Number)
+            @Html.Gds().ValidationMessageFor(m => m.Number)
+            @Html.Gds().TextBoxFor(m => m.Number, new { type = "number", min = 1, max = int.MaxValue })
+            &nbsp;&nbsp;&nbsp;<button type="submit" class="button">@Resource.ButtonText</button>
+        </div>
+    }
+</div>
+
+@section menu {
+    @Html.Action("ImportNavigation", "Menu", new { area = "Admin", section = ImportNavigationSection.Shipments })
 }

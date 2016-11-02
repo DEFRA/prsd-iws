@@ -1,12 +1,12 @@
-﻿namespace EA.Iws.Web.Areas.AdminImportNotificationMovements.ViewModels.Shipments
+﻿namespace EA.Iws.Web.Areas.AdminImportNotificationMovements.ViewModels.Home
 {
     using System;
     using Core.ImportNotificationMovements;
     using Core.Shared;
 
-    public class TableDataViewModel
+    public class MovementsSummaryTableViewModel
     {
-        public TableDataViewModel(MovementTableData data)
+        public MovementsSummaryTableViewModel(MovementTableData data)
         {
             Number = data.Number;
             PreNotification = data.PreNotification;

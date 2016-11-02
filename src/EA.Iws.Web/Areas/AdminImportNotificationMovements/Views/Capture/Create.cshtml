@@ -16,3 +16,7 @@
         @Html.ActionLink(Resource.ReturnToSummary, "Index", "Home")
     </div>
 </div>
+
+@section menu {
+    @Html.Action("ImportNavigation", "Menu", new { area = "Admin", section = ImportNavigationSection.Shipments })
+}
