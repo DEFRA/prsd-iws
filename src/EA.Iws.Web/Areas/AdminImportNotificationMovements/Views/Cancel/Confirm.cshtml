@@ -4,32 +4,38 @@
     ViewBag.Title = Resources.Title;
 }
 
-<header class="hgroup text">
-    <h1 class="heading-large">@Resources.Heading</h1>
-    @Resources.SubHeading
-</header>
-
-<div class="form-group">
-    @foreach (var movement in Model.SelectedMovements)
-    {
-        <span class="operation-code-list">@movement.Number</span>
-    }
-</div>
-
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
-    @Html.HiddenFor(m => m.NotificationId)
+<div class="column-two-thirds">
+    <header class="hgroup text">
+        <h1 class="heading-large">@Resources.Heading</h1>
+        @Resources.SubHeading
+    </header>
 
     <div class="form-group">
-        <button class="button" type="submit">@Resources.ConfirmCancellation</button>
+        @foreach (var movement in Model.SelectedMovements)
+        {
+            <span class="operation-code-list">@movement.Number</span>
+        }
     </div>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(m => m.NotificationId)
+
+        <div class="form-group">
+            <button class="button" type="submit">@Resources.ConfirmCancellation</button>
+        </div>
+    }
+
+    <div class="form-group">
+        @Html.ActionLink(Resources.EditList, "Index")
+    </div>
+
+    <div class="form-group">
+        @Html.ActionLink(Resources.AbortCancel, "Index", "Home")
+    </div>
+</div>
+
+@section menu {
+    @Html.Action("ImportNavigation", "Menu", new { area = "Admin", section = ImportNavigationSection.Shipments })
 }
-
-<div class="form-group">
-    @Html.ActionLink(Resources.EditList, "Index")
-</div>
-
-<div class="form-group">
-    @Html.ActionLink(Resources.AbortCancel, "Index", "Home")
-</div>

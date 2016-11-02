@@ -4,10 +4,16 @@
     ViewBag.Title = Resources.Title;
 }
 
-<header class="hgroup">
-    <h1 class="heading-large">@Model.HeadingText</h1>
-</header>
+<div class="column-two-thirds">
+    <header class="hgroup">
+        <h1 class="heading-large">@Model.HeadingText</h1>
+    </header>
 
-<div class="form-group">
-    @Html.ActionLink("Continue", "Index", "Home", null, new { @class = "button" })
+    <div class="form-group">
+        @Html.ActionLink("Continue", "Index", "Home", null, new { @class = "button" })
+    </div>
 </div>
+
+@section menu {
+    @Html.Action("ImportNavigation", "Menu", new { area = "Admin", section = ImportNavigationSection.Shipments })
+}
