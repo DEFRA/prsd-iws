@@ -55,3 +55,7 @@
 }
 
 @Html.ActionLink(Resource.ReturnToSummary, "Index", "Home", new { area = "AdminImportNotificationMovements", id = Model.NotificationId }, null)
+
+@section menu {
+    @Html.Action("ImportNavigation", "Menu", new { area = "Admin", id = Model.NotificationId, section = ImportNavigationSection.Shipments })
+}

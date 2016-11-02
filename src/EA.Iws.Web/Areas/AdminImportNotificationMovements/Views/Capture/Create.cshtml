@@ -5,7 +5,7 @@
     ViewBag.Title = Resource.PageTitle;
 }
 
-<div class="grid-row">
+
     <div class="column-two-thirds">
         <h1 class="heading-large">@Resource.MainHeading</h1>
 
@@ -15,7 +15,7 @@
 
         @Html.ActionLink(Resource.ReturnToSummary, "Index", "Home")
     </div>
-</div>
+
 
 @section menu {
     @Html.Action("ImportNavigation", "Menu", new { area = "Admin", section = ImportNavigationSection.Shipments })
