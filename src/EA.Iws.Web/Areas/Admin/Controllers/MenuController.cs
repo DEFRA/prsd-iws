@@ -64,6 +64,11 @@
                     ImportNotificationPermissions.CanMakeImportNotificationAssessmentDecision))
                 .Result;
 
+            var showKeyDatesOverride = Task.Run(() =>
+                authorizationService.AuthorizeActivity(
+                    UserAdministrationPermissions.CanOverrideKeyDates))
+                .Result;
+
             var model = new ImportNavigationViewModel
             {
                 Details = details,
@@ -74,7 +79,8 @@
                     ShowApproveNewInternalUserLink = showApproveNewInternalUserLink,
                     ShowAddNewEntryOrExitPointLink = showAddNewEntryOrExitPointLink
                 },
-                ShowAssessmentDecision = showAssessmentDecision
+                ShowAssessmentDecision = showAssessmentDecision,
+                ShowKeyDatesOverride = showKeyDatesOverride
             };
 
             return PartialView("_ImportNavigation", model);

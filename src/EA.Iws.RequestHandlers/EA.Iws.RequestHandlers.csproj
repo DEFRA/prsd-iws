@@ -89,7 +89,9 @@
     <Compile Include="Admin\FinancialGuarantee\GetFinancialGuaranteeStatusHandler.cs" />
     <Compile Include="Admin\GetExportNotificationOwnerDisplaysHandler.cs" />
     <Compile Include="Admin\GetUserCompetentAuthorityHandler.cs" />
+    <Compile Include="Admin\KeyDates\GetImportKeyDatesOverrideDataHandler.cs" />
     <Compile Include="Admin\KeyDates\GetExportKeyDatesOverrideDataHandler.cs" />
+    <Compile Include="Admin\KeyDates\SetImportKeyDatesOverrideHandler.cs" />
     <Compile Include="Admin\KeyDates\SetExportKeyDatesOverrideHandler.cs" />
     <Compile Include="Admin\NotificationAssessment\AcceptChangesHandler.cs" />
     <Compile Include="Admin\NotificationAssessment\GetDatesHandler.cs" />

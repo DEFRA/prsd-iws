@@ -56,7 +56,9 @@
     <Compile Include="Admin\EntryOrExitPoints\GetEntryOrExitPointsGroupedByCountry.cs" />
     <Compile Include="Admin\GetExportNotificationOwnerDisplays.cs" />
     <Compile Include="Admin\GetUserCompetentAuthority.cs" />
+    <Compile Include="Admin\KeyDates\GetImportKeyDatesOverrideData.cs" />
     <Compile Include="Admin\KeyDates\GetExportKeyDatesOverrideData.cs" />
+    <Compile Include="Admin\KeyDates\SetImportKeyDatesOverride.cs" />
     <Compile Include="Admin\KeyDates\SetExportKeyDatesOverride.cs" />
     <Compile Include="Admin\NotificationAssessment\AcceptChanges.cs" />
     <Compile Include="Admin\NotificationAssessment\GetDates.cs" />

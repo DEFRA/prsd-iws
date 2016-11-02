@@ -50,6 +50,10 @@
             </h3>
             <ul>
                 <li>@Html.ActionLink("Key dates", "Index", "KeyDates", new { area = "AdminImportAssessment", id }, null)</li>
+                @if (Model.ShowKeyDatesOverride)
+                {
+                    <li>@Html.ActionLink("Update key dates", "Index", "KeyDatesOverride", new { area = "AdminImportAssessment", id }, null)</li>
+                }
                 @if (Model.ShowAssessmentDecision)
                 {
                     <li>@Html.ActionLink("Assessment decision", "Index", "Decision", new { area = "AdminImportAssessment", id }, null)</li>
