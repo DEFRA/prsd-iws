@@ -20,9 +20,12 @@
         }
 
         [HttpGet]
-        public ActionResult Index(Guid id)
+        public async Task<ActionResult> Index(Guid id)
         {
-            return View(new SearchViewModel());
+            var model = new SearchViewModel();
+            model.HighestCurrentMovementNumber = await mediator.SendAsync(new GetHighestMovementNumber(id));
+
+            return View(model);
         }
 
         [HttpPost]

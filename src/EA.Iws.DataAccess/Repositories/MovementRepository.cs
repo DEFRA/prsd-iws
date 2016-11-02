@@ -89,5 +89,14 @@
 
             return currentActiveLoads;
         }
+
+        public async Task<int> GetHighestMovementNumber(Guid notificationId)
+        {
+            await notificationAuthorization.EnsureAccessAsync(notificationId);
+
+            var movement = await context.Movements.Where(m => m.NotificationId == notificationId).OrderByDescending(m => m.Number).FirstOrDefaultAsync();
+
+            return movement == null ? 0 : movement.Number;
+        }
     }
 }

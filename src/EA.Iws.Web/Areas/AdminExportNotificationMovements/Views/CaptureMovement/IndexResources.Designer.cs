@@ -71,6 +71,15 @@ namespace EA.Iws.Web.Areas.AdminExportNotificationMovements.Views.CaptureMovemen
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The last shipment prenotified for this notification was {0}.
+        /// </summary>
+        public static string HighestNumber {
+            get {
+                return ResourceManager.GetString("HighestNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Capture a shipment.
         /// </summary>
         public static string MainHeading {
@@ -85,6 +94,15 @@ namespace EA.Iws.Web.Areas.AdminExportNotificationMovements.Views.CaptureMovemen
         public static string Title {
             get {
                 return ResourceManager.GetString("Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to So far no shipments have been prenotified for this notification.
+        /// </summary>
+        public static string ZeroMovements {
+            get {
+                return ResourceManager.GetString("ZeroMovements", resourceCulture);
             }
         }
     }
