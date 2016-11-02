@@ -143,13 +143,13 @@
 
             DateTime validFromDate = model.ConsentValidFromDate.AsDateTime().GetValueOrDefault();
 
-            if (data.IsPreconsented && model.ConsentValidToDate.AsDateTime() > validFromDate.AddYears(3))
+            if (data.IsPreconsented && model.ConsentValidToDate.AsDateTime() >= validFromDate.AddYears(3))
             {
                 ModelState.AddModelError("ConsentValidToDate", DecisionControllerResources.ValidToPreconsented);
                 areValid = false;
             }
 
-            if ((!data.IsPreconsented) && model.ConsentValidToDate.AsDateTime() > validFromDate.AddYears(1))
+            if ((!data.IsPreconsented) && model.ConsentValidToDate.AsDateTime() >= validFromDate.AddYears(1))
             {
                 ModelState.AddModelError("ConsentValidToDate", DecisionControllerResources.ValidToNotPreconsented);
                 areValid = false;

@@ -161,7 +161,7 @@
             var model = new NotificationAssessmentDecisionViewModel();
             model.SelectedDecision = DecisionType.Consent;
             model.ConsentValidFromDate = new OptionalDateInputViewModel(Today);
-            model.ConsentValidToDate = new OptionalDateInputViewModel(Today.AddYears(3).AddDays(1));
+            model.ConsentValidToDate = new OptionalDateInputViewModel(Today.AddYears(3));
 
             A.CallTo(() => mediator.SendAsync(A<GetNotificationAssessmentDecisionData>.Ignored))
                 .Returns(new NotificationAssessmentDecisionData
@@ -181,7 +181,7 @@
             var model = new NotificationAssessmentDecisionViewModel();
             model.SelectedDecision = DecisionType.Consent;
             model.ConsentValidFromDate = new OptionalDateInputViewModel(Today);
-            model.ConsentValidToDate = new OptionalDateInputViewModel(Today.AddYears(3));
+            model.ConsentValidToDate = new OptionalDateInputViewModel(Today.AddYears(3).AddDays(-1));
 
             A.CallTo(() => mediator.SendAsync(A<GetNotificationAssessmentDecisionData>.Ignored))
                 .Returns(new NotificationAssessmentDecisionData
@@ -201,7 +201,7 @@
             var model = new NotificationAssessmentDecisionViewModel();
             model.SelectedDecision = DecisionType.Consent;
             model.ConsentValidFromDate = new OptionalDateInputViewModel(Today);
-            model.ConsentValidToDate = new OptionalDateInputViewModel(Today.AddYears(1).AddDays(1));
+            model.ConsentValidToDate = new OptionalDateInputViewModel(Today.AddYears(1));
 
             A.CallTo(() => mediator.SendAsync(A<GetNotificationAssessmentDecisionData>.Ignored))
                 .Returns(new NotificationAssessmentDecisionData
@@ -221,7 +221,7 @@
             var model = new NotificationAssessmentDecisionViewModel();
             model.SelectedDecision = DecisionType.Consent;
             model.ConsentValidFromDate = new OptionalDateInputViewModel(Today);
-            model.ConsentValidToDate = new OptionalDateInputViewModel(Today.AddYears(1));
+            model.ConsentValidToDate = new OptionalDateInputViewModel(Today.AddYears(1).AddDays(-1));
 
             A.CallTo(() => mediator.SendAsync(A<GetNotificationAssessmentDecisionData>.Ignored))
                 .Returns(new NotificationAssessmentDecisionData
