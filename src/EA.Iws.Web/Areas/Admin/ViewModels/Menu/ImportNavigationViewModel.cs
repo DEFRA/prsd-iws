@@ -14,5 +14,7 @@
         public bool ShowImportSections { get; set; }
 
         public bool ShowAssessmentDecision { get; set; }
+
+        public bool ShowKeyDatesOverride { get; set; }
     }
 }

@@ -55,7 +55,7 @@
                 ,@ConsentValidToDate",
                 new SqlParameter("@NotificationId", data.NotificationId),
                 new SqlParameter("@NotificationReceivedDate", (object)data.NotificationReceivedDate ?? DBNull.Value),
-                new SqlParameter("@CommencementDate", (object)data.CommencementDate ?? DBNull.Value),
+                new SqlParameter("@AssessmentStartedDate", (object)data.CommencementDate ?? DBNull.Value),
                 new SqlParameter("@CompleteDate", (object)data.CompleteDate ?? DBNull.Value),
                 new SqlParameter("@AcknowledgedDate", (object)data.AcknowledgedDate ?? DBNull.Value),
                 new SqlParameter("@WithdrawnDate", (object)data.WithdrawnDate ?? DBNull.Value),
