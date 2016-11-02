@@ -60,7 +60,7 @@
             <td>
                 @if (Model.NotificationReceivedDate.IsCompleted && !Model.PaymentIsComplete)
                 {
-                    @Html.ActionLink("Go to payment details", "Index", "PaymentDetails")
+                    @Html.ActionLink("Go to payment details", "Index", "AccountManagement")
                 }
             </td>
         </tr>
@@ -120,7 +120,7 @@
                         }
                         else if (!Model.PaymentIsComplete)
                         {
-                            @Html.ActionLink("Go to payment details", "Index", "PaymentDetails")
+                            @Html.ActionLink("Go to payment details", "Index", "AccountManagement")
                         }
                         else
                         {
