@@ -8,5 +8,7 @@
         [Range(1, int.MaxValue, ErrorMessageResourceType = typeof(SearchViewModelResources), ErrorMessageResourceName = "Range")]
         [Display(Name = "Label", ResourceType = typeof(SearchViewModelResources))]
         public int? Number { get; set; }
+
+        public int? LatestCurrentMovementNumber { get; set; }
     }
 }

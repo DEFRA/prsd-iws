@@ -110,6 +110,7 @@
     <Compile Include="ImportMovement\Capture\GetImportMovementDates.cs" />
     <Compile Include="ImportMovement\Capture\GetImportMovementIdIfExists.cs" />
     <Compile Include="ImportMovement\Capture\GetImportMovementReceiptAndRecoveryData.cs" />
+    <Compile Include="ImportMovement\Capture\GetLatestMovementNumber.cs" />
     <Compile Include="ImportMovement\CompletedReceipt\RecordCompletedReceipt.cs" />
     <Compile Include="ImportMovement\Edit\SetImportMovementDates.cs" />
     <Compile Include="ImportMovement\Receipt\RecordReceipt.cs" />
@@ -170,7 +171,7 @@
     <Compile Include="NotificationAssessment\GetChargeDue.cs" />
     <Compile Include="NotificationAssessment\GetInterimStatus.cs" />
     <Compile Include="NotificationAssessment\MarkAsInterim.cs" />
-    <Compile Include="NotificationMovements\Capture\GetHighestMovementNumber.cs" />
+    <Compile Include="NotificationMovements\Capture\GetLatestMovementNumber.cs" />
     <Compile Include="NotificationMovements\Create\HasExceededConsentedQuantity.cs" />
     <Compile Include="Movement\Receive\DoesQuantityReceivedExceedTolerance.cs" />
     <Compile Include="NotificationMovements\GetWorkingDaysUntil.cs" />

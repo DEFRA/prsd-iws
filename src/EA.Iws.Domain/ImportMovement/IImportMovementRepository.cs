@@ -15,5 +15,7 @@
         Task<IEnumerable<ImportMovement>> GetPrenotifiedForNotification(Guid importNotificationId);
 
         void Add(ImportMovement movement);
+
+        Task<int> GetLatestMovementNumber(Guid notificationId);
     }
 }
