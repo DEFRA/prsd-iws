@@ -151,7 +151,7 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.WhatToDoNext {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to ensure there is a contract in place and send a copy to us.
+        ///   Looks up a localized string similar to send us a copy of your contract with the consignee.
         /// </summary>
         public static string WhatToDoNextListItem6 {
             get {
