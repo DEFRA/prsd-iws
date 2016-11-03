@@ -23,7 +23,7 @@
         public async Task<ActionResult> Index(Guid id)
         {
             var model = new SearchViewModel();
-            model.HighestCurrentMovementNumber = await mediator.SendAsync(new GetHighestMovementNumber(id));
+            model.LatestCurrentMovementNumber = await mediator.SendAsync(new GetLatestMovementNumber(id));
 
             return View(model);
         }

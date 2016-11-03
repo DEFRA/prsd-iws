@@ -5,16 +5,16 @@
     using Prsd.Core.Mediator;
     using Requests.NotificationMovements.Capture;
 
-    public class GetHighestMovementNumberHandler : IRequestHandler<GetHighestMovementNumber, int>
+    public class GetLatestMovementNumberHandler : IRequestHandler<GetLatestMovementNumber, int>
     {
         private readonly IMovementRepository movementRepository;
 
-        public GetHighestMovementNumberHandler(IMovementRepository movementRepository)
+        public GetLatestMovementNumberHandler(IMovementRepository movementRepository)
         {
             this.movementRepository = movementRepository;
         }
 
-        public async Task<int> HandleAsync(GetHighestMovementNumber message)
+        public async Task<int> HandleAsync(GetLatestMovementNumber message)
         {
             return await movementRepository.GetLatestMovementNumber(message.NotificationId);
         }

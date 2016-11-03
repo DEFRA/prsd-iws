@@ -73,9 +73,9 @@ namespace EA.Iws.Web.Areas.AdminExportNotificationMovements.Views.CaptureMovemen
         /// <summary>
         ///   Looks up a localized string similar to The last shipment prenotified for this notification was {0}.
         /// </summary>
-        public static string HighestNumber {
+        public static string LatestNumber {
             get {
-                return ResourceManager.GetString("HighestNumber", resourceCulture);
+                return ResourceManager.GetString("LatestNumber", resourceCulture);
             }
         }
         

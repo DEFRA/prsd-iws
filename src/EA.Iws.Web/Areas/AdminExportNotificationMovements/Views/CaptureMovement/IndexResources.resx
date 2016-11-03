@@ -120,7 +120,7 @@
   <data name="ButtonText" xml:space="preserve">
     <value>Go</value>
   </data>
-  <data name="HighestNumber" xml:space="preserve">
+  <data name="LatestNumber" xml:space="preserve">
     <value>The last shipment prenotified for this notification was {0}</value>
   </data>
   <data name="MainHeading" xml:space="preserve">

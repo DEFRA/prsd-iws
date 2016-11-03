@@ -6,11 +6,11 @@
     using Prsd.Core.Mediator;
 
     [RequestAuthorization(ExportMovementPermissions.CanReadExportMovementsInternal)]
-    public class GetHighestMovementNumber : IRequest<int>
+    public class GetLatestMovementNumber : IRequest<int>
     {
         public Guid NotificationId { get; private set; }
 
-        public GetHighestMovementNumber(Guid notificationId)
+        public GetLatestMovementNumber(Guid notificationId)
         {
             NotificationId = notificationId;
         }
