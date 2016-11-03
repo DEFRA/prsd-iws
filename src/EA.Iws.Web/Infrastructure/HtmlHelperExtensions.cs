@@ -1,6 +1,7 @@
 ﻿namespace EA.Iws.Web.Infrastructure
 {
     using System;
+    using System.Linq.Expressions;
     using System.Web.Mvc;
     using System.Web.Mvc.Html;
     using Core.Notification;
@@ -79,6 +80,27 @@
             builder.SetInnerText(emailAddress);
 
             return MvcHtmlString.Create(builder.ToString());
+        }
+
+        /// <summary>
+        /// Returns HTML markup with whitespace replaced with non-breaking space for each property 
+        /// in the object that is represented by the 
+        /// <see cref="T:System.Linq.Expressions.Expression"/> expression.
+        /// </summary>
+        /// 
+        /// <returns>
+        /// The HTML markup with whitespace replaced with non-breaking space for each property in the 
+        /// object that is represented by the expression.
+        /// </returns>
+        /// <param name="helper">The HTML helper instance that this method extends.</param>
+        /// <param name="expression">An expression that identifies the object that contains the properties to display.</param>
+        /// <typeparam name="TModel">The type of the model.</typeparam>
+        /// <typeparam name="TValue">The type of the value.</typeparam>
+        public static MvcHtmlString DisplayNonBreakingFor<TModel, TValue>(this HtmlHelper<TModel> helper,
+            Expression<Func<TModel, TValue>> expression)
+        {
+            var display = helper.DisplayFor(expression);
+            return new MvcHtmlString(display.ToString().ToNonBreakingString());
         }
     }
 }

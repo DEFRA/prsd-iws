@@ -48,7 +48,7 @@
                 {
                 <tr>
                     <td>
-                        @Html.ActionLink(linkText: @Html.DisplayFor(m => m.ExportSearchResults[i].NotificationNumber).ToString(),
+                        @Html.ActionLink(linkText: @Html.DisplayNonBreakingFor(m => m.ExportSearchResults[i].NotificationNumber).ToString(),
                                 actionName: "Index",
                                 controllerName: "Home",
                                 routeValues: new { id = Model.ExportSearchResults[i].Id, area = "AdminExportAssessment" },
@@ -96,7 +96,7 @@ else if (Model != null && Model.HasSearched && Model.ImportSearchResults.Count =
             {
                 <tr>
                     <td>
-                        @Html.ActionLink(linkText: row.NotificationNumber,
+                        @Html.ActionLink(linkText: row.NotificationNumber.ToNonBreakingString(),
                                     actionName: "Index",
                                     controllerName: "Home",
                                     routeValues: new { id = row.NotificationId, area = "AdminExportAssessment" },

@@ -28,7 +28,7 @@
                 {
                 <tr>
                     <td>
-                        @Html.ActionLink(linkText: @Html.DisplayFor(m => m.ExportResults[i].NotificationNumber).ToString(),
+                        @Html.ActionLink(linkText: @Html.DisplayNonBreakingFor(m => m.ExportResults[i].NotificationNumber).ToString(),
                                 actionName: "Index",
                                 controllerName: "Home",
                                 routeValues: new { id = Model.ExportResults[i].Id, area = "AdminExportAssessment" },
@@ -71,7 +71,7 @@ else
                 {
                 <tr>
                     <td>
-                        @Html.ActionLink(linkText: @Html.DisplayFor(m => m.ImportResults[i].NotificationNumber).ToString(),
+                        @Html.ActionLink(linkText: @Html.DisplayNonBreakingFor(m => m.ImportResults[i].NotificationNumber).ToString(),
                                 actionName: "Index",
                                 controllerName: "Home",
                                 routeValues: new { id = Model.ImportResults[i].Id, area = "ImportNotification" },
