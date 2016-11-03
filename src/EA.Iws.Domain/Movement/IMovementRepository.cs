@@ -20,5 +20,7 @@
         Task<IEnumerable<Movement>> GetActiveMovements(Guid notificationId);
 
         void Add(Movement movement);
+
+        Task<int> GetLatestMovementNumber(Guid notificationId);
     }
 }

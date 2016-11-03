@@ -13,9 +13,18 @@
         {
             @Html.AntiForgeryToken()
             @Html.Gds().ValidationSummary()
+            @Html.HiddenFor(m => m.LatestCurrentMovementNumber)
 
             <div class="form-group @Html.Gds().FormGroupClass(m => m.Number)">
                 @Html.Gds().LabelFor(m => m.Number)
+                @if (Model.LatestCurrentMovementNumber == 0)
+                {
+                    @Resource.ZeroMovements
+                }
+                else
+                {
+                    @Html.Raw(string.Format(Resource.LatestNumber, Model.LatestCurrentMovementNumber))
+                }
                 @Html.Gds().ValidationMessageFor(m => m.Number)
                 @Html.Gds().TextBoxFor(m => m.Number, new { type = "number", min = 1 })
                 &nbsp;&nbsp;&nbsp;<button type="submit" class="button">@Resource.ButtonText</button>

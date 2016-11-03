@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Data.Entity;
+    using System.Data.SqlClient;
     using System.Linq;
     using System.Threading.Tasks;
     using Core.Movement;
@@ -88,6 +89,15 @@
                     && m.Date < SystemTime.UtcNow).ToArrayAsync();
 
             return currentActiveLoads;
+        }
+
+        public async Task<int> GetLatestMovementNumber(Guid notificationId)
+        {
+            await notificationAuthorization.EnsureAccessAsync(notificationId);
+
+            var movement = await context.Movements.Where(m => m.NotificationId == notificationId).OrderByDescending(m => m.Date).FirstOrDefaultAsync();
+
+            return movement == null ? 0 : movement.Number;
         }
     }
 }
