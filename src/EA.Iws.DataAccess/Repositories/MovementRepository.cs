@@ -95,14 +95,9 @@
         {
             await notificationAuthorization.EnsureAccessAsync(notificationId);
 
-            var numbers = await context.Database.SqlQuery<MovementData>(
-                @"SELECT [Number]
-                  FROM [Notification].[Movement]
-                  WHERE [NotificationId] = @id
-                  ORDER BY [RowVersion] DESC",
-                new SqlParameter("@id", notificationId)).ToListAsync();
+            var movement = await context.Movements.Where(m => m.NotificationId == notificationId).OrderByDescending(m => m.Date).FirstOrDefaultAsync();
 
-            return numbers.Count == 0 ? 0 : numbers.First().Number;
+            return movement == null ? 0 : movement.Number;
         }
     }
 }
