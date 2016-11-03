@@ -16,7 +16,7 @@
             context.MapLowercaseDashedRoute(
                 "Reports_default",
                 "Reports/{controller}/{action}",
-                new { controller = "Home", action = "Index" }, new[] { typeof(HomeController).Namespace });
+                new { controller = "Home", action = "Index" }, new[] { typeof(ExportNotificationsController).Namespace });
         }
     }
 }

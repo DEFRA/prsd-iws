@@ -70,15 +70,6 @@ namespace EA.Iws.Web.Areas.Reports.Views.MissingShipments {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Return to reports home.
-        /// </summary>
-        public static string HomeLink {
-            get {
-                return ResourceManager.GetString("HomeLink", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Notification shipment data - missing shipments.
         /// </summary>
         public static string MainHeading {
