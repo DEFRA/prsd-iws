@@ -16,7 +16,7 @@
 
         public async Task<int> HandleAsync(GetHighestMovementNumber message)
         {
-            return await movementRepository.GetHighestMovementNumber(message.NotificationId);
+            return await movementRepository.GetLatestMovementNumber(message.NotificationId);
         }
     }
 }

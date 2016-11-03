@@ -21,6 +21,6 @@
 
         void Add(Movement movement);
 
-        Task<int> GetHighestMovementNumber(Guid notificationId);
+        Task<int> GetLatestMovementNumber(Guid notificationId);
     }
 }

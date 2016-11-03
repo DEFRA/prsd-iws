@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Data.Entity;
+    using System.Data.SqlClient;
     using System.Linq;
     using System.Threading.Tasks;
     using Core.Movement;
@@ -90,13 +91,18 @@
             return currentActiveLoads;
         }
 
-        public async Task<int> GetHighestMovementNumber(Guid notificationId)
+        public async Task<int> GetLatestMovementNumber(Guid notificationId)
         {
             await notificationAuthorization.EnsureAccessAsync(notificationId);
 
-            var movement = await context.Movements.Where(m => m.NotificationId == notificationId).OrderByDescending(m => m.Number).FirstOrDefaultAsync();
+            var numbers = await context.Database.SqlQuery<MovementData>(
+                @"SELECT [Number]
+                  FROM [Notification].[Movement]
+                  WHERE [NotificationId] = @id
+                  ORDER BY [RowVersion] DESC",
+                new SqlParameter("@id", notificationId)).ToListAsync();
 
-            return movement == null ? 0 : movement.Number;
+            return numbers.Count == 0 ? 0 : numbers.First().Number;
         }
     }
 }
