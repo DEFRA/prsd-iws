@@ -120,9 +120,6 @@
   <data name="ButtonText" xml:space="preserve">
     <value>Generate report</value>
   </data>
-  <data name="HomeLink" xml:space="preserve">
-    <value>Return to reports home</value>
-  </data>
   <data name="MainHeading" xml:space="preserve">
     <value>Notification shipment data - missing shipments</value>
   </data>

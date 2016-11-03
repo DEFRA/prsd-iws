@@ -79,15 +79,6 @@ namespace EA.Iws.Web.Areas.Reports.Views.RdfSrfWood {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Return to reports home.
-        /// </summary>
-        public static string ReturnHome {
-            get {
-                return ResourceManager.GetString("ReturnHome", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to FOI Report.
         /// </summary>
         public static string Title {
