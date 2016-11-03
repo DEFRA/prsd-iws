@@ -6,6 +6,7 @@
     public static class StringExtensions
     {
         private static readonly Regex regex;
+        private const char NonBreakingSpace = '\u00a0';
 
         static StringExtensions()
         {
@@ -38,6 +39,11 @@
             }
 
             return result;
+        }
+
+        public static string ToNonBreakingString(this string value)
+        {
+            return value.Replace(' ', NonBreakingSpace);
         }
     }
 }

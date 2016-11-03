@@ -23,7 +23,7 @@
         @foreach (var ownerData in Model.TableData)
         {
             <tr>
-                <td>@ownerData.Number</td>
+                <td>@ownerData.Number.ToNonBreakingString()</td>
                 <td>@ownerData.ExporterName</td>
                 <td>@ownerData.ProducerName</td>
                 <td>@ownerData.ImporterName</td>
