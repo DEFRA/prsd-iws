@@ -110,6 +110,7 @@
     <Compile Include="ImportMovement\Capture\GetImportMovementDates.cs" />
     <Compile Include="ImportMovement\Capture\GetImportMovementIdIfExists.cs" />
     <Compile Include="ImportMovement\Capture\GetImportMovementReceiptAndRecoveryData.cs" />
+    <Compile Include="ImportMovement\Capture\GetLatestMovementNumber.cs" />
     <Compile Include="ImportMovement\CompletedReceipt\RecordCompletedReceipt.cs" />
     <Compile Include="ImportMovement\Edit\SetImportMovementDates.cs" />
     <Compile Include="ImportMovement\Receipt\RecordReceipt.cs" />

@@ -58,5 +58,14 @@
         {
             context.ImportMovements.Add(movement);
         }
+
+        public async Task<int> GetLatestMovementNumber(Guid importNotificationId)
+        {
+            await notificationAuthorization.EnsureAccessAsync(importNotificationId);
+
+            var movement = await context.ImportMovements.Where(m => m.NotificationId == importNotificationId).OrderByDescending(m => m.ActualShipmentDate).FirstOrDefaultAsync();
+
+            return movement == null ? 0 : movement.Number;
+        }
     }
 }
