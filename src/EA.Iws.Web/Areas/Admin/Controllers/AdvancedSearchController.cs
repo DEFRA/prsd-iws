@@ -41,8 +41,10 @@
 
             return RedirectToAction("Results", new AdvancedSearchCriteria
             {
-                ConsentValidFrom = model.ConsentValidFrom.AsDateTime(),
-                ConsentValidTo = model.ConsentValidTo.AsDateTime(),
+                ConsentValidFromStart = model.ConsentValidFromStart.AsDateTime(),
+                ConsentValidFromEnd = model.ConsentValidFromEnd.AsDateTime(),
+                ConsentValidToStart = model.ConsentValidToStart.AsDateTime(),
+                ConsentValidToEnd = model.ConsentValidToEnd.AsDateTime(),
                 EwcCode = model.EwcCode,
                 ImportCountryName = model.ImportCountryName,
                 ImporterName = model.ImporterName,

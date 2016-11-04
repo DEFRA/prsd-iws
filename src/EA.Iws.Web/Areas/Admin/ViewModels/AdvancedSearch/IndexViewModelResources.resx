@@ -138,7 +138,16 @@
   <data name="NoSearchCriteriaCompleted" xml:space="preserve">
     <value>Please complete at least one search criteria</value>
   </data>
+  <data name="PleaseEnterEndDate" xml:space="preserve">
+    <value>Please enter the end date for this date range</value>
+  </data>
+  <data name="PleaseEnterStartDate" xml:space="preserve">
+    <value>Please enter the start date for this date range</value>
+  </data>
   <data name="ProducerName" xml:space="preserve">
     <value>Producer</value>
+  </data>
+  <data name="To" xml:space="preserve">
+    <value>to</value>
   </data>
 </root>

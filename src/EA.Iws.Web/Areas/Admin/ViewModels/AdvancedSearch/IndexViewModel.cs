@@ -10,8 +10,10 @@
     {
         public IndexViewModel()
         {
-            ConsentValidFrom = new OptionalDateInputViewModel(allowPastDates: true, showLabels: false);
-            ConsentValidTo = new OptionalDateInputViewModel(allowPastDates: true, showLabels: false);
+            ConsentValidFromStart = new OptionalDateInputViewModel(allowPastDates: true, showLabels: false);
+            ConsentValidFromEnd = new OptionalDateInputViewModel(allowPastDates: true, showLabels: false);
+            ConsentValidToStart = new OptionalDateInputViewModel(allowPastDates: true, showLabels: false);
+            ConsentValidToEnd = new OptionalDateInputViewModel(allowPastDates: true, showLabels: false);
         }
 
         [Display(ResourceType = typeof(IndexViewModelResources), Name = "EwcCode")]
@@ -30,10 +32,16 @@
         public Guid? LocalAreaId { get; set; }
 
         [Display(ResourceType = typeof(IndexViewModelResources), Name = "ConsentValidFrom")]
-        public OptionalDateInputViewModel ConsentValidFrom { get; set; }
+        public OptionalDateInputViewModel ConsentValidFromStart { get; set; }
+
+        [Display(ResourceType = typeof(IndexViewModelResources), Name = "To")]
+        public OptionalDateInputViewModel ConsentValidFromEnd { get; set; }
 
         [Display(ResourceType = typeof(IndexViewModelResources), Name = "ConsentValidTo")]
-        public OptionalDateInputViewModel ConsentValidTo { get; set; }
+        public OptionalDateInputViewModel ConsentValidToStart { get; set; }
+
+        [Display(ResourceType = typeof(IndexViewModelResources), Name = "To")]
+        public OptionalDateInputViewModel ConsentValidToEnd { get; set; }
 
         public SelectList Areas { get; set; }
 
@@ -41,9 +49,19 @@
         {
             if (string.IsNullOrWhiteSpace(EwcCode) && string.IsNullOrWhiteSpace(ProducerName)
                 && string.IsNullOrWhiteSpace(ImporterName) && string.IsNullOrWhiteSpace(ImportCountryName)
-                && !LocalAreaId.HasValue && !ConsentValidTo.IsCompleted)
+                && !LocalAreaId.HasValue && !(ConsentValidToStart.IsCompleted && ConsentValidToEnd.IsCompleted))
             {
                 yield return new ValidationResult(IndexViewModelResources.NoSearchCriteriaCompleted);
+            }
+
+            if (ConsentValidToStart.IsCompleted && !ConsentValidToEnd.IsCompleted)
+            {
+                yield return new ValidationResult(IndexViewModelResources.PleaseEnterEndDate, new[] { "ConsentValidToEnd" });
+            }
+
+            if (ConsentValidToEnd.IsCompleted && !ConsentValidToStart.IsCompleted)
+            {
+                yield return new ValidationResult(IndexViewModelResources.PleaseEnterStartDate, new[] { "ConsentValidToStart" });
             }
         }
     }

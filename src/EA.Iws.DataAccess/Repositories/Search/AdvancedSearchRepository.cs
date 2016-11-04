@@ -20,8 +20,8 @@
                     AND     (@importerName IS NULL OR [ImporterName] LIKE '%' + @importerName + '%')
                     AND     (@importCountryName IS NULL OR [CountryOfImport] LIKE '%' + @importCountryName + '%')
                     AND     (@localAreaId IS NULL OR [LocalAreaId] = @localAreaId)
-                    AND     (@consentValidFrom IS NULL OR [ConsentValidFrom] = @consentValidFrom)
-                    AND     (@consentValidTo IS NULL OR [ConsentValidTo] = @consentValidTo)";
+                    AND     (@consentValidFromStart IS NULL OR [ConsentValidFrom] BETWEEN @consentValidFromStart AND COALESCE(@consentValidFromEnd, GETDATE()))
+                    AND     (@consentValidToStart IS NULL OR [ConsentValidTo] BETWEEN @consentValidToStart AND COALESCE(@consentValidToEnd, GETDATE()))";
 
         private readonly IwsContext context;
 
@@ -111,8 +111,10 @@
                 new SqlParameter("@importerName", (object)criteria.ImporterName ?? DBNull.Value),
                 new SqlParameter("@importCountryName", (object)criteria.ImportCountryName ?? DBNull.Value),
                 new SqlParameter("@localAreaId", (object)criteria.LocalAreaId ?? DBNull.Value),
-                new SqlParameter("@consentValidFrom", (object)criteria.ConsentValidFrom ?? DBNull.Value),
-                new SqlParameter("@consentValidTo", (object)criteria.ConsentValidTo ?? DBNull.Value)).ToArrayAsync();
+                new SqlParameter("@consentValidFromStart", (object)criteria.ConsentValidFromStart ?? DBNull.Value),
+                new SqlParameter("@consentValidFromEnd", (object)criteria.ConsentValidFromEnd ?? DBNull.Value),
+                new SqlParameter("@consentValidToStart", (object)criteria.ConsentValidToStart ?? DBNull.Value),
+                new SqlParameter("@consentValidToEnd", (object)criteria.ConsentValidToEnd ?? DBNull.Value)).ToArrayAsync();
         }
     }
 }

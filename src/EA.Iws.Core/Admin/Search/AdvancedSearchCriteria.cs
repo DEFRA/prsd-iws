@@ -14,8 +14,12 @@
 
         public Guid? LocalAreaId { get; set; }
 
-        public DateTime? ConsentValidFrom { get; set; }
+        public DateTime? ConsentValidFromStart { get; set; }
 
-        public DateTime? ConsentValidTo { get; set; }
+        public DateTime? ConsentValidFromEnd { get; set; }
+
+        public DateTime? ConsentValidToStart { get; set; }
+
+        public DateTime? ConsentValidToEnd { get; set; }
     }
 }
