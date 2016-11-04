@@ -25,7 +25,7 @@
                     D.[NotificationCompletedDate] AS [CompleteDate],
                     NULL AS [TransmittedDate],
                     D.[AcknowledgedDate],
-                    D.[WithdrawnDate],
+                    W.[Date] AS [WithdrawnDate],
                     O.[Date] AS [ObjectedDate],
                     D.[ConsentedDate],
                     C.[From] AS [ConsentValidFromDate],
@@ -35,6 +35,7 @@
                     INNER JOIN [ImportNotification].[NotificationDates] D ON NA.Id = D.NotificationAssessmentId
                     LEFT JOIN [ImportNotification].[Consent] C ON NA.NotificationApplicationId = C.NotificationId
                     LEFT JOIN [ImportNotification].[Objection] O ON NA.NotificationApplicationId = O.NotificationId
+                    LEFT JOIN [ImportNotification].[Withdrawn] W ON NA.NotificationApplicationId = W.NotificationId
                 WHERE
                     NA.NotificationApplicationId = @NotificationId",
                 new SqlParameter("@NotificationId", notificationId)).SingleAsync();

@@ -28,7 +28,6 @@ BEGIN
           ,[AssessmentStartedDate] = CASE WHEN [AssessmentStartedDate] IS NULL THEN NULL ELSE ISNULL(@AssessmentStartedDate, [AssessmentStartedDate]) END
           ,[NotificationCompletedDate] = CASE WHEN [NotificationCompletedDate] IS NULL THEN NULL ELSE ISNULL(@CompleteDate, [NotificationCompletedDate]) END
           ,[AcknowledgedDate] = CASE WHEN [AcknowledgedDate] IS NULL THEN NULL ELSE ISNULL(@AcknowledgedDate, [AcknowledgedDate]) END
-          ,[WithdrawnDate] = CASE WHEN [WithdrawnDate] IS NULL THEN NULL ELSE ISNULL(@WithdrawnDate, [WithdrawnDate]) END
           ,[ConsentedDate] = CASE WHEN [ConsentedDate] IS NULL THEN NULL ELSE ISNULL(@ConsentedDate, [ConsentedDate]) END
      WHERE [NotificationAssessmentId] = @NotificationAssessmentId;
 
@@ -40,5 +39,9 @@ BEGIN
         SET [From] = ISNULL(@ConsentValidFromDate, [From])
            ,[To] = ISNULL(@ConsentValidToDate, [To])
       WHERE [NotificationId] = @NotificationId;
+
+      UPDATE [ImportNotification].[Withdrawn]
+         SET [Date] = ISNULL(@WithdrawnDate, [Date])
+       WHERE [NotificationId] = @NotificationId;
 END
 GO
