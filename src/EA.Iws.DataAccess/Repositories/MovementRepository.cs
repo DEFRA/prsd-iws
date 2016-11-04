@@ -95,7 +95,7 @@
         {
             await notificationAuthorization.EnsureAccessAsync(notificationId);
 
-            var movement = await context.Movements.Where(m => m.NotificationId == notificationId).OrderByDescending(m => m.Date).FirstOrDefaultAsync();
+            var movement = await context.Movements.Where(m => m.NotificationId == notificationId).OrderByDescending(m => m.Date).ThenByDescending(m => m.Number).FirstOrDefaultAsync();
 
             return movement == null ? 0 : movement.Number;
         }
