@@ -124,11 +124,38 @@ namespace EA.Iws.Web.Areas.Admin.ViewModels.AdvancedSearch {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Please enter the end date for this date range.
+        /// </summary>
+        public static string PleaseEnterEndDate {
+            get {
+                return ResourceManager.GetString("PleaseEnterEndDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please enter the start date for this date range.
+        /// </summary>
+        public static string PleaseEnterStartDate {
+            get {
+                return ResourceManager.GetString("PleaseEnterStartDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Producer.
         /// </summary>
         public static string ProducerName {
             get {
                 return ResourceManager.GetString("ProducerName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to to.
+        /// </summary>
+        public static string To {
+            get {
+                return ResourceManager.GetString("To", resourceCulture);
             }
         }
     }
