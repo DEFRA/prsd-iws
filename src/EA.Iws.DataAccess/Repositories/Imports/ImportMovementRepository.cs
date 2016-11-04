@@ -63,7 +63,7 @@
         {
             await notificationAuthorization.EnsureAccessAsync(importNotificationId);
 
-            var movement = await context.ImportMovements.Where(m => m.NotificationId == importNotificationId).OrderByDescending(m => m.ActualShipmentDate).FirstOrDefaultAsync();
+            var movement = await context.ImportMovements.Where(m => m.NotificationId == importNotificationId).OrderByDescending(m => m.ActualShipmentDate).ThenByDescending(m => m.Number).FirstOrDefaultAsync();
 
             return movement == null ? 0 : movement.Number;
         }
