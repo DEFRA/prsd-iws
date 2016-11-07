@@ -21,5 +21,19 @@
         public DateTime? ConsentValidToStart { get; set; }
 
         public DateTime? ConsentValidToEnd { get; set; }
+
+        public string ExporterName { get; set; }
+
+        public string BaselOecdCode { get; set; }
+
+        public string FacilityName { get; set; }
+
+        public string ExitPointName { get; set; }
+
+        public string EntryPointName { get; set; }
+
+        public DateTime? NotificationReceivedStart { get; set; }
+
+        public DateTime? NotificationReceivedEnd { get; set; }
     }
 }

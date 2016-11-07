@@ -49,7 +49,14 @@
                 ImportCountryName = model.ImportCountryName,
                 ImporterName = model.ImporterName,
                 LocalAreaId = model.LocalAreaId,
-                ProducerName = model.ProducerName
+                ProducerName = model.ProducerName,
+                BaselOecdCode = model.BaselOecdCode,
+                EntryPointName = model.EntryPointName,
+                ExitPointName = model.ExitPointName,
+                ExporterName = model.ExporterName,
+                FacilityName = model.FacilityName,
+                NotificationReceivedStart = model.NotificationReceivedStart.AsDateTime(),
+                NotificationReceivedEnd = model.NotificationReceivedEnd.AsDateTime()
             });
         }
 
