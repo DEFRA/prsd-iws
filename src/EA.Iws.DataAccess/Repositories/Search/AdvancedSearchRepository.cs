@@ -16,12 +16,18 @@
                     WHERE	[CompetentAuthority] = @ca
                     AND     [ImportOrExport] = @importOrExport
                     AND     (@ewc IS NULL OR ([CodeType] = 3 AND [Code] LIKE '%' + @ewc + '%'))
+                    AND     (@baselOecd IS NULL OR ([CodeType] IN (1,2) AND [Code] LIKE '%' + @baselOecd + '%'))
                     AND     (@producerName IS NULL OR [ProducerName] LIKE '%' + @producerName + '%')
                     AND     (@importerName IS NULL OR [ImporterName] LIKE '%' + @importerName + '%')
+                    AND     (@exporterName IS NULL OR [ExporterName] LIKE '%' + @exporterName + '%')
+                    AND     (@facilityName IS NULL OR [FacilityName] LIKE '%' + @facilityName + '%')
                     AND     (@importCountryName IS NULL OR [CountryOfImport] LIKE '%' + @importCountryName + '%')
+                    AND     (@exitPointName IS NULL OR [ExitPointName] LIKE '%' + @exitPointName + '%')
+                    AND     (@entryPointName IS NULL OR [EntryPointName] LIKE '%' + @entryPointName + '%')
                     AND     (@localAreaId IS NULL OR [LocalAreaId] = @localAreaId)
                     AND     (@consentValidFromStart IS NULL OR [ConsentValidFrom] BETWEEN @consentValidFromStart AND COALESCE(@consentValidFromEnd, GETDATE()))
-                    AND     (@consentValidToStart IS NULL OR [ConsentValidTo] BETWEEN @consentValidToStart AND COALESCE(@consentValidToEnd, GETDATE()))";
+                    AND     (@consentValidToStart IS NULL OR [ConsentValidTo] BETWEEN @consentValidToStart AND COALESCE(@consentValidToEnd, GETDATE()))
+                    AND     (@notificationReceivedStart IS NULL OR [NotificationReceivedDate] BETWEEN @notificationReceivedStart AND COALESCE(@notificationReceivedEnd, GETDATE()))";
 
         private readonly IwsContext context;
 
@@ -107,14 +113,21 @@
                 new SqlParameter("@ca", (int)competentAuthority),
                 new SqlParameter("@importOrExport", importOrExport),
                 new SqlParameter("@ewc", (object)criteria.EwcCode ?? DBNull.Value),
+                new SqlParameter("@baselOecd", (object)criteria.BaselOecdCode ?? DBNull.Value),
                 new SqlParameter("@producerName", (object)criteria.ProducerName ?? DBNull.Value),
                 new SqlParameter("@importerName", (object)criteria.ImporterName ?? DBNull.Value),
+                new SqlParameter("@exporterName", (object)criteria.ExporterName ?? DBNull.Value),
+                new SqlParameter("@facilityName", (object)criteria.FacilityName ?? DBNull.Value),
                 new SqlParameter("@importCountryName", (object)criteria.ImportCountryName ?? DBNull.Value),
+                new SqlParameter("@exitPointName", (object)criteria.ExitPointName ?? DBNull.Value),
+                new SqlParameter("@entryPointName", (object)criteria.EntryPointName ?? DBNull.Value),
                 new SqlParameter("@localAreaId", (object)criteria.LocalAreaId ?? DBNull.Value),
                 new SqlParameter("@consentValidFromStart", (object)criteria.ConsentValidFromStart ?? DBNull.Value),
                 new SqlParameter("@consentValidFromEnd", (object)criteria.ConsentValidFromEnd ?? DBNull.Value),
                 new SqlParameter("@consentValidToStart", (object)criteria.ConsentValidToStart ?? DBNull.Value),
-                new SqlParameter("@consentValidToEnd", (object)criteria.ConsentValidToEnd ?? DBNull.Value)).ToArrayAsync();
+                new SqlParameter("@consentValidToEnd", (object)criteria.ConsentValidToEnd ?? DBNull.Value),
+                new SqlParameter("@notificationReceivedStart", (object)criteria.NotificationReceivedStart ?? DBNull.Value),
+                new SqlParameter("@notificationReceivedEnd", (object)criteria.NotificationReceivedEnd ?? DBNull.Value)).ToArrayAsync();
         }
     }
 }

@@ -61,6 +61,15 @@ namespace EA.Iws.Web.Areas.Admin.ViewModels.AdvancedSearch {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Basel / OECD code.
+        /// </summary>
+        public static string BaselOecdCode {
+            get {
+                return ResourceManager.GetString("BaselOecdCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Consent &quot;valid from&quot; date.
         /// </summary>
         public static string ConsentValidFrom {
@@ -79,11 +88,47 @@ namespace EA.Iws.Web.Areas.Admin.ViewModels.AdvancedSearch {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to EWC Code.
+        ///   Looks up a localized string similar to Entry port / point.
+        /// </summary>
+        public static string EntryPointName {
+            get {
+                return ResourceManager.GetString("EntryPointName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to EWC code.
         /// </summary>
         public static string EwcCode {
             get {
                 return ResourceManager.GetString("EwcCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Exit port / point.
+        /// </summary>
+        public static string ExitPointName {
+            get {
+                return ResourceManager.GetString("ExitPointName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Notifier (exporter).
+        /// </summary>
+        public static string ExporterName {
+            get {
+                return ResourceManager.GetString("ExporterName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Recovery / disposal facility.
+        /// </summary>
+        public static string FacilityName {
+            get {
+                return ResourceManager.GetString("FacilityName", resourceCulture);
             }
         }
         
@@ -120,6 +165,15 @@ namespace EA.Iws.Web.Areas.Admin.ViewModels.AdvancedSearch {
         public static string NoSearchCriteriaCompleted {
             get {
                 return ResourceManager.GetString("NoSearchCriteriaCompleted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Notification received date.
+        /// </summary>
+        public static string NotificationReceived {
+            get {
+                return ResourceManager.GetString("NotificationReceived", resourceCulture);
             }
         }
         
