@@ -1,0 +1,38 @@
+﻿@model EA.Iws.Requests.Notification.WhatToDoNextData
+@using Resource = EA.Iws.Web.Areas.NotificationApplication.Views.WhatToDoNext.SepaContractGuidanceResources
+
+@{
+    ViewBag.Title = @Resource.TabTitle;
+    Layout = "~/Views/Shared/_Layout.GovUK.Sections.cshtml";
+}
+
+<div class="grid-row">
+    <div class="column-two-thirds">
+        <header class="hgroup">
+            <h1 class="heading-large">@Resource.Title</h1>
+        </header>
+
+        <div class="form-group">
+            <p>
+                @Resource.BodyPara1
+            </p>
+            <p>
+                <a href="http://eur-lex.europa.eu/legal-content/EN/ALL/?uri=CELEX:32006R1013"
+                   target="_blank"
+                   title="@Resource.TitleSupportingInfo"
+                   data-action="Supporting information">@Resource.LinkText</a>
+                <span class="visuallyhidden">@Resource.SupportingInfoMessage</span>
+                @Resource.PostLinkText
+            </p>
+        </div>
+    </div>
+</div>
+
+<div class="form-group">
+    @Html.ActionLink("Continue", "PostageLabel", "WhatToDoNext", new { id = Model.Id, area = "NotificationApplication" }, new { @class = "button" })
+</div>
+
+<div>
+    @Html.ActionLink(@Resource.NotificationOptionLinkText, "Index", "Options", new { id = Model.Id, area = "NotificationApplication" }, null)
+</div>
+
