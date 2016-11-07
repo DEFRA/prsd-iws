@@ -38,6 +38,14 @@
         }
 
         [HttpGet]
+        public async Task<ActionResult> SepaContractGuidance(Guid id)
+        {
+            var response = await mediator.SendAsync(new GetWhatToDoNextDataForNotification(id));
+
+            return View(response);
+        }
+
+        [HttpGet]
         public async Task<ActionResult> PostageLabel(Guid id)
         {
             var response = await mediator.SendAsync(new GetWhatToDoNextDataForNotification(id));
