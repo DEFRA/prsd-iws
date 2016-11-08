@@ -30,6 +30,8 @@
         Unlocked = 12,
         [Display(Name = "Reassessment")]
         Reassessment = 13,
+        [Display(Name = "File closed")]
+        FileClosed = 14,
         [Display(Name = "In Determination")]
         InDetermination = 100
     }

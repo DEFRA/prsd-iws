@@ -99,6 +99,7 @@
     <Compile Include="Admin\NotificationAssessment\GetExportNotificationConsultationHandler.cs" />
     <Compile Include="Admin\NotificationAssessment\RejectChangesHandler.cs" />
     <Compile Include="Admin\NotificationAssessment\SetCommencedDateHandler.cs" />
+    <Compile Include="Admin\NotificationAssessment\SetNotifcationFileClosedDateHandler.cs" />
     <Compile Include="Admin\NotificationAssessment\SetNotificationCompleteDateHandler.cs" />
     <Compile Include="Admin\NotificationAssessment\SetExportNotificationConsultationHandler.cs" />
     <Compile Include="Admin\NotificationAssessment\SetNotificationReceivedDateHandler.cs" />

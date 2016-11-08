@@ -24,6 +24,7 @@
         private DateTime decisionByDate = new DateTime(2015, 8, 24);
         private DateTime consentedDate = new DateTime(2015, 9, 1);
         private DateTime withdrawnDate = new DateTime(2015, 9, 10);
+        private DateTime fileClosedDate = new DateTime(2015, 12, 1);
         private static readonly string AnyString = "Where is Wilfred hiding?";
 
         public NotificationAssessmentStatusTests()
@@ -408,6 +409,36 @@
             Action rejectChanges = () => notificationAssessment.RejectChanges();
 
             Assert.Throws<InvalidOperationException>(rejectChanges);
+        }
+
+        [Theory]
+        [InlineData(NotificationStatus.ConsentWithdrawn)]
+        [InlineData(NotificationStatus.Consented)]
+        [InlineData(NotificationStatus.DecisionRequiredBy)]
+        [InlineData(NotificationStatus.InAssessment)]
+        [InlineData(NotificationStatus.NotSubmitted)]
+        [InlineData(NotificationStatus.NotificationReceived)]
+        [InlineData(NotificationStatus.Objected)]
+        [InlineData(NotificationStatus.ReadyToTransmit)]
+        [InlineData(NotificationStatus.Reassessment)]
+        [InlineData(NotificationStatus.Submitted)]
+        [InlineData(NotificationStatus.Transmitted)]
+        [InlineData(NotificationStatus.Unlocked)]
+        [InlineData(NotificationStatus.Withdrawn)]
+        public void CanMarkFileClosedAtAnyTime(NotificationStatus currentStatus)
+        {
+            SetNotificationStatus(currentStatus);
+            notificationAssessment.MarkFileClosed(fileClosedDate);
+
+            Assert.Equal(NotificationStatus.FileClosed, notificationAssessment.Status);
+        }
+
+        [Fact]
+        public void MarkFileClosedSetsDate()
+        {
+            notificationAssessment.MarkFileClosed(fileClosedDate);
+
+            Assert.Equal(notificationAssessment.Dates.FileClosedDate, fileClosedDate);
         }
     }
 }

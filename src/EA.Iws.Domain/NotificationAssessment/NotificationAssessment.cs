@@ -31,7 +31,8 @@
             Unlock,
             Resubmit,
             AcceptChanges,
-            RejectChanges
+            RejectChanges,
+            Archive
         }
 
         private static readonly BidirectionalDictionary<DecisionType, Trigger> DecisionTriggers
@@ -53,7 +54,8 @@
         private StateMachine<NotificationStatus, Trigger>.TriggerWithParameters<DateTime, string> withdrawTrigger;
         private StateMachine<NotificationStatus, Trigger>.TriggerWithParameters<DateTime, string> objectTrigger;
         private StateMachine<NotificationStatus, Trigger>.TriggerWithParameters<DateTime, string> withdrawConsentTrigger;
-        private StateMachine<NotificationStatus, Trigger>.TriggerWithParameters<DateTime> consentedTrigger;  
+        private StateMachine<NotificationStatus, Trigger>.TriggerWithParameters<DateTime> consentedTrigger;
+        private StateMachine<NotificationStatus, Trigger>.TriggerWithParameters<DateTime> archiveTrigger;
 
         public Guid NotificationApplicationId { get; private set; }
 
@@ -107,11 +109,13 @@
             objectTrigger = stateMachine.SetTriggerParameters<DateTime, string>(Trigger.Object);
             withdrawConsentTrigger = stateMachine.SetTriggerParameters<DateTime, string>(Trigger.WithdrawConsent);
             consentedTrigger = stateMachine.SetTriggerParameters<DateTime>(Trigger.Consent);
+            archiveTrigger = stateMachine.SetTriggerParameters<DateTime>(Trigger.Archive);
 
             stateMachine.OnTransitioned(OnTransitionAction);
 
             stateMachine.Configure(NotificationStatus.NotSubmitted)
-                .Permit(Trigger.Submit, NotificationStatus.Submitted);
+                .Permit(Trigger.Submit, NotificationStatus.Submitted)
+                .Permit(Trigger.Archive, NotificationStatus.FileClosed);
 
             stateMachine.Configure(NotificationStatus.Submitted)
                 .SubstateOf(NotificationStatus.InDetermination)
@@ -146,23 +150,29 @@
                 .OnEntryFrom(acknowledgedTrigger, OnAcknowledged)
                 .Permit(Trigger.Unlock, NotificationStatus.Unlocked)
                 .Permit(Trigger.Consent, NotificationStatus.Consented)
-                .Permit(Trigger.Object, NotificationStatus.Objected);
+                .Permit(Trigger.Object, NotificationStatus.Objected)
+                .Permit(Trigger.Archive, NotificationStatus.FileClosed);
 
             stateMachine.Configure(NotificationStatus.InDetermination)
-                .Permit(Trigger.Withdraw, NotificationStatus.Withdrawn);
+                .Permit(Trigger.Withdraw, NotificationStatus.Withdrawn)
+                .Permit(Trigger.Archive, NotificationStatus.FileClosed);
 
             stateMachine.Configure(NotificationStatus.Withdrawn)
-                .OnEntryFrom(withdrawTrigger, OnWithdrawn);
+                .OnEntryFrom(withdrawTrigger, OnWithdrawn)
+                .Permit(Trigger.Archive, NotificationStatus.FileClosed);
 
             stateMachine.Configure(NotificationStatus.Objected)
-                .OnEntryFrom(objectTrigger, OnObjected);
+                .OnEntryFrom(objectTrigger, OnObjected)
+                .Permit(Trigger.Archive, NotificationStatus.FileClosed);
 
             stateMachine.Configure(NotificationStatus.Consented)
                 .OnEntryFrom(consentedTrigger, OnConsented)
-                .Permit(Trigger.WithdrawConsent, NotificationStatus.ConsentWithdrawn);
+                .Permit(Trigger.WithdrawConsent, NotificationStatus.ConsentWithdrawn)
+                .Permit(Trigger.Archive, NotificationStatus.FileClosed);
 
             stateMachine.Configure(NotificationStatus.ConsentWithdrawn)
-                .OnEntryFrom(withdrawConsentTrigger, OnConsentWithdrawn);
+                .OnEntryFrom(withdrawConsentTrigger, OnConsentWithdrawn)
+                .Permit(Trigger.Archive, NotificationStatus.FileClosed);
 
             stateMachine.Configure(NotificationStatus.Unlocked)
                 .SubstateOf(NotificationStatus.InDetermination)
@@ -172,6 +182,9 @@
                 .SubstateOf(NotificationStatus.InDetermination)
                 .Permit(Trigger.AcceptChanges, NotificationStatus.DecisionRequiredBy)
                 .Permit(Trigger.RejectChanges, NotificationStatus.Unlocked);
+
+            stateMachine.Configure(NotificationStatus.FileClosed)
+                .OnEntryFrom(archiveTrigger, OnFileClosed);
 
             return stateMachine;
         }
@@ -234,6 +247,11 @@
         private void OnAcknowledged(DateTime acknowledgedDate)
         {
             Dates.AcknowledgedDate = acknowledgedDate;
+        }
+
+        private void OnFileClosed(DateTime fileClosedDate)
+        {
+            Dates.FileClosedDate = fileClosedDate;
         }
 
         public void Submit(INotificationProgressService progressService)
@@ -328,6 +346,11 @@
         public void RejectChanges()
         {
             stateMachine.Fire(Trigger.RejectChanges);
+        }
+
+        public void MarkFileClosed(DateTime fileClosedDate)
+        {
+            stateMachine.Fire(archiveTrigger, fileClosedDate);
         }
     }
 }
