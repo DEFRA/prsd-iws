@@ -58,7 +58,7 @@
             var showAddNewEntryOrExitPointLink = Task.Run(() =>
                         authorizationService.AuthorizeActivity(typeof(AddEntryOrExitPoint)))
                     .Result;
-
+            
             var showAssessmentDecision = Task.Run(() =>
                 authorizationService.AuthorizeActivity(
                     ImportNotificationPermissions.CanMakeImportNotificationAssessmentDecision))
@@ -109,6 +109,11 @@
                     UserAdministrationPermissions.CanOverrideKeyDates))
                 .Result;
 
+            var showDeleteMovementLink = Task.Run(() =>
+                authorizationService.AuthorizeActivity(
+                    UserAdministrationPermissions.CanDeleteMovements))
+                .Result;
+
             var model = new ExportNavigationViewModel
             {
                 Data = data,
@@ -119,7 +124,8 @@
                     ShowAddNewEntryOrExitPointLink = showAddNewEntryOrExitPointLink
                 },
                 ShowAssessmentDecision = showAssessmentDecision,
-                ShowKeyDatesOverride = showKeyDatesOverride
+                ShowKeyDatesOverride = showKeyDatesOverride,
+                ShowDeleteMovementLink = showDeleteMovementLink
             };
 
             return PartialView("_ExportNavigation", model);
