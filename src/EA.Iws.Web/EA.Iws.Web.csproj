@@ -449,6 +449,7 @@
     <Content Include="Areas\AdminImportAssessment\Views\AccountManagement\_RefundDetails.cshtml" />
     <Content Include="Areas\AdminImportAssessment\Views\KeyDatesOverride\Index.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\WhatToDoNext\SepaContractGuidance.cshtml" />
+    <Content Include="Areas\AdminExportNotificationMovements\Views\Delete\Index.cshtml" />
     <None Include="Content\iws\_panels.scss" />
     <Content Include="Content\nta-extended.css" />
     <Content Include="Content\select2\select2-spinner.gif" />
@@ -1089,6 +1090,18 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>IndexResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\AdminExportNotificationMovements\Controllers\DeleteController.cs" />
+    <Compile Include="Areas\AdminExportNotificationMovements\ViewModels\Delete\IndexViewModel.cs" />
+    <Compile Include="Areas\AdminExportNotificationMovements\ViewModels\Delete\IndexViewModelResources.Designer.cs">
+      <DependentUpon>IndexViewModelResources.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Areas\AdminExportNotificationMovements\Views\Delete\IndexResources.Designer.cs">
+      <DependentUpon>IndexResources.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Areas\AdminImportAssessment\AdminImportAssessmentAreaRegistration.cs" />
     <Compile Include="Areas\AdminImportAssessment\Controllers\AccountManagementController.cs" />
@@ -2891,6 +2904,14 @@
       <LastGenOutput>DecisionResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\AdminExportAssessment\Views\KeyDatesOverride\IndexResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\AdminExportNotificationMovements\ViewModels\Delete\IndexViewModelResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>IndexViewModelResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\AdminExportNotificationMovements\Views\Delete\IndexResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
