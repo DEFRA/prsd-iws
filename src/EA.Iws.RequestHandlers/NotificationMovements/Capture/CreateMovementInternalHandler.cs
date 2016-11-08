@@ -28,7 +28,8 @@
                 var movement = await factory.Create(message.NotificationId,
                         message.Number,
                         message.PrenotificationDate,
-                        message.ActualShipmentDate);
+                        message.ActualShipmentDate,
+                        message.HasNoPrenotification);
 
                 movementRepository.Add(movement);
 

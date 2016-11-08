@@ -39,19 +39,25 @@
         }
 
         public static Movement Capture(int movementNumber, Guid notificationId, DateTime actualDate,
-            DateTime? preNotificationDate)
+            DateTime? prenotificationDate, bool hasNoPrenotification)
         {
+            if (hasNoPrenotification && prenotificationDate.HasValue)
+            {
+                throw new ArgumentException("Can't provide prenotification date if there is no prenotification", "prenotificationDate");
+            }
+
             var movement = new Movement
             {
                 NotificationId = notificationId,
                 Number = movementNumber,
                 Date = actualDate,
-                Status = MovementStatus.Captured
+                Status = MovementStatus.Captured,
+                HasNoPrenotification = hasNoPrenotification
             };
 
-            if (preNotificationDate.HasValue)
+            if (prenotificationDate.HasValue)
             {
-                movement.SubmitInternally(preNotificationDate.Value);
+                movement.SubmitInternally(prenotificationDate.Value);
             }
 
             return movement;
@@ -90,6 +96,8 @@
         public Guid? FileId { get; private set; }
 
         public DateTime? PrenotificationDate { get; private set; }
+
+        public bool HasNoPrenotification { get; set; }
 
         public bool HasShipped
         {

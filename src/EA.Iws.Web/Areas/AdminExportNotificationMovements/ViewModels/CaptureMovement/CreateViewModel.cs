@@ -17,6 +17,9 @@
         [Display(Name = "ActualDateLabel", ResourceType = typeof(CreateViewModelResources))]
         public OptionalDateInputViewModel ActualShipmentDate { get; set; }
 
+        [Display(Name = "HasNoPrenotification", ResourceType = typeof(CreateViewModelResources))]
+        public bool HasNoPrenotification { get; set; }
+
         public CreateViewModel()
         {
             PrenotificationDate = new OptionalDateInputViewModel(true);
@@ -28,6 +31,12 @@
             if (!ActualShipmentDate.IsCompleted)
             {
                 yield return new ValidationResult(CreateViewModelResources.ActualDateRequired, new[] { "ActualShipmentDate" });
+            }
+
+            if (!HasNoPrenotification && !PrenotificationDate.IsCompleted)
+            {
+                yield return new ValidationResult(CreateViewModelResources.PrenotificationDateRequired, 
+                    new[] { "PrenotificationDate" });
             }
         }
     }
