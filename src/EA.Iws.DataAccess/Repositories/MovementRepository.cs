@@ -99,5 +99,30 @@
 
             return movement == null ? 0 : movement.Number;
         }
+
+        public async Task<bool> DeleteById(Guid movementId)
+        {
+            try
+            {
+                await context.Database.ExecuteSqlCommandAsync(
+                @"DELETE from [Notification].[MovementCarrier] WHERE MovementDetailsId in (SELECT Id FROM [Notification].[MovementDetails] WHERE MovementId = @movementId)
+                  DELETE from [Notification].[MovementPackagingInfo] WHERE MovementDetailsId in (SELECT Id FROM [Notification].[MovementDetails] WHERE MovementId = @movementId)
+                  DELETE from [Notification].[MovementDetails] WHERE MovementId = @movementId
+                  DELETE from [Notification].[MovementDateHistory] WHERE MovementId = @movementId
+                  DELETE from [Notification].[MovementOperationReceipt] WHERE MovementId = @movementId
+                  DELETE from [Notification].[MovementReceipt] WHERE MovementId = @movementId
+                  DELETE from [Notification].[MovementRejection] WHERE MovementId = @movementId
+                  DELETE from [Notification].[MovementStatusChange] WHERE MovementId = @movementId
+                  DELETE from [Notification].[Movement] WHERE Id = @movementId",
+                new SqlParameter("@movementId", movementId));
+            }
+            catch (Exception e)
+            {
+                var bob = e;
+                return false;
+            }
+            
+            return true;
+        }
     }
 }

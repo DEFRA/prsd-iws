@@ -6,6 +6,7 @@
     using Core.Authorization.Permissions;
     using Infrastructure.Authorization;
     using Prsd.Core.Mediator;
+    using Requests.Movement;
     using Requests.NotificationMovements.Capture;
     using ViewModels.Delete;
 
@@ -65,15 +66,23 @@
         }
 
         [HttpPost]
-        public ActionResult Delete(Guid id, DeleteViewModel model)
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Delete(Guid id, DeleteViewModel model)
         {
-            //If model is valid delete the shipment
+            var movementId = await mediator.SendAsync(new GetMovementIdIfExists(id, model.Number.Value));
+            bool result = false;
 
-            //Then redirect to confirmation screen and display success or failure
-            var confirmModel = new ConfirmViewModel();
-            confirmModel.Number = model.Number;
-            confirmModel.Success = false;
-            confirmModel.NotificationId = id;
+            if (movementId.HasValue)
+            {
+                result = await mediator.SendAsync(new DeleteMovement(movementId.Value));
+            }
+
+            var confirmModel = new ConfirmViewModel
+            {
+                Number = model.Number,
+                Success = result,
+                NotificationId = id
+            };
 
             return RedirectToAction("Confirm", confirmModel);
         }
