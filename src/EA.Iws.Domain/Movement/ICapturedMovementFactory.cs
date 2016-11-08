@@ -8,6 +8,7 @@
         Task<Movement> Create(Guid notificationId, 
             int number, 
             DateTime? prenotificationDate, 
-            DateTime actualShipmentDate);
+            DateTime actualShipmentDate, 
+            bool hasNoPrenotification);
     }
 }

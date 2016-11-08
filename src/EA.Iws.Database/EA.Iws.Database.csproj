@@ -101,6 +101,7 @@
     <Content Include="scripts\Update\0002-CI\Sprint1\20161011-145600-create-search-schema.sql" />
     <Content Include="scripts\Update\0002-CI\Sprint1\20161013-170500-import-movement-iscancelled.sql" />
     <Content Include="scripts\Update\0002-CI\Sprint2\20161031-141800-add-indexes-and-foreign-keys.sql" />
+    <Content Include="scripts\Update\0002-CI\Sprint3\20161108-141600-movement-hasnoprenotificationdate.sql" />
     <Content Include="scripts\Update\placeholder.txt" />
     <Content Include="scripts\Update\0001-Release1\Sprint10\20150625-103000-add-us-competent-authority.sql" />
     <Content Include="scripts\Update\0001-Release1\Sprint10\20150626-163000-link-waste-code-info-to-notification.sql" />

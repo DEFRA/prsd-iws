@@ -123,7 +123,13 @@
   <data name="ActualDateRequired" xml:space="preserve">
     <value>Please enter the actual date of shipment</value>
   </data>
+  <data name="HasNoPrenotification" xml:space="preserve">
+    <value>No prenotification received</value>
+  </data>
   <data name="PrenotificationDateLabel" xml:space="preserve">
     <value>Prenotification date</value>
+  </data>
+  <data name="PrenotificationDateRequired" xml:space="preserve">
+    <value>Please tick the box or enter prenotification received date</value>
   </data>
 </root>

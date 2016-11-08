@@ -16,12 +16,16 @@
 
         public DateTime ActualShipmentDate { get; private set; }
 
-        public CreateMovementInternal(Guid notificationId, int number, DateTime? prenotificationDate, DateTime actualShipmentDate)
+        public bool HasNoPrenotification { get; set; }
+
+        public CreateMovementInternal(Guid notificationId, int number, DateTime? prenotificationDate, DateTime actualShipmentDate,
+            bool hasNoPrenotification)
         {
             NotificationId = notificationId;
             Number = number;
             PrenotificationDate = prenotificationDate;
             ActualShipmentDate = actualShipmentDate;
+            HasNoPrenotification = hasNoPrenotification;
         }
     }
 }
