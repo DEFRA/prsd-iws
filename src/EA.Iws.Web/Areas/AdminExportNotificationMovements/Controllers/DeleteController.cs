@@ -3,11 +3,13 @@
     using System;
     using System.Threading.Tasks;
     using System.Web.Mvc;
+    using Core.Authorization.Permissions;
+    using Infrastructure.Authorization;
     using Prsd.Core.Mediator;
     using Requests.NotificationMovements.Capture;
     using ViewModels.Delete;
 
-    [Authorize(Roles = "internal")]
+    [AuthorizeActivity(UserAdministrationPermissions.CanDeleteMovements)]
     public class DeleteController : Controller
     {
         private const string MovementNumberKey = "MovementNumberKey";
@@ -52,7 +54,7 @@
             object result;
             if (TempData.TryGetValue(MovementNumberKey, out result))
             {
-                return View(new IndexViewModel
+                return View(new DeleteViewModel
                 {
                     Number = (int)result,
                     NotificationId = id
@@ -60,6 +62,26 @@
             }
 
             return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public ActionResult Delete(Guid id, DeleteViewModel model)
+        {
+            //If model is valid delete the shipment
+
+            //Then redirect to confirmation screen and display success or failure
+            var confirmModel = new ConfirmViewModel();
+            confirmModel.Number = model.Number;
+            confirmModel.Success = false;
+            confirmModel.NotificationId = id;
+
+            return RedirectToAction("Confirm", confirmModel);
+        }
+
+        [HttpGet]
+        public ActionResult Confirm(ConfirmViewModel model)
+        {
+            return View(model);
         }
     }
 }
