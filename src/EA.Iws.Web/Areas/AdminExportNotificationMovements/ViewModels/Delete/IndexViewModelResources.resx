@@ -117,19 +117,13 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="ActualDateLabel" xml:space="preserve">
-    <value>Actual date of shipment</value>
+  <data name="Number" xml:space="preserve">
+    <value>Enter the shipment number, for example 5</value>
   </data>
-  <data name="ActualDateRequired" xml:space="preserve">
-    <value>Please enter the actual date of shipment</value>
+  <data name="NumberIsInt" xml:space="preserve">
+    <value>Please enter a valid number</value>
   </data>
-  <data name="HasNoPrenotification" xml:space="preserve">
-    <value>No prenotification received</value>
-  </data>
-  <data name="PrenotificationDateLabel" xml:space="preserve">
-    <value>Prenotification date</value>
-  </data>
-  <data name="PrenotificationDateRequired" xml:space="preserve">
-    <value>Please tick the box or enter prenotification received date</value>
+  <data name="NumberRequired" xml:space="preserve">
+    <value>Please enter a shipment number</value>
   </data>
 </root>

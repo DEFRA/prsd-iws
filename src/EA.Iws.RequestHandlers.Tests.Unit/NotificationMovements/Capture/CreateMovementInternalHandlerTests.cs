@@ -15,7 +15,7 @@
         private readonly CreateMovementInternalHandler handler;
         private readonly CreateMovementInternal request = 
             new CreateMovementInternal(new Guid("5E055311-2406-44E7-84FF-E35F4E004421"), 
-                1, null, new DateTime(2015, 1, 1));
+                1, null, new DateTime(2015, 1, 1), true);
         private readonly ICapturedMovementFactory factory;
         private readonly IwsContext context;
         private readonly IMovementRepository movementRepository;
@@ -32,7 +32,7 @@
         [Fact]
         public async Task CannotCreateMovement_ReturnsFalse()
         {
-            A.CallTo(() => factory.Create(A<Guid>.Ignored, A<int>.Ignored, null, A<DateTime>.Ignored)).Throws(new MovementNumberException("Mike Merry"));
+            A.CallTo(() => factory.Create(A<Guid>.Ignored, A<int>.Ignored, null, A<DateTime>.Ignored, true)).Throws(new MovementNumberException("Mike Merry"));
 
             var result = await handler.HandleAsync(request);
 
@@ -42,7 +42,7 @@
         [Fact]
         public async Task CanCreateMovement_ReturnsTrue()
         {
-            A.CallTo(() => factory.Create(A<Guid>.Ignored, A<int>.Ignored, null, A<DateTime>.Ignored))
+            A.CallTo(() => factory.Create(A<Guid>.Ignored, A<int>.Ignored, null, A<DateTime>.Ignored, true))
                 .Returns(new TestableMovement());
 
             var result = await handler.HandleAsync(request);

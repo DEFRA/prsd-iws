@@ -77,7 +77,8 @@
             var success = await mediator.SendAsync(new CreateMovementInternal(id, 
                 model.Number,
                 model.PrenotificationDate.AsDateTime(), 
-                model.ActualShipmentDate.AsDateTime().Value));
+                model.ActualShipmentDate.AsDateTime().Value,
+                model.HasNoPrenotification));
 
             if (success)
             {

@@ -18,8 +18,13 @@
             this.assessmentRepository = assessmentRepository;
         }
 
-        public async Task<Movement> Create(Guid notificationId, int number, DateTime? prenotificationDate, DateTime actualShipmentDate)
+        public async Task<Movement> Create(Guid notificationId, int number, DateTime? prenotificationDate, DateTime actualShipmentDate, bool hasNoPrenotification)
         {
+            if (hasNoPrenotification && prenotificationDate.HasValue)
+            {
+                throw new ArgumentException("Can't provide prenotification date if there is no prenotification", "prenotificationDate");
+            }
+
             if (!await movementNumberValidator.Validate(notificationId, number))
             {
                 throw new MovementNumberException("Cannot create a movement with a conflicting movement number (" + number + ") for notification: " + notificationId);
@@ -34,7 +39,7 @@
                         notificationId, notificationStatus));
             }
 
-            var movement = Movement.Capture(number, notificationId, actualShipmentDate, prenotificationDate);
+            var movement = Movement.Capture(number, notificationId, actualShipmentDate, prenotificationDate, hasNoPrenotification);
 
             return movement;
         }

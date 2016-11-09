@@ -35,7 +35,7 @@
             A.CallTo(() => validator.Validate(NotificationId, A<int>.Ignored))
                 .Returns(false);
 
-            await Assert.ThrowsAsync<MovementNumberException>(() => factory.Create(NotificationId, 1, null, AnyDate));
+            await Assert.ThrowsAsync<MovementNumberException>(() => factory.Create(NotificationId, 1, null, AnyDate, true));
         }
 
         [Fact]
@@ -44,7 +44,7 @@
             A.CallTo(() => validator.Validate(NotificationId, A<int>.Ignored))
                 .Returns(true);
 
-            var result = await factory.Create(NotificationId, 1, null, AnyDate);
+            var result = await factory.Create(NotificationId, 1, null, AnyDate, true);
 
             Assert.Equal(MovementStatus.Captured, result.Status);
         }
@@ -55,7 +55,7 @@
             A.CallTo(() => validator.Validate(NotificationId, A<int>.Ignored))
                 .Returns(true);
 
-            var result = await factory.Create(NotificationId, 1, AnyDate.AddDays(5), AnyDate);
+            var result = await factory.Create(NotificationId, 1, AnyDate.AddDays(5), AnyDate, false);
 
             Assert.Equal(MovementStatus.Submitted, result.Status);
             Assert.Equal(AnyDate.AddDays(5), result.PrenotificationDate);
@@ -72,6 +72,15 @@
                 .Returns(new TestableNotificationAssessment { Status = NotificationStatus.FileClosed });
 
             await Assert.ThrowsAsync<InvalidOperationException>(() => factory.Create(NotificationId, 1, null, AnyDate));
+        }
+        
+        [Fact]
+        public async Task HasNoPrenotification_PrenotificationDateProvided_Throws()
+        {
+            A.CallTo(() => validator.Validate(NotificationId, A<int>.Ignored))
+                .Returns(false);
+
+            await Assert.ThrowsAsync<ArgumentException>("prenotificationDate", () => factory.Create(NotificationId, 1, AnyDate, AnyDate, true));
         }
     }
 }

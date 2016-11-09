@@ -1,0 +1,23 @@
+﻿@using Resource = EA.Iws.Web.Areas.AdminExportNotificationMovements.Views.Delete.ConfirmResources
+@model EA.Iws.Web.Areas.AdminExportNotificationMovements.ViewModels.Delete.ConfirmViewModel
+
+@{
+    ViewBag.Title = Resource.Title;
+}
+
+<div class="grid-row">
+    <div class="column-two-thirds">
+        @if (Model.Success)
+        {
+            <h1 class="heading-large">@String.Format(Resource.SuccessMainHeading, Model.Number)</h1>
+        }
+        else
+        {
+            <h1 class="heading-large">@String.Format(Resource.FailureMainHeading, Model.Number)</h1>
+        }
+
+
+        @Html.ActionLink("Shipment summary", "Index", "Home", new { area = "AdminExportNotificationMovements", Model.NotificationId }, new { @class = "button" })
+
+    </div>
+</div>

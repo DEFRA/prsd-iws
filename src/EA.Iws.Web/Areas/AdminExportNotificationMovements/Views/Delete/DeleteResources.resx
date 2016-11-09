@@ -117,19 +117,16 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="ActualDateLabel" xml:space="preserve">
-    <value>Actual date of shipment</value>
+  <data name="CancelButtonText" xml:space="preserve">
+    <value>Cancel</value>
   </data>
-  <data name="ActualDateRequired" xml:space="preserve">
-    <value>Please enter the actual date of shipment</value>
+  <data name="ConfirmButtonText" xml:space="preserve">
+    <value>Delete shipment</value>
   </data>
-  <data name="HasNoPrenotification" xml:space="preserve">
-    <value>No prenotification received</value>
+  <data name="MainHeading" xml:space="preserve">
+    <value>Are you sure you want to delete shipment {0}?</value>
   </data>
-  <data name="PrenotificationDateLabel" xml:space="preserve">
-    <value>Prenotification date</value>
-  </data>
-  <data name="PrenotificationDateRequired" xml:space="preserve">
-    <value>Please tick the box or enter prenotification received date</value>
+  <data name="Title" xml:space="preserve">
+    <value>Delete shipment</value>
   </data>
 </root>

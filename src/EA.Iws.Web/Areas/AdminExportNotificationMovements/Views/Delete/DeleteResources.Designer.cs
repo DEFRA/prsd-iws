@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace EA.Iws.Web.Areas.AdminExportNotificationMovements.ViewModels.CaptureMovement {
+namespace EA.Iws.Web.Areas.AdminExportNotificationMovements.Views.Delete {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace EA.Iws.Web.Areas.AdminExportNotificationMovements.ViewModels.CaptureMo
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class CreateViewModelResources {
+    public class DeleteResources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal CreateViewModelResources() {
+        internal DeleteResources() {
         }
         
         /// <summary>
@@ -39,8 +39,7 @@ namespace EA.Iws.Web.Areas.AdminExportNotificationMovements.ViewModels.CaptureMo
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EA.Iws.Web.Areas.AdminExportNotificationMovements.ViewModels.CaptureMovement.Crea" +
-                            "teViewModelResources", typeof(CreateViewModelResources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EA.Iws.Web.Areas.AdminExportNotificationMovements.Views.Delete.DeleteResources", typeof(DeleteResources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -62,47 +61,38 @@ namespace EA.Iws.Web.Areas.AdminExportNotificationMovements.ViewModels.CaptureMo
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Actual date of shipment.
+        ///   Looks up a localized string similar to Cancel.
         /// </summary>
-        public static string ActualDateLabel {
+        public static string CancelButtonText {
             get {
-                return ResourceManager.GetString("ActualDateLabel", resourceCulture);
+                return ResourceManager.GetString("CancelButtonText", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Please enter the actual date of shipment.
+        ///   Looks up a localized string similar to Delete shipment.
         /// </summary>
-        public static string ActualDateRequired {
+        public static string ConfirmButtonText {
             get {
-                return ResourceManager.GetString("ActualDateRequired", resourceCulture);
+                return ResourceManager.GetString("ConfirmButtonText", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to No prenotification received.
+        ///   Looks up a localized string similar to Are you sure you want to delete shipment {0}?.
         /// </summary>
-        public static string HasNoPrenotification {
+        public static string MainHeading {
             get {
-                return ResourceManager.GetString("HasNoPrenotification", resourceCulture);
+                return ResourceManager.GetString("MainHeading", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Prenotification date.
+        ///   Looks up a localized string similar to Delete shipment.
         /// </summary>
-        public static string PrenotificationDateLabel {
+        public static string Title {
             get {
-                return ResourceManager.GetString("PrenotificationDateLabel", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Please tick the box or enter prenotification received date.
-        /// </summary>
-        public static string PrenotificationDateRequired {
-            get {
-                return ResourceManager.GetString("PrenotificationDateRequired", resourceCulture);
+                return ResourceManager.GetString("Title", resourceCulture);
             }
         }
     }

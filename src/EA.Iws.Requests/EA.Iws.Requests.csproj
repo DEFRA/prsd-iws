@@ -160,6 +160,7 @@
     <Compile Include="ImportNotification\CheckImportNumberUnique.cs" />
     <Compile Include="ImportNotification\CreateImportNotification.cs" />
     <Compile Include="Movement\CancelMovements.cs" />
+    <Compile Include="Movement\DeleteMovement.cs" />
     <Compile Include="Movement\Edit\GetMovementDateHistory.cs" />
     <Compile Include="Movement\Edit\IsProposedUpdatedMovementDateValid.cs" />
     <Compile Include="Movement\Edit\UpdateMovementDate.cs" />
@@ -372,6 +373,14 @@
     <ProjectReference Include="..\EA.Iws.Core\EA.Iws.Core.csproj">
       <Project>{dd2a73a4-a652-4ecc-87ee-24239ce45ad4}</Project>
       <Name>EA.Iws.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EA.Iws.DataAccess\EA.Iws.DataAccess.csproj">
+      <Project>{46300373-D7AE-40AA-BF96-3FC3889825A4}</Project>
+      <Name>EA.Iws.DataAccess</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EA.Iws.Domain\EA.Iws.Domain.csproj">
+      <Project>{A987FFF6-5386-419E-AF0A-E6C74E3323CF}</Project>
+      <Name>EA.Iws.Domain</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />
