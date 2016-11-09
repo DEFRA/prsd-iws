@@ -97,7 +97,7 @@
 
         public DateTime? PrenotificationDate { get; private set; }
 
-        public bool HasNoPrenotification { get; set; }
+        public bool? HasNoPrenotification { get; set; }
 
         public bool HasShipped
         {
