@@ -27,6 +27,8 @@
 
         public DateTime? DecisionRequiredDate { get; private set; }
 
+        public DateTime? FileClosedDate { get; private set; }
+
         public static NotificationDatesSummary Load(
             NotificationStatus currentStatus,
             DateTime? notificationReceivedDate,
@@ -38,7 +40,8 @@
             DateTime? completedDate,
             DateTime? transmittedDate,
             DateTime? acknowledgedDate,
-            DateTime? decisionRequiredDate)
+            DateTime? decisionRequiredDate,
+            DateTime? fileClosedDate)
         {
             return new NotificationDatesSummary
             {
@@ -52,7 +55,8 @@
                 CompletedDate = completedDate,
                 TransmittedDate = transmittedDate,
                 AcknowledgedDate = acknowledgedDate,
-                DecisionRequiredDate = decisionRequiredDate
+                DecisionRequiredDate = decisionRequiredDate,
+                FileClosedDate = fileClosedDate
             };
         }
     }

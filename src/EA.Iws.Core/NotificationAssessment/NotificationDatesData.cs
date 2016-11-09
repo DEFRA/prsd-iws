@@ -25,5 +25,7 @@
         public DateTime? AcknowledgedDate { get; set; }
 
         public DateTime? DecisionRequiredDate { get; set; }
+
+        public DateTime? FileClosedDate { get; set; }
     }
 }

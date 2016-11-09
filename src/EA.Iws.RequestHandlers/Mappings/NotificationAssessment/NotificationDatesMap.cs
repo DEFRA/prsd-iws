@@ -20,7 +20,8 @@
                 CompletedDate = source.CompletedDate,
                 TransmittedDate = source.TransmittedDate,
                 AcknowledgedDate = source.AcknowledgedDate,
-                DecisionRequiredDate = source.DecisionRequiredDate
+                DecisionRequiredDate = source.DecisionRequiredDate,
+                FileClosedDate = source.FileClosedDate
             };
         }
     }

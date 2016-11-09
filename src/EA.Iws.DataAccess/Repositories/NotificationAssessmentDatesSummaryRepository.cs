@@ -52,7 +52,8 @@
                 assessment.Dates.CompleteDate,
                 assessment.Dates.TransmittedDate,
                 assessment.Dates.AcknowledgedDate,
-                await decisionRequiredBy.GetDecisionRequiredByDate(notification, assessment));
+                await decisionRequiredBy.GetDecisionRequiredByDate(notification, assessment),
+                assessment.Dates.FileClosedDate);
         }
     }
 }
