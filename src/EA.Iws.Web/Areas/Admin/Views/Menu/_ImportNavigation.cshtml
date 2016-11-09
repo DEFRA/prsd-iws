@@ -87,6 +87,10 @@
                 <ul>
                     <li>@Html.ActionLink("Shipment summary", "Index", "Home", new { area = "AdminImportNotificationMovements", id }, null)</li>
                     <li>@Html.ActionLink("Cancel shipments", "Index", "Cancel", new { area = "AdminImportNotificationMovements", id }, null)</li>
+                    @if (Model.ShowDeleteMovementLink)
+                    {
+                        <li>@Html.ActionLink("Delete a shipment", "Index", "Delete", new { area = "AdminImportNotificationMovements", id }, null)</li>
+                    }
                 </ul>
             </li>
         }

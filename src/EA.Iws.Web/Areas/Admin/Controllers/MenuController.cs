@@ -69,6 +69,11 @@
                     UserAdministrationPermissions.CanOverrideKeyDates))
                 .Result;
 
+            var showDeleteMovementLink = Task.Run(() =>
+                authorizationService.AuthorizeActivity(
+                    UserAdministrationPermissions.CanDeleteMovements))
+                .Result;
+
             var model = new ImportNavigationViewModel
             {
                 Details = details,
@@ -80,7 +85,8 @@
                     ShowAddNewEntryOrExitPointLink = showAddNewEntryOrExitPointLink
                 },
                 ShowAssessmentDecision = showAssessmentDecision,
-                ShowKeyDatesOverride = showKeyDatesOverride
+                ShowKeyDatesOverride = showKeyDatesOverride,
+                ShowDeleteMovementLink = showDeleteMovementLink
             };
 
             return PartialView("_ImportNavigation", model);
