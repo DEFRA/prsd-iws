@@ -9,5 +9,7 @@
         public const string CanReadInternalUserData = "Can Read Internal User Data";
 
         public const string CanOverrideKeyDates = "Can Override Key Dates";
+
+        public const string CanDeleteMovements = "Can Delete Movements";
     }
 }

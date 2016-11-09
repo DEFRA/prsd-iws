@@ -1,0 +1,25 @@
+﻿@using Resource = EA.Iws.Web.Areas.AdminExportNotificationMovements.Views.Delete.DeleteResources
+@model EA.Iws.Web.Areas.AdminExportNotificationMovements.ViewModels.Delete.DeleteViewModel
+
+@{
+    ViewBag.Title = Resource.Title;
+}
+
+<div class="grid-row">
+    <div class="column-two-thirds">
+        <h1 class="heading-large">@String.Format(Resource.MainHeading, Model.Number)</h1>
+
+        <div class="form-group">
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+                @Html.HiddenFor(m => m.NotificationId)
+                @Html.HiddenFor(m => m.Number)
+
+                <button type="submit" class="button">@Resource.ConfirmButtonText</button>
+            }
+        </div>
+
+        @Html.ActionLink(Resource.CancelButtonText, "Index", "Home", new { area = "AdminExportNotificationMovements", Model.NotificationId }, null)
+    </div>
+</div>
