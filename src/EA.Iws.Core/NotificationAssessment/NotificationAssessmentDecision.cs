@@ -22,5 +22,9 @@
             ConsentedTo = consentedTo;
             Status = status;
         }
+
+        public NotificationAssessmentDecision()
+        {
+        }
     }
 }

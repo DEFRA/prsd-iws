@@ -36,5 +36,7 @@ namespace EA.Iws.Domain.NotificationAssessment
         public string ObjectionReason { get; internal set; }
 
         public string WithdrawnReason { get; internal set; }
+
+        public DateTime? FileClosedDate { get; internal set; }
     }
 }

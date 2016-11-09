@@ -23,6 +23,9 @@
         NotificationAcknowledged = 6,
 
         [Display(Name = "Decision required by")]
-        NotificationDecisionDateEntered = 7
+        NotificationDecisionDateEntered = 7,
+
+        [Display(Name = "File closed on")]
+        FileClosed = 8
     }
 }

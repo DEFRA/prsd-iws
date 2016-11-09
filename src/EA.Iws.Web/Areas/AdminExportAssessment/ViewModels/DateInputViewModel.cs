@@ -23,6 +23,7 @@
             NewDate = new OptionalDateInputViewModel(true);
             AssessmentDecisions = new List<NotificationAssessmentDecision>();
             FinancialGuaranteeDecisions = new List<FinancialGuaranteeDecisionData>();
+            NotificationFileClosedDate = new OptionalDateInputViewModel(true);
         }
 
         public DateInputViewModel(NotificationDatesData dates)
@@ -40,6 +41,7 @@
             NewDate = new OptionalDateInputViewModel(true);
             NameOfOfficer = dates.NameOfOfficer;
             AssessmentDecisions = new List<NotificationAssessmentDecision>();
+            NotificationFileClosedDate = new OptionalDateInputViewModel(dates.FileClosedDate, true);
         }
 
         public Guid NotificationId { get; set; }
@@ -70,6 +72,9 @@
 
         [Display(Name = "Decision required by")]
         public OptionalDateInputViewModel DecisionDate { get; set; }
+
+        [Display(Name = "File closed on")]
+        public OptionalDateInputViewModel NotificationFileClosedDate { get; set; }
 
         [Display(Name = "Name of officer")]
         public string NameOfOfficer { get; set; }
@@ -198,6 +203,24 @@
                     (NotificationTransmittedDate != null && NewDate.AsDateTime() < NotificationTransmittedDate.AsDateTime()))
                 {
                     yield return new ValidationResult(DateInputViewModelResources.AcknowledgedNotBefore, new[] { "NewDate" });
+                }
+            }
+
+            if (Command == KeyDatesStatusEnum.FileClosed)
+            {
+                if (NewDate.AsDateTime() > SystemTime.UtcNow)
+                {
+                    yield return new ValidationResult(DateInputViewModelResources.FileClosedInFuture, new[] { "NewDate" });
+                }
+
+                if (NotificationReceivedDate == null)
+                {
+                    yield return new ValidationResult(DateInputViewModelResources.CompleteOtherDatesRequired, new[] { "NewDate" });
+                }
+
+                if (NotificationReceivedDate != null && NewDate.AsDateTime() < NotificationReceivedDate.AsDateTime())
+                {
+                    yield return new ValidationResult(DateInputViewModelResources.FileClosedNotBefore, new[] { "NewDate" });
                 }
             }
         }

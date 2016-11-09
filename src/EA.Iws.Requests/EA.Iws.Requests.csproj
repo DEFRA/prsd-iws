@@ -66,6 +66,7 @@
     <Compile Include="Admin\NotificationAssessment\GetExportNotificationConsultation.cs" />
     <Compile Include="Admin\NotificationAssessment\RejectChanges.cs" />
     <Compile Include="Admin\NotificationAssessment\SetCommencedDate.cs" />
+    <Compile Include="Admin\NotificationAssessment\SetNotificationFileClosedDate.cs" />
     <Compile Include="Admin\NotificationAssessment\SetNotificationCompleteDate.cs" />
     <Compile Include="Admin\NotificationAssessment\SetExportNotificationConsultation.cs" />
     <Compile Include="Admin\NotificationAssessment\SetNotificationTransmittedDate.cs" />
