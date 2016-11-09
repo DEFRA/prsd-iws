@@ -89,6 +89,10 @@
             {
                 return RedirectToAction("ConsentWithdrawn");
             }
+            else if (ruleSummary.RuleResults.Any(r => r.Rule == MovementRules.FileClosed && r.MessageLevel == MessageLevel.Error))
+            {
+                return RedirectToAction("FileClosed");
+            }
 
             throw new InvalidOperationException("Unknown rule view");
         }
@@ -345,6 +349,12 @@
 
         [HttpGet]
         public ActionResult ConsentWithdrawn(Guid notificationId)
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public ActionResult FileClosed(Guid notificationId)
         {
             return View();
         }

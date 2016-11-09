@@ -9,6 +9,7 @@
         ConsentPeriodExpired = 5,
         ConsentExpiresInFourWorkingDays = 6,
         ConsentExpiresInThreeOrLessWorkingDays = 7,
-        ConsentWithdrawn = 8
+        ConsentWithdrawn = 8,
+        FileClosed = 9
     }
 }

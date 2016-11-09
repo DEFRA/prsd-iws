@@ -440,6 +440,7 @@
     <Compile Include="NotificationMovements\Mappings\ShipmentDatesMap.cs" />
     <Compile Include="NotificationMovements\Rules\ConsentExpiresInThreeOrLessWorkingDays.cs" />
     <Compile Include="NotificationMovements\Rules\ConsentExpiresInFourWorkingDays.cs" />
+    <Compile Include="NotificationMovements\Rules\FileClosed.cs" />
     <Compile Include="NotificationMovements\Rules\TotalActiveLoadsReached.cs" />
     <Compile Include="NotificationMovements\Rules\ConsentWithdrawn.cs" />
     <Compile Include="NotificationMovements\Rules\TotalIntendedQuantityExceeded.cs" />
