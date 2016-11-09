@@ -71,7 +71,7 @@
             A.CallTo(() => assessmentRepository.GetByNotificationId(NotificationId))
                 .Returns(new TestableNotificationAssessment { Status = NotificationStatus.FileClosed });
 
-            await Assert.ThrowsAsync<InvalidOperationException>(() => factory.Create(NotificationId, 1, null, AnyDate));
+            await Assert.ThrowsAsync<InvalidOperationException>(() => factory.Create(NotificationId, 1, null, AnyDate, true));
         }
         
         [Fact]
