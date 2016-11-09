@@ -454,6 +454,8 @@
     <Content Include="Areas\AdminExportNotificationMovements\Views\Delete\Confirm.cshtml" />
     <Content Include="Areas\NotificationMovements\Views\Create\FileClosed.cshtml" />
     <Content Include="Areas\AdminImportNotificationMovements\Views\Delete\Index.cshtml" />
+    <Content Include="Areas\AdminImportNotificationMovements\Views\Delete\Delete.cshtml" />
+    <Content Include="Areas\AdminImportNotificationMovements\Views\Delete\Confirm.cshtml" />
     <None Include="Content\iws\_panels.scss" />
     <Content Include="Content\nta-extended.css" />
     <Content Include="Content\select2\select2-spinner.gif" />
@@ -1292,6 +1294,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>SearchViewModelResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Areas\AdminImportNotificationMovements\ViewModels\Delete\ConfirmViewModel.cs" />
+    <Compile Include="Areas\AdminImportNotificationMovements\ViewModels\Delete\DeleteViewModel.cs" />
     <Compile Include="Areas\AdminImportNotificationMovements\ViewModels\Delete\IndexViewModel.cs" />
     <Compile Include="Areas\AdminImportNotificationMovements\ViewModels\Delete\IndexViewModelResources.Designer.cs" />
     <Compile Include="Areas\AdminImportNotificationMovements\ViewModels\Home\MovementsSummaryTableViewModel.cs" />
@@ -1324,6 +1328,16 @@
     <Compile Include="Areas\AdminExportMovement\AdminMovementAreaRegistration.cs" />
     <Compile Include="Areas\AdminExportMovement\Controllers\HomeController.cs" />
     <Compile Include="Areas\AdminExportNotificationMovements\AdminNotificationMovementsAreaRegistration.cs" />
+    <Compile Include="Areas\AdminImportNotificationMovements\Views\Delete\ConfirmResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ConfirmResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\AdminImportNotificationMovements\Views\Delete\DeleteResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DeleteResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Areas\AdminImportNotificationMovements\Views\Delete\IndexResources.Designer.cs" />
     <Compile Include="Areas\AdminImportNotificationMovements\Views\Home\IndexResources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -3080,6 +3094,14 @@
     <EmbeddedResource Include="Areas\AdminImportNotificationMovements\Views\Capture\IndexResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\AdminImportNotificationMovements\Views\Delete\ConfirmResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ConfirmResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\AdminImportNotificationMovements\Views\Delete\DeleteResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>DeleteResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\AdminImportNotificationMovements\Views\Delete\IndexResources.resx" />
     <EmbeddedResource Include="Areas\AdminImportNotificationMovements\Views\Home\IndexResources.resx">

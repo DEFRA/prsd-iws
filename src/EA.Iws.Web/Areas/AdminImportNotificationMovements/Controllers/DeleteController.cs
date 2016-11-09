@@ -7,6 +7,7 @@
     using Infrastructure.Authorization;
     using Prsd.Core.Mediator;
     using Requests.ImportMovement.Capture;
+    using Requests.ImportMovement.Delete;
     using ViewModels.Delete;
 
     [AuthorizeActivity(UserAdministrationPermissions.CanDeleteMovements)]
@@ -40,10 +41,54 @@
             if (movementId.HasValue)
             {
                 TempData[MovementNumberKey] = model.Number;
-                return RedirectToAction("Index");
+                return RedirectToAction("Delete");
             }
 
             return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        public ActionResult Delete(Guid id)
+        {
+            object result;
+            if (TempData.TryGetValue(MovementNumberKey, out result))
+            {
+                return View(new DeleteViewModel
+                {
+                    Number = (int)result,
+                    NotificationId = id
+                });
+            }
+
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Delete(Guid id, DeleteViewModel model)
+        {
+            var movementId = await mediator.SendAsync(new GetImportMovementIdIfExists(id, model.Number.Value));
+            bool result = false;
+
+            if (movementId.HasValue)
+            {
+                result = await mediator.SendAsync(new DeleteMovement(movementId.Value));
+            }
+
+            var confirmModel = new ConfirmViewModel
+            {
+                Number = model.Number,
+                Success = result,
+                NotificationId = id
+            };
+
+            return RedirectToAction("Confirm", confirmModel);
+        }
+
+        [HttpGet]
+        public ActionResult Confirm(ConfirmViewModel model)
+        {
+            return View(model);
         }
     }
 }
