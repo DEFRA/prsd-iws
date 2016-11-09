@@ -53,7 +53,8 @@
                 assessment.Dates.TransmittedDate,
                 assessment.Dates.AcknowledgedDate,
                 await decisionRequiredBy.GetDecisionRequiredByDate(notification, assessment),
-                assessment.Dates.FileClosedDate);
+                assessment.Dates.FileClosedDate,
+                assessment.Dates.ArchiveReference);
         }
     }
 }

@@ -29,6 +29,8 @@
 
         public DateTime? FileClosedDate { get; private set; }
 
+        public string ArchiveReference { get; private set; }
+
         public static NotificationDatesSummary Load(
             NotificationStatus currentStatus,
             DateTime? notificationReceivedDate,
@@ -41,7 +43,8 @@
             DateTime? transmittedDate,
             DateTime? acknowledgedDate,
             DateTime? decisionRequiredDate,
-            DateTime? fileClosedDate)
+            DateTime? fileClosedDate,
+            string archiveReference)
         {
             return new NotificationDatesSummary
             {
@@ -56,7 +59,8 @@
                 TransmittedDate = transmittedDate,
                 AcknowledgedDate = acknowledgedDate,
                 DecisionRequiredDate = decisionRequiredDate,
-                FileClosedDate = fileClosedDate
+                FileClosedDate = fileClosedDate,
+                ArchiveReference = archiveReference
             };
         }
     }

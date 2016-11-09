@@ -38,5 +38,7 @@ namespace EA.Iws.Domain.NotificationAssessment
         public string WithdrawnReason { get; internal set; }
 
         public DateTime? FileClosedDate { get; internal set; }
+
+        public string ArchiveReference { get; internal set; }
     }
 }

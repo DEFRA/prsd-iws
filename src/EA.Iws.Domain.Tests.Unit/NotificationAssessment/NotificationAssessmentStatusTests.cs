@@ -440,5 +440,20 @@
 
             Assert.Equal(notificationAssessment.Dates.FileClosedDate, fileClosedDate);
         }
+
+        [Fact]
+        public void SetArchiveReference_FileClosedDateIsSet_UpdatesValue()
+        {
+            notificationAssessment.MarkFileClosed(fileClosedDate);
+            notificationAssessment.SetArchiveReference("ref");
+
+            Assert.Equal("ref", notificationAssessment.Dates.ArchiveReference);
+        }
+
+        [Fact]
+        public void SetArchiveReference_FileClosedDateIsNotSet_Throws()
+        {
+            Assert.Throws<InvalidOperationException>(() => notificationAssessment.SetArchiveReference("ref"));
+        }
     }
 }
