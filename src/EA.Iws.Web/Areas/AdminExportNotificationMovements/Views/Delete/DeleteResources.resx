@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="CancelButtonText" xml:space="preserve">
-    <value>Cancel</value>
+    <value>No I don't want to delete this shipment</value>
   </data>
   <data name="ConfirmButtonText" xml:space="preserve">
     <value>Delete shipment</value>
