@@ -84,6 +84,10 @@
             {
                 await SetAcknowledged(model);
             }
+            else if (model.Command == KeyDatesStatusEnum.FileClosed)
+            {
+                await FileClosed(model);
+            }
             else
             {
                 throw new InvalidOperationException();
@@ -157,6 +161,14 @@
                 model.NewDate.AsDateTime().GetValueOrDefault());
 
             await mediator.SendAsync(setAcknowledged);
+        }
+
+        private async Task FileClosed(DateInputViewModel model)
+        {
+            var fileClosed = new SetNotifcationFileClosedDate(model.NotificationId, 
+                model.NewDate.AsDateTime().GetValueOrDefault());
+
+            await mediator.SendAsync(fileClosed);
         }
 
         private void AddRelevantDateToNewDate(DateInputViewModel model)

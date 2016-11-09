@@ -32,8 +32,10 @@
                 }
             </td>
             <td>
-                @(Model.NotificationReceivedDate.IsCompleted ? Html.Raw(string.Empty)
-                      : Html.ActionLink("Add", "Index", "KeyDates", new { command = KeyDatesStatusEnum.NotificationReceived }, null))
+                @if (!Model.NotificationReceivedDate.IsCompleted)
+                {
+                    @Html.ActionLink("Add", "Index", "KeyDates", new { command = KeyDatesStatusEnum.NotificationReceived }, null)
+                }
             </td>
         </tr>
 
@@ -80,10 +82,9 @@
                 }
             </td>
             <td>
-                @if (Model.PaymentIsComplete)
+                @if (Model.PaymentIsComplete && !Model.CommencementDate.IsCompleted && !Model.NotificationFileClosedDate.IsCompleted)
                 {
-                    @(Model.CommencementDate.IsCompleted ? Html.Raw(string.Empty)
-                                  : Html.ActionLink("Add", "Index", "KeyDates", new { command = KeyDatesStatusEnum.AssessmentCommenced }, null))
+                    @Html.ActionLink("Add", "Index", "KeyDates", new { command = KeyDatesStatusEnum.AssessmentCommenced }, null)
                 }
             </td>
 
@@ -102,30 +103,23 @@
                 }
             </td>
             <td>
-                @if (Model.CommencementDate.IsCompleted)
+                @if (Model.CommencementDate.IsCompleted && !Model.NotificationCompleteDate.IsCompleted)
                 {
-                    if (Model.NotificationCompleteDate.IsCompleted)
+                    if (!Model.IsAreaAssigned && Model.CompetentAuthority == UKCompetentAuthority.England)
                     {
-                        Html.Raw(string.Empty);
+                        @Html.ActionLink("Go to Assign an area", "Index", "AssignArea")
                     }
-                    else
+                    else if (!Model.IsInterim.HasValue)
                     {
-                        if (!Model.IsAreaAssigned && Model.CompetentAuthority == UKCompetentAuthority.England)
-                        {
-                            @Html.ActionLink("Go to Assign an area", "Index", "AssignArea")
-                        }
-                        else if (!Model.IsInterim.HasValue)
-                        {
-                            @Html.ActionLink("Mark notification as interim or non-interim", "Index", "MarkAsInterim")
-                        }
-                        else if (!Model.PaymentIsComplete)
-                        {
-                            @Html.ActionLink("Go to payment details", "Index", "AccountManagement")
-                        }
-                        else
-                        {
-                            @Html.ActionLink("Add", "Index", "KeyDates", new { command = KeyDatesStatusEnum.NotificationComplete }, null)
-                        }
+                        @Html.ActionLink("Mark notification as interim or non-interim", "Index", "MarkAsInterim")
+                    }
+                    else if (!Model.PaymentIsComplete)
+                    {
+                        @Html.ActionLink("Go to payment details", "Index", "AccountManagement")
+                    }
+                    else if (!Model.NotificationFileClosedDate.IsCompleted)
+                    {
+                        @Html.ActionLink("Add", "Index", "KeyDates", new { command = KeyDatesStatusEnum.NotificationComplete }, null)
                     }
                 }
             </td>
@@ -145,10 +139,9 @@
                 }
             </td>
             <td>
-                @if (Model.NotificationCompleteDate.IsCompleted)
+                @if (Model.NotificationCompleteDate.IsCompleted && !Model.NotificationTransmittedDate.IsCompleted && !Model.NotificationFileClosedDate.IsCompleted)
                 {
-                    @(Model.NotificationTransmittedDate.IsCompleted ? Html.Raw(string.Empty)
-                                  : Html.ActionLink("Add", "Index", "KeyDates", new { command = KeyDatesStatusEnum.NotificationTransmitted }, null))
+                    @Html.ActionLink("Add", "Index", "KeyDates", new { command = KeyDatesStatusEnum.NotificationTransmitted }, null)
                 }
             </td>
 
@@ -167,10 +160,9 @@
                 }
             </td>
             <td>
-                @if (Model.NotificationTransmittedDate.IsCompleted)
+                @if (Model.NotificationTransmittedDate.IsCompleted && !Model.NotificationAcknowledgedDate.IsCompleted && !Model.NotificationFileClosedDate.IsCompleted)
                 {
-                    @(Model.NotificationAcknowledgedDate.IsCompleted ? Html.Raw(string.Empty)
-                                  : Html.ActionLink("Add", "Index", "KeyDates", new { command = KeyDatesStatusEnum.NotificationAcknowledged }, null))
+                    @Html.ActionLink("Add", "Index", "KeyDates", new { command = KeyDatesStatusEnum.NotificationAcknowledged }, null)
                 }
             </td>
 
@@ -189,7 +181,7 @@
                 }
             </td>
             <td>
-                @if (Model.ShowAssessmentDecisionLink && Model.NotificationAcknowledgedDate.IsCompleted && !Model.AssessmentDecisions.Any())
+                @if (Model.ShowAssessmentDecisionLink && Model.NotificationAcknowledgedDate.IsCompleted && !Model.AssessmentDecisions.Any() && !Model.NotificationFileClosedDate.IsCompleted)
                 {
                     @Html.ActionLink("Go to assessment decision", "Index", "Decision");
                 }
@@ -235,6 +227,27 @@
                 </td>
             </tr>
         }
+
+        <tr>
+            <td>File closed on</td>
+            <td>
+                @if (Model.NotificationFileClosedDate.IsCompleted)
+                {
+                    @Html.Gds().DisplayDateFor(m => m.NotificationFileClosedDate.AsDateTime().GetValueOrDefault())
+                }
+                else
+                {
+                    @nullMarker
+                }
+            </td>
+            <td>
+                @if (!Model.NotificationFileClosedDate.IsCompleted && Model.NotificationReceivedDate.IsCompleted)
+                {
+                    @Html.ActionLink("Add", "Index", "KeyDates", new { command = KeyDatesStatusEnum.FileClosed }, null)
+                }
+            </td>
+
+        </tr>
 
     </table>
 </div>

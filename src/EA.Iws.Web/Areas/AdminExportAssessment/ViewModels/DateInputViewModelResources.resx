@@ -144,6 +144,12 @@
   <data name="CompleteOtherDatesRequired" xml:space="preserve">
     <value>You need to enter previous key dates before you can continue</value>
   </data>
+  <data name="FileClosedInFuture" xml:space="preserve">
+    <value>The 'file closed' date cannot be in the future. Please enter a different date.</value>
+  </data>
+  <data name="FileClosedNotBefore" xml:space="preserve">
+    <value>The 'file closed' date cannot be before the previous key dates. Please enter a different date.</value>
+  </data>
   <data name="NameOfOfficer" xml:space="preserve">
     <value>Please enter the name of the officer</value>
   </data>

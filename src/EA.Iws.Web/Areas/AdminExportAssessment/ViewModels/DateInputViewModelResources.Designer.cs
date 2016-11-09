@@ -142,6 +142,24 @@ namespace EA.Iws.Web.Areas.AdminExportAssessment.ViewModels {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The &apos;file closed&apos; date cannot be in the future. Please enter a different date..
+        /// </summary>
+        public static string FileClosedInFuture {
+            get {
+                return ResourceManager.GetString("FileClosedInFuture", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The &apos;file closed&apos; date cannot be before the previous key dates. Please enter a different date..
+        /// </summary>
+        public static string FileClosedNotBefore {
+            get {
+                return ResourceManager.GetString("FileClosedNotBefore", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Please enter the name of the officer.
         /// </summary>
         public static string NameOfOfficer {
