@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Data.Entity;
+    using System.Data.SqlClient;
     using System.Linq;
     using System.Threading.Tasks;
     using Domain.ImportMovement;
@@ -66,6 +67,18 @@
             var movement = await context.ImportMovements.Where(m => m.NotificationId == importNotificationId).OrderByDescending(m => m.ActualShipmentDate).ThenByDescending(m => m.Number).FirstOrDefaultAsync();
 
             return movement == null ? 0 : movement.Number;
+        }
+
+        public async Task<bool> DeleteById(Guid movementId)
+        {
+            var rowsAffected = await context.Database.ExecuteSqlCommandAsync(
+                @"DELETE from [ImportNotification].[MovementOperationReceipt] WHERE MovementId = @movementId
+                  DELETE from [ImportNotification].[MovementReceipt] WHERE MovementId = @movementId
+                  DELETE from [ImportNotification].[MovementRejection] WHERE MovementId = @movementId
+                  DELETE from [ImportNotification].[Movement] WHERE Id = @movementId",
+                new SqlParameter("@movementId", movementId));
+
+            return rowsAffected > 0;
         }
     }
 }

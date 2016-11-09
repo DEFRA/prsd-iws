@@ -17,5 +17,7 @@
         void Add(ImportMovement movement);
 
         Task<int> GetLatestMovementNumber(Guid notificationId);
+
+        Task<bool> DeleteById(Guid movementId);
     }
 }
