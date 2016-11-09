@@ -1,0 +1,25 @@
+﻿@using Resource = EA.Iws.Web.Areas.AdminImportNotificationMovements.Views.Delete.IndexResources
+@model EA.Iws.Web.Areas.AdminImportNotificationMovements.ViewModels.Delete.IndexViewModel
+
+@{
+    ViewBag.Title = Resource.Title;
+}
+
+<div class="grid-row">
+    <div class="column-two-thirds">
+        <h1 class="heading-large">@Resource.MainHeading</h1>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            @Html.Gds().ValidationSummary()
+
+            <div class="form-group @Html.Gds().FormGroupClass(m => m.Number)">
+                @Html.Gds().LabelFor(m => m.Number)
+                @Html.Gds().ValidationMessageFor(m => m.Number)
+                @Html.Gds().TextBoxFor(m => m.Number, new { type = "number", min = 1 })
+                &nbsp;&nbsp;&nbsp;<button type="submit" class="button">@Resource.ButtonText</button>
+            </div>
+        }
+    </div>
+</div>
