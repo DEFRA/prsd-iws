@@ -245,6 +245,16 @@
                 {
                     @Html.ActionLink("Add", "Index", "KeyDates", new { command = KeyDatesStatusEnum.FileClosed }, null)
                 }
+                else if (Model.NotificationFileClosedDate.IsCompleted && string.IsNullOrWhiteSpace(Model.ArchiveReference))
+                {
+                    @Html.ActionLink("Add archive reference", "Index", "KeyDates", new { command = KeyDatesStatusEnum.ArchiveReference }, null)
+                }
+                else if (!string.IsNullOrWhiteSpace(Model.ArchiveReference))
+                {
+                    @Model.ArchiveReference
+                    @:&nbsp;
+                    @Html.ActionLink("Update", "Index", "KeyDates", new { command = KeyDatesStatusEnum.ArchiveReference }, null)
+                }
             </td>
 
         </tr>
@@ -281,6 +291,9 @@
         @Html.HiddenFor(m => m.DecisionDate.Day)
         @Html.HiddenFor(m => m.DecisionDate.Month)
         @Html.HiddenFor(m => m.DecisionDate.Year)
+        @Html.HiddenFor(m => m.NotificationFileClosedDate.Day)
+        @Html.HiddenFor(m => m.NotificationFileClosedDate.Month)
+        @Html.HiddenFor(m => m.NotificationFileClosedDate.Year)
 
         for (int i = 0; i < Model.FinancialGuaranteeDecisions.Count(); i++)
         {
@@ -303,14 +316,28 @@
         @Html.AntiForgeryToken()
 
         <br /><br />
-        <fieldset>
-            <div class="form-group @Html.Gds().FormGroupClass(m => m.NewDate) @Html.Gds().FormGroupClass(m => m.NewDate.Day) @Html.Gds().FormGroupClass(m => m.NewDate.Month) @Html.Gds().FormGroupClass(m => m.NewDate.Year)">
-                @EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(@Model.Command) date<br>
-                @Html.Gds().ValidationMessageFor(m => m.NewDate)
-                @Html.Gds().HintParagraph("For example, 31 3 2015")
-                @Html.EditorFor(m => m.NewDate)
-            </div>
-        </fieldset>
+
+        if (Model.Command == KeyDatesStatusEnum.ArchiveReference)
+        {
+            <fieldset>
+                <div class="form-group @Html.Gds().FormGroupClass(m => m.ArchiveReference)">
+                    @Html.Gds().LabelFor(m => m.ArchiveReference, false)
+                    @Html.Gds().ValidationMessageFor(m => m.ArchiveReference)
+                    @Html.Gds().TextBoxFor(m => m.ArchiveReference, new { @Maxlength = 100 })
+                </div>
+            </fieldset>
+        }
+        else
+        {
+            <fieldset>
+                <div class="form-group @Html.Gds().FormGroupClass(m => m.NewDate) @Html.Gds().FormGroupClass(m => m.NewDate.Day) @Html.Gds().FormGroupClass(m => m.NewDate.Month) @Html.Gds().FormGroupClass(m => m.NewDate.Year)">
+                    @EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(@Model.Command) date<br>
+                    @Html.Gds().ValidationMessageFor(m => m.NewDate)
+                    @Html.Gds().HintParagraph("For example, 31 3 2015")
+                    @Html.EditorFor(m => m.NewDate)
+                </div>
+            </fieldset>
+        }
 
         if (Model.Command == KeyDatesStatusEnum.AssessmentCommenced)
         {
@@ -333,8 +360,6 @@
             <input type="submit" class="button" value="Submit date" />
         </div>
     }
-
-
 
     @section scripts{
         <script>
@@ -383,24 +408,24 @@ else
 {
     <br />
     <p>To make changes to this notification you need to go to the external overview.</p>
-    
-    @Html.ActionLink("Go to external notification overview", 
-        "Index", 
-        "Home", 
-        new { area = "NotificationApplication", id = Model.NotificationId }, 
+
+    @Html.ActionLink("Go to external notification overview",
+        "Index",
+        "Home",
+        new { area = "NotificationApplication", id = Model.NotificationId },
         null)
 }
 
 @if (Model.CurrentStatus == NotificationStatus.Reassessment)
 {
-    <br/>
+    <br />
     <div class="form-group">
         @using (Html.BeginForm("AcceptChanges", "KeyDates", FormMethod.Post, new { id = Model.NotificationId }))
         {
             @Html.HiddenFor(m => m.NotificationId)
             @Html.AntiForgeryToken()
 
-            <input type="submit" class="button" value="Accept changes" data-track = "element" data-category = "Export notification assessment" data-action = "Accept changes"/>
+            <input type="submit" class="button" value="Accept changes" data-track="element" data-category="Export notification assessment" data-action="Accept changes" />
         }
 
         @using (Html.BeginForm("RejectChanges", "KeyDates", FormMethod.Post, new { id = Model.NotificationId }))
@@ -409,7 +434,7 @@ else
 
             @Html.AntiForgeryToken()
 
-            <input type="submit" class="button" value="Reject changes" data-track = "element" data-category = "Export notification assessment" data-action = "Reject changes"/>
+            <input type="submit" class="button" value="Reject changes" data-track="element" data-category="Export notification assessment" data-action="Reject changes" />
         }
     </div>
 }

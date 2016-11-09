@@ -26,6 +26,9 @@
         NotificationDecisionDateEntered = 7,
 
         [Display(Name = "File closed on")]
-        FileClosed = 8
+        FileClosed = 8,
+
+        [Display(Name = "Archive reference")]
+        ArchiveReference = 9
     }
 }

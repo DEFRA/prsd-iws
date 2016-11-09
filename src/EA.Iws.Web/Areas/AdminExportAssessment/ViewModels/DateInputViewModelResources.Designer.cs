@@ -88,6 +88,24 @@ namespace EA.Iws.Web.Areas.AdminExportAssessment.ViewModels {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The archive reference cannot be more than 100 characters in length.
+        /// </summary>
+        public static string ArchiveReferenceLength {
+            get {
+                return ResourceManager.GetString("ArchiveReferenceLength", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please enter the archive reference.
+        /// </summary>
+        public static string ArchiveReferenceRequired {
+            get {
+                return ResourceManager.GetString("ArchiveReferenceRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The &apos;assessment started&apos; date cannot be in the future. Please enter a different date..
         /// </summary>
         public static string CommencedInFuture {

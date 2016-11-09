@@ -21,7 +21,8 @@
                 TransmittedDate = source.TransmittedDate,
                 AcknowledgedDate = source.AcknowledgedDate,
                 DecisionRequiredDate = source.DecisionRequiredDate,
-                FileClosedDate = source.FileClosedDate
+                FileClosedDate = source.FileClosedDate,
+                ArchiveReference = source.ArchiveReference
             };
         }
     }
