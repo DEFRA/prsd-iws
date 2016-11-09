@@ -61,7 +61,7 @@ namespace EA.Iws.Web.Areas.AdminExportNotificationMovements.Views.Delete {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Cancel.
+        ///   Looks up a localized string similar to No I don&apos;t want to delete this shipment.
         /// </summary>
         public static string CancelButtonText {
             get {
