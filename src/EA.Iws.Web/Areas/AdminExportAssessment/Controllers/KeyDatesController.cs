@@ -88,6 +88,10 @@
             {
                 await FileClosed(model);
             }
+            else if (model.Command == KeyDatesStatusEnum.ArchiveReference)
+            {
+                await SetArchiveReference(model);
+            }
             else
             {
                 throw new InvalidOperationException();
@@ -169,6 +173,11 @@
                 model.NewDate.AsDateTime().GetValueOrDefault());
 
             await mediator.SendAsync(fileClosed);
+        }
+
+        private async Task SetArchiveReference(DateInputViewModel model)
+        {
+            await mediator.SendAsync(new SetArchiveReference(model.NotificationId, model.ArchiveReference));
         }
 
         private void AddRelevantDateToNewDate(DateInputViewModel model)

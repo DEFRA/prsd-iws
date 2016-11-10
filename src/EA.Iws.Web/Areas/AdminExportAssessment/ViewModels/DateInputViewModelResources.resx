@@ -126,6 +126,12 @@
   <data name="AcknowledgedOtherDatesRequired" xml:space="preserve">
     <value>You need to enter previous key dates before you can continue</value>
   </data>
+  <data name="ArchiveReferenceLength" xml:space="preserve">
+    <value>The archive reference cannot be more than 100 characters in length</value>
+  </data>
+  <data name="ArchiveReferenceRequired" xml:space="preserve">
+    <value>Please enter the archive reference</value>
+  </data>
   <data name="CommencedInFuture" xml:space="preserve">
     <value>The 'assessment started' date cannot be in the future. Please enter a different date.</value>
   </data>

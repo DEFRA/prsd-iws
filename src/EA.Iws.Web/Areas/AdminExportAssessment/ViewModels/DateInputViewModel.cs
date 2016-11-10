@@ -42,6 +42,7 @@
             NameOfOfficer = dates.NameOfOfficer;
             AssessmentDecisions = new List<NotificationAssessmentDecision>();
             NotificationFileClosedDate = new OptionalDateInputViewModel(dates.FileClosedDate, true);
+            ArchiveReference = dates.ArchiveReference;
         }
 
         public Guid NotificationId { get; set; }
@@ -76,6 +77,9 @@
         [Display(Name = "File closed on")]
         public OptionalDateInputViewModel NotificationFileClosedDate { get; set; }
 
+        [Display(Name = "Archive reference")]
+        public string ArchiveReference { get; set; }
+
         [Display(Name = "Name of officer")]
         public string NameOfOfficer { get; set; }
 
@@ -100,7 +104,7 @@
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
-            if (!NewDate.IsCompleted)
+            if (Command != KeyDatesStatusEnum.ArchiveReference && !NewDate.IsCompleted)
             {
                 yield return new ValidationResult("Please enter a valid date", new[] {"NewDate"});
             }
@@ -221,6 +225,18 @@
                 if (NotificationReceivedDate != null && NewDate.AsDateTime() < NotificationReceivedDate.AsDateTime())
                 {
                     yield return new ValidationResult(DateInputViewModelResources.FileClosedNotBefore, new[] { "NewDate" });
+                }
+            }
+
+            if (Command == KeyDatesStatusEnum.ArchiveReference)
+            {
+                if (string.IsNullOrWhiteSpace(ArchiveReference))
+                {
+                    yield return new ValidationResult(DateInputViewModelResources.ArchiveReferenceRequired, new[] { "ArchiveReference" });
+                }
+                else if (ArchiveReference.Length > 100)
+                {
+                    yield return new ValidationResult(DateInputViewModelResources.ArchiveReferenceLength, new[] { "ArchiveReference" });
                 }
             }
         }

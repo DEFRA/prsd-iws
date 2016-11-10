@@ -27,5 +27,7 @@
         public DateTime? DecisionRequiredDate { get; set; }
 
         public DateTime? FileClosedDate { get; set; }
+
+        public string ArchiveReference { get; set; }
     }
 }
