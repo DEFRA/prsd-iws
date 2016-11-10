@@ -1098,6 +1098,11 @@
       <DependentUpon>IndexResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Areas\AdminExportNotificationMovements\Controllers\DeleteController.cs" />
+    <Compile Include="Areas\AdminExportNotificationMovements\Controllers\DeleteControllerResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DeleteControllerResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Areas\AdminExportNotificationMovements\ViewModels\Delete\ConfirmViewModel.cs" />
     <Compile Include="Areas\AdminExportNotificationMovements\ViewModels\Delete\DeleteViewModel.cs" />
     <Compile Include="Areas\AdminExportNotificationMovements\ViewModels\Delete\IndexViewModel.cs" />
@@ -1273,6 +1278,11 @@
     <Compile Include="Areas\AdminImportNotificationMovements\Controllers\CancelController.cs" />
     <Compile Include="Areas\AdminImportNotificationMovements\Controllers\CaptureController.cs" />
     <Compile Include="Areas\AdminImportNotificationMovements\Controllers\DeleteController.cs" />
+    <Compile Include="Areas\AdminImportNotificationMovements\Controllers\DeleteControllerResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DeleteControllerResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Areas\AdminImportNotificationMovements\Controllers\HomeController.cs" />
     <Compile Include="Areas\AdminImportNotificationMovements\ViewModels\Cancel\CancellableMovementsViewModel.cs" />
     <Compile Include="Areas\AdminImportNotificationMovements\ViewModels\Cancel\CancelResources.Designer.cs">
@@ -2946,6 +2956,10 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Areas\AdminExportNotificationMovements\Controllers\DeleteControllerResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>DeleteControllerResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Areas\AdminExportNotificationMovements\ViewModels\Delete\IndexViewModelResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>IndexViewModelResources.Designer.cs</LastGenOutput>
@@ -3061,6 +3075,10 @@
     <EmbeddedResource Include="Areas\AdminImportMovement\Views\Shared\EditorTemplates\RecoveryResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>RecoveryResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\AdminImportNotificationMovements\Controllers\DeleteControllerResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>DeleteControllerResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\AdminImportNotificationMovements\ViewModels\Cancel\CancelResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

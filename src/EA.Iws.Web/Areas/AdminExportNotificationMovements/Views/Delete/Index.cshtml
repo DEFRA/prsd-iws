@@ -13,6 +13,7 @@
         {
             @Html.AntiForgeryToken()
             @Html.Gds().ValidationSummary()
+            @Html.HiddenFor(m => m.NotificationId)
 
             <div class="form-group @Html.Gds().FormGroupClass(m => m.Number)">
                 @Html.Gds().LabelFor(m => m.Number)
@@ -21,5 +22,7 @@
                 &nbsp;&nbsp;&nbsp;<button type="submit" class="button">@Resource.ButtonText</button>
             </div>
         }
+
+        @Html.ActionLink("Shipment summary", "Index", "Home", new { area = "AdminExportNotificationMovements", Model.NotificationId }, null)
     </div>
 </div>
