@@ -24,9 +24,9 @@
         [HttpGet]
         public ActionResult Index(Guid id)
         {
-            var model = new IndexViewModel();
+            var model = new IndexViewModel { NotificationId = id };
 
-            return View();
+            return View(model);
         }
 
         [HttpPost]
