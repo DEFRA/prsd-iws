@@ -36,7 +36,8 @@
             </ul>
         </li>
 
-        @if (Model.Data.Status == NotificationStatus.Consented || Model.Data.Status == NotificationStatus.ConsentWithdrawn)
+        @if (Model.Data.Status == NotificationStatus.Consented || Model.Data.Status == NotificationStatus.ConsentWithdrawn
+             || Model.Data.Status == NotificationStatus.FileClosed)
         {
             <li class="@GetClassForSection(ExportNavigationSection.Shipments, "active")">
                 <h3 class="@GetClassForSection(ExportNavigationSection.Shipments, "current")">
