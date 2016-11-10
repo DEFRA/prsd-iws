@@ -23,6 +23,8 @@
 
         public string ConsentWithdrawnReasons { get; internal set; }
 
+        public DateTime? FileClosedDate { get; internal set; }
+
         internal ImportNotificationDates()
         {
         }

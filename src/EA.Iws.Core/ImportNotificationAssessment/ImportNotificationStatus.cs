@@ -25,6 +25,8 @@
         [Display(Name = "Objected")]
         Objected = 11,
         [Display(Name = "Withdrawn")]
-        Withdrawn = 12
+        Withdrawn = 12,
+        [Display(Name = "File closed")]
+        FileClosed = 13
     }
 }
