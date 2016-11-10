@@ -46,7 +46,8 @@
                 return RedirectToAction("Delete");
             }
 
-            return RedirectToAction("Index");
+            ModelState.AddModelError("Number", string.Format(DeleteControllerResources.NotExistError, model.Number));
+            return View(model);
         }
 
         [HttpGet]
