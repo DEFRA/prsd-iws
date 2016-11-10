@@ -1,6 +1,5 @@
 ﻿namespace EA.Iws.RequestHandlers.ImportNotificationAssessment
 {
-    using System;
     using System.Threading.Tasks;
     using Core.ImportNotificationAssessment;
     using Domain.ImportNotification;
@@ -34,27 +33,18 @@
 
             return new KeyDatesData
             {
-                NotificationReceived = DateTimeOffsetAsDateTime(assessment.Dates.NotificationReceivedDate),
-                PaymentReceived = DateTimeOffsetAsDateTime(assessment.Dates.PaymentReceivedDate),
+                NotificationReceived = assessment.Dates.NotificationReceivedDate,
+                PaymentReceived = assessment.Dates.PaymentReceivedDate,
                 IsPaymentComplete = assessment.Dates.PaymentReceivedDate.HasValue &&
                 await transactionCalculator.PaymentIsNowFullyReceived(message.ImportNotificationId, 0),
                 NameOfOfficer = assessment.Dates.NameOfOfficer,
-                AssessmentStarted = DateTimeOffsetAsDateTime(assessment.Dates.AssessmentStartedDate),
-                NotificationCompletedDate = DateTimeOffsetAsDateTime(assessment.Dates.NotificationCompletedDate),
-                AcknowlegedDate = DateTimeOffsetAsDateTime(assessment.Dates.AcknowledgedDate),
+                AssessmentStarted = assessment.Dates.AssessmentStartedDate,
+                NotificationCompletedDate = assessment.Dates.NotificationCompletedDate,
+                AcknowlegedDate = assessment.Dates.AcknowledgedDate,
                 DecisionRequiredByDate = await decisionRequiredBy.GetDecisionRequiredByDate(assessment),
-                IsInterim = interimStatus.IsInterim
+                IsInterim = interimStatus.IsInterim,
+                FileClosedDate = assessment.Dates.FileClosedDate
             };
-        }
-
-        private DateTime? DateTimeOffsetAsDateTime(DateTimeOffset? dateTimeOffset)
-        {
-            if (dateTimeOffset.HasValue)
-            {
-                return dateTimeOffset.Value.DateTime;
-            }
-
-            return null;
         }
     }
 }

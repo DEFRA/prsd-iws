@@ -11,6 +11,9 @@
         NotificationComplete = 2,
 
         [Display(Name = "Acknowledged on")]
-        NotificationAcknowledged = 3
+        NotificationAcknowledged = 3,
+
+        [Display(Name = "File closed")]
+        FileClosed = 4
     }
 }

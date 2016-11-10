@@ -55,6 +55,9 @@
                 case KeyDatesCommand.NotificationAcknowledged:
                     await mediator.SendAsync(new SetAcknowlegedDate(id, model.NewDate.AsDateTime().Value));
                     break;
+                case KeyDatesCommand.FileClosed:
+                    await mediator.SendAsync(new SetNotificationFileClosedDate(id, model.NewDate.AsDateTime().Value));
+                    break;
                 default:
                     break;
             }

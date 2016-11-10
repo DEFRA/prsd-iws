@@ -136,6 +136,7 @@
     <Compile Include="ImportNotificationAssessment\SetAssessmentStartedDate.cs" />
     <Compile Include="ImportNotificationAssessment\GetKeyDates.cs" />
     <Compile Include="ImportNotificationAssessment\SetImportNotificationConsultation.cs" />
+    <Compile Include="ImportNotificationAssessment\SetNotificationFileClosedDate.cs" />
     <Compile Include="ImportNotificationAssessment\SetNotificationCompletedDate.cs" />
     <Compile Include="ImportNotificationAssessment\SetReceivedDate.cs" />
     <Compile Include="ImportNotificationAssessment\Transactions\AddNotificationPayment.cs" />

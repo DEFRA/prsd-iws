@@ -186,5 +186,33 @@
         {
             ObjectInstantiator<ImportNotificationAssessment>.SetProperty(x => x.Status, status, assessment);
         }
+
+        [Theory]
+        [InlineData(ImportNotificationStatus.NotificationReceived)]
+        [InlineData(ImportNotificationStatus.AwaitingPayment)]
+        [InlineData(ImportNotificationStatus.AwaitingAssessment)]
+        [InlineData(ImportNotificationStatus.InAssessment)]
+        [InlineData(ImportNotificationStatus.ReadyToAcknowledge)]
+        [InlineData(ImportNotificationStatus.DecisionRequiredBy)]
+        [InlineData(ImportNotificationStatus.Consented)]
+        [InlineData(ImportNotificationStatus.ConsentWithdrawn)]
+        [InlineData(ImportNotificationStatus.Objected)]
+        [InlineData(ImportNotificationStatus.Withdrawn)]
+        public void CanMarkFileClosedAtAnyTime(ImportNotificationStatus currentStatus)
+        {
+            SetNotificationAssessmentStatus(currentStatus);
+            assessment.MarkFileClosed(AnyDate);
+
+            Assert.Equal(ImportNotificationStatus.FileClosed, assessment.Status);
+        }
+
+        [Fact]
+        public void MarkFileClosedSetsDate()
+        {
+            SetNotificationAssessmentStatus(ImportNotificationStatus.Consented);
+            assessment.MarkFileClosed(AnyDate);
+
+            Assert.Equal(assessment.Dates.FileClosedDate, AnyDate);
+        }
     }
 }

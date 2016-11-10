@@ -2,8 +2,8 @@
 {
     using System;
     using System.Collections.Generic;
+    using Core.ImportNotificationAssessment;
     using Core.ImportNotificationMovements;
-    using Core.NotificationAssessment;
     using Core.Shared;
     using Prsd.Core.Helpers;
 
@@ -11,9 +11,9 @@
     {
         public Guid NotificationId { get; set; }
 
-        public string NotificationNumber { get; set; }
-
         public NotificationType NotificationType { get; set; }
+
+        public ImportNotificationStatus NotificationStatus { get; set; }
 
         public int IntendedShipments { get; set; }
 
@@ -36,13 +36,13 @@
         public MovementSummaryViewModel(Summary data)
         {
             NotificationId = data.Id;
-            NotificationNumber = data.NotificationNumber;
-            NotificationType = data.NotificationType;
             IntendedShipments = data.IntendedShipments;
             UsedShipments = data.UsedShipments;
             QuantityReceivedTotal = data.QuantityReceivedTotal.ToString("G29") + " " + EnumHelper.GetDisplayName(data.DisplayUnit);
             QuantityRemainingTotal = data.QuantityRemainingTotal.ToString("G29") + " " + EnumHelper.GetDisplayName(data.DisplayUnit);
             TableData = new List<MovementsSummaryTableViewModel>();
+            NotificationStatus = data.NotificationStatus;
+            NotificationType = data.NotificationType;
         }
 
         public bool ShowShipmentOptions()

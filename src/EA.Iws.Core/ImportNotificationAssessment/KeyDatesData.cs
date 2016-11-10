@@ -21,5 +21,7 @@
         public DateTime? DecisionRequiredByDate { get; set; }
 
         public bool IsInterim { get; set; }
+
+        public DateTime? FileClosedDate { get; set; }
     }
 }

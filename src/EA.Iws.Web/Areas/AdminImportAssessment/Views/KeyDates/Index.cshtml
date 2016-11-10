@@ -92,10 +92,9 @@
                 }
             </td>
             <td>
-                @if (Model.PaymentIsComplete)
+                @if (Model.PaymentIsComplete && !Model.AssessmentStartedDate.IsCompleted)
                 {
-                    @(Model.AssessmentStartedDate.IsCompleted ? Html.Raw(string.Empty)
-                                  : Html.ActionLink("Add", "Index", "KeyDates", new { command = KeyDatesCommand.BeginAssessment }, null))
+                    @Html.ActionLink("Add", "Index", "KeyDates", new { command = KeyDatesCommand.BeginAssessment }, null)
                 }
             </td>
 
@@ -114,10 +113,9 @@
                 }
             </td>
             <td>
-                @if (Model.AssessmentStartedDate.IsCompleted)
+                @if (Model.AssessmentStartedDate.IsCompleted && !Model.NotificationCompleteDate.IsCompleted)
                 {
-                    @(Model.NotificationCompleteDate.IsCompleted ? Html.Raw(string.Empty)
-                                  : Html.ActionLink("Add", "Index", "KeyDates", new { command = KeyDatesCommand.NotificationComplete }, null))
+                    @Html.ActionLink("Add", "Index", "KeyDates", new { command = KeyDatesCommand.NotificationComplete }, null)
                 }
             </td>
         </tr>
@@ -135,10 +133,9 @@
                 }
             </td>
             <td>
-                @if (Model.NotificationCompleteDate.IsCompleted)
+                @if (Model.NotificationCompleteDate.IsCompleted && !Model.NotificationAcknowledgedDate.IsCompleted)
                 {
-                    @(Model.NotificationAcknowledgedDate.IsCompleted ? Html.Raw(string.Empty)
-                                  : Html.ActionLink("Add", "Index", "KeyDates", new { command = KeyDatesCommand.NotificationAcknowledged }, null))
+                    @Html.ActionLink("Add", "Index", "KeyDates", new { command = KeyDatesCommand.NotificationAcknowledged }, null)
                 }
             </td>
 
@@ -178,6 +175,27 @@
             </tr>
         }
 
+        <tr>
+            <td>File closed on</td>
+            <td>
+                @if (Model.NotificationFileClosedDate.IsCompleted)
+                {
+                    @Html.Gds().DisplayDateFor(m => m.NotificationFileClosedDate.AsDateTime().GetValueOrDefault())
+                }
+                else
+                {
+                    @nullMarker
+                }
+            </td>
+            <td>
+                @if (!Model.NotificationFileClosedDate.IsCompleted && Model.NotificationReceivedDate.IsCompleted)
+                {
+                    @Html.ActionLink("Add", "Index", "KeyDates", new { command = KeyDatesCommand.FileClosed }, null)
+                }
+            </td>
+
+        </tr>
+
     </table>
 </div>
 
@@ -203,6 +221,9 @@
         @Html.HiddenFor(m => m.DecisionDate.Day)
         @Html.HiddenFor(m => m.DecisionDate.Month)
         @Html.HiddenFor(m => m.DecisionDate.Year)
+        @Html.HiddenFor(m => m.NotificationFileClosedDate.Day)
+        @Html.HiddenFor(m => m.NotificationFileClosedDate.Month)
+        @Html.HiddenFor(m => m.NotificationFileClosedDate.Year)
 
         @Html.AntiForgeryToken()
 

@@ -188,6 +188,7 @@
     <Compile Include="ImportNotificationAssessment\SetAssessmentStartedDateHandler.cs" />
     <Compile Include="ImportNotificationAssessment\SetImportNotificationConsultationHandler.cs" />
     <Compile Include="ImportNotificationAssessment\SetNotificationCompletedDateHandler.cs" />
+    <Compile Include="ImportNotificationAssessment\SetNotificationFileClosedDateHandler.cs" />
     <Compile Include="ImportNotificationAssessment\SetReceivedDateHandler.cs" />
     <Compile Include="ImportNotificationAssessment\Transactions\AddNotificationPaymentHandler.cs" />
     <Compile Include="ImportNotificationAssessment\Transactions\AddNotificationRefundHandler.cs" />
