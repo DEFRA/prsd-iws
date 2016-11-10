@@ -27,6 +27,14 @@
         {
             await authorization.EnsureAccessAsync(importNotificationId);
 
+            var status =
+                (await
+                    context.ImportNotificationAssessments.SingleAsync(
+                        n => n.NotificationApplicationId == importNotificationId)).Status;
+
+            var notificationType =
+                (await context.ImportNotifications.SingleAsync(n => n.Id == importNotificationId)).NotificationType;
+
             var totalMovements = await context.ImportMovements.Where(m => m.NotificationId == importNotificationId).CountAsync();
 
             var shipment = await context.Shipments.Where(s => s.ImportNotificationId == importNotificationId).SingleAsync();
@@ -40,7 +48,9 @@
                 DisplayUnit = shipment.Quantity.Units,
                 QuantityReceivedTotal = received.Quantity,
                 QuantityRemainingTotal = shipment.Quantity.Quantity - received.Quantity,
-                Id = importNotificationId
+                Id = importNotificationId,
+                NotificationStatus = status,
+                NotificationType = notificationType
             };
         }
 
