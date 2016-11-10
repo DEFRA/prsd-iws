@@ -170,6 +170,33 @@ namespace EA.Iws.Web.Areas.AdminImportAssessment.ViewModels.KeyDates {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The &apos;file closed&apos; date cannot be in the future. Please enter a different date..
+        /// </summary>
+        public static string FileClosedInFuture {
+            get {
+                return ResourceManager.GetString("FileClosedInFuture", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The &apos;file closed&apos; date cannot be before the &apos;notification received&apos; date. Please enter a different date..
+        /// </summary>
+        public static string FileClosedNotBefore {
+            get {
+                return ResourceManager.GetString("FileClosedNotBefore", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You need to enter a &apos;notification received&apos; date before you can continue.
+        /// </summary>
+        public static string FileClosedOtherDatesRequired {
+            get {
+                return ResourceManager.GetString("FileClosedOtherDatesRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Name of officer.
         /// </summary>
         public static string NameOfOfficer {
@@ -211,6 +238,15 @@ namespace EA.Iws.Web.Areas.AdminImportAssessment.ViewModels.KeyDates {
         public static string NotificationCompletedDate {
             get {
                 return ResourceManager.GetString("NotificationCompletedDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to File closed on.
+        /// </summary>
+        public static string NotificationFileClosedDate {
+            get {
+                return ResourceManager.GetString("NotificationFileClosedDate", resourceCulture);
             }
         }
         

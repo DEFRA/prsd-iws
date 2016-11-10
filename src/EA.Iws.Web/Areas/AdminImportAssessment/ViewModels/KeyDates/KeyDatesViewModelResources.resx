@@ -153,6 +153,15 @@
   <data name="DecisionDate" xml:space="preserve">
     <value>Decision required by</value>
   </data>
+  <data name="FileClosedInFuture" xml:space="preserve">
+    <value>The 'file closed' date cannot be in the future. Please enter a different date.</value>
+  </data>
+  <data name="FileClosedNotBefore" xml:space="preserve">
+    <value>The 'file closed' date cannot be before the 'notification received' date. Please enter a different date.</value>
+  </data>
+  <data name="FileClosedOtherDatesRequired" xml:space="preserve">
+    <value>You need to enter a 'notification received' date before you can continue</value>
+  </data>
   <data name="NameOfOfficer" xml:space="preserve">
     <value>Name of officer</value>
   </data>
@@ -167,6 +176,9 @@
   </data>
   <data name="NotificationCompletedDate" xml:space="preserve">
     <value>Date completed</value>
+  </data>
+  <data name="NotificationFileClosedDate" xml:space="preserve">
+    <value>File closed on</value>
   </data>
   <data name="NotificationReceivedDate" xml:space="preserve">
     <value>Notification received</value>

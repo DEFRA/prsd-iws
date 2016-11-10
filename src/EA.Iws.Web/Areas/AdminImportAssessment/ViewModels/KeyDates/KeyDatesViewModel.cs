@@ -19,6 +19,7 @@
             DecisionDate = new OptionalDateInputViewModel(true);
             NewDate = new OptionalDateInputViewModel(true);
             Decisions = new List<NotificationAssessmentDecision>();
+            NotificationFileClosedDate = new OptionalDateInputViewModel(true);
         }
 
         public KeyDatesViewModel(KeyDatesData keyDates)
@@ -34,6 +35,7 @@
             NewDate = new OptionalDateInputViewModel(true);
             Decisions = new List<NotificationAssessmentDecision>();
             IsInterim = keyDates.IsInterim;
+            NotificationFileClosedDate = new OptionalDateInputViewModel(keyDates.FileClosedDate, true);
         }
 
         public Guid NotificationId { get; set; }
@@ -62,6 +64,9 @@
 
         [Display(Name = "NameOfOfficer", ResourceType = typeof(KeyDatesViewModelResources))]
         public string NameOfOfficer { get; set; }
+
+        [Display(Name = "NotificationFileClosedDate", ResourceType = typeof(KeyDatesViewModelResources))]
+        public OptionalDateInputViewModel NotificationFileClosedDate { get; set; }
 
         public OptionalDateInputViewModel NewDate { get; set; }
 
@@ -141,6 +146,27 @@
                 if ((NotificationReceivedDate != null && NewDate.AsDateTime() < NotificationReceivedDate.AsDateTime()))
                 {
                     yield return new ValidationResult(KeyDatesViewModelResources.AcknowledgedNotBeforeOthers, new[] { "NewDate" });
+                }
+            }
+
+            if (Command == KeyDatesCommand.FileClosed)
+            {
+                if (NewDate.AsDateTime() > SystemTime.UtcNow)
+                {
+                    yield return
+                        new ValidationResult(KeyDatesViewModelResources.FileClosedInFuture, new[] { "NewDate" });
+                }
+
+                if (NotificationReceivedDate == null)
+                {
+                    yield return
+                        new ValidationResult(KeyDatesViewModelResources.FileClosedOtherDatesRequired, new[] { "NewDate" });
+                }
+
+                if (NotificationReceivedDate != null && NewDate.AsDateTime() < NotificationReceivedDate.AsDateTime())
+                {
+                    yield return
+                        new ValidationResult(KeyDatesViewModelResources.FileClosedNotBefore, new[] { "NewDate" });
                 }
             }
         }

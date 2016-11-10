@@ -169,7 +169,7 @@ namespace EA.Iws.Web.Areas.AdminExportAssessment.ViewModels {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The &apos;file closed&apos; date cannot be before the previous key dates. Please enter a different date..
+        ///   Looks up a localized string similar to The &apos;file closed&apos; date cannot be before the &apos;notification received&apos; date. Please enter a different date..
         /// </summary>
         public static string FileClosedNotBefore {
             get {
