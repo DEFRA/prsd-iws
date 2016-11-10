@@ -40,14 +40,14 @@
 
             var movementId = await mediator.SendAsync(new GetMovementIdIfExists(id, model.Number.Value));
 
-            if (movementId.HasValue)
+            if (!movementId.HasValue)
             {
-                TempData[MovementNumberKey] = model.Number;
-                return RedirectToAction("Delete");
+                ModelState.AddModelError("Number", string.Format(DeleteControllerResources.NotExistError, model.Number));
+                return View(model);
             }
 
-            ModelState.AddModelError("Number", string.Format(DeleteControllerResources.NotExistError, model.Number));
-            return View(model);
+            TempData[MovementNumberKey] = model.Number;
+            return RedirectToAction("Delete");
         }
 
         [HttpGet]
