@@ -290,5 +290,17 @@
         {
             stateMachine.Fire(fileClosedTrigger, fileClosedDate);
         }
+
+        public void SetArchiveReference(string reference)
+        {
+            if (!Dates.FileClosedDate.HasValue)
+            {
+                throw new InvalidOperationException(
+                    string.Format(
+                        "Can't set archive reference for notification {0} if it is not marked as file closed",
+                        NotificationApplicationId));
+            }
+            Dates.ArchiveReference = reference;
+        }
     }
 }

@@ -23,5 +23,7 @@
         public bool IsInterim { get; set; }
 
         public DateTime? FileClosedDate { get; set; }
+
+        public string ArchiveReference { get; set; }
     }
 }

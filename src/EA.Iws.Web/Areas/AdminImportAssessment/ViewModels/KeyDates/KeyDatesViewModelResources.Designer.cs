@@ -89,6 +89,33 @@ namespace EA.Iws.Web.Areas.AdminImportAssessment.ViewModels.KeyDates {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Archive reference.
+        /// </summary>
+        public static string ArchiveReference {
+            get {
+                return ResourceManager.GetString("ArchiveReference", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The archive reference cannot be more than 100 characters in length.
+        /// </summary>
+        public static string ArchiveReferenceLength {
+            get {
+                return ResourceManager.GetString("ArchiveReferenceLength", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please enter the archive reference.
+        /// </summary>
+        public static string ArchiveReferenceRequired {
+            get {
+                return ResourceManager.GetString("ArchiveReferenceRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Assessment Started.
         /// </summary>
         public static string CommencementDate {
