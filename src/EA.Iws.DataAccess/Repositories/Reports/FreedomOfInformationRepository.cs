@@ -23,36 +23,33 @@
         {
             return await context.Database.SqlQuery<FreedomOfInformationData>(
                 @"SELECT 
+                    [NotificationNumber],
                     [NotifierName],
                     [NotifierAddress],
                     [ProducerName],
                     [ProducerAddress],
                     [PointOfExport],
+                    [PointOfEntry],
+                    [ImportCountryName],
                     [NameOfWaste],
                     [EWC],
                     [YCode],
+                    [ImporterName],
+                    [ImporterAddress],
                     [FacilityName],
                     [FacilityAddress],
-                    SUM([QuantityReceived]) AS [QuantityReceived],
-                    [QuantityReceivedUnit]
+                    COALESCE([QuantityReceived], 0) AS [QuantityReceived],
+                    [QuantityReceivedUnit],
+                    [IntendedQuantity],
+                    [IntendedQuantityUnit],
+                    [ConsentFrom],
+                    [ConsentTo]
                 FROM 
                     [Reports].[FreedomOfInformation]
                 WHERE 
                     [CompetentAuthorityId] = @competentAuthority
                     AND [ChemicalCompositionTypeId] = @chemicalComposition
-                    AND [ReceivedDate] BETWEEN @from AND @to
-                GROUP BY
-                    [NotifierName],
-                    [NotifierAddress],
-                    [ProducerName],
-                    [ProducerAddress],
-                    [PointOfExport],
-                    [NameOfWaste],
-                    [EWC],
-                    [YCode],
-                    [FacilityName],
-                    [FacilityAddress],
-                    [QuantityReceivedUnit]",
+                    AND [ReceivedDate] BETWEEN @from AND @to",
                 new SqlParameter("@from", from),
                 new SqlParameter("@to", to),
                 new SqlParameter("@chemicalComposition", (int)chemicalComposition),
