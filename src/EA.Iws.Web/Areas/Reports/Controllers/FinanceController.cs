@@ -1,6 +1,5 @@
 ﻿namespace EA.Iws.Web.Areas.Reports.Controllers
 {
-    using System;
     using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Mvc;
@@ -8,6 +7,7 @@
     using Infrastructure;
     using Prsd.Core.Mediator;
     using Requests.Admin.Reports;
+    using ViewModels.Finance;
 
     [Authorize(Roles = "internal")]
     public class FinanceController : Controller
@@ -22,13 +22,22 @@
         [HttpGet]
         public ActionResult Index()
         {
-            return View();
+            return View(new IndexViewModel());
         }
 
-        [HttpGet]
-        public async Task<ActionResult> Download(DateTime endDate)
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Index(IndexViewModel model)
         {
-            var report = await mediator.SendAsync(new GetFinanceReport(endDate));
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            var from = model.From.AsDateTime().Value;
+            var to = model.To.AsDateTime().Value;
+
+            var report = await mediator.SendAsync(new GetFinanceReport(to));
 
             var fileName = "finance-report.csv";
 
