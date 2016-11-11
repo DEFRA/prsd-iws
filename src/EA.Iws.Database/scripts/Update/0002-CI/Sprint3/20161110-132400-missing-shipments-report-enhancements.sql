@@ -30,10 +30,11 @@ AS
 		SI.Quantity AS TotalQuantity,
 		SI_U.Description AS TotalQuantityUnits,
 		SI.Units AS TotalQuantityUnitsId,
-		IP.Name as EntryPort,
-		DC.Name as DestinationCountry,
-		OP.Name as ExitPort,
-		OC.Name as OriginatingCountry
+		IP.Name AS EntryPort,
+		DC.Name AS DestinationCountry,
+		OP.Name AS ExitPort,
+		OC.Name AS OriginatingCountry,
+		MS.Status
 	
 	FROM [Notification].[Movement] AS M
 
@@ -93,23 +94,26 @@ AS
 	LEFT JOIN	[Notification].[TransportRoute] AS TR 
 	ON			[TR].[NotificationId] = [N].[Id]
 
-	LEFT JOIN   [Notification].[StateOfImport] as SOI
+	LEFT JOIN   [Notification].[StateOfImport] AS SOI
 	ON			SOI.TransportRouteId = TR.Id
 
-	LEFT JOIN   [Notification].[EntryOrExitPoint] as IP
+	LEFT JOIN   [Notification].[EntryOrExitPoint] AS IP
 	ON			IP.Id = SOI.EntryPointId
 
-	LEFT JOIN   [Lookup].[Country] as DC
+	LEFT JOIN   [Lookup].[Country] AS DC
 	ON          DC.Id = SOI.CountryId
 
-	LEFT JOIN   [Notification].[StateOfExport] as SOO
+	LEFT JOIN   [Notification].[StateOfExport] AS SOO
 	ON			SOO.TransportRouteId = TR.Id
 
-	LEFT JOIN   [Notification].[EntryOrExitPoint] as OP
+	LEFT JOIN   [Notification].[EntryOrExitPoint] AS OP
 	ON			OP.Id = SOO.ExitPointId
 
-	LEFT JOIN   [Lookup].[Country] as OC
+	LEFT JOIN   [Lookup].[Country] AS OC
 	ON          OC.Id = SOO.CountryId
+
+	LEFT JOIN   [Lookup].[MovementStatus] AS MS
+	ON			MS.Id = M.Status
 
 	UNION 
 
@@ -135,10 +139,11 @@ AS
 		SI.Quantity AS TotalQuantity,
 		SI_U.Description AS TotalQuantityUnits,
 		SI.Units AS TotalQuantityUnitsId,
-		IP.Name as EntryPort,
-		'United Kingdom' as DestinationCountry,
-		OP.Name as ExitPort,
-		OC.Name as OriginatingCountry
+		IP.Name AS EntryPort,
+		'United Kingdom' AS DestinationCountry,
+		OP.Name AS ExitPort,
+		OC.Name AS OriginatingCountry,
+		'NA' AS Status
 	
 	FROM [ImportNotification].[Movement] AS M
 
@@ -192,19 +197,19 @@ AS
 	LEFT JOIN	[ImportNotification].[TransportRoute] AS TR 
 	ON			[TR].[ImportNotificationId] = [N].[Id]
 
-	LEFT JOIN   [ImportNotification].[StateOfImport] as SOI
-	on			SOI.TransportRouteId = TR.Id
+	LEFT JOIN   [ImportNotification].[StateOfImport] AS SOI
+	ON			SOI.TransportRouteId = TR.Id
 
-	LEFT JOIN   [Notification].[EntryOrExitPoint] as IP
-	on			IP.Id = SOI.EntryPointId
+	LEFT JOIN   [Notification].[EntryOrExitPoint] AS IP
+	ON			IP.Id = SOI.EntryPointId
 
-	LEFT JOIN   [ImportNotification].[StateOfExport] as SOO
-	on			SOO.TransportRouteId = TR.Id
+	LEFT JOIN   [ImportNotification].[StateOfExport] AS SOO
+	ON			SOO.TransportRouteId = TR.Id
 
-	LEFT JOIN   [Notification].[EntryOrExitPoint] as OP
-	on			OP.Id = SOO.ExitPointId
+	LEFT JOIN   [Notification].[EntryOrExitPoint] AS OP
+	ON			OP.Id = SOO.ExitPointId
 
-	LEFT JOIN   [Lookup].[Country] as OC
-	on          OC.Id = SOO.CountryId
+	LEFT JOIN   [Lookup].[Country] AS OC
+	ON          OC.Id = SOO.CountryId
 
 GO
