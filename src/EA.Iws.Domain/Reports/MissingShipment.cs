@@ -34,5 +34,19 @@ namespace EA.Iws.Domain.Reports
         public string ChemicalComposition { get; protected set; }
 
         public string LocalArea { get; protected set; }
+
+        public decimal? TotalQuantity { get; protected set; }
+
+        public ShipmentQuantityUnits? TotalQuantityUnitsId { get; protected set; }
+
+        public string EntryPort { get; protected set; }
+
+        public string DestinationCountry { get; protected set; }
+
+        public string ExitPort { get; protected set; }
+
+        public string OriginatingCountry { get; protected set; }
+
+        public string Status { get; protected set; }
     }
 }
