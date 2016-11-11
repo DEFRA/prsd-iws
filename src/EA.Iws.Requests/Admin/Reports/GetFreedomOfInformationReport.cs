@@ -7,10 +7,10 @@
     using Core.WasteType;
     using Prsd.Core.Mediator;
 
-    [RequestAuthorization(ReportingPermissions.CanViewRdfSrfWoodReport)]
-    public class GetRdfSrfWoodReport : IRequest<RdfSrfWoodData[]>
+    [RequestAuthorization(ReportingPermissions.CanViewFoiReport)]
+    public class GetFreedomOfInformationReport : IRequest<FreedomOfInformationData[]>
     {
-        public GetRdfSrfWoodReport(DateTime from, DateTime to, ChemicalComposition chemicalComposition)
+        public GetFreedomOfInformationReport(DateTime from, DateTime to, ChemicalComposition chemicalComposition)
         {
             From = from;
             To = to;

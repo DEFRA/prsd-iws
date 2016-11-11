@@ -1,6 +1,6 @@
 namespace EA.Iws.Core.Admin.Reports
 {
-    public class RdfSrfWoodData
+    public class FreedomOfInformationData
     {
         public string NotifierName { get; set; }
 

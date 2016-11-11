@@ -9,20 +9,20 @@
     using Prsd.Core.Mediator;
     using Requests.Admin.Reports;
 
-    internal class GetRdfSrfWoodReportHandler : IRequestHandler<GetRdfSrfWoodReport, RdfSrfWoodData[]>
+    internal class GetFreedomOfInformationReportHandler : IRequestHandler<GetFreedomOfInformationReport, FreedomOfInformationData[]>
     {
-        private readonly IRdfSrfWoodRepository repository;
+        private readonly IFreedomOfInformationRepository repository;
         private readonly IUserContext userContext;
         private readonly IInternalUserRepository internalUserRepository;
 
-        public GetRdfSrfWoodReportHandler(IRdfSrfWoodRepository repository, IUserContext userContext, IInternalUserRepository internalUserRepository)
+        public GetFreedomOfInformationReportHandler(IFreedomOfInformationRepository repository, IUserContext userContext, IInternalUserRepository internalUserRepository)
         {
             this.repository = repository;
             this.userContext = userContext;
             this.internalUserRepository = internalUserRepository;
         }
 
-        public async Task<RdfSrfWoodData[]> HandleAsync(GetRdfSrfWoodReport message)
+        public async Task<FreedomOfInformationData[]> HandleAsync(GetFreedomOfInformationReport message)
         {
             var user = await internalUserRepository.GetByUserId(userContext.UserId);
             return (await repository.Get(message.From, message.To, message.ChemicalComposition, user.CompetentAuthority)).ToArray();

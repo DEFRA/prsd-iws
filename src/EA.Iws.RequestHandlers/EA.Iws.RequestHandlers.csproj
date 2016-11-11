@@ -111,7 +111,7 @@
     <Compile Include="Admin\Reports\GetExportStatsReportHandler.cs" />
     <Compile Include="Admin\Reports\GetFinanceReportHandler.cs" />
     <Compile Include="Admin\Reports\GetMissingShipmentsReportHandler.cs" />
-    <Compile Include="Admin\Reports\GetRdfSrfWoodReportHandler.cs" />
+    <Compile Include="Admin\Reports\GetFreedomOfInformationReportHandler.cs" />
     <Compile Include="Admin\Search\NotificaitonsAdvancedSearchHandler.cs" />
     <Compile Include="Admin\Search\SearchImportNotificationsHandler.cs" />
     <Compile Include="Admin\SendTestEmailHandler.cs" />

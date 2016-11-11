@@ -27,7 +27,7 @@
             { ReportingPermissions.CanViewExportNotificationsReport, new[] { UserRole.Internal, UserRole.Administrator } },
             { ReportingPermissions.CanViewFinanceReport, new[] { UserRole.Internal, UserRole.Administrator } },
             { ReportingPermissions.CanViewMissingShipmentsReport, new[] { UserRole.Internal, UserRole.Administrator } },
-            { ReportingPermissions.CanViewRdfSrfWoodReport, new[] { UserRole.Internal, UserRole.Administrator } },
+            { ReportingPermissions.CanViewFoiReport, new[] { UserRole.Internal, UserRole.Administrator } },
             { ExportNotificationPermissions.CanCreateExportNotification, new[] { UserRole.External, UserRole.Internal, UserRole.Administrator } },
             { ExportNotificationPermissions.CanEditExportNotification, new[] { UserRole.External, UserRole.Internal, UserRole.Administrator } },
             { ExportNotificationPermissions.CanReadExportNotification, new[] { UserRole.External, UserRole.Internal, UserRole.Administrator } },

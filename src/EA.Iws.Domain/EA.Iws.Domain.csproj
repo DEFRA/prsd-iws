@@ -344,7 +344,7 @@
     <Compile Include="Reports\IExportStatsRepository.cs" />
     <Compile Include="Reports\IFinanceReportRepository.cs" />
     <Compile Include="Reports\IMissingShipmentsRepository.cs" />
-    <Compile Include="Reports\IRdfSrfWoodRepository.cs" />
+    <Compile Include="Reports\IFreedomOfInformationRepository.cs" />
     <Compile Include="Reports\MissingShipment.cs" />
     <Compile Include="Search\IAdvancedSearchRepository.cs" />
     <Compile Include="Security\IImportMovementAuthorization.cs" />

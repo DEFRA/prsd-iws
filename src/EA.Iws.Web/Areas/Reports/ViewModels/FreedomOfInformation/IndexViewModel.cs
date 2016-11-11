@@ -1,4 +1,4 @@
-﻿namespace EA.Iws.Web.Areas.Reports.ViewModels.RdfSrfWood
+﻿namespace EA.Iws.Web.Areas.Reports.ViewModels.FreedomOfInformation
 {
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;

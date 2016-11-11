@@ -9,19 +9,19 @@
     using Core.WasteType;
     using Domain.Reports;
 
-    internal class RdfSrfWoodRepository : IRdfSrfWoodRepository
+    internal class FreedomOfInformationRepository : IFreedomOfInformationRepository
     {
         private readonly IwsContext context;
 
-        public RdfSrfWoodRepository(IwsContext context)
+        public FreedomOfInformationRepository(IwsContext context)
         {
             this.context = context;
         }
 
-        public async Task<IEnumerable<RdfSrfWoodData>> Get(DateTime from, DateTime to,
+        public async Task<IEnumerable<FreedomOfInformationData>> Get(DateTime from, DateTime to,
             ChemicalComposition chemicalComposition, UKCompetentAuthority competentAuthority)
         {
-            return await context.Database.SqlQuery<RdfSrfWoodData>(
+            return await context.Database.SqlQuery<FreedomOfInformationData>(
                 @"SELECT 
                     [NotifierName],
                     [NotifierAddress],
@@ -36,7 +36,7 @@
                     SUM([QuantityReceived]) AS [QuantityReceived],
                     [QuantityReceivedUnit]
                 FROM 
-                    [Reports].[RdfSrfWood]
+                    [Reports].[FreedomOfInformation]
                 WHERE 
                     [CompetentAuthorityId] = @competentAuthority
                     AND [ChemicalCompositionTypeId] = @chemicalComposition
