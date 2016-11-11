@@ -7,7 +7,7 @@ AS
     SELECT
         N.[Id] AS Id,
         N.[NotificationNumber],
-		N.[UserId],
+        N.[UserId],
         NT.[Description] AS [Type],
         NT.Id AS [TypeId],
         CA.[UnitedKingdomCountry] AS [CompetentAuthorityCountry],
@@ -25,6 +25,7 @@ AS
         SI.[Quantity] AS [IntendedQuantity],
         SI.[NumberOfShipments] AS [NumberOfShipments],
         U.[Description] AS [Units],
+        U.[Id] AS [UnitsId],
         C.[From] AS [ConsentFrom],
         C.[To] AS [ConsentTo],
         FC.[AllFacilitiesPreconsented] AS [Preconsented],
@@ -44,9 +45,9 @@ AS
 
     INNER JOIN	[Lookup].[NotificationStatus] AS NS
     ON			[NS].[Id] = [NA].[Status]
-	
-	LEFT JOIN	[Notification].[Consultation] AS CON
-	ON			[CON].[NotificationId] = [N].[Id]
+    
+    LEFT JOIN	[Notification].[Consultation] AS CON
+    ON			[CON].[NotificationId] = [N].[Id]
 
     LEFT JOIN	[Lookup].[LocalArea] AS LA
     ON			[CON].[LocalAreaId] = [LA].[Id]
@@ -60,15 +61,15 @@ AS
     LEFT JOIN	[Notification].[Consent] AS C
     ON			[N].[Id] = [C].[NotificationApplicationId]
 
-	LEFT JOIN	[Notification].[FacilityCollection] FC
-	ON			N.[Id] = FC.[NotificationId]
+    LEFT JOIN	[Notification].[FacilityCollection] FC
+    ON			N.[Id] = FC.[NotificationId]
 
     UNION
 
     SELECT 
         N.[Id] AS Id,
         N.[NotificationNumber],
-		NULL AS [UserId],
+        NULL AS [UserId],
         NT.[Description] AS [Type],
         NT.[Id] AS [TypeId],
         CA.[UnitedKingdomCountry] AS [CompetentAuthorityCountry],
@@ -86,6 +87,7 @@ AS
         S.[Quantity] AS [IntendedQuantity],
         S.[NumberOfShipments] AS [NumberOfShipments],
         U.[Description] AS [Units],
+        U.[Id] AS [UnitsId],
         C.[From] AS [ConsentFrom],
         C.[To] AS [ConsentTo],
         0 AS [Preconsented],
@@ -97,16 +99,16 @@ AS
     INNER JOIN	[Lookup].[NotificationType] AS NT
     ON			[NT].[Id] = [N].[NotificationType]
 
-	INNER JOIN  [ImportNotification].[NotificationAssessment] NA
-	ON			[NA].NotificationApplicationId = [N].Id
+    INNER JOIN  [ImportNotification].[NotificationAssessment] NA
+    ON			[NA].NotificationApplicationId = [N].Id
 
-	INNER JOIN  [Lookup].[ImportNotificationStatus] NS
-	ON			[NA].[Status] = [NS].[Id]
+    INNER JOIN  [Lookup].[ImportNotificationStatus] NS
+    ON			[NA].[Status] = [NS].[Id]
 
-	LEFT JOIN	[ImportNotification].[Consultation] AS CON
-	ON			[CON].[NotificationId] = [N].[Id]
+    LEFT JOIN	[ImportNotification].[Consultation] AS CON
+    ON			[CON].[NotificationId] = [N].[Id]
 
-	LEFT JOIN	[Lookup].[LocalArea] AS LA
+    LEFT JOIN	[Lookup].[LocalArea] AS LA
     ON			[CON].[LocalAreaId] = [LA].[Id]
 
     INNER JOIN	[Lookup].[UnitedKingdomCompetentAuthority] AS [CA]
@@ -118,6 +120,6 @@ AS
     LEFT JOIN	[Lookup].[ShipmentQuantityUnit] AS U
     ON			[S].[Units] = [U].[Id]
 
-	LEFT JOIN	[ImportNotification].[Consent] AS C
+    LEFT JOIN	[ImportNotification].[Consent] AS C
     ON			[N].[Id] = [C].[NotificationId]
 GO

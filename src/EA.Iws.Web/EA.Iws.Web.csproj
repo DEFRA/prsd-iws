@@ -400,7 +400,7 @@
     <Content Include="Areas\NotificationApplication\Views\Options\PostageLabelUnavailable.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\Options\FinancialGuaranteeUnavailable.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\Options\AnnexUploadUnavailable.cshtml" />
-    <Content Include="Areas\Reports\Views\RdfSrfWood\Index.cshtml" />
+    <Content Include="Areas\Reports\Views\FreedomOfInformation\Index.cshtml" />
     <Content Include="Content\govuk_elements\_tables.scss" />
     <Content Include="Content\govuk_elements\_shame.scss" />
     <Content Include="Content\govuk_elements\_reset.scss" />
@@ -1987,7 +1987,7 @@
     <Compile Include="Areas\Reports\Controllers\ExportNotificationsController.cs" />
     <Compile Include="Areas\Reports\Controllers\FinanceController.cs" />
     <Compile Include="Areas\Reports\Controllers\MissingShipmentsController.cs" />
-    <Compile Include="Areas\Reports\Controllers\RdfSrfWoodController.cs" />
+    <Compile Include="Areas\Reports\Controllers\FreedomOfInformationController.cs" />
     <Compile Include="Areas\Reports\ViewModels\ExportNotifications\IndexViewModel.cs" />
     <Compile Include="Areas\Reports\ViewModels\ExportNotifications\IndexViewModelResources.Designer.cs">
       <DependentUpon>IndexViewModelResources.resx</DependentUpon>
@@ -2006,8 +2006,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>IndexViewModelResources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Areas\Reports\ViewModels\RdfSrfWood\IndexViewModel.cs" />
-    <Compile Include="Areas\Reports\ViewModels\RdfSrfWood\IndexViewModelResources.Designer.cs">
+    <Compile Include="Areas\Reports\ViewModels\FreedomOfInformation\IndexViewModel.cs" />
+    <Compile Include="Areas\Reports\ViewModels\FreedomOfInformation\IndexViewModelResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>IndexViewModelResources.resx</DependentUpon>
@@ -2022,7 +2022,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>IndexResources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Areas\Reports\Views\RdfSrfWood\IndexResources.Designer.cs">
+    <Compile Include="Areas\Reports\Views\FreedomOfInformation\IndexResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>IndexResources.resx</DependentUpon>
@@ -3918,7 +3918,7 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>IndexViewModelResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Areas\Reports\ViewModels\RdfSrfWood\IndexViewModelResources.resx">
+    <EmbeddedResource Include="Areas\Reports\ViewModels\FreedomOfInformation\IndexViewModelResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>IndexViewModelResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
@@ -3930,7 +3930,7 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Areas\Reports\Views\RdfSrfWood\IndexResources.resx">
+    <EmbeddedResource Include="Areas\Reports\Views\FreedomOfInformation\IndexResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>

@@ -10,6 +10,6 @@
 
         public const string CanViewMissingShipmentsReport = "Can View Missing Shipments Report";
 
-        public const string CanViewRdfSrfWoodReport = "Can View RDF/SRF/Wood Report";
+        public const string CanViewFoiReport = "Can View FOI Report";
     }
 }

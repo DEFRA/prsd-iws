@@ -7,8 +7,8 @@
     using Core.Notification;
     using Core.WasteType;
 
-    public interface IRdfSrfWoodRepository
+    public interface IFreedomOfInformationRepository
     {
-        Task<IEnumerable<RdfSrfWoodData>> Get(DateTime from, DateTime to, ChemicalComposition chemicalComposition, UKCompetentAuthority competentAuthority);
+        Task<IEnumerable<FreedomOfInformationData>> Get(DateTime from, DateTime to, ChemicalComposition chemicalComposition, UKCompetentAuthority competentAuthority);
     }
 }

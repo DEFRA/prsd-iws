@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace EA.Iws.Web.Areas.Reports.Views.RdfSrfWood {
+namespace EA.Iws.Web.Areas.Reports.ViewModels.FreedomOfInformation {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace EA.Iws.Web.Areas.Reports.Views.RdfSrfWood {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class IndexResources {
+    public class IndexViewModelResources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal IndexResources() {
+        internal IndexViewModelResources() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace EA.Iws.Web.Areas.Reports.Views.RdfSrfWood {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EA.Iws.Web.Areas.Reports.Views.RdfSrfWood.IndexResources", typeof(IndexResources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EA.Iws.Web.Areas.Reports.ViewModels.FreedomOfInformation.IndexViewModelResources", typeof(IndexViewModelResources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,29 +61,65 @@ namespace EA.Iws.Web.Areas.Reports.Views.RdfSrfWood {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Generate report.
+        ///   Looks up a localized string similar to From date.
         /// </summary>
-        public static string ButtonText {
+        public static string FromDate {
             get {
-                return ResourceManager.GetString("ButtonText", resourceCulture);
+                return ResourceManager.GetString("FromDate", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to FOI Report.
+        ///   Looks up a localized string similar to The from date must be before the to date.
         /// </summary>
-        public static string Heading {
+        public static string FromDateBeforeToDate {
             get {
-                return ResourceManager.GetString("Heading", resourceCulture);
+                return ResourceManager.GetString("FromDateBeforeToDate", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to FOI Report.
+        ///   Looks up a localized string similar to Please enter the from date.
         /// </summary>
-        public static string Title {
+        public static string FromDateRequired {
             get {
-                return ResourceManager.GetString("Title", resourceCulture);
+                return ResourceManager.GetString("FromDateRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to To date.
+        /// </summary>
+        public static string ToDate {
+            get {
+                return ResourceManager.GetString("ToDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please enter the to date.
+        /// </summary>
+        public static string ToDateRequired {
+            get {
+                return ResourceManager.GetString("ToDateRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Waste type.
+        /// </summary>
+        public static string WasteType {
+            get {
+                return ResourceManager.GetString("WasteType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please select the waste type.
+        /// </summary>
+        public static string WasteTypeRequired {
+            get {
+                return ResourceManager.GetString("WasteTypeRequired", resourceCulture);
             }
         }
     }

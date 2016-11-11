@@ -10,14 +10,14 @@
     using Prsd.Core.Helpers;
     using Prsd.Core.Mediator;
     using Requests.Admin.Reports;
-    using ViewModels.RdfSrfWood;
+    using ViewModels.FreedomOfInformation;
 
     [Authorize(Roles = "internal")]
-    public class RdfSrfWoodController : Controller
+    public class FreedomOfInformationController : Controller
     {
         private readonly IMediator mediator;
 
-        public RdfSrfWoodController(IMediator mediator)
+        public FreedomOfInformationController(IMediator mediator)
         {
             this.mediator = mediator;
         }
@@ -48,13 +48,13 @@
         [HttpGet]
         public async Task<ActionResult> Download(DateTime from, DateTime to, ChemicalComposition chemicalComposition)
         {
-            var report = await mediator.SendAsync(new GetRdfSrfWoodReport(from, to, chemicalComposition));
+            var report = await mediator.SendAsync(new GetFreedomOfInformationReport(from, to, chemicalComposition));
 
             var type = EnumHelper.GetShortName(chemicalComposition);
 
             var fileName = string.Format("{0}-{1}-{2}.csv", type, from, to);
 
-            return new CsvActionResult<RdfSrfWoodData>(report.ToList(), fileName);
+            return new CsvActionResult<FreedomOfInformationData>(report.ToList(), fileName);
         }
     }
 }

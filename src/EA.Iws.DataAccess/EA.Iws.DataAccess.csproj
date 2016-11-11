@@ -265,7 +265,7 @@
     <Compile Include="Repositories\Reports\ExportNotificationsRepository.cs" />
     <Compile Include="Repositories\Reports\FinanceReportRepository.cs" />
     <Compile Include="Repositories\Reports\MissingShipmentsRepository.cs" />
-    <Compile Include="Repositories\Reports\RdfSrfWoodRepository.cs" />
+    <Compile Include="Repositories\Reports\FreedomOfInformationRepository.cs" />
     <Compile Include="Repositories\TechnologyEmployedRepository.cs" />
     <Compile Include="Repositories\Search\AdvancedSearchRepository.cs" />
     <Compile Include="Repositories\UserHistoryRepository.cs" />

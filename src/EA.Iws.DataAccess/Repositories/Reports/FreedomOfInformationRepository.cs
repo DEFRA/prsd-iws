@@ -9,50 +9,47 @@
     using Core.WasteType;
     using Domain.Reports;
 
-    internal class RdfSrfWoodRepository : IRdfSrfWoodRepository
+    internal class FreedomOfInformationRepository : IFreedomOfInformationRepository
     {
         private readonly IwsContext context;
 
-        public RdfSrfWoodRepository(IwsContext context)
+        public FreedomOfInformationRepository(IwsContext context)
         {
             this.context = context;
         }
 
-        public async Task<IEnumerable<RdfSrfWoodData>> Get(DateTime from, DateTime to,
+        public async Task<IEnumerable<FreedomOfInformationData>> Get(DateTime from, DateTime to,
             ChemicalComposition chemicalComposition, UKCompetentAuthority competentAuthority)
         {
-            return await context.Database.SqlQuery<RdfSrfWoodData>(
+            return await context.Database.SqlQuery<FreedomOfInformationData>(
                 @"SELECT 
+                    [NotificationNumber],
                     [NotifierName],
                     [NotifierAddress],
                     [ProducerName],
                     [ProducerAddress],
                     [PointOfExport],
+                    [PointOfEntry],
+                    [ImportCountryName],
                     [NameOfWaste],
                     [EWC],
                     [YCode],
+                    [ImporterName],
+                    [ImporterAddress],
                     [FacilityName],
                     [FacilityAddress],
-                    SUM([QuantityReceived]) AS [QuantityReceived],
-                    [QuantityReceivedUnit]
+                    COALESCE([QuantityReceived], 0) AS [QuantityReceived],
+                    [QuantityReceivedUnit],
+                    [IntendedQuantity],
+                    [IntendedQuantityUnit],
+                    [ConsentFrom],
+                    [ConsentTo]
                 FROM 
-                    [Reports].[RdfSrfWood]
+                    [Reports].[FreedomOfInformation]
                 WHERE 
                     [CompetentAuthorityId] = @competentAuthority
                     AND [ChemicalCompositionTypeId] = @chemicalComposition
-                    AND [ReceivedDate] BETWEEN @from AND @to
-                GROUP BY
-                    [NotifierName],
-                    [NotifierAddress],
-                    [ProducerName],
-                    [ProducerAddress],
-                    [PointOfExport],
-                    [NameOfWaste],
-                    [EWC],
-                    [YCode],
-                    [FacilityName],
-                    [FacilityAddress],
-                    [QuantityReceivedUnit]",
+                    AND [ReceivedDate] BETWEEN @from AND @to",
                 new SqlParameter("@from", from),
                 new SqlParameter("@to", to),
                 new SqlParameter("@chemicalComposition", (int)chemicalComposition),

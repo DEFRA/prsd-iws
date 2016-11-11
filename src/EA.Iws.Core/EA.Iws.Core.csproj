@@ -63,7 +63,7 @@
     <Compile Include="Admin\Reports\ExportStatsData.cs" />
     <Compile Include="Admin\Reports\FinanceReportData.cs" />
     <Compile Include="Admin\Reports\MissingShipmentData.cs" />
-    <Compile Include="Admin\Reports\RdfSrfWoodData.cs" />
+    <Compile Include="Admin\Reports\FreedomOfInformationData.cs" />
     <Compile Include="Admin\Search\AdvancedSearchCriteria.cs" />
     <Compile Include="Admin\Search\AdvancedSearchResult.cs" />
     <Compile Include="Admin\Search\ExportAdvancedSearchResult.cs" />
