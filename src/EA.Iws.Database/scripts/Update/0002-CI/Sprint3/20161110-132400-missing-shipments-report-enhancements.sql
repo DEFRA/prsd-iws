@@ -29,7 +29,11 @@ AS
 		LA.[Name] AS [LocalArea],
 		SI.Quantity AS TotalQuantity,
 		SI_U.Description AS TotalQuantityUnits,
-		SI.Units AS TotalQuantityUnitsId
+		SI.Units AS TotalQuantityUnitsId,
+		IP.Name as EntryPort,
+		DC.Name as DestinationCountry,
+		OP.Name as ExitPort,
+		OC.Name as OriginatingCountry
 	
 	FROM [Notification].[Movement] AS M
 
@@ -86,6 +90,27 @@ AS
 	LEFT JOIN	[Lookup].[ShipmentQuantityUnit] AS SI_U 
 	ON			[SI].[Units] = [SI_U].[Id]
 
+	LEFT JOIN	[Notification].[TransportRoute] AS TR 
+	ON			[TR].[NotificationId] = [N].[Id]
+
+	LEFT JOIN   [Notification].[StateOfImport] as SOI
+	ON			SOI.TransportRouteId = TR.Id
+
+	LEFT JOIN   [Notification].[EntryOrExitPoint] as IP
+	ON			IP.Id = SOI.EntryPointId
+
+	LEFT JOIN   [Lookup].[Country] as DC
+	ON          DC.Id = SOI.CountryId
+
+	LEFT JOIN   [Notification].[StateOfExport] as SOO
+	ON			SOO.TransportRouteId = TR.Id
+
+	LEFT JOIN   [Notification].[EntryOrExitPoint] as OP
+	ON			OP.Id = SOO.ExitPointId
+
+	LEFT JOIN   [Lookup].[Country] as OC
+	ON          OC.Id = SOO.CountryId
+
 	UNION 
 
 		SELECT	
@@ -109,7 +134,11 @@ AS
 		LA.[Name] AS [LocalArea],
 		SI.Quantity AS TotalQuantity,
 		SI_U.Description AS TotalQuantityUnits,
-		SI.Units AS TotalQuantityUnitsId
+		SI.Units AS TotalQuantityUnitsId,
+		IP.Name as EntryPort,
+		'United Kingdom' as DestinationCountry,
+		OP.Name as ExitPort,
+		OC.Name as OriginatingCountry
 	
 	FROM [ImportNotification].[Movement] AS M
 
@@ -159,5 +188,23 @@ AS
 
 	LEFT JOIN	[Lookup].[ShipmentQuantityUnit] AS SI_U 
 	ON			[SI].[Units] = [SI_U].[Id]
+
+	LEFT JOIN	[ImportNotification].[TransportRoute] AS TR 
+	ON			[TR].[ImportNotificationId] = [N].[Id]
+
+	LEFT JOIN   [ImportNotification].[StateOfImport] as SOI
+	on			SOI.TransportRouteId = TR.Id
+
+	LEFT JOIN   [Notification].[EntryOrExitPoint] as IP
+	on			IP.Id = SOI.EntryPointId
+
+	LEFT JOIN   [ImportNotification].[StateOfExport] as SOO
+	on			SOO.TransportRouteId = TR.Id
+
+	LEFT JOIN   [Notification].[EntryOrExitPoint] as OP
+	on			OP.Id = SOO.ExitPointId
+
+	LEFT JOIN   [Lookup].[Country] as OC
+	on          OC.Id = SOO.CountryId
 
 GO
