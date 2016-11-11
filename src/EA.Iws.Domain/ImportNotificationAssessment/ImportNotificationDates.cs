@@ -25,6 +25,8 @@
 
         public DateTime? FileClosedDate { get; internal set; }
 
+        public string ArchiveReference { get; internal set; }
+
         internal ImportNotificationDates()
         {
         }

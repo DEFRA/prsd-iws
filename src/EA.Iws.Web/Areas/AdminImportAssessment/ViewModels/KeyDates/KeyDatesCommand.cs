@@ -14,6 +14,9 @@
         NotificationAcknowledged = 3,
 
         [Display(Name = "File closed")]
-        FileClosed = 4
+        FileClosed = 4,
+
+        [Display(Name = "Archive reference")]
+        ArchiveReference = 5
     }
 }

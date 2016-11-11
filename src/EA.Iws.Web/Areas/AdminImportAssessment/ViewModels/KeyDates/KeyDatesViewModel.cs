@@ -36,6 +36,7 @@
             Decisions = new List<NotificationAssessmentDecision>();
             IsInterim = keyDates.IsInterim;
             NotificationFileClosedDate = new OptionalDateInputViewModel(keyDates.FileClosedDate, true);
+            ArchiveReference = keyDates.ArchiveReference;
         }
 
         public Guid NotificationId { get; set; }
@@ -72,6 +73,9 @@
 
         public bool IsInterim { get; set; }
 
+        [Display(Name = "ArchiveReference", ResourceType = typeof(KeyDatesViewModelResources))]
+        public string ArchiveReference { get; set; }
+
         public bool CommencementComplete
         {
             get { return AssessmentStartedDate.AsDateTime() != null && !string.IsNullOrWhiteSpace(NameOfOfficer); }
@@ -81,7 +85,7 @@
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
-            if (!NewDate.IsCompleted)
+            if (Command != KeyDatesCommand.ArchiveReference && !NewDate.IsCompleted)
             {
                 yield return new ValidationResult(KeyDatesViewModelResources.DateRequiredError, new[] {"NewDate"});
             }
@@ -167,6 +171,22 @@
                 {
                     yield return
                         new ValidationResult(KeyDatesViewModelResources.FileClosedNotBefore, new[] { "NewDate" });
+                }
+            }
+
+            if (Command == KeyDatesCommand.ArchiveReference)
+            {
+                if (string.IsNullOrWhiteSpace(ArchiveReference))
+                {
+                    yield return
+                        new ValidationResult(KeyDatesViewModelResources.ArchiveReferenceRequired,
+                            new[] { "ArchiveReference" });
+                }
+                else if (ArchiveReference.Length > 100)
+                {
+                    yield return
+                        new ValidationResult(KeyDatesViewModelResources.ArchiveReferenceLength,
+                            new[] { "ArchiveReference" });
                 }
             }
         }

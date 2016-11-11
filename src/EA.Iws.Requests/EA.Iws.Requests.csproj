@@ -133,6 +133,7 @@
     <Compile Include="ImportNotificationAssessment\GetImportNotificationConsultation.cs" />
     <Compile Include="ImportNotificationAssessment\ObjectToImportNotification.cs" />
     <Compile Include="ImportNotificationAssessment\SetAcknowlegedDate.cs" />
+    <Compile Include="ImportNotificationAssessment\SetArchiveReference.cs" />
     <Compile Include="ImportNotificationAssessment\SetAssessmentStartedDate.cs" />
     <Compile Include="ImportNotificationAssessment\GetKeyDates.cs" />
     <Compile Include="ImportNotificationAssessment\SetImportNotificationConsultation.cs" />

@@ -58,6 +58,9 @@
                 case KeyDatesCommand.FileClosed:
                     await mediator.SendAsync(new SetNotificationFileClosedDate(id, model.NewDate.AsDateTime().Value));
                     break;
+                case KeyDatesCommand.ArchiveReference:
+                    await mediator.SendAsync(new SetArchiveReference(id, model.ArchiveReference));
+                    break;
                 default:
                     break;
             }

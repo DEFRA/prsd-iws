@@ -43,7 +43,8 @@
                 AcknowlegedDate = assessment.Dates.AcknowledgedDate,
                 DecisionRequiredByDate = await decisionRequiredBy.GetDecisionRequiredByDate(assessment),
                 IsInterim = interimStatus.IsInterim,
-                FileClosedDate = assessment.Dates.FileClosedDate
+                FileClosedDate = assessment.Dates.FileClosedDate,
+                ArchiveReference = assessment.Dates.ArchiveReference
             };
         }
     }
