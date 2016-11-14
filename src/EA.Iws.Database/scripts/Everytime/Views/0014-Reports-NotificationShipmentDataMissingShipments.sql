@@ -30,10 +30,10 @@ AS
 		SI.Quantity AS TotalQuantity,
 		SI_U.Description AS TotalQuantityUnits,
 		SI.Units AS TotalQuantityUnitsId,
-		IP.Name AS EntryPort,
-		DC.Name AS DestinationCountry,
-		OP.Name AS ExitPort,
-		OC.Name AS OriginatingCountry,
+		TR.[EntryPoint] AS EntryPort,
+		TR.[ImportCountryName] AS DestinationCountry,
+		TR.[ExitPoint] AS ExitPort,
+		TR.[ExportCountryName] AS OriginatingCountry,
 		MS.Status
 	
 	FROM [Notification].[Movement] AS M
@@ -91,26 +91,8 @@ AS
 	LEFT JOIN	[Lookup].[ShipmentQuantityUnit] AS SI_U 
 	ON			[SI].[Units] = [SI_U].[Id]
 
-	LEFT JOIN	[Notification].[TransportRoute] AS TR 
+	LEFT JOIN   [Reports].[TransportRoute] AS TR
 	ON			[TR].[NotificationId] = [N].[Id]
-
-	LEFT JOIN   [Notification].[StateOfImport] AS SOI
-	ON			SOI.TransportRouteId = TR.Id
-
-	LEFT JOIN   [Notification].[EntryOrExitPoint] AS IP
-	ON			IP.Id = SOI.EntryPointId
-
-	LEFT JOIN   [Lookup].[Country] AS DC
-	ON          DC.Id = SOI.CountryId
-
-	LEFT JOIN   [Notification].[StateOfExport] AS SOO
-	ON			SOO.TransportRouteId = TR.Id
-
-	LEFT JOIN   [Notification].[EntryOrExitPoint] AS OP
-	ON			OP.Id = SOO.ExitPointId
-
-	LEFT JOIN   [Lookup].[Country] AS OC
-	ON          OC.Id = SOO.CountryId
 
 	LEFT JOIN   [Lookup].[MovementStatus] AS MS
 	ON			MS.Id = M.Status
