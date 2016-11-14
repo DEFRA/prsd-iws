@@ -2000,6 +2000,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>IndexViewModelResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Areas\Reports\ViewModels\Finance\IndexViewModel.cs" />
+    <Compile Include="Areas\Reports\ViewModels\Finance\IndexViewModelResources.Designer.cs" />
     <Compile Include="Areas\Reports\ViewModels\MissingShipments\IndexViewModel.cs" />
     <Compile Include="Areas\Reports\ViewModels\MissingShipments\IndexViewModelResources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -2017,6 +2019,7 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="Areas\Reports\Views\Finance\IndexResources.Designer.cs" />
     <Compile Include="Areas\Reports\Views\MissingShipments\IndexResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -3914,6 +3917,7 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>IndexViewModelResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Areas\Reports\ViewModels\Finance\IndexViewModelResources.resx" />
     <EmbeddedResource Include="Areas\Reports\ViewModels\MissingShipments\IndexViewModelResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>IndexViewModelResources.Designer.cs</LastGenOutput>
@@ -3926,6 +3930,7 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Areas\Reports\Views\Finance\IndexResources.resx" />
     <EmbeddedResource Include="Areas\Reports\Views\MissingShipments\IndexResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>

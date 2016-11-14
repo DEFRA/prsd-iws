@@ -29,7 +29,7 @@
         public async Task<FinanceReportData[]> HandleAsync(GetFinanceReport message)
         {
             var user = await internalUserRepository.GetByUserId(userContext.UserId);
-            var report = await financeReportRepository.GetFinanceReport(message.EndDate, user.CompetentAuthority);
+            var report = await financeReportRepository.GetFinanceReport(message.From, message.To, user.CompetentAuthority);
 
             return report.Select(f => mapper.Map<FinanceReportData>(f)).ToArray();
         }

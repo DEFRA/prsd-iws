@@ -29,7 +29,8 @@ AS
         NA.ConsentFrom,
         NA.ConsentTo,
         NA.Status,
-        N.CompetentAuthorityId
+        N.CompetentAuthorityId,
+		NA.ReceivedDate
     FROM [Reports].[NotificationOrganisations] NO
     INNER JOIN [Reports].[NotificationAssessment] NA ON NO.Id = NA.NotificationId
     INNER JOIN [Reports].[Notification] N ON NO.Id = N.Id

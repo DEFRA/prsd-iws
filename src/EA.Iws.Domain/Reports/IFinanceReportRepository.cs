@@ -7,6 +7,6 @@
 
     public interface IFinanceReportRepository
     {
-        Task<IEnumerable<Finance>> GetFinanceReport(DateTime endDate, UKCompetentAuthority competentAuthority);
+        Task<IEnumerable<Finance>> GetFinanceReport(DateTime from, DateTime to, UKCompetentAuthority competentAuthority);
     }
 }
