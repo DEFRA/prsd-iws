@@ -16,7 +16,7 @@
             this.context = context;
         }
 
-        public async Task<IEnumerable<Finance>> GetFinanceReport(DateTime to, DateTime from, UKCompetentAuthority competentAuthority)
+        public async Task<IEnumerable<Finance>> GetFinanceReport(DateTime from, DateTime to, UKCompetentAuthority competentAuthority)
         {
             return await context.Database.SqlQuery<Finance>(
                 @"SELECT
