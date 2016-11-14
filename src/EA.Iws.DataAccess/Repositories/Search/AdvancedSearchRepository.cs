@@ -7,13 +7,14 @@
     using System.Threading.Tasks;
     using Core.Admin.Search;
     using Core.Notification;
+    using Core.Shared;
     using Domain.Search;
 
     internal class AdvancedSearchRepository : IAdvancedSearchRepository
     {
         private const string SearchQuery = @"SELECT DISTINCT [Id]
-                    FROM	[Search].[Notifications]
-                    WHERE	[CompetentAuthority] = @ca
+                    FROM    [Search].[Notifications]
+                    WHERE   [CompetentAuthority] = @ca
                     AND     [ImportOrExport] = @importOrExport
                     AND     (@ewc IS NULL OR ([CodeType] = 3 AND [Code] LIKE '%' + @ewc + '%'))
                     AND     (@baselOecd IS NULL OR ([CodeType] IN (1,2) AND [Code] LIKE '%' + @baselOecd + '%'))
@@ -27,7 +28,12 @@
                     AND     (@localAreaId IS NULL OR [LocalAreaId] = @localAreaId)
                     AND     (@consentValidFromStart IS NULL OR [ConsentValidFrom] BETWEEN @consentValidFromStart AND COALESCE(@consentValidFromEnd, GETDATE()))
                     AND     (@consentValidToStart IS NULL OR [ConsentValidTo] BETWEEN @consentValidToStart AND COALESCE(@consentValidToEnd, GETDATE()))
-                    AND     (@notificationReceivedStart IS NULL OR [NotificationReceivedDate] BETWEEN @notificationReceivedStart AND COALESCE(@notificationReceivedEnd, GETDATE()))";
+                    AND     (@notificationReceivedStart IS NULL OR [NotificationReceivedDate] BETWEEN @notificationReceivedStart AND COALESCE(@notificationReceivedEnd, GETDATE()))
+                    AND     (@notificationType IS NULL OR [NotificationType] = @notificationType)
+                    AND     (@exportStatus IS NULL OR [ExportStatus] = @exportStatus)
+                    AND     (@importStatus IS NULL OR [ImportStatus] = @importStatus)
+                    AND     (@isInterim IS NULL OR [IsInterim] = @isInterim)
+                    AND     (@exportCountryName IS NULL OR [CountryOfExport] LIKE '%' + @exportCountryName + '%')";
 
         private readonly IwsContext context;
 
@@ -38,6 +44,11 @@
 
         public async Task<IEnumerable<ExportAdvancedSearchResult>> SearchExportNotificationsByCriteria(AdvancedSearchCriteria criteria, UKCompetentAuthority competentAuthority)
         {
+            if (criteria.TradeDirection == TradeDirection.Import)
+            {
+                return Enumerable.Empty<ExportAdvancedSearchResult>();
+            }
+
             var result = await GetSearchResults(criteria, competentAuthority, "Export");
 
             if (!result.Any())
@@ -73,6 +84,11 @@
 
         public async Task<IEnumerable<ImportAdvancedSearchResult>> SearchImportNotificationsByCriteria(AdvancedSearchCriteria criteria, UKCompetentAuthority competentAuthority)
         {
+            if (criteria.TradeDirection == TradeDirection.Export)
+            {
+                return Enumerable.Empty<ImportAdvancedSearchResult>();
+            }
+
             var result = await GetSearchResults(criteria, competentAuthority, "Import");
 
             if (!result.Any())
@@ -108,8 +124,10 @@
 
         private async Task<Guid[]> GetSearchResults(AdvancedSearchCriteria criteria, UKCompetentAuthority competentAuthority, string importOrExport)
         {
-            return await context.Database.SqlQuery<Guid>(
-                SearchQuery,
+            var query = SearchQuery;
+
+            var parameters = new List<object>
+            {
                 new SqlParameter("@ca", (int)competentAuthority),
                 new SqlParameter("@importOrExport", importOrExport),
                 new SqlParameter("@ewc", (object)criteria.EwcCode ?? DBNull.Value),
@@ -126,8 +144,37 @@
                 new SqlParameter("@consentValidFromEnd", (object)criteria.ConsentValidFromEnd ?? DBNull.Value),
                 new SqlParameter("@consentValidToStart", (object)criteria.ConsentValidToStart ?? DBNull.Value),
                 new SqlParameter("@consentValidToEnd", (object)criteria.ConsentValidToEnd ?? DBNull.Value),
-                new SqlParameter("@notificationReceivedStart", (object)criteria.NotificationReceivedStart ?? DBNull.Value),
-                new SqlParameter("@notificationReceivedEnd", (object)criteria.NotificationReceivedEnd ?? DBNull.Value)).ToArrayAsync();
+                new SqlParameter("@notificationReceivedStart",
+                    (object)criteria.NotificationReceivedStart ?? DBNull.Value),
+                new SqlParameter("@notificationReceivedEnd", (object)criteria.NotificationReceivedEnd ?? DBNull.Value),
+                new SqlParameter("@notificationType", (object)criteria.NotificationType ?? DBNull.Value),
+                new SqlParameter("@exportStatus", (object)criteria.NotificationStatus ?? DBNull.Value),
+                new SqlParameter("@importStatus", (object)criteria.ImportNotificationStatus ?? DBNull.Value),
+                new SqlParameter("@isInterim", (object)criteria.IsInterim ?? DBNull.Value),
+                new SqlParameter("@exportCountryName", (object)criteria.ExportCountryName ?? DBNull.Value)
+            };
+
+            if (criteria.OperationCodes != null && criteria.OperationCodes.Any())
+            {
+                query += "\nAND (";
+
+                for (int i = 0; i < criteria.OperationCodes.Length; i++)
+                {
+                    if (i == 0)
+                    {
+                        query += string.Format("\n[OperationCode] = @opCode{0}", i);
+                    }
+                    else
+                    {
+                        query += string.Format("\nOR [OperationCode] = @opCode{0}", i);
+                    }
+                    parameters.Add(new SqlParameter(string.Format("@opCode{0}", i), criteria.OperationCodes[i]));
+                }
+
+                query += ")";
+            }
+
+            return await context.Database.SqlQuery<Guid>(query, parameters.ToArray()).ToArrayAsync();
         }
     }
 }
