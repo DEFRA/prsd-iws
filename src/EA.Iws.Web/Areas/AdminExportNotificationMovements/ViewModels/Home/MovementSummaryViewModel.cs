@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Web.Mvc;
+    using Core.FinancialGuarantee;
     using Core.Movement;
     using Core.NotificationAssessment;
     using Core.Shared;
@@ -35,6 +36,8 @@
 
         public MovementStatus? SelectedMovementStatus { get; set; }
 
+        public FinancialGuaranteeStatus FgStatus { get; set; }
+
         public SelectList MovementStatuses
         {
             get
@@ -65,6 +68,7 @@
             ActiveLoadsPermitted = data.SummaryData.ActiveLoadsPermitted;
             ActiveLoadsCurrent = data.SummaryData.CurrentActiveLoads;
             NotificationStatus = data.SummaryData.NotificationStatus;
+            FgStatus = data.FgStatus;
 
             TableData = new List<MovementSummaryTableViewModel>(
                 data.ShipmentTableData.OrderByDescending(m => m.Number)

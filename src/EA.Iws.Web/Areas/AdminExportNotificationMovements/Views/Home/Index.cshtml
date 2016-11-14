@@ -1,4 +1,5 @@
-﻿@using EA.Iws.Core.Movement
+﻿@using EA.Iws.Core.FinancialGuarantee
+@using EA.Iws.Core.Movement
 @using EA.Iws.Core.NotificationAssessment
 @using EA.Iws.Core.Shared
 @using EnumHelper = EA.Prsd.Core.Helpers.EnumHelper
@@ -77,10 +78,12 @@
         <div class="column-half nav-bloc">
             <h2 class="heading-small">Shipping options</h2>
             <nav>
-                @if (Model.NotificationStatus == NotificationStatus.Consented)
+                @if (Model.NotificationStatus == NotificationStatus.Consented && Model.FgStatus == FinancialGuaranteeStatus.Approved)
                 {
                     @Html.ActionLink("Record shipment data", "Index", "CaptureMovement", new { area = "AdminExportNotificationMovements" }, null)
-
+                }
+                @if (Model.NotificationStatus == NotificationStatus.Consented)
+                {
                     @Html.ActionLink("Cancel a prenotification", "Index", "Cancel")
                 }
             </nav>
