@@ -9,11 +9,14 @@
     [RequestAuthorization(ReportingPermissions.CanViewFinanceReport)]
     public class GetFinanceReport : IRequest<FinanceReportData[]>
     {
-        public GetFinanceReport(DateTime endDate)
+        public GetFinanceReport(DateTime from, DateTime to)
         {
-            EndDate = endDate;
+            From = from;
+            To = to;
         }
 
-        public DateTime EndDate { get; private set; }
+        public DateTime From { get; private set; }
+
+        public DateTime To { get; private set; }
     }
 }

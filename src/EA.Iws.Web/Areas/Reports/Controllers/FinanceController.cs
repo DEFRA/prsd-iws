@@ -37,9 +37,9 @@
             var from = model.From.AsDateTime().Value;
             var to = model.To.AsDateTime().Value;
 
-            var report = await mediator.SendAsync(new GetFinanceReport(to));
+            var report = await mediator.SendAsync(new GetFinanceReport(from, to));
 
-            var fileName = "finance-report.csv";
+            var fileName = string.Format("finance-report-{0}-{1}.csv", from.ToShortDateString(), to.ToShortDateString());
 
             return new CsvActionResult<FinanceReportData>(report.ToList(), fileName);
         }

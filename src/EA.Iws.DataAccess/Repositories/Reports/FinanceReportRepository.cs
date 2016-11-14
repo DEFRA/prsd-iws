@@ -16,7 +16,7 @@
             this.context = context;
         }
 
-        public async Task<IEnumerable<Finance>> GetFinanceReport(DateTime endDate, UKCompetentAuthority competentAuthority)
+        public async Task<IEnumerable<Finance>> GetFinanceReport(DateTime to, DateTime from, UKCompetentAuthority competentAuthority)
         {
             return await context.Database.SqlQuery<Finance>(
                 @"SELECT
@@ -43,12 +43,16 @@
                     [HasMultipleFacilities],
                     [ConsentFrom],
                     [ConsentTo],
-                    [Status]                    
+                    [Status]                   
                   FROM
                     [Reports].[Finance]
                   WHERE
-                    [CompetentAuthorityId] = @ca",
-                new SqlParameter("@ca", (int)competentAuthority)).ToArrayAsync();
+                    [CompetentAuthorityId] = @ca
+                  AND
+                    [ReceivedDate] BETWEEN @from AND @to",
+                new SqlParameter("@ca", (int)competentAuthority),
+                new SqlParameter("@from", from),
+                new SqlParameter("@to", to)).ToArrayAsync();
         }
     }
 }
