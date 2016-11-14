@@ -26,7 +26,15 @@ AS
 			WHEN WT.ChemicalCompositionDescription IS NULL THEN CCT.Description
 			ELSE CCT.Description + ' - ' + WT.ChemicalCompositionDescription
 		END AS [ChemicalComposition],
-		LA.[Name] AS [LocalArea]
+		LA.[Name] AS [LocalArea],
+		SI.Quantity AS TotalQuantity,
+		SI_U.Description AS TotalQuantityUnits,
+		SI.Units AS TotalQuantityUnitsId,
+		TR.[EntryPoint] AS EntryPort,
+		TR.[ImportCountryName] AS DestinationCountry,
+		TR.[ExitPoint] AS ExitPort,
+		TR.[ExportCountryName] AS OriginatingCountry,
+		MS.Status
 	
 	FROM [Notification].[Movement] AS M
 
@@ -77,6 +85,18 @@ AS
     LEFT JOIN	[Lookup].[LocalArea] AS LA
     ON			[CON].[LocalAreaId] = [LA].[Id]
 
+	LEFT JOIN	[Notification].[ShipmentInfo] AS SI
+	ON			SI.[NotificationId] = M.NotificationId
+
+	LEFT JOIN	[Lookup].[ShipmentQuantityUnit] AS SI_U 
+	ON			[SI].[Units] = [SI_U].[Id]
+
+	LEFT JOIN   [Reports].[TransportRoute] AS TR
+	ON			[TR].[NotificationId] = [N].[Id]
+
+	LEFT JOIN   [Lookup].[MovementStatus] AS MS
+	ON			MS.Id = M.Status
+
 	UNION 
 
 		SELECT	
@@ -97,7 +117,15 @@ AS
 		MR_U.Description AS [QuantityReceivedUnit],
 		MR_U.Id AS [QuantityReceivedUnitId],
 		NULL AS [ChemicalComposition],
-		LA.[Name] AS [LocalArea]
+		LA.[Name] AS [LocalArea],
+		SI.Quantity AS TotalQuantity,
+		SI_U.Description AS TotalQuantityUnits,
+		SI.Units AS TotalQuantityUnitsId,
+		IP.Name AS EntryPort,
+		'United Kingdom' AS DestinationCountry,
+		OP.Name AS ExitPort,
+		OC.Name AS OriginatingCountry,
+		'NA' AS Status
 	
 	FROM [ImportNotification].[Movement] AS M
 
@@ -141,5 +169,29 @@ AS
 
     LEFT JOIN	[Lookup].[LocalArea] AS LA
     ON			[CON].[LocalAreaId] = [LA].[Id]
+
+	LEFT JOIN	[ImportNotification].[Shipment] AS SI
+	ON			SI.[ImportNotificationId] = M.NotificationId
+
+	LEFT JOIN	[Lookup].[ShipmentQuantityUnit] AS SI_U 
+	ON			[SI].[Units] = [SI_U].[Id]
+
+	LEFT JOIN	[ImportNotification].[TransportRoute] AS TR 
+	ON			[TR].[ImportNotificationId] = [N].[Id]
+
+	LEFT JOIN   [ImportNotification].[StateOfImport] AS SOI
+	ON			SOI.TransportRouteId = TR.Id
+
+	LEFT JOIN   [Notification].[EntryOrExitPoint] AS IP
+	ON			IP.Id = SOI.EntryPointId
+
+	LEFT JOIN   [ImportNotification].[StateOfExport] AS SOO
+	ON			SOO.TransportRouteId = TR.Id
+
+	LEFT JOIN   [Notification].[EntryOrExitPoint] AS OP
+	ON			OP.Id = SOO.ExitPointId
+
+	LEFT JOIN   [Lookup].[Country] AS OC
+	ON          OC.Id = SOO.CountryId
 
 GO

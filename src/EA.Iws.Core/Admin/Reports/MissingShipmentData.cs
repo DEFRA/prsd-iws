@@ -26,6 +26,8 @@
 
         public DateTime? RecoveryOrDisposalDate { get; set; }
 
+        public string CancelledShipment { get; set; }
+
         public decimal? CubicMetresQuantityReceived { get; set; }
 
         public decimal? TonnesQuantityReceived { get; set; }
@@ -35,5 +37,17 @@
         public string CompetentAuthorityArea { get; set; }
 
         public bool WasPrenotifiedBeforeThreeWorkingDays { get; set; }
+
+        public decimal? IntendedCubicMetresQuantity { get; set; }
+
+        public decimal? IntendedTonnesQuantity { get; set; }
+
+        public string PortOfExit { get; set; }
+
+        public string DispatchingCountry { get; set; }
+
+        public string PortOfEntry { get; set; }
+
+        public string DestinationCountry { get; set; }
     }
 }

@@ -26,8 +26,8 @@
                 NotificationNumber = source.NotificationNumber,
                 Exporter = source.Exporter,
                 Facility = source.Facility,
-                TonnesQuantityReceived = GetTonnes(source),
-                CubicMetresQuantityReceived = GetCubicMetres(source),
+                TonnesQuantityReceived = GetActualTonnes(source),
+                CubicMetresQuantityReceived = GetActualCubicMetres(source),
                 ActualDateOfShipment = source.ActualDateOfShipment,
                 ChemicalComposition = source.ChemicalComposition,
                 CompetentAuthorityArea = source.LocalArea,
@@ -35,11 +35,18 @@
                 ConsentValidTo = source.ConsentTo,
                 RecoveryOrDisposalDate = source.CompletedDate,
                 ShipmentNumber = source.ShipmentNumber,
-                WasPrenotifiedBeforeThreeWorkingDays = GetWasPrenotifiedThreeWorkingDaysBeforeActualDate(source, parameter)
+                WasPrenotifiedBeforeThreeWorkingDays = GetWasPrenotifiedThreeWorkingDaysBeforeActualDate(source, parameter),
+                CancelledShipment = source.Status == "Cancelled" ? "Cancelled" : string.Empty,
+                PortOfEntry = source.EntryPort,
+                PortOfExit = source.ExitPort,
+                DestinationCountry = source.DestinationCountry,
+                DispatchingCountry = source.OriginatingCountry,
+                IntendedTonnesQuantity = GetIntendedTonnes(source),
+                IntendedCubicMetresQuantity = GetIntendedCubicMetres(source)
             };
         }
 
-        private decimal? GetTonnes(MissingShipment source)
+        private decimal? GetActualTonnes(MissingShipment source)
         {
             if (!source.Units.HasValue
                 || !source.QuantityReceived.HasValue
@@ -54,7 +61,7 @@
                 false);
         }
 
-        private decimal? GetCubicMetres(MissingShipment source)
+        private decimal? GetActualCubicMetres(MissingShipment source)
         {
             if (!source.Units.HasValue
                 || !source.QuantityReceived.HasValue
@@ -66,6 +73,36 @@
             return ShipmentQuantityUnitConverter.ConvertToTarget(source.Units.Value,
                 ShipmentQuantityUnits.CubicMetres,
                 source.QuantityReceived.Value,
+                false);
+        }
+
+        private decimal? GetIntendedTonnes(MissingShipment source)
+        {
+            if (!source.TotalQuantityUnitsId.HasValue
+                || !source.TotalQuantity.HasValue
+                || ShipmentQuantityUnitsMetadata.IsVolumeUnit(source.TotalQuantityUnitsId.Value))
+            {
+                return null;
+            }
+
+            return ShipmentQuantityUnitConverter.ConvertToTarget(source.TotalQuantityUnitsId.Value,
+                ShipmentQuantityUnits.Tonnes,
+                source.TotalQuantity.Value,
+                false);
+        }
+
+        private decimal? GetIntendedCubicMetres(MissingShipment source)
+        {
+            if (!source.TotalQuantityUnitsId.HasValue
+                || !source.TotalQuantity.HasValue
+                || ShipmentQuantityUnitsMetadata.IsWeightUnit(source.TotalQuantityUnitsId.Value))
+            {
+                return null;
+            }
+
+            return ShipmentQuantityUnitConverter.ConvertToTarget(source.TotalQuantityUnitsId.Value,
+                ShipmentQuantityUnits.CubicMetres,
+                source.TotalQuantity.Value,
                 false);
         }
 

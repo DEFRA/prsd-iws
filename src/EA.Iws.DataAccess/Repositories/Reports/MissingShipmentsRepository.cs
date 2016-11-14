@@ -34,7 +34,14 @@
                     [QuantityReceived],
                     [QuantityReceivedUnitId] AS [Units],
                     [ChemicalComposition],
-                    [LocalArea]
+                    [LocalArea],
+                    [TotalQuantity],
+                    [TotalQuantityUnitsId],
+                    [EntryPort],
+                    [DestinationCountry],
+                    [ExitPort],
+                    [OriginatingCountry],
+                    [Status]
                 FROM [Reports].[NotificationShipmentDataMissingShipments]
                 WHERE [CompetentAuthorityId] = @ca
                 AND COALESCE([PrenotificationDate], [ActualDateOfShipment]) BETWEEN @from AND @to",
