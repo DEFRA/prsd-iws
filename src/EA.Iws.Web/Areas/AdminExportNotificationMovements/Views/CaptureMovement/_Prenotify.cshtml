@@ -16,7 +16,7 @@
         <fieldset>
             <div>@Html.Gds().ValidationMessageFor(m => m.HasNoPrenotification)</div>
             <label class="block-label" for="@Html.NameFor(m => m.HasNoPrenotification)">
-                @Html.CheckBoxFor(m => m.HasNoPrenotification, new { data_track = "element", data_category = "Terms and conditions", data_action = "Accept" })
+                @Html.CheckBoxFor(m => m.HasNoPrenotification)
                 @Html.DisplayNameFor(m => m.HasNoPrenotification)
             </label>
         </fieldset>
