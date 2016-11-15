@@ -106,6 +106,11 @@
             }
         }
 
+        public bool ShowFileClosedMessage
+        {
+            get { return NotificationStatus == NotificationStatus.FileClosed; }
+        }
+
         public bool ShowShipmentKeyDates
         {
             get
