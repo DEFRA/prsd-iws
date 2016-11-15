@@ -43,5 +43,20 @@
                 PrenotificationDate = movementSummaryData.Data.PreNotificationDate.Value.DateTime;
             }
         }
+
+        public bool ShowReceiptAndRecoveryAsReadOnly()
+        {
+            return IsReceived && IsOperationCompleted;
+        }
+
+        public bool ShowReceiptDataAsReadOnly()
+        {
+            return IsReceived;
+        }
+
+        public bool ShowRecoveryDataAsReadOnly()
+        {
+            return IsOperationCompleted;
+        }
     }
 }
