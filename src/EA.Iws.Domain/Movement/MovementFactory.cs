@@ -3,7 +3,9 @@
     using System;
     using System.Threading.Tasks;
     using Core.ComponentRegistration;
+    using Core.FinancialGuarantee;
     using Core.NotificationAssessment;
+    using FinancialGuarantee;
     using NotificationAssessment;
 
     [AutoRegister]
@@ -16,6 +18,7 @@
         private readonly INotificationAssessmentRepository assessmentRepository;
         private readonly NumberOfActiveLoads numberOfActiveLoads;
         private readonly ConsentPeriod consentPeriod;
+        private readonly IFinancialGuaranteeRepository financialGuaranteeRepository;
 
         public MovementFactory(NumberOfMovements numberOfMovements,
             NotificationMovementsQuantity movementsQuantity,
@@ -23,7 +26,8 @@
             MovementNumberGenerator numberGenerator,
             NumberOfActiveLoads numberOfActiveLoads,
             ConsentPeriod consentPeriod,
-            IMovementDateValidator dateValidator)
+            IMovementDateValidator dateValidator,
+            IFinancialGuaranteeRepository financialGuaranteeRepository)
         {
             this.numberOfMovements = numberOfMovements;
             this.movementsQuantity = movementsQuantity;
@@ -32,6 +36,7 @@
             this.numberOfActiveLoads = numberOfActiveLoads;
             this.consentPeriod = consentPeriod;
             this.dateValidator = dateValidator;
+            this.financialGuaranteeRepository = financialGuaranteeRepository;
         }
 
         public async Task<Movement> Create(Guid notificationId, DateTime actualMovementDate)
@@ -72,6 +77,15 @@
                 throw new InvalidOperationException(
                     string.Format("Cannot create a movement for notification {0} because its status is {1}",
                         notificationId, notificationStatus));
+            }
+
+            var financialGuaranteeStatus = await financialGuaranteeRepository.GetStatusByNotificationId(notificationId);
+
+            if (financialGuaranteeStatus != FinancialGuaranteeStatus.Approved)
+            {
+                throw new InvalidOperationException(
+                    string.Format("Cannot create a movement for notification {0} because its financial guarantee status is {1}",
+                        notificationId, financialGuaranteeStatus));
             }
 
             var consentPeriodExpired = await consentPeriod.HasExpired(notificationId);
