@@ -116,7 +116,8 @@
             get
             {
                 return (NotificationStatus == NotificationStatus.Consented ||
-                        NotificationStatus == NotificationStatus.ConsentWithdrawn)
+                        NotificationStatus == NotificationStatus.ConsentWithdrawn ||
+                        NotificationStatus == NotificationStatus.FileClosed)
                        &&
                        (FinancialGuaranteeStatus == FinancialGuaranteeStatus.Approved ||
                         FinancialGuaranteeStatus == FinancialGuaranteeStatus.Released);
