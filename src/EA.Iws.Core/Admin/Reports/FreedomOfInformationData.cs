@@ -26,6 +26,8 @@ namespace EA.Iws.Core.Admin.Reports
 
         public string YCode { get; set; }
 
+        public string OperationCodes { get; set; }
+
         public string ImporterName { get; set; }
 
         public string ImporterAddress { get; set; }

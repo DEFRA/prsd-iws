@@ -4,7 +4,7 @@ GO
 
 ALTER VIEW [Reports].[FreedomOfInformation]
 AS
-    SELECT
+       SELECT
         N.[NotificationNumber],
         NA.[ReceivedDate],
         N.[CompetentAuthorityId],
@@ -29,6 +29,7 @@ AS
                    order by 1
                    FOR XML PATH('')
                  ), 1, 1, '' ) AS [YCode],
+        OP.OperationCodes,
         O.[Importer] AS [ImporterName],
         O.[ImporterAddress],
         O.[Facility] AS [FacilityName],
@@ -58,5 +59,6 @@ AS
         INNER JOIN [Reports].[NotificationAssessment] NA ON N.Id = NA.NotificationId
         INNER JOIN [Reports].[WasteType] WT ON N.Id = WT.NotificationId
         INNER JOIN [Reports].[TransportRoute] TR ON N.Id = TR.NotificationId
+        INNER JOIN [Reports].[OperationCodesConcat] OP ON N.Id = OP.NotificationId
 
 GO
