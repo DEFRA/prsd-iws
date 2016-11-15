@@ -80,11 +80,29 @@ namespace EA.Iws.Web.Areas.AdminImportNotificationMovements.ViewModels.Capture {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to No prenotification received.
+        /// </summary>
+        public static string HasNoPrenotification {
+            get {
+                return ResourceManager.GetString("HasNoPrenotification", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Prenotification date.
         /// </summary>
         public static string PrenotificationDate {
             get {
                 return ResourceManager.GetString("PrenotificationDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please tick the box or enter prenotification received date.
+        /// </summary>
+        public static string PrenotificationDateRequired {
+            get {
+                return ResourceManager.GetString("PrenotificationDateRequired", resourceCulture);
             }
         }
     }
