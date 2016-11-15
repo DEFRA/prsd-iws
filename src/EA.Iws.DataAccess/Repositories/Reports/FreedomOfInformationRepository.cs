@@ -34,6 +34,7 @@
                     [NameOfWaste],
                     [EWC],
                     [YCode],
+                    [OperationCodes],
                     [ImporterName],
                     [ImporterAddress],
                     [FacilityName],
