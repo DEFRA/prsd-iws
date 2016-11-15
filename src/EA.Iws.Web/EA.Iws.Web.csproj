@@ -1097,6 +1097,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>IndexResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Areas\AdminExportAssessment\Views\KeyDates\IndexResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IndexResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Areas\AdminExportNotificationMovements\Controllers\DeleteController.cs" />
     <Compile Include="Areas\AdminExportNotificationMovements\Controllers\DeleteControllerResources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -2956,6 +2961,10 @@
       <LastGenOutput>DecisionResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\AdminExportAssessment\Views\KeyDatesOverride\IndexResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\AdminExportAssessment\Views\KeyDates\IndexResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>

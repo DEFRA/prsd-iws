@@ -280,7 +280,14 @@
 
         <br />
         <div class="form-group">
-            <input type="submit" class="button" value="Submit date" />
+            @if (Model.Command == KeyDatesCommand.ArchiveReference)
+            {
+                <input type="submit" class="button" value="@Resource.ArchieveReferenceButtonText" />
+            }
+            else
+            {
+                <input type="submit" class="button" value="@Resource.ButtonText" />
+            }
         </div>
 
     }

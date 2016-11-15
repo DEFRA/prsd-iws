@@ -1,6 +1,7 @@
 ﻿@using EA.Iws.Core.Notification
 @using EA.Iws.Core.NotificationAssessment
 @using EA.Iws.Web.Areas.AdminExportAssessment.ViewModels
+@using EA.Iws.Web.Areas.AdminExportAssessment.Views.KeyDates
 @model DateInputViewModel
 
 <h1 class="heading-large">Enter the key dates for this notification</h1>
@@ -355,9 +356,18 @@
         }
 
 
-        <br />
+        <br/>
+
         <div class="form-group">
-            <input type="submit" class="button" value="Submit date" />
+            @if (Model.Command == KeyDatesStatusEnum.ArchiveReference)
+            {
+                <input type="submit" class="button" value="@IndexResources.ArchieveReferenceButtonText" />
+            }
+            else
+            {
+                <input type="submit" class="button" value="@IndexResources.ButtonText" />
+            }
+            
         </div>
     }
 
