@@ -73,5 +73,20 @@
                     new[] { "Recovery.RecoveryDate.Day" });
             }
         }
+        
+        public bool ShowReceiptAndRecoveryAsReadOnly()
+        {
+            return Receipt.ReceivedDate.Day.HasValue && Recovery.RecoveryDate.Day.HasValue;
+        }
+
+        public bool ShowReceiptDataAsReadOnly()
+        {
+            return Receipt.ReceivedDate.Day.HasValue;
+        }
+
+        public bool ShowRecoveryDataAsReadOnly()
+        {
+            return Recovery.RecoveryDate.Day.HasValue;
+        }
     }
 }

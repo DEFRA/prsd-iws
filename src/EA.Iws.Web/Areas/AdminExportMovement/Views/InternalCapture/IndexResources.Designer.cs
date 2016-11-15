@@ -61,6 +61,15 @@ namespace EA.Iws.Web.Areas.AdminExportMovement.Views.InternalCapture {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Was the shipment accepted?.
+        /// </summary>
+        public static string AcceptedTitle {
+            get {
+                return ResourceManager.GetString("AcceptedTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Actual date.
         /// </summary>
         public static string ActualDateRow {
@@ -106,11 +115,38 @@ namespace EA.Iws.Web.Areas.AdminExportMovement.Views.InternalCapture {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to When was the waste recovered?.
+        /// </summary>
+        public static string RecoveryTitle {
+            get {
+                return ResourceManager.GetString("RecoveryTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Return to shipment summary.
         /// </summary>
         public static string ReturnToSummary {
             get {
                 return ResourceManager.GetString("ReturnToSummary", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Yes.
+        /// </summary>
+        public static string ShipmentWasAccepted {
+            get {
+                return ResourceManager.GetString("ShipmentWasAccepted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No.
+        /// </summary>
+        public static string ShipmentWasNotAccepted {
+            get {
+                return ResourceManager.GetString("ShipmentWasNotAccepted", resourceCulture);
             }
         }
         
