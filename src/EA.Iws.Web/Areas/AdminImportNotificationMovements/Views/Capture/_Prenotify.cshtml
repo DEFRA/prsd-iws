@@ -12,6 +12,16 @@
         @Html.EditorFor(m => m.PrenotificationDate)
     </div>
 
+    <div class="form-group @Html.Gds().FormGroupClass(m => m.HasNoPrenotification)">
+        <fieldset>
+            <div>@Html.Gds().ValidationMessageFor(m => m.HasNoPrenotification)</div>
+            <label class="block-label" for="@Html.NameFor(m => m.HasNoPrenotification)">
+                @Html.CheckBoxFor(m => m.HasNoPrenotification)
+                @Html.DisplayNameFor(m => m.HasNoPrenotification)
+            </label>
+        </fieldset>
+    </div>
+
     <div class="form-group @Html.Gds().FormGroupClass(m => m.ActualShipmentDate) @Html.Gds().FormGroupClass(m => m.ActualShipmentDate.Day) @Html.Gds().FormGroupClass(m => m.ActualShipmentDate.Month) @Html.Gds().FormGroupClass(m => m.ActualShipmentDate.Year)">
         @Html.LabelFor(m => m.ActualShipmentDate, new { @class = "heading-small" })
         @Html.Gds().ValidationMessageFor(m => m.ActualShipmentDate)
