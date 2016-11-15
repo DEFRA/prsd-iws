@@ -4,6 +4,7 @@
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Core.Admin.Search;
+    using Infrastructure;
     using Prsd.Core.Mediator;
     using Requests.Admin;
     using Requests.Admin.Search;
@@ -39,7 +40,7 @@
                 return View(model);
             }
 
-            return RedirectToAction("Results", new AdvancedSearchCriteria
+            var criteria = new AdvancedSearchCriteria
             {
                 ConsentValidFromStart = model.ConsentValidFromStart.AsDateTime(),
                 ConsentValidFromEnd = model.ConsentValidFromEnd.AsDateTime(),
@@ -56,8 +57,17 @@
                 ExporterName = model.ExporterName,
                 FacilityName = model.FacilityName,
                 NotificationReceivedStart = model.NotificationReceivedStart.AsDateTime(),
-                NotificationReceivedEnd = model.NotificationReceivedEnd.AsDateTime()
-            });
+                NotificationReceivedEnd = model.NotificationReceivedEnd.AsDateTime(),
+                ImportNotificationStatus = model.GetImportNotificationStatus(),
+                NotificationStatus = model.GetExportNotificationStatus(),
+                TradeDirection = model.SelectedTradeDirection,
+                NotificationType = model.SelectedNotificationType,
+                OperationCodes = model.SelectedOperationCodes,
+                IsInterim = model.IsInterim,
+                ExportCountryName = model.ExportCountryName
+            };
+
+            return RedirectToAction("Results", criteria.ToRouteValueDictionary());
         }
 
         [HttpGet]
@@ -77,7 +87,9 @@
         private async Task<SelectList> GetAreas()
         {
             var result = await mediator.SendAsync(new GetLocalAreas());
-            return new SelectList(result.Select(area => new SelectListItem { Text = area.Name, Value = area.Id.ToString() }),
+            return
+                new SelectList(
+                    result.Select(area => new SelectListItem { Text = area.Name, Value = area.Id.ToString() }),
                     "Value", "Text");
         }
     }

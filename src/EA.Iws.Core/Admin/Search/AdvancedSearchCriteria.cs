@@ -1,6 +1,11 @@
 ﻿namespace EA.Iws.Core.Admin.Search
 {
     using System;
+    using System.Collections.Generic;
+    using ImportNotificationAssessment;
+    using NotificationAssessment;
+    using OperationCodes;
+    using Shared;
 
     public class AdvancedSearchCriteria
     {
@@ -35,5 +40,19 @@
         public DateTime? NotificationReceivedStart { get; set; }
 
         public DateTime? NotificationReceivedEnd { get; set; }
+
+        public NotificationType? NotificationType { get; set; }
+
+        public OperationCode[] OperationCodes { get; set; }
+
+        public TradeDirection? TradeDirection { get; set; }
+
+        public string ExportCountryName { get; set; }
+
+        public NotificationStatus? NotificationStatus { get; set; }
+
+        public ImportNotificationStatus? ImportNotificationStatus { get; set; }
+
+        public bool? IsInterim { get; set; }
     }
 }

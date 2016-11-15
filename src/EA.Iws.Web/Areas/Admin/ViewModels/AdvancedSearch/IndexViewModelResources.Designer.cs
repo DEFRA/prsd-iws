@@ -115,6 +115,15 @@ namespace EA.Iws.Web.Areas.Admin.ViewModels.AdvancedSearch {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Country of export.
+        /// </summary>
+        public static string ExportCountryName {
+            get {
+                return ResourceManager.GetString("ExportCountryName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Notifier (exporter).
         /// </summary>
         public static string ExporterName {
@@ -151,6 +160,15 @@ namespace EA.Iws.Web.Areas.Admin.ViewModels.AdvancedSearch {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Interim or non-interim.
+        /// </summary>
+        public static string IsInterim {
+            get {
+                return ResourceManager.GetString("IsInterim", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Area.
         /// </summary>
         public static string LocalArea {
@@ -174,6 +192,33 @@ namespace EA.Iws.Web.Areas.Admin.ViewModels.AdvancedSearch {
         public static string NotificationReceived {
             get {
                 return ResourceManager.GetString("NotificationReceived", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Notification status.
+        /// </summary>
+        public static string NotificationStatus {
+            get {
+                return ResourceManager.GetString("NotificationStatus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Recovery or disposal.
+        /// </summary>
+        public static string NotificationType {
+            get {
+                return ResourceManager.GetString("NotificationType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to R and D codes.
+        /// </summary>
+        public static string OperationCodes {
+            get {
+                return ResourceManager.GetString("OperationCodes", resourceCulture);
             }
         }
         
@@ -210,6 +255,15 @@ namespace EA.Iws.Web.Areas.Admin.ViewModels.AdvancedSearch {
         public static string To {
             get {
                 return ResourceManager.GetString("To", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Import or export.
+        /// </summary>
+        public static string TradeDirection {
+            get {
+                return ResourceManager.GetString("TradeDirection", resourceCulture);
             }
         }
     }

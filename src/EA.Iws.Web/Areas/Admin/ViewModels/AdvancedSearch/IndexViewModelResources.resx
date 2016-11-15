@@ -135,6 +135,9 @@
   <data name="ExitPointName" xml:space="preserve">
     <value>Exit port / point</value>
   </data>
+  <data name="ExportCountryName" xml:space="preserve">
+    <value>Country of export</value>
+  </data>
   <data name="ExporterName" xml:space="preserve">
     <value>Notifier (exporter)</value>
   </data>
@@ -147,6 +150,9 @@
   <data name="ImporterName" xml:space="preserve">
     <value>Consignee (importer)</value>
   </data>
+  <data name="IsInterim" xml:space="preserve">
+    <value>Interim or non-interim</value>
+  </data>
   <data name="LocalArea" xml:space="preserve">
     <value>Area</value>
   </data>
@@ -155,6 +161,15 @@
   </data>
   <data name="NotificationReceived" xml:space="preserve">
     <value>Notification received date</value>
+  </data>
+  <data name="NotificationStatus" xml:space="preserve">
+    <value>Notification status</value>
+  </data>
+  <data name="NotificationType" xml:space="preserve">
+    <value>Recovery or disposal</value>
+  </data>
+  <data name="OperationCodes" xml:space="preserve">
+    <value>R and D codes</value>
   </data>
   <data name="PleaseEnterEndDate" xml:space="preserve">
     <value>Please enter the end date for this date range</value>
@@ -167,5 +182,8 @@
   </data>
   <data name="To" xml:space="preserve">
     <value>to</value>
+  </data>
+  <data name="TradeDirection" xml:space="preserve">
+    <value>Import or export</value>
   </data>
 </root>
