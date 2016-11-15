@@ -169,6 +169,15 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.Options {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to This notification has been closed. No further shipments can be made..
+        /// </summary>
+        public static string FileClosedMessage {
+            get {
+                return ResourceManager.GetString("FileClosedMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Download an interim movement document.
         /// </summary>
         public static string GenerateInterimDoc {

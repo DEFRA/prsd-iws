@@ -228,4 +228,7 @@
   <data name="IncompleteMessage" xml:space="preserve">
     <value>This notification can not be submitted yet, as it is incomplete. You can submit it for approval once you complete it.</value>
   </data>
+  <data name="FileClosedMessage" xml:space="preserve">
+    <value>This notification has been closed. No further shipments can be made.</value>
+  </data>
 </root>
