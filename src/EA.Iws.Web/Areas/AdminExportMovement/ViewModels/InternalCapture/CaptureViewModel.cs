@@ -76,17 +76,17 @@
         
         public bool ShowReceiptAndRecoveryAsReadOnly()
         {
-            return Receipt.ReceivedDate.Day.HasValue && Recovery.RecoveryDate.Day.HasValue;
+            return IsReceived && IsOperationCompleted;
         }
 
         public bool ShowReceiptDataAsReadOnly()
         {
-            return Receipt.ReceivedDate.Day.HasValue;
+            return IsReceived;
         }
 
         public bool ShowRecoveryDataAsReadOnly()
         {
-            return Recovery.RecoveryDate.Day.HasValue;
+            return IsOperationCompleted;
         }
     }
 }
