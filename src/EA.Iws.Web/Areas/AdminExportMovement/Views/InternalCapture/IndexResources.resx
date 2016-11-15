@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AcceptedTitle" xml:space="preserve">
+    <value>Was the shipment accepted?</value>
+  </data>
   <data name="ActualDateRow" xml:space="preserve">
     <value>Actual date</value>
   </data>
@@ -132,8 +135,17 @@
   <data name="PrenotificationDateRow" xml:space="preserve">
     <value>Prenotification date</value>
   </data>
+  <data name="RecoveryTitle" xml:space="preserve">
+    <value>When was the waste recovered?</value>
+  </data>
   <data name="ReturnToSummary" xml:space="preserve">
     <value>Return to shipment summary</value>
+  </data>
+  <data name="ShipmentWasAccepted" xml:space="preserve">
+    <value>Yes</value>
+  </data>
+  <data name="ShipmentWasNotAccepted" xml:space="preserve">
+    <value>No</value>
   </data>
   <data name="TableDateHeader" xml:space="preserve">
     <value>Date</value>

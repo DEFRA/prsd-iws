@@ -73,5 +73,20 @@
                     new[] { "Recovery.RecoveryDate.Day" });
             }
         }
+        
+        public bool ShowReceiptAndRecoveryAsReadOnly()
+        {
+            return IsReceived && IsOperationCompleted;
+        }
+
+        public bool ShowReceiptDataAsReadOnly()
+        {
+            return IsReceived;
+        }
+
+        public bool ShowRecoveryDataAsReadOnly()
+        {
+            return IsOperationCompleted;
+        }
     }
 }
