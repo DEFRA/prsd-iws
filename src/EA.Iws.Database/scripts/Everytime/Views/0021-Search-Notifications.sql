@@ -24,7 +24,12 @@ AS
         SOE_C.Name AS CountryOfExport,
         EnPt.Name AS EntryPointName,
         ExPt.Name AS ExitPointName,
-        OC.OperationCode,
+        STUFF(( SELECT ',' + CONVERT(NVARCHAR(4), OC.OperationCode) AS [text()]
+               FROM [Notification].[OperationCodes] OC
+               WHERE OC.NotificationId = N.Id
+               ORDER BY OC.OperationCode
+               FOR XML PATH('')
+             ), 1, 1, '' ) AS OperationCodes,
         C.LocalAreaId,
         CON.[From] AS ConsentValidFrom,
         CON.[To] AS ConsentValidTo
@@ -51,7 +56,6 @@ AS
         INNER JOIN [Notification].[FacilityCollection] FC
             INNER JOIN [Notification].[Facility] F ON FC.Id = F.FacilityCollectionId
         ON N.Id = FC.NotificationId
-        INNER JOIN [Notification].[OperationCodes] OC ON N.Id = OC.NotificationId
         INNER JOIN [Notification].[NotificationDates] ND ON NA.Id = ND.NotificationAssessmentId
         LEFT JOIN [Notification].[Consultation] C ON N.Id = C.NotificationId
         LEFT JOIN [Notification].[Consent] CON ON N.Id = CON.NotificationApplicationId
@@ -78,7 +82,13 @@ AS
         SOE_C.Name AS CountryOfExport,
         EnPt.Name AS EntryPointName,
         ExPt.Name AS ExitPointName,
-        OC.OperationCode,
+        STUFF(( SELECT ',' + CONVERT(NVARCHAR(4), OC.OperationCode) AS [text()]
+               FROM [ImportNotification].[WasteOperation] WO
+               INNER JOIN [ImportNotification].[OperationCodes] OC ON WO.Id = OC.WasteOperationId
+               WHERE N.Id = WO.ImportNotificationId
+               ORDER BY OC.OperationCode
+               FOR XML PATH('')
+             ), 1, 1, '' ) AS OperationCodes,
         C.LocalAreaId,
         CON.[From] AS ConsentValidFrom,
         CON.[To] AS ConsentValidTo
@@ -102,9 +112,6 @@ AS
         INNER JOIN [ImportNotification].[FacilityCollection] FC
             INNER JOIN [ImportNotification].[Facility] F ON FC.Id = F.FacilityCollectionId
         ON N.Id = FC.ImportNotificationId
-        INNER JOIN [ImportNotification].[WasteOperation] WO
-            INNER JOIN [ImportNotification].[OperationCodes] OC ON WO.Id = OC.WasteOperationId
-        ON N.ID = WO.ImportNotificationId
         INNER JOIN [ImportNotification].[NotificationAssessment] NA ON N.Id = NA.NotificationApplicationId
         INNER JOIN [ImportNotification].[NotificationDates] ND ON NA.Id = ND.NotificationAssessmentId
         INNER JOIN [ImportNotification].[InterimStatus] InS ON N.Id = InS.ImportNotificationId

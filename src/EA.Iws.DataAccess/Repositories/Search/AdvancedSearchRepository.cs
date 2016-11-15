@@ -7,6 +7,7 @@
     using System.Threading.Tasks;
     using Core.Admin.Search;
     using Core.Notification;
+    using Core.OperationCodes;
     using Core.Shared;
     using Domain.Search;
 
@@ -33,7 +34,8 @@
                     AND     (@exportStatus IS NULL OR [ExportStatus] = @exportStatus)
                     AND     (@importStatus IS NULL OR [ImportStatus] = @importStatus)
                     AND     (@isInterim IS NULL OR [IsInterim] = @isInterim)
-                    AND     (@exportCountryName IS NULL OR [CountryOfExport] LIKE '%' + @exportCountryName + '%')";
+                    AND     (@exportCountryName IS NULL OR [CountryOfExport] LIKE '%' + @exportCountryName + '%')
+                    AND     (@operationCodes IS NULL OR [OperationCodes] = @operationCodes)";
 
         private readonly IwsContext context;
 
@@ -124,10 +126,7 @@
 
         private async Task<Guid[]> GetSearchResults(AdvancedSearchCriteria criteria, UKCompetentAuthority competentAuthority, string importOrExport)
         {
-            var query = SearchQuery;
-
-            var parameters = new List<object>
-            {
+            return await context.Database.SqlQuery<Guid>(SearchQuery,
                 new SqlParameter("@ca", (int)competentAuthority),
                 new SqlParameter("@importOrExport", importOrExport),
                 new SqlParameter("@ewc", (object)criteria.EwcCode ?? DBNull.Value),
@@ -151,30 +150,18 @@
                 new SqlParameter("@exportStatus", (object)criteria.NotificationStatus ?? DBNull.Value),
                 new SqlParameter("@importStatus", (object)criteria.ImportNotificationStatus ?? DBNull.Value),
                 new SqlParameter("@isInterim", (object)criteria.IsInterim ?? DBNull.Value),
-                new SqlParameter("@exportCountryName", (object)criteria.ExportCountryName ?? DBNull.Value)
-            };
+                new SqlParameter("@exportCountryName", (object)criteria.ExportCountryName ?? DBNull.Value),
+                new SqlParameter("@operationCodes", GetOperationCodes(criteria.OperationCodes))).ToArrayAsync();
+        }
 
-            if (criteria.OperationCodes != null && criteria.OperationCodes.Any())
+        private static object GetOperationCodes(OperationCode[] operationCodes)
+        {
+            if (operationCodes == null || !operationCodes.Any())
             {
-                query += "\nAND (";
-
-                for (int i = 0; i < criteria.OperationCodes.Length; i++)
-                {
-                    if (i == 0)
-                    {
-                        query += string.Format("\n[OperationCode] = @opCode{0}", i);
-                    }
-                    else
-                    {
-                        query += string.Format("\nOR [OperationCode] = @opCode{0}", i);
-                    }
-                    parameters.Add(new SqlParameter(string.Format("@opCode{0}", i), criteria.OperationCodes[i]));
-                }
-
-                query += ")";
+                return DBNull.Value;
             }
 
-            return await context.Database.SqlQuery<Guid>(query, parameters.ToArray()).ToArrayAsync();
+            return string.Join(",", operationCodes.OrderBy(x => x).Select(x => (int)x));
         }
     }
 }
