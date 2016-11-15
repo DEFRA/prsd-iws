@@ -58,7 +58,5 @@ AS
         INNER JOIN [Reports].[NotificationAssessment] NA ON N.Id = NA.NotificationId
         INNER JOIN [Reports].[WasteType] WT ON N.Id = WT.NotificationId
         INNER JOIN [Reports].[TransportRoute] TR ON N.Id = TR.NotificationId
-    WHERE
-        N.[ImportOrExport] = 'Export'
 
 GO

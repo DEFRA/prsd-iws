@@ -31,4 +31,22 @@ AS
     INNER JOIN	[Reports].[WasteCodes] WC 
     ON			[N].[Id] = [WC].[NotificationId] 
     AND			[WC].[CodeType] IN (1, 2)
+
+    UNION
+
+    SELECT
+        N.Id AS NotificationId,
+        N.NotificationNumber,
+        WT.Name AS Description,
+        4 AS ChemicalCompositionTypeId,
+        'Other' AS ChemicalCompositionType,
+        NULL AS ChemicalCompositionDescription,
+        NULL AS HasSpecialHandlingRequirements,
+        NULL AS SpecialHandlingDetails,
+        'Import' AS [ImportOrExport]
+
+    FROM		[ImportNotification].[Notification] AS N
+
+    INNER JOIN	[ImportNotification].[WasteType] AS WT
+    ON			[WT].[ImportNotificationId] = [N].[Id]
 GO
