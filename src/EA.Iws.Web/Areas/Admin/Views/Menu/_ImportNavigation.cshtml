@@ -14,7 +14,15 @@
 }
 
 <div id="accordion" class="accordion-import">
-    <p class="bold-medium">&nbsp;@Model.Details.NotificationNumber</p>
+    <div class="notification-number">
+        <p class="bold-medium">@Model.Details.NotificationNumber
+            @if (Model.Details.CompetentAuthority == UKCompetentAuthority.England)
+            {
+            <br />
+                <span class="assigned-area">@Model.Details.Area</span>
+            }
+        </p>
+    </div>
     <ul>
         <li class="@GetClassForSection(ImportNavigationSection.Notification, "active")">
             <h3 class="@GetClassForSection(ImportNavigationSection.Notification, "current")">
