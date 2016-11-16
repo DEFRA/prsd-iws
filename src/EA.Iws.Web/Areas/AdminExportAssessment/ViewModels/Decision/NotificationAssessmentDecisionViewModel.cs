@@ -7,6 +7,7 @@
     using System.Web.Mvc;
     using Core.Admin;
     using Core.NotificationAssessment;
+    using Prsd.Core;
     using Prsd.Core.Helpers;
     using Web.ViewModels.Shared;
 
@@ -150,6 +151,11 @@
             if (!ObjectionDate.IsCompleted)
             {
                 yield return new ValidationResult(NotificationAssessmentDecisionViewModelResources.ObjectedDateRequired, new[] { "ObjectionDate" });
+            }
+
+            if (ObjectionDate.AsDateTime() > SystemTime.UtcNow.Date)
+            {
+                yield return new ValidationResult(NotificationAssessmentDecisionViewModelResources.ObjectDateNotFuture, new[] { "ObjectionDate" });
             }
         }
 
