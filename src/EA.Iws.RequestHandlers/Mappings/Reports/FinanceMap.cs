@@ -28,6 +28,7 @@
                 Notifier = source.Notifier,
                 NotifierAddress = source.NotifierAddress,
                 PaymentReceivedDate = source.PaymentReceivedDate,
+                ReceivedDate = source.ReceivedDate,
                 TotalBillable = source.TotalBillable,
                 TotalPaid = source.TotalPaid,
                 TotalRefunded = source.TotalRefunded,
