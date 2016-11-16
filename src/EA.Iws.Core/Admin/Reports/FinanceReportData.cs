@@ -20,6 +20,8 @@
 
         public string FacilityAddress { get; set; }
 
+        public DateTime? ReceivedDate { get; set; }
+
         public DateTime? PaymentReceivedDate { get; set; }
 
         public decimal? TotalBillable { get; set; }

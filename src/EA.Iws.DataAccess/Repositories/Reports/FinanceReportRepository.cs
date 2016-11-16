@@ -28,6 +28,7 @@
                     [ConsigneeAddress],
                     [Facility],
                     [FacilityAddress],
+                    [ReceivedDate],
                     [PaymentReceivedDate],
                     [TotalBillable],
                     [TotalPaid],
