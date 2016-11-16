@@ -2,8 +2,7 @@
 {
     using Prsd.Core.Mediator;
     using Requests.NotificationAssessment;
-    using System.Data.Entity;
-    using System.Linq;
+    using System.Data.SqlClient;
     using System.Threading.Tasks;
     using Core.NotificationAssessment;
     using DataAccess;
@@ -19,25 +18,22 @@
 
         public async Task<NotificationAssessmentSummaryInformationData> HandleAsync(GetNotificationAssessmentSummaryInformation message)
         {
-            var data = await context.NotificationApplications.Join(
-                context.NotificationAssessments,
-                nap => nap.Id,
-                nas => nas.NotificationApplicationId,
-                (application, assessment) => new 
-                {
-                    application.Id,
-                    Number = application.NotificationNumber,
-                    application.CompetentAuthority,
-                    assessment.Status
-                }).SingleAsync(o => o.Id == message.Id);
-
-            return new NotificationAssessmentSummaryInformationData
-            {
-                Id = data.Id,
-                CompetentAuthority = data.CompetentAuthority,
-                Number = data.Number,
-                Status = data.Status
-            };
+            return await context.Database.SqlQuery<NotificationAssessmentSummaryInformationData>(
+                @"SELECT
+                    N.[Id],
+                    N.[NotificationNumber] AS [Number],
+                    N.[CompetentAuthority],
+                    NA.[Status],
+                    LA.[Name] AS [Area]
+                FROM
+                    [Notification].[Notification] N
+                    INNER JOIN [Notification].[NotificationAssessment] NA ON NA.[NotificationApplicationId] = N.[Id]
+                    LEFT JOIN [Notification].[Consultation] C 
+                        INNER JOIN [Lookup].[LocalArea] LA ON LA.[Id] = C.[LocalAreaId]
+                    ON C.[NotificationId] = N.[Id]
+                WHERE
+                    N.[Id] = @notificationId",
+                new SqlParameter("@notificationId", message.Id)).SingleAsync();
         }
     }
 }

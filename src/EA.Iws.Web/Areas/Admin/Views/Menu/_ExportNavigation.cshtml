@@ -8,7 +8,15 @@
 }
 
 <div id="accordion" class="accordion-export">
-    <p class="bold-medium">&nbsp;@Model.Data.Number</p>
+    <div class="notification-number">
+        <p class="bold-medium">@Model.Data.Number
+            @if (Model.Data.CompetentAuthority == UKCompetentAuthority.England)
+            {
+                <br/>
+                <span class="assigned-area">@Model.Data.Area</span>
+            }
+        </p>
+    </div>
     <ul>
         <li class="@GetClassForSection(ExportNavigationSection.Assessment, "active")">
             <h3 class="@GetClassForSection(ExportNavigationSection.Assessment, "current")">

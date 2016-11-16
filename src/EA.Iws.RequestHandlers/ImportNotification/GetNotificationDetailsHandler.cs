@@ -1,33 +1,40 @@
 ﻿namespace EA.Iws.RequestHandlers.ImportNotification
 {
+    using System.Data.SqlClient;
     using System.Threading.Tasks;
     using Core.ImportNotification;
-    using Domain.ImportNotification;
-    using Prsd.Core.Mapper;
+    using DataAccess;
     using Prsd.Core.Mediator;
     using Requests.ImportNotification;
 
     internal class GetNotificationDetailsHandler : IRequestHandler<GetNotificationDetails, NotificationDetails>
     {
-        private readonly IImportNotificationAssessmentRepository assessmentRepository;
-        private readonly IMapper mapper;
-        private readonly IImportNotificationRepository repository;
+        private readonly ImportNotificationContext context;
 
-        public GetNotificationDetailsHandler(IImportNotificationRepository repository,
-            IImportNotificationAssessmentRepository assessmentRepository,
-            IMapper mapper)
+        public GetNotificationDetailsHandler(ImportNotificationContext context)
         {
-            this.repository = repository;
-            this.mapper = mapper;
-            this.assessmentRepository = assessmentRepository;
+            this.context = context;
         }
 
         public async Task<NotificationDetails> HandleAsync(GetNotificationDetails message)
         {
-            var notification = await repository.Get(message.ImportNotificationId);
-            var status = await assessmentRepository.GetStatusByNotification(message.ImportNotificationId);
-
-            return mapper.Map<NotificationDetails>(notification, status);
+            return await context.Database.SqlQuery<NotificationDetails>(
+                @"SELECT
+                    N.[Id] AS [ImportNotificationId],
+                    N.[NotificationNumber],
+                    N.[NotificationType],
+                    N.[CompetentAuthority],
+                    NA.[Status],
+                    LA.[Name] AS [Area]
+                FROM
+                    [ImportNotification].[Notification] N
+                    INNER JOIN [ImportNotification].[NotificationAssessment] NA ON NA.[NotificationApplicationId] = N.[Id]
+                    LEFT JOIN [ImportNotification].[Consultation] C 
+                        INNER JOIN [Lookup].[LocalArea] LA ON LA.[Id] = C.[LocalAreaId]
+                    ON C.[NotificationId] = N.[Id]
+                WHERE
+                    N.[Id] = @notificationId",
+                new SqlParameter("@notificationId", message.ImportNotificationId)).SingleAsync();
         }
     }
 }

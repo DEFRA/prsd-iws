@@ -132,6 +132,14 @@
     li.active ul {
         display: block;
     }
+
+    .notification-number {
+        padding: 5px;
+
+        .assigned-area {
+            @include core-14;
+        }
+    }
 }
 
 .accordion-import {
