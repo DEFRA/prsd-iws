@@ -33,7 +33,7 @@
             NotificationAcknowledgedDate = new OptionalDateInputViewModel(keyDates.AcknowlegedDate, true);
             DecisionDate = new OptionalDateInputViewModel(keyDates.DecisionRequiredByDate, true);
             NewDate = new OptionalDateInputViewModel(true);
-            Decisions = new List<NotificationAssessmentDecision>();
+            Decisions = keyDates.DecisionHistory;
             IsInterim = keyDates.IsInterim;
             NotificationFileClosedDate = new OptionalDateInputViewModel(keyDates.FileClosedDate, true);
             ArchiveReference = keyDates.ArchiveReference;
