@@ -17,5 +17,9 @@
             Date = date;
             Reasons = reasons;
         }
+
+        private ImportWithdrawn()
+        {
+        }
     }
 }

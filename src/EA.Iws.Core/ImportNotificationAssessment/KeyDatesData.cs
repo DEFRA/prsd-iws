@@ -1,6 +1,8 @@
 ﻿namespace EA.Iws.Core.ImportNotificationAssessment
 {
     using System;
+    using System.Collections.Generic;
+    using NotificationAssessment;
 
     public class KeyDatesData
     {
@@ -25,5 +27,7 @@
         public DateTime? FileClosedDate { get; set; }
 
         public string ArchiveReference { get; set; }
+
+        public IList<NotificationAssessmentDecision> DecisionHistory { get; set; } 
     }
 }
