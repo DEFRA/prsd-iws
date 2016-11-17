@@ -338,12 +338,14 @@
     <Compile Include="Movement\Movement.cs" />
     <Compile Include="AddressBook\AddressBook.cs" />
     <Compile Include="PhoneNumber.cs" />
+    <Compile Include="Reports\DataImportNotification.cs" />
     <Compile Include="Reports\DataExportNotification.cs" />
     <Compile Include="Reports\ExportStats.cs" />
     <Compile Include="Reports\Finance.cs" />
     <Compile Include="Reports\IExportNotificationsRepository.cs" />
     <Compile Include="Reports\IExportStatsRepository.cs" />
     <Compile Include="Reports\IFinanceReportRepository.cs" />
+    <Compile Include="Reports\IImportNotificationsRepository.cs" />
     <Compile Include="Reports\IMissingShipmentsRepository.cs" />
     <Compile Include="Reports\IFreedomOfInformationRepository.cs" />
     <Compile Include="Reports\MissingShipment.cs" />

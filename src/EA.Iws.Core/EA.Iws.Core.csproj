@@ -59,6 +59,7 @@
     <Compile Include="Admin\DecisionType.cs" />
     <Compile Include="Admin\KeyDates\KeyDatesOverrideData.cs" />
     <Compile Include="Admin\LocalAreaData.cs" />
+    <Compile Include="Admin\Reports\DataImportNotificationData.cs" />
     <Compile Include="Admin\Reports\DataExportNotificationData.cs" />
     <Compile Include="Admin\Reports\ExportStatsData.cs" />
     <Compile Include="Admin\Reports\FinanceReportData.cs" />
