@@ -242,6 +242,15 @@ namespace EA.Iws.Web.Areas.AdminExportAssessment.ViewModels.Decision {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The decision made date cannot be in the future.
+        /// </summary>
+        public static string WithdrawnDateNotFuture {
+            get {
+                return ResourceManager.GetString("WithdrawnDateNotFuture", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Please enter the date the notificaiton was withdrawn.
         /// </summary>
         public static string WithdrawnDateRequired {

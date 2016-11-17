@@ -180,4 +180,7 @@
   <data name="ObjectDateNotFuture" xml:space="preserve">
     <value>The decision made date cannot be in the future</value>
   </data>
+  <data name="WithdrawnDateNotFuture" xml:space="preserve">
+    <value>The decision made date cannot be in the future</value>
+  </data>
 </root>
