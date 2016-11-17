@@ -35,8 +35,29 @@
                 AssessmentStartedElapsedWorkingDays = GetAssessmentStartedElapsedWorkingDays(source, parameter),
                 DecisionRequiredDate = GetDecisionRequiredByDate(source, parameter),
                 ConsentDate = source.Consented,
-                Officer = source.Officer
+                Officer = source.Officer,
+                CompleteToAcknowledgedElapsedWorkingDays = GetCompleteToAcknowledgedElapsedWorkingDays(source, parameter),
+                DecisionToConsentElapsedWorkingDays = GetDecisionToConsentElapsedWorkingDays(source, parameter),
+                ReceivedToAcknowledgedElapsedWorkingDays = GetReceivedToAcknowledgedElapsedWorkingDays(source, parameter),
+                ReceivedToConsentElapsedWorkingDays = GetReceivedToConsentElapsedWorkingDays(source, parameter)
             };
+        }
+
+        private DateTime GetReceivedOrPaymentDate(DataImportNotification source)
+        {
+            if (!source.PaymentReceived.HasValue)
+            {
+                throw new InvalidOperationException("PaymentReceived has no value");
+            }
+
+            if (!source.NotificationReceived.HasValue)
+            {
+                throw new InvalidOperationException("NotificationReceived has no value");
+            }
+
+            return source.PaymentReceived.Value > source.NotificationReceived.Value
+                ? source.PaymentReceived.Value
+                : source.NotificationReceived.Value;
         }
 
         private int? GetAssessmentStartedElapsedWorkingDays(DataImportNotification source, UKCompetentAuthority parameter)
@@ -47,7 +68,7 @@
             }
 
             return workingDayCalculator.GetWorkingDays(
-                source.PaymentReceived.Value > source.NotificationReceived.Value ? source.PaymentReceived.Value : source.NotificationReceived.Value, 
+                GetReceivedOrPaymentDate(source), 
                 source.AssessmentStarted.Value,
                 false, parameter);
         }
@@ -60,6 +81,62 @@
             }
 
             return decisionRequiredByCalculator.Get(source.Preconsented, source.Acknowledged.Value, parameter);
+        }
+
+        private int? GetReceivedToAcknowledgedElapsedWorkingDays(DataImportNotification source,
+            UKCompetentAuthority parameter)
+        {
+            if (!source.PaymentReceived.HasValue || !source.Acknowledged.HasValue || !source.NotificationReceived.HasValue)
+            {
+                return null;
+            }
+
+            return workingDayCalculator.GetWorkingDays(
+                GetReceivedOrPaymentDate(source),
+                source.Acknowledged.Value,
+                false, parameter);
+        }
+
+        private int? GetCompleteToAcknowledgedElapsedWorkingDays(DataImportNotification source,
+            UKCompetentAuthority parameter)
+        {
+            if (!source.ApplicationCompleted.HasValue || !source.Acknowledged.HasValue)
+            {
+                return null;
+            }
+
+            return workingDayCalculator.GetWorkingDays(
+                source.ApplicationCompleted.Value,
+                source.Acknowledged.Value,
+                false, parameter);
+        }
+
+        private int? GetReceivedToConsentElapsedWorkingDays(DataImportNotification source,
+            UKCompetentAuthority parameter)
+        {
+            if (!source.PaymentReceived.HasValue || !source.Consented.HasValue || !source.NotificationReceived.HasValue)
+            {
+                return null;
+            }
+
+            return workingDayCalculator.GetWorkingDays(
+                GetReceivedOrPaymentDate(source),
+                source.Consented.Value,
+                false, parameter);
+        }
+
+        private int? GetDecisionToConsentElapsedWorkingDays(DataImportNotification source,
+            UKCompetentAuthority parameter)
+        {
+            if (!source.DecisionDate.HasValue || !source.Consented.HasValue)
+            {
+                return null;
+            }
+
+            return workingDayCalculator.GetWorkingDays(
+                source.DecisionDate.Value,
+                source.Consented.Value,
+                false, parameter);
         }
     }
 }

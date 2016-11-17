@@ -30,6 +30,14 @@
 
         public int? AssessmentStartedElapsedWorkingDays { get; set; }
 
+        public int? ReceivedToAcknowledgedElapsedWorkingDays { get; set; }
+
+        public int? CompleteToAcknowledgedElapsedWorkingDays { get; set; }
+
+        public int? ReceivedToConsentElapsedWorkingDays { get; set; }
+
+        public int? DecisionToConsentElapsedWorkingDays { get; set; }
+
         public string Officer { get; set; }
     }
 }
