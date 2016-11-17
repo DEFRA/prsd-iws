@@ -11,5 +11,7 @@
         public const string CanViewMissingShipmentsReport = "Can View Missing Shipments Report";
 
         public const string CanViewFoiReport = "Can View FOI Report";
+
+        public const string CanViewImportNotificationsReport = "Can View Import Notifications Report";
     }
 }
