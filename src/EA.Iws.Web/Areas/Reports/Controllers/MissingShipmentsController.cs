@@ -3,6 +3,7 @@
     using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Mvc;
+    using ClosedXML.Excel;
     using Core.Admin.Reports;
     using Infrastructure;
     using Prsd.Core.Mediator;
@@ -39,9 +40,9 @@
 
             var report = await mediator.SendAsync(new GetMissingShipmentsReport(from, to));
 
-            var fileName = string.Format("missing-shipments-{0}-{1}.csv", from.ToShortDateString(), to.ToShortDateString());
+            var fileName = string.Format("missing-shipments-{0}-{1}.xlsx", from.ToShortDateString(), to.ToShortDateString());
 
-            return new CsvActionResult<MissingShipmentData>(report.ToList(), fileName);
-        } 
+            return new XlsxActionResult<MissingShipmentData>(report, fileName);
+        }
     }
 }

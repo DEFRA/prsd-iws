@@ -2045,6 +2045,7 @@
     </Compile>
     <Compile Include="Infrastructure\Authorization\AuthorizationService.cs" />
     <Compile Include="Infrastructure\Authorization\AuthorizeActivityAttribute.cs" />
+    <Compile Include="Infrastructure\XlsxActionResult.cs" />
     <Compile Include="Infrastructure\ExportNavigationSection.cs" />
     <Compile Include="Infrastructure\FeedbackLinkResources.Designer.cs">
       <AutoGen>True</AutoGen>
