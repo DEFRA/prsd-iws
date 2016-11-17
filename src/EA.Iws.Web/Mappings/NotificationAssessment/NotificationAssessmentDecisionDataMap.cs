@@ -5,6 +5,7 @@
     using Areas.AdminExportAssessment.ViewModels.Decision;
     using Core.NotificationAssessment;
     using Prsd.Core.Mapper;
+    using ViewModels.Shared;
 
     public class NotificationAssessmentDecisionDataMap : IMap<NotificationAssessmentDecisionData, NotificationAssessmentDecisionViewModel>
     {
@@ -15,7 +16,8 @@
                 NotificationId = source.NotificationId,
                 Status = source.Status,
                 PreviousDecisions = source.StatusHistory.Select(d => new DecisionRecordViewModel()).ToList(),
-                DecisionTypes = source.AvailableDecisions.ToList()
+                DecisionTypes = source.AvailableDecisions.ToList(),
+                ConsentedDate = new OptionalDateInputViewModel(source.ConsentedDate, true)
             };
         }
     }

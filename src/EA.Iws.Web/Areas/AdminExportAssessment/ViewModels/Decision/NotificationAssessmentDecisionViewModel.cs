@@ -138,6 +138,16 @@
             {
                 yield return new ValidationResult(NotificationAssessmentDecisionViewModelResources.ConsentWithdrawnDateRequired, new[] { "ConsentWithdrawnDate" });
             }
+
+            if (ConsentWithdrawnDate.AsDateTime() > SystemTime.UtcNow.Date)
+            {
+                yield return new ValidationResult(NotificationAssessmentDecisionViewModelResources.ConsentWithdrawnDateNotFuture, new[] { "ConsentWithdrawnDate" });
+            }
+
+            if (ConsentWithdrawnDate.AsDateTime() < ConsentedDate.AsDateTime())
+            {
+                yield return new ValidationResult(NotificationAssessmentDecisionViewModelResources.ConsentWithdrawnDateNotBeforeConsentGiven, new[] { "ConsentWithdrawnDate" });
+            }
         }
 
         private IEnumerable<ValidationResult> ValidateObject()
@@ -170,6 +180,11 @@
             if (!WithdrawnDate.IsCompleted)
             {
                 yield return new ValidationResult(NotificationAssessmentDecisionViewModelResources.WithdrawnDateRequired, new[] { "WithdrawnDate" });
+            }
+
+            if (WithdrawnDate.AsDateTime() > SystemTime.UtcNow.Date)
+            {
+                yield return new ValidationResult(NotificationAssessmentDecisionViewModelResources.WithdrawnDateNotFuture, new[] { "WithdrawnDate" });
             }
         }
     }
