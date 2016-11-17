@@ -180,6 +180,12 @@
   <data name="ObjectDateNotFuture" xml:space="preserve">
     <value>The decision made date cannot be in the future</value>
   </data>
+  <data name="ConsentWithdrawnDateNotBeforeConsentGiven" xml:space="preserve">
+    <value>The decision made date cannot be before the date that consent was given</value>
+  </data>
+  <data name="ConsentWithdrawnDateNotFuture" xml:space="preserve">
+    <value>The decision made date cannot be in the future</value>
+  </data>
   <data name="WithdrawnDateNotFuture" xml:space="preserve">
     <value>The decision made date cannot be in the future</value>
   </data>

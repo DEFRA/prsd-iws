@@ -61,6 +61,15 @@ namespace EA.Iws.Web.Areas.AdminExportAssessment.Views.Decision {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The reason must include a reference to the exact WSR article under which the objection was made.
+        /// </summary>
+        public static string ConsentWithdrawnReasonHint {
+            get {
+                return ResourceManager.GetString("ConsentWithdrawnReasonHint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Please note: you can&apos;t change these dates once you&apos;ve committed them to the system. Please make sure that you enter the right dates..
         /// </summary>
         public static string MultipleDateWarning {

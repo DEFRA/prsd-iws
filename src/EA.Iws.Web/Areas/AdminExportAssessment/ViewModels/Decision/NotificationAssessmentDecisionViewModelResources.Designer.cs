@@ -134,6 +134,24 @@ namespace EA.Iws.Web.Areas.AdminExportAssessment.ViewModels.Decision {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The decision made date cannot be before the date that consent was given.
+        /// </summary>
+        public static string ConsentWithdrawnDateNotBeforeConsentGiven {
+            get {
+                return ResourceManager.GetString("ConsentWithdrawnDateNotBeforeConsentGiven", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The decision made date cannot be in the future.
+        /// </summary>
+        public static string ConsentWithdrawnDateNotFuture {
+            get {
+                return ResourceManager.GetString("ConsentWithdrawnDateNotFuture", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Please enter the date the notification consent was withdrawn.
         /// </summary>
         public static string ConsentWithdrawnDateRequired {
