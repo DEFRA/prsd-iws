@@ -70,6 +70,15 @@ namespace EA.Iws.Web.Areas.AdminExportAssessment.Views.Decision {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The reason must include a reference to the exact WSR article under which the objection was made.
+        /// </summary>
+        public static string ObjectReasonHint {
+            get {
+                return ResourceManager.GetString("ObjectReasonHint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Please note: you can&apos;t change this date once you&apos;ve committed it to the system. Please make sure that you enter the right date..
         /// </summary>
         public static string SingleDateWarning {

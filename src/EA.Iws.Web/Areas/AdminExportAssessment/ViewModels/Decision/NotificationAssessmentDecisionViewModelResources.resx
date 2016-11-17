@@ -177,4 +177,7 @@
   <data name="ConsentWithdrawnDateRequired" xml:space="preserve">
     <value>Please enter the date the notification consent was withdrawn</value>
   </data>
+  <data name="ObjectDateNotFuture" xml:space="preserve">
+    <value>The decision made date cannot be in the future</value>
+  </data>
 </root>

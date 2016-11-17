@@ -14,5 +14,6 @@
 <div class="form-group @Html.Gds().FormGroupClass(m => m.ReasonForObjection)">
     <label class="heading-medium">@Html.DisplayNameFor(m => m.ReasonForObjection)</label>
     @Html.Gds().ValidationMessageFor(m => m.ReasonForObjection)
+    @Html.Gds().HintSpan(Resourse.ObjectReasonHint)
     @Html.TextAreaFor(m => m.ReasonForObjection, new { @class = "text-area two-thirds", @MaxLength = "4000" })
 </div>

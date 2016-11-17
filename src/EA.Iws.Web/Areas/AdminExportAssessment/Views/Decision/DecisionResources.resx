@@ -120,6 +120,9 @@
   <data name="MultipleDateWarning" xml:space="preserve">
     <value>Please note: you can't change these dates once you've committed them to the system. Please make sure that you enter the right dates.</value>
   </data>
+  <data name="ObjectReasonHint" xml:space="preserve">
+    <value>The reason must include a reference to the exact WSR article under which the objection was made</value>
+  </data>
   <data name="SingleDateWarning" xml:space="preserve">
     <value>Please note: you can't change this date once you've committed it to the system. Please make sure that you enter the right date.</value>
   </data>
