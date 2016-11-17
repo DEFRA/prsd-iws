@@ -38,7 +38,7 @@ AS
             CASE WHEN [QuantityReceivedUnitId] IN (1, 2) -- Tonnes / Cubic Metres
                 THEN COALESCE([QuantityReceived], 0)
             ELSE 
-                COALESCE([QuantityReceived] * 1000, 0) -- Convert to Tonnes / Cubic Metres
+                COALESCE([QuantityReceived] / 1000, 0) -- Convert to Tonnes / Cubic Metres
             END
             ) 
             FROM [Reports].[Movements]
