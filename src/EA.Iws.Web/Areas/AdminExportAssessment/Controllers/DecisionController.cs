@@ -10,8 +10,6 @@
     using Prsd.Core;
     using Prsd.Core.Mapper;
     using Prsd.Core.Mediator;
-    using Requests.Facilities;
-    using Requests.Notification;
     using Requests.NotificationAssessment;
     using ViewModels.Decision;
 

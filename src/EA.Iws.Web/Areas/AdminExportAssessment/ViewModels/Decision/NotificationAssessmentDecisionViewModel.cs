@@ -143,6 +143,11 @@
             {
                 yield return new ValidationResult(NotificationAssessmentDecisionViewModelResources.ConsentWithdrawnDateNotFuture, new[] { "ConsentWithdrawnDate" });
             }
+
+            if (ConsentWithdrawnDate.AsDateTime() < ConsentedDate.AsDateTime())
+            {
+                yield return new ValidationResult(NotificationAssessmentDecisionViewModelResources.ConsentWithdrawnDateNotBeforeConsentGiven, new[] { "ConsentWithdrawnDate" });
+            }
         }
 
         private IEnumerable<ValidationResult> ValidateObject()

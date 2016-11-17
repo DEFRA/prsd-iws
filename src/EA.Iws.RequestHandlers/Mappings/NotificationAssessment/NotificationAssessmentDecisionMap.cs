@@ -1,5 +1,6 @@
 ﻿namespace EA.Iws.RequestHandlers.Mappings.NotificationAssessment
 {
+    using System;
     using System.Linq;
     using System.Threading.Tasks;
     using Core.NotificationAssessment;
@@ -29,7 +30,8 @@
                 }).ToArray(),
                 AvailableDecisions = source.GetAvailableDecisions(),
                 AcknowledgedOnDate = source.Dates.AcknowledgedDate.GetValueOrDefault(),
-                IsPreconsented = Task.Run(() => facilityRepository.GetByNotificationId(source.NotificationApplicationId)).Result.AllFacilitiesPreconsented.GetValueOrDefault()
+                IsPreconsented = Task.Run(() => facilityRepository.GetByNotificationId(source.NotificationApplicationId)).Result.AllFacilitiesPreconsented.GetValueOrDefault(),
+                ConsentedDate = source.Dates.ConsentedDate
             };
 
             return data;
