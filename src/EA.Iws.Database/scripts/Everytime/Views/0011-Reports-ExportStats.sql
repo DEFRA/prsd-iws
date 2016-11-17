@@ -29,7 +29,7 @@ FROM (
         CASE WHEN M.[QuantityReceivedUnitId] IN (1, 2) -- Tonnes / Cubic Metres
             THEN COALESCE(M.[QuantityReceived], 0)
         ELSE 
-            COALESCE(M.[QuantityReceived] * 1000, 0) -- Convert to Tonnes / Cubic Metres
+            COALESCE(M.[QuantityReceived] / 1000, 0) -- Convert to Tonnes / Cubic Metres
         END AS QuantityReceived,
         M.ReceivedDate,
         N.[CompetentAuthority],
