@@ -47,5 +47,7 @@ namespace EA.Iws.Core.Admin.Reports
         public DateTime? ConsentFrom { get; set; }
 
         public DateTime? ConsentTo { get; set; }
+
+        public string LocalArea { get; set; }
     }
 }
