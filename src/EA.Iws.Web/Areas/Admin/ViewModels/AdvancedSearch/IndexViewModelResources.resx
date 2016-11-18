@@ -120,6 +120,9 @@
   <data name="BaselOecdCode" xml:space="preserve">
     <value>Basel / OECD code</value>
   </data>
+  <data name="BaselOecdCodeNotListed" xml:space="preserve">
+    <value>Not listed</value>
+  </data>
   <data name="ConsentValidFrom" xml:space="preserve">
     <value>Consent "valid from" date</value>
   </data>

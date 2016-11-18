@@ -67,6 +67,11 @@
                 ExportCountryName = model.ExportCountryName
             };
 
+            if (model.BaselOecdCodeNotListed)
+            {
+                criteria.BaselOecdCodeNotListed = true;
+            }
+
             return RedirectToAction("Results", criteria.ToRouteValueDictionary());
         }
 

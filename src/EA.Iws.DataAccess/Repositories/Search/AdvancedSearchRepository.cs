@@ -35,7 +35,8 @@
                     AND     (@importStatus IS NULL OR [ImportStatus] = @importStatus)
                     AND     (@isInterim IS NULL OR [IsInterim] = @isInterim)
                     AND     (@exportCountryName IS NULL OR [CountryOfExport] LIKE '%' + @exportCountryName + '%')
-                    AND     (@operationCodes IS NULL OR [OperationCodes] = @operationCodes)";
+                    AND     (@operationCodes IS NULL OR [OperationCodes] = @operationCodes)
+                    AND     (@baselOecdCodeNotListed IS NULL OR [BaselOecdCodeNotListed] = @baselOecdCodeNotListed)";
 
         private readonly IwsContext context;
 
@@ -151,7 +152,8 @@
                 new SqlParameter("@importStatus", (object)criteria.ImportNotificationStatus ?? DBNull.Value),
                 new SqlParameter("@isInterim", (object)criteria.IsInterim ?? DBNull.Value),
                 new SqlParameter("@exportCountryName", (object)criteria.ExportCountryName ?? DBNull.Value),
-                new SqlParameter("@operationCodes", GetOperationCodes(criteria.OperationCodes))).ToArrayAsync();
+                new SqlParameter("@operationCodes", GetOperationCodes(criteria.OperationCodes)),
+                new SqlParameter("@baselOecdCodeNotListed", (object)criteria.BaselOecdCodeNotListed ?? DBNull.Value)).ToArrayAsync();
         }
 
         private static object GetOperationCodes(OperationCode[] operationCodes)

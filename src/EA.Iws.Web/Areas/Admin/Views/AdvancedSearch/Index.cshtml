@@ -68,6 +68,14 @@
                 @Html.Gds().LabelFor(m => m.BaselOecdCode, showOptionalLabel: false)
                 @Html.Gds().ValidationMessageFor(m => m.BaselOecdCode)
                 @Html.Gds().TextBoxFor(m => m.BaselOecdCode)
+
+                <div class="form-group @Html.Gds().FormGroupClass(m => m.BaselOecdCodeNotListed)">
+                    @Html.Gds().ValidationMessageFor(m => m.BaselOecdCodeNotListed)
+                    <label for="@Html.IdFor(m => m.BaselOecdCodeNotListed)">
+                        @Html.CheckBoxFor(m => m.BaselOecdCodeNotListed)
+                        @Html.DisplayNameFor(m => m.BaselOecdCodeNotListed)
+                    </label>
+                </div>
             </div>
 
             <div class="form-group @Html.Gds().FormGroupClass(m => m.SelectedOperationCodes)">
@@ -155,4 +163,33 @@
     </div>
 
     <button type="submit" class="button">@Resources.Search</button>
+}
+
+@section scripts {
+    <script>
+        var baselOecdCodeSelector = $("#@Html.IdFor(m => m.BaselOecdCode)");
+
+        function toggleBaselOecdCode(checked) {
+            if (checked) {
+                baselOecdCodeSelector
+                    .val('')
+                    .attr('readonly', true)
+                    .css('background-color', '#DEDEDE')
+                    .css('color', 'gray');
+            } else {
+                baselOecdCodeSelector
+                    .attr('readonly', false)
+                    .css('background-color', 'white')
+                    .css('color', 'black');
+            }
+        }
+
+        toggleBaselOecdCode($('#@Html.IdFor(m => m.BaselOecdCodeNotListed)').is(':checked'));
+
+        $(function () {
+            $("#@Html.IdFor(m => m.BaselOecdCodeNotListed)").click(function () {
+                toggleBaselOecdCode($('#@Html.IdFor(m => m.BaselOecdCodeNotListed)').is(':checked'));
+            });
+        });
+    </script>
 }
