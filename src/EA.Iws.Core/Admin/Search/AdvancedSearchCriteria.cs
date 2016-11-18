@@ -54,5 +54,7 @@
         public ImportNotificationStatus? ImportNotificationStatus { get; set; }
 
         public bool? IsInterim { get; set; }
+
+        public bool? BaselOecdCodeNotListed { get; set; }
     }
 }

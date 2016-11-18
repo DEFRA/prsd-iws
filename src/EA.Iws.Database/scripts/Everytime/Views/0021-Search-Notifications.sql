@@ -15,6 +15,10 @@ AS
         'Export' AS [ImportOrExport],
         WCI.CodeType,
         WC.Code,
+        CASE 
+            WHEN WCI.CodeType IN (1, 2) AND WCI.IsNotApplicable = 1 THEN 1
+            ELSE 0 END
+        AS BaselOecdCodeNotListed,
         P.Name AS ProducerName,
         I.Name AS ImporterName,
         E.Name AS ExporterName,
@@ -38,7 +42,7 @@ AS
         INNER JOIN [Notification].[NotificationAssessment] NA ON N.Id = NA.NotificationApplicationId
             AND NA.[Status] <> 1
         INNER JOIN [Notification].[WasteCodeInfo] WCI 
-            INNER JOIN [Lookup].[WasteCode] WC ON WCI.WasteCodeId = WC.Id
+            LEFT JOIN [Lookup].[WasteCode] WC ON WCI.WasteCodeId = WC.Id
         ON N.Id = WCI.NotificationId
         INNER JOIN [Notification].[ProducerCollection] PC
             INNER JOIN [Notification].[Producer] P ON PC.Id = P.ProducerCollectionId
@@ -73,6 +77,7 @@ AS
         'Import' AS [ImportOrExport],
         WC.CodeType,
         WC.Code,
+        WT.BaselOecdCodeNotListed,
         P.Name AS ProducerName,
         I.Name AS ImporterName,
         E.Name AS ExporterName,

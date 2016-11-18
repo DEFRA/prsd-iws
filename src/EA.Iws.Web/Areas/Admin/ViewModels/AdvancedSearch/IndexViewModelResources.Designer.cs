@@ -70,6 +70,15 @@ namespace EA.Iws.Web.Areas.Admin.ViewModels.AdvancedSearch {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Not listed.
+        /// </summary>
+        public static string BaselOecdCodeNotListed {
+            get {
+                return ResourceManager.GetString("BaselOecdCodeNotListed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Consent &quot;valid from&quot; date.
         /// </summary>
         public static string ConsentValidFrom {

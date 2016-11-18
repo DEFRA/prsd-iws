@@ -124,6 +124,9 @@
         [Display(ResourceType = typeof(IndexViewModelResources), Name = "NotificationStatus")]
         public int? SelectedNotificationStatusId { get; set; }
 
+        [Display(ResourceType = typeof(IndexViewModelResources), Name = "BaselOecdCodeNotListed")]
+        public bool BaselOecdCodeNotListed { get; set; }
+
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             if (string.IsNullOrWhiteSpace(EwcCode) && string.IsNullOrWhiteSpace(ProducerName)
@@ -134,7 +137,7 @@
                 && string.IsNullOrWhiteSpace(EntryPointName) && !(NotificationReceivedStart.IsCompleted && NotificationReceivedEnd.IsCompleted)
                 && !SelectedNotificationStatusId.HasValue && !SelectedTradeDirection.HasValue && !SelectedNotificationType.HasValue
                 && !SelectedOperationCodes.Any() && !IsInterim.HasValue && string.IsNullOrWhiteSpace(ExportCountryName)
-                && !(ConsentValidFromStart.IsCompleted && ConsentValidFromEnd.IsCompleted))
+                && !(ConsentValidFromStart.IsCompleted && ConsentValidFromEnd.IsCompleted) && !BaselOecdCodeNotListed)
             {
                 yield return new ValidationResult(IndexViewModelResources.NoSearchCriteriaCompleted);
             }
