@@ -13,11 +13,10 @@
     public class XlsxActionResult<T> : FileResult
     {
         private readonly IEnumerable<T> data;
-        private const string contentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
         private XLWorkbook workBook;
         private IXLWorksheet workSheet;
 
-        public XlsxActionResult(IEnumerable<T> data, string fileDownloadName) : base(contentType)
+        public XlsxActionResult(IEnumerable<T> data, string fileDownloadName) : base(MimeTypes.MSExcelXml)
         {
             this.data = data;
             FileDownloadName = fileDownloadName;
