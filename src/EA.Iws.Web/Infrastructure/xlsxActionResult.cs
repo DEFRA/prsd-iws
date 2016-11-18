@@ -5,6 +5,7 @@
     using System.ComponentModel;
     using System.IO;
     using System.Linq;
+    using System.Text.RegularExpressions;
     using System.Web;
     using System.Web.Mvc;
     using ClosedXML.Excel;
@@ -40,7 +41,7 @@
 
             AddHeaderRow();
 
-            // format header row
+            FormatTitles();
 
             workSheet.Columns().AdjustToContents();
 
@@ -63,17 +64,32 @@
                 string columnName;
 
                 var attr = (DisplayNameAttribute)Attribute.GetCustomAttribute(property, typeof(DisplayNameAttribute));
-                if (attr == null)
-                {
-                    columnName = property.Name;
-                }
-                else
-                {
-                    columnName = attr.DisplayName;
-                }
+
+                columnName = attr == null ? SplitCamelCase(property.Name) : attr.DisplayName;
 
                 workSheet.Cell(1, i + 1).Value = columnName;
             }
+        }
+
+        private static string SplitCamelCase(string input)
+        {
+            return Regex.Replace(input, "(?<=[a-z])([A-Z])", " $1", RegexOptions.Compiled);
+        }
+
+        private void FormatTitles()
+        {
+            var numberOfProperties = typeof(T).GetProperties().Count();
+
+            workSheet.Range(1, 1, 1, numberOfProperties).AddToNamed("Titles");
+
+            var titlesStyle = workBook.Style;
+            titlesStyle.Font.Bold = true;
+            titlesStyle.Font.FontColor = XLColor.White;
+            titlesStyle.Fill.BackgroundColor = XLColor.DarkGreen;
+
+            workBook.NamedRanges.NamedRange("Titles").Ranges.Style = titlesStyle;
+
+            workSheet.SheetView.FreezeRows(1);
         }
     }
 }
