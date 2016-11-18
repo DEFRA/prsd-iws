@@ -1,9 +1,7 @@
 ﻿namespace EA.Iws.Web.Areas.Reports.Controllers
 {
-    using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Mvc;
-    using ClosedXML.Excel;
     using Core.Admin.Reports;
     using Infrastructure;
     using Prsd.Core.Mediator;

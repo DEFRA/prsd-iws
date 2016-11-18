@@ -1,6 +1,5 @@
 ﻿namespace EA.Iws.Web.Areas.Reports.Controllers
 {
-    using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Core.Admin.Reports;
@@ -39,9 +38,9 @@
 
             var report = await mediator.SendAsync(new GetExportNotificationsReport(from, to));
 
-            var fileName = string.Format("BDU-export-notifications-{0}-{1}.csv", from.ToShortDateString(), to.ToShortDateString());
+            var fileName = string.Format("BDU-export-notifications-{0}-{1}.xlsx", from.ToShortDateString(), to.ToShortDateString());
 
-            return new CsvActionResult<DataExportNotificationData>(report.ToList(), fileName);
+            return new XlsxActionResult<DataExportNotificationData>(report, fileName);
         }
     }
 }

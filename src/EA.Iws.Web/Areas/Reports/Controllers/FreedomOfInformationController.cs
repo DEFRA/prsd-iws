@@ -52,9 +52,9 @@
 
             var type = EnumHelper.GetShortName(chemicalComposition);
 
-            var fileName = string.Format("{0}-{1}-{2}.csv", type, from, to);
+            var fileName = string.Format("foi-report-{0}-{1}-{2}.xlsx", type, from.ToShortDateString(), to.ToShortDateString());
 
-            return new CsvActionResult<FreedomOfInformationData>(report.ToList(), fileName);
+            return new XlsxActionResult<FreedomOfInformationData>(report, fileName);
         }
     }
 }
