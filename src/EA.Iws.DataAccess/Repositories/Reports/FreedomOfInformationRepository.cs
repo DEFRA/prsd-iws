@@ -44,7 +44,8 @@
                     [IntendedQuantity],
                     [IntendedQuantityUnit],
                     [ConsentFrom],
-                    [ConsentTo]
+                    [ConsentTo],
+                    [LocalArea]
                 FROM 
                     [Reports].[FreedomOfInformation]
                 WHERE 

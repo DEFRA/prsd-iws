@@ -4,7 +4,7 @@ GO
 
 ALTER VIEW [Reports].[FreedomOfInformation]
 AS
-       SELECT
+    SELECT
         N.[NotificationNumber],
         NA.[ReceivedDate],
         N.[CompetentAuthorityId],
@@ -52,7 +52,8 @@ AS
         N.[IntendedQuantity],
         N.[Units] AS [IntendedQuantityUnit],
         NA.[ConsentFrom],
-        NA.[ConsentTo]
+        NA.[ConsentTo],
+        N.[LocalArea]
     FROM
         [Reports].[Notification] N
         INNER JOIN [Reports].[NotificationOrganisations] O ON N.Id = O.Id
