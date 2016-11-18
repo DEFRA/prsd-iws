@@ -2,7 +2,6 @@
 {
     using System.Collections;
     using System.Linq;
-    using System.Web;
     using System.Web.Routing;
 
     public static class ObjectExtensions
@@ -21,13 +20,13 @@
 
                     foreach (var item in enumerable)
                     {
-                        result.Add(string.Format("{0}[{1}]", p.Name, i), HttpUtility.UrlEncode(item.ToString()));
+                        result.Add(string.Format("{0}[{1}]", p.Name, i), item.ToString());
                         i++;
                     }
                 }
                 else
                 {
-                    result.Add(p.Name, HttpUtility.UrlEncode(value.ToString()));
+                    result.Add(p.Name, value.ToString());
                 }
             }
 
