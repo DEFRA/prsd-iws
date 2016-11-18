@@ -1,6 +1,8 @@
 ﻿namespace EA.Iws.Web.Infrastructure
 {
+    using System;
     using System.Collections.Generic;
+    using System.ComponentModel;
     using System.IO;
     using System.Linq;
     using System.Web;
@@ -36,7 +38,7 @@
             
             workSheet.Cell(2, 1).Value = data.AsEnumerable();
 
-            // add header row
+            AddHeaderRow();
 
             // format header row
 
@@ -49,6 +51,29 @@
         {
             workBook = new XLWorkbook();
             workSheet = workBook.Worksheets.Add("Report");
+        }
+
+        private void AddHeaderRow()
+        {
+            var properties = typeof(T).GetProperties();
+
+            for (int i = 0; i < properties.Count(); i++)
+            {
+                var property = properties[i];
+                string columnName;
+
+                var attr = (DisplayNameAttribute)Attribute.GetCustomAttribute(property, typeof(DisplayNameAttribute));
+                if (attr == null)
+                {
+                    columnName = property.Name;
+                }
+                else
+                {
+                    columnName = attr.DisplayName;
+                }
+
+                workSheet.Cell(1, i + 1).Value = columnName;
+            }
         }
     }
 }
