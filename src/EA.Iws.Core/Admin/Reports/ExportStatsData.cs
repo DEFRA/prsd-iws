@@ -9,7 +9,7 @@
 
         public string WasteStreams { get; set; }
 
-        [DisplayName("Annes VIII")]
+        [DisplayName("Annex VIII")]
         public string AnnexViii { get; set; }
 
         [DisplayName("UN Class")]
