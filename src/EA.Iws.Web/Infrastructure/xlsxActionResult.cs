@@ -83,8 +83,7 @@
 
             var titlesStyle = workBook.Style;
             titlesStyle.Font.Bold = true;
-            titlesStyle.Font.FontColor = XLColor.White;
-            titlesStyle.Fill.BackgroundColor = XLColor.DarkGreen;
+            titlesStyle.Fill.BackgroundColor = XLColor.LimeGreen;
 
             workBook.NamedRanges.NamedRange("Titles").Ranges.Style = titlesStyle;
 

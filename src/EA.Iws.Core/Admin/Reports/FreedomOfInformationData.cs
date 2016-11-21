@@ -1,37 +1,49 @@
 namespace EA.Iws.Core.Admin.Reports
 {
     using System;
+    using System.ComponentModel;
 
     public class FreedomOfInformationData
     {
         public string NotificationNumber { get; set; }
 
+        [DisplayName("Notifier")]
         public string NotifierName { get; set; }
 
         public string NotifierAddress { get; set; }
 
+        [DisplayName("Producer")]
         public string ProducerName { get; set; }
 
         public string ProducerAddress { get; set; }
 
+        [DisplayName("Port of Exit")]
         public string PointOfExport { get; set; }
 
+        [DisplayName("Port of Entry")]
         public string PointOfEntry { get; set; }
 
+        [DisplayName("Country of Destination")]
         public string ImportCountryName { get; set; }
 
+        [DisplayName("Waste Type")]
         public string NameOfWaste { get; set; }
 
+        [DisplayName("EWC Code")]
         public string Ewc { get; set; }
-
+        
         public string YCode { get; set; }
 
+        [DisplayName("R/D Code(s)")]
         public string OperationCodes { get; set; }
 
+        [DisplayName("Consignee Name")]
         public string ImporterName { get; set; }
 
+        [DisplayName("Consignee Address")]
         public string ImporterAddress { get; set; }
 
+        [DisplayName("Facility")]
         public string FacilityName { get; set; }
 
         public string FacilityAddress { get; set; }
@@ -48,6 +60,7 @@ namespace EA.Iws.Core.Admin.Reports
 
         public DateTime? ConsentTo { get; set; }
 
+        [DisplayName("Area")]
         public string LocalArea { get; set; }
     }
 }
