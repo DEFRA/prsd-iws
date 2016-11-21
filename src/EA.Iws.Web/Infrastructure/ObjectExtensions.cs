@@ -1,5 +1,6 @@
 ﻿namespace EA.Iws.Web.Infrastructure
 {
+    using System;
     using System.Collections;
     using System.Linq;
     using System.Web.Routing;
@@ -26,7 +27,15 @@
                 }
                 else
                 {
-                    result.Add(p.Name, value.ToString());
+                    var date = value as DateTime?;
+                    if (date != null)
+                    {
+                        result.Add(p.Name, date.Value.ToString("yyyy-MM-dd"));
+                    }
+                    else
+                    {
+                        result.Add(p.Name, value.ToString());
+                    }
                 }
             }
 
