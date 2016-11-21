@@ -1,6 +1,7 @@
 ﻿namespace EA.Iws.Core.Admin.Reports
 {
     using System;
+    using System.ComponentModel;
     using NotificationAssessment;
     using Shared;
 
@@ -8,6 +9,7 @@
     {
         public string NotificationNumber { get; set; }
 
+        [DisplayName("Notification Type (R/D)")]
         public NotificationType NotificationType { get; set; }
 
         public NotificationStatus Status { get; set; }
@@ -30,8 +32,10 @@
 
         public DateTime? DecisionRequiredDate { get; set; }
 
+        [DisplayName("Days to Assessment Started")]
         public int? AssessmentStartedElapsedWorkingDays { get; set; }
 
+        [DisplayName("Days to Transmission")]
         public int? TransmittedElapsedWorkingDays { get; set; }
 
         public string Officer { get; set; }
