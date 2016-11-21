@@ -21,7 +21,7 @@
     <div id="search-container" class="form-group @Html.Gds().FormGroupClass(m => m.SearchTerm)">
         @Html.Gds().ValidationMessageFor(m => m.SearchTerm)
         @Html.Gds().TextBoxFor(m => m.SearchTerm, new { @title = "Search term", placeholder = Resource.SearchPlaceholder })
-        &nbsp;&nbsp;&nbsp;<input type="submit" class="button" value="Go"/>
+        <input type="submit" class="button" value="Go"/>
         @Html.ActionLink(Resource.AdvancedSearch, "Index", "AdvancedSearch", null, new { @class = "" })
     </div>
 }
