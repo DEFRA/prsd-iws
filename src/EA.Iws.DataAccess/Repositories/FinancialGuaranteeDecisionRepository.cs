@@ -34,9 +34,7 @@
                     {
                         NotificationId = financialGuarantee.NotificationApplicationId,
                         Date = financialGuarantee.DecisionDate.Value,
-                        Status = statusChange.Status,
-                        ValidFrom = financialGuarantee.ValidFrom,
-                        ValidTo = financialGuarantee.ValidTo
+                        Status = statusChange.Status
                     });
                 }
                 else if (statusChange.Status == FinancialGuaranteeStatus.Released)

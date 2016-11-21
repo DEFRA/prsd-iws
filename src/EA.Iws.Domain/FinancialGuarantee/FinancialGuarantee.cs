@@ -65,10 +65,6 @@
 
         public DateTime? DecisionDate { get; protected set; }
 
-        public DateTime? ValidFrom { get; protected set; }
-
-        public DateTime? ValidTo { get; protected set; }
-
         public string RefusalReason { get; protected set; }
 
         public string ReferenceNumber { get; protected set; }
@@ -210,19 +206,9 @@
         private void OnApproved(ApproveDates approveDates)
         {
             DecisionDate = approveDates.DecisionDate;
-            ValidFrom = approveDates.ValidFrom;
             ActiveLoadsPermitted = approveDates.ActiveLoadsPermitted;
             ReferenceNumber = approveDates.ReferenceNumber;
             IsBlanketBond = approveDates.IsBlanketBond;
-
-            if (approveDates.IsBlanketBond)
-            {
-                ValidTo = null;
-            }
-            else
-            {
-                ValidTo = approveDates.ValidTo;
-            }
         }
 
         public virtual void Refuse(DateTime decisionDate, string refusalReason)

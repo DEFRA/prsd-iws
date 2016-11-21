@@ -20,7 +20,7 @@
         {
             var financialGuarantee = await context.FinancialGuarantees.SingleAsync(fg => fg.NotificationApplicationId == message.NotificationId);
 
-            financialGuarantee.Approve(new ApproveDates(message.DecisionDate, message.ValidFrom, message.ValidTo, 
+            financialGuarantee.Approve(new ApproveDates(message.DecisionDate, 
                 message.ReferenceNumber, message.ActiveLoadsPermitted, message.IsBlanketbond));
 
             await context.SaveChangesAsync();

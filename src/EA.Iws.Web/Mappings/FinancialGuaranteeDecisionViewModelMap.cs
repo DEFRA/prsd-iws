@@ -15,8 +15,6 @@
                 case FinancialGuaranteeDecision.Approved:
                     return new ApproveFinancialGuarantee(id,
                         source.DecisionMadeDate.AsDateTime().Value,
-                        source.ValidFrom.AsDateTime().Value,
-                        source.ValidTo.AsDateTime().GetValueOrDefault(),
                         source.ReferenceNumber,
                         source.ActiveLoadsPermitted.Value,
                         source.IsBlanketBond.GetValueOrDefault());

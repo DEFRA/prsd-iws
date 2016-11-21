@@ -14,8 +14,6 @@ namespace EA.Iws.Web.Mappings
                 DecisionRequiredDate = source.DecisionRequiredDate,
                 Status = source.Status,
                 IsApplicationCompleted = source.CompletedDate.HasValue,
-                ValidFrom = new OptionalDateInputViewModel(source.ValidFrom),
-                ValidTo = new OptionalDateInputViewModel(source.ValidTo),
                 DecisionMadeDate = new OptionalDateInputViewModel(source.DecisionDate),
                 ActiveLoadsPermitted = source.ActiveLoadsPermitted,
                 ReasonForRefusal = source.RefusalReason,

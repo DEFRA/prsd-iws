@@ -7,7 +7,6 @@
     using System.Web.Mvc;
     using Core.Admin;
     using Core.FinancialGuarantee;
-    using Infrastructure.Validation;
     using Prsd.Core.Helpers;
     using Web.ViewModels.Shared;
 
@@ -47,12 +46,6 @@
         [Display(Name = "Date decision made")]
         public OptionalDateInputViewModel DecisionMadeDate { get; set; }
 
-        [Display(Name = "Valid from")]
-        public OptionalDateInputViewModel ValidFrom { get; set; }
-
-        [Display(Name = "Valid to")]
-        public OptionalDateInputViewModel ValidTo { get; set; }
-
         [Display(Name = "Active loads permitted")]
         public int? ActiveLoadsPermitted { get; set; }
 
@@ -63,8 +56,6 @@
         public FinancialGuaranteeDecisionViewModel()
         {
             DecisionMadeDate = new OptionalDateInputViewModel();
-            ValidFrom = new OptionalDateInputViewModel();
-            ValidTo = new OptionalDateInputViewModel();
         }
 
         public bool? IsBlanketBond { get; set; }
@@ -123,23 +114,6 @@
             if (!DecisionMadeDate.IsCompleted)
             {
                 yield return DecisionMadeDateValidation();
-            }
-
-            if (!ValidFrom.IsCompleted)
-            {
-                yield return new ValidationResult(RequiredValidationMessage("Valid from"), new[] { "ValidFrom.Day" });
-            }
-
-            if (!ValidTo.IsCompleted && !IsBlanketBond.GetValueOrDefault())
-            {
-                yield return new ValidationResult(RequiredValidationMessage("Valid to"), new[] { "ValidTo.Day" });
-            }
-
-            if (ValidFrom.IsCompleted 
-                && ValidTo.IsCompleted 
-                && ValidFrom.AsDateTime() > ValidTo.AsDateTime())
-            {
-                yield return new ValidationResult("The valid to date must not be before the valid from date", new[] { "ValidTo.Day" });
             }
 
             if (IsBlanketBond.GetValueOrDefault() && string.IsNullOrEmpty(ReferenceNumber))

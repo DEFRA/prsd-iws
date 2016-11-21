@@ -25,18 +25,6 @@
             set { base.DecisionDate = value; }
         }
 
-        public new DateTime? ValidFrom
-        {
-            get { return base.ValidFrom; }
-            set { base.ValidFrom = value; }
-        }
-
-        public new DateTime? ValidTo
-        {
-            get { return base.ValidTo; }
-            set { base.ValidTo = value; }
-        }
-
         public new string RefusalReason
         {
             get { return base.RefusalReason; }
