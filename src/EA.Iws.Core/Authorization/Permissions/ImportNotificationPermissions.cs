@@ -15,5 +15,7 @@
         public const string CanEditImportNotificationAssessment = "Can Edit Import Notification Assessment";
 
         public const string CanMakeImportNotificationAssessmentDecision = "Can Make Import Notification Assessment Decision";
+
+        public const string CanChangeNumberOfShipmentsOnImportNotification = "Can Change Number Of Shipments On Import Notification";
     }
 }
