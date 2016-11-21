@@ -688,10 +688,11 @@ table.table-pad-bottom {
 
 #search-container {
     input[type=text] {
-        width: 75%;
+        width: 70%;
     }
     input[type=submit], button {
         width: 20%;
+        margin-left: 15px;
     }
 }
 
