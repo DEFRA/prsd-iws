@@ -1,6 +1,7 @@
 ﻿namespace EA.Iws.Core.Admin.Reports
 {
     using System;
+    using System.ComponentModel;
     using ImportNotificationAssessment;
     using Shared;
 
@@ -8,6 +9,7 @@
     {
         public string NotificationNumber { get; set; }
 
+        [DisplayName("Notification Type (R/D)")]
         public NotificationType NotificationType { get; set; }
 
         public ImportNotificationStatus Status { get; set; }
@@ -28,14 +30,19 @@
 
         public DateTime? DecisionRequiredDate { get; set; }
 
+        [DisplayName("Days to Assessment Started")]
         public int? AssessmentStartedElapsedWorkingDays { get; set; }
 
+        [DisplayName("Received to Acknowledged Days")]
         public int? ReceivedToAcknowledgedElapsedWorkingDays { get; set; }
 
+        [DisplayName("Complete to Acknowledged Days")]
         public int? CompleteToAcknowledgedElapsedWorkingDays { get; set; }
 
+        [DisplayName("Received to Consent Days")]
         public int? ReceivedToConsentElapsedWorkingDays { get; set; }
 
+        [DisplayName("Decision to Consent Days")]
         public int? DecisionToConsentElapsedWorkingDays { get; set; }
 
         public string Officer { get; set; }
