@@ -151,6 +151,7 @@
                 .Permit(Trigger.Unlock, NotificationStatus.Unlocked)
                 .Permit(Trigger.Consent, NotificationStatus.Consented)
                 .Permit(Trigger.Object, NotificationStatus.Objected)
+                .Permit(Trigger.Withdraw, NotificationStatus.Withdrawn)
                 .Permit(Trigger.Archive, NotificationStatus.FileClosed);
 
             stateMachine.Configure(NotificationStatus.InDetermination)
