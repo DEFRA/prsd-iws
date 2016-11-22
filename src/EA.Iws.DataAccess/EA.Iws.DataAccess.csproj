@@ -270,6 +270,7 @@
     <Compile Include="Repositories\Reports\ImportNotificationsRepository.cs" />
     <Compile Include="Repositories\Reports\MissingShipmentsRepository.cs" />
     <Compile Include="Repositories\Reports\FreedomOfInformationRepository.cs" />
+    <Compile Include="Repositories\ShipmentNumberHistoryRepository.cs" />
     <Compile Include="Repositories\TechnologyEmployedRepository.cs" />
     <Compile Include="Repositories\Search\AdvancedSearchRepository.cs" />
     <Compile Include="Repositories\UserHistoryRepository.cs" />

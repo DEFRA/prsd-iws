@@ -353,6 +353,7 @@
     <Compile Include="Mappings\Reports\FinanceMap.cs" />
     <Compile Include="Mappings\Reports\MissingShipmentMap.cs" />
     <Compile Include="Mappings\Reports\ExportStatsMap.cs" />
+    <Compile Include="Mappings\ShipmentNumberHistoryMap.cs" />
     <Compile Include="Mappings\UserMap.cs" />
     <Compile Include="Mappings\UsersMap.cs" />
     <Compile Include="Movement\Complete\GetOperationCompleteDataHandler.cs" />
@@ -366,6 +367,7 @@
     <Compile Include="Movement\GetNotificationNumberByMovementIdHandler.cs" />
     <Compile Include="NotificationAssessment\GetChargeDueHandler.cs" />
     <Compile Include="NotificationAssessment\GetInterimStatusHandler.cs" />
+    <Compile Include="NotificationAssessment\GetOriginalNumberOfShipmentsHandler.cs" />
     <Compile Include="NotificationAssessment\MarkAsInterimHandler.cs" />
     <Compile Include="NotificationMovements\Capture\GetLatestMovementNumberHandler.cs" />
     <Compile Include="NotificationMovements\Create\HasExceededConsentedQuantityHandler.cs" />

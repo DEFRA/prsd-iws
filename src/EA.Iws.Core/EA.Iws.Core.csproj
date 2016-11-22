@@ -244,6 +244,7 @@
     <Compile Include="Notification\SubmitSummaryData.cs" />
     <Compile Include="Shared\TradeDirection.cs" />
     <Compile Include="Shared\UnitedKingdomCompetentAuthorityData.cs" />
+    <Compile Include="Shipment\ShipmentNumberHistoryData.cs" />
     <Compile Include="StateOfImport\StateOfImportWithTransportRouteData.cs" />
     <Compile Include="Documents\FileData.cs" />
     <Compile Include="Documents\FileType.cs" />
