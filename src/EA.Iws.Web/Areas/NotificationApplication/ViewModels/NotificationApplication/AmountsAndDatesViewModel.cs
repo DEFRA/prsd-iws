@@ -12,6 +12,7 @@
         public NotificationType NotificationType { get; set; }
         public bool IsIntendedShipmentsCompleted { get; set; }
         public IntendedShipmentData IntendedShipmentData { get; set; }
+        public bool ShowChangeShipmentNumberLink { get; set; }
 
         public AmountsAndDatesViewModel()
         {
