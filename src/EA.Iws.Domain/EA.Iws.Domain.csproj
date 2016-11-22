@@ -139,6 +139,7 @@
     <Compile Include="ImportNotification\ITransportRouteRepository.cs" />
     <Compile Include="ImportNotification\IWasteOperationRepository.cs" />
     <Compile Include="ImportNotification\IProducerRepository.cs" />
+    <Compile Include="ImportNotification\ShipmentNumberHistory.cs" />
     <Compile Include="ImportNotification\StateOfExport.cs" />
     <Compile Include="ImportNotification\StateOfImport.cs" />
     <Compile Include="ImportNotification\TransitState.cs" />

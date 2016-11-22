@@ -128,6 +128,7 @@
     <Compile Include="Mappings\Imports\ImportNotificationDatesMapping.cs" />
     <Compile Include="Mappings\Imports\ImportNotificationStatusChangeMapping.cs" />
     <Compile Include="Mappings\Imports\ImportNotificationTransactionMapping.cs" />
+    <Compile Include="Mappings\Imports\ShipmentNumberHistoryMapping.cs" />
     <Compile Include="Mappings\Imports\StateOfExportMapping.cs" />
     <Compile Include="Mappings\Imports\StateOfImportMapping.cs" />
     <Compile Include="Mappings\Imports\TransitStateMapping.cs" />
