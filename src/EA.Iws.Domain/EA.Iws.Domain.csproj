@@ -283,6 +283,7 @@
     <Compile Include="NotificationApplication\NotificationNumberFormatter.cs" />
     <Compile Include="NotificationApplication\ProducerCollection.cs" />
     <Compile Include="NotificationApplication\SetAllFacilitiesPreconsented.cs" />
+    <Compile Include="NotificationApplication\Shipment\ShipmentNumberHistory.cs" />
     <Compile Include="NotificationApplication\UserHistory.cs" />
     <Compile Include="NotificationApplication\NotificationUserChangedEvent.cs" />
     <Compile Include="NotificationApplication\WasteRecovery\PercentageChangedEvent.cs" />
