@@ -8,7 +8,7 @@
 
             if (Model.ShowChangeShipmentNumberLink)
             {
-                <text>&nbsp; &nbsp; &nbsp;</text>@Html.ActionLink("Change", "Index", "ShipmentNumber", new { id = Model.NotificationId }, null)
+                <div class="change-answer" >@Html.ActionLink("Change", "Index", "ShipmentNumber", new { id = Model.NotificationId }, null)</div>
             }
         }
         else
