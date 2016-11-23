@@ -1,23 +1,26 @@
 ﻿namespace EA.Iws.RequestHandlers.Admin.FinancialGuarantee
 {
-    using System.Data.Entity;
     using System.Threading.Tasks;
     using DataAccess;
+    using Domain.FinancialGuarantee;
     using Prsd.Core.Mediator;
     using Requests.Admin.FinancialGuarantee;
 
     internal class ReleaseFinancialGuaranteeHandler : IRequestHandler<ReleaseFinancialGuarantee, bool>
     {
+        private readonly IFinancialGuaranteeRepository repository;
         private readonly IwsContext context;
 
-        public ReleaseFinancialGuaranteeHandler(IwsContext context)
+        public ReleaseFinancialGuaranteeHandler(IFinancialGuaranteeRepository repository, IwsContext context)
         {
+            this.repository = repository;
             this.context = context;
         }
 
         public async Task<bool> HandleAsync(ReleaseFinancialGuarantee message)
         {
-            var financialGuarantee = await context.FinancialGuarantees.SingleAsync(fg => fg.NotificationApplicationId == message.NotificationId);
+            var financialGuaranteeCollection = await repository.GetByNotificationId(message.NotificationId);
+            var financialGuarantee = financialGuaranteeCollection.GetFinancialGuarantee(message.FinancialGuaranteeId);
 
             financialGuarantee.Release(message.DecisionDate);
 

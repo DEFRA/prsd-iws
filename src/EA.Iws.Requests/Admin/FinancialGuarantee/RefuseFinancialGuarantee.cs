@@ -10,11 +10,13 @@
     {
         public string ReasonForRefusal { get; private set; }
 
-        public RefuseFinancialGuarantee(Guid notificationId, DateTime decisionDate, string reasonForRefusal)
+        public RefuseFinancialGuarantee(Guid notificationId, Guid financialGuaranteeId,
+            DateTime decisionDate, string reasonForRefusal)
         {
             Guard.ArgumentNotNullOrEmpty(() => reasonForRefusal, reasonForRefusal);
 
             NotificationId = notificationId;
+            FinancialGuaranteeId = financialGuaranteeId;
             DecisionDate = decisionDate;
             ReasonForRefusal = reasonForRefusal;
         }

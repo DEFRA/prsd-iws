@@ -106,7 +106,7 @@
         {
             var destination = await context.GetNotificationApplication(destinationId);
             var destinationAssessment = await context.NotificationAssessments.SingleAsync(p => p.NotificationApplicationId == destinationId);
-            var destinationFinancialGuarantee = await context.FinancialGuarantees.SingleAsync(fg => fg.NotificationApplicationId == destinationId);
+            var destinationFinancialGuarantee = await context.FinancialGuarantees.SingleAsync(fg => fg.NotificationId == destinationId);
             var destinationAnnexCollection = await context.AnnexCollections.SingleAsync(p => p.NotificationId == destinationId);
             var destinationFacilities = await context.Facilities.SingleAsync(f => f.NotificationId == destinationId);
             var destinationCarriers = await context.Carriers.SingleAsync(c => c.NotificationId == destinationId);
@@ -141,7 +141,7 @@
             context.NotificationAssessments.Add(clonedAssessment);
 
             // Add financial guarantee
-            context.FinancialGuarantees.Add(FinancialGuarantee.Create(clone.Id));
+            context.FinancialGuarantees.Add(new FinancialGuaranteeCollection(clone.Id));
 
             // Transport route
             await CloneTransportRoute(sourceId, clone.Id, destination.CompetentAuthority);

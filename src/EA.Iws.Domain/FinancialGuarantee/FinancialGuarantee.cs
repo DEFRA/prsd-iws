@@ -13,8 +13,6 @@
     {
         private const int WorkingDaysUntilDecisionRequired = 20;
 
-        public Guid NotificationApplicationId { get; protected set; }
-
         private StateMachine<FinancialGuaranteeStatus, Trigger>.TriggerWithParameters<DateTime> receivedTrigger;
         private StateMachine<FinancialGuaranteeStatus, Trigger>.TriggerWithParameters<DateTime> completedTrigger;
         private StateMachine<FinancialGuaranteeStatus, Trigger>.TriggerWithParameters<ApproveDates> approvedTrigger;
@@ -27,10 +25,10 @@
             stateMachine = CreateStateMachine();
         }
 
-        protected FinancialGuarantee(Guid notificationApplicationId)
+        internal FinancialGuarantee(DateTime receivedDate)
         {
             CreatedDate = new DateTimeOffset(SystemTime.UtcNow, TimeSpan.Zero);
-            NotificationApplicationId = notificationApplicationId;
+            ReceivedDate = receivedDate;
             StatusChangeCollection = new List<FinancialGuaranteeStatusChange>();
             stateMachine = CreateStateMachine();
             Status = FinancialGuaranteeStatus.AwaitingApplication;
@@ -90,13 +88,6 @@
             Guard.ArgumentNotNull(() => statusChange, statusChange);
 
             StatusChangeCollection.Add(statusChange);
-        }
-
-        public static FinancialGuarantee Create(Guid notificationApplicationId)
-        {
-            var financialGuarantee = new FinancialGuarantee(notificationApplicationId);
-
-            return financialGuarantee;
         }
 
         private void OnReceived(DateTime date)
@@ -196,8 +187,7 @@
         {
             if (approveDates.DecisionDate < CompletedDate)
             {
-                throw new InvalidOperationException("Cannot set the decision date to before the completed date. Id: " +
-                                                    NotificationApplicationId);
+                throw new InvalidOperationException("Cannot set the decision date to before the completed date. Id: " + Id);
             }
 
             stateMachine.Fire(approvedTrigger, approveDates);
@@ -217,12 +207,12 @@
 
             if (string.IsNullOrWhiteSpace(refusalReason))
             {
-                throw new ArgumentException("Refusal reason cannot be white space. Id: " + NotificationApplicationId);
+                throw new ArgumentException("Refusal reason cannot be white space. Id: " + Id);
             }
 
             if (decisionDate < CompletedDate)
             {
-                throw new InvalidOperationException("Cannot set the decision date to be before the completed date. Id: " + NotificationApplicationId);
+                throw new InvalidOperationException("Cannot set the decision date to be before the completed date. Id: " + Id);
             }
 
             stateMachine.Fire(refusedTrigger, decisionDate, refusalReason);
@@ -243,7 +233,7 @@
         {
             if (releasedDate < CompletedDate)
             {
-                throw new InvalidOperationException("Cannot set the released date to be before the completed date. Id: " + NotificationApplicationId);
+                throw new InvalidOperationException("Cannot set the released date to be before the completed date. Id: " + Id);
             }
 
             ReleasedDate = releasedDate;

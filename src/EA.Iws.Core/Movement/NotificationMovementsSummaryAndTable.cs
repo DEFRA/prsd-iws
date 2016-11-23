@@ -1,7 +1,6 @@
 ﻿namespace EA.Iws.Core.Movement
 {
     using System.Collections.Generic;
-    using FinancialGuarantee;
     using Shared;
 
     public class NotificationMovementsSummaryAndTable
@@ -15,7 +14,5 @@
         public List<MovementTableDataRow> ShipmentTableData { get; set; }
 
         public bool IsInterimNotification { get; set; }
-
-        public FinancialGuaranteeStatus FgStatus { get; set; }
     }
 }

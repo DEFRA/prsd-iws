@@ -15,6 +15,7 @@
         public bool IsBlanketbond { get; set; }
 
         public ApproveFinancialGuarantee(Guid notificationId, 
+            Guid financialGuaranteeId,
             DateTime decisionDate,
             string blanketBondReference,
             int activeLoadsPermitted,
@@ -23,6 +24,7 @@
             Guard.ArgumentNotZeroOrNegative(() => activeLoadsPermitted, activeLoadsPermitted);
 
             NotificationId = notificationId;
+            FinancialGuaranteeId = financialGuaranteeId;
             DecisionDate = decisionDate;
             ActiveLoadsPermitted = activeLoadsPermitted;
             ReferenceNumber = blanketBondReference;

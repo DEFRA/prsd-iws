@@ -3,7 +3,6 @@
     using System;
     using System.Data.Entity;
     using System.Threading.Tasks;
-    using Core.FinancialGuarantee;
     using Domain.FinancialGuarantee;
     using Domain.Security;
 
@@ -18,15 +17,10 @@
             this.authorization = authorization;
         }
 
-        public async Task<FinancialGuarantee> GetByNotificationId(Guid notificationId)
+        public async Task<FinancialGuaranteeCollection> GetByNotificationId(Guid notificationId)
         {
             await authorization.EnsureAccessAsync(notificationId);
-            return await context.FinancialGuarantees.SingleAsync(fg => fg.NotificationApplicationId == notificationId);
-        }
-
-        public async Task<FinancialGuaranteeStatus> GetStatusByNotificationId(Guid notificationId)
-        {
-            return (await GetByNotificationId(notificationId)).Status;
+            return await context.FinancialGuarantees.SingleAsync(fg => fg.NotificationId == notificationId);
         }
     }
 }

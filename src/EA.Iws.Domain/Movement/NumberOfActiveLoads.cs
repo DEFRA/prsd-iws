@@ -4,6 +4,7 @@
     using System.Linq;
     using System.Threading.Tasks;
     using Core.ComponentRegistration;
+    using Core.FinancialGuarantee;
     using FinancialGuarantee;
 
     [AutoRegister]
@@ -21,7 +22,13 @@
         public async Task<bool> HasMaximum(Guid notificationId)
         {
             var currentActiveLoads = (await movementRepository.GetActiveMovements(notificationId)).Count();
-            var activeLoadsPermitted = (await financialGuaranteeRepository.GetByNotificationId(notificationId)).ActiveLoadsPermitted.GetValueOrDefault();
+            var financialGuaranteeCollection = await financialGuaranteeRepository.GetByNotificationId(notificationId);
+
+            var currentFinancialGuarantee =
+                financialGuaranteeCollection.FinancialGuarantees.SingleOrDefault(
+                    fg => fg.Status == FinancialGuaranteeStatus.Approved);
+
+            var activeLoadsPermitted = currentFinancialGuarantee == null ? 0 : currentFinancialGuarantee.ActiveLoadsPermitted.GetValueOrDefault();
 
             return currentActiveLoads >= activeLoadsPermitted;
         }

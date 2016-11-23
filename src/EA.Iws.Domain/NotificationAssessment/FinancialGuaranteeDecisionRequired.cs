@@ -1,6 +1,7 @@
 ﻿namespace EA.Iws.Domain.NotificationAssessment
 {
     using System;
+    using System.Linq;
     using System.Threading.Tasks;
     using Core.ComponentRegistration;
     using Core.FinancialGuarantee;
@@ -23,21 +24,16 @@
         public async Task<bool> Calculate(Guid notificationId)
         {
             var assessment = await assessmentRepository.GetByNotificationId(notificationId);
-            var financialGuarantee = await financialGuaranteeRepository.GetByNotificationId(notificationId);
+            var financialGuaranteeCollection = await financialGuaranteeRepository.GetByNotificationId(notificationId);
 
             if (assessment.Status != NotificationStatus.Consented)
             {
                 return false;
             }
 
-            if (financialGuarantee.Status != FinancialGuaranteeStatus.ApplicationComplete
-                && financialGuarantee.Status != FinancialGuaranteeStatus.ApplicationReceived
-                && financialGuarantee.Status != FinancialGuaranteeStatus.AwaitingApplication)
-            {
-                return false;
-            }
-
-            return true;
+            return
+                financialGuaranteeCollection.FinancialGuarantees.Any(
+                    fg => fg.Status == FinancialGuaranteeStatus.ApplicationComplete);
         }
     }
 }

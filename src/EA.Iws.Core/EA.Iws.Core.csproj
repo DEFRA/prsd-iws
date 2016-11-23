@@ -189,7 +189,6 @@
     <Compile Include="NotificationAssessment\TransactionType.cs" />
     <Compile Include="Notification\UKCompetentAuthority.cs" />
     <Compile Include="NotificationAssessment\NotificationAssessmentDecisionRecord.cs" />
-    <Compile Include="NotificationAssessment\FinancialGuaranteeDecisionData.cs" />
     <Compile Include="Annexes\ExportNotification\ProvidedAnnexesData.cs" />
     <Compile Include="Shared\AddressDataResources.Designer.cs">
       <AutoGen>True</AutoGen>

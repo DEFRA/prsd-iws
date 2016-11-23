@@ -15,7 +15,6 @@
         private readonly IConsultationRepository consultationRepository;
         private readonly INotificationApplicationRepository notificationRepository;
         private readonly INotificationAssessmentRepository assessmentRepository;
-        private readonly IFinancialGuaranteeDecisionRepository financialGuaranteeDecisionRepository;
         private readonly INotificationAssessmentDatesSummaryRepository datesSummaryRepository;
         private readonly INotificationAssessmentDecisionRepository decisionRepository;
         private readonly IFacilityRepository facilityRepository;
@@ -23,7 +22,6 @@
 
         public GetKeyDatesSummaryInformationHandler(INotificationApplicationRepository notificationRepository,
             INotificationAssessmentRepository assessmentRepository,
-            IFinancialGuaranteeDecisionRepository financialGuaranteeDecisionRepository,
             INotificationAssessmentDatesSummaryRepository datesSummaryRepository,
             INotificationAssessmentDecisionRepository decisionRepository,
             IFacilityRepository facilityRepository,
@@ -32,7 +30,6 @@
         {
             this.notificationRepository = notificationRepository;
             this.assessmentRepository = assessmentRepository;
-            this.financialGuaranteeDecisionRepository = financialGuaranteeDecisionRepository;
             this.datesSummaryRepository = datesSummaryRepository;
             this.decisionRepository = decisionRepository;
             this.facilityRepository = facilityRepository;
@@ -48,8 +45,6 @@
 
             var dates = await datesSummaryRepository.GetById(message.NotificationId);
 
-            var financialGuaranteeDecisions = await financialGuaranteeDecisionRepository.GetByNotificationId(message.NotificationId);
-
             var decision = await decisionRepository.GetByNotificationId(message.NotificationId);
 
             var facilityCollection = await facilityRepository.GetByNotificationId(message.NotificationId);
@@ -60,8 +55,6 @@
             {
                 CompetentAuthority = notification.CompetentAuthority,
                 IsLocalAreaSet = consultation != null && consultation.LocalAreaId.HasValue,
-                FinancialGuaranteeDecisions =
-                    financialGuaranteeDecisions.Select(x => mapper.Map<FinancialGuaranteeDecisionData>(x)).ToArray(),
                 Dates = mapper.Map<NotificationDatesData>(dates),
                 DecisionHistory = decision,
                 IsInterim = facilityCollection.IsInterim

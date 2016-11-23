@@ -14,18 +14,23 @@
     {
         private readonly IwsContext context;
         private readonly IMapWithParameter<FinancialGuarantee, UKCompetentAuthority, FinancialGuaranteeData> financialGuaranteeMap;
+        private readonly IFinancialGuaranteeRepository repository;
 
-        public GetFinancialGuaranteeDataByNotificationApplicationIdHandler(IwsContext context, IMapWithParameter<FinancialGuarantee, UKCompetentAuthority, FinancialGuaranteeData> financialGuaranteeMap)
+        public GetFinancialGuaranteeDataByNotificationApplicationIdHandler(IwsContext context, 
+            IMapWithParameter<FinancialGuarantee, UKCompetentAuthority, FinancialGuaranteeData> financialGuaranteeMap, 
+            IFinancialGuaranteeRepository repository)
         {
             this.context = context;
             this.financialGuaranteeMap = financialGuaranteeMap;
+            this.repository = repository;
         }
 
         public async Task<FinancialGuaranteeData> HandleAsync(GetFinancialGuaranteeDataByNotificationApplicationId message)
         {
-            var financialGuarantee =
-                await context.FinancialGuarantees.SingleOrDefaultAsync(na => na.NotificationApplicationId == message.Id);
-            var authority = (await context.NotificationApplications.SingleAsync(na => na.Id == message.Id)).CompetentAuthority;
+            var financialGuaranteeCollection = await repository.GetByNotificationId(message.NotificationId);
+            var financialGuarantee = financialGuaranteeCollection.GetFinancialGuarantee(message.FinancialGuaranteeId);
+
+            var authority = (await context.NotificationApplications.SingleAsync(na => na.Id == message.NotificationId)).CompetentAuthority;
 
             return financialGuaranteeMap.Map(financialGuarantee, authority);
         }

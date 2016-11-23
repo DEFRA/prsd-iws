@@ -7,8 +7,6 @@
     {
         public NotificationDatesData Dates { get; set; }
 
-        public IList<FinancialGuaranteeDecisionData> FinancialGuaranteeDecisions { get; set; }
-
         public UKCompetentAuthority CompetentAuthority { get; set; }
 
         public bool IsLocalAreaSet { get; set; }

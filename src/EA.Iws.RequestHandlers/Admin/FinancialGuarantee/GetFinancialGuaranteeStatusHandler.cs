@@ -17,7 +17,9 @@
 
         public async Task<FinancialGuaranteeStatus> HandleAsync(GetFinancialGuaranteeStatus message)
         {
-            return await repository.GetStatusByNotificationId(message.NotificationId);
+            var financialGuaranteeCollection = await repository.GetByNotificationId(message.NotificationId);
+            var financialGuarantee = financialGuaranteeCollection.GetFinancialGuarantee(message.FinancialGuaranteeId);
+            return financialGuarantee.Status;
         }
     }
 }

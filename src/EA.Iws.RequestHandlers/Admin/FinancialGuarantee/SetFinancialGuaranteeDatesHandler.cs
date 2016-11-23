@@ -1,7 +1,5 @@
 ﻿namespace EA.Iws.RequestHandlers.Admin.FinancialGuarantee
 {
-    using System;
-    using System.Data.Entity;
     using System.Threading.Tasks;
     using Core.FinancialGuarantee;
     using DataAccess;
@@ -11,27 +9,19 @@
 
     internal class SetFinancialGuaranteeDatesHandler : IRequestHandler<SetFinancialGuaranteeDates, bool>
     {
+        private readonly IFinancialGuaranteeRepository repository;
         private readonly IwsContext context;
 
-        public SetFinancialGuaranteeDatesHandler(IwsContext context)
+        public SetFinancialGuaranteeDatesHandler(IFinancialGuaranteeRepository repository, IwsContext context)
         {
+            this.repository = repository;
             this.context = context;
         }
 
         public async Task<bool> HandleAsync(SetFinancialGuaranteeDates message)
         {
-            if (!await context.NotificationApplications.AnyAsync(p => p.Id == message.NotificationId))
-            {
-                throw new InvalidOperationException(string.Format("Notification {0} does not exist.", message.NotificationId));
-            }
-
-            var financialGuarantee = await context.FinancialGuarantees.SingleOrDefaultAsync(na => na.NotificationApplicationId == message.NotificationId);
-
-            if (financialGuarantee == null)
-            {
-                financialGuarantee = FinancialGuarantee.Create(message.NotificationId);
-                context.FinancialGuarantees.Add(financialGuarantee);
-            }
+            var financialGuaranteeCollection = await repository.GetByNotificationId(message.NotificationId);
+            var financialGuarantee = financialGuaranteeCollection.GetFinancialGuarantee(message.FinancialGuaranteeId);
 
             if (message.ReceivedDate.HasValue)
             {

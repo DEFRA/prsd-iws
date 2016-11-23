@@ -199,7 +199,6 @@
     <Compile Include="Movement\SetMovementFileId.cs" />
     <Compile Include="Movement\Reject\SetMovementRejected.cs" />
     <Compile Include="NotificationAssessment\GetFinancialGuaranteeDecisionRequired.cs" />
-    <Compile Include="NotificationAssessment\GetFinancialGuaranteeDecisions.cs" />
     <Compile Include="NotificationAssessment\GetFinancialGuaranteeStatus.cs" />
     <Compile Include="NotificationAssessment\GetKeyDatesSummaryInformation.cs" />
     <Compile Include="NotificationAssessment\GetLocalAreasByUserCA.cs" />
