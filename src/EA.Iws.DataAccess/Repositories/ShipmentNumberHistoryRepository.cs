@@ -22,7 +22,7 @@
         {
             await notificationApplicationAuthorization.EnsureAccessAsync(notificationId);
 
-            return await context.ShipmentNumberHistories.Where(x => x.NotificationId == notificationId).OrderBy(x => x.DateChanged).FirstAsync();
+            return await context.ShipmentNumberHistories.Where(x => x.NotificationId == notificationId).OrderBy(x => x.DateChanged).FirstOrDefaultAsync();
         }
     }
 }

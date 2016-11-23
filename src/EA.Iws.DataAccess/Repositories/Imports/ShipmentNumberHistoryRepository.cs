@@ -24,7 +24,7 @@
 
             return await context.ShipmentNumberHistories.Where(x => x.ImportNotificationId == notificationId)
                         .OrderBy(x => x.DateChanged)
-                        .FirstAsync();
+                        .FirstOrDefaultAsync();
         }
     }
 }
