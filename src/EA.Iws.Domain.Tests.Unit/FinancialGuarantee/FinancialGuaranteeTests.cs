@@ -37,8 +37,6 @@
             ObjectInstantiator<FinancialGuarantee>.SetProperty(fg => fg.ReceivedDate, AnyDate, ApprovedFinancialGuarantee);
             ObjectInstantiator<FinancialGuarantee>.SetProperty(fg => fg.CompletedDate, CompletedDate, ApprovedFinancialGuarantee);
             ObjectInstantiator<FinancialGuarantee>.SetProperty(fg => fg.DecisionDate, AfterCompletionDate, ApprovedFinancialGuarantee);
-            ObjectInstantiator<FinancialGuarantee>.SetProperty(fg => fg.ValidFrom, AfterCompletionDate, ApprovedFinancialGuarantee);
-            ObjectInstantiator<FinancialGuarantee>.SetProperty(fg => fg.ValidTo, AfterCompletionDate.AddYears(1), ApprovedFinancialGuarantee);
 
             RefusedFinancialGuarantee = FinancialGuarantee.Create(new Guid("229F6957-3CBE-4C70-9A5F-40F42CF5BA11"));
             ObjectInstantiator<FinancialGuarantee>.SetProperty(fg => fg.Status, FinancialGuaranteeStatus.Refused, RefusedFinancialGuarantee);

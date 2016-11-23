@@ -2,7 +2,6 @@
 {
     using System;
     using System.Threading.Tasks;
-    using FakeItEasy;
     using RequestHandlers.Admin.FinancialGuarantee;
     using Requests.Admin.FinancialGuarantee;
     using Xunit;
@@ -14,8 +13,7 @@
         private readonly ApproveFinancialGuaranteeHandler handler;
         private readonly TestFinancialGuarantee financialGuarantee;
         private readonly ApproveFinancialGuarantee approveFinancialGuarantee =
-            new ApproveFinancialGuarantee(ApplicationCompletedId, FirstDate, MiddleDate,
-                LastDate, BlanketBondReference, AnyInt, true);
+            new ApproveFinancialGuarantee(ApplicationCompletedId, FirstDate, BlanketBondReference, AnyInt, true);
 
         public ApproveFinancialGuaranteeHandlerTests()
         {
@@ -34,7 +32,7 @@
             await
                 Assert.ThrowsAsync<InvalidOperationException>(
                     () =>
-                        handler.HandleAsync(new ApproveFinancialGuarantee(Guid.Empty, FirstDate, MiddleDate, LastDate, BlanketBondReference, AnyInt, true)));
+                        handler.HandleAsync(new ApproveFinancialGuarantee(Guid.Empty, FirstDate, BlanketBondReference, AnyInt, true)));
         }
 
         [Fact]
@@ -43,7 +41,7 @@
             await
                 Assert.ThrowsAsync<InvalidOperationException>(
                     () =>
-                        handler.HandleAsync(new ApproveFinancialGuarantee(Guid.Empty, FirstDate, MiddleDate, LastDate, BlanketBondReference, AnyInt, true)));
+                        handler.HandleAsync(new ApproveFinancialGuarantee(Guid.Empty, FirstDate, BlanketBondReference, AnyInt, true)));
 
             Assert.False(financialGuarantee.ApproveCalled);
         }

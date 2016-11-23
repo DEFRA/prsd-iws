@@ -32,8 +32,6 @@
                 DecisionRequiredDate = source.GetDecisionRequiredDate(workingDayCalculator, parameter),
                 ReceivedDate = source.ReceivedDate,
                 DecisionDate = source.DecisionDate,
-                ValidFrom = source.ValidFrom,
-                ValidTo = source.ValidTo,
                 RefusalReason = source.RefusalReason,
                 ActiveLoadsPermitted = source.ActiveLoadsPermitted,
                 Decision = GetDecision(source),

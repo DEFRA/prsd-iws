@@ -3,29 +3,22 @@
     using System;
     using Core.FinancialGuarantee;
     using Domain.FinancialGuarantee;
-    using FakeItEasy;
     using Xunit;
 
     public class FinancialGuaranteeApproveTests : FinancialGuaranteeTests
     {
-        private static readonly DateTime TwoDaysAfterCompletionDate = CompletedDate.AddDays(2);
-        private static readonly DateTime YearAfterCompletionDate = CompletedDate.AddYears(1);
         private const int AnyInt = 7;
         private const string BlanketBondReference = "ref 23";
 
         private readonly Action<FinancialGuarantee> setGuaranteeApproved =
             fg =>
                 fg.Approve(new ApproveDates(AfterCompletionDate, 
-                    TwoDaysAfterCompletionDate, 
-                    YearAfterCompletionDate,
                     BlanketBondReference, 
                     AnyInt, false));
 
         private readonly Action<FinancialGuarantee> setGuaranteeApprovedIsBlanketBond =
             fg =>
                 fg.Approve(new ApproveDates(AfterCompletionDate,
-                    TwoDaysAfterCompletionDate,
-                    YearAfterCompletionDate,
                     BlanketBondReference,
                     AnyInt, true));
 
@@ -40,17 +33,7 @@
         {
             Assert.Throws<InvalidOperationException>(
                 () =>
-                    CompletedFinancialGuarantee.Approve(new ApproveDates(BeforeCompletionDate, AfterCompletionDate,
-                        TwoDaysAfterCompletionDate, BlanketBondReference, AnyInt, true)));
-        }
-
-        [Fact]
-        public void ValidFromBeforeValidToThrows()
-        {
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                    CompletedFinancialGuarantee.Approve(new ApproveDates(AfterCompletionDate, YearAfterCompletionDate,
-                        TwoDaysAfterCompletionDate, BlanketBondReference, AnyInt, false)));
+                    CompletedFinancialGuarantee.Approve(new ApproveDates(BeforeCompletionDate, BlanketBondReference, AnyInt, true)));
         }
 
         [Fact]
@@ -67,35 +50,6 @@
             setGuaranteeApproved(CompletedFinancialGuarantee);
 
             Assert.Equal(FinancialGuaranteeStatus.Approved, CompletedFinancialGuarantee.Status);
-        }
-
-        [Fact]
-        public void SetsApprovedFromAndApprovedTo()
-        {
-            setGuaranteeApproved(CompletedFinancialGuarantee);
-
-            Assert.Equal(TwoDaysAfterCompletionDate, CompletedFinancialGuarantee.ValidFrom);
-            Assert.Equal(YearAfterCompletionDate, CompletedFinancialGuarantee.ValidTo);
-        }
-
-        [Fact]
-        public void SetsApprovedFromOnlyWhenIsBlanketBond()
-        {
-            setGuaranteeApprovedIsBlanketBond(CompletedFinancialGuarantee);
-
-            Assert.Equal(TwoDaysAfterCompletionDate, CompletedFinancialGuarantee.ValidFrom);
-            Assert.Equal(null, CompletedFinancialGuarantee.ValidTo);
-        }
-
-        [Fact]
-        public void ValidFromBeforeValidTo_DoesNotSetStatusAndDoesNotRaiseEvent()
-        {
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                    CompletedFinancialGuarantee.Approve(new ApproveDates(AfterCompletionDate, YearAfterCompletionDate, TwoDaysAfterCompletionDate, BlanketBondReference, AnyInt, false)));
-
-            Assert.Equal(FinancialGuaranteeStatus.ApplicationComplete, CompletedFinancialGuarantee.Status);
-            A.CallTo(() => Dispatcher.Dispatch(A<FinancialGuaranteeStatusChangeEvent>.Ignored)).MustNotHaveHappened();
         }
 
         [Fact]

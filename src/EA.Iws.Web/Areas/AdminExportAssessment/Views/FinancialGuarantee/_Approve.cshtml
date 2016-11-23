@@ -14,20 +14,6 @@
     </div>
 </div>
 
-<div class="form-group @Html.Gds().FormGroupClass(m => m.ValidFrom.Day)  @Html.Gds().FormGroupClass(m => m.ValidFrom.Month)  @Html.Gds().FormGroupClass(m => m.ValidFrom.Year)">
-    @Html.Gds().ValidationMessageFor(m => m.ValidFrom)
-    @Html.Gds().LabelFor(m => m.ValidFrom, false)
-    @Html.EditorFor(m => m.ValidFrom)
-</div>
-
-<div class="@(Model.IsBlanketBond.GetValueOrDefault() ? "js-hidden" : string.Empty)" id="validToDate">
-    <div class="form-group @Html.Gds().FormGroupClass(m => m.ValidTo.Day) @Html.Gds().FormGroupClass(m => m.ValidTo.Month) @Html.Gds().FormGroupClass(m => m.ValidTo.Year)">
-        @Html.Gds().ValidationMessageFor(m => m.ValidTo)
-        @Html.Gds().LabelFor(m => m.ValidTo, false)
-        @Html.EditorFor(m => m.ValidTo)
-    </div>
-</div>
-
 <div>
     <div class="form-group @Html.Gds().FormGroupClass(m => m.ReferenceNumber)">
         @Html.Gds().ValidationMessageFor(m => m.ReferenceNumber)
