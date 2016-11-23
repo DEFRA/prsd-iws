@@ -466,6 +466,7 @@
     <Content Include="Areas\AdminImportNotificationMovements\Views\Delete\Confirm.cshtml" />
     <Content Include="Areas\Reports\Views\ImportNotifications\Index.cshtml" />
     <Content Include="Areas\AdminExportAssessment\Views\ShipmentNumber\Index.cshtml" />
+    <Content Include="Areas\ImportNotification\Views\ShipmentNumber\Index.cshtml" />
     <None Include="Content\iws\_panels.scss" />
     <Content Include="Content\nta-extended.css" />
     <Content Include="Content\select2\select2-spinner.gif" />
@@ -1608,6 +1609,7 @@
     <Compile Include="Areas\ImportNotification\Controllers\ImporterController.cs" />
     <Compile Include="Areas\ImportNotification\Controllers\PreconsentedController.cs" />
     <Compile Include="Areas\ImportNotification\Controllers\ProducerController.cs" />
+    <Compile Include="Areas\ImportNotification\Controllers\ShipmentNumberController.cs" />
     <Compile Include="Areas\ImportNotification\Controllers\StateOfExportController.cs" />
     <Compile Include="Areas\ImportNotification\Controllers\StateOfImportController.cs" />
     <Compile Include="Areas\ImportNotification\Controllers\TransitStateController.cs" />
