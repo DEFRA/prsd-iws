@@ -5,6 +5,11 @@
         @if (Model.IntendedShipmentData.NumberOfShipments > 0)
         {
             @Model.IntendedShipmentData.NumberOfShipments
+
+            if (Model.ShowChangeShipmentNumberLink)
+            {
+                <text>&nbsp; &nbsp; &nbsp;</text>@Html.ActionLink("Change", "Index", "ShipmentNumber", new { id = Model.NotificationId }, null)
+            }
         }
         else
         {
