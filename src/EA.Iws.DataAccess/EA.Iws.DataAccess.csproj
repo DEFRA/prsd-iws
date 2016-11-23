@@ -242,6 +242,7 @@
     <Compile Include="Repositories\Imports\ImportObjectionRepository.cs" />
     <Compile Include="Repositories\Imports\ImportWithdrawnRepository.cs" />
     <Compile Include="Repositories\Imports\KeyDatesOverrideRepository.cs" />
+    <Compile Include="Repositories\Imports\ShipmentNumberHistoryRepository.cs" />
     <Compile Include="Repositories\Imports\TransportRouteRepository.cs" />
     <Compile Include="Repositories\Imports\WasteOperationRepository.cs" />
     <Compile Include="Repositories\Imports\ProducerRepository.cs" />

@@ -1,4 +1,4 @@
-﻿namespace EA.Iws.Domain.NotificationApplication.Shipment
+﻿namespace EA.Iws.Domain.ImportNotification
 {
     using System;
     using System.Threading.Tasks;
