@@ -17,10 +17,10 @@ namespace EA.Iws.Core.Admin.Reports
 
         public string ProducerAddress { get; set; }
 
-        [DisplayName("Port of Exit")]
+        [DisplayName("Point of Exit")]
         public string PointOfExport { get; set; }
 
-        [DisplayName("Port of Entry")]
+        [DisplayName("Point of Entry")]
         public string PointOfEntry { get; set; }
 
         [DisplayName("Country of Destination")]
@@ -37,7 +37,7 @@ namespace EA.Iws.Core.Admin.Reports
         [DisplayName("R/D Code(s)")]
         public string OperationCodes { get; set; }
 
-        [DisplayName("Consignee Name")]
+        [DisplayName("Consignee")]
         public string ImporterName { get; set; }
 
         [DisplayName("Consignee Address")]
