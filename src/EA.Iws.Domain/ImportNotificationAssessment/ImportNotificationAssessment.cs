@@ -134,6 +134,7 @@
                 .OnEntryFrom(acknowledgeTrigger, OnAcknowledged)
                 .Permit(Trigger.Consent, ImportNotificationStatus.Consented)
                 .Permit(Trigger.Object, ImportNotificationStatus.Objected)
+                .Permit(Trigger.Withdraw, ImportNotificationStatus.Withdrawn)
                 .Permit(Trigger.FileClosed, ImportNotificationStatus.FileClosed);
 
             stateMachine.Configure(ImportNotificationStatus.Consented)
