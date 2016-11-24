@@ -2,6 +2,8 @@
 {
     using System;
     using System.Threading.Tasks;
+    using Domain.FinancialGuarantee;
+    using FakeItEasy;
     using RequestHandlers.Admin.FinancialGuarantee;
     using Requests.Admin.FinancialGuarantee;
     using Xunit;
@@ -13,17 +15,22 @@
         private readonly ApproveFinancialGuaranteeHandler handler;
         private readonly TestFinancialGuarantee financialGuarantee;
         private readonly ApproveFinancialGuarantee approveFinancialGuarantee =
-            new ApproveFinancialGuarantee(ApplicationCompletedId, FirstDate, BlanketBondReference, AnyInt, true);
+            new ApproveFinancialGuarantee(ApplicationCompletedId, FinancialGuaranteeId, FirstDate, BlanketBondReference, AnyInt, true);
+
+        private readonly IFinancialGuaranteeRepository repository;
 
         public ApproveFinancialGuaranteeHandlerTests()
         {
             context = new TestIwsContext();
+            repository = A.Fake<IFinancialGuaranteeRepository>();
 
-            financialGuarantee = new TestFinancialGuarantee { NotificationApplicationId = ApplicationCompletedId };
+            var financialGuaranteeCollection = new TestFinancialGuaranteeCollection(ApplicationCompletedId);
+            financialGuarantee = new TestFinancialGuarantee(FinancialGuaranteeId);
+            financialGuaranteeCollection.AddExistingFinancialGuarantee(financialGuarantee);
 
-            context.FinancialGuarantees.Add(financialGuarantee);
+            A.CallTo(() => repository.GetByNotificationId(ApplicationCompletedId)).Returns(financialGuaranteeCollection);
 
-            handler = new ApproveFinancialGuaranteeHandler(context);
+            handler = new ApproveFinancialGuaranteeHandler(repository, context);
         }
 
         [Fact]
@@ -32,7 +39,7 @@
             await
                 Assert.ThrowsAsync<InvalidOperationException>(
                     () =>
-                        handler.HandleAsync(new ApproveFinancialGuarantee(Guid.Empty, FirstDate, BlanketBondReference, AnyInt, true)));
+                        handler.HandleAsync(new ApproveFinancialGuarantee(Guid.Empty, FinancialGuaranteeId, FirstDate, BlanketBondReference, AnyInt, true)));
         }
 
         [Fact]
@@ -41,7 +48,7 @@
             await
                 Assert.ThrowsAsync<InvalidOperationException>(
                     () =>
-                        handler.HandleAsync(new ApproveFinancialGuarantee(Guid.Empty, FirstDate, BlanketBondReference, AnyInt, true)));
+                        handler.HandleAsync(new ApproveFinancialGuarantee(Guid.Empty, FinancialGuaranteeId, FirstDate, BlanketBondReference, AnyInt, true)));
 
             Assert.False(financialGuarantee.ApproveCalled);
         }

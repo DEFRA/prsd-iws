@@ -3,6 +3,8 @@
     using System;
     using System.Threading.Tasks;
     using Core.FinancialGuarantee;
+    using Domain.FinancialGuarantee;
+    using FakeItEasy;
     using RequestHandlers.Admin.FinancialGuarantee;
     using Requests.Admin.FinancialGuarantee;
     using Xunit;
@@ -12,17 +14,22 @@
         private readonly ReleaseFinancialGuaranteeHandler handler;
         private readonly TestFinancialGuarantee financialGuarantee;
         private readonly ReleaseFinancialGuarantee releaseFinancialGuarantee =
-            new ReleaseFinancialGuarantee(ApplicationCompletedId, FirstDate);
+            new ReleaseFinancialGuarantee(ApplicationCompletedId, FinancialGuaranteeId, FirstDate);
+
+        private readonly IFinancialGuaranteeRepository repository;
 
         public ReleaseFinancialGuaranteeHandlerTests()
         {
             context = new TestIwsContext();
+            repository = A.Fake<IFinancialGuaranteeRepository>();
 
-            financialGuarantee = new TestFinancialGuarantee { NotificationApplicationId = ApplicationCompletedId };
+            var financialGuaranteeCollection = new TestFinancialGuaranteeCollection(ApplicationCompletedId);
+            financialGuarantee = new TestFinancialGuarantee(FinancialGuaranteeId);
+            financialGuaranteeCollection.AddExistingFinancialGuarantee(financialGuarantee);
 
-            context.FinancialGuarantees.Add(financialGuarantee);
+            A.CallTo(() => repository.GetByNotificationId(ApplicationCompletedId)).Returns(financialGuaranteeCollection);
 
-            handler = new ReleaseFinancialGuaranteeHandler(context);
+            handler = new ReleaseFinancialGuaranteeHandler(repository, context);
         }
 
         [Fact]
@@ -31,7 +38,7 @@
             await
                 Assert.ThrowsAsync<InvalidOperationException>(
                     () =>
-                        handler.HandleAsync(new ReleaseFinancialGuarantee(Guid.Empty, FirstDate)));
+                        handler.HandleAsync(new ReleaseFinancialGuarantee(Guid.Empty, Guid.Empty, FirstDate)));
         }
 
         [Fact]

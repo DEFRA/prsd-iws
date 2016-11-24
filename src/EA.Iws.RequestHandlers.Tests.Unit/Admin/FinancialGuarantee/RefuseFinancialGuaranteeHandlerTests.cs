@@ -2,6 +2,7 @@
 {
     using System;
     using System.Threading.Tasks;
+    using Domain.FinancialGuarantee;
     using FakeItEasy;
     using RequestHandlers.Admin.FinancialGuarantee;
     using Requests.Admin.FinancialGuarantee;
@@ -12,17 +13,22 @@
         private readonly RefuseFinancialGuaranteeHandler handler;
         private readonly TestFinancialGuarantee financialGuarantee;
         private readonly RefuseFinancialGuarantee refuseFinancialGuarantee =
-            new RefuseFinancialGuarantee(ApplicationCompletedId, FirstDate, "test");
+            new RefuseFinancialGuarantee(ApplicationCompletedId, FinancialGuaranteeId, FirstDate, "test");
+
+        private readonly IFinancialGuaranteeRepository repository;
 
         public RefuseFinancialGuaranteeHandlerTests()
         {
             context = new TestIwsContext();
+            repository = A.Fake<IFinancialGuaranteeRepository>();
 
-            financialGuarantee = new TestFinancialGuarantee { NotificationApplicationId = ApplicationCompletedId };
+            var financialGuaranteeCollection = new TestFinancialGuaranteeCollection(ApplicationCompletedId);
+            financialGuarantee = new TestFinancialGuarantee(FinancialGuaranteeId);
+            financialGuaranteeCollection.AddExistingFinancialGuarantee(financialGuarantee);
 
-            context.FinancialGuarantees.Add(financialGuarantee);
+            A.CallTo(() => repository.GetByNotificationId(ApplicationCompletedId)).Returns(financialGuaranteeCollection);
 
-            handler = new RefuseFinancialGuaranteeHandler(context);
+            handler = new RefuseFinancialGuaranteeHandler(repository, context);
         }
 
         [Fact]
@@ -31,7 +37,7 @@
             await
                 Assert.ThrowsAsync<InvalidOperationException>(
                     () =>
-                        handler.HandleAsync(new RefuseFinancialGuarantee(Guid.Empty, FirstDate, "test")));
+                        handler.HandleAsync(new RefuseFinancialGuarantee(Guid.Empty, Guid.Empty, FirstDate, "test")));
         }
 
         [Fact]

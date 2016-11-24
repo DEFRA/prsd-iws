@@ -4,6 +4,7 @@ namespace EA.Iws.RequestHandlers.Tests.Unit.Admin.FinancialGuarantee
     using Core.FinancialGuarantee;
     using DataAccess;
     using Domain.FinancialGuarantee;
+    using TestHelpers.Helpers;
 
     public class FinancialGuaranteeDecisionTests
     {
@@ -12,11 +13,30 @@ namespace EA.Iws.RequestHandlers.Tests.Unit.Admin.FinancialGuarantee
         protected static readonly DateTime LastDate = new DateTime(2015, 2, 1);
 
         protected static readonly Guid ApplicationCompletedId = new Guid("9DA0EE37-EA13-4DF8-A4C9-0A8FDBC2207B");
+        protected static readonly Guid FinancialGuaranteeId = new Guid("9837EB9C-5F52-4D8D-A347-3CF57B2ED4FE");
 
         protected IwsContext context;
 
+        protected class TestFinancialGuaranteeCollection : FinancialGuaranteeCollection
+        {
+            public TestFinancialGuaranteeCollection(Guid notificationId)
+                : base(notificationId)
+            {
+            }
+
+            public void AddExistingFinancialGuarantee(FinancialGuarantee financialGuarantee)
+            {
+                FinancialGuaranteesCollection.Add(financialGuarantee);
+            }
+        }
+
         protected class TestFinancialGuarantee : FinancialGuarantee
         {
+            public TestFinancialGuarantee(Guid financialGuaranteeId)
+            {
+                EntityHelper.SetEntityId(this, financialGuaranteeId);
+            }
+
             public bool ApproveCalled { get; private set; }
 
             public bool ApproveThrows { get; set; }

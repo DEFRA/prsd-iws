@@ -6,7 +6,6 @@
     using Core.FinancialGuarantee;
     using DataAccess;
     using Domain.FinancialGuarantee;
-    using FakeItEasy;
     using Prsd.Core;
     using RequestHandlers.Admin.FinancialGuarantee;
     using TestHelpers.Helpers;
@@ -31,7 +30,7 @@
 
             context.Users.Add(UserFactory.Create(UserId, AnyString, AnyString, AnyString, AnyString));
 
-            financialGuarantee = FinancialGuarantee.Create(new Guid("68787AC6-7CF5-4862-8E7E-77E20172AECC"));
+            financialGuarantee = new FinancialGuaranteeCollection(new Guid("68787AC6-7CF5-4862-8E7E-77E20172AECC")).AddFinancialGuarantee(new DateTime(2015, 1, 1));
 
             receivedEvent = new FinancialGuaranteeStatusChangeEvent(financialGuarantee,
                 FinancialGuaranteeStatus.ApplicationReceived);

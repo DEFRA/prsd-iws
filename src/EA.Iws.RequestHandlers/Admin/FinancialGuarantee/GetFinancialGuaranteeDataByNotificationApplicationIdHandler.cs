@@ -1,36 +1,36 @@
 ﻿namespace EA.Iws.RequestHandlers.Admin.FinancialGuarantee
 {
-    using System.Data.Entity;
     using System.Threading.Tasks;
     using Core.Admin;
     using Core.Notification;
-    using DataAccess;
     using Domain.FinancialGuarantee;
+    using Domain.NotificationApplication;
     using Prsd.Core.Mapper;
     using Prsd.Core.Mediator;
     using Requests.Admin.FinancialGuarantee;
 
     public class GetFinancialGuaranteeDataByNotificationApplicationIdHandler : IRequestHandler<GetFinancialGuaranteeDataByNotificationApplicationId, FinancialGuaranteeData>
     {
-        private readonly IwsContext context;
         private readonly IMapWithParameter<FinancialGuarantee, UKCompetentAuthority, FinancialGuaranteeData> financialGuaranteeMap;
-        private readonly IFinancialGuaranteeRepository repository;
+        private readonly IFinancialGuaranteeRepository financialGuaranteeRepository;
+        private readonly INotificationApplicationRepository notificationApplicationRepository;
 
-        public GetFinancialGuaranteeDataByNotificationApplicationIdHandler(IwsContext context, 
+        public GetFinancialGuaranteeDataByNotificationApplicationIdHandler( 
             IMapWithParameter<FinancialGuarantee, UKCompetentAuthority, FinancialGuaranteeData> financialGuaranteeMap, 
-            IFinancialGuaranteeRepository repository)
+            IFinancialGuaranteeRepository financialGuaranteeRepository,
+            INotificationApplicationRepository notificationApplicationRepository)
         {
-            this.context = context;
             this.financialGuaranteeMap = financialGuaranteeMap;
-            this.repository = repository;
+            this.financialGuaranteeRepository = financialGuaranteeRepository;
+            this.notificationApplicationRepository = notificationApplicationRepository;
         }
 
         public async Task<FinancialGuaranteeData> HandleAsync(GetFinancialGuaranteeDataByNotificationApplicationId message)
         {
-            var financialGuaranteeCollection = await repository.GetByNotificationId(message.NotificationId);
+            var financialGuaranteeCollection = await financialGuaranteeRepository.GetByNotificationId(message.NotificationId);
             var financialGuarantee = financialGuaranteeCollection.GetFinancialGuarantee(message.FinancialGuaranteeId);
 
-            var authority = (await context.NotificationApplications.SingleAsync(na => na.Id == message.NotificationId)).CompetentAuthority;
+            var authority = (await notificationApplicationRepository.GetById(message.NotificationId)).CompetentAuthority;
 
             return financialGuaranteeMap.Map(financialGuarantee, authority);
         }
