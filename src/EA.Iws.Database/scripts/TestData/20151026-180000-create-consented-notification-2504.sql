@@ -834,8 +834,6 @@ INSERT INTO [Notification].[FinancialGuarantee]
 	[CreatedDate],
 	[NotificationApplicationId],
 	[DecisionDate],
-	[ValidFrom],
-	[ValidTo],
 	[ActiveLoadsPermitted]
 )
 VALUES
@@ -847,8 +845,6 @@ VALUES
 	'2016-10-13',
 	GETDATE(),
 	@NotificationId,
-	'2016-10-20',
-	'2016-10-20',
 	'2018-10-20',
 	520
 )
