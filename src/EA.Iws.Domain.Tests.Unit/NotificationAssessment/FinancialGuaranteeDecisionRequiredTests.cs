@@ -35,11 +35,12 @@
             var assessment = new NotificationAssessment(NotificationId);
             ObjectInstantiator<NotificationAssessment>.SetProperty(x => x.Status, NotificationStatus.Consented, assessment);
 
-            var financialGuarantee = FinancialGuarantee.Create(NotificationId);
+            var financialGuaranteeCollection = new FinancialGuaranteeCollection(NotificationId);
+            var financialGuarantee = financialGuaranteeCollection.AddFinancialGuarantee(new DateTime(2015, 1, 1));
             ObjectInstantiator<FinancialGuarantee>.SetProperty(x => x.Status, status, financialGuarantee);
 
             A.CallTo(() => assessmentRepository.GetByNotificationId(NotificationId)).Returns(assessment);
-            A.CallTo(() => financialGuaranteeRepository.GetByNotificationId(NotificationId)).Returns(financialGuarantee);
+            A.CallTo(() => financialGuaranteeRepository.GetByNotificationId(NotificationId)).Returns(financialGuaranteeCollection);
 
             var result = await service.Calculate(NotificationId);
 
@@ -63,11 +64,12 @@
             var assessment = new NotificationAssessment(NotificationId);
             ObjectInstantiator<NotificationAssessment>.SetProperty(x => x.Status, status, assessment);
 
-            var financialGuarantee = FinancialGuarantee.Create(NotificationId);
+            var financialGuaranteeCollection = new FinancialGuaranteeCollection(NotificationId);
+            var financialGuarantee = financialGuaranteeCollection.AddFinancialGuarantee(new DateTime(2015, 1, 1));
             ObjectInstantiator<FinancialGuarantee>.SetProperty(x => x.Status, FinancialGuaranteeStatus.ApplicationComplete, financialGuarantee);
 
             A.CallTo(() => assessmentRepository.GetByNotificationId(NotificationId)).Returns(assessment);
-            A.CallTo(() => financialGuaranteeRepository.GetByNotificationId(NotificationId)).Returns(financialGuarantee);
+            A.CallTo(() => financialGuaranteeRepository.GetByNotificationId(NotificationId)).Returns(financialGuaranteeCollection);
 
             var result = await service.Calculate(NotificationId);
 
@@ -83,11 +85,12 @@
             var assessment = new NotificationAssessment(NotificationId);
             ObjectInstantiator<NotificationAssessment>.SetProperty(x => x.Status, NotificationStatus.Consented, assessment);
 
-            var financialGuarantee = FinancialGuarantee.Create(NotificationId);
+            var financialGuaranteeCollection = new FinancialGuaranteeCollection(NotificationId);
+            var financialGuarantee = financialGuaranteeCollection.AddFinancialGuarantee(new DateTime(2015, 1, 1));
             ObjectInstantiator<FinancialGuarantee>.SetProperty(x => x.Status, status, financialGuarantee);
 
             A.CallTo(() => assessmentRepository.GetByNotificationId(NotificationId)).Returns(assessment);
-            A.CallTo(() => financialGuaranteeRepository.GetByNotificationId(NotificationId)).Returns(financialGuarantee);
+            A.CallTo(() => financialGuaranteeRepository.GetByNotificationId(NotificationId)).Returns(financialGuaranteeCollection);
 
             var result = await service.Calculate(NotificationId);
 

@@ -74,12 +74,15 @@
             }
         }
 
-        private static FinancialGuarantee GetFinancialGuarantee()
+        private static FinancialGuaranteeCollection GetFinancialGuarantee()
         {
-            var fg = FinancialGuarantee.Create(new Guid("26342B36-15A4-4AC4-BAE0-9C2CA36B0CD9"));
-            ObjectInstantiator<FinancialGuarantee>.SetProperty(f => f.ActiveLoadsPermitted, 2, fg);
+            var collection = new FinancialGuaranteeCollection(NotificationId);
 
-            return fg;
+            var fg = collection.AddFinancialGuarantee(new DateTime(2015, 1, 1));
+            ObjectInstantiator<FinancialGuarantee>.SetProperty(f => f.ActiveLoadsPermitted, 2, fg);
+            ObjectInstantiator<FinancialGuarantee>.SetProperty(f => f.Status, FinancialGuaranteeStatus.Approved, fg);
+
+            return collection;
         }
 
         private IEnumerable<Movement> GetMovementArray(int n)

@@ -17,11 +17,6 @@ namespace EA.Iws.RequestHandlers.Tests.Unit.Admin.FinancialGuarantee
 
         protected class TestFinancialGuarantee : FinancialGuarantee
         {
-            public new Guid NotificationApplicationId
-            {
-                set { base.NotificationApplicationId = value; }
-            }
-
             public bool ApproveCalled { get; private set; }
 
             public bool ApproveThrows { get; set; }

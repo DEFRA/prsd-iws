@@ -2,7 +2,6 @@
 {
     using System;
     using Core.FinancialGuarantee;
-    using Domain.FinancialGuarantee;
     using Prsd.Core;
     using Xunit;
 
@@ -37,7 +36,7 @@
         {
             SystemTime.Freeze();
 
-            var fg = FinancialGuarantee.Create(new Guid("03A3DC05-7144-483A-BF99-3AF02D3DEF72"));
+            var fg = FinancialGuaranteeCollection.AddFinancialGuarantee(AnyDate);
 
             Assert.Equal(SystemTime.UtcNow, fg.CreatedDate);
             Assert.Equal(FinancialGuaranteeStatus.AwaitingApplication, fg.Status);
