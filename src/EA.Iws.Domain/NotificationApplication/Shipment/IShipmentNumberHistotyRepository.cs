@@ -5,6 +5,6 @@
 
     public interface IShipmentNumberHistotyRepository
     {
-        Task<ShipmentNumberHistory> GetOriginalNumberOfShipments(Guid notificationId);
+        Task<NumberOfShipmentsHistory> GetOriginalNumberOfShipments(Guid notificationId);
     }
 }

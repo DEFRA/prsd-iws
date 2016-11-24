@@ -140,7 +140,7 @@
     <Compile Include="ImportNotification\ITransportRouteRepository.cs" />
     <Compile Include="ImportNotification\IWasteOperationRepository.cs" />
     <Compile Include="ImportNotification\IProducerRepository.cs" />
-    <Compile Include="ImportNotification\ShipmentNumberHistory.cs" />
+    <Compile Include="ImportNotification\NumberOfShipmentsHistory.cs" />
     <Compile Include="ImportNotification\StateOfExport.cs" />
     <Compile Include="ImportNotification\StateOfImport.cs" />
     <Compile Include="ImportNotification\TransitState.cs" />
@@ -286,7 +286,7 @@
     <Compile Include="NotificationApplication\ProducerCollection.cs" />
     <Compile Include="NotificationApplication\SetAllFacilitiesPreconsented.cs" />
     <Compile Include="NotificationApplication\Shipment\IShipmentNumberHistotyRepository.cs" />
-    <Compile Include="NotificationApplication\Shipment\ShipmentNumberHistory.cs" />
+    <Compile Include="NotificationApplication\Shipment\NumberOfShipmentsHistory.cs" />
     <Compile Include="NotificationApplication\UserHistory.cs" />
     <Compile Include="NotificationApplication\NotificationUserChangedEvent.cs" />
     <Compile Include="NotificationApplication\WasteRecovery\PercentageChangedEvent.cs" />

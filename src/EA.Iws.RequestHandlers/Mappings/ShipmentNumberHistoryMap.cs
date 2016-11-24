@@ -4,9 +4,9 @@
     using Domain.NotificationApplication.Shipment;
     using Prsd.Core.Mapper;
 
-    internal class ShipmentNumberHistoryMap : IMap<ShipmentNumberHistory, ShipmentNumberHistoryData>
+    internal class ShipmentNumberHistoryMap : IMap<NumberOfShipmentsHistory, ShipmentNumberHistoryData>
     {
-        public ShipmentNumberHistoryData Map(ShipmentNumberHistory source)
+        public ShipmentNumberHistoryData Map(NumberOfShipmentsHistory source)
         {
             ShipmentNumberHistoryData data;
             if (source != null)

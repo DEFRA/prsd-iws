@@ -110,7 +110,7 @@
 
         public virtual DbSet<TechnologyEmployed> TechnologiesEmployed { get; set; }
 
-        public virtual DbSet<ShipmentNumberHistory> ShipmentNumberHistories { get; set; }
+        public virtual DbSet<NumberOfShipmentsHistory> NumberOfShipmentsHistories { get; set; }
 
         public async Task<NotificationApplication> GetNotificationApplication(Guid notificationId)
         {

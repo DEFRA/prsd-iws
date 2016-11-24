@@ -105,7 +105,7 @@
     <Compile Include="Mappings\Exports\FacilityCollectionMapping.cs" />
     <Compile Include="Mappings\Exports\MeansOfTransportMapping.cs" />
     <Compile Include="Mappings\Exports\ProducerCollectionMapping.cs" />
-    <Compile Include="Mappings\Exports\ShipmentNumberHistoryMapping.cs" />
+    <Compile Include="Mappings\Exports\NumberOfShipmentsHistoryMapping.cs" />
     <Compile Include="Mappings\Exports\UserHistoryMapping.cs" />
     <Compile Include="Mappings\Exports\WasteCompositionAnnexMapping.cs" />
     <Compile Include="Mappings\Exports\TechnologyEmployedAnnexMapping.cs" />
@@ -128,7 +128,7 @@
     <Compile Include="Mappings\Imports\ImportNotificationDatesMapping.cs" />
     <Compile Include="Mappings\Imports\ImportNotificationStatusChangeMapping.cs" />
     <Compile Include="Mappings\Imports\ImportNotificationTransactionMapping.cs" />
-    <Compile Include="Mappings\Imports\ShipmentNumberHistoryMapping.cs" />
+    <Compile Include="Mappings\Imports\NumberOfShipmentsHistoryMapping.cs" />
     <Compile Include="Mappings\Imports\StateOfExportMapping.cs" />
     <Compile Include="Mappings\Imports\StateOfImportMapping.cs" />
     <Compile Include="Mappings\Imports\TransitStateMapping.cs" />

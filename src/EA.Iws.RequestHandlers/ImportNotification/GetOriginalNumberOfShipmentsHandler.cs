@@ -10,9 +10,9 @@
     internal class GetOriginalNumberOfShipmentsHandler : IRequestHandler<GetOriginalNumberOfShipments, ShipmentNumberHistoryData>
     {
         private readonly IShipmentNumberHistotyRepository repository;
-        private readonly IMap<ShipmentNumberHistory, ShipmentNumberHistoryData> map;
+        private readonly IMap<NumberOfShipmentsHistory, ShipmentNumberHistoryData> map;
 
-        public GetOriginalNumberOfShipmentsHandler(IShipmentNumberHistotyRepository repository, IMap<ShipmentNumberHistory, ShipmentNumberHistoryData> map)
+        public GetOriginalNumberOfShipmentsHandler(IShipmentNumberHistotyRepository repository, IMap<NumberOfShipmentsHistory, ShipmentNumberHistoryData> map)
         {
             this.repository = repository;
             this.map = map;

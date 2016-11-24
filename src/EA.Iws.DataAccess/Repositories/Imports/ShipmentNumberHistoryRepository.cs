@@ -18,11 +18,11 @@
             this.authorization = authorization;
         }
 
-        public async Task<ShipmentNumberHistory> GetOriginalNumberOfShipments(Guid notificationId)
+        public async Task<NumberOfShipmentsHistory> GetOriginalNumberOfShipments(Guid notificationId)
         {
             await authorization.EnsureAccessAsync(notificationId);
 
-            return await context.ShipmentNumberHistories.Where(x => x.ImportNotificationId == notificationId)
+            return await context.NumberOfShipmentsHistories.Where(x => x.ImportNotificationId == notificationId)
                         .OrderBy(x => x.DateChanged)
                         .FirstOrDefaultAsync();
         }

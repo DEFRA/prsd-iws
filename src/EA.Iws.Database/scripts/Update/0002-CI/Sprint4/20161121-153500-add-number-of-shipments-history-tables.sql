@@ -1,4 +1,4 @@
-﻿CREATE TABLE [ImportNotification].[ShipmentNumberHistory] (
+﻿CREATE TABLE [ImportNotification].[NumberOfShipmentsHistory] (
     [Id] UNIQUEIDENTIFIER NOT NULL,
     [NumberOfShipments] INT NOT NULL,
     [DateChanged] DATE NOT NULL,
@@ -10,7 +10,7 @@
 
 GO
 
-CREATE TABLE [Notification].[ShipmentNumberHistory] (
+CREATE TABLE [Notification].[NumberOfShipmentsHistory] (
     [Id] UNIQUEIDENTIFIER NOT NULL,
     [NumberOfShipments] INT NOT NULL,
     [DateChanged] DATE NOT NULL,

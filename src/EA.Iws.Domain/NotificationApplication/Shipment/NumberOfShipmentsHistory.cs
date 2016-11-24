@@ -4,13 +4,13 @@
     using Prsd.Core;
     using Prsd.Core.Domain;
 
-    public class ShipmentNumberHistory : Entity
+    public class NumberOfShipmentsHistory : Entity
     {
-        protected ShipmentNumberHistory()
+        protected NumberOfShipmentsHistory()
         {
         }
 
-        public ShipmentNumberHistory(Guid notificationId, int numberOfShipments, DateTime dateChanged)
+        public NumberOfShipmentsHistory(Guid notificationId, int numberOfShipments, DateTime dateChanged)
         {
             Guard.ArgumentNotDefaultValue(() => notificationId, notificationId);
             Guard.ArgumentNotDefaultValue(() => dateChanged, dateChanged);

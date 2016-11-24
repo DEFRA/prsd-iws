@@ -18,11 +18,11 @@
             this.notificationApplicationAuthorization = notificationApplicationAuthorization;
         }
 
-        public async Task<ShipmentNumberHistory> GetOriginalNumberOfShipments(Guid notificationId)
+        public async Task<NumberOfShipmentsHistory> GetOriginalNumberOfShipments(Guid notificationId)
         {
             await notificationApplicationAuthorization.EnsureAccessAsync(notificationId);
 
-            return await context.ShipmentNumberHistories.Where(x => x.NotificationId == notificationId).OrderBy(x => x.DateChanged).FirstOrDefaultAsync();
+            return await context.NumberOfShipmentsHistories.Where(x => x.NotificationId == notificationId).OrderBy(x => x.DateChanged).FirstOrDefaultAsync();
         }
     }
 }

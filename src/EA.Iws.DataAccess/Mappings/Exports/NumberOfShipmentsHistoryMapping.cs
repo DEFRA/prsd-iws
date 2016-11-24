@@ -3,11 +3,11 @@
     using System.Data.Entity.ModelConfiguration;
     using Domain.NotificationApplication.Shipment;
 
-    public class ShipmentNumberHistoryMapping : EntityTypeConfiguration<ShipmentNumberHistory>
+    public class NumberOfShipmentsHistoryMapping : EntityTypeConfiguration<NumberOfShipmentsHistory>
     {
-        public ShipmentNumberHistoryMapping()
+        public NumberOfShipmentsHistoryMapping()
         {
-            ToTable("ShipmentNumberHistory", "Notification");
+            ToTable("NumberOfShipmentsHistory", "Notification");
 
             Property(x => x.NumberOfShipments).IsRequired();
             Property(x => x.NotificationId).IsRequired();
