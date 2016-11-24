@@ -242,7 +242,7 @@
     <Compile Include="Repositories\Imports\ImportObjectionRepository.cs" />
     <Compile Include="Repositories\Imports\ImportWithdrawnRepository.cs" />
     <Compile Include="Repositories\Imports\KeyDatesOverrideRepository.cs" />
-    <Compile Include="Repositories\Imports\ShipmentNumberHistoryRepository.cs" />
+    <Compile Include="Repositories\Imports\NumberOfShipmentsHistoryRepository.cs" />
     <Compile Include="Repositories\Imports\TransportRouteRepository.cs" />
     <Compile Include="Repositories\Imports\WasteOperationRepository.cs" />
     <Compile Include="Repositories\Imports\ProducerRepository.cs" />
@@ -271,7 +271,7 @@
     <Compile Include="Repositories\Reports\ImportNotificationsRepository.cs" />
     <Compile Include="Repositories\Reports\MissingShipmentsRepository.cs" />
     <Compile Include="Repositories\Reports\FreedomOfInformationRepository.cs" />
-    <Compile Include="Repositories\ShipmentNumberHistoryRepository.cs" />
+    <Compile Include="Repositories\NumberOfShipmentsHistoryRepository.cs" />
     <Compile Include="Repositories\TechnologyEmployedRepository.cs" />
     <Compile Include="Repositories\Search\AdvancedSearchRepository.cs" />
     <Compile Include="Repositories\UserHistoryRepository.cs" />

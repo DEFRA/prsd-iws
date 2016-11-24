@@ -7,18 +7,18 @@
     using Prsd.Core.Mediator;
     using Requests.ImportNotification;
 
-    internal class GetOriginalNumberOfShipmentsHandler : IRequestHandler<GetOriginalNumberOfShipments, ShipmentNumberHistoryData>
+    internal class GetOriginalNumberOfShipmentsHandler : IRequestHandler<GetOriginalNumberOfShipments, NumberOfShipmentsHistoryData>
     {
-        private readonly IShipmentNumberHistotyRepository repository;
-        private readonly IMap<NumberOfShipmentsHistory, ShipmentNumberHistoryData> map;
+        private readonly INumberOfShipmentsHistotyRepository repository;
+        private readonly IMap<NumberOfShipmentsHistory, NumberOfShipmentsHistoryData> map;
 
-        public GetOriginalNumberOfShipmentsHandler(IShipmentNumberHistotyRepository repository, IMap<NumberOfShipmentsHistory, ShipmentNumberHistoryData> map)
+        public GetOriginalNumberOfShipmentsHandler(INumberOfShipmentsHistotyRepository repository, IMap<NumberOfShipmentsHistory, NumberOfShipmentsHistoryData> map)
         {
             this.repository = repository;
             this.map = map;
         }
 
-        public async Task<ShipmentNumberHistoryData> HandleAsync(GetOriginalNumberOfShipments message)
+        public async Task<NumberOfShipmentsHistoryData> HandleAsync(GetOriginalNumberOfShipments message)
         {
             var result = await repository.GetOriginalNumberOfShipments(message.NotificationId);
 

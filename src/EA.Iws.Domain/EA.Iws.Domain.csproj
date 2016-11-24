@@ -136,7 +136,7 @@
     <Compile Include="ImportNotification\ImportNotificationOverview.cs" />
     <Compile Include="ImportNotification\ImportNotificationSearchResult.cs" />
     <Compile Include="ImportNotification\InterimStatus.cs" />
-    <Compile Include="ImportNotification\IShipmentNumberHistotyRepository.cs" />
+    <Compile Include="ImportNotification\INumberOfShipmentsHistotyRepository.cs" />
     <Compile Include="ImportNotification\ITransportRouteRepository.cs" />
     <Compile Include="ImportNotification\IWasteOperationRepository.cs" />
     <Compile Include="ImportNotification\IProducerRepository.cs" />
@@ -285,7 +285,7 @@
     <Compile Include="NotificationApplication\NotificationNumberFormatter.cs" />
     <Compile Include="NotificationApplication\ProducerCollection.cs" />
     <Compile Include="NotificationApplication\SetAllFacilitiesPreconsented.cs" />
-    <Compile Include="NotificationApplication\Shipment\IShipmentNumberHistotyRepository.cs" />
+    <Compile Include="NotificationApplication\Shipment\INumberOfShipmentsHistotyRepository.cs" />
     <Compile Include="NotificationApplication\Shipment\NumberOfShipmentsHistory.cs" />
     <Compile Include="NotificationApplication\UserHistory.cs" />
     <Compile Include="NotificationApplication\NotificationUserChangedEvent.cs" />

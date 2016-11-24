@@ -7,12 +7,12 @@
     using Domain.NotificationApplication.Shipment;
     using Domain.Security;
 
-    internal class ShipmentNumberHistoryRepository : IShipmentNumberHistotyRepository
+    internal class NumberOfShipmentsHistoryRepository : INumberOfShipmentsHistotyRepository
     {
         private readonly IwsContext context;
         private readonly INotificationApplicationAuthorization notificationApplicationAuthorization;
 
-        public ShipmentNumberHistoryRepository(IwsContext context, INotificationApplicationAuthorization notificationApplicationAuthorization)
+        public NumberOfShipmentsHistoryRepository(IwsContext context, INotificationApplicationAuthorization notificationApplicationAuthorization)
         {
             this.context = context;
             this.notificationApplicationAuthorization = notificationApplicationAuthorization;

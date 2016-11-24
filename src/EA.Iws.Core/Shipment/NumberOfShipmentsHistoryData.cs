@@ -2,7 +2,7 @@
 {
     using System;
 
-    public class ShipmentNumberHistoryData
+    public class NumberOfShipmentsHistoryData
     {
         public Guid NotificaitonId { get; set; }
 

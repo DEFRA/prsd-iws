@@ -4,14 +4,14 @@
     using Domain.NotificationApplication.Shipment;
     using Prsd.Core.Mapper;
 
-    internal class ShipmentNumberHistoryMap : IMap<NumberOfShipmentsHistory, ShipmentNumberHistoryData>
+    internal class NumberOfShipmentsHistoryMap : IMap<NumberOfShipmentsHistory, NumberOfShipmentsHistoryData>
     {
-        public ShipmentNumberHistoryData Map(NumberOfShipmentsHistory source)
+        public NumberOfShipmentsHistoryData Map(NumberOfShipmentsHistory source)
         {
-            ShipmentNumberHistoryData data;
+            NumberOfShipmentsHistoryData data;
             if (source != null)
             {
-                data = new ShipmentNumberHistoryData
+                data = new NumberOfShipmentsHistoryData
                 {
                     NotificaitonId = source.NotificationId,
                     HasHistoryData = true,
@@ -21,7 +21,7 @@
             }
             else
             {
-                data = new ShipmentNumberHistoryData
+                data = new NumberOfShipmentsHistoryData
                 {
                     HasHistoryData = false
                 };

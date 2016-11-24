@@ -7,12 +7,12 @@
     using Domain.ImportNotification;
     using Domain.Security;
 
-    internal class ShipmentNumberHistoryRepository : IShipmentNumberHistotyRepository
+    internal class NumberOfShipmentsHistoryRepository : INumberOfShipmentsHistotyRepository
     {
         private readonly ImportNotificationContext context;
         private readonly IImportNotificationApplicationAuthorization authorization;
 
-        public ShipmentNumberHistoryRepository(ImportNotificationContext context, IImportNotificationApplicationAuthorization authorization)
+        public NumberOfShipmentsHistoryRepository(ImportNotificationContext context, IImportNotificationApplicationAuthorization authorization)
         {
             this.context = context;
             this.authorization = authorization;

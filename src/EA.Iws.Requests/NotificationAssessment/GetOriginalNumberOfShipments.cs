@@ -7,7 +7,7 @@
     using Prsd.Core.Mediator;
 
     [RequestAuthorization(ExportNotificationPermissions.CanChangeNumberOfShipmentsOnExportNotification)]
-    public class GetOriginalNumberOfShipments : IRequest<ShipmentNumberHistoryData>
+    public class GetOriginalNumberOfShipments : IRequest<NumberOfShipmentsHistoryData>
     {
         public GetOriginalNumberOfShipments(Guid notificationId)
         {

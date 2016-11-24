@@ -3,7 +3,7 @@
     using System;
     using System.Threading.Tasks;
 
-    public interface IShipmentNumberHistotyRepository
+    public interface INumberOfShipmentsHistotyRepository
     {
         Task<NumberOfShipmentsHistory> GetOriginalNumberOfShipments(Guid notificationId);
     }
