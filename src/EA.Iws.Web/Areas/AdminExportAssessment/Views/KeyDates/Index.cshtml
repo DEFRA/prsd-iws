@@ -209,19 +209,6 @@
             </tr>
         }
 
-        @foreach (var decision in Model.FinancialGuaranteeDecisions)
-        {
-            <tr>
-                <td>
-                    @decision.Decision
-                </td>
-                <td>
-                    @Html.Gds().DisplayDate(decision.Date)
-                </td>
-                <td></td>
-            </tr>
-        }
-
         <tr>
             <td>File closed on</td>
             <td>
@@ -288,13 +275,6 @@
         @Html.HiddenFor(m => m.NotificationFileClosedDate.Day)
         @Html.HiddenFor(m => m.NotificationFileClosedDate.Month)
         @Html.HiddenFor(m => m.NotificationFileClosedDate.Year)
-
-        for (int i = 0; i < Model.FinancialGuaranteeDecisions.Count(); i++)
-        {
-            @Html.HiddenFor(m => m.FinancialGuaranteeDecisions[i].NotificationId)
-            @Html.HiddenFor(m => m.FinancialGuaranteeDecisions[i].Date)
-            @Html.HiddenFor(m => m.FinancialGuaranteeDecisions[i].Decision)
-        }
 
         for (int i = 0; i < Model.AssessmentDecisions.Count(); i++)
         {
