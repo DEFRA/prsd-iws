@@ -467,6 +467,8 @@
     <Content Include="Areas\Reports\Views\ImportNotifications\Index.cshtml" />
     <Content Include="Areas\AdminExportAssessment\Views\NumberOfShipments\Index.cshtml" />
     <Content Include="Areas\ImportNotification\Views\NumberOfShipments\Index.cshtml" />
+    <Content Include="Areas\AdminExportAssessment\Views\FinancialGuaranteeAssessment\Index.cshtml" />
+    <Content Include="Content\iws\_financial-guarantee.scss" />
     <None Include="Content\iws\_panels.scss" />
     <Content Include="Content\nta-extended.css" />
     <Content Include="Content\select2\select2-spinner.gif" />
@@ -1073,6 +1075,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DecisionControllerResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Areas\AdminExportAssessment\Controllers\FinancialGuaranteeAssessmentController.cs" />
     <Compile Include="Areas\AdminExportAssessment\Controllers\KeyDatesOverrideController.cs" />
     <Compile Include="Areas\AdminExportAssessment\Controllers\MarkAsInterimController.cs" />
     <Compile Include="Areas\AdminExportAssessment\Controllers\OverviewController.cs" />

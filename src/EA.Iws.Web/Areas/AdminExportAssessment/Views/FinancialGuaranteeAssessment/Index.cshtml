@@ -1,0 +1,23 @@
+﻿@{
+    ViewBag.Title = "Financial guarantee assessment";
+}
+
+<h1 class="heading-large">Financial guarantee assessment</h1>
+
+<div class="fg-header">
+    <h2 class="heading-medium">Financial guarantee decision</h2>
+    <p class="change-answer">
+        <a href="#">Change</a>
+    </p>
+</div>
+
+<div class="form-group">
+    
+    <button class="button">Make decision</button>
+</div>
+
+<h2 class="heading-medium">Financial guarantee history</h2>
+
+@section menu {
+    @Html.Action("ExportNavigation", "Menu", new { area = "Admin", section = ExportNavigationSection.Assessment })
+}
