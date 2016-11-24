@@ -180,6 +180,12 @@
   <data name="WithdrawnDateLabel" xml:space="preserve">
     <value>Date decision made</value>
   </data>
+  <data name="WithdrawnDateNotBeforeReceived" xml:space="preserve">
+    <value>The decision made date cannot be before the date the notification was received</value>
+  </data>
+  <data name="WithdrawnDateNotFuture" xml:space="preserve">
+    <value>The decision made date cannot be in the future</value>
+  </data>
   <data name="WithdrawnDateRequired" xml:space="preserve">
     <value>Please provide the date withdrawn</value>
   </data>
