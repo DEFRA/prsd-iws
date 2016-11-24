@@ -10,7 +10,15 @@
                 <div class="sub-title">@Resource.ShipmentNumberTitle</div>
                 @if (Model.Details.IntendedShipment.TotalShipments.HasValue)
                 {
-                    <div class="sub-text">@Model.Details.IntendedShipment.TotalShipments</div>
+                    <div class="sub-text">
+                        @Model.Details.IntendedShipment.TotalShipments
+
+                        @if (Model.ShowChangeShipmentNumberLink)
+                        {
+                            <div class="change-answer" >@Html.ActionLink("Change", "Index", "NumberOfShipments")</div>
+                        }
+
+                    </div>
                 }
                 else
                 {

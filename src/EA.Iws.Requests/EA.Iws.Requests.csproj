@@ -154,6 +154,7 @@
     <Compile Include="ImportNotification\GetDraftData.cs" />
     <Compile Include="ImportNotification\GetInternalUserCompetentAuthority.cs" />
     <Compile Include="ImportNotification\GetNotificationDetails.cs" />
+    <Compile Include="ImportNotification\GetOriginalNumberOfShipments.cs" />
     <Compile Include="ImportNotification\GetSummary.cs" />
     <Compile Include="ImportNotification\SetDraftData.cs" />
     <Compile Include="ImportNotification\TransportRoute\GetTransitStateDataForTransitState.cs" />
@@ -177,6 +178,7 @@
     <Compile Include="Movement\GetNotificationNumberByMovementId.cs" />
     <Compile Include="NotificationAssessment\GetChargeDue.cs" />
     <Compile Include="NotificationAssessment\GetInterimStatus.cs" />
+    <Compile Include="NotificationAssessment\GetOriginalNumberOfShipments.cs" />
     <Compile Include="NotificationAssessment\MarkAsInterim.cs" />
     <Compile Include="NotificationMovements\Capture\GetLatestMovementNumber.cs" />
     <Compile Include="NotificationMovements\Create\HasExceededConsentedQuantity.cs" />

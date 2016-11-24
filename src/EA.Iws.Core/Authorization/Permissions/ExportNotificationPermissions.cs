@@ -23,5 +23,7 @@
         public const string CanGetNotificationsForApplicantHome = "Can Get Notifications For Applicant Home";
 
         public const string CanMakeExportNotificationAssessmentDecision = "Can Make Export Notification Assessment Decision";
+
+        public const string CanChangeNumberOfShipmentsOnExportNotification = "Can Change Number Of Shipments On Export Notification";
     }
 }

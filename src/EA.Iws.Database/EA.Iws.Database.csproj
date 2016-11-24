@@ -110,6 +110,7 @@
     <Content Include="scripts\Update\0002-CI\Sprint3\20161109-115200-add-file-closed-status.sql" />
     <Content Include="scripts\Update\0002-CI\Sprint3\20161110-113500-file-closed-date.sql" />
     <Content Include="scripts\Update\0002-CI\Sprint4\20161121-172000-delete-fg-valid-from-to-dates.sql" />
+    <Content Include="scripts\Update\0002-CI\Sprint4\20161121-153500-add-number-of-shipments-history-tables.sql" />
     <Content Include="scripts\Update\placeholder.txt" />
     <Content Include="scripts\Update\0001-Release1\Sprint10\20150625-103000-add-us-competent-authority.sql" />
     <Content Include="scripts\Update\0001-Release1\Sprint10\20150626-163000-link-waste-code-info-to-notification.sql" />

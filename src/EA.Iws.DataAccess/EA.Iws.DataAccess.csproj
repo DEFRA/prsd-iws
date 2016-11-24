@@ -105,6 +105,7 @@
     <Compile Include="Mappings\Exports\FacilityCollectionMapping.cs" />
     <Compile Include="Mappings\Exports\MeansOfTransportMapping.cs" />
     <Compile Include="Mappings\Exports\ProducerCollectionMapping.cs" />
+    <Compile Include="Mappings\Exports\NumberOfShipmentsHistoryMapping.cs" />
     <Compile Include="Mappings\Exports\UserHistoryMapping.cs" />
     <Compile Include="Mappings\Exports\WasteCompositionAnnexMapping.cs" />
     <Compile Include="Mappings\Exports\TechnologyEmployedAnnexMapping.cs" />
@@ -127,6 +128,7 @@
     <Compile Include="Mappings\Imports\ImportNotificationDatesMapping.cs" />
     <Compile Include="Mappings\Imports\ImportNotificationStatusChangeMapping.cs" />
     <Compile Include="Mappings\Imports\ImportNotificationTransactionMapping.cs" />
+    <Compile Include="Mappings\Imports\NumberOfShipmentsHistoryMapping.cs" />
     <Compile Include="Mappings\Imports\StateOfExportMapping.cs" />
     <Compile Include="Mappings\Imports\StateOfImportMapping.cs" />
     <Compile Include="Mappings\Imports\TransitStateMapping.cs" />
@@ -240,6 +242,7 @@
     <Compile Include="Repositories\Imports\ImportObjectionRepository.cs" />
     <Compile Include="Repositories\Imports\ImportWithdrawnRepository.cs" />
     <Compile Include="Repositories\Imports\KeyDatesOverrideRepository.cs" />
+    <Compile Include="Repositories\Imports\NumberOfShipmentsHistoryRepository.cs" />
     <Compile Include="Repositories\Imports\TransportRouteRepository.cs" />
     <Compile Include="Repositories\Imports\WasteOperationRepository.cs" />
     <Compile Include="Repositories\Imports\ProducerRepository.cs" />
@@ -268,6 +271,7 @@
     <Compile Include="Repositories\Reports\ImportNotificationsRepository.cs" />
     <Compile Include="Repositories\Reports\MissingShipmentsRepository.cs" />
     <Compile Include="Repositories\Reports\FreedomOfInformationRepository.cs" />
+    <Compile Include="Repositories\NumberOfShipmentsHistoryRepository.cs" />
     <Compile Include="Repositories\TechnologyEmployedRepository.cs" />
     <Compile Include="Repositories\Search\AdvancedSearchRepository.cs" />
     <Compile Include="Repositories\UserHistoryRepository.cs" />

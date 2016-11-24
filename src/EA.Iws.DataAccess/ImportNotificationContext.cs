@@ -67,6 +67,8 @@
 
         public virtual DbSet<Consultation> Consultations { get; set; }
 
+        public virtual DbSet<NumberOfShipmentsHistory> NumberOfShipmentsHistories { get; set; }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);

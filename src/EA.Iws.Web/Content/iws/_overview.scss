@@ -48,6 +48,17 @@
     }
 }
 
+.overview-table .change-answer{
+    display: inline-block;
+    width: 85%;
+}
+
+.change-answer{
+    font-weight: 700;
+    text-align: right;
+    padding-right: 0;
+}
+
 .noti-price{
     background: $light-blue;
         color: $white;
