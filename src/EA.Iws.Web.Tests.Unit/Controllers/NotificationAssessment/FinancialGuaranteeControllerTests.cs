@@ -64,19 +64,19 @@
                 new FinancialGuaranteeDecisionViewModelMap());
 
             A.CallTo(() => client.SendAsync(
-                        A<GetFinancialGuaranteeDataByNotificationApplicationId>.That.Matches(r => r.Id == ReceivedId)))
+                        A<GetFinancialGuaranteeDataByNotificationApplicationId>.That.Matches(r => r.NotificationId == ReceivedId)))
                 .Returns(ReceivedFinancialGuaranteeData);
 
             A.CallTo(() => client.SendAsync(
-                        A<GetFinancialGuaranteeDataByNotificationApplicationId>.That.Matches(r => r.Id == CompletedId)))
+                        A<GetFinancialGuaranteeDataByNotificationApplicationId>.That.Matches(r => r.NotificationId == CompletedId)))
                 .Returns(CompletedFinancialGuaranteeData);
 
             A.CallTo(() => client.SendAsync(
-                        A<GetFinancialGuaranteeDataByNotificationApplicationId>.That.Matches(r => r.Id == ApprovedId)))
+                        A<GetFinancialGuaranteeDataByNotificationApplicationId>.That.Matches(r => r.NotificationId == ApprovedId)))
                 .Returns(ApprovedFinancialGuaranteeData);
 
             A.CallTo(() => client.SendAsync(
-                        A<GetFinancialGuaranteeDataByNotificationApplicationId>.That.Matches(r => r.Id == AnyGuid)))
+                        A<GetFinancialGuaranteeDataByNotificationApplicationId>.That.Matches(r => r.NotificationId == AnyGuid)))
                 .Returns(new FinancialGuaranteeData
                 {
                     Status = FinancialGuaranteeStatus.AwaitingApplication
@@ -95,7 +95,7 @@
         [Fact]
         public async Task GetDates_ReturnsNewViewModel()
         {
-            var result = await controller.Dates(AnyGuid) as ViewResult;
+            var result = await controller.Dates(AnyGuid, AnyGuid) as ViewResult;
 
             Assert.IsType<FinancialGuaranteeDatesViewModel>(result.Model);
         }
@@ -103,10 +103,10 @@
         [Fact]
         public async Task GetDates_CallsClient()
         {
-            var result = await controller.Dates(AnyGuid) as ViewResult;
+            var result = await controller.Dates(AnyGuid, AnyGuid) as ViewResult;
 
             A.CallTo(() => client.SendAsync(
-                        A<GetFinancialGuaranteeDataByNotificationApplicationId>.That.Matches(r => r.Id == AnyGuid)))
+                        A<GetFinancialGuaranteeDataByNotificationApplicationId>.That.Matches(r => r.NotificationId == AnyGuid)))
                 .MustHaveHappened(Repeated.Exactly.Once);
         }
 
@@ -132,7 +132,7 @@
         [Fact]
         public async Task GetDecision_RetrievesFinancialGuaranteeData()
         {
-            var result = await controller.Decision(ReceivedId);
+            var result = await controller.Decision(ReceivedId, AnyGuid);
 
             A.CallTo(() => client.SendAsync(A<GetFinancialGuaranteeDataByNotificationApplicationId>.Ignored))
                 .MustHaveHappened(Repeated.Exactly.Once);
@@ -141,7 +141,7 @@
         [Fact]
         public async Task GetDecision_ReturnsCorrectModel()
         {
-            var result = await controller.Decision(CompletedId) as ViewResult;
+            var result = await controller.Decision(CompletedId, AnyGuid) as ViewResult;
 
             Assert.IsType<FinancialGuaranteeDecisionViewModel>(result.Model);
         }
@@ -149,7 +149,7 @@
         [Fact]
         public async Task GetDecision_GuaranteeInReceivedStatus_ReturnsCorrectModel()
         {
-            var result = await controller.Decision(ReceivedId) as ViewResult;
+            var result = await controller.Decision(ReceivedId, AnyGuid) as ViewResult;
 
             var model = result.Model as FinancialGuaranteeDecisionViewModel;
 
@@ -160,7 +160,7 @@
         [Fact]
         public async Task GetDecision_GuaranteeInCompletedStatus_RetunsCorrectModel()
         {
-            var result = await controller.Decision(CompletedId) as ViewResult;
+            var result = await controller.Decision(CompletedId, AnyGuid) as ViewResult;
 
             var model = result.Model as FinancialGuaranteeDecisionViewModel;
 

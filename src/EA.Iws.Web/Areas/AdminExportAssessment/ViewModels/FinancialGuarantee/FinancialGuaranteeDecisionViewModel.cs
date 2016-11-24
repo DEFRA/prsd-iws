@@ -14,6 +14,8 @@
     {
         public Guid NotificationId { get; set; }
 
+        public Guid FinancialGuaranteeId { get; set; }
+
         private static readonly Func<string, string> RequiredValidationMessage =
             s => string.Format("The {0} field is required", s);
 

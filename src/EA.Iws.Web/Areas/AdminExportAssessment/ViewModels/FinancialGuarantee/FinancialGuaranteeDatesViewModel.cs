@@ -23,6 +23,8 @@
 
         public bool IsRequiredEntryComplete { get; set; }
 
+        public Guid FinancialGuaranteeId { get; set; }
+
         public FinancialGuaranteeDatesViewModel()
         {
             Received = new OptionalDateInputViewModel();

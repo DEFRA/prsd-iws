@@ -29,9 +29,9 @@
         }
 
         [HttpGet]
-        public async Task<ActionResult> Dates(Guid id)
+        public async Task<ActionResult> Dates(Guid id, Guid financialGuaranteeId)
         {
-            var result = await mediator.SendAsync(new GetFinancialGuaranteeDataByNotificationApplicationId(id));
+            var result = await mediator.SendAsync(new GetFinancialGuaranteeDataByNotificationApplicationId(id, financialGuaranteeId));
             return View(dateMap.Map(result));
         }
 
@@ -44,7 +44,7 @@
                 return View(model);
             }
 
-            await mediator.SendAsync(new SetFinancialGuaranteeDates(id, model.Received.AsDateTime(),
+            await mediator.SendAsync(new SetFinancialGuaranteeDates(id, model.FinancialGuaranteeId, model.Received.AsDateTime(),
                     model.Completed.AsDateTime()));
 
             return (model.IsRequiredEntryComplete) ?
@@ -53,9 +53,9 @@
         }
 
         [HttpGet]
-        public async Task<ActionResult> Decision(Guid id)
+        public async Task<ActionResult> Decision(Guid id, Guid financialGuaranteeId)
         {
-            var result = await mediator.SendAsync(new GetFinancialGuaranteeDataByNotificationApplicationId(id));
+            var result = await mediator.SendAsync(new GetFinancialGuaranteeDataByNotificationApplicationId(id, financialGuaranteeId));
             return View(decisionMap.Map(result));
         }
 

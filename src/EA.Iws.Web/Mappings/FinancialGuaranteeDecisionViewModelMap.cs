@@ -14,16 +14,19 @@
             {
                 case FinancialGuaranteeDecision.Approved:
                     return new ApproveFinancialGuarantee(id,
+                        source.FinancialGuaranteeId,
                         source.DecisionMadeDate.AsDateTime().Value,
                         source.ReferenceNumber,
                         source.ActiveLoadsPermitted.Value,
                         source.IsBlanketBond.GetValueOrDefault());
                 case FinancialGuaranteeDecision.Refused:
-                    return new RefuseFinancialGuarantee(id, 
+                    return new RefuseFinancialGuarantee(id,
+                        source.FinancialGuaranteeId,
                         source.DecisionMadeDate.AsDateTime().Value, 
                         source.ReasonForRefusal);
                 case FinancialGuaranteeDecision.Released:
-                    return new ReleaseFinancialGuarantee(id, 
+                    return new ReleaseFinancialGuarantee(id,
+                        source.FinancialGuaranteeId,
                         source.DecisionMadeDate.AsDateTime().Value);
             }
 
