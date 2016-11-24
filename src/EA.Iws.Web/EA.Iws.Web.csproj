@@ -468,6 +468,7 @@
     <Content Include="Areas\AdminExportAssessment\Views\NumberOfShipments\Index.cshtml" />
     <Content Include="Areas\ImportNotification\Views\NumberOfShipments\Index.cshtml" />
     <Content Include="Areas\AdminExportAssessment\Views\NumberOfShipments\Confirm.cshtml" />
+    <Content Include="Areas\ImportNotification\Views\NumberOfShipments\Confirm.cshtml" />
     <None Include="Content\iws\_panels.scss" />
     <Content Include="Content\nta-extended.css" />
     <Content Include="Content\select2\select2-spinner.gif" />
@@ -1656,6 +1657,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ImporterViewModelResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Areas\ImportNotification\ViewModels\NumberOfShipments\IndexViewModel.cs" />
+    <Compile Include="Areas\ImportNotification\ViewModels\NumberOfShipments\IndexViewModelResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IndexViewModelResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Areas\ImportNotification\ViewModels\Preconsented\PreconsentedViewModel.cs" />
     <Compile Include="Areas\ImportNotification\ViewModels\Preconsented\PreconsentedViewModelResources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -1760,6 +1767,16 @@
       <DependentUpon>IndexResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Areas\ImportNotification\Views\Importer\IndexResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IndexResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\ImportNotification\Views\NumberOfShipments\ConfirmResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ConfirmResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\ImportNotification\Views\NumberOfShipments\IndexResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>IndexResources.resx</DependentUpon>
@@ -3368,6 +3385,10 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>ImporterViewModelResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Areas\ImportNotification\ViewModels\NumberOfShipments\IndexViewModelResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>IndexViewModelResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Areas\ImportNotification\ViewModels\Preconsented\PreconsentedViewModelResources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>PreconsentedViewModelResources.Designer.cs</LastGenOutput>
@@ -3441,6 +3462,14 @@
       <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\ImportNotification\Views\Importer\IndexResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\ImportNotification\Views\NumberOfShipments\ConfirmResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ConfirmResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\ImportNotification\Views\NumberOfShipments\IndexResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
