@@ -6,12 +6,6 @@
     public class FinancialGuaranteeUpdateDateTests : FinancialGuaranteeTests
     {
         [Fact]
-        public void UpdateReceivedDate_NullReceivedDate_Throws()
-        {
-            Assert.Throws<InvalidOperationException>(() => FinancialGuarantee.UpdateReceivedDate(AnyDate));
-        }
-
-        [Fact]
         public void UpdateReceivedDate_GreaterThanCompletedDate_Throws()
         {
             Assert.Throws<InvalidOperationException>(() => CompletedFinancialGuarantee.UpdateReceivedDate(AnyDate.AddDays(2)));

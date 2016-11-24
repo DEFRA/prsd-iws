@@ -33,7 +33,9 @@
 
             return
                 financialGuaranteeCollection.FinancialGuarantees.Any(
-                    fg => fg.Status == FinancialGuaranteeStatus.ApplicationComplete);
+                    fg => fg.Status == FinancialGuaranteeStatus.ApplicationComplete
+                        || fg.Status == FinancialGuaranteeStatus.ApplicationReceived
+                        || fg.Status == FinancialGuaranteeStatus.AwaitingApplication);
         }
     }
 }
