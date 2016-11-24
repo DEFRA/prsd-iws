@@ -5,7 +5,7 @@
     using Infrastructure.Authorization;
 
     [AuthorizeActivity(ImportNotificationPermissions.CanChangeNumberOfShipmentsOnImportNotification)]
-    public class ShipmentNumberController : Controller
+    public class NumberOfShipmentsController : Controller
     {
         [HttpGet]
         public ActionResult Index()
