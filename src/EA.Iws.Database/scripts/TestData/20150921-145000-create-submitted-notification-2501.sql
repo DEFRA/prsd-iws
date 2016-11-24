@@ -791,18 +791,14 @@ VALUES
 	@NotificationAssessmentId
 )
 
-INSERT INTO [Notification].[FinancialGuarantee]
+INSERT INTO [Notification].[FinancialGuaranteeCollection]
 			(
 				[Id],
-				[Status],
-				[CreatedDate],
-				[NotificationApplicationId]
+				[NotificationId]
 			)
 VALUES
 			(
-			(SELECT Cast(Cast(Newid() AS BINARY(10))
-                           + Cast(Getdate() AS BINARY(6)) AS UNIQUEIDENTIFIER)),
-			1,
-			GETDATE(),
-            @NotificationId
+				(SELECT Cast(Cast(Newid() AS BINARY(10))
+							   + Cast(Getdate() AS BINARY(6)) AS UNIQUEIDENTIFIER)),
+				@NotificationId
 			)

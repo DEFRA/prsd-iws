@@ -839,6 +839,17 @@ VALUES
 	@NotificationId
 )
 
+INSERT INTO [Notification].[FinancialGuaranteeCollection]
+			(
+				[Id],
+				[NotificationId]
+			)
+VALUES
+			(
+				(SELECT Cast(Cast(Newid() AS BINARY(10))
+							   + Cast(Getdate() AS BINARY(6)) AS UNIQUEIDENTIFIER)),
+				@NotificationId
+			)
 
 INSERT INTO [Notification].[FinancialGuarantee]
 (
@@ -847,9 +858,9 @@ INSERT INTO [Notification].[FinancialGuarantee]
 	[ReceivedDate],
 	[CompletedDate],
 	[CreatedDate],
-	[NotificationApplicationId],
 	[DecisionDate],
-	[ActiveLoadsPermitted]
+	[ActiveLoadsPermitted],
+	[FinancialGuaranteeCollectionId]
 )
 VALUES
 (
@@ -859,7 +870,7 @@ VALUES
 	'2016-10-13',
 	'2016-10-13',
 	GETDATE(),
-	@NotificationId,
 	'2016-10-20',
-	520
+	520,
+	(SELECT Id FROM [Notification].[FinancialGuaranteeCollection] WHERE [NotificationId] = @NotificationId)
 )
