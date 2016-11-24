@@ -189,4 +189,7 @@
   <data name="WithdrawnDateNotFuture" xml:space="preserve">
     <value>The decision made date cannot be in the future</value>
   </data>
+  <data name="WithdrawnDateNotBeforeReceived" xml:space="preserve">
+    <value>The decision made date cannot be before the date the notification was received</value>
+  </data>
 </root>
