@@ -260,6 +260,15 @@ namespace EA.Iws.Web.Areas.AdminExportAssessment.ViewModels.Decision {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The decision made date cannot be before the date the notification was received.
+        /// </summary>
+        public static string WithdrawnDateNotBeforeReceived {
+            get {
+                return ResourceManager.GetString("WithdrawnDateNotBeforeReceived", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The decision made date cannot be in the future.
         /// </summary>
         public static string WithdrawnDateNotFuture {

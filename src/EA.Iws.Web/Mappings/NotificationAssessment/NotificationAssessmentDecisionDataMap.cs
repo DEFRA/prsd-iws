@@ -17,7 +17,8 @@
                 Status = source.Status,
                 PreviousDecisions = source.StatusHistory.Select(d => new DecisionRecordViewModel()).ToList(),
                 DecisionTypes = source.AvailableDecisions.ToList(),
-                ConsentedDate = new OptionalDateInputViewModel(source.ConsentedDate, true)
+                ConsentedDate = new OptionalDateInputViewModel(source.ConsentedDate, true),
+                NotificationReceivedDate = new OptionalDateInputViewModel(source.NotificationReceivedDate, true)
             };
         }
     }

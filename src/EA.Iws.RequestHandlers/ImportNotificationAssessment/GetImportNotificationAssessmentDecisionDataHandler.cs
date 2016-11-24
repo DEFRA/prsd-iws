@@ -28,7 +28,8 @@
                 Status = assessment.Status,
                 AvailableDecisions = assessment.GetAvailableDecisions().ToArray(),
                 AcknowledgedOnDate = assessment.Dates.AcknowledgedDate.GetValueOrDefault(),
-                IsPreconsented = isPreconsented
+                IsPreconsented = isPreconsented,
+                NotificationReceivedDate = assessment.Dates.NotificationReceivedDate.GetValueOrDefault()
             };
         }
     }

@@ -13,5 +13,7 @@
         public DateTime AcknowledgedOnDate { get; set; }
 
         public bool IsPreconsented { get; set; }
+
+        public DateTime NotificationReceivedDate { get; set; }
     }
 }
