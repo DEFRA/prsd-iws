@@ -4,6 +4,7 @@
     using Core.IntendedShipments;
     using Core.Notification;
     using Core.Notification.Overview;
+    using Core.NotificationAssessment;
     using Core.Shared;
 
     public class AmountsAndDatesViewModel
@@ -12,7 +13,7 @@
         public NotificationType NotificationType { get; set; }
         public bool IsIntendedShipmentsCompleted { get; set; }
         public IntendedShipmentData IntendedShipmentData { get; set; }
-        public bool ShowChangeShipmentNumberLink { get; set; }
+        public bool CanShowChangeShipmentNumberLink { get; set; }
 
         public AmountsAndDatesViewModel()
         {
@@ -24,6 +25,14 @@
             NotificationType = amountAndDatesInfo.NotificationType;
             IsIntendedShipmentsCompleted = progress.HasShipmentInfo;
             IntendedShipmentData = amountAndDatesInfo.IntendedShipmentData ?? new IntendedShipmentData();
+        }
+
+        public bool ShowChangeShipmentNumberLink
+        {
+            get
+            {
+                return CanShowChangeShipmentNumberLink && IntendedShipmentData.Status == NotificationStatus.Consented;
+            }
         }
     }
 }
