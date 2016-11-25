@@ -57,7 +57,14 @@
                     await PostObjection(id, model);
                     break;
                 case DecisionType.Withdraw:
-                    await Postwithdrawn(id, model);
+                    if (await WithdrawDateIsValid(id, model))
+                    {
+                        await PostWithdrawn(id, model);
+                    }
+                    else
+                    {
+                        return View(model);
+                    }
                     break;
                 default:
                     break;
@@ -89,11 +96,31 @@
                 model.ObjectionDate.AsDateTime().GetValueOrDefault()));
         }
 
-        private async Task Postwithdrawn(Guid id, DecisionViewModel model)
+        private async Task PostWithdrawn(Guid id, DecisionViewModel model)
         {
             await mediator.SendAsync(new WithdrawImportNotification(id,
                 model.ReasonForWithdrawal, 
                 model.WithdrawnDate.AsDateTime().GetValueOrDefault()));
+        }
+
+        private async Task<bool> WithdrawDateIsValid(Guid id, DecisionViewModel model)
+        {
+            bool isValid = true;
+            var data = await mediator.SendAsync(new GetImportNotificationAssessmentDecisionData(id));
+
+            if (model.WithdrawnDate.AsDateTime() > SystemTime.UtcNow)
+            {
+                ModelState.AddModelError("WithdrawnDate", DecisionControllerResources.WithdrawNotInFuture);
+                isValid = false;
+            }
+
+            if (model.WithdrawnDate.AsDateTime() < data.NotificationReceivedDate)
+            {
+                ModelState.AddModelError("WithdrawnDate", DecisionControllerResources.WithdrawNotBeforeReceived);
+                isValid = false;
+            }
+
+            return isValid;
         }
 
         private async Task<bool> ConsentDatesAreValid(Guid id, DecisionViewModel model)

@@ -41,8 +41,6 @@
 
         public OptionalDateInputViewModel ConsentedDate { get; set; }
 
-        public OptionalDateInputViewModel NotificationReceivedDate { get; set; }
-
         [Display(Name = "ReasonConsentWithdrawalLabel", ResourceType = typeof(NotificationAssessmentDecisionViewModelResources))]
         public string ReasonsForConsentWithdrawal { get; set; }
 
@@ -73,7 +71,6 @@
             ObjectionDate = new OptionalDateInputViewModel(true);
             WithdrawnDate = new OptionalDateInputViewModel(true);
             ConsentWithdrawnDate = new OptionalDateInputViewModel(true);
-            NotificationReceivedDate = new OptionalDateInputViewModel(true);
         }
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
@@ -183,16 +180,6 @@
             if (!WithdrawnDate.IsCompleted)
             {
                 yield return new ValidationResult(NotificationAssessmentDecisionViewModelResources.WithdrawnDateRequired, new[] { "WithdrawnDate" });
-            }
-
-            if (WithdrawnDate.AsDateTime() > SystemTime.UtcNow.Date)
-            {
-                yield return new ValidationResult(NotificationAssessmentDecisionViewModelResources.WithdrawnDateNotFuture, new[] { "WithdrawnDate" });
-            }
-
-            if (WithdrawnDate.AsDateTime() < NotificationReceivedDate.AsDateTime())
-            {
-                yield return new ValidationResult(NotificationAssessmentDecisionViewModelResources.WithdrawnDateNotBeforeReceived, new[] { "WithdrawnDate" });
             }
         }
     }
