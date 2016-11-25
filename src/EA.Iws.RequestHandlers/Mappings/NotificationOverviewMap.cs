@@ -22,7 +22,7 @@
 
         public NotificationOverview Map(NotificationApplicationOverview source)
         {
-            return new NotificationOverview
+            var returnData = new NotificationOverview
             {
                 NotificationId = source.Notification.Id,
                 NotificationType = source.Notification.NotificationType,
@@ -42,6 +42,10 @@
                 CanEditNotification = source.NotificationAssessment.CanEditNotification,
                 NotificationCharge = source.Charge
             };
+
+            returnData.ShipmentOverview.IntendedShipmentData.Status = source.NotificationAssessment.Status;
+
+            return returnData;
         }
 
         private OrganisationsInvolved MapOrganisationsInvolved(NotificationApplicationOverview source)
