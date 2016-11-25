@@ -6,7 +6,6 @@
     using System.Web.Mvc;
     using Core.Admin;
     using Core.ImportNotificationAssessment;
-    using Prsd.Core;
     using Prsd.Core.Helpers;
     using Web.ViewModels.Shared;
 
@@ -60,8 +59,6 @@
         [Display(Name = "ReasonWithdrawnLabel", ResourceType = typeof(DecisionViewModelResources))]
         public string ReasonForWithdrawal { get; set; }
 
-        public OptionalDateInputViewModel NotificationReceivedDate { get; set; }
-
         public DecisionViewModel()
         {
             ConsentValidFromDate = new OptionalDateInputViewModel(true);
@@ -71,14 +68,12 @@
             ObjectionDate = new OptionalDateInputViewModel(true);
             ConsentWithdrawnDate = new OptionalDateInputViewModel(true);
             WithdrawnDate = new OptionalDateInputViewModel(true);
-            NotificationReceivedDate = new OptionalDateInputViewModel(true);
         }
 
         public DecisionViewModel(ImportNotificationAssessmentDecisionData data) : this()
         {
             DecisionTypes = data.AvailableDecisions;
             Status = data.Status;
-            NotificationReceivedDate = new OptionalDateInputViewModel(data.NotificationReceivedDate, true);
         }
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
@@ -164,16 +159,6 @@
             if (!WithdrawnDate.IsCompleted)
             {
                 yield return new ValidationResult(DecisionViewModelResources.WithdrawnDateRequired, new[] { "WithdrawnDate" });
-            }
-
-            if (WithdrawnDate.AsDateTime() > SystemTime.UtcNow.Date)
-            {
-                yield return new ValidationResult(DecisionViewModelResources.WithdrawnDateNotFuture, new[] { "WithdrawnDate" });
-            }
-
-            if (WithdrawnDate.AsDateTime() < NotificationReceivedDate.AsDateTime())
-            {
-                yield return new ValidationResult(DecisionViewModelResources.WithdrawnDateNotBeforeReceived, new[] { "WithdrawnDate" });
             }
         } 
     }
