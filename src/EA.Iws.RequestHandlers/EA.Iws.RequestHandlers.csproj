@@ -86,6 +86,7 @@
     <Compile Include="Admin\EntryOrExitPoints\AddEntryOrExitPointHandler.cs" />
     <Compile Include="Admin\EntryOrExitPoints\CheckEntryOrExitPointUniqueHandler.cs" />
     <Compile Include="Admin\EntryOrExitPoints\GetEntryOrExitPointsGroupedByCountryHandler.cs" />
+    <Compile Include="Admin\FinancialGuarantee\GetCurrentFinancialGuaranteeDetailsHandler.cs" />
     <Compile Include="Admin\FinancialGuarantee\GetFinancialGuaranteeStatusHandler.cs" />
     <Compile Include="Admin\GetExportNotificationOwnerDisplaysHandler.cs" />
     <Compile Include="Admin\GetUserCompetentAuthorityHandler.cs" />

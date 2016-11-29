@@ -96,6 +96,7 @@
     <Compile Include="Exporters\ExporterData.cs" />
     <Compile Include="Extensions\EnumerableExtensions.cs" />
     <Compile Include="Facilities\FacilityData.cs" />
+    <Compile Include="FinancialGuarantee\CurrentFinancialGuaranteeDetails.cs" />
     <Compile Include="FinancialGuarantee\FinancialGuaranteeStatus.cs" />
     <Compile Include="Importer\ImporterData.cs" />
     <Compile Include="Admin\Search\BasicSearchResults.cs" />

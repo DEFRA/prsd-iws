@@ -10,8 +10,14 @@
     }
 }
 
-.change-answer {
-    font-weight: 700;
-    text-align: right;
-    padding-right: 0;
+.fg-decision {
+    th {
+        font-weight: normal;
+        width: 60%;
+    }
+
+    td {
+        font-weight: bold;
+        width: 40%;
+    }
 }

@@ -54,6 +54,7 @@
     <Compile Include="Admin\EntryOrExitPoints\AddEntryOrExitPoint.cs" />
     <Compile Include="Admin\EntryOrExitPoints\CheckEntryOrExitPointUnique.cs" />
     <Compile Include="Admin\EntryOrExitPoints\GetEntryOrExitPointsGroupedByCountry.cs" />
+    <Compile Include="Admin\FinancialGuarantee\GetCurrentFinancialGuaranteeDetails.cs" />
     <Compile Include="Admin\GetExportNotificationOwnerDisplays.cs" />
     <Compile Include="Admin\GetUserCompetentAuthority.cs" />
     <Compile Include="Admin\KeyDates\GetImportKeyDatesOverrideData.cs" />

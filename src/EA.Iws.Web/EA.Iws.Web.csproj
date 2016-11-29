@@ -2960,6 +2960,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\AddressBook\Models\" />
+    <Folder Include="Areas\AdminExportAssessment\ViewModels\FinancialGuaranteeAssessment\" />
     <Folder Include="Areas\Admin\Views\Shared\EditorTemplates\" />
     <Folder Include="Areas\Admin\Views\SmokeTest\" />
     <Folder Include="Areas\FinancialGuarantee\ViewModels\" />

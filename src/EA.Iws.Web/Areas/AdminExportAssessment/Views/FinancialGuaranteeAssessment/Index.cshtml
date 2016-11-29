@@ -1,22 +1,48 @@
-﻿@{
+﻿@model EA.Iws.Core.FinancialGuarantee.CurrentFinancialGuaranteeDetails
+@{
     ViewBag.Title = "Financial guarantee assessment";
 }
 
 <h1 class="heading-large">Financial guarantee assessment</h1>
 
-<div class="fg-header">
-    <h2 class="heading-medium">Financial guarantee decision</h2>
-    <p class="change-answer">
-        <a href="#">Change</a>
-    </p>
+<div class="form-group">
+
+    <div class="fg-header">
+        <h2 class="heading-medium">Financial guarantee decision</h2><p class="change-answer">
+            <a href="#">Change</a>
+        </p>
+    </div>
+
+    <table class="fg-decision">
+        <tbody>
+            <tr>
+                <th>Status</th>
+                <td>@Model.Decision</td>
+            </tr>
+            <tr>
+                <th>Date decision made</th>
+                <td>@Html.Gds().DisplayDateFor(m => m.DecisionDate)</td>
+            </tr>
+            <tr>
+                <th>Is this a blanket bond?</th>
+                <td>@Model.IsBlanketBond</td>
+            </tr>
+            <tr>
+                <th>Reference number</th>
+                <td>@Model.ReferenceNumber</td>
+            </tr>
+            <tr>
+                <th>Active loads permitted</th>
+                <td>@Model.ActiveLoadsPermitted</td>
+            </tr>
+        </tbody>
+    </table>
+
 </div>
 
 <div class="form-group">
-    
-    <button class="button">Make decision</button>
+    <button class="button">Record a new financial guarantee</button>
 </div>
-
-<h2 class="heading-medium">Financial guarantee history</h2>
 
 @section menu {
     @Html.Action("ExportNavigation", "Menu", new { area = "Admin", section = ExportNavigationSection.Assessment })
