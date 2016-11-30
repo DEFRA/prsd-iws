@@ -61,11 +61,65 @@ namespace EA.Iws.Web.Areas.AdminExportAssessment.Views.NumberOfShipments {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Increase / decrease total number of intended shipments.
+        ///   Looks up a localized string similar to This increase will require the Notifier to pay an additional charge of {0}.
+        /// </summary>
+        public static string AdditionalCharge {
+            get {
+                return ResourceManager.GetString("AdditionalCharge", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You are about to decrease the number of shipments for this notification to .
+        /// </summary>
+        public static string DecreaseTo {
+            get {
+                return ResourceManager.GetString("DecreaseTo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Once this change has been committed shipments will decrease to {0} and the Notifier will only be able to make up to {0} shipments on this notification.
+        /// </summary>
+        public static string GuidanceDecrease {
+            get {
+                return ResourceManager.GetString("GuidanceDecrease", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Once this change has been committed shipments for this notification will increase to {0} and allow the Notifier to make up to {0} shipments.
+        /// </summary>
+        public static string GuidanceNoIncrease {
+            get {
+                return ResourceManager.GetString("GuidanceNoIncrease", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to total number of intended shipments.
         /// </summary>
         public static string Heading {
             get {
                 return ResourceManager.GetString("Heading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You are about to increase the number of shipments for this notification to .
+        /// </summary>
+        public static string IncreaseTo {
+            get {
+                return ResourceManager.GetString("IncreaseTo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This charge will need to be paid prior to the Notifier using these additional shipments.
+        /// </summary>
+        public static string NeedToPay {
+            get {
+                return ResourceManager.GetString("NeedToPay", resourceCulture);
             }
         }
         
