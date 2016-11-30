@@ -30,5 +30,12 @@
             Quantity = quantity;
             NumberOfShipments = numberOfShipments;
         }
+
+        public void UpdateNumberOfShipments(int numberOfShipments)
+        {
+            Guard.ArgumentNotZeroOrNegative(() => numberOfShipments, numberOfShipments);
+
+            NumberOfShipments = numberOfShipments;
+        }
     }
 }

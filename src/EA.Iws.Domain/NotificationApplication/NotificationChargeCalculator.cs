@@ -38,6 +38,22 @@
             return await GetPrice(shipmentInfo, notification);
         }
 
+        public async Task<decimal> GetValueForNumberOfShipments(Guid notificationId, int numberOfShipments)
+        {
+            var shipmentInfo = await shipmentInfoRepository.GetByNotificationId(notificationId);
+
+            if (shipmentInfo == null)
+            {
+                return 0;
+            }
+
+            shipmentInfo.UpdateNumberOfShipments(numberOfShipments);
+
+            var notification = await notificationApplicationRepository.GetById(notificationId);
+
+            return await GetPrice(shipmentInfo, notification);
+        }
+
         private async Task<decimal> GetPrice(ShipmentInfo shipmentInfo, NotificationApplication notification)
         {
             var facilityCollection = await facilityRepository.GetByNotificationId(notification.Id);

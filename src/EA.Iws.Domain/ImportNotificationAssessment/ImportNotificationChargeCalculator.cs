@@ -40,6 +40,21 @@
             return await GetPrice(notification, shipment, await GetInterimStatus(importNotificationId));
         }
 
+        public async Task<decimal> GetValueForNumberOfShipments(Guid importNotificationId, int numberOfShipments)
+        {
+            var notification = await notificationRepository.Get(importNotificationId);
+            var shipment = await shipmentRepository.GetByNotificationIdOrDefault(importNotificationId);
+
+            if (shipment == null)
+            {
+                return 0;
+            }
+
+            shipment.UpdateNumberOfShipments(numberOfShipments);
+
+            return await GetPrice(notification, shipment, await GetInterimStatus(importNotificationId));
+        }
+
         private async Task<bool> GetInterimStatus(Guid notificationId)
         {
             var interimStatus = await interimStatusRepository.GetByNotificationId(notificationId);
