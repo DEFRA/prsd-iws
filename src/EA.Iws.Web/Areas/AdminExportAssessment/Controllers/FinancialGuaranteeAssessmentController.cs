@@ -10,7 +10,7 @@
     [Authorize(Roles = "internal")]
     public class FinancialGuaranteeAssessmentController : Controller
     {
-        private IMediator mediator;
+        private readonly IMediator mediator;
 
         public FinancialGuaranteeAssessmentController(IMediator mediator)
         {

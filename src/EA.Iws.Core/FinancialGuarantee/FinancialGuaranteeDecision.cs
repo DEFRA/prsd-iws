@@ -1,4 +1,4 @@
-﻿namespace EA.Iws.Core.Admin
+﻿namespace EA.Iws.Core.FinancialGuarantee
 {
     using System.ComponentModel.DataAnnotations;
 

@@ -3,6 +3,7 @@
     using System;
     using Areas.AdminExportAssessment.ViewModels.FinancialGuarantee;
     using Core.Admin;
+    using Core.FinancialGuarantee;
     using Prsd.Core.Mapper;
     using Requests.Admin.FinancialGuarantee;
 

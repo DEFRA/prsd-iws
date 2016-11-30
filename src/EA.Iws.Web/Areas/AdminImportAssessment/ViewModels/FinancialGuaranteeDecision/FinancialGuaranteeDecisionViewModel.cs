@@ -5,6 +5,7 @@
     using System.Linq;
     using System.Web.Mvc;
     using Core.Admin;
+    using Core.FinancialGuarantee;
     using Core.ImportNotificationAssessment.FinancialGuarantee;
     using Infrastructure.Validation;
     using Prsd.Core.Helpers;

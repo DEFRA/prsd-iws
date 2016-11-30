@@ -40,19 +40,19 @@
             };
         }
 
-        private Core.Admin.FinancialGuaranteeDecision? GetDecision(FinancialGuarantee guarantee)
+        private FinancialGuaranteeDecision? GetDecision(FinancialGuarantee guarantee)
         {
             if (guarantee.Status == FinancialGuaranteeStatus.Approved)
             {
-                return Core.Admin.FinancialGuaranteeDecision.Approved;
+                return FinancialGuaranteeDecision.Approved;
             }
             else if (guarantee.Status == FinancialGuaranteeStatus.Refused)
             {
-                return Core.Admin.FinancialGuaranteeDecision.Refused;
+                return FinancialGuaranteeDecision.Refused;
             }
             else if (guarantee.Status == FinancialGuaranteeStatus.Released)
             {
-                return Core.Admin.FinancialGuaranteeDecision.Released;
+                return FinancialGuaranteeDecision.Released;
             }
 
             return null;

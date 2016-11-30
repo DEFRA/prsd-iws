@@ -53,7 +53,7 @@
     <Compile Include="Admin\ChangeUserData.cs" />
     <Compile Include="Admin\ExportNotificationOwnerDisplay.cs" />
     <Compile Include="Admin\FinancialGuaranteeData.cs" />
-    <Compile Include="Admin\FinancialGuaranteeDecision.cs" />
+    <Compile Include="FinancialGuarantee\FinancialGuaranteeDecision.cs" />
     <Compile Include="Admin\InternalUserData.cs" />
     <Compile Include="Admin\InternalUserStatus.cs" />
     <Compile Include="Admin\DecisionType.cs" />
