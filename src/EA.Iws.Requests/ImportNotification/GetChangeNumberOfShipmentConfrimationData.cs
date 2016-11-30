@@ -1,9 +1,12 @@
 ﻿namespace EA.Iws.Requests.ImportNotification
 {
     using System;
+    using Core.Authorization;
     using Core.ImportNotification;
     using Prsd.Core.Mediator;
+    using Core.Authorization.Permissions;
 
+    [RequestAuthorization(ImportNotificationPermissions.CanChangeNumberOfShipmentsOnImportNotification)]
     public class GetChangeNumberOfShipmentConfrimationData : IRequest<ConfirmNumberOfShipmentsChangeData>
     {
         public GetChangeNumberOfShipmentConfrimationData(Guid notificationId, int numberOfShipments)
