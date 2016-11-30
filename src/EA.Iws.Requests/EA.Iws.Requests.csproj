@@ -151,6 +151,7 @@
     <Compile Include="ImportNotificationMovements\GetImportMovementsSummary.cs" />
     <Compile Include="ImportNotificationMovements\GetImportMovementsSummaryTable.cs" />
     <Compile Include="ImportNotification\CompleteDraftImportNotification.cs" />
+    <Compile Include="ImportNotification\GetChangeNumberOfShipmentConfrimationData.cs" />
     <Compile Include="ImportNotification\GetDraftData.cs" />
     <Compile Include="ImportNotification\GetInternalUserCompetentAuthority.cs" />
     <Compile Include="ImportNotification\GetNotificationDetails.cs" />
