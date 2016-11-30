@@ -176,6 +176,7 @@
     <Compile Include="Movement\Complete\RecordOperationCompleteInternal.cs" />
     <Compile Include="Movement\GetNewMovementIdsByNotificationId.cs" />
     <Compile Include="Movement\GetNotificationNumberByMovementId.cs" />
+    <Compile Include="NotificationAssessment\GetChangeNumberOfShipmentConfrimationData.cs" />
     <Compile Include="NotificationAssessment\GetChargeDue.cs" />
     <Compile Include="NotificationAssessment\GetInterimStatus.cs" />
     <Compile Include="NotificationAssessment\GetOriginalNumberOfShipments.cs" />
