@@ -39,31 +39,25 @@
                 return 0;
             }
 
+            var numberOfShipments = shipment.NumberOfShipments;
+
             var largestNumberOfShipments = await numberOfShipmentsHistotyRepository.GetLargestNumberOfShipments(importNotificationId);
 
             if (largestNumberOfShipments > shipment.NumberOfShipments)
             {
-                shipment.UpdateNumberOfShipments(largestNumberOfShipments);
+                numberOfShipments = largestNumberOfShipments;
             }
 
             var notification = await notificationRepository.Get(importNotificationId);
 
-            return await GetPrice(notification, shipment, await GetInterimStatus(importNotificationId));
+            return await GetPrice(notification, numberOfShipments, await GetInterimStatus(importNotificationId));
         }
 
         public async Task<decimal> GetValueForNumberOfShipments(Guid importNotificationId, int numberOfShipments)
         {
             var notification = await notificationRepository.Get(importNotificationId);
-            var shipment = await shipmentRepository.GetByNotificationIdOrDefault(importNotificationId);
 
-            if (shipment == null)
-            {
-                return 0;
-            }
-
-            shipment.UpdateNumberOfShipments(numberOfShipments);
-
-            return await GetPrice(notification, shipment, await GetInterimStatus(importNotificationId));
+            return await GetPrice(notification, numberOfShipments, await GetInterimStatus(importNotificationId));
         }
 
         private async Task<bool> GetInterimStatus(Guid notificationId)
@@ -73,7 +67,7 @@
             return interimStatus.IsInterim;
         }
 
-        private async Task<decimal> GetPrice(ImportNotification notification, Shipment shipment, bool isInterim)
+        private async Task<decimal> GetPrice(ImportNotification notification, int numberOfShipments, bool isInterim)
         {
              var pricingStructures = await pricingStructureRepository.Get();
 
@@ -82,9 +76,9 @@
                                               && p.Activity.TradeDirection == TradeDirection.Import
                                               && p.Activity.NotificationType == notification.NotificationType
                                               && p.Activity.IsInterim == isInterim
-                                              && p.ShipmentQuantityRange.RangeFrom <= shipment.NumberOfShipments
+                                              && p.ShipmentQuantityRange.RangeFrom <= numberOfShipments
                                               && (p.ShipmentQuantityRange.RangeTo == null
-                                                  || p.ShipmentQuantityRange.RangeTo >= shipment.NumberOfShipments));
+                                                  || p.ShipmentQuantityRange.RangeTo >= numberOfShipments));
 
             return correspondingPricingStructure.Price;
         } 

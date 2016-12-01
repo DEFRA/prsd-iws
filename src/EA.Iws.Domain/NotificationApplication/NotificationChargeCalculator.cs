@@ -36,42 +36,35 @@
                 return 0;
             }
 
+            var numberOfShipments = shipmentInfo.NumberOfShipments;
+
             var largestNumberOfShipments = await numberOfShipmentsHistotyRepository.GetLargestNumberOfShipments(notificationId);
 
             if (largestNumberOfShipments > shipmentInfo.NumberOfShipments)
             {
-                shipmentInfo.UpdateNumberOfShipments(largestNumberOfShipments);
+                numberOfShipments = largestNumberOfShipments;
             }
 
             var notification = await notificationApplicationRepository.GetById(notificationId);
 
-            return await GetPrice(shipmentInfo, notification);
+            return await GetPrice(numberOfShipments, notification);
         }
 
         public async Task<decimal> GetValueForNumberOfShipments(Guid notificationId, int numberOfShipments)
         {
-            var shipmentInfo = await shipmentInfoRepository.GetByNotificationId(notificationId);
-
-            if (shipmentInfo == null)
-            {
-                return 0;
-            }
-
-            shipmentInfo.UpdateNumberOfShipments(numberOfShipments);
-
             var notification = await notificationApplicationRepository.GetById(notificationId);
 
-            return await GetPrice(shipmentInfo, notification);
+            return await GetPrice(numberOfShipments, notification);
         }
 
-        private async Task<decimal> GetPrice(ShipmentInfo shipmentInfo, NotificationApplication notification)
+        private async Task<decimal> GetPrice(int numberOfShipments, NotificationApplication notification)
         {
             var facilityCollection = await facilityRepository.GetByNotificationId(notification.Id);
             bool isInterim = facilityCollection.IsInterim.HasValue ? facilityCollection.IsInterim.Value : facilityCollection.HasMultipleFacilities;
 
             var result = await pricingStructureRepository.GetExport(notification.CompetentAuthority, 
-                notification.NotificationType, 
-                shipmentInfo.NumberOfShipments, 
+                notification.NotificationType,
+                numberOfShipments, 
                 isInterim);
 
             return result.Price;
