@@ -53,5 +53,10 @@
 
             return currentNumber;
         }
+
+        public void Add(NumberOfShipmentsHistory history)
+        {
+            context.NumberOfShipmentsHistories.Add(history);
+        }
     }
 }
