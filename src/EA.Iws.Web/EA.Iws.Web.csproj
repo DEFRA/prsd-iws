@@ -576,11 +576,9 @@
     <Content Include="Views\Shared\EditorTemplates\OptionalDateInputViewModel.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\WasteRecovery\DisposalMethod.cshtml" />
     <Content Include="Areas\AdminExportAssessment\Views\FinancialGuaranteeDecision\Index.cshtml" />
-    <Content Include="Areas\AdminExportAssessment\Views\FinancialGuarantee\_Incomplete.cshtml" />
-    <Content Include="Areas\AdminExportAssessment\Views\FinancialGuarantee\_Complete.cshtml" />
-    <Content Include="Areas\AdminExportAssessment\Views\FinancialGuarantee\_Approve.cshtml" />
-    <Content Include="Areas\AdminExportAssessment\Views\FinancialGuarantee\_Refuse.cshtml" />
-    <Content Include="Areas\AdminExportAssessment\Views\FinancialGuarantee\_Release.cshtml" />
+    <Content Include="Areas\AdminExportAssessment\Views\FinancialGuaranteeDecision\Approve.cshtml" />
+    <Content Include="Areas\AdminExportAssessment\Views\FinancialGuaranteeDecision\Refuse.cshtml" />
+    <Content Include="Areas\AdminExportAssessment\Views\FinancialGuaranteeDecision\Release.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\WhatToDoNext\Index.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\Shared\DisplayTemplates\AddressData.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\WhatToDoNext\_GeneralRemittanceEmail.cshtml" />
@@ -1087,9 +1085,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DateInputViewModelResources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Areas\AdminExportAssessment\ViewModels\FinancialGuaranteeAssessment\ApproveFinancialGuaranteeViewModel.cs" />
+    <Compile Include="Areas\AdminExportAssessment\ViewModels\FinancialGuaranteeDecision\ApproveFinancialGuaranteeViewModel.cs" />
     <Compile Include="Areas\AdminExportAssessment\ViewModels\FinancialGuaranteeAssessment\CompleteFinancialGuaranteeViewModel.cs" />
     <Compile Include="Areas\AdminExportAssessment\ViewModels\FinancialGuaranteeAssessment\NewFinancialGuaranteeViewModel.cs" />
+    <Compile Include="Areas\AdminExportAssessment\ViewModels\FinancialGuaranteeDecision\RefuseFinancialGuaranteeViewModel.cs" />
+    <Compile Include="Areas\AdminExportAssessment\ViewModels\FinancialGuaranteeDecision\ReleaseFinancialGuaranteeViewModel.cs" />
     <Compile Include="Areas\AdminExportAssessment\ViewModels\KeyDatesOverride\IndexViewModel.cs" />
     <Compile Include="Areas\AdminExportAssessment\ViewModels\KeyDatesOverride\IndexViewModelResources.Designer.cs">
       <AutoGen>True</AutoGen>

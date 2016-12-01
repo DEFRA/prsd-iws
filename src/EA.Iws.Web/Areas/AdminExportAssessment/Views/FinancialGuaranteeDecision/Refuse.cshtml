@@ -1,0 +1,34 @@
+﻿@model EA.Iws.Web.Areas.AdminExportAssessment.ViewModels.FinancialGuaranteeDecision.RefuseFinancialGuaranteeViewModel
+
+@{
+    ViewBag.Title = "Refuse financial guarantee";
+}
+
+<h2 class="heading-large">Refuse financial guarantee</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.Gds().ValidationSummary()
+    @Html.HiddenFor(m => m.FinancialGuaranteeId)
+    @Html.HiddenFor(m => m.CompletedDate)
+
+    <div class="form-group @Html.Gds().FormGroupClass(m => m.DecisionMadeDate.Day) @Html.Gds().FormGroupClass(m => m.DecisionMadeDate.Month) @Html.Gds().FormGroupClass(m => m.DecisionMadeDate.Year)">
+        <label class="form-label" for="DecisionMadeDate_Day">Date decision made</label>
+        @Html.EditorFor(m => m.DecisionMadeDate)
+    </div>
+
+    <div class="form-group @Html.Gds().FormGroupClass(m => m.ReasonForRefusal)">
+        @Html.Gds().LabelFor(m => m.ReasonForRefusal, false)
+        @Html.Gds().ValidationMessageFor(m => m.ReasonForRefusal)
+        @Html.Gds().TextBoxFor(m => m.ReasonForRefusal)
+    </div>
+
+    <div class="form-group">
+        <button class="button" type="submit" name="submit" value="decision">@Constants.ContinueButtonText</button>
+    </div>
+}
+
+@section menu {
+    @Html.Action("ExportNavigation", "Menu", new { area = "Admin", section = ExportNavigationSection.Assessment })
+}

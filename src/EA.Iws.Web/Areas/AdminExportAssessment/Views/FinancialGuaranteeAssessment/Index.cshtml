@@ -41,7 +41,7 @@
 @if (Model.Status == FinancialGuaranteeStatus.ApplicationComplete)
 {
     <div class="form-group">
-        @Html.ActionLink("Make a decision", "Index", "FinancialGuaranteeDecision" new { financialGuaranteeId = Model.FinancialGuaranteeId }, new { @class = "button" })
+        @Html.ActionLink("Make a decision", "Index", "FinancialGuaranteeDecision", new { financialGuaranteeId = Model.FinancialGuaranteeId }, new { @class = "button" })
     </div>
 }
 
