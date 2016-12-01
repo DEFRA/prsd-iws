@@ -170,6 +170,15 @@ namespace EA.Iws.Web.Areas.AdminImportAssessment.ViewModels.Decision {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The decision made date cannot be in the future.
+        /// </summary>
+        public static string ObjectDateNotFuture {
+            get {
+                return ResourceManager.GetString("ObjectDateNotFuture", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Date decision made.
         /// </summary>
         public static string ObjectedDateLabel {

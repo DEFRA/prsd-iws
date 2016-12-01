@@ -132,6 +132,9 @@
   <data name="NoAvailableDecisionsParagraphTwo" xml:space="preserve">
     <value>No further decisions are available.</value>
   </data>
+  <data name="ObjectReasonGuidance" xml:space="preserve">
+    <value>The reason must include a reference to the exact WSR article under which the objection was made</value>
+  </data>
   <data name="SingleDateWarning" xml:space="preserve">
     <value>Please note: you can't change this date once you've committed it to the system. Please make sure that you enter the right date.</value>
   </data>
