@@ -6,7 +6,7 @@
     using Prsd.Core.Mediator;
     using Requests.Admin.FinancialGuarantee;
 
-    internal class ReleaseFinancialGuaranteeHandler : IRequestHandler<ReleaseFinancialGuarantee, bool>
+    internal class ReleaseFinancialGuaranteeHandler : IRequestHandler<ReleaseFinancialGuarantee, Unit>
     {
         private readonly IFinancialGuaranteeRepository repository;
         private readonly IwsContext context;
@@ -17,7 +17,7 @@
             this.context = context;
         }
 
-        public async Task<bool> HandleAsync(ReleaseFinancialGuarantee message)
+        public async Task<Unit> HandleAsync(ReleaseFinancialGuarantee message)
         {
             var financialGuaranteeCollection = await repository.GetByNotificationId(message.NotificationId);
             var financialGuarantee = financialGuaranteeCollection.GetFinancialGuarantee(message.FinancialGuaranteeId);
@@ -26,7 +26,7 @@
 
             await context.SaveChangesAsync();
 
-            return true;
+            return Unit.Value;
         }
     }
 }

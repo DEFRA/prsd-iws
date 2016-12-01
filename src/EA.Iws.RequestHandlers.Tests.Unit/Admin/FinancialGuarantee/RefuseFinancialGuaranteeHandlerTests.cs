@@ -66,13 +66,5 @@
             await
                 Assert.ThrowsAsync<InvalidOperationException>(() => handler.HandleAsync(refuseFinancialGuarantee));
         }
-
-        [Fact]
-        public async Task ReturnsTrueByDefault()
-        {
-            var result = await handler.HandleAsync(refuseFinancialGuarantee);
-
-            Assert.True(result);
-        }
     }
 }

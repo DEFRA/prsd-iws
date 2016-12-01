@@ -44,8 +44,7 @@
         [Fact]
         public async Task Saves()
         {
-            await
-                handler.HandleAsync(releaseFinancialGuarantee);
+            await handler.HandleAsync(releaseFinancialGuarantee);
 
             Assert.Equal(1, ((TestIwsContext)context).SaveChangesCount);
         }
@@ -53,8 +52,7 @@
         [Fact]
         public async Task CallsRelease()
         {
-            await
-                handler.HandleAsync(releaseFinancialGuarantee);
+            await handler.HandleAsync(releaseFinancialGuarantee);
 
             Assert.True(financialGuarantee.ReleaseCalled);
         }
@@ -69,17 +67,9 @@
         }
 
         [Fact]
-        public async Task ReturnsTrueByDefault()
-        {
-            var result = await handler.HandleAsync(releaseFinancialGuarantee);
-
-            Assert.True(result);
-        }
-
-        [Fact]
         public async Task StatusReleased()
         {
-            var result = await handler.HandleAsync(releaseFinancialGuarantee);
+            await handler.HandleAsync(releaseFinancialGuarantee);
             
             Assert.Equal(FinancialGuaranteeStatus.Released, financialGuarantee.Status);
         }

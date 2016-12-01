@@ -88,7 +88,6 @@
     <Compile Include="Admin\SendTestEmail.cs" />
     <Compile Include="Admin\SmokeTest.cs" />
     <Compile Include="Admin\UserAdministration\CreateInternalUser.cs" />
-    <Compile Include="Admin\FinancialGuarantee\FinancialGuaranteeDecisionRequest.cs" />
     <Compile Include="Admin\FinancialGuarantee\ReleaseFinancialGuarantee.cs" />
     <Compile Include="Admin\FinancialGuarantee\RefuseFinancialGuarantee.cs" />
     <Compile Include="Admin\FinancialGuarantee\ApproveFinancialGuarantee.cs" />
