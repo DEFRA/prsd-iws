@@ -575,7 +575,7 @@
     <Content Include="Scripts\select2\select2.js" />
     <Content Include="Views\Shared\EditorTemplates\OptionalDateInputViewModel.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\WasteRecovery\DisposalMethod.cshtml" />
-    <Content Include="Areas\AdminExportAssessment\Views\FinancialGuaranteeAssessment\Decision.cshtml" />
+    <Content Include="Areas\AdminExportAssessment\Views\FinancialGuaranteeDecision\Index.cshtml" />
     <Content Include="Areas\AdminExportAssessment\Views\FinancialGuarantee\_Incomplete.cshtml" />
     <Content Include="Areas\AdminExportAssessment\Views\FinancialGuarantee\_Complete.cshtml" />
     <Content Include="Areas\AdminExportAssessment\Views\FinancialGuarantee\_Approve.cshtml" />
@@ -1077,6 +1077,7 @@
       <DependentUpon>DecisionControllerResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Areas\AdminExportAssessment\Controllers\FinancialGuaranteeAssessmentController.cs" />
+    <Compile Include="Areas\AdminExportAssessment\Controllers\FinancialGuaranteeDecisionController.cs" />
     <Compile Include="Areas\AdminExportAssessment\Controllers\KeyDatesOverrideController.cs" />
     <Compile Include="Areas\AdminExportAssessment\Controllers\MarkAsInterimController.cs" />
     <Compile Include="Areas\AdminExportAssessment\Controllers\OverviewController.cs" />
@@ -2633,7 +2634,7 @@
     <Compile Include="Areas\Admin\ViewModels\Registration\AdminRegistrationViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\Home\BasicSearchViewModel.cs" />
     <Compile Include="Areas\AdminExportAssessment\ViewModels\DateInputViewModel.cs" />
-    <Compile Include="Areas\AdminExportAssessment\ViewModels\FinancialGuaranteeAssessment\FinancialGuaranteeDecisionViewModel.cs" />
+    <Compile Include="Areas\AdminExportAssessment\ViewModels\FinancialGuaranteeDecision\FinancialGuaranteeDecisionViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\UserAdministration\NewUsersListViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\UserAdministration\UserApprovalViewModel.cs" />
     <Compile Include="Areas\FinancialGuarantee\Controllers\HomeController.cs" />

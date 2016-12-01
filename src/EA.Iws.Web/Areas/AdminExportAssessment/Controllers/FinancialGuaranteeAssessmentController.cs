@@ -80,38 +80,5 @@
 
             return RedirectToAction("Index");
         }
-
-        [HttpGet]
-        public async Task<ActionResult> Decision(Guid id, Guid financialGuaranteeId)
-        {
-            var financialGuarantee = await mediator.SendAsync(
-                new GetFinancialGuaranteeDataByNotificationApplicationId(id, financialGuaranteeId));
-
-            if (financialGuarantee.Status != FinancialGuaranteeStatus.ApplicationComplete)
-            {
-                return RedirectToAction("Index");
-            }
-
-            var model = new FinancialGuaranteeDecisionViewModel
-            {
-                FinancialGuaranteeId = financialGuaranteeId
-            };
-
-            return View(model);
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Decision(Guid id, FinancialGuaranteeDecisionViewModel model)
-        {
-            if (!ModelState.IsValid)
-            {
-                return View(model);
-            }
-
-            await Task.Yield();
-
-            return View(model);
-        } 
     }
 }

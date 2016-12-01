@@ -1,4 +1,4 @@
-﻿namespace EA.Iws.Web.Areas.AdminExportAssessment.ViewModels.FinancialGuaranteeAssessment
+﻿namespace EA.Iws.Web.Areas.AdminExportAssessment.ViewModels.FinancialGuaranteeDecision
 {
     using System;
     using System.Collections.Generic;
