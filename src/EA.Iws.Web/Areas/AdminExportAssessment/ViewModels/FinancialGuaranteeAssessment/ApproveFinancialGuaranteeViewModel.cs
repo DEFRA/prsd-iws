@@ -1,16 +1,13 @@
-﻿namespace EA.Iws.Web.Areas.AdminExportAssessment.ViewModels.FinancialGuarantee
+﻿namespace EA.Iws.Web.Areas.AdminExportAssessment.ViewModels.FinancialGuaranteeAssessment
 {
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-    using System.Linq;
-    using System.Web.Mvc;
     using Core.Admin;
     using Core.FinancialGuarantee;
-    using Prsd.Core.Helpers;
     using Web.ViewModels.Shared;
 
-    public class FinancialGuaranteeDecisionViewModel : IValidatableObject
+    public class ApproveFinancialGuaranteeViewModel : IValidatableObject
     {
         public Guid NotificationId { get; set; }
 
@@ -24,20 +21,6 @@
         public FinancialGuaranteeStatus Status { get; set; }
 
         public FinancialGuaranteeDecision? Decision { get; set; }
-
-        public SelectList PossibleDecisions
-        {
-            get
-            {
-                var values = Enum.GetValues(typeof(FinancialGuaranteeDecision))
-                    .Cast<FinancialGuaranteeDecision>()
-                    .Select(e => new KeyValuePair<string, FinancialGuaranteeDecision>(
-                        EnumHelper.GetShortName(e),
-                        e));
-
-                return new SelectList(values, "Value", "Key");
-            }
-        }
 
         public DateTime? ReceivedDate { get; set; }
 
@@ -55,13 +38,28 @@
         [Display(Name = "Reason for refusal")]
         public string ReasonForRefusal { get; set; }
 
-        public FinancialGuaranteeDecisionViewModel()
+        public ApproveFinancialGuaranteeViewModel()
         {
             DecisionMadeDate = new OptionalDateInputViewModel();
         }
 
+        public ApproveFinancialGuaranteeViewModel(FinancialGuaranteeData financialGuarantee)
+        {
+            DecisionRequiredDate = financialGuarantee.DecisionRequiredDate;
+            Status = financialGuarantee.Status;
+            IsApplicationCompleted = financialGuarantee.CompletedDate.HasValue;
+            DecisionMadeDate = new OptionalDateInputViewModel(financialGuarantee.DecisionDate);
+            ActiveLoadsPermitted = financialGuarantee.ActiveLoadsPermitted;
+            ReasonForRefusal = financialGuarantee.RefusalReason;
+            Decision = financialGuarantee.Decision;
+            CompletedDate = financialGuarantee.CompletedDate;
+            ReceivedDate = financialGuarantee.ReceivedDate;
+            ReferenceNumber = financialGuarantee.ReferenceNumber;
+            IsBlanketBond = financialGuarantee.IsBlanketBond;
+        }
+
         public bool? IsBlanketBond { get; set; }
-        
+
         [MaxLength(70)]
         public string ReferenceNumber { get; set; }
 
@@ -160,7 +158,7 @@
         private ValidationResult ValidateDecisionDate()
         {
             return new ValidationResult(string.Format("The decision date cannot be before the completed date of {0}",
-                CompletedDate.Value.ToShortDateString()), 
+                CompletedDate.Value.ToShortDateString()),
                 new[] { "DecisionMadeDate.Day" });
         }
     }

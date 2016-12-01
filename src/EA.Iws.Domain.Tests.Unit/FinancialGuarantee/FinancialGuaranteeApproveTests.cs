@@ -59,5 +59,13 @@
 
             Assert.Equal(AnyInt, CompletedFinancialGuarantee.ActiveLoadsPermitted);
         }
+
+        [Fact]
+        public void DecisionIsApproved()
+        {
+            setGuaranteeApproved(CompletedFinancialGuarantee);
+
+            Assert.Equal(FinancialGuaranteeDecision.Approved, CompletedFinancialGuarantee.Decision);
+        }
     }
 }

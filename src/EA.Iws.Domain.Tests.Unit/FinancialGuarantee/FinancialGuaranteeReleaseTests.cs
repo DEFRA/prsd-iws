@@ -64,5 +64,13 @@
 
             Assert.Equal(FinancialGuaranteeStatus.Released, RefusedFinancialGuarantee.Status);
         }
+
+        [Fact]
+        public void DecisionIsReleased()
+        {
+            RefusedFinancialGuarantee.Release(AfterCompletionDate);
+
+            Assert.Equal(FinancialGuaranteeDecision.Released, RefusedFinancialGuarantee.Decision);
+        }
     }
 }

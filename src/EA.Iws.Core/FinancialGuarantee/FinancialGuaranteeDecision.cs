@@ -4,13 +4,15 @@
 
     public enum FinancialGuaranteeDecision
     {
+        None = 1,
+
         [Display(ShortName = "Refuse")]
-        Refused = 0,
+        Refused = 2,
 
         [Display(ShortName = "Approve")]
-        Approved = 1,
+        Approved = 3,
 
         [Display(ShortName = "Release")]
-        Released = 2
+        Released = 4
     }
 }

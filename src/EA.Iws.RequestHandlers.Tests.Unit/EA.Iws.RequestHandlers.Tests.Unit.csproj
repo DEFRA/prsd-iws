@@ -99,7 +99,6 @@
     <Compile Include="Admin\FinancialGuarantee\FinancialGuaranteeDecisionTests.cs" />
     <Compile Include="Admin\FinancialGuarantee\FinancialGuaranteeStatusChangeEventHandlerTests.cs" />
     <Compile Include="Admin\NotificationAssessment\NotificationStatusChangeEventHandlerTests.cs" />
-    <Compile Include="Admin\FinancialGuarantee\SetFinancialGuaranteeDatesHandlerTests.cs" />
     <Compile Include="Admin\UserAdministration\SetUserApprovalsHandlerTests.cs" />
     <Compile Include="Admin\UserAdministration\GetNewInternalUsersHandlerTests.cs" />
     <Compile Include="Admin\UserAdministration\InternalUserCollection.cs" />

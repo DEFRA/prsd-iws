@@ -1,0 +1,25 @@
+﻿@model EA.Iws.Web.Areas.AdminExportAssessment.ViewModels.FinancialGuaranteeAssessment.CompleteFinancialGuaranteeViewModel
+@{
+    ViewBag.Title = "Complete financial guarantee";
+}
+
+<h1 class="heading-large">Complete financial guarantee</h1>
+
+@using (Html.BeginForm())
+{
+    @Html.Gds().ValidationSummary()
+    @Html.AntiForgeryToken()
+
+    @Html.HiddenFor(m => m.FinancialGuaranteeId)
+
+    <div class="form-group @Html.Gds().FormGroupClass(m => m.CompleteDate.Day) @Html.Gds().FormGroupClass(m => m.CompleteDate.Month) @Html.Gds().FormGroupClass(m => m.CompleteDate.Year)">
+        <label class="form-label" for="CompleteDate_Day">Guarantee completed</label>
+        @Html.EditorFor(m => m.CompleteDate)
+    </div>
+
+    <button class="button" type="submit">@Constants.ContinueButtonText</button>
+}
+
+@section menu {
+    @Html.Action("ExportNavigation", "Menu", new { area = "Admin", section = ExportNavigationSection.Assessment })
+}

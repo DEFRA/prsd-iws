@@ -23,24 +23,23 @@
 
             if (!financialGuaranteeCollection.FinancialGuarantees.Any())
             {
-                return new CurrentFinancialGuaranteeDetails();
+                return new CurrentFinancialGuaranteeDetails
+                {
+                    NotificationId = financialGuaranteeCollection.NotificationId
+                };
             }
 
-            var financialGuarantee =
-                financialGuaranteeCollection.FinancialGuarantees.OrderByDescending(fg => fg.DecisionDate)
-                    .Select(fg => new CurrentFinancialGuaranteeDetails
-                    {
-                        ActiveLoadsPermitted = fg.ActiveLoadsPermitted.Value,
-                        Decision = fg.Status.ToString(),
-                        DecisionDate = fg.DecisionDate.Value,
-                        FinancialGuaranteeId = fg.Id,
-                        NotificationId = financialGuaranteeCollection.NotificationId,
-                        ReferenceNumber = fg.ReferenceNumber,
-                        IsBlanketBond = fg.IsBlanketBond.Value
-                    })
-                    .First();
+            var financialGuarantee = financialGuaranteeCollection.GetLatestFinancialGuarantee();
 
-            return financialGuarantee;
+            return new CurrentFinancialGuaranteeDetails
+            {
+                FinancialGuaranteeId = financialGuarantee.Id,
+                NotificationId = financialGuaranteeCollection.NotificationId,
+                ReceivedDate = financialGuarantee.ReceivedDate,
+                CompletedDate = financialGuarantee.CompletedDate,
+                Decision = financialGuarantee.Decision,
+                Status = financialGuarantee.Status
+            };
         }
     }
 }

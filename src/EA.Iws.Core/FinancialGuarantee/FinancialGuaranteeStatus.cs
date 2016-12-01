@@ -12,6 +12,7 @@
         ApplicationComplete = 3,
         Approved = 4,
         Refused = 5,
-        Released = 6
+        Released = 6,
+        Superseded = 7
     }
 }

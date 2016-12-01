@@ -13,7 +13,6 @@
     {
         private const int WorkingDaysUntilDecisionRequired = 20;
 
-        private StateMachine<FinancialGuaranteeStatus, Trigger>.TriggerWithParameters<DateTime> receivedTrigger;
         private StateMachine<FinancialGuaranteeStatus, Trigger>.TriggerWithParameters<DateTime> completedTrigger;
         private StateMachine<FinancialGuaranteeStatus, Trigger>.TriggerWithParameters<ApproveDates> approvedTrigger;
         private StateMachine<FinancialGuaranteeStatus, Trigger>.TriggerWithParameters<DateTime, string> refusedTrigger;
@@ -31,10 +30,11 @@
             ReceivedDate = receivedDate;
             StatusChangeCollection = new List<FinancialGuaranteeStatusChange>();
             stateMachine = CreateStateMachine();
-            Status = FinancialGuaranteeStatus.AwaitingApplication;
+            Status = FinancialGuaranteeStatus.ApplicationReceived;
+            Decision = FinancialGuaranteeDecision.None;
         }
 
-        public DateTime? ReceivedDate { get; private set; }
+        public DateTime ReceivedDate { get; private set; }
 
         public DateTime? CompletedDate { get; private set; }
 
@@ -53,6 +53,8 @@
         public DateTimeOffset CreatedDate { get; private set; }
 
         public FinancialGuaranteeStatus Status { get; protected set; }
+
+        public FinancialGuaranteeDecision Decision { get; private set; }
 
         protected virtual ICollection<FinancialGuaranteeStatusChange> StatusChangeCollection { get; set; }
 
@@ -73,13 +75,14 @@
 
         public bool? IsBlanketBond { get; private set; }
 
-        public void Received(DateTime date)
+        public void Complete(DateTime date)
         {
-            stateMachine.Fire(receivedTrigger, date);
-        }
+            if (date < ReceivedDate)
+            {
+                throw new InvalidOperationException(
+                    string.Format("Cannot set FG completed date before received date for financial guarantee {0}.", Id));
+            }
 
-        public void Completed(DateTime date)
-        {
             stateMachine.Fire(completedTrigger, date);
         }
 
@@ -90,19 +93,8 @@
             StatusChangeCollection.Add(statusChange);
         }
 
-        private void OnReceived(DateTime date)
-        {
-            ReceivedDate = date;
-        }
-
         private void OnCompleted(DateTime date)
         {
-            if (date < ReceivedDate.Value)
-            {
-                throw new InvalidOperationException(
-                    string.Format("Cannot set FG completed date before received date for financial guarantee {0}.", Id));
-            }
-
             CompletedDate = date;
         }
 
@@ -110,17 +102,12 @@
         {
             var stateMachine = new StateMachine<FinancialGuaranteeStatus, Trigger>(() => Status, s => Status = s);
 
-            receivedTrigger = stateMachine.SetTriggerParameters<DateTime>(Trigger.Received);
             completedTrigger = stateMachine.SetTriggerParameters<DateTime>(Trigger.Completed);
             approvedTrigger = stateMachine.SetTriggerParameters<ApproveDates>(Trigger.Approved);
             refusedTrigger = stateMachine.SetTriggerParameters<DateTime, string>(Trigger.Refused);
             releasedTrigger = stateMachine.SetTriggerParameters<DateTime>(Trigger.Released);
 
-            stateMachine.Configure(FinancialGuaranteeStatus.AwaitingApplication)
-                .Permit(Trigger.Received, FinancialGuaranteeStatus.ApplicationReceived);
-
             stateMachine.Configure(FinancialGuaranteeStatus.ApplicationReceived)
-                .OnEntryFrom(receivedTrigger, OnReceived)
                 .Permit(Trigger.Completed, FinancialGuaranteeStatus.ApplicationComplete);
 
             stateMachine.Configure(FinancialGuaranteeStatus.ApplicationComplete)
@@ -152,35 +139,10 @@
 
         private enum Trigger
         {
-            Received = 0,
-            Completed = 1,
-            Approved = 2,
+            Completed,
+            Approved,
             Refused,
             Released
-        }
-
-        public void UpdateReceivedDate(DateTime value)
-        {
-            if (ReceivedDate.HasValue && (!CompletedDate.HasValue || value <= CompletedDate))
-            {
-                ReceivedDate = value;
-            }
-            else
-            {
-                throw new InvalidOperationException("Received date must have value and value to set must be less than received date.");
-            }
-        }
-
-        public void UpdateCompletedDate(DateTime value)
-        {
-            if (CompletedDate.HasValue && ReceivedDate.HasValue && value >= ReceivedDate)
-            {
-                CompletedDate = value;
-            }
-            else
-            {
-                throw new InvalidOperationException("Completed date must have value and value to set must be greater than received date.");
-            }
         }
 
         public virtual void Approve(ApproveDates approveDates)
@@ -196,6 +158,7 @@
         private void OnApproved(ApproveDates approveDates)
         {
             DecisionDate = approveDates.DecisionDate;
+            Decision = FinancialGuaranteeDecision.Approved;
             ActiveLoadsPermitted = approveDates.ActiveLoadsPermitted;
             ReferenceNumber = approveDates.ReferenceNumber;
             IsBlanketBond = approveDates.IsBlanketBond;
@@ -221,22 +184,24 @@
         private void OnRefused(DateTime decisionDate, string refusalReason)
         {
             DecisionDate = decisionDate;
+            Decision = FinancialGuaranteeDecision.Refused;
             RefusalReason = refusalReason;
         }
 
         public virtual void Release(DateTime releasedDate)
-        {
-            stateMachine.Fire(releasedTrigger, releasedDate);
-        }
-
-        private void OnReleased(DateTime releasedDate)
         {
             if (releasedDate < CompletedDate)
             {
                 throw new InvalidOperationException("Cannot set the released date to be before the completed date. Id: " + Id);
             }
 
+            stateMachine.Fire(releasedTrigger, releasedDate);
+        }
+
+        private void OnReleased(DateTime releasedDate)
+        {
             ReleasedDate = releasedDate;
+            Decision = FinancialGuaranteeDecision.Released;
         }
     }
 }

@@ -50,5 +50,10 @@
 
             return financialGuarantee;
         }
+
+        public FinancialGuarantee GetLatestFinancialGuarantee()
+        {
+            return FinancialGuarantees.OrderByDescending(fg => fg.CreatedDate).FirstOrDefault();
+        }
     }
 }

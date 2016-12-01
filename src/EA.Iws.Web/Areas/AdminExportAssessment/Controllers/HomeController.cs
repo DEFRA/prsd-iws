@@ -25,7 +25,7 @@
 
             if (financialGuaranteeDecisionRequired)
             {
-                return RedirectToAction("Dates", "FinancialGuarantee");
+                return RedirectToAction("Index", "FinancialGuaranteeAssessment");
             }
             else
             {

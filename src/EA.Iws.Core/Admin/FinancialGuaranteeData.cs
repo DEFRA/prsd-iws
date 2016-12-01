@@ -5,7 +5,7 @@ namespace EA.Iws.Core.Admin
 
     public class FinancialGuaranteeData
     {
-        public DateTime? ReceivedDate { get; set; }
+        public DateTime ReceivedDate { get; set; }
 
         public DateTime? CompletedDate { get; set; }
 
@@ -13,7 +13,7 @@ namespace EA.Iws.Core.Admin
 
         public FinancialGuaranteeStatus Status { get; set; }
 
-        public FinancialGuaranteeDecision? Decision { get; set; }
+        public FinancialGuaranteeDecision Decision { get; set; }
 
         public DateTime? DecisionDate { get; set; }
 

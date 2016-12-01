@@ -3,6 +3,7 @@
     using System;
     using System.Threading.Tasks;
     using System.Web.Mvc;
+    using Core.FinancialGuarantee;
     using Prsd.Core.Mediator;
     using Requests.Admin.FinancialGuarantee;
     using ViewModels.FinancialGuaranteeAssessment;
@@ -40,9 +41,77 @@
                 return View(model);
             }
 
-            await Task.Yield();
+            await mediator.SendAsync(new CreateFinancialGuarantee(id, model.ReceivedDate.AsDateTime().Value));
+
+            return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> Complete(Guid id, Guid financialGuaranteeId)
+        {
+            var financialGuarantee = await mediator.SendAsync(
+                new GetFinancialGuaranteeDataByNotificationApplicationId(id, financialGuaranteeId));
+
+            if (financialGuarantee.Status != FinancialGuaranteeStatus.ApplicationReceived)
+            {
+                return RedirectToAction("Index");
+            }
+
+            var model = new CompleteFinancialGuaranteeViewModel
+            {
+                FinancialGuaranteeId = financialGuaranteeId,
+                ReceivedDate = financialGuarantee.ReceivedDate
+            };
 
             return View(model);
         }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Complete(Guid id, CompleteFinancialGuaranteeViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            await mediator.SendAsync(
+                new CompleteFinancialGuarantee(id, model.FinancialGuaranteeId, model.CompleteDate.AsDateTime().Value));
+
+            return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> Decision(Guid id, Guid financialGuaranteeId)
+        {
+            var financialGuarantee = await mediator.SendAsync(
+                new GetFinancialGuaranteeDataByNotificationApplicationId(id, financialGuaranteeId));
+
+            if (financialGuarantee.Status != FinancialGuaranteeStatus.ApplicationComplete)
+            {
+                return RedirectToAction("Index");
+            }
+
+            var model = new FinancialGuaranteeDecisionViewModel
+            {
+                FinancialGuaranteeId = financialGuaranteeId
+            };
+
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Decision(Guid id, FinancialGuaranteeDecisionViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            await Task.Yield();
+
+            return View(model);
+        } 
     }
 }

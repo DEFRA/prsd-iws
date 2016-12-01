@@ -86,6 +86,8 @@
     <Compile Include="Admin\EntryOrExitPoints\AddEntryOrExitPointHandler.cs" />
     <Compile Include="Admin\EntryOrExitPoints\CheckEntryOrExitPointUniqueHandler.cs" />
     <Compile Include="Admin\EntryOrExitPoints\GetEntryOrExitPointsGroupedByCountryHandler.cs" />
+    <Compile Include="Admin\FinancialGuarantee\CompleteFinancialGuaranteeHandler.cs" />
+    <Compile Include="Admin\FinancialGuarantee\CreateFinancialGuaranteeHandler.cs" />
     <Compile Include="Admin\FinancialGuarantee\GetCurrentFinancialGuaranteeDetailsHandler.cs" />
     <Compile Include="Admin\FinancialGuarantee\GetFinancialGuaranteeStatusHandler.cs" />
     <Compile Include="Admin\GetExportNotificationOwnerDisplaysHandler.cs" />
@@ -126,7 +128,6 @@
     <Compile Include="Admin\FinancialGuarantee\GetFinancialGuaranteeDataByNotificationApplicationIdHandler.cs" />
     <Compile Include="Admin\NotificationAssessment\NotificationStatusChangeEventHandler.cs" />
     <Compile Include="Admin\Registration\GetLocalAreasHandler.cs" />
-    <Compile Include="Admin\FinancialGuarantee\SetFinancialGuaranteeDatesHandler.cs" />
     <Compile Include="Admin\UserAdministration\GetAllUsersHandler.cs" />
     <Compile Include="Admin\UserAdministration\GetNewInternalUsersHandler.cs" />
     <Compile Include="Admin\UserAdministration\GetUserByExportNotificationIdHandler.cs" />

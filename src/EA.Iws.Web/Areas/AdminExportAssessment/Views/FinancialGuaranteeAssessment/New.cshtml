@@ -15,11 +15,6 @@
         @Html.EditorFor(m => m.ReceivedDate)
     </div>
 
-    <div class="form-group @Html.Gds().FormGroupClass(m => m.CompletedDate.Day) @Html.Gds().FormGroupClass(m => m.CompletedDate.Month) @Html.Gds().FormGroupClass(m => m.CompletedDate.Year)">
-        <label class="form-label" for="CompletedDate_Day">Guarantee completed</label>
-        @Html.EditorFor(m => m.CompletedDate)
-    </div>
-
     <button class="button" type="submit">@Constants.ContinueButtonText</button>
 }
 

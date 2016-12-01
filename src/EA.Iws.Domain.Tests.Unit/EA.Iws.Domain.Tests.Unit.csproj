@@ -76,7 +76,6 @@
     <Compile Include="FinancialGuarantee\FinancialGuaranteeRefuseTests.cs" />
     <Compile Include="FinancialGuarantee\FinancialGuaranteeReleaseTests.cs" />
     <Compile Include="FinancialGuarantee\FinancialGuaranteeTests.cs" />
-    <Compile Include="FinancialGuarantee\FinancialGuaranteeUpdateDateTests.cs" />
     <Compile Include="ImportMovement\CancelImportMovementTests.cs" />
     <Compile Include="ImportMovement\ImportMovementFactoryTests.cs" />
     <Compile Include="ImportNotificationAssessment\ImportNotificationAssessmentTests.cs" />
@@ -171,10 +170,6 @@
     <ProjectReference Include="..\EA.Iws.Domain\EA.Iws.Domain.csproj">
       <Project>{a987fff6-5386-419e-af0a-e6c74e3323cf}</Project>
       <Name>EA.Iws.Domain</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\EA.Iws.RequestHandlers\EA.Iws.RequestHandlers.csproj">
-      <Project>{575A5355-B008-422A-B9B6-535CA2B5CC26}</Project>
-      <Name>EA.Iws.RequestHandlers</Name>
     </ProjectReference>
     <ProjectReference Include="..\EA.Iws.TestHelpers\EA.Iws.TestHelpers.csproj">
       <Project>{dec3021a-32cf-4b84-a59c-77503378ed67}</Project>
