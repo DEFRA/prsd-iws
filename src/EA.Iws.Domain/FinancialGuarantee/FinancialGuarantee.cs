@@ -118,7 +118,8 @@
 
             stateMachine.Configure(FinancialGuaranteeStatus.Approved)
                 .OnEntryFrom(approvedTrigger, OnApproved)
-                .Permit(Trigger.Released, FinancialGuaranteeStatus.Released);
+                .Permit(Trigger.Released, FinancialGuaranteeStatus.Released)
+                .Permit(Trigger.Superseded, FinancialGuaranteeStatus.Superseded);
 
             stateMachine.Configure(FinancialGuaranteeStatus.Refused)
                 .OnEntryFrom(refusedTrigger, OnRefused)
@@ -142,10 +143,11 @@
             Completed,
             Approved,
             Refused,
-            Released
+            Released,
+            Superseded
         }
 
-        public virtual void Approve(ApprovalData approvalData)
+        internal void Approve(ApprovalData approvalData)
         {
             if (approvalData.DecisionDate < CompletedDate)
             {
@@ -202,6 +204,11 @@
         {
             ReleasedDate = releasedDate;
             Decision = FinancialGuaranteeDecision.Released;
+        }
+
+        internal void Supersede()
+        {
+            stateMachine.Fire(Trigger.Superseded);
         }
     }
 }

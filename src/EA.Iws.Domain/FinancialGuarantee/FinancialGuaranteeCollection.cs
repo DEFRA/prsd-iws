@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using Core.FinancialGuarantee;
     using Prsd.Core.Domain;
     using Prsd.Core.Extensions;
 
@@ -54,6 +55,11 @@
         public FinancialGuarantee GetLatestFinancialGuarantee()
         {
             return FinancialGuarantees.OrderByDescending(fg => fg.CreatedDate).FirstOrDefault();
+        }
+
+        public FinancialGuarantee GetCurrentApprovedFinancialGuarantee()
+        {
+            return FinancialGuarantees.SingleOrDefault(fg => fg.Status == FinancialGuaranteeStatus.Approved);
         }
     }
 }

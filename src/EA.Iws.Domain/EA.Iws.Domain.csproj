@@ -52,6 +52,7 @@
   <ItemGroup>
     <Compile Include="DateTimeOffsetRange.cs" />
     <Compile Include="EmailAddress.cs" />
+    <Compile Include="FinancialGuarantee\FinancialGuaranteeApproval.cs" />
     <Compile Include="FinancialGuarantee\FinancialGuaranteeCollection.cs" />
     <Compile Include="FinancialGuarantee\IFinancialGuaranteeRepository.cs" />
     <Compile Include="IInterimMovementDocumentGenerator.cs" />

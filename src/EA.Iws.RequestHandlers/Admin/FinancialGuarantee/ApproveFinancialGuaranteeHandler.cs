@@ -8,22 +8,20 @@
 
     internal class ApproveFinancialGuaranteeHandler : IRequestHandler<ApproveFinancialGuarantee, Unit>
     {
-        private readonly IFinancialGuaranteeRepository repository;
+        private readonly FinancialGuaranteeApproval financialGuaranteeApproval;
         private readonly IwsContext context;
 
-        public ApproveFinancialGuaranteeHandler(IFinancialGuaranteeRepository repository, IwsContext context)
+        public ApproveFinancialGuaranteeHandler(FinancialGuaranteeApproval financialGuaranteeApproval, IwsContext context)
         {
-            this.repository = repository;
+            this.financialGuaranteeApproval = financialGuaranteeApproval;
             this.context = context;
         }
 
         public async Task<Unit> HandleAsync(ApproveFinancialGuarantee message)
         {
-            var financialGuaranteeCollection = await repository.GetByNotificationId(message.NotificationId);
-            var financialGuarantee = financialGuaranteeCollection.GetFinancialGuarantee(message.FinancialGuaranteeId);
-
-            financialGuarantee.Approve(new ApprovalData(message.DecisionDate, 
-                message.ReferenceNumber, message.ActiveLoadsPermitted, message.IsBlanketbond));
+            await financialGuaranteeApproval.Approve(message.NotificationId, message.FinancialGuaranteeId,
+                new ApprovalData(message.DecisionDate, 
+                    message.ReferenceNumber, message.ActiveLoadsPermitted, message.IsBlanketbond));
 
             await context.SaveChangesAsync();
 

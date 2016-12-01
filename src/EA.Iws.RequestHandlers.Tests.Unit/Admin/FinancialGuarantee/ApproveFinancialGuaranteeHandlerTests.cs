@@ -30,7 +30,9 @@
 
             A.CallTo(() => repository.GetByNotificationId(ApplicationCompletedId)).Returns(financialGuaranteeCollection);
 
-            handler = new ApproveFinancialGuaranteeHandler(repository, context);
+            var approval = new FinancialGuaranteeApproval(repository);
+
+            handler = new ApproveFinancialGuaranteeHandler(approval, context);
         }
 
         [Fact]

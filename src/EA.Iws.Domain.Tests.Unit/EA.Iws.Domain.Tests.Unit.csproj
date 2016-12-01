@@ -70,6 +70,7 @@
     <Compile Include="BusinessTests.cs" />
     <Compile Include="DaysRemainingCalculatorTests.cs" />
     <Compile Include="EmailAddressTests.cs" />
+    <Compile Include="FinancialGuarantee\FinancialGuaranteeApprovalTests.cs" />
     <Compile Include="FinancialGuarantee\FinancialGuaranteeApproveTests.cs" />
     <Compile Include="FinancialGuarantee\FinancialGuaranteeCompletedTests.cs" />
     <Compile Include="FinancialGuarantee\FinancialGuaranteeReceivedTests.cs" />

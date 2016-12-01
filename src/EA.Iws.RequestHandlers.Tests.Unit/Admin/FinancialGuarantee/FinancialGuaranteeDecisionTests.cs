@@ -49,18 +49,6 @@ namespace EA.Iws.RequestHandlers.Tests.Unit.Admin.FinancialGuarantee
 
             public bool ReleaseCalled { get; set; }
 
-            public override void Approve(ApprovalData approvalData)
-            {
-                ApproveCalled = true;
-
-                if (ApproveThrows)
-                {
-                    throw new InvalidOperationException();
-                }
-
-                Status = FinancialGuaranteeStatus.Approved;
-            }
-
             public override void Refuse(DateTime decisionDate, string refusalReason)
             {
                 RefuseCalled = true;
