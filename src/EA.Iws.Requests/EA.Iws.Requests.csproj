@@ -151,12 +151,14 @@
     <Compile Include="ImportNotificationMovements\GetImportMovementsSummary.cs" />
     <Compile Include="ImportNotificationMovements\GetImportMovementsSummaryTable.cs" />
     <Compile Include="ImportNotification\CompleteDraftImportNotification.cs" />
+    <Compile Include="ImportNotification\GetChangeNumberOfShipmentConfrimationData.cs" />
     <Compile Include="ImportNotification\GetDraftData.cs" />
     <Compile Include="ImportNotification\GetInternalUserCompetentAuthority.cs" />
     <Compile Include="ImportNotification\GetNotificationDetails.cs" />
     <Compile Include="ImportNotification\GetOriginalNumberOfShipments.cs" />
     <Compile Include="ImportNotification\GetSummary.cs" />
     <Compile Include="ImportNotification\SetDraftData.cs" />
+    <Compile Include="ImportNotification\SetNewNumberOfShipments.cs" />
     <Compile Include="ImportNotification\TransportRoute\GetTransitStateDataForTransitState.cs" />
     <Compile Include="ImportNotification\Validate\ValidateImportNotification.cs" />
     <Compile Include="ImportNotification\Validate\ValidationResults.cs" />
@@ -176,10 +178,12 @@
     <Compile Include="Movement\Complete\RecordOperationCompleteInternal.cs" />
     <Compile Include="Movement\GetNewMovementIdsByNotificationId.cs" />
     <Compile Include="Movement\GetNotificationNumberByMovementId.cs" />
+    <Compile Include="NotificationAssessment\GetChangeNumberOfShipmentConfrimationData.cs" />
     <Compile Include="NotificationAssessment\GetChargeDue.cs" />
     <Compile Include="NotificationAssessment\GetInterimStatus.cs" />
     <Compile Include="NotificationAssessment\GetOriginalNumberOfShipments.cs" />
     <Compile Include="NotificationAssessment\MarkAsInterim.cs" />
+    <Compile Include="NotificationAssessment\SetNewNumberOfShipments.cs" />
     <Compile Include="NotificationMovements\Capture\GetLatestMovementNumber.cs" />
     <Compile Include="NotificationMovements\Create\HasExceededConsentedQuantity.cs" />
     <Compile Include="Movement\Receive\DoesQuantityReceivedExceedTolerance.cs" />

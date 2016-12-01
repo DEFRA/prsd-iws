@@ -205,6 +205,7 @@
     <Compile Include="ImportNotification\CompleteDraftImportNotificationHandler.cs" />
     <Compile Include="ImportNotification\CreateImportNotificationHandler.cs" />
     <Compile Include="ImportNotification\Events\CreateImportNotificationAssessment.cs" />
+    <Compile Include="ImportNotification\GetChangeNumberOfShipmentConfrimationDataHandler.cs" />
     <Compile Include="ImportNotification\GetDraftDataHandler.cs" />
     <Compile Include="ImportNotification\GetInternalUserCompetentAuthorityHandler.cs" />
     <Compile Include="ImportNotification\GetNotificationDetailsHandler.cs" />
@@ -222,6 +223,7 @@
     <Compile Include="ImportNotification\Mappings\TransitStateMap.cs" />
     <Compile Include="ImportNotification\Mappings\WasteOperationMap.cs" />
     <Compile Include="ImportNotification\Mappings\WasteTypeMap.cs" />
+    <Compile Include="ImportNotification\SetNewNumberOfShipmentsHandler.cs" />
     <Compile Include="ImportNotification\Summary\GetSummaryHandler.cs" />
     <Compile Include="ImportNotification\SetDraftDataHandler.cs" />
     <Compile Include="ImportNotification\Summary\TransportRouteData.cs" />
@@ -367,10 +369,12 @@
     <Compile Include="Movement\GetMovementIdByNumberHandler.cs" />
     <Compile Include="Movement\GetNewMovementIdsByNotificationIdHandler.cs" />
     <Compile Include="Movement\GetNotificationNumberByMovementIdHandler.cs" />
+    <Compile Include="NotificationAssessment\GetChangeNumberOfShipmentConfrimationDataHandler.cs" />
     <Compile Include="NotificationAssessment\GetChargeDueHandler.cs" />
     <Compile Include="NotificationAssessment\GetInterimStatusHandler.cs" />
     <Compile Include="NotificationAssessment\GetOriginalNumberOfShipmentsHandler.cs" />
     <Compile Include="NotificationAssessment\MarkAsInterimHandler.cs" />
+    <Compile Include="NotificationAssessment\SetNewNumberOfShipmentsHandler.cs" />
     <Compile Include="NotificationMovements\Capture\GetLatestMovementNumberHandler.cs" />
     <Compile Include="NotificationMovements\Create\HasExceededConsentedQuantityHandler.cs" />
     <Compile Include="Movement\Receive\DoesQuantityReceivedExceedToleranceHandler.cs" />

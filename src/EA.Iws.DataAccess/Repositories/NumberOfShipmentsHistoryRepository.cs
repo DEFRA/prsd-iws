@@ -22,7 +22,41 @@
         {
             await notificationApplicationAuthorization.EnsureAccessAsync(notificationId);
 
-            return await context.NumberOfShipmentsHistories.Where(x => x.NotificationId == notificationId).OrderBy(x => x.DateChanged).FirstOrDefaultAsync();
+            return await context.NumberOfShipmentsHistories.Where(x => x.NotificationId == notificationId)
+                        .OrderBy(x => x.DateChanged)
+                        .FirstOrDefaultAsync();
+        }
+
+        public async Task<int> GetCurrentNumberOfShipments(Guid notificationId)
+        {
+            await notificationApplicationAuthorization.EnsureAccessAsync(notificationId);
+
+            var shipmentInfo = await context.ShipmentInfos.Where(x => x.NotificationId == notificationId).SingleOrDefaultAsync();
+
+            return shipmentInfo.NumberOfShipments;
+        }
+
+        public async Task<int> GetLargestNumberOfShipments(Guid notificationId)
+        {
+            await notificationApplicationAuthorization.EnsureAccessAsync(notificationId);
+
+            var currentNumber = await GetCurrentNumberOfShipments(notificationId);
+
+            var largestInHistory = await context.NumberOfShipmentsHistories.Where(x => x.NotificationId == notificationId)
+                                        .OrderByDescending(x => x.NumberOfShipments)
+                                        .FirstOrDefaultAsync();
+
+            if (largestInHistory != null && largestInHistory.NumberOfShipments > currentNumber)
+            {
+                return largestInHistory.NumberOfShipments;
+            }
+
+            return currentNumber;
+        }
+
+        public void Add(NumberOfShipmentsHistory history)
+        {
+            context.NumberOfShipmentsHistories.Add(history);
         }
     }
 }

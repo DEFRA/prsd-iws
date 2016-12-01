@@ -1091,6 +1091,7 @@
       <DependentUpon>IndexViewModelResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Areas\AdminExportAssessment\ViewModels\MarkAsInterimViewModel.cs" />
+    <Compile Include="Areas\AdminExportAssessment\ViewModels\NumberOfShipments\ConfirmViewModel.cs" />
     <Compile Include="Areas\AdminExportAssessment\ViewModels\NumberOfShipments\IndexViewModel.cs" />
     <Compile Include="Areas\AdminExportAssessment\ViewModels\NumberOfShipments\IndexViewModelResources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -1657,6 +1658,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ImporterViewModelResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Areas\ImportNotification\ViewModels\NumberOfShipments\ConfirmViewModel.cs" />
     <Compile Include="Areas\ImportNotification\ViewModels\NumberOfShipments\IndexViewModel.cs" />
     <Compile Include="Areas\ImportNotification\ViewModels\NumberOfShipments\IndexViewModelResources.Designer.cs">
       <AutoGen>True</AutoGen>
