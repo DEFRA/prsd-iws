@@ -223,6 +223,7 @@
     <Compile Include="ImportNotification\Mappings\TransitStateMap.cs" />
     <Compile Include="ImportNotification\Mappings\WasteOperationMap.cs" />
     <Compile Include="ImportNotification\Mappings\WasteTypeMap.cs" />
+    <Compile Include="ImportNotification\SetNewNumberOfShipmentsHandler.cs" />
     <Compile Include="ImportNotification\Summary\GetSummaryHandler.cs" />
     <Compile Include="ImportNotification\SetDraftDataHandler.cs" />
     <Compile Include="ImportNotification\Summary\TransportRouteData.cs" />

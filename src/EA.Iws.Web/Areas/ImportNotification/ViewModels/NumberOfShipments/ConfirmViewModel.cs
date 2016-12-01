@@ -15,6 +15,10 @@
 
         public decimal NewCharge { get; set; }
 
+        public ConfirmViewModel()
+        {
+        }
+
         public ConfirmViewModel(ConfirmNumberOfShipmentsChangeData data)
         {
             NotificationId = data.NotificationId;

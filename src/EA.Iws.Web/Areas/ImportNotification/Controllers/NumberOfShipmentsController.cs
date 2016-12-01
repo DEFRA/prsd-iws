@@ -46,5 +46,14 @@
 
             return View(confirmModel);
         }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Confirm(ConfirmViewModel model)
+        {
+            mediator.SendAsync(new SetNewNumberOfShipments(model.NotificationId, model.OldNumberOfShipments, model.NewNumberOfShipments));
+
+            return RedirectToAction("Index", "Home");
+        }
     }
 }

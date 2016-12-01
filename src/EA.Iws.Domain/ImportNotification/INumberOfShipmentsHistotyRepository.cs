@@ -10,5 +10,7 @@
         Task<int> GetCurrentNumberOfShipments(Guid notificationId);
 
         Task<int> GetLargestNumberOfShipments(Guid notificationId);
+
+        void Add(NumberOfShipmentsHistory history);
     }
 }
