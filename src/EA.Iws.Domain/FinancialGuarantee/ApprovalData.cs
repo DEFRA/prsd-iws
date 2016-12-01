@@ -2,7 +2,7 @@
 {
     using System;
 
-    public class ApproveDates
+    public class ApprovalData
     {
         public DateTime DecisionDate { get; private set; }
 
@@ -12,7 +12,7 @@
 
         public bool IsBlanketBond { get; private set; }
 
-        public ApproveDates(DateTime decisionDate, string referenceNumber, int activeLoadsPermitted, bool isBlanketBond)
+        public ApprovalData(DateTime decisionDate, string referenceNumber, int activeLoadsPermitted, bool isBlanketBond)
         {
             DecisionDate = decisionDate;
             ActiveLoadsPermitted = activeLoadsPermitted;

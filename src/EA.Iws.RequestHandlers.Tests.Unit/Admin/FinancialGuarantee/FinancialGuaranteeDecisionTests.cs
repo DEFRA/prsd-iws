@@ -49,7 +49,7 @@ namespace EA.Iws.RequestHandlers.Tests.Unit.Admin.FinancialGuarantee
 
             public bool ReleaseCalled { get; set; }
 
-            public override void Approve(ApproveDates approveDates)
+            public override void Approve(ApprovalData approvalData)
             {
                 ApproveCalled = true;
 

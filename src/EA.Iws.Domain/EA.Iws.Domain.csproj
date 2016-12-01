@@ -202,7 +202,7 @@
     <Compile Include="EstimatedValue.cs" />
     <Compile Include="FileStore\File.cs" />
     <Compile Include="FileStore\IFileRepository.cs" />
-    <Compile Include="FinancialGuarantee\ApproveDates.cs" />
+    <Compile Include="FinancialGuarantee\ApprovalData.cs" />
     <Compile Include="FinancialGuarantee\FinancialGuarantee.cs" />
     <Compile Include="Events\RegistrationApprovedEvent.cs" />
     <Compile Include="FinancialGuarantee\FinancialGuaranteeStatusChange.cs" />

@@ -14,7 +14,7 @@
         private const int WorkingDaysUntilDecisionRequired = 20;
 
         private StateMachine<FinancialGuaranteeStatus, Trigger>.TriggerWithParameters<DateTime> completedTrigger;
-        private StateMachine<FinancialGuaranteeStatus, Trigger>.TriggerWithParameters<ApproveDates> approvedTrigger;
+        private StateMachine<FinancialGuaranteeStatus, Trigger>.TriggerWithParameters<ApprovalData> approvedTrigger;
         private StateMachine<FinancialGuaranteeStatus, Trigger>.TriggerWithParameters<DateTime, string> refusedTrigger;
         private StateMachine<FinancialGuaranteeStatus, Trigger>.TriggerWithParameters<DateTime> releasedTrigger;
         private readonly StateMachine<FinancialGuaranteeStatus, Trigger> stateMachine;
@@ -103,7 +103,7 @@
             var stateMachine = new StateMachine<FinancialGuaranteeStatus, Trigger>(() => Status, s => Status = s);
 
             completedTrigger = stateMachine.SetTriggerParameters<DateTime>(Trigger.Completed);
-            approvedTrigger = stateMachine.SetTriggerParameters<ApproveDates>(Trigger.Approved);
+            approvedTrigger = stateMachine.SetTriggerParameters<ApprovalData>(Trigger.Approved);
             refusedTrigger = stateMachine.SetTriggerParameters<DateTime, string>(Trigger.Refused);
             releasedTrigger = stateMachine.SetTriggerParameters<DateTime>(Trigger.Released);
 
@@ -145,23 +145,23 @@
             Released
         }
 
-        public virtual void Approve(ApproveDates approveDates)
+        public virtual void Approve(ApprovalData approvalData)
         {
-            if (approveDates.DecisionDate < CompletedDate)
+            if (approvalData.DecisionDate < CompletedDate)
             {
                 throw new InvalidOperationException("Cannot set the decision date to before the completed date. Id: " + Id);
             }
 
-            stateMachine.Fire(approvedTrigger, approveDates);
+            stateMachine.Fire(approvedTrigger, approvalData);
         }
 
-        private void OnApproved(ApproveDates approveDates)
+        private void OnApproved(ApprovalData approvalData)
         {
-            DecisionDate = approveDates.DecisionDate;
+            DecisionDate = approvalData.DecisionDate;
             Decision = FinancialGuaranteeDecision.Approved;
-            ActiveLoadsPermitted = approveDates.ActiveLoadsPermitted;
-            ReferenceNumber = approveDates.ReferenceNumber;
-            IsBlanketBond = approveDates.IsBlanketBond;
+            ActiveLoadsPermitted = approvalData.ActiveLoadsPermitted;
+            ReferenceNumber = approvalData.ReferenceNumber;
+            IsBlanketBond = approvalData.IsBlanketBond;
         }
 
         public virtual void Refuse(DateTime decisionDate, string refusalReason)

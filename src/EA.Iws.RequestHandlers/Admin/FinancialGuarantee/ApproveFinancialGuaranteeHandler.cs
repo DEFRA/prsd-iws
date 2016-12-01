@@ -22,7 +22,7 @@
             var financialGuaranteeCollection = await repository.GetByNotificationId(message.NotificationId);
             var financialGuarantee = financialGuaranteeCollection.GetFinancialGuarantee(message.FinancialGuaranteeId);
 
-            financialGuarantee.Approve(new ApproveDates(message.DecisionDate, 
+            financialGuarantee.Approve(new ApprovalData(message.DecisionDate, 
                 message.ReferenceNumber, message.ActiveLoadsPermitted, message.IsBlanketbond));
 
             await context.SaveChangesAsync();
