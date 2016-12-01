@@ -2,9 +2,9 @@
 {
     using System;
     using Core.Authorization;
+    using Core.Authorization.Permissions;
     using Core.ImportNotification;
     using Prsd.Core.Mediator;
-    using Core.Authorization.Permissions;
 
     [RequestAuthorization(ImportNotificationPermissions.CanChangeNumberOfShipmentsOnImportNotification)]
     public class GetChangeNumberOfShipmentConfrimationData : IRequest<ConfirmNumberOfShipmentsChangeData>

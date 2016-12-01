@@ -1,14 +1,24 @@
 ﻿namespace EA.Iws.Web.Areas.AdminExportAssessment.Controllers
 {
     using System;
+    using System.Threading.Tasks;
     using System.Web.Mvc;
     using Core.Authorization.Permissions;
     using Infrastructure.Authorization;
+    using Prsd.Core.Mediator;
+    using Requests.NotificationAssessment;
     using ViewModels.NumberOfShipments;
 
     [AuthorizeActivity(ExportNotificationPermissions.CanChangeNumberOfShipmentsOnExportNotification)]
     public class NumberOfShipmentsController : Controller
     {
+        private readonly IMediator mediator;
+
+        public NumberOfShipmentsController(IMediator mediator)
+        {
+            this.mediator = mediator;
+        }
+
         [HttpGet]
         public ActionResult Index()
         {
@@ -24,13 +34,17 @@
                 return View(model);
             }
 
-            return RedirectToAction("Confirm");
+            return RedirectToAction("Confirm", model);
         }
 
         [HttpGet]
-        public ActionResult Confirm()
+        public async Task<ActionResult> Confirm(Guid id, IndexViewModel model)
         {
-            return View();
+            var data = await mediator.SendAsync(new GetChangeNumberOfShipmentConfrimationData(id, model.Number.GetValueOrDefault()));
+            var confirmModel = new ConfirmViewModel(data);
+            confirmModel.NewNumberOfShipments = model.Number.GetValueOrDefault();
+
+            return View(confirmModel);
         }
     }
 }
