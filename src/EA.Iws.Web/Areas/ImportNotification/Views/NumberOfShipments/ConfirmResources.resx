@@ -120,8 +120,14 @@
   <data name="AdditionalCharge" xml:space="preserve">
     <value>This increase will require the Notifier to pay an additional charge of {0}</value>
   </data>
+  <data name="CancelButtonText" xml:space="preserve">
+    <value>Do not make the change and return to notification overview</value>
+  </data>
+  <data name="Decrease" xml:space="preserve">
+    <value>Decrease</value>
+  </data>
   <data name="DecreaseTo" xml:space="preserve">
-    <value>You are about to decrease the number of shipments for this notification to</value>
+    <value>You are about to decrease the number of shipments for this notification from</value>
   </data>
   <data name="GuidanceDecrease" xml:space="preserve">
     <value>Once this change has been committed shipments will decrease to {0} and the Notifier will only be able to make up to {0} shipments on this notification</value>
@@ -130,13 +136,19 @@
     <value>Once this change has been committed shipments for this notification will increase to {0} and allow the Notifier to make up to {0} shipments</value>
   </data>
   <data name="Heading" xml:space="preserve">
-    <value>total number of intended shipments</value>
+    <value>the total number of intended shipments</value>
+  </data>
+  <data name="Increase" xml:space="preserve">
+    <value>Increase</value>
   </data>
   <data name="IncreaseTo" xml:space="preserve">
-    <value>You are about to increase the number of shipments for this notification to</value>
+    <value>You are about to increase the number of shipments for this notification from</value>
   </data>
   <data name="NeedToPay" xml:space="preserve">
     <value>This charge will need to be paid prior to the Notifier using these additional shipments</value>
+  </data>
+  <data name="NoChargeChange" xml:space="preserve">
+    <value>This does not change the charge for this notification</value>
   </data>
   <data name="Title" xml:space="preserve">
     <value>Confirm number of shipments change</value>

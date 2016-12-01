@@ -70,7 +70,25 @@ namespace EA.Iws.Web.Areas.ImportNotification.Views.NumberOfShipments {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You are about to decrease the number of shipments for this notification to.
+        ///   Looks up a localized string similar to Do not make the change and return to notification overview.
+        /// </summary>
+        public static string CancelButtonText {
+            get {
+                return ResourceManager.GetString("CancelButtonText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Decrease.
+        /// </summary>
+        public static string Decrease {
+            get {
+                return ResourceManager.GetString("Decrease", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You are about to decrease the number of shipments for this notification from.
         /// </summary>
         public static string DecreaseTo {
             get {
@@ -97,7 +115,7 @@ namespace EA.Iws.Web.Areas.ImportNotification.Views.NumberOfShipments {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to total number of intended shipments.
+        ///   Looks up a localized string similar to the total number of intended shipments.
         /// </summary>
         public static string Heading {
             get {
@@ -106,7 +124,16 @@ namespace EA.Iws.Web.Areas.ImportNotification.Views.NumberOfShipments {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You are about to increase the number of shipments for this notification to.
+        ///   Looks up a localized string similar to Increase.
+        /// </summary>
+        public static string Increase {
+            get {
+                return ResourceManager.GetString("Increase", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You are about to increase the number of shipments for this notification from.
         /// </summary>
         public static string IncreaseTo {
             get {
@@ -120,6 +147,15 @@ namespace EA.Iws.Web.Areas.ImportNotification.Views.NumberOfShipments {
         public static string NeedToPay {
             get {
                 return ResourceManager.GetString("NeedToPay", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This does not change the charge for this notification.
+        /// </summary>
+        public static string NoChargeChange {
+            get {
+                return ResourceManager.GetString("NoChargeChange", resourceCulture);
             }
         }
         
