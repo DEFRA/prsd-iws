@@ -167,6 +167,11 @@
             {
                 yield return new ValidationResult(DecisionViewModelResources.WithdrawnDateRequired, new[] { "WithdrawnDate" });
             }
+
+            if (WithdrawnDate.AsDateTime() > SystemTime.UtcNow.Date)
+            {
+                yield return new ValidationResult(DecisionViewModelResources.WithdrawnDateNotFuture, new[] { "WithdrawnDate" });
+            }
         } 
     }
 }
