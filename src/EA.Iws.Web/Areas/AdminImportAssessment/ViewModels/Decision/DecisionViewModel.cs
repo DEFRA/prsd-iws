@@ -4,8 +4,10 @@
     using System.ComponentModel.DataAnnotations;
     using System.Linq;
     using System.Web.Mvc;
+    using AdminExportAssessment.ViewModels.Decision;
     using Core.Admin;
     using Core.ImportNotificationAssessment;
+    using Prsd.Core;
     using Prsd.Core.Helpers;
     using Web.ViewModels.Shared;
 
@@ -146,6 +148,11 @@
             if (!ObjectionDate.IsCompleted)
             {
                 yield return new ValidationResult(DecisionViewModelResources.ObjectedDateRequired, new[] { "ObjectionDate" });
+            }
+
+            if (ObjectionDate.AsDateTime() > SystemTime.UtcNow.Date)
+            {
+                yield return new ValidationResult(DecisionViewModelResources.ObjectDateNotFuture, new[] { "ObjectionDate" });
             }
         }
 

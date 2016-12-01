@@ -153,6 +153,9 @@
   <data name="DecisionRequired" xml:space="preserve">
     <value>Please provide a notification decision</value>
   </data>
+  <data name="ObjectDateNotFuture" xml:space="preserve">
+    <value>The decision made date cannot be in the future</value>
+  </data>
   <data name="ObjectedDateLabel" xml:space="preserve">
     <value>Date decision made</value>
   </data>
