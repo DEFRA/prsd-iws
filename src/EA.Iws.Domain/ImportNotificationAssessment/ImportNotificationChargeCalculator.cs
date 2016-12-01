@@ -15,27 +15,38 @@
         private readonly IShipmentRepository shipmentRepository;
         private readonly IPricingStructureRepository pricingStructureRepository;
         private readonly IInterimStatusRepository interimStatusRepository;
+        private readonly INumberOfShipmentsHistotyRepository numberOfShipmentsHistotyRepository;
 
         public ImportNotificationChargeCalculator(IImportNotificationRepository notificationRepository, 
             IShipmentRepository shipmentRepository,
             IPricingStructureRepository pricingStructureRepository,
-            IInterimStatusRepository interimStatusRepository)
+            IInterimStatusRepository interimStatusRepository,
+            INumberOfShipmentsHistotyRepository numberOfShipmentsHistotyRepository)
         {
             this.notificationRepository = notificationRepository;
             this.shipmentRepository = shipmentRepository;
             this.pricingStructureRepository = pricingStructureRepository;
             this.interimStatusRepository = interimStatusRepository;
+            this.numberOfShipmentsHistotyRepository = numberOfShipmentsHistotyRepository;
         }
 
         public async Task<decimal> GetValue(Guid importNotificationId)
         {
-            var notification = await notificationRepository.Get(importNotificationId);
             var shipment = await shipmentRepository.GetByNotificationIdOrDefault(importNotificationId);
 
             if (shipment == null)
             {
                 return 0;
             }
+
+            var largestNumberOfShipments = await numberOfShipmentsHistotyRepository.GetLargestNumberOfShipments(importNotificationId);
+
+            if (largestNumberOfShipments > shipment.NumberOfShipments)
+            {
+                shipment.UpdateNumberOfShipments(largestNumberOfShipments);
+            }
+
+            var notification = await notificationRepository.Get(importNotificationId);
 
             return await GetPrice(notification, shipment, await GetInterimStatus(importNotificationId));
         }

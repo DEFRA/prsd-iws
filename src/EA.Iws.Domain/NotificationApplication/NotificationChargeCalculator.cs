@@ -12,16 +12,19 @@
         private readonly INotificationApplicationRepository notificationApplicationRepository;
         private readonly IPricingStructureRepository pricingStructureRepository;
         private readonly IFacilityRepository facilityRepository;
+        private readonly INumberOfShipmentsHistotyRepository numberOfShipmentsHistotyRepository;
 
         public NotificationChargeCalculator(IShipmentInfoRepository shipmentInfoRepository, 
             INotificationApplicationRepository notificationApplicationRepository,
             IPricingStructureRepository pricingStructureRepository,
-            IFacilityRepository facilityRepository)
+            IFacilityRepository facilityRepository,
+            INumberOfShipmentsHistotyRepository numberOfShipmentsHistotyRepository)
         {
             this.shipmentInfoRepository = shipmentInfoRepository;
             this.notificationApplicationRepository = notificationApplicationRepository;
             this.pricingStructureRepository = pricingStructureRepository;
             this.facilityRepository = facilityRepository;
+            this.numberOfShipmentsHistotyRepository = numberOfShipmentsHistotyRepository;
         }
         
         public async Task<decimal> GetValue(Guid notificationId)
@@ -31,6 +34,13 @@
             if (shipmentInfo == null)
             {
                 return 0;
+            }
+
+            var largestNumberOfShipments = await numberOfShipmentsHistotyRepository.GetLargestNumberOfShipments(notificationId);
+
+            if (largestNumberOfShipments > shipmentInfo.NumberOfShipments)
+            {
+                shipmentInfo.UpdateNumberOfShipments(largestNumberOfShipments);
             }
 
             var notification = await notificationApplicationRepository.GetById(notificationId);
