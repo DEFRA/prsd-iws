@@ -131,6 +131,7 @@
     <Compile Include="ImportNotificationAssessment\FinancialGuarantee\SetCompletedDate.cs" />
     <Compile Include="ImportNotificationAssessment\FinancialGuarantee\SetReceivedAndCompletedDate.cs" />
     <Compile Include="ImportNotificationAssessment\GetImportNotificationAssessmentDecisionData.cs" />
+    <Compile Include="ImportNotificationAssessment\GetImportNotificationConsentedDate.cs" />
     <Compile Include="ImportNotificationAssessment\GetImportNotificationConsultation.cs" />
     <Compile Include="ImportNotificationAssessment\ObjectToImportNotification.cs" />
     <Compile Include="ImportNotificationAssessment\SetAcknowlegedDate.cs" />
