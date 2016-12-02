@@ -1,10 +1,11 @@
 ﻿@model EA.Iws.Web.Areas.AdminExportAssessment.ViewModels.FinancialGuaranteeDecision.ReleaseFinancialGuaranteeViewModel
-    
+@using Resources = EA.Iws.Web.Areas.AdminExportAssessment.Views.FinancialGuaranteeDecision.FinancialGuaranteeDecisionResources
+
 @{
-    ViewBag.Title = "Release financial guarantee";
+    ViewBag.Title = Resources.ReleaseTitle;
 }
 
-<h2 class="heading-large">Release financial guarantee</h2>
+<h2 class="heading-large">@Resources.ReleaseTitle</h2>
 
 @using (Html.BeginForm())
 {
@@ -14,7 +15,7 @@
     @Html.HiddenFor(m => m.CompletedDate)
 
     <div class="form-group @Html.Gds().FormGroupClass(m => m.DecisionMadeDate.Day) @Html.Gds().FormGroupClass(m => m.DecisionMadeDate.Month) @Html.Gds().FormGroupClass(m => m.DecisionMadeDate.Year)">
-        <label class="form-label" for="DecisionMadeDate_Day">Date decision made</label>
+        <label class="form-label" for="DecisionMadeDate_Day">@Html.DisplayNameFor(m => m.DecisionMadeDate)</label>
         @Html.EditorFor(m => m.DecisionMadeDate)
     </div>
 

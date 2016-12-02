@@ -27,7 +27,7 @@
 
         public DateTime CompletedDate { get; set; }
 
-        [Display(Name = "Date decision made")]
+        [Display(ResourceType = typeof(FinancialGuaranteeDecisionResources), Name = "DecisionMadeDate")]
         public OptionalDateInputViewModel DecisionMadeDate { get; set; }
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
@@ -35,7 +35,7 @@
             if (DecisionMadeDate.IsCompleted && DecisionMadeDate.AsDateTime() < CompletedDate)
             {
                 yield return
-                    new ValidationResult(string.Format("The decision date cannot be before the completed date of {0}",
+                    new ValidationResult(string.Format(FinancialGuaranteeDecisionResources.DecisionMadeDateNotBeforeCompleteDate,
                         CompletedDate.ToShortDateString()),
                         new[] { "DecisionMadeDate.Day" });
             }
@@ -43,12 +43,12 @@
             if (!DecisionMadeDate.IsCompleted)
             {
                 yield return
-                    new ValidationResult("Please enter the date the decision was made", new[] { "DecisionMadeDate.Day" });
+                    new ValidationResult(FinancialGuaranteeDecisionResources.DecisionMadeDateRequired, new[] { "DecisionMadeDate.Day" });
             }
 
             if (DecisionMadeDate.AsDateTime() > SystemTime.UtcNow)
             {
-                yield return new ValidationResult("Decision date cannot be in the future", new[] { "DecisionMadeDate.Day" });
+                yield return new ValidationResult(FinancialGuaranteeDecisionResources.DecisionMadeDateNotInFuture, new[] { "DecisionMadeDate.Day" });
             }
         }
     }

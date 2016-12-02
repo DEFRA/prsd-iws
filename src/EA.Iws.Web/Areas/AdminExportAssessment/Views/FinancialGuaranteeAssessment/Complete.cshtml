@@ -1,9 +1,10 @@
 ﻿@model EA.Iws.Web.Areas.AdminExportAssessment.ViewModels.FinancialGuaranteeAssessment.CompleteFinancialGuaranteeViewModel
+@using Resources = EA.Iws.Web.Areas.AdminExportAssessment.Views.FinancialGuaranteeAssessment.FinancialGuaranteeAssessmentResources
 @{
-    ViewBag.Title = "Complete financial guarantee";
+    ViewBag.Title = Resources.CompleteTitle;
 }
 
-<h1 class="heading-large">Complete financial guarantee</h1>
+<h1 class="heading-large">@Resources.CompleteTitle</h1>
 
 @using (Html.BeginForm())
 {
@@ -13,7 +14,7 @@
     @Html.HiddenFor(m => m.FinancialGuaranteeId)
 
     <div class="form-group @Html.Gds().FormGroupClass(m => m.CompleteDate.Day) @Html.Gds().FormGroupClass(m => m.CompleteDate.Month) @Html.Gds().FormGroupClass(m => m.CompleteDate.Year)">
-        <label class="form-label" for="CompleteDate_Day">Guarantee completed</label>
+        <label class="form-label" for="CompleteDate_Day">@Html.DisplayNameFor(m => m.CompleteDate)</label>
         @Html.EditorFor(m => m.CompleteDate)
     </div>
 

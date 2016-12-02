@@ -1,7 +1,6 @@
 ﻿namespace EA.Iws.Web.Areas.AdminExportAssessment.ViewModels.FinancialGuaranteeAssessment
 {
     using System.Collections.Generic;
-    using System.ComponentModel;
     using System.ComponentModel.DataAnnotations;
     using Prsd.Core;
     using Web.ViewModels.Shared;
@@ -9,7 +8,7 @@
     public class NewFinancialGuaranteeViewModel : IValidatableObject
     {
         [Required]
-        [DisplayName("Guarantee received")]
+        [Display(ResourceType = typeof(FinancialGuaranteeAssessmentResources), Name = "ReceivedDate")]
         public OptionalDateInputViewModel ReceivedDate { get; set; }
 
         public NewFinancialGuaranteeViewModel()
@@ -21,12 +20,12 @@
         {
             if (!ReceivedDate.IsCompleted)
             {
-                yield return new ValidationResult("Received date is required", new[] { "ReceivedDate.Day" });
+                yield return new ValidationResult(FinancialGuaranteeAssessmentResources.ReceivedDateRequired, new[] { "ReceivedDate.Day" });
             }
 
             if (ReceivedDate.AsDateTime() > SystemTime.UtcNow)
             {
-                yield return new ValidationResult("Received date cannot be in the future", new[] { "ReceivedDate.Day" });
+                yield return new ValidationResult(FinancialGuaranteeAssessmentResources.ReceivedDateNotInFuture, new[] { "ReceivedDate.Day" });
             }
         }
     }

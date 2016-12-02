@@ -1,9 +1,10 @@
 ﻿@model EA.Iws.Web.Areas.AdminExportAssessment.ViewModels.FinancialGuaranteeDecision.FinancialGuaranteeDecisionViewModel
+@using Resources = EA.Iws.Web.Areas.AdminExportAssessment.Views.FinancialGuaranteeDecision.FinancialGuaranteeDecisionResources
 @{
-    ViewBag.Title = "Financial Guarantee Decision";
+    ViewBag.Title = Resources.DecisionTitle;
 }
 
-<h2 class="heading-large">Financial guarantee decision</h2>
+<h2 class="heading-large">@Resources.DecisionTitle</h2>
 
 @using (Html.BeginForm())
 {

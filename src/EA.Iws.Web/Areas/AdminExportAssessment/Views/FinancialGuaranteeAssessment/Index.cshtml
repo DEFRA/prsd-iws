@@ -1,31 +1,32 @@
 ﻿@using EA.Iws.Core.FinancialGuarantee
 @model FinancialGuaranteeData
+@using Resources = EA.Iws.Web.Areas.AdminExportAssessment.Views.FinancialGuaranteeAssessment.FinancialGuaranteeAssessmentResources
 @{
-    ViewBag.Title = "Financial guarantee assessment";
+    ViewBag.Title = Resources.AssessmentTitle;
 }
 
-<h1 class="heading-large">Financial guarantee assessment</h1>
+<h1 class="heading-large">@Resources.AssessmentTitle</h1>
 
 <div class="form-group">
 
-    <h2 class="heading-medium">Financial guarantee decision</h2>
+    <h2 class="heading-medium">@Resources.DecisionHeading</h2>
 
     <table class="fg-decision">
         <tbody>
         <tr>
-            <th>Decision</th>
+            <th>@Resources.Decision</th>
             <td>@Model.Decision</td>
         </tr>
         <tr>
-            <th>Date received</th>
+            <th>@Resources.DateReceived</th>
             <td>@Html.Gds().DisplayDateFor(m => m.ReceivedDate)</td>
         </tr>
         <tr>
-            <th>Date completed</th>
+            <th>@Resources.DateCompleted</th>
             <td>
                 @if (Model.Status == FinancialGuaranteeStatus.ApplicationReceived)
                 {
-                    @Html.ActionLink("Add", "Complete", new { financialGuaranteeId = Model.FinancialGuaranteeId })
+                    @Html.ActionLink(Resources.AddLink, "Complete", new { financialGuaranteeId = Model.FinancialGuaranteeId })
                 }
                 else
                 {
@@ -41,21 +42,21 @@
 @if (Model.Status == FinancialGuaranteeStatus.ApplicationReceived)
 {
     <div class="form-group">
-        <a href="#" class="button" disabled="disabled">Make a decision</a>
+        <a href="#" class="button" disabled="disabled">@Resources.MakeADecisionButton</a>
     </div>
 }
 
 @if (Model.Status == FinancialGuaranteeStatus.ApplicationComplete)
 {
     <div class="form-group">
-        @Html.ActionLink("Make a decision", "Index", "FinancialGuaranteeDecision", new { financialGuaranteeId = Model.FinancialGuaranteeId }, new { @class = "button" })
+        @Html.ActionLink(Resources.MakeADecisionButton, "Index", "FinancialGuaranteeDecision", new { financialGuaranteeId = Model.FinancialGuaranteeId }, new { @class = "button" })
     </div>
 }
 
 @if (Model.Decision == FinancialGuaranteeDecision.Approved)
 {
     <div class="form-group">
-        @Html.ActionLink("Record a new financial guarantee", "New", null, new { @class = "button" })
+        @Html.ActionLink(Resources.RecordNew, "New", null, new { @class = "button" })
     </div>
 }
 

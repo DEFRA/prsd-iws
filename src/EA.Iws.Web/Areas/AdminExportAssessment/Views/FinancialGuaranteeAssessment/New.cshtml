@@ -1,9 +1,10 @@
 ﻿@model EA.Iws.Web.Areas.AdminExportAssessment.ViewModels.FinancialGuaranteeAssessment.NewFinancialGuaranteeViewModel
+@using Resources = EA.Iws.Web.Areas.AdminExportAssessment.Views.FinancialGuaranteeAssessment.FinancialGuaranteeAssessmentResources
 @{
-    ViewBag.Title = "Record new financial guarantee";
+    ViewBag.Title = Resources.NewTitle;
 }
 
-<h1 class="heading-large">Record new financial guarantee</h1>
+<h1 class="heading-large">@Resources.NewTitle</h1>
 
 @using (Html.BeginForm())
 {
@@ -11,7 +12,7 @@
     @Html.AntiForgeryToken()
 
     <div class="form-group @Html.Gds().FormGroupClass(m => m.ReceivedDate.Day) @Html.Gds().FormGroupClass(m => m.ReceivedDate.Month) @Html.Gds().FormGroupClass(m => m.ReceivedDate.Year)">
-        <label class="form-label" for="ReceivedDate_Day">Guarantee received</label>
+        <label class="form-label" for="ReceivedDate_Day">@Html.DisplayNameFor(m => m.ReceivedDate)</label>
         @Html.EditorFor(m => m.ReceivedDate)
     </div>
 

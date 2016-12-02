@@ -1,24 +1,25 @@
 ﻿@using EA.Iws.Core.FinancialGuarantee
 @model EA.Iws.Web.Areas.AdminExportAssessment.ViewModels.FinancialGuaranteeDecisionHistory.FinancialGuaranteeDecisionHistoryViewModel
+@using Resources = EA.Iws.Web.Areas.AdminExportAssessment.Views.FinancialGuaranteeDecisionHistory.FinancialGuaranteeDecisionHistoryResources
 @{
-    ViewBag.Title = "Financial guarantee decision history";
+    ViewBag.Title = Resources.DecisionHistoryTitle;
 }
 
-<h1 class="heading-large">Financial guarantee decision history</h1>
+<h1 class="heading-large">@Resources.DecisionHistoryTitle</h1>
 
 <div class="form-group">
 
-    <h2 class="heading-medium">Current financial guarantee</h2>
+    <h2 class="heading-medium">@Resources.CurrentTitle</h2>
 
     <table class="fg-decision">
         <tbody>
             <tr>
-                <th>Status</th>
+                <th>@Resources.Status</th>
                 <td>@Model.CurrentFinancialGuarantee.Status</td>
             </tr>
 
             <tr>
-                <th>Date decision made</th>
+                <th>@Resources.DecisionDate</th>
                 <td>
                     @if (Model.CurrentFinancialGuarantee.DecisionDate.HasValue)
                     {
@@ -31,11 +32,11 @@
                 </td>
             </tr>
             <tr>
-                <th>Is this a blanket bond?</th>
+                <th>@Resources.IsBlanketBond</th>
                 <td>
                     @if (Model.CurrentFinancialGuarantee.IsBlanketBond.HasValue)
                     {
-                        @(Model.CurrentFinancialGuarantee.IsBlanketBond.Value ? "Yes" : "No")
+                        @(Model.CurrentFinancialGuarantee.IsBlanketBond.Value ? Resources.Yes : Resources.No)
                     }
                     else
                     {
@@ -44,7 +45,7 @@
                 </td>
             </tr>
             <tr>
-                <th>Reference number</th>
+                <th>@Resources.ReferenceNumber</th>
                 <td>
                     @if (!string.IsNullOrWhiteSpace(Model.CurrentFinancialGuarantee.ReferenceNumber))
                     {
@@ -57,7 +58,7 @@
                 </td>
             </tr>
             <tr>
-                <th>Active loads permitted</th>
+                <th>@Resources.ActiveLoadsPermitted</th>
                 <td>
                     @if (Model.CurrentFinancialGuarantee.ActiveLoadsPermitted.HasValue)
                     {
@@ -76,18 +77,18 @@
 @if (Model.CurrentFinancialGuarantee.Decision == FinancialGuaranteeDecision.Approved)
 {
     <div class="form-group">
-        @Html.ActionLink("Record a new financial guarantee", "New", "FinancialGuaranteeAssessment", null, new { @class = "button" })
+        @Html.ActionLink(Resources.NewLink, "New", "FinancialGuaranteeAssessment", null, new { @class = "button" })
     </div>
 }
 
 <div class="form-group">
-    <h2 class="heading-medium">Financial guarantee history</h2>
+    <h2 class="heading-medium">@Resources.HistoryTitle</h2>
 
     <table>
         <thead>
         <tr>
-            <th>Status</th>
-            <th>Date</th>
+            <th>@Resources.Status</th>
+            <th>@Resources.Date</th>
             <th/>
         </tr>
         </thead>
@@ -107,7 +108,7 @@
                         }
                     </td>
                     <td>
-                        @Html.ActionLink("View details", "Index", "FinancialGuaranteeDetails",
+                        @Html.ActionLink(Resources.DetailsLink, "Index", "FinancialGuaranteeDetails",
                             routeValues: new { financialGuaranteeId = financialGuarantee.FinancialGuaranteeId }, htmlAttributes: null)
                     </td>
                 </tr>
