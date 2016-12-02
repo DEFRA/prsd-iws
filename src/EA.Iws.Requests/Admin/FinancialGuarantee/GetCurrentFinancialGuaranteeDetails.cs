@@ -7,7 +7,7 @@
     using Prsd.Core.Mediator;
 
     [RequestAuthorization(ExportNotificationPermissions.CanReadExportNotificationAssessment)]
-    public class GetCurrentFinancialGuaranteeDetails : IRequest<CurrentFinancialGuaranteeDetails>
+    public class GetCurrentFinancialGuaranteeDetails : IRequest<FinancialGuaranteeData>
     {
         public GetCurrentFinancialGuaranteeDetails(Guid notificationId)
         {

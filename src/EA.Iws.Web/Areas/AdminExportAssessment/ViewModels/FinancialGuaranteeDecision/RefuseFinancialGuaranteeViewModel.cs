@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using Core.Admin;
+    using Core.FinancialGuarantee;
     using Prsd.Core;
     using Web.ViewModels.Shared;
 

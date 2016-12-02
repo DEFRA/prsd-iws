@@ -89,6 +89,7 @@
     <Compile Include="Admin\FinancialGuarantee\CompleteFinancialGuaranteeHandler.cs" />
     <Compile Include="Admin\FinancialGuarantee\CreateFinancialGuaranteeHandler.cs" />
     <Compile Include="Admin\FinancialGuarantee\GetCurrentFinancialGuaranteeDetailsHandler.cs" />
+    <Compile Include="Admin\FinancialGuarantee\GetFinancialGuaranteeHistoryHandler.cs" />
     <Compile Include="Admin\FinancialGuarantee\GetFinancialGuaranteeStatusHandler.cs" />
     <Compile Include="Admin\GetExportNotificationOwnerDisplaysHandler.cs" />
     <Compile Include="Admin\GetUserCompetentAuthorityHandler.cs" />

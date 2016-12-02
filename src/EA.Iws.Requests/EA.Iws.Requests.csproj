@@ -57,6 +57,7 @@
     <Compile Include="Admin\FinancialGuarantee\CompleteFinancialGuarantee.cs" />
     <Compile Include="Admin\FinancialGuarantee\CreateFinancialGuarantee.cs" />
     <Compile Include="Admin\FinancialGuarantee\GetCurrentFinancialGuaranteeDetails.cs" />
+    <Compile Include="Admin\FinancialGuarantee\GetFinancialGuaranteeHistory.cs" />
     <Compile Include="Admin\GetExportNotificationOwnerDisplays.cs" />
     <Compile Include="Admin\GetUserCompetentAuthority.cs" />
     <Compile Include="Admin\KeyDates\GetImportKeyDatesOverrideData.cs" />

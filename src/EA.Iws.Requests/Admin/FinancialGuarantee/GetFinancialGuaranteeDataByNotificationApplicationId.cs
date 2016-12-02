@@ -4,6 +4,7 @@
     using Core.Admin;
     using Core.Authorization;
     using Core.Authorization.Permissions;
+    using Core.FinancialGuarantee;
     using Prsd.Core.Mediator;
 
     [RequestAuthorization(ExportNotificationPermissions.CanReadExportNotificationAssessment)]

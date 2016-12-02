@@ -1,6 +1,5 @@
 ﻿namespace EA.Iws.RequestHandlers.Mappings
 {
-    using Core.Admin;
     using Core.FinancialGuarantee;
     using Core.Notification;
     using Domain.FinancialGuarantee;
@@ -27,6 +26,7 @@
 
             return new FinancialGuaranteeData
             {
+                FinancialGuaranteeId = source.Id,
                 Status = source.Status,
                 CompletedDate = source.CompletedDate,
                 DecisionRequiredDate = source.GetDecisionRequiredDate(workingDayCalculator, parameter),

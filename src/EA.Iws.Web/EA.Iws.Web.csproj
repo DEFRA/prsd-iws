@@ -471,6 +471,7 @@
     <Content Include="Content\iws\_financial-guarantee.scss" />
     <Content Include="Areas\AdminExportAssessment\Views\FinancialGuaranteeAssessment\New.cshtml" />
     <Content Include="Areas\AdminExportAssessment\Views\FinancialGuaranteeAssessment\Complete.cshtml" />
+    <Content Include="Areas\AdminExportAssessment\Views\FinancialGuaranteeDecisionHistory\Index.cshtml" />
     <None Include="Content\iws\_panels.scss" />
     <Content Include="Content\nta-extended.css" />
     <Content Include="Content\select2\select2-spinner.gif" />
@@ -1076,6 +1077,7 @@
     </Compile>
     <Compile Include="Areas\AdminExportAssessment\Controllers\FinancialGuaranteeAssessmentController.cs" />
     <Compile Include="Areas\AdminExportAssessment\Controllers\FinancialGuaranteeDecisionController.cs" />
+    <Compile Include="Areas\AdminExportAssessment\Controllers\FinancialGuaranteeDecisionHistoryController.cs" />
     <Compile Include="Areas\AdminExportAssessment\Controllers\KeyDatesOverrideController.cs" />
     <Compile Include="Areas\AdminExportAssessment\Controllers\MarkAsInterimController.cs" />
     <Compile Include="Areas\AdminExportAssessment\Controllers\OverviewController.cs" />
@@ -1085,6 +1087,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DateInputViewModelResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Areas\AdminExportAssessment\ViewModels\FinancialGuaranteeDecisionHistory\FinancialGuaranteeDecisionHistoryViewModel.cs" />
     <Compile Include="Areas\AdminExportAssessment\ViewModels\FinancialGuaranteeDecision\ApproveFinancialGuaranteeViewModel.cs" />
     <Compile Include="Areas\AdminExportAssessment\ViewModels\FinancialGuaranteeAssessment\CompleteFinancialGuaranteeViewModel.cs" />
     <Compile Include="Areas\AdminExportAssessment\ViewModels\FinancialGuaranteeAssessment\NewFinancialGuaranteeViewModel.cs" />

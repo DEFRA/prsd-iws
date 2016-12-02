@@ -1,0 +1,118 @@
+﻿@using EA.Iws.Core.FinancialGuarantee
+@model EA.Iws.Web.Areas.AdminExportAssessment.ViewModels.FinancialGuaranteeDecisionHistory.FinancialGuaranteeDecisionHistoryViewModel
+@{
+    ViewBag.Title = "Financial guarantee decision history";
+}
+
+<h1 class="heading-large">Financial guarantee decision history</h1>
+
+<div class="form-group">
+
+    <h2 class="heading-medium">Current financial guarantee</h2>
+
+    <table class="fg-decision">
+        <tbody>
+            <tr>
+                <th>Status</th>
+                <td>@Model.CurrentFinancialGuarantee.Status</td>
+            </tr>
+
+            <tr>
+                <th>Date decision made</th>
+                <td>
+                    @if (Model.CurrentFinancialGuarantee.DecisionDate.HasValue)
+                    {
+                        @Html.Gds().DisplayDateFor(m => m.CurrentFinancialGuarantee.DecisionDate.Value)
+                    }
+                    else
+                    {
+                        @:- -
+                }
+                </td>
+            </tr>
+            <tr>
+                <th>Is this a blanket bond?</th>
+                <td>
+                    @if (Model.CurrentFinancialGuarantee.IsBlanketBond.HasValue)
+                    {
+                        @(Model.CurrentFinancialGuarantee.IsBlanketBond.Value ? "Yes" : "No")
+                    }
+                    else
+                    {
+                        @:- -
+                }
+                </td>
+            </tr>
+            <tr>
+                <th>Reference number</th>
+                <td>
+                    @if (!string.IsNullOrWhiteSpace(Model.CurrentFinancialGuarantee.ReferenceNumber))
+                    {
+                        @Model.CurrentFinancialGuarantee.ReferenceNumber
+                    }
+                    else
+                    {
+                        @:- -
+                }
+                </td>
+            </tr>
+            <tr>
+                <th>Active loads permitted</th>
+                <td>
+                    @if (Model.CurrentFinancialGuarantee.ActiveLoadsPermitted.HasValue)
+                    {
+                        @Model.CurrentFinancialGuarantee.ActiveLoadsPermitted.Value
+                    }
+                    else
+                    {
+                        @:- -
+                    }
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+@if (Model.CurrentFinancialGuarantee.Decision == FinancialGuaranteeDecision.Approved)
+{
+    <div class="form-group">
+        @Html.ActionLink("Record a new financial guarantee", "New", "FinancialGuaranteeAssessment", null, new { @class = "button" })
+    </div>
+}
+
+<div class="form-group">
+    <h2 class="heading-medium">Financial guarantee history</h2>
+
+    <table>
+        <thead>
+        <tr>
+            <th>Decision</th>
+            <th>Date</th>
+            <th/>
+        </tr>
+        </thead>
+        <tbody>
+            @foreach (var financialGuarantee in Model.FinancialGuaranteeHistory)
+            {
+                <tr>
+                    <td>@financialGuarantee.Decision</td>
+                    <td>
+                        @if (financialGuarantee.DecisionDate.HasValue)
+                        {
+                            @Html.Gds().DisplayDate(financialGuarantee.DecisionDate.Value)
+                        }
+                        else
+                        {
+                            @:- -
+                        }
+                    </td>
+                    <td><a href="#">View details</a></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+@section menu {
+    @Html.Action("ExportNavigation", "Menu", new { area = "Admin", section = ExportNavigationSection.Assessment })
+}

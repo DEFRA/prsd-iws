@@ -1,7 +1,6 @@
-namespace EA.Iws.Core.Admin
+namespace EA.Iws.Core.FinancialGuarantee
 {
     using System;
-    using FinancialGuarantee;
 
     public class FinancialGuaranteeData
     {
@@ -24,5 +23,7 @@ namespace EA.Iws.Core.Admin
         public string ReferenceNumber { get; set; }
 
         public bool? IsBlanketBond { get; set; }
+
+        public Guid FinancialGuaranteeId { get; set; }
     }
 }

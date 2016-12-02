@@ -3,43 +3,42 @@
     using System.Linq;
     using System.Threading.Tasks;
     using Core.FinancialGuarantee;
+    using Core.Notification;
     using Domain.FinancialGuarantee;
+    using Domain.NotificationApplication;
+    using Prsd.Core.Mapper;
     using Prsd.Core.Mediator;
     using Requests.Admin.FinancialGuarantee;
 
     internal class GetCurrentFinancialGuaranteeDetailsHandler :
-        IRequestHandler<GetCurrentFinancialGuaranteeDetails, CurrentFinancialGuaranteeDetails>
+        IRequestHandler<GetCurrentFinancialGuaranteeDetails, FinancialGuaranteeData>
     {
-        private readonly IFinancialGuaranteeRepository repository;
+        private readonly IMapWithParameter<FinancialGuarantee, UKCompetentAuthority, FinancialGuaranteeData> financialGuaranteeMap;
+        private readonly IFinancialGuaranteeRepository financialGuaranteeRepository;
+        private readonly INotificationApplicationRepository notificationApplicationRepository;
 
-        public GetCurrentFinancialGuaranteeDetailsHandler(IFinancialGuaranteeRepository repository)
+        public GetCurrentFinancialGuaranteeDetailsHandler(IMapWithParameter<FinancialGuarantee, UKCompetentAuthority, FinancialGuaranteeData> financialGuaranteeMap,
+            IFinancialGuaranteeRepository financialGuaranteeRepository,
+            INotificationApplicationRepository notificationApplicationRepository)
         {
-            this.repository = repository;
+            this.financialGuaranteeMap = financialGuaranteeMap;
+            this.financialGuaranteeRepository = financialGuaranteeRepository;
+            this.notificationApplicationRepository = notificationApplicationRepository;
         }
 
-        public async Task<CurrentFinancialGuaranteeDetails> HandleAsync(GetCurrentFinancialGuaranteeDetails message)
+        public async Task<FinancialGuaranteeData> HandleAsync(GetCurrentFinancialGuaranteeDetails message)
         {
-            var financialGuaranteeCollection = await repository.GetByNotificationId(message.NotificationId);
+            var financialGuaranteeCollection = await financialGuaranteeRepository.GetByNotificationId(message.NotificationId);
 
             if (!financialGuaranteeCollection.FinancialGuarantees.Any())
             {
-                return new CurrentFinancialGuaranteeDetails
-                {
-                    NotificationId = financialGuaranteeCollection.NotificationId
-                };
+                return new FinancialGuaranteeData();
             }
 
             var financialGuarantee = financialGuaranteeCollection.GetLatestFinancialGuarantee();
+            var authority = (await notificationApplicationRepository.GetById(message.NotificationId)).CompetentAuthority;
 
-            return new CurrentFinancialGuaranteeDetails
-            {
-                FinancialGuaranteeId = financialGuarantee.Id,
-                NotificationId = financialGuaranteeCollection.NotificationId,
-                ReceivedDate = financialGuarantee.ReceivedDate,
-                CompletedDate = financialGuarantee.CompletedDate,
-                Decision = financialGuarantee.Decision,
-                Status = financialGuarantee.Status
-            };
+            return financialGuaranteeMap.Map(financialGuarantee, authority);
         }
     }
 }
