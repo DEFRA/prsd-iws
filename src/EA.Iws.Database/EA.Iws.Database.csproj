@@ -120,6 +120,7 @@
     <Content Include="scripts\Update\0002-CI\Sprint4\20161201-122100-change-date-to-date-time-offset-in-number-of-shipments-history.sql" />
     <Content Include="scripts\Update\0002-CI\Sprint4\20161130-161300-add-fg-decision.sql" />
     <Content Include="scripts\Update\0002-CI\Sprint4\20161202-140600-add-superseded-fg-status.sql" />
+    <Content Include="scripts\Update\0002-CI\Sprint4\20161202-165700-remove-non-received-fgs.sql" />
     <Content Include="scripts\Update\placeholder.txt" />
     <Content Include="scripts\Update\0001-Release1\Sprint10\20150625-103000-add-us-competent-authority.sql" />
     <Content Include="scripts\Update\0001-Release1\Sprint10\20150626-163000-link-waste-code-info-to-notification.sql" />
