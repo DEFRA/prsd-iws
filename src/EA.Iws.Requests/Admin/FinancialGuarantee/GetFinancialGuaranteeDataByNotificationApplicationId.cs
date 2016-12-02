@@ -1,7 +1,6 @@
 ﻿namespace EA.Iws.Requests.Admin.FinancialGuarantee
 {
     using System;
-    using Core.Admin;
     using Core.Authorization;
     using Core.Authorization.Permissions;
     using Core.FinancialGuarantee;
