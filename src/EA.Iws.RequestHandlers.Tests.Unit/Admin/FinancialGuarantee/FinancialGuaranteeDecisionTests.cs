@@ -37,10 +37,6 @@ namespace EA.Iws.RequestHandlers.Tests.Unit.Admin.FinancialGuarantee
                 EntityHelper.SetEntityId(this, financialGuaranteeId);
             }
 
-            public bool ApproveCalled { get; private set; }
-
-            public bool ApproveThrows { get; set; }
-
             public bool RejectThrows { get; set; }
 
             public bool RefuseCalled { get; set; }
@@ -48,6 +44,12 @@ namespace EA.Iws.RequestHandlers.Tests.Unit.Admin.FinancialGuarantee
             public bool RefuseThrows { get; set; }
 
             public bool ReleaseCalled { get; set; }
+
+            public new DateTime? CompletedDate
+            {
+                get { return base.CompletedDate; }
+                set { ObjectInstantiator<FinancialGuarantee>.SetProperty(x => x.CompletedDate, value, this); }
+            }
 
             public override void Refuse(DateTime decisionDate, string refusalReason)
             {
@@ -71,6 +73,11 @@ namespace EA.Iws.RequestHandlers.Tests.Unit.Admin.FinancialGuarantee
                 }
 
                 Status = FinancialGuaranteeStatus.Released;
+            }
+
+            public void SetStatus(FinancialGuaranteeStatus status)
+            {
+                Status = status;
             }
         }
     }

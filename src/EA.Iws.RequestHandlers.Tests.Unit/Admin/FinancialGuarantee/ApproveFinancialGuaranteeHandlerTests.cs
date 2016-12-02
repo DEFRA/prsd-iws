@@ -2,6 +2,7 @@
 {
     using System;
     using System.Threading.Tasks;
+    using Core.FinancialGuarantee;
     using Domain.FinancialGuarantee;
     using FakeItEasy;
     using RequestHandlers.Admin.FinancialGuarantee;
@@ -26,6 +27,8 @@
 
             var financialGuaranteeCollection = new TestFinancialGuaranteeCollection(ApplicationCompletedId);
             financialGuarantee = new TestFinancialGuarantee(FinancialGuaranteeId);
+            financialGuarantee.SetStatus(FinancialGuaranteeStatus.ApplicationComplete);
+            financialGuarantee.CompletedDate = FirstDate;
             financialGuaranteeCollection.AddExistingFinancialGuarantee(financialGuarantee);
 
             A.CallTo(() => repository.GetByNotificationId(ApplicationCompletedId)).Returns(financialGuaranteeCollection);
@@ -51,35 +54,14 @@
                 Assert.ThrowsAsync<InvalidOperationException>(
                     () =>
                         handler.HandleAsync(new ApproveFinancialGuarantee(Guid.Empty, FinancialGuaranteeId, FirstDate, BlanketBondReference, AnyInt, true)));
-
-            Assert.False(financialGuarantee.ApproveCalled);
         }
 
         [Fact]
         public async Task Saves()
         {
-            await
-                handler.HandleAsync(approveFinancialGuarantee);
+            await handler.HandleAsync(approveFinancialGuarantee);
 
             Assert.Equal(1, ((TestIwsContext)context).SaveChangesCount);
-        }
-
-        [Fact]
-        public async Task CallsApprove()
-        {
-            await
-                handler.HandleAsync(approveFinancialGuarantee);
-
-            Assert.True(financialGuarantee.ApproveCalled);
-        }
-
-        [Fact]
-        public async Task ApproveThrows_Propagates()
-        {
-            financialGuarantee.ApproveThrows = true;
-
-            await
-                Assert.ThrowsAsync<InvalidOperationException>(() => handler.HandleAsync(approveFinancialGuarantee));
         }
     }
 }
