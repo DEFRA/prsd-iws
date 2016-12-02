@@ -38,6 +38,13 @@
 
 </div>
 
+@if (Model.Status == FinancialGuaranteeStatus.ApplicationReceived)
+{
+    <div class="form-group">
+        <a href="#" class="button" disabled="disabled">Make a decision</a>
+    </div>
+}
+
 @if (Model.Status == FinancialGuaranteeStatus.ApplicationComplete)
 {
     <div class="form-group">
