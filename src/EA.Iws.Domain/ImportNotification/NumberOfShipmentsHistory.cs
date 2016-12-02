@@ -25,6 +25,6 @@
 
         public int NumberOfShipments { get; private set; }
 
-        public DateTime DateChanged { get; private set; }
+        public DateTimeOffset DateChanged { get; private set; }
     }
 }

@@ -25,13 +25,13 @@
         public async Task<ActionResult> Index(Guid id)
         {
             var details = await mediator.SendAsync(new GetSummary(id));
-            var showLink = Task.Run(() => authorizationService.AuthorizeActivity(typeof(GetOriginalNumberOfShipments))).Result;
+            var authorised = Task.Run(() => authorizationService.AuthorizeActivity(typeof(GetOriginalNumberOfShipments))).Result;
 
             var model = new SummaryTableContainerViewModel
             {
                 Details = details,
                 ShowChangeLinks = details.Status == ImportNotificationStatus.NotificationReceived,
-                ShowChangeShipmentNumberLink = showLink
+                ShowChangeShipmentNumberLink = authorised && details.Status == ImportNotificationStatus.Consented
             };
 
             return View(model);

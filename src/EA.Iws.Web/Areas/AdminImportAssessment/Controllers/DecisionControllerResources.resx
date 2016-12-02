@@ -118,24 +118,36 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ConsentedNotBeforeAcknowledged" xml:space="preserve">
-    <value>The 'decision made' date cannot be before the 'acknowledged on' date. Please enter a different date.</value>
+    <value>The decision made date cannot be before the acknowledged on date</value>
   </data>
   <data name="ConsentedNotInFuture" xml:space="preserve">
-    <value>The 'decision made' date cannot be in the future. Please enter a different date.</value>
+    <value>The decision made date cannot be in the future</value>
+  </data>
+  <data name="ConsentWithdrawnNotBeforeConsented" xml:space="preserve">
+    <value>The decision made date cannot be before the consented date</value>
+  </data>
+  <data name="ConsentWithdrawnNotInFuture" xml:space="preserve">
+    <value>The decision made date cannot be in the future</value>
   </data>
   <data name="ValidFromNotBeforeAcknowledged" xml:space="preserve">
-    <value>The 'valid from' date cannot be before the 'acknowledged on' date. Please enter a different date.</value>
+    <value>The valid from date cannot be before the acknowledged on date</value>
   </data>
   <data name="ValidFromNotInFuture" xml:space="preserve">
-    <value>The 'valid from' date cannot be in the future. Please enter a different date.</value>
+    <value>The valid from date cannot be in the future</value>
   </data>
   <data name="ValidFromNotPreconsented" xml:space="preserve">
-    <value>This 'valid to' date cannot be more than one calendar year away from the 'valid from' date. Please enter a different date.</value>
+    <value>This valid to date cannot be more than one calendar year away from the valid from date</value>
   </data>
   <data name="ValidFromPreconsented" xml:space="preserve">
-    <value>This 'valid to' date cannot be more than three calendar years away from the 'valid from' date. Please enter a different date.</value>
+    <value>This valid to date cannot be more than three calendar years away from the valid from date</value>
   </data>
   <data name="ValidToMustBeInFuture" xml:space="preserve">
-    <value>The 'valid to' date cannot be in the past or include today’s date. Please enter the correct future date.</value>
+    <value>The valid to date cannot be in the past or include today’s date</value>
+  </data>
+  <data name="WithdrawNotBeforeReceived" xml:space="preserve">
+    <value>The decision made date cannot be before the notification received date</value>
+  </data>
+  <data name="WithdrawNotInFuture" xml:space="preserve">
+    <value>The decision made date cannot be in the future</value>
   </data>
 </root>

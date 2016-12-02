@@ -1,0 +1,65 @@
+﻿@using Resource = EA.Iws.Web.Areas.ImportNotification.Views.NumberOfShipments.ConfirmResources
+@model EA.Iws.Web.Areas.ImportNotification.ViewModels.NumberOfShipments.ConfirmViewModel
+
+@{
+    ViewBag.Title = Resource.Title;
+}
+
+<div class="grid-row">
+    <div class="column-two-thirds">
+        <h1 class="heading-large">
+            @(Model.IsIncrease ? Resource.Increase : Resource.Decrease)
+            @Resource.Heading
+        </h1>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            @Html.Gds().ValidationSummary()
+            @Html.HiddenFor(x => x.NotificationId)
+            @Html.HiddenFor(x => x.CurrentCharge)
+            @Html.HiddenFor(x => x.NewCharge)
+            @Html.HiddenFor(x => x.NewNumberOfShipments)
+            @Html.HiddenFor(x => x.OldNumberOfShipments)
+
+            <div class="form-group">
+
+                <div class="form-group">
+                    @(Model.IsIncrease ? Resource.IncreaseTo : Resource.DecreaseTo)
+                    @Model.OldNumberOfShipments to @Model.NewNumberOfShipments
+                </div>
+
+
+                @if (Model.IncreaseInCharge > 0)
+                {
+                    <div class="form-group">
+                        <div class="panel panel-border-wide">
+                            <p>@Html.Raw(string.Format(Resource.AdditionalCharge, Model.IncreaseInCharge.ToString("C")))</p>
+                            <p>@Resource.NeedToPay</p>
+                        </div>
+                    </div>
+                }
+
+                <div class="form-group">
+                    @if (Model.IsIncrease)
+                    {
+                        @Html.Raw(string.Format(Resource.GuidanceNoIncrease, Model.NewNumberOfShipments))
+                    }
+                    else
+                    {
+                        @Html.Raw(string.Format(Resource.GuidanceDecrease, Model.NewNumberOfShipments))
+                    }
+                </div>
+
+            </div>
+
+            <div class="form-group">
+                @Html.ActionLink(Resource.CancelButtonText, "Index", "Home")
+            </div>
+
+            <button type="submit" class="button">@Constants.ContinueButtonText</button>
+        }
+
+
+    </div>
+</div>

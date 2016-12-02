@@ -14,5 +14,7 @@
         Task<ImportNotificationStatus> GetStatusByNotification(Guid notificationId);
 
         void Add(ImportNotificationAssessment assessment);
+
+        Task<DateTime?> GetConsentedDate(Guid notificationId);
     }
 }

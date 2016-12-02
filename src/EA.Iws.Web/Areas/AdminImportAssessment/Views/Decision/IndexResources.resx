@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="ConsentWithdrawnReasonGuidance" xml:space="preserve">
+    <value>This reason must include a reference to the exact WSR article under which the objection was made</value>
+  </data>
   <data name="DecisionHeading" xml:space="preserve">
     <value>Decision</value>
   </data>
@@ -131,6 +134,9 @@
   </data>
   <data name="NoAvailableDecisionsParagraphTwo" xml:space="preserve">
     <value>No further decisions are available.</value>
+  </data>
+  <data name="ObjectReasonGuidance" xml:space="preserve">
+    <value>The reason must include a reference to the exact WSR article under which the objection was made</value>
   </data>
   <data name="SingleDateWarning" xml:space="preserve">
     <value>Please note: you can't change this date once you've committed it to the system. Please make sure that you enter the right date.</value>

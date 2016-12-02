@@ -25,10 +25,10 @@
         public async Task<ActionResult> Index(Guid id)
         {
             var result = await mediator.SendAsync(new GetNotificationOverviewInternal(id));
-            var showLink = Task.Run(() => authorizationService.AuthorizeActivity(typeof(GetOriginalNumberOfShipments))).Result;
+            var authorised = Task.Run(() => authorizationService.AuthorizeActivity(typeof(GetOriginalNumberOfShipments))).Result;
 
             var model = new NotificationOverviewViewModel(result);
-            model.AmountsAndDatesViewModel.ShowChangeShipmentNumberLink = showLink;
+            model.AmountsAndDatesViewModel.CanShowChangeShipmentNumberLink = authorised;
 
             return View(model);
         }

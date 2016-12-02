@@ -16,7 +16,7 @@
                     NotificaitonId = source.NotificationId,
                     HasHistoryData = true,
                     NumberOfShipments = source.NumberOfShipments,
-                    DateChanged = source.DateChanged
+                    DateChanged = source.DateChanged.DateTime
                 };
             }
             else

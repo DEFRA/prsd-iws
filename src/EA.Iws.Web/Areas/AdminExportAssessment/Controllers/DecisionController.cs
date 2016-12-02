@@ -61,7 +61,14 @@
                     }
                     break;
                 case DecisionType.Withdraw:
-                    await PostWithdrawn(model);
+                    if (await WithdrawDateIsValid(model))
+                    {
+                        await PostWithdrawn(model);
+                    }
+                    else
+                    {
+                        return View(model);
+                    }
                     break;
                 case DecisionType.Object:
                     await PostObjection(model);
@@ -108,6 +115,26 @@
 
             var request = new ObjectNotificationApplication(model.NotificationId, date, model.ReasonForObjection);
             await mediator.SendAsync(request);
+        }
+
+        private async Task<bool> WithdrawDateIsValid(NotificationAssessmentDecisionViewModel model)
+        {
+            bool areValid = true;
+            var data = await mediator.SendAsync(new GetNotificationAssessmentDecisionData(model.NotificationId));
+
+            if (model.WithdrawnDate.AsDateTime() > SystemTime.UtcNow)
+            {
+                ModelState.AddModelError("WithdrawnDate", DecisionControllerResources.WithdrawnNotInFuture);
+                areValid = false;
+            }
+
+            if (model.WithdrawnDate.AsDateTime() < data.NotificationReceivedDate)
+            {
+                ModelState.AddModelError("WithdrawnDate", DecisionControllerResources.WithdrawnNotBeforeReceived);
+                areValid = false;
+            }
+
+            return areValid;
         }
 
         private async Task<bool> ConsentDatesAreValid(NotificationAssessmentDecisionViewModel model)

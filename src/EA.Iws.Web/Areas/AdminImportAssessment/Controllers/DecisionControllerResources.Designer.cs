@@ -61,7 +61,7 @@ namespace EA.Iws.Web.Areas.AdminImportAssessment.Controllers {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The &apos;decision made&apos; date cannot be before the &apos;acknowledged on&apos; date. Please enter a different date..
+        ///   Looks up a localized string similar to The decision made date cannot be before the acknowledged on date.
         /// </summary>
         public static string ConsentedNotBeforeAcknowledged {
             get {
@@ -70,7 +70,7 @@ namespace EA.Iws.Web.Areas.AdminImportAssessment.Controllers {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The &apos;decision made&apos; date cannot be in the future. Please enter a different date..
+        ///   Looks up a localized string similar to The decision made date cannot be in the future.
         /// </summary>
         public static string ConsentedNotInFuture {
             get {
@@ -79,7 +79,25 @@ namespace EA.Iws.Web.Areas.AdminImportAssessment.Controllers {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The &apos;valid from&apos; date cannot be before the &apos;acknowledged on&apos; date. Please enter a different date..
+        ///   Looks up a localized string similar to The decision made date cannot be before the consented date.
+        /// </summary>
+        public static string ConsentWithdrawnNotBeforeConsented {
+            get {
+                return ResourceManager.GetString("ConsentWithdrawnNotBeforeConsented", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The decision made date cannot be in the future.
+        /// </summary>
+        public static string ConsentWithdrawnNotInFuture {
+            get {
+                return ResourceManager.GetString("ConsentWithdrawnNotInFuture", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The valid from date cannot be before the acknowledged on date.
         /// </summary>
         public static string ValidFromNotBeforeAcknowledged {
             get {
@@ -88,7 +106,7 @@ namespace EA.Iws.Web.Areas.AdminImportAssessment.Controllers {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The &apos;valid from&apos; date cannot be in the future. Please enter a different date..
+        ///   Looks up a localized string similar to The valid from date cannot be in the future.
         /// </summary>
         public static string ValidFromNotInFuture {
             get {
@@ -97,7 +115,7 @@ namespace EA.Iws.Web.Areas.AdminImportAssessment.Controllers {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This &apos;valid to&apos; date cannot be more than one calendar year away from the &apos;valid from&apos; date. Please enter a different date..
+        ///   Looks up a localized string similar to This valid to date cannot be more than one calendar year away from the valid from date.
         /// </summary>
         public static string ValidFromNotPreconsented {
             get {
@@ -106,7 +124,7 @@ namespace EA.Iws.Web.Areas.AdminImportAssessment.Controllers {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This &apos;valid to&apos; date cannot be more than three calendar years away from the &apos;valid from&apos; date. Please enter a different date..
+        ///   Looks up a localized string similar to This valid to date cannot be more than three calendar years away from the valid from date.
         /// </summary>
         public static string ValidFromPreconsented {
             get {
@@ -115,11 +133,29 @@ namespace EA.Iws.Web.Areas.AdminImportAssessment.Controllers {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The &apos;valid to&apos; date cannot be in the past or include today’s date. Please enter the correct future date..
+        ///   Looks up a localized string similar to The valid to date cannot be in the past or include today’s date.
         /// </summary>
         public static string ValidToMustBeInFuture {
             get {
                 return ResourceManager.GetString("ValidToMustBeInFuture", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The decision made date cannot be before the notification received date.
+        /// </summary>
+        public static string WithdrawNotBeforeReceived {
+            get {
+                return ResourceManager.GetString("WithdrawNotBeforeReceived", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The decision made date cannot be in the future.
+        /// </summary>
+        public static string WithdrawNotInFuture {
+            get {
+                return ResourceManager.GetString("WithdrawNotInFuture", resourceCulture);
             }
         }
     }

@@ -61,6 +61,15 @@ namespace EA.Iws.Web.Areas.AdminImportAssessment.Views.Decision {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to This reason must include a reference to the exact WSR article under which the objection was made.
+        /// </summary>
+        public static string ConsentWithdrawnReasonGuidance {
+            get {
+                return ResourceManager.GetString("ConsentWithdrawnReasonGuidance", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Decision.
         /// </summary>
         public static string DecisionHeading {
@@ -102,6 +111,15 @@ namespace EA.Iws.Web.Areas.AdminImportAssessment.Views.Decision {
         public static string NoAvailableDecisionsParagraphTwo {
             get {
                 return ResourceManager.GetString("NoAvailableDecisionsParagraphTwo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The reason must include a reference to the exact WSR article under which the objection was made.
+        /// </summary>
+        public static string ObjectReasonGuidance {
+            get {
+                return ResourceManager.GetString("ObjectReasonGuidance", resourceCulture);
             }
         }
         

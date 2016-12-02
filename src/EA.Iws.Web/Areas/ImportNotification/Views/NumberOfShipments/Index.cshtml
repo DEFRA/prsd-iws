@@ -1,1 +1,30 @@
-﻿Enter Shipment Number
+﻿@model EA.Iws.Web.Areas.ImportNotification.ViewModels.NumberOfShipments.IndexViewModel
+@using Resource = EA.Iws.Web.Areas.ImportNotification.Views.NumberOfShipments.IndexResources
+
+@{
+    ViewBag.Title = Resource.Title;
+}
+
+<div class="grid-row">
+    <div class="column-two-thirds">
+        <h1 class="heading-large">@Resource.Heading</h1>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            @Html.Gds().ValidationSummary()
+
+            <div class="form-group">
+                @Resource.Guidance
+            </div>
+
+            <div class="form-group @Html.Gds().FormGroupClass(m => m.Number)">
+                @Html.Gds().LabelFor(m => m.Number)
+                @Html.Gds().ValidationMessageFor(m => m.Number)
+                @Html.Gds().TextBoxFor(m => m.Number, new { type = "number", min = 1 })
+            </div>
+
+            <button type="submit" class="button">@Constants.ContinueButtonText</button>
+        }
+    </div>
+</div>

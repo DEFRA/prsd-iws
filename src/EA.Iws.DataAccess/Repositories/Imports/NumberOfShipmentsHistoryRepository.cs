@@ -26,5 +26,37 @@
                         .OrderBy(x => x.DateChanged)
                         .FirstOrDefaultAsync();
         }
+
+        public async Task<int> GetCurrentNumberOfShipments(Guid notificationId)
+        {
+            await authorization.EnsureAccessAsync(notificationId);
+
+            var shipmentInfo = await context.Shipments.Where(n => n.ImportNotificationId == notificationId).SingleOrDefaultAsync();
+
+            return shipmentInfo.NumberOfShipments;
+        }
+
+        public async Task<int> GetLargestNumberOfShipments(Guid notificationId)
+        {
+            await authorization.EnsureAccessAsync(notificationId);
+
+            var currentNumber = await GetCurrentNumberOfShipments(notificationId);
+
+            var largestInHistory = await context.NumberOfShipmentsHistories.Where(n => n.ImportNotificationId == notificationId)
+                                        .OrderByDescending(x => x.NumberOfShipments)
+                                        .FirstOrDefaultAsync();
+
+            if (largestInHistory != null && largestInHistory.NumberOfShipments > currentNumber)
+            {
+                return largestInHistory.NumberOfShipments;
+            }
+
+            return currentNumber;
+        }
+
+        public void Add(NumberOfShipmentsHistory history)
+        {
+            context.NumberOfShipmentsHistories.Add(history);
+        }
     }
 }

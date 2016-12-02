@@ -58,6 +58,11 @@
     <Content Include="scripts\Everytime\Views\0019-Reports-RdfSrfWood.sql" />
     <Content Include="scripts\Everytime\Views\0020-Reports-DataImportNotifications.sql" />
     <Content Include="scripts\Everytime\Views\0021-Search-Notifications.sql" />
+    <Content Include="scripts\TestData\20161128-105400-import-shipment-data.sql" />
+    <Content Include="scripts\TestData\20161128-120500-export-shipment-data.sql" />
+    <Content Include="scripts\TestData\20161128-131900-add-multiple-export-consented.sql" />
+    <Content Include="scripts\TestData\20161128-144200-add-multiple-import-consented.sql" />
+    <Content Include="scripts\TestData\20161130-081000-add-multiple-export-recovery-consented.sql" />
     <Content Include="scripts\Update\0001-Release1\Sprint28\20160316-1233-fix-bank-address-typo.sql" />
     <Content Include="Readme.txt" />
     <Content Include="scripts\AliaSQL.exe" />
@@ -112,6 +117,7 @@
     <Content Include="scripts\Update\0002-CI\Sprint4\20161121-172000-delete-fg-valid-from-to-dates.sql" />
     <Content Include="scripts\Update\0002-CI\Sprint4\20161121-153500-add-number-of-shipments-history-tables.sql" />
     <Content Include="scripts\Update\0002-CI\Sprint4\20161124-101700-financial-guarantee-collection.sql" />
+    <Content Include="scripts\Update\0002-CI\Sprint4\20161201-122100-change-date-to-date-time-offset-in-number-of-shipments-history.sql" />
     <Content Include="scripts\Update\0002-CI\Sprint4\20161130-161300-add-fg-decision.sql" />
     <Content Include="scripts\Update\0002-CI\Sprint4\20161202-140600-add-superseded-fg-status.sql" />
     <Content Include="scripts\Update\placeholder.txt" />
