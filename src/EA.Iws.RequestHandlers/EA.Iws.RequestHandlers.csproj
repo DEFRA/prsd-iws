@@ -182,6 +182,7 @@
     <Compile Include="ImportNotificationAssessment\FinancialGuarantee\SetCompletedDateHandler.cs" />
     <Compile Include="ImportNotificationAssessment\FinancialGuarantee\SetReceivedAndCompletedDateHandler.cs" />
     <Compile Include="ImportNotificationAssessment\GetImportNotificationAssessmentDecisionDataHandler.cs" />
+    <Compile Include="ImportNotificationAssessment\GetImportNotificationConsentedDateHandler.cs" />
     <Compile Include="ImportNotificationAssessment\GetImportNotificationConsultationHandler.cs" />
     <Compile Include="ImportNotificationAssessment\GetKeyDatesHandler.cs" />
     <Compile Include="ImportNotificationAssessment\ObjectToImportNotificationHandler.cs" />

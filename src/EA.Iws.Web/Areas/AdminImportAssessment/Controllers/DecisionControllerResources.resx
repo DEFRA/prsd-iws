@@ -123,6 +123,12 @@
   <data name="ConsentedNotInFuture" xml:space="preserve">
     <value>The decision made date cannot be in the future</value>
   </data>
+  <data name="ConsentWithdrawnNotBeforeConsented" xml:space="preserve">
+    <value>The decision made date cannot be before the consented date</value>
+  </data>
+  <data name="ConsentWithdrawnNotInFuture" xml:space="preserve">
+    <value>The decision made date cannot be in the future</value>
+  </data>
   <data name="ValidFromNotBeforeAcknowledged" xml:space="preserve">
     <value>The valid from date cannot be before the acknowledged on date</value>
   </data>

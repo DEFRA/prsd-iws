@@ -79,6 +79,24 @@ namespace EA.Iws.Web.Areas.AdminImportAssessment.Controllers {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The decision made date cannot be before the consented date.
+        /// </summary>
+        public static string ConsentWithdrawnNotBeforeConsented {
+            get {
+                return ResourceManager.GetString("ConsentWithdrawnNotBeforeConsented", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The decision made date cannot be in the future.
+        /// </summary>
+        public static string ConsentWithdrawnNotInFuture {
+            get {
+                return ResourceManager.GetString("ConsentWithdrawnNotInFuture", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The valid from date cannot be before the acknowledged on date.
         /// </summary>
         public static string ValidFromNotBeforeAcknowledged {

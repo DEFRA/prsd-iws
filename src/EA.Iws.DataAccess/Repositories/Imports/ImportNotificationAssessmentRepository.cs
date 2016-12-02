@@ -2,6 +2,7 @@
 {
     using System;
     using System.Data.Entity;
+    using System.Linq;
     using System.Threading.Tasks;
     using Core.ImportNotificationAssessment;
     using Domain.ImportNotification;
@@ -35,6 +36,13 @@
         public void Add(ImportNotificationAssessment assessment)
         {
             context.ImportNotificationAssessments.Add(assessment);
+        }
+
+        public async Task<DateTime?> GetConsentedDate(Guid notificationId)
+        {
+            var assessment = await GetByNotification(notificationId);
+
+            return assessment.Dates.ConsentedDate;
         }
 
         public async Task<ImportNotificationStatus> GetStatusByNotification(Guid notificationId)
