@@ -66,11 +66,19 @@
         }
 
         [Fact]
-        public void DecisionIsReleased()
+        public void CompletedFinancialGuaranteeDecisionIsReleased()
         {
-            RefusedFinancialGuarantee.Release(AfterCompletionDate);
+            CompletedFinancialGuarantee.Release(AfterCompletionDate);
 
-            Assert.Equal(FinancialGuaranteeDecision.Released, RefusedFinancialGuarantee.Decision);
+            Assert.Equal(FinancialGuaranteeDecision.Released, CompletedFinancialGuarantee.Decision);
+        }
+
+        [Fact]
+        public void ReleaseApprovedRetainsDecision()
+        {
+            ApprovedFinancialGuarantee.Release(AfterCompletionDate);
+
+            Assert.Equal(FinancialGuaranteeDecision.Approved, ApprovedFinancialGuarantee.Decision);
         }
     }
 }

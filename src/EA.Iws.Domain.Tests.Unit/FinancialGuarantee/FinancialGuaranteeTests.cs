@@ -38,12 +38,14 @@
 
             ApprovedFinancialGuarantee = FinancialGuaranteeCollection.AddFinancialGuarantee(AnyDate);
             ObjectInstantiator<FinancialGuarantee>.SetProperty(fg => fg.Status, FinancialGuaranteeStatus.Approved, ApprovedFinancialGuarantee);
+            ObjectInstantiator<FinancialGuarantee>.SetProperty(fg => fg.Decision, FinancialGuaranteeDecision.Approved, ApprovedFinancialGuarantee);
             ObjectInstantiator<FinancialGuarantee>.SetProperty(fg => fg.ReceivedDate, AnyDate, ApprovedFinancialGuarantee);
             ObjectInstantiator<FinancialGuarantee>.SetProperty(fg => fg.CompletedDate, CompletedDate, ApprovedFinancialGuarantee);
             ObjectInstantiator<FinancialGuarantee>.SetProperty(fg => fg.DecisionDate, AfterCompletionDate, ApprovedFinancialGuarantee);
 
             RefusedFinancialGuarantee = FinancialGuaranteeCollection.AddFinancialGuarantee(AnyDate);
             ObjectInstantiator<FinancialGuarantee>.SetProperty(fg => fg.Status, FinancialGuaranteeStatus.Refused, RefusedFinancialGuarantee);
+            ObjectInstantiator<FinancialGuarantee>.SetProperty(fg => fg.Decision, FinancialGuaranteeDecision.Refused, RefusedFinancialGuarantee);
             ObjectInstantiator<FinancialGuarantee>.SetProperty(fg => fg.ReceivedDate, AnyDate, RefusedFinancialGuarantee);
             ObjectInstantiator<FinancialGuarantee>.SetProperty(fg => fg.CompletedDate, CompletedDate, RefusedFinancialGuarantee);
             ObjectInstantiator<FinancialGuarantee>.SetProperty(fg => fg.DecisionDate, AfterCompletionDate, RefusedFinancialGuarantee);

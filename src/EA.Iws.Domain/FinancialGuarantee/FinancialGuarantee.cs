@@ -203,7 +203,11 @@
         private void OnReleased(DateTime releasedDate)
         {
             ReleasedDate = releasedDate;
-            Decision = FinancialGuaranteeDecision.Released;
+
+            if (Decision == FinancialGuaranteeDecision.None)
+            {
+                Decision = FinancialGuaranteeDecision.Released;
+            }
         }
 
         internal void Supersede()
