@@ -38,7 +38,7 @@
 
             return financialGuaranteeCollection.FinancialGuarantees
                 .Where(fg => fg.Id != latestFinancialGuaranteeId)
-                .OrderByDescending(fg => fg.DecisionDate)
+                .OrderByDescending(fg => fg.CreatedDate)
                 .Select(fg => financialGuaranteeMap.Map(fg, authority))
                 .ToArray();
         }
