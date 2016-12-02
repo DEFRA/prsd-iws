@@ -4,11 +4,12 @@
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Core.FinancialGuarantee;
+    using Infrastructure.Authorization;
     using Prsd.Core.Mediator;
     using Requests.Admin.FinancialGuarantee;
     using ViewModels.FinancialGuaranteeAssessment;
 
-    [Authorize(Roles = "internal")]
+    [AuthorizeActivity(typeof(GetFinancialGuaranteeDataByNotificationApplicationId))]
     public class FinancialGuaranteeAssessmentController : Controller
     {
         private readonly IMediator mediator;

@@ -1,0 +1,82 @@
+﻿@model EA.Iws.Core.FinancialGuarantee.FinancialGuaranteeData
+@{
+    ViewBag.Title = "Financial guarantee details";
+}
+
+<h1 class="heading-large">Financial guarantee details</h1>
+
+<div class="form-group">
+
+    <table class="fg-decision">
+        <tbody>
+        <tr>
+            <th>Status</th>
+            <td>@Model.Status</td>
+        </tr>
+
+        <tr>
+            <th>Decision</th>
+            <td>@Model.Decision</td>
+        </tr>
+
+        <tr>
+            <th>Date decision made</th>
+            <td>
+                @if (Model.DecisionDate.HasValue)
+                {
+                    @Html.Gds().DisplayDateFor(m => m.DecisionDate.Value)
+                }
+                else
+                {
+                    @:- -
+                }
+            </td>
+        </tr>
+        <tr>
+            <th>Is this a blanket bond?</th>
+            <td>
+                @if (Model.IsBlanketBond.HasValue)
+                {
+                    @(Model.IsBlanketBond.Value ? "Yes" : "No")
+                }
+                else
+                {
+                    @:- -
+                }
+            </td>
+        </tr>
+        <tr>
+            <th>Reference number</th>
+            <td>
+                @if (!string.IsNullOrWhiteSpace(Model.ReferenceNumber))
+                {
+                    @Model.ReferenceNumber
+                }
+                else
+                {
+                    @:- -
+                }
+            </td>
+        </tr>
+        <tr>
+            <th>Active loads permitted</th>
+            <td>
+                @if (Model.ActiveLoadsPermitted.HasValue)
+                {
+                    @Model.ActiveLoadsPermitted.Value
+                }
+                else
+                {
+                    @:- -
+                }
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+@Html.ActionLink("Back to decision history", "Index", "FinancialGuaranteeDecisionHistory")
+
+@section menu {
+    @Html.Action("ExportNavigation", "Menu", new { area = "Admin", section = ExportNavigationSection.Assessment })
+}

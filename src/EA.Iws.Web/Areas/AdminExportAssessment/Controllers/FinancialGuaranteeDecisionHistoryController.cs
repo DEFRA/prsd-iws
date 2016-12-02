@@ -3,11 +3,12 @@
     using System;
     using System.Threading.Tasks;
     using System.Web.Mvc;
+    using Infrastructure.Authorization;
     using Prsd.Core.Mediator;
     using Requests.Admin.FinancialGuarantee;
     using ViewModels.FinancialGuaranteeDecisionHistory;
 
-    [Authorize(Roles = "internal")]
+    [AuthorizeActivity(typeof(GetFinancialGuaranteeHistory))]
     public class FinancialGuaranteeDecisionHistoryController : Controller
     {
         private readonly IMediator mediator;
