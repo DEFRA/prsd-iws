@@ -6,7 +6,7 @@
     @if (User.Identity.IsAuthenticated)
     {
         <aside class="column-third">
-            @Html.Action("HomeNavigation", "Menu", new { area = "Admin" })
+            @Html.Action("HomeNavigation", "Menu", new { area = "Admin", section = AdminHomeNavigationSection.Notifications })
         </aside>
     }
     <div class="column-two-thirds">
