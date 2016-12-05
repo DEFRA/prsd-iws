@@ -13,12 +13,12 @@ AS
         NULL AS ImportStatus,
         ND.NotificationReceivedDate,
         'Export' AS [ImportOrExport],
-        WCI.CodeType,
-        WC.Code,
+        WC_Basel.Code AS BaselOecdCode,
         CASE 
-            WHEN WCI.CodeType IN (1, 2) AND WCI.IsNotApplicable = 1 THEN 1
+            WHEN WCI_Basel.IsNotApplicable = 1 THEN 1
             ELSE 0 END
         AS BaselOecdCodeNotListed,
+        WC_Ewc.Code AS EwcCode,
         P.Name AS ProducerName,
         I.Name AS ImporterName,
         E.Name AS ExporterName,
@@ -41,9 +41,12 @@ AS
         [Notification].[Notification] N
         INNER JOIN [Notification].[NotificationAssessment] NA ON N.Id = NA.NotificationApplicationId
             AND NA.[Status] <> 1
-        INNER JOIN [Notification].[WasteCodeInfo] WCI 
-            LEFT JOIN [Lookup].[WasteCode] WC ON WCI.WasteCodeId = WC.Id
-        ON N.Id = WCI.NotificationId
+        INNER JOIN [Notification].[WasteCodeInfo] WCI_Basel
+            LEFT JOIN [Lookup].[WasteCode] WC_Basel ON WCI_Basel.WasteCodeId = WC_Basel.Id
+        ON N.Id = WCI_Basel.NotificationId AND WCI_Basel.CodeType IN (1, 2)
+        INNER JOIN [Notification].[WasteCodeInfo] WCI_Ewc
+            LEFT JOIN [Lookup].[WasteCode] WC_Ewc ON WCI_Ewc.WasteCodeId = WC_Ewc.Id
+        ON N.Id = WCI_Ewc.NotificationId AND WCI_Ewc.CodeType = 3
         INNER JOIN [Notification].[ProducerCollection] PC
             INNER JOIN [Notification].[Producer] P ON PC.Id = P.ProducerCollectionId
         ON N.Id = PC.NotificationId
@@ -75,9 +78,9 @@ AS
         NA.Status AS ImportStatus,
         ND.NotificationReceivedDate,
         'Import' AS [ImportOrExport],
-        WC.CodeType,
-        WC.Code,
-        WT.BaselOecdCodeNotListed,
+        WC_Basel.Code AS BaselOecdCode,
+        WT_Basel.BaselOecdCodeNotListed,
+        WC_Ewc.Code AS EwcCode,
         P.Name AS ProducerName,
         I.Name AS ImporterName,
         E.Name AS ExporterName,
@@ -99,10 +102,16 @@ AS
         CON.[To] AS ConsentValidTo
     FROM
         [ImportNotification].[Notification] AS N
-        INNER JOIN [ImportNotification].[WasteType] WT
-            INNER JOIN [ImportNotification].[WasteCode] WCI ON WCI.WasteTypeId = WT.Id 
-            INNER JOIN [Lookup].[WasteCode] WC ON WCI.WasteCodeId = WC.Id
-        ON N.Id = WT.ImportNotificationId
+        INNER JOIN [ImportNotification].[WasteType] WT_Basel
+            LEFT JOIN [ImportNotification].[WasteCode] WCI_Basel 
+                INNER JOIN [Lookup].[WasteCode] WC_Basel ON WCI_Basel.WasteCodeId = WC_Basel.Id AND WC_Basel.CodeType IN (1, 2)
+            ON WCI_Basel.WasteTypeId = WT_Basel.Id 
+        ON N.Id = WT_Basel.ImportNotificationId
+        INNER JOIN [ImportNotification].[WasteType] WT_Ewc
+            LEFT JOIN [ImportNotification].[WasteCode] WCI_Ewc 
+                INNER JOIN [Lookup].[WasteCode] WC_Ewc ON WCI_Ewc.WasteCodeId = WC_Ewc.Id AND WC_Ewc.CodeType = 3
+            ON WCI_Ewc.WasteTypeId = WT_Ewc.Id             
+        ON N.Id = WT_Ewc.ImportNotificationId
         INNER JOIN [ImportNotification].[Producer] P ON N.Id = P.ImportNotificationId
         INNER JOIN [ImportNotification].[Importer] I ON N.Id = I.ImportNotificationId
         INNER JOIN [ImportNotification].[TransportRoute] TR
