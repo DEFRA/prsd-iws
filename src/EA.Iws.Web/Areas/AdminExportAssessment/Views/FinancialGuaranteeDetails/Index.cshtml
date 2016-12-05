@@ -1,26 +1,36 @@
 ﻿@model EA.Iws.Core.FinancialGuarantee.FinancialGuaranteeData
+@using EA.Iws.Core.FinancialGuarantee
+@using Resources = EA.Iws.Web.Areas.AdminExportAssessment.Views.FinancialGuaranteeDetails.FinancialGuaranteeDetailsResources
 @{
-    ViewBag.Title = "Financial guarantee details";
+    ViewBag.Title = Resources.DetailsTitle;
 }
 
-<h1 class="heading-large">Financial guarantee details</h1>
+<h1 class="heading-large">@Resources.DetailsTitle</h1>
 
 <div class="form-group">
 
     <table class="fg-decision">
         <tbody>
         <tr>
-            <th>Status</th>
+            <th>@Resources.Status</th>
             <td>@Model.Status</td>
         </tr>
 
         <tr>
-            <th>Decision</th>
+            <th>@Resources.Decision</th>
             <td>@Model.Decision</td>
         </tr>
 
+        @if (Model.Decision == FinancialGuaranteeDecision.Refused)
+        {
+            <tr>
+                <th>@Resources.RefusalReason</th>
+                <td>@Model.RefusalReason</td>
+            </tr>
+        }
+
         <tr>
-            <th>Date decision made</th>
+            <th>@Resources.DecisionDate</th>
             <td>
                 @if (Model.DecisionDate.HasValue)
                 {
@@ -33,11 +43,11 @@
             </td>
         </tr>
         <tr>
-            <th>Is this a blanket bond?</th>
+            <th>@Resources.IsBlanketBond</th>
             <td>
                 @if (Model.IsBlanketBond.HasValue)
                 {
-                    @(Model.IsBlanketBond.Value ? "Yes" : "No")
+                    @(Model.IsBlanketBond.Value ? Resources.Yes : Resources.No)
                 }
                 else
                 {
@@ -46,7 +56,7 @@
             </td>
         </tr>
         <tr>
-            <th>Reference number</th>
+            <th>@Resources.ReferenceNumber</th>
             <td>
                 @if (!string.IsNullOrWhiteSpace(Model.ReferenceNumber))
                 {
@@ -59,7 +69,7 @@
             </td>
         </tr>
         <tr>
-            <th>Active loads permitted</th>
+            <th>@Resources.ActiveLoadsPermitted</th>
             <td>
                 @if (Model.ActiveLoadsPermitted.HasValue)
                 {
@@ -75,7 +85,7 @@
     </table>
 </div>
 
-@Html.ActionLink("Back to decision history", "Index", "FinancialGuaranteeDecisionHistory")
+@Html.ActionLink(Resources.BackToHistoryLink, "Index", "FinancialGuaranteeDecisionHistory")
 
 @section menu {
     @Html.Action("ExportNavigation", "Menu", new { area = "Admin", section = ExportNavigationSection.Assessment })

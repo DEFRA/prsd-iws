@@ -1151,6 +1151,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>FinancialGuaranteeDecisionResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Areas\AdminExportAssessment\Views\FinancialGuaranteeDetails\FinancialGuaranteeDetailsResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FinancialGuaranteeDetailsResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Areas\AdminExportAssessment\Views\KeyDatesOverride\IndexResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -3079,6 +3084,10 @@
     <EmbeddedResource Include="Areas\AdminExportAssessment\Views\FinancialGuaranteeDecision\FinancialGuaranteeDecisionResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>FinancialGuaranteeDecisionResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\AdminExportAssessment\Views\FinancialGuaranteeDetails\FinancialGuaranteeDetailsResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>FinancialGuaranteeDetailsResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\AdminExportAssessment\Views\KeyDatesOverride\IndexResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
