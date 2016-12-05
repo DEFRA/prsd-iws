@@ -40,7 +40,8 @@ AS
 		N.[UnitsId] AS [IntendedQuantityUnitId],
         NA.[ConsentFrom],
         NA.[ConsentTo],
-        N.[LocalArea]
+        N.[LocalArea],
+		ND.[NotificationReceivedDate]
     FROM
         [Reports].[Notification] N
         INNER JOIN [Reports].[NotificationOrganisations] O ON N.Id = O.Id
@@ -48,5 +49,6 @@ AS
         INNER JOIN [Reports].[WasteType] WT ON N.Id = WT.NotificationId
         INNER JOIN [Reports].[TransportRoute] TR ON N.Id = TR.NotificationId
         INNER JOIN [Reports].[OperationCodesConcat] OP ON N.Id = OP.NotificationId
+		INNER JOIN	[Notification].[NotificationDates] AS ND ON	ND.[NotificationAssessmentId] = NA.Id
 
 GO
