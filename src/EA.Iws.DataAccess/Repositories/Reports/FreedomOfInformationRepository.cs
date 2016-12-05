@@ -20,7 +20,7 @@
         }
 
         public async Task<IEnumerable<FreedomOfInformationData>> Get(DateTime from, DateTime to,
-            ChemicalComposition chemicalComposition, UKCompetentAuthority competentAuthority)
+            ChemicalComposition chemicalComposition, UKCompetentAuthority competentAuthority, FoiReportDates dateType)
         {
             return await context.Database.SqlQuery<FreedomOfInformationData>(
                 @"SELECT 
@@ -50,6 +50,10 @@
                             ) 
                             FROM [Reports].[Movements]
                             WHERE Id = NotificationId
+                                AND (@dateType = 'NotificationReceivedDate'
+				                     OR @dateType = 'ConsentFrom'
+				                     OR @dateType = 'ReceivedDate' and  [ReceivedDate] BETWEEN @from AND @to
+				                     OR @dateType = 'CompletedDate' and  [CompletedDate] BETWEEN @from AND @to)
                         ), 0) AS [QuantityReceived],
                     CASE WHEN [IntendedQuantityUnitId] IN (1, 2) -- Due to conversion units will only be Tonnes / Cubic Metres
                         THEN [IntendedQuantityUnit] 
@@ -66,11 +70,20 @@
                 WHERE 
                     [CompetentAuthorityId] = @competentAuthority
                     AND [ChemicalCompositionTypeId] = @chemicalComposition
-                    AND [ReceivedDate] BETWEEN @from AND @to",
+                    AND [ReceivedDate] BETWEEN @from AND @to
+                    AND (@dateType = 'NotificationReceivedDate' AND  [NotificationReceivedDate] BETWEEN @from AND @to
+				         OR @dateType = 'ConsentFrom' AND  [ConsentFrom] BETWEEN @from AND @to
+                         OR @dateType = 'ReceivedDate' AND  
+                                            EXISTS (SELECT [MovementId] FROM [Reports].[Movements]
+                                            WHERE Id = NotificationId AND [ReceivedDate] BETWEEN @from AND @to)
+				         OR @dateType = 'CompletedDate' AND  
+                                            EXISTS (SELECT [MovementId] FROM [Reports].[Movements]
+                                            WHERE Id = NotificationId AND [CompletedDate] BETWEEN @from AND @to))",
                 new SqlParameter("@from", from),
                 new SqlParameter("@to", to),
                 new SqlParameter("@chemicalComposition", (int)chemicalComposition),
-                new SqlParameter("@competentAuthority", (int)competentAuthority)).ToArrayAsync();
+                new SqlParameter("@competentAuthority", (int)competentAuthority),
+                new SqlParameter("@dateType", dateType.ToString())).ToArrayAsync();
         }
     }
 }
