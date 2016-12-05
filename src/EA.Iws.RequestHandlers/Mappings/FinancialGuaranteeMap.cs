@@ -20,7 +20,7 @@
             {
                 return new FinancialGuaranteeData
                 {
-                    Status = FinancialGuaranteeStatus.AwaitingApplication
+                    IsEmpty = true
                 };
             }
 
@@ -36,7 +36,8 @@
                 ActiveLoadsPermitted = source.ActiveLoadsPermitted,
                 Decision = source.Decision,
                 ReferenceNumber = source.ReferenceNumber,
-                IsBlanketBond = source.IsBlanketBond.GetValueOrDefault()
+                IsBlanketBond = source.IsBlanketBond.GetValueOrDefault(),
+                IsEmpty = false
             };
         }
     }

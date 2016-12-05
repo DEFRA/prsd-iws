@@ -1,6 +1,5 @@
 ﻿namespace EA.Iws.RequestHandlers.Admin.FinancialGuarantee
 {
-    using System.Linq;
     using System.Threading.Tasks;
     using Core.FinancialGuarantee;
     using Core.Notification;
@@ -29,12 +28,6 @@
         public async Task<FinancialGuaranteeData> HandleAsync(GetCurrentFinancialGuaranteeDetails message)
         {
             var financialGuaranteeCollection = await financialGuaranteeRepository.GetByNotificationId(message.NotificationId);
-
-            if (!financialGuaranteeCollection.FinancialGuarantees.Any())
-            {
-                return new FinancialGuaranteeData();
-            }
-
             var financialGuarantee = financialGuaranteeCollection.GetLatestFinancialGuarantee();
             var authority = (await notificationApplicationRepository.GetById(message.NotificationId)).CompetentAuthority;
 

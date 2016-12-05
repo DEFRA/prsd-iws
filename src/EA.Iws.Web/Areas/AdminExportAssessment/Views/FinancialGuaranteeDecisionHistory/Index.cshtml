@@ -11,8 +11,14 @@
 
     <h2 class="heading-medium">@Resources.CurrentTitle</h2>
 
-    <table class="fg-decision">
-        <tbody>
+    @if (Model.CurrentFinancialGuarantee.IsEmpty)
+    {
+        <p>@Resources.NoData</p>
+    }
+    else
+    {
+        <table class="fg-decision">
+            <tbody>
             <tr>
                 <th>@Resources.Status</th>
                 <td>@Model.CurrentFinancialGuarantee.Status</td>
@@ -70,8 +76,9 @@
                     }
                 </td>
             </tr>
-        </tbody>
-    </table>
+            </tbody>
+        </table>
+    }
 </div>
 
 @if (Model.CurrentFinancialGuarantee.Decision == FinancialGuaranteeDecision.Approved)
@@ -84,15 +91,17 @@
 <div class="form-group">
     <h2 class="heading-medium">@Resources.HistoryTitle</h2>
 
-    <table>
-        <thead>
-        <tr>
-            <th>@Resources.Status</th>
-            <th>@Resources.Date</th>
-            <th/>
-        </tr>
-        </thead>
-        <tbody>
+    @if (Model.FinancialGuaranteeHistory.Any())
+    {
+        <table>
+            <thead>
+            <tr>
+                <th>@Resources.Status</th>
+                <th>@Resources.Date</th>
+                <th/>
+            </tr>
+            </thead>
+            <tbody>
             @foreach (var financialGuarantee in Model.FinancialGuaranteeHistory)
             {
                 <tr>
@@ -113,8 +122,13 @@
                     </td>
                 </tr>
             }
-        </tbody>
-    </table>
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <p>@Resources.NoData</p>
+    }
 </div>
 
 @section menu {

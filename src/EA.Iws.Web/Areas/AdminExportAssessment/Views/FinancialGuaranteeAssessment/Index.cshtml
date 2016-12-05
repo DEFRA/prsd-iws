@@ -7,37 +7,40 @@
 
 <h1 class="heading-large">@Resources.AssessmentTitle</h1>
 
-<div class="form-group">
+@if (!Model.IsEmpty)
+{
+    <div class="form-group">
 
-    <h2 class="heading-medium">@Resources.DecisionHeading</h2>
+        <h2 class="heading-medium">@Resources.DecisionHeading</h2>
 
-    <table class="fg-decision">
-        <tbody>
-        <tr>
-            <th>@Resources.Decision</th>
-            <td>@Model.Decision</td>
-        </tr>
-        <tr>
-            <th>@Resources.DateReceived</th>
-            <td>@Html.Gds().DisplayDateFor(m => m.ReceivedDate)</td>
-        </tr>
-        <tr>
-            <th>@Resources.DateCompleted</th>
-            <td>
-                @if (Model.Status == FinancialGuaranteeStatus.ApplicationReceived)
-                {
-                    @Html.ActionLink(Resources.AddLink, "Complete", new { financialGuaranteeId = Model.FinancialGuaranteeId })
-                }
-                else
-                {
-                    @Html.Gds().DisplayDateFor(m => m.CompletedDate.Value)
-                }
-            </td>
-        </tr>
-        </tbody>
-    </table>
+        <table class="fg-decision">
+            <tbody>
+            <tr>
+                <th>@Resources.Decision</th>
+                <td>@Model.Decision</td>
+            </tr>
+            <tr>
+                <th>@Resources.DateReceived</th>
+                <td>@Html.Gds().DisplayDateFor(m => m.ReceivedDate)</td>
+            </tr>
+            <tr>
+                <th>@Resources.DateCompleted</th>
+                <td>
+                    @if (Model.Status == FinancialGuaranteeStatus.ApplicationReceived)
+                    {
+                        @Html.ActionLink(Resources.AddLink, "Complete", new { financialGuaranteeId = Model.FinancialGuaranteeId })
+                    }
+                    else if (Model.CompletedDate.HasValue)
+                    {
+                        @Html.Gds().DisplayDateFor(m => m.CompletedDate.Value)
+                    }
+                </td>
+            </tr>
+            </tbody>
+        </table>
 
-</div>
+    </div>
+}
 
 @if (Model.Status == FinancialGuaranteeStatus.ApplicationReceived)
 {
@@ -53,7 +56,7 @@
     </div>
 }
 
-@if (Model.Decision == FinancialGuaranteeDecision.Approved)
+@if (Model.Decision != FinancialGuaranteeDecision.None || Model.IsEmpty)
 {
     <div class="form-group">
         @Html.ActionLink(Resources.RecordNew, "New", null, new { @class = "button" })

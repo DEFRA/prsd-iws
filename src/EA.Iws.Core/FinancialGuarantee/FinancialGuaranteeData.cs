@@ -25,5 +25,7 @@ namespace EA.Iws.Core.FinancialGuarantee
         public bool? IsBlanketBond { get; set; }
 
         public Guid FinancialGuaranteeId { get; set; }
+
+        public bool IsEmpty { get; set; }
     }
 }

@@ -147,6 +147,9 @@
   <data name="No" xml:space="preserve">
     <value>No</value>
   </data>
+  <data name="NoData" xml:space="preserve">
+    <value>There is no data to show</value>
+  </data>
   <data name="ReferenceNumber" xml:space="preserve">
     <value>Reference number</value>
   </data>

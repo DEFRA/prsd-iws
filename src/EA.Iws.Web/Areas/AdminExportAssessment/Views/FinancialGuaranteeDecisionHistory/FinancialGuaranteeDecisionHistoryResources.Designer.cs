@@ -152,6 +152,15 @@ namespace EA.Iws.Web.Areas.AdminExportAssessment.Views.FinancialGuaranteeDecisio
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to There is no data to show.
+        /// </summary>
+        public static string NoData {
+            get {
+                return ResourceManager.GetString("NoData", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Reference number.
         /// </summary>
         public static string ReferenceNumber {
