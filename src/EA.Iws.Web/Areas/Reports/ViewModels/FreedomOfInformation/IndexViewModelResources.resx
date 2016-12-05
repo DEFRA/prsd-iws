@@ -117,6 +117,12 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="DateType" xml:space="preserve">
+    <value>Select the type of date to search on</value>
+  </data>
+  <data name="DateTypeRequired" xml:space="preserve">
+    <value>Please select the date to search on</value>
+  </data>
   <data name="FromDate" xml:space="preserve">
     <value>From date</value>
   </data>

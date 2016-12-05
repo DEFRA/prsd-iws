@@ -3,6 +3,7 @@
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.Web.Mvc;
+    using Core.Reports;
     using Core.WasteType;
     using Infrastructure.Validation;
     using Prsd.Core.Helpers;
@@ -15,11 +16,8 @@
             FromDate = new OptionalDateInputViewModel(true);
             ToDate = new OptionalDateInputViewModel(true);
 
-            ChemicalCompositions = new SelectList(
-                EnumHelper.GetValues(typeof(ChemicalComposition)),
-                "Key",
-                "Value",
-                null);
+            ChemicalCompositions = new SelectList(EnumHelper.GetValues(typeof(ChemicalComposition)), "Key", "Value", null);
+            DateSelectList = new SelectList(EnumHelper.GetValues(typeof(FoiReportDates)), "Key", "Value", null);
         }
 
         [Display(Name = "FromDate", ResourceType = typeof(IndexViewModelResources))]
@@ -36,6 +34,12 @@
         public ChemicalComposition ChemicalComposition { get; set; }
 
         public SelectList ChemicalCompositions { get; set; }
+
+        [Display(Name = "DateType", ResourceType = typeof(IndexViewModelResources))]
+        [Required(ErrorMessageResourceName = "DateTypeRequired", ErrorMessageResourceType = typeof(IndexViewModelResources))]
+        public FoiReportDates DateType { get; set; }
+
+        public SelectList DateSelectList { get; set; }
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
