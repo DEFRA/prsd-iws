@@ -207,6 +207,7 @@
             if (Decision == FinancialGuaranteeDecision.None)
             {
                 Decision = FinancialGuaranteeDecision.Released;
+                DecisionDate = releasedDate;
             }
         }
 

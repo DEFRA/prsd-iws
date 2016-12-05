@@ -31,6 +31,14 @@
         }
 
         [Fact]
+        public void SetsDecisionDateWhenNoDecision()
+        {
+            CompletedFinancialGuarantee.Release(AfterCompletionDate);
+
+            Assert.Equal(AfterCompletionDate, CompletedFinancialGuarantee.DecisionDate.Value);
+        }
+
+        [Fact]
         public void DoesNotOverrideDecisionDate()
         {
             var previousDecisionDate = ApprovedFinancialGuarantee.DecisionDate.Value;
