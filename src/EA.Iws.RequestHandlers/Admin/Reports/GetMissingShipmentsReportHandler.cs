@@ -31,7 +31,7 @@
         public async Task<MissingShipmentData[]> HandleAsync(GetMissingShipmentsReport message)
         {
             var user = await internalUserRepository.GetByUserId(userContext.UserId);
-            var data = await missingShipmentsRepository.Get(message.From, message.To, user.CompetentAuthority);
+            var data = await missingShipmentsRepository.Get(message.From, message.To, user.CompetentAuthority, message.DateType);
 
             return data.Select(x => mapper.Map(x, user.CompetentAuthority)).ToArray();
         }
