@@ -6,7 +6,7 @@ ALTER VIEW [Reports].[WasteCodes]
 AS
     SELECT
         N.Id AS NotificationId,
-        N.NotificationNumber,
+        REPLACE(N.NotificationNumber, ' ', '') AS NotificationNumber,
         WCI.CodeType,
         CT.Name AS CodeTypeName,
         CASE 
@@ -23,7 +23,7 @@ AS
 
     SELECT
         N.Id AS NotificationId,
-        N.NotificationNumber,
+        REPLACE(N.NotificationNumber, ' ', '') AS NotificationNumber,
         WC.CodeType,
         CT.Name AS CodeTypeName,
         WC.Code,
