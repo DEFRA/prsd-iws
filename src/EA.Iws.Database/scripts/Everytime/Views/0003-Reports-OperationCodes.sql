@@ -6,7 +6,7 @@ ALTER VIEW [Reports].[OperationCodes]
 AS
     SELECT
         N.Id AS NotificationId,
-        N.NotificationNumber,
+        REPLACE(N.NotificationNumber, ' ', '') AS NotificationNumber,
         O.Id as OperationCodeId,
         O.Name
     FROM [Notification].[OperationCodes] OC
@@ -17,7 +17,7 @@ AS
 
     SELECT
         N.Id AS NotificationId,
-        N.NotificationNumber,
+        REPLACE(N.NotificationNumber, ' ', '') AS NotificationNumber,
         O.Id as OperationCodeId,
         O.Name
     FROM [ImportNotification].[WasteOperation] WO

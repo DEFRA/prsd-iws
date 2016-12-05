@@ -6,7 +6,7 @@ ALTER VIEW [Reports].[WasteType]
 AS
     SELECT
         N.Id AS NotificationId,
-        N.NotificationNumber,
+        REPLACE(N.NotificationNumber, ' ', '') AS NotificationNumber,
         CASE 
             WHEN WT.ChemicalCompositionType IN (1, 2) THEN CCT.Description
             WHEN WC.Code IS NOT NULL THEN WC.Code + ' ' + WC.Description
@@ -36,7 +36,7 @@ AS
 
     SELECT
         N.Id AS NotificationId,
-        N.NotificationNumber,
+        REPLACE(N.NotificationNumber, ' ', '') AS NotificationNumber,
         WT.Name AS Description,
         4 AS ChemicalCompositionTypeId,
         'Other' AS ChemicalCompositionType,

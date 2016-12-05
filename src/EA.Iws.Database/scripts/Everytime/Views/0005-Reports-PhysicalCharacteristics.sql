@@ -7,7 +7,7 @@ AS
 
 	SELECT
 		N.Id AS NotificationId,
-		N.NotificationNumber,
+		REPLACE(N.NotificationNumber, ' ', '') AS NotificationNumber,
 		PC.PhysicalCharacteristicType,
 		CASE 
 			WHEN PC.PhysicalCharacteristicType = 7 THEN PC.OtherDescription

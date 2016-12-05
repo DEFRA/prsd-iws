@@ -6,7 +6,7 @@ ALTER VIEW [Reports].[Payments]
 AS
     SELECT 
         N.Id AS [NotificationId],
-        N.NotificationNumber,
+        REPLACE(N.NotificationNumber, ' ', '') AS NotificationNumber,
         SUM(T.Credit) AS TotalPaid,
         SUM(T.Debit) AS TotalRefunded,
         (SELECT TOP 1 [Date] FROM [Notification].[Transaction] WHERE NotificationId = N.Id AND Credit IS NOT NULL ORDER BY [Date] DESC) AS [LatestPaymentDate],
@@ -19,7 +19,7 @@ AS
 
     SELECT
         N.Id AS [NotificationId],
-        N.NotificationNumber,
+        REPLACE(N.NotificationNumber, ' ', '') AS NotificationNumber,
         SUM(T.Credit) AS TotalPaid,
         SUM(T.Debit) AS TotalRefunded,
         (SELECT TOP 1 [Date] FROM [ImportNotification].[Transaction] WHERE NotificationId = N.Id AND Credit IS NOT NULL ORDER BY [Date] DESC) AS [LatestPaymentDate],

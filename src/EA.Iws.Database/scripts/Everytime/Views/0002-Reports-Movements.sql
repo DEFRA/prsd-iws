@@ -6,7 +6,7 @@ ALTER VIEW [Reports].[Movements]
 AS
 	SELECT
 		N.Id AS [NotificationId],
-		N.NotificationNumber,
+		REPLACE(N.NotificationNumber, ' ', '') AS NotificationNumber,
 		M.Id AS [MovementId],
 		M.Number AS [ShipmentNumber],
 		CAST(M.Date AS DATE) AS [ActualDateOfShipment],
@@ -49,7 +49,7 @@ AS
 
 	SELECT
 		N.Id AS [NotificationId],
-		N.NotificationNumber,
+		REPLACE(N.NotificationNumber, ' ', '') AS NotificationNumber,
 		M.Id AS [MovementId],
 		M.Number AS [ShipmentNumber],
 		CAST(M.ActualShipmentDate AS DATE) AS [ActualDateOfShipment],

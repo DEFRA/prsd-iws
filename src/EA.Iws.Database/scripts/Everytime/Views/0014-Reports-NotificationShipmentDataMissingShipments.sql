@@ -7,7 +7,7 @@ AS
 	
 	SELECT	
 		M.NotificationId,
-		N.NotificationNumber,
+		REPLACE(N.NotificationNumber, ' ', '') AS NotificationNumber,
 		N.CompetentAuthority AS CompetentAuthorityId,
 		E.Name AS Exporter,
 		I.Name AS Importer,
@@ -108,7 +108,7 @@ AS
 
 		SELECT	
 		M.NotificationId,
-		N.NotificationNumber,
+		REPLACE(N.NotificationNumber, ' ', '') AS NotificationNumber,
 		N.CompetentAuthority AS CompetentAuthorityId,
 		E.Name AS Exporter,
 		I.Name AS Importer,

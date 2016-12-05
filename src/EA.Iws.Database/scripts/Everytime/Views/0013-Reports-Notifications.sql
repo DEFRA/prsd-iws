@@ -6,7 +6,7 @@ ALTER VIEW [Reports].[Notification]
 AS
     SELECT
         N.[Id] AS Id,
-        N.[NotificationNumber],
+        REPLACE(N.[NotificationNumber], ' ', '') AS [NotificationNumber],
         N.[UserId],
         NT.[Description] AS [Type],
         NT.Id AS [TypeId],
@@ -68,7 +68,7 @@ AS
 
     SELECT 
         N.[Id] AS Id,
-        N.[NotificationNumber],
+        REPLACE(N.[NotificationNumber], ' ', '') AS [NotificationNumber],
         NULL AS [UserId],
         NT.[Description] AS [Type],
         NT.[Id] AS [TypeId],

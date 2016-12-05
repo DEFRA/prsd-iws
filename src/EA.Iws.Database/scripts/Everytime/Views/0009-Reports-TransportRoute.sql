@@ -7,7 +7,7 @@ AS
 
     SELECT 
         N.Id AS NotificationId,
-        N.NotificationNumber,
+        REPLACE(N.NotificationNumber, ' ', '') AS NotificationNumber,
         TR.Id AS TransportRouteId,
         SE_C.Id AS ExportCountryId,
         SE_C.Name AS ExportCountryName,
@@ -32,7 +32,7 @@ AS
 
     SELECT
         N.Id AS NotificationId,
-        N.NotificationNumber,
+        REPLACE(N.NotificationNumber, ' ', '') AS NotificationNumber,
         TR.Id AS TransportRouteId,
         SE_C.Id AS ExportCountryId,
         SE_C.Name AS ExportCountryName,
