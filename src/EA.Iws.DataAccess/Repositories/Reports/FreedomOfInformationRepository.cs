@@ -6,6 +6,7 @@
     using System.Threading.Tasks;
     using Core.Admin.Reports;
     using Core.Notification;
+    using Core.Reports;
     using Core.WasteType;
     using Domain.Reports;
 
@@ -39,8 +40,22 @@
                     [ImporterAddress],
                     [FacilityName],
                     [FacilityAddress],
-                    COALESCE([QuantityReceived], 0) AS [QuantityReceived],
-                    [QuantityReceivedUnit],
+                    COALESCE(                    
+                        (SELECT	SUM(
+                            CASE WHEN [QuantityReceivedUnitId] IN (1, 2) -- Tonnes / Cubic Metres
+                                THEN COALESCE([QuantityReceived], 0)
+                            ELSE 
+                                COALESCE([QuantityReceived] / 1000, 0) -- Convert to Tonnes / Cubic Metres
+                            END
+                            ) 
+                            FROM [Reports].[Movements]
+                            WHERE Id = NotificationId
+                        ), 0) AS [QuantityReceived],
+                    CASE WHEN [IntendedQuantityUnitId] IN (1, 2) -- Due to conversion units will only be Tonnes / Cubic Metres
+                        THEN [IntendedQuantityUnit] 
+                    WHEN [IntendedQuantityUnitId] = 3 THEN 'Tonnes'
+                    WHEN [IntendedQuantityUnitId] = 4 THEN 'Cubic Metres'
+                    END AS [QuantityReceivedUnit],
                     [IntendedQuantity],
                     [IntendedQuantityUnit],
                     [ConsentFrom],
