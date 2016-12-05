@@ -17,8 +17,8 @@
                     FROM    [Search].[Notifications]
                     WHERE   [CompetentAuthority] = @ca
                     AND     [ImportOrExport] = @importOrExport
-                    AND     (@ewc IS NULL OR ([CodeType] = 3 AND [Code] LIKE '%' + @ewc + '%'))
-                    AND     (@baselOecd IS NULL OR ([CodeType] IN (1,2) AND [Code] LIKE '%' + @baselOecd + '%'))
+                    AND     (@ewc IS NULL OR ([EwcCode] LIKE '%' + @ewc + '%'))
+                    AND     (@baselOecd IS NULL OR ([BaselOecdCode] LIKE '%' + @baselOecd + '%'))
                     AND     (@producerName IS NULL OR [ProducerName] LIKE '%' + @producerName + '%')
                     AND     (@importerName IS NULL OR [ImporterName] LIKE '%' + @importerName + '%')
                     AND     (@exporterName IS NULL OR [ExporterName] LIKE '%' + @exporterName + '%')
