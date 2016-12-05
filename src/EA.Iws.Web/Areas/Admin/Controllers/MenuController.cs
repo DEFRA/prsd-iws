@@ -27,7 +27,7 @@
         }
 
         [AcceptVerbs(HttpVerbs.Get | HttpVerbs.Post)]
-        public ActionResult HomeNavigation()
+        public ActionResult HomeNavigation(AdminHomeNavigationSection section)
         {
             var showApproveNewInternalUserLink = Task.Run(() =>
                         authorizationService.AuthorizeActivity(typeof(SetUserApprovals)))
@@ -40,7 +40,8 @@
             var model = new AdminLinksViewModel
             {
                 ShowApproveNewInternalUserLink = showApproveNewInternalUserLink,
-                ShowAddNewEntryOrExitPointLink = showAddNewEntryOrExitPointLink
+                ShowAddNewEntryOrExitPointLink = showAddNewEntryOrExitPointLink,
+                ActiveSection = section
             };
 
             return PartialView("_HomeNavigation", model);

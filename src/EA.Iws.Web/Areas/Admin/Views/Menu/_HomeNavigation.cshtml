@@ -1,8 +1,14 @@
 ﻿@model EA.Iws.Web.Areas.Admin.ViewModels.Menu.AdminLinksViewModel
+
+@helper GetClassForSection(AdminHomeNavigationSection section, string className)
+{
+    @(Model.ActiveSection == section ? className : string.Empty)
+}
+
 <div id="accordion" class="accordion-general">
     <ul>
-        <li class="active">
-            <h3 class="current">
+        <li class="@GetClassForSection(AdminHomeNavigationSection.Notifications, "active")">
+            <h3 class="@GetClassForSection(AdminHomeNavigationSection.Notifications, "current")">
                 <span></span>
                 Notifications
             </h3>
@@ -13,19 +19,19 @@
             </ul>
         </li>
 
-        <li class="">
-            <h3 class="">
+        <li class="@GetClassForSection(AdminHomeNavigationSection.Reporting, "active")">
+            <h3 class="@GetClassForSection(AdminHomeNavigationSection.Reporting, "current")">
                 <span></span>
                 Reporting
             </h3>
             @Html.Partial("~/Areas/Admin/Views/Menu/_ReportingLinks.cshtml", Model)
         </li>
 
-        @if (Model.ShowAddNewEntryOrExitPointLink 
-            || Model.ShowApproveNewInternalUserLink)
+        @if (Model.ShowAddNewEntryOrExitPointLink
+                    || Model.ShowApproveNewInternalUserLink)
         {
-            <li class="">
-                <h3 class="">
+            <li class="@GetClassForSection(AdminHomeNavigationSection.AccountServices, "active")">
+                <h3 class="@GetClassForSection(AdminHomeNavigationSection.AccountServices, "current")">
                     <span></span>
                     Account services
                 </h3>
