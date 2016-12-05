@@ -36,7 +36,7 @@
             var from = model.From.AsDateTime().GetValueOrDefault();
             var to = model.To.AsDateTime().GetValueOrDefault();
 
-            var report = await mediator.SendAsync(new GetMissingShipmentsReport(from, to));
+            var report = await mediator.SendAsync(new GetMissingShipmentsReport(from, to, model.DateType));
 
             var fileName = string.Format("missing-shipments-{0}-{1}.xlsx", from.ToShortDateString(), to.ToShortDateString());
 

@@ -5,6 +5,7 @@
     using System.Data.SqlClient;
     using System.Threading.Tasks;
     using Core.Notification;
+    using Core.Reports;
     using Domain.Reports;
 
     internal class MissingShipmentsRepository : IMissingShipmentsRepository
@@ -16,8 +17,10 @@
             this.context = context;
         }
 
-        public async Task<IEnumerable<MissingShipment>> Get(DateTime from, DateTime to, UKCompetentAuthority competentAuthority)
+        public async Task<IEnumerable<MissingShipment>> Get(DateTime from, DateTime to, UKCompetentAuthority competentAuthority, MissingShipmentsReportDates dateType)
         {
+            var bob = dateType.ToString();
+
             return await context.Database.SqlQuery<MissingShipment>(
                 @"SELECT 
                     [NotificationNumber],
@@ -44,10 +47,14 @@
                     [Status]
                 FROM [Reports].[NotificationShipmentDataMissingShipments]
                 WHERE [CompetentAuthorityId] = @ca
-                AND COALESCE([PrenotificationDate], [ActualDateOfShipment]) BETWEEN @from AND @to",
+                AND (@dateType = 'NotificationReceivedDate' and  [NotificationReceivedDate] BETWEEN @from AND @to
+				     OR @dateType = 'ConsentFrom' and  [ConsentFrom] BETWEEN @from AND @to
+				     OR @dateType = 'ReceivedDate' and  [ReceivedDate] BETWEEN @from AND @to
+				     OR @dateType = 'CompletedDate' and  [CompletedDate] BETWEEN @from AND @to)",
                 new SqlParameter("@from", from),
                 new SqlParameter("@to", to),
-                new SqlParameter("@ca", (int)competentAuthority)).ToArrayAsync();
+                new SqlParameter("@ca", (int)competentAuthority),
+                new SqlParameter("@dateType", dateType.ToString())).ToArrayAsync();
         }
     }
 }

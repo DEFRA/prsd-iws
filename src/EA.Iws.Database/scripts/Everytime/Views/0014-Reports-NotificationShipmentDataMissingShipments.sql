@@ -34,7 +34,8 @@ AS
 		TR.[ImportCountryName] AS DestinationCountry,
 		TR.[ExitPoint] AS ExitPort,
 		TR.[ExportCountryName] AS OriginatingCountry,
-		MS.Status
+		MS.Status,
+		ND.[NotificationReceivedDate]
 	
 	FROM [Notification].[Movement] AS M
 
@@ -97,6 +98,12 @@ AS
 	LEFT JOIN   [Lookup].[MovementStatus] AS MS
 	ON			MS.Id = M.Status
 
+	LEFT JOIN	[Notification].[NotificationAssessment] AS NA
+	ON			NA.NotificationApplicationId = N.Id
+
+	LEFT JOIN	[Notification].[NotificationDates] AS ND
+	ON			ND.[NotificationAssessmentId] = NA.Id
+
 	UNION 
 
 		SELECT	
@@ -125,7 +132,8 @@ AS
 		TR.ImportCountryName AS DestinationCountry,
 		TR.ExitPoint AS ExitPort,
 		TR.ExportCountryName AS OriginatingCountry,
-		'NA' AS Status
+		'NA' AS Status,
+		ND.[NotificationReceivedDate]
 	
 	FROM [ImportNotification].[Movement] AS M
 
@@ -178,5 +186,11 @@ AS
 
 	LEFT JOIN   [Reports].[TransportRoute] AS TR
 	ON			[TR].[NotificationId] = [N].[Id]
+
+	LEFT JOIN	[ImportNotification].[NotificationAssessment] AS NA
+	ON			NA.NotificationApplicationId = N.Id
+
+	LEFT JOIN	[ImportNotification].[NotificationDates] AS ND
+	ON			ND.[NotificationAssessmentId] = NA.Id
 
 GO
