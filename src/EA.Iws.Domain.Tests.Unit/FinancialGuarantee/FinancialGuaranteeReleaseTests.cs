@@ -19,23 +19,21 @@
         [Fact]
         public void DecisionDateBeforeCompletionDateThrows()
         {
-            Assert.Throws<InvalidOperationException>(() => CompletedFinancialGuarantee.Release(BeforeCompletionDate));
+            Assert.Throws<InvalidOperationException>(() => ApprovedFinancialGuarantee.Release(BeforeCompletionDate));
         }
 
         [Fact]
         public void SetsReleasedDate()
         {
-            CompletedFinancialGuarantee.Release(AfterCompletionDate);
+            ApprovedFinancialGuarantee.Release(AfterCompletionDate);
 
-            Assert.Equal(AfterCompletionDate, CompletedFinancialGuarantee.ReleasedDate);
+            Assert.Equal(AfterCompletionDate, ApprovedFinancialGuarantee.ReleasedDate);
         }
 
         [Fact]
-        public void SetsDecisionDateWhenNoDecision()
+        public void CannotReleaseCompletedGuarantee()
         {
-            CompletedFinancialGuarantee.Release(AfterCompletionDate);
-
-            Assert.Equal(AfterCompletionDate, CompletedFinancialGuarantee.DecisionDate.Value);
+            Assert.Throws<InvalidOperationException>(() => CompletedFinancialGuarantee.Release(AfterCompletionDate));
         }
 
         [Fact]
@@ -52,9 +50,9 @@
         [Fact]
         public void SetsStatus()
         {
-            releaseGuarantee(CompletedFinancialGuarantee);
+            releaseGuarantee(ApprovedFinancialGuarantee);
 
-            Assert.Equal(FinancialGuaranteeStatus.Released, CompletedFinancialGuarantee.Status);
+            Assert.Equal(FinancialGuaranteeStatus.Released, ApprovedFinancialGuarantee.Status);
         }
 
         [Fact]
@@ -71,14 +69,6 @@
             RefusedFinancialGuarantee.Release(AfterCompletionDate);
 
             Assert.Equal(FinancialGuaranteeStatus.Released, RefusedFinancialGuarantee.Status);
-        }
-
-        [Fact]
-        public void CompletedFinancialGuaranteeDecisionIsReleased()
-        {
-            CompletedFinancialGuarantee.Release(AfterCompletionDate);
-
-            Assert.Equal(FinancialGuaranteeDecision.Released, CompletedFinancialGuarantee.Decision);
         }
 
         [Fact]

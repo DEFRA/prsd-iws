@@ -113,8 +113,7 @@
             stateMachine.Configure(FinancialGuaranteeStatus.ApplicationComplete)
                 .OnEntryFrom(completedTrigger, OnCompleted)
                 .PermitIf(Trigger.Approved, FinancialGuaranteeStatus.Approved, () => CompletedDate.HasValue)
-                .PermitIf(Trigger.Refused, FinancialGuaranteeStatus.Refused, () => CompletedDate.HasValue)
-                .PermitIf(Trigger.Released, FinancialGuaranteeStatus.Released, () => CompletedDate.HasValue);
+                .PermitIf(Trigger.Refused, FinancialGuaranteeStatus.Refused, () => CompletedDate.HasValue);
 
             stateMachine.Configure(FinancialGuaranteeStatus.Approved)
                 .OnEntryFrom(approvedTrigger, OnApproved)

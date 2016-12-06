@@ -19,9 +19,7 @@
 
         public FinancialGuaranteeDecisionViewModel()
         {
-            var values = Enum.GetValues(typeof(FinancialGuaranteeDecision))
-                .Cast<FinancialGuaranteeDecision>()
-                .Where(d => d != FinancialGuaranteeDecision.None)
+            var values = new[] { FinancialGuaranteeDecision.Approved, FinancialGuaranteeDecision.Refused }
                 .Select(e => new KeyValuePair<int, string>(
                     (int)e,
                     EnumHelper.GetShortName(e)))
