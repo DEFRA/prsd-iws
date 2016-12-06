@@ -64,11 +64,9 @@
         }
 
         [Fact]
-        public void CanReleaseARefusedGuarantee()
+        public void CannotReleaseARefusedGuarantee()
         {
-            RefusedFinancialGuarantee.Release(AfterCompletionDate);
-
-            Assert.Equal(FinancialGuaranteeStatus.Released, RefusedFinancialGuarantee.Status);
+            Assert.Throws<InvalidOperationException>(() => RefusedFinancialGuarantee.Release(AfterCompletionDate));
         }
 
         [Fact]

@@ -137,7 +137,7 @@
             var financialGuarantee = await mediator.SendAsync(
                 new GetFinancialGuaranteeDataByNotificationApplicationId(id, financialGuaranteeId));
 
-            if (financialGuarantee.Status != FinancialGuaranteeStatus.ApplicationComplete)
+            if (financialGuarantee.Status != FinancialGuaranteeStatus.Approved)
             {
                 return RedirectToAction("Index", "FinancialGuaranteeAssessment");
             }

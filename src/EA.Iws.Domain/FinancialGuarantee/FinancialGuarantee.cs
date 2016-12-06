@@ -121,8 +121,7 @@
                 .Permit(Trigger.Superseded, FinancialGuaranteeStatus.Superseded);
 
             stateMachine.Configure(FinancialGuaranteeStatus.Refused)
-                .OnEntryFrom(refusedTrigger, OnRefused)
-                .Permit(Trigger.Released, FinancialGuaranteeStatus.Released);
+                .OnEntryFrom(refusedTrigger, OnRefused);
 
             stateMachine.Configure(FinancialGuaranteeStatus.Released)
                 .OnEntryFrom(releasedTrigger, OnReleased);
