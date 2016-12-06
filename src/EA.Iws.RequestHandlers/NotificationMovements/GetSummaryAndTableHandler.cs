@@ -35,7 +35,6 @@
 
         public async Task<NotificationMovementsSummaryAndTable> HandleAsync(GetSummaryAndTable message)
         {
-            var finacialGuaranteeStatus = await financialGuaranteeRepository.GetStatusByNotificationId(message.Id);
             var isInterimNotification = (await facilityRepository.GetByNotificationId((message.Id))).IsInterim.GetValueOrDefault();
             var summaryData = await summaryRepository.GetById(message.Id);
             IEnumerable<Movement> notificationMovements;
@@ -51,7 +50,6 @@
 
             var data = mapper.Map<NotificationMovementsSummary, Movement[], NotificationMovementsSummaryAndTable>(summaryData, notificationMovements.ToArray());
             data.IsInterimNotification = isInterimNotification;
-            data.FgStatus = finacialGuaranteeStatus;
 
             return data;
         }

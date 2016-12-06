@@ -1,6 +1,7 @@
 ﻿namespace EA.Iws.Domain.Movement
 {
     using System;
+    using System.Linq;
     using System.Threading.Tasks;
     using Core.ComponentRegistration;
     using Core.FinancialGuarantee;
@@ -79,13 +80,13 @@
                         notificationId, notificationStatus));
             }
 
-            var financialGuaranteeStatus = await financialGuaranteeRepository.GetStatusByNotificationId(notificationId);
+            var financialGuaranteeCollection = await financialGuaranteeRepository.GetByNotificationId(notificationId);
 
-            if (financialGuaranteeStatus != FinancialGuaranteeStatus.Approved)
+            if (!financialGuaranteeCollection.FinancialGuarantees.Any(fg => fg.Status == FinancialGuaranteeStatus.Approved))
             {
                 throw new InvalidOperationException(
-                    string.Format("Cannot create a movement for notification {0} because its financial guarantee status is {1}",
-                        notificationId, financialGuaranteeStatus));
+                    string.Format("Cannot create a movement for notification {0} because there are no approved financial guarantees",
+                        notificationId));
             }
 
             var consentPeriodExpired = await consentPeriod.HasExpired(notificationId);

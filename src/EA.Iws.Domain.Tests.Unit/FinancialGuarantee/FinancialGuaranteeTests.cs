@@ -9,6 +9,9 @@
 
     public class FinancialGuaranteeTests
     {
+        protected readonly FinancialGuaranteeCollection FinancialGuaranteeCollection;
+        protected readonly Guid NotificationId = new Guid("80BC000C-14C5-47B6-B15A-F277A2B63F59");
+
         protected static readonly DateTime AnyDate = new DateTime(2014, 5, 5);
         protected static readonly string AnyString = "test";
         protected static readonly DateTime CompletedDate = AnyDate.AddDays(1);
@@ -25,27 +28,30 @@
 
         public FinancialGuaranteeTests()
         {
-            FinancialGuarantee = FinancialGuarantee.Create(new Guid("C91DA02A-114A-44C3-8B12-3FF24950D6E4"));
+            FinancialGuaranteeCollection = new FinancialGuaranteeCollection(NotificationId);
+            FinancialGuarantee = FinancialGuaranteeCollection.AddFinancialGuarantee(AnyDate);
 
-            CompletedFinancialGuarantee = FinancialGuarantee.Create(new Guid("5DC6DB46-89DF-4F3D-BE47-4290EEE890D3"));
+            CompletedFinancialGuarantee = FinancialGuaranteeCollection.AddFinancialGuarantee(AnyDate);
             ObjectInstantiator<FinancialGuarantee>.SetProperty(fg => fg.Status, FinancialGuaranteeStatus.ApplicationComplete, CompletedFinancialGuarantee);
             ObjectInstantiator<FinancialGuarantee>.SetProperty(fg => fg.ReceivedDate, AnyDate, CompletedFinancialGuarantee);
             ObjectInstantiator<FinancialGuarantee>.SetProperty(fg => fg.CompletedDate, CompletedDate, CompletedFinancialGuarantee);
 
-            ApprovedFinancialGuarantee = FinancialGuarantee.Create(new Guid("38CBD523-7F96-45AA-9251-955DB1632F3A"));
+            ApprovedFinancialGuarantee = FinancialGuaranteeCollection.AddFinancialGuarantee(AnyDate);
             ObjectInstantiator<FinancialGuarantee>.SetProperty(fg => fg.Status, FinancialGuaranteeStatus.Approved, ApprovedFinancialGuarantee);
+            ObjectInstantiator<FinancialGuarantee>.SetProperty(fg => fg.Decision, FinancialGuaranteeDecision.Approved, ApprovedFinancialGuarantee);
             ObjectInstantiator<FinancialGuarantee>.SetProperty(fg => fg.ReceivedDate, AnyDate, ApprovedFinancialGuarantee);
             ObjectInstantiator<FinancialGuarantee>.SetProperty(fg => fg.CompletedDate, CompletedDate, ApprovedFinancialGuarantee);
             ObjectInstantiator<FinancialGuarantee>.SetProperty(fg => fg.DecisionDate, AfterCompletionDate, ApprovedFinancialGuarantee);
 
-            RefusedFinancialGuarantee = FinancialGuarantee.Create(new Guid("229F6957-3CBE-4C70-9A5F-40F42CF5BA11"));
+            RefusedFinancialGuarantee = FinancialGuaranteeCollection.AddFinancialGuarantee(AnyDate);
             ObjectInstantiator<FinancialGuarantee>.SetProperty(fg => fg.Status, FinancialGuaranteeStatus.Refused, RefusedFinancialGuarantee);
+            ObjectInstantiator<FinancialGuarantee>.SetProperty(fg => fg.Decision, FinancialGuaranteeDecision.Refused, RefusedFinancialGuarantee);
             ObjectInstantiator<FinancialGuarantee>.SetProperty(fg => fg.ReceivedDate, AnyDate, RefusedFinancialGuarantee);
             ObjectInstantiator<FinancialGuarantee>.SetProperty(fg => fg.CompletedDate, CompletedDate, RefusedFinancialGuarantee);
             ObjectInstantiator<FinancialGuarantee>.SetProperty(fg => fg.DecisionDate, AfterCompletionDate, RefusedFinancialGuarantee);
             ObjectInstantiator<FinancialGuarantee>.SetProperty(fg => fg.RefusalReason, AnyString, RefusedFinancialGuarantee);
 
-            ReceivedFinancialGuarantee = FinancialGuarantee.Create(new Guid("26342B36-15A4-4AC4-BAE0-9C2CA36B0CD9"));
+            ReceivedFinancialGuarantee = FinancialGuaranteeCollection.AddFinancialGuarantee(AnyDate);
             ObjectInstantiator<FinancialGuarantee>.SetProperty(fg => fg.Status, FinancialGuaranteeStatus.ApplicationReceived, ReceivedFinancialGuarantee);
             ObjectInstantiator<FinancialGuarantee>.SetProperty(fg => fg.ReceivedDate, AnyDate, ReceivedFinancialGuarantee);
 

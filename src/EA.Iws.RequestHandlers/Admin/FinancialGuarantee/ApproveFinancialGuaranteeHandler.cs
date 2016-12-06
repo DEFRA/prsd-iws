@@ -1,31 +1,31 @@
 ﻿namespace EA.Iws.RequestHandlers.Admin.FinancialGuarantee
 {
-    using System.Data.Entity;
     using System.Threading.Tasks;
     using DataAccess;
     using Domain.FinancialGuarantee;
     using Prsd.Core.Mediator;
     using Requests.Admin.FinancialGuarantee;
 
-    internal class ApproveFinancialGuaranteeHandler : IRequestHandler<ApproveFinancialGuarantee, bool>
+    internal class ApproveFinancialGuaranteeHandler : IRequestHandler<ApproveFinancialGuarantee, Unit>
     {
+        private readonly FinancialGuaranteeApproval financialGuaranteeApproval;
         private readonly IwsContext context;
 
-        public ApproveFinancialGuaranteeHandler(IwsContext context)
+        public ApproveFinancialGuaranteeHandler(FinancialGuaranteeApproval financialGuaranteeApproval, IwsContext context)
         {
+            this.financialGuaranteeApproval = financialGuaranteeApproval;
             this.context = context;
         }
 
-        public async Task<bool> HandleAsync(ApproveFinancialGuarantee message)
+        public async Task<Unit> HandleAsync(ApproveFinancialGuarantee message)
         {
-            var financialGuarantee = await context.FinancialGuarantees.SingleAsync(fg => fg.NotificationApplicationId == message.NotificationId);
-
-            financialGuarantee.Approve(new ApproveDates(message.DecisionDate, 
-                message.ReferenceNumber, message.ActiveLoadsPermitted, message.IsBlanketbond));
+            await financialGuaranteeApproval.Approve(message.NotificationId, message.FinancialGuaranteeId,
+                new ApprovalData(message.DecisionDate, 
+                    message.ReferenceNumber, message.ActiveLoadsPermitted, message.IsBlanketbond));
 
             await context.SaveChangesAsync();
 
-            return true;
+            return Unit.Value;
         }
     }
 }

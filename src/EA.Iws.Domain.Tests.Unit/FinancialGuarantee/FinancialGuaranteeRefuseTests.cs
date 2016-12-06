@@ -68,5 +68,13 @@
 
             Assert.Equal(AnyString, CompletedFinancialGuarantee.RefusalReason);
         }
+
+        [Fact]
+        public void DecisionIsRefused()
+        {
+            refuseGuarantee(CompletedFinancialGuarantee, AfterCompletionDate);
+
+            Assert.Equal(FinancialGuaranteeDecision.Refused, CompletedFinancialGuarantee.Decision);
+        }
     }
 }

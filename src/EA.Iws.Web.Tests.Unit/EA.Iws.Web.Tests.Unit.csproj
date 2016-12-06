@@ -156,7 +156,6 @@
     <Compile Include="Controllers\NotificationAssessment\DecisionControllerTests.cs" />
     <Compile Include="Controllers\NotificationMovements\CancelMovementControllerTests.cs" />
     <Compile Include="Controllers\NotificationApplication\BaseWasteCodeControllerTests.cs" />
-    <Compile Include="Controllers\NotificationAssessment\FinancialGuaranteeControllerTests.cs" />
     <Compile Include="Controllers\NotificationApplication\CarrierControllerTests.cs" />
     <Compile Include="Controllers\NotificationAssessment\KeyDatesControllerTests.cs" />
     <Compile Include="Controllers\ControllerTests.cs" />

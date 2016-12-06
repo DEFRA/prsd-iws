@@ -467,8 +467,14 @@
     <Content Include="Areas\Reports\Views\ImportNotifications\Index.cshtml" />
     <Content Include="Areas\AdminExportAssessment\Views\NumberOfShipments\Index.cshtml" />
     <Content Include="Areas\ImportNotification\Views\NumberOfShipments\Index.cshtml" />
+    <Content Include="Areas\AdminExportAssessment\Views\FinancialGuaranteeAssessment\Index.cshtml" />
+    <Content Include="Content\iws\_financial-guarantee.scss" />
     <Content Include="Areas\AdminExportAssessment\Views\NumberOfShipments\Confirm.cshtml" />
     <Content Include="Areas\ImportNotification\Views\NumberOfShipments\Confirm.cshtml" />
+    <Content Include="Areas\AdminExportAssessment\Views\FinancialGuaranteeAssessment\New.cshtml" />
+    <Content Include="Areas\AdminExportAssessment\Views\FinancialGuaranteeAssessment\Complete.cshtml" />
+    <Content Include="Areas\AdminExportAssessment\Views\FinancialGuaranteeDecisionHistory\Index.cshtml" />
+    <Content Include="Areas\AdminExportAssessment\Views\FinancialGuaranteeDetails\Index.cshtml" />
     <None Include="Content\iws\_panels.scss" />
     <Content Include="Content\nta-extended.css" />
     <Content Include="Content\select2\select2-spinner.gif" />
@@ -572,14 +578,11 @@
     <Content Include="Scripts\jquery.prevent-double-click.js" />
     <Content Include="Scripts\select2\select2.js" />
     <Content Include="Views\Shared\EditorTemplates\OptionalDateInputViewModel.cshtml" />
-    <Content Include="Areas\AdminExportAssessment\Views\FinancialGuarantee\Dates.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\WasteRecovery\DisposalMethod.cshtml" />
-    <Content Include="Areas\AdminExportAssessment\Views\FinancialGuarantee\Decision.cshtml" />
-    <Content Include="Areas\AdminExportAssessment\Views\FinancialGuarantee\_Incomplete.cshtml" />
-    <Content Include="Areas\AdminExportAssessment\Views\FinancialGuarantee\_Complete.cshtml" />
-    <Content Include="Areas\AdminExportAssessment\Views\FinancialGuarantee\_Approve.cshtml" />
-    <Content Include="Areas\AdminExportAssessment\Views\FinancialGuarantee\_Refuse.cshtml" />
-    <Content Include="Areas\AdminExportAssessment\Views\FinancialGuarantee\_Release.cshtml" />
+    <Content Include="Areas\AdminExportAssessment\Views\FinancialGuaranteeDecision\Index.cshtml" />
+    <Content Include="Areas\AdminExportAssessment\Views\FinancialGuaranteeDecision\Approve.cshtml" />
+    <Content Include="Areas\AdminExportAssessment\Views\FinancialGuaranteeDecision\Refuse.cshtml" />
+    <Content Include="Areas\AdminExportAssessment\Views\FinancialGuaranteeDecision\Release.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\WhatToDoNext\Index.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\Shared\DisplayTemplates\AddressData.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\WhatToDoNext\_GeneralRemittanceEmail.cshtml" />
@@ -1075,6 +1078,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DecisionControllerResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Areas\AdminExportAssessment\Controllers\FinancialGuaranteeAssessmentController.cs" />
+    <Compile Include="Areas\AdminExportAssessment\Controllers\FinancialGuaranteeDecisionController.cs" />
+    <Compile Include="Areas\AdminExportAssessment\Controllers\FinancialGuaranteeDecisionHistoryController.cs" />
+    <Compile Include="Areas\AdminExportAssessment\Controllers\FinancialGuaranteeDetailsController.cs" />
     <Compile Include="Areas\AdminExportAssessment\Controllers\KeyDatesOverrideController.cs" />
     <Compile Include="Areas\AdminExportAssessment\Controllers\MarkAsInterimController.cs" />
     <Compile Include="Areas\AdminExportAssessment\Controllers\OverviewController.cs" />
@@ -1084,6 +1091,22 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DateInputViewModelResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Areas\AdminExportAssessment\ViewModels\FinancialGuaranteeAssessment\FinancialGuaranteeAssessmentResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FinancialGuaranteeAssessmentResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\AdminExportAssessment\ViewModels\FinancialGuaranteeDecisionHistory\FinancialGuaranteeDecisionHistoryViewModel.cs" />
+    <Compile Include="Areas\AdminExportAssessment\ViewModels\FinancialGuaranteeDecision\ApproveFinancialGuaranteeViewModel.cs" />
+    <Compile Include="Areas\AdminExportAssessment\ViewModels\FinancialGuaranteeAssessment\CompleteFinancialGuaranteeViewModel.cs" />
+    <Compile Include="Areas\AdminExportAssessment\ViewModels\FinancialGuaranteeAssessment\NewFinancialGuaranteeViewModel.cs" />
+    <Compile Include="Areas\AdminExportAssessment\ViewModels\FinancialGuaranteeDecision\FinancialGuaranteeDecisionResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FinancialGuaranteeDecisionResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\AdminExportAssessment\ViewModels\FinancialGuaranteeDecision\RefuseFinancialGuaranteeViewModel.cs" />
+    <Compile Include="Areas\AdminExportAssessment\ViewModels\FinancialGuaranteeDecision\ReleaseFinancialGuaranteeViewModel.cs" />
     <Compile Include="Areas\AdminExportAssessment\ViewModels\KeyDatesOverride\IndexViewModel.cs" />
     <Compile Include="Areas\AdminExportAssessment\ViewModels\KeyDatesOverride\IndexViewModelResources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -1112,6 +1135,26 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>DecisionResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\AdminExportAssessment\Views\FinancialGuaranteeAssessment\FinancialGuaranteeAssessmentResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FinancialGuaranteeAssessmentResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\AdminExportAssessment\Views\FinancialGuaranteeDecisionHistory\FinancialGuaranteeDecisionHistoryResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FinancialGuaranteeDecisionHistoryResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\AdminExportAssessment\Views\FinancialGuaranteeDecision\FinancialGuaranteeDecisionResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FinancialGuaranteeDecisionResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\AdminExportAssessment\Views\FinancialGuaranteeDetails\FinancialGuaranteeDetailsResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FinancialGuaranteeDetailsResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Areas\AdminExportAssessment\Views\KeyDatesOverride\IndexResources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -2657,15 +2700,13 @@
     <Compile Include="Areas\NotificationApplication\ViewModels\HCode\HCodeViewModel.cs" />
     <Compile Include="Areas\AdminExportAssessment\Controllers\DecisionController.cs" />
     <Compile Include="Areas\AdminExportAssessment\Controllers\KeyDatesController.cs" />
-    <Compile Include="Areas\AdminExportAssessment\Controllers\FinancialGuaranteeController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeController.cs" />
     <Compile Include="Areas\Admin\Controllers\RegistrationController.cs" />
     <Compile Include="Areas\Admin\Controllers\UserAdministrationController.cs" />
     <Compile Include="Areas\Admin\ViewModels\Registration\AdminRegistrationViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\Home\BasicSearchViewModel.cs" />
     <Compile Include="Areas\AdminExportAssessment\ViewModels\DateInputViewModel.cs" />
-    <Compile Include="Areas\AdminExportAssessment\ViewModels\FinancialGuarantee\FinancialGuaranteeDatesViewModel.cs" />
-    <Compile Include="Areas\AdminExportAssessment\ViewModels\FinancialGuarantee\FinancialGuaranteeDecisionViewModel.cs" />
+    <Compile Include="Areas\AdminExportAssessment\ViewModels\FinancialGuaranteeDecision\FinancialGuaranteeDecisionViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\UserAdministration\NewUsersListViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\UserAdministration\UserApprovalViewModel.cs" />
     <Compile Include="Areas\FinancialGuarantee\Controllers\HomeController.cs" />
@@ -2729,9 +2770,6 @@
     <Compile Include="Infrastructure\Navigation.cs" />
     <Compile Include="Infrastructure\NavigationExtensions.cs" />
     <Compile Include="Infrastructure\RouteCollectionExtensions.cs" />
-    <Compile Include="Mappings\FinancialGuaranteeDataMap.cs" />
-    <Compile Include="Mappings\FinancialGuaranteeDataToDecisionMap.cs" />
-    <Compile Include="Mappings\FinancialGuaranteeDecisionViewModelMap.cs" />
     <Compile Include="Mappings\StateOfExportWithTransportRouteDataMap.cs" />
     <Compile Include="Mappings\TransitStateWithTransportRouteDataMap.cs" />
     <Compile Include="Mappings\StateOfImportWithTransportRouteDataMap.cs" />
@@ -3008,6 +3046,14 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>DateInputViewModelResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Areas\AdminExportAssessment\ViewModels\FinancialGuaranteeAssessment\FinancialGuaranteeAssessmentResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>FinancialGuaranteeAssessmentResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\AdminExportAssessment\ViewModels\FinancialGuaranteeDecision\FinancialGuaranteeDecisionResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>FinancialGuaranteeDecisionResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Areas\AdminExportAssessment\ViewModels\KeyDatesOverride\IndexViewModelResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>IndexViewModelResources.Designer.cs</LastGenOutput>
@@ -3027,6 +3073,22 @@
     <EmbeddedResource Include="Areas\AdminExportAssessment\Views\Decision\DecisionResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>DecisionResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\AdminExportAssessment\Views\FinancialGuaranteeAssessment\FinancialGuaranteeAssessmentResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>FinancialGuaranteeAssessmentResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\AdminExportAssessment\Views\FinancialGuaranteeDecisionHistory\FinancialGuaranteeDecisionHistoryResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>FinancialGuaranteeDecisionHistoryResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\AdminExportAssessment\Views\FinancialGuaranteeDecision\FinancialGuaranteeDecisionResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>FinancialGuaranteeDecisionResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\AdminExportAssessment\Views\FinancialGuaranteeDetails\FinancialGuaranteeDetailsResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>FinancialGuaranteeDetailsResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\AdminExportAssessment\Views\KeyDatesOverride\IndexResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

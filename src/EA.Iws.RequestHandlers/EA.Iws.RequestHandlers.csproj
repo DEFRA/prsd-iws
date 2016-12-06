@@ -86,6 +86,10 @@
     <Compile Include="Admin\EntryOrExitPoints\AddEntryOrExitPointHandler.cs" />
     <Compile Include="Admin\EntryOrExitPoints\CheckEntryOrExitPointUniqueHandler.cs" />
     <Compile Include="Admin\EntryOrExitPoints\GetEntryOrExitPointsGroupedByCountryHandler.cs" />
+    <Compile Include="Admin\FinancialGuarantee\CompleteFinancialGuaranteeHandler.cs" />
+    <Compile Include="Admin\FinancialGuarantee\CreateFinancialGuaranteeHandler.cs" />
+    <Compile Include="Admin\FinancialGuarantee\GetCurrentFinancialGuaranteeDetailsHandler.cs" />
+    <Compile Include="Admin\FinancialGuarantee\GetFinancialGuaranteeHistoryHandler.cs" />
     <Compile Include="Admin\FinancialGuarantee\GetFinancialGuaranteeStatusHandler.cs" />
     <Compile Include="Admin\GetExportNotificationOwnerDisplaysHandler.cs" />
     <Compile Include="Admin\GetUserCompetentAuthorityHandler.cs" />
@@ -125,7 +129,6 @@
     <Compile Include="Admin\FinancialGuarantee\GetFinancialGuaranteeDataByNotificationApplicationIdHandler.cs" />
     <Compile Include="Admin\NotificationAssessment\NotificationStatusChangeEventHandler.cs" />
     <Compile Include="Admin\Registration\GetLocalAreasHandler.cs" />
-    <Compile Include="Admin\FinancialGuarantee\SetFinancialGuaranteeDatesHandler.cs" />
     <Compile Include="Admin\UserAdministration\GetAllUsersHandler.cs" />
     <Compile Include="Admin\UserAdministration\GetNewInternalUsersHandler.cs" />
     <Compile Include="Admin\UserAdministration\GetUserByExportNotificationIdHandler.cs" />
@@ -352,7 +355,6 @@
     <Compile Include="Mappings\Movement\MovementMap.cs" />
     <Compile Include="Mappings\NotificationAssessment\AccountManageDataMap.cs" />
     <Compile Include="Mappings\NotificationAssessment\ConsultationMap.cs" />
-    <Compile Include="Mappings\NotificationAssessment\FinancialGuaranteeDecisionMap.cs" />
     <Compile Include="Mappings\Reports\DataImportNotificationMap.cs" />
     <Compile Include="Mappings\Reports\DataExportNotificationMap.cs" />
     <Compile Include="Mappings\Reports\FinanceMap.cs" />
@@ -387,7 +389,6 @@
     <Compile Include="Movement\Mappings\MovementSummaryMap.cs" />
     <Compile Include="Movement\Receive\RecordReceiptInternalHandler.cs" />
     <Compile Include="NotificationAssessment\GetFinancialGuaranteeDecisionRequiredHandler.cs" />
-    <Compile Include="NotificationAssessment\GetFinancialGuaranteeDecisionsHandler.cs" />
     <Compile Include="NotificationAssessment\GetKeyDatesSummaryInformationHandler.cs" />
     <Compile Include="NotificationAssessment\GetLocalAreasByUserCaHandler.cs" />
     <Compile Include="NotificationAssessment\GetNotificationAttentionSummaryHandler.cs" />

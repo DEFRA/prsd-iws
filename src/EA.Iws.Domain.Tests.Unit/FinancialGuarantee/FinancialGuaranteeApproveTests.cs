@@ -12,13 +12,13 @@
 
         private readonly Action<FinancialGuarantee> setGuaranteeApproved =
             fg =>
-                fg.Approve(new ApproveDates(AfterCompletionDate, 
+                fg.Approve(new ApprovalData(AfterCompletionDate, 
                     BlanketBondReference, 
                     AnyInt, false));
 
         private readonly Action<FinancialGuarantee> setGuaranteeApprovedIsBlanketBond =
             fg =>
-                fg.Approve(new ApproveDates(AfterCompletionDate,
+                fg.Approve(new ApprovalData(AfterCompletionDate,
                     BlanketBondReference,
                     AnyInt, true));
 
@@ -33,7 +33,7 @@
         {
             Assert.Throws<InvalidOperationException>(
                 () =>
-                    CompletedFinancialGuarantee.Approve(new ApproveDates(BeforeCompletionDate, BlanketBondReference, AnyInt, true)));
+                    CompletedFinancialGuarantee.Approve(new ApprovalData(BeforeCompletionDate, BlanketBondReference, AnyInt, true)));
         }
 
         [Fact]
@@ -58,6 +58,14 @@
             setGuaranteeApproved(CompletedFinancialGuarantee);
 
             Assert.Equal(AnyInt, CompletedFinancialGuarantee.ActiveLoadsPermitted);
+        }
+
+        [Fact]
+        public void DecisionIsApproved()
+        {
+            setGuaranteeApproved(CompletedFinancialGuarantee);
+
+            Assert.Equal(FinancialGuaranteeDecision.Approved, CompletedFinancialGuarantee.Decision);
         }
     }
 }

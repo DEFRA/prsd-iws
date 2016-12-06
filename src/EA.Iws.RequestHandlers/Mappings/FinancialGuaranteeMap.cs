@@ -1,6 +1,5 @@
 ﻿namespace EA.Iws.RequestHandlers.Mappings
 {
-    using Core.Admin;
     using Core.FinancialGuarantee;
     using Core.Notification;
     using Domain.FinancialGuarantee;
@@ -21,12 +20,13 @@
             {
                 return new FinancialGuaranteeData
                 {
-                    Status = FinancialGuaranteeStatus.AwaitingApplication
+                    IsEmpty = true
                 };
             }
 
             return new FinancialGuaranteeData
             {
+                FinancialGuaranteeId = source.Id,
                 Status = source.Status,
                 CompletedDate = source.CompletedDate,
                 DecisionRequiredDate = source.GetDecisionRequiredDate(workingDayCalculator, parameter),
@@ -34,28 +34,11 @@
                 DecisionDate = source.DecisionDate,
                 RefusalReason = source.RefusalReason,
                 ActiveLoadsPermitted = source.ActiveLoadsPermitted,
-                Decision = GetDecision(source),
+                Decision = source.Decision,
                 ReferenceNumber = source.ReferenceNumber,
-                IsBlanketBond = source.IsBlanketBond.GetValueOrDefault()
+                IsBlanketBond = source.IsBlanketBond.GetValueOrDefault(),
+                IsEmpty = false
             };
-        }
-
-        private Core.Admin.FinancialGuaranteeDecision? GetDecision(FinancialGuarantee guarantee)
-        {
-            if (guarantee.Status == FinancialGuaranteeStatus.Approved)
-            {
-                return Core.Admin.FinancialGuaranteeDecision.Approved;
-            }
-            else if (guarantee.Status == FinancialGuaranteeStatus.Refused)
-            {
-                return Core.Admin.FinancialGuaranteeDecision.Refused;
-            }
-            else if (guarantee.Status == FinancialGuaranteeStatus.Released)
-            {
-                return Core.Admin.FinancialGuaranteeDecision.Released;
-            }
-
-            return null;
         }
     }
 }

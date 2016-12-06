@@ -4,6 +4,7 @@ namespace EA.Iws.RequestHandlers.Tests.Unit.Admin.FinancialGuarantee
     using Core.FinancialGuarantee;
     using DataAccess;
     using Domain.FinancialGuarantee;
+    using TestHelpers.Helpers;
 
     public class FinancialGuaranteeDecisionTests
     {
@@ -12,19 +13,29 @@ namespace EA.Iws.RequestHandlers.Tests.Unit.Admin.FinancialGuarantee
         protected static readonly DateTime LastDate = new DateTime(2015, 2, 1);
 
         protected static readonly Guid ApplicationCompletedId = new Guid("9DA0EE37-EA13-4DF8-A4C9-0A8FDBC2207B");
+        protected static readonly Guid FinancialGuaranteeId = new Guid("9837EB9C-5F52-4D8D-A347-3CF57B2ED4FE");
 
         protected IwsContext context;
 
-        protected class TestFinancialGuarantee : FinancialGuarantee
+        protected class TestFinancialGuaranteeCollection : FinancialGuaranteeCollection
         {
-            public new Guid NotificationApplicationId
+            public TestFinancialGuaranteeCollection(Guid notificationId)
+                : base(notificationId)
             {
-                set { base.NotificationApplicationId = value; }
             }
 
-            public bool ApproveCalled { get; private set; }
+            public void AddExistingFinancialGuarantee(FinancialGuarantee financialGuarantee)
+            {
+                FinancialGuaranteesCollection.Add(financialGuarantee);
+            }
+        }
 
-            public bool ApproveThrows { get; set; }
+        protected class TestFinancialGuarantee : FinancialGuarantee
+        {
+            public TestFinancialGuarantee(Guid financialGuaranteeId)
+            {
+                EntityHelper.SetEntityId(this, financialGuaranteeId);
+            }
 
             public bool RejectThrows { get; set; }
 
@@ -34,16 +45,10 @@ namespace EA.Iws.RequestHandlers.Tests.Unit.Admin.FinancialGuarantee
 
             public bool ReleaseCalled { get; set; }
 
-            public override void Approve(ApproveDates approveDates)
+            public new DateTime? CompletedDate
             {
-                ApproveCalled = true;
-
-                if (ApproveThrows)
-                {
-                    throw new InvalidOperationException();
-                }
-
-                Status = FinancialGuaranteeStatus.Approved;
+                get { return base.CompletedDate; }
+                set { ObjectInstantiator<FinancialGuarantee>.SetProperty(x => x.CompletedDate, value, this); }
             }
 
             public override void Refuse(DateTime decisionDate, string refusalReason)
@@ -68,6 +73,11 @@ namespace EA.Iws.RequestHandlers.Tests.Unit.Admin.FinancialGuarantee
                 }
 
                 Status = FinancialGuaranteeStatus.Released;
+            }
+
+            public void SetStatus(FinancialGuaranteeStatus status)
+            {
+                Status = status;
             }
         }
     }

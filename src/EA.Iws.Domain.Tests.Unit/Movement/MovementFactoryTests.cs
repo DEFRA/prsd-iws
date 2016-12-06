@@ -13,7 +13,6 @@
     using Domain.NotificationApplication.Shipment;
     using Domain.NotificationAssessment;
     using FakeItEasy;
-    using NotificationApplication;
     using NotificationConsent;
     using Prsd.Core;
     using TestHelpers.DomainFakes;
@@ -97,8 +96,7 @@
         public async Task FinancialGuaranteeNotApproved_Throws()
         {
             SetupMovements(500, 100);
-            A.CallTo(() => financialGuaranteeRepository.GetByNotificationId(NotificationId)).Returns(GetFinancialGuarantee());
-            A.CallTo(() => financialGuaranteeRepository.GetStatusByNotificationId(NotificationId)).Returns(FinancialGuaranteeStatus.ApplicationComplete);
+            A.CallTo(() => financialGuaranteeRepository.GetByNotificationId(NotificationId)).Returns(GetFinancialGuarantee(FinancialGuaranteeStatus.ApplicationComplete));
             A.CallTo(() => movementRepository.GetAllMovements(NotificationId)).Returns(new Movement[0]);
 
             var date = Today.AddDays(5);
@@ -110,8 +108,7 @@
         public async Task DateIsValidated()
         {
             SetupMovements(500, 100);
-            A.CallTo(() => financialGuaranteeRepository.GetByNotificationId(NotificationId)).Returns(GetFinancialGuarantee());
-            A.CallTo(() => financialGuaranteeRepository.GetStatusByNotificationId(NotificationId)).Returns(FinancialGuaranteeStatus.Approved);
+            A.CallTo(() => financialGuaranteeRepository.GetByNotificationId(NotificationId)).Returns(GetFinancialGuarantee(FinancialGuaranteeStatus.Approved));
             A.CallTo(() => movementRepository.GetActiveMovements(NotificationId)).Returns(GetMovementArray(1));
 
             var date = Today.AddDays(5);
@@ -132,10 +129,9 @@
             A.CallTo(() => assessmentRepository.GetByNotificationId(NotificationId))
                 .Returns(new TestableNotificationAssessment { Status = NotificationStatus.Consented });
 
-            A.CallTo(() => financialGuaranteeRepository.GetByNotificationId(NotificationId)).Returns(GetFinancialGuarantee());
+            A.CallTo(() => financialGuaranteeRepository.GetByNotificationId(NotificationId)).Returns(GetFinancialGuarantee(FinancialGuaranteeStatus.Approved));
             A.CallTo(() => movementRepository.GetActiveMovements(NotificationId)).Returns(GetMovementArray(1));
             A.CallTo(() => consentRepository.GetByNotificationId(NotificationId)).Returns(ValidConsent());
-            A.CallTo(() => financialGuaranteeRepository.GetStatusByNotificationId(NotificationId)).Returns(FinancialGuaranteeStatus.Approved);
 
             var movement = await factory.Create(NotificationId, Today);
 
@@ -153,7 +149,7 @@
             A.CallTo(() => assessmentRepository.GetByNotificationId(NotificationId))
                 .Returns(new TestableNotificationAssessment { Status = NotificationStatus.Consented });
 
-            A.CallTo(() => financialGuaranteeRepository.GetByNotificationId(NotificationId)).Returns(GetFinancialGuarantee());
+            A.CallTo(() => financialGuaranteeRepository.GetByNotificationId(NotificationId)).Returns(GetFinancialGuarantee(FinancialGuaranteeStatus.Approved));
             A.CallTo(() => movementRepository.GetActiveMovements(NotificationId)).Returns(GetMovementArray(2));
 
             await Assert.ThrowsAsync<InvalidOperationException>(() => factory.Create(NotificationId, Today));
@@ -180,8 +176,7 @@
         {
             SetupMovements(1000, 900);
 
-            A.CallTo(() => financialGuaranteeRepository.GetByNotificationId(NotificationId)).Returns(GetFinancialGuarantee());
-            A.CallTo(() => financialGuaranteeRepository.GetStatusByNotificationId(NotificationId)).Returns(FinancialGuaranteeStatus.Approved);
+            A.CallTo(() => financialGuaranteeRepository.GetByNotificationId(NotificationId)).Returns(GetFinancialGuarantee(FinancialGuaranteeStatus.Approved));
             A.CallTo(() => movementRepository.GetActiveMovements(NotificationId)).Returns(GetMovementArray(1));
 
             await factory.Create(NotificationId, Today);
@@ -233,12 +228,15 @@
             A.CallTo(() => shipmentRepository.GetByNotificationId(NotificationId)).Returns(shipment);
         }
 
-        private static FinancialGuarantee GetFinancialGuarantee()
+        private static FinancialGuaranteeCollection GetFinancialGuarantee(FinancialGuaranteeStatus status)
         {
-            var fg = FinancialGuarantee.Create(new Guid("26342B36-15A4-4AC4-BAE0-9C2CA36B0CD9"));
-            ObjectInstantiator<FinancialGuarantee>.SetProperty(f => f.ActiveLoadsPermitted, 2, fg);
+            var collection = new FinancialGuaranteeCollection(NotificationId);
 
-            return fg;
+            var fg = collection.AddFinancialGuarantee(Today);
+            ObjectInstantiator<FinancialGuarantee>.SetProperty(f => f.ActiveLoadsPermitted, 2, fg);
+            ObjectInstantiator<FinancialGuarantee>.SetProperty(f => f.Status, status, fg);
+
+            return collection;
         }
 
         private IEnumerable<Movement> GetMovementArray(int n)

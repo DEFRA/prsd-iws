@@ -52,8 +52,8 @@
     <Compile Include="Admin\ApprovalAction.cs" />
     <Compile Include="Admin\ChangeUserData.cs" />
     <Compile Include="Admin\ExportNotificationOwnerDisplay.cs" />
-    <Compile Include="Admin\FinancialGuaranteeData.cs" />
-    <Compile Include="Admin\FinancialGuaranteeDecision.cs" />
+    <Compile Include="FinancialGuarantee\FinancialGuaranteeData.cs" />
+    <Compile Include="FinancialGuarantee\FinancialGuaranteeDecision.cs" />
     <Compile Include="Admin\InternalUserData.cs" />
     <Compile Include="Admin\InternalUserStatus.cs" />
     <Compile Include="Admin\DecisionType.cs" />
@@ -192,7 +192,6 @@
     <Compile Include="NotificationAssessment\TransactionType.cs" />
     <Compile Include="Notification\UKCompetentAuthority.cs" />
     <Compile Include="NotificationAssessment\NotificationAssessmentDecisionRecord.cs" />
-    <Compile Include="NotificationAssessment\FinancialGuaranteeDecisionData.cs" />
     <Compile Include="Annexes\ExportNotification\ProvidedAnnexesData.cs" />
     <Compile Include="Shared\AddressDataResources.Designer.cs">
       <AutoGen>True</AutoGen>

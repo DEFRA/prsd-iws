@@ -1,0 +1,24 @@
+﻿@model EA.Iws.Web.Areas.AdminExportAssessment.ViewModels.FinancialGuaranteeAssessment.NewFinancialGuaranteeViewModel
+@using Resources = EA.Iws.Web.Areas.AdminExportAssessment.Views.FinancialGuaranteeAssessment.FinancialGuaranteeAssessmentResources
+@{
+    ViewBag.Title = Resources.NewTitle;
+}
+
+<h1 class="heading-large">@Resources.NewTitle</h1>
+
+@using (Html.BeginForm())
+{
+    @Html.Gds().ValidationSummary()
+    @Html.AntiForgeryToken()
+
+    <div class="form-group @Html.Gds().FormGroupClass(m => m.ReceivedDate.Day) @Html.Gds().FormGroupClass(m => m.ReceivedDate.Month) @Html.Gds().FormGroupClass(m => m.ReceivedDate.Year)">
+        <label class="form-label" for="ReceivedDate_Day">@Html.DisplayNameFor(m => m.ReceivedDate)</label>
+        @Html.EditorFor(m => m.ReceivedDate)
+    </div>
+
+    <button class="button" type="submit">@Constants.ContinueButtonText</button>
+}
+
+@section menu {
+    @Html.Action("ExportNavigation", "Menu", new { area = "Admin", section = ExportNavigationSection.Assessment })
+}

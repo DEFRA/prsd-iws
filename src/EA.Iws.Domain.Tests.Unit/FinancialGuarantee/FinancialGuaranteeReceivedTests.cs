@@ -1,39 +1,40 @@
 ﻿namespace EA.Iws.Domain.Tests.Unit.FinancialGuarantee
 {
-    using System;
     using Core.FinancialGuarantee;
+    using Prsd.Core;
     using Xunit;
 
     public class FinancialGuaranteeReceivedTests : FinancialGuaranteeTests
     {
         [Fact]
-        public void SetReceivedDate_SetsDate()
+        public void Create_GeneratesObjectwithExpectedValues()
         {
-            FinancialGuarantee.Received(AnyDate);
+            SystemTime.Freeze();
 
+            var fg = FinancialGuaranteeCollection.AddFinancialGuarantee(AnyDate);
+
+            Assert.Equal(SystemTime.UtcNow, fg.CreatedDate);
+            Assert.Equal(FinancialGuaranteeStatus.ApplicationReceived, fg.Status);
+
+            SystemTime.Unfreeze();
+        }
+
+        [Fact]
+        public void ReceivedDate_IsSet()
+        {
             Assert.Equal(AnyDate, FinancialGuarantee.ReceivedDate);
         }
 
         [Fact]
-        public void Status_IsPending()
+        public void Status_IsApplicationReceived()
         {
-            Assert.Equal(FinancialGuaranteeStatus.AwaitingApplication, FinancialGuarantee.Status);
-        }
-
-        [Fact]
-        public void SetReceivedDate_ChangesStatus()
-        {
-            FinancialGuarantee.Received(AnyDate);
-
             Assert.Equal(FinancialGuaranteeStatus.ApplicationReceived, FinancialGuarantee.Status);
         }
 
         [Fact]
-        public void SetReceivedDateTwice_Throws()
+        public void Decision_IsNone()
         {
-            FinancialGuarantee.Received(AnyDate);
-
-            Assert.Throws<InvalidOperationException>(() => FinancialGuarantee.Received(AnyDate.AddDays(1)));
+            Assert.Equal(FinancialGuaranteeDecision.None, FinancialGuarantee.Decision);
         }
     }
 }

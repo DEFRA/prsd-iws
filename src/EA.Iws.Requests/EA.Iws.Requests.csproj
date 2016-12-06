@@ -54,6 +54,10 @@
     <Compile Include="Admin\EntryOrExitPoints\AddEntryOrExitPoint.cs" />
     <Compile Include="Admin\EntryOrExitPoints\CheckEntryOrExitPointUnique.cs" />
     <Compile Include="Admin\EntryOrExitPoints\GetEntryOrExitPointsGroupedByCountry.cs" />
+    <Compile Include="Admin\FinancialGuarantee\CompleteFinancialGuarantee.cs" />
+    <Compile Include="Admin\FinancialGuarantee\CreateFinancialGuarantee.cs" />
+    <Compile Include="Admin\FinancialGuarantee\GetCurrentFinancialGuaranteeDetails.cs" />
+    <Compile Include="Admin\FinancialGuarantee\GetFinancialGuaranteeHistory.cs" />
     <Compile Include="Admin\GetExportNotificationOwnerDisplays.cs" />
     <Compile Include="Admin\GetUserCompetentAuthority.cs" />
     <Compile Include="Admin\KeyDates\GetImportKeyDatesOverrideData.cs" />
@@ -85,13 +89,11 @@
     <Compile Include="Admin\SendTestEmail.cs" />
     <Compile Include="Admin\SmokeTest.cs" />
     <Compile Include="Admin\UserAdministration\CreateInternalUser.cs" />
-    <Compile Include="Admin\FinancialGuarantee\FinancialGuaranteeDecisionRequest.cs" />
     <Compile Include="Admin\FinancialGuarantee\ReleaseFinancialGuarantee.cs" />
     <Compile Include="Admin\FinancialGuarantee\RefuseFinancialGuarantee.cs" />
     <Compile Include="Admin\FinancialGuarantee\ApproveFinancialGuarantee.cs" />
     <Compile Include="Admin\GetLocalAreas.cs" />
     <Compile Include="Admin\FinancialGuarantee\GetFinancialGuaranteeDataByNotificationApplicationId.cs" />
-    <Compile Include="Admin\FinancialGuarantee\SetFinancialGuaranteeDates.cs" />
     <Compile Include="Admin\UserAdministration\GetAllUsers.cs" />
     <Compile Include="Admin\UserAdministration\GetNewInternalUsers.cs" />
     <Compile Include="Admin\UserAdministration\GetUserByExportNotificationId.cs" />
@@ -204,7 +206,6 @@
     <Compile Include="Movement\SetMovementFileId.cs" />
     <Compile Include="Movement\Reject\SetMovementRejected.cs" />
     <Compile Include="NotificationAssessment\GetFinancialGuaranteeDecisionRequired.cs" />
-    <Compile Include="NotificationAssessment\GetFinancialGuaranteeDecisions.cs" />
     <Compile Include="NotificationAssessment\GetFinancialGuaranteeStatus.cs" />
     <Compile Include="NotificationAssessment\GetKeyDatesSummaryInformation.cs" />
     <Compile Include="NotificationAssessment\GetLocalAreasByUserCA.cs" />

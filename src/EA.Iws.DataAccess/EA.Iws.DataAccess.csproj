@@ -103,6 +103,7 @@
     <Compile Include="Mappings\Common\EmailAddressMapping.cs" />
     <Compile Include="Mappings\Exports\ConsultationMapping.cs" />
     <Compile Include="Mappings\Exports\FacilityCollectionMapping.cs" />
+    <Compile Include="Mappings\Exports\FinancialGuaranteeCollectionMapping.cs" />
     <Compile Include="Mappings\Exports\MeansOfTransportMapping.cs" />
     <Compile Include="Mappings\Exports\ProducerCollectionMapping.cs" />
     <Compile Include="Mappings\Exports\NumberOfShipmentsHistoryMapping.cs" />
@@ -213,7 +214,6 @@
     <Compile Include="Repositories\ExporterRepository.cs" />
     <Compile Include="Repositories\ExportNotificationOwnerDisplayRepository.cs" />
     <Compile Include="Repositories\FacilityRepository.cs" />
-    <Compile Include="Repositories\FinancialGuaranteeDecisionRepository.cs" />
     <Compile Include="Repositories\FinancialGuaranteeRepository.cs" />
     <Compile Include="Repositories\ImporterRepository.cs" />
     <Compile Include="Repositories\Imports\ConsultationRepository.cs" />

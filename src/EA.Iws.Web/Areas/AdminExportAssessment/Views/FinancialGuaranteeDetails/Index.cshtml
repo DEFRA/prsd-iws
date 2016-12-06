@@ -1,0 +1,92 @@
+﻿@model EA.Iws.Core.FinancialGuarantee.FinancialGuaranteeData
+@using EA.Iws.Core.FinancialGuarantee
+@using Resources = EA.Iws.Web.Areas.AdminExportAssessment.Views.FinancialGuaranteeDetails.FinancialGuaranteeDetailsResources
+@{
+    ViewBag.Title = Resources.DetailsTitle;
+}
+
+<h1 class="heading-large">@Resources.DetailsTitle</h1>
+
+<div class="form-group">
+
+    <table class="fg-decision">
+        <tbody>
+        <tr>
+            <th>@Resources.Status</th>
+            <td>@EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(Model.Status)</td>
+        </tr>
+
+        <tr>
+            <th>@Resources.Decision</th>
+            <td>@EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(Model.Decision)</td>
+        </tr>
+
+        @if (Model.Decision == FinancialGuaranteeDecision.Refused)
+        {
+            <tr>
+                <th>@Resources.RefusalReason</th>
+                <td>@Model.RefusalReason</td>
+            </tr>
+        }
+
+        <tr>
+            <th>@Resources.DecisionDate</th>
+            <td>
+                @if (Model.DecisionDate.HasValue)
+                {
+                    @Html.Gds().DisplayDateFor(m => m.DecisionDate.Value)
+                }
+                else
+                {
+                    @:- -
+                }
+            </td>
+        </tr>
+        <tr>
+            <th>@Resources.IsBlanketBond</th>
+            <td>
+                @if (Model.IsBlanketBond.HasValue)
+                {
+                    @(Model.IsBlanketBond.Value ? Resources.Yes : Resources.No)
+                }
+                else
+                {
+                    @:- -
+                }
+            </td>
+        </tr>
+        <tr>
+            <th>@Resources.ReferenceNumber</th>
+            <td>
+                @if (!string.IsNullOrWhiteSpace(Model.ReferenceNumber))
+                {
+                    @Model.ReferenceNumber
+                }
+                else
+                {
+                    @:- -
+                }
+            </td>
+        </tr>
+        <tr>
+            <th>@Resources.ActiveLoadsPermitted</th>
+            <td>
+                @if (Model.ActiveLoadsPermitted.HasValue)
+                {
+                    @Model.ActiveLoadsPermitted.Value
+                }
+                else
+                {
+                    @:- -
+                }
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+@Html.ActionLink(Resources.BackToHistoryLink, "Index", "FinancialGuaranteeDecisionHistory")
+
+@section menu {
+    @Html.Action("ExportNavigation", "Menu", new { area = "Admin", section = ExportNavigationSection.Assessment })
+}

@@ -52,8 +52,8 @@
   <ItemGroup>
     <Compile Include="DateTimeOffsetRange.cs" />
     <Compile Include="EmailAddress.cs" />
-    <Compile Include="FinancialGuarantee\FinancialGuaranteeDecision.cs" />
-    <Compile Include="FinancialGuarantee\IFinancialGuaranteeDecisionRepository.cs" />
+    <Compile Include="FinancialGuarantee\FinancialGuaranteeApproval.cs" />
+    <Compile Include="FinancialGuarantee\FinancialGuaranteeCollection.cs" />
     <Compile Include="FinancialGuarantee\IFinancialGuaranteeRepository.cs" />
     <Compile Include="IInterimMovementDocumentGenerator.cs" />
     <Compile Include="ImportMovement\CancelImportMovement.cs" />
@@ -203,7 +203,7 @@
     <Compile Include="EstimatedValue.cs" />
     <Compile Include="FileStore\File.cs" />
     <Compile Include="FileStore\IFileRepository.cs" />
-    <Compile Include="FinancialGuarantee\ApproveDates.cs" />
+    <Compile Include="FinancialGuarantee\ApprovalData.cs" />
     <Compile Include="FinancialGuarantee\FinancialGuarantee.cs" />
     <Compile Include="Events\RegistrationApprovedEvent.cs" />
     <Compile Include="FinancialGuarantee\FinancialGuaranteeStatusChange.cs" />

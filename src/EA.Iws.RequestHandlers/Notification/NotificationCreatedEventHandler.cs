@@ -19,10 +19,10 @@
         public async Task HandleAsync(NotificationCreatedEvent @event)
         {
             var notificationAssessment = new NotificationAssessment(@event.Notification.Id);
-            var financialGuarantee = FinancialGuarantee.Create(@event.Notification.Id);
+            var financialGuaranteeCollection = new FinancialGuaranteeCollection(@event.Notification.Id);
 
             context.NotificationAssessments.Add(notificationAssessment);
-            context.FinancialGuarantees.Add(financialGuarantee);
+            context.FinancialGuarantees.Add(financialGuaranteeCollection);
 
             await context.SaveChangesAsync();
         }

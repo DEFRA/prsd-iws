@@ -19,15 +19,21 @@
         [Fact]
         public void DecisionDateBeforeCompletionDateThrows()
         {
-            Assert.Throws<InvalidOperationException>(() => CompletedFinancialGuarantee.Release(BeforeCompletionDate));
+            Assert.Throws<InvalidOperationException>(() => ApprovedFinancialGuarantee.Release(BeforeCompletionDate));
         }
 
         [Fact]
         public void SetsReleasedDate()
         {
-            CompletedFinancialGuarantee.Release(AfterCompletionDate);
+            ApprovedFinancialGuarantee.Release(AfterCompletionDate);
 
-            Assert.Equal(AfterCompletionDate, CompletedFinancialGuarantee.ReleasedDate);
+            Assert.Equal(AfterCompletionDate, ApprovedFinancialGuarantee.ReleasedDate);
+        }
+
+        [Fact]
+        public void CannotReleaseCompletedGuarantee()
+        {
+            Assert.Throws<InvalidOperationException>(() => CompletedFinancialGuarantee.Release(AfterCompletionDate));
         }
 
         [Fact]
@@ -44,9 +50,9 @@
         [Fact]
         public void SetsStatus()
         {
-            releaseGuarantee(CompletedFinancialGuarantee);
+            releaseGuarantee(ApprovedFinancialGuarantee);
 
-            Assert.Equal(FinancialGuaranteeStatus.Released, CompletedFinancialGuarantee.Status);
+            Assert.Equal(FinancialGuaranteeStatus.Released, ApprovedFinancialGuarantee.Status);
         }
 
         [Fact]
@@ -58,11 +64,17 @@
         }
 
         [Fact]
-        public void CanReleaseARefusedGuarantee()
+        public void CannotReleaseARefusedGuarantee()
         {
-            RefusedFinancialGuarantee.Release(AfterCompletionDate);
+            Assert.Throws<InvalidOperationException>(() => RefusedFinancialGuarantee.Release(AfterCompletionDate));
+        }
 
-            Assert.Equal(FinancialGuaranteeStatus.Released, RefusedFinancialGuarantee.Status);
+        [Fact]
+        public void ReleaseApprovedRetainsDecision()
+        {
+            ApprovedFinancialGuarantee.Release(AfterCompletionDate);
+
+            Assert.Equal(FinancialGuaranteeDecision.Approved, ApprovedFinancialGuarantee.Decision);
         }
     }
 }

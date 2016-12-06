@@ -11,9 +11,12 @@
     {
         public Guid NotificationId { get; private set; }
 
-        public GetFinancialGuaranteeStatus(Guid notificationId)
+        public Guid FinancialGuaranteeId { get; private set; }
+
+        public GetFinancialGuaranteeStatus(Guid notificationId, Guid financialGuaranteeId)
         {
             NotificationId = notificationId;
+            FinancialGuaranteeId = financialGuaranteeId;
         }
     }
 }

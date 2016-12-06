@@ -13,12 +13,6 @@
             set { ObjectInstantiator<FinancialGuarantee>.SetProperty(x => x.Id, value, this); }
         }
 
-        public new Guid NotificationApplicationId
-        {
-            get { return base.NotificationApplicationId; }
-            set { base.NotificationApplicationId = value; }
-        }
-
         public new DateTime? DecisionDate
         {
             get { return base.DecisionDate; }

@@ -156,8 +156,8 @@
 
         private void AddFinancialGuarantees(Guid sourceId, Guid destinationId)
         {
-            var sourceFinancialGuarantee = FinancialGuarantee.Create(sourceId);
-            var destinationFinancialGuarantee = FinancialGuarantee.Create(destinationId);
+            var sourceFinancialGuarantee = new FinancialGuaranteeCollection(sourceId);
+            var destinationFinancialGuarantee = new FinancialGuaranteeCollection(destinationId);
             context.FinancialGuarantees.Add(sourceFinancialGuarantee);
             context.FinancialGuarantees.Add(destinationFinancialGuarantee);
         }

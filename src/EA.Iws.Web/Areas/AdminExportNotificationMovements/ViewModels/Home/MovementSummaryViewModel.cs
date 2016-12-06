@@ -68,7 +68,7 @@
             ActiveLoadsPermitted = data.SummaryData.ActiveLoadsPermitted;
             ActiveLoadsCurrent = data.SummaryData.CurrentActiveLoads;
             NotificationStatus = data.SummaryData.NotificationStatus;
-            FgStatus = data.FgStatus;
+            FgStatus = data.SummaryData.FinancialGuaranteeStatus;
 
             TableData = new List<MovementSummaryTableViewModel>(
                 data.ShipmentTableData.OrderByDescending(m => m.Number)

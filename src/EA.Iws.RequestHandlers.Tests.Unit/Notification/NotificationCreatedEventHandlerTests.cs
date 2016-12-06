@@ -54,7 +54,7 @@
         {
             await handler.HandleAsync(message);
 
-            Assert.Single(context.FinancialGuarantees, fg => fg.NotificationApplicationId == notificationId);
+            Assert.Single(context.FinancialGuarantees, fg => fg.NotificationId == notificationId);
         }
     }
 }

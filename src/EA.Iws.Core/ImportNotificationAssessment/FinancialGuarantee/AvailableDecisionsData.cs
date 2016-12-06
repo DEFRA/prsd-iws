@@ -2,6 +2,7 @@
 {
     using System.Collections.Generic;
     using Admin;
+    using Core.FinancialGuarantee;
 
     public class AvailableDecisionsData
     {

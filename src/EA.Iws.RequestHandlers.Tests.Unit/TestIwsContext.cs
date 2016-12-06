@@ -40,7 +40,7 @@
             this.Countries = new TestDbSet<Country>();
             this.EntryOrExitPoints = new TestDbSet<EntryOrExitPoint>();
             this.Exporters = new TestDbSet<Exporter>();
-            this.FinancialGuarantees = new TestDbSet<FinancialGuarantee>();
+            this.FinancialGuarantees = new TestDbSet<FinancialGuaranteeCollection>();
             this.InternalUsers = new TestDbSet<InternalUser>();
             this.LocalAreas = new TestDbSet<LocalArea>();
             this.NotificationApplications = new TestDbSet<NotificationApplication>();

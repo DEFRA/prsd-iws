@@ -3,6 +3,7 @@
     using System;
     using Areas.AdminImportAssessment.ViewModels.FinancialGuaranteeDecision;
     using Core.Admin;
+    using Core.FinancialGuarantee;
     using Prsd.Core.Helpers;
     using Prsd.Core.Mapper;
     using Requests.ImportNotificationAssessment.FinancialGuarantee;
