@@ -127,7 +127,7 @@
     <value>Added H or HP codes</value>
   </data>
   <data name="MainHeading" xml:space="preserve">
-    <value>Waste type and codes</value>
+    <value>Waste codes</value>
   </data>
   <data name="NoCodes" xml:space="preserve">
     <value>None</value>
@@ -136,7 +136,7 @@
     <value>Remove</value>
   </data>
   <data name="Title" xml:space="preserve">
-    <value>Waste type and codes</value>
+    <value>Waste codes</value>
   </data>
   <data name="UnClassesTableHeading" xml:space="preserve">
     <value>Added UN classes</value>

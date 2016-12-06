@@ -1,4 +1,4 @@
-﻿namespace EA.Iws.Web.Areas.ImportNotification.ViewModels.WasteType
+﻿namespace EA.Iws.Web.Areas.ImportNotification.ViewModels.WasteCodes
 {
     using System;
     using System.Collections.Generic;
@@ -9,13 +9,13 @@
     using Core.WasteCodes;
     using Shared;
 
-    public class WasteTypeViewModel
+    public class WasteCodesViewModel
     {
-        public WasteTypeViewModel()
+        public WasteCodesViewModel()
         {
         }
 
-        public WasteTypeViewModel(WasteType data)
+        public WasteCodesViewModel(WasteType data)
         {
             Name = data.Name;
             BaselCodeNotListed = data.BaselCodeNotListed;
@@ -33,36 +33,36 @@
 
         public Guid ImportNotificationId { get; set; }
 
-        [Display(Name = "BaselCodeNotListed", ResourceType = typeof(WasteTypeViewModelResources))]
+        [Display(Name = "BaselCodeNotListed", ResourceType = typeof(WasteCodesViewModelResources))]
         public bool BaselCodeNotListed { get; set; }
 
-        [Display(Name = "YCodeNotApplicable", ResourceType = typeof(WasteTypeViewModelResources))]
+        [Display(Name = "YCodeNotApplicable", ResourceType = typeof(WasteCodesViewModelResources))]
         public bool YCodeNotApplicable { get; set; }
 
-        [Display(Name = "HCodeNotApplicable", ResourceType = typeof(WasteTypeViewModelResources))]
+        [Display(Name = "HCodeNotApplicable", ResourceType = typeof(WasteCodesViewModelResources))]
         public bool HCodeNotApplicable { get; set; }
 
-        [Display(Name = "UnClassNotApplicable", ResourceType = typeof(WasteTypeViewModelResources))]
+        [Display(Name = "UnClassNotApplicable", ResourceType = typeof(WasteCodesViewModelResources))]
         public bool UnClassNotApplicable { get; set; }
 
-        [Display(Name = "WasteTypeName", ResourceType = typeof(WasteTypeViewModelResources))]
+        [Display(Name = "WasteTypeName", ResourceType = typeof(WasteCodesViewModelResources))]
         public string Name { get; set; }
 
         public IList<WasteCodeViewModel> AllCodes { get; set; }
 
-        [Display(Name = "BaselCode", ResourceType = typeof(WasteTypeViewModelResources))]
+        [Display(Name = "BaselCode", ResourceType = typeof(WasteCodesViewModelResources))]
         public Guid? SelectedBaselCode { get; set; }
 
-        [Display(Name = "EwcCode", ResourceType = typeof(WasteTypeViewModelResources))]
+        [Display(Name = "EwcCode", ResourceType = typeof(WasteCodesViewModelResources))]
         public Guid? SelectedEwcCode { get; set; }
 
-        [Display(Name = "YCode", ResourceType = typeof(WasteTypeViewModelResources))]
+        [Display(Name = "YCode", ResourceType = typeof(WasteCodesViewModelResources))]
         public Guid? SelectedYCode { get; set; }
 
-        [Display(Name = "HCode", ResourceType = typeof(WasteTypeViewModelResources))]
+        [Display(Name = "HCode", ResourceType = typeof(WasteCodesViewModelResources))]
         public Guid? SelectedHCode { get; set; }
 
-        [Display(Name = "UnClass", ResourceType = typeof(WasteTypeViewModelResources))]
+        [Display(Name = "UnClass", ResourceType = typeof(WasteCodesViewModelResources))]
         public Guid? SelectedUnClass { get; set; }
 
         public string SelectedEwcCodesJson { get; set; }

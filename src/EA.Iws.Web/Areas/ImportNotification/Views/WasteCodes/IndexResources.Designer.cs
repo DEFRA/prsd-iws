@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace EA.Iws.Web.Areas.ImportNotification.Views.WasteType {
+namespace EA.Iws.Web.Areas.ImportNotification.Views.WasteCodes {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace EA.Iws.Web.Areas.ImportNotification.Views.WasteType {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EA.Iws.Web.Areas.ImportNotification.Views.WasteType.IndexResources", typeof(IndexResources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EA.Iws.Web.Areas.ImportNotification.Views.WasteCodes.IndexResources", typeof(IndexResources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -88,7 +88,7 @@ namespace EA.Iws.Web.Areas.ImportNotification.Views.WasteType {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Waste type and codes.
+        ///   Looks up a localized string similar to Waste codes.
         /// </summary>
         public static string MainHeading {
             get {
@@ -115,7 +115,7 @@ namespace EA.Iws.Web.Areas.ImportNotification.Views.WasteType {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Waste type and codes.
+        ///   Looks up a localized string similar to Waste codes.
         /// </summary>
         public static string Title {
             get {

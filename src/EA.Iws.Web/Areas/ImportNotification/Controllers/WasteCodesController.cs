@@ -8,15 +8,15 @@
     using Prsd.Core.Mediator;
     using Requests.ImportNotification;
     using Requests.ImportNotification.WasteType;
-    using ViewModels.WasteType;
+    using ViewModels.WasteCodes;
 
     [Authorize(Roles = "internal")]
-    public class WasteTypeController : Controller
+    public class WasteCodesController : Controller
     {
         private readonly IMapper mapper;
         private readonly IMediator mediator;
 
-        public WasteTypeController(IMediator mediator, IMapper mapper)
+        public WasteCodesController(IMediator mediator, IMapper mapper)
         {
             this.mediator = mediator;
             this.mapper = mapper;
@@ -28,14 +28,14 @@
             var allCodes = await mediator.SendAsync(new GetAllWasteCodes());
             var data = await mediator.SendAsync(new GetDraftData<WasteType>(id));
 
-            var model = mapper.Map<WasteTypeViewModel>(data, allCodes);
+            var model = mapper.Map<WasteCodesViewModel>(data, allCodes);
 
             return View(model);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Index(Guid id, WasteTypeViewModel model)
+        public async Task<ActionResult> Index(Guid id, WasteCodesViewModel model)
         {
             var wasteType = mapper.Map<WasteType>(model);
 
