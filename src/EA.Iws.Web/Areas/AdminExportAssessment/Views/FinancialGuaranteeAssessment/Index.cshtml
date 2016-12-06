@@ -56,6 +56,13 @@
     </div>
 }
 
+@if (Model.Status == FinancialGuaranteeStatus.Approved)
+{
+    <div class="form-group">
+        @Html.ActionLink(Resources.Release, "Release", "FinancialGuaranteeDecision", new { financialGuaranteeId = Model.FinancialGuaranteeId }, null)
+    </div>
+}
+
 @if (Model.Decision != FinancialGuaranteeDecision.None || Model.IsEmpty)
 {
     <div class="form-group">

@@ -84,7 +84,7 @@
 @if (Model.CurrentFinancialGuarantee.Decision == FinancialGuaranteeDecision.Approved)
 {
     <div class="form-group">
-        @Html.ActionLink(Resources.NewLink, "New", "FinancialGuaranteeAssessment", null, new { @class = "button" })
+        @Html.ActionLink(Resources.ReleaseFinancialGuarantee, "Release", "FinancialGuaranteeDecision", new { financialGuaranteeId = Model.CurrentFinancialGuarantee.FinancialGuaranteeId }, null)
     </div>
 }
 
@@ -119,6 +119,11 @@
                     <td>
                         @Html.ActionLink(Resources.DetailsLink, "Index", "FinancialGuaranteeDetails",
                             routeValues: new { financialGuaranteeId = financialGuarantee.FinancialGuaranteeId }, htmlAttributes: null)
+                        @if (financialGuarantee.Status == FinancialGuaranteeStatus.Approved)
+                        {
+                            @:&nbsp;
+                            @Html.ActionLink(Resources.Release, "Release", "FinancialGuaranteeDecision", new { financialGuaranteeId = financialGuarantee.FinancialGuaranteeId }, null)
+                        }
                     </td>
                 </tr>
             }

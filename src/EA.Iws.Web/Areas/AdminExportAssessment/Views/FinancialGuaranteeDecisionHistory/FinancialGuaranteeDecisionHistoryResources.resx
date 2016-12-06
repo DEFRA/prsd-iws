@@ -141,9 +141,6 @@
   <data name="IsBlanketBond" xml:space="preserve">
     <value>Is this a blanket bond?</value>
   </data>
-  <data name="NewLink" xml:space="preserve">
-    <value>Record a new financial guarantee</value>
-  </data>
   <data name="No" xml:space="preserve">
     <value>No</value>
   </data>
@@ -152,6 +149,12 @@
   </data>
   <data name="ReferenceNumber" xml:space="preserve">
     <value>Reference number</value>
+  </data>
+  <data name="Release" xml:space="preserve">
+    <value>Release</value>
+  </data>
+  <data name="ReleaseFinancialGuarantee" xml:space="preserve">
+    <value>Release financial guarantee</value>
   </data>
   <data name="Status" xml:space="preserve">
     <value>Status</value>

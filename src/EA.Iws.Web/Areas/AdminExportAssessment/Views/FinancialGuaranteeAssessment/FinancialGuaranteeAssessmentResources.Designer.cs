@@ -150,5 +150,14 @@ namespace EA.Iws.Web.Areas.AdminExportAssessment.Views.FinancialGuaranteeAssessm
                 return ResourceManager.GetString("RecordNew", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Release financial guarantee.
+        /// </summary>
+        public static string Release {
+            get {
+                return ResourceManager.GetString("Release", resourceCulture);
+            }
+        }
     }
 }

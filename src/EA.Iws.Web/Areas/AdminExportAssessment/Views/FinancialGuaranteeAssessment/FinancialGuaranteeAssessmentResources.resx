@@ -147,4 +147,7 @@
   <data name="RecordNew" xml:space="preserve">
     <value>Record a new financial guarantee</value>
   </data>
+  <data name="Release" xml:space="preserve">
+    <value>Release financial guarantee</value>
+  </data>
 </root>

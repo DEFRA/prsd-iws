@@ -134,15 +134,6 @@ namespace EA.Iws.Web.Areas.AdminExportAssessment.Views.FinancialGuaranteeDecisio
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Record a new financial guarantee.
-        /// </summary>
-        public static string NewLink {
-            get {
-                return ResourceManager.GetString("NewLink", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to No.
         /// </summary>
         public static string No {
@@ -166,6 +157,24 @@ namespace EA.Iws.Web.Areas.AdminExportAssessment.Views.FinancialGuaranteeDecisio
         public static string ReferenceNumber {
             get {
                 return ResourceManager.GetString("ReferenceNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Release.
+        /// </summary>
+        public static string Release {
+            get {
+                return ResourceManager.GetString("Release", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Release financial guarantee.
+        /// </summary>
+        public static string ReleaseFinancialGuarantee {
+            get {
+                return ResourceManager.GetString("ReleaseFinancialGuarantee", resourceCulture);
             }
         }
         
