@@ -6,13 +6,13 @@
     {
         None = 1,
 
-        [Display(ShortName = "Refuse")]
+        [Display(ShortName = "Refuse", Name = "Refused")]
         Refused = 2,
 
-        [Display(ShortName = "Approve")]
+        [Display(ShortName = "Approve", Name = "Approved")]
         Approved = 3,
 
-        [Display(ShortName = "Release")]
+        [Display(ShortName = "Release", Name = "Released")]
         Released = 4
     }
 }
