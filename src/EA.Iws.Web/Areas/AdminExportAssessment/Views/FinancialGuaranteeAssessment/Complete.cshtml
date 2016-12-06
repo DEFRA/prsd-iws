@@ -12,6 +12,7 @@
     @Html.AntiForgeryToken()
 
     @Html.HiddenFor(m => m.FinancialGuaranteeId)
+    @Html.HiddenFor(m => m.ReceivedDate)
 
     <div class="form-group @Html.Gds().FormGroupClass(m => m.CompleteDate.Day) @Html.Gds().FormGroupClass(m => m.CompleteDate.Month) @Html.Gds().FormGroupClass(m => m.CompleteDate.Year)">
         <label class="form-label" for="CompleteDate_Day">@Html.DisplayNameFor(m => m.CompleteDate)</label>

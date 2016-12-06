@@ -25,7 +25,7 @@
         {
             if (!CompleteDate.IsCompleted)
             {
-                yield return new ValidationResult(FinancialGuaranteeAssessmentResources.CompleteDateRequired, new[] { "ReceivedDate.Day" });
+                yield return new ValidationResult(FinancialGuaranteeAssessmentResources.CompleteDateRequired, new[] { "CompleteDate.Day" });
             }
 
             if (CompleteDate.AsDateTime() > SystemTime.UtcNow)
