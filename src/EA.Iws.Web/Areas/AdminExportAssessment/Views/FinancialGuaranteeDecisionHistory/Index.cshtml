@@ -21,7 +21,7 @@
             <tbody>
             <tr>
                 <th>@Resources.Status</th>
-                <td>@Model.CurrentFinancialGuarantee.Status</td>
+                <td>@EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(Model.CurrentFinancialGuarantee.Status)</td>
             </tr>
 
             <tr>
@@ -105,7 +105,7 @@
             @foreach (var financialGuarantee in Model.FinancialGuaranteeHistory)
             {
                 <tr>
-                    <td>@financialGuarantee.Status</td>
+                    <td>@EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(financialGuarantee.Status)</td>
                     <td>
                         @if (financialGuarantee.DecisionDate.HasValue)
                         {

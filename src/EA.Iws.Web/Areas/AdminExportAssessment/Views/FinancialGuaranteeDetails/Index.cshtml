@@ -13,12 +13,12 @@
         <tbody>
         <tr>
             <th>@Resources.Status</th>
-            <td>@Model.Status</td>
+            <td>@EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(Model.Status)</td>
         </tr>
 
         <tr>
             <th>@Resources.Decision</th>
-            <td>@Model.Decision</td>
+            <td>@EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(Model.Decision)</td>
         </tr>
 
         @if (Model.Decision == FinancialGuaranteeDecision.Refused)
