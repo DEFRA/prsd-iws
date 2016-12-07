@@ -1,6 +1,7 @@
 ﻿@using EA.Iws.Core.ImportNotificationAssessment
 @using EA.Iws.Core.Notification
 @using EA.Iws.Core.Shared
+@using Resources = EA.Iws.Web.Areas.Admin.Views.Menu.ImportNavigationResources
 
 @model EA.Iws.Web.Areas.Admin.ViewModels.Menu.ImportNavigationViewModel
 
@@ -24,33 +25,33 @@
             <br />
             <span class="assigned-area">@Model.Details.Status</span>
             <br />
-            <span class="assigned-area"> @(Model.Details.IsInterim ? "Is Interim" : "Non-interim")</span>
+            <span class="assigned-area"> @(Model.Details.IsInterim ? Resources.IsInterim : Resources.NonInterim)</span>
         </p>
     </div>
     <ul>
         <li class="@GetClassForSection(ImportNavigationSection.Notification, "active")">
             <h3 class="@GetClassForSection(ImportNavigationSection.Notification, "current")">
                 <span></span>
-                Import Notification
+                @Resources.ImportNotificationHeading
             </h3>
             <ul>
-                <li>@Html.ActionLink("Overview", "Index", "Home", new { area = "ImportNotification", id }, null)</li>
+                <li>@Html.ActionLink(Resources.OverviewLinkText, "Index", "Home", new { area = "ImportNotification", id }, null)</li>
                 @if (Model.ActiveSection == ImportNavigationSection.Notification && Model.ShowImportSections)
                 {
                     if (Model.Details.NotificationType != NotificationType.Disposal)
                     {
-                        <li>@Html.ActionLink("Pre-consent", "Index", "Preconsented", new { area = "ImportNotification", id }, null)</li>
+                        <li>@Html.ActionLink(Resources.PreconsentLinkText, "Index", "Preconsented", new { area = "ImportNotification", id }, null)</li>
                     }
-                    <li>@Html.ActionLink("Exporter notifier", "Index", "Exporter", new { area = "ImportNotification", id }, null)</li>
-                    <li>@Html.ActionLink("Importer consignee", "Index", "Importer", new { area = "ImportNotification", id }, null)</li>
-                    <li>@Html.ActionLink("Waste generator producer", "Index", "Producer", new { area = "ImportNotification", id }, null)</li>
-                    <li>@Html.ActionLink("Facility", "Index", "Facility", new { area = "ImportNotification", id }, null)</li>
-                    <li>@Html.ActionLink("Intended shipments", "Index", "Shipment", new { area = "ImportNotification", id }, null)</li>
-                    <li>@Html.ActionLink("Waste operation", "Index", "WasteOperation", new { area = "ImportNotification", id }, null)</li>
-                    <li>@Html.ActionLink("Waste type and codes", "Index", "WasteType", new { area = "ImportNotification", id }, null)</li>
-                    <li>@Html.ActionLink("Transport route export", "Index", "StateOfExport", new { area = "ImportNotification", id }, null)</li>
-                    <li>@Html.ActionLink("Transport route import", "Index", "StateOfImport", new { area = "ImportNotification", id }, null)</li>
-                    <li>@Html.ActionLink("Transport route transits", "Index", "TransitState", new { area = "ImportNotification", id }, null)</li>
+                    <li>@Html.ActionLink(Resources.ExporterLinkText, "Index", "Exporter", new { area = "ImportNotification", id }, null)</li>
+                    <li>@Html.ActionLink(Resources.ImporterLinkText, "Index", "Importer", new { area = "ImportNotification", id }, null)</li>
+                    <li>@Html.ActionLink(Resources.GeneratorLinkText, "Index", "Producer", new { area = "ImportNotification", id }, null)</li>
+                    <li>@Html.ActionLink(Resources.FacilityLinkText, "Index", "Facility", new { area = "ImportNotification", id }, null)</li>
+                    <li>@Html.ActionLink(Resources.IntendedShipmentsLinkText, "Index", "Shipment", new { area = "ImportNotification", id }, null)</li>
+                    <li>@Html.ActionLink(Resources.OperationLinkText, "Index", "WasteOperation", new { area = "ImportNotification", id }, null)</li>
+                    <li>@Html.ActionLink(Resources.CodesLinkText, "Index", "WasteType", new { area = "ImportNotification", id }, null)</li>
+                    <li>@Html.ActionLink(Resources.ExportRouteLinkText, "Index", "StateOfExport", new { area = "ImportNotification", id }, null)</li>
+                    <li>@Html.ActionLink(Resources.ImportRouteLinkText, "Index", "StateOfImport", new { area = "ImportNotification", id }, null)</li>
+                    <li>@Html.ActionLink(Resources.TransitRouteLinkText, "Index", "TransitState", new { area = "ImportNotification", id }, null)</li>
                 }
             </ul>
         </li>
@@ -58,34 +59,34 @@
         <li class="@GetClassForSection(ImportNavigationSection.Assessment, "active")">
             <h3 class="@GetClassForSection(ImportNavigationSection.Assessment, "current")">
                 <span></span>
-                Assessment
+                @Resources.AssessmentHeading
             </h3>
             <ul>
-                <li>@Html.ActionLink("Key dates", "Index", "KeyDates", new { area = "AdminImportAssessment", id }, null)</li>
+                <li>@Html.ActionLink(Resources.KeyDatesLinkText, "Index", "KeyDates", new { area = "AdminImportAssessment", id }, null)</li>
                 @if (Model.ShowKeyDatesOverride)
                 {
-                    <li>@Html.ActionLink("Update key dates", "Index", "KeyDatesOverride", new { area = "AdminImportAssessment", id }, null)</li>
+                    <li>@Html.ActionLink(Resources.UpdateKeyDatesLinkText, "Index", "KeyDatesOverride", new { area = "AdminImportAssessment", id }, null)</li>
                 }
                 @if (Model.ShowAssessmentDecision)
                 {
-                    <li>@Html.ActionLink("Assessment decision", "Index", "Decision", new { area = "AdminImportAssessment", id }, null)</li>
+                    <li>@Html.ActionLink(Resources.DecisionLinkText, "Index", "Decision", new { area = "AdminImportAssessment", id }, null)</li>
                 }
                 @if (Model.Details.CompetentAuthority == UKCompetentAuthority.England)
                 {
-                    <li>@Html.ActionLink("Assign an area", "Index", "AssignArea", new { area = "AdminImportAssessment", id}, null)</li>
+                    <li>@Html.ActionLink(Resources.AreaLinkText, "Index", "AssignArea", new { area = "AdminImportAssessment", id}, null)</li>
                 }
-                <li>@Html.ActionLink("FG dates", "ReceivedDate", "FinancialGuaranteeDates", new { area = "AdminImportAssessment", id }, null)</li>
-                <li>@Html.ActionLink("FG decision", "Index", "FinancialGuaranteeDecision", new { area = "AdminImportAssessment", id }, null)</li>
+                <li>@Html.ActionLink(Resources.FGDatesLinkText, "ReceivedDate", "FinancialGuaranteeDates", new { area = "AdminImportAssessment", id }, null)</li>
+                <li>@Html.ActionLink(Resources.FGDecisionLinkText, "Index", "FinancialGuaranteeDecision", new { area = "AdminImportAssessment", id }, null)</li>
             </ul>
         </li>
 
         <li class="@GetClassForSection(ImportNavigationSection.Finance, "active")">
             <h3 class="@GetClassForSection(ImportNavigationSection.Finance, "current")">
                 <span></span>
-                Finance
+                @Resources.FinanceHeading
             </h3>
             <ul>
-                <li>@Html.ActionLink("Finance management", "Index", "AccountManagement", new { area = "AdminImportAssessment", id }, null)</li>
+                <li>@Html.ActionLink(Resources.FinanceLinkText, "Index", "AccountManagement", new { area = "AdminImportAssessment", id }, null)</li>
             </ul>
         </li>
 
@@ -95,14 +96,14 @@
             <li class="@GetClassForSection(ImportNavigationSection.Shipments, "active")">
                 <h3 class="@GetClassForSection(ImportNavigationSection.Shipments, "current")">
                     <span></span>
-                    Shipments
+                    @Resources.ShipmentsHeading
                 </h3>
                 <ul>
-                    <li>@Html.ActionLink("Shipment summary", "Index", "Home", new { area = "AdminImportNotificationMovements", id }, null)</li>
-                    <li>@Html.ActionLink("Cancel shipments", "Index", "Cancel", new { area = "AdminImportNotificationMovements", id }, null)</li>
+                    <li>@Html.ActionLink(Resources.ShipmentSummaryLinkText, "Index", "Home", new { area = "AdminImportNotificationMovements", id }, null)</li>
+                    <li>@Html.ActionLink(Resources.CancelShipmentsLinkText, "Index", "Cancel", new { area = "AdminImportNotificationMovements", id }, null)</li>
                     @if (Model.ShowDeleteMovementLink)
                     {
-                        <li>@Html.ActionLink("Delete a shipment", "Index", "Delete", new { area = "AdminImportNotificationMovements", id }, null)</li>
+                        <li>@Html.ActionLink(Resources.DeleteShipmentLinkText, "Index", "Delete", new { area = "AdminImportNotificationMovements", id }, null)</li>
                     }
                 </ul>
             </li>
@@ -111,7 +112,7 @@
         <li class="">
             <h3 class="">
                 <span></span>
-                Reporting
+                @Resources.ReportingHeading
             </h3>
             @Html.Partial("~/Areas/Admin/Views/Menu/_ReportingLinks.cshtml")
         </li>
@@ -122,7 +123,7 @@
             <li class="">
                 <h3 class="">
                     <span></span>
-                    Account services
+                    @Resources.AccountServicesHeading
                 </h3>
                 @Html.Partial("~/Areas/Admin/Views/Menu/_AdminLinks.cshtml", Model.AdminLinksModel)
             </li>
