@@ -61,6 +61,24 @@ namespace EA.Iws.Web.Areas.Reports.ViewModels.FreedomOfInformation {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Select the type of date to search on.
+        /// </summary>
+        public static string DateType {
+            get {
+                return ResourceManager.GetString("DateType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please select the date to search on.
+        /// </summary>
+        public static string DateTypeRequired {
+            get {
+                return ResourceManager.GetString("DateTypeRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to From date.
         /// </summary>
         public static string FromDate {
