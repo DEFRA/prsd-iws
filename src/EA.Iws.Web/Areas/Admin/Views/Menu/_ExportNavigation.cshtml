@@ -9,12 +9,17 @@
 
 <div id="accordion" class="accordion-export">
     <div class="notification-number">
-        <p class="bold-medium">@Model.Data.Number
+        <p class="bold-medium">
+            @Model.Data.Number
             @if (Model.Data.CompetentAuthority == UKCompetentAuthority.England)
             {
                 <br/>
                 <span class="assigned-area">@Model.Data.Area</span>
             }
+            <br/>
+            <span class="assigned-area">@Model.Data.Status</span>
+            <br />
+            <span class="assigned-area"> @(Model.Data.IsInterim.GetValueOrDefault() ? "Interim" : "Non-Interim")</span>
         </p>
     </div>
     <ul>
