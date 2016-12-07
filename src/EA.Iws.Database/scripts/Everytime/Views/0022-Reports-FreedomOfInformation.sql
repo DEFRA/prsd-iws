@@ -30,6 +30,12 @@ AS
                    order by 1
                    FOR XML PATH('')
                  ), 1, 1, '' ) AS [YCode],
+		STUFF(( SELECT ', ' + WC.Code AS [text()]
+                   FROM [Reports].[WasteCodes] WC
+                   WHERE WC.NotificationId = N.Id AND WC.CodeType = 5
+                   order by 1
+                   FOR XML PATH('')
+                 ), 1, 1, '' ) AS [HCode],
         OP.OperationCodes,
         O.[Importer] AS [ImporterName],
         O.[ImporterAddress],
