@@ -72,6 +72,7 @@
     <Compile Include="EmailAddressTests.cs" />
     <Compile Include="FinancialGuarantee\FinancialGuaranteeApprovalTests.cs" />
     <Compile Include="FinancialGuarantee\FinancialGuaranteeApproveTests.cs" />
+    <Compile Include="FinancialGuarantee\FinancialGuaranteeCollectionTests.cs" />
     <Compile Include="FinancialGuarantee\FinancialGuaranteeCompletedTests.cs" />
     <Compile Include="FinancialGuarantee\FinancialGuaranteeReceivedTests.cs" />
     <Compile Include="FinancialGuarantee\FinancialGuaranteeRefuseTests.cs" />
