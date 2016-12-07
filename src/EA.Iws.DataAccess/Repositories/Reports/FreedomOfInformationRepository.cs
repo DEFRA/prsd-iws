@@ -70,7 +70,6 @@
                 WHERE 
                     [CompetentAuthorityId] = @competentAuthority
                     AND [ChemicalCompositionTypeId] = @chemicalComposition
-                    AND [ReceivedDate] BETWEEN @from AND @to
                     AND (@dateType = 'NotificationReceivedDate' AND  [NotificationReceivedDate] BETWEEN @from AND @to
 				         OR @dateType = 'ConsentFrom' AND  [ConsentFrom] BETWEEN @from AND @to
                          OR @dateType = 'ReceivedDate' AND  
