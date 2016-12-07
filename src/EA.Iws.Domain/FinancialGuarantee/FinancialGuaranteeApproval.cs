@@ -3,6 +3,7 @@
     using System;
     using System.Threading.Tasks;
     using Core.ComponentRegistration;
+    using Prsd.Core;
 
     [AutoRegister]
     public class FinancialGuaranteeApproval
@@ -30,7 +31,7 @@
                 }
                 else
                 {
-                    approvedFinancialGuarantee.Release(approvalData.DecisionDate);
+                    approvedFinancialGuarantee.Release(SystemTime.UtcNow);
                 }
             }
         }
