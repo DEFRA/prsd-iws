@@ -21,6 +21,10 @@
             <br />
                 <span class="assigned-area">@Model.Details.Area</span>
             }
+            <br />
+            <span class="assigned-area">@Model.Details.Status</span>
+            <br />
+            <span class="assigned-area"> @(Model.Details.IsInterim ? "Is Interim" : "Non-interim")</span>
         </p>
     </div>
     <ul>
