@@ -47,7 +47,7 @@
 
             await mediator.SendAsync(new SetDraftData<WasteOperation>(id, wasteOperation));
 
-            return RedirectToAction("Index", "WasteCodes");
+            return RedirectToAction("Index", "WasteType");
         }
     }
 }

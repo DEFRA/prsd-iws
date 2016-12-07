@@ -475,6 +475,7 @@
     <Content Include="Areas\AdminExportAssessment\Views\FinancialGuaranteeAssessment\Complete.cshtml" />
     <Content Include="Areas\AdminExportAssessment\Views\FinancialGuaranteeDecisionHistory\Index.cshtml" />
     <Content Include="Areas\AdminExportAssessment\Views\FinancialGuaranteeDetails\Index.cshtml" />
+    <Content Include="Areas\ImportNotification\Views\WasteType\Index.cshtml" />
     <None Include="Content\iws\_panels.scss" />
     <Content Include="Content\nta-extended.css" />
     <Content Include="Content\select2\select2-spinner.gif" />
@@ -1679,6 +1680,7 @@
     <Compile Include="Areas\ImportNotification\Controllers\WasteOperationController.cs" />
     <Compile Include="Areas\ImportNotification\Controllers\ShipmentController.cs" />
     <Compile Include="Areas\ImportNotification\Controllers\WasteCodesController.cs" />
+    <Compile Include="Areas\ImportNotification\Controllers\WasteTypeController.cs" />
     <Compile Include="Areas\ImportNotification\ImportNotificationAreaRegistration.cs" />
     <Compile Include="Areas\ImportNotification\ViewModels\Exporter\ExporterViewModel.cs" />
     <Compile Include="Areas\ImportNotification\ViewModels\Exporter\ExporterViewModelResources.Designer.cs">
@@ -1776,6 +1778,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>WasteCodesViewModelResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Areas\ImportNotification\ViewModels\WasteType\WasteTypeViewModel.cs" />
     <Compile Include="Areas\ImportNotification\Views\Complete\IndexResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -1923,6 +1926,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>CaptureViewModelResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\ImportNotification\Views\WasteType\IndexResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IndexResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Areas\NotificationApplication\ViewModels\Annex\SuccessViewModel.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\Home\ResubmissionSuccessViewModel.cs" />
@@ -3658,6 +3666,10 @@
     <EmbeddedResource Include="Areas\ExportMovement\Views\Submit\SuccessResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>SuccessResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\ImportNotification\Views\WasteType\IndexResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\NotificationApplication\ViewModels\Annex\AnnexViewModelResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
