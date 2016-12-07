@@ -23,7 +23,7 @@
             ChemicalComposition chemicalComposition, UKCompetentAuthority competentAuthority, FoiReportDates dateType)
         {
             return await context.Database.SqlQuery<FreedomOfInformationData>(
-                @"SELECT 
+                @"SELECT DISTINCT
                     [NotificationNumber],
                     [NotifierName],
                     [NotifierAddress],
@@ -70,14 +70,10 @@
                 WHERE 
                     [CompetentAuthorityId] = @competentAuthority
                     AND [ChemicalCompositionTypeId] = @chemicalComposition
-                    AND (@dateType = 'NotificationReceivedDate' AND  [NotificationReceivedDate] BETWEEN @from AND @to
+                    AND (@dateType = 'NotificationReceivedDate' AND  [ReceivedDate] BETWEEN @from AND @to
 				         OR @dateType = 'ConsentFrom' AND  [ConsentFrom] BETWEEN @from AND @to
-                         OR @dateType = 'ReceivedDate' AND  
-                                            EXISTS (SELECT [MovementId] FROM [Reports].[Movements]
-                                            WHERE Id = NotificationId AND [ReceivedDate] BETWEEN @from AND @to)
-				         OR @dateType = 'CompletedDate' AND  
-                                            EXISTS (SELECT [MovementId] FROM [Reports].[Movements]
-                                            WHERE Id = NotificationId AND [CompletedDate] BETWEEN @from AND @to))",
+                         OR @dateType = 'ReceivedDate' AND [MovementReceivedDate] BETWEEN @from AND @to
+				         OR @dateType = 'CompletedDate' AND [MovementCompletedDate] BETWEEN @from AND @to)",
                 new SqlParameter("@from", from),
                 new SqlParameter("@to", to),
                 new SqlParameter("@chemicalComposition", (int)chemicalComposition),
