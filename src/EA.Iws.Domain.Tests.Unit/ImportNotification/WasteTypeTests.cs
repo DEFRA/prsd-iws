@@ -4,6 +4,7 @@
     using System.Diagnostics.CodeAnalysis;
     using System.Linq;
     using Core.WasteCodes;
+    using Core.WasteType;
     using Domain.ImportNotification.WasteCodes;
     using Domain.NotificationApplication;
     using TestHelpers.Helpers;
@@ -24,7 +25,8 @@
                 EwcCode.CreateFor(new[] { AnyWasteCode(CodeType.Ewc) }),
                 YCode.CreateFor(new[] { AnyWasteCode(CodeType.Y) }),
                 HCode.CreateFor(new[] { AnyWasteCode(CodeType.H) }),
-                UnClass.CreateFor(new[] { AnyWasteCode(CodeType.Un) }));
+                UnClass.CreateFor(new[] { AnyWasteCode(CodeType.Un) }),
+                ChemicalComposition.Other);
 
             Assert.IsType<WasteType>(wasteType);
         }
@@ -38,7 +40,8 @@
                 EwcCode.CreateFor(new[] { AnyWasteCode(CodeType.Ewc) }),
                 YCode.CreateNotApplicable(),
                 HCode.CreateNotApplicable(),
-                UnClass.CreateNotApplicable());
+                UnClass.CreateNotApplicable(),
+                ChemicalComposition.Other);
 
             Assert.True(wasteType.BaselOecdCodeNotListed);
         }
@@ -52,7 +55,8 @@
                 EwcCode.CreateFor(new[] { AnyWasteCode(CodeType.Ewc) }),
                 YCode.CreateNotApplicable(),
                 HCode.CreateNotApplicable(),
-                UnClass.CreateNotApplicable());
+                UnClass.CreateNotApplicable(),
+                ChemicalComposition.Other);
 
             Assert.True(wasteType.YCodeNotApplicable);
         }
@@ -66,7 +70,8 @@
                 EwcCode.CreateFor(new[] { AnyWasteCode(CodeType.Ewc) }),
                 YCode.CreateNotApplicable(),
                 HCode.CreateNotApplicable(),
-                UnClass.CreateNotApplicable());
+                UnClass.CreateNotApplicable(),
+                ChemicalComposition.Other);
 
             Assert.True(wasteType.HCodeNotApplicable);
         }
@@ -80,7 +85,8 @@
                 EwcCode.CreateFor(new[] { AnyWasteCode(CodeType.Ewc) }),
                 YCode.CreateNotApplicable(),
                 HCode.CreateNotApplicable(),
-                UnClass.CreateNotApplicable());
+                UnClass.CreateNotApplicable(),
+                ChemicalComposition.Other);
 
             Assert.True(wasteType.UnClassNotApplicable);
         }
@@ -127,7 +133,8 @@
                 }),
                 YCode.CreateNotApplicable(),
                 HCode.CreateNotApplicable(),
-                UnClass.CreateNotApplicable()));
+                UnClass.CreateNotApplicable(),
+                ChemicalComposition.Other));
         }
 
         [Fact]
@@ -142,7 +149,8 @@
                 }),
                 YCode.CreateNotApplicable(),
                 HCode.CreateNotApplicable(),
-                UnClass.CreateNotApplicable()));
+                UnClass.CreateNotApplicable(),
+                ChemicalComposition.Other));
         }
 
         [Fact]
@@ -157,7 +165,8 @@
                 }),
                 YCode.CreateNotApplicable(),
                 HCode.CreateNotApplicable(),
-                UnClass.CreateNotApplicable()));
+                UnClass.CreateNotApplicable(),
+                ChemicalComposition.Other));
         }
 
         [Fact]
@@ -172,7 +181,8 @@
                 }),
                 YCode.CreateNotApplicable(),
                 HCode.CreateNotApplicable(),
-                UnClass.CreateNotApplicable()));
+                UnClass.CreateNotApplicable(),
+                ChemicalComposition.Other));
         }
 
         [Fact]
@@ -184,7 +194,8 @@
                 null,
                 YCode.CreateNotApplicable(),
                 HCode.CreateNotApplicable(),
-                UnClass.CreateNotApplicable()));
+                UnClass.CreateNotApplicable(),
+                ChemicalComposition.Other));
         }
 
         [Fact]
@@ -199,7 +210,8 @@
                 }),
                 null,
                 HCode.CreateNotApplicable(),
-                UnClass.CreateNotApplicable()));
+                UnClass.CreateNotApplicable(),
+                ChemicalComposition.Other));
         }
 
         [Fact]
@@ -214,7 +226,8 @@
                 }),
                 YCode.CreateNotApplicable(),
                 null,
-                UnClass.CreateNotApplicable()));
+                UnClass.CreateNotApplicable(),
+                ChemicalComposition.Other));
         }
 
         [Fact]
@@ -229,7 +242,8 @@
                 }),
                 YCode.CreateNotApplicable(),
                 HCode.CreateNotApplicable(),
-                null));
+                null,
+                ChemicalComposition.Other));
         }
 
         [Fact]
@@ -245,7 +259,8 @@
                 EwcCode.CreateFor(new[] { AnyWasteCode(CodeType.Ewc) }),
                 YCode.CreateNotApplicable(),
                 HCode.CreateNotApplicable(),
-                UnClass.CreateNotApplicable());
+                UnClass.CreateNotApplicable(),
+                ChemicalComposition.Other);
 
             Assert.Equal(1, wasteType.WasteCodes.Count(wc => wc.WasteCodeId == baselCodeId));
         }
@@ -263,7 +278,8 @@
                 EwcCode.CreateFor(new[] { AnyWasteCode(CodeType.Ewc) }),
                 YCode.CreateNotApplicable(),
                 HCode.CreateNotApplicable(),
-                UnClass.CreateNotApplicable());
+                UnClass.CreateNotApplicable(),
+                ChemicalComposition.Other);
 
             Assert.Equal(1, wasteType.WasteCodes.Count(wc => wc.WasteCodeId == oecdCodeId));
         }
@@ -296,7 +312,8 @@
                 EwcCode.CreateFor(new[] { ewcCode }),
                 YCode.CreateNotApplicable(),
                 HCode.CreateNotApplicable(),
-                UnClass.CreateNotApplicable());
+                UnClass.CreateNotApplicable(),
+                ChemicalComposition.Other);
 
             Assert.Equal(1, wasteType.WasteCodes.Count(wc => wc.WasteCodeId == ewcCodeId));
         }
@@ -330,7 +347,8 @@
                 EwcCode.CreateFor(new[] { AnyWasteCode(CodeType.Ewc) }),
                 YCode.CreateFor(new[] { yCode }),
                 HCode.CreateNotApplicable(),
-                UnClass.CreateNotApplicable());
+                UnClass.CreateNotApplicable(),
+                ChemicalComposition.Other);
 
             Assert.Equal(1, wasteType.WasteCodes.Count(wc => wc.WasteCodeId == yCodeId));
         }
@@ -364,7 +382,8 @@
                 EwcCode.CreateFor(new[] { AnyWasteCode(CodeType.Ewc) }),
                 YCode.CreateNotApplicable(),
                 HCode.CreateFor(new[] { hCode }),
-                UnClass.CreateNotApplicable());
+                UnClass.CreateNotApplicable(),
+                ChemicalComposition.Other);
 
             Assert.Equal(1, wasteType.WasteCodes.Count(wc => wc.WasteCodeId == hCodeId));
         }
@@ -398,7 +417,8 @@
                 EwcCode.CreateFor(new[] { AnyWasteCode(CodeType.Ewc) }),
                 YCode.CreateNotApplicable(),
                 HCode.CreateNotApplicable(),
-                UnClass.CreateFor(new[] { unCode }));
+                UnClass.CreateFor(new[] { unCode }),
+                ChemicalComposition.Other);
 
             Assert.Equal(1, wasteType.WasteCodes.Count(wc => wc.WasteCodeId == unCodeId));
         }
@@ -417,6 +437,22 @@
         public void AnyUnClassesWrongType_Throws(CodeType codeType)
         {
             Assert.Throws<ArgumentException>(() => UnClass.CreateFor(new[] { AnyWasteCode(codeType) }));
+        }
+
+        [Fact]
+        public void UnsetChemicalComposition_Throws()
+        {
+            Assert.Throws<ArgumentException>(() => new WasteType(ImportNotificationId,
+                "Name",
+                BaselOecdCode.CreateNotListed(),
+                EwcCode.CreateFor(new[]
+                {
+                    AnyWasteCode(CodeType.Ewc)
+                }),
+                YCode.CreateNotApplicable(),
+                HCode.CreateNotApplicable(),
+                UnClass.CreateNotApplicable(),
+                default(ChemicalComposition)));
         }
 
         private WasteCode AnyWasteCode(CodeType codeType)

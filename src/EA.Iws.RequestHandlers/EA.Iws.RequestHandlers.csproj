@@ -215,6 +215,7 @@
     <Compile Include="ImportNotification\GetNotificationDetailsHandler.cs" />
     <Compile Include="ImportNotification\GetOriginalNumberOfShipmentsHandler.cs" />
     <Compile Include="ImportNotification\Mappings\AddressMap.cs" />
+    <Compile Include="ImportNotification\Mappings\ChemicalCompositionMap.cs" />
     <Compile Include="ImportNotification\Mappings\ContactMap.cs" />
     <Compile Include="ImportNotification\Mappings\ExporterMap.cs" />
     <Compile Include="ImportNotification\Mappings\FacilityMap.cs" />
@@ -241,6 +242,12 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>AddressValidatorResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="ImportNotification\Validate\ChemicalCompositionValidator.cs" />
+    <Compile Include="ImportNotification\Validate\ChemicalCompositionValidatorResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ChemicalCompositionValidatorResources.resx</DependentUpon>
     </Compile>
     <Compile Include="ImportNotification\Validate\ContactValidator.cs" />
     <Compile Include="ImportNotification\Validate\ContactValidatorResources.Designer.cs">
@@ -679,6 +686,10 @@
     <EmbeddedResource Include="ImportNotification\Validate\AddressValidatorResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>AddressValidatorResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ImportNotification\Validate\ChemicalCompositionValidatorResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ChemicalCompositionValidatorResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="ImportNotification\Validate\ContactValidatorResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

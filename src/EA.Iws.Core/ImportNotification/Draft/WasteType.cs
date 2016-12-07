@@ -4,7 +4,7 @@
     using System.Collections.Generic;
     using System.ComponentModel;
 
-    [DisplayName("Waste type")]
+    [DisplayName("Waste codes")]
     public class WasteType : IDraftEntity
     {
         public string Name { get; set; }

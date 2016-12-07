@@ -33,7 +33,8 @@
                 TransitStates = source.TransportRoute.TransitStates.Select(x => mapper.Map<Core.TransitState>(x)).ToArray(),
                 HasNoTransitStates = !source.TransportRoute.TransitStates.Any(),
                 StateOfExport = mapper.Map<Core.StateOfExport>(source.TransportRoute.StateOfExport),
-                StateOfImport = mapper.Map<Core.StateOfImport>(source.TransportRoute.StateOfImport)
+                StateOfImport = mapper.Map<Core.StateOfImport>(source.TransportRoute.StateOfImport),
+                Composition = mapper.Map<Core.ChemicalComposition>(source.WasteType)
             };
         }
     }

@@ -32,6 +32,7 @@
             result.Add(await validator.ValidateAsync(notificationDraft.Facilities));
             result.Add(await validator.ValidateAsync(notificationDraft.Shipment));
             result.Add(await validator.ValidateAsync(notificationDraft.WasteOperation));
+            result.Add(await validator.ValidateAsync(notificationDraft.ChemicalComposition));
             result.Add(await validator.ValidateAsync(notificationDraft.WasteType));
             result.Add(await validator.ValidateAsync(notificationDraft.StateOfExport));
             result.Add(await validator.ValidateAsync(notificationDraft.StateOfImport));
