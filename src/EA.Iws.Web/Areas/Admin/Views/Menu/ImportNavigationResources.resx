@@ -130,7 +130,7 @@
     <value>Cancel shipments</value>
   </data>
   <data name="CodesLinkText" xml:space="preserve">
-    <value>Waste type and codes</value>
+    <value>Waste codes</value>
   </data>
   <data name="DecisionLinkText" xml:space="preserve">
     <value>Assessment decision</value>
@@ -206,5 +206,8 @@
   </data>
   <data name="UpdateKeyDatesLinkText" xml:space="preserve">
     <value>Update key dates</value>
+  </data>
+  <data name="WasteTypeLink" xml:space="preserve">
+    <value>Waste type</value>
   </data>
 </root>

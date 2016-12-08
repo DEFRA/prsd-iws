@@ -97,7 +97,7 @@ namespace EA.Iws.Web.Areas.Admin.Views.Menu {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Waste type and codes.
+        ///   Looks up a localized string similar to Waste codes.
         /// </summary>
         public static string CodesLinkText {
             get {
@@ -327,6 +327,15 @@ namespace EA.Iws.Web.Areas.Admin.Views.Menu {
         public static string UpdateKeyDatesLinkText {
             get {
                 return ResourceManager.GetString("UpdateKeyDatesLinkText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Waste type.
+        /// </summary>
+        public static string WasteTypeLink {
+            get {
+                return ResourceManager.GetString("WasteTypeLink", resourceCulture);
             }
         }
     }
