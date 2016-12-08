@@ -4,14 +4,13 @@ GO
 
 ALTER VIEW [Reports].[TransitStatesConcat]
 AS
-	SELECT
-		N.Id AS NotificationId,
-		STUFF(( SELECT ', ' + TS.CountryCode AS [text()]
+    SELECT
+        T.NotificationId,
+        STUFF(( SELECT ', ' + TS.CountryCode AS [text()]
                FROM [Reports].[TransitStates] TS
-               WHERE TS.NotificationId = N.Id
+               WHERE TS.NotificationId = t.NotificationId
                order by 1
                FOR XML PATH('')
              ), 1, 1, '' ) AS [TransitStates]
-	FROM [Notification].[Notification] N
-	INNER JOIN ( SELECT DISTINCT NotificationId FROM [Reports].[TransitStates] ) TS ON N.Id = TS.NotificationId
+    FROM ( SELECT DISTINCT NotificationId FROM [Reports].[TransitStates] ) T
 GO
