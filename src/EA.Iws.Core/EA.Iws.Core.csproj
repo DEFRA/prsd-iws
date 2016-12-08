@@ -187,6 +187,7 @@
     <Compile Include="OperationCodes\OperationCode.cs" />
     <Compile Include="OperationCodes\OperationCodeMetadata.cs" />
     <Compile Include="OperationCodes\OperationCodeTypeAttribute.cs" />
+    <Compile Include="Reports\FoiReportDates.cs" />
     <Compile Include="Reports\MissingShipmentsReportDates.cs" />
     <Compile Include="Rules\MessageLevel.cs" />
     <Compile Include="Rules\RuleResult.cs" />

@@ -117,31 +117,67 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="DateType" xml:space="preserve">
-    <value>Select the type of date to search on</value>
+  <data name="AccountHeading" xml:space="preserve">
+    <value>Account services</value>
   </data>
-  <data name="DateTypeRequired" xml:space="preserve">
-    <value>Please select the date to search on</value>
+  <data name="AreaLinkText" xml:space="preserve">
+    <value>Assign an area</value>
   </data>
-  <data name="FromDate" xml:space="preserve">
-    <value>From date</value>
+  <data name="CancelShipmentLinkText" xml:space="preserve">
+    <value>Cancel shipments</value>
   </data>
-  <data name="FromDateBeforeToDate" xml:space="preserve">
-    <value>The from date must be before the to date</value>
+  <data name="ChangeOwnerHeading" xml:space="preserve">
+    <value>Change owner</value>
   </data>
-  <data name="FromDateRequired" xml:space="preserve">
-    <value>Please enter the from date</value>
+  <data name="ChangeOwnerLink" xml:space="preserve">
+    <value>Change owner</value>
   </data>
-  <data name="ToDate" xml:space="preserve">
-    <value>To date</value>
+  <data name="DecisionLinkText" xml:space="preserve">
+    <value>Assessment decision</value>
   </data>
-  <data name="ToDateRequired" xml:space="preserve">
-    <value>Please enter the to date</value>
+  <data name="DeleteShipmentLinkText" xml:space="preserve">
+    <value>Delete a shipment</value>
   </data>
-  <data name="WasteType" xml:space="preserve">
-    <value>Waste type</value>
+  <data name="FGAssessmentLinkText" xml:space="preserve">
+    <value>Financial guarantee assessment</value>
   </data>
-  <data name="WasteTypeRequired" xml:space="preserve">
-    <value>Please select the waste type</value>
+  <data name="FGHistoryLinkText" xml:space="preserve">
+    <value>Financial guarantee decision history</value>
+  </data>
+  <data name="FinanceHeading" xml:space="preserve">
+    <value>Finance</value>
+  </data>
+  <data name="FinanceLinkText" xml:space="preserve">
+    <value>Finance management</value>
+  </data>
+  <data name="isInterim" xml:space="preserve">
+    <value>Interim</value>
+  </data>
+  <data name="KeyDatesLinkText" xml:space="preserve">
+    <value>Key dates</value>
+  </data>
+  <data name="MarkInterimLinkText" xml:space="preserve">
+    <value>Mark notification as interim or non-interim</value>
+  </data>
+  <data name="nonInterim" xml:space="preserve">
+    <value>Non-Interim</value>
+  </data>
+  <data name="NotificationAssessmentHeading" xml:space="preserve">
+    <value>Notification assessment</value>
+  </data>
+  <data name="NotificationOverviewLinkText" xml:space="preserve">
+    <value>Notification overview</value>
+  </data>
+  <data name="ReportingHeading" xml:space="preserve">
+    <value>Reporting</value>
+  </data>
+  <data name="ShipmentsHeading" xml:space="preserve">
+    <value>Shipments</value>
+  </data>
+  <data name="ShipmentSummaryLinkText" xml:space="preserve">
+    <value>Shipment summary</value>
+  </data>
+  <data name="UpdateKeyDatesLinkText" xml:space="preserve">
+    <value>Update key dates</value>
   </data>
 </root>

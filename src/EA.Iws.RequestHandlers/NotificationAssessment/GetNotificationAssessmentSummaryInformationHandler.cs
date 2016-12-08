@@ -24,13 +24,15 @@
                     N.[NotificationNumber] AS [Number],
                     N.[CompetentAuthority],
                     NA.[Status],
-                    LA.[Name] AS [Area]
+                    LA.[Name] AS [Area],
+                    FC.[IsInterim]
                 FROM
                     [Notification].[Notification] N
                     INNER JOIN [Notification].[NotificationAssessment] NA ON NA.[NotificationApplicationId] = N.[Id]
                     LEFT JOIN [Notification].[Consultation] C 
                         INNER JOIN [Lookup].[LocalArea] LA ON LA.[Id] = C.[LocalAreaId]
                     ON C.[NotificationId] = N.[Id]
+                    INNER JOIN [Notification].[FacilityCollection] FC ON FC.[NotificationId] = N.[Id]
                 WHERE
                     N.[Id] = @notificationId",
                 new SqlParameter("@notificationId", message.Id)).SingleAsync();

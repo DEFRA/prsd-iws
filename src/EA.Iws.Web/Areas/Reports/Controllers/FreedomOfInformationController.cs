@@ -5,6 +5,7 @@
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Core.Admin.Reports;
+    using Core.Reports;
     using Core.WasteType;
     using Infrastructure;
     using Prsd.Core.Helpers;
@@ -41,14 +42,15 @@
             {
                 From = model.FromDate.AsDateTime().Value,
                 To = model.ToDate.AsDateTime().Value,
-                model.ChemicalComposition
+                model.ChemicalComposition,
+                model.DateType
             });
         }
 
         [HttpGet]
-        public async Task<ActionResult> Download(DateTime from, DateTime to, ChemicalComposition chemicalComposition)
+        public async Task<ActionResult> Download(DateTime from, DateTime to, ChemicalComposition chemicalComposition, FoiReportDates dateType)
         {
-            var report = await mediator.SendAsync(new GetFreedomOfInformationReport(from, to, chemicalComposition));
+            var report = await mediator.SendAsync(new GetFreedomOfInformationReport(from, to, chemicalComposition, dateType));
 
             var type = EnumHelper.GetShortName(chemicalComposition);
 

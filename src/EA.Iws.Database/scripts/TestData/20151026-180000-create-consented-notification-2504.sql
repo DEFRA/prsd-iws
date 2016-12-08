@@ -846,7 +846,8 @@ INSERT INTO [Notification].[FinancialGuarantee]
 	[CreatedDate],
 	[DecisionDate],
 	[ActiveLoadsPermitted],
-	[FinancialGuaranteeCollectionId]
+	[FinancialGuaranteeCollectionId],
+	[Decision]
 )
 VALUES
 (
@@ -858,5 +859,6 @@ VALUES
 	GETDATE(),
 	'2016-10-20',
 	520,
-	(SELECT Id FROM [Notification].[FinancialGuaranteeCollection] WHERE [NotificationId] = @NotificationId)
+	(SELECT Id FROM [Notification].[FinancialGuaranteeCollection] WHERE [NotificationId] = @NotificationId),
+	1
 )

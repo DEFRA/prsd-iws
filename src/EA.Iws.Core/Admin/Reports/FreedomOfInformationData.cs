@@ -34,6 +34,8 @@ namespace EA.Iws.Core.Admin.Reports
         
         public string YCode { get; set; }
 
+        public string HCode { get; set; }
+
         [DisplayName("R/D Code(s)")]
         public string OperationCodes { get; set; }
 

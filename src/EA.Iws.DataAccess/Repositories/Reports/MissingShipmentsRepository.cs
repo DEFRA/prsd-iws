@@ -19,8 +19,6 @@
 
         public async Task<IEnumerable<MissingShipment>> Get(DateTime from, DateTime to, UKCompetentAuthority competentAuthority, MissingShipmentsReportDates dateType)
         {
-            var bob = dateType.ToString();
-
             return await context.Database.SqlQuery<MissingShipment>(
                 @"SELECT 
                     [NotificationNumber],

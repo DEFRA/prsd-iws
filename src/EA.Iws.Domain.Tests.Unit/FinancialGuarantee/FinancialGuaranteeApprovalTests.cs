@@ -78,13 +78,13 @@
         }
 
         [Fact]
-        public async Task ReleaseDateIsSameAsDecisionDate()
+        public async Task ReleaseDateIsTodaysDate()
         {
-            await approval.Approve(notificationId, financialGuaranteeId, new ApprovalData(today, "456", 5, false));
+            await approval.Approve(notificationId, financialGuaranteeId, new ApprovalData(today.AddDays(-1), "456", 5, false));
 
             var oldFinancialGuarantee = financialGuaranteeCollection.GetFinancialGuarantee(approvedFinancialGuaranteeId);
 
-            Assert.Equal(today, oldFinancialGuarantee.ReleasedDate.Value);
+            Assert.Equal(SystemTime.UtcNow, oldFinancialGuarantee.ReleasedDate.Value);
         }
     }
 }
