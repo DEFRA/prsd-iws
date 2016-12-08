@@ -24,7 +24,7 @@
         {
             var consultation = await mediator.SendAsync(new GetImportNotificationConsultation(id));
 
-            var model = new AssignAreaViewModel(consultation.ReceivedDate)
+            var model = new AssignAreaViewModel
             {
                 NotificationId = id,
                 Areas = await GetAreas(),
@@ -47,8 +47,7 @@
 
             await mediator.SendAsync(new SetImportNotificationConsultation(
                 model.NotificationId, 
-                model.LocalAreaId.GetValueOrDefault(), 
-                model.ReceivedDate.AsDateTime()));
+                model.LocalAreaId.GetValueOrDefault()));
 
             return RedirectToAction("Index", "KeyDates", new { id = model.NotificationId, area = "AdminImportAssessment" });
         }
