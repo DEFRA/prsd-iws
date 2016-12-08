@@ -18,7 +18,7 @@
                 <span class="assigned-area">@Model.Data.Area</span>
             }
             <br/>
-            <span class="assigned-area">@Model.Data.Status</span>
+            <span class="assigned-area">@EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(Model.Data.Status)</span>
             <br />
             <span class="assigned-area"> @(Model.Data.IsInterim.GetValueOrDefault() ? Resources.isInterim : Resources.nonInterim)</span>
         </p>
