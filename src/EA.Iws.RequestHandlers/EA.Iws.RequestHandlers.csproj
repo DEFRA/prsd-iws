@@ -111,6 +111,7 @@
     <Compile Include="Admin\NotificationAssessment\SetNotificationTransmittedDateHandler.cs" />
     <Compile Include="Admin\NotificationAssessment\SetNotificationAcknowledgedDateHandler.cs" />
     <Compile Include="Admin\NotificationAssessment\UnlockNotificationHandler.cs" />
+    <Compile Include="Admin\Reports\GetImportStatsReportHandler.cs" />
     <Compile Include="Admin\Reports\GetImportNotificationsReportHandler.cs" />
     <Compile Include="Admin\Reports\GetExportNotificationsReportHandler.cs" />
     <Compile Include="Admin\Reports\GetExportStatsReportHandler.cs" />
@@ -364,6 +365,7 @@
     <Compile Include="Mappings\NotificationAssessment\ConsultationMap.cs" />
     <Compile Include="Mappings\Reports\DataImportNotificationMap.cs" />
     <Compile Include="Mappings\Reports\DataExportNotificationMap.cs" />
+    <Compile Include="Mappings\Reports\ImportStatsMap.cs" />
     <Compile Include="Mappings\Reports\FinanceMap.cs" />
     <Compile Include="Mappings\Reports\MissingShipmentMap.cs" />
     <Compile Include="Mappings\Reports\ExportStatsMap.cs" />
