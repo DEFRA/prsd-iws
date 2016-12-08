@@ -28,11 +28,23 @@
 
         public NotificationType NotificationType { get; set; }
 
-        public bool HasAcceptableStatus => NotificationStatus == NotificationStatus.InAssessment ||
-                                           NotificationStatus == NotificationStatus.ReadyToTransmit ||
-                                           NotificationStatus == NotificationStatus.Transmitted ||
-                                           NotificationStatus == NotificationStatus.DecisionRequiredBy;
+        public bool HasAcceptableStatus
+        {
+            get
+            {
+                return NotificationStatus == NotificationStatus.InAssessment ||
+                       NotificationStatus == NotificationStatus.ReadyToTransmit ||
+                       NotificationStatus == NotificationStatus.Transmitted ||
+                       NotificationStatus == NotificationStatus.DecisionRequiredBy;
+            }
+        }
 
-        public bool InterimStatusIsUpdateable => HasAcceptableStatus && NotificationType == NotificationType.Disposal;
+        public bool InterimStatusIsUpdateable
+        {
+            get
+            {
+                return HasAcceptableStatus && NotificationType == NotificationType.Disposal;
+            }
+        }      
     }
 }
