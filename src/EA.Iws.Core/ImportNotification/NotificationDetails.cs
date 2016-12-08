@@ -18,5 +18,7 @@
         public UKCompetentAuthority CompetentAuthority { get; set; }
 
         public string Area { get; set; }
+
+        public bool IsInterim { get; set; }
     }
 }

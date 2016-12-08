@@ -1603,6 +1603,16 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ReceivedDateResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Areas\Admin\Views\Menu\ExportNavigationResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ExportNavigationResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Admin\Views\Menu\ImportNavigationResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ImportNavigationResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Areas\Admin\Views\TestEmail\Index.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -3388,6 +3398,14 @@
     <EmbeddedResource Include="Areas\Admin\Views\ImportNotification\ReceivedDateResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>ReceivedDateResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\Admin\Views\Menu\ExportNavigationResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ExportNavigationResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\Admin\Views\Menu\ImportNavigationResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ImportNavigationResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\Admin\Views\TestEmail\Index.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
