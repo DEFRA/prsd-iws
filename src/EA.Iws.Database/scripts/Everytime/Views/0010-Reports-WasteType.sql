@@ -28,7 +28,7 @@ AS
     INNER JOIN	[Lookup].[ChemicalCompositionType] AS CCT 
     ON			[WT].[ChemicalCompositionType] = [CCT].[Id]
 
-    INNER JOIN	[Reports].[WasteCodes] WC 
+    LEFT JOIN	[Reports].[WasteCodes] WC 
     ON			[N].[Id] = [WC].[NotificationId] 
     AND			[WC].[CodeType] IN (1, 2)
 
@@ -57,7 +57,7 @@ AS
     INNER JOIN	[Lookup].[ChemicalCompositionType] AS CCT 
     ON			[WT].[ChemicalCompositionType] = [CCT].[Id]
 
-    INNER JOIN	[Reports].[WasteCodes] WC 
+    LEFT JOIN	[Reports].[WasteCodes] WC 
     ON			[N].[Id] = [WC].[NotificationId] 
     AND			[WC].[CodeType] IN (1, 2)
 GO
