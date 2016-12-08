@@ -1,0 +1,11 @@
+﻿@using Resources = EA.Iws.Web.Areas.AdminImportAssessment.Views.MarkAsInterim.IndexResources
+
+@{
+    ViewBag.Title = Resources.Title;
+}
+
+<h1 class="heading-large">@Resources.Heading</h1>
+
+@section menu {
+    @Html.Action("ImportNavigation", "Menu", new { area = "Admin", section = ImportNavigationSection.Assessment })
+}
