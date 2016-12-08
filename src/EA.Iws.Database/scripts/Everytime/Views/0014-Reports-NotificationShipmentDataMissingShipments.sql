@@ -4,57 +4,57 @@ GO
 
 ALTER VIEW [Reports].[NotificationShipmentDataMissingShipments]
 AS
-	
-	SELECT	
-		M.NotificationId,
-		REPLACE(N.NotificationNumber, ' ', '') AS NotificationNumber,
-		N.CompetentAuthority AS CompetentAuthorityId,
-		E.Name AS Exporter,
-		I.Name AS Importer,
-		F.Name AS Facility,
-		M.Number AS ShipmentNumber,
-		M.Date AS ActualDateOfShipment,
-		C.[From] AS [ConsentFrom],
+    
+    SELECT	
+        M.NotificationId,
+        REPLACE(N.NotificationNumber, ' ', '') AS NotificationNumber,
+        N.CompetentAuthority AS CompetentAuthorityId,
+        E.Name AS Exporter,
+        I.Name AS Importer,
+        F.Name AS Facility,
+        M.Number AS ShipmentNumber,
+        M.Date AS ActualDateOfShipment,
+        C.[From] AS [ConsentFrom],
         C.[To] AS [ConsentTo],
-		M.PrenotificationDate,
-		MR.Date AS ReceivedDate,
-		MOR.Date AS CompletedDate,
-		MR.Quantity AS QuantityReceived,
-		MR_U.Description AS [QuantityReceivedUnit],
-		MR_U.Id AS [QuantityReceivedUnitId],
-		CASE
-			WHEN WT.ChemicalCompositionDescription IS NULL THEN CCT.Description
-			ELSE CCT.Description + ' - ' + WT.ChemicalCompositionDescription
-		END AS [ChemicalComposition],
-		LA.[Name] AS [LocalArea],
-		SI.Quantity AS TotalQuantity,
-		SI_U.Description AS TotalQuantityUnits,
-		SI.Units AS TotalQuantityUnitsId,
-		TR.[EntryPoint] AS EntryPort,
-		TR.[ImportCountryName] AS DestinationCountry,
-		TR.[ExitPoint] AS ExitPort,
-		TR.[ExportCountryName] AS OriginatingCountry,
-		MS.Status,
-		ND.[NotificationReceivedDate]
-	
-	FROM [Notification].[Movement] AS M
+        M.PrenotificationDate,
+        MR.Date AS ReceivedDate,
+        MOR.Date AS CompletedDate,
+        MR.Quantity AS QuantityReceived,
+        MR_U.Description AS [QuantityReceivedUnit],
+        MR_U.Id AS [QuantityReceivedUnitId],
+        CASE
+            WHEN WT.ChemicalCompositionDescription IS NULL THEN CCT.Description
+            ELSE CCT.Description + ' - ' + WT.ChemicalCompositionDescription
+        END AS [ChemicalComposition],
+        LA.[Name] AS [LocalArea],
+        SI.Quantity AS TotalQuantity,
+        SI_U.Description AS TotalQuantityUnits,
+        SI.Units AS TotalQuantityUnitsId,
+        TR.[EntryPoint] AS EntryPort,
+        TR.[ImportCountryName] AS DestinationCountry,
+        TR.[ExitPoint] AS ExitPort,
+        TR.[ExportCountryName] AS OriginatingCountry,
+        MS.Status,
+        ND.[NotificationReceivedDate]
+    
+    FROM [Notification].[Movement] AS M
 
-	INNER JOIN [Notification].[Notification] AS N
-	ON M.NotificationId = N.Id
+    INNER JOIN [Notification].[Notification] AS N
+    ON M.NotificationId = N.Id
 
-	INNER JOIN	[Notification].[WasteType] AS WT 
+    INNER JOIN	[Notification].[WasteType] AS WT 
     ON			[WT].[NotificationId] = M.NotificationId
 
-	INNER JOIN	[Lookup].[ChemicalCompositionType] AS CCT 
+    INNER JOIN	[Lookup].[ChemicalCompositionType] AS CCT 
     ON			[WT].[ChemicalCompositionType] = [CCT].[Id]
 
-	LEFT JOIN [Notification].[Exporter] AS E
+    LEFT JOIN [Notification].[Exporter] AS E
     ON E.[NotificationId] = M.NotificationId
 
-	LEFT JOIN [Notification].[Importer] AS I
+    LEFT JOIN [Notification].[Importer] AS I
     ON I.[NotificationId] = M.NotificationId
 
-	LEFT JOIN	[Notification].[Facility] AS F
+    LEFT JOIN	[Notification].[Facility] AS F
     ON			F.Id = 
                 (
                     SELECT TOP 1 F1.Id
@@ -68,85 +68,94 @@ AS
                     ORDER BY	F1.IsActualSiteOfTreatment DESC
                 )
 
-	LEFT JOIN	[Notification].[MovementReceipt] AS MR
-	ON			[M].[Id] = [MR].[MovementId]
+    LEFT JOIN	[Notification].[MovementReceipt] AS MR
+    ON			[M].[Id] = [MR].[MovementId]
 
-	LEFT JOIN	[Notification].[MovementOperationReceipt] AS MOR
-	ON			[M].[Id] = [MOR].[MovementId]
+    LEFT JOIN	[Notification].[MovementOperationReceipt] AS MOR
+    ON			[M].[Id] = [MOR].[MovementId]
 
-	LEFT JOIN	[Lookup].[ShipmentQuantityUnit] AS MR_U 
-	ON			[MR].[Unit] = [MR_U].[Id]
+    LEFT JOIN	[Lookup].[ShipmentQuantityUnit] AS MR_U 
+    ON			[MR].[Unit] = [MR_U].[Id]
 
-	LEFT JOIN	[Notification].[Consent] AS C
+    LEFT JOIN	[Notification].[Consent] AS C
     ON			M.NotificationId = [C].[NotificationApplicationId]
 
-	LEFT JOIN	[Notification].[Consultation] AS CON
-	ON			[CON].[NotificationId] = M.NotificationId
+    LEFT JOIN	[Notification].[Consultation] AS CON
+    ON			[CON].[NotificationId] = M.NotificationId
 
     LEFT JOIN	[Lookup].[LocalArea] AS LA
     ON			[CON].[LocalAreaId] = [LA].[Id]
 
-	LEFT JOIN	[Notification].[ShipmentInfo] AS SI
-	ON			SI.[NotificationId] = M.NotificationId
+    LEFT JOIN	[Notification].[ShipmentInfo] AS SI
+    ON			SI.[NotificationId] = M.NotificationId
 
-	LEFT JOIN	[Lookup].[ShipmentQuantityUnit] AS SI_U 
-	ON			[SI].[Units] = [SI_U].[Id]
+    LEFT JOIN	[Lookup].[ShipmentQuantityUnit] AS SI_U 
+    ON			[SI].[Units] = [SI_U].[Id]
 
-	LEFT JOIN   [Reports].[TransportRoute] AS TR
-	ON			[TR].[NotificationId] = [N].[Id]
+    LEFT JOIN   [Reports].[TransportRoute] AS TR
+    ON			[TR].[NotificationId] = [N].[Id]
 
-	LEFT JOIN   [Lookup].[MovementStatus] AS MS
-	ON			MS.Id = M.Status
+    LEFT JOIN   [Lookup].[MovementStatus] AS MS
+    ON			MS.Id = M.Status
 
-	LEFT JOIN	[Notification].[NotificationAssessment] AS NA
-	ON			NA.NotificationApplicationId = N.Id
+    LEFT JOIN	[Notification].[NotificationAssessment] AS NA
+    ON			NA.NotificationApplicationId = N.Id
 
-	LEFT JOIN	[Notification].[NotificationDates] AS ND
-	ON			ND.[NotificationAssessmentId] = NA.Id
+    LEFT JOIN	[Notification].[NotificationDates] AS ND
+    ON			ND.[NotificationAssessmentId] = NA.Id
 
-	UNION 
+    UNION 
 
-		SELECT	
-		M.NotificationId,
-		REPLACE(N.NotificationNumber, ' ', '') AS NotificationNumber,
-		N.CompetentAuthority AS CompetentAuthorityId,
-		E.Name AS Exporter,
-		I.Name AS Importer,
-		F.Name AS Facility,
-		M.Number AS ShipmentNumber,
-		M.ActualShipmentDate AS ActualDateOfShipment,
-		C.[From] AS [ConsentFrom],
+    SELECT	
+        M.NotificationId,
+        REPLACE(N.NotificationNumber, ' ', '') AS NotificationNumber,
+        N.CompetentAuthority AS CompetentAuthorityId,
+        E.Name AS Exporter,
+        I.Name AS Importer,
+        F.Name AS Facility,
+        M.Number AS ShipmentNumber,
+        M.ActualShipmentDate AS ActualDateOfShipment,
+        C.[From] AS [ConsentFrom],
         C.[To] AS [ConsentTo],
-		M.PrenotificationDate,
-		MR.Date AS ReceivedDate,
-		MOR.Date AS CompletedDate,
-		MR.Quantity AS QuantityReceived,
-		MR_U.Description AS [QuantityReceivedUnit],
-		MR_U.Id AS [QuantityReceivedUnitId],
-		NULL AS [ChemicalComposition],
-		LA.[Name] AS [LocalArea],
-		SI.Quantity AS TotalQuantity,
-		SI_U.Description AS TotalQuantityUnits,
-		SI.Units AS TotalQuantityUnitsId,
-		TR.EntryPoint AS EntryPort,
-		TR.ImportCountryName AS DestinationCountry,
-		TR.ExitPoint AS ExitPort,
-		TR.ExportCountryName AS OriginatingCountry,
-		'NA' AS Status,
-		ND.[NotificationReceivedDate]
-	
-	FROM [ImportNotification].[Movement] AS M
+        M.PrenotificationDate,
+        MR.Date AS ReceivedDate,
+        MOR.Date AS CompletedDate,
+        MR.Quantity AS QuantityReceived,
+        MR_U.Description AS [QuantityReceivedUnit],
+        MR_U.Id AS [QuantityReceivedUnitId],
+        CASE
+            WHEN WT.Name IS NULL THEN CCT.Description
+            ELSE CCT.Description + ' - ' + WT.Name
+        END AS [ChemicalComposition],
+        LA.[Name] AS [LocalArea],
+        SI.Quantity AS TotalQuantity,
+        SI_U.Description AS TotalQuantityUnits,
+        SI.Units AS TotalQuantityUnitsId,
+        TR.EntryPoint AS EntryPort,
+        TR.ImportCountryName AS DestinationCountry,
+        TR.ExitPoint AS ExitPort,
+        TR.ExportCountryName AS OriginatingCountry,
+        'NA' AS Status,
+        ND.[NotificationReceivedDate]
+    
+    FROM [ImportNotification].[Movement] AS M
 
-	INNER JOIN [ImportNotification].[Notification] AS N
-	ON M.NotificationId = N.Id
+    INNER JOIN [ImportNotification].[Notification] AS N
+    ON M.NotificationId = N.Id
 
-	LEFT JOIN [ImportNotification].[Exporter] AS E
+    INNER JOIN	[ImportNotification].[WasteType] AS WT 
+    ON			[WT].[ImportNotificationId] = M.NotificationId
+
+    INNER JOIN	[Lookup].[ChemicalCompositionType] AS CCT 
+    ON			[WT].[ChemicalCompositionType] = [CCT].[Id]
+
+    LEFT JOIN [ImportNotification].[Exporter] AS E
     ON E.[ImportNotificationId] = M.NotificationId
 
-	LEFT JOIN [ImportNotification].[Importer] AS I
+    LEFT JOIN [ImportNotification].[Importer] AS I
     ON I.[ImportNotificationId] = M.NotificationId
 
-	LEFT JOIN	[ImportNotification].[Facility] AS F
+    LEFT JOIN	[ImportNotification].[Facility] AS F
     ON			F.Id = 
                 (
                     SELECT TOP 1 F1.Id
@@ -160,37 +169,37 @@ AS
                     ORDER BY	F1.IsActualSiteOfTreatment DESC
                 )
 
-	LEFT JOIN	[ImportNotification].[MovementReceipt] AS MR
-	ON			[M].[Id] = [MR].[MovementId]
+    LEFT JOIN	[ImportNotification].[MovementReceipt] AS MR
+    ON			[M].[Id] = [MR].[MovementId]
 
-	LEFT JOIN	[ImportNotification].[MovementOperationReceipt] AS MOR
-	ON			[M].[Id] = [MOR].[MovementId]
+    LEFT JOIN	[ImportNotification].[MovementOperationReceipt] AS MOR
+    ON			[M].[Id] = [MOR].[MovementId]
 
-	LEFT JOIN	[Lookup].[ShipmentQuantityUnit] AS MR_U 
-	ON			[MR].[Unit] = [MR_U].[Id]
+    LEFT JOIN	[Lookup].[ShipmentQuantityUnit] AS MR_U 
+    ON			[MR].[Unit] = [MR_U].[Id]
 
-	LEFT JOIN	[ImportNotification].[Consent] AS C
+    LEFT JOIN	[ImportNotification].[Consent] AS C
     ON			M.NotificationId = [C].[NotificationId]
 
-	LEFT JOIN	[ImportNotification].[Consultation] AS CON
-	ON			[CON].[NotificationId] = M.NotificationId
+    LEFT JOIN	[ImportNotification].[Consultation] AS CON
+    ON			[CON].[NotificationId] = M.NotificationId
 
     LEFT JOIN	[Lookup].[LocalArea] AS LA
     ON			[CON].[LocalAreaId] = [LA].[Id]
 
-	LEFT JOIN	[ImportNotification].[Shipment] AS SI
-	ON			SI.[ImportNotificationId] = M.NotificationId
+    LEFT JOIN	[ImportNotification].[Shipment] AS SI
+    ON			SI.[ImportNotificationId] = M.NotificationId
 
-	LEFT JOIN	[Lookup].[ShipmentQuantityUnit] AS SI_U 
-	ON			[SI].[Units] = [SI_U].[Id]
+    LEFT JOIN	[Lookup].[ShipmentQuantityUnit] AS SI_U 
+    ON			[SI].[Units] = [SI_U].[Id]
 
-	LEFT JOIN   [Reports].[TransportRoute] AS TR
-	ON			[TR].[NotificationId] = [N].[Id]
+    LEFT JOIN   [Reports].[TransportRoute] AS TR
+    ON			[TR].[NotificationId] = [N].[Id]
 
-	LEFT JOIN	[ImportNotification].[NotificationAssessment] AS NA
-	ON			NA.NotificationApplicationId = N.Id
+    LEFT JOIN	[ImportNotification].[NotificationAssessment] AS NA
+    ON			NA.NotificationApplicationId = N.Id
 
-	LEFT JOIN	[ImportNotification].[NotificationDates] AS ND
-	ON			ND.[NotificationAssessmentId] = NA.Id
+    LEFT JOIN	[ImportNotification].[NotificationDates] AS ND
+    ON			ND.[NotificationAssessmentId] = NA.Id
 
 GO
