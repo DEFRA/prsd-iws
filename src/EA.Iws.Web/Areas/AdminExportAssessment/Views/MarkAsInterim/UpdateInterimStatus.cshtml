@@ -47,11 +47,11 @@
             <fieldset>
                 <label class="block-label" for="yes">
                     @Html.RadioButtonFor(m => m.IsInterim, true, new { id = "yes" })
-                    Yes
+                    @Resources.Yes
                 </label>
                 <label class="block-label" for="no">
                     @Html.RadioButtonFor(m => m.IsInterim, false, new { id = "no" })
-                    No
+                    @Resources.No
                 </label>
             </fieldset>
         </div>

@@ -28,7 +28,7 @@
 
             var model = new MarkAsInterimViewModel(interimStatus);
 
-            model.ShowUpdateInterimStatus = Task.Run(() => authorizationService.AuthorizeActivity(typeof(UpdateInterimStatus))).Result;
+            model.ShowUpdateInterimStatus = await authorizationService.AuthorizeActivity(typeof(UpdateInterimStatus));
 
             return View(model);
         }
