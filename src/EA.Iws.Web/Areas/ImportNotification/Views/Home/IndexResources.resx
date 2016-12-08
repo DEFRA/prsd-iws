@@ -192,8 +192,8 @@
   <data name="UNTitle" xml:space="preserve">
     <value>UN Classes</value>
   </data>
-  <data name="WasteCodeTitle" xml:space="preserve">
-    <value>Waste codes</value>
+  <data name="WasteTypeCodeTitle" xml:space="preserve">
+    <value>Waste type and codes</value>
   </data>
   <data name="YTitle" xml:space="preserve">
     <value>Y Codes</value>
@@ -233,5 +233,8 @@
   </data>
   <data name="GuidanceText" xml:space="preserve">
     <value>Select "Ready to be acknowledged" once you've entered all of the necessary information for this notification.</value>
+  </data>
+  <data name="WasteTypeTitle" xml:space="preserve">
+    <value>Type of waste</value>
   </data>
 </root>

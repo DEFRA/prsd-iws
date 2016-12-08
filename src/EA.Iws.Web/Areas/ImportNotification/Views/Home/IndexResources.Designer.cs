@@ -394,11 +394,20 @@ namespace EA.Iws.Web.Areas.ImportNotification.Views.Home {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Waste codes.
+        ///   Looks up a localized string similar to Waste type and codes.
         /// </summary>
-        public static string WasteCodeTitle {
+        public static string WasteTypeCodeTitle {
             get {
-                return ResourceManager.GetString("WasteCodeTitle", resourceCulture);
+                return ResourceManager.GetString("WasteTypeCodeTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Type of waste.
+        /// </summary>
+        public static string WasteTypeTitle {
+            get {
+                return ResourceManager.GetString("WasteTypeTitle", resourceCulture);
             }
         }
         

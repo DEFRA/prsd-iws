@@ -1,0 +1,15 @@
+﻿@model EA.Iws.Web.Areas.ImportNotification.ViewModels.Home.SummaryTableContainerViewModel
+
+<div class="overview-block">
+    <div class="overview-block-element">
+        @if (Model.Details.Composition.Composition.HasValue)
+        {
+            @EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(Model.Details.Composition.Composition.Value)
+        }
+        else
+        {
+            @ViewBag.SectionIncompleteText
+        }
+
+    </div>
+</div>
