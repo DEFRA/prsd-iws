@@ -339,11 +339,13 @@ BEGIN
 					   ,[BaselOecdCodeNotListed]
 					   ,[YCodeNotApplicable]
 					   ,[HCodeNotApplicable]
-					   ,[UnClassNotApplicable])
+					   ,[UnClassNotApplicable]
+					   ,[ChemicalCompositionType])
 				 VALUES
 					   (@WasteTypeId,
 					   @ImportNotificationId,
 					   N'Rubish',
+					   1,
 					   1,
 					   1,
 					   1,
