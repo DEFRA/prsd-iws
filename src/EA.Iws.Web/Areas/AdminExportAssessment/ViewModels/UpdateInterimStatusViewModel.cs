@@ -3,18 +3,20 @@
     using System;
     using System.ComponentModel.DataAnnotations;
     using Core.NotificationAssessment;
+    using Core.Shared;
 
-    public class MarkAsInterimViewModel
+    public class UpdateInterimStatusViewModel
     {
-        public MarkAsInterimViewModel()
+        public UpdateInterimStatusViewModel()
         {
         }
 
-        public MarkAsInterimViewModel(InterimStatus interimStatus)
+        public UpdateInterimStatusViewModel(InterimStatus interimStatus, NotificationType notificationType)
         {
             NotificationId = interimStatus.NotificationId;
             NotificationStatus = interimStatus.NotificationStatus;
             IsInterim = interimStatus.IsInterim;
+            NotificationType = notificationType;
         }
 
         public Guid NotificationId { get; set; }
@@ -24,6 +26,6 @@
 
         public NotificationStatus NotificationStatus { get; set; }
 
-        public bool? ShowUpdateInterimStatus { get; set; }
+        public NotificationType NotificationType { get; set; }
     }
 }
