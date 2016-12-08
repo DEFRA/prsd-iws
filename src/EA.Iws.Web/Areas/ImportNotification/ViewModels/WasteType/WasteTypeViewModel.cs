@@ -1,137 +1,41 @@
 ﻿namespace EA.Iws.Web.Areas.ImportNotification.ViewModels.WasteType
 {
-    using System;
-    using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-    using System.Linq;
-    using System.Web.Mvc;
-    using Core.ImportNotification.Draft;
-    using Core.WasteCodes;
-    using Shared;
+    using Core.WasteType;
+    using Prsd.Core.Helpers;
+    using Web.ViewModels.Shared;
 
     public class WasteTypeViewModel
     {
+        public RadioButtonStringCollectionViewModel ChemicalCompositionType { get; set; }
+
         public WasteTypeViewModel()
         {
+            ChemicalCompositionType = RadioButtonStringCollectionViewModel.CreateFromEnum<ChemicalComposition>();
         }
 
-        public WasteTypeViewModel(WasteType data)
+        public ChemicalComposition GetSelectedChemicalComposition()
         {
-            Name = data.Name;
-            BaselCodeNotListed = data.BaselCodeNotListed;
-            SelectedBaselCode = data.SelectedBaselCode;
-
-            YCodeNotApplicable = data.YCodeNotApplicable;
-            HCodeNotApplicable = data.HCodeNotApplicable;
-            UnClassNotApplicable = data.UnClassNotApplicable;
-
-            SelectedEwcCodesDisplay = new List<WasteCodeViewModel>();
-            SelectedYCodesDisplay = new List<WasteCodeViewModel>();
-            SelectedHCodesDisplay = new List<WasteCodeViewModel>();
-            SelectedUnClassesDisplay = new List<WasteCodeViewModel>();
-        }
-
-        public Guid ImportNotificationId { get; set; }
-
-        [Display(Name = "BaselCodeNotListed", ResourceType = typeof(WasteTypeViewModelResources))]
-        public bool BaselCodeNotListed { get; set; }
-
-        [Display(Name = "YCodeNotApplicable", ResourceType = typeof(WasteTypeViewModelResources))]
-        public bool YCodeNotApplicable { get; set; }
-
-        [Display(Name = "HCodeNotApplicable", ResourceType = typeof(WasteTypeViewModelResources))]
-        public bool HCodeNotApplicable { get; set; }
-
-        [Display(Name = "UnClassNotApplicable", ResourceType = typeof(WasteTypeViewModelResources))]
-        public bool UnClassNotApplicable { get; set; }
-
-        [Display(Name = "WasteTypeName", ResourceType = typeof(WasteTypeViewModelResources))]
-        public string Name { get; set; }
-
-        public IList<WasteCodeViewModel> AllCodes { get; set; }
-
-        [Display(Name = "BaselCode", ResourceType = typeof(WasteTypeViewModelResources))]
-        public Guid? SelectedBaselCode { get; set; }
-
-        [Display(Name = "EwcCode", ResourceType = typeof(WasteTypeViewModelResources))]
-        public Guid? SelectedEwcCode { get; set; }
-
-        [Display(Name = "YCode", ResourceType = typeof(WasteTypeViewModelResources))]
-        public Guid? SelectedYCode { get; set; }
-
-        [Display(Name = "HCode", ResourceType = typeof(WasteTypeViewModelResources))]
-        public Guid? SelectedHCode { get; set; }
-
-        [Display(Name = "UnClass", ResourceType = typeof(WasteTypeViewModelResources))]
-        public Guid? SelectedUnClass { get; set; }
-
-        public string SelectedEwcCodesJson { get; set; }
-        public string SelectedYCodesJson { get; set; }
-        public string SelectedHCodesJson { get; set; }
-        public string SelectedUnClassesJson { get; set; }
-        public IList<WasteCodeViewModel> SelectedEwcCodesDisplay { get; set; }
-        public IList<WasteCodeViewModel> SelectedYCodesDisplay { get; set; }
-        public IList<WasteCodeViewModel> SelectedHCodesDisplay { get; set; }
-        public IList<WasteCodeViewModel> SelectedUnClassesDisplay { get; set; }
-
-        public SelectList BaselCodes
-        {
-            get
+            if (ChemicalCompositionType.SelectedValue == EnumHelper.GetDisplayName(ChemicalComposition.Other))
             {
-                return new SelectList(
-                    AllCodes.Where(c => c.CodeType == CodeType.Basel || c.CodeType == CodeType.Oecd),
-                    "Id",
-                    "Name",
-                    SelectedBaselCode);
+                return ChemicalComposition.Other;
             }
-        }
 
-        public SelectList EwcCodes
-        {
-            get
+            if (ChemicalCompositionType.SelectedValue == EnumHelper.GetDisplayName(ChemicalComposition.RDF))
             {
-                return new SelectList(
-                    AllCodes.Where(c => c.CodeType == CodeType.Ewc),
-                    "Id",
-                    "Name",
-                    SelectedEwcCode);
+                return ChemicalComposition.RDF;
             }
-        }
 
-        public SelectList YCodes
-        {
-            get
+            if (ChemicalCompositionType.SelectedValue == EnumHelper.GetDisplayName(ChemicalComposition.SRF))
             {
-                return new SelectList(
-                    AllCodes.Where(c => c.CodeType == CodeType.Y),
-                    "Id",
-                    "Name",
-                    SelectedYCode);
+                return ChemicalComposition.SRF;
             }
-        }
 
-        public SelectList HCodes
-        {
-            get
+            if (ChemicalCompositionType.SelectedValue == EnumHelper.GetDisplayName(ChemicalComposition.Wood))
             {
-                return new SelectList(
-                    AllCodes.Where(c => c.CodeType == CodeType.H),
-                    "Id",
-                    "Name",
-                    SelectedHCode);
+                return ChemicalComposition.Wood;
             }
-        }
 
-        public SelectList UnClasses
-        {
-            get
-            {
-                return new SelectList(
-                    AllCodes.Where(c => c.CodeType == CodeType.Un),
-                    "Id",
-                    "Name",
-                    SelectedUnClass);
-            }
+            return default(ChemicalComposition);
         }
     }
 }

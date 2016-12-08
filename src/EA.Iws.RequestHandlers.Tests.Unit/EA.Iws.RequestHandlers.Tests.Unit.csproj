@@ -109,6 +109,7 @@
     <Compile Include="ImportNotification\Summary\TransportRouteIdContainerTests.cs" />
     <Compile Include="ImportNotification\Validate\AddressTestData.cs" />
     <Compile Include="ImportNotification\Validate\AddressValidatorTests.cs" />
+    <Compile Include="ImportNotification\Validate\ChemicalCompositionValidatorTests.cs" />
     <Compile Include="ImportNotification\Validate\ContactTestData.cs" />
     <Compile Include="ImportNotification\Validate\ContactValidatorTests.cs" />
     <Compile Include="ImportNotification\Validate\ExporterValidatorTests.cs" />

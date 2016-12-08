@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
+    using Core.WasteType;
     using Prsd.Core;
     using Prsd.Core.Domain;
     using Prsd.Core.Extensions;
@@ -25,6 +26,8 @@
 
         public bool UnClassNotApplicable { get; private set; }
 
+        public ChemicalComposition ChemicalCompositionType { get; private set; }
+
         public IEnumerable<WasteTypeWasteCode> WasteCodes
         {
             get { return WasteCodesCollection.ToSafeIEnumerable(); }
@@ -40,7 +43,8 @@
             EwcCode ewcCode,
             YCode yCode,
             HCode hCode,
-            UnClass unClass)
+            UnClass unClass,
+            ChemicalComposition chemicalComposition)
         {
             Guard.ArgumentNotDefaultValue(() => importNotificationId, importNotificationId);
             Guard.ArgumentNotNullOrEmpty(() => name, name);
@@ -49,6 +53,7 @@
             Guard.ArgumentNotNull(() => yCode, yCode);
             Guard.ArgumentNotNull(() => hCode, hCode);
             Guard.ArgumentNotNull(() => unClass, unClass);
+            Guard.ArgumentNotDefaultValue(() => chemicalComposition, chemicalComposition);
 
             ImportNotificationId = importNotificationId;
             Name = name;
@@ -60,6 +65,7 @@
             YCodeNotApplicable = yCode.NotApplicable;
             HCodeNotApplicable = hCode.NotApplicable;
             UnClassNotApplicable = unClass.NotApplicable;
+            ChemicalCompositionType = chemicalComposition;
 
             wasteCodes.AddRange(ewcCode.Codes);
 

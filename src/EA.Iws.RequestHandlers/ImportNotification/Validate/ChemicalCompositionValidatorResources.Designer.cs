@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace EA.Iws.Web.Areas.ImportNotification.Views.WasteType {
+namespace EA.Iws.RequestHandlers.ImportNotification.Validate {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace EA.Iws.Web.Areas.ImportNotification.Views.WasteType {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class IndexResources {
+    public class ChemicalCompositionValidatorResources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal IndexResources() {
+        internal ChemicalCompositionValidatorResources() {
         }
         
         /// <summary>
@@ -39,7 +39,8 @@ namespace EA.Iws.Web.Areas.ImportNotification.Views.WasteType {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EA.Iws.Web.Areas.ImportNotification.Views.WasteType.IndexResources", typeof(IndexResources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EA.Iws.RequestHandlers.ImportNotification.Validate.ChemicalCompositionValidatorRe" +
+                            "sources", typeof(ChemicalCompositionValidatorResources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,11 +62,11 @@ namespace EA.Iws.Web.Areas.ImportNotification.Views.WasteType {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to What type of waste is it?.
+        ///   Looks up a localized string similar to please enter the type of waste.
         /// </summary>
-        public static string Header {
+        public static string CompositionRequred {
             get {
-                return ResourceManager.GetString("Header", resourceCulture);
+                return ResourceManager.GetString("CompositionRequred", resourceCulture);
             }
         }
     }

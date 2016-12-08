@@ -3,32 +3,31 @@
     using System;
     using System.Threading.Tasks;
     using System.Web.Mvc;
-    using Core.ImportNotification.Draft;
-    using Prsd.Core.Mapper;
     using Prsd.Core.Mediator;
     using Requests.ImportNotification;
-    using Requests.ImportNotification.WasteType;
     using ViewModels.WasteType;
 
     [Authorize(Roles = "internal")]
     public class WasteTypeController : Controller
     {
-        private readonly IMapper mapper;
         private readonly IMediator mediator;
 
-        public WasteTypeController(IMediator mediator, IMapper mapper)
+        public WasteTypeController(IMediator mediator)
         {
             this.mediator = mediator;
-            this.mapper = mapper;
         }
 
         [HttpGet]
         public async Task<ActionResult> Index(Guid id)
         {
-            var allCodes = await mediator.SendAsync(new GetAllWasteCodes());
-            var data = await mediator.SendAsync(new GetDraftData<WasteType>(id));
+            var model = new WasteTypeViewModel();
 
-            var model = mapper.Map<WasteTypeViewModel>(data, allCodes);
+            var chemicalComposition = await mediator.SendAsync(new GetDraftData<Core.ImportNotification.Draft.ChemicalComposition>(id));
+
+            if (chemicalComposition.Composition.HasValue)
+            {
+                model.ChemicalCompositionType.SelectedValue = Prsd.Core.Helpers.EnumHelper.GetDisplayName(chemicalComposition.Composition.Value);
+            }
 
             return View(model);
         }
@@ -37,11 +36,14 @@
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Index(Guid id, WasteTypeViewModel model)
         {
-            var wasteType = mapper.Map<WasteType>(model);
+            var chemicalComposition = new Core.ImportNotification.Draft.ChemicalComposition(id)
+            {
+                Composition = model.GetSelectedChemicalComposition()
+            };
 
-            await mediator.SendAsync(new SetDraftData<WasteType>(id, wasteType));
+            await mediator.SendAsync(new SetDraftData<Core.ImportNotification.Draft.ChemicalComposition>(id, chemicalComposition));
 
-            return RedirectToAction("Index", "StateOfExport");
+            return RedirectToAction("Index", "WasteCodes");
         }
     }
 }

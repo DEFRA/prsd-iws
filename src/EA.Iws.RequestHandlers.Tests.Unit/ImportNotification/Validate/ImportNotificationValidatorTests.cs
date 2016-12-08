@@ -31,6 +31,7 @@
             var transitStatesValidator = new TransitStateCollectionValidator(transitStateValidator);
             var wasteOperationValidator = new WasteOperationValidator();
             var wasteTypeValidator = new WasteTypeValidator();
+            var chemicalCompositionValidator = new ChemicalCompositionValidator();
             validator = new ImportNotificationValidator(exporterValidator,
                 facilitiesValidator,
                 importerValidator,
@@ -41,7 +42,8 @@
                 stateOfImportValidator,
                 transitStatesValidator,
                 wasteOperationValidator,
-                wasteTypeValidator);
+                wasteTypeValidator,
+                chemicalCompositionValidator);
         }
 
         [Fact]
@@ -108,6 +110,12 @@
         public void WasteTypeIsValidated()
         {
             validator.ShouldHaveChildValidator(x => x.WasteType, typeof(WasteTypeValidator));
+        }
+
+        [Fact]
+        public void ChemicalCompositionIsValidated()
+        {
+            validator.ShouldHaveChildValidator(x => x.ChemicalComposition, typeof(ChemicalCompositionValidator));
         }
     }
 }

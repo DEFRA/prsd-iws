@@ -90,7 +90,7 @@
                 }
 
                 var wasteOperation = mapper.Map<WasteOperation>(draft.WasteOperation, notification);
-                var wasteType = mapper.Map<Domain.ImportNotification.WasteType>(draft.WasteType);
+                var wasteType = mapper.Map<Domain.ImportNotification.WasteType>(draft.WasteType, draft.ChemicalComposition.Composition);
 
                 exporterRepository.Add(exporter);
                 facilityRepository.Add(facilityCollection);

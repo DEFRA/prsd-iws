@@ -4,23 +4,23 @@
     using System.Collections.Generic;
     using System.Linq;
     using Areas.ImportNotification.ViewModels.Shared;
-    using Areas.ImportNotification.ViewModels.WasteType;
+    using Areas.ImportNotification.ViewModels.WasteCodes;
     using Core.ImportNotification.Draft;
     using Core.WasteCodes;
     using Newtonsoft.Json;
     using Prsd.Core.Mapper;
 
-    public class WasteTypeMap : IMap<WasteTypeViewModel, WasteType>,
-        IMapWithParameter<WasteType, List<WasteCodeData>, WasteTypeViewModel>
+    public class WasteCodesMap : IMap<WasteCodesViewModel, WasteType>,
+        IMapWithParameter<WasteType, List<WasteCodeData>, WasteCodesViewModel>
     {
         private readonly IMapper mapper;
 
-        public WasteTypeMap(IMapper mapper)
+        public WasteCodesMap(IMapper mapper)
         {
             this.mapper = mapper;
         }
 
-        public WasteType Map(WasteTypeViewModel source)
+        public WasteType Map(WasteCodesViewModel source)
         {
             var wasteType = new WasteType(source.ImportNotificationId)
             {
@@ -59,9 +59,9 @@
             return wasteType;
         }
 
-        public WasteTypeViewModel Map(WasteType source, List<WasteCodeData> parameter)
+        public WasteCodesViewModel Map(WasteType source, List<WasteCodeData> parameter)
         {
-            var model = new WasteTypeViewModel(source);
+            var model = new WasteCodesViewModel(source);
             model.ImportNotificationId = source.ImportNotificationId;
 
             if (source.SelectedEwcCodes != null)

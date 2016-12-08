@@ -119,6 +119,7 @@
     <Compile Include="ImportNotificationMovements\Summary.cs" />
     <Compile Include="ImportNotification\ConfirmNumberOfShipmentsChangeData.cs" />
     <Compile Include="ImportNotification\Draft\Address.cs" />
+    <Compile Include="ImportNotification\Draft\ChemicalComposition.cs" />
     <Compile Include="ImportNotification\Draft\Contact.cs" />
     <Compile Include="ImportNotification\Draft\FacilityCollection.cs" />
     <Compile Include="ImportNotification\Draft\Facility.cs" />
@@ -137,6 +138,7 @@
     <Compile Include="ImportNotification\Draft\WasteType.cs" />
     <Compile Include="ImportNotification\NotificationDetails.cs" />
     <Compile Include="ImportNotification\Summary\Address.cs" />
+    <Compile Include="ImportNotification\Summary\ChemicalComposition.cs" />
     <Compile Include="ImportNotification\Summary\Contact.cs" />
     <Compile Include="ImportNotification\Summary\Exporter.cs" />
     <Compile Include="ImportNotification\Summary\Facility.cs" />

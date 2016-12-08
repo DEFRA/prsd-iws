@@ -82,7 +82,8 @@
                     HasNoTransitStates = transportRoute.HasNoTransitStates,
                     WasteOperation = GetWasteOperation(data),
                     WasteType = await wasteTypeSummary.GetWasteType(message.Id),
-                    AreFacilitiesPreconsented = GetFacilityPreconsent(data)
+                    AreFacilitiesPreconsented = GetFacilityPreconsent(data),
+                    Composition = GetChemicalComposition(data)
                 };
             }
             else
@@ -199,6 +200,14 @@
         private static bool? GetFacilityPreconsent(Draft.ImportNotification notification)
         {
             return notification.Preconsented.AllFacilitiesPreconsented;
+        }
+
+        private static ChemicalComposition GetChemicalComposition(Draft.ImportNotification notification)
+        {
+            return new ChemicalComposition
+            {
+                Composition = notification.ChemicalComposition.Composition
+            };
         }
     }
 }

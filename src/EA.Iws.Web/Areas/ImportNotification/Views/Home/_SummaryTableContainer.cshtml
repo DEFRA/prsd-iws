@@ -5,93 +5,93 @@
 @{ViewBag.SectionIncompleteText = Resource.SectionIncompleteText;}
 
 <div id="submit-overview-area">
-    
+
     <table class="overview-table">
         <thead>
-        <tr>
-            <th colspan="3">
-                <h2 class="heading-medium">@Resource.OrganisationsTitle</h2>
-            </th>
-        </tr>
+            <tr>
+                <th colspan="3">
+                    <h2 class="heading-medium">@Resource.OrganisationsTitle</h2>
+                </th>
+            </tr>
         </thead>
         <tbody>
-        @if (Model.ShowPreconsentedLinks)
-        {
+            @if (Model.ShowPreconsentedLinks)
+            {
+                <tr>
+                    <td>
+                        @Resource.PreconsentedTitle
+                    </td>
+                    <td>
+                        @Html.Partial("_Preconsented")
+                    </td>
+                    @if (Model.ShowChangeLinks)
+                    {
+                        <td>
+                            @Html.ActionLink("Change", "Index", "Preconsented", null, new { @class = "right-float" })
+                        </td>
+                    }
+                </tr>
+            }
             <tr>
                 <td>
-                    @Resource.PreconsentedTitle
+                    @Resource.ExporterTitle
                 </td>
                 <td>
-                    @Html.Partial("_Preconsented")
+                    @Html.Partial("_Exporter")
                 </td>
                 @if (Model.ShowChangeLinks)
                 {
                     <td>
-                        @Html.ActionLink("Change", "Index", "Preconsented", null, new { @class = "right-float" })
+                        @Html.ActionLink("Change", "Index", "Exporter", null, new { @class = "right-float" })
                     </td>
                 }
+
             </tr>
-        }
-        <tr>
-            <td>
-                @Resource.ExporterTitle
-            </td>
-            <td>
-                @Html.Partial("_Exporter")
-            </td>
-            @if (Model.ShowChangeLinks)
-            {
+            <tr>
                 <td>
-                    @Html.ActionLink("Change", "Index", "Exporter", null, new { @class = "right-float" })
+                    @Resource.ProducerTitle
                 </td>
-            }
-
-        </tr>
-        <tr>
-            <td>
-                @Resource.ProducerTitle
-            </td>
-            <td>
-                @Html.Partial("_Producer")
-            </td>
-            @if (Model.ShowChangeLinks)
-            {
                 <td>
-                    @Html.ActionLink("Change", "Index", "Producer", null, new { @class = "right-float" })
+                    @Html.Partial("_Producer")
                 </td>
-            }
+                @if (Model.ShowChangeLinks)
+                {
+                    <td>
+                        @Html.ActionLink("Change", "Index", "Producer", null, new { @class = "right-float" })
+                    </td>
+                }
 
-        </tr>
-        <tr>
-            <td>
-                @Resource.ImporterTitle
-            </td>
-            <td>
-                @Html.Partial("_Importer")
-            </td>
-            @if (Model.ShowChangeLinks)
-            {
+            </tr>
+            <tr>
                 <td>
-                    @Html.ActionLink("Change", "Index", "Exporter", null, new { @class = "right-float" })
+                    @Resource.ImporterTitle
                 </td>
-            }
-
-        </tr>
-        <tr>
-            <td>
-                @Resource.FacilityTitle
-            </td>
-            <td>
-                @Html.Partial("_Facility")
-            </td>
-            @if (Model.ShowChangeLinks)
-            {
                 <td>
-                    @Html.ActionLink("Change", "Index", "Facility", null, new { @class = "right-float" })
+                    @Html.Partial("_Importer")
                 </td>
-            }
+                @if (Model.ShowChangeLinks)
+                {
+                    <td>
+                        @Html.ActionLink("Change", "Index", "Exporter", null, new { @class = "right-float" })
+                    </td>
+                }
 
-        </tr>
+            </tr>
+            <tr>
+                <td>
+                    @Resource.FacilityTitle
+                </td>
+                <td>
+                    @Html.Partial("_Facility")
+                </td>
+                @if (Model.ShowChangeLinks)
+                {
+                    <td>
+                        @Html.ActionLink("Change", "Index", "Facility", null, new { @class = "right-float" })
+                    </td>
+                }
+
+            </tr>
 
         </tbody>
     </table>
@@ -119,7 +119,7 @@
                         @Html.ActionLink("Change", "Index", "WasteOperation", null, new { @class = "right-float" })
                     </td>
                 }
-                
+
             </tr>
             <tr>
                 <td>
@@ -134,12 +134,11 @@
                         @Html.ActionLink("Change", "Index", "WasteOperation", null, new { @class = "right-float" })
                     </td>
                 }
-                
+
             </tr>
-            
+
         </tbody>
     </table>
-
 
     <table class="overview-table">
         <thead>
@@ -163,9 +162,9 @@
                         @Html.ActionLink("Change", "Index", "Shipment", null, new { @class = "right-float" })
                     </td>
                 }
-                
+
             </tr>
-            
+
         </tbody>
     </table>
 
@@ -174,11 +173,26 @@
         <thead>
             <tr>
                 <th colspan="3">
-                    <h2 class="heading-medium">@Resource.WasteCodeTitle</h2>
+                    <h2 class="heading-medium">@Resource.WasteTypeCodeTitle</h2>
                 </th>
             </tr>
         </thead>
         <tbody>
+            <tr>
+                <td>
+                    @Resource.WasteTypeTitle
+                </td>
+                <td>
+                    @Html.Partial("_WasteType")
+                </td>
+                @if (Model.ShowChangeLinks)
+                {
+                    <td>
+                        @Html.ActionLink("Change", "Index", "WasteType", null, new { @class = "right-float" })
+                    </td>
+                }
+
+            </tr>
             <tr>
                 <td>
                     @Resource.BaselTitle
@@ -189,10 +203,10 @@
                 @if (Model.ShowChangeLinks)
                 {
                     <td>
-                        @Html.ActionLink("Change", "Index", "WasteType", null, new { @class = "right-float" })
+                        @Html.ActionLink("Change", "Index", "WasteCodes", null, new { @class = "right-float" })
                     </td>
                 }
-                
+
             </tr>
             <tr>
                 <td>
@@ -204,10 +218,10 @@
                 @if (Model.ShowChangeLinks)
                 {
                     <td>
-                        @Html.ActionLink("Change", "Index", "WasteType", null, new { @class = "right-float" })
+                        @Html.ActionLink("Change", "Index", "WasteCodes", null, new { @class = "right-float" })
                     </td>
                 }
-                
+
             </tr>
             <tr>
                 <td>
@@ -219,10 +233,10 @@
                 @if (Model.ShowChangeLinks)
                 {
                     <td>
-                        @Html.ActionLink("Change", "Index", "WasteType", null, new { @class = "right-float" })
+                        @Html.ActionLink("Change", "Index", "WasteCodes", null, new { @class = "right-float" })
                     </td>
                 }
-                
+
             </tr>
             <tr>
                 <td>
@@ -234,10 +248,10 @@
                 @if (Model.ShowChangeLinks)
                 {
                     <td>
-                        @Html.ActionLink("Change", "Index", "WasteType", null, new { @class = "right-float" })
+                        @Html.ActionLink("Change", "Index", "WasteCodes", null, new { @class = "right-float" })
                     </td>
                 }
-                
+
             </tr>
             <tr>
                 <td>
@@ -249,10 +263,10 @@
                 @if (Model.ShowChangeLinks)
                 {
                     <td>
-                        @Html.ActionLink("Change", "Index", "WasteType", null, new { @class = "right-float" })
+                        @Html.ActionLink("Change", "Index", "WasteCodes", null, new { @class = "right-float" })
                     </td>
                 }
-                
+
             </tr>
 
         </tbody>
@@ -281,7 +295,7 @@
                         @Html.ActionLink("Change", "Index", "StateOfExport", null, new { @class = "right-float" })
                     </td>
                 }
-                
+
             </tr>
             <tr>
                 <td>
@@ -296,7 +310,7 @@
                         @Html.ActionLink("Change", "Index", "StateOfImport", null, new { @class = "right-float" })
                     </td>
                 }
-                
+
             </tr>
             <tr>
                 <td>
@@ -311,9 +325,9 @@
                         @Html.ActionLink("Change", "Index", "TransitState", null, new { @class = "right-float" })
                     </td>
                 }
-                
+
             </tr>
-            
+
         </tbody>
     </table>
 </div>

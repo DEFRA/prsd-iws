@@ -23,5 +23,7 @@
         public WasteOperation WasteOperation { get; set; }
 
         public WasteType WasteType { get; set; }
+
+        public ChemicalComposition ChemicalComposition { get; set; }
     }
 }

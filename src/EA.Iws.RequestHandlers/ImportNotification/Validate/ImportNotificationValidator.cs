@@ -15,7 +15,8 @@
             IValidator<StateOfImport> stateOfImportValidator,
             IValidator<TransitStateCollection> transitStatesValidator,
             IValidator<WasteOperation> wasteOperationValidator,
-            IValidator<WasteType> wasteTypeValidator)
+            IValidator<WasteType> wasteTypeValidator,
+            IValidator<ChemicalComposition> chemicalCompositionValidator)
         {
             RuleFor(x => x.Exporter).SetValidator(exporterValidator);
             RuleFor(x => x.Facilities).SetValidator(facilitiesValidator);
@@ -28,6 +29,7 @@
             RuleFor(x => x.TransitStates).SetValidator(transitStatesValidator);
             RuleFor(x => x.WasteOperation).SetValidator(wasteOperationValidator);
             RuleFor(x => x.WasteType).SetValidator(wasteTypeValidator);
+            RuleFor(x => x.ChemicalComposition).SetValidator(chemicalCompositionValidator);
         }
     }
 }

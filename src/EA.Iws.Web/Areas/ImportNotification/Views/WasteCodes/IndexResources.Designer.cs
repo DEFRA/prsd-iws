@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace EA.Iws.Web.Areas.ImportNotification.ViewModels.WasteType {
+namespace EA.Iws.Web.Areas.ImportNotification.Views.WasteCodes {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace EA.Iws.Web.Areas.ImportNotification.ViewModels.WasteType {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class WasteTypeViewModelResources {
+    public class IndexResources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal WasteTypeViewModelResources() {
+        internal IndexResources() {
         }
         
         /// <summary>
@@ -39,8 +39,7 @@ namespace EA.Iws.Web.Areas.ImportNotification.ViewModels.WasteType {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EA.Iws.Web.Areas.ImportNotification.ViewModels.WasteType.WasteTypeViewModelResour" +
-                            "ces", typeof(WasteTypeViewModelResources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EA.Iws.Web.Areas.ImportNotification.Views.WasteCodes.IndexResources", typeof(IndexResources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -62,92 +61,83 @@ namespace EA.Iws.Web.Areas.ImportNotification.ViewModels.WasteType {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Basel/OECD code.
+        ///   Looks up a localized string similar to Add.
         /// </summary>
-        public static string BaselCode {
+        public static string AddCodeButton {
             get {
-                return ResourceManager.GetString("BaselCode", resourceCulture);
+                return ResourceManager.GetString("AddCodeButton", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Not listed.
+        ///   Looks up a localized string similar to Added EWC codes.
         /// </summary>
-        public static string BaselCodeNotListed {
+        public static string EwcCodesTableHeading {
             get {
-                return ResourceManager.GetString("BaselCodeNotListed", resourceCulture);
+                return ResourceManager.GetString("EwcCodesTableHeading", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to EWC code(s).
+        ///   Looks up a localized string similar to Added H or HP codes.
         /// </summary>
-        public static string EwcCode {
+        public static string HCodesTableHeading {
             get {
-                return ResourceManager.GetString("EwcCode", resourceCulture);
+                return ResourceManager.GetString("HCodesTableHeading", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to H or HP code(s).
+        ///   Looks up a localized string similar to Waste codes.
         /// </summary>
-        public static string HCode {
+        public static string MainHeading {
             get {
-                return ResourceManager.GetString("HCode", resourceCulture);
+                return ResourceManager.GetString("MainHeading", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Not applicable.
+        ///   Looks up a localized string similar to None.
         /// </summary>
-        public static string HCodeNotApplicable {
+        public static string NoCodes {
             get {
-                return ResourceManager.GetString("HCodeNotApplicable", resourceCulture);
+                return ResourceManager.GetString("NoCodes", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to UN class(es).
+        ///   Looks up a localized string similar to Remove.
         /// </summary>
-        public static string UnClass {
+        public static string RemoveCodeButton {
             get {
-                return ResourceManager.GetString("UnClass", resourceCulture);
+                return ResourceManager.GetString("RemoveCodeButton", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Not applicable.
+        ///   Looks up a localized string similar to Waste codes.
         /// </summary>
-        public static string UnClassNotApplicable {
+        public static string Title {
             get {
-                return ResourceManager.GetString("UnClassNotApplicable", resourceCulture);
+                return ResourceManager.GetString("Title", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Name of the waste.
+        ///   Looks up a localized string similar to Added UN classes.
         /// </summary>
-        public static string WasteTypeName {
+        public static string UnClassesTableHeading {
             get {
-                return ResourceManager.GetString("WasteTypeName", resourceCulture);
+                return ResourceManager.GetString("UnClassesTableHeading", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Y code(s).
+        ///   Looks up a localized string similar to Added Y codes.
         /// </summary>
-        public static string YCode {
+        public static string YCodesTableHeading {
             get {
-                return ResourceManager.GetString("YCode", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Not applicable.
-        /// </summary>
-        public static string YCodeNotApplicable {
-            get {
-                return ResourceManager.GetString("YCodeNotApplicable", resourceCulture);
+                return ResourceManager.GetString("YCodesTableHeading", resourceCulture);
             }
         }
     }
