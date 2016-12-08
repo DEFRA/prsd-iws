@@ -38,8 +38,8 @@ AS
         N.Id AS NotificationId,
         REPLACE(N.NotificationNumber, ' ', '') AS NotificationNumber,
         WT.Name AS Description,
-        4 AS ChemicalCompositionTypeId,
-        'Other' AS ChemicalCompositionType,
+        CCT.Id AS ChemicalCompositionTypeId,
+        CCT.Description AS ChemicalCompositionType,
         NULL AS ChemicalCompositionDescription,
         NULL AS HasSpecialHandlingRequirements,
         NULL AS SpecialHandlingDetails,
@@ -49,4 +49,7 @@ AS
 
     INNER JOIN	[ImportNotification].[WasteType] AS WT
     ON			[WT].[ImportNotificationId] = [N].[Id]
+
+    INNER JOIN	[Lookup].[ChemicalCompositionType] AS CCT 
+    ON			[WT].[ChemicalCompositionType] = [CCT].[Id]
 GO
