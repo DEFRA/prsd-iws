@@ -12,7 +12,7 @@
     {
         public Guid FinancialGuaranteeId { get; set; }
 
-        [Required(ErrorMessageResourceType = typeof(FinancialGuaranteeDecisionResources), ErrorMessage = "DecisionRequried")]
+        [Required(ErrorMessageResourceType = typeof(FinancialGuaranteeDecisionResources), ErrorMessageResourceName = "DecisionRequired")]
         public FinancialGuaranteeDecision? Decision { get; set; }
 
         public SelectList PossibleDecisions { get; set; }
