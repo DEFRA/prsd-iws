@@ -3,6 +3,7 @@
     using System;
     using System.Threading.Tasks;
     using Core.Notification;
+    using Core.Shared;
 
     public interface INotificationApplicationRepository
     {
@@ -17,5 +18,7 @@
         void Add(NotificationApplication notification);
 
         Task<bool> NotificationNumberExists(int number, UKCompetentAuthority competentAuthority);
+
+        Task<NotificationType> GetNotificationType(Guid id);
     }
 }

@@ -23,7 +23,7 @@
                 <span class="assigned-area">@Model.Details.Area</span>
             }
             <br />
-            <span class="assigned-area">@Model.Details.Status</span>
+            <span class="assigned-area">@EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(Model.Details.Status)</span>
             <br />
             <span class="assigned-area"> @(Model.Details.IsInterim ? Resources.IsInterim : Resources.NonInterim)</span>
         </p>

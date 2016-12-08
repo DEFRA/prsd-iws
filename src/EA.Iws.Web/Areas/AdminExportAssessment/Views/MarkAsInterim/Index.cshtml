@@ -1,4 +1,6 @@
 ﻿@using EA.Iws.Core.NotificationAssessment
+@using EA.Iws.Requests.NotificationAssessment
+@using Resource = EA.Iws.Web.Areas.AdminExportAssessment.Views.MarkAsInterim.IndexResources
 @model EA.Iws.Web.Areas.AdminExportAssessment.ViewModels.MarkAsInterimViewModel
 @{
     ViewBag.Title = "Is this an interim notification?";
@@ -51,6 +53,11 @@ else
 
         <button type="submit" class="button">@Constants.ContinueButtonText</button>
     }
+}
+
+@if (Model.IsInterim.HasValue && Model.ShowUpdateInterimStatus.GetValueOrDefault() && Model.NotificationStatus != NotificationStatus.InAssessment)
+{
+    @Html.ActionLink(Resource.UpdateInterimStatusButtonText, "UpdateInterimStatus", "MarkAsInterim", new {@class = "button"})
 }
 
 @section menu {

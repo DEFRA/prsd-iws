@@ -11,5 +11,7 @@
         public const string CanOverrideKeyDates = "Can Override Key Dates";
 
         public const string CanDeleteMovements = "Can Delete Movements";
+
+        public const string CanUpdateInterimStatus = "Can Update Interim Status";
     }
 }

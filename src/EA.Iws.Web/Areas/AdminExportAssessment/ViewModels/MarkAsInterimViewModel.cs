@@ -23,5 +23,7 @@
         public bool? IsInterim { get; set; }
 
         public NotificationStatus NotificationStatus { get; set; }
+
+        public bool? ShowUpdateInterimStatus { get; set; }
     }
 }
