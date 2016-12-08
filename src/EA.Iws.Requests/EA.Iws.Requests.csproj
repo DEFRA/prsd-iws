@@ -187,6 +187,7 @@
     <Compile Include="NotificationAssessment\GetOriginalNumberOfShipments.cs" />
     <Compile Include="NotificationAssessment\MarkAsInterim.cs" />
     <Compile Include="NotificationAssessment\SetNewNumberOfShipments.cs" />
+    <Compile Include="NotificationAssessment\UpdateInterimStatus.cs" />
     <Compile Include="NotificationMovements\Capture\GetLatestMovementNumber.cs" />
     <Compile Include="NotificationMovements\Create\HasExceededConsentedQuantity.cs" />
     <Compile Include="Movement\Receive\DoesQuantityReceivedExceedTolerance.cs" />
@@ -246,6 +247,7 @@
     <Compile Include="Notification\GetNotificationNumber.cs" />
     <Compile Include="Notification\GetNotificationIdAndStatusByNumber.cs" />
     <Compile Include="Movement\Receive\RecordReceiptInternal.cs" />
+    <Compile Include="Notification\GetNotificationType.cs" />
     <Compile Include="Notification\GetWhatToDoNextDataForNotification.cs" />
     <Compile Include="Notification\ResubmitNotification.cs" />
     <Compile Include="Notification\WhatToDoNextData.cs" />

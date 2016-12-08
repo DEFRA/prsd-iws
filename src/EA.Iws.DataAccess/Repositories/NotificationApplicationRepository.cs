@@ -5,6 +5,7 @@
     using System.Linq;
     using System.Threading.Tasks;
     using Core.Notification;
+    using Core.Shared;
     using Domain.NotificationApplication;
     using Domain.Security;
 
@@ -62,6 +63,13 @@
             var formattedNumber = NotificationNumberFormatter.GetNumber(number, competentAuthority);
 
             return await context.NotificationApplications.AnyAsync(n => n.NotificationNumber == formattedNumber);
+        }
+
+        public async Task<NotificationType> GetNotificationType(Guid id)
+        {
+            var notification = await GetById(id);
+
+            return notification.NotificationType;
         }
     }
 }

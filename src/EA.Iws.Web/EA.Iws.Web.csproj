@@ -477,6 +477,7 @@
     <Content Include="Areas\AdminExportAssessment\Views\FinancialGuaranteeDetails\Index.cshtml" />
     <Content Include="Areas\ImportNotification\Views\WasteType\Index.cshtml" />
     <Content Include="Areas\ImportNotification\Views\Home\_WasteType.cshtml" />
+    <Content Include="Areas\AdminExportAssessment\Views\MarkAsInterim\UpdateInterimStatus.cshtml" />
     <None Include="Content\iws\_panels.scss" />
     <Content Include="Content\nta-extended.css" />
     <Content Include="Content\select2\select2-spinner.gif" />
@@ -1123,6 +1124,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>IndexViewModelResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Areas\AdminExportAssessment\ViewModels\UpdateInterimStatusViewModel.cs" />
     <Compile Include="Areas\AdminExportAssessment\Views\AccountManagement\PaymentDetailsResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -1167,6 +1169,16 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>IndexResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\AdminExportAssessment\Views\MarkAsInterim\IndexResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IndexResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\AdminExportAssessment\Views\MarkAsInterim\UpdateInterimStatusResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>UpdateInterimStatusResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Areas\AdminExportAssessment\Views\NumberOfShipments\ConfirmResources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -3116,6 +3128,14 @@
     <EmbeddedResource Include="Areas\AdminExportAssessment\Views\KeyDates\IndexResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\AdminExportAssessment\Views\MarkAsInterim\IndexResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\AdminExportAssessment\Views\MarkAsInterim\UpdateInterimStatusResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>UpdateInterimStatusResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\AdminExportAssessment\Views\NumberOfShipments\ConfirmResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
