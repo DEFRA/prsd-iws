@@ -324,7 +324,8 @@ INSERT INTO [ImportNotification].[WasteType]
            ,[BaselOecdCodeNotListed]
            ,[YCodeNotApplicable]
            ,[HCodeNotApplicable]
-           ,[UnClassNotApplicable])
+           ,[UnClassNotApplicable]
+		   ,[ChemicalCompositionType])
      VALUES
            (@WasteTypeId,
            @ImportNotificationId,
@@ -332,7 +333,8 @@ INSERT INTO [ImportNotification].[WasteType]
            1,
            1,
            1,
-           1)
+           1,
+		   1)
 
 INSERT INTO [ImportNotification].[WasteCode]
            ([Id]
