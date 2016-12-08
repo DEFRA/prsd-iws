@@ -15,8 +15,7 @@
 
             return new ConsultationData
             {
-                LocalAreaId = source.LocalAreaId,
-                ReceivedDate = source.ReceivedDate
+                LocalAreaId = source.LocalAreaId
             };
         }
     }

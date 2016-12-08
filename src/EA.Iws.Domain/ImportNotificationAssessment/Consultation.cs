@@ -9,8 +9,6 @@
 
         public Guid? LocalAreaId { get; set; }
 
-        public DateTime? ReceivedDate { get; set; }
-
         protected Consultation()
         {
         }

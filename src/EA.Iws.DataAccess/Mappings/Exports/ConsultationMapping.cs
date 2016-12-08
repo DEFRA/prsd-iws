@@ -11,7 +11,6 @@
 
             Property(x => x.NotificationId).IsRequired();
             Property(x => x.LocalAreaId).IsOptional();
-            Property(x => x.ReceivedDate).IsOptional();
         }
     }
 }

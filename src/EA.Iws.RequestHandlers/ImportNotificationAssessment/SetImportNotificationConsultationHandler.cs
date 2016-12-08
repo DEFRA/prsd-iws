@@ -29,7 +29,6 @@
             }
 
             consultation.LocalAreaId = message.LocalAreaId;
-            consultation.ReceivedDate = message.ReceivedDate;
 
             await context.SaveChangesAsync();
 
