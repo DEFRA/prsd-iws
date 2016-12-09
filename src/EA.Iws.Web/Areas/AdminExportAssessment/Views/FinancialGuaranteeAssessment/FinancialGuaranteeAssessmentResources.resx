@@ -138,6 +138,9 @@
   <data name="DecisionHeading" xml:space="preserve">
     <value>Financial guarantee decision</value>
   </data>
+  <data name="DecisionHistoryLink" xml:space="preserve">
+    <value>Financial guarantee decision history</value>
+  </data>
   <data name="MakeADecisionButton" xml:space="preserve">
     <value>Make a decision</value>
   </data>

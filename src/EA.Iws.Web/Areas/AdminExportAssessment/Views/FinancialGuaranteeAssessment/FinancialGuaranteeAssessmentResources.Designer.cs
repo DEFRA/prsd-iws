@@ -125,6 +125,15 @@ namespace EA.Iws.Web.Areas.AdminExportAssessment.Views.FinancialGuaranteeAssessm
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Financial guarantee decision history.
+        /// </summary>
+        public static string DecisionHistoryLink {
+            get {
+                return ResourceManager.GetString("DecisionHistoryLink", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Make a decision.
         /// </summary>
         public static string MakeADecisionButton {

@@ -70,6 +70,10 @@
     </div>
 }
 
+<div class="form-group">
+    @Html.ActionLink(Resources.DecisionHistoryLink, "Index", "FinancialGuaranteeDecisionHistory")
+</div>
+
 @section menu {
     @Html.Action("ExportNavigation", "Menu", new { area = "Admin", section = ExportNavigationSection.Assessment })
 }
