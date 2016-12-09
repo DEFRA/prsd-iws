@@ -1,0 +1,36 @@
+﻿@model EA.Iws.Core.Notification.UKCompetentAuthority
+@using EA.Iws.Core.Notification
+@using Resource = EA.Iws.Web.Areas.NotificationMovements.Views.Create.NoApprovedFinancialGuaranteeResources
+@{
+    ViewBag.Title = "NoApprovedFinancialGuarantee";
+}
+
+<h1 class="heading-large">@Resource.Title</h1>
+
+<p>@Resource.Body</p>
+
+<p>
+    <ol class="list-number">
+        <li>@Resource.ListItem1</li>
+        <li>@Resource.ListItem2</li>
+    </ol>
+</p>
+
+@if (Model != UKCompetentAuthority.Scotland)
+{
+    <div class="form-group">
+        @Html.ActionLink(Resource.DownloadLink, "GenerateFinancialGuaranteeDocument", "Home", new { competentAuthority = Model, area = "FinancialGuarantee" }, null)
+    </div>
+}
+else
+{
+    <p class="text">
+        @Resource.SepaPreLinkText
+        @Html.ActionLink(Resource.SepaDownloadBankLink, "GenerateBankGuaranteeDocument", "Home", new { area = "FinancialGuarantee" }, null)
+        @Resource.Or
+        @Html.ActionLink(Resource.SepaDownloadParentLink, "GenerateParentCompanyDocument", "Home", new { area = "FinancialGuarantee" }, null)
+        @Resource.SepaPostLinkText
+    </p>
+}
+
+@Html.ActionLink("Continue", "Index", "Options", new { area = "NotificationApplication", id = ViewContext.RouteData.Values["notificationId"] }, new { @class = "button" })

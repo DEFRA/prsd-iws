@@ -12,6 +12,7 @@
     using Infrastructure.Authorization;
     using Prsd.Core.Mediator;
     using Requests.Movement;
+    using Requests.Notification;
     using Requests.NotificationMovements;
     using Requests.NotificationMovements.Create;
     using ViewModels.Create;
@@ -68,6 +69,10 @@
             else if (ruleSummary.RuleResults.Any(r => r.Rule == MovementRules.TotalIntendedQuantityExceeded && r.MessageLevel == MessageLevel.Error))
             {
                 return RedirectToAction("TotalIntendedQuantityExceeded");
+            }
+            else if (ruleSummary.RuleResults.Any(r => r.Rule == MovementRules.HasApprovedFinancialGuarantee && r.MessageLevel == MessageLevel.Error))
+            {
+                return RedirectToAction("NoApprovedFinancialGuarantee");
             }
             else if (ruleSummary.RuleResults.Any(r => r.Rule == MovementRules.ActiveLoadsReached && r.MessageLevel == MessageLevel.Error))
             {
@@ -357,6 +362,15 @@
         public ActionResult FileClosed(Guid notificationId)
         {
             return View();
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> NoApprovedFinancialGuarantee(Guid notificationId)
+        {
+            var competentAuthority =
+                await mediator.SendAsync(new GetUnitedKingdomCompetentAuthorityByNotificationId(notificationId));
+
+            return View(competentAuthority.AsUKCompetantAuthority());
         }
     }
 }
