@@ -14,11 +14,11 @@
         private readonly StateMachine<MovementStatus, Trigger> stateMachine;
 
         private StateMachine<MovementStatus, Trigger>.TriggerWithParameters<Guid> submittedTrigger;
-        private StateMachine<MovementStatus, Trigger>.TriggerWithParameters<DateTime, Guid> completedTrigger;
-        private StateMachine<MovementStatus, Trigger>.TriggerWithParameters<Guid, DateTime, ShipmentQuantity> acceptedTrigger;
-        private StateMachine<MovementStatus, Trigger>.TriggerWithParameters<DateTime, ShipmentQuantity> internallyAcceptedTrigger;
+        private StateMachine<MovementStatus, Trigger>.TriggerWithParameters<DateTime, Guid, Guid> completedTrigger;
+        private StateMachine<MovementStatus, Trigger>.TriggerWithParameters<AcceptedTriggerParameters> acceptedTrigger;
+        private StateMachine<MovementStatus, Trigger>.TriggerWithParameters<InternallyAcceptedTriggerParameters> internallyAcceptedTrigger;
         private StateMachine<MovementStatus, Trigger>.TriggerWithParameters<DateTime> internallySubmittedTrigger;
-        private StateMachine<MovementStatus, Trigger>.TriggerWithParameters<DateTime> internallyCompletedTrigger;
+        private StateMachine<MovementStatus, Trigger>.TriggerWithParameters<DateTime, Guid> internallyCompletedTrigger;
 
         private enum Trigger
         {
@@ -131,11 +131,11 @@
 
             submittedTrigger = stateMachine.SetTriggerParameters<Guid>(Trigger.Submit);
             internallySubmittedTrigger = stateMachine.SetTriggerParameters<DateTime>(Trigger.SubmitInternal);
-            completedTrigger = stateMachine.SetTriggerParameters<DateTime, Guid>(Trigger.Complete);
-            internallyCompletedTrigger = stateMachine.SetTriggerParameters<DateTime>(Trigger.CompleteInternal);
+            completedTrigger = stateMachine.SetTriggerParameters<DateTime, Guid, Guid>(Trigger.Complete);
+            internallyCompletedTrigger = stateMachine.SetTriggerParameters<DateTime, Guid>(Trigger.CompleteInternal);
 
-            acceptedTrigger = stateMachine.SetTriggerParameters<Guid, DateTime, ShipmentQuantity>(Trigger.Receive);
-            internallyAcceptedTrigger = stateMachine.SetTriggerParameters<DateTime, ShipmentQuantity>(Trigger.ReceiveInternal);
+            acceptedTrigger = stateMachine.SetTriggerParameters<AcceptedTriggerParameters>(Trigger.Receive);
+            internallyAcceptedTrigger = stateMachine.SetTriggerParameters<InternallyAcceptedTriggerParameters>(Trigger.ReceiveInternal);
 
             stateMachine.OnTransitioned(OnTransitionAction);
 
@@ -210,31 +210,31 @@
             return rejection;
         }
 
-        public void Receive(Guid fileId, DateTime dateReceived, ShipmentQuantity quantity)
+        public void Receive(Guid fileId, DateTime dateReceived, ShipmentQuantity quantity, Guid createdBy)
         {
             Guard.ArgumentNotDefaultValue(() => fileId, fileId);
             Guard.ArgumentNotDefaultValue(() => dateReceived, dateReceived);
             Guard.ArgumentNotDefaultValue(() => quantity, quantity);
 
-            stateMachine.Fire(acceptedTrigger, fileId, dateReceived, quantity);
+            stateMachine.Fire(acceptedTrigger, new AcceptedTriggerParameters(fileId, dateReceived, quantity, createdBy));
         }
 
-        private void OnReceived(Guid fileId, DateTime dateReceived, ShipmentQuantity quantity)
+        private void OnReceived(AcceptedTriggerParameters parameters)
         {
-            Receipt = new MovementReceipt(fileId, dateReceived, quantity);
+            Receipt = new MovementReceipt(parameters.FileId, parameters.DateReceived, parameters.Quantity, parameters.CreatedBy);
         }
 
-        public void ReceiveInternally(DateTime dateReceived, ShipmentQuantity quantity)
+        public void ReceiveInternally(DateTime dateReceived, ShipmentQuantity quantity, Guid createdBy)
         {
             Guard.ArgumentNotDefaultValue(() => dateReceived, dateReceived);
             Guard.ArgumentNotNull(() => quantity, quantity);
 
-            stateMachine.Fire(internallyAcceptedTrigger, dateReceived, quantity);
+            stateMachine.Fire(internallyAcceptedTrigger, new InternallyAcceptedTriggerParameters(dateReceived, quantity, createdBy));
         }
 
-        private void OnInternallyReceived(DateTime dateReceived, ShipmentQuantity quantity)
+        private void OnInternallyReceived(InternallyAcceptedTriggerParameters parameters)
         {
-            Receipt = new MovementReceipt(dateReceived, quantity);
+            Receipt = new MovementReceipt(parameters.DateReceived, parameters.Quantity, parameters.CreatedBy);
         }
 
         public void Cancel()
@@ -242,27 +242,62 @@
             stateMachine.Fire(Trigger.Cancel);
         }
 
-        public void Complete(DateTime completedDate, Guid fileId)
+        public void Complete(DateTime completedDate, Guid fileId, Guid createdBy)
         {
             Guard.ArgumentNotDefaultValue(() => completedDate, completedDate);
             Guard.ArgumentNotDefaultValue(() => fileId, fileId);
 
-            stateMachine.Fire(completedTrigger, completedDate, fileId);
+            stateMachine.Fire(completedTrigger, completedDate, fileId, createdBy);
         }
 
-        private void OnCompleted(DateTime completedDate, Guid fileId)
+        private void OnCompleted(DateTime completedDate, Guid fileId, Guid createdBy)
         {
-            CompletedReceipt = new MovementCompletedReceipt(completedDate, fileId);
+            CompletedReceipt = new MovementCompletedReceipt(completedDate, fileId, createdBy);
         }
 
-        public void CompleteInternally(DateTime completedDate)
+        public void CompleteInternally(DateTime completedDate, Guid createdBy)
         {
-            stateMachine.Fire(internallyCompletedTrigger, completedDate);
+            stateMachine.Fire(internallyCompletedTrigger, completedDate, createdBy);
         }
 
-        private void OnInternallyCompleted(DateTime completedDate)
+        private void OnInternallyCompleted(DateTime completedDate, Guid createdBy)
         {
-            CompletedReceipt = new MovementCompletedReceipt(completedDate);
+            CompletedReceipt = new MovementCompletedReceipt(completedDate, createdBy);
+        }
+
+        private class AcceptedTriggerParameters
+        {
+            public Guid FileId { get; private set; }
+
+            public DateTime DateReceived { get; private set; }
+
+            public ShipmentQuantity Quantity { get; private set; }
+
+            public Guid CreatedBy { get; private set; }
+
+            public AcceptedTriggerParameters(Guid fileId, DateTime dateReceived, ShipmentQuantity quantity, Guid createdBy)
+            {
+                FileId = fileId;
+                DateReceived = dateReceived;
+                CreatedBy = createdBy;
+                Quantity = quantity;
+            }
+        }
+
+        private class InternallyAcceptedTriggerParameters
+        {
+            public DateTime DateReceived { get; private set; }
+
+            public ShipmentQuantity Quantity { get; private set; }
+
+            public Guid CreatedBy { get; private set; }
+
+            public InternallyAcceptedTriggerParameters(DateTime dateReceived, ShipmentQuantity quantity, Guid createdBy)
+            {
+                DateReceived = dateReceived;
+                CreatedBy = createdBy;
+                Quantity = quantity;
+            }
         }
     }
 }

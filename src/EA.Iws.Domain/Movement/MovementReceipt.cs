@@ -10,17 +10,19 @@
         {
         }
 
-        internal MovementReceipt(Guid fileId, DateTime dateReceived, ShipmentQuantity quantity)
+        internal MovementReceipt(Guid fileId, DateTime dateReceived, ShipmentQuantity quantity, Guid createdBy)
         {
             FileId = fileId;
             Date = dateReceived;
             QuantityReceived = quantity;
+            CreatedBy = createdBy;
         }
 
-        internal MovementReceipt(DateTime dateReceived, ShipmentQuantity quantity)
+        internal MovementReceipt(DateTime dateReceived, ShipmentQuantity quantity, Guid createdBy)
         {
             Date = dateReceived;
             QuantityReceived = quantity;
+            CreatedBy = createdBy;
         }
         
         public DateTime Date { get; private set; }
@@ -30,5 +32,7 @@
         public ShipmentQuantity QuantityReceived { get; private set; }
 
         public Guid? FileId { get; private set; }
+
+        public Guid CreatedBy { get; private set; }
     }
 }

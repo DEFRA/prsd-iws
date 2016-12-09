@@ -31,7 +31,7 @@
         [Fact]
         public void Captured_ToReceived()
         {
-            movement.ReceiveInternally(Date, new ShipmentQuantity(10, ShipmentQuantityUnits.Kilograms));
+            movement.ReceiveInternally(Date, new ShipmentQuantity(10, ShipmentQuantityUnits.Kilograms), userId);
 
             Assert.Equal(MovementStatus.Received, movement.Status);
             Assert.Equal(Date, movement.Receipt.Date);
@@ -53,7 +53,7 @@
         {
             movement.SubmitInternally(Date);
 
-            movement.Receive(new Guid("2A24F5A5-000F-437D-9C00-9EA01EDD0668"), Date.AddDays(5), new ShipmentQuantity(10, ShipmentQuantityUnits.Kilograms));
+            movement.Receive(new Guid("2A24F5A5-000F-437D-9C00-9EA01EDD0668"), Date.AddDays(5), new ShipmentQuantity(10, ShipmentQuantityUnits.Kilograms), userId);
 
             Assert.Equal(MovementStatus.Received, movement.Status);
             Assert.Equal(Date, movement.PrenotificationDate);
@@ -65,7 +65,7 @@
         {
             SetMovementStatus(MovementStatus.Received);
 
-            movement.CompleteInternally(Date);
+            movement.CompleteInternally(Date, userId);
 
             Assert.Equal(MovementStatus.Completed, movement.Status);
             Assert.Equal(Date, movement.CompletedReceipt.Date);
@@ -82,7 +82,7 @@
         {
             SetMovementStatus(status);
 
-            Action complete = () => movement.CompleteInternally(Date);
+            Action complete = () => movement.CompleteInternally(Date, userId);
 
             Assert.Throws<InvalidOperationException>(complete);
         }

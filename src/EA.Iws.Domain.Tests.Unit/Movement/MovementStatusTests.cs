@@ -73,7 +73,7 @@
         {
             SetMovementStatus(MovementStatus.Received, movement);
 
-            movement.Complete(AnyDate, AnyGuid);
+            movement.Complete(AnyDate, AnyGuid, userId);
 
             Assert.Equal(MovementStatus.Completed, movement.Status);
         }
@@ -83,7 +83,7 @@
         {
             SetMovementStatus(MovementStatus.Received, movement);
 
-            movement.Complete(AnyDate, AnyGuid);
+            movement.Complete(AnyDate, AnyGuid, userId);
 
             Assert.NotNull(movement.CompletedReceipt);
         }
@@ -97,7 +97,7 @@
         {
             SetMovementStatus(status, movement);
 
-            Assert.Throws<InvalidOperationException>(() => movement.Complete(AnyDate, AnyGuid));
+            Assert.Throws<InvalidOperationException>(() => movement.Complete(AnyDate, AnyGuid, userId));
         }
 
         private Movement CreateMovement()
