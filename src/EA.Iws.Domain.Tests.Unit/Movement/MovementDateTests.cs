@@ -15,6 +15,7 @@
         private static readonly Guid NotificationId = new Guid("5FE8E146-2584-43CF-A2A7-FD3911924502");
         private static readonly DateTime Today = new DateTime(2015, 1, 1);
         private readonly IUpdatedMovementDateValidator validator;
+        private readonly Guid userId = new Guid("E45663E5-1BD0-4AC3-999B-0E9975BE86FC");
 
         public MovementDateTests()
         {
@@ -26,7 +27,7 @@
         [Fact]
         public async Task DateUpdates()
         {
-            var movement = new Movement(1, NotificationId, Today);
+            var movement = new Movement(1, NotificationId, Today, userId);
             ObjectInstantiator<Movement>.SetProperty(x => x.Status, MovementStatus.Submitted, movement);
 
             var newDate = Today.AddDays(13);
@@ -40,7 +41,7 @@
         public async Task DateNotValid_Throws()
         {
             var initialDate = Today;
-            var movement = new Movement(1, NotificationId, initialDate);
+            var movement = new Movement(1, NotificationId, initialDate, userId);
             ObjectInstantiator<Movement>.SetProperty(x => x.Status, MovementStatus.Submitted, movement);
 
             A.CallTo(() => validator.EnsureDateValid(movement, A<DateTime>.Ignored)).Throws<MovementDateException>();
@@ -53,7 +54,7 @@
         [Fact]
         public async Task DateChangedRaisesEvent()
         {
-            var movement = new Movement(1, NotificationId, Today);
+            var movement = new Movement(1, NotificationId, Today, userId);
             ObjectInstantiator<Movement>.SetProperty(x => x.Status, MovementStatus.Submitted, movement);
 
             var newDate = Today.AddDays(5);
@@ -67,7 +68,7 @@
         public async Task DateChangedEvent_ContainsOldDate()
         {
             var initialDate = Today;
-            var movement = new Movement(1, NotificationId, initialDate);
+            var movement = new Movement(1, NotificationId, initialDate, userId);
             ObjectInstantiator<Movement>.SetProperty(x => x.Status, MovementStatus.Submitted, movement);
 
             var newDate = initialDate.AddDays(5);

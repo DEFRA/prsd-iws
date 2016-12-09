@@ -11,10 +11,11 @@
     {
         private static readonly DateTime Date = new DateTime(2015, 7, 7);
         private readonly Movement movement;
+        private readonly Guid userId = new Guid("E45663E5-1BD0-4AC3-999B-0E9975BE86FC");
 
         public MovementInternalStatusTests()
         {
-            movement = new Movement(1, Guid.Empty, new DateTime(2015, 1, 1));
+            movement = new Movement(1, Guid.Empty, new DateTime(2015, 1, 1), userId);
             SetMovementStatus(MovementStatus.Captured);
         }
 

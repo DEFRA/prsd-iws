@@ -12,6 +12,7 @@
         private readonly Movement movement;
         private static readonly Guid AnyGuid = new Guid("B68806E3-524E-476E-A505-40B717B3191E");
         private static readonly DateTime AnyDate = new DateTime(2015, 1, 1);
+        private readonly Guid userId = new Guid("E45663E5-1BD0-4AC3-999B-0E9975BE86FC");
 
         public MovementStatusTests()
         {
@@ -102,7 +103,7 @@
         private Movement CreateMovement()
         {
             var notificationId = new Guid("EAD34BEE-E962-4D4D-9D53-ADCD7240C333");
-            return new Movement(1, notificationId, AnyDate);
+            return new Movement(1, notificationId, AnyDate, userId);
         }
     }
 }

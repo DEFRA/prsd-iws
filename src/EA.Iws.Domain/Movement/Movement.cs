@@ -39,7 +39,7 @@
         }
 
         public static Movement Capture(int movementNumber, Guid notificationId, DateTime actualDate,
-            DateTime? prenotificationDate, bool hasNoPrenotification)
+            DateTime? prenotificationDate, bool hasNoPrenotification, Guid createdBy)
         {
             if (hasNoPrenotification && prenotificationDate.HasValue)
             {
@@ -52,7 +52,8 @@
                 Number = movementNumber,
                 Date = actualDate,
                 Status = MovementStatus.Captured,
-                HasNoPrenotification = hasNoPrenotification
+                HasNoPrenotification = hasNoPrenotification,
+                CreatedBy = createdBy
             };
 
             if (prenotificationDate.HasValue)
@@ -63,11 +64,12 @@
             return movement;
         }
 
-        internal Movement(int movementNumber, Guid notificationId, DateTime date)
+        internal Movement(int movementNumber, Guid notificationId, DateTime date, Guid createdBy)
         {
             Number = movementNumber;
             NotificationId = notificationId;
             Date = date;
+            CreatedBy = createdBy;
 
             Status = MovementStatus.New;
             StatusChangeCollection = new List<MovementStatusChange>();
@@ -103,6 +105,8 @@
         {
             get { return Status == MovementStatus.Submitted && Date < SystemTime.UtcNow; }
         }
+
+        public Guid CreatedBy { get; private set; }
 
         public void AddStatusChangeRecord(MovementStatusChange statusChange)
         {

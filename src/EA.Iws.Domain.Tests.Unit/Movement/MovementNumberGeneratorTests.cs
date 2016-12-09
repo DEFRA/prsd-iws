@@ -14,6 +14,7 @@
         private static readonly Guid NotificationId = new Guid("89425659-DDDA-4168-BACD-3032A5EB1FB6");
         private readonly IMovementRepository movementRepository;
         private readonly IShipmentInfoRepository shipmentRepository;
+        private readonly Guid userId = new Guid("E45663E5-1BD0-4AC3-999B-0E9975BE86FC");
 
         public MovementNumberGeneratorTests()
         {
@@ -93,7 +94,7 @@
 
         private Movement GetMovement(int number, Guid notificationId)
         {
-            return new Movement(number, notificationId, DateTime.Today.AddDays(-number));
+            return new Movement(number, notificationId, DateTime.Today.AddDays(-number), userId);
         }
 
         public void Dispose()

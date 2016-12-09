@@ -7,6 +7,7 @@
     using Domain.Movement;
     using Domain.NotificationAssessment;
     using FakeItEasy;
+    using Prsd.Core.Domain;
     using TestHelpers.DomainFakes;
     using Xunit;
 
@@ -26,7 +27,7 @@
             A.CallTo(() => assessmentRepository.GetByNotificationId(NotificationId))
                 .Returns(new TestableNotificationAssessment { Status = NotificationStatus.Consented });
 
-            factory = new CapturedMovementFactory(validator, assessmentRepository);
+            factory = new CapturedMovementFactory(validator, assessmentRepository, A.Fake<IUserContext>());
         }
 
         [Fact]

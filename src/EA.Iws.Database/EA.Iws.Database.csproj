@@ -124,6 +124,7 @@
     <Content Include="scripts\Update\0002-CI\Sprint4\20161202-165700-remove-non-received-fgs.sql" />
     <Content Include="scripts\Update\0002-CI\Sprint5\20161207-142500-add-chemical-composition-type.sql" />
     <Content Include="scripts\Update\0002-CI\Sprint5\20161208-112600-remove-area-consultation-date.sql" />
+    <Content Include="scripts\Update\0002-CI\Sprint5\20161209-111900-add-created-by-to-movement.sql" />
     <Content Include="scripts\Update\placeholder.txt" />
     <Content Include="scripts\Update\0001-Release1\Sprint10\20150625-103000-add-us-competent-authority.sql" />
     <Content Include="scripts\Update\0001-Release1\Sprint10\20150626-163000-link-waste-code-info-to-notification.sql" />
