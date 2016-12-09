@@ -117,10 +117,31 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AuthorisedOnly" xml:space="preserve">
+    <value>Only admin users can change the interim status of notifications</value>
+  </data>
   <data name="Heading" xml:space="preserve">
     <value>Change interim status</value>
   </data>
+  <data name="IsThisQuestionHeading" xml:space="preserve">
+    <value>Is this an iterim or non-interim notification?</value>
+  </data>
+  <data name="No" xml:space="preserve">
+    <value>Non-interim</value>
+  </data>
+  <data name="StatusErrorMessage" xml:space="preserve">
+    <value>It is only possible to change the interim status of notifications that have the status:</value>
+  </data>
+  <data name="ThisStatus" xml:space="preserve">
+    <value>This notification has the status</value>
+  </data>
   <data name="Title" xml:space="preserve">
     <value>Change Interim Status</value>
+  </data>
+  <data name="TypeErrorMessage" xml:space="preserve">
+    <value>This notification is for Recovery and it is only possible to change the interim status of notification for Disposal</value>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>Interim</value>
   </data>
 </root>

@@ -1276,6 +1276,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>KeyDatesViewModelResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Areas\AdminImportAssessment\ViewModels\MarkAsInterim\MarkAsInterimViewModel.cs" />
     <Compile Include="Areas\AdminImportAssessment\ViewModels\RefundDetails\RefundDetailsViewModel.cs" />
     <Compile Include="Areas\AdminImportAssessment\ViewModels\RefundDetails\RefundDetailsViewModelResources.Designer.cs">
       <AutoGen>True</AutoGen>

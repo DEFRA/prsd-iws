@@ -61,6 +61,15 @@ namespace EA.Iws.Web.Areas.AdminImportAssessment.Views.MarkAsInterim {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Only admin users can change the interim status of notifications.
+        /// </summary>
+        public static string AuthorisedOnly {
+            get {
+                return ResourceManager.GetString("AuthorisedOnly", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Change interim status.
         /// </summary>
         public static string Heading {
@@ -70,11 +79,65 @@ namespace EA.Iws.Web.Areas.AdminImportAssessment.Views.MarkAsInterim {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Is this an iterim or non-interim notification?.
+        /// </summary>
+        public static string IsThisQuestionHeading {
+            get {
+                return ResourceManager.GetString("IsThisQuestionHeading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Non-interim.
+        /// </summary>
+        public static string No {
+            get {
+                return ResourceManager.GetString("No", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to It is only possible to change the interim status of notifications that have the status:.
+        /// </summary>
+        public static string StatusErrorMessage {
+            get {
+                return ResourceManager.GetString("StatusErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This notification has the status.
+        /// </summary>
+        public static string ThisStatus {
+            get {
+                return ResourceManager.GetString("ThisStatus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Change Interim Status.
         /// </summary>
         public static string Title {
             get {
                 return ResourceManager.GetString("Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This notification is for Recovery and it is only possible to change the interim status of notification for Disposal.
+        /// </summary>
+        public static string TypeErrorMessage {
+            get {
+                return ResourceManager.GetString("TypeErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Interim.
+        /// </summary>
+        public static string Yes {
+            get {
+                return ResourceManager.GetString("Yes", resourceCulture);
             }
         }
     }
