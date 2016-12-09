@@ -163,7 +163,13 @@
             await mediator.SendAsync(new ReleaseFinancialGuarantee(id, model.FinancialGuaranteeId,
                   model.DecisionMadeDate.AsDateTime().Value));
 
-            return RedirectToAction("Index", "FinancialGuaranteeAssessment");
+            return RedirectToAction("Released");
+        }
+
+        [HttpGet]
+        public ActionResult Released()
+        {
+            return View();
         }
     }
 }

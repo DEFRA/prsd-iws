@@ -89,6 +89,24 @@ namespace EA.Iws.Web.Areas.AdminExportAssessment.Views.FinancialGuaranteeDecisio
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to This notification has no approved financial guarantee in place. An approved financial guarantee is required in order to make shipments..
+        /// </summary>
+        public static string ReleasedDescription {
+            get {
+                return ResourceManager.GetString("ReleasedDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This Financial Guarantee has now been released.
+        /// </summary>
+        public static string ReleasedTitle {
+            get {
+                return ResourceManager.GetString("ReleasedTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Release financial guarantee.
         /// </summary>
         public static string ReleaseTitle {
