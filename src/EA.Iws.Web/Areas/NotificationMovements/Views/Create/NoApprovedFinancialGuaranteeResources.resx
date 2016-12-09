@@ -117,40 +117,34 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AddLink" xml:space="preserve">
-    <value>Add</value>
+  <data name="Body" xml:space="preserve">
+    <value>You cannot prenotify any more shipments until you have an approved financial guarantee in place.</value>
   </data>
-  <data name="AssessmentTitle" xml:space="preserve">
-    <value>Financial guarantee assessment</value>
+  <data name="DownloadLink" xml:space="preserve">
+    <value>Download financial guarantee</value>
   </data>
-  <data name="CompleteTitle" xml:space="preserve">
-    <value>Complete financial guarantee</value>
+  <data name="ListItem1" xml:space="preserve">
+    <value>submit a new financial guarantee application</value>
   </data>
-  <data name="DateCompleted" xml:space="preserve">
-    <value>Date completed</value>
+  <data name="ListItem2" xml:space="preserve">
+    <value>wait for approval from your competent authority</value>
   </data>
-  <data name="DateReceived" xml:space="preserve">
-    <value>Date received</value>
+  <data name="Or" xml:space="preserve">
+    <value>or</value>
   </data>
-  <data name="Decision" xml:space="preserve">
-    <value>Decision</value>
+  <data name="SepaDownloadBankLink" xml:space="preserve">
+    <value>Bank Guarantee template</value>
   </data>
-  <data name="DecisionHeading" xml:space="preserve">
-    <value>Financial guarantee decision</value>
+  <data name="SepaDownloadParentLink" xml:space="preserve">
+    <value>Parent Company template</value>
   </data>
-  <data name="DecisionHistoryLink" xml:space="preserve">
-    <value>Financial guarantee decision history</value>
+  <data name="SepaPostLinkText" xml:space="preserve">
+    <value>and ask your bank or parent company to complete the guarantee.</value>
   </data>
-  <data name="MakeADecisionButton" xml:space="preserve">
-    <value>Make a decision</value>
+  <data name="SepaPreLinkText" xml:space="preserve">
+    <value>If you intend to submit a bank or parent company guarantee, download either the</value>
   </data>
-  <data name="NewTitle" xml:space="preserve">
-    <value>Record new financial guarantee</value>
-  </data>
-  <data name="RecordNew" xml:space="preserve">
-    <value>Record a new financial guarantee</value>
-  </data>
-  <data name="Release" xml:space="preserve">
-    <value>Release financial guarantee</value>
+  <data name="Title" xml:space="preserve">
+    <value>There is no approved financial guarantee in place</value>
   </data>
 </root>

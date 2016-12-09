@@ -463,6 +463,7 @@
     <Compile Include="NotificationMovements\GetReceivedMovementsHandler.cs" />
     <Compile Include="NotificationMovements\Mappings\PackagingDataMap.cs" />
     <Compile Include="NotificationMovements\Mappings\ShipmentDatesMap.cs" />
+    <Compile Include="NotificationMovements\Rules\ActiveApprovedFinancialGuarantee.cs" />
     <Compile Include="NotificationMovements\Rules\ConsentExpiresInThreeOrLessWorkingDays.cs" />
     <Compile Include="NotificationMovements\Rules\ConsentExpiresInFourWorkingDays.cs" />
     <Compile Include="NotificationMovements\Rules\FileClosed.cs" />

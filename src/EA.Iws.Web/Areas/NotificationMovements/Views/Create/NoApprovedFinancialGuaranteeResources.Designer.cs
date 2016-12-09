@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace EA.Iws.Web.Areas.AdminExportAssessment.Views.FinancialGuaranteeAssessment {
+namespace EA.Iws.Web.Areas.NotificationMovements.Views.Create {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace EA.Iws.Web.Areas.AdminExportAssessment.Views.FinancialGuaranteeAssessm
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class FinancialGuaranteeAssessmentResources {
+    public class NoApprovedFinancialGuaranteeResources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal FinancialGuaranteeAssessmentResources() {
+        internal NoApprovedFinancialGuaranteeResources() {
         }
         
         /// <summary>
@@ -39,8 +39,8 @@ namespace EA.Iws.Web.Areas.AdminExportAssessment.Views.FinancialGuaranteeAssessm
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EA.Iws.Web.Areas.AdminExportAssessment.Views.FinancialGuaranteeAssessment.Financi" +
-                            "alGuaranteeAssessmentResources", typeof(FinancialGuaranteeAssessmentResources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EA.Iws.Web.Areas.NotificationMovements.Views.Create.NoApprovedFinancialGuaranteeR" +
+                            "esources", typeof(NoApprovedFinancialGuaranteeResources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -62,110 +62,92 @@ namespace EA.Iws.Web.Areas.AdminExportAssessment.Views.FinancialGuaranteeAssessm
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Add.
+        ///   Looks up a localized string similar to You cannot prenotify any more shipments until you have an approved financial guarantee in place..
         /// </summary>
-        public static string AddLink {
+        public static string Body {
             get {
-                return ResourceManager.GetString("AddLink", resourceCulture);
+                return ResourceManager.GetString("Body", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Financial guarantee assessment.
+        ///   Looks up a localized string similar to Download financial guarantee.
         /// </summary>
-        public static string AssessmentTitle {
+        public static string DownloadLink {
             get {
-                return ResourceManager.GetString("AssessmentTitle", resourceCulture);
+                return ResourceManager.GetString("DownloadLink", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Complete financial guarantee.
+        ///   Looks up a localized string similar to submit a new financial guarantee application.
         /// </summary>
-        public static string CompleteTitle {
+        public static string ListItem1 {
             get {
-                return ResourceManager.GetString("CompleteTitle", resourceCulture);
+                return ResourceManager.GetString("ListItem1", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Date completed.
+        ///   Looks up a localized string similar to wait for approval from your competent authority.
         /// </summary>
-        public static string DateCompleted {
+        public static string ListItem2 {
             get {
-                return ResourceManager.GetString("DateCompleted", resourceCulture);
+                return ResourceManager.GetString("ListItem2", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Date received.
+        ///   Looks up a localized string similar to or.
         /// </summary>
-        public static string DateReceived {
+        public static string Or {
             get {
-                return ResourceManager.GetString("DateReceived", resourceCulture);
+                return ResourceManager.GetString("Or", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Decision.
+        ///   Looks up a localized string similar to Bank Guarantee template.
         /// </summary>
-        public static string Decision {
+        public static string SepaDownloadBankLink {
             get {
-                return ResourceManager.GetString("Decision", resourceCulture);
+                return ResourceManager.GetString("SepaDownloadBankLink", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Financial guarantee decision.
+        ///   Looks up a localized string similar to Parent Company template.
         /// </summary>
-        public static string DecisionHeading {
+        public static string SepaDownloadParentLink {
             get {
-                return ResourceManager.GetString("DecisionHeading", resourceCulture);
+                return ResourceManager.GetString("SepaDownloadParentLink", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Financial guarantee decision history.
+        ///   Looks up a localized string similar to and ask your bank or parent company to complete the guarantee..
         /// </summary>
-        public static string DecisionHistoryLink {
+        public static string SepaPostLinkText {
             get {
-                return ResourceManager.GetString("DecisionHistoryLink", resourceCulture);
+                return ResourceManager.GetString("SepaPostLinkText", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Make a decision.
+        ///   Looks up a localized string similar to If you intend to submit a bank or parent company guarantee, download either the.
         /// </summary>
-        public static string MakeADecisionButton {
+        public static string SepaPreLinkText {
             get {
-                return ResourceManager.GetString("MakeADecisionButton", resourceCulture);
+                return ResourceManager.GetString("SepaPreLinkText", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Record new financial guarantee.
+        ///   Looks up a localized string similar to There is no approved financial guarantee in place.
         /// </summary>
-        public static string NewTitle {
+        public static string Title {
             get {
-                return ResourceManager.GetString("NewTitle", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Record a new financial guarantee.
-        /// </summary>
-        public static string RecordNew {
-            get {
-                return ResourceManager.GetString("RecordNew", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Release financial guarantee.
-        /// </summary>
-        public static string Release {
-            get {
-                return ResourceManager.GetString("Release", resourceCulture);
+                return ResourceManager.GetString("Title", resourceCulture);
             }
         }
     }

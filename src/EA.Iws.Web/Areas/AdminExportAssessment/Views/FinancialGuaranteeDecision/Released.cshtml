@@ -1,0 +1,16 @@
+﻿@using Resources = EA.Iws.Web.Areas.AdminExportAssessment.Views.FinancialGuaranteeDecision.FinancialGuaranteeDecisionResources
+@{
+    ViewBag.Title = Resources.ReleasedTitle;
+}
+
+<h2 class="heading-large">@Resources.ReleasedTitle</h2>
+
+<p>@Resources.ReleasedDescription</p>
+
+<div class="form-group">
+    @Html.ActionLink(Constants.ContinueOnlyButtonText, "Index", "FinancialGuaranteeAssessment", null, new { @class = "button" })
+</div>
+
+@section menu {
+    @Html.Action("ExportNavigation", "Menu", new { area = "Admin", section = ExportNavigationSection.Assessment })
+}

@@ -479,6 +479,8 @@
     <Content Include="Areas\ImportNotification\Views\Home\_WasteType.cshtml" />
     <Content Include="Areas\Reports\Views\ImportStats\Index.cshtml" />
     <Content Include="Areas\AdminExportAssessment\Views\MarkAsInterim\UpdateInterimStatus.cshtml" />
+    <Content Include="Areas\AdminExportAssessment\Views\FinancialGuaranteeDecision\Released.cshtml" />
+    <Content Include="Areas\NotificationMovements\Views\Create\NoApprovedFinancialGuarantee.cshtml" />
     <None Include="Content\iws\_panels.scss" />
     <Content Include="Content\nta-extended.css" />
     <Content Include="Content\select2\select2-spinner.gif" />
@@ -2082,6 +2084,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>FileClosedResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\NotificationMovements\Views\Create\NoApprovedFinancialGuaranteeResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>NoApprovedFinancialGuaranteeResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Areas\NotificationMovements\Views\Create\TotalActiveLoadsReachedResources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -4074,6 +4081,10 @@
     <EmbeddedResource Include="Areas\NotificationMovements\Views\Create\FileClosedResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>FileClosedResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\NotificationMovements\Views\Create\NoApprovedFinancialGuaranteeResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>NoApprovedFinancialGuaranteeResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\NotificationMovements\Views\Create\ThreeWorkingDaysResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
