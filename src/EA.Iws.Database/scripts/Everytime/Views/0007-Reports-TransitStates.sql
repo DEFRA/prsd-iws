@@ -5,16 +5,30 @@ GO
 ALTER VIEW [Reports].[TransitStates]
 AS
 
-	SELECT 
-		N.Id AS NotificationId,
-		REPLACE(N.NotificationNumber, ' ', '') AS NotificationNumber,
-		TR.Id AS TransportRouteId,
-		C.Id AS CountryId,
-		C.Name AS CountryName,
-		C.IsoAlpha2Code AS CountryCode
-	FROM [Notification].[TransitState] TS
-	INNER JOIN [Notification].[TransportRoute] TR ON TS.TransportRouteId = TR.Id
-	INNER JOIN [Notification].[Notification] N ON TR.NotificationId = N.Id
-	INNER JOIN [Lookup].[Country] C ON TS.CountryId = C.Id
+    SELECT 
+        N.Id AS NotificationId,
+        REPLACE(N.NotificationNumber, ' ', '') AS NotificationNumber,
+        TR.Id AS TransportRouteId,
+        C.Id AS CountryId,
+        C.Name AS CountryName,
+        C.IsoAlpha2Code AS CountryCode
+    FROM [Notification].[TransitState] TS
+    INNER JOIN [Notification].[TransportRoute] TR ON TS.TransportRouteId = TR.Id
+    INNER JOIN [Notification].[Notification] N ON TR.NotificationId = N.Id
+    INNER JOIN [Lookup].[Country] C ON TS.CountryId = C.Id
+
+    UNION
+
+    SELECT
+        N.Id AS NotificationId,
+        REPLACE(N.NotificationNumber, ' ', '') AS NotificationNumber,
+        TR.Id AS TransportRouteId,
+        C.Id AS CountryId,
+        C.Name AS CountryName,
+        C.IsoAlpha2Code AS CountryCode
+    FROM [ImportNotification].[TransitState] TS
+    INNER JOIN [ImportNotification].[TransportRoute] TR ON TS.TransportRouteId = TR.Id
+    INNER JOIN [ImportNotification].[Notification] N ON TR.ImportNotificationId = N.Id
+    INNER JOIN [Lookup].[Country] C ON TS.CountryId = C.Id
 
 GO

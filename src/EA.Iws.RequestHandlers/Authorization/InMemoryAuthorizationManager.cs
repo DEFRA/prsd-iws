@@ -29,6 +29,7 @@
             { ReportingPermissions.CanViewMissingShipmentsReport, new[] { UserRole.Internal, UserRole.Administrator } },
             { ReportingPermissions.CanViewFoiReport, new[] { UserRole.Internal, UserRole.Administrator } },
             { ReportingPermissions.CanViewImportNotificationsReport, new[] { UserRole.Internal, UserRole.Administrator } },
+            { ReportingPermissions.CanViewImportStatsReport, new[] { UserRole.Internal, UserRole.Administrator } },
             { ExportNotificationPermissions.CanCreateExportNotification, new[] { UserRole.External, UserRole.Internal, UserRole.Administrator } },
             { ExportNotificationPermissions.CanEditExportNotification, new[] { UserRole.External, UserRole.Internal, UserRole.Administrator } },
             { ExportNotificationPermissions.CanReadExportNotification, new[] { UserRole.External, UserRole.Internal, UserRole.Administrator } },

@@ -350,8 +350,10 @@
     <Compile Include="Reports\IExportStatsRepository.cs" />
     <Compile Include="Reports\IFinanceReportRepository.cs" />
     <Compile Include="Reports\IImportNotificationsRepository.cs" />
+    <Compile Include="Reports\IImportStatsRepository.cs" />
     <Compile Include="Reports\IMissingShipmentsRepository.cs" />
     <Compile Include="Reports\IFreedomOfInformationRepository.cs" />
+    <Compile Include="Reports\ImportStats.cs" />
     <Compile Include="Reports\MissingShipment.cs" />
     <Compile Include="Search\IAdvancedSearchRepository.cs" />
     <Compile Include="Security\IImportMovementAuthorization.cs" />

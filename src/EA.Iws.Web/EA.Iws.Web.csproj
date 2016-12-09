@@ -477,6 +477,7 @@
     <Content Include="Areas\AdminExportAssessment\Views\FinancialGuaranteeDetails\Index.cshtml" />
     <Content Include="Areas\ImportNotification\Views\WasteType\Index.cshtml" />
     <Content Include="Areas\ImportNotification\Views\Home\_WasteType.cshtml" />
+    <Content Include="Areas\Reports\Views\ImportStats\Index.cshtml" />
     <Content Include="Areas\AdminExportAssessment\Views\MarkAsInterim\UpdateInterimStatus.cshtml" />
     <None Include="Content\iws\_panels.scss" />
     <Content Include="Content\nta-extended.css" />
@@ -2112,6 +2113,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>SummaryResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Areas\Reports\Controllers\ImportStatsController.cs" />
     <Compile Include="Areas\Reports\Controllers\ImportNotificationsController.cs" />
     <Compile Include="Areas\Reports\Controllers\ExportNotificationsController.cs" />
     <Compile Include="Areas\Reports\Controllers\FinanceController.cs" />
@@ -2133,6 +2135,12 @@
     <Compile Include="Areas\Reports\ViewModels\Finance\IndexViewModelResources.Designer.cs" />
     <Compile Include="Areas\Reports\ViewModels\ImportNotifications\IndexViewModel.cs" />
     <Compile Include="Areas\Reports\ViewModels\ImportNotifications\IndexViewModelResources.Designer.cs">
+      <DependentUpon>IndexViewModelResources.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Areas\Reports\ViewModels\ImportStats\IndexViewModel.cs" />
+    <Compile Include="Areas\Reports\ViewModels\ImportStats\IndexViewModelResources.Designer.cs">
       <DependentUpon>IndexViewModelResources.resx</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -4129,6 +4137,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\Reports\ViewModels\Finance\IndexViewModelResources.resx" />
     <EmbeddedResource Include="Areas\Reports\ViewModels\ImportNotifications\IndexViewModelResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>IndexViewModelResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\Reports\ViewModels\ImportStats\IndexViewModelResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>IndexViewModelResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>

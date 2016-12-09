@@ -28,7 +28,7 @@ AS
     INNER JOIN	[Lookup].[ChemicalCompositionType] AS CCT 
     ON			[WT].[ChemicalCompositionType] = [CCT].[Id]
 
-    INNER JOIN	[Reports].[WasteCodes] WC 
+    LEFT JOIN	[Reports].[WasteCodes] WC 
     ON			[N].[Id] = [WC].[NotificationId] 
     AND			[WC].[CodeType] IN (1, 2)
 
@@ -37,9 +37,13 @@ AS
     SELECT
         N.Id AS NotificationId,
         REPLACE(N.NotificationNumber, ' ', '') AS NotificationNumber,
-        WT.Name AS Description,
-        4 AS ChemicalCompositionTypeId,
-        'Other' AS ChemicalCompositionType,
+        CASE 
+            WHEN WT.ChemicalCompositionType IN (1, 2) THEN CCT.Description
+            WHEN WC.Code IS NOT NULL THEN WC.Code + ' ' + WC.Description
+            WHEN WT.ChemicalCompositionType IN (3, 4) THEN WT.Name
+        END AS Description,
+        CCT.Id AS ChemicalCompositionTypeId,
+        CCT.Description AS ChemicalCompositionType,
         NULL AS ChemicalCompositionDescription,
         NULL AS HasSpecialHandlingRequirements,
         NULL AS SpecialHandlingDetails,
@@ -49,4 +53,11 @@ AS
 
     INNER JOIN	[ImportNotification].[WasteType] AS WT
     ON			[WT].[ImportNotificationId] = [N].[Id]
+
+    INNER JOIN	[Lookup].[ChemicalCompositionType] AS CCT 
+    ON			[WT].[ChemicalCompositionType] = [CCT].[Id]
+
+    LEFT JOIN	[Reports].[WasteCodes] WC 
+    ON			[N].[Id] = [WC].[NotificationId] 
+    AND			[WC].[CodeType] IN (1, 2)
 GO

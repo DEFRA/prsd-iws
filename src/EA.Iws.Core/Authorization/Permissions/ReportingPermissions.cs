@@ -13,5 +13,7 @@
         public const string CanViewFoiReport = "Can View FOI Report";
 
         public const string CanViewImportNotificationsReport = "Can View Import Notifications Report";
+
+        public const string CanViewImportStatsReport = "Can View Import Stats Report";
     }
 }
