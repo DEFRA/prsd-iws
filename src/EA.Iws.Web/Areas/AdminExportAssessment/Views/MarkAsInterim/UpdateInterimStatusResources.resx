@@ -121,10 +121,10 @@
     <value>Change interim status</value>
   </data>
   <data name="IsThisQuestionHeading" xml:space="preserve">
-    <value>Is this an iterim notification?</value>
+    <value>Is this an iterim or non-interim notification?</value>
   </data>
   <data name="No" xml:space="preserve">
-    <value>No</value>
+    <value>Non-interim</value>
   </data>
   <data name="StatusErrorMessage" xml:space="preserve">
     <value>It is only possible to change the interim status of notifications that have the status:</value>
@@ -139,6 +139,6 @@
     <value>This notification is for Recovery and it is only possible to change the interim status of notification for Disposal</value>
   </data>
   <data name="Yes" xml:space="preserve">
-    <value>Yes</value>
+    <value>Interim</value>
   </data>
 </root>

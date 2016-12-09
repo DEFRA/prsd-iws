@@ -71,7 +71,7 @@ namespace EA.Iws.Web.Areas.AdminExportAssessment.Views.MarkAsInterim {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Is this an iterim notification?.
+        ///   Looks up a localized string similar to Is this an iterim or non-interim notification?.
         /// </summary>
         public static string IsThisQuestionHeading {
             get {
@@ -80,7 +80,7 @@ namespace EA.Iws.Web.Areas.AdminExportAssessment.Views.MarkAsInterim {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to No.
+        ///   Looks up a localized string similar to Non-interim.
         /// </summary>
         public static string No {
             get {
@@ -125,7 +125,7 @@ namespace EA.Iws.Web.Areas.AdminExportAssessment.Views.MarkAsInterim {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Yes.
+        ///   Looks up a localized string similar to Interim.
         /// </summary>
         public static string Yes {
             get {
