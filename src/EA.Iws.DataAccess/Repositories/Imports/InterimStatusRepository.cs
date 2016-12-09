@@ -33,5 +33,12 @@
         {
             context.InterimStatuses.Add(interimStatus);
         }
+
+        public async Task UpdateStatus(Guid notificationId, bool isInterim)
+        {
+            var currentInterimStatus = await GetByNotificationId(notificationId);
+
+            currentInterimStatus.UpdateStatus(isInterim);
+        }
     }
 }
