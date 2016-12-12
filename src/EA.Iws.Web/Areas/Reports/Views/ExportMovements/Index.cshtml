@@ -1,0 +1,30 @@
+﻿@model EA.Iws.Web.Areas.Reports.ViewModels.ExportMovements.IndexViewModel
+@using Resource = EA.Iws.Web.Areas.Reports.Views.ExportMovements.IndexResources
+
+@{
+    ViewBag.Title = Resource.Title;
+}
+
+<h1 class="heading-large">@Resource.MainHeading</h1>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.Gds().ValidationSummary()
+
+    <div class="form-group @Html.Gds().FormGroupClass(m => m.From) @Html.Gds().FormGroupClass(m => m.From.Day) @Html.Gds().FormGroupClass(m => m.From.Month) @Html.Gds().FormGroupClass(m => m.From.Year)">
+        @Html.LabelFor(m => m.From)
+        @Html.Gds().ValidationMessageFor(m => m.From)
+        @Html.EditorFor(m => m.From)
+    </div>
+
+    <div class="form-group @Html.Gds().FormGroupClass(m => m.To) @Html.Gds().FormGroupClass(m => m.To.Day) @Html.Gds().FormGroupClass(m => m.To.Month) @Html.Gds().FormGroupClass(m => m.To.Year)">
+        @Html.LabelFor(m => m.To)
+        @Html.Gds().ValidationMessageFor(m => m.To)
+        @Html.EditorFor(m => m.To)
+    </div>
+
+    <div class="form-group">
+        <button class="button" type="submit">@Resource.ButtonText</button>
+    </div>
+}
