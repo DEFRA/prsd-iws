@@ -11,7 +11,7 @@
 
 @if (Model.IsAuthorised)
 {
-    if (Model.InterimStatusIsUpdateable)
+    if (Model.HasAcceptableStatus)
     {
         <h3 class="heading-medium">@Resources.IsThisQuestionHeading</h3>
 
@@ -46,26 +46,18 @@
     }
     else
     {
-        if (!Model.HasAcceptableStatus)
-        {
-            <p>@Resources.ThisStatus @EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(Model.NotificationStatus)</p>
-            <div>
-                @Resources.StatusErrorMessage
-                <ul class="list list-bullet">
-                    <li>@EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(ImportNotificationStatus.NotificationReceived)</li>
-                    <li>@EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(ImportNotificationStatus.AwaitingPayment)</li>
-                    <li>@EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(ImportNotificationStatus.AwaitingAssessment)</li>
-                    <li>@EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(ImportNotificationStatus.InAssessment)</li>
-                    <li>@EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(ImportNotificationStatus.ReadyToAcknowledge)</li>
-                    <li>or @EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(ImportNotificationStatus.DecisionRequiredBy)</li>
-                </ul>
-            </div>
-        }
-
-        if (Model.NotificationType == NotificationType.Recovery)
-        {
-            @Resources.TypeErrorMessage
-        }
+        <p>@Resources.ThisStatus @EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(Model.NotificationStatus)</p>
+        <div>
+            @Resources.StatusErrorMessage
+            <ul class="list list-bullet">
+                <li>@EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(ImportNotificationStatus.NotificationReceived)</li>
+                <li>@EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(ImportNotificationStatus.AwaitingPayment)</li>
+                <li>@EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(ImportNotificationStatus.AwaitingAssessment)</li>
+                <li>@EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(ImportNotificationStatus.InAssessment)</li>
+                <li>@EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(ImportNotificationStatus.ReadyToAcknowledge)</li>
+                <li>or @EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(ImportNotificationStatus.DecisionRequiredBy)</li>
+            </ul>
+        </div>
     }
 }
 else
