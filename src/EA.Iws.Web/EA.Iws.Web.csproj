@@ -1128,7 +1128,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>IndexViewModelResources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Areas\AdminExportAssessment\ViewModels\UpdateInterimStatusViewModel.cs" />
     <Compile Include="Areas\AdminExportAssessment\Views\AccountManagement\PaymentDetailsResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

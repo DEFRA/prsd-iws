@@ -1,6 +1,5 @@
 ﻿@using EA.Iws.Core.NotificationAssessment
-@using EA.Iws.Requests.NotificationAssessment
-@using Resource = EA.Iws.Web.Areas.AdminExportAssessment.Views.MarkAsInterim.IndexResources
+@using Resources = EA.Iws.Web.Areas.AdminExportAssessment.Views.MarkAsInterim.IndexResources
 @model EA.Iws.Web.Areas.AdminExportAssessment.ViewModels.MarkAsInterimViewModel
 @{
     ViewBag.Title = "Is this an interim notification?";
@@ -8,25 +7,7 @@
 
 <h1 class="heading-large">Is this an interim notification?</h1>
 
-@if (Model.NotificationStatus != NotificationStatus.InAssessment)
-{
-    if (Model.IsInterim.HasValue)
-    {
-        if (Model.IsInterim.Value)
-        {
-            <p>The notification is marked as interim</p>
-        }
-        else
-        {
-            <p>The notification is marked as non-interim</p>
-        }
-    }
-    else
-    {
-        <p>Can't set as interim unless the notification is "in assessment"</p>
-    }
-}
-else
+@if (Model.NotificationStatus == NotificationStatus.InAssessment || (Model.CanUpdateInterimStatus && Model.HasAcceptableStatus))
 {
     using (Html.BeginForm())
     {
@@ -54,10 +35,37 @@ else
         <button type="submit" class="button">@Constants.ContinueButtonText</button>
     }
 }
-
-@if (Model.IsInterim.HasValue && Model.ShowUpdateInterimStatus.GetValueOrDefault() && Model.NotificationStatus != NotificationStatus.InAssessment)
+else
 {
-    @Html.ActionLink(Resource.UpdateInterimStatusButtonText, "UpdateInterimStatus", "MarkAsInterim", null, new { @class = "button" })
+    if (Model.IsInterim.HasValue)
+    {
+        if (Model.IsInterim.Value)
+        {
+            <p>The notification is marked as interim</p>
+        }
+        else
+        {
+            <p>The notification is marked as non-interim</p>
+        }
+    }
+    else
+    {
+        <p>Can't set as interim unless the notification is "in assessment"</p>
+    }
+}
+
+@if (Model.CanUpdateInterimStatus && !Model.HasAcceptableStatus)
+{
+    <p>@Resources.ThisStatus @EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(Model.NotificationStatus)</p>
+    <div>
+        @Resources.StatusErrorMessage
+        <ul class="list list-bullet">
+            <li>@EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(NotificationStatus.InAssessment)</li>
+            <li>@EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(NotificationStatus.ReadyToTransmit)</li>
+            <li>@EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(NotificationStatus.Transmitted)</li>
+            <li>or @EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(NotificationStatus.DecisionRequiredBy)</li>
+        </ul>
+    </div>
 }
 
 @section menu {

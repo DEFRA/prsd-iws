@@ -4,7 +4,6 @@
     using System.ComponentModel.DataAnnotations;
     using Core.ImportNotification;
     using Core.ImportNotificationAssessment;
-    using Core.Shared;
 
     public class MarkAsInterimViewModel
     {
@@ -17,7 +16,6 @@
             NotificationId = data.ImportNotificationId;
             IsInterim = data.IsInterim;
             NotificationStatus = data.Status;
-            NotificationType = data.NotificationType;
         }
 
         public Guid NotificationId { get; set; }
@@ -26,8 +24,6 @@
         public bool? IsInterim { get; set; }
 
         public ImportNotificationStatus NotificationStatus { get; set; }
-
-        public NotificationType NotificationType { get; set; }
 
         public bool IsAuthorised { get; set; }
 

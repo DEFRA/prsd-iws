@@ -61,11 +61,20 @@ namespace EA.Iws.Web.Areas.AdminExportAssessment.Views.MarkAsInterim {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Change interim status.
+        ///   Looks up a localized string similar to It is only possible to change the interim status of notifications that have the status:.
         /// </summary>
-        public static string UpdateInterimStatusButtonText {
+        public static string StatusErrorMessage {
             get {
-                return ResourceManager.GetString("UpdateInterimStatusButtonText", resourceCulture);
+                return ResourceManager.GetString("StatusErrorMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This notification has the status.
+        /// </summary>
+        public static string ThisStatus {
+            get {
+                return ResourceManager.GetString("ThisStatus", resourceCulture);
             }
         }
     }
