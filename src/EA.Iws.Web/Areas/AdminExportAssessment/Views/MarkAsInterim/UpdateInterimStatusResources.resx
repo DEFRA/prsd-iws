@@ -135,9 +135,6 @@
   <data name="Title" xml:space="preserve">
     <value>Change Interim Status</value>
   </data>
-  <data name="TypeErrorMessage" xml:space="preserve">
-    <value>This notification is for Recovery and it is only possible to change the interim status of notification for Disposal</value>
-  </data>
   <data name="Yes" xml:space="preserve">
     <value>Interim</value>
   </data>

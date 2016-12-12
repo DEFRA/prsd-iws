@@ -1,5 +1,4 @@
 ﻿@using EA.Iws.Core.NotificationAssessment
-@using EA.Iws.Core.Shared
 @using Resources = EA.Iws.Web.Areas.AdminExportAssessment.Views.MarkAsInterim.UpdateInterimStatusResources
 @model EA.Iws.Web.Areas.AdminExportAssessment.ViewModels.UpdateInterimStatusViewModel
 
@@ -9,26 +8,7 @@
 
 <h1 class="heading-large">@Resources.Heading</h1>
 
-@if (!Model.HasAcceptableStatus)
-{
-    <p>@Resources.ThisStatus @EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(Model.NotificationStatus)</p>
-    <div>
-            @Resources.StatusErrorMessage
-        <ul class="list list-bullet">
-            <li>@EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(NotificationStatus.InAssessment)</li>
-            <li>@EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(NotificationStatus.ReadyToTransmit)</li>
-            <li>@EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(NotificationStatus.Transmitted)</li>
-            <li>or @EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(NotificationStatus.DecisionRequiredBy)</li>
-        </ul>
-    </div>
-}
-
-@if (Model.NotificationType == NotificationType.Recovery)
-{
-    @Resources.TypeErrorMessage
-}
-
-@if (Model.InterimStatusIsUpdateable)
+@if (Model.HasAcceptableStatus)
 {
     <h3 class="heading-medium">@Resources.IsThisQuestionHeading</h3>
 
@@ -59,9 +39,19 @@
         <button type="submit" class="button">@Constants.ContinueButtonText</button>
     }
 }
-
-
-
+else
+{
+    <p>@Resources.ThisStatus @EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(Model.NotificationStatus)</p>
+    <div>
+            @Resources.StatusErrorMessage
+        <ul class="list list-bullet">
+            <li>@EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(NotificationStatus.InAssessment)</li>
+            <li>@EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(NotificationStatus.ReadyToTransmit)</li>
+            <li>@EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(NotificationStatus.Transmitted)</li>
+            <li>or @EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(NotificationStatus.DecisionRequiredBy)</li>
+        </ul>
+    </div>
+}
 
 @section menu {
     @Html.Action("ExportNavigation", "Menu", new { area = "Admin", section = ExportNavigationSection.Assessment })

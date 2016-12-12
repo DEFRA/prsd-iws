@@ -57,7 +57,7 @@ else
 
 @if (Model.IsInterim.HasValue && Model.ShowUpdateInterimStatus.GetValueOrDefault() && Model.NotificationStatus != NotificationStatus.InAssessment)
 {
-    @Html.ActionLink(Resource.UpdateInterimStatusButtonText, "UpdateInterimStatus", "MarkAsInterim", new {@class = "button"})
+    @Html.ActionLink(Resource.UpdateInterimStatusButtonText, "UpdateInterimStatus", "MarkAsInterim", null, new { @class = "button" })
 }
 
 @section menu {
