@@ -59,6 +59,7 @@
     <Content Include="scripts\Everytime\Views\0020-Reports-DataImportNotifications.sql" />
     <Content Include="scripts\Everytime\Views\0021-Search-Notifications.sql" />
     <Content Include="scripts\Everytime\Views\0023-Reports-ImportStats.sql" />
+    <Content Include="scripts\Everytime\Views\0024-Reports-ExportMovements.sql" />
     <Content Include="scripts\TestData\20161128-105400-import-shipment-data.sql" />
     <Content Include="scripts\TestData\20161128-120500-export-shipment-data.sql" />
     <Content Include="scripts\TestData\20161128-131900-add-multiple-export-consented.sql" />
