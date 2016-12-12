@@ -37,14 +37,6 @@
                        NotificationStatus == NotificationStatus.Transmitted ||
                        NotificationStatus == NotificationStatus.DecisionRequiredBy;
             }
-        }
-
-        public bool InterimStatusIsUpdateable
-        {
-            get
-            {
-                return HasAcceptableStatus && NotificationType == NotificationType.Disposal;
-            }
-        }      
+        }    
     }
 }

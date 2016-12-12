@@ -116,15 +116,6 @@ namespace EA.Iws.Web.Areas.AdminExportAssessment.Views.MarkAsInterim {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This notification is for Recovery and it is only possible to change the interim status of notification for Disposal.
-        /// </summary>
-        public static string TypeErrorMessage {
-            get {
-                return ResourceManager.GetString("TypeErrorMessage", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Interim.
         /// </summary>
         public static string Yes {
