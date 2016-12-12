@@ -3,9 +3,9 @@
     using System;
     using System.Threading.Tasks;
     using System.Web.Mvc;
+    using Core.Authorization.Permissions;
     using Infrastructure.Authorization;
     using Prsd.Core.Mediator;
-    using Requests.Notification;
     using Requests.NotificationAssessment;
     using ViewModels;
 
@@ -28,7 +28,7 @@
 
             var model = new MarkAsInterimViewModel(interimStatus);
 
-            model.ShowUpdateInterimStatus = await authorizationService.AuthorizeActivity(typeof(UpdateInterimStatus));
+            model.CanUpdateInterimStatus = await authorizationService.AuthorizeActivity(UserAdministrationPermissions.CanUpdateInterimStatus);
 
             return View(model);
         }
@@ -45,31 +45,6 @@
             await mediator.SendAsync(new MarkAsInterim(model.NotificationId, model.IsInterim.Value));
 
             return RedirectToAction("Index", "KeyDates");
-        }
-
-        [HttpGet]
-        public async Task<ActionResult> UpdateInterimStatus(Guid id)
-        {
-            var interimStatus = await mediator.SendAsync(new GetInterimStatus(id));
-            var type = await mediator.SendAsync(new GetNotificationType(id));
-
-            var model = new UpdateInterimStatusViewModel(interimStatus, type);
-
-            return View(model);
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> UpdateInterimStatus(UpdateInterimStatusViewModel model)
-        {
-            if (!ModelState.IsValid)
-            {
-                return View(model);
-            }
-
-            await mediator.SendAsync(new MarkAsInterim(model.NotificationId, model.IsInterim.Value));
-
-            return RedirectToAction("Index", "MarkAsInterim");
         }
     }
 }

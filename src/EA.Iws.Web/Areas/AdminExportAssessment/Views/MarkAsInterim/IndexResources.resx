@@ -117,7 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="UpdateInterimStatusButtonText" xml:space="preserve">
-    <value>Change interim status</value>
+  <data name="StatusErrorMessage" xml:space="preserve">
+    <value>It is only possible to change the interim status of notifications that have the status:</value>
+  </data>
+  <data name="ThisStatus" xml:space="preserve">
+    <value>This notification has the status</value>
   </data>
 </root>
