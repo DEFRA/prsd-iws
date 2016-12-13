@@ -210,4 +210,7 @@
   <data name="WasteTypeLink" xml:space="preserve">
     <value>Waste type</value>
   </data>
+  <data name="MarkAsInterimLinkText" xml:space="preserve">
+    <value>Mark notification as interim or non-interim</value>
+  </data>
 </root>

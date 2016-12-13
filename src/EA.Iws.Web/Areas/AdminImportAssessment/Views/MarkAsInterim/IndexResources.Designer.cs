@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace EA.Iws.Web.Areas.AdminExportAssessment.Views.MarkAsInterim {
+namespace EA.Iws.Web.Areas.AdminImportAssessment.Views.MarkAsInterim {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace EA.Iws.Web.Areas.AdminExportAssessment.Views.MarkAsInterim {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EA.Iws.Web.Areas.AdminExportAssessment.Views.MarkAsInterim.IndexResources", typeof(IndexResources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EA.Iws.Web.Areas.AdminImportAssessment.Views.MarkAsInterim.IndexResources", typeof(IndexResources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,56 +61,38 @@ namespace EA.Iws.Web.Areas.AdminExportAssessment.Views.MarkAsInterim {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Can&apos;t set as interim unless the notification is &quot;in assessment&quot;.
+        ///   Looks up a localized string similar to Only admin users can change the interim status of notifications.
         /// </summary>
-        public static string CantSetInterim {
+        public static string AuthorisedOnly {
             get {
-                return ResourceManager.GetString("CantSetInterim", resourceCulture);
+                return ResourceManager.GetString("AuthorisedOnly", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Interim.
+        ///   Looks up a localized string similar to Change interim status.
         /// </summary>
-        public static string Interim {
+        public static string Heading {
             get {
-                return ResourceManager.GetString("Interim", resourceCulture);
+                return ResourceManager.GetString("Heading", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The notification is marked as interim.
+        ///   Looks up a localized string similar to Is this an iterim or non-interim notification?.
         /// </summary>
-        public static string MarkedAsInterim {
+        public static string IsThisQuestionHeading {
             get {
-                return ResourceManager.GetString("MarkedAsInterim", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The notification is marked as non-interim.
-        /// </summary>
-        public static string MarkedAsNonInterim {
-            get {
-                return ResourceManager.GetString("MarkedAsNonInterim", resourceCulture);
+                return ResourceManager.GetString("IsThisQuestionHeading", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Non-interim.
         /// </summary>
-        public static string NonInterim {
+        public static string No {
             get {
-                return ResourceManager.GetString("NonInterim", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Is this an interim or non-interim notification?.
-        /// </summary>
-        public static string QuestionTitle {
-            get {
-                return ResourceManager.GetString("QuestionTitle", resourceCulture);
+                return ResourceManager.GetString("No", resourceCulture);
             }
         }
         
@@ -138,6 +120,15 @@ namespace EA.Iws.Web.Areas.AdminExportAssessment.Views.MarkAsInterim {
         public static string Title {
             get {
                 return ResourceManager.GetString("Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Interim.
+        /// </summary>
+        public static string Yes {
+            get {
+                return ResourceManager.GetString("Yes", resourceCulture);
             }
         }
     }

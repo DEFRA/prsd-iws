@@ -1,33 +1,16 @@
 ﻿@using EA.Iws.Core.NotificationAssessment
-@using EA.Iws.Requests.NotificationAssessment
-@using Resource = EA.Iws.Web.Areas.AdminExportAssessment.Views.MarkAsInterim.IndexResources
+@using Resources = EA.Iws.Web.Areas.AdminExportAssessment.Views.MarkAsInterim.IndexResources
 @model EA.Iws.Web.Areas.AdminExportAssessment.ViewModels.MarkAsInterimViewModel
 @{
-    ViewBag.Title = "Is this an interim notification?";
+    ViewBag.Title = Resources.Title;
 }
 
-<h1 class="heading-large">Is this an interim notification?</h1>
+<h1 class="heading-large">@Resources.Title</h1>
 
-@if (Model.NotificationStatus != NotificationStatus.InAssessment)
+@if (Model.NotificationStatus == NotificationStatus.InAssessment || (Model.CanUpdateInterimStatus && Model.HasAcceptableStatus))
 {
-    if (Model.IsInterim.HasValue)
-    {
-        if (Model.IsInterim.Value)
-        {
-            <p>The notification is marked as interim</p>
-        }
-        else
-        {
-            <p>The notification is marked as non-interim</p>
-        }
-    }
-    else
-    {
-        <p>Can't set as interim unless the notification is "in assessment"</p>
-    }
-}
-else
-{
+    <h2 class="heading-medium">@Resources.QuestionTitle</h2>
+
     using (Html.BeginForm())
     {
         @Html.AntiForgeryToken()
@@ -42,11 +25,11 @@ else
             <fieldset>
                 <label class="block-label" for="yes">
                     @Html.RadioButtonFor(m => m.IsInterim, true, new { id = "yes" })
-                    Yes
+                    @Resources.Interim
                 </label>
                 <label class="block-label" for="no">
                     @Html.RadioButtonFor(m => m.IsInterim, false, new { id = "no" })
-                    No
+                    @Resources.NonInterim
                 </label>
             </fieldset>
         </div>
@@ -54,10 +37,37 @@ else
         <button type="submit" class="button">@Constants.ContinueButtonText</button>
     }
 }
-
-@if (Model.IsInterim.HasValue && Model.ShowUpdateInterimStatus.GetValueOrDefault() && Model.NotificationStatus != NotificationStatus.InAssessment)
+else
 {
-    @Html.ActionLink(Resource.UpdateInterimStatusButtonText, "UpdateInterimStatus", "MarkAsInterim", new {@class = "button"})
+    if (Model.IsInterim.HasValue)
+    {
+        if (Model.IsInterim.Value)
+        {
+            <p>@Resources.MarkedAsInterim</p>
+        }
+        else
+        {
+            <p>@Resources.MarkedAsNonInterim</p>
+        }
+    }
+    else
+    {
+        <p>@Resources.CantSetInterim</p>
+    }
+}
+
+@if (Model.CanUpdateInterimStatus && !Model.HasAcceptableStatus)
+{
+    <p>@Resources.ThisStatus @EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(Model.NotificationStatus)</p>
+    <div>
+        @Resources.StatusErrorMessage
+        <ul class="list list-bullet">
+            <li>@EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(NotificationStatus.InAssessment)</li>
+            <li>@EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(NotificationStatus.ReadyToTransmit)</li>
+            <li>@EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(NotificationStatus.Transmitted)</li>
+            <li>or @EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(NotificationStatus.DecisionRequiredBy)</li>
+        </ul>
+    </div>
 }
 
 @section menu {

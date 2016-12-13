@@ -117,40 +117,28 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AddLink" xml:space="preserve">
-    <value>Add</value>
+  <data name="AuthorisedOnly" xml:space="preserve">
+    <value>Only admin users can change the interim status of notifications</value>
   </data>
-  <data name="AssessmentTitle" xml:space="preserve">
-    <value>Financial guarantee assessment</value>
+  <data name="Heading" xml:space="preserve">
+    <value>Change interim status</value>
   </data>
-  <data name="CompleteTitle" xml:space="preserve">
-    <value>Complete financial guarantee</value>
+  <data name="IsThisQuestionHeading" xml:space="preserve">
+    <value>Is this an iterim or non-interim notification?</value>
   </data>
-  <data name="DateCompleted" xml:space="preserve">
-    <value>Date completed</value>
+  <data name="No" xml:space="preserve">
+    <value>Non-interim</value>
   </data>
-  <data name="DateReceived" xml:space="preserve">
-    <value>Date received</value>
+  <data name="StatusErrorMessage" xml:space="preserve">
+    <value>It is only possible to change the interim status of notifications that have the status:</value>
   </data>
-  <data name="Decision" xml:space="preserve">
-    <value>Decision</value>
+  <data name="ThisStatus" xml:space="preserve">
+    <value>This notification has the status</value>
   </data>
-  <data name="DecisionHeading" xml:space="preserve">
-    <value>Financial guarantee decision</value>
+  <data name="Title" xml:space="preserve">
+    <value>Change interim status</value>
   </data>
-  <data name="DecisionHistoryLink" xml:space="preserve">
-    <value>Financial guarantee decision history</value>
-  </data>
-  <data name="MakeADecisionButton" xml:space="preserve">
-    <value>Make a decision</value>
-  </data>
-  <data name="NewTitle" xml:space="preserve">
-    <value>Record new financial guarantee</value>
-  </data>
-  <data name="RecordNew" xml:space="preserve">
-    <value>Record a new financial guarantee</value>
-  </data>
-  <data name="Release" xml:space="preserve">
-    <value>Release financial guarantee</value>
+  <data name="Yes" xml:space="preserve">
+    <value>Interim</value>
   </data>
 </root>

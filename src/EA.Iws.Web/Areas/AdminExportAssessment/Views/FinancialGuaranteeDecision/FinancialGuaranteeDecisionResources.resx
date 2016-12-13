@@ -126,6 +126,12 @@
   <data name="RefuseTitle" xml:space="preserve">
     <value>Refuse financial guarantee</value>
   </data>
+  <data name="ReleasedDescription" xml:space="preserve">
+    <value>This notification has no approved financial guarantee in place. An approved financial guarantee is required in order to make shipments.</value>
+  </data>
+  <data name="ReleasedTitle" xml:space="preserve">
+    <value>This Financial Guarantee has now been released</value>
+  </data>
   <data name="ReleaseTitle" xml:space="preserve">
     <value>Release financial guarantee</value>
   </data>

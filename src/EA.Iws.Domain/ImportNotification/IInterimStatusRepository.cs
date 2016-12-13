@@ -10,5 +10,7 @@
         Task<InterimStatus> GetByNotificationIdOrDefault(Guid notificationId);
         
         void Add(InterimStatus interimStatus);
+
+        Task UpdateStatus(Guid notificationId, bool isInterim);
     }
 }

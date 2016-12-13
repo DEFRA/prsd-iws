@@ -1,13 +1,14 @@
-﻿namespace EA.Iws.Web.Areas.AdminExportAssessment.Controllers
+﻿namespace EA.Iws.Web.Areas.AdminImportAssessment.Controllers
 {
     using System;
     using System.Threading.Tasks;
     using System.Web.Mvc;
-    using Core.Authorization.Permissions;
+    using Infrastructure;
     using Infrastructure.Authorization;
     using Prsd.Core.Mediator;
-    using Requests.NotificationAssessment;
-    using ViewModels;
+    using Requests.ImportNotification;
+    using Requests.ImportNotificationAssessment;
+    using ViewModels.MarkAsInterim;
 
     [Authorize(Roles = "internal")]
     public class MarkAsInterimController : Controller
@@ -15,20 +16,19 @@
         private readonly AuthorizationService authorizationService;
         private readonly IMediator mediator;
 
-        public MarkAsInterimController(IMediator mediator, AuthorizationService authorizationService)
+        public MarkAsInterimController(AuthorizationService authorizationService, IMediator mediator)
         {
-            this.mediator = mediator;
             this.authorizationService = authorizationService;
+            this.mediator = mediator;
         }
 
         [HttpGet]
         public async Task<ActionResult> Index(Guid id)
         {
-            var interimStatus = await mediator.SendAsync(new GetInterimStatus(id));
+            var data = await mediator.SendAsync(new GetNotificationDetails(id));
+            var model = new MarkAsInterimViewModel(data);
 
-            var model = new MarkAsInterimViewModel(interimStatus);
-
-            model.CanUpdateInterimStatus = await authorizationService.AuthorizeActivity(UserAdministrationPermissions.CanUpdateInterimStatus);
+            model.IsAuthorised = await authorizationService.AuthorizeActivity(typeof(UpdateInterimStatus));
 
             return View(model);
         }
@@ -42,7 +42,7 @@
                 return View(model);
             }
 
-            await mediator.SendAsync(new MarkAsInterim(model.NotificationId, model.IsInterim.Value));
+            await mediator.SendAsync(new UpdateInterimStatus(model.NotificationId, model.IsInterim.GetValueOrDefault()));
 
             return RedirectToAction("Index", "KeyDates");
         }

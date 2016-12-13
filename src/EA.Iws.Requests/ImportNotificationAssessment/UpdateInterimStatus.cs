@@ -1,4 +1,4 @@
-﻿namespace EA.Iws.Requests.NotificationAssessment
+﻿namespace EA.Iws.Requests.ImportNotificationAssessment
 {
     using System;
     using Core.Authorization;
@@ -8,13 +8,13 @@
     [RequestAuthorization(UserAdministrationPermissions.CanUpdateInterimStatus)]
     public class UpdateInterimStatus : IRequest<bool>
     {
-        public UpdateInterimStatus(Guid notificationId, bool isInterim)
+        public UpdateInterimStatus(Guid importNotificationId, bool isInterim)
         {
-            NotificationId = notificationId;
+            ImportNotificationId = importNotificationId;
             IsInterim = isInterim;
         }
 
-        public Guid NotificationId { get; private set; }
+        public Guid ImportNotificationId { get; private set; }
 
         public bool IsInterim { get; private set; }
     }

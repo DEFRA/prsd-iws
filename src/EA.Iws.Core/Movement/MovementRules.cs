@@ -10,6 +10,7 @@
         ConsentExpiresInFourWorkingDays = 6,
         ConsentExpiresInThreeOrLessWorkingDays = 7,
         ConsentWithdrawn = 8,
-        FileClosed = 9
+        FileClosed = 9,
+        HasApprovedFinancialGuarantee = 10
     }
 }

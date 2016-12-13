@@ -24,6 +24,17 @@
 
         public NotificationStatus NotificationStatus { get; set; }
 
-        public bool? ShowUpdateInterimStatus { get; set; }
+        public bool CanUpdateInterimStatus { get; set; }
+
+        public bool HasAcceptableStatus
+        {
+            get
+            {
+                return NotificationStatus == NotificationStatus.InAssessment ||
+                       NotificationStatus == NotificationStatus.ReadyToTransmit ||
+                       NotificationStatus == NotificationStatus.Transmitted ||
+                       NotificationStatus == NotificationStatus.DecisionRequiredBy;
+            }
+        }
     }
 }

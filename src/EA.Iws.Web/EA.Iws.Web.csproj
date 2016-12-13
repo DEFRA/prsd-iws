@@ -478,8 +478,10 @@
     <Content Include="Areas\ImportNotification\Views\WasteType\Index.cshtml" />
     <Content Include="Areas\ImportNotification\Views\Home\_WasteType.cshtml" />
     <Content Include="Areas\Reports\Views\ImportStats\Index.cshtml" />
-    <Content Include="Areas\AdminExportAssessment\Views\MarkAsInterim\UpdateInterimStatus.cshtml" />
+    <Content Include="Areas\AdminExportAssessment\Views\FinancialGuaranteeDecision\Released.cshtml" />
     <Content Include="Areas\Reports\Views\ExportMovements\Index.cshtml" />
+    <Content Include="Areas\NotificationMovements\Views\Create\NoApprovedFinancialGuarantee.cshtml" />
+    <Content Include="Areas\AdminImportAssessment\Views\MarkAsInterim\Index.cshtml" />
     <None Include="Content\iws\_panels.scss" />
     <Content Include="Content\nta-extended.css" />
     <Content Include="Content\select2\select2-spinner.gif" />
@@ -1126,7 +1128,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>IndexViewModelResources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Areas\AdminExportAssessment\ViewModels\UpdateInterimStatusViewModel.cs" />
     <Compile Include="Areas\AdminExportAssessment\Views\AccountManagement\PaymentDetailsResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -1176,11 +1177,6 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>IndexResources.resx</DependentUpon>
-    </Compile>
-    <Compile Include="Areas\AdminExportAssessment\Views\MarkAsInterim\UpdateInterimStatusResources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>UpdateInterimStatusResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Areas\AdminExportAssessment\Views\NumberOfShipments\ConfirmResources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -1234,6 +1230,7 @@
     <Compile Include="Areas\AdminImportAssessment\Controllers\FinancialGuaranteeDecisionController.cs" />
     <Compile Include="Areas\AdminImportAssessment\Controllers\KeyDatesController.cs" />
     <Compile Include="Areas\AdminImportAssessment\Controllers\KeyDatesOverrideController.cs" />
+    <Compile Include="Areas\AdminImportAssessment\Controllers\MarkAsInterimController.cs" />
     <Compile Include="Areas\AdminImportAssessment\ViewModels\AccountManagement\AccountManagementViewModel.cs" />
     <Compile Include="Areas\AdminImportAssessment\ViewModels\AssignArea\AssignAreaViewModel.cs" />
     <Compile Include="Areas\AdminImportAssessment\ViewModels\Decision\DecisionViewModel.cs" />
@@ -1273,6 +1270,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>KeyDatesViewModelResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Areas\AdminImportAssessment\ViewModels\MarkAsInterim\MarkAsInterimViewModel.cs" />
     <Compile Include="Areas\AdminImportAssessment\ViewModels\RefundDetails\RefundDetailsViewModel.cs" />
     <Compile Include="Areas\AdminImportAssessment\ViewModels\RefundDetails\RefundDetailsViewModelResources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -1339,6 +1337,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>PaymentDetailsViewModelResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\AdminImportAssessment\Views\MarkAsInterim\IndexResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IndexResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Areas\AdminImportMovement\Controllers\HomeController.cs" />
     <Compile Include="Areas\AdminImportMovement\ViewModels\Home\HomeViewModel.cs" />
@@ -2083,6 +2086,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>FileClosedResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\NotificationMovements\Views\Create\NoApprovedFinancialGuaranteeResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>NoApprovedFinancialGuaranteeResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Areas\NotificationMovements\Views\Create\TotalActiveLoadsReachedResources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -3154,10 +3162,6 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Areas\AdminExportAssessment\Views\MarkAsInterim\UpdateInterimStatusResources.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>UpdateInterimStatusResources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
     <EmbeddedResource Include="Areas\AdminExportAssessment\Views\NumberOfShipments\ConfirmResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>ConfirmResources.Designer.cs</LastGenOutput>
@@ -3263,6 +3267,10 @@
       <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\AdminImportAssessment\Views\KeyDates\IndexResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\AdminImportAssessment\Views\MarkAsInterim\IndexResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
@@ -4087,6 +4095,10 @@
     <EmbeddedResource Include="Areas\NotificationMovements\Views\Create\FileClosedResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>FileClosedResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\NotificationMovements\Views\Create\NoApprovedFinancialGuaranteeResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>NoApprovedFinancialGuaranteeResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\NotificationMovements\Views\Create\ThreeWorkingDaysResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

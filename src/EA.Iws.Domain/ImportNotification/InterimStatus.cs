@@ -18,5 +18,10 @@
             IsInterim = isInterim;
             ImportNotificationId = importNotificationId;
         }
+
+        public void UpdateStatus(bool isInterim)
+        {
+            IsInterim = isInterim;
+        }
     }
 }

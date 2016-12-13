@@ -202,6 +202,7 @@
     <Compile Include="ImportNotificationAssessment\Transactions\AddNotificationRefundHandler.cs" />
     <Compile Include="ImportNotificationAssessment\Transactions\GetChargeDueHandler.cs" />
     <Compile Include="ImportNotificationAssessment\Transactions\GetImportNotificationAccountOverviewHandler.cs" />
+    <Compile Include="ImportNotificationAssessment\UpdateInterimStatusHandler.cs" />
     <Compile Include="ImportNotificationAssessment\WithdrawConsentForImportNotificationHandler.cs" />
     <Compile Include="ImportNotificationAssessment\WithdrawImportNotificationHandler.cs" />
     <Compile Include="ImportNotificationMovements\GetCancellableMovementsHandler.cs" />
@@ -388,7 +389,6 @@
     <Compile Include="NotificationAssessment\GetOriginalNumberOfShipmentsHandler.cs" />
     <Compile Include="NotificationAssessment\MarkAsInterimHandler.cs" />
     <Compile Include="NotificationAssessment\SetNewNumberOfShipmentsHandler.cs" />
-    <Compile Include="NotificationAssessment\UpdateInterimStatusHandler.cs" />
     <Compile Include="NotificationMovements\Capture\GetLatestMovementNumberHandler.cs" />
     <Compile Include="NotificationMovements\Create\HasExceededConsentedQuantityHandler.cs" />
     <Compile Include="Movement\Receive\DoesQuantityReceivedExceedToleranceHandler.cs" />
@@ -464,6 +464,7 @@
     <Compile Include="NotificationMovements\GetReceivedMovementsHandler.cs" />
     <Compile Include="NotificationMovements\Mappings\PackagingDataMap.cs" />
     <Compile Include="NotificationMovements\Mappings\ShipmentDatesMap.cs" />
+    <Compile Include="NotificationMovements\Rules\ActiveApprovedFinancialGuarantee.cs" />
     <Compile Include="NotificationMovements\Rules\ConsentExpiresInThreeOrLessWorkingDays.cs" />
     <Compile Include="NotificationMovements\Rules\ConsentExpiresInFourWorkingDays.cs" />
     <Compile Include="NotificationMovements\Rules\FileClosed.cs" />

@@ -250,6 +250,15 @@ namespace EA.Iws.Web.Areas.Admin.Views.Menu {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Mark notification as interim or non-interim.
+        /// </summary>
+        public static string MarkAsInterimLinkText {
+            get {
+                return ResourceManager.GetString("MarkAsInterimLinkText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Non-interim.
         /// </summary>
         public static string NonInterim {

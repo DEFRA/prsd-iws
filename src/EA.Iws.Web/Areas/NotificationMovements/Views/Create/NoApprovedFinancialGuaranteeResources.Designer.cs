@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace EA.Iws.Web.Areas.AdminExportAssessment.Views.MarkAsInterim {
+namespace EA.Iws.Web.Areas.NotificationMovements.Views.Create {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace EA.Iws.Web.Areas.AdminExportAssessment.Views.MarkAsInterim {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class UpdateInterimStatusResources {
+    public class NoApprovedFinancialGuaranteeResources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal UpdateInterimStatusResources() {
+        internal NoApprovedFinancialGuaranteeResources() {
         }
         
         /// <summary>
@@ -39,8 +39,8 @@ namespace EA.Iws.Web.Areas.AdminExportAssessment.Views.MarkAsInterim {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EA.Iws.Web.Areas.AdminExportAssessment.Views.MarkAsInterim.UpdateInterimStatusRes" +
-                            "ources", typeof(UpdateInterimStatusResources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EA.Iws.Web.Areas.NotificationMovements.Views.Create.NoApprovedFinancialGuaranteeR" +
+                            "esources", typeof(NoApprovedFinancialGuaranteeResources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -62,74 +62,92 @@ namespace EA.Iws.Web.Areas.AdminExportAssessment.Views.MarkAsInterim {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Change interim status.
+        ///   Looks up a localized string similar to You cannot prenotify any more shipments until you have an approved financial guarantee in place..
         /// </summary>
-        public static string Heading {
+        public static string Body {
             get {
-                return ResourceManager.GetString("Heading", resourceCulture);
+                return ResourceManager.GetString("Body", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Is this an iterim notification?.
+        ///   Looks up a localized string similar to Download financial guarantee.
         /// </summary>
-        public static string IsThisQuestionHeading {
+        public static string DownloadLink {
             get {
-                return ResourceManager.GetString("IsThisQuestionHeading", resourceCulture);
+                return ResourceManager.GetString("DownloadLink", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to No.
+        ///   Looks up a localized string similar to submit a new financial guarantee application.
         /// </summary>
-        public static string No {
+        public static string ListItem1 {
             get {
-                return ResourceManager.GetString("No", resourceCulture);
+                return ResourceManager.GetString("ListItem1", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to It is only possible to change the interim status of notifications that have the status:.
+        ///   Looks up a localized string similar to wait for approval from your competent authority.
         /// </summary>
-        public static string StatusErrorMessage {
+        public static string ListItem2 {
             get {
-                return ResourceManager.GetString("StatusErrorMessage", resourceCulture);
+                return ResourceManager.GetString("ListItem2", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This notification has the status.
+        ///   Looks up a localized string similar to or.
         /// </summary>
-        public static string ThisStatus {
+        public static string Or {
             get {
-                return ResourceManager.GetString("ThisStatus", resourceCulture);
+                return ResourceManager.GetString("Or", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Change Interim Status.
+        ///   Looks up a localized string similar to Bank Guarantee template.
+        /// </summary>
+        public static string SepaDownloadBankLink {
+            get {
+                return ResourceManager.GetString("SepaDownloadBankLink", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Parent Company template.
+        /// </summary>
+        public static string SepaDownloadParentLink {
+            get {
+                return ResourceManager.GetString("SepaDownloadParentLink", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to and ask your bank or parent company to complete the guarantee..
+        /// </summary>
+        public static string SepaPostLinkText {
+            get {
+                return ResourceManager.GetString("SepaPostLinkText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to If you intend to submit a bank or parent company guarantee, download either the.
+        /// </summary>
+        public static string SepaPreLinkText {
+            get {
+                return ResourceManager.GetString("SepaPreLinkText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to There is no approved financial guarantee in place.
         /// </summary>
         public static string Title {
             get {
                 return ResourceManager.GetString("Title", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to This notification is for Recovery and it is only possible to change the interim status of notification for Disposal.
-        /// </summary>
-        public static string TypeErrorMessage {
-            get {
-                return ResourceManager.GetString("TypeErrorMessage", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Yes.
-        /// </summary>
-        public static string Yes {
-            get {
-                return ResourceManager.GetString("Yes", resourceCulture);
             }
         }
     }
