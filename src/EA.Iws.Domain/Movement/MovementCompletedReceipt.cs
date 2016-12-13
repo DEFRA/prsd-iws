@@ -13,19 +13,19 @@
         {
             Date = dateComplete;
             FileId = fileId;
-            CreatedBy = createdBy;
+            CreatedBy = createdBy.ToString();
         }
 
         internal MovementCompletedReceipt(DateTime dateComplete, Guid createdBy)
         {
             Date = dateComplete;
-            CreatedBy = createdBy;
+            CreatedBy = createdBy.ToString();
         }
 
         public DateTime Date { get; private set; }
 
         public Guid? FileId { get; private set; }
 
-        public Guid CreatedBy { get; private set; }
+        public string CreatedBy { get; private set; }
     }
 }

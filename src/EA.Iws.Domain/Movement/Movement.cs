@@ -53,7 +53,7 @@
                 Date = actualDate,
                 Status = MovementStatus.Captured,
                 HasNoPrenotification = hasNoPrenotification,
-                CreatedBy = createdBy
+                CreatedBy = createdBy.ToString()
             };
 
             if (prenotificationDate.HasValue)
@@ -69,7 +69,7 @@
             Number = movementNumber;
             NotificationId = notificationId;
             Date = date;
-            CreatedBy = createdBy;
+            CreatedBy = createdBy.ToString();
 
             Status = MovementStatus.New;
             StatusChangeCollection = new List<MovementStatusChange>();
@@ -106,7 +106,7 @@
             get { return Status == MovementStatus.Submitted && Date < SystemTime.UtcNow; }
         }
 
-        public Guid CreatedBy { get; private set; }
+        public string CreatedBy { get; private set; }
 
         public void AddStatusChangeRecord(MovementStatusChange statusChange)
         {

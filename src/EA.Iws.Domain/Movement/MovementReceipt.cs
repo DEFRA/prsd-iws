@@ -15,14 +15,14 @@
             FileId = fileId;
             Date = dateReceived;
             QuantityReceived = quantity;
-            CreatedBy = createdBy;
+            CreatedBy = createdBy.ToString();
         }
 
         internal MovementReceipt(DateTime dateReceived, ShipmentQuantity quantity, Guid createdBy)
         {
             Date = dateReceived;
             QuantityReceived = quantity;
-            CreatedBy = createdBy;
+            CreatedBy = createdBy.ToString();
         }
         
         public DateTime Date { get; private set; }
@@ -33,6 +33,6 @@
 
         public Guid? FileId { get; private set; }
 
-        public Guid CreatedBy { get; private set; }
+        public string CreatedBy { get; private set; }
     }
 }
