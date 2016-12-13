@@ -115,7 +115,7 @@ namespace EA.Iws.Web.Areas.AdminImportAssessment.Views.MarkAsInterim {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Change Interim Status.
+        ///   Looks up a localized string similar to Change interim status.
         /// </summary>
         public static string Title {
             get {

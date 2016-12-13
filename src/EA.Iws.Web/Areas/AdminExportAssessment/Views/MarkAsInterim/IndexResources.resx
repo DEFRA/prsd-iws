@@ -117,10 +117,31 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="CantSetInterim" xml:space="preserve">
+    <value>Can't set as interim unless the notification is "in assessment"</value>
+  </data>
+  <data name="Interim" xml:space="preserve">
+    <value>Interim</value>
+  </data>
+  <data name="MarkedAsInterim" xml:space="preserve">
+    <value>The notification is marked as interim</value>
+  </data>
+  <data name="MarkedAsNonInterim" xml:space="preserve">
+    <value>The notification is marked as non-interim</value>
+  </data>
+  <data name="NonInterim" xml:space="preserve">
+    <value>Non-interim</value>
+  </data>
+  <data name="QuestionTitle" xml:space="preserve">
+    <value>Is this an interim or non-interim notification?</value>
+  </data>
   <data name="StatusErrorMessage" xml:space="preserve">
     <value>It is only possible to change the interim status of notifications that have the status:</value>
   </data>
   <data name="ThisStatus" xml:space="preserve">
     <value>This notification has the status</value>
+  </data>
+  <data name="Title" xml:space="preserve">
+    <value>Change interim status</value>
   </data>
 </root>

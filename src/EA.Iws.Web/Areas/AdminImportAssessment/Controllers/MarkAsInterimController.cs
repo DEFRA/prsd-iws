@@ -44,7 +44,7 @@
 
             await mediator.SendAsync(new UpdateInterimStatus(model.NotificationId, model.IsInterim.GetValueOrDefault()));
 
-            return RedirectToAction("Index", "Home", new { area = "ImportNotification", section = ImportNavigationSection.Assessment });
+            return RedirectToAction("Index", "KeyDates");
         }
     }
 }

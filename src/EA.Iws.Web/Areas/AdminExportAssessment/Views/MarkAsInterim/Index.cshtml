@@ -2,13 +2,15 @@
 @using Resources = EA.Iws.Web.Areas.AdminExportAssessment.Views.MarkAsInterim.IndexResources
 @model EA.Iws.Web.Areas.AdminExportAssessment.ViewModels.MarkAsInterimViewModel
 @{
-    ViewBag.Title = "Is this an interim notification?";
+    ViewBag.Title = Resources.Title;
 }
 
-<h1 class="heading-large">Is this an interim notification?</h1>
+<h1 class="heading-large">@Resources.Title</h1>
 
 @if (Model.NotificationStatus == NotificationStatus.InAssessment || (Model.CanUpdateInterimStatus && Model.HasAcceptableStatus))
 {
+    <h2 class="heading-medium">@Resources.QuestionTitle</h2>
+
     using (Html.BeginForm())
     {
         @Html.AntiForgeryToken()
@@ -23,11 +25,11 @@
             <fieldset>
                 <label class="block-label" for="yes">
                     @Html.RadioButtonFor(m => m.IsInterim, true, new { id = "yes" })
-                    Yes
+                    @Resources.Interim
                 </label>
                 <label class="block-label" for="no">
                     @Html.RadioButtonFor(m => m.IsInterim, false, new { id = "no" })
-                    No
+                    @Resources.NonInterim
                 </label>
             </fieldset>
         </div>
@@ -41,16 +43,16 @@ else
     {
         if (Model.IsInterim.Value)
         {
-            <p>The notification is marked as interim</p>
+            <p>@Resources.MarkedAsInterim</p>
         }
         else
         {
-            <p>The notification is marked as non-interim</p>
+            <p>@Resources.MarkedAsNonInterim</p>
         }
     }
     else
     {
-        <p>Can't set as interim unless the notification is "in assessment"</p>
+        <p>@Resources.CantSetInterim</p>
     }
 }
 
