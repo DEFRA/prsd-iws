@@ -64,7 +64,7 @@ AS
                     INNER JOIN	[Notification].[Facility] AS F1
                     ON			FC.Id = F1.FacilityCollectionId
 
-                    WHERE		NotificationId = M.NotificationId
+                    WHERE		FC.NotificationId = M.NotificationId
                     ORDER BY	F1.IsActualSiteOfTreatment DESC
                 )
 
@@ -165,7 +165,7 @@ AS
                     INNER JOIN	[ImportNotification].[Facility] AS F1
                     ON			FC.Id = F1.FacilityCollectionId
 
-                    WHERE		NotificationId = M.NotificationId
+                    WHERE		FC.ImportNotificationId = M.NotificationId
                     ORDER BY	F1.IsActualSiteOfTreatment DESC
                 )
 
