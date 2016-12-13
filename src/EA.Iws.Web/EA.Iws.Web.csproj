@@ -478,7 +478,6 @@
     <Content Include="Areas\ImportNotification\Views\WasteType\Index.cshtml" />
     <Content Include="Areas\ImportNotification\Views\Home\_WasteType.cshtml" />
     <Content Include="Areas\Reports\Views\ImportStats\Index.cshtml" />
-    <Content Include="Areas\AdminExportAssessment\Views\MarkAsInterim\UpdateInterimStatus.cshtml" />
     <Content Include="Areas\AdminExportAssessment\Views\FinancialGuaranteeDecision\Released.cshtml" />
     <Content Include="Areas\NotificationMovements\Views\Create\NoApprovedFinancialGuarantee.cshtml" />
     <Content Include="Areas\AdminImportAssessment\Views\MarkAsInterim\Index.cshtml" />
@@ -1177,11 +1176,6 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>IndexResources.resx</DependentUpon>
-    </Compile>
-    <Compile Include="Areas\AdminExportAssessment\Views\MarkAsInterim\UpdateInterimStatusResources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>UpdateInterimStatusResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Areas\AdminExportAssessment\Views\NumberOfShipments\ConfirmResources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -3154,10 +3148,6 @@
     <EmbeddedResource Include="Areas\AdminExportAssessment\Views\MarkAsInterim\IndexResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Areas\AdminExportAssessment\Views\MarkAsInterim\UpdateInterimStatusResources.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>UpdateInterimStatusResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\AdminExportAssessment\Views\NumberOfShipments\ConfirmResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
