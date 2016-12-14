@@ -33,5 +33,7 @@
         public RefundDetailsViewModel RefundViewModel { get; set; }
 
         public bool ShowRefundDetails { get; set; }
+
+        public bool CanDeleteTransaction { get; set; }
     }
 }

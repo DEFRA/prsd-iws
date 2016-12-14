@@ -88,6 +88,15 @@ namespace EA.Iws.Web.Areas.AdminImportAssessment.Views.AccountManagement {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Delete a payment.
+        /// </summary>
+        public static string DeleteTransaction {
+            get {
+                return ResourceManager.GetString("DeleteTransaction", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Enter a payment.
         /// </summary>
         public static string EnterPaymentHeading {
