@@ -53,5 +53,25 @@
 
             RaiseEvent(new RegistrationRejectedEvent(User.Email));
         }
+
+        public void Deactivate()
+        {
+            if (Status != InternalUserStatus.Approved)
+            {
+                throw new InvalidOperationException(string.Format("Cannot deactivate user {0} as its status is not 'Approved'. Current status: {1}", Id, Status));
+            }
+
+            Status = InternalUserStatus.Inactive;
+        }
+
+        public void Activate()
+        {
+            if (Status != InternalUserStatus.Inactive)
+            {
+                throw new InvalidOperationException(string.Format("Cannot activate user {0} as its status is not 'Inactive'. Current status: {1}", Id, Status));
+            }
+
+            Status = InternalUserStatus.Approved;
+        }
     }
 }
