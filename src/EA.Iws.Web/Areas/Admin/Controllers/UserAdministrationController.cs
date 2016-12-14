@@ -67,7 +67,7 @@
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> ManageExistingUsers(ManageUserViewModel model)
         {
-            await Task.Yield();
+            await mediator.SendAsync(new UpdateInternalUser(model.UserId, model.AssignedStatus, model.AssignedRole));
 
             return RedirectToAction("ManageExistingUsers");
         }

@@ -6,7 +6,7 @@
 
     public class ManageUserViewModel
     {
-        public Guid Id { get; set; }
+        public string UserId { get; set; }
 
         public string FullName { get; set; }
 
@@ -22,7 +22,7 @@
 
         public ManageUserViewModel(InternalUserData data)
         {
-            Id = data.Id;
+            UserId = data.UserId;
             FullName = data.FullName;
             Email = data.Email;
             AssignedRole = data.Role;

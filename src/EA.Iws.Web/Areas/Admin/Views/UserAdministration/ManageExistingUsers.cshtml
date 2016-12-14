@@ -21,7 +21,7 @@
             using (Html.BeginForm())
             {
                 @Html.AntiForgeryToken()
-                @Html.Hidden("Id", Model.Users[i].Id)
+                @Html.Hidden("UserId", Model.Users[i].UserId)
 
                 <tr>
                     <td class="font-xsmall">@Model.Users[i].FullName</td>
