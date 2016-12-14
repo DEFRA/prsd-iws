@@ -32,6 +32,8 @@
 
         public bool LockoutEnabled { get; private set; }
 
+        public DateTime? LockoutEndDateUtc { get; private set; }
+
         public int AccessFailedCount { get; private set; }
 
         public string UserName { get; private set; }

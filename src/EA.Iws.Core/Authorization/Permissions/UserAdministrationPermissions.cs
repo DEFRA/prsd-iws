@@ -13,5 +13,7 @@
         public const string CanDeleteMovements = "Can Delete Movements";
 
         public const string CanUpdateInterimStatus = "Can Update Interim Status";
+
+        public const string CanManageExistingInternalUser = "Can Manage Existing Internal User";
     }
 }

@@ -131,6 +131,7 @@
     <Compile Include="Admin\NotificationAssessment\NotificationStatusChangeEventHandler.cs" />
     <Compile Include="Admin\Registration\GetLocalAreasHandler.cs" />
     <Compile Include="Admin\UserAdministration\GetAllUsersHandler.cs" />
+    <Compile Include="Admin\UserAdministration\GetExistingInternalUsersHandler.cs" />
     <Compile Include="Admin\UserAdministration\GetNewInternalUsersHandler.cs" />
     <Compile Include="Admin\UserAdministration\GetUserByExportNotificationIdHandler.cs" />
     <Compile Include="Admin\UserAdministration\GetUserByIdHandler.cs" />
