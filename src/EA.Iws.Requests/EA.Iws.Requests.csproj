@@ -151,6 +151,7 @@
     <Compile Include="ImportNotificationAssessment\Transactions\DeleteTransaction.cs" />
     <Compile Include="ImportNotificationAssessment\Transactions\GetChargeDue.cs" />
     <Compile Include="ImportNotificationAssessment\Transactions\GetImportNotificationAccountOverview.cs" />
+    <Compile Include="ImportNotificationAssessment\Transactions\GetImportNotificationTransactions.cs" />
     <Compile Include="ImportNotificationAssessment\UpdateInterimStatus.cs" />
     <Compile Include="ImportNotificationAssessment\WithdrawConsentForImportNotification.cs" />
     <Compile Include="ImportNotificationAssessment\WithdrawImportNotification.cs" />

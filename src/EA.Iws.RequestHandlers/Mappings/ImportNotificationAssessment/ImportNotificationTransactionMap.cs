@@ -16,7 +16,8 @@
                 ReceiptNumber = source.ReceiptNumber,
                 Comments = source.Comments,
                 Type = source.PaymentMethod,
-                Transaction = source.Credit.HasValue ? TransactionType.Payment : TransactionType.Refund
+                Transaction = source.Credit.HasValue ? TransactionType.Payment : TransactionType.Refund,
+                TransactionId = source.Id
             };
         }
     }
