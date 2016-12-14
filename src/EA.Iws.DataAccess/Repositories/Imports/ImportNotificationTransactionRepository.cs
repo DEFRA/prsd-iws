@@ -39,5 +39,10 @@
 
             context.ImportNotificationTransactions.Remove(transaction);
         }
+
+        public async Task<ImportNotificationTransaction> GetById(Guid transactionId)
+        {
+            return await context.ImportNotificationTransactions.Where(t => t.Id == transactionId).SingleAsync();
+        }
     }
 }

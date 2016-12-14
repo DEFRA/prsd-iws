@@ -204,6 +204,7 @@
     <Compile Include="ImportNotificationAssessment\Transactions\GetChargeDueHandler.cs" />
     <Compile Include="ImportNotificationAssessment\Transactions\GetImportNotificationAccountOverviewHandler.cs" />
     <Compile Include="ImportNotificationAssessment\Transactions\GetImportNotificationTransactionsHandler.cs" />
+    <Compile Include="ImportNotificationAssessment\Transactions\GetTransactionByIdHandler.cs" />
     <Compile Include="ImportNotificationAssessment\UpdateInterimStatusHandler.cs" />
     <Compile Include="ImportNotificationAssessment\WithdrawConsentForImportNotificationHandler.cs" />
     <Compile Include="ImportNotificationAssessment\WithdrawImportNotificationHandler.cs" />
