@@ -1,0 +1,18 @@
+﻿@model EA.Iws.Web.Areas.AdminImportAssessment.ViewModels.DeleteTransaction.ConfirmViewModel
+@using Resource = EA.Iws.Web.Areas.AdminImportAssessment.Views.DeleteTransaction.ConfirmResources
+@using EnumHelper = EA.Prsd.Core.Helpers.EnumHelper
+
+@{
+    ViewBag.Title = Resource.MainHeading;
+}
+
+<h1 class="heading-large">@Resource.MainHeading</h1>
+
+<div class="form-group">
+    
+</div>
+
+
+@section menu {
+    @Html.Action("ImportNavigation", "Menu", new { area = "Admin", section = ImportNavigationSection.Finance })
+}

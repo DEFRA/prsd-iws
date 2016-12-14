@@ -16,5 +16,7 @@
         public string ReceiptNumber { get; set; }
 
         public string Comments { get; set; }
+
+        public Guid TransactionId { get; set; }
     }
 }
