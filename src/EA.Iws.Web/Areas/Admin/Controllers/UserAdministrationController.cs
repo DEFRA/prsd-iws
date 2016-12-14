@@ -49,5 +49,27 @@
 
             return RedirectToAction("Index", "Home");
         }
+
+        [HttpGet]
+        public async Task<ActionResult> ManageExistingUsers()
+        {
+            var users = await mediator.SendAsync(new GetExistingInternalUsers());
+
+            var model = new ExistingUsersListViewModel
+            {
+                Users = users.Select(u => new ManageUserViewModel(u)).ToList()
+            };
+
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> ManageExistingUsers(ManageUserViewModel model)
+        {
+            await Task.Yield();
+
+            return RedirectToAction("ManageExistingUsers");
+        }
     }
 }

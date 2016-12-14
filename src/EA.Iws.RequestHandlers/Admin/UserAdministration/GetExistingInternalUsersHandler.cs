@@ -6,7 +6,6 @@
     using System.Security;
     using System.Security.Claims;
     using System.Threading.Tasks;
-    using Authorization;
     using Core.Admin;
     using DataAccess;
     using DataAccess.Identity;
@@ -45,7 +44,7 @@
             }
 
             var users = await context.InternalUsers.Where(u =>
-                    u.Status == InternalUserStatus.Approved
+                    (u.Status == InternalUserStatus.Approved || u.Status == InternalUserStatus.Inactive)
                     && u.UserId != userContext.UserId.ToString()
                     && u.User.EmailConfirmed
                     && u.CompetentAuthority == user.CompetentAuthority)

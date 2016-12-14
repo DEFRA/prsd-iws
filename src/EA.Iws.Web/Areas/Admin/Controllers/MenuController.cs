@@ -29,36 +29,44 @@
         [AcceptVerbs(HttpVerbs.Get | HttpVerbs.Post)]
         public ActionResult HomeNavigation(AdminHomeNavigationSection section)
         {
+            var model = CreateAdminLinksViewModel(section);
+
+            return PartialView("_HomeNavigation", model);
+        }
+
+        private AdminLinksViewModel CreateAdminLinksViewModel(AdminHomeNavigationSection? section = null)
+        {
             var showApproveNewInternalUserLink = Task.Run(() =>
-                        authorizationService.AuthorizeActivity(typeof(SetUserApprovals)))
-                    .Result;
+                authorizationService.AuthorizeActivity(typeof(SetUserApprovals)))
+                .Result;
 
             var showAddNewEntryOrExitPointLink = Task.Run(() =>
-                        authorizationService.AuthorizeActivity(typeof(AddEntryOrExitPoint)))
-                    .Result;
+                authorizationService.AuthorizeActivity(typeof(AddEntryOrExitPoint)))
+                .Result;
+
+            var showManageExistingInternalUserLink = Task.Run(() =>
+                authorizationService.AuthorizeActivity(typeof(GetExistingInternalUsers)))
+                .Result;
 
             var model = new AdminLinksViewModel
             {
                 ShowApproveNewInternalUserLink = showApproveNewInternalUserLink,
                 ShowAddNewEntryOrExitPointLink = showAddNewEntryOrExitPointLink,
-                ActiveSection = section
+                ShowManageExistingInternalUserLink = showManageExistingInternalUserLink
             };
 
-            return PartialView("_HomeNavigation", model);
+            if (section.HasValue)
+            {
+                model.ActiveSection = section.Value;
+            }
+
+            return model;
         }
 
         [AcceptVerbs(HttpVerbs.Get | HttpVerbs.Post)]
         public ActionResult ImportNavigation(Guid id, ImportNavigationSection section)
         {
             var details = Task.Run(() => mediator.SendAsync(new GetNotificationDetails(id))).Result;
-
-            var showApproveNewInternalUserLink = Task.Run(() =>
-                        authorizationService.AuthorizeActivity(typeof(SetUserApprovals)))
-                    .Result;
-
-            var showAddNewEntryOrExitPointLink = Task.Run(() =>
-                        authorizationService.AuthorizeActivity(typeof(AddEntryOrExitPoint)))
-                    .Result;
             
             var showAssessmentDecision = Task.Run(() =>
                 authorizationService.AuthorizeActivity(
@@ -80,11 +88,7 @@
                 Details = details,
                 ActiveSection = section,
                 ShowImportSections = details.Status == ImportNotificationStatus.NotificationReceived,
-                AdminLinksModel = new AdminLinksViewModel
-                {
-                    ShowApproveNewInternalUserLink = showApproveNewInternalUserLink,
-                    ShowAddNewEntryOrExitPointLink = showAddNewEntryOrExitPointLink
-                },
+                AdminLinksModel = CreateAdminLinksViewModel(),
                 ShowAssessmentDecision = showAssessmentDecision,
                 ShowKeyDatesOverride = showKeyDatesOverride,
                 ShowDeleteMovementLink = showDeleteMovementLink
@@ -97,14 +101,6 @@
         public ActionResult ExportNavigation(Guid id, ExportNavigationSection section)
         {
             var data = Task.Run(() => mediator.SendAsync(new GetNotificationAssessmentSummaryInformation(id))).Result;
-
-            var showApproveNewInternalUserLink = Task.Run(() =>
-                        authorizationService.AuthorizeActivity(typeof(SetUserApprovals)))
-                    .Result;
-
-            var showAddNewEntryOrExitPointLink = Task.Run(() =>
-                        authorizationService.AuthorizeActivity(typeof(AddEntryOrExitPoint)))
-                    .Result;
 
             var showAssessmentDecision = Task.Run(() =>
                 authorizationService.AuthorizeActivity(
@@ -125,11 +121,7 @@
             {
                 Data = data,
                 ActiveSection = section,
-                AdminLinksModel = new AdminLinksViewModel
-                {
-                    ShowApproveNewInternalUserLink = showApproveNewInternalUserLink,
-                    ShowAddNewEntryOrExitPointLink = showAddNewEntryOrExitPointLink
-                },
+                AdminLinksModel = CreateAdminLinksViewModel(),
                 ShowAssessmentDecision = showAssessmentDecision,
                 ShowKeyDatesOverride = showKeyDatesOverride,
                 ShowDeleteMovementLink = showDeleteMovementLink

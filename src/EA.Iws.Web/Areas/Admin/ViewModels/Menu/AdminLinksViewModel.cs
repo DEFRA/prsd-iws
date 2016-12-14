@@ -6,6 +6,8 @@
     {
         public bool ShowApproveNewInternalUserLink { get; set; }
 
+        public bool ShowManageExistingInternalUserLink { get; set; }
+
         public bool ShowAddNewEntryOrExitPointLink { get; set; }
 
         public AdminHomeNavigationSection ActiveSection { get; set; }

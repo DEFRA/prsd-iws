@@ -1,0 +1,36 @@
+﻿@model EA.Iws.Web.Areas.Admin.ViewModels.UserAdministration.ExistingUsersListViewModel
+@{
+    ViewBag.Title = "Manage existing users";
+}
+
+<h1 class="heading-large">Manage existing users</h1>
+
+<table class="form-group" title="Manage existing users">
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Role</th>
+        <th>Status</th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+        @for (int i = 0; i < Model.Users.Count(); i++)
+        {
+            using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+                @Html.Hidden("Id", Model.Users[i].Id)
+
+                <tr>
+                    <td class="font-xsmall">@Model.Users[i].FullName</td>
+                    <td class="font-xsmall">@Model.Users[i].Email</td>
+                    <td>@Html.DropDownList("AssignedRole", Model.GetUserRolesList(Model.Users[i].AssignedRole), new { id = string.Format("AssignedRole{0}", i) })</td>
+                    <td>@Html.DropDownList("AssignedStatus", Model.GetUserStatusList(Model.Users[i].AssignedStatus), new { id = string.Format("AssignedStatus{0}", i) })</td>
+                    <td><button type="submit">Update</button></td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>

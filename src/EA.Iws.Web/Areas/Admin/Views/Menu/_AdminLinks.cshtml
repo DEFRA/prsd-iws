@@ -4,6 +4,10 @@
     {
         <li>@Html.ActionLink("Manage new users", "ManageNewUsers", "UserAdministration", new { area = "Admin" }, null)</li>
     }
+    @if (Model.ShowManageExistingInternalUserLink)
+    {
+        <li>@Html.ActionLink("Manage existing users", "ManageExistingUsers", "UserAdministration", new { area = "Admin" }, null)</li>
+    }
     @if (Model.ShowAddNewEntryOrExitPointLink)
     {
         <li>@Html.ActionLink("New ports or border crossings", "Index", "EntryOrExitPoint", new { area = "Admin" }, null)</li>
