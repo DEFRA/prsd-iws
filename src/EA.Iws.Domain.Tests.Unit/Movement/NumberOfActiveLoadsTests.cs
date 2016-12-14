@@ -18,6 +18,7 @@
         private readonly IFinancialGuaranteeRepository financialGuaranteeRepository;
         private readonly NumberOfActiveLoads numberOfActiveLoads;
         private readonly IMovementRepository movementRepository;
+        private readonly Guid userId = new Guid("E45663E5-1BD0-4AC3-999B-0E9975BE86FC");
 
         public NumberOfActiveLoadsTests()
         {
@@ -91,7 +92,7 @@
 
             for (int i = 0; i < n; i++)
             {
-                movements.Add(new Movement(i + 1, NotificationId, SystemTime.UtcNow));
+                movements.Add(new Movement(i + 1, NotificationId, SystemTime.UtcNow, userId));
             }
 
             return movements;

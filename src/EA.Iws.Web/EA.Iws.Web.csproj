@@ -479,6 +479,7 @@
     <Content Include="Areas\ImportNotification\Views\Home\_WasteType.cshtml" />
     <Content Include="Areas\Reports\Views\ImportStats\Index.cshtml" />
     <Content Include="Areas\AdminExportAssessment\Views\FinancialGuaranteeDecision\Released.cshtml" />
+    <Content Include="Areas\Reports\Views\ExportMovements\Index.cshtml" />
     <Content Include="Areas\NotificationMovements\Views\Create\NoApprovedFinancialGuarantee.cshtml" />
     <Content Include="Areas\AdminImportAssessment\Views\MarkAsInterim\Index.cshtml" />
     <Content Include="Areas\Admin\Views\UserAdministration\ManageExistingUsers.cshtml" />
@@ -2124,12 +2125,19 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>SummaryResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Areas\Reports\Controllers\ExportMovementsController.cs" />
     <Compile Include="Areas\Reports\Controllers\ImportStatsController.cs" />
     <Compile Include="Areas\Reports\Controllers\ImportNotificationsController.cs" />
     <Compile Include="Areas\Reports\Controllers\ExportNotificationsController.cs" />
     <Compile Include="Areas\Reports\Controllers\FinanceController.cs" />
     <Compile Include="Areas\Reports\Controllers\MissingShipmentsController.cs" />
     <Compile Include="Areas\Reports\Controllers\FreedomOfInformationController.cs" />
+    <Compile Include="Areas\Reports\ViewModels\ExportMovements\IndexViewModel.cs" />
+    <Compile Include="Areas\Reports\ViewModels\ExportMovements\IndexViewModelResources.Designer.cs">
+      <DependentUpon>IndexViewModelResources.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Areas\Reports\ViewModels\ExportNotifications\IndexViewModel.cs" />
     <Compile Include="Areas\Reports\ViewModels\ExportNotifications\IndexViewModelResources.Designer.cs">
       <DependentUpon>IndexViewModelResources.resx</DependentUpon>
@@ -2167,6 +2175,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>IndexViewModelResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Reports\Views\ExportMovements\IndexResources.Designer.cs">
+      <DependentUpon>IndexResources.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Areas\Reports\Views\ExportNotifications\IndexResources.Designer.cs">
       <DependentUpon>IndexResources.resx</DependentUpon>
@@ -4142,6 +4155,10 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Areas\Reports\ViewModels\ExportMovements\IndexViewModelResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>IndexViewModelResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Areas\Reports\ViewModels\ExportNotifications\IndexViewModelResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>IndexViewModelResources.Designer.cs</LastGenOutput>
@@ -4166,6 +4183,10 @@
     <EmbeddedResource Include="Areas\Reports\ViewModels\FreedomOfInformation\IndexViewModelResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>IndexViewModelResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\Reports\Views\ExportMovements\IndexResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\Reports\Views\ExportNotifications\IndexResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

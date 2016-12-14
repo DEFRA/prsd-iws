@@ -5,17 +5,21 @@
     using Core.ComponentRegistration;
     using Core.NotificationAssessment;
     using NotificationAssessment;
+    using Prsd.Core.Domain;
 
     [AutoRegister]
     public class CapturedMovementFactory : ICapturedMovementFactory
     {
         private readonly IMovementNumberValidator movementNumberValidator;
         private readonly INotificationAssessmentRepository assessmentRepository;
+        private readonly IUserContext userContext;
 
-        public CapturedMovementFactory(IMovementNumberValidator movementNumberValidator, INotificationAssessmentRepository assessmentRepository)
+        public CapturedMovementFactory(IMovementNumberValidator movementNumberValidator, INotificationAssessmentRepository assessmentRepository,
+            IUserContext userContext)
         {
             this.movementNumberValidator = movementNumberValidator;
             this.assessmentRepository = assessmentRepository;
+            this.userContext = userContext;
         }
 
         public async Task<Movement> Create(Guid notificationId, int number, DateTime? prenotificationDate, DateTime actualShipmentDate, bool hasNoPrenotification)
@@ -39,7 +43,7 @@
                         notificationId, notificationStatus));
             }
 
-            var movement = Movement.Capture(number, notificationId, actualShipmentDate, prenotificationDate, hasNoPrenotification);
+            var movement = Movement.Capture(number, notificationId, actualShipmentDate, prenotificationDate, hasNoPrenotification, userContext.UserId);
 
             return movement;
         }

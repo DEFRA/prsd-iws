@@ -18,6 +18,7 @@
         private static readonly DateTime FrozenTime = new DateTime(2015, 9, 1);
         private static readonly DateTime BeforeFrozenTime = new DateTime(2015, 7, 1);
         private static readonly DateTime AfterFrozenTime = new DateTime(2015, 9, 2);
+        private readonly Guid userId = new Guid("E45663E5-1BD0-4AC3-999B-0E9975BE86FC");
 
         public MovementTests()
         {
@@ -27,7 +28,7 @@
                 UKCompetentAuthority.England,
                 0);
 
-            movement = new Movement(1, notification.Id, AnyDate);
+            movement = new Movement(1, notification.Id, AnyDate, userId);
 
             SystemTime.Freeze(FrozenTime);
         }

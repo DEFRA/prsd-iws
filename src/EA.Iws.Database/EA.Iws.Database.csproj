@@ -59,6 +59,7 @@
     <Content Include="scripts\Everytime\Views\0020-Reports-DataImportNotifications.sql" />
     <Content Include="scripts\Everytime\Views\0021-Search-Notifications.sql" />
     <Content Include="scripts\Everytime\Views\0023-Reports-ImportStats.sql" />
+    <Content Include="scripts\Everytime\Views\0024-Reports-ExportMovements.sql" />
     <Content Include="scripts\TestData\20161128-105400-import-shipment-data.sql" />
     <Content Include="scripts\TestData\20161128-120500-export-shipment-data.sql" />
     <Content Include="scripts\TestData\20161128-131900-add-multiple-export-consented.sql" />
@@ -125,6 +126,7 @@
     <Content Include="scripts\Update\0002-CI\Sprint5\20161207-142500-add-chemical-composition-type.sql" />
     <Content Include="scripts\Update\0002-CI\Sprint5\20161208-112600-remove-area-consultation-date.sql" />
     <Content Include="scripts\Update\0002-CI\Sprint5\20161214-152500-add-inactive-user-status.sql" />
+    <Content Include="scripts\Update\0002-CI\Sprint5\20161209-111900-add-created-by-to-movement.sql" />
     <Content Include="scripts\Update\placeholder.txt" />
     <Content Include="scripts\Update\0001-Release1\Sprint10\20150625-103000-add-us-competent-authority.sql" />
     <Content Include="scripts\Update\0001-Release1\Sprint10\20150626-163000-link-waste-code-info-to-notification.sql" />

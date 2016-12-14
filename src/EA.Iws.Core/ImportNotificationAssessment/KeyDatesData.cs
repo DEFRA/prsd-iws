@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using Notification;
     using NotificationAssessment;
 
     public class KeyDatesData
@@ -29,5 +30,9 @@
         public string ArchiveReference { get; set; }
 
         public IList<NotificationAssessmentDecision> DecisionHistory { get; set; } 
+
+        public bool IsLocalAreaSet { get; set; }
+
+        public UKCompetentAuthority CompententAuthority { get; set; }
     }
 }

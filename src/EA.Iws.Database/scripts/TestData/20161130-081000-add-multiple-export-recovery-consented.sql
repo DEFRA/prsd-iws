@@ -893,11 +893,11 @@ BEGIN
 			WHILE @shipmentNumber < 5
 			BEGIN
 				DECLARE @movementId uniqueidentifier = NEWID()
-				INSERT INTO [Notification].[Movement] ([Id],[Number],[NotificationId],[Date],[Status],[PrenotificationDate])
-					VALUES(@movementId, @shipmentNumber, @NotificationId, Cast(N'2016-11-01' AS DATE), 3, Cast(N'2016-10-26' AS DATE));
+				INSERT INTO [Notification].[Movement] ([Id],[Number],[NotificationId],[Date],[Status],[PrenotificationDate], [CreatedBy])
+					VALUES(@movementId, @shipmentNumber, @NotificationId, Cast(N'2016-11-01' AS DATE), 3, Cast(N'2016-10-26' AS DATE), @userId);
 
-				INSERT INTO [Notification].[MovementReceipt]([Id], [MovementId], [Date], [Quantity], [Unit])
-					VALUES (NEWID(), @movementId, Cast(N'2016-11-10' AS DATE), 1, 3)
+				INSERT INTO [Notification].[MovementReceipt]([Id], [MovementId], [Date], [Quantity], [Unit], [CreatedBy])
+					VALUES (NEWID(), @movementId, Cast(N'2016-11-10' AS DATE), 1, 3, @userId)
 
 				SET @shipmentNumber = @shipmentNumber + 1;
 			END;

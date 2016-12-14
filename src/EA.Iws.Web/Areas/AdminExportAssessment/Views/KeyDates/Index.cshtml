@@ -360,7 +360,7 @@ else
     @section scripts{
         <script>
             $(function () {
-                var link = $("td a").filter(function (i) { return $(this).text() === "Add" });
+                var link = $("td a").first();
 
                 if (link) {
                     link.focus();
