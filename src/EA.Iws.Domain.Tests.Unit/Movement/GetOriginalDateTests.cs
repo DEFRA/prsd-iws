@@ -12,6 +12,7 @@
         private static readonly Guid AnyGuid = new Guid("0FBE9BBE-76DA-4028-AF36-D516E207F345");
         private static readonly DateTime AnyDate = new DateTime(2014, 12, 25);
         private readonly IMovementDateHistoryRepository historyRepository;
+        private readonly Guid userId = new Guid("E45663E5-1BD0-4AC3-999B-0E9975BE86FC");
 
         public GetOriginalDateTests()
         {
@@ -22,7 +23,7 @@
         public async Task WhenNoPreviousDates_ReturnsMovementDate()
         {
             var movementDate = new DateTime(2015, 1, 1);
-            var movement = new Movement(1, AnyGuid, movementDate);
+            var movement = new Movement(1, AnyGuid, movementDate, userId);
             var dateService = new OriginalMovementDate(historyRepository);
 
             Assert.Equal(movementDate, await dateService.Get(movement));
@@ -31,7 +32,7 @@
         [Fact]
         public async Task WhenOnePreviousDate_ReturnsPreviousDate()
         {
-            var movement = new Movement(1, AnyGuid, AnyDate);
+            var movement = new Movement(1, AnyGuid, AnyDate, userId);
 
             var previousDate = new DateTime(2015, 1, 2);
 
@@ -49,7 +50,7 @@
         [Fact]
         public async Task WhenMultiPreviousDates_ReturnsOldestPreviousDate()
         {
-            var movement = new Movement(1, AnyGuid, AnyDate);
+            var movement = new Movement(1, AnyGuid, AnyDate, userId);
 
             var oldestDateHistory = new MovementDateHistory(AnyGuid, new DateTime(2015, 1, 5));
             ObjectInstantiator<MovementDateHistory>.SetProperty(m => m.DateChanged, new DateTime(2015, 10, 10), oldestDateHistory);

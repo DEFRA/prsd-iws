@@ -16,6 +16,7 @@
         private readonly CertificateOfRecoveryNameGenerator certificateOfRecoveryName;
         private readonly INotificationApplicationRepository notificationRepository;
         private readonly Guid notificationId;
+        private readonly Guid userId = new Guid("E45663E5-1BD0-4AC3-999B-0E9975BE86FC");
 
         public CertificateOfRecoveryNameTests()
         {
@@ -31,7 +32,7 @@
             var notification = new NotificationApplication(Guid.NewGuid(), notificationType, competentAuthority, notificationNumber);
             A.CallTo(() => notificationRepository.GetById(notificationId)).Returns(notification);
 
-            var result = await certificateOfRecoveryName.GetValue(new Movement(movementNumber, notificationId, AnyDate));
+            var result = await certificateOfRecoveryName.GetValue(new Movement(movementNumber, notificationId, AnyDate, userId));
 
             Assert.Equal(expected, result);
         }

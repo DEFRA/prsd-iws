@@ -31,7 +31,7 @@
             //TODO: create ObjectInstantator<T>.CreateInstance(params) method...
             var flags = BindingFlags.NonPublic | BindingFlags.Instance;
             var culture = CultureInfo.InvariantCulture;
-            var parameters = new object[] { 1, notificationId, new DateTime(2015, 1, 1) };
+            var parameters = new object[] { 1, notificationId, new DateTime(2015, 1, 1), userId };
             movement = (Movement)Activator.CreateInstance(
                 typeof(Movement), flags, null, parameters, culture);
 

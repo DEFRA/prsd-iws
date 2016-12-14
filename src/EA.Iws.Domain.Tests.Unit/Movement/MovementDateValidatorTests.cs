@@ -86,7 +86,7 @@
         [InlineData(MovementStatus.Rejected)]
         public async Task MovementStatusNotSubmitted_Throws(MovementStatus status)
         {
-            var movement = new Movement(1, NotificationId, Today);
+            var movement = new Movement(1, NotificationId, Today, AnyGuid);
             ObjectInstantiator<Movement>.SetProperty(x => x.Status, status, movement);
 
             var validDate = Today.AddDays(3);
@@ -164,7 +164,7 @@
         [Fact]
         public async Task Date10WorkingsDaysGreaterThanOriginalDate_Throws()
         {
-            var movement = new Movement(1, NotificationId, Today);
+            var movement = new Movement(1, NotificationId, Today, AnyGuid);
             ObjectInstantiator<Movement>.SetProperty(x => x.Status, MovementStatus.Submitted, movement);
 
             //10 workings days after 1 Jan 2015 is 14 calendar days (only counting weekends)...
@@ -177,7 +177,7 @@
         [Fact]
         public async Task ValidDate_DoesNotThrow()
         {
-            var movement = new Movement(1, NotificationId, Today);
+            var movement = new Movement(1, NotificationId, Today, AnyGuid);
             ObjectInstantiator<Movement>.SetProperty(x => x.Status, MovementStatus.Submitted, movement);
 
             var validDate = Today.AddDays(3);

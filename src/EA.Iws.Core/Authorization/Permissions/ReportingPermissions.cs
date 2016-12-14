@@ -15,5 +15,7 @@
         public const string CanViewImportNotificationsReport = "Can View Import Notifications Report";
 
         public const string CanViewImportStatsReport = "Can View Import Stats Report";
+
+        public const string CanViewExportMovementsReport = "Can View Export Movements Report";
     }
 }

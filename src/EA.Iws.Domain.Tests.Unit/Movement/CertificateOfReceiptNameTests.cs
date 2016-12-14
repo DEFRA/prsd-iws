@@ -16,6 +16,7 @@
         private readonly CertificateOfReceiptNameGenerator certificateOfReceiptName;
         private readonly INotificationApplicationRepository notificationApplicationRepository;
         private readonly Guid notificationId;
+        private readonly Guid userId = new Guid("E45663E5-1BD0-4AC3-999B-0E9975BE86FC");
 
         public CertificateOfReceiptNameTests()
         {
@@ -32,7 +33,7 @@
             var notification = new NotificationApplication(notificationId, NotificationType.Recovery, competentAuthority, notificationNumber);
             A.CallTo(() => notificationApplicationRepository.GetById(notificationId)).Returns(notification);
 
-            var movement = new Movement(movementNumber, notificationId, AnyDate);
+            var movement = new Movement(movementNumber, notificationId, AnyDate, userId);
             var name = await certificateOfReceiptName.GetValue(movement);
 
             Assert.Equal(expected, name);

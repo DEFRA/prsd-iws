@@ -8,6 +8,7 @@
     using Core.NotificationAssessment;
     using FinancialGuarantee;
     using NotificationAssessment;
+    using Prsd.Core.Domain;
 
     [AutoRegister]
     public class MovementFactory
@@ -20,6 +21,7 @@
         private readonly NumberOfActiveLoads numberOfActiveLoads;
         private readonly ConsentPeriod consentPeriod;
         private readonly IFinancialGuaranteeRepository financialGuaranteeRepository;
+        private readonly IUserContext userContext;
 
         public MovementFactory(NumberOfMovements numberOfMovements,
             NotificationMovementsQuantity movementsQuantity,
@@ -28,7 +30,8 @@
             NumberOfActiveLoads numberOfActiveLoads,
             ConsentPeriod consentPeriod,
             IMovementDateValidator dateValidator,
-            IFinancialGuaranteeRepository financialGuaranteeRepository)
+            IFinancialGuaranteeRepository financialGuaranteeRepository,
+            IUserContext userContext)
         {
             this.numberOfMovements = numberOfMovements;
             this.movementsQuantity = movementsQuantity;
@@ -38,6 +41,7 @@
             this.consentPeriod = consentPeriod;
             this.dateValidator = dateValidator;
             this.financialGuaranteeRepository = financialGuaranteeRepository;
+            this.userContext = userContext;
         }
 
         public async Task<Movement> Create(Guid notificationId, DateTime actualMovementDate)
@@ -100,7 +104,7 @@
 
             var newNumber = await numberGenerator.Generate(notificationId);
 
-            return new Movement(newNumber, notificationId, actualMovementDate);
+            return new Movement(newNumber, notificationId, actualMovementDate, userContext.UserId);
         }
     }
 }

@@ -15,6 +15,7 @@
     using FakeItEasy;
     using NotificationConsent;
     using Prsd.Core;
+    using Prsd.Core.Domain;
     using TestHelpers.DomainFakes;
     using TestHelpers.Helpers;
     using Xunit;
@@ -32,6 +33,7 @@
         private readonly IWorkingDayCalculator workingDayCalculator;
         private readonly INotificationApplicationRepository notificationApplicationRepository;
         private readonly IMovementDateValidator dateValidator;
+        private readonly Guid userId = new Guid("E45663E5-1BD0-4AC3-999B-0E9975BE86FC");
 
         public MovementFactoryTests()
         {
@@ -63,7 +65,8 @@
                 numberOfActiveLoads,
                 consentPeriod,
                 dateValidator,
-                financialGuaranteeRepository);
+                financialGuaranteeRepository,
+                A.Fake<IUserContext>());
         }
 
         [Fact]
@@ -245,7 +248,7 @@
 
             for (int i = 0; i < n; i++)
             {
-                movements.Add(new Movement(i + 1, NotificationId, Today));
+                movements.Add(new Movement(i + 1, NotificationId, Today, userId));
             }
 
             return movements;
