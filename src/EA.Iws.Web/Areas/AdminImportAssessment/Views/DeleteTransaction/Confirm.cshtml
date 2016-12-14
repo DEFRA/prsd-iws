@@ -9,8 +9,32 @@
 <h1 class="heading-large">@Resource.MainHeading</h1>
 
 <div class="form-group">
-    
+    <p>@Resource.subTitle</p>
+    <div class="gird-row">
+        <div class="column-one-third bold-small">
+            @Resource.TransactionType </br>
+            @Resource.Date  </br>
+            @Resource.Amount  </br>
+            @Resource.Type </br>
+            @Resource.Receipt  </br>
+            @Resource.Comments  </br>
+        </div>
+        <div class="column-two-thirds">
+            @Model.Transaction </br>
+            @Html.Gds().DisplayShortDateFor(m => Model.Date) </br>
+            @Model.Amount.ToString("C") </br>
+            @Model.Type </br>
+            @Model.ReceiptNumber </br>
+            @(Model.Comments == string.Empty || Model.Comments == null ? "None" : Model.Comments) </br>
+        </div>
+    </div>
 </div>
+
+<div class="form-group">
+    @Html.ActionLink(Resource.CancelLink, "Index", "AccountManagement")
+</div>
+
+    @Html.ActionLink(Resource.DeleteLink, "Delete", "DeleteTransaction", new { transactionId = Model.TransactionId }, new { @class = "button" })
 
 
 @section menu {

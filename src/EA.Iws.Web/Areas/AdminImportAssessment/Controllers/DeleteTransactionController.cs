@@ -38,11 +38,21 @@
         }
 
         [HttpGet]
-        public ActionResult Confirm(Guid id, Guid transactionId)
+        public async Task<ActionResult> Confirm(Guid id, Guid transactionId)
         {
-            var model = new ConfirmViewModel(id, transactionId);
+            var transaction = await mediator.SendAsync(new GetTransactionById(transactionId));
+
+            var model = new ConfirmViewModel(id, transaction);
 
             return View(model);
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> Delete(Guid id, Guid transactionId)
+        {
+            await mediator.SendAsync(new DeleteTransaction(transactionId));
+
+            return RedirectToAction("Index", "AccountManagement");
         }
     }
 }
