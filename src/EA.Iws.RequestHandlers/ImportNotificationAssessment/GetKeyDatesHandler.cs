@@ -18,22 +18,30 @@
         private readonly DecisionRequiredBy decisionRequiredBy;
         private readonly IImportNotificationTransactionCalculator transactionCalculator;
         private readonly IImportNotificationAssessmentDecisionRepository notificationAssessmentDecisionRepository;
+        private readonly IImportNotificationRepository notificationRepository;
+        private readonly IConsultationRepository consultationRepository;
 
         public GetKeyDatesHandler(IImportNotificationAssessmentRepository notificationAssessmentRepository,
             IInterimStatusRepository interimStatusRepository,
             DecisionRequiredBy decisionRequiredBy,
             IImportNotificationTransactionCalculator transactionCalculator,
-            IImportNotificationAssessmentDecisionRepository notificationAssessmentDecisionRepository)
+            IImportNotificationAssessmentDecisionRepository notificationAssessmentDecisionRepository,
+            IImportNotificationRepository notificationRepository,
+            IConsultationRepository consultationRepository)
         {
             this.notificationAssessmentRepository = notificationAssessmentRepository;
             this.interimStatusRepository = interimStatusRepository;
             this.decisionRequiredBy = decisionRequiredBy;
             this.transactionCalculator = transactionCalculator;
             this.notificationAssessmentDecisionRepository = notificationAssessmentDecisionRepository;
+            this.notificationRepository = notificationRepository;
+            this.consultationRepository = consultationRepository;
         }
 
         public async Task<KeyDatesData> HandleAsync(GetKeyDates message)
         {
+            var notification = await notificationRepository.Get(message.ImportNotificationId);
+            var consultation = await consultationRepository.GetByNotificationId(message.ImportNotificationId);
             var assessment = await notificationAssessmentRepository.GetByNotification(message.ImportNotificationId);
             var interimStatus = await interimStatusRepository.GetByNotificationId(message.ImportNotificationId);
             var decisions = await notificationAssessmentDecisionRepository.GetByImportNotificationId(message.ImportNotificationId);
@@ -52,7 +60,9 @@
                 IsInterim = interimStatus.IsInterim,
                 FileClosedDate = assessment.Dates.FileClosedDate,
                 ArchiveReference = assessment.Dates.ArchiveReference,
-                DecisionHistory = decisions ?? new List<NotificationAssessmentDecision>()
+                DecisionHistory = decisions ?? new List<NotificationAssessmentDecision>(),
+                CompententAuthority = notification.CompetentAuthority,
+                IsLocalAreaSet = consultation != null && consultation.LocalAreaId.HasValue
             };
         }
     }

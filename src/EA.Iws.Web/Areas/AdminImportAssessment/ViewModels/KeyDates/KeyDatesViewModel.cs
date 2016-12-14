@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using Core.ImportNotificationAssessment;
+    using Core.Notification;
     using Core.NotificationAssessment;
     using Prsd.Core;
     using Web.ViewModels.Shared;
@@ -37,6 +38,8 @@
             IsInterim = keyDates.IsInterim;
             NotificationFileClosedDate = new OptionalDateInputViewModel(keyDates.FileClosedDate, true);
             ArchiveReference = keyDates.ArchiveReference;
+            IsAreaAssigned = keyDates.IsLocalAreaSet;
+            CompetentAuthority = keyDates.CompententAuthority;
         }
 
         public Guid NotificationId { get; set; }
@@ -75,6 +78,10 @@
 
         [Display(Name = "ArchiveReference", ResourceType = typeof(KeyDatesViewModelResources))]
         public string ArchiveReference { get; set; }
+
+        public UKCompetentAuthority CompetentAuthority { get; set; }
+
+        public bool IsAreaAssigned { get; set; }
 
         public bool CommencementComplete
         {
