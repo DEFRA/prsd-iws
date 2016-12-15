@@ -8,7 +8,7 @@
     using Requests.ImportNotificationAssessment.Transactions;
     using ViewModels.DeleteTransaction;
 
-    [Authorize(Roles = "internal")]
+    [AuthorizeActivity(typeof(DeleteTransaction))]
     public class DeleteTransactionController : Controller
     {
         private readonly IMediator mediator;
@@ -23,13 +23,6 @@
         [HttpGet]
         public async Task<ActionResult> Index(Guid id)
         {
-            var canDeleteTransaction = await authorizationService.AuthorizeActivity(typeof(DeleteTransaction));
-
-            if (!canDeleteTransaction)
-            {
-                return RedirectToAction("Index", "AccountManagement");
-            }
-
             var transactions = await mediator.SendAsync(new GetImportNotificationTransactions(id));
 
             var model = new DeleteTransactionViewModel(id, transactions);
