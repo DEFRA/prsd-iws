@@ -21,21 +21,39 @@
         {
             return await context.Database.SqlQuery<ImportStats>(
                 @"SELECT
-                    [QuantityReceived],
-                    [WasteCategory],
-                    [WasteStreams],
-                    [CountryOfExport],
-                    [TransitStates],
-                    [BaselOecd],
-                    [EWC],
-                    [Hcode],
-                    [HcodeDescription],
-                    [UN],
-                    [RCode],
-                    [DCode]
-                FROM [Reports].[ImportStats]
-                WHERE [ReceivedDate] BETWEEN @from AND @to
-                AND [CompetentAuthority] = @ca",
+                      SUM(QuantityReceived) AS [QuantityReceived],
+                      CASE 
+                          WHEN YCode IS NULL AND BaselOecd IS NULL THEN 'BASEL WASTE, Y CODE UNASSIGNED'
+                          WHEN YCode IS NULL AND BaselOecd LIKE 'A%' THEN 'Y CODE NOT APPLICABLE - NON HAZ WASTE'
+                          ELSE YCode
+                      END AS [WasteCategory],
+                      [WasteStreams],
+                      [CountryOfExport],
+                      [TransitStates],
+                      [BaselOecd],
+                      [EWC],
+                      [Hcode],
+                      [HcodeDescription],
+                      [UN],
+                      [RCode],
+                      [DCode]
+                  FROM
+                      [Reports].[ImportStats]
+                  WHERE
+                      [ReceivedDate] BETWEEN @from AND @to
+                      AND [CompetentAuthority] = @ca
+                  GROUP BY
+                      [YCode],
+                      [WasteStreams],
+                      [CountryOfExport],
+                      [TransitStates],
+                      [BaselOecd],
+                      [EWC],
+                      [Hcode],
+                      [HcodeDescription],
+                      [UN],
+                      [RCode],
+                      [DCode]",
                 new SqlParameter("@from", from),
                 new SqlParameter("@to", to),
                 new SqlParameter("@ca", (int)competentAuthority)).ToArrayAsync();
