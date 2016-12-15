@@ -124,7 +124,7 @@ namespace EA.Iws.Web.Areas.AdminImportAssessment.Views.DeleteTransaction {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The payment you have selected to be deleted is:.
+        ///   Looks up a localized string similar to The details of the payment you have selected to be deleted are:.
         /// </summary>
         public static string subTitle {
             get {

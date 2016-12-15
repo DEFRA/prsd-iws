@@ -139,7 +139,7 @@
     <value>Receipt number:</value>
   </data>
   <data name="subTitle" xml:space="preserve">
-    <value>The payment you have selected to be deleted is:</value>
+    <value>The details of the payment you have selected to be deleted are:</value>
   </data>
   <data name="TransactionType" xml:space="preserve">
     <value>Type:</value>
