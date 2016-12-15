@@ -35,5 +35,12 @@
         {
             return await context.NotificationTransactions.Where(t => t.Id == transactionId).SingleAsync();
         }
+
+        public async Task DeleteById(Guid transactionId)
+        {
+            var transaction = await context.NotificationTransactions.Where(t => t.Id == transactionId).SingleAsync();
+
+            context.DeleteOnCommit(transaction);
+        }
     }
 }

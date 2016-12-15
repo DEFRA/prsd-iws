@@ -12,5 +12,7 @@
         Task<IList<NotificationTransaction>> GetTransactions(Guid notificationId);
 
         Task<NotificationTransaction> GetById(Guid transactionId);
+
+        Task DeleteById(Guid transactionId);
     }
 }
