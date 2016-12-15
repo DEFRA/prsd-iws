@@ -37,7 +37,7 @@
         {
             var transaction = await context.ImportNotificationTransactions.Where(t => t.Id == transactionId).SingleAsync();
 
-            context.ImportNotificationTransactions.Remove(transaction);
+            context.DeleteOnCommit(transaction);
         }
 
         public async Task<ImportNotificationTransaction> GetById(Guid transactionId)
