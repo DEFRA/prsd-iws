@@ -11,12 +11,10 @@
     internal class GetTransactionByIdHandler : IRequestHandler<GetTransactionById, TransactionRecordData>
     {
         private readonly IImportNotificationTransactionRepository repository;
-        private readonly ImportNotificationContext context;
 
-        public GetTransactionByIdHandler(IImportNotificationTransactionRepository repository, ImportNotificationContext context)
+        public GetTransactionByIdHandler(IImportNotificationTransactionRepository repository)
         {
             this.repository = repository;
-            this.context = context;
         }
 
         public async Task<TransactionRecordData> HandleAsync(GetTransactionById message)
