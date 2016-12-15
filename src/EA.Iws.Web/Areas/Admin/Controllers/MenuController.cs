@@ -48,11 +48,16 @@
                 authorizationService.AuthorizeActivity(typeof(GetExistingInternalUsers)))
                 .Result;
 
+            var showDeleteNotificationLink = Task.Run(() =>
+                authorizationService.AuthorizeActivity(typeof(DeleteExportNotification)))
+                .Result;
+
             var model = new AdminLinksViewModel
             {
                 ShowApproveNewInternalUserLink = showApproveNewInternalUserLink,
                 ShowAddNewEntryOrExitPointLink = showAddNewEntryOrExitPointLink,
-                ShowManageExistingInternalUserLink = showManageExistingInternalUserLink
+                ShowManageExistingInternalUserLink = showManageExistingInternalUserLink,
+                ShowDeleteNotificationLink = showDeleteNotificationLink
             };
 
             if (section.HasValue)

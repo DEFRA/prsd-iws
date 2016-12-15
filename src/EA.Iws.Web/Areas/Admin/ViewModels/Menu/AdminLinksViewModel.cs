@@ -10,6 +10,8 @@
 
         public bool ShowAddNewEntryOrExitPointLink { get; set; }
 
+        public bool ShowDeleteNotificationLink { get; set; }
+
         public AdminHomeNavigationSection ActiveSection { get; set; }
     }
 }

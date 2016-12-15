@@ -13,4 +13,8 @@
     {
         <li>@Html.ActionLink("New ports or border crossings", "Index", "EntryOrExitPoint", new { area = "Admin" }, null)</li>
     }
+    @if (Model.ShowDeleteNotificationLink)
+    {
+        <li>@Html.ActionLink("Delete a notification", "Index", "DeleteNotification", new { area = "Admin" }, null)</li>
+    }
 </ul>
