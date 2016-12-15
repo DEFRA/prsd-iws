@@ -26,11 +26,16 @@
             }, "Value", "Key", selectedValue);
         }
 
-        public IList<ManageUserViewModel> Users { get; set; }
+        public IList<InternalUserData> Users { get; set; }
 
         public ExistingUsersListViewModel()
         {
-            Users = new List<ManageUserViewModel>();
+            Users = new List<InternalUserData>();
+        }
+
+        public ExistingUsersListViewModel(IEnumerable<InternalUserData> users)
+        {
+            Users = new List<InternalUserData>(users);
         }
     }
 }

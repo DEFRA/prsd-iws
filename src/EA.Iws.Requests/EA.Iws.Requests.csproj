@@ -102,7 +102,8 @@
     <Compile Include="Admin\UserAdministration\GetUserByExportNotificationId.cs" />
     <Compile Include="Admin\UserAdministration\GetUserById.cs" />
     <Compile Include="Admin\UserAdministration\SetUserApprovals.cs" />
-    <Compile Include="Admin\UserAdministration\UpdateInternalUser.cs" />
+    <Compile Include="Admin\UserAdministration\UpdateInternalUserRole.cs" />
+    <Compile Include="Admin\UserAdministration\UpdateInternalUserStatus.cs" />
     <Compile Include="Annexes\DeleteAnnexFile.cs" />
     <Compile Include="Annexes\GetAnnexFile.cs" />
     <Compile Include="Annexes\SetWasteCompositionAnnex.cs" />

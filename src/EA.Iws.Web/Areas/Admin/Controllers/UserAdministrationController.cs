@@ -51,25 +51,41 @@
         }
 
         [HttpGet]
-        public async Task<ActionResult> ManageExistingUsers()
+        public async Task<ActionResult> ChangeUserRole()
         {
             var users = await mediator.SendAsync(new GetExistingInternalUsers());
 
-            var model = new ExistingUsersListViewModel
-            {
-                Users = users.Select(u => new ManageUserViewModel(u)).ToList()
-            };
+            var model = new ExistingUsersListViewModel(users);
 
             return View(model);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> ManageExistingUsers(ManageUserViewModel model)
+        public async Task<ActionResult> ChangeUserRole(ChangeUserRoleViewModel model)
         {
-            await mediator.SendAsync(new UpdateInternalUser(model.UserId, model.AssignedStatus, model.AssignedRole));
+            await mediator.SendAsync(new UpdateInternalUserRole(model.UserId, model.Role));
 
-            return RedirectToAction("ManageExistingUsers");
+            return RedirectToAction("ChangeUserRole");
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> ChangeUserStatus()
+        {
+            var users = await mediator.SendAsync(new GetExistingInternalUsers());
+
+            var model = new ExistingUsersListViewModel(users);
+
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> ChangeUserStatus(ChangeUserStatusViewModel model)
+        {
+            await mediator.SendAsync(new UpdateInternalUserStatus(model.UserId, model.Status));
+
+            return RedirectToAction("ChangeUserStatus");
         }
     }
 }

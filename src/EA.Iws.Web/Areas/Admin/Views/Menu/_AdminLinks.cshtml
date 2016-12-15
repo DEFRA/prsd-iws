@@ -6,7 +6,8 @@
     }
     @if (Model.ShowManageExistingInternalUserLink)
     {
-        <li>@Html.ActionLink("Manage existing users", "ManageExistingUsers", "UserAdministration", new { area = "Admin" }, null)</li>
+        <li>@Html.ActionLink("Change user role", "ChangeUserRole", "UserAdministration", new { area = "Admin" }, null)</li>
+        <li>@Html.ActionLink("Change user status", "ChangeUserStatus", "UserAdministration", new { area = "Admin" }, null)</li>
     }
     @if (Model.ShowAddNewEntryOrExitPointLink)
     {

@@ -482,9 +482,10 @@
     <Content Include="Areas\Reports\Views\ExportMovements\Index.cshtml" />
     <Content Include="Areas\NotificationMovements\Views\Create\NoApprovedFinancialGuarantee.cshtml" />
     <Content Include="Areas\AdminImportAssessment\Views\MarkAsInterim\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\UserAdministration\ManageExistingUsers.cshtml" />
+    <Content Include="Areas\Admin\Views\UserAdministration\ChangeUserRole.cshtml" />
     <Content Include="Areas\AdminImportAssessment\Views\DeleteTransaction\Index.cshtml" />
     <Content Include="Areas\AdminImportAssessment\Views\DeleteTransaction\Confirm.cshtml" />
+    <Content Include="Areas\Admin\Views\UserAdministration\ChangeUserStatus.cshtml" />
     <None Include="Content\iws\_panels.scss" />
     <Content Include="Content\nta-extended.css" />
     <Content Include="Content\select2\select2-spinner.gif" />
@@ -1558,8 +1559,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>SuccessResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Areas\Admin\ViewModels\UserAdministration\ChangeUserStatusViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\UserAdministration\ExistingUsersListViewModel.cs" />
-    <Compile Include="Areas\Admin\ViewModels\UserAdministration\ManageUserViewModel.cs" />
+    <Compile Include="Areas\Admin\ViewModels\UserAdministration\ChangeUserRoleViewModel.cs" />
     <Compile Include="Areas\Admin\Views\AdvancedSearch\IndexResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
