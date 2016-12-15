@@ -368,6 +368,7 @@
     <Compile Include="Mappings\Movement\MovementMap.cs" />
     <Compile Include="Mappings\NotificationAssessment\AccountManageDataMap.cs" />
     <Compile Include="Mappings\NotificationAssessment\ConsultationMap.cs" />
+    <Compile Include="Mappings\NotificationAssessment\NotificationTransactionMap.cs" />
     <Compile Include="Mappings\Reports\DataImportNotificationMap.cs" />
     <Compile Include="Mappings\Reports\DataExportNotificationMap.cs" />
     <Compile Include="Mappings\Reports\ImportStatsMap.cs" />
@@ -388,6 +389,7 @@
     <Compile Include="Movement\GetNotificationNumberByMovementIdHandler.cs" />
     <Compile Include="NotificationAssessment\GetChangeNumberOfShipmentConfrimationDataHandler.cs" />
     <Compile Include="NotificationAssessment\GetChargeDueHandler.cs" />
+    <Compile Include="NotificationAssessment\GetExportNotificationTransactionsHandler.cs" />
     <Compile Include="NotificationAssessment\GetInterimStatusHandler.cs" />
     <Compile Include="NotificationAssessment\GetOriginalNumberOfShipmentsHandler.cs" />
     <Compile Include="NotificationAssessment\MarkAsInterimHandler.cs" />

@@ -189,6 +189,7 @@
     <Compile Include="Movement\GetNotificationNumberByMovementId.cs" />
     <Compile Include="NotificationAssessment\GetChangeNumberOfShipmentConfrimationData.cs" />
     <Compile Include="NotificationAssessment\GetChargeDue.cs" />
+    <Compile Include="NotificationAssessment\GetExportNotificationTransactions.cs" />
     <Compile Include="NotificationAssessment\GetInterimStatus.cs" />
     <Compile Include="NotificationAssessment\GetOriginalNumberOfShipments.cs" />
     <Compile Include="NotificationAssessment\MarkAsInterim.cs" />
