@@ -1,18 +1,17 @@
-﻿namespace EA.Iws.RequestHandlers.ImportNotificationAssessment.Transactions
+﻿namespace EA.Iws.RequestHandlers.NotificationAssessment
 {
     using System.Threading.Tasks;
     using Core.NotificationAssessment;
     using Core.Shared;
-    using DataAccess;
-    using Domain.ImportNotificationAssessment.Transactions;
+    using Domain.NotificationAssessment;
     using Prsd.Core.Mediator;
-    using Requests.ImportNotificationAssessment.Transactions;
+    using Requests.NotificationAssessment;
 
     internal class GetTransactionByIdHandler : IRequestHandler<GetTransactionById, TransactionRecordData>
     {
-        private readonly IImportNotificationTransactionRepository repository;
+        private readonly INotificationTransactionRepository repository;
 
-        public GetTransactionByIdHandler(IImportNotificationTransactionRepository repository)
+        public GetTransactionByIdHandler(INotificationTransactionRepository repository)
         {
             this.repository = repository;
         }

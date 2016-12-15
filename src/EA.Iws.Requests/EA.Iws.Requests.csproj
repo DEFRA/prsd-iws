@@ -187,10 +187,13 @@
     <Compile Include="Movement\Complete\RecordOperationCompleteInternal.cs" />
     <Compile Include="Movement\GetNewMovementIdsByNotificationId.cs" />
     <Compile Include="Movement\GetNotificationNumberByMovementId.cs" />
+    <Compile Include="NotificationAssessment\DeleteTransaction.cs" />
     <Compile Include="NotificationAssessment\GetChangeNumberOfShipmentConfrimationData.cs" />
     <Compile Include="NotificationAssessment\GetChargeDue.cs" />
+    <Compile Include="NotificationAssessment\GetExportNotificationTransactions.cs" />
     <Compile Include="NotificationAssessment\GetInterimStatus.cs" />
     <Compile Include="NotificationAssessment\GetOriginalNumberOfShipments.cs" />
+    <Compile Include="NotificationAssessment\GetTransactionById.cs" />
     <Compile Include="NotificationAssessment\MarkAsInterim.cs" />
     <Compile Include="NotificationAssessment\SetNewNumberOfShipments.cs" />
     <Compile Include="NotificationMovements\Capture\GetLatestMovementNumber.cs" />
