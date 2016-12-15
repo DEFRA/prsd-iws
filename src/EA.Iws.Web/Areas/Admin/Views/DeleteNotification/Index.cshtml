@@ -1,1 +1,28 @@
-﻿What notification do you want to delete?
+﻿@model EA.Iws.Web.Areas.Admin.ViewModels.DeleteNotification.IndexViewModel
+@using Resources = EA.Iws.Web.Areas.Admin.Views.DeleteNotification.IndexResources
+
+@{
+    ViewBag.Title = Resources.Title;
+}
+
+
+<div class="grid-row">
+    <div class="column-two-thirds">
+        <h1 class="heading-large">@Resources.MainHeading</h1>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            @Html.Gds().ValidationSummary()
+
+            <div class="form-group @Html.Gds().FormGroupClass(m => m.NotificationNumber)">
+                @Html.Gds().LabelFor(m => m.NotificationNumber)
+                @Html.Gds().ValidationMessageFor(m => m.NotificationNumber)
+                @Html.Gds().TextBoxFor(m => m.NotificationNumber)
+                &nbsp;&nbsp;&nbsp;<button type="submit" class="button">@Resources.ButtonText</button>
+            </div>
+        }
+
+        @Html.ActionLink(@Resources.HomeLinkText, "Index", "Home")
+    </div>
+</div>
