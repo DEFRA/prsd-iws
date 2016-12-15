@@ -26,7 +26,7 @@
                 <tr>
                     <td class="font-xsmall">@Model.Users[i].FullName</td>
                     <td class="font-xsmall">@Model.Users[i].Email</td>
-                    <td>@Model.Users[i].Status</td>
+                    <td class="font-xsmall">@Model.Users[i].Status</td>
                     <td>@Html.DropDownList("Role", Model.GetUserRolesList(Model.Users[i].Role), new { id = string.Format("Role{0}", i) })</td>
                     <td><button type="submit">Update</button></td>
                 </tr>
