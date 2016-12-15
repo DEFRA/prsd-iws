@@ -10,5 +10,7 @@
         void Add(NotificationTransactionData notificationTransactionData);
 
         Task<IList<NotificationTransaction>> GetTransactions(Guid notificationId);
+
+        Task<NotificationTransaction> GetById(Guid transactionId);
     }
 }

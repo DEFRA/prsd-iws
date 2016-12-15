@@ -192,6 +192,7 @@
     <Compile Include="NotificationAssessment\GetExportNotificationTransactions.cs" />
     <Compile Include="NotificationAssessment\GetInterimStatus.cs" />
     <Compile Include="NotificationAssessment\GetOriginalNumberOfShipments.cs" />
+    <Compile Include="NotificationAssessment\GetTransactionById.cs" />
     <Compile Include="NotificationAssessment\MarkAsInterim.cs" />
     <Compile Include="NotificationAssessment\SetNewNumberOfShipments.cs" />
     <Compile Include="NotificationMovements\Capture\GetLatestMovementNumber.cs" />
