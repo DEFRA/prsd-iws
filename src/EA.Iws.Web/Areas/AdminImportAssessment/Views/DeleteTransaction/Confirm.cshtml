@@ -34,8 +34,15 @@
     @Html.ActionLink(Resource.CancelLink, "Index", "AccountManagement")
 </div>
 
-    @Html.ActionLink(Resource.DeleteLink, "Delete", "DeleteTransaction", new { transactionId = Model.TransactionId }, new { @class = "button" })
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(m => m.TransactionId)
 
+    <div class="form-group">
+        <button class="button" type="submit">@Resource.DeleteLink</button>
+    </div>
+}
 
 @section menu {
     @Html.Action("ImportNavigation", "Menu", new { area = "Admin", section = ImportNavigationSection.Finance })

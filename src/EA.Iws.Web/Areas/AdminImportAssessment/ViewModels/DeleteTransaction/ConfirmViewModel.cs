@@ -22,6 +22,10 @@
 
         public string Comments { get; set; }
 
+        public ConfirmViewModel()
+        {
+        }
+
         public ConfirmViewModel(Guid notificationId, TransactionRecordData transaction)
         {
             NotificationId = notificationId;

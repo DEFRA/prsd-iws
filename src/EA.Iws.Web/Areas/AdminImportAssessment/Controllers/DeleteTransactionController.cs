@@ -40,10 +40,11 @@
             return View(model);
         }
 
-        [HttpGet]
-        public async Task<ActionResult> Delete(Guid id, Guid transactionId)
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Confirm(ConfirmViewModel model)
         {
-            await mediator.SendAsync(new DeleteTransaction(transactionId));
+            await mediator.SendAsync(new DeleteTransaction(model.TransactionId));
 
             return RedirectToAction("Index", "AccountManagement");
         }
