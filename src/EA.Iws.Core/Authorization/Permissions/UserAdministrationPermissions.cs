@@ -15,5 +15,7 @@
         public const string CanUpdateInterimStatus = "Can Update Interim Status";
 
         public const string CanManageExistingInternalUser = "Can Manage Existing Internal User";
+        
+        public const string CanDeleteTransaction = "Can Delete Transaction";
     }
 }

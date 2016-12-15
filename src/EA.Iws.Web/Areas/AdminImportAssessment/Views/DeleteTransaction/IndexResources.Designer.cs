@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace EA.Iws.Web.Areas.AdminImportAssessment.Views.AccountManagement {
+namespace EA.Iws.Web.Areas.AdminImportAssessment.Views.DeleteTransaction {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace EA.Iws.Web.Areas.AdminImportAssessment.Views.AccountManagement {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EA.Iws.Web.Areas.AdminImportAssessment.Views.AccountManagement.IndexResources", typeof(IndexResources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EA.Iws.Web.Areas.AdminImportAssessment.Views.DeleteTransaction.IndexResources", typeof(IndexResources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,101 +61,20 @@ namespace EA.Iws.Web.Areas.AdminImportAssessment.Views.AccountManagement {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Total paid.
+        ///   Looks up a localized string similar to Delete.
         /// </summary>
-        public static string BalanceHeading {
+        public static string DeleteLink {
             get {
-                return ResourceManager.GetString("BalanceHeading", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Comments.
-        /// </summary>
-        public static string CommentSectionHeading {
-            get {
-                return ResourceManager.GetString("CommentSectionHeading", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to £.
-        /// </summary>
-        public static string CurrencySymbol {
-            get {
-                return ResourceManager.GetString("CurrencySymbol", resourceCulture);
+                return ResourceManager.GetString("DeleteLink", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Delete a payment.
         /// </summary>
-        public static string DeleteTransaction {
-            get {
-                return ResourceManager.GetString("DeleteTransaction", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Enter a payment.
-        /// </summary>
-        public static string EnterPaymentHeading {
-            get {
-                return ResourceManager.GetString("EnterPaymentHeading", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Enter a refund.
-        /// </summary>
-        public static string EnterRefundHeading {
-            get {
-                return ResourceManager.GetString("EnterRefundHeading", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Payment history.
-        /// </summary>
-        public static string HistoryHeading {
-            get {
-                return ResourceManager.GetString("HistoryHeading", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Go to Key dates.
-        /// </summary>
-        public static string KeyDatesLinkText {
-            get {
-                return ResourceManager.GetString("KeyDatesLinkText", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Finance management.
-        /// </summary>
         public static string MainHeading {
             get {
                 return ResourceManager.GetString("MainHeading", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Amount remaining.
-        /// </summary>
-        public static string RemainingHeading {
-            get {
-                return ResourceManager.GetString("RemainingHeading", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Status: .
-        /// </summary>
-        public static string StatusLabel {
-            get {
-                return ResourceManager.GetString("StatusLabel", resourceCulture);
             }
         }
         
@@ -169,29 +88,11 @@ namespace EA.Iws.Web.Areas.AdminImportAssessment.Views.AccountManagement {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Comments.
-        /// </summary>
-        public static string TableHeaderComments {
-            get {
-                return ResourceManager.GetString("TableHeaderComments", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Date.
         /// </summary>
         public static string TableHeaderDate {
             get {
                 return ResourceManager.GetString("TableHeaderDate", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Receipt.
-        /// </summary>
-        public static string TableHeaderReceipt {
-            get {
-                return ResourceManager.GetString("TableHeaderReceipt", resourceCulture);
             }
         }
         
@@ -214,11 +115,11 @@ namespace EA.Iws.Web.Areas.AdminImportAssessment.Views.AccountManagement {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Total billable for notification.
+        ///   Looks up a localized string similar to Payment history.
         /// </summary>
-        public static string TotalHeading {
+        public static string TableHeading {
             get {
-                return ResourceManager.GetString("TotalHeading", resourceCulture);
+                return ResourceManager.GetString("TableHeading", resourceCulture);
             }
         }
     }

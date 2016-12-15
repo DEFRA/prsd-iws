@@ -32,5 +32,17 @@
         {
             context.ImportNotificationTransactions.Add(transaction);
         }
+
+        public async Task DeleteById(Guid transactionId)
+        {
+            var transaction = await context.ImportNotificationTransactions.Where(t => t.Id == transactionId).SingleAsync();
+
+            context.DeleteOnCommit(transaction);
+        }
+
+        public async Task<ImportNotificationTransaction> GetById(Guid transactionId)
+        {
+            return await context.ImportNotificationTransactions.Where(t => t.Id == transactionId).SingleAsync();
+        }
     }
 }

@@ -1,0 +1,60 @@
+﻿@model EA.Iws.Web.Areas.AdminImportAssessment.ViewModels.DeleteTransaction.ConfirmViewModel
+@using Resource = EA.Iws.Web.Areas.AdminImportAssessment.Views.DeleteTransaction.ConfirmResources
+
+@{
+    ViewBag.Title = Resource.MainHeading;
+}
+
+<h1 class="heading-large">@Resource.MainHeading</h1>
+
+<div class="form-group">
+    <p>@Resource.subTitle</p>
+
+    <table>
+        <tbody>
+        <tr>
+            <td class="bold-small">@Resource.TransactionType</td>
+            <td>@Model.Transaction</td>
+        </tr>
+        <tr>
+            <td class="bold-small">@Resource.Date</td>
+            <td>@Html.Gds().DisplayShortDateFor(m => Model.Date)</td>
+        </tr>
+        <tr>
+            <td class="bold-small">@Resource.Amount</td>
+            <td>@Model.Amount.ToString("C")</td>
+        </tr>
+        <tr>
+            <td class="bold-small">@Resource.Type.ToNonBreakingString()</td>
+            <td>@Model.Type</td>
+        </tr>
+        <tr>
+            <td class="bold-small">@Resource.Receipt.ToNonBreakingString()</td>
+            <td>@Model.ReceiptNumber</td>
+        </tr>
+        <tr>
+            <td class="bold-small">@Resource.Comments</td>
+            <td>@(Model.Comments == string.Empty || Model.Comments == null ? "None" : Model.Comments)</td>
+        </tr>
+
+        </tbody>
+    </table>
+</div>
+
+<div class="form-group">
+    @Html.ActionLink(Resource.CancelLink, "Index", "AccountManagement")
+</div>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(m => m.TransactionId)
+
+    <div class="form-group">
+        <button class="button" type="submit">@Resource.DeleteLink</button>
+    </div>
+}
+
+@section menu {
+    @Html.Action("ImportNavigation", "Menu", new { area = "Admin", section = ImportNavigationSection.Finance })
+}

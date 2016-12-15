@@ -117,58 +117,34 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="BalanceHeading" xml:space="preserve">
-    <value>Total paid</value>
+  <data name="Amount" xml:space="preserve">
+    <value>Amount:</value>
   </data>
-  <data name="CommentSectionHeading" xml:space="preserve">
-    <value>Comments</value>
+  <data name="CancelLink" xml:space="preserve">
+    <value>Do not delete payment and return to finance management</value>
   </data>
-  <data name="CurrencySymbol" xml:space="preserve">
-    <value>£</value>
+  <data name="Comments" xml:space="preserve">
+    <value>Comments:</value>
   </data>
-  <data name="DeleteTransaction" xml:space="preserve">
-    <value>Delete a payment</value>
+  <data name="Date" xml:space="preserve">
+    <value>Date:</value>
   </data>
-  <data name="EnterPaymentHeading" xml:space="preserve">
-    <value>Enter a payment</value>
-  </data>
-  <data name="EnterRefundHeading" xml:space="preserve">
-    <value>Enter a refund</value>
-  </data>
-  <data name="HistoryHeading" xml:space="preserve">
-    <value>Payment history</value>
-  </data>
-  <data name="KeyDatesLinkText" xml:space="preserve">
-    <value>Go to Key dates</value>
+  <data name="DeleteLink" xml:space="preserve">
+    <value>Delete payment</value>
   </data>
   <data name="MainHeading" xml:space="preserve">
-    <value>Finance management</value>
+    <value>Confirm payment deletion</value>
   </data>
-  <data name="RemainingHeading" xml:space="preserve">
-    <value>Amount remaining</value>
+  <data name="Receipt" xml:space="preserve">
+    <value>Receipt number:</value>
   </data>
-  <data name="StatusLabel" xml:space="preserve">
-    <value>Status: </value>
+  <data name="subTitle" xml:space="preserve">
+    <value>The details of the payment you have selected to be deleted are:</value>
   </data>
-  <data name="TableHeaderAmount" xml:space="preserve">
-    <value>Amount</value>
+  <data name="TransactionType" xml:space="preserve">
+    <value>Type:</value>
   </data>
-  <data name="TableHeaderComments" xml:space="preserve">
-    <value>Comments</value>
-  </data>
-  <data name="TableHeaderDate" xml:space="preserve">
-    <value>Date</value>
-  </data>
-  <data name="TableHeaderReceipt" xml:space="preserve">
-    <value>Receipt</value>
-  </data>
-  <data name="TableHeaderTranaction" xml:space="preserve">
-    <value>Transaction</value>
-  </data>
-  <data name="TableHeaderType" xml:space="preserve">
-    <value>Type</value>
-  </data>
-  <data name="TotalHeading" xml:space="preserve">
-    <value>Total billable for notification</value>
+  <data name="Type" xml:space="preserve">
+    <value>Payment method:</value>
   </data>
 </root>
