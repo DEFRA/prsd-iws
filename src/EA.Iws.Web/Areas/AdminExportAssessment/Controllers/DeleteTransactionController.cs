@@ -1,14 +1,14 @@
-﻿namespace EA.Iws.Web.Areas.AdminImportAssessment.Controllers
+﻿namespace EA.Iws.Web.Areas.AdminExportAssessment.Controllers
 {
     using System;
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Infrastructure.Authorization;
     using Prsd.Core.Mediator;
-    using Requests.ImportNotificationAssessment.Transactions;
+    using Requests.NotificationAssessment;
     using ViewModels.DeleteTransaction;
 
-    [AuthorizeActivity(typeof(DeleteTransaction))]
+    [AuthorizeActivity(typeof(Requests.ImportNotificationAssessment.Transactions.DeleteTransaction))]
     public class DeleteTransactionController : Controller
     {
         private readonly IMediator mediator;
@@ -21,7 +21,7 @@
         [HttpGet]
         public async Task<ActionResult> Index(Guid id)
         {
-            var transactions = await mediator.SendAsync(new GetImportNotificationTransactions(id));
+            var transactions = await mediator.SendAsync(new GetExportNotificationTransactions(id));
 
             var model = new DeleteTransactionViewModel(id, transactions);
 

@@ -1,0 +1,61 @@
+﻿@model EA.Iws.Web.Areas.AdminExportAssessment.ViewModels.DeleteTransaction.DeleteTransactionViewModel
+@using EA.Iws.Core.NotificationAssessment
+@using EA.Iws.Core.Shared
+@using Resource = EA.Iws.Web.Areas.AdminExportAssessment.Views.DeleteTransaction.IndexResources
+@using EnumHelper = EA.Prsd.Core.Helpers.EnumHelper
+
+@{
+    ViewBag.Title = Resource.MainHeading;
+}
+
+<h1 class="heading-large">@Resource.MainHeading</h1>
+
+<h2 class="heading-medium">@Resource.TableHeading</h2>
+
+<div class="form-group">
+    <table title=@Resource.TableHeading>
+        <thead>
+        <tr>
+            <th>@Resource.TableHeaderTranaction</th>
+            <th>@Resource.TableHeaderDate</th>
+            <th>@Resource.TableHeaderAmount</th>
+            <th>@Resource.TableHeaderType</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        @{
+            for (var i = 0; i < Model.Transactions.Count(); i++)
+            {
+                var trans = Model.Transactions[i].Transaction;
+
+                Enum type;
+                if (trans == TransactionType.Refund)
+                {
+                    type = TransactionType.Refund;
+                }
+                else
+                {
+                    type = (PaymentMethod)Model.Transactions[i].Type;
+                }
+                <tr>
+                    <td>@trans</td>
+                    <td>@Model.Transactions[i].Date.ToString("dd/MM/yyyy")</td>
+                    <td>@Model.Transactions[i].Amount.ToString("C")</td>
+                    <td>@EnumHelper.GetDescription(type)</td>
+                    <td>
+                        @if (trans == TransactionType.Payment)
+                        {
+                            @Html.ActionLink(Resource.DeleteLink, "Confirm", "DeleteTransaction", new { id = Model.NotificationId, transactionId = Model.Transactions[i].TransactionId }, null)
+                        }
+                    </td>
+                </tr>
+            }
+        }
+        </tbody>
+    </table>
+</div>
+
+@section menu {
+    @Html.Action("ExportNavigation", "Menu", new { area = "Admin", section = ExportNavigationSection.Finance })
+}

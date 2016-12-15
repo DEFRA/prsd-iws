@@ -5,6 +5,7 @@
     using System.Web.Mvc;
     using Core.NotificationAssessment;
     using Core.Shared;
+    using Infrastructure.Authorization;
     using Prsd.Core.Mediator;
     using Requests.NotificationAssessment;
     using ViewModels.AccountManagement;
@@ -15,10 +16,12 @@
     public class AccountManagementController : Controller
     {
         private readonly IMediator mediator;
+        private readonly AuthorizationService authorizationService;
 
-        public AccountManagementController(IMediator mediator)
+        public AccountManagementController(IMediator mediator, AuthorizationService authorizationService)
         {
             this.mediator = mediator;
+            this.authorizationService = authorizationService;
         }
 
         [HttpGet]
@@ -26,10 +29,11 @@
         {
             var data = await mediator.SendAsync(new GetAccountManagementData(id));
             var model = new AccountManagementViewModel(data);
+            var canDeleteTransaction = await authorizationService.AuthorizeActivity(typeof(DeleteTransactionController));
 
             model.PaymentViewModel = new PaymentDetailsViewModel{ NotificationId = id };
-
             model.RefundViewModel = await GetNewRefundDetailsViewModel(id);
+            model.CanDeleteTransaction = canDeleteTransaction;
 
             return View(model);
         }

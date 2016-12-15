@@ -487,6 +487,8 @@
     <Content Include="Areas\AdminImportAssessment\Views\DeleteTransaction\Confirm.cshtml" />
     <Content Include="Areas\Admin\Views\UserAdministration\ChangeUserStatus.cshtml" />
     <Content Include="Areas\Admin\Views\UserAdministration\ChangeUserRoleSuccess.cshtml" />
+    <Content Include="Areas\AdminExportAssessment\Views\DeleteTransaction\Index.cshtml" />
+    <Content Include="Areas\AdminExportAssessment\Views\DeleteTransaction\Confirm.cshtml" />
     <Content Include="Areas\Admin\Views\UserAdministration\ChangeUserStatusSuccess.cshtml" />
     <None Include="Content\iws\_panels.scss" />
     <Content Include="Content\nta-extended.css" />
@@ -1091,6 +1093,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DecisionControllerResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Areas\AdminExportAssessment\Controllers\DeleteTransactionController.cs" />
     <Compile Include="Areas\AdminExportAssessment\Controllers\FinancialGuaranteeAssessmentController.cs" />
     <Compile Include="Areas\AdminExportAssessment\Controllers\FinancialGuaranteeDecisionController.cs" />
     <Compile Include="Areas\AdminExportAssessment\Controllers\FinancialGuaranteeDecisionHistoryController.cs" />
@@ -1104,6 +1107,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DateInputViewModelResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Areas\AdminExportAssessment\ViewModels\DeleteTransaction\ConfirmViewModel.cs" />
     <Compile Include="Areas\AdminExportAssessment\ViewModels\FinancialGuaranteeAssessment\FinancialGuaranteeAssessmentResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -1148,6 +1152,17 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>DecisionResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\AdminExportAssessment\ViewModels\DeleteTransaction\DeleteTransactionViewModel.cs" />
+    <Compile Include="Areas\AdminExportAssessment\Views\DeleteTransaction\ConfirmResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ConfirmResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\AdminExportAssessment\Views\DeleteTransaction\IndexResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IndexResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Areas\AdminExportAssessment\Views\FinancialGuaranteeAssessment\FinancialGuaranteeAssessmentResources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -3155,6 +3170,14 @@
     <EmbeddedResource Include="Areas\AdminExportAssessment\Views\Decision\DecisionResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>DecisionResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\AdminExportAssessment\Views\DeleteTransaction\ConfirmResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ConfirmResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\AdminExportAssessment\Views\DeleteTransaction\IndexResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\AdminExportAssessment\Views\FinancialGuaranteeAssessment\FinancialGuaranteeAssessmentResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
