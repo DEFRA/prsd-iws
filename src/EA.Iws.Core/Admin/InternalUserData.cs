@@ -1,6 +1,7 @@
 ﻿namespace EA.Iws.Core.Admin
 {
     using System;
+    using Authorization;
     using Notification;
 
     public class InternalUserData
@@ -27,5 +28,7 @@
         {
             get { return string.Format("{0} {1}", FirstName, Surname); }
         }
+
+        public UserRole Role { get; set; }
     }
 }

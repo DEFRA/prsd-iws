@@ -1,0 +1,10 @@
+﻿@model EA.Iws.Core.Admin.InternalUserData
+@{
+    ViewBag.Title = "User role changed";
+}
+
+<h1 class="heading-large">User role changed</h1>
+
+<p>The changes you have made have been confirmed. User @Model.FullName now has the role '@EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(Model.Role)'.</p>
+
+@Html.ActionLink(Constants.ContinueOnlyButtonText, "Index", "Home", null, new { @class = "button" })

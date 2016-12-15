@@ -96,5 +96,45 @@
 
             Assert.Throws<ArgumentException>("localAreaId", newUser);
         }
+
+        [Fact]
+        public void CanActivateInactiveUser()
+        {
+            SetInternalUserStatus(anyUser, InternalUserStatus.Inactive);
+            anyUser.Activate();
+
+            Assert.Equal(InternalUserStatus.Approved, anyUser.Status);
+        }
+
+        [Theory]
+        [InlineData(InternalUserStatus.Pending)]
+        [InlineData(InternalUserStatus.Rejected)]
+        [InlineData(InternalUserStatus.Approved)]
+        public void CannotActivateUser(InternalUserStatus status)
+        {
+            SetInternalUserStatus(anyUser, status);
+
+            Assert.Throws<InvalidOperationException>(() => anyUser.Activate());
+        }
+
+        [Fact]
+        public void CanDeactivateApprovedUser()
+        {
+            SetInternalUserStatus(anyUser, InternalUserStatus.Approved);
+            anyUser.Deactivate();
+
+            Assert.Equal(InternalUserStatus.Inactive, anyUser.Status);
+        }
+
+        [Theory]
+        [InlineData(InternalUserStatus.Pending)]
+        [InlineData(InternalUserStatus.Rejected)]
+        [InlineData(InternalUserStatus.Inactive)]
+        public void CannotDeactivateUser(InternalUserStatus status)
+        {
+            SetInternalUserStatus(anyUser, status);
+
+            Assert.Throws<InvalidOperationException>(() => anyUser.Deactivate());
+        }
     }
 }

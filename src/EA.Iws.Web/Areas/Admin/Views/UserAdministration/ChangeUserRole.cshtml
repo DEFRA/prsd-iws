@@ -1,0 +1,36 @@
+﻿@model EA.Iws.Web.Areas.Admin.ViewModels.UserAdministration.ExistingUsersListViewModel
+@{
+    ViewBag.Title = "Change user role";
+}
+
+<h1 class="heading-large">Change user role</h1>
+
+<table class="form-group" title="Change user role">
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Status</th>
+        <th>Role</th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+        @for (int i = 0; i < Model.Users.Count(); i++)
+        {
+            using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+                @Html.Hidden("UserId", Model.Users[i].UserId)
+
+                <tr>
+                    <td class="font-xsmall">@Model.Users[i].FullName</td>
+                    <td class="font-xsmall">@Model.Users[i].Email</td>
+                    <td class="font-xsmall">@Model.Users[i].Status</td>
+                    <td>@Html.DropDownList("Role", Model.GetUserRolesList(Model.Users[i].Role), new { id = string.Format("Role{0}", i) })</td>
+                    <td><button type="submit">Update</button></td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>

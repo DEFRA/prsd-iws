@@ -69,6 +69,7 @@
             { UserAdministrationPermissions.CanOverrideKeyDates, new[] { UserRole.Administrator } },
             { UserAdministrationPermissions.CanDeleteMovements, new[] { UserRole.Administrator } },
             { UserAdministrationPermissions.CanUpdateInterimStatus, new[] { UserRole.Administrator } },
+            { UserAdministrationPermissions.CanManageExistingInternalUser, new[] { UserRole.Administrator } },
             { UserAdministrationPermissions.CanDeleteTransaction, new[] { UserRole.Administrator } },
             { ImportFinancialGuaranteePermissions.CanEditImportFinancialGuarantee, new[] { UserRole.Internal, UserRole.Administrator } }
         };

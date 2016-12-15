@@ -49,5 +49,57 @@
 
             return RedirectToAction("Index", "Home");
         }
+
+        [HttpGet]
+        public async Task<ActionResult> ChangeUserRole()
+        {
+            var users = await mediator.SendAsync(new GetExistingInternalUsers());
+
+            var model = new ExistingUsersListViewModel(users);
+
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> ChangeUserRole(ChangeUserRoleViewModel model)
+        {
+            await mediator.SendAsync(new UpdateInternalUserRole(model.UserId, model.Role));
+
+            return RedirectToAction("ChangeUserRoleSuccess", new { userId = model.UserId });
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> ChangeUserRoleSuccess(string userId)
+        {
+            var user = await mediator.SendAsync(new GetInternalUserByUserId(userId));
+            return View(user);
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> ChangeUserStatus()
+        {
+            var users = await mediator.SendAsync(new GetExistingInternalUsers());
+
+            var model = new ExistingUsersListViewModel(users);
+
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> ChangeUserStatus(ChangeUserStatusViewModel model)
+        {
+            await mediator.SendAsync(new UpdateInternalUserStatus(model.UserId, model.Status));
+
+            return RedirectToAction("ChangeUserStatusSuccess", new { userId = model.UserId });
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> ChangeUserStatusSuccess(string userId)
+        {
+            var user = await mediator.SendAsync(new GetInternalUserByUserId(userId));
+            return View(user);
+        }
     }
 }
