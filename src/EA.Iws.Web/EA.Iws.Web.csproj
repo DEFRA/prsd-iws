@@ -484,6 +484,7 @@
     <Content Include="Areas\AdminImportAssessment\Views\MarkAsInterim\Index.cshtml" />
     <Content Include="Areas\AdminImportAssessment\Views\DeleteTransaction\Index.cshtml" />
     <Content Include="Areas\AdminImportAssessment\Views\DeleteTransaction\Confirm.cshtml" />
+    <Content Include="Areas\AdminExportAssessment\Views\DeleteTransaction\Index.cshtml" />
     <None Include="Content\iws\_panels.scss" />
     <Content Include="Content\nta-extended.css" />
     <Content Include="Content\select2\select2-spinner.gif" />
@@ -1087,6 +1088,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DecisionControllerResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Areas\AdminExportAssessment\Controllers\DeleteTransactionController.cs" />
     <Compile Include="Areas\AdminExportAssessment\Controllers\FinancialGuaranteeAssessmentController.cs" />
     <Compile Include="Areas\AdminExportAssessment\Controllers\FinancialGuaranteeDecisionController.cs" />
     <Compile Include="Areas\AdminExportAssessment\Controllers\FinancialGuaranteeDecisionHistoryController.cs" />
@@ -1144,6 +1146,12 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>DecisionResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\AdminExportAssessment\ViewModels\DeleteTransaction\DeleteTransactionViewModel.cs" />
+    <Compile Include="Areas\AdminExportAssessment\Views\DeleteTransaction\IndexResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IndexResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Areas\AdminExportAssessment\Views\FinancialGuaranteeAssessment\FinancialGuaranteeAssessmentResources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -3148,6 +3156,10 @@
     <EmbeddedResource Include="Areas\AdminExportAssessment\Views\Decision\DecisionResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>DecisionResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\AdminExportAssessment\Views\DeleteTransaction\IndexResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\AdminExportAssessment\Views\FinancialGuaranteeAssessment\FinancialGuaranteeAssessmentResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

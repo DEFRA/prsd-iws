@@ -29,7 +29,7 @@
         {
             var data = await mediator.SendAsync(new GetAccountManagementData(id));
             var model = new AccountManagementViewModel(data);
-            var canDeleteTransaction = await authorizationService.AuthorizeActivity(typeof(DeleteTransaction));
+            var canDeleteTransaction = await authorizationService.AuthorizeActivity(typeof(DeleteTransactionController));
 
             model.PaymentViewModel = new PaymentDetailsViewModel{ NotificationId = id };
             model.RefundViewModel = await GetNewRefundDetailsViewModel(id);
