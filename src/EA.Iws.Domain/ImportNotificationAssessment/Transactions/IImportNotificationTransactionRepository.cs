@@ -9,5 +9,9 @@
         Task<IEnumerable<ImportNotificationTransaction>> GetTransactions(Guid importNotificationId);
 
         void Add(ImportNotificationTransaction transaction);
+
+        Task DeleteById(Guid transactionId);
+
+        Task<ImportNotificationTransaction> GetById(Guid transactionId);
     }
 }

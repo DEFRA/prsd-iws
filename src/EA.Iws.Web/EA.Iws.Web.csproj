@@ -482,6 +482,8 @@
     <Content Include="Areas\Reports\Views\ExportMovements\Index.cshtml" />
     <Content Include="Areas\NotificationMovements\Views\Create\NoApprovedFinancialGuarantee.cshtml" />
     <Content Include="Areas\AdminImportAssessment\Views\MarkAsInterim\Index.cshtml" />
+    <Content Include="Areas\AdminImportAssessment\Views\DeleteTransaction\Index.cshtml" />
+    <Content Include="Areas\AdminImportAssessment\Views\DeleteTransaction\Confirm.cshtml" />
     <None Include="Content\iws\_panels.scss" />
     <Content Include="Content\nta-extended.css" />
     <Content Include="Content\select2\select2-spinner.gif" />
@@ -1226,6 +1228,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DecisionControllerResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Areas\AdminImportAssessment\Controllers\DeleteTransactionController.cs" />
     <Compile Include="Areas\AdminImportAssessment\Controllers\FinancialGuaranteeDatesController.cs" />
     <Compile Include="Areas\AdminImportAssessment\Controllers\FinancialGuaranteeDecisionController.cs" />
     <Compile Include="Areas\AdminImportAssessment\Controllers\KeyDatesController.cs" />
@@ -1239,6 +1242,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DecisionViewModelResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Areas\AdminImportAssessment\ViewModels\DeleteTransaction\ConfirmViewModel.cs" />
+    <Compile Include="Areas\AdminImportAssessment\ViewModels\DeleteTransaction\DeleteTransactionViewModel.cs" />
     <Compile Include="Areas\AdminImportAssessment\ViewModels\FinancialGuaranteeDates\ReceivedAndCompletedDateViewModel.cs" />
     <Compile Include="Areas\AdminImportAssessment\ViewModels\FinancialGuaranteeDates\ReceivedDateViewModel.cs" />
     <Compile Include="Areas\AdminImportAssessment\ViewModels\FinancialGuaranteeDates\ReceivedAndCompletedDateViewModelResources.Designer.cs">
@@ -1288,6 +1293,16 @@
       <DependentUpon>IndexResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Areas\AdminImportAssessment\Views\Decision\IndexResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IndexResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\AdminImportAssessment\Views\DeleteTransaction\ConfirmResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ConfirmResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\AdminImportAssessment\Views\DeleteTransaction\IndexResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>IndexResources.resx</DependentUpon>
@@ -3231,6 +3246,14 @@
       <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\AdminImportAssessment\Views\Decision\IndexResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\AdminImportAssessment\Views\DeleteTransaction\ConfirmResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ConfirmResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\AdminImportAssessment\Views\DeleteTransaction\IndexResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>

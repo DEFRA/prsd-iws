@@ -139,6 +139,13 @@
     </details>
 </div>
 
+<div class="form-group">
+    @if (Model.CanDeleteTransaction)
+    {
+        @Html.ActionLink(Resource.DeleteTransaction, "Index", "DeleteTransaction")
+    }
+</div>
+
 @Html.ActionLink(Resource.KeyDatesLinkText, "Index", "Keydates")
 
 @section menu {

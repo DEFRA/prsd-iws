@@ -26,7 +26,8 @@
                         Date = item.Date,
                         Type = item.PaymentMethod,
                         Transaction = IsCredit(item) ? TransactionType.Payment : TransactionType.Refund,
-                        Amount = IsCredit(item) ? item.Credit.GetValueOrDefault() : item.Debit.GetValueOrDefault()
+                        Amount = IsCredit(item) ? item.Credit.GetValueOrDefault() : item.Debit.GetValueOrDefault(),
+                        TransactionId = item.Id
                     };
 
                     data.PaymentHistory.Add(d);
