@@ -66,7 +66,14 @@
         {
             await mediator.SendAsync(new UpdateInternalUserRole(model.UserId, model.Role));
 
-            return RedirectToAction("ChangeUserRole");
+            return RedirectToAction("ChangeUserRoleSuccess", new { userId = model.UserId });
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> ChangeUserRoleSuccess(string userId)
+        {
+            var user = await mediator.SendAsync(new GetInternalUserByUserId(userId));
+            return View(user);
         }
 
         [HttpGet]
@@ -85,7 +92,14 @@
         {
             await mediator.SendAsync(new UpdateInternalUserStatus(model.UserId, model.Status));
 
-            return RedirectToAction("ChangeUserStatus");
+            return RedirectToAction("ChangeUserStatusSuccess", new { userId = model.UserId });
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> ChangeUserStatusSuccess(string userId)
+        {
+            var user = await mediator.SendAsync(new GetInternalUserByUserId(userId));
+            return View(user);
         }
     }
 }
