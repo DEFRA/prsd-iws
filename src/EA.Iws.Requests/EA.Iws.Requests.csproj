@@ -128,6 +128,7 @@
     <Compile Include="ImportMovement\Receipt\RecordReceipt.cs" />
     <Compile Include="ImportMovement\Reject\RecordRejection.cs" />
     <Compile Include="ImportNotificationAssessment\Consent.cs" />
+    <Compile Include="ImportNotificationAssessment\DeleteImportNotification.cs" />
     <Compile Include="ImportNotificationAssessment\FinancialGuarantee\ApproveFinancialGuarantee.cs" />
     <Compile Include="ImportNotificationAssessment\FinancialGuarantee\CreateFinancialGuarantee.cs" />
     <Compile Include="ImportNotificationAssessment\FinancialGuarantee\FinancialGuaranteeDecisionRequest.cs" />
@@ -191,6 +192,7 @@
     <Compile Include="Movement\Complete\RecordOperationCompleteInternal.cs" />
     <Compile Include="Movement\GetNewMovementIdsByNotificationId.cs" />
     <Compile Include="Movement\GetNotificationNumberByMovementId.cs" />
+    <Compile Include="NotificationAssessment\DeleteExportNotification.cs" />
     <Compile Include="NotificationAssessment\DeleteTransaction.cs" />
     <Compile Include="NotificationAssessment\GetChangeNumberOfShipmentConfrimationData.cs" />
     <Compile Include="NotificationAssessment\GetChargeDue.cs" />
