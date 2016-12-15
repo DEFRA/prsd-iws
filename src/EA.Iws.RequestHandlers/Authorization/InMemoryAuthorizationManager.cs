@@ -71,6 +71,7 @@
             { UserAdministrationPermissions.CanUpdateInterimStatus, new[] { UserRole.Administrator } },
             { UserAdministrationPermissions.CanManageExistingInternalUser, new[] { UserRole.Administrator } },
             { UserAdministrationPermissions.CanDeleteTransaction, new[] { UserRole.Administrator } },
+            { UserAdministrationPermissions.CanDeleteNotification, new[] { UserRole.Administrator } },
             { ImportFinancialGuaranteePermissions.CanEditImportFinancialGuarantee, new[] { UserRole.Internal, UserRole.Administrator } }
         };
 
