@@ -12,12 +12,10 @@
     public class DeleteTransactionController : Controller
     {
         private readonly IMediator mediator;
-        private readonly AuthorizationService authorizationService;
 
-        public DeleteTransactionController(IMediator mediator, AuthorizationService authorizationService)
+        public DeleteTransactionController(IMediator mediator)
         {
             this.mediator = mediator;
-            this.authorizationService = authorizationService;
         }
 
         [HttpGet]
