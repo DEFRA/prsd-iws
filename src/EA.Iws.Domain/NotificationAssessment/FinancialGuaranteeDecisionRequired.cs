@@ -32,6 +32,7 @@
             }
 
             return
+                !financialGuaranteeCollection.FinancialGuarantees.Any() ||
                 financialGuaranteeCollection.FinancialGuarantees.Any(
                     fg => fg.Status == FinancialGuaranteeStatus.ApplicationComplete
                         || fg.Status == FinancialGuaranteeStatus.ApplicationReceived
