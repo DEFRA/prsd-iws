@@ -21,7 +21,6 @@
         <thead>
         <tr>
             <th>Name</th>
-            <th>Email</th>
             <th>Action</th>
             <th></th>
             <th>Assign role</th>
@@ -31,8 +30,7 @@
         @for (int i = 0; i < Model.Users.Count; i++)
         {
             <tr class="@Html.Gds().FormGroupClass(m => m.Users[i])">
-                <td>@Html.DisplayFor(m => m.Users[i].UserData.FullName)</td>
-                <td>@Html.DisplayFor(m => m.Users[i].UserData.Email)</td>
+                <td class="font-xsmall" title="@Html.DisplayFor(m => m.Users[i].UserData.Email)">@Html.DisplayFor(m => m.Users[i].UserData.FullName)</td>
                 <td>
                     @Html.HiddenFor(m => m.Users[i].UserData.Id)
                     @Html.HiddenFor(m => m.Users[i].UserData.Email)
@@ -42,7 +40,7 @@
                     @Html.HiddenFor(m => m.Users[i].UserData.JobTitle)
                     @Html.HiddenFor(m => m.Users[i].UserData.PhoneNumber)
                     @Html.HiddenFor(m => m.Users[i].UserData.Status)
-                    @Html.Gds().DropDownListFor(m => m.Users[i].Action, Model.ApprovalActionsList, optionLabel: "Pending", htmlAttributes: new { @class = "action-dropdown" })
+                    @Html.DropDownListFor(m => m.Users[i].Action, Model.ApprovalActionsList, optionLabel: "Pending", htmlAttributes: new { @class = "action-dropdown" })
                 </td>
                 <td style="text-align: center;">
                     @if (Model.Users[i].Action == ApprovalAction.Approve)
@@ -65,7 +63,7 @@
                     }
                     else
                     {
-                        @Html.Gds().DropDownListFor(m => m.Users[i].AssignedRole, Model.UserRolesList, string.Empty, new { @class = "role-dropdown form-control-wide form-control visually-hidden", disabled = "disabled" })
+                        @Html.DropDownListFor(m => m.Users[i].AssignedRole, Model.UserRolesList, string.Empty, new { @class = "role-dropdown visually-hidden", disabled = "disabled" })
                     }
                 </td>
             </tr>
