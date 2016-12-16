@@ -8,6 +8,10 @@
 <h1 class="heading-large">@Html.Raw(string.Format(Resource.Title, Model.PortName, Model.CountryName))</h1>
 
 
-    <div class="form-group">
-        @Html.ActionLink("Continue", "Index", "EntryOrExitPoint", null, new { @class = "button"})
-    </div>
+<div class="form-group">
+    @Html.ActionLink("Continue", "Index", "EntryOrExitPoint", null, new { @class = "button" })
+</div>
+
+@section menu {
+    @Html.Action("HomeNavigation", "Menu", new { area = "Admin", section = AdminHomeNavigationSection.AccountServices })
+}

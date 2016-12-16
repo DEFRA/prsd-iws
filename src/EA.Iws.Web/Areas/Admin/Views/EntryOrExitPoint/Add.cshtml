@@ -47,3 +47,7 @@
 
     @Html.ActionLink("Cancel", "Index")
 }
+
+@section menu {
+    @Html.Action("HomeNavigation", "Menu", new { area = "Admin", section = AdminHomeNavigationSection.AccountServices })
+}

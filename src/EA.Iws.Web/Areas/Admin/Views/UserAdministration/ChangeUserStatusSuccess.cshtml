@@ -1,22 +1,26 @@
-﻿@using EA.Iws.Core.Admin
-@using EA.Iws.Core.Authorization
-@model EA.Iws.Core.Admin.InternalUserData
+﻿@model EA.Iws.Core.Admin.InternalUserData
+@using EA.Iws.Core.Admin
+@using Resources = EA.Iws.Web.Areas.Admin.Views.UserAdministration.UserAdministrationResources
 @{
-    ViewBag.Title = "User status changed";
+    ViewBag.Title = Resources.UserStatusChangedTitle;
 }
 
-<h1 class="heading-large">User status changed</h1>
+<h1 class="heading-large">@Resources.UserStatusChangedTitle</h1>
 
 <p>
     The changes you have made have been confirmed.
     @if (Model.Status == InternalUserStatus.Inactive)
     {
-        @:User @Model.FullName is now inactive. They can no longer access IWS Online.
+        @string.Format(Resources.UserNowInactive, Model.FullName)
     }
     else
     {
-        @:User @Model.FullName is now active. They can now access IWS Online.
+        @string.Format(Resources.UserNowActive, Model.FullName)
     }
 </p>
 
 @Html.ActionLink(Constants.ContinueOnlyButtonText, "Index", "Home", null, new { @class = "button" })
+
+@section menu {
+    @Html.Action("HomeNavigation", "Menu", new { area = "Admin", section = AdminHomeNavigationSection.AccountServices })
+}
