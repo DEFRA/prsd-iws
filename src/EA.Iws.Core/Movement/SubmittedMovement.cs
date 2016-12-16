@@ -10,7 +10,7 @@
 
         public int Number { get; set; }
 
-        public DateTime SubmittedDate { get; set; }
+        public DateTime? PrenotificationDate { get; set; }
 
         public DateTime ShipmentDate { get; set; }
 
