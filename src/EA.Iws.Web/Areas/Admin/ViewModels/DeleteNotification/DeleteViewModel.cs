@@ -9,5 +9,12 @@
         public string NotificationNumber { get; set; }
 
         public bool IsExportNotification { get; set; }
+
+        public DeleteViewModel(IndexViewModel model, Guid notificationId)
+        {
+            NotificationId = notificationId;
+            NotificationNumber = model.NotificationNumber;
+            IsExportNotification = model.IsExportNotification.GetValueOrDefault();
+        }
     }
 }

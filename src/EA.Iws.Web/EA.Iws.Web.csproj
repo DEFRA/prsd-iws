@@ -1493,6 +1493,11 @@
     <Compile Include="Areas\Admin\Controllers\AdvancedSearchController.cs" />
     <Compile Include="Areas\Admin\Controllers\ConfigurationController.cs" />
     <Compile Include="Areas\Admin\Controllers\DeleteNotificationController.cs" />
+    <Compile Include="Areas\Admin\Controllers\DeleteNotificationControllerResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DeleteNotificationControllerResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Areas\Admin\Controllers\EntryOrExitPointController.cs" />
     <Compile Include="Areas\Admin\Controllers\EntryOrExitPointControllerResources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -3416,6 +3421,10 @@
     <EmbeddedResource Include="Areas\AdminImportNotificationMovements\Views\Home\IndexResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\Admin\Controllers\DeleteNotificationControllerResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>DeleteNotificationControllerResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\Admin\Controllers\EntryOrExitPointControllerResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
