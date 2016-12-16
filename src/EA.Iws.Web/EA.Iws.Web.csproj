@@ -1694,6 +1694,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>IndexResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Areas\Admin\Views\UserAdministration\UserAdministrationResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>UserAdministrationResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Areas\ExportMovement\ViewModels\EditDate\ThreeWorkingDaysSelection.cs" />
     <Compile Include="Areas\ExportMovement\ViewModels\EditDate\ThreeWorkingDaysWarningViewModel.cs" />
     <Compile Include="Areas\ExportMovement\ViewModels\EditDate\ThreeWorkingDaysWarningViewModelResources.Designer.cs">
@@ -3539,6 +3544,10 @@
     <EmbeddedResource Include="Areas\AdminImportMovement\Views\Dates\IndexResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\Admin\Views\UserAdministration\UserAdministrationResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>UserAdministrationResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\ExportMovement\ViewModels\EditDate\ThreeWorkingDaysWarningViewModelResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

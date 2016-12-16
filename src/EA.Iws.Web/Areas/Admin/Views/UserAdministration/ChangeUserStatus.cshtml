@@ -1,17 +1,17 @@
 ﻿@model EA.Iws.Web.Areas.Admin.ViewModels.UserAdministration.ExistingUsersListViewModel
+@using Resources = EA.Iws.Web.Areas.Admin.Views.UserAdministration.UserAdministrationResources
 @{
-    ViewBag.Title = "Change user status";
+    ViewBag.Title = Resources.ChangeUserStatusTitle;
 }
 
-<h1 class="heading-large">Change user status</h1>
+<h1 class="heading-large">@Resources.ChangeUserStatusTitle</h1>
 
-<table class="form-group" title="Change user status">
+<table class="form-group" title="@Resources.ChangeUserStatusTitle">
     <thead>
     <tr>
-        <th>Name</th>
-        <th>Email</th>
-        <th>Role</th>
-        <th>Status</th>
+        <th>@Resources.Name</th>
+        <th>@Resources.Role</th>
+        <th>@Resources.Status</th>
         <th></th>
     </tr>
     </thead>
@@ -24,11 +24,10 @@
                 @Html.Hidden("UserId", Model.Users[i].UserId)
 
                 <tr>
-                    <td class="font-xsmall">@Model.Users[i].FullName</td>
-                    <td class="font-xsmall">@Model.Users[i].Email</td>
+                    <td class="font-xsmall" title="@Model.Users[i].Email">@Model.Users[i].FullName</td>
                     <td class="font-xsmall">@Model.Users[i].Role</td>
                     <td>@Html.DropDownList("Status", Model.GetUserStatusList(Model.Users[i].Status), new { id = string.Format("Status{0}", i) })</td>
-                    <td><button type="submit">Update</button></td>
+                    <td><button type="submit">@Resources.Update</button></td>
                 </tr>
             }
         }
