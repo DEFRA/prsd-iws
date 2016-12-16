@@ -163,6 +163,8 @@
     </div>
 
     <button type="submit" class="button">@Resources.Search</button>
+
+    <button id="reset" type="reset" class="button">@Resources.Reset</button>
 }
 
 @section scripts {
@@ -189,6 +191,11 @@
         $(function () {
             $("#@Html.IdFor(m => m.BaselOecdCodeNotListed)").click(function () {
                 toggleBaselOecdCode($('#@Html.IdFor(m => m.BaselOecdCodeNotListed)').is(':checked'));
+            });
+
+            $("#reset").click(function() {
+                $("select[data-select-box='true']").select2("val", "");
+                toggleBaselOecdCode(false);
             });
         });
     </script>
