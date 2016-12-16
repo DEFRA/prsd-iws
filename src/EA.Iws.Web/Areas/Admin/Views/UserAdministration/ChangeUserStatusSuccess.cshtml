@@ -20,3 +20,7 @@
 </p>
 
 @Html.ActionLink(Constants.ContinueOnlyButtonText, "Index", "Home", null, new { @class = "button" })
+
+@section menu {
+    @Html.Action("HomeNavigation", "Menu", new { area = "Admin", section = AdminHomeNavigationSection.AccountServices })
+}

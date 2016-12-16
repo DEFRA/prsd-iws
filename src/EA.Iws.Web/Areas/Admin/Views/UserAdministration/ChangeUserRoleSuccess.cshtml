@@ -9,3 +9,7 @@
 <p>@string.Format(Resources.UserRoleChangedParagraph, Model.FullName ,EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(Model.Role))</p>
 
 @Html.ActionLink(Constants.ContinueOnlyButtonText, "Index", "Home", null, new { @class = "button" })
+
+@section menu {
+    @Html.Action("HomeNavigation", "Menu", new { area = "Admin", section = AdminHomeNavigationSection.AccountServices })
+}

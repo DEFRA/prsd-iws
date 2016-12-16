@@ -16,20 +16,24 @@
     </tr>
     </thead>
     <tbody>
-        @for (int i = 0; i < Model.Users.Count(); i++)
+    @for (int i = 0; i < Model.Users.Count(); i++)
+    {
+        using (Html.BeginForm())
         {
-            using (Html.BeginForm())
-            {
-                @Html.AntiForgeryToken()
-                @Html.Hidden("UserId", Model.Users[i].UserId)
+            @Html.AntiForgeryToken()
+            @Html.Hidden("UserId", Model.Users[i].UserId)
 
-                <tr>
-                    <td class="font-xsmall" title="@Model.Users[i].Email">@Model.Users[i].FullName</td>
-                    <td class="font-xsmall">@Model.Users[i].Role</td>
-                    <td>@Html.DropDownList("Status", Model.GetUserStatusList(Model.Users[i].Status), new { id = string.Format("Status{0}", i) })</td>
-                    <td><button type="submit">@Resources.Update</button></td>
-                </tr>
-            }
+            <tr>
+                <td class="font-xsmall" title="@Model.Users[i].Email">@Model.Users[i].FullName</td>
+                <td class="font-xsmall">@Model.Users[i].Role</td>
+                <td>@Html.DropDownList("Status", Model.GetUserStatusList(Model.Users[i].Status), new { id = string.Format("Status{0}", i) })</td>
+                <td><button type="submit">@Resources.Update</button></td>
+            </tr>
         }
+    }
     </tbody>
 </table>
+
+@section menu {
+    @Html.Action("HomeNavigation", "Menu", new { area = "Admin", section = AdminHomeNavigationSection.AccountServices })
+}
