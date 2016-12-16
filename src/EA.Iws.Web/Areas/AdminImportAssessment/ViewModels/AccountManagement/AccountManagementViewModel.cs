@@ -1,7 +1,9 @@
 ﻿namespace EA.Iws.Web.Areas.AdminImportAssessment.ViewModels.AccountManagement
 {
     using System.Collections.Generic;
+    using System.Linq;
     using Core.ImportNotificationAssessment.Transactions;
+    using Core.NotificationAssessment;
     using Core.Shared;
     using PaymentDetails;
     using RefundDetails;
@@ -35,5 +37,13 @@
         public bool ShowRefundDetails { get; set; }
 
         public bool CanDeleteTransaction { get; set; }
+
+        public bool HasPayments
+        {
+            get
+            {
+                return Transactions.Count != 0 && Transactions.Any(t => t.Transaction == TransactionType.Payment);
+            }
+        }
     }
 }
