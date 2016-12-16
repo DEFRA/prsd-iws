@@ -491,6 +491,8 @@
     <Content Include="Areas\AdminExportAssessment\Views\DeleteTransaction\Confirm.cshtml" />
     <Content Include="Areas\Admin\Views\UserAdministration\ChangeUserStatusSuccess.cshtml" />
     <Content Include="Areas\Admin\Views\DeleteNotification\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\DeleteNotification\Check.cshtml" />
+    <Content Include="Areas\Admin\Views\DeleteNotification\Confirm.cshtml" />
     <None Include="Content\iws\_panels.scss" />
     <Content Include="Content\nta-extended.css" />
     <Content Include="Content\select2\select2-spinner.gif" />
@@ -1492,6 +1494,11 @@
     <Compile Include="Areas\Admin\Controllers\AdvancedSearchController.cs" />
     <Compile Include="Areas\Admin\Controllers\ConfigurationController.cs" />
     <Compile Include="Areas\Admin\Controllers\DeleteNotificationController.cs" />
+    <Compile Include="Areas\Admin\Controllers\DeleteNotificationControllerResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DeleteNotificationControllerResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Areas\Admin\Controllers\EntryOrExitPointController.cs" />
     <Compile Include="Areas\Admin\Controllers\EntryOrExitPointControllerResources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -1524,6 +1531,13 @@
       <DependentUpon>IndexViewModelResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Areas\Admin\ViewModels\AdvancedSearch\ResultsViewModel.cs" />
+    <Compile Include="Areas\Admin\ViewModels\DeleteNotification\DeleteViewModel.cs" />
+    <Compile Include="Areas\Admin\ViewModels\DeleteNotification\IndexViewModelResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IndexViewModelResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Admin\ViewModels\DeleteNotification\IndexViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\EntryOrExitPoint\AddEntryOrExitPointViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\EntryOrExitPoint\AddEntryOrExitPointViewModelResources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -1595,6 +1609,26 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Index.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Admin\Views\DeleteNotification\CheckResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CheckResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Admin\Views\DeleteNotification\ConfirmResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ConfirmResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Admin\Views\DeleteNotification\DeleteResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DeleteResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Admin\Views\DeleteNotification\IndexResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IndexResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Areas\Admin\Views\EntryOrExitPoint\Add.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -3404,6 +3438,10 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Areas\Admin\Controllers\DeleteNotificationControllerResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>DeleteNotificationControllerResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Areas\Admin\Controllers\EntryOrExitPointControllerResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>EntryOrExitPointControllerResources.Designer.cs</LastGenOutput>
@@ -3417,6 +3455,10 @@
       <LastGenOutput>ChangeNotificationOwnerViewModelResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\Admin\ViewModels\AdvancedSearch\IndexViewModelResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>IndexViewModelResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\Admin\ViewModels\DeleteNotification\IndexViewModelResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>IndexViewModelResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
@@ -3464,6 +3506,22 @@
     <EmbeddedResource Include="Areas\Admin\Views\Configuration\Index.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Index.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\Admin\Views\DeleteNotification\CheckResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>CheckResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\Admin\Views\DeleteNotification\ConfirmResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ConfirmResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\Admin\Views\DeleteNotification\DeleteResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>DeleteResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\Admin\Views\DeleteNotification\IndexResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\Admin\Views\EntryOrExitPoint\Add.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

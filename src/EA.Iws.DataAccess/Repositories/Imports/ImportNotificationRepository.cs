@@ -2,6 +2,7 @@
 {
     using System;
     using System.Data.Entity;
+    using System.Linq;
     using System.Threading.Tasks;
     using Core.Shared;
     using Domain.ImportNotification;
@@ -47,6 +48,13 @@
         {
             await authorization.EnsureAccessAsync(id);
             return (await context.ImportNotifications.SingleAsync(n => n.Id == id)).NotificationType;
+        }
+
+        public async Task<Guid?> GetIdOrDefault(string number)
+        {
+            return await context.ImportNotifications.Where(n => n.NotificationNumber == number)
+                                                    .Select(n => (Guid?)n.Id)
+                                                    .SingleOrDefaultAsync();
         }
     }
 }

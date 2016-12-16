@@ -1,0 +1,35 @@
+﻿@model EA.Iws.Web.Areas.Admin.ViewModels.DeleteNotification.DeleteViewModel
+@using Resources = EA.Iws.Web.Areas.Admin.Views.DeleteNotification.CheckResources
+
+@{
+    ViewBag.Title = Resources.Title;
+}
+
+
+<div class="grid-row">
+    <div class="column-two-thirds">
+        <h1 class="heading-large">@Resources.MainHeading @Model.NotificationNumber.ToNonBreakingString()</h1>
+
+        <p>@Resources.Guidance</p>
+
+
+        <div class="form-group">
+            @Html.ActionLink(@Resources.CancelLinkText, "Index", "Home")
+        </div>
+
+        @using (Html.BeginForm("Delete", "DeleteNotification", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            @Html.HiddenFor(m => m.NotificationId)
+            @Html.HiddenFor(m => m.IsExportNotification)
+            @Html.HiddenFor(m => m.NotificationNumber)
+
+            <button type="submit" class="button">@Resources.ButtonText</button>
+        }
+
+    </div>
+</div>
+
+@section menu {
+    @Html.Action("HomeNavigation", "Menu", new { area = "Admin", section = AdminHomeNavigationSection.AccountServices })
+}
