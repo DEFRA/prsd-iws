@@ -120,6 +120,9 @@
   <data name="Heading" xml:space="preserve">
     <value>Advanced search</value>
   </data>
+  <data name="Reset" xml:space="preserve">
+    <value>Reset</value>
+  </data>
   <data name="Search" xml:space="preserve">
     <value>Search</value>
   </data>
