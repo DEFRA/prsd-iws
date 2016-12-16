@@ -15,10 +15,7 @@
                 NotificationId = source.NotificationId,
                 Number = source.Number,
                 ShipmentDate = source.Date,
-                SubmittedDate = source.StatusChanges
-                    .Where(sc => sc.Status == MovementStatus.Submitted)
-                    .Select(sc => sc.ChangeDate.UtcDateTime)
-                    .SingleOrDefault()
+                PrenotificationDate = source.PrenotificationDate
             };
         }
     }
