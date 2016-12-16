@@ -44,3 +44,7 @@
         @Html.ActionLink(@Resources.HomeLinkText, "Index", "Home")
     </div>
 </div>
+
+@section menu {
+    @Html.Action("HomeNavigation", "Menu", new { area = "Admin", section = AdminHomeNavigationSection.AccountServices })
+}

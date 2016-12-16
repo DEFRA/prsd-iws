@@ -63,3 +63,7 @@
         })
     </script>
 }
+
+@section menu {
+    @Html.Action("HomeNavigation", "Menu", new { area = "Admin", section = AdminHomeNavigationSection.AccountServices })
+}

@@ -66,21 +66,23 @@
                     && m.Date < SystemTime.UtcNow)
                 .CountAsync();
 
-            var latestFinancialGuarantee =
-                (await context.FinancialGuarantees.SingleAsync(x => x.NotificationId == notificationId))
-                    .FinancialGuarantees.OrderByDescending(x => x.CreatedDate).FirstOrDefault();
+            var financialGuaranteeCollection =
+                await context.FinancialGuarantees.SingleAsync(x => x.NotificationId == notificationId);
+
+            var financialGuarantee = financialGuaranteeCollection.GetCurrentApprovedFinancialGuarantee() ??
+                                     financialGuaranteeCollection.GetLatestFinancialGuarantee();
 
             return NotificationMovementsSummary.Load(summaryData.NotificationId,
                 summaryData.NotificationNumber,
                 summaryData.NotificationType,
                 summaryData.NumberOfShipments,
                 totalMovements,
-                latestFinancialGuarantee == null ? 0 : latestFinancialGuarantee.ActiveLoadsPermitted.GetValueOrDefault(),
+                financialGuarantee == null ? 0 : financialGuarantee.ActiveLoadsPermitted.GetValueOrDefault(),
                 currentActiveLoads,
                 summaryData.Quantity,
                 (await quantity.Received(notificationId)).Quantity,
                 summaryData.Units,
-                latestFinancialGuarantee == null ? FinancialGuaranteeStatus.AwaitingApplication : latestFinancialGuarantee.Status,
+                financialGuarantee == null ? FinancialGuaranteeStatus.AwaitingApplication : financialGuarantee.Status,
                 summaryData.CompetentAuthority,
                 summaryData.NotificationStatus);
         }

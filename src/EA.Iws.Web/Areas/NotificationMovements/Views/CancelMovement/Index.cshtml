@@ -54,7 +54,14 @@
                                     @Html.HiddenFor(m => m.SubmittedMovements[i].Number)
                                 </td>
                                 <td>
-                                    @Html.Gds().DisplayShortDateFor(m => m.SubmittedMovements[i].SubmittedDate)
+                                    @if (Model.SubmittedMovements[i].PrenotificationDate.HasValue)
+                                    {
+                                        @Html.Gds().DisplayShortDateFor(m => m.SubmittedMovements[i].PrenotificationDate.Value)
+                                    }
+                                    else
+                                    {
+                                        @:- -
+                                    }
                                 </td>
                                 <td>
                                     @Html.Gds().DisplayShortDateFor(m => m.SubmittedMovements[i].ShipmentDate)

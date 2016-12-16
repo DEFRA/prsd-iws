@@ -19,7 +19,7 @@ $.deserializeIntoNamedInputs = function (prefix, json) {
 }
 
 function getSearchUrlForAddressBook(url, term, type) {
-    return url + "?term=" + term + "&type=" + type;
+    return url + "?term=" + encodeURIComponent(term) + "&type=" + type;
 }
 
 function autocompleteListEntriesForData(data) {
