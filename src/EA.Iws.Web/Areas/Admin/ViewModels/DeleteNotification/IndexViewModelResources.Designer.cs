@@ -61,6 +61,15 @@ namespace EA.Iws.Web.Areas.Admin.ViewModels.DeleteNotification {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Please select if this is an export or import notification.
+        /// </summary>
+        public static string NotificationChoiceRequired {
+            get {
+                return ResourceManager.GetString("NotificationChoiceRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Enter the notification number.
         /// </summary>
         public static string NotificationNumber {

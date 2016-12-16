@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="NotificationChoiceRequired" xml:space="preserve">
+    <value>Please select if this is an export or import notification</value>
+  </data>
   <data name="NotificationNumber" xml:space="preserve">
     <value>Enter the notification number</value>
   </data>

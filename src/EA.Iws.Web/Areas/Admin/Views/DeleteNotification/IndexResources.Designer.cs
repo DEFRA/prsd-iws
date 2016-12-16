@@ -61,11 +61,20 @@ namespace EA.Iws.Web.Areas.Admin.Views.DeleteNotification {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Go.
+        ///   Looks up a localized string similar to Delete.
         /// </summary>
         public static string ButtonText {
             get {
                 return ResourceManager.GetString("ButtonText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Export notification.
+        /// </summary>
+        public static string Export {
+            get {
+                return ResourceManager.GetString("Export", resourceCulture);
             }
         }
         
@@ -79,11 +88,29 @@ namespace EA.Iws.Web.Areas.Admin.Views.DeleteNotification {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Import notification.
+        /// </summary>
+        public static string Import {
+            get {
+                return ResourceManager.GetString("Import", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Which notification would you like to delete?.
         /// </summary>
         public static string MainHeading {
             get {
                 return ResourceManager.GetString("MainHeading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Is this an export or import notification?.
+        /// </summary>
+        public static string Question {
+            get {
+                return ResourceManager.GetString("Question", resourceCulture);
             }
         }
         
