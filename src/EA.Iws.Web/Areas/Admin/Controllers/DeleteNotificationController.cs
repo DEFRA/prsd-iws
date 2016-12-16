@@ -53,15 +53,24 @@
                 return View(model);
             }
 
-            var deleteModel = new DeleteViewModel(model);
+            var deleteModel = new DeleteViewModel(model, notificationId.GetValueOrDefault());
 
-            return RedirectToAction("Delete", deleteModel);
+            return RedirectToAction("Check", deleteModel);
         }
 
         [HttpGet]
-        public ActionResult Delete(DeleteViewModel model)
+        public ActionResult Check(DeleteViewModel model)
         {
             return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Delete(DeleteViewModel model)
+        {
+            // Actually delete the notification
+
+            return View("Confirm");
         }
     }
 }

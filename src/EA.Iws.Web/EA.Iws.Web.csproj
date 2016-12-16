@@ -491,7 +491,8 @@
     <Content Include="Areas\AdminExportAssessment\Views\DeleteTransaction\Confirm.cshtml" />
     <Content Include="Areas\Admin\Views\UserAdministration\ChangeUserStatusSuccess.cshtml" />
     <Content Include="Areas\Admin\Views\DeleteNotification\Index.cshtml" />
-    <Content Include="Areas\Admin\Views\DeleteNotification\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\DeleteNotification\Check.cshtml" />
+    <Content Include="Areas\Admin\Views\DeleteNotification\Confirm.cshtml" />
     <None Include="Content\iws\_panels.scss" />
     <Content Include="Content\nta-extended.css" />
     <Content Include="Content\select2\select2-spinner.gif" />
@@ -1608,6 +1609,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Index.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Admin\Views\DeleteNotification\CheckResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CheckResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Areas\Admin\Views\DeleteNotification\DeleteResources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -3491,8 +3497,12 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Index.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Areas\Admin\Views\DeleteNotification\CheckResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>CheckResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Areas\Admin\Views\DeleteNotification\DeleteResources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
+      <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>DeleteResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\Admin\Views\DeleteNotification\IndexResources.resx">

@@ -16,5 +16,9 @@
             NotificationNumber = model.NotificationNumber;
             IsExportNotification = model.IsExportNotification.GetValueOrDefault();
         }
+
+        public DeleteViewModel()
+        {
+        }
     }
 }
