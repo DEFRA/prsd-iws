@@ -13,9 +13,13 @@
         </div>
 
         <div class="form-group">
-            @Html.ActionLink(@Resources.HomeLinkText, "Index", "Home", null, new { @class = "button"})
+            @Html.ActionLink(@Resources.HomeLinkText, "Index", "Home", null, new { @class = "button" })
         </div>
 
 
     </div>
 </div>
+
+@section menu {
+    @Html.Action("HomeNavigation", "Menu", new { area = "Admin", section = AdminHomeNavigationSection.AccountServices })
+}
