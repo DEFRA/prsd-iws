@@ -1615,6 +1615,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>CheckResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Areas\Admin\Views\DeleteNotification\ConfirmResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ConfirmResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Areas\Admin\Views\DeleteNotification\DeleteResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -3500,6 +3505,10 @@
     <EmbeddedResource Include="Areas\Admin\Views\DeleteNotification\CheckResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>CheckResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\Admin\Views\DeleteNotification\ConfirmResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ConfirmResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\Admin\Views\DeleteNotification\DeleteResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

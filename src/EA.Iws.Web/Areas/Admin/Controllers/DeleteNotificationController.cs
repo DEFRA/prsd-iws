@@ -70,7 +70,7 @@
         {
             // Actually delete the notification
 
-            return View("Confirm");
+            return View("Confirm", model);
         }
     }
 }
