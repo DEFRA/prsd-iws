@@ -4,7 +4,7 @@
 
     public class DeleteViewModel
     {
-        public Guid NotificationId { get; set; }
+        public Guid? NotificationId { get; set; }
 
         public string NotificationNumber { get; set; }
 
