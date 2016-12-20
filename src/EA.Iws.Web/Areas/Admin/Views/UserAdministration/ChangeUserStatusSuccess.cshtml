@@ -8,14 +8,14 @@
 <h1 class="heading-large">@Resources.UserStatusChangedTitle</h1>
 
 <p>
-    The changes you have made have been confirmed.
+    @Resources.ChangedConfirmed
     @if (Model.Status == InternalUserStatus.Inactive)
     {
-        string.Format(Resources.UserNowInactive, Model.FullName);
+        <p>@Html.Raw(string.Format(Resources.UserNowInactive, Model.FullName))</p>
     }
     else
     {
-        string.Format(Resources.UserNowActive, Model.FullName);
+        <p>@Html.Raw(string.Format(Resources.UserNowActive, Model.FullName))</p>
     }
 </p>
 

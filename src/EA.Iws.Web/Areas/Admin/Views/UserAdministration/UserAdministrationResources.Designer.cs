@@ -61,7 +61,7 @@ namespace EA.Iws.Web.Areas.Admin.Views.UserAdministration {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The changes you have made have been confirmed..
+        ///   Looks up a localized string similar to The changes you have made have been confirmed.
         /// </summary>
         public static string ChangedConfirmed {
             get {
@@ -124,7 +124,7 @@ namespace EA.Iws.Web.Areas.Admin.Views.UserAdministration {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to User {0} is now active. They can now access IWS Online..
+        ///   Looks up a localized string similar to User {0} is now active and they can now access IWS Online.
         /// </summary>
         public static string UserNowActive {
             get {
@@ -133,7 +133,7 @@ namespace EA.Iws.Web.Areas.Admin.Views.UserAdministration {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to User {0} is now inactive. They can no longer access IWS Online..
+        ///   Looks up a localized string similar to User {0} is now inactive and they can no longer access IWS Online.
         /// </summary>
         public static string UserNowInactive {
             get {
@@ -142,7 +142,7 @@ namespace EA.Iws.Web.Areas.Admin.Views.UserAdministration {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The changes you have made have been confirmed. User {0} now has the role &apos;{1}&apos;..
+        ///   Looks up a localized string similar to The changes you have made have been confirmed and user {0} now has the role &apos;{1}&apos;.
         /// </summary>
         public static string UserRoleChangedParagraph {
             get {
