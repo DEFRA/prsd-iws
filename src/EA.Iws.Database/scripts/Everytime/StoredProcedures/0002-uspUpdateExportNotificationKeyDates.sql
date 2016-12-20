@@ -5,6 +5,7 @@ GO
 ALTER PROCEDURE [Notification].[uspUpdateExportNotificationKeyDates]
     @NotificationId UNIQUEIDENTIFIER,
     @NotificationReceivedDate DATE,
+	@PaymentReceivedDate DATE,
     @CommencementDate DATE,
     @CompleteDate DATE,
     @TransmittedDate DATE,
@@ -26,6 +27,7 @@ BEGIN
 
     UPDATE [Notification].[NotificationDates]
        SET [NotificationReceivedDate] = CASE WHEN [NotificationReceivedDate] IS NULL THEN NULL ELSE ISNULL(@NotificationReceivedDate, [NotificationReceivedDate]) END
+	      ,[PaymentReceivedDate] = CASE WHEN [PaymentReceivedDate] IS NULL THEN NULL ELSE ISNULL(@PaymentReceivedDate, [PaymentReceivedDate]) END
           ,[CommencementDate] = CASE WHEN [CommencementDate] IS NULL THEN NULL ELSE ISNULL(@CommencementDate, [CommencementDate]) END
           ,[CompleteDate] = CASE WHEN [CompleteDate] IS NULL THEN NULL ELSE ISNULL(@CompleteDate, [CompleteDate]) END
           ,[TransmittedDate] = CASE WHEN [TransmittedDate] IS NULL THEN NULL ELSE ISNULL(@TransmittedDate, [TransmittedDate]) END
