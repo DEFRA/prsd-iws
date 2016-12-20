@@ -10,6 +10,8 @@
 
         public bool IsExportNotification { get; set; }
 
+        public bool Success { get; set; }
+
         public DeleteViewModel(IndexViewModel model, Guid notificationId)
         {
             NotificationId = notificationId;

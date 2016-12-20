@@ -20,5 +20,7 @@
         Task<bool> NotificationNumberExists(int number, UKCompetentAuthority competentAuthority);
 
         Task<NotificationType> GetNotificationType(Guid id);
+
+        Task<bool> Delete(Guid notificationId);
     }
 }

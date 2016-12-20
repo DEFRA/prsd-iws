@@ -117,10 +117,13 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="FailureHeading" xml:space="preserve">
+    <value>Sorry an error occured and notification {0} has not been deleted</value>
+  </data>
   <data name="HomeLinkText" xml:space="preserve">
     <value>Return to home page</value>
   </data>
-  <data name="MainHeading" xml:space="preserve">
+  <data name="SuccessHeading" xml:space="preserve">
     <value>Notification {0} has been deleted</value>
   </data>
   <data name="Title" xml:space="preserve">

@@ -2,6 +2,7 @@
 {
     using System;
     using System.Data.Entity;
+    using System.Data.SqlClient;
     using System.Linq;
     using System.Threading.Tasks;
     using Core.Shared;
@@ -55,6 +56,48 @@
             return await context.ImportNotifications.Where(n => n.NotificationNumber == number)
                                                     .Select(n => (Guid?)n.Id)
                                                     .SingleOrDefaultAsync();
+        }
+
+        public async Task<bool> Delete(Guid notificationId)
+        {
+            var rowsAffected = await context.Database.ExecuteSqlCommandAsync(@"
+                DELETE FROM [ImportNotification].[MovementOperationReceipt] WHERE MovementId IN (SELECT [Id] FROM [ImportNotification].[Movement] WHERE NotificationId = @Id)
+                DELETE FROM [ImportNotification].[MovementReceipt] WHERE MovementId IN (SELECT [Id] FROM [ImportNotification].[Movement] WHERE NotificationId = @Id)
+                DELETE FROM [ImportNotification].[MovementRejection] WHERE MovementId IN (SELECT [Id] FROM [ImportNotification].[Movement] WHERE NotificationId = @Id)
+                DELETE FROM [ImportNotification].[Movement] WHERE NotificationId = @Id
+                DELETE FROM [ImportNotification].[Consent] WHERE NotificationId = @Id
+                DELETE FROM [ImportNotification].[Consultation] WHERE NotificationId = @Id
+                DELETE FROM [ImportNotification].[Exporter] WHERE ImportNotificationId = @Id
+                DELETE FROM [ImportNotification].[Facility] WHERE FacilityCollectionId IN (SELECT [Id] FROM [ImportNotification].[FacilityCollection] WHERE ImportNotificationId = @Id)
+                DELETE FROM [ImportNotification].[FacilityCollection] WHERE ImportNotificationId = @Id
+                DELETE FROM [ImportNotification].[FinancialGuaranteeStatusChange] WHERE FinancialGuaranteeId IN (SELECT [Id] FROM [ImportNotification].[FinancialGuarantee] WHERE ImportNotificationId  = @Id)
+                DELETE FROM [ImportNotification].[FinancialGuarantee] WHERE ImportNotificationId = @Id
+                DELETE FROM [ImportNotification].[FinancialGuaranteeApproval] WHERE ImportNotificationId = @Id
+                DELETE FROM [ImportNotification].[FinancialGuaranteeRefusal] WHERE ImportNotificationId = @Id
+                DELETE FROM [ImportNotification].[FinancialGuaranteeRelease] WHERE ImportNotificationId = @Id
+                DELETE FROM [ImportNotification].[Importer] WHERE ImportNotificationId = @Id
+                DELETE FROM [ImportNotification].[InterimStatus] WHERE ImportNotificationId = @Id
+                DELETE FROM [ImportNotification].[NotificationDates] WHERE NotificationAssessmentId IN (SELECT [Id] FROM [ImportNotification].[NotificationAssessment] WHERE NotificationApplicationId = @Id)
+                DELETE FROM [ImportNotification].[NotificationStatusChange] WHERE NotificationAssessmentId IN (SELECT [Id] FROM [ImportNotification].[NotificationAssessment] WHERE NotificationApplicationId = @Id)
+                DELETE FROM [ImportNotification].[NotificationAssessment] WHERE NotificationApplicationId = @Id
+                DELETE FROM [ImportNotification].[NumberOfShipmentsHistory] WHERE ImportNotificationId = @Id
+                DELETE FROM [ImportNotification].[Objection] WHERE NotificationId = @Id
+                DELETE FROM [ImportNotification].[Producer] WHERE ImportNotificationId = @Id
+                DELETE FROM [ImportNotification].[Shipment] WHERE ImportNotificationId = @Id
+                DELETE FROM [ImportNotification].[Transaction] WHERE NotificationId = @Id
+                DELETE FROM [ImportNotification].[StateOfExport] WHERE TransportRouteId IN (SELECT [Id] FROM [ImportNotification].[TransportRoute] WHERE ImportNotificationId = @Id)
+                DELETE FROM [ImportNotification].[StateOfImport] WHERE TransportRouteId IN (SELECT [Id] FROM [ImportNotification].[TransportRoute] WHERE ImportNotificationId = @Id)
+                DELETE FROM [ImportNotification].[TransitState] WHERE TransportRouteId IN (SELECT [Id] FROM [ImportNotification].[TransportRoute] WHERE ImportNotificationId = @Id)
+                DELETE FROM [ImportNotification].[TransportRoute] WHERE ImportNotificationId = @Id
+                DELETE FROM [ImportNotification].[OperationCodes] WHERE WasteOperationId IN (SELECT [Id] FROM [ImportNotification].[WasteOperation] WHERE ImportNotificationId = @Id)
+                DELETE FROM [ImportNotification].[WasteOperation] WHERE ImportNotificationId = @Id
+                DELETE FROM [ImportNotification].[WasteCode] WHERE WasteTypeId IN (SELECT [Id] FROM [ImportNotification].[WasteType] WHERE ImportNotificationId = @Id)
+                DELETE FROM [ImportNotification].[WasteType] WHERE ImportNotificationId = @Id
+                DELETE FROM [ImportNotification].[Withdrawn] WHERE NotificationId = @Id
+                DELETE FROM [ImportNotification].[Notification] WHERE Id = @Id",
+                new SqlParameter("@Id", notificationId));
+
+            return rowsAffected > 0;
         }
     }
 }

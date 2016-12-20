@@ -6,6 +6,7 @@
     using Infrastructure.Authorization;
     using Prsd.Core.Mediator;
     using Requests.ImportNotification;
+    using Requests.ImportNotificationAssessment;
     using Requests.Notification;
     using Requests.NotificationAssessment;
     using ViewModels.DeleteNotification;
@@ -66,9 +67,21 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(DeleteViewModel model)
+        public async Task<ActionResult> Delete(DeleteViewModel model)
         {
-            // Actually delete the notification
+            bool result = false;
+
+            if (model.IsExportNotification)
+            {
+                result = await mediator.SendAsync(new DeleteExportNotification(model.NotificationId.GetValueOrDefault()));
+            }
+
+            if (!model.IsExportNotification)
+            {
+                result = await mediator.SendAsync(new DeleteImportNotification(model.NotificationId.GetValueOrDefault()));
+            }
+
+            model.Success = result;
 
             return View("Confirm", model);
         }
