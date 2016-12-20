@@ -28,6 +28,7 @@
                     D.[WithdrawnDate],
                     D.[ObjectedDate],
                     D.[ConsentedDate],
+                    D.[PaymentReceivedDate],
                     C.[From] AS [ConsentValidFromDate],
                     C.[To] AS [ConsentValidToDate]
                 FROM
