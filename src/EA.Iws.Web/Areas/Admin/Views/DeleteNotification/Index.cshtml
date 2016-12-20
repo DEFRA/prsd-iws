@@ -18,6 +18,7 @@
             <div class="form-group @Html.Gds().FormGroupClass(m => m.NotificationNumber)">
                 @Html.Gds().LabelFor(m => m.NotificationNumber)
                 @Html.Gds().ValidationMessageFor(m => m.NotificationNumber)
+                @Html.Gds().HintSpan(Resources.NumberHint)
                 @Html.Gds().TextBoxFor(m => m.NotificationNumber)
             </div>
 

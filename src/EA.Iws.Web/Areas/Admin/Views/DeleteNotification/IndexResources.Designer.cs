@@ -106,6 +106,15 @@ namespace EA.Iws.Web.Areas.Admin.Views.DeleteNotification {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to For example, GB 0001 123456.
+        /// </summary>
+        public static string NumberHint {
+            get {
+                return ResourceManager.GetString("NumberHint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Is this an export or import notification?.
         /// </summary>
         public static string Question {
