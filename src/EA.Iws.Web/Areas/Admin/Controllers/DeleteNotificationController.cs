@@ -69,15 +69,19 @@
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Delete(DeleteViewModel model)
         {
+            bool result = false;
+
             if (model.IsExportNotification)
             {
-                await mediator.SendAsync(new DeleteExportNotification(model.NotificationId.GetValueOrDefault()));
+                result = await mediator.SendAsync(new DeleteExportNotification(model.NotificationId.GetValueOrDefault()));
             }
 
             if (!model.IsExportNotification)
             {
-                await mediator.SendAsync(new DeleteImportNotification(model.NotificationId.GetValueOrDefault()));
+                result = await mediator.SendAsync(new DeleteImportNotification(model.NotificationId.GetValueOrDefault()));
             }
+
+            model.Success = result;
 
             return View("Confirm", model);
         }

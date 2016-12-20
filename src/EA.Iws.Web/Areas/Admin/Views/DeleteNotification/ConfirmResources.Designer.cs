@@ -61,6 +61,15 @@ namespace EA.Iws.Web.Areas.Admin.Views.DeleteNotification {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Sorry an error occured and notification {0} has not been deleted.
+        /// </summary>
+        public static string FailureHeading {
+            get {
+                return ResourceManager.GetString("FailureHeading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Return to home page.
         /// </summary>
         public static string HomeLinkText {
@@ -72,9 +81,9 @@ namespace EA.Iws.Web.Areas.Admin.Views.DeleteNotification {
         /// <summary>
         ///   Looks up a localized string similar to Notification {0} has been deleted.
         /// </summary>
-        public static string MainHeading {
+        public static string SuccessHeading {
             get {
-                return ResourceManager.GetString("MainHeading", resourceCulture);
+                return ResourceManager.GetString("SuccessHeading", resourceCulture);
             }
         }
         
