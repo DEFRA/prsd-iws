@@ -21,6 +21,7 @@
                 SELECT
                     NA.[NotificationApplicationId] AS [NotificationId],
                     D.[NotificationReceivedDate],
+                    D.[PaymentReceivedDate],
                     D.[AssessmentStartedDate] AS [CommencementDate],
                     D.[NotificationCompletedDate] AS [CompleteDate],
                     NULL AS [TransmittedDate],

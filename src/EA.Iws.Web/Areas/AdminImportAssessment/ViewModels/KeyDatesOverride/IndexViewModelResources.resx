@@ -144,4 +144,7 @@
   <data name="WithdrawnDate" xml:space="preserve">
     <value>Withdrawn</value>
   </data>
+  <data name="PaymentReceivedDate" xml:space="preserve">
+    <value>Payment received</value>
+  </data>
 </root>
