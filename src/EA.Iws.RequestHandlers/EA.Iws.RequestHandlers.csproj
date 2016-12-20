@@ -178,6 +178,7 @@
     <Compile Include="ImportMovement\Receipt\RecordReceiptHandler.cs" />
     <Compile Include="ImportMovement\Reject\RecordRejectionHandler.cs" />
     <Compile Include="ImportNotificationAssessment\ConsentHandler.cs" />
+    <Compile Include="ImportNotificationAssessment\DeleteImportNotificationHandler.cs" />
     <Compile Include="ImportNotificationAssessment\Events\ChangeImportNotificationAssessmentStatus.cs" />
     <Compile Include="ImportNotificationAssessment\Events\CheckImportNotificationPaymentStatus.cs" />
     <Compile Include="ImportNotificationAssessment\FinancialGuarantee\ApproveFinancialGuaranteeHandler.cs" />
