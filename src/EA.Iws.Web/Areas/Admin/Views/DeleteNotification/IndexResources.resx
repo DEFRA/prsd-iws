@@ -132,6 +132,9 @@
   <data name="MainHeading" xml:space="preserve">
     <value>Which notification would you like to delete?</value>
   </data>
+  <data name="NumberHint" xml:space="preserve">
+    <value>For example, GB 0001 123456</value>
+  </data>
   <data name="Question" xml:space="preserve">
     <value>Is this an export or import notification?</value>
   </data>
