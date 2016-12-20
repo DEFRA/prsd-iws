@@ -21,6 +21,6 @@
 
         Task<NotificationType> GetNotificationType(Guid id);
 
-        Task Delete(Guid notificationId);
+        Task<bool> Delete(Guid notificationId);
     }
 }
