@@ -11,11 +11,11 @@
     The changes you have made have been confirmed.
     @if (Model.Status == InternalUserStatus.Inactive)
     {
-        @string.Format(Resources.UserNowInactive, Model.FullName)
+        string.Format(Resources.UserNowInactive, Model.FullName);
     }
     else
     {
-        @string.Format(Resources.UserNowActive, Model.FullName)
+        string.Format(Resources.UserNowActive, Model.FullName);
     }
 </p>
 
