@@ -5,11 +5,12 @@
 @using EnumHelper = EA.Prsd.Core.Helpers.EnumHelper
 
 @model EA.Iws.Web.Areas.AdminExportNotificationMovements.ViewModels.Home.MovementSummaryViewModel
+@using Resources = EA.Iws.Web.Areas.AdminExportNotificationMovements.Views.Home.IndexResources
 
 @{
-    ViewBag.Title = "Shipment summary";
+    ViewBag.Title = Resources.Title;
 
-    var operationTitle = Model.NotificationType == NotificationType.Disposal ? "Disposed" : "Recovered";
+    var operationTitle = Model.NotificationType == NotificationType.Disposal ? @Resources.Disposed : @Resources.Recovered;
 }
 
 @helper DisplayDate(DateTime? date, MovementStatus status)
@@ -39,36 +40,36 @@
 <div class="shipping-home">
 
     <h1 class="heading-large">
-        Shipment summary
+        @Resources.MainHeading
     </h1>
 
     <div class="grid-row">
         <div class="column-half">
             <table class="odd-table">
-                <caption class="visuallyhidden">Shipment summary</caption>
+                <caption class="visuallyhidden">@Resources.MainHeading</caption>
                 <tbody>
                 <tr>
-                    <td>Total intended number of shipments:</td>
+                    <td>@Resources.SummaryTitleIntended</td>
                     <td>@Model.IntendedShipments</td>
                 </tr>
                 <tr>
-                    <td>Number of shipments used:</td>
+                    <td>@Resources.SummaryTitleNumber</td>
                     <td>@Model.UsedShipments</td>
                 </tr>
                 <tr>
-                    <td>Active loads permitted:</td>
+                    <td>@Resources.SummaryTitleActive</td>
                     <td>@Model.ActiveLoadsPermitted</td>
                 </tr>
                 <tr>
-                    <td>Current active loads:</td>
+                    <td>@Resources.SummaryTitleCurrent</td>
                     <td>@Model.ActiveLoadsCurrent</td>
                 </tr>
                 <tr>
-                    <td>Total quantity received:</td>
+                    <td>@Resources.SummaryTitleReceived</td>
                     <td>@Model.QuantityReceivedTotal</td>
                 </tr>
                 <tr>
-                    <td>Total quantity remaining:</td>
+                    <td>@Resources.SummaryTitleRemaining</td>
                     <td>@Model.QuantityRemainingTotal</td>
                 </tr>
                 </tbody>
@@ -76,25 +77,25 @@
         </div>
 
         <div class="column-half nav-bloc">
-            <h2 class="heading-small">Shipping options</h2>
+            <h2 class="heading-small">@Resources.OptionsHeading</h2>
             <nav>
                 @if (Model.NotificationStatus == NotificationStatus.Consented && Model.FgStatus == FinancialGuaranteeStatus.Approved)
                 {
-                    @Html.ActionLink("Record shipment data", "Index", "CaptureMovement", new { area = "AdminExportNotificationMovements" }, null)
+                    @Html.ActionLink(Resources.OptionsRecord, "Index", "CaptureMovement", new { area = "AdminExportNotificationMovements" }, null)
                 }
                 @if (Model.NotificationStatus == NotificationStatus.Consented)
                 {
-                    @Html.ActionLink("Cancel a prenotification", "Index", "Cancel")
+                    @Html.ActionLink(Resources.OptionsCancel, "Index", "Cancel")
                 }
-                @Html.ActionLink("View rejected shipments", "List", "RejectedMovement")
-                @Html.ActionLink("Go to notification overview", "Index", "Home", new { area = "AdminExportAssessment", id = Model.NotificationId }, null)
+                @Html.ActionLink(Resources.OptionsViewRejected, "List", "RejectedMovement")
+                @Html.ActionLink(Resources.OptionsOverview, "Index", "Home", new { area = "AdminExportAssessment", id = Model.NotificationId }, null)
             </nav>
         </div>
     </div>
 
     <section class="ship-data">
         <h3 class="heading-small">
-            Shipment details
+            @Resources.DetailsHeading
         </h3>
 
         @using (Html.BeginForm())
@@ -104,22 +105,22 @@
             <div class="grid-row form-group">
                 <div class="column-half">
                     @Html.DropDownListFor(m => m.SelectedMovementStatus, Model.MovementStatuses, new { @class = "form-control view-by" })
-                    <button id="updateStatus" class="button" type="submit">Update</button>
+                    <button id="updateStatus" class="button" type="submit">@Resources.Update</button>
                 </div>
             </div>
         }
 
         <div class="form-group">
             <table class="odd-table">
-                <caption class="visuallyhidden">Shipment summary</caption>
+                <caption class="visuallyhidden">@Resources.SummaryTableHeading</caption>
                 <thead>
                 <tr>
-                    <th>No.</th>
-                    <th>Status</th>
-                    <th>Prenotified</th>
-                    <th>Shipment due</th>
-                    <th>Received</th>
-                    <th>Quantity</th>
+                    <th>@Resources.SummaryTableNumber</th>
+                    <th>@Resources.SummaryTableStatus</th>
+                    <th>@Resources.SummaryTablePrenotified</th>
+                    <th>@Resources.SummaryTableDue</th>
+                    <th>@Resources.SummaryTableReceived</th>
+                    <th>@Resources.SummaryTableQuantity</th>
                     <th>@operationTitle</th>
                 </tr>
                 </thead>
@@ -131,7 +132,7 @@
                         var statusText = Model.TableData[i].Status == MovementStatus.Completed ? operationTitle : EnumHelper.GetDisplayName(Model.TableData[i].Status);
                         if (Model.TableData[i].IsShipped())
                         {
-                            statusText = statusText + " (Shipped)";
+                            statusText = statusText + Resources.Shipped;
                         }
 
                         <tr>
@@ -160,7 +161,7 @@
         </div>
     </section>
     <div class="form-group">
-        @Html.ActionLink("Go to notification overview",
+        @Html.ActionLink(Resources.GoToButtonText,
             "Index",
             "Home",
             new { area = "AdminExportAssessment", id = Model.NotificationId },
