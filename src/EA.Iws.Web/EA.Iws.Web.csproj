@@ -1231,6 +1231,7 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="Areas\AdminExportNotificationMovements\ViewModels\RejectedMovement\DetailsViewModel.cs" />
     <Compile Include="Areas\AdminExportNotificationMovements\ViewModels\RejectedMovement\ListViewModel.cs" />
     <Compile Include="Areas\AdminExportNotificationMovements\Views\Delete\ConfirmResources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -1251,6 +1252,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>IndexResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\AdminExportNotificationMovements\Views\RejectedMovement\DetailsResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DetailsResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Areas\AdminExportNotificationMovements\Views\RejectedMovement\ListResources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -3302,6 +3308,10 @@
     <EmbeddedResource Include="Areas\AdminExportNotificationMovements\Views\Home\IndexResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\AdminExportNotificationMovements\Views\RejectedMovement\DetailsResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>DetailsResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\AdminExportNotificationMovements\Views\RejectedMovement\ListResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

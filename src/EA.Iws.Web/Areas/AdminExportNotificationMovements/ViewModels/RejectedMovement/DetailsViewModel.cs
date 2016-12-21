@@ -1,0 +1,28 @@
+﻿namespace EA.Iws.Web.Areas.AdminExportNotificationMovements.ViewModels.RejectedMovement
+{
+    using System;
+    using Core.Movement;
+
+    public class DetailsViewModel
+    {
+        public int Number { get; set; }
+
+        public DateTime Date { get; set; }
+
+        public string Reason { get; set; }
+
+        public string FurtherDetails { get; set; }
+
+        public DetailsViewModel()
+        {
+        }
+
+        public DetailsViewModel(RejectedMovementDetails details)
+        {
+            Number = details.Number;
+            Date = details.Date;
+            Reason = details.Reason;
+            FurtherDetails = details.FurtherDetails;
+        }
+    }
+}
