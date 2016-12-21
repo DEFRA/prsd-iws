@@ -7,7 +7,7 @@
     using Core.Movement;
     using Prsd.Core.Mediator;
 
-    [RequestAuthorization(ExportMovementPermissions.CanReadExportMovementsExternal)]
+    [RequestAuthorization(ExportMovementPermissions.CanReadExportMovementsInternal)]
     public class GetRejectedMovements : IRequest<IList<RejectedMovementListData>>
     {
         public Guid NotificationId { get; private set; }
