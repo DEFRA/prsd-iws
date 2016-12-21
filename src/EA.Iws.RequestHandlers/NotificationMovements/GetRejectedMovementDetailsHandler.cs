@@ -8,23 +8,26 @@
 
     internal class GetRejectedMovementDetailsHandler : IRequestHandler<GetRejectedMovementDetails, RejectedMovementDetails>
     {
-        private readonly IMovementRejectionRepository repository;
+        private readonly IMovementRejectionRepository rejectionRepository;
+        private readonly IMovementRepository movementRepository;
 
-        public GetRejectedMovementDetailsHandler(IMovementRejectionRepository repository)
+        public GetRejectedMovementDetailsHandler(IMovementRejectionRepository rejectionRepository, IMovementRepository movementRepository)
         {
-            this.repository = repository;
+            this.rejectionRepository = rejectionRepository;
+            this.movementRepository = movementRepository;
         }
 
         public async Task<RejectedMovementDetails> HandleAsync(GetRejectedMovementDetails message)
         {
-            var details = await repository.GetByMovementId(message.MovementId);
+            var movement = await movementRepository.GetById(message.MovementId);
+            var details = await rejectionRepository.GetByMovementId(message.MovementId);
 
             return new RejectedMovementDetails
             {
-                Number = message.Number,
+                Number = movement.Number,
                 Date = details.Date,
                 Reason = details.Reason,
-                FurtherDetails = details.Reason
+                FurtherDetails = details.FurtherDetails
             };
         }
     }
