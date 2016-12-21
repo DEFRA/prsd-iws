@@ -495,6 +495,7 @@
     <Content Include="Areas\Admin\Views\DeleteNotification\Confirm.cshtml" />
     <Content Include="Areas\AdminExportNotificationMovements\Views\RejectedMovement\List.cshtml" />
     <Content Include="Areas\AdminImportNotificationMovements\Views\RejectedMovement\List.cshtml" />
+    <Content Include="Areas\AdminExportNotificationMovements\Views\RejectedMovement\Details.cshtml" />
     <None Include="Content\iws\_panels.scss" />
     <Content Include="Content\nta-extended.css" />
     <Content Include="Content\select2\select2-spinner.gif" />
@@ -1229,6 +1230,7 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="Areas\AdminExportNotificationMovements\ViewModels\RejectedMovement\ListViewModel.cs" />
     <Compile Include="Areas\AdminExportNotificationMovements\Views\Delete\ConfirmResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -1248,6 +1250,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>IndexResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\AdminExportNotificationMovements\Views\RejectedMovement\ListResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ListResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Areas\AdminImportAssessment\AdminImportAssessmentAreaRegistration.cs" />
     <Compile Include="Areas\AdminImportAssessment\Controllers\AccountManagementController.cs" />
@@ -3179,7 +3186,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\AddressBook\Models\" />
-    <Folder Include="Areas\AdminExportNotificationMovements\ViewModels\RejectedMovement\" />
     <Folder Include="Areas\AdminImportNotificationMovements\ViewModels\RejectedMovement\" />
     <Folder Include="Areas\Admin\Views\Shared\EditorTemplates\" />
     <Folder Include="Areas\Admin\Views\SmokeTest\" />
@@ -3290,6 +3296,10 @@
     <EmbeddedResource Include="Areas\AdminExportNotificationMovements\Views\Home\IndexResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\AdminExportNotificationMovements\Views\RejectedMovement\ListResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ListResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\AdminImportAssessment\Controllers\DecisionControllerResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
