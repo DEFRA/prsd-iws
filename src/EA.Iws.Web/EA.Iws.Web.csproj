@@ -496,6 +496,7 @@
     <Content Include="Areas\AdminExportNotificationMovements\Views\RejectedMovement\List.cshtml" />
     <Content Include="Areas\AdminImportNotificationMovements\Views\RejectedMovement\List.cshtml" />
     <Content Include="Areas\AdminExportNotificationMovements\Views\RejectedMovement\Details.cshtml" />
+    <Content Include="Areas\AdminImportNotificationMovements\Views\RejectedMovement\Details.cshtml" />
     <None Include="Content\iws\_panels.scss" />
     <Content Include="Content\nta-extended.css" />
     <Content Include="Content\select2\select2-spinner.gif" />
@@ -1461,6 +1462,7 @@
     <Compile Include="Areas\AdminImportNotificationMovements\ViewModels\Delete\IndexViewModelResources.Designer.cs" />
     <Compile Include="Areas\AdminImportNotificationMovements\ViewModels\Home\MovementsSummaryTableViewModel.cs" />
     <Compile Include="Areas\AdminImportNotificationMovements\ViewModels\Home\MovementSummaryViewModel.cs" />
+    <Compile Include="Areas\AdminImportNotificationMovements\ViewModels\RejectedMovement\ListViewModel.cs" />
     <Compile Include="Areas\AdminImportNotificationMovements\Views\Cancel\ConfirmResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -1504,6 +1506,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>IndexResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\AdminImportNotificationMovements\Views\RejectedMovement\ListResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ListResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\AdminExportAssessment\Controllers\ChangeNotificationOwnerController.cs" />
@@ -3186,7 +3193,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\AddressBook\Models\" />
-    <Folder Include="Areas\AdminImportNotificationMovements\ViewModels\RejectedMovement\" />
     <Folder Include="Areas\Admin\Views\Shared\EditorTemplates\" />
     <Folder Include="Areas\Admin\Views\SmokeTest\" />
     <Folder Include="Areas\FinancialGuarantee\ViewModels\" />
@@ -3462,6 +3468,10 @@
     <EmbeddedResource Include="Areas\AdminImportNotificationMovements\Views\Home\IndexResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\AdminImportNotificationMovements\Views\RejectedMovement\ListResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ListResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\Admin\Controllers\DeleteNotificationControllerResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
