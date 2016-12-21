@@ -134,6 +134,15 @@ namespace EA.Iws.Web.Areas.AdminExportAssessment.ViewModels.KeyDatesOverride {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Payment received.
+        /// </summary>
+        public static string PaymentReceivedDate {
+            get {
+                return ResourceManager.GetString("PaymentReceivedDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Transmitted on.
         /// </summary>
         public static string TransmittedDate {

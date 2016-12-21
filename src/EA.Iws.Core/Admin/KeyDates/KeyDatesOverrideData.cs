@@ -25,5 +25,7 @@
         public DateTime? ConsentValidFromDate { get; set; }
 
         public DateTime? ConsentValidToDate { get; set; }
+
+        public DateTime? PaymentReceivedDate { get; set; }
     }
 }

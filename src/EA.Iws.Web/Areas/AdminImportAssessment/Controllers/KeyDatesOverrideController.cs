@@ -49,7 +49,8 @@
                 NotificationId = id,
                 NotificationReceivedDate = model.NotificationReceivedDate.AsDateTime(),
                 ObjectedDate = model.ObjectedDate.AsDateTime(),
-                WithdrawnDate = model.WithdrawnDate.AsDateTime()
+                WithdrawnDate = model.WithdrawnDate.AsDateTime(),
+                PaymentReceivedDate = model.PaymentReceivedDate.AsDateTime()
             };
 
             await mediator.SendAsync(new SetImportKeyDatesOverride(data));

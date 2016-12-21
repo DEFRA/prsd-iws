@@ -28,6 +28,7 @@
                     D.[WithdrawnDate],
                     D.[ObjectedDate],
                     D.[ConsentedDate],
+                    D.[PaymentReceivedDate],
                     C.[From] AS [ConsentValidFromDate],
                     C.[To] AS [ConsentValidToDate]
                 FROM
@@ -44,6 +45,7 @@
             await context.Database.ExecuteSqlCommandAsync(@"[Notification].[uspUpdateExportNotificationKeyDates] 
                 @NotificationId
                 ,@NotificationReceivedDate
+                ,@PaymentReceivedDate
                 ,@CommencementDate
                 ,@CompleteDate
                 ,@TransmittedDate
@@ -55,6 +57,7 @@
                 ,@ConsentValidToDate",
                 new SqlParameter("@NotificationId", data.NotificationId),
                 new SqlParameter("@NotificationReceivedDate", (object)data.NotificationReceivedDate ?? DBNull.Value),
+                new SqlParameter("@PaymentReceivedDate", (object)data.PaymentReceivedDate ?? DBNull.Value),
                 new SqlParameter("@CommencementDate", (object)data.CommencementDate ?? DBNull.Value),
                 new SqlParameter("@CompleteDate", (object)data.CompleteDate ?? DBNull.Value),
                 new SqlParameter("@TransmittedDate", (object)data.TransmittedDate ?? DBNull.Value),
