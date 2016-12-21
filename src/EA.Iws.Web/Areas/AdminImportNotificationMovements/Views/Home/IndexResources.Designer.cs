@@ -133,6 +133,15 @@ namespace EA.Iws.Web.Areas.AdminImportNotificationMovements.Views.Home {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to View rejected movements.
+        /// </summary>
+        public static string RejectedMovements {
+            get {
+                return ResourceManager.GetString("RejectedMovements", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Shipping options.
         /// </summary>
         public static string ShipingOptions {

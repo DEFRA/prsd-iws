@@ -494,6 +494,7 @@
     <Content Include="Areas\Admin\Views\DeleteNotification\Check.cshtml" />
     <Content Include="Areas\Admin\Views\DeleteNotification\Confirm.cshtml" />
     <Content Include="Areas\AdminExportNotificationMovements\Views\RejectedMovement\List.cshtml" />
+    <Content Include="Areas\AdminImportNotificationMovements\Views\RejectedMovement\List.cshtml" />
     <None Include="Content\iws\_panels.scss" />
     <Content Include="Content\nta-extended.css" />
     <Content Include="Content\select2\select2-spinner.gif" />
@@ -1421,6 +1422,7 @@
       <DependentUpon>DeleteControllerResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Areas\AdminImportNotificationMovements\Controllers\HomeController.cs" />
+    <Compile Include="Areas\AdminImportNotificationMovements\Controllers\RejectedMovementController.cs" />
     <Compile Include="Areas\AdminImportNotificationMovements\ViewModels\Cancel\CancellableMovementsViewModel.cs" />
     <Compile Include="Areas\AdminImportNotificationMovements\ViewModels\Cancel\CancelResources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -3173,6 +3175,7 @@
   <ItemGroup>
     <Folder Include="Areas\AddressBook\Models\" />
     <Folder Include="Areas\AdminExportNotificationMovements\ViewModels\RejectedMovement\" />
+    <Folder Include="Areas\AdminImportNotificationMovements\ViewModels\RejectedMovement\" />
     <Folder Include="Areas\Admin\Views\Shared\EditorTemplates\" />
     <Folder Include="Areas\Admin\Views\SmokeTest\" />
     <Folder Include="Areas\FinancialGuarantee\ViewModels\" />

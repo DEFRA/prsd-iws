@@ -186,4 +186,7 @@
   <data name="GoToOverview" xml:space="preserve">
     <value>Go to notification overview</value>
   </data>
+  <data name="RejectedMovements" xml:space="preserve">
+    <value>View rejected movements</value>
+  </data>
 </root>

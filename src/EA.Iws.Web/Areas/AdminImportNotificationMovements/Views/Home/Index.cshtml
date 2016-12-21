@@ -75,6 +75,8 @@ else
 
                         @Html.ActionLink(@Resource.Cancel, "Index", "Cancel")
 
+                        @Html.ActionLink(@Resource.RejectedMovements, "List", "RejectedMovement")
+
                         @Html.ActionLink(@Resource.GoToOverview, "Index", "Home", new { area = "ImportNotification", id = Model.NotificationId }, null)
                     </nav>
                 </div>
