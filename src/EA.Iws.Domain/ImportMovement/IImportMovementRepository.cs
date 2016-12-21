@@ -19,5 +19,7 @@
         Task<int> GetLatestMovementNumber(Guid notificationId);
 
         Task<bool> DeleteById(Guid movementId);
+
+        Task<IEnumerable<ImportMovement>> GetRejectedMovements(Guid notificationId);
     }
 }

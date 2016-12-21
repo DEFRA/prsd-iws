@@ -80,5 +80,24 @@
 
             return rowsAffected > 0;
         }
+
+        public async Task<IEnumerable<ImportMovement>> GetRejectedMovements(Guid notificationId)
+        {
+            await notificationAuthorization.EnsureAccessAsync(notificationId);
+
+            var movements = await context.ImportMovements.Where(m => m.NotificationId == notificationId).ToArrayAsync();
+            var rejectedMovements = new List<ImportMovement>();
+
+            foreach (var m in movements)
+            {
+                var rejection = await context.ImportMovementRejections.SingleOrDefaultAsync(r => r.MovementId == m.Id);
+                if (rejection != null)
+                {
+                    rejectedMovements.Add(m);
+                }
+            }
+
+            return rejectedMovements;
+        }
     }
 }

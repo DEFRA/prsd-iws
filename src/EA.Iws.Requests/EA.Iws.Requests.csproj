@@ -164,6 +164,7 @@
     <Compile Include="ImportNotificationMovements\GetCancellableMovements.cs" />
     <Compile Include="ImportNotificationMovements\GetImportMovementsSummary.cs" />
     <Compile Include="ImportNotificationMovements\GetImportMovementsSummaryTable.cs" />
+    <Compile Include="ImportNotificationMovements\GetRejectedImportMovements.cs" />
     <Compile Include="ImportNotification\CompleteDraftImportNotification.cs" />
     <Compile Include="ImportNotification\GetChangeNumberOfShipmentConfrimationData.cs" />
     <Compile Include="ImportNotification\GetDraftData.cs" />
