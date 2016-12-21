@@ -116,5 +116,12 @@
 
             return rowsAffected > 0;
         }
+
+        public async Task<IEnumerable<Movement>> GetRejectedMovements(Guid notificationId)
+        {
+            await notificationAuthorization.EnsureAccessAsync(notificationId);
+
+            return await context.Movements.Where(m => m.NotificationId == notificationId && (m.Status == MovementStatus.Rejected)).ToArrayAsync();
+        }
     }
 }

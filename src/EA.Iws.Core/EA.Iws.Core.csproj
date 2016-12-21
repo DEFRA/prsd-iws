@@ -170,6 +170,7 @@
     <Compile Include="Movement\QuantityReceivedTolerance.cs" />
     <Compile Include="Movement\ProposedMovementDateResponse.cs" />
     <Compile Include="Movement\ProposedUpdatedMovementDateResponse.cs" />
+    <Compile Include="Movement\RejectedMovementListData.cs" />
     <Compile Include="Movement\ShipmentDates.cs" />
     <Compile Include="Movement\SubmittedMovement.cs" />
     <Compile Include="Movement\MovementData.cs" />
