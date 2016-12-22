@@ -11,12 +11,9 @@
     {
         public Guid MovementId { get; private set; }
 
-        public int Number { get; private set; }
-
-        public GetRejectedImportMovementDetails(Guid movementId, int number)
+        public GetRejectedImportMovementDetails(Guid movementId)
         {
             MovementId = movementId;
-            Number = number;
         }
     }
 }
