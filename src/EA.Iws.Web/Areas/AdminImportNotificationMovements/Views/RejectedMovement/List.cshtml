@@ -1,0 +1,60 @@
+﻿@model EA.Iws.Web.Areas.AdminImportNotificationMovements.ViewModels.RejectedMovement.ListViewModel
+@using Resources = EA.Iws.Web.Areas.AdminImportNotificationMovements.Views.RejectedMovement.ListResources
+
+@{
+    ViewBag.Title = Resources.Title;
+}
+
+@helper DisplayDate(DateTime? date)
+{
+if (date.HasValue)
+{
+        @date.Value.ToString("d MMM yyyy")
+}
+else
+{
+        @:- -
+    }
+}
+
+<h1 class="heading-large">@Resources.MainHeading</h1>
+
+<div class="form-group">
+    <table class="odd-table">
+        <caption class="visuallyhidden">@Resources.MainHeading</caption>
+        <thead>
+            <tr>
+                <th>@Resources.TableNumber</th>
+                <th>@Resources.TablePrenotified</th>
+                <th>@Resources.TableDue</th>
+                <th></th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @{
+                for (int i = 0; i < Model.Movements.Count; i++)
+                {
+                    <tr>
+                        <td>
+                            @Model.Movements[i].Number
+                        </td>
+                        <td>
+                            @DisplayDate(Model.Movements[i].PrenotificationDate)
+                        </td>
+                        <td>
+                            @DisplayDate(Model.Movements[i].ShipmentDate)
+                        </td>
+                        <td>
+                            @Html.ActionLink(Resources.TableDetails, "Details", "RejectedMovement", new { movementId = Model.Movements[i].Id }, null)
+                        </td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>
+
+<div class="form-group">
+    @Html.ActionLink(Resources.LinkText, "Index", "Home", null, new { @class = "button" })
+</div>
