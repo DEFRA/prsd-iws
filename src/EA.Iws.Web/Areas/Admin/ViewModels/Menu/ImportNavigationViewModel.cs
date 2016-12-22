@@ -16,7 +16,5 @@
         public bool ShowAssessmentDecision { get; set; }
 
         public bool ShowKeyDatesOverride { get; set; }
-
-        public bool ShowDeleteMovementLink { get; set; }
     }
 }
