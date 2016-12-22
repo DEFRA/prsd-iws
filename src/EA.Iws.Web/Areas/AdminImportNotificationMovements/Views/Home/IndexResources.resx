@@ -189,4 +189,7 @@
   <data name="RejectedMovements" xml:space="preserve">
     <value>View rejected movements</value>
   </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Delete a shipment</value>
+  </data>
 </root>

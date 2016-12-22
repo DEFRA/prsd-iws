@@ -75,6 +75,11 @@ else
 
                         @Html.ActionLink(@Resource.Cancel, "Index", "Cancel")
 
+                        @if (Model.CanDeleteMovement)
+                        {
+                            @Html.ActionLink(@Resource.Delete, "Index", "Delete")
+                        }
+
                         @Html.ActionLink(@Resource.RejectedMovements, "List", "RejectedMovement")
 
                         @Html.ActionLink(@Resource.GoToOverview, "Index", "Home", new { area = "ImportNotification", id = Model.NotificationId }, null)

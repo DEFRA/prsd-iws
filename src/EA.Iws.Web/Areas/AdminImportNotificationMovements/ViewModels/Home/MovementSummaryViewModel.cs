@@ -29,6 +29,8 @@
 
         public List<MovementsSummaryTableViewModel> TableData { get; set; }
 
+        public bool CanDeleteMovement { get; set; }
+
         public MovementSummaryViewModel()
         {
         }
