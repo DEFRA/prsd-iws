@@ -79,7 +79,7 @@ namespace EA.Iws.Web.Areas.Admin.Views.Menu {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Cancel shipments.
+        ///   Looks up a localized string similar to Cancel prenotifications.
         /// </summary>
         public static string CancelShipmentLinkText {
             get {

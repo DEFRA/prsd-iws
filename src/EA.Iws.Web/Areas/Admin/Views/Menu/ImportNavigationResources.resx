@@ -127,7 +127,7 @@
     <value>Assessment</value>
   </data>
   <data name="CancelShipmentsLinkText" xml:space="preserve">
-    <value>Cancel shipments</value>
+    <value>Cancel prenotifications</value>
   </data>
   <data name="CodesLinkText" xml:space="preserve">
     <value>Waste codes</value>
