@@ -124,7 +124,7 @@
     <value>Rejected shipments</value>
   </data>
   <data name="TableDetails" xml:space="preserve">
-    <value>Rejection details</value>
+    <value>View details</value>
   </data>
   <data name="TableDue" xml:space="preserve">
     <value>Shipment Date</value>

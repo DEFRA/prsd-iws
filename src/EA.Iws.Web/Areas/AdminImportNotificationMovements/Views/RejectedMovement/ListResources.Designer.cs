@@ -80,7 +80,7 @@ namespace EA.Iws.Web.Areas.AdminImportNotificationMovements.Views.RejectedMoveme
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Rejection details.
+        ///   Looks up a localized string similar to View details.
         /// </summary>
         public static string TableDetails {
             get {
