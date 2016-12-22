@@ -38,6 +38,8 @@
 
         public FinancialGuaranteeStatus FgStatus { get; set; }
 
+        public bool CanDeleteMovement { get; set; }
+
         public SelectList MovementStatuses
         {
             get

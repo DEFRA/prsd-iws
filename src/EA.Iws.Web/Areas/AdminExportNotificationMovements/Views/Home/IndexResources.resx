@@ -132,6 +132,9 @@
   <data name="OptionsCancel" xml:space="preserve">
     <value>Cancel a prenotification</value>
   </data>
+  <data name="OptionsDelete" xml:space="preserve">
+    <value>Delete a shipment</value>
+  </data>
   <data name="OptionsHeading" xml:space="preserve">
     <value>Shipping options</value>
   </data>

@@ -106,6 +106,15 @@ namespace EA.Iws.Web.Areas.AdminExportNotificationMovements.Views.Home {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Delete a shipment.
+        /// </summary>
+        public static string OptionsDelete {
+            get {
+                return ResourceManager.GetString("OptionsDelete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Shipping options.
         /// </summary>
         public static string OptionsHeading {

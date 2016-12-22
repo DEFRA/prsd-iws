@@ -87,6 +87,10 @@
                 {
                     @Html.ActionLink(Resources.OptionsCancel, "Index", "Cancel")
                 }
+                @if (Model.CanDeleteMovement)
+                {
+                    @Html.ActionLink(Resources.OptionsDelete, "Index", "Delete")
+                }
                 @Html.ActionLink(Resources.OptionsViewRejected, "List", "RejectedMovement")
                 @Html.ActionLink(Resources.OptionsOverview, "Index", "Home", new { area = "AdminExportAssessment", id = Model.NotificationId }, null)
             </nav>
