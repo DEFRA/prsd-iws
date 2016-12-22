@@ -94,6 +94,7 @@
                 DELETE FROM [ImportNotification].[WasteCode] WHERE WasteTypeId IN (SELECT [Id] FROM [ImportNotification].[WasteType] WHERE ImportNotificationId = @Id)
                 DELETE FROM [ImportNotification].[WasteType] WHERE ImportNotificationId = @Id
                 DELETE FROM [ImportNotification].[Withdrawn] WHERE NotificationId = @Id
+                DELETE FROM [Draft].[Import] WHERE ImportNotificationId = @Id 
                 DELETE FROM [ImportNotification].[Notification] WHERE Id = @Id",
                 new SqlParameter("@Id", notificationId));
 
