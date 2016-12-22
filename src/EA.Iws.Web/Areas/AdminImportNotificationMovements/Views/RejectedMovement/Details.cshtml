@@ -1,1 +1,37 @@
-﻿Rejected movement details
+﻿@model EA.Iws.Web.Areas.AdminImportNotificationMovements.ViewModels.RejectedMovement.DetailsViewModel
+@using Resources = EA.Iws.Web.Areas.AdminImportNotificationMovements.Views.RejectedMovement.DetailsResources
+
+@{
+    ViewBag.Title = Resources.Title;
+}
+
+<h1 class="heading-large">@Resources.MainHeading</h1>
+
+<div class="form-group">
+    <table>
+        <caption class="visuallyhidden">@Resources.MainHeading</caption>
+
+        <tbody>
+            <tr>
+                <td class="heading-small">@Resources.ShipmentNumber.ToNonBreakingString()</td>
+                <td>@Model.Number</td>
+            </tr>
+            <tr>
+                <td class="heading-small">@Resources.DateRejected.ToNonBreakingString()</td>
+                <td>@Html.Gds().DisplayShortDate(Model.Date)</td>
+            </tr>
+            <tr>
+                <td class="heading-small">@Resources.Reason.ToNonBreakingString()</td>
+                <td>@Model.Reason</td>
+            </tr>
+            <tr>
+                <td class="heading-small">@Resources.Info.ToNonBreakingString()</td>
+                <td>@(Model.FurtherDetails == null ? Resources.None : Model.FurtherDetails)</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="form-group">
+    @Html.ActionLink(Resources.LinkText, "Index", "Home", null, new { @class = "button" })
+</div>

@@ -29,9 +29,12 @@
         }
 
         [HttpGet]
-        public ActionResult Details(Guid movementId)
+        public async Task<ActionResult> Details(Guid movementId)
         {
-            return View();
+            var movement = await mediator.SendAsync(new GetRejectedImportMovementDetails(movementId));
+            var model = new DetailsViewModel(movement);
+
+            return View(model);
         }
     }
 }

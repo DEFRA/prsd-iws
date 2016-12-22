@@ -1468,6 +1468,7 @@
     <Compile Include="Areas\AdminImportNotificationMovements\ViewModels\Delete\IndexViewModelResources.Designer.cs" />
     <Compile Include="Areas\AdminImportNotificationMovements\ViewModels\Home\MovementsSummaryTableViewModel.cs" />
     <Compile Include="Areas\AdminImportNotificationMovements\ViewModels\Home\MovementSummaryViewModel.cs" />
+    <Compile Include="Areas\AdminImportNotificationMovements\ViewModels\RejectedMovement\DetailsViewModel.cs" />
     <Compile Include="Areas\AdminImportNotificationMovements\ViewModels\RejectedMovement\ListViewModel.cs" />
     <Compile Include="Areas\AdminImportNotificationMovements\Views\Cancel\ConfirmResources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -1512,6 +1513,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>IndexResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\AdminImportNotificationMovements\Views\RejectedMovement\DetailsResources.Designer.cs">
+      <DependentUpon>DetailsResources.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Areas\AdminImportNotificationMovements\Views\RejectedMovement\ListResources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -3478,6 +3484,10 @@
     <EmbeddedResource Include="Areas\AdminImportNotificationMovements\Views\Home\IndexResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\AdminImportNotificationMovements\Views\RejectedMovement\DetailsResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>DetailsResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\AdminImportNotificationMovements\Views\RejectedMovement\ListResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
