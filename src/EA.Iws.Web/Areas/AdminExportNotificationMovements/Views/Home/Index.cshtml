@@ -76,24 +76,30 @@
             </table>
         </div>
 
-        <div class="column-half nav-bloc">
-            <h2 class="heading-small">@Resources.OptionsHeading</h2>
-            <nav>
-                @if (Model.NotificationStatus == NotificationStatus.Consented && Model.FgStatus == FinancialGuaranteeStatus.Approved)
-                {
-                    @Html.ActionLink(Resources.OptionsRecord, "Index", "CaptureMovement", new { area = "AdminExportNotificationMovements" }, null)
-                }
-                @if (Model.NotificationStatus == NotificationStatus.Consented)
-                {
-                    @Html.ActionLink(Resources.OptionsCancel, "Index", "Cancel")
-                }
-                @if (Model.CanDeleteMovement)
-                {
-                    @Html.ActionLink(Resources.OptionsDelete, "Index", "Delete")
-                }
-                @Html.ActionLink(Resources.OptionsViewRejected, "List", "RejectedMovement")
-                @Html.ActionLink(Resources.OptionsOverview, "Index", "Home", new { area = "AdminExportAssessment", id = Model.NotificationId }, null)
-            </nav>
+        <div class="column-half">
+            <div class="nav-bloc">
+                <h2 class="heading-small">@Resources.OptionsHeading</h2>
+                <nav>
+                    @if (Model.NotificationStatus == NotificationStatus.Consented && Model.FgStatus == FinancialGuaranteeStatus.Approved)
+                    {
+                        @Html.ActionLink(Resources.OptionsRecord, "Index", "CaptureMovement", new { area = "AdminExportNotificationMovements" }, null)
+                    }
+                    @if (Model.NotificationStatus == NotificationStatus.Consented)
+                    {
+                        @Html.ActionLink(Resources.OptionsCancel, "Index", "Cancel")
+                    }
+                    @if (Model.CanDeleteMovement)
+                    {
+                        @Html.ActionLink(Resources.OptionsDelete, "Index", "Delete")
+                    }
+                    @Html.ActionLink(Resources.OptionsViewRejected, "List", "RejectedMovement")
+                    @Html.ActionLink(Resources.OptionsOverview, "Index", "Home", new { area = "AdminExportAssessment", id = Model.NotificationId }, null)
+                </nav>
+            </div>
+            <div class="nav-bloc">
+                <br />
+                <nav>@Html.ActionLink(Resources.DownloadExcel, "Excel", "Download")</nav>
+            </div>
         </div>
     </div>
 
