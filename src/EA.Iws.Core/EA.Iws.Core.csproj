@@ -160,6 +160,7 @@
     <Compile Include="MovementOperation\MovementOperationData.cs" />
     <Compile Include="MovementReceipt\Decision.cs" />
     <Compile Include="Movement\DateHistory.cs" />
+    <Compile Include="Movement\DownloadMovementData.cs" />
     <Compile Include="Movement\IMovementRule.cs" />
     <Compile Include="Movement\MovementReceiptAndRecoveryData.cs" />
     <Compile Include="Movement\MovementRules.cs" />
