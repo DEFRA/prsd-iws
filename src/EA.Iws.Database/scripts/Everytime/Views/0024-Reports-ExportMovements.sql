@@ -14,13 +14,11 @@ SELECT
     IU_MR.Id AS MovementReceiptInternalUserId,
     MOR.Date AS OperationDate,
     IU_MOR.Id AS MovementOperationReceiptInternalUserId,
-    N.CompetentAuthority,
-    ND.ConsentedDate
+    N.CompetentAuthority
 FROM
     [Notification].[Movement] M
     INNER JOIN [Notification].[Notification] N ON M.NotificationId = N.Id
     INNER JOIN [Notification].[NotificationAssessment] NA ON NA.NotificationApplicationId = N.Id
-    INNER JOIN [Notification].[NotificationDates] ND ON ND.NotificationAssessmentId = NA.Id
     INNER JOIN [Identity].[AspNetUsers] U_M ON M.CreatedBy = U_M.Id
     LEFT JOIN [Person].[InternalUser] IU_M ON U_M.Id = IU_M.UserId
     LEFT JOIN [Notification].[MovementReceipt] MR 

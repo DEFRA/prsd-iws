@@ -32,7 +32,7 @@
                       [Reports].[ExportMovements]
                   WHERE 
                       [CompetentAuthority] = @ca
-                      AND ConsentedDate BETWEEN @from AND @to",
+                      AND ShipmentDate BETWEEN @from AND @to",
                 new SqlParameter("@ca", (int)competentAuthority),
                 new SqlParameter("@from", from),
                 new SqlParameter("@to", to)).SingleAsync();
