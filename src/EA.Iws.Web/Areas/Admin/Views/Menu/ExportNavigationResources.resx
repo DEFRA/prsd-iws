@@ -124,7 +124,7 @@
     <value>Assign an area</value>
   </data>
   <data name="CancelShipmentLinkText" xml:space="preserve">
-    <value>Cancel shipments</value>
+    <value>Cancel prenotifications</value>
   </data>
   <data name="ChangeOwnerHeading" xml:space="preserve">
     <value>Change owner</value>

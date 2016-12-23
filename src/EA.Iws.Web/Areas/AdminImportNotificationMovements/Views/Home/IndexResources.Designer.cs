@@ -97,6 +97,15 @@ namespace EA.Iws.Web.Areas.AdminImportNotificationMovements.Views.Home {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Delete a shipment.
+        /// </summary>
+        public static string Delete {
+            get {
+                return ResourceManager.GetString("Delete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Go to notification overview.
         /// </summary>
         public static string GoToOverview {
