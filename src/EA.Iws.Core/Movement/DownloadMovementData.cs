@@ -2,30 +2,50 @@
 {
     using System;
     using System.ComponentModel;
-    using Shared;
+    using Prsd.Core.Helpers;
 
     public class DownloadMovementData
     {
         [DisplayName("Shipment number")]
-        public int Number { get; set; }
+        public string Number { get; set; }
 
         public MovementStatus Status { get; set; }
 
         [DisplayName("Prenotified")]
-        public DateTime? SubmittedDate { get; set; }
+        public string SubmittedDate { get; set; }
 
         [DisplayName("Shipment due")]
-        public DateTime? ShipmentDate { get; set; }
+        public string ShipmentDate { get; set; }
 
         [DisplayName("Received")]
-        public DateTime? ReceivedDate { get; set; }
+        public string ReceivedDate { get; set; }
 
-        public decimal? Quantity { get; set; }
-
-        [DisplayName("Units")]
-        public ShipmentQuantityUnits? QuantityUnits { get; set; }
+        public string Quantity { get; set; }
 
         [DisplayName("Recovered/Disposed")]
-        public DateTime? CompletedDate { get; set; }
+        public string CompletedDate { get; set; }
+
+        public DownloadMovementData(MovementTableDataRow data)
+        {
+            Number = data.Number.ToString();
+            Status = data.Status;
+            SubmittedDate = DateValue(data.SubmittedDate);
+            ShipmentDate = DateValue(data.ShipmentDate);
+            ReceivedDate = DateValue(data.ReceivedDate);
+            Quantity = data.Quantity.HasValue ? data.Quantity.Value.ToString("G29") + " " + EnumHelper.GetShortName(data.QuantityUnits.GetValueOrDefault()) : "- -";
+            CompletedDate = DateValue(data.CompletedDate);
+        }
+
+        private string DateValue(DateTime? date)
+        {
+            if (date.HasValue)
+            {
+                return date.Value.ToString("d MMM yyyy");
+            }
+            else
+            {
+                return "- -";
+            }
+        }
     }
 }
