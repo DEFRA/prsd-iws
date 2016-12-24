@@ -96,10 +96,6 @@
                     @Html.ActionLink(Resources.OptionsOverview, "Index", "Home", new { area = "AdminExportAssessment", id = Model.NotificationId }, null)
                 </nav>
             </div>
-            <div class="nav-bloc">
-                <br />
-                <nav>@Html.ActionLink(Resources.DownloadExcel, "Excel", "Download")</nav>
-            </div>
         </div>
     </div>
 
@@ -113,9 +109,12 @@
             @Html.AntiForgeryToken()
 
             <div class="grid-row form-group">
-                <div class="column-half">
+                <div class="column-two-thirds">
                     @Html.DropDownListFor(m => m.SelectedMovementStatus, Model.MovementStatuses, new { @class = "form-control view-by" })
                     <button id="updateStatus" class="button" type="submit">@Resources.Update</button>
+                </div>
+                <div class="column-one-third">
+                    @Html.ActionLink(Resources.DownloadExcel, "Excel", "Download")
                 </div>
             </div>
         }

@@ -124,7 +124,7 @@
     <value>Disposed</value>
   </data>
   <data name="DownloadExcel" xml:space="preserve">
-    <value>Download all shipments</value>
+    <value>Download shipment details</value>
   </data>
   <data name="GoToButtonText" xml:space="preserve">
     <value>Go to notification overview</value>

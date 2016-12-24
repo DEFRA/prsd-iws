@@ -79,7 +79,7 @@ namespace EA.Iws.Web.Areas.AdminExportNotificationMovements.Views.Home {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Download all shipments.
+        ///   Looks up a localized string similar to Download shipment details.
         /// </summary>
         public static string DownloadExcel {
             get {
