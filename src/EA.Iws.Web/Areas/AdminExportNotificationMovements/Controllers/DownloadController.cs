@@ -25,7 +25,7 @@
         {
             var notification = await mediator.SendAsync(new GetNotificationBasicInfo(id));
             var movementData = await mediator.SendAsync(new GetMovementsByNotificationId(id));
-            var data = movementData.Select(movement => new DownloadMovementData
+            var data = movementData.OrderBy(m => m.Number).Select(movement => new DownloadMovementData
             {
                 Number = movement.Number,
                 Status = movement.Status,
