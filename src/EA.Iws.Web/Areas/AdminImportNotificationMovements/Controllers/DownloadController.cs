@@ -21,7 +21,7 @@
         }
 
         [HttpGet]
-        public async Task<ActionResult> Excel(Guid id)
+        public async Task<ActionResult> Index(Guid id)
         {
             var notification = await mediator.SendAsync(new GetNotificationDetails(id));
             var movementData = await mediator.SendAsync(new GetImportMovementsSummaryTable(id));
