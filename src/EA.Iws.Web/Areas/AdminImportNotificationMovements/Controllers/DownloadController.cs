@@ -24,22 +24,21 @@
         public async Task<ActionResult> Excel(Guid id)
         {
             var notification = await mediator.SendAsync(new GetNotificationDetails(id));
-            var movementData = await mediator.SendAsync(new GetMovementsByNotificationId(id));
-            var data = movementData.Select(movement => new DownloadMovementData
+            var movementData = await mediator.SendAsync(new GetImportMovementsSummaryTable(id));
+            var data = movementData.TableData.Select(movement => new DownloadImportMovementData
             {
                 Number = movement.Number,
-                Status = movement.Status,
-                SubmittedDate = movement.SubmittedDate,
+                SubmittedDate = movement.PreNotification,
                 ShipmentDate = movement.ShipmentDate,
-                ReceivedDate = movement.ReceivedDate,
+                ReceivedDate = movement.Received,
                 Quantity = movement.Quantity,
-                QuantityUnits = movement.QuantityUnits,
-                CompletedDate = movement.CompletedDate
+                QuantityUnits = movement.Unit,
+                CompletedDate = movement.RecoveredOrDisposedOf
             }).ToList();
 
             var filename = string.Format("movement-details-for-notification-number-{0}.xlsx", notification.NotificationNumber);
 
-            return new XlsxActionResult<DownloadMovementData>(data, filename);
+            return new XlsxActionResult<DownloadImportMovementData>(data, filename);
         }
     }
 }
