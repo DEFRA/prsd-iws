@@ -4,7 +4,7 @@
     using System.ComponentModel;
     using Prsd.Core.Helpers;
 
-    public class DownloadMovementData
+    public class DownloadExportMovementData
     {
         [DisplayName("Shipment number")]
         public string Number { get; set; }
@@ -25,7 +25,7 @@
         [DisplayName("Recovered/Disposed")]
         public string CompletedDate { get; set; }
 
-        public DownloadMovementData(MovementTableDataRow data)
+        public DownloadExportMovementData(MovementTableDataRow data)
         {
             Number = data.Number.ToString();
             Status = data.Status;
