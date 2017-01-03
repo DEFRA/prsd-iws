@@ -23,7 +23,7 @@
         {
             await authorization.EnsureAccessAsync(importNotificationId);
 
-            var movements = await context.ImportMovements.Where(m => m.NotificationId == importNotificationId).ToArrayAsync();
+            var movements = await context.ImportMovements.Where(m => m.NotificationId == importNotificationId).OrderBy(m => m.Number).ToArrayAsync();
 
             var result = new List<MovementTableData>();
 
