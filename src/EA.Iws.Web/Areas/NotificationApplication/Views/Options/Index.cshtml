@@ -136,6 +136,10 @@
                             {
                                 @Html.ActionLink(Resource.GenerateInterimDoc, "GenerateInterimMovementDocument", "Home", new { id = Model.NotificationId, area = "NotificationApplication" }, null)
                             }
+                            if (Model.ShowDownloadMovementsLink)
+                            {
+                                @Html.ActionLink(Resource.Download, "Index", "Download", new { notificationId = Model.NotificationId, area = "NotificationMovements" }, null)
+                            }
                         }
                     </nav>
                 </div>

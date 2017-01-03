@@ -2170,6 +2170,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>SepaContractGuidanceResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Areas\NotificationMovements\Controllers\DownloadController.cs" />
     <Compile Include="Areas\NotificationMovements\ViewModels\Create\ThreeWorkingDaysSelection.cs" />
     <Compile Include="Areas\NotificationMovements\ViewModels\Create\ThreeWorkingDaysWarningViewModel.cs" />
     <Compile Include="Areas\NotificationMovements\ViewModels\Create\ThreeWorkingDaysWarningViewModelResources.Designer.cs">
