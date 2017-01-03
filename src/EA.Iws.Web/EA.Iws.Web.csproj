@@ -1222,6 +1222,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DeleteControllerResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Areas\AdminExportNotificationMovements\Controllers\DownloadController.cs" />
     <Compile Include="Areas\AdminExportNotificationMovements\Controllers\RejectedMovementController.cs" />
     <Compile Include="Areas\AdminExportNotificationMovements\ViewModels\Delete\ConfirmViewModel.cs" />
     <Compile Include="Areas\AdminExportNotificationMovements\ViewModels\Delete\DeleteViewModel.cs" />
@@ -1440,6 +1441,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DeleteControllerResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Areas\AdminImportNotificationMovements\Controllers\DownloadController.cs" />
     <Compile Include="Areas\AdminImportNotificationMovements\Controllers\HomeController.cs" />
     <Compile Include="Areas\AdminImportNotificationMovements\Controllers\RejectedMovementController.cs" />
     <Compile Include="Areas\AdminImportNotificationMovements\ViewModels\Cancel\CancellableMovementsViewModel.cs" />

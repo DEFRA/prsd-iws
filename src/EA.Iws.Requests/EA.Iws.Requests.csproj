@@ -208,6 +208,7 @@
     <Compile Include="NotificationMovements\Capture\GetLatestMovementNumber.cs" />
     <Compile Include="NotificationMovements\Create\HasExceededConsentedQuantity.cs" />
     <Compile Include="Movement\Receive\DoesQuantityReceivedExceedTolerance.cs" />
+    <Compile Include="NotificationMovements\GetMovementsByNotificationId.cs" />
     <Compile Include="NotificationMovements\GetRejectedMovementDetails.cs" />
     <Compile Include="NotificationMovements\GetRejectedMovements.cs" />
     <Compile Include="NotificationMovements\GetWorkingDaysUntil.cs" />

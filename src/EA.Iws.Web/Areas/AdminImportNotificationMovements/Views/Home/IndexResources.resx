@@ -192,4 +192,7 @@
   <data name="Delete" xml:space="preserve">
     <value>Delete a shipment</value>
   </data>
+  <data name="DownloadExcel" xml:space="preserve">
+    <value>Download shipment details</value>
+  </data>
 </root>

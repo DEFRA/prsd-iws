@@ -76,24 +76,26 @@
             </table>
         </div>
 
-        <div class="column-half nav-bloc">
-            <h2 class="heading-small">@Resources.OptionsHeading</h2>
-            <nav>
-                @if (Model.NotificationStatus == NotificationStatus.Consented && Model.FgStatus == FinancialGuaranteeStatus.Approved)
-                {
-                    @Html.ActionLink(Resources.OptionsRecord, "Index", "CaptureMovement", new { area = "AdminExportNotificationMovements" }, null)
-                }
-                @if (Model.NotificationStatus == NotificationStatus.Consented)
-                {
-                    @Html.ActionLink(Resources.OptionsCancel, "Index", "Cancel")
-                }
-                @if (Model.CanDeleteMovement)
-                {
-                    @Html.ActionLink(Resources.OptionsDelete, "Index", "Delete")
-                }
-                @Html.ActionLink(Resources.OptionsViewRejected, "List", "RejectedMovement")
-                @Html.ActionLink(Resources.OptionsOverview, "Index", "Home", new { area = "AdminExportAssessment", id = Model.NotificationId }, null)
-            </nav>
+        <div class="column-half">
+            <div class="nav-bloc">
+                <h2 class="heading-small">@Resources.OptionsHeading</h2>
+                <nav>
+                    @if (Model.NotificationStatus == NotificationStatus.Consented && Model.FgStatus == FinancialGuaranteeStatus.Approved)
+                    {
+                        @Html.ActionLink(Resources.OptionsRecord, "Index", "CaptureMovement", new { area = "AdminExportNotificationMovements" }, null)
+                    }
+                    @if (Model.NotificationStatus == NotificationStatus.Consented)
+                    {
+                        @Html.ActionLink(Resources.OptionsCancel, "Index", "Cancel")
+                    }
+                    @if (Model.CanDeleteMovement)
+                    {
+                        @Html.ActionLink(Resources.OptionsDelete, "Index", "Delete")
+                    }
+                    @Html.ActionLink(Resources.OptionsViewRejected, "List", "RejectedMovement")
+                    @Html.ActionLink(Resources.OptionsOverview, "Index", "Home", new { area = "AdminExportAssessment", id = Model.NotificationId }, null)
+                </nav>
+            </div>
         </div>
     </div>
 
@@ -107,9 +109,12 @@
             @Html.AntiForgeryToken()
 
             <div class="grid-row form-group">
-                <div class="column-half">
+                <div class="column-two-thirds">
                     @Html.DropDownListFor(m => m.SelectedMovementStatus, Model.MovementStatuses, new { @class = "form-control view-by" })
                     <button id="updateStatus" class="button" type="submit">@Resources.Update</button>
+                </div>
+                <div class="column-one-third">
+                    @Html.ActionLink(Resources.DownloadExcel, "Index", "Download")
                 </div>
             </div>
         }

@@ -66,9 +66,10 @@ else
                     </tbody>
                 </table>
             </div>
-            @if (Model.NotificationStatus == ImportNotificationStatus.Consented)
+            <div class="column-one-third">
+                @if (Model.NotificationStatus == ImportNotificationStatus.Consented)
             {
-                <div class="column-one-third nav-bloc">
+                <div class="nav-bloc">
                     <h2 class="heading-small">@Resource.ShipingOptions</h2>
                     <nav>
                         @Html.ActionLink(@Resource.Record, "Index", "Capture")
@@ -86,8 +87,8 @@ else
                     </nav>
                 </div>
             }
+            </div>
         </div>
-
     </div>
 </div>
 
@@ -95,7 +96,14 @@ else
 
     @if (Model.ShowShipments())
     {
-        <h2 class="heading-small">@Resource.TableTitle</h2>
+        <div class="grid-row">
+            <div class="column-two-thirds">
+                <h2 class="heading-small">@Resource.TableTitle</h2>
+            </div>
+            <div class="column-one-third">
+                @Html.ActionLink(Resource.DownloadExcel, "Index", "Download")
+            </div>
+        </div>
 
         <table class="odd-table">
             <caption class="visuallyhidden">@Resource.SummaryCaption</caption>

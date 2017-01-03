@@ -61,6 +61,7 @@
 
             return await context.Movements
                 .Where(m => m.NotificationId == notificationId)
+                .OrderBy(m => m.Number)
                 .ToArrayAsync();
         }
 
