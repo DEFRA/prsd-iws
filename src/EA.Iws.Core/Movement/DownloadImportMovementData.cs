@@ -42,7 +42,6 @@
             }
 
             return "- -";
-
         }
 
         private string DateValue(DateTime? date, bool isCancelled)
@@ -58,7 +57,6 @@
             }
 
             return "- -";
-            
         }
     }
 }
