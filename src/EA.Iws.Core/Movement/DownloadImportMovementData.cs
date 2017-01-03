@@ -28,7 +28,7 @@
         {
             Number = data.Number.ToString();
             SubmittedDate = DateValue(data.PreNotification);
-            ShipmentDate = DateValue(data.ShipmentDate);
+            ShipmentDate = DateValue(data.ShipmentDate, data.IsCancelled);
             ReceivedDate = DateValue(data.Received);
             Quantity = data.Quantity.HasValue ? data.Quantity.Value.ToString("G29") + " " + EnumHelper.GetShortName(data.Unit.GetValueOrDefault()) : "- -";
             CompletedDate = DateValue(data.RecoveredOrDisposedOf);
@@ -40,10 +40,25 @@
             {
                 return date.Value.ToString("d MMM yyyy");
             }
-            else
+
+            return "- -";
+
+        }
+
+        private string DateValue(DateTime? date, bool isCancelled)
+        {
+            if (isCancelled)
             {
-                return "- -";
+                return "Cancelled";
             }
+
+            if (date.HasValue)
+            {
+                return date.Value.ToString("d MMM yyyy");
+            }
+
+            return "- -";
+            
         }
     }
 }
