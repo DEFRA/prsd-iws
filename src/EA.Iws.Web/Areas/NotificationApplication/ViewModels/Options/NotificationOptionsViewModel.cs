@@ -133,5 +133,10 @@
                        IsInterimNotification);
             }
         }
+
+        public bool ShowDownloadMovementsLink
+        {
+            get { return TableData.Any(); }
+        }
     }
 }

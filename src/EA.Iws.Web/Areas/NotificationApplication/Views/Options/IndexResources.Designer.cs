@@ -151,6 +151,15 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.Options {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Download a list of all movements in csv format.
+        /// </summary>
+        public static string Download {
+            get {
+                return ResourceManager.GetString("Download", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Choose what you would like to view.
         /// </summary>
         public static string Dropdown {
