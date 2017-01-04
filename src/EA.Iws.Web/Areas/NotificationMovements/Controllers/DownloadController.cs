@@ -27,7 +27,7 @@
         {
             var notification = await mediator.SendAsync(new GetNotificationBasicInfo(notificationId));
             var movementData = await mediator.SendAsync(new GetMovementsByNotificationId(notificationId));
-            var data = movementData.Select(m => new DownloadExportMovementData(m)).ToList();
+            var data = movementData.Select(m => new DownloadExportMovementData(m, notification.NotificationType)).ToList();
 
             var filename = string.Format("movement-details-for-notification-number-{0}.csv", notification.NotificationNumber);
 
