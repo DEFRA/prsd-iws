@@ -21,7 +21,6 @@
                 SELECT
                     NA.[NotificationApplicationId] AS [NotificationId],
                     D.[NotificationReceivedDate],
-                    D.[PaymentReceivedDate],
                     D.[AssessmentStartedDate] AS [CommencementDate],
                     D.[NotificationCompletedDate] AS [CompleteDate],
                     NULL AS [TransmittedDate],
@@ -47,7 +46,6 @@
             await context.Database.ExecuteSqlCommandAsync(@"[ImportNotification].[uspUpdateImportNotificationKeyDates] 
                 @NotificationId
                 ,@NotificationReceivedDate
-                ,@PaymentReceivedDate
                 ,@AssessmentStartedDate
                 ,@CompleteDate
                 ,@AcknowledgedDate
@@ -58,7 +56,6 @@
                 ,@ConsentValidToDate",
                 new SqlParameter("@NotificationId", data.NotificationId),
                 new SqlParameter("@NotificationReceivedDate", (object)data.NotificationReceivedDate ?? DBNull.Value),
-                new SqlParameter("@PaymentReceivedDate", (object)data.PaymentReceivedDate ?? DBNull.Value),
                 new SqlParameter("@AssessmentStartedDate", (object)data.CommencementDate ?? DBNull.Value),
                 new SqlParameter("@CompleteDate", (object)data.CompleteDate ?? DBNull.Value),
                 new SqlParameter("@AcknowledgedDate", (object)data.AcknowledgedDate ?? DBNull.Value),

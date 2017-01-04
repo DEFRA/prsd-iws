@@ -17,7 +17,6 @@
             ConsentedDate = new OptionalDateInputViewModel(allowPastDates: true, showLabels: false);
             ConsentValidFromDate = new OptionalDateInputViewModel(allowPastDates: true, showLabels: false);
             ConsentValidToDate = new OptionalDateInputViewModel(allowPastDates: true, showLabels: false);
-            PaymentReceivedDate = new OptionalDateInputViewModel(allowPastDates: true, showLabels: false);
         }
 
         public IndexViewModel(KeyDatesOverrideData data)
@@ -31,7 +30,6 @@
             ConsentedDate = new OptionalDateInputViewModel(data.ConsentedDate, allowPastDates: true, showLabels: false);
             ConsentValidFromDate = new OptionalDateInputViewModel(data.ConsentValidFromDate, allowPastDates: true, showLabels: false);
             ConsentValidToDate = new OptionalDateInputViewModel(data.ConsentValidToDate, allowPastDates: true, showLabels: false);
-            PaymentReceivedDate = new OptionalDateInputViewModel(data.PaymentReceivedDate, allowPastDates: true, showLabels: false);
         }
 
         [Display(Name = "NotificationReceivedDate", ResourceType = typeof(IndexViewModelResources))]
@@ -60,8 +58,5 @@
 
         [Display(Name = "ConsentValidToDate", ResourceType = typeof(IndexViewModelResources))]
         public OptionalDateInputViewModel ConsentValidToDate { get; set; }
-
-        [Display(Name = "PaymentReceivedDate", ResourceType = typeof(IndexViewModelResources))]
-        public OptionalDateInputViewModel PaymentReceivedDate { get; set; }
     }
 }
