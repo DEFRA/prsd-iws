@@ -39,15 +39,6 @@
             </div>
         }
 
-        @if (Model.PaymentReceivedDate.IsCompleted)
-        {
-            <div class="form-group @Html.Gds().FormGroupClass(m => m.PaymentReceivedDate) @Html.Gds().FormGroupClass(m => m.PaymentReceivedDate.Day) @Html.Gds().FormGroupClass(m => m.PaymentReceivedDate.Month) @Html.Gds().FormGroupClass(m => m.PaymentReceivedDate.Year)">
-                @Html.Gds().LabelFor(m => m.PaymentReceivedDate, showOptionalLabel: false)
-                @Html.Gds().ValidationMessageFor(m => m.PaymentReceivedDate)
-                @Html.EditorFor(m => m.PaymentReceivedDate)
-            </div>
-        }
-
         @if (Model.AcknowledgedDate.IsCompleted)
         {
             <div class="form-group @Html.Gds().FormGroupClass(m => m.AcknowledgedDate) @Html.Gds().FormGroupClass(m => m.AcknowledgedDate.Day) @Html.Gds().FormGroupClass(m => m.AcknowledgedDate.Month) @Html.Gds().FormGroupClass(m => m.AcknowledgedDate.Year)">
