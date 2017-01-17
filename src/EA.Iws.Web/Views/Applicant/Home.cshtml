@@ -1,6 +1,6 @@
 ﻿@using EA.Iws.Web.Infrastructure.Paging
 @using EA.Iws.Web.Views.Applicant
-@model EA.Iws.Requests.Notification.UserNotifications
+@model EA.Iws.Web.ViewModels.Applicant.UserNotificationsViewModel
 @{
     ViewBag.Title = HomeResources.Title;
 }
@@ -49,12 +49,25 @@
 {
     <p>@HomeResources.ErrorMessage</p>
 }
-else if (Model.NumberOfNotifications == 0)
+
+@if (Model.NumberOfNotifications == 0 && Model.SelectedNotificationStatus == null)
 {
     <p>@HomeResources.MessageNoNotification</p>
 }
 else
 {
+    using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="grid-row form-group">
+            <div class="column-two-thirds">
+                @Html.DropDownListFor(m => m.SelectedNotificationStatus, Model.NotificationStatuses, new { @class = "form-control view-by" })
+                <button id="updateStatus" class="button" type="submit">@HomeResources.Update</button>
+            </div>
+        </div>
+    }
+
     <table class="odd-table" title="@HomeResources.TitleManageNotifications">
         <caption class="visuallyhidden">@HomeResources.TableCaption</caption>
         <thead>
@@ -109,6 +122,23 @@ else
     </table>
 
     <div class="pager">
-        @Html.Pager(Model.PageSize, Model.PageNumber, Model.NumberOfNotifications)
+        @Html.Pager(Model.PageSize, Model.PageNumber, Model.NumberOfNotifications).Options(o =>
+        {
+            if (Model.SelectedNotificationStatus != null)
+            {
+                o.AddRouteValue("status", (int)Model.SelectedNotificationStatus.Value);
+            }
+        })
     </div>
+}    
+
+@section scripts {
+    <script>
+        $(function() {
+            $("#updateStatus").hide();
+            $("#@Html.NameFor(m => m.SelectedNotificationStatus)").change(function() {
+                $("#updateStatus").parents("form").submit();
+            });
+        });
+    </script>
 }

@@ -204,4 +204,7 @@
   <data name="TitleSupportingInfo" xml:space="preserve">
     <value>View supporting information on GOV.UK in new tab</value>
   </data>
+  <data name="Update" xml:space="preserve">
+    <value>Update</value>
+  </data>
 </root>
