@@ -12,6 +12,7 @@ namespace EA.Iws.Web
     using Autofac.Integration.Mvc;
     using IdentityModel;
     using Infrastructure;
+    using Infrastructure.Paging;
     using Owin;
     using Services;
 
@@ -41,6 +42,9 @@ namespace EA.Iws.Web
             AntiForgeryConfig.CookieName = Prsd.Core.Web.Constants.CookiePrefix + Constants.AntiForgeryCookieName;
 
             MvcHandler.DisableMvcResponseHeader = true;
+
+            PagerOptions.Defaults.NextPageText = "Next";
+            PagerOptions.Defaults.PreviousPageText = "Prev";
         }
     }
 }

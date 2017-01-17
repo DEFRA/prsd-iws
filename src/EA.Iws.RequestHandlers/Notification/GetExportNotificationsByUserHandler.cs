@@ -1,6 +1,5 @@
 ﻿namespace EA.Iws.RequestHandlers.Notification
 {
-    using System.Collections.Generic;
     using System.Data.SqlClient;
     using System.Threading.Tasks;
     using DataAccess;
@@ -9,10 +8,11 @@
     using Requests.Notification;
 
     internal class GetExportNotificationsByUserHandler :
-        IRequestHandler<GetExportNotificationsByUser, IList<NotificationApplicationSummaryData>>
+        IRequestHandler<GetExportNotificationsByUser, UserNotifications>
     {
         private readonly IwsContext context;
         private readonly IUserContext userContext;
+        private readonly int pageSize = 20;
 
         public GetExportNotificationsByUserHandler(IwsContext context, IUserContext userContext)
         {
@@ -20,9 +20,9 @@
             this.userContext = userContext;
         }
 
-        public async Task<IList<NotificationApplicationSummaryData>> HandleAsync(GetExportNotificationsByUser message)
+        public async Task<UserNotifications> HandleAsync(GetExportNotificationsByUser message)
         {
-            return await context.Database.SqlQuery<NotificationApplicationSummaryData>(@"
+            var notifications = await context.Database.SqlQuery<NotificationApplicationSummaryData>(@"
                 SELECT 
                     N.Id,
                     N.NotificationNumber,
@@ -47,8 +47,17 @@
                 WHERE 
                     N.UserId = @Id
                 ORDER BY
-                    N.NotificationNumber ASC", 
-                new SqlParameter("@Id", userContext.UserId)).ToListAsync();
+                    N.CreatedDate DESC
+                OFFSET (@Skip) ROWS FETCH NEXT (@Take) ROWS ONLY", 
+                new SqlParameter("@Id", userContext.UserId),
+                new SqlParameter("@Skip", (message.PageNumber - 1) * pageSize),
+                new SqlParameter("@Take", pageSize)).ToListAsync();
+
+            var numberOfNotifications = await context.Database.SqlQuery<int>(
+                "SELECT COUNT([Id]) FROM [Notification].[Notification] N WHERE N.UserId = @Id",
+                new SqlParameter("@Id", userContext.UserId)).SingleAsync();
+
+            return new UserNotifications(notifications, numberOfNotifications, message.PageNumber, pageSize);
         }
     }
 }

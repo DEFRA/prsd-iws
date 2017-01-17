@@ -18,9 +18,9 @@
         }
 
         [HttpGet]
-        public async Task<ActionResult> Home()
+        public async Task<ActionResult> Home(int page = 1)
         {
-            var response = (await mediator.SendAsync(new GetExportNotificationsByUser())).ToList();
+            var response = (await mediator.SendAsync(new GetExportNotificationsByUser(page)));
 
             return View(response);
         }
