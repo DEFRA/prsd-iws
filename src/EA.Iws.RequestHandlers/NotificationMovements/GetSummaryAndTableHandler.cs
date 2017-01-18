@@ -4,7 +4,6 @@
     using System.Linq;
     using System.Threading.Tasks;
     using Core.Movement;
-    using Domain.FinancialGuarantee;
     using Domain.Movement;
     using Domain.NotificationApplication;
     using Prsd.Core.Mapper;
@@ -17,20 +16,18 @@
         private readonly IFacilityRepository facilityRepository;
         private readonly IMovementRepository movementRepository;
         private readonly IMapper mapper;
-        private readonly IFinancialGuaranteeRepository financialGuaranteeRepository;
+        private const int PageSize = 30;
 
         public GetSummaryAndTableHandler(
             IFacilityRepository facilityRepository,
             INotificationMovementsSummaryRepository summaryRepository,
             IMovementRepository movementRepository,
-            IMapper mapper,
-            IFinancialGuaranteeRepository financialGuaranteeRepository)
+            IMapper mapper)
         {
             this.facilityRepository = facilityRepository;
             this.movementRepository = movementRepository;
             this.mapper = mapper;
             this.summaryRepository = summaryRepository;
-            this.financialGuaranteeRepository = financialGuaranteeRepository;
         }
 
         public async Task<NotificationMovementsSummaryAndTable> HandleAsync(GetSummaryAndTable message)
@@ -41,15 +38,19 @@
 
             if (message.Status.HasValue)
             {
-                notificationMovements = await movementRepository.GetMovementsByStatus(message.Id, message.Status.Value);
+                notificationMovements = await movementRepository.GetPagedMovementsByStatus(message.Id, message.Status.Value, message.PageNumber, PageSize);
             }
             else
             {
-                notificationMovements = await movementRepository.GetAllMovements(message.Id);
+                notificationMovements = await movementRepository.GetPagedMovements(message.Id, message.PageNumber, PageSize);
             }
 
             var data = mapper.Map<NotificationMovementsSummary, Movement[], NotificationMovementsSummaryAndTable>(summaryData, notificationMovements.ToArray());
             data.IsInterimNotification = isInterimNotification;
+
+            data.PageSize = PageSize;
+            data.PageNumber = message.PageNumber;
+            data.NumberOfShipments = await movementRepository.GetTotalNumberOfMovements(message.Id, message.Status);
 
             return data;
         }

@@ -33,6 +33,40 @@
                 .ToArrayAsync();
         }
 
+        public async Task<IEnumerable<Movement>> GetPagedMovements(Guid notificationId, int pageNumber, int pageSize)
+        {
+            await notificationAuthorization.EnsureAccessAsync(notificationId);
+
+            return await context.Movements
+                .Where(m => m.NotificationId == notificationId)
+                .OrderByDescending(m => m.Number)
+                .Skip((pageNumber - 1) * pageSize)
+                .Take(pageSize)
+                .ToArrayAsync();
+        }
+
+        public async Task<IEnumerable<Movement>> GetPagedMovementsByStatus(Guid notificationId, MovementStatus status, int pageNumber, int pageSize)
+        {
+            await notificationAuthorization.EnsureAccessAsync(notificationId);
+
+            return await context.Movements
+                .Where(m =>
+                    m.NotificationId == notificationId
+                    && m.Status == status)
+                .OrderByDescending(m => m.Number)
+                .Skip((pageNumber - 1) * pageSize)
+                .Take(pageSize)
+                .ToArrayAsync();
+        }
+
+        public async Task<int> GetTotalNumberOfMovements(Guid notificationId, MovementStatus? status)
+        {
+            await notificationAuthorization.EnsureAccessAsync(notificationId);
+
+            return await context.Movements
+                .CountAsync(m => m.NotificationId == notificationId && (status == null || m.Status == status.Value));
+        }
+
         public async Task<Movement> GetByNumberOrDefault(int movementNumber, Guid notificationId)
         {
             await notificationAuthorization.EnsureAccessAsync(notificationId);

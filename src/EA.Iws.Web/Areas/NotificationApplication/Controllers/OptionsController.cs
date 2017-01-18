@@ -21,9 +21,9 @@
         }
 
         [HttpGet]
-        public async Task<ActionResult> Index(Guid id, int? status)
+        public async Task<ActionResult> Index(Guid id, int? status, int page = 1)
         {
-            var movementsSummary = await mediator.SendAsync(new GetSummaryAndTable(id, (MovementStatus?)status));
+            var movementsSummary = await mediator.SendAsync(new GetSummaryAndTable(id, (MovementStatus?)status, page));
 
             var model = new NotificationOptionsViewModel(id, movementsSummary);
             model.SelectedMovementStatus = (MovementStatus?)status;
@@ -36,7 +36,7 @@
         [ActionName("Index")]
         public ActionResult IndexPost(Guid id, int? selectedMovementStatus)
         {
-            return RedirectToAction("Index", new { id, status = selectedMovementStatus });
+            return RedirectToAction("Index", new { id, status = selectedMovementStatus, page = 1 });
         }
 
         [HttpGet]

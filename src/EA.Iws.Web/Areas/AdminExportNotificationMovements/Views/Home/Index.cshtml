@@ -2,6 +2,7 @@
 @using EA.Iws.Core.Movement
 @using EA.Iws.Core.NotificationAssessment
 @using EA.Iws.Core.Shared
+@using EA.Iws.Web.Infrastructure.Paging
 @using EnumHelper = EA.Prsd.Core.Helpers.EnumHelper
 
 @model EA.Iws.Web.Areas.AdminExportNotificationMovements.ViewModels.Home.MovementSummaryViewModel
@@ -168,6 +169,8 @@
                 </tbody>
             </table>
         </div>
+
+        @Html.Pager(Model.PageSize, Model.PageNumber, Model.NumberofShipments)
     </section>
     <div class="form-group">
         @Html.ActionLink(Resources.GoToButtonText,

@@ -13,10 +13,13 @@
 
         public MovementStatus? Status { get; private set; }
 
-        public GetSummaryAndTable(Guid id, MovementStatus? status)
+        public int PageNumber { get; private set; }
+
+        public GetSummaryAndTable(Guid id, MovementStatus? status, int pageNumber)
         {
             Id = id;
             Status = status;
+            PageNumber = pageNumber;
         }
     }
 }

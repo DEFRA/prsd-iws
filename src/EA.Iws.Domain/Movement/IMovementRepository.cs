@@ -15,6 +15,12 @@
 
         Task<IEnumerable<Movement>> GetMovementsByStatus(Guid notificationId, MovementStatus status);
 
+        Task<IEnumerable<Movement>> GetPagedMovements(Guid notificationId, int pageNumber, int pageSize);
+
+        Task<IEnumerable<Movement>> GetPagedMovementsByStatus(Guid notificationId, MovementStatus status, int pageNumber, int pageSize);
+
+        Task<int> GetTotalNumberOfMovements(Guid notificationId, MovementStatus? status);
+
         Task<Movement> GetByNumberOrDefault(int movementNumber, Guid notificationId);
 
         Task<IEnumerable<Movement>> GetActiveMovements(Guid notificationId);
