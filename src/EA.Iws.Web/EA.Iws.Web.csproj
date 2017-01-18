@@ -2265,7 +2265,11 @@
       <DependentUpon>IndexViewModelResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Areas\Reports\ViewModels\Finance\IndexViewModel.cs" />
-    <Compile Include="Areas\Reports\ViewModels\Finance\IndexViewModelResources.Designer.cs" />
+    <Compile Include="Areas\Reports\ViewModels\Finance\IndexViewModelResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IndexViewModelResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Areas\Reports\ViewModels\ImportNotifications\IndexViewModel.cs" />
     <Compile Include="Areas\Reports\ViewModels\ImportNotifications\IndexViewModelResources.Designer.cs">
       <DependentUpon>IndexViewModelResources.resx</DependentUpon>
@@ -4352,7 +4356,10 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>IndexViewModelResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Areas\Reports\ViewModels\Finance\IndexViewModelResources.resx" />
+    <EmbeddedResource Include="Areas\Reports\ViewModels\Finance\IndexViewModelResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>IndexViewModelResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Areas\Reports\ViewModels\ImportNotifications\IndexViewModelResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>IndexViewModelResources.Designer.cs</LastGenOutput>

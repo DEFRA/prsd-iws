@@ -70,6 +70,15 @@ namespace EA.Iws.Web.Areas.Reports.ViewModels.ExportMovements {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The from date must be before the to date.
+        /// </summary>
+        public static string FromDateBeforeToDate {
+            get {
+                return ResourceManager.GetString("FromDateBeforeToDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Please provide the from date.
         /// </summary>
         public static string FromRequired {

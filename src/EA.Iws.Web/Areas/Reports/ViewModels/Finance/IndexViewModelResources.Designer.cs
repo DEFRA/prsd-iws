@@ -22,7 +22,7 @@ namespace EA.Iws.Web.Areas.Reports.ViewModels.Finance {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class IndexViewModelResources {
+    internal class IndexViewModelResources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -36,10 +36,10 @@ namespace EA.Iws.Web.Areas.Reports.ViewModels.Finance {
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        public static global::System.Resources.ResourceManager ResourceManager {
+        internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EA.Iws.Web.Areas.Reports.ViewModels.ExportNotifications.IndexViewModelResources", typeof(IndexViewModelResources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EA.Iws.Web.Areas.Reports.ViewModels.Finance.IndexViewModelResources", typeof(IndexViewModelResources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -51,7 +51,7 @@ namespace EA.Iws.Web.Areas.Reports.ViewModels.Finance {
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        public static global::System.Globalization.CultureInfo Culture {
+        internal static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -63,16 +63,25 @@ namespace EA.Iws.Web.Areas.Reports.ViewModels.Finance {
         /// <summary>
         ///   Looks up a localized string similar to From.
         /// </summary>
-        public static string From {
+        internal static string From {
             get {
                 return ResourceManager.GetString("From", resourceCulture);
             }
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The from date must be before the to date.
+        /// </summary>
+        internal static string FromDateBeforeToDate {
+            get {
+                return ResourceManager.GetString("FromDateBeforeToDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Please provide the from date.
         /// </summary>
-        public static string FromRequired {
+        internal static string FromRequired {
             get {
                 return ResourceManager.GetString("FromRequired", resourceCulture);
             }
@@ -81,7 +90,7 @@ namespace EA.Iws.Web.Areas.Reports.ViewModels.Finance {
         /// <summary>
         ///   Looks up a localized string similar to To.
         /// </summary>
-        public static string To {
+        internal static string To {
             get {
                 return ResourceManager.GetString("To", resourceCulture);
             }
@@ -90,7 +99,7 @@ namespace EA.Iws.Web.Areas.Reports.ViewModels.Finance {
         /// <summary>
         ///   Looks up a localized string similar to Please provide the to date.
         /// </summary>
-        public static string ToRequired {
+        internal static string ToRequired {
             get {
                 return ResourceManager.GetString("ToRequired", resourceCulture);
             }

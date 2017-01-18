@@ -1,5 +1,6 @@
 ﻿namespace EA.Iws.Web.Areas.Reports.ViewModels.MissingShipments
 {
+    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.Web.Mvc;
     using Core.Reports;
@@ -7,7 +8,7 @@
     using Prsd.Core.Helpers;
     using Web.ViewModels.Shared;
 
-    public class IndexViewModel
+    public class IndexViewModel : IValidatableObject
     {
         public IndexViewModel()
         {
@@ -32,5 +33,13 @@
         public MissingShipmentsReportDates DateType { get; set; } 
 
         public SelectList DateSelectList { get; set; }
+
+        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+        {
+            if (From.AsDateTime() > To.AsDateTime())
+            {
+                yield return new ValidationResult(IndexViewModelResources.FromDateBeforeToDate, new[] { "FromDate" });
+            }
+        }
     }
 }

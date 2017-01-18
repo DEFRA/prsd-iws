@@ -120,6 +120,9 @@
   <data name="From" xml:space="preserve">
     <value>From</value>
   </data>
+  <data name="FromDateBeforeToDate" xml:space="preserve">
+    <value>The from date must be before the to date</value>
+  </data>
   <data name="FromRequired" xml:space="preserve">
     <value>Please provide the from date</value>
   </data>
