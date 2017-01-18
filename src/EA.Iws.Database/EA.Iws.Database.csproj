@@ -51,6 +51,8 @@
   <ItemGroup>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Content Include="scripts\Update\0003-Migration\Sprint1\20170118-153400-drop-countryid.sql" />
+    <Content Include="unindexed-foreign-keys.sql" />
     <Content Include="scripts\Everytime\Functions\0003-Reports-PricingInfo.sql" />
     <Content Include="scripts\Everytime\StoredProcedures\0003-uspUpdateImportNotificationKeyDates.sql" />
     <Content Include="scripts\Everytime\StoredProcedures\0002-uspUpdateExportNotificationKeyDates.sql" />
@@ -127,6 +129,7 @@
     <Content Include="scripts\Update\0002-CI\Sprint5\20161208-112600-remove-area-consultation-date.sql" />
     <Content Include="scripts\Update\0002-CI\Sprint5\20161214-152500-add-inactive-user-status.sql" />
     <Content Include="scripts\Update\0002-CI\Sprint5\20161209-111900-add-created-by-to-movement.sql" />
+    <Content Include="scripts\Update\0003-Migration\Sprint1\20170118-152200-add-indexes-to-foreign-keys.sql" />
     <Content Include="scripts\Update\placeholder.txt" />
     <Content Include="scripts\Update\0001-Release1\Sprint10\20150625-103000-add-us-competent-authority.sql" />
     <Content Include="scripts\Update\0001-Release1\Sprint10\20150626-163000-link-waste-code-info-to-notification.sql" />
