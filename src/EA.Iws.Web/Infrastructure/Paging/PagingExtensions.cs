@@ -27,8 +27,6 @@
  */
 namespace EA.Iws.Web.Infrastructure.Paging
 {
-    using System;
-    using System.Web;
     using System.Web.Mvc;
 
     public static class PagingExtensions
@@ -41,19 +39,6 @@ namespace EA.Iws.Web.Infrastructure.Paging
         public static Pager<TModel> Pager<TModel>(this HtmlHelper<TModel> htmlHelper, int pageSize, int currentPage, int totalItemCount)
         {
             return new Pager<TModel>(htmlHelper, pageSize, currentPage, totalItemCount);
-        }
-
-        public static MvcHtmlString PagerSummary(this HtmlHelper htmlHelper, int pageSize, int currentPage,
-            int totalItemCount)
-        {
-            var start = ((currentPage - 1) * pageSize) + 1;
-            var end = Math.Min(totalItemCount, currentPage * pageSize);
-
-            var builder = new TagBuilder("div");
-            builder.AddCssClass("pager-summary");
-            builder.SetInnerText(string.Format("Showing {0} &ndash; {1} of {2} results", start, end, totalItemCount));
-
-            return MvcHtmlString.Create(HttpUtility.HtmlDecode(builder.ToString()));
         }
     }
 }

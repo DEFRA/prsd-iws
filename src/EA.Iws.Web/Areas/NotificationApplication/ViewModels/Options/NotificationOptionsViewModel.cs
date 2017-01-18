@@ -81,6 +81,10 @@
             TableData = new List<ShipmentDatesTableViewModel>(
                 data.ShipmentTableData.OrderByDescending(m => m.Number)
                     .Select(p => new ShipmentDatesTableViewModel(p)));
+
+            PageSize = data.PageSize;
+            PageNumber = data.PageNumber;
+            NumberofShipments = data.NumberOfShipments;
         }
 
         private string GetMovementStatusText(MovementStatus status)
@@ -138,5 +142,11 @@
         {
             get { return TableData.Any(); }
         }
+
+        public int PageSize { get; set; }
+
+        public int PageNumber { get; set; }
+
+        public int NumberofShipments { get; set; }
     }
 }

@@ -75,6 +75,10 @@
             TableData = new List<MovementSummaryTableViewModel>(
                 data.ShipmentTableData.OrderByDescending(m => m.Number)
                     .Select(p => new MovementSummaryTableViewModel(p)));
+
+            PageSize = data.PageSize;
+            PageNumber = data.PageNumber;
+            NumberofShipments = data.NumberOfShipments;
         }
 
         private string GetMovementStatusText(MovementStatus status)
@@ -86,5 +90,11 @@
 
             return EnumHelper.GetDisplayName(status);
         }
+
+        public int PageSize { get; set; }
+
+        public int PageNumber { get; set; }
+
+        public int NumberofShipments { get; set; }
     }
 }

@@ -1,6 +1,7 @@
 ﻿@using EA.Iws.Core.Movement
 @using EA.Iws.Core.NotificationAssessment
 @using EA.Iws.Core.Shared
+@using EA.Iws.Web.Infrastructure.Paging
 @using Resource = EA.Iws.Web.Areas.NotificationApplication.Views.Options.IndexResources
 @using EnumHelper = EA.Prsd.Core.Helpers.EnumHelper
 
@@ -211,50 +212,52 @@
                 <table class="odd-table">
                     <caption class="visuallyhidden">Shipment summary</caption>
                     <thead>
-                        <tr>
-                            <th>No.</th>
-                            <th>Status</th>
-                            <th>Prenotified</th>
-                            <th>Shipment due</th>
-                            <th>Received</th>
-                            <th>Quantity</th>
-                            <th>@operationTitle</th>
-                        </tr>
+                    <tr>
+                        <th>No.</th>
+                        <th>Status</th>
+                        <th>Prenotified</th>
+                        <th>Shipment due</th>
+                        <th>Received</th>
+                        <th>Quantity</th>
+                        <th>@operationTitle</th>
+                    </tr>
                     </thead>
 
                     <tbody>
-                        @{
-                            for (int i = 0; i < Model.TableData.Count; i++)
+                    @{
+                        for (int i = 0; i < Model.TableData.Count; i++)
+                        {
+                            var statusText = Model.TableData[i].Status == MovementStatus.Completed ? operationTitle : EnumHelper.GetDisplayName(Model.TableData[i].Status);
+                            if (Model.TableData[i].HasShipped)
                             {
-                                var statusText = Model.TableData[i].Status == MovementStatus.Completed ? operationTitle : EnumHelper.GetDisplayName(Model.TableData[i].Status);
-                                if (Model.TableData[i].HasShipped)
-                                {
-                                    statusText = statusText + " (Shipped)";
-                                }
-                                <tr>
-                                    <td>@Model.TableData[i].Number</td>
-                                    <td>@statusText</td>
-                                    <td>
-                                        @DisplayDate(Model.TableData[i].PreNotification, Model.TableData[i].Status)
-                                    </td>
-                                    <td>
-                                        @DisplayDate(Model.TableData[i].ShipmentDate, Model.TableData[i].Status)
-                                    </td>
-                                    <td>
-                                        @DisplayDate(Model.TableData[i].Received, Model.TableData[i].Status)
-                                    </td>
-                                    <td>
-                                        @DisplayQuantity(Model.TableData[i].Quantity, Model.TableData[i].Unit, Model.TableData[i].Status)
-                                    </td>
-                                    <td>
-                                        @DisplayDate(Model.TableData[i].RecoveredOrDisposedOf, Model.TableData[i].Status)
-                                    </td>
-                                </tr>
+                                statusText = statusText + " (Shipped)";
                             }
+                            <tr>
+                                <td>@Model.TableData[i].Number</td>
+                                <td>@statusText</td>
+                                <td>
+                                    @DisplayDate(Model.TableData[i].PreNotification, Model.TableData[i].Status)
+                                </td>
+                                <td>
+                                    @DisplayDate(Model.TableData[i].ShipmentDate, Model.TableData[i].Status)
+                                </td>
+                                <td>
+                                    @DisplayDate(Model.TableData[i].Received, Model.TableData[i].Status)
+                                </td>
+                                <td>
+                                    @DisplayQuantity(Model.TableData[i].Quantity, Model.TableData[i].Unit, Model.TableData[i].Status)
+                                </td>
+                                <td>
+                                    @DisplayDate(Model.TableData[i].RecoveredOrDisposedOf, Model.TableData[i].Status)
+                                </td>
+                            </tr>
                         }
+                    }
                     </tbody>
                 </table>
             </div>
+
+            @Html.Pager(Model.PageSize, Model.PageNumber, Model.NumberofShipments)
         </section>
     }
 </div>
