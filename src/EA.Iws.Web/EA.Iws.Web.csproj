@@ -497,6 +497,7 @@
     <Content Include="Areas\AdminImportNotificationMovements\Views\RejectedMovement\List.cshtml" />
     <Content Include="Areas\AdminExportNotificationMovements\Views\RejectedMovement\Details.cshtml" />
     <Content Include="Areas\AdminImportNotificationMovements\Views\RejectedMovement\Details.cshtml" />
+    <Content Include="Content\iws\_pagination.scss" />
     <None Include="Content\iws\_panels.scss" />
     <Content Include="Content\nta-extended.css" />
     <Content Include="Content\select2\select2-spinner.gif" />

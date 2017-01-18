@@ -68,68 +68,70 @@ else
         </div>
     }
 
-    <table class="odd-table" title="@HomeResources.TitleManageNotifications">
-        <caption class="visuallyhidden">@HomeResources.TableCaption</caption>
-        <thead>
-        <tr>
-            <th>
-                @HomeResources.ThNotificationNumber
-            </th>
-            <th>
-                @HomeResources.ThStatus
-            </th>
-            <th>
-                @HomeResources.ThExporter
-            </th>
-            <th>
-                @Html.Raw(HomeResources.ProducerTableHeader)
-            </th>
-            <th>
-                @HomeResources.ThImporter
-            </th>
-            <th>
-                @HomeResources.ThAction
-            </th>
-        </tr>
-        </thead>
+    <div class="form-group">
 
-        <tbody>
-        @for (int i = 0; i < Model.Notifications.Count; i++)
-        {
+        <table class="odd-table" title="@HomeResources.TitleManageNotifications">
+            <caption class="visuallyhidden">@HomeResources.TableCaption</caption>
+            <thead>
             <tr>
-                <td>
-                    @Html.Raw(Model.Notifications[i].NotificationNumber.Replace(" ", "&nbsp;"))
-                </td>
-                <td>
-                    <span class="statusbox @Html.ExportStatus().DisplayColorClass(Model.Notifications[i].Status) table">@Html.Raw(EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(Model.Notifications[i].Status).ToUpperInvariant().Replace(" ", "&nbsp;")) </span>
-                </td>
-                <td>
-                    @Model.Notifications[i].Exporter
-                </td>
-                <td>
-                    @Model.Notifications[i].Producer
-                </td>
-                <td>
-                    @Model.Notifications[i].Importer
-                </td>
-                <td>
-                    @Html.ActionLink(linkText: HomeResources.LinkChoose, actionName: "Index", controllerName: "Options",
-                        routeValues: new { id = Model.Notifications[i].Id, area = "NotificationApplication" }, htmlAttributes: new { @title = Model.Notifications[i].NotificationNumber })
-                </td>
+                <th>
+                    @HomeResources.ThNotificationNumber
+                </th>
+                <th>
+                    @HomeResources.ThStatus
+                </th>
+                <th>
+                    @HomeResources.ThExporter
+                </th>
+                <th>
+                    @Html.Raw(HomeResources.ProducerTableHeader)
+                </th>
+                <th>
+                    @HomeResources.ThImporter
+                </th>
+                <th>
+                    @HomeResources.ThAction
+                </th>
             </tr>
-        }
-        </tbody>
-    </table>
+            </thead>
 
-    <div class="pager">
-        @Html.Pager(Model.PageSize, Model.PageNumber, Model.NumberOfNotifications).Options(o =>
-        {
-            if (Model.SelectedNotificationStatus != null)
+            <tbody>
+            @for (int i = 0; i < Model.Notifications.Count; i++)
             {
-                o.AddRouteValue("status", (int)Model.SelectedNotificationStatus.Value);
+                <tr>
+                    <td>
+                        @Html.Raw(Model.Notifications[i].NotificationNumber.Replace(" ", "&nbsp;"))
+                    </td>
+                    <td>
+                        <span class="statusbox @Html.ExportStatus().DisplayColorClass(Model.Notifications[i].Status) table">@Html.Raw(EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(Model.Notifications[i].Status).ToUpperInvariant().Replace(" ", "&nbsp;")) </span>
+                    </td>
+                    <td>
+                        @Model.Notifications[i].Exporter
+                    </td>
+                    <td>
+                        @Model.Notifications[i].Producer
+                    </td>
+                    <td>
+                        @Model.Notifications[i].Importer
+                    </td>
+                    <td>
+                        @Html.ActionLink(linkText: HomeResources.LinkChoose, actionName: "Index", controllerName: "Options",
+                            routeValues: new { id = Model.Notifications[i].Id, area = "NotificationApplication" }, htmlAttributes: new { @title = Model.Notifications[i].NotificationNumber })
+                    </td>
+                </tr>
             }
-        })
+            </tbody>
+        </table>
+
     </div>
+
+    @Html.Pager(Model.PageSize, Model.PageNumber, Model.NumberOfNotifications).Options(o =>
+    {
+        if (Model.SelectedNotificationStatus != null)
+        {
+            o.AddRouteValue("status", (int)Model.SelectedNotificationStatus.Value);
+        }
+    })
 }    
 
 @section scripts {

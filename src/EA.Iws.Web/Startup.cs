@@ -42,9 +42,6 @@ namespace EA.Iws.Web
             AntiForgeryConfig.CookieName = Prsd.Core.Web.Constants.CookiePrefix + Constants.AntiForgeryCookieName;
 
             MvcHandler.DisableMvcResponseHeader = true;
-
-            PagerOptions.Defaults.NextPageText = "Next";
-            PagerOptions.Defaults.PreviousPageText = "Prev";
         }
     }
 }
