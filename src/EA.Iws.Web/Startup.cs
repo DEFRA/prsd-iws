@@ -12,6 +12,7 @@ namespace EA.Iws.Web
     using Autofac.Integration.Mvc;
     using IdentityModel;
     using Infrastructure;
+    using Infrastructure.Paging;
     using Owin;
     using Services;
 

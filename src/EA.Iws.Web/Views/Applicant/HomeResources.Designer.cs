@@ -320,5 +320,14 @@ namespace EA.Iws.Web.Views.Applicant {
                 return ResourceManager.GetString("TitleSupportingInfo", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Update.
+        /// </summary>
+        public static string Update {
+            get {
+                return ResourceManager.GetString("Update", resourceCulture);
+            }
+        }
     }
 }

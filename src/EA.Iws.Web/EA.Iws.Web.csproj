@@ -497,6 +497,7 @@
     <Content Include="Areas\AdminImportNotificationMovements\Views\RejectedMovement\List.cshtml" />
     <Content Include="Areas\AdminExportNotificationMovements\Views\RejectedMovement\Details.cshtml" />
     <Content Include="Areas\AdminImportNotificationMovements\Views\RejectedMovement\Details.cshtml" />
+    <Content Include="Content\iws\_pagination.scss" />
     <None Include="Content\iws\_panels.scss" />
     <Content Include="Content\nta-extended.css" />
     <Content Include="Content\select2\select2-spinner.gif" />
@@ -2318,6 +2319,12 @@
     <Compile Include="Infrastructure\AdminHomeNavigationSection.cs" />
     <Compile Include="Infrastructure\Authorization\AuthorizationService.cs" />
     <Compile Include="Infrastructure\Authorization\AuthorizeActivityAttribute.cs" />
+    <Compile Include="Infrastructure\Paging\Pager.cs" />
+    <Compile Include="Infrastructure\Paging\PagerOptions.cs" />
+    <Compile Include="Infrastructure\Paging\PagerOptionsBuilder.cs" />
+    <Compile Include="Infrastructure\Paging\PaginationLink.cs" />
+    <Compile Include="Infrastructure\Paging\PaginationModel.cs" />
+    <Compile Include="Infrastructure\Paging\PagingExtensions.cs" />
     <Compile Include="Infrastructure\XlsxActionResult.cs" />
     <Compile Include="Infrastructure\ExportNavigationSection.cs" />
     <Compile Include="Infrastructure\FeedbackLinkResources.Designer.cs">
@@ -2350,6 +2357,7 @@
     <Compile Include="Infrastructure\VirusScanning\WriteFileVirusScanner.cs" />
     <Compile Include="Logging\ElmahFilter.cs" />
     <Compile Include="Mappings\ImportNotificationAssessment\FinancialGuarantee\FinancialGuaranteeDecisionViewModelMap.cs" />
+    <Compile Include="ViewModels\Applicant\UserNotificationsViewModel.cs" />
     <Compile Include="ViewModels\Shared\IComplete.cs" />
     <Compile Include="Areas\AdminExportMovement\ViewModels\InternalCapture\ReceiptViewModel.cs" />
     <Compile Include="Areas\AdminExportMovement\ViewModels\InternalCapture\RecoveryViewModelResources.Designer.cs">

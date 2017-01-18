@@ -1,5 +1,6 @@
-﻿@using EA.Iws.Web.Views.Applicant
-@model IList<EA.Iws.Requests.Notification.NotificationApplicationSummaryData>
+﻿@using EA.Iws.Web.Infrastructure.Paging
+@using EA.Iws.Web.Views.Applicant
+@model EA.Iws.Web.ViewModels.Applicant.UserNotificationsViewModel
 @{
     ViewBag.Title = HomeResources.Title;
 }
@@ -48,15 +49,30 @@
 {
     <p>@HomeResources.ErrorMessage</p>
 }
-else if (Model.Count == 0)
+
+@if (Model.NumberOfNotifications == 0 && Model.SelectedNotificationStatus == null)
 {
     <p>@HomeResources.MessageNoNotification</p>
 }
 else
 {
-    <table class="odd-table" title="@HomeResources.TitleManageNotifications">
-        <caption class="visuallyhidden">@HomeResources.TableCaption</caption>
-        <thead>
+    using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="grid-row form-group">
+            <div class="column-two-thirds">
+                @Html.DropDownListFor(m => m.SelectedNotificationStatus, Model.NotificationStatuses, new { @class = "form-control view-by" })
+                <button id="updateStatus" class="button" type="submit">@HomeResources.Update</button>
+            </div>
+        </div>
+    }
+
+    <div class="form-group">
+
+        <table class="odd-table" title="@HomeResources.TitleManageNotifications">
+            <caption class="visuallyhidden">@HomeResources.TableCaption</caption>
+            <thead>
             <tr>
                 <th>
                     @HomeResources.ThNotificationNumber
@@ -77,33 +93,54 @@ else
                     @HomeResources.ThAction
                 </th>
             </tr>
-        </thead>
+            </thead>
 
-        <tbody>
-            @for (int i = 0; i < Model.Count; i++)
+            <tbody>
+            @for (int i = 0; i < Model.Notifications.Count; i++)
             {
                 <tr>
                     <td>
-                        @Html.Raw(Model[i].NotificationNumber.Replace(" ", "&nbsp;"))
+                        @Html.Raw(Model.Notifications[i].NotificationNumber.Replace(" ", "&nbsp;"))
                     </td>
                     <td>
-                        <span class="statusbox @Html.ExportStatus().DisplayColorClass(Model[i].Status) table">@Html.Raw(EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(Model[i].Status).ToUpperInvariant().Replace(" ", "&nbsp;")) </span>
+                        <span class="statusbox @Html.ExportStatus().DisplayColorClass(Model.Notifications[i].Status) table">@Html.Raw(EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(Model.Notifications[i].Status).ToUpperInvariant().Replace(" ", "&nbsp;")) </span>
                     </td>
                     <td>
-                        @Model[i].Exporter
+                        @Model.Notifications[i].Exporter
                     </td>
                     <td>
-                        @Model[i].Producer
+                        @Model.Notifications[i].Producer
                     </td>
                     <td>
-                        @Model[i].Importer
+                        @Model.Notifications[i].Importer
                     </td>
                     <td>
                         @Html.ActionLink(linkText: HomeResources.LinkChoose, actionName: "Index", controllerName: "Options",
-                        routeValues: new { id = Model[i].Id, area = "NotificationApplication" }, htmlAttributes: new { @title = Model[i].NotificationNumber })
+                            routeValues: new { id = Model.Notifications[i].Id, area = "NotificationApplication" }, htmlAttributes: new { @title = Model.Notifications[i].NotificationNumber })
                     </td>
                 </tr>
             }
-        </tbody>
-    </table>
+            </tbody>
+        </table>
+
+    </div>
+
+    @Html.Pager(Model.PageSize, Model.PageNumber, Model.NumberOfNotifications).Options(o =>
+    {
+        if (Model.SelectedNotificationStatus != null)
+        {
+            o.AddRouteValue("status", (int)Model.SelectedNotificationStatus.Value);
+        }
+    })
+}    
+
+@section scripts {
+    <script>
+        $(function() {
+            $("#updateStatus").hide();
+            $("#@Html.NameFor(m => m.SelectedNotificationStatus)").change(function() {
+                $("#updateStatus").parents("form").submit();
+            });
+        });
+    </script>
 }

@@ -20,20 +20,20 @@ table.fraction
 }
 
 /* ******* Table Rows ********* */
-.odd-table{
+.odd-table {
     border-collapse: separate;
         border-top: 1px solid $grey-2;
     
-    th{
+    th {
         background: $grey-3; 
         padding-left: 10px;
     }
-    tr{
+    tr {
         &:nth-child(2n+1) {  
         background: $grey-4;
         } 
     }
-    td{
+    td {
         padding-left: 10px;
     }
 }
