@@ -129,6 +129,9 @@
   <data name="FromDateBeforeToDate" xml:space="preserve">
     <value>The from date must be before the to date</value>
   </data>
+  <data name="FromDateBeforeToDate1" xml:space="preserve">
+    <value>The from date must be before the to date</value>
+  </data>
   <data name="FromDateRequired" xml:space="preserve">
     <value>Please enter the from date</value>
   </data>

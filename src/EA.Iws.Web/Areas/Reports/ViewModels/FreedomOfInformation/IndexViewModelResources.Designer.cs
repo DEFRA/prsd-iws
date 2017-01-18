@@ -97,6 +97,15 @@ namespace EA.Iws.Web.Areas.Reports.ViewModels.FreedomOfInformation {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The from date must be before the to date.
+        /// </summary>
+        public static string FromDateBeforeToDate1 {
+            get {
+                return ResourceManager.GetString("FromDateBeforeToDate1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Please enter the from date.
         /// </summary>
         public static string FromDateRequired {

@@ -1,10 +1,11 @@
 ﻿namespace EA.Iws.Web.Areas.Reports.ViewModels.ExportNotifications
 {
+    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using Infrastructure.Validation;
     using Web.ViewModels.Shared;
 
-    public class IndexViewModel
+    public class IndexViewModel : IValidatableObject
     {
         [Display(Name = "From", ResourceType = typeof(IndexViewModelResources))]
         [RequiredDateInput(ErrorMessageResourceName = "FromRequired", ErrorMessageResourceType = typeof(IndexViewModelResources))]
@@ -18,6 +19,14 @@
         {
             From = new OptionalDateInputViewModel(true);
             To = new OptionalDateInputViewModel(true);
+        }
+
+        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+        {
+            if (From.AsDateTime() > To.AsDateTime())
+            {
+                yield return new ValidationResult(IndexViewModelResources.FromDateBeforeToDate, new[] { "FromDate" });
+            }
         }
     }
 }
