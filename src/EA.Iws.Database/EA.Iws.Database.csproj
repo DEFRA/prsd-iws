@@ -51,7 +51,9 @@
   <ItemGroup>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Content Include="missing-indexes.sql" />
     <Content Include="scripts\Update\0003-Migration\Sprint1\20170118-153400-drop-countryid.sql" />
+    <Content Include="scripts\Update\0003-Migration\Sprint1\20170118-160400-add-indexes.sql" />
     <Content Include="unindexed-foreign-keys.sql" />
     <Content Include="scripts\Everytime\Functions\0003-Reports-PricingInfo.sql" />
     <Content Include="scripts\Everytime\StoredProcedures\0003-uspUpdateImportNotificationKeyDates.sql" />
