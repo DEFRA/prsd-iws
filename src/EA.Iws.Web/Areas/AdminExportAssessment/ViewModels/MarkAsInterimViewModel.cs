@@ -33,7 +33,8 @@
                 return NotificationStatus == NotificationStatus.InAssessment ||
                        NotificationStatus == NotificationStatus.ReadyToTransmit ||
                        NotificationStatus == NotificationStatus.Transmitted ||
-                       NotificationStatus == NotificationStatus.DecisionRequiredBy;
+                       NotificationStatus == NotificationStatus.DecisionRequiredBy ||
+                       NotificationStatus == NotificationStatus.Consented;
             }
         }
     }
