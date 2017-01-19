@@ -36,7 +36,8 @@
                        NotificationStatus == ImportNotificationStatus.AwaitingAssessment ||
                        NotificationStatus == ImportNotificationStatus.InAssessment ||
                        NotificationStatus == ImportNotificationStatus.ReadyToAcknowledge ||
-                       NotificationStatus == ImportNotificationStatus.DecisionRequiredBy;
+                       NotificationStatus == ImportNotificationStatus.DecisionRequiredBy ||
+                       NotificationStatus == ImportNotificationStatus.Consented;
             }
         }
     }
