@@ -1,0 +1,1 @@
+﻿CREATE INDEX [IX_Movement_NotificationId_2] ON [Notification].[Movement] ([NotificationId]) INCLUDE ([Id], [Number], [Date], [Status], [PrenotificationDate]);
