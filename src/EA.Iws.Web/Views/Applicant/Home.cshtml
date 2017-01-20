@@ -41,8 +41,6 @@
     </div>
 </div>
 
-<div class="form-group"></div>
-
 <h2 class="heading-medium">@HomeResources.HeaderManageYourNotifications</h2>
 
 @if (ViewBag.Errors != null && ((IEnumerable<string>)ViewBag.Errors).Any())
@@ -56,17 +54,18 @@
 }
 else
 {
-    using (Html.BeginForm())
-    {
-        @Html.AntiForgeryToken()
-
-        <div class="grid-row form-group">
-            <div class="column-two-thirds">
-                @Html.DropDownListFor(m => m.SelectedNotificationStatus, Model.NotificationStatuses, new { @class = "form-control view-by" })
-                <button id="updateStatus" class="button" type="submit">@HomeResources.Update</button>
-            </div>
+    <div class="grid-row">
+        <div class="column-two-thirds">
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+                <div class="form-group">
+                    @Html.DropDownListFor(m => m.SelectedNotificationStatus, Model.NotificationStatuses, new { @class = "form-control view-by" })
+                    <button id="updateStatus" class="button" type="submit">@HomeResources.Update</button>
+                </div>
+            }
         </div>
-    }
+    </div>
 
     <div class="form-group">
 

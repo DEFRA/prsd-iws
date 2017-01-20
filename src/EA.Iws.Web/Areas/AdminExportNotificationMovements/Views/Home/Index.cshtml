@@ -105,20 +105,21 @@
             @Resources.DetailsHeading
         </h3>
 
-        @using (Html.BeginForm())
-        {
-            @Html.AntiForgeryToken()
-
-            <div class="grid-row form-group">
+        <div class="grid-row">
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
                 <div class="column-two-thirds">
-                    @Html.DropDownListFor(m => m.SelectedMovementStatus, Model.MovementStatuses, new { @class = "form-control view-by" })
-                    <button id="updateStatus" class="button" type="submit">@Resources.Update</button>
+                    <div class="form-group">
+                        @Html.DropDownListFor(m => m.SelectedMovementStatus, Model.MovementStatuses, new { @class = "form-control view-by" })
+                        <button id="updateStatus" class="button" type="submit">@Resources.Update</button>
+                    </div>
                 </div>
                 <div class="column-one-third">
                     @Html.ActionLink(Resources.DownloadExcel, "Index", "Download")
                 </div>
-            </div>
-        }
+            }
+        </div>
 
         <div class="form-group">
             <table class="odd-table">
