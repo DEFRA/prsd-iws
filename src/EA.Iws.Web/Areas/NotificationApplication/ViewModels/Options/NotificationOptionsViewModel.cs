@@ -55,7 +55,7 @@
                         Value = ((int)s).ToString()
                     }).ToList();
 
-                units.Insert(0, new SelectListItem { Text = "View all", Value = "0" });
+                units.Insert(0, new SelectListItem { Text = "View all", Value = string.Empty });
 
                 return new SelectList(units, "Value", "Text", SelectedMovementStatus);
             }
