@@ -194,19 +194,23 @@
                 @Resource.TableTitle
             </h2>
 
-            @using (Html.BeginForm())
-            {
-                @Html.AntiForgeryToken()
+            <div class="grid-row">
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
 
-                <div class="grid-row form-group">
-                    <div class="column-third">@Resource.Dropdown</div>
+                    <div class="column-third">
+                        @Resource.Dropdown
+                    </div>
 
                     <div class="column-half">
-                        @Html.DropDownListFor(m => m.SelectedMovementStatus, Model.MovementStatuses, new { @class = "form-control view-by" })
-                        <button id="updateStatus" class="button" type="submit">Update</button>
+                        <div class="form-group">
+                            @Html.DropDownListFor(m => m.SelectedMovementStatus, Model.MovementStatuses, new { @class = "form-control view-by" })
+                            <button id="updateStatus" class="button" type="submit">Update</button>
+                        </div>
                     </div>
-                </div>
-            }
+                }
+            </div>
 
             <div class="form-group">
                 <table class="odd-table">

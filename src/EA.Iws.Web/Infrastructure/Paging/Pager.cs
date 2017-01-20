@@ -229,7 +229,7 @@ namespace EA.Iws.Web.Infrastructure.Paging
             }
 
             // Next page
-            if (currentPage != pageCount)
+            if (pageCount != 0 && currentPage != pageCount)
             {
                 var nextPageText = NextPageText;
                 model.PaginationLinks.Add(currentPage < pageCount
@@ -323,7 +323,14 @@ namespace EA.Iws.Web.Infrastructure.Paging
 
             var builder = new TagBuilder("div");
             builder.AddCssClass("pager-summary");
-            builder.SetInnerText(string.Format("Showing {0} &ndash; {1} of {2} results", start, end, totalItemCount));
+            if (totalItemCount == 0)
+            {
+                builder.SetInnerText("No results to show");
+            }
+            else
+            {
+                builder.SetInnerText(string.Format("Showing {0} &ndash; {1} of {2} results", start, end, totalItemCount));
+            }
 
             return HttpUtility.HtmlDecode(builder.ToString());
         }
