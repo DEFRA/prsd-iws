@@ -368,20 +368,6 @@ $palette: ( ("purple", $purple), ("mauve", $mauve), ("fuschia", $fuschia), ("pin
     padding-bottom: 0;
 }
 
-
-// 9. Alpha beta banners
-// ==========================================================================
-
-// Alpha
-.phase-banner-alpha {
-    @include phase-banner($state: alpha);
-}
-
-// Beta
-.phase-banner-beta {
-    @include phase-banner($state: beta);
-}
-
 // Custom
 // ==========================================================================
 
