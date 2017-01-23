@@ -15,6 +15,7 @@
         private readonly IImportNotificationRepository notificationRepository;
         private readonly IImportMovementTableDataRepository tableDataRepository;
         private readonly IMap<IEnumerable<MovementTableData>, IEnumerable<Core.ImportNotificationMovements.MovementTableData>> mapper;
+        private const int PageSize = 30;
 
         public GetImportMovementsSummaryTableHandler(IImportNotificationRepository notificationRepository,
             IImportMovementTableDataRepository tableDataRepository,
@@ -28,13 +29,17 @@
         public async Task<MovementsSummary> HandleAsync(GetImportMovementsSummaryTable message)
         {
             var type = await notificationRepository.GetTypeById(message.ImportNotificationId);
-            var tableData = await tableDataRepository.GetById(message.ImportNotificationId);
+            var tableData = await tableDataRepository.GetById(message.ImportNotificationId, message.PageNumber, PageSize);
+            var numberOfShipments = await tableDataRepository.GetTotalNumberOfShipments(message.ImportNotificationId);
 
             var movementsSummary = new MovementsSummary
             {
                 ImportNotificationId = message.ImportNotificationId,
                 NotificationType = type,
-                TableData = mapper.Map(tableData).ToList()
+                TableData = mapper.Map(tableData).ToList(),
+                NumberofShipments = numberOfShipments,
+                PageSize = PageSize,
+                PageNumber = message.PageNumber
             };
 
             return movementsSummary;

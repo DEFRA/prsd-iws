@@ -19,48 +19,73 @@
             this.authorization = authorization;
         }
 
+        public async Task<IEnumerable<MovementTableData>> GetById(Guid importNotificationId, int pageNumber, int pageSize)
+        {
+            return await GetByIdInternal(importNotificationId, pageNumber, pageSize);
+        }
+
         public async Task<IEnumerable<MovementTableData>> GetById(Guid importNotificationId)
+        {
+            return await GetByIdInternal(importNotificationId, null, null);
+        }
+
+        private async Task<IEnumerable<MovementTableData>> GetByIdInternal(Guid importNotificationId, int? pageNumber, int? pageSize)
         {
             await authorization.EnsureAccessAsync(importNotificationId);
 
-            var movements = await context.ImportMovements.Where(m => m.NotificationId == importNotificationId).OrderBy(m => m.Number).ToArrayAsync();
+            IQueryable<ImportMovement> movements;
+
+            if (pageNumber.HasValue && pageSize.HasValue)
+            {
+                movements = context.ImportMovements
+                    .Where(movement => movement.NotificationId == importNotificationId)
+                    .OrderByDescending(m => m.Number)
+                    .Skip((pageNumber.Value - 1) * pageSize.Value)
+                    .Take(pageSize.Value);
+            }
+            else
+            {
+                movements = context.ImportMovements
+                    .Where(movement => movement.NotificationId == importNotificationId)
+                    .OrderBy(m => m.Number);
+            }
+
+            var movementData = movements
+                    .GroupJoin(context.ImportMovementReceipts, movement => movement.Id,
+                        mr => mr.MovementId, (movement, movementReceipt) => new { movement, movementReceipt })
+                    .SelectMany(x => x.movementReceipt.DefaultIfEmpty(), (x, movementReceipt) => new { x.movement, movementReceipt })
+                    .GroupJoin(context.ImportMovementRejections, x => x.movement.Id,
+                        movementRejection => movementRejection.MovementId, (x, movementRejection) => new { x.movement, x.movementReceipt, movementRejection })
+                    .SelectMany(x => x.movementRejection.DefaultIfEmpty(),
+                        (x, movementRejection) => new { x.movement, x.movementReceipt, movementRejection })
+                    .GroupJoin(context.ImportMovementCompletedReceipts, x => x.movement.Id,
+                        movementOperationReceipt => movementOperationReceipt.MovementId,
+                        (x, movementOperationReceipt) => new { x.movement, x.movementReceipt, x.movementRejection, movementOperationReceipt })
+                    .SelectMany(x => x.movementOperationReceipt.DefaultIfEmpty(), (x, movementOperationReceipt) => new
+                    {
+                        Movement = x.movement,
+                        MovementReceipt = x.movementReceipt,
+                        MovementRejection = x.movementRejection,
+                        MovementOperationReceipt = movementOperationReceipt
+                    });
 
             var result = new List<MovementTableData>();
 
-            foreach (var m in movements)
+            foreach (var movement in movementData)
             {
-                result.Add(await GetByMovementId(m.Id));
+                result.Add(MovementTableData.Load(
+                    movement.Movement,
+                    movement.MovementReceipt,
+                    movement.MovementRejection,
+                    movement.MovementOperationReceipt));
             }
 
             return result;
         }
 
-        private async Task<MovementTableData> GetByMovementId(Guid movementId)
+        public async Task<int> GetTotalNumberOfShipments(Guid importNotificationId)
         {
-            var query =
-                from movement in context.ImportMovements
-                where movement.Id == movementId
-                from movementReceipt
-                    in context.ImportMovementReceipts.Where(mr => mr.MovementId == movementId).DefaultIfEmpty()
-                from movementRejection
-                    in context.ImportMovementRejections.Where(mre => mre.MovementId == movementId).DefaultIfEmpty()
-                from movementOperationReceipt
-                    in context.ImportMovementCompletedReceipts.Where(mcr => mcr.MovementId == movementId).DefaultIfEmpty()
-                select new
-                {
-                    Movement = movement,
-                    MovementReceipt = movementReceipt,
-                    MovementRejection = movementRejection,
-                    MovementOperationReceipt = movementOperationReceipt
-                };
-
-            var data = await query.SingleAsync();
-
-            return MovementTableData.Load(
-                data.Movement,
-                data.MovementReceipt,
-                data.MovementRejection,
-                data.MovementOperationReceipt);
+            return await context.ImportMovements.CountAsync(m => m.NotificationId == importNotificationId);
         }
     }
 }

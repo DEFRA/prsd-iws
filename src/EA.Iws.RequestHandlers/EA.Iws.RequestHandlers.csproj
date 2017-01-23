@@ -215,6 +215,7 @@
     <Compile Include="ImportNotificationAssessment\WithdrawImportNotificationHandler.cs" />
     <Compile Include="ImportNotificationMovements\GetCancellableMovementsHandler.cs" />
     <Compile Include="ImportNotificationMovements\GetImportMovementsSummaryHandler.cs" />
+    <Compile Include="ImportNotificationMovements\GetImportMovementsByNotificationIdHandler.cs" />
     <Compile Include="ImportNotificationMovements\GetImportMovementsSummaryTableHandler.cs" />
     <Compile Include="ImportNotificationMovements\GetRejectedImportMovementDetailsHandler.cs" />
     <Compile Include="ImportNotificationMovements\GetRejectedImportMovementsHandler.cs" />

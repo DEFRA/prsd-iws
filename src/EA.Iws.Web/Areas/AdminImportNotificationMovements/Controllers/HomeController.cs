@@ -23,14 +23,14 @@
         }
 
         [HttpGet]
-        public async Task<ActionResult> Index(Guid id)
+        public async Task<ActionResult> Index(Guid id, int page = 1)
         {
             var movementData = await mediator.SendAsync(new GetImportMovementsSummary(id));
-            var tableData = await mediator.SendAsync(new GetImportMovementsSummaryTable(id));
+            var tableData = await mediator.SendAsync(new GetImportMovementsSummaryTable(id, page));
             var canDeleteMovement = await authorizationService.AuthorizeActivity(typeof(DeleteMovement));
 
-            var model = new MovementSummaryViewModel(movementData);
-            model.TableData = tableData.TableData.OrderByDescending(d => d.Number).Select(d => new MovementsSummaryTableViewModel(d)).ToList();
+            var model = new MovementSummaryViewModel(movementData, tableData);
+
             model.CanDeleteMovement = canDeleteMovement;
 
             return View(model);
