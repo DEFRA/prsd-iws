@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
     using Core.ImportNotificationAssessment;
     using Core.ImportNotificationMovements;
     using Core.Shared;
@@ -35,16 +36,19 @@
         {
         }
 
-        public MovementSummaryViewModel(Summary data)
+        public MovementSummaryViewModel(Summary data, MovementsSummary movementsSummary)
         {
             NotificationId = data.Id;
             IntendedShipments = data.IntendedShipments;
             UsedShipments = data.UsedShipments;
             QuantityReceivedTotal = data.QuantityReceivedTotal.ToString("G29") + " " + EnumHelper.GetDisplayName(data.DisplayUnit);
             QuantityRemainingTotal = data.QuantityRemainingTotal.ToString("G29") + " " + EnumHelper.GetDisplayName(data.DisplayUnit);
-            TableData = new List<MovementsSummaryTableViewModel>();
+            TableData = movementsSummary.TableData.OrderByDescending(d => d.Number).Select(d => new MovementsSummaryTableViewModel(d)).ToList();
             NotificationStatus = data.NotificationStatus;
             NotificationType = data.NotificationType;
+            PageSize = movementsSummary.PageSize;
+            PageNumber = movementsSummary.PageNumber;
+            NumberofShipments = movementsSummary.NumberofShipments;
         }
 
         public bool ShowShipmentOptions()
@@ -56,5 +60,11 @@
         {
             return TableData != null && TableData.Count > 0;
         }
+
+        public int PageSize { get; set; }
+
+        public int PageNumber { get; set; }
+
+        public int NumberofShipments { get; set; }
     }
 }

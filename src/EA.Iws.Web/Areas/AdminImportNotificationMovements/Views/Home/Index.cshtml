@@ -2,6 +2,7 @@
 @using EA.Iws.Core.ImportNotificationAssessment
 @using EA.Iws.Core.NotificationAssessment
 @using EA.Iws.Core.Shared
+@using EA.Iws.Web.Infrastructure.Paging
 @using EnumHelper = EA.Prsd.Core.Helpers.EnumHelper
 @using Resource = EA.Iws.Web.Areas.AdminImportNotificationMovements.Views.Home.IndexResources
 
@@ -145,6 +146,7 @@ else
             </tbody>
         </table>
 
+        @Html.Pager(Model.PageSize, Model.PageNumber, Model.NumberofShipments)
     }
     else
     {
