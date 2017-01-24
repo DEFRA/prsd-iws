@@ -1064,6 +1064,7 @@
     <Content Include="Views\NewUser\TermsAndConditions.cshtml" />
     <Content Include="Views\Errors\_GenericError.cshtml" />
     <Content Include="Views\Shared\_IwsSepaStandardDataNotice.cshtml" />
+    <Content Include="Views\Applicant\NotFound.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -3103,6 +3104,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>HomeResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Views\Applicant\NotFoundResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>NotFoundResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Views\CopyFromNotification\CopyFromNotificationResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -4448,6 +4454,10 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>HomeResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\Applicant\NotFoundResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>NotFoundResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\CopyFromNotification\CopyFromNotificationResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>CopyFromNotificationResources.Designer.cs</LastGenOutput>
@@ -4472,6 +4482,7 @@
     <EmbeddedResource Include="Views\NotificationSwitch\NotFoundResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>NotFoundResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\Registration\ApplicantRegistrationResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

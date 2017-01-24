@@ -1,6 +1,7 @@
 ﻿namespace EA.Iws.RequestHandlers.Notification
 {
     using System;
+    using System.Text.RegularExpressions;
     using System.Threading.Tasks;
     using Domain.NotificationApplication;
     using Prsd.Core.Mediator;
@@ -9,6 +10,7 @@
     internal class GetNotificationIdByNumberHandler : IRequestHandler<GetNotificationIdByNumber, Guid?>
     {
         private readonly INotificationApplicationRepository notificationApplicationRepository;
+        private static readonly Regex NotificationNumberRegex = new Regex(@"(GB)(\d{4})(\d{6})", RegexOptions.Compiled);
 
         public GetNotificationIdByNumberHandler(INotificationApplicationRepository notificationApplicationRepository)
         {
@@ -17,7 +19,19 @@
 
         public async Task<Guid?> HandleAsync(GetNotificationIdByNumber message)
         {
-            return await notificationApplicationRepository.GetIdOrDefault(message.NotificationNumber);
+            return await notificationApplicationRepository.GetIdOrDefault(FormatNotificationNumber(message.NotificationNumber));
+        }
+
+        private static string FormatNotificationNumber(string number)
+        {
+            number = number.ToUpper().Replace(" ", string.Empty);
+
+            if (NotificationNumberRegex.IsMatch(number))
+            {
+                number = NotificationNumberRegex.Replace(number, "$1 $2 $3");
+            }
+
+            return number;
         }
     }
 }

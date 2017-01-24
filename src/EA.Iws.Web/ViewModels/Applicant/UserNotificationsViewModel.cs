@@ -52,5 +52,7 @@
         }
 
         public NotificationStatus? SelectedNotificationStatus { get; set; }
+
+        public string SearchTerm { get; set; }
     }
 }

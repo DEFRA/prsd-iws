@@ -22,7 +22,7 @@
         public async Task<ActionResult> Home(int? status, int page = 1)
         {
             var notificationStatus = (NotificationStatus?)status;
-            var response = (await mediator.SendAsync(new GetExportNotificationsByUser(page, notificationStatus)));
+            var response = await mediator.SendAsync(new GetExportNotificationsByUser(page, notificationStatus));
 
             var model = new UserNotificationsViewModel(response);
             model.SelectedNotificationStatus = notificationStatus;
@@ -36,6 +36,28 @@
         public ActionResult HomePost(int? selectedNotificationStatus)
         {
             return RedirectToAction("Home", new { page = 1, status = selectedNotificationStatus });
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Search(UserNotificationsViewModel model)
+        {
+            var id = await mediator.SendAsync(new GetNotificationIdByNumber(model.SearchTerm));
+
+            if (id.HasValue)
+            {
+                return RedirectToAction("Index", "Options", new { area = "NotificationApplication", id });
+            }
+            else
+            {
+                return RedirectToAction("NotFound");
+            }
+        }
+
+        [HttpGet]
+        public ActionResult NotFound()
+        {
+            return View();
         }
     }
 }

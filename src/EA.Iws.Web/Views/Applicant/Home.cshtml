@@ -56,6 +56,24 @@ else
 {
     <div class="grid-row">
         <div class="column-two-thirds">
+            @using (Html.BeginForm("Search", "Applicant", FormMethod.Post))
+            {
+                @Html.Gds().ValidationSummary()
+                @Html.AntiForgeryToken()
+
+                <p>@HomeResources.SearchForNotification</p>
+
+                <div id="search-container" class="form-group @Html.Gds().FormGroupClass(m => m.SearchTerm)">
+                    @Html.Gds().ValidationMessageFor(m => m.SearchTerm)
+                    @Html.Gds().TextBoxFor(m => m.SearchTerm, new { @title = "Search term", placeholder = HomeResources.SearchPlaceholder })
+                    <input type="submit" class="button" value="@HomeResources.Search"/>
+                </div>
+            }
+        </div>
+    </div>
+
+    <div class="grid-row">
+        <div class="column-two-thirds">
             @using (Html.BeginForm())
             {
                 @Html.AntiForgeryToken()

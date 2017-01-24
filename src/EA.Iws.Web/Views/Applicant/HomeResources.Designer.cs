@@ -205,6 +205,33 @@ namespace EA.Iws.Web.Views.Applicant {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Search.
+        /// </summary>
+        public static string Search {
+            get {
+                return ResourceManager.GetString("Search", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Search for one of your notifications.
+        /// </summary>
+        public static string SearchForNotification {
+            get {
+                return ResourceManager.GetString("SearchForNotification", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter notification number.
+        /// </summary>
+        public static string SearchPlaceholder {
+            get {
+                return ResourceManager.GetString("SearchPlaceholder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Start a new notification now or read the .
         /// </summary>
         public static string Start {
