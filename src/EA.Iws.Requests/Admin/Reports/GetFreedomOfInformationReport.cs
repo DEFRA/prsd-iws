@@ -11,7 +11,7 @@
     [RequestAuthorization(ReportingPermissions.CanViewFoiReport)]
     public class GetFreedomOfInformationReport : IRequest<FreedomOfInformationData[]>
     {
-        public GetFreedomOfInformationReport(DateTime from, DateTime to, ChemicalComposition chemicalComposition, FoiReportDates dateType)
+        public GetFreedomOfInformationReport(DateTime from, DateTime to, ChemicalComposition? chemicalComposition, FoiReportDates dateType)
         {
             From = from;
             To = to;
@@ -23,7 +23,7 @@
 
         public DateTime To { get; private set; }
 
-        public ChemicalComposition ChemicalComposition { get; private set; }
+        public ChemicalComposition? ChemicalComposition { get; private set; }
 
         public FoiReportDates DateType { get; private set; }
     }

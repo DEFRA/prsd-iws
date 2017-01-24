@@ -10,6 +10,6 @@
 
     public interface IFreedomOfInformationRepository
     {
-        Task<IEnumerable<FreedomOfInformationData>> Get(DateTime from, DateTime to, ChemicalComposition chemicalComposition, UKCompetentAuthority competentAuthority, FoiReportDates dateType);
+        Task<IEnumerable<FreedomOfInformationData>> Get(DateTime from, DateTime to, ChemicalComposition? chemicalComposition, UKCompetentAuthority competentAuthority, FoiReportDates dateType);
     }
 }
