@@ -32,6 +32,6 @@ BEGIN
 	SET @country = ' ' + @country;
 
 	-- The Concat function will treat null as an empty string instead so we use it here to prevent the entire address string being null.
-	RETURN CONCAT(@addressLine1, @addressLine2, @townOrCity, @postalCode, @region, @country);
+	RETURN CONCAT(@addressLine1, @addressLine2, @townOrCity, @region, @postalCode, @country);
 END;
 GO
