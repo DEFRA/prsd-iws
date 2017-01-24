@@ -3,12 +3,13 @@
     using System;
     using System.Threading.Tasks;
     using System.Web.Mvc;
+    using Infrastructure.Authorization;
     using Prsd.Core.Mediator;
     using Requests.Movement;
     using Requests.NotificationMovements.Capture;
     using ViewModels.CaptureMovement;
 
-    [Authorize(Roles = "internal")]
+    [AuthorizeActivity(typeof(CreateMovementInternal))]
     public class CaptureMovementController : Controller
     {
         private const string MovementNumberKey = "MovementNumberKey";

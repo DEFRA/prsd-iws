@@ -3,11 +3,12 @@
     using System;
     using System.Threading.Tasks;
     using System.Web.Mvc;
+    using Infrastructure.Authorization;
     using Prsd.Core.Mediator;
     using Requests.ImportNotification;
     using ViewModels.WasteType;
 
-    [Authorize(Roles = "internal")]
+    [AuthorizeActivity(typeof(SetDraftData<>))]
     public class WasteTypeController : Controller
     {
         private readonly IMediator mediator;

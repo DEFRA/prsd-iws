@@ -12,7 +12,7 @@
     using ViewModels.PaymentDetails;
     using ViewModels.RefundDetails;
 
-    [Authorize(Roles = "internal")]
+    [AuthorizeActivity(typeof(GetImportNotificationAccountOverview))]
     public class AccountManagementController : Controller
     {
         private readonly IMediator mediator;

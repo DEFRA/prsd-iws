@@ -5,11 +5,12 @@
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Core.ImportNotification.Draft;
+    using Infrastructure.Authorization;
     using Prsd.Core.Mediator;
     using Requests.ImportNotification;
     using ViewModels.WasteOperation;
 
-    [Authorize(Roles = "internal")]
+    [AuthorizeActivity(typeof(SetDraftData<>))]
     public class WasteOperationController : Controller
     {
         private readonly IMediator mediator;

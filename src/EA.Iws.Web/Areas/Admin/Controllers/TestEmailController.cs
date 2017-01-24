@@ -2,11 +2,12 @@
 {
     using System.Threading.Tasks;
     using System.Web.Mvc;
+    using Infrastructure.Authorization;
     using Prsd.Core.Mediator;
     using Requests.Admin;
     using ViewModels.TestEmail;
 
-    [Authorize(Roles = "internal")]
+    [AuthorizeActivity(typeof(SendTestEmail))]
     public class TestEmailController : Controller
     {
         private readonly IMediator mediator;

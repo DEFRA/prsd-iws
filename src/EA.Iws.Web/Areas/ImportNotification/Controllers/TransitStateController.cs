@@ -5,6 +5,7 @@
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Core.ImportNotification.Draft;
+    using Infrastructure.Authorization;
     using Prsd.Core.Mediator;
     using Requests.ImportNotification;
     using Requests.ImportNotification.TransportRoute;
@@ -12,7 +13,7 @@
     using Requests.TransportRoute;
     using ViewModels.TransitState;
 
-    [Authorize(Roles = "internal")]
+    [AuthorizeActivity(typeof(SetDraftData<>))]
     public class TransitStateController : Controller
     {
         private readonly IMediator mediator;

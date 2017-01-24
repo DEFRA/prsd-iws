@@ -12,7 +12,7 @@
     using ViewModels.Home;
     using Web.ViewModels.Shared;
 
-    [Authorize(Roles = "internal")]
+    [AuthorizeActivity(typeof(GetSummaryAndTable))]
     public class HomeController : Controller
     {
         private readonly IMediator mediator;

@@ -3,12 +3,13 @@
     using System;
     using System.Threading.Tasks;
     using System.Web.Mvc;
+    using Infrastructure.Authorization;
     using Prsd.Core.Mediator;
     using Requests.ImportNotification;
     using Requests.ImportNotification.Validate;
     using ViewModels.Validate;
 
-    [Authorize(Roles = "internal")]
+    [AuthorizeActivity(typeof(CompleteDraftImportNotification))]
     public class ValidateController : Controller
     {
         private readonly IMediator mediator;

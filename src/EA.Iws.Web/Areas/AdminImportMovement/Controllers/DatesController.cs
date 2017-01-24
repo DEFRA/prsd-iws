@@ -3,12 +3,13 @@
     using System;
     using System.Threading.Tasks;
     using System.Web.Mvc;
+    using Infrastructure.Authorization;
     using Prsd.Core.Mediator;
     using Requests.ImportMovement.Capture;
     using Requests.ImportMovement.Edit;
     using ViewModels.Dates;
 
-    [Authorize(Roles = "internal")]
+    [AuthorizeActivity(typeof(SetImportMovementDates))]
     public class DatesController : Controller
     {
         private readonly IMediator mediator;

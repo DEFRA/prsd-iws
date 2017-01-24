@@ -5,12 +5,13 @@
     using System.Web.Mvc;
     using Core.Admin.Search;
     using Infrastructure;
+    using Infrastructure.Authorization;
     using Prsd.Core.Mediator;
     using Requests.Admin;
     using Requests.Admin.Search;
     using ViewModels.AdvancedSearch;
 
-    [Authorize(Roles = "internal")]
+    [AuthorizeActivity(typeof(NotificaitonsAdvancedSearch))]
     public class AdvancedSearchController : Controller
     {
         private readonly IMediator mediator;

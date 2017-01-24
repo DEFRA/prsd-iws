@@ -4,12 +4,13 @@
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Core.ImportNotification.Draft;
+    using Infrastructure.Authorization;
     using Prsd.Core.Mapper;
     using Prsd.Core.Mediator;
     using Requests.ImportNotification;
     using ViewModels.Shipment;
 
-    [Authorize(Roles = "internal")]
+    [AuthorizeActivity(typeof(SetDraftData<>))]
     public class ShipmentController : Controller
     {
         private readonly IMediator mediator;

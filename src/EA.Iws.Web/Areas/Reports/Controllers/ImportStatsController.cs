@@ -4,11 +4,12 @@
     using System.Web.Mvc;
     using Core.Admin.Reports;
     using Infrastructure;
+    using Infrastructure.Authorization;
     using Prsd.Core.Mediator;
     using Requests.Admin.Reports;
     using ViewModels.ImportStats;
 
-    [Authorize(Roles = "internal")]
+    [AuthorizeActivity(typeof(GetImportStatsReport))]
     public class ImportStatsController : Controller
     {
         private readonly IMediator mediator;

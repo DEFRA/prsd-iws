@@ -4,13 +4,14 @@
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Core.ImportNotification.Draft;
+    using Infrastructure.Authorization;
     using Prsd.Core.Mapper;
     using Prsd.Core.Mediator;
     using Requests.ImportNotification;
     using Requests.ImportNotification.WasteType;
     using ViewModels.WasteCodes;
 
-    [Authorize(Roles = "internal")]
+    [AuthorizeActivity(typeof(SetDraftData<>))]
     public class WasteCodesController : Controller
     {
         private readonly IMapper mapper;

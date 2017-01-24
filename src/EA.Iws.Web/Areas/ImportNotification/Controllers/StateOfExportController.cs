@@ -4,13 +4,14 @@
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Core.ImportNotification.Draft;
+    using Infrastructure.Authorization;
     using Prsd.Core.Mediator;
     using Requests.ImportNotification;
     using Requests.Shared;
     using Requests.TransportRoute;
     using ViewModels.StateOfExport;
 
-    [Authorize(Roles = "internal")]
+    [AuthorizeActivity(typeof(SetDraftData<>))]
     public class StateOfExportController : Controller
     {
         private readonly IMediator mediator;

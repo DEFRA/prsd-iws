@@ -3,6 +3,7 @@
     using System;
     using System.Threading.Tasks;
     using System.Web.Mvc;
+    using Infrastructure.Authorization;
     using Prsd.Core.Mediator;
     using Requests.ImportMovement.Capture;
     using Requests.ImportMovement.CompletedReceipt;
@@ -10,7 +11,7 @@
     using Requests.ImportMovement.Reject;
     using ViewModels.Home;
 
-    [Authorize(Roles = "internal")]
+    [AuthorizeActivity(typeof(GetImportMovementReceiptAndRecoveryData))]
     public class HomeController : Controller
     {
         private readonly IMediator mediator;

@@ -762,7 +762,6 @@
     <Content Include="Areas\Admin\Views\EntryOrExitPoint\Index.cshtml" />
     <Content Include="Areas\Admin\Views\EntryOrExitPoint\Add.cshtml" />
     <Content Include="Areas\ImportNotification\Views\Shared\_Layout.cshtml" />
-    <Content Include="Areas\Admin\Views\Configuration\Index.cshtml" />
     <Content Include="Areas\ImportNotification\Views\Shipment\Index.cshtml" />
     <Content Include="Areas\ImportNotification\Views\Shared\EditorTemplates\AddressViewModel.cshtml" />
     <Content Include="Areas\ImportNotification\Views\Shared\EditorTemplates\ContactViewModel.cshtml" />
@@ -1527,7 +1526,6 @@
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\AdminExportAssessment\Controllers\ChangeNotificationOwnerController.cs" />
     <Compile Include="Areas\Admin\Controllers\AdvancedSearchController.cs" />
-    <Compile Include="Areas\Admin\Controllers\ConfigurationController.cs" />
     <Compile Include="Areas\Admin\Controllers\DeleteNotificationController.cs" />
     <Compile Include="Areas\Admin\Controllers\DeleteNotificationControllerResources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -1639,11 +1637,6 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ResultsResources.resx</DependentUpon>
-    </Compile>
-    <Compile Include="Areas\Admin\Views\Configuration\Index.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Index.resx</DependentUpon>
     </Compile>
     <Compile Include="Areas\Admin\Views\DeleteNotification\CheckResources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -3574,10 +3567,6 @@
     <EmbeddedResource Include="Areas\Admin\Views\AdvancedSearch\ResultsResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>ResultsResources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Areas\Admin\Views\Configuration\Index.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Index.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\Admin\Views\DeleteNotification\CheckResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

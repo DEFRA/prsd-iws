@@ -4,12 +4,13 @@
     using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Mvc;
+    using Infrastructure.Authorization;
     using Prsd.Core.Mediator;
     using Requests.Admin.UserAdministration;
     using Requests.Notification;
     using ViewModels.ChangeNotificationOwner;
 
-    [Authorize(Roles = "internal")]
+    [AuthorizeActivity(typeof(ChangeUser))]
     public class ChangeNotificationOwnerController : Controller
     {
         private readonly IMediator mediator;

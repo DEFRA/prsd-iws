@@ -2,12 +2,13 @@
 {
     using System.Threading.Tasks;
     using System.Web.Mvc;
+    using Infrastructure.Authorization;
     using Prsd.Core.Mediator;
     using Requests.Admin.Search;
     using Requests.NotificationAssessment;
     using ViewModels.Home;
 
-    [Authorize(Roles = "internal")]
+    [AuthorizeActivity(typeof(GetNotificationAttentionSummary))]
     public class HomeController : Controller
     {
         private readonly IMediator mediator;

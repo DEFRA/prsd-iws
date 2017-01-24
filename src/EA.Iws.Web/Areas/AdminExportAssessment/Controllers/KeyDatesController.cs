@@ -10,7 +10,7 @@
     using Requests.NotificationAssessment;
     using ViewModels;
 
-    [Authorize(Roles = "internal")]
+    [AuthorizeActivity(typeof(GetKeyDatesSummaryInformation))]
     public class KeyDatesController : Controller
     {
         private readonly IMediator mediator;

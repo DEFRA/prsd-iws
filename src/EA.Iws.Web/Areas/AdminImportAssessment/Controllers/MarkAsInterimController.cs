@@ -3,7 +3,6 @@
     using System;
     using System.Threading.Tasks;
     using System.Web.Mvc;
-    using Infrastructure;
     using Infrastructure.Authorization;
     using Prsd.Core.Mediator;
     using Requests.ImportNotification;
