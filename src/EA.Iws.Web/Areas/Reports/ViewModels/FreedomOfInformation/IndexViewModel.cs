@@ -16,7 +16,10 @@
             FromDate = new OptionalDateInputViewModel(true);
             ToDate = new OptionalDateInputViewModel(true);
 
-            ChemicalCompositions = new SelectList(EnumHelper.GetValues(typeof(ChemicalComposition)), "Key", "Value", null);
+            var chemicalCompositions = EnumHelper.GetValues(typeof(ChemicalComposition));
+            chemicalCompositions.Add(0, "View all");
+
+            ChemicalCompositions = new SelectList(chemicalCompositions, "Key", "Value", null);
             DateSelectList = new SelectList(EnumHelper.GetValues(typeof(FoiReportDates)), "Key", "Value", null);
         }
 
@@ -31,7 +34,7 @@
         [Display(Name = "WasteType", ResourceType = typeof(IndexViewModelResources))]
         [Required(ErrorMessageResourceName = "WasteTypeRequired",
             ErrorMessageResourceType = typeof(IndexViewModelResources))]
-        public ChemicalComposition ChemicalComposition { get; set; }
+        public ChemicalComposition? ChemicalComposition { get; set; }
 
         public SelectList ChemicalCompositions { get; set; }
 

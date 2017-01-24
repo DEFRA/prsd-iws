@@ -20,7 +20,7 @@
         }
 
         public async Task<IEnumerable<FreedomOfInformationData>> Get(DateTime from, DateTime to,
-            ChemicalComposition chemicalComposition, UKCompetentAuthority competentAuthority, FoiReportDates dateType)
+            ChemicalComposition? chemicalComposition, UKCompetentAuthority competentAuthority, FoiReportDates dateType)
         {
             return await context.Database.SqlQuery<FreedomOfInformationData>(
                 @"SELECT DISTINCT
@@ -52,9 +52,9 @@
                             FROM [Reports].[Movements]
                             WHERE Id = NotificationId
                                 AND (@dateType = 'NotificationReceivedDate'
-				                     OR @dateType = 'ConsentFrom'
-				                     OR @dateType = 'ReceivedDate' and  [ReceivedDate] BETWEEN @from AND @to
-				                     OR @dateType = 'CompletedDate' and  [CompletedDate] BETWEEN @from AND @to)
+                                     OR @dateType = 'ConsentFrom'
+                                     OR @dateType = 'ReceivedDate' and  [ReceivedDate] BETWEEN @from AND @to
+                                     OR @dateType = 'CompletedDate' and  [CompletedDate] BETWEEN @from AND @to)
                         ), 0) AS [QuantityReceived],
                     CASE WHEN [IntendedQuantityUnitId] IN (1, 2) -- Due to conversion units will only be Tonnes / Cubic Metres
                         THEN [IntendedQuantityUnit] 
@@ -70,14 +70,14 @@
                     [Reports].[FreedomOfInformation]
                 WHERE 
                     [CompetentAuthorityId] = @competentAuthority
-                    AND [ChemicalCompositionTypeId] = @chemicalComposition
+                    AND (@chemicalComposition IS NULL OR [ChemicalCompositionTypeId] = @chemicalComposition)
                     AND (@dateType = 'NotificationReceivedDate' AND  [ReceivedDate] BETWEEN @from AND @to
-				         OR @dateType = 'ConsentFrom' AND  [ConsentFrom] BETWEEN @from AND @to
+                         OR @dateType = 'ConsentFrom' AND  [ConsentFrom] BETWEEN @from AND @to
                          OR @dateType = 'ReceivedDate' AND [MovementReceivedDate] BETWEEN @from AND @to
-				         OR @dateType = 'CompletedDate' AND [MovementCompletedDate] BETWEEN @from AND @to)",
+                         OR @dateType = 'CompletedDate' AND [MovementCompletedDate] BETWEEN @from AND @to)",
                 new SqlParameter("@from", from),
                 new SqlParameter("@to", to),
-                new SqlParameter("@chemicalComposition", (int)chemicalComposition),
+                new SqlParameter("@chemicalComposition", (chemicalComposition.HasValue ? (object)(int)chemicalComposition.Value : DBNull.Value)),
                 new SqlParameter("@competentAuthority", (int)competentAuthority),
                 new SqlParameter("@dateType", dateType.ToString())).ToArrayAsync();
         }

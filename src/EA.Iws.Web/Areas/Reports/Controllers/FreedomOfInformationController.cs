@@ -48,11 +48,16 @@
         }
 
         [HttpGet]
-        public async Task<ActionResult> Download(DateTime from, DateTime to, ChemicalComposition chemicalComposition, FoiReportDates dateType)
+        public async Task<ActionResult> Download(DateTime from, DateTime to, ChemicalComposition? chemicalComposition, FoiReportDates dateType)
         {
+            if (chemicalComposition == default(ChemicalComposition))
+            {
+                chemicalComposition = null;
+            }
+
             var report = await mediator.SendAsync(new GetFreedomOfInformationReport(from, to, chemicalComposition, dateType));
 
-            var type = EnumHelper.GetShortName(chemicalComposition);
+            var type = chemicalComposition == null ? "all" : EnumHelper.GetShortName(chemicalComposition);
 
             var fileName = string.Format("foi-report-{0}-{1}-{2}.xlsx", type, from.ToShortDateString(), to.ToShortDateString());
 
