@@ -3,11 +3,12 @@
     using System;
     using System.Threading.Tasks;
     using System.Web.Mvc;
+    using Infrastructure.Authorization;
     using Prsd.Core.Mediator;
     using Requests.ImportNotificationAssessment;
     using ViewModels.KeyDates;
 
-    [Authorize(Roles = "internal")]
+    [AuthorizeActivity(typeof(GetKeyDates))]
     public class KeyDatesController : Controller
     {
         private readonly IMediator mediator;

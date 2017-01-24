@@ -3,11 +3,12 @@
     using System;
     using System.Threading.Tasks;
     using System.Web.Mvc;
+    using Infrastructure.Authorization;
     using Prsd.Core.Mediator;
     using Requests.Movement;
     using Web.ViewModels.Shared;
 
-    [Authorize(Roles = "internal")]
+    [AuthorizeActivity(typeof(GetNotificationNumberByMovementId))]
     public class HomeController : Controller
     {
         private readonly IMediator mediator;

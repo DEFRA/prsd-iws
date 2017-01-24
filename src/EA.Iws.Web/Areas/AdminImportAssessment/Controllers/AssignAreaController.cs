@@ -4,12 +4,13 @@
     using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Mvc;
+    using Infrastructure.Authorization;
     using Prsd.Core.Mediator;
     using Requests.ImportNotificationAssessment;
     using Requests.NotificationAssessment;
     using ViewModels.AssignArea;
 
-    [Authorize(Roles = "internal")]
+    [AuthorizeActivity(typeof(SetImportNotificationConsultation))]
     public class AssignAreaController : Controller
     {
         private readonly IMediator mediator;

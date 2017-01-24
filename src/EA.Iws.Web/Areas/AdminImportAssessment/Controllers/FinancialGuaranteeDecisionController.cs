@@ -3,12 +3,13 @@
     using System;
     using System.Threading.Tasks;
     using System.Web.Mvc;
+    using Infrastructure.Authorization;
     using Prsd.Core.Mapper;
     using Prsd.Core.Mediator;
     using Requests.ImportNotificationAssessment.FinancialGuarantee;
     using ViewModels.FinancialGuaranteeDecision;
 
-    [Authorize(Roles = "internal")]
+    [AuthorizeActivity(typeof(GetAvailableFinancialGuaranteeDecisions))]
     public class FinancialGuaranteeDecisionController : Controller
     {
         private readonly IMediator mediator;

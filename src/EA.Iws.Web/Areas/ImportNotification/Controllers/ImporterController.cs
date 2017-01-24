@@ -4,12 +4,13 @@
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Core.ImportNotification.Draft;
+    using Infrastructure.Authorization;
     using Prsd.Core.Mediator;
     using Requests.ImportNotification;
     using Requests.Shared;
     using ViewModels.Importer;
 
-    [Authorize(Roles = "internal")]
+    [AuthorizeActivity(typeof(SetDraftData<>))]
     public class ImporterController : Controller
     {
         private readonly IMediator mediator;

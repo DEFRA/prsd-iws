@@ -9,7 +9,7 @@
     using Requests.Notification;
     using Requests.NotificationAssessment;
 
-    [Authorize(Roles = "internal")]
+    [AuthorizeActivity(typeof(GetNotificationOverviewInternal))]
     public class OverviewController : Controller
     {
         private readonly AuthorizationService authorizationService;

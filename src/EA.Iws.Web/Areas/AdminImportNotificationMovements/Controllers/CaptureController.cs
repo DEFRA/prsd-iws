@@ -3,11 +3,12 @@
     using System;
     using System.Threading.Tasks;
     using System.Web.Mvc;
+    using Infrastructure.Authorization;
     using Prsd.Core.Mediator;
     using Requests.ImportMovement.Capture;
     using ViewModels.Capture;
 
-    [Authorize(Roles = "internal")]
+    [AuthorizeActivity(typeof(CreateImportMovement))]
     public class CaptureController : Controller
     {
         private const string NumberKey = "Number";

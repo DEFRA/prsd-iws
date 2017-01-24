@@ -10,7 +10,8 @@
     using Requests.ImportNotificationMovements;
     using ViewModels.Home;
 
-    [Authorize(Roles = "internal")]
+    [AuthorizeActivity(typeof(GetImportMovementsSummary))]
+    [AuthorizeActivity(typeof(GetImportMovementsSummaryTable))]
     public class HomeController : Controller
     {
         private readonly IMediator mediator;

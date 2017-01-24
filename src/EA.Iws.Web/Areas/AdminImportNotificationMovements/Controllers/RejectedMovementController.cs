@@ -3,11 +3,12 @@
     using System;
     using System.Threading.Tasks;
     using System.Web.Mvc;
+    using Infrastructure.Authorization;
     using Prsd.Core.Mediator;
     using Requests.ImportNotificationMovements;
     using ViewModels.RejectedMovement;
 
-    [Authorize(Roles = "internal")]
+    [AuthorizeActivity(typeof(GetRejectedImportMovements))]
     public class RejectedMovementController : Controller
     {
         private readonly IMediator mediator;

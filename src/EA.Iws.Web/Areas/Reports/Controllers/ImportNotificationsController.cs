@@ -4,11 +4,12 @@
     using System.Web.Mvc;
     using Core.Admin.Reports;
     using Infrastructure;
+    using Infrastructure.Authorization;
     using Prsd.Core.Mediator;
     using Requests.Admin.Reports;
     using ViewModels.ImportNotifications;
 
-    [Authorize(Roles = "internal")]
+    [AuthorizeActivity(typeof(GetImportNotificationsReport))]
     public class ImportNotificationsController : Controller
     {
         private readonly IMediator mediator;

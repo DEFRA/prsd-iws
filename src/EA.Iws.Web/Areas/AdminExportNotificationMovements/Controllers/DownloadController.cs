@@ -6,11 +6,13 @@
     using System.Web.Mvc;
     using Core.Movement;
     using Infrastructure;
+    using Infrastructure.Authorization;
     using Prsd.Core.Mediator;
     using Requests.Notification;
     using Requests.NotificationMovements;
 
-    [Authorize(Roles = "internal")]
+    [AuthorizeActivity(typeof(GetNotificationBasicInfo))]
+    [AuthorizeActivity(typeof(GetMovementsByNotificationId))]
     public class DownloadController : Controller
     {
         private readonly IMediator mediator;

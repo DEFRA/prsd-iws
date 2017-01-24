@@ -4,12 +4,13 @@
     using System.Web.Mvc;
     using Core.Notification;
     using Core.Shared;
+    using Infrastructure.Authorization;
     using Prsd.Core.Mediator;
     using Requests.Admin;
     using Requests.Notification;
     using ViewModels.ExportNotification;
 
-    [Authorize(Roles = "internal")]
+    [AuthorizeActivity(typeof(CreateLegacyNotificationApplication))]
     public class ExportNotificationController : Controller
     {
         private readonly IMediator mediator;
@@ -62,7 +63,7 @@
                 });
             }
 
-            return RedirectToAction("CompetentAuthority");
+            return RedirectToAction("NotificationType");
         }
 
         [HttpPost]
@@ -113,7 +114,7 @@
                 });
             }
 
-            return RedirectToAction("CompetentAuthority");
+            return RedirectToAction("NotificationType");
         }
 
         [HttpPost]

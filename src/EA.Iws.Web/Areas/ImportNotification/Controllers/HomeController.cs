@@ -9,7 +9,7 @@
     using Requests.ImportNotification;
     using ViewModels.Home;
 
-    [Authorize(Roles = "internal")]
+    [AuthorizeActivity(typeof(GetSummary))]
     public class HomeController : Controller
     {
         private readonly AuthorizationService authorizationService;

@@ -4,11 +4,12 @@
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Core.ImportNotification.Draft;
+    using Infrastructure.Authorization;
     using Prsd.Core.Mediator;
     using Requests.ImportNotification;
     using ViewModels.Preconsented;
 
-    [Authorize(Roles = "internal")]
+    [AuthorizeActivity(typeof(SetDraftData<>))]
     public class PreconsentedController : Controller
     {
         private readonly IMediator mediator;

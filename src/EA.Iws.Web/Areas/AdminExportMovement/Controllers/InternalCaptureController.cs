@@ -3,6 +3,7 @@
     using System;
     using System.Threading.Tasks;
     using System.Web.Mvc;
+    using Infrastructure.Authorization;
     using Prsd.Core.Mediator;
     using Requests.Movement.Complete;
     using Requests.Movement.Receive;
@@ -10,7 +11,7 @@
     using Requests.Movement.Summary;
     using ViewModels.InternalCapture;
 
-    [Authorize(Roles = "internal")]
+    [AuthorizeActivity(typeof(GetMovementReceiptAndRecoveryData))]
     public class InternalCaptureController : Controller
     {
         private readonly IMediator mediator;

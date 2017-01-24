@@ -8,12 +8,13 @@
     using Core.Reports;
     using Core.WasteType;
     using Infrastructure;
+    using Infrastructure.Authorization;
     using Prsd.Core.Helpers;
     using Prsd.Core.Mediator;
     using Requests.Admin.Reports;
     using ViewModels.FreedomOfInformation;
 
-    [Authorize(Roles = "internal")]
+    [AuthorizeActivity(typeof(GetFreedomOfInformationReport))]
     public class FreedomOfInformationController : Controller
     {
         private readonly IMediator mediator;

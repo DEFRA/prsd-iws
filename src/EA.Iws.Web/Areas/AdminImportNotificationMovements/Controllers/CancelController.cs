@@ -6,12 +6,13 @@
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Core.ImportMovement;
+    using Infrastructure.Authorization;
     using Prsd.Core.Mediator;
     using Requests.ImportMovement.Cancel;
     using Requests.ImportNotificationMovements;
     using ViewModels.Cancel;
 
-    [Authorize(Roles = "internal")]
+    [AuthorizeActivity(typeof(CancelImportMovements))]
     public class CancelController : Controller
     {
         private readonly IMediator mediator;
