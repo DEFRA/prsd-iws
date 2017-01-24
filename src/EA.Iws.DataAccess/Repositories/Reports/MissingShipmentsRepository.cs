@@ -46,9 +46,10 @@
                 FROM [Reports].[NotificationShipmentDataMissingShipments]
                 WHERE [CompetentAuthorityId] = @ca
                 AND (@dateType = 'NotificationReceivedDate' and  [NotificationReceivedDate] BETWEEN @from AND @to
-				     OR @dateType = 'ConsentFrom' and  [ConsentFrom] BETWEEN @from AND @to
-				     OR @dateType = 'ReceivedDate' and  [ReceivedDate] BETWEEN @from AND @to
-				     OR @dateType = 'CompletedDate' and  [CompletedDate] BETWEEN @from AND @to)",
+                     OR @dateType = 'ConsentFrom' and  [ConsentFrom] BETWEEN @from AND @to
+                     OR @dateType = 'ReceivedDate' and  [ReceivedDate] BETWEEN @from AND @to
+                     OR @dateType = 'CompletedDate' and  [CompletedDate] BETWEEN @from AND @to
+                     OR @dateType = 'ActualDateOfShipment' and  [ActualDateOfShipment] BETWEEN @from AND @to)",
                 new SqlParameter("@from", from),
                 new SqlParameter("@to", to),
                 new SqlParameter("@ca", (int)competentAuthority),

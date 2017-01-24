@@ -14,6 +14,9 @@
         ReceivedDate,
 
         [Display(Name = "Shipment recovered/disposed of date")]
-        CompletedDate
+        CompletedDate,
+
+        [Display(Name = "Actual date of shipment")]
+        ActualDateOfShipment
     }
 }
