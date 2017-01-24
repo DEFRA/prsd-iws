@@ -5,7 +5,7 @@ GO
 ALTER VIEW [Reports].[FreedomOfInformation]
 AS
     SELECT
-		N.[Id],
+        N.[Id],
         N.[NotificationNumber],
         NA.[ReceivedDate],
         N.[CompetentAuthorityId],
@@ -16,8 +16,10 @@ AS
         TR.[ExitPoint] AS [PointOfExport],
         TR.[EntryPoint] AS [PointOfEntry],
         TR.[ImportCountryName],
-        WT.ChemicalCompositionTypeId,
-        WT.[ChemicalCompositionType] AS [NameOfWaste],
+        WT.[ChemicalCompositionTypeId],
+        CASE WHEN WT.[ChemicalCompositionTypeId] = 4 
+            THEN WT.[ChemicalCompositionType] + ' - ' + WT.[Description]
+            ELSE WT.[ChemicalCompositionType] END AS [NameOfWaste],
         STUFF(( SELECT ', ' + WC.Code AS [text()]
                    FROM [Reports].[WasteCodes] WC
                    WHERE WC.NotificationId = N.Id AND WC.CodeType = 3
@@ -30,7 +32,7 @@ AS
                    order by 1
                    FOR XML PATH('')
                  ), 1, 1, '' ) AS [YCode],
-		STUFF(( SELECT ', ' + WC.Code AS [text()]
+        STUFF(( SELECT ', ' + WC.Code AS [text()]
                    FROM [Reports].[WasteCodes] WC
                    WHERE WC.NotificationId = N.Id AND WC.CodeType = 5
                    order by 1
@@ -43,14 +45,14 @@ AS
         O.[FacilityAddress],
         N.[IntendedQuantity],
         N.[Units] AS [IntendedQuantityUnit],
-		N.[UnitsId] AS [IntendedQuantityUnitId],
+        N.[UnitsId] AS [IntendedQuantityUnitId],
         NA.[ConsentFrom],
         NA.[ConsentTo],
         N.[LocalArea],
-		M.[ReceivedDate] AS MovementReceivedDate,
-		M.[CompletedDate] AS MovementCompletedDate,
-		M.[QuantityReceivedUnitId] AS MovementQuantityReceviedUnitId,
-		M.[QuantityReceived] AS MovementQuantityReceived
+        M.[ReceivedDate] AS MovementReceivedDate,
+        M.[CompletedDate] AS MovementCompletedDate,
+        M.[QuantityReceivedUnitId] AS MovementQuantityReceviedUnitId,
+        M.[QuantityReceived] AS MovementQuantityReceived
     FROM
         [Reports].[Notification] N
         INNER JOIN [Reports].[NotificationOrganisations] O ON N.Id = O.Id
@@ -58,5 +60,5 @@ AS
         INNER JOIN [Reports].[WasteType] WT ON N.Id = WT.NotificationId
         INNER JOIN [Reports].[TransportRoute] TR ON N.Id = TR.NotificationId
         INNER JOIN [Reports].[OperationCodesConcat] OP ON N.Id = OP.NotificationId
-		LEFT JOIN [Reports].[Movements] AS M ON M.[NotificationId] = N.Id
+        LEFT JOIN [Reports].[Movements] AS M ON M.[NotificationId] = N.Id
 GO
