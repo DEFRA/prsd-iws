@@ -24,6 +24,11 @@
 
         private static string FormatNotificationNumber(string number)
         {
+            if (string.IsNullOrWhiteSpace(number))
+            {
+                return string.Empty;
+            }
+
             number = number.ToUpper().Replace(" ", string.Empty);
 
             if (NotificationNumberRegex.IsMatch(number))
