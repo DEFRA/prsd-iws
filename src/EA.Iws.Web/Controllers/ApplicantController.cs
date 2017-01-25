@@ -33,24 +33,32 @@
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ActionName("Home")]
-        public ActionResult HomePost(int? selectedNotificationStatus)
+        public async Task<ActionResult> HomePost(UserNotificationsViewModel model, string button, int page = 1)
         {
-            return RedirectToAction("Home", new { page = 1, status = selectedNotificationStatus });
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Search(UserNotificationsViewModel model)
-        {
-            var id = await mediator.SendAsync(new GetNotificationIdByNumber(model.SearchTerm));
-
-            if (id.HasValue)
+            if (button == "search")
             {
-                return RedirectToAction("Index", "Options", new { area = "NotificationApplication", id });
+                if (!string.IsNullOrWhiteSpace(model.SearchTerm))
+                {
+                    var id = await mediator.SendAsync(new GetNotificationIdByNumber(model.SearchTerm));
+
+                    if (id.HasValue)
+                    {
+                        return RedirectToAction("Index", "Options", new { area = "NotificationApplication", id });
+                    }
+                    else
+                    {
+                        return RedirectToAction("NotFound");
+                    }
+                }
+                else
+                {
+                    ModelState.AddModelError("SearchTerm", "Please enter a valid search term");
+                    return await Home(null, page);
+                }
             }
             else
             {
-                return RedirectToAction("NotFound");
+                return RedirectToAction("Home", new { page = 1, status = (int?)model.SelectedNotificationStatus });
             }
         }
 
