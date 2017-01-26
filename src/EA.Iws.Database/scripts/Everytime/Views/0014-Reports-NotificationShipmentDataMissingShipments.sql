@@ -23,6 +23,7 @@ AS
         MR_U.Description AS [QuantityReceivedUnit],
         MR_U.Id AS [QuantityReceivedUnitId],
         CASE
+            WHEN WT.ChemicalCompositionType = 4 THEN CCT.Description + ' - ' + WT.ChemicalCompositionName
             WHEN WT.ChemicalCompositionDescription IS NULL THEN CCT.Description
             ELSE CCT.Description + ' - ' + WT.ChemicalCompositionDescription
         END AS [ChemicalComposition],
