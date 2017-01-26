@@ -29,6 +29,7 @@
 
             var model = new NotificationOverviewViewModel(result);
             model.AmountsAndDatesViewModel.CanChangeNumberOfShipments = authorised;
+            model.JourneyViewModel.CanChangeEntryExitPoint = false; // todo
 
             return View(model);
         }
