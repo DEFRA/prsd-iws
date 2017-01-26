@@ -142,11 +142,15 @@
     <Compile Include="ImportNotificationAssessment\GetImportNotificationAssessmentDecisionData.cs" />
     <Compile Include="ImportNotificationAssessment\GetImportNotificationConsentedDate.cs" />
     <Compile Include="ImportNotificationAssessment\GetImportNotificationConsultation.cs" />
+    <Compile Include="ImportNotificationAssessment\GetStateOfExportData.cs" />
+    <Compile Include="ImportNotificationAssessment\GetStateOfImportData.cs" />
     <Compile Include="ImportNotificationAssessment\ObjectToImportNotification.cs" />
     <Compile Include="ImportNotificationAssessment\SetAcknowlegedDate.cs" />
     <Compile Include="ImportNotificationAssessment\SetArchiveReference.cs" />
     <Compile Include="ImportNotificationAssessment\SetAssessmentStartedDate.cs" />
     <Compile Include="ImportNotificationAssessment\GetKeyDates.cs" />
+    <Compile Include="ImportNotificationAssessment\SetEntryPoint.cs" />
+    <Compile Include="ImportNotificationAssessment\SetExitPoint.cs" />
     <Compile Include="ImportNotificationAssessment\SetImportNotificationConsultation.cs" />
     <Compile Include="ImportNotificationAssessment\SetNotificationFileClosedDate.cs" />
     <Compile Include="ImportNotificationAssessment\SetNotificationCompletedDate.cs" />

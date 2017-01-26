@@ -61,6 +61,7 @@
             { ImportNotificationPermissions.CanEditImportNotificationAssessment, new[] { UserRole.Internal, UserRole.Administrator } },
             { ImportNotificationPermissions.CanMakeImportNotificationAssessmentDecision, new[] { UserRole.Administrator } },
             { ImportNotificationPermissions.CanChangeNumberOfShipmentsOnImportNotification, new[] { UserRole.Administrator } },
+            { ImportNotificationPermissions.CanChangeImportEntryExitPoint, new[] { UserRole.Administrator } },
             { ImportMovementPermissions.CanCreateImportMovements, new[] { UserRole.Internal, UserRole.Administrator } },
             { ImportMovementPermissions.CanEditImportMovements, new[] { UserRole.Internal, UserRole.Administrator } },
             { ImportMovementPermissions.CanReadImportMovements, new[] { UserRole.Internal, UserRole.Administrator } },

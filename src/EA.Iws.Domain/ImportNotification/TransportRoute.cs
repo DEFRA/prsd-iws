@@ -40,5 +40,17 @@
         {
             TransitStateCollection = new List<TransitState>(transitStates);
         }
+
+        public void SetStateOfExport(StateOfExport stateOfExport)
+        {
+            Guard.ArgumentNotNull(() => stateOfExport, stateOfExport);
+            StateOfExport = stateOfExport;
+        }
+
+        public void SetStateOfImport(StateOfImport stateOfImport)
+        {
+            Guard.ArgumentNotNull(() => stateOfImport, stateOfImport);
+            StateOfImport = stateOfImport;
+        }
     }
 }

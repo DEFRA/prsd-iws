@@ -195,10 +195,14 @@
     <Compile Include="ImportNotificationAssessment\GetImportNotificationConsentedDateHandler.cs" />
     <Compile Include="ImportNotificationAssessment\GetImportNotificationConsultationHandler.cs" />
     <Compile Include="ImportNotificationAssessment\GetKeyDatesHandler.cs" />
+    <Compile Include="ImportNotificationAssessment\GetStateOfExportDataHandler.cs" />
+    <Compile Include="ImportNotificationAssessment\GetStateOfImportDataHandler.cs" />
     <Compile Include="ImportNotificationAssessment\ObjectToImportNotificationHandler.cs" />
     <Compile Include="ImportNotificationAssessment\SetAcknowlegedDateHandler.cs" />
     <Compile Include="ImportNotificationAssessment\SetArchiveReferenceHandler.cs" />
     <Compile Include="ImportNotificationAssessment\SetAssessmentStartedDateHandler.cs" />
+    <Compile Include="ImportNotificationAssessment\SetEntryPointHandler.cs" />
+    <Compile Include="ImportNotificationAssessment\SetExitPointHandler.cs" />
     <Compile Include="ImportNotificationAssessment\SetImportNotificationConsultationHandler.cs" />
     <Compile Include="ImportNotificationAssessment\SetNotificationCompletedDateHandler.cs" />
     <Compile Include="ImportNotificationAssessment\SetNotificationFileClosedDateHandler.cs" />

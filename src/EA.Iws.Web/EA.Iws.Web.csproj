@@ -498,6 +498,10 @@
     <Content Include="Areas\AdminExportAssessment\Views\UpdateJourney\EntryPointChanged.cshtml" />
     <Content Include="Areas\AdminExportAssessment\Views\UpdateJourney\ExitPoint.cshtml" />
     <Content Include="Areas\AdminExportAssessment\Views\UpdateJourney\ExitPointChanged.cshtml" />
+    <Content Include="Areas\ImportNotification\Views\UpdateJourney\EntryPoint.cshtml" />
+    <Content Include="Areas\ImportNotification\Views\UpdateJourney\ExitPoint.cshtml" />
+    <Content Include="Areas\ImportNotification\Views\UpdateJourney\EntryPointChanged.cshtml" />
+    <Content Include="Areas\ImportNotification\Views\UpdateJourney\ExitPointChanged.cshtml" />
     <None Include="Content\iws\_panels.scss" />
     <Content Include="Content\nta-extended.css" />
     <Content Include="Content\select2\select2-spinner.gif" />
@@ -1827,6 +1831,7 @@
     <Compile Include="Areas\ImportNotification\Controllers\StateOfExportController.cs" />
     <Compile Include="Areas\ImportNotification\Controllers\StateOfImportController.cs" />
     <Compile Include="Areas\ImportNotification\Controllers\TransitStateController.cs" />
+    <Compile Include="Areas\ImportNotification\Controllers\UpdateJourneyController.cs" />
     <Compile Include="Areas\ImportNotification\Controllers\ValidateController.cs" />
     <Compile Include="Areas\ImportNotification\Controllers\WasteOperationController.cs" />
     <Compile Include="Areas\ImportNotification\Controllers\ShipmentController.cs" />
@@ -1915,6 +1920,13 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>TransitStateViewModelResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\ImportNotification\ViewModels\UpdateJourney\EntryPointViewModel.cs" />
+    <Compile Include="Areas\ImportNotification\ViewModels\UpdateJourney\ExitPointViewModel.cs" />
+    <Compile Include="Areas\ImportNotification\ViewModels\UpdateJourney\UpdateJourneyResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>UpdateJourneyResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Areas\ImportNotification\ViewModels\Validate\ValidateViewModel.cs" />
     <Compile Include="Areas\ImportNotification\ViewModels\WasteOperation\WasteOperationViewModel.cs" />
@@ -2049,6 +2061,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>TableResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\ImportNotification\Views\UpdateJourney\UpdateJourneyResources.Designer.cs">
+      <DependentUpon>UpdateJourneyResources.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Areas\ImportNotification\Views\Validate\IndexResources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -3778,6 +3795,10 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>TransitStateViewModelResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Areas\ImportNotification\ViewModels\UpdateJourney\UpdateJourneyResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>UpdateJourneyResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Areas\ImportNotification\ViewModels\WasteOperation\WasteOperationViewModelResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>WasteOperationViewModelResources.Designer.cs</LastGenOutput>
@@ -3881,6 +3902,10 @@
     <EmbeddedResource Include="Areas\ImportNotification\Views\TransitState\TableResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>TableResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\ImportNotification\Views\UpdateJourney\UpdateJourneyResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>UpdateJourneyResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\ImportNotification\Views\Validate\IndexResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

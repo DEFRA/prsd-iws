@@ -1,16 +1,13 @@
-﻿namespace EA.Iws.Web.Areas.AdminExportAssessment.Controllers
+﻿namespace EA.Iws.Web.Areas.ImportNotification.Controllers
 {
     using System;
     using System.Threading.Tasks;
     using System.Web.Mvc;
-    using Infrastructure.Authorization;
     using Prsd.Core.Mediator;
-    using Requests.NotificationAssessment;
+    using Requests.ImportNotificationAssessment;
     using Requests.TransportRoute;
     using ViewModels.UpdateJourney;
 
-    [AuthorizeActivity(typeof(SetEntryPoint))]
-    [AuthorizeActivity(typeof(SetExitPoint))]
     public class UpdateJourneyController : Controller
     {
         private readonly IMediator mediator;

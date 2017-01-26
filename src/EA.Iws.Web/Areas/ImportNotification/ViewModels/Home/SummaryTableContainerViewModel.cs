@@ -15,5 +15,7 @@
         }
 
         public bool ShowChangeNumberOfShipmentsLink { get; set; }
+
+        public bool ShowChangeEntryExitPointLink { get; set; }
     }
 }

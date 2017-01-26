@@ -36,7 +36,11 @@
             {
                 <div class="sub-text">@Resource.UnansweredQuestionPlaceholder</div>
             }
-        
+
+            if (Model.ShowChangeEntryExitPointLink)
+            {
+                <div class="change-answer">@Html.ActionLink("Change", "ExitPoint", "UpdateJourney", new { id = Model.Details.Id }, null)</div>
+            }
         }
         else
         {

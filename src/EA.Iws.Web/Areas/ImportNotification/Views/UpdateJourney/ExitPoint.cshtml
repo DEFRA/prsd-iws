@@ -1,5 +1,5 @@
-﻿@model EA.Iws.Web.Areas.AdminExportAssessment.ViewModels.UpdateJourney.ExitPointViewModel
-@using Resources = EA.Iws.Web.Areas.AdminExportAssessment.Views.UpdateJourney.UpdateJourneyResources
+﻿@model EA.Iws.Web.Areas.ImportNotification.ViewModels.UpdateJourney.ExitPointViewModel
+@using Resources = EA.Iws.Web.Areas.ImportNotification.Views.UpdateJourney.UpdateJourneyResources
 @{
     ViewBag.Title = Resources.ChangeExitPointTitle;
 }
@@ -22,8 +22,4 @@
     </div>
 
     <button class="button" type="submit">@Constants.ContinueButtonText</button>
-}
-
-@section menu {
-    @Html.Action("ExportNavigation", "Menu", new { area = "Admin", section = ExportNavigationSection.Assessment })
 }

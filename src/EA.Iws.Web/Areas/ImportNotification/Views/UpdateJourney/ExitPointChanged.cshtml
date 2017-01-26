@@ -1,0 +1,10 @@
+﻿@using Resources = EA.Iws.Web.Areas.ImportNotification.Views.UpdateJourney.UpdateJourneyResources
+@{
+    ViewBag.Title = "title";
+}
+
+<h1 class="heading-large">@Resources.ExitPointChangedTitle</h1>
+
+<p>@(string.Format(Resources.ExitPointChangedDescription, ViewBag.ExitPoint)).</p>
+
+@Html.ActionLink(Constants.ContinueOnlyButtonText, "Index", "Home", routeValues: null, htmlAttributes: new { @class = "button" })
