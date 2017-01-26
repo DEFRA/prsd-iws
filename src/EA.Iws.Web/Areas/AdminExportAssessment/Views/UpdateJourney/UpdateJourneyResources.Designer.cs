@@ -71,6 +71,15 @@ namespace EA.Iws.Web.Areas.AdminExportAssessment.Views.UpdateJourney {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Change point of exit.
+        /// </summary>
+        public static string ChangeExitPointTitle {
+            get {
+                return ResourceManager.GetString("ChangeExitPointTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Competent authority.
         /// </summary>
         public static string CompetentAuthority {
@@ -80,7 +89,7 @@ namespace EA.Iws.Web.Areas.AdminExportAssessment.Views.UpdateJourney {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Entry point.
+        ///   Looks up a localized string similar to Point of entry.
         /// </summary>
         public static string EntryPoint {
             get {
@@ -107,11 +116,47 @@ namespace EA.Iws.Web.Areas.AdminExportAssessment.Views.UpdateJourney {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Point of exit.
+        /// </summary>
+        public static string ExitPoint {
+            get {
+                return ResourceManager.GetString("ExitPoint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The point of exit has been changed to {0}.
+        /// </summary>
+        public static string ExitPointChangedDescription {
+            get {
+                return ResourceManager.GetString("ExitPointChangedDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Point of exit changed.
+        /// </summary>
+        public static string ExitPointChangedTitle {
+            get {
+                return ResourceManager.GetString("ExitPointChangedTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The point of entry is currently {0}.
         /// </summary>
         public static string PointOfEntryCurrently {
             get {
                 return ResourceManager.GetString("PointOfEntryCurrently", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The point of exit is currently {0}.
+        /// </summary>
+        public static string PointOfExitCurrently {
+            get {
+                return ResourceManager.GetString("PointOfExitCurrently", resourceCulture);
             }
         }
     }

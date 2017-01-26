@@ -120,11 +120,14 @@
   <data name="ChangeEntryPointTitle" xml:space="preserve">
     <value>Change point of entry</value>
   </data>
+  <data name="ChangeExitPointTitle" xml:space="preserve">
+    <value>Change point of exit</value>
+  </data>
   <data name="CompetentAuthority" xml:space="preserve">
     <value>Competent authority</value>
   </data>
   <data name="EntryPoint" xml:space="preserve">
-    <value>Entry point</value>
+    <value>Point of entry</value>
   </data>
   <data name="EntryPointChangedDescription" xml:space="preserve">
     <value>The point of entry has been changed to {0}</value>
@@ -132,7 +135,19 @@
   <data name="EntryPointChangedTitle" xml:space="preserve">
     <value>Point of entry changed</value>
   </data>
+  <data name="ExitPoint" xml:space="preserve">
+    <value>Point of exit</value>
+  </data>
+  <data name="ExitPointChangedDescription" xml:space="preserve">
+    <value>The point of exit has been changed to {0}</value>
+  </data>
+  <data name="ExitPointChangedTitle" xml:space="preserve">
+    <value>Point of exit changed</value>
+  </data>
   <data name="PointOfEntryCurrently" xml:space="preserve">
     <value>The point of entry is currently {0}</value>
+  </data>
+  <data name="PointOfExitCurrently" xml:space="preserve">
+    <value>The point of exit is currently {0}</value>
   </data>
 </root>

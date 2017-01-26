@@ -120,4 +120,13 @@
   <data name="EntryPoint" xml:space="preserve">
     <value>Entry point</value>
   </data>
+  <data name="EntryPointRequired" xml:space="preserve">
+    <value>Please select a point of entry</value>
+  </data>
+  <data name="ExitPoint" xml:space="preserve">
+    <value>Exit point</value>
+  </data>
+  <data name="ExitPointRequired" xml:space="preserve">
+    <value>Please select a point of exit</value>
+  </data>
 </root>

@@ -27,7 +27,7 @@
         public SelectList EntryPoints { get; set; }
 
         [Display(ResourceType = typeof(UpdateJourneyResources), Name = "EntryPoint")]
-        [Required]
+        [Required(ErrorMessageResourceType = typeof(UpdateJourneyResources), ErrorMessageResourceName = "EntryPointRequired")]
         public Guid? SelectedEntryPoint { get; set; }
     }
 }

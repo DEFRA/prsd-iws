@@ -69,5 +69,32 @@ namespace EA.Iws.Web.Areas.AdminExportAssessment.ViewModels.UpdateJourney {
                 return ResourceManager.GetString("EntryPoint", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please select a point of entry.
+        /// </summary>
+        public static string EntryPointRequired {
+            get {
+                return ResourceManager.GetString("EntryPointRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Exit point.
+        /// </summary>
+        public static string ExitPoint {
+            get {
+                return ResourceManager.GetString("ExitPoint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please select a point of exit.
+        /// </summary>
+        public static string ExitPointRequired {
+            get {
+                return ResourceManager.GetString("ExitPointRequired", resourceCulture);
+            }
+        }
     }
 }
