@@ -31,7 +31,7 @@
             {
                 Details = details,
                 ShowChangeLinks = details.Status == ImportNotificationStatus.NotificationReceived,
-                ShowChangeShipmentNumberLink = authorised && details.Status == ImportNotificationStatus.Consented
+                ShowChangeNumberOfShipmentsLink = authorised && details.Status == ImportNotificationStatus.Consented
             };
 
             return View(model);

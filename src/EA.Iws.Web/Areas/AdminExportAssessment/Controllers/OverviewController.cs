@@ -28,7 +28,7 @@
             var authorised = Task.Run(() => authorizationService.AuthorizeActivity(typeof(GetOriginalNumberOfShipments))).Result;
 
             var model = new NotificationOverviewViewModel(result);
-            model.AmountsAndDatesViewModel.CanShowChangeShipmentNumberLink = authorised;
+            model.AmountsAndDatesViewModel.CanChangeNumberOfShipments = authorised;
 
             return View(model);
         }

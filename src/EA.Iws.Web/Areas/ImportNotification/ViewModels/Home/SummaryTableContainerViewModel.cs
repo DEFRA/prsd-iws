@@ -14,6 +14,6 @@
             get { return Details.Type == NotificationType.Recovery; }
         }
 
-        public bool ShowChangeShipmentNumberLink { get; set; }
+        public bool ShowChangeNumberOfShipmentsLink { get; set; }
     }
 }
