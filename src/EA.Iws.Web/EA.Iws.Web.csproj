@@ -494,6 +494,8 @@
     <Content Include="Content\govuk_toolkit\stylesheets\design-patterns\_alpha-beta.scss" />
     <Content Include="Content\govuk_toolkit\stylesheets\colours\_palette.scss" />
     <Content Include="Content\govuk_toolkit\stylesheets\colours\_organisation.scss" />
+    <Content Include="Areas\AdminExportAssessment\Views\UpdateJourney\EntryPoint.cshtml" />
+    <Content Include="Areas\AdminExportAssessment\Views\UpdateJourney\EntryPointChanged.cshtml" />
     <None Include="Content\iws\_panels.scss" />
     <Content Include="Content\nta-extended.css" />
     <Content Include="Content\select2\select2-spinner.gif" />
@@ -1143,6 +1145,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>IndexViewModelResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Areas\AdminExportAssessment\ViewModels\UpdateJourney\EntryPointViewModel.cs" />
+    <Compile Include="Areas\AdminExportAssessment\ViewModels\UpdateJourney\UpdateJourneyResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>UpdateJourneyResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Areas\AdminExportAssessment\Views\AccountManagement\PaymentDetailsResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -1213,6 +1221,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>IndexResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\AdminExportAssessment\Views\UpdateJourney\UpdateJourneyResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>UpdateJourneyResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Areas\AdminExportNotificationMovements\Controllers\DeleteController.cs" />
     <Compile Include="Areas\AdminExportNotificationMovements\Controllers\DeleteControllerResources.Designer.cs">
@@ -3220,7 +3233,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\AddressBook\Models\" />
-    <Folder Include="Areas\AdminExportAssessment\Views\UpdateJourney\" />
     <Folder Include="Areas\Admin\Views\Shared\EditorTemplates\" />
     <Folder Include="Areas\Admin\Views\SmokeTest\" />
     <Folder Include="Areas\FinancialGuarantee\ViewModels\" />
@@ -3250,6 +3262,10 @@
     <EmbeddedResource Include="Areas\AdminExportAssessment\ViewModels\NumberOfShipments\IndexViewModelResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>IndexViewModelResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\AdminExportAssessment\ViewModels\UpdateJourney\UpdateJourneyResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>UpdateJourneyResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\AdminExportAssessment\Views\AccountManagement\PaymentDetailsResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -3306,6 +3322,10 @@
     <EmbeddedResource Include="Areas\AdminExportAssessment\Views\NumberOfShipments\IndexResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\AdminExportAssessment\Views\UpdateJourney\UpdateJourneyResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>UpdateJourneyResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\AdminExportNotificationMovements\Controllers\DeleteControllerResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

@@ -43,6 +43,7 @@
             { ExportNotificationPermissions.CanGetNotificationsForApplicantHome, new[] { UserRole.External } },
             { ExportNotificationPermissions.CanMakeExportNotificationAssessmentDecision, new[] { UserRole.Administrator } },
             { ExportNotificationPermissions.CanChangeNumberOfShipmentsOnExportNotification, new[] { UserRole.Administrator } },
+            { ExportNotificationPermissions.CanChangeEntryExitPoint, new[] { UserRole.Administrator } },
             { ExportMovementPermissions.CanCreateExportMovements, new[] { UserRole.External, UserRole.Internal, UserRole.Administrator } },
             { ExportMovementPermissions.CanReadExportMovements, new[] { UserRole.Internal, UserRole.External, UserRole.Administrator } },
             { ExportMovementPermissions.CanReadExportMovementsExternal, new[] { UserRole.External } },
