@@ -3,6 +3,11 @@
 <div class="overview-block">
     @if (Model.IsProducerCompleted)
     {
+        if (Model.CanAddProducer)
+        {
+            <div class="change-answer">@Html.ActionLink("Add", "Add", "Producer", new { id = Model.NotificationId }, null)</div>
+        }
+
         for (int i = 0; i < Model.Producers.Count; i++)
         {
             <div class="overview-block-element">

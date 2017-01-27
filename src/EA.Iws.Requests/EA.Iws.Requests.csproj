@@ -200,6 +200,7 @@
     <Compile Include="Movement\Complete\RecordOperationCompleteInternal.cs" />
     <Compile Include="Movement\GetNewMovementIdsByNotificationId.cs" />
     <Compile Include="Movement\GetNotificationNumberByMovementId.cs" />
+    <Compile Include="NotificationAssessment\AddProducer.cs" />
     <Compile Include="NotificationAssessment\DeleteExportNotification.cs" />
     <Compile Include="NotificationAssessment\DeleteTransaction.cs" />
     <Compile Include="NotificationAssessment\GetChangeNumberOfShipmentConfrimationData.cs" />

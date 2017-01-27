@@ -27,5 +27,7 @@
         public const string CanChangeNumberOfShipmentsOnExportNotification = "Can Change Number Of Shipments On Export Notification";
 
         public const string CanChangeEntryExitPoint = "Can Change Entry Exit Point";
+
+        public const string CanAddProducer = "Can Add Producer";
     }
 }
