@@ -24,6 +24,8 @@
         public List<ProducerData> Producers { get; set; }
         public ImporterData Importer { get; set; }
         public List<FacilityData> Facilities { get; set; }
+
+        public bool CanAddProducer { get; set; }
        
         public OrganisationsInvolvedViewModel() 
         {

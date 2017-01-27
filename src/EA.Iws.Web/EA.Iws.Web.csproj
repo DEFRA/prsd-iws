@@ -502,6 +502,8 @@
     <Content Include="Areas\ImportNotification\Views\UpdateJourney\ExitPoint.cshtml" />
     <Content Include="Areas\ImportNotification\Views\UpdateJourney\EntryPointChanged.cshtml" />
     <Content Include="Areas\ImportNotification\Views\UpdateJourney\ExitPointChanged.cshtml" />
+    <Content Include="Areas\AdminExportAssessment\Views\Producer\_BusinessType.cshtml" />
+    <Content Include="Areas\AdminExportAssessment\Views\Producer\Add.cshtml" />
     <None Include="Content\iws\_panels.scss" />
     <Content Include="Content\nta-extended.css" />
     <Content Include="Content\select2\select2-spinner.gif" />
@@ -1114,6 +1116,7 @@
     <Compile Include="Areas\AdminExportAssessment\Controllers\MarkAsInterimController.cs" />
     <Compile Include="Areas\AdminExportAssessment\Controllers\OverviewController.cs" />
     <Compile Include="Areas\AdminExportAssessment\Controllers\NumberOfShipmentsController.cs" />
+    <Compile Include="Areas\AdminExportAssessment\Controllers\ProducerController.cs" />
     <Compile Include="Areas\AdminExportAssessment\Controllers\UpdateJourneyController.cs" />
     <Compile Include="Areas\AdminExportAssessment\ViewModels\DateInputViewModelResources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -1151,6 +1154,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>IndexViewModelResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Areas\AdminExportAssessment\ViewModels\Producer\AddProducerViewModel.cs" />
     <Compile Include="Areas\AdminExportAssessment\ViewModels\UpdateJourney\ExitPointViewModel.cs" />
     <Compile Include="Areas\AdminExportAssessment\ViewModels\UpdateJourney\EntryPointViewModel.cs" />
     <Compile Include="Areas\AdminExportAssessment\ViewModels\UpdateJourney\UpdateJourneyResources.Designer.cs">
@@ -1228,6 +1232,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>IndexResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\AdminExportAssessment\Views\Producer\ProducerResources.Designer.cs">
+      <DependentUpon>ProducerResources.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Areas\AdminExportAssessment\Views\UpdateJourney\UpdateJourneyResources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -3342,6 +3351,10 @@
     <EmbeddedResource Include="Areas\AdminExportAssessment\Views\NumberOfShipments\IndexResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\AdminExportAssessment\Views\Producer\ProducerResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ProducerResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\AdminExportAssessment\Views\UpdateJourney\UpdateJourneyResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

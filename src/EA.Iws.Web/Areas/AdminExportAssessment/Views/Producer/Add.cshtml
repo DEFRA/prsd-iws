@@ -1,0 +1,52 @@
+﻿@using EA.Iws.Web.Areas.AddressBook.Views
+@using EA.Iws.Web.Areas.AdminExportAssessment.Views.Producer
+@model EA.Iws.Web.Areas.AdminExportAssessment.ViewModels.Producer.AddProducerViewModel
+@{
+    ViewBag.Title = ProducerResources.TitleAdd;
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.Gds().ValidationSummary()
+    @Html.HiddenFor(m => m.NotificationId)
+
+    <header class="hgroup">
+        <h1 class="heading-large">@ProducerResources.Header</h1>
+    </header>
+
+    <fieldset>
+        <legend class="visuallyhidden">@ProducerResources.ProducerDetails</legend>
+        @Html.Partial("_BusinessType", Model)
+    </fieldset>
+
+    <h2 class="heading-medium">@ProducerResources.Address</h2>
+    <hr />
+    <span class="form-hint">@ProducerResources.AddressDescription</span>
+
+    <fieldset>
+        <legend class="visuallyhidden">@ProducerResources.Address</legend>
+        @Html.EditorFor(m => m.Address)
+    </fieldset>
+
+    <h2 class="heading-medium">@ProducerResources.Contact</h2>
+    <hr/>
+
+    <fieldset>
+        <legend class="visuallyhidden">@ProducerResources.Contact</legend>
+        @Html.EditorFor(m => m.Contact)
+    </fieldset>
+
+    <div class="form-group no-js-hidden">
+        <label class="block-label" for="addressBook">
+            @Html.CheckBoxFor(m => m.IsAddedToAddressBook, new { id = "addressBook" })
+            @AddressBookResources.AddToAddressBook
+        </label>
+    </div>
+
+    <button class="button" type="submit">@Constants.ContinueButtonText</button>
+}
+
+@section menu {
+    @Html.Action("ExportNavigation", "Menu", new { area = "Admin", section = ExportNavigationSection.Assessment })
+}
