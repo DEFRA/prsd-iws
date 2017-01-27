@@ -11,6 +11,11 @@
                 <div class="column-half">
                     @Html.DisplayFor(m => m.StateOfExportData.ExitPoint.Name),
                     @Html.DisplayFor(m => m.StateOfExportData.Country.Name)
+
+                    @if (Model.CanChangeEntryExitPoint)
+                    {
+                        <div class="change-answer">@Html.ActionLink("Change", "ExitPoint", "UpdateJourney", new { id = Model.NotificationId }, null)</div>
+                    }
                 </div>
             </div>
             <div class="grid-row">

@@ -13,7 +13,7 @@
                     <div class="sub-text">
                         @Model.Details.IntendedShipment.TotalShipments
 
-                        @if (Model.ShowChangeShipmentNumberLink)
+                        @if (Model.ShowChangeNumberOfShipmentsLink)
                         {
                             <div class="change-answer" >@Html.ActionLink("Change", "Index", "NumberOfShipments")</div>
                         }

@@ -3,6 +3,7 @@
     using System;
     using System.Threading.Tasks;
     using System.Web.Mvc;
+    using Core.Authorization.Permissions;
     using Core.ImportNotificationAssessment;
     using Infrastructure.Authorization;
     using Prsd.Core.Mediator;
@@ -25,13 +26,15 @@
         public async Task<ActionResult> Index(Guid id)
         {
             var details = await mediator.SendAsync(new GetSummary(id));
-            var authorised = Task.Run(() => authorizationService.AuthorizeActivity(typeof(GetOriginalNumberOfShipments))).Result;
+            var canChangeNumberOfShipments = Task.Run(() => authorizationService.AuthorizeActivity(typeof(GetOriginalNumberOfShipments))).Result;
+            var canChangeEntryExitPoint = Task.Run(() => authorizationService.AuthorizeActivity(ImportNotificationPermissions.CanChangeImportEntryExitPoint)).Result;
 
             var model = new SummaryTableContainerViewModel
             {
                 Details = details,
                 ShowChangeLinks = details.Status == ImportNotificationStatus.NotificationReceived,
-                ShowChangeShipmentNumberLink = authorised && details.Status == ImportNotificationStatus.Consented
+                ShowChangeNumberOfShipmentsLink = canChangeNumberOfShipments && details.Status == ImportNotificationStatus.Consented,
+                ShowChangeEntryExitPointLink = canChangeEntryExitPoint && details.Status != ImportNotificationStatus.New && details.Status != ImportNotificationStatus.NotificationReceived
             };
 
             return View(model);

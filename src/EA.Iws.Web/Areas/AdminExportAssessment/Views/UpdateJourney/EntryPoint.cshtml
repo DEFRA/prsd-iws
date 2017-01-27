@@ -1,0 +1,29 @@
+﻿@model EA.Iws.Web.Areas.AdminExportAssessment.ViewModels.UpdateJourney.EntryPointViewModel
+@using Resources = EA.Iws.Web.Areas.AdminExportAssessment.Views.UpdateJourney.UpdateJourneyResources
+@{
+    ViewBag.Title = Resources.ChangeEntryPointTitle;
+}
+
+<h1 class="heading-large">@Resources.ChangeEntryPointTitle</h1>
+
+<p>@Resources.CompetentAuthority - @(Model.CompetentAuthority).</p>
+
+<p>@(string.Format(Resources.PointOfEntryCurrently, Model.EntryPoint)).</p>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.Gds().ValidationSummary()
+
+    <div class="form-group @Html.Gds().FormGroupClass(m => m.SelectedEntryPoint)">
+        @Html.Gds().LabelFor(m => m.SelectedEntryPoint, new { @class = "form-label-bold" })
+        @Html.Gds().ValidationMessageFor(m => m.SelectedEntryPoint)
+        @Html.Gds().DropDownListFor(m => m.SelectedEntryPoint, Model.EntryPoints, string.Empty, new { title = Resources.EntryPoint, data_select_box = "true" })
+    </div>
+
+    <button class="button" type="submit">@Constants.ContinueButtonText</button>
+}
+
+@section menu {
+    @Html.Action("ExportNavigation", "Menu", new { area = "Admin", section = ExportNavigationSection.Assessment })
+}

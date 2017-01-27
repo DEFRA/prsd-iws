@@ -1,0 +1,25 @@
+﻿@model EA.Iws.Web.Areas.ImportNotification.ViewModels.UpdateJourney.ExitPointViewModel
+@using Resources = EA.Iws.Web.Areas.ImportNotification.Views.UpdateJourney.UpdateJourneyResources
+@{
+    ViewBag.Title = Resources.ChangeExitPointTitle;
+}
+
+<h1 class="heading-large">@Resources.ChangeExitPointTitle</h1>
+
+<p>@Resources.CompetentAuthority - @(Model.CompetentAuthority).</p>
+
+<p>@(string.Format(Resources.PointOfExitCurrently, Model.ExitPoint)).</p>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.Gds().ValidationSummary()
+
+    <div class="form-group @Html.Gds().FormGroupClass(m => m.SelectedExitPoint)">
+        @Html.Gds().LabelFor(m => m.SelectedExitPoint, new { @class = "form-label-bold" })
+        @Html.Gds().ValidationMessageFor(m => m.SelectedExitPoint)
+        @Html.Gds().DropDownListFor(m => m.SelectedExitPoint, Model.ExitPoints, string.Empty, new { title = Resources.ExitPoint, data_select_box = "true" })
+    </div>
+
+    <button class="button" type="submit">@Constants.ContinueButtonText</button>
+}

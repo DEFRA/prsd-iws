@@ -25,5 +25,7 @@
         public const string CanMakeExportNotificationAssessmentDecision = "Can Make Export Notification Assessment Decision";
 
         public const string CanChangeNumberOfShipmentsOnExportNotification = "Can Change Number Of Shipments On Export Notification";
+
+        public const string CanChangeEntryExitPoint = "Can Change Entry Exit Point";
     }
 }

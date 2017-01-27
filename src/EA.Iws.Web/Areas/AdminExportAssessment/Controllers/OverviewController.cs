@@ -3,6 +3,7 @@
     using System;
     using System.Threading.Tasks;
     using System.Web.Mvc;
+    using Core.Authorization.Permissions;
     using Infrastructure.Authorization;
     using NotificationApplication.ViewModels.NotificationApplication;
     using Prsd.Core.Mediator;
@@ -25,10 +26,12 @@
         public async Task<ActionResult> Index(Guid id)
         {
             var result = await mediator.SendAsync(new GetNotificationOverviewInternal(id));
-            var authorised = Task.Run(() => authorizationService.AuthorizeActivity(typeof(GetOriginalNumberOfShipments))).Result;
+            var canChangeNumberOfShipments = Task.Run(() => authorizationService.AuthorizeActivity(typeof(GetOriginalNumberOfShipments))).Result;
+            var canChangeEntryExitPoints = Task.Run(() => authorizationService.AuthorizeActivity(ExportNotificationPermissions.CanChangeEntryExitPoint)).Result;
 
             var model = new NotificationOverviewViewModel(result);
-            model.AmountsAndDatesViewModel.CanShowChangeShipmentNumberLink = authorised;
+            model.AmountsAndDatesViewModel.CanChangeNumberOfShipments = canChangeNumberOfShipments;
+            model.JourneyViewModel.CanChangeEntryExitPoint = canChangeEntryExitPoints;
 
             return View(model);
         }

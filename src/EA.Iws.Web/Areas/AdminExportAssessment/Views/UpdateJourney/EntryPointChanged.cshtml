@@ -1,0 +1,14 @@
+﻿@using Resources = EA.Iws.Web.Areas.AdminExportAssessment.Views.UpdateJourney.UpdateJourneyResources
+@{
+    ViewBag.Title = Resources.EntryPointChangedTitle;
+}
+
+<h1 class="heading-large">@Resources.EntryPointChangedTitle</h1>
+
+<p>@(string.Format(Resources.EntryPointChangedDescription, ViewBag.EntryPoint)).</p>
+
+@Html.ActionLink(Constants.ContinueOnlyButtonText, "Index", "Overview", routeValues: null, htmlAttributes: new { @class = "button" })
+
+@section menu {
+    @Html.Action("ExportNavigation", "Menu", new { area = "Admin", section = ExportNavigationSection.Assessment })
+}

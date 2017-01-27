@@ -10,10 +10,14 @@
     public class AmountsAndDatesViewModel
     {
         public Guid NotificationId { get; set; }
+
         public NotificationType NotificationType { get; set; }
+
         public bool IsIntendedShipmentsCompleted { get; set; }
+
         public IntendedShipmentData IntendedShipmentData { get; set; }
-        public bool CanShowChangeShipmentNumberLink { get; set; }
+
+        public bool CanChangeNumberOfShipments { get; set; }
 
         public AmountsAndDatesViewModel()
         {
@@ -27,11 +31,11 @@
             IntendedShipmentData = amountAndDatesInfo.IntendedShipmentData ?? new IntendedShipmentData();
         }
 
-        public bool ShowChangeShipmentNumberLink
+        public bool ShowChangeNumberOfShipmentsLink
         {
             get
             {
-                return CanShowChangeShipmentNumberLink && IntendedShipmentData.Status == NotificationStatus.Consented;
+                return CanChangeNumberOfShipments && IntendedShipmentData.Status == NotificationStatus.Consented;
             }
         }
     }
