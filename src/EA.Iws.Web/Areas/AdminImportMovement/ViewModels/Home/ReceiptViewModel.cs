@@ -105,6 +105,11 @@
             {
                 yield return new ValidationResult(ReceiptViewModelResources.RejectReasonRequired, new[] { "RejectionReason" });
             }
+
+            if (!WasAccepted && string.IsNullOrWhiteSpace(RejectionFurtherInformation))
+            {
+                yield return new ValidationResult(ReceiptViewModelResources.RejectionFurtherInformationRequired, new[] { "RejectionFurtherInformation" });
+            }
         }
     }
 }
