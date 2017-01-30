@@ -25,6 +25,7 @@
             {
                 NotificationType = source.NotificationType,
                 Status = source.Status,
+                Preconsented = source.Preconsented ? "Yes" : "No",
                 NotificationNumber = source.NotificationNumber,
                 Acknowledged = source.Acknowledged,
                 ApplicationCompleted = source.ApplicationCompleted,
