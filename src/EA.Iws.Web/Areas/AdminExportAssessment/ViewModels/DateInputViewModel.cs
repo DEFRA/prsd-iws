@@ -99,6 +99,15 @@
 
         public bool ShowAssessmentDecisionLink { get; set; }
 
+        public bool CanSetDates
+        {
+            get
+            {
+                return CurrentStatus != NotificationStatus.Withdrawn
+                       || CurrentStatus != NotificationStatus.FileClosed;
+            }
+        }
+
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             if (Command != KeyDatesStatusEnum.ArchiveReference && !NewDate.IsCompleted)
