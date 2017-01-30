@@ -23,6 +23,7 @@
                 @"SELECT	[NotificationNumber],
                             [NotificationType],
                             [Status],
+                            [Preconsented],
                             [NotificationReceived],
                             [PaymentReceived],
                             [AssessmentStarted],

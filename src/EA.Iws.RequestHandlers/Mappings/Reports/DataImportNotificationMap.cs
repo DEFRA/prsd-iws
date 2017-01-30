@@ -25,6 +25,7 @@
             {
                 NotificationType = source.NotificationType,
                 Status = source.Status,
+                Preconsented = source.Preconsented.HasValue && source.Preconsented.Value ? "Yes" : "No",
                 NotificationNumber = source.NotificationNumber,
                 Acknowledged = source.Acknowledged,
                 ApplicationCompleted = source.ApplicationCompleted,
@@ -75,12 +76,12 @@
 
         private DateTime? GetDecisionRequiredByDate(DataImportNotification source, UKCompetentAuthority parameter)
         {
-            if (!source.Acknowledged.HasValue)
+            if (!source.Acknowledged.HasValue || !source.Preconsented.HasValue)
             {
                 return null;
             }
 
-            return decisionRequiredByCalculator.Get(source.Preconsented, source.Acknowledged.Value, parameter);
+            return decisionRequiredByCalculator.Get(source.Preconsented.Value, source.Acknowledged.Value, parameter);
         }
 
         private int? GetReceivedToAcknowledgedElapsedWorkingDays(DataImportNotification source,

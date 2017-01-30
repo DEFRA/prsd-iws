@@ -90,7 +90,7 @@ AS
         U.[Id] AS [UnitsId],
         C.[From] AS [ConsentFrom],
         C.[To] AS [ConsentTo],
-        0 AS [Preconsented],
+        FC.[AllFacilitiesPreconsented] AS [Preconsented],
         'Import' AS [ImportOrExport],
         (SELECT Price FROM [Reports].[PricingInfo](N.Id)) AS [Charge]
 
@@ -122,4 +122,7 @@ AS
 
     LEFT JOIN	[ImportNotification].[Consent] AS C
     ON			[N].[Id] = [C].[NotificationId]
+
+	LEFT JOIN   [ImportNotification].[FacilityCollection] AS FC
+	ON			[N].[Id] = [FC].[ImportNotificationId]
 GO

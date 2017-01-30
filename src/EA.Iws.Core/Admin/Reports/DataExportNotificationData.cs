@@ -14,6 +14,9 @@
 
         public NotificationStatus Status { get; set; }
 
+        [DisplayName("Pre-consented")]
+        public string Preconsented { get; set; }
+
         public DateTime? ConsentDate { get; set; }
 
         public DateTime? NotificationReceived { get; set; }
