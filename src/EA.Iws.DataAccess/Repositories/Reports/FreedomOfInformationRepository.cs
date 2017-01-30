@@ -25,6 +25,8 @@
             return await context.Database.SqlQuery<FreedomOfInformationData>(
                 @"SELECT DISTINCT
                     [NotificationNumber],
+                    [ImportOrExport],
+                    CASE WHEN [IsInterim] = 1 THEN 'Interim' WHEN [IsInterim] = 0 THEN 'Non-interim' ELSE NULL END AS [Interim],
                     [NotifierName],
                     [NotifierAddress],
                     [ProducerName],

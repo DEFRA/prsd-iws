@@ -30,7 +30,8 @@ AS
         C.[To] AS [ConsentTo],
         FC.[AllFacilitiesPreconsented] AS [Preconsented],
         'Export' AS [ImportOrExport],
-        (SELECT Price FROM [Reports].[PricingInfo](N.Id)) AS [Charge]
+        (SELECT Price FROM [Reports].[PricingInfo](N.Id)) AS [Charge],
+        FC.[IsInterim]
 
     FROM		[Notification].[Notification] AS N
 
@@ -92,7 +93,8 @@ AS
         C.[To] AS [ConsentTo],
         FC.[AllFacilitiesPreconsented] AS [Preconsented],
         'Import' AS [ImportOrExport],
-        (SELECT Price FROM [Reports].[PricingInfo](N.Id)) AS [Charge]
+        (SELECT Price FROM [Reports].[PricingInfo](N.Id)) AS [Charge],
+        InS.[IsInterim]
 
     FROM [ImportNotification].[Notification] AS N
 
@@ -123,6 +125,9 @@ AS
     LEFT JOIN	[ImportNotification].[Consent] AS C
     ON			[N].[Id] = [C].[NotificationId]
 
-	LEFT JOIN   [ImportNotification].[FacilityCollection] AS FC
-	ON			[N].[Id] = [FC].[ImportNotificationId]
+    LEFT JOIN   [ImportNotification].[FacilityCollection] AS FC
+    ON			[N].[Id] = [FC].[ImportNotificationId]
+
+    LEFT JOIN   [ImportNotification].[InterimStatus] InS 
+    ON			[N].[Id] = [InS].[ImportNotificationId]
 GO
