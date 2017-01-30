@@ -33,7 +33,7 @@
                 }
             </td>
             <td>
-                @if (!Model.NotificationReceivedDate.IsCompleted)
+                @if (!Model.NotificationReceivedDate.IsCompleted && Model.CanSetDates)
                 {
                     @Html.ActionLink("Add", "Index", "KeyDates", new { command = KeyDatesStatusEnum.NotificationReceived }, null)
                 }
@@ -83,7 +83,7 @@
                 }
             </td>
             <td>
-                @if (Model.PaymentIsComplete && !Model.CommencementDate.IsCompleted && !Model.NotificationFileClosedDate.IsCompleted)
+                @if (Model.PaymentIsComplete && !Model.CommencementDate.IsCompleted && !Model.NotificationFileClosedDate.IsCompleted && Model.CanSetDates)
                 {
                     @Html.ActionLink("Add", "Index", "KeyDates", new { command = KeyDatesStatusEnum.AssessmentCommenced }, null)
                 }
