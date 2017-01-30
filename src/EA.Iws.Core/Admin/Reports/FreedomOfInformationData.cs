@@ -18,10 +18,14 @@ namespace EA.Iws.Core.Admin.Reports
 
         public string NotifierAddress { get; set; }
 
+        public string NotifierPostalCode { get; set; }
+
         [DisplayName("Producer")]
         public string ProducerName { get; set; }
 
         public string ProducerAddress { get; set; }
+
+        public string ProducerPostalCode { get; set; }
 
         [DisplayName("Point of Exit")]
         public string PointOfExport { get; set; }
@@ -51,10 +55,15 @@ namespace EA.Iws.Core.Admin.Reports
         [DisplayName("Consignee Address")]
         public string ImporterAddress { get; set; }
 
+        [DisplayName("Consignee Postal Code")]
+        public string ImporterPostalCode { get; set; }
+
         [DisplayName("Facility")]
         public string FacilityName { get; set; }
 
         public string FacilityAddress { get; set; }
+
+        public string FacilityPostalCode { get; set; }
 
         public decimal QuantityReceived { get; set; }
 

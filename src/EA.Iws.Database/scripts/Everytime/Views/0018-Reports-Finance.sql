@@ -9,10 +9,13 @@ AS
         CASE WHEN IU.Id IS NULL THEN 'External' ELSE 'Internal' END AS CreatedBy,
         NO.Exporter AS [Notifier],
         NO.ExporterAddress AS [NotifierAddress],
+        NO.ExporterPostalCode AS [NotifierPostalCode],
         NO.Importer AS [Consignee],
         NO.ImporterAddress AS [ConsigneeAddress],
+        NO.ImporterPostalCode AS [ConsigneePostalCode],
         NO.Facility,
         NO.FacilityAddress,
+        NO.FacilityPostalCode,
         NA.PaymentReceivedDate,
         N.Charge AS [TotalBillable],
         P.TotalPaid,
@@ -30,7 +33,7 @@ AS
         NA.ConsentTo,
         NA.Status,
         N.CompetentAuthorityId,
-		NA.ReceivedDate
+        NA.ReceivedDate
     FROM [Reports].[NotificationOrganisations] NO
     INNER JOIN [Reports].[NotificationAssessment] NA ON NO.Id = NA.NotificationId
     INNER JOIN [Reports].[Notification] N ON NO.Id = N.Id

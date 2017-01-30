@@ -12,13 +12,19 @@
 
         public string NotifierAddress { get; protected set; }
 
+        public string NotifierPostalCode { get; set; }
+
         public string Consignee { get; protected set; }
 
         public string ConsigneeAddress { get; protected set; }
 
+        public string ConsigneePostalCode { get; set; }
+
         public string Facility { get; protected set; }
 
         public string FacilityAddress { get; protected set; }
+
+        public string FacilityPostalCode { get; set; }
 
         public DateTime? ReceivedDate { get; set; }
 
