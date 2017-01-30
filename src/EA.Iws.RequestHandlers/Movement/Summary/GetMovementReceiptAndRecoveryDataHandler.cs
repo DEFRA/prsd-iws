@@ -48,7 +48,8 @@
                 ActualDate = movement.Date,
                 NotificationType = notification.NotificationType,
                 PrenotificationDate = movement.PrenotificationDate,
-                NotificationUnits = shipmentInfo.Units
+                NotificationUnits = shipmentInfo.Units,
+                Status = movement.Status
             };
 
             if (movement.Receipt != null)

@@ -3,6 +3,7 @@
     using System;
     using System.Threading.Tasks;
     using System.Web.Mvc;
+    using Core.Movement;
     using Infrastructure.Authorization;
     using Prsd.Core.Mediator;
     using Requests.Movement.Complete;
@@ -25,6 +26,11 @@
         public async Task<ActionResult> Index(Guid id)
         {
             var result = await mediator.SendAsync(new GetMovementReceiptAndRecoveryData(id));
+
+            if (result.Status == MovementStatus.Cancelled)
+            {
+                return RedirectToAction("Cancelled", new { id, notificationId = result.NotificationId });
+            }
 
             var model = new CaptureViewModel(result);
 
@@ -68,6 +74,12 @@
             }
 
             return RedirectToAction("Index", "Home", new { area = "AdminExportNotificationMovements", id = model.NotificationId });
+        }
+
+        [HttpGet]
+        public ActionResult Cancelled(Guid id, Guid notificationId)
+        {
+            return View(notificationId);
         }
     }
 }

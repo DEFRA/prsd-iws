@@ -26,6 +26,11 @@
         {
             var result = await mediator.SendAsync(new GetImportMovementReceiptAndRecoveryData(id));
 
+            if (result.Data.IsCancelled)
+            {
+                return RedirectToAction("Cancelled", new { id, notificationId = result.Data.NotificationId });
+            }
+
             return View(new HomeViewModel(result));
         }
 
@@ -66,6 +71,12 @@
             }
 
             return RedirectToAction("Index", "Home", new { area = "AdminImportNotificationMovements", id = model.NotificationId });
+        }
+
+        [HttpGet]
+        public ActionResult Cancelled(Guid id, Guid notificationId)
+        {
+            return View(notificationId);
         }
     } 
 }

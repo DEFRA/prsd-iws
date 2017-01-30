@@ -19,7 +19,8 @@
                     Number = source.Movement.Number,
                     NotificationType = source.NotificationType,
                     ActualDate = source.Movement.ActualShipmentDate,
-                    PreNotificationDate = source.Movement.PrenotificationDate
+                    PreNotificationDate = source.Movement.PrenotificationDate,
+                    IsCancelled = source.Movement.IsCancelled
                 },
                 RecoveryData = new ImportMovementRecoveryData
                 {

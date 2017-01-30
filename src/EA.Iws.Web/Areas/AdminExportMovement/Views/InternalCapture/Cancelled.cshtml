@@ -1,0 +1,11 @@
+﻿@model Guid
+@using Resources = EA.Iws.Web.Areas.AdminExportMovement.Views.InternalCapture.CancelledResources
+@{
+    ViewBag.Title = Resources.Title;
+}
+
+<h1 class="heading-large">@Resources.Title</h1>
+
+<p class="text">@Resources.Description</p>
+
+@Html.ActionLink(Resources.ReturnToSummary, "Index", "Home", new { area = "AdminExportNotificationMovements", id = Model }, null)

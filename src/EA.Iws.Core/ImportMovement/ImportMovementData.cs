@@ -14,5 +14,7 @@
         public DateTimeOffset ActualDate { get; set; }
 
         public DateTimeOffset? PreNotificationDate { get; set; }
+
+        public bool IsCancelled { get; set; }
     }
 }
