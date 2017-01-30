@@ -11,6 +11,8 @@
 
         public string NotifierAddress { get; set; }
 
+        public string NotifierPostalCode { get; set; }
+
         public decimal? TotalPaid { get; set; }
 
         public DateTime? LatestPaymentDate { get; set; }
@@ -44,9 +46,13 @@
 
         public string ConsigneeAddress { get; set; }
 
+        public string ConsigneePostalCode { get; set; }
+
         public string Facility { get; set; }
 
         public string FacilityAddress { get; set; }
+
+        public string FacilityPostalCode { get; set; }
 
         [DisplayName("Notification Received Date")]
         public DateTime? ReceivedDate { get; set; }

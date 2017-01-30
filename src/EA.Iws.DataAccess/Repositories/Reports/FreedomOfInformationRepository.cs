@@ -29,8 +29,10 @@
                     CASE WHEN [IsInterim] = 1 THEN 'Interim' WHEN [IsInterim] = 0 THEN 'Non-interim' ELSE NULL END AS [Interim],
                     [NotifierName],
                     [NotifierAddress],
+                    [NotifierPostalCode],
                     [ProducerName],
                     [ProducerAddress],
+                    [ProducerPostalCode],
                     [PointOfExport],
                     [PointOfEntry],
                     [ImportCountryName],
@@ -41,8 +43,10 @@
                     [OperationCodes],
                     [ImporterName],
                     [ImporterAddress],
+                    [ImporterPostalCode],
                     [FacilityName],
                     [FacilityAddress],
+                    [FacilityPostalCode],
                     COALESCE(                    
                         (SELECT	SUM(
                             CASE WHEN [QuantityReceivedUnitId] IN (1, 2) -- Tonnes / Cubic Metres
