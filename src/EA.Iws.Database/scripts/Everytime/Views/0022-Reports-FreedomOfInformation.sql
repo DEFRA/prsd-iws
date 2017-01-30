@@ -7,6 +7,8 @@ AS
     SELECT
         N.[Id],
         N.[NotificationNumber],
+        N.[ImportOrExport],
+        N.[IsInterim],
         NA.[ReceivedDate],
         N.[CompetentAuthorityId],
         O.[Exporter] AS [NotifierName],

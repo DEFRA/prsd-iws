@@ -7,6 +7,12 @@ namespace EA.Iws.Core.Admin.Reports
     {
         public string NotificationNumber { get; set; }
 
+        [DisplayName("Import / Export")]
+        public string ImportOrExport { get; set; }
+
+        [DisplayName("Interim / non-interim")]
+        public string Interim { get; set; }
+
         [DisplayName("Notifier")]
         public string NotifierName { get; set; }
 
