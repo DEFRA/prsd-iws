@@ -24,7 +24,8 @@
                 NotificationId = movement.NotificationId,
                 ActualDate = movement.ActualShipmentDate,
                 Number = movement.Number,
-                PreNotificationDate = movement.PrenotificationDate
+                PreNotificationDate = movement.PrenotificationDate,
+                IsCancelled = movement.IsCancelled
             };
         }
     }

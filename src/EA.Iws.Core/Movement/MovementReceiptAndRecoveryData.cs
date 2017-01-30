@@ -37,5 +37,7 @@
         public bool IsReceived { get; set; }
 
         public bool IsOperationCompleted { get; set; }
+
+        public MovementStatus Status { get; set; }
     }
 }

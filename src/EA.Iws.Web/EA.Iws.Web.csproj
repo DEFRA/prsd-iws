@@ -504,6 +504,8 @@
     <Content Include="Areas\ImportNotification\Views\UpdateJourney\ExitPointChanged.cshtml" />
     <Content Include="Areas\AdminExportAssessment\Views\Producer\_BusinessType.cshtml" />
     <Content Include="Areas\AdminExportAssessment\Views\Producer\Add.cshtml" />
+    <None Include="Areas\AdminExportMovement\Views\InternalCapture\Cancelled.cshtml" />
+    <None Include="Areas\AdminImportMovement\Views\Home\Cancelled.cshtml" />
     <None Include="Content\iws\_panels.scss" />
     <Content Include="Content\nta-extended.css" />
     <Content Include="Content\select2\select2-spinner.gif" />
@@ -1243,6 +1245,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>UpdateJourneyResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Areas\AdminExportMovement\Views\InternalCapture\CancelledResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CancelledResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Areas\AdminExportNotificationMovements\Controllers\DeleteController.cs" />
     <Compile Include="Areas\AdminExportNotificationMovements\Controllers\DeleteControllerResources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -1443,6 +1450,11 @@
       <DependentUpon>RecoveryViewModelResources.resx</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Areas\AdminImportMovement\Views\Home\CancelledResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CancelledResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Areas\AdminImportMovement\Views\Home\IndexResources.Designer.cs">
       <DependentUpon>IndexResources.resx</DependentUpon>
@@ -3360,6 +3372,10 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>UpdateJourneyResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Areas\AdminExportMovement\Views\InternalCapture\CancelledResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>CancelledResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Areas\AdminExportNotificationMovements\Controllers\DeleteControllerResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>DeleteControllerResources.Designer.cs</LastGenOutput>
@@ -3491,6 +3507,10 @@
     <EmbeddedResource Include="Areas\AdminImportMovement\ViewModels\Home\RecoveryViewModelResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>RecoveryViewModelResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\AdminImportMovement\Views\Home\CancelledResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>CancelledResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\AdminImportMovement\Views\Home\IndexResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
