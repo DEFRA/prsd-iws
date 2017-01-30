@@ -147,4 +147,7 @@
   <data name="MaximumActualQuantity" xml:space="preserve">
     <value>Please enter a smaller number </value>
   </data>
+  <data name="RejectionFurtherInformationRequired" xml:space="preserve">
+    <value>Please provide further information on why the shipment was rejected</value>
+  </data>
 </root>
