@@ -504,9 +504,9 @@
     <Content Include="Areas\ImportNotification\Views\UpdateJourney\ExitPointChanged.cshtml" />
     <Content Include="Areas\AdminExportAssessment\Views\Producer\_BusinessType.cshtml" />
     <Content Include="Areas\AdminExportAssessment\Views\Producer\Add.cshtml" />
-    <None Include="Areas\AdminExportMovement\Views\InternalCapture\Cancelled.cshtml" />
-    <None Include="Areas\AdminImportMovement\Views\Home\Cancelled.cshtml" />
-    <None Include="Content\iws\_panels.scss" />
+    <Content Include="Areas\AdminExportMovement\Views\InternalCapture\Cancelled.cshtml" />
+    <Content Include="Areas\AdminImportMovement\Views\Home\Cancelled.cshtml" />
+    <Content Include="Content\iws\_panels.scss" />
     <Content Include="Content\nta-extended.css" />
     <Content Include="Content\select2\select2-spinner.gif" />
     <Content Include="Content\select2\select2.css" />
