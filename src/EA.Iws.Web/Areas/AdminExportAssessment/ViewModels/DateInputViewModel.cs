@@ -104,7 +104,7 @@
             get
             {
                 return CurrentStatus != NotificationStatus.Withdrawn
-                       || CurrentStatus != NotificationStatus.FileClosed;
+                       && CurrentStatus != NotificationStatus.FileClosed;
             }
         }
 
