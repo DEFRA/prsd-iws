@@ -3,9 +3,11 @@
     using System;
     using System.Threading.Tasks;
     using System.Web.Mvc;
+    using Core.AddressBook;
     using Infrastructure;
     using Infrastructure.Authorization;
     using Prsd.Core.Mediator;
+    using Requests.AddressBook;
     using Requests.NotificationAssessment;
     using ViewModels.Producer;
 
@@ -54,6 +56,17 @@
             };
 
             await mediator.SendAsync(request);
+
+            if (model.IsAddedToAddressBook)
+            {
+                await mediator.SendAsync(new AddAddressBookEntry
+                {
+                    Address = model.Address,
+                    Business = model.Business.ToBusinessInfoData(),
+                    Contact = model.Contact,
+                    Type = AddressRecordType.Producer
+                });
+            }
 
             return RedirectToAction("Index", "Overview");
         }
