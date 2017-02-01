@@ -4,30 +4,38 @@ GO
 
 ALTER VIEW [Reports].[DataImportNotifications]
 AS
-    SELECT
-        N.[NotificationNumber],
-        N.[TypeId] AS [NotificationType],
-        N.[CompetentAuthorityId],
-        N.[Preconsented],
-        NA.[ImportStatusId] AS [Status],
-        NA.[ReceivedDate] AS [NotificationReceived],
-        NA.[PaymentReceivedDate] AS [PaymentReceived],
-        NA.[CommencementDate] AS [AssessmentStarted],
-        NA.[CompleteDate] AS [ApplicationCompleted],
-        NA.[AcknowlegedDate] AS [Acknowledged],
-		C.[From] AS [Consented],
-		NA.[Officer],
+    SELECT 
+        REPLACE(N.[NotificationNumber], ' ', '') AS [NotificationNumber],
+        N.[NotificationType],
+        N.[CompetentAuthority] AS [CompetentAuthorityId],
+        FC.[AllFacilitiesPreconsented] AS [Preconsented],
+        NA.[Status],
+        D.[NotificationReceivedDate] AS [NotificationReceived],
+        D.[PaymentReceivedDate] AS [PaymentReceived],
+        D.[AssessmentStartedDate] AS [AssessmentStarted],
+        D.[NotificationCompletedDate] AS [ApplicationCompleted],		
+        D.[AcknowledgedDate] AS [Acknowledged],
+        C.[From] AS [Consented],
+        D.[NameOfOfficer] AS [Officer],
         -- Decision date will be the date it was withdrawn, objected or consented and it will only be one of these.
-        CAST(COALESCE(NA.WithdrawnDate, COALESCE(NA.ObjectedDate, NA.ConsentedDate)) AS DATE) AS [DecisionDate]
+        CAST(COALESCE(D.WithdrawnDate, COALESCE(O.[Date], D.[ConsentedDate])) AS DATE) AS [DecisionDate]        
 
-    FROM		[Reports].[NotificationAssessment] AS NA
+    FROM [ImportNotification].[Notification] AS [N]
 
-    INNER JOIN	[Reports].[Notification] AS N
-    ON			[N].[Id] = [NA].[NotificationId]
+    LEFT JOIN   [ImportNotification].[FacilityCollection] AS FC
+    ON			[N].[Id] = [FC].[ImportNotificationId]
 
-	LEFT JOIN	[ImportNotification].[Consent] AS C
-	ON			[NA].[NotificationId] = [C].[NotificationId]
+    INNER JOIN  [ImportNotification].[NotificationAssessment] AS NA
+    ON			[N].[Id] = [NA].[NotificationApplicationId]
 
-    WHERE		[NA].[ImportOrExport] = 'Import'
-    AND			[NA].[ImportStatusId] <> 1
+    INNER JOIN	[ImportNotification].[NotificationDates] AS D
+    ON			[D].[NotificationAssessmentId] = [NA].[Id]
+
+    LEFT JOIN	[ImportNotification].[Consent] AS C
+    ON			[N].[Id] = [C].[NotificationId]
+
+    LEFT JOIN	[ImportNotification].[Objection] AS O
+    ON			[N].[Id] = [O].[NotificationId]
+
+    WHERE		[NA].[Status] <> 1
 GO
