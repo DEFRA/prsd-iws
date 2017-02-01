@@ -21,6 +21,7 @@
             return await context.Database.SqlQuery<DataExportNotification>(
                 @"SELECT	[NotificationNumber],
                             [NotificationType],
+                            [Preconsented],
                             [Status],
                             [NotificationReceived],
                             [PaymentReceived],

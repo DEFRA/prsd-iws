@@ -25,7 +25,7 @@
             {
                 NotificationType = source.NotificationType,
                 Status = source.Status,
-                Preconsented = source.Preconsented.HasValue && source.Preconsented.Value ? "Yes" : "No",
+                Preconsented = GetPreconsented(source),
                 NotificationNumber = source.NotificationNumber,
                 Acknowledged = source.Acknowledged,
                 ApplicationCompleted = source.ApplicationCompleted,
@@ -42,6 +42,16 @@
                 ReceivedToAcknowledgedElapsedWorkingDays = GetReceivedToAcknowledgedElapsedWorkingDays(source, parameter),
                 ReceivedToConsentElapsedWorkingDays = GetReceivedToConsentElapsedWorkingDays(source, parameter)
             };
+        }
+
+        private static string GetPreconsented(DataImportNotification source)
+        {
+            if (source.Preconsented.HasValue)
+            {
+                return source.Preconsented.Value ? "Yes" : "No";
+            }
+
+            return null;
         }
 
         private DateTime GetReceivedOrPaymentDate(DataImportNotification source)

@@ -30,6 +30,6 @@
 
         public string Officer { get; set; }
 
-        public bool Preconsented { get; protected set; }
+        public bool? Preconsented { get; protected set; }
     }
 }
