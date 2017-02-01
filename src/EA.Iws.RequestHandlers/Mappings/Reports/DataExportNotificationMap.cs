@@ -25,7 +25,7 @@
             {
                 NotificationType = source.NotificationType,
                 Status = source.Status,
-                Preconsented = source.Preconsented ? "Yes" : "No",
+                Preconsented = GetPreconsented(source),
                 NotificationNumber = source.NotificationNumber,
                 Acknowledged = source.Acknowledged,
                 ApplicationCompleted = source.ApplicationCompleted,
@@ -40,6 +40,16 @@
                 ConsentDate = source.Consented,
                 Officer = source.Officer
             };
+        }
+
+        private static string GetPreconsented(DataExportNotification source)
+        {
+            if (source.Preconsented.HasValue)
+            {
+                return source.Preconsented.Value ? "Yes" : "No";
+            }
+
+            return null;
         }
 
         private int? GetAssessmentStartedElapsedWorkingDays(DataExportNotification source, UKCompetentAuthority parameter)
@@ -68,12 +78,12 @@
 
         private DateTime? GetDecisionRequiredByDate(DataExportNotification source, UKCompetentAuthority parameter)
         {
-            if (!source.Acknowledged.HasValue)
+            if (!source.Acknowledged.HasValue || !source.Preconsented.HasValue)
             {
                 return null;
             }
 
-            return decisionRequiredByCalculator.Get(source.Preconsented, source.Acknowledged.Value, parameter);
+            return decisionRequiredByCalculator.Get(source.Preconsented.Value, source.Acknowledged.Value, parameter);
         }
     }
 }
