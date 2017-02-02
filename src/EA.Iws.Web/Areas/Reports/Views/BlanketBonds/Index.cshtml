@@ -1,0 +1,41 @@
+﻿@model EA.Iws.Web.Areas.Reports.ViewModels.BlanketBonds.IndexViewModel
+@using Resources = EA.Iws.Web.Areas.Reports.Views.BlanketBonds.IndexResources
+
+@{
+    ViewBag.Title = Resources.Title;
+}
+
+<h1 class="heading-large">@Resources.Title</h1>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.Gds().ValidationSummary()
+
+    <div class="form-group @Html.Gds().FormGroupClass(m => m.FinancialGuaranteeReferenceNumber)">
+        @Html.LabelFor(m => m.FinancialGuaranteeReferenceNumber)
+        @Html.Gds().ValidationMessageFor(m => m.FinancialGuaranteeReferenceNumber)
+        @Html.Gds().TextBoxFor(m => m.FinancialGuaranteeReferenceNumber)
+    </div>
+
+    <div class="form-group @Html.Gds().FormGroupClass(m => m.ExporterName)">
+        @Html.LabelFor(m => m.ExporterName)
+        @Html.Gds().ValidationMessageFor(m => m.ExporterName)
+        @Html.Gds().TextBoxFor(m => m.ExporterName)
+    </div>
+
+    <div class="form-group @Html.Gds().FormGroupClass(m => m.ImporterName)">
+        @Html.LabelFor(m => m.ImporterName)
+        @Html.Gds().ValidationMessageFor(m => m.ImporterName)
+        @Html.Gds().TextBoxFor(m => m.ImporterName)
+    </div>
+    <div class="form-group @Html.Gds().FormGroupClass(m => m.ProducerName)">
+        @Html.LabelFor(m => m.ProducerName)
+        @Html.Gds().ValidationMessageFor(m => m.ProducerName)
+        @Html.Gds().TextBoxFor(m => m.ProducerName)
+    </div>
+
+    <div class="form-group">
+        <button class="button" type="submit">@Resources.ButtonText</button>
+    </div>
+}
