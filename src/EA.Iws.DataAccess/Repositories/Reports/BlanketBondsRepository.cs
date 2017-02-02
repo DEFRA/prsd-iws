@@ -1,5 +1,6 @@
 ﻿namespace EA.Iws.DataAccess.Repositories.Reports
 {
+    using System;
     using System.Collections.Generic;
     using System.Data.SqlClient;
     using System.Threading.Tasks;
@@ -31,14 +32,15 @@
                       ,[ProducerName]
                   FROM [Reports].[BlanketBonds]
                  WHERE [CompetentAuthority] = @ca
-                   AND (@financialGuaranteeReferenceNumber IS NULL OR [ReferenceNumber] = @financialGuaranteeReferenceNumber)
-                   AND (@exporterName IS NULL OR [ExporterName] = @exporterName)
-                   AND (@importerName IS NULL OR [ImporterName] = @importerName)
-                   AND (@producerName IS NULL OR [ProducerName] = @producerName)",
+                   AND (@financialGuaranteeReferenceNumber IS NULL OR [ReferenceNumber] LIKE '%' + @financialGuaranteeReferenceNumber + '%')
+                   AND (@exporterName IS NULL OR [ExporterName] LIKE '%' + @exporterName + '%')
+                   AND (@importerName IS NULL OR [ImporterName] LIKE '%' + @importerName + '%')
+                   AND (@producerName IS NULL OR [ProducerName] LIKE '%' + @producerName + '%')",
                 new SqlParameter("@ca", (int)competentAuthority),
-                new SqlParameter("@exporterName", exporterName),
-                new SqlParameter("@importerName", importerName),
-                new SqlParameter("@producerName", producerName)).ToArrayAsync();
+                new SqlParameter("@financialGuaranteeReferenceNumber", (object)financialGuaranteeReferenceNumber ?? DBNull.Value),
+                new SqlParameter("@exporterName", (object)exporterName ?? DBNull.Value),
+                new SqlParameter("@importerName", (object)importerName ?? DBNull.Value),
+                new SqlParameter("@producerName", (object)producerName ?? DBNull.Value)).ToArrayAsync();
         }
     }
 }
