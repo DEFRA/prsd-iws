@@ -111,6 +111,7 @@
     <Compile Include="Admin\NotificationAssessment\SetNotificationTransmittedDateHandler.cs" />
     <Compile Include="Admin\NotificationAssessment\SetNotificationAcknowledgedDateHandler.cs" />
     <Compile Include="Admin\NotificationAssessment\UnlockNotificationHandler.cs" />
+    <Compile Include="Admin\Reports\GetBlanketBondsReportHandler.cs" />
     <Compile Include="Admin\Reports\GetExportMovementsReportHandler.cs" />
     <Compile Include="Admin\Reports\GetImportStatsReportHandler.cs" />
     <Compile Include="Admin\Reports\GetImportNotificationsReportHandler.cs" />

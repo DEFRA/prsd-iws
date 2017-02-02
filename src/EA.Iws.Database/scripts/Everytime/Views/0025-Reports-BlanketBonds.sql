@@ -16,7 +16,8 @@ SELECT
     N.[NotificationNumber],
     E.[Name] AS [ExporterName],
     I.[Name] AS [ImporterName],
-    P.[Name] AS [ProducerName]
+    P.[Name] AS [ProducerName],
+    N.[CompetentAuthority]
 FROM
     [Notification].[Notification] N
     INNER JOIN  [Notification].[FinancialGuaranteeCollection] FGC
