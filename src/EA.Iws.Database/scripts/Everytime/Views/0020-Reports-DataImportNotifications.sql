@@ -37,5 +37,5 @@ AS
     LEFT JOIN	[ImportNotification].[Objection] AS O
     ON			[N].[Id] = [O].[NotificationId]
 
-    WHERE		[NA].[Status] <> 1
+    WHERE		[NA].[Status] NOT IN (1, 2)
 GO
