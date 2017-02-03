@@ -42,7 +42,7 @@
                 model.ImporterName,
                 model.ProducerName));
 
-            var filename = string.Format("blanket-bonds-{0}", SystemTime.UtcNow.ToShortDateString());
+            var filename = string.Format("blanket-bonds-{0}.xlsx", SystemTime.UtcNow.ToShortDateString());
 
             return new XlsxActionResult<BlanketBondsData>(report, filename);
         }
