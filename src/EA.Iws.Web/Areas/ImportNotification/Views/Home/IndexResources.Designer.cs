@@ -187,7 +187,7 @@ namespace EA.Iws.Web.Areas.ImportNotification.Views.Home {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Are there mulitple producers?.
+        ///   Looks up a localized string similar to Are there multiple producers?.
         /// </summary>
         public static string MultipleProducersQuestion {
             get {
