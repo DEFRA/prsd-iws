@@ -171,6 +171,9 @@
   <data name="SearchForNotification" xml:space="preserve">
     <value>Search for one of your notifications</value>
   </data>
+  <data name="SearchHint" xml:space="preserve">
+    <value>The notification number must be entered in full, for example GB0001009999</value>
+  </data>
   <data name="SearchPlaceholder" xml:space="preserve">
     <value>Enter notification number</value>
   </data>

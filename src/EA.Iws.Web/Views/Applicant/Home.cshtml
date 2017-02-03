@@ -65,6 +65,7 @@ else
 
                 <div id="search-container" class="form-group @Html.Gds().FormGroupClass(m => m.SearchTerm)">
                     @Html.Gds().ValidationMessageFor(m => m.SearchTerm)
+                    @Html.Gds().HintParagraph(HomeResources.SearchHint)
                     @Html.Gds().TextBoxFor(m => m.SearchTerm, new { @title = "Search term", placeholder = HomeResources.SearchPlaceholder })
                     <button name="button" value="search" class="button" type="submit">@HomeResources.Search</button>
                 </div>

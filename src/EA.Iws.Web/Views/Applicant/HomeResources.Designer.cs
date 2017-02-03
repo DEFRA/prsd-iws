@@ -223,6 +223,15 @@ namespace EA.Iws.Web.Views.Applicant {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The notification number must be entered in full, for example GB0001009999.
+        /// </summary>
+        public static string SearchHint {
+            get {
+                return ResourceManager.GetString("SearchHint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Enter notification number.
         /// </summary>
         public static string SearchPlaceholder {
