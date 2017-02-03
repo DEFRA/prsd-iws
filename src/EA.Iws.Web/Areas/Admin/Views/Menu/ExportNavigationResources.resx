@@ -180,4 +180,7 @@
   <data name="UpdateKeyDatesLinkText" xml:space="preserve">
     <value>Update key dates</value>
   </data>
+  <data name="Preconsented" xml:space="preserve">
+    <value>Pre-consented</value>
+  </data>
 </root>

@@ -19,13 +19,18 @@
         <p class="bold-medium">@Model.Details.NotificationNumber
             @if (Model.Details.CompetentAuthority == UKCompetentAuthority.England)
             {
-            <br />
+                <br />
                 <span class="assigned-area">@Model.Details.Area</span>
             }
             <br />
             <span class="assigned-area">@EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(Model.Details.Status)</span>
             <br />
             <span class="assigned-area"> @(Model.Details.IsInterim ? Resources.IsInterim : Resources.NonInterim)</span>
+            @if (Model.Details.AllFacilitiesPreconsented.HasValue && Model.Details.AllFacilitiesPreconsented.Value)
+            {
+                <br/>
+                <span class="assigned-area">@Resources.Preconsented</span>
+            }
         </p>
     </div>
     <ul>

@@ -26,7 +26,8 @@
                     N.[CompetentAuthority],
                     NA.[Status],
                     LA.[Name] AS [Area],
-                    I.[IsInterim]
+                    I.[IsInterim],
+                    FC.[AllFacilitiesPreconsented]
                 FROM
                     [ImportNotification].[Notification] N
                     INNER JOIN [ImportNotification].[NotificationAssessment] NA ON NA.[NotificationApplicationId] = N.[Id]
@@ -34,6 +35,7 @@
                         INNER JOIN [Lookup].[LocalArea] LA ON LA.[Id] = C.[LocalAreaId]
                     ON C.[NotificationId] = N.[Id]
                     INNER JOIN [ImportNotification].[InterimStatus] I ON I.[ImportNotificationId] = N.[Id]
+                    LEFT JOIN [ImportNotification].[FacilityCollection] FC ON FC.[ImportNotificationId] = N.[Id]
                 WHERE
                     N.[Id] = @notificationId",
                 new SqlParameter("@notificationId", message.ImportNotificationId)).SingleAsync();
