@@ -213,4 +213,7 @@
   <data name="MarkAsInterimLinkText" xml:space="preserve">
     <value>Mark notification as interim or non-interim</value>
   </data>
+  <data name="Preconsented" xml:space="preserve">
+    <value>Pre-consented</value>
+  </data>
 </root>

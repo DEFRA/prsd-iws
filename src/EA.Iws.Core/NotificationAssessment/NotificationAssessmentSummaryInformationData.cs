@@ -16,5 +16,7 @@
         public string Area { get; set; }
 
         public bool? IsInterim { get; set; }
+
+        public bool? AllFacilitiesPreconsented { get; set; }
     }
 }

@@ -214,6 +214,15 @@ namespace EA.Iws.Web.Areas.Admin.Views.Menu {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Pre-consented.
+        /// </summary>
+        public static string Preconsented {
+            get {
+                return ResourceManager.GetString("Preconsented", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Reporting.
         /// </summary>
         public static string ReportingHeading {

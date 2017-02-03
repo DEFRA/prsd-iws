@@ -25,7 +25,8 @@
                     N.[CompetentAuthority],
                     NA.[Status],
                     LA.[Name] AS [Area],
-                    FC.[IsInterim]
+                    FC.[IsInterim],
+                    FC.[AllFacilitiesPreconsented]
                 FROM
                     [Notification].[Notification] N
                     INNER JOIN [Notification].[NotificationAssessment] NA ON NA.[NotificationApplicationId] = N.[Id]

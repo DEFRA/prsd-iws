@@ -21,6 +21,11 @@
             <span class="assigned-area">@EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(Model.Data.Status)</span>
             <br />
             <span class="assigned-area"> @(Model.Data.IsInterim.GetValueOrDefault() ? Resources.isInterim : Resources.nonInterim)</span>
+            @if (Model.Data.AllFacilitiesPreconsented.HasValue && Model.Data.AllFacilitiesPreconsented.Value)
+            {
+                <br />
+                <span class="assigned-area">@Resources.Preconsented</span>
+            }
         </p>
     </div>
     <ul>
