@@ -62,5 +62,8 @@
 
         [DisplayName("Prenotified on Time")]
         public bool WasPrenotifiedBeforeThreeWorkingDays { get; set; }
+
+        [DisplayName("EWC Codes")]
+        public string EwcCodes { get; set; }
     }
 }

@@ -42,7 +42,8 @@
                     [DestinationCountry],
                     [ExitPort],
                     [OriginatingCountry],
-                    [Status]
+                    [Status],
+                    [EwcCodes]
                 FROM [Reports].[NotificationShipmentDataMissingShipments]
                 WHERE [CompetentAuthorityId] = @ca
                 AND (@dateType = 'NotificationReceivedDate' and  [NotificationReceivedDate] BETWEEN @from AND @to
