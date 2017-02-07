@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using Core.Notification;
     using Core.Shared;
     using Domain.NotificationApplication;
     using Helpers;
@@ -85,6 +86,12 @@
         {
             get { return base.WasteType; }
             set { ObjectInstantiator<NotificationApplication>.SetProperty(x => x.WasteType, value, this); }
+        }
+
+        public new UKCompetentAuthority CompetentAuthority
+        {
+            get { return base.CompetentAuthority; }
+            set { ObjectInstantiator<NotificationApplication>.SetProperty(x => x.CompetentAuthority, value, this); }
         }
     }
 }

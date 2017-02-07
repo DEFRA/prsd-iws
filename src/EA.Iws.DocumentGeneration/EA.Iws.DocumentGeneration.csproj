@@ -62,6 +62,7 @@
     <Compile Include="DocumentGenerator\NotificationDocumentGenerator.cs" />
     <Compile Include="DocumentGenerator\PostageLabelGenerator.cs" />
     <Compile Include="DocumentHelper.cs" />
+    <Compile Include="Formatters\CompetentAuthorityFormatter.cs" />
     <Compile Include="Formatters\DateTimeFormatter.cs" />
     <Compile Include="Formatters\MeansOfTransportFormatter.cs" />
     <Compile Include="Formatters\OperationInfoFormatter.cs" />

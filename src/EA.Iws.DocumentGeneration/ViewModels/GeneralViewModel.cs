@@ -65,6 +65,8 @@
             PhysicalCharacteristics =
                 physicalCharacteristicsFormatter.PhysicalCharacteristicsToCommaDelimitedString(
                     notification.PhysicalCharacteristics);
+
+            CA = CompetentAuthorityFormatter.GetCompetentAuthority(notification.CompetentAuthority);
         }
 
         private static string GetPackagingInfo(NotificationApplication notification)
@@ -151,5 +153,7 @@
         public string IntendedQuantityLtrs { get; private set; }
 
         public string PhysicalCharacteristics { get; private set; }
+
+        public string CA { get; private set; }
     }
 }

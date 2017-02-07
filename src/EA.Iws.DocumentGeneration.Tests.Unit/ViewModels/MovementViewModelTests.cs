@@ -1,6 +1,7 @@
 ﻿namespace EA.Iws.DocumentGeneration.Tests.Unit.ViewModels
 {
     using System;
+    using Core.Notification;
     using Core.Shared;
     using Core.WasteType;
     using DocumentGeneration.Formatters;
@@ -21,7 +22,8 @@
         {
             notification = new TestableNotificationApplication
             {
-                Id = new Guid("07FF7B1D-A3A9-4FB1-B10B-F00EEF8FB9F8")
+                Id = new Guid("07FF7B1D-A3A9-4FB1-B10B-F00EEF8FB9F8"),
+                CompetentAuthority = UKCompetentAuthority.England
             };
             movement = new TestableMovement
             {
@@ -60,7 +62,8 @@
                 IsSpecialHandling = false,
                 NotificationNumber = string.Empty,
                 Number = string.Empty,
-                PhysicalCharacteristics = string.Empty
+                PhysicalCharacteristics = string.Empty,
+                CA = string.Empty
             }.Evaluate(result);
         }
 
@@ -73,6 +76,7 @@
             {
                 PhysicalCharacteristicsInfo.CreatePhysicalCharacteristicsInfo(PhysicalCharacteristicType.Sludgy)
             };
+
             movement.NotificationId = notification.Id;
             movementDetails = null;
             var result = GenerateViewModel();
@@ -88,7 +92,8 @@
                 IsSpecialHandling = true,
                 NotificationNumber = notification.NotificationNumber,
                 Number = "0",
-                PhysicalCharacteristics = "4"
+                PhysicalCharacteristics = "4",
+                CA = "GB01 - EA"
             }.Evaluate(result);
         }
 
@@ -112,7 +117,8 @@
                 IsSpecialHandling = false,
                 NotificationNumber = string.Empty,
                 Number = "5",
-                PhysicalCharacteristics = string.Empty
+                PhysicalCharacteristics = string.Empty,
+                CA = "GB01 - EA"
             }.Evaluate(result);
         }
 
@@ -136,7 +142,8 @@
                 IsSpecialHandling = false,
                 NotificationNumber = string.Empty,
                 Number = "2",
-                PhysicalCharacteristics = string.Empty
+                PhysicalCharacteristics = string.Empty,
+                CA = "GB01 - EA"
             }.Evaluate(result);
         }
 
@@ -171,7 +178,8 @@
                 IsSpecialHandling = false,
                 NotificationNumber = notification.NotificationNumber,
                 Number = "12",
-                PhysicalCharacteristics = "1, 4, Pastel"
+                PhysicalCharacteristics = "1, 4, Pastel",
+                CA = "GB01 - EA"
             }.Evaluate(result);
         }
 
@@ -200,6 +208,7 @@
             public string PhysicalCharacteristics { get; set; }
             public bool IsNotSpecialHandling { get; set; }
             public bool IsSpecialHandling { get; set; }
+            public string CA { get; set; }
 
             public void Evaluate(MovementViewModel model)
             {
@@ -213,6 +222,7 @@
                 Assert.Equal(PhysicalCharacteristics, model.PhysicalCharacteristics);
                 Assert.Equal(IsNotSpecialHandling, model.IsNotSpecialHandling);
                 Assert.Equal(IsSpecialHandling, model.IsSpecialHandling);
+                Assert.Equal(CA, model.CA);
             }
         }
     }

@@ -19,6 +19,7 @@
         private string intendedNumberOfShipments = string.Empty;
         private string numberOfPackages = string.Empty;
         private string packagingTypes = string.Empty;
+        private string ca = string.Empty;
 
         public string NotificationNumber
         {
@@ -91,6 +92,12 @@
         public bool IsDisposal { get; set; }
         public bool IsRecovery { get; set; }
 
+        public string CA
+        {
+            get { return ca; }
+            set { ca = value; }
+        }
+
         public MovementViewModel(Movement movement,
             MovementDetails movementDetails,
             NotificationApplication notification,
@@ -115,6 +122,7 @@
                 : shipmentInfo.NumberOfShipments.ToString();
             IsRecovery = notification.NotificationType == NotificationType.Recovery;
             IsDisposal = notification.NotificationType == NotificationType.Disposal;
+            CA = CompetentAuthorityFormatter.GetCompetentAuthority(notification.CompetentAuthority);
 
             if (movement == null)
             {
