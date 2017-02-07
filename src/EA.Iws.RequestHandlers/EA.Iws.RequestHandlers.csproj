@@ -91,6 +91,7 @@
     <Compile Include="Admin\FinancialGuarantee\GetCurrentFinancialGuaranteeDetailsHandler.cs" />
     <Compile Include="Admin\FinancialGuarantee\GetFinancialGuaranteeHistoryHandler.cs" />
     <Compile Include="Admin\FinancialGuarantee\GetFinancialGuaranteeStatusHandler.cs" />
+    <Compile Include="Admin\FinancialGuarantee\SetCurrentFinancialGuaranteeDatesHandler.cs" />
     <Compile Include="Admin\GetExportNotificationOwnerDisplaysHandler.cs" />
     <Compile Include="Admin\GetUserCompetentAuthorityHandler.cs" />
     <Compile Include="Admin\KeyDates\GetImportKeyDatesOverrideDataHandler.cs" />

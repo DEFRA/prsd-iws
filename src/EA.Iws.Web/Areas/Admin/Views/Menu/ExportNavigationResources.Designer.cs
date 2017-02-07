@@ -133,6 +133,15 @@ namespace EA.Iws.Web.Areas.Admin.Views.Menu {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Update financial guarantee dates.
+        /// </summary>
+        public static string FGDates {
+            get {
+                return ResourceManager.GetString("FGDates", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Financial guarantee decision history.
         /// </summary>
         public static string FGHistoryLinkText {

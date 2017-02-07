@@ -2,6 +2,7 @@
 {
     using System;
     using System.Data.Entity;
+    using System.Data.SqlClient;
     using System.Threading.Tasks;
     using Domain.FinancialGuarantee;
     using Domain.Security;
@@ -21,6 +22,21 @@
         {
             await authorization.EnsureAccessAsync(notificationId);
             return await context.FinancialGuarantees.SingleAsync(fg => fg.NotificationId == notificationId);
+        }
+
+        public async Task SetCurrentFinancialGuaranteeDates(Guid notificationId, DateTime? receivedDate, DateTime? completedDate,
+            DateTime? decisionDate)
+        {
+            await authorization.EnsureAccessAsync(notificationId);
+            await context.Database.ExecuteSqlCommandAsync(@"[Notification].[uspUpdateExportFinancialGuaranteeDates] 
+                @NotificationId,
+                @ReceivedDate,
+                @CompletedDate,
+                @DecisionDate",
+                new SqlParameter("@NotificationId", notificationId),
+                new SqlParameter("@ReceivedDate", (object)receivedDate ?? DBNull.Value),
+                new SqlParameter("@CompletedDate", (object)completedDate ?? DBNull.Value),
+                new SqlParameter("@DecisionDate", (object)decisionDate ?? DBNull.Value));
         }
     }
 }
