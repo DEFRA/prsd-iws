@@ -42,7 +42,8 @@
                 DestinationCountry = source.DestinationCountry,
                 DispatchingCountry = source.OriginatingCountry,
                 IntendedTonnesQuantity = GetIntendedTonnes(source),
-                IntendedCubicMetresQuantity = GetIntendedCubicMetres(source)
+                IntendedCubicMetresQuantity = GetIntendedCubicMetres(source),
+                EwcCodes = source.EwcCodes
             };
         }
 

@@ -48,5 +48,7 @@ namespace EA.Iws.Domain.Reports
         public string OriginatingCountry { get; protected set; }
 
         public string Status { get; protected set; }
+
+        public string EwcCodes { get; protected set; }
     }
 }

@@ -36,7 +36,14 @@ AS
         TR.[ExitPoint] AS ExitPort,
         TR.[ExportCountryName] AS OriginatingCountry,
         MS.Status,
-        ND.[NotificationReceivedDate]
+        ND.[NotificationReceivedDate],
+        STUFF(( SELECT ', ' + WC.Code AS [text()]
+                FROM [Notification].[WasteCodeInfo] WCI
+                LEFT JOIN [Lookup].[WasteCode] WC ON WCI.WasteCodeId = WC.Id
+                WHERE WCI.NotificationId = M.NotificationId AND WC.CodeType = 3
+                order by 1
+                FOR XML PATH('')
+                ), 1, 1, '' ) AS [EwcCodes]
     
     FROM [Notification].[Movement] AS M
 
@@ -49,13 +56,13 @@ AS
     INNER JOIN	[Lookup].[ChemicalCompositionType] AS CCT 
     ON			[WT].[ChemicalCompositionType] = [CCT].[Id]
 
-    LEFT JOIN [Notification].[Exporter] AS E
+    INNER JOIN [Notification].[Exporter] AS E
     ON E.[NotificationId] = M.NotificationId
 
-    LEFT JOIN [Notification].[Importer] AS I
+    INNER JOIN [Notification].[Importer] AS I
     ON I.[NotificationId] = M.NotificationId
 
-    LEFT JOIN	[Notification].[Facility] AS F
+    INNER JOIN	[Notification].[Facility] AS F
     ON			F.Id = 
                 (
                     SELECT TOP 1 F1.Id
@@ -87,22 +94,22 @@ AS
     LEFT JOIN	[Lookup].[LocalArea] AS LA
     ON			[CON].[LocalAreaId] = [LA].[Id]
 
-    LEFT JOIN	[Notification].[ShipmentInfo] AS SI
+    INNER JOIN	[Notification].[ShipmentInfo] AS SI
     ON			SI.[NotificationId] = M.NotificationId
 
-    LEFT JOIN	[Lookup].[ShipmentQuantityUnit] AS SI_U 
+    INNER JOIN	[Lookup].[ShipmentQuantityUnit] AS SI_U 
     ON			[SI].[Units] = [SI_U].[Id]
 
-    LEFT JOIN   [Reports].[TransportRoute] AS TR
+    INNER JOIN   [Reports].[TransportRoute] AS TR
     ON			[TR].[NotificationId] = [N].[Id]
 
     LEFT JOIN   [Lookup].[MovementStatus] AS MS
     ON			MS.Id = M.Status
 
-    LEFT JOIN	[Notification].[NotificationAssessment] AS NA
+    INNER JOIN	[Notification].[NotificationAssessment] AS NA
     ON			NA.NotificationApplicationId = N.Id
 
-    LEFT JOIN	[Notification].[NotificationDates] AS ND
+    INNER JOIN	[Notification].[NotificationDates] AS ND
     ON			ND.[NotificationAssessmentId] = NA.Id
 
     UNION 
@@ -137,7 +144,15 @@ AS
         TR.ExitPoint AS ExitPort,
         TR.ExportCountryName AS OriginatingCountry,
         'NA' AS Status,
-        ND.[NotificationReceivedDate]
+        ND.[NotificationReceivedDate],
+        STUFF(( SELECT ', ' + WC.Code AS [text()]
+                FROM [ImportNotification].[WasteType] WT
+                INNER JOIN [ImportNotification].[WasteCode] WCI ON WT.Id = WCI.WasteTypeId
+                LEFT JOIN [Lookup].[WasteCode] WC ON WCI.WasteCodeId = WC.Id
+                WHERE WT.ImportNotificationId = M.NotificationId AND WC.CodeType = 3
+                order by 1
+                FOR XML PATH('')
+                ), 1, 1, '' ) AS [EwcCodes]
     
     FROM [ImportNotification].[Movement] AS M
 
@@ -150,13 +165,13 @@ AS
     INNER JOIN	[Lookup].[ChemicalCompositionType] AS CCT 
     ON			[WT].[ChemicalCompositionType] = [CCT].[Id]
 
-    LEFT JOIN [ImportNotification].[Exporter] AS E
+    INNER JOIN [ImportNotification].[Exporter] AS E
     ON E.[ImportNotificationId] = M.NotificationId
 
-    LEFT JOIN [ImportNotification].[Importer] AS I
+    INNER JOIN [ImportNotification].[Importer] AS I
     ON I.[ImportNotificationId] = M.NotificationId
 
-    LEFT JOIN	[ImportNotification].[Facility] AS F
+    INNER JOIN	[ImportNotification].[Facility] AS F
     ON			F.Id = 
                 (
                     SELECT TOP 1 F1.Id
@@ -188,19 +203,19 @@ AS
     LEFT JOIN	[Lookup].[LocalArea] AS LA
     ON			[CON].[LocalAreaId] = [LA].[Id]
 
-    LEFT JOIN	[ImportNotification].[Shipment] AS SI
+    INNER JOIN	[ImportNotification].[Shipment] AS SI
     ON			SI.[ImportNotificationId] = M.NotificationId
 
-    LEFT JOIN	[Lookup].[ShipmentQuantityUnit] AS SI_U 
+    INNER JOIN	[Lookup].[ShipmentQuantityUnit] AS SI_U 
     ON			[SI].[Units] = [SI_U].[Id]
 
     LEFT JOIN   [Reports].[TransportRoute] AS TR
     ON			[TR].[NotificationId] = [N].[Id]
 
-    LEFT JOIN	[ImportNotification].[NotificationAssessment] AS NA
+    INNER JOIN	[ImportNotification].[NotificationAssessment] AS NA
     ON			NA.NotificationApplicationId = N.Id
 
-    LEFT JOIN	[ImportNotification].[NotificationDates] AS ND
+    INNER JOIN	[ImportNotification].[NotificationDates] AS ND
     ON			ND.[NotificationAssessmentId] = NA.Id
 
 GO
