@@ -19,6 +19,7 @@
         private string intendedNumberOfShipments = string.Empty;
         private string numberOfPackages = string.Empty;
         private string packagingTypes = string.Empty;
+        private string ca = string.Empty;
 
         public string NotificationNumber
         {
@@ -90,7 +91,12 @@
         public bool IsNotSpecialHandling { get; set; }
         public bool IsDisposal { get; set; }
         public bool IsRecovery { get; set; }
-        public string CA { get; set; }
+
+        public string CA
+        {
+            get { return ca; }
+            set { ca = value; }
+        }
 
         public MovementViewModel(Movement movement,
             MovementDetails movementDetails,
@@ -116,6 +122,7 @@
                 : shipmentInfo.NumberOfShipments.ToString();
             IsRecovery = notification.NotificationType == NotificationType.Recovery;
             IsDisposal = notification.NotificationType == NotificationType.Disposal;
+            CA = CompetentAuthorityFormatter.GetCompetentAuthority(notification.CompetentAuthority);
 
             if (movement == null)
             {
@@ -132,7 +139,6 @@
             ActualDate = dateTimeFormatter.DateTimeToDocumentFormatString(movement.Date);
             SetQuantity(movementDetails, quantityFormatter);
             PackagingTypes = packagingTypesFormatter.PackagingTypesToCommaDelimitedString(movementDetails.PackagingInfos);
-            CA = CompetentAuthorityFormatter.GetCompetentAuthority(notification.CompetentAuthority);
         }
 
         private void SetQuantity(MovementDetails movementDetails, QuantityFormatter quantityFormatter)
