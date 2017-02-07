@@ -71,6 +71,7 @@
             { UserAdministrationPermissions.CanReadInternalUserData, new[] { UserRole.Internal, UserRole.Administrator } },
             { UserAdministrationPermissions.CanApproveNewInternalUser, new[] { UserRole.Administrator } },
             { UserAdministrationPermissions.CanOverrideKeyDates, new[] { UserRole.Administrator } },
+            { UserAdministrationPermissions.CanOverrideFinancialGuaranteeDates, new[] { UserRole.Administrator } },
             { UserAdministrationPermissions.CanDeleteMovements, new[] { UserRole.Administrator } },
             { UserAdministrationPermissions.CanUpdateInterimStatus, new[] { UserRole.Administrator } },
             { UserAdministrationPermissions.CanManageExistingInternalUser, new[] { UserRole.Administrator } },

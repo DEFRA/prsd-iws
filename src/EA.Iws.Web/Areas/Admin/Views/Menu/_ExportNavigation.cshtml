@@ -52,6 +52,10 @@
                 <li>@Html.ActionLink(Resources.MarkInterimLinkText, "Index", "MarkAsInterim", new { area = "AdminExportAssessment", Model.Data.Id }, null)</li>
                 <li>@Html.ActionLink(Resources.FGAssessmentLinkText, "Index", "FinancialGuaranteeAssessment", new { area = "AdminExportAssessment", Model.Data.Id }, null)</li>
                 <li>@Html.ActionLink(Resources.FGHistoryLinkText, "Index", "FinancialGuaranteeDecisionHistory", new { area = "AdminExportAssessment", Model.Data.Id }, null)</li>
+                @if (Model.ShowFinancialGuaranteeDatesOverride)
+                {
+                    <li>@Html.ActionLink(Resources.FGDates, "Index", "FinancialGuaranteeDates", new { area = "AdminExportAssessment", Model.Data.Id }, null)</li>
+                }
             </ul>
         </li>
 

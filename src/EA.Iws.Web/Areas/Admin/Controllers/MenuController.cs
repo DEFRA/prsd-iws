@@ -111,13 +111,19 @@
                     UserAdministrationPermissions.CanOverrideKeyDates))
                 .Result;
 
+            var showFinancialGuaranteeDatesOverride = Task.Run(() =>
+                authorizationService.AuthorizeActivity(
+                    UserAdministrationPermissions.CanOverrideFinancialGuaranteeDates))
+                .Result;
+
             var model = new ExportNavigationViewModel
             {
                 Data = data,
                 ActiveSection = section,
                 AdminLinksModel = CreateAdminLinksViewModel(),
                 ShowAssessmentDecision = showAssessmentDecision,
-                ShowKeyDatesOverride = showKeyDatesOverride
+                ShowKeyDatesOverride = showKeyDatesOverride,
+                ShowFinancialGuaranteeDatesOverride = showFinancialGuaranteeDatesOverride
             };
 
             return PartialView("_ExportNavigation", model);

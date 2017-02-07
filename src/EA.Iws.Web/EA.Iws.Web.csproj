@@ -966,6 +966,7 @@
     <Content Include="Content\fonts\fontawesome-webfont.eot" />
     <Content Include="Content\iws\_search.scss" />
     <Content Include="Areas\Reports\Views\BlanketBonds\Index.cshtml" />
+    <Content Include="Areas\AdminExportAssessment\Views\FinancialGuaranteeDates\Index.cshtml" />
     <None Include="Scripts\jquery-2.1.3.intellisense.js" />
     <Content Include="Scripts\govuk\govuk-template.js" />
     <Content Include="Scripts\govuk\ie.js" />
@@ -1112,6 +1113,7 @@
     </Compile>
     <Compile Include="Areas\AdminExportAssessment\Controllers\DeleteTransactionController.cs" />
     <Compile Include="Areas\AdminExportAssessment\Controllers\FinancialGuaranteeAssessmentController.cs" />
+    <Compile Include="Areas\AdminExportAssessment\Controllers\FinancialGuaranteeDatesController.cs" />
     <Compile Include="Areas\AdminExportAssessment\Controllers\FinancialGuaranteeDecisionController.cs" />
     <Compile Include="Areas\AdminExportAssessment\Controllers\FinancialGuaranteeDecisionHistoryController.cs" />
     <Compile Include="Areas\AdminExportAssessment\Controllers\FinancialGuaranteeDetailsController.cs" />
@@ -1132,6 +1134,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>FinancialGuaranteeAssessmentResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Areas\AdminExportAssessment\ViewModels\FinancialGuaranteeDates\FinancialGuaranteeDatesResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FinancialGuaranteeDatesResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\AdminExportAssessment\ViewModels\FinancialGuaranteeDates\UpdateFinancialGuaranteeDatesViewModel.cs" />
     <Compile Include="Areas\AdminExportAssessment\ViewModels\FinancialGuaranteeDecisionHistory\FinancialGuaranteeDecisionHistoryViewModel.cs" />
     <Compile Include="Areas\AdminExportAssessment\ViewModels\FinancialGuaranteeDecision\ApproveFinancialGuaranteeViewModel.cs" />
     <Compile Include="Areas\AdminExportAssessment\ViewModels\FinancialGuaranteeAssessment\CompleteFinancialGuaranteeViewModel.cs" />
@@ -1195,6 +1203,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>FinancialGuaranteeAssessmentResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\AdminExportAssessment\Views\FinancialGuaranteeDates\FinancialGuaranteeDatesResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>FinancialGuaranteeDatesResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Areas\AdminExportAssessment\Views\FinancialGuaranteeDecisionHistory\FinancialGuaranteeDecisionHistoryResources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -3305,6 +3318,10 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>FinancialGuaranteeAssessmentResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Areas\AdminExportAssessment\ViewModels\FinancialGuaranteeDates\FinancialGuaranteeDatesResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>FinancialGuaranteeDatesResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Areas\AdminExportAssessment\ViewModels\FinancialGuaranteeDecision\FinancialGuaranteeDecisionResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>FinancialGuaranteeDecisionResources.Designer.cs</LastGenOutput>
@@ -3344,6 +3361,10 @@
     <EmbeddedResource Include="Areas\AdminExportAssessment\Views\FinancialGuaranteeAssessment\FinancialGuaranteeAssessmentResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>FinancialGuaranteeAssessmentResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\AdminExportAssessment\Views\FinancialGuaranteeDates\FinancialGuaranteeDatesResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>FinancialGuaranteeDatesResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\AdminExportAssessment\Views\FinancialGuaranteeDecisionHistory\FinancialGuaranteeDecisionHistoryResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

@@ -6,5 +6,8 @@
     public interface IFinancialGuaranteeRepository
     {
         Task<FinancialGuaranteeCollection> GetByNotificationId(Guid notificationId);
+
+        Task SetCurrentFinancialGuaranteeDates(Guid notificationId, DateTime? receivedDate, 
+            DateTime? completedDate, DateTime? decisionDate);
     }
 }

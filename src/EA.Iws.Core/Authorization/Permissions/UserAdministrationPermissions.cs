@@ -19,5 +19,7 @@
         public const string CanDeleteTransaction = "Can Delete Transaction";
 
         public const string CanDeleteNotification = "Can Delete Notification";
+
+        public const string CanOverrideFinancialGuaranteeDates = "Can Override Financial Guarantee Dates";
     }
 }
