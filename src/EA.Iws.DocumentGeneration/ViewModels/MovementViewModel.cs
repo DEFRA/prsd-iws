@@ -90,6 +90,7 @@
         public bool IsNotSpecialHandling { get; set; }
         public bool IsDisposal { get; set; }
         public bool IsRecovery { get; set; }
+        public string CA { get; set; }
 
         public MovementViewModel(Movement movement,
             MovementDetails movementDetails,
@@ -131,6 +132,7 @@
             ActualDate = dateTimeFormatter.DateTimeToDocumentFormatString(movement.Date);
             SetQuantity(movementDetails, quantityFormatter);
             PackagingTypes = packagingTypesFormatter.PackagingTypesToCommaDelimitedString(movementDetails.PackagingInfos);
+            CA = CompetentAuthorityFormatter.GetCompetentAuthority(notification.CompetentAuthority);
         }
 
         private void SetQuantity(MovementDetails movementDetails, QuantityFormatter quantityFormatter)
