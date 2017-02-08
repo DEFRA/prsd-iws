@@ -967,6 +967,7 @@
     <Content Include="Content\iws\_search.scss" />
     <Content Include="Areas\Reports\Views\BlanketBonds\Index.cshtml" />
     <Content Include="Areas\AdminExportAssessment\Views\FinancialGuaranteeDates\Index.cshtml" />
+    <Content Include="Areas\AdminExportAssessment\Views\Annex\Index.cshtml" />
     <None Include="Scripts\jquery-2.1.3.intellisense.js" />
     <Content Include="Scripts\govuk\govuk-template.js" />
     <Content Include="Scripts\govuk\ie.js" />
@@ -1106,6 +1107,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>AddressBookResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Areas\AdminExportAssessment\Controllers\AnnexController.cs" />
     <Compile Include="Areas\AdminExportAssessment\Controllers\DecisionControllerResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -1123,6 +1125,7 @@
     <Compile Include="Areas\AdminExportAssessment\Controllers\NumberOfShipmentsController.cs" />
     <Compile Include="Areas\AdminExportAssessment\Controllers\ProducerController.cs" />
     <Compile Include="Areas\AdminExportAssessment\Controllers\UpdateJourneyController.cs" />
+    <Compile Include="Areas\AdminExportAssessment\ViewModels\Annex\DownloadAnnexViewModel.cs" />
     <Compile Include="Areas\AdminExportAssessment\ViewModels\DateInputViewModelResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -1182,6 +1185,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>RefundDetailsResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\AdminExportAssessment\Views\Annex\AnnexResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AnnexResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Areas\AdminExportAssessment\Views\Decision\DecisionResources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -3345,6 +3353,10 @@
     <EmbeddedResource Include="Areas\AdminExportAssessment\Views\AccountManagement\RefundDetailsResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>RefundDetailsResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\AdminExportAssessment\Views\Annex\AnnexResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AnnexResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\AdminExportAssessment\Views\Decision\DecisionResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
