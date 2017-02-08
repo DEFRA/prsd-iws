@@ -144,7 +144,7 @@
     <Compile Include="Admin\UserAdministration\UpdateInternalUserStatusHandler.cs" />
     <Compile Include="Annexes\DeleteAnnex.cs" />
     <Compile Include="Annexes\DeleteAnnexFileHandler.cs" />
-    <Compile Include="Annexes\GetAnnexFileHandler.cs" />
+    <Compile Include="Files\GetFileHandler.cs" />
     <Compile Include="Annexes\SetTechnologyEmployedAnnexHandler.cs" />
     <Compile Include="Annexes\SetWasteCompositionAnnexHandler.cs" />
     <Compile Include="Annexes\SetProcessOfGenerationAnnexHandler.cs" />
@@ -380,6 +380,7 @@
     <Compile Include="Mappings\ImportNotification\TransitStateMap.cs" />
     <Compile Include="Mappings\ImportNotification\WasteOperationMap.cs" />
     <Compile Include="Mappings\ImportNotification\WasteTypeMap.cs" />
+    <Compile Include="Mappings\Movement\MovementFileMap.cs" />
     <Compile Include="Mappings\Movement\MovementMap.cs" />
     <Compile Include="Mappings\NotificationAssessment\AccountManageDataMap.cs" />
     <Compile Include="Mappings\NotificationAssessment\ConsultationMap.cs" />
@@ -399,6 +400,7 @@
     <Compile Include="Movement\Edit\GetMovementDateHistoryHandler.cs" />
     <Compile Include="Movement\Edit\IsProposedUpdatedMovementDateValidHandler.cs" />
     <Compile Include="Movement\Edit\UpdateMovementDateHandler.cs" />
+    <Compile Include="Movement\GetMovementFilesHandler.cs" />
     <Compile Include="Movement\GetMovementIdByNumberHandler.cs" />
     <Compile Include="Movement\GetNewMovementIdsByNotificationIdHandler.cs" />
     <Compile Include="Movement\GetNotificationNumberByMovementIdHandler.cs" />

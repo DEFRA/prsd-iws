@@ -74,7 +74,7 @@
     <Compile Include="Admin\Search\ImportAdvancedSearchResult.cs" />
     <Compile Include="Admin\Search\ImportSearchResult.cs" />
     <Compile Include="Admin\UserAdministration\UserApproval.cs" />
-    <Compile Include="Annexes\AnnexFileData.cs" />
+    <Compile Include="Files\FileData.cs" />
     <Compile Include="Annexes\AnnexStatus.cs" />
     <Compile Include="Annexes\AnnexUpload.cs" />
     <Compile Include="Authorization\Permissions\ExportMovementPermissions.cs" />
@@ -164,6 +164,8 @@
     <Compile Include="Movement\DownloadImportMovementData.cs" />
     <Compile Include="Movement\DownloadExportMovementData.cs" />
     <Compile Include="Movement\IMovementRule.cs" />
+    <Compile Include="Movement\MovementFileData.cs" />
+    <Compile Include="Movement\MovementFiles.cs" />
     <Compile Include="Movement\MovementReceiptAndRecoveryData.cs" />
     <Compile Include="Movement\MovementRules.cs" />
     <Compile Include="Movement\MovementRulesSummary.cs" />

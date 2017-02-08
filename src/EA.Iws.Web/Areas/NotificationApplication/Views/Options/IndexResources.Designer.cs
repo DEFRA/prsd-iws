@@ -160,6 +160,15 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.Options {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Download shipment documents.
+        /// </summary>
+        public static string DownloadShipmentDocuments {
+            get {
+                return ResourceManager.GetString("DownloadShipmentDocuments", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Choose what you would like to view.
         /// </summary>
         public static string Dropdown {

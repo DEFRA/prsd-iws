@@ -968,6 +968,7 @@
     <Content Include="Areas\Reports\Views\BlanketBonds\Index.cshtml" />
     <Content Include="Areas\AdminExportAssessment\Views\FinancialGuaranteeDates\Index.cshtml" />
     <Content Include="Areas\AdminExportAssessment\Views\Annex\Index.cshtml" />
+    <Content Include="Areas\NotificationMovements\Views\Documents\Index.cshtml" />
     <None Include="Scripts\jquery-2.1.3.intellisense.js" />
     <Content Include="Scripts\govuk\govuk-template.js" />
     <Content Include="Scripts\govuk\ie.js" />
@@ -2238,6 +2239,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>SepaContractGuidanceResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Areas\NotificationMovements\Controllers\DocumentsController.cs" />
     <Compile Include="Areas\NotificationMovements\Controllers\DownloadController.cs" />
     <Compile Include="Areas\NotificationMovements\ViewModels\Create\ThreeWorkingDaysSelection.cs" />
     <Compile Include="Areas\NotificationMovements\ViewModels\Create\ThreeWorkingDaysWarningViewModel.cs" />
@@ -2300,6 +2302,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>TotalMovementsReachedResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\NotificationMovements\Views\Documents\DocumentsResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DocumentsResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Areas\NotificationMovements\Views\Home\SummaryResources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -4443,6 +4450,10 @@
     <EmbeddedResource Include="Areas\NotificationMovements\Views\Create\TotalMovementsReachedResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>TotalMovementsReachedResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\NotificationMovements\Views\Documents\DocumentsResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>DocumentsResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\NotificationMovements\Views\Edit\IndexResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

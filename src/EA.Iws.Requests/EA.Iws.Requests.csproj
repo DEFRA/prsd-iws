@@ -108,7 +108,7 @@
     <Compile Include="Admin\UserAdministration\UpdateInternalUserRole.cs" />
     <Compile Include="Admin\UserAdministration\UpdateInternalUserStatus.cs" />
     <Compile Include="Annexes\DeleteAnnexFile.cs" />
-    <Compile Include="Annexes\GetAnnexFile.cs" />
+    <Compile Include="Files\GetFile.cs" />
     <Compile Include="Annexes\SetWasteCompositionAnnex.cs" />
     <Compile Include="Annexes\SetTechnologyEmployedAnnex.cs" />
     <Compile Include="Annexes\SetProcessOfGenerationAnnex.cs" />
@@ -198,6 +198,7 @@
     <Compile Include="Movement\Edit\UpdateMovementDate.cs" />
     <Compile Include="Movement\GenerateMovementDocument.cs" />
     <Compile Include="Movement\GetMovementDateByMovementId.cs" />
+    <Compile Include="Movement\GetMovementFiles.cs" />
     <Compile Include="Movement\GetMovementIdByNumber.cs" />
     <Compile Include="Movement\Complete\RecordOperationCompleteInternal.cs" />
     <Compile Include="Movement\GetNewMovementIdsByNotificationId.cs" />

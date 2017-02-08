@@ -1,6 +1,6 @@
-﻿namespace EA.Iws.Core.Annexes
+﻿namespace EA.Iws.Core.Files
 {
-    public class AnnexFileData
+    public class FileData
     {
         public string Name { get; set; }
 
