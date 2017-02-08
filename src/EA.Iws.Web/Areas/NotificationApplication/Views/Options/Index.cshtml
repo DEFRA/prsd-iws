@@ -141,6 +141,7 @@
                             {
                                 @Html.ActionLink(Resource.Download, "Index", "Download", new { notificationId = Model.NotificationId, area = "NotificationMovements" }, null)
                             }
+                            @Html.ActionLink(Resource.DownloadShipmentDocuments, "Index", "Documents", new { notificationId = Model.NotificationId, area = "NotificationMovements" }, null)
                         }
                     </nav>
                 </div>

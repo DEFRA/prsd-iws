@@ -234,4 +234,7 @@
   <data name="Download" xml:space="preserve">
     <value>Download a list of all movements in csv format</value>
   </data>
+  <data name="DownloadShipmentDocuments" xml:space="preserve">
+    <value>Download shipment documents</value>
+  </data>
 </root>
