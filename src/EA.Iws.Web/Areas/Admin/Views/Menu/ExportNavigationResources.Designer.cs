@@ -124,6 +124,15 @@ namespace EA.Iws.Web.Areas.Admin.Views.Menu {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Download annexes.
+        /// </summary>
+        public static string DownloadAnnexes {
+            get {
+                return ResourceManager.GetString("DownloadAnnexes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Financial guarantee assessment.
         /// </summary>
         public static string FGAssessmentLinkText {

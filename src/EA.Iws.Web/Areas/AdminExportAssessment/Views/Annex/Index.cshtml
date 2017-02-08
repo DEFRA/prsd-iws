@@ -1,0 +1,79 @@
+﻿@model EA.Iws.Web.Areas.AdminExportAssessment.ViewModels.Annex.DownloadAnnexViewModel
+@using Resources =  EA.Iws.Web.Areas.AdminExportAssessment.Views.Annex.AnnexResources
+@{
+    ViewBag.Title = Resources.DownloadAnnexesTitle;
+}
+
+<h1 class="heading-large">@Resources.DownloadAnnexesTitle</h1>
+
+@if (Model.HasAnnexes)
+{
+    <table class="form-group">
+        <thead>
+        <tr>
+            <th>@Resources.AnnexNameColumnTitle</th>
+            <th>@Resources.AnnexColumnTitle</th>
+        </tr>
+        </thead>
+        <tbody>
+        @if (Model.ProcessOfGeneration.IsRequired)
+        {
+            <tr>
+                <td>@Html.LabelFor(m => m.ProcessOfGeneration, Resources.ProcessOfGeneration)</td>
+                <td>
+                    @if (Model.ProcessOfGeneration.FileId.HasValue)
+                    {
+                        @Html.ActionLink(Resources.DownloadLink, "Download", new { fileId = Model.ProcessOfGeneration.FileId.Value })
+                    }
+                    else
+                    {
+                        @Resources.NoAnnexUploaded
+                    }
+                </td>
+            </tr>
+        }
+        @if (Model.TechnologyEmployed.IsRequired)
+        {
+            <tr>
+                <td>@Html.LabelFor(m => m.TechnologyEmployed, Resources.TechnologyEmployed)</td>
+                <td>
+                    @if (Model.TechnologyEmployed.FileId.HasValue)
+                    {
+                        @Html.ActionLink(Resources.DownloadLink, "Download", new { fileId = Model.TechnologyEmployed.FileId.Value })
+                    }
+                    else
+                    {
+                        @Resources.NoAnnexUploaded
+                    }
+                </td>
+            </tr>
+        }
+        @if (Model.WasteComposition.IsRequired)
+        {
+            <tr>
+                <td>@Html.LabelFor(m => m.WasteComposition, Resources.WasteComposition)</td>
+                <td>
+                    @if (Model.WasteComposition.FileId.HasValue)
+                    {
+                        @Html.ActionLink(Resources.DownloadLink, "Download", new { fileId = Model.WasteComposition.FileId.Value })
+                    }
+                    else
+                    {
+                        @Resources.NoAnnexUploaded
+                    }
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>@Resources.NoAnnexes</p>
+}
+
+@Html.ActionLink(Resources.OverviewLink, "Index", "Overview")
+
+@section menu {
+    @Html.Action("ExportNavigation", "Menu", new { area = "Admin", section = ExportNavigationSection.Assessment })
+}
