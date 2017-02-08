@@ -106,6 +106,15 @@ namespace EA.Iws.Web.Areas.AdminExportAssessment.Views.Annex {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to No annex has been uploaded.
+        /// </summary>
+        public static string NoAnnexUploaded {
+            get {
+                return ResourceManager.GetString("NoAnnexUploaded", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Return to notification overview.
         /// </summary>
         public static string OverviewLink {

@@ -132,6 +132,9 @@
   <data name="NoAnnexes" xml:space="preserve">
     <value>There are no annexes required for this notification</value>
   </data>
+  <data name="NoAnnexUploaded" xml:space="preserve">
+    <value>No annex has been uploaded</value>
+  </data>
   <data name="OverviewLink" xml:space="preserve">
     <value>Return to notification overview</value>
   </data>

@@ -16,30 +16,51 @@
         </tr>
         </thead>
         <tbody>
-        @if (Model.ProcessOfGeneration.IsRequired && Model.ProcessOfGeneration.FileId.HasValue)
+        @if (Model.ProcessOfGeneration.IsRequired)
         {
             <tr>
                 <td>@Html.LabelFor(m => m.ProcessOfGeneration, Resources.ProcessOfGeneration)</td>
                 <td>
-                    @Html.ActionLink(Resources.DownloadLink, "Download", new { fileId = Model.ProcessOfGeneration.FileId.Value })
+                    @if (Model.ProcessOfGeneration.FileId.HasValue)
+                    {
+                        @Html.ActionLink(Resources.DownloadLink, "Download", new { fileId = Model.ProcessOfGeneration.FileId.Value })
+                    }
+                    else
+                    {
+                        @Resources.NoAnnexUploaded
+                    }
                 </td>
             </tr>
         }
-        @if (Model.TechnologyEmployed.IsRequired && Model.TechnologyEmployed.FileId.HasValue)
+        @if (Model.TechnologyEmployed.IsRequired)
         {
             <tr>
                 <td>@Html.LabelFor(m => m.TechnologyEmployed, Resources.TechnologyEmployed)</td>
                 <td>
-                    @Html.ActionLink(Resources.DownloadLink, "Download", new { fileId = Model.TechnologyEmployed.FileId.Value })
+                    @if (Model.TechnologyEmployed.FileId.HasValue)
+                    {
+                        @Html.ActionLink(Resources.DownloadLink, "Download", new { fileId = Model.TechnologyEmployed.FileId.Value })
+                    }
+                    else
+                    {
+                        @Resources.NoAnnexUploaded
+                    }
                 </td>
             </tr>
         }
-        @if (Model.WasteComposition.IsRequired && Model.WasteComposition.FileId.HasValue)
+        @if (Model.WasteComposition.IsRequired)
         {
             <tr>
                 <td>@Html.LabelFor(m => m.WasteComposition, Resources.WasteComposition)</td>
                 <td>
-                    @Html.ActionLink(Resources.DownloadLink, "Download", new { fileId = Model.WasteComposition.FileId.Value })
+                    @if (Model.WasteComposition.FileId.HasValue)
+                    {
+                        @Html.ActionLink(Resources.DownloadLink, "Download", new { fileId = Model.WasteComposition.FileId.Value })
+                    }
+                    else
+                    {
+                        @Resources.NoAnnexUploaded
+                    }
                 </td>
             </tr>
         }
