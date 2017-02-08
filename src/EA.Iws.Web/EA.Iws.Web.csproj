@@ -2303,6 +2303,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>TotalMovementsReachedResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Areas\NotificationMovements\Views\Documents\DocumentsResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DocumentsResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Areas\NotificationMovements\Views\Home\SummaryResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -4445,6 +4450,10 @@
     <EmbeddedResource Include="Areas\NotificationMovements\Views\Create\TotalMovementsReachedResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>TotalMovementsReachedResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\NotificationMovements\Views\Documents\DocumentsResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>DocumentsResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\NotificationMovements\Views\Edit\IndexResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
