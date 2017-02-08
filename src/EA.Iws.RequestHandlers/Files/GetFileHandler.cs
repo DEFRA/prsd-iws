@@ -1,30 +1,30 @@
-﻿namespace EA.Iws.RequestHandlers.Annexes
+﻿namespace EA.Iws.RequestHandlers.Files
 {
     using System.Threading.Tasks;
-    using Core.Annexes;
+    using Core.Files;
     using Domain.FileStore;
     using Domain.Security;
     using Prsd.Core.Mediator;
-    using Requests.Annexes;
+    using Requests.Files;
 
-    internal class GetAnnexFileHandler : IRequestHandler<GetAnnexFile, AnnexFileData>
+    internal class GetFileHandler : IRequestHandler<GetFile, FileData>
     {
         private readonly IFileRepository fileRepository;
         private readonly INotificationApplicationAuthorization authorization;
 
-        public GetAnnexFileHandler(IFileRepository fileRepository, INotificationApplicationAuthorization authorization)
+        public GetFileHandler(IFileRepository fileRepository, INotificationApplicationAuthorization authorization)
         {
             this.fileRepository = fileRepository;
             this.authorization = authorization;
         }
 
-        public async Task<AnnexFileData> HandleAsync(GetAnnexFile message)
+        public async Task<FileData> HandleAsync(GetFile message)
         {
             await authorization.EnsureAccessAsync(message.NotificationId);
 
             var file = await fileRepository.Get(message.FileId);
 
-            return new AnnexFileData
+            return new FileData
             {
                 Name = file.Name,
                 Type = file.Type,

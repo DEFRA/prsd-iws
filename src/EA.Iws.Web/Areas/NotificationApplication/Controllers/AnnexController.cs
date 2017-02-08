@@ -8,6 +8,7 @@
     using Infrastructure;
     using Prsd.Core.Mediator;
     using Requests.Annexes;
+    using Requests.Files;
     using ViewModels.Annex;
 
     [Authorize]
@@ -104,7 +105,7 @@
         [HttpGet]
         public async Task<ActionResult> ViewAnnex(Guid id, Guid fileId)
         {
-            var result = await mediator.SendAsync(new GetAnnexFile(id, fileId));
+            var result = await mediator.SendAsync(new GetFile(id, fileId));
 
             return File(result.Content, MimeTypeHelper.GetMimeType(result.Type),
                 string.Format("{0}.{1}", result.Name, result.Type));
