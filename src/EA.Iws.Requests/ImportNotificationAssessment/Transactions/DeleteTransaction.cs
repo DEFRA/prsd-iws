@@ -8,10 +8,13 @@
     [RequestAuthorization(UserAdministrationPermissions.CanDeleteTransaction)]
     public class DeleteTransaction : IRequest<bool>
     {
+        public Guid NotificationId { get; private set; }
+
         public Guid TransactionId { get; private set; }
 
-        public DeleteTransaction(Guid transactionId)
+        public DeleteTransaction(Guid notificationId, Guid transactionId)
         {
+            NotificationId = notificationId;
             TransactionId = transactionId;
         }
     }
