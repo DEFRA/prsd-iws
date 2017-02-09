@@ -13,6 +13,6 @@
             Data = data;
         }
 
-        public NotificationTransactionData Data;
+        public NotificationTransactionData Data { get; private set; }
     }
 }

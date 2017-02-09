@@ -3,7 +3,6 @@
     using System;
     using System.Threading.Tasks;
     using Core.ComponentRegistration;
-    using Core.NotificationAssessment;
 
     [AutoRegister]
     public class Transaction
@@ -21,24 +20,48 @@
             this.transactionCalculator = transactionCalculator;
         }
 
-        public async Task Save(NotificationTransactionData data)
+        public async Task Save(NotificationTransaction transaction)
         {
-            if (data.Debit > await transactionCalculator.RefundLimit(data.NotificationId))
+            if (transaction.Debit > await transactionCalculator.RefundLimit(transaction.NotificationId))
             {
                 throw new InvalidOperationException("Transaction cannot refund more than has already been paid");
             }
 
-            transactionRepository.Add(data);
+            var balance = await transactionCalculator.Balance(transaction.NotificationId)
+                - transaction.Credit.GetValueOrDefault()
+                + transaction.Debit.GetValueOrDefault();
 
-            if (data.Credit > 0 && await transactionCalculator.PaymentIsNowFullyReceived(data))
+            if (transaction.Credit > 0 && balance <= 0)
             {
-                var assessment = await notificationAssessmentRepository.GetByNotificationId(data.NotificationId);
+                var assessment = await notificationAssessmentRepository.GetByNotificationId(transaction.NotificationId);
 
                 if (assessment.Dates.PaymentReceivedDate == null)
                 {
-                    assessment.Dates.PaymentReceivedDate = data.Date;
+                    assessment.Dates.PaymentReceivedDate = transaction.Date;
                 }
             }
+
+            transactionRepository.Add(transaction);
+        }
+
+        public async Task Delete(Guid notificationId, Guid transactionId)
+        {
+            var transaction = await transactionRepository.GetById(transactionId);
+            var balance = await transactionCalculator.Balance(transaction.NotificationId)
+                + transaction.Credit.GetValueOrDefault()
+                - transaction.Debit.GetValueOrDefault();
+
+            if (balance > 0)
+            {
+                var assessment = await notificationAssessmentRepository.GetByNotificationId(transaction.NotificationId);
+
+                if (assessment.Dates.PaymentReceivedDate.HasValue)
+                {
+                    assessment.Dates.PaymentReceivedDate = null;
+                }
+            }
+
+            await transactionRepository.DeleteById(transactionId);
         }
     }
 }

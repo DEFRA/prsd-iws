@@ -5,7 +5,6 @@
     using System.Linq;
     using System.Threading.Tasks;
     using Core.ComponentRegistration;
-    using Core.NotificationAssessment;
     using NotificationApplication;
 
     [AutoRegister]
@@ -50,15 +49,6 @@
         {
             var transactions = await transactionRepository.GetTransactions(notificationId);
             return transactions.Where(t => t.Credit > 0).OrderByDescending(t => t.Date).FirstOrDefault();
-        }
-
-        public async Task<bool> PaymentIsNowFullyReceived(NotificationTransactionData data)
-        {
-            var newBalance = await Balance(data.NotificationId)
-                - data.Credit.GetValueOrDefault()
-                + data.Debit.GetValueOrDefault();
-
-            return newBalance <= 0;
         }
 
         public async Task<decimal> RefundLimit(Guid notificationId)
