@@ -8,17 +8,17 @@
 
     internal class DeleteTransactionHandler : IRequestHandler<DeleteTransaction, bool>
     {
-        private readonly INotificationTransactionRepository repository;
+        private readonly Transaction transaction;
         private readonly IwsContext context;
 
-        public DeleteTransactionHandler(INotificationTransactionRepository repository, IwsContext context)
+        public DeleteTransactionHandler(Transaction transaction, IwsContext context)
         {
-            this.repository = repository;
+            this.transaction = transaction;
             this.context = context;
         }
         public async Task<bool> HandleAsync(DeleteTransaction message)
         {
-            await repository.DeleteById(message.TransactionId);
+            await transaction.Delete(message.NotificationId, message.TransactionId);
             await context.SaveChangesAsync();
             return true;
         }

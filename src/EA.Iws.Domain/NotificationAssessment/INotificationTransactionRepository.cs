@@ -3,11 +3,10 @@
     using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
-    using Core.NotificationAssessment;
 
     public interface INotificationTransactionRepository
     {
-        void Add(NotificationTransactionData notificationTransactionData);
+        void Add(NotificationTransaction notificationTransaction);
 
         Task<IList<NotificationTransaction>> GetTransactions(Guid notificationId);
 

@@ -20,7 +20,7 @@
 
         public async Task<bool> HandleAsync(AddNotificationTransaction message)
         {
-            await transaction.Save(message.Data);
+            await transaction.Save(new NotificationTransaction(message.Data));
 
             await context.SaveChangesAsync();
 

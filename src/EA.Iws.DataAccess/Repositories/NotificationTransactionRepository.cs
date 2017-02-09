@@ -5,7 +5,6 @@
     using System.Data.Entity;
     using System.Linq;
     using System.Threading.Tasks;
-    using Core.NotificationAssessment;
     using Domain.NotificationAssessment;
     using Domain.Security;
 
@@ -20,9 +19,9 @@
             this.authorization = authorization;
         }
 
-        public void Add(NotificationTransactionData notificationTransactionData)
+        public void Add(NotificationTransaction notificationTransaction)
         {
-            context.NotificationTransactions.Add(new NotificationTransaction(notificationTransactionData));
+            context.NotificationTransactions.Add(notificationTransaction);
         }
 
         public async Task<IList<NotificationTransaction>> GetTransactions(Guid notificationId)

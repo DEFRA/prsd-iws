@@ -151,6 +151,7 @@
     <Compile Include="NotificationAssessment\NotificationAssessmentEditableTests.cs" />
     <Compile Include="NotificationAssessment\NotificationAssessmentStatusTests.cs" />
     <Compile Include="NotificationAssessment\NotificationInterimTests.cs" />
+    <Compile Include="NotificationAssessment\TransactionTests.cs" />
     <Compile Include="OrganisationTests.cs" />
     <Compile Include="PhoneNumberTests.cs" />
     <Compile Include="ProducerBusinessTests.cs" />
