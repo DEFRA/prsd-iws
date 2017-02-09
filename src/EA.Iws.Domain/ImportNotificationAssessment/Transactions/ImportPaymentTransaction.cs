@@ -26,8 +26,6 @@
         public async Task Save(Guid notificationId, DateTime date, decimal amount, PaymentMethod paymentMethod,
             string receiptNumber, string comments)
         {
-            transactionRepository.Add(ImportNotificationTransaction.PaymentRecord(notificationId, date, amount, paymentMethod, receiptNumber, comments));
-
             if (await transactionCalculator.PaymentIsNowFullyReceived(notificationId, amount))
             {
                 var assessment = await assessmentRepository.GetByNotification(notificationId);
@@ -36,7 +34,33 @@
                 {
                     assessment.PaymentComplete(date);
                 }
+                else if (!assessment.Dates.PaymentReceivedDate.HasValue)
+                {
+                    assessment.Dates.PaymentReceivedDate = date;
+                }
             }
+
+            transactionRepository.Add(ImportNotificationTransaction.PaymentRecord(notificationId, date, amount, paymentMethod, receiptNumber, comments));
+        }
+
+        public async Task Delete(Guid notificationId, Guid transactionId)
+        {
+            var transaction = await transactionRepository.GetById(transactionId);
+            var balance = await transactionCalculator.Balance(notificationId)
+                + transaction.Credit.GetValueOrDefault()
+                - transaction.Debit.GetValueOrDefault();
+
+            if (balance > 0)
+            {
+                var assessment = await assessmentRepository.GetByNotification(notificationId);
+
+                if (assessment.Dates.PaymentReceivedDate.HasValue)
+                {
+                    assessment.Dates.PaymentReceivedDate = null;
+                }
+            }
+
+            await transactionRepository.DeleteById(transactionId);
         }
     }
 }

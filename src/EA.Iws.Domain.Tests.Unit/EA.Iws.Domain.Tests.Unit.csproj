@@ -82,6 +82,7 @@
     <Compile Include="ImportMovement\ImportMovementFactoryTests.cs" />
     <Compile Include="ImportNotificationAssessment\ImportNotificationAssessmentTests.cs" />
     <Compile Include="ImportNotificationAssessment\Transactions\ImportNotificationTransactionCalculatorTests.cs" />
+    <Compile Include="ImportNotificationAssessment\Transactions\ImportPaymentTransactionTests.cs" />
     <Compile Include="ImportNotificationAssessment\Transactions\ImportRefundTransactionTests.cs" />
     <Compile Include="ImportNotification\AddressBuilderTests.cs" />
     <Compile Include="ImportNotification\ContactTests.cs" />
