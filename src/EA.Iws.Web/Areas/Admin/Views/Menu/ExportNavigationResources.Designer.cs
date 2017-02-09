@@ -133,6 +133,15 @@ namespace EA.Iws.Web.Areas.Admin.Views.Menu {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Download shipment documents.
+        /// </summary>
+        public static string DownloadShipmentDocumentsLinkText {
+            get {
+                return ResourceManager.GetString("DownloadShipmentDocumentsLinkText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Financial guarantee assessment.
         /// </summary>
         public static string FGAssessmentLinkText {
