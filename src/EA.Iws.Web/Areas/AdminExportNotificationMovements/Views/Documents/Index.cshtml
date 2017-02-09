@@ -1,0 +1,70 @@
+﻿@model EA.Iws.Core.Movement.MovementFiles
+@using EA.Iws.Core.Shared
+@using EA.Iws.Web.Infrastructure.Paging
+@using Resources = EA.Iws.Web.Areas.AdminExportNotificationMovements.Views.Documents.DocumentsResources
+@{
+    ViewBag.Title = Resources.DownloadTitle;
+    NotificationType type = ViewBag.NotificationType;
+}
+
+<h1 class="heading-large">@Resources.DownloadTitle</h1>
+
+<div class="form-group">
+    <table class="odd-table">
+        <tr>
+            <th>@Resources.ShipmentNumber</th>
+            <th>@Resources.Prenotification</th>
+            <th>@Resources.CertificateOfReceipt</th>
+            <th>
+                @if (type == NotificationType.Recovery)
+                {
+                    @Resources.CertificateOfRecovery
+                }
+                else
+                {
+                    @Resources.CertificateOfDisposal
+                }
+            </th>
+        </tr>
+        @foreach (var fileData in Model.FileData)
+        {
+            <tr>
+                <td>@fileData.ShipmentNumber</td>
+                <td>
+                    @if (fileData.PrenotificationFileId.HasValue)
+                    {
+                        @Html.ActionLink(Resources.DownloadLink, "Download", new { fileId = fileData.PrenotificationFileId.Value })
+                    }
+                    else
+                    {
+                        @:- -
+                    }
+                </td>
+                <td>
+                    @if (fileData.ReceiptFileId.HasValue)
+                    {
+                        @Html.ActionLink(Resources.DownloadLink, "Download", new { fileId = fileData.ReceiptFileId.Value })
+                    }
+                    else
+                    {
+                        @:- -
+                    }
+                </td>
+                <td>
+                    @if (fileData.OperationReceiptFileId.HasValue)
+                    {
+                        @Html.ActionLink(Resources.DownloadLink, "Download", new { fileId = fileData.OperationReceiptFileId.Value })
+                    }
+                    else
+                    {
+                        @:- -
+                    }
+                </td>
+            </tr>
+        }
+    </table>
+</div>
+
+@Html.Pager(Model.PageSize, Model.PageNumber, Model.NumberOfShipments)
+
+@Html.ActionLink(Resources.ShipmentSummaryLink, "Index", "Home")

@@ -117,79 +117,28 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AccountHeading" xml:space="preserve">
-    <value>Account services</value>
+  <data name="CertificateOfDisposal" xml:space="preserve">
+    <value>Certificate of disposal</value>
   </data>
-  <data name="AreaLinkText" xml:space="preserve">
-    <value>Assign an area</value>
+  <data name="CertificateOfReceipt" xml:space="preserve">
+    <value>Certificate of receipt</value>
   </data>
-  <data name="CancelShipmentLinkText" xml:space="preserve">
-    <value>Cancel prenotifications</value>
+  <data name="CertificateOfRecovery" xml:space="preserve">
+    <value>Certificate of recovery</value>
   </data>
-  <data name="ChangeOwnerHeading" xml:space="preserve">
-    <value>Change owner</value>
+  <data name="DownloadLink" xml:space="preserve">
+    <value>Download</value>
   </data>
-  <data name="ChangeOwnerLink" xml:space="preserve">
-    <value>Change owner</value>
-  </data>
-  <data name="DecisionLinkText" xml:space="preserve">
-    <value>Assessment decision</value>
-  </data>
-  <data name="DeleteShipmentLinkText" xml:space="preserve">
-    <value>Delete a shipment</value>
-  </data>
-  <data name="FGAssessmentLinkText" xml:space="preserve">
-    <value>Financial guarantee assessment</value>
-  </data>
-  <data name="FGHistoryLinkText" xml:space="preserve">
-    <value>Financial guarantee decision history</value>
-  </data>
-  <data name="FinanceHeading" xml:space="preserve">
-    <value>Finance</value>
-  </data>
-  <data name="FinanceLinkText" xml:space="preserve">
-    <value>Finance management</value>
-  </data>
-  <data name="isInterim" xml:space="preserve">
-    <value>Interim</value>
-  </data>
-  <data name="KeyDatesLinkText" xml:space="preserve">
-    <value>Key dates</value>
-  </data>
-  <data name="MarkInterimLinkText" xml:space="preserve">
-    <value>Mark notification as interim or non-interim</value>
-  </data>
-  <data name="nonInterim" xml:space="preserve">
-    <value>Non-Interim</value>
-  </data>
-  <data name="NotificationAssessmentHeading" xml:space="preserve">
-    <value>Notification assessment</value>
-  </data>
-  <data name="NotificationOverviewLinkText" xml:space="preserve">
-    <value>Notification overview</value>
-  </data>
-  <data name="ReportingHeading" xml:space="preserve">
-    <value>Reporting</value>
-  </data>
-  <data name="ShipmentsHeading" xml:space="preserve">
-    <value>Shipments</value>
-  </data>
-  <data name="ShipmentSummaryLinkText" xml:space="preserve">
-    <value>Shipment summary</value>
-  </data>
-  <data name="UpdateKeyDatesLinkText" xml:space="preserve">
-    <value>Update key dates</value>
-  </data>
-  <data name="Preconsented" xml:space="preserve">
-    <value>Pre-consented</value>
-  </data>
-  <data name="FGDates" xml:space="preserve">
-    <value>Update financial guarantee dates</value>
-  </data>
-  <data name="DownloadAnnexes" xml:space="preserve">
-    <value>Download annexes</value>
-  </data>
-  <data name="DownloadShipmentDocumentsLinkText" xml:space="preserve">
+  <data name="DownloadTitle" xml:space="preserve">
     <value>Download shipment documents</value>
+  </data>
+  <data name="Prenotification" xml:space="preserve">
+    <value>Pre-notification</value>
+  </data>
+  <data name="ShipmentNumber" xml:space="preserve">
+    <value>Shipment number</value>
+  </data>
+  <data name="ShipmentSummaryLink" xml:space="preserve">
+    <value>Return to shipment summary</value>
   </data>
 </root>
