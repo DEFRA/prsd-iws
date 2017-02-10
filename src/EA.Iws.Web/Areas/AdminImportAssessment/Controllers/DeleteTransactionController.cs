@@ -40,9 +40,9 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Confirm(ConfirmViewModel model)
+        public async Task<ActionResult> Confirm(Guid id, ConfirmViewModel model)
         {
-            await mediator.SendAsync(new DeleteTransaction(model.NotificationId, model.TransactionId));
+            await mediator.SendAsync(new DeleteTransaction(id, model.TransactionId));
 
             return RedirectToAction("Index", "AccountManagement");
         }
