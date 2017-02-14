@@ -13,7 +13,7 @@ SELECT
         WHERE M.[NotificationId] = N.Id 
         AND M.[Status] IN (2, 3)
         AND M.[Date] <= GETDATE()) AS [CurrentActiveLoads],
-    N.[NotificationNumber],
+    REPLACE(N.[NotificationNumber], ' ', '') AS [NotificationNumber],
     E.[Name] AS [ExporterName],
     I.[Name] AS [ImporterName],
     P.[Name] AS [ProducerName],
