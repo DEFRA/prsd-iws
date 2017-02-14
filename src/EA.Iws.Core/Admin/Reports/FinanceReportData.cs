@@ -25,6 +25,10 @@
 
         public int? IntendedNumberOfShipments { get; set; }
 
+        public decimal? IntendedQuantity { get; set; }
+
+        public string Units { get; set; }
+
         [DisplayName("Actual Shipments Made")]
         public int? TotalShipmentsMade { get; set; }
 

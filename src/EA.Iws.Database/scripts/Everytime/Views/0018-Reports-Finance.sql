@@ -24,6 +24,8 @@ AS
         P.TotalRefunded,
         P.LatestRefundDate,
         N.NumberOfShipments AS [IntendedNumberOfShipments],
+        N.IntendedQuantity,
+        N.Units,
         (SELECT COUNT(MovementId) FROM [Reports].[Movements] WHERE NotificationId = NO.Id) AS [TotalShipmentsMade],
         N.ImportOrExport,
         N.Type AS NotificationType,

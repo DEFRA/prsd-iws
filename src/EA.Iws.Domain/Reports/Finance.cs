@@ -44,6 +44,10 @@
 
         public int? IntendedNumberOfShipments { get; protected set; }
 
+        public decimal? IntendedQuantity { get; set; }
+
+        public string Units { get; set; }
+
         public int? TotalShipmentsMade { get; protected set; }
 
         public string ImportOrExport { get; protected set; }
