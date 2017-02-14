@@ -9,7 +9,7 @@
                 @Html.Raw(string.Format(_PortNotListedDisclosureResources.PortNotListedText, 
                     caDetails.IwsDepartmentDescription, 
                     caDetails.HelplineNumber,
-                    caDetails.ContactEmail))
+                    Html.MailtoLink(caDetails.ContactEmail.ToString())))
             </p>
         </div>
     </details>
