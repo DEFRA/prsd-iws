@@ -549,7 +549,6 @@
     <Content Include="Content\iws-page-ie7.scss" />
     <Content Include="Content\iws-page-ie8.scss" />
     <Content Include="Content\iws-page.scss" />
-    <Content Include="Content\iws\forms\_form-validation.scss" />
     <Content Include="Content\iws\_dialog.scss" />
     <Content Include="Content\iws\_display-elements.scss" />
     <Content Include="Content\iws\_helpers.scss" />
