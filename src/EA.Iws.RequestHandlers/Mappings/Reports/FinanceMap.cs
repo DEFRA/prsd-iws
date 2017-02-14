@@ -22,6 +22,7 @@
                 FacilityAddress = source.FacilityAddress,
                 FacilityPostalCode = source.FacilityPostalCode,
                 IntendedNumberOfShipments = source.IntendedNumberOfShipments,
+                IntendedQuantity = source.IntendedQuantity,
                 LatestPaymentDate = source.LatestPaymentDate,
                 LatestRefundDate = source.LatestRefundDate,
                 NotificationType = GetNotificationType(source),
@@ -35,7 +36,8 @@
                 TotalBillable = source.TotalBillable,
                 TotalPaid = source.TotalPaid,
                 TotalRefunded = source.TotalRefunded,
-                TotalShipmentsMade = source.TotalShipmentsMade
+                TotalShipmentsMade = source.TotalShipmentsMade,
+                Units = source.Units
             };
         }
 

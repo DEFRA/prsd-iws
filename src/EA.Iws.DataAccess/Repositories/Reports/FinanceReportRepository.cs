@@ -40,6 +40,8 @@
                     [TotalRefunded],
                     [LatestRefundDate],
                     [IntendedNumberOfShipments],
+                    [IntendedQuantity],
+                    [Units],
                     [TotalShipmentsMade],
                     [ImportOrExport],
                     [NotificationType],
