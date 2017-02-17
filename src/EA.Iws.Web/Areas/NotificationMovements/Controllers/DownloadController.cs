@@ -5,12 +5,12 @@
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Core.Authorization.Permissions;
-    using Core.Movement;
     using Infrastructure;
     using Infrastructure.Authorization;
     using Prsd.Core.Mediator;
     using Requests.Notification;
     using Requests.NotificationMovements;
+    using ViewModels.Download;
 
     [AuthorizeActivity(ExportMovementPermissions.CanReadExportMovements)]
     public class DownloadController : Controller
@@ -27,11 +27,11 @@
         {
             var notification = await mediator.SendAsync(new GetNotificationBasicInfo(notificationId));
             var movementData = await mediator.SendAsync(new GetMovementsByNotificationId(notificationId));
-            var data = movementData.Select(m => new DownloadExportMovementData(m, notification.NotificationType)).ToList();
+            var data = movementData.Select(m => new DownloadMovementViewModel(m, notification.NotificationType)).ToList();
 
             var filename = string.Format("movement-details-for-notification-number-{0}.csv", notification.NotificationNumber);
 
-            return new CsvActionResult<DownloadExportMovementData>(data, filename);
+            return new CsvActionResult<DownloadMovementViewModel>(data, filename);
         }
     }
 }

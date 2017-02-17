@@ -1290,6 +1290,7 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="Areas\AdminExportNotificationMovements\ViewModels\Download\DownloadMovementViewModel.cs" />
     <Compile Include="Areas\AdminExportNotificationMovements\ViewModels\RejectedMovement\DetailsViewModel.cs" />
     <Compile Include="Areas\AdminExportNotificationMovements\ViewModels\RejectedMovement\ListViewModel.cs" />
     <Compile Include="Areas\AdminExportNotificationMovements\Views\Delete\ConfirmResources.Designer.cs">
@@ -1536,6 +1537,7 @@
     <Compile Include="Areas\AdminImportNotificationMovements\ViewModels\Delete\DeleteViewModel.cs" />
     <Compile Include="Areas\AdminImportNotificationMovements\ViewModels\Delete\IndexViewModel.cs" />
     <Compile Include="Areas\AdminImportNotificationMovements\ViewModels\Delete\IndexViewModelResources.Designer.cs" />
+    <Compile Include="Areas\AdminImportNotificationMovements\ViewModels\Download\DownloadMovementViewModel.cs" />
     <Compile Include="Areas\AdminImportNotificationMovements\ViewModels\Home\MovementsSummaryTableViewModel.cs" />
     <Compile Include="Areas\AdminImportNotificationMovements\ViewModels\Home\MovementSummaryViewModel.cs" />
     <Compile Include="Areas\AdminImportNotificationMovements\ViewModels\RejectedMovement\DetailsViewModel.cs" />
@@ -2254,6 +2256,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ThreeWorkingDaysWarningViewModelResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Areas\NotificationMovements\ViewModels\Download\DownloadMovementViewModel.cs" />
     <Compile Include="Areas\NotificationMovements\Views\Create\ConsentExpiresInFourWorkingDaysResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

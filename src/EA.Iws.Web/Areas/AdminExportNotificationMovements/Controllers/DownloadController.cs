@@ -4,12 +4,12 @@
     using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Mvc;
-    using Core.Movement;
     using Infrastructure;
     using Infrastructure.Authorization;
     using Prsd.Core.Mediator;
     using Requests.Notification;
     using Requests.NotificationMovements;
+    using ViewModels.Download;
 
     [AuthorizeActivity(typeof(GetNotificationBasicInfo))]
     [AuthorizeActivity(typeof(GetMovementsByNotificationId))]
@@ -27,11 +27,11 @@
         {
             var notification = await mediator.SendAsync(new GetNotificationBasicInfo(id));
             var movementData = await mediator.SendAsync(new GetMovementsByNotificationId(id));
-            var data = movementData.Select(m => new DownloadExportMovementData(m, notification.NotificationType)).ToList();
+            var data = movementData.Select(m => new DownloadMovementViewModel(m, notification.NotificationType)).ToList();
 
             var filename = string.Format("movement-details-for-notification-number-{0}.xlsx", notification.NotificationNumber);
 
-            return new XlsxActionResult<DownloadExportMovementData>(data, filename);
+            return new XlsxActionResult<DownloadMovementViewModel>(data, filename);
         }
     }
 }
