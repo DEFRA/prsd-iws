@@ -5,66 +5,237 @@ GO
 ALTER VIEW [Reports].[FreedomOfInformation]
 AS
     SELECT
-        N.[Id],
-        N.[NotificationNumber],
-        N.[ImportOrExport],
-        N.[IsInterim],
-        NA.[ReceivedDate],
-        N.[CompetentAuthorityId],
-        O.[Exporter] AS [NotifierName],
-        O.[ExporterAddress] AS [NotifierAddress],
-        O.[ExporterPostalCode] AS [NotifierPostalCode],
-        O.[Producer] AS [ProducerName],
-        O.[ProducerAddress],
-        O.[ProducerPostalCode],
-        TR.[ExitPoint] AS [PointOfExport],
-        TR.[EntryPoint] AS [PointOfEntry],
-        TR.[ImportCountryName],
-        WT.[ChemicalCompositionTypeId],
-        CASE WHEN WT.[ChemicalCompositionTypeId] = 4 
-            THEN WT.[ChemicalCompositionType] + ' - ' + WT.[Description]
-            ELSE WT.[ChemicalCompositionType] END AS [NameOfWaste],
+        REPLACE(N.[NotificationNumber], ' ', '') AS [NotificationNumber],
+        'Export' AS [ImportOrExport],
+        FC.[IsInterim],
+        D.[NotificationReceivedDate] AS [ReceivedDate],
+        N.[CompetentAuthority] AS [CompetentAuthorityId],
+        E.[Name] AS [NotifierName],
+        [Reports].[ConcatenateAddress](E.[Address1], E.[Address2], E.[TownOrCity], E.[PostalCode], E.[Region], E.[Country]) AS [NotifierAddress],
+        E.[PostalCode] AS [NotifierPostalCode],
+        P.[Name] AS [ProducerName],
+        [Reports].[ConcatenateAddress](P.[Address1], P.[Address2], P.[TownOrCity], P.[PostalCode], P.[Region], P.[Country]) AS [ProducerAddress],
+        P.[PostalCode] AS [ProducerPostalCode],
+        SE_EEP.[Name] AS [PointOfExport],
+        SI_EEP.[Name] AS [PointOfEntry],
+        SI_C.[Name] AS [ImportCountryName],
+        WT.[ChemicalCompositionType] AS [ChemicalCompositionTypeId],
+        CASE WHEN WT.[ChemicalCompositionType] = 4
+            THEN 'Other - ' + WT.[ChemicalCompositionName]
+            ELSE CCT.[Description] END AS [NameOfWaste],
         STUFF(( SELECT ', ' + WC.Code AS [text()]
-                   FROM [Reports].[WasteCodes] WC
-                   WHERE WC.NotificationId = N.Id AND WC.CodeType = 3
-                   order by 1
-                   FOR XML PATH('')
-                 ), 1, 1, '' ) AS [EWC],
+            FROM [Notification].[WasteCodeInfo] WCI
+            LEFT JOIN [Lookup].[WasteCode] WC ON WCI.WasteCodeId = WC.Id
+            WHERE WCI.NotificationId = N.Id AND WC.CodeType = 3
+            order by 1
+            FOR XML PATH('')
+            ), 1, 1, '' ) AS [EWC],
         STUFF(( SELECT ', ' + WC.Code AS [text()]
-                   FROM [Reports].[WasteCodes] WC
-                   WHERE WC.NotificationId = N.Id AND WC.CodeType = 4
-                   order by 1
-                   FOR XML PATH('')
-                 ), 1, 1, '' ) AS [YCode],
+            FROM [Notification].[WasteCodeInfo] WCI
+            LEFT JOIN [Lookup].[WasteCode] WC ON WCI.WasteCodeId = WC.Id
+            WHERE WCI.NotificationId = N.Id AND WC.CodeType = 4
+            order by 1
+            FOR XML PATH('')
+            ), 1, 1, '' ) AS [YCode],
         STUFF(( SELECT ', ' + WC.Code AS [text()]
-                   FROM [Reports].[WasteCodes] WC
-                   WHERE WC.NotificationId = N.Id AND WC.CodeType = 5
-                   order by 1
-                   FOR XML PATH('')
-                 ), 1, 1, '' ) AS [HCode],
-        OP.OperationCodes,
-        O.[Importer] AS [ImporterName],
-        O.[ImporterAddress],
-        O.[ImporterPostalCode],
-        O.[Facility] AS [FacilityName],
-        O.[FacilityAddress],
-        O.[FacilityPostalCode],
-        N.[IntendedQuantity],
-        N.[Units] AS [IntendedQuantityUnit],
-        N.[UnitsId] AS [IntendedQuantityUnitId],
-        NA.[ConsentFrom],
-        NA.[ConsentTo],
-        N.[LocalArea],
-        M.[ReceivedDate] AS MovementReceivedDate,
-        M.[CompletedDate] AS MovementCompletedDate,
-        M.[QuantityReceivedUnitId] AS MovementQuantityReceviedUnitId,
-        M.[QuantityReceived] AS MovementQuantityReceived
-    FROM
-        [Reports].[Notification] N
-        INNER JOIN [Reports].[NotificationOrganisations] O ON N.Id = O.Id
-        INNER JOIN [Reports].[NotificationAssessment] NA ON N.Id = NA.NotificationId
-        INNER JOIN [Reports].[WasteType] WT ON N.Id = WT.NotificationId
-        INNER JOIN [Reports].[TransportRoute] TR ON N.Id = TR.NotificationId
-        INNER JOIN [Reports].[OperationCodesConcat] OP ON N.Id = OP.NotificationId
-        LEFT JOIN [Reports].[Movements] AS M ON M.[NotificationId] = N.Id
+            FROM [Notification].[WasteCodeInfo] WCI
+            LEFT JOIN [Lookup].[WasteCode] WC ON WCI.WasteCodeId = WC.Id
+            WHERE WCI.NotificationId = N.Id AND WC.CodeType = 5
+            order by 1
+            FOR XML PATH('')
+            ), 1, 1, '' ) AS [HCode],
+        STUFF(( SELECT ', ' + O.Name AS [text()]
+            FROM [Notification].[OperationCodes] OC
+            INNER JOIN [Lookup].[OperationCode] O ON OC.OperationCode = O.Id
+            WHERE OC.NotificationId = N.Id
+            ORDER BY O.Id
+            FOR XML PATH('')
+            ), 1, 1, '' ) AS OperationCodes,
+        I.[Name] AS [ImporterName],
+        [Reports].[ConcatenateAddress](I.[Address1], I.[Address2], I.[TownOrCity], I.[PostalCode], I.[Region], I.[Country]) AS [ImporterAddress],
+        I.[PostalCode] AS [ImporterPostalCode],
+        F.[Name] AS [FacilityName],
+        [Reports].[ConcatenateAddress](F.[Address1], F.[Address2], F.[TownOrCity], F.[PostalCode], F.[Region], F.[Country]) AS [FacilityAddress],
+        F.[PostalCode] AS [FacilityPostalCode],
+        S.[Quantity] AS [IntendedQuantity],
+        SU.[Description] AS [IntendedQuantityUnit],
+        S.[Units] AS [IntendedQuantityUnitId],
+        C.[From] AS [ConsentFrom],
+        C.[To] AS [ConsentTo],
+        LA.[Name] AS [LocalArea],
+        M.[Number] AS [MovementNumber],
+        MR.[Date] AS [MovementReceivedDate],
+        MOR.[Date] AS [MovementCompletedDate],
+        MR.[Unit] AS [MovementQuantityReceviedUnitId],
+        MR.[Quantity] AS [MovementQuantityReceived]
+
+    FROM [Notification].[Notification] N
+    INNER JOIN [Notification].[FacilityCollection] FC ON FC.[NotificationId] = N.[Id]
+    INNER JOIN [Notification].[NotificationAssessment] NA ON NA.[NotificationApplicationId] = N.[Id]
+    LEFT JOIN [Notification].NotificationDates D ON D.[NotificationAssessmentId] = NA.[Id]
+    INNER JOIN [Notification].[Exporter] E ON E.NotificationId = N.Id
+    INNER JOIN [Notification].[Importer] I ON I.NotificationId = N.Id
+    INNER JOIN [Notification].[Producer] P
+        ON P.Id = 
+        (
+            SELECT TOP 1 P1.Id
+
+            FROM		[Notification].[ProducerCollection] AS PC
+
+            INNER JOIN [Notification].[Producer] AS P1
+            ON		   PC.Id = P1.ProducerCollectionId
+
+            WHERE		PC.NotificationId = N.Id
+            ORDER BY	P1.[IsSiteOfExport] DESC
+        )
+    INNER JOIN [Notification].[Facility] F
+        ON F.Id = 
+        (
+            SELECT TOP 1 F1.Id
+
+            FROM		[Notification].[FacilityCollection] AS FC
+
+            INNER JOIN	[Notification].[Facility] AS F1
+            ON			FC.Id = F1.FacilityCollectionId
+
+            WHERE		NotificationId = N.Id
+            ORDER BY	F1.IsActualSiteOfTreatment DESC
+        )
+    INNER JOIN [Notification].[TransportRoute] TR ON TR.NotificationId = N.Id
+    INNER JOIN [Notification].[StateOfExport] SE ON SE.TransportRouteId = TR.Id
+    INNER JOIN [Notification].[StateOfImport] SI ON SI.TransportRouteId = TR.Id
+    INNER JOIN [Notification].[EntryOrExitPoint] SE_EEP ON SE_EEP.Id = SE.ExitPointId
+    INNER JOIN [Notification].[EntryOrExitPoint] SI_EEP ON SI_EEP.Id = SI.EntryPointId
+    INNER JOIN [Lookup].[Country] SI_C ON SI_C.Id = SI.CountryId
+    INNER JOIN [Notification].[WasteType] WT ON WT.NotificationId = N.Id
+    INNER JOIN [Lookup].[ChemicalCompositionType] CCT ON CCT.Id = WT.ChemicalCompositionType
+    INNER JOIN [Notification].[ShipmentInfo] S ON S.NotificationId = N.Id
+    INNER JOIN [Lookup].[ShipmentQuantityUnit] SU ON SU.Id = S.Units
+    LEFT JOIN [Notification].[Consent] C ON C.NotificationApplicationId = N.Id
+    LEFT JOIN [Notification].[Consultation] CON 
+        INNER JOIN [Lookup].[LocalArea] LA ON CON.LocalAreaId = LA.Id
+    ON CON.NotificationId = N.Id
+    LEFT JOIN [Notification].[Movement] M ON M.[NotificationId] = N.Id
+    LEFT JOIN [Notification].[MovementReceipt] MR ON MR.MovementId = M.Id
+    LEFT JOIN [Notification].[MovementOperationReceipt] MOR ON MOR.MovementId = M.Id
+
+    UNION ALL
+
+    SELECT
+        REPLACE(N.[NotificationNumber], ' ', '') AS [NotificationNumber],
+        'Import' AS [ImportOrExport],
+        InS.[IsInterim],
+        D.[NotificationReceivedDate] AS [ReceivedDate],
+        N.[CompetentAuthority] AS [CompetentAuthorityId],
+        E.[Name] AS [NotifierName],
+        [Reports].[ConcatenateAddress](E.[Address1], E.[Address2], E.[TownOrCity], E.[PostalCode], NULL, C_E.[Name]) AS [NotifierAddress],
+        E.[PostalCode] AS [NotifierPostalCode],
+        P.[Name] AS [ProducerName],
+        [Reports].[ConcatenateAddress](P.[Address1], P.[Address2], P.[TownOrCity], P.[PostalCode], NULL, C_P.[Name]) AS [ProducerAddress],
+        P.[PostalCode] AS [ProducerPostalCode],
+        SE_EEP.[Name] AS [PointOfExport],
+        SI_EEP.[Name] AS [PointOfEntry],
+        SI_C.[Name] AS [ImportCountryName],
+        WT.[ChemicalCompositionType] AS [ChemicalCompositionTypeId],
+        CASE WHEN WT.[ChemicalCompositionType] = 4
+            THEN 'Other - ' + WT.[Name]
+            ELSE CCT.[Description] END AS [NameOfWaste],
+        STUFF(( SELECT ', ' + WC.Code AS [text()]
+            FROM [ImportNotification].[WasteType] WT
+            INNER JOIN [ImportNotification].[WasteCode] WCI ON WT.Id = WCI.WasteTypeId
+            INNER JOIN [Lookup].[WasteCode] WC ON WCI.WasteCodeId = WC.Id
+            WHERE WT.ImportNotificationId = N.Id AND WC.CodeType = 3
+            order by 1
+            FOR XML PATH('')
+            ), 1, 1, '' ) AS [EWC],
+        STUFF(( SELECT ', ' + WC.Code AS [text()]
+            FROM [ImportNotification].[WasteType] WT
+            INNER JOIN [ImportNotification].[WasteCode] WCI ON WT.Id = WCI.WasteTypeId
+            LEFT JOIN [Lookup].[WasteCode] WC ON WCI.WasteCodeId = WC.Id
+            WHERE WT.ImportNotificationId = N.Id AND WC.CodeType = 4
+            order by 1
+            FOR XML PATH('')
+            ), 1, 1, '' ) AS [YCode],
+        STUFF(( SELECT ', ' + WC.Code AS [text()]
+            FROM [ImportNotification].[WasteType] WT
+            INNER JOIN [ImportNotification].[WasteCode] WCI ON WT.Id = WCI.WasteTypeId
+            LEFT JOIN [Lookup].[WasteCode] WC ON WCI.WasteCodeId = WC.Id
+            WHERE WT.ImportNotificationId = N.Id AND WC.CodeType = 5
+            order by 1
+            FOR XML PATH('')
+            ), 1, 1, '' ) AS [HCode],
+        STUFF(( SELECT ', ' + O.Name AS [text()]
+            FROM [ImportNotification].[WasteOperation] WO
+            INNER JOIN [ImportNotification].[OperationCodes] OC ON OC.WasteOperationId = WO.Id
+            LEFT JOIN [Lookup].[OperationCode] O ON OC.OperationCode = O.Id
+            WHERE WO.ImportNotificationId = N.Id
+            ORDER BY O.Id
+            FOR XML PATH('')
+            ), 1, 1, '' ) AS OperationCodes,
+        I.[Name] AS [ImporterName],
+        [Reports].[ConcatenateAddress](I.[Address1], I.[Address2], I.[TownOrCity], I.[PostalCode], NULL, C_I.[Name]) AS [ImporterAddress],
+        I.[PostalCode] AS [ImporterPostalCode],
+        F.[Name] AS [FacilityName],
+        [Reports].[ConcatenateAddress](F.[Address1], F.[Address2], F.[TownOrCity], F.[PostalCode], NULL, C_F.[Name]) AS [FacilityAddress],
+        F.[PostalCode] AS [FacilityPostalCode],
+        S.[Quantity] AS [IntendedQuantity],
+        SU.[Description] AS [IntendedQuantityUnit],
+        S.[Units] AS [IntendedQuantityUnitId],
+        C.[From] AS [ConsentFrom],
+        C.[To] AS [ConsentTo],
+        LA.[Name] AS [LocalArea],
+        M.[Number] AS [MovementNumber],
+        MR.[Date] AS [MovementReceivedDate],
+        MOR.[Date] AS [MovementCompletedDate],
+        MR.[Unit] AS [MovementQuantityReceviedUnitId],
+        MR.[Quantity] AS [MovementQuantityReceived]
+
+    FROM [ImportNotification].[Notification] N
+    INNER JOIN [ImportNotification].[FacilityCollection] FC ON FC.[ImportNotificationId] = N.[Id]
+    INNER JOIN [ImportNotification].[NotificationAssessment] NA ON NA.[NotificationApplicationId] = N.[Id]
+    LEFT JOIN [ImportNotification].NotificationDates D ON D.[NotificationAssessmentId] = NA.[Id]
+    INNER JOIN [ImportNotification].[Exporter] E
+        INNER JOIN [Lookup].[Country] AS C_E ON E.[CountryId] = C_E.[Id]
+    ON E.ImportNotificationId = N.Id
+    INNER JOIN [ImportNotification].[Importer] I
+        INNER JOIN [Lookup].[Country] AS C_I ON I.[CountryId] = C_I.[Id]
+    ON I.ImportNotificationId = N.Id
+    INNER JOIN [ImportNotification].[Producer] P
+        INNER JOIN [Lookup].[Country] AS C_P ON P.[CountryId] = C_P.[Id]
+    ON P.ImportNotificationId = N.Id
+    INNER JOIN [ImportNotification].[Facility] F
+        ON F.Id = 
+        (
+            SELECT TOP 1 F1.Id
+
+            FROM		[ImportNotification].[FacilityCollection] AS FC
+
+            INNER JOIN	[ImportNotification].[Facility] AS F1
+            ON			FC.Id = F1.FacilityCollectionId
+
+            WHERE		ImportNotificationId = N.Id
+            ORDER BY	F1.IsActualSiteOfTreatment DESC
+        )
+    INNER JOIN [Lookup].[Country] AS C_F ON F.[CountryId] = C_F.[Id]
+    INNER JOIN [ImportNotification].[TransportRoute] TR ON TR.ImportNotificationId = N.Id
+    INNER JOIN [ImportNotification].[StateOfExport] SE ON SE.TransportRouteId = TR.Id
+    INNER JOIN [ImportNotification].[StateOfImport] SI ON SI.TransportRouteId = TR.Id
+    INNER JOIN [Notification].[EntryOrExitPoint] SE_EEP ON SE_EEP.Id = SE.ExitPointId
+    INNER JOIN [Notification].[EntryOrExitPoint] SI_EEP ON SI_EEP.Id = SI.EntryPointId
+    INNER JOIN (
+        SELECT TOP 1 [Id], [Name], [IsoAlpha2Code] 
+        FROM [Lookup].[Country] 
+        WHERE IsoAlpha2Code = 'GB' ) AS SI_C ON 1 = 1
+    INNER JOIN [ImportNotification].[WasteType] WT ON WT.ImportNotificationId = N.Id
+    INNER JOIN [Lookup].[ChemicalCompositionType] CCT ON CCT.Id = WT.ChemicalCompositionType
+    INNER JOIN [ImportNotification].[Shipment] S ON S.ImportNotificationId = N.Id
+    INNER JOIN [Lookup].[ShipmentQuantityUnit] SU ON SU.Id = S.Units
+    LEFT JOIN [ImportNotification].[Consent] C ON C.NotificationId = N.Id
+    LEFT JOIN [ImportNotification].[Consultation] CON 
+        INNER JOIN [Lookup].[LocalArea] LA ON CON.LocalAreaId = LA.Id
+    ON CON.NotificationId = N.Id
+    LEFT JOIN [ImportNotification].[InterimStatus] InS ON	[N].[Id] = [InS].[ImportNotificationId]
+    LEFT JOIN [ImportNotification].[Movement] M ON M.[NotificationId] = N.Id
+    LEFT JOIN [ImportNotification].[MovementReceipt] MR ON MR.MovementId = M.Id
+    LEFT JOIN [ImportNotification].[MovementOperationReceipt] MOR ON MOR.MovementId = M.Id
 GO
