@@ -13,7 +13,7 @@ AS
     INNER JOIN [Notification].[Notification] N ON OC.NotificationId = N.Id
     INNER JOIN [Lookup].[OperationCode] O ON OC.OperationCode = O.Id
 
-    UNION
+    UNION ALL
 
     SELECT
         N.Id AS NotificationId,

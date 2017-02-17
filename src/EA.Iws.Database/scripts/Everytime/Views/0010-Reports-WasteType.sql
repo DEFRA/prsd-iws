@@ -32,7 +32,7 @@ AS
     ON			[N].[Id] = [WC].[NotificationId] 
     AND			[WC].[CodeType] IN (1, 2)
 
-    UNION
+    UNION ALL
 
     SELECT
         N.Id AS NotificationId,

@@ -28,7 +28,7 @@ AS
     INNER JOIN [Lookup].[Country] SE_C ON SE.CountryId = SE_C.Id
     INNER JOIN [Lookup].[Country] SI_C ON SI.CountryId = SI_C.Id
 
-    UNION
+    UNION ALL
 
     SELECT
         N.Id AS NotificationId,

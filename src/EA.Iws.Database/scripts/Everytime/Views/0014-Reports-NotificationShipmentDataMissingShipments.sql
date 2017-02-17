@@ -112,7 +112,7 @@ AS
     INNER JOIN	[Notification].[NotificationDates] AS ND
     ON			ND.[NotificationAssessmentId] = NA.Id
 
-    UNION 
+    UNION ALL
 
     SELECT	
         M.NotificationId,

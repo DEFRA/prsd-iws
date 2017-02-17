@@ -45,7 +45,7 @@ AS
     LEFT JOIN	[Notification].[MovementOperationReceipt] AS MOR
     ON			[M].[Id] = [MOR].[MovementId]
 
-    UNION
+    UNION ALL
 
     SELECT
         N.Id AS [NotificationId],
