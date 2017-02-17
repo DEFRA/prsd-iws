@@ -47,20 +47,14 @@
                     [FacilityName],
                     [FacilityAddress],
                     [FacilityPostalCode],
-                    COALESCE(                    
+                    COALESCE(
                         (SELECT	SUM(
-                            CASE WHEN [QuantityReceivedUnitId] IN (1, 2) -- Tonnes / Cubic Metres
-                                THEN COALESCE([QuantityReceived], 0)
+                            CASE WHEN [MovementQuantityReceviedUnitId] IN (1, 2) -- Tonnes / Cubic Metres
+                                THEN COALESCE([MovementQuantityReceived], 0)
                             ELSE 
-                                COALESCE([QuantityReceived] / 1000, 0) -- Convert to Tonnes / Cubic Metres
+                                COALESCE([MovementQuantityReceived] / 1000, 0) -- Convert to Tonnes / Cubic Metres
                             END
-                            ) 
-                            FROM [Reports].[Movements]
-                            WHERE Id = NotificationId
-                                AND (@dateType = 'NotificationReceivedDate'
-                                     OR @dateType = 'ConsentFrom'
-                                     OR @dateType = 'ReceivedDate' and  [ReceivedDate] BETWEEN @from AND @to
-                                     OR @dateType = 'CompletedDate' and  [CompletedDate] BETWEEN @from AND @to)
+                            )
                         ), 0) AS [QuantityReceived],
                     CASE WHEN [IntendedQuantityUnitId] IN (1, 2) -- Due to conversion units will only be Tonnes / Cubic Metres
                         THEN [IntendedQuantityUnit] 
@@ -80,7 +74,38 @@
                     AND (@dateType = 'NotificationReceivedDate' AND  [ReceivedDate] BETWEEN @from AND @to
                          OR @dateType = 'ConsentFrom' AND  [ConsentFrom] BETWEEN @from AND @to
                          OR @dateType = 'ReceivedDate' AND [MovementReceivedDate] BETWEEN @from AND @to
-                         OR @dateType = 'CompletedDate' AND [MovementCompletedDate] BETWEEN @from AND @to)",
+                         OR @dateType = 'CompletedDate' AND [MovementCompletedDate] BETWEEN @from AND @to)
+                GROUP BY
+                    [NotificationNumber],
+                    [ImportOrExport],
+                    [IsInterim],
+                    [NotifierName],
+                    [NotifierAddress],
+                    [NotifierPostalCode],
+                    [ProducerName],
+                    [ProducerAddress],
+                    [ProducerPostalCode],
+                    [PointOfExport],
+                    [PointOfEntry],
+                    [ImportCountryName],
+                    [NameOfWaste],
+                    [EWC],
+                    [YCode],
+                    [HCode],
+                    [OperationCodes],
+                    [ImporterName],
+                    [ImporterAddress],
+                    [ImporterPostalCode],
+                    [FacilityName],
+                    [FacilityAddress],
+                    [FacilityPostalCode],
+                    [IntendedQuantityUnitId],
+                    [IntendedQuantityUnit],
+                    [IntendedQuantity],
+                    [IntendedQuantityUnit],
+                    [ConsentFrom],
+                    [ConsentTo],
+                    [LocalArea]",
                 new SqlParameter("@from", from),
                 new SqlParameter("@to", to),
                 new SqlParameter("@chemicalComposition", (chemicalComposition.HasValue ? (object)(int)chemicalComposition.Value : DBNull.Value)),
