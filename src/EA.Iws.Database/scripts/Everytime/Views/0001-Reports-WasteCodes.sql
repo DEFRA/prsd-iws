@@ -19,7 +19,7 @@ AS
     INNER JOIN [Notification].[Notification] N ON WCI.NotificationId = N.Id
     INNER JOIN [Lookup].[CodeType] CT ON WCI.CodeType = CT.Id
 
-    UNION
+    UNION ALL
 
     SELECT
         N.Id AS NotificationId,

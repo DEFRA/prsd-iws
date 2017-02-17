@@ -67,7 +67,7 @@ AS
         LEFT JOIN [Notification].[Consultation] C ON N.Id = C.NotificationId
         LEFT JOIN [Notification].[Consent] CON ON N.Id = CON.NotificationApplicationId
 
-    UNION
+    UNION ALL
 
     SELECT
         N.Id,

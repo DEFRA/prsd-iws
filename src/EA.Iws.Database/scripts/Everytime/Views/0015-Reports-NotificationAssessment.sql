@@ -46,7 +46,7 @@ AS
     LEFT JOIN	[Notification].[Consent] AS C
     ON			[NA].[NotificationApplicationId] = [C].[NotificationApplicationId]
 
-    UNION
+    UNION ALL
 
         SELECT
         NA.[Id] AS Id,
@@ -90,9 +90,9 @@ AS
     LEFT JOIN	[ImportNotification].[Consent] AS C
     ON			[NA].[NotificationApplicationId] = [C].[NotificationId]
 
-	LEFT JOIN	[ImportNotification].[Objection] AS O
-	ON			[NA].[NotificationApplicationId] = [O].[NotificationId]
+    LEFT JOIN	[ImportNotification].[Objection] AS O
+    ON			[NA].[NotificationApplicationId] = [O].[NotificationId]
 
-	LEFT JOIN	[ImportNotification].[Withdrawn] AS W
-	ON			[NA].[NotificationApplicationId] = [W].[NotificationId]
+    LEFT JOIN	[ImportNotification].[Withdrawn] AS W
+    ON			[NA].[NotificationApplicationId] = [W].[NotificationId]
 GO

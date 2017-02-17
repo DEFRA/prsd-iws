@@ -65,7 +65,7 @@ AS
     LEFT JOIN	[Notification].[FacilityCollection] FC
     ON			N.[Id] = FC.[NotificationId]
 
-    UNION
+    UNION ALL
 
     SELECT 
         N.[Id] AS Id,

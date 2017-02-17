@@ -15,7 +15,7 @@ AS
     INNER JOIN [Notification].[Notification] N ON N.Id = T.NotificationId
     GROUP BY N.Id, N.NotificationNumber
 
-    UNION
+    UNION ALL
 
     SELECT
         N.Id AS [NotificationId],
