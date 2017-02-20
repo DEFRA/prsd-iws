@@ -2422,6 +2422,7 @@
     <Compile Include="Infrastructure\AdminHomeNavigationSection.cs" />
     <Compile Include="Infrastructure\Authorization\AuthorizationService.cs" />
     <Compile Include="Infrastructure\Authorization\AuthorizeActivityAttribute.cs" />
+    <Compile Include="Infrastructure\Logging\ApiErrorLog.cs" />
     <Compile Include="Infrastructure\Paging\Pager.cs" />
     <Compile Include="Infrastructure\Paging\PagerOptions.cs" />
     <Compile Include="Infrastructure\Paging\PagerOptionsBuilder.cs" />
