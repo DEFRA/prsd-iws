@@ -17,6 +17,8 @@
         {
             this.UserContext = userContext;
             this.Dispatcher = dispatcher;
+
+            this.Database.CommandTimeout = 90;
         }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
