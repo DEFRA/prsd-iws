@@ -1,7 +1,6 @@
 ﻿namespace EA.Iws.DataAccess
 {
     using System.Data.Entity;
-    using System.Data.Entity.Infrastructure;
     using System.Threading;
     using System.Threading.Tasks;
     using Mappings.Common;
@@ -19,7 +18,7 @@
             this.UserContext = userContext;
             this.Dispatcher = dispatcher;
 
-            ((IObjectContextAdapter)this).ObjectContext.CommandTimeout = 90;
+            this.Database.CommandTimeout = 90;
         }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
