@@ -93,6 +93,10 @@
       <HintPath>..\packages\elmah.corelibrary.1.2.2\lib\Elmah.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Elmah.FallbackErrorLog, Version=1.0.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Elmah.FallbackErrorLog.1.0.2.0\lib\net35\Elmah.FallbackErrorLog.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Elmah.Mvc, Version=2.1.2.1389, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Elmah.Mvc.2.1.2\lib\net40\Elmah.Mvc.dll</HintPath>
       <Private>True</Private>

@@ -17,6 +17,8 @@
         {
             this.config = config;
             this.apiClient = DependencyResolver.Current.GetService<IIwsClient>();
+
+            ApplicationName = (string)(config["applicationName"] ?? string.Empty);
         }
 
         public override string Log(Error error)
@@ -36,6 +38,11 @@
         public override ErrorLogEntry GetError(string id)
         {
             var errorData = Task.Run(() => apiClient.ErrorLog.Get(id)).Result;
+
+            if (errorData == null)
+            {
+                return null;
+            }
 
             var error = ErrorXml.DecodeString(errorData.ErrorXml);
             return new ErrorLogEntry(this, id, error);

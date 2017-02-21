@@ -53,7 +53,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Content Include="missing-indexes.sql" />
     <Content Include="scripts\Everytime\StoredProcedures\0004-uspUpdateExportFinancialGuaranteeDates.sql" />
-    <Content Include="scripts\Everytime\StoredProcedures\0006-elmah-GetErrorSXml.sql" />
+    <Content Include="scripts\Everytime\StoredProcedures\0006-elmah-GetErrorsXml.sql" />
     <Content Include="scripts\Everytime\StoredProcedures\0005-elmah-GetErrorXml.sql" />
     <Content Include="scripts\Everytime\StoredProcedures\0007-elmah-LogError.sql" />
     <Content Include="scripts\Everytime\Synonyms\0001-elmah.sql" />
