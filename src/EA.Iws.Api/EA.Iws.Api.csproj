@@ -238,6 +238,7 @@
     <Compile Include="Controllers\ErrorLogController.cs" />
     <Compile Include="IdSrv\AspNetIdentityUserService.cs" />
     <Compile Include="IdSrv\ClaimsTransformationOptionsFactory.cs" />
+    <Compile Include="Infrastructure\ElmahSqlLogger.cs" />
     <Compile Include="Infrastructure\HttpStatusCodeResult.cs" />
     <Compile Include="Controllers\MediatorController.cs" />
     <Compile Include="Identity\ApplicationUserManager.cs" />
