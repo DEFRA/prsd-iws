@@ -1,6 +1,5 @@
 ﻿namespace EA.Iws.Api.Client.Actions
 {
-    using System;
     using System.Net.Http;
     using System.Threading.Tasks;
     using Entities;
