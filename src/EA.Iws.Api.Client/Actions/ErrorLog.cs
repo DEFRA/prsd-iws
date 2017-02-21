@@ -1,5 +1,6 @@
 ﻿namespace EA.Iws.Api.Client.Actions
 {
+    using System;
     using System.Net.Http;
     using System.Threading.Tasks;
     using Entities;
@@ -21,15 +22,29 @@
             return response.IsSuccessStatusCode;
         }
 
-        public async Task<ErrorData> Get(string id)
+        public async Task<ErrorData> Get(string id, string applicationName = "")
         {
-            var response = await httpClient.GetAsync(Controller + id);
+            var uri = Controller + id;
+
+            if (!string.IsNullOrWhiteSpace(applicationName))
+            {
+                uri += string.Format("?applicationName={0}", applicationName);
+            }
+
+            var response = await httpClient.GetAsync(uri);
             return await response.CreateResponseAsync<ErrorData>();
         }
 
-        public async Task<PagedErrorDataList> GetList(int pageIndex, int pageSize)
+        public async Task<PagedErrorDataList> GetList(int pageIndex, int pageSize, string applicationName = "")
         {
-            var response = await httpClient.GetAsync(Controller + "list" + string.Format("?pageIndex={0}&pageSize={1}", pageIndex, pageSize));
+            var uri = Controller + "list" + string.Format("?pageIndex={0}&pageSize={1}", pageIndex, pageSize);
+
+            if (!string.IsNullOrWhiteSpace(applicationName))
+            {
+                uri += string.Format("&applicationName={0}", applicationName);
+            }
+
+            var response = await httpClient.GetAsync(uri);
             return await response.CreateResponseAsync<PagedErrorDataList>();
         }
     }

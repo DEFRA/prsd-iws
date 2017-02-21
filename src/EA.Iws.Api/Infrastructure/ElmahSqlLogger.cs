@@ -61,11 +61,11 @@ namespace EA.Iws.Api.Infrastructure
                     new SqlParameter("@TimeUtc", errorData.Date.ToUniversalTime()));
         }
 
-        public async Task<ErrorData> GetError(Guid id)
+        public async Task<ErrorData> GetError(Guid id, string applicationName)
         {
             var xml = await context.Database.SqlQuery<string>("ELMAH_GetErrorXml @Application, @ErrorId",
                 new SqlParameter("@ErrorId", id),
-                new SqlParameter("@Application", string.Empty)).SingleOrDefaultAsync();
+                new SqlParameter("@Application", applicationName)).SingleOrDefaultAsync();
 
             if (string.IsNullOrWhiteSpace(xml))
             {
@@ -75,7 +75,7 @@ namespace EA.Iws.Api.Infrastructure
             return CreateErrorDataFromXml(id, xml);
         }
 
-        public async Task<PagedErrorDataList> GetPagedErrorList(int pageIndex, int pageSize)
+        public async Task<PagedErrorDataList> GetPagedErrorList(int pageIndex, int pageSize, string applicationName)
         {
             var totalCountParameter = new SqlParameter("@TotalCount", SqlDbType.Int)
             {
@@ -93,7 +93,7 @@ namespace EA.Iws.Api.Infrastructure
 
                 command.Parameters.AddRange(new[]
                 {
-                    new SqlParameter("@Application", string.Empty),
+                    new SqlParameter("@Application", applicationName),
                     new SqlParameter("@PageIndex", pageIndex),
                     new SqlParameter("@PageSize", pageSize),
                     totalCountParameter

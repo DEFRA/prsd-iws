@@ -28,18 +28,18 @@
 
         [HttpGet]
         [Route("{id}")]
-        public async Task<IHttpActionResult> Get(string id)
+        public async Task<IHttpActionResult> Get(string id, [FromUri] string applicationName = "")
         {
-            var errorData = await logger.GetError(Guid.Parse(id));
+            var errorData = await logger.GetError(Guid.Parse(id), applicationName);
 
             return Ok(errorData);
         }
 
         [HttpGet]
         [Route("list")]
-        public async Task<IHttpActionResult> GetList([FromUri] int pageIndex, [FromUri] int pageSize)
+        public async Task<IHttpActionResult> GetList([FromUri] int pageIndex, [FromUri] int pageSize, [FromUri] string applicationName = "")
         {
-            var pagedErrorList = await logger.GetPagedErrorList(pageIndex, pageSize);
+            var pagedErrorList = await logger.GetPagedErrorList(pageIndex, pageSize, applicationName);
 
             return Ok(pagedErrorList);
         }

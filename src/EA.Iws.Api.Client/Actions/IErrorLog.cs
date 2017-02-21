@@ -8,8 +8,8 @@
     {
         Task<bool> Create(ErrorData errorData);
 
-        Task<ErrorData> Get(string id);
+        Task<ErrorData> Get(string id, string applicationName = "");
 
-        Task<PagedErrorDataList> GetList(int pageIndex, int pageSize);
+        Task<PagedErrorDataList> GetList(int pageIndex, int pageSize, string applicationName = "");
     }
 }

@@ -37,7 +37,7 @@
 
         public override ErrorLogEntry GetError(string id)
         {
-            var errorData = Task.Run(() => apiClient.ErrorLog.Get(id)).Result;
+            var errorData = Task.Run(() => apiClient.ErrorLog.Get(id, ApplicationName)).Result;
 
             if (errorData == null)
             {
@@ -50,7 +50,7 @@
 
         public override int GetErrors(int pageIndex, int pageSize, IList errorEntryList)
         {
-            var errorList = Task.Run(() => apiClient.ErrorLog.GetList(pageIndex, pageSize)).Result;
+            var errorList = Task.Run(() => apiClient.ErrorLog.GetList(pageIndex, pageSize, ApplicationName)).Result;
 
             foreach (var errorData in errorList.Errors)
             {
