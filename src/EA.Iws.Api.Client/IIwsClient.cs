@@ -8,6 +8,8 @@
     {
         IRegistration Registration { get; }
 
+        IErrorLog ErrorLog { get; }
+
         Task<TResult> SendAsync<TResult>(IRequest<TResult> request);
         Task<TResult> SendAsync<TResult>(string accessToken, IRequest<TResult> request);
     }

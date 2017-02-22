@@ -14,6 +14,7 @@
     {
         private readonly HttpClient httpClient;
         private IRegistration registration;
+        private IErrorLog errorLog;
 
         public IwsClient(string baseUrl)
         {
@@ -28,6 +29,11 @@
         public IRegistration Registration
         {
             get { return registration ?? (registration = new Registration(httpClient)); }
+        }
+
+        public IErrorLog ErrorLog
+        {
+            get { return errorLog ?? (errorLog = new ErrorLog(httpClient)); }
         }
 
         public async Task<TResult> SendAsync<TResult>(IRequest<TResult> request)
