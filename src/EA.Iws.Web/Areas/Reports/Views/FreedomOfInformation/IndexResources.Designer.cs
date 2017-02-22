@@ -79,6 +79,15 @@ namespace EA.Iws.Web.Areas.Reports.Views.FreedomOfInformation {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Please note this report is run against a copy of the live data which is a day behind..
+        /// </summary>
+        public static string ReportInfo {
+            get {
+                return ResourceManager.GetString("ReportInfo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to FOI Report.
         /// </summary>
         public static string Title {
