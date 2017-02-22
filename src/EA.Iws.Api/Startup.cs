@@ -45,6 +45,7 @@ namespace EA.Iws.Api
             builder.Register(c => app.GetDataProtectionProvider()).InstancePerRequest();
             builder.Register(c => HttpContext.Current.GetOwinContext().Authentication).InstancePerRequest();
             builder.Register(c => Log.Logger).As<ILogger>().SingleInstance();
+            builder.RegisterType<ElmahSqlLogger>().AsSelf().InstancePerRequest();
 
             var container = AutofacBootstrapper.Initialize(builder, config, configurationService);
 

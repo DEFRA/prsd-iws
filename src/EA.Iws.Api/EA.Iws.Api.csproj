@@ -84,6 +84,10 @@
       <HintPath>..\packages\Elmah.Contrib.WebApi.1.0.10.25\lib\net45\Elmah.Contrib.WebApi.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Elmah.FallbackErrorLog, Version=1.0.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Elmah.FallbackErrorLog.1.0.2.0\lib\net35\Elmah.FallbackErrorLog.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
       <Private>True</Private>
@@ -244,8 +248,10 @@
     <Compile Include="App_Start\HangFireJobsSetup.cs" />
     <Compile Include="App_Start\Modules\EmailServiceModule.cs" />
     <Compile Include="App_Start\Modules\UserContextModule.cs" />
+    <Compile Include="Controllers\ErrorLogController.cs" />
     <Compile Include="IdSrv\AspNetIdentityUserService.cs" />
     <Compile Include="IdSrv\ClaimsTransformationOptionsFactory.cs" />
+    <Compile Include="Infrastructure\ElmahSqlLogger.cs" />
     <Compile Include="Infrastructure\HttpStatusCodeResult.cs" />
     <Compile Include="Controllers\MediatorController.cs" />
     <Compile Include="Identity\ApplicationUserManager.cs" />
@@ -292,7 +298,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="App_Readme\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\EA.Iws.Api.Client\EA.Iws.Api.Client.csproj">

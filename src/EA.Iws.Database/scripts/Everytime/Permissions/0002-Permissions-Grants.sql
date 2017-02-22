@@ -13,4 +13,6 @@ GRANT SELECT ON SCHEMA::[Lookup] TO [iws_application]
 
 GRANT SELECT, INSERT, UPDATE, DELETE ON SCHEMA::[HangFire] TO [iws_application]
 
+GRANT EXEC ON SCHEMA::[Logging] TO [iws_application]
+
 GO
