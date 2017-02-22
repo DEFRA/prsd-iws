@@ -43,12 +43,10 @@ namespace EA.Iws.Api
             // Autofac
             var builder = new ContainerBuilder();
             builder.Register(c => app.GetDataProtectionProvider()).InstancePerRequest();
-            builder.Register(c => configurationService).As<ConfigurationService>().SingleInstance();
-            builder.Register(c => configurationService.CurrentConfiguration).As<AppConfiguration>().SingleInstance();
             builder.Register(c => HttpContext.Current.GetOwinContext().Authentication).InstancePerRequest();
             builder.Register(c => Log.Logger).As<ILogger>().SingleInstance();
 
-            var container = AutofacBootstrapper.Initialize(builder, config);
+            var container = AutofacBootstrapper.Initialize(builder, config, configurationService);
 
             // Web API
             config.MapHttpAttributeRoutes();
