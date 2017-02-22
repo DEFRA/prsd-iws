@@ -7,7 +7,7 @@
     using Infrastructure;
 
     [RoutePrefix("api/ErrorLog")]
-    [AllowAnonymous]
+    [Authorize(Roles = "administrator")]
     public class ErrorLogController : ApiController
     {
         private readonly ElmahSqlLogger logger;
@@ -19,6 +19,7 @@
 
         [HttpPost]
         [Route("Create")]
+        [AllowAnonymous]
         public async Task<IHttpActionResult> Create(ErrorData errorData)
         {
             await logger.Log(errorData);
