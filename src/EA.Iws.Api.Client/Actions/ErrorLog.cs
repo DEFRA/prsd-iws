@@ -21,8 +21,10 @@
             return response.IsSuccessStatusCode;
         }
 
-        public async Task<ErrorData> Get(string id, string applicationName = "")
+        public async Task<ErrorData> Get(string accessToken, string id, string applicationName = "")
         {
+            httpClient.SetBearerToken(accessToken);
+
             var uri = Controller + id;
 
             if (!string.IsNullOrWhiteSpace(applicationName))
@@ -34,8 +36,10 @@
             return await response.CreateResponseAsync<ErrorData>();
         }
 
-        public async Task<PagedErrorDataList> GetList(int pageIndex, int pageSize, string applicationName = "")
+        public async Task<PagedErrorDataList> GetList(string accessToken, int pageIndex, int pageSize, string applicationName = "")
         {
+            httpClient.SetBearerToken(accessToken);
+
             var uri = Controller + "list" + string.Format("?pageIndex={0}&pageSize={1}", pageIndex, pageSize);
 
             if (!string.IsNullOrWhiteSpace(applicationName))

@@ -3,6 +3,7 @@
     using System;
     using System.Collections;
     using System.Threading.Tasks;
+    using System.Web;
     using System.Web.Mvc;
     using Api.Client;
     using Api.Client.Entities;
@@ -37,7 +38,9 @@
 
         public override ErrorLogEntry GetError(string id)
         {
-            var errorData = Task.Run(() => apiClient.ErrorLog.Get(id, ApplicationName)).Result;
+            var accessToken = HttpContext.Current.User.GetAccessToken();
+
+            var errorData = Task.Run(() => apiClient.ErrorLog.Get(accessToken, id, ApplicationName)).Result;
 
             if (errorData == null)
             {
@@ -50,7 +53,9 @@
 
         public override int GetErrors(int pageIndex, int pageSize, IList errorEntryList)
         {
-            var errorList = Task.Run(() => apiClient.ErrorLog.GetList(pageIndex, pageSize, ApplicationName)).Result;
+            var accessToken = HttpContext.Current.User.GetAccessToken();
+
+            var errorList = Task.Run(() => apiClient.ErrorLog.GetList(accessToken, pageIndex, pageSize, ApplicationName)).Result;
 
             foreach (var errorData in errorList.Errors)
             {
