@@ -10,11 +10,16 @@
     using Microsoft.AspNet.Identity;
     using Prsd.Core.Autofac;
     using RequestHandlers;
+    using Services;
 
     public class AutofacBootstrapper
     {
-        public static IContainer Initialize(ContainerBuilder builder, HttpConfiguration config)
+        public static IContainer Initialize(ContainerBuilder builder, HttpConfiguration config, ConfigurationService configurationService)
         {
+            // Config
+            builder.Register(c => configurationService).As<ConfigurationService>().SingleInstance();
+            builder.Register(c => configurationService.CurrentConfiguration).As<AppConfiguration>().SingleInstance();
+
             // Register all controllers
             builder.RegisterApiControllers(typeof(Startup).Assembly);
 
@@ -31,6 +36,7 @@
             builder.RegisterModule(new RequestHandlerModule());
             builder.RegisterModule(new EntityFrameworkModule());
             builder.RegisterModule(new DocumentGeneratorModule());
+            builder.RegisterModule(new JobsModule(configurationService.CurrentConfiguration.ConnectionString));
 
             // http://www.talksharp.com/configuring-autofac-to-work-with-the-aspnet-identity-framework-in-mvc-5
             builder.RegisterType<IwsIdentityContext>().AsSelf().InstancePerRequest();

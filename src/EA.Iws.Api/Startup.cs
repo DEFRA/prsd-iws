@@ -11,6 +11,8 @@ namespace EA.Iws.Api
     using Autofac;
     using Autofac.Integration.WebApi;
     using Elmah.Contrib.WebApi;
+    using Hangfire;
+    using Hangfire.SqlServer;
     using IdentityServer3.AccessTokenValidation;
     using IdentityServer3.Core.Configuration;
     using IdSrv;
@@ -41,13 +43,11 @@ namespace EA.Iws.Api
             // Autofac
             var builder = new ContainerBuilder();
             builder.Register(c => app.GetDataProtectionProvider()).InstancePerRequest();
-            builder.Register(c => configurationService).As<ConfigurationService>().SingleInstance();
-            builder.Register(c => configurationService.CurrentConfiguration).As<AppConfiguration>().SingleInstance();
             builder.Register(c => HttpContext.Current.GetOwinContext().Authentication).InstancePerRequest();
             builder.Register(c => Log.Logger).As<ILogger>().SingleInstance();
             builder.RegisterType<ElmahSqlLogger>().AsSelf().InstancePerRequest();
 
-            var container = AutofacBootstrapper.Initialize(builder, config);
+            var container = AutofacBootstrapper.Initialize(builder, config, configurationService);
 
             // Web API
             config.MapHttpAttributeRoutes();
@@ -72,6 +72,15 @@ namespace EA.Iws.Api
             app.UseClaimsTransformation(ClaimsTransformationOptionsFactory.Create());
 
             app.UseWebApi(config);
+
+            Hangfire.GlobalConfiguration.Configuration
+                .UseSqlServerStorage("Iws.DefaultConnection", GetSqlServerStorageOptions())
+                .UseAutofacActivator(container);
+
+            app.UseHangfireDashboard();
+            app.UseHangfireServer();
+
+            HangFireJobsSetup.Configure();
         }
 
         private static IdentityServerOptions GetIdentityServerOptions(IAppBuilder app, AppConfiguration config)
@@ -83,6 +92,16 @@ namespace EA.Iws.Api
             {
                 Factory = factory
             };
+        }
+
+        private static SqlServerStorageOptions GetSqlServerStorageOptions()
+        {
+            var options = new SqlServerStorageOptions
+            {
+                PrepareSchemaIfNecessary = false
+            };
+
+            return options;
         }
     }
 }

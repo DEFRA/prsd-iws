@@ -44,7 +44,7 @@
                     [OriginatingCountry],
                     [Status],
                     [EwcCodes]
-                FROM [Reports].[NotificationShipmentDataMissingShipments]
+                FROM [Reports].[NotificationShipmentDataMissingShipmentsCache]
                 WHERE [CompetentAuthorityId] = @ca
                 AND (@dateType = 'NotificationReceivedDate' and  [NotificationReceivedDate] BETWEEN @from AND @to
                      OR @dateType = 'ConsentFrom' and  [ConsentFrom] BETWEEN @from AND @to

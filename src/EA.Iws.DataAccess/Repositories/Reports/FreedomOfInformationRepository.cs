@@ -67,7 +67,7 @@
                     [ConsentTo],
                     [LocalArea]
                 FROM 
-                    [Reports].[FreedomOfInformation]
+                    [Reports].[FreedomOfInformationCache]
                 WHERE 
                     [CompetentAuthorityId] = @competentAuthority
                     AND (@chemicalComposition IS NULL OR [ChemicalCompositionTypeId] = @chemicalComposition)
