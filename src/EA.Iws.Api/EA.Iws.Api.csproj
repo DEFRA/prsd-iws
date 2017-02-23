@@ -249,6 +249,7 @@
     <Compile Include="App_Start\Modules\EmailServiceModule.cs" />
     <Compile Include="App_Start\Modules\UserContextModule.cs" />
     <Compile Include="Controllers\ErrorLogController.cs" />
+    <Compile Include="Controllers\WarmupController.cs" />
     <Compile Include="IdSrv\AspNetIdentityUserService.cs" />
     <Compile Include="IdSrv\ClaimsTransformationOptionsFactory.cs" />
     <Compile Include="Infrastructure\ElmahSqlLogger.cs" />
