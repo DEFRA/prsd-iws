@@ -23,7 +23,6 @@
                 {
                     command.CommandType = CommandType.StoredProcedure;
                     command.CommandText = "[Reports].[uspUpdateReportCache]";
-                    command.CommandTimeout = 300; // 5 minutes
 
                     await command.ExecuteNonQueryAsync();
                 }
