@@ -64,7 +64,6 @@
     <Content Include="scripts\Update\0003-Migration\Sprint1\20170118-160400-add-indexes.sql" />
     <Content Include="scripts\Update\0003-Migration\Sprint1\20170119-114000-add-indexes.sql" />
     <Content Include="scripts\Update\0003-Migration\Sprint3\20170217-094200-add-indexes.sql" />
-    <Content Include="scripts\Update\0003-Migration\Sprint3\20170221-121200-hangfire.sql" />
     <Content Include="scripts\Update\0003-Migration\Sprint3\20170222-094900-report-cache-tables.sql" />
     <Content Include="scripts\Update\0003-Migration\Sprint3\20170220-153000-add-elmah-tables.sql" />
     <Content Include="unindexed-foreign-keys.sql" />

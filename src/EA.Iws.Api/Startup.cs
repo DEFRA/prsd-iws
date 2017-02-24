@@ -11,8 +11,6 @@ namespace EA.Iws.Api
     using Autofac;
     using Autofac.Integration.WebApi;
     using Elmah.Contrib.WebApi;
-    using Hangfire;
-    using Hangfire.SqlServer;
     using IdentityServer3.AccessTokenValidation;
     using IdentityServer3.Core.Configuration;
     using IdSrv;
@@ -72,15 +70,6 @@ namespace EA.Iws.Api
             app.UseClaimsTransformation(ClaimsTransformationOptionsFactory.Create());
 
             app.UseWebApi(config);
-
-            Hangfire.GlobalConfiguration.Configuration
-                .UseSqlServerStorage("Iws.DefaultConnection", GetSqlServerStorageOptions())
-                .UseAutofacActivator(container);
-
-            app.UseHangfireDashboard();
-            app.UseHangfireServer();
-
-            HangFireJobsSetup.Configure();
         }
 
         private static IdentityServerOptions GetIdentityServerOptions(IAppBuilder app, AppConfiguration config)
@@ -92,16 +81,6 @@ namespace EA.Iws.Api
             {
                 Factory = factory
             };
-        }
-
-        private static SqlServerStorageOptions GetSqlServerStorageOptions()
-        {
-            var options = new SqlServerStorageOptions
-            {
-                PrepareSchemaIfNecessary = false
-            };
-
-            return options;
         }
     }
 }
