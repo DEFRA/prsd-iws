@@ -36,7 +36,6 @@
             builder.RegisterModule(new RequestHandlerModule());
             builder.RegisterModule(new EntityFrameworkModule());
             builder.RegisterModule(new DocumentGeneratorModule());
-            builder.RegisterModule(new JobsModule(configurationService.CurrentConfiguration.ConnectionString));
 
             // http://www.talksharp.com/configuring-autofac-to-work-with-the-aspnet-identity-framework-in-mvc-5
             builder.RegisterType<IwsIdentityContext>().AsSelf().InstancePerRequest();
