@@ -88,8 +88,6 @@
     <Compile Include="ContextBase.cs" />
     <Compile Include="ImportNotificationContext.cs" />
     <Compile Include="IwsContext.cs" />
-    <Compile Include="JobsModule.cs" />
-    <Compile Include="Jobs\UpdateReportCache.cs" />
     <Compile Include="Mappings\Common\ActivityMapping.cs" />
     <Compile Include="Mappings\Common\DateTimeOffsetRangeMapping.cs" />
     <Compile Include="Mappings\Exports\AddressBookMapping.cs" />
