@@ -13,4 +13,8 @@ GRANT SELECT ON SCHEMA::[Lookup] TO [iws_application]
 
 GRANT EXEC ON SCHEMA::[Logging] TO [iws_application]
 
+GRANT EXEC ON [ELMAH_GetErrorsXml] TO [iws_application]
+GRANT EXEC ON [ELMAH_GetErrorXml] TO [iws_application]
+GRANT EXEC ON [ELMAH_LogError] TO [iws_application]
+
 GO
