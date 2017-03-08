@@ -13,10 +13,11 @@
         @for (int i = 0; i < Model.CompetentAuthorities.Count; i++)
         {
             var label = Model.CompetentAuthorities[i].Code + " - " + Model.CompetentAuthorities[i].Name;
+            MvcHtmlString nameForThisValue = Html.NameFor(m => m.CompetentAuthorities[i].Id);
 
             <div class="form-group form-group-compound">
-                <label class="block-label">
-                    @Html.RadioButtonFor(m => m.CompetentAuthorityId, Model.CompetentAuthorities[i].Id)
+                <label class="block-label" for="@nameForThisValue">
+                    @Html.RadioButtonFor(m => m.CompetentAuthorityId, Model.CompetentAuthorities[i].Id, htmlAttributes: new { id = nameForThisValue })
                     @label
                 </label>
             </div>
