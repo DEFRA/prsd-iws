@@ -45,6 +45,8 @@
 
         function updateAuthoritiesAndExitPoints(html) {
             $("#ca-and-exit-point").html(html);
+            var $blockLabels = $(".block-label input[type='radio']");
+            new GOVUK.SelectionButtons($blockLabels);
         }
     </script>
 }
