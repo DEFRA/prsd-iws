@@ -66,6 +66,7 @@
     <Content Include="scripts\Update\0003-Migration\Sprint3\20170217-094200-add-indexes.sql" />
     <Content Include="scripts\Update\0003-Migration\Sprint3\20170222-094900-report-cache-tables.sql" />
     <Content Include="scripts\Update\0003-Migration\Sprint3\20170220-153000-add-elmah-tables.sql" />
+    <Content Include="scripts\Update\0003-Migration\Sprint3\20170411-135900-add-bank-holidays.sql" />
     <Content Include="unindexed-foreign-keys.sql" />
     <Content Include="scripts\Everytime\01-Functions\0003-Reports-PricingInfo.sql" />
     <Content Include="scripts\Everytime\03-StoredProcedures\0003-uspUpdateImportNotificationKeyDates.sql" />
