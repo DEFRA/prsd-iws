@@ -206,3 +206,7 @@ tools/xunit.runner.console/
 
 # License files
 *.lic
+
+# Cake (C# Make)
+cake-tools/*
+!cake-tools/packages.config
