@@ -278,7 +278,7 @@
     <Compile Include="Annexes\GetAnnexes.cs" />
     <Compile Include="Notification\GetNotificationIdByNumber.cs" />
     <Compile Include="Notification\GetNotificationNumber.cs" />
-    <Compile Include="Notification\GetNotificationIdAndStatusByNumber.cs" />
+    <Compile Include="Admin\GetNotificationInfo.cs" />
     <Compile Include="Movement\Receive\RecordReceiptInternal.cs" />
     <Compile Include="Notification\GetNotificationType.cs" />
     <Compile Include="Notification\GetWhatToDoNextDataForNotification.cs" />
