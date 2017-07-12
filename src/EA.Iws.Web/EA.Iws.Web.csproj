@@ -765,7 +765,6 @@
     <Content Include="Areas\NotificationApplication\Views\Home\OverviewSections\_YCodes.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\Home\OverviewSections\_IntendedQuantity.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\Home\OverviewSections\_IntendedDates.cshtml" />
-    <Content Include="Areas\AdminExportAssessment\Views\Home\_NotificationSwitcher.cshtml" />
     <Content Include="Areas\AdminExportAssessment\Views\MovementCertificate\Index.cshtml" />
     <Content Include="Areas\Admin\Views\TestEmail\Index.cshtml" />
     <Content Include="Areas\AdminExportNotificationMovements\Views\Home\Index.cshtml" />
@@ -846,7 +845,6 @@
     <Content Include="Areas\AdminExportNotificationMovements\Views\Cancel\Confirm.cshtml" />
     <Content Include="Areas\AdminExportNotificationMovements\Views\Cancel\Success.cshtml" />
     <Content Include="Areas\AdminExportNotificationMovements\Views\web.config" />
-    <Content Include="Areas\AdminExportNotificationMovements\Views\Home\_NotificationSwitcher.cshtml" />
     <Content Include="Areas\AdminExportNotificationMovements\Views\_ViewStart.cshtml" />
     <Content Include="Areas\ExportMovement\Views\Reject\Index.cshtml" />
     <Content Include="Areas\AdminExportAssessment\Views\AssignArea\Index.cshtml" />
@@ -859,7 +857,6 @@
     <Content Include="Content\iws\_details.scss" />
     <Content Include="Areas\AdminExportMovement\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\AdminExportMovement\Views\_ViewStart.cshtml" />
-    <Content Include="Areas\AdminExportMovement\Views\Home\_NotificationSwitcher.cshtml" />
     <Content Include="Areas\AdminImportAssessment\Views\web.config" />
     <Content Include="Areas\AdminImportAssessment\Views\KeyDates\Index.cshtml" />
     <Content Include="Areas\AdminImportAssessment\Views\_ViewStart.cshtml" />
@@ -1084,6 +1081,7 @@
     <Content Include="Views\Errors\_GenericError.cshtml" />
     <Content Include="Views\Shared\_IwsSepaStandardDataNotice.cshtml" />
     <Content Include="Views\Applicant\NotFound.cshtml" />
+    <Content Include="Views\Shared\_NotificationSwitcher.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -3329,6 +3327,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\AddressBook\Models\" />
+    <Folder Include="Areas\AdminExportAssessment\Views\Home\" />
+    <Folder Include="Areas\AdminExportMovement\Views\Home\" />
     <Folder Include="Areas\Admin\Views\Shared\EditorTemplates\" />
     <Folder Include="Areas\Admin\Views\SmokeTest\" />
     <Folder Include="Areas\FinancialGuarantee\ViewModels\" />
