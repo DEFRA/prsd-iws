@@ -8,7 +8,7 @@
 
     public class DownloadMovementViewModel
     {
-        public DownloadMovementViewModel(MovementTableDataRow data, NotificationType type)
+        public DownloadMovementViewModel(MovementTableDataRow data, NotificationType type, string notificationNumber)
         {
             Number = data.Number.ToString();
             Status = GetStatusDisplay(data.Status, type);
@@ -20,7 +20,11 @@
                   EnumHelper.GetShortName(data.QuantityUnits.GetValueOrDefault())
                 : "- -";
             CompletedDate = DateValue(data.CompletedDate, data.Status);
+            NotificationNumber = notificationNumber;
         }
+
+        [DisplayName("Notification number")]
+        public string NotificationNumber { get; set; }
 
         [DisplayName("Shipment number")]
         public string Number { get; set; }
