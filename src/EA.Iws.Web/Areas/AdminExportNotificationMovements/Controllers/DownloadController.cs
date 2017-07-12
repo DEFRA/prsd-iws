@@ -27,7 +27,7 @@
         {
             var notification = await mediator.SendAsync(new GetNotificationBasicInfo(id));
             var movementData = await mediator.SendAsync(new GetMovementsByNotificationId(id));
-            var data = movementData.Select(m => new DownloadMovementViewModel(m, notification.NotificationType)).ToList();
+            var data = movementData.Select(m => new DownloadMovementViewModel(m, notification.NotificationType, notification.NotificationNumber)).ToList();
 
             var filename = string.Format("movement-details-for-notification-number-{0}.xlsx", notification.NotificationNumber);
 
