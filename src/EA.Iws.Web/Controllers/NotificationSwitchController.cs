@@ -5,13 +5,13 @@
     using System.Web.Mvc;
     using Core.NotificationAssessment;
     using Core.Shared;
+    using Infrastructure.Authorization;
     using Prsd.Core.Mediator;
     using Requests.Admin;
-    using Requests.Notification;
     using ViewModels.NotificationSwitch;
     using ViewModels.Shared;
 
-    [Authorize]
+    [AuthorizeActivity(typeof(GetNotificationInfo))]
     public class NotificationSwitchController : Controller
     {
         private readonly IMediator mediator;
