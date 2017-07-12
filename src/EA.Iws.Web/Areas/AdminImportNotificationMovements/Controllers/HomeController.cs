@@ -1,14 +1,15 @@
 ﻿namespace EA.Iws.Web.Areas.AdminImportNotificationMovements.Controllers
 {
     using System;
-    using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Infrastructure.Authorization;
     using Prsd.Core.Mediator;
     using Requests.ImportMovement.Delete;
+    using Requests.ImportNotification;
     using Requests.ImportNotificationMovements;
     using ViewModels.Home;
+    using Web.ViewModels.Shared;
 
     [AuthorizeActivity(typeof(GetImportMovementsSummary))]
     [AuthorizeActivity(typeof(GetImportMovementsSummaryTable))]
@@ -35,6 +36,14 @@
             model.CanDeleteMovement = canDeleteMovement;
 
             return View(model);
-        } 
+        }
+
+        [AcceptVerbs(HttpVerbs.Get | HttpVerbs.Post)]
+        public ActionResult NotificationSwitcher(Guid id)
+        {
+            var response = Task.Run(() => mediator.SendAsync(new GetNotificationDetails(id))).Result;
+
+            return PartialView("_NotificationSwitcher", new NotificationSwitcherViewModel(response.NotificationNumber));
+        }
     }
 }

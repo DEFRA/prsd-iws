@@ -1342,6 +1342,7 @@
     <Compile Include="Areas\AdminImportAssessment\Controllers\DeleteTransactionController.cs" />
     <Compile Include="Areas\AdminImportAssessment\Controllers\FinancialGuaranteeDatesController.cs" />
     <Compile Include="Areas\AdminImportAssessment\Controllers\FinancialGuaranteeDecisionController.cs" />
+    <Compile Include="Areas\AdminImportAssessment\Controllers\HomeController.cs" />
     <Compile Include="Areas\AdminImportAssessment\Controllers\KeyDatesController.cs" />
     <Compile Include="Areas\AdminImportAssessment\Controllers\KeyDatesOverrideController.cs" />
     <Compile Include="Areas\AdminImportAssessment\Controllers\MarkAsInterimController.cs" />
@@ -3329,6 +3330,7 @@
     <Folder Include="Areas\AddressBook\Models\" />
     <Folder Include="Areas\AdminExportAssessment\Views\Home\" />
     <Folder Include="Areas\AdminExportMovement\Views\Home\" />
+    <Folder Include="Areas\AdminImportAssessment\Views\Home\" />
     <Folder Include="Areas\Admin\Views\Shared\EditorTemplates\" />
     <Folder Include="Areas\Admin\Views\SmokeTest\" />
     <Folder Include="Areas\FinancialGuarantee\ViewModels\" />

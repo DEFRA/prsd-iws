@@ -9,6 +9,7 @@
     using Prsd.Core.Mediator;
     using Requests.ImportNotification;
     using ViewModels.Home;
+    using Web.ViewModels.Shared;
 
     [AuthorizeActivity(typeof(GetSummary))]
     public class HomeController : Controller
@@ -38,6 +39,14 @@
             };
 
             return View(model);
+        }
+
+        [AcceptVerbs(HttpVerbs.Get | HttpVerbs.Post)]
+        public ActionResult NotificationSwitcher(Guid id)
+        {
+            var response = Task.Run(() => mediator.SendAsync(new GetNotificationDetails(id))).Result;
+
+            return PartialView("_NotificationSwitcher", new NotificationSwitcherViewModel(response.NotificationNumber));
         }
     }
 }
