@@ -73,8 +73,10 @@ namespace EA.Iws.Core.Admin.Reports
 
         public string IntendedQuantityUnit { get; set; }
 
+        [DisplayName("Consent valid from")]
         public DateTime? ConsentFrom { get; set; }
 
+        [DisplayName("Consent valid to")]
         public DateTime? ConsentTo { get; set; }
 
         [DisplayName("Area")]
