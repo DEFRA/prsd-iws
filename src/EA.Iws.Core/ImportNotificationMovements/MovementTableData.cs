@@ -1,7 +1,6 @@
 ﻿namespace EA.Iws.Core.ImportNotificationMovements
 {
     using System;
-    using ImportMovement;
     using Shared;
 
     public class MovementTableData
