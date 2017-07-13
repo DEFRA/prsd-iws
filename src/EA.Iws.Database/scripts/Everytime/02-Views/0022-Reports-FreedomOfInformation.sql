@@ -18,8 +18,10 @@ AS
         P.[PostalCode] AS [ProducerPostalCode],
         SE_EEP.[Name] AS [PointOfExport],
         SI_EEP.[Name] AS [PointOfEntry],
+        SE_C.[Name] AS [ExportCountryName],
         SI_C.[Name] AS [ImportCountryName],
         WT.[ChemicalCompositionType] AS [ChemicalCompositionTypeId],
+        COALESCE(BaselCodeInfo.[Code] + ' - ' + BaselCodeInfo.[Description], 'Not listed') AS [BaselOecdCode],
         CASE WHEN WT.[ChemicalCompositionType] = 4
             THEN 'Other - ' + WT.[ChemicalCompositionName]
             ELSE CCT.[Description] END AS [NameOfWaste],
@@ -107,10 +109,14 @@ AS
     INNER JOIN [Notification].[EntryOrExitPoint] SE_EEP ON SE_EEP.Id = SE.ExitPointId
     INNER JOIN [Notification].[EntryOrExitPoint] SI_EEP ON SI_EEP.Id = SI.EntryPointId
     INNER JOIN [Lookup].[Country] SI_C ON SI_C.Id = SI.CountryId
+    INNER JOIN [Lookup].[Country] SE_C ON SE_C.Id = SE.CountryId
     INNER JOIN [Notification].[WasteType] WT ON WT.NotificationId = N.Id
     INNER JOIN [Lookup].[ChemicalCompositionType] CCT ON CCT.Id = WT.ChemicalCompositionType
     INNER JOIN [Notification].[ShipmentInfo] S ON S.NotificationId = N.Id
     INNER JOIN [Lookup].[ShipmentQuantityUnit] SU ON SU.Id = S.Units
+    LEFT JOIN [Notification].[WasteCodeInfo] BaselCode
+        LEFT JOIN [Lookup].[WasteCode] BaselCodeInfo ON BaselCode.WasteCodeId = BaselCodeInfo.Id
+    ON BaselCode.NotificationId = N.Id AND BaselCode.CodeType IN (1, 2)
     LEFT JOIN [Notification].[Consent] C ON C.NotificationApplicationId = N.Id
     LEFT JOIN [Notification].[Consultation] CON 
         INNER JOIN [Lookup].[LocalArea] LA ON CON.LocalAreaId = LA.Id
@@ -135,8 +141,10 @@ AS
         P.[PostalCode] AS [ProducerPostalCode],
         SE_EEP.[Name] AS [PointOfExport],
         SI_EEP.[Name] AS [PointOfEntry],
+        SE_C.[Name] AS [ExportCountryName],
         SI_C.[Name] AS [ImportCountryName],
         WT.[ChemicalCompositionType] AS [ChemicalCompositionTypeId],
+        COALESCE(WasteCodeInfo.[Code] + ' - ' + WasteCodeInfo.[Description], 'Not listed') AS [BaselOecdCode],
         CASE WHEN WT.[ChemicalCompositionType] = 4
             THEN 'Other - ' + WT.[Name]
             ELSE CCT.[Description] END AS [NameOfWaste],
@@ -226,10 +234,15 @@ AS
         SELECT TOP 1 [Id], [Name], [IsoAlpha2Code] 
         FROM [Lookup].[Country] 
         WHERE IsoAlpha2Code = 'GB' ) AS SI_C ON 1 = 1
+    INNER JOIN [Lookup].[Country] SE_C ON SE_C.Id = SE.CountryId
     INNER JOIN [ImportNotification].[WasteType] WT ON WT.ImportNotificationId = N.Id
     INNER JOIN [Lookup].[ChemicalCompositionType] CCT ON CCT.Id = WT.ChemicalCompositionType
     INNER JOIN [ImportNotification].[Shipment] S ON S.ImportNotificationId = N.Id
     INNER JOIN [Lookup].[ShipmentQuantityUnit] SU ON SU.Id = S.Units
+    LEFT JOIN [ImportNotification].[WasteType] WasteType
+        INNER JOIN [ImportNotification].[WasteCode] WasteCode ON WasteType.Id = WasteCode.WasteTypeId
+        LEFT JOIN [Lookup].[WasteCode] WasteCodeInfo ON WasteCode.WasteCodeId = WasteCodeInfo.Id
+    ON WasteType.ImportNotificationId = N.Id AND WasteCodeInfo.CodeType IN (1, 2)
     LEFT JOIN [ImportNotification].[Consent] C ON C.NotificationId = N.Id
     LEFT JOIN [ImportNotification].[Consultation] CON 
         INNER JOIN [Lookup].[LocalArea] LA ON CON.LocalAreaId = LA.Id

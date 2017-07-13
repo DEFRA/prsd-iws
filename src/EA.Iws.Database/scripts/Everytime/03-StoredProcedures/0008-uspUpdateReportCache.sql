@@ -46,7 +46,9 @@ BEGIN
           ,[MovementReceivedDate]
           ,[MovementCompletedDate]
           ,[MovementQuantityReceviedUnitId]
-          ,[MovementQuantityReceived] )
+          ,[MovementQuantityReceived]
+          ,[BaselOecdCode]
+          ,[ExportCountryName] )
     SELECT [NotificationNumber]
           ,[ImportOrExport]
           ,[IsInterim]
@@ -84,6 +86,8 @@ BEGIN
           ,[MovementCompletedDate]
           ,[MovementQuantityReceviedUnitId]
           ,[MovementQuantityReceived]
+          ,[BaselOecdCode]
+          ,[ExportCountryName]
       FROM [Reports].[FreedomOfInformation];
 
     INSERT INTO [Reports].[NotificationShipmentDataMissingShipmentsCache] (
