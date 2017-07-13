@@ -4,12 +4,14 @@
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Core.NotificationAssessment;
+    using Core.Shared;
+    using Infrastructure.Authorization;
     using Prsd.Core.Mediator;
-    using Requests.Notification;
+    using Requests.Admin;
     using ViewModels.NotificationSwitch;
     using ViewModels.Shared;
 
-    [Authorize]
+    [AuthorizeActivity(typeof(GetNotificationInfo))]
     public class NotificationSwitchController : Controller
     {
         private readonly IMediator mediator;
@@ -30,11 +32,20 @@
                 return RedirectToAction("Index", "Home", new { area = "Admin" });
             }
 
-            var idAndStatus = await mediator.SendAsync(new GetNotificationIdAndStatusByNumber(model.Number));
+            var info = await mediator.SendAsync(new GetNotificationInfo(model.Number));
 
-            if (idAndStatus.Item1.HasValue && idAndStatus.Item2 != NotificationStatus.NotSubmitted)
+            if (info.IsExistingNotification)
             {
-                return RedirectToAction("Index", "Home", new { id = idAndStatus.Item1, area = "AdminExportAssessment" });
+                if (info.TradeDirection == TradeDirection.Export &&
+                    info.ExportNotificationStatus != NotificationStatus.NotSubmitted)
+                {
+                    return RedirectToAction("Index", "Home", new { id = info.Id, area = "AdminExportAssessment" });
+                }
+
+                if (info.TradeDirection == TradeDirection.Import)
+                {
+                    return RedirectToAction("Index", "Home", new { id = info.Id, area = "ImportNotification" });
+                }
             }
 
             return RedirectToAction("NotFound", new { number = model.Number });
