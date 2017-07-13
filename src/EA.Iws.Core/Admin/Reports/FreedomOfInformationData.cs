@@ -33,8 +33,14 @@ namespace EA.Iws.Core.Admin.Reports
         [DisplayName("Point of Entry")]
         public string PointOfEntry { get; set; }
 
+        [DisplayName("Country of Dispatch")]
+        public string ExportCountryName { get; set; }
+
         [DisplayName("Country of Destination")]
         public string ImportCountryName { get; set; }
+
+        [DisplayName("Basel/OECD code and description")]
+        public string BaselOecdCode { get; set; }
 
         [DisplayName("Waste Type")]
         public string NameOfWaste { get; set; }
