@@ -13,6 +13,9 @@ namespace EA.Iws.Core.Admin.Reports
         [DisplayName("Interim / non-interim")]
         public string Interim { get; set; }
 
+        [DisplayName("Basel/OECD Code and Description")]
+        public string BaselOecdCode { get; set; }
+
         [DisplayName("Notifier")]
         public string NotifierName { get; set; }
 
@@ -38,9 +41,6 @@ namespace EA.Iws.Core.Admin.Reports
 
         [DisplayName("Country of Destination")]
         public string ImportCountryName { get; set; }
-
-        [DisplayName("Basel/OECD code and description")]
-        public string BaselOecdCode { get; set; }
 
         [DisplayName("Waste Type")]
         public string NameOfWaste { get; set; }
@@ -79,10 +79,10 @@ namespace EA.Iws.Core.Admin.Reports
 
         public string IntendedQuantityUnit { get; set; }
 
-        [DisplayName("Consent valid from")]
+        [DisplayName("Consent Valid From")]
         public DateTime? ConsentFrom { get; set; }
 
-        [DisplayName("Consent valid to")]
+        [DisplayName("Consent Valid To")]
         public DateTime? ConsentTo { get; set; }
 
         [DisplayName("Area")]
