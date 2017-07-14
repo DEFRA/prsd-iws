@@ -116,6 +116,15 @@ namespace EA.Iws.Web.Areas.AdminExportAssessment.ViewModels.PaymentDetails {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Please enter a comment.
+        /// </summary>
+        public static string CommentsRequired {
+            get {
+                return ResourceManager.GetString("CommentsRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Date received.
         /// </summary>
         public static string DateLabel {

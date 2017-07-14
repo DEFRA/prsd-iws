@@ -33,6 +33,7 @@
         public OptionalDateInputViewModel RefundDate { get; set; }
 
         [Display(Name = "CommentsLabel", ResourceType = typeof(RefundDetailsViewModelResources))]
+        [Required(ErrorMessageResourceName = "CommentsRequired", ErrorMessageResourceType = typeof(RefundDetailsViewModelResources))]
         public string RefundComments { get; set; }
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
