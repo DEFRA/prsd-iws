@@ -19,5 +19,7 @@
         public const string CanEditAddressBook = "Can Edit Address Book";
 
         public const string CanViewSearchResults = "Can View Search Results";
+
+        public const string CanReadImportExportNotificationData = "Can Read Import Export Notification Data";
     }
 }

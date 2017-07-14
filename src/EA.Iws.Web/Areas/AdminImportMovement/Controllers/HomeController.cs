@@ -9,7 +9,9 @@
     using Requests.ImportMovement.CompletedReceipt;
     using Requests.ImportMovement.Receipt;
     using Requests.ImportMovement.Reject;
+    using Requests.ImportNotification;
     using ViewModels.Home;
+    using Web.ViewModels.Shared;
 
     [AuthorizeActivity(typeof(GetImportMovementReceiptAndRecoveryData))]
     public class HomeController : Controller
@@ -77,6 +79,14 @@
         public ActionResult Cancelled(Guid id, Guid notificationId)
         {
             return View(notificationId);
+        }
+
+        [AcceptVerbs(HttpVerbs.Get | HttpVerbs.Post)]
+        public ActionResult NotificationSwitcher(Guid id)
+        {
+            var response = Task.Run(() => mediator.SendAsync(new GetNotificationDetails(id))).Result;
+
+            return PartialView("_NotificationSwitcher", new NotificationSwitcherViewModel(response.NotificationNumber));
         }
     } 
 }

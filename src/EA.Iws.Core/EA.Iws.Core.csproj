@@ -52,6 +52,7 @@
     <Compile Include="Admin\ApprovalAction.cs" />
     <Compile Include="Admin\ChangeUserData.cs" />
     <Compile Include="Admin\ExportNotificationOwnerDisplay.cs" />
+    <Compile Include="Admin\NotificationInfo.cs" />
     <Compile Include="Admin\Reports\BlanketBondsData.cs" />
     <Compile Include="Admin\Reports\ExportMovementsData.cs" />
     <Compile Include="Admin\Reports\ImportStatsData.cs" />

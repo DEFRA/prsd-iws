@@ -515,7 +515,7 @@
     <Compile Include="Notification\GeneratePostageLabelHandler.cs" />
     <Compile Include="Annexes\GetAnnexesHandler.cs" />
     <Compile Include="Notification\CreateAnnexCollection.cs" />
-    <Compile Include="Notification\GetNotificationIdAndStatusByNumberHandler.cs" />
+    <Compile Include="Admin\GetNotificationInfoHandler.cs" />
     <Compile Include="Notification\GetNotificationIdByNumberHandler.cs" />
     <Compile Include="Notification\GetNotificationNumberHandler.cs" />
     <Compile Include="Notification\GetNotificationOverviewInternalHandler.cs" />
