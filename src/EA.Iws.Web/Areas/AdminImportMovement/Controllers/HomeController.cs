@@ -5,6 +5,7 @@
     using System.Web.Mvc;
     using Infrastructure.Authorization;
     using Prsd.Core.Mediator;
+    using Requests.ImportMovement;
     using Requests.ImportMovement.Capture;
     using Requests.ImportMovement.CompletedReceipt;
     using Requests.ImportMovement.Receipt;
@@ -84,7 +85,8 @@
         [AcceptVerbs(HttpVerbs.Get | HttpVerbs.Post)]
         public ActionResult NotificationSwitcher(Guid id)
         {
-            var response = Task.Run(() => mediator.SendAsync(new GetNotificationDetails(id))).Result;
+            var notificationId = Task.Run(() => mediator.SendAsync(new GetNotificationIdByMovementId(id))).Result;
+            var response = Task.Run(() => mediator.SendAsync(new GetNotificationDetails(notificationId))).Result;
 
             return PartialView("_NotificationSwitcher", new NotificationSwitcherViewModel(response.NotificationNumber));
         }

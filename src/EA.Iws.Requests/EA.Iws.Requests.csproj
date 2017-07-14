@@ -127,6 +127,7 @@
     <Compile Include="ImportMovement\CompletedReceipt\RecordCompletedReceipt.cs" />
     <Compile Include="ImportMovement\Delete\DeleteMovement.cs" />
     <Compile Include="ImportMovement\Edit\SetImportMovementDates.cs" />
+    <Compile Include="ImportMovement\GetNotificationIdByMovementId.cs" />
     <Compile Include="ImportMovement\Receipt\RecordReceipt.cs" />
     <Compile Include="ImportMovement\Reject\RecordRejection.cs" />
     <Compile Include="ImportNotificationAssessment\Consent.cs" />
