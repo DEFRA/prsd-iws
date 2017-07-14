@@ -135,6 +135,9 @@
   <data name="CommentsLengthError" xml:space="preserve">
     <value>The maximum length of the comments is 500 characters</value>
   </data>
+  <data name="CommentsRequired" xml:space="preserve">
+    <value>Please enter a comment</value>
+  </data>
   <data name="DateLabel" xml:space="preserve">
     <value>Date received</value>
   </data>

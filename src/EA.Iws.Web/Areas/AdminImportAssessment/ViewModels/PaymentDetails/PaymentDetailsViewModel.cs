@@ -25,6 +25,7 @@
         public string ReceiptNumber { get; set; }
 
         [Display(Name = "Comments", ResourceType = typeof(PaymentDetailsViewModelResources))]
+        [Required(ErrorMessageResourceName = "CommentsRequired", ErrorMessageResourceType = typeof(PaymentDetailsViewModelResources))]
         public string PaymentComments { get; set; }
         
         public SelectList PaymentMethodsList

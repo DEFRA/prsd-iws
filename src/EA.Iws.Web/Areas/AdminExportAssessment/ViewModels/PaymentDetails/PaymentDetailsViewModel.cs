@@ -38,7 +38,8 @@
         public OptionalDateInputViewModel PaymentDate { get; set; }
         
         [Display(Name = "CommentsLabel", ResourceType = typeof(PaymentDetailsViewModelResources))]
-        public string Comments { get; set; }
+        [Required(ErrorMessageResourceName = "CommentsRequired", ErrorMessageResourceType = typeof(PaymentDetailsViewModelResources))]
+        public string PaymentComments { get; set; }
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
@@ -54,7 +55,7 @@
                 results.Add(new ValidationResult(PaymentDetailsViewModelResources.ReceiptRequiredError, new[] { "Receipt" }));
             }
             
-            if (Comments != null && Comments.Length > 500)
+            if (PaymentComments != null && PaymentComments.Length > 500)
             {
                 results.Add(new ValidationResult(PaymentDetailsViewModelResources.CommentsLengthError, new[] { "Comments" }));
             }

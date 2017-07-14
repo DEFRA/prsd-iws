@@ -125,6 +125,15 @@ namespace EA.Iws.Web.Areas.AdminImportAssessment.ViewModels.RefundDetails {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Please enter a comment.
+        /// </summary>
+        public static string CommentsRequired {
+            get {
+                return ResourceManager.GetString("CommentsRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Date refunded.
         /// </summary>
         public static string Date {

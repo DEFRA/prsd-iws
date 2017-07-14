@@ -48,10 +48,10 @@
 
     <div class="grid-row">
         <div class="column-two-thirds">
-            <div class="form-group @Html.Gds().FormGroupClass(m => m.Comments)">
-                @Html.Gds().LabelFor(m => m.Comments)
-                @Html.Gds().ValidationMessageFor(m => m.Comments)
-                @Html.TextAreaFor(m => m.Comments, new { @MaxLength = 500, @style = "width: 100%; height: 200px", @title = PaymentDetailsViewModelResources.CommentsLabel })
+            <div class="form-group @Html.Gds().FormGroupClass(m => m.PaymentComments)">
+                @Html.Gds().LabelFor(m => m.PaymentComments)
+                @Html.Gds().ValidationMessageFor(m => m.PaymentComments)
+                @Html.TextAreaFor(m => m.PaymentComments, new { @MaxLength = 500, @style = "width: 100%; height: 200px", @title = PaymentDetailsViewModelResources.CommentsLabel })
             </div>
         </div>
     </div>

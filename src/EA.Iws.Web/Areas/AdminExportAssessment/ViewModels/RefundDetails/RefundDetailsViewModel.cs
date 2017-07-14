@@ -23,7 +23,8 @@
         public OptionalDateInputViewModel RefundDate { get; set; }
 
         [Display(Name = "CommentsLabel", ResourceType = typeof(RefundDetailsViewModelResources))]
-        public string Comments { get; set; }
+        [Required(ErrorMessageResourceName = "CommentsRequired", ErrorMessageResourceType = typeof(RefundDetailsViewModelResources))]
+        public string RefundComments { get; set; }
 
         public RefundDetailsViewModel()
         {
@@ -34,7 +35,7 @@
         {
             var results = new List<ValidationResult>();
 
-            if (Comments != null && Comments.Length > 500)
+            if (RefundComments != null && RefundComments.Length > 500)
             {
                 results.Add(new ValidationResult(RefundDetailsViewModelResources.CommentsLengthError, new[] { "Comments" }));
             }
