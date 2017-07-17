@@ -22,6 +22,7 @@
         private static readonly Guid NotificationId = new Guid("70C125C6-3B69-4B96-84E9-CE84E78C1BB4");
         private static readonly CreateViewModel Model = new CreateViewModel
         {
+            Number = 9,
             ActualShipmentDate = new OptionalDateInputViewModel(new DateTime(2015, 1, 1))
         };
 
@@ -59,26 +60,6 @@
             var result = await controller.Index(notificationId, model) as RedirectToRouteResult;
 
             RouteAssert.RoutesTo(result.RouteValues, "Index", "InternalCapture", "AdminExportMovement");
-        }
-
-        [Fact]
-        public void Create_Get_RetrievesMovementNumber()
-        {
-            controller.TempData["MovementNumberKey"] = 52;
-
-            var result = controller.Create(NotificationId) as ViewResult;
-
-            var viewModel = Assert.IsType<CreateViewModel>(result.Model);
-
-            Assert.Equal(52, viewModel.Number);
-        }
-
-        [Fact]
-        public void Create_Get_CantRetrieveNumber_RedirectsToSearch()
-        {
-            var result = controller.Create(NotificationId) as RedirectToRouteResult;
-
-            RouteAssert.RoutesTo(result.RouteValues, "Index", null);
         }
 
         [Fact]

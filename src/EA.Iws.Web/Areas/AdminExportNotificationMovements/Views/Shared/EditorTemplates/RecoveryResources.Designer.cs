@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace EA.Iws.Web.Areas.AdminExportNotificationMovements.Controllers {
+namespace EA.Iws.Web.Areas.AdminExportNotificationMovements.Views.Shared.EditorTemplates {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace EA.Iws.Web.Areas.AdminExportNotificationMovements.Controllers {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class CaptureMovementControllerResources {
+    public class RecoveryResources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal CaptureMovementControllerResources() {
+        internal RecoveryResources() {
         }
         
         /// <summary>
@@ -39,8 +39,8 @@ namespace EA.Iws.Web.Areas.AdminExportNotificationMovements.Controllers {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EA.Iws.Web.Areas.AdminExportNotificationMovements.Controllers.CaptureMovementCont" +
-                            "rollerResources", typeof(CaptureMovementControllerResources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EA.Iws.Web.Areas.AdminExportMovement.Views.Shared.EditorTemplates.RecoveryResourc" +
+                            "es", typeof(RecoveryResources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -62,20 +62,20 @@ namespace EA.Iws.Web.Areas.AdminExportNotificationMovements.Controllers {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Shipment Number exists. Please enter a valid number.
+        ///   Looks up a localized string similar to {0} date.
         /// </summary>
-        public static string NumberExists {
+        public static string MainHeading {
             get {
-                return ResourceManager.GetString("NumberExists", resourceCulture);
+                return ResourceManager.GetString("MainHeading", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This movement could not be created please try recording the shipment again.
+        ///   Looks up a localized string similar to When was the waste {0}?.
         /// </summary>
-        public static string SaveUnsuccessful {
+        public static string RecoveryDate {
             get {
-                return ResourceManager.GetString("SaveUnsuccessful", resourceCulture);
+                return ResourceManager.GetString("RecoveryDate", resourceCulture);
             }
         }
     }
