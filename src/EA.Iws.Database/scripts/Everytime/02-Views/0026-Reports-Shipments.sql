@@ -7,11 +7,13 @@ AS
     
     SELECT	
         M.NotificationId,
+        'Export' AS [ImportOrExport],
         REPLACE(N.NotificationNumber, ' ', '') AS NotificationNumber,
         N.CompetentAuthority AS CompetentAuthorityId,
         E.Name AS Exporter,
         I.Name AS Importer,
         F.Name AS Facility,
+        COALESCE(BaselCodeInfo.[Code] + ' - ' + BaselCodeInfo.[Description], 'Not listed') AS [BaselOecdCode],
         M.Number AS ShipmentNumber,
         M.Date AS ActualDateOfShipment,
         C.[From] AS [ConsentFrom],
@@ -43,7 +45,37 @@ AS
                 WHERE WCI.NotificationId = M.NotificationId AND WC.CodeType = 3
                 order by 1
                 FOR XML PATH('')
-                ), 1, 1, '' ) AS [EwcCodes]
+                ), 1, 1, '' ) AS [EwcCodes],
+        STUFF(( SELECT ', ' + O.Name AS [text()]
+            FROM [Notification].[OperationCodes] OC
+            INNER JOIN [Lookup].[OperationCode] O ON OC.OperationCode = O.Id
+            WHERE OC.NotificationId = N.Id
+            ORDER BY O.Id
+            FOR XML PATH('')
+            ), 1, 1, '' ) AS OperationCodes,
+        STUFF(( SELECT ', ' + WC.Code AS [text()]
+            FROM [Notification].[WasteCodeInfo] WCI
+            LEFT JOIN [Lookup].[WasteCode] WC ON WCI.WasteCodeId = WC.Id
+            WHERE WCI.NotificationId = N.Id AND WC.CodeType = 4
+            order by 1
+            FOR XML PATH('')
+            ), 1, 1, '' ) AS [YCode],
+        STUFF(( SELECT ', ' + WC.Code AS [text()]
+            FROM [Notification].[WasteCodeInfo] WCI
+            LEFT JOIN [Lookup].[WasteCode] WC ON WCI.WasteCodeId = WC.Id
+            WHERE WCI.NotificationId = N.Id AND WC.CodeType = 5
+            order by 1
+            FOR XML PATH('')
+            ), 1, 1, '' ) AS [HCode],
+        STUFF(( SELECT ', ' + WC.Code AS [text()]
+            FROM [Notification].[WasteCodeInfo] WCI
+            LEFT JOIN [Lookup].[WasteCode] WC ON WCI.WasteCodeId = WC.Id
+            WHERE WCI.NotificationId = N.Id AND WC.CodeType = 6
+            order by 1
+            FOR XML PATH('')
+            ), 1, 1, '' ) AS [UNClass]
+        
+        
     
     FROM [Notification].[Movement] AS M
 
@@ -112,15 +144,21 @@ AS
     INNER JOIN	[Notification].[NotificationDates] AS ND
     ON			ND.[NotificationAssessmentId] = NA.Id
 
+    LEFT JOIN   [Notification].[WasteCodeInfo] BaselCode
+                LEFT JOIN [Lookup].[WasteCode] BaselCodeInfo ON BaselCode.WasteCodeId = BaselCodeInfo.Id
+    ON          BaselCode.NotificationId = N.Id AND BaselCode.CodeType IN (1, 2)
+
     UNION ALL
 
     SELECT	
         M.NotificationId,
+        'Import' AS [ImportOrExport],
         REPLACE(N.NotificationNumber, ' ', '') AS NotificationNumber,
         N.CompetentAuthority AS CompetentAuthorityId,
         E.Name AS Exporter,
         I.Name AS Importer,
         F.Name AS Facility,
+        COALESCE(WasteCodeInfo.[Code] + ' - ' + WasteCodeInfo.[Description], 'Not listed') AS [BaselOecdCode],
         M.Number AS ShipmentNumber,
         M.ActualShipmentDate AS ActualDateOfShipment,
         C.[From] AS [ConsentFrom],
@@ -152,7 +190,39 @@ AS
                 WHERE WT.ImportNotificationId = M.NotificationId AND WC.CodeType = 3
                 order by 1
                 FOR XML PATH('')
-                ), 1, 1, '' ) AS [EwcCodes]
+                ), 1, 1, '' ) AS [EwcCodes],
+        STUFF(( SELECT ', ' + O.Name AS [text()]
+            FROM [ImportNotification].[WasteOperation] WO
+            INNER JOIN [ImportNotification].[OperationCodes] OC ON OC.WasteOperationId = WO.Id
+            LEFT JOIN [Lookup].[OperationCode] O ON OC.OperationCode = O.Id
+            WHERE WO.ImportNotificationId = N.Id
+            ORDER BY O.Id
+            FOR XML PATH('')
+            ), 1, 1, '' ) AS OperationCodes,
+        STUFF(( SELECT ', ' + WC.Code AS [text()]
+            FROM [ImportNotification].[WasteType] WT
+            INNER JOIN [ImportNotification].[WasteCode] WCI ON WT.Id = WCI.WasteTypeId
+            LEFT JOIN [Lookup].[WasteCode] WC ON WCI.WasteCodeId = WC.Id
+            WHERE WT.ImportNotificationId = N.Id AND WC.CodeType = 4
+            order by 1
+            FOR XML PATH('')
+            ), 1, 1, '' ) AS [YCode],
+        STUFF(( SELECT ', ' + WC.Code AS [text()]
+            FROM [ImportNotification].[WasteType] WT
+            INNER JOIN [ImportNotification].[WasteCode] WCI ON WT.Id = WCI.WasteTypeId
+            LEFT JOIN [Lookup].[WasteCode] WC ON WCI.WasteCodeId = WC.Id
+            WHERE WT.ImportNotificationId = N.Id AND WC.CodeType = 5
+            order by 1
+            FOR XML PATH('')
+            ), 1, 1, '' ) AS [HCode],
+        STUFF(( SELECT ', ' + WC.Code AS [text()]
+            FROM [ImportNotification].[WasteType] WT
+            INNER JOIN [ImportNotification].[WasteCode] WCI ON WT.Id = WCI.WasteTypeId
+            INNER JOIN [Lookup].[WasteCode] WC ON WCI.WasteCodeId = WC.Id
+            WHERE WT.ImportNotificationId = N.Id AND WC.CodeType = 6
+            order by 1
+            FOR XML PATH('')
+            ), 1, 1, '' ) AS [UNClass]
     
     FROM [ImportNotification].[Movement] AS M
 
@@ -217,5 +287,10 @@ AS
 
     INNER JOIN	[ImportNotification].[NotificationDates] AS ND
     ON			ND.[NotificationAssessmentId] = NA.Id
+
+    LEFT JOIN   [ImportNotification].[WasteType] WasteType
+                INNER JOIN [ImportNotification].[WasteCode] WasteCode ON WasteType.Id = WasteCode.WasteTypeId
+                LEFT JOIN [Lookup].[WasteCode] WasteCodeInfo ON WasteCode.WasteCodeId = WasteCodeInfo.Id
+    ON			WasteType.ImportNotificationId = N.Id AND WasteCodeInfo.CodeType IN (1, 2)
 
 GO

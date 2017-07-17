@@ -3,15 +3,19 @@ namespace EA.Iws.Domain.Reports
     using System;
     using Core.Shared;
 
-    public class MissingShipment
+    public class Shipment
     {
         public string NotificationNumber { get; protected set; }
+
+        public string ImportOrExport { get; protected set; }
 
         public string Exporter { get; protected set; }
 
         public string Importer { get; protected set; }
 
         public string Facility { get; protected set; }
+
+        public string BaselOecdCode { get; protected set; }
 
         public int ShipmentNumber { get; protected set; }
 
@@ -50,5 +54,13 @@ namespace EA.Iws.Domain.Reports
         public string Status { get; protected set; }
 
         public string EwcCodes { get; protected set; }
+
+        public string OperationCodes { get; protected set; }
+
+        public string YCode { get; protected set; }
+
+        public string HCode { get; protected set; }
+
+        public string UNClass { get; protected set; }
     }
 }

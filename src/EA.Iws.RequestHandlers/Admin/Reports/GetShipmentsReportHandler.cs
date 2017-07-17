@@ -13,12 +13,12 @@
     internal class GetShipmentsReportHandler : IRequestHandler<GetShipmentsReport, ShipmentData[]>
     {
         private readonly IShipmentsRepository shipmentsRepository;
-        private readonly IMapWithParameter<MissingShipment, UKCompetentAuthority, ShipmentData> mapper;
+        private readonly IMapWithParameter<Shipment, UKCompetentAuthority, ShipmentData> mapper;
         private readonly IUserContext userContext;
         private readonly Domain.IInternalUserRepository internalUserRepository;
 
         public GetShipmentsReportHandler(IShipmentsRepository shipmentsRepository,
-            IMapWithParameter<MissingShipment, UKCompetentAuthority, ShipmentData> mapper,
+            IMapWithParameter<Shipment, UKCompetentAuthority, ShipmentData> mapper,
             IUserContext userContext,
             Domain.IInternalUserRepository internalUserRepository)
         {

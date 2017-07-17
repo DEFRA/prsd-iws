@@ -356,7 +356,7 @@
     <Compile Include="Reports\IShipmentsRepository.cs" />
     <Compile Include="Reports\IFreedomOfInformationRepository.cs" />
     <Compile Include="Reports\ImportStats.cs" />
-    <Compile Include="Reports\MissingShipment.cs" />
+    <Compile Include="Reports\Shipment.cs" />
     <Compile Include="Search\IAdvancedSearchRepository.cs" />
     <Compile Include="Security\IImportMovementAuthorization.cs" />
     <Compile Include="Security\IMovementAuthorization.cs" />

@@ -118,7 +118,13 @@ BEGIN
           ,[OriginatingCountry]
           ,[Status]
           ,[NotificationReceivedDate]
-          ,[EwcCodes] )
+          ,[EwcCodes]
+          ,[ImportOrExport]
+          ,[BaselOecdCode]
+          ,[OperationCodes]
+          ,[YCode]
+          ,[HCode]
+          ,[UNClass] )
     SELECT [NotificationId]
           ,[NotificationNumber]
           ,[CompetentAuthorityId]
@@ -147,6 +153,12 @@ BEGIN
           ,[Status]
           ,[NotificationReceivedDate]
           ,[EwcCodes]
+          ,[ImportOrExport]
+          ,[BaselOecdCode]
+          ,[OperationCodes]
+          ,[YCode]
+          ,[HCode]
+          ,[UNClass]
       FROM [Reports].[Shipments]
 
 END

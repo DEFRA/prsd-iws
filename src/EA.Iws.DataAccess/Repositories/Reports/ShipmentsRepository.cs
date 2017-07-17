@@ -17,14 +17,16 @@
             this.context = context;
         }
 
-        public async Task<IEnumerable<MissingShipment>> Get(DateTime from, DateTime to, UKCompetentAuthority competentAuthority, ShipmentsReportDates dateType)
+        public async Task<IEnumerable<Shipment>> Get(DateTime from, DateTime to, UKCompetentAuthority competentAuthority, ShipmentsReportDates dateType)
         {
-            return await context.Database.SqlQuery<MissingShipment>(
+            return await context.Database.SqlQuery<Shipment>(
                 @"SELECT 
                     [NotificationNumber],
+                    [ImportOrExport],
                     [Exporter],
                     [Importer],
                     [Facility],
+                    [BaselOecdCode],
                     [ShipmentNumber],
                     [ActualDateOfShipment],
                     [ConsentFrom],
@@ -43,7 +45,11 @@
                     [ExitPort],
                     [OriginatingCountry],
                     [Status],
-                    [EwcCodes]
+                    [EwcCodes],
+                    [OperationCodes],
+                    [YCode],
+                    [HCode],
+                    [UNClass]
                 FROM [Reports].[ShipmentsCache]
                 WHERE [CompetentAuthorityId] = @ca
                 AND (@dateType = 'NotificationReceivedDate' and  [NotificationReceivedDate] BETWEEN @from AND @to
