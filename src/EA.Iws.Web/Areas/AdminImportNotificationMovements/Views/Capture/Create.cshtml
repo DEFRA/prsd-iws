@@ -8,12 +8,44 @@
 
     <div class="column-two-thirds">
         <h1 class="heading-large">@Resource.MainHeading</h1>
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            @Html.Gds().ValidationSummary()
+            @Html.HiddenFor(m => m.LatestCurrentMovementNumber)
+            @Html.HiddenFor(m => m.NotificationId)
+            if (ViewData.ModelState.IsValid && Model.Number != null)
+            {
+                <h1 class="data-item bold-xxlarge">@string.Format(Resource.ShipmentNumber, Model.Number)</h1>
+            }
+            <div class="form-group @Html.Gds().FormGroupClass(m => m.Number)">
+                @Html.Gds().LabelFor(m => m.Number)
+                @if (Model.LatestCurrentMovementNumber == 0)
+                {
+                    @Resource.ZeroMovements
+                }
+                else
+                {
+                    @Html.Raw(string.Format(Resource.LatestNumber, Model.LatestCurrentMovementNumber))
+                }
+                @Html.Gds().ValidationMessageFor(m => m.Number)
+                @Html.Gds().TextBoxFor(m => m.Number, new { type = "number", min = 1, max = int.MaxValue })
+            </div>
 
-        <p>@string.Format(Resource.CurrentShipmentParagraph, Model.Number)</p>
 
         @Html.Partial("_Prenotify")
+            <hr class="hrline" />
 
-        @Html.ActionLink(Resource.ReturnToSummary, "Index", "Home")
+            @Html.EditorFor(m => m.Receipt)
+
+            <hr class="hrline" />
+
+            @Html.EditorFor(m => m.Recovery)
+            <hr class="hrline" />
+
+            <button class="button" type="submit">@Constants.ContinueButtonText</button>
+        }
+        @Html.ActionLink(Resource.ReturnToSummary, "Index", "Home", new { area = "AdminImportNotificationMovements", id = Model.NotificationId }, null)
     </div>
 
 

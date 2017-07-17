@@ -173,6 +173,7 @@
     <Compile Include="ImportMovement\Capture\GetImportMovementDatesHandler.cs" />
     <Compile Include="ImportMovement\Capture\GetImportMovementIdIfExistsHandler.cs" />
     <Compile Include="ImportMovement\Capture\GetImportMovementReceiptAndRecoveryDataHandler.cs" />
+    <Compile Include="ImportMovement\Capture\GetImportShipmentUnitsHandler.cs" />
     <Compile Include="ImportMovement\Capture\GetLatestMovementNumberHandler.cs" />
     <Compile Include="ImportMovement\CompletedReceipt\RecordCompletedReceiptHandler.cs" />
     <Compile Include="ImportMovement\Delete\DeleteMovementHandler.cs" />
