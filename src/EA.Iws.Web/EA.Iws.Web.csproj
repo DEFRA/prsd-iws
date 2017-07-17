@@ -972,6 +972,8 @@
     <Content Include="Areas\AdminExportNotificationMovements\Views\Documents\Index.cshtml" />
     <Content Include="Areas\AdminExportNotificationMovements\Views\Shared\EditorTemplates\ReceiptViewModel.cshtml" />
     <Content Include="Areas\AdminExportNotificationMovements\Views\Shared\EditorTemplates\RecoveryViewModel.cshtml" />
+    <Content Include="Areas\AdminImportNotificationMovements\Views\Shared\EditorTemplates\ReceiptViewModel.cshtml" />
+    <Content Include="Areas\AdminImportNotificationMovements\Views\Shared\EditorTemplates\RecoveryViewModel.cshtml" />
     <None Include="Scripts\jquery-2.1.3.intellisense.js" />
     <Content Include="Scripts\govuk\govuk-template.js" />
     <Content Include="Scripts\govuk\ie.js" />
@@ -1531,6 +1533,11 @@
     <Compile Include="Areas\AdminImportNotificationMovements\AdminImportNotificationMovementsAreaRegistration.cs" />
     <Compile Include="Areas\AdminImportNotificationMovements\Controllers\CancelController.cs" />
     <Compile Include="Areas\AdminImportNotificationMovements\Controllers\CaptureController.cs" />
+    <Compile Include="Areas\AdminImportNotificationMovements\Controllers\CaptureControllerResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CaptureControllerResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Areas\AdminImportNotificationMovements\Controllers\DeleteController.cs" />
     <Compile Include="Areas\AdminImportNotificationMovements\Controllers\DeleteControllerResources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -1553,6 +1560,18 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>CreateViewModelResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\AdminImportNotificationMovements\ViewModels\Capture\ReceiptViewModel.cs" />
+    <Compile Include="Areas\AdminImportNotificationMovements\ViewModels\Capture\ReceiptViewModelResources.Designer.cs">
+      <DependentUpon>ReceiptViewModelResources.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Areas\AdminImportNotificationMovements\ViewModels\Capture\RecoveryViewModel.cs" />
+    <Compile Include="Areas\AdminImportNotificationMovements\ViewModels\Capture\RecoveryViewModelResources.Designer.cs">
+      <DependentUpon>RecoveryViewModelResources.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Areas\AdminImportNotificationMovements\ViewModels\Capture\SearchViewModel.cs" />
     <Compile Include="Areas\AdminImportNotificationMovements\ViewModels\Capture\SearchViewModelResources.Designer.cs">
@@ -1622,6 +1641,16 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ListResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\AdminImportNotificationMovements\Views\Shared\EditorTemplates\ReceiptResources.Designer.cs">
+      <DependentUpon>ReceiptResources.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Areas\AdminImportNotificationMovements\Views\Shared\EditorTemplates\RecoveryResources.Designer.cs">
+      <DependentUpon>RecoveryResources.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\AdminExportAssessment\Controllers\ChangeNotificationOwnerController.cs" />
@@ -3638,6 +3667,10 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>RecoveryResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Areas\AdminImportNotificationMovements\Controllers\CaptureControllerResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>CaptureControllerResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Areas\AdminImportNotificationMovements\Controllers\DeleteControllerResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>DeleteControllerResources.Designer.cs</LastGenOutput>
@@ -3649,6 +3682,14 @@
     <EmbeddedResource Include="Areas\AdminImportNotificationMovements\ViewModels\Capture\CreateViewModelResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>CreateViewModelResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\AdminImportNotificationMovements\ViewModels\Capture\ReceiptViewModelResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ReceiptViewModelResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\AdminImportNotificationMovements\ViewModels\Capture\RecoveryViewModelResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>RecoveryViewModelResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\AdminImportNotificationMovements\ViewModels\Capture\SearchViewModelResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -3695,6 +3736,14 @@
     <EmbeddedResource Include="Areas\AdminImportNotificationMovements\Views\RejectedMovement\ListResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>ListResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\AdminImportNotificationMovements\Views\Shared\EditorTemplates\ReceiptResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ReceiptResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\AdminImportNotificationMovements\Views\Shared\EditorTemplates\RecoveryResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>RecoveryResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\Admin\Controllers\DeleteNotificationControllerResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

@@ -117,25 +117,7 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="CurrentShipmentParagraph" xml:space="preserve">
-    <value>Currently displaying shipment {0}</value>
-  </data>
-  <data name="LatestNumber" xml:space="preserve">
-    <value>The last shipment prenotified for this notification was {0}</value>
-  </data>
-  <data name="MainHeading" xml:space="preserve">
-    <value>Record Shipment data</value>
-  </data>
-  <data name="PageTitle" xml:space="preserve">
-    <value>Capture shipment</value>
-  </data>
-  <data name="ReturnToSummary" xml:space="preserve">
-    <value>Return to shipment summary</value>
-  </data>
-  <data name="ShipmentNumber" xml:space="preserve">
-    <value>Shipment {0}</value>
-  </data>
-  <data name="ZeroMovements" xml:space="preserve">
-    <value>So far no shipments have been prenotified for this notification</value>
+  <data name="NumberExists" xml:space="preserve">
+    <value>Shipment Number exists. Please enter a valid number</value>
   </data>
 </root>
