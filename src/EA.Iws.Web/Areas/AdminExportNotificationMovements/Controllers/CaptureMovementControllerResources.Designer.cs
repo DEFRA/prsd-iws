@@ -62,7 +62,7 @@ namespace EA.Iws.Web.Areas.AdminExportNotificationMovements.Controllers {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Shipment Number exists.Please enter a valid number.
+        ///   Looks up a localized string similar to Shipment Number exists. Please enter a valid number.
         /// </summary>
         public static string NumberExists {
             get {

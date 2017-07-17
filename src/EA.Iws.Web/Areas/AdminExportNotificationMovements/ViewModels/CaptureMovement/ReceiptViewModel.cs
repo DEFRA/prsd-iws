@@ -42,8 +42,6 @@
         {
             get
             {
-                //return new SelectList(PossibleUnits);
-
                 return new SelectList(PossibleUnits.Select(u =>
                 new KeyValuePair<string, ShipmentQuantityUnits>(EnumHelper.GetDisplayName(u), u)),
                 "Value",
@@ -52,8 +50,6 @@
         }
 
         public IList<ShipmentQuantityUnits> PossibleUnits { get; set; }
-
-        //public ShipmentQuantityUnits PossibleUnits { get; set; }
 
         public ReceiptViewModel()
         {
@@ -72,40 +68,6 @@
             }
 
             return !string.IsNullOrWhiteSpace(RejectionReason) && ReceivedDate.IsCompleted;
-        }
-
-        //public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
-        //{
-        //    //    if (WasShipmentAccepted)
-        //    //    {
-        //    //        if (!ActualQuantity.HasValue)
-        //    //        {
-        //    //            yield return new ValidationResult(ReceiptViewModelResources.QuantityRequired, new[] { "ActualQuantity" });
-        //    //        }
-        //    //        if (!Units.HasValue)
-        //    //        {
-        //    //            yield return new ValidationResult(ReceiptViewModelResources.UnitsRequired, new[] { "Units" });
-        //    //        }
-        //    //    }
-
-        //    //    if (!ReceivedDate.IsCompleted)
-        //    //    {
-        //    //        yield return new ValidationResult(ReceiptViewModelResources.ReceivedDateRequired, new[] { "ReceivedDate.Day" });
-        //    //}
-        //    if (!ActualQuantity.HasValue && ReceivedDate.IsCompleted)
-        //    {
-        //        yield return new ValidationResult(ReceiptViewModelResources.QuantityRequired, new[] { "ActualQuantity" });
-        //    }
-
-        //    if (!ReceivedDate.IsCompleted && ActualQuantity.HasValue)
-        //    {
-        //        yield return new ValidationResult(ReceiptViewModelResources.ReceivedDateRequired, new[] { "ReceivedDate.Day" });
-        //    }
-
-        //    if (!WasShipmentAccepted && string.IsNullOrWhiteSpace(RejectionReason))
-        //    {
-        //        yield return new ValidationResult(ReceiptViewModelResources.RejectReasonRequired, new[] { "RejectionReason" });
-        //    }
-        //}
+        }       
     }
 }

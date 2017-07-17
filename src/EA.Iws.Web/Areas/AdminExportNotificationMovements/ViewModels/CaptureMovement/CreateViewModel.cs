@@ -61,15 +61,15 @@
                 yield return new ValidationResult(CreateViewModelResources.PrenotificationDateRequired, 
                     new[] { "PrenotificationDate" });
             }
+          
+            if ((!Receipt.ReceivedDate.IsCompleted && Receipt.ActualQuantity.HasValue) || (!Receipt.ReceivedDate.IsCompleted && !string.IsNullOrWhiteSpace(Receipt.RejectionReason)))
+            {
+                yield return new ValidationResult(CreateViewModelResources.ReceivedDateRequired, new[] { "Receipt.ReceivedDate.Day" });
+            }
 
             if (!Receipt.ActualQuantity.HasValue && Receipt.ReceivedDate.IsCompleted)
             {
                 yield return new ValidationResult(CreateViewModelResources.QuantityRequired, new[] { "Receipt.ActualQuantity" });
-            }
-
-            if (!Receipt.ReceivedDate.IsCompleted && Receipt.ActualQuantity.HasValue)
-            {
-                yield return new ValidationResult(CreateViewModelResources.ReceivedDateRequired, new[] { "Receipt.ReceivedDate.Day" });
             }
 
             if (!Receipt.WasShipmentAccepted && string.IsNullOrWhiteSpace(Receipt.RejectionReason))

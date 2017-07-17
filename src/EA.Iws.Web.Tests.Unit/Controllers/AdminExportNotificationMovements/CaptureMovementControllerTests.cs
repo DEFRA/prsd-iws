@@ -62,26 +62,6 @@
             RouteAssert.RoutesTo(result.RouteValues, "Index", "InternalCapture", "AdminExportMovement");
         }
 
-        //[Fact]
-        //public void Create_Get_RetrievesMovementNumber()
-        //{
-        //    controller.TempData["MovementNumberKey"] = 52;
-
-        //    var result = controller.Create(NotificationId) as ViewResult;
-
-        //    var viewModel = Assert.IsType<CreateViewModel>(result.Model);
-
-        //    Assert.Equal(52, viewModel.Number);
-        //}
-
-        //[Fact]
-        //public void Create_Get_CantRetrieveNumber_RedirectsToSearch()
-        //{
-        //    var result = controller.Create(NotificationId) as RedirectToRouteResult;
-
-        //    RouteAssert.RoutesTo(result.RouteValues, "Index", null);
-        //}
-
         [Fact]
         public async Task Create_Post_Fail_ReturnsView()
         {
