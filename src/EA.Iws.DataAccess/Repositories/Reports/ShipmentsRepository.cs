@@ -8,16 +8,16 @@
     using Core.Reports;
     using Domain.Reports;
 
-    internal class MissingShipmentsRepository : IMissingShipmentsRepository
+    internal class ShipmentsRepository : IShipmentsRepository
     {
         private readonly IwsContext context;
 
-        public MissingShipmentsRepository(IwsContext context)
+        public ShipmentsRepository(IwsContext context)
         {
             this.context = context;
         }
 
-        public async Task<IEnumerable<MissingShipment>> Get(DateTime from, DateTime to, UKCompetentAuthority competentAuthority, MissingShipmentsReportDates dateType)
+        public async Task<IEnumerable<MissingShipment>> Get(DateTime from, DateTime to, UKCompetentAuthority competentAuthority, ShipmentsReportDates dateType)
         {
             return await context.Database.SqlQuery<MissingShipment>(
                 @"SELECT 
@@ -44,7 +44,7 @@
                     [OriginatingCountry],
                     [Status],
                     [EwcCodes]
-                FROM [Reports].[NotificationShipmentDataMissingShipmentsCache]
+                FROM [Reports].[ShipmentsCache]
                 WHERE [CompetentAuthorityId] = @ca
                 AND (@dateType = 'NotificationReceivedDate' and  [NotificationReceivedDate] BETWEEN @from AND @to
                      OR @dateType = 'ConsentFrom' and  [ConsentFrom] BETWEEN @from AND @to

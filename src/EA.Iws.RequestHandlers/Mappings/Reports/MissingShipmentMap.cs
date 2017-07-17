@@ -7,7 +7,7 @@
     using Domain.Reports;
     using Prsd.Core.Mapper;
 
-    internal class MissingShipmentMap : IMapWithParameter<MissingShipment, UKCompetentAuthority, MissingShipmentData>
+    internal class MissingShipmentMap : IMapWithParameter<MissingShipment, UKCompetentAuthority, ShipmentData>
     {
         private readonly IWorkingDayCalculator workingDayCalculator;
 
@@ -16,9 +16,9 @@
             this.workingDayCalculator = workingDayCalculator;
         }
 
-        public MissingShipmentData Map(MissingShipment source, UKCompetentAuthority parameter)
+        public ShipmentData Map(MissingShipment source, UKCompetentAuthority parameter)
         {
-            return new MissingShipmentData
+            return new ShipmentData
             {
                 Importer = source.Importer,
                 PrenotificationDate = source.PrenotificationDate,

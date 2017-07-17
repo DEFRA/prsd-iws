@@ -67,7 +67,7 @@
     <Compile Include="Admin\Reports\DataExportNotificationData.cs" />
     <Compile Include="Admin\Reports\ExportStatsData.cs" />
     <Compile Include="Admin\Reports\FinanceReportData.cs" />
-    <Compile Include="Admin\Reports\MissingShipmentData.cs" />
+    <Compile Include="Admin\Reports\ShipmentData.cs" />
     <Compile Include="Admin\Reports\FreedomOfInformationData.cs" />
     <Compile Include="Admin\Search\AdvancedSearchCriteria.cs" />
     <Compile Include="Admin\Search\AdvancedSearchResult.cs" />
@@ -196,7 +196,7 @@
     <Compile Include="OperationCodes\OperationCodeMetadata.cs" />
     <Compile Include="OperationCodes\OperationCodeTypeAttribute.cs" />
     <Compile Include="Reports\FoiReportDates.cs" />
-    <Compile Include="Reports\MissingShipmentsReportDates.cs" />
+    <Compile Include="Reports\ShipmentsReportDates.cs" />
     <Compile Include="Rules\MessageLevel.cs" />
     <Compile Include="Rules\RuleResult.cs" />
     <Compile Include="Shared\TransactionRecordData.cs" />

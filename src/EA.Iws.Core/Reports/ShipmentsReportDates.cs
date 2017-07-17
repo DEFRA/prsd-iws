@@ -2,7 +2,7 @@
 {
     using System.ComponentModel.DataAnnotations;
 
-    public enum MissingShipmentsReportDates
+    public enum ShipmentsReportDates
     {
         [Display(Name = "Notification received date")]
         NotificationReceivedDate,

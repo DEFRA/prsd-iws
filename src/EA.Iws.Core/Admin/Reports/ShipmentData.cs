@@ -3,7 +3,7 @@
     using System;
     using System.ComponentModel;
 
-    public class MissingShipmentData
+    public class ShipmentData
     {
         public string NotificationNumber { get; set; }
 

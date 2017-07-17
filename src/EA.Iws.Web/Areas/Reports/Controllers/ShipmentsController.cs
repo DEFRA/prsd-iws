@@ -7,14 +7,14 @@
     using Infrastructure.Authorization;
     using Prsd.Core.Mediator;
     using Requests.Admin.Reports;
-    using ViewModels.MissingShipments;
+    using ViewModels.Shipments;
 
-    [AuthorizeActivity(typeof(GetMissingShipmentsReport))]
-    public class MissingShipmentsController : Controller
+    [AuthorizeActivity(typeof(GetShipmentsReport))]
+    public class ShipmentsController : Controller
     {
         private readonly IMediator mediator;
 
-        public MissingShipmentsController(IMediator mediator)
+        public ShipmentsController(IMediator mediator)
         {
             this.mediator = mediator;
         }
@@ -37,11 +37,11 @@
             var from = model.From.AsDateTime().GetValueOrDefault();
             var to = model.To.AsDateTime().GetValueOrDefault();
 
-            var report = await mediator.SendAsync(new GetMissingShipmentsReport(from, to, model.DateType));
+            var report = await mediator.SendAsync(new GetShipmentsReport(from, to, model.DateType));
 
-            var fileName = string.Format("missing-shipments-{0}-{1}.xlsx", from.ToShortDateString(), to.ToShortDateString());
+            var fileName = string.Format("shipments-{0}-{1}.xlsx", from.ToShortDateString(), to.ToShortDateString());
 
-            return new XlsxActionResult<MissingShipmentData>(report, fileName);
+            return new XlsxActionResult<ShipmentData>(report, fileName);
         }
     }
 }
