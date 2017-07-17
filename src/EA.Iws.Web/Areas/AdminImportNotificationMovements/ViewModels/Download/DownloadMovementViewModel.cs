@@ -62,6 +62,11 @@
                 return "Received";
             }
 
+            if (data.Rejected.HasValue)
+            {
+                return "Rejected";
+            }
+
             return "Pending";
         }
     }
