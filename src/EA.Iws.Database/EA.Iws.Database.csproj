@@ -53,6 +53,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Content Include="missing-indexes.sql" />
     <Content Include="script-views-as-tables.sql" />
+    <Content Include="scripts\Everytime\02-Views\0026-Reports-Shipments.sql" />
     <Content Include="scripts\Everytime\03-StoredProcedures\0004-uspUpdateExportFinancialGuaranteeDates.sql" />
     <Content Include="scripts\Everytime\03-StoredProcedures\0008-uspUpdateReportCache.sql" />
     <Content Include="scripts\Everytime\03-StoredProcedures\0006-elmah-GetErrorsXml.sql" />
@@ -68,6 +69,8 @@
     <Content Include="scripts\Update\0003-Migration\Sprint3\20170220-153000-add-elmah-tables.sql" />
     <Content Include="scripts\Update\0003-Migration\Sprint3\20170411-135900-add-bank-holidays.sql" />
     <Content Include="scripts\Update\0004-CI\Sprint1\20170713-154600-update-foi-cache.sql" />
+    <Content Include="scripts\Update\0004-CI\Sprint1\20170717-141700-rename-missing-shipments-cache.sql" />
+    <Content Include="scripts\Update\0004-CI\Sprint1\20170717-150100-update-shipments-cache.sql" />
     <Content Include="unindexed-foreign-keys.sql" />
     <Content Include="scripts\Everytime\01-Functions\0003-Reports-PricingInfo.sql" />
     <Content Include="scripts\Everytime\03-StoredProcedures\0003-uspUpdateImportNotificationKeyDates.sql" />

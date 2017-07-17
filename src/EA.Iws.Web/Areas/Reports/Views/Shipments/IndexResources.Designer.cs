@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace EA.Iws.Web.Areas.Reports.Views.MissingShipments {
+namespace EA.Iws.Web.Areas.Reports.Views.Shipments {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace EA.Iws.Web.Areas.Reports.Views.MissingShipments {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EA.Iws.Web.Areas.Reports.Views.MissingShipments.IndexResources", typeof(IndexResources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EA.Iws.Web.Areas.Reports.Views.Shipments.IndexResources", typeof(IndexResources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -70,7 +70,7 @@ namespace EA.Iws.Web.Areas.Reports.Views.MissingShipments {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Notification shipment data - missing shipments.
+        ///   Looks up a localized string similar to Shipments report.
         /// </summary>
         public static string MainHeading {
             get {
@@ -88,7 +88,7 @@ namespace EA.Iws.Web.Areas.Reports.Views.MissingShipments {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Missing Shipments.
+        ///   Looks up a localized string similar to Shipments report.
         /// </summary>
         public static string Title {
             get {

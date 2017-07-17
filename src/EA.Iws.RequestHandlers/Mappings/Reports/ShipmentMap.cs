@@ -7,18 +7,18 @@
     using Domain.Reports;
     using Prsd.Core.Mapper;
 
-    internal class MissingShipmentMap : IMapWithParameter<MissingShipment, UKCompetentAuthority, MissingShipmentData>
+    internal class ShipmentMap : IMapWithParameter<Shipment, UKCompetentAuthority, ShipmentData>
     {
         private readonly IWorkingDayCalculator workingDayCalculator;
 
-        public MissingShipmentMap(IWorkingDayCalculator workingDayCalculator)
+        public ShipmentMap(IWorkingDayCalculator workingDayCalculator)
         {
             this.workingDayCalculator = workingDayCalculator;
         }
 
-        public MissingShipmentData Map(MissingShipment source, UKCompetentAuthority parameter)
+        public ShipmentData Map(Shipment source, UKCompetentAuthority parameter)
         {
-            return new MissingShipmentData
+            return new ShipmentData
             {
                 Importer = source.Importer,
                 PrenotificationDate = source.PrenotificationDate,
@@ -43,11 +43,17 @@
                 DispatchingCountry = source.OriginatingCountry,
                 IntendedTonnesQuantity = GetIntendedTonnes(source),
                 IntendedCubicMetresQuantity = GetIntendedCubicMetres(source),
-                EwcCodes = source.EwcCodes
+                EwcCodes = source.EwcCodes,
+                ImportOrExport = source.ImportOrExport,
+                OperationCodes = source.OperationCodes,
+                BaselOecdCode = source.BaselOecdCode,
+                HCode = source.HCode,
+                UNClass = source.UNClass,
+                YCode = source.YCode
             };
         }
 
-        private decimal? GetActualTonnes(MissingShipment source)
+        private decimal? GetActualTonnes(Shipment source)
         {
             if (!source.Units.HasValue
                 || !source.QuantityReceived.HasValue
@@ -62,7 +68,7 @@
                 false);
         }
 
-        private decimal? GetActualCubicMetres(MissingShipment source)
+        private decimal? GetActualCubicMetres(Shipment source)
         {
             if (!source.Units.HasValue
                 || !source.QuantityReceived.HasValue
@@ -77,7 +83,7 @@
                 false);
         }
 
-        private decimal? GetIntendedTonnes(MissingShipment source)
+        private decimal? GetIntendedTonnes(Shipment source)
         {
             if (!source.TotalQuantityUnitsId.HasValue
                 || !source.TotalQuantity.HasValue
@@ -92,7 +98,7 @@
                 false);
         }
 
-        private decimal? GetIntendedCubicMetres(MissingShipment source)
+        private decimal? GetIntendedCubicMetres(Shipment source)
         {
             if (!source.TotalQuantityUnitsId.HasValue
                 || !source.TotalQuantity.HasValue
@@ -107,7 +113,7 @@
                 false);
         }
 
-        private bool GetWasPrenotifiedThreeWorkingDaysBeforeActualDate(MissingShipment source, UKCompetentAuthority competentAuthority)
+        private bool GetWasPrenotifiedThreeWorkingDaysBeforeActualDate(Shipment source, UKCompetentAuthority competentAuthority)
         {
             if (!source.PrenotificationDate.HasValue
                 || !source.ActualDateOfShipment.HasValue)

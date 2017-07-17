@@ -7,7 +7,7 @@ AS
 BEGIN
 
     DELETE FROM [Reports].[FreedomOfInformationCache];
-    DELETE FROM [Reports].[NotificationShipmentDataMissingShipmentsCache];
+    DELETE FROM [Reports].[ShipmentsCache];
 
     INSERT INTO [Reports].[FreedomOfInformationCache] (
            [NotificationNumber]
@@ -90,7 +90,7 @@ BEGIN
           ,[ExportCountryName]
       FROM [Reports].[FreedomOfInformation];
 
-    INSERT INTO [Reports].[NotificationShipmentDataMissingShipmentsCache] (
+    INSERT INTO [Reports].[ShipmentsCache] (
            [NotificationId]
           ,[NotificationNumber]
           ,[CompetentAuthorityId]
@@ -118,7 +118,13 @@ BEGIN
           ,[OriginatingCountry]
           ,[Status]
           ,[NotificationReceivedDate]
-          ,[EwcCodes] )
+          ,[EwcCodes]
+          ,[ImportOrExport]
+          ,[BaselOecdCode]
+          ,[OperationCodes]
+          ,[YCode]
+          ,[HCode]
+          ,[UNClass] )
     SELECT [NotificationId]
           ,[NotificationNumber]
           ,[CompetentAuthorityId]
@@ -147,7 +153,13 @@ BEGIN
           ,[Status]
           ,[NotificationReceivedDate]
           ,[EwcCodes]
-      FROM [Reports].[NotificationShipmentDataMissingShipments]
+          ,[ImportOrExport]
+          ,[BaselOecdCode]
+          ,[OperationCodes]
+          ,[YCode]
+          ,[HCode]
+          ,[UNClass]
+      FROM [Reports].[Shipments]
 
 END
 GO

@@ -10,28 +10,28 @@
     using Prsd.Core.Mediator;
     using Requests.Admin.Reports;
 
-    internal class GetMissingShipmentsReportHandler : IRequestHandler<GetMissingShipmentsReport, MissingShipmentData[]>
+    internal class GetShipmentsReportHandler : IRequestHandler<GetShipmentsReport, ShipmentData[]>
     {
-        private readonly IMissingShipmentsRepository missingShipmentsRepository;
-        private readonly IMapWithParameter<MissingShipment, UKCompetentAuthority, MissingShipmentData> mapper;
+        private readonly IShipmentsRepository shipmentsRepository;
+        private readonly IMapWithParameter<Shipment, UKCompetentAuthority, ShipmentData> mapper;
         private readonly IUserContext userContext;
         private readonly Domain.IInternalUserRepository internalUserRepository;
 
-        public GetMissingShipmentsReportHandler(IMissingShipmentsRepository missingShipmentsRepository,
-            IMapWithParameter<MissingShipment, UKCompetentAuthority, MissingShipmentData> mapper,
+        public GetShipmentsReportHandler(IShipmentsRepository shipmentsRepository,
+            IMapWithParameter<Shipment, UKCompetentAuthority, ShipmentData> mapper,
             IUserContext userContext,
             Domain.IInternalUserRepository internalUserRepository)
         {
-            this.missingShipmentsRepository = missingShipmentsRepository;
+            this.shipmentsRepository = shipmentsRepository;
             this.mapper = mapper;
             this.userContext = userContext;
             this.internalUserRepository = internalUserRepository;
         }
 
-        public async Task<MissingShipmentData[]> HandleAsync(GetMissingShipmentsReport message)
+        public async Task<ShipmentData[]> HandleAsync(GetShipmentsReport message)
         {
             var user = await internalUserRepository.GetByUserId(userContext.UserId);
-            var data = await missingShipmentsRepository.Get(message.From, message.To, user.CompetentAuthority, message.DateType);
+            var data = await shipmentsRepository.Get(message.From, message.To, user.CompetentAuthority, message.DateType);
 
             return data.Select(x => mapper.Map(x, user.CompetentAuthority)).ToArray();
         }

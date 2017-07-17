@@ -121,12 +121,12 @@
     <value>Generate report</value>
   </data>
   <data name="MainHeading" xml:space="preserve">
-    <value>Notification shipment data - missing shipments</value>
+    <value>Shipments report</value>
   </data>
   <data name="ReportInfo" xml:space="preserve">
     <value>Please note this report is run against a copy of the live data which is a day behind. Anything input today will not be on the report.</value>
   </data>
   <data name="Title" xml:space="preserve">
-    <value>Missing Shipments</value>
+    <value>Shipments report</value>
   </data>
 </root>

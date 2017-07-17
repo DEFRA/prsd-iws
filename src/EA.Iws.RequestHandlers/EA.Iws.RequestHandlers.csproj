@@ -119,7 +119,7 @@
     <Compile Include="Admin\Reports\GetExportNotificationsReportHandler.cs" />
     <Compile Include="Admin\Reports\GetExportStatsReportHandler.cs" />
     <Compile Include="Admin\Reports\GetFinanceReportHandler.cs" />
-    <Compile Include="Admin\Reports\GetMissingShipmentsReportHandler.cs" />
+    <Compile Include="Admin\Reports\GetShipmentsReportHandler.cs" />
     <Compile Include="Admin\Reports\GetFreedomOfInformationReportHandler.cs" />
     <Compile Include="Admin\Search\NotificaitonsAdvancedSearchHandler.cs" />
     <Compile Include="Admin\Search\SearchImportNotificationsHandler.cs" />
@@ -390,7 +390,7 @@
     <Compile Include="Mappings\Reports\DataExportNotificationMap.cs" />
     <Compile Include="Mappings\Reports\ImportStatsMap.cs" />
     <Compile Include="Mappings\Reports\FinanceMap.cs" />
-    <Compile Include="Mappings\Reports\MissingShipmentMap.cs" />
+    <Compile Include="Mappings\Reports\ShipmentMap.cs" />
     <Compile Include="Mappings\Reports\ExportStatsMap.cs" />
     <Compile Include="Mappings\NumberOfShipmentsHistoryMap.cs" />
     <Compile Include="Mappings\UserMap.cs" />

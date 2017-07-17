@@ -1,4 +1,4 @@
-﻿namespace EA.Iws.Web.Areas.Reports.ViewModels.MissingShipments
+﻿namespace EA.Iws.Web.Areas.Reports.ViewModels.Shipments
 {
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
@@ -15,7 +15,7 @@
             From = new OptionalDateInputViewModel(true);
             To = new OptionalDateInputViewModel(true);
 
-            DateSelectList = new SelectList(EnumHelper.GetValues(typeof(MissingShipmentsReportDates)), "Key", "Value", null);
+            DateSelectList = new SelectList(EnumHelper.GetValues(typeof(ShipmentsReportDates)), "Key", "Value", null);
         }
 
         [Display(Name = "From", ResourceType = typeof(ExportStats.IndexViewModelResources))]
@@ -30,7 +30,7 @@
 
         [Display(Name = "DateType", ResourceType = typeof(IndexViewModelResources))]
         [Required(ErrorMessageResourceName = "DateTypeRequired", ErrorMessageResourceType = typeof(IndexViewModelResources))]
-        public MissingShipmentsReportDates DateType { get; set; } 
+        public ShipmentsReportDates DateType { get; set; } 
 
         public SelectList DateSelectList { get; set; }
 

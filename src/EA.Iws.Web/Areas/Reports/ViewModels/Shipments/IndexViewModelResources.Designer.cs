@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace EA.Iws.Web.Areas.Reports.ViewModels.MissingShipments {
+namespace EA.Iws.Web.Areas.Reports.ViewModels.Shipments {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace EA.Iws.Web.Areas.Reports.ViewModels.MissingShipments {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EA.Iws.Web.Areas.Reports.ViewModels.MissingShipments.IndexViewModelResources", typeof(IndexViewModelResources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EA.Iws.Web.Areas.Reports.ViewModels.Shipments.IndexViewModelResources", typeof(IndexViewModelResources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;

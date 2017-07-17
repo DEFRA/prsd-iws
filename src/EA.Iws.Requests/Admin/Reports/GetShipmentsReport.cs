@@ -8,15 +8,15 @@
     using Prsd.Core.Mediator;
 
     [RequestAuthorization(ReportingPermissions.CanViewMissingShipmentsReport)]
-    public class GetMissingShipmentsReport : IRequest<MissingShipmentData[]>
+    public class GetShipmentsReport : IRequest<ShipmentData[]>
     {
         public DateTime From { get; private set; }
 
         public DateTime To { get; private set; }
 
-        public MissingShipmentsReportDates DateType { get; private set; }
+        public ShipmentsReportDates DateType { get; private set; }
 
-        public GetMissingShipmentsReport(DateTime from, DateTime to, MissingShipmentsReportDates dateType)
+        public GetShipmentsReport(DateTime from, DateTime to, ShipmentsReportDates dateType)
         {
             From = from;
             To = to;
