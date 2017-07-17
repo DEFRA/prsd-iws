@@ -83,7 +83,7 @@
                 <nav>
                     @if (Model.NotificationStatus == NotificationStatus.Consented && Model.FgStatus == FinancialGuaranteeStatus.Approved)
                     {
-                        @Html.ActionLink(Resources.OptionsRecord, "Index", "CaptureMovement", new { area = "AdminExportNotificationMovements" }, null)
+                        @Html.ActionLink(Resources.OptionsRecord, "Create", "CaptureMovement", new { area = "AdminExportNotificationMovements", id = Model.NotificationId }, null)
                     }
                     @if (Model.NotificationStatus == NotificationStatus.Consented)
                     {

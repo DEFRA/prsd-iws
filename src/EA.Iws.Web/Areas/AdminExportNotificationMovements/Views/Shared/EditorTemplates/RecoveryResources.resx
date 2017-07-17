@@ -117,10 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="NumberExists" xml:space="preserve">
-    <value>Shipment Number exists.Please enter a valid number</value>
+  <data name="MainHeading" xml:space="preserve">
+    <value>{0} date</value>
   </data>
-  <data name="SaveUnsuccessful" xml:space="preserve">
-    <value>This movement could not be created please try recording the shipment again</value>
+  <data name="RecoveryDate" xml:space="preserve">
+    <value>When was the waste {0}?</value>
   </data>
 </root>

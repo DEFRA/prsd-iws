@@ -8,7 +8,8 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace EA.Iws.Web.Areas.AdminExportNotificationMovements.Controllers {
+namespace EA.Iws.Web.Areas.AdminExportNotificationsMovements.ViewModels.CaptureMovement
+{
     using System;
     
     
@@ -22,14 +23,14 @@ namespace EA.Iws.Web.Areas.AdminExportNotificationMovements.Controllers {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class CaptureMovementControllerResources {
+    public class RecoveryViewModelResources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal CaptureMovementControllerResources() {
+        internal RecoveryViewModelResources() {
         }
         
         /// <summary>
@@ -39,8 +40,8 @@ namespace EA.Iws.Web.Areas.AdminExportNotificationMovements.Controllers {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EA.Iws.Web.Areas.AdminExportNotificationMovements.Controllers.CaptureMovementCont" +
-                            "rollerResources", typeof(CaptureMovementControllerResources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EA.Iws.Web.Areas.AdminExportMovement.ViewModels.InternalCapture.RecoveryViewModel" +
+                            "Resources", typeof(RecoveryViewModelResources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -62,20 +63,47 @@ namespace EA.Iws.Web.Areas.AdminExportNotificationMovements.Controllers {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Shipment Number exists.Please enter a valid number.
+        ///   Looks up a localized string similar to Actual quantity.
         /// </summary>
-        public static string NumberExists {
+        public static string ActualQuantityLabel {
             get {
-                return ResourceManager.GetString("NumberExists", resourceCulture);
+                return ResourceManager.GetString("ActualQuantityLabel", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This movement could not be created please try recording the shipment again.
+        ///   Looks up a localized string similar to When was the waste received?.
         /// </summary>
-        public static string SaveUnsuccessful {
+        public static string ReceivedDateLabel {
             get {
-                return ResourceManager.GetString("SaveUnsuccessful", resourceCulture);
+                return ResourceManager.GetString("ReceivedDateLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Further information on why the shipment was rejected.
+        /// </summary>
+        public static string RejectionFurtherInformationLabel {
+            get {
+                return ResourceManager.GetString("RejectionFurtherInformationLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Why was it rejected?.
+        /// </summary>
+        public static string RejectionReasonLabel {
+            get {
+                return ResourceManager.GetString("RejectionReasonLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Was the shipment accepted?.
+        /// </summary>
+        public static string WasShipmentAcceptedLabel {
+            get {
+                return ResourceManager.GetString("WasShipmentAcceptedLabel", resourceCulture);
             }
         }
     }

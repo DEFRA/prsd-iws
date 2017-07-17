@@ -89,6 +89,33 @@ namespace EA.Iws.Web.Areas.AdminExportNotificationMovements.ViewModels.CaptureMo
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Enter the shipment number, for example 5.
+        /// </summary>
+        public static string Number {
+            get {
+                return ResourceManager.GetString("Number", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please enter a valid number.
+        /// </summary>
+        public static string NumberIsInt {
+            get {
+                return ResourceManager.GetString("NumberIsInt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please enter a shipment number.
+        /// </summary>
+        public static string NumberRequired {
+            get {
+                return ResourceManager.GetString("NumberRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Prenotification date.
         /// </summary>
         public static string PrenotificationDateLabel {
@@ -103,6 +130,51 @@ namespace EA.Iws.Web.Areas.AdminExportNotificationMovements.ViewModels.CaptureMo
         public static string PrenotificationDateRequired {
             get {
                 return ResourceManager.GetString("PrenotificationDateRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please provide the actual quantity.
+        /// </summary>
+        public static string QuantityRequired {
+            get {
+                return ResourceManager.GetString("QuantityRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please provide receipt information before providing date of {0}.
+        /// </summary>
+        public static string ReceiptMustBeCompletedFirst {
+            get {
+                return ResourceManager.GetString("ReceiptMustBeCompletedFirst", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please provide the received date.
+        /// </summary>
+        public static string ReceivedDateRequired {
+            get {
+                return ResourceManager.GetString("ReceivedDateRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Do not provide {0} date when the prenotification has been rejected.
+        /// </summary>
+        public static string RecoveryDateCannotBeEnteredForRejected {
+            get {
+                return ResourceManager.GetString("RecoveryDateCannotBeEnteredForRejected", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please provide a reason for rejection.
+        /// </summary>
+        public static string RejectReasonRequired {
+            get {
+                return ResourceManager.GetString("RejectReasonRequired", resourceCulture);
             }
         }
     }
