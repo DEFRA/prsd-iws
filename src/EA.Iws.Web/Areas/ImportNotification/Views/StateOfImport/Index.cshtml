@@ -23,10 +23,12 @@
                 @Html.HiddenFor(m => m.CompetentAuthorities[i].Id)
                 var label = string.Format("{0} - {1}", Model.CompetentAuthorities[i].Code, Model.CompetentAuthorities[i].Name);
                 <div class="form-group form-group-compound">
-                    <label class="block-label" for="@Model.CompetentAuthorities[i].Id">
+                    <div class="multiple-choice">
                         @Html.RadioButtonFor(m => m.CompetentAuthorityId, Model.CompetentAuthorities[i].Id, new { id = Model.CompetentAuthorities[i].Id })
-                        @label
-                    </label>
+                        <label for="@Model.CompetentAuthorities[i].Id">
+                            @label
+                        </label>
+                    </div>
                 </div>
             }
         </fieldset>

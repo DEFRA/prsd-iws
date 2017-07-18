@@ -23,13 +23,19 @@
         <label class="form-label">@Html.DisplayNameFor(m => m.IsBlanketBond)</label>
         @Html.Gds().ValidationMessageFor(m => m.IsBlanketBond)
         <div class="form-group">
-            <label class="block-label" data-target="validToDate" for="rdoNo">
-                @Html.RadioButtonFor(m => m.IsBlanketBond, false, new { @class = "", @id = "rdoNo" })No
-            </label>
+            <div class="multiple-choice" data-target="validToDate">
+                @Html.RadioButtonFor(m => m.IsBlanketBond, false, new { @class = "", @id = "rdoNo" })
+                <label for="rdoNo">
+                    No
+                </label>
+            </div>
 
-            <label class="block-label" for="rdoYes">
-                @Html.RadioButtonFor(m => m.IsBlanketBond, true, new { @class = "", @id = "rdoYes" })Yes
-            </label>
+            <div class="multiple-choice">
+                @Html.RadioButtonFor(m => m.IsBlanketBond, true, new { @class = "", @id = "rdoYes" })
+                <label for="rdoYes">
+                    Yes
+                </label>
+            </div>
         </div>
     </div>
 

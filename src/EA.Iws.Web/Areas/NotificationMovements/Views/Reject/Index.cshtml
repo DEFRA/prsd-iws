@@ -32,10 +32,12 @@
             {
                 @Html.HiddenFor(m => m.Movements[i].Id)
                 @Html.HiddenFor(m => m.Movements[i].Number)
-                <label class="block-label" for="movement-@i">
+                <div class="multiple-choice">
                     @Html.RadioButtonFor(m => m.Selected, Model.Movements[i].Id, new { id = "movement-" + i })
-                    @Html.Raw(string.Format(Resource.ShipmentNumberDisplay, Model.Movements[i].Number))
-                </label>
+                    <label for="movement-@i">
+                        @Html.Raw(string.Format(Resource.ShipmentNumberDisplay, Model.Movements[i].Number))
+                    </label>
+                </div>
             }
         </div>
 

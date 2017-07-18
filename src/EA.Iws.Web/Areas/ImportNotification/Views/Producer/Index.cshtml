@@ -26,10 +26,12 @@
     @Html.EditorFor(m => m.Contact)
 
     <div class="form-group">
-        <label class="block-label" for="AreMultiple">
+        <div class="multiple-choice">
             @Html.CheckBoxFor(m => m.AreMultiple, new { id = "AreMultiple" })
-            @Resource.MultipleProducers
-        </label>
+            <label for="AreMultiple">
+                @Resource.MultipleProducers
+            </label>
+        </div>
     </div>
 
     <div class="form-group">

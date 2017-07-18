@@ -37,10 +37,12 @@
     <div class="form-group @Html.Gds().FormGroupClass(m => m.TermsAndConditions)">
         <fieldset>
             <div>@Html.Gds().ValidationMessageFor(m => m.TermsAndConditions)</div>
-            <label class="block-label">
+            <div class="multiple-choice">
                 @Html.CheckBoxFor(m => m.TermsAndConditions)
-                @DisclaimerResources.Accept
-            </label>
+                <label for="@Html.IdFor(m => m.TermsAndConditions)">
+                    @DisclaimerResources.Accept
+                </label>
+            </div>
         </fieldset>
     </div>
     <div class="form-group">

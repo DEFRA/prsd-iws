@@ -11,9 +11,9 @@
                 MvcHtmlString idForThisCheckBox = Html.NameFor(m => m.PossibleCodes[i].Key);
                 @Html.HiddenFor(m => m.PossibleCodes[i].Key)
 
-                <div>
-                    <label for="@idForThisCheckBox" class="block-label grid-view">
-                        @Html.CheckBoxFor(m => m.PossibleCodes[i].Value, new { id = idForThisCheckBox })
+                <div class="multiple-choice">
+                    @Html.CheckBoxFor(m => m.PossibleCodes[i].Value, new { id = idForThisCheckBox })
+                    <label for="@idForThisCheckBox" class="grid-view">
                         @Html.Raw(Model.DisplayValues[i])
                     </label>
                 </div>

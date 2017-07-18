@@ -19,15 +19,19 @@
         @Html.Gds().LabelFor(m => m.GenerateNew, new { @class = "visually-hidden" })
         @Html.Gds().ValidationMessageFor(m => m.GenerateNew)
         <fieldset>
-            <label class="block-label" for="GenerateNew">
+            <div class="multiple-choice">
                 @Html.RadioButtonFor(m => m.GenerateNew, true, new { id = "GenerateNew" })
-                @NewOrExistingNotificationResources.GenerateNewNumber
-            </label>
+                <label for="GenerateNew">
+                    @NewOrExistingNotificationResources.GenerateNewNumber
+                </label>
+            </div>
 
-            <label class="block-label" for="EnterNumber">
+            <div class="multiple-choice">
                 @Html.RadioButtonFor(m => m.GenerateNew, false, new { id = "EnterNumber" })
-                @NewOrExistingNotificationResources.EnterExistingNumber
-            </label>
+                <label for="EnterNumber">
+                    @NewOrExistingNotificationResources.EnterExistingNumber
+                </label>
+            </div>
         </fieldset>
     </div>
 

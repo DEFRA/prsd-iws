@@ -18,22 +18,35 @@
 
     @Html.Gds().ValidationMessageFor(m => m.Business.BusinessType)
 
-    <label class="block-label" data-target="sole-trader-number" for="SoleTrader">
-        @Html.RadioButtonFor(m => m.Business.BusinessType, "SoleTrader", new { @class = "", @id = "SoleTrader" }) @EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(BusinessType.SoleTrader)
-    </label>
+    <div class="multiple-choice" data-target="sole-trader-number">
+        @Html.RadioButtonFor(m => m.Business.BusinessType, "SoleTrader", new { @class = "", @id = "SoleTrader" })
+        <label for="SoleTrader">
+            @EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(BusinessType.SoleTrader)
+        </label>
+    </div>
 
-    <label class="block-label" data-target="partnership-number" for="Partnership">
-        @Html.RadioButtonFor(m => m.Business.BusinessType, "Partnership", new { @class = "", @id = "Partnership" }) @EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(BusinessType.Partnership)
-    </label>
+    <div class="multiple-choice" data-target="partnership-number">
+        @Html.RadioButtonFor(m => m.Business.BusinessType, "Partnership", new { @class = "", @id = "Partnership" })
+        <label for="Partnership">
+            @EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(BusinessType.Partnership)
+        </label>
+    </div>
 
-    <label class="block-label" data-target="companies-house-number" for="LimitedCompany">
-        @Html.RadioButtonFor(m => m.Business.BusinessType, "LimitedCompany", new { @class = "", @id = "LimitedCompany" }) @EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(BusinessType.LimitedCompany)
-    </label>
+    <div class="multiple-choice" data-target="companies-house-number">
+        @Html.RadioButtonFor(m => m.Business.BusinessType, "LimitedCompany", new { @class = "", @id = "LimitedCompany" })
+        <label for="LimitedCompany">
+            @EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(BusinessType.LimitedCompany)
+        </label>
+    </div>
 
-    <label class="block-label" data-target="other-description" for="Other">
-        @Html.RadioButtonFor(m => m.Business.BusinessType, BusinessType.Other, new { @class = "", @id = "Other" }) @EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(BusinessType.Other)
-    </label>
-    <div class="panel-indent @(Model.Business.BusinessType != null && Model.Business.BusinessType == BusinessType.Other ? "" : "js-hidden")" id="other-description">
+    <div class="multiple-choice" data-target="other-description">
+        @Html.RadioButtonFor(m => m.Business.BusinessType, BusinessType.Other, new { @class = "", @id = "Other" })
+        <label for="Other">
+            @EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(BusinessType.Other)
+        </label>
+    </div>
+    
+    <div class="panel @(Model.Business.BusinessType != null && Model.Business.BusinessType == BusinessType.Other ? "" : "js-hidden")" id="other-description">
         <div class="form-group @Html.Gds().FormGroupClass(m => m.Business.OtherDescription)">
             @Html.Gds().LabelFor(m => m.Business.OtherDescription)
             @Html.Gds().ValidationMessageFor(m => m.Business.OtherDescription)

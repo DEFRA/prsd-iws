@@ -16,10 +16,12 @@
             MvcHtmlString nameForThisValue = Html.NameFor(m => m.CompetentAuthorities[i].Id);
 
             <div class="form-group form-group-compound">
-                <label class="block-label" for="@nameForThisValue">
+                <div class="multiple-choice">
                     @Html.RadioButtonFor(m => m.CompetentAuthorityId, Model.CompetentAuthorities[i].Id, htmlAttributes: new { id = nameForThisValue })
-                    @label
-                </label>
+                    <label for="@nameForThisValue">
+                        @label
+                    </label>
+                </div>
             </div>
         }
     </fieldset>

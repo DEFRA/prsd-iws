@@ -17,18 +17,25 @@
     <div class="form-group @Html.Gds().FormGroupClass(m => m.Value)">
         @Html.Gds().ValidationMessageFor(model => model.Value)
         <fieldset>
-            <label class="block-label" for="rdoYes" data-target="yes-message">
+            <div class="multiple-choice" data-target="yes-message">
                 @Html.RadioButtonFor(m => m.Value, true, new { id = "rdoYes" })
-                @RecoveryPreconsentResources.Yes
-            </label>
-            <div class="panel-indent @(Model.Value.GetValueOrDefault() ? "" : "js-hidden")" id="yes-message">
+                <label for="rdoYes">
+                    @RecoveryPreconsentResources.Yes
+                </label>
+            </div>
+
+            <div class="panel @(Model.Value.GetValueOrDefault() ? "" : "js-hidden")" id="yes-message">
                 <p>@RecoveryPreconsentResources.YesDescription</p>
             </div>
-            <label class="block-label" for="rdoNo" data-target="no-message">
+
+            <div class="multiple-choice" data-target="no-message">
                 @Html.RadioButtonFor(m => m.Value, false, new { id = "rdoNo" })
-                @RecoveryPreconsentResources.No
-            </label>
-            <div class="panel-indent @((Model.Value.HasValue && !Model.Value.Value) ? "" : "js-hidden")" id="no-message" id="no-message">
+                <label for="rdoNo">
+                    @RecoveryPreconsentResources.No
+                </label>
+            </div>
+            
+            <div class="panel @((Model.Value.HasValue && !Model.Value.Value) ? "" : "js-hidden")" id="no-message" id="no-message">
                 <p>@RecoveryPreconsentResources.NoDescription</p>
             </div>
         </fieldset>

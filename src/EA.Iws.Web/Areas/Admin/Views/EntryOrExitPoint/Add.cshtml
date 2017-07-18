@@ -35,10 +35,12 @@
     <div class="form-group @Html.Gds().FormGroupClass(m => m.IsWarningAccepted)">
         <p class="heading-small">@Resource.Warning</p>
         @Html.Gds().ValidationMessageFor(m => m.IsWarningAccepted)
-        <label class="block-label" for="warning">
+        <div class="multiple-choice">
             @Html.CheckBoxFor(m => m.IsWarningAccepted, new { id = "warning" })
-            @Resource.WarningLabel
-        </label>
+            <label for="warning">
+                @Resource.WarningLabel
+            </label>
+        </div>
     </div>
 
     <div class="form-group">

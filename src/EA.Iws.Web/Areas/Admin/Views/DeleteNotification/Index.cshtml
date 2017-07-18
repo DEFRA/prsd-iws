@@ -28,14 +28,20 @@
                 @Html.Gds().ValidationMessageFor(m => m.IsExportNotification)
 
                 <fieldset>
-                    <label class="block-label" for="yes">
+                    <div class="multiple-choice">
                         @Html.RadioButtonFor(m => m.IsExportNotification, true, new { id = "yes" })
-                        @Resources.Export
-                    </label>
-                    <label class="block-label" for="no">
+                        <label for="yes">
+                            @Resources.Export
+                        </label>
+                    </div>
+
+                    <div class="multiple-choice">
                         @Html.RadioButtonFor(m => m.IsExportNotification, false, new { id = "no" })
-                        @Resources.Import
-                    </label>
+                        <label for="no">
+                            @Resources.Import
+                        </label>
+                    </div>
+                    
                 </fieldset>
             </div>
 

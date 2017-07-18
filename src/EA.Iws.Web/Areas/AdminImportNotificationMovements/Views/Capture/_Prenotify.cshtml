@@ -10,10 +10,12 @@
     <div class="form-group @Html.Gds().FormGroupClass(m => m.HasNoPrenotification)">
         <fieldset>
             <div>@Html.Gds().ValidationMessageFor(m => m.HasNoPrenotification)</div>
-            <label class="block-label" for="@Html.NameFor(m => m.HasNoPrenotification)">
+            <div class="multiple-choice">
                 @Html.CheckBoxFor(m => m.HasNoPrenotification)
-                @Html.DisplayNameFor(m => m.HasNoPrenotification)
-            </label>
+                <label for="@Html.NameFor(m => m.HasNoPrenotification)">
+                    @Html.DisplayNameFor(m => m.HasNoPrenotification)
+                </label>
+            </div>
         </fieldset>
     </div>
 

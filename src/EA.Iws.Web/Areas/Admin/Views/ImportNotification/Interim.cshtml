@@ -19,15 +19,19 @@
         @Html.Gds().LabelFor(m => m.IsInterim, new { @class = "visually-hidden" })
         @Html.Gds().ValidationMessageFor(m => m.IsInterim)
         <fieldset>
-            <label class="block-label" for="Interim">
+            <div class="multiple-choice">
                 @Html.RadioButtonFor(m => m.IsInterim, true, new { id = "Interim" })
-                @Resources.Interim
-            </label>
+                <label for="Interim">
+                    @Resources.Interim
+                </label>
+            </div>
 
-            <label class="block-label" for="NonInterim">
+            <div class="multiple-choice">
                 @Html.RadioButtonFor(m => m.IsInterim, false, new { id = "NonInterim" })
-                @Resources.NonInterim
-            </label>
+                <label for="NonInterim">
+                    @Resources.NonInterim
+                </label>
+            </div>
         </fieldset>
     </div>
 

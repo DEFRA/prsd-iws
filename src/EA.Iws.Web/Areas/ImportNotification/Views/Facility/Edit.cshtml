@@ -31,14 +31,19 @@
         @Html.Gds().LabelFor(m => m.Type, false)
         @Html.Gds().ValidationMessageFor(m => m.Type)
         <fieldset>
-            <label class="block-label" for="LimitedCompany">
+            <div class="multiple-choice">
                 @Html.RadioButtonFor(m => m.Type, BusinessType.LimitedCompany, new { id = "LimitedCompany" })
-                @Resource.LimitedCompanyLabel
-            </label>
-            <label class="block-label" for="Other">
+                <label for="LimitedCompany">
+                    @Resource.LimitedCompanyLabel
+                </label>
+            </div>
+
+            <div class="multiple-choice">
                 @Html.RadioButtonFor(m => m.Type, BusinessType.Other, new { id = "Other" })
-                @Resource.OtherLabel
-            </label>
+                <label for="Other">
+                    @Resource.OtherLabel
+                </label>
+            </div>
         </fieldset>
     </div>
 

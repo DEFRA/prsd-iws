@@ -15,14 +15,14 @@
             <fieldset>
                 <div class="multiple-choice">
                     @Html.RadioButtonFor(m => m.WasShipmentAccepted, true, new { id = "yes" })
-                    <label class="block-label" for="yes">
+                    <label for="yes">
                         Yes
                     </label>
                 </div>
 
                 <div class="multiple-choice" data-target="rejected">
                     @Html.RadioButtonFor(m => m.WasShipmentAccepted, false, new { id = "no" })
-                    <label class="block-label" for="no">
+                    <label for="no">
                         No
                     </label>
                 </div>

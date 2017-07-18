@@ -27,25 +27,30 @@
             {
                 MvcHtmlString idForThisCheckBox = Html.NameFor(m => m.PackagingTypes.PossibleValues[i]);
 
-                <label for="@idForThisCheckBox" class="block-label">
+                <div class="multiple-choice">
                     @Html.CheckBoxFor(m => m.PackagingTypes.PossibleValues[i].Selected, new { id = idForThisCheckBox })
-                    @Html.HiddenFor(m => m.PackagingTypes.PossibleValues[i].Text)
-                    @Html.HiddenFor(m => m.PackagingTypes.PossibleValues[i].Value)
-                    @if (Model.PackagingTypes.ShowEnumValue)
+                    <label for="@idForThisCheckBox">
+                        @if (Model.PackagingTypes.ShowEnumValue)
                     {
-                        @Html.DisplayFor(m => m.PackagingTypes.PossibleValues[i].Value)
-                        @Html.Raw(" - ")
-                    }
-                    @Html.DisplayFor(m => m.PackagingTypes.PossibleValues[i].Text)
-                </label>
+                            @Html.DisplayFor(m => m.PackagingTypes.PossibleValues[i].Value)
+                            @Html.Raw(" - ")
+                        }
+                        @Html.DisplayFor(m => m.PackagingTypes.PossibleValues[i].Text)
+                    </label>
+                </div>
+                
+                @Html.HiddenFor(m => m.PackagingTypes.PossibleValues[i].Text)
+                @Html.HiddenFor(m => m.PackagingTypes.PossibleValues[i].Value)
             }
 
-            <label class="block-label" for="other-option-check" data-target="other-option">
+            <div class="multiple-choice" data-target="other-option">
                 @Html.CheckBoxFor(m => m.OtherSelected, new { id = "other-option-check" })
-                @((int)PackagingType.Other) - @PackagingTypesResources.Other
-            </label>
+                <label for="other-option-check">
+                    @((int)PackagingType.Other) - @PackagingTypesResources.Other
+                </label>
+            </div>
 
-            <div class="panel-indent @(Model.OtherSelected ? "" : "js-hidden")" id="other-option">
+            <div class="panel @(Model.OtherSelected ? "" : "js-hidden")" id="other-option">
                 <label class="form-label" for="other-label">@PackagingTypesResources.Other</label>
                 <div class="form-group @Html.Gds().FormGroupClass(m => m.OtherDescription)">
                     @Html.Gds().ValidationMessageFor(m => m.OtherDescription)

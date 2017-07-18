@@ -19,12 +19,14 @@
         @Html.EditorFor(m => m.PhysicalCharacteristics)
         <fieldset>
             <div id="list-item-other-container" class="form-group form-group-compound">
-                <label class="block-label" for="other-option-check" data-target="other-option">
+                <div class="multiple-choice" data-target="other-option">
                     @Html.CheckBoxFor(m => m.OtherSelected, new { id = "other-option-check" })
-                    @((int)PhysicalCharacteristicType.Other) - @PhysicalCharacteristicsResources.Other
-                </label>
+                    <label for="other-option-check">
+                        @((int)PhysicalCharacteristicType.Other) - @PhysicalCharacteristicsResources.Other
+                    </label>
+                </div>
             </div>
-            <div class="panel-indent @(Model.OtherSelected ? "" : "js-hidden")" id="other-option">
+            <div class="panel @(Model.OtherSelected ? "" : "js-hidden")" id="other-option">
                 <div class="form-group @Html.Gds().FormGroupClass(m => m.OtherDescription)">
                     <label class="form-label" for="OtherDescription">@PhysicalCharacteristicsResources.OtherRequired</label>
                     @Html.Gds().ValidationMessageFor(m => m.OtherDescription)<br />
