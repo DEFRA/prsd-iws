@@ -79,7 +79,7 @@
     // Handle radio show/hide
     function handleRadioContent ($control, $content) {
       // All radios in this group which control content
-      var selector = selectors.radio + '[name=' + escapeElementName($control.attr('name')) + '][aria-controls]'
+      var selector = selectors.radio + '[name="' + escapeElementName($control.attr('name')) + '"][aria-controls]'
       var $form = $control.closest('form')
       var $radios = $form.length ? $form.find(selector) : $(selector)
 

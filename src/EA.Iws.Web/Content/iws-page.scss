@@ -690,9 +690,6 @@ table.table-pad-bottom {
     margin-bottom: 10px;
 }
 
-.hrline
-{
-    display: block;
-    line-height: 1px;
-    width: 100%;
+.error {
+    @extend .form-group-error;
 }

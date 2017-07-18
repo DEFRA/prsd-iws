@@ -117,19 +117,13 @@ $(document).ready(function () {
     // Turn off jQuery animation
     jQuery.fx.off = true;
 
-    // Use GOV.UK selection-buttons.js to set selected
-    // and focused states for block labels
-    var $blockLabels = $(".block-label input[type='radio'], .block-label input[type='checkbox']");
-    new GOVUK.SelectionButtons($blockLabels);
-
     // Details/summary polyfill
     // See /javascripts/vendor/details.polyfill.js
 
-    // Where .block-label uses the data-target attribute
+    // Where .multiple-choice uses the data-target attribute
     // to toggle hidden content
-    var toggleContent = new ShowHideContent();
-    toggleContent.showHideRadioToggledContent();
-    toggleContent.showHideCheckboxToggledContent();
+    var showHideContent = new GOVUK.ShowHideContent();
+    showHideContent.init();
 
     //Unhide if javascript is enabled
     $('.no-js-hidden').css('display', 'block');
@@ -193,6 +187,9 @@ $(document).ready(function () {
         $("#accordion ul ul").slideUp();
         $(".current").siblings("ul").slideDown();
     });
+
+    // Datable
+    $("input[data-datable]").datable();
 });
 
 $(window).load(function () {
