@@ -23,7 +23,7 @@
         private static readonly CreateViewModel Model = new CreateViewModel
         {
             Number = 9,
-            ActualShipmentDate = new OptionalDateInputViewModel(new DateTime(2015, 1, 1))
+            ActualShipmentDate = new MaskedDateInputViewModel(new DateTime(2015, 1, 1))
         };
 
         public CaptureMovementControllerTests()

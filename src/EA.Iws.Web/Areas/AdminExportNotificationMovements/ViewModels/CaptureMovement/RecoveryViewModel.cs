@@ -5,13 +5,13 @@
 
     public class RecoveryViewModel : IComplete
     {
-        public OptionalDateInputViewModel RecoveryDate { get; set; }
+        public MaskedDateInputViewModel RecoveryDate { get; set; }
 
         public NotificationType NotificationType { get; set; }
 
         public RecoveryViewModel()
         {
-            RecoveryDate = new OptionalDateInputViewModel(true);
+            RecoveryDate = new MaskedDateInputViewModel();
         }
 
         public bool IsComplete()

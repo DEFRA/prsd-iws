@@ -132,4 +132,7 @@
   <data name="PrenotificationDateRequired" xml:space="preserve">
     <value>Please tick the box or enter prenotification received date</value>
   </data>
+  <data name="ShipmentNumber" xml:space="preserve">
+    <value>Shipment number</value>
+  </data>
 </root>

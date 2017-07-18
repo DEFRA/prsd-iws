@@ -80,8 +80,8 @@
             {
                 var success = await mediator.SendAsync(new CreateMovementInternal(id,
                     model.Number.Value,
-                    model.PrenotificationDate.AsDateTime(),
-                    model.ActualShipmentDate.AsDateTime().Value,
+                    model.PrenotificationDate.Date,
+                    model.ActualShipmentDate.Date.Value,
                     model.HasNoPrenotification));
 
                 if (success)
@@ -94,14 +94,14 @@
                         if (!model.Receipt.WasShipmentAccepted)
                         {
                             await mediator.SendAsync(new RecordRejectionInternal(movementId.Value,
-                                model.Receipt.ReceivedDate.AsDateTime().Value,
+                                model.Receipt.ReceivedDate.Date.Value,
                                 model.Receipt.RejectionReason,
                                 model.Receipt.RejectionFurtherInformation));
                         }
                         else
                         {
                             await mediator.SendAsync(new RecordReceiptInternal(movementId.Value,
-                                model.Receipt.ReceivedDate.AsDateTime().Value,
+                                model.Receipt.ReceivedDate.Date.Value,
                                 model.Receipt.ActualQuantity.Value,
                                 model.Receipt.Units.Value));
                         }
@@ -113,7 +113,7 @@
                         && model.Receipt.WasShipmentAccepted)
                     {
                         await mediator.SendAsync(new RecordOperationCompleteInternal(movementId.Value,
-                            model.Recovery.RecoveryDate.AsDateTime().Value));
+                            model.Recovery.RecoveryDate.Date.Value));
                     }
 
                     return View(model);

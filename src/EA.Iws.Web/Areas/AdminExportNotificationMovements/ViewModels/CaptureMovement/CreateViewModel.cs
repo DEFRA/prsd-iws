@@ -1,6 +1,5 @@
 ﻿namespace EA.Iws.Web.Areas.AdminExportNotificationMovements.ViewModels.CaptureMovement
 {
-    using AdminExportNotificationsMovements.ViewModels.CaptureMovement;
     using Core.Shared;
     using System;
     using System.Collections.Generic;
@@ -23,10 +22,10 @@
         public RecoveryViewModel Recovery { get; set; }
 
         [Display(Name = "PrenotificationDateLabel", ResourceType = typeof(CreateViewModelResources))]
-        public OptionalDateInputViewModel PrenotificationDate { get; set; }
+        public MaskedDateInputViewModel PrenotificationDate { get; set; }
 
         [Display(Name = "ActualDateLabel", ResourceType = typeof(CreateViewModelResources))]
-        public OptionalDateInputViewModel ActualShipmentDate { get; set; }
+        public MaskedDateInputViewModel ActualShipmentDate { get; set; }
 
         [Display(Name = "HasNoPrenotification", ResourceType = typeof(CreateViewModelResources))]
         public bool HasNoPrenotification { get; set; }
@@ -43,10 +42,10 @@
 
         public CreateViewModel()
         {
-            PrenotificationDate = new OptionalDateInputViewModel(true);
-            ActualShipmentDate = new OptionalDateInputViewModel(true);
+            PrenotificationDate = new MaskedDateInputViewModel();
+            ActualShipmentDate = new MaskedDateInputViewModel();
             Receipt = new ReceiptViewModel();
-            Recovery = new RecoveryViewModel();                
+            Recovery = new RecoveryViewModel();
         }
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)

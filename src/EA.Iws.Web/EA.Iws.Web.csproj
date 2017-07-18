@@ -482,6 +482,7 @@
     <Content Include="Content\select2\select2x2.png" />
     <Content Include="Global.asax" />
     <Content Include="packages.config" />
+    <Content Include="Scripts\datable.min.js" />
     <Content Include="Scripts\decision-dropdown.js" />
     <Content Include="Scripts\govuk_elements\application.js" />
     <Content Include="Scripts\govuk_elements\govuk\details.polyfill.js" />
@@ -1089,6 +1090,7 @@
     <Content Include="Views\Shared\_IwsSepaStandardDataNotice.cshtml" />
     <Content Include="Views\Applicant\NotFound.cshtml" />
     <Content Include="Views\Shared\_NotificationSwitcher.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\MaskedDateInputViewModel.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -3187,6 +3189,7 @@
     <Compile Include="Areas\NotificationApplication\ViewModels\StateOfExport\EditStateOfExportViewModel.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\WasteOperations\OperationCodesViewModel.cs" />
     <Compile Include="ViewModels\Shared\BusinessTypeViewModel.cs" />
+    <Compile Include="ViewModels\Shared\MaskedDateInputViewModel.cs" />
     <Compile Include="ViewModels\Shared\NotificationSwitcher.cs" />
     <Compile Include="ViewModels\Shared\OptionalDateInputViewModel.cs" />
     <Compile Include="ViewModels\Shared\RadioButtonPair.cs" />

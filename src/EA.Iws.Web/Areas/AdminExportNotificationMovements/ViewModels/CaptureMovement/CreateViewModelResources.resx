@@ -127,7 +127,7 @@
     <value>No prenotification received</value>
   </data>
   <data name="Number" xml:space="preserve">
-    <value>Enter the shipment number, for example 5</value>
+    <value>Shipment number</value>
   </data>
   <data name="NumberIsInt" xml:space="preserve">
     <value>Please enter a valid number</value>

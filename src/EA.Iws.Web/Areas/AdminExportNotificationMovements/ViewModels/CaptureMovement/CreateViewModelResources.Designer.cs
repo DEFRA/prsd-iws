@@ -89,7 +89,7 @@ namespace EA.Iws.Web.Areas.AdminExportNotificationMovements.ViewModels.CaptureMo
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Enter the shipment number, for example 5.
+        ///   Looks up a localized string similar to Shipment number.
         /// </summary>
         public static string Number {
             get {

@@ -6,47 +6,49 @@
 }
 
 
-    <div class="column-two-thirds">
-        <h1 class="heading-large">@Resource.MainHeading</h1>
-        @using (Html.BeginForm())
+<div class="column-two-thirds">
+    <h1 class="heading-large">@Resource.MainHeading</h1>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        @Html.Gds().ValidationSummary()
+        @Html.HiddenFor(m => m.LatestCurrentMovementNumber)
+        @Html.HiddenFor(m => m.NotificationId)
+        if (ViewData.ModelState.IsValid && Model.Number != null)
         {
-            @Html.AntiForgeryToken()
-            @Html.Gds().ValidationSummary()
-            @Html.HiddenFor(m => m.LatestCurrentMovementNumber)
-            @Html.HiddenFor(m => m.NotificationId)
-            if (ViewData.ModelState.IsValid && Model.Number != null)
+            <h1 class="data-item bold-xxlarge">@string.Format(Resource.ShipmentNumber, Model.Number)</h1>
+        }
+        <div class="form-group @Html.Gds().FormGroupClass(m => m.Number)">
+            @Html.Gds().LabelFor(m => m.Number, new { @class = "form-label-bold" })
+            @if (Model.LatestCurrentMovementNumber == 0)
             {
-                <h1 class="data-item bold-xxlarge">@string.Format(Resource.ShipmentNumber, Model.Number)</h1>
+                @Html.Gds().HintSpan(Resource.ZeroMovements)
             }
-            <div class="form-group @Html.Gds().FormGroupClass(m => m.Number)">
-                @Html.Gds().LabelFor(m => m.Number)
-                @if (Model.LatestCurrentMovementNumber == 0)
-                {
-                    @Resource.ZeroMovements
-                }
-                else
-                {
-                    @Html.Raw(string.Format(Resource.LatestNumber, Model.LatestCurrentMovementNumber))
-                }
-                @Html.Gds().ValidationMessageFor(m => m.Number)
-                @Html.Gds().TextBoxFor(m => m.Number, new { type = "number", min = 1, max = int.MaxValue })
-            </div>
-
+            else
+            {
+                @Html.Gds().HintSpan(string.Format(Resource.LatestNumber, Model.LatestCurrentMovementNumber))
+            }
+            @Html.Gds().ValidationMessageFor(m => m.Number)
+            @Html.Gds().TextBoxFor(m => m.Number, new { type = "number", min = 1, max = int.MaxValue })
+        </div>
 
         @Html.Partial("_Prenotify")
-            <hr class="hrline" />
 
-            @Html.EditorFor(m => m.Receipt)
+        <hr />
 
-            <hr class="hrline" />
+        @Html.EditorFor(m => m.Receipt)
 
-            @Html.EditorFor(m => m.Recovery)
-            <hr class="hrline" />
+        <hr />
 
-            <button class="button" type="submit">@Constants.ContinueButtonText</button>
-        }
-        @Html.ActionLink(Resource.ReturnToSummary, "Index", "Home", new { area = "AdminImportNotificationMovements", id = Model.NotificationId }, null)
-    </div>
+        @Html.EditorFor(m => m.Recovery)
+
+        <hr />
+
+        <button class="button" type="submit">@Constants.ContinueButtonText</button>
+    }
+
+    @Html.ActionLink(Resource.ReturnToSummary, "Index", "Home", new { area = "AdminImportNotificationMovements", id = Model.NotificationId }, null)
+</div>
 
 
 @section menu {
