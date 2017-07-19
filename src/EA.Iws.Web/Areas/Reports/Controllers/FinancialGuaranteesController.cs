@@ -8,14 +8,14 @@
     using Prsd.Core;
     using Prsd.Core.Mediator;
     using Requests.Admin.Reports;
-    using ViewModels.BlanketBonds;
+    using ViewModels.FinancialGuarantees;
 
-    [AuthorizeActivity(typeof(GetBlanketBondsReport))]
-    public class BlanketBondsController : Controller
+    [AuthorizeActivity(typeof(GetFinancialGuaranteesReport))]
+    public class FinancialGuaranteesController : Controller
     {
         private readonly IMediator mediator;
 
-        public BlanketBondsController(IMediator mediator)
+        public FinancialGuaranteesController(IMediator mediator)
         {
             this.mediator = mediator;
         }
@@ -36,15 +36,15 @@
                 return View(model);
             }
 
-            var report = await mediator.SendAsync(new GetBlanketBondsReport(
+            var report = await mediator.SendAsync(new GetFinancialGuaranteesReport(
                 model.FinancialGuaranteeReferenceNumber,
                 model.ExporterName,
                 model.ImporterName,
                 model.ProducerName));
 
-            var filename = string.Format("blanket-bonds-{0}.xlsx", SystemTime.UtcNow.ToShortDateString());
+            var filename = string.Format("financial-guarantees-{0}.xlsx", SystemTime.UtcNow.ToShortDateString());
 
-            return new XlsxActionResult<BlanketBondsData>(report, filename);
+            return new XlsxActionResult<FinancialGuaranteesData>(report, filename);
         }
     }
 }

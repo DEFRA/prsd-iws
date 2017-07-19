@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace EA.Iws.Web.Areas.Reports.Views.BlanketBonds {
+namespace EA.Iws.Web.Areas.Reports.ViewModels.FinancialGuarantees {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace EA.Iws.Web.Areas.Reports.Views.BlanketBonds {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class IndexResources {
+    public class IndexViewModelResources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal IndexResources() {
+        internal IndexViewModelResources() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace EA.Iws.Web.Areas.Reports.Views.BlanketBonds {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EA.Iws.Web.Areas.Reports.Views.BlanketBonds.IndexResources", typeof(IndexResources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EA.Iws.Web.Areas.Reports.ViewModels.FinancialGuarantees.IndexViewModelResources", typeof(IndexViewModelResources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,20 +61,38 @@ namespace EA.Iws.Web.Areas.Reports.Views.BlanketBonds {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Generate report.
+        ///   Looks up a localized string similar to Exporter (notifier) name.
         /// </summary>
-        public static string ButtonText {
+        public static string ExporterName {
             get {
-                return ResourceManager.GetString("ButtonText", resourceCulture);
+                return ResourceManager.GetString("ExporterName", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Blanket bonds.
+        ///   Looks up a localized string similar to Financial guarantee reference number.
         /// </summary>
-        public static string Title {
+        public static string FinancialGuaranteeReferenceNumber {
             get {
-                return ResourceManager.GetString("Title", resourceCulture);
+                return ResourceManager.GetString("FinancialGuaranteeReferenceNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Importer (consignee) name.
+        /// </summary>
+        public static string ImporterName {
+            get {
+                return ResourceManager.GetString("ImporterName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Producer name.
+        /// </summary>
+        public static string ProducerName {
+            get {
+                return ResourceManager.GetString("ProducerName", resourceCulture);
             }
         }
     }

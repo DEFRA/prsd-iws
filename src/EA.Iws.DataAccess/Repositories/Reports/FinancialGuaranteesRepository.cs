@@ -8,20 +8,20 @@
     using Core.Notification;
     using Domain.Reports;
 
-    internal class BlanketBondsRepository : IBlanketBondsRepository
+    internal class FinancialGuaranteesRepository : IFinancialGuaranteesRepository
     {
         private readonly IwsContext context;
 
-        public BlanketBondsRepository(IwsContext context)
+        public FinancialGuaranteesRepository(IwsContext context)
         {
             this.context = context;
         }
 
-        public async Task<IEnumerable<BlanketBondsData>> GetBlanketBonds(UKCompetentAuthority competentAuthority,
+        public async Task<IEnumerable<FinancialGuaranteesData>> GetBlanketBonds(UKCompetentAuthority competentAuthority,
             string financialGuaranteeReferenceNumber, string exporterName, string importerName,
             string producerName)
         {
-            return await context.Database.SqlQuery<BlanketBondsData>(@"
+            return await context.Database.SqlQuery<FinancialGuaranteesData>(@"
                 SELECT [ReferenceNumber]
                       ,[ApprovedDate]
                       ,[ActiveLoadsPermitted]

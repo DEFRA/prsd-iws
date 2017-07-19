@@ -3,7 +3,7 @@
     using System;
     using System.ComponentModel;
 
-    public class BlanketBondsData
+    public class FinancialGuaranteesData
     {
         public string ReferenceNumber { get; set; }
 

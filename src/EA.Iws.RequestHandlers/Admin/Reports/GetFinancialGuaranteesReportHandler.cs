@@ -9,26 +9,26 @@
     using Prsd.Core.Mediator;
     using Requests.Admin.Reports;
 
-    internal class GetBlanketBondsReportHandler : IRequestHandler<GetBlanketBondsReport, BlanketBondsData[]>
+    internal class GetFinancialGuaranteesReportHandler : IRequestHandler<GetFinancialGuaranteesReport, FinancialGuaranteesData[]>
     {
-        private readonly IBlanketBondsRepository blanketBondsRepository;
+        private readonly IFinancialGuaranteesRepository financialGuaranteesRepository;
         private readonly IInternalUserRepository internalUserRepository;
         private readonly IUserContext userContext;
 
-        public GetBlanketBondsReportHandler(IBlanketBondsRepository blanketBondsRepository, 
+        public GetFinancialGuaranteesReportHandler(IFinancialGuaranteesRepository financialGuaranteesRepository, 
             IUserContext userContext,
             IInternalUserRepository internalUserRepository)
         {
-            this.blanketBondsRepository = blanketBondsRepository;
+            this.financialGuaranteesRepository = financialGuaranteesRepository;
             this.userContext = userContext;
             this.internalUserRepository = internalUserRepository;
         }
 
-        public async Task<BlanketBondsData[]> HandleAsync(GetBlanketBondsReport message)
+        public async Task<FinancialGuaranteesData[]> HandleAsync(GetFinancialGuaranteesReport message)
         {
             var user = await internalUserRepository.GetByUserId(userContext.UserId);
 
-            return (await blanketBondsRepository.GetBlanketBonds(
+            return (await financialGuaranteesRepository.GetBlanketBonds(
                 user.CompetentAuthority,
                 message.FinancialGuaranteeReferenceNumber,
                 message.ExporterName,
