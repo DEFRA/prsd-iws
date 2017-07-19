@@ -164,8 +164,7 @@
                 }
 
                 if ((NotificationReceivedDate != null && NewDate.AsDateTime() < NotificationReceivedDate.AsDateTime()) ||
-                    (PaymentReceivedDate != null && NewDate.AsDateTime() < PaymentReceivedDate) ||
-                    (CommencementDate != null && NewDate.AsDateTime() < CommencementDate.AsDateTime()))
+                    (PaymentReceivedDate != null && NewDate.AsDateTime() < PaymentReceivedDate))
                 {
                     yield return new ValidationResult(DateInputViewModelResources.CompleteNotBefore, new[] { "NewDate" });
                 }
