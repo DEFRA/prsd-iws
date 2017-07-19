@@ -49,7 +49,7 @@
         public async Task<Guid?> GetIdOrDefault(string number)
         {
             return await context.NotificationApplications
-                .Where(n => number == n.NotificationNumber)
+                .Where(n => number.Replace(" ", string.Empty) == n.NotificationNumber.Replace(" ", string.Empty))
                 .Select(n => (Guid?)n.Id)
                 .SingleOrDefaultAsync();
         }
