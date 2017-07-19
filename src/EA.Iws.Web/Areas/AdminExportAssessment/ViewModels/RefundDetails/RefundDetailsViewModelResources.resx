@@ -142,7 +142,7 @@
     <value>Please enter a comment</value>
   </data>
   <data name="Date" xml:space="preserve">
-    <value>Date refunded</value>
+    <value>Date refund requested</value>
   </data>
   <data name="DateRequiredError" xml:space="preserve">
     <value>Please provide the date the refund was made</value>
