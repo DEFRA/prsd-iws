@@ -30,6 +30,7 @@
                       ,[ExporterName]
                       ,[ImporterName]
                       ,[ProducerName]
+                      ,[IsBlanketBond]
                   FROM [Reports].[BlanketBonds]
                  WHERE [CompetentAuthority] = @ca
                    AND (@financialGuaranteeReferenceNumber IS NULL OR [ReferenceNumber] LIKE '%' + @financialGuaranteeReferenceNumber + '%')
