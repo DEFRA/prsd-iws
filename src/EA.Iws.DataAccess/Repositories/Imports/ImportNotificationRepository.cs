@@ -53,9 +53,10 @@
 
         public async Task<Guid?> GetIdOrDefault(string number)
         {
-            return await context.ImportNotifications.Where(n => n.NotificationNumber == number)
-                                                    .Select(n => (Guid?)n.Id)
-                                                    .SingleOrDefaultAsync();
+            return await context.ImportNotifications
+                .Where(n => n.NotificationNumber.Replace(" ", string.Empty) == number.Replace(" ", string.Empty))
+                .Select(n => (Guid?)n.Id)
+                .SingleOrDefaultAsync();
         }
 
         public async Task<bool> Delete(Guid notificationId)
