@@ -1,4 +1,4 @@
-﻿namespace EA.Iws.Web.Areas.Reports.ViewModels.BlanketBonds
+﻿namespace EA.Iws.Web.Areas.Reports.ViewModels.FinancialGuarantees
 {
     using System.ComponentModel.DataAnnotations;
 
