@@ -76,7 +76,7 @@
                     type = (PaymentMethod)Model.TableData[i].Type;
                 }
 
-                var comment = string.IsNullOrWhiteSpace(Model.TableData[i].Comments) ? "No" : "<a href=\"#comment-" + i + "\">Yes</a>";
+                var comment = string.IsNullOrWhiteSpace(Model.TableData[i].Comments) ? "No" : "<a href=\"#comment-" + i + "\" onclick='openComments()'>Yes</a>";
 
                 <tr>
                     <td>@trans</td>
@@ -117,7 +117,7 @@
 </div>
 
 <div class="form-group">
-    <details role="group">
+    <details id="comments" role="group">
 
         <summary role="button"><span class="summary">@IndexResources.CommentSectionHeading</span></summary>
 
@@ -158,6 +158,8 @@
 {
     <script>
 
+        $comments = $("#comments");
+
         $(function () 
         {
             var showPayment = @Model.ShowPaymentDetails.ToString().ToLower();
@@ -176,5 +178,9 @@
             }
 
         });
+
+        function openComments() {
+            $comments.attr('open', '');
+        }
     </script>
 }
