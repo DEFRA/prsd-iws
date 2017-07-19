@@ -14,7 +14,7 @@
     {
         [Display(Name = "ReceivedDateLabel", ResourceType = typeof(ReceiptViewModelResources))]
         [RequiredDateInput(ErrorMessageResourceName = "ReceivedDateRequired", ErrorMessageResourceType = typeof(ReceiptViewModelResources))]
-        public OptionalDateInputViewModel ReceivedDate { get; set; }
+        public MaskedDateInputViewModel ReceivedDate { get; set; }
 
         [Display(Name = "ActualQuantityLabel", ResourceType = typeof(ReceiptViewModelResources))]
         public decimal? ActualQuantity { get; set; }
@@ -51,7 +51,7 @@
 
         public ReceiptViewModel()
         {
-            ReceivedDate = new OptionalDateInputViewModel(true);
+            ReceivedDate = new MaskedDateInputViewModel();
             PossibleUnits = new List<ShipmentQuantityUnits>();
             WasAccepted = true;
         }
@@ -67,11 +67,11 @@
 
             if (importMovementReceiptData.ReceiptDate.HasValue)
             {
-                ReceivedDate = new OptionalDateInputViewModel(importMovementReceiptData.ReceiptDate.Value.DateTime, true);
+                ReceivedDate = new MaskedDateInputViewModel(importMovementReceiptData.ReceiptDate.Value.DateTime);
             }
             else
             {
-                ReceivedDate = new OptionalDateInputViewModel(true);
+                ReceivedDate = new MaskedDateInputViewModel();
             }
         }
 

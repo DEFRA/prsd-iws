@@ -21,10 +21,10 @@
         [RequiredDateInput(ErrorMessageResourceName = "ActualShipmentDateRequired",
             ErrorMessageResourceType = typeof(CreateViewModelResources))]
         [Display(Name = "ActualShipmentDate", ResourceType = typeof(CreateViewModelResources))]
-        public OptionalDateInputViewModel ActualShipmentDate { get; set; }
+        public MaskedDateInputViewModel ActualShipmentDate { get; set; }
 
         [Display(Name = "PrenotificationDate", ResourceType = typeof(CreateViewModelResources))]
-        public OptionalDateInputViewModel PrenotificationDate { get; set; }
+        public MaskedDateInputViewModel PrenotificationDate { get; set; }
 
         [Display(Name = "HasNoPrenotification", ResourceType = typeof(CreateViewModelResources))]
         public bool HasNoPrenotification { get; set; }
@@ -41,8 +41,8 @@
 
         public CreateViewModel()
         {
-            ActualShipmentDate = new OptionalDateInputViewModel(true);
-            PrenotificationDate = new OptionalDateInputViewModel(true);
+            ActualShipmentDate = new MaskedDateInputViewModel();
+            PrenotificationDate = new MaskedDateInputViewModel();
             Receipt = new ReceiptViewModel();
             Recovery = new RecoveryViewModel();
         }
