@@ -63,10 +63,10 @@
             A.CallTo(() => validator.Validate(NotificationId, A<int>.Ignored))
                 .Returns(true);
 
-            var result = await factory.Create(NotificationId, 1, AnyDate.AddDays(5), AnyDate, false);
+            var result = await factory.Create(NotificationId, 1, AnyDate, AnyDate, false);
 
             Assert.Equal(MovementStatus.Submitted, result.Status);
-            Assert.Equal(AnyDate.AddDays(5), result.PrenotificationDate);
+            Assert.Equal(AnyDate, result.PrenotificationDate);
             Assert.Equal(AnyDate, result.Date);
         }
 
