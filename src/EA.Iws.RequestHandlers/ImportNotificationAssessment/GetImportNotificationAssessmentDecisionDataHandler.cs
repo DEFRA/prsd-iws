@@ -20,7 +20,8 @@
 
         public async Task<ImportNotificationAssessmentDecisionData> HandleAsync(GetImportNotificationAssessmentDecisionData message)
         {
-            var isPreconsented = (await facilityRepository.GetByNotificationId(message.ImportNotificationId)).AllFacilitiesPreconsented;
+            var facilityCollection = await facilityRepository.GetByNotificationId(message.ImportNotificationId);
+            var isPreconsented = facilityCollection == null ? (bool?)null : facilityCollection.AllFacilitiesPreconsented;
             var assessment = await assessmentRepository.GetByNotification(message.ImportNotificationId);
 
             return new ImportNotificationAssessmentDecisionData

@@ -20,7 +20,7 @@
         public async Task<FacilityCollection> GetByNotificationId(Guid notificationId)
         {
             await authorization.EnsureAccessAsync(notificationId);
-            return await context.Facilities.SingleAsync(f => f.ImportNotificationId == notificationId);
+            return await context.Facilities.SingleOrDefaultAsync(f => f.ImportNotificationId == notificationId);
         }
 
         public void Add(FacilityCollection facilityCollection)
