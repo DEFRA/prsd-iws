@@ -79,7 +79,7 @@
     <Compile Include="Admin\NotificationAssessment\SetNotificationAcknowledgedDate.cs" />
     <Compile Include="Admin\NotificationAssessment\SetNotificationReceivedDate.cs" />
     <Compile Include="Admin\NotificationAssessment\UnlockNotification.cs" />
-    <Compile Include="Admin\Reports\GetBlanketBondsReport.cs" />
+    <Compile Include="Admin\Reports\GetFinancialGuaranteesReport.cs" />
     <Compile Include="Admin\Reports\GetExportMovementsReport.cs" />
     <Compile Include="Admin\Reports\GetImportStatsReport.cs" />
     <Compile Include="Admin\Reports\GetImportNotificationsReport.cs" />

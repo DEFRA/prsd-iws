@@ -931,7 +931,7 @@
     <Content Include="Content\fonts\fontawesome-webfont.ttf" />
     <Content Include="Content\fonts\fontawesome-webfont.eot" />
     <Content Include="Content\iws\_search.scss" />
-    <Content Include="Areas\Reports\Views\BlanketBonds\Index.cshtml" />
+    <Content Include="Areas\Reports\Views\FinancialGuarantees\Index.cshtml" />
     <Content Include="Areas\AdminExportAssessment\Views\FinancialGuaranteeDates\Index.cshtml" />
     <Content Include="Areas\AdminExportAssessment\Views\Annex\Index.cshtml" />
     <Content Include="Areas\NotificationMovements\Views\Documents\Index.cshtml" />
@@ -2383,7 +2383,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>SummaryResources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Areas\Reports\Controllers\BlanketBondsController.cs" />
+    <Compile Include="Areas\Reports\Controllers\FinancialGuaranteesController.cs" />
     <Compile Include="Areas\Reports\Controllers\ExportMovementsController.cs" />
     <Compile Include="Areas\Reports\Controllers\ImportStatsController.cs" />
     <Compile Include="Areas\Reports\Controllers\ImportNotificationsController.cs" />
@@ -2391,8 +2391,8 @@
     <Compile Include="Areas\Reports\Controllers\FinanceController.cs" />
     <Compile Include="Areas\Reports\Controllers\ShipmentsController.cs" />
     <Compile Include="Areas\Reports\Controllers\FreedomOfInformationController.cs" />
-    <Compile Include="Areas\Reports\ViewModels\BlanketBonds\IndexViewModel.cs" />
-    <Compile Include="Areas\Reports\ViewModels\BlanketBonds\IndexViewModelResources.Designer.cs">
+    <Compile Include="Areas\Reports\ViewModels\FinancialGuarantees\IndexViewModel.cs" />
+    <Compile Include="Areas\Reports\ViewModels\FinancialGuarantees\IndexViewModelResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>IndexViewModelResources.resx</DependentUpon>
@@ -2445,7 +2445,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>IndexViewModelResources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Areas\Reports\Views\BlanketBonds\IndexResources.Designer.cs">
+    <Compile Include="Areas\Reports\Views\FinancialGuarantees\IndexResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>IndexResources.resx</DependentUpon>
@@ -4595,7 +4595,7 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Areas\Reports\ViewModels\BlanketBonds\IndexViewModelResources.resx">
+    <EmbeddedResource Include="Areas\Reports\ViewModels\FinancialGuarantees\IndexViewModelResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>IndexViewModelResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
@@ -4631,7 +4631,7 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>IndexViewModelResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Areas\Reports\Views\BlanketBonds\IndexResources.resx">
+    <EmbeddedResource Include="Areas\Reports\Views\FinancialGuarantees\IndexResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>

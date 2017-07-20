@@ -346,7 +346,7 @@
     <Compile Include="Reports\DataExportNotification.cs" />
     <Compile Include="Reports\ExportStats.cs" />
     <Compile Include="Reports\Finance.cs" />
-    <Compile Include="Reports\IBlanketBondsRepository.cs" />
+    <Compile Include="Reports\IFinancialGuaranteesRepository.cs" />
     <Compile Include="Reports\IExportMovementsRepository.cs" />
     <Compile Include="Reports\IExportNotificationsRepository.cs" />
     <Compile Include="Reports\IExportStatsRepository.cs" />

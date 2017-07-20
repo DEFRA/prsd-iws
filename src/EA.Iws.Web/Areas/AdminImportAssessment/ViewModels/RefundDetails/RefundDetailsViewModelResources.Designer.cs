@@ -134,7 +134,7 @@ namespace EA.Iws.Web.Areas.AdminImportAssessment.ViewModels.RefundDetails {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Date refunded.
+        ///   Looks up a localized string similar to Date refund requested.
         /// </summary>
         public static string Date {
             get {
@@ -161,7 +161,7 @@ namespace EA.Iws.Web.Areas.AdminImportAssessment.ViewModels.RefundDetails {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Please provide the date the refund was made.
+        ///   Looks up a localized string similar to Please provide the date the refund was requested.
         /// </summary>
         public static string DateRequiredError {
             get {

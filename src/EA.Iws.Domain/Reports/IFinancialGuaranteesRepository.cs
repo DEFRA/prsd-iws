@@ -5,9 +5,9 @@
     using Core.Admin.Reports;
     using Core.Notification;
 
-    public interface IBlanketBondsRepository
+    public interface IFinancialGuaranteesRepository
     {
-        Task<IEnumerable<BlanketBondsData>> GetBlanketBonds(UKCompetentAuthority competentAuthority, string financialGuaranteeReferenceNumber, string exporterName,
+        Task<IEnumerable<FinancialGuaranteesData>> GetBlanketBonds(UKCompetentAuthority competentAuthority, string financialGuaranteeReferenceNumber, string exporterName,
             string importerName, string producerName);
     }
 }

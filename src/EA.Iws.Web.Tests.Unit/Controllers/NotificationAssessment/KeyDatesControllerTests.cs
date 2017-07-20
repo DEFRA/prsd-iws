@@ -378,7 +378,7 @@
         }
 
         [Fact]
-        public async Task NotificationComplete_NotBefore_AssessmentStartedDate()
+        public async Task NotificationComplete_CanBeBefore_AssessmentStartedDate()
         {
             var model = GetValidViewModel();
             model.NotificationCompleteDate = null;
@@ -389,7 +389,7 @@
 
             await controller.Index(model);
 
-            Assert.True(controller.ModelState.ContainsKey("NewDate"));
+            Assert.False(controller.ModelState.ContainsKey("NewDate"));
         }
 
         [Fact]

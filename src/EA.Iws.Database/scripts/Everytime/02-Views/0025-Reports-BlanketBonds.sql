@@ -17,7 +17,12 @@ SELECT
     E.[Name] AS [ExporterName],
     I.[Name] AS [ImporterName],
     P.[Name] AS [ProducerName],
-    N.[CompetentAuthority]
+    N.[CompetentAuthority],
+    CASE
+        WHEN FG.[IsBlanketBond] = 1 THEN 'Yes'
+        WHEN FG.[IsBlanketBond] = 0 THEN 'No'
+        ELSE '- -' 
+    END AS [IsBlanketBond]
 FROM
     [Notification].[Notification] N
     INNER JOIN  [Notification].[FinancialGuaranteeCollection] FGC

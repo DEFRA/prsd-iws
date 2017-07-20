@@ -42,7 +42,7 @@
         {
             get
             {
-                return new SelectList(PossibleUnits.Select(u =>
+                return new SelectList(PossibleUnits.OrderBy(u => (int)u).Select(u =>
                 new KeyValuePair<string, ShipmentQuantityUnits>(EnumHelper.GetDisplayName(u), u)),
                 "Value",
                 "Key");

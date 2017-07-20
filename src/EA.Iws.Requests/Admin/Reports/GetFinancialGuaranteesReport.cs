@@ -6,9 +6,9 @@
     using Prsd.Core.Mediator;
 
     [RequestAuthorization(ReportingPermissions.CanViewBlanketBondsReport)]
-    public class GetBlanketBondsReport : IRequest<BlanketBondsData[]>
+    public class GetFinancialGuaranteesReport : IRequest<FinancialGuaranteesData[]>
     {
-        public GetBlanketBondsReport(string financialGuaranteeReferenceNumber, string exporterName, string importerName,
+        public GetFinancialGuaranteesReport(string financialGuaranteeReferenceNumber, string exporterName, string importerName,
             string producerName)
         {
             FinancialGuaranteeReferenceNumber = financialGuaranteeReferenceNumber;
