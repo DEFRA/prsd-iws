@@ -64,7 +64,7 @@
           
             if ((!Receipt.ReceivedDate.IsCompleted && Receipt.ActualQuantity.HasValue) || (!Receipt.ReceivedDate.IsCompleted && !string.IsNullOrWhiteSpace(Receipt.RejectionReason)))
             {
-                yield return new ValidationResult(CreateViewModelResources.ReceivedDateRequired, new[] { "Receipt.ReceivedDate.Day" });
+                yield return new ValidationResult(CreateViewModelResources.ReceivedDateRequired, new[] { "Receipt.ReceivedDate.Date" });
             }
 
             if (!Receipt.ActualQuantity.HasValue && Receipt.ReceivedDate.IsCompleted)
@@ -80,16 +80,16 @@
             if (Recovery.IsComplete() && !Receipt.IsComplete())
             {
                 yield return new ValidationResult(string.Format(CreateViewModelResources.ReceiptMustBeCompletedFirst, NotificationType),
-                    new[] { "Recovery.RecoveryDate.Day" });
+                    new[] { "Recovery.RecoveryDate.Date" });
             }
 
             if (Receipt.IsComplete() && !Receipt.WasShipmentAccepted && Recovery.IsComplete())
             {
                 yield return new ValidationResult(string.Format(CreateViewModelResources.RecoveryDateCannotBeEnteredForRejected, NotificationType),
-                    new[] { "Recovery.RecoveryDate.Day" });
+                    new[] { "Recovery.RecoveryDate.Date" });
             }
 
-            if (PrenotificationDate.IsCompleted && PrenotificationDate.AsDateTime() > SystemTime.UtcNow.Date)
+            if (PrenotificationDate.IsCompleted && PrenotificationDate.Date > SystemTime.UtcNow.Date)
             {
                 yield return new ValidationResult(CreateViewModelResources.PrenotifictaionDateInfuture,
                    new[] { "PrenotificationDate" });
@@ -97,14 +97,14 @@
 
             if (ActualShipmentDate.IsCompleted && PrenotificationDate.IsCompleted)
             {
-                DateTime preNotificateDate = PrenotificationDate.AsDateTime().Value;
+                DateTime preNotificateDate = PrenotificationDate.Date.Value;
 
-                if (ActualShipmentDate.AsDateTime() < preNotificateDate)
+                if (ActualShipmentDate.Date < preNotificateDate)
                 {
                     yield return new ValidationResult(CreateViewModelResources.ActualDateBeforePrenotification, new[] { "ActualShipmentDate" });
                 }
 
-                if (ActualShipmentDate.AsDateTime() > preNotificateDate.AddDays(60))
+                if (ActualShipmentDate.Date > preNotificateDate.AddDays(60))
                 {
                     yield return new ValidationResult(CreateViewModelResources.ActualDateGreaterthanSixtyDays, new[] { "ActualShipmentDate" });
                 }
@@ -112,25 +112,25 @@
 
             if (Receipt.IsComplete())
             {
-                if (Receipt.ReceivedDate.AsDateTime() < ActualShipmentDate.AsDateTime())
+                if (Receipt.ReceivedDate.Date < ActualShipmentDate.Date)
                 {
-                    yield return new ValidationResult(CreateViewModelResources.ReceivedDateBeforeActualDate, new[] { "Receipt.ReceivedDate.Day" });
+                    yield return new ValidationResult(CreateViewModelResources.ReceivedDateBeforeActualDate, new[] { "Receipt.ReceivedDate.Date" });
                 }
-                if (Receipt.ReceivedDate.AsDateTime() > SystemTime.UtcNow.Date)
+                if (Receipt.ReceivedDate.Date > SystemTime.UtcNow.Date)
                 {
-                    yield return new ValidationResult(CreateViewModelResources.ReceivedDateInfuture, new[] { "Receipt.ReceivedDate.Day" });
+                    yield return new ValidationResult(CreateViewModelResources.ReceivedDateInfuture, new[] { "Receipt.ReceivedDate.Date" });
                 }
             }
 
             if (Recovery.IsComplete())
             {
-                if (Recovery.RecoveryDate.AsDateTime() < Receipt.ReceivedDate.AsDateTime())
+                if (Recovery.RecoveryDate.Date < Receipt.ReceivedDate.Date)
                 {
-                    yield return new ValidationResult(CreateViewModelResources.RecoveredDateBeforeReceivedDate, new[] { "Recovery.RecoveryDate.Day" });
+                    yield return new ValidationResult(CreateViewModelResources.RecoveredDateBeforeReceivedDate, new[] { "Recovery.RecoveryDate.Date" });
                 }
-                if (Recovery.RecoveryDate.AsDateTime() > SystemTime.UtcNow.Date)
+                if (Recovery.RecoveryDate.Date > SystemTime.UtcNow.Date)
                 {
-                    yield return new ValidationResult(CreateViewModelResources.RecoveredDateInfuture, new[] { "Recovery.RecoveryDate.Day" });
+                    yield return new ValidationResult(CreateViewModelResources.RecoveredDateInfuture, new[] { "Recovery.RecoveryDate.Date" });
                 }
             }
         }
