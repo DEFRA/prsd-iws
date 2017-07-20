@@ -43,112 +43,112 @@
         [Fact]
         public void ActualShipmentDateCanBeInThePast()
         {
-            var model = CreateViewModelForActualDate(15, 6, 2016, "ACTUALDATE_PAST");
+            var model = CreateViewModelForActualDate(15, 6, 2016, true);
             Assert.Empty(ViewModelValidator.ValidateViewModel(model));
         }
 
         [Fact]
         public void ActualShipmentDateCanBeToday()
         {
-            var model = CreateViewModelForActualDate(1, 6, 2016, String.Empty);
+            var model = CreateViewModelForActualDate(1, 6, 2016, false);
             Assert.Empty(ViewModelValidator.ValidateViewModel(model));
         }
 
         [Fact]
         public void ActualShipmentDateNotBeforePrenotificationDate()
         {
-            var model = CreateViewModelForActualDate(31, 5, 2016, String.Empty);
+            var model = CreateViewModelForActualDate(31, 5, 2016, false);
             Assert.NotEmpty(ViewModelValidator.ValidateViewModel(model));
         }
 
         [Fact]
         public void ActualShipmentDateSameasPrenotificationDate()
         {
-            var model = CreateViewModelForActualDate(1, 6, 2016, String.Empty);
+            var model = CreateViewModelForActualDate(1, 6, 2016, false);
             Assert.Empty(ViewModelValidator.ValidateViewModel(model));
         }       
 
         [Fact]
         public void ActualShipmentDateCanBeSixtyDaysAfterPrenotification()
         {
-            var model = CreateViewModelForActualDate(31, 7, 2016, String.Empty);
+            var model = CreateViewModelForActualDate(31, 7, 2016, false);
             Assert.Empty(ViewModelValidator.ValidateViewModel(model));
         }
 
         [Fact]
         public void ActualShipmentDateGreaterThanSixtyDaysAfterPrenotification()
         {
-            var model = CreateViewModelForActualDate(2, 8, 2016, String.Empty);
+            var model = CreateViewModelForActualDate(2, 8, 2016, false);
             Assert.NotEmpty(ViewModelValidator.ValidateViewModel(model));
         }
 
         [Fact]
         public void WasteReceivedDateCanBeInThePast()
         {
-            var model = CreateViewModelForReceivedDate(30, 5, 2016, "RECEIVED_PAST");
+            var model = CreateViewModelForReceivedDate(30, 5, 2016, true);
             Assert.Empty(ViewModelValidator.ValidateViewModel(model));
         }
 
         [Fact]
         public void WasteReceivedDateCanBeToday()
         {
-            var model = CreateViewModelForReceivedDate(1, 6, 2016, String.Empty);
+            var model = CreateViewModelForReceivedDate(1, 6, 2016, false);
             Assert.Empty(ViewModelValidator.ValidateViewModel(model));
         }
 
         [Fact]
         public void WasteReceivedDateNotBeforeActualShipmentDate()
         {
-            var model = CreateViewModelForReceivedDate(31, 5, 2016, String.Empty);
+            var model = CreateViewModelForReceivedDate(31, 5, 2016, false);
             Assert.NotEmpty(ViewModelValidator.ValidateViewModel(model));
         }
 
         [Fact]
         public void WasteReceivedDateSameasActualShipmentDate()
         {
-            var model = CreateViewModelForReceivedDate(1, 6, 2016, String.Empty);
+            var model = CreateViewModelForReceivedDate(1, 6, 2016, false);
             Assert.Empty(ViewModelValidator.ValidateViewModel(model));
         }
 
         [Fact]
         public void WasteReceivedDateCannotBeInTheFuture()
         {
-            var model = CreateViewModelForReceivedDate(30, 7, 2016, String.Empty);
+            var model = CreateViewModelForReceivedDate(30, 7, 2016, false);
             Assert.NotEmpty(ViewModelValidator.ValidateViewModel(model));
         }
 
         [Fact]
         public void WasteRecoveredDateCanBeInThePast()
         {
-            var model = CreateViewModelForRecoveredDate(30, 5, 2016, "RECOVERED_PAST");
+            var model = CreateViewModelForRecoveredDate(30, 5, 2016, true);
             Assert.Empty(ViewModelValidator.ValidateViewModel(model));
         }
 
         [Fact]
         public void WasteRecoveredDateCanBeToday()
         {
-            var model = CreateViewModelForRecoveredDate(1, 6, 2016, String.Empty);
+            var model = CreateViewModelForRecoveredDate(1, 6, 2016, false);
             Assert.Empty(ViewModelValidator.ValidateViewModel(model));
         }
 
         [Fact]
         public void WasteRecoveredDateNotBeforeWasteReceivedDate()
         {
-            var model = CreateViewModelForRecoveredDate(31, 5, 2016, String.Empty);
+            var model = CreateViewModelForRecoveredDate(31, 5, 2016, false);
             Assert.NotEmpty(ViewModelValidator.ValidateViewModel(model));
         }
 
         [Fact]
         public void WasteRecoveredDateSameasWasteReceivedDate()
         {
-            var model = CreateViewModelForRecoveredDate(1, 6, 2016, String.Empty);
+            var model = CreateViewModelForRecoveredDate(1, 6, 2016, false);
             Assert.Empty(ViewModelValidator.ValidateViewModel(model));
         }
 
         [Fact]
         public void WasteRecoveredDateCannotBeInTheFuture()
         {
-            var model = CreateViewModelForRecoveredDate(30, 7, 2016, String.Empty);
+            var model = CreateViewModelForRecoveredDate(30, 7, 2016, false);
             Assert.NotEmpty(ViewModelValidator.ValidateViewModel(model));
         }
 
@@ -160,34 +160,34 @@
             model.ActualShipmentDate = new OptionalDateInputViewModel(new DateTime(year, month, day));
             return model;
         }
-        internal CreateViewModel CreateViewModelForActualDate(int day, int month, int year, string type)
+        internal CreateViewModel CreateViewModelForActualDate(int day, int month, int year, bool isDateInPast)
         {
             var model = new CreateViewModel();
             model.Number = 52;
             model.PrenotificationDate = new OptionalDateInputViewModel(new DateTime(2016, 6, 1));
 
-            if (type.Equals(String.Empty))
+            if (!isDateInPast)
             {
                 model.ActualShipmentDate = new OptionalDateInputViewModel(new DateTime(year, month, day));
             }
-            else if (type.Equals("ACTUALDATE_PAST"))
+            else
             {
                 model.ActualShipmentDate = new OptionalDateInputViewModel(new DateTime(year, month, day));
             }
             return model;
         }
 
-        internal CreateViewModel CreateViewModelForReceivedDate(int day, int month, int year, string type)
+        internal CreateViewModel CreateViewModelForReceivedDate(int day, int month, int year, bool isDateInPast)
         {
             var model = new CreateViewModel();
             model.Number = 52;
 
-            if (type.Equals(String.Empty))
+            if (!isDateInPast)
             {
                 model.PrenotificationDate = new OptionalDateInputViewModel(new DateTime(2016, 6, 1));
                 model.ActualShipmentDate = new OptionalDateInputViewModel(new DateTime(2016, 6, 1));             
             }
-            else if (type.Equals("RECEIVED_PAST"))
+            else
             {
                 model.PrenotificationDate = new OptionalDateInputViewModel(new DateTime(2016, 5, 1));
                 model.ActualShipmentDate = new OptionalDateInputViewModel(new DateTime(2016, 5, 15));
@@ -201,17 +201,17 @@
             return model;
         }
 
-        internal CreateViewModel CreateViewModelForRecoveredDate(int day, int month, int year, string type)
+        internal CreateViewModel CreateViewModelForRecoveredDate(int day, int month, int year, bool isDateInPast)
         {
             var model = new CreateViewModel();
             model.Number = 52;
-            if (type.Equals(String.Empty))
+            if (!isDateInPast)
             {
                 model.PrenotificationDate = new OptionalDateInputViewModel(new DateTime(2016, 6, 1));
                 model.ActualShipmentDate = new OptionalDateInputViewModel(new DateTime(2016, 6, 1));
                 model.Receipt.ReceivedDate = new OptionalDateInputViewModel(new DateTime(2016, 6, 1));               
             }
-            else if (type.Equals("RECOVERED_PAST"))
+            else 
             {
                 model.PrenotificationDate = new OptionalDateInputViewModel(new DateTime(2016, 5, 1));
                 model.ActualShipmentDate = new OptionalDateInputViewModel(new DateTime(2016, 5, 1));
