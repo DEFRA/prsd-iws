@@ -188,22 +188,29 @@
         }
 
         [Theory]
+        [InlineData(ImportNotificationStatus.Consented)]
+        [InlineData(ImportNotificationStatus.ConsentWithdrawn)]
+        [InlineData(ImportNotificationStatus.Objected)]
+        [InlineData(ImportNotificationStatus.Withdrawn)]
+        public void CanMarkFileAfterDecisionMade(ImportNotificationStatus currentStatus)
+        {
+            SetNotificationAssessmentStatus(currentStatus);
+            assessment.MarkFileClosed(AnyDate);
+
+            Assert.Equal(ImportNotificationStatus.FileClosed, assessment.Status);
+        }
+
+        [Theory]
         [InlineData(ImportNotificationStatus.NotificationReceived)]
         [InlineData(ImportNotificationStatus.AwaitingPayment)]
         [InlineData(ImportNotificationStatus.AwaitingAssessment)]
         [InlineData(ImportNotificationStatus.InAssessment)]
         [InlineData(ImportNotificationStatus.ReadyToAcknowledge)]
         [InlineData(ImportNotificationStatus.DecisionRequiredBy)]
-        [InlineData(ImportNotificationStatus.Consented)]
-        [InlineData(ImportNotificationStatus.ConsentWithdrawn)]
-        [InlineData(ImportNotificationStatus.Objected)]
-        [InlineData(ImportNotificationStatus.Withdrawn)]
-        public void CanMarkFileClosedAtAnyTime(ImportNotificationStatus currentStatus)
+        public void CanNotMarkFileClosedBeforeDecisionMade(ImportNotificationStatus currentStatus)
         {
             SetNotificationAssessmentStatus(currentStatus);
-            assessment.MarkFileClosed(AnyDate);
-
-            Assert.Equal(ImportNotificationStatus.FileClosed, assessment.Status);
+            Assert.Throws<InvalidOperationException>(() => assessment.MarkFileClosed(AnyDate));
         }
 
         [Fact]

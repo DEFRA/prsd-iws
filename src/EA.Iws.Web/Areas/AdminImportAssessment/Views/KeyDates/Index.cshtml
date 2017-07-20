@@ -196,7 +196,7 @@
                 }
             </td>
             <td>
-                @if (!Model.NotificationFileClosedDate.IsCompleted && Model.NotificationReceivedDate.IsCompleted)
+                @if (!Model.NotificationFileClosedDate.IsCompleted && Model.DecisionDate.IsCompleted)
                 {
                     @Html.ActionLink("Add", "Index", "KeyDates", new { command = KeyDatesCommand.FileClosed }, null)
                 }
