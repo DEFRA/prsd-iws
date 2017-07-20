@@ -9,7 +9,7 @@
     using TestHelpers.DomainFakes;
     using TestHelpers.Helpers;
     using Xunit;
-    public class RecoveryDateTests
+    public class RecoveryDateTests : IDisposable
     {
         private Movement movement;
         private readonly Guid userId = new Guid("E45663E5-1BD0-4AC3-999B-0E9975BE86FC");
@@ -22,6 +22,11 @@
         public RecoveryDateTests()
         {
             SystemTime.Freeze(Today);
+        }
+
+        public void Dispose()
+        {
+            SystemTime.Unfreeze();
         }
 
         [Fact]

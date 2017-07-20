@@ -9,7 +9,7 @@
     using TestHelpers.DomainFakes;
     using Xunit;
 
-    public class RejectMovementTests
+    public class RejectMovementTests : IDisposable
     {
         private static readonly Guid NotificationId = new Guid("675287E3-42D3-4A58-86D4-691ECF620671");
         private static readonly Guid MovementId = new Guid("DD7A435F-BB74-4EA6-8680-C1811C46500A");
@@ -29,6 +29,11 @@
             movementRejectionRepository = A.Fake<IMovementRejectionRepository>();
 
             rejectFactory = new RejectMovement(movementRepository, movementRejectionRepository);
+        }
+
+        public void Dispose()
+        {
+            SystemTime.Unfreeze();
         }
 
         [Fact]

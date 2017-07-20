@@ -12,7 +12,7 @@
     using TestHelpers.DomainFakes;
     using Xunit;   
 
-    public class CapturedMovementFactoryTests
+    public class CapturedMovementFactoryTests : IDisposable
     {
         private static readonly Guid NotificationId = new Guid("675287E3-42D3-4A58-86D4-691ECF620671");
         private static readonly DateTime AnyDate = new DateTime(2015, 1, 1);
@@ -35,6 +35,10 @@
                 .Returns(new TestableNotificationAssessment { Status = NotificationStatus.Consented });
 
             factory = new CapturedMovementFactory(validator, assessmentRepository, A.Fake<IUserContext>());
+        }
+        public void Dispose()
+        {
+            SystemTime.Unfreeze();
         }
 
         [Fact]
