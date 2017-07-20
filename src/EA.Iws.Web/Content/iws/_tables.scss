@@ -36,4 +36,8 @@ table.fraction
     td {
         padding-left: 10px;
     }
+    td:last-child,
+    th:last-child {
+        padding-right: 10px;
+    }
 }
