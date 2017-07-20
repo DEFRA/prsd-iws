@@ -230,5 +230,20 @@
         {
             Assert.Throws<InvalidOperationException>(() => assessment.SetArchiveReference("ref"));
         }
+
+        [Theory]
+        [InlineData(ImportNotificationStatus.NotificationReceived)]
+        [InlineData(ImportNotificationStatus.AwaitingPayment)]
+        [InlineData(ImportNotificationStatus.AwaitingAssessment)]
+        [InlineData(ImportNotificationStatus.InAssessment)]
+        [InlineData(ImportNotificationStatus.ReadyToAcknowledge)]
+        [InlineData(ImportNotificationStatus.DecisionRequiredBy)]
+        public void CanWithdrawInAllowedStates(ImportNotificationStatus currentStatus)
+        {
+            SetNotificationAssessmentStatus(currentStatus);
+            assessment.Withdraw(AnyDate, "test");
+
+            Assert.Equal(ImportNotificationStatus.Withdrawn, assessment.Status);
+        }
     }
 }

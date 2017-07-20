@@ -30,7 +30,8 @@
             A.CallTo(() => mediator.SendAsync(A<GetImportNotificationAssessmentDecisionData>.Ignored))
                 .Returns(new ImportNotificationAssessmentDecisionData
                 {
-                    AcknowledgedOnDate = acknowledgedOnDate
+                    AcknowledgedOnDate = acknowledgedOnDate,
+                    IsPreconsented = false
                 });
         }
 
