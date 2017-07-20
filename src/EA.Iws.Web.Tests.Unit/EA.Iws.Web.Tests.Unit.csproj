@@ -192,6 +192,7 @@
     <Compile Include="TestHelpers\ViewModelValidator.cs" />
     <Compile Include="Controllers\RegistrationControllerTests.cs" />
     <Compile Include="ViewModels\AdminExportNotificationMovements\CreateViewModelTests.cs" />
+    <Compile Include="ViewModels\AdminImportNotificationMovements\CreateViewModelTests.cs" />
     <Compile Include="ViewModels\Admin\AdvancedSearch\IndexViewModelTests.cs" />
     <Compile Include="ViewModels\Admin\NotificationNumberViewModelTests.cs" />
     <Compile Include="ViewModels\DisposalCostViewModelTests.cs" />

@@ -117,6 +117,12 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="ActualDateBeforePrenotification" xml:space="preserve">
+    <value>The "actual date of shipment" cannot be before the prenotification date. Please enter a different date.</value>
+  </data>
+  <data name="ActualDateGreaterthanSixtyDays" xml:space="preserve">
+    <value>The "actual date of shipment" should not be more than 30 calendar days after the "prenotification date". Please advise the exporter or enter a different date.</value>
+  </data>
   <data name="ActualShipmentDate" xml:space="preserve">
     <value>Actual date</value>
   </data>
@@ -131,6 +137,21 @@
   </data>
   <data name="PrenotificationDateRequired" xml:space="preserve">
     <value>Please tick the box or enter prenotification received date</value>
+  </data>
+  <data name="PrenotifictaionDateInfuture" xml:space="preserve">
+    <value>The "prenotification date" cannot be in the future. Please enter a different date.</value>
+  </data>
+  <data name="ReceivedDateBeforeActualDate" xml:space="preserve">
+    <value>The "when the waste was received" date cannot be before the "actual date of shipment". Please enter a different date.</value>
+  </data>
+  <data name="ReceivedDateInfuture" xml:space="preserve">
+    <value>The "when the waste was received" date cannot be in the future. Please enter a different date.</value>
+  </data>
+  <data name="RecoveredDateBeforeReceivedDate" xml:space="preserve">
+    <value>The "when was the waste recovered" date cannot be before the "when was the waste received " date. Please enter a different date.</value>
+  </data>
+  <data name="RecoveredDateInfuture" xml:space="preserve">
+    <value>The "when the waste was recovered" date cannot be in the future. Please enter a different date.</value>
   </data>
   <data name="ShipmentNumber" xml:space="preserve">
     <value>Shipment number</value>
