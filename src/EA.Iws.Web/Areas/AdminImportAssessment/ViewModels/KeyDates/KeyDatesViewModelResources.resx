@@ -145,10 +145,10 @@
     <value>The 'assessment started' date cannot be in the future. Please enter a different date.</value>
   </data>
   <data name="CommencementOthersRequired" xml:space="preserve">
-    <value>You need to enter a 'notification received' date before you can continue</value>
+    <value>You need to enter previous key dates before you can continue</value>
   </data>
   <data name="CompletedNotBeforeOthers" xml:space="preserve">
-    <value>The 'notification complete' date cannot be before 'notification received' date. Please enter a different date.</value>
+    <value>The 'notification complete' date cannot be before the previous key dates. Please enter a different date.</value>
   </data>
   <data name="CompletedNotInFuture" xml:space="preserve">
     <value>The 'notification complete' date cannot be in the future. Please enter a different date.</value>

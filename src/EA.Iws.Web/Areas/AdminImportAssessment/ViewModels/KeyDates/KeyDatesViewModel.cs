@@ -131,12 +131,13 @@
                     yield return new ValidationResult(KeyDatesViewModelResources.CompletedNotInFuture, new[] { "NewDate" });
                 }
 
-                if (NotificationReceivedDate == null)
+                if (NotificationReceivedDate == null || PaymentReceivedDate == null)
                 {
                     yield return new ValidationResult(KeyDatesViewModelResources.CompletedOthersRequired, new[] { "NewDate" });
                 }
 
-                if ((NotificationReceivedDate != null && NewDate.AsDateTime() < NotificationReceivedDate.AsDateTime()))
+                if ((NotificationReceivedDate != null && NewDate.AsDateTime() < NotificationReceivedDate.AsDateTime())
+                    || (PaymentReceivedDate != null && NewDate.AsDateTime() < PaymentReceivedDate))
                 {
                     yield return new ValidationResult(KeyDatesViewModelResources.CompletedNotBeforeOthers, new[] { "NewDate" });
                 }
