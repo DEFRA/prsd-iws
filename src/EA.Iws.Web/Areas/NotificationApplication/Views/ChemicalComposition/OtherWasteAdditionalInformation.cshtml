@@ -23,10 +23,12 @@
     </div>
     <div class="form-group">
         <fieldset>
-            <label class="block-label" for="chkboxFurtherInfo">
+            <div class="multiple-choice">
                 @Html.CheckBoxFor(m => m.HasAttachement, new { @id = "chkboxFurtherInfo" })
-                @OtherWasteAdditionalInformationResources.Declaration
-            </label>
+                <label for="chkboxFurtherInfo">
+                    @OtherWasteAdditionalInformationResources.Declaration
+                </label>
+            </div>
         </fieldset>
     </div>
     <div class="form-group">

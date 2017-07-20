@@ -4,7 +4,7 @@ a selected radio button. This is so different hint text can be shown depending o
 radio button selected without changing visible text.
 
 The inputs should be moved relative to their hint text which may or may not be present
-in a panel (.panel-indent) div underneath the radio button input.
+in a panel (.panel) div underneath the radio button input.
 
 Optionally a <details> element may be present which is also moved to the panel identified
 by its data-target attribute.
@@ -25,7 +25,7 @@ Known Issues:
 
 $(function () {
 
-    $(".panel-indent").removeClass(".hide-for-initial-load");
+    $(".panel").removeClass(".hide-for-initial-load");
 
     placeDetailsElementsInCorrectLocation();
 
@@ -46,7 +46,7 @@ function placeDetailsElementsInCorrectLocation() {
 
 $(".business-type-radio-button").click(function () {
 
-    var panelIndentClass = ".panel-indent";
+    var panelIndentClass = ".panel";
     var formGroupClass = ".form-group";
 
     // Find the div containing the registration number input and the form group inputs.

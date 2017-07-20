@@ -21,14 +21,19 @@
     <div class="form-group @Html.Gds().FormGroupClass(m => m.Selection)">
         @Html.Gds().ValidationMessageFor(m => m.Selection)
         <fieldset>
-            <label class="block-label" for="one">
+            <div class="multiple-choice">
                 @Html.RadioButtonFor(m => m.Selection, ThreeWorkingDaysSelection.ContinueAnyway, new { @id = "one" })
-                @Resource.ContinueAnywayOption
-            </label>
-            <label class="block-label" for="two" data-target="change-date">
+                <label for="one">
+                    @Resource.ContinueAnywayOption
+                </label>
+            </div>
+
+            <div class="multiple-choice" data-target="change-date">
                 @Html.RadioButtonFor(m => m.Selection, ThreeWorkingDaysSelection.ChangeDate, new { @id = "two" })
-                @Resource.ChangeDateOption
-            </label>
+                <label for="two">
+                    @Resource.ChangeDateOption
+                </label>
+            </div>
         </fieldset>
     </div>
 

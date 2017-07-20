@@ -23,16 +23,20 @@
             {
                 MvcHtmlString idForThisCheckBox = Html.NameFor(m => m.PackagingTypes.PossibleValues[i]);
 
-                <label for="@idForThisCheckBox" class="block-label">
+                <div class="multiple-choice">
                     @Html.CheckBoxFor(m => m.PackagingTypes.PossibleValues[i].Selected, new { id = idForThisCheckBox })
-                    @Html.HiddenFor(m => m.PackagingTypes.PossibleValues[i].Text)
-                    @Html.HiddenFor(m => m.PackagingTypes.PossibleValues[i].Value)
-                    @if (Model.PackagingTypes.ShowEnumValue)
-                    {
-                        @Html.DisplayFor(m => m.PackagingTypes.PossibleValues[i].Value) @Html.Raw(" - ")
-                    }
-                    @Html.DisplayFor(m => m.PackagingTypes.PossibleValues[i].Text)
-                </label>
+                    <label for="@idForThisCheckBox">
+                        @if (Model.PackagingTypes.ShowEnumValue)
+                        {
+                            @Html.DisplayFor(m => m.PackagingTypes.PossibleValues[i].Value)
+                            @Html.Raw(" - ")
+                        }
+                        @Html.DisplayFor(m => m.PackagingTypes.PossibleValues[i].Text)
+                    </label>
+                </div>
+                
+                @Html.HiddenFor(m => m.PackagingTypes.PossibleValues[i].Text)
+                @Html.HiddenFor(m => m.PackagingTypes.PossibleValues[i].Value)
             }
         </fieldset>
     </div>

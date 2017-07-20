@@ -11,7 +11,7 @@
     {
         [Required(ErrorMessageResourceType = typeof(SearchViewModelResources), ErrorMessageResourceName = "Required")]
         [Range(1, int.MaxValue, ErrorMessageResourceType = typeof(SearchViewModelResources), ErrorMessageResourceName = "Range")]
-        [Display(Name = "Label", ResourceType = typeof(SearchViewModelResources))]
+        [Display(Name = "ShipmentNumber", ResourceType = typeof(CreateViewModelResources))]
         public int? Number { get; set; }
 
         public int? LatestCurrentMovementNumber { get; set; }
@@ -21,10 +21,10 @@
         [RequiredDateInput(ErrorMessageResourceName = "ActualShipmentDateRequired",
             ErrorMessageResourceType = typeof(CreateViewModelResources))]
         [Display(Name = "ActualShipmentDate", ResourceType = typeof(CreateViewModelResources))]
-        public OptionalDateInputViewModel ActualShipmentDate { get; set; }
+        public MaskedDateInputViewModel ActualShipmentDate { get; set; }
 
         [Display(Name = "PrenotificationDate", ResourceType = typeof(CreateViewModelResources))]
-        public OptionalDateInputViewModel PrenotificationDate { get; set; }
+        public MaskedDateInputViewModel PrenotificationDate { get; set; }
 
         [Display(Name = "HasNoPrenotification", ResourceType = typeof(CreateViewModelResources))]
         public bool HasNoPrenotification { get; set; }
@@ -41,8 +41,8 @@
 
         public CreateViewModel()
         {
-            ActualShipmentDate = new OptionalDateInputViewModel(true);
-            PrenotificationDate = new OptionalDateInputViewModel(true);
+            ActualShipmentDate = new MaskedDateInputViewModel();
+            PrenotificationDate = new MaskedDateInputViewModel();
             Receipt = new ReceiptViewModel();
             Recovery = new RecoveryViewModel();
         }
@@ -57,7 +57,7 @@
 
             if ((!Receipt.ReceivedDate.IsCompleted && Receipt.ActualQuantity.HasValue) || (!Receipt.ReceivedDate.IsCompleted && !string.IsNullOrWhiteSpace(Receipt.RejectionReason)))
             {
-                yield return new ValidationResult(ReceiptViewModelResources.ReceivedDateRequired, new[] { "Receipt.ReceivedDate.Day" });
+                yield return new ValidationResult(ReceiptViewModelResources.ReceivedDateRequired, new[] { "Receipt.ReceivedDate.Date" });
             }
 
             if (!Receipt.ActualQuantity.HasValue && Receipt.ReceivedDate.IsCompleted)

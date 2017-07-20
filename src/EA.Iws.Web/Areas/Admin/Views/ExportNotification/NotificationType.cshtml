@@ -26,13 +26,16 @@
                 var notificationType = Model.NotificationTypes[i];
                 bool isDisposal = notificationType == NotificationType.Disposal.ToString();
 
-                <label class="block-label" for="@labelFor" @(isDisposal ? "data-target=disposal-message" : string.Empty)>
+                <div class="multiple-choice" @(isDisposal ? "data-target=disposal-message" : string.Empty)>
                     @Html.RadioButtonFor(m => m.SelectedNotificationType, notificationType, new { @id = labelFor })
-                    @Html.DisplayFor(m => m.NotificationTypes[i])
-                </label>
+                    <label for="@labelFor">
+                        @Html.DisplayFor(m => m.NotificationTypes[i])
+                    </label>
+                </div>
+                
                 if (isDisposal)
                 {
-                    <div class="panel-indent js-hidden" id="disposal-message">
+                    <div class="panel js-hidden" id="disposal-message">
                         @NotificationTypeResources.DisposalMessage
                         <p>@Model.CompetentAuthorityContactInfo</p>
                     </div>

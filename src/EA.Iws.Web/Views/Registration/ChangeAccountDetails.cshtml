@@ -16,12 +16,19 @@
             <div class="form-group @Html.Gds().FormGroupClass(m => m.ChangeOptions)">
                 @Html.Gds().ValidationMessageFor(m => m.ChangeOptions)
                 <fieldset>
-                    <label class="block-label" for="rdoOrganisationDetails">
-                        @Html.RadioButtonFor(m => m.ChangeOptions, true, new { id = "rdoOrganisationDetails" })@ChangeAccountDetailsResources.OrgOption
-                    </label>
-                    <label class="block-label" for="rdoPersonalDetails">
-                        @Html.RadioButtonFor(m => m.ChangeOptions, false, new { id = "rdoPersonalDetails" })@ChangeAccountDetailsResources.ApplicantOption
-                    </label>
+                    <div class="multiple-choice">
+                        @Html.RadioButtonFor(m => m.ChangeOptions, true, new { id = "rdoOrganisationDetails" })
+                        <label for="rdoOrganisationDetails">
+                            @ChangeAccountDetailsResources.OrgOption
+                        </label>
+                    </div>
+
+                    <div class="multiple-choice">
+                        @Html.RadioButtonFor(m => m.ChangeOptions, false, new { id = "rdoPersonalDetails" })
+                        <label for="rdoPersonalDetails">
+                            @ChangeAccountDetailsResources.ApplicantOption
+                        </label>
+                    </div>
                 </fieldset>
             </div>
 

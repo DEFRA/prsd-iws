@@ -34,9 +34,8 @@ $toolkit-font-stack-tabular:
 @import "govuk_elements/elements-typography";
 @import "govuk_elements/layout";
 @import "govuk_elements/forms";
-@import "govuk_elements/forms/form-block-labels";
 @import "govuk_elements/forms/form-date"; 
-@import "govuk_elements/forms/form-validation"; 
+@import "govuk_elements/forms/form-validation";
 @import "govuk_elements/tables";
 @import "govuk_elements/buttons";
 @import "govuk_elements/details";
@@ -74,3 +73,4 @@ $internal-export-colour: $light-blue;
 @import "iws/panels";
 @import "iws/search";
 @import "iws/pagination";
+@import "iws/form-multiple-choice";

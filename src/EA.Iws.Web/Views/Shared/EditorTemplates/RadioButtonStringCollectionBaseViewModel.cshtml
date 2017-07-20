@@ -9,14 +9,14 @@
 
             <div>@Html.HiddenFor(m => m.PossibleValues[i])</div>
 
-            <label for="@idForThisRadioButton" class="block-label">
-
+            <div class="multiple-choice">
                 @Html.RadioButtonFor(m => m.SelectedValue,
                     Model.PossibleValues[i],
-                    new {id = idForThisRadioButton})
-
-                @Html.DisplayFor(m => m.PossibleValues[i])
-            </label>
+                    new { id = idForThisRadioButton })
+                <label for="@idForThisRadioButton">
+                    @Html.DisplayFor(m => m.PossibleValues[i])
+                </label>
+            </div>
         }
     </fieldset>
 }

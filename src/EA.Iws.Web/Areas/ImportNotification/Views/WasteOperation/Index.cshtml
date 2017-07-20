@@ -22,11 +22,13 @@
             {
                 var id = Model.Codes[i].Key.ToString();
                 @Html.HiddenFor(m => m.Codes[i].Key)
-                    
-                <label class="block-label" for="@id">
+
+                <div class="multiple-choice">
                     @Html.CheckBoxFor(m => m.Codes[i].Value, new { id })
-                    @Html.Raw(Model.CodeDisplay[i])
-                </label>
+                    <label for="@id">
+                        @Html.Raw(Model.CodeDisplay[i])
+                    </label>
+                </div>
             }  
         </fieldset>
 

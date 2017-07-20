@@ -105,5 +105,14 @@ namespace EA.Iws.Web.Areas.AdminImportNotificationMovements.ViewModels.Capture {
                 return ResourceManager.GetString("PrenotificationDateRequired", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Shipment number.
+        /// </summary>
+        public static string ShipmentNumber {
+            get {
+                return ResourceManager.GetString("ShipmentNumber", resourceCulture);
+            }
+        }
     }
 }

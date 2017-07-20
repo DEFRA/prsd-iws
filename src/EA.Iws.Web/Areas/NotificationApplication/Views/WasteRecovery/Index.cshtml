@@ -22,15 +22,21 @@
         <h2 class="heading-small">@WasteRecoveryResources.Header2</h2>
 
         <div class="form-group">
-            <label class="block-label" for="rdoNotifier">
-                @Html.RadioButtonFor(m => m.ProvidedBy, ProvidedBy.Notifier, new { @class = "", @id = "rdoNotifier" }) @EA.Prsd.Core.Helpers.EnumHelper.GetDescription(ProvidedBy.Notifier)
-            </label>
+            <div class="multiple-choice">
+                @Html.RadioButtonFor(m => m.ProvidedBy, ProvidedBy.Notifier, new { @class = "", @id = "rdoNotifier" })
+                <label for="rdoNotifier">
+                    @EA.Prsd.Core.Helpers.EnumHelper.GetDescription(ProvidedBy.Notifier)
+                </label>
+            </div>
 
-            <label class="block-label" data-target="importer-note" for="rdoImporter">
-                @Html.RadioButtonFor(m => m.ProvidedBy, ProvidedBy.Importer, new { @class = "", @id = "rdoImporter" }) @EA.Prsd.Core.Helpers.EnumHelper.GetDescription(ProvidedBy.Importer)
-            </label>
-
-            <div class="panel-indent @(Model.ProvidedBy != null && Model.ProvidedBy == ProvidedBy.Importer ? string.Empty : "js-hidden")" id="importer-note">
+            <div class="multiple-choice" data-target="importer-note">
+                @Html.RadioButtonFor(m => m.ProvidedBy, ProvidedBy.Importer, new { @class = "", @id = "rdoImporter" })
+                <label for="rdoImporter">
+                    @EA.Prsd.Core.Helpers.EnumHelper.GetDescription(ProvidedBy.Importer)
+                </label>
+            </div>
+            
+            <div class="panel @(Model.ProvidedBy != null && Model.ProvidedBy == ProvidedBy.Importer ? string.Empty : "js-hidden")" id="importer-note">
                 <p>@WasteRecoveryResources.Desc3</p>
             </div>
         </div>

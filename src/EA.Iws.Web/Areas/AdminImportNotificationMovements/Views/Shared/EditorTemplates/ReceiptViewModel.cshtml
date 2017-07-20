@@ -5,23 +5,31 @@
 
     <div>
 
-        <div class="form-group @Html.Gds().FormGroupClass(m => m.ReceivedDate.Day) @Html.Gds().FormGroupClass(m => m.ReceivedDate.Month) @Html.Gds().FormGroupClass(m => m.ReceivedDate.Year)">
-            @Html.LabelFor(m => m.ReceivedDate, new { @class = "heading-small" })
+        <div class="form-group @Html.Gds().FormGroupClass(m => m.ReceivedDate)">
+            @Html.LabelFor(m => m.ReceivedDate, new { @class = "form-label-bold" })
             @Html.Gds().ValidationMessageFor(m => m.ReceivedDate)
             @Html.EditorFor(m => m.ReceivedDate)
         </div>
 
         <div class="form-group @Html.Gds().FormGroupClass(m => m.WasAccepted)">
-            @Html.LabelFor(m => m.WasAccepted, new { @class = "heading-small" })
+            @Html.LabelFor(m => m.WasAccepted, new { @class = "form-label-bold" })
             @Html.Gds().ValidationMessageFor(m => m.WasAccepted)
             <fieldset>
-                <label class="block-label" for="yes">
-                    @Html.RadioButtonFor(m => m.WasAccepted, true, new { id = "yes" }) Yes
-                </label>
-                <label class="block-label" data-target="rejected" for="no">
-                    @Html.RadioButtonFor(m => m.WasAccepted, false, new { id = "no" }) No
-                </label>
-                <div class="panel-indent @(Model.WasAccepted ? "js-hidden" : string.Empty)" id="rejected">
+                <div class="multiple-choice">
+                    @Html.RadioButtonFor(m => m.WasAccepted, true, new { id = "yes" })
+                    <label for="yes">
+                        Yes
+                    </label>
+                </div>
+
+                <div class="multiple-choice" data-target="rejected">
+                    @Html.RadioButtonFor(m => m.WasAccepted, false, new { id = "no" })
+                    <label for="no">
+                        No
+                    </label>
+                </div>
+                
+                <div class="panel @(Model.WasAccepted ? "js-hidden" : string.Empty)" id="rejected">
 
                     <div class="form-group @Html.Gds().FormGroupClass(m => m.RejectionReason)">
                         @Html.LabelFor(m => m.RejectionReason, new { @class = "form-label-bold" })

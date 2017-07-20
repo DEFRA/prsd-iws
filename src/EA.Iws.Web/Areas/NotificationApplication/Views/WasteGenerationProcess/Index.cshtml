@@ -20,10 +20,12 @@
             <div class="form-group @Html.Gds().FormGroupClass(m => m.IsDocumentAttached)">
                 <fieldset>
                     <div>@Html.Gds().ValidationMessageFor(m => m.IsDocumentAttached)</div>
-                    <label class="block-label" for="checkbox-1">
+                    <div class="multiple-choice">
                         @Html.CheckBoxFor(m => m.IsDocumentAttached, new { @id = "checkbox-1" })
-                        @WasteGenerationProcessResources.Detail
-                    </label>
+                        <label for="checkbox-1">
+                            @WasteGenerationProcessResources.Detail
+                        </label>
+                    </div>
                 </fieldset>
             </div>
         </fieldset>

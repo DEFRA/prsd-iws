@@ -28,14 +28,19 @@
                 @Html.Gds().ValidationMessageFor(m => m.IsInterim)
 
                 <fieldset>
-                    <label class="block-label" for="yes">
+                    <div class="multiple-choice">
                         @Html.RadioButtonFor(m => m.IsInterim, true, new { id = "yes" })
-                        @Resources.Yes
-                    </label>
-                    <label class="block-label" for="no">
+                        <label for="yes">
+                            @Resources.Yes
+                        </label>
+                    </div>
+
+                    <div class="multiple-choice">
                         @Html.RadioButtonFor(m => m.IsInterim, false, new { id = "no" })
-                        @Resources.No
-                    </label>
+                        <label for="no">
+                            @Resources.No
+                        </label>
+                    </div>
                 </fieldset>
             </div>
 

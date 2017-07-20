@@ -6,14 +6,15 @@
     {
         MvcHtmlString nameForThisValue = Html.NameFor(m => m.PossibleValues[i].Value);
 
-        <label for="@nameForThisValue" class="block-label">
-            @Html.HiddenFor(m => m.PossibleValues[i].Key)
-            @Html.HiddenFor(m => m.PossibleValues[i].Value)
-
+        <div class="multiple-choice">
             @Html.RadioButtonFor(m => m.SelectedValue, Model.PossibleValues[i].Value,
              htmlAttributes: new { id = nameForThisValue })
-
-            @Html.DisplayFor(m => m.PossibleValues[i].Key)
-        </label>
+            <label for="@nameForThisValue">
+                @Html.DisplayFor(m => m.PossibleValues[i].Key)
+            </label>
+        </div>
+        
+        @Html.HiddenFor(m => m.PossibleValues[i].Key)
+        @Html.HiddenFor(m => m.PossibleValues[i].Value)
     }
 }

@@ -5,13 +5,13 @@
     using Web.ViewModels.Shared;
     public class RecoveryViewModel : IComplete
     {
-        public OptionalDateInputViewModel RecoveryDate { get; set; }
+        public MaskedDateInputViewModel RecoveryDate { get; set; }
 
         public NotificationType NotificationType { get; set; }
 
         public RecoveryViewModel()
         {
-            RecoveryDate = new OptionalDateInputViewModel(true);
+            RecoveryDate = new MaskedDateInputViewModel();
         }
 
         public RecoveryViewModel(DateTimeOffset? recoveryDate, NotificationType notificationType)
@@ -19,11 +19,11 @@
             NotificationType = notificationType;
             if (recoveryDate.HasValue)
             {
-                RecoveryDate = new OptionalDateInputViewModel(recoveryDate.Value.DateTime, true);
+                RecoveryDate = new MaskedDateInputViewModel(recoveryDate.Value.DateTime);
             }
             else
             {
-                RecoveryDate = new OptionalDateInputViewModel(true);
+                RecoveryDate = new MaskedDateInputViewModel();
             }
         }
 

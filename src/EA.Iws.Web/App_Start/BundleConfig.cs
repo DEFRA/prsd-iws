@@ -11,7 +11,8 @@
                 "~/Scripts/vendor/jquery-1.11.0.min.js",
                 "~/Scripts/jquery.unobtrusive-ajax.js",
                 "~/Scripts/jquery.prevent-double-click.js",
-                "~/Scripts/select2/select2.js"));
+                "~/Scripts/select2/select2.js",
+                "~/Scripts/datable.min.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jquery-ui").Include(
                 "~/Scripts/jquery-ui-{version}.js",
@@ -30,7 +31,7 @@
 
             bundles.Add(new ScriptBundle("~/bundles/govuk_toolkit").Include(
                 "~/Scripts/govuk_toolkit/vendor/polyfills/bind.js",
-                "~/Scripts/govuk_toolkit/govuk/selection-buttons.js"));
+                "~/Scripts/show-hide-content.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/govuk_iws").Include(
                 "~/Scripts/vendor/modernizr.custom.77028.js",

@@ -9,55 +9,53 @@
     <div class="column-two-thirds">
         <h1 class="heading-large">@Resource.MainHeading</h1>
 
-       @using (Html.BeginForm())
-       {
-        @Html.AntiForgeryToken()
-        @Html.Gds().ValidationSummary()
-        @Html.HiddenFor(m => m.LatestCurrentMovementNumber)
-        @Html.HiddenFor(m => m.NotificationId)
-        @Html.HiddenFor(m => m.NotificationType)
-           if (ViewData.ModelState.IsValid && Model.Number != null)
-           {
-        <h1 class="data-item bold-xxlarge">@string.Format(Resource.ShipmentNumber, Model.Number)</h1>
-        }
-        
-                    <div class="form-group @Html.Gds().FormGroupClass(m => m.Number)">
-                        @Html.Gds().LabelFor(m => m.Number)
-                        @if (Model.LatestCurrentMovementNumber == 0)
-                        {
-                            @Resource.ZeroMovements
-                        }
-                        else
-                        {
-                            @Html.Raw(string.Format(Resource.LatestNumber, Model.LatestCurrentMovementNumber))
-                        }
-                        @Html.Gds().ValidationMessageFor(m => m.Number)
-                        @Html.Gds().TextBoxFor(m => m.Number, new { type = "number", min = 1 })
-                    </div>
-               
-                    @Html.Partial("_Prenotify")
-        <hr class="hrline" />
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            @Html.Gds().ValidationSummary()
+            @Html.HiddenFor(m => m.LatestCurrentMovementNumber)
+            @Html.HiddenFor(m => m.NotificationId)
+            @Html.HiddenFor(m => m.NotificationType)
+            if (ViewData.ModelState.IsValid && Model.Number != null)
+            {
+                <h1 class="data-item bold-xxlarge">@string.Format(Resource.ShipmentNumber, Model.Number)</h1>
+            }
 
-                    @Html.EditorFor(m => m.Receipt)
+            <div class="form-group @Html.Gds().FormGroupClass(m => m.Number)">
+                @Html.Gds().LabelFor(m => m.Number, new { @class = "form-label-bold" })
+                @if (Model.LatestCurrentMovementNumber == 0)
+                {
+                    @Html.Gds().HintSpan(Resource.ZeroMovements)
+                }
+                else
+                {
+                    @Html.Gds().HintSpan(string.Format(Resource.LatestNumber, Model.LatestCurrentMovementNumber))
+                }
+                @Html.Gds().ValidationMessageFor(m => m.Number)
+                @Html.Gds().TextBoxFor(m => m.Number, new { type = "number", min = 1 })
+            </div>
 
-       <hr class="hrline"/>
+            @Html.Partial("_Prenotify")
 
-                    @Html.EditorFor(m => m.Recovery)
-         <hr class="hrline"/>         
-              
+            <hr />
+
+            @Html.EditorFor(m => m.Receipt)
+
+            <hr />
+
+            @Html.EditorFor(m => m.Recovery)
+            <hr />
+
             <button class="button" type="submit">@Constants.ContinueButtonText</button>
-          
-       }
+
+        }
     </div>
 </div>
 @Html.ActionLink(Resource.ReturnToSummary, "Index", "Home", new { area = "AdminExportNotificationMovements", id = Model.NotificationId }, null)
 
-
-
-
 @section scripts {
     <script>
-        var prenotificationDateSelector = $("#PrenotificationDate_Day, #PrenotificationDate_Month, #PrenotificationDate_Year");
+        var prenotificationDateSelector = $("#PrenotificationDate_Date");
 
         function togglePrenotificationDate(checked) {
             if (checked) {

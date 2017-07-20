@@ -13,17 +13,22 @@
 <div class="form-group @Html.Gds().FormGroupClass(m => m.HasSpecialHandlingRequirements)">
     @Html.Gds().ValidationMessageFor(model => model.HasSpecialHandlingRequirements)
     <fieldset>
-        <label class="block-label" for="rdoYes" data-target="information-message">
+        <div class="multiple-choice" data-target="information-message">
             @Html.RadioButtonFor(m => m.HasSpecialHandlingRequirements, true, new { id = "rdoYes" })
-            Yes
-        </label>
-        <label class="block-label" for="rdoNo">
+            <label for="rdoYes">
+                Yes
+            </label>
+        </div>
+
+        <div class="multiple-choice">
             @Html.RadioButtonFor(m => m.HasSpecialHandlingRequirements, false, new { id = "rdoNo" })
-            No
-        </label>
+            <label for="rdoNo">
+                No
+            </label>
+        </div>
     </fieldset>
 
-    <div class="panel-indent @(Model.HasSpecialHandlingRequirements.GetValueOrDefault() ? "" : "js-hidden")" id="information-message">
+    <div class="panel @(Model.HasSpecialHandlingRequirements.GetValueOrDefault() ? "" : "js-hidden")" id="information-message">
         <div class="form-group @Html.Gds().FormGroupClass(m => m.SpecialHandlingDetails)">
             @Html.LabelFor(m => m.SpecialHandlingDetails)
             @Html.Gds().ValidationMessageFor(m => m.SpecialHandlingDetails)

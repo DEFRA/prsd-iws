@@ -13,7 +13,7 @@
     public class ReceiptViewModel : IComplete
     {
         [Display(Name = "ReceivedDateLabel", ResourceType = typeof(ReceiptViewModelResources))]
-        public OptionalDateInputViewModel ReceivedDate { get; set; }
+        public MaskedDateInputViewModel ReceivedDate { get; set; }
 
         [Display(Name = "WasShipmentAcceptedLabel", ResourceType = typeof(ReceiptViewModelResources))]
         public bool WasShipmentAccepted { get; set; }
@@ -54,7 +54,7 @@
         public ReceiptViewModel()
         {
             WasShipmentAccepted = true;
-            ReceivedDate = new OptionalDateInputViewModel(true);
+            ReceivedDate = new MaskedDateInputViewModel();
             PossibleUnits = new List<ShipmentQuantityUnits>();
         }
 

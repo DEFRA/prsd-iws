@@ -4,23 +4,23 @@
 
 @{
     var headerTitle = Model.BusinessName ?? Resource.BlankFacilityName;
-    var headerId = "header" + Model.Id;
-    var limitedCompanyId = "LimitedCompany" + Model.Id;
-    var otherId = "Other" + Model.Id;
-    var setSiteId = "set-actual-site-" + Model.Id;
+    var headerId = "header" + Model.FacilityId;
+    var limitedCompanyId = "LimitedCompany" + Model.FacilityId;
+    var otherId = "Other" + Model.FacilityId;
+    var setSiteId = "set-actual-site-" + Model.FacilityId;
 }
 
 <div class="facility-header" id="@headerId">
     <a href="javascript:;" onclick="expandSection(event)">@headerTitle</a>
-    <input name="ActualSite" value="@Model.Id" type="radio" onclick="setSite(event)" @if (Model.IsActualSite){ <text>checked</text> } id="@setSiteId"/>
+    <input name="ActualSite" value="@Model.FacilityId" type="radio" onclick="setSite(event)" @if (Model.IsActualSite){ <text>checked</text> } id="@setSiteId"/>
     <label for="@setSiteId">@string.Format(Resource.ActualSite, Model.NotificationTypeString)</label>
-    <button class="link-submit right-float" onclick="deletePost(event)" value="@Model.Id">Delete</button>
+    <button class="link-submit right-float" onclick="deletePost(event)" value="@Model.FacilityId">Delete</button>
 </div>
 
 <div class="grid-row js-hidden">
     <div class="column-half">
-        @Html.HiddenFor(m => m.Id)
-        @Html.HiddenFor(m => m.IsActualSite, new { id = "is-actual-" + Model.Id, @class="hidden-actual-site" })
+        @Html.HiddenFor(m => m.FacilityId)
+        @Html.HiddenFor(m => m.IsActualSite, new { id = "is-actual-" + Model.FacilityId, @class="hidden-actual-site" })
         <h3 class="heading-small">@Resource.OrganisationHeading</h3>
         <div class="form-group-compound">
             @Html.Gds().LabelFor(m => m.BusinessName, false)
@@ -33,14 +33,18 @@
         <div class="form-group">
             @Html.Gds().LabelFor(m => m.Type, showOptionalLabel:false)
             <fieldset>
-                <label class="block-label" for="@limitedCompanyId">
+                <div class="multiple-choice">
                     @Html.RadioButtonFor(m => m.Type, BusinessType.LimitedCompany, new { id = limitedCompanyId })
-                    @Resource.LimitedCompanyLabel
-                </label>
-                <label class="block-label" for="@otherId">
+                    <label for="@limitedCompanyId">
+                        @Resource.LimitedCompanyLabel
+                    </label>
+                </div>
+                <div class="multiple-choice">
                     @Html.RadioButtonFor(m => m.Type, BusinessType.Other, new { id = otherId })
-                    @Resource.OtherLabel
-                </label>
+                    <label for="@otherId">
+                        @Resource.OtherLabel
+                    </label>
+                </div>
             </fieldset>
         </div>
         @Html.EditorFor(m => m.Address, "FacilityAddressViewModel")

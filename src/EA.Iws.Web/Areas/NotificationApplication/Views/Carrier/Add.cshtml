@@ -28,10 +28,12 @@
     @Html.EditorFor(m => m.Contact)
 
     <div class="form-group no-js-hidden">
-        <label class="block-label" for="addressBook">
+        <div class="multiple-choice">
             @Html.CheckBoxFor(m => m.IsAddedToAddressBook, new { id = "addressBook" })
-            @AddressBookResources.AddToAddressBook
-        </label>
+            <label for="addressBook">
+                @AddressBookResources.AddToAddressBook
+            </label>
+        </div>
     </div>
 
     <button class="button" type="submit">@Constants.ContinueButtonText</button>
