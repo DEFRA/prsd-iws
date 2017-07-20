@@ -15,8 +15,9 @@
         @Html.Gds().ValidationSummary()
         @Html.HiddenFor(m => m.LatestCurrentMovementNumber)
         @Html.HiddenFor(m => m.NotificationId)
-        if (ViewData.ModelState.IsValid && Model.Number != null)
-        {
+        @Html.HiddenFor(m => m.NotificationType)
+           if (ViewData.ModelState.IsValid && Model.Number != null)
+           {
         <h1 class="data-item bold-xxlarge">@string.Format(Resource.ShipmentNumber, Model.Number)</h1>
         }
         

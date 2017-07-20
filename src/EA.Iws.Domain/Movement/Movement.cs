@@ -229,6 +229,15 @@
             Guard.ArgumentNotDefaultValue(() => dateReceived, dateReceived);
             Guard.ArgumentNotNull(() => quantity, quantity);
 
+            if (dateReceived < Date)
+            {
+                throw new InvalidOperationException("The when the waste was received date cannot be before the actual date of shipment.");
+            }
+            if (dateReceived > SystemTime.UtcNow.Date)
+            {
+                throw new InvalidOperationException("The when the waste was received date cannot be in the future.");
+            }
+
             stateMachine.Fire(internallyAcceptedTrigger, new InternallyAcceptedTriggerParameters(dateReceived, quantity, createdBy));
         }
 
@@ -257,6 +266,14 @@
 
         public void CompleteInternally(DateTime completedDate, Guid createdBy)
         {
+            if (completedDate < Receipt.Date)
+            {
+                throw new InvalidOperationException("The when was the waste recovered date cannot be before the when was the waste received. ");
+            }
+            if (completedDate > SystemTime.UtcNow.Date)
+            {
+                throw new InvalidOperationException("The when the waste was recovered date cannot be in the future.");
+            }
             stateMachine.Fire(internallyCompletedTrigger, completedDate, createdBy);
         }
 
