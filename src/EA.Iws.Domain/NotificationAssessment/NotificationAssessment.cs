@@ -114,8 +114,7 @@
             stateMachine.OnTransitioned(OnTransitionAction);
 
             stateMachine.Configure(NotificationStatus.NotSubmitted)
-                .Permit(Trigger.Submit, NotificationStatus.Submitted)
-                .Permit(Trigger.Archive, NotificationStatus.FileClosed);
+                .Permit(Trigger.Submit, NotificationStatus.Submitted);
 
             stateMachine.Configure(NotificationStatus.Submitted)
                 .SubstateOf(NotificationStatus.InDetermination)
@@ -151,12 +150,10 @@
                 .Permit(Trigger.Unlock, NotificationStatus.Unlocked)
                 .Permit(Trigger.Consent, NotificationStatus.Consented)
                 .Permit(Trigger.Object, NotificationStatus.Objected)
-                .Permit(Trigger.Withdraw, NotificationStatus.Withdrawn)
-                .Permit(Trigger.Archive, NotificationStatus.FileClosed);
+                .Permit(Trigger.Withdraw, NotificationStatus.Withdrawn);
 
             stateMachine.Configure(NotificationStatus.InDetermination)
-                .Permit(Trigger.Withdraw, NotificationStatus.Withdrawn)
-                .Permit(Trigger.Archive, NotificationStatus.FileClosed);
+                .Permit(Trigger.Withdraw, NotificationStatus.Withdrawn);
 
             stateMachine.Configure(NotificationStatus.Withdrawn)
                 .OnEntryFrom(withdrawTrigger, OnWithdrawn)

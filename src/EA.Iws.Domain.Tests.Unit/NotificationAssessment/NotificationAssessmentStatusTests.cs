@@ -414,18 +414,9 @@
         [Theory]
         [InlineData(NotificationStatus.ConsentWithdrawn)]
         [InlineData(NotificationStatus.Consented)]
-        [InlineData(NotificationStatus.DecisionRequiredBy)]
-        [InlineData(NotificationStatus.InAssessment)]
-        [InlineData(NotificationStatus.NotSubmitted)]
-        [InlineData(NotificationStatus.NotificationReceived)]
         [InlineData(NotificationStatus.Objected)]
-        [InlineData(NotificationStatus.ReadyToTransmit)]
-        [InlineData(NotificationStatus.Reassessment)]
-        [InlineData(NotificationStatus.Submitted)]
-        [InlineData(NotificationStatus.Transmitted)]
-        [InlineData(NotificationStatus.Unlocked)]
         [InlineData(NotificationStatus.Withdrawn)]
-        public void CanMarkFileClosedAtAnyTime(NotificationStatus currentStatus)
+        public void CanMarkFileAfterDecisionMade(NotificationStatus currentStatus)
         {
             SetNotificationStatus(currentStatus);
             notificationAssessment.MarkFileClosed(fileClosedDate);
@@ -433,9 +424,26 @@
             Assert.Equal(NotificationStatus.FileClosed, notificationAssessment.Status);
         }
 
+        [Theory]
+        [InlineData(NotificationStatus.DecisionRequiredBy)]
+        [InlineData(NotificationStatus.InAssessment)]
+        [InlineData(NotificationStatus.NotSubmitted)]
+        [InlineData(NotificationStatus.NotificationReceived)]
+        [InlineData(NotificationStatus.ReadyToTransmit)]
+        [InlineData(NotificationStatus.Reassessment)]
+        [InlineData(NotificationStatus.Submitted)]
+        [InlineData(NotificationStatus.Transmitted)]
+        [InlineData(NotificationStatus.Unlocked)]
+        public void CanNotMarkFileClosedBeforeDecisionMade(NotificationStatus currentStatus)
+        {
+            SetNotificationStatus(currentStatus);
+            Assert.Throws<InvalidOperationException>(() => notificationAssessment.MarkFileClosed(fileClosedDate));
+        }
+
         [Fact]
         public void MarkFileClosedSetsDate()
         {
+            SetNotificationStatus(NotificationStatus.Consented);
             notificationAssessment.MarkFileClosed(fileClosedDate);
 
             Assert.Equal(notificationAssessment.Dates.FileClosedDate, fileClosedDate);
@@ -444,6 +452,7 @@
         [Fact]
         public void SetArchiveReference_FileClosedDateIsSet_UpdatesValue()
         {
+            SetNotificationStatus(NotificationStatus.Consented);
             notificationAssessment.MarkFileClosed(fileClosedDate);
             notificationAssessment.SetArchiveReference("ref");
 

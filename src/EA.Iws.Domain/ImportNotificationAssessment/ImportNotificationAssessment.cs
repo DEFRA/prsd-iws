@@ -98,44 +98,38 @@
                 .OnEntryFrom(receivedTrigger, OnReceived)
                 .Permit(Trigger.Submit, ImportNotificationStatus.AwaitingPayment)
                 .Permit(Trigger.Withdraw, ImportNotificationStatus.Withdrawn)
-                .Permit(Trigger.Object, ImportNotificationStatus.Objected)
-                .Permit(Trigger.FileClosed, ImportNotificationStatus.FileClosed);
+                .Permit(Trigger.Object, ImportNotificationStatus.Objected);
 
             stateMachine.Configure(ImportNotificationStatus.AwaitingPayment)
                 .SubstateOf(ImportNotificationStatus.Submitted)
                 .Permit(Trigger.FullyPaid, ImportNotificationStatus.AwaitingAssessment)
                 .Permit(Trigger.Withdraw, ImportNotificationStatus.Withdrawn)
-                .Permit(Trigger.Object, ImportNotificationStatus.Objected)
-                .Permit(Trigger.FileClosed, ImportNotificationStatus.FileClosed);
+                .Permit(Trigger.Object, ImportNotificationStatus.Objected);
 
             stateMachine.Configure(ImportNotificationStatus.AwaitingAssessment)
                 .SubstateOf(ImportNotificationStatus.Submitted)
                 .OnEntryFrom(fullyPaidTrigger, OnFullyPaid)
                 .Permit(Trigger.BeginAssessment, ImportNotificationStatus.InAssessment)
                 .Permit(Trigger.Withdraw, ImportNotificationStatus.Withdrawn)
-                .Permit(Trigger.Object, ImportNotificationStatus.Objected)
-                .Permit(Trigger.FileClosed, ImportNotificationStatus.FileClosed);
+                .Permit(Trigger.Object, ImportNotificationStatus.Objected);
             
             stateMachine.Configure(ImportNotificationStatus.InAssessment)
                 .OnEntryFrom(beginAssessmentTrigger, OnAssessmentStarted)
                 .Permit(Trigger.CompleteNotification, ImportNotificationStatus.ReadyToAcknowledge)
                 .Permit(Trigger.Object, ImportNotificationStatus.Objected)
-                .Permit(Trigger.Withdraw, ImportNotificationStatus.Withdrawn)
-                .Permit(Trigger.FileClosed, ImportNotificationStatus.FileClosed);
+                .Permit(Trigger.Withdraw, ImportNotificationStatus.Withdrawn);
 
             stateMachine.Configure(ImportNotificationStatus.ReadyToAcknowledge)
                 .OnEntryFrom(completeNotificationTrigger, OnNotificationCompleted)
                 .Permit(Trigger.Acknowledge, ImportNotificationStatus.DecisionRequiredBy)
                 .Permit(Trigger.Withdraw, ImportNotificationStatus.Withdrawn)
-                .Permit(Trigger.Object, ImportNotificationStatus.Objected)
-                .Permit(Trigger.FileClosed, ImportNotificationStatus.FileClosed);
+                .Permit(Trigger.Object, ImportNotificationStatus.Objected);
 
             stateMachine.Configure(ImportNotificationStatus.DecisionRequiredBy)
                 .OnEntryFrom(acknowledgeTrigger, OnAcknowledged)
                 .Permit(Trigger.Consent, ImportNotificationStatus.Consented)
                 .Permit(Trigger.Object, ImportNotificationStatus.Objected)
-                .Permit(Trigger.Withdraw, ImportNotificationStatus.Withdrawn)
-                .Permit(Trigger.FileClosed, ImportNotificationStatus.FileClosed);
+                .Permit(Trigger.Withdraw, ImportNotificationStatus.Withdrawn);
 
             stateMachine.Configure(ImportNotificationStatus.Consented)
                 .OnEntryFrom(consentedTrigger, OnConsented)
