@@ -145,6 +145,6 @@
     <value>Date refund requested</value>
   </data>
   <data name="DateRequiredError" xml:space="preserve">
-    <value>Please provide the date the refund was made</value>
+    <value>Please provide the date the refund was requested</value>
   </data>
 </root>

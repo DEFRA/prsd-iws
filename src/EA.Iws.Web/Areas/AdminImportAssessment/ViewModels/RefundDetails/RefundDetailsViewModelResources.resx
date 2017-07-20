@@ -151,7 +151,7 @@
     <value>The refund date cannot be in the future</value>
   </data>
   <data name="DateRequiredError" xml:space="preserve">
-    <value>Please provide the date the refund was made</value>
+    <value>Please provide the date the refund was requested</value>
   </data>
   <data name="NoPaymentsMade" xml:space="preserve">
     <value>A refund cannot be made as no payments have been made yet</value>
