@@ -100,9 +100,21 @@
         }
 
         [Fact]
+        public async Task Complete_PaymentReceivedDate_MustBePresent()
+        {
+            await PaymentReceivedDate_MustBePresent(KeyDatesCommand.NotificationComplete);
+        }
+
+        [Fact]
         public async Task Complete_NotBefore_NotificationReceivedDate()
         {
             await NotBefore_NotificationReceivedDate(KeyDatesCommand.NotificationComplete);
+        }
+
+        [Fact]
+        public async Task Complete_NotBefore_PaymentReceivedDate()
+        {
+            await NotBefore_PaymentReceivedDate(KeyDatesCommand.NotificationComplete);
         }
 
         [Fact]
@@ -138,7 +150,7 @@
             Assert.True(controller.ModelState.ContainsKey("NewDate"));
         }
 
-        public async Task NotBefore_NotificationReceivedDate(KeyDatesCommand command)
+        private async Task NotBefore_NotificationReceivedDate(KeyDatesCommand command)
         {
             var model = GetValidViewModel();
             model.NotificationCompleteDate = null;
@@ -156,6 +168,36 @@
         {
             var model = GetValidViewModel();
             model.NewDate = new OptionalDateInputViewModel(SystemTime.UtcNow.AddDays(1));
+            model.Command = command;
+
+            var controller = GetMockAssessmentController(model);
+
+            await controller.Index(notificationId, model);
+
+            Assert.True(controller.ModelState.ContainsKey("NewDate"));
+        }
+
+        private async Task NotBefore_PaymentReceivedDate(KeyDatesCommand command)
+        {
+            var model = GetValidViewModel();
+            model.NotificationCompleteDate = null;
+            model.NewDate = new OptionalDateInputViewModel(new DateTime(2015, 8, 1));
+            model.Command = command;
+
+            var controller = GetMockAssessmentController(model);
+
+            await controller.Index(notificationId, model);
+
+            Assert.True(controller.ModelState.ContainsKey("NewDate"));
+        }
+
+        private async Task PaymentReceivedDate_MustBePresent(KeyDatesCommand command)
+        {
+            var model = GetValidViewModel();
+            model.NotificationCompleteDate = null;
+            model.NotificationReceivedDate = new OptionalDateInputViewModel(notificationReceivedDate);
+            model.PaymentReceivedDate = null;
+            model.NewDate = new OptionalDateInputViewModel(SystemTime.UtcNow);
             model.Command = command;
 
             var controller = GetMockAssessmentController(model);

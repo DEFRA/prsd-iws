@@ -143,7 +143,7 @@ namespace EA.Iws.Web.Areas.AdminImportAssessment.ViewModels.KeyDates {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You need to enter a &apos;notification received&apos; date before you can continue.
+        ///   Looks up a localized string similar to You need to enter previous key dates before you can continue.
         /// </summary>
         public static string CommencementOthersRequired {
             get {
@@ -152,7 +152,7 @@ namespace EA.Iws.Web.Areas.AdminImportAssessment.ViewModels.KeyDates {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The &apos;notification complete&apos; date cannot be before &apos;notification received&apos; date. Please enter a different date..
+        ///   Looks up a localized string similar to The &apos;notification complete&apos; date cannot be before the previous key dates. Please enter a different date..
         /// </summary>
         public static string CompletedNotBeforeOthers {
             get {
