@@ -62,6 +62,24 @@ namespace EA.Iws.Web.Areas.AdminImportNotificationMovements.ViewModels.Capture {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The &quot;actual date of shipment&quot; cannot be before the prenotification date. Please enter a different date..
+        /// </summary>
+        public static string ActualDateBeforePrenotification {
+            get {
+                return ResourceManager.GetString("ActualDateBeforePrenotification", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The &quot;actual date of shipment&quot; should not be more than 30 calendar days after the &quot;prenotification date&quot;. Please advise the exporter or enter a different date..
+        /// </summary>
+        public static string ActualDateGreaterthanSixtyDays {
+            get {
+                return ResourceManager.GetString("ActualDateGreaterthanSixtyDays", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Actual date.
         /// </summary>
         public static string ActualShipmentDate {
@@ -103,6 +121,51 @@ namespace EA.Iws.Web.Areas.AdminImportNotificationMovements.ViewModels.Capture {
         public static string PrenotificationDateRequired {
             get {
                 return ResourceManager.GetString("PrenotificationDateRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The &quot;prenotification date&quot; cannot be in the future. Please enter a different date..
+        /// </summary>
+        public static string PrenotifictaionDateInfuture {
+            get {
+                return ResourceManager.GetString("PrenotifictaionDateInfuture", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The &quot;when the waste was received&quot; date cannot be before the &quot;actual date of shipment&quot;. Please enter a different date..
+        /// </summary>
+        public static string ReceivedDateBeforeActualDate {
+            get {
+                return ResourceManager.GetString("ReceivedDateBeforeActualDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The &quot;when the waste was received&quot; date cannot be in the future. Please enter a different date..
+        /// </summary>
+        public static string ReceivedDateInfuture {
+            get {
+                return ResourceManager.GetString("ReceivedDateInfuture", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The &quot;when was the waste recovered&quot; date cannot be before the &quot;when was the waste received &quot; date. Please enter a different date..
+        /// </summary>
+        public static string RecoveredDateBeforeReceivedDate {
+            get {
+                return ResourceManager.GetString("RecoveredDateBeforeReceivedDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The &quot;when the waste was recovered&quot; date cannot be in the future. Please enter a different date..
+        /// </summary>
+        public static string RecoveredDateInfuture {
+            get {
+                return ResourceManager.GetString("RecoveredDateInfuture", resourceCulture);
             }
         }
         

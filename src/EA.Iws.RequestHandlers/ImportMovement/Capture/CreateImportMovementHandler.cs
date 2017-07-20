@@ -27,7 +27,7 @@
             var movement =
                 await importMovementFactory.Create(message.NotificationId, 
                 message.Number, 
-                message.ActualShipmentDate);
+                message.ActualShipmentDate, message.PrenotificationDate);
 
             if (message.PrenotificationDate.HasValue)
             {

@@ -1,10 +1,10 @@
 ﻿namespace EA.Iws.Web.Areas.AdminImportNotificationMovements.ViewModels.Capture
 {
-    using AdminImportNotificationMovements.ViewModels.Capture;
+    using Infrastructure.Validation;
+    using Prsd.Core;
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-    using Infrastructure.Validation;
     using Web.ViewModels.Shared;
 
     public class CreateViewModel : IValidatableObject
@@ -73,6 +73,51 @@
             if (!Receipt.WasAccepted && string.IsNullOrWhiteSpace(Receipt.RejectionFurtherInformation))
             {
                 yield return new ValidationResult(ReceiptViewModelResources.RejectionFurtherInformationRequired, new[] { "Receipt.RejectionFurtherInformation" });
+            }
+
+            if (PrenotificationDate.IsCompleted && PrenotificationDate.Date > SystemTime.UtcNow.Date)
+            {
+                yield return new ValidationResult(CreateViewModelResources.PrenotifictaionDateInfuture,
+                   new[] { "PrenotificationDate" });
+            }
+
+            if (ActualShipmentDate.IsCompleted && PrenotificationDate.IsCompleted)
+            {
+                DateTime preNotificateDate = PrenotificationDate.Date.Value;
+
+                if (ActualShipmentDate.Date < preNotificateDate)
+                {
+                    yield return new ValidationResult(CreateViewModelResources.ActualDateBeforePrenotification, new[] { "ActualShipmentDate" });
+                }
+
+                if (ActualShipmentDate.Date > preNotificateDate.AddDays(60))
+                {
+                    yield return new ValidationResult(CreateViewModelResources.ActualDateGreaterthanSixtyDays, new[] { "ActualShipmentDate" });
+                }
+            }
+
+            if (Receipt.IsComplete())
+            {
+                if (Receipt.ReceivedDate.Date < ActualShipmentDate.Date)
+                {
+                    yield return new ValidationResult(CreateViewModelResources.ReceivedDateBeforeActualDate, new[] { "Receipt.ReceivedDate.Date" });
+                }
+                if (Receipt.ReceivedDate.Date > SystemTime.UtcNow.Date)
+                {
+                    yield return new ValidationResult(CreateViewModelResources.ReceivedDateInfuture, new[] { "Receipt.ReceivedDate.Date" });
+                }
+            }
+
+            if (Recovery.IsComplete())
+            {
+                if (Recovery.RecoveryDate.Date < Receipt.ReceivedDate.Date)
+                {
+                    yield return new ValidationResult(CreateViewModelResources.RecoveredDateBeforeReceivedDate, new[] { "Recovery.RecoveryDate.Date" });
+                }
+                if (Recovery.RecoveryDate.Date > SystemTime.UtcNow.Date)
+                {
+                    yield return new ValidationResult(CreateViewModelResources.RecoveredDateInfuture, new[] { "Recovery.RecoveryDate.Date" });
+                }
             }
         }
 

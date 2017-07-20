@@ -79,7 +79,10 @@
     <Compile Include="FinancialGuarantee\FinancialGuaranteeReleaseTests.cs" />
     <Compile Include="FinancialGuarantee\FinancialGuaranteeTests.cs" />
     <Compile Include="ImportMovement\CancelImportMovementTests.cs" />
+    <Compile Include="ImportMovement\CompleteImportMovementTests.cs" />
     <Compile Include="ImportMovement\ImportMovementFactoryTests.cs" />
+    <Compile Include="ImportMovement\ReceiveImportMovementTests.cs" />
+    <Compile Include="ImportMovement\RejectImportMovementTests.cs" />
     <Compile Include="ImportNotificationAssessment\ImportNotificationAssessmentTests.cs" />
     <Compile Include="ImportNotificationAssessment\Transactions\ImportNotificationTransactionCalculatorTests.cs" />
     <Compile Include="ImportNotificationAssessment\Transactions\ImportPaymentTransactionTests.cs" />
