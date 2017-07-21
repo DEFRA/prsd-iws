@@ -12,7 +12,7 @@
         [Required(ErrorMessageResourceType = typeof(SearchViewModelResources), ErrorMessageResourceName = "Required")]
         [Range(1, int.MaxValue, ErrorMessageResourceType = typeof(SearchViewModelResources), ErrorMessageResourceName = "Range")]
         [Display(Name = "ShipmentNumber", ResourceType = typeof(CreateViewModelResources))]
-        public int? Number { get; set; }
+        public int? ShipmentNumber { get; set; }
 
         public int? LatestCurrentMovementNumber { get; set; }
 

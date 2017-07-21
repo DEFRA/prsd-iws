@@ -5,6 +5,18 @@
     ViewBag.Title = Resource.PageTitle;
 }
 
+@section top_of_page {
+    @if (ViewData.ModelState.IsValid && Model.ShipmentNumber != null)
+    {
+        <div class="grid-row">
+            <div class="column-full">
+                <div id="status-box-saved" name="status-box-saved">
+                    <h2 class="heading-small">@Resource.ChangesSaved</h2>
+                </div>
+            </div>
+        </div>
+    }
+}
 
 <div class="column-two-thirds">
     <h1 class="heading-large">@Resource.MainHeading</h1>
@@ -14,12 +26,12 @@
         @Html.Gds().ValidationSummary()
         @Html.HiddenFor(m => m.LatestCurrentMovementNumber)
         @Html.HiddenFor(m => m.NotificationId)
-        if (ViewData.ModelState.IsValid && Model.Number != null)
+        if (ViewData.ModelState.IsValid && Model.ShipmentNumber != null)
         {
-            <h1 class="data-item bold-xxlarge">@string.Format(Resource.ShipmentNumber, Model.Number)</h1>
+            <h1 class="data-item bold-xxlarge">@string.Format(Resource.ShipmentNumber, Model.ShipmentNumber)</h1>
         }
-        <div class="form-group @Html.Gds().FormGroupClass(m => m.Number)">
-            @Html.Gds().LabelFor(m => m.Number, new { @class = "form-label-bold" })
+        <div class="form-group @Html.Gds().FormGroupClass(m => m.ShipmentNumber)">
+            @Html.Gds().LabelFor(m => m.ShipmentNumber, new { @class = "form-label-bold" })
             @if (Model.LatestCurrentMovementNumber == 0)
             {
                 @Html.Gds().HintSpan(Resource.ZeroMovements)
@@ -28,8 +40,8 @@
             {
                 @Html.Gds().HintSpan(string.Format(Resource.LatestNumber, Model.LatestCurrentMovementNumber))
             }
-            @Html.Gds().ValidationMessageFor(m => m.Number)
-            @Html.Gds().TextBoxFor(m => m.Number, new { type = "number", min = 1, max = int.MaxValue })
+            @Html.Gds().ValidationMessageFor(m => m.ShipmentNumber)
+            @Html.Gds().TextBoxFor(m => m.ShipmentNumber, new { type = "number", min = 1, max = int.MaxValue })
         </div>
 
         @Html.Partial("_Prenotify")
@@ -80,6 +92,8 @@
             $("#HasNoPrenotification").click(function () {
                 togglePrenotificationDate($('#HasNoPrenotification').is(':checked'));
             });
+
+            $("#ShipmentNumber").focus();
         });
     </script>
 }
