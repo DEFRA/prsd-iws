@@ -74,19 +74,19 @@
 
             //Check if shipment number exists
             var movementId =
-                await mediator.SendAsync(new GetMovementIdIfExists(id, model.Number.Value));
+                await mediator.SendAsync(new GetMovementIdIfExists(id, model.ShipmentNumber.Value));
 
             if (!movementId.HasValue)
             {
                 var success = await mediator.SendAsync(new CreateMovementInternal(id,
-                    model.Number.Value,
+                    model.ShipmentNumber.Value,
                     model.PrenotificationDate.Date,
                     model.ActualShipmentDate.Date.Value,
                     model.HasNoPrenotification));
 
                 if (success)
                 {
-                     movementId = await mediator.SendAsync(new GetMovementIdByNumber(id, model.Number.Value));
+                     movementId = await mediator.SendAsync(new GetMovementIdByNumber(id, model.ShipmentNumber.Value));
 
                     model.IsSaved = true;
                     if (model.Receipt.IsComplete() && !model.IsReceived)

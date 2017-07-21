@@ -16,13 +16,13 @@
             @Html.HiddenFor(m => m.LatestCurrentMovementNumber)
             @Html.HiddenFor(m => m.NotificationId)
             @Html.HiddenFor(m => m.NotificationType)
-            if (ViewData.ModelState.IsValid && Model.Number != null)
+            if (ViewData.ModelState.IsValid && Model.ShipmentNumber != null)
             {
-                <h1 class="data-item bold-xxlarge">@string.Format(Resource.ShipmentNumber, Model.Number)</h1>
+                <h1 class="data-item bold-xxlarge">@string.Format(Resource.ShipmentNumber, Model.ShipmentNumber)</h1>
             }
 
-            <div class="form-group @Html.Gds().FormGroupClass(m => m.Number)">
-                @Html.Gds().LabelFor(m => m.Number, new { @class = "form-label-bold" })
+            <div class="form-group @Html.Gds().FormGroupClass(m => m.ShipmentNumber)">
+                @Html.Gds().LabelFor(m => m.ShipmentNumber, new { @class = "form-label-bold" })
                 @if (Model.LatestCurrentMovementNumber == 0)
                 {
                     @Html.Gds().HintSpan(Resource.ZeroMovements)
@@ -31,8 +31,8 @@
                 {
                     @Html.Gds().HintSpan(string.Format(Resource.LatestNumber, Model.LatestCurrentMovementNumber))
                 }
-                @Html.Gds().ValidationMessageFor(m => m.Number)
-                @Html.Gds().TextBoxFor(m => m.Number, new { type = "number", min = 1 })
+                @Html.Gds().ValidationMessageFor(m => m.ShipmentNumber)
+                @Html.Gds().TextBoxFor(m => m.ShipmentNumber, new { type = "number", min = 1 })
             </div>
 
             @Html.Partial("_Prenotify")
@@ -78,6 +78,8 @@
             $("#HasNoPrenotification").click(function () {
                 togglePrenotificationDate($('#HasNoPrenotification').is(':checked'));
             });
+
+            $("#ShipmentNumber").focus();
         });
     </script>
 }

@@ -67,12 +67,12 @@
                 return View(model);
             }
 
-            var result = await mediator.SendAsync(new GetImportMovementIdIfExists(id, model.Number.Value));
+            var result = await mediator.SendAsync(new GetImportMovementIdIfExists(id, model.ShipmentNumber.Value));
 
             if (!result.HasValue)
             {
                 var movementId = await mediator.SendAsync(new CreateImportMovement(id,
-                model.Number.Value,
+                model.ShipmentNumber.Value,
                 model.ActualShipmentDate.Date.Value,
                 model.PrenotificationDate.Date));
 

@@ -14,7 +14,7 @@
         [Required(ErrorMessageResourceName = "NumberRequired", ErrorMessageResourceType = typeof(CreateViewModelResources))]
         [Display(Name = "Number", ResourceType = typeof(CreateViewModelResources))]
         [Range(1, int.MaxValue, ErrorMessage = null, ErrorMessageResourceName = "NumberIsInt", ErrorMessageResourceType = typeof(CreateViewModelResources))]
-        public int? Number { get; set; }
+        public int? ShipmentNumber { get; set; }
 
         public Guid NotificationId { get; set; }
 

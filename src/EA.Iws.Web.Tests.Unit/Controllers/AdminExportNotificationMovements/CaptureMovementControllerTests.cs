@@ -22,7 +22,7 @@
         private static readonly Guid NotificationId = new Guid("70C125C6-3B69-4B96-84E9-CE84E78C1BB4");
         private static readonly CreateViewModel Model = new CreateViewModel
         {
-            Number = 9,
+            ShipmentNumber = 9,
             ActualShipmentDate = new MaskedDateInputViewModel(new DateTime(2015, 1, 1))
         };
 

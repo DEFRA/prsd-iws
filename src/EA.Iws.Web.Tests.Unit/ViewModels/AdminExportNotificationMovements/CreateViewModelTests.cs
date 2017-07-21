@@ -155,7 +155,7 @@
         internal CreateViewModel CreateViewModelForPrenotificationDate(int day, int month, int year)
         {
             var model = new CreateViewModel();
-            model.Number = 52;
+            model.ShipmentNumber = 52;
             model.PrenotificationDate = new MaskedDateInputViewModel(new DateTime(year, month, day));
             model.ActualShipmentDate = new MaskedDateInputViewModel(new DateTime(year, month, day));
             return model;
@@ -163,7 +163,7 @@
         internal CreateViewModel CreateViewModelForActualDate(int day, int month, int year, bool isDateInPast)
         {
             var model = new CreateViewModel();
-            model.Number = 52;
+            model.ShipmentNumber = 52;
             model.PrenotificationDate = new MaskedDateInputViewModel(new DateTime(2016, 6, 1));
 
             if (!isDateInPast)
@@ -180,7 +180,7 @@
         internal CreateViewModel CreateViewModelForReceivedDate(int day, int month, int year, bool isDateInPast)
         {
             var model = new CreateViewModel();
-            model.Number = 52;
+            model.ShipmentNumber = 52;
 
             if (!isDateInPast)
             {
@@ -204,7 +204,7 @@
         internal CreateViewModel CreateViewModelForRecoveredDate(int day, int month, int year, bool isDateInPast)
         {
             var model = new CreateViewModel();
-            model.Number = 52;
+            model.ShipmentNumber = 52;
             if (!isDateInPast)
             {
                 model.PrenotificationDate = new MaskedDateInputViewModel(new DateTime(2016, 6, 1));
