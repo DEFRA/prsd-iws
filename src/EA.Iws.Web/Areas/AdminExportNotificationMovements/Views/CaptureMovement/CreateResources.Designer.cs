@@ -71,6 +71,15 @@ namespace EA.Iws.Web.Areas.AdminExportNotificationMovements.Views.CaptureMovemen
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Your changes have been saved.
+        /// </summary>
+        public static string ChangesSaved {
+            get {
+                return ResourceManager.GetString("ChangesSaved", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Currently displaying shipment {0}.
         /// </summary>
         public static string CurrentShipmentParagraph {

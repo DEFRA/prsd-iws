@@ -2,6 +2,8 @@
     Layout = "~/Views/Shared/_Layout.GovUK.Sections.cshtml";
 }
 
+@RenderSection("top_of_page", required: false)
+
 <div class="grid-row">
     <div class="column-third">
         @RenderSection("menu", required: false)

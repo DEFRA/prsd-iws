@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="ChangesSaved" xml:space="preserve">
+    <value>Your changes have been saved</value>
+  </data>
   <data name="CurrentShipmentParagraph" xml:space="preserve">
     <value>Currently displaying shipment {0}</value>
   </data>

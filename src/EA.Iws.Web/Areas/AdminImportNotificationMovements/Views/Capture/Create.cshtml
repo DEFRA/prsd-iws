@@ -5,6 +5,18 @@
     ViewBag.Title = Resource.PageTitle;
 }
 
+@section top_of_page {
+    @if (ViewData.ModelState.IsValid && Model.ShipmentNumber != null)
+    {
+        <div class="grid-row">
+            <div class="column-full">
+                <div id="status-box-saved" name="status-box-saved">
+                    <h2 class="heading-small">@Resource.ChangesSaved</h2>
+                </div>
+            </div>
+        </div>
+    }
+}
 
 <div class="column-two-thirds">
     <h1 class="heading-large">@Resource.MainHeading</h1>
