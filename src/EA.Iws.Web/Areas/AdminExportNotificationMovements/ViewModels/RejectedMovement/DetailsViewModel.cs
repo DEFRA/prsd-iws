@@ -11,8 +11,6 @@
 
         public string Reason { get; set; }
 
-        public string FurtherDetails { get; set; }
-
         public DetailsViewModel()
         {
         }
@@ -22,7 +20,6 @@
             Number = details.Number;
             Date = details.Date;
             Reason = details.Reason;
-            FurtherDetails = details.FurtherDetails;
         }
     }
 }

@@ -197,13 +197,12 @@
         }
 
         internal MovementRejection Reject(DateTime dateReceived,
-            string reason,
-            string furtherDetails)
+            string reason)
         {
             Guard.ArgumentNotDefaultValue(() => dateReceived, dateReceived);
             Guard.ArgumentNotDefaultValue(() => reason, reason);
 
-            var rejection = new MovementRejection(Id, dateReceived, reason, furtherDetails);
+            var rejection = new MovementRejection(Id, dateReceived, reason);
 
             stateMachine.Fire(Trigger.Reject);
 

@@ -22,8 +22,7 @@
         {
             await rejectMovement.Reject(message.MovementId,
                 message.RejectedDate,
-                message.RejectionReason,
-                message.RejectionFurtherInformation);
+                message.RejectionReason);
 
             await context.SaveChangesAsync();
 

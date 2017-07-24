@@ -30,8 +30,6 @@
 
         public string RejectionReason { get; set; }
 
-        public string RejectionReasonFurtherInformation { get; set; }
-
         public DateTime? OperationCompleteDate { get; set; }
 
         public bool IsReceived { get; set; }

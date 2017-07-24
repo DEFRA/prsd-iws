@@ -49,7 +49,6 @@
                 Units = data.ReceiptUnits ?? data.NotificationUnits,
                 WasShipmentAccepted = string.IsNullOrWhiteSpace(data.RejectionReason),
                 RejectionReason = data.RejectionReason,
-                RejectionFurtherInformation = data.RejectionReasonFurtherInformation,
                 PossibleUnits = data.PossibleUnits
             };
             Recovery = new RecoveryViewModel

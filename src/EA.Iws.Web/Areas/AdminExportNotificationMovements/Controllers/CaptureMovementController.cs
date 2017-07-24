@@ -95,8 +95,7 @@
                         {
                             await mediator.SendAsync(new RecordRejectionInternal(movementId.Value,
                                 model.Receipt.ReceivedDate.Date.Value,
-                                model.Receipt.RejectionReason,
-                                model.Receipt.RejectionFurtherInformation));
+                                model.Receipt.RejectionReason));
                         }
                         else
                         {

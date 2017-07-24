@@ -20,8 +20,7 @@
 
         public async Task<MovementRejection> Reject(Guid movementId,
             DateTime rejectionDate,
-            string reason,
-            string furtherDetails = null)
+            string reason)
         {
             var movement = await movementRepository.GetById(movementId);
 
@@ -35,8 +34,7 @@
             }
 
             var movementRejection = movement.Reject(rejectionDate,
-                reason,
-                furtherDetails);
+                reason);
 
             movementRejectionRepository.Add(movementRejection);
 

@@ -69,7 +69,6 @@
             if (movementRejection != null)
             {
                 data.RejectionReason = movementRejection.Reason;
-                data.RejectionReasonFurtherInformation = movementRejection.FurtherDetails;
                 data.ReceiptDate = movementRejection.Date;
             }
 
