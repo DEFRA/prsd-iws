@@ -154,7 +154,7 @@
     <value>The 'notification complete' date cannot be in the future. Please enter a different date.</value>
   </data>
   <data name="CompletedOthersRequired" xml:space="preserve">
-    <value>You need to enter a 'notification received' date before you can continue</value>
+    <value>You need to enter previous key dates before you can continue</value>
   </data>
   <data name="DateRequiredError" xml:space="preserve">
     <value>Please enter a valid date</value>
