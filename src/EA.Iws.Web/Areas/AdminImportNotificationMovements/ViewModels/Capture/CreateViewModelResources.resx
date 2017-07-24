@@ -124,7 +124,7 @@
     <value>The "actual date of shipment" should not be more than 30 calendar days after the "prenotification date". Please advise the exporter or enter a different date.</value>
   </data>
   <data name="ActualShipmentDate" xml:space="preserve">
-    <value>Actual date</value>
+    <value>Actual date of shipment</value>
   </data>
   <data name="ActualShipmentDateRequired" xml:space="preserve">
     <value>Please provide the actual shipment date</value>
@@ -148,10 +148,10 @@
     <value>The "when the waste was received" date cannot be in the future. Please enter a different date.</value>
   </data>
   <data name="RecoveredDateBeforeReceivedDate" xml:space="preserve">
-    <value>The "when was the waste recovered" date cannot be before the "when was the waste received " date. Please enter a different date.</value>
+    <value>The "when was the waste {0}" date cannot be before the "when was the waste received " date. Please enter a different date.</value>
   </data>
   <data name="RecoveredDateInfuture" xml:space="preserve">
-    <value>The "when the waste was recovered" date cannot be in the future. Please enter a different date.</value>
+    <value>The "when the waste was {0}" date cannot be in the future. Please enter a different date.</value>
   </data>
   <data name="ShipmentNumber" xml:space="preserve">
     <value>Shipment number</value>

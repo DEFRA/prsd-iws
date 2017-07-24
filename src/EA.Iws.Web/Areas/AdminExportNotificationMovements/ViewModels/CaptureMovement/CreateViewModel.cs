@@ -64,7 +64,7 @@
           
             if ((!Receipt.ReceivedDate.IsCompleted && Receipt.ActualQuantity.HasValue) || (!Receipt.ReceivedDate.IsCompleted && !string.IsNullOrWhiteSpace(Receipt.RejectionReason)))
             {
-                yield return new ValidationResult(CreateViewModelResources.ReceivedDateRequired, new[] { "Receipt.ReceivedDate.Date" });
+                yield return new ValidationResult(CreateViewModelResources.ReceivedDateRequired, new[] { "Receipt.ReceivedDate" });
             }
 
             if (!Receipt.ActualQuantity.HasValue && Receipt.ReceivedDate.IsCompleted)
@@ -80,13 +80,13 @@
             if (Recovery.IsComplete() && !Receipt.IsComplete())
             {
                 yield return new ValidationResult(string.Format(CreateViewModelResources.ReceiptMustBeCompletedFirst, NotificationType),
-                    new[] { "Recovery.RecoveryDate.Date" });
+                    new[] { "Recovery.RecoveryDate" });
             }
 
             if (Receipt.IsComplete() && !Receipt.WasShipmentAccepted && Recovery.IsComplete())
             {
                 yield return new ValidationResult(string.Format(CreateViewModelResources.RecoveryDateCannotBeEnteredForRejected, NotificationType),
-                    new[] { "Recovery.RecoveryDate.Date" });
+                    new[] { "Recovery.RecoveryDate" });
             }
 
             if (PrenotificationDate.IsCompleted && PrenotificationDate.Date > SystemTime.UtcNow.Date)
@@ -114,11 +114,11 @@
             {
                 if (Receipt.ReceivedDate.Date < ActualShipmentDate.Date)
                 {
-                    yield return new ValidationResult(CreateViewModelResources.ReceivedDateBeforeActualDate, new[] { "Receipt.ReceivedDate.Date" });
+                    yield return new ValidationResult(CreateViewModelResources.ReceivedDateBeforeActualDate, new[] { "Receipt.ReceivedDate" });
                 }
                 if (Receipt.ReceivedDate.Date > SystemTime.UtcNow.Date)
                 {
-                    yield return new ValidationResult(CreateViewModelResources.ReceivedDateInfuture, new[] { "Receipt.ReceivedDate.Date" });
+                    yield return new ValidationResult(CreateViewModelResources.ReceivedDateInfuture, new[] { "Receipt.ReceivedDate" });
                 }
             }
 
@@ -126,11 +126,11 @@
             {
                 if (Recovery.RecoveryDate.Date < Receipt.ReceivedDate.Date)
                 {
-                    yield return new ValidationResult(CreateViewModelResources.RecoveredDateBeforeReceivedDate, new[] { "Recovery.RecoveryDate.Date" });
+                    yield return new ValidationResult(string.Format(CreateViewModelResources.RecoveredDateBeforeReceivedDate, GetNotificationTypeVerb(Recovery.NotificationType)), new[] { "Recovery.RecoveryDate" });
                 }
                 if (Recovery.RecoveryDate.Date > SystemTime.UtcNow.Date)
                 {
-                    yield return new ValidationResult(CreateViewModelResources.RecoveredDateInfuture, new[] { "Recovery.RecoveryDate.Date" });
+                    yield return new ValidationResult(string.Format(CreateViewModelResources.RecoveredDateInfuture, GetNotificationTypeVerb(Recovery.NotificationType)), new[] { "Recovery.RecoveryDate" });
                 }
             }
         }
@@ -148,6 +148,11 @@
         public bool ShowRecoveryDataAsReadOnly()
         {
             return IsOperationCompleted;
+        }
+
+        public String GetNotificationTypeVerb(NotificationType displayedType)
+        {
+            return displayedType == NotificationType.Recovery ? "recovered" : "disposed of";
         }
     }
 }

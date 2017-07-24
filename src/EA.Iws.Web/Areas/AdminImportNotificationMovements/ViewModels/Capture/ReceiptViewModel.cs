@@ -13,7 +13,6 @@
     public class ReceiptViewModel : IComplete
     {
         [Display(Name = "ReceivedDateLabel", ResourceType = typeof(ReceiptViewModelResources))]
-        [RequiredDateInput(ErrorMessageResourceName = "ReceivedDateRequired", ErrorMessageResourceType = typeof(ReceiptViewModelResources))]
         public MaskedDateInputViewModel ReceivedDate { get; set; }
 
         [Display(Name = "ActualQuantityLabel", ResourceType = typeof(ReceiptViewModelResources))]
