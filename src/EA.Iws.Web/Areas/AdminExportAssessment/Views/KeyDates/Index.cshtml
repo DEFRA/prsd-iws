@@ -222,7 +222,7 @@
                 }
             </td>
             <td>
-                @if (!Model.NotificationFileClosedDate.IsCompleted && Model.DecisionDate.IsCompleted)
+                @if (!Model.NotificationFileClosedDate.IsCompleted && Model.AssessmentDecisions.Any())
                 {
                     @Html.ActionLink("Add", "Index", "KeyDates", new { command = KeyDatesStatusEnum.FileClosed }, null)
                 }
