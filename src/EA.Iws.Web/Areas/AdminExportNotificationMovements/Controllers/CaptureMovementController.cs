@@ -86,7 +86,7 @@
 
                 if (success)
                 {
-                     movementId = await mediator.SendAsync(new GetMovementIdByNumber(id, model.ShipmentNumber.Value));
+                    movementId = await mediator.SendAsync(new GetMovementIdByNumber(id, model.ShipmentNumber.Value));
 
                     model.IsSaved = true;
                     if (model.Receipt.IsComplete() && !model.IsReceived)
@@ -113,6 +113,15 @@
                     {
                         await mediator.SendAsync(new RecordOperationCompleteInternal(movementId.Value,
                             model.Recovery.RecoveryDate.Date.Value));
+                    }
+
+                    if (model.HasComments)
+                    {
+                        await mediator.SendAsync(new SetMovementComments(movementId.Value)
+                        {
+                            Comments = model.Comments,
+                            StatsMarking = model.StatsMarking
+                        });
                     }
 
                     return View(model);

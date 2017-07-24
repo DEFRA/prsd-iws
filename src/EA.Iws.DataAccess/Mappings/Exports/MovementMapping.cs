@@ -26,6 +26,8 @@
                 ExpressionHelper.GetPrivatePropertyExpression<Movement, MovementCompletedReceipt>("CompletedReceipt"))
                 .WithRequired()
                 .Map(m => m.MapKey("MovementId"));
+
+            Property(x => x.StatsMarking).HasMaxLength(1024);
         }
     }
 }

@@ -65,6 +65,46 @@
             Assert.False(movement.HasShipped);
         }
 
+        [Fact]
+        public void CanSetComments()
+        {
+            movement.SetComments("testing");
+
+            Assert.Equal("testing", movement.Comments);
+        }
+
+        [Fact]
+        public void CommentsCantBeNull()
+        {
+            Assert.Throws<ArgumentNullException>(() => movement.SetComments(null));
+        }
+
+        [Fact]
+        public void CommentsCantBeEmpty()
+        {
+            Assert.Throws<ArgumentException>(() => movement.SetComments(string.Empty));
+        }
+
+        [Fact]
+        public void CanSetStatsMarking()
+        {
+            movement.SetStatsMarking("testing");
+
+            Assert.Equal("testing", movement.StatsMarking);
+        }
+
+        [Fact]
+        public void StatsMarkingCantBeNull()
+        {
+            Assert.Throws<ArgumentNullException>(() => movement.SetStatsMarking(null));
+        }
+
+        [Fact]
+        public void StatsMarkingCantBeEmpty()
+        {
+            Assert.Throws<ArgumentException>(() => movement.SetStatsMarking(string.Empty));
+        }
+
         public void Dispose()
         {
             SystemTime.Unfreeze();
