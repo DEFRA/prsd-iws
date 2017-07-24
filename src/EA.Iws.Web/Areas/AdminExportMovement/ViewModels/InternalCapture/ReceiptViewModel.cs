@@ -27,17 +27,6 @@ namespace EA.Iws.Web.Areas.AdminExportMovement.ViewModels.InternalCapture
         [Display(Name = "RejectionReasonLabel", ResourceType = typeof(ReceiptViewModelResources))]
         public string RejectionReason { get; set; }
 
-        [Display(Name = "RejectionFurtherInformationLabel", ResourceType = typeof(ReceiptViewModelResources))]
-        public string RejectionFurtherInformation { get; set; }
-
-        public SelectList RejectionReasonsSelectList
-        {
-            get
-            {
-                return new SelectList(new MovementRejectionReasons());
-            }
-        }
-
         public SelectList UnitSelectList
         {
             get

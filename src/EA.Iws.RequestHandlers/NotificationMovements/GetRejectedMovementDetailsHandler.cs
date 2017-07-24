@@ -26,8 +26,7 @@
             {
                 Number = movement.Number,
                 Date = details.Date,
-                Reason = details.Reason,
-                FurtherDetails = details.FurtherDetails
+                Reason = details.Reason
             };
         }
     }

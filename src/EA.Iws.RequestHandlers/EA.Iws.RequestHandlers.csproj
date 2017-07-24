@@ -406,6 +406,7 @@
     <Compile Include="Movement\GetMovementIdByNumberHandler.cs" />
     <Compile Include="Movement\GetNewMovementIdsByNotificationIdHandler.cs" />
     <Compile Include="Movement\GetNotificationNumberByMovementIdHandler.cs" />
+    <Compile Include="Movement\SetMovementCommentsHandler.cs" />
     <Compile Include="NotificationAssessment\AddProducerHandler.cs" />
     <Compile Include="NotificationAssessment\DeleteExportNotificationHandler.cs" />
     <Compile Include="NotificationAssessment\DeleteTransactionHandler.cs" />

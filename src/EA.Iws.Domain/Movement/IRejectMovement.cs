@@ -7,7 +7,6 @@
     {
         Task<MovementRejection> Reject(Guid movementId,
             DateTime rejectionDate,
-            string reason,
-            string furtherDetails = null);
+            string reason);
     }
 }

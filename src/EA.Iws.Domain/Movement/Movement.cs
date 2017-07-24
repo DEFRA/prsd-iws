@@ -108,6 +108,10 @@
 
         public string CreatedBy { get; private set; }
 
+        public string Comments { get; private set; }
+
+        public string StatsMarking { get; private set; }
+
         public void AddStatusChangeRecord(MovementStatusChange statusChange)
         {
             Guard.ArgumentNotNull(() => statusChange, statusChange);
@@ -197,13 +201,12 @@
         }
 
         internal MovementRejection Reject(DateTime dateReceived,
-            string reason,
-            string furtherDetails)
+            string reason)
         {
             Guard.ArgumentNotDefaultValue(() => dateReceived, dateReceived);
             Guard.ArgumentNotDefaultValue(() => reason, reason);
 
-            var rejection = new MovementRejection(Id, dateReceived, reason, furtherDetails);
+            var rejection = new MovementRejection(Id, dateReceived, reason);
 
             stateMachine.Fire(Trigger.Reject);
 
@@ -275,6 +278,18 @@
                 throw new InvalidOperationException("The when the waste was recovered date cannot be in the future.");
             }
             stateMachine.Fire(internallyCompletedTrigger, completedDate, createdBy);
+        }
+
+        public void SetComments(string comments)
+        {
+            Guard.ArgumentNotNullOrEmpty(() => comments, comments);
+            Comments = comments;
+        }
+
+        public void SetStatsMarking(string statsMarking)
+        {
+            Guard.ArgumentNotNullOrEmpty(() => statsMarking, statsMarking);
+            StatsMarking = statsMarking;
         }
 
         private void OnInternallyCompleted(DateTime completedDate, Guid createdBy)

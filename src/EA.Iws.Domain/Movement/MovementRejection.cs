@@ -12,8 +12,6 @@
 
         public string Reason { get; private set; }
 
-        public string FurtherDetails { get; private set; }
-
         public Guid? FileId { get; private set; }
 
         protected MovementRejection()
@@ -22,15 +20,13 @@
 
         public MovementRejection(Guid movementId,
             DateTime date, 
-            string reason, 
-            string furtherDetails)
+            string reason)
         {
             Guard.ArgumentNotNullOrEmpty(() => reason, reason);
 
             MovementId = movementId;
             Date = date;
             Reason = reason;
-            FurtherDetails = furtherDetails;
         }
 
         public void SetFile(Guid fileId)
