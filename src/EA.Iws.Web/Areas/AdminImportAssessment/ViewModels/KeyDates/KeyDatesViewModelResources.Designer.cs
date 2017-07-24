@@ -170,7 +170,7 @@ namespace EA.Iws.Web.Areas.AdminImportAssessment.ViewModels.KeyDates {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You need to enter a &apos;notification received&apos; date before you can continue.
+        ///   Looks up a localized string similar to You need to enter previous key dates before you can continue.
         /// </summary>
         public static string CompletedOthersRequired {
             get {
