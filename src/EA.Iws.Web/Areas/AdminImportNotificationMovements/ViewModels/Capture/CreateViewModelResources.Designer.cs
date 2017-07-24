@@ -80,7 +80,7 @@ namespace EA.Iws.Web.Areas.AdminImportNotificationMovements.ViewModels.Capture {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Actual date.
+        ///   Looks up a localized string similar to Actual date of shipment.
         /// </summary>
         public static string ActualShipmentDate {
             get {
@@ -152,7 +152,7 @@ namespace EA.Iws.Web.Areas.AdminImportNotificationMovements.ViewModels.Capture {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The &quot;when was the waste recovered&quot; date cannot be before the &quot;when was the waste received &quot; date. Please enter a different date..
+        ///   Looks up a localized string similar to The &quot;when was the waste {0}&quot; date cannot be before the &quot;when was the waste received &quot; date. Please enter a different date..
         /// </summary>
         public static string RecoveredDateBeforeReceivedDate {
             get {
@@ -161,7 +161,7 @@ namespace EA.Iws.Web.Areas.AdminImportNotificationMovements.ViewModels.Capture {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The &quot;when the waste was recovered&quot; date cannot be in the future. Please enter a different date..
+        ///   Looks up a localized string similar to The &quot;when the waste was {0}&quot; date cannot be in the future. Please enter a different date..
         /// </summary>
         public static string RecoveredDateInfuture {
             get {

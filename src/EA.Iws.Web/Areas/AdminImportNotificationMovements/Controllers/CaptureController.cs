@@ -11,6 +11,7 @@
     using Requests.ImportMovement.CompletedReceipt;
     using Requests.ImportMovement.Receipt;
     using Requests.ImportMovement.Reject;
+    using Requests.ImportNotification;
     using ViewModels.Capture;
  
     [AuthorizeActivity(typeof(CreateImportMovement))]
@@ -30,7 +31,9 @@
             var model = new CreateViewModel();
             model.LatestCurrentMovementNumber = await mediator.SendAsync(new GetLatestMovementNumber(id));
             model.NotificationId = id;
-            
+
+            var result = await mediator.SendAsync(new GetNotificationDetails(id));
+            model.Recovery.NotificationType = result.NotificationType;
             //Set the units based on the notification Id  
             var units = await mediator.SendAsync(new GetImportShipmentUnits(id));
             model.Receipt.PossibleUnits = ShipmentQuantityUnitsMetadata.GetUnitsOfThisType(units).ToArray();

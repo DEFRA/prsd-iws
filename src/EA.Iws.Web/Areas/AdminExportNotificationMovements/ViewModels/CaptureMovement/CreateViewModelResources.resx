@@ -166,10 +166,10 @@
     <value>Please provide the received date</value>
   </data>
   <data name="RecoveredDateBeforeReceivedDate" xml:space="preserve">
-    <value>The "when was the waste recovered" date cannot be before the "when was the waste received " date. Please enter a different date.</value>
+    <value>The "when was the waste {0}" date cannot be before the "when was the waste received " date. Please enter a different date.</value>
   </data>
   <data name="RecoveredDateInfuture" xml:space="preserve">
-    <value>The "when the waste was recovered" date cannot be in the future. Please enter a different date.</value>
+    <value>The "when the waste was {0}" date cannot be in the future. Please enter a different date.</value>
   </data>
   <data name="RecoveryDateCannotBeEnteredForRejected" xml:space="preserve">
     <value>Do not provide {0} date when the prenotification has been rejected</value>

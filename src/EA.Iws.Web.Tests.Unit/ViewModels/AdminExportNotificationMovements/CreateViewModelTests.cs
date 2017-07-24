@@ -43,7 +43,7 @@
         [Fact]
         public void ActualShipmentDateCanBeInThePast()
         {
-            var model = CreateViewModelForActualDate(15, 6, 2016, true);
+            var model = CreateViewModelForActualDate(15, 5, 2016, true);
             Assert.Empty(ViewModelValidator.ValidateViewModel(model));
         }
 
@@ -164,14 +164,15 @@
         {
             var model = new CreateViewModel();
             model.ShipmentNumber = 52;
-            model.PrenotificationDate = new MaskedDateInputViewModel(new DateTime(2016, 6, 1));
 
             if (!isDateInPast)
             {
+                model.PrenotificationDate = new MaskedDateInputViewModel(new DateTime(2016, 6, 1));
                 model.ActualShipmentDate = new MaskedDateInputViewModel(new DateTime(year, month, day));
             }
             else
             {
+                model.PrenotificationDate = new MaskedDateInputViewModel(new DateTime(2016, 5, 1));
                 model.ActualShipmentDate = new MaskedDateInputViewModel(new DateTime(year, month, day));
             }
             return model;

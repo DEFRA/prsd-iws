@@ -1,5 +1,6 @@
 ﻿namespace EA.Iws.Web.Areas.AdminImportNotificationMovements.ViewModels.Capture
 {
+    using Core.Shared;
     using Infrastructure.Validation;
     using Prsd.Core;
     using System;
@@ -18,8 +19,6 @@
 
         public Guid NotificationId { get; set; }
 
-        [RequiredDateInput(ErrorMessageResourceName = "ActualShipmentDateRequired",
-            ErrorMessageResourceType = typeof(CreateViewModelResources))]
         [Display(Name = "ActualShipmentDate", ResourceType = typeof(CreateViewModelResources))]
         public MaskedDateInputViewModel ActualShipmentDate { get; set; }
 
@@ -55,9 +54,15 @@
                     new[] { "PrenotificationDate" });
             }
 
-            if ((!Receipt.ReceivedDate.IsCompleted && Receipt.ActualQuantity.HasValue) || (!Receipt.ReceivedDate.IsCompleted && !string.IsNullOrWhiteSpace(Receipt.RejectionReason)))
+            if (!ActualShipmentDate.IsCompleted)
             {
-                yield return new ValidationResult(ReceiptViewModelResources.ReceivedDateRequired, new[] { "Receipt.ReceivedDate.Date" });
+                yield return new ValidationResult(CreateViewModelResources.ActualShipmentDateRequired,
+                   new[] { "ActualShipmentDate" });
+            }
+
+            if ((!Receipt.ReceivedDate.IsCompleted) || (!Receipt.ReceivedDate.IsCompleted && Receipt.ActualQuantity.HasValue) || (!Receipt.ReceivedDate.IsCompleted && !string.IsNullOrWhiteSpace(Receipt.RejectionReason)))
+            {
+                yield return new ValidationResult(ReceiptViewModelResources.ReceivedDateRequired, new[] { "Receipt.ReceivedDate" });
             }
 
             if (!Receipt.ActualQuantity.HasValue && Receipt.ReceivedDate.IsCompleted)
@@ -100,11 +105,11 @@
             {
                 if (Receipt.ReceivedDate.Date < ActualShipmentDate.Date)
                 {
-                    yield return new ValidationResult(CreateViewModelResources.ReceivedDateBeforeActualDate, new[] { "Receipt.ReceivedDate.Date" });
+                    yield return new ValidationResult(CreateViewModelResources.ReceivedDateBeforeActualDate, new[] { "Receipt.ReceivedDate" });
                 }
                 if (Receipt.ReceivedDate.Date > SystemTime.UtcNow.Date)
                 {
-                    yield return new ValidationResult(CreateViewModelResources.ReceivedDateInfuture, new[] { "Receipt.ReceivedDate.Date" });
+                    yield return new ValidationResult(CreateViewModelResources.ReceivedDateInfuture, new[] { "Receipt.ReceivedDate" });
                 }
             }
 
@@ -112,11 +117,11 @@
             {
                 if (Recovery.RecoveryDate.Date < Receipt.ReceivedDate.Date)
                 {
-                    yield return new ValidationResult(CreateViewModelResources.RecoveredDateBeforeReceivedDate, new[] { "Recovery.RecoveryDate.Date" });
+                    yield return new ValidationResult(String.Format(CreateViewModelResources.RecoveredDateBeforeReceivedDate, GetNotificationTypeVerb(Recovery.NotificationType)), new[] { "Recovery.RecoveryDate" });
                 }
                 if (Recovery.RecoveryDate.Date > SystemTime.UtcNow.Date)
                 {
-                    yield return new ValidationResult(CreateViewModelResources.RecoveredDateInfuture, new[] { "Recovery.RecoveryDate.Date" });
+                    yield return new ValidationResult(String.Format(CreateViewModelResources.RecoveredDateInfuture, GetNotificationTypeVerb(Recovery.NotificationType)), new[] { "Recovery.RecoveryDate" });
                 }
             }
         }
@@ -134,6 +139,11 @@
         public bool ShowRecoveryDataAsReadOnly()
         {
             return IsOperationCompleted;
+        }
+
+        public String GetNotificationTypeVerb(NotificationType displayedType)
+        {
+            return displayedType == NotificationType.Recovery ? "recovered" : "disposed of";
         }
     }
 }
