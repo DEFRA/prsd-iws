@@ -6,6 +6,7 @@
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using System.Web.Mvc;
     using Web.ViewModels.Shared;
 
     public class CreateViewModel : IValidatableObject
@@ -37,6 +38,28 @@
         public bool IsSaved { get; set; }
 
         public bool IsOperationCompleted { get; set; }
+
+        [Display(Name = "HasComments", ResourceType = typeof(CreateViewModelResources))]
+        public bool HasComments { get; set; }
+
+        [Display(Name = "Comments", ResourceType = typeof(CreateViewModelResources))]
+        public string Comments { get; set; }
+
+        [Display(Name = "StatsMarking", ResourceType = typeof(CreateViewModelResources))]
+        public string StatsMarking { get; set; }
+
+        public SelectList StatsMarkingSelectList
+        {
+            get
+            {
+                return new SelectList(new[]
+                {
+                    "Illegal Shipment (WSR Table 5)",
+                    "Did not proceed as intended (Basel Table 9)",
+                    "Accident occurred during transport (Basel Table 10)"
+                });
+            }
+        }
 
         public CreateViewModel()
         {
@@ -73,11 +96,6 @@
             if (!Receipt.WasAccepted && string.IsNullOrWhiteSpace(Receipt.RejectionReason))
             {
                 yield return new ValidationResult(ReceiptViewModelResources.RejectReasonRequired, new[] { "Receipt.RejectionReason" });
-            }
-
-            if (!Receipt.WasAccepted && string.IsNullOrWhiteSpace(Receipt.RejectionFurtherInformation))
-            {
-                yield return new ValidationResult(ReceiptViewModelResources.RejectionFurtherInformationRequired, new[] { "Receipt.RejectionFurtherInformation" });
             }
 
             if (PrenotificationDate.IsCompleted && PrenotificationDate.Date > SystemTime.UtcNow.Date)

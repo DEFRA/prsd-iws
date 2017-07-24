@@ -8,8 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace EA.Iws.Web.Areas.AdminImportNotificationMovements.ViewModels.Capture
-{
+namespace EA.Iws.Web.Areas.AdminImportNotificationMovements.ViewModels.Capture {
     using System;
     
     
@@ -40,7 +39,8 @@ namespace EA.Iws.Web.Areas.AdminImportNotificationMovements.ViewModels.Capture
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EA.Iws.Web.Areas.AdminImportMovement.ViewModels.Home.ReceiptViewModelResources", typeof(ReceiptViewModelResources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EA.Iws.Web.Areas.AdminImportNotificationMovements.ViewModels.Capture.ReceiptViewM" +
+                            "odelResources", typeof(ReceiptViewModelResources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -103,24 +103,6 @@ namespace EA.Iws.Web.Areas.AdminImportNotificationMovements.ViewModels.Capture
         public static string ReceivedDateRequired {
             get {
                 return ResourceManager.GetString("ReceivedDateRequired", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Further information on why the shipment was rejected.
-        /// </summary>
-        public static string RejectionFurtherInformationLabel {
-            get {
-                return ResourceManager.GetString("RejectionFurtherInformationLabel", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Please provide further information on why the shipment was rejected.
-        /// </summary>
-        public static string RejectionFurtherInformationRequired {
-            get {
-                return ResourceManager.GetString("RejectionFurtherInformationRequired", resourceCulture);
             }
         }
         

@@ -52,8 +52,7 @@
                 {
                     await mediator.SendAsync(new RecordRejection(id,
                         model.Receipt.ReceivedDate.AsDateTime().Value,
-                        model.Receipt.RejectionReason,
-                        model.Receipt.RejectionFurtherInformation));
+                        model.Receipt.RejectionReason));
                 }
                 else
                 {

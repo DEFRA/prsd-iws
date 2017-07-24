@@ -79,15 +79,6 @@ namespace EA.Iws.Web.Areas.AdminImportMovement.ViewModels.Home {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Further information on why the shipment was rejected.
-        /// </summary>
-        public static string RejectionFurtherInformationLabel {
-            get {
-                return ResourceManager.GetString("RejectionFurtherInformationLabel", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Why was it rejected?.
         /// </summary>
         public static string RejectionReasonLabel {

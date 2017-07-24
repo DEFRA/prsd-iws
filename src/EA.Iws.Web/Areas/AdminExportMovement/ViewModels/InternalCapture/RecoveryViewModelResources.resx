@@ -123,9 +123,6 @@
   <data name="ReceivedDateLabel" xml:space="preserve">
     <value>When was the waste received?</value>
   </data>
-  <data name="RejectionFurtherInformationLabel" xml:space="preserve">
-    <value>Further information on why the shipment was rejected</value>
-  </data>
   <data name="RejectionReasonLabel" xml:space="preserve">
     <value>Why was it rejected?</value>
   </data>

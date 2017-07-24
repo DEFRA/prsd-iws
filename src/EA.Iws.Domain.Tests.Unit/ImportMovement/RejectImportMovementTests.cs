@@ -18,7 +18,6 @@
         private readonly IImportMovementRejectionRepository rejectionRepository;
         private readonly IRejectImportMovement rejectFactory;
         private readonly String rejectionreason = "Rejection Date validation tests";
-        private readonly String furtherDetails = "Further details for Rejection Date";
         private ImportMovement movement;
         
         public RejectImportMovementTests()
@@ -42,7 +41,7 @@
 
             A.CallTo(() => movementRepository.Get(movementId)).Returns(movement);
 
-            var result = await rejectFactory.Reject(movementId, PastDate, rejectionreason, furtherDetails);
+            var result = await rejectFactory.Reject(movementId, PastDate, rejectionreason);
 
             Assert.Equal(PastDate, result.Date);
         }
@@ -54,7 +53,7 @@
 
             A.CallTo(() => movementRepository.Get(movementId)).Returns(movement);
 
-            var result = await rejectFactory.Reject(movementId, Today, rejectionreason, furtherDetails);
+            var result = await rejectFactory.Reject(movementId, Today, rejectionreason);
 
             Assert.Equal(Today, result.Date);
         }
@@ -66,7 +65,7 @@
 
             A.CallTo(() => movementRepository.Get(movementId)).Returns(movement);
 
-            await Assert.ThrowsAsync<InvalidOperationException>(() => rejectFactory.Reject(movementId, PastDate, rejectionreason, furtherDetails));
+            await Assert.ThrowsAsync<InvalidOperationException>(() => rejectFactory.Reject(movementId, PastDate, rejectionreason));
         }
 
         [Fact]
@@ -76,7 +75,7 @@
 
             A.CallTo(() => movementRepository.Get(movementId)).Returns(movement);
 
-            var result = await rejectFactory.Reject(movementId, PastDate, rejectionreason, furtherDetails);
+            var result = await rejectFactory.Reject(movementId, PastDate, rejectionreason);
 
             Assert.Equal(PastDate, result.Date);
         }
@@ -88,7 +87,7 @@
 
             A.CallTo(() => movementRepository.Get(movementId)).Returns(movement);
 
-            await Assert.ThrowsAsync<InvalidOperationException>(() => rejectFactory.Reject(movementId, FutureDate, rejectionreason, furtherDetails));
+            await Assert.ThrowsAsync<InvalidOperationException>(() => rejectFactory.Reject(movementId, FutureDate, rejectionreason));
         }
     }
 }

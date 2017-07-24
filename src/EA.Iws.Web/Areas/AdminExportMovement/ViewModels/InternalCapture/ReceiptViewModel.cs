@@ -4,7 +4,6 @@ namespace EA.Iws.Web.Areas.AdminExportMovement.ViewModels.InternalCapture
     using System.ComponentModel.DataAnnotations;
     using System.Linq;
     using System.Web.Mvc;
-    using Core.ImportMovement;
     using Core.Shared;
     using Infrastructure.Validation;
     using Prsd.Core.Helpers;

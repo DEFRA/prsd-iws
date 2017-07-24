@@ -12,23 +12,19 @@
 
         public string Reason { get; private set; }
 
-        public string FurtherDetails { get; private set; }
-
         protected ImportMovementRejection()
         {
         }
 
         public ImportMovementRejection(Guid movementId,
             DateTime date, 
-            string reason, 
-            string furtherDetails)
+            string reason)
         {
             Guard.ArgumentNotNullOrEmpty(() => reason, reason);
 
             MovementId = movementId;
             Date = date;
             Reason = reason;
-            FurtherDetails = furtherDetails;
         }
     }
 }
