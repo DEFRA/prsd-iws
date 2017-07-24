@@ -1,6 +1,7 @@
 ﻿namespace EA.Iws.Domain.ImportMovement
 {
     using System;
+    using Prsd.Core;
     using Prsd.Core.Domain;
 
     public class ImportMovement : Entity
@@ -14,6 +15,10 @@
         public DateTime? PrenotificationDate { get; private set; }
 
         public bool IsCancelled { get; private set; }
+
+        public string Comments { get; private set; }
+
+        public string StatsMarking { get; private set; }
 
         internal ImportMovement(Guid notificationId, int number, DateTime actualDate)
         {
@@ -42,9 +47,9 @@
             return new ImportMovementReceipt(Id, quantity, date);
         }
 
-        public ImportMovementRejection Reject(DateTime date, string reason, string furtherDetails)
+        public ImportMovementRejection Reject(DateTime date, string reason)
         {
-            return new ImportMovementRejection(Id, date, reason, furtherDetails);
+            return new ImportMovementRejection(Id, date, reason);
         }
 
         public ImportMovementCompletedReceipt Complete(DateTime date)
@@ -60,6 +65,18 @@
             }
 
             IsCancelled = true;
+        }
+
+        public void SetComments(string comments)
+        {
+            Guard.ArgumentNotNullOrEmpty(() => comments, comments);
+            Comments = comments;
+        }
+
+        public void SetStatsMarking(string statsMarking)
+        {
+            Guard.ArgumentNotNullOrEmpty(() => statsMarking, statsMarking);
+            StatsMarking = statsMarking;
         }
     }
 }

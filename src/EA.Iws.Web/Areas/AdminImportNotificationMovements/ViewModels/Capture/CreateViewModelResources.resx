@@ -129,6 +129,12 @@
   <data name="ActualShipmentDateRequired" xml:space="preserve">
     <value>Please provide the actual shipment date</value>
   </data>
+  <data name="Comments" xml:space="preserve">
+    <value>Comments</value>
+  </data>
+  <data name="HasComments" xml:space="preserve">
+    <value>Do you want to enter comments against this shipment?</value>
+  </data>
   <data name="HasNoPrenotification" xml:space="preserve">
     <value>No prenotification received</value>
   </data>
@@ -155,5 +161,8 @@
   </data>
   <data name="ShipmentNumber" xml:space="preserve">
     <value>Shipment number</value>
+  </data>
+  <data name="StatsMarking" xml:space="preserve">
+    <value>WSR/Basel annual stats marking (when required)</value>
   </data>
 </root>

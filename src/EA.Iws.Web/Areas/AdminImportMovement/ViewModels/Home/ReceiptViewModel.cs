@@ -22,9 +22,6 @@
         [Display(Name = "RejectionReasonLabel", ResourceType = typeof(ReceiptViewModelResources))]
         public string RejectionReason { get; set; }
 
-        [Display(Name = "RejectionFurtherInformationLabel", ResourceType = typeof(ReceiptViewModelResources))]
-        public string RejectionFurtherInformation { get; set; }
-
         [Display(Name = "WasShipmentAcceptedLabel", ResourceType = typeof(ReceiptViewModelResources))]
         public bool WasAccepted { get; set; }
 
@@ -41,14 +38,6 @@
             }
         }
 
-        public SelectList RejectionReasonsSelectList
-        {
-            get
-            {
-                return new SelectList(new MovementRejectionReasons());
-            }
-        }
-
         public ReceiptViewModel()
         {
             ReceivedDate = new OptionalDateInputViewModel(true);
@@ -62,7 +51,6 @@
             Units = importMovementReceiptData.ReceiptUnits ?? importMovementReceiptData.NotificationUnit;
             PossibleUnits = importMovementReceiptData.PossibleUnits;
             RejectionReason = importMovementReceiptData.RejectionReason;
-            RejectionFurtherInformation = importMovementReceiptData.RejectionReasonFurtherInformation;
             WasAccepted = string.IsNullOrWhiteSpace(RejectionReason);
 
             if (importMovementReceiptData.ReceiptDate.HasValue)
@@ -104,11 +92,6 @@
             if (!WasAccepted && string.IsNullOrWhiteSpace(RejectionReason))
             {
                 yield return new ValidationResult(ReceiptViewModelResources.RejectReasonRequired, new[] { "RejectionReason" });
-            }
-
-            if (!WasAccepted && string.IsNullOrWhiteSpace(RejectionFurtherInformation))
-            {
-                yield return new ValidationResult(ReceiptViewModelResources.RejectionFurtherInformationRequired, new[] { "RejectionFurtherInformation" });
             }
         }
     }

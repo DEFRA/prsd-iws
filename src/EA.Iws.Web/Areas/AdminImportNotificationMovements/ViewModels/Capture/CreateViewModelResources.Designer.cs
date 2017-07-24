@@ -98,6 +98,24 @@ namespace EA.Iws.Web.Areas.AdminImportNotificationMovements.ViewModels.Capture {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Comments.
+        /// </summary>
+        public static string Comments {
+            get {
+                return ResourceManager.GetString("Comments", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Do you want to enter comments against this shipment?.
+        /// </summary>
+        public static string HasComments {
+            get {
+                return ResourceManager.GetString("HasComments", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to No prenotification received.
         /// </summary>
         public static string HasNoPrenotification {
@@ -175,6 +193,15 @@ namespace EA.Iws.Web.Areas.AdminImportNotificationMovements.ViewModels.Capture {
         public static string ShipmentNumber {
             get {
                 return ResourceManager.GetString("ShipmentNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to WSR/Basel annual stats marking (when required).
+        /// </summary>
+        public static string StatsMarking {
+            get {
+                return ResourceManager.GetString("StatsMarking", resourceCulture);
             }
         }
     }

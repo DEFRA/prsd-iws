@@ -37,13 +37,7 @@
                     <div class="form-group @Html.Gds().FormGroupClass(m => m.RejectionReason)">
                         @Html.LabelFor(m => m.RejectionReason, new { @class = "form-label-bold" })
                         @Html.Gds().ValidationMessageFor(m => m.RejectionReason)
-                        @Html.Gds().DropDownListFor(m => m.RejectionReason, Model.RejectionReasonsSelectList, string.Empty)
-                    </div>
-
-                    <div class="form-group @Html.Gds().FormGroupClass(m => m.RejectionFurtherInformation)">
-                        @Html.LabelFor(m => m.RejectionFurtherInformation, new { @class = "form-label" })
-                        @Html.Gds().ValidationMessageFor(m => m.RejectionFurtherInformation)
-                        @Html.TextAreaFor(m => m.RejectionFurtherInformation, new { @class = "form-control-wide", rows = 10 })
+                        @Html.TextAreaFor(m => m.RejectionReason, new { @class = "form-control-wide", rows = 10 })
                     </div>
 
                 </div>

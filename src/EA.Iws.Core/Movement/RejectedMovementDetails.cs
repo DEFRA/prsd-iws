@@ -9,7 +9,5 @@
         public DateTime Date { get; set; }
 
         public string Reason { get; set; }
-
-        public string FurtherDetails { get; set; }
     }
 }

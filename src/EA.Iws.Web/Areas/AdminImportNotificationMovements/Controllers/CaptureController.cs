@@ -7,6 +7,7 @@
     using Core.Shared;
     using Infrastructure.Authorization;
     using Prsd.Core.Mediator;
+    using Requests.ImportMovement;
     using Requests.ImportMovement.Capture;
     using Requests.ImportMovement.CompletedReceipt;
     using Requests.ImportMovement.Receipt;
@@ -85,8 +86,7 @@
                         {
                             await mediator.SendAsync(new RecordRejection(movementId,
                                 model.Receipt.ReceivedDate.Date.Value,
-                                model.Receipt.RejectionReason,
-                                model.Receipt.RejectionFurtherInformation));
+                                model.Receipt.RejectionReason));
                         }
                         else
                         {
@@ -104,6 +104,15 @@
                     {
                         await mediator.SendAsync(new RecordCompletedReceipt(movementId,
                             model.Recovery.RecoveryDate.Date.Value));
+                    }
+
+                    if (model.HasComments)
+                    {
+                        await mediator.SendAsync(new SetMovementComments(movementId)
+                        {
+                            Comments = model.Comments,
+                            StatsMarking = model.StatsMarking
+                        });
                     }
                 }
             }

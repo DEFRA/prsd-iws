@@ -18,7 +18,7 @@ namespace EA.Iws.Domain.ImportMovement
             this.rejectionRepository = rejectionRepository;
         }
 
-        public async Task<ImportMovementRejection> Reject(Guid importMovementId, DateTime date, string reason, string furtherDetails)
+        public async Task<ImportMovementRejection> Reject(Guid importMovementId, DateTime date, string reason)
         {
             var movement = await movementRepository.Get(importMovementId);
 
@@ -31,7 +31,7 @@ namespace EA.Iws.Domain.ImportMovement
                 throw new InvalidOperationException("The when the waste was received date cannot be in the future.");
             }
 
-            var rejection = movement.Reject(date, reason, furtherDetails);
+            var rejection = movement.Reject(date, reason);
 
             rejectionRepository.Add(rejection);
 

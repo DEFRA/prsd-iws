@@ -5,7 +5,6 @@
 
     public interface IRejectImportMovement
     {
-        Task<ImportMovementRejection> Reject(Guid importMovementId, DateTime date, string reason,
-            string furtherDetails);
+        Task<ImportMovementRejection> Reject(Guid importMovementId, DateTime date, string reason);
     }
 }

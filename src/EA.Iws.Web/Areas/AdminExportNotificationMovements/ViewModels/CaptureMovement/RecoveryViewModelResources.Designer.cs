@@ -8,8 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace EA.Iws.Web.Areas.AdminExportNotificationsMovements.ViewModels.CaptureMovement
-{
+namespace EA.Iws.Web.Areas.AdminExportNotificationMovements.ViewModels.CaptureMovement {
     using System;
     
     
@@ -40,8 +39,8 @@ namespace EA.Iws.Web.Areas.AdminExportNotificationsMovements.ViewModels.CaptureM
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EA.Iws.Web.Areas.AdminExportMovement.ViewModels.InternalCapture.RecoveryViewModel" +
-                            "Resources", typeof(RecoveryViewModelResources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EA.Iws.Web.Areas.AdminExportNotificationMovements.ViewModels.CaptureMovement.Reco" +
+                            "veryViewModelResources", typeof(RecoveryViewModelResources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -77,15 +76,6 @@ namespace EA.Iws.Web.Areas.AdminExportNotificationsMovements.ViewModels.CaptureM
         public static string ReceivedDateLabel {
             get {
                 return ResourceManager.GetString("ReceivedDateLabel", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Further information on why the shipment was rejected.
-        /// </summary>
-        public static string RejectionFurtherInformationLabel {
-            get {
-                return ResourceManager.GetString("RejectionFurtherInformationLabel", resourceCulture);
             }
         }
         

@@ -14,17 +14,13 @@
 
         public string Reason { get; private set; }
 
-        public string FurtherDetails { get; private set; }
-
         public RecordRejection(Guid importMovementId, 
             DateTime date, 
-            string reason, 
-            string furtherDetails)
+            string reason)
         {
             ImportMovementId = importMovementId;
             Date = date;
             Reason = reason;
-            FurtherDetails = furtherDetails;
         }
     }
 }

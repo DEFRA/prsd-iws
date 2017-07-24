@@ -31,7 +31,7 @@
             };
         }
 
-        private ImportMovementReceiptData GetReceiptData(ImportMovementSummary source)
+        private static ImportMovementReceiptData GetReceiptData(ImportMovementSummary source)
         {
             var possibleUnits = ShipmentQuantityUnitsMetadata.GetUnitsOfThisType(source.Units).ToArray();
 
@@ -41,7 +41,6 @@
                 {
                     PossibleUnits = possibleUnits,
                     RejectionReason = source.Rejection.Reason,
-                    RejectionReasonFurtherInformation = source.Rejection.FurtherDetails,
                     ReceiptDate = source.Rejection.Date
                 };
             }
