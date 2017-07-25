@@ -20,7 +20,7 @@
                   EnumHelper.GetShortName(data.QuantityUnits.GetValueOrDefault())
                 : "- -";
             CompletedDate = DateValue(data.CompletedDate, data.Status);
-            NotificationNumber = notificationNumber;
+            NotificationNumber = notificationNumber.Replace(" ", string.Empty);
         }
 
         [DisplayName("Notification number")]

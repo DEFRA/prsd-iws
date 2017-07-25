@@ -18,7 +18,7 @@
             Quantity = data.Quantity;
             Unit = data.QuantityUnits.HasValue ? EnumHelper.GetDisplayName(data.QuantityUnits) : null;
             CompletedDate = data.CompletedDate;
-            NotificationNumber = notificationNumber;
+            NotificationNumber = notificationNumber.Replace(" ", string.Empty);
         }
 
         [DisplayName("Notification number")]
