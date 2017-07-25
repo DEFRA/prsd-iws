@@ -188,6 +188,15 @@ namespace EA.Iws.Web.Areas.AdminImportNotificationMovements.ViewModels.Capture {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Do not provide {0} date when the prenotification has been rejected.
+        /// </summary>
+        public static string RecoveryDateCannotBeEnteredForRejected {
+            get {
+                return ResourceManager.GetString("RecoveryDateCannotBeEnteredForRejected", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Shipment number.
         /// </summary>
         public static string ShipmentNumber {
