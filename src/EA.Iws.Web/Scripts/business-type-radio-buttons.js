@@ -25,7 +25,7 @@ Known Issues:
 
 $(function () {
 
-    $(".panel").removeClass(".hide-for-initial-load");
+    $(".panel").removeClass("hide-for-initial-load");
 
     placeDetailsElementsInCorrectLocation();
 
