@@ -107,7 +107,7 @@ namespace EA.Iws.Web.Areas.AdminImportNotificationMovements.ViewModels.Capture {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Why was it rejected?.
+        ///   Looks up a localized string similar to Reason why the shipment was rejected and any relevant details.
         /// </summary>
         public static string RejectionReasonLabel {
             get {
