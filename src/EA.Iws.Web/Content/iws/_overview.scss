@@ -46,6 +46,11 @@
     h2 {
         margin-bottom: 0px;
     }
+
+    td:last-child,
+    th:last-child {
+        padding-right: 10px;
+    }
 }
 
 .overview-table .change-answer{
