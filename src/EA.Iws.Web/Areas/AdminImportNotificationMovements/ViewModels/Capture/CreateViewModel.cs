@@ -61,6 +61,8 @@
             }
         }
 
+        public NotificationType NotificationType { get; set; }
+
         public CreateViewModel()
         {
             ActualShipmentDate = new MaskedDateInputViewModel();
@@ -141,6 +143,12 @@
                 {
                     yield return new ValidationResult(String.Format(CreateViewModelResources.RecoveredDateInfuture, GetNotificationTypeVerb(Recovery.NotificationType)), new[] { "Recovery.RecoveryDate" });
                 }
+            }
+
+            if (Receipt.IsComplete() && !Receipt.WasAccepted && Recovery.IsComplete())
+            {
+                yield return new ValidationResult(string.Format(CreateViewModelResources.RecoveryDateCannotBeEnteredForRejected, NotificationType),
+                    new[] { "Recovery.RecoveryDate" });
             }
         }
 

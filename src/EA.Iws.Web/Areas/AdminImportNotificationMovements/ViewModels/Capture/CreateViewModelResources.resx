@@ -159,6 +159,9 @@
   <data name="RecoveredDateInfuture" xml:space="preserve">
     <value>The "when the waste was {0}" date cannot be in the future. Please enter a different date.</value>
   </data>
+  <data name="RecoveryDateCannotBeEnteredForRejected" xml:space="preserve">
+    <value>Do not provide {0} date when the prenotification has been rejected</value>
+  </data>
   <data name="ShipmentNumber" xml:space="preserve">
     <value>Shipment number</value>
   </data>

@@ -35,6 +35,7 @@
 
             var result = await mediator.SendAsync(new GetNotificationDetails(id));
             model.Recovery.NotificationType = result.NotificationType;
+            model.NotificationType = result.NotificationType;
             //Set the units based on the notification Id  
             var units = await mediator.SendAsync(new GetImportShipmentUnits(id));
             model.Receipt.PossibleUnits = ShipmentQuantityUnitsMetadata.GetUnitsOfThisType(units).ToArray();
