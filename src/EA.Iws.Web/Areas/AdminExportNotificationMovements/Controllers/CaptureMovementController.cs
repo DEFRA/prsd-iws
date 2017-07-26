@@ -31,7 +31,6 @@
         public async Task<ActionResult> Create(Guid id)
         {
             var model = new CreateViewModel();            
-            model.LatestCurrentMovementNumber = await mediator.SendAsync(new GetLatestMovementNumber(id));
             model.NotificationType = await mediator.SendAsync(new GetNotificationType(id));
             model.NotificationId = id;
             model.Recovery.NotificationType = model.NotificationType;

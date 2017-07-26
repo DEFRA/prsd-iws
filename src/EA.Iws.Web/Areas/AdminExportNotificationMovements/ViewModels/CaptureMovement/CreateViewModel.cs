@@ -10,8 +10,6 @@
 
     public class CreateViewModel : IValidatableObject
     {
-        public int? LatestCurrentMovementNumber { get; set; }
-
         [Required(ErrorMessageResourceName = "NumberRequired", ErrorMessageResourceType = typeof(CreateViewModelResources))]
         [Display(Name = "Number", ResourceType = typeof(CreateViewModelResources))]
         [Range(1, int.MaxValue, ErrorMessage = null, ErrorMessageResourceName = "NumberIsInt", ErrorMessageResourceType = typeof(CreateViewModelResources))]

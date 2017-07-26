@@ -16,8 +16,6 @@
         [Display(Name = "ShipmentNumber", ResourceType = typeof(CreateViewModelResources))]
         public int? ShipmentNumber { get; set; }
 
-        public int? LatestCurrentMovementNumber { get; set; }
-
         public Guid NotificationId { get; set; }
 
         [Display(Name = "ActualShipmentDate", ResourceType = typeof(CreateViewModelResources))]

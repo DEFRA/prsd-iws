@@ -693,3 +693,9 @@ table.table-pad-bottom {
 .error {
     @extend .form-group-error;
 }
+
+.form-control-narrow
+{
+    @extend .form-control;
+    width:20%;
+}
