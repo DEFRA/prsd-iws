@@ -39,10 +39,10 @@
 
         <div class="multiple-choice" data-target="companies-house-number">
             @Html.RadioButtonFor(m => m.BusinessType, "LimitedCompany", new { id = "limited-company" })
+            <label for="limited-company">
+                @CreateNewOrganisationResources.LimitedCompany
+            </label>
         </div>
-        <label for="limited-company">
-            @CreateNewOrganisationResources.LimitedCompany
-        </label>
 
         <div class="multiple-choice" >
             @Html.RadioButtonFor(m => m.BusinessType, BusinessType.Other, new { @class = "business-type-radio-button", id = "other" })
