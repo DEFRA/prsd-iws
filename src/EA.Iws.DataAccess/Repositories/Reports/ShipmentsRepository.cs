@@ -47,9 +47,9 @@
                     [Status],
                     [EwcCodes],
                     [OperationCodes],
-                    [YCode],
-                    [HCode],
-                    [UNClass]
+                    CASE WHEN YCode IS NULL THEN 'NA' ELSE YCode END AS [YCode],
+                    CASE WHEN HCode IS NULL THEN 'NA' ELSE HCode END AS [HCode],
+                    CASE WHEN UNClass IS NULL THEN 'NA' ELSE UNClass END AS [UNClass]
                 FROM [Reports].[ShipmentsCache]
                 WHERE [CompetentAuthorityId] = @ca
                 AND (@dateType = 'NotificationReceivedDate' and  [NotificationReceivedDate] BETWEEN @from AND @to
