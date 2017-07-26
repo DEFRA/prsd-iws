@@ -24,26 +24,17 @@
         {
             @Html.AntiForgeryToken()
             @Html.Gds().ValidationSummary()
-            @Html.HiddenFor(m => m.LatestCurrentMovementNumber)
             @Html.HiddenFor(m => m.NotificationId)
             @Html.HiddenFor(m => m.NotificationType)
             if (ViewData.ModelState.IsValid && Model.ShipmentNumber != null)
             {
-                <h1 class="data-item bold-xxlarge">@string.Format(Resource.ShipmentNumber, Model.ShipmentNumber)</h1>
+                <h1 class="data-item bold-xlarge">@string.Format(Resource.ShipmentNumber, Model.ShipmentNumber)</h1>
             }
 
             <div class="form-group @Html.Gds().FormGroupClass(m => m.ShipmentNumber)">
                 @Html.Gds().LabelFor(m => m.ShipmentNumber, new { @class = "form-label-bold" })
-                @if (Model.LatestCurrentMovementNumber == 0)
-                {
-                    @Html.Gds().HintSpan(Resource.ZeroMovements)
-                }
-                else
-                {
-                    @Html.Gds().HintSpan(string.Format(Resource.LatestNumber, Model.LatestCurrentMovementNumber))
-                }
                 @Html.Gds().ValidationMessageFor(m => m.ShipmentNumber)
-                @Html.Gds().TextBoxFor(m => m.ShipmentNumber, new { type = "number", min = 1 })
+                @Html.Gds().TextBoxFor(m => m.ShipmentNumber, new { type = "number", min = 1, @class = "form-control-narrow" })
             </div>
 
             @Html.Partial("_Prenotify")
