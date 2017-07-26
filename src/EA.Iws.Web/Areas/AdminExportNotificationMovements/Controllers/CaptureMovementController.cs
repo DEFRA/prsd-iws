@@ -4,6 +4,7 @@
     using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Mvc;
+    using Core.Movement;
     using Core.Shared;
     using Infrastructure.Authorization;
     using Prsd.Core.Mediator;
@@ -11,6 +12,7 @@
     using Requests.Movement.Complete;
     using Requests.Movement.Receive;
     using Requests.Movement.Reject;
+    using Requests.Movement.Summary;
     using Requests.Notification;
     using Requests.NotificationMovements.Capture;
     using Requests.NotificationMovements.Create;
@@ -39,27 +41,6 @@
            model.Receipt.PossibleUnits = ShipmentQuantityUnitsMetadata.GetUnitsOfThisType(units).ToArray();
             
             return View(model);
-        }
- 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Index(Guid id, SearchViewModel model)
-        {
-            if (!ModelState.IsValid)
-            {
-                return View(model);
-            }
-
-            var movementId =
-                await mediator.SendAsync(new GetMovementIdIfExists(id, model.Number.Value));
-
-            if (!movementId.HasValue)
-            {
-                TempData[MovementNumberKey] = model.Number;
-                return RedirectToAction("Create");
-            }
-
-            return RedirectToAction("Index", "InternalCapture", new { area = "AdminExportMovement", id = movementId.Value });
         }
 
         [HttpPost]
@@ -133,6 +114,25 @@
             ModelState.AddModelError("Number", CaptureMovementControllerResources.SaveUnsuccessful);
 
             return View(model);
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> Edit(Guid id, Guid movementId)
+        {
+            var result = await mediator.SendAsync(new GetMovementReceiptAndRecoveryData(movementId));
+
+            if (result.Status == MovementStatus.Cancelled)
+            {
+                return RedirectToAction("Cancelled", new { id, notificationId = result.NotificationId });
+            }
+
+            return HttpNotFound();
+        }
+
+        [HttpGet]
+        public ActionResult Cancelled(Guid id, Guid notificationId)
+        {
+            return View(notificationId);
         }
     }
 }

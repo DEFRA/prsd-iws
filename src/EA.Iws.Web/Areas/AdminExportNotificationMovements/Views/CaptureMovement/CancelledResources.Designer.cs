@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace EA.Iws.Web.Areas.AdminExportMovement.ViewModels.InternalCapture {
+namespace EA.Iws.Web.Areas.AdminExportNotificationMovements.Views.CaptureMovement {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace EA.Iws.Web.Areas.AdminExportMovement.ViewModels.InternalCapture {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class CaptureViewModelResources {
+    public class CancelledResources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal CaptureViewModelResources() {
+        internal CancelledResources() {
         }
         
         /// <summary>
@@ -39,8 +39,8 @@ namespace EA.Iws.Web.Areas.AdminExportMovement.ViewModels.InternalCapture {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EA.Iws.Web.Areas.AdminExportMovement.ViewModels.InternalCapture.CaptureViewModelR" +
-                            "esources", typeof(CaptureViewModelResources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EA.Iws.Web.Areas.AdminExportNotificationMovements.Views.CaptureMovement.Cancelled" +
+                            "Resources", typeof(CancelledResources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -62,20 +62,29 @@ namespace EA.Iws.Web.Areas.AdminExportMovement.ViewModels.InternalCapture {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Please provide receipt information before providing date of {0}.
+        ///   Looks up a localized string similar to This shipment has been cancelled, you cannot record any data against it..
         /// </summary>
-        public static string ReceiptMustBeCompletedFirst {
+        public static string Description {
             get {
-                return ResourceManager.GetString("ReceiptMustBeCompletedFirst", resourceCulture);
+                return ResourceManager.GetString("Description", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Do not provide {0} date when the prenotification has been rejected.
+        ///   Looks up a localized string similar to Return to shipment summary.
         /// </summary>
-        public static string RecoveryDateCannotBeEnteredForRejected {
+        public static string ReturnToSummary {
             get {
-                return ResourceManager.GetString("RecoveryDateCannotBeEnteredForRejected", resourceCulture);
+                return ResourceManager.GetString("ReturnToSummary", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Shipment is cancelled.
+        /// </summary>
+        public static string Title {
+            get {
+                return ResourceManager.GetString("Title", resourceCulture);
             }
         }
     }

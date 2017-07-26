@@ -5,6 +5,8 @@
 
     public class MovementTableDataRow
     {
+        public Guid Id { get; set; }
+
         public int Number { get; set; }
 
         public MovementStatus Status { get; set; }
