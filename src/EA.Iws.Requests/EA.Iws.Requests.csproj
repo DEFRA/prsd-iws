@@ -124,7 +124,6 @@
     <Compile Include="ImportMovement\Capture\GetImportMovementIdIfExists.cs" />
     <Compile Include="ImportMovement\Capture\GetImportMovementReceiptAndRecoveryData.cs" />
     <Compile Include="ImportMovement\Capture\GetImportShipmentUnits.cs" />
-    <Compile Include="ImportMovement\Capture\GetLatestMovementNumber.cs" />
     <Compile Include="ImportMovement\CompletedReceipt\RecordCompletedReceipt.cs" />
     <Compile Include="ImportMovement\Delete\DeleteMovement.cs" />
     <Compile Include="ImportMovement\Edit\SetImportMovementDates.cs" />
@@ -222,7 +221,6 @@
     <Compile Include="NotificationAssessment\SetExitPoint.cs" />
     <Compile Include="NotificationAssessment\SetNewNumberOfShipments.cs" />
     <Compile Include="NotificationAssessment\SetEntryPoint.cs" />
-    <Compile Include="NotificationMovements\Capture\GetLatestMovementNumber.cs" />
     <Compile Include="NotificationMovements\Create\HasExceededConsentedQuantity.cs" />
     <Compile Include="Movement\Receive\DoesQuantityReceivedExceedTolerance.cs" />
     <Compile Include="NotificationMovements\GetMovementsByNotificationId.cs" />
