@@ -3,7 +3,7 @@
     using Core.Shared;
     using Web.ViewModels.Shared;
 
-    public class RecoveryViewModel : IComplete
+    public class RecoveryViewModel
     {
         public MaskedDateInputViewModel RecoveryDate { get; set; }
 

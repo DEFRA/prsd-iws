@@ -4,13 +4,12 @@
     using System.ComponentModel.DataAnnotations;
     using System.Linq;
     using System.Web.Mvc;
-    using Core.ImportMovement;
     using Core.Shared;
     using Infrastructure.Validation;
     using Prsd.Core.Helpers;
     using Web.ViewModels.Shared;
     
-    public class ReceiptViewModel : IComplete
+    public class ReceiptViewModel
     {
         [Display(Name = "ReceivedDateLabel", ResourceType = typeof(ReceiptViewModelResources))]
         public MaskedDateInputViewModel ReceivedDate { get; set; }

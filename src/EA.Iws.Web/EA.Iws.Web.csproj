@@ -2507,7 +2507,6 @@
     <Compile Include="Logging\ElmahFilter.cs" />
     <Compile Include="Mappings\ImportNotificationAssessment\FinancialGuarantee\FinancialGuaranteeDecisionViewModelMap.cs" />
     <Compile Include="ViewModels\Applicant\UserNotificationsViewModel.cs" />
-    <Compile Include="ViewModels\Shared\IComplete.cs" />
     <Compile Include="Areas\ExportMovement\ViewModels\Reject\RejectViewModel.cs" />
     <Compile Include="Areas\ExportMovement\ViewModels\Reject\RejectViewModelResources.Designer.cs">
       <AutoGen>True</AutoGen>
