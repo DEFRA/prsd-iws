@@ -971,6 +971,12 @@
     <Content Include="Content\govuk_toolkit\stylesheets\.gitkeep" />
     <Content Include="Content\iws\_form-multiple-choice.scss" />
     <Content Include="Areas\AdminExportNotificationMovements\Views\CaptureMovement\Cancelled.cshtml" />
+    <Content Include="Areas\AdminExportNotificationMovements\Views\CaptureMovement\Edit.cshtml" />
+    <Content Include="Areas\AdminExportNotificationMovements\Views\CaptureMovement\_Comments.cshtml" />
+    <Content Include="Areas\AdminExportNotificationMovements\Views\CaptureMovement\_Scripts.cshtml" />
+    <Content Include="Areas\AdminExportNotificationMovements\Views\CaptureMovement\_PrenotifyReadOnly.cshtml" />
+    <Content Include="Areas\AdminExportNotificationMovements\Views\CaptureMovement\_ReceiptReadOnly.cshtml" />
+    <Content Include="Areas\AdminExportNotificationMovements\Views\CaptureMovement\_OperationReadOnly.cshtml" />
     <None Include="Scripts\jquery-2.1.3.intellisense.js" />
     <Content Include="Scripts\govuk\govuk-template.js" />
     <Content Include="Scripts\govuk\ie.js" />

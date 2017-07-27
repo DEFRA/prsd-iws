@@ -1,0 +1,18 @@
+﻿@model EA.Iws.Web.Areas.AdminExportNotificationMovements.ViewModels.CaptureMovement.RecoveryViewModel
+
+<table>
+    <thead>
+        <tr>
+            <th>Date</th>
+            <th>Value</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>@Html.DisplayNameFor(m => m.RecoveryDate)</td>
+            <td>
+                @Html.Gds().DisplayDate(Model.RecoveryDate.Date.Value)
+            </td>
+        </tr>
+    </tbody>
+</table>

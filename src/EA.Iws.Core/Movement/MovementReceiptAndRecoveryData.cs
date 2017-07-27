@@ -36,6 +36,12 @@
 
         public bool IsOperationCompleted { get; set; }
 
+        public bool IsRejected { get; set; }
+
         public MovementStatus Status { get; set; }
+
+        public string Comments { get; set; }
+
+        public string StatsMarking { get; set; }
     }
 }

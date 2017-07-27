@@ -1,0 +1,36 @@
+﻿@model EA.Iws.Web.Areas.AdminExportNotificationMovements.ViewModels.CaptureMovement.ReceiptViewModel
+
+<table>
+    <thead>
+        <tr>
+            <th>Date</th>
+            <th>Value</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>@Html.DisplayNameFor(m => m.ReceivedDate)</td>
+            <td>
+                @Html.Gds().DisplayDate(Model.ReceivedDate.Date.Value)
+            </td>
+        </tr>
+        <tr>
+            <td>@Html.DisplayNameFor(m => m.WasShipmentAccepted)</td>
+            <td>@(Model.WasShipmentAccepted ? "Yes" : "No")</td>
+        </tr>
+        @if (!Model.WasShipmentAccepted)
+        {
+            <tr>
+                <td>@Html.DisplayNameFor(m => m.RejectionReason)</td>
+                <td>@Model.RejectionReason</td>
+            </tr>
+        }
+        else
+        {
+            <tr>
+                <td>@Html.DisplayNameFor(m => m.ActualQuantity)</td>
+                <td>@Model.ActualQuantity.Value.ToString("G29") @EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(Model.Units.Value)</td>
+            </tr>
+        }
+    </tbody>
+</table>

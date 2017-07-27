@@ -1,0 +1,31 @@
+﻿@model EA.Iws.Web.Areas.AdminExportNotificationMovements.ViewModels.CaptureMovement.CreateViewModel
+
+@Html.HiddenFor(m => m.PrenotificationDate.Date)
+@Html.HiddenFor(m => m.HasNoPrenotification)
+@Html.HiddenFor(m => m.ActualShipmentDate.Date)
+
+<table>
+    <thead>
+    <tr>
+        <th>Date</th>
+        <th>Value</th>
+    </tr>
+    <tr>
+        <td>@Html.DisplayNameFor(m => m.PrenotificationDate)</td>
+        <td>
+            @if (Model.HasNoPrenotification)
+            {
+                @:Has no prenotification
+            }
+            else
+            {
+                @Html.Gds().DisplayDate(Model.PrenotificationDate.Date.Value)
+            }
+        </td>
+    </tr>
+    <tr>
+        <td>@Html.DisplayNameFor(m => m.ActualShipmentDate)</td>
+        <td>@Html.Gds().DisplayDate(Model.ActualShipmentDate.Date.Value)</td>
+    </tr>
+    </thead>
+</table>
