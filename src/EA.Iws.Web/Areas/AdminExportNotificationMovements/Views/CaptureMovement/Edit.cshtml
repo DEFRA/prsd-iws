@@ -56,13 +56,15 @@
             {
                 @Html.HiddenFor(m => m.Recovery.RecoveryDate.Date)
                 @Html.Partial("_OperationReadOnly", Model.Recovery)
+
+                <hr />
             }
             else if (Model.Receipt.IsComplete() && Model.Receipt.WasShipmentAccepted)
             {
                 @Html.EditorFor(m => m.Recovery)
-            }
 
-            <hr />
+                <hr />
+            }
 
             @Html.Partial("_Comments")
 
