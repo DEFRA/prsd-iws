@@ -27,7 +27,9 @@
                     IsOperationCompleted = source.CompletedReceipt != null,
                     OperationCompleteDate = (source.CompletedReceipt == null) ? (DateTimeOffset?)null : source.CompletedReceipt.Date
                 },
-                ReceiptData = GetReceiptData(source)
+                ReceiptData = GetReceiptData(source),
+                Comments = source.Movement.Comments,
+                StatsMarking = source.Movement.StatsMarking
             };
         }
 
@@ -41,7 +43,8 @@
                 {
                     PossibleUnits = possibleUnits,
                     RejectionReason = source.Rejection.Reason,
-                    ReceiptDate = source.Rejection.Date
+                    ReceiptDate = source.Rejection.Date,
+                    IsRejected = true
                 };
             }
 

@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace EA.Iws.Web.Areas.AdminImportMovement.Views.Home {
+namespace EA.Iws.Web.Areas.AdminImportNotificationMovements.Views.Capture {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace EA.Iws.Web.Areas.AdminImportMovement.Views.Home {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class CancelledResources {
+    public class CreateEditResources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal CancelledResources() {
+        internal CreateEditResources() {
         }
         
         /// <summary>
@@ -39,7 +39,8 @@ namespace EA.Iws.Web.Areas.AdminImportMovement.Views.Home {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EA.Iws.Web.Areas.AdminImportMovement.Views.Home.CancelledResources", typeof(CancelledResources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EA.Iws.Web.Areas.AdminImportNotificationMovements.Views.Capture.CreateEditResourc" +
+                            "es", typeof(CreateEditResources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,11 +62,47 @@ namespace EA.Iws.Web.Areas.AdminImportMovement.Views.Home {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This shipment has been cancelled, you cannot record any data against it..
+        ///   Looks up a localized string similar to Your changes have been saved.
         /// </summary>
-        public static string Description {
+        public static string ChangesSaved {
             get {
-                return ResourceManager.GetString("Description", resourceCulture);
+                return ResourceManager.GetString("ChangesSaved", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Currently displaying shipment {0}.
+        /// </summary>
+        public static string CurrentShipmentParagraph {
+            get {
+                return ResourceManager.GetString("CurrentShipmentParagraph", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The last shipment prenotified for this notification was {0}.
+        /// </summary>
+        public static string LatestNumber {
+            get {
+                return ResourceManager.GetString("LatestNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Record Shipment data.
+        /// </summary>
+        public static string MainHeading {
+            get {
+                return ResourceManager.GetString("MainHeading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Capture shipment.
+        /// </summary>
+        public static string PageTitle {
+            get {
+                return ResourceManager.GetString("PageTitle", resourceCulture);
             }
         }
         
@@ -79,11 +116,20 @@ namespace EA.Iws.Web.Areas.AdminImportMovement.Views.Home {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Shipment is cancelled.
+        ///   Looks up a localized string similar to Shipment {0}.
         /// </summary>
-        public static string Title {
+        public static string ShipmentNumber {
             get {
-                return ResourceManager.GetString("Title", resourceCulture);
+                return ResourceManager.GetString("ShipmentNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to So far no shipments have been prenotified for this notification.
+        /// </summary>
+        public static string ZeroMovements {
+            get {
+                return ResourceManager.GetString("ZeroMovements", resourceCulture);
             }
         }
     }

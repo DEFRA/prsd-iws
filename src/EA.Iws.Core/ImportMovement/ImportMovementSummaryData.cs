@@ -7,5 +7,9 @@
         public ImportMovementReceiptData ReceiptData { get; set; }
 
         public ImportMovementRecoveryData RecoveryData { get; set; }
+
+        public string Comments { get; set; }
+
+        public string StatsMarking { get; set; }
     }
 }

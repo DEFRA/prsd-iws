@@ -19,5 +19,7 @@
         public string RejectionReason { get; set; }
 
         public bool IsReceived { get; set; }
+
+        public bool IsRejected { get; set; }
     }
 }

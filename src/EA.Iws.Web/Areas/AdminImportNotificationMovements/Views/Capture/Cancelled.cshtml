@@ -1,5 +1,5 @@
 ﻿@model Guid
-@using Resources = EA.Iws.Web.Areas.AdminImportMovement.Views.Home.CancelledResources
+@using Resources = EA.Iws.Web.Areas.AdminImportNotificationMovements.Views.Capture.CancelledResources
 @{
     ViewBag.Title = Resources.Title;
 }
@@ -8,7 +8,7 @@
 
 <p class="text">@Resources.Description</p>
 
-@Html.ActionLink(Resources.ReturnToSummary, "Index", "Home", new { area = "AdminImportNotificationMovements", id = Model }, null)
+@Html.ActionLink(Resources.ReturnToSummary, "Index", "Home")
 
 @section menu {
     @Html.Action("ImportNavigation", "Menu", new { area = "Admin", id = Model, section = ImportNavigationSection.Shipments })

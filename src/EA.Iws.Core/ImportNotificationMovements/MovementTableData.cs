@@ -5,6 +5,8 @@
 
     public class MovementTableData
     {
+        public Guid Id { get; set; }
+
         public int Number { get; set; }
 
         public DateTime? PreNotification { get; set; }

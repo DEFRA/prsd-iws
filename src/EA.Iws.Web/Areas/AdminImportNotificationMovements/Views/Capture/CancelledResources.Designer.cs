@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace EA.Iws.Web.Areas.AdminImportMovement.ViewModels.Home {
+namespace EA.Iws.Web.Areas.AdminImportNotificationMovements.Views.Capture {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace EA.Iws.Web.Areas.AdminImportMovement.ViewModels.Home {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class RecoveryViewModelResources {
+    public class CancelledResources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal RecoveryViewModelResources() {
+        internal CancelledResources() {
         }
         
         /// <summary>
@@ -39,7 +39,8 @@ namespace EA.Iws.Web.Areas.AdminImportMovement.ViewModels.Home {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EA.Iws.Web.Areas.AdminImportMovement.ViewModels.Home.RecoveryViewModelResources", typeof(RecoveryViewModelResources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EA.Iws.Web.Areas.AdminImportNotificationMovements.Views.Capture.CancelledResource" +
+                            "s", typeof(CancelledResources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,38 +62,29 @@ namespace EA.Iws.Web.Areas.AdminImportMovement.ViewModels.Home {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Actual quantity.
+        ///   Looks up a localized string similar to This shipment has been cancelled, you cannot record any data against it..
         /// </summary>
-        public static string ActualQuantityLabel {
+        public static string Description {
             get {
-                return ResourceManager.GetString("ActualQuantityLabel", resourceCulture);
+                return ResourceManager.GetString("Description", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to When was the waste received?.
+        ///   Looks up a localized string similar to Return to shipment summary.
         /// </summary>
-        public static string ReceivedDateLabel {
+        public static string ReturnToSummary {
             get {
-                return ResourceManager.GetString("ReceivedDateLabel", resourceCulture);
+                return ResourceManager.GetString("ReturnToSummary", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Why was it rejected?.
+        ///   Looks up a localized string similar to Shipment is cancelled.
         /// </summary>
-        public static string RejectionReasonLabel {
+        public static string Title {
             get {
-                return ResourceManager.GetString("RejectionReasonLabel", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Was the shipment accepted?.
-        /// </summary>
-        public static string WasShipmentAcceptedLabel {
-            get {
-                return ResourceManager.GetString("WasShipmentAcceptedLabel", resourceCulture);
+                return ResourceManager.GetString("Title", resourceCulture);
             }
         }
     }

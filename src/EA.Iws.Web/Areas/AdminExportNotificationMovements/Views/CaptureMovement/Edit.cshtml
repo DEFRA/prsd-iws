@@ -1,5 +1,5 @@
-﻿@model EA.Iws.Web.Areas.AdminExportNotificationMovements.ViewModels.CaptureMovement.CreateViewModel
-@using Resource = EA.Iws.Web.Areas.AdminExportNotificationMovements.Views.CaptureMovement.CreateResources
+﻿@model EA.Iws.Web.Areas.AdminExportNotificationMovements.ViewModels.CaptureMovement.CaptureViewModel
+@using Resource = EA.Iws.Web.Areas.AdminExportNotificationMovements.Views.CaptureMovement.CreateEditResources
 
 @{
     ViewBag.Title = Resource.PageTitle;
@@ -59,7 +59,7 @@
 
                 <hr />
             }
-            else if (Model.Receipt.IsComplete() && Model.Receipt.WasShipmentAccepted)
+            else if ((Model.Receipt.IsComplete() && Model.Receipt.WasShipmentAccepted) || !Model.Receipt.IsComplete())
             {
                 @Html.EditorFor(m => m.Recovery)
 
