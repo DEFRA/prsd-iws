@@ -9,20 +9,20 @@
     using Prsd.Core;
     using Web.ViewModels.Shared;
 
-    public class CreateViewModel : IValidatableObject
+    public class CaptureViewModel : IValidatableObject
     {
         [Required(ErrorMessageResourceType = typeof(SearchViewModelResources), ErrorMessageResourceName = "Required")]
         [Range(1, int.MaxValue, ErrorMessageResourceType = typeof(SearchViewModelResources), ErrorMessageResourceName = "Range")]
-        [Display(Name = "ShipmentNumber", ResourceType = typeof(CreateViewModelResources))]
+        [Display(Name = "ShipmentNumber", ResourceType = typeof(CaptureViewModelResources))]
         public int? ShipmentNumber { get; set; }
 
-        [Display(Name = "ActualShipmentDate", ResourceType = typeof(CreateViewModelResources))]
+        [Display(Name = "ActualShipmentDate", ResourceType = typeof(CaptureViewModelResources))]
         public MaskedDateInputViewModel ActualShipmentDate { get; set; }
 
-        [Display(Name = "PrenotificationDate", ResourceType = typeof(CreateViewModelResources))]
+        [Display(Name = "PrenotificationDate", ResourceType = typeof(CaptureViewModelResources))]
         public MaskedDateInputViewModel PrenotificationDate { get; set; }
 
-        [Display(Name = "HasNoPrenotification", ResourceType = typeof(CreateViewModelResources))]
+        [Display(Name = "HasNoPrenotification", ResourceType = typeof(CaptureViewModelResources))]
         public bool HasNoPrenotification { get; set; }
 
         public ReceiptViewModel Receipt { get; set; }
@@ -35,13 +35,13 @@
 
         public bool IsRejected { get; set; }
 
-        [Display(Name = "HasComments", ResourceType = typeof(CreateViewModelResources))]
+        [Display(Name = "HasComments", ResourceType = typeof(CaptureViewModelResources))]
         public bool HasComments { get; set; }
 
-        [Display(Name = "Comments", ResourceType = typeof(CreateViewModelResources))]
+        [Display(Name = "Comments", ResourceType = typeof(CaptureViewModelResources))]
         public string Comments { get; set; }
 
-        [Display(Name = "StatsMarking", ResourceType = typeof(CreateViewModelResources))]
+        [Display(Name = "StatsMarking", ResourceType = typeof(CaptureViewModelResources))]
         public string StatsMarking { get; set; }
 
         public SelectList StatsMarkingSelectList
@@ -59,7 +59,7 @@
 
         public NotificationType NotificationType { get; set; }
 
-        public CreateViewModel()
+        public CaptureViewModel()
         {
             ActualShipmentDate = new MaskedDateInputViewModel();
             PrenotificationDate = new MaskedDateInputViewModel();
@@ -67,7 +67,7 @@
             Recovery = new RecoveryViewModel();
         }
 
-        public CreateViewModel(ImportMovementSummaryData data)
+        public CaptureViewModel(ImportMovementSummaryData data)
         {
             ShipmentNumber = data.Data.Number;
             ActualShipmentDate = new MaskedDateInputViewModel(data.Data.ActualDate.DateTime);
@@ -116,13 +116,13 @@
         {
             if (!HasNoPrenotification && !PrenotificationDate.IsCompleted)
             {
-                yield return new ValidationResult(CreateViewModelResources.PrenotificationDateRequired,
+                yield return new ValidationResult(CaptureViewModelResources.PrenotificationDateRequired,
                     new[] { "PrenotificationDate" });
             }
 
             if (!ActualShipmentDate.IsCompleted)
             {
-                yield return new ValidationResult(CreateViewModelResources.ActualShipmentDateRequired,
+                yield return new ValidationResult(CaptureViewModelResources.ActualShipmentDateRequired,
                    new[] { "ActualShipmentDate" });
             }
 
@@ -143,7 +143,7 @@
 
             if (PrenotificationDate.IsCompleted && PrenotificationDate.Date > SystemTime.UtcNow.Date)
             {
-                yield return new ValidationResult(CreateViewModelResources.PrenotifictaionDateInfuture,
+                yield return new ValidationResult(CaptureViewModelResources.PrenotifictaionDateInfuture,
                    new[] { "PrenotificationDate" });
             }
 
@@ -153,12 +153,12 @@
 
                 if (ActualShipmentDate.Date < preNotificateDate)
                 {
-                    yield return new ValidationResult(CreateViewModelResources.ActualDateBeforePrenotification, new[] { "ActualShipmentDate" });
+                    yield return new ValidationResult(CaptureViewModelResources.ActualDateBeforePrenotification, new[] { "ActualShipmentDate" });
                 }
 
                 if (ActualShipmentDate.Date > preNotificateDate.AddDays(60))
                 {
-                    yield return new ValidationResult(CreateViewModelResources.ActualDateGreaterthanSixtyDays, new[] { "ActualShipmentDate" });
+                    yield return new ValidationResult(CaptureViewModelResources.ActualDateGreaterthanSixtyDays, new[] { "ActualShipmentDate" });
                 }
             }
 
@@ -166,11 +166,11 @@
             {
                 if (Receipt.ReceivedDate.Date < ActualShipmentDate.Date)
                 {
-                    yield return new ValidationResult(CreateViewModelResources.ReceivedDateBeforeActualDate, new[] { "Receipt.ReceivedDate" });
+                    yield return new ValidationResult(CaptureViewModelResources.ReceivedDateBeforeActualDate, new[] { "Receipt.ReceivedDate" });
                 }
                 if (Receipt.ReceivedDate.Date > SystemTime.UtcNow.Date)
                 {
-                    yield return new ValidationResult(CreateViewModelResources.ReceivedDateInfuture, new[] { "Receipt.ReceivedDate" });
+                    yield return new ValidationResult(CaptureViewModelResources.ReceivedDateInfuture, new[] { "Receipt.ReceivedDate" });
                 }
             }
 
@@ -178,17 +178,17 @@
             {
                 if (Recovery.RecoveryDate.Date < Receipt.ReceivedDate.Date)
                 {
-                    yield return new ValidationResult(String.Format(CreateViewModelResources.RecoveredDateBeforeReceivedDate, GetNotificationTypeVerb(Recovery.NotificationType)), new[] { "Recovery.RecoveryDate" });
+                    yield return new ValidationResult(String.Format(CaptureViewModelResources.RecoveredDateBeforeReceivedDate, GetNotificationTypeVerb(Recovery.NotificationType)), new[] { "Recovery.RecoveryDate" });
                 }
                 if (Recovery.RecoveryDate.Date > SystemTime.UtcNow.Date)
                 {
-                    yield return new ValidationResult(String.Format(CreateViewModelResources.RecoveredDateInfuture, GetNotificationTypeVerb(Recovery.NotificationType)), new[] { "Recovery.RecoveryDate" });
+                    yield return new ValidationResult(String.Format(CaptureViewModelResources.RecoveredDateInfuture, GetNotificationTypeVerb(Recovery.NotificationType)), new[] { "Recovery.RecoveryDate" });
                 }
             }
 
             if (Receipt.IsComplete() && !Receipt.WasAccepted && Recovery.IsComplete())
             {
-                yield return new ValidationResult(string.Format(CreateViewModelResources.RecoveryDateCannotBeEnteredForRejected, NotificationType),
+                yield return new ValidationResult(string.Format(CaptureViewModelResources.RecoveryDateCannotBeEnteredForRejected, NotificationType),
                     new[] { "Recovery.RecoveryDate" });
             }
         }

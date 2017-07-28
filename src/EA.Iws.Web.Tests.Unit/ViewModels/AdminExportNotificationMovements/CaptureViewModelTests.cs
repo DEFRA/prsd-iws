@@ -1,15 +1,15 @@
-﻿namespace EA.Iws.Web.Tests.Unit.ViewModels.AdminImportNotificationMovements
+﻿namespace EA.Iws.Web.Tests.Unit.ViewModels.AdminExportNotificationMovements
 {
     using System;
-    using EA.Iws.Web.Areas.AdminImportNotificationMovements.ViewModels.Capture;
+    using Areas.AdminExportNotificationMovements.ViewModels.CaptureMovement;
     using Prsd.Core;
     using TestHelpers;
     using Web.ViewModels.Shared;
     using Xunit;
 
-    public class CreateViewModelTests : IDisposable
+    public class CaptureViewModelTests : IDisposable
     {
-        public CreateViewModelTests()
+        public CaptureViewModelTests()
         {
             SystemTime.Freeze(new DateTime(2016, 6, 1));
         }
@@ -29,14 +29,14 @@
         [Fact]
         public void PrenotificationDateCannotBeInTheFuture()
         {
-            var model = CreateViewModelForPrenotificationDate(30, 7, 2016);
+            var model = CreateViewModelForPrenotificationDate(30, 7, 2016);           
             Assert.NotEmpty(ViewModelValidator.ValidateViewModel(model));
         }
 
         [Fact]
         public void PrenotificationDateCanBeToday()
         {
-            var model = CreateViewModelForPrenotificationDate(1, 6, 2016);
+            var model = CreateViewModelForPrenotificationDate(1, 6, 2016);           
             Assert.Empty(ViewModelValidator.ValidateViewModel(model));
         }
 
@@ -66,20 +66,12 @@
         {
             var model = CreateViewModelForActualDate(1, 6, 2016, false);
             Assert.Empty(ViewModelValidator.ValidateViewModel(model));
-        }
+        }       
 
         [Fact]
         public void ActualShipmentDateCanBeSixtyDaysAfterPrenotification()
         {
-            var model = new CreateViewModel();
-            model.ShipmentNumber = 52;
-            model.PrenotificationDate = new MaskedDateInputViewModel(new DateTime(2015, 5, 25));
-            model.ActualShipmentDate = new MaskedDateInputViewModel(new DateTime(2015, 07, 24));
-            model.Receipt.ReceivedDate = new MaskedDateInputViewModel(new DateTime(2016, 6, 1));
-            model.Receipt.ActualQuantity = 10;
-            model.Receipt.WasAccepted = true;
-            model.Receipt.Units = Core.Shared.ShipmentQuantityUnits.Tonnes;
-            
+            var model = CreateViewModelForActualDate(31, 7, 2016, false);
             Assert.Empty(ViewModelValidator.ValidateViewModel(model));
         }
 
@@ -160,44 +152,41 @@
             Assert.NotEmpty(ViewModelValidator.ValidateViewModel(model));
         }
 
-        internal CreateViewModel CreateViewModelForPrenotificationDate(int day, int month, int year)
+        internal CaptureViewModel CreateViewModelForPrenotificationDate(int day, int month, int year)
         {
-            var model = new CreateViewModel();
+            var model = new CaptureViewModel();
             model.ShipmentNumber = 52;
             model.PrenotificationDate = new MaskedDateInputViewModel(new DateTime(year, month, day));
             model.ActualShipmentDate = new MaskedDateInputViewModel(new DateTime(year, month, day));
-            model.Receipt.ReceivedDate = new MaskedDateInputViewModel(new DateTime(year, month, day));
-            model.Receipt.ActualQuantity = 10;
-            model.Receipt.WasAccepted = true;
-            model.Receipt.Units = Core.Shared.ShipmentQuantityUnits.Tonnes;
             return model;
         }
-        internal CreateViewModel CreateViewModelForActualDate(int day, int month, int year, bool isDateInPast)
+        internal CaptureViewModel CreateViewModelForActualDate(int day, int month, int year, bool isDateInPast)
         {
-            var model = new CreateViewModel();
-            model.ShipmentNumber = 52;         
+            var model = new CaptureViewModel();
+            model.ShipmentNumber = 52;
 
             if (!isDateInPast)
             {
                 model.PrenotificationDate = new MaskedDateInputViewModel(new DateTime(2016, 6, 1));
+                model.ActualShipmentDate = new MaskedDateInputViewModel(new DateTime(year, month, day));
             }
             else
             {
                 model.PrenotificationDate = new MaskedDateInputViewModel(new DateTime(2016, 5, 1));
+                model.ActualShipmentDate = new MaskedDateInputViewModel(new DateTime(year, month, day));
             }
-            model.ActualShipmentDate = new MaskedDateInputViewModel(new DateTime(year, month, day));
             return model;
         }
 
-        internal CreateViewModel CreateViewModelForReceivedDate(int day, int month, int year, bool isDateInPast)
+        internal CaptureViewModel CreateViewModelForReceivedDate(int day, int month, int year, bool isDateInPast)
         {
-            var model = new CreateViewModel();
+            var model = new CaptureViewModel();
             model.ShipmentNumber = 52;
 
             if (!isDateInPast)
             {
                 model.PrenotificationDate = new MaskedDateInputViewModel(new DateTime(2016, 6, 1));
-                model.ActualShipmentDate = new MaskedDateInputViewModel(new DateTime(2016, 6, 1));
+                model.ActualShipmentDate = new MaskedDateInputViewModel(new DateTime(2016, 6, 1));             
             }
             else
             {
@@ -207,30 +196,30 @@
 
             model.Receipt.ReceivedDate = new MaskedDateInputViewModel(new DateTime(year, month, day));
             model.Receipt.ActualQuantity = 10;
-            model.Receipt.WasAccepted = true;
+            model.Receipt.WasShipmentAccepted = true;
             model.Receipt.Units = Core.Shared.ShipmentQuantityUnits.Tonnes;
 
             return model;
         }
 
-        internal CreateViewModel CreateViewModelForRecoveredDate(int day, int month, int year, bool isDateInPast)
+        internal CaptureViewModel CreateViewModelForRecoveredDate(int day, int month, int year, bool isDateInPast)
         {
-            var model = new CreateViewModel();
+            var model = new CaptureViewModel();
             model.ShipmentNumber = 52;
             if (!isDateInPast)
             {
                 model.PrenotificationDate = new MaskedDateInputViewModel(new DateTime(2016, 6, 1));
                 model.ActualShipmentDate = new MaskedDateInputViewModel(new DateTime(2016, 6, 1));
-                model.Receipt.ReceivedDate = new MaskedDateInputViewModel(new DateTime(2016, 6, 1));
+                model.Receipt.ReceivedDate = new MaskedDateInputViewModel(new DateTime(2016, 6, 1));               
             }
-            else
+            else 
             {
                 model.PrenotificationDate = new MaskedDateInputViewModel(new DateTime(2016, 5, 1));
                 model.ActualShipmentDate = new MaskedDateInputViewModel(new DateTime(2016, 5, 1));
                 model.Receipt.ReceivedDate = new MaskedDateInputViewModel(new DateTime(2016, 5, 1));
             }
             model.Receipt.ActualQuantity = 10;
-            model.Receipt.WasAccepted = true;
+            model.Receipt.WasShipmentAccepted = true;
             model.Receipt.Units = Core.Shared.ShipmentQuantityUnits.Tonnes;
             model.Recovery.RecoveryDate = new MaskedDateInputViewModel(new DateTime(year, month, day));
             return model;

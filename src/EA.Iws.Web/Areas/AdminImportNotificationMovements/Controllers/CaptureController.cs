@@ -28,7 +28,7 @@
         [HttpGet]
         public async Task<ActionResult> Create(Guid id)
         {            
-            var model = new CreateViewModel();
+            var model = new CaptureViewModel();
 
             var result = await mediator.SendAsync(new GetNotificationDetails(id));
             model.Recovery.NotificationType = result.NotificationType;
@@ -42,7 +42,7 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create(Guid id, CreateViewModel model)
+        public async Task<ActionResult> Create(Guid id, CaptureViewModel model)
         {
             if (!ModelState.IsValid)
             {
@@ -84,14 +84,14 @@
                 return RedirectToAction("Cancelled");
             }
 
-            var model = new CreateViewModel(result);
+            var model = new CaptureViewModel(result);
 
             return View(model);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit(Guid id, Guid movementId, CreateViewModel model)
+        public async Task<ActionResult> Edit(Guid id, Guid movementId, CaptureViewModel model)
         {
             if (!ModelState.IsValid)
             {
@@ -104,7 +104,7 @@
             return RedirectToAction("Edit", new { movementId, saved = true });
         }
 
-        private async Task SaveMovementData(Guid movementId, CreateViewModel model)
+        private async Task SaveMovementData(Guid movementId, CaptureViewModel model)
         {
             if (model.Receipt.IsComplete() && !model.IsReceived)
             {
