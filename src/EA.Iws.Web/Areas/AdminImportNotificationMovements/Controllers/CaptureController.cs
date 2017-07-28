@@ -104,5 +104,11 @@
             }
             return View(model);
         }
+
+        [HttpGet]
+        public ActionResult Cancelled(Guid id)
+        {
+            return View(id);
+        }
     }
 }
