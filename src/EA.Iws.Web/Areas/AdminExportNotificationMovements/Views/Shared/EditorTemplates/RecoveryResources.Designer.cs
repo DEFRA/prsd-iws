@@ -39,8 +39,8 @@ namespace EA.Iws.Web.Areas.AdminExportNotificationMovements.Views.Shared.EditorT
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EA.Iws.Web.Areas.AdminExportMovement.Views.Shared.EditorTemplates.RecoveryResourc" +
-                            "es", typeof(RecoveryResources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EA.Iws.Web.Areas.AdminExportNotificationMovements.Views.Shared.EditorTemplates.Re" +
+                            "coveryResources", typeof(RecoveryResources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;

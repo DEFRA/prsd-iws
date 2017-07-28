@@ -147,7 +147,12 @@
                         }
 
                         <tr>
-                            <td>@Model.TableData[i].Number</td>
+                            <td>@Html.ActionLink(Model.TableData[i].Number.ToString(), 
+                                    actionName: "Edit", 
+                                    controllerName: "CaptureMovement", 
+                                    routeValues: new { movementId = Model.TableData[i].Id }, 
+                                    htmlAttributes: null)
+                            </td>
                             <td>@statusText</td>
                             <td>
                                 @DisplayDate(Model.TableData[i].PreNotification, Model.TableData[i].Status)

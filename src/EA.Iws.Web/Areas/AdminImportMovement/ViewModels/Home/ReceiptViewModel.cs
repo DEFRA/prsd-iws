@@ -10,7 +10,7 @@
     using Prsd.Core.Helpers;
     using Web.ViewModels.Shared;
 
-    public class ReceiptViewModel : IComplete, IValidatableObject
+    public class ReceiptViewModel : IValidatableObject
     {
         [Display(Name = "ReceivedDateLabel", ResourceType = typeof(ReceiptViewModelResources))]
         [RequiredDateInput(ErrorMessageResourceName = "ReceivedDateRequired", ErrorMessageResourceType = typeof(ReceiptViewModelResources))]

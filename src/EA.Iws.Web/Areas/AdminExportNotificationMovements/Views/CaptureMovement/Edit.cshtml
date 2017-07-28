@@ -1,0 +1,94 @@
+﻿@model EA.Iws.Web.Areas.AdminExportNotificationMovements.ViewModels.CaptureMovement.CreateViewModel
+@using Resource = EA.Iws.Web.Areas.AdminExportNotificationMovements.Views.CaptureMovement.CreateResources
+
+@{
+    ViewBag.Title = Resource.PageTitle;
+}
+
+@if (ViewBag.IsSaved)
+{
+    <div class="grid-row">
+        <div class="column-full">
+            <div id="status-box-saved" name="status-box-saved">
+                <h2 class="heading-small">@Resource.ChangesSaved</h2>
+            </div>
+        </div>
+    </div>
+}
+
+<div class="grid-row">
+    <div class="column-two-thirds">
+        <h1 class="heading-large">@Resource.MainHeading</h1>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            @Html.Gds().ValidationSummary()
+            @Html.HiddenFor(m => m.NotificationType)
+            @Html.HiddenFor(m => m.ShipmentNumber)
+            @Html.HiddenFor(m => m.IsReceived)
+            @Html.HiddenFor(m => m.IsOperationCompleted)
+            @Html.HiddenFor(m => m.IsRejected)
+
+            <h1 class="data-item bold-xlarge">@string.Format(Resource.ShipmentNumber, Model.ShipmentNumber)</h1>
+
+            @Html.Partial("_PrenotifyReadOnly")
+
+            <hr />
+
+            if (Model.Receipt.IsComplete())
+            {
+                @Html.HiddenFor(m => m.Receipt.ReceivedDate.Date)
+                @Html.HiddenFor(m => m.Receipt.WasShipmentAccepted)
+                @Html.HiddenFor(m => m.Receipt.RejectionReason)
+                @Html.HiddenFor(m => m.Receipt.ActualQuantity)
+                @Html.HiddenFor(m => m.Receipt.Units)
+                @Html.Partial("_ReceiptReadOnly", Model.Receipt)
+            }
+            else
+            {
+                @Html.EditorFor(m => m.Receipt)
+            }
+
+            <hr />
+
+            if (Model.Recovery.IsComplete())
+            {
+                @Html.HiddenFor(m => m.Recovery.RecoveryDate.Date)
+                @Html.Partial("_OperationReadOnly", Model.Recovery)
+
+                <hr />
+            }
+            else if (Model.Receipt.IsComplete() && Model.Receipt.WasShipmentAccepted)
+            {
+                @Html.EditorFor(m => m.Recovery)
+
+                <hr />
+            }
+
+            @Html.Partial("_Comments")
+
+            <button class="button" type="submit">@Constants.ContinueButtonText</button>
+
+        }
+    </div>
+</div>
+
+@Html.ActionLink(Resource.ReturnToSummary, "Index", "Home")
+
+@section scripts {
+    @Html.Partial("_Scripts")
+
+    <script>
+        $(function () {
+            @if (!Model.IsReceived)
+            {
+                @:$("#Receipt_ReceivedDate_Date").focus();
+            }
+            else if (!Model.IsOperationCompleted)
+            {
+                @:$("#Recovery_RecoveryDate_Date").focus();
+            }
+        })
+    </script>
+}

@@ -1,12 +1,13 @@
 ﻿namespace EA.Iws.RequestHandlers.NotificationMovements.Capture
 {
+    using System;
     using System.Threading.Tasks;
     using DataAccess;
     using Domain.Movement;
     using Prsd.Core.Mediator;
     using Requests.NotificationMovements.Capture;
 
-    internal class CreateMovementInternalHandler : IRequestHandler<CreateMovementInternal, bool>
+    internal class CreateMovementInternalHandler : IRequestHandler<CreateMovementInternal, Guid>
     {
         private readonly ICapturedMovementFactory factory;
         private readonly IMovementRepository movementRepository;
@@ -21,26 +22,19 @@
             this.context = context;
         }
 
-        public async Task<bool> HandleAsync(CreateMovementInternal message)
+        public async Task<Guid> HandleAsync(CreateMovementInternal message)
         {
-            try
-            {
-                var movement = await factory.Create(message.NotificationId,
-                        message.Number,
-                        message.PrenotificationDate,
-                        message.ActualShipmentDate,
-                        message.HasNoPrenotification);
+            var movement = await factory.Create(message.NotificationId,
+                    message.Number,
+                    message.PrenotificationDate,
+                    message.ActualShipmentDate,
+                    message.HasNoPrenotification);
 
-                movementRepository.Add(movement);
+            movementRepository.Add(movement);
 
-                await context.SaveChangesAsync();
-            }
-            catch (MovementNumberException)
-            {
-                return false;
-            }
+            await context.SaveChangesAsync();
 
-            return true;
+            return movement.Id;
         }
     }
 }

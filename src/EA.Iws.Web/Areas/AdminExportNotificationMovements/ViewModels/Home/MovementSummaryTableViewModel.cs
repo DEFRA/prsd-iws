@@ -7,6 +7,8 @@
 
     public class MovementSummaryTableViewModel
     {
+        public Guid Id { get; set; }
+
         public int Number { get; set; }
 
         public MovementStatus Status { get; set; }
@@ -25,6 +27,7 @@
 
         public MovementSummaryTableViewModel(MovementTableDataRow data)
         {
+            Id = data.Id;
             Number = data.Number;
             Status = data.Status;
             PreNotification = data.SubmittedDate;

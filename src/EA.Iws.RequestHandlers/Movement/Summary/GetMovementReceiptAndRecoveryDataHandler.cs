@@ -49,7 +49,9 @@
                 NotificationType = notification.NotificationType,
                 PrenotificationDate = movement.PrenotificationDate,
                 NotificationUnits = shipmentInfo.Units,
-                Status = movement.Status
+                Status = movement.Status,
+                Comments = movement.Comments,
+                StatsMarking = movement.StatsMarking
             };
 
             if (movement.Receipt != null)
@@ -70,6 +72,7 @@
             {
                 data.RejectionReason = movementRejection.Reason;
                 data.ReceiptDate = movementRejection.Date;
+                data.IsRejected = true;
             }
 
             return data;

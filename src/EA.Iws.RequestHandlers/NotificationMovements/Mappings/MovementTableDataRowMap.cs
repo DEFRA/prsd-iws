@@ -11,6 +11,7 @@
         {
             var data = new MovementTableDataRow
             {
+                Id = source.Id,
                 Number = source.Number,
                 ShipmentDate = source.Date,
                 HasShipped = source.HasShipped,

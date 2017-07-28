@@ -15,7 +15,7 @@
         {
         }
 
-        public MaskedDateInputViewModel(DateTime date)
+        public MaskedDateInputViewModel(DateTime? date)
         {
             Date = date;
         }
