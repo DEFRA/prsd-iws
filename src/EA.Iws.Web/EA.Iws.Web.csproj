@@ -472,7 +472,6 @@
     <Content Include="Areas\ImportNotification\Views\UpdateJourney\ExitPointChanged.cshtml" />
     <Content Include="Areas\AdminExportAssessment\Views\Producer\_BusinessType.cshtml" />
     <Content Include="Areas\AdminExportAssessment\Views\Producer\Add.cshtml" />
-    <Content Include="Areas\AdminImportMovement\Views\Home\Cancelled.cshtml" />
     <Content Include="Content\iws\_panels.scss" />
     <Content Include="Content\nta-extended.css" />
     <Content Include="Content\select2\select2-spinner.gif" />
@@ -824,17 +823,8 @@
     <Content Include="Areas\AdminImportNotificationMovements\Views\_ViewStart.cshtml" />
     <Content Include="Areas\AdminImportNotificationMovements\Views\Capture\Create.cshtml" />
     <Content Include="Areas\AdminImportNotificationMovements\Views\Capture\_Prenotify.cshtml" />
-    <Content Include="Areas\AdminImportMovement\Views\_ViewStart.cshtml" />
-    <Content Include="Areas\AdminImportMovement\Views\web.config" />
-    <Content Include="Areas\AdminImportMovement\Views\Shared\_Layout.cshtml" />
-    <Content Include="Areas\AdminImportMovement\Views\Dates\Index.cshtml" />
-    <Content Include="Areas\AdminImportMovement\Views\Dates\_PreNotify.cshtml" />
     <Content Include="Areas\AdminImportNotificationMovements\Views\Home\Index.cshtml" />
     <Content Include="Areas\ImportNotification\Views\Validate\Index.cshtml" />
-    <Content Include="Areas\AdminImportMovement\Views\Home\Index.cshtml" />
-    <Content Include="Areas\AdminImportMovement\Views\Shared\EditorTemplates\ReceiptViewModel.cshtml" />
-    <Content Include="Areas\AdminImportMovement\Views\Shared\EditorTemplates\RecoveryViewModel.cshtml" />
-    <Content Include="Areas\AdminImportMovement\Views\Home\_Receipt.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\Options\Index.cshtml" />
     <Content Include="Areas\NotificationMovements\Views\Home\_CreateSummary.cshtml" />
     <Content Include="Areas\NotificationMovements\Views\Home\_Summary.cshtml" />
@@ -1500,40 +1490,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>IndexResources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Areas\AdminImportMovement\Controllers\HomeController.cs" />
-    <Compile Include="Areas\AdminImportMovement\ViewModels\Home\HomeViewModel.cs" />
-    <Compile Include="Areas\AdminImportMovement\ViewModels\Home\ReceiptViewModel.cs" />
-    <Compile Include="Areas\AdminImportMovement\ViewModels\Home\ReceiptViewModelResources.Designer.cs">
-      <DependentUpon>ReceiptViewModelResources.resx</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="Areas\AdminImportMovement\ViewModels\Home\RecoveryViewModel.cs" />
-    <Compile Include="Areas\AdminImportMovement\ViewModels\Home\RecoveryViewModelResources.Designer.cs">
-      <DependentUpon>RecoveryViewModelResources.resx</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="Areas\AdminImportMovement\Views\Home\CancelledResources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>CancelledResources.resx</DependentUpon>
-    </Compile>
-    <Compile Include="Areas\AdminImportMovement\Views\Home\IndexResources.Designer.cs">
-      <DependentUpon>IndexResources.resx</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="Areas\AdminImportMovement\Views\Shared\EditorTemplates\ReceiptResources.Designer.cs">
-      <DependentUpon>ReceiptResources.resx</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="Areas\AdminImportMovement\Views\Shared\EditorTemplates\RecoveryResources.Designer.cs">
-      <DependentUpon>RecoveryResources.resx</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
     <Compile Include="Areas\AdminImportNotificationMovements\AdminImportNotificationMovementsAreaRegistration.cs" />
     <Compile Include="Areas\AdminImportNotificationMovements\Controllers\CancelController.cs" />
     <Compile Include="Areas\AdminImportNotificationMovements\Controllers\CaptureController.cs" />
@@ -1873,19 +1829,6 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Success.resx</DependentUpon>
-    </Compile>
-    <Compile Include="Areas\AdminImportMovement\Controllers\DatesController.cs" />
-    <Compile Include="Areas\AdminImportMovement\ImportMovementAreaRegistration.cs" />
-    <Compile Include="Areas\AdminImportMovement\ViewModels\Dates\DatesViewModel.cs" />
-    <Compile Include="Areas\AdminImportMovement\ViewModels\Dates\DatesViewModelResources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DatesViewModelResources.resx</DependentUpon>
-    </Compile>
-    <Compile Include="Areas\AdminImportMovement\Views\Dates\IndexResources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>IndexResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Areas\Admin\Views\UserAdministration\UserAdministrationResources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -3599,30 +3542,6 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Areas\AdminImportMovement\ViewModels\Home\ReceiptViewModelResources.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>ReceiptViewModelResources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Areas\AdminImportMovement\ViewModels\Home\RecoveryViewModelResources.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>RecoveryViewModelResources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Areas\AdminImportMovement\Views\Home\CancelledResources.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>CancelledResources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Areas\AdminImportMovement\Views\Home\IndexResources.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Areas\AdminImportMovement\Views\Shared\EditorTemplates\ReceiptResources.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>ReceiptResources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Areas\AdminImportMovement\Views\Shared\EditorTemplates\RecoveryResources.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>RecoveryResources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
     <EmbeddedResource Include="Areas\AdminImportNotificationMovements\Controllers\CaptureControllerResources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>CaptureControllerResources.Designer.cs</LastGenOutput>
@@ -3853,14 +3772,6 @@
     <EmbeddedResource Include="Areas\AddressBook\Views\AddressBookResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>AddressBookResources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Areas\AdminImportMovement\ViewModels\Dates\DatesViewModelResources.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>DatesViewModelResources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Areas\AdminImportMovement\Views\Dates\IndexResources.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\Admin\Views\UserAdministration\UserAdministrationResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
