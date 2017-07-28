@@ -1,0 +1,37 @@
+﻿@model EA.Iws.Web.Areas.AdminImportNotificationMovements.ViewModels.Capture.CreateViewModel
+
+<div class="form-group @Html.Gds().FormGroupClass(m => m.HasComments)">
+    @Html.LabelFor(m => m.HasComments, new { @class = "form-label-bold" })
+    @Html.Gds().ValidationMessageFor(m => m.HasComments)
+    <fieldset>
+        <div class="multiple-choice" data-target="comments">
+            @Html.RadioButtonFor(m => m.HasComments, true, new { id = "comments-yes" })
+            <label for="comments-yes">
+                Yes
+            </label>
+        </div>
+
+        <div class="multiple-choice">
+            @Html.RadioButtonFor(m => m.HasComments, false, new { id = "comments-no" })
+            <label for="comments-no">
+                No
+            </label>
+        </div>
+
+        <div class="panel @(!Model.HasComments ? "js-hidden" : string.Empty)" id="comments">
+
+            <div class="form-group @Html.Gds().FormGroupClass(m => m.StatsMarking)">
+                @Html.LabelFor(m => m.StatsMarking, new { @class = "form-label-bold" })
+                @Html.Gds().ValidationMessageFor(m => m.StatsMarking)
+                @Html.Gds().DropDownListFor(m => m.StatsMarking, Model.StatsMarkingSelectList, string.Empty)
+            </div>
+
+            <div class="form-group @Html.Gds().FormGroupClass(m => m.Comments)">
+                @Html.LabelFor(m => m.Comments, new { @class = "form-label-bold" })
+                @Html.Gds().ValidationMessageFor(m => m.Comments)
+                @Html.TextAreaFor(m => m.Comments, new { @class = "form-control-wide", rows = 10 })
+            </div>
+
+        </div>
+    </fieldset>
+</div>

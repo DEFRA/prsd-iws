@@ -1,12 +1,12 @@
 ﻿namespace EA.Iws.Web.Areas.AdminImportNotificationMovements.ViewModels.Capture
 {
-    using Core.Shared;
-    using Infrastructure.Validation;
-    using Prsd.Core;
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.Web.Mvc;
+    using Core.ImportMovement;
+    using Core.Shared;
+    using Prsd.Core;
     using Web.ViewModels.Shared;
 
     public class CreateViewModel : IValidatableObject
@@ -15,8 +15,6 @@
         [Range(1, int.MaxValue, ErrorMessageResourceType = typeof(SearchViewModelResources), ErrorMessageResourceName = "Range")]
         [Display(Name = "ShipmentNumber", ResourceType = typeof(CreateViewModelResources))]
         public int? ShipmentNumber { get; set; }
-
-        public Guid NotificationId { get; set; }
 
         [Display(Name = "ActualShipmentDate", ResourceType = typeof(CreateViewModelResources))]
         public MaskedDateInputViewModel ActualShipmentDate { get; set; }
@@ -33,9 +31,9 @@
 
         public bool IsReceived { get; set; }
 
-        public bool IsSaved { get; set; }
-
         public bool IsOperationCompleted { get; set; }
+
+        public bool IsRejected { get; set; }
 
         [Display(Name = "HasComments", ResourceType = typeof(CreateViewModelResources))]
         public bool HasComments { get; set; }
@@ -69,6 +67,51 @@
             Recovery = new RecoveryViewModel();
         }
 
+        public CreateViewModel(ImportMovementSummaryData data)
+        {
+            ShipmentNumber = data.Data.Number;
+            ActualShipmentDate = new MaskedDateInputViewModel(data.Data.ActualDate.DateTime);
+
+            if (data.Data.PreNotificationDate.HasValue)
+            {
+                PrenotificationDate = new MaskedDateInputViewModel(data.Data.PreNotificationDate.Value.DateTime);
+            }
+            else
+            {
+                PrenotificationDate = new MaskedDateInputViewModel();
+                HasNoPrenotification = true;
+            }
+
+            Comments = data.Comments;
+            StatsMarking = data.StatsMarking;
+
+            if (!string.IsNullOrWhiteSpace(data.Comments) || !string.IsNullOrWhiteSpace(data.StatsMarking))
+            {
+                HasComments = true;
+            }
+
+            NotificationType = data.Data.NotificationType;
+            IsReceived = data.ReceiptData.IsReceived;
+            IsOperationCompleted = data.RecoveryData.IsOperationCompleted;
+            IsRejected = data.ReceiptData.IsRejected;
+
+            Receipt = new ReceiptViewModel
+            {
+                ActualQuantity = data.ReceiptData.ActualQuantity,
+                ReceivedDate = data.ReceiptData.ReceiptDate.HasValue ? new MaskedDateInputViewModel(data.ReceiptData.ReceiptDate.Value.DateTime) : new MaskedDateInputViewModel(),
+                Units = data.ReceiptData.ReceiptUnits ?? data.ReceiptData.NotificationUnit,
+                WasAccepted = string.IsNullOrWhiteSpace(data.ReceiptData.RejectionReason),
+                RejectionReason = data.ReceiptData.RejectionReason,
+                PossibleUnits = data.ReceiptData.PossibleUnits
+            };
+
+            Recovery = new RecoveryViewModel
+            {
+                NotificationType = data.Data.NotificationType,
+                RecoveryDate = data.RecoveryData.OperationCompleteDate.HasValue ? new MaskedDateInputViewModel(data.RecoveryData.OperationCompleteDate.Value.DateTime) : new MaskedDateInputViewModel()
+            };
+        }
+
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             if (!HasNoPrenotification && !PrenotificationDate.IsCompleted)
@@ -88,7 +131,7 @@
                 yield return new ValidationResult(ReceiptViewModelResources.ReceivedDateRequired, new[] { "Receipt.ReceivedDate" });
             }
 
-            if (!Receipt.ActualQuantity.HasValue && Receipt.ReceivedDate.IsCompleted)
+            if (!Receipt.ActualQuantity.HasValue && Receipt.ReceivedDate.IsCompleted && Receipt.WasAccepted)
             {
                 yield return new ValidationResult(ReceiptViewModelResources.QuantityRequired, new[] { "Receipt.ActualQuantity" });
             }
@@ -150,22 +193,7 @@
             }
         }
 
-        public bool ShowReceiptAndRecoveryAsReadOnly()
-        {
-            return IsReceived && IsOperationCompleted;
-        }
-
-        public bool ShowReceiptDataAsReadOnly()
-        {
-            return IsReceived;
-        }
-
-        public bool ShowRecoveryDataAsReadOnly()
-        {
-            return IsOperationCompleted;
-        }
-
-        public String GetNotificationTypeVerb(NotificationType displayedType)
+        private static string GetNotificationTypeVerb(NotificationType displayedType)
         {
             return displayedType == NotificationType.Recovery ? "recovered" : "disposed of";
         }

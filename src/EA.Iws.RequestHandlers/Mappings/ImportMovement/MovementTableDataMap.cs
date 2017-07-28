@@ -11,6 +11,7 @@
         {
             return source.Select(i => new MovementTableData
             {
+                Id = i.Id,
                 Number = i.Number,
                 PreNotification = i.PreNotification,
                 ShipmentDate = i.ShipmentDate,

@@ -29,7 +29,6 @@
         public async Task<ActionResult> Create(Guid id)
         {            
             var model = new CreateViewModel();
-            model.NotificationId = id;
 
             var result = await mediator.SendAsync(new GetNotificationDetails(id));
             model.Recovery.NotificationType = result.NotificationType;
@@ -50,59 +49,97 @@
                 return View(model);
             }
 
-            var result = await mediator.SendAsync(new GetImportMovementIdIfExists(id, model.ShipmentNumber.Value));
+            var movementId = await mediator.SendAsync(new GetImportMovementIdIfExists(id, model.ShipmentNumber.Value));
 
-            if (!result.HasValue)
+            if (!movementId.HasValue)
             {
-                var movementId = await mediator.SendAsync(new CreateImportMovement(id,
-                model.ShipmentNumber.Value,
-                model.ActualShipmentDate.Date.Value,
-                model.PrenotificationDate.Date));
+                movementId = await mediator.SendAsync(new CreateImportMovement(id,
+                    model.ShipmentNumber.Value,
+                    model.ActualShipmentDate.Date.Value,
+                    model.PrenotificationDate.Date));
 
-                if (movementId != null)
+                if (movementId.HasValue)
                 {
-                    model.IsSaved = true;
-                    if (model.Receipt.IsComplete() && !model.IsReceived)
-                    {
-                        if (!model.Receipt.WasAccepted)
-                        {
-                            await mediator.SendAsync(new RecordRejection(movementId,
-                                model.Receipt.ReceivedDate.Date.Value,
-                                model.Receipt.RejectionReason));
-                        }
-                        else
-                        {
-                            await mediator.SendAsync(new RecordReceipt(movementId,
-                                model.Receipt.ReceivedDate.Date.Value,
-                                model.Receipt.Units.Value,
-                                model.Receipt.ActualQuantity.Value));
-                        }
-                    }
+                    await SaveMovementData(movementId.Value, model);
 
-                    if (model.Recovery.IsComplete()
-                        && (model.Receipt.IsComplete() || model.IsReceived)
-                        && !model.IsOperationCompleted
-                        && model.Receipt.WasAccepted)
-                    {
-                        await mediator.SendAsync(new RecordCompletedReceipt(movementId,
-                            model.Recovery.RecoveryDate.Date.Value));
-                    }
-
-                    if (model.HasComments)
-                    {
-                        await mediator.SendAsync(new SetMovementComments(movementId)
-                        {
-                            Comments = model.Comments,
-                            StatsMarking = model.StatsMarking
-                        });
-                    }
+                    return RedirectToAction("Edit", new { movementId, saved = true });
                 }
             }
             else
             {
                 ModelState.AddModelError("Number", CaptureControllerResources.NumberExists);
             }
+
             return View(model);
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> Edit(Guid id, Guid movementId, bool saved = false)
+        {
+            ViewBag.IsSaved = saved;
+            var result = await mediator.SendAsync(new GetImportMovementReceiptAndRecoveryData(movementId));
+
+            if (result.Data.IsCancelled)
+            {
+                return RedirectToAction("Cancelled");
+            }
+
+            var model = new CreateViewModel(result);
+
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Edit(Guid id, Guid movementId, CreateViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                ViewBag.IsSaved = false;
+                return View(model);
+            }
+
+            await SaveMovementData(movementId, model);
+
+            return RedirectToAction("Edit", new { movementId, saved = true });
+        }
+
+        private async Task SaveMovementData(Guid movementId, CreateViewModel model)
+        {
+            if (model.Receipt.IsComplete() && !model.IsReceived)
+            {
+                if (!model.Receipt.WasAccepted)
+                {
+                    await mediator.SendAsync(new RecordRejection(movementId,
+                        model.Receipt.ReceivedDate.Date.Value,
+                        model.Receipt.RejectionReason));
+                }
+                else
+                {
+                    await mediator.SendAsync(new RecordReceipt(movementId,
+                        model.Receipt.ReceivedDate.Date.Value,
+                        model.Receipt.Units.Value,
+                        model.Receipt.ActualQuantity.Value));
+                }
+            }
+
+            if (model.Recovery.IsComplete()
+                && (model.Receipt.IsComplete() || model.IsReceived)
+                && !model.IsOperationCompleted
+                && model.Receipt.WasAccepted)
+            {
+                await mediator.SendAsync(new RecordCompletedReceipt(movementId,
+                    model.Recovery.RecoveryDate.Date.Value));
+            }
+
+            if (model.HasComments)
+            {
+                await mediator.SendAsync(new SetMovementComments(movementId)
+                {
+                    Comments = model.Comments,
+                    StatsMarking = model.StatsMarking
+                });
+            }
         }
 
         [HttpGet]

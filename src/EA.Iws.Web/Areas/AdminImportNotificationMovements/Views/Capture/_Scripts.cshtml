@@ -1,0 +1,26 @@
+﻿<script>
+        var prenotificationDateSelector = $("#PrenotificationDate_Date");
+
+        function togglePrenotificationDate(checked) {
+            if (checked) {
+                prenotificationDateSelector
+                    .val('')
+                    .attr('readonly', true)
+                    .css('background-color', '#DEDEDE')
+                    .css('color', 'gray');
+            } else {
+                prenotificationDateSelector
+                    .attr('readonly', false)
+                    .css('background-color', 'white')
+                    .css('color', 'black');
+            }
+        }
+
+        togglePrenotificationDate($('#HasNoPrenotification').is(':checked'));
+
+        $(function () {
+            $("#HasNoPrenotification").click(function () {
+                togglePrenotificationDate($('#HasNoPrenotification').is(':checked'));
+            });
+        });
+</script>

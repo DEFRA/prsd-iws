@@ -1,0 +1,26 @@
+﻿@model EA.Iws.Web.Areas.AdminImportNotificationMovements.ViewModels.Capture.ReceiptViewModel
+
+<div class="form-group">
+    <h3 class="heading-small">@Html.DisplayNameFor(m => m.ReceivedDate)</h3>
+    <p>@Html.Gds().DisplayDate(Model.ReceivedDate.Date.Value)</p>
+</div>
+
+<div class="form-group">
+    <h3 class="heading-small">@Html.DisplayNameFor(m => m.WasAccepted)</h3>
+    <p>@(Model.WasAccepted ? "Yes" : "No")</p>
+</div>
+            
+@if (!Model.WasAccepted)
+{
+    <div class="form-group">
+        <h3 class="heading-small">@Html.DisplayNameFor(m => m.RejectionReason)</h3>
+        <p>@Model.RejectionReason</p>
+    </div>
+}
+else
+{
+    <div class="form-group">
+        <h3 class="heading-small">@Html.DisplayNameFor(m => m.ActualQuantity)</h3>
+        <p>@Model.ActualQuantity.Value.ToString("G29") @EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(Model.Units.Value)</p>
+    </div>
+}

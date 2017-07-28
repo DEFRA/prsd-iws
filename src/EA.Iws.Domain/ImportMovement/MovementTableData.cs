@@ -5,6 +5,8 @@
 
     public class MovementTableData
     {
+        public Guid Id { get; private set; }
+
         public int Number { get; private set; }
 
         public DateTime? PreNotification { get; private set; }
@@ -32,6 +34,7 @@
 
             if (movement != null)
             {
+                data.Id = movement.Id;
                 data.Number = movement.Number;
                 data.PreNotification = movement.PrenotificationDate;
                 data.ShipmentDate = movement.ActualShipmentDate;

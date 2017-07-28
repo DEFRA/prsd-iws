@@ -5,32 +5,14 @@
     ViewBag.Title = Resource.PageTitle;
 }
 
-@section top_of_page {
-    @if (ViewData.ModelState.IsValid && Model.ShipmentNumber != null)
-    {
-        <div class="grid-row">
-            <div class="column-full">
-                <div id="status-box-saved" name="status-box-saved">
-                    <h2 class="heading-small">@Resource.ChangesSaved</h2>
-                </div>
-            </div>
-        </div>
-    }
-}
-
 <div class="column-two-thirds">
     <h1 class="heading-large">@Resource.MainHeading</h1>
     @using (Html.BeginForm())
     {
         @Html.AntiForgeryToken()
         @Html.Gds().ValidationSummary()
-        @Html.HiddenFor(m => m.NotificationId)
         @Html.HiddenFor(m => m.NotificationType)
 
-        if (ViewData.ModelState.IsValid && Model.ShipmentNumber != null)
-        {
-            <h1 class="data-item bold-xlarge">@string.Format(Resource.ShipmentNumber, Model.ShipmentNumber)</h1>
-        }
         <div class="form-group @Html.Gds().FormGroupClass(m => m.ShipmentNumber)">
             @Html.Gds().LabelFor(m => m.ShipmentNumber, new { @class = "form-label-bold" })
             @Html.Gds().ValidationMessageFor(m => m.ShipmentNumber)
@@ -49,46 +31,12 @@
 
         <hr/>
 
-        <div class="form-group @Html.Gds().FormGroupClass(m => m.HasComments)">
-            @Html.LabelFor(m => m.HasComments, new { @class = "form-label-bold" })
-            @Html.Gds().ValidationMessageFor(m => m.HasComments)
-            <fieldset>
-                <div class="multiple-choice" data-target="comments">
-                    @Html.RadioButtonFor(m => m.HasComments, true, new { id = "comments-yes" })
-                    <label for="comments-yes">
-                        Yes
-                    </label>
-                </div>
-
-                <div class="multiple-choice">
-                    @Html.RadioButtonFor(m => m.HasComments, false, new { id = "comments-no" })
-                    <label for="comments-no">
-                        No
-                    </label>
-                </div>
-
-                <div class="panel @(!Model.HasComments ? "js-hidden" : string.Empty)" id="comments">
-
-                    <div class="form-group @Html.Gds().FormGroupClass(m => m.StatsMarking)">
-                        @Html.LabelFor(m => m.StatsMarking, new { @class = "form-label-bold" })
-                        @Html.Gds().ValidationMessageFor(m => m.StatsMarking)
-                        @Html.Gds().DropDownListFor(m => m.StatsMarking, Model.StatsMarkingSelectList, string.Empty)
-                    </div>
-
-                    <div class="form-group @Html.Gds().FormGroupClass(m => m.Comments)">
-                        @Html.LabelFor(m => m.Comments, new { @class = "form-label-bold" })
-                        @Html.Gds().ValidationMessageFor(m => m.Comments)
-                        @Html.TextAreaFor(m => m.Comments, new { @class = "form-control-wide", rows = 10 })
-                    </div>
-
-                </div>
-            </fieldset>
-        </div>
+        @Html.Partial("_Comments")
 
         <button class="button" type="submit">@Constants.ContinueButtonText</button>
     }
 
-    @Html.ActionLink(Resource.ReturnToSummary, "Index", "Home", new { area = "AdminImportNotificationMovements", id = Model.NotificationId }, null)
+    @Html.ActionLink(Resource.ReturnToSummary, "Index", "Home")
 </div>
 
 
@@ -97,31 +45,9 @@
 }
 
 @section scripts {
+    @Html.Partial("_Scripts")
     <script>
-        var prenotificationDateSelector = $("#PrenotificationDate_Date");
-
-        function togglePrenotificationDate(checked) {
-            if (checked) {
-                prenotificationDateSelector
-                    .val('')
-                    .attr('readonly', true)
-                    .css('background-color', '#DEDEDE')
-                    .css('color', 'gray');
-            } else {
-                prenotificationDateSelector
-                    .attr('readonly', false)
-                    .css('background-color', 'white')
-                    .css('color', 'black');
-            }
-        }
-
-        togglePrenotificationDate($('#HasNoPrenotification').is(':checked'));
-
         $(function () {
-            $("#HasNoPrenotification").click(function () {
-                togglePrenotificationDate($('#HasNoPrenotification').is(':checked'));
-            });
-
             $("#ShipmentNumber").focus();
         });
     </script>

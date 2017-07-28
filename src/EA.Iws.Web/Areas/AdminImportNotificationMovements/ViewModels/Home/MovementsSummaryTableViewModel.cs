@@ -8,6 +8,7 @@
     {
         public MovementsSummaryTableViewModel(MovementTableData data)
         {
+            Id = data.Id;
             Number = data.Number;
             PreNotification = data.PreNotification;
             ShipmentDate = data.ShipmentDate;
@@ -18,6 +19,8 @@
             RecoveredOrDisposedOf = data.RecoveredOrDisposedOf;
             IsCancelled = data.IsCancelled;
         }
+
+        public Guid Id { get; set; }
 
         public int Number { get; set; }
 
