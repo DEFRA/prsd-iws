@@ -198,7 +198,7 @@
             }
         }
 
-        public String GetNotificationTypeVerb(NotificationType displayedType)
+        private static string GetNotificationTypeVerb(NotificationType displayedType)
         {
             return displayedType == NotificationType.Recovery ? "recovered" : "disposed of";
         }

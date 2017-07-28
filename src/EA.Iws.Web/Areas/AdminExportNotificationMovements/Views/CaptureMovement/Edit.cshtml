@@ -59,7 +59,7 @@
 
                 <hr />
             }
-            else if (Model.Receipt.IsComplete() && Model.Receipt.WasShipmentAccepted)
+            else if ((Model.Receipt.IsComplete() && Model.Receipt.WasShipmentAccepted) || !Model.Receipt.IsComplete())
             {
                 @Html.EditorFor(m => m.Recovery)
 
