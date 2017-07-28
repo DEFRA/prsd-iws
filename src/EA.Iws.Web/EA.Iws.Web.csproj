@@ -820,7 +820,6 @@
     <Content Include="Areas\AdminImportAssessment\Views\_ViewStart.cshtml" />
     <Content Include="Areas\AdminImportAssessment\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\AdminImportNotificationMovements\Views\web.config" />
-    <Content Include="Areas\AdminImportNotificationMovements\Views\Capture\Index.cshtml" />
     <Content Include="Areas\AdminImportNotificationMovements\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\AdminImportNotificationMovements\Views\_ViewStart.cshtml" />
     <Content Include="Areas\AdminImportNotificationMovements\Views\Capture\Create.cshtml" />
@@ -1609,11 +1608,6 @@
     </Compile>
     <Compile Include="Areas\AdminImportNotificationMovements\Views\Capture\CreateResources.Designer.cs">
       <DependentUpon>CreateResources.resx</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="Areas\AdminImportNotificationMovements\Views\Capture\IndexResources.Designer.cs">
-      <DependentUpon>IndexResources.resx</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
@@ -3667,10 +3661,6 @@
     <EmbeddedResource Include="Areas\AdminImportNotificationMovements\Views\Capture\CreateResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>CreateResources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Areas\AdminImportNotificationMovements\Views\Capture\IndexResources.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\AdminImportNotificationMovements\Views\Delete\ConfirmResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

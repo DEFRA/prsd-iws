@@ -18,7 +18,6 @@
     [AuthorizeActivity(typeof(CreateImportMovement))]
     public class CaptureController : Controller
     {
-        private const string NumberKey = "Number";
         private readonly IMediator mediator;
 
         public CaptureController(IMediator mediator)
@@ -40,26 +39,6 @@
             model.Receipt.PossibleUnits = ShipmentQuantityUnitsMetadata.GetUnitsOfThisType(units).ToArray();
 
             return View(model);
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Index(Guid id, SearchViewModel model)
-        {
-            if (!ModelState.IsValid)
-            {
-                return View(model);
-            }
-
-            var result = await mediator.SendAsync(new GetImportMovementIdIfExists(id, model.Number.Value));
-
-            if (!result.HasValue)
-            {
-                TempData[NumberKey] = model.Number.Value;
-                return RedirectToAction("Create");
-            }
-            
-            return RedirectToAction("Index", "Home", new { area = "AdminImportMovement", id = result.Value });
         }
 
         [HttpPost]
