@@ -78,7 +78,7 @@
             Receipt = new ReceiptViewModel();
             Recovery = new RecoveryViewModel();
         }
-  	public void UpdateSummaryViewModel(ImportInternalMovementSummary floatingSummary)
+       public void UpdateSummaryViewModel(ImportInternalMovementSummary floatingSummary)
         {
             IntendedShipments = floatingSummary.SummaryData.IntendedShipments;
             AverageTonnage = floatingSummary.AverageTonnage + EnumHelper.GetShortName(floatingSummary.AverageDataUnit);

@@ -8,7 +8,6 @@
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.Web.Mvc;
-    using Core.Movement;
     using Web.ViewModels.Shared;
 
     public class CaptureViewModel : IValidatableObject
