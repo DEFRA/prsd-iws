@@ -59,7 +59,7 @@
 
             <hr />
         }
-        else if (Model.IsReceived || !Model.Receipt.IsComplete())
+        else if (!Model.IsRejected)
         {
             @Html.EditorFor(m => m.Recovery)
 
