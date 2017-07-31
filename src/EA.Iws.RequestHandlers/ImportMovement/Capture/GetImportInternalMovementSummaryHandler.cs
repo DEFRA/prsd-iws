@@ -20,7 +20,6 @@
             var movementSummary = await movementSummaryRepository.GetById(message.ImportNotificationId);
 
             var averageData = await movementSummaryRepository.AveragePerShipment(message.ImportNotificationId);
-                //Task.Run(() => mediator.SendAsync(nmovementSummaryRepository.)).Result; 
             return new ImportInternalMovementSummary
             {
                 SummaryData = movementSummary,

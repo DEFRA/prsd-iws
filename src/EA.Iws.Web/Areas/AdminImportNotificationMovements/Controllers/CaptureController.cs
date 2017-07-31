@@ -15,7 +15,7 @@
     using Requests.ImportMovement.Reject;
     using Requests.ImportNotification;
     using ViewModels.Capture;
- 
+
     [AuthorizeActivity(typeof(CreateImportMovement))]
     public class CaptureController : Controller
     {
@@ -28,7 +28,7 @@
 
         [HttpGet]
         public async Task<ActionResult> Create(Guid id)
-        {            
+        {
             var model = new CaptureViewModel();
 
             var result = await mediator.SendAsync(new GetNotificationDetails(id));
@@ -37,7 +37,7 @@
             //Set the units based on the notification Id  
             var units = await mediator.SendAsync(new GetImportShipmentUnits(id));
             model.Receipt.PossibleUnits = ShipmentQuantityUnitsMetadata.GetUnitsOfThisType(units).ToArray();
-	    model.NotificationNumber = result.NotificationNumber;
+            model.NotificationNumber = result.NotificationNumber;
             UpdateSummary(model, id);
             return View(model);
         }
@@ -48,7 +48,7 @@
         {
             if (!ModelState.IsValid)
             {
-            	UpdateSummary(model, id);
+                UpdateSummary(model, id);
                 return View(model);
             }
 
@@ -72,7 +72,7 @@
             {
                 ModelState.AddModelError("Number", CaptureControllerResources.NumberExists);
             }
-	    UpdateSummary(model, id);
+            UpdateSummary(model, id);
             return View(model);
         }
 
@@ -88,7 +88,7 @@
             }
 
             var model = new CaptureViewModel(result);
-	    UpdateSummary(model, id);
+            UpdateSummary(model, id);
             return View(model);
         }
 
@@ -157,7 +157,7 @@
             return Task.Run(() => mediator.SendAsync(new GetImportInternalMovementSummary(id))).Result;
         }
 
-        private CreateViewModel UpdateSummary(CreateViewModel model, Guid id)
+        private CaptureViewModel UpdateSummary(CaptureViewModel model, Guid id)
         {
             model.UpdateSummaryViewModel(GetSummarydata(id));
             return model;

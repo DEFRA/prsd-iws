@@ -82,25 +82,35 @@
             return new ShipmentQuantity(totalReceived, shipment.Quantity.Units);
         }
 
+        /// <summary>
+        /// 1 ton = 1000 litres
+        /// 1 ton = 1 cubic metre
+        /// </summary>
+        /// <param name="importNotificationId"></param>
+        /// <returns></returns>
         public async Task<ShipmentQuantity> AveragePerShipment(Guid importNotificationId)
         {
             var shipment = await context.Shipments.Where(s => s.ImportNotificationId == importNotificationId).SingleAsync();
 
-            ShipmentQuantity shipmentQuantity;
+            decimal shipmentQuantity;
 
             if (shipment.Quantity.Units == ShipmentQuantityUnits.Kilograms)
             {
-                shipmentQuantity = new ShipmentQuantity(ShipmentQuantityUnitConverter.ConvertToTarget(
+                shipmentQuantity = ShipmentQuantityUnitConverter.ConvertToTarget(
                        shipment.Quantity.Units,
                        ShipmentQuantityUnits.Tonnes,
-                       shipment.Quantity.Quantity), ShipmentQuantityUnits.Tonnes);
+                       shipment.Quantity.Quantity);
+            }
+            else if (shipment.Quantity.Units == ShipmentQuantityUnits.Litres)
+            {
+                shipmentQuantity = shipment.Quantity.Quantity / 1000m;
             }
             else
             {
-                shipmentQuantity = new ShipmentQuantity(shipment.Quantity.Quantity, shipment.Quantity.Units);
+                shipmentQuantity = shipment.Quantity.Quantity;
             }
 
-            return new ShipmentQuantity(Decimal.Divide(shipment.NumberOfShipments, shipmentQuantity.Quantity), shipmentQuantity.Units);
+            return new ShipmentQuantity(Decimal.Divide(shipment.NumberOfShipments, shipmentQuantity), ShipmentQuantityUnits.Tonnes);
         }
     }
 }

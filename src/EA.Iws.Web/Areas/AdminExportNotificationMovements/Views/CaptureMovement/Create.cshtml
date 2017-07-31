@@ -80,7 +80,6 @@
     </div>
 </div>
 
-@Html.ActionLink(Resource.ReturnToSummary, "Index", "Home")
 
 @section scripts {
     @Html.Partial("_Scripts")
@@ -88,12 +87,13 @@
     <script>
         $(function() {
             $("#ShipmentNumber").focus();
-        })
+        });
     </script>
-}
+
 <script src="~/Scripts/jquery.stickem.js"></script>
 <script>
     $(document).ready(function () {
         $('.container').stickem();
     });
 </script>
+}

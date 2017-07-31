@@ -32,7 +32,7 @@
         [HttpGet]
         public async Task<ActionResult> Create(Guid id)
         {
-            var model = new CaptureViewModel();            
+            var model = new CaptureViewModel();
             model.NotificationType = await mediator.SendAsync(new GetNotificationType(id));
             model.Recovery.NotificationType = model.NotificationType;
 
@@ -50,7 +50,7 @@
         {
             if (!ModelState.IsValid)
             {
-            	UpdateSummary(model, id);
+                UpdateSummary(model, id);
                 return View(model);
             }
 
@@ -79,7 +79,7 @@
             }
 
             ModelState.AddModelError("Number", CaptureMovementControllerResources.SaveUnsuccessful);
-	    UpdateSummary(model, id);
+            UpdateSummary(model, id);
             return View(model);
         }
 
@@ -95,7 +95,7 @@
             }
 
             var model = new CaptureViewModel(result);
-	    UpdateSummary(model, id);
+            UpdateSummary(model, id);
             return View(model);
         }
 
@@ -161,10 +161,10 @@
         }
         private InternalMovementSummary GetSummarydata(Guid id)
         {
-          return Task.Run(() => mediator.SendAsync(new GetInternalMovementSummary(id))).Result;        
+            return Task.Run(() => mediator.SendAsync(new GetInternalMovementSummary(id))).Result;
         }
 
-        private CreateViewModel UpdateSummary(CreateViewModel model, Guid id)
+        private CaptureViewModel UpdateSummary(CaptureViewModel model, Guid id)
         {
             model.UpdateSummaryViewModel(GetSummarydata(id));
             return model;
