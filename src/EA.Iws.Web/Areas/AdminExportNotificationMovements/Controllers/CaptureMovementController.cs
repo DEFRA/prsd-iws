@@ -39,7 +39,8 @@
             //Set the units based on the notification Id  
             var units = await mediator.SendAsync(new GetShipmentUnits(id));
             model.Receipt.PossibleUnits = ShipmentQuantityUnitsMetadata.GetUnitsOfThisType(units).ToArray();
-            
+            //floating summary
+            UpdateSummary(model, id);
             return View(model);
         }
 
@@ -49,6 +50,7 @@
         {
             if (!ModelState.IsValid)
             {
+            	UpdateSummary(model, id);
                 return View(model);
             }
 
@@ -77,7 +79,7 @@
             }
 
             ModelState.AddModelError("Number", CaptureMovementControllerResources.SaveUnsuccessful);
-
+	    UpdateSummary(model, id);
             return View(model);
         }
 
@@ -93,7 +95,7 @@
             }
 
             var model = new CaptureViewModel(result);
-
+	    UpdateSummary(model, id);
             return View(model);
         }
 
@@ -104,6 +106,7 @@
             if (!ModelState.IsValid)
             {
                 ViewBag.IsSaved = false;
+                UpdateSummary(model, id);
                 return View(model);
             }
 
@@ -155,6 +158,16 @@
         public ActionResult Cancelled(Guid id)
         {
             return View(id);
+        }
+        private InternalMovementSummary GetSummarydata(Guid id)
+        {
+          return Task.Run(() => mediator.SendAsync(new GetInternalMovementSummary(id))).Result;        
+        }
+
+        private CreateViewModel UpdateSummary(CreateViewModel model, Guid id)
+        {
+            model.UpdateSummaryViewModel(GetSummarydata(id));
+            return model;
         }
     }
 }

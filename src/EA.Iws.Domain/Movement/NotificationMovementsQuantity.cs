@@ -56,5 +56,26 @@
         {
             return movements != null && movements.Any();
         }
+
+        public async Task<ShipmentQuantity> AveragePerShipment(Guid notificationId, decimal totalShipments)
+        {
+            var shipment = await shipmentRepository.GetByNotificationId(notificationId);
+
+            ShipmentQuantity shipmentQuantity;
+
+            if (shipment.Units == ShipmentQuantityUnits.Kilograms)
+            {
+                shipmentQuantity = new ShipmentQuantity(ShipmentQuantityUnitConverter.ConvertToTarget(
+                       shipment.Units,
+                       ShipmentQuantityUnits.Tonnes,
+                       shipment.Quantity), ShipmentQuantityUnits.Tonnes);
+            }
+            else
+            {
+                shipmentQuantity = new ShipmentQuantity(shipment.Quantity, shipment.Units);
+            }
+
+            return new ShipmentQuantity(Decimal.Divide(totalShipments, shipmentQuantity.Quantity), shipmentQuantity.Units);
+        }
     }
 }

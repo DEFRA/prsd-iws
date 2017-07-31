@@ -4,6 +4,7 @@
     using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Mvc;
+    using Core.ImportMovement;
     using Core.Shared;
     using Infrastructure.Authorization;
     using Prsd.Core.Mediator;
@@ -36,7 +37,8 @@
             //Set the units based on the notification Id  
             var units = await mediator.SendAsync(new GetImportShipmentUnits(id));
             model.Receipt.PossibleUnits = ShipmentQuantityUnitsMetadata.GetUnitsOfThisType(units).ToArray();
-
+	    model.NotificationNumber = result.NotificationNumber;
+            UpdateSummary(model, id);
             return View(model);
         }
 
@@ -46,6 +48,7 @@
         {
             if (!ModelState.IsValid)
             {
+            	UpdateSummary(model, id);
                 return View(model);
             }
 
@@ -69,7 +72,7 @@
             {
                 ModelState.AddModelError("Number", CaptureControllerResources.NumberExists);
             }
-
+	    UpdateSummary(model, id);
             return View(model);
         }
 
@@ -85,7 +88,7 @@
             }
 
             var model = new CaptureViewModel(result);
-
+	    UpdateSummary(model, id);
             return View(model);
         }
 
@@ -96,6 +99,7 @@
             if (!ModelState.IsValid)
             {
                 ViewBag.IsSaved = false;
+                UpdateSummary(model, id);
                 return View(model);
             }
 
@@ -147,6 +151,16 @@
         public ActionResult Cancelled(Guid id)
         {
             return View(id);
+        }
+        private ImportInternalMovementSummary GetSummarydata(Guid id)
+        {
+            return Task.Run(() => mediator.SendAsync(new GetImportInternalMovementSummary(id))).Result;
+        }
+
+        private CreateViewModel UpdateSummary(CreateViewModel model, Guid id)
+        {
+            model.UpdateSummaryViewModel(GetSummarydata(id));
+            return model;
         }
     }
 }

@@ -195,4 +195,7 @@
   <data name="DownloadExcel" xml:space="preserve">
     <value>Download shipment details</value>
   </data>
+  <data name="SummaryTitleIntended" xml:space="preserve">
+    <value>Total intended number of shipments:</value>
+  </data>
 </root>

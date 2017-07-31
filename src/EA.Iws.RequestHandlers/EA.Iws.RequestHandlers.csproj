@@ -170,6 +170,7 @@
     <Compile Include="FinancialGuarantee\GenerateParentCompanyDocumentHandler.cs" />
     <Compile Include="ImportMovement\Cancel\CancelImportMovementsHandler.cs" />
     <Compile Include="ImportMovement\Capture\CreateImportMovementHandler.cs" />
+    <Compile Include="ImportMovement\Capture\GetImportInternalMovementSummaryHandler.cs" />
     <Compile Include="ImportMovement\Capture\GetImportMovementDatesHandler.cs" />
     <Compile Include="ImportMovement\Capture\GetImportMovementIdIfExistsHandler.cs" />
     <Compile Include="ImportMovement\Capture\GetImportMovementReceiptAndRecoveryDataHandler.cs" />
@@ -422,6 +423,7 @@
     <Compile Include="NotificationAssessment\SetExitPointHandler.cs" />
     <Compile Include="NotificationAssessment\SetNewNumberOfShipmentsHandler.cs" />
     <Compile Include="NotificationAssessment\SetEntryPointHandler.cs" />
+    <Compile Include="NotificationMovements\Create\GetInternalMovementSummaryHandler.cs" />
     <Compile Include="NotificationMovements\Create\HasExceededConsentedQuantityHandler.cs" />
     <Compile Include="Movement\Receive\DoesQuantityReceivedExceedToleranceHandler.cs" />
     <Compile Include="NotificationMovements\Create\IsProposedMovementDateValidHandler.cs" />

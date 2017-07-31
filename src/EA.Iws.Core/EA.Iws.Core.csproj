@@ -105,6 +105,7 @@
     <Compile Include="Admin\Search\BasicSearchResults.cs" />
     <Compile Include="ImportMovement\ImportCancellableMovement.cs" />
     <Compile Include="ImportMovement\ImportCancelMovementData.cs" />
+    <Compile Include="ImportMovement\ImportInternalMovementSummary.cs" />
     <Compile Include="ImportMovement\ImportMovementSummaryData.cs" />
     <Compile Include="ImportMovement\ImportMovementData.cs" />
     <Compile Include="ImportMovement\ImportMovementRecoveryData.cs" />
@@ -162,6 +163,7 @@
     <Compile Include="MovementReceipt\Decision.cs" />
     <Compile Include="Movement\DateHistory.cs" />
     <Compile Include="Movement\IMovementRule.cs" />
+    <Compile Include="Movement\InternalMovementSummary.cs" />
     <Compile Include="Movement\MovementFileData.cs" />
     <Compile Include="Movement\MovementFiles.cs" />
     <Compile Include="Movement\MovementReceiptAndRecoveryData.cs" />

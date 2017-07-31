@@ -120,6 +120,7 @@
     <Compile Include="FinancialGuarantee\GenerateFinancialGuaranteeDocument.cs" />
     <Compile Include="ImportMovement\Cancel\CancelImportMovements.cs" />
     <Compile Include="ImportMovement\Capture\CreateImportMovement.cs" />
+    <Compile Include="ImportMovement\Capture\GetImportInternalMovementSummary.cs" />
     <Compile Include="ImportMovement\Capture\GetImportMovementDates.cs" />
     <Compile Include="ImportMovement\Capture\GetImportMovementIdIfExists.cs" />
     <Compile Include="ImportMovement\Capture\GetImportMovementReceiptAndRecoveryData.cs" />
@@ -221,6 +222,7 @@
     <Compile Include="NotificationAssessment\SetExitPoint.cs" />
     <Compile Include="NotificationAssessment\SetNewNumberOfShipments.cs" />
     <Compile Include="NotificationAssessment\SetEntryPoint.cs" />
+    <Compile Include="NotificationMovements\Create\GetInternalMovementSummary.cs" />
     <Compile Include="NotificationMovements\Create\HasExceededConsentedQuantity.cs" />
     <Compile Include="Movement\Receive\DoesQuantityReceivedExceedTolerance.cs" />
     <Compile Include="NotificationMovements\GetMovementsByNotificationId.cs" />

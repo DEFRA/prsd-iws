@@ -1,7 +1,9 @@
 ﻿namespace EA.Iws.Web.Areas.AdminExportNotificationMovements.ViewModels.CaptureMovement
 {
+    using Core.Movement;
     using Core.Shared;
     using Prsd.Core;
+    using Prsd.Core.Helpers;
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
@@ -58,6 +60,19 @@
                 });
             }
         }
+
+        public string NotificationNumber { get; set; }
+
+        public int IntendedShipments { get; set; }
+
+        public int UsedShipments { get; set; }
+
+        public int ActiveLoads { get; set; }
+        public string QuantityRemainingTotal { get; set; }
+
+        public string QuantityReceivedTotal { get; set; }
+
+        public string AverageTonnage { get; set; }
 
         public CaptureViewModel()
         {
@@ -201,6 +216,17 @@
         private static string GetNotificationTypeVerb(NotificationType displayedType)
         {
             return displayedType == NotificationType.Recovery ? "recovered" : "disposed of";
+        }
+
+        public void UpdateSummaryViewModel(InternalMovementSummary floatingSummary)
+        {
+            NotificationNumber = floatingSummary.SummaryData.NotificationNumber;
+            IntendedShipments = floatingSummary.TotalIntendedShipments;
+            ActiveLoads = floatingSummary.SummaryData.ActiveLoadsPermitted;
+            AverageTonnage = floatingSummary.AverageTonnage + EnumHelper.GetShortName(floatingSummary.AverageDataUnit);
+            UsedShipments = floatingSummary.SummaryData.TotalShipments;
+            QuantityRemainingTotal = floatingSummary.SummaryData.QuantityRemaining.ToString("G29") + EnumHelper.GetShortName(floatingSummary.SummaryData.DisplayUnit);
+            QuantityReceivedTotal = floatingSummary.SummaryData.QuantityReceived.ToString("G29") + EnumHelper.GetShortName(floatingSummary.SummaryData.DisplayUnit);
         }
     }
 }

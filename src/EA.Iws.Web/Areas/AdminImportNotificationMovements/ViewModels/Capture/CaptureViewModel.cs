@@ -7,6 +7,7 @@
     using Core.ImportMovement;
     using Core.Shared;
     using Prsd.Core;
+    using Prsd.Core.Helpers;
     using Web.ViewModels.Shared;
 
     public class CaptureViewModel : IValidatableObject
@@ -58,7 +59,18 @@
         }
 
         public NotificationType NotificationType { get; set; }
+ 
+        public string NotificationNumber { get; set; }
 
+        public int IntendedShipments { get; set; }
+
+        public int UsedShipments { get; set; }
+
+        public string QuantityRemainingTotal { get; set; }
+
+        public string QuantityReceivedTotal { get; set; }
+
+        public string AverageTonnage { get; set; }
         public CaptureViewModel()
         {
             ActualShipmentDate = new MaskedDateInputViewModel();
@@ -66,7 +78,14 @@
             Receipt = new ReceiptViewModel();
             Recovery = new RecoveryViewModel();
         }
-
+  	public void UpdateSummaryViewModel(ImportInternalMovementSummary floatingSummary)
+        {
+            IntendedShipments = floatingSummary.SummaryData.IntendedShipments;
+            AverageTonnage = floatingSummary.AverageTonnage + EnumHelper.GetShortName(floatingSummary.AverageDataUnit);
+            UsedShipments = floatingSummary.SummaryData.UsedShipments;
+            QuantityRemainingTotal = floatingSummary.SummaryData.QuantityRemainingTotal.ToString("G29") + EnumHelper.GetShortName(floatingSummary.SummaryData.DisplayUnit);
+            QuantityReceivedTotal = floatingSummary.SummaryData.QuantityReceivedTotal.ToString("G29") + EnumHelper.GetShortName(floatingSummary.SummaryData.DisplayUnit);
+        }
         public CaptureViewModel(ImportMovementSummaryData data)
         {
             ShipmentNumber = data.Data.Number;
