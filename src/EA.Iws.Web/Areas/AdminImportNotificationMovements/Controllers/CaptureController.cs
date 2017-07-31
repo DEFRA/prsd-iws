@@ -106,7 +106,7 @@
 
         private async Task SaveMovementData(Guid movementId, CaptureViewModel model)
         {
-            if (model.Receipt.IsComplete() && !model.IsReceived)
+            if (model.Receipt.IsComplete() && !model.IsReceived && !model.IsRejected)
             {
                 if (!model.Receipt.WasAccepted)
                 {
@@ -126,6 +126,7 @@
             if (model.Recovery.IsComplete()
                 && (model.Receipt.IsComplete() || model.IsReceived)
                 && !model.IsOperationCompleted
+                && !model.IsRejected
                 && model.Receipt.WasAccepted)
             {
                 await mediator.SendAsync(new RecordCompletedReceipt(movementId,
