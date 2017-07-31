@@ -36,7 +36,7 @@
 
         <hr />
 
-        if (Model.Receipt.IsComplete())
+        if (Model.IsReceived || Model.IsRejected)
         {
             @Html.HiddenFor(m => m.Receipt.ReceivedDate.Date)
             @Html.HiddenFor(m => m.Receipt.WasAccepted)
@@ -52,14 +52,14 @@
 
         <hr />
 
-        if (Model.Recovery.IsComplete())
+        if (Model.IsOperationCompleted)
         {
             @Html.HiddenFor(m => m.Recovery.RecoveryDate.Date)
             @Html.Partial("_OperationReadOnly", Model.Recovery)
 
             <hr />
         }
-        else if ((Model.Receipt.IsComplete() && Model.Receipt.WasAccepted) || !Model.Receipt.IsComplete())
+        else if (Model.IsReceived || !Model.Receipt.IsComplete())
         {
             @Html.EditorFor(m => m.Recovery)
 
