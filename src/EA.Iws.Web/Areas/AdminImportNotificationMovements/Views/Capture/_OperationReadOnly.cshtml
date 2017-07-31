@@ -1,6 +1,17 @@
-﻿@model EA.Iws.Web.Areas.AdminImportNotificationMovements.ViewModels.Capture.RecoveryViewModel
+﻿@using EA.Iws.Core.Shared
+@model EA.Iws.Web.Areas.AdminImportNotificationMovements.ViewModels.Capture.RecoveryViewModel
+@using Resource = EA.Iws.Web.Areas.AdminImportNotificationMovements.Views.Capture.CreateEditResources
 
 <div class="form-group">
-    <h3 class="heading-small">@Html.DisplayNameFor(m => m.RecoveryDate)</h3>
+    <h3 class="heading-small">
+        @if (Model.NotificationType == NotificationType.Recovery)
+        {
+            @Resource.RecoveryDate
+        }
+        else
+        {
+            @Resource.DisposalDate
+        }
+    </h3>
     <p>@Html.Gds().DisplayDate(Model.RecoveryDate.Date.Value)</p>
 </div>   

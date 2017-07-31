@@ -89,6 +89,15 @@ namespace EA.Iws.Web.Areas.AdminExportNotificationMovements.Views.CaptureMovemen
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Disposal date.
+        /// </summary>
+        public static string DisposalDate {
+            get {
+                return ResourceManager.GetString("DisposalDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The last shipment prenotified for this notification was {0}.
         /// </summary>
         public static string LatestNumber {
@@ -112,6 +121,15 @@ namespace EA.Iws.Web.Areas.AdminExportNotificationMovements.Views.CaptureMovemen
         public static string PageTitle {
             get {
                 return ResourceManager.GetString("PageTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Recovery date.
+        /// </summary>
+        public static string RecoveryDate {
+            get {
+                return ResourceManager.GetString("RecoveryDate", resourceCulture);
             }
         }
         

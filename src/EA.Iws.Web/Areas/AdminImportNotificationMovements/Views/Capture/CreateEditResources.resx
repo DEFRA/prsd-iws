@@ -123,6 +123,9 @@
   <data name="CurrentShipmentParagraph" xml:space="preserve">
     <value>Currently displaying shipment {0}</value>
   </data>
+  <data name="DisposalDate" xml:space="preserve">
+    <value>Disposal date</value>
+  </data>
   <data name="LatestNumber" xml:space="preserve">
     <value>The last shipment prenotified for this notification was {0}</value>
   </data>
@@ -131,6 +134,9 @@
   </data>
   <data name="PageTitle" xml:space="preserve">
     <value>Capture shipment</value>
+  </data>
+  <data name="RecoveryDate" xml:space="preserve">
+    <value>Recovery date</value>
   </data>
   <data name="ReturnToSummary" xml:space="preserve">
     <value>Return to shipment summary</value>
