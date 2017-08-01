@@ -80,7 +80,8 @@
             Receipt = new ReceiptViewModel();
             Recovery = new RecoveryViewModel();
         }
-       public void SetSummaryData(Summary summaryData)
+
+        public void SetSummaryData(Summary summaryData)
         {
             IntendedShipments = summaryData.IntendedShipments;
             AverageTonnage = summaryData.AverageTonnage + EnumHelper.GetShortName(summaryData.AverageDataUnit);
@@ -89,6 +90,7 @@
             QuantityReceivedTotal = summaryData.QuantityReceivedTotal.ToString("G29") + EnumHelper.GetShortName(summaryData.DisplayUnit);
             NotificationNumber = summaryData.NotificationNumber;
         }
+
         public CaptureViewModel(ImportMovementSummaryData data)
         {
             ShipmentNumber = data.Data.Number;

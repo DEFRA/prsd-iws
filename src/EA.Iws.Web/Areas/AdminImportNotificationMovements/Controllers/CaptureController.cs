@@ -152,11 +152,10 @@
             return View(id);
         }
 
-        private async Task<CaptureViewModel> UpdateSummary(CaptureViewModel model, Guid id)
+        private async Task UpdateSummary(CaptureViewModel model, Guid id)
         {
             var summary = await mediator.SendAsync(new GetImportMovementsSummary(id));
             model.SetSummaryData(summary);
-            return model;
         }
     }
 }

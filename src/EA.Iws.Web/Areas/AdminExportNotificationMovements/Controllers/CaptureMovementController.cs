@@ -10,7 +10,6 @@
     using Requests.Movement.Reject;
     using Requests.Movement.Summary;
     using Requests.Notification;
-    using Requests.NotificationMovements;
     using Requests.NotificationMovements.Capture;
     using Requests.NotificationMovements.Create;
     using System;
@@ -22,7 +21,6 @@
     [AuthorizeActivity(typeof(CreateMovementInternal))]
     public class CaptureMovementController : Controller
     {
-        private const string MovementNumberKey = "MovementNumberKey";
         private readonly IMediator mediator;
 
         public CaptureMovementController(IMediator mediator)
@@ -161,11 +159,10 @@
             return View(id);
         }
 
-        private async Task<CaptureViewModel> UpdateSummary(CaptureViewModel model, Guid id)
+        private async Task UpdateSummary(CaptureViewModel model, Guid id)
         {
             var summary = await mediator.SendAsync(new GetInternalMovementSummary(id));
             model.SetSummaryData(summary);
-            return model;
         }
     }
 }
