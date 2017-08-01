@@ -170,7 +170,6 @@
     <Compile Include="FinancialGuarantee\GenerateParentCompanyDocumentHandler.cs" />
     <Compile Include="ImportMovement\Cancel\CancelImportMovementsHandler.cs" />
     <Compile Include="ImportMovement\Capture\CreateImportMovementHandler.cs" />
-    <Compile Include="ImportMovement\Capture\GetImportInternalMovementSummaryHandler.cs" />
     <Compile Include="ImportMovement\Capture\GetImportMovementDatesHandler.cs" />
     <Compile Include="ImportMovement\Capture\GetImportMovementIdIfExistsHandler.cs" />
     <Compile Include="ImportMovement\Capture\GetImportMovementReceiptAndRecoveryDataHandler.cs" />

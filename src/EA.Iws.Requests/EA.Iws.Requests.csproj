@@ -120,7 +120,6 @@
     <Compile Include="FinancialGuarantee\GenerateFinancialGuaranteeDocument.cs" />
     <Compile Include="ImportMovement\Cancel\CancelImportMovements.cs" />
     <Compile Include="ImportMovement\Capture\CreateImportMovement.cs" />
-    <Compile Include="ImportMovement\Capture\GetImportInternalMovementSummary.cs" />
     <Compile Include="ImportMovement\Capture\GetImportMovementDates.cs" />
     <Compile Include="ImportMovement\Capture\GetImportMovementIdIfExists.cs" />
     <Compile Include="ImportMovement\Capture\GetImportMovementReceiptAndRecoveryData.cs" />

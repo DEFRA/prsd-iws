@@ -4,9 +4,15 @@
 
 @RenderSection("top_of_page", required: false)
 
+<div>
+    <div class="column-third">
+        @RenderSection("menu", required: false)
+    </div>
+
     <div>
         @RenderBody()
     </div>
+</div>
 
 
 @section top_content_box {

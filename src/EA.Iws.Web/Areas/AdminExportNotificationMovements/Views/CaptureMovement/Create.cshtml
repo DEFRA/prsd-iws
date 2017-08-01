@@ -41,8 +41,7 @@
         }
         @Html.ActionLink(Resource.ReturnToSummary, "Index", "Home")
         </div>
-        <br/>
-        <div class="column-one-third stickem" id="floatingSummary">         
+        <div class="column-one-third stickem">         
                 <table>
                     <thead>
                         <tr>
@@ -87,13 +86,7 @@
     <script>
         $(function() {
             $("#ShipmentNumber").focus();
+            $('.container').stickem();
         });
     </script>
-
-<script src="~/Scripts/jquery.stickem.js"></script>
-<script>
-    $(document).ready(function () {
-        $('.container').stickem();
-    });
-</script>
 }

@@ -25,15 +25,22 @@
         {
             var summary = await repository.GetById(message.NotificationId);
 
-            //Average tonnage
-            var averageData = await quantity.AveragePerShipment(message.NotificationId, summary.IntendedTotalShipments);
-
             return new InternalMovementSummary
             {
-                SummaryData = mapper.Map<BasicMovementSummary>(summary),
+                NotificationId = summary.NotificationId,
+                NotificationNumber = summary.NotificationNumber,
+                TotalShipments = summary.CurrentTotalShipments,
+                QuantityReceived = summary.QuantityReceived,
+                QuantityRemaining = summary.QuantityRemaining,
+                DisplayUnit = summary.Units,
+                ActiveLoadsPermitted = summary.ActiveLoadsPermitted,
+                CurrentActiveLoads = summary.CurrentActiveLoads,
+                CompetentAuthority = summary.CompetentAuthority,
+                FinancialGuaranteeStatus = summary.FinancialGuaranteeStatus,
+                NotificationStatus = summary.NotificationStatus,
                 TotalIntendedShipments = summary.IntendedTotalShipments,
-                AverageTonnage = averageData.Quantity,
-                AverageDataUnit = averageData.Units
+                AverageTonnage = summary.AverageTonnage,
+                AverageDataUnit = summary.AverageDataUnit
             };
         }
     }

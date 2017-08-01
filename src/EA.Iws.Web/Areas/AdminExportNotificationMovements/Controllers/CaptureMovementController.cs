@@ -1,9 +1,5 @@
 ﻿namespace EA.Iws.Web.Areas.AdminExportNotificationMovements.Controllers
 {
-    using System;
-    using System.Linq;
-    using System.Threading.Tasks;
-    using System.Web.Mvc;
     using Core.Movement;
     using Core.Shared;
     using Infrastructure.Authorization;
@@ -14,8 +10,13 @@
     using Requests.Movement.Reject;
     using Requests.Movement.Summary;
     using Requests.Notification;
+    using Requests.NotificationMovements;
     using Requests.NotificationMovements.Capture;
     using Requests.NotificationMovements.Create;
+    using System;
+    using System.Linq;
+    using System.Threading.Tasks;
+    using System.Web.Mvc;
     using ViewModels.CaptureMovement;
 
     [AuthorizeActivity(typeof(CreateMovementInternal))]
@@ -40,7 +41,7 @@
             var units = await mediator.SendAsync(new GetShipmentUnits(id));
             model.Receipt.PossibleUnits = ShipmentQuantityUnitsMetadata.GetUnitsOfThisType(units).ToArray();
             //floating summary
-            UpdateSummary(model, id);
+            await UpdateSummary(model, id);
             return View(model);
         }
 
@@ -50,7 +51,7 @@
         {
             if (!ModelState.IsValid)
             {
-                UpdateSummary(model, id);
+                await UpdateSummary(model, id);
                 return View(model);
             }
 
@@ -79,7 +80,7 @@
             }
 
             ModelState.AddModelError("Number", CaptureMovementControllerResources.SaveUnsuccessful);
-            UpdateSummary(model, id);
+            await UpdateSummary(model, id);
             return View(model);
         }
 
@@ -95,7 +96,7 @@
             }
 
             var model = new CaptureViewModel(result);
-            UpdateSummary(model, id);
+            await UpdateSummary(model, id);
             return View(model);
         }
 
@@ -106,7 +107,7 @@
             if (!ModelState.IsValid)
             {
                 ViewBag.IsSaved = false;
-                UpdateSummary(model, id);
+                await UpdateSummary(model, id);
                 return View(model);
             }
 
@@ -159,14 +160,11 @@
         {
             return View(id);
         }
-        private InternalMovementSummary GetSummarydata(Guid id)
-        {
-            return Task.Run(() => mediator.SendAsync(new GetInternalMovementSummary(id))).Result;
-        }
 
-        private CaptureViewModel UpdateSummary(CaptureViewModel model, Guid id)
+        private async Task<CaptureViewModel> UpdateSummary(CaptureViewModel model, Guid id)
         {
-            model.UpdateSummaryViewModel(GetSummarydata(id));
+            var summary = await mediator.SendAsync(new GetInternalMovementSummary(id));
+            model.SetSummaryData(summary);
             return model;
         }
     }

@@ -67,6 +67,7 @@
         public int UsedShipments { get; set; }
 
         public int ActiveLoads { get; set; }
+
         public string QuantityRemainingTotal { get; set; }
 
         public string QuantityReceivedTotal { get; set; }
@@ -217,15 +218,15 @@
             return displayedType == NotificationType.Recovery ? "recovered" : "disposed of";
         }
 
-        public void UpdateSummaryViewModel(InternalMovementSummary floatingSummary)
+        public void SetSummaryData(InternalMovementSummary summaryData)
         {
-            NotificationNumber = floatingSummary.SummaryData.NotificationNumber;
-            IntendedShipments = floatingSummary.TotalIntendedShipments;
-            ActiveLoads = floatingSummary.SummaryData.ActiveLoadsPermitted;
-            AverageTonnage = floatingSummary.AverageTonnage + EnumHelper.GetShortName(floatingSummary.AverageDataUnit);
-            UsedShipments = floatingSummary.SummaryData.TotalShipments;
-            QuantityRemainingTotal = floatingSummary.SummaryData.QuantityRemaining.ToString("G29") + EnumHelper.GetShortName(floatingSummary.SummaryData.DisplayUnit);
-            QuantityReceivedTotal = floatingSummary.SummaryData.QuantityReceived.ToString("G29") + EnumHelper.GetShortName(floatingSummary.SummaryData.DisplayUnit);
+            NotificationNumber = summaryData.NotificationNumber;
+            IntendedShipments = summaryData.TotalIntendedShipments;
+            ActiveLoads = summaryData.ActiveLoadsPermitted;
+            AverageTonnage = summaryData.AverageTonnage + EnumHelper.GetShortName(summaryData.AverageDataUnit);
+            UsedShipments = summaryData.TotalShipments;
+            QuantityRemainingTotal = summaryData.QuantityRemaining.ToString("G29") + EnumHelper.GetShortName(summaryData.DisplayUnit);
+            QuantityReceivedTotal = summaryData.QuantityReceived.ToString("G29") + EnumHelper.GetShortName(summaryData.DisplayUnit);
         }
     }
 }

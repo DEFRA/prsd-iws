@@ -105,7 +105,6 @@
     <Compile Include="Admin\Search\BasicSearchResults.cs" />
     <Compile Include="ImportMovement\ImportCancellableMovement.cs" />
     <Compile Include="ImportMovement\ImportCancelMovementData.cs" />
-    <Compile Include="ImportMovement\ImportInternalMovementSummary.cs" />
     <Compile Include="ImportMovement\ImportMovementSummaryData.cs" />
     <Compile Include="ImportMovement\ImportMovementData.cs" />
     <Compile Include="ImportMovement\ImportMovementRecoveryData.cs" />

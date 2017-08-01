@@ -32,14 +32,15 @@
                     context.ImportNotificationAssessments.SingleAsync(
                         n => n.NotificationApplicationId == importNotificationId)).Status;
 
-            var notificationType =
-                (await context.ImportNotifications.SingleAsync(n => n.Id == importNotificationId)).NotificationType;
+            var notificationInfo = await context.ImportNotifications.SingleAsync(n => n.Id == importNotificationId);
 
             var totalMovements = await context.ImportMovements.Where(m => m.NotificationId == importNotificationId).CountAsync();
 
             var shipment = await context.Shipments.Where(s => s.ImportNotificationId == importNotificationId).SingleAsync();
 
             var received = await TotalQuantityReceived(importNotificationId, shipment);
+
+            var averageShipmentInfo = AveragePerShipment(importNotificationId, shipment);
 
             return new Summary
             {
@@ -50,7 +51,10 @@
                 QuantityRemainingTotal = shipment.Quantity.Quantity - received.Quantity,
                 Id = importNotificationId,
                 NotificationStatus = status,
-                NotificationType = notificationType
+                NotificationType = notificationInfo.NotificationType,
+                NotificationNumber = notificationInfo.NotificationNumber,
+                AverageTonnage = averageShipmentInfo.Quantity,
+                AverageDataUnit = averageShipmentInfo.Units
             };
         }
 
@@ -88,10 +92,8 @@
         /// </summary>
         /// <param name="importNotificationId"></param>
         /// <returns></returns>
-        public async Task<ShipmentQuantity> AveragePerShipment(Guid importNotificationId)
-        {
-            var shipment = await context.Shipments.Where(s => s.ImportNotificationId == importNotificationId).SingleAsync();
-
+        private ShipmentQuantity AveragePerShipment(Guid importNotificationId, Shipment shipment)
+        {            
             decimal shipmentQuantity;
 
             if (shipment.Quantity.Units == ShipmentQuantityUnits.Kilograms)

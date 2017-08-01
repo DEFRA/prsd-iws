@@ -1,13 +1,14 @@
 ﻿namespace EA.Iws.Web.Areas.AdminImportNotificationMovements.ViewModels.Capture
 {
+    using Core.ImportMovement;
+    using Core.ImportNotificationMovements;
+    using Core.Shared;
+    using Prsd.Core;
+    using Prsd.Core.Helpers;
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.Web.Mvc;
-    using Core.ImportMovement;
-    using Core.Shared;
-    using Prsd.Core;
-    using Prsd.Core.Helpers;
     using Web.ViewModels.Shared;
 
     public class CaptureViewModel : IValidatableObject
@@ -71,6 +72,7 @@
         public string QuantityReceivedTotal { get; set; }
 
         public string AverageTonnage { get; set; }
+
         public CaptureViewModel()
         {
             ActualShipmentDate = new MaskedDateInputViewModel();
@@ -78,13 +80,14 @@
             Receipt = new ReceiptViewModel();
             Recovery = new RecoveryViewModel();
         }
-       public void UpdateSummaryViewModel(ImportInternalMovementSummary floatingSummary)
+       public void SetSummaryData(Summary summaryData)
         {
-            IntendedShipments = floatingSummary.SummaryData.IntendedShipments;
-            AverageTonnage = floatingSummary.AverageTonnage + EnumHelper.GetShortName(floatingSummary.AverageDataUnit);
-            UsedShipments = floatingSummary.SummaryData.UsedShipments;
-            QuantityRemainingTotal = floatingSummary.SummaryData.QuantityRemainingTotal.ToString("G29") + EnumHelper.GetShortName(floatingSummary.SummaryData.DisplayUnit);
-            QuantityReceivedTotal = floatingSummary.SummaryData.QuantityReceivedTotal.ToString("G29") + EnumHelper.GetShortName(floatingSummary.SummaryData.DisplayUnit);
+            IntendedShipments = summaryData.IntendedShipments;
+            AverageTonnage = summaryData.AverageTonnage + EnumHelper.GetShortName(summaryData.AverageDataUnit);
+            UsedShipments = summaryData.UsedShipments;
+            QuantityRemainingTotal = summaryData.QuantityRemainingTotal.ToString("G29") + EnumHelper.GetShortName(summaryData.DisplayUnit);
+            QuantityReceivedTotal = summaryData.QuantityReceivedTotal.ToString("G29") + EnumHelper.GetShortName(summaryData.DisplayUnit);
+            NotificationNumber = summaryData.NotificationNumber;
         }
         public CaptureViewModel(ImportMovementSummaryData data)
         {

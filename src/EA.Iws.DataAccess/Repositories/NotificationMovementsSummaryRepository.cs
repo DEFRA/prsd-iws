@@ -72,6 +72,8 @@
             var financialGuarantee = financialGuaranteeCollection.GetCurrentApprovedFinancialGuarantee() ??
                                      financialGuaranteeCollection.GetLatestFinancialGuarantee();
 
+            var averageShipmentInfo = await quantity.AveragePerShipment(notificationId, summaryData.NumberOfShipments);
+
             return NotificationMovementsSummary.Load(summaryData.NotificationId,
                 summaryData.NotificationNumber,
                 summaryData.NotificationType,
@@ -84,7 +86,7 @@
                 summaryData.Units,
                 financialGuarantee == null ? FinancialGuaranteeStatus.AwaitingApplication : financialGuarantee.Status,
                 summaryData.CompetentAuthority,
-                summaryData.NotificationStatus);
+                summaryData.NotificationStatus, averageShipmentInfo);
         }
     }
 }
