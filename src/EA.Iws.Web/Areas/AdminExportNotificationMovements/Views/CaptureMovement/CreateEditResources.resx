@@ -120,6 +120,9 @@
   <data name="AcceptedTitle" xml:space="preserve">
     <value>Was the shipment accepted?</value>
   </data>
+  <data name="AverageTonnage" xml:space="preserve">
+    <value>Average tonnage per shipment:</value>
+  </data>
   <data name="ChangesSaved" xml:space="preserve">
     <value>Your changes have been saved</value>
   </data>

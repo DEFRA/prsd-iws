@@ -699,3 +699,32 @@ table.table-pad-bottom {
     @extend .form-control;
     width:20%;
 }
+
+.stickem-row {
+  position: relative;
+}
+
+.stickem-row::after {
+  clear: both;
+  content: '.';
+  display: block;
+  height: 0;
+  visibility: hidden;
+}
+
+
+.stickem-container .stickem{
+  width:330px;
+}
+
+.stickit {
+    margin-left: 660px;
+	position: fixed;
+    top:0;
+}
+
+.stickit-end {
+	bottom: 40px;
+	position: absolute;
+	right: 0;
+}

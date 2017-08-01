@@ -21,5 +21,11 @@
         public ShipmentQuantityUnits DisplayUnit { get; set; }
 
         public NotificationType NotificationType { get; set; }
+
+        public string NotificationNumber { get; set; }
+
+        public decimal AverageTonnage { get; set; }
+
+        public ShipmentQuantityUnits AverageDataUnit { get; set; }
     }
 }

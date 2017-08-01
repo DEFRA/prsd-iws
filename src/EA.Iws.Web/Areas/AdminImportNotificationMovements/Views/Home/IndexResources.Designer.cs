@@ -187,6 +187,15 @@ namespace EA.Iws.Web.Areas.AdminImportNotificationMovements.Views.Home {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Total intended number of shipments:.
+        /// </summary>
+        public static string SummaryTitleIntended {
+            get {
+                return ResourceManager.GetString("SummaryTitleIntended", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Shipment details.
         /// </summary>
         public static string TableTitle {

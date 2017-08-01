@@ -71,6 +71,15 @@ namespace EA.Iws.Web.Areas.AdminExportNotificationMovements.Views.CaptureMovemen
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Average tonnage per shipment:.
+        /// </summary>
+        public static string AverageTonnage {
+            get {
+                return ResourceManager.GetString("AverageTonnage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Your changes have been saved.
         /// </summary>
         public static string ChangesSaved {

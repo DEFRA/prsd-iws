@@ -29,6 +29,10 @@
 
         public NotificationStatus NotificationStatus { get; private set; }
 
+        public decimal AverageTonnage { get; set; }
+
+        public ShipmentQuantityUnits AverageDataUnit { get; set; }
+
         public static NotificationMovementsSummary Load(Guid notificationId,
             string notificationNumber,
             NotificationType notificationType,
@@ -41,7 +45,8 @@
             ShipmentQuantityUnits units,
             FinancialGuaranteeStatus financialGuaranteeStatus,
             UKCompetentAuthority competentAuthority,
-            NotificationStatus notificationStatus)
+            NotificationStatus notificationStatus,
+            ShipmentQuantity averageTonnageInfo)
         {
             return new NotificationMovementsSummary
             {
@@ -57,7 +62,9 @@
                 Units = units,
                 FinancialGuaranteeStatus = financialGuaranteeStatus,
                 CompetentAuthority = competentAuthority,
-                NotificationStatus = notificationStatus
+                NotificationStatus = notificationStatus,
+                AverageDataUnit = averageTonnageInfo.Units,
+                AverageTonnage = averageTonnageInfo.Quantity
             };
         }
     }
