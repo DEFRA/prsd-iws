@@ -1,5 +1,4 @@
 ﻿@using Resource = EA.Iws.Web.Areas.AdminExportNotificationMovements.Views.CaptureMovement.CreateEditResources
-@using Resources = EA.Iws.Web.Areas.AdminExportNotificationMovements.Views.Home.IndexResources
 @model EA.Iws.Web.Areas.AdminExportNotificationMovements.ViewModels.CaptureMovement.CaptureViewModel
 
 @{
@@ -41,41 +40,9 @@
         }
         @Html.ActionLink(Resource.ReturnToSummary, "Index", "Home")
         </div>
-        <div class="column-one-third stickem">         
-                <table>
-                    <thead>
-                        <tr>
-                            <th colspan="2" class="heading-small">@Model.NotificationNumber</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>@Resources.SummaryTitleIntended</td>
-                            <td>@Model.IntendedShipments</td>
-                        </tr>
-                        <tr>
-                            <td>@Resources.SummaryTitleNumber</td>
-                            <td>@Model.UsedShipments</td>
-                        </tr>
-                        <tr>
-                            <td>@Resources.SummaryTitleActive</td>
-                            <td>@Model.ActiveLoads</td>
-                        </tr>
-                        <tr>
-                            <td>@Resources.SummaryTitleReceived</td>
-                            <td>@Model.QuantityReceivedTotal</td>
-                        </tr>
-                        <tr>
-                            <td>@Resources.SummaryTitleRemaining</td>
-                            <td>@Model.QuantityRemainingTotal</td>
-                        </tr>
-                        <tr>
-                            <td>@Resource.AverageTonnage</td>
-                            <td>@Model.AverageTonnage</td>
-                        </tr>
-                    </tbody>
-                </table>          
-        </div>
+
+    @Html.Partial("_ChangeShipment")
+
     </div>
 </div>
 
@@ -86,7 +53,6 @@
     <script>
         $(function() {
             $("#ShipmentNumber").focus();
-            $('.container').stickem();
         });
     </script>
 }

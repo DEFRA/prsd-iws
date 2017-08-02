@@ -1,0 +1,54 @@
+﻿@using Resources = EA.Iws.Web.Areas.AdminExportNotificationMovements.Views.Home.IndexResources
+@using Resource = EA.Iws.Web.Areas.AdminExportNotificationMovements.Views.CaptureMovement.CreateEditResources
+@model EA.Iws.Web.Areas.AdminExportNotificationMovements.ViewModels.CaptureMovement.CaptureViewModel
+
+<div class="column-one-third stickem">
+    <table>
+        <thead>
+            <tr>
+                <th colspan="2" class="heading-small">@Model.NotificationNumber</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>@Resources.SummaryTitleIntended</td>
+                <td>@Model.IntendedShipments</td>
+            </tr>
+            <tr>
+                <td>@Resources.SummaryTitleNumber</td>
+                <td>@Model.UsedShipments</td>
+            </tr>
+            <tr>
+                <td>@Resources.SummaryTitleActive</td>
+                <td>@Model.ActiveLoads</td>
+            </tr>
+            <tr>
+                <td>@Resources.SummaryTitleReceived</td>
+                <td>@Model.QuantityReceivedTotal</td>
+            </tr>
+            <tr>
+                <td>@Resources.SummaryTitleRemaining</td>
+                <td>@Model.QuantityRemainingTotal</td>
+            </tr>
+            <tr>
+                <td>@Resources.AverageTonnage</td>
+                <td>@Model.AverageTonnage</td>
+            </tr>
+        </tbody>
+    </table>
+    <br />
+   @using (Html.BeginForm("ChangeShipment", "CaptureMovement", FormMethod.Post))
+   {
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(m => m.ShipmentNumber)
+    <p>
+        <label class="heading-small">@string.Format(Resource.ShipmentNumber, Model.ShipmentNumber)</label>
+        <div class="form-group @Html.Gds().FormGroupClass(m => m.NewShipmentNumber)">
+            @Html.Gds().ValidationMessageFor(m => m.NewShipmentNumber)
+            @Html.Gds().TextBoxFor(m => m.NewShipmentNumber, new { type = "number", min = 1, @class = "form-control" })
+            <button class="button" type="submit">@Resources.ChangeShipment</button>
+        </div>
+    </p>
+   }
+
+</div>

@@ -165,6 +165,37 @@
             return View(id);
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> ChangeShipment(Guid id, int? shipmentNumber = null, int? newShipmentNumber = null)
+        {          
+            if (newShipmentNumber.HasValue)
+            {
+               var movementId = await mediator.SendAsync(new GetMovementIdIfExists(id, newShipmentNumber.Value));
+
+                if (movementId.HasValue)
+                {
+                    return RedirectToAction("Edit", new { movementId });
+                }
+                else
+                {
+                    return RedirectToAction("Create", new { id, shipmentNumber = newShipmentNumber.Value });
+                }
+            }
+            else
+            {
+                if (shipmentNumber.HasValue)
+                {
+                   var movementId = await mediator.SendAsync(new GetMovementIdIfExists(id, shipmentNumber.Value));
+                   if (movementId.HasValue)
+                    {
+                        return RedirectToAction("Edit", new { movementId = movementId.Value });
+                    }
+                }
+                return RedirectToAction("Create", new { id });
+            }
+        }
+
         private async Task UpdateSummary(CaptureViewModel model, Guid id)
         {
             var summary = await mediator.SendAsync(new GetInternalMovementSummary(id));
