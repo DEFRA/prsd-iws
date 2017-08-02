@@ -5,6 +5,7 @@
     using System.Web.Mvc;
     using Infrastructure.Authorization;
     using Prsd.Core.Mediator;
+    using Requests.ImportMovement.Capture;
     using Requests.ImportMovement.Delete;
     using Requests.ImportNotification;
     using Requests.ImportNotificationMovements;
@@ -36,6 +37,26 @@
             model.CanDeleteMovement = canDeleteMovement;
 
             return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Search(Guid id, int? shipmentNumber)
+        {
+            if (!shipmentNumber.HasValue || shipmentNumber.Value <= 0)
+            {
+                return RedirectToAction("Index");
+            }
+
+            var movementId = await mediator.SendAsync(new GetImportMovementIdIfExists(id, shipmentNumber.Value));
+            if (movementId.HasValue)
+            {
+                return RedirectToAction("Edit", "Capture", new { movementId });
+            }
+            else
+            {
+                return RedirectToAction("Create", "Capture", new { shipmentNumber });
+            }
         }
 
         [AcceptVerbs(HttpVerbs.Get | HttpVerbs.Post)]

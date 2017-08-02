@@ -159,6 +159,12 @@
   <data name="Recovered" xml:space="preserve">
     <value>Recovered</value>
   </data>
+  <data name="SearchButton" xml:space="preserve">
+    <value>Go</value>
+  </data>
+  <data name="SearchPlaceholder" xml:space="preserve">
+    <value>Go to shipment</value>
+  </data>
   <data name="Shipped" xml:space="preserve">
     <value>(Shipped)</value>
   </data>

@@ -30,10 +30,12 @@
         public async Task<ActionResult> Create(Guid id, int? shipmentNumber = null)
         {
             var model = new CaptureViewModel();
+
             if (shipmentNumber.HasValue)
             {
                 model.ShipmentNumber = shipmentNumber;
             }
+
             var result = await mediator.SendAsync(new GetNotificationDetails(id));
             model.Recovery.NotificationType = result.NotificationType;
             model.NotificationType = result.NotificationType;
