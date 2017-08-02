@@ -110,7 +110,7 @@ else
             @using (Html.BeginForm("Search", "Home"))
             {
                 @Html.AntiForgeryToken()
-                <input id="ShipmentNumber" name="ShipmentNumber" type="text" class="form-control-narrow" placeholder="@Resource.SearchPlaceholder" />
+                <input id="ShipmentNumber" name="ShipmentNumber" type="number" min="1" class="form-control-narrow" placeholder="@Resource.SearchPlaceholder" />
                 <button class="button">@Resource.SearchButton</button>
             }
         </div>

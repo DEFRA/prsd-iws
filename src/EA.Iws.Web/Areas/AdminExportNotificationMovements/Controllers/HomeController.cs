@@ -48,9 +48,14 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Search(Guid id, int shipmentNumber)
+        public async Task<ActionResult> Search(Guid id, int? shipmentNumber)
         {
-            var movementId = await mediator.SendAsync(new GetMovementIdIfExists(id, shipmentNumber));
+            if (!shipmentNumber.HasValue || shipmentNumber.Value <= 0)
+            {
+                return RedirectToAction("Index");
+            }
+
+            var movementId = await mediator.SendAsync(new GetMovementIdIfExists(id, shipmentNumber.Value));
             if (movementId.HasValue)
             {
                 return RedirectToAction("Edit", "CaptureMovement", new { movementId });
