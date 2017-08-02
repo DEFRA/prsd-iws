@@ -122,6 +122,15 @@
         </div>
 
         <div class="form-group">
+            @using (Html.BeginForm("Search", "Home"))
+            {
+                @Html.AntiForgeryToken()
+                <input id="ShipmentNumber" name="ShipmentNumber" type="text" class="form-control-narrow" placeholder="@Resources.SearchPlaceholder" />
+                <button class="button">@Resources.SearchButton</button>
+            }
+        </div>
+
+        <div class="form-group">
             <table class="odd-table">
                 <caption class="visuallyhidden">@Resources.SummaryTableHeading</caption>
                 <thead>

@@ -195,4 +195,10 @@
   <data name="DownloadExcel" xml:space="preserve">
     <value>Download shipment details</value>
   </data>
+  <data name="SearchButton" xml:space="preserve">
+    <value>Go</value>
+  </data>
+  <data name="SearchPlaceholder" xml:space="preserve">
+    <value>Go to shipment</value>
+  </data>
 </root>
