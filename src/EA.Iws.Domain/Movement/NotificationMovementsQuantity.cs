@@ -86,7 +86,7 @@
                 shipmentQuantity = shipment.Quantity;
             }
 
-            return new ShipmentQuantity(Decimal.Divide(totalShipments, shipmentQuantity), ShipmentQuantityUnits.Tonnes);
+            return new ShipmentQuantity(Decimal.Divide(shipmentQuantity, totalShipments), ShipmentQuantityUnits.Tonnes);
         }
     }
 }
