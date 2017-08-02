@@ -18,6 +18,10 @@
         [Display(Name = "ShipmentNumber", ResourceType = typeof(CaptureViewModelResources))]
         public int? ShipmentNumber { get; set; }
 
+        [Display(Name = "NewShipmentNumber", ResourceType = typeof(CaptureViewModelResources))]
+        [Range(1, int.MaxValue, ErrorMessage = null, ErrorMessageResourceName = "NumberIsInt", ErrorMessageResourceType = typeof(CaptureViewModelResources))]
+        public int? NewShipmentNumber { get; set; }
+
         [Display(Name = "ActualShipmentDate", ResourceType = typeof(CaptureViewModelResources))]
         public MaskedDateInputViewModel ActualShipmentDate { get; set; }
 
@@ -84,10 +88,10 @@
         public void SetSummaryData(Summary summaryData)
         {
             IntendedShipments = summaryData.IntendedShipments;
-            AverageTonnage = summaryData.AverageTonnage + EnumHelper.GetShortName(summaryData.AverageDataUnit);
+            AverageTonnage = summaryData.AverageTonnage.ToString("G29") + " " + EnumHelper.GetShortName(summaryData.AverageDataUnit);
             UsedShipments = summaryData.UsedShipments;
-            QuantityRemainingTotal = summaryData.QuantityRemainingTotal.ToString("G29") + EnumHelper.GetShortName(summaryData.DisplayUnit);
-            QuantityReceivedTotal = summaryData.QuantityReceivedTotal.ToString("G29") + EnumHelper.GetShortName(summaryData.DisplayUnit);
+            QuantityRemainingTotal = summaryData.QuantityRemainingTotal.ToString("G29") + " " + EnumHelper.GetShortName(summaryData.DisplayUnit);
+            QuantityReceivedTotal = summaryData.QuantityReceivedTotal.ToString("G29") + " " + EnumHelper.GetShortName(summaryData.DisplayUnit);
             NotificationNumber = summaryData.NotificationNumber;
         }
 

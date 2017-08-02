@@ -64,8 +64,6 @@
             }
         }
 
-        public Guid NotificationId { get; set; }
-
         public string NotificationNumber { get; set; }
 
         public int IntendedShipments { get; set; }
@@ -112,7 +110,6 @@
             }
 
             NotificationType = data.NotificationType;
-            NotificationId = data.NotificationId;
             IsReceived = data.IsReceived;
             IsOperationCompleted = data.IsOperationCompleted;
             IsRejected = data.IsRejected;
@@ -230,7 +227,7 @@
             NotificationNumber = summaryData.NotificationNumber;
             IntendedShipments = summaryData.TotalIntendedShipments;
             ActiveLoads = summaryData.ActiveLoadsPermitted;
-            AverageTonnage = summaryData.AverageTonnage + EnumHelper.GetShortName(summaryData.AverageDataUnit);
+            AverageTonnage = summaryData.AverageTonnage.ToString("G29") + " " + EnumHelper.GetShortName(summaryData.AverageDataUnit);
             UsedShipments = summaryData.TotalShipments;
             QuantityRemainingTotal = summaryData.QuantityRemaining.ToString("G29") + " " + EnumHelper.GetShortName(summaryData.DisplayUnit);
             QuantityReceivedTotal = summaryData.QuantityReceived.ToString("G29") + " " + EnumHelper.GetShortName(summaryData.DisplayUnit);

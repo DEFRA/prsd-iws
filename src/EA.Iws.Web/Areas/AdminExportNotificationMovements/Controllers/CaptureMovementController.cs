@@ -36,7 +36,6 @@
             {
                 model.ShipmentNumber = shipmentNumber;
             }
-            model.NotificationId = id;
             model.NotificationType = await mediator.SendAsync(new GetNotificationType(id));
             model.Recovery.NotificationType = model.NotificationType;
 
@@ -185,11 +184,12 @@
             {
                 if (shipmentNumber.HasValue)
                 {
-                   var movementId =
-                        await mediator.SendAsync(new GetMovementIdIfExists(id, shipmentNumber.Value));
-                    return RedirectToAction("Edit", new { movementId = movementId.Value });
+                   var movementId = await mediator.SendAsync(new GetMovementIdIfExists(id, shipmentNumber.Value));
+                   if (movementId.HasValue)
+                    {
+                        return RedirectToAction("Edit", new { movementId = movementId.Value });
+                    }
                 }
-
                 return RedirectToAction("Create", new { id });
             }
         }

@@ -70,6 +70,15 @@ namespace EA.Iws.Web.Areas.AdminImportNotificationMovements.Views.Home {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Average tonnage per shipment:.
+        /// </summary>
+        public static string AverageTonnage {
+            get {
+                return ResourceManager.GetString("AverageTonnage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cancel a prenotification.
         /// </summary>
         public static string Cancel {
@@ -84,6 +93,15 @@ namespace EA.Iws.Web.Areas.AdminImportNotificationMovements.Views.Home {
         public static string Cancelled {
             get {
                 return ResourceManager.GetString("Cancelled", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Go.
+        /// </summary>
+        public static string ChangeShipment {
+            get {
+                return ResourceManager.GetString("ChangeShipment", resourceCulture);
             }
         }
         
