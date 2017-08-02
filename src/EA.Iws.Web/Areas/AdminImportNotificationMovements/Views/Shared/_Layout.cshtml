@@ -4,7 +4,7 @@
 
 @RenderSection("top_of_page", required: false)
 
-<div class="grid-row">
+<div>
     <div class="column-third">
         @RenderSection("menu", required: false)
     </div>
@@ -13,6 +13,7 @@
         @RenderBody()
     </div>
 </div>
+
 
 @section top_content_box {
     @Html.Action("NotificationSwitcher", "Home")

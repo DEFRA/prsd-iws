@@ -1,11 +1,13 @@
 ﻿@using Resource = EA.Iws.Web.Areas.AdminExportNotificationMovements.Views.CaptureMovement.CreateEditResources
+@using Resources = EA.Iws.Web.Areas.AdminExportNotificationMovements.Views.Home.IndexResources
 @model EA.Iws.Web.Areas.AdminExportNotificationMovements.ViewModels.CaptureMovement.CaptureViewModel
 
 @{
     ViewBag.Title = Resource.PageTitle;
 }
 
-<div class="grid-row">
+<div class="grid-row container">
+<div class="stickem-row stickem-container">
     <div class="column-two-thirds">
         <h1 class="heading-large">@Resource.MainHeading</h1>
 
@@ -37,10 +39,46 @@
             <button class="button" type="submit">@Constants.ContinueButtonText</button>
 
         }
+        @Html.ActionLink(Resource.ReturnToSummary, "Index", "Home")
+        </div>
+        <div class="column-one-third stickem">         
+                <table>
+                    <thead>
+                        <tr>
+                            <th colspan="2" class="heading-small">@Model.NotificationNumber</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>@Resources.SummaryTitleIntended</td>
+                            <td>@Model.IntendedShipments</td>
+                        </tr>
+                        <tr>
+                            <td>@Resources.SummaryTitleNumber</td>
+                            <td>@Model.UsedShipments</td>
+                        </tr>
+                        <tr>
+                            <td>@Resources.SummaryTitleActive</td>
+                            <td>@Model.ActiveLoads</td>
+                        </tr>
+                        <tr>
+                            <td>@Resources.SummaryTitleReceived</td>
+                            <td>@Model.QuantityReceivedTotal</td>
+                        </tr>
+                        <tr>
+                            <td>@Resources.SummaryTitleRemaining</td>
+                            <td>@Model.QuantityRemainingTotal</td>
+                        </tr>
+                        <tr>
+                            <td>@Resource.AverageTonnage</td>
+                            <td>@Model.AverageTonnage</td>
+                        </tr>
+                    </tbody>
+                </table>          
+        </div>
     </div>
 </div>
 
-@Html.ActionLink(Resource.ReturnToSummary, "Index", "Home")
 
 @section scripts {
     @Html.Partial("_Scripts")
@@ -48,6 +86,7 @@
     <script>
         $(function() {
             $("#ShipmentNumber").focus();
-        })
+            $('.container').stickem();
+        });
     </script>
 }

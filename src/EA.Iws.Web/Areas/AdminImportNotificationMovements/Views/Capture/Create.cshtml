@@ -1,10 +1,13 @@
 ﻿@using Resource = EA.Iws.Web.Areas.AdminImportNotificationMovements.Views.Capture.CreateEditResources
+@using Resources = EA.Iws.Web.Areas.AdminImportNotificationMovements.Views.Home.IndexResources
 @model EA.Iws.Web.Areas.AdminImportNotificationMovements.ViewModels.Capture.CaptureViewModel
 
 @{
     ViewBag.Title = Resource.PageTitle;
 }
 
+<div class="grid-row container">
+    <div class="stickem-row stickem-container">
 <div class="column-two-thirds">
     <h1 class="heading-large">@Resource.MainHeading</h1>
     @using (Html.BeginForm())
@@ -12,7 +15,6 @@
         @Html.AntiForgeryToken()
         @Html.Gds().ValidationSummary()
         @Html.HiddenFor(m => m.NotificationType)
-
         <div class="form-group @Html.Gds().FormGroupClass(m => m.ShipmentNumber)">
             @Html.Gds().LabelFor(m => m.ShipmentNumber, new { @class = "form-label-bold" })
             @Html.Gds().ValidationMessageFor(m => m.ShipmentNumber)
@@ -39,16 +41,46 @@
     @Html.ActionLink(Resource.ReturnToSummary, "Index", "Home")
 </div>
 
-
-@section menu {
-    @Html.Action("ImportNavigation", "Menu", new { area = "Admin", section = ImportNavigationSection.Shipments })
-}
+        <div class="column-one-third stickem">          
+                <table>
+                    <thead>
+                        <tr>
+                            <th colspan="2" class="heading-small">@Model.NotificationNumber</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>@Resources.SummaryTitleIntended</td>
+                            <td>@Model.IntendedShipments</td>
+                        </tr>
+                        <tr>
+                            <td>@Resources.NumberUsed</td>
+                            <td>@Model.UsedShipments</td>
+                        </tr>
+                        <tr>
+                            <td>@Resources.TotalQuantityReceived</td>
+                            <td>@Model.QuantityReceivedTotal</td>
+                        </tr>
+                        <tr>
+                            <td>@Resources.TotalQuantityRemaining</td>
+                            <td>@Model.QuantityRemainingTotal</td>
+                        </tr>
+                        <tr>
+                            <td>@Resource.AverageTonnage</td>
+                            <td>@Model.AverageTonnage</td>
+                        </tr>
+                    </tbody>
+                </table>           
+        </div>
+    </div>
+</div> 
 
 @section scripts {
     @Html.Partial("_Scripts")
     <script>
         $(function () {
             $("#ShipmentNumber").focus();
+            $('.container').stickem();
         });
     </script>
 }

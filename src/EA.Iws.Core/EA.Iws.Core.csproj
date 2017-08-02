@@ -162,6 +162,7 @@
     <Compile Include="MovementReceipt\Decision.cs" />
     <Compile Include="Movement\DateHistory.cs" />
     <Compile Include="Movement\IMovementRule.cs" />
+    <Compile Include="Movement\InternalMovementSummary.cs" />
     <Compile Include="Movement\MovementFileData.cs" />
     <Compile Include="Movement\MovementFiles.cs" />
     <Compile Include="Movement\MovementReceiptAndRecoveryData.cs" />

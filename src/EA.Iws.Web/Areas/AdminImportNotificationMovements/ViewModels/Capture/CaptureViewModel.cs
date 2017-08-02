@@ -1,12 +1,14 @@
 ﻿namespace EA.Iws.Web.Areas.AdminImportNotificationMovements.ViewModels.Capture
 {
+    using Core.ImportMovement;
+    using Core.ImportNotificationMovements;
+    using Core.Shared;
+    using Prsd.Core;
+    using Prsd.Core.Helpers;
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.Web.Mvc;
-    using Core.ImportMovement;
-    using Core.Shared;
-    using Prsd.Core;
     using Web.ViewModels.Shared;
 
     public class CaptureViewModel : IValidatableObject
@@ -58,6 +60,18 @@
         }
 
         public NotificationType NotificationType { get; set; }
+ 
+        public string NotificationNumber { get; set; }
+
+        public int IntendedShipments { get; set; }
+
+        public int UsedShipments { get; set; }
+
+        public string QuantityRemainingTotal { get; set; }
+
+        public string QuantityReceivedTotal { get; set; }
+
+        public string AverageTonnage { get; set; }
 
         public CaptureViewModel()
         {
@@ -65,6 +79,16 @@
             PrenotificationDate = new MaskedDateInputViewModel();
             Receipt = new ReceiptViewModel();
             Recovery = new RecoveryViewModel();
+        }
+
+        public void SetSummaryData(Summary summaryData)
+        {
+            IntendedShipments = summaryData.IntendedShipments;
+            AverageTonnage = summaryData.AverageTonnage + EnumHelper.GetShortName(summaryData.AverageDataUnit);
+            UsedShipments = summaryData.UsedShipments;
+            QuantityRemainingTotal = summaryData.QuantityRemainingTotal.ToString("G29") + EnumHelper.GetShortName(summaryData.DisplayUnit);
+            QuantityReceivedTotal = summaryData.QuantityReceivedTotal.ToString("G29") + EnumHelper.GetShortName(summaryData.DisplayUnit);
+            NotificationNumber = summaryData.NotificationNumber;
         }
 
         public CaptureViewModel(ImportMovementSummaryData data)

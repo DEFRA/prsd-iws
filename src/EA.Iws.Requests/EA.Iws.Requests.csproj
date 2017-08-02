@@ -221,6 +221,7 @@
     <Compile Include="NotificationAssessment\SetExitPoint.cs" />
     <Compile Include="NotificationAssessment\SetNewNumberOfShipments.cs" />
     <Compile Include="NotificationAssessment\SetEntryPoint.cs" />
+    <Compile Include="NotificationMovements\Create\GetInternalMovementSummary.cs" />
     <Compile Include="NotificationMovements\Create\HasExceededConsentedQuantity.cs" />
     <Compile Include="Movement\Receive\DoesQuantityReceivedExceedTolerance.cs" />
     <Compile Include="NotificationMovements\GetMovementsByNotificationId.cs" />
