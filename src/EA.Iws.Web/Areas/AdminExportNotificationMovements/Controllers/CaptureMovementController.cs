@@ -29,9 +29,15 @@
         }
 
         [HttpGet]
-        public async Task<ActionResult> Create(Guid id)
+        public async Task<ActionResult> Create(Guid id, int? shipmentNumber = null)
         {
             var model = new CaptureViewModel();
+
+            if (shipmentNumber.HasValue)
+            {
+                model.ShipmentNumber = shipmentNumber;
+            }
+
             model.NotificationType = await mediator.SendAsync(new GetNotificationType(id));
             model.Recovery.NotificationType = model.NotificationType;
 

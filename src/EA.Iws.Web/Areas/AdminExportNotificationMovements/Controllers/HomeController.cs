@@ -9,6 +9,7 @@
     using Requests.Movement;
     using Requests.Notification;
     using Requests.NotificationMovements;
+    using Requests.NotificationMovements.Capture;
     using ViewModels.Home;
     using Web.ViewModels.Shared;
 
@@ -43,6 +44,26 @@
         public ActionResult IndexPost(Guid id, int? selectedMovementStatus)
         {
             return RedirectToAction("Index", new { id, status = selectedMovementStatus, page = 1 });
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Search(Guid id, int? shipmentNumber)
+        {
+            if (!shipmentNumber.HasValue || shipmentNumber.Value <= 0)
+            {
+                return RedirectToAction("Index");
+            }
+
+            var movementId = await mediator.SendAsync(new GetMovementIdIfExists(id, shipmentNumber.Value));
+            if (movementId.HasValue)
+            {
+                return RedirectToAction("Edit", "CaptureMovement", new { movementId });
+            }
+            else
+            {
+                return RedirectToAction("Create", "CaptureMovement", new { shipmentNumber });
+            }
         }
 
         [AcceptVerbs(HttpVerbs.Get | HttpVerbs.Post)]

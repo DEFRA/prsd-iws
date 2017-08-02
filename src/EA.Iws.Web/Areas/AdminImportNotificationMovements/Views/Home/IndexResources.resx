@@ -195,7 +195,13 @@
   <data name="DownloadExcel" xml:space="preserve">
     <value>Download shipment details</value>
   </data>
+  <data name="SearchButton" xml:space="preserve">
+    <value>Go</value>
+  </data>
   <data name="SummaryTitleIntended" xml:space="preserve">
     <value>Total intended number of shipments:</value>
+  </data>
+  <data name="SearchPlaceholder" xml:space="preserve">
+    <value>Go to shipment</value>
   </data>
 </root>
