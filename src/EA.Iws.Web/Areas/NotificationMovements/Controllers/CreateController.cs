@@ -9,6 +9,7 @@
     using Core.PackagingType;
     using Core.Rules;
     using Core.Shared;
+    using Infrastructure;
     using Infrastructure.Authorization;
     using Prsd.Core.Mediator;
     using Requests.Notification;
@@ -110,7 +111,7 @@
                 return View(model);
             }
 
-            await mediator.SendAsync(new CreateMovements(
+            var newMovementIds = await mediator.SendAsync(new CreateMovements(
                 notificationId,
                 model.NumberToCreate.Value,
                 model.ShipmentDate.Value,
@@ -118,7 +119,7 @@
                 model.Units.Value,
                 model.SelectedPackagingTypes));
 
-            return RedirectToAction("Download");
+            return RedirectToAction("Download", newMovementIds.ToRouteValueDictionary("newMovementIds"));
         }
 
         private ActionResult GetRuleErrorView(MovementRulesSummary ruleSummary)
@@ -196,7 +197,7 @@
 
             var tempMovement = (TempMovement)TempData["TempMovement"];
 
-            await mediator.SendAsync(new CreateMovements(
+            var newMovementIds = await mediator.SendAsync(new CreateMovements(
                 notificationId,
                 tempMovement.NumberToCreate,
                 tempMovement.ShipmentDate,
@@ -206,13 +207,13 @@
 
             TempData["TempMovement"] = null;
 
-            return RedirectToAction("Download");
+            return RedirectToAction("Download", newMovementIds.ToRouteValueDictionary("newMovementIds"));
         }
 
         [HttpGet]
-        public ActionResult Download(Guid notificationId)
+        public ActionResult Download(Guid notificationId, Guid[] newMovementIds)
         {
-            return View();
+            return View(newMovementIds);
         }
 
         [HttpGet]

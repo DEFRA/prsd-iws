@@ -9,7 +9,7 @@
     using Prsd.Core.Mediator;
 
     [RequestAuthorization(ExportMovementPermissions.CanCreateExportMovementsExternal)]
-    public class CreateMovements : IRequest<Unit>
+    public class CreateMovements : IRequest<Guid[]>
     {
         public CreateMovements(Guid notificationId, int numberToCreate, DateTime actualMovementDate,
             decimal quantity, ShipmentQuantityUnits units, IList<PackagingType> packagingTypes)

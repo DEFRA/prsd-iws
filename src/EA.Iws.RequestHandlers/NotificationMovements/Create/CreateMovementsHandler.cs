@@ -12,7 +12,7 @@
     using Prsd.Core.Mediator;
     using Requests.NotificationMovements.Create;
 
-    internal class CreateMovementsHandler : IRequestHandler<CreateMovements, Unit>
+    internal class CreateMovementsHandler : IRequestHandler<CreateMovements, Guid[]>
     {
         private readonly INotificationApplicationRepository notificationRepository;
         private readonly IwsContext context;
@@ -30,8 +30,10 @@
             this.notificationRepository = notificationRepository;
         }
 
-        public async Task<Unit> HandleAsync(CreateMovements message)
+        public async Task<Guid[]> HandleAsync(CreateMovements message)
         {
+            var newIds = new List<Guid>();
+
             using (var transaction = context.Database.BeginTransaction())
             {
                 try
@@ -55,6 +57,8 @@
                         context.MovementDetails.Add(movementDetails);
 
                         await context.SaveChangesAsync();
+
+                        newIds.Add(movement.Id);
                     }
                 }
                 catch
@@ -66,7 +70,7 @@
                 transaction.Commit();
             }
 
-            return Unit.Value;
+            return newIds.ToArray();
         }
 
         private async Task<IEnumerable<PackagingInfo>> GetPackagingInfos(Guid notificationId, IList<PackagingType> packagingTypes)

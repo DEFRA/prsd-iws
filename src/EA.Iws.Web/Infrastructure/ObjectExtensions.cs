@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections;
+    using System.Collections.Generic;
     using System.Linq;
     using System.Web.Routing;
 
@@ -37,6 +38,20 @@
                         result.Add(p.Name, value.ToString());
                     }
                 }
+            }
+
+            return result;
+        }
+
+        public static RouteValueDictionary ToRouteValueDictionary<T>(this IEnumerable<T> values, string key)
+        {
+            var result = new RouteValueDictionary();
+
+            var valuesList = values.ToList();
+
+            for (int i = 0; i < valuesList.Count; i++)
+            {
+                result.Add(string.Format("{0}[{1}]", key, i), valuesList[i]);
             }
 
             return result;

@@ -1,4 +1,5 @@
-﻿@{
+﻿@model Guid[]
+@{
     ViewBag.Title = "Download your prenotification";
     Layout = "~/Areas/NotificationMovements/Views/Shared/_CreateSummaryLayout.cshtml";
 }
@@ -13,7 +14,7 @@
     <ol class="list-number">
         <li>
             download the
-            @Html.ActionLink("IWS movement", "GenerateMovementDocument", "Home", new { id = Model.MovementId, area = "ExportMovement" }, new { })
+            @Html.ActionLink("IWS movement", "GenerateMovementDocument", "Home", new { id = Model.First(), area = "ExportMovement" }, new { })
             document
         </li>
         <li>print the document</li>
