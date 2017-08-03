@@ -1,16 +1,15 @@
 ﻿@model EA.Iws.Web.Areas.NotificationMovements.ViewModels.Create.CreateMovementsViewModel
+@using Resources = EA.Iws.Web.Areas.NotificationMovements.Views.Create.IndexResources
 
 @{
-    ViewBag.Title = "Create prenotification";
+    ViewBag.Title = Resources.Title;
     Layout = "~/Areas/NotificationMovements/Views/Shared/_CreateSummaryLayout.cshtml";
 }
 
-<header class="hgroup">
-    <h1 class="heading-large">Create prenotification</h1>
-</header>
+<h1 class="heading-large">@Resources.Title</h1>
 
 <p>
-    You can schedule your shipments from
+    @Resources.ShipmentSchedule
     @Html.Gds().DisplayShortDateRangeFor(m => m.StartDate, m => m.EndDate).
 </p>
 
@@ -24,16 +23,10 @@
     @Html.HiddenFor(m => m.NotificationUnits)
     @Html.HiddenFor(m => m.PackagingTypes.ShowEnumValue)
 
-    <div class="form-group @Html.Gds().FormGroupClass(m => m.NumberToCreate)">
-        @Html.Gds().LabelFor(m => m.NumberToCreate, showOptionalLabel: false)
-        @Html.Gds().ValidationMessageFor(m => m.NumberToCreate)
-        @Html.Gds().TextBoxFor(m => m.NumberToCreate)
-    </div>
-
     <div class="form-group @Html.Gds().FormGroupClass(m => m.Day) @Html.Gds().FormGroupClass(m => m.Month) @Html.Gds().FormGroupClass(m => m.Year)">
         <fieldset>
             <legend>
-                <span class="form-label">What is the actual date of shipment?</span>
+                <span class="form-label">@Resources.ActualDateOfShipment</span>
             </legend>
 
             <div class="form-date">
@@ -57,9 +50,16 @@
         </fieldset>
     </div>
 
+    <div class="form-group @Html.Gds().FormGroupClass(m => m.NumberToCreate)">
+        @Html.Gds().LabelFor(m => m.NumberToCreate, showOptionalLabel: false)
+        @Html.Gds().HintParagraph(Resources.NunmberToCreateHint)
+        @Html.Gds().ValidationMessageFor(m => m.NumberToCreate)
+        @Html.Gds().TextBoxFor(m => m.NumberToCreate)
+    </div>
+
     <header class="hgroup">
-        <h1 class="heading-large">How much waste is being exported?</h1>
-        <p>Enter the actual quantity of waste as a number. You can add decimal figures if necessary.</p>
+        <h2 class="heading-small">@Resources.QuantityTitle</h2>
+        <p>@Resources.QuantityDescription</p>
     </header>
 
     for (int i = 0; i < Model.AvailableUnits.Count; i++)
@@ -81,8 +81,8 @@
     </div>
 
     <header class="hgroup">
-        <h1 class="heading-large">What packaging types will be used?</h1>
-        <p>Select all the types of packaging that will be used for this shipment.</p>
+        <h2 class="heading-small">@Resources.PackagingTitle</h2>
+        <p>@Resources.PackagingDescription</p>
     </header>
 
     <div class="form-group">

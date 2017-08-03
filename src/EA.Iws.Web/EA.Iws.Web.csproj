@@ -2276,6 +2276,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>FileClosedResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Areas\NotificationMovements\Views\Create\IndexResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IndexResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Areas\NotificationMovements\Views\Create\NoApprovedFinancialGuaranteeResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -4357,6 +4362,10 @@
     <EmbeddedResource Include="Areas\NotificationMovements\Views\Create\FileClosedResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>FileClosedResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\NotificationMovements\Views\Create\IndexResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\NotificationMovements\Views\Create\NoApprovedFinancialGuaranteeResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
