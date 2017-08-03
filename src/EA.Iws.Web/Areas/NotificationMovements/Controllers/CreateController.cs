@@ -53,7 +53,7 @@
             }
 
             var proposedMovementDate =
-                await mediator.SendAsync(new IsProposedMovementDateValid(notificationId, model.AsDateTime().Value));
+                await mediator.SendAsync(new IsProposedMovementDateValid(notificationId, model.ShipmentDate.Value));
 
             if (proposedMovementDate.IsOutOfRange)
             {
@@ -69,15 +69,15 @@
 
             var workingDaysUntilShipment =
                 await
-                    mediator.SendAsync(new GetWorkingDaysUntil(notificationId, model.AsDateTime().GetValueOrDefault()));
+                    mediator.SendAsync(new GetWorkingDaysUntil(notificationId, model.ShipmentDate.GetValueOrDefault()));
 
             if (workingDaysUntilShipment < 4)
             {
                 var tempMovement = new TempMovement(model.NumberToCreate.Value,
-                    model.AsDateTime().Value,
+                    model.ShipmentDate.Value,
                     Convert.ToDecimal(model.Quantity),
                     model.Units.Value,
-                    model.SelectedValues);
+                    model.SelectedPackagingTypes);
 
                 TempData["TempMovement"] = tempMovement;
 
@@ -113,10 +113,10 @@
             await mediator.SendAsync(new CreateMovements(
                 notificationId,
                 model.NumberToCreate.Value,
-                model.AsDateTime().Value,
+                model.ShipmentDate.Value,
                 Convert.ToDecimal(model.Quantity),
                 model.Units.Value,
-                model.SelectedValues));
+                model.SelectedPackagingTypes));
 
             return RedirectToAction("Download");
         }

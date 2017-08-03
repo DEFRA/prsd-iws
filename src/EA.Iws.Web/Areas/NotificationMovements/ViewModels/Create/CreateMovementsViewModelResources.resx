@@ -138,4 +138,31 @@
   <data name="NumberToCreate" xml:space="preserve">
     <value>Number of shipments</value>
   </data>
+  <data name="DayRequired" xml:space="preserve">
+    <value>Please enter a valid number in the 'Day' field</value>
+  </data>
+  <data name="MonthRequired" xml:space="preserve">
+    <value>Please enter a valid number in the 'Month' field</value>
+  </data>
+  <data name="YearRequired" xml:space="preserve">
+    <value>Please enter a valid number in the 'Year' field</value>
+  </data>
+  <data name="NumberToCreateRequired" xml:space="preserve">
+    <value>Please enter the number of shipments</value>
+  </data>
+  <data name="NumberToCreateValid" xml:space="preserve">
+    <value>Please enter a valid number of shipments</value>
+  </data>
+  <data name="DateValid" xml:space="preserve">
+    <value>Please enter a valid date</value>
+  </data>
+  <data name="DateNotInPast" xml:space="preserve">
+    <value>The actual date of shipment cannot be in the past. Please enter a different date.</value>
+  </data>
+  <data name="PackagingTypeRequired" xml:space="preserve">
+    <value>Please select at least one packaging type</value>
+  </data>
+  <data name="DateHint" xml:space="preserve">
+    <value>For example, </value>
+  </data>
 </root>

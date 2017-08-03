@@ -51,19 +51,19 @@
             PackagingTypes.PossibleValues = items;
         }
 
-        [Required(ErrorMessage = "Please enter a valid number in the 'Day' field")]
+        [Required(ErrorMessageResourceType = typeof(CreateMovementsViewModelResources), ErrorMessageResourceName = "DayRequired")]
         [Display(Name = "Day")]
-        [Range(1, 31, ErrorMessage = "Please enter a valid number in the 'Day' field")]
+        [Range(1, 31, ErrorMessageResourceType = typeof(CreateMovementsViewModelResources), ErrorMessageResourceName = "DayRequired")]
         public int? Day { get; set; }
 
-        [Required(ErrorMessage = "Please enter a valid number in the 'Month' field")]
+        [Required(ErrorMessageResourceType = typeof(CreateMovementsViewModelResources), ErrorMessageResourceName = "MonthRequired")]
         [Display(Name = "Month")]
-        [Range(1, 12, ErrorMessage = "Please enter a valid number in the 'Month' field")]
+        [Range(1, 12, ErrorMessageResourceType = typeof(CreateMovementsViewModelResources), ErrorMessageResourceName = "MonthRequired")]
         public int? Month { get; set; }
 
-        [Required(ErrorMessage = "Please enter a valid number in the 'Year' field")]
+        [Required(ErrorMessageResourceType = typeof(CreateMovementsViewModelResources), ErrorMessageResourceName = "YearRequired")]
         [Display(Name = "Year")]
-        [Range(2015, 3000, ErrorMessage = "Please enter a valid number in the 'Year' field")]
+        [Range(2015, 3000, ErrorMessageResourceType = typeof(CreateMovementsViewModelResources), ErrorMessageResourceName = "YearRequired")]
         public int? Year { get; set; }
 
         public string DateHintText
@@ -72,11 +72,11 @@
             {
                 var dateString = SystemTime.Now.Day + " " + SystemTime.Now.Month + " " + SystemTime.Now.Year;
 
-                return "For example, " + dateString;
+                return CreateMovementsViewModelResources.DateHint + dateString;
             }
         }
 
-        [Required(ErrorMessage = "Please enter the number of shipments")]
+        [Required(ErrorMessageResourceType = typeof(CreateMovementsViewModelResources), ErrorMessageResourceName = "NumberToCreateRequired")]
         [Display(Name = "NumberToCreate", ResourceType = typeof(CreateMovementsViewModelResources))]
         public int? NumberToCreate { get; set; }
 
@@ -116,7 +116,7 @@
 
         public CheckBoxCollectionViewModel PackagingTypes { get; set; }
 
-        public IList<PackagingType> SelectedValues
+        public IList<PackagingType> SelectedPackagingTypes
         {
             get
             {
@@ -128,24 +128,27 @@
             }
         }
 
-        public DateTime? AsDateTime()
+        public DateTime? ShipmentDate
         {
-            if (Day.HasValue && Month.HasValue && Year.HasValue)
+            get
             {
-                if (Day.Value > DateTime.DaysInMonth(Year.Value, Month.Value))
+                if (Day.HasValue && Month.HasValue && Year.HasValue)
                 {
-                    return null;
+                    if (Day.Value > DateTime.DaysInMonth(Year.Value, Month.Value))
+                    {
+                        return null;
+                    }
+                    return new DateTime(Year.Value, Month.Value, Day.Value);
                 }
-                return new DateTime(Year.Value, Month.Value, Day.Value);
+                return null;
             }
-            return null;
         }
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             if (NumberToCreate == null || NumberToCreate.Value <= 0)
             {
-                yield return new ValidationResult("Please enter a valid number of shipments", new[] { "NumberToCreate" });
+                yield return new ValidationResult(CreateMovementsViewModelResources.NumberToCreateValid, new[] { "NumberToCreate" });
             }
 
             DateTime shipmentDate;
@@ -156,12 +159,12 @@
 
             if (!isValidDate)
             {
-                yield return new ValidationResult("Please enter a valid date",
+                yield return new ValidationResult(CreateMovementsViewModelResources.DateValid,
                     new[] { "Day" });
             }
             else if (shipmentDate < SystemTime.UtcNow.Date)
             {
-                yield return new ValidationResult("The actual date of shipment cannot be in the past. Please enter a different date.",
+                yield return new ValidationResult(CreateMovementsViewModelResources.DateNotInPast,
                     new[] { "Day" });
             }
 
@@ -180,9 +183,9 @@
                     new[] { "Quantity" });
             }
 
-            if (!SelectedValues.Any())
+            if (!SelectedPackagingTypes.Any())
             {
-                yield return new ValidationResult("Please select at least one packaging type", new[] { "PackagingTypes" });
+                yield return new ValidationResult(CreateMovementsViewModelResources.PackagingTypeRequired, new[] { "PackagingTypes" });
             }
         }
     }
