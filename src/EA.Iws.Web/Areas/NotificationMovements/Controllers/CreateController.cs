@@ -14,7 +14,7 @@
     using Requests.NotificationMovements.Create;
     using ViewModels.Create;
 
-    [AuthorizeActivity(typeof(CreateMovementAndDetails))]
+    [AuthorizeActivity(typeof(CreateMovements))]
     public class CreateController : Controller
     {
         private readonly IMediator mediator;
@@ -89,17 +89,15 @@
                 return View(model);
             }
 
-            var newMovementDetails = new NewMovementDetails
-            {
-                Quantity = Convert.ToDecimal(model.Quantity),
-                Units = model.Units.Value,
-                PackagingTypes = model.SelectedValues
-            };
+            await mediator.SendAsync(new CreateMovements(
+                notificationId, 
+                model.NumberToCreate.Value,
+                model.AsDateTime().Value, 
+                Convert.ToDecimal(model.Quantity),
+                model.Units.Value,
+                model.SelectedValues));
 
-            // todo: create multiple
-            var newMovementId = await mediator.SendAsync(new CreateMovementAndDetails(notificationId, model.AsDateTime().Value, newMovementDetails));
-
-            return RedirectToAction("Download", "Create", new { id = newMovementId });
+            return RedirectToAction("Download");
         }
 
         private ActionResult GetRuleErrorView(MovementRulesSummary ruleSummary)
@@ -176,13 +174,9 @@
         }
 
         [HttpGet]
-        public async Task<ActionResult> Download(Guid notificationId, Guid id)
+        public ActionResult Download(Guid notificationId, Guid id)
         {
-            var model = new DownloadViewModel { MovementId = id };
-
-            ViewBag.MovementNumber = await mediator.SendAsync(new GetMovementNumberByMovementId(id));
-
-            return View(model);
+            return View();
         }
 
         [HttpGet]

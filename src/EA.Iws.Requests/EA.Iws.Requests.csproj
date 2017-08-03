@@ -253,7 +253,7 @@
     <Compile Include="NotificationMovements\Capture\CreateMovementInternal.cs" />
     <Compile Include="NotificationMovements\Capture\GetMovementIdIfExists.cs" />
     <Compile Include="NotificationMovements\CheckMovementNumberValid.cs" />
-    <Compile Include="NotificationMovements\Create\CreateMovementAndDetails.cs" />
+    <Compile Include="NotificationMovements\Create\CreateMovements.cs" />
     <Compile Include="NotificationMovements\Create\GenerateMovementNumber.cs" />
     <Compile Include="NotificationAssessment\GetAccountManagementData.cs" />
     <Compile Include="NotificationMovements\Create\GetCarriers.cs" />

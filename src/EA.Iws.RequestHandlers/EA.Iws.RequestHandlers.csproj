@@ -444,7 +444,7 @@
     <Compile Include="NotificationMovements\Capture\GetMovementIdIfExistsHandler.cs" />
     <Compile Include="Movement\RecordMovementDateChange.cs" />
     <Compile Include="NotificationMovements\CheckMovementNumberValidHandler.cs" />
-    <Compile Include="NotificationMovements\Create\CreateMovementAndDetailsHandler.cs" />
+    <Compile Include="NotificationMovements\Create\CreateMovementsHandler.cs" />
     <Compile Include="NotificationMovements\Create\GenerateMovementNumberHandler.cs" />
     <Compile Include="NotificationMovements\Create\GetCarriersHandler.cs" />
     <Compile Include="NotificationMovements\Create\GetMeansOfTransportHandler.cs" />

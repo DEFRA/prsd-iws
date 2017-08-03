@@ -2836,7 +2836,6 @@
     <Compile Include="Areas\NotificationMovements\ViewModels\CancelMovement\ConfirmCancelMovementsViewModel.cs" />
     <Compile Include="Areas\NotificationMovements\ViewModels\CancelMovement\CancelMovementsViewModel.cs" />
     <Compile Include="Areas\AdminExportNotificationMovements\ViewModels\CaptureMovement\CaptureViewModel.cs" />
-    <Compile Include="Areas\NotificationMovements\ViewModels\Create\DownloadViewModel.cs" />
     <Compile Include="Areas\ExportMovement\ViewModels\Complete\DateViewModel.cs" />
     <Compile Include="Areas\ExportMovement\ViewModels\DateReceivedViewModel.cs" />
     <Compile Include="Areas\ExportMovement\ViewModels\Complete\UploadViewModel.cs" />
