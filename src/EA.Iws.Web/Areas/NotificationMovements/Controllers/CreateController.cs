@@ -8,7 +8,6 @@
     using Core.Rules;
     using Infrastructure.Authorization;
     using Prsd.Core.Mediator;
-    using Requests.Movement;
     using Requests.Notification;
     using Requests.NotificationMovements;
     using Requests.NotificationMovements.Create;
@@ -34,11 +33,9 @@
                 return GetRuleErrorView(ruleSummary);
             }
 
-            var shipmentDates = await mediator.SendAsync(new GetShipmentDates(notificationId));
-            var shipmentUnits = await mediator.SendAsync(new GetShipmentUnits(notificationId));
-            var availablePackagingTypes = await mediator.SendAsync(new GetPackagingTypes(notificationId));
+            var shipmentInfo = await mediator.SendAsync(new GetShipmentInfo(notificationId));
 
-            var model = new CreateMovementsViewModel(shipmentDates, shipmentUnits, availablePackagingTypes);
+            var model = new CreateMovementsViewModel(shipmentInfo);
 
             return View(model);
         }

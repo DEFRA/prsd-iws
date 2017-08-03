@@ -20,15 +20,14 @@
         {
         }
 
-        public CreateMovementsViewModel(ShipmentDates shipmentDates, ShipmentQuantityUnits notificationShipmentUnits,
-            PackagingData availablePackagingTypes)
+        public CreateMovementsViewModel(ShipmentInfo shipmentInfo)
         {
-            StartDate = shipmentDates.StartDate;
-            EndDate = shipmentDates.EndDate;
-            NotificationUnits = notificationShipmentUnits;
-            AvailableUnits = ShipmentQuantityUnitsMetadata.GetUnitsOfThisType(notificationShipmentUnits).ToList();
+            StartDate = shipmentInfo.ShipmentDates.StartDate;
+            EndDate = shipmentInfo.ShipmentDates.EndDate;
+            NotificationUnits = shipmentInfo.ShipmentQuantityUnits;
+            AvailableUnits = ShipmentQuantityUnitsMetadata.GetUnitsOfThisType(shipmentInfo.ShipmentQuantityUnits).ToList();
 
-            var items = availablePackagingTypes.PackagingTypes
+            var items = shipmentInfo.PackagingData.PackagingTypes
                 .Where(x => x != PackagingType.Other)
                 .Select(x => new SelectListItem
                 {
@@ -37,12 +36,12 @@
                 })
                 .ToList();
 
-            if (availablePackagingTypes.PackagingTypes.Contains(PackagingType.Other))
+            if (shipmentInfo.PackagingData.PackagingTypes.Contains(PackagingType.Other))
             {
                 items.Add(new SelectListItem
                 {
                     Text = string.Format("{0} - {1}", EnumHelper.GetShortName(PackagingType.Other),
-                        availablePackagingTypes.OtherDescription),
+                        shipmentInfo.PackagingData.OtherDescription),
                     Value = ((int)PackagingType.Other).ToString()
                 });
             }

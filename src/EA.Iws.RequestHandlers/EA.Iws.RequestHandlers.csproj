@@ -448,9 +448,8 @@
     <Compile Include="NotificationMovements\Create\GenerateMovementNumberHandler.cs" />
     <Compile Include="NotificationMovements\Create\GetCarriersHandler.cs" />
     <Compile Include="NotificationMovements\Create\GetMeansOfTransportHandler.cs" />
-    <Compile Include="NotificationMovements\Create\GetPackagingTypesHandler.cs" />
     <Compile Include="NotificationAssessment\GetAccountManagementDataHandler.cs" />
-    <Compile Include="NotificationMovements\Create\GetShipmentDatesHandler.cs" />
+    <Compile Include="NotificationMovements\Create\GetShipmentInfoHandler.cs" />
     <Compile Include="NotificationMovements\Create\GetShipmentUnitsHandler.cs" />
     <Compile Include="NotificationMovements\Edit\GetEditableMovementsHandler.cs" />
     <Compile Include="NotificationMovements\GetBasicMovementSummaryHandler.cs" />

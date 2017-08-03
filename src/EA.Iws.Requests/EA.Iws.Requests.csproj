@@ -259,10 +259,9 @@
     <Compile Include="NotificationMovements\Create\GetCarriers.cs" />
     <Compile Include="NotificationMovements\Create\GetMeansOfTransport.cs" />
     <Compile Include="NotificationMovements\Create\GetShipmentUnits.cs" />
-    <Compile Include="NotificationMovements\Create\GetPackagingTypes.cs" />
     <Compile Include="NotificationMovements\Edit\GetEditableMovements.cs" />
     <Compile Include="NotificationMovements\GetBasicMovementSummary.cs" />
-    <Compile Include="NotificationMovements\Create\GetShipmentDates.cs" />
+    <Compile Include="NotificationMovements\Create\GetShipmentInfo.cs" />
     <Compile Include="NotificationMovements\GetSummaryAndTable.cs" />
     <Compile Include="NotificationAssessment\AddNotificationTransaction.cs" />
     <Compile Include="NotificationAssessment\ConsentNotificationApplication.cs" />
