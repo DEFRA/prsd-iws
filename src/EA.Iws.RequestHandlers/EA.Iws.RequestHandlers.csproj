@@ -423,6 +423,7 @@
     <Compile Include="NotificationAssessment\SetNewNumberOfShipmentsHandler.cs" />
     <Compile Include="NotificationAssessment\SetEntryPointHandler.cs" />
     <Compile Include="NotificationMovements\Create\GetInternalMovementSummaryHandler.cs" />
+    <Compile Include="NotificationMovements\Create\GetRemainingShipmentsHandler.cs" />
     <Compile Include="NotificationMovements\Create\HasExceededConsentedQuantityHandler.cs" />
     <Compile Include="Movement\Receive\DoesQuantityReceivedExceedToleranceHandler.cs" />
     <Compile Include="NotificationMovements\Create\IsProposedMovementDateValidHandler.cs" />

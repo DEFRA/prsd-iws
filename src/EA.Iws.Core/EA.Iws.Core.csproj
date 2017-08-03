@@ -175,6 +175,7 @@
     <Compile Include="Movement\ProposedUpdatedMovementDateResponse.cs" />
     <Compile Include="Movement\RejectedMovementDetails.cs" />
     <Compile Include="Movement\RejectedMovementListData.cs" />
+    <Compile Include="Movement\RemainingShipmentsData.cs" />
     <Compile Include="Movement\ShipmentDates.cs" />
     <Compile Include="Movement\ShipmentInfo.cs" />
     <Compile Include="Movement\SubmittedMovement.cs" />

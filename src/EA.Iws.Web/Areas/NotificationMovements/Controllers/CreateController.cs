@@ -92,7 +92,18 @@
                 ModelState.AddModelError("Quantity", CreateMovementsViewModelResources.HasExceededTotalQuantity);
             }
 
-            // todo: check total number of shipments not exceeded
+            var remainingShipmentsData = await mediator.SendAsync(new GetRemainingShipments(notificationId));
+
+            if (model.NumberToCreate > remainingShipmentsData.ShipmentsRemaining)
+            {
+                ModelState.AddModelError("NumberToCreate", 
+                    string.Format("You cannot create {0} shipments as there are only {1} remaining", model.NumberToCreate, remainingShipmentsData.ShipmentsRemaining));
+            }
+            else if (model.NumberToCreate > remainingShipmentsData.ActiveLoadsRemaining)
+            {
+                ModelState.AddModelError("NumberToCreate",
+                    string.Format("You cannot create {0} shipments as there are only {1} active loads remaining", model.NumberToCreate, remainingShipmentsData.ActiveLoadsRemaining));
+            }
 
             if (!ModelState.IsValid)
             {
