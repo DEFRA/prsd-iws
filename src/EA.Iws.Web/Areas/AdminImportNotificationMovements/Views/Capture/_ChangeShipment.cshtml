@@ -33,6 +33,10 @@
         </tbody>
     </table>
     <br />
+    <div>
+        @Html.ActionLink(Resource.ReturnToSummary, "Index", "Home")
+    </div>
+    <br />
     @using (Html.BeginForm("ChangeShipment", "Capture", FormMethod.Post))
     {
         @Html.AntiForgeryToken()
