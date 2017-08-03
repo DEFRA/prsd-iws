@@ -125,6 +125,15 @@ namespace EA.Iws.Web.Areas.AdminExportNotificationMovements.ViewModels.CaptureMo
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Shipment {0}.
+        /// </summary>
+        public static string NewShipmentNumber {
+            get {
+                return ResourceManager.GetString("NewShipmentNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Shipment number.
         /// </summary>
         public static string Number {

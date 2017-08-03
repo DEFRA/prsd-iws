@@ -29,9 +29,15 @@
         }
 
         [HttpGet]
-        public async Task<ActionResult> Create(Guid id)
+        public async Task<ActionResult> Create(Guid id, int? shipmentNumber = null)
         {
             var model = new CaptureViewModel();
+
+            if (shipmentNumber.HasValue)
+            {
+                model.ShipmentNumber = shipmentNumber;
+            }
+
             model.NotificationType = await mediator.SendAsync(new GetNotificationType(id));
             model.Recovery.NotificationType = model.NotificationType;
 
@@ -157,6 +163,37 @@
         public ActionResult Cancelled(Guid id)
         {
             return View(id);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> ChangeShipment(Guid id, int? shipmentNumber = null, int? newShipmentNumber = null)
+        {          
+            if (newShipmentNumber.HasValue)
+            {
+               var movementId = await mediator.SendAsync(new GetMovementIdIfExists(id, newShipmentNumber.Value));
+
+                if (movementId.HasValue)
+                {
+                    return RedirectToAction("Edit", new { movementId });
+                }
+                else
+                {
+                    return RedirectToAction("Create", new { id, shipmentNumber = newShipmentNumber.Value });
+                }
+            }
+            else
+            {
+                if (shipmentNumber.HasValue)
+                {
+                   var movementId = await mediator.SendAsync(new GetMovementIdIfExists(id, shipmentNumber.Value));
+                   if (movementId.HasValue)
+                    {
+                        return RedirectToAction("Edit", new { movementId = movementId.Value });
+                    }
+                }
+                return RedirectToAction("Create", new { id });
+            }
         }
 
         private async Task UpdateSummary(CaptureViewModel model, Guid id)

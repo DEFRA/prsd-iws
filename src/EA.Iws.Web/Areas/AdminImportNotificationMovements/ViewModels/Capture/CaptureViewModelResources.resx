@@ -138,6 +138,9 @@
   <data name="HasNoPrenotification" xml:space="preserve">
     <value>No prenotification received</value>
   </data>
+  <data name="NewShipmentNumber" xml:space="preserve">
+    <value>Shipment {0}</value>
+  </data>
   <data name="PrenotificationDate" xml:space="preserve">
     <value>Prenotification date</value>
   </data>

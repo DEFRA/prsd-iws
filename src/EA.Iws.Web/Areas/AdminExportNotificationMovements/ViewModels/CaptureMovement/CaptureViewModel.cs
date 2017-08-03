@@ -17,6 +17,10 @@
         [Range(1, int.MaxValue, ErrorMessage = null, ErrorMessageResourceName = "NumberIsInt", ErrorMessageResourceType = typeof(CaptureViewModelResources))]
         public int? ShipmentNumber { get; set; }
 
+        [Display(Name = "NewShipmentNumber", ResourceType = typeof(CaptureViewModelResources))]
+        [Range(1, int.MaxValue, ErrorMessage = null, ErrorMessageResourceName = "NumberIsInt", ErrorMessageResourceType = typeof(CaptureViewModelResources))]
+        public int? NewShipmentNumber { get; set; }
+
         public ReceiptViewModel Receipt { get; set; }
 
         public RecoveryViewModel Recovery { get; set; }
@@ -223,10 +227,10 @@
             NotificationNumber = summaryData.NotificationNumber;
             IntendedShipments = summaryData.TotalIntendedShipments;
             ActiveLoads = summaryData.ActiveLoadsPermitted;
-            AverageTonnage = summaryData.AverageTonnage + EnumHelper.GetShortName(summaryData.AverageDataUnit);
+            AverageTonnage = summaryData.AverageTonnage.ToString("G29") + " " + EnumHelper.GetShortName(summaryData.AverageDataUnit);
             UsedShipments = summaryData.TotalShipments;
-            QuantityRemainingTotal = summaryData.QuantityRemaining.ToString("G29") + EnumHelper.GetShortName(summaryData.DisplayUnit);
-            QuantityReceivedTotal = summaryData.QuantityReceived.ToString("G29") + EnumHelper.GetShortName(summaryData.DisplayUnit);
+            QuantityRemainingTotal = summaryData.QuantityRemaining.ToString("G29") + " " + EnumHelper.GetShortName(summaryData.DisplayUnit);
+            QuantityReceivedTotal = summaryData.QuantityReceived.ToString("G29") + " " + EnumHelper.GetShortName(summaryData.DisplayUnit);
         }
     }
 }

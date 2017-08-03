@@ -1,5 +1,4 @@
 ﻿@using Resource = EA.Iws.Web.Areas.AdminImportNotificationMovements.Views.Capture.CreateEditResources
-@using Resources = EA.Iws.Web.Areas.AdminImportNotificationMovements.Views.Home.IndexResources
 @model EA.Iws.Web.Areas.AdminImportNotificationMovements.ViewModels.Capture.CaptureViewModel
 
 @{
@@ -38,40 +37,9 @@
         <button class="button" type="submit">@Constants.ContinueButtonText</button>
     }
 
-    @Html.ActionLink(Resource.ReturnToSummary, "Index", "Home")
 </div>
-
-        <div class="column-one-third stickem">          
-                <table>
-                    <thead>
-                        <tr>
-                            <th colspan="2" class="heading-small">@Model.NotificationNumber</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>@Resources.SummaryTitleIntended</td>
-                            <td>@Model.IntendedShipments</td>
-                        </tr>
-                        <tr>
-                            <td>@Resources.NumberUsed</td>
-                            <td>@Model.UsedShipments</td>
-                        </tr>
-                        <tr>
-                            <td>@Resources.TotalQuantityReceived</td>
-                            <td>@Model.QuantityReceivedTotal</td>
-                        </tr>
-                        <tr>
-                            <td>@Resources.TotalQuantityRemaining</td>
-                            <td>@Model.QuantityRemainingTotal</td>
-                        </tr>
-                        <tr>
-                            <td>@Resource.AverageTonnage</td>
-                            <td>@Model.AverageTonnage</td>
-                        </tr>
-                    </tbody>
-                </table>           
-        </div>
+        @Html.Partial("_ChangeShipment")
+        
     </div>
 </div> 
 
@@ -80,7 +48,6 @@
     <script>
         $(function () {
             $("#ShipmentNumber").focus();
-            $('.container').stickem();
         });
     </script>
 }

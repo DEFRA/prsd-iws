@@ -18,73 +18,74 @@
     }
 }
 
-<div class="column-two-thirds">
-    <h1 class="heading-large">@Resource.MainHeading</h1>
-    @using (Html.BeginForm())
-    {
-        @Html.AntiForgeryToken()
-        @Html.Gds().ValidationSummary()
-        @Html.HiddenFor(m => m.NotificationType)
-        @Html.HiddenFor(m => m.ShipmentNumber)
-        @Html.HiddenFor(m => m.IsReceived)
-        @Html.HiddenFor(m => m.IsOperationCompleted)
-        @Html.HiddenFor(m => m.IsRejected)
+<div class="grid-row container">
+    <div class="stickem-row stickem-container">
+        <div class="column-two-thirds">
+            <h1 class="heading-large">@Resource.MainHeading</h1>
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+                @Html.Gds().ValidationSummary()
+                @Html.HiddenFor(m => m.NotificationType)
+                @Html.HiddenFor(m => m.ShipmentNumber)
+                @Html.HiddenFor(m => m.IsReceived)
+                @Html.HiddenFor(m => m.IsOperationCompleted)
+                @Html.HiddenFor(m => m.IsRejected)
 
-        <h1 class="data-item bold-xlarge">@string.Format(Resource.ShipmentNumber, Model.ShipmentNumber)</h1>
+                <h1 class="data-item bold-xlarge">@string.Format(Resource.ShipmentNumber, Model.ShipmentNumber)</h1>
 
-        @Html.Partial("_PrenotifyReadOnly")
+                @Html.Partial("_PrenotifyReadOnly")
 
-        <hr />
+                <hr />
 
-        if (Model.IsReceived || Model.IsRejected)
-        {
-            @Html.HiddenFor(m => m.Receipt.ReceivedDate.Date)
-            @Html.HiddenFor(m => m.Receipt.WasAccepted)
-            @Html.HiddenFor(m => m.Receipt.RejectionReason)
-            @Html.HiddenFor(m => m.Receipt.ActualQuantity)
-            @Html.HiddenFor(m => m.Receipt.Units)
-            @Html.Partial("_ReceiptReadOnly", Model.Receipt)
-        }
-        else
-        {
-            @Html.EditorFor(m => m.Receipt)
-        }
+                if (Model.IsReceived || Model.IsRejected)
+                {
+                    @Html.HiddenFor(m => m.Receipt.ReceivedDate.Date)
+                    @Html.HiddenFor(m => m.Receipt.WasAccepted)
+                    @Html.HiddenFor(m => m.Receipt.RejectionReason)
+                    @Html.HiddenFor(m => m.Receipt.ActualQuantity)
+                    @Html.HiddenFor(m => m.Receipt.Units)
+                    @Html.Partial("_ReceiptReadOnly", Model.Receipt)
+                }
+                else
+                {
+                    @Html.EditorFor(m => m.Receipt)
+                }
 
-        <hr />
+                <hr />
 
-        if (Model.IsOperationCompleted)
-        {
-            @Html.HiddenFor(m => m.Recovery.RecoveryDate.Date)
-            @Html.Partial("_OperationReadOnly", Model.Recovery)
+                if (Model.IsOperationCompleted)
+                {
+                    @Html.HiddenFor(m => m.Recovery.RecoveryDate.Date)
+                    @Html.Partial("_OperationReadOnly", Model.Recovery)
 
-            <hr />
-        }
-        else if (!Model.IsRejected)
-        {
-            @Html.EditorFor(m => m.Recovery)
+                    <hr />
+                }
+                else if (!Model.IsRejected)
+                {
+                    @Html.EditorFor(m => m.Recovery)
 
-            <hr />
-        }
+                    <hr />
+                }
 
-        if (Model.HasComments)
-        {
-            @Html.Partial("_CommentsReadOnly")
-        }
-        else
-        {
-            @Html.Partial("_Comments")
-        }
+                if (Model.HasComments)
+                {
+                    @Html.Partial("_CommentsReadOnly")
+                }
+                else
+                {
+                    @Html.Partial("_Comments")
+                }
 
-        <button class="button" type="submit">@Constants.ContinueButtonText</button>
-    }
+                <button class="button" type="submit">@Constants.ContinueButtonText</button>
+            }
 
-    @Html.ActionLink(Resource.ReturnToSummary, "Index", "Home")
+        </div>
+
+        @Html.Partial("_ChangeShipment")
+
+    </div>
 </div>
-
-@section menu {
-    @Html.Action("ImportNavigation", "Menu", new { area = "Admin", section = ImportNavigationSection.Shipments })
-}
-
 @section scripts {
     @Html.Partial("_Scripts")
     <script>
@@ -92,11 +93,11 @@
             @if (!Model.IsReceived)
             {
                 @:$("#Receipt_ReceivedDate_Date").focus();
-            }
+                        }
             else if (!Model.IsOperationCompleted)
             {
                 @:$("#Recovery_RecoveryDate_Date").focus();
-            }
+                        }
         });
     </script>
 }
