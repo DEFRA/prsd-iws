@@ -1,11 +1,14 @@
 ﻿namespace EA.Iws.Web.Areas.NotificationMovements.Controllers
 {
     using System;
+    using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Core.Movement;
+    using Core.PackagingType;
     using Core.Rules;
+    using Core.Shared;
     using Infrastructure.Authorization;
     using Prsd.Core.Mediator;
     using Requests.Notification;
@@ -49,7 +52,8 @@
                 return View(model);
             }
 
-            var proposedMovementDate = await mediator.SendAsync(new IsProposedMovementDateValid(notificationId, model.AsDateTime().Value));
+            var proposedMovementDate =
+                await mediator.SendAsync(new IsProposedMovementDateValid(notificationId, model.AsDateTime().Value));
 
             if (proposedMovementDate.IsOutOfRange)
             {
@@ -63,16 +67,25 @@
                     "The actual date of shipment cannot be outside of the consent validity period. Please enter a different date.");
             }
 
-            var workingDaysUntilShipment = await mediator.SendAsync(new GetWorkingDaysUntil(notificationId, model.AsDateTime().GetValueOrDefault()));
+            var workingDaysUntilShipment =
+                await
+                    mediator.SendAsync(new GetWorkingDaysUntil(notificationId, model.AsDateTime().GetValueOrDefault()));
 
             if (workingDaysUntilShipment < 4)
             {
-                // todo: add model to tempdata?
+                var tempMovement = new TempMovement(model.NumberToCreate.Value,
+                    model.AsDateTime().Value,
+                    Convert.ToDecimal(model.Quantity),
+                    model.Units.Value,
+                    model.SelectedValues);
+
+                TempData["TempMovement"] = tempMovement;
+
                 return RedirectToAction("ThreeWorkingDaysWarning", "Create");
             }
 
-            var hasExceededTotalQuantity =
-                await mediator.SendAsync(new HasExceededConsentedQuantity(notificationId, Convert.ToDecimal(model.Quantity) * model.NumberToCreate.Value, model.Units.Value));
+            var hasExceededTotalQuantity = await mediator.SendAsync(new HasExceededConsentedQuantity(notificationId,
+                Convert.ToDecimal(model.Quantity) * model.NumberToCreate.Value, model.Units.Value));
 
             if (hasExceededTotalQuantity)
             {
@@ -87,9 +100,9 @@
             }
 
             await mediator.SendAsync(new CreateMovements(
-                notificationId, 
+                notificationId,
                 model.NumberToCreate.Value,
-                model.AsDateTime().Value, 
+                model.AsDateTime().Value,
                 Convert.ToDecimal(model.Quantity),
                 model.Units.Value,
                 model.SelectedValues));
@@ -103,39 +116,39 @@
             {
                 return RedirectToAction("TotalMovementsReached");
             }
-            else if (ruleSummary.RuleResults.Any(r => r.Rule == MovementRules.TotalIntendedQuantityReached && r.MessageLevel == MessageLevel.Error))
+            if (ruleSummary.RuleResults.Any(r => r.Rule == MovementRules.TotalIntendedQuantityReached && r.MessageLevel == MessageLevel.Error))
             {
                 return RedirectToAction("TotalIntendedQuantityReached");
             }
-            else if (ruleSummary.RuleResults.Any(r => r.Rule == MovementRules.TotalIntendedQuantityExceeded && r.MessageLevel == MessageLevel.Error))
+            if (ruleSummary.RuleResults.Any(r => r.Rule == MovementRules.TotalIntendedQuantityExceeded && r.MessageLevel == MessageLevel.Error))
             {
                 return RedirectToAction("TotalIntendedQuantityExceeded");
             }
-            else if (ruleSummary.RuleResults.Any(r => r.Rule == MovementRules.HasApprovedFinancialGuarantee && r.MessageLevel == MessageLevel.Error))
+            if (ruleSummary.RuleResults.Any(r => r.Rule == MovementRules.HasApprovedFinancialGuarantee && r.MessageLevel == MessageLevel.Error))
             {
                 return RedirectToAction("NoApprovedFinancialGuarantee");
             }
-            else if (ruleSummary.RuleResults.Any(r => r.Rule == MovementRules.ActiveLoadsReached && r.MessageLevel == MessageLevel.Error))
+            if (ruleSummary.RuleResults.Any(r => r.Rule == MovementRules.ActiveLoadsReached && r.MessageLevel == MessageLevel.Error))
             {
                 return RedirectToAction("TotalActiveLoadsReached");
             }
-            else if (ruleSummary.RuleResults.Any(r => r.Rule == MovementRules.ConsentPeriodExpired && r.MessageLevel == MessageLevel.Error))
+            if (ruleSummary.RuleResults.Any(r => r.Rule == MovementRules.ConsentPeriodExpired && r.MessageLevel == MessageLevel.Error))
             {
                 return RedirectToAction("ConsentPeriodExpired");
             }
-            else if (ruleSummary.RuleResults.Any(r => r.Rule == MovementRules.ConsentExpiresInFourWorkingDays && r.MessageLevel == MessageLevel.Error))
+            if (ruleSummary.RuleResults.Any(r => r.Rule == MovementRules.ConsentExpiresInFourWorkingDays && r.MessageLevel == MessageLevel.Error))
             {
                 return RedirectToAction("ConsentExpiresInFourWorkingDays");
             }
-            else if (ruleSummary.RuleResults.Any(r => r.Rule == MovementRules.ConsentExpiresInThreeOrLessWorkingDays && r.MessageLevel == MessageLevel.Error))
+            if (ruleSummary.RuleResults.Any(r => r.Rule == MovementRules.ConsentExpiresInThreeOrLessWorkingDays && r.MessageLevel == MessageLevel.Error))
             {
                 return RedirectToAction("ConsentExpiresInThreeOrLessWorkingDays");
             }
-            else if (ruleSummary.RuleResults.Any(r => r.Rule == MovementRules.ConsentWithdrawn && r.MessageLevel == MessageLevel.Error))
+            if (ruleSummary.RuleResults.Any(r => r.Rule == MovementRules.ConsentWithdrawn && r.MessageLevel == MessageLevel.Error))
             {
                 return RedirectToAction("ConsentWithdrawn");
             }
-            else if (ruleSummary.RuleResults.Any(r => r.Rule == MovementRules.FileClosed && r.MessageLevel == MessageLevel.Error))
+            if (ruleSummary.RuleResults.Any(r => r.Rule == MovementRules.FileClosed && r.MessageLevel == MessageLevel.Error))
             {
                 return RedirectToAction("FileClosed");
             }
@@ -146,7 +159,6 @@
         [HttpGet]
         public ActionResult ThreeWorkingDaysWarning(Guid notificationId)
         {
-            // todo: read model from tempdata?
             var model = new ThreeWorkingDaysWarningViewModel();
 
             return View("ThreeWorkingDays", model);
@@ -154,7 +166,7 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult ThreeWorkingDaysWarning(Guid notificationId, ThreeWorkingDaysWarningViewModel model)
+        public async Task<ActionResult> ThreeWorkingDaysWarning(Guid notificationId, ThreeWorkingDaysWarningViewModel model)
         {
             if (!ModelState.IsValid)
             {
@@ -166,12 +178,28 @@
                 return RedirectToAction("Index");
             }
 
-            // todo: save movements, redirect to 'what to do next'
-            return RedirectToAction("Index");
+            if (TempData["TempMovement"] == null)
+            {
+                return RedirectToAction("Index");
+            }
+
+            var tempMovement = (TempMovement)TempData["TempMovement"];
+
+            await mediator.SendAsync(new CreateMovements(
+                notificationId,
+                tempMovement.NumberToCreate,
+                tempMovement.ShipmentDate,
+                tempMovement.Quantity,
+                tempMovement.ShipmentQuantityUnits,
+                tempMovement.PackagingTypes));
+
+            TempData["TempMovement"] = null;
+
+            return RedirectToAction("Download");
         }
 
         [HttpGet]
-        public ActionResult Download(Guid notificationId, Guid id)
+        public ActionResult Download(Guid notificationId)
         {
             return View();
         }
@@ -181,13 +209,13 @@
         {
             return View();
         }
-        
+
         [HttpGet]
         public ActionResult TotalActiveLoadsReached(Guid notificationId)
         {
             return View();
         }
-        
+
         [HttpGet]
         public ActionResult TotalIntendedQuantityReached(Guid notificationId)
         {
@@ -237,6 +265,30 @@
                 await mediator.SendAsync(new GetUnitedKingdomCompetentAuthorityByNotificationId(notificationId));
 
             return View(competentAuthority.AsUKCompetantAuthority());
+        }
+
+        [Serializable]
+        private class TempMovement
+        {
+            public TempMovement(int numberToCreate, DateTime shipmentDate, decimal quantity,
+                ShipmentQuantityUnits shipmentQuantityUnits, IList<PackagingType> packagingTypes)
+            {
+                NumberToCreate = numberToCreate;
+                ShipmentDate = shipmentDate;
+                Quantity = quantity;
+                ShipmentQuantityUnits = shipmentQuantityUnits;
+                PackagingTypes = packagingTypes;
+            }
+
+            public int NumberToCreate { get; set; }
+
+            public DateTime ShipmentDate { get; set; }
+
+            public decimal Quantity { get; set; }
+
+            public ShipmentQuantityUnits ShipmentQuantityUnits { get; set; }
+
+            public IList<PackagingType> PackagingTypes { get; set; }
         }
     }
 }
