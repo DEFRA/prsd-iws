@@ -125,6 +125,15 @@ namespace EA.Iws.Web.Areas.AdminImportNotificationMovements.ViewModels.Capture {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Shipment {0}.
+        /// </summary>
+        public static string NewShipmentNumber {
+            get {
+                return ResourceManager.GetString("NewShipmentNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Prenotification date.
         /// </summary>
         public static string PrenotificationDate {
