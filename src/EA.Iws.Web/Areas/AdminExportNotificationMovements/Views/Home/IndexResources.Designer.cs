@@ -340,6 +340,15 @@ namespace EA.Iws.Web.Areas.AdminExportNotificationMovements.Views.Home {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Total number of shipments:.
+        /// </summary>
+        public static string TotalShipments {
+            get {
+                return ResourceManager.GetString("TotalShipments", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Update.
         /// </summary>
         public static string Update {
