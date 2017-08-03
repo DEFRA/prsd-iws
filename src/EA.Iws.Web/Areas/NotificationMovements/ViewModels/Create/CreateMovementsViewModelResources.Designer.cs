@@ -22,14 +22,14 @@ namespace EA.Iws.Web.Areas.NotificationMovements.ViewModels.Create {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class CreateViewModelResources {
+    public class CreateMovementsViewModelResources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal CreateViewModelResources() {
+        internal CreateMovementsViewModelResources() {
         }
         
         /// <summary>
@@ -39,8 +39,8 @@ namespace EA.Iws.Web.Areas.NotificationMovements.ViewModels.Create {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EA.Iws.Web.Areas.NotificationMovements.ViewModels.Create.CreateViewModelResources" +
-                            "", typeof(CreateViewModelResources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EA.Iws.Web.Areas.NotificationMovements.ViewModels.Create.CreateMovementsViewModel" +
+                            "Resources", typeof(CreateMovementsViewModelResources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -62,7 +62,61 @@ namespace EA.Iws.Web.Areas.NotificationMovements.ViewModels.Create {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Enter a number.
+        ///   Looks up a localized string similar to Actual quantity.
+        /// </summary>
+        public static string ActualQuantity {
+            get {
+                return ResourceManager.GetString("ActualQuantity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You can&apos;t enter any symbols apart from a decimal full stop.
+        /// </summary>
+        public static string ActualQuantityIsValid {
+            get {
+                return ResourceManager.GetString("ActualQuantityIsValid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The actual quantity must be a positive value.
+        /// </summary>
+        public static string ActualQuantityPositive {
+            get {
+                return ResourceManager.GetString("ActualQuantityPositive", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please enter a value with less than {0} decimal places.
+        /// </summary>
+        public static string ActualQuantityPrecision {
+            get {
+                return ResourceManager.GetString("ActualQuantityPrecision", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please enter a number.
+        /// </summary>
+        public static string ActualQuantityRequired {
+            get {
+                return ResourceManager.GetString("ActualQuantityRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please enter a value that doesn&apos;t exceed the total consented quantity.
+        /// </summary>
+        public static string HasExceededTotalQuantity {
+            get {
+                return ResourceManager.GetString("HasExceededTotalQuantity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Number of shipments.
         /// </summary>
         public static string NumberToCreate {
             get {

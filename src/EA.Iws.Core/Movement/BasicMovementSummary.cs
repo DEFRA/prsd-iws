@@ -14,6 +14,8 @@
 
         public int TotalShipments { get; set; }
 
+        public int ShipmentsUsed { get; set; }
+
         public int ActiveLoadsPermitted { get; set; }
 
         public int CurrentActiveLoads { get; set; }

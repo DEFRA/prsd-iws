@@ -6,7 +6,6 @@
     using Infrastructure.Authorization;
     using Prsd.Core.Mediator;
     using Requests.NotificationMovements;
-    using ViewModels.Home;
 
     [AuthorizeActivity(typeof(GetBasicMovementSummary))]
     public class HomeController : Controller
@@ -24,20 +23,6 @@
             var result = Task.Run(() => mediator.SendAsync(new GetBasicMovementSummary(notificationId))).Result;
 
             return PartialView("_Summary", result);
-        }
-
-        [AcceptVerbs(HttpVerbs.Get | HttpVerbs.Post)]
-        public ActionResult CreateSummary(Guid notificationId, int movementNumber)
-        {
-            var result = Task.Run(() => mediator.SendAsync(new GetBasicMovementSummary(notificationId))).Result;
-
-            var model = new CreateSummaryViewModel
-            {
-                SummaryData = result,
-                NewShipmentNumber = movementNumber
-            };
-
-            return PartialView("_CreateSummary", model);
         }
     }
 }

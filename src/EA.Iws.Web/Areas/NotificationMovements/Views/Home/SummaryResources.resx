@@ -138,6 +138,9 @@
   <data name="ShipmentNumbersRangeFormat" xml:space="preserve">
     <value>{0} to {1}</value>
   </data>
+  <data name="ShipmentsUsed" xml:space="preserve">
+    <value>Number of shipments used:</value>
+  </data>
   <data name="TotalShipments" xml:space="preserve">
     <value>Total number of shipments:</value>
   </data>

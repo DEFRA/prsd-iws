@@ -135,4 +135,7 @@
   <data name="HasExceededTotalQuantity" xml:space="preserve">
     <value>Please enter a value that doesn't exceed the total consented quantity</value>
   </data>
+  <data name="NumberToCreate" xml:space="preserve">
+    <value>Number of shipments</value>
+  </data>
 </root>

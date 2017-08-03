@@ -124,6 +124,15 @@ namespace EA.Iws.Web.Areas.NotificationMovements.Views.Home {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Number of shipments used:.
+        /// </summary>
+        public static string ShipmentsUsed {
+            get {
+                return ResourceManager.GetString("ShipmentsUsed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Total number of shipments:.
         /// </summary>
         public static string TotalShipments {
