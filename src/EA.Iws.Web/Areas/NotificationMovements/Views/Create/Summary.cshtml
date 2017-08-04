@@ -1,4 +1,4 @@
-﻿@model IEnumerable<EA.Iws.Core.Movement.MovementInfo>
+﻿@model EA.Iws.Web.Areas.NotificationMovements.ViewModels.Summary.SummaryViewModel
 @{
     ViewBag.Title = "Download your prenotification";
     Layout = "~/Areas/NotificationMovements/Views/Shared/_CreateSummaryLayout.cshtml";
@@ -8,22 +8,21 @@
     <h1 class="heading-large">What to do next with these prenotifications</h1>
 </header>
 
+<p>You have created @Model.NumberOfShipments shipments, totalling @Model.TotalQuantity.</p>
+
 <div class="form-group">
     <table>
         <tbody>
         <tr>
-            <th>Shipment number</th>
+            <th>Shipment number(s)</th>
             <th>Quantity</th>
-            <th>Type</th>
+            <th>Packaging type(s)</th>
         </tr>
-            @foreach (var movement in Model)
-            {
-                <tr>
-                    <td>@movement.ShipmentNumber</td>
-                    <td>@Html.Raw(movement.ActualQuantity.ToString("G29"))&nbsp;@Html.Raw(EA.Prsd.Core.Helpers.EnumHelper.GetShortName(movement.Unit))</td>
-                    <td>@string.Join(", ", movement.PackagingTypes.Select(EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName))</td>
-                </tr>
-            }
+            <tr>
+                <td>@Model.ShipmentNumbers</td>
+                <td>@Model.Quantity</td>
+                <td>@Model.PackagingTypes</td>
+            </tr>
         </tbody>
     </table>
 </div>
@@ -34,7 +33,7 @@
     <ol class="list-number">
         <li>
             download the
-            @Html.ActionLink("IWS movement", "GenerateMovementDocument", "Home", new { id = Model.First(), area = "ExportMovement" }, new { })
+            @Html.ActionLink("IWS movement", "GenerateMovementDocument", "Home", new { id = Model.MovementIds.First(), area = "ExportMovement" }, new { })
             documents
         </li>
         <li>print the documents</li>

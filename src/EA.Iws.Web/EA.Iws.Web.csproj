@@ -2258,6 +2258,7 @@
       <DependentUpon>ThreeWorkingDaysWarningViewModelResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Areas\NotificationMovements\ViewModels\Download\DownloadMovementViewModel.cs" />
+    <Compile Include="Areas\NotificationMovements\ViewModels\Summary\SummaryViewModel.cs" />
     <Compile Include="Areas\NotificationMovements\Views\Create\ConsentExpiresInFourWorkingDaysResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

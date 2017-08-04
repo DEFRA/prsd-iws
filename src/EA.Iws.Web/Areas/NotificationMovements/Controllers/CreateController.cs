@@ -17,6 +17,7 @@
     using Requests.NotificationMovements;
     using Requests.NotificationMovements.Create;
     using ViewModels.Create;
+    using ViewModels.Summary;
 
     [AuthorizeActivity(typeof(CreateMovements))]
     public class CreateController : Controller
@@ -215,7 +216,8 @@
         public async Task<ActionResult> Summary(Guid notificationId, Guid[] newMovementIds)
         {
             var movements = await mediator.SendAsync(new GetMovementsByIds(notificationId, newMovementIds));
-            return View(movements);
+            var model = new SummaryViewModel(movements);
+            return View(model);
         }
 
         [HttpGet]
