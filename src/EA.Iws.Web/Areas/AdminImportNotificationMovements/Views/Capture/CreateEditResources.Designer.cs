@@ -62,6 +62,15 @@ namespace EA.Iws.Web.Areas.AdminImportNotificationMovements.Views.Capture {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Go to shipment.
+        /// </summary>
+        public static string ChangeShipmentPlaceholder {
+            get {
+                return ResourceManager.GetString("ChangeShipmentPlaceholder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Your changes have been saved.
         /// </summary>
         public static string ChangesSaved {

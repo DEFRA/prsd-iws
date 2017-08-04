@@ -123,6 +123,9 @@
   <data name="AverageTonnage" xml:space="preserve">
     <value>Average tonnage per shipment:</value>
   </data>
+  <data name="ChangeShipmentPlaceholder" xml:space="preserve">
+    <value>Go to shipment</value>
+  </data>
   <data name="ChangesSaved" xml:space="preserve">
     <value>Your changes have been saved</value>
   </data>
