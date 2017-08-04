@@ -68,23 +68,6 @@
                     "The actual date of shipment cannot be outside of the consent validity period. Please enter a different date.");
             }
 
-            var workingDaysUntilShipment =
-                await
-                    mediator.SendAsync(new GetWorkingDaysUntil(notificationId, model.ShipmentDate.GetValueOrDefault()));
-
-            if (workingDaysUntilShipment < 4)
-            {
-                var tempMovement = new TempMovement(model.NumberToCreate.Value,
-                    model.ShipmentDate.Value,
-                    Convert.ToDecimal(model.Quantity),
-                    model.Units.Value,
-                    model.SelectedPackagingTypes);
-
-                TempData["TempMovement"] = tempMovement;
-
-                return RedirectToAction("ThreeWorkingDaysWarning", "Create");
-            }
-
             var hasExceededTotalQuantity = await mediator.SendAsync(new HasExceededConsentedQuantity(notificationId,
                 Convert.ToDecimal(model.Quantity) * model.NumberToCreate.Value, model.Units.Value));
 
@@ -109,6 +92,23 @@
             if (!ModelState.IsValid)
             {
                 return View(model);
+            }
+
+            var workingDaysUntilShipment =
+                await
+                    mediator.SendAsync(new GetWorkingDaysUntil(notificationId, model.ShipmentDate.GetValueOrDefault()));
+
+            if (workingDaysUntilShipment < 4)
+            {
+                var tempMovement = new TempMovement(model.NumberToCreate.Value,
+                    model.ShipmentDate.Value,
+                    Convert.ToDecimal(model.Quantity),
+                    model.Units.Value,
+                    model.SelectedPackagingTypes);
+
+                TempData["TempMovement"] = tempMovement;
+
+                return RedirectToAction("ThreeWorkingDaysWarning", "Create");
             }
 
             var newMovementIds = await mediator.SendAsync(new CreateMovements(
