@@ -971,7 +971,7 @@
     <Content Include="Areas\AdminImportNotificationMovements\Views\Capture\_ReceiptReadOnly.cshtml" />
     <Content Include="Areas\AdminImportNotificationMovements\Views\Capture\_CommentsReadOnly.cshtml" />
     <Content Include="Areas\AdminExportNotificationMovements\Views\CaptureMovement\_CommentsReadOnly.cshtml" />
-    <None Include="Areas\NotificationMovements\Views\Create\Index.cshtml" />
+    <Content Include="Areas\NotificationMovements\Views\Create\Index.cshtml" />
     <Content Include="Areas\AdminExportNotificationMovements\Views\CaptureMovement\_ChangeShipment.cshtml" />
     <Content Include="Areas\AdminImportNotificationMovements\Views\Capture\_ChangeShipment.cshtml" />
     <None Include="Scripts\jquery-2.1.3.intellisense.js" />
