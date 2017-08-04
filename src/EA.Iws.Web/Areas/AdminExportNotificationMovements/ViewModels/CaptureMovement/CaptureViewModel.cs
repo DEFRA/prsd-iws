@@ -78,6 +78,12 @@
 
         public string AverageTonnage { get; set; }
 
+        public bool ShowShipmentDatesOverride { get; set; }
+
+        public Guid NotificationId { get; set; }
+
+        public Guid MovementId { get; set; }
+
         public CaptureViewModel()
         {
             PrenotificationDate = new MaskedDateInputViewModel();

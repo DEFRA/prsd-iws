@@ -978,6 +978,9 @@
     <Content Include="Areas\AdminExportNotificationMovements\Views\CaptureMovement\_CommentsReadOnly.cshtml" />
     <Content Include="Areas\AdminExportNotificationMovements\Views\CaptureMovement\_ChangeShipment.cshtml" />
     <Content Include="Areas\AdminImportNotificationMovements\Views\Capture\_ChangeShipment.cshtml" />
+    <Content Include="Areas\AdminExportNotificationMovements\Views\MovementOverride\Index.cshtml" />
+    <Content Include="Areas\AdminExportNotificationMovements\Views\MovementOverride\_ShipmentComments.cshtml" />
+    <Content Include="Areas\AdminExportNotificationMovements\Views\MovementOverride\_ChangeShipment.cshtml" />
     <None Include="Scripts\jquery-2.1.3.intellisense.js" />
     <Content Include="Scripts\govuk\govuk-template.js" />
     <Content Include="Scripts\govuk\ie.js" />
@@ -1287,6 +1290,7 @@
     </Compile>
     <Compile Include="Areas\AdminExportNotificationMovements\Controllers\DocumentsController.cs" />
     <Compile Include="Areas\AdminExportNotificationMovements\Controllers\DownloadController.cs" />
+    <Compile Include="Areas\AdminExportNotificationMovements\Controllers\MovementOverrideController.cs" />
     <Compile Include="Areas\AdminExportNotificationMovements\Controllers\RejectedMovementController.cs" />
     <Compile Include="Areas\AdminExportNotificationMovements\ViewModels\CaptureMovement\ReceiptViewModel.cs" />
     <Compile Include="Areas\AdminExportNotificationMovements\ViewModels\CaptureMovement\ReceiptViewModelResources.Designer.cs">
@@ -1309,6 +1313,12 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Areas\AdminExportNotificationMovements\ViewModels\Download\DownloadMovementViewModel.cs" />
+    <Compile Include="Areas\AdminExportNotificationMovements\ViewModels\MovementOverride\IndexViewModel.cs" />
+    <Compile Include="Areas\AdminExportNotificationMovements\ViewModels\MovementOverride\IndexViewModelResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IndexViewModelResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Areas\AdminExportNotificationMovements\ViewModels\RejectedMovement\DetailsViewModel.cs" />
     <Compile Include="Areas\AdminExportNotificationMovements\ViewModels\RejectedMovement\ListViewModel.cs" />
     <Compile Include="Areas\AdminExportNotificationMovements\Views\CaptureMovement\CancelledResources.Designer.cs">
@@ -1337,6 +1347,11 @@
       <DependentUpon>DocumentsResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Areas\AdminExportNotificationMovements\Views\Home\IndexResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IndexResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\AdminExportNotificationMovements\Views\MovementOverride\IndexResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>IndexResources.resx</DependentUpon>
@@ -3421,6 +3436,10 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>IndexViewModelResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Areas\AdminExportNotificationMovements\ViewModels\MovementOverride\IndexViewModelResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>IndexViewModelResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Areas\AdminExportNotificationMovements\Views\CaptureMovement\CancelledResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>CancelledResources.Designer.cs</LastGenOutput>
@@ -3442,6 +3461,10 @@
       <LastGenOutput>DocumentsResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\AdminExportNotificationMovements\Views\Home\IndexResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\AdminExportNotificationMovements\Views\MovementOverride\IndexResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>

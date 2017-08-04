@@ -1,5 +1,6 @@
 ﻿namespace EA.Iws.Web.Areas.AdminExportNotificationMovements.Controllers
 {
+    using Core.Authorization.Permissions;
     using Core.Movement;
     using Core.Shared;
     using Infrastructure.Authorization;
@@ -21,11 +22,13 @@
     [AuthorizeActivity(typeof(CreateMovementInternal))]
     public class CaptureMovementController : Controller
     {
+        private readonly AuthorizationService authorizationService;
         private readonly IMediator mediator;
 
-        public CaptureMovementController(IMediator mediator)
+        public CaptureMovementController(IMediator mediator, AuthorizationService authorizationService)
         {
             this.mediator = mediator;
+            this.authorizationService = authorizationService;
         }
 
         [HttpGet]
@@ -101,6 +104,9 @@
 
             var model = new CaptureViewModel(result);
             await UpdateSummary(model, id);
+            model.ShowShipmentDatesOverride = CanShowEditLink();
+            model.NotificationId = id;
+            model.MovementId = movementId;
             return View(model);
         }
 
@@ -200,6 +206,16 @@
         {
             var summary = await mediator.SendAsync(new GetInternalMovementSummary(id));
             model.SetSummaryData(summary);
+        }
+
+        private bool CanShowEditLink()
+        {
+            var showKeyDatesOverride = Task.Run(() =>
+             authorizationService.AuthorizeActivity(
+                 UserAdministrationPermissions.CanOverrideShipmentData))
+             .Result;
+
+            return showKeyDatesOverride;
         }
     }
 }

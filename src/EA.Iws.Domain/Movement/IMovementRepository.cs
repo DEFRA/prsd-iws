@@ -32,5 +32,7 @@
         Task<bool> DeleteById(Guid movementId);
 
         Task<IEnumerable<Movement>> GetRejectedMovements(Guid notificationId);
+
+        Task SetMovementReceiptAndRecoveryData(MovementReceiptAndRecoveryData data, Guid createdBy);
     }
 }
