@@ -1,9 +1,13 @@
 ﻿namespace EA.Iws.DocumentGeneration.DocumentGenerator
 {
     using System;
+    using System.Collections.Generic;
+    using System.IO;
     using System.Linq;
     using System.Threading.Tasks;
+    using System.Xml.Linq;
     using DocumentFormat.OpenXml.Packaging;
+    using DocumentFormat.OpenXml.Wordprocessing;
     using Domain;
     using Domain.Movement;
     using Domain.NotificationApplication;
@@ -49,6 +53,47 @@
 
                 return memoryStream.ToArray();
             }
+        }
+
+        public async Task<byte[]> GenerateMultiple(Guid[] movementIds)
+        {
+            var docs = new List<byte[]>();
+            foreach (var id in movementIds)
+            {
+                var doc = await Generate(id);
+                docs.Add(doc);
+            }
+            return CombineDocuments(docs);
+        }
+
+        // https://stackoverflow.com/a/2463729
+        private static byte[] CombineDocuments(IList<byte[]> documents)
+        {
+            byte[] ret;
+            using (var mainStream = new MemoryStream())
+            {
+                mainStream.Write(documents[0], 0, documents[0].Length);
+                mainStream.Position = 0;
+
+                using (var mainDocument = WordprocessingDocument.Open(mainStream, true))
+                {
+                    var newBody = XElement.Parse(mainDocument.MainDocumentPart.Document.Body.OuterXml);
+
+                    for (int pointer = 1; pointer < documents.Count; pointer++)
+                    {
+                        newBody.Add(XElement.Parse(new Paragraph(new Run(new Break { Type = BreakValues.Page })).OuterXml));
+                        var tempDocument = WordprocessingDocument.Open(new MemoryStream(documents[pointer]), true);
+                        var tempBody = XElement.Parse(tempDocument.MainDocumentPart.Document.Body.OuterXml);
+
+                        newBody.Add(tempBody);
+                        mainDocument.MainDocumentPart.Document.Body = new Body(newBody.ToString());
+                        mainDocument.MainDocumentPart.Document.Save();
+                        mainDocument.Package.Flush();
+                    }
+                }
+                ret = mainStream.ToArray();
+            }
+            return (ret);
         }
     }
 }

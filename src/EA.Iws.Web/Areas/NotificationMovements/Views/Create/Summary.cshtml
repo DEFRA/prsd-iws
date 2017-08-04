@@ -33,7 +33,7 @@
     <ol class="list-number">
         <li>
             download the
-            @Html.ActionLink("IWS movement", "GenerateMovementDocument", "Home", new { id = Model.MovementIds.First(), area = "ExportMovement" }, new { })
+            @Html.ActionLink("IWS movement", "GenerateDocuments", "Download", Model.MovementIds.ToRouteValueDictionary("movementIds"), null)
             documents
         </li>
         <li>print the documents</li>
