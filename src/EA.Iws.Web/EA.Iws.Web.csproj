@@ -777,7 +777,7 @@
     <Content Include="Areas\ImportNotification\Views\Home\_Producer.cshtml" />
     <Content Include="Areas\ImportNotification\Views\Home\_Facility.cshtml" />
     <Content Include="Areas\ImportNotification\Views\Home\_Importer.cshtml" />
-    <Content Include="Areas\NotificationMovements\Views\Create\Download.cshtml" />
+    <Content Include="Areas\NotificationMovements\Views\Create\Summary.cshtml" />
     <Content Include="Areas\ImportNotification\Views\Preconsented\Index.cshtml" />
     <Content Include="Areas\ImportNotification\Views\Home\_IntendedShipment.cshtml" />
     <Content Include="Areas\ImportNotification\Views\Home\_StateOfExport.cshtml" />

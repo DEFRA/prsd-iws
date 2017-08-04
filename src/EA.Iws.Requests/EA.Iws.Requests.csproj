@@ -203,6 +203,7 @@
     <Compile Include="Movement\GetMovementFiles.cs" />
     <Compile Include="Movement\GetMovementIdByNumber.cs" />
     <Compile Include="Movement\Complete\RecordOperationCompleteInternal.cs" />
+    <Compile Include="Movement\GetMovementsByIds.cs" />
     <Compile Include="Movement\GetNewMovementIdsByNotificationId.cs" />
     <Compile Include="Movement\GetNotificationNumberByMovementId.cs" />
     <Compile Include="Movement\SetMovementComments.cs" />

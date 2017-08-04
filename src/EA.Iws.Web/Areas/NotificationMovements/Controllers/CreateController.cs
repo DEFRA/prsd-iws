@@ -12,6 +12,7 @@
     using Infrastructure;
     using Infrastructure.Authorization;
     using Prsd.Core.Mediator;
+    using Requests.Movement;
     using Requests.Notification;
     using Requests.NotificationMovements;
     using Requests.NotificationMovements.Create;
@@ -119,7 +120,7 @@
                 model.Units.Value,
                 model.SelectedPackagingTypes));
 
-            return RedirectToAction("Download", newMovementIds.ToRouteValueDictionary("newMovementIds"));
+            return RedirectToAction("Summary", newMovementIds.ToRouteValueDictionary("newMovementIds"));
         }
 
         private ActionResult GetRuleErrorView(MovementRulesSummary ruleSummary)
@@ -207,13 +208,14 @@
 
             TempData["TempMovement"] = null;
 
-            return RedirectToAction("Download", newMovementIds.ToRouteValueDictionary("newMovementIds"));
+            return RedirectToAction("Summary", newMovementIds.ToRouteValueDictionary("newMovementIds"));
         }
 
         [HttpGet]
-        public ActionResult Download(Guid notificationId, Guid[] newMovementIds)
+        public async Task<ActionResult> Summary(Guid notificationId, Guid[] newMovementIds)
         {
-            return View(newMovementIds);
+            var movements = await mediator.SendAsync(new GetMovementsByIds(notificationId, newMovementIds));
+            return View(movements);
         }
 
         [HttpGet]
