@@ -3,15 +3,15 @@
     using System;
     using Core.Authorization;
     using Core.Authorization.Permissions;
-    using Core.PackagingType;
+    using Core.Movement;
     using Prsd.Core.Mediator;
 
     [RequestAuthorization(ExportMovementPermissions.CanCreateExportMovements)]
-    public class GetPackagingTypes : IRequest<PackagingData>
+    public class GetShipmentInfo : IRequest<ShipmentInfo>
     {
         public Guid NotificationId { get; private set; }
 
-        public GetPackagingTypes(Guid notificationId)
+        public GetShipmentInfo(Guid notificationId)
         {
             NotificationId = notificationId;
         }

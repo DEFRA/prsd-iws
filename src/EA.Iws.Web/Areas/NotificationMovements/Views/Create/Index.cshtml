@@ -1,0 +1,117 @@
+﻿@model EA.Iws.Web.Areas.NotificationMovements.ViewModels.Create.CreateMovementsViewModel
+@using Resources = EA.Iws.Web.Areas.NotificationMovements.Views.Create.IndexResources
+
+@{
+    ViewBag.Title = Resources.Title;
+    Layout = "~/Areas/NotificationMovements/Views/Shared/_CreateSummaryLayout.cshtml";
+}
+
+<h1 class="heading-large">@Resources.Title</h1>
+
+<p>
+    @Resources.ShipmentSchedule
+    @Html.Gds().DisplayShortDateRangeFor(m => m.StartDate, m => m.EndDate).
+</p>
+
+@using (Html.BeginForm())
+{
+
+    @Html.AntiForgeryToken()
+    @Html.Gds().ValidationSummary()
+    @Html.HiddenFor(m => m.StartDate)
+    @Html.HiddenFor(m => m.EndDate)
+    @Html.HiddenFor(m => m.NotificationUnits)
+    @Html.HiddenFor(m => m.PackagingTypes.ShowEnumValue)
+
+    <div class="form-group @Html.Gds().FormGroupClass(m => m.Day) @Html.Gds().FormGroupClass(m => m.Month) @Html.Gds().FormGroupClass(m => m.Year)">
+        <fieldset>
+            <legend>
+                <span class="form-label">@Resources.ActualDateOfShipment</span>
+            </legend>
+
+            <div class="form-date">
+                @Html.Gds().HintParagraph(Model.DateHintText)
+                @Html.Gds().ValidationMessageFor(m => m.Day)
+                @Html.Gds().ValidationMessageFor(m => m.Month)
+                @Html.Gds().ValidationMessageFor(m => m.Year)
+                <div class="form-group form-group-day">
+                    @Html.Gds().LabelFor(m => m.Day)
+                    @Html.Gds().TextBoxFor(m => m.Day, new { type = "number", min = "1", max = "31" })
+                </div>
+                <div class="form-group form-group-month">
+                    @Html.Gds().LabelFor(m => m.Month)
+                    @Html.Gds().TextBoxFor(m => m.Month, new { type = "number", min = "1", max = "12" })
+                </div>
+                <div class="form-group form-group-year">
+                    @Html.Gds().LabelFor(m => m.Year)
+                    @Html.Gds().TextBoxFor(m => m.Year, new { type = "number", min = "2015" })
+                </div>
+            </div>
+        </fieldset>
+    </div>
+
+    <div class="form-group @Html.Gds().FormGroupClass(m => m.NumberToCreate)">
+        @Html.Gds().LabelFor(m => m.NumberToCreate, showOptionalLabel: false)
+        @Html.Gds().HintParagraph(Resources.NunmberToCreateHint)
+        @Html.Gds().ValidationMessageFor(m => m.NumberToCreate)
+        @Html.Gds().TextBoxFor(m => m.NumberToCreate)
+    </div>
+
+    <header class="hgroup">
+        <h2 class="heading-small">@Resources.QuantityTitle</h2>
+        <p>@Resources.QuantityDescription</p>
+    </header>
+
+    for (int i = 0; i < Model.AvailableUnits.Count; i++)
+    {
+        @Html.HiddenFor(m => m.AvailableUnits[i])
+    }
+
+    <div class="form-group @Html.Gds().FormGroupClass(m => m.Quantity)">
+        @Html.Gds().LabelFor(m => m.Quantity, false)
+        @Html.Gds().ValidationMessageFor(m => m.Quantity)
+        <div class="grid-row">
+            <div class="column-third">
+                @Html.Gds().TextBoxFor(m => m.Quantity, new { @class = "form-control form-control-wide" })
+            </div>
+            <div class="column-third">
+                @Html.Gds().DropDownListFor(m => m.Units, Model.UnitsSelectList, new { @class = "form-control form-control-wide" })
+            </div>
+        </div>
+    </div>
+
+    <header class="hgroup">
+        <h2 class="heading-small">@Resources.PackagingTitle</h2>
+        <p>@Resources.PackagingDescription</p>
+    </header>
+
+    <div class="form-group">
+        <fieldset>
+            @for (int i = 0; i < Model.PackagingTypes.PossibleValues.Count; i++)
+            {
+                MvcHtmlString idForThisCheckBox = Html.NameFor(m => m.PackagingTypes.PossibleValues[i]);
+
+                <div class="multiple-choice">
+                    @Html.CheckBoxFor(m => m.PackagingTypes.PossibleValues[i].Selected, new { id = idForThisCheckBox })
+                    <label for="@idForThisCheckBox">
+                        @if (Model.PackagingTypes.ShowEnumValue)
+                        {
+                            @Html.DisplayFor(m => m.PackagingTypes.PossibleValues[i].Value)
+                            @Html.Raw(" - ")
+                        }
+                        @Html.DisplayFor(m => m.PackagingTypes.PossibleValues[i].Text)
+                    </label>
+                </div>
+
+                @Html.HiddenFor(m => m.PackagingTypes.PossibleValues[i].Text)
+                @Html.HiddenFor(m => m.PackagingTypes.PossibleValues[i].Value)
+            }
+        </fieldset>
+    </div>
+
+    <div class="form-group">
+        <p>
+            <button class="button" type="submit">@Constants.ContinueButtonText</button>
+        </p>
+    </div>
+}

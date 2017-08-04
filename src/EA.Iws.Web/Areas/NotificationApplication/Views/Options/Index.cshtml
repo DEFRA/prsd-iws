@@ -126,7 +126,7 @@
                         }
                         else
                         {
-                            @Html.ActionLink(Resource.CreatePrenotification, "ShipmentDate", "Create", new { notificationId = Model.NotificationId, area = "NotificationMovements" }, null)
+                            @Html.ActionLink(Resource.CreatePrenotification, "Index", "Create", new { notificationId = Model.NotificationId, area = "NotificationMovements" }, null)
                             @Html.ActionLink(Resource.UploadPrenotification, "Index", "UploadChoice", new { notificationId = Model.NotificationId, area = "NotificationMovements" }, null)
                             @Html.ActionLink(Resource.CertificateOfReceipt, "Index", "ReceiveMovement", new { notificationId = Model.NotificationId, area = "NotificationMovements" }, null)
                             @Html.ActionLink(certificateLinkText, "Index", "Complete", new { notificationId = Model.NotificationId, area = "NotificationMovements" }, null)

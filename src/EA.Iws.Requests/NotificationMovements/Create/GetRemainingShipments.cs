@@ -7,13 +7,13 @@
     using Prsd.Core.Mediator;
 
     [RequestAuthorization(ExportMovementPermissions.CanCreateExportMovements)]
-    public class GetShipmentDates : IRequest<ShipmentDates>
+    public class GetRemainingShipments : IRequest<RemainingShipmentsData>
     {
-        public Guid NotificationId { get; private set; }
-
-        public GetShipmentDates(Guid notificationId)
+        public GetRemainingShipments(Guid notificationId)
         {
             NotificationId = notificationId;
         }
+
+        public Guid NotificationId { get; private set; }
     }
 }

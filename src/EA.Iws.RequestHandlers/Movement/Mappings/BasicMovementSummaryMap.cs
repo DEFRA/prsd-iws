@@ -12,7 +12,8 @@
             {
                 NotificationId = source.NotificationId,
                 NotificationNumber = source.NotificationNumber,
-                TotalShipments = source.CurrentTotalShipments,
+                TotalShipments = source.IntendedTotalShipments,
+                ShipmentsUsed = source.CurrentTotalShipments,
                 QuantityReceived = source.QuantityReceived,
                 QuantityRemaining = source.QuantityRemaining,
                 DisplayUnit = source.Units,

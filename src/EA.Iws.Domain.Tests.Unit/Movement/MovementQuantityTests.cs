@@ -10,6 +10,7 @@
     using FakeItEasy;
     using TestHelpers.DomainFakes;
     using Xunit;
+    using ShipmentInfo = Domain.NotificationApplication.Shipment.ShipmentInfo;
 
     public class MovementQuantityTests
     {

@@ -3,13 +3,12 @@
 }
 
 <div class="grid-row">
-    <aside id="form-menu" class="column-third form-status">
-        @Html.Action("CreateSummary", "Home", new { ViewBag.MovementNumber })
-    </aside>
-
     <div class="column-two-thirds">
         @RenderBody()
     </div>
+    <aside id="form-menu" class="column-third form-status">
+        @Html.Action("Summary", "Home")
+    </aside>
 </div>
 
 @section head {

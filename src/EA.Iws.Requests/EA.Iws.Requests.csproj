@@ -222,6 +222,7 @@
     <Compile Include="NotificationAssessment\SetNewNumberOfShipments.cs" />
     <Compile Include="NotificationAssessment\SetEntryPoint.cs" />
     <Compile Include="NotificationMovements\Create\GetInternalMovementSummary.cs" />
+    <Compile Include="NotificationMovements\Create\GetRemainingShipments.cs" />
     <Compile Include="NotificationMovements\Create\HasExceededConsentedQuantity.cs" />
     <Compile Include="Movement\Receive\DoesQuantityReceivedExceedTolerance.cs" />
     <Compile Include="NotificationMovements\GetMovementsByNotificationId.cs" />
@@ -253,16 +254,15 @@
     <Compile Include="NotificationMovements\Capture\CreateMovementInternal.cs" />
     <Compile Include="NotificationMovements\Capture\GetMovementIdIfExists.cs" />
     <Compile Include="NotificationMovements\CheckMovementNumberValid.cs" />
-    <Compile Include="NotificationMovements\Create\CreateMovementAndDetails.cs" />
+    <Compile Include="NotificationMovements\Create\CreateMovements.cs" />
     <Compile Include="NotificationMovements\Create\GenerateMovementNumber.cs" />
     <Compile Include="NotificationAssessment\GetAccountManagementData.cs" />
     <Compile Include="NotificationMovements\Create\GetCarriers.cs" />
     <Compile Include="NotificationMovements\Create\GetMeansOfTransport.cs" />
     <Compile Include="NotificationMovements\Create\GetShipmentUnits.cs" />
-    <Compile Include="NotificationMovements\Create\GetPackagingTypes.cs" />
     <Compile Include="NotificationMovements\Edit\GetEditableMovements.cs" />
     <Compile Include="NotificationMovements\GetBasicMovementSummary.cs" />
-    <Compile Include="NotificationMovements\Create\GetShipmentDates.cs" />
+    <Compile Include="NotificationMovements\Create\GetShipmentInfo.cs" />
     <Compile Include="NotificationMovements\GetSummaryAndTable.cs" />
     <Compile Include="NotificationAssessment\AddNotificationTransaction.cs" />
     <Compile Include="NotificationAssessment\ConsentNotificationApplication.cs" />

@@ -169,14 +169,15 @@
     <Compile Include="Movement\MovementRules.cs" />
     <Compile Include="Movement\MovementRulesSummary.cs" />
     <Compile Include="Movement\MovementStatus.cs" />
-    <Compile Include="Movement\NewMovementDetails.cs" />
     <Compile Include="Movement\OperationCompleteData.cs" />
     <Compile Include="Movement\QuantityReceivedTolerance.cs" />
     <Compile Include="Movement\ProposedMovementDateResponse.cs" />
     <Compile Include="Movement\ProposedUpdatedMovementDateResponse.cs" />
     <Compile Include="Movement\RejectedMovementDetails.cs" />
     <Compile Include="Movement\RejectedMovementListData.cs" />
+    <Compile Include="Movement\RemainingShipmentsData.cs" />
     <Compile Include="Movement\ShipmentDates.cs" />
+    <Compile Include="Movement\ShipmentInfo.cs" />
     <Compile Include="Movement\SubmittedMovement.cs" />
     <Compile Include="Movement\MovementData.cs" />
     <Compile Include="Movement\BasicMovementSummary.cs" />

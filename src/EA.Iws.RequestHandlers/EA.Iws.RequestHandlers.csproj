@@ -423,6 +423,7 @@
     <Compile Include="NotificationAssessment\SetNewNumberOfShipmentsHandler.cs" />
     <Compile Include="NotificationAssessment\SetEntryPointHandler.cs" />
     <Compile Include="NotificationMovements\Create\GetInternalMovementSummaryHandler.cs" />
+    <Compile Include="NotificationMovements\Create\GetRemainingShipmentsHandler.cs" />
     <Compile Include="NotificationMovements\Create\HasExceededConsentedQuantityHandler.cs" />
     <Compile Include="Movement\Receive\DoesQuantityReceivedExceedToleranceHandler.cs" />
     <Compile Include="NotificationMovements\Create\IsProposedMovementDateValidHandler.cs" />
@@ -444,13 +445,12 @@
     <Compile Include="NotificationMovements\Capture\GetMovementIdIfExistsHandler.cs" />
     <Compile Include="Movement\RecordMovementDateChange.cs" />
     <Compile Include="NotificationMovements\CheckMovementNumberValidHandler.cs" />
-    <Compile Include="NotificationMovements\Create\CreateMovementAndDetailsHandler.cs" />
+    <Compile Include="NotificationMovements\Create\CreateMovementsHandler.cs" />
     <Compile Include="NotificationMovements\Create\GenerateMovementNumberHandler.cs" />
     <Compile Include="NotificationMovements\Create\GetCarriersHandler.cs" />
     <Compile Include="NotificationMovements\Create\GetMeansOfTransportHandler.cs" />
-    <Compile Include="NotificationMovements\Create\GetPackagingTypesHandler.cs" />
     <Compile Include="NotificationAssessment\GetAccountManagementDataHandler.cs" />
-    <Compile Include="NotificationMovements\Create\GetShipmentDatesHandler.cs" />
+    <Compile Include="NotificationMovements\Create\GetShipmentInfoHandler.cs" />
     <Compile Include="NotificationMovements\Create\GetShipmentUnitsHandler.cs" />
     <Compile Include="NotificationMovements\Edit\GetEditableMovementsHandler.cs" />
     <Compile Include="NotificationMovements\GetBasicMovementSummaryHandler.cs" />

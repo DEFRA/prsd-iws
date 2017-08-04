@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace EA.Iws.Web.Areas.NotificationMovements.Views.Home {
+namespace EA.Iws.Web.Areas.NotificationMovements.Views.Create {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace EA.Iws.Web.Areas.NotificationMovements.Views.Home {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class SummaryResources {
+    public class IndexResources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal SummaryResources() {
+        internal IndexResources() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace EA.Iws.Web.Areas.NotificationMovements.Views.Home {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EA.Iws.Web.Areas.NotificationMovements.Views.Home.SummaryResources", typeof(SummaryResources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EA.Iws.Web.Areas.NotificationMovements.Views.Create.IndexResources", typeof(IndexResources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,83 +61,74 @@ namespace EA.Iws.Web.Areas.NotificationMovements.Views.Home {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Active loads permitted:.
+        ///   Looks up a localized string similar to What is the actual date of shipment?.
         /// </summary>
-        public static string ActiveLoadsPermitted {
+        public static string ActualDateOfShipment {
             get {
-                return ResourceManager.GetString("ActiveLoadsPermitted", resourceCulture);
+                return ResourceManager.GetString("ActualDateOfShipment", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Current active loads:.
+        ///   Looks up a localized string similar to Enter the number of shipments you are prenotifying for this date.
         /// </summary>
-        public static string CurrentActiveLoads {
+        public static string NunmberToCreateHint {
             get {
-                return ResourceManager.GetString("CurrentActiveLoads", resourceCulture);
+                return ResourceManager.GetString("NunmberToCreateHint", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Total quantity received:.
+        ///   Looks up a localized string similar to Select all the types of packaging that will be used for this shipment..
         /// </summary>
-        public static string QuantityReceived {
+        public static string PackagingDescription {
             get {
-                return ResourceManager.GetString("QuantityReceived", resourceCulture);
+                return ResourceManager.GetString("PackagingDescription", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Total quantity remaining:.
+        ///   Looks up a localized string similar to What packaging types will be used?.
         /// </summary>
-        public static string QuantityRemaining {
+        public static string PackagingTitle {
             get {
-                return ResourceManager.GetString("QuantityRemaining", resourceCulture);
+                return ResourceManager.GetString("PackagingTitle", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Shipment number:.
+        ///   Looks up a localized string similar to Enter the actual quantity of waste as a number. You can add decimal figures if necessary..
         /// </summary>
-        public static string ShipmentNumber {
+        public static string QuantityDescription {
             get {
-                return ResourceManager.GetString("ShipmentNumber", resourceCulture);
+                return ResourceManager.GetString("QuantityDescription", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Shipment numbers:.
+        ///   Looks up a localized string similar to How much waste is being exported?.
         /// </summary>
-        public static string ShipmentNumbers {
+        public static string QuantityTitle {
             get {
-                return ResourceManager.GetString("ShipmentNumbers", resourceCulture);
+                return ResourceManager.GetString("QuantityTitle", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0} to {1}.
+        ///   Looks up a localized string similar to You can schedule your shipments from.
         /// </summary>
-        public static string ShipmentNumbersRangeFormat {
+        public static string ShipmentSchedule {
             get {
-                return ResourceManager.GetString("ShipmentNumbersRangeFormat", resourceCulture);
+                return ResourceManager.GetString("ShipmentSchedule", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Number of shipments used:.
+        ///   Looks up a localized string similar to Create prenotification.
         /// </summary>
-        public static string ShipmentsUsed {
+        public static string Title {
             get {
-                return ResourceManager.GetString("ShipmentsUsed", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Total number of shipments:.
-        /// </summary>
-        public static string TotalShipments {
-            get {
-                return ResourceManager.GetString("TotalShipments", resourceCulture);
+                return ResourceManager.GetString("Title", resourceCulture);
             }
         }
     }
