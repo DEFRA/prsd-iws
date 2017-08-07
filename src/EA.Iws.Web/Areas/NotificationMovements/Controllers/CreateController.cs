@@ -41,6 +41,15 @@
 
             var model = new CreateMovementsViewModel(shipmentInfo);
 
+            if (TempData["TempMovement"] != null)
+            {
+                var tempMovement = (TempMovement)TempData["TempMovement"];
+                model.NumberToCreate = tempMovement.NumberToCreate;
+                model.Quantity = tempMovement.Quantity.ToString();
+                model.Units = tempMovement.ShipmentQuantityUnits;
+                model.PackagingTypes.SetSelectedValues(tempMovement.PackagingTypes);                      
+            }
+
             return View(model);
         }
 
