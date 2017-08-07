@@ -975,6 +975,7 @@
     <Content Include="Areas\AdminExportNotificationMovements\Views\CaptureMovement\_ChangeShipment.cshtml" />
     <Content Include="Areas\AdminImportNotificationMovements\Views\Capture\_ChangeShipment.cshtml" />
     <Content Include="Areas\NotificationMovements\Views\Upload\Index.cshtml" />
+    <Content Include="Areas\NotificationMovements\Views\Upload\Success.cshtml" />
     <None Include="Scripts\jquery-2.1.3.intellisense.js" />
     <Content Include="Scripts\govuk\govuk-template.js" />
     <Content Include="Scripts\govuk\ie.js" />
@@ -2260,6 +2261,7 @@
       <DependentUpon>ThreeWorkingDaysWarningViewModelResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Areas\NotificationMovements\ViewModels\Download\DownloadMovementViewModel.cs" />
+    <Compile Include="Areas\NotificationMovements\ViewModels\Success\SuccessViewModel.cs" />
     <Compile Include="Areas\NotificationMovements\ViewModels\Summary\SummaryViewModel.cs" />
     <Compile Include="Areas\NotificationMovements\ViewModels\Upload\UploadViewModel.cs" />
     <Compile Include="Areas\NotificationMovements\Views\Create\ConsentExpiresInFourWorkingDaysResources.Designer.cs">
@@ -2336,6 +2338,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>IndexResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\NotificationMovements\Views\Upload\SuccessResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SuccessResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Areas\Reports\Controllers\FinancialGuaranteesController.cs" />
     <Compile Include="Areas\Reports\Controllers\ExportMovementsController.cs" />
@@ -4446,6 +4453,10 @@
     <EmbeddedResource Include="Areas\NotificationMovements\Views\Upload\IndexResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\NotificationMovements\Views\Upload\SuccessResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>SuccessResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\Reports\ViewModels\FinancialGuarantees\IndexViewModelResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

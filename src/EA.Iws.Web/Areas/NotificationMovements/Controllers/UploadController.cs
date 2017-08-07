@@ -7,6 +7,7 @@
     using Infrastructure;
     using Prsd.Core.Mediator;
     using Requests.Movement;
+    using ViewModels.Success;
     using ViewModels.Upload;
 
     public class UploadController : Controller
@@ -46,13 +47,16 @@
 
             await mediator.SendAsync(new SetMultipleMovementFileId(notificationId, movementIds, uploadedFile, fileExtension));
 
-            return RedirectToAction("Success");
+            return RedirectToAction("Success", movementIds.ToRouteValueDictionary("movementIds"));
         }
 
         [HttpGet]
-        public ActionResult Success(Guid notificationId)
+        public async Task<ActionResult> Success(Guid notificationId, Guid[] movementIds)
         {
-            return HttpNotFound();
+            ViewBag.NotificationId = notificationId;
+            var movements = await mediator.SendAsync(new GetMovementsByIds(notificationId, movementIds));
+            var model = new SuccessViewModel(movements);
+            return View(model);
         }
     }
 }
