@@ -5,11 +5,13 @@
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Infrastructure;
+    using Infrastructure.Authorization;
     using Prsd.Core.Mediator;
     using Requests.Movement;
     using ViewModels.Success;
     using ViewModels.Upload;
 
+    [AuthorizeActivity(typeof(GetMovementsByIds))]
     public class UploadController : Controller
     {
         private readonly IFileReader fileReader;
