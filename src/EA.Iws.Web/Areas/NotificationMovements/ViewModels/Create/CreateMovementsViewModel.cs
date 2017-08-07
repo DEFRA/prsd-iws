@@ -51,17 +51,14 @@
             PackagingTypes.PossibleValues = items;
         }
 
-        [Required(ErrorMessageResourceType = typeof(CreateMovementsViewModelResources), ErrorMessageResourceName = "DayRequired")]
         [Display(Name = "Day")]
         [Range(1, 31, ErrorMessageResourceType = typeof(CreateMovementsViewModelResources), ErrorMessageResourceName = "DayRequired")]
         public int? Day { get; set; }
 
-        [Required(ErrorMessageResourceType = typeof(CreateMovementsViewModelResources), ErrorMessageResourceName = "MonthRequired")]
         [Display(Name = "Month")]
         [Range(1, 12, ErrorMessageResourceType = typeof(CreateMovementsViewModelResources), ErrorMessageResourceName = "MonthRequired")]
         public int? Month { get; set; }
 
-        [Required(ErrorMessageResourceType = typeof(CreateMovementsViewModelResources), ErrorMessageResourceName = "YearRequired")]
         [Display(Name = "Year")]
         [Range(2015, 3000, ErrorMessageResourceType = typeof(CreateMovementsViewModelResources), ErrorMessageResourceName = "YearRequired")]
         public int? Year { get; set; }
@@ -76,7 +73,6 @@
             }
         }
 
-        [Required(ErrorMessageResourceType = typeof(CreateMovementsViewModelResources), ErrorMessageResourceName = "NumberToCreateRequired")]
         [Display(Name = "NumberToCreate", ResourceType = typeof(CreateMovementsViewModelResources))]
         public int? NumberToCreate { get; set; }
 
@@ -101,8 +97,6 @@
         public IList<ShipmentQuantityUnits> AvailableUnits { get; set; }
 
         [Display(Name = "ActualQuantity", ResourceType = typeof(CreateMovementsViewModelResources))]
-        [Required(ErrorMessageResourceName = "ActualQuantityRequired", ErrorMessageResourceType = typeof(CreateMovementsViewModelResources))]
-        [IsValidNumber(maxPrecision: 18, NumberStyle = NumberStyles.AllowDecimalPoint, ErrorMessageResourceName = "ActualQuantityIsValid", ErrorMessageResourceType = typeof(CreateMovementsViewModelResources))]
         public string Quantity { get; set; }
 
         public ShipmentQuantityUnits? Units { get; set; }
@@ -146,47 +140,99 @@
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
-            if (NumberToCreate == null || NumberToCreate.Value <= 0)
+            if (NumberToCreate == null)
+            {
+                yield return new ValidationResult(CreateMovementsViewModelResources.NumberToCreateRequired, new[] { "NumberToCreate" });
+            }
+            if (NumberToCreate != null && NumberToCreate.Value <= 0)
             {
                 yield return new ValidationResult(CreateMovementsViewModelResources.NumberToCreateValid, new[] { "NumberToCreate" });
             }
-
-            DateTime shipmentDate;
-            bool isValidDate = SystemTime.TryParse(Year.GetValueOrDefault(),
-                Month.GetValueOrDefault(),
-                Day.GetValueOrDefault(),
-                out shipmentDate);
-
-            if (!isValidDate)
+            int result;
+            if (!int.TryParse(NumberToCreate.ToString(), out result))
             {
-                yield return new ValidationResult(CreateMovementsViewModelResources.DateValid,
-                    new[] { "Day" });
+                yield return new ValidationResult(CreateMovementsViewModelResources.NumberToCreateValid, new[] { "NumberToCreate" });
             }
-            else if (shipmentDate < SystemTime.UtcNow.Date)
+            if (Day == null)
             {
-                yield return new ValidationResult(CreateMovementsViewModelResources.DateNotInPast,
-                    new[] { "Day" });
+                yield return new ValidationResult(CreateMovementsViewModelResources.DayRequired, new[] { "Day" });
             }
-
-            decimal quantity = Convert.ToDecimal(Quantity);
-
-            if (quantity <= 0)
+            if (Month == null)
             {
-                yield return new ValidationResult(CreateMovementsViewModelResources.ActualQuantityPositive, new[] { "Quantity" });
+                yield return new ValidationResult(CreateMovementsViewModelResources.MonthRequired, new[] { "Month" });
             }
-
-            if (Units.HasValue && decimal.Round(quantity, ShipmentQuantityUnitsMetadata.Precision[Units.Value]) != quantity)
+            if (Year == null)
             {
-                yield return new ValidationResult(string.Format(
-                    CreateMovementsViewModelResources.ActualQuantityPrecision,
-                    ShipmentQuantityUnitsMetadata.Precision[Units.Value] + 1),
-                    new[] { "Quantity" });
+                yield return new ValidationResult(CreateMovementsViewModelResources.YearRequired, new[] { "Year" });
             }
-
+            if (string.IsNullOrEmpty(Quantity))
+            {
+                yield return new ValidationResult(CreateMovementsViewModelResources.ActualQuantityRequired, new[] { "Quantity" });
+            }
             if (!SelectedPackagingTypes.Any())
             {
                 yield return new ValidationResult(CreateMovementsViewModelResources.PackagingTypeRequired, new[] { "PackagingTypes" });
             }
+          
+            if (!string.IsNullOrEmpty(Quantity))
+            {
+                decimal number;
+                if (decimal.TryParse(Quantity, NumberStyles.AllowDecimalPoint, new NumberFormatInfo(), out number))
+                {
+                    if (!NumberIsValid(number))
+                    {
+                        yield return new ValidationResult(CreateMovementsViewModelResources.ActualQuantityIsValid, new[] { "Quantity" });
+                    }
+                    else
+                    {
+                        decimal quantity = Convert.ToDecimal(Quantity);
+
+                        if (quantity <= 0)
+                        {
+                            yield return new ValidationResult(CreateMovementsViewModelResources.ActualQuantityPositive, new[] { "Quantity" });
+                        }
+
+                        if (Units.HasValue && decimal.Round(quantity, ShipmentQuantityUnitsMetadata.Precision[Units.Value]) != quantity)
+                        {
+                            yield return new ValidationResult(string.Format(
+                                CreateMovementsViewModelResources.ActualQuantityPrecision,
+                                ShipmentQuantityUnitsMetadata.Precision[Units.Value] + 1),
+                                new[] { "Quantity" });
+                        }
+                    }
+                }
+                else
+                {
+                    yield return new ValidationResult(CreateMovementsViewModelResources.ActualQuantityIsValid, new[] { "Quantity" });
+                }
+            }
+            if (Day != null && Month != null && Year != null)
+            {
+                DateTime shipmentDate;
+                bool isValidDate = SystemTime.TryParse(Year.GetValueOrDefault(),
+                    Month.GetValueOrDefault(),
+                    Day.GetValueOrDefault(),
+                    out shipmentDate);
+
+                if (!isValidDate)
+                {
+                    yield return new ValidationResult(CreateMovementsViewModelResources.DateValid,
+                        new[] { "Day" });
+                }
+                else if (shipmentDate < SystemTime.UtcNow.Date)
+                {
+                    yield return new ValidationResult(CreateMovementsViewModelResources.DateNotInPast,
+                        new[] { "Day" });
+                }
+            }
+        }
+
+        private bool NumberIsValid(decimal number)
+        {
+            var maxNumber = (long)Math.Pow(10, 18) - 1;
+            var minNumber = 0 - maxNumber;
+
+            return number > minNumber && number < maxNumber;
         }
     }
 }
