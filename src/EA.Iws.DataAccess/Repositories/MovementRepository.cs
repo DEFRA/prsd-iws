@@ -158,5 +158,38 @@
 
             return await context.Movements.Where(m => m.NotificationId == notificationId && (m.Status == MovementStatus.Rejected)).ToArrayAsync();
         }
+
+        public async Task SetMovementReceiptAndRecoveryData(MovementReceiptAndRecoveryData data, Guid createdBy)
+        {
+            await context.Database.ExecuteSqlCommandAsync(@"[Notification].[uspUpdateExportMovementData] 
+                @NotificationId
+                ,@MovementId
+                ,@PrenotificationDate
+                ,@HasNoPrenotification
+                ,@ActualDate
+                ,@ReceiptDate
+                ,@Quantity
+                ,@Unit
+                ,@RejectiontDate
+                ,@RejectionReason
+                ,@StatsMarking
+                ,@Comments
+                ,@RecoveryDate
+                ,@CreatedBy",
+                new SqlParameter("@NotificationId", data.NotificationId),
+                new SqlParameter("@MovementId", data.Id),
+                new SqlParameter("@PrenotificationDate", (object)data.PrenotificationDate ?? DBNull.Value),
+                new SqlParameter("@HasNoPrenotification", (object)data.HasNoPrenotification ?? DBNull.Value),
+                new SqlParameter("@ActualDate", (object)data.ActualDate ?? DBNull.Value),
+                new SqlParameter("@ReceiptDate", (object)data.ReceiptDate ?? DBNull.Value),
+                new SqlParameter("@Quantity", (object)data.ActualQuantity ?? DBNull.Value),
+                new SqlParameter("@Unit", (object)data.ReceiptUnits ?? DBNull.Value),
+                new SqlParameter("@RejectiontDate", (object)data.RejectionDate ?? DBNull.Value),
+                new SqlParameter("@RejectionReason", (object)data.RejectionReason ?? DBNull.Value),
+                new SqlParameter("@StatsMarking", (object)data.StatsMarking ?? DBNull.Value),
+                new SqlParameter("@Comments", (object)data.Comments ?? DBNull.Value),
+                 new SqlParameter("@RecoveryDate", (object)data.OperationCompleteDate ?? DBNull.Value),
+                new SqlParameter("@CreatedBy", createdBy));
+        }
     }
 }

@@ -1,13 +1,14 @@
 ﻿namespace EA.Iws.DataAccess.Repositories.Imports
 {
+    using Core.ImportMovement;
+    using Domain.ImportMovement;
+    using Domain.Security;
     using System;
     using System.Collections.Generic;
     using System.Data.Entity;
     using System.Data.SqlClient;
     using System.Linq;
     using System.Threading.Tasks;
-    using Domain.ImportMovement;
-    using Domain.Security;
 
     internal class ImportMovementRepository : IImportMovementRepository
     {
@@ -98,6 +99,37 @@
             }
 
             return rejectedMovements;
+        }
+
+        public async Task SetImportMovementReceiptAndRecoveryData(ImportMovementSummaryData data, Guid createdBy)
+        {
+            await context.Database.ExecuteSqlCommandAsync(@"[ImportNotification].[uspUpdateImportMovementData] 
+                @NotificationId
+                ,@MovementId
+                ,@PrenotificationDate
+                ,@ActualDate
+                ,@ReceiptDate
+                ,@Quantity
+                ,@Unit
+                ,@RejectiontDate
+                ,@RejectionReason
+                ,@StatsMarking
+                ,@Comments
+                ,@RecoveryDate
+                ,@CreatedBy",
+                new SqlParameter("@NotificationId", data.Data.NotificationId),
+                new SqlParameter("@MovementId", data.MovementId),
+                new SqlParameter("@PrenotificationDate", (object)data.Data.PreNotificationDate ?? DBNull.Value),
+                new SqlParameter("@ActualDate", (object)data.Data.ActualDate ?? DBNull.Value),
+                new SqlParameter("@ReceiptDate", (object)data.ReceiptData.ReceiptDate ?? DBNull.Value),
+                new SqlParameter("@Quantity", (object)data.ReceiptData.ActualQuantity ?? DBNull.Value),
+                new SqlParameter("@Unit", (object)data.ReceiptData.ReceiptUnits ?? DBNull.Value),
+                new SqlParameter("@RejectiontDate", (object)data.RejectionDate ?? DBNull.Value),
+                new SqlParameter("@RejectionReason", (object)data.ReceiptData.RejectionReason ?? DBNull.Value),
+                new SqlParameter("@StatsMarking", (object)data.StatsMarking ?? DBNull.Value),
+                new SqlParameter("@Comments", (object)data.Comments ?? DBNull.Value),
+                 new SqlParameter("@RecoveryDate", (object)data.RecoveryData.OperationCompleteDate ?? DBNull.Value),
+                new SqlParameter("@CreatedBy", createdBy));
         }
     }
 }

@@ -59,6 +59,8 @@
     <Content Include="scripts\Everytime\03-StoredProcedures\0006-elmah-GetErrorsXml.sql" />
     <Content Include="scripts\Everytime\03-StoredProcedures\0005-elmah-GetErrorXml.sql" />
     <Content Include="scripts\Everytime\03-StoredProcedures\0007-elmah-LogError.sql" />
+    <Content Include="scripts\Everytime\03-StoredProcedures\0009-uspUpdateExportMovementData.sql" />
+    <Content Include="scripts\Everytime\03-StoredProcedures\0010-uspUpdateImportMovementData.sql" />
     <Content Include="scripts\Everytime\04-Synonyms\0001-elmah.sql" />
     <Content Include="scripts\Everytime\02-Views\0025-Reports-BlanketBonds.sql" />
     <Content Include="scripts\Update\0003-Migration\Sprint1\20170118-153400-drop-countryid.sql" />

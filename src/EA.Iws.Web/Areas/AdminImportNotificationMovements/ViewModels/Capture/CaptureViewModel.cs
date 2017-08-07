@@ -31,6 +31,8 @@
         [Display(Name = "HasNoPrenotification", ResourceType = typeof(CaptureViewModelResources))]
         public bool HasNoPrenotification { get; set; }
 
+        public bool ShowShipmentDataOverride { get; set; }
+
         public ReceiptViewModel Receipt { get; set; }
 
         public RecoveryViewModel Recovery { get; set; }
@@ -76,6 +78,10 @@
         public string QuantityReceivedTotal { get; set; }
 
         public string AverageTonnage { get; set; }
+
+        public Guid NotificationId { get; set; }
+
+        public Guid MovementId { get; set; }
 
         public CaptureViewModel()
         {

@@ -1,5 +1,6 @@
 ﻿namespace EA.Iws.Web.Areas.AdminImportNotificationMovements.Controllers
 {
+    using Core.Authorization.Permissions;
     using Core.Shared;
     using Infrastructure.Authorization;
     using Prsd.Core.Mediator;
@@ -20,10 +21,12 @@
     public class CaptureController : Controller
     {
         private readonly IMediator mediator;
+        private readonly AuthorizationService authorizationService;
 
-        public CaptureController(IMediator mediator)
+        public CaptureController(IMediator mediator, AuthorizationService authorizationService)
         {
             this.mediator = mediator;
+            this.authorizationService = authorizationService;
         }
 
         [HttpGet]
@@ -93,6 +96,9 @@
 
             var model = new CaptureViewModel(result);
             await UpdateSummary(model, id);
+            model.ShowShipmentDataOverride = await CanShowEditLink();
+            model.MovementId = movementId;
+            model.NotificationId = id;
             return View(model);
         }
 
@@ -193,6 +199,13 @@
         {
             var summary = await mediator.SendAsync(new GetImportMovementsSummary(id));
             model.SetSummaryData(summary);
+        }
+
+        private async Task<bool> CanShowEditLink()
+        {
+            var showUpdateLink = await authorizationService.AuthorizeActivity(UserAdministrationPermissions.CanOverrideShipmentData);
+
+            return showUpdateLink;
         }
     }
 }

@@ -1,0 +1,42 @@
+﻿@using Resource = EA.Iws.Web.Areas.AdminImportNotificationMovements.Views.MovementOverride.IndexResources
+@using Resources = EA.Iws.Web.Areas.AdminImportNotificationMovements.Views.Home.IndexResources
+@model EA.Iws.Web.Areas.AdminImportNotificationMovements.ViewModels.MovementOverride.IndexViewModel
+
+<div class="column-one-third stickem">
+    <div id="form-menu">
+        <p>
+            <span>@Html.Raw(Model.NotificationNumber)</span>
+        </p>
+        <ul class="summary-list">
+            <li> <span class="grey-text">@Resources.TotalNumber</span> @Html.Raw(Model.IntendedShipments)</li>
+            <li><span class="grey-text">@Resources.NumberUsed</span> @Html.Raw(Model.UsedShipments)</li>
+            <li><span class="grey-text">@Resources.TotalQuantityReceived</span> @Html.Raw(Model.QuantityReceivedTotal)</li>
+            <li>
+                <span class="grey-text">@Resources.TotalQuantityRemaining</span>
+                @Html.Raw(Model.QuantityRemainingTotal)
+            </li>
+            <li>
+                <span class="grey-text">@Resources.AverageTonnage</span>
+                @Html.Raw(Model.AverageTonnage)
+            </li>
+        </ul>
+    </div>
+    <div>
+        @Html.ActionLink(Resource.ReturnToSummary, "Index", "Home")
+    </div>
+    <br />
+    @using (Html.BeginForm("ChangeShipment", "MovementOverride", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(m => m.ShipmentNumber)
+        <p>
+            <label class="heading-small">@string.Format(Resource.ShipmentNumber, Model.ShipmentNumber)</label>
+            <div class="form-group @Html.Gds().FormGroupClass(m => m.NewShipmentNumber)">
+                @Html.Gds().ValidationMessageFor(m => m.NewShipmentNumber)
+                @Html.Gds().TextBoxFor(m => m.NewShipmentNumber, new { type = "number", min = 1, @class = "form-control", placeholder = Resource.ChangeShipmentPlaceholder })
+                <button class="button" type="submit">@Resources.ChangeShipment</button>
+            </div>
+        </p>
+    }
+</div>
+
