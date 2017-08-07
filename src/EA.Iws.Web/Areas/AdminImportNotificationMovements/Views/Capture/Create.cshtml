@@ -47,7 +47,14 @@
     @Html.Partial("_Scripts")
     <script>
         $(function () {
-            $("#ShipmentNumber").focus();
+            @if (Model.ShipmentNumber == null)
+            {
+                @:$("#ShipmentNumber").focus();
+            }
+            else
+            {
+                @:$("#PrenotificationDate_Date").focus();
+            }
         });
     </script>
 }
