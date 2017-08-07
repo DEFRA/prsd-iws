@@ -69,15 +69,14 @@
         // https://stackoverflow.com/a/2463729
         private static byte[] CombineDocuments(IList<byte[]> documents)
         {
-            byte[] ret;
-            using (var mainStream = new MemoryStream())
+            using (var memoryStream = new MemoryStream())
             {
-                mainStream.Write(documents[0], 0, documents[0].Length);
-                mainStream.Position = 0;
+                memoryStream.Write(documents[0], 0, documents[0].Length);
+                memoryStream.Position = 0;
 
-                using (var mainDocument = WordprocessingDocument.Open(mainStream, true))
+                using (var document = WordprocessingDocument.Open(memoryStream, true))
                 {
-                    var newBody = XElement.Parse(mainDocument.MainDocumentPart.Document.Body.OuterXml);
+                    var newBody = XElement.Parse(document.MainDocumentPart.Document.Body.OuterXml);
 
                     for (int pointer = 1; pointer < documents.Count; pointer++)
                     {
@@ -86,14 +85,13 @@
                         var tempBody = XElement.Parse(tempDocument.MainDocumentPart.Document.Body.OuterXml);
 
                         newBody.Add(tempBody);
-                        mainDocument.MainDocumentPart.Document.Body = new Body(newBody.ToString());
-                        mainDocument.MainDocumentPart.Document.Save();
-                        mainDocument.Package.Flush();
+                        document.MainDocumentPart.Document.Body = new Body(newBody.ToString());
+                        document.MainDocumentPart.Document.Save();
+                        document.Package.Flush();
                     }
                 }
-                ret = mainStream.ToArray();
+                return memoryStream.ToArray();
             }
-            return (ret);
         }
     }
 }
