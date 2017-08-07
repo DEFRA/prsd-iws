@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace EA.Iws.Web.Areas.NotificationMovements.Views.UploadChoice {
+namespace EA.Iws.Web.Areas.NotificationMovements.Views.Upload {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace EA.Iws.Web.Areas.NotificationMovements.Views.UploadChoice {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EA.Iws.Web.Areas.NotificationMovements.Views.UploadChoice.IndexResources", typeof(IndexResources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EA.Iws.Web.Areas.NotificationMovements.Views.Upload.IndexResources", typeof(IndexResources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,47 +61,65 @@ namespace EA.Iws.Web.Areas.NotificationMovements.Views.UploadChoice {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to All your prenotifications have been uploaded..
+        ///   Looks up a localized string similar to download it again.
         /// </summary>
-        public static string NoMovementText {
+        public static string DownloadItAgain {
             get {
-                return ResourceManager.GetString("NoMovementText", resourceCulture);
+                return ResourceManager.GetString("DownloadItAgain", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to If you need another copy of this prenotification document,.
+        /// </summary>
+        public static string IfYouNeedAnotherCopy {
+            get {
+                return ResourceManager.GetString("IfYouNeedAnotherCopy", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Go to notification options.
         /// </summary>
-        public static string NotificationOptionsLinkText {
+        public static string NotificationOptionsLink {
             get {
-                return ResourceManager.GetString("NotificationOptionsLinkText", resourceCulture);
+                return ResourceManager.GetString("NotificationOptionsLink", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Please select all the prenotifications that you would like to upload documentation for..
+        ///   Looks up a localized string similar to Please make sure your prenotification is signed before you upload it..
         /// </summary>
-        public static string SelectPrenotificationsParagraph {
+        public static string PleaseSignPrenotification {
             get {
-                return ResourceManager.GetString("SelectPrenotificationsParagraph", resourceCulture);
+                return ResourceManager.GetString("PleaseSignPrenotification", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Select prenotification(s) to upload.
-        /// </summary>
-        public static string TabTitle {
-            get {
-                return ResourceManager.GetString("TabTitle", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Select prenotification(s) to upload.
+        ///   Looks up a localized string similar to Upload your signed prenotifications.
         /// </summary>
         public static string Title {
             get {
                 return ResourceManager.GetString("Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Only upload 1 document, which should contain copies of all the prenotifications for your selected shipments..
+        /// </summary>
+        public static string UploadInstructions {
+            get {
+                return ResourceManager.GetString("UploadInstructions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Upload the signed copy of the document for these prenotifications:.
+        /// </summary>
+        public static string UploadSignedPrenotifications {
+            get {
+                return ResourceManager.GetString("UploadSignedPrenotifications", resourceCulture);
             }
         }
     }

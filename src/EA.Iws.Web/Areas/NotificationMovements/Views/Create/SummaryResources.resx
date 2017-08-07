@@ -117,19 +117,43 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="NoMovementText" xml:space="preserve">
-    <value>All your prenotifications have been uploaded.</value>
+  <data name="CompleteBlocks7And8" xml:space="preserve">
+    <value>complete blocks 7 and 8</value>
   </data>
-  <data name="NotificationOptionsLinkText" xml:space="preserve">
-    <value>Go to notification options</value>
+  <data name="CompletePrenotificationsParagraph" xml:space="preserve">
+    <value>Before we can consider your prenotifications, you still have to complete, sign and submit the documentation. This is a five step process:</value>
   </data>
-  <data name="SelectPrenotificationsParagraph" xml:space="preserve">
-    <value>Please select all the prenotifications that you would like to upload documentation for.</value>
+  <data name="DownloadTheDocuments" xml:space="preserve">
+    <value>download the {0} documents</value>
   </data>
-  <data name="TabTitle" xml:space="preserve">
-    <value>Select prenotification(s) to upload</value>
+  <data name="PackagingTypes" xml:space="preserve">
+    <value>Packaging type(s)</value>
+  </data>
+  <data name="PrintTheDocuments" xml:space="preserve">
+    <value>print the documents</value>
+  </data>
+  <data name="Quantity" xml:space="preserve">
+    <value>Quantity</value>
+  </data>
+  <data name="ShipmentNumbers" xml:space="preserve">
+    <value>Shipment number(s)</value>
+  </data>
+  <data name="SignIt" xml:space="preserve">
+    <value>sign it</value>
+  </data>
+  <data name="SummaryParagraph" xml:space="preserve">
+    <value>You have created {0} shipments, totalling {1}.</value>
   </data>
   <data name="Title" xml:space="preserve">
-    <value>Select prenotification(s) to upload</value>
+    <value>What to do next with these prenotifications</value>
+  </data>
+  <data name="UploadPrenotificationsParagraph" xml:space="preserve">
+    <value>You can either {0}, or choose to upload them later. You'll be able to do this from the 'Notification options' page.</value>
+  </data>
+  <data name="UploadTheSignedDocuments" xml:space="preserve">
+    <value>upload the signed documents</value>
+  </data>
+  <data name="UploadTheSignedFilesNow" xml:space="preserve">
+    <value>upload the signed files now</value>
   </data>
 </root>

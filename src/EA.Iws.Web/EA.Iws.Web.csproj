@@ -777,7 +777,7 @@
     <Content Include="Areas\ImportNotification\Views\Home\_Producer.cshtml" />
     <Content Include="Areas\ImportNotification\Views\Home\_Facility.cshtml" />
     <Content Include="Areas\ImportNotification\Views\Home\_Importer.cshtml" />
-    <Content Include="Areas\NotificationMovements\Views\Create\Download.cshtml" />
+    <Content Include="Areas\NotificationMovements\Views\Create\Summary.cshtml" />
     <Content Include="Areas\ImportNotification\Views\Preconsented\Index.cshtml" />
     <Content Include="Areas\ImportNotification\Views\Home\_IntendedShipment.cshtml" />
     <Content Include="Areas\ImportNotification\Views\Home\_StateOfExport.cshtml" />
@@ -974,6 +974,8 @@
     <Content Include="Areas\NotificationMovements\Views\Create\Index.cshtml" />
     <Content Include="Areas\AdminExportNotificationMovements\Views\CaptureMovement\_ChangeShipment.cshtml" />
     <Content Include="Areas\AdminImportNotificationMovements\Views\Capture\_ChangeShipment.cshtml" />
+    <Content Include="Areas\NotificationMovements\Views\Upload\Index.cshtml" />
+    <Content Include="Areas\NotificationMovements\Views\Upload\Success.cshtml" />
     <Content Include="Areas\AdminExportNotificationMovements\Views\MovementOverride\Index.cshtml" />
     <Content Include="Areas\AdminExportNotificationMovements\Views\MovementOverride\_ShipmentComments.cshtml" />
     <Content Include="Areas\AdminExportNotificationMovements\Views\MovementOverride\_ChangeShipment.cshtml" />
@@ -2280,6 +2282,7 @@
     </Compile>
     <Compile Include="Areas\NotificationMovements\Controllers\DocumentsController.cs" />
     <Compile Include="Areas\NotificationMovements\Controllers\DownloadController.cs" />
+    <Compile Include="Areas\NotificationMovements\Controllers\UploadController.cs" />
     <Compile Include="Areas\NotificationMovements\ViewModels\Create\ThreeWorkingDaysSelection.cs" />
     <Compile Include="Areas\NotificationMovements\ViewModels\Create\ThreeWorkingDaysWarningViewModel.cs" />
     <Compile Include="Areas\NotificationMovements\ViewModels\Create\ThreeWorkingDaysWarningViewModelResources.Designer.cs">
@@ -2288,6 +2291,9 @@
       <DependentUpon>ThreeWorkingDaysWarningViewModelResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Areas\NotificationMovements\ViewModels\Download\DownloadMovementViewModel.cs" />
+    <Compile Include="Areas\NotificationMovements\ViewModels\Success\SuccessViewModel.cs" />
+    <Compile Include="Areas\NotificationMovements\ViewModels\Summary\SummaryViewModel.cs" />
+    <Compile Include="Areas\NotificationMovements\ViewModels\Upload\UploadViewModel.cs" />
     <Compile Include="Areas\NotificationMovements\Views\Create\ConsentExpiresInFourWorkingDaysResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -2317,6 +2323,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>NoApprovedFinancialGuaranteeResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\NotificationMovements\Views\Create\SummaryResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SummaryResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Areas\NotificationMovements\Views\Create\TotalActiveLoadsReachedResources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -2352,6 +2363,16 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>SummaryResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\NotificationMovements\Views\Upload\IndexResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IndexResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\NotificationMovements\Views\Upload\SuccessResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SuccessResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Areas\Reports\Controllers\FinancialGuaranteesController.cs" />
     <Compile Include="Areas\Reports\Controllers\ExportMovementsController.cs" />
@@ -4419,6 +4440,10 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>NoApprovedFinancialGuaranteeResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Areas\NotificationMovements\Views\Create\SummaryResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>SummaryResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Areas\NotificationMovements\Views\Create\ThreeWorkingDaysResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>ThreeWorkingDaysResources.Designer.cs</LastGenOutput>
@@ -4470,6 +4495,14 @@
     <EmbeddedResource Include="Areas\NotificationMovements\Views\UploadChoice\IndexResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\NotificationMovements\Views\Upload\IndexResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\NotificationMovements\Views\Upload\SuccessResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>SuccessResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\Reports\ViewModels\FinancialGuarantees\IndexViewModelResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

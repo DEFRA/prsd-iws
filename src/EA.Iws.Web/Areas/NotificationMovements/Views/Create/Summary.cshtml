@@ -1,0 +1,53 @@
+﻿@model EA.Iws.Web.Areas.NotificationMovements.ViewModels.Summary.SummaryViewModel
+@using Resources = EA.Iws.Web.Areas.NotificationMovements.Views.Create.SummaryResources
+@{
+    ViewBag.Title = Resources.Title;
+    Layout = "~/Areas/NotificationMovements/Views/Shared/_CreateSummaryLayout.cshtml";
+}
+
+<header class="hgroup">
+    <h1 class="heading-large">@Resources.Title</h1>
+</header>
+
+<p>@string.Format(Resources.SummaryParagraph,Model.NumberOfShipments, Model.TotalQuantity)</p>
+
+<div class="form-group">
+    <table>
+        <tbody>
+        <tr>
+            <th>@Resources.ShipmentNumbers</th>
+            <th>@Resources.Quantity</th>
+            <th>@Resources.PackagingTypes</th>
+        </tr>
+            <tr>
+                <td>@Model.ShipmentNumbers</td>
+                <td>@Model.Quantity</td>
+                <td>@Model.PackagingTypes</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<p>@Resources.CompletePrenotificationsParagraph</p>
+
+<div class="form-group">
+    <ol class="list-number">
+        <li>
+            @Html.Raw(string.Format(Resources.DownloadTheDocuments, Html.ActionLink("IWS movement", "GenerateDocuments", "Download", Model.MovementIds.ToRouteValueDictionary("movementIds"), null)))
+        </li>
+        <li>@Resources.PrintTheDocuments</li>
+        <li>@Resources.CompleteBlocks7And8</li>
+        <li>@Resources.SignIt</li>
+        <li>@Resources.UploadTheSignedDocuments</li>
+    </ol>
+</div>
+
+<p>@Html.Raw(string.Format(Resources.UploadPrenotificationsParagraph, Html.ActionLink(Resources.UploadTheSignedFilesNow, "Index", "Upload", Model.MovementIds.ToRouteValueDictionary("movementIds"), null)))</p>
+
+<div class="form-group">
+    @Html.ActionLink(Constants.ContinueOnlyButtonText, "Index", "Options",
+            new { area = "NotificationApplication", id = ViewContext.RouteData.Values["notificationId"] },
+            new { @class = "button" })
+</div>
+
+@Html.FeedbackLink()

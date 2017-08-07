@@ -1,0 +1,22 @@
+﻿@model EA.Iws.Web.Areas.NotificationMovements.ViewModels.Success.SuccessViewModel
+@using Resources = EA.Iws.Web.Areas.NotificationMovements.Views.Upload.SuccessResources
+@{
+    ViewBag.Title = Resources.Title;
+    Layout = "~/Areas/NotificationMovements/Views/Shared/_CreateSummaryLayout.cshtml";
+}
+
+<header class="hgroup">
+    <h1 class="heading-large">@Resources.Heading</h1>
+</header>
+
+<ul class="list list-bullet">
+    @foreach (var shipment in Model.Shipments)
+    {
+        <li>@shipment</li>
+    }
+</ul>
+
+<p>@Resources.PrenotificationComplete</p>
+
+@Html.ActionLink(Constants.ContinueOnlyButtonText, "Index", "Options",
+    new { id = ViewBag.NotificationId, area = "NotificationApplication" }, new { @class = "button" })

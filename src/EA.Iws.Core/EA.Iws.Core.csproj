@@ -165,6 +165,7 @@
     <Compile Include="Movement\InternalMovementSummary.cs" />
     <Compile Include="Movement\MovementFileData.cs" />
     <Compile Include="Movement\MovementFiles.cs" />
+    <Compile Include="Movement\MovementInfo.cs" />
     <Compile Include="Movement\MovementReceiptAndRecoveryData.cs" />
     <Compile Include="Movement\MovementRules.cs" />
     <Compile Include="Movement\MovementRulesSummary.cs" />

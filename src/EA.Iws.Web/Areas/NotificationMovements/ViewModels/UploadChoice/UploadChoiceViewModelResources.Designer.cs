@@ -62,29 +62,11 @@ namespace EA.Iws.Web.Areas.NotificationMovements.ViewModels.UploadChoice {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Shipment number.
+        ///   Looks up a localized string similar to Please select at least one shipment.
         /// </summary>
-        public static string Number {
+        public static string ShipmentRequired {
             get {
-                return ResourceManager.GetString("Number", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Enter a shipment number.
-        /// </summary>
-        public static string ValidateEmpty {
-            get {
-                return ResourceManager.GetString("ValidateEmpty", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The shipment number must be positive.
-        /// </summary>
-        public static string ValidatePositive {
-            get {
-                return ResourceManager.GetString("ValidatePositive", resourceCulture);
+                return ResourceManager.GetString("ShipmentRequired", resourceCulture);
             }
         }
     }

@@ -117,19 +117,25 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="NoMovementText" xml:space="preserve">
-    <value>All your prenotifications have been uploaded.</value>
+  <data name="DownloadItAgain" xml:space="preserve">
+    <value>download it again</value>
   </data>
-  <data name="NotificationOptionsLinkText" xml:space="preserve">
+  <data name="IfYouNeedAnotherCopy" xml:space="preserve">
+    <value>If you need another copy of this prenotification document,</value>
+  </data>
+  <data name="NotificationOptionsLink" xml:space="preserve">
     <value>Go to notification options</value>
   </data>
-  <data name="SelectPrenotificationsParagraph" xml:space="preserve">
-    <value>Please select all the prenotifications that you would like to upload documentation for.</value>
-  </data>
-  <data name="TabTitle" xml:space="preserve">
-    <value>Select prenotification(s) to upload</value>
+  <data name="PleaseSignPrenotification" xml:space="preserve">
+    <value>Please make sure your prenotification is signed before you upload it.</value>
   </data>
   <data name="Title" xml:space="preserve">
-    <value>Select prenotification(s) to upload</value>
+    <value>Upload your signed prenotifications</value>
+  </data>
+  <data name="UploadInstructions" xml:space="preserve">
+    <value>Only upload 1 document, which should contain copies of all the prenotifications for your selected shipments.</value>
+  </data>
+  <data name="UploadSignedPrenotifications" xml:space="preserve">
+    <value>Upload the signed copy of the document for these prenotifications:</value>
   </data>
 </root>

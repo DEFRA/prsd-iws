@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace EA.Iws.Web.Areas.NotificationMovements.Views.UploadChoice {
+namespace EA.Iws.Web.Areas.NotificationMovements.Views.Upload {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace EA.Iws.Web.Areas.NotificationMovements.Views.UploadChoice {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class IndexResources {
+    public class SuccessResources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal IndexResources() {
+        internal SuccessResources() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace EA.Iws.Web.Areas.NotificationMovements.Views.UploadChoice {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EA.Iws.Web.Areas.NotificationMovements.Views.UploadChoice.IndexResources", typeof(IndexResources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EA.Iws.Web.Areas.NotificationMovements.Views.Upload.SuccessResources", typeof(SuccessResources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,43 +61,25 @@ namespace EA.Iws.Web.Areas.NotificationMovements.Views.UploadChoice {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to All your prenotifications have been uploaded..
+        ///   Looks up a localized string similar to You&apos;ve successfully prenotified us of the following shipments:.
         /// </summary>
-        public static string NoMovementText {
+        public static string Heading {
             get {
-                return ResourceManager.GetString("NoMovementText", resourceCulture);
+                return ResourceManager.GetString("Heading", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Go to notification options.
+        ///   Looks up a localized string similar to Your prenotification is now complete..
         /// </summary>
-        public static string NotificationOptionsLinkText {
+        public static string PrenotificationComplete {
             get {
-                return ResourceManager.GetString("NotificationOptionsLinkText", resourceCulture);
+                return ResourceManager.GetString("PrenotificationComplete", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Please select all the prenotifications that you would like to upload documentation for..
-        /// </summary>
-        public static string SelectPrenotificationsParagraph {
-            get {
-                return ResourceManager.GetString("SelectPrenotificationsParagraph", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Select prenotification(s) to upload.
-        /// </summary>
-        public static string TabTitle {
-            get {
-                return ResourceManager.GetString("TabTitle", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Select prenotification(s) to upload.
+        ///   Looks up a localized string similar to Success.
         /// </summary>
         public static string Title {
             get {
