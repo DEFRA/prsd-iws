@@ -2,15 +2,15 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     using System.Linq;
     using Core.Movement;
-    using Web.ViewModels.Shared;
 
-    public class UploadChoiceViewModel
+    public class UploadChoiceViewModel : IValidatableObject
     {
         public Guid NotificationId { get; set; }
 
-        public StringGuidRadioButtons RadioButtons { get; set; }
+        public IList<SelectShipmentViewModel> Shipments { get; set; }
 
         public UploadChoiceViewModel()
         {
@@ -18,15 +18,37 @@
 
         public UploadChoiceViewModel(Guid id, IEnumerable<MovementData> model)
         {
-            RadioButtons = new StringGuidRadioButtons(model
+            Shipments = model
                 .OrderBy(d => d.Number)
-                .Select(d => new KeyValuePair<string, Guid>("Shipment " + d.Number, d.Id)));
+                .Select(d => new SelectShipmentViewModel
+                {
+                    DisplayName = "Shipment " + d.Number,
+                    Id = d.Id,
+                    IsSelected = false
+                }).ToArray();
             NotificationId = id;
         }
 
         public bool NoMovementsToList
         {
-            get { return RadioButtons == null || RadioButtons.PossibleValues.Count == 0; }
+            get { return Shipments == null || !Shipments.Any(); }
+        }
+
+        public class SelectShipmentViewModel
+        {
+            public string DisplayName { get; set; }
+
+            public Guid Id { get; set; }
+
+            public bool IsSelected { get; set; }
+        }
+
+        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+        {
+            if (!Shipments.Any(s => s.IsSelected))
+            {
+                yield return new ValidationResult(UploadChoiceViewModelResources.ShipmentRequired, new[] { "Shipments" });
+            }
         }
     }
 }

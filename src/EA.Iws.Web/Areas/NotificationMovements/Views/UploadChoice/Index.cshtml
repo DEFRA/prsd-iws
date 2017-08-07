@@ -8,25 +8,35 @@
 
 <h1 class="heading-large">@Resource.Title</h1>
 
-@using (Html.BeginForm())
+@if (Model.NoMovementsToList)
 {
-    @Html.AntiForgeryToken()
-    @Html.Gds().ValidationSummary()
-    @Html.HiddenFor(m => m.NotificationId)
+    <p>@Resource.NoMovementText</p>
 
-    if (Model.NoMovementsToList)
+    @Html.ActionLink(Resource.NotificationOptionsLinkText, "Index", "Options",
+        new { id = Model.NotificationId, area = "NotificationApplication" },
+        new { @class = "button" })
+}
+else
+{
+    using (Html.BeginForm())
     {
-        <p>@Resource.NoMovementText</p>
+        @Html.AntiForgeryToken()
+        @Html.Gds().ValidationSummary()
+        @Html.HiddenFor(m => m.NotificationId)
+        <div class="form-group @Html.Gds().FormGroupClass(m => m.Shipments)">
+            <fieldset>
+                <p>@Resource.SelectPrenotificationsParagraph</p>
 
-        @Html.ActionLink(Resource.NotificationOptionsLinkText, "Index", "Options",
-                new { id = Model.NotificationId, area = "NotificationApplication" },
-                new { @class = "button" })
-    }
-    else
-    {
-        <div class="form-group">
-            @Html.Gds().ValidationMessageFor(m => m.RadioButtons.SelectedValue)
-            @Html.EditorFor(m => m.RadioButtons)
+                @for (int i = 0; i < Model.Shipments.Count(); i++)
+                {
+                    <div class="multiple-choice">
+                        @Html.HiddenFor(m => m.Shipments[i].Id)
+                        @Html.HiddenFor(m => m.Shipments[i].DisplayName)
+                        @Html.CheckBoxFor(m => m.Shipments[i].IsSelected)
+                        <label for="@Html.IdFor(m => m.Shipments[i].IsSelected)">@Model.Shipments[i].DisplayName</label>
+                    </div>
+                }
+            </fieldset>
         </div>
 
         <div class="form-group">

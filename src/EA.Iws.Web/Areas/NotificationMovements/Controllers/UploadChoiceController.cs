@@ -1,25 +1,18 @@
 ﻿namespace EA.Iws.Web.Areas.NotificationMovements.Controllers
 {
     using System;
-    using System.Collections.Generic;
+    using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Mvc;
+    using Infrastructure;
     using Infrastructure.Authorization;
     using Prsd.Core.Mediator;
     using Requests.Movement;
-    using Requests.NotificationMovements;
     using ViewModels.UploadChoice;
 
     [AuthorizeActivity(typeof(GetNewMovementIdsByNotificationId))]
     public class UploadChoiceController : Controller
     {
-        private static readonly Dictionary<MovementNumberStatus, string> ValidationMessages = new Dictionary<MovementNumberStatus, string>
-        {
-            { MovementNumberStatus.DoesNotExist, UploadChoiceControllerResources.DoesNotExist },
-            { MovementNumberStatus.NotNew, UploadChoiceControllerResources.NotNew },
-            { MovementNumberStatus.OutOfRange, UploadChoiceControllerResources.OutOfRange }
-        };
-
         private readonly IMediator mediator;
 
         public UploadChoiceController(IMediator mediator)
@@ -44,7 +37,7 @@
                 return View(model);
             }
 
-            return RedirectToAction("Index", "Submit", new { id = model.RadioButtons.SelectedValue, area = "ExportMovement" });
+            return RedirectToAction("Index", "Upload", model.Shipments.Where(s => s.IsSelected).Select(s => s.Id).ToRouteValueDictionary("movementIds"));
         }
     }
 }

@@ -79,7 +79,16 @@ namespace EA.Iws.Web.Areas.NotificationMovements.Views.UploadChoice {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Select a prenotification.
+        ///   Looks up a localized string similar to Please select all the prenotifications that you would like to upload documentation for..
+        /// </summary>
+        public static string SelectPrenotificationsParagraph {
+            get {
+                return ResourceManager.GetString("SelectPrenotificationsParagraph", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select prenotification(s) to upload.
         /// </summary>
         public static string TabTitle {
             get {
@@ -88,7 +97,7 @@ namespace EA.Iws.Web.Areas.NotificationMovements.Views.UploadChoice {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Which prenotification would you like to upload?.
+        ///   Looks up a localized string similar to Select prenotification(s) to upload.
         /// </summary>
         public static string Title {
             get {
