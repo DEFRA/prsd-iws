@@ -148,9 +148,12 @@
     <value>What to do next with these prenotifications</value>
   </data>
   <data name="UploadPrenotificationsParagraph" xml:space="preserve">
-    <value>You can either upload the signed files now, or choose to upload them later. You'll be able to do this from the 'Notification options' page.</value>
+    <value>You can either {0}, or choose to upload them later. You'll be able to do this from the 'Notification options' page.</value>
   </data>
   <data name="UploadTheSignedDocuments" xml:space="preserve">
     <value>upload the signed documents</value>
+  </data>
+  <data name="UploadTheSignedFilesNow" xml:space="preserve">
+    <value>upload the signed files now</value>
   </data>
 </root>

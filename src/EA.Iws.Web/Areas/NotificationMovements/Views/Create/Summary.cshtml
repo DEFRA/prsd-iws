@@ -42,7 +42,7 @@
     </ol>
 </div>
 
-<p>@Resources.UploadPrenotificationsParagraph</p>
+<p>@Html.Raw(string.Format(Resources.UploadPrenotificationsParagraph, Html.ActionLink(Resources.UploadTheSignedFilesNow, "Index", "Upload", Model.MovementIds.ToRouteValueDictionary("movementIds"), null)))</p>
 
 <div class="form-group">
     @Html.ActionLink(Constants.ContinueOnlyButtonText, "Index", "Options",

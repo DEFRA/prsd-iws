@@ -151,7 +151,7 @@ namespace EA.Iws.Web.Areas.NotificationMovements.Views.Create {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You can either upload the signed files now, or choose to upload them later. You&apos;ll be able to do this from the &apos;Notification options&apos; page..
+        ///   Looks up a localized string similar to You can either {0}, or choose to upload them later. You&apos;ll be able to do this from the &apos;Notification options&apos; page..
         /// </summary>
         public static string UploadPrenotificationsParagraph {
             get {
@@ -165,6 +165,15 @@ namespace EA.Iws.Web.Areas.NotificationMovements.Views.Create {
         public static string UploadTheSignedDocuments {
             get {
                 return ResourceManager.GetString("UploadTheSignedDocuments", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to upload the signed files now.
+        /// </summary>
+        public static string UploadTheSignedFilesNow {
+            get {
+                return ResourceManager.GetString("UploadTheSignedFilesNow", resourceCulture);
             }
         }
     }
