@@ -97,6 +97,15 @@ namespace EA.Iws.Web.Areas.ExportMovement.ViewModels.Reject {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to This date cannot be before the actual date of shipment. Please enter a different date..
+        /// </summary>
+        public static string RejectionDateNotBeforeShipmentDate {
+            get {
+                return ResourceManager.GetString("RejectionDateNotBeforeShipmentDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Why was this waste rejected?.
         /// </summary>
         public static string RejectionReasonTitle {

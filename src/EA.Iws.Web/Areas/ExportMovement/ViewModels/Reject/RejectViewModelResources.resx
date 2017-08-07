@@ -129,6 +129,9 @@
   <data name="FileRequired" xml:space="preserve">
     <value>Please provide the signed certificate of receipt</value>
   </data>
+  <data name="RejectionDateNotBeforeShipmentDate" xml:space="preserve">
+    <value>This date cannot be before the actual date of shipment. Please enter a different date.</value>
+  </data>
   <data name="RejectionReasonTitle" xml:space="preserve">
     <value>Why was this waste rejected?</value>
   </data>
