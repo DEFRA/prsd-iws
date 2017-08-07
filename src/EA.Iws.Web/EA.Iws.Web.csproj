@@ -2289,6 +2289,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>NoApprovedFinancialGuaranteeResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Areas\NotificationMovements\Views\Create\SummaryResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SummaryResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Areas\NotificationMovements\Views\Create\TotalActiveLoadsReachedResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -4373,6 +4378,10 @@
     <EmbeddedResource Include="Areas\NotificationMovements\Views\Create\NoApprovedFinancialGuaranteeResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>NoApprovedFinancialGuaranteeResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\NotificationMovements\Views\Create\SummaryResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>SummaryResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\NotificationMovements\Views\Create\ThreeWorkingDaysResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

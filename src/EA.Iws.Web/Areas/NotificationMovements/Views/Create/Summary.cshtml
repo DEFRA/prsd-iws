@@ -1,22 +1,23 @@
 ﻿@model EA.Iws.Web.Areas.NotificationMovements.ViewModels.Summary.SummaryViewModel
+@using Resources = EA.Iws.Web.Areas.NotificationMovements.Views.Create.SummaryResources
 @{
-    ViewBag.Title = "Download your prenotification";
+    ViewBag.Title = Resources.Title;
     Layout = "~/Areas/NotificationMovements/Views/Shared/_CreateSummaryLayout.cshtml";
 }
 
 <header class="hgroup">
-    <h1 class="heading-large">What to do next with these prenotifications</h1>
+    <h1 class="heading-large">@Resources.Title</h1>
 </header>
 
-<p>You have created @Model.NumberOfShipments shipments, totalling @Model.TotalQuantity.</p>
+<p>@string.Format(Resources.SummaryParagraph,Model.NumberOfShipments, Model.TotalQuantity)</p>
 
 <div class="form-group">
     <table>
         <tbody>
         <tr>
-            <th>Shipment number(s)</th>
-            <th>Quantity</th>
-            <th>Packaging type(s)</th>
+            <th>@Resources.ShipmentNumbers</th>
+            <th>@Resources.Quantity</th>
+            <th>@Resources.PackagingTypes</th>
         </tr>
             <tr>
                 <td>@Model.ShipmentNumbers</td>
@@ -27,23 +28,21 @@
     </table>
 </div>
 
-<p>Before we can consider your prenotifications, you still have to complete, sign and submit the documentation. This is a five step process:</p>
+<p>@Resources.CompletePrenotificationsParagraph</p>
 
 <div class="form-group">
     <ol class="list-number">
         <li>
-            download the
-            @Html.ActionLink("IWS movement", "GenerateDocuments", "Download", Model.MovementIds.ToRouteValueDictionary("movementIds"), null)
-            documents
+            @Html.Raw(string.Format(Resources.DownloadTheDocuments, Html.ActionLink("IWS movement", "GenerateDocuments", "Download", Model.MovementIds.ToRouteValueDictionary("movementIds"), null)))
         </li>
-        <li>print the documents</li>
-        <li>complete blocks 7 and 8</li>
-        <li>sign it</li>
-        <li>upload the signed documents</li>
+        <li>@Resources.PrintTheDocuments</li>
+        <li>@Resources.CompleteBlocks7And8</li>
+        <li>@Resources.SignIt</li>
+        <li>@Resources.UploadTheSignedDocuments</li>
     </ol>
 </div>
 
-<p>You can either upload the signed files now, or choose to upload them later. You'll be able to do this from the 'Notification options' page.</p>
+<p>@Resources.UploadPrenotificationsParagraph</p>
 
 <div class="form-group">
     @Html.ActionLink(Constants.ContinueOnlyButtonText, "Index", "Options",
