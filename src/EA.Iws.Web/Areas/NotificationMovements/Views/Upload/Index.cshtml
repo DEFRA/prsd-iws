@@ -1,21 +1,22 @@
 ﻿@model EA.Iws.Web.Areas.NotificationMovements.ViewModels.Upload.UploadViewModel
+@using Resources = EA.Iws.Web.Areas.NotificationMovements.Views.Upload.IndexResources
 @{
-    ViewBag.Title = "Upload your signed prenotifications";
+    ViewBag.Title = Resources.Title;
     Layout = "~/Areas/NotificationMovements/Views/Shared/_CreateSummaryLayout.cshtml";
 }
 
-<h1 class="heading-large">Upload your signed prenotifications</h1>
+<h1 class="heading-large">@Resources.Title</h1>
 
-<p>Only upload 1 document, which should contain copies of all the prenotifications for your selected shipments.</p>
+<p>@Resources.UploadInstructions</p>
 
 <p>
-    If you need another copy of this prenotification document,
-    @Html.ActionLink("download it again", "GenerateDocuments", "Download", Model.MovementIds.ToRouteValueDictionary("movementIds"), null).
+    @Resources.IfYouNeedAnotherCopy
+    @Html.ActionLink(Resources.DownloadItAgain, "GenerateDocuments", "Download", Model.MovementIds.ToRouteValueDictionary("movementIds"), null).
 </p>
 
-<p>Please make sure your prenotification is signed before you upload it.</p>
+<p>@Resources.PleaseSignPrenotification</p>
 
-<strong class="bold-small">Upload the signed copy of the document for these prenotifications: @Model.ShipmentNumbers</strong>
+<strong class="bold-small">@Resources.UploadSignedPrenotifications @Model.ShipmentNumbers</strong>
 
 @using (Html.BeginForm(null, null, Model.MovementIds.ToRouteValueDictionary("movementIds"), 
     FormMethod.Post, HtmlHelper.AnonymousObjectToHtmlAttributes(new { enctype = "multipart/form-data" })))
@@ -34,7 +35,7 @@
     </div>
 
     <div>
-        @Html.ActionLink("Go to notification options", "Index", "Options",
+        @Html.ActionLink(Resources.NotificationOptionsLink, "Index", "Options",
                 new { id = ViewBag.NotificationId, area = "NotificationApplication" }, null)
     </div>
 }
