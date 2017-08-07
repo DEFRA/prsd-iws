@@ -777,7 +777,7 @@
     <Content Include="Areas\ImportNotification\Views\Home\_Producer.cshtml" />
     <Content Include="Areas\ImportNotification\Views\Home\_Facility.cshtml" />
     <Content Include="Areas\ImportNotification\Views\Home\_Importer.cshtml" />
-    <Content Include="Areas\NotificationMovements\Views\Create\Download.cshtml" />
+    <Content Include="Areas\NotificationMovements\Views\Create\Summary.cshtml" />
     <Content Include="Areas\ImportNotification\Views\Preconsented\Index.cshtml" />
     <Content Include="Areas\ImportNotification\Views\Home\_IntendedShipment.cshtml" />
     <Content Include="Areas\ImportNotification\Views\Home\_StateOfExport.cshtml" />
@@ -2288,6 +2288,7 @@
       <DependentUpon>ThreeWorkingDaysWarningViewModelResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Areas\NotificationMovements\ViewModels\Download\DownloadMovementViewModel.cs" />
+    <Compile Include="Areas\NotificationMovements\ViewModels\Summary\SummaryViewModel.cs" />
     <Compile Include="Areas\NotificationMovements\Views\Create\ConsentExpiresInFourWorkingDaysResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -2317,6 +2318,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>NoApprovedFinancialGuaranteeResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\NotificationMovements\Views\Create\SummaryResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SummaryResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Areas\NotificationMovements\Views\Create\TotalActiveLoadsReachedResources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -4418,6 +4424,10 @@
     <EmbeddedResource Include="Areas\NotificationMovements\Views\Create\NoApprovedFinancialGuaranteeResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>NoApprovedFinancialGuaranteeResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\NotificationMovements\Views\Create\SummaryResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>SummaryResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\NotificationMovements\Views\Create\ThreeWorkingDaysResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

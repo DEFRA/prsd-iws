@@ -403,8 +403,10 @@
     <Compile Include="Movement\Edit\GetMovementDateHistoryHandler.cs" />
     <Compile Include="Movement\Edit\IsProposedUpdatedMovementDateValidHandler.cs" />
     <Compile Include="Movement\Edit\UpdateMovementDateHandler.cs" />
+    <Compile Include="Movement\GenerateMovementDocumentsHandler.cs" />
     <Compile Include="Movement\GetMovementFilesHandler.cs" />
     <Compile Include="Movement\GetMovementIdByNumberHandler.cs" />
+    <Compile Include="Movement\GetMovementsByIdsHandler.cs" />
     <Compile Include="Movement\GetNewMovementIdsByNotificationIdHandler.cs" />
     <Compile Include="Movement\GetNotificationNumberByMovementIdHandler.cs" />
     <Compile Include="Movement\SetMovementCommentsHandler.cs" />

@@ -199,11 +199,13 @@
     <Compile Include="Movement\Edit\GetMovementDateHistory.cs" />
     <Compile Include="Movement\Edit\IsProposedUpdatedMovementDateValid.cs" />
     <Compile Include="Movement\Edit\UpdateMovementDate.cs" />
+    <Compile Include="Movement\GenerateMovementDocuments.cs" />
     <Compile Include="Movement\GenerateMovementDocument.cs" />
     <Compile Include="Movement\GetMovementDateByMovementId.cs" />
     <Compile Include="Movement\GetMovementFiles.cs" />
     <Compile Include="Movement\GetMovementIdByNumber.cs" />
     <Compile Include="Movement\Complete\RecordOperationCompleteInternal.cs" />
+    <Compile Include="Movement\GetMovementsByIds.cs" />
     <Compile Include="Movement\GetNewMovementIdsByNotificationId.cs" />
     <Compile Include="Movement\GetNotificationNumberByMovementId.cs" />
     <Compile Include="Movement\SetMovementComments.cs" />

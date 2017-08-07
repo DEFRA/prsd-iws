@@ -6,5 +6,6 @@
     public interface IMovementDocumentGenerator
     {
         Task<byte[]> Generate(Guid movementId);
+        Task<byte[]> GenerateMultiple(Guid[] movementIds);
     }
 }
