@@ -1,18 +1,18 @@
-﻿@model EA.Iws.Web.Areas.AdminExportNotificationMovements.ViewModels.MovementOverride.IndexViewModel
-@using Resource = EA.Iws.Web.Areas.AdminExportNotificationMovements.Views.MovementOverride.IndexResources
+﻿@using Resource = EA.Iws.Web.Areas.AdminImportNotificationMovements.Views.MovementOverride.IndexResources
+@model EA.Iws.Web.Areas.AdminImportNotificationMovements.ViewModels.MovementOverride.IndexViewModel
 @using EA.Iws.Core.Shared
 
 
 <div class="grid-row container">
     <div class="stickem-row stickem-container">
         <div class="column-two-thirds">
-
             <h1 class="heading-large">@Resource.MainHeading</h1>
             @using (Html.BeginForm())
             {
                 @Html.AntiForgeryToken()
                 @Html.Gds().ValidationSummary()
                 @Html.HiddenFor(m => m.NotificationType)
+
                 var operationLabelVerb = Model.NotificationType == NotificationType.Recovery ? "recovered" : "disposed of";
                 var operationTitleVerb = Model.NotificationType == NotificationType.Recovery ? "Recovered" : "Disposed";
 
@@ -27,69 +27,66 @@
                 }
                 else
                 {
-                    <div class="form-group @Html.Gds().FormGroupClass(m => m.PrenotificationDate) @Html.Gds().FormGroupClass(m => m.HasNoPrenotification)">
-                        @Html.LabelFor(m => m.PrenotificationDate, new { @class = "form-label-bold" })
-                        @Html.Gds().ValidationMessageFor(m => m.PrenotificationDate)
-                        @Html.Gds().TextBoxFor(m => m.PrenotificationDate, new { data_datable = "ddmmyy", @class = "form-control-narrow", @Value = Model.PrenotificationDate.HasValue ? Model.PrenotificationDate.Value.ToString("dd/MM/yy") : Model.PrenotificationDate.ToString() })
-                    </div>
+                <div class="form-group @Html.Gds().FormGroupClass(m => m.PrenotificationDate)">
+                    @Html.LabelFor(m => m.PrenotificationDate, new { @class = "form-label-bold" })
+                    @Html.Gds().ValidationMessageFor(m => m.PrenotificationDate)
+                    @Html.Gds().TextBoxFor(m => m.PrenotificationDate, new { data_datable = "ddmmyy", @class = "form-control-narrow", @Value = Model.PrenotificationDate.HasValue ? Model.PrenotificationDate.Value.ToString("dd/MM/yy") : Model.PrenotificationDate.ToString()  })
+                </div>
 
-                    <div class="form-group @Html.Gds().FormGroupClass(m => m.HasNoPrenotification)">
-                        <fieldset>
-                            <div>@Html.Gds().ValidationMessageFor(m => m.HasNoPrenotification)</div>
-                            <div class="multiple-choice">
-                                @Html.CheckBoxFor(m => m.HasNoPrenotification)
-                                <label for="@Html.NameFor(m => m.HasNoPrenotification)">
-                                    @Html.DisplayNameFor(m => m.HasNoPrenotification)
-                                </label>
-                            </div>
-                        </fieldset>
-                    </div>
+                <div class="form-group @Html.Gds().FormGroupClass(m => m.HasNoPrenotification)">
+                    <fieldset>
+                        <div>@Html.Gds().ValidationMessageFor(m => m.HasNoPrenotification)</div>
+                        <div class="multiple-choice">
+                            @Html.CheckBoxFor(m => m.HasNoPrenotification)
+                            <label for="@Html.NameFor(m => m.HasNoPrenotification)">
+                                @Html.DisplayNameFor(m => m.HasNoPrenotification)
+                            </label>
+                        </div>
+                    </fieldset>
+                </div>
                 }
-
                 <div class="form-group @Html.Gds().FormGroupClass(m => m.ActualShipmentDate)">
                     @Html.LabelFor(m => m.ActualShipmentDate, new { @class = "form-label-bold" })
                     @Html.Gds().ValidationMessageFor(m => m.ActualShipmentDate)
                     @Html.Gds().TextBoxFor(m => m.ActualShipmentDate, new { data_datable = "ddmmyy", @class = "form-control-narrow", @Value = Model.ActualShipmentDate.HasValue ? Model.ActualShipmentDate.Value.ToString("dd/MM/yy") : Model.ActualShipmentDate.ToString() })
-
-
                 </div>
+
                 <hr />
                 if (Model.ReceivedDate.HasValue)
                 {
                     <div>
+
                         <div class="form-group @Html.Gds().FormGroupClass(m => m.ReceivedDate)">
                             @Html.LabelFor(m => m.ReceivedDate, new { @class = "form-label-bold" })
                             @Html.Gds().ValidationMessageFor(m => m.ReceivedDate)
                             @Html.Gds().TextBoxFor(m => m.ReceivedDate, new { data_datable = "ddmmyy", @class = "form-control-narrow", @Value = Model.ReceivedDate.HasValue ? Model.ReceivedDate.Value.ToString("dd/MM/yy") : Model.ReceivedDate.ToString() })
-
                         </div>
 
-
-                        <div class="form-group @Html.Gds().FormGroupClass(m => m.WasShipmentAccepted)">
-                            @Html.LabelFor(m => m.WasShipmentAccepted, new { @class = "form-label-bold" })
-                            @Html.Gds().ValidationMessageFor(m => m.WasShipmentAccepted)
+                        <div class="form-group @Html.Gds().FormGroupClass(m => m.WasAccepted)">
+                            @Html.LabelFor(m => m.WasAccepted, new { @class = "form-label-bold" })
+                            @Html.Gds().ValidationMessageFor(m => m.WasAccepted)
                             <fieldset>
                                 @if (Model.IsReceived || Model.IsRejected)
-                            {
-                            <p>@(Model.WasShipmentAccepted ? "Yes" : "No")</p>
-                            }
-                            else
-                            {
-                            <div class="multiple-choice">
-                                @Html.RadioButtonFor(m => m.WasShipmentAccepted, true, new { id = "yes" })
-                                <label for="yes">
-                                    Yes
-                                </label>
-                            </div>
+                                {
+                                    <p>@(Model.WasAccepted ? "Yes" : "No")</p>
+                                }
+                                else
+                                {
+                                <div class="multiple-choice">
+                                    @Html.RadioButtonFor(m => m.WasAccepted, true, new { id = "yes" })
+                                    <label for="yes">
+                                        Yes
+                                    </label>
+                                </div>
 
-                            <div class="multiple-choice" data-target="rejected">
-                                @Html.RadioButtonFor(m => m.WasShipmentAccepted, false, new { id = "no" })
-                                <label for="no">
-                                    No
-                                </label>
-                            </div>
-                            }
-                                <div class="panel @(Model.WasShipmentAccepted ? "js-hidden" : string.Empty)" id="rejected">
+                                <div class="multiple-choice" data-target="rejected">
+                                    @Html.RadioButtonFor(m => m.WasAccepted, false, new { id = "no" })
+                                    <label for="no">
+                                        No
+                                    </label>
+                                </div>
+                                }
+                                <div class="panel @(Model.WasAccepted ? "js-hidden" : string.Empty)" id="rejected">
 
                                     <div class="form-group @Html.Gds().FormGroupClass(m => m.RejectionReason)">
                                         @Html.LabelFor(m => m.RejectionReason, new { @class = "form-label-bold" })
@@ -98,9 +95,9 @@
                                     </div>
 
                                 </div>
+                                
                             </fieldset>
                         </div>
-
 
                         <div class="form-group @Html.Gds().FormGroupClass(m => m.ActualQuantity) @Html.Gds().FormGroupClass(m => m.Units)">
                             <h3 class="heading-small" style="margin-top: 0">@Resource.ActualQuantityQuestion</h3>
@@ -115,41 +112,44 @@
                                 <div class="column-third">
                                     @Html.Gds().DropDownListFor(m => m.Units, Model.UnitSelectList, new { @class = "form-control form-control-wide" })
                                     @for (int i = 0; i < Model.PossibleUnits.Count; i++)
-                                {
-                                @Html.HiddenFor(m => m.PossibleUnits[i])
-                                }
+                    {
+                                        @Html.HiddenFor(m => m.PossibleUnits[i])
+                                    }
                                 </div>
                             </div>
                         </div>
                     </div>
                     <hr />
                 }
+
+
+
                 if (Model.RecoveryDate.HasValue)
                 {
-                <div>
-                    <div class="form-group @Html.Gds().FormGroupClass(m => m.RecoveryDate)">
-                        @Html.LabelFor(m => m.RecoveryDate, string.Format(Resource.RecoveryDate, operationLabelVerb), new { @class = "form-label-bold" })
-                        @Html.Gds().ValidationMessageFor(m => m.RecoveryDate)
-                        @Html.Gds().TextBoxFor(m => m.RecoveryDate, new { data_datable = "ddmmyy", @class = "form-control-narrow", @Value = Model.RecoveryDate.HasValue ? Model.RecoveryDate.Value.ToString("dd/MM/yy") : Model.RecoveryDate.ToString() })
+                    <div>
+                        <div class="form-group @Html.Gds().FormGroupClass(m => m.RecoveryDate)">
+                            @Html.LabelFor(m => m.RecoveryDate, string.Format(Resource.RecoveryDate, operationLabelVerb), new { @class = "form-label-bold" })
+                            @Html.Gds().ValidationMessageFor(m => m.RecoveryDate)
+                            @Html.Gds().TextBoxFor(m => m.RecoveryDate, new { data_datable = "ddmmyy", @class = "form-control-narrow", @Value = Model.RecoveryDate.HasValue ? Model.RecoveryDate.Value.ToString("dd/MM/yy") : Model.RecoveryDate.ToString() })
+                        </div>
                     </div>
-                </div>
-                <hr />
+                    <hr />
                 }
-          
-                @Html.Partial("_ShipmentComments")
-               
+
+
+
+                @Html.Partial("_Comments")
+
                 <button class="button" type="submit">@Constants.ContinueButtonText</button>
-
             }
-        </div>
 
+        </div>
         @Html.Partial("_ChangeShipment")
+
     </div>
 </div>
-
 @section scripts {
-
-    <script>
+<script>
         var prenotificationDateSelector = $("#PrenotificationDate");
 
         function togglePrenotificationDate(checked) {
@@ -166,15 +166,14 @@
                     .css('color', 'black');
             }
         }
+
         togglePrenotificationDate($('#HasNoPrenotification').is(':checked'));
 
         $(function () {
             $("#HasNoPrenotification").click(function () {
                 togglePrenotificationDate($('#HasNoPrenotification').is(':checked'));
             });
-
             $('.container').stickem();
         });
-    </script>
-
+</script>
 }

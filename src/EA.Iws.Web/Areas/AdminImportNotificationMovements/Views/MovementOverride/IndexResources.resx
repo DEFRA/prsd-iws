@@ -117,26 +117,20 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="ChangesSaved" xml:space="preserve">
-    <value>Your changes have been saved</value>
+  <data name="ActualQuantityHint" xml:space="preserve">
+    <value>Enter the quantity of waste received on the shipment</value>
   </data>
-  <data name="CurrentShipmentParagraph" xml:space="preserve">
-    <value>Currently displaying shipment {0}</value>
+  <data name="ActualQuantityQuestion" xml:space="preserve">
+    <value>How much waste was received?</value>
   </data>
-  <data name="DisposalDate" xml:space="preserve">
-    <value>Disposal date</value>
-  </data>
-  <data name="LatestNumber" xml:space="preserve">
-    <value>The last shipment prenotified for this notification was {0}</value>
+  <data name="ChangeShipmentPlaceholder" xml:space="preserve">
+    <value>Go to shipment</value>
   </data>
   <data name="MainHeading" xml:space="preserve">
-    <value>Record Shipment data</value>
-  </data>
-  <data name="PageTitle" xml:space="preserve">
-    <value>Capture shipment</value>
+    <value>Update Shipment data</value>
   </data>
   <data name="RecoveryDate" xml:space="preserve">
-    <value>Recovery date</value>
+    <value>When was the waste {0}?</value>
   </data>
   <data name="ReturnToSummary" xml:space="preserve">
     <value>Return to shipment summary</value>
@@ -144,10 +138,7 @@
   <data name="ShipmentNumber" xml:space="preserve">
     <value>Shipment {0}</value>
   </data>
-  <data name="UpdateShipmentDataLinkText" xml:space="preserve">
-    <value>Update shipment data</value>
-  </data>
-  <data name="ZeroMovements" xml:space="preserve">
-    <value>So far no shipments have been prenotified for this notification</value>
+  <data name="ShipmentNumber1" xml:space="preserve">
+    <value>Shipment {0}</value>
   </data>
 </root>

@@ -104,7 +104,7 @@
 
             var model = new CaptureViewModel(result);
             await UpdateSummary(model, id);
-            model.ShowShipmentDatesOverride = CanShowEditLink();
+            model.ShowShipmentDatesOverride = await CanShowEditLink();
             model.NotificationId = id;
             model.MovementId = movementId;
             return View(model);
@@ -208,14 +208,11 @@
             model.SetSummaryData(summary);
         }
 
-        private bool CanShowEditLink()
+        private async Task<bool> CanShowEditLink()
         {
-            var showKeyDatesOverride = Task.Run(() =>
-             authorizationService.AuthorizeActivity(
-                 UserAdministrationPermissions.CanOverrideShipmentData))
-             .Result;
+            var showUpdateLink = await authorizationService.AuthorizeActivity(UserAdministrationPermissions.CanOverrideShipmentData);
 
-            return showKeyDatesOverride;
+            return showUpdateLink;
         }
     }
 }

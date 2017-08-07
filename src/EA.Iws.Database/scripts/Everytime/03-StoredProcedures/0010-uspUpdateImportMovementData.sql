@@ -1,8 +1,8 @@
-IF OBJECT_ID('[Notification].[uspUpdateExportMovementData]') IS NULL
-    EXEC('CREATE PROCEDURE [Notification].[uspUpdateExportMovementData] AS SET NOCOUNT ON;')
+IF OBJECT_ID('[ImportNotification].[uspUpdateImportMovementData]') IS NULL
+    EXEC('CREATE PROCEDURE [ImportNotification].[uspUpdateImportMovementData] AS SET NOCOUNT ON;')
 GO
 
-ALTER PROCEDURE [Notification].[uspUpdateExportMovementData] 
+ALTER PROCEDURE [ImportNotification].[uspUpdateImportMovementData] 
                 @NotificationId UNIQUEIDENTIFIER
                 ,@MovementId UNIQUEIDENTIFIER
                 ,@PrenotificationDate DATE
@@ -13,7 +13,7 @@ ALTER PROCEDURE [Notification].[uspUpdateExportMovementData]
                 ,@Unit int
                 ,@RejectiontDate DATE
                 ,@RejectionReason NVARCHAR(MAX)
-                ,@StatsMarking NVARCHAR(1024)
+                ,@StatsMarking INT
                 ,@Comments NVARCHAR(MAX)
 				,@RecoveryDate DATE
 				,@CreatedBy nvarchar(128)
@@ -23,19 +23,18 @@ BEGIN
 
 	BEGIN TRAN
 	--UPDATE MOVEMENT
-	UPDATE [Notification].[Movement]
-	SET [Date] = ISNULL(@ActualDate, [Date]) 
-	,[PrenotificationDate] = @PrenotificationDate 
-	,[HasNoPrenotification] = ISNULL(@HasNoPrenotification, [HasNoPrenotification]) 
+	UPDATE [ImportNotification].[Movement]
+	SET [ActualShipmentDate] = ISNULL(@ActualDate, [ActualShipmentDate]) 
+	,[PrenotificationDate] = ISNULL(@PrenotificationDate, [PrenotificationDate]) 
 	,[StatsMarking] = ISNULL(@StatsMarking, [StatsMarking]) 
 	,[Comments] = ISNULL(@Comments, [Comments]) 
 	WHERE [Id]= @MovementId AND [NotificationId] = @NotificationId
 		
 	--UPDATE RECEIPT
 
-	IF EXISTS(SELECT * FROM [Notification].[MovementReceipt] WHERE [MovementId]= @MovementId)
+	IF EXISTS(SELECT * FROM [ImportNotification].[MovementReceipt] WHERE [MovementId]= @MovementId)
 	BEGIN
-		UPDATE [Notification].[MovementReceipt]
+		UPDATE [ImportNotification].[MovementReceipt]
 		SET [Date] = ISNULL(@ReceiptDate, [Date]) 
 		,[Quantity] = ISNULL(@Quantity, [Quantity])
 		,[Unit] = ISNULL(@Unit, [Unit])
@@ -43,9 +42,9 @@ BEGIN
 	END
 	
 	
-	IF EXISTS(SELECT * FROM [Notification].[MovementRejection] WHERE [MovementId]= @MovementId)
+	IF EXISTS(SELECT * FROM [ImportNotification].[MovementRejection] WHERE [MovementId]= @MovementId)
 	BEGIN
-		UPDATE [Notification].[MovementRejection]
+		UPDATE [ImportNotification].[MovementRejection]
 		SET    [Date] = ISNULL(@RejectiontDate, [Date]) 
 			  ,[Reason] = ISNULL(@RejectionReason, [Reason]) 			 
 		 WHERE [MovementId] = @MovementId
@@ -54,9 +53,9 @@ BEGIN
 	
 
 	--UPDATE RECOVERY
-	IF EXISTS(SELECT * FROM [Notification].[MovementOperationReceipt] WHERE [MovementId]= @MovementId)
+	IF EXISTS(SELECT * FROM [ImportNotification].[MovementOperationReceipt] WHERE [MovementId]= @MovementId)
 	BEGIN
-		UPDATE [Notification].[MovementOperationReceipt]
+		UPDATE [ImportNotification].[MovementOperationReceipt]
 		 SET 
 		  [Date] = @RecoveryDate 
 		WHERE [MovementId]= @MovementId 

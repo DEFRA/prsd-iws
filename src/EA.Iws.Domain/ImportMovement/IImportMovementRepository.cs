@@ -1,5 +1,6 @@
 ﻿namespace EA.Iws.Domain.ImportMovement
 {
+    using Core.ImportMovement;
     using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
@@ -21,5 +22,7 @@
         Task<bool> DeleteById(Guid movementId);
 
         Task<IEnumerable<ImportMovement>> GetRejectedMovements(Guid notificationId);
+
+        Task SetImportMovementReceiptAndRecoveryData(ImportMovementSummaryData data, Guid createdBy);
     }
 }

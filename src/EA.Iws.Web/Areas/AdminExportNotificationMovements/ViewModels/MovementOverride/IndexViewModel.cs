@@ -3,18 +3,16 @@
     using Core.Movement;
     using Core.Shared;
     using Infrastructure.Validation;
-    using Prsd.Core;
     using Prsd.Core.Helpers;
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.Linq;
     using System.Web.Mvc;
-    using Web.ViewModels.Shared;
 
     public class IndexViewModel : IValidatableObject
     {
-        public Int32 ShipmentNumber { get; set; }
+        public int ShipmentNumber { get; set; }
 
         public NotificationType NotificationType { get; set; }
 
@@ -71,15 +69,9 @@
 
         public SelectList StatsMarkingSelectList
         {
-            //Wriet this in core
             get
             {
-                return new SelectList(new[]
-                {
-                    "Illegal Shipment (WSR Table 5)",
-                    "Did not proceed as intended (Basel Table 9)",
-                    "Accident occurred during transport (Basel Table 10)"
-                });
+                return new SelectList(EnumHelper.GetValues(typeof(StatsMarking)), dataTextField: "Value", dataValueField: "Value");
             }
         }
 
@@ -150,7 +142,7 @@
                 yield return new ValidationResult(IndexViewModelResources.ActualDateRequired, new[] { "ActualShipmentDate" });
             }
 
-            if (ReceivedDate.HasValue && !ActualQuantity.HasValue)
+            if (ReceivedDate.HasValue && WasShipmentAccepted && !ActualQuantity.HasValue)
             {
                 yield return new ValidationResult(IndexViewModelResources.QuantityRequired, new[] { "Receipt.ActualQuantity" });
             } 

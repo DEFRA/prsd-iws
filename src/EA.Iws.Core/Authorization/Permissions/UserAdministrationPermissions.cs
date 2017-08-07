@@ -22,6 +22,6 @@
 
         public const string CanOverrideFinancialGuaranteeDates = "Can Override Financial Guarantee Dates";
 
-        public const string CanOverrideShipmentData = "Can Override Shipment Dates";
+        public const string CanOverrideShipmentData = "Can Override Shipment Data";
     }
 }

@@ -199,6 +199,7 @@
     <Compile Include="Reports\ShipmentsReportDates.cs" />
     <Compile Include="Rules\MessageLevel.cs" />
     <Compile Include="Rules\RuleResult.cs" />
+    <Compile Include="Shared\StatsMarking.cs" />
     <Compile Include="Shared\TransactionRecordData.cs" />
     <Compile Include="NotificationAssessment\TransactionType.cs" />
     <Compile Include="Notification\UKCompetentAuthority.cs" />
