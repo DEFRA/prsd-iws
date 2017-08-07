@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace EA.Iws.Web.Areas.AdminImportNotificationMovements.Views.Capture {
+namespace EA.Iws.Web.Areas.AdminImportNotificationMovements.Views.MovementOverride {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace EA.Iws.Web.Areas.AdminImportNotificationMovements.Views.Capture {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class CreateEditResources {
+    public class IndexResources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal CreateEditResources() {
+        internal IndexResources() {
         }
         
         /// <summary>
@@ -39,8 +39,8 @@ namespace EA.Iws.Web.Areas.AdminImportNotificationMovements.Views.Capture {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EA.Iws.Web.Areas.AdminImportNotificationMovements.Views.Capture.CreateEditResourc" +
-                            "es", typeof(CreateEditResources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EA.Iws.Web.Areas.AdminImportNotificationMovements.Views.MovementOverride.IndexRes" +
+                            "ources", typeof(IndexResources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -62,6 +62,24 @@ namespace EA.Iws.Web.Areas.AdminImportNotificationMovements.Views.Capture {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Enter the quantity of waste received on the shipment.
+        /// </summary>
+        public static string ActualQuantityHint {
+            get {
+                return ResourceManager.GetString("ActualQuantityHint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to How much waste was received?.
+        /// </summary>
+        public static string ActualQuantityQuestion {
+            get {
+                return ResourceManager.GetString("ActualQuantityQuestion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Go to shipment.
         /// </summary>
         public static string ChangeShipmentPlaceholder {
@@ -71,43 +89,7 @@ namespace EA.Iws.Web.Areas.AdminImportNotificationMovements.Views.Capture {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Your changes have been saved.
-        /// </summary>
-        public static string ChangesSaved {
-            get {
-                return ResourceManager.GetString("ChangesSaved", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Currently displaying shipment {0}.
-        /// </summary>
-        public static string CurrentShipmentParagraph {
-            get {
-                return ResourceManager.GetString("CurrentShipmentParagraph", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Disposal date.
-        /// </summary>
-        public static string DisposalDate {
-            get {
-                return ResourceManager.GetString("DisposalDate", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to The last shipment prenotified for this notification was {0}.
-        /// </summary>
-        public static string LatestNumber {
-            get {
-                return ResourceManager.GetString("LatestNumber", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Record Shipment data.
+        ///   Looks up a localized string similar to Update Shipment data.
         /// </summary>
         public static string MainHeading {
             get {
@@ -116,16 +98,7 @@ namespace EA.Iws.Web.Areas.AdminImportNotificationMovements.Views.Capture {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Capture shipment.
-        /// </summary>
-        public static string PageTitle {
-            get {
-                return ResourceManager.GetString("PageTitle", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Recovery date.
+        ///   Looks up a localized string similar to When was the waste {0}?.
         /// </summary>
         public static string RecoveryDate {
             get {
@@ -152,20 +125,11 @@ namespace EA.Iws.Web.Areas.AdminImportNotificationMovements.Views.Capture {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Update shipment data.
+        ///   Looks up a localized string similar to Shipment {0}.
         /// </summary>
-        public static string UpdateShipmentDataLinkText {
+        public static string ShipmentNumber1 {
             get {
-                return ResourceManager.GetString("UpdateShipmentDataLinkText", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to So far no shipments have been prenotified for this notification.
-        /// </summary>
-        public static string ZeroMovements {
-            get {
-                return ResourceManager.GetString("ZeroMovements", resourceCulture);
+                return ResourceManager.GetString("ShipmentNumber1", resourceCulture);
             }
         }
     }

@@ -971,11 +971,17 @@
     <Content Include="Areas\AdminImportNotificationMovements\Views\Capture\_ReceiptReadOnly.cshtml" />
     <Content Include="Areas\AdminImportNotificationMovements\Views\Capture\_CommentsReadOnly.cshtml" />
     <Content Include="Areas\AdminExportNotificationMovements\Views\CaptureMovement\_CommentsReadOnly.cshtml" />
-    <None Include="Areas\NotificationMovements\Views\Create\Index.cshtml" />
+    <Content Include="Areas\NotificationMovements\Views\Create\Index.cshtml" />
     <Content Include="Areas\AdminExportNotificationMovements\Views\CaptureMovement\_ChangeShipment.cshtml" />
     <Content Include="Areas\AdminImportNotificationMovements\Views\Capture\_ChangeShipment.cshtml" />
     <Content Include="Areas\NotificationMovements\Views\Upload\Index.cshtml" />
     <Content Include="Areas\NotificationMovements\Views\Upload\Success.cshtml" />
+    <Content Include="Areas\AdminExportNotificationMovements\Views\MovementOverride\Index.cshtml" />
+    <Content Include="Areas\AdminExportNotificationMovements\Views\MovementOverride\_ShipmentComments.cshtml" />
+    <Content Include="Areas\AdminExportNotificationMovements\Views\MovementOverride\_ChangeShipment.cshtml" />
+    <Content Include="Areas\AdminImportNotificationMovements\Views\MovementOverride\_Comments.cshtml" />
+    <Content Include="Areas\AdminImportNotificationMovements\Views\MovementOverride\_ChangeShipment.cshtml" />
+    <Content Include="Areas\AdminImportNotificationMovements\Views\MovementOverride\Index.cshtml" />
     <None Include="Scripts\jquery-2.1.3.intellisense.js" />
     <Content Include="Scripts\govuk\govuk-template.js" />
     <Content Include="Scripts\govuk\ie.js" />
@@ -1285,6 +1291,7 @@
     </Compile>
     <Compile Include="Areas\AdminExportNotificationMovements\Controllers\DocumentsController.cs" />
     <Compile Include="Areas\AdminExportNotificationMovements\Controllers\DownloadController.cs" />
+    <Compile Include="Areas\AdminExportNotificationMovements\Controllers\MovementOverrideController.cs" />
     <Compile Include="Areas\AdminExportNotificationMovements\Controllers\RejectedMovementController.cs" />
     <Compile Include="Areas\AdminExportNotificationMovements\ViewModels\CaptureMovement\ReceiptViewModel.cs" />
     <Compile Include="Areas\AdminExportNotificationMovements\ViewModels\CaptureMovement\ReceiptViewModelResources.Designer.cs">
@@ -1307,6 +1314,12 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Areas\AdminExportNotificationMovements\ViewModels\Download\DownloadMovementViewModel.cs" />
+    <Compile Include="Areas\AdminExportNotificationMovements\ViewModels\MovementOverride\IndexViewModel.cs" />
+    <Compile Include="Areas\AdminExportNotificationMovements\ViewModels\MovementOverride\IndexViewModelResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IndexViewModelResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Areas\AdminExportNotificationMovements\ViewModels\RejectedMovement\DetailsViewModel.cs" />
     <Compile Include="Areas\AdminExportNotificationMovements\ViewModels\RejectedMovement\ListViewModel.cs" />
     <Compile Include="Areas\AdminExportNotificationMovements\Views\CaptureMovement\CancelledResources.Designer.cs">
@@ -1335,6 +1348,11 @@
       <DependentUpon>DocumentsResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Areas\AdminExportNotificationMovements\Views\Home\IndexResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IndexResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\AdminExportNotificationMovements\Views\MovementOverride\IndexResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>IndexResources.resx</DependentUpon>
@@ -1515,6 +1533,7 @@
     </Compile>
     <Compile Include="Areas\AdminImportNotificationMovements\Controllers\DownloadController.cs" />
     <Compile Include="Areas\AdminImportNotificationMovements\Controllers\HomeController.cs" />
+    <Compile Include="Areas\AdminImportNotificationMovements\Controllers\MovementOverrideController.cs" />
     <Compile Include="Areas\AdminImportNotificationMovements\Controllers\RejectedMovementController.cs" />
     <Compile Include="Areas\AdminImportNotificationMovements\ViewModels\Cancel\CancellableMovementsViewModel.cs" />
     <Compile Include="Areas\AdminImportNotificationMovements\ViewModels\Cancel\CancelResources.Designer.cs">
@@ -1555,6 +1574,12 @@
     <Compile Include="Areas\AdminImportNotificationMovements\ViewModels\Download\DownloadMovementViewModel.cs" />
     <Compile Include="Areas\AdminImportNotificationMovements\ViewModels\Home\MovementsSummaryTableViewModel.cs" />
     <Compile Include="Areas\AdminImportNotificationMovements\ViewModels\Home\MovementSummaryViewModel.cs" />
+    <Compile Include="Areas\AdminImportNotificationMovements\ViewModels\MovementOverride\IndexViewModel.cs" />
+    <Compile Include="Areas\AdminImportNotificationMovements\ViewModels\MovementOverride\IndexViewModelResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IndexViewModelResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Areas\AdminImportNotificationMovements\ViewModels\RejectedMovement\DetailsViewModel.cs" />
     <Compile Include="Areas\AdminImportNotificationMovements\ViewModels\RejectedMovement\ListViewModel.cs" />
     <Compile Include="Areas\AdminImportNotificationMovements\Views\Cancel\ConfirmResources.Designer.cs">
@@ -1595,6 +1620,11 @@
     </Compile>
     <Compile Include="Areas\AdminImportNotificationMovements\Views\Delete\IndexResources.Designer.cs" />
     <Compile Include="Areas\AdminImportNotificationMovements\Views\Home\IndexResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IndexResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\AdminImportNotificationMovements\Views\MovementOverride\IndexResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>IndexResources.resx</DependentUpon>
@@ -3432,6 +3462,10 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>IndexViewModelResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Areas\AdminExportNotificationMovements\ViewModels\MovementOverride\IndexViewModelResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>IndexViewModelResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Areas\AdminExportNotificationMovements\Views\CaptureMovement\CancelledResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>CancelledResources.Designer.cs</LastGenOutput>
@@ -3453,6 +3487,10 @@
       <LastGenOutput>DocumentsResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\AdminExportNotificationMovements\Views\Home\IndexResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\AdminExportNotificationMovements\Views\MovementOverride\IndexResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
@@ -3593,6 +3631,10 @@
       <LastGenOutput>SearchViewModelResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\AdminImportNotificationMovements\ViewModels\Delete\IndexViewModelResources.resx" />
+    <EmbeddedResource Include="Areas\AdminImportNotificationMovements\ViewModels\MovementOverride\IndexViewModelResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>IndexViewModelResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Areas\AdminImportNotificationMovements\Views\Cancel\ConfirmResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>ConfirmResources.Designer.cs</LastGenOutput>
@@ -3623,6 +3665,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\AdminImportNotificationMovements\Views\Delete\IndexResources.resx" />
     <EmbeddedResource Include="Areas\AdminImportNotificationMovements\Views\Home\IndexResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\AdminImportNotificationMovements\Views\MovementOverride\IndexResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>

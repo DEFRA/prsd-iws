@@ -78,7 +78,8 @@
             { UserAdministrationPermissions.CanManageExistingInternalUser, new[] { UserRole.Administrator } },
             { UserAdministrationPermissions.CanDeleteTransaction, new[] { UserRole.Administrator } },
             { UserAdministrationPermissions.CanDeleteNotification, new[] { UserRole.Administrator } },
-            { ImportFinancialGuaranteePermissions.CanEditImportFinancialGuarantee, new[] { UserRole.Internal, UserRole.Administrator } }
+            { ImportFinancialGuaranteePermissions.CanEditImportFinancialGuarantee, new[] { UserRole.Internal, UserRole.Administrator } },
+            { UserAdministrationPermissions.CanOverrideShipmentData, new[] { UserRole.Administrator } }
         };
 
         public Task<bool> CheckAccessAsync(AuthorizationContext context)

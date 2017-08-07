@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace EA.Iws.Web.Areas.AdminExportNotificationMovements.Views.CaptureMovement {
+namespace EA.Iws.Web.Areas.AdminExportNotificationMovements.ViewModels.MovementOverride {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace EA.Iws.Web.Areas.AdminExportNotificationMovements.Views.CaptureMovemen
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class CreateEditResources {
+    public class IndexViewModelResources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal CreateEditResources() {
+        internal IndexViewModelResources() {
         }
         
         /// <summary>
@@ -39,8 +39,8 @@ namespace EA.Iws.Web.Areas.AdminExportNotificationMovements.Views.CaptureMovemen
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EA.Iws.Web.Areas.AdminExportNotificationMovements.Views.CaptureMovement.CreateEdi" +
-                            "tResources", typeof(CreateEditResources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EA.Iws.Web.Areas.AdminExportNotificationMovements.ViewModels.MovementOverride.Ind" +
+                            "exViewModelResources", typeof(IndexViewModelResources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -62,110 +62,110 @@ namespace EA.Iws.Web.Areas.AdminExportNotificationMovements.Views.CaptureMovemen
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Was the shipment accepted?.
+        ///   Looks up a localized string similar to Actual date of shipment.
         /// </summary>
-        public static string AcceptedTitle {
+        public static string ActualDateLabel {
             get {
-                return ResourceManager.GetString("AcceptedTitle", resourceCulture);
+                return ResourceManager.GetString("ActualDateLabel", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Average tonnage per shipment:.
+        ///   Looks up a localized string similar to Please enter the actual date of shipment.
         /// </summary>
-        public static string AverageTonnage {
+        public static string ActualDateRequired {
             get {
-                return ResourceManager.GetString("AverageTonnage", resourceCulture);
+                return ResourceManager.GetString("ActualDateRequired", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Go to shipment.
+        ///   Looks up a localized string similar to Quantity received.
         /// </summary>
-        public static string ChangeShipmentPlaceholder {
+        public static string ActualQuantityLabel {
             get {
-                return ResourceManager.GetString("ChangeShipmentPlaceholder", resourceCulture);
+                return ResourceManager.GetString("ActualQuantityLabel", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Your changes have been saved.
+        ///   Looks up a localized string similar to Comments.
         /// </summary>
-        public static string ChangesSaved {
+        public static string Comments {
             get {
-                return ResourceManager.GetString("ChangesSaved", resourceCulture);
+                return ResourceManager.GetString("Comments", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Currently displaying shipment {0}.
+        ///   Looks up a localized string similar to Do you want to enter comments against this shipment?.
         /// </summary>
-        public static string CurrentShipmentParagraph {
+        public static string HasComments {
             get {
-                return ResourceManager.GetString("CurrentShipmentParagraph", resourceCulture);
+                return ResourceManager.GetString("HasComments", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Disposal date.
+        ///   Looks up a localized string similar to No prenotification received.
         /// </summary>
-        public static string DisposalDate {
+        public static string HasNoPrenotification {
             get {
-                return ResourceManager.GetString("DisposalDate", resourceCulture);
+                return ResourceManager.GetString("HasNoPrenotification", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The last shipment prenotified for this notification was {0}.
+        ///   Looks up a localized string similar to Please enter a smaller number .
         /// </summary>
-        public static string LatestNumber {
+        public static string MaximumActualQuantity {
             get {
-                return ResourceManager.GetString("LatestNumber", resourceCulture);
+                return ResourceManager.GetString("MaximumActualQuantity", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Record Shipment data.
+        ///   Looks up a localized string similar to Please enter a valid number.
         /// </summary>
-        public static string MainHeading {
+        public static string NumberIsInt {
             get {
-                return ResourceManager.GetString("MainHeading", resourceCulture);
+                return ResourceManager.GetString("NumberIsInt", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Capture shipment.
+        ///   Looks up a localized string similar to Prenotification date.
         /// </summary>
-        public static string PageTitle {
+        public static string PrenotificationDateLabel {
             get {
-                return ResourceManager.GetString("PageTitle", resourceCulture);
+                return ResourceManager.GetString("PrenotificationDateLabel", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Recovery date.
+        ///   Looks up a localized string similar to Please provide the actual quantity.
         /// </summary>
-        public static string RecoveryDate {
+        public static string QuantityRequired {
             get {
-                return ResourceManager.GetString("RecoveryDate", resourceCulture);
+                return ResourceManager.GetString("QuantityRequired", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to When was the waste recovered?.
+        ///   Looks up a localized string similar to When was the waste received?.
         /// </summary>
-        public static string RecoveryTitle {
+        public static string ReceivedDateLabel {
             get {
-                return ResourceManager.GetString("RecoveryTitle", resourceCulture);
+                return ResourceManager.GetString("ReceivedDateLabel", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Return to shipment summary.
+        ///   Looks up a localized string similar to Reason why the shipment was rejected and any relevant details.
         /// </summary>
-        public static string ReturnToSummary {
+        public static string RejectionReasonLabel {
             get {
-                return ResourceManager.GetString("ReturnToSummary", resourceCulture);
+                return ResourceManager.GetString("RejectionReasonLabel", resourceCulture);
             }
         }
         
@@ -179,38 +179,20 @@ namespace EA.Iws.Web.Areas.AdminExportNotificationMovements.Views.CaptureMovemen
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Yes.
+        ///   Looks up a localized string similar to WSR/Basel annual stats marking (when required).
         /// </summary>
-        public static string ShipmentWasAccepted {
+        public static string StatsMarking {
             get {
-                return ResourceManager.GetString("ShipmentWasAccepted", resourceCulture);
+                return ResourceManager.GetString("StatsMarking", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to No.
+        ///   Looks up a localized string similar to Was the shipment accepted?.
         /// </summary>
-        public static string ShipmentWasNotAccepted {
+        public static string WasShipmentAcceptedLabel {
             get {
-                return ResourceManager.GetString("ShipmentWasNotAccepted", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Update shipment data.
-        /// </summary>
-        public static string UpdateShipmentDataLinkText {
-            get {
-                return ResourceManager.GetString("UpdateShipmentDataLinkText", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to So far no shipments have been prenotified for this notification.
-        /// </summary>
-        public static string ZeroMovements {
-            get {
-                return ResourceManager.GetString("ZeroMovements", resourceCulture);
+                return ResourceManager.GetString("WasShipmentAcceptedLabel", resourceCulture);
             }
         }
     }

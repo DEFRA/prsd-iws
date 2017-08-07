@@ -43,5 +43,9 @@
         public string Comments { get; set; }
 
         public string StatsMarking { get; set; }
+
+        public bool HasNoPrenotification { get; set; }
+
+        public DateTime? RejectionDate { get; set; }
     }
 }
