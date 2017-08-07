@@ -23,6 +23,8 @@
         [RestrictToAllowedUploadTypes]
         public HttpPostedFileBase File { get; set; }
 
+        public DateTime MovementDate { get; set; }
+
         public RejectViewModel()
         {
             RejectionDate = new OptionalDateInputViewModel(true)
@@ -31,11 +33,27 @@
             };
         }
 
+        public RejectViewModel(DateTime movementDate)
+        {
+            RejectionDate = new OptionalDateInputViewModel(true)
+            {
+                IsAutoTabEnabled = false
+            };
+
+            MovementDate = movementDate;
+        }
+
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             if (!RejectionDate.IsStarted)
             {
                 yield return new ValidationResult(RejectViewModelResources.DateRequired, new[] { "RejectionDate.Day" });
+            }
+
+            var rejectionDate = RejectionDate.AsDateTime();
+            if (rejectionDate.HasValue && rejectionDate.Value < MovementDate)
+            {
+                yield return new ValidationResult(RejectViewModelResources.RejectionDateNotBeforeShipmentDate, new[] { "RejectionDate.Day" });
             }
         }
     }

@@ -27,8 +27,10 @@
         [HttpGet]
         public async Task<ActionResult> Index(Guid id)
         {
-            var model = new RejectViewModel();
+            var movementDate = await mediator.SendAsync(new GetMovementDateByMovementId(id));
             var notificationId = await mediator.SendAsync(new GetNotificationIdByMovementId(id));
+
+            var model = new RejectViewModel(movementDate);
             model.NotificationId = notificationId;
 
             return View(model);

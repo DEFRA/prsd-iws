@@ -12,6 +12,7 @@
     @Html.AntiForgeryToken()
     @Html.Gds().ValidationSummary()
     @Html.HiddenFor(m => m.NotificationId)
+    @Html.HiddenFor(m => m.MovementDate)
 
     <div class="form-group @Html.Gds().FormGroupClass(m => m.RejectionDate) @Html.Gds().FormGroupClass(m => m.RejectionDate.Day) @Html.Gds().FormGroupClass(m => m.RejectionDate.Month) @Html.Gds().FormGroupClass(m => m.RejectionDate.Year)">
         @Html.LabelFor(m => m.RejectionDate, new { @class = "heading-small" })
