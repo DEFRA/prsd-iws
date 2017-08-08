@@ -2481,6 +2481,7 @@
     <Compile Include="Infrastructure\Paging\PaginationLink.cs" />
     <Compile Include="Infrastructure\Paging\PaginationModel.cs" />
     <Compile Include="Infrastructure\Paging\PagingExtensions.cs" />
+    <Compile Include="Infrastructure\RangeExtensions.cs" />
     <Compile Include="Infrastructure\XlsxActionResult.cs" />
     <Compile Include="Infrastructure\ExportNavigationSection.cs" />
     <Compile Include="Infrastructure\FeedbackLinkResources.Designer.cs">

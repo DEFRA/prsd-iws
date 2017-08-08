@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using Core.Movement;
+    using Infrastructure;
     using Prsd.Core.Helpers;
 
     public class SummaryViewModel
@@ -18,15 +19,7 @@
 
             MovementIds = movementInfos.Select(m => m.Id);
             NumberOfShipments = movementInfos.Count();
-            if (NumberOfShipments > 1)
-            {
-                ShipmentNumbers = string.Format("{0} - {1}", movementInfos.Min(m => m.ShipmentNumber),
-                    movementInfos.Max(m => m.ShipmentNumber));
-            }
-            else
-            {
-                ShipmentNumbers = movementInfos.Max(m => m.ShipmentNumber).ToString();
-            }
+            ShipmentNumbers = movementInfos.Select(m => m.ShipmentNumber).ToRangeString();
             Quantity = string.Format("{0} {1}", movementInfos.First().ActualQuantity.ToString("G29"),
                 EnumHelper.GetShortName(movementInfos.First().Unit));
             PackagingTypes = string.Join(", ", movementInfos.First().PackagingTypes.Select(EnumHelper.GetDisplayName));
