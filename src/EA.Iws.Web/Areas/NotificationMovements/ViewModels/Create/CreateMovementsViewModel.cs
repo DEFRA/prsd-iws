@@ -144,12 +144,8 @@
             {
                 yield return new ValidationResult(CreateMovementsViewModelResources.NumberToCreateRequired, new[] { "NumberToCreate" });
             }
-            if (NumberToCreate != null && NumberToCreate.Value <= 0)
-            {
-                yield return new ValidationResult(CreateMovementsViewModelResources.NumberToCreateValid, new[] { "NumberToCreate" });
-            }
             int result;
-            if (!int.TryParse(NumberToCreate.ToString(), out result))
+            if (NumberToCreate != null && (!int.TryParse(NumberToCreate.ToString(), out result) || NumberToCreate.Value <= 0))
             {
                 yield return new ValidationResult(CreateMovementsViewModelResources.NumberToCreateValid, new[] { "NumberToCreate" });
             }
