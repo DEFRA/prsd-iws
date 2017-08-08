@@ -53,8 +53,8 @@
                 RejectionDate = (model.IsRejected) && model.ReceivedDate.HasValue ? model.ReceivedDate.Value : (DateTime?)null,
                 OperationCompleteDate = model.RecoveryDate.HasValue ? model.RecoveryDate.Value : (DateTime?)null,
                 RejectionReason = model.RejectionReason,
-                Comments = model.Comments,
-                StatsMarking = model.StatsMarking,
+                Comments = model.HasComments ? model.Comments : null,
+                StatsMarking = model.HasComments ? model.StatsMarking : null,
                 IsRejected = model.IsRejected
             };
 

@@ -61,8 +61,8 @@
                 {
                     OperationCompleteDate = model.RecoveryDate.HasValue ? model.RecoveryDate.Value : (DateTime?)null
                 },
-                Comments = model.Comments,
-                StatsMarking = model.StatsMarking,
+                Comments = model.HasComments ? model.Comments : null,
+                StatsMarking = model.HasComments ? model.StatsMarking : null,
                 IsRejected = model.IsRejected,
                 MovementId = movementId
             };
