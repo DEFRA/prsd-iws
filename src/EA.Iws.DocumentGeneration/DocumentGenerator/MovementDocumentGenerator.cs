@@ -6,7 +6,9 @@
     using System.Linq;
     using System.Threading.Tasks;
     using System.Xml.Linq;
+    using DocumentFormat.OpenXml;
     using DocumentFormat.OpenXml.Packaging;
+    using DocumentFormat.OpenXml.Validation;
     using DocumentFormat.OpenXml.Wordprocessing;
     using Domain;
     using Domain.Movement;
@@ -66,9 +68,10 @@
             return CombineDocuments(docs);
         }
 
-        // https://stackoverflow.com/a/2463729
         private static byte[] CombineDocuments(IList<byte[]> documents)
         {
+            var newBody = new Body();
+
             using (var memoryStream = new MemoryStream())
             {
                 memoryStream.Write(documents[0], 0, documents[0].Length);
@@ -76,20 +79,26 @@
 
                 using (var document = WordprocessingDocument.Open(memoryStream, true))
                 {
-                    var newBody = XElement.Parse(document.MainDocumentPart.Document.Body.OuterXml);
+                    newBody.Append(document.MainDocumentPart.Document.Body.ChildElements.Select(e => (OpenXmlElement)e.Clone()));
 
                     for (int pointer = 1; pointer < documents.Count; pointer++)
                     {
-                        newBody.Add(XElement.Parse(new Paragraph(new Run(new Break { Type = BreakValues.Page })).OuterXml));
-                        var tempDocument = WordprocessingDocument.Open(new MemoryStream(documents[pointer]), true);
-                        var tempBody = XElement.Parse(tempDocument.MainDocumentPart.Document.Body.OuterXml);
+                        using (var tempMemoryStream = new MemoryStream(documents[pointer]))
+                        {
+                            newBody.Append(new Paragraph(new Run(new Break { Type = BreakValues.Page })));
 
-                        newBody.Add(tempBody);
-                        document.MainDocumentPart.Document.Body = new Body(newBody.ToString());
-                        document.MainDocumentPart.Document.Save();
-                        document.Package.Flush();
+                            using (var tempDocument = WordprocessingDocument.Open(tempMemoryStream, true))
+                            {
+                                newBody.Append(tempDocument.MainDocumentPart.Document.Body.ChildElements.Select(e => (OpenXmlElement)e.Clone()));
+                            }
+                        }
                     }
+
+                    document.MainDocumentPart.Document.Body = newBody;
+                    document.MainDocumentPart.Document.Save();
+                    document.Package.Flush();
                 }
+
                 return memoryStream.ToArray();
             }
         }
