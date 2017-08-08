@@ -12,7 +12,7 @@
                 @Html.AntiForgeryToken()
                 @Html.Gds().ValidationSummary()
                 @Html.HiddenFor(m => m.NotificationType)
-
+                @Html.HiddenFor(m => m.ShipmentNumber)
                 var operationLabelVerb = Model.NotificationType == NotificationType.Recovery ? "recovered" : "disposed of";
                 var operationTitleVerb = Model.NotificationType == NotificationType.Recovery ? "Recovered" : "Disposed";
 
