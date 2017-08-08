@@ -14,7 +14,7 @@
         /// <returns>a number range string</returns>
         public static string ToRangeString(this IEnumerable<int> list)
         {
-            return string.Join(", ", list.ToPossiblyDegenerateRanges().Select(PrettyRange));
+            return string.Join(", ", list.OrderBy(x => x).ToPossiblyDegenerateRanges().Select(PrettyRange));
         }
 
         /// <summary>
