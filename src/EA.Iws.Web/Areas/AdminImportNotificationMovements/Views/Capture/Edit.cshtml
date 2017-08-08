@@ -31,9 +31,9 @@
                 @Html.HiddenFor(m => m.IsReceived)
                 @Html.HiddenFor(m => m.IsOperationCompleted)
                 @Html.HiddenFor(m => m.IsRejected)
-                <p>
+                
                     <h1 class="data-item bold-xlarge">@string.Format(Resource.ShipmentNumber, Model.ShipmentNumber)</h1>
-                </p>
+                
                 @Html.Partial("_PrenotifyReadOnly")
 
                 <hr />
