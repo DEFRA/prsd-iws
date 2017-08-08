@@ -54,10 +54,13 @@ BEGIN
 	--UPDATE RECOVERY
 	IF EXISTS(SELECT * FROM [ImportNotification].[MovementOperationReceipt] WHERE [MovementId]= @MovementId)
 	BEGIN
-		UPDATE [ImportNotification].[MovementOperationReceipt]
-		 SET 
-		  [Date] = @RecoveryDate 
-		WHERE [MovementId]= @MovementId 
+		IF(@RecoveryDate IS NOT NULL)
+		BEGIN
+			UPDATE [ImportNotification].[MovementOperationReceipt]
+			 SET 
+			  [Date] = @RecoveryDate 
+			WHERE [MovementId]= @MovementId 
+		END
 	END
 	
 	COMMIT;
