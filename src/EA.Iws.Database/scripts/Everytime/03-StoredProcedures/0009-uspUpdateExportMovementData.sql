@@ -27,8 +27,8 @@ BEGIN
 	SET [Date] = ISNULL(@ActualDate, [Date]) 
 	,[PrenotificationDate] = @PrenotificationDate 
 	,[HasNoPrenotification] = ISNULL(@HasNoPrenotification, [HasNoPrenotification]) 
-	,[StatsMarking] = ISNULL(@StatsMarking, [StatsMarking]) 
-	,[Comments] = ISNULL(@Comments, [Comments]) 
+	,[StatsMarking] = @StatsMarking 
+	,[Comments] = @Comments 
 	WHERE [Id]= @MovementId AND [NotificationId] = @NotificationId
 		
 	--UPDATE RECEIPT

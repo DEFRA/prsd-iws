@@ -6,7 +6,6 @@ ALTER PROCEDURE [ImportNotification].[uspUpdateImportMovementData]
                 @NotificationId UNIQUEIDENTIFIER
                 ,@MovementId UNIQUEIDENTIFIER
                 ,@PrenotificationDate DATE
-                ,@HasNoPrenotification bit
                 ,@ActualDate DATE
                 ,@ReceiptDate DATE
                 ,@Quantity DECIMAL(18,4)
@@ -25,9 +24,9 @@ BEGIN
 	--UPDATE MOVEMENT
 	UPDATE [ImportNotification].[Movement]
 	SET [ActualShipmentDate] = ISNULL(@ActualDate, [ActualShipmentDate]) 
-	,[PrenotificationDate] = ISNULL(@PrenotificationDate, [PrenotificationDate]) 
-	,[StatsMarking] = ISNULL(@StatsMarking, [StatsMarking]) 
-	,[Comments] = ISNULL(@Comments, [Comments]) 
+	,[PrenotificationDate] = @PrenotificationDate 
+	,[StatsMarking] = @StatsMarking
+	,[Comments] = @Comments
 	WHERE [Id]= @MovementId AND [NotificationId] = @NotificationId
 		
 	--UPDATE RECEIPT
