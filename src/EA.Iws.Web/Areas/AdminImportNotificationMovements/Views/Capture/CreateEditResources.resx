@@ -148,7 +148,7 @@
     <value>Shipment {0}</value>
   </data>
   <data name="UpdateShipmentDataLinkText" xml:space="preserve">
-    <value>Update shipment data</value>
+    <value>Edit shipment data</value>
   </data>
   <data name="ZeroMovements" xml:space="preserve">
     <value>So far no shipments have been prenotified for this notification</value>

@@ -12,7 +12,7 @@ ALTER PROCEDURE [ImportNotification].[uspUpdateImportMovementData]
                 ,@Unit int
                 ,@RejectiontDate DATE
                 ,@RejectionReason NVARCHAR(MAX)
-                ,@StatsMarking INT
+                ,@StatsMarking NVARCHAR(1024)
                 ,@Comments NVARCHAR(MAX)
 				,@RecoveryDate DATE
 				,@CreatedBy nvarchar(128)

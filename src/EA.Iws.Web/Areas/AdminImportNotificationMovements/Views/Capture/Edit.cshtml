@@ -22,12 +22,6 @@
     <div class="stickem-row stickem-container">
         <div class="column-two-thirds">
             <h1 class="heading-large">@Resource.MainHeading</h1>
-            @if (Model.ShowShipmentDataOverride)
-            {
-                <div>
-                    @Html.ActionLink(Resource.UpdateShipmentDataLinkText, "Index", "MovementOverride", new { id = Model.NotificationId, movementId = Model.MovementId }, null)
-                </div>
-            }
             @using (Html.BeginForm())
             {
                 @Html.AntiForgeryToken()
@@ -37,9 +31,9 @@
                 @Html.HiddenFor(m => m.IsReceived)
                 @Html.HiddenFor(m => m.IsOperationCompleted)
                 @Html.HiddenFor(m => m.IsRejected)
-
-                <h1 class="data-item bold-xlarge">@string.Format(Resource.ShipmentNumber, Model.ShipmentNumber)</h1>
-
+                
+                    <h1 class="data-item bold-xlarge">@string.Format(Resource.ShipmentNumber, Model.ShipmentNumber)</h1>
+                
                 @Html.Partial("_PrenotifyReadOnly")
 
                 <hr />
