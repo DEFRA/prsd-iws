@@ -17,12 +17,20 @@
             var movementInfos = movements as MovementInfo[] ?? movements.ToArray();
 
             MovementIds = movementInfos.Select(m => m.Id);
-            ShipmentNumbers = string.Format("{0} - {1}", movementInfos.Min(m => m.ShipmentNumber),
-                movementInfos.Max(m => m.ShipmentNumber));
+            NumberOfShipments = movementInfos.Count();
+            if (NumberOfShipments > 1)
+            {
+                ShipmentNumbers = string.Format("{0} - {1}", movementInfos.Min(m => m.ShipmentNumber),
+                    movementInfos.Max(m => m.ShipmentNumber));
+            }
+            else
+            {
+                ShipmentNumbers = movementInfos.Max(m => m.ShipmentNumber).ToString();
+            }
             Quantity = string.Format("{0} {1}", movementInfos.First().ActualQuantity.ToString("G29"),
                 EnumHelper.GetShortName(movementInfos.First().Unit));
             PackagingTypes = string.Join(", ", movementInfos.First().PackagingTypes.Select(EnumHelper.GetDisplayName));
-            NumberOfShipments = movementInfos.Count();
+           
             TotalQuantity = string.Format("{0} {1}", movementInfos.Sum(m => m.ActualQuantity).ToString("G29"),
                 EnumHelper.GetDisplayName(movementInfos.First().Unit));
         }
