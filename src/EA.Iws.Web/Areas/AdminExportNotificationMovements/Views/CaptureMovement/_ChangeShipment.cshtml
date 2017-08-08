@@ -25,6 +25,12 @@
     <div>
         @Html.ActionLink(Resource.ReturnToSummary, "Index", "Home")
     </div>
+    @if (Model.ShowShipmentDatesOverride)
+            {
+        <div>
+            @Html.ActionLink(Resource.UpdateShipmentDataLinkText, "Index", "MovementOverride", new { id = Model.NotificationId, movementId = Model.MovementId }, null)
+        </div>
+    }
     <br />
    @using (Html.BeginForm("ChangeShipment", "CaptureMovement", FormMethod.Post))
    {

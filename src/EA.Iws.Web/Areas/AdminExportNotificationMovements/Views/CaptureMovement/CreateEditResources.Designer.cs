@@ -197,7 +197,7 @@ namespace EA.Iws.Web.Areas.AdminExportNotificationMovements.Views.CaptureMovemen
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Update shipment data.
+        ///   Looks up a localized string similar to Edit shipment data.
         /// </summary>
         public static string UpdateShipmentDataLinkText {
             get {
