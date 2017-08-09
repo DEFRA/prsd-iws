@@ -37,6 +37,7 @@
         {
             if (!ModelState.IsValid)
             {
+                await UpdateSummary(model, id);
                 return View(model);
             }
 

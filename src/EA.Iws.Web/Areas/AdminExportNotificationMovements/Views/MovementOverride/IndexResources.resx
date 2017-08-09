@@ -127,7 +127,7 @@
     <value>Go to shipment</value>
   </data>
   <data name="MainHeading" xml:space="preserve">
-    <value>Update Shipment Data</value>
+    <value>Edit Shipment Data</value>
   </data>
   <data name="RecoveryDate" xml:space="preserve">
     <value>When was the waste {0}?</value>
