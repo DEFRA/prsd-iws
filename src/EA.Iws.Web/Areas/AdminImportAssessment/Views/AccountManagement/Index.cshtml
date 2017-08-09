@@ -164,15 +164,21 @@
 
             var showRefund = @Model.ShowRefundDetails.ToString().ToLower();
             if (showRefund) { $("#refundDetails").attr("open", "open"); }
+            checkPaymentMethod();
         });
 
         $('#PaymentMethod').change(function () {
+            checkPaymentMethod();
+        });
+
+        function checkPaymentMethod()
+        {
             if ($('#PaymentMethod option:selected').text() === 'Cheque') {
                 $('#receiptArea').show();
             } else {
                 $('#receiptArea').hide();
             }
-        });
+        }
 
         function openComments() {
             $comments.attr('open', '');
