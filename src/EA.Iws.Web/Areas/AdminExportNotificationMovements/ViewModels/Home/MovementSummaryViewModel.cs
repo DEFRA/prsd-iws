@@ -64,7 +64,7 @@
             NotificationNumber = data.SummaryData.NotificationNumber;
             NotificationType = data.NotificationType;
             IntendedShipments = data.TotalIntendedShipments;
-            UsedShipments = data.SummaryData.TotalShipments;
+            UsedShipments = data.SummaryData.ShipmentsUsed;
             QuantityRemainingTotal = data.SummaryData.QuantityRemaining.ToString("G29") + " " + EnumHelper.GetDisplayName(data.SummaryData.DisplayUnit);
             QuantityReceivedTotal = data.SummaryData.QuantityReceived.ToString("G29") + " " + EnumHelper.GetDisplayName(data.SummaryData.DisplayUnit);
             ActiveLoadsPermitted = data.SummaryData.ActiveLoadsPermitted;

@@ -89,7 +89,7 @@ namespace EA.Iws.Web.Areas.AdminExportNotificationMovements.Views.MovementOverri
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Update Shipment Data.
+        ///   Looks up a localized string similar to Edit Shipment Data.
         /// </summary>
         public static string MainHeading {
             get {
