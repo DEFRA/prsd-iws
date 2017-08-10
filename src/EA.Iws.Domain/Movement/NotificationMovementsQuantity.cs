@@ -66,6 +66,11 @@
         /// <returns></returns>
         public async Task<ShipmentQuantity> AveragePerShipment(Guid notificationId, decimal totalShipments)
         {
+            if (totalShipments == 0)
+            {
+                return new ShipmentQuantity(0, ShipmentQuantityUnits.Tonnes);
+            }
+
             var shipment = await shipmentRepository.GetByNotificationId(notificationId);
 
             decimal shipmentQuantity;
@@ -86,7 +91,7 @@
                 shipmentQuantity = shipment.Quantity;
             }
 
-            return new ShipmentQuantity(Decimal.Divide(shipmentQuantity, totalShipments), ShipmentQuantityUnits.Tonnes);
+            return new ShipmentQuantity(decimal.Divide(shipmentQuantity, totalShipments), ShipmentQuantityUnits.Tonnes);
         }
     }
 }
