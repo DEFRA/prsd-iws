@@ -1,0 +1,52 @@
+﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.Carrier.AddFromAddressBookViewModel
+@{
+    ViewBag.Title = "AddFromAddressBook";
+}
+
+<h1 class="heading-large">Add carriers from your address book</h1>
+
+<p>You can add several carriers from your address book using the list below.</p>
+
+<p>If a carrier is not in the list, you will need to add a new carrier.</p>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-group-compound @Html.Gds().FormGroupClass(m => m.SelectedCarrier)">
+        @Html.Gds().ValidationMessageFor(m => m.SelectedCarrier)
+        @Html.Gds().DropDownListFor(m => m.SelectedCarrier, Model.CarriersList, string.Empty, new { title = "carrier list", data_select_box = "true", tabindex = 1 })
+        <button type="submit" name="command" value="addcarrier" tabindex="2" class="button-secondary">Add carrier</button>
+    </div>
+
+    <h2 class="heading-medium">Your chosen carriers</h2>
+
+    <div class="form-group">
+        <table title="Carriers" id="codeTable">
+            <thead>
+                <tr>
+                    <th>Carrier</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            @if (Model.SelectedCarriers.Count < 1)
+            {
+                <tr>
+                    <td colspan="3">Awaiting carriers...</td>
+                </tr>
+            }
+            @for (int i = 0; i < Model.SelectedCarriers.Count; i++)
+            {
+                var carrier = Model.CarriersList.Single(c => c.Value == Model.SelectedCarriers[i].ToString());
+                <tr>
+                    <td>@Html.HiddenFor(m => m.SelectedCarriers[i]) @Html.Raw(carrier.Text)</td>
+                    <td><input name="SelectedCarriers[@i].Id" type="hidden" value="@Model.SelectedCarriers[i]" /></td>
+                    <td><button class="link-submit" type="submit" name="remove" value="@Model.SelectedCarriers[i]">Remove</button></td>
+                </tr>
+            }
+        </table>
+    </div>
+
+    <button class="button" type="submit" name="command" value="continue">@Constants.ContinueButtonText</button>
+}

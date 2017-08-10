@@ -61,7 +61,7 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.Carrier {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Add another carrier.
+        ///   Looks up a localized string similar to Add a new carrier.
         /// </summary>
         public static string AddAnother {
             get {
@@ -75,6 +75,15 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.Carrier {
         public static string AddFirst {
             get {
                 return ResourceManager.GetString("AddFirst", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add carriers from your address book.
+        /// </summary>
+        public static string AddFromAddressBook {
+            get {
+                return ResourceManager.GetString("AddFromAddressBook", resourceCulture);
             }
         }
         
@@ -98,7 +107,7 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.Carrier {
         
         /// <summary>
         ///   Looks up a localized string similar to Add details of all the intended carriers for the whole journey. 
-        ///    After you&apos;ve added your first carrier, you can add several more by selecting &quot;Add another carrier&quot;..
+        ///    After you&apos;ve added your first carrier, you can add several more by selecting &quot;Add a new carrier&quot;..
         /// </summary>
         public static string HeaderDescription {
             get {

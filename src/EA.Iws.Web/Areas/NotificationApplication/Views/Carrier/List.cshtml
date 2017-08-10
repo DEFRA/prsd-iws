@@ -43,15 +43,13 @@
 }
 
 <div class="form-group">
-    @if (Model != null && Model.Carriers.Any())
-    {
-        @Html.ActionLink(ListCarrierResources.AddAnother, "Add", "Carrier", new { id = Model.NotificationId, backToOverview = ViewBag.BackToOverview }, null)
-    }
-    else
-    {
-        @Html.ActionLink(ListCarrierResources.AddFirst, "Add", "Carrier", new { id = Model.NotificationId, backToOverview = ViewBag.BackToOverview }, null)
-    }
+    @Html.ActionLink(ListCarrierResources.AddAnother, "Add", "Carrier", new { id = Model.NotificationId, backToOverview = ViewBag.BackToOverview }, null)
 </div>
+
+<div class="form-group">
+    @Html.ActionLink(ListCarrierResources.AddFromAddressBook, "AddFromAddressBook", "Carrier", new { id = Model.NotificationId }, null)
+</div>
+
 @if (ViewBag.BackToOverview)
 {
     @Html.ActionLink(Constants.ContinueButtonText, "Index", "Home", new { id = Model.NotificationId }, new { @class = "button" })
