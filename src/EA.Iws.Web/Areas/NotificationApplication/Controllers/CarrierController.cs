@@ -2,8 +2,10 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Mvc;
+    using Core.AddressBook;
     using Core.Carriers;
     using Infrastructure;
     using Prsd.Core.Mapper;
@@ -170,5 +172,49 @@
 
             return RedirectToAction("List", "Carrier", new { id = model.NotificationId, backToOverview });
         }
+
+        [HttpGet]
+        public async Task<ActionResult> AddFromAddressBook(Guid id)
+        {
+            var carriers = await mediator.SendAsync(new GetUserAddressBookByType(AddressRecordType.Carrier));
+
+            var model = new AddFromAddressBookViewModel();
+            model.SetCarriers(carriers.AddressRecords);
+
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> AddFromAddressBook(Guid id, AddFromAddressBookViewModel model, 
+            string command, string remove)
+        {
+            if (command != null && command == "addcarrier")
+            {
+                if (model.SelectedCarrier.HasValue && !model.SelectedCarriers.Contains(model.SelectedCarrier.Value))
+                {
+                    model.SelectedCarriers.Add(model.SelectedCarrier.Value);
+                }
+            }
+            else if (command != null && command == "continue")
+            {
+                if (model.SelectedCarriers.Any())
+                {
+                    await mediator.SendAsync(new AddCarriersToNotificationFromAddressBook(id,
+                        model.SelectedCarriers.ToArray()));
+                }
+
+                return RedirectToAction("List");
+            }
+            else if (remove != null)
+            {
+                model.SelectedCarriers.RemoveAll(c => c.ToString().Equals(remove));
+            }
+
+            var carriers = await mediator.SendAsync(new GetUserAddressBookByType(AddressRecordType.Carrier));
+            model.SetCarriers(carriers.AddressRecords);
+
+            return View(model);
+        } 
     }
 }
