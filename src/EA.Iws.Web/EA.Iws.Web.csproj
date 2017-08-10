@@ -2218,6 +2218,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>SuccessResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Areas\NotificationApplication\Views\Carrier\AddFromAddressBookResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AddFromAddressBookResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Areas\NotificationApplication\Views\Home\ResubmissionSuccessResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -4119,6 +4124,10 @@
     <EmbeddedResource Include="Areas\NotificationApplication\Views\Carrier\AddEditCarrierResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>AddEditCarrierResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\NotificationApplication\Views\Carrier\AddFromAddressBookResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AddFromAddressBookResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\NotificationApplication\Views\Carrier\CarrierBusinessTypeResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
