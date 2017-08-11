@@ -1,0 +1,42 @@
+﻿@model EA.Iws.Web.Areas.NotificationMovements.ViewModels.ReceiptRecovery.SuccessViewModel
+@using Resource = EA.Iws.Web.Areas.NotificationMovements.Views.ReceiptRecovery.IndexResources
+@using EA.Iws.Core.Shared
+@{
+    ViewBag.Title = "Upload successful";
+    Layout = "~/Areas/NotificationMovements/Views/Shared/_CreateSummaryLayout.cshtml";
+}
+
+@{ 
+    string titletext = " ";
+    string recoveryText = Model.NotificationType == NotificationType.Recovery ? "recovery" : "disposal";
+    if (Model.Certificate == CertificateType.Receipt)
+    {
+        titletext = "receipt";
+    }
+    else if (Model.Certificate == CertificateType.Recovery)
+    {
+        titletext = recoveryText;
+    }
+    else if(Model.Certificate == CertificateType.ReceiptRecovery)
+    {
+        titletext = "receipt and " + recoveryText;
+    }
+ }
+<header class="hgroup">
+    <h1 class="heading-large">@Html.Raw(string.Format(@Resource.SuccessTitle, titletext))</h1>
+</header>
+@Html.HiddenFor(m => m.NotificationId)
+
+<div class="form-group">
+    @Html.ActionLink("Record another certificate", "CertificateTypes", "Certificate",
+        new { area = "NotificationMovements", id = Model.NotificationId },
+        new { @class = "button" })
+</div>
+
+<div class="form-group">
+    @Html.ActionLink("Return to notification options", "Index", "Options",
+        new { area = "NotificationApplication", id = Model.NotificationId }, null
+        )
+</div>
+
+@Html.FeedbackLink()

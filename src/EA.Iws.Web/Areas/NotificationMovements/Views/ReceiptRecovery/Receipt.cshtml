@@ -1,0 +1,54 @@
+﻿@model EA.Iws.Web.Areas.NotificationMovements.ViewModels.ReceiptRecovery.ReceiptViewModel
+@using Resource = EA.Iws.Web.Areas.NotificationMovements.Views.ReceiptRecovery.IndexResources
+@using EnumHelper = EA.Prsd.Core.Helpers.EnumHelper
+@using EA.Iws.Core.Shared
+@{
+    Layout = "~/Areas/NotificationMovements/Views/Shared/_SummaryLayout.cshtml";
+    ViewBag.Title = "Received shipment";
+}
+
+@{
+    var operationTitleVerb = Model.Certificate == CertificateType.ReceiptRecovery ? (Model.NotificationType == NotificationType.Recovery ? "and recovered" : "and disposed") : " ";
+}
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.Gds().ValidationSummary()
+    @Html.HiddenFor(m => m.NotificationType)
+    @Html.HiddenFor(m => m.Certificate)
+    @Html.HiddenFor(m => m.Unit)
+
+<h1 class="heading-large">@Html.Raw(string.Format(Resource.Title, operationTitleVerb))</h1>
+
+<h2 class="heading-small">@Html.Raw(string.Format(Resource.QuantityLabel, EnumHelper.GetDisplayName(Model.Unit)))</h2>
+<div class="form-group @Html.Gds().FormGroupClass(m => m.Quantity)">
+    @Html.Gds().ValidationMessageFor(m => m.Quantity)
+    @Html.Gds().TextBoxFor(m => m.Quantity)
+</div>
+
+<div class="form-group @Html.Gds().FormGroupClass(m => m.Day) @Html.Gds().FormGroupClass(m => m.Month) @Html.Gds().FormGroupClass(m => m.Year)">
+    <fieldset>
+        <h2 class="heading-small">@Resource.ReceivedDate</h2>
+        <div class="form-date">
+            @Html.Gds().HintParagraph(@Resource.HintParagraph)
+            @Html.Gds().ValidationMessageFor(m => m.Day)
+            @Html.Gds().ValidationMessageFor(m => m.Month)
+            @Html.Gds().ValidationMessageFor(m => m.Year)
+            <div class="form-group form-group-day">
+                @Html.Gds().LabelFor(m => m.Day)
+                @Html.Gds().TextBoxFor(m => m.Day, new { type = "number", min = "1", max = "31" })
+            </div>
+            <div class="form-group form-group-month">
+                @Html.Gds().LabelFor(m => m.Month)
+                @Html.Gds().TextBoxFor(m => m.Month, new { type = "number", min = "1", max = "12" })
+            </div>
+            <div class="form-group form-group-year">
+                @Html.Gds().LabelFor(m => m.Year)
+                @Html.Gds().TextBoxFor(m => m.Year, new { type = "number", min = "2015" })
+            </div>
+        </div>
+    </fieldset>
+</div>
+<button class="button" type="submit">@Constants.ContinueOnlyButtonText</button>
+
+}

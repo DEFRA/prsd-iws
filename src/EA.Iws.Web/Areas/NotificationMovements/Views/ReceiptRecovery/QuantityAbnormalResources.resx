@@ -117,124 +117,25 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="ActiveLoadsPermitted" xml:space="preserve">
-    <value>Active loads permitted:</value>
+  <data name="AboveTolerance" xml:space="preserve">
+    <value>Please note: You entered {0} as the quantity of waste received, however that’s over 50% more than the actual quantity.</value>
   </data>
-  <data name="CancelPrenotification" xml:space="preserve">
-    <value>Cancel a prenotification</value>
+  <data name="BelowTolerance" xml:space="preserve">
+    <value>Please note: You entered {0} as the quantity of waste received, however that’s over 50% less than the actual quantity.</value>
   </data>
-  <data name="CertificateOfReceipt" xml:space="preserve">
-    <value>Record certificate of receipt and/or {0}</value>
+  <data name="Confirm" xml:space="preserve">
+    <value>Yes - I’ve entered the right quantity of waste received</value>
   </data>
-  <data name="CreatePrenotification" xml:space="preserve">
-    <value>Generate a prenotification</value>
+  <data name="MainHeading" xml:space="preserve">
+    <value>Are you sure you've entered the right quantity?</value>
   </data>
-  <data name="CurrentActiveLoads" xml:space="preserve">
-    <value>Current active loads:</value>
-  </data>
-  <data name="Dropdown" xml:space="preserve">
-    <value>Choose what you would like to view</value>
-  </data>
-  <data name="EditPrenotification" xml:space="preserve">
-    <value>Edit a prenotification</value>
-  </data>
-  <data name="NumberUsed" xml:space="preserve">
-    <value>Number of shipments used:</value>
+  <data name="QuantityLabel" xml:space="preserve">
+    <value>Quantity received in {0}</value>
   </data>
   <data name="Reject" xml:space="preserve">
-    <value>Record a rejected shipment</value>
-  </data>
-  <data name="SummaryCaption" xml:space="preserve">
-    <value>Shipment summary</value>
-  </data>
-  <data name="TableTitle" xml:space="preserve">
-    <value>Shipment key dates - based on status.</value>
-  </data>
-  <data name="TabTitle" xml:space="preserve">
-    <value>Notification options</value>
+    <value>No - I’d like to correct the quantity of waste received</value>
   </data>
   <data name="Title" xml:space="preserve">
-    <value>Notification options</value>
-  </data>
-  <data name="TotalNumber" xml:space="preserve">
-    <value>Total number of shipments:</value>
-  </data>
-  <data name="TotalQuantityReceived" xml:space="preserve">
-    <value>Total quantity received:</value>
-  </data>
-  <data name="TotalQuantityRemaining" xml:space="preserve">
-    <value>Total quantity remaining:</value>
-  </data>
-  <data name="UploadPrenotification" xml:space="preserve">
-    <value>Upload prenotification documents</value>
-  </data>
-  <data name="ShipmentOptionsTitle" xml:space="preserve">
-    <value>Shipment options</value>
-  </data>
-  <data name="ShipmentSummaryTitle" xml:space="preserve">
-    <value>Shipment summary</value>
-  </data>
-  <data name="CompleteFG" xml:space="preserve">
-    <value>Complete the financial guarantee</value>
-  </data>
-  <data name="CopyFromPrevious" xml:space="preserve">
-    <value>Create a new notification based on a previous one</value>
-  </data>
-  <data name="CostInfo" xml:space="preserve">
-    <value>Costs and payment information</value>
-  </data>
-  <data name="CurrentNotificationTitle" xml:space="preserve">
-    <value>Current notification:</value>
-  </data>
-  <data name="NewNotificationTitle" xml:space="preserve">
-    <value>New notification</value>
-  </data>
-  <data name="PrintLabel" xml:space="preserve">
-    <value>Print postage label</value>
-  </data>
-  <data name="PrintNotification" xml:space="preserve">
-    <value>Download notification</value>
-  </data>
-  <data name="StartNewNotification" xml:space="preserve">
-    <value>Start a new notification</value>
-  </data>
-  <data name="SupportingInfoLink" xml:space="preserve">
-    <value>View supporting information</value>
-  </data>
-  <data name="SupportingInfoMessage" xml:space="preserve">
-    <value>This link opens in a new browser tab</value>
-  </data>
-  <data name="TitleSupportingInfo" xml:space="preserve">
-    <value>View supporting information on GOV.UK in new tab</value>
-  </data>
-  <data name="UploadAnnexes" xml:space="preserve">
-    <value>Upload annexes and extra information</value>
-  </data>
-  <data name="ViewDates" xml:space="preserve">
-    <value>View the key dates</value>
-  </data>
-  <data name="ViewNotification" xml:space="preserve">
-    <value>View notification</value>
-  </data>
-  <data name="GenerateInterimDoc" xml:space="preserve">
-    <value>Download an interim movement document</value>
-  </data>
-  <data name="NoShipmentOptionsText" xml:space="preserve">
-    <value>You can start creating shipments once your notification has been consented and your financial guarantee is approved.</value>
-  </data>
-  <data name="ContinueWithButtonText" xml:space="preserve">
-    <value>Continue with this notification</value>
-  </data>
-  <data name="IncompleteMessage" xml:space="preserve">
-    <value>This notification can not be submitted yet, as it is incomplete. You can submit it for approval once you complete it.</value>
-  </data>
-  <data name="FileClosedMessage" xml:space="preserve">
-    <value>This notification has been closed. No further shipments can be made.</value>
-  </data>
-  <data name="Download" xml:space="preserve">
-    <value>Download a list of all movements in csv format</value>
-  </data>
-  <data name="DownloadShipmentDocuments" xml:space="preserve">
-    <value>Download shipment documents</value>
+    <value>Quantity received</value>
   </data>
 </root>

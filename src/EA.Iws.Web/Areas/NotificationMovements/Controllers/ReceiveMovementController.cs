@@ -1,11 +1,15 @@
 ﻿namespace EA.Iws.Web.Areas.NotificationMovements.Controllers
 {
-    using System;
-    using System.Threading.Tasks;
-    using System.Web.Mvc;
+    using Core.Shared;
+    using Infrastructure;
     using Infrastructure.Authorization;
     using Prsd.Core.Mediator;
     using Requests.Movement.Receive;
+    using Requests.NotificationMovements;
+    using System;
+    using System.Linq;
+    using System.Threading.Tasks;
+    using System.Web.Mvc;
     using ViewModels.ReceiveMovement;
 
     [AuthorizeActivity(typeof(GetSubmittedMovementsByNotificationId))]
@@ -21,9 +25,11 @@
         [HttpGet]
         public async Task<ActionResult> Index(Guid notificationId)
         {
-            var result = await mediator.SendAsync(new GetSubmittedMovementsByNotificationId(notificationId));
+            var receivedResult = await mediator.SendAsync(new GetSubmittedMovementsByNotificationId(notificationId));
 
-            return View(new MovementReceiptViewModel(notificationId, result));
+            var recoveryResult = await mediator.SendAsync(new GetReceivedMovements(notificationId));
+
+            return View(new MovementReceiptViewModel(notificationId, receivedResult, recoveryResult));
         }
 
         [HttpPost]
@@ -35,12 +41,16 @@
                 return View(model);
             }
 
-            return RedirectToAction("Index", "DateReceived",
-                new
-                {
-                    id = model.RadioButtons.SelectedValue,
-                    area = "ExportMovement"
-                });
-        }
+            if (model.ReceiveShipments.Any(s => s.IsSelected))
+            {
+                return RedirectToAction("CertificateTypes", "ReceiptRecovery", model.ReceiveShipments.Where(s => s.IsSelected).Select(s => s.Id).ToRouteValueDictionary("movementIds"));
+            }
+
+            if (model.RecoveryShipments.Any(s => s.IsSelected))
+            {
+                return RedirectToAction("Index", "ReceiptRecovery", model.RecoveryShipments.Where(s => s.IsSelected).Select(s => s.Id).ToRouteValueDictionary("movementIds"));
+            }
+            return View(model);
+        }      
     }
 }

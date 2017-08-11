@@ -1,25 +1,28 @@
-﻿namespace EA.Iws.Web.Areas.NotificationMovements.ViewModels.ReceiveMovement
+﻿namespace EA.Iws.Web.Areas.NotificationMovements.ViewModels.Certificate
 {
     using Core.Movement;
     using Core.MovementOperation;
+    using Core.Shared;
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.Linq;
-
-    public class MovementReceiptViewModel : IValidatableObject
+    public class ShipmentViewModel : IValidatableObject
     {
         public Guid NotificationId { get; set; }
 
-        public MovementReceiptViewModel()
+        public ShipmentViewModel()
         {
         }
+
+        public NotificationType NotificationType { get; set; }
+
+        public CertificateType Certificate { get; set; }
 
         public IList<SelectShipmentViewModel> ReceiveShipments { get; set; }
 
         public IList<SelectShipmentViewModel> RecoveryShipments { get; set; }
-
-        public MovementReceiptViewModel(Guid id, IEnumerable<MovementData> receiveModel, MovementOperationData recoveryModel)
+        public ShipmentViewModel(Guid id, NotificationType notificationType, CertificateType certificate, IEnumerable<MovementData> receiveModel)
         {
             ReceiveShipments = receiveModel
                .OrderBy(d => d.Number)
@@ -30,7 +33,12 @@
                    IsSelected = false
                }).ToArray();
             NotificationId = id;
+            NotificationType = notificationType;
+            Certificate = certificate;
+        }
 
+        public ShipmentViewModel(Guid id, NotificationType notificationType, CertificateType certificate, MovementOperationData recoveryModel)
+        {
             var list = recoveryModel.MovementDatas;
             RecoveryShipments = list
                .OrderBy(d => d.Number)
@@ -41,6 +49,16 @@
                    IsSelected = false
                }).ToArray();
             NotificationId = id;
+            NotificationType = notificationType;
+            Certificate = certificate;
+        }
+
+        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+        {
+            if ((ReceiveShipments != null && !ReceiveShipments.Any(s => s.IsSelected)) || (RecoveryShipments != null && !RecoveryShipments.Any(s => s.IsSelected)))
+            {
+                yield return new ValidationResult(ShipmentViewModelResources.ShipmentRequired);
+            }
         }
 
         public class SelectShipmentViewModel
@@ -51,17 +69,5 @@
 
             public bool IsSelected { get; set; }
         }
-
-        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
-        {
-            if (!ReceiveShipments.Any(s => s.IsSelected) && !RecoveryShipments.Any(s => s.IsSelected))
-            {
-                yield return new ValidationResult(MovementReceiptViewModelResources.ShipmentRequired);
-            }
-            if ((ReceiveShipments != null && ReceiveShipments.Any(s => s.IsSelected)) && (RecoveryShipments != null && RecoveryShipments.Any(s => s.IsSelected)))
-            {
-                yield return new ValidationResult(MovementReceiptViewModelResources.EitherReceiveOrRecovery);
-            }
-        }
-    }
+    }   
 }

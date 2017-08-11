@@ -1,0 +1,44 @@
+﻿@using Resource = EA.Iws.Web.Areas.NotificationMovements.Views.Certificate.CertificateShipmentResources
+@using EA.Iws.Core.Shared
+@model EA.Iws.Web.Areas.NotificationMovements.ViewModels.Certificate.CertificationSelectionViewModel
+@{
+    Layout = "~/Areas/NotificationMovements/Views/Shared/_SummaryLayout.cshtml";
+}
+
+<header class="hgroup">
+    <h1 class="heading-large">@Resource.CertificateTitle</h1>
+</header>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.Gds().ValidationSummary()
+
+    <div class="form-group @Html.Gds().FormGroupClass(m => m.Certificate)">
+        <fieldset>
+            <div class="multiple-choice">
+                @Html.RadioButtonFor(m => m.Certificate, CertificateType.Receipt, new { id = "ReceiptCertificate" })
+                <label for="ReceiptCertificate">
+                    @Resource.ReceiveCertificate
+                </label>
+            </div>
+            <div class="multiple-choice">
+                @Html.RadioButtonFor(m => m.Certificate, CertificateType.Recovery, new { id = "RecoveryCertificate" })
+                <label for="RecoveryCertificate">
+                    @Resource.RecoveryCertificate
+                </label>
+            </div>
+            <div class="multiple-choice">
+                @Html.RadioButtonFor(m => m.Certificate, CertificateType.ReceiptRecovery, new { id = "ReceiptRecoveryCertificate" })
+                <label for="ReceiptRecoveryCertificate">
+                    @Resource.ReceiptRecoveryCertificate
+                </label>
+            </div>
+        </fieldset>
+    </div>
+
+
+    <div class="form-group">
+        <button class="button" type="submit">@Constants.ContinueOnlyButtonText</button>
+    </div>
+}
