@@ -17,6 +17,7 @@
                 @Html.HiddenFor(m => m.WasAccepted)
                 @Html.HiddenFor(m => m.IsReceived)
                 @Html.HiddenFor(m => m.IsOperationCompleted)
+                @Html.HiddenFor(m => m.IsRejected)
                 var operationLabelVerb = Model.NotificationType == NotificationType.Recovery ? "recovered" : "disposed of";
                 var operationTitleVerb = Model.NotificationType == NotificationType.Recovery ? "Recovered" : "Disposed";
 
@@ -56,7 +57,7 @@
                 </div>
 
                 <hr />
-                if (Model.IsReceived)
+                if (Model.IsReceived || Model.IsRejected)
                 {
                     <div>
 
