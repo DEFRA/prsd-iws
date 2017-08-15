@@ -9,7 +9,7 @@
     using Views.TransitState;
     using Web.ViewModels.Shared;
 
-    public class TransitStateViewModel : IValidatableObject
+    public class TransitStateViewModel
     {
         public int? OrdinalPosition { get; set; }
 
@@ -46,24 +46,6 @@
         public TransitStateViewModel()
         {
             TransitStateCountryIds = new List<Guid>();
-        }
-
-        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
-        {
-            if (CountryId == StateOfExportCountryId)
-            {
-                yield return new ValidationResult(TransitStateResources.TransitNotSameAsExport, new[] { "CountryId" });
-            }
-
-            if (CountryId == StateOfImportCountryId)
-            {
-                yield return new ValidationResult(TransitStateResources.TransitNotSameAsImport, new[] { "CountryId" });
-            }
-
-            if (TransitStateCountryIds != null && TransitStateCountryIds.Contains(CountryId.GetValueOrDefault()))
-            {
-                yield return new ValidationResult(TransitStateResources.TransitNotSameAsAnotherTransit, new[] { "CountryId" });
-            }
         }
     }
 }

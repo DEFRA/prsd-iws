@@ -361,16 +361,18 @@
         }
 
         [Fact]
-        public void UpdateTransitState_SetToSameCountryAsExisting_Throws()
+        public void UpdateTransitState_SetToSameCountryAsExisting_AddsToNotification()
         {
             transportRoute.AddTransitStateToNotification(transitStates[0]);
 
             transportRoute.AddTransitStateToNotification(transitStates[1]);
 
-            Assert.Throws<InvalidOperationException>(() => transportRoute.UpdateTransitStateForNotification(transitStates[1].Id, countries[0], 
+            transportRoute.UpdateTransitStateForNotification(transitStates[1].Id, countries[0],
                 CompetentAuthorityFactory.Create(guids[0], countries[0]),
                 EntryOrExitPointFactory.Create(guids[0], countries[0]),
-                EntryOrExitPointFactory.Create(guids[1], countries[0]), null));
+                EntryOrExitPointFactory.Create(guids[1], countries[0]), null);
+
+            Assert.Equal(2, transportRoute.TransitStates.Count());
         }
 
         [Fact]
