@@ -39,6 +39,8 @@
         [Display(Name = "WasShipmentAcceptedLabel", ResourceType = typeof(IndexViewModelResources))]
         public bool WasAccepted { get; set; }
 
+        public bool IsOperationCompleted { get; set; }
+
         public ShipmentQuantityUnits? Units { get; set; }
 
         public IList<ShipmentQuantityUnits> PossibleUnits { get; set; }
@@ -50,7 +52,7 @@
                 return new SelectList(PossibleUnits.OrderBy(u => (int)u).Select(u => new KeyValuePair<string, ShipmentQuantityUnits>(EnumHelper.GetDisplayName(u), u)), "Value", "Key");
             }
         }
-        public DateTime? RecoveryDate { get; set; }
+        public DateTime? Date { get; set; }
 
         public NotificationType NotificationType { get; set; }
 
@@ -116,6 +118,7 @@
             NotificationType = data.Data.NotificationType;
             IsReceived = data.ReceiptData.IsReceived;
             IsRejected = data.ReceiptData.IsRejected;
+            IsOperationCompleted = data.RecoveryData.IsOperationCompleted;
             ActualQuantity = data.ReceiptData.ActualQuantity;
             ReceivedDate = data.ReceiptData.ReceiptDate.HasValue ? data.ReceiptData.ReceiptDate.Value.DateTime : (DateTime?)null;
             Units = data.ReceiptData.ReceiptUnits ?? data.ReceiptData.NotificationUnit;
@@ -124,7 +127,7 @@
             PossibleUnits = data.ReceiptData.PossibleUnits;
 
             NotificationType = data.Data.NotificationType;
-            RecoveryDate = data.RecoveryData.OperationCompleteDate.HasValue ? data.RecoveryData.OperationCompleteDate.Value.DateTime : (DateTime?)null;
+            Date = data.RecoveryData.OperationCompleteDate.HasValue ? data.RecoveryData.OperationCompleteDate.Value.DateTime : (DateTime?)null;
         }
 
         public void SetSummaryData(Summary summaryData)
@@ -146,7 +149,7 @@
 
             if (ReceivedDate.HasValue && WasAccepted && !ActualQuantity.HasValue)
             {
-                yield return new ValidationResult(IndexViewModelResources.QuantityRequired, new[] { "Receipt.ActualQuantity" });
+                yield return new ValidationResult(IndexViewModelResources.QuantityRequired, new[] { "ActualQuantity" });
             }
         }
     }
