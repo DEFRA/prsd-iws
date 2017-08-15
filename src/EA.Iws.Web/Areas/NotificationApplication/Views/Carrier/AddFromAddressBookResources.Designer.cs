@@ -62,6 +62,15 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.Carrier {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add carrier.
+        /// </summary>
+        public static string AddCarrier {
+            get {
+                return ResourceManager.GetString("AddCarrier", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Awaiting carriers....
         /// </summary>
         public static string AwaitingCarriers {
@@ -76,6 +85,24 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.Carrier {
         public static string Carrier {
             get {
                 return ResourceManager.GetString("Carrier", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to carrier list.
+        /// </summary>
+        public static string CarrierListTitle {
+            get {
+                return ResourceManager.GetString("CarrierListTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Carriers.
+        /// </summary>
+        public static string CarrierTableTitle {
+            get {
+                return ResourceManager.GetString("CarrierTableTitle", resourceCulture);
             }
         }
         
