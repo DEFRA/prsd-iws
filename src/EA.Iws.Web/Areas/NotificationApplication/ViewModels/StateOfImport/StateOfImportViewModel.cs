@@ -46,11 +46,6 @@
             {
                 yield return new ValidationResult(StateOfImportResources.ImportExportCountryShouldNotSame, new[] { "CountryId" });
             }
-
-            if (CountryId.HasValue && TransitStateCountryIds.Contains(CountryId.Value))
-            {
-                yield return new ValidationResult(StateOfImportResources.ImportTransitCountryShouldNotSame, new[] { "CountryId" });
-            }
         }
     }
 }
