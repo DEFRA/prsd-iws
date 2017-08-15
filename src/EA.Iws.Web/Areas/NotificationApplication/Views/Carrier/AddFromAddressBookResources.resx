@@ -117,17 +117,26 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AddCarrier" xml:space="preserve">
+    <value>Add carrier</value>
+  </data>
   <data name="AwaitingCarriers" xml:space="preserve">
     <value>Awaiting carriers...</value>
   </data>
   <data name="Carrier" xml:space="preserve">
     <value>Carrier</value>
   </data>
+  <data name="CarrierListTitle" xml:space="preserve">
+    <value>carrier list</value>
+  </data>
+  <data name="CarrierTableTitle" xml:space="preserve">
+    <value>Carriers</value>
+  </data>
   <data name="ChosenCarriers" xml:space="preserve">
     <value>Your chosen carriers</value>
   </data>
   <data name="IfCarrierIsNotListed" xml:space="preserve">
-    <value>If a carrier is not in the list, you will need to add a new carrier.</value>
+    <value>If a carrier is not in the list, you can add a new carrier on the next screen.</value>
   </data>
   <data name="Remove" xml:space="preserve">
     <value>Remove</value>

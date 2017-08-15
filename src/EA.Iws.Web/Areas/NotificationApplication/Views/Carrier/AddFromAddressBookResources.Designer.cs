@@ -62,6 +62,15 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.Carrier {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add carrier.
+        /// </summary>
+        public static string AddCarrier {
+            get {
+                return ResourceManager.GetString("AddCarrier", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Awaiting carriers....
         /// </summary>
         public static string AwaitingCarriers {
@@ -80,6 +89,24 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.Carrier {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to carrier list.
+        /// </summary>
+        public static string CarrierListTitle {
+            get {
+                return ResourceManager.GetString("CarrierListTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Carriers.
+        /// </summary>
+        public static string CarrierTableTitle {
+            get {
+                return ResourceManager.GetString("CarrierTableTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Your chosen carriers.
         /// </summary>
         public static string ChosenCarriers {
@@ -89,7 +116,7 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.Carrier {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to If a carrier is not in the list, you will need to add a new carrier..
+        ///   Looks up a localized string similar to If a carrier is not in the list, you can add a new carrier on the next screen..
         /// </summary>
         public static string IfCarrierIsNotListed {
             get {
