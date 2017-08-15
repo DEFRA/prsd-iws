@@ -127,7 +127,7 @@
     <value>Your chosen carriers</value>
   </data>
   <data name="IfCarrierIsNotListed" xml:space="preserve">
-    <value>If a carrier is not in the list, you will need to add a new carrier.</value>
+    <value>If a carrier is not in the list, you can add a new carrier on the next screen.</value>
   </data>
   <data name="Remove" xml:space="preserve">
     <value>Remove</value>

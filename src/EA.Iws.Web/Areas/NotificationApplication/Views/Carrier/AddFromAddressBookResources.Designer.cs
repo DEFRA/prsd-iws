@@ -89,7 +89,7 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.Carrier {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to If a carrier is not in the list, you will need to add a new carrier..
+        ///   Looks up a localized string similar to If a carrier is not in the list, you can add a new carrier on the next screen..
         /// </summary>
         public static string IfCarrierIsNotListed {
             get {
