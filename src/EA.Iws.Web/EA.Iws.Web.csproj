@@ -989,6 +989,8 @@
     <Content Include="Areas\AdminImportNotificationMovements\Views\MovementOverride\_ChangeShipment.cshtml" />
     <Content Include="Areas\AdminImportNotificationMovements\Views\MovementOverride\Index.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\Carrier\AddFromAddressBook.cshtml" />
+    <Content Include="Areas\AdminExportAssessment\Views\UpdateJourney\AddTransitState.cshtml" />
+    <Content Include="Areas\AdminExportAssessment\Views\UpdateJourney\GetTransitAuthoritiesAndEntryOrExitPointsByCountryId.cshtml" />
     <None Include="Scripts\jquery-2.1.3.intellisense.js" />
     <Content Include="Scripts\govuk\govuk-template.js" />
     <Content Include="Scripts\govuk\ie.js" />
@@ -1192,6 +1194,12 @@
       <DependentUpon>IndexViewModelResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Areas\AdminExportAssessment\ViewModels\Producer\AddProducerViewModel.cs" />
+    <Compile Include="Areas\AdminExportAssessment\ViewModels\UpdateJourney\AddTransitStateViewModel.cs" />
+    <Compile Include="Areas\AdminExportAssessment\ViewModels\UpdateJourney\AddTransitStateViewModelResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AddTransitStateViewModelResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Areas\AdminExportAssessment\ViewModels\UpdateJourney\ExitPointViewModel.cs" />
     <Compile Include="Areas\AdminExportAssessment\ViewModels\UpdateJourney\EntryPointViewModel.cs" />
     <Compile Include="Areas\AdminExportAssessment\ViewModels\UpdateJourney\UpdateJourneyResources.Designer.cs">
@@ -1284,6 +1292,11 @@
       <DependentUpon>ProducerResources.resx</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Areas\AdminExportAssessment\Views\UpdateJourney\AddTransitStateResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AddTransitStateResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Areas\AdminExportAssessment\Views\UpdateJourney\UpdateJourneyResources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -3383,6 +3396,10 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>IndexViewModelResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Areas\AdminExportAssessment\ViewModels\UpdateJourney\AddTransitStateViewModelResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AddTransitStateViewModelResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Areas\AdminExportAssessment\ViewModels\UpdateJourney\UpdateJourneyResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>UpdateJourneyResources.Designer.cs</LastGenOutput>
@@ -3454,6 +3471,10 @@
     <EmbeddedResource Include="Areas\AdminExportAssessment\Views\Producer\ProducerResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>ProducerResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\AdminExportAssessment\Views\UpdateJourney\AddTransitStateResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AddTransitStateResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\AdminExportAssessment\Views\UpdateJourney\UpdateJourneyResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

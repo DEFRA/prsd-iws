@@ -1,6 +1,8 @@
 ﻿namespace EA.Iws.Web.Areas.AdminExportAssessment.Controllers
 {
     using System;
+    using System.Collections.Generic;
+    using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Infrastructure.Authorization;
@@ -8,9 +10,11 @@
     using Requests.NotificationAssessment;
     using Requests.TransportRoute;
     using ViewModels.UpdateJourney;
+    using Web.ViewModels.Shared;
 
     [AuthorizeActivity(typeof(SetEntryPoint))]
     [AuthorizeActivity(typeof(SetExitPoint))]
+    [AuthorizeActivity(typeof(AddTransitState))]
     public class UpdateJourneyController : Controller
     {
         private readonly IMediator mediator;
@@ -88,6 +92,64 @@
             ViewBag.ExitPoint = stateOfImport.ExitPoint.Name;
 
             return View();
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> AddTransitState(Guid id)
+        {
+            var countries = await mediator.SendAsync(new GetAllCountriesHavingCompetentAuthorities());
+
+            var model = new AddTransitStateViewModel
+            {
+                Countries = new SelectList(countries, "Id", "Name")
+            };
+
+            return View(model);
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> GetTransitAuthoritiesAndEntryOrExitPointsByCountryId(Guid countryId)
+        {
+            var model = new AddTransitStateViewModel();
+
+            var result = await mediator.SendAsync(new GetTransitAuthoritiesAndEntryOrExitPointsByCountryId(countryId));
+
+            var competentAuthoritiesKeyValuePairs = result.CompetentAuthorities.Select(ca =>
+                new KeyValuePair<string, Guid>(ca.Code + " - " + ca.Name, ca.Id));
+            var competentAuthorityRadioButtons = new StringGuidRadioButtons(competentAuthoritiesKeyValuePairs);
+
+            model.CompetentAuthorities = competentAuthorityRadioButtons;
+            model.EntryOrExitPoints = new SelectList(result.EntryOrExitPoints, "Id", "Name");
+
+            return PartialView(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> AddTransitState(Guid id, AddTransitStateViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                var countries = await mediator.SendAsync(new GetAllCountriesHavingCompetentAuthorities());
+                model.Countries = new SelectList(countries, "Id", "Name");
+
+                var result = await mediator.SendAsync(new GetTransitAuthoritiesAndEntryOrExitPointsByCountryId(model.CountryId.Value));
+
+                var competentAuthoritiesKeyValuePairs = result.CompetentAuthorities.Select(ca =>
+                    new KeyValuePair<string, Guid>(ca.Code + " - " + ca.Name, ca.Id));
+                var competentAuthorityRadioButtons = new StringGuidRadioButtons(competentAuthoritiesKeyValuePairs);
+
+                model.CompetentAuthorities = competentAuthorityRadioButtons;
+                model.EntryOrExitPoints = new SelectList(result.EntryOrExitPoints, "Id", "Name");
+
+                return View(model);
+            }
+
+            await
+                mediator.SendAsync(new AddTransitState(id, model.CountryId.Value, model.EntryPointId.Value,
+                    model.ExitPointId.Value, model.CompetentAuthorities.SelectedValue));
+
+            return RedirectToAction("Index", "Overview");
         }
     }
 }

@@ -213,6 +213,7 @@
     <Compile Include="Movement\SetMultipleMovementFileId.cs" />
     <Compile Include="Movement\SetMovementReceiptAndRecoveryData.cs" />
     <Compile Include="NotificationAssessment\AddProducer.cs" />
+    <Compile Include="NotificationAssessment\AddTransitState.cs" />
     <Compile Include="NotificationAssessment\DeleteExportNotification.cs" />
     <Compile Include="NotificationAssessment\DeleteTransaction.cs" />
     <Compile Include="NotificationAssessment\GetChangeNumberOfShipmentConfrimationData.cs" />

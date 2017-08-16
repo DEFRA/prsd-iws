@@ -29,10 +29,12 @@
             var canChangeNumberOfShipments = Task.Run(() => authorizationService.AuthorizeActivity(typeof(GetOriginalNumberOfShipments))).Result;
             var canChangeEntryExitPoints = Task.Run(() => authorizationService.AuthorizeActivity(ExportNotificationPermissions.CanChangeEntryExitPoint)).Result;
             var canAddProducer = Task.Run(() => authorizationService.AuthorizeActivity(ExportNotificationPermissions.CanAddProducer)).Result;
+            var canAddRemoveTransitState = Task.Run(() => authorizationService.AuthorizeActivity(ExportNotificationPermissions.CanAddRemoveTransitState)).Result;
 
             var model = new NotificationOverviewViewModel(result);
             model.AmountsAndDatesViewModel.CanChangeNumberOfShipments = canChangeNumberOfShipments;
             model.JourneyViewModel.CanChangeEntryExitPoint = canChangeEntryExitPoints;
+            model.JourneyViewModel.CanAddRemoveTransitState = canAddRemoveTransitState;
             model.OrganisationsInvolvedViewModel.CanAddProducer = canAddProducer;
 
             return View(model);
