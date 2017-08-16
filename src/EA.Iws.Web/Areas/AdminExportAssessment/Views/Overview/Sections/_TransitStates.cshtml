@@ -1,7 +1,7 @@
 ﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.NotificationApplication.JourneyViewModel
 
 <div class="overview-block">
-    @if (Model.AreTransitStatesCompleted && Model.CanAddRemoveTransitState)
+    @if (Model.CanAddRemoveTransitState)
     {
         <div class="change-answer">@Html.ActionLink("Add", "AddTransitState", "UpdateJourney", new { id = Model.NotificationId }, null)</div>
     }
