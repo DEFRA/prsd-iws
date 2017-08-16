@@ -1,9 +1,11 @@
 ﻿namespace EA.Iws.Web.Areas.AdminExportAssessment.Controllers
 {
     using System;
+    using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Core.Authorization.Permissions;
+    using Core.NotificationAssessment;
     using Infrastructure.Authorization;
     using NotificationApplication.ViewModels.NotificationApplication;
     using Prsd.Core.Mediator;
@@ -34,10 +36,22 @@
             var model = new NotificationOverviewViewModel(result);
             model.AmountsAndDatesViewModel.CanChangeNumberOfShipments = canChangeNumberOfShipments;
             model.JourneyViewModel.CanChangeEntryExitPoint = canChangeEntryExitPoints;
-            model.JourneyViewModel.CanAddRemoveTransitState = canAddRemoveTransitState;
+            model.JourneyViewModel.CanAddRemoveTransitState = canAddRemoveTransitState && IsEditableStatus(result.SubmitSummaryData.Status);
             model.OrganisationsInvolvedViewModel.CanAddProducer = canAddProducer;
 
             return View(model);
+        }
+
+        private static bool IsEditableStatus(NotificationStatus status)
+        {
+            var allowedStatuses = new[]
+            {
+                NotificationStatus.Submitted, NotificationStatus.NotificationReceived, NotificationStatus.InAssessment,
+                NotificationStatus.ReadyToTransmit, NotificationStatus.Transmitted,
+                NotificationStatus.DecisionRequiredBy, NotificationStatus.Unlocked, NotificationStatus.Reassessment
+            };
+
+            return allowedStatuses.Contains(status);
         }
     }
 }
