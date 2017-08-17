@@ -1,0 +1,51 @@
+﻿@using Resource = EA.Iws.Web.Areas.NotificationMovements.Views.ReceiptRecovery.IndexResources
+@using EA.Iws.Core.Shared
+@model EA.Iws.Web.Areas.NotificationMovements.ViewModels.ReceiptRecovery.UploadCertificateViewModel
+@{
+    ViewBag.Title = "Upload Certificate";
+    Layout = "~/Areas/NotificationMovements/Views/Shared/_CreateSummaryLayout.cshtml";
+}
+@{
+    ViewBag.Title = (Model.NotificationType == NotificationType.Recovery ? "Recovery" : "Disposal") + " complete";
+    string operation = Model.NotificationType == NotificationType.Recovery ? "recovery" : "disposal";
+    string titleText = Model.Certificate == CertificateType.Receipt ? @Resource.UploadReceiptTitle : @Resource.UploadRecoveryTitle;
+    string fileText = Model.Certificate == CertificateType.Receipt ? "receipt" : "recovery";
+}
+
+
+@using (Html.BeginForm(null, null, Model.MovementIds.ToRouteValueDictionary("movementIds"),
+                FormMethod.Post, HtmlHelper.AnonymousObjectToHtmlAttributes(new { enctype = "multipart/form-data" })))
+{
+    @Html.AntiForgeryToken()
+    @Html.Gds().ValidationSummary()
+    @Html.HiddenFor(m => m.NotificationType)
+    @Html.HiddenFor(m => m.Certificate)
+    @Html.HiddenFor(m => m.NotificationId)
+    @Html.HiddenFor(m => m.DateReceived)
+    @Html.HiddenFor(m => m.Quantity)
+    @Html.HiddenFor(m => m.DateRecovered)
+    @Html.HiddenFor(m => m.Unit)
+
+    if (Model.Certificate == CertificateType.ReceiptRecovery)
+    {
+            <h1 class="heading-large">@Html.Raw(string.Format(@Resource.UploadCombinedTitle, operation))</h1>
+    }
+    else
+    {
+         <h1 class="heading-large">@Html.Raw(titleText)</h1>
+    }
+
+    <p>@string.Format(Resource.UploadInstruction, fileText)</p>
+
+    <div class="form-group @Html.Gds().FormGroupClass(m => m.File)">
+        <label for="@Html.NameFor(m => m.File)">@Html.Raw(Model.Certificate != CertificateType.ReceiptRecovery ? string.Format(Resource.UploadFileTitle, fileText) : Resource.UploadFileCombinedTitle)</label>
+        @Html.Gds().ValidationMessageFor(m => m.File)
+        @Html.Gds().TextBoxFor(m => m.File, new { type = "file" })
+    </div>
+
+
+    <div class="form-group-compound">
+        <button class="button" type="submit">@Constants.ContinueButtonText</button>
+    </div>
+
+    }

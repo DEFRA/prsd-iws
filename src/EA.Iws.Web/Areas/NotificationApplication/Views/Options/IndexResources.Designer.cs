@@ -79,7 +79,7 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.Options {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Record a certificate of receipt.
+        ///   Looks up a localized string similar to Record certificate of receipt and/or {0}.
         /// </summary>
         public static string CertificateOfReceipt {
             get {
