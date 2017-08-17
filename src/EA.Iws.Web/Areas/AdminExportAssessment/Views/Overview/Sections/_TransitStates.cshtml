@@ -39,6 +39,10 @@
                         @transitState.CompetentAuthority.Name
                     </div>
                 </div>
+                @if (Model.CanAddRemoveTransitState)
+                {
+                    <div class="change-answer">@Html.ActionLink("Remove", "RemoveTransitState", "UpdateJourney", new { id = Model.NotificationId, entityId = transitState.Id }, null)</div>
+                }
             </div>
             if (transitState != Model.TransitStates.OrderBy(ts => ts.OrdinalPosition).Last())
             {

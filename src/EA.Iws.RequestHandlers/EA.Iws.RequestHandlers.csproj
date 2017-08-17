@@ -426,6 +426,7 @@
     <Compile Include="NotificationAssessment\GetStateOfImportDataHandler.cs" />
     <Compile Include="NotificationAssessment\GetTransactionByIdHandler.cs" />
     <Compile Include="NotificationAssessment\MarkAsInterimHandler.cs" />
+    <Compile Include="NotificationAssessment\RemoveTransitStateHandler.cs" />
     <Compile Include="NotificationAssessment\SetExitPointHandler.cs" />
     <Compile Include="NotificationAssessment\SetNewNumberOfShipmentsHandler.cs" />
     <Compile Include="NotificationAssessment\SetEntryPointHandler.cs" />

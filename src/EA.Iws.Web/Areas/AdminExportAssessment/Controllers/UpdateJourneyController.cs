@@ -8,6 +8,7 @@
     using Infrastructure.Authorization;
     using Prsd.Core.Mediator;
     using Requests.NotificationAssessment;
+    using Requests.TransitState;
     using Requests.TransportRoute;
     using ViewModels.UpdateJourney;
     using Web.ViewModels.Shared;
@@ -15,6 +16,7 @@
     [AuthorizeActivity(typeof(SetEntryPoint))]
     [AuthorizeActivity(typeof(SetExitPoint))]
     [AuthorizeActivity(typeof(AddTransitState))]
+    [AuthorizeActivity(typeof(RemoveTransitState))]
     public class UpdateJourneyController : Controller
     {
         private readonly IMediator mediator;
@@ -148,6 +150,25 @@
             await
                 mediator.SendAsync(new AddTransitState(id, model.CountryId.Value, model.EntryPointId.Value,
                     model.ExitPointId.Value, model.CompetentAuthorities.SelectedValue));
+
+            return RedirectToAction("Index", "Overview");
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> RemoveTransitState(Guid id, Guid entityId)
+        {
+            var transitState =
+                await mediator.SendAsync(new GetTransitStateWithTransportRouteDataByNotificationId(id, entityId));
+
+            return View(transitState.TransitState);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [ActionName("RemoveTransitState")]
+        public async Task<ActionResult> RemoveTransitStatePost(Guid id, Guid entityId)
+        {
+            await mediator.SendAsync(new RemoveTransitState(id, entityId));
 
             return RedirectToAction("Index", "Overview");
         }

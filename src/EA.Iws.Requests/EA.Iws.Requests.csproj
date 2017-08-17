@@ -225,6 +225,7 @@
     <Compile Include="NotificationAssessment\GetStateOfImportData.cs" />
     <Compile Include="NotificationAssessment\GetTransactionById.cs" />
     <Compile Include="NotificationAssessment\MarkAsInterim.cs" />
+    <Compile Include="NotificationAssessment\RemoveTransitState.cs" />
     <Compile Include="NotificationAssessment\SetExitPoint.cs" />
     <Compile Include="NotificationAssessment\SetNewNumberOfShipments.cs" />
     <Compile Include="NotificationAssessment\SetEntryPoint.cs" />
