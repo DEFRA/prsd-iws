@@ -661,13 +661,8 @@
     <Content Include="Areas\AdminExportAssessment\Views\Overview\_WasteRecovery.cshtml" />
     <Content Include="Areas\AdminExportAssessment\Views\Overview\_SummaryTableContainer.cshtml" />
     <Content Include="Content\iws\_movement.scss" />
-    <Content Include="Areas\ExportMovement\Views\DateReceived\Index.cshtml" />
-    <Content Include="Areas\ExportMovement\Views\QuantityReceived\Index.cshtml" />
-    <Content Include="Areas\ExportMovement\Views\ReceiptComplete\Index.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\CustomsOffice\NoCustomsOffice.cshtml" />
     <Content Include="Content\iws\_footer.scss" />
-    <Content Include="Areas\ExportMovement\Views\Complete\Date.cshtml" />
-    <Content Include="Areas\ExportMovement\Views\Complete\Upload.cshtml" />
     <Content Include="Content\iws\_address-book.scss" />
     <Content Include="Areas\AddressBook\Views\web.config" />
     <Content Include="Areas\AddressBook\Views\_ViewStart.cshtml" />
@@ -695,11 +690,7 @@
     <Content Include="Areas\NotificationApplication\Views\KeyDates\Index.cshtml" />
     <Content Include="Areas\ExportMovement\Views\Submit\Index.cshtml" />
     <Content Include="Areas\ExportMovement\Views\Submit\Success.cshtml" />
-    <Content Include="Areas\ExportMovement\Views\ReceiptComplete\Success.cshtml" />
-    <Content Include="Areas\ExportMovement\Views\Complete\Success.cshtml" />
     <Content Include="Areas\Admin\Views\ImportNotification\NotificationType.cshtml" />
-    <Content Include="Areas\NotificationMovements\Views\Complete\Index.cshtml" />
-    <Content Include="Areas\NotificationMovements\Views\ReceiveMovement\Index.cshtml" />
     <Content Include="Areas\NotificationMovements\Views\CancelMovement\Success.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\Home\OverviewSections\_BaselOecdCode.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\Home\OverviewSections\_Carrier.cshtml" />
@@ -883,7 +874,6 @@
     <Content Include="Areas\AdminImportAssessment\Views\AccountManagement\Index.cshtml" />
     <Content Include="Areas\AdminImportAssessment\Views\Decision\Index.cshtml" />
     <Content Include="Areas\AdminImportAssessment\Views\Decision\_Consent.cshtml" />
-    <Content Include="Areas\ExportMovement\Views\QuantityReceived\QuantityAbnormal.cshtml" />
     <Content Include="Areas\Admin\Views\Menu\_ExportNavigation.cshtml" />
     <Content Include="Areas\Admin\Views\Menu\_ImportNavigation.cshtml" />
     <Content Include="Areas\ExportMovement\Views\EditDate\ThreeWorkingDays.cshtml" />
@@ -1895,31 +1885,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ThreeWorkingDaysWarningViewModelResources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Areas\ExportMovement\ViewModels\Quantity\QuantityAbnormalViewModel.cs" />
-    <Compile Include="Areas\ExportMovement\ViewModels\Quantity\QuantityAbnormalViewModelResources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>QuantityAbnormalViewModelResources.resx</DependentUpon>
-    </Compile>
-    <Compile Include="Areas\ExportMovement\ViewModels\Quantity\QuantityReceivedViewModelResources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>QuantityReceivedViewModelResources.resx</DependentUpon>
-    </Compile>
     <Compile Include="Areas\ExportMovement\Views\EditDate\ThreeWorkingDaysResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ThreeWorkingDaysResources.resx</DependentUpon>
-    </Compile>
-    <Compile Include="Areas\ExportMovement\Views\QuantityReceived\IndexResources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>IndexResources.resx</DependentUpon>
-    </Compile>
-    <Compile Include="Areas\ExportMovement\Views\QuantityReceived\QuantityAbnormalResources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>QuantityAbnormalResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Areas\ExportMovement\Views\Reject\SuccessResources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -2188,8 +2157,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>IndexResources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Areas\ExportMovement\Controllers\CompleteController.cs" />
-    <Compile Include="Areas\ExportMovement\Controllers\DateReceivedController.cs" />
     <Compile Include="Areas\ExportMovement\Controllers\EditDateController.cs" />
     <Compile Include="Areas\ExportMovement\Controllers\HomeController.cs" />
     <Compile Include="Areas\ExportMovement\Controllers\RejectController.cs" />
@@ -2335,11 +2302,6 @@
     </Compile>
     <Compile Include="Areas\NotificationMovements\ViewModels\ReceiptRecovery\SuccessViewModel.cs" />
     <Compile Include="Areas\NotificationMovements\ViewModels\ReceiptRecovery\UploadCertificateViewModel.cs" />
-    <Compile Include="Areas\NotificationMovements\ViewModels\ReceiveMovement\MovementReceiptViewModelResources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>MovementReceiptViewModelResources.resx</DependentUpon>
-    </Compile>
     <Compile Include="Areas\NotificationMovements\ViewModels\Success\SuccessViewModel.cs" />
     <Compile Include="Areas\NotificationMovements\ViewModels\Summary\SummaryViewModel.cs" />
     <Compile Include="Areas\NotificationMovements\ViewModels\Upload\UploadViewModel.cs" />
@@ -2427,11 +2389,6 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>QuantityAbnormalResources.resx</DependentUpon>
-    </Compile>
-    <Compile Include="Areas\NotificationMovements\Views\ReceiveMovement\IndexResources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>IndexResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Areas\NotificationMovements\Views\Upload\IndexResources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -2902,10 +2859,7 @@
     <Compile Include="Areas\AdminExportAssessment\Controllers\AccountManagementController.cs" />
     <Compile Include="Areas\AdminExportAssessment\Controllers\AssignAreaController.cs" />
     <Compile Include="Areas\AdminExportAssessment\Controllers\MovementCertificateController.cs" />
-    <Compile Include="Areas\ExportMovement\Controllers\QuantityReceivedController.cs" />
-    <Compile Include="Areas\ExportMovement\Controllers\ReceiptCompleteController.cs" />
     <Compile Include="Areas\ExportMovement\Controllers\SubmitController.cs" />
-    <Compile Include="Areas\ExportMovement\ViewModels\Complete\SuccessViewModel.cs" />
     <Compile Include="Areas\ExportMovement\ViewModels\Submit\SubmitViewModel.cs" />
     <Compile Include="Areas\ExportMovement\ViewModels\SuccessViewModel.cs" />
     <Compile Include="Areas\NotificationApplication\Controllers\KeyDatesController.cs" />
@@ -2945,11 +2899,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>CaptureMovementControllerResources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Areas\NotificationMovements\Controllers\CompleteController.cs" />
     <Compile Include="Areas\NotificationMovements\Controllers\CreateController.cs" />
     <Compile Include="Areas\NotificationMovements\Controllers\EditController.cs" />
     <Compile Include="Areas\NotificationMovements\Controllers\HomeController.cs" />
-    <Compile Include="Areas\NotificationMovements\Controllers\ReceiveMovementController.cs" />
     <Compile Include="Areas\AdminExportNotificationMovements\Controllers\CaptureMovementController.cs" />
     <Compile Include="Areas\NotificationMovements\Controllers\RejectController.cs" />
     <Compile Include="Areas\NotificationMovements\Controllers\UploadChoiceController.cs" />
@@ -2964,10 +2916,6 @@
     <Compile Include="Areas\NotificationMovements\ViewModels\CancelMovement\ConfirmCancelMovementsViewModel.cs" />
     <Compile Include="Areas\NotificationMovements\ViewModels\CancelMovement\CancelMovementsViewModel.cs" />
     <Compile Include="Areas\AdminExportNotificationMovements\ViewModels\CaptureMovement\CaptureViewModel.cs" />
-    <Compile Include="Areas\ExportMovement\ViewModels\Complete\DateViewModel.cs" />
-    <Compile Include="Areas\ExportMovement\ViewModels\DateReceivedViewModel.cs" />
-    <Compile Include="Areas\ExportMovement\ViewModels\Complete\UploadViewModel.cs" />
-    <Compile Include="Areas\ExportMovement\ViewModels\ReceiptCompleteViewModel.cs" />
     <Compile Include="Areas\AddressBook\Controllers\SearchController.cs" />
     <Compile Include="Areas\NotificationApplication\Controllers\ReadOnlyController.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\WasteRecovery\DisposalMethodViewModel.cs" />
@@ -2978,7 +2926,6 @@
     <Compile Include="Areas\AdminExportAssessment\ViewModels\Decision\NotificationAssessmentDecisionViewModel.cs" />
     <Compile Include="Areas\NotificationMovements\NotificationMovementsAreaRegistration.cs" />
     <Compile Include="Areas\NotificationMovements\ViewModels\CancelMovement\SuccessViewModel.cs" />
-    <Compile Include="Areas\NotificationMovements\ViewModels\Complete\CompleteMovementViewModel.cs" />
     <Compile Include="Areas\NotificationMovements\ViewModels\Create\CreateMovementsViewModel.cs" />
     <Compile Include="Areas\NotificationMovements\ViewModels\Create\CreateMovementsViewModelResources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -2986,7 +2933,6 @@
       <DependentUpon>CreateMovementsViewModelResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Areas\NotificationMovements\ViewModels\Edit\EditViewModel.cs" />
-    <Compile Include="Areas\NotificationMovements\ViewModels\ReceiveMovement\MovementReceiptViewModel.cs" />
     <Compile Include="Areas\AdminExportNotificationMovements\ViewModels\CaptureMovement\CaptureViewModelResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -3047,7 +2993,6 @@
     <Compile Include="Mappings\NotificationAssessment\NotificationAssessmentDecisionDataMap.cs" />
     <Compile Include="ViewModels\Account\ResetPasswordViewModel.cs" />
     <Compile Include="ViewModels\Movement\MovementsViewModel.cs" />
-    <Compile Include="Areas\ExportMovement\ViewModels\Quantity\QuantityReceivedViewModel.cs" />
     <Compile Include="Areas\ExportMovement\MovementAreaRegistration.cs" />
     <Compile Include="Areas\NotificationApplication\Controllers\BaseWasteCodeController.cs" />
     <Compile Include="Areas\NotificationApplication\Controllers\CustomWasteCodeController.cs" />
@@ -3409,7 +3354,6 @@
     <Folder Include="Areas\Admin\Views\SmokeTest\" />
     <Folder Include="Areas\FinancialGuarantee\ViewModels\" />
     <Folder Include="Areas\FinancialGuarantee\Views\Shared\" />
-    <Folder Include="Areas\NotificationMovements\Views\Receipt\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Areas\AdminExportAssessment\Controllers\DecisionControllerResources.resx">
@@ -3920,26 +3864,9 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>ThreeWorkingDaysWarningViewModelResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Areas\ExportMovement\ViewModels\Quantity\QuantityAbnormalViewModelResources.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>QuantityAbnormalViewModelResources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Areas\ExportMovement\ViewModels\Quantity\QuantityReceivedViewModelResources.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>QuantityReceivedViewModelResources.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
     <EmbeddedResource Include="Areas\ExportMovement\Views\EditDate\ThreeWorkingDaysResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>ThreeWorkingDaysResources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Areas\ExportMovement\Views\QuantityReceived\IndexResources.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Areas\ExportMovement\Views\QuantityReceived\QuantityAbnormalResources.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>QuantityAbnormalResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\ExportMovement\Views\Reject\SuccessResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -4499,10 +4426,6 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>ShipmentViewModelResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Areas\NotificationMovements\ViewModels\ReceiveMovement\MovementReceiptViewModelResources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>MovementReceiptViewModelResources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
     <EmbeddedResource Include="Areas\NotificationMovements\ViewModels\Reject\RejectViewModelResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>RejectViewModelResources.Designer.cs</LastGenOutput>
@@ -4590,10 +4513,6 @@
     <EmbeddedResource Include="Areas\NotificationMovements\Views\ReceiptRecovery\QuantityAbnormalResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>QuantityAbnormalResources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Areas\NotificationMovements\Views\ReceiveMovement\IndexResources.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\NotificationMovements\Views\Reject\IndexResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
