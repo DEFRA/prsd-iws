@@ -54,9 +54,12 @@
         public IList<ShipmentQuantityUnits> PossibleUnits { get; set; }
 
         public bool IsReceived { get; set; }
+
         public bool IsRejected { get; set; }
 
-        public DateTime? RecoveryDate { get; set; }
+        public bool IsOperationCompleted { get; set; }
+
+        public DateTime? Date { get; set; }
 
         [Display(Name = "HasComments", ResourceType = typeof(IndexViewModelResources))]
         public bool HasComments { get; set; }
@@ -123,6 +126,7 @@
             NotificationType = data.NotificationType;
             IsRejected = data.IsRejected;
             IsReceived = data.IsReceived;
+            IsOperationCompleted = data.IsOperationCompleted;
             ActualQuantity = data.ActualQuantity;
             ReceivedDate = data.ReceiptDate;
             Units = data.ReceiptUnits ?? data.NotificationUnits;
@@ -131,8 +135,8 @@
             PossibleUnits = data.PossibleUnits;
 
             NotificationType = data.NotificationType;
-            
-            RecoveryDate = data.OperationCompleteDate;         
+
+            Date = data.OperationCompleteDate;         
         }
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
@@ -144,7 +148,7 @@
 
             if (ReceivedDate.HasValue && WasShipmentAccepted && !ActualQuantity.HasValue)
             {
-                yield return new ValidationResult(IndexViewModelResources.QuantityRequired, new[] { "Receipt.ActualQuantity" });
+                yield return new ValidationResult(IndexViewModelResources.QuantityRequired, new[] { "ActualQuantity" });
             } 
         }
 

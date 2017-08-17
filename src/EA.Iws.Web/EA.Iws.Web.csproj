@@ -986,6 +986,10 @@
     <Content Include="Areas\NotificationMovements\Views\ReceiptRecovery\QuantityAbnormal.cshtml" />
     <Content Include="Areas\NotificationMovements\Views\ReceiptRecovery\Success.cshtml" />
     <Content Include="Areas\NotificationMovements\Views\ReceiptRecovery\Receipt.cshtml" />
+    <Content Include="Areas\NotificationApplication\Views\Carrier\AddFromAddressBook.cshtml" />
+    <Content Include="Areas\AdminExportAssessment\Views\UpdateJourney\AddTransitState.cshtml" />
+    <Content Include="Areas\AdminExportAssessment\Views\UpdateJourney\GetTransitAuthoritiesAndEntryOrExitPointsByCountryId.cshtml" />
+    <Content Include="Areas\AdminExportAssessment\Views\UpdateJourney\RemoveTransitState.cshtml" />
     <None Include="Scripts\jquery-2.1.3.intellisense.js" />
     <Content Include="Scripts\govuk\govuk-template.js" />
     <Content Include="Scripts\govuk\ie.js" />
@@ -1189,6 +1193,12 @@
       <DependentUpon>IndexViewModelResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Areas\AdminExportAssessment\ViewModels\Producer\AddProducerViewModel.cs" />
+    <Compile Include="Areas\AdminExportAssessment\ViewModels\UpdateJourney\AddTransitStateViewModel.cs" />
+    <Compile Include="Areas\AdminExportAssessment\ViewModels\UpdateJourney\AddTransitStateViewModelResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AddTransitStateViewModelResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Areas\AdminExportAssessment\ViewModels\UpdateJourney\ExitPointViewModel.cs" />
     <Compile Include="Areas\AdminExportAssessment\ViewModels\UpdateJourney\EntryPointViewModel.cs" />
     <Compile Include="Areas\AdminExportAssessment\ViewModels\UpdateJourney\UpdateJourneyResources.Designer.cs">
@@ -1281,6 +1291,16 @@
       <DependentUpon>ProducerResources.resx</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Areas\AdminExportAssessment\Views\UpdateJourney\AddTransitStateResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AddTransitStateResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\AdminExportAssessment\Views\UpdateJourney\RemoveTransitStateResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RemoveTransitStateResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Areas\AdminExportAssessment\Views\UpdateJourney\UpdateJourneyResources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -2167,6 +2187,7 @@
       <DependentUpon>IndexResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Areas\NotificationApplication\ViewModels\Annex\SuccessViewModel.cs" />
+    <Compile Include="Areas\NotificationApplication\ViewModels\Carrier\AddFromAddressBookViewModel.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\Home\ResubmissionSuccessViewModel.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\Options\UnavailableViewModel.cs" />
     <Compile Include="Areas\NotificationApplication\Controllers\AnnexController.cs" />
@@ -2190,6 +2211,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>SuccessResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\NotificationApplication\Views\Carrier\AddFromAddressBookResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AddFromAddressBookResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Areas\NotificationApplication\Views\Home\ResubmissionSuccessResources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -3384,6 +3410,10 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>IndexViewModelResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Areas\AdminExportAssessment\ViewModels\UpdateJourney\AddTransitStateViewModelResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AddTransitStateViewModelResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Areas\AdminExportAssessment\ViewModels\UpdateJourney\UpdateJourneyResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>UpdateJourneyResources.Designer.cs</LastGenOutput>
@@ -3455,6 +3485,14 @@
     <EmbeddedResource Include="Areas\AdminExportAssessment\Views\Producer\ProducerResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>ProducerResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\AdminExportAssessment\Views\UpdateJourney\AddTransitStateResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AddTransitStateResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\AdminExportAssessment\Views\UpdateJourney\RemoveTransitStateResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>RemoveTransitStateResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\AdminExportAssessment\Views\UpdateJourney\UpdateJourneyResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -4108,6 +4146,10 @@
     <EmbeddedResource Include="Areas\NotificationApplication\Views\Carrier\AddEditCarrierResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>AddEditCarrierResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\NotificationApplication\Views\Carrier\AddFromAddressBookResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AddFromAddressBookResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\NotificationApplication\Views\Carrier\CarrierBusinessTypeResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

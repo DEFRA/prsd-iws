@@ -51,5 +51,7 @@
         public CustomsOfficeData ExitCustomsOffice { get; set; }
 
         public bool CanChangeEntryExitPoint { get; set; }
+
+        public bool CanAddRemoveTransitState { get; set; }
     }
 }

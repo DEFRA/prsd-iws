@@ -1,0 +1,24 @@
+﻿@model EA.Iws.Web.Areas.AdminExportAssessment.ViewModels.UpdateJourney.AddTransitStateViewModel
+
+<div class="form-group @Html.Gds().FormGroupClass(m => m.CompetentAuthorities.Selected)">
+    @Html.Gds().LabelFor(m => m.CompetentAuthorities, new { @class = "form-label-bold" })
+    @Html.Gds().ValidationMessageFor(m => m.CompetentAuthorities.SelectedValue)
+    @Html.EditorFor(m => m.CompetentAuthorities)
+</div>
+
+<div class="form-group @Html.Gds().FormGroupClass(m => m.EntryPointId)">
+    @Html.Gds().LabelFor(m => m.EntryPointId, new { @class = "form-label-bold" })
+    @Html.Gds().ValidationMessageFor(m => m.EntryPointId)
+    @Html.Gds().DropDownListFor(m => m.EntryPointId, Model.EntryOrExitPoints, string.Empty, new { title = "Entry point", data_select_box = "true" })
+    @*@Html.HiddenFor(m => m.NotificationCompetentAuthority)*@
+</div>
+
+<div class="form-group @Html.Gds().FormGroupClass(m => m.ExitPointId)">
+    @Html.Gds().LabelFor(m => m.ExitPointId, new { @class = "form-label-bold" })
+    @Html.Gds().ValidationMessageFor(m => m.ExitPointId)
+    @Html.Gds().DropDownListFor(m => m.ExitPointId, Model.EntryOrExitPoints, string.Empty, new { title = "Exit point", data_select_box = "true" })
+</div>
+
+<div class="form-group">
+    <button class="button" type="submit" value="submit" name="submit">@Constants.ContinueButtonText</button>
+</div>

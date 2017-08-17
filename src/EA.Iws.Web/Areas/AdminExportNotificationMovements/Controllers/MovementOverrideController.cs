@@ -52,7 +52,7 @@
                 ActualQuantity = model.ActualQuantity,
                 ReceiptUnits = model.Units,
                 RejectionDate = (model.IsRejected) && model.ReceivedDate.HasValue ? model.ReceivedDate.Value : (DateTime?)null,
-                OperationCompleteDate = model.RecoveryDate.HasValue ? model.RecoveryDate.Value : (DateTime?)null,
+                OperationCompleteDate = model.Date.HasValue ? model.Date.Value : (DateTime?)null,
                 RejectionReason = model.RejectionReason,
                 Comments = model.HasComments ? model.Comments : null,
                 StatsMarking = model.HasComments ? model.StatsMarking : null,

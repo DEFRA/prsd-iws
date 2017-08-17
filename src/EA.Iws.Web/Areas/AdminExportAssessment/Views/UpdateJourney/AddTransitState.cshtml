@@ -1,0 +1,49 @@
+﻿@model EA.Iws.Web.Areas.AdminExportAssessment.ViewModels.UpdateJourney.AddTransitStateViewModel
+@using Resources = EA.Iws.Web.Areas.AdminExportAssessment.Views.UpdateJourney.AddTransitStateResources
+@{
+    ViewBag.Title = Resources.Title;
+}
+
+<h1 class="heading-large">@Resources.Title</h1>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.Gds().ValidationSummary()
+
+    <div class="form-group @Html.Gds().FormGroupClass(m => m.CountryId)">
+        @Html.Gds().LabelFor(m => m.CountryId, new { @class = "form-label-bold" })
+        @if (Model.CountryId != null)
+        {
+            @Html.Gds().DropDownListFor(m => m.CountryId, Model.Countries, new { title = Resources.ExitCountry, data_select_box = "true" })
+        }
+        else
+        {
+            @Html.Gds().DropDownListFor(m => m.CountryId, Model.Countries, string.Empty, new { title = Resources.ExitCountry, data_select_box = "true" })
+        }
+    </div>
+
+    <div id="editor">
+        @if (Model.CountryId != null)
+        {
+            @Html.Partial("GetTransitAuthoritiesAndEntryOrExitPointsByCountryId")
+        }
+    </div>
+}
+
+@section scripts {
+    <script>
+        $(function() {
+            $("#@Html.IdFor(m => m.CountryId)").on("select2-selecting", function(e) {
+                $.get("@Url.Action("GetTransitAuthoritiesAndEntryOrExitPointsByCountryId")" + "?countryId=" + e.val,
+                    function(data) {
+                        $("#editor").html(data);
+                    });
+            });
+        });
+    </script>
+}
+
+@section menu {
+    @Html.Action("ExportNavigation", "Menu", new { area = "Admin", section = ExportNavigationSection.Assessment })
+}

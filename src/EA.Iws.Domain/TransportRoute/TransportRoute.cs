@@ -55,16 +55,6 @@
                         StateOfExport.Country.Name));
             }
 
-            if (TransitStatesCollection != null &&
-                TransitStatesCollection.Select(ts => ts.Country.Id).Contains(stateOfExport.Country.Id))
-            {
-                throw new InvalidOperationException(
-                    string.Format(
-                        "Cannot add a State of Export in the same country as a Transit State for TransportRoute {0}. Country: {1}",
-                        Id,
-                        stateOfExport.Country.Name));
-            }
-
             StateOfExport = stateOfExport;
         }
 
@@ -87,33 +77,6 @@
         public void AddTransitStateToNotification(TransitState transitState)
         {
             Guard.ArgumentNotNull(() => transitState, transitState);
-
-            if (TransitStatesCollection.Any(ts => ts.CompetentAuthority == transitState.CompetentAuthority))
-            {
-                throw new InvalidOperationException(
-                    string.Format(
-                        "Cannot add a Transit State in the same Competent Authority as another in the collection. TransportRoute {0}. Competent authority {1}",
-                        Id,
-                        transitState.CompetentAuthority.Name));
-            }
-
-            if (TransitStatesCollection.Any(ts => ts.EntryPoint.Id == transitState.EntryPoint.Id))
-            {
-                throw new InvalidOperationException(
-                    string.Format(
-                        "Cannot add a Transit State with the same entry point as another in the collection. TransportRoute {0}. Entry point {1}.",
-                        Id,
-                        transitState.EntryPoint.Name));
-            }
-
-            if (TransitStatesCollection.Any(ts => ts.ExitPoint.Id == transitState.ExitPoint.Id))
-            {
-                throw new InvalidOperationException(
-                    string.Format(
-                        "Cannot add a Transit State with the same exit point as another in the collection. TransportRoute {0}. Exit point {1}.",
-                        Id,
-                        transitState.ExitPoint.Name));
-            }
 
             if (TransitStatesCollection.Any(ts => ts.OrdinalPosition == transitState.OrdinalPosition))
             {
@@ -156,15 +119,6 @@
 
             var allTransitStatesExceptTarget =
                 TransitStatesCollection.Where(ts => ts.Id != targetTransitStateId).ToArray();
-
-            if (allTransitStatesExceptTarget.Any(ts => ts.Country.Id == country.Id))
-            {
-                throw new InvalidOperationException(
-                    string.Format(
-                        "Cannot edit a Transit State to put it in the same Country as another in the collection. TransportRoute {0}. Country {1}",
-                        Id,
-                        country.Name));
-            }
 
             if (ordinalPosition.HasValue &&
                 allTransitStatesExceptTarget.Any(ts => ts.OrdinalPosition == ordinalPosition))

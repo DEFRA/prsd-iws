@@ -117,35 +117,31 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AddAnother" xml:space="preserve">
-    <value>Add a new carrier</value>
+  <data name="CA" xml:space="preserve">
+    <value>Competent authority</value>
   </data>
-  <data name="AddFirst" xml:space="preserve">
-    <value>Add your first carrier</value>
+  <data name="CARequired" xml:space="preserve">
+    <value>Please select the competent authority</value>
   </data>
-  <data name="AddFromAddressBook" xml:space="preserve">
-    <value>Add carriers from your address book</value>
+  <data name="Country" xml:space="preserve">
+    <value>Country</value>
   </data>
-  <data name="Edit" xml:space="preserve">
-    <value>Edit</value>
+  <data name="EntryPoint" xml:space="preserve">
+    <value>Entry point</value>
   </data>
-  <data name="Header" xml:space="preserve">
-    <value>Who are your intended carriers?</value>
+  <data name="EntryPointRequired" xml:space="preserve">
+    <value>Please select the entry point</value>
   </data>
-  <data name="HeaderDescription" xml:space="preserve">
-    <value>Add details of all the intended carriers for the whole journey. 
-    After you've added your first carrier, you can add several more by selecting "Add a new carrier".</value>
+  <data name="ExitCountry" xml:space="preserve">
+    <value>Exit country</value>
   </data>
-  <data name="Remove" xml:space="preserve">
-    <value>Remove</value>
+  <data name="ExitPoint" xml:space="preserve">
+    <value>Exit point</value>
   </data>
-  <data name="ThAddress" xml:space="preserve">
-    <value>Address</value>
+  <data name="ExitPointRequired" xml:space="preserve">
+    <value>Please select the exit point</value>
   </data>
-  <data name="ThOrgName" xml:space="preserve">
-    <value>Organisation name</value>
-  </data>
-  <data name="Title" xml:space="preserve">
-    <value>Intended carriers</value>
+  <data name="TransitCountryRequired" xml:space="preserve">
+    <value>Please select the country of transit</value>
   </data>
 </root>

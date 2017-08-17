@@ -1,0 +1,53 @@
+﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.Carrier.AddFromAddressBookViewModel
+@using Resources = EA.Iws.Web.Areas.NotificationApplication.Views.Carrier.AddFromAddressBookResources
+@{
+    ViewBag.Title = Resources.Title;
+}
+
+<h1 class="heading-large">@Resources.Title</h1>
+
+<p>@Resources.YouCanAddSeveralCarriers</p>
+
+<p>@Resources.IfCarrierIsNotListed</p>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-group-compound @Html.Gds().FormGroupClass(m => m.SelectedCarrier)">
+        @Html.Gds().ValidationMessageFor(m => m.SelectedCarrier)
+        @Html.Gds().DropDownListFor(m => m.SelectedCarrier, Model.CarriersList, string.Empty, new { title = Resources.CarrierListTitle, data_select_box = "true", tabindex = 1 })
+        <button type="submit" name="command" value="addcarrier" tabindex="2" class="button-secondary">@Resources.AddCarrier</button>
+    </div>
+
+    <h2 class="heading-medium">@Resources.ChosenCarriers</h2>
+
+    <div class="form-group">
+        <table title="@Resources.CarrierTableTitle">
+            <thead>
+                <tr>
+                    <th>@Resources.Carrier</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            @if (Model.SelectedCarriers.Count < 1)
+            {
+                <tr>
+                    <td colspan="3">@Resources.AwaitingCarriers</td>
+                </tr>
+            }
+            @for (int i = 0; i < Model.SelectedCarriers.Count; i++)
+            {
+                var carrier = Model.CarriersList.Single(c => c.Value == Model.SelectedCarriers[i].ToString());
+                <tr>
+                    <td>@Html.HiddenFor(m => m.SelectedCarriers[i]) @Html.Raw(carrier.Text)</td>
+                    <td><input name="SelectedCarriers[@i].Id" type="hidden" value="@Model.SelectedCarriers[i]" /></td>
+                    <td><button class="link-submit" type="submit" name="remove" value="@Model.SelectedCarriers[i]">@Resources.Remove</button></td>
+                </tr>
+            }
+        </table>
+    </div>
+
+    <button class="button" type="submit" name="command" value="continue">@Constants.ContinueButtonText</button>
+}

@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace EA.Iws.Web.Areas.NotificationApplication.Views.Carrier {
+namespace EA.Iws.Web.Areas.AdminExportAssessment.Views.UpdateJourney {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.Carrier {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class AddEditCarrierResources {
+    public class AddTransitStateResources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal AddEditCarrierResources() {
+        internal AddTransitStateResources() {
         }
         
         /// <summary>
@@ -39,7 +39,8 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.Carrier {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EA.Iws.Web.Areas.NotificationApplication.Views.Carrier.AddEditCarrierResources", typeof(AddEditCarrierResources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EA.Iws.Web.Areas.AdminExportAssessment.Views.UpdateJourney.AddTransitStateResourc" +
+                            "es", typeof(AddTransitStateResources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,34 +62,16 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.Carrier {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Address.
+        ///   Looks up a localized string similar to Exit country.
         /// </summary>
-        public static string Address {
+        public static string ExitCountry {
             get {
-                return ResourceManager.GetString("Address", resourceCulture);
+                return ResourceManager.GetString("ExitCountry", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Contact person.
-        /// </summary>
-        public static string Contact {
-            get {
-                return ResourceManager.GetString("Contact", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Add intended carrier.
-        /// </summary>
-        public static string Header {
-            get {
-                return ResourceManager.GetString("Header", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Intended carrier(s).
+        ///   Looks up a localized string similar to Add transit state.
         /// </summary>
         public static string Title {
             get {

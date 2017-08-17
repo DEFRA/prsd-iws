@@ -108,6 +108,7 @@
     <Compile Include="Admin\UserAdministration\UpdateInternalUserRole.cs" />
     <Compile Include="Admin\UserAdministration\UpdateInternalUserStatus.cs" />
     <Compile Include="Annexes\DeleteAnnexFile.cs" />
+    <Compile Include="Carriers\AddCarriersToNotificationFromAddressBook.cs" />
     <Compile Include="Files\GetFile.cs" />
     <Compile Include="Annexes\SetWasteCompositionAnnex.cs" />
     <Compile Include="Annexes\SetTechnologyEmployedAnnex.cs" />
@@ -213,6 +214,7 @@
     <Compile Include="Movement\SetMultipleMovementFileId.cs" />
     <Compile Include="Movement\SetMovementReceiptAndRecoveryData.cs" />
     <Compile Include="NotificationAssessment\AddProducer.cs" />
+    <Compile Include="NotificationAssessment\AddTransitState.cs" />
     <Compile Include="NotificationAssessment\DeleteExportNotification.cs" />
     <Compile Include="NotificationAssessment\DeleteTransaction.cs" />
     <Compile Include="NotificationAssessment\GetChangeNumberOfShipmentConfrimationData.cs" />
@@ -224,6 +226,7 @@
     <Compile Include="NotificationAssessment\GetStateOfImportData.cs" />
     <Compile Include="NotificationAssessment\GetTransactionById.cs" />
     <Compile Include="NotificationAssessment\MarkAsInterim.cs" />
+    <Compile Include="NotificationAssessment\RemoveTransitState.cs" />
     <Compile Include="NotificationAssessment\SetExitPoint.cs" />
     <Compile Include="NotificationAssessment\SetNewNumberOfShipments.cs" />
     <Compile Include="NotificationAssessment\SetEntryPoint.cs" />

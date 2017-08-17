@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace EA.Iws.Web.Areas.NotificationApplication.Views.Carrier {
+namespace EA.Iws.Web.Areas.AdminExportAssessment.ViewModels.UpdateJourney {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.Carrier {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class ListCarrierResources {
+    public class AddTransitStateViewModelResources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal ListCarrierResources() {
+        internal AddTransitStateViewModelResources() {
         }
         
         /// <summary>
@@ -39,7 +39,8 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.Carrier {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EA.Iws.Web.Areas.NotificationApplication.Views.Carrier.ListCarrierResources", typeof(ListCarrierResources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EA.Iws.Web.Areas.AdminExportAssessment.ViewModels.UpdateJourney.AddTransitStateVi" +
+                            "ewModelResources", typeof(AddTransitStateViewModelResources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,93 +62,83 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.Carrier {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Add a new carrier.
+        ///   Looks up a localized string similar to Competent authority.
         /// </summary>
-        public static string AddAnother {
+        public static string CA {
             get {
-                return ResourceManager.GetString("AddAnother", resourceCulture);
+                return ResourceManager.GetString("CA", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Add your first carrier.
+        ///   Looks up a localized string similar to Please select the competent authority.
         /// </summary>
-        public static string AddFirst {
+        public static string CARequired {
             get {
-                return ResourceManager.GetString("AddFirst", resourceCulture);
+                return ResourceManager.GetString("CARequired", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Add carriers from your address book.
+        ///   Looks up a localized string similar to Country.
         /// </summary>
-        public static string AddFromAddressBook {
+        public static string Country {
             get {
-                return ResourceManager.GetString("AddFromAddressBook", resourceCulture);
+                return ResourceManager.GetString("Country", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Edit.
+        ///   Looks up a localized string similar to Entry point.
         /// </summary>
-        public static string Edit {
+        public static string EntryPoint {
             get {
-                return ResourceManager.GetString("Edit", resourceCulture);
+                return ResourceManager.GetString("EntryPoint", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Who are your intended carriers?.
+        ///   Looks up a localized string similar to Please select the entry point.
         /// </summary>
-        public static string Header {
+        public static string EntryPointRequired {
             get {
-                return ResourceManager.GetString("Header", resourceCulture);
+                return ResourceManager.GetString("EntryPointRequired", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Add details of all the intended carriers for the whole journey. 
-        ///    After you&apos;ve added your first carrier, you can add several more by selecting &quot;Add a new carrier&quot;..
+        ///   Looks up a localized string similar to Exit country.
         /// </summary>
-        public static string HeaderDescription {
+        public static string ExitCountry {
             get {
-                return ResourceManager.GetString("HeaderDescription", resourceCulture);
+                return ResourceManager.GetString("ExitCountry", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Remove.
+        ///   Looks up a localized string similar to Exit point.
         /// </summary>
-        public static string Remove {
+        public static string ExitPoint {
             get {
-                return ResourceManager.GetString("Remove", resourceCulture);
+                return ResourceManager.GetString("ExitPoint", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Address.
+        ///   Looks up a localized string similar to Please select the exit point.
         /// </summary>
-        public static string ThAddress {
+        public static string ExitPointRequired {
             get {
-                return ResourceManager.GetString("ThAddress", resourceCulture);
+                return ResourceManager.GetString("ExitPointRequired", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Organisation name.
+        ///   Looks up a localized string similar to Please select the country of transit.
         /// </summary>
-        public static string ThOrgName {
+        public static string TransitCountryRequired {
             get {
-                return ResourceManager.GetString("ThOrgName", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Intended carriers.
-        /// </summary>
-        public static string Title {
-            get {
-                return ResourceManager.GetString("Title", resourceCulture);
+                return ResourceManager.GetString("TransitCountryRequired", resourceCulture);
             }
         }
     }

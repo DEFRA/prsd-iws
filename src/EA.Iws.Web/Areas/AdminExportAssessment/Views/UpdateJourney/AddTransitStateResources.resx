@@ -117,35 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AddAnother" xml:space="preserve">
-    <value>Add a new carrier</value>
-  </data>
-  <data name="AddFirst" xml:space="preserve">
-    <value>Add your first carrier</value>
-  </data>
-  <data name="AddFromAddressBook" xml:space="preserve">
-    <value>Add carriers from your address book</value>
-  </data>
-  <data name="Edit" xml:space="preserve">
-    <value>Edit</value>
-  </data>
-  <data name="Header" xml:space="preserve">
-    <value>Who are your intended carriers?</value>
-  </data>
-  <data name="HeaderDescription" xml:space="preserve">
-    <value>Add details of all the intended carriers for the whole journey. 
-    After you've added your first carrier, you can add several more by selecting "Add a new carrier".</value>
-  </data>
-  <data name="Remove" xml:space="preserve">
-    <value>Remove</value>
-  </data>
-  <data name="ThAddress" xml:space="preserve">
-    <value>Address</value>
-  </data>
-  <data name="ThOrgName" xml:space="preserve">
-    <value>Organisation name</value>
+  <data name="ExitCountry" xml:space="preserve">
+    <value>Exit country</value>
   </data>
   <data name="Title" xml:space="preserve">
-    <value>Intended carriers</value>
+    <value>Add transit state</value>
   </data>
 </root>

@@ -14,6 +14,11 @@
                 @Html.Gds().ValidationSummary()
                 @Html.HiddenFor(m => m.NotificationType)
                 @Html.HiddenFor(m => m.ShipmentNumber)
+                @Html.HiddenFor(m => m.HasNoPrenotification)
+                @Html.HiddenFor(m => m.WasShipmentAccepted)
+                @Html.HiddenFor(m => m.IsReceived)
+                @Html.HiddenFor(m => m.IsOperationCompleted)
+                @Html.HiddenFor(m => m.IsRejected)
                 var operationLabelVerb = Model.NotificationType == NotificationType.Recovery ? "recovered" : "disposed of";
                 var operationTitleVerb = Model.NotificationType == NotificationType.Recovery ? "Recovered" : "Disposed";
 
@@ -55,7 +60,7 @@
 
                 </div>
                 <hr />
-                if (Model.ReceivedDate.HasValue)
+                if (Model.IsReceived || Model.IsRejected)
                 {
                     <div>
                         <div class="form-group @Html.Gds().FormGroupClass(m => m.ReceivedDate)">
@@ -125,13 +130,13 @@
                     </div>
                     <hr />
                 }
-                if (Model.RecoveryDate.HasValue)
+                if (Model.IsOperationCompleted)
                 {
                 <div>
-                    <div class="form-group @Html.Gds().FormGroupClass(m => m.RecoveryDate)">
-                        @Html.LabelFor(m => m.RecoveryDate, string.Format(Resource.RecoveryDate, operationLabelVerb), new { @class = "form-label-bold" })
-                        @Html.Gds().ValidationMessageFor(m => m.RecoveryDate)
-                        @Html.Gds().TextBoxFor(m => m.RecoveryDate, new { data_datable = "ddmmyy", @class = "form-control-narrow", @Value = Model.RecoveryDate.HasValue ? Model.RecoveryDate.Value.ToString("dd/MM/yy") : Model.RecoveryDate.ToString() })
+                    <div class="form-group @Html.Gds().FormGroupClass(m => m.Date)">
+                        @Html.LabelFor(m => m.Date, string.Format(Resource.RecoveryDate, operationLabelVerb), new { @class = "form-label-bold" })
+                        @Html.Gds().ValidationMessageFor(m => m.Date)
+                        @Html.Gds().TextBoxFor(m => m.Date, new { data_datable = "ddmmyy", @class = "form-control-narrow", @Value = Model.Date.HasValue ? Model.Date.Value.ToString("dd/MM/yy") : Model.Date.ToString() })
                     </div>
                 </div>
                 <hr />

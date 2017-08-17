@@ -40,7 +40,7 @@
 
             var received = await TotalQuantityReceived(importNotificationId, shipment);
 
-            var averageShipmentInfo = AveragePerShipment(importNotificationId, shipment);
+            var averageShipmentInfo = AveragePerShipment(shipment);
 
             return new Summary
             {
@@ -90,9 +90,9 @@
         /// 1 ton = 1000 litres
         /// 1 ton = 1 cubic metre
         /// </summary>
-        /// <param name="importNotificationId"></param>
+        /// <param name="shipment">the shipment info</param>
         /// <returns></returns>
-        private ShipmentQuantity AveragePerShipment(Guid importNotificationId, Shipment shipment)
+        private static ShipmentQuantity AveragePerShipment(Shipment shipment)
         {            
             decimal shipmentQuantity;
 
@@ -112,7 +112,7 @@
                 shipmentQuantity = shipment.Quantity.Quantity;
             }
 
-            return new ShipmentQuantity(Decimal.Divide(shipmentQuantity, shipment.NumberOfShipments), ShipmentQuantityUnits.Tonnes);
+            return new ShipmentQuantity(decimal.Divide(shipmentQuantity, shipment.NumberOfShipments), ShipmentQuantityUnits.Tonnes);
         }
     }
 }

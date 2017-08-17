@@ -1,0 +1,37 @@
+﻿@model EA.Iws.Core.TransitState.TransitStateData
+@using Resources = EA.Iws.Web.Areas.AdminExportAssessment.Views.UpdateJourney.RemoveTransitStateResources
+@{
+    ViewBag.Title = Resources.Title;
+}
+
+<h1 class="heading-large">@Resources.Heading</h1>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-group">
+        <label class="form-label-bold">@Resources.Country</label>
+        <span>@Model.Country.Name</span>
+    </div>
+
+    <div class="form-group">
+        <label class="form-label-bold">@Resources.EntryPoint</label>
+        <span>@Model.EntryPoint.Name</span>
+    </div>
+
+    <div class="form-group">
+        <label class="form-label-bold">@Resources.ExitPoint</label>
+        <span>@Model.ExitPoint.Name</span>
+    </div>
+
+    <div class="form-group">
+        @Html.ActionLink(Resources.BackToOverview, "Index", "Overview")
+    </div>
+
+    <button class="button" type="submit">@Resources.RemoveTransitState</button>
+}
+
+@section menu {
+    @Html.Action("ExportNavigation", "Menu", new { area = "Admin", section = ExportNavigationSection.Assessment })
+}
