@@ -1,6 +1,11 @@
 ﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.NotificationApplication.JourneyViewModel
 
 <div class="overview-block">
+    @if (Model.CanAddRemoveTransitState)
+    {
+        <div class="change-answer">@Html.ActionLink("Add", "AddTransitState", "UpdateJourney", new { id = Model.NotificationId }, null)</div>
+    }
+
     @if (Model.AreTransitStatesCompleted && Model.TransitStates.Any())
     {
         foreach (var transitState in Model.TransitStates.OrderBy(ts => ts.OrdinalPosition))
@@ -34,10 +39,14 @@
                         @transitState.CompetentAuthority.Name
                     </div>
                 </div>
+                @if (Model.CanAddRemoveTransitState)
+                {
+                    <div class="change-answer">@Html.ActionLink("Remove", "RemoveTransitState", "UpdateJourney", new { id = Model.NotificationId, entityId = transitState.Id }, null)</div>
+                }
             </div>
             if (transitState != Model.TransitStates.OrderBy(ts => ts.OrdinalPosition).Last())
             {
-                <hr />
+                <hr/>
             }
         }
     }
