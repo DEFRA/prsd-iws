@@ -2,6 +2,7 @@
 {
     using Core.Shared;
     using Infrastructure;
+    using Infrastructure.Authorization;
     using Prsd.Core.Mediator;
     using Requests.Movement.Receive;
     using Requests.Notification;
@@ -11,6 +12,8 @@
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using ViewModels.Certificate;
+
+    [AuthorizeActivity(typeof(GetSubmittedMovementsByNotificationId))]
     public class CertificateController : Controller
     {
         private readonly IMediator mediator;
