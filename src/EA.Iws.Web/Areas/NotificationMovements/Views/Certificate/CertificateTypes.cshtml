@@ -2,7 +2,11 @@
 @using EA.Iws.Core.Shared
 @model EA.Iws.Web.Areas.NotificationMovements.ViewModels.Certificate.CertificationSelectionViewModel
 @{
-    Layout = "~/Areas/NotificationMovements/Views/Shared/_SummaryLayout.cshtml";
+    Layout = "~/Areas/NotificationMovements/Views/Shared/_CreateSummaryLayout.cshtml";
+}
+
+@{
+    var titleText = Model.NotificationType == NotificationType.Recovery ? "recovery" : "disposal";
 }
 
 <header class="hgroup">
@@ -13,7 +17,7 @@
 {
     @Html.AntiForgeryToken()
     @Html.Gds().ValidationSummary()
-
+    @Html.HiddenFor(m => m.NotificationType)
     <div class="form-group @Html.Gds().FormGroupClass(m => m.Certificate)">
         <fieldset>
             <div class="multiple-choice">
@@ -25,13 +29,13 @@
             <div class="multiple-choice">
                 @Html.RadioButtonFor(m => m.Certificate, CertificateType.Recovery, new { id = "RecoveryCertificate" })
                 <label for="RecoveryCertificate">
-                    @Resource.RecoveryCertificate
+                    @Html.Raw(string.Format(Resource.RecoveryCertificate, titleText))
                 </label>
             </div>
             <div class="multiple-choice">
                 @Html.RadioButtonFor(m => m.Certificate, CertificateType.ReceiptRecovery, new { id = "ReceiptRecoveryCertificate" })
                 <label for="ReceiptRecoveryCertificate">
-                    @Resource.ReceiptRecoveryCertificate
+                    @Html.Raw(string.Format(Resource.ReceiptRecoveryCertificate, titleText))
                 </label>
             </div>
         </fieldset>

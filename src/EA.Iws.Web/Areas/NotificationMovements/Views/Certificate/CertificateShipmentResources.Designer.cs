@@ -80,7 +80,7 @@ namespace EA.Iws.Web.Areas.NotificationMovements.Views.Certificate {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Certificate of receipt and recovery.
+        ///   Looks up a localized string similar to Certificate of receipt and {0}.
         /// </summary>
         public static string ReceiptRecoveryCertificate {
             get {
@@ -107,7 +107,7 @@ namespace EA.Iws.Web.Areas.NotificationMovements.Views.Certificate {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Certificate of recovery.
+        ///   Looks up a localized string similar to Certificate of {0}.
         /// </summary>
         public static string RecoveryCertificate {
             get {

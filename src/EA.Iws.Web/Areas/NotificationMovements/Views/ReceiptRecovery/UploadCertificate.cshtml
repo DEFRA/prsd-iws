@@ -9,7 +9,7 @@
     ViewBag.Title = (Model.NotificationType == NotificationType.Recovery ? "Recovery" : "Disposal") + " complete";
     string operation = Model.NotificationType == NotificationType.Recovery ? "recovery" : "disposal";
     string titleText = Model.Certificate == CertificateType.Receipt ? @Resource.UploadReceiptTitle : @Resource.UploadRecoveryTitle;
-    string fileText = Model.Certificate == CertificateType.Receipt ? "receipt" : "recovery";
+    string fileText = Model.Certificate == CertificateType.Receipt ? "receipt" : (Model.NotificationType == NotificationType.Recovery ? "recovery" : "disposal");
 }
 
 
@@ -34,11 +34,16 @@
     {
          <h1 class="heading-large">@Html.Raw(titleText)</h1>
     }
-
-    <p>@string.Format(Resource.UploadInstruction, fileText)</p>
-
+    if (Model.Certificate == CertificateType.ReceiptRecovery)
+    {
+    <p>@string.Format(Resource.UploadInstructionReceiptRecovery, fileText)</p>
+    }
+    else
+    {
+        <p>@string.Format(Resource.UploadInstruction, fileText)</p>
+    }
     <div class="form-group @Html.Gds().FormGroupClass(m => m.File)">
-        <label for="@Html.NameFor(m => m.File)">@Html.Raw(Model.Certificate != CertificateType.ReceiptRecovery ? string.Format(Resource.UploadFileTitle, fileText) : Resource.UploadFileCombinedTitle)</label>
+        <label for="@Html.NameFor(m => m.File)">@Html.Raw(Model.Certificate != CertificateType.ReceiptRecovery ? string.Format(Resource.UploadFileTitle, fileText) : string.Format(Resource.UploadFileCombinedTitle, operation))</label>
         @Html.Gds().ValidationMessageFor(m => m.File)
         @Html.Gds().TextBoxFor(m => m.File, new { type = "file" })
     </div>

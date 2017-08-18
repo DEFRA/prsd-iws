@@ -12,5 +12,7 @@
         public CertificateType? Certificate { get; set; }
 
         public Guid NotificationId { get; set; }
+
+        public NotificationType NotificationType { get; set; }
     }
 }
