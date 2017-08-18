@@ -1,0 +1,17 @@
+﻿@model EA.Iws.Web.ViewModels.ChangeNotificationOwner.ConfirmViewModel
+@using Resources = EA.Iws.Web.Views.ChangeNotificationOwner.ChangeNotificationOwnerResources
+@{
+    ViewBag.Title = Resources.SuccessTitle;
+}
+
+<div class="grid-row">
+    <div class="column-two-thirds">
+        <h1 class="heading-large">@Resources.SuccessTitle</h1>
+
+        <p>
+            @string.Format(Resources.NotificationReassigned, Model.NotificationNumber, Model.EmailAddress)
+        </p>
+
+        @Html.ActionLink(Constants.ContinueOnlyButtonText, "Home", "Applicant", new { area = string.Empty }, new { @class = "button" })
+    </div>
+</div>

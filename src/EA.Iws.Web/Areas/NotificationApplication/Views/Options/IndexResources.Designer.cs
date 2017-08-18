@@ -70,6 +70,15 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.Options {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Assign notification to another user.
+        /// </summary>
+        public static string AssignNotification {
+            get {
+                return ResourceManager.GetString("AssignNotification", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cancel a prenotification.
         /// </summary>
         public static string CancelPrenotification {

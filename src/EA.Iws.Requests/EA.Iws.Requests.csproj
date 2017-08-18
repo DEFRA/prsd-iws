@@ -345,6 +345,8 @@
     <Compile Include="TransportRoute\GetAllCountriesHavingCompetentAuthorities.cs" />
     <Compile Include="TransportRoute\GetUnitedKingdomCompetentAuthoritiesAndEntryOrExitPoints.cs" />
     <Compile Include="TransportRoute\GetTransitAuthoritiesAndEntryOrExitPointsByCountryId.cs" />
+    <Compile Include="Users\GetUserId.cs" />
+    <Compile Include="Users\ExternalUserExists.cs" />
     <Compile Include="WasteRecovery\GetRecoveryCost.cs" />
     <Compile Include="WasteRecovery\SaveWasteRecovery.cs" />
     <Compile Include="WasteRecovery\GetEstimatedValue.cs" />

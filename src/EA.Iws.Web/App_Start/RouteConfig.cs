@@ -23,8 +23,12 @@
             routes.MapRoute("Movements", "notification-movement/{id}",
                 new { controller = "NotificationMovement", action = "Index" });
 
+            routes.MapRoute("ChangeNotificationOwner", "change-notification-owner/{id}",
+                new { controller = "ChangeNotificationOwner", action = "Index" },
+                namespaces: new[] { typeof(ChangeNotificationOwnerController).Namespace });
+
             routes.MapLowercaseDashedRoute("Default", "{controller}/{action}/{id}",
-                defaults: new {controller = "Home", action = "Index", id = UrlParameter.Optional},
+                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional },
                 namespaces: new[] { typeof(HomeController).Namespace });
         }
     }
