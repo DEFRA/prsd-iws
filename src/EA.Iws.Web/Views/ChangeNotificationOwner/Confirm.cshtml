@@ -1,0 +1,26 @@
+﻿@model EA.Iws.Web.ViewModels.ChangeNotificationOwner.ConfirmViewModel
+@using Resources = EA.Iws.Web.Views.ChangeNotificationOwner.ChangeNotificationOwnerResources
+@{
+    ViewBag.Title = string.Format(Resources.ConfirmTitle, Model.NotificationNumber);
+}
+
+<div class="grid-row">
+    <div class="column-two-thirds">
+
+        <h1 class="heading-large">@string.Format(Resources.ConfirmTitle, Model.NotificationNumber)</h1>
+
+        <p>
+            @Resources.ConfirmResponsibility
+        </p>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            @Html.HiddenFor(m => m.NotificationNumber)
+            @Html.HiddenFor(m => m.NotificationId)
+            @Html.HiddenFor(m => m.EmailAddress)
+
+            <button class="button" type="submit">@Constants.ContinueButtonText</button>
+        }
+    </div>
+</div>

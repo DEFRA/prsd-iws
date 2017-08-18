@@ -990,6 +990,9 @@
     <Content Include="Areas\AdminExportAssessment\Views\UpdateJourney\AddTransitState.cshtml" />
     <Content Include="Areas\AdminExportAssessment\Views\UpdateJourney\GetTransitAuthoritiesAndEntryOrExitPointsByCountryId.cshtml" />
     <Content Include="Areas\AdminExportAssessment\Views\UpdateJourney\RemoveTransitState.cshtml" />
+    <Content Include="Views\ChangeNotificationOwner\Index.cshtml" />
+    <Content Include="Views\ChangeNotificationOwner\Confirm.cshtml" />
+    <Content Include="Views\ChangeNotificationOwner\Success.cshtml" />
     <None Include="Scripts\jquery-2.1.3.intellisense.js" />
     <Content Include="Scripts\govuk\govuk-template.js" />
     <Content Include="Scripts\govuk\ie.js" />
@@ -2188,6 +2191,8 @@
     </Compile>
     <Compile Include="Areas\NotificationApplication\ViewModels\Annex\SuccessViewModel.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\Carrier\AddFromAddressBookViewModel.cs" />
+    <Compile Include="ViewModels\ChangeNotificationOwner\ChangeOwnerViewModel.cs" />
+    <Compile Include="ViewModels\ChangeNotificationOwner\ConfirmViewModel.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\Home\ResubmissionSuccessViewModel.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\Options\UnavailableViewModel.cs" />
     <Compile Include="Areas\NotificationApplication\Controllers\AnnexController.cs" />
@@ -2523,6 +2528,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>IndexResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Controllers\ChangeNotificationOwnerController.cs" />
     <Compile Include="Infrastructure\AdminHomeNavigationSection.cs" />
     <Compile Include="Infrastructure\Authorization\AuthorizationService.cs" />
     <Compile Include="Infrastructure\Authorization\AuthorizeActivityAttribute.cs" />
@@ -3260,6 +3266,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>NotFoundResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ChangeNotificationOwner\ChangeNotificationOwnerResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ChangeNotificationOwnerResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Views\CopyFromNotification\CopyFromNotificationResources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -4694,6 +4705,10 @@
     <EmbeddedResource Include="Views\Applicant\NotFoundResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>NotFoundResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\ChangeNotificationOwner\ChangeNotificationOwnerResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ChangeNotificationOwnerResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\CopyFromNotification\CopyFromNotificationResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

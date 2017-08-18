@@ -1,0 +1,29 @@
+﻿@model EA.Iws.Web.ViewModels.ChangeNotificationOwner.ChangeOwnerViewModel
+@using Resources = EA.Iws.Web.Views.ChangeNotificationOwner.ChangeNotificationOwnerResources
+@{
+    ViewBag.Title = Resources.ChangeOwnerTitle;
+}
+
+<div class="grid-row">
+    <div class="column-two-thirds">
+        <h1 class="heading-large">@Resources.ChangeOwnerTitle</h1>
+
+        <p>@Resources.YouAreCurrentlyTheOwner</p>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            @Html.Gds().ValidationSummary()
+            @Html.HiddenFor(m => m.NotificationId)
+
+            <div class="form-group @Html.Gds().FormGroupClass(m => m.EmailAddress)">
+                @Html.Gds().LabelFor(m => m.EmailAddress)
+                @Html.Gds().HintParagraph(Resources.ChangeOwnerHint)
+                @Html.Gds().ValidationMessageFor(m => m.EmailAddress)
+                @Html.Gds().TextBoxFor(m => m.EmailAddress)
+            </div>
+
+            <button class="button" type="submit">@Constants.ContinueOnlyButtonText</button>
+        }
+    </div>
+</div>

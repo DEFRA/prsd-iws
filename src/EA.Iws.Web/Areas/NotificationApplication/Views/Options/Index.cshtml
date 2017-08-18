@@ -64,26 +64,27 @@
             <h2 class="heading-medium">@Resource.CurrentNotificationTitle @Model.NotificationNumber</h2>
             <div class="nav-bloc">
                 <nav>
-                    @Html.ActionLink(@Resource.ViewNotification, "Index", "Home", new { id = Model.NotificationId, area = "NotificationApplication" }, null)
+                    @Html.ActionLink(Resource.ViewNotification, "Index", "Home", new { id = Model.NotificationId, area = "NotificationApplication" }, null)
+                    @Html.ActionLink(Resource.AssignNotification, "Index", "ChangeNotificationOwner", new { id = Model.NotificationId, area = string.Empty }, null)
 
                     @if (Model.NotificationStatus == NotificationStatus.NotSubmitted)
                     {
-                        @Html.ActionLink(@Resource.PrintNotification, "DownloadUnavailable", "Options", new { id = Model.NotificationId, area = "NotificationApplication" }, null)
-                        @Html.ActionLink(@Resource.PrintLabel, "PostageLabelUnavailable", "Options", new { id = Model.NotificationId, area = "NotificationApplication" }, null)
-                        @Html.ActionLink(@Resource.CompleteFG, "FinancialGuaranteeUnavailable", "Options", new { id = Model.NotificationId, area = "NotificationApplication" }, null)
-                        @Html.ActionLink(@Resource.CostInfo, "Payment", "WhatToDoNext", new { id = Model.NotificationId, area = "NotificationApplication" }, null)
-                        @Html.ActionLink(@Resource.UploadAnnexes, "AnnexUploadUnavailable", "Options", new { id = Model.NotificationId, area = "NotificationApplication" }, null)
+                        @Html.ActionLink(Resource.PrintNotification, "DownloadUnavailable", "Options", new { id = Model.NotificationId, area = "NotificationApplication" }, null)
+                        @Html.ActionLink(Resource.PrintLabel, "PostageLabelUnavailable", "Options", new { id = Model.NotificationId, area = "NotificationApplication" }, null)
+                        @Html.ActionLink(Resource.CompleteFG, "FinancialGuaranteeUnavailable", "Options", new { id = Model.NotificationId, area = "NotificationApplication" }, null)
+                        @Html.ActionLink(Resource.CostInfo, "Payment", "WhatToDoNext", new { id = Model.NotificationId, area = "NotificationApplication" }, null)
+                        @Html.ActionLink(Resource.UploadAnnexes, "AnnexUploadUnavailable", "Options", new { id = Model.NotificationId, area = "NotificationApplication" }, null)
                     }
                     else
                     {
-                        @Html.ActionLink(@Resource.PrintNotification, "Print", "WhatToDoNext", new { id = Model.NotificationId, area = "NotificationApplication" }, null)
-                        @Html.ActionLink(@Resource.PrintLabel, "PostageLabel", "WhatToDoNext", new { id = Model.NotificationId, area = "NotificationApplication" }, null)
-                        @Html.ActionLink(@Resource.CompleteFG, "FinancialGuarantee", "WhatToDoNext", new { id = Model.NotificationId, area = "NotificationApplication" }, null)
-                        @Html.ActionLink(@Resource.CostInfo, "Payment", "WhatToDoNext", new { id = Model.NotificationId, area = "NotificationApplication" }, null)
-                        @Html.ActionLink(@Resource.UploadAnnexes, "Index", "Annex", new { id = Model.NotificationId, area = "NotificationApplication" }, null)
+                        @Html.ActionLink(Resource.PrintNotification, "Print", "WhatToDoNext", new { id = Model.NotificationId, area = "NotificationApplication" }, null)
+                        @Html.ActionLink(Resource.PrintLabel, "PostageLabel", "WhatToDoNext", new { id = Model.NotificationId, area = "NotificationApplication" }, null)
+                        @Html.ActionLink(Resource.CompleteFG, "FinancialGuarantee", "WhatToDoNext", new { id = Model.NotificationId, area = "NotificationApplication" }, null)
+                        @Html.ActionLink(Resource.CostInfo, "Payment", "WhatToDoNext", new { id = Model.NotificationId, area = "NotificationApplication" }, null)
+                        @Html.ActionLink(Resource.UploadAnnexes, "Index", "Annex", new { id = Model.NotificationId, area = "NotificationApplication" }, null)
                     }
 
-                    @Html.ActionLink(@Resource.ViewDates, "Index", "KeyDates", new { id = Model.NotificationId, area = "NotificationApplication" }, null)
+                    @Html.ActionLink(Resource.ViewDates, "Index", "KeyDates", new { id = Model.NotificationId, area = "NotificationApplication" }, null)
                 </nav>
             </div>
         </div>
@@ -92,9 +93,9 @@
             <h2 class="heading-medium">@Resource.NewNotificationTitle</h2>
             <div class="nav-bloc">
                 <nav>
-                    @Html.ActionLink(@Resource.StartNewNotification, "CompetentAuthority", "NewNotification", new { area = string.Empty },
+                    @Html.ActionLink(Resource.StartNewNotification, "CompetentAuthority", "NewNotification", new { area = string.Empty },
                         new { data_track = "element", data_category = "Export notification", data_action = "Start" })
-                    @Html.ActionLink(@Resource.CopyFromPrevious, "CompetentAuthority", "NewNotification", new { cfp = 1, area = string.Empty },
+                    @Html.ActionLink(Resource.CopyFromPrevious, "CompetentAuthority", "NewNotification", new { cfp = 1, area = string.Empty },
                         new { data_track = "element", data_category = "Export notification", data_action = "Copy" })
                     <a href="https://www.gov.uk/importing-and-exporting-waste"
                        target="_blank"
