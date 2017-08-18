@@ -151,7 +151,7 @@ namespace EA.Iws.Web.Areas.NotificationMovements.Views.ReceiptRecovery {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Upload combined receipt and recovery file.
+        ///   Looks up a localized string similar to Upload combined receipt and {0} file.
         /// </summary>
         public static string UploadFileCombinedTitle {
             get {
@@ -174,6 +174,15 @@ namespace EA.Iws.Web.Areas.NotificationMovements.Views.ReceiptRecovery {
         public static string UploadInstruction {
             get {
                 return ResourceManager.GetString("UploadInstruction", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Before you continue, you need to upload the signed copy of the certificate of receipt and {0}..
+        /// </summary>
+        public static string UploadInstructionReceiptRecovery {
+            get {
+                return ResourceManager.GetString("UploadInstructionReceiptRecovery", resourceCulture);
             }
         }
         

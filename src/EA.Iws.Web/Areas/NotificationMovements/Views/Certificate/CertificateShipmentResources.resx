@@ -124,7 +124,7 @@
     <value>Which shipment has been {0}?</value>
   </data>
   <data name="ReceiptRecoveryCertificate" xml:space="preserve">
-    <value>Certificate of receipt and recovery</value>
+    <value>Certificate of receipt and {0}</value>
   </data>
   <data name="ReceiveCertificate" xml:space="preserve">
     <value>Certificate of receipt</value>
@@ -133,7 +133,7 @@
     <value>Prenotified Shipments</value>
   </data>
   <data name="RecoveryCertificate" xml:space="preserve">
-    <value>Certificate of recovery</value>
+    <value>Certificate of {0}</value>
   </data>
   <data name="RecoveryShipmentTitle" xml:space="preserve">
     <value>Received Shipments</value>

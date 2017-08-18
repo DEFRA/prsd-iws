@@ -148,13 +148,16 @@
     <value>Your certificates of receipt and {0} are now complete</value>
   </data>
   <data name="UploadFileCombinedTitle" xml:space="preserve">
-    <value>Upload combined receipt and recovery file</value>
+    <value>Upload combined receipt and {0} file</value>
   </data>
   <data name="UploadFileTitle" xml:space="preserve">
     <value>Upload the signed copy of the certificate of {0}</value>
   </data>
   <data name="UploadInstruction" xml:space="preserve">
     <value>Before you continue, you need to upload the signed copy of the certificate of {0}.</value>
+  </data>
+  <data name="UploadInstructionReceiptRecovery" xml:space="preserve">
+    <value>Before you continue, you need to upload the signed copy of the certificate of receipt and {0}.</value>
   </data>
   <data name="UploadReceiptTitle" xml:space="preserve">
     <value>Your certificate of receipt is now complete</value>

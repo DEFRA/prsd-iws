@@ -24,9 +24,10 @@
         }
 
         [HttpGet]
-        public ActionResult CertificateTypes(Guid notificationId)
+        public async Task<ActionResult> CertificateTypes(Guid notificationId)
         {
             CertificationSelectionViewModel model = new CertificationSelectionViewModel();
+            model.NotificationType = await mediator.SendAsync(new GetNotificationType(notificationId));
             return View(model);
         }
 

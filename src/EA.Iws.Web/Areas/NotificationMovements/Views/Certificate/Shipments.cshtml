@@ -2,7 +2,7 @@
 @using EA.Iws.Core.Shared
 @model EA.Iws.Web.Areas.NotificationMovements.ViewModels.Certificate.ShipmentViewModel
 @{
-    Layout = "~/Areas/NotificationMovements/Views/Shared/_SummaryLayout.cshtml";
+    Layout = "~/Areas/NotificationMovements/Views/Shared/_CreateSummaryLayout.cshtml";
     ViewBag.Title = "Which shipment?";
 }
 
@@ -20,6 +20,8 @@
 
     if (Model.Certificate == CertificateType.Receipt || Model.Certificate == CertificateType.ReceiptRecovery)
     {
+        <h1 class="heading-large">@Html.Raw(string.Format(@Resource.MainTitle, (Model.Certificate == CertificateType.ReceiptRecovery ? "received and " + titleText : "received")))</h1>
+
         if (Model.ReceiveShipments == null || Model.ReceiveShipments.Count() == 0)
         {
             <p>You currently have no active shipments to record as received.</p>
@@ -32,7 +34,6 @@
         }
         else
         {
-            <h1 class="heading-large">@Html.Raw(string.Format(@Resource.MainTitle,(Model.Certificate == CertificateType.ReceiptRecovery ? "received and " + titleText : "received")))</h1>
 
             <div class="form-group @Html.Gds().FormGroupClass(m => m.ReceiveShipments)">
                 <fieldset>
@@ -53,6 +54,8 @@
     }
     else if (Model.Certificate == CertificateType.Recovery)
     {
+        <h1 class="heading-large">@Html.Raw(string.Format(@Resource.MainTitle, titleText))</h1>
+
         if (Model.RecoveryShipments == null || Model.RecoveryShipments.Count() == 0)
         {
             <p>You have no active shipments with a recorded certificate of receipt.</p>
@@ -65,7 +68,6 @@
         }
         else
         {
-            <h1 class="heading-large">@Html.Raw(string.Format(@Resource.MainTitle,titleText))</h1>
 
             <div class="form-group @Html.Gds().FormGroupClass(m => m.RecoveryShipments)">
                 <fieldset>
