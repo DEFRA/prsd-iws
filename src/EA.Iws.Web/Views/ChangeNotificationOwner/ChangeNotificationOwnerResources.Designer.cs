@@ -61,6 +61,15 @@ namespace EA.Iws.Web.Views.ChangeNotificationOwner {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cancel.
+        /// </summary>
+        public static string Cancel {
+            get {
+                return ResourceManager.GetString("Cancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to This is the email address that was used to register their account and they enter when logging into the service. If they are not registered to use IWS Online, they will need to do this first..
         /// </summary>
         public static string ChangeOwnerHint {

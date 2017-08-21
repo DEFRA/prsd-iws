@@ -26,5 +26,7 @@
 
             <button class="button" type="submit">@Constants.ContinueButtonText</button>
         }
+
+        @Html.ActionLink(Resources.Cancel, "Index", "Options", routeValues: new { area = "NotificationApplication" }, htmlAttributes: null)
     </div>
 </div>
