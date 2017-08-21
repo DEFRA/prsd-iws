@@ -106,6 +106,15 @@ namespace EA.Iws.Web.Views.ChangeNotificationOwner {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to This notification will be assigned to {0}..
+        /// </summary>
+        public static string NotificationWillBeAssignedTo {
+            get {
+                return ResourceManager.GetString("NotificationWillBeAssignedTo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Notification owner changed.
         /// </summary>
         public static string SuccessTitle {

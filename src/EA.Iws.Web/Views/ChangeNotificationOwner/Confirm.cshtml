@@ -10,6 +10,10 @@
         <h1 class="heading-large">@string.Format(Resources.ConfirmTitle, Model.NotificationNumber)</h1>
 
         <p>
+            @string.Format(Resources.NotificationWillBeAssignedTo, Model.EmailAddress)
+        </p>
+
+        <p>
             @Resources.ConfirmResponsibility
         </p>
 

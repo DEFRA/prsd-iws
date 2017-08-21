@@ -132,6 +132,9 @@
   <data name="NotificationReassigned" xml:space="preserve">
     <value>Notification {0} has been successfully assigned to {1}.</value>
   </data>
+  <data name="NotificationWillBeAssignedTo" xml:space="preserve">
+    <value>This notification will be assigned to {0}.</value>
+  </data>
   <data name="SuccessTitle" xml:space="preserve">
     <value>Notification owner changed</value>
   </data>
