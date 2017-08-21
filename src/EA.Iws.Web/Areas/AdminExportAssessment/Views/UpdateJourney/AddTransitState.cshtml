@@ -38,6 +38,7 @@
                 $.get("@Url.Action("GetTransitAuthoritiesAndEntryOrExitPointsByCountryId")" + "?countryId=" + e.val,
                     function(data) {
                         $("#editor").html(data);
+                        select2Init();
                     });
             });
         });
