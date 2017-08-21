@@ -10,6 +10,10 @@
         <h1 class="heading-large">@string.Format(Resources.ConfirmTitle, Model.NotificationNumber)</h1>
 
         <p>
+            @string.Format(Resources.NotificationWillBeAssignedTo, Model.EmailAddress)
+        </p>
+
+        <p>
             @Resources.ConfirmResponsibility
         </p>
 
@@ -22,5 +26,7 @@
 
             <button class="button" type="submit">@Constants.ContinueButtonText</button>
         }
+
+        @Html.ActionLink(Resources.Cancel, "Index", "Options", routeValues: new { area = "NotificationApplication" }, htmlAttributes: null)
     </div>
 </div>
