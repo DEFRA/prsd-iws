@@ -7,7 +7,9 @@
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.Linq;
-    public class ShipmentViewModel : IValidatableObject
+    using Web.ViewModels.Shared;
+
+    public class ShipmentViewModel 
     {
         public Guid NotificationId { get; set; }
 
@@ -19,19 +21,16 @@
 
         public CertificateType Certificate { get; set; }
 
-        public IList<SelectShipmentViewModel> ReceiveShipments { get; set; }
+        public StringGuidRadioButtons ReceiveShipments { get; set; }
 
-        public IList<SelectShipmentViewModel> RecoveryShipments { get; set; }
+        public StringGuidRadioButtons RecoveryShipments { get; set; }
+
         public ShipmentViewModel(Guid id, NotificationType notificationType, CertificateType certificate, IEnumerable<MovementData> receiveModel)
         {
-            ReceiveShipments = receiveModel
+            ReceiveShipments = new StringGuidRadioButtons(receiveModel
                .OrderBy(d => d.Number)
-               .Select(d => new SelectShipmentViewModel
-               {
-                   DisplayName = "Shipment " + d.Number,
-                   Id = d.Id,
-                   IsSelected = false
-               }).ToArray();
+               .Select(d => new KeyValuePair<string, Guid>("Shipment " + d.Number, d.Id)));
+           
             NotificationId = id;
             NotificationType = notificationType;
             Certificate = certificate;
@@ -40,34 +39,13 @@
         public ShipmentViewModel(Guid id, NotificationType notificationType, CertificateType certificate, MovementOperationData recoveryModel)
         {
             var list = recoveryModel.MovementDatas;
-            RecoveryShipments = list
+            RecoveryShipments = new StringGuidRadioButtons(list
                .OrderBy(d => d.Number)
-               .Select(d => new SelectShipmentViewModel
-               {
-                   DisplayName = "Shipment " + d.Number,
-                   Id = d.Id,
-                   IsSelected = false
-               }).ToArray();
+               .Select(d => new KeyValuePair<string, Guid>("Shipment " + d.Number, d.Id)));
+           
             NotificationId = id;
             NotificationType = notificationType;
             Certificate = certificate;
-        }
-
-        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
-        {
-            if ((ReceiveShipments != null && !ReceiveShipments.Any(s => s.IsSelected)) || (RecoveryShipments != null && !RecoveryShipments.Any(s => s.IsSelected)))
-            {
-                yield return new ValidationResult(ShipmentViewModelResources.ShipmentRequired);
-            }
-        }
-
-        public class SelectShipmentViewModel
-        {
-            public string DisplayName { get; set; }
-
-            public Guid Id { get; set; }
-
-            public bool IsSelected { get; set; }
         }
     }   
 }

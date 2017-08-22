@@ -71,17 +71,17 @@
             }
             TempData[CertificateKey] = model.Certificate;
 
-            if (model.Certificate == CertificateType.ReceiptRecovery && model.ReceiveShipments.Any(s => s.IsSelected))
+            if (model.Certificate == CertificateType.ReceiptRecovery)
             {
-                return RedirectToAction("Index", "ReceiptRecovery", model.ReceiveShipments.Where(s => s.IsSelected).Select(s => s.Id).ToRouteValueDictionary("movementIds"));
+                return RedirectToAction("Index", "ReceiptRecovery", new { movementId = model.ReceiveShipments.SelectedValue});
             }
-            else if (model.Certificate == CertificateType.Receipt && model.ReceiveShipments.Any(s => s.IsSelected))
+            else if (model.Certificate == CertificateType.Receipt)
             {
-                return RedirectToAction("Receipt", "ReceiptRecovery", model.ReceiveShipments.Where(s => s.IsSelected).Select(s => s.Id).ToRouteValueDictionary("movementIds"));
+                return RedirectToAction("Receipt", "ReceiptRecovery", new { movementId = model.ReceiveShipments.SelectedValue});
             }
-            else if (model.Certificate == CertificateType.Recovery && model.RecoveryShipments.Any(s => s.IsSelected))
+            else if (model.Certificate == CertificateType.Recovery)
             {
-                return RedirectToAction("Recovery", "ReceiptRecovery", model.RecoveryShipments.Where(s => s.IsSelected).Select(s => s.Id).ToRouteValueDictionary("movementIds"));
+                return RedirectToAction("Recovery", "ReceiptRecovery", new { movementId = model.RecoveryShipments.SelectedValue});
             }
             return View(model);
         }

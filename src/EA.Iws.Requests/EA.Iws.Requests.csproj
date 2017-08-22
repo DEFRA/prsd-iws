@@ -203,7 +203,7 @@
     <Compile Include="Movement\GenerateMovementDocuments.cs" />
     <Compile Include="Movement\GenerateMovementDocument.cs" />
     <Compile Include="Movement\GetMovementDateByMovementId.cs" />
-    <Compile Include="Movement\GetMovementDetailsByIds.cs" />
+    <Compile Include="Movement\GetMovementDetailsById.cs" />
     <Compile Include="Movement\GetMovementFiles.cs" />
     <Compile Include="Movement\GetMovementIdByNumber.cs" />
     <Compile Include="Movement\Complete\RecordOperationCompleteInternal.cs" />

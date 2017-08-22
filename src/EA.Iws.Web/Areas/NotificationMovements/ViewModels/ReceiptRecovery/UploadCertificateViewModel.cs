@@ -17,7 +17,7 @@
 
         public Guid NotificationId { get; set; }
 
-        public IEnumerable<Guid> MovementIds { get; set; }
+        public Guid MovementId { get; set; }
 
         public NotificationType NotificationType { get; set; }
 

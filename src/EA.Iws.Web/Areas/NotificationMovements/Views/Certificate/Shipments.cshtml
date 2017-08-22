@@ -22,7 +22,7 @@
     {
         <h1 class="heading-large">@Html.Raw(string.Format(@Resource.MainTitle, (Model.Certificate == CertificateType.ReceiptRecovery ? "received and " + titleText : "received")))</h1>
 
-        if (Model.ReceiveShipments == null || Model.ReceiveShipments.Count() == 0)
+        if (Model.ReceiveShipments == null || !Model.ReceiveShipments.PossibleValues.Any())
         {
             <p>You currently have no active shipments to record as received.</p>
 
@@ -38,16 +38,8 @@
             <div class="form-group @Html.Gds().FormGroupClass(m => m.ReceiveShipments)">
                 <fieldset>
                     <h2 class="heading-small">@Resource.ReceiveTitle</h2>
-
-                    @for (int i = 0; i < Model.ReceiveShipments.Count(); i++)
-                    {
-                        <div class="multiple-choice">
-                            @Html.HiddenFor(m => m.ReceiveShipments[i].Id)
-                            @Html.HiddenFor(m => m.ReceiveShipments[i].DisplayName)
-                            @Html.CheckBoxFor(m => m.ReceiveShipments[i].IsSelected)
-                            <label for="@Html.IdFor(m => m.ReceiveShipments[i].IsSelected)">@Model.ReceiveShipments[i].DisplayName</label>
-                        </div>
-                    }
+                    @Html.EditorFor(m => m.ReceiveShipments)
+ 
                 </fieldset>
             </div>
         }
@@ -56,7 +48,7 @@
     {
         <h1 class="heading-large">@Html.Raw(string.Format(@Resource.MainTitle, titleText))</h1>
 
-        if (Model.RecoveryShipments == null || Model.RecoveryShipments.Count() == 0)
+        if (Model.RecoveryShipments == null || !Model.RecoveryShipments.PossibleValues.Any())
         {
             <p>You have no active shipments with a recorded certificate of receipt.</p>
 
@@ -72,21 +64,13 @@
             <div class="form-group @Html.Gds().FormGroupClass(m => m.RecoveryShipments)">
                 <fieldset>
                     <p class="heading-small">@Resource.RecoveryShipmentTitle</p>
-
-                    @for (int i = 0; i < Model.RecoveryShipments.Count(); i++)
-                    {
-                        <div class="multiple-choice">
-                            @Html.HiddenFor(m => m.RecoveryShipments[i].Id)
-                            @Html.HiddenFor(m => m.RecoveryShipments[i].DisplayName)
-                            @Html.CheckBoxFor(m => m.RecoveryShipments[i].IsSelected)
-                            <label for="@Html.IdFor(m => m.RecoveryShipments[i].IsSelected)">@Model.RecoveryShipments[i].DisplayName</label>
-                        </div>
-                    }
+                    @Html.EditorFor(m => m.RecoveryShipments)
+                   
                 </fieldset>
             </div>
         }
     }
-    if ((Model.ReceiveShipments != null && Model.ReceiveShipments.Count() > 0) || (Model.RecoveryShipments != null && Model.RecoveryShipments.Count() > 0))
+    if ((Model.ReceiveShipments != null && Model.ReceiveShipments.PossibleValues.Any()) || (Model.RecoveryShipments != null && Model.RecoveryShipments.PossibleValues.Any()))
     {
         <div class="form-group-compound">
             <button class="button" type="submit">Continue</button>

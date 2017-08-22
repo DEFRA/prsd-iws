@@ -133,7 +133,7 @@ namespace EA.Iws.Web.Areas.NotificationMovements.Views.ReceiptRecovery {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to How much waste and when was it received {0}?.
+        ///   Looks up a localized string similar to How much waste was received {0}?.
         /// </summary>
         public static string Title {
             get {
