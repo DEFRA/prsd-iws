@@ -5,26 +5,22 @@
     using Prsd.Core.Mediator;
     using Requests.Movement;
     using System;
-    using System.Collections.Generic;
     using System.Threading.Tasks;
 
-    internal class GetMovementDetailsByIdsHandler : IRequestHandler<GetMovementDetailsByIds, MovementBasicDetails>
+    internal class GetMovementDetailsByIdHandler : IRequestHandler<GetMovementDetailsById, MovementBasicDetails>
     {
-        private readonly IMovementDetailsRepository movementDetailsRepository;
         private readonly IMovementRepository movementRepository;
 
-        public GetMovementDetailsByIdsHandler(IMovementRepository movementRepository,
-          IMovementDetailsRepository movementDetailsRepository)
+        public GetMovementDetailsByIdHandler(IMovementRepository movementRepository)
         {
             this.movementRepository = movementRepository;
-            this.movementDetailsRepository = movementDetailsRepository;
         }
 
-        public async Task<MovementBasicDetails> HandleAsync(GetMovementDetailsByIds message)
+        public async Task<MovementBasicDetails> HandleAsync(GetMovementDetailsById message)
         {
             var result = new MovementBasicDetails();
 
-            var movement = await movementRepository.GetById(message.MovementIds);
+            var movement = await movementRepository.GetById(message.MovementId);
           
             result = new MovementBasicDetails
             {

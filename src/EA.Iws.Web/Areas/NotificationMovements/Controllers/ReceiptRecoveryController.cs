@@ -9,17 +9,11 @@
     using Requests.Movement.Complete;
     using Requests.Movement.Receive;
     using Requests.Notification;
-    using Requests.NotificationMovements;
     using Requests.NotificationMovements.Create;
     using System;
-    using System.Collections;
-    using System.Collections.Generic;
     using System.IO;
-    using System.Linq;
     using System.Threading.Tasks;
-    using System.Web;
     using System.Web.Mvc;
-    using System.Web.Routing;
     using ViewModels.ReceiptRecovery;
 
     [AuthorizeActivity(typeof(SaveMovementCompletedReceipt))]
@@ -74,7 +68,7 @@
             TempData[CertificateKey] = model.Certificate;
             TempData[NotificationTypeKey] = model.NotificationType;
 
-            MovementBasicDetails movementDetails = await mediator.SendAsync(new GetMovementDetailsByIds(notificationId, movementId));
+            MovementBasicDetails movementDetails = await mediator.SendAsync(new GetMovementDetailsById(notificationId, movementId));
             ValidateShipment(model.GetDateReceived(), movementDetails);
 
             if (!ModelState.IsValid)
@@ -127,7 +121,7 @@
                 return View(model);
             }
 
-            MovementBasicDetails movementDetails = await mediator.SendAsync(new GetMovementDetailsByIds(notificationId, movementId));
+            MovementBasicDetails movementDetails = await mediator.SendAsync(new GetMovementDetailsById(notificationId, movementId));
             
             ValidateShipment(model.GetDateReceived(), movementDetails);
             if (!ModelState.IsValid)
@@ -179,7 +173,7 @@
             TempData[NotificationTypeKey] = model.NotificationType;
             TempData[DateRecoveredKey] = model.GetDateRecovered();
 
-            MovementBasicDetails movementDetails = await mediator.SendAsync(new GetMovementDetailsByIds(notificationId, movementId));
+            MovementBasicDetails movementDetails = await mediator.SendAsync(new GetMovementDetailsById(notificationId, movementId));
             
             ValidateRecoveryShipment(model.GetDateRecovered(), movementDetails);
             if (!ModelState.IsValid)
