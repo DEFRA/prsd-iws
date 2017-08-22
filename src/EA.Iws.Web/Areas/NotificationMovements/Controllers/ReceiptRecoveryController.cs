@@ -12,6 +12,7 @@
     using Requests.NotificationMovements;
     using Requests.NotificationMovements.Create;
     using System;
+    using System.Collections;
     using System.Collections.Generic;
     using System.IO;
     using System.Linq;
@@ -41,10 +42,10 @@
         }
 
         [HttpGet]
-        public async Task<ActionResult> Index(Guid notificationId, Guid[] movementIds)
+        public async Task<ActionResult> Index(Guid notificationId, Guid movementId)
         {
             ReceiptRecoveryViewModel model = new ReceiptRecoveryViewModel();
-            model.SelectedmovementIds = movementIds;
+            model.SelectedmovementId = movementId;
             model.NotificationId = notificationId;
             model.NotificationType = await mediator.SendAsync(new GetNotificationType(notificationId));
             model.Unit = await mediator.SendAsync(new GetShipmentUnits(notificationId));
@@ -63,7 +64,7 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Index(Guid notificationId, Guid[] movementIds, ReceiptRecoveryViewModel model)
+        public async Task<ActionResult> Index(Guid notificationId, Guid movementId, ReceiptRecoveryViewModel model)
         {
             if (!ModelState.IsValid)
             {
@@ -73,14 +74,14 @@
             TempData[CertificateKey] = model.Certificate;
             TempData[NotificationTypeKey] = model.NotificationType;
 
-            MovementBasicDetails[] movementDetails = await mediator.SendAsync(new GetMovementDetailsByIds(notificationId, movementIds));
+            MovementBasicDetails movementDetails = await mediator.SendAsync(new GetMovementDetailsByIds(notificationId, movementId));
             ValidateShipment(model.GetDateReceived(), movementDetails);
 
             if (!ModelState.IsValid)
             {
                 return View(model);
             }
-            var tolerance = await mediator.SendAsync(new DoesQuantityReceivedExceedTolerance(movementIds.FirstOrDefault(), Convert.ToDecimal(model.Quantity), model.Unit));
+            var tolerance = await mediator.SendAsync(new DoesQuantityReceivedExceedTolerance(movementId, Convert.ToDecimal(model.Quantity), model.Unit));
 
             TempData[DateReceivedKey] = model.GetDateReceived();
             TempData[UnitKey] = model.Unit;
@@ -90,17 +91,17 @@
                 || tolerance == QuantityReceivedTolerance.BelowTolerance)
             {
                 TempData[ToleranceKey] = tolerance;
-                return RedirectToAction("QuantityAbnormal", movementIds.ToRouteValueDictionary("movementIds"));
+                return RedirectToAction("QuantityAbnormal", new { movementId = movementId });
             }
             
-            return RedirectToAction("UploadCertificate", movementIds.ToRouteValueDictionary("movementIds"));
+            return RedirectToAction("UploadCertificate", new { movementId = movementId });
         }
 
         [HttpGet]
-        public async Task<ActionResult> Receipt(Guid notificationId, Guid[] movementIds)
+        public async Task<ActionResult> Receipt(Guid notificationId, Guid movementId)
         {
             ReceiptViewModel model = new ReceiptViewModel();
-            model.SelectedmovementIds = movementIds;
+            model.SelectedmovementId = movementId;
             model.NotificationId = notificationId;
             model.NotificationType = await mediator.SendAsync(new GetNotificationType(notificationId));
             model.Unit = await mediator.SendAsync(new GetShipmentUnits(notificationId));
@@ -119,14 +120,14 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Receipt(Guid notificationId, Guid[] movementIds, ReceiptViewModel model)
+        public async Task<ActionResult> Receipt(Guid notificationId, Guid movementId, ReceiptViewModel model)
         {
             if (!ModelState.IsValid)
             {
                 return View(model);
             }
 
-            MovementBasicDetails[] movementDetails = await mediator.SendAsync(new GetMovementDetailsByIds(notificationId, movementIds));
+            MovementBasicDetails movementDetails = await mediator.SendAsync(new GetMovementDetailsByIds(notificationId, movementId));
             
             ValidateShipment(model.GetDateReceived(), movementDetails);
             if (!ModelState.IsValid)
@@ -135,7 +136,7 @@
             }
             TempData[CertificateKey] = model.Certificate;
             TempData[NotificationTypeKey] = model.NotificationType;
-            var tolerance = await mediator.SendAsync(new DoesQuantityReceivedExceedTolerance(movementIds.FirstOrDefault(), Convert.ToDecimal(model.Quantity), model.Unit));
+            var tolerance = await mediator.SendAsync(new DoesQuantityReceivedExceedTolerance(movementId, Convert.ToDecimal(model.Quantity), model.Unit));
 
             TempData[DateReceivedKey] = model.GetDateReceived();
             TempData[UnitKey] = model.Unit;
@@ -144,15 +145,15 @@
                   || tolerance == QuantityReceivedTolerance.BelowTolerance)
             {
                 TempData[ToleranceKey] = tolerance;
-                return RedirectToAction("QuantityAbnormal", movementIds.ToRouteValueDictionary("movementIds"));
+                return RedirectToAction("QuantityAbnormal", new { movementId = movementId});
             }
-            return RedirectToAction("UploadCertificate", movementIds.ToRouteValueDictionary("movementIds"));
+            return RedirectToAction("UploadCertificate", new { movementId = movementId});
         }
         [HttpGet]
-        public async Task<ActionResult> Recovery(Guid notificationId, Guid[] movementIds)
+        public async Task<ActionResult> Recovery(Guid notificationId, Guid movementId)
         {
             RecoveryViewModel model = new RecoveryViewModel();
-            model.SelectedmovementIds = movementIds;
+            model.SelectedmovementId = movementId;
             model.NotificationId = notificationId;
             model.NotificationType = await mediator.SendAsync(new GetNotificationType(notificationId));
             if (TempData[CertificateKey] != null)
@@ -168,7 +169,7 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Recovery(Guid notificationId, Guid[] movementIds, RecoveryViewModel model)
+        public async Task<ActionResult> Recovery(Guid notificationId, Guid movementId, RecoveryViewModel model)
         {
             if (!ModelState.IsValid)
             {
@@ -178,18 +179,18 @@
             TempData[NotificationTypeKey] = model.NotificationType;
             TempData[DateRecoveredKey] = model.GetDateRecovered();
 
-            MovementBasicDetails[] movementDetails = await mediator.SendAsync(new GetMovementDetailsByIds(notificationId, movementIds));
+            MovementBasicDetails movementDetails = await mediator.SendAsync(new GetMovementDetailsByIds(notificationId, movementId));
             
             ValidateRecoveryShipment(model.GetDateRecovered(), movementDetails);
             if (!ModelState.IsValid)
             {
                 return View(model);
             }
-            return RedirectToAction("UploadCertificate", movementIds.ToRouteValueDictionary("movementIds"));
+            return RedirectToAction("UploadCertificate", new { movementId = movementId });
         }
 
         [HttpGet]
-        public ActionResult QuantityAbnormal(Guid notificationId, Guid[] movementIds)
+        public ActionResult QuantityAbnormal(Guid notificationId, Guid movementId)
         {
             object date;
             object quantity;
@@ -218,7 +219,7 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult QuantityAbnormal(Guid notificationId, Guid[] movementIds, QuantityAbnormalViewModel model)
+        public ActionResult QuantityAbnormal(Guid notificationId, Guid movementId, QuantityAbnormalViewModel model)
         {
             if (!ModelState.IsValid)
             {
@@ -232,11 +233,11 @@
             TempData[CertificateKey] = model.Certificate;
             TempData[NotificationTypeKey] = model.NotificationType;
 
-            return RedirectToAction("UploadCertificate", movementIds.ToRouteValueDictionary("movementIds"));
+            return RedirectToAction("UploadCertificate", new { movementId = movementId });
         }
 
         [HttpGet]
-        public ActionResult UploadCertificate(Guid notificationId, Guid[] movementIds)
+        public ActionResult UploadCertificate(Guid notificationId, Guid movementId)
         {
             //Check all the values are available
             object dateReceivedResult;
@@ -248,7 +249,7 @@
             model.Certificate = (CertificateType)TempData[CertificateKey];
             model.NotificationType = (NotificationType)TempData[NotificationTypeKey];
             model.NotificationId = notificationId;
-            model.MovementIds = movementIds;
+            model.MovementId = movementId;
 
             if (model.Certificate == CertificateType.Receipt || model.Certificate == CertificateType.ReceiptRecovery)
             {
@@ -270,13 +271,13 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> UploadCertificate(Guid notificationId, Guid[] movementIds, UploadCertificateViewModel model)
+        public async Task<ActionResult> UploadCertificate(Guid notificationId, Guid movementId, UploadCertificateViewModel model)
         {
             if (!ModelState.IsValid)
             {
                 return View(model);
             }
-            model.MovementIds = movementIds;
+            model.MovementId = movementId;
             if (model.Certificate == CertificateType.Receipt)
             {
                 await SaveReceiptData(notificationId, model);
@@ -287,8 +288,7 @@
             }
             else if (model.Certificate == CertificateType.ReceiptRecovery)
             {
-                await SaveReceiptData(notificationId, model);
-                await SaveCompleteData(notificationId, model);
+                await SaveReceiptRecoveryData(notificationId, model);
             }
             TempData[CertificateKey] = model.Certificate;
             TempData[NotificationTypeKey] = model.NotificationType;
@@ -300,13 +300,11 @@
         {
             var fileExtension = Path.GetExtension(model.File.FileName);
             var uploadedFile = await fileReader.GetFileBytes(model.File);
-            for (int i = 0; i < model.MovementIds.Count(); i++)
-            {
-                var id = model.MovementIds.ElementAt(i);
-                var fileId = await mediator.SendAsync(new SaveCertificateOfReceiptFile(id, uploadedFile, fileExtension));
 
-                await mediator.SendAsync(new SetMovementAccepted(id, fileId, model.DateReceived, model.Quantity.GetValueOrDefault(), model.Unit.GetValueOrDefault()));
-            }
+            var id = model.MovementId;
+           var fileId = await mediator.SendAsync(new SaveCertificateOfReceiptFile(id, uploadedFile, fileExtension));
+
+            await mediator.SendAsync(new SetMovementAccepted(id, fileId, model.DateReceived, model.Quantity.GetValueOrDefault(), model.Unit.GetValueOrDefault()));           
         }
 
         private async Task SaveCompleteData(Guid notificationId, UploadCertificateViewModel model)
@@ -314,12 +312,21 @@
             var fileExtension = Path.GetExtension(model.File.FileName);
             var uploadedFile = await fileReader.GetFileBytes(model.File);
 
-            for (int i = 0; i < model.MovementIds.Count(); i++)
-            {
-                var id = model.MovementIds.ElementAt(i);
+            var id = model.MovementId;
 
-                await mediator.SendAsync(new SaveMovementCompletedReceipt(id, model.DateRecovered, uploadedFile, fileExtension));
-            }
+            await mediator.SendAsync(new SaveMovementCompletedReceipt(id, model.DateRecovered, uploadedFile, fileExtension));           
+        }
+
+        private async Task SaveReceiptRecoveryData(Guid notificationId, UploadCertificateViewModel model)
+        {
+            var fileExtension = Path.GetExtension(model.File.FileName);
+            var uploadedFile = await fileReader.GetFileBytes(model.File);
+
+            var id = model.MovementId;
+            var fileId = await mediator.SendAsync(new SaveCertificateOfReceiptFile(id, uploadedFile, fileExtension));
+
+            await mediator.SendAsync(new SetMovementAccepted(id, fileId, model.DateReceived, model.Quantity.GetValueOrDefault(), model.Unit.GetValueOrDefault()));
+            await mediator.SendAsync(new SaveMovementCompletedReceipt(id, model.DateRecovered, uploadedFile, fileExtension));
         }
 
         [HttpGet]
@@ -343,25 +350,19 @@
             return View();
         }
 
-        private void ValidateShipment(DateTime dateReceived, MovementBasicDetails[] movementDetails)
-        {
-            for (int i = 0; i < movementDetails.Count(); i++)
+        private void ValidateShipment(DateTime dateReceived, MovementBasicDetails movementDetails)
+        {           
+            if (dateReceived < movementDetails.ActualDate)
             {
-                if (dateReceived < movementDetails[i].ActualDate)
-                {
-                    ModelState.AddModelError("Day", "This date cannot be before the actual date of shipment. Please enter a different date for shipment(s) - " + movementDetails[i].Number);
-                }
-            }
+                ModelState.AddModelError("Day", "This date cannot be before the actual date of shipment. Please enter a different date for shipment - " + movementDetails.Number);
+            }            
         }
 
-        private void ValidateRecoveryShipment(DateTime dateComplete, MovementBasicDetails[] movementDetails)
-        {
-            for (int i = 0; i < movementDetails.Count(); i++)
+        private void ValidateRecoveryShipment(DateTime dateComplete, MovementBasicDetails movementDetails)
+        {        
+            if (dateComplete < movementDetails.ReceiptDate)
             {
-                if (dateComplete < movementDetails[i].ReceiptDate)
-                {
-                    ModelState.AddModelError("Day", "This date cannot be before the date of receipt. Please enter a different date for shipment(s) - " + movementDetails[i].Number);
-                }
+                ModelState.AddModelError("Day", "This date cannot be before the date of receipt. Please enter a different date for shipment - " + movementDetails.Number);
             }
         }
     }

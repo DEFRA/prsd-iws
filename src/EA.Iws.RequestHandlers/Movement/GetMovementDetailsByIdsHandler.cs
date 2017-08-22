@@ -8,7 +8,7 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
-    internal class GetMovementDetailsByIdsHandler : IRequestHandler<GetMovementDetailsByIds, MovementBasicDetails[]>
+    internal class GetMovementDetailsByIdsHandler : IRequestHandler<GetMovementDetailsByIds, MovementBasicDetails>
     {
         private readonly IMovementDetailsRepository movementDetailsRepository;
         private readonly IMovementRepository movementRepository;
@@ -20,24 +20,20 @@
             this.movementDetailsRepository = movementDetailsRepository;
         }
 
-        public async Task<MovementBasicDetails[]> HandleAsync(GetMovementDetailsByIds message)
+        public async Task<MovementBasicDetails> HandleAsync(GetMovementDetailsByIds message)
         {
-            var result = new List<MovementBasicDetails>();
+            var result = new MovementBasicDetails();
 
-            var movements = await movementRepository.GetMovementsByIds(message.NotificationId, message.MovementIds);
-
-            foreach (var movement in movements)
+            var movement = await movementRepository.GetById(message.MovementIds);
+          
+            result = new MovementBasicDetails
             {
-                result.Add(new MovementBasicDetails
-                {
-                    Id = movement.Id,
-                    Number = movement.Number,
-                    ActualDate = movement.Date,
-                    ReceiptDate = movement.Receipt != null ? movement.Receipt.Date : (DateTime?)null
-                });
-            }
-
-            return result.ToArray();
+                Id = movement.Id,
+                Number = movement.Number,
+                ActualDate = movement.Date,
+                ReceiptDate = movement.Receipt != null ? movement.Receipt.Date : (DateTime?)null
+            };
+            return result;
         }
     }
 }

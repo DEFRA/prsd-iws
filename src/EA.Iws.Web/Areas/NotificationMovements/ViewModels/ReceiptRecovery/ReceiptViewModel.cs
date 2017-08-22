@@ -14,7 +14,7 @@
     {
         public Guid NotificationId { get; set; }
 
-        public IEnumerable<Guid> SelectedmovementIds { get; set; }
+        public Guid SelectedmovementId { get; set; }
 
         public CertificateType Certificate { get; set; }
 

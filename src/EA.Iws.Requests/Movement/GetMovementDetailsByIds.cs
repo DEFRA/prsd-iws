@@ -8,9 +8,9 @@
     using Prsd.Core.Mediator;
 
     [RequestAuthorization(ExportMovementPermissions.CanReadExportMovements)]
-    public class GetMovementDetailsByIds : IRequest<MovementBasicDetails[]>
+    public class GetMovementDetailsByIds : IRequest<MovementBasicDetails>
     {
-        public GetMovementDetailsByIds(Guid notificationId, IEnumerable<Guid> movementIds)
+        public GetMovementDetailsByIds(Guid notificationId, Guid movementIds)
         {
             NotificationId = notificationId;
             MovementIds = movementIds;
@@ -18,6 +18,6 @@
 
         public Guid NotificationId { get; private set; }
 
-        public IEnumerable<Guid> MovementIds { get; private set; }
+        public Guid MovementIds { get; private set; }
     }
 }
