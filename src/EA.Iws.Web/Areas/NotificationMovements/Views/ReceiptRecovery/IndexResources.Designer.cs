@@ -88,6 +88,15 @@ namespace EA.Iws.Web.Areas.NotificationMovements.Views.ReceiptRecovery {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to How much waste and when was it received?.
+        /// </summary>
+        public static string ReceiptTitle {
+            get {
+                return ResourceManager.GetString("ReceiptTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Received date.
         /// </summary>
         public static string ReceivedDate {
@@ -133,7 +142,7 @@ namespace EA.Iws.Web.Areas.NotificationMovements.Views.ReceiptRecovery {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to How much waste was received {0}?.
+        ///   Looks up a localized string similar to How much waste was received and when was it {0}?.
         /// </summary>
         public static string Title {
             get {

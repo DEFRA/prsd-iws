@@ -126,6 +126,9 @@
   <data name="QuantityLabel" xml:space="preserve">
     <value>Quantity received in {0}</value>
   </data>
+  <data name="ReceiptTitle" xml:space="preserve">
+    <value>How much waste and when was it received?</value>
+  </data>
   <data name="ReceivedDate" xml:space="preserve">
     <value>Received date</value>
   </data>
@@ -142,7 +145,7 @@
     <value>You've successfully recorded the {0} of this shipment</value>
   </data>
   <data name="Title" xml:space="preserve">
-    <value>How much waste was received {0}?</value>
+    <value>How much waste was received and when was it {0}?</value>
   </data>
   <data name="UploadCombinedTitle" xml:space="preserve">
     <value>Your certificates of receipt and {0} are now complete</value>
