@@ -7,9 +7,6 @@
     ViewBag.Title = "Received shipment";
 }
 
-@{
-    var operationTitleVerb = Model.Certificate == CertificateType.ReceiptRecovery ? (Model.NotificationType == NotificationType.Recovery ? "and recovered" : "and disposed") : " ";
-}
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
@@ -18,7 +15,7 @@
     @Html.HiddenFor(m => m.Certificate)
     @Html.HiddenFor(m => m.Unit)
 
-<h1 class="heading-large">@Html.Raw(string.Format(Resource.Title, operationTitleVerb))</h1>
+<h1 class="heading-large">@Html.Raw(Resource.ReceiptTitle)</h1>
 
 <h2 class="heading-small">@Html.Raw(string.Format(Resource.QuantityLabel, EnumHelper.GetDisplayName(Model.Unit)))</h2>
 <div class="form-group @Html.Gds().FormGroupClass(m => m.Quantity)">

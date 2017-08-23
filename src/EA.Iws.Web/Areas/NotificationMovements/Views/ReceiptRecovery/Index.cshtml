@@ -9,7 +9,7 @@
 
 @{
     var operationLabelVerb = Model.NotificationType == NotificationType.Recovery ? "recovery" : "disposal";
-    var operationTitleVerb = Model.Certificate == CertificateType.ReceiptRecovery ? (Model.NotificationType == NotificationType.Recovery ? "and recovered" : "and disposed") : " ";
+    var operationTitleVerb = Model.Certificate == CertificateType.ReceiptRecovery ? (Model.NotificationType == NotificationType.Recovery ? "recovered" : "disposed") : " ";
     var recoveryLabelVerb = Model.NotificationType == NotificationType.Recovery ? "recovered" : "disposed of";
     var labelText = Model.NotificationType == NotificationType.Recovery ? "Recovered" : "Disposed of";
 }
