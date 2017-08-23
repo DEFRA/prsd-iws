@@ -31,7 +31,8 @@
                             [Acknowledged],
                             [DecisionDate],
                             [Consented],
-                            [Officer]
+                            [Officer],
+                            [SubmittedBy]
 
                     FROM	[Reports].[DataExportNotifications]
 
