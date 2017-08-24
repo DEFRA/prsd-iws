@@ -26,7 +26,7 @@
         {
             var movements = await movementRepository.GetMovementsByStatus(message.NotificationId, MovementStatus.Submitted);
 
-            return movements.Select(m => mapper.Map<SubmittedMovement>(m)).ToList();
+            return movements.Select(m => mapper.Map<SubmittedMovement>(m)).OrderBy(m => m.Number).ToList();
         }
     }
 }
