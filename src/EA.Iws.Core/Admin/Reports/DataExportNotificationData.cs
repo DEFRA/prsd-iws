@@ -42,5 +42,7 @@
         public int? TransmittedElapsedWorkingDays { get; set; }
 
         public string Officer { get; set; }
+
+        public string SubmittedBy { get; set; }
     }
 }

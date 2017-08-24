@@ -31,5 +31,7 @@
         public string Officer { get; set; }
 
         public bool? Preconsented { get; protected set; }
+
+        public string SubmittedBy { get; protected set; }
     }
 }

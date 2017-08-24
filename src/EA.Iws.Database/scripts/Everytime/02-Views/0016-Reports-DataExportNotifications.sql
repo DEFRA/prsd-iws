@@ -19,7 +19,8 @@ AS
         C.[From] AS [Consented],
         D.[NameOfOfficer] AS [Officer],
         -- Decision date will be the date it was withdrawn, objected or consented and it will only be one of these.
-        CAST(COALESCE(D.WithdrawnDate, COALESCE(D.[ObjectedDate], D.[ConsentedDate])) AS DATE) AS [DecisionDate]        
+        CAST(COALESCE(D.WithdrawnDate, COALESCE(D.[ObjectedDate], D.[ConsentedDate])) AS DATE) AS [DecisionDate],
+        [SubmittedBy].[SubmittedBy]
 
     FROM [Notification].[Notification] AS [N]
 
@@ -34,6 +35,13 @@ AS
 
     LEFT JOIN	[Notification].[Consent] AS C
     ON			[N].[Id] = [C].[NotificationApplicationId]
+
+    OUTER APPLY (SELECT TOP 1 CASE WHEN [IU].[Id] IS NULL THEN 'External User' ELSE 'Internal User' END AS [SubmittedBy]
+                 FROM [Notification].[NotificationStatusChange] [NSC]
+                 LEFT JOIN [Person].[InternalUser] IU ON [NSC].[UserId] = [IU].[UserId]
+                 WHERE [NSC].[NotificationAssessmentId] = [NA].[Id] 
+                 AND [NSC].[Status] = 2 -- Submitted
+                 ORDER BY [ChangeDate] ASC) [SubmittedBy]
 
     WHERE		[NA].[Status] <> 1
 GO
