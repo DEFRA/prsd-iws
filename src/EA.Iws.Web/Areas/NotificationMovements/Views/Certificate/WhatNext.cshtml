@@ -1,0 +1,63 @@
+﻿@using Resources = EA.Iws.Web.Areas.NotificationMovements.Views.Certificate.WhatNextResources
+@using EA.Iws.Core.Notification
+@using EnumHelper = EA.Prsd.Core.Helpers.EnumHelper
+@model EA.Iws.Requests.Notification.WhatToDoNextData
+
+@{
+    Layout = "~/Areas/NotificationMovements/Views/Shared/_CreateSummaryLayout.cshtml";
+    ViewBag.Title = "Whats next?";
+}
+
+@{
+    var value = Resources.ResourceManager.GetString(EnumHelper.GetShortName(Model.CompetentAuthority) + "ToDo");
+
+    string email = null;
+    if (Model.CompetentAuthority == UKCompetentAuthority.England)
+    {
+        email = "ask.shipments@environment-agency.gov.uk";
+    }
+    else if(Model.CompetentAuthority == UKCompetentAuthority.Scotland)
+    {
+        email = "Transfrontier@sepa.org.uk";
+    }
+    else if (Model.CompetentAuthority == UKCompetentAuthority.NorthernIreland)
+    {
+        email = "TFS@doeni.gov.uk";
+    }
+    else if(Model.CompetentAuthority == UKCompetentAuthority.Wales)
+    {
+        email = "waste-shipments@naturalresourceswales.gov.uk or taliadau.cymru@cyfoethnaturiolcymru.gov.uk and cludiant-gwastraff@cyfoethnaturiolcymru.gov.uk";
+    }
+}
+<div>
+    <header class="hgroup">
+        <h1 class="heading-large">What's next?</h1>
+    </header>
+   
+   
+    @if (Model.CompetentAuthority == UKCompetentAuthority.Wales)
+    {
+        <p>
+            @Html.Raw(string.Format(Resources.NextInstructionWales, EnumHelper.GetDescription(Model.CompetentAuthority)))
+        </p>
+            <p>
+            @string.Concat(Resources.GeneralToDo, value)
+            @Html.MailtoLink("waste-shipments@naturalresourceswales.gov.uk") or @Html.MailtoLink("taliadau.cymru@cyfoethnaturiolcymru.gov.uk") and @Html.MailtoLink("cludiant-gwastraff@cyfoethnaturiolcymru.gov.uk")
+            </p>
+        }
+        else
+        {
+            <p>
+                @Html.Raw(string.Format(Resources.NextInstruction, EnumHelper.GetDescription(Model.CompetentAuthority)))
+            </p>
+            <p>
+                @string.Concat(Resources.GeneralToDo, value) @Html.MailtoLink(email)
+            </p>
+        }
+
+    @Html.ActionLink("Go to notification options",
+        "Index",
+        "Options",
+        new { area = "NotificationApplication", id = Model.Id },
+        new { @class = "button" })
+</div>

@@ -4,6 +4,7 @@
     using Infrastructure;
     using Infrastructure.Authorization;
     using Prsd.Core.Mediator;
+    using Requests.Movement;
     using Requests.Movement.Receive;
     using Requests.Notification;
     using Requests.NotificationMovements;
@@ -63,25 +64,45 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Shipments(Guid notificationId, ShipmentViewModel model)
+        public async Task<ActionResult> Shipments(Guid notificationId, ShipmentViewModel model)
         {
             if (!ModelState.IsValid)
             {
                 return View(model);
             }
-            TempData[CertificateKey] = model.Certificate;
+            //Check if shipment was created by internal user
+            Guid movementId;
+            if (model.Certificate == CertificateType.Recovery)
+            {
+                movementId = movementId = model.RecoveryShipments.SelectedValue;
+            }
+            else
+            {
+                movementId = movementId = model.ReceiveShipments.SelectedValue;
+            }
+            var shipmentExists = await mediator.SendAsync(new DoesMovementDetailsExist(movementId));
 
-            if (model.Certificate == CertificateType.ReceiptRecovery)
+            if (shipmentExists)
             {
-                return RedirectToAction("Index", "ReceiptRecovery", new { movementId = model.ReceiveShipments.SelectedValue});
+                TempData[CertificateKey] = model.Certificate;
+
+                if (model.Certificate == CertificateType.ReceiptRecovery)
+                {
+                    return RedirectToAction("Index", "ReceiptRecovery", new { movementId = model.ReceiveShipments.SelectedValue});
+                }
+                else if (model.Certificate == CertificateType.Receipt)
+                {
+                    return RedirectToAction("Receipt", "ReceiptRecovery", new { movementId = model.ReceiveShipments.SelectedValue});
+                }
+                else if (model.Certificate == CertificateType.Recovery)
+                {
+                    return RedirectToAction("Recovery", "ReceiptRecovery", new { movementId = model.RecoveryShipments.SelectedValue});
+                }
             }
-            else if (model.Certificate == CertificateType.Receipt)
+            else
             {
-                return RedirectToAction("Receipt", "ReceiptRecovery", new { movementId = model.ReceiveShipments.SelectedValue});
-            }
-            else if (model.Certificate == CertificateType.Recovery)
-            {
-                return RedirectToAction("Recovery", "ReceiptRecovery", new { movementId = model.RecoveryShipments.SelectedValue});
+                var notification = await mediator.SendAsync(new GetWhatToDoNextDataForNotification(notificationId));
+                return View("WhatNext", notification);
             }
             return View(model);
         }
