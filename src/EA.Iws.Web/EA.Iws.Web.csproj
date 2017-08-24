@@ -993,6 +993,7 @@
     <Content Include="Views\ChangeNotificationOwner\Index.cshtml" />
     <Content Include="Views\ChangeNotificationOwner\Confirm.cshtml" />
     <Content Include="Views\ChangeNotificationOwner\Success.cshtml" />
+    <Content Include="Areas\NotificationMovements\Views\Certificate\WhatNext.cshtml" />
     <None Include="Scripts\jquery-2.1.3.intellisense.js" />
     <Content Include="Scripts\govuk\govuk-template.js" />
     <Content Include="Scripts\govuk\ie.js" />
@@ -2191,6 +2192,11 @@
     </Compile>
     <Compile Include="Areas\NotificationApplication\ViewModels\Annex\SuccessViewModel.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\Carrier\AddFromAddressBookViewModel.cs" />
+    <Compile Include="Areas\NotificationMovements\Views\Certificate\WhatNextResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>WhatNextResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="ViewModels\ChangeNotificationOwner\ChangeOwnerViewModel.cs" />
     <Compile Include="ViewModels\ChangeNotificationOwner\ConfirmViewModel.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\Home\ResubmissionSuccessViewModel.cs" />
@@ -4490,6 +4496,10 @@
     <EmbeddedResource Include="Areas\NotificationMovements\Views\Certificate\CertificateShipmentResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>CertificateShipmentResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\NotificationMovements\Views\Certificate\WhatNextResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>WhatNextResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\NotificationMovements\Views\Create\ConsentExpiresInFourWorkingDaysResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

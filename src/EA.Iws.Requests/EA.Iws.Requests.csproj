@@ -197,6 +197,7 @@
     <Compile Include="ImportNotification\CreateImportNotification.cs" />
     <Compile Include="Movement\CancelMovements.cs" />
     <Compile Include="Movement\DeleteMovement.cs" />
+    <Compile Include="Movement\DoesMovementDetailsExist.cs" />
     <Compile Include="Movement\Edit\GetMovementDateHistory.cs" />
     <Compile Include="Movement\Edit\IsProposedUpdatedMovementDateValid.cs" />
     <Compile Include="Movement\Edit\UpdateMovementDate.cs" />

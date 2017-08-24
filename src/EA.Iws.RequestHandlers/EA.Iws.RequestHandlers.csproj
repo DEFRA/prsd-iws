@@ -401,6 +401,7 @@
     <Compile Include="Movement\Complete\GetOperationCompleteDataHandler.cs" />
     <Compile Include="Movement\Complete\RecordOperationCompleteInternalHandler.cs" />
     <Compile Include="Movement\DeleteMovementHandler.cs" />
+    <Compile Include="Movement\DoesMovementDetailsExistHandler.cs" />
     <Compile Include="Movement\Edit\GetMovementDateHistoryHandler.cs" />
     <Compile Include="Movement\Edit\IsProposedUpdatedMovementDateValidHandler.cs" />
     <Compile Include="Movement\Edit\UpdateMovementDateHandler.cs" />
