@@ -138,6 +138,9 @@
   <data name="EmailFormatValidation" xml:space="preserve">
     <value>Please enter a valid email address</value>
   </data>
+  <data name="EmailNotCompetentAuthority" xml:space="preserve">
+    <value>Competent authority users cannot register for external user accounts. Please check with your competent authority for the registration process.</value>
+  </data>
   <data name="EmailRequired" xml:space="preserve">
     <value>Please enter your email address</value>
   </data>

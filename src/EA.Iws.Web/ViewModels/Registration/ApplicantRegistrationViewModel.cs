@@ -1,11 +1,16 @@
 ﻿namespace EA.Iws.Web.ViewModels.Registration
 {
+    using System;
+    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using System.Linq;
+    using System.Web.Mvc;
     using Core.Shared;
     using Prsd.Core.Validation;
+    using Services;
     using Views.Registration;
 
-    public class ApplicantRegistrationViewModel
+    public class ApplicantRegistrationViewModel : IValidatableObject
     {
         public ApplicantRegistrationViewModel()
         {
@@ -49,12 +54,26 @@
         [Required(ErrorMessageResourceType = typeof(ApplicantRegistrationResources), ErrorMessageResourceName = "ConfirmPasswordRequired")]
         [DataType(DataType.Password)]
         [Display(Name = "ConfirmPassword", ResourceType = typeof(ApplicantRegistrationResources))]
-        [Compare("Password", ErrorMessageResourceName = "PasswordsDoNotMatch", ErrorMessageResourceType = typeof(ApplicantRegistrationResources))]
+        [System.ComponentModel.DataAnnotations.Compare("Password", ErrorMessageResourceName = "PasswordsDoNotMatch", ErrorMessageResourceType = typeof(ApplicantRegistrationResources))]
         public string ConfirmPassword { get; set; }
 
         [MustBeTrue(ErrorMessageResourceName = "ConfirmTnCs", ErrorMessageResourceType = typeof(ApplicantRegistrationResources))]
         public bool TermsAndConditions { get; set; }
 
         public AddressData Address { get; set; }
+
+        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+        {
+            var config = DependencyResolver.Current.GetService<AppConfiguration>();
+
+            if (config.Environment.Equals("LIVE", StringComparison.InvariantCultureIgnoreCase))
+            {
+                var competentAuthorityEmailDomains = CompetentAuthorityMetadata.GetValidEmailAddressDomains();
+                if (competentAuthorityEmailDomains.Any(domain => Email.ToString().EndsWith(domain)))
+                {
+                    yield return new ValidationResult(ApplicantRegistrationResources.EmailNotCompetentAuthority, new[] { "Email" });
+                }
+            }
+        }
     }
 }
