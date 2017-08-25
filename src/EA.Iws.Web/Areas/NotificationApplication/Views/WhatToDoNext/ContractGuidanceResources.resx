@@ -120,17 +120,11 @@
   <data name="BodyPara1" xml:space="preserve">
     <value>You need to have a contract in place with the consignee. Include a copy of this contract when you send us your notification package.</value>
   </data>
-  <data name="LinkText" xml:space="preserve">
-    <value>See Article 5 of the Waste Shipments Regulation</value>
+  <data name="BodyPara2" xml:space="preserve">
+    <value>See Article 5 of the Waste Shipments Regulation for more information about this contract.</value>
   </data>
   <data name="NotificationOptionLinkText" xml:space="preserve">
     <value>Go to notification options</value>
-  </data>
-  <data name="PostLinkText" xml:space="preserve">
-    <value> for more information about this contract.</value>
-  </data>
-  <data name="SupportingInfoMessage" xml:space="preserve">
-    <value>This link opens in a new browser tab</value>
   </data>
   <data name="TabTitle" xml:space="preserve">
     <value>Download notification</value>

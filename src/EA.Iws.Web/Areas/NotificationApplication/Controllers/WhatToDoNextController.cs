@@ -38,7 +38,7 @@
         }
 
         [HttpGet]
-        public async Task<ActionResult> SepaContractGuidance(Guid id)
+        public async Task<ActionResult> ContractGuidance(Guid id)
         {
             var response = await mediator.SendAsync(new GetWhatToDoNextDataForNotification(id));
 

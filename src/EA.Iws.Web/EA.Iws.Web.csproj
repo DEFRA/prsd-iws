@@ -424,7 +424,7 @@
     <Content Include="Areas\AdminImportAssessment\Views\AccountManagement\_PaymentDetails.cshtml" />
     <Content Include="Areas\AdminImportAssessment\Views\AccountManagement\_RefundDetails.cshtml" />
     <Content Include="Areas\AdminImportAssessment\Views\KeyDatesOverride\Index.cshtml" />
-    <Content Include="Areas\NotificationApplication\Views\WhatToDoNext\SepaContractGuidance.cshtml" />
+    <Content Include="Areas\NotificationApplication\Views\WhatToDoNext\ContractGuidance.cshtml" />
     <Content Include="Areas\AdminExportNotificationMovements\Views\Delete\Index.cshtml" />
     <Content Include="Areas\AdminExportNotificationMovements\Views\Delete\Delete.cshtml" />
     <Content Include="Areas\AdminExportNotificationMovements\Views\Delete\Confirm.cshtml" />
@@ -2293,10 +2293,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>PrintResources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Areas\NotificationApplication\Views\WhatToDoNext\SepaContractGuidanceResources.Designer.cs">
+    <Compile Include="Areas\NotificationApplication\Views\WhatToDoNext\ContractGuidanceResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>SepaContractGuidanceResources.resx</DependentUpon>
+      <DependentUpon>ContractGuidanceResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Areas\NotificationMovements\Controllers\DocumentsController.cs" />
     <Compile Include="Areas\NotificationMovements\Controllers\DownloadController.cs" />
@@ -4425,9 +4425,9 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>PrintResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Areas\NotificationApplication\Views\WhatToDoNext\SepaContractGuidanceResources.resx">
+    <EmbeddedResource Include="Areas\NotificationApplication\Views\WhatToDoNext\ContractGuidanceResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>SepaContractGuidanceResources.Designer.cs</LastGenOutput>
+      <LastGenOutput>ContractGuidanceResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\NotificationApplication\Views\YCode\YCodeResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
