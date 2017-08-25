@@ -124,7 +124,7 @@ namespace EA.Iws.Web.Views.Registration {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Competent authority users cannot register for external user accounts. Please check with your competent authority for the registration process..
+        ///   Looks up a localized string similar to Competent authority users cannot register for external user accounts. Please check with your competent authority for the internal user registration process..
         /// </summary>
         public static string EmailNotCompetentAuthority {
             get {
