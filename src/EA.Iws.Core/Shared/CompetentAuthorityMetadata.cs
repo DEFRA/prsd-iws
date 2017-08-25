@@ -1,6 +1,7 @@
 ﻿namespace EA.Iws.Core.Shared
 {
     using System.Collections.Generic;
+    using System.Linq;
     using Notification;
 
     public class CompetentAuthorityMetadata
@@ -17,6 +18,11 @@
         public static IEnumerable<string> GetValidEmailAddressDomains(UKCompetentAuthority competentAuthority)
         {
             return ValidEmailDomains[competentAuthority];
+        }
+
+        public static IEnumerable<string> GetValidEmailAddressDomains()
+        {
+            return ValidEmailDomains.Values.SelectMany(x => x);
         }
     }
 }
