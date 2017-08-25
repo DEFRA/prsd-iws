@@ -1,5 +1,5 @@
 ﻿@model EA.Iws.Requests.Notification.WhatToDoNextData
-@using Resource = EA.Iws.Web.Areas.NotificationApplication.Views.WhatToDoNext.SepaContractGuidanceResources
+@using Resource = EA.Iws.Web.Areas.NotificationApplication.Views.WhatToDoNext.ContractGuidanceResources
 
 @{
     ViewBag.Title = @Resource.TabTitle;
@@ -17,12 +17,7 @@
                 @Resource.BodyPara1
             </p>
             <p>
-                <a href="http://eur-lex.europa.eu/legal-content/EN/ALL/?uri=CELEX:32006R1013"
-                   target="_blank"
-                   title="@Resource.TitleSupportingInfo"
-                   data-action="Supporting information">@Resource.LinkText</a>
-                <span class="visuallyhidden">@Resource.SupportingInfoMessage</span>
-                @Resource.PostLinkText
+               @Resource.BodyPara2
             </p>
         </div>
     </div>

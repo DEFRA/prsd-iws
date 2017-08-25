@@ -22,14 +22,14 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.WhatToDoNext {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class SepaContractGuidanceResources {
+    public class ContractGuidanceResources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal SepaContractGuidanceResources() {
+        internal ContractGuidanceResources() {
         }
         
         /// <summary>
@@ -39,8 +39,8 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.WhatToDoNext {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EA.Iws.Web.Areas.NotificationApplication.Views.WhatToDoNext.SepaContractGuidanceR" +
-                            "esources", typeof(SepaContractGuidanceResources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EA.Iws.Web.Areas.NotificationApplication.Views.WhatToDoNext.ContractGuidanceResou" +
+                            "rces", typeof(ContractGuidanceResources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -71,11 +71,11 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.WhatToDoNext {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to See Article 5 of the Waste Shipments Regulation.
+        ///   Looks up a localized string similar to See Article 5 of the Waste Shipments Regulation for more information about this contract..
         /// </summary>
-        public static string LinkText {
+        public static string BodyPara2 {
             get {
-                return ResourceManager.GetString("LinkText", resourceCulture);
+                return ResourceManager.GetString("BodyPara2", resourceCulture);
             }
         }
         
@@ -85,24 +85,6 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.WhatToDoNext {
         public static string NotificationOptionLinkText {
             get {
                 return ResourceManager.GetString("NotificationOptionLinkText", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to  for more information about this contract..
-        /// </summary>
-        public static string PostLinkText {
-            get {
-                return ResourceManager.GetString("PostLinkText", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to This link opens in a new browser tab.
-        /// </summary>
-        public static string SupportingInfoMessage {
-            get {
-                return ResourceManager.GetString("SupportingInfoMessage", resourceCulture);
             }
         }
         
