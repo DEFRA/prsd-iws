@@ -11,6 +11,7 @@
     using EmailMessaging;
     using Identity;
     using Microsoft.AspNet.Identity;
+    using Prsd.Core;
     using Prsd.Core.Domain;
 
     [RoutePrefix("api/Registration")]
@@ -261,6 +262,16 @@
             parameters["code"] = verificationToken;
             uriBuilder.Query = parameters.ToString();
             return uriBuilder.Uri.ToString();
+        }
+
+        [HttpPost]
+        [Route("DeactivateUser")]
+        public async Task<IHttpActionResult> DeactivateUser(string userId)
+        {
+            await userManager.SetLockoutEnabledAsync(userId, true);
+            await userManager.SetLockoutEndDateAsync(userId, SystemTime.UtcNow.AddYears(100));
+
+            return Ok(true);
         }
     }
 }

@@ -1,0 +1,21 @@
+﻿@model EA.Iws.Web.Areas.Admin.ViewModels.ExternalUserAdministration.DeactivateUserViewModel
+@using Resources = EA.Iws.Web.Areas.Admin.Views.ExternalUserAdministration.DeactivateResources
+@{
+    ViewBag.Title = Resources.DeactivateTitle;
+}
+
+<h1 class="heading-large">@Resources.DeactivateTitle</h1>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.Gds().ValidationSummary()
+
+    <div class="form-group @Html.Gds().FormGroupClass(m => m.Email)">
+        @Html.Gds().LabelFor(m => m.Email)
+        @Html.Gds().ValidationMessageFor(m => m.Email)
+        @Html.Gds().TextBoxFor(m => m.Email)
+    </div>
+
+    <button class="button" type="submit">@Constants.ContinueOnlyButtonText</button>
+}

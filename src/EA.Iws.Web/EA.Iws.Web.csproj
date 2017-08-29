@@ -994,6 +994,10 @@
     <Content Include="Views\ChangeNotificationOwner\Confirm.cshtml" />
     <Content Include="Views\ChangeNotificationOwner\Success.cshtml" />
     <Content Include="Areas\NotificationMovements\Views\Certificate\WhatNext.cshtml" />
+    <Content Include="Areas\Admin\Views\ExternalUserAdministration\Deactivate.cshtml" />
+    <Content Include="Areas\Admin\Views\ExternalUserAdministration\DeactivateSummary.cshtml" />
+    <Content Include="Areas\Admin\Views\ExternalUserAdministration\DeactivateConfirmation.cshtml" />
+    <Content Include="Areas\Admin\Views\ExternalUserAdministration\DeactivateSuccess.cshtml" />
     <None Include="Scripts\jquery-2.1.3.intellisense.js" />
     <Content Include="Scripts\govuk\govuk-template.js" />
     <Content Include="Scripts\govuk\ie.js" />
@@ -1694,6 +1698,7 @@
     </Compile>
     <Compile Include="Areas\Admin\Controllers\ExportNotificationController.cs" />
     <Compile Include="Areas\Admin\Controllers\ExportNotificationsController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ExternalUserAdministrationController.cs" />
     <Compile Include="Areas\Admin\Controllers\ImportNotificationController.cs" />
     <Compile Include="Areas\Admin\Controllers\MenuController.cs" />
     <Compile Include="Areas\Admin\Controllers\SmokeTestController.cs" />
@@ -1736,6 +1741,12 @@
     <Compile Include="Areas\Admin\ViewModels\ExportNotification\EnterNumberViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\ExportNotification\NewOrExistingNotificationViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\ExportNotification\NotificationTypeViewModel.cs" />
+    <Compile Include="Areas\Admin\ViewModels\ExternalUserAdministration\DeactivateUserViewModel.cs" />
+    <Compile Include="Areas\Admin\ViewModels\ExternalUserAdministration\DeactivateUserViewModelResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DeactivateUserViewModelResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Areas\Admin\ViewModels\Home\BasicSearchViewModelResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -1846,6 +1857,11 @@
       <DependentUpon>NotificationTypeResources.resx</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Areas\Admin\Views\ExternalUserAdministration\DeactivateResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DeactivateResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Areas\Admin\Views\Home\ImportResultsResources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -3786,6 +3802,10 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>AddEntryOrExitPointViewModelResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Areas\Admin\ViewModels\ExternalUserAdministration\DeactivateUserViewModelResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>DeactivateUserViewModelResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Areas\Admin\ViewModels\Home\BasicSearchViewModelResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>BasicSearchViewModelResources.Designer.cs</LastGenOutput>
@@ -3866,6 +3886,10 @@
     <EmbeddedResource Include="Areas\Admin\Views\ExportNotification\NotificationTypeResources.resx">
       <LastGenOutput>NotificationTypeResources.Designer.cs</LastGenOutput>
       <Generator>PublicResXFileCodeGenerator</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\Admin\Views\ExternalUserAdministration\DeactivateResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>DeactivateResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\Admin\Views\Home\ImportResultsResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

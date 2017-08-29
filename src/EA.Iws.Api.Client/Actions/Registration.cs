@@ -68,5 +68,11 @@
 
             return await response.CreateResponseAsync<bool>();
         }
+
+        public async Task<bool> DeactivateUser(string accessToken, string userId)
+        {
+            var response = await httpClient.PostAsync(Controller + "DeactivateUser?userId=" + userId, null);
+            return await response.CreateResponseAsync<bool>();
+        }
     }
 }

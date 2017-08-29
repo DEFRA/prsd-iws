@@ -1,0 +1,23 @@
+﻿@model EA.Iws.Core.Notification.UserNotificationsSummary
+@using Resources = EA.Iws.Web.Areas.Admin.Views.ExternalUserAdministration.DeactivateResources
+@{
+    ViewBag.Title = Resources.SummaryTitle;
+}
+
+<h1 class="heading-large">@Resources.SummaryTitle</h1>
+
+@if (Model.NumberOfNotifications == 1)
+{
+    <p>@Resources.CurrentlySingleNotification</p>
+    <p>@Resources.ReallocateSingle</p>
+}
+else
+{
+    <p>@string.Format(Resources.CurrentlyMultipleNotifications, Model.NumberOfNotifications)</p>
+    if (Model.NumberOfNotifications > 1)
+    {
+        <p>@Resources.ReallocateMultiple</p>
+    }
+}
+
+@Html.ActionLink(Constants.ContinueOnlyButtonText, "DeactivateConfirmation", routeValues: new { userId = ViewBag.UserId }, htmlAttributes: new { @class = "button" })

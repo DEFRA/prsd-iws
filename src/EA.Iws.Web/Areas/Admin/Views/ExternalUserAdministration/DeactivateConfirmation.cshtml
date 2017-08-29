@@ -1,0 +1,18 @@
+﻿@using Resources = EA.Iws.Web.Areas.Admin.Views.ExternalUserAdministration.DeactivateResources
+@{
+    ViewBag.Title = Resources.ConfirmationTitle;
+}
+
+<h1 class="heading-large">@Resources.ConfirmationTitle</h1>
+
+<p>@string.Format(Resources.Confirmation, ViewBag.Email)</p>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.Hidden("UserId", (Guid)ViewBag.UserId)
+    @Html.Hidden("Email", (string)ViewBag.Email)
+    <button class="button" type="submit">@Resources.DeactivateButton</button>
+}
+
+@Html.ActionLink("Home", "Index", "Home")
