@@ -10,6 +10,9 @@
         [Display(Name = "Consent valid from date")]
         ConsentFrom,
 
+        [Display(Name = "Consent valid to date")]
+        ConsentTo,
+
         [Display(Name = "Shipment received date")]
         ReceivedDate,
 

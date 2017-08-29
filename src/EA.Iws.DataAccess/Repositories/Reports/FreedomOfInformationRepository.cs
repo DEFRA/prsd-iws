@@ -75,6 +75,7 @@
                     AND (@chemicalComposition IS NULL OR [ChemicalCompositionTypeId] = @chemicalComposition)
                     AND (@dateType = 'NotificationReceivedDate' AND  [ReceivedDate] BETWEEN @from AND @to
                          OR @dateType = 'ConsentFrom' AND  [ConsentFrom] BETWEEN @from AND @to
+                         OR @dateType = 'ConsentTo' AND  [ConsentTo] BETWEEN @from AND @to
                          OR @dateType = 'ReceivedDate' AND [MovementReceivedDate] BETWEEN @from AND @to
                          OR @dateType = 'CompletedDate' AND [MovementCompletedDate] BETWEEN @from AND @to)
                 GROUP BY
