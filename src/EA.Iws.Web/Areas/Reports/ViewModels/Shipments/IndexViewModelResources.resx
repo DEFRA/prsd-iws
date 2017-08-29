@@ -138,4 +138,10 @@
   <data name="ToRequired" xml:space="preserve">
     <value>Please provide the to date</value>
   </data>
+  <data name="WasteType" xml:space="preserve">
+    <value>Waste type</value>
+  </data>
+  <data name="WasteTypeRequired" xml:space="preserve">
+    <value>Please select the waste type</value>
+  </data>
 </root>

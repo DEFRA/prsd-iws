@@ -6,6 +6,7 @@
     using System.Threading.Tasks;
     using Core.Notification;
     using Core.Reports;
+    using Core.WasteType;
     using Domain.Reports;
 
     internal class ShipmentsRepository : IShipmentsRepository
@@ -17,7 +18,8 @@
             this.context = context;
         }
 
-        public async Task<IEnumerable<Shipment>> Get(DateTime from, DateTime to, UKCompetentAuthority competentAuthority, ShipmentsReportDates dateType)
+        public async Task<IEnumerable<Shipment>> Get(DateTime from, DateTime to, UKCompetentAuthority competentAuthority, 
+            ShipmentsReportDates dateType, ChemicalComposition? chemicalComposition)
         {
             return await context.Database.SqlQuery<Shipment>(
                 @"SELECT 
@@ -36,6 +38,7 @@
                     [CompletedDate],
                     [QuantityReceived],
                     [QuantityReceivedUnitId] AS [Units],
+                    [ChemicalCompositionTypeId],
                     [ChemicalComposition],
                     [LocalArea],
                     [TotalQuantity],
@@ -56,11 +59,13 @@
                      OR @dateType = 'ConsentFrom' and  [ConsentFrom] BETWEEN @from AND @to
                      OR @dateType = 'ReceivedDate' and  [ReceivedDate] BETWEEN @from AND @to
                      OR @dateType = 'CompletedDate' and  [CompletedDate] BETWEEN @from AND @to
-                     OR @dateType = 'ActualDateOfShipment' and  [ActualDateOfShipment] BETWEEN @from AND @to)",
+                     OR @dateType = 'ActualDateOfShipment' and  [ActualDateOfShipment] BETWEEN @from AND @to)
+                AND (@chemicalComposition IS NULL OR [ChemicalCompositionTypeId] = @chemicalComposition)",
                 new SqlParameter("@from", from),
                 new SqlParameter("@to", to),
                 new SqlParameter("@ca", (int)competentAuthority),
-                new SqlParameter("@dateType", dateType.ToString())).ToArrayAsync();
+                new SqlParameter("@dateType", dateType.ToString()),
+                new SqlParameter("@chemicalComposition", (chemicalComposition.HasValue ? (object)(int)chemicalComposition.Value : DBNull.Value))).ToArrayAsync();
         }
     }
 }

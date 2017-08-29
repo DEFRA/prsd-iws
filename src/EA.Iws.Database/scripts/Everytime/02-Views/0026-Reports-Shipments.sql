@@ -24,6 +24,7 @@ AS
         MR.Quantity AS QuantityReceived,
         MR_U.Description AS [QuantityReceivedUnit],
         MR_U.Id AS [QuantityReceivedUnitId],
+        WT.[ChemicalCompositionType] AS [ChemicalCompositionTypeId],
         CASE
             WHEN WT.ChemicalCompositionType = 4 THEN CCT.Description + ' - ' + WT.ChemicalCompositionName
             WHEN WT.ChemicalCompositionDescription IS NULL THEN CCT.Description
@@ -169,6 +170,7 @@ AS
         MR.Quantity AS QuantityReceived,
         MR_U.Description AS [QuantityReceivedUnit],
         MR_U.Id AS [QuantityReceivedUnitId],
+        WT.[ChemicalCompositionType] AS [ChemicalCompositionTypeId],
         CASE
             WHEN WT.Name IS NULL THEN CCT.Description
             ELSE CCT.Description + ' - ' + WT.Name

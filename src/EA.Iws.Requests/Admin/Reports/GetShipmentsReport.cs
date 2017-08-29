@@ -5,6 +5,7 @@
     using Core.Authorization;
     using Core.Authorization.Permissions;
     using Core.Reports;
+    using Core.WasteType;
     using Prsd.Core.Mediator;
 
     [RequestAuthorization(ReportingPermissions.CanViewMissingShipmentsReport)]
@@ -16,11 +17,14 @@
 
         public ShipmentsReportDates DateType { get; private set; }
 
-        public GetShipmentsReport(DateTime from, DateTime to, ShipmentsReportDates dateType)
+        public ChemicalComposition? ChemicalComposition { get; private set; }
+
+        public GetShipmentsReport(DateTime from, DateTime to, ShipmentsReportDates dateType, ChemicalComposition? chemicalComposition)
         {
             From = from;
             To = to;
             DateType = dateType;
+            ChemicalComposition = chemicalComposition;
         }
     }
 }
