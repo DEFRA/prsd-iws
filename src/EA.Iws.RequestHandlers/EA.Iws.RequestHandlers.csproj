@@ -139,6 +139,7 @@
     <Compile Include="Admin\UserAdministration\GetNewInternalUsersHandler.cs" />
     <Compile Include="Admin\UserAdministration\GetUserByExportNotificationIdHandler.cs" />
     <Compile Include="Admin\UserAdministration\GetUserByIdHandler.cs" />
+    <Compile Include="Admin\UserAdministration\SetExternalUserStatusHandler.cs" />
     <Compile Include="Admin\UserAdministration\SetUserApprovalsHandler.cs" />
     <Compile Include="Admin\UserAdministration\UpdateInternalUserRoleHandler.cs" />
     <Compile Include="Admin\UserAdministration\UpdateInternalUserStatusHandler.cs" />

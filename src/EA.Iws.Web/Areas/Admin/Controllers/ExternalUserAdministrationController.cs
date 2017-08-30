@@ -1,12 +1,10 @@
 ﻿namespace EA.Iws.Web.Areas.Admin.Controllers
 {
     using System;
-    using System.Net;
     using System.Threading.Tasks;
     using System.Web.Mvc;
-    using Api.Client;
+    using Core.Admin;
     using Core.Authorization.Permissions;
-    using Infrastructure;
     using Infrastructure.Authorization;
     using Prsd.Core.Mediator;
     using Requests.Admin.UserAdministration;
@@ -18,12 +16,10 @@
     public class ExternalUserAdministrationController : Controller
     {
         private readonly IMediator mediator;
-        private readonly IIwsClient iwsClient;
 
-        public ExternalUserAdministrationController(IMediator mediator, IIwsClient iwsClient)
+        public ExternalUserAdministrationController(IMediator mediator)
         {
             this.mediator = mediator;
-            this.iwsClient = iwsClient;
         }
 
         [HttpGet]
@@ -76,13 +72,9 @@
         [ActionName("DeactivateConfirmation")]
         public async Task<ActionResult> DeactivateConfirmationPost(Guid userId, string email)
         {
-            var result = await iwsClient.Registration.DeactivateUser(User.GetAccessToken(), userId.ToString());
-            if (result)
-            {
-                return RedirectToAction("DeactivateSuccess", new { email });
-            }
+            await mediator.SendAsync(new SetExternalUserStatus(userId.ToString(), ExternalUserStatus.Inactive));
 
-            return new HttpStatusCodeResult(HttpStatusCode.InternalServerError);
+            return RedirectToAction("DeactivateSuccess", new { email });
         }
 
         [HttpGet]
