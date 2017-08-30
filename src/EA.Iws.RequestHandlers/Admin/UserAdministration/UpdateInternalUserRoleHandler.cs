@@ -1,5 +1,6 @@
 ﻿namespace EA.Iws.RequestHandlers.Admin.UserAdministration
 {
+    using System.Collections.Generic;
     using System.Linq;
     using System.Security.Claims;
     using System.Threading.Tasks;
@@ -30,24 +31,49 @@
             var user = await repository.GetByUserId(message.UserId);
 
             var adminClaim = new Claim(ClaimTypes.Role, UserRole.Administrator.ToString().ToLowerInvariant());
+            var internalClaim = new Claim(ClaimTypes.Role, UserRole.Internal.ToString().ToLowerInvariant());
+            var readOnlyClaim = new Claim(ClaimTypes.Role, UserRole.ReadOnly.ToString().ToLowerInvariant());
+
             var userClaims = await userManager.GetClaimsAsync(user.UserId);
 
             if (message.Role == UserRole.Administrator)
             {
-                if (!userClaims.Any(c => c.Type == adminClaim.Type && c.Value == adminClaim.Value))
-                {
-                    await userManager.AddClaimAsync(user.UserId, adminClaim);
-                }
+                await AddClaimToUser(userClaims, adminClaim, user);
+                await AddClaimToUser(userClaims, internalClaim, user);
+                await RemoveClaim(userClaims, readOnlyClaim, user);
             }
-            else
+
+            if (message.Role == UserRole.Internal)
             {
-                if (userClaims.Any(c => c.Type == adminClaim.Type && c.Value == adminClaim.Value))
-                {
-                    await userManager.RemoveClaimAsync(user.UserId, adminClaim);
-                }
+                await AddClaimToUser(userClaims, internalClaim, user);
+                await RemoveClaim(userClaims, adminClaim, user);
+                await RemoveClaim(userClaims, readOnlyClaim, user);
+            }
+
+            if (message.Role == UserRole.ReadOnly)
+            {
+                await AddClaimToUser(userClaims, readOnlyClaim, user);
+                await RemoveClaim(userClaims, internalClaim, user);
+                await RemoveClaim(userClaims, adminClaim, user);
             }
 
             return Unit.Value;
+        }
+
+        private async Task RemoveClaim(IList<Claim> userClaims, Claim claim, InternalUser user)
+        {
+            if (userClaims.Any(c => c.Type == claim.Type && c.Value == claim.Value))
+            {
+                await userManager.RemoveClaimAsync(user.UserId, claim);
+            }
+        }
+
+        private async Task AddClaimToUser(IList<Claim> userClaims, Claim claim, InternalUser user)
+        {
+            if (!userClaims.Any(c => c.Type == claim.Type && c.Value == claim.Value))
+            {
+                await userManager.AddClaimAsync(user.UserId, claim);
+            }
         }
     }
 }

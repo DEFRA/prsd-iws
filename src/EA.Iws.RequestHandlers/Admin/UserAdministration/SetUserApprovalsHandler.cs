@@ -82,6 +82,13 @@
                                     new Claim(ClaimTypes.Role, UserRole.Administrator.ToString().ToLowerInvariant()));
                         }
 
+                        // Read only role needs internal role removing
+                        if (action.AssignedRole.Value == UserRole.ReadOnly)
+                        {
+                            await userManager.RemoveClaimAsync(user.UserId,
+                                new Claim(ClaimTypes.Role, UserRole.Internal.ToString().ToLowerInvariant()));
+                        }
+
                         break;
                     case ApprovalAction.Reject:
                         user.Reject();
