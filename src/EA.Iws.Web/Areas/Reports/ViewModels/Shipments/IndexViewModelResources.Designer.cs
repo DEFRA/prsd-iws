@@ -122,5 +122,23 @@ namespace EA.Iws.Web.Areas.Reports.ViewModels.Shipments {
                 return ResourceManager.GetString("ToRequired", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Waste type.
+        /// </summary>
+        public static string WasteType {
+            get {
+                return ResourceManager.GetString("WasteType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please select the waste type.
+        /// </summary>
+        public static string WasteTypeRequired {
+            get {
+                return ResourceManager.GetString("WasteTypeRequired", resourceCulture);
+            }
+        }
     }
 }

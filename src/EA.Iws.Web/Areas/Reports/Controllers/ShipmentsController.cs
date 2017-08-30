@@ -3,6 +3,7 @@
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Core.Admin.Reports;
+    using Core.WasteType;
     using Infrastructure;
     using Infrastructure.Authorization;
     using Prsd.Core.Mediator;
@@ -36,8 +37,14 @@
 
             var from = model.From.AsDateTime().GetValueOrDefault();
             var to = model.To.AsDateTime().GetValueOrDefault();
+            var chemicalComposition = model.ChemicalComposition;
 
-            var report = await mediator.SendAsync(new GetShipmentsReport(from, to, model.DateType));
+            if (chemicalComposition == default(ChemicalComposition))
+            {
+                chemicalComposition = null;
+            }
+
+            var report = await mediator.SendAsync(new GetShipmentsReport(from, to, model.DateType, chemicalComposition));
 
             var fileName = string.Format("shipments-{0}-{1}.xlsx", from.ToShortDateString(), to.ToShortDateString());
 
