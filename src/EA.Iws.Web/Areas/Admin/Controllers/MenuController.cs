@@ -57,7 +57,8 @@
                 ShowApproveNewInternalUserLink = showApproveNewInternalUserLink,
                 ShowAddNewEntryOrExitPointLink = showAddNewEntryOrExitPointLink,
                 ShowManageExistingInternalUserLink = showManageExistingInternalUserLink,
-                ShowDeleteNotificationLink = showDeleteNotificationLink
+                ShowDeleteNotificationLink = showDeleteNotificationLink,
+                ShowNotificationLinks = !User.IsInRole("readonly")
             };
 
             if (section.HasValue)

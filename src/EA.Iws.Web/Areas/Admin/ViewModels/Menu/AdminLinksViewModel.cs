@@ -13,5 +13,7 @@
         public bool ShowDeleteNotificationLink { get; set; }
 
         public AdminHomeNavigationSection ActiveSection { get; set; }
+
+        public bool ShowNotificationLinks { get; set; }
     }
 }
