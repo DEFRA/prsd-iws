@@ -17,5 +17,7 @@
         Task<bool> ResetPasswordRequestAsync(PasswordResetRequest passwordResetRequest);
 
         Task<bool> ResetPasswordAsync(PasswordResetData passwordResetData);
+
+        Task<bool> DeactivateUser(string accessToken, string userId);
     }
 }
