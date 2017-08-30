@@ -1,4 +1,5 @@
-﻿@using EA.Iws.Core.Notification
+﻿@using EA.Iws.Core.ImportNotificationAssessment
+@using EA.Iws.Core.Notification
 @using Resource = EA.Iws.Web.Areas.AdminImportAssessment.Views.KeyDates.IndexResources
 @using EA.Iws.Core.NotificationAssessment
 @using EA.Iws.Web.Areas.AdminImportAssessment.ViewModels.KeyDates
@@ -141,7 +142,8 @@
                 }
             </td>
             <td>
-                @if (Model.NotificationCompleteDate.IsCompleted && !Model.NotificationAcknowledgedDate.IsCompleted)
+                @if (Model.NotificationCompleteDate.IsCompleted && !Model.NotificationAcknowledgedDate.IsCompleted
+                    && Model.Status != ImportNotificationStatus.Objected)
                 {
                     @Html.ActionLink("Add", "Index", "KeyDates", new { command = KeyDatesCommand.NotificationAcknowledged }, null)
                 }
