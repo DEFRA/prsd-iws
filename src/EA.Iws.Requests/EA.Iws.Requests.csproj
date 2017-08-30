@@ -104,6 +104,7 @@
     <Compile Include="Admin\UserAdministration\GetNewInternalUsers.cs" />
     <Compile Include="Admin\UserAdministration\GetUserByExportNotificationId.cs" />
     <Compile Include="Admin\UserAdministration\GetUserById.cs" />
+    <Compile Include="Admin\UserAdministration\SetExternalUserStatus.cs" />
     <Compile Include="Admin\UserAdministration\SetUserApprovals.cs" />
     <Compile Include="Admin\UserAdministration\UpdateInternalUserRole.cs" />
     <Compile Include="Admin\UserAdministration\UpdateInternalUserStatus.cs" />
