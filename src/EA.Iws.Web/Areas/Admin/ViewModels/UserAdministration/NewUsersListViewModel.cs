@@ -29,8 +29,8 @@
                 return new SelectList(new[]
                 {
                     new KeyValuePair<string, UserRole>(EnumHelper.GetDisplayName(UserRole.Internal), UserRole.Internal),
-                    new KeyValuePair<string, UserRole>(EnumHelper.GetDisplayName(UserRole.Administrator),
-                        UserRole.Administrator)
+                    new KeyValuePair<string, UserRole>(EnumHelper.GetDisplayName(UserRole.Administrator), UserRole.Administrator),
+                    new KeyValuePair<string, UserRole>(EnumHelper.GetDisplayName(UserRole.ReadOnly), UserRole.ReadOnly)
                 }, "Value", "Key");
             }
         }

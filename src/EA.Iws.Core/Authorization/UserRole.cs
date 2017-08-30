@@ -7,6 +7,8 @@
         External,
         [Display(Name = "Standard user")]
         Internal,
-        Administrator
+        Administrator,
+        [Display(Name = "Read only")]
+        ReadOnly
     }
 }

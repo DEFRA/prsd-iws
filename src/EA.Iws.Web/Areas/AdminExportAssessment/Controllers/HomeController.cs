@@ -8,7 +8,7 @@
     using Requests.NotificationAssessment;
     using Web.ViewModels.Shared;
 
-    [Authorize(Roles = "internal")]
+    [Authorize(Roles = "internal,readonly")]
     public class HomeController : Controller
     {
         private readonly IMediator mediator;

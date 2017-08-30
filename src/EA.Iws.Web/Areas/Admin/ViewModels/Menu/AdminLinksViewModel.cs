@@ -15,5 +15,7 @@
         public AdminHomeNavigationSection ActiveSection { get; set; }
 
         public bool ShowManageExternalUserLink { get; set; }
+
+        public bool ShowNotificationLinks { get; set; }
     }
 }

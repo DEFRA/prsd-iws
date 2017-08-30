@@ -73,7 +73,7 @@
         {
             var userInfo = await userInfoClient.GetUserInfoAsync(accessToken);
 
-            return userInfo.Claims.Any(p => p.Item1 == ClaimTypes.Role && p.Item2 == "internal");
+            return userInfo.Claims.Any(p => p.Item1 == ClaimTypes.Role && (p.Item2 == "internal" || p.Item2 == "readonly"));
         }
 
         [HttpPost]
