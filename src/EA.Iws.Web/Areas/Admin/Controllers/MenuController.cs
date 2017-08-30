@@ -52,12 +52,17 @@
                 authorizationService.AuthorizeActivity(typeof(DeleteExportNotification)))
                 .Result;
 
+            var showManageExternalUserLink = Task.Run(() =>
+                authorizationService.AuthorizeActivity(typeof(SetExternalUserStatus)))
+                .Result;
+
             var model = new AdminLinksViewModel
             {
                 ShowApproveNewInternalUserLink = showApproveNewInternalUserLink,
                 ShowAddNewEntryOrExitPointLink = showAddNewEntryOrExitPointLink,
                 ShowManageExistingInternalUserLink = showManageExistingInternalUserLink,
-                ShowDeleteNotificationLink = showDeleteNotificationLink
+                ShowDeleteNotificationLink = showDeleteNotificationLink,
+                ShowManageExternalUserLink = showManageExternalUserLink
             };
 
             if (section.HasValue)
