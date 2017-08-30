@@ -14,7 +14,7 @@
     using Requests.NotificationAssessment;
     using ViewModels.Menu;
 
-    [Authorize(Roles = "internal")]
+    [Authorize(Roles = "internal,readonly")]
     public class MenuController : Controller
     {
         private readonly AuthorizationService authorizationService;
@@ -57,7 +57,8 @@
                 ShowApproveNewInternalUserLink = showApproveNewInternalUserLink,
                 ShowAddNewEntryOrExitPointLink = showAddNewEntryOrExitPointLink,
                 ShowManageExistingInternalUserLink = showManageExistingInternalUserLink,
-                ShowDeleteNotificationLink = showDeleteNotificationLink
+                ShowDeleteNotificationLink = showDeleteNotificationLink,
+                ShowNotificationLinks = !User.IsInRole("readonly")
             };
 
             if (section.HasValue)

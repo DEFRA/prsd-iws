@@ -14,6 +14,7 @@
             {
                 new SelectListItem { Value = UserRole.Internal.ToString(), Text = EnumHelper.GetDisplayName(UserRole.Internal) },
                 new SelectListItem { Value = UserRole.Administrator.ToString(), Text = EnumHelper.GetDisplayName(UserRole.Administrator) },
+                new SelectListItem { Value = UserRole.ReadOnly.ToString(), Text = EnumHelper.GetDisplayName(UserRole.ReadOnly) },
             }, "Value", "Text", selectedValue);
         }
 

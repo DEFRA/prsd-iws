@@ -76,7 +76,8 @@
                 return false;
             }
 
-            return claimsPrincipal.HasClaim(ClaimTypes.Role, "internal");
+            return claimsPrincipal.HasClaim(ClaimTypes.Role, "internal")
+                || claimsPrincipal.HasClaim(ClaimTypes.Role, "readonly");
         }
     }
 }

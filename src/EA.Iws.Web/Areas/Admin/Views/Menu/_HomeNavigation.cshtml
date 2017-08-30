@@ -7,17 +7,20 @@
 
 <div id="accordion" class="accordion-general">
     <ul>
-        <li class="@GetClassForSection(AdminHomeNavigationSection.Notifications, "active")">
-            <h3 class="@GetClassForSection(AdminHomeNavigationSection.Notifications, "current")">
-                <span></span>
-                Notifications
-            </h3>
-            <ul>
-                <li>@Html.ActionLink("Create import notification", "Number", "ImportNotification", new { area = "Admin" }, null)</li>
-                <li>@Html.ActionLink("Create export notification", "NotificationType", "ExportNotification", new { area = "Admin" }, null)</li>
-                <li>@Html.ActionLink("Unsubmitted export notifications", "Index", "ExportNotifications", new { area = "Admin" }, null)</li>
-            </ul>
-        </li>
+        @if (Model.ShowNotificationLinks)
+        {
+            <li class="@GetClassForSection(AdminHomeNavigationSection.Notifications, "active")">
+                <h3 class="@GetClassForSection(AdminHomeNavigationSection.Notifications, "current")">
+                    <span></span>
+                    Notifications
+                </h3>
+                <ul>
+                    <li>@Html.ActionLink("Create import notification", "Number", "ImportNotification", new { area = "Admin" }, null)</li>
+                    <li>@Html.ActionLink("Create export notification", "NotificationType", "ExportNotification", new { area = "Admin" }, null)</li>
+                    <li>@Html.ActionLink("Unsubmitted export notifications", "Index", "ExportNotifications", new { area = "Admin" }, null)</li>
+                </ul>
+            </li>
+        }
 
         <li class="@GetClassForSection(AdminHomeNavigationSection.Reporting, "active")">
             <h3 class="@GetClassForSection(AdminHomeNavigationSection.Reporting, "current")">
@@ -28,7 +31,7 @@
         </li>
 
         @if (Model.ShowAddNewEntryOrExitPointLink
-                    || Model.ShowApproveNewInternalUserLink)
+             || Model.ShowApproveNewInternalUserLink)
         {
             <li class="@GetClassForSection(AdminHomeNavigationSection.AccountServices, "active")">
                 <h3 class="@GetClassForSection(AdminHomeNavigationSection.AccountServices, "current")">
