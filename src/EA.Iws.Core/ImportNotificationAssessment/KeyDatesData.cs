@@ -34,5 +34,7 @@
         public bool IsLocalAreaSet { get; set; }
 
         public UKCompetentAuthority CompententAuthority { get; set; }
+
+        public ImportNotificationStatus Status { get; set; }
     }
 }

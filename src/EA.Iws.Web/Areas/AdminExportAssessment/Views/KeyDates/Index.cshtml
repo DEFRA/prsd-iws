@@ -140,7 +140,8 @@
                 }
             </td>
             <td>
-                @if (Model.NotificationCompleteDate.IsCompleted && !Model.NotificationTransmittedDate.IsCompleted && !Model.NotificationFileClosedDate.IsCompleted)
+                @if (Model.NotificationCompleteDate.IsCompleted && !Model.NotificationTransmittedDate.IsCompleted 
+                    && !Model.NotificationFileClosedDate.IsCompleted && Model.CurrentStatus != NotificationStatus.Objected)
                 {
                     @Html.ActionLink("Add", "Index", "KeyDates", new { command = KeyDatesStatusEnum.NotificationTransmitted }, null)
                 }

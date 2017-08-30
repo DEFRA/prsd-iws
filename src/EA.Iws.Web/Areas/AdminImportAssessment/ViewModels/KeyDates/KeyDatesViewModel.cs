@@ -40,7 +40,10 @@
             ArchiveReference = keyDates.ArchiveReference;
             IsAreaAssigned = keyDates.IsLocalAreaSet;
             CompetentAuthority = keyDates.CompententAuthority;
+            Status = keyDates.Status;
         }
+
+        public ImportNotificationStatus Status { get; set; }
 
         public Guid NotificationId { get; set; }
 

@@ -62,7 +62,8 @@
                 ArchiveReference = assessment.Dates.ArchiveReference,
                 DecisionHistory = decisions ?? new List<NotificationAssessmentDecision>(),
                 CompententAuthority = notification.CompetentAuthority,
-                IsLocalAreaSet = consultation != null && consultation.LocalAreaId.HasValue
+                IsLocalAreaSet = consultation != null && consultation.LocalAreaId.HasValue,
+                Status = assessment.Status
             };
         }
     }
