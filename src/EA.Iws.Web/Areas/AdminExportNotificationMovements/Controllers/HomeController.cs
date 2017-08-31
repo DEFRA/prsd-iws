@@ -4,6 +4,7 @@
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Core.Movement;
+    using Core.NotificationAssessment;
     using Infrastructure.Authorization;
     using Prsd.Core.Mediator;
     using Requests.Movement;
@@ -33,7 +34,7 @@
 
             var model = new MovementSummaryViewModel(id, movementsSummary);
             model.SelectedMovementStatus = (MovementStatus?)status;
-            model.CanDeleteMovement = canDeleteMovement;
+            model.CanDeleteMovement = canDeleteMovement && movementsSummary.SummaryData.NotificationStatus != NotificationStatus.FileClosed;
 
             return View(model);
         }
