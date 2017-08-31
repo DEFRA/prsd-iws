@@ -12,6 +12,7 @@
     @if (Model.ShowManageExternalUserLink)
     {
         <li>@Html.ActionLink("Deactivate external user", "Deactivate", "ExternalUserAdministration", new { area = "Admin" }, null)</li>
+        <li>@Html.ActionLink("Reactivate external user", "Reactivate", "ExternalUserAdministration", new { area = "Admin" }, null)</li>
     }
     @if (Model.ShowAddNewEntryOrExitPointLink)
     {
