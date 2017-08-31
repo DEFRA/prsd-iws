@@ -116,3 +116,9 @@
         </p>
     </div>
 }
+
+@Html.ActionLink("Go to notification options",
+    "Index",
+    "Options",
+    new { area = "NotificationApplication", id = ViewBag.NotificationId },
+    null)

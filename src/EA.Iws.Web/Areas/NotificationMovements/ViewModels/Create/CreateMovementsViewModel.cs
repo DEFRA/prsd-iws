@@ -9,7 +9,6 @@
     using Core.Movement;
     using Core.PackagingType;
     using Core.Shared;
-    using Infrastructure.Validation;
     using Prsd.Core;
     using Prsd.Core.Helpers;
     using Web.ViewModels.Shared;
