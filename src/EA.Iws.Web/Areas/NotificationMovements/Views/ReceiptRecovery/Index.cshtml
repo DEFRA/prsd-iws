@@ -103,3 +103,9 @@
 
     <button class="button" type="submit">@Constants.ContinueOnlyButtonText</button>
 }
+
+@Html.ActionLink("Go to notification options",
+    "Index",
+    "Options",
+    new { area = "NotificationApplication", id = Model.NotificationId },
+    null)

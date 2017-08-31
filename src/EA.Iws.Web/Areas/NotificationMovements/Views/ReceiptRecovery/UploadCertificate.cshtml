@@ -52,4 +52,10 @@
         <button class="button" type="submit">@Constants.ContinueButtonText</button>
     </div>
 
-    }
+}
+
+@Html.ActionLink("Go to notification options",
+    "Index",
+    "Options",
+    new { area = "NotificationApplication", id = Model.NotificationId },
+    null)
