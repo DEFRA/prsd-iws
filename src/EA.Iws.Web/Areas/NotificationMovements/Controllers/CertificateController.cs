@@ -70,16 +70,18 @@
             {
                 return View(model);
             }
-            //Check if shipment was created by internal user
+            
             Guid movementId;
+
             if (model.Certificate == CertificateType.Recovery)
             {
-                movementId = movementId = model.RecoveryShipments.SelectedValue;
+                movementId = model.RecoveryShipments.SelectedValue;
             }
             else
             {
-                movementId = movementId = model.ReceiveShipments.SelectedValue;
+                movementId = model.ReceiveShipments.SelectedValue;
             }
+
             var shipmentExists = await mediator.SendAsync(new DoesMovementDetailsExist(movementId));
 
             if (shipmentExists)
