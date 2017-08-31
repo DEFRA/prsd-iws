@@ -81,10 +81,6 @@
             <div class="nav-bloc">
                 <h2 class="heading-small">@Resources.OptionsHeading</h2>
                 <nav>
-                    @if (Model.NotificationStatus == NotificationStatus.Consented && Model.FgStatus == FinancialGuaranteeStatus.Approved)
-                    {
-                        @Html.ActionLink(Resources.OptionsRecord, "Create", "CaptureMovement", new { area = "AdminExportNotificationMovements", id = Model.NotificationId }, null)
-                    }
                     @if (Model.NotificationStatus == NotificationStatus.Consented)
                     {
                         @Html.ActionLink(Resources.OptionsCancel, "Index", "Cancel")
@@ -97,6 +93,19 @@
                     @Html.ActionLink(Resources.OptionsOverview, "Index", "Home", new { area = "AdminExportAssessment", id = Model.NotificationId }, null)
                 </nav>
             </div>
+
+            @if (Model.NotificationStatus == NotificationStatus.Consented && Model.FgStatus == FinancialGuaranteeStatus.Approved)
+            {
+                <div class="form-group">
+                    <h2 class="heading-small">@Resources.OptionsRecord</h2>
+                    @using (Html.BeginForm("Search", "Home"))
+                    {
+                        @Html.AntiForgeryToken()
+                        <input id="ShipmentNumber" name="ShipmentNumber" type="number" min="1" class="form-control" placeholder="@Resources.SearchPlaceholder"/>
+                        <button class="button">@Resources.SearchButton</button>
+                    }
+                </div>
+            }
         </div>
     </div>
 
@@ -118,15 +127,6 @@
                 <div class="column-one-third">
                     @Html.ActionLink(Resources.DownloadExcel, "Index", "Download")
                 </div>
-            }
-        </div>
-
-        <div class="form-group">
-            @using (Html.BeginForm("Search", "Home"))
-            {
-                @Html.AntiForgeryToken()
-                <input id="ShipmentNumber" name="ShipmentNumber" type="number" min="1" class="form-control-narrow" placeholder="@Resources.SearchPlaceholder" />
-                <button class="button">@Resources.SearchButton</button>
             }
         </div>
 

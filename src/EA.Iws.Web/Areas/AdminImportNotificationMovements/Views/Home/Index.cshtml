@@ -44,7 +44,7 @@ else
         </h1>
 
         <div class="grid-row">
-            <div class="column-two-thirds">
+            <div class="column-half">
                 <table class="odd-table">
                     <caption class="visuallyhidden">@Resource.SummaryCaption</caption>
                     <tbody>
@@ -67,27 +67,35 @@ else
                     </tbody>
                 </table>
             </div>
-            <div class="column-one-third">
+            <div class="column-half">
                 @if (Model.NotificationStatus == ImportNotificationStatus.Consented)
-            {
-                <div class="nav-bloc">
-                    <h2 class="heading-small">@Resource.ShipingOptions</h2>
-                    <nav>
-                        @Html.ActionLink(@Resource.Record, "Create", "Capture")
+                {
+                    <div class="nav-bloc">
+                        <h2 class="heading-small">@Resource.ShipingOptions</h2>
+                        <nav>
+                            @Html.ActionLink(Resource.Cancel, "Index", "Cancel")
 
-                        @Html.ActionLink(@Resource.Cancel, "Index", "Cancel")
+                            @if (Model.CanDeleteMovement)
+                            {
+                                @Html.ActionLink(Resource.Delete, "Index", "Delete")
+                            }
 
-                        @if (Model.CanDeleteMovement)
-                        {
-                            @Html.ActionLink(@Resource.Delete, "Index", "Delete")
-                        }
+                            @Html.ActionLink(Resource.RejectedMovements, "List", "RejectedMovement")
 
-                        @Html.ActionLink(@Resource.RejectedMovements, "List", "RejectedMovement")
+                            @Html.ActionLink(Resource.GoToOverview, "Index", "Home", new { area = "ImportNotification", id = Model.NotificationId }, null)
+                        </nav>
+                    </div>
+                }
 
-                        @Html.ActionLink(@Resource.GoToOverview, "Index", "Home", new { area = "ImportNotification", id = Model.NotificationId }, null)
-                    </nav>
+                <div class="form-group">
+                    <h2 class="heading-small">@Resource.Record</h2>
+                    @using (Html.BeginForm("Search", "Home"))
+                    {
+                        @Html.AntiForgeryToken()
+                        <input id="ShipmentNumber" name="ShipmentNumber" type="number" min="1" class="form-control" placeholder="@Resource.SearchPlaceholder"/>
+                        <button class="button">@Resource.SearchButton</button>
+                    }
                 </div>
-            }
             </div>
         </div>
     </div>
@@ -104,15 +112,6 @@ else
             <div class="column-one-third">
                 @Html.ActionLink(Resource.DownloadExcel, "Index", "Download")
             </div>
-        </div>
-
-        <div class="form-group">
-            @using (Html.BeginForm("Search", "Home"))
-            {
-                @Html.AntiForgeryToken()
-                <input id="ShipmentNumber" name="ShipmentNumber" type="number" min="1" class="form-control-narrow" placeholder="@Resource.SearchPlaceholder" />
-                <button class="button">@Resource.SearchButton</button>
-            }
         </div>
 
         <table class="odd-table">
