@@ -100,6 +100,7 @@
     <Compile Include="Admin\FinancialGuarantee\GetFinancialGuaranteeDataByNotificationApplicationId.cs" />
     <Compile Include="Admin\UserAdministration\GetAllUsers.cs" />
     <Compile Include="Admin\UserAdministration\GetExistingInternalUsers.cs" />
+    <Compile Include="Admin\UserAdministration\GetExternalUserByUserId.cs" />
     <Compile Include="Admin\UserAdministration\GetInternalUserByUserId.cs" />
     <Compile Include="Admin\UserAdministration\GetNewInternalUsers.cs" />
     <Compile Include="Admin\UserAdministration\GetUserByExportNotificationId.cs" />

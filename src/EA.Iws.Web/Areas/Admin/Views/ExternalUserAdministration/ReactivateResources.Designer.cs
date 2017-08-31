@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace EA.Iws.Web.Areas.Admin.ViewModels.ExternalUserAdministration {
+namespace EA.Iws.Web.Areas.Admin.Views.ExternalUserAdministration {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace EA.Iws.Web.Areas.Admin.ViewModels.ExternalUserAdministration {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class DeactivateUserViewModelResources {
+    public class ReactivateResources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal DeactivateUserViewModelResources() {
+        internal ReactivateResources() {
         }
         
         /// <summary>
@@ -39,8 +39,7 @@ namespace EA.Iws.Web.Areas.Admin.ViewModels.ExternalUserAdministration {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EA.Iws.Web.Areas.Admin.ViewModels.ExternalUserAdministration.DeactivateUserViewMo" +
-                            "delResources", typeof(DeactivateUserViewModelResources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EA.Iws.Web.Areas.Admin.Views.ExternalUserAdministration.ReactivateResources", typeof(ReactivateResources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -62,38 +61,56 @@ namespace EA.Iws.Web.Areas.Admin.ViewModels.ExternalUserAdministration {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Email address.
+        ///   Looks up a localized string similar to You are about to reactivate the user account for {0}..
         /// </summary>
-        public static string Email {
+        public static string Confirmation {
             get {
-                return ResourceManager.GetString("Email", resourceCulture);
+                return ResourceManager.GetString("Confirmation", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The email address you have entered is not registered in IWS Online.
+        ///   Looks up a localized string similar to Are you sure you want to reactivate the user account?.
         /// </summary>
-        public static string EmailNotRegistered {
+        public static string ConfirmationTitle {
             get {
-                return ResourceManager.GetString("EmailNotRegistered", resourceCulture);
+                return ResourceManager.GetString("ConfirmationTitle", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Please enter an email address.
+        ///   Looks up a localized string similar to Reactivate.
         /// </summary>
-        public static string EmailRequired {
+        public static string ReactivateButton {
             get {
-                return ResourceManager.GetString("EmailRequired", resourceCulture);
+                return ResourceManager.GetString("ReactivateButton", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Please enter a valid email address.
+        ///   Looks up a localized string similar to Reactivate external user.
         /// </summary>
-        public static string EmailValid {
+        public static string ReactivateTitle {
             get {
-                return ResourceManager.GetString("EmailValid", resourceCulture);
+                return ResourceManager.GetString("ReactivateTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to External user account reactivated.
+        /// </summary>
+        public static string SuccessTitle {
+            get {
+                return ResourceManager.GetString("SuccessTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The user account for {0} has been reactivated..
+        /// </summary>
+        public static string UserAccountDeactivated {
+            get {
+                return ResourceManager.GetString("UserAccountDeactivated", resourceCulture);
             }
         }
     }

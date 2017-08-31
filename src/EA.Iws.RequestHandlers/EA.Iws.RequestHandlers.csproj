@@ -135,6 +135,7 @@
     <Compile Include="Admin\Registration\GetLocalAreasHandler.cs" />
     <Compile Include="Admin\UserAdministration\GetAllUsersHandler.cs" />
     <Compile Include="Admin\UserAdministration\GetExistingInternalUsersHandler.cs" />
+    <Compile Include="Admin\UserAdministration\GetExternalUserByUserIdHandler.cs" />
     <Compile Include="Admin\UserAdministration\GetInternalUserByUserIdHandler.cs" />
     <Compile Include="Admin\UserAdministration\GetNewInternalUsersHandler.cs" />
     <Compile Include="Admin\UserAdministration\GetUserByExportNotificationIdHandler.cs" />

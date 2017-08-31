@@ -1,0 +1,10 @@
+﻿@using Resources = EA.Iws.Web.Areas.Admin.Views.ExternalUserAdministration.ReactivateResources
+@{
+    ViewBag.Title = Resources.SuccessTitle;
+}
+
+<h1 class="heading-large">@Resources.SuccessTitle</h1>
+
+<p>@string.Format(Resources.UserAccountDeactivated, ViewBag.Email)</p>
+
+@Html.ActionLink("Home", "Index", "Home")

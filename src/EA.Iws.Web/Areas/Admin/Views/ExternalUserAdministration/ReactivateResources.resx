@@ -117,16 +117,22 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Email" xml:space="preserve">
-    <value>Email address</value>
+  <data name="Confirmation" xml:space="preserve">
+    <value>You are about to reactivate the user account for {0}.</value>
   </data>
-  <data name="EmailNotRegistered" xml:space="preserve">
-    <value>The email address you have entered is not registered in IWS Online</value>
+  <data name="ConfirmationTitle" xml:space="preserve">
+    <value>Are you sure you want to reactivate the user account?</value>
   </data>
-  <data name="EmailRequired" xml:space="preserve">
-    <value>Please enter an email address</value>
+  <data name="ReactivateButton" xml:space="preserve">
+    <value>Reactivate</value>
   </data>
-  <data name="EmailValid" xml:space="preserve">
-    <value>Please enter a valid email address</value>
+  <data name="ReactivateTitle" xml:space="preserve">
+    <value>Reactivate external user</value>
+  </data>
+  <data name="SuccessTitle" xml:space="preserve">
+    <value>External user account reactivated</value>
+  </data>
+  <data name="UserAccountDeactivated" xml:space="preserve">
+    <value>The user account for {0} has been reactivated.</value>
   </data>
 </root>

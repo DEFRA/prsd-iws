@@ -30,7 +30,7 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Deactivate(DeactivateUserViewModel model)
+        public async Task<ActionResult> Deactivate(ExternalUserAdministrationViewModel model)
         {
             if (!ModelState.IsValid)
             {
@@ -41,11 +41,19 @@
 
             if (!userExists)
             {
-                ModelState.AddModelError("Email", DeactivateUserViewModelResources.EmailNotRegistered);
+                ModelState.AddModelError("Email", ExternalUserAdministrationViewModelResources.EmailNotRegistered);
                 return View(model);
             }
 
             var userId = await mediator.SendAsync(new GetUserId(model.Email));
+
+            var userData = await mediator.SendAsync(new GetExternalUserByUserId(userId));
+
+            if (userData.Status == ExternalUserStatus.Inactive)
+            {
+                ModelState.AddModelError("Email", ExternalUserAdministrationViewModelResources.UserAlreadyDeactivated);
+                return View(model);
+            }
 
             return RedirectToAction("DeactivateSummary", new { userId });
         }
@@ -79,6 +87,68 @@
 
         [HttpGet]
         public ActionResult DeactivateSuccess(string email)
+        {
+            ViewBag.Email = email;
+            return View();
+        }
+
+        [HttpGet]
+        public ActionResult Reactivate()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Reactivate(ExternalUserAdministrationViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            bool userExists = await mediator.SendAsync(new ExternalUserExists(model.Email));
+
+            if (!userExists)
+            {
+                ModelState.AddModelError("Email", ExternalUserAdministrationViewModelResources.EmailNotRegistered);
+                return View(model);
+            }
+
+            var userId = await mediator.SendAsync(new GetUserId(model.Email));
+
+            var userData = await mediator.SendAsync(new GetExternalUserByUserId(userId));
+
+            if (userData.Status == ExternalUserStatus.Active)
+            {
+                ModelState.AddModelError("Email", ExternalUserAdministrationViewModelResources.UserAlreadyActive);
+                return View(model);
+            }
+
+            return RedirectToAction("ReactivateConfirmation", new { userId });
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> ReactivateConfirmation(Guid userId)
+        {
+            var user = await mediator.SendAsync(new GetUserById(userId.ToString()));
+            ViewBag.UserId = userId;
+            ViewBag.Email = user.Email;
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [ActionName("ReactivateConfirmation")]
+        public async Task<ActionResult> ReactivateConfirmationPost(Guid userId, string email)
+        {
+            await mediator.SendAsync(new SetExternalUserStatus(userId.ToString(), ExternalUserStatus.Active));
+
+            return RedirectToAction("ReactivateSuccess", new { email });
+        }
+
+        [HttpGet]
+        public ActionResult ReactivateSuccess(string email)
         {
             ViewBag.Email = email;
             return View();
