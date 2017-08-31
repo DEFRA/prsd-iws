@@ -3,6 +3,7 @@
     using System;
     using System.Threading.Tasks;
     using System.Web.Mvc;
+    using Core.ImportNotificationAssessment;
     using Infrastructure.Authorization;
     using Prsd.Core.Mediator;
     using Requests.ImportMovement.Capture;
@@ -34,7 +35,7 @@
 
             var model = new MovementSummaryViewModel(movementData, tableData);
 
-            model.CanDeleteMovement = canDeleteMovement;
+            model.CanDeleteMovement = canDeleteMovement && movementData.NotificationStatus != ImportNotificationStatus.FileClosed;
 
             return View(model);
         }
