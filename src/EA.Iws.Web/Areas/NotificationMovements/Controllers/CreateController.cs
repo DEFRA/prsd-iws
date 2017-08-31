@@ -32,6 +32,8 @@
         [HttpGet]
         public async Task<ActionResult> Index(Guid notificationId)
         {
+            ViewBag.NotificationId = notificationId;
+
             var ruleSummary = await mediator.SendAsync(new GetMovementRulesSummary(notificationId));
 
             if (!ruleSummary.IsSuccess)
