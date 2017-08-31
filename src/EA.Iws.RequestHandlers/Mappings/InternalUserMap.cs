@@ -36,11 +36,28 @@
         {
             var user = Map(source);
 
-            var isAdmin = parameter.Any(c => c.Type == ClaimTypes.Role && c.Value == UserRole.Administrator.ToString().ToLowerInvariant());
-
-            user.Role = isAdmin ? UserRole.Administrator : UserRole.Internal;
+            user.Role = GetRole(parameter);
 
             return user;
+        }
+
+        private static UserRole GetRole(IEnumerable<Claim> claims)
+        {
+            var claimsArray = claims as Claim[] ?? claims.ToArray();
+            var isAdmin = claimsArray.Any(c => c.Type == ClaimTypes.Role && c.Value == UserRole.Administrator.ToString().ToLowerInvariant());
+            var isReadOnly = claimsArray.Any(c => c.Type == ClaimTypes.Role && c.Value == UserRole.ReadOnly.ToString().ToLowerInvariant());
+
+            if (isAdmin)
+            {
+                return UserRole.Administrator;
+            }
+
+            if (isReadOnly)
+            {
+                return UserRole.ReadOnly;
+            }
+
+            return UserRole.Internal;
         }
     }
 }
