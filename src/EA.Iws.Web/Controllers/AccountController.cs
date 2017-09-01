@@ -40,6 +40,11 @@
         [AllowAnonymous]
         public ActionResult Login(string returnUrl)
         {
+            if (User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("Index", "Home", new { area = string.Empty });
+            }
+
             ViewBag.ReturnUrl = returnUrl;
             return View();
         }
