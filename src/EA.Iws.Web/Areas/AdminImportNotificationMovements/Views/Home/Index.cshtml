@@ -68,34 +68,37 @@ else
                 </table>
             </div>
             <div class="column-half">
-                @if (Model.NotificationStatus == ImportNotificationStatus.Consented)
-                {
                     <div class="nav-bloc">
                         <h2 class="heading-small">@Resource.ShipingOptions</h2>
                         <nav>
-                            @Html.ActionLink(Resource.Cancel, "Index", "Cancel")
-
-                            @if (Model.CanDeleteMovement)
+                            @if (Model.NotificationStatus == ImportNotificationStatus.Consented)
                             {
-                                @Html.ActionLink(Resource.Delete, "Index", "Delete")
-                            }
+                                @Html.ActionLink(Resource.Cancel, "Index", "Cancel")
 
+                                if (Model.CanDeleteMovement)
+                                {
+                                    @Html.ActionLink(Resource.Delete, "Index", "Delete")
+                                }
+
+                            }
                             @Html.ActionLink(Resource.RejectedMovements, "List", "RejectedMovement")
 
                             @Html.ActionLink(Resource.GoToOverview, "Index", "Home", new { area = "ImportNotification", id = Model.NotificationId }, null)
                         </nav>
                     </div>
-                }
 
-                <div class="form-group">
-                    <h2 class="heading-small">@Resource.Record</h2>
-                    @using (Html.BeginForm("Search", "Home"))
+                    @if (Model.NotificationStatus == ImportNotificationStatus.Consented)
                     {
-                        @Html.AntiForgeryToken()
-                        <input id="ShipmentNumber" name="ShipmentNumber" type="number" min="1" class="form-control" placeholder="@Resource.SearchPlaceholder"/>
-                        <button class="button">@Resource.SearchButton</button>
+                        <div class="form-group">
+                            <h2 class="heading-small">@Resource.Record</h2>
+                            @using (Html.BeginForm("Search", "Home"))
+                            {
+                                @Html.AntiForgeryToken()
+                                <input id="ShipmentNumber" name="ShipmentNumber" type="number" min="1" class="form-control" placeholder="@Resource.SearchPlaceholder"/>
+                                <button class="button">@Resource.SearchButton</button>
+                            }
+                        </div>
                     }
-                </div>
             </div>
         </div>
     </div>
