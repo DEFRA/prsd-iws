@@ -16,7 +16,6 @@
     using Prsd.Core.Web.OAuth;
     using Requests.Admin;
     using Requests.Admin.UserAdministration;
-    using ViewModels;
     using ViewModels.Registration;
 
     public class RegistrationController : Controller
@@ -38,6 +37,11 @@
         [AllowAnonymous]
         public async Task<ActionResult> Register()
         {
+            if (User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("Index", "Home", new { area = string.Empty });
+            }
+
             var model = await GetModelData(new AdminRegistrationViewModel());
             return View(model);
         }

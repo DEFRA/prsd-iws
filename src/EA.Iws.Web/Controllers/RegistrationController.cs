@@ -36,6 +36,11 @@
         [AllowAnonymous]
         public async Task<ActionResult> ApplicantRegistration()
         {
+            if (User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("Index", "Home", new { area = string.Empty });
+            }
+
             var model = new ApplicantRegistrationViewModel();
             await this.BindCountryList(client);
             model.Address.DefaultCountryId = this.GetDefaultCountryId();
