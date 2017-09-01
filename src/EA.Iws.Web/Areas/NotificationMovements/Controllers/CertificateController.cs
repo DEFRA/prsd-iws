@@ -1,7 +1,6 @@
 ﻿namespace EA.Iws.Web.Areas.NotificationMovements.Controllers
 {
     using Core.Shared;
-    using Infrastructure;
     using Infrastructure.Authorization;
     using Prsd.Core.Mediator;
     using Requests.Movement;
@@ -9,7 +8,6 @@
     using Requests.Notification;
     using Requests.NotificationMovements;
     using System;
-    using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using ViewModels.Certificate;
@@ -27,8 +25,12 @@
         [HttpGet]
         public async Task<ActionResult> CertificateTypes(Guid notificationId)
         {
-            CertificationSelectionViewModel model = new CertificationSelectionViewModel();
-            model.NotificationType = await mediator.SendAsync(new GetNotificationType(notificationId));
+            var model = new CertificationSelectionViewModel
+            {
+                NotificationId = notificationId,
+                NotificationType = await mediator.SendAsync(new GetNotificationType(notificationId))
+            };
+
             return View(model);
         }
 
@@ -40,7 +42,7 @@
             {
                 return View(model);
             }
-            return RedirectToAction("Shipments", new { notificationId = notificationId, certificate = model.Certificate });
+            return RedirectToAction("Shipments", new { notificationId, certificate = model.Certificate });
         }
 
         [HttpGet]
@@ -53,6 +55,7 @@
                 var receivedResult = await mediator.SendAsync(new GetSubmittedMovementsByNotificationId(notificationId));
                 return View(new ShipmentViewModel(notificationId, notificationType, certificate, receivedResult));
             }
+
             if (certificate == CertificateType.Recovery)
             {
                 var recoveryResult = await mediator.SendAsync(new GetReceivedMovements(notificationId));
@@ -92,11 +95,13 @@
                 {
                     return RedirectToAction("Index", "ReceiptRecovery", new { movementId = model.ReceiveShipments.SelectedValue});
                 }
-                else if (model.Certificate == CertificateType.Receipt)
+
+                if (model.Certificate == CertificateType.Receipt)
                 {
                     return RedirectToAction("Receipt", "ReceiptRecovery", new { movementId = model.ReceiveShipments.SelectedValue});
                 }
-                else if (model.Certificate == CertificateType.Recovery)
+
+                if (model.Certificate == CertificateType.Recovery)
                 {
                     return RedirectToAction("Recovery", "ReceiptRecovery", new { movementId = model.RecoveryShipments.SelectedValue});
                 }
@@ -106,6 +111,7 @@
                 var notification = await mediator.SendAsync(new GetWhatToDoNextDataForNotification(notificationId));
                 return View("WhatNext", notification);
             }
+
             return View(model);
         }
     }
