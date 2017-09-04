@@ -136,7 +136,7 @@
     <value>What packaging type(s) will be used in the shipment(s)?</value>
   </data>
   <data name="QuantityDescription" xml:space="preserve">
-    <value>Enter the actual quantity as a number using decimal figures if necessary.</value>
+    <value>Enter the actual quantity as a number using decimal figures if relevant.</value>
   </data>
   <data name="QuantityTitle" xml:space="preserve">
     <value>How much waste will be exported in each shipment?</value>

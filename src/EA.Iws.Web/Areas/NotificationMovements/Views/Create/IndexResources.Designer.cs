@@ -115,7 +115,7 @@ namespace EA.Iws.Web.Areas.NotificationMovements.Views.Create {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Enter the actual quantity as a number using decimal figures if necessary..
+        ///   Looks up a localized string similar to Enter the actual quantity as a number using decimal figures if relevant..
         /// </summary>
         public static string QuantityDescription {
             get {

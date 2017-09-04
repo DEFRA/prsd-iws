@@ -196,7 +196,7 @@ namespace EA.Iws.Web.Areas.NotificationMovements.Views.Create {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to upload the signed files now.
+        ///   Looks up a localized string similar to upload the signed files.
         /// </summary>
         public static string UploadTheSignedFilesNow {
             get {
