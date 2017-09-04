@@ -26,7 +26,9 @@
         public List<FacilityData> Facilities { get; set; }
 
         public bool CanAddProducer { get; set; }
-       
+
+        public bool CanEditContactDetails { get; set; }
+
         public OrganisationsInvolvedViewModel() 
         {
         }
