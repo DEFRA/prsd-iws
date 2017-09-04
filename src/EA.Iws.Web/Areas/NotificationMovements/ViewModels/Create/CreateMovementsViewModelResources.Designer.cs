@@ -161,7 +161,7 @@ namespace EA.Iws.Web.Areas.NotificationMovements.ViewModels.Create {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Number of shipments.
+        ///   Looks up a localized string similar to How many shipments are scheduled for that date?.
         /// </summary>
         public static string NumberToCreate {
             get {

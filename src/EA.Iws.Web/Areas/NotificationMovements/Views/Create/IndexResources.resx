@@ -118,27 +118,42 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ActualDateOfShipment" xml:space="preserve">
-    <value>What is the actual date of shipment?</value>
+    <value>What's the actual date of the shipment(s)?</value>
+  </data>
+  <data name="CreateSummary" xml:space="preserve">
+    <value>You can create more than one shipment prenotification at the same time if:</value>
   </data>
   <data name="NunmberToCreateHint" xml:space="preserve">
-    <value>Enter the number of shipments you are prenotifying for this date</value>
+    <value>This is the number of shipments with the same waste quantities and packaging types.</value>
+  </data>
+  <data name="OptionsLink" xml:space="preserve">
+    <value>Go to notification options</value>
   </data>
   <data name="PackagingDescription" xml:space="preserve">
-    <value>Select all the types of packaging that will be used for this shipment.</value>
+    <value>Select all that apply</value>
   </data>
   <data name="PackagingTitle" xml:space="preserve">
-    <value>What packaging types will be used?</value>
+    <value>What packaging type(s) will be used in the shipment(s)?</value>
   </data>
   <data name="QuantityDescription" xml:space="preserve">
-    <value>Enter the actual quantity of waste as a number. You can add decimal figures if necessary.</value>
+    <value>Enter the actual quantity as a number using decimal figures if necessary.</value>
   </data>
   <data name="QuantityTitle" xml:space="preserve">
-    <value>How much waste is being exported?</value>
+    <value>How much waste will be exported in each shipment?</value>
+  </data>
+  <data name="SameDay" xml:space="preserve">
+    <value>they're scheduled for the same day</value>
+  </data>
+  <data name="SamePackaging" xml:space="preserve">
+    <value>the packaging types are the same</value>
+  </data>
+  <data name="SameQuantity" xml:space="preserve">
+    <value>the waste quantities are the same</value>
   </data>
   <data name="ShipmentSchedule" xml:space="preserve">
     <value>You can schedule your shipments from</value>
   </data>
   <data name="Title" xml:space="preserve">
-    <value>Create prenotification</value>
+    <value>Create your prenotification(s)</value>
   </data>
 </root>

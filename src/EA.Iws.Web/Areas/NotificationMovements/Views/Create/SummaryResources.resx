@@ -118,19 +118,28 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="CompleteBlocks7And8" xml:space="preserve">
-    <value>complete blocks 7 and 8</value>
+    <value>Complete sections 7 and 8</value>
   </data>
   <data name="CompletePrenotificationsParagraph" xml:space="preserve">
-    <value>Before we can consider your prenotifications, you still have to complete, sign and submit the documentation. This is a five step process:</value>
+    <value>To complete your prenotification(s), you now need to:</value>
+  </data>
+  <data name="CreateNewLink" xml:space="preserve">
+    <value>Create a new prenotification(s) for this notification</value>
+  </data>
+  <data name="Download" xml:space="preserve">
+    <value>Download</value>
   </data>
   <data name="DownloadTheDocuments" xml:space="preserve">
-    <value>download the {0} documents</value>
+    <value>{0} your IWS movement document(s)</value>
+  </data>
+  <data name="NotificationOptions" xml:space="preserve">
+    <value>notification options</value>
   </data>
   <data name="PackagingTypes" xml:space="preserve">
     <value>Packaging type(s)</value>
   </data>
   <data name="PrintTheDocuments" xml:space="preserve">
-    <value>print the documents</value>
+    <value>Print the documents</value>
   </data>
   <data name="Quantity" xml:space="preserve">
     <value>Quantity</value>
@@ -139,19 +148,19 @@
     <value>Shipment number(s)</value>
   </data>
   <data name="SignIt" xml:space="preserve">
-    <value>sign it</value>
+    <value>Sign the completed documents</value>
   </data>
   <data name="SummaryParagraph" xml:space="preserve">
-    <value>You have created {0} shipments, totalling {1}.</value>
+    <value>You've created IWS movement documents for {0} shipments, totalling {1}.</value>
   </data>
   <data name="Title" xml:space="preserve">
-    <value>What to do next with these prenotifications</value>
+    <value>Submit your prenotification(s)</value>
   </data>
   <data name="UploadPrenotificationsParagraph" xml:space="preserve">
-    <value>You can either {0}, or choose to upload them later. You'll be able to do this from the 'Notification options' page.</value>
+    <value>You can {0} now, or do it later by visiting your {1} page.</value>
   </data>
   <data name="UploadTheSignedDocuments" xml:space="preserve">
-    <value>upload the signed documents</value>
+    <value>Upload your signed documents</value>
   </data>
   <data name="UploadTheSignedFilesNow" xml:space="preserve">
     <value>upload the signed files now</value>

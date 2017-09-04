@@ -61,7 +61,7 @@ namespace EA.Iws.Web.Areas.NotificationMovements.Views.Create {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to What is the actual date of shipment?.
+        ///   Looks up a localized string similar to What&apos;s the actual date of the shipment(s)?.
         /// </summary>
         public static string ActualDateOfShipment {
             get {
@@ -70,7 +70,16 @@ namespace EA.Iws.Web.Areas.NotificationMovements.Views.Create {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Enter the number of shipments you are prenotifying for this date.
+        ///   Looks up a localized string similar to You can create more than one shipment prenotification at the same time if:.
+        /// </summary>
+        public static string CreateSummary {
+            get {
+                return ResourceManager.GetString("CreateSummary", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This is the number of shipments with the same waste quantities and packaging types..
         /// </summary>
         public static string NunmberToCreateHint {
             get {
@@ -79,7 +88,16 @@ namespace EA.Iws.Web.Areas.NotificationMovements.Views.Create {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Select all the types of packaging that will be used for this shipment..
+        ///   Looks up a localized string similar to Go to notification options.
+        /// </summary>
+        public static string OptionsLink {
+            get {
+                return ResourceManager.GetString("OptionsLink", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select all that apply.
         /// </summary>
         public static string PackagingDescription {
             get {
@@ -88,7 +106,7 @@ namespace EA.Iws.Web.Areas.NotificationMovements.Views.Create {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to What packaging types will be used?.
+        ///   Looks up a localized string similar to What packaging type(s) will be used in the shipment(s)?.
         /// </summary>
         public static string PackagingTitle {
             get {
@@ -97,7 +115,7 @@ namespace EA.Iws.Web.Areas.NotificationMovements.Views.Create {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Enter the actual quantity of waste as a number. You can add decimal figures if necessary..
+        ///   Looks up a localized string similar to Enter the actual quantity as a number using decimal figures if necessary..
         /// </summary>
         public static string QuantityDescription {
             get {
@@ -106,11 +124,38 @@ namespace EA.Iws.Web.Areas.NotificationMovements.Views.Create {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to How much waste is being exported?.
+        ///   Looks up a localized string similar to How much waste will be exported in each shipment?.
         /// </summary>
         public static string QuantityTitle {
             get {
                 return ResourceManager.GetString("QuantityTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to they&apos;re scheduled for the same day.
+        /// </summary>
+        public static string SameDay {
+            get {
+                return ResourceManager.GetString("SameDay", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to the packaging types are the same.
+        /// </summary>
+        public static string SamePackaging {
+            get {
+                return ResourceManager.GetString("SamePackaging", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to the waste quantities are the same.
+        /// </summary>
+        public static string SameQuantity {
+            get {
+                return ResourceManager.GetString("SameQuantity", resourceCulture);
             }
         }
         
@@ -124,7 +169,7 @@ namespace EA.Iws.Web.Areas.NotificationMovements.Views.Create {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Create prenotification.
+        ///   Looks up a localized string similar to Create your prenotification(s).
         /// </summary>
         public static string Title {
             get {
