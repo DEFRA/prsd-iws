@@ -40,5 +40,11 @@
             Address = address;
             Contact = contact;
         }
+
+        public void UpdateContact(Contact contact)
+        {
+            Guard.ArgumentNotNull(() => contact, contact);
+            Contact = contact;
+        }
     }
 }

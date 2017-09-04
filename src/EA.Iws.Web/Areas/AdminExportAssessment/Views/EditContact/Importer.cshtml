@@ -1,0 +1,17 @@
+﻿@model EA.Iws.Web.Areas.AdminExportAssessment.ViewModels.EditContact.EditContactViewModel
+@{
+    ViewBag.Title = "Amend importer contact details";
+}
+
+<h1 class="heading-large">Amend importer contact details</h1>
+
+@using (Html.BeginForm())
+{
+    @Html.EditorForModel()
+
+    <button type="submit" class="button">@Constants.ContinueButtonText</button>
+}
+
+@section menu {
+    @Html.Action("ExportNavigation", "Menu", new { area = "Admin", section = ExportNavigationSection.Assessment })
+}

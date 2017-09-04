@@ -3,6 +3,11 @@
 <div class="overview-block">
     @if (Model.IsImporterCompleted)
     {
+        if (Model.CanEditContactDetails)
+        {
+            <div class="change-answer">@Html.ActionLink("Amend contact", "Importer", "EditContact", new { id = Model.NotificationId }, null)</div>
+        }
+
         <div class="overview-block-element">
             @Html.DisplayFor(m => m.Importer.Business.Name)
             <br />

@@ -31,5 +31,7 @@
         public const string CanAddProducer = "Can Add Producer";
 
         public const string CanAddRemoveTransitState = "Can Add Remove Transit State";
+
+        public const string CanEditContactDetails = "Can Edit Contact Details";
     }
 }

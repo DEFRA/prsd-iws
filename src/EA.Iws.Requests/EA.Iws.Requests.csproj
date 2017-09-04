@@ -231,6 +231,8 @@
     <Compile Include="NotificationAssessment\MarkAsInterim.cs" />
     <Compile Include="NotificationAssessment\RemoveTransitState.cs" />
     <Compile Include="NotificationAssessment\SetExitPoint.cs" />
+    <Compile Include="NotificationAssessment\SetImporterContact.cs" />
+    <Compile Include="NotificationAssessment\SetExporterContact.cs" />
     <Compile Include="NotificationAssessment\SetNewNumberOfShipments.cs" />
     <Compile Include="NotificationAssessment\SetEntryPoint.cs" />
     <Compile Include="NotificationMovements\Create\GetInternalMovementSummary.cs" />
