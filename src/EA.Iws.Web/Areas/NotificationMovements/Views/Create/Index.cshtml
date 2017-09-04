@@ -13,6 +13,15 @@
     @Html.Gds().DisplayShortDateRangeFor(m => m.StartDate, m => m.EndDate).
 </p>
 
+<p>
+    @Resources.CreateSummary
+    <ul class="list-bullet">
+        <li>@Resources.SameDay</li>
+        <li>@Resources.SameQuantity</li>
+        <li>@Resources.SamePackaging</li>
+    </ul>
+</p>
+
 @using (Html.BeginForm())
 {
 
@@ -26,8 +35,7 @@
     <div class="form-group @Html.Gds().FormGroupClass(m => m.Day) @Html.Gds().FormGroupClass(m => m.Month) @Html.Gds().FormGroupClass(m => m.Year)">
         <fieldset>
  
-                <h2 class="heading-small">@Resources.ActualDateOfShipment</h2>
-           
+            <h2 class="heading-small">@Resources.ActualDateOfShipment</h2>
 
             <div class="form-date">
                 @Html.Gds().HintParagraph(Model.DateHintText)
@@ -117,7 +125,7 @@
     </div>
 }
 
-@Html.ActionLink("Go to notification options",
+@Html.ActionLink(Resources.OptionsLink,
     "Index",
     "Options",
     new { area = "NotificationApplication", id = ViewBag.NotificationId },
