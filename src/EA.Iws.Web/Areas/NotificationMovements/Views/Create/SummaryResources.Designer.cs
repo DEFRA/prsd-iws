@@ -61,7 +61,7 @@ namespace EA.Iws.Web.Areas.NotificationMovements.Views.Create {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to complete blocks 7 and 8.
+        ///   Looks up a localized string similar to Complete sections 7 and 8.
         /// </summary>
         public static string CompleteBlocks7And8 {
             get {
@@ -70,7 +70,7 @@ namespace EA.Iws.Web.Areas.NotificationMovements.Views.Create {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Before we can consider your prenotifications, you still have to complete, sign and submit the documentation. This is a five step process:.
+        ///   Looks up a localized string similar to To complete your prenotification(s), you now need to:.
         /// </summary>
         public static string CompletePrenotificationsParagraph {
             get {
@@ -79,11 +79,38 @@ namespace EA.Iws.Web.Areas.NotificationMovements.Views.Create {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to download the {0} documents.
+        ///   Looks up a localized string similar to Create a new prenotification(s) for this notification.
+        /// </summary>
+        public static string CreateNewLink {
+            get {
+                return ResourceManager.GetString("CreateNewLink", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Download.
+        /// </summary>
+        public static string Download {
+            get {
+                return ResourceManager.GetString("Download", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} your IWS movement document(s).
         /// </summary>
         public static string DownloadTheDocuments {
             get {
                 return ResourceManager.GetString("DownloadTheDocuments", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to notification options.
+        /// </summary>
+        public static string NotificationOptions {
+            get {
+                return ResourceManager.GetString("NotificationOptions", resourceCulture);
             }
         }
         
@@ -97,7 +124,7 @@ namespace EA.Iws.Web.Areas.NotificationMovements.Views.Create {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to print the documents.
+        ///   Looks up a localized string similar to Print the documents.
         /// </summary>
         public static string PrintTheDocuments {
             get {
@@ -124,7 +151,7 @@ namespace EA.Iws.Web.Areas.NotificationMovements.Views.Create {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to sign it.
+        ///   Looks up a localized string similar to Sign the completed documents.
         /// </summary>
         public static string SignIt {
             get {
@@ -133,7 +160,7 @@ namespace EA.Iws.Web.Areas.NotificationMovements.Views.Create {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You have created {0} shipments, totalling {1}..
+        ///   Looks up a localized string similar to You&apos;ve created IWS movement documents for {0} shipments, totalling {1}..
         /// </summary>
         public static string SummaryParagraph {
             get {
@@ -142,7 +169,7 @@ namespace EA.Iws.Web.Areas.NotificationMovements.Views.Create {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to What to do next with these prenotifications.
+        ///   Looks up a localized string similar to Submit your prenotification(s).
         /// </summary>
         public static string Title {
             get {
@@ -151,7 +178,7 @@ namespace EA.Iws.Web.Areas.NotificationMovements.Views.Create {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You can either {0}, or choose to upload them later. You&apos;ll be able to do this from the &apos;Notification options&apos; page..
+        ///   Looks up a localized string similar to You can {0} now, or do it later by visiting your {1} page..
         /// </summary>
         public static string UploadPrenotificationsParagraph {
             get {
@@ -160,7 +187,7 @@ namespace EA.Iws.Web.Areas.NotificationMovements.Views.Create {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to upload the signed documents.
+        ///   Looks up a localized string similar to Upload your signed documents.
         /// </summary>
         public static string UploadTheSignedDocuments {
             get {

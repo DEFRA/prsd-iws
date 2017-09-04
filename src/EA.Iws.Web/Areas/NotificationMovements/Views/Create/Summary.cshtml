@@ -33,7 +33,7 @@
 <div class="form-group">
     <ol class="list-number">
         <li>
-            @Html.Raw(string.Format(Resources.DownloadTheDocuments, Html.ActionLink("IWS movement", "GenerateDocuments", "Download", Model.MovementIds.ToRouteValueDictionary("movementIds"), null)))
+            @Html.Raw(string.Format(Resources.DownloadTheDocuments, Html.ActionLink(Resources.Download, "GenerateDocuments", "Download", Model.MovementIds.ToRouteValueDictionary("movementIds"), null)))
         </li>
         <li>@Resources.PrintTheDocuments</li>
         <li>@Resources.CompleteBlocks7And8</li>
@@ -42,7 +42,15 @@
     </ol>
 </div>
 
-<p>@Html.Raw(string.Format(Resources.UploadPrenotificationsParagraph, Html.ActionLink(Resources.UploadTheSignedFilesNow, "Index", "Upload", Model.MovementIds.ToRouteValueDictionary("movementIds"), null)))</p>
+<p>
+    @Html.Raw(string.Format(Resources.UploadPrenotificationsParagraph,
+        Html.ActionLink(Resources.UploadTheSignedFilesNow, "Index", "Upload", Model.MovementIds.ToRouteValueDictionary("movementIds"), null),
+        Html.ActionLink(Resources.NotificationOptions, "Index", "Options", new { area = "NotificationApplication", id = ViewContext.RouteData.Values["notificationId"] }, null)))
+</p>
+
+<p>
+    @Html.ActionLink(Resources.CreateNewLink, "Index", "Create")
+</p>
 
 <div class="form-group">
     @Html.ActionLink(Constants.ContinueOnlyButtonText, "Index", "Options",
