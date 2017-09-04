@@ -33,6 +33,7 @@
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<ActionResult> Exporter(Guid id, EditContactViewModel model)
         {
             if (!ModelState.IsValid)
@@ -59,6 +60,7 @@
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<ActionResult> Importer(Guid id, EditContactViewModel model)
         {
             if (!ModelState.IsValid)

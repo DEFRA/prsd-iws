@@ -7,6 +7,9 @@
 
 @using (Html.BeginForm())
 {
+    @Html.AntiForgeryToken()
+    @Html.Gds().ValidationSummary()
+
     @Html.EditorForModel()
 
     <button type="submit" class="button">@Constants.ContinueButtonText</button>
