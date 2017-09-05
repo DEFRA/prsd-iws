@@ -45,7 +45,10 @@
                 @Html.Gds().LabelFor(m => m.NotificationReceivedStart, showOptionalLabel: false)
                 @Html.Gds().ValidationMessageFor(m => m.NotificationReceivedStart)
                 @Html.Gds().ValidationMessageFor(m => m.NotificationReceivedEnd)
-                @Html.EditorFor(m => m.NotificationReceivedStart)
+
+                <div class="form-group">
+                    @Html.EditorFor(m => m.NotificationReceivedStart)
+                </div>
                 <div class="form-group">
                     @Html.Gds().LabelFor(m => m.NotificationReceivedEnd, showOptionalLabel: false)
                     @Html.EditorFor(m => m.NotificationReceivedEnd)
@@ -140,7 +143,10 @@
                 @Html.Gds().LabelFor(m => m.ConsentValidFromStart, showOptionalLabel: false)
                 @Html.Gds().ValidationMessageFor(m => m.ConsentValidFromStart)
                 @Html.Gds().ValidationMessageFor(m => m.ConsentValidFromEnd)
-                @Html.EditorFor(m => m.ConsentValidFromStart)
+
+                <div class="form-group">
+                    @Html.EditorFor(m => m.ConsentValidFromStart)
+                </div>
                 <div class="form-group">
                     @Html.Gds().LabelFor(m => m.ConsentValidFromEnd, showOptionalLabel: false)
                     @Html.EditorFor(m => m.ConsentValidFromEnd)
@@ -151,7 +157,10 @@
                 @Html.Gds().LabelFor(m => m.ConsentValidToStart, showOptionalLabel: false)
                 @Html.Gds().ValidationMessageFor(m => m.ConsentValidToStart)
                 @Html.Gds().ValidationMessageFor(m => m.ConsentValidToEnd)
-                @Html.EditorFor(m => m.ConsentValidToStart)
+
+                <div class="form-group">
+                    @Html.EditorFor(m => m.ConsentValidToStart)
+                </div>
                 <div class="form-group">
                     @Html.Gds().LabelFor(m => m.ConsentValidToEnd, showOptionalLabel: false)
                     @Html.EditorFor(m => m.ConsentValidToEnd)
