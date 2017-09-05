@@ -262,7 +262,13 @@
                 </table>
             </div>
 
-            @Html.Pager(Model.PageSize, Model.PageNumber, Model.NumberofShipments)
+            @Html.Pager(Model.PageSize, Model.PageNumber, Model.NumberofShipments).Options(o =>
+            {
+                if (Model.SelectedMovementStatus.HasValue)
+                {
+                    o.AddRouteValue("status", (int)Model.SelectedMovementStatus.Value);
+                }
+            })
         </section>
     }
 </div>
