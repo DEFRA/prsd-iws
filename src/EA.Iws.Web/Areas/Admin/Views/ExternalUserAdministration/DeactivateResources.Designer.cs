@@ -115,7 +115,7 @@ namespace EA.Iws.Web.Areas.Admin.Views.ExternalUserAdministration {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to If any activity is required to be performed on these notifiactions then they will need to be reallocated to another active registered user..
+        ///   Looks up a localized string similar to If any activity is required to be performed on these notifications then they will need to be reallocated to another active registered user..
         /// </summary>
         public static string ReallocateMultiple {
             get {
@@ -124,7 +124,7 @@ namespace EA.Iws.Web.Areas.Admin.Views.ExternalUserAdministration {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to If any activity is required to be performed on this notifiaction then it will need to be reallocated to another active registered user..
+        ///   Looks up a localized string similar to If any activity is required to be performed on this notification then it will need to be reallocated to another active registered user..
         /// </summary>
         public static string ReallocateSingle {
             get {
