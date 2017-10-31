@@ -49,7 +49,8 @@
                     [HasMultipleFacilities],
                     [ConsentFrom],
                     [ConsentTo],
-                    [Status]                   
+                    [Status],
+                    [IsInterim]
                   FROM
                     [Reports].[Finance]
                   WHERE
