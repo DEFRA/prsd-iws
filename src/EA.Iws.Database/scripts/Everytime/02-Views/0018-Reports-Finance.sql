@@ -36,14 +36,14 @@ AS
         NA.Status,
         N.CompetentAuthorityId,
         NA.ReceivedDate,
-		CASE WHEN FC.IsInterim IS NULL THEN InS.IsInterim ELSE FC.IsInterim END AS IsInterim
+        CASE WHEN FC.IsInterim IS NULL THEN InS.IsInterim ELSE FC.IsInterim END AS IsInterim
     FROM [Reports].[NotificationOrganisations] NO
     INNER JOIN [Reports].[NotificationAssessment] NA ON NO.Id = NA.NotificationId
     INNER JOIN [Reports].[Notification] N ON NO.Id = N.Id
     LEFT JOIN [Reports].[Payments] P ON NO.Id = P.NotificationId
     LEFT JOIN [Person].[InternalUser] IU ON N.[UserId] = IU.[UserId]
-	LEFT JOIN [Notification].[FacilityCollection] FC ON NO.Id = FC.NotificationId
-	LEFT JOIN [ImportNotification].[InterimStatus] InS ON NO.Id = InS.ImportNotificationId
+    LEFT JOIN [Notification].[FacilityCollection] FC ON NO.Id = FC.NotificationId
+    LEFT JOIN [ImportNotification].[InterimStatus] InS ON NO.Id = InS.ImportNotificationId
     WHERE 
         (NA.[ExportStatusId] IS NULL OR NA.[ExportStatusId] <> 1 OR (NA.[ExportStatusId] = 1 AND IU.[UserId] IS NOT NULL))
         AND (NA.[ImportStatusId] IS NULL OR NA.[ImportStatusId] > 2)
