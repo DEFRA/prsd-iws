@@ -63,5 +63,7 @@
         public DateTime? ConsentTo { get; protected set; }
 
         public string Status { get; protected set; }
+
+        public bool? IsInterim { get; protected set; }
     }
 }

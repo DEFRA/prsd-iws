@@ -54,7 +54,10 @@
                 type.Append(" (Pre-consented)");
             }
 
-            type.Append(source.HasMultipleFacilities ? " (Interim)" : " (Non-interim)");
+            if (source.IsInterim != null)
+            {
+                type.Append(source.IsInterim.Value ? " (Interim)" : " (Non-interim)");
+            }
 
             return type.ToString();
         }
