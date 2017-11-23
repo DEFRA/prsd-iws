@@ -47,7 +47,7 @@
                     LEFT JOIN [Notification].[Producer] P ON PC.Id = P.ProducerCollectionId AND P.IsSiteOfExport = 1
                 WHERE 
                     N.UserId = @Id
-                    AND @Status IS NULL OR NA.Status = @Status
+                    AND (@Status IS NULL OR NA.Status = @Status)
                 ORDER BY
                     N.CreatedDate DESC
                 OFFSET (@Skip) ROWS FETCH NEXT (@Take) ROWS ONLY", 
@@ -60,7 +60,7 @@
                 @"SELECT COUNT(N.[Id])
                   FROM [Notification].[Notification] N
                   INNER JOIN [Notification].[NotificationAssessment] NA ON N.Id = NA.NotificationApplicationId
-                  WHERE N.UserId = @Id AND @Status IS NULL OR NA.Status = @Status",
+                  WHERE N.UserId = @Id AND (@Status IS NULL OR NA.Status = @Status)",
                 new SqlParameter("@Id", userContext.UserId),
                 new SqlParameter("@Status", (object)message.NotificationStatus ?? DBNull.Value)).SingleAsync();
 
