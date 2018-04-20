@@ -153,13 +153,11 @@
                 bool hasExitOffice = progressResult.CustomsOffices.First().ExitCustomsOfficeId.HasValue;
 
                 bool allInEu = importIsEuMember && exportIsEuMember && allTransitStatsAreEu;
-                bool importOutsideEu = !importIsEuMember && exportIsEuMember && allTransitStatsAreEu;
-                bool importAndTransitsOutsideEu = !importIsEuMember && exportIsEuMember && !allTransitStatsAreEu;
+                bool importOutsideEu = !importIsEuMember && exportIsEuMember;
                 bool transitsOutsideEu = importIsEuMember && exportIsEuMember && !allTransitStatsAreEu;
 
                 progress.HasCustomsOffice = allInEu
                     || (importOutsideEu && hasExitOffice)
-                    || (importAndTransitsOutsideEu && hasEntryOffice)
                     || (transitsOutsideEu && hasExitOffice && hasEntryOffice);
             }
             else
