@@ -46,5 +46,5 @@ AS
     LEFT JOIN [ImportNotification].[InterimStatus] InS ON NO.Id = InS.ImportNotificationId
     WHERE 
         (NA.[ExportStatusId] IS NULL OR NA.[ExportStatusId] <> 1 OR (NA.[ExportStatusId] = 1 AND IU.[UserId] IS NOT NULL))
-        AND (NA.[ImportStatusId] IS NULL OR NA.[ImportStatusId] > 2)
+        AND (NA.[ImportStatusId] IS NULL OR NA.[ImportStatusId] > 1)
 GO
