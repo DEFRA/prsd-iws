@@ -56,8 +56,8 @@
         {
             var transaction = await transactionRepository.GetById(transactionId);
             var balance = await transactionCalculator.Balance(transaction.NotificationId)
-                - transaction.Credit.GetValueOrDefault()
-                + transaction.Debit.GetValueOrDefault();
+                + transaction.Credit.GetValueOrDefault()
+                - transaction.Debit.GetValueOrDefault();
             var assessment = await notificationAssessmentRepository.GetByNotificationId(transaction.NotificationId);
 
             await transactionRepository.DeleteById(transactionId);
