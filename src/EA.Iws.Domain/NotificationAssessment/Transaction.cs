@@ -1,6 +1,7 @@
 ﻿namespace EA.Iws.Domain.NotificationAssessment
 {
     using System;
+    using System.Linq;
     using System.Threading.Tasks;
     using Core.ComponentRegistration;
 
@@ -31,37 +32,58 @@
                 - transaction.Credit.GetValueOrDefault()
                 + transaction.Debit.GetValueOrDefault();
 
-            if (transaction.Credit > 0 && balance <= 0)
+            transactionRepository.Add(transaction);
+
+            if (balance <= 0)
             {
                 var assessment = await notificationAssessmentRepository.GetByNotificationId(transaction.NotificationId);
+                var transactions = await transactionRepository.GetTransactions(transaction.NotificationId);
+                transactions = transactions.Where(t => t.Credit > 0).OrderByDescending(t => t.Date).ToList();
 
-                if (assessment.Dates.PaymentReceivedDate == null)
+                foreach (var tran in transactions)
                 {
-                    assessment.Dates.PaymentReceivedDate = transaction.Date;
+                    if (balance == 0)
+                    {
+                        assessment.Dates.PaymentReceivedDate = tran.Date;
+                        break;
+                    }
+                    balance += tran.Credit.GetValueOrDefault() - tran.Debit.GetValueOrDefault();
                 }
             }
-
-            transactionRepository.Add(transaction);
         }
 
         public async Task Delete(Guid notificationId, Guid transactionId)
         {
             var transaction = await transactionRepository.GetById(transactionId);
             var balance = await transactionCalculator.Balance(transaction.NotificationId)
-                + transaction.Credit.GetValueOrDefault()
-                - transaction.Debit.GetValueOrDefault();
+                - transaction.Credit.GetValueOrDefault()
+                + transaction.Debit.GetValueOrDefault();
+            var assessment = await notificationAssessmentRepository.GetByNotificationId(transaction.NotificationId);
+
+            await transactionRepository.DeleteById(transactionId);
 
             if (balance > 0)
             {
-                var assessment = await notificationAssessmentRepository.GetByNotificationId(transaction.NotificationId);
-
                 if (assessment.Dates.PaymentReceivedDate.HasValue)
                 {
                     assessment.Dates.PaymentReceivedDate = null;
                 }
             }
+            else
+            {
+                var transactions = await transactionRepository.GetTransactions(transaction.NotificationId);
+                transactions = transactions.Where(t => t.Credit > 0).OrderByDescending(t => t.Date).ToList();
 
-            await transactionRepository.DeleteById(transactionId);
+                foreach (var tran in transactions)
+                {
+                    if (balance == 0)
+                    {
+                        assessment.Dates.PaymentReceivedDate = tran.Date;
+                        break;
+                    }
+                    balance += tran.Credit.GetValueOrDefault() - tran.Debit.GetValueOrDefault();
+                }
+            }
         }
     }
 }
