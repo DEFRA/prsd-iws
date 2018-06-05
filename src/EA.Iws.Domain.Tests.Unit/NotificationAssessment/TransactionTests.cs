@@ -156,7 +156,7 @@
         }
 
         [Fact]
-        public async Task Delete_PaymentStillFullyReceived_ReceivedDateRemains()
+        public async Task Delete_PaymentStillFullyReceived_ReceivedDateUpdated()
         {
             var transactionId = new Guid("F7DF1DD7-E356-47E2-8C9C-281C4A824F94");
             var notificationTransaction = CreateNotificationTransaction(100);
@@ -177,6 +177,8 @@
 
             A.CallTo(() => notificationTransactionRepository.GetTransactions(notificationId))
                .Returns(transactionsList);
+
+            assessment.Dates.PaymentReceivedDate = new DateTime(2017, 2, 2);
 
             // Delete payment, balance now -£100
             await transaction.Delete(notificationId, transactionId);
