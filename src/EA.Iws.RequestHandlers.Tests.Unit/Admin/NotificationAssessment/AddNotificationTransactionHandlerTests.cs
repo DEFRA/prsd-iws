@@ -85,7 +85,7 @@
 
             await handler.HandleAsync(message);
 
-            Assert.Equal(existingDate, context.NotificationAssessments.Single().Dates.PaymentReceivedDate);
+            Assert.Equal(NewDate, context.NotificationAssessments.Single().Dates.PaymentReceivedDate);
         }
 
         [Fact]
