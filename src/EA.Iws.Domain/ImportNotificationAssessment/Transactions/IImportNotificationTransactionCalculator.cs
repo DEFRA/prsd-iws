@@ -10,5 +10,7 @@
         Task<bool> PaymentIsNowFullyReceived(Guid importNotificationId, decimal credit);
 
         Task<decimal> Balance(Guid importNotificationId);
+
+        Task<DateTime?> PaymentReceivedDate(Guid notificationId);
     }
 }
