@@ -57,5 +57,26 @@
 
             return totalBillable - totalPaid;
         }
+
+        public async Task<DateTime?> PaymentReceivedDate(Guid notificationId)
+        {
+            var balance = await Balance(notificationId);
+
+            if (balance <= 0)
+            {
+                var transactions = await transactionRepository.GetTransactions(notificationId);
+                transactions = transactions.Where(t => t.Credit > 0).OrderByDescending(t => t.Date).ToList();
+
+                foreach (var tran in transactions)
+                {
+                    if (balance == 0)
+                    {
+                        return tran.Date;
+                    }
+                    balance += tran.Credit.GetValueOrDefault() - tran.Debit.GetValueOrDefault();
+                }
+            }
+            return null;
+        }
     }
 }

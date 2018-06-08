@@ -37,30 +37,18 @@
                 .Returns(1000);
 
             transaction = new Transaction(
-                notificationAssessmentRepository, 
+                notificationAssessmentRepository,
                 notificationTransactionRepository,
                 notificationTransactionCalculator);
         }
 
-        private NotificationTransaction CreateNotificationTransaction(int credit)
+        private NotificationTransaction CreateNotificationTransaction(decimal credit, DateTime? date = null)
         {
             return new NotificationTransaction(
                 new NotificationTransactionData
                 {
                     Credit = credit,
-                    Date = new DateTime(2017, 1, 1),
-                    NotificationId = notificationId,
-                    PaymentMethod = PaymentMethod.Card
-                });
-        }
-
-        private NotificationTransaction CreateNotificationTransaction(int credit, DateTime date)
-        {
-            return new NotificationTransaction(
-                new NotificationTransactionData
-                {
-                    Credit = credit,
-                    Date = date,
+                    Date = date == null ? new DateTime(2017, 1, 1) : date.GetValueOrDefault(),
                     NotificationId = notificationId,
                     PaymentMethod = PaymentMethod.Card
                 });
@@ -75,16 +63,18 @@
 
             A.CallTo(() => notificationTransactionRepository.Add(notificationTransaction))
                 .MustHaveHappened();
+
+            A.CallTo(() => notificationTransactionCalculator.PaymentReceivedDate(notificationTransaction.NotificationId))
+                .MustHaveHappened();
         }
 
         [Fact]
         public async Task Save_PaymentFullyReceived_SetsReceivedDate()
         {
-            var notificationTransaction = CreateNotificationTransaction(1000);
-            var transactionsList = new List<NotificationTransaction> { notificationTransaction };
+            var notificationTransaction = CreateNotificationTransaction(1000, new DateTime(2017, 1, 1));
 
-            A.CallTo(() => notificationTransactionRepository.GetTransactions(notificationId))
-                .Returns(transactionsList);
+            A.CallTo(() => notificationTransactionCalculator.PaymentReceivedDate(notificationTransaction.NotificationId))
+                .Returns(notificationTransaction.Date);
 
             await transaction.Save(notificationTransaction);
 
@@ -92,38 +82,9 @@
         }
 
         [Fact]
-        public async Task Save_PaymentFullyReceived_CorrectPaymentReceivedDate()
-        {
-            var notificationTransaction = CreateNotificationTransaction(300, new DateTime(2018, 4, 4));
-            var transactionsList = new List<NotificationTransaction>
-            {
-                CreateNotificationTransaction(300, new DateTime(2018, 1, 1)),
-                CreateNotificationTransaction(300, new DateTime(2018, 2, 2)),
-                // This will be the payment that reaches 1000 when ordered by date.
-                CreateNotificationTransaction(400, new DateTime(2018, 3, 3)),
-                notificationTransaction
-            };
-
-            // Set payment to fully received
-            A.CallTo(() => notificationTransactionCalculator.Balance(notificationId))
-                .Returns(0);
-
-            A.CallTo(() => notificationTransactionRepository.GetTransactions(notificationId))
-                .Returns(transactionsList);
-
-            await transaction.Save(notificationTransaction);
-
-            Assert.Equal(assessment.Dates.PaymentReceivedDate, new DateTime(2018, 3, 3));
-        }
-
-        [Fact]
         public async Task Save_PaymentNotFullyReceived_ReceivedDateNull()
         {
             var notificationTransaction = CreateNotificationTransaction(999);
-            var transactionsList = new List<NotificationTransaction> { notificationTransaction };
-
-            A.CallTo(() => notificationTransactionRepository.GetTransactions(notificationId))
-                .Returns(transactionsList);
 
             await transaction.Save(notificationTransaction);
 
@@ -135,7 +96,6 @@
         {
             var transactionId = new Guid("F7DF1DD7-E356-47E2-8C9C-281C4A824F94");
             var notificationTransaction = CreateNotificationTransaction(600);
-            var transactionsList = new List<NotificationTransaction> { notificationTransaction };
 
             A.CallTo(() => notificationTransactionRepository.GetById(transactionId))
                 .Returns(notificationTransaction);
@@ -144,13 +104,13 @@
             A.CallTo(() => notificationTransactionCalculator.Balance(notificationId))
                 .Returns(0);
 
-            A.CallTo(() => notificationTransactionRepository.GetTransactions(notificationId))
-                .Returns(transactionsList);
-
             assessment.Dates.PaymentReceivedDate = new DateTime(2017, 2, 2);
 
             // Delete payment, balance now £600
             await transaction.Delete(notificationId, transactionId);
+
+            A.CallTo(() => notificationTransactionCalculator.PaymentReceivedDate(notificationId))
+                .MustHaveHappened();
 
             Assert.Null(assessment.Dates.PaymentReceivedDate);
         }
@@ -160,13 +120,6 @@
         {
             var transactionId = new Guid("F7DF1DD7-E356-47E2-8C9C-281C4A824F94");
             var notificationTransaction = CreateNotificationTransaction(100);
-            var transactionsList = new List<NotificationTransaction>
-            {
-                CreateNotificationTransaction(300, new DateTime(2018, 1, 1)),
-                // This will be the payment that reaches 1000 when ordered by date.
-                CreateNotificationTransaction(700, new DateTime(2018, 2, 2)),
-                CreateNotificationTransaction(100, new DateTime(2018, 3, 3))
-            };
 
             A.CallTo(() => notificationTransactionRepository.GetById(transactionId))
                 .Returns(notificationTransaction);
@@ -175,8 +128,8 @@
             A.CallTo(() => notificationTransactionCalculator.Balance(notificationId))
                 .Returns(-200);
 
-            A.CallTo(() => notificationTransactionRepository.GetTransactions(notificationId))
-               .Returns(transactionsList);
+            A.CallTo(() => notificationTransactionCalculator.PaymentReceivedDate(notificationTransaction.NotificationId))
+                .Returns(new DateTime(2018, 2, 2));
 
             assessment.Dates.PaymentReceivedDate = new DateTime(2017, 2, 2);
 

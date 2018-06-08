@@ -17,6 +17,7 @@
 
     public class AddNotificationTransactionHandlerTests
     {
+        private const decimal TotalBillable = 200.00m;
         private static readonly DateTime NewDate = new DateTime(2015, 11, 01);
         private readonly DateTime existingDate = new DateTime(2015, 10, 01);
         private readonly DateTime newerDate = new DateTime(2015, 11, 02);
@@ -26,11 +27,13 @@
         private readonly AddNotificationTransactionHandler handler;
         private readonly TestIwsContext context = new TestIwsContext();
         private readonly NotificationAssessment assessment;
+        private readonly List<NotificationTransaction> transactions;
 
         public AddNotificationTransactionHandlerTests()
         {
             var chargeCalculator = A.Fake<INotificationChargeCalculator>();
-            A.CallTo(() => chargeCalculator.GetValue(A<Guid>.Ignored)).Returns(200.00m);
+            A.CallTo(() => chargeCalculator.GetValue(A<Guid>.Ignored)).Returns(TotalBillable);
+            transactions = new List<NotificationTransaction>();
 
             var transactionsList = new List<NotificationTransaction>();
             transactionsList.Add(new NotificationTransaction(new NotificationTransactionData
@@ -42,7 +45,7 @@
             }));
 
             var repository = A.Fake<INotificationTransactionRepository>();
-            A.CallTo(() => repository.GetTransactions(NotificationId)).Returns(transactionsList);
+            A.CallTo(() => repository.GetTransactions(NotificationId)).Returns(transactions);
             
             context.ShipmentInfos.Add(new TestableShipmentInfo { NotificationId = NotificationId });
 
@@ -63,12 +66,9 @@
         public async Task PaymentComplete_PaymentReceivedDateNotSet_AddsDateToAssessment()
         {
             var newDate = NewDate;
-            var data = GetNotificationTransactionData(newDate);
-            data.Credit = 100.00m;
 
-            var message = new AddNotificationTransaction(data);
-
-            await handler.HandleAsync(message);
+            var paymentComplete = GetAddNotificationTransaction(newDate, TotalBillable, null);
+            await handler.HandleAsync(paymentComplete);
 
             Assert.Equal(newDate, context.NotificationAssessments.Single().Dates.PaymentReceivedDate);
         }
@@ -78,29 +78,21 @@
         {
             ObjectInstantiator<NotificationDates>.SetProperty(x => x.PaymentReceivedDate, existingDate, assessment.Dates);
 
-            var data = GetNotificationTransactionData(NewDate);
-            data.Credit = 100.00m;
-            
-            var message = new AddNotificationTransaction(data);
-
-            await handler.HandleAsync(message);
+            var paymentComplete = GetAddNotificationTransaction(NewDate, TotalBillable, null);
+            await handler.HandleAsync(paymentComplete);
 
             Assert.Equal(NewDate, context.NotificationAssessments.Single().Dates.PaymentReceivedDate);
         }
 
         [Fact]
-        public async Task PaymentMadeButPaymentIncomplete_DoesNotAddDateToAssessment()
+        public async Task PaymentMadeButPaymentIncomplete_PaymentReceivedDateNull()
         {
             ObjectInstantiator<NotificationDates>.SetProperty(x => x.PaymentReceivedDate, existingDate, assessment.Dates);
 
-            var data = GetNotificationTransactionData(NewDate);
-            data.Credit = 50.00m;
+            var incompletePayment = GetAddNotificationTransaction(existingDate, 50.00m, null);
+            await handler.HandleAsync(incompletePayment);
 
-            var message = new AddNotificationTransaction(data);
-
-            await handler.HandleAsync(message);
-
-            Assert.Equal(existingDate, context.NotificationAssessments.Single().Dates.PaymentReceivedDate);
+            Assert.Equal(null, context.NotificationAssessments.Single().Dates.PaymentReceivedDate);
         }
 
         [Fact]
@@ -108,55 +100,49 @@
         {
             ObjectInstantiator<NotificationDates>.SetProperty(x => x.PaymentReceivedDate, existingDate, assessment.Dates);
 
-            var creditData = GetNotificationTransactionData(existingDate);
-            creditData.Debit = 30.00m;
+            var paymentComplete = GetAddNotificationTransaction(existingDate, TotalBillable, null);
+            await handler.HandleAsync(paymentComplete);
 
-            var debitData = GetNotificationTransactionData(NewDate);
-            debitData.Debit = 50.00m;
+            var refundMade = GetAddNotificationTransaction(existingDate, null, 50.00m);
+            await handler.HandleAsync(refundMade);
 
-            var message = new AddNotificationTransaction(creditData);
-            await handler.HandleAsync(message);
-
-            message = new AddNotificationTransaction(debitData);
-            await handler.HandleAsync(message);
-
-            Assert.Equal(existingDate, context.NotificationAssessments.Single().Dates.PaymentReceivedDate);
+            Assert.Equal(null, context.NotificationAssessments.Single().Dates.PaymentReceivedDate);
         }
         
         [Fact]
-        public async Task PaymentComplete_RefundMade_PaymentCompletedAgain_DoesNotAddDateToAssessment()
+        public async Task PaymentComplete_RefundMade_PaymentCompletedAgain_UpdatesDateToAssessment()
         {
             ObjectInstantiator<NotificationDates>.SetProperty(x => x.PaymentReceivedDate, existingDate, assessment.Dates);
 
-            var paymentComplete = GetNotificationTransactionData(existingDate);
-            paymentComplete.Credit = 200.00m;
+            var paymentComplete = GetAddNotificationTransaction(existingDate, TotalBillable, null);
+            await handler.HandleAsync(paymentComplete);
 
-            var refundMade = GetNotificationTransactionData(NewDate);
-            refundMade.Debit = 50.00m;
+            var refundMade = GetAddNotificationTransaction(NewDate, null, 50.00m);
+            await handler.HandleAsync(refundMade);
 
-            var paymentCompleteAgain = GetNotificationTransactionData(newerDate);
-            paymentCompleteAgain.Credit = 200.00m;
+            var paymentCompleteAgain = GetAddNotificationTransaction(newerDate, 50.00m, null);
+            await handler.HandleAsync(paymentCompleteAgain);
 
-            var message = new AddNotificationTransaction(paymentComplete);
-            await handler.HandleAsync(message);
-
-            message = new AddNotificationTransaction(refundMade);
-            await handler.HandleAsync(message);
-
-            message = new AddNotificationTransaction(paymentCompleteAgain);
-            await handler.HandleAsync(message);
-
-            Assert.Equal(existingDate, context.NotificationAssessments.Single().Dates.PaymentReceivedDate);
+            Assert.Equal(newerDate, context.NotificationAssessments.Single().Dates.PaymentReceivedDate);
         }
 
-        private NotificationTransactionData GetNotificationTransactionData(DateTime date)
+        private AddNotificationTransaction GetAddNotificationTransaction(DateTime date, decimal? credit, decimal? debit)
         {
-            return new NotificationTransactionData
-            {
-                Date = date,
-                NotificationId = NotificationId,
-                PaymentMethod = PaymentMethod.BacsChaps
-            };
+            var transactionData =
+                new NotificationTransactionData
+                {
+                    Date = date,
+                    Credit = credit,
+                    Debit = debit,
+                    NotificationId = NotificationId,
+                    PaymentMethod = PaymentMethod.BacsChaps
+                };
+
+            var message = new AddNotificationTransaction(transactionData);
+
+            transactions.Add(new NotificationTransaction(transactionData));
+
+            return message;
         }
     }
 }
