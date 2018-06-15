@@ -74,11 +74,12 @@
 
                 foreach (var tran in transactions)
                 {
-                    if (balance == 0)
+                    balance += tran.Credit.GetValueOrDefault() - tran.Debit.GetValueOrDefault();
+
+                    if (balance > 0)
                     {
                         return tran.Date;
                     }
-                    balance += tran.Credit.GetValueOrDefault() - tran.Debit.GetValueOrDefault();
                 }
             }
             return null;

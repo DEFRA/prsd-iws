@@ -1,7 +1,6 @@
 ﻿namespace EA.Iws.Domain.NotificationAssessment
 {
     using System;
-    using System.Linq;
     using System.Threading.Tasks;
     using Core.ComponentRegistration;
 

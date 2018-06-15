@@ -1,7 +1,6 @@
 ﻿namespace EA.Iws.Domain.ImportNotificationAssessment.Transactions
 {
     using System;
-    using System.Linq;
     using System.Threading.Tasks;
     using Core.ComponentRegistration;
     using Core.ImportNotificationAssessment;
