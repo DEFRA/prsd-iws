@@ -1,6 +1,7 @@
 ﻿namespace EA.Iws.Domain.Tests.Unit.NotificationAssessment
 {
     using System;
+    using System.Collections.Generic;
     using System.Threading.Tasks;
     using Core.NotificationAssessment;
     using Core.Shared;
@@ -36,18 +37,18 @@
                 .Returns(1000);
 
             transaction = new Transaction(
-                notificationAssessmentRepository, 
+                notificationAssessmentRepository,
                 notificationTransactionRepository,
                 notificationTransactionCalculator);
         }
 
-        private NotificationTransaction CreateNotificationTransaction(int credit)
+        private NotificationTransaction CreateNotificationTransaction(decimal credit, DateTime? date = null)
         {
             return new NotificationTransaction(
                 new NotificationTransactionData
                 {
                     Credit = credit,
-                    Date = new DateTime(2017, 1, 1),
+                    Date = date == null ? new DateTime(2017, 1, 1) : date.GetValueOrDefault(),
                     NotificationId = notificationId,
                     PaymentMethod = PaymentMethod.Card
                 });
@@ -62,12 +63,18 @@
 
             A.CallTo(() => notificationTransactionRepository.Add(notificationTransaction))
                 .MustHaveHappened();
+
+            A.CallTo(() => notificationTransactionCalculator.PaymentReceivedDate(notificationTransaction.NotificationId))
+                .MustHaveHappened();
         }
 
         [Fact]
         public async Task Save_PaymentFullyReceived_SetsReceivedDate()
         {
-            var notificationTransaction = CreateNotificationTransaction(1000);
+            var notificationTransaction = CreateNotificationTransaction(1000, new DateTime(2017, 1, 1));
+
+            A.CallTo(() => notificationTransactionCalculator.PaymentReceivedDate(notificationTransaction.NotificationId))
+                .Returns(notificationTransaction.Date);
 
             await transaction.Save(notificationTransaction);
 
@@ -102,11 +109,14 @@
             // Delete payment, balance now £600
             await transaction.Delete(notificationId, transactionId);
 
+            A.CallTo(() => notificationTransactionCalculator.PaymentReceivedDate(notificationId))
+                .MustHaveHappened();
+
             Assert.Null(assessment.Dates.PaymentReceivedDate);
         }
 
         [Fact]
-        public async Task Delete_PaymentStillFullyReceived_ReceivedDateRemains()
+        public async Task Delete_PaymentStillFullyReceived_ReceivedDateUpdated()
         {
             var transactionId = new Guid("F7DF1DD7-E356-47E2-8C9C-281C4A824F94");
             var notificationTransaction = CreateNotificationTransaction(100);
@@ -116,14 +126,17 @@
 
             // Set payment to overpaid
             A.CallTo(() => notificationTransactionCalculator.Balance(notificationId))
-                .Returns(-100);
+                .Returns(-200);
+
+            A.CallTo(() => notificationTransactionCalculator.PaymentReceivedDate(notificationTransaction.NotificationId))
+                .Returns(new DateTime(2018, 2, 2));
 
             assessment.Dates.PaymentReceivedDate = new DateTime(2017, 2, 2);
 
-            // Delete payment, balance now £0
+            // Delete payment, balance now -£100
             await transaction.Delete(notificationId, transactionId);
 
-            Assert.Equal(assessment.Dates.PaymentReceivedDate, new DateTime(2017, 2, 2));
+            Assert.Equal(assessment.Dates.PaymentReceivedDate, new DateTime(2018, 2, 2));
         }
     }
 }

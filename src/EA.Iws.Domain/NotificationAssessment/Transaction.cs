@@ -10,9 +10,9 @@
         private readonly INotificationAssessmentRepository notificationAssessmentRepository;
         private readonly INotificationTransactionRepository transactionRepository;
         private readonly INotificationTransactionCalculator transactionCalculator;
-
+        
         public Transaction(INotificationAssessmentRepository notificationAssessmentRepository,
-            INotificationTransactionRepository transactionRepository,
+            INotificationTransactionRepository transactionRepository, 
             INotificationTransactionCalculator transactionCalculator)
         {
             this.notificationAssessmentRepository = notificationAssessmentRepository;
@@ -27,41 +27,35 @@
                 throw new InvalidOperationException("Transaction cannot refund more than has already been paid");
             }
 
-            var balance = await transactionCalculator.Balance(transaction.NotificationId)
-                - transaction.Credit.GetValueOrDefault()
-                + transaction.Debit.GetValueOrDefault();
-
-            if (transaction.Credit > 0 && balance <= 0)
-            {
-                var assessment = await notificationAssessmentRepository.GetByNotificationId(transaction.NotificationId);
-
-                if (assessment.Dates.PaymentReceivedDate == null)
-                {
-                    assessment.Dates.PaymentReceivedDate = transaction.Date;
-                }
-            }
-
             transactionRepository.Add(transaction);
+
+            await UpdatePaymentReceivedDate(transaction.NotificationId);
         }
 
         public async Task Delete(Guid notificationId, Guid transactionId)
         {
-            var transaction = await transactionRepository.GetById(transactionId);
-            var balance = await transactionCalculator.Balance(transaction.NotificationId)
-                + transaction.Credit.GetValueOrDefault()
-                - transaction.Debit.GetValueOrDefault();
+            await transactionRepository.DeleteById(transactionId);
 
-            if (balance > 0)
+            await UpdatePaymentReceivedDate(notificationId);
+        }
+
+        private async Task UpdatePaymentReceivedDate(Guid notificationId)
+        {
+            var fullPaymentDate = await transactionCalculator.PaymentReceivedDate(notificationId);
+
+            var assessment = await notificationAssessmentRepository.GetByNotificationId(notificationId);
+
+            if (fullPaymentDate != null)
             {
-                var assessment = await notificationAssessmentRepository.GetByNotificationId(transaction.NotificationId);
-
+                assessment.Dates.PaymentReceivedDate = fullPaymentDate;
+            }
+            else
+            {
                 if (assessment.Dates.PaymentReceivedDate.HasValue)
                 {
                     assessment.Dates.PaymentReceivedDate = null;
                 }
             }
-
-            await transactionRepository.DeleteById(transactionId);
         }
     }
 }
