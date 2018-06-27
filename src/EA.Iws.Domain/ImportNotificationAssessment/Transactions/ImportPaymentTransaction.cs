@@ -26,41 +26,45 @@
         public async Task Save(Guid notificationId, DateTime date, decimal amount, PaymentMethod paymentMethod,
             string receiptNumber, string comments)
         {
-            if (await transactionCalculator.PaymentIsNowFullyReceived(notificationId, amount))
-            {
-                var assessment = await assessmentRepository.GetByNotification(notificationId);
+            var transaction = ImportNotificationTransaction.PaymentRecord(notificationId, date, amount,
+                paymentMethod, receiptNumber, comments);
 
-                if (assessment.Status == ImportNotificationStatus.AwaitingPayment)
-                {
-                    assessment.PaymentComplete(date);
-                }
-                else if (!assessment.Dates.PaymentReceivedDate.HasValue)
-                {
-                    assessment.Dates.PaymentReceivedDate = date;
-                }
-            }
+            transactionRepository.Add(transaction);
 
-            transactionRepository.Add(ImportNotificationTransaction.PaymentRecord(notificationId, date, amount, paymentMethod, receiptNumber, comments));
+            await UpdatePaymentReceivedDate(notificationId);
         }
 
         public async Task Delete(Guid notificationId, Guid transactionId)
         {
-            var transaction = await transactionRepository.GetById(transactionId);
-            var balance = await transactionCalculator.Balance(notificationId)
-                + transaction.Credit.GetValueOrDefault()
-                - transaction.Debit.GetValueOrDefault();
+            await transactionRepository.DeleteById(transactionId);
 
-            if (balance > 0)
+            await UpdatePaymentReceivedDate(notificationId);
+        }
+
+        private async Task UpdatePaymentReceivedDate(Guid notificationId)
+        {
+            var fullPaymentDate = await transactionCalculator.PaymentReceivedDate(notificationId);
+
+            var assessment = await assessmentRepository.GetByNotification(notificationId);
+
+            if (fullPaymentDate != null)
             {
-                var assessment = await assessmentRepository.GetByNotification(notificationId);
-
+                if (assessment.Status == ImportNotificationStatus.AwaitingPayment)
+                {
+                    assessment.PaymentComplete(fullPaymentDate.GetValueOrDefault());
+                }
+                else
+                {
+                    assessment.Dates.PaymentReceivedDate = fullPaymentDate;
+                }
+            }
+            else
+            {
                 if (assessment.Dates.PaymentReceivedDate.HasValue)
                 {
                     assessment.Dates.PaymentReceivedDate = null;
                 }
             }
-
-            await transactionRepository.DeleteById(transactionId);
         }
     }
 }
