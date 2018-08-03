@@ -14,7 +14,5 @@ namespace EA.Iws.Domain.NotificationAssessment
         Task<decimal> RefundLimit(Guid notificationId);
 
         Task<decimal> TotalPaid(Guid notificationId);
-
-        Task<DateTime?> PaymentReceivedDate(Guid notificationId);
     }
 }

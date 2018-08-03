@@ -1,6 +1,8 @@
 ﻿namespace EA.Iws.Domain.NotificationAssessment
 {
     using System;
+    using System.Collections.Generic;
+    using System.Linq;
     using System.Threading.Tasks;
     using Core.ComponentRegistration;
 
@@ -29,25 +31,56 @@
 
             transactionRepository.Add(transaction);
 
-            await UpdatePaymentReceivedDate(transaction.NotificationId);
+            var balance = await transactionCalculator.Balance(transaction.NotificationId)
+                - transaction.Credit.GetValueOrDefault()
+                + transaction.Debit.GetValueOrDefault();
+            var transactions = await transactionRepository.GetTransactions(transaction.NotificationId);
+            var paymentDate = CalculatePaymentReceivedDate(transactions, balance);
+
+            await UpdatePaymentReceivedDate(paymentDate, transaction.NotificationId);
         }
 
         public async Task Delete(Guid notificationId, Guid transactionId)
         {
+            var transaction = await transactionRepository.GetById(transactionId);
+
             await transactionRepository.DeleteById(transactionId);
 
-            await UpdatePaymentReceivedDate(notificationId);
+            var balance = await transactionCalculator.Balance(transaction.NotificationId)
+                + transaction.Credit.GetValueOrDefault()
+                - transaction.Debit.GetValueOrDefault();
+            var transactions = await transactionRepository.GetTransactions(notificationId);
+            var paymentDate = CalculatePaymentReceivedDate(transactions, balance);
+
+            await UpdatePaymentReceivedDate(paymentDate, notificationId);
         }
 
-        private async Task UpdatePaymentReceivedDate(Guid notificationId)
+        private static DateTime? CalculatePaymentReceivedDate(IList<NotificationTransaction> transactions, decimal balance)
         {
-            var fullPaymentDate = await transactionCalculator.PaymentReceivedDate(notificationId);
+            if (balance <= 0)
+            {
+                transactions = transactions.Where(t => t.Credit > 0).OrderByDescending(t => t.Date).ToList();
 
+                foreach (var tran in transactions)
+                {
+                    balance += tran.Credit.GetValueOrDefault() - tran.Debit.GetValueOrDefault();
+
+                    if (balance > 0)
+                    {
+                        return tran.Date;
+                    }
+                }
+            }
+            return null;
+        }
+
+        private async Task UpdatePaymentReceivedDate(DateTime? paymentDate, Guid notificationId)
+        {
             var assessment = await notificationAssessmentRepository.GetByNotificationId(notificationId);
 
-            if (fullPaymentDate != null)
+            if (paymentDate != null)
             {
-                assessment.Dates.PaymentReceivedDate = fullPaymentDate;
+                assessment.Dates.PaymentReceivedDate = paymentDate;
             }
             else
             {
