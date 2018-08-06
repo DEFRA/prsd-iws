@@ -63,9 +63,6 @@
 
             A.CallTo(() => notificationTransactionRepository.Add(notificationTransaction))
                 .MustHaveHappened();
-
-            A.CallTo(() => notificationTransactionCalculator.PaymentReceivedDate(notificationTransaction.NotificationId))
-                .MustHaveHappened();
         }
 
         [Fact]
@@ -73,8 +70,11 @@
         {
             var notificationTransaction = CreateNotificationTransaction(1000, new DateTime(2017, 1, 1));
 
-            A.CallTo(() => notificationTransactionCalculator.PaymentReceivedDate(notificationTransaction.NotificationId))
-                .Returns(notificationTransaction.Date);
+            // Set payment to be the same amount of the transaction
+            A.CallTo(() => notificationTransactionCalculator.Balance(notificationId))
+                .Returns(1000);
+            A.CallTo(() => notificationTransactionRepository.GetTransactions(notificationId))
+                .Returns(new List<NotificationTransaction>() { notificationTransaction });
 
             await transaction.Save(notificationTransaction);
 
@@ -109,9 +109,6 @@
             // Delete payment, balance now £600
             await transaction.Delete(notificationId, transactionId);
 
-            A.CallTo(() => notificationTransactionCalculator.PaymentReceivedDate(notificationId))
-                .MustHaveHappened();
-
             Assert.Null(assessment.Dates.PaymentReceivedDate);
         }
 
@@ -119,24 +116,24 @@
         public async Task Delete_PaymentStillFullyReceived_ReceivedDateUpdated()
         {
             var transactionId = new Guid("F7DF1DD7-E356-47E2-8C9C-281C4A824F94");
-            var notificationTransaction = CreateNotificationTransaction(100);
+            var firstTransaction = CreateNotificationTransaction(100);
+            var secondTransaction = CreateNotificationTransaction(200);
 
             A.CallTo(() => notificationTransactionRepository.GetById(transactionId))
-                .Returns(notificationTransaction);
+                .Returns(firstTransaction);
 
             // Set payment to overpaid
             A.CallTo(() => notificationTransactionCalculator.Balance(notificationId))
                 .Returns(-200);
-
-            A.CallTo(() => notificationTransactionCalculator.PaymentReceivedDate(notificationTransaction.NotificationId))
-                .Returns(new DateTime(2018, 2, 2));
+            A.CallTo(() => notificationTransactionRepository.GetTransactions(notificationId))
+                .Returns(new List<NotificationTransaction>() { secondTransaction });
 
             assessment.Dates.PaymentReceivedDate = new DateTime(2017, 2, 2);
 
             // Delete payment, balance now -£100
             await transaction.Delete(notificationId, transactionId);
 
-            Assert.Equal(assessment.Dates.PaymentReceivedDate, new DateTime(2018, 2, 2));
+            Assert.Equal(assessment.Dates.PaymentReceivedDate, new DateTime(2017, 1, 1));
         }
     }
 }
