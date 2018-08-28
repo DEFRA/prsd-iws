@@ -50,6 +50,28 @@
             return transactions.Where(t => t.Credit > 0).OrderByDescending(t => t.Date).FirstOrDefault();
         }
 
+        public async Task<NotificationTransaction> PaymentReceivedDate(Guid notificationId)
+        {
+            var balance = await Balance(notificationId);
+
+            if (balance <= 0)
+            {
+                var transactions = await transactionRepository.GetTransactions(notificationId);
+                transactions = transactions.Where(t => t.Credit > 0).OrderByDescending(t => t.Date).ToList();
+
+                foreach (var tran in transactions)
+                {
+                    balance += tran.Credit.GetValueOrDefault() - tran.Debit.GetValueOrDefault();
+
+                    if (balance > 0)
+                    {
+                        return tran;
+                    }
+                }
+            }
+            return null;
+        }
+
         public async Task<decimal> RefundLimit(Guid notificationId)
         {
             var transactions = await transactionRepository.GetTransactions(notificationId);

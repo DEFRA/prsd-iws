@@ -11,6 +11,8 @@ namespace EA.Iws.Domain.NotificationAssessment
 
         Task<NotificationTransaction> LatestPayment(Guid notificationId);
 
+        Task<NotificationTransaction> PaymentReceivedDate(Guid notificationId);
+
         Task<decimal> RefundLimit(Guid notificationId);
 
         Task<decimal> TotalPaid(Guid notificationId);

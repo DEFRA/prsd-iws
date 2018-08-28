@@ -33,19 +33,20 @@
             var assessment = await notificationAssessmentRepository.GetByNotificationId(notificationId);
             var notification = await notificationApplicationRepository.GetById(notificationId);
 
-            var latestPayment = await transactionCalculator.LatestPayment(notificationId);
-            DateTime? lastestPaymentDate = null;
+            var paymentReceived = await transactionCalculator.PaymentReceivedDate(notificationId) ??
+                                      await transactionCalculator.LatestPayment(notificationId);
+            DateTime? paymentReceivedDate = null;
 
-            if (latestPayment != null)
+            if (paymentReceived != null)
             {
-                lastestPaymentDate = latestPayment.Date;
+                paymentReceivedDate = paymentReceived.Date;
             }
 
             return NotificationDatesSummary.Load(
                 assessment.Status,
                 assessment.Dates.NotificationReceivedDate,
                 notificationId,
-                lastestPaymentDate,
+                paymentReceivedDate,
                 await transactionCalculator.IsPaymentComplete(notificationId),
                 assessment.Dates.CommencementDate,
                 assessment.Dates.NameOfOfficer,
