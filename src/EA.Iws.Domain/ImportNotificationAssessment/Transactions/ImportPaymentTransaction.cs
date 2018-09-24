@@ -49,11 +49,11 @@
             var balance = await transactionCalculator.Balance(transaction.NotificationId)
                 + transaction.Credit.GetValueOrDefault()
                 - transaction.Debit.GetValueOrDefault();
-            var transactions = await transactionRepository.GetTransactions(notificationId);
+            var transactions = await transactionRepository.GetTransactions(transaction.NotificationId);
             transactions = transactions.Where(t => t.Id != transactionId);
             var paymentDate = CalculatePaymentReceivedDate(transactions, balance);
 
-            await UpdatePaymentReceivedDate(paymentDate, notificationId);
+            await UpdatePaymentReceivedDate(paymentDate, transaction.NotificationId);
 
             await transactionRepository.DeleteById(transactionId);
         }
