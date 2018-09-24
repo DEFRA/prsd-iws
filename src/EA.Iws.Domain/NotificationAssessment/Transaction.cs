@@ -43,16 +43,17 @@
         public async Task Delete(Guid notificationId, Guid transactionId)
         {
             var transaction = await transactionRepository.GetById(transactionId);
-
-            await transactionRepository.DeleteById(transactionId);
-
+            
             var balance = await transactionCalculator.Balance(transaction.NotificationId)
                 + transaction.Credit.GetValueOrDefault()
                 - transaction.Debit.GetValueOrDefault();
             var transactions = await transactionRepository.GetTransactions(notificationId);
+            transactions.Remove(transactions.FirstOrDefault(t => t.Id == transactionId));
             var paymentDate = CalculatePaymentReceivedDate(transactions, balance);
 
             await UpdatePaymentReceivedDate(paymentDate, notificationId);
+
+            await transactionRepository.DeleteById(transactionId);
         }
 
         private static DateTime? CalculatePaymentReceivedDate(IList<NotificationTransaction> transactions, decimal balance)
