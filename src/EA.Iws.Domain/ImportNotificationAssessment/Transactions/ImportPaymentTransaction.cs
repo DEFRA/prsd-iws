@@ -31,15 +31,18 @@
             var transaction = ImportNotificationTransaction.PaymentRecord(notificationId, date, amount,
                 paymentMethod, receiptNumber, comments);
 
-            transactionRepository.Add(transaction);
-
             var balance = await transactionCalculator.Balance(transaction.NotificationId)
                 - transaction.Credit.GetValueOrDefault()
                 + transaction.Debit.GetValueOrDefault();
-            var transactions = await transactionRepository.GetTransactions(transaction.NotificationId);
+
+            var transactions = (await transactionRepository.GetTransactions(transaction.NotificationId)).ToList();
+            transactions.Add(transaction);
+
             var paymentDate = CalculatePaymentReceivedDate(transactions, balance);
 
             await UpdatePaymentReceivedDate(paymentDate, notificationId);
+
+            transactionRepository.Add(transaction);
         }
 
         public async Task Delete(Guid notificationId, Guid transactionId)
@@ -49,8 +52,10 @@
             var balance = await transactionCalculator.Balance(transaction.NotificationId)
                 + transaction.Credit.GetValueOrDefault()
                 - transaction.Debit.GetValueOrDefault();
-            var transactions = await transactionRepository.GetTransactions(transaction.NotificationId);
-            transactions = transactions.Where(t => t.Id != transactionId);
+
+            var transactions = (await transactionRepository.GetTransactions(transaction.NotificationId)).ToList();
+            transactions.RemoveAll(t => t.Id == transactionId);
+
             var paymentDate = CalculatePaymentReceivedDate(transactions, balance);
 
             await UpdatePaymentReceivedDate(paymentDate, transaction.NotificationId);
