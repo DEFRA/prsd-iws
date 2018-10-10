@@ -48,6 +48,7 @@
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
+    @Html.HiddenFor(m => m.NotificationId)
     @Html.HiddenFor(m => m.TransactionId)
 
     <div class="form-group">

@@ -1,5 +1,6 @@
 ﻿namespace EA.Iws.RequestHandlers.ImportNotificationAssessment
 {
+    using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
     using Core.ImportNotificationAssessment;
@@ -46,10 +47,19 @@
             var interimStatus = await interimStatusRepository.GetByNotificationId(message.ImportNotificationId);
             var decisions = await notificationAssessmentDecisionRepository.GetByImportNotificationId(message.ImportNotificationId);
 
+            var paymentReceived = await transactionCalculator.PaymentReceivedDate(message.ImportNotificationId) ??
+                          await transactionCalculator.LatestPayment(message.ImportNotificationId);
+            DateTime? paymentReceivedDate = null;
+
+            if (paymentReceived != null)
+            {
+                paymentReceivedDate = paymentReceived.Date;
+            }
+
             return new KeyDatesData
             {
                 NotificationReceived = assessment.Dates.NotificationReceivedDate,
-                PaymentReceived = assessment.Dates.PaymentReceivedDate,
+                PaymentReceived = paymentReceivedDate,
                 IsPaymentComplete = assessment.Dates.PaymentReceivedDate.HasValue &&
                 await transactionCalculator.PaymentIsNowFullyReceived(message.ImportNotificationId, 0),
                 NameOfOfficer = assessment.Dates.NameOfOfficer,
