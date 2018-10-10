@@ -29,15 +29,18 @@
                 throw new InvalidOperationException("Transaction cannot refund more than has already been paid");
             }
 
-            transactionRepository.Add(transaction);
-
             var balance = await transactionCalculator.Balance(transaction.NotificationId)
                 - transaction.Credit.GetValueOrDefault()
                 + transaction.Debit.GetValueOrDefault();
-            var transactions = await transactionRepository.GetTransactions(transaction.NotificationId);
+
+            var transactions = (await transactionRepository.GetTransactions(transaction.NotificationId)).ToList();
+            transactions.Add(transaction);
+
             var paymentDate = CalculatePaymentReceivedDate(transactions, balance);
 
             await UpdatePaymentReceivedDate(paymentDate, transaction.NotificationId);
+
+            transactionRepository.Add(transaction);
         }
 
         public async Task Delete(Guid notificationId, Guid transactionId)
@@ -47,8 +50,10 @@
             var balance = await transactionCalculator.Balance(transaction.NotificationId)
                 + transaction.Credit.GetValueOrDefault()
                 - transaction.Debit.GetValueOrDefault();
-            var transactions = await transactionRepository.GetTransactions(transaction.NotificationId);
-            transactions.Remove(transactions.FirstOrDefault(t => t.Id == transactionId));
+
+            var transactions = (await transactionRepository.GetTransactions(transaction.NotificationId)).ToList();
+            transactions.RemoveAll(t => t.Id == transactionId);
+
             var paymentDate = CalculatePaymentReceivedDate(transactions, balance);
 
             await UpdatePaymentReceivedDate(paymentDate, transaction.NotificationId);
