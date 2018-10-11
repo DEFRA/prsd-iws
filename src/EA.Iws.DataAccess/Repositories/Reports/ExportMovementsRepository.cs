@@ -2,10 +2,12 @@
 {
     using System;
     using System.Data.SqlClient;
+    using System.Linq;
     using System.Threading.Tasks;
     using Core.Admin.Reports;
     using Core.Notification;
     using Domain.Reports;
+    using Newtonsoft.Json;
 
     internal class ExportMovementsRepository : IExportMovementsRepository
     {
@@ -24,8 +26,7 @@
                         IU.Id AS UserId,
 						MR.Date AS MRReceiptDate,
 						MOR.Date AS MORReceiptDate,
-						A.TableName,
-						N.Id AS bob
+						A.TableName
                     FROM Auditing.AuditLog AS A 
                         LEFT JOIN [Notification].[Movement] AS M ON A.RecordId = M.Id
 						LEFT JOIN [Notification].[MovementReceipt] AS MR ON A.RecordId = MR.Id
@@ -76,6 +77,24 @@
                 new SqlParameter("@ca", (int)competentAuthority),
                 new SqlParameter("@from", from),
                 new SqlParameter("@to", to)).ToListAsync();
+
+            var filesUploadedByExternalUser = 0;
+
+            foreach (var notificationGroup in userActions.GroupBy(a => a.RecordId))
+            {
+                for (var i = 0; i < notificationGroup.Count(); i++)
+                {
+                    UserActionJsonModel m = JsonConvert.DeserializeObject<UserActionJsonModel>(notificationGroup.ElementAt(i).NewValue);
+                    
+                    if (m.FileId != null)
+                    {
+                        filesUploadedByExternalUser++;
+                        i = notificationGroup.Count();
+                    }
+                }
+            }
+
+            result.FilesUploadedExternally = filesUploadedByExternalUser;
 
             return result;
         }
