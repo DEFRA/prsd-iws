@@ -3,6 +3,8 @@
     using System;
     using System.Threading.Tasks;
     using Core.Shared;
+    using Domain.ImportNotification;
+    using Domain.ImportNotificationAssessment;
     using Domain.ImportNotificationAssessment.Transactions;
     using FakeItEasy;
     using Prsd.Core;
@@ -13,13 +15,15 @@
         private readonly ImportRefundTransaction refundTransaction;
         private readonly IImportNotificationTransactionRepository transactionRepository;
         private readonly IImportNotificationTransactionCalculator transactionCalculator;
+        private readonly IImportNotificationAssessmentRepository assessmentRepository;
         private readonly Guid notificationId;
 
         public ImportRefundTransactionTests()
         {
             transactionRepository = A.Fake<IImportNotificationTransactionRepository>();
             transactionCalculator = A.Fake<IImportNotificationTransactionCalculator>();
-            refundTransaction = new ImportRefundTransaction(transactionRepository, transactionCalculator);
+            assessmentRepository = A.Fake<IImportNotificationAssessmentRepository>();
+            refundTransaction = new ImportRefundTransaction(transactionRepository, transactionCalculator, assessmentRepository);
             notificationId = new Guid("DB476D01-2870-4322-8284-520B34D9667B");
 
             A.CallTo(() => transactionCalculator.TotalPaid(notificationId)).Returns(100);
@@ -29,6 +33,11 @@
                     ImportNotificationTransaction.PaymentRecord(notificationId, new DateTime(2015, 12, 1), 100,
                         PaymentMethod.Cheque, "12345", "comments"),
                 });
+
+            var assessment = new ImportNotificationAssessment(notificationId);
+
+            A.CallTo(() => assessmentRepository.GetByNotification(notificationId))
+                .Returns(assessment);
 
             SystemTime.Freeze(new DateTime(2016, 1, 1));
         }
