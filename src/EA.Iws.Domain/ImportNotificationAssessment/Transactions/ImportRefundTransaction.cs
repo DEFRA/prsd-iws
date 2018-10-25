@@ -1,9 +1,12 @@
 ﻿namespace EA.Iws.Domain.ImportNotificationAssessment.Transactions
 {
     using System;
+    using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
     using Core.ComponentRegistration;
+    using Core.ImportNotificationAssessment;
+    using ImportNotification;
     using Prsd.Core;
 
     [AutoRegister]
@@ -11,12 +14,16 @@
     {
         private readonly IImportNotificationTransactionCalculator transactionCalculator;
         private readonly IImportNotificationTransactionRepository transactionRepository;
+        private readonly IImportNotificationAssessmentRepository assessmentRepository;
 
-        public ImportRefundTransaction(IImportNotificationTransactionRepository transactionRepository,
-            IImportNotificationTransactionCalculator transactionCalculator)
+        public ImportRefundTransaction(
+            IImportNotificationTransactionRepository transactionRepository,
+            IImportNotificationTransactionCalculator transactionCalculator,
+            IImportNotificationAssessmentRepository assessmentRepository)
         {
             this.transactionRepository = transactionRepository;
             this.transactionCalculator = transactionCalculator;
+            this.assessmentRepository = assessmentRepository;
         }
 
         public async Task Save(Guid notificationId, DateTime date, decimal amount, string comments)
@@ -52,7 +59,63 @@
                         notificationId));
             }
 
-            transactionRepository.Add(ImportNotificationTransaction.RefundRecord(notificationId, date, amount, comments));
+            var transaction = ImportNotificationTransaction.RefundRecord(notificationId, date, amount, comments);
+
+            var balance = await transactionCalculator.Balance(transaction.NotificationId)
+                - transaction.Credit.GetValueOrDefault()
+                + transaction.Debit.GetValueOrDefault();
+
+            var transactions = (await transactionRepository.GetTransactions(transaction.NotificationId)).ToList();
+            transactions.Add(transaction);
+
+            var paymentDate = CalculatePaymentReceivedDate(transactions, balance);
+
+            await UpdatePaymentReceivedDate(paymentDate, notificationId);
+
+            transactionRepository.Add(transaction);
+        }
+
+        private static DateTime? CalculatePaymentReceivedDate(IEnumerable<ImportNotificationTransaction> transactions, decimal balance)
+        {
+            if (balance <= 0)
+            {
+                transactions = transactions.Where(t => t.Credit > 0).OrderByDescending(t => t.Date).ToList();
+
+                foreach (var tran in transactions)
+                {
+                    balance += tran.Credit.GetValueOrDefault() - tran.Debit.GetValueOrDefault();
+
+                    if (balance > 0)
+                    {
+                        return tran.Date;
+                    }
+                }
+            }
+            return null;
+        }
+
+        private async Task UpdatePaymentReceivedDate(DateTime? paymentDate, Guid notificationId)
+        {
+            var assessment = await assessmentRepository.GetByNotification(notificationId);
+
+            if (paymentDate != null)
+            {
+                if (assessment.Status == ImportNotificationStatus.AwaitingPayment)
+                {
+                    assessment.PaymentComplete(paymentDate.GetValueOrDefault());
+                }
+                else
+                {
+                    assessment.Dates.PaymentReceivedDate = paymentDate;
+                }
+            }
+            else
+            {
+                if (assessment.Dates.PaymentReceivedDate.HasValue)
+                {
+                    assessment.Dates.PaymentReceivedDate = null;
+                }
+            }
         }
     }
 }
