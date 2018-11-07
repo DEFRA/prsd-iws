@@ -23,8 +23,7 @@
                 @"SELECT
                       SUM(QuantityReceived) AS [QuantityReceived],
                       CASE 
-                          WHEN YCode IS NULL AND BaselOecd IS NULL THEN 'BASEL WASTE, Y CODE UNASSIGNED'
-                          WHEN YCode IS NULL AND BaselOecd LIKE 'A%' THEN 'Y CODE NOT APPLICABLE - NON HAZ WASTE'
+                          WHEN YCode IS NULL THEN 'No applicable Y code'
                           ELSE YCode
                       END AS [WasteCategory],
                       [WasteStreams],
