@@ -10,10 +10,11 @@
                 {
                     if (Model.Details.Facilities[i].IsActualSite)
                     {
-                        <text>Actual site of recovery</text>
-                        <br/><br />
+                        <text>Actual site of @Model.Details.Type.ToString().ToLower()</text>
+
+                        <br /><br />
                     }
-                    
+
                     @Html.DisplayFor(m => m.Details.Facilities[i].Name)
                     <br />
                 }
