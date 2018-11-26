@@ -1,6 +1,5 @@
 ﻿namespace EA.Iws.Core.Admin.Reports
 {
-
     using System;
 
     public class UserActionData
