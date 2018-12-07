@@ -59,42 +59,17 @@
             result.MovementOperationReceiptsCreatedExternally = movementData.MovementOperationReceiptsCreatedExternally;
             result.MovementOperationReceiptsCreatedInternally = movementData.MovementOperationReceiptsCreatedInternally;
 
-            var userActions = await context.Database.SqlQuery<UserActionData>(
-                @"SELECT     
-	                A.NewValue,
-	                A.RecordId
-                FROM [Auditing].[AuditLog] AS A
-                INNER JOIN [Notification].[Movement] AS M ON M.Id = A.RecordId
-                INNER JOIN [Notification].[Notification] N ON M.NotificationId = N.Id
-                INNER JOIN [Identity].[AspNetUsers] U ON A.UserId = U.Id
-                LEFT JOIN [Person].[InternalUser] IU ON U.Id = IU.UserId
-                WHERE TableName = '[Notification].[Movement]' 
-                    AND EventType != 0 
-                    AND IU.UserId IS NULL
-                    AND N.CompetentAuthority = @ca
-                    AND A.EventDate BETWEEN @from AND @to
-                ORDER BY RecordId, EventDate",
+            result.FilesUploadedExternally = await context.Database.SqlQuery<int>(
+                @"SELECT COUNT(FileId) 
+                    FROM Notification.Movement M
+                    LEFT JOIN [Notification].[Notification] N ON M.NotificationId = N.Id
+                    WHERE PrenotificationDate is not null 
+	                    AND FileId is not null
+	                    AND N.CompetentAuthority = @ca
+                        AND M.PrenotificationDate BETWEEN @from AND @to",
                 new SqlParameter("@ca", (int)competentAuthority),
                 new SqlParameter("@from", from),
-                new SqlParameter("@to", to)).ToListAsync();
-
-            var filesUploadedByExternalUser = 0;
-
-            foreach (var notificationGroup in userActions.GroupBy(a => a.RecordId))
-            {
-                for (var i = 0; i < notificationGroup.Count(); i++)
-                {
-                    UserActionJsonModel m = JsonConvert.DeserializeObject<UserActionJsonModel>(notificationGroup.ElementAt(i).NewValue);
-                    
-                    if (m.FileId != null)
-                    {
-                        filesUploadedByExternalUser++;
-                        i = notificationGroup.Count();
-                    }
-                }
-            }
-
-            result.FilesUploadedExternally = filesUploadedByExternalUser;
+                new SqlParameter("@to", to)).SingleAsync();
 
             return result;
         }
