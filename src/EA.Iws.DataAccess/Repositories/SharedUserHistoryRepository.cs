@@ -2,7 +2,7 @@
 {
     using Domain.NotificationApplication;
 
-    class SharedUserHistoryRepository : ISharedUserHistoryRepository
+    public class SharedUserHistoryRepository : ISharedUserHistoryRepository
     {
         private readonly IwsContext context;
 
