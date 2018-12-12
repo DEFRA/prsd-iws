@@ -98,7 +98,11 @@
 
         public virtual DbSet<FacilityCollection> Facilities { get; set; }
 
-        public virtual DbSet<UserHistory> UserHistory { get; set; } 
+        public virtual DbSet<UserHistory> UserHistory { get; set; }
+
+        public virtual DbSet<SharedUser> SharedUser { get; set; }
+
+        public virtual DbSet<SharedUserHistory> SharedUserHistory { get; set; }
 
         public virtual DbSet<CarrierCollection> Carriers { get; set; }
 
