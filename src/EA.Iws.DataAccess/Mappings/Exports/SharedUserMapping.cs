@@ -1,8 +1,8 @@
-﻿using EA.Iws.Domain.NotificationApplication;
-using System.Data.Entity.ModelConfiguration;
-
-namespace EA.Iws.DataAccess.Mappings.Exports
+﻿namespace EA.Iws.DataAccess.Mappings.Exports
 {
+    using Domain.NotificationApplication;
+    using System.Data.Entity.ModelConfiguration;
+
     internal class SharedUserMapping : EntityTypeConfiguration<SharedUser>
     {
         public SharedUserMapping()

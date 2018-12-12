@@ -1,8 +1,8 @@
-﻿using EA.Prsd.Core.Domain;
-using System;
-
-namespace EA.Iws.Domain.NotificationApplication
+﻿namespace EA.Iws.Domain.NotificationApplication
 {
+    using Prsd.Core.Domain;
+    using System;
+
     public class SharedUser : Entity
     {
         public Guid NotificationId { get; private set; }
