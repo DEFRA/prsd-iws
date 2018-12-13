@@ -240,4 +240,7 @@
   <data name="AssignNotification" xml:space="preserve">
     <value>Assign notification to another user</value>
   </data>
+  <data name="ShareNotification" xml:space="preserve">
+    <value>Share notification with other users</value>
+  </data>
 </root>

@@ -277,6 +277,15 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.Options {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Share notification with other users.
+        /// </summary>
+        public static string ShareNotification {
+            get {
+                return ResourceManager.GetString("ShareNotification", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Shipment options.
         /// </summary>
         public static string ShipmentOptionsTitle {
