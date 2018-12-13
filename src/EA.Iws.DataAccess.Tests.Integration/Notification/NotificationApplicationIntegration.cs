@@ -10,7 +10,6 @@
     using Core.PackagingType;
     using Core.Shared;
     using Core.WasteType;
-    using Domain;
     using Domain.NotificationApplication;
     using FakeItEasy;
     using Prsd.Core.Domain;
@@ -19,9 +18,10 @@
     using NotificationApplicationFactory = TestHelpers.Helpers.NotificationApplicationFactory;
 
     [Trait("Category", "Integration")]
-    public class NotificationApplicationIntegration
+    public class NotificationApplicationIntegration : IDisposable
     {
         private readonly IwsContext context;
+        private readonly Guid[] preRunNotifications;
 
         public NotificationApplicationIntegration()
         {
@@ -30,6 +30,8 @@
             A.CallTo(() => userContext.UserId).Returns(Guid.NewGuid());
 
             context = new IwsContext(userContext, A.Fake<IEventDispatcher>());
+
+            preRunNotifications = context.NotificationApplications.Select(na => na.Id).ToArray();
         }
 
         [Fact]
@@ -52,11 +54,12 @@
                 producerCollection.AddProducer(business, address, contact);
             }
 
-            Assert.True(producerCollection.Producers.Count() == 5);
-
-            context.DeleteOnCommit(notification);
-            context.DeleteOnCommit(producerCollection);
+            context.Producers.Add(producerCollection);
             await context.SaveChangesAsync();
+
+            var dbProducerCollection = context.Producers.Single(p => p.NotificationId == notification.Id);
+
+            Assert.True(producerCollection.Producers.Count() == dbProducerCollection.Producers.Count());
         }
 
         [Fact]
@@ -91,12 +94,6 @@
                     new SqlParameter("id", producer.Id)).SingleAsync();
 
             Assert.Equal("address1", newAddress1);
-
-            context.DeleteOnCommit(producer);
-            context.DeleteOnCommit(producerCollection);
-            context.DeleteOnCommit(notification);
-
-            await context.SaveChangesAsync();
         }
 
         [Fact]
@@ -146,9 +143,6 @@
             Assert.Collection(notification.OperationInfos,
                 item => Assert.Equal(notification.OperationInfos.ElementAt(0).OperationCode, OperationCode.R3),
                 item => Assert.Equal(notification.OperationInfos.ElementAt(1).OperationCode, OperationCode.R4));
-
-            context.DeleteOnCommit(notification);
-            await context.SaveChangesAsync();
         }
 
         [Fact]
@@ -170,10 +164,6 @@
             await context.SaveChangesAsync();
 
             Assert.True(notification.HasWasteType);
-
-            context.DeleteOnCommit(notification.WasteType);
-            context.DeleteOnCommit(notification);
-            await context.SaveChangesAsync();
         }
 
         [Fact]
@@ -217,10 +207,6 @@
             await context.SaveChangesAsync();
 
             Assert.False(producerCollection.Producers.Any());
-
-            context.DeleteOnCommit(notification);
-            context.DeleteOnCommit(producerCollection);
-            await context.SaveChangesAsync();
         }
 
         [Fact]
@@ -248,10 +234,6 @@
 
             Action removeProducer = () => producerCollection.RemoveProducer(anotherProducer.Id);
             Assert.Throws<InvalidOperationException>(removeProducer);
-
-            context.DeleteOnCommit(notification);
-            context.DeleteOnCommit(producerCollection);
-            await context.SaveChangesAsync();
         }
 
         [Fact]
@@ -272,6 +254,7 @@
             var producer = producerCollection.AddProducer(business, address, contact);
             var anotherProducer = producerCollection.AddProducer(business, address, contact);
             context.NotificationApplications.Add(notification);
+            context.Producers.Add(producerCollection);
             await context.SaveChangesAsync();
 
             Assert.True(producerCollection.Producers.Count() == 2);
@@ -283,10 +266,6 @@
             await context.SaveChangesAsync();
 
             Assert.True(producerCollection.Producers.Count() == 1);
-
-            context.DeleteOnCommit(notification);
-            context.DeleteOnCommit(producerCollection);
-            await context.SaveChangesAsync();
         }
 
         [Fact]
@@ -314,11 +293,6 @@
             await context.SaveChangesAsync();
 
             Assert.True(facilityCollection.Facilities.Count() == 5);
-
-            context.DeleteOnCommit(facilityCollection);
-            context.DeleteOnCommit(notification);
-
-            await context.SaveChangesAsync();
         }
 
         [Fact]
@@ -346,10 +320,6 @@
             await context.SaveChangesAsync();
 
             Assert.False(facilityCollection.Facilities.Any());
-
-            context.DeleteOnCommit(facilityCollection);
-            context.DeleteOnCommit(notification);
-            await context.SaveChangesAsync();
         }
 
         [Fact]
@@ -380,10 +350,6 @@
 
             Action removeFacility = () => facilityCollection.RemoveFacility(anotherFacility.Id);
             Assert.Throws<InvalidOperationException>(removeFacility);
-
-            context.DeleteOnCommit(facilityCollection);
-            context.DeleteOnCommit(notification);
-            await context.SaveChangesAsync();
         }
 
         [Fact]
@@ -416,10 +382,6 @@
             await context.SaveChangesAsync();
 
             Assert.True(facilityCollection.Facilities.Count() == 1);
-
-            context.DeleteOnCommit(facilityCollection);
-            context.DeleteOnCommit(notification);
-            await context.SaveChangesAsync();
         }
 
         [Fact]
@@ -446,11 +408,6 @@
             await context.SaveChangesAsync();
 
             Assert.Equal(carrierCollection.Carriers.Count(), 5);
-
-            context.DeleteOnCommit(notification);
-            context.DeleteOnCommit(carrierCollection);
-
-            await context.SaveChangesAsync();
         }
 
         [Fact]
@@ -479,11 +436,21 @@
             await context.SaveChangesAsync();
 
             Assert.False(carrierCollection.Carriers.Any());
+        }
 
-            context.DeleteOnCommit(notification);
-            context.DeleteOnCommit(carrierCollection);
+        public void Dispose()
+        {
+            var createdNotifications =
+                context.NotificationApplications.Where(n => !preRunNotifications.Contains(n.Id))
+                    .Select(n => n.Id)
+                    .ToArray();
 
-            await context.SaveChangesAsync();
+            foreach (var createdNotification in createdNotifications)
+            {
+                DatabaseDataDeleter.DeleteDataForNotification(createdNotification, context);
+            }
+
+            context.Dispose();
         }
     }
 }
