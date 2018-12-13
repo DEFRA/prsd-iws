@@ -57,9 +57,7 @@
             Assert.Equal(competentAuthority.Id, transport.StateOfExport.CompetentAuthority.Id);
             Assert.Equal(exitPoint.Id, transport.StateOfExport.ExitPoint.Id);
 
-            await DeleteEntity(stateOfExport);
-            await DeleteEntity(transport);
-            await DeleteEntity(notification);
+            DatabaseDataDeleter.DeleteDataForNotification(notification.Id, context);
         }
 
         [Fact]
@@ -104,14 +102,7 @@
 
             Assert.Equal(nextExitPoint.Id, transport.StateOfExport.ExitPoint.Id);
 
-            await DeleteEntity(transport);
-            await DeleteEntity(notification);
-        }
-
-        private async Task DeleteEntity(Entity entity)
-        {
-            context.DeleteOnCommit(entity);
-            await context.SaveChangesAsync();
+            DatabaseDataDeleter.DeleteDataForNotification(notification.Id, context);
         }
     }
 }
