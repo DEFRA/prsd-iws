@@ -107,6 +107,8 @@
     <Compile Include="Mappings\Exports\MeansOfTransportMapping.cs" />
     <Compile Include="Mappings\Exports\ProducerCollectionMapping.cs" />
     <Compile Include="Mappings\Exports\NumberOfShipmentsHistoryMapping.cs" />
+    <Compile Include="Mappings\Exports\SharedUserHistoryMapping.cs" />
+    <Compile Include="Mappings\Exports\SharedUserMapping.cs" />
     <Compile Include="Mappings\Exports\UserHistoryMapping.cs" />
     <Compile Include="Mappings\Exports\WasteCompositionAnnexMapping.cs" />
     <Compile Include="Mappings\Exports\TechnologyEmployedAnnexMapping.cs" />
@@ -275,6 +277,8 @@
     <Compile Include="Repositories\Reports\ShipmentsRepository.cs" />
     <Compile Include="Repositories\Reports\FreedomOfInformationRepository.cs" />
     <Compile Include="Repositories\NumberOfShipmentsHistoryRepository.cs" />
+    <Compile Include="Repositories\SharedUserHistoryRepository.cs" />
+    <Compile Include="Repositories\SharedUserRepository.cs" />
     <Compile Include="Repositories\TechnologyEmployedRepository.cs" />
     <Compile Include="Repositories\Search\AdvancedSearchRepository.cs" />
     <Compile Include="Repositories\UserHistoryRepository.cs" />

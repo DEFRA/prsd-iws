@@ -546,6 +546,8 @@
     <Compile Include="Notification\RecordUserChange.cs" />
     <Compile Include="Authorization\AuthorizeActivityHandler.cs" />
     <Compile Include="Notification\GetNotificationTypeHandler.cs" />
+    <Compile Include="Notification\SharedUserAdded.cs" />
+    <Compile Include="Notification\SharedUserHistoryAdded.cs" />
     <Compile Include="TransitState\DeleteCustomsOfficesWhenAllTransitStatesInEU.cs" />
     <Compile Include="TransportRoute\GetAllCountriesHavingCompetentAuthoritiesHandler.cs" />
     <Compile Include="TransportRoute\GetTransitAuthoritiesAndEntryOrExitPointsByCountryIdHandler.cs" />
