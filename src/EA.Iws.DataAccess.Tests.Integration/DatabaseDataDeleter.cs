@@ -14,14 +14,29 @@
         DELETE FROM [Notification].[Importer]
         WHERE NotificationId = @NotificationId;
 
-        DELETE FROM [Notification].[Producer]
-        WHERE NotificationId = @NotificationId;
+        DELETE P
+		FROM [Notification].[Producer] P
+		INNER JOIN [Notification].[ProducerCollection] PC ON PC.Id = P.ProducerCollectionId
+		WHERE PC.NotificationId = @NotificationId;
 
-        DELETE FROM [Notification].[Carrier]
-        WHERE NotificationId = @NotificationId;
+		DELETE FROM [Notification].[ProducerCollection]
+		WHERE NotificationId = @NotificationId;
 
-        DELETE FROM [Notification].[Facility]
-        WHERE NotificationId = @NotificationId;
+        DELETE C
+		FROM [Notification].[Carrier] C
+		INNER JOIN [Notification].[CarrierCollection] CC ON CC.Id = C.CarrierCollectionId
+		WHERE CC.NotificationId = @NotificationId;
+
+		DELETE FROM [Notification].[CarrierCollection]
+		WHERE NotificationId = @NotificationId;
+
+        DELETE F
+		FROM [Notification].[Facility] F
+		INNER JOIN [Notification].[FacilityCollection] FC ON FC.Id = F.FacilityCollectionId
+		WHERE FC.NotificationId = @NotificationId;
+
+		DELETE FROM [Notification].[FacilityCollection]
+		WHERE NotificationId = @NotificationId;
 
         DELETE FROM [Notification].[OperationCodes]
         WHERE NotificationId = @NotificationId;
@@ -84,12 +99,19 @@
         DELETE FROM [Notification].[NotificationAssessment]
         WHERE NotificationApplicationId = @NotificationId;
 
-        DELETE FROM [Notification].[FinancialGuaranteeStatusChange]
-        WHERE FinancialGuaranteeId = 
-            (SELECT Id FROM [Notification].[FinancialGuarantee] WHERE NotificationApplicationId = @NotificationId);
+        DELETE FGSC
+		FROM [Notification].[FinancialGuaranteeStatusChange] FGSC
+			 INNER JOIN [Notification].[FinancialGuarantee] FG ON FGSC.FinancialGuaranteeId = FG.Id
+			 INNER JOIN [Notification].[FinancialGuaranteeCollection] FGC ON FG.FinancialGuaranteeCollectionId = FGC.Id
+		WHERE FGC.NotificationId = @NotificationId;
 
-        DELETE FROM [Notification].[FinancialGuarantee]
-        WHERE NotificationApplicationId = @NotificationId;
+		DELETE FG
+		FROM [Notification].[FinancialGuarantee] FG
+			 INNER JOIN [Notification].[FinancialGuaranteeCollection] FGC ON FG.FinancialGuaranteeCollectionId = FGC.Id
+		WHERE FGC.NotificationId = @NotificationId;
+
+		DELETE FROM [Notification].[FinancialGuaranteeCollection]
+		WHERE NotificationId = @NotificationId;
 
         DELETE FROM [Notification].[AnnexCollection] 
         WHERE NotificationId = @NotificationId;
