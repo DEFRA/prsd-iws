@@ -524,6 +524,7 @@
     <Compile Include="NotificationMovements\Rules\TotalIntendedQuantityReached.cs" />
     <Compile Include="NotificationMovements\Rules\TotalShipmentsReached.cs" />
     <Compile Include="NotificationMovements\Rules\WithinConsentPeriod.cs" />
+    <Compile Include="Notification\AddSharedUserHandler.cs" />
     <Compile Include="Notification\CanEditNotificationHandler.cs" />
     <Compile Include="Notification\ChangeUserHandler.cs" />
     <Compile Include="Notification\CheckNotificationNumberUniqueHandler.cs" />

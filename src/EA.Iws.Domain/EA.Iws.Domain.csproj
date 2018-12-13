@@ -171,6 +171,7 @@
     <Compile Include="Movement\MovementDateOutsideConsentPeriodException.cs" />
     <Compile Include="Movement\MovementDateValidator.cs" />
     <Compile Include="Movement\NumberOfMovements.cs" />
+    <Compile Include="NotificationApplication\AddNotificationSharedUser.cs" />
     <Compile Include="NotificationApplication\Address.cs" />
     <Compile Include="AddressBook\AddressBookRecordComparer.cs" />
     <Compile Include="AddressBook\IAddressBookRespository.cs" />
