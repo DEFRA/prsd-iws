@@ -65,7 +65,7 @@
             RaiseEvent(new NotificationUserChangedEvent(Id, currentUser, newUserId));
         }
 
-        public void AddSharedUser(Guid sharedUserId)
+        public void AddSharedUser(string sharedUserId)
         {
             RaiseEvent(new NotificationSharedUserAddedEvent(this.Id, sharedUserId));
         }

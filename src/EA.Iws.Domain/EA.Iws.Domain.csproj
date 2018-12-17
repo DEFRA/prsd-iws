@@ -287,7 +287,6 @@
     <Compile Include="NotificationApplication\ChangeNotificationUser.cs" />
     <Compile Include="NotificationApplication\NotificationNumberFormatter.cs" />
     <Compile Include="NotificationApplication\NotificationSharedUserAddedEvent.cs" />
-    <Compile Include="NotificationApplication\NotificationSharedUserHistoryAddedEvent.cs" />
     <Compile Include="NotificationApplication\ProducerCollection.cs" />
     <Compile Include="NotificationApplication\SetAllFacilitiesPreconsented.cs" />
     <Compile Include="NotificationApplication\SharedUser.cs" />
