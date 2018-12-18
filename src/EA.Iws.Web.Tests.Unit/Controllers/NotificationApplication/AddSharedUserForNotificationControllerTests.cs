@@ -4,6 +4,7 @@
     using FakeItEasy;
     using Prsd.Core.Mediator;
     using Requests.Notification;
+    using Requests.SharedUsers;
     using Requests.Users;
     using System;
     using System.Collections.Generic;
@@ -44,11 +45,6 @@
                 () =>
                 mediator.SendAsync(A<ExternalUserExists>.That.Matches(p => p.EmailAddress == externalEmail)))
                 .Returns(true);
-
-            A.CallTo(
-                () =>
-                mediator.SendAsync(A<ExternalUserExists>.That.Matches(p => p.EmailAddress == internalEmail)))
-                .Returns(false);
         }
 
         [Fact]
@@ -125,6 +121,11 @@
         [Fact]
         public async Task Add_InternalEmail_ReturnsError()
         {
+            A.CallTo(
+               () =>
+               mediator.SendAsync(A<ExternalUserExists>.That.Matches(p => p.EmailAddress == internalEmail)))
+               .Returns(false);
+
             var model = new ShareNotificationViewModel(this.notificationId);
             model.EmailAddress = this.internalEmail;
 
@@ -147,6 +148,55 @@
             var result = await shareNotificationOptionController.Index(this.notificationId, model, "addshareduser", string.Empty) as ViewResult;
 
             Assert.True(result.ViewData.ModelState.Count == 1, "Enter a valid email address");
+        }
+
+        [Fact]
+        public async Task Add_UserAlreadyShared_ReturnsError()
+        {
+            List<NotificationSharedUser> users = new List<NotificationSharedUser>()
+            {
+                new NotificationSharedUser()
+                {
+                    UserId = this.userId.ToString()
+                }
+            };
+
+            A.CallTo(
+                () =>
+                mediator.SendAsync(A<GetSharedUsersByNotificationId>.That.Matches(p => p.NotificationId == this.notificationId)))
+                .Returns(users);
+
+            var model = new ShareNotificationViewModel(this.notificationId, users);
+            
+            var result = await shareNotificationOptionController.Index(this.notificationId, model, "addshareduser", null) as ViewResult;
+
+            Assert.True(result.ViewData.ModelState.Count == 1, "This email address has already been added as a shared user");
+        }
+
+        [Fact]
+        public async Task Add_ConfirmAndAddUser_ReturnsSuccessView()
+        {
+            List<NotificationSharedUser> users = new List<NotificationSharedUser>()
+            {
+                new NotificationSharedUser()
+                {
+                    UserId = this.userId.ToString()
+                }
+            };
+
+            this.shareNotificationOptionController.TempData["SharedUsers"] = users;
+
+            var result = await shareNotificationOptionController.Confirm(this.notificationId) as ViewResult;
+
+            Assert.Equal(string.Empty, result.ViewName);
+        }
+
+        [Fact]
+        public void SuccessAction_ReturnsView()
+        {
+            var result = this.shareNotificationOptionController.Success(this.notificationId) as ViewResult;
+
+            Assert.Equal(string.Empty, result.ViewName);
         }
 
         private List<NotificationSharedUser> CreateSharedUserList(int numberOfUsers)
