@@ -1117,6 +1117,8 @@
     <Content Include="Views\Applicant\NotFound.cshtml" />
     <Content Include="Views\Shared\_NotificationSwitcher.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\MaskedDateInputViewModel.cshtml" />
+    <Content Include="Views\ShareNotification\Index.cshtml" />
+    <Content Include="Views\ShareNotification\Confirm.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -2231,6 +2233,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>WhatNextResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Controllers\ShareNotificationController.cs" />
+    <Compile Include="Infrastructure\Validation\NotificationShareUserValidationAttribute.cs" />
     <Compile Include="ViewModels\ChangeNotificationOwner\ChangeOwnerViewModel.cs" />
     <Compile Include="ViewModels\ChangeNotificationOwner\ConfirmViewModel.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\Home\ResubmissionSuccessViewModel.cs" />
@@ -3257,6 +3261,9 @@
     <Compile Include="Areas\NotificationApplication\ViewModels\WasteGenerationProcess\WasteGenerationProcessViewModel.cs" />
     <Compile Include="ViewModels\Shared\TrueFalseViewModel.cs" />
     <Compile Include="ViewModels\Account\ForgotPasswordViewModel.cs" />
+    <Compile Include="ViewModels\ShareNotification\SharedUserListConfirmViewModel.cs" />
+    <Compile Include="ViewModels\ShareNotification\SharedUserListViewModel.cs" />
+    <Compile Include="ViewModels\ShareNotification\ShareNotificationViewModel.cs" />
     <Compile Include="Views\Account\EmailVerificationRequiredResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -3408,6 +3415,11 @@
       <DependentUpon>IwsStandardDataNoticeResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Views\Shared\ViewBase.cs" />
+    <Compile Include="Views\ShareNotification\ShareNotificationResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ShareNotificationResources.resx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\EA.Iws.Api.Client\EA.Iws.Api.Client.csproj">
@@ -4829,6 +4841,10 @@
     <EmbeddedResource Include="Views\Shared\IwsStandardDataNoticeResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>IwsStandardDataNoticeResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\ShareNotification\ShareNotificationResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>ShareNotificationResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

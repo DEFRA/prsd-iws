@@ -11,6 +11,10 @@
         public Guid NotificationId { get; private set; }
         public Guid UserId { get; private set; }
 
+        public AddSharedUser()
+        {
+        }
+
         public AddSharedUser(Guid notificationId, Guid userId)
         {
             NotificationId = notificationId;
