@@ -157,7 +157,7 @@
             {
                 returnList.Add(new NotificationSharedUser()
                 {
-                    Email = string.Format("{0}@fake.com",i),
+                    Email = string.Format("{0}@fake.com", i),
                     UserId = Guid.NewGuid().ToString()
                 });
             }
