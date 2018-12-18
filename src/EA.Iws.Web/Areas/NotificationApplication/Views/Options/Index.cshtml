@@ -67,6 +67,8 @@
                     @Html.ActionLink(Resource.ViewNotification, "Index", "Home", new { id = Model.NotificationId, area = "NotificationApplication" }, null)
                     @Html.ActionLink(Resource.AssignNotification, "Index", "ChangeNotificationOwner", new { id = Model.NotificationId, area = string.Empty }, null)
                     @Html.ActionLink(Resource.ShareNotification, "Index", "ShareNotification", new { id = Model.NotificationId, area = string.Empty}, null)
+					@Html.ActionLink(Resource.ReviewAccess, "UserList", "ReviewUserAccess", new { id = Model.NotificationId, area = "NotificationApplication" }, null)
+
 
                     @if (Model.NotificationStatus == NotificationStatus.NotSubmitted)
                     {

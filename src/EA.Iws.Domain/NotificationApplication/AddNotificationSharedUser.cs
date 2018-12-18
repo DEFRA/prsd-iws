@@ -14,7 +14,7 @@
             this.repository = repository;
         }
 
-        public async Task Apply(Guid notificationId, Guid sharedUserId)
+        public async Task Apply(Guid notificationId, string sharedUserId)
         {
             var notification = await repository.GetById(notificationId);
             notification.AddSharedUser(sharedUserId);

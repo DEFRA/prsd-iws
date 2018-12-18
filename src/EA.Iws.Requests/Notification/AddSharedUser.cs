@@ -9,13 +9,13 @@
     public class AddSharedUser : IRequest<bool>
     {
         public Guid NotificationId { get; private set; }
-        public Guid UserId { get; private set; }
+        public string UserId { get; private set; }
 
         public AddSharedUser()
         {
         }
 
-        public AddSharedUser(Guid notificationId, Guid userId)
+        public AddSharedUser(Guid notificationId, string userId)
         {
             NotificationId = notificationId;
             UserId = userId;

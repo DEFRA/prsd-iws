@@ -349,6 +349,9 @@
     <Compile Include="Notification\PreconsentedFacilityData.cs" />
     <Compile Include="Notification\SetPreconsentedRecoveryFacility.cs" />
     <Compile Include="Notification\SetReasonForExport.cs" />
+    <Compile Include="SharedUsers\DeleteSharedUserForNotification.cs" />
+    <Compile Include="SharedUsers\GetSharedUserById.cs" />
+    <Compile Include="SharedUsers\GetSharedUsersByNotificationId.cs" />
     <Compile Include="TransportRoute\GetAllCountriesHavingCompetentAuthorities.cs" />
     <Compile Include="TransportRoute\GetUnitedKingdomCompetentAuthoritiesAndEntryOrExitPoints.cs" />
     <Compile Include="TransportRoute\GetTransitAuthoritiesAndEntryOrExitPointsByCountryId.cs" />

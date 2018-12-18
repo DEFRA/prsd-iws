@@ -7,9 +7,9 @@
     {
         public Guid NotificationId { get; private set; }
 
-        public Guid UserId { get; private set; }
+        public string UserId { get; private set; }
 
-        public NotificationSharedUserAddedEvent(Guid notificationId, Guid userId)
+        public NotificationSharedUserAddedEvent(Guid notificationId, string userId)
         {
             NotificationId = notificationId;
             UserId = userId;

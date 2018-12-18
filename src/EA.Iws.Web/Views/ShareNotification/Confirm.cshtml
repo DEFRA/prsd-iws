@@ -1,0 +1,49 @@
+﻿@model EA.Iws.Web.ViewModels.ShareNotification.SharedUserListConfirmViewModel
+@using Resources = EA.Iws.Web.Views.ShareNotification.ShareNotificationResources
+@{
+    ViewBag.Title = Resources.ShareNotificationTitle;
+}
+
+<div class="grid-row">
+    <div class="column-two-thirds">
+        <h1 class="heading-large">@Model.ConfirmTitle</h1>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            @Html.Gds().ValidationSummary()
+            @Html.HiddenFor(m => m.NotificationId)
+            @Html.HiddenFor(m => m.SharedUserIds)
+            @Html.HiddenFor(m => m.SharedUsers)
+
+            <div class="form-group">
+                <h2 class="heading-medium">@Resources.ShareNotificationConfirmShareUsers</h2>
+                <table title="@Resources.ShareNotificationTitle">
+
+                    <thead>
+                        <tr>
+                            <th>@Resources.SharedUser</th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    @for (int i = 0; i < Model.SharedUsers.Count; i++)
+                    {
+                        var sharedUser = Model.SharedUsers[i];
+
+                        <tr>
+                            <td>@Html.Raw(sharedUser.Email)</td>
+                        </tr>
+                    }
+                </table>
+            </div>
+
+            <div>
+                <button class="button" type="submit">@Constants.ContinueButtonText</button>
+            </div>
+            <div class="form-group">
+                <button class="button" type="submit">@Resources.Back</button>
+            </div>
+        }
+    </div>
+</div>

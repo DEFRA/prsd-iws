@@ -7,7 +7,7 @@
     {
         public Guid NotificationId { get; private set; }
 
-        public Guid UserId { get; private set; }
+        public string UserId { get; private set; }
 
         public DateTimeOffset DateAdded { get; private set; }
         public DateTimeOffset DateRemoved { get; private set; }
@@ -16,7 +16,7 @@
         {
         }
 
-        public SharedUserHistory(Guid notificationId, Guid userId,  DateTimeOffset dateAdded, DateTimeOffset dateRemoved)
+        public SharedUserHistory(Guid notificationId, string userId,  DateTimeOffset dateAdded, DateTimeOffset dateRemoved)
         {
             NotificationId = notificationId;
             UserId = userId;
