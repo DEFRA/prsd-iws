@@ -55,8 +55,8 @@
             if (notificationUserId != userContext.UserId &&
                 !await IsSharedUser(notificationId))
             {
-                throw new SecurityException(
-                    $"Access denied to this notification {notificationId} for user {userContext.UserId}");
+                throw new SecurityException(string.Format("Access denied to this notification {0} for user {1}",
+                    notificationId, userContext.UserId));
             }
         }
 
