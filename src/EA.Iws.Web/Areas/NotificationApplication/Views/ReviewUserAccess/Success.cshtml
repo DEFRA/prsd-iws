@@ -1,0 +1,16 @@
+﻿@using EA.Iws.Web.Areas.NotificationApplication.Views.ReviewUserAccess
+@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.ReviewUserAccess.SuccessViewModel
+@{
+	ViewBag.Title = "Shared Confirmation";
+	Layout = "~/Views/Shared/_Layout.GovUK.Sections.cshtml";
+
+}
+<h1 class="heading-large">@SuccessResources.HeaderText</h1>
+<p>@SuccessResources.ContinueText</p>
+<p>
+	@Html.ActionLink(SuccessResources.ReviewLink, "UserList", "ReviewUserAccess", new { area = "NotificationApplication", id = Model.NotificationId }, null)
+</p>
+<div>
+	@Html.ActionLink(SuccessResources.OptionsLink, "Index", "Options",
+                new { id = Model.NotificationId, area = "NotificationApplication" }, null)
+</div>
