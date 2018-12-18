@@ -1,4 +1,4 @@
-﻿namespace EA.Iws.Web.Areas.NotificationApplication.ViewModels.ReviewUserAccess
+﻿namespace EA.Iws.Web.ViewModels.ShareNotification
 {
     using System;
     public class SuccessViewModel

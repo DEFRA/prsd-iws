@@ -11,7 +11,7 @@
         public Guid NotificationId { get; set; }
 
         public List<NotificationSharedUser> SharedUsers { get; set; } = new List<NotificationSharedUser>();
-        public IEnumerable<string> SharedUserIds { get; set; }
+        public List<string> SharedUserIds { get; set; }
 
         public string ConfirmTitle { get; set; }
 
@@ -20,14 +20,18 @@
             this.ConfirmTitle = ShareNotificationResources.ShareNotificationConfirmTitle;
         }
 
-        public SharedUserListConfirmViewModel(Guid notificationId, IEnumerable<NotificationSharedUser> sharedUsers) : this()
+        public SharedUserListConfirmViewModel(Guid notificationId, List<string> sharedUsers) : this()
+        {
+            this.NotificationId = notificationId;
+            this.SharedUserIds = sharedUsers;
+        }
+
+        public SharedUserListConfirmViewModel(Guid notificationId, List<NotificationSharedUser> sharedUsers) : this()
         {
             this.NotificationId = notificationId;
             this.SharedUsers = sharedUsers.ToList();
 
-            var userIds = sharedUsers as NotificationSharedUser[] ?? sharedUsers.ToArray();
-
-            this.SharedUserIds = userIds.Select(p => p.UserId);
+            this.SharedUserIds = sharedUsers.Select(p => p.UserId).ToList();
         }
     }
 }

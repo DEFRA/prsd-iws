@@ -19,8 +19,10 @@
 
         public async Task<bool> HandleAsync(AddSharedUser message)
         {
-            await addNotificationSharedUser.Apply(message.NotificationId, message.UserId);
-
+            foreach (string user in message.UserIds)
+            {
+                await addNotificationSharedUser.Apply(message.NotificationId, user);
+            }
             await context.SaveChangesAsync();
 
             return true;

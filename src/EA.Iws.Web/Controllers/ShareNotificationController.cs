@@ -4,6 +4,7 @@
     using Infrastructure.Authorization;
     using Prsd.Core.Mediator;
     using Requests.Notification;
+    using Requests.SharedUsers;
     using Requests.Users;
     using System;
     using System.Collections.Generic;
@@ -25,7 +26,10 @@
         [HttpGet]
         public ActionResult Index(Guid id)
         {
-            var model = new ShareNotificationViewModel(id);
+            var sharedUsers = (List<NotificationSharedUser>)TempData["SharedUsers"];
+            var model = new ShareNotificationViewModel(id, sharedUsers);
+
+            this.PrepareReturnModel(model);
             return View(model);
         }
 
@@ -41,6 +45,14 @@
 
             model.ConfirmTitle = model.ConfirmTitle.Replace("{notification}", notification.NotificationNumber);
 
+            return View(model);
+        }
+
+        [HttpGet]
+        public ActionResult Success(Guid id)
+        {
+            var model = new SuccessViewModel();
+            model.NotificationId = id;
             return View(model);
         }
 
@@ -95,6 +107,15 @@
                     return View(model);
                 }
 
+                var existingSharedUsers = await mediator.SendAsync(new GetSharedUsersByNotificationId(id));
+
+                if (existingSharedUsers.Count(p => p.UserId == userId.ToString()) > 0)
+                {
+                    ModelState.AddModelError("EmailAddress", "This email address has already been added as a shared user");
+                    model.SetSharedUsers(model.SelectedSharedUsers);
+                    return View(model);
+                }
+
                 // If user id is not already in list then add it to the list
                 if (userId != null && model.SelectedSharedUsers.Count(p => p.UserId == userId.ToString()) == 0)
                 {
@@ -108,11 +129,14 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Confirm(Guid id, SharedUserListConfirmViewModel model)
+        public async Task<ActionResult> Confirm(Guid id, SharedUserListConfirmViewModel model)
         {
             model.SharedUsers = (List<NotificationSharedUser>)TempData["SharedUsers"];
 
-            return View(model);
+            List<string> userIds = model.SharedUsers.Select(p => p.UserId).ToList();
+            await mediator.SendAsync(new AddSharedUser(id, userIds));
+
+            return RedirectToAction("Success", "ShareNotification", new { id = id });
         }
 
         private ShareNotificationViewModel PrepareReturnModel(ShareNotificationViewModel model)
