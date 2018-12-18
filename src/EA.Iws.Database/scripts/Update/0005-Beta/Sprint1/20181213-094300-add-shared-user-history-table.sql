@@ -1,11 +1,3 @@
-USE [EA.Iws]
-GO
-
-/****** Object:  Table [Notification].[SharedUserHistory]    Script Date: 13/12/2018 09:43:42 ******/
-SET ANSI_NULLS ON
-GO
-
-SET QUOTED_IDENTIFIER ON
 GO
 
 CREATE TABLE [Notification].[SharedUserHistory](
