@@ -61,7 +61,7 @@
                 @"SELECT COUNT(N.[Id])
                   FROM [Notification].[Notification] N
                   INNER JOIN [Notification].[NotificationAssessment] NA ON N.Id = NA.NotificationApplicationId
-                  LEFT JOIN [Notification].[SharedUser] SU ON SU.NotificationId = N.Id
+                  LEFT JOIN [Notification].[SharedUser] SU ON SU.NotificationId = N.Id AND SU.UserId =  @Id
                   WHERE (N.UserId = @Id OR SU.UserId = @Id) AND (@Status IS NULL OR NA.Status = @Status)",
                 new SqlParameter("@Id", userContext.UserId),
                 new SqlParameter("@Status", (object)message.NotificationStatus ?? DBNull.Value)).SingleAsync();
