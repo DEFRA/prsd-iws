@@ -38,48 +38,43 @@
             var notification = NotificationApplicationFactory.Create(Guid.NewGuid(), NotificationType.Recovery,
                 UKCompetentAuthority.England, 20181);
             var aspnetInternalUser = UserFactory.Create(Guid.NewGuid(), "Internal", "Internal Last", "12345",
-                "abc@mail.com");
+                "abc123@mail.com");
             var aspnetSharedUser = UserFactory.Create(Guid.NewGuid(), "External", "Shared", "12345",
-                "12345@external.com");
+                "123456@external.com");
             var localArea = new LocalArea(Guid.NewGuid(), "Test Area", (int)UKCompetentAuthority.England);
 
-            try
-            {
-                context.NotificationApplications.Add(notification);
-                context.Users.Add(aspnetInternalUser);
-                context.Users.Add(aspnetSharedUser);
-                context.LocalAreas.Add(localArea);
-                context.SaveChanges();
+            context.NotificationApplications.Add(notification);
+            context.Users.Add(aspnetInternalUser);
+            context.Users.Add(aspnetSharedUser);
+            context.LocalAreas.Add(localArea);
+            await context.SaveChangesAsync();
 
-                var internalUser = new InternalUser(aspnetInternalUser.Id, "test", UKCompetentAuthority.England,
-                    localArea.Id);
-                //Shared user is different to the user context.
-                var sharedUser = new SharedUser(notification.Id, aspnetSharedUser.Id, DateTimeOffset.Now);
+            var internalUser = new InternalUser(aspnetInternalUser.Id, "test", UKCompetentAuthority.England,
+                localArea.Id);
+            //Shared user is different to the user context.
+            var sharedUser = new SharedUser(notification.Id, aspnetSharedUser.Id, DateTimeOffset.Now);
 
-                context.SharedUser.Add(sharedUser);
-                context.SaveChanges();
+            context.SharedUser.Add(sharedUser);
+            await context.SaveChangesAsync();
 
-                context.InternalUsers.Add(internalUser);
-                context.SaveChanges();
+            context.InternalUsers.Add(internalUser);
+            await context.SaveChangesAsync();
 
-                var authorization = new NotificationApplicationAuthorization(context, userContext);
+            var authorization = new NotificationApplicationAuthorization(context, userContext);
 
-                await Assert.ThrowsAsync<SecurityException>(() => authorization.EnsureAccessAsync(notification.Id));
+            await Assert.ThrowsAsync<SecurityException>(() => authorization.EnsureAccessAsync(notification.Id));
 
-                context.DeleteOnCommit(internalUser);
-                context.DeleteOnCommit(sharedUser);
-                await context.SaveChangesAsync();
-            }
-            finally
-            {
-                context.Entry(aspnetInternalUser).State = EntityState.Deleted;
-                context.Entry(aspnetSharedUser).State = EntityState.Deleted;
-                context.Entry(localArea).State = EntityState.Deleted;
-                await context.SaveChangesAsync();
+            context.DeleteOnCommit(internalUser);
+            context.DeleteOnCommit(sharedUser);
+            await context.SaveChangesAsync();
 
-                context.DeleteOnCommit(notification);
-                await context.SaveChangesAsync();
-            }
+            context.Entry(aspnetInternalUser).State = EntityState.Deleted;
+            context.Entry(aspnetSharedUser).State = EntityState.Deleted;
+            context.Entry(localArea).State = EntityState.Deleted;
+            await context.SaveChangesAsync();
+
+            context.DeleteOnCommit(notification);
+            await context.SaveChangesAsync();
         }
 
         [Fact]
@@ -88,49 +83,44 @@
             var notification = NotificationApplicationFactory.Create(Guid.NewGuid(), NotificationType.Recovery,
                 UKCompetentAuthority.England, 20181);
             var aspnetInternalUser = UserFactory.Create(Guid.NewGuid(), "Internal", "Internal Last", "12345",
-                "internal123@mail.com");
+                "internal1234@mail.com");
             var aspnetSharedUser = UserFactory.Create(Guid.NewGuid(), "External", "Shared", "12345",
-                "external123@external.com");
+                "external1234@external.com");
             var localArea = new LocalArea(Guid.NewGuid(), "Test Area", (int)UKCompetentAuthority.England);
 
-            try
-            {
-                context.NotificationApplications.Add(notification);
-                context.Users.Add(aspnetInternalUser);
-                context.Users.Add(aspnetSharedUser);
-                context.LocalAreas.Add(localArea);
-                context.SaveChanges();
+            context.NotificationApplications.Add(notification);
+            context.Users.Add(aspnetInternalUser);
+            context.Users.Add(aspnetSharedUser);
+            context.LocalAreas.Add(localArea);
+            await context.SaveChangesAsync();
 
-                var internalUser = new InternalUser(aspnetInternalUser.Id, "test", UKCompetentAuthority.England,
-                    localArea.Id);
-                var sharedUser = new SharedUser(notification.Id, aspnetSharedUser.Id, DateTimeOffset.Now);
+            var internalUser = new InternalUser(aspnetInternalUser.Id, "test", UKCompetentAuthority.England,
+                localArea.Id);
+            var sharedUser = new SharedUser(notification.Id, aspnetSharedUser.Id, DateTimeOffset.Now);
 
-                context.InternalUsers.Add(internalUser);
-                context.SharedUser.Add(sharedUser);
-                context.SaveChanges();
+            context.InternalUsers.Add(internalUser);
+            context.SharedUser.Add(sharedUser);
+            await context.SaveChangesAsync();
 
-                // Set the shared user to be the user context.
-                A.CallTo(() => userContext.UserId).Returns(Guid.Parse(sharedUser.UserId));
+            // Set the shared user to be the user context.
+            A.CallTo(() => userContext.UserId).Returns(Guid.Parse(sharedUser.UserId));
 
-                var authorization = new NotificationApplicationAuthorization(context, userContext);
+            var authorization = new NotificationApplicationAuthorization(context, userContext);
 
-                // There's no assertion for 'does not throw exception' so just executing it as normal.
-                await authorization.EnsureAccessAsync(notification.Id);
+            // There's no assertion for 'does not throw exception' so just executing it as normal.
+            await authorization.EnsureAccessAsync(notification.Id);
 
-                context.DeleteOnCommit(internalUser);
-                context.DeleteOnCommit(sharedUser);
-                await context.SaveChangesAsync();
-            }
-            finally
-            {
-                context.Entry(aspnetInternalUser).State = EntityState.Deleted;
-                context.Entry(aspnetSharedUser).State = EntityState.Deleted;
-                context.Entry(localArea).State = EntityState.Deleted;
-                await context.SaveChangesAsync();
+            context.DeleteOnCommit(internalUser);
+            context.DeleteOnCommit(sharedUser);
+            await context.SaveChangesAsync();
 
-                context.DeleteOnCommit(notification);
-                await context.SaveChangesAsync();
-            }
+            context.Entry(aspnetInternalUser).State = EntityState.Deleted;
+            context.Entry(aspnetSharedUser).State = EntityState.Deleted;
+            context.Entry(localArea).State = EntityState.Deleted;
+            await context.SaveChangesAsync();
+
+            context.DeleteOnCommit(notification);
+            await context.SaveChangesAsync();
         }
     }
 }
