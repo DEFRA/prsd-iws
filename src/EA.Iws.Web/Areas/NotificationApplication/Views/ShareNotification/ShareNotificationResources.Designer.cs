@@ -161,7 +161,7 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.ShareNotification {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Are you sure you want to want to share notification {notification} to these users?.
+        ///   Looks up a localized string similar to Are you sure you want to share notification {notification} to these users?.
         /// </summary>
         public static string ShareNotificationConfirmTitle {
             get {
