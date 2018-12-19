@@ -1,13 +1,4 @@
-USE [EA.Iws]
 GO
-
-/****** Object:  Table [Notification].[SharedUser]    Script Date: 13/12/2018 09:43:20 ******/
-SET ANSI_NULLS ON
-GO
-
-SET QUOTED_IDENTIFIER ON
-GO
-
 CREATE TABLE [Notification].[SharedUser](
 	[Id] [uniqueidentifier] NOT NULL,
 	[NotificationId] [uniqueidentifier] NOT NULL,
