@@ -528,6 +528,7 @@
     <Compile Include="Notification\AddSharedUserHandler.cs" />
     <Compile Include="Notification\CanEditNotificationHandler.cs" />
     <Compile Include="Notification\ChangeUserHandler.cs" />
+    <Compile Include="Notification\CheckIfNotificationOwnerHandler.cs" />
     <Compile Include="Notification\CheckNotificationNumberUniqueHandler.cs" />
     <Compile Include="Notification\CreateLegacyNotificationApplicationHandler.cs" />
     <Compile Include="Notification\GenerateInterimMovementDocumentHandler.cs" />
@@ -549,6 +550,7 @@
     <Compile Include="Authorization\AuthorizeActivityHandler.cs" />
     <Compile Include="Notification\GetNotificationTypeHandler.cs" />
     <Compile Include="Notification\SharedUserAdded.cs" />
+    <Compile Include="SharedUsers\CheckIfSharedUserExistsHandler.cs" />
     <Compile Include="SharedUsers\DeleteSharedUserForNotificationHandler.cs" />
     <Compile Include="SharedUsers\GetSharedUserByIdHandler.cs" />
     <Compile Include="SharedUsers\GetSharedUsersByNotificationIdHandler.cs" />
