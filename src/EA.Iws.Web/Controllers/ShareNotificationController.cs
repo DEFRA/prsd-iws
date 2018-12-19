@@ -1,6 +1,7 @@
 ﻿namespace EA.Iws.Web.Controllers
 {
     using Core.Notification;
+    using Infrastructure;
     using Infrastructure.Authorization;
     using Prsd.Core.Mediator;
     using Requests.Notification;
@@ -71,6 +72,13 @@
             {
                 SharedUserListConfirmViewModel confirmViewModel = new SharedUserListConfirmViewModel(id, model.SelectedSharedUsers);
 
+                if (confirmViewModel.SharedUsers.Count == 0)
+                {
+                    ModelState.Clear();
+                    ModelState.AddModelError("Continue", "Please enter at least 1 email address to continue");
+                    return View(model);
+                }
+
                 TempData["SharedUsers"] = confirmViewModel.SharedUsers;
                 return RedirectToAction("Confirm", "ShareNotification", new { id = id });
             }
@@ -81,6 +89,13 @@
                 // Check validation of model for correct number of email addresses and email address in correct format
                 if (!ModelState.IsValid)
                 {
+                    model.SetSharedUsers(model.SelectedSharedUsers);
+                    return View(model);
+                }
+
+                if (User.GetEmailAddress() == model.EmailAddress)
+                {
+                    ModelState.AddModelError("Email Address", "Cannot share notification with your email address");
                     model.SetSharedUsers(model.SelectedSharedUsers);
                     return View(model);
                 }
@@ -132,6 +147,8 @@
         public async Task<ActionResult> Confirm(Guid id, SharedUserListConfirmViewModel model)
         {
             model.SharedUsers = (List<NotificationSharedUser>)TempData["SharedUsers"];
+
+            TempData["SharedUsers"] = null;
 
             List<string> userIds = model.SharedUsers.Select(p => p.UserId).ToList();
             await mediator.SendAsync(new AddSharedUser(id, userIds));
