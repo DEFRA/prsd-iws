@@ -88,7 +88,7 @@ namespace EA.Iws.Web.Views.ShareNotification {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Your chosesn shared users.
+        ///   Looks up a localized string similar to Your chosen shared users.
         /// </summary>
         public static string ChosenSharedUsers {
             get {
@@ -97,7 +97,7 @@ namespace EA.Iws.Web.Views.ShareNotification {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to It is your responsiblity as the owner to advise the user you want to share this notification with; what they can, and can&apos;t do on this notification once shared..
+        ///   Looks up a localized string similar to It is your responsibility as the owner to advise the user you want to share this notification with; what they can, and can&apos;t do on this notification once shared..
         /// </summary>
         public static string ConfirmResponsibility {
             get {

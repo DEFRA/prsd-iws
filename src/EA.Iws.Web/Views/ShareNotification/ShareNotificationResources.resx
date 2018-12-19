@@ -124,10 +124,10 @@
     <value>Awaiting shared users</value>
   </data>
   <data name="ChosenSharedUsers" xml:space="preserve">
-    <value>Your chosesn shared users</value>
+    <value>Your chosen shared users</value>
   </data>
   <data name="ConfirmResponsibility" xml:space="preserve">
-    <value>It is your responsiblity as the owner to advise the user you want to share this notification with; what they can, and can't do on this notification once shared.</value>
+    <value>It is your responsibility as the owner to advise the user you want to share this notification with; what they can, and can't do on this notification once shared.</value>
   </data>
   <data name="EmailHint" xml:space="preserve">
     <value>This is the email address that was used to register their account and they enter when logging into the service. If they are not registered to use IWS Online, they will need to do this first.</value>

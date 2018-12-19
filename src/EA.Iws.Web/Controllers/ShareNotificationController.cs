@@ -93,7 +93,7 @@
                 }
                 catch (Exception)
                 {
-                    ModelState.AddModelError("EmailAddress", "Enter a valid email address");
+                    ModelState.AddModelError("Email Address", "Enter a valid email address");
                     model.SetSharedUsers(model.SelectedSharedUsers);
                     return View(model);
                 }
@@ -102,7 +102,7 @@
 
                 if (!isInternalUser)
                 {
-                    ModelState.AddModelError("EmailAddress", "Email address can't be an internal user");
+                    ModelState.AddModelError("Email Address", "Email address can't be an internal user");
                     model.SetSharedUsers(model.SelectedSharedUsers);
                     return View(model);
                 }
@@ -111,7 +111,7 @@
 
                 if (existingSharedUsers.Count(p => p.UserId == userId.ToString()) > 0)
                 {
-                    ModelState.AddModelError("EmailAddress", "This email address has already been added as a shared user");
+                    ModelState.AddModelError("Email Address", "This email address has already been added as a shared user");
                     model.SetSharedUsers(model.SelectedSharedUsers);
                     return View(model);
                 }

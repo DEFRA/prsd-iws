@@ -11,7 +11,7 @@
     public class ShareNotificationViewModel
     {
         [Required]
-        [EmailAddress]
+        [EmailAddress(ErrorMessage = "The Email Address field is not a valid email address")]
         public string EmailAddress { get; set; }
 
         public Guid NotificationId { get; set; }
