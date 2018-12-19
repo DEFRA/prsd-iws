@@ -1,13 +1,15 @@
 ﻿namespace EA.Iws.Web.Areas.NotificationApplication.Controllers
 {
-    using System;
-    using System.Threading.Tasks;
-    using System.Web.Mvc;
     using Core.Authorization.Permissions;
     using Core.Movement;
     using Infrastructure.Authorization;
     using Prsd.Core.Mediator;
+    using Requests.Notification;
     using Requests.NotificationMovements;
+    using Requests.SharedUsers;
+    using System;
+    using System.Threading.Tasks;
+    using System.Web.Mvc;
     using ViewModels.Options;
 
     [AuthorizeActivity(ExportMovementPermissions.CanEditExportMovementsExternal)]
@@ -28,6 +30,16 @@
             var model = new NotificationOptionsViewModel(id, movementsSummary);
             model.SelectedMovementStatus = (MovementStatus?)status;
 
+            var isUserOwner = await mediator.SendAsync(new CheckIfNotificationOwner(id));
+            model.IsOwner = isUserOwner;
+            if (isUserOwner)
+            {
+                model.HasSharedUsers = await mediator.SendAsync(new CheckIfSharedUserExists(id));
+            }
+            else
+            {
+                model.HasSharedUsers = false;
+            }
             return View(model);
         }
 
