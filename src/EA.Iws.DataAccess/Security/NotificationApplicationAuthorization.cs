@@ -52,8 +52,7 @@
 
         private async Task CheckUserId(Guid notificationId, Guid notificationUserId)
         {
-            if (notificationUserId != userContext.UserId &&
-                !await IsSharedUser(notificationId))
+            if (notificationUserId != userContext.UserId && !(await IsSharedUser(notificationId)))
             {
                 throw new SecurityException(string.Format("Access denied to this notification {0} for user {1}",
                     notificationId, userContext.UserId));
