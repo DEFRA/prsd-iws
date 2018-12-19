@@ -1,4 +1,4 @@
-﻿namespace EA.Iws.Web.ViewModels.ShareNotification
+﻿namespace EA.Iws.Web.Areas.NotificationApplication.ViewModels.ShareNotification
 {
     using System;
     public class SuccessViewModel

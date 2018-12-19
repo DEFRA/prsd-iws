@@ -1,5 +1,7 @@
 ﻿namespace EA.Iws.Web.Tests.Unit.Controllers.NotificationApplication
-{
+{ 
+    using Areas.NotificationApplication.Controllers;
+    using Areas.NotificationApplication.ViewModels.ShareNotification;
     using Core.Notification;
     using FakeItEasy;
     using Prsd.Core.Mediator;
@@ -12,8 +14,6 @@
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using TestHelpers;
-    using Web.Controllers;
-    using Web.ViewModels.ShareNotification;
     using Xunit;
 
     public class AddSharedUserForNotificationControllerTests
@@ -50,7 +50,7 @@
         [Fact]
         public void ShareNotification_Get_ReturnsCorrectView()
         {
-            var result = shareNotificationOptionController.Index(this.notificationId) as ViewResult;
+            var result = shareNotificationOptionController.ShareNotification(this.notificationId) as ViewResult;
 
             Assert.IsType<ShareNotificationViewModel>(result.Model);
         }
@@ -61,7 +61,7 @@
             var model = new ShareNotificationViewModel(this.notificationId);
             model.EmailAddress = this.externalEmail;
 
-            var result = await shareNotificationOptionController.Index(this.notificationId, model, "addshareduser", string.Empty) as ViewResult;
+            var result = await shareNotificationOptionController.ShareNotification(this.notificationId, model, "addshareduser", string.Empty) as ViewResult;
 
             var resultModel = result.Model as ShareNotificationViewModel;
 
@@ -75,7 +75,7 @@
             model.SelectedSharedUsers = this.CreateSharedUserList(1);
             model.EmailAddress = model.SelectedSharedUsers[0].Email;
 
-            var result = await shareNotificationOptionController.Index(this.notificationId, model, string.Empty, model.SelectedSharedUsers[0].UserId.ToString()) as ViewResult;
+            var result = await shareNotificationOptionController.ShareNotification(this.notificationId, model, string.Empty, model.SelectedSharedUsers[0].UserId.ToString()) as ViewResult;
 
             var resultModel = result.Model as ShareNotificationViewModel;
 
@@ -91,7 +91,7 @@
 
             model.EmailAddress = model.SelectedSharedUsers[0].Email;
 
-            var result = await shareNotificationOptionController.Index(this.notificationId, model, "addshareduser", string.Empty) as ViewResult;
+            var result = await shareNotificationOptionController.ShareNotification(this.notificationId, model, "addshareduser", string.Empty) as ViewResult;
 
             var resultModel = result.Model as ShareNotificationViewModel;
 
@@ -129,7 +129,7 @@
             var model = new ShareNotificationViewModel(this.notificationId);
             model.EmailAddress = this.internalEmail;
 
-            var result = await shareNotificationOptionController.Index(this.notificationId, model, "addshareduser", string.Empty) as ViewResult;
+            var result = await shareNotificationOptionController.ShareNotification(this.notificationId, model, "addshareduser", string.Empty) as ViewResult;
 
             Assert.True(result.ViewData.ModelState.Count == 1, "Email address can't be an internal user");
         }
@@ -145,7 +145,7 @@
             var model = new ShareNotificationViewModel(this.notificationId);
             model.EmailAddress = "fake@fake.com";
 
-            var result = await shareNotificationOptionController.Index(this.notificationId, model, "addshareduser", string.Empty) as ViewResult;
+            var result = await shareNotificationOptionController.ShareNotification(this.notificationId, model, "addshareduser", string.Empty) as ViewResult;
 
             Assert.True(result.ViewData.ModelState.Count == 1, "Enter a valid email address");
         }
@@ -168,7 +168,7 @@
 
             var model = new ShareNotificationViewModel(this.notificationId, users);
             
-            var result = await shareNotificationOptionController.Index(this.notificationId, model, "addshareduser", null) as ViewResult;
+            var result = await shareNotificationOptionController.ShareNotification(this.notificationId, model, "addshareduser", null) as ViewResult;
 
             Assert.True(result.ViewData.ModelState.Count == 1, "This email address has already been added as a shared user");
         }

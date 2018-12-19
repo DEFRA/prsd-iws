@@ -1,4 +1,4 @@
-﻿namespace EA.Iws.Web.Controllers
+﻿namespace EA.Iws.Web.Areas.NotificationApplication.Controllers
 {
     using Core.Notification;
     using Infrastructure;
@@ -25,7 +25,7 @@
         }
 
         [HttpGet]
-        public ActionResult Index(Guid id)
+        public ActionResult ShareNotification(Guid id)
         {
             var sharedUsers = (List<NotificationSharedUser>)TempData["SharedUsers"];
             var model = new ShareNotificationViewModel(id, sharedUsers);
@@ -59,7 +59,7 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Index(Guid id, ShareNotificationViewModel model, string command, string removeId)
+        public async Task<ActionResult> ShareNotification(Guid id, ShareNotificationViewModel model, string command, string removeId)
         {
             // User is removing a user from the list
             if (removeId != null)
