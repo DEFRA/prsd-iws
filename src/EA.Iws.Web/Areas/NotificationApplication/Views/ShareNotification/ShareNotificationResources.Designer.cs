@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace EA.Iws.Web.Views.ShareNotification {
+namespace EA.Iws.Web.Areas.NotificationApplication.Views.ShareNotification {
     using System;
     
     
@@ -39,7 +39,8 @@ namespace EA.Iws.Web.Views.ShareNotification {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EA.Iws.Web.Views.ShareNotification.ShareNotificationResources", typeof(ShareNotificationResources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EA.Iws.Web.Areas.NotificationApplication.Views.ShareNotification.ShareNotificatio" +
+                            "nResources", typeof(ShareNotificationResources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -160,7 +161,7 @@ namespace EA.Iws.Web.Views.ShareNotification {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Are you sure you want to want to share notification {notification} to these users?.
+        ///   Looks up a localized string similar to Are you sure you want to share notification {notification} to these users?.
         /// </summary>
         public static string ShareNotificationConfirmTitle {
             get {

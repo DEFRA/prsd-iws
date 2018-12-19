@@ -1,4 +1,4 @@
-﻿namespace EA.Iws.Web.Controllers
+﻿namespace EA.Iws.Web.Areas.NotificationApplication.Controllers
 {
     using Core.Notification;
     using Infrastructure;
@@ -25,7 +25,7 @@
         }
 
         [HttpGet]
-        public ActionResult Index(Guid id)
+        public ActionResult ShareNotification(Guid id)
         {
             var sharedUsers = (List<NotificationSharedUser>)TempData["SharedUsers"];
             var model = new ShareNotificationViewModel(id, sharedUsers);
@@ -59,7 +59,7 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Index(Guid id, ShareNotificationViewModel model, string command, string removeId)
+        public async Task<ActionResult> ShareNotification(Guid id, ShareNotificationViewModel model, string command, string removeId)
         {
             // User is removing a user from the list
             if (removeId != null)
@@ -93,10 +93,10 @@
                     return View(model);
                 }
 
+                // Check that the owner of notification isn't trying to share it with themselves
                 if (User.GetEmailAddress() == model.EmailAddress)
                 {
-                    ModelState.AddModelError("Email Address", "Cannot share notification with your email address");
-                    model.SetSharedUsers(model.SelectedSharedUsers);
+                    model = this.PrepareModelWithErrors("Email Address", "Cannot share notification with your email address", model);
                     return View(model);
                 }
 
@@ -108,8 +108,7 @@
                 }
                 catch (Exception)
                 {
-                    ModelState.AddModelError("Email Address", "Enter a valid email address");
-                    model.SetSharedUsers(model.SelectedSharedUsers);
+                    model = this.PrepareModelWithErrors("Email Address", "Enter a valid email address", model);
                     return View(model);
                 }
 
@@ -117,8 +116,7 @@
 
                 if (!isInternalUser)
                 {
-                    ModelState.AddModelError("Email Address", "Email address can't be an internal user");
-                    model.SetSharedUsers(model.SelectedSharedUsers);
+                    model = this.PrepareModelWithErrors("Email Address", "Email address can't be an internal user", model);
                     return View(model);
                 }
 
@@ -126,8 +124,8 @@
 
                 if (existingSharedUsers.Count(p => p.UserId == userId.ToString()) > 0)
                 {
-                    ModelState.AddModelError("Email Address", "This email address has already been added as a shared user");
-                    model.SetSharedUsers(model.SelectedSharedUsers);
+                    model = this.PrepareModelWithErrors("Email Address", "This email address has already been added as a shared user", model);
+
                     return View(model);
                 }
 
@@ -154,6 +152,14 @@
             await mediator.SendAsync(new AddSharedUser(id, userIds));
 
             return RedirectToAction("Success", "ShareNotification", new { id = id });
+        }
+
+        private ShareNotificationViewModel PrepareModelWithErrors(string area, string errorMessage, ShareNotificationViewModel model)
+        {
+            model.SetSharedUsers(model.SelectedSharedUsers);
+            ModelState.AddModelError(area, errorMessage);
+
+            return model;
         }
 
         private ShareNotificationViewModel PrepareReturnModel(ShareNotificationViewModel model)

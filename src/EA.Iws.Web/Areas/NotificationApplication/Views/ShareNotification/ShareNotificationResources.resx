@@ -151,7 +151,7 @@
     <value>This notification will be shared with:</value>
   </data>
   <data name="ShareNotificationConfirmTitle" xml:space="preserve">
-    <value>Are you sure you want to want to share notification {notification} to these users?</value>
+    <value>Are you sure you want to share notification {notification} to these users?</value>
   </data>
   <data name="Back" xml:space="preserve">
     <value>Back to share access</value>
