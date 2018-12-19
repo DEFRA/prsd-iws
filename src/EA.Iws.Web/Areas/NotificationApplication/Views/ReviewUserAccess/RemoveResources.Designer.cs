@@ -61,6 +61,15 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.ReviewUserAccess {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to It is your responsibility, as owner of this notification, to inform the user their access has been revoked..
+        /// </summary>
+        public static string AdditionalText {
+            get {
+                return ResourceManager.GetString("AdditionalText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cancel.
         /// </summary>
         public static string Cancel {
