@@ -93,10 +93,10 @@
                     return View(model);
                 }
 
+                // Check that the owner of notification isn't trying to share it with themselves
                 if (User.GetEmailAddress() == model.EmailAddress)
                 {
-                    ModelState.AddModelError("Email Address", "Cannot share notification with your email address");
-                    model.SetSharedUsers(model.SelectedSharedUsers);
+                    model = this.PrepareModelWithErrors("Email Address", "Cannot share notification with your email address", model);
                     return View(model);
                 }
 
@@ -108,8 +108,7 @@
                 }
                 catch (Exception)
                 {
-                    ModelState.AddModelError("Email Address", "Enter a valid email address");
-                    model.SetSharedUsers(model.SelectedSharedUsers);
+                    model = this.PrepareModelWithErrors("Email Address", "Enter a valid email address", model);
                     return View(model);
                 }
 
@@ -117,8 +116,7 @@
 
                 if (!isInternalUser)
                 {
-                    ModelState.AddModelError("Email Address", "Email address can't be an internal user");
-                    model.SetSharedUsers(model.SelectedSharedUsers);
+                    model = this.PrepareModelWithErrors("Email Address", "Email address can't be an internal user", model);
                     return View(model);
                 }
 
@@ -126,8 +124,8 @@
 
                 if (existingSharedUsers.Count(p => p.UserId == userId.ToString()) > 0)
                 {
-                    ModelState.AddModelError("Email Address", "This email address has already been added as a shared user");
-                    model.SetSharedUsers(model.SelectedSharedUsers);
+                    model = this.PrepareModelWithErrors("Email Address", "This email address has already been added as a shared user", model);
+
                     return View(model);
                 }
 
@@ -154,6 +152,14 @@
             await mediator.SendAsync(new AddSharedUser(id, userIds));
 
             return RedirectToAction("Success", "ShareNotification", new { id = id });
+        }
+
+        private ShareNotificationViewModel PrepareModelWithErrors(string area, string errorMessage, ShareNotificationViewModel model)
+        {
+            model.SetSharedUsers(model.SelectedSharedUsers);
+            ModelState.AddModelError(area, errorMessage);
+
+            return model;
         }
 
         private ShareNotificationViewModel PrepareReturnModel(ShareNotificationViewModel model)
