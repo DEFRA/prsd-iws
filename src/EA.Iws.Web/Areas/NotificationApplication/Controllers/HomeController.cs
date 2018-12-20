@@ -1,6 +1,7 @@
 ﻿namespace EA.Iws.Web.Areas.NotificationApplication.Controllers
 {
     using System;
+    using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Core.Notification;
@@ -9,6 +10,7 @@
     using Prsd.Core.Web.ApiClient;
     using Prsd.Core.Web.Mvc.Extensions;
     using Requests.Notification;
+    using Requests.SharedUsers;
     using ViewModels.Home;
     using ViewModels.NotificationApplication;
 
@@ -70,6 +72,14 @@
             var response = await mediator.SendAsync(new GetNotificationOverview(id));
 
             var model = new NotificationOverviewViewModel(response);
+
+            model.SubmitSideBarViewModel.IsOwner = await mediator.SendAsync(new CheckIfNotificationOwner(id));
+
+            if (!model.SubmitSideBarViewModel.IsOwner)
+            {
+                var sharedUsers = await mediator.SendAsync(new GetSharedUsersByNotificationId(id));
+                model.SubmitSideBarViewModel.IsSharedUser = sharedUsers.Count(p => p.UserId == User.GetUserId()) > 0;
+            }
 
             ViewBag.Charge = response.NotificationCharge;
 

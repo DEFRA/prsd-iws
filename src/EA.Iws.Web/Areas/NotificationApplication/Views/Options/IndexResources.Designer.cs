@@ -61,6 +61,15 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.Options {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Notification access level:.
+        /// </summary>
+        public static string AccessLevel {
+            get {
+                return ResourceManager.GetString("AccessLevel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Active loads permitted:.
         /// </summary>
         public static string ActiveLoadsPermitted {

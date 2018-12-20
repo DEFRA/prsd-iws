@@ -2,12 +2,14 @@
 {
     using Core.Authorization.Permissions;
     using Core.Movement;
+    using Infrastructure;
     using Infrastructure.Authorization;
     using Prsd.Core.Mediator;
     using Requests.Notification;
     using Requests.NotificationMovements;
     using Requests.SharedUsers;
     using System;
+    using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using ViewModels.Options;
@@ -30,16 +32,16 @@
             var model = new NotificationOptionsViewModel(id, movementsSummary);
             model.SelectedMovementStatus = (MovementStatus?)status;
 
-            var isUserOwner = await mediator.SendAsync(new CheckIfNotificationOwner(id));
-            model.IsOwner = isUserOwner;
-            if (isUserOwner)
+            model.IsOwner = await mediator.SendAsync(new CheckIfNotificationOwner(id));
+
+            if (!model.IsOwner)
             {
-                model.HasSharedUsers = await mediator.SendAsync(new CheckIfSharedUserExists(id));
+                var sharedUsers = await mediator.SendAsync(new GetSharedUsersByNotificationId(id));
+                model.IsSharedUser = sharedUsers.Count(p => p.UserId == User.GetUserId()) > 0;
             }
-            else
-            {
-                model.HasSharedUsers = false;
-            }
+
+            model.HasSharedUsers = await mediator.SendAsync(new CheckIfSharedUserExists(id));
+
             return View(model);
         }
 

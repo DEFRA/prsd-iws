@@ -52,6 +52,11 @@
                 @Html.ActionLink(@Resource.ContinueWithButtonText, "Index", "Home", new { id = Model.NotificationId, area = "NotificationApplication" }, new { @class = "button" })
             }
         </div>
+
+        <div class="column-third" id="submit-side-bar">
+            <h3 style="text-align: center" class="heading-medium">@Resource.AccessLevel</h3>
+            <h3 style="text-align: center" class="bold-medium">@Model.AccessLevelText</h3>
+        </div>
     </div>
 
     @if (Model.NotificationStatus == NotificationStatus.NotSubmitted)
@@ -65,12 +70,17 @@
             <div class="nav-bloc">
                 <nav>
                     @Html.ActionLink(Resource.ViewNotification, "Index", "Home", new { id = Model.NotificationId, area = "NotificationApplication" }, null)
-                    @Html.ActionLink(Resource.AssignNotification, "Index", "ChangeNotificationOwner", new { id = Model.NotificationId, area = string.Empty }, null)
-                    @Html.ActionLink(Resource.ShareNotification, "ShareNotification", "ShareNotification", new { id = Model.NotificationId, area = "NotificationApplication"}, null)
-					@if (Model.IsOwner && Model.HasSharedUsers)
-					{
-                    @Html.ActionLink(Resource.ReviewAccess, "UserList", "ReviewUserAccess", new { id = Model.NotificationId, area = "NotificationApplication" }, null)
-					}
+                    
+                    @if (Model.IsOwner)
+                    {
+                        @Html.ActionLink(Resource.AssignNotification, "Index", "ChangeNotificationOwner", new { id = Model.NotificationId, area = string.Empty }, null)
+                        @Html.ActionLink(Resource.ShareNotification, "ShareNotification", "ShareNotification", new { id = Model.NotificationId, area = "NotificationApplication" }, null)
+                    }
+
+                    @if (Model.HasSharedUsers)
+                    {
+                        @Html.ActionLink(Resource.ReviewAccess, "UserList", "ReviewUserAccess", new { id = Model.NotificationId, area = "NotificationApplication" }, null)
+                    }
 
                     @if (Model.NotificationStatus == NotificationStatus.NotSubmitted)
                     {
