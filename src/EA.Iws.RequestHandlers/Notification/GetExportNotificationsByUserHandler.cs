@@ -31,7 +31,8 @@
                     COALESCE(NS.ChangeDate, N.CreatedDate) AS StatusDate,
                     E.Name AS Exporter,
                     I.Name AS Importer,
-                    P.Name AS Producer
+                    P.Name AS Producer,
+                    AccessLevel = CASE WHEN N.UserId = @Id THEN 'Owner' Else 'Administrator' END
                 FROM 
                     [Notification].[Notification] N
                     INNER JOIN [Notification].[NotificationAssessment] NA ON N.Id = NA.NotificationApplicationId
