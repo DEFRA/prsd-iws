@@ -159,4 +159,7 @@
   <data name="NotificationOption" xml:space="preserve">
     <value>Go to notification options</value>
   </data>
+  <data name="Email" xml:space="preserve">
+    <value>Email</value>
+  </data>
 </root>

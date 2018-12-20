@@ -107,6 +107,15 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.ShareNotification {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Email.
+        /// </summary>
+        public static string Email {
+            get {
+                return ResourceManager.GetString("Email", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to This is the email address that was used to register their account and they enter when logging into the service. If they are not registered to use IWS Online, they will need to do this first..
         /// </summary>
         public static string EmailHint {
