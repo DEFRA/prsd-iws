@@ -57,6 +57,10 @@
             </div>
 
             <button class="button" type="submit" name="command" value="continue">@Constants.ContinueOnlyButtonText</button>
+
+            <div>
+                @Html.ActionLink(Resources.NotificationOption, "Index", "Options", new { area = "NotificationApplication", id = Model.NotificationId }, null)
+            </div>
         }
     </div>
 </div>

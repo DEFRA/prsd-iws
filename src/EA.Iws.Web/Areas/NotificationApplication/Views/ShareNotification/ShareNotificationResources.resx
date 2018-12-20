@@ -156,4 +156,7 @@
   <data name="Back" xml:space="preserve">
     <value>Back to share access</value>
   </data>
+  <data name="NotificationOption" xml:space="preserve">
+    <value>Go to notification options</value>
+  </data>
 </root>

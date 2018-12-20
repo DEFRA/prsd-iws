@@ -24,9 +24,27 @@
             this.mediator = mediator;
         }
 
+        // If the previous controller is the notifications options page, then remove the temp data for shared owners
+        private void CheckSharedDataIsValid()
+        {
+            try
+            {
+                var previousController = (Request.UrlReferrer.Segments.Skip(3).Take(1).SingleOrDefault() ?? "Home").Trim('/');
+                if (previousController == "options")
+                {
+                    TempData.Remove("SharedUsers");
+                }
+            }
+            catch (Exception)
+            {
+            }
+        }
+
         [HttpGet]
         public ActionResult ShareNotification(Guid id)
         {
+            this.CheckSharedDataIsValid();
+            
             var sharedUsers = (List<NotificationSharedUser>)TempData["SharedUsers"];
             var model = new ShareNotificationViewModel(id, sharedUsers);
 

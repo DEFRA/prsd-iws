@@ -42,8 +42,7 @@
             <div>
                 <button class="button" type="submit">@Constants.ContinueButtonText</button>
             </div>
-            @Html.ActionLink(@Resources.Back, "Index", "ShareNotification", new { id = Model.NotificationId, area = string.Empty}, null)
-            
+            @Html.ActionLink(@Resources.Back, "ShareNotification", "ShareNotification", new { id = Model.NotificationId, area = "NotificationApplication" }, null)
         }
     </div>
 </div>
