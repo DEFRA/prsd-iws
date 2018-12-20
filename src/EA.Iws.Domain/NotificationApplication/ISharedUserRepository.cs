@@ -10,5 +10,7 @@
         Task<IEnumerable<SharedUser>> GetAllSharedUsers(Guid notificationId);
 
         Task<SharedUser> GetSharedUserById(Guid notificationId, Guid sharedId);
+
+        Task<int> GetSharedUserCount(Guid notificationId);
     }
 }

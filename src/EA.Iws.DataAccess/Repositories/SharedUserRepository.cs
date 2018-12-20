@@ -37,5 +37,15 @@
         {
             return await context.SharedUser.Where(x => x.NotificationId == notificationId && x.Id == sharedId).SingleAsync();
         }
+
+        public async Task<int> GetSharedUserCount(Guid notificationId)
+        {
+            var totalMovements = await context.SharedUser
+                  .Where(m =>
+                      m.NotificationId == notificationId)
+                  .CountAsync();
+
+            return totalMovements;
+        }
     }
 }

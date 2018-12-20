@@ -298,6 +298,7 @@
     <Compile Include="Notification\GetNotificationNumber.cs" />
     <Compile Include="Admin\GetNotificationInfo.cs" />
     <Compile Include="Movement\Receive\RecordReceiptInternal.cs" />
+    <Compile Include="Notification\CheckIfNotificationOwner.cs" />
     <Compile Include="Notification\GetNotificationType.cs" />
     <Compile Include="Notification\GetUserNotificationsSummary.cs" />
     <Compile Include="Notification\GetWhatToDoNextDataForNotification.cs" />
@@ -349,6 +350,7 @@
     <Compile Include="Notification\PreconsentedFacilityData.cs" />
     <Compile Include="Notification\SetPreconsentedRecoveryFacility.cs" />
     <Compile Include="Notification\SetReasonForExport.cs" />
+    <Compile Include="SharedUsers\CheckIfSharedUserExists.cs" />
     <Compile Include="SharedUsers\DeleteSharedUserForNotification.cs" />
     <Compile Include="SharedUsers\GetSharedUserById.cs" />
     <Compile Include="SharedUsers\GetSharedUsersByNotificationId.cs" />

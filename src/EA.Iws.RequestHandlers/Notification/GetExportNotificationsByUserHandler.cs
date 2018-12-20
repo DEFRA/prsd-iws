@@ -45,7 +45,7 @@
                     LEFT JOIN [Notification].[Importer] I ON N.Id = I.NotificationId
                     LEFT JOIN [Notification].[ProducerCollection] PC ON N.Id = PC.NotificationId
                     LEFT JOIN [Notification].[Producer] P ON PC.Id = P.ProducerCollectionId AND P.IsSiteOfExport = 1
-                    LEFT JOIN [Notification].[SharedUser] SU ON SU.NotificationId = N.Id
+                    LEFT JOIN [Notification].[SharedUser] SU ON SU.NotificationId = N.Id AND SU.UserId =  @Id
                 WHERE 
                     (N.UserId = @Id OR SU.UserId = @Id)
                     AND (@Status IS NULL OR NA.Status = @Status)
@@ -61,7 +61,7 @@
                 @"SELECT COUNT(N.[Id])
                   FROM [Notification].[Notification] N
                   INNER JOIN [Notification].[NotificationAssessment] NA ON N.Id = NA.NotificationApplicationId
-                  LEFT JOIN [Notification].[SharedUser] SU ON SU.NotificationId = N.Id
+                  LEFT JOIN [Notification].[SharedUser] SU ON SU.NotificationId = N.Id AND SU.UserId =  @Id
                   WHERE (N.UserId = @Id OR SU.UserId = @Id) AND (@Status IS NULL OR NA.Status = @Status)",
                 new SqlParameter("@Id", userContext.UserId),
                 new SqlParameter("@Status", (object)message.NotificationStatus ?? DBNull.Value)).SingleAsync();

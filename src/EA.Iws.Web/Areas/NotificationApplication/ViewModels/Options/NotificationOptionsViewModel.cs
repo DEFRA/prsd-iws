@@ -148,5 +148,9 @@
         public int PageNumber { get; set; }
 
         public int NumberofShipments { get; set; }
+
+        public bool IsOwner { get; set; }
+
+        public bool HasSharedUsers { get; set; }
     }
 }
