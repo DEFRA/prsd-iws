@@ -124,7 +124,7 @@
     <value>Cancel</value>
   </data>
   <data name="Confirm" xml:space="preserve">
-    <value>Save and Continue</value>
+    <value>Save and continue</value>
   </data>
   <data name="ConfirmText" xml:space="preserve">
     <value>You are about to remove {0} from this notification. This will remove their ability to view or edit this notification.</value>

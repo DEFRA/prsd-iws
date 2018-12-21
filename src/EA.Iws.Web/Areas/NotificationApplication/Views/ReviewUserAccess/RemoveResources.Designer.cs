@@ -79,7 +79,7 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.ReviewUserAccess {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Save and Continue.
+        ///   Looks up a localized string similar to Save and continue.
         /// </summary>
         public static string Confirm {
             get {
