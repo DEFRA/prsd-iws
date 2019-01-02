@@ -150,6 +150,8 @@
     <Compile Include="Controllers\Admin\HomeControllerTests.cs" />
     <Compile Include="Controllers\Admin\ImportNotificationControllerTests.cs" />
     <Compile Include="Controllers\ImportNotification\WasteOperationControllerTests.cs" />
+    <Compile Include="Controllers\NotificationApplication\ReviewUserAccessControllerTests.cs" />
+    <Compile Include="Controllers\NotificationApplication\AddSharedUserForNotificationControllerTests.cs" />
     <Compile Include="Controllers\NotificationAssessment\DecisionControllerTests.cs" />
     <Compile Include="Controllers\NotificationMovements\CancelMovementControllerTests.cs" />
     <Compile Include="Controllers\NotificationApplication\BaseWasteCodeControllerTests.cs" />

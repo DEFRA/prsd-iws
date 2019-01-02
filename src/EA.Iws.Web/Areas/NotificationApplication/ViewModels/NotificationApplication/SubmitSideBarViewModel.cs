@@ -23,6 +23,18 @@
 
         public bool IsNotificationComplete { get; set; }
 
+        public bool IsOwner { get; set; }
+
+        public bool IsSharedUser { get; set; }
+
+        public string AccessLevelText
+        {
+            get
+            {
+                return this.IsOwner == true ? "Owner" : this.IsSharedUser == true ? "Administrator" : string.Empty;
+            }
+        }
+
         public bool ShowSubmitButton
         {
             get

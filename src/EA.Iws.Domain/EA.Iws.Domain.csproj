@@ -171,6 +171,7 @@
     <Compile Include="Movement\MovementDateOutsideConsentPeriodException.cs" />
     <Compile Include="Movement\MovementDateValidator.cs" />
     <Compile Include="Movement\NumberOfMovements.cs" />
+    <Compile Include="NotificationApplication\AddNotificationSharedUser.cs" />
     <Compile Include="NotificationApplication\Address.cs" />
     <Compile Include="AddressBook\AddressBookRecordComparer.cs" />
     <Compile Include="AddressBook\IAddressBookRespository.cs" />
@@ -263,6 +264,8 @@
     <Compile Include="Movement\RejectMovement.cs" />
     <Compile Include="Finance\Activity.cs" />
     <Compile Include="NotificationApplication\IMeansOfTransportRepository.cs" />
+    <Compile Include="NotificationApplication\ISharedUserHistoryRepository.cs" />
+    <Compile Include="NotificationApplication\ISharedUserRepository.cs" />
     <Compile Include="NotificationApplication\ITechnologyEmployedRepository.cs" />
     <Compile Include="NotificationApplication\MeansOfTransport.cs" />
     <Compile Include="NotificationApplication\NotificationApplicationFactory.cs" />
@@ -283,8 +286,11 @@
     <Compile Include="NotificationApplication\IWasteCodeRepository.cs" />
     <Compile Include="NotificationApplication\ChangeNotificationUser.cs" />
     <Compile Include="NotificationApplication\NotificationNumberFormatter.cs" />
+    <Compile Include="NotificationApplication\NotificationSharedUserAddedEvent.cs" />
     <Compile Include="NotificationApplication\ProducerCollection.cs" />
     <Compile Include="NotificationApplication\SetAllFacilitiesPreconsented.cs" />
+    <Compile Include="NotificationApplication\SharedUser.cs" />
+    <Compile Include="NotificationApplication\SharedUserHistory.cs" />
     <Compile Include="NotificationApplication\Shipment\INumberOfShipmentsHistotyRepository.cs" />
     <Compile Include="NotificationApplication\Shipment\NumberOfShipmentsHistory.cs" />
     <Compile Include="NotificationApplication\UserHistory.cs" />

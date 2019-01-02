@@ -5,30 +5,43 @@
 <section class="grid-row">
     <div class="noti-overview">
         <div class="column-half">
-            <h2 class="heading-medium">@Model.NotificationNumber</h2>
-            <h1 class="heading-large">Notification overview</h1>
+            <div>
+                <h2 class="heading-medium">@Model.NotificationNumber</h2>
+                <h1 class="heading-large">Notification overview</h1>
+            </div>
+            <div id="submit-side-bar" style="background-color:#f8f8f8">
+                <h3 style="text-align:center; font-size:24px">Notification access level:</h3>
+                <h3 style="text-align:center; font-size:36px" >@Model.AccessLevelText</h3>
+            </div>
+            <div>
+                <br />
+            </div>
 
-            @if (Model.ShowSubmitButton)
+            <div>
+                @if (Model.ShowSubmitButton)
             {
-                @Html.ActionLink("Submit notification", "Disclaimer", "Submit", null, new { @class = "button" })
-            }
-
-            else if (Model.ShowDisabledSubmitButtonAndGuidanceText)
-            {
-                <a href="#" class="button" disabled="disabled">Submit notification</a>
-                <p>You can submit this notification once you've completed all sections</p>
-            }
-
-            else if (Model.ShowResubmitButton)
-            {
-                using (Html.BeginForm("Resubmit","Home", FormMethod.Post, new { id = Model.NotificationId }))
-                {
-                    @Html.AntiForgeryToken()
-
-                    <input type="submit" class="button" value="Resubmit notification"/>
+                    @Html.ActionLink("Submit notification", "Disclaimer", "Submit", null, new { @class = "button" })
                 }
-            }
+
+                else if (Model.ShowDisabledSubmitButtonAndGuidanceText)
+                {
+                    <a href="#" class="button" disabled="disabled">Submit notification</a>
+                    <p>You can submit this notification once you've completed all sections</p>
+                }
+
+                else if (Model.ShowResubmitButton)
+                {
+                    using (Html.BeginForm("Resubmit", "Home", FormMethod.Post, new { id = Model.NotificationId }))
+                    {
+                        @Html.AntiForgeryToken()
+
+                        <input type="submit" class="button" value="Resubmit notification" />
+                    }
+                }
+            </div>
         </div>
+
+
 
         <div class="column-half charge">
 
@@ -43,7 +56,7 @@
                     <span>Notification<br />charge</span>
                     <span class="price">&pound;@Model.Charge</span>
                     <div class="vat-message">
-                        All charges for environmental<br/> permits and licences are outside<br/> the scope of VAT
+                        All charges for environmental<br /> permits and licences are outside<br /> the scope of VAT
                     </div>
                 </div>
             }
@@ -52,14 +65,14 @@
                 @if (Model.CompetentAuthority == UKCompetentAuthority.Scotland)
                 {
                     @Html.ActionLink("Bank guarantee template", "GenerateBankGuaranteeDocument", "Home", new { area = "FinancialGuarantee" }, null)
-                    <br/>
+                    <br />
                     @Html.ActionLink("Parent company template", "GenerateParentCompanyDocument", "Home", new { area = "FinancialGuarantee" }, null)
                 }
                 else
                 {
                     @Html.ActionLink("Download financial guarantee", "GenerateFinancialGuaranteeDocument", "Home", new { area = "FinancialGuarantee", competentAuthority = Model.CompetentAuthority }, null)
                 }
-                <br/>
+                <br />
                 @if (Model.Status != NotificationStatus.NotSubmitted)
                 {
                     @Html.ActionLink("Download notification", "GenerateNotificationDocument", "Home", new { id = Model.NotificationId },

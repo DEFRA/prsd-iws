@@ -18,5 +18,7 @@
         public string Producer { get; set; }
 
         public string Importer { get; set; }
+
+        public string AccessLevel { get; set; }
     }
 }

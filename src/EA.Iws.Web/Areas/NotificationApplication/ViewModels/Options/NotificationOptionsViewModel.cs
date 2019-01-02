@@ -148,5 +148,18 @@
         public int PageNumber { get; set; }
 
         public int NumberofShipments { get; set; }
+
+        public bool IsOwner { get; set; }
+        public bool IsSharedUser { get; set; }
+
+        public bool HasSharedUsers { get; set; }
+
+        public string AccessLevelText
+        {
+            get
+            {
+                return this.IsOwner == true ? "Owner" : this.IsSharedUser == true ? "Administrator" : string.Empty;
+            }
+        }
     }
 }
