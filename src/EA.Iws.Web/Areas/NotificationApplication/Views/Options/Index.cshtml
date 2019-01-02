@@ -52,6 +52,13 @@
                 @Html.ActionLink(@Resource.ContinueWithButtonText, "Index", "Home", new { id = Model.NotificationId, area = "NotificationApplication" }, new { @class = "button" })
             }
         </div>
+
+        <div class="column-third">
+            <div id="submit-side-bar" style="background-color:#f8f8f8">
+                <h3 style="text-align:center; font-size:24px" >@Resource.AccessLevel</h3>
+                <h3 style="text-align:center; font-size:36px" >@Model.AccessLevelText</h3>
+            </div>
+        </div>
     </div>
 
     @if (Model.NotificationStatus == NotificationStatus.NotSubmitted)
@@ -65,7 +72,17 @@
             <div class="nav-bloc">
                 <nav>
                     @Html.ActionLink(Resource.ViewNotification, "Index", "Home", new { id = Model.NotificationId, area = "NotificationApplication" }, null)
-                    @Html.ActionLink(Resource.AssignNotification, "Index", "ChangeNotificationOwner", new { id = Model.NotificationId, area = string.Empty }, null)
+                    
+                    @if (Model.IsOwner)
+                    {
+                        @Html.ActionLink(Resource.AssignNotification, "Index", "ChangeNotificationOwner", new { id = Model.NotificationId, area = string.Empty }, null)
+                        @Html.ActionLink(Resource.ShareNotification, "ShareNotification", "ShareNotification", new { id = Model.NotificationId, area = "NotificationApplication" }, null)
+                    }
+
+                    @if (Model.HasSharedUsers)
+                    {
+                        @Html.ActionLink(Resource.ReviewAccess, "UserList", "ReviewUserAccess", new { id = Model.NotificationId, area = "NotificationApplication" }, null)
+                    }
 
                     @if (Model.NotificationStatus == NotificationStatus.NotSubmitted)
                     {

@@ -1,0 +1,66 @@
+﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.ShareNotification.ShareNotificationViewModel
+@using Resources = EA.Iws.Web.Areas.NotificationApplication.Views.ShareNotification.ShareNotificationResources
+@{
+    Layout = "~/Views/Shared/_Layout.GovUK.Sections.cshtml";
+    ViewBag.Title = Resources.ShareNotificationTitle;
+}
+
+<div class="grid-row">
+    <div class="column-two-thirds">
+        <h1 class="heading-large">@Resources.ShareNotificationTitle</h1>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            @Html.Gds().ValidationSummary()
+            @Html.HiddenFor(m => m.NotificationId)
+
+
+            <div class="form-group @Html.Gds().FormGroupClass(m => m.EmailAddress)">
+                <p>@Resources.ConfirmResponsibility</p>
+                <p>@Resources.EnterEmail</p>
+                <div class="column bold-small">
+                    @Resources.EmailHint
+                </div>
+                @Html.Gds().ValidationMessageFor(m => m.EmailAddress)
+                @Html.Gds().TextBoxFor(m => m.EmailAddress)
+                <button type="submit" name="command" value="addshareduser" tabindex="2" class="button-secondary">@Resources.AddSharedUser</button>
+            </div>
+
+            <h2 class="heading-medium">@Resources.ChosenSharedUsers</h2>
+
+            <div class="form-group">
+                <table title="@Resources.SharedUserTableTitle">
+                    <thead>
+                        <tr>
+                            <th>@Resources.Email</th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    @if (Model.SelectedSharedUsers.Count < 1)
+                    {
+                        <tr>
+                            <td colspan="3">@Resources.AwaitingSharedUsers</td>
+                        </tr>
+                    }
+                    @for (int i = 0; i < Model.SelectedSharedUsers.Count; i++)
+                    {
+                        var sharedUser = Model.SharedUsersList.Single(c => c.Value == Model.SelectedSharedUsers[i].UserId.ToString());
+                        <tr>
+                            <td>@Html.HiddenFor(m => m.SelectedSharedUsers[i].UserId)@Html.HiddenFor(m => m.SelectedSharedUsers[i].Email)@Html.HiddenFor(m => m.SelectedSharedUsers[i].NotificationId) @Html.Raw(sharedUser.Text)</td>                       
+                            <td><input name="SelectedSharedUsers[@i].Id" type="hidden" value="@Model.SelectedSharedUsers[i].UserId" /></td>
+                            <td><button class="link-submit" type="submit" name="removeId" value="@Model.SelectedSharedUsers[i].UserId">@Resources.Remove</button></td>
+                        </tr>
+                    }
+                </table>
+            </div>
+
+            <button class="button" type="submit" name="command" value="continue">@Constants.ContinueOnlyButtonText</button>
+
+            <div>
+                @Html.ActionLink(Resources.NotificationOption, "Index", "Options", new { area = "NotificationApplication", id = Model.NotificationId }, null)
+            </div>
+        }
+    </div>
+</div>

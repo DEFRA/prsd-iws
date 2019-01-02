@@ -398,6 +398,7 @@
     <Compile Include="Mappings\Reports\ShipmentMap.cs" />
     <Compile Include="Mappings\Reports\ExportStatsMap.cs" />
     <Compile Include="Mappings\NumberOfShipmentsHistoryMap.cs" />
+    <Compile Include="Mappings\SharedUserMap.cs" />
     <Compile Include="Mappings\UserMap.cs" />
     <Compile Include="Mappings\UsersMap.cs" />
     <Compile Include="Movement\Complete\GetOperationCompleteDataHandler.cs" />
@@ -524,8 +525,10 @@
     <Compile Include="NotificationMovements\Rules\TotalIntendedQuantityReached.cs" />
     <Compile Include="NotificationMovements\Rules\TotalShipmentsReached.cs" />
     <Compile Include="NotificationMovements\Rules\WithinConsentPeriod.cs" />
+    <Compile Include="Notification\AddSharedUserHandler.cs" />
     <Compile Include="Notification\CanEditNotificationHandler.cs" />
     <Compile Include="Notification\ChangeUserHandler.cs" />
+    <Compile Include="Notification\CheckIfNotificationOwnerHandler.cs" />
     <Compile Include="Notification\CheckNotificationNumberUniqueHandler.cs" />
     <Compile Include="Notification\CreateLegacyNotificationApplicationHandler.cs" />
     <Compile Include="Notification\GenerateInterimMovementDocumentHandler.cs" />
@@ -546,6 +549,11 @@
     <Compile Include="Notification\RecordUserChange.cs" />
     <Compile Include="Authorization\AuthorizeActivityHandler.cs" />
     <Compile Include="Notification\GetNotificationTypeHandler.cs" />
+    <Compile Include="Notification\SharedUserAdded.cs" />
+    <Compile Include="SharedUsers\CheckIfSharedUserExistsHandler.cs" />
+    <Compile Include="SharedUsers\DeleteSharedUserForNotificationHandler.cs" />
+    <Compile Include="SharedUsers\GetSharedUserByIdHandler.cs" />
+    <Compile Include="SharedUsers\GetSharedUsersByNotificationIdHandler.cs" />
     <Compile Include="TransitState\DeleteCustomsOfficesWhenAllTransitStatesInEU.cs" />
     <Compile Include="TransportRoute\GetAllCountriesHavingCompetentAuthoritiesHandler.cs" />
     <Compile Include="TransportRoute\GetTransitAuthoritiesAndEntryOrExitPointsByCountryIdHandler.cs" />

@@ -61,6 +61,15 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.Options {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Notification access level:.
+        /// </summary>
+        public static string AccessLevel {
+            get {
+                return ResourceManager.GetString("AccessLevel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Active loads permitted:.
         /// </summary>
         public static string ActiveLoadsPermitted {
@@ -273,6 +282,24 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.Options {
         public static string Reject {
             get {
                 return ResourceManager.GetString("Reject", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Review user access levels.
+        /// </summary>
+        public static string ReviewAccess {
+            get {
+                return ResourceManager.GetString("ReviewAccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Share notification with other users.
+        /// </summary>
+        public static string ShareNotification {
+            get {
+                return ResourceManager.GetString("ShareNotification", resourceCulture);
             }
         }
         

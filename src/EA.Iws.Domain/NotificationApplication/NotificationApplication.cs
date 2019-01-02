@@ -65,6 +65,11 @@
             RaiseEvent(new NotificationUserChangedEvent(Id, currentUser, newUserId));
         }
 
+        public void AddSharedUser(string sharedUserId)
+        {
+            RaiseEvent(new NotificationSharedUserAddedEvent(this.Id, sharedUserId));
+        }
+
         public DateTimeOffset CreatedDate { get; private set; }
 
         public IEnumerable<OperationInfo> OperationInfos
