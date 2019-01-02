@@ -67,13 +67,13 @@
 
             context.NotificationApplications.Add(notification);
 
-            context.SaveChanges();
+            await context.SaveChangesAsync();
 
             var transport = new TransportRoute(notification.Id);
 
             context.TransportRoutes.Add(transport);
 
-            context.SaveChanges();
+            await context.SaveChangesAsync();
 
             var exitPoint = context.EntryOrExitPoints.First();
 
@@ -85,7 +85,7 @@
 
             transport.SetStateOfExportForNotification(stateOfExport);
 
-            context.SaveChanges();
+            await context.SaveChangesAsync();
 
             var nextExitPoint = context.EntryOrExitPoints.First(ep => ep.Id != exitPoint.Id);
 
@@ -98,7 +98,7 @@
             var newStateOfExport = new StateOfExport(country, competentAuthority, nextExitPoint);
             transport.SetStateOfExportForNotification(newStateOfExport);
 
-            context.SaveChanges();
+            await context.SaveChangesAsync();
 
             Assert.Equal(nextExitPoint.Id, transport.StateOfExport.ExitPoint.Id);
 
