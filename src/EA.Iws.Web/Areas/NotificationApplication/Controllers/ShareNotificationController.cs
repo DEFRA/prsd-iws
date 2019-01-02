@@ -34,7 +34,6 @@
                 {
                     TempData.Remove("SharedUsers");
                 }
-
             }
         }
 
