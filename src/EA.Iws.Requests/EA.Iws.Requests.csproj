@@ -292,6 +292,7 @@
     <Compile Include="Notification\CheckNotificationNumberUnique.cs" />
     <Compile Include="Notification\CreateLegacyNotificationApplication.cs" />
     <Compile Include="Notification\GenerateInterimMovementDocument.cs" />
+    <Compile Include="Notification\GenerateNotificationPreviewDocument.cs" />
     <Compile Include="Notification\GeneratePostageLabel.cs" />
     <Compile Include="Annexes\GetAnnexes.cs" />
     <Compile Include="Notification\GetNotificationIdByNumber.cs" />
