@@ -135,7 +135,7 @@
 
                 if (!isInternalUser)
                 {
-                    model = this.PrepareModelWithErrors("Email Address", "You cannot share this notification with an competant authority user", model);
+                    model = this.PrepareModelWithErrors("Email Address", "You cannot share this notification with a competent authority user", model);
                     return View(model);
                 }
 
