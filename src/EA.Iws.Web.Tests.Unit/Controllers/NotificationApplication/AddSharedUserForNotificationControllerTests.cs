@@ -10,9 +10,10 @@
     using Requests.Users;
     using System;
     using System.Collections.Generic;
-    using System.Linq;
     using System.Threading.Tasks;
+    using System.Web;
     using System.Web.Mvc;
+    using System.Web.Routing;
     using TestHelpers;
     using Xunit;
 
@@ -45,6 +46,17 @@
                 () =>
                 mediator.SendAsync(A<ExternalUserExists>.That.Matches(p => p.EmailAddress == externalEmail)))
                 .Returns(true);
+
+            var request = A.Fake<HttpRequestBase>();
+            var context = A.Fake<HttpContextBase>();
+
+            A.CallTo(() => request.Url).Returns(new Uri("https://test.com"));
+            A.CallTo(() => request.UrlReferrer).Returns(new Uri("https://test.com"));
+            A.CallTo(() => context.Request).Returns(request);
+
+            shareNotificationOptionController.ControllerContext = new ControllerContext(context, new RouteData(), shareNotificationOptionController);
+
+            shareNotificationOptionController.Url = new UrlHelper(new RequestContext(context, new RouteData()));
         }
 
         [Fact]
