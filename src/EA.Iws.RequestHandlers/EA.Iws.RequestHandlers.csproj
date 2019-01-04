@@ -71,6 +71,7 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -532,6 +533,7 @@
     <Compile Include="Notification\CheckNotificationNumberUniqueHandler.cs" />
     <Compile Include="Notification\CreateLegacyNotificationApplicationHandler.cs" />
     <Compile Include="Notification\GenerateInterimMovementDocumentHandler.cs" />
+    <Compile Include="Notification\GenerateNotificationPreviewDocumentHandler.cs" />
     <Compile Include="Notification\GeneratePostageLabelHandler.cs" />
     <Compile Include="Annexes\GetAnnexesHandler.cs" />
     <Compile Include="Notification\CreateAnnexCollection.cs" />
