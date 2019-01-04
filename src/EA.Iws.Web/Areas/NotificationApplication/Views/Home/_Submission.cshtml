@@ -97,17 +97,7 @@
                     </div>
             }
         </div>
-        @if (Model.Status == NotificationStatus.NotSubmitted)
-        {
-            <div class="column-half">
-                <div class="pull-right">
-                    <div id="submit-side-bar" style="background-color:#f8f8f8">
-                        <h3 style="text-align:center; font-size:24px">Notification access level:</h3>
-                        <h3 style="text-align:center; font-size:36px">@Model.AccessLevelText</h3>
-                    </div>
-                </div>
-            </div>
-        }
+        
     </div>
 
     @if (!Model.IsNotificationComplete)
