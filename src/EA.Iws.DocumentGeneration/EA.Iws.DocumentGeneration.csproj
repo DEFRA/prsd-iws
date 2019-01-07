@@ -60,6 +60,7 @@
     <Compile Include="DocumentGenerator\InterimMovementDocumentGenerator.cs" />
     <Compile Include="DocumentGenerator\MovementDocumentGenerator.cs" />
     <Compile Include="DocumentGenerator\NotificationDocumentGenerator.cs" />
+    <Compile Include="DocumentGenerator\NotificationPreviewWatermarkGenerator.cs" />
     <Compile Include="DocumentGenerator\PostageLabelGenerator.cs" />
     <Compile Include="DocumentHelper.cs" />
     <Compile Include="Formatters\CompetentAuthorityFormatter.cs" />
@@ -162,6 +163,7 @@
     <Compile Include="ViewModels\TransportViewModel.cs" />
     <Compile Include="ViewModels\WasteCodesViewModel.cs" />
     <Compile Include="ViewModels\WasteCompositionViewModel.cs" />
+    <Compile Include="WordWatermark.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\EA.Iws.Core\EA.Iws.Core.csproj">
