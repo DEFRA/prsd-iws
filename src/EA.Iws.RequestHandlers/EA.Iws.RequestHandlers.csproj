@@ -732,6 +732,10 @@
       <Project>{46300373-D7AE-40AA-BF96-3FC3889825A4}</Project>
       <Name>EA.Iws.DataAccess</Name>
     </ProjectReference>
+    <ProjectReference Include="..\EA.Iws.DocumentGeneration\EA.Iws.DocumentGeneration.csproj">
+      <Project>{4E8F11AB-ABC4-4B67-BBDE-0A50E51580DE}</Project>
+      <Name>EA.Iws.DocumentGeneration</Name>
+    </ProjectReference>
     <ProjectReference Include="..\EA.Iws.Domain\EA.Iws.Domain.csproj">
       <Project>{a987fff6-5386-419e-af0a-e6c74e3323cf}</Project>
       <Name>EA.Iws.Domain</Name>
