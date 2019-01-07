@@ -163,7 +163,6 @@
     <Compile Include="ViewModels\TransportViewModel.cs" />
     <Compile Include="ViewModels\WasteCodesViewModel.cs" />
     <Compile Include="ViewModels\WasteCompositionViewModel.cs" />
-    <Compile Include="WordWatermark.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\EA.Iws.Core\EA.Iws.Core.csproj">
