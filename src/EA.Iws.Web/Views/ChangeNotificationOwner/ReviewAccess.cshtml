@@ -1,0 +1,24 @@
+﻿@model EA.Iws.Web.ViewModels.ChangeNotificationOwner.ReviewAccessViewModel
+@using Resources = EA.Iws.Web.Views.ChangeNotificationOwner.ChangeNotificationOwnerResources
+
+@{
+	ViewBag.Title = Resources.SuccessTitle;
+}
+
+<div class="grid-row">
+	<div class="column-two-thirds">
+
+		<h1 class="heading-large">@Resources.UnableToShare</h1>
+
+		<p>
+			@Resources.Reason
+		</p>
+		<p>
+			@Resources.Transfer @Html.ActionLink(Resources.ReviewLink, "UserList", "ReviewUserAccess", routeValues: new { area = "NotificationApplication" }, htmlAttributes: null)
+ @Resources.TransferRemainingText
+		</p>
+
+		
+		@Html.ActionLink(Resources.OptionsLink, "Index", "Options", routeValues: new { area = "NotificationApplication" }, htmlAttributes: null)
+	</div>
+</div>
