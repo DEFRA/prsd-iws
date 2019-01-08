@@ -9,9 +9,11 @@
     using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Mvc;
+    using Infrastructure;
     using ViewModels.ChangeNotificationOwner;
 
     [AuthorizeActivity(typeof(ChangeUser))]
+    [NotificationOwnerFilter]
     public class ChangeNotificationOwnerController : Controller
     {
         private readonly IMediator mediator;

@@ -153,6 +153,7 @@
     <Compile Include="Controllers\ImportNotification\WasteOperationControllerTests.cs" />
     <Compile Include="Controllers\NotificationApplication\ReviewUserAccessControllerTests.cs" />
     <Compile Include="Controllers\NotificationApplication\AddSharedUserForNotificationControllerTests.cs" />
+    <Compile Include="Controllers\NotificationApplication\SharedUser\NotificationOwnerFilterControllerAttributeTests.cs" />
     <Compile Include="Controllers\NotificationAssessment\DecisionControllerTests.cs" />
     <Compile Include="Controllers\NotificationMovements\CancelMovementControllerTests.cs" />
     <Compile Include="Controllers\NotificationApplication\BaseWasteCodeControllerTests.cs" />
@@ -181,6 +182,7 @@
     <Compile Include="Controllers\NotificationApplication\WasteOperationsControllerTests.cs" />
     <Compile Include="Extensions\StringExtensionsTests.cs" />
     <Compile Include="Infrastructure\HtmlHelperExtensionsTests.cs" />
+    <Compile Include="Infrastructure\NotificationOwnerFilterTests.cs" />
     <Compile Include="Infrastructure\RangeExtensionsTests.cs" />
     <Compile Include="Infrastructure\Validation\CompetentAuthorityEmailAddressAttributeTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

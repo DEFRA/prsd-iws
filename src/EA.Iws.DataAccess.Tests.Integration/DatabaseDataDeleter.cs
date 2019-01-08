@@ -116,6 +116,12 @@
         DELETE FROM [Notification].[AnnexCollection] 
         WHERE NotificationId = @NotificationId;
 
+        DELETE FROM [Notification].[SharedUserHistory]
+        WHERE NotificationId = @NotificationId;
+
+        DELETE FROM [Notification].[SharedUser]
+        WHERE NotificationId = @NotificationId;
+
         DELETE FROM [Notification].[Notification] 
         WHERE Id = @NotificationId;
 
