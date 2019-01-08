@@ -1122,6 +1122,7 @@
     <Content Include="Views\Shared\EditorTemplates\MaskedDateInputViewModel.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\ShareNotification\ShareNotification.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\ShareNotification\Confirm.cshtml" />
+    <Content Include="Views\ChangeNotificationOwner\ReviewAccess.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -3091,6 +3092,7 @@
     <Compile Include="Mappings\ImportNotification\WasteCodesMap.cs" />
     <Compile Include="Mappings\NotificationAssessment\NotificationAssessmentDecisionDataMap.cs" />
     <Compile Include="ViewModels\Account\ResetPasswordViewModel.cs" />
+    <Compile Include="ViewModels\ChangeNotificationOwner\ReviewAccessViewModel.cs" />
     <Compile Include="ViewModels\Movement\MovementsViewModel.cs" />
     <Compile Include="Areas\ExportMovement\MovementAreaRegistration.cs" />
     <Compile Include="Areas\NotificationApplication\Controllers\BaseWasteCodeController.cs" />
@@ -3466,7 +3468,6 @@
     <Folder Include="Areas\Admin\Views\SmokeTest\" />
     <Folder Include="Areas\FinancialGuarantee\ViewModels\" />
     <Folder Include="Areas\FinancialGuarantee\Views\Shared\" />
-    <Folder Include="Areas\NotificationApplication\Views\UserAccess\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Areas\AdminExportAssessment\Controllers\DecisionControllerResources.resx">
@@ -4818,6 +4819,7 @@
     <EmbeddedResource Include="Views\ChangeNotificationOwner\ChangeNotificationOwnerResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>ChangeNotificationOwnerResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\CopyFromNotification\CopyFromNotificationResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
