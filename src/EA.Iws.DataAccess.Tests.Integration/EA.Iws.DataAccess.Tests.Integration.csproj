@@ -89,6 +89,7 @@
     <Compile Include="SharedUser\IwsContextTests.cs" />
     <Compile Include="SharedUser\NotificationApplicationAuthorizationTests.cs" />
     <Compile Include="SharedUser\NotificationApplicationRepositoryTests.cs" />
+    <Compile Include="SharedUser\SharedUserRepositoryTests.cs" />
     <Compile Include="TransportRouteIntegration.cs" />
     <Compile Include="UnitedKingdomCompetentAuthorityIntegration.cs" />
   </ItemGroup>

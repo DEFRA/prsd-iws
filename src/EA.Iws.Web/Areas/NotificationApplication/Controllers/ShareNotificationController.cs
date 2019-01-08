@@ -15,6 +15,7 @@
     using ViewModels.ShareNotification;
 
     [AuthorizeActivity(typeof(AddSharedUser))]
+    [NotificationOwnerFilter]
     public class ShareNotificationController : Controller
     {
         private readonly IMediator mediator;

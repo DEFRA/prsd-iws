@@ -22,11 +22,7 @@
         {
             var notificationOwner = (await context.NotificationApplications.SingleAsync(n => n.Id == message.NotificationId)).UserId;
 
-            if (notificationOwner.CompareTo(userContext.UserId) == 0)
-            {
-                return true;
-            }
-            return false;
+            return notificationOwner.CompareTo(userContext.UserId) == 0;
         }
     }
 }
