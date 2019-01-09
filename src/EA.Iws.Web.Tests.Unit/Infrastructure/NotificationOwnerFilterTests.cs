@@ -44,7 +44,8 @@
             actionExecutingContext = new ActionExecutingContext
             {
                 Controller = controller,
-                Result = new HttpStatusCodeResult(HttpStatusCode.OK)
+                Result = new HttpStatusCodeResult(HttpStatusCode.OK),
+                ActionDescriptor = A.Fake<ActionDescriptor>()
             };
 
             filter = new NotificationOwnerFilter { Mediator = mediator };

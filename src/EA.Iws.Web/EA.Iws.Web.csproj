@@ -2258,6 +2258,7 @@
     </Compile>
     <Compile Include="Areas\NotificationApplication\Controllers\ShareNotificationController.cs" />
     <Compile Include="Infrastructure\NotificationOwnerFilter.cs" />
+    <Compile Include="Infrastructure\SkipNotificationOwnerFilter.cs" />
     <Compile Include="Infrastructure\Validation\NotificationShareUserValidationAttribute.cs" />
     <Compile Include="ViewModels\ChangeNotificationOwner\ChangeOwnerViewModel.cs" />
     <Compile Include="ViewModels\ChangeNotificationOwner\ConfirmViewModel.cs" />
