@@ -189,6 +189,7 @@
     <Compile Include="NotificationApplication\Annexes\RequiredAnnexes.cs" />
     <Compile Include="NotificationApplication\Annexes\TechnologyEmployedAnnex.cs" />
     <Compile Include="NotificationApplication\Annexes\WasteCompositionAnnex.cs" />
+    <Compile Include="NotificationApplication\AuditScreen.cs" />
     <Compile Include="NotificationApplication\CarrierCollection.cs" />
     <Compile Include="NotificationApplication\ContactComparer.cs" />
     <Compile Include="NotificationApplication\BusinessComparer.cs" />
@@ -264,6 +265,8 @@
     <Compile Include="Movement\RejectMovement.cs" />
     <Compile Include="Finance\Activity.cs" />
     <Compile Include="NotificationApplication\IMeansOfTransportRepository.cs" />
+    <Compile Include="NotificationApplication\INotificationAuditRepository.cs" />
+    <Compile Include="NotificationApplication\INotificationAuditScreenRepository.cs" />
     <Compile Include="NotificationApplication\ISharedUserHistoryRepository.cs" />
     <Compile Include="NotificationApplication\ISharedUserRepository.cs" />
     <Compile Include="NotificationApplication\ITechnologyEmployedRepository.cs" />
@@ -285,6 +288,7 @@
     <Compile Include="NotificationApplication\NotificationApplicationOverview.cs" />
     <Compile Include="NotificationApplication\IWasteCodeRepository.cs" />
     <Compile Include="NotificationApplication\ChangeNotificationUser.cs" />
+    <Compile Include="NotificationApplication\Audit.cs" />
     <Compile Include="NotificationApplication\NotificationNumberFormatter.cs" />
     <Compile Include="NotificationApplication\NotificationSharedUserAddedEvent.cs" />
     <Compile Include="NotificationApplication\ProducerCollection.cs" />

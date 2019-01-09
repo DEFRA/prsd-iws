@@ -142,6 +142,8 @@
     <Compile Include="Movement\GetNotificationIdByMovementIdHandlerTests.cs" />
     <Compile Include="Movement\RecordMovementStatusChangeTest.cs" />
     <Compile Include="NotificationMovements\Capture\EnsureMovementNumberAvailableHandlerTests.cs" />
+    <Compile Include="Notification\NotificationAuditCreatedHandlerTests.cs" />
+    <Compile Include="Notification\NotificationAuditScreenGetHandlerTests.cs" />
     <Compile Include="Notification\NotificationCreatedEventHandlerTests.cs" />
     <Compile Include="Notification\SubmitNotificationHandlerTests.cs" />
     <Compile Include="Organisations\GetOrganisationDetailsByUserHandlerTests.cs" />

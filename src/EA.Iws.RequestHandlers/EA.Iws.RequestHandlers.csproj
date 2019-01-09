@@ -531,11 +531,13 @@
     <Compile Include="Notification\CheckIfNotificationOwnerHandler.cs" />
     <Compile Include="Notification\CheckNotificationNumberUniqueHandler.cs" />
     <Compile Include="Notification\CreateLegacyNotificationApplicationHandler.cs" />
+    <Compile Include="Notification\CreateNotificationAuditHandler.cs" />
     <Compile Include="Notification\GenerateInterimMovementDocumentHandler.cs" />
     <Compile Include="Notification\GeneratePostageLabelHandler.cs" />
     <Compile Include="Annexes\GetAnnexesHandler.cs" />
     <Compile Include="Notification\CreateAnnexCollection.cs" />
     <Compile Include="Admin\GetNotificationInfoHandler.cs" />
+    <Compile Include="Notification\GetNotificationAuditScreensHandler.cs" />
     <Compile Include="Notification\GetNotificationIdByNumberHandler.cs" />
     <Compile Include="Notification\GetNotificationNumberHandler.cs" />
     <Compile Include="Notification\GetNotificationOverviewInternalHandler.cs" />
