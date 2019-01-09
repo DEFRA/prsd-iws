@@ -1007,6 +1007,8 @@
     <Content Include="Areas\NotificationApplication\Views\ReviewUserAccess\UserList.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\ReviewUserAccess\Remove.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\ShareNotification\Success.cshtml" />
+    <Content Include="Areas\NotificationApplication\Views\UpdateHistory\NoChanges.cshtml" />
+    <Content Include="Areas\NotificationApplication\Views\UpdateHistory\Index.cshtml" />
     <None Include="Scripts\jquery-2.1.3.intellisense.js" />
     <Content Include="Scripts\govuk\govuk-template.js" />
     <Content Include="Scripts\govuk\ie.js" />
@@ -2230,6 +2232,7 @@
       <DependentUpon>IndexResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Areas\NotificationApplication\Controllers\ReviewUserAccessController.cs" />
+    <Compile Include="Areas\NotificationApplication\Controllers\UpdateHistoryController.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\Annex\SuccessViewModel.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\Carrier\AddFromAddressBookViewModel.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\ReviewUserAccess\RemoveUserViewModel.cs" />
@@ -2249,6 +2252,16 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>UserListResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\NotificationApplication\Views\UpdateHistory\IndexResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IndexResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\NotificationApplication\Views\UpdateHistory\NoChangesResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>NoChangesResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Areas\NotificationMovements\Views\Certificate\WhatNextResources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -3632,6 +3645,7 @@
     <EmbeddedResource Include="Areas\AdminExportNotificationMovements\Views\Home\IndexResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\AdminExportNotificationMovements\Views\MovementOverride\IndexResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -3810,6 +3824,7 @@
     <EmbeddedResource Include="Areas\AdminImportNotificationMovements\Views\Home\IndexResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\AdminImportNotificationMovements\Views\MovementOverride\IndexResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -4461,6 +4476,14 @@
     <EmbeddedResource Include="Areas\NotificationApplication\Views\UnNumber\UnNumberResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>UnNumberResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\NotificationApplication\Views\UpdateHistory\IndexResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\NotificationApplication\Views\UpdateHistory\NoChangesResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>NoChangesResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\NotificationApplication\Views\WasteGenerationProcess\WasteGenerationProcessResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

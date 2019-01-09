@@ -1,0 +1,37 @@
+﻿@using Resource = EA.Iws.Web.Areas.NotificationApplication.Views.UpdateHistory.NoChangesResources
+
+@{
+    ViewBag.Title = @Resource.TabTitle;
+    Layout = "~/Views/Shared/_Layout.GovUK.Sections.cshtml";
+}
+
+@{
+    var id = Model.NotificationId;
+}
+
+<div>
+    
+    <div class="grid-row">
+        <div class="column-full">
+            <h1 class="heading-large">@Resource.Title</h1>
+            <div>
+                <br />
+            </div>
+            <p>@Resource.UpdateHistoryInfo</p>
+            <div>
+                <br />
+                <br />
+                <br />
+            </div>
+            <h3 style="text-align:center; font-size:36px">No updates available</h3>
+            <div>
+                <br />
+                <br />
+                <br />
+                <br />
+            </div>
+            @Html.ActionLink("Go to Notification Overview", "Index", "Home", new { id, backToOverview = true }, null)
+        </div>
+    </div>
+
+</div>
