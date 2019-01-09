@@ -993,7 +993,6 @@
     <Content Include="Views\ChangeNotificationOwner\Index.cshtml" />
     <Content Include="Views\ChangeNotificationOwner\Confirm.cshtml" />
     <Content Include="Views\ChangeNotificationOwner\Success.cshtml" />
-    <Content Include="Areas\NotificationMovements\Views\Certificate\WhatNext.cshtml" />
     <Content Include="Areas\Admin\Views\ExternalUserAdministration\Deactivate.cshtml" />
     <Content Include="Areas\Admin\Views\ExternalUserAdministration\DeactivateSummary.cshtml" />
     <Content Include="Areas\Admin\Views\ExternalUserAdministration\DeactivateConfirmation.cshtml" />
@@ -2249,11 +2248,6 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>UserListResources.resx</DependentUpon>
-    </Compile>
-    <Compile Include="Areas\NotificationMovements\Views\Certificate\WhatNextResources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>WhatNextResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Areas\NotificationApplication\Controllers\ShareNotificationController.cs" />
     <Compile Include="Infrastructure\Validation\NotificationShareUserValidationAttribute.cs" />
@@ -4594,10 +4588,6 @@
     <EmbeddedResource Include="Areas\NotificationMovements\Views\Certificate\CertificateShipmentResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>CertificateShipmentResources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Areas\NotificationMovements\Views\Certificate\WhatNextResources.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>WhatNextResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\NotificationMovements\Views\Create\ConsentExpiresInFourWorkingDaysResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
