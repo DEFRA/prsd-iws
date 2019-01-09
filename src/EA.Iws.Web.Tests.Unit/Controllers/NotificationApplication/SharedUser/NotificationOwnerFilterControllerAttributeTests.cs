@@ -18,6 +18,19 @@
         }
 
         [Fact]
+        public void ChangeNotificationOwnerControllerSuccessHasSkipFilter()
+        {
+            var methodInfo = typeof(ChangeNotificationOwnerController).GetMethod("Success");
+
+            if (methodInfo != null)
+            {
+                var attributes = methodInfo.GetCustomAttributes(typeof(SkipNotificationOwnerFilter), true);
+
+                Assert.True(attributes.Any());
+            }
+        }
+
+        [Fact]
         public void ShareNotificationControllerHasNotificationOwnerFilter()
         {
             var attributes = typeof(ShareNotificationController).GetCustomAttributes(
