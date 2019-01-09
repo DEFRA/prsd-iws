@@ -95,6 +95,7 @@
         }
 
         [HttpGet]
+        [SkipNotificationOwnerFilter]
         public ActionResult Success(Guid id)
         {
             var model = (ConfirmViewModel)TempData["ConfirmViewModel"];
