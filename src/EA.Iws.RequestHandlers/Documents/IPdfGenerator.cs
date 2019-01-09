@@ -3,5 +3,7 @@
     internal interface IPdfGenerator
     {
         byte[] ConvertToPdf(byte[] docxBytes);
+
+        byte[] ConvertToPreviewPdf(byte[] docxBytes);
     }
 }

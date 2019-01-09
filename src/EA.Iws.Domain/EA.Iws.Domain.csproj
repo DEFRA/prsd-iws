@@ -160,6 +160,7 @@
     <Compile Include="ImportNotification\Producer.cs" />
     <Compile Include="ImportNotification\WasteOperationCode.cs" />
     <Compile Include="ImportNotification\Shipment.cs" />
+    <Compile Include="INotificationPreviewWatermarkGenerator.cs" />
     <Compile Include="INotificationUserRepository.cs" />
     <Compile Include="IPostageLabelGenerator.cs" />
     <Compile Include="Movement\MovementDetailsFactory.cs" />
