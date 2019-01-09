@@ -67,7 +67,7 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Shipments(Guid notificationId, ShipmentViewModel model)
+        public ActionResult Shipments(Guid notificationId, ShipmentViewModel model)
         {
             if (!ModelState.IsValid)
             {
