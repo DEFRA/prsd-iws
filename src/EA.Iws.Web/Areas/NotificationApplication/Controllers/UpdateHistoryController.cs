@@ -5,7 +5,7 @@
     using Prsd.Core.Mediator;
     using ViewModels.UpdateHistory;
 
-    // Does this need an Authorize tag (like HomeController) or AuthorizeActivity tag (like OptionsController)?
+    [Authorize]
     public class UpdateHistoryController : Controller
     {
         private readonly IMediator mediator;
