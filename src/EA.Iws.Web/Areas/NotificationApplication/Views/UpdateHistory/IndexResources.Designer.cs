@@ -61,6 +61,15 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.UpdateHistory {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Notification Update History Search Results.
+        /// </summary>
+        public static string TableCaption {
+            get {
+                return ResourceManager.GetString("TableCaption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Notification update history.
         /// </summary>
         public static string TabTitle {
@@ -120,6 +129,15 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.UpdateHistory {
         public static string Title {
             get {
                 return ResourceManager.GetString("Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Notification Update History Search Results.
+        /// </summary>
+        public static string TitleNotificationUpdateHistorySearchResults {
+            get {
+                return ResourceManager.GetString("TitleNotificationUpdateHistorySearchResults", resourceCulture);
             }
         }
         

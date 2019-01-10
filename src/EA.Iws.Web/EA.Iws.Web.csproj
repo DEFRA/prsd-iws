@@ -2235,6 +2235,7 @@
     <Compile Include="Areas\NotificationApplication\Controllers\UpdateHistoryController.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\Annex\SuccessViewModel.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\Carrier\AddFromAddressBookViewModel.cs" />
+    <Compile Include="Areas\NotificationApplication\ViewModels\UpdateHistory\NoChangesViewModel.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\UpdateHistory\UpdateHistoryViewModel.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\ReviewUserAccess\RemoveUserViewModel.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\ShareNotification\SuccessViewModel.cs" />

@@ -26,7 +26,7 @@
         [HttpGet]
         public ActionResult NoChanges(Guid id)
         {
-            var model = new UpdateHistoryViewModel { NotificationId = id };
+            var model = new NoChangesViewModel { NotificationId = id };
 
             return View(model);
         }
