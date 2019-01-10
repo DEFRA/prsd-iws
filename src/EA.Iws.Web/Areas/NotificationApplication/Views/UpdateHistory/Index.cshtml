@@ -1,0 +1,11 @@
+﻿@using Resource = EA.Iws.Web.Areas.NotificationApplication.Views.UpdateHistory.IndexResources
+@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.UpdateHistory.UpdateHistoryViewModel
+
+@{
+    ViewBag.Title = @Resource.TabTitle;
+    Layout = "~/Views/Shared/_Layout.GovUK.Sections.cshtml";
+}
+
+@Html.Partial("_Title", null)
+
+@Html.ActionLink("Go to Notification Overview", "Index", "Home", new { @Model.NotificationId, backToOverview = true }, null)
