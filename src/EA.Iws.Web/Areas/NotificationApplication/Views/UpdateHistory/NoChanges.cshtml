@@ -8,15 +8,8 @@
 
 @Html.Partial("_Title", null)
 
-<div>
-    <br />
-    <br />
-    <br />
+<div class="margin-bottom-30 margin-top-30 ">
     <h3 style="text-align:center; font-size:36px">No updates available</h3>
-    <br />
-    <br />
-    <br />
-    <br />
 </div>
 
 @Html.ActionLink("Go to Notification Overview", "Index", "Home", new { @Model.NotificationId, backToOverview = true }, null)
