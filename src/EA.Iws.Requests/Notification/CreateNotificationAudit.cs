@@ -1,7 +1,7 @@
 ﻿namespace EA.Iws.Requests.Notification
 {
-    using EA.Iws.Core.Notification.Audit;
-    using EA.Prsd.Core.Mediator;
+    using Core.Notification.Audit;
+    using Prsd.Core.Mediator;
     using System;
 
     public class CreateNotificationAudit : IRequest<bool>

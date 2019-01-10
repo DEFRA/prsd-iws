@@ -4,7 +4,7 @@
 
     public class NotificationAuditScreen
     {
-        public Guid Id { get; set; }
+        public int Id { get; set; }
 
         public string ScreenName { get;  set; }
     }
