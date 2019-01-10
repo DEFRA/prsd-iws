@@ -1,17 +1,11 @@
-﻿@{
-    Layout = null;
+﻿@using Resource = EA.Iws.Web.Areas.NotificationApplication.Views.UpdateHistory.IndexResources
+@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.Options.UnavailableViewModel
+
+@{
+    ViewBag.Title = @Resource.TabTitle;
+    Layout = "~/Views/Shared/_Layout.GovUK.Sections.cshtml";
 }
 
-<!DOCTYPE html>
+@Html.Partial("_Title", null)
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title></title>
-</head>
-<body>
-    <div>
-    
-    </div>
-</body>
-</html>
+@Html.ActionLink("Go to Notification Overview", "Index", "Home", new { @Model.NotificationId, backToOverview = true }, null)
