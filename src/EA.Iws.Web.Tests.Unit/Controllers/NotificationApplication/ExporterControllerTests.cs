@@ -4,11 +4,12 @@
     using Areas.NotificationApplication.ViewModels.Exporter;
     using Core.Shared;
     using FakeItEasy;
+    using Mappings;
     using Prsd.Core.Mediator;
     using System;
     using System.Threading.Tasks;
     using System.Web.Mvc;
-    using Mappings;
+    using Web.Infrastructure;
     using Web.ViewModels.Shared;
     using Xunit;
 
@@ -17,11 +18,15 @@
         private readonly IMediator client;
         private readonly Guid notificationId = new Guid("81CBBCEE-34C0-4628-B054-E0D8135A7947");
         private readonly ExporterController exporterController;
+        private readonly IAuditService auditService;
 
         public ExporterControllerTests()
         {
             client = A.Fake<IMediator>();
-            exporterController = new ExporterController(client, new AddAddressBookEntryMap());
+            auditService = A.Fake<IAuditService>();
+            exporterController = new ExporterController(client, new AddAddressBookEntryMap(), auditService);
+
+            A.CallTo(() => auditService.AddAuditEntry(client, notificationId, "user", false, "screen"));
         }
 
         private ExporterViewModel CreateExporterViewModel()

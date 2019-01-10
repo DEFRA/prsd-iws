@@ -1,9 +1,7 @@
 ﻿namespace EA.Iws.Web.Areas.NotificationApplication.Controllers
 {
-    using System;
-    using System.Threading.Tasks;
-    using System.Web.Mvc;
     using Core.AddressBook;
+    using Core.Notification.Audit;
     using Infrastructure;
     using Prsd.Core.Mapper;
     using Prsd.Core.Mediator;
@@ -11,7 +9,12 @@
     using Prsd.Core.Web.Mvc.Extensions;
     using Requests.AddressBook;
     using Requests.Exporters;
+    using Requests.Notification;
     using ViewModels.Exporter;
+    using System;
+    using System.Linq;
+    using System.Threading.Tasks;
+    using System.Web.Mvc;
 
     [Authorize]
     [NotificationReadOnlyFilter]
@@ -19,11 +22,13 @@
     {
         private readonly IMediator mediator;
         private readonly IMapWithParameter<ExporterViewModel, AddressRecordType, AddAddressBookEntry> addressBookMapper;
+        private readonly IAuditService auditService;
 
-        public ExporterController(IMediator mediator, IMapWithParameter<ExporterViewModel, AddressRecordType, AddAddressBookEntry> addressBookMapper)
+        public ExporterController(IMediator mediator, IMapWithParameter<ExporterViewModel, AddressRecordType, AddAddressBookEntry> addressBookMapper, IAuditService auditService)
         {
             this.mediator = mediator;
             this.addressBookMapper = addressBookMapper;
+            this.auditService = auditService;
         }
 
         [HttpGet]
@@ -60,9 +65,17 @@
 
             try
             {
+                var exporter = await mediator.SendAsync(new GetExporterByNotificationId(model.NotificationId));
+
                 await mediator.SendAsync(model.ToRequest());
 
                 await AddToProducerAddressBook(model);
+
+                await this.auditService.AddAuditEntry(this.mediator,
+                    model.NotificationId,
+                    User.GetUserId(),
+                    exporter.HasExporter,
+                    "Exporter - notifier");
 
                 if (backToOverview.GetValueOrDefault())
                 {
