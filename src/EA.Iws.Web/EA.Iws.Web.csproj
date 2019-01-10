@@ -1009,6 +1009,7 @@
     <Content Include="Areas\NotificationApplication\Views\ShareNotification\Success.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\UpdateHistory\NoChanges.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\UpdateHistory\Index.cshtml" />
+    <Content Include="Areas\NotificationApplication\Views\UpdateHistory\_Title.cshtml" />
     <None Include="Scripts\jquery-2.1.3.intellisense.js" />
     <Content Include="Scripts\govuk\govuk-template.js" />
     <Content Include="Scripts\govuk\ie.js" />
@@ -4478,7 +4479,7 @@
       <LastGenOutput>UnNumberResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\NotificationApplication\Views\UpdateHistory\IndexResources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
+      <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\NotificationApplication\Views\UpdateHistory\NoChangesResources.resx">

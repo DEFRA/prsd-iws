@@ -16,9 +16,11 @@
         }
 
         [HttpGet]
-        public ActionResult Index()
+        public ActionResult Index(Guid id)
         {
-            return View();
+            var model = new UnavailableViewModel { NotificationId = id };
+
+            return View(model);
         }
 
         [HttpGet]
