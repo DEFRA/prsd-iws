@@ -3,8 +3,9 @@
     using Prsd.Core.Domain;
     using System;
 
-    public class AuditScreen : Entity
+    public class AuditScreen
     {
+        public int Id { get; private set; }
         public string ScreenName { get; private set; }
 
         protected AuditScreen()

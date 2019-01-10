@@ -16,7 +16,7 @@ CREATE TABLE [Notification].[Audit](
 GO
 
 ALTER TABLE [Notification].[Audit]  WITH CHECK ADD  CONSTRAINT [FK_NotificationAudit_Notification] FOREIGN KEY([NotificationId])
-REFERENCES [Notification].[Audit] ([Id])
+REFERENCES [Notification].[Notification] ([Id])
 GO
 
 ALTER TABLE [Notification].[Audit] CHECK CONSTRAINT [FK_NotificationAudit_Notification]
