@@ -8,4 +8,55 @@
 
 @Html.Partial("_Title", null)
 
+<div class="form-group">
+
+    <table class="odd-table" title="@HomeResources.TitleManageNotifications">
+        <caption class="visuallyhidden">@HomeResources.TableCaption</caption>
+        <thead>
+            <tr>
+                <th>
+                    @Resource.ThName
+                </th>
+                <th>
+                    @Resource.ThName
+                </th>
+                <th>
+                    @Resource.ThName
+                </th>
+                <th>
+                    @Resource.ThName
+                </th>
+                <th>
+                    @Resource.ThName
+                </th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @for (int i = 0; i < Model.Notifications.Count; i++)
+            {
+                <tr>
+                    <td>
+                        <!-- @Html.Raw(Model.Notifications[i].NotificationNumber.Replace(" ", "&nbsp;")) -->
+                    </td>
+                    <td>
+                        <span class="statusbox @Html.ExportStatus().DisplayColorClass(Model.Notifications[i].Status) table">@Html.Raw(EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(Model.Notifications[i].Status).ToUpperInvariant().Replace(" ", "&nbsp;")) </span>
+                    </td>
+                    <td>
+                        @Model.Notifications[i].Importer
+                    </td>
+                    <td>
+                        @Model.Notifications[i].AccessLevel
+                    </td>
+                    <td>
+                        @Html.ActionLink(linkText: HomeResources.LinkChoose, actionName: "Index", controllerName: "Options",
+                            routeValues: new { id = Model.Notifications[i].Id, area = "NotificationApplication" }, htmlAttributes: new { @title = Model.Notifications[i].NotificationNumber })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</div>
+
 @Html.ActionLink("Go to Notification Overview", "Index", "Home", new { @Model.NotificationId, backToOverview = true }, null)
