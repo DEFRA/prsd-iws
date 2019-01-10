@@ -71,6 +71,7 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -532,6 +533,7 @@
     <Compile Include="Notification\CheckNotificationNumberUniqueHandler.cs" />
     <Compile Include="Notification\CreateLegacyNotificationApplicationHandler.cs" />
     <Compile Include="Notification\GenerateInterimMovementDocumentHandler.cs" />
+    <Compile Include="Notification\GenerateNotificationPreviewDocumentHandler.cs" />
     <Compile Include="Notification\GeneratePostageLabelHandler.cs" />
     <Compile Include="Annexes\GetAnnexesHandler.cs" />
     <Compile Include="Notification\CreateAnnexCollection.cs" />
@@ -729,6 +731,10 @@
     <ProjectReference Include="..\EA.Iws.DataAccess\EA.Iws.DataAccess.csproj">
       <Project>{46300373-D7AE-40AA-BF96-3FC3889825A4}</Project>
       <Name>EA.Iws.DataAccess</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EA.Iws.DocumentGeneration\EA.Iws.DocumentGeneration.csproj">
+      <Project>{4E8F11AB-ABC4-4B67-BBDE-0A50E51580DE}</Project>
+      <Name>EA.Iws.DocumentGeneration</Name>
     </ProjectReference>
     <ProjectReference Include="..\EA.Iws.Domain\EA.Iws.Domain.csproj">
       <Project>{a987fff6-5386-419e-af0a-e6c74e3323cf}</Project>

@@ -75,17 +75,24 @@
             {
                 return View(model);
             }
-            var tolerance = await mediator.SendAsync(new DoesQuantityReceivedExceedTolerance(movementId, Convert.ToDecimal(model.Quantity), model.Unit));
-
+            
             TempData[DateReceivedKey] = model.GetDateReceived();
             TempData[UnitKey] = model.Unit;
             TempData[QuantityKey] = model.Quantity;
             TempData[DateRecoveredKey] = model.GetDateRecovered();
-            if (tolerance == QuantityReceivedTolerance.AboveTolerance
-                || tolerance == QuantityReceivedTolerance.BelowTolerance)
+
+            var shipmentExists = await mediator.SendAsync(new DoesMovementDetailsExist(movementId));
+
+            if (shipmentExists)
             {
-                TempData[ToleranceKey] = tolerance;
-                return RedirectToAction("QuantityAbnormal", new { movementId = movementId });
+                var tolerance = await mediator.SendAsync(new DoesQuantityReceivedExceedTolerance(movementId, Convert.ToDecimal(model.Quantity), model.Unit));
+
+                if (tolerance == QuantityReceivedTolerance.AboveTolerance
+                || tolerance == QuantityReceivedTolerance.BelowTolerance)
+                {
+                    TempData[ToleranceKey] = tolerance;
+                    return RedirectToAction("QuantityAbnormal", new { movementId = movementId });
+                }
             }
             
             return RedirectToAction("UploadCertificate", new { movementId = movementId });
@@ -122,7 +129,7 @@
             }
 
             MovementBasicDetails movementDetails = await mediator.SendAsync(new GetMovementDetailsById(notificationId, movementId));
-            
+
             ValidateShipment(model.GetDateReceived(), movementDetails);
             if (!ModelState.IsValid)
             {
@@ -130,17 +137,24 @@
             }
             TempData[CertificateKey] = model.Certificate;
             TempData[NotificationTypeKey] = model.NotificationType;
-            var tolerance = await mediator.SendAsync(new DoesQuantityReceivedExceedTolerance(movementId, Convert.ToDecimal(model.Quantity), model.Unit));
-
             TempData[DateReceivedKey] = model.GetDateReceived();
             TempData[UnitKey] = model.Unit;
             TempData[QuantityKey] = model.Quantity;
-            if (tolerance == QuantityReceivedTolerance.AboveTolerance
-                  || tolerance == QuantityReceivedTolerance.BelowTolerance)
+
+            var shipmentExists = await mediator.SendAsync(new DoesMovementDetailsExist(movementId));
+
+            if (shipmentExists)
             {
-                TempData[ToleranceKey] = tolerance;
-                return RedirectToAction("QuantityAbnormal", new { movementId = movementId});
+                var tolerance = await mediator.SendAsync(new DoesQuantityReceivedExceedTolerance(movementId, Convert.ToDecimal(model.Quantity), model.Unit));
+                
+                if (tolerance == QuantityReceivedTolerance.AboveTolerance
+                      || tolerance == QuantityReceivedTolerance.BelowTolerance)
+                {
+                    TempData[ToleranceKey] = tolerance;
+                    return RedirectToAction("QuantityAbnormal", new { movementId = movementId });
+                }
             }
+
             return RedirectToAction("UploadCertificate", new { movementId = movementId});
         }
         [HttpGet]
