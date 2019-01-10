@@ -2264,11 +2264,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>NoChangesResources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Areas\NotificationMovements\Views\Certificate\WhatNextResources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>WhatNextResources.resx</DependentUpon>
-    </Compile>
     <Compile Include="Areas\NotificationApplication\Controllers\ShareNotificationController.cs" />
     <Compile Include="Infrastructure\Validation\NotificationShareUserValidationAttribute.cs" />
     <Compile Include="ViewModels\ChangeNotificationOwner\ChangeOwnerViewModel.cs" />
