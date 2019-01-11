@@ -21,5 +21,8 @@
         public const string CanViewSearchResults = "Can View Search Results";
 
         public const string CanReadImportExportNotificationData = "Can Read Import Export Notification Data";
+
+        //COULLM: Is this the right location for the new permission? Is there an existing permission that should be used instead?
+        public const string CanViewNotificationUpdateHistory = "Can View Notification Update History";
     }
 }

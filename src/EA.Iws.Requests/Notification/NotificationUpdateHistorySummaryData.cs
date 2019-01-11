@@ -11,10 +11,10 @@
         public string Name { get; set; }
 
         //COULLM: Which date?
-        public DateTime Date { get; set; }
+        public string Date { get; set; }
 
         //COULLM: What time?
-        public DateTime Time { get; set; }
+        public string Time { get; set; }
 
         //COULLM: Should the type be an enum? If so does it already exist?
         public string InformationChange { get; set; }

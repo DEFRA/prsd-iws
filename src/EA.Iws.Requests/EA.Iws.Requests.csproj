@@ -303,8 +303,10 @@
     <Compile Include="Movement\Receive\RecordReceiptInternal.cs" />
     <Compile Include="Notification\CheckIfNotificationOwner.cs" />
     <Compile Include="Notification\GetNotificationType.cs" />
+    <Compile Include="Notification\GetNotificationUpdateHistory.cs" />
     <Compile Include="Notification\GetUserNotificationsSummary.cs" />
     <Compile Include="Notification\GetWhatToDoNextDataForNotification.cs" />
+    <Compile Include="Notification\NotificationUpdateHistory.cs" />
     <Compile Include="Notification\NotificationUpdateHistorySummaryData.cs" />
     <Compile Include="Notification\ResubmitNotification.cs" />
     <Compile Include="Notification\UserNotifications.cs" />

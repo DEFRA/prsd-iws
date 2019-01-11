@@ -13,36 +13,38 @@
 
             UpdateHistoryItems.Add(new NotificationUpdateHistorySummaryData
             {
-                Date = new DateTime(),
+                Date = new DateTime().ToString("o"),
                 Id = new Guid(),
                 InformationChange = "Sample record 1",
                 Name = "MCoull",
-                Time = new DateTime(),
+                Time = new DateTime().ToString("o"),
                 TypeOfChange = "Added"
             });
             UpdateHistoryItems.Add(new NotificationUpdateHistorySummaryData
             {
-                Date = new DateTime(),
+                Date = new DateTime().ToString("o"),
                 Id = new Guid(),
                 InformationChange = "Sample record 2",
                 Name = "MCoull",
-                Time = new DateTime(),
+                Time = new DateTime().ToString("o"),
                 TypeOfChange = "Updated"
             });
             UpdateHistoryItems.Add(new NotificationUpdateHistorySummaryData
             {
-                Date = new DateTime(),
+                Date = new DateTime().ToString("o"),
                 Id = new Guid(),
                 InformationChange = "Sample record 3",
                 Name = "MCoull",
-                Time = new DateTime(),
+                Time = new DateTime().ToString("o"),
                 TypeOfChange = "Deleted"
             });
         }
 
         //COULLM: This should not accept UserNotifications
-        public UpdateHistoryViewModel(UserNotifications userNotifications)
+        public UpdateHistoryViewModel(NotificationUpdateHistory notificationUpdateHistory)
         {
+            UpdateHistoryItems = notificationUpdateHistory.UpdateHistory;
+
             //COULLM: Relevant properties should be set here.
             /*
             NumberOfNotifications = userNotifications.NumberOfNotifications;
@@ -51,8 +53,7 @@
             Notifications = userNotifications.Notifications;
             */
 
-            //COULLM: This should be set to a property contained in the method input variable
-            UpdateHistoryItems = new List<NotificationUpdateHistorySummaryData>();
+            //COULLM: Should NotificationId also be set here?
         }
 
         public Guid NotificationId { get; set; }

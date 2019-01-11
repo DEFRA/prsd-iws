@@ -1,8 +1,11 @@
 ﻿namespace EA.Iws.Web.Areas.NotificationApplication.Controllers
 {
     using System;
+    using System.Threading.Tasks;
     using System.Web.Mvc;
+    using Infrastructure.Authorization;
     using Prsd.Core.Mediator;
+    using Requests.Notification;
     using ViewModels.UpdateHistory;
 
     [Authorize]
@@ -16,9 +19,13 @@
         }
 
         [HttpGet]
-        public ActionResult Index(Guid id)
+        public async Task<ActionResult> Index(Guid id)
         {
-            var model = new UpdateHistoryViewModel { NotificationId = id };
+            var response = await mediator.SendAsync(new GetNotificationUpdateHistory(id));
+
+            var model = new UpdateHistoryViewModel(response);
+            //COULLM: Should this be set by the GetNotificationUpdateHistory constructor above?
+            model.NotificationId = id;
 
             return View(model);
         }

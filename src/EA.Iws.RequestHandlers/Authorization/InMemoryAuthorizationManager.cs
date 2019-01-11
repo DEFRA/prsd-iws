@@ -22,6 +22,8 @@
             { GeneralPermissions.CanEditAddressBook, new[] { UserRole.Internal, UserRole.External, UserRole.Administrator } },
             { GeneralPermissions.CanViewSearchResults, new[] { UserRole.Internal, UserRole.External, UserRole.Administrator, UserRole.ReadOnly } },
             { GeneralPermissions.CanReadImportExportNotificationData, new[] { UserRole.Internal, UserRole.Administrator, UserRole.ReadOnly } },
+            //COULLM: Are these permissions correct?
+            { GeneralPermissions.CanViewNotificationUpdateHistory, new[] { UserRole.External, UserRole.Administrator } },
             { SystemConfigurationPermissions.CanAddNewEntryOrExitPoint, new[] { UserRole.Administrator } },
             { SystemConfigurationPermissions.CanSendTestEmail, new[] { UserRole.Administrator } },
             { ReportingPermissions.CanViewExportStatsReport, new[] { UserRole.Internal, UserRole.Administrator, UserRole.ReadOnly } },
