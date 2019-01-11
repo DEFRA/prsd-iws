@@ -46,23 +46,6 @@
             Assert.True(result.ViewName == "Index");
         }
 
-        [Fact]
-        public async Task RedirectToShipmentDate_Send_Request()
-        {
-            var result = await controller.RedirectToShipmentDate(Guid.NewGuid()) as ViewResult;
-
-            // Redirect from warning page if Consent expires in 4 working days or less than 3 days
-            // should skip the rules.
-            A.CallTo(() => mediator.SendAsync(A<GetMovementRulesSummary>.Ignored))
-                .MustHaveHappened(Repeated.Never);
-
-            A.CallTo(() => mediator.SendAsync(A<GetShipmentInfo>.Ignored))
-                .MustHaveHappened(Repeated.Exactly.Once);
-
-            Assert.NotNull(result);
-            Assert.True(result.ViewName == "Index");
-        }
-
         private static ShipmentInfo GetShipmentInfo()
         {
             var shipmentDates = new ShipmentDates() { StartDate = DateTime.Now, EndDate = DateTime.Now.AddMonths(6) };
