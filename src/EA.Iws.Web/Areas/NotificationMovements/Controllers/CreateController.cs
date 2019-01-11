@@ -32,7 +32,29 @@
         [HttpGet]
         public async Task<ActionResult> Index(Guid notificationId)
         {
-            return await GetIndex(notificationId);
+            ViewBag.NotificationId = notificationId;
+
+            var ruleSummary = await mediator.SendAsync(new GetMovementRulesSummary(notificationId));
+
+            if (!ruleSummary.IsSuccess)
+            {
+                return GetRuleErrorView(ruleSummary);
+            }
+
+            var shipmentInfo = await mediator.SendAsync(new GetShipmentInfo(notificationId));
+
+            var model = new CreateMovementsViewModel(shipmentInfo);
+
+            if (TempData["TempMovement"] != null)
+            {
+                var tempMovement = (TempMovement)TempData["TempMovement"];
+                model.NumberToCreate = tempMovement.NumberToCreate;
+                model.Quantity = tempMovement.Quantity.ToString();
+                model.Units = tempMovement.ShipmentQuantityUnits;
+                model.PackagingTypes.SetSelectedValues(tempMovement.PackagingTypes);
+            }
+
+            return View("Index", model);
         }
 
         [HttpPost]
@@ -270,42 +292,6 @@
                 await mediator.SendAsync(new GetUnitedKingdomCompetentAuthorityByNotificationId(notificationId));
 
             return View(competentAuthority.AsUKCompetantAuthority());
-        }
-
-        [HttpGet]
-        public async Task<ActionResult> RedirectToShipmentDate(Guid notificationId)
-        {
-            return await GetIndex(notificationId, true);
-        }
-
-        private async Task<ActionResult> GetIndex(Guid notificationId, bool skipRules = false)
-        {
-            ViewBag.NotificationId = notificationId;
-
-            if (!skipRules)
-            {
-                var ruleSummary = await mediator.SendAsync(new GetMovementRulesSummary(notificationId));
-
-                if (!ruleSummary.IsSuccess)
-                {
-                    return GetRuleErrorView(ruleSummary);
-                }
-            }
-
-            var shipmentInfo = await mediator.SendAsync(new GetShipmentInfo(notificationId));
-
-            var model = new CreateMovementsViewModel(shipmentInfo);
-
-            if (TempData["TempMovement"] != null)
-            {
-                var tempMovement = (TempMovement)TempData["TempMovement"];
-                model.NumberToCreate = tempMovement.NumberToCreate;
-                model.Quantity = tempMovement.Quantity.ToString();
-                model.Units = tempMovement.ShipmentQuantityUnits;
-                model.PackagingTypes.SetSelectedValues(tempMovement.PackagingTypes);
-            }
-
-            return View("Index", model);
         }
 
         [Serializable]
