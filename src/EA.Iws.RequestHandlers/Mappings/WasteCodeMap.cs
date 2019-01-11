@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Text.RegularExpressions;
     using Core.WasteCodes;
     using Domain.NotificationApplication;
     using Prsd.Core.Mapper;
@@ -26,7 +27,12 @@
 
         public WasteCodeData[] Map(IEnumerable<WasteCodeInfo> source)
         {
-            return source.Select(Map).ToArray();
+            return source.Select(Map).OrderBy(w => Regex.Match(w.Code, @"(\D+)").Value).ThenBy(w =>
+            {
+                int val;
+                int.TryParse(Regex.Match(w.Code, @"(\d+)").Value, out val);
+                return val;
+            }).ToArray();
         }
 
         public WasteCodeData Map(WasteCodeInfo source)
