@@ -1,16 +1,17 @@
 ﻿namespace EA.Iws.Web.Areas.NotificationApplication.Controllers
 {
-    using System;
-    using System.Linq;
-    using System.Threading.Tasks;
-    using System.Web.Mvc;
     using Core.MeansOfTransport;
+    using Core.Notification.Audit;
     using Infrastructure;
     using Prsd.Core.Helpers;
     using Prsd.Core.Mediator;
     using Prsd.Core.Web.ApiClient;
     using Prsd.Core.Web.Mvc.Extensions;
     using Requests.MeansOfTransport;
+    using System;
+    using System.Linq;
+    using System.Threading.Tasks;
+    using System.Web.Mvc;
     using ViewModels.MeansOfTransport;
 
     [Authorize]
@@ -18,10 +19,12 @@
     public class MeansOfTransportController : Controller
     {
         private readonly IMediator mediator;
+        private readonly IAuditService auditService;
 
-        public MeansOfTransportController(IMediator mediator)
+        public MeansOfTransportController(IMediator mediator, IAuditService auditService)
         {
             this.mediator = mediator;
+            this.auditService = auditService;
         }
 
         [HttpGet]
@@ -51,9 +54,17 @@
 
             try
             {
+                var currentMeans = await mediator.SendAsync(new GetMeansOfTransportByNotificationId(id));
+
                 var meansList = model.SelectedMeans.Split('-')
                     .Select(MeansOfTransportHelper.GetTransportMethodFromToken)
                     .ToList();
+
+                await this.auditService.AddAuditEntry(this.mediator,
+                    id,
+                    User.GetUserId(),
+                    currentMeans.Count == 0 ? NotificationAuditType.Create : NotificationAuditType.Update,
+                    "Means of transport");
 
                 await mediator.SendAsync(new SetMeansOfTransportForNotification(id, meansList));
             }

@@ -9,14 +9,14 @@
 
     public class AuditService : IAuditService
     {
-        public async Task AddAuditEntry(IMediator mediator, Guid notificationId, string userId, bool existingEntry, string screenName)
+        public async Task AddAuditEntry(IMediator mediator, Guid notificationId, string userId, NotificationAuditType auditType, string screenName)
         {
             var screens = await mediator.SendAsync(new GetNotificationAuditScreens());
 
             var audit = CreateAudit(notificationId,
                 userId,
                 screens.FirstOrDefault(p => p.ScreenName == screenName).Id,
-                existingEntry ? NotificationAuditType.Update : NotificationAuditType.Create);
+                auditType);
 
             await mediator.SendAsync(audit);
         }
