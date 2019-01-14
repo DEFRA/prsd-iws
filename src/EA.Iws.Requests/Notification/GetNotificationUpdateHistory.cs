@@ -5,8 +5,8 @@
     using Core.Authorization;
     using Core.Authorization.Permissions;
     using Prsd.Core.Mediator;
-
-    [RequestAuthorization(GeneralPermissions.CanViewSearchResults)]
+    
+    [RequestAuthorization(ExportNotificationPermissions.CanReadExportNotification)]
     public class GetNotificationUpdateHistory : IRequest<IList<NotificationUpdateHistory>>
     {
         public GetNotificationUpdateHistory(Guid notificationId)
