@@ -13,21 +13,6 @@
 
     public class SummaryTableContainerViewModelTests
     {
-        private const string Ewc1 = "01 04 09";
-        private const string Ewc2 = "01 05 10*";
-        private const string Ewc3 = "02 01 01";
-
-        private const string Y1 = "Y1";
-        private const string Y2 = "Y4";
-        private const string Y3 = "Y10";
-
-        private const string H1 = "H1";
-        private const string H2 = "H2";
-        private const string H3 = "H10";
-
-        private const string Un1 = "2";
-        private const string Un2 = "5";
-
         [Fact]
         public void NotificationReceived_ShowChangeLinks()
         {
@@ -106,12 +91,12 @@
             Assert.True(result.SequenceEqual(expected, new WasteCodeComparer()));
         }
 
-        private SummaryTableContainerViewModel CreateModel(ImportNotificationStatus status, bool canChangeNumberOfShipments, bool canChangeEntryExitPoint)
+        private static SummaryTableContainerViewModel CreateModel(ImportNotificationStatus status, bool canChangeNumberOfShipments, bool canChangeEntryExitPoint)
         {
             return new SummaryTableContainerViewModel(CreateImportNotifiationSummary(status), canChangeNumberOfShipments, canChangeEntryExitPoint);
         }
 
-        private ImportNotificationSummary CreateImportNotifiationSummary(ImportNotificationStatus status)
+        private static ImportNotificationSummary CreateImportNotifiationSummary(ImportNotificationStatus status)
         {
             var wasteType = new WasteType()
             {
@@ -133,42 +118,42 @@
             return summary;
         }
 
-        private IList<WasteCode> CreateEwcCodes()
+        private static IList<WasteCode> CreateEwcCodes()
         {
             return new List<WasteCode>()
             {
-                new WasteCode() { Name = Ewc2, Description = "wastes from mineral metalliferous excavation" },
-                new WasteCode() { Name = Ewc1, Description = "waste sand and clays" },
-                new WasteCode() { Name = Ewc3, Description = "sludges from washing and cleaning" }
+                new WasteCode() { Name = "01 05 10*", Description = "wastes from mineral metalliferous excavation" },
+                new WasteCode() { Name = "01 04 09", Description = "waste sand and clays" },
+                new WasteCode() { Name = "02 01 01", Description = "sludges from washing and cleaning" }
             };
         }
 
-        private IList<WasteCode> CreateYCodes()
+        private static IList<WasteCode> CreateYCodes()
         {
             return new List<WasteCode>()
             {
-                new WasteCode() { Name = Y3, Description = "Metal carbonyls" },
-                new WasteCode() { Name = Y2, Description = "Copper compounds" },
-                new WasteCode() { Name = Y1, Description = "Zinc compounds" }
+                new WasteCode() { Name = "Y10", Description = "Metal carbonyls" },
+                new WasteCode() { Name = "Y4", Description = "Copper compounds" },
+                new WasteCode() { Name = "Y1", Description = "Zinc compounds" }
             };
         }
 
-        private IList<WasteCode> CreateHCodes()
+        private static IList<WasteCode> CreateHCodes()
         {
             return new List<WasteCode>()
             {
-                new WasteCode() { Name = H1, Description = "Explosive" },
-                new WasteCode() { Name = H3, Description = "Liberation of toxic gases in contact with air or water" },
-                new WasteCode() { Name = H2, Description = "Ecotoxic" }
+                new WasteCode() { Name = "H1", Description = "Explosive" },
+                new WasteCode() { Name = "H10", Description = "Liberation of toxic gases in contact with air or water" },
+                new WasteCode() { Name = "H2", Description = "Ecotoxic" }
             };
         }
 
-        private IList<WasteCode> CreateUnClasses()
+        private static IList<WasteCode> CreateUnClasses()
         {
             return new List<WasteCode>()
             {
-                new WasteCode() { Name = Un1, Description = "Explosives" },
-                new WasteCode() { Name = Un2, Description = "Flammable solids" }
+                new WasteCode() { Name = "5", Description = "Explosives" },
+                new WasteCode() { Name = "2", Description = "Flammable solids" }
             };
         }
     }
