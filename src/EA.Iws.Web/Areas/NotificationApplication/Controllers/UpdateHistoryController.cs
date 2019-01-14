@@ -24,7 +24,6 @@
             var response = await mediator.SendAsync(new GetNotificationUpdateHistory(id));
 
             var model = new UpdateHistoryViewModel(response);
-            //COULLM: Should this be set by the GetNotificationUpdateHistory constructor above?
             model.NotificationId = id;
 
             return View(model);
