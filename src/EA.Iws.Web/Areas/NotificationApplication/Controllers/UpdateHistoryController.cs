@@ -20,7 +20,7 @@
         [HttpGet]
         public async Task<ActionResult> Index(Guid id)
         {
-            var response = await mediator.SendAsync(new GetNotificationUpdateHistory(id));
+            var response = await mediator.SendAsync(new GetNotificationAudits(id));
 
             var model = new UpdateHistoryViewModel(response);
             model.NotificationId = id;

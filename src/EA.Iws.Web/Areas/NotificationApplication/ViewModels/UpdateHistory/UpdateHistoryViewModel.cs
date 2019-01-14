@@ -2,7 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
-    using Requests.Notification;
+    using Core.Notification.Audit;
 
     public class UpdateHistoryViewModel
     {
@@ -10,10 +10,10 @@
         {
         }
         
-        public UpdateHistoryViewModel(IList<NotificationUpdateHistory> notificationUpdateHistory)
+        public UpdateHistoryViewModel(IEnumerable<NotificationAuditForDisplay> notificationUpdateHistory)
         {
-            UpdateHistoryItems = new List<NotificationUpdateHistory>();
-            foreach (NotificationUpdateHistory updateHistory in notificationUpdateHistory)
+            UpdateHistoryItems = new List<NotificationAuditForDisplay>();
+            foreach (NotificationAuditForDisplay updateHistory in notificationUpdateHistory)
             {
                 UpdateHistoryItems.Add(updateHistory);
             }
@@ -21,6 +21,6 @@
 
         public Guid NotificationId { get; set; }
 
-        public IList<NotificationUpdateHistory> UpdateHistoryItems { get; set; }
+        public List<NotificationAuditForDisplay> UpdateHistoryItems { get; set; }
     }
 }
