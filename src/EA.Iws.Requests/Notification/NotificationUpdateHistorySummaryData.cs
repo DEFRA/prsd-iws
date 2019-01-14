@@ -8,9 +8,7 @@
         
         public string Name { get; set; }
         
-        public string Date { get; set; }
-        
-        public string Time { get; set; }
+        public DateTimeOffset DateAdded { get; set; }
         
         public string InformationChange { get; set; }
         

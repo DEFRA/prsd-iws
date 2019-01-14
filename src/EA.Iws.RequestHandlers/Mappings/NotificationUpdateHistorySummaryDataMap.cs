@@ -16,8 +16,7 @@
             {
                 Id = source.Id,
                 UserName = source.Name,
-                ChangeDate = source.Date,
-                ChangeTime = source.Time,
+                DateAdded = source.DateAdded,
                 InformationChange = source.InformationChange,
                 TypeOfChange = source.TypeOfChange
             };

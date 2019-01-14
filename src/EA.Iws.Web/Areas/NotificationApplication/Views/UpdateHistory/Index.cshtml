@@ -6,6 +6,16 @@
     Layout = "~/Views/Shared/_Layout.GovUK.Sections.cshtml";
 }
 
+@helper DisplayDate(DateTimeOffset date)
+{
+    @date.ToString("d MMM yyyy")
+}
+
+@helper DisplayTime(DateTimeOffset time)
+{
+    @time.ToString("HH:mm")
+}
+
 @Html.Partial("_Title", null)
 
 <div class="form-group">
@@ -40,10 +50,10 @@
                         @Model.UpdateHistoryItems[i].UserName
                     </td>
                     <td>
-                        @Model.UpdateHistoryItems[i].ChangeDate
+                        @DisplayDate(@Model.UpdateHistoryItems[i].DateAdded)
                     </td>
                     <td>
-                        @Model.UpdateHistoryItems[i].ChangeTime
+                        @DisplayTime(@Model.UpdateHistoryItems[i].DateAdded)
                     </td>
                     <td>
                         @Model.UpdateHistoryItems[i].InformationChange

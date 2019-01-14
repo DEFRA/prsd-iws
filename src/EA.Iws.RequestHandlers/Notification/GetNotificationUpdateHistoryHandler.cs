@@ -28,8 +28,7 @@
                 SELECT
 	                A.Id AS Id,
 	                CASE WHEN IU.Id IS NULL THEN U.FirstName + ' ' + U.Surname ELSE 'Internal User' END AS Name,
-	                FORMAT(A.DateAdded, 'yyyy-MM-dd') AS Date,
-	                FORMAT(A.DateAdded, 'hh:mm:ss') AS Time,
+	                A.DateAdded,
 	                S.ScreenName AS InformationChange,
 	                AT.AuditType AS TypeOfChange
                 FROM 

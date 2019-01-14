@@ -9,9 +9,7 @@
         
         public string UserName { get; set; }
         
-        public string ChangeDate { get; set; }
-        
-        public string ChangeTime { get; set; }
+        public DateTimeOffset DateAdded { get; set; }
         
         public string InformationChange { get; set; }
 
