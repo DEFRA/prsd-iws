@@ -27,12 +27,7 @@
 
         public WasteCodeData[] Map(IEnumerable<WasteCodeInfo> source)
         {
-            return source.Select(Map).OrderBy(w => Regex.Match(w.Code, @"(\D+)").Value).ThenBy(w =>
-            {
-                int val;
-                int.TryParse(Regex.Match(w.Code, @"(\d+)").Value, out val);
-                return val;
-            }).ToArray();
+            return source.Select(Map).ToArray();
         }
 
         public WasteCodeData Map(WasteCodeInfo source)
