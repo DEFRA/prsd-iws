@@ -1,23 +1,28 @@
 ﻿namespace EA.Iws.Web.Tests.Unit.Controllers.NotificationApplication
 {
-    using System;
-    using System.Threading.Tasks;
-    using System.Web.Mvc;
     using Api.Client;
     using Areas.NotificationApplication.Controllers;
     using Areas.NotificationApplication.ViewModels.StateOfExport;
+    using Core.Notification.Audit;
     using Core.Shared;
     using Core.StateOfExport;
     using Core.TransportRoute;
     using FakeItEasy;
     using Prsd.Core.Mapper;
     using Prsd.Core.Mediator;
+    using Requests.StateOfExport;
     using Requests.TransportRoute;
+    using System;
+    using System.Collections.Generic;
+    using System.Threading.Tasks;
+    using System.Web.Mvc;
+    using Web.Infrastructure;
     using Xunit;
 
     public class StateOfExportControllerTests
     {
         private readonly IMediator mediator;
+        private readonly IAuditService auditService;
         private static readonly Guid anyCountryId = new Guid("25D2D146-942E-46DE-926E-00E2ECFB45C7");
         private static readonly Guid anyCompetentAuthorityId = new Guid("1BF015B8-56C6-43C2-BB8B-3A3FF39135BC");
         private static readonly Guid anyEntryOrExitPointId = new Guid("72F68B61-E969-42DB-AF7F-E0B9FEDB7BBF");
@@ -28,6 +33,7 @@
         public StateOfExportControllerTests()
         {
             mediator = A.Fake<IMediator>();
+            this.auditService = A.Fake<IAuditService>();
             var competentAuthorties = new[]
                 {
                     new CompetentAuthorityData { Id = anyCompetentAuthorityId, Name = anyString }
@@ -44,7 +50,14 @@
                     CompetentAuthorities = competentAuthorties,
                     EntryOrExitPoints = entryOrExitPoints
                 });
-            stateOfExportController = new StateOfExportController(mediator, new TestMap());
+            stateOfExportController = new StateOfExportController(mediator, new TestMap(), this.auditService);
+            A.CallTo(
+                () => mediator.SendAsync(A<GetStateOfExportWithTransportRouteDataByNotificationId>.That.Matches(s => s.Id == notificationId)))
+                .Returns(new StateOfExportWithTransportRouteData()
+                {    
+                    StateOfExport = new StateOfExportData()          
+                });
+            A.CallTo(() => auditService.AddAuditEntry(this.mediator, notificationId, "user", NotificationAuditType.Create, "screen"));
         }
 
         [Fact]

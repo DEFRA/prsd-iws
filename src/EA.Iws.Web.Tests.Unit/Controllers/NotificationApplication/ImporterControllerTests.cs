@@ -2,15 +2,17 @@
 {
     using Areas.NotificationApplication.Controllers;
     using Areas.NotificationApplication.ViewModels.Importer;
+    using Core.AddressBook;
+    using Core.Notification.Audit;
     using Core.Shared;
     using FakeItEasy;
+    using Prsd.Core.Mapper;
     using Prsd.Core.Mediator;
+    using Requests.AddressBook;
     using System;
     using System.Threading.Tasks;
     using System.Web.Mvc;
-    using Core.AddressBook;
-    using Prsd.Core.Mapper;
-    using Requests.AddressBook;
+    using Web.Infrastructure;
     using Web.ViewModels.Shared;
     using Xunit;
 
@@ -18,11 +20,16 @@
     {
         private readonly Guid notificationId = new Guid("31D3BCAA-7315-4FD6-A6C3-A1B9D6697DF2");
         private readonly ImporterController importerController;
+        private readonly IAuditService auditService;
+        private readonly IMediator mediator;
 
         public ImporterControllerTests()
         {
+            this.mediator = A.Fake<IMediator>();
+            this.auditService = A.Fake<IAuditService>();
             importerController = new ImporterController(A.Fake<IMediator>(), 
-                A.Fake<IMapWithParameter<ImporterViewModel, AddressRecordType, AddAddressBookEntry>>());
+                A.Fake<IMapWithParameter<ImporterViewModel, AddressRecordType, AddAddressBookEntry>>(), this.auditService);
+            A.CallTo(() => auditService.AddAuditEntry(this.mediator, notificationId, "user", NotificationAuditType.Create, "screen"));
         }
 
         private ImporterViewModel CreateImporterViewModel()

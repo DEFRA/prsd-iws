@@ -1,15 +1,16 @@
 ﻿namespace EA.Iws.Web.Areas.NotificationApplication.Controllers
 {
-    using System;
-    using System.Linq;
-    using System.Threading.Tasks;
-    using System.Web.Mvc;
+    using Core.Notification.Audit;
     using Core.WasteType;
     using Infrastructure;
     using Prsd.Core.Mediator;
     using Prsd.Core.Web.ApiClient;
     using Prsd.Core.Web.Mvc.Extensions;
     using Requests.WasteType;
+    using System;
+    using System.Linq;
+    using System.Threading.Tasks;
+    using System.Web.Mvc;
     using ViewModels.PhysicalCharacteristics;
     using Web.ViewModels.Shared;
 
@@ -18,10 +19,12 @@
     public class PhysicalCharacteristicsController : Controller
     {
         private readonly IMediator mediator;
+        private readonly IAuditService auditService;
 
-        public PhysicalCharacteristicsController(IMediator mediator)
+        public PhysicalCharacteristicsController(IMediator mediator, IAuditService auditService)
         {
             this.mediator = mediator;
+            this.auditService = auditService;
         }
 
         [HttpGet]
@@ -78,9 +81,17 @@
                     selectedPackagingTypes.Add(PhysicalCharacteristicType.Other);
                 }
 
+                var existingPhysicalCharacteristicsData = await mediator.SendAsync(new GetPhysicalCharacteristics(model.NotificationId));
+
                 await
                     mediator.SendAsync(new SetPhysicalCharacteristics(selectedPackagingTypes, model.NotificationId,
                             model.OtherDescription));
+
+                await this.auditService.AddAuditEntry(this.mediator,
+                   model.NotificationId,
+                   User.GetUserId(),
+                   existingPhysicalCharacteristicsData.PhysicalCharacteristics.Count == 0 ? NotificationAuditType.Create : NotificationAuditType.Update,
+                   "Physical characteristics");
 
                 if (backToOverview.GetValueOrDefault())
                 {

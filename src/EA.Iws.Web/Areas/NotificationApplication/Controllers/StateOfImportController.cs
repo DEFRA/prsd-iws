@@ -1,5 +1,6 @@
 ﻿namespace EA.Iws.Web.Areas.NotificationApplication.Controllers
 {
+    using Core.Notification.Audit;
     using Infrastructure;
     using Prsd.Core.Mapper;
     using Prsd.Core.Mediator;
@@ -21,14 +22,16 @@
     {
         private readonly IMediator mediator;
         private readonly IMap<StateOfImportWithTransportRouteData, StateOfImportViewModel> mapper;
+        private readonly IAuditService auditService;
 
         private const string SelectCountry = "country";
         private const string ChangeCountry = "changeCountry";
 
-        public StateOfImportController(IMediator mediator, IMap<StateOfImportWithTransportRouteData, StateOfImportViewModel> mapper)
+        public StateOfImportController(IMediator mediator, IMap<StateOfImportWithTransportRouteData, StateOfImportViewModel> mapper, IAuditService auditService)
         {
             this.mediator = mediator;
             this.mapper = mapper;
+            this.auditService = auditService;
         }
 
         [HttpGet]
@@ -84,10 +87,18 @@
 
         private async Task<ActionResult> SubmitAction(Guid id, StateOfImportViewModel model, bool? backToOverview)
         {
+            var stateOfImportSetData = await mediator.SendAsync(new GetStateOfImportWithTransportRouteDataByNotificationId(id));
+
             await mediator.SendAsync(new SetStateOfImportForNotification(id,
                     model.CountryId.Value,
                     model.EntryOrExitPointId.Value,
                     model.CompetentAuthorities.SelectedValue));
+
+            await this.auditService.AddAuditEntry(this.mediator,
+                    id,
+                    User.GetUserId(),
+                    stateOfImportSetData.StateOfImport == null ? NotificationAuditType.Create : NotificationAuditType.Update,
+                    "Import route");
 
             if (backToOverview.GetValueOrDefault())
             {

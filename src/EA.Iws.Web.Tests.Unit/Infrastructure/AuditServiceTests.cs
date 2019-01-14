@@ -30,7 +30,7 @@
             var screens = A.CollectionOfFake<NotificationAuditScreen>(1);
             A.CallTo(() => mediator.SendAsync(A<GetNotificationAuditScreens>.Ignored)).Returns(screens);
 
-            await this.auditService.AddAuditEntry(this.mediator, notificationId, userId.ToString(), true, screens.FirstOrDefault().ScreenName);
+            await this.auditService.AddAuditEntry(this.mediator, notificationId, userId.ToString(), NotificationAuditType.Create, screens.FirstOrDefault().ScreenName);
 
             A.CallTo(() => mediator.SendAsync(A<GetNotificationAuditScreens>.Ignored)).MustHaveHappened(Repeated.AtLeast.Once);
 

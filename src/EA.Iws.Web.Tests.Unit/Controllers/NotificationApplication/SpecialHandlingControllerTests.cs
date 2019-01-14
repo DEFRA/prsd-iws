@@ -2,19 +2,28 @@
 {
     using Areas.NotificationApplication.Controllers;
     using Areas.NotificationApplication.ViewModels.SpecialHandling;
+    using Core.Notification.Audit;
     using FakeItEasy;
+    using Prsd.Core.Mediator;
+    using System;
     using System.Threading.Tasks;
     using System.Web.Mvc;
-    using Prsd.Core.Mediator;
+    using Web.Infrastructure;
     using Xunit;
 
     public class SpecialHandlingControllerTests
     {
         private readonly SpecialHandlingController specialHandlingController;
+        private readonly Guid notificationId = new Guid("4AB23CDF-9B24-4598-A302-A69EBB5F2152");
+        private readonly IMediator mediator;
+        private readonly IAuditService auditService;
 
         public SpecialHandlingControllerTests()
         {
-            specialHandlingController = new SpecialHandlingController(A.Fake<IMediator>());
+            this.mediator = A.Fake<IMediator>();
+            this.auditService = A.Fake<IAuditService>();
+            specialHandlingController = new SpecialHandlingController(A.Fake<IMediator>(), this.auditService);
+            A.CallTo(() => auditService.AddAuditEntry(this.mediator, notificationId, "user", NotificationAuditType.Create, "screen"));
         }
 
         [Fact]

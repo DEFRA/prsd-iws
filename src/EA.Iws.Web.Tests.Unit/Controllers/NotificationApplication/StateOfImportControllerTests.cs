@@ -2,6 +2,7 @@
 {
     using Areas.NotificationApplication.Controllers;
     using Areas.NotificationApplication.ViewModels.StateOfImport;
+    using Core.Notification.Audit;
     using Core.Shared;
     using Core.StateOfImport;
     using Core.TransportRoute;
@@ -13,22 +14,26 @@
     using System;
     using System.Threading.Tasks;
     using System.Web.Mvc;
+    using Web.Infrastructure;
     using Xunit;
 
     public class StateOfImportControllerTests
     {
         private readonly StateOfImportController controller;
         private readonly IMediator mediator;
+        private readonly IAuditService auditService;
         private static readonly Guid NullStateOfImportGuid = new Guid("6DF6FDA2-BA9F-477D-94D9-F1E03F4D2E61");
         private static readonly Guid ExistingStateOfImportGuid = new Guid("3B541912-2D24-4C7F-B6E5-20831363CE44");
         private static readonly Guid AnyCompetentAuthorityId = new Guid("92D4DF75-A6D1-413F-9C6C-B69DA69F006A");
         private static readonly Guid AnyCountryId = new Guid("96CB73BB-5F7A-4BBD-84B1-F720F2A0DB23");
         private static readonly Guid AnyEntryOrExitPointId = new Guid("68F189F6-BF5A-43D6-8F51-26D1DD637864");
+        private readonly Guid notificationId = new Guid("4AB23CDF-9B24-4598-A302-A69EBB5F2152");
         private const string AnyString = "test";
 
         public StateOfImportControllerTests()
         {
             mediator = A.Fake<IMediator>();
+            this.auditService = A.Fake<IAuditService>();
 
             var countries = new[]
             {
@@ -84,7 +89,8 @@
                     EntryOrExitPoints = entryOrExitPoints
                 });
 
-            this.controller = new StateOfImportController(mediator, new TestMap());
+            this.controller = new StateOfImportController(mediator, new TestMap(), this.auditService);
+            A.CallTo(() => auditService.AddAuditEntry(this.mediator, notificationId, "user", NotificationAuditType.Create, "screen"));
         }
 
         [Fact]

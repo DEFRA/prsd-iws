@@ -2,6 +2,7 @@
 {
     using Areas.NotificationApplication.Controllers;
     using Areas.NotificationApplication.ViewModels.Exporter;
+    using Core.Notification.Audit;
     using Core.Shared;
     using FakeItEasy;
     using Mappings;
@@ -26,7 +27,7 @@
             auditService = A.Fake<IAuditService>();
             exporterController = new ExporterController(client, new AddAddressBookEntryMap(), auditService);
 
-            A.CallTo(() => auditService.AddAuditEntry(client, notificationId, "user", false, "screen"));
+            A.CallTo(() => auditService.AddAuditEntry(client, notificationId, "user", NotificationAuditType.Create, "screen"));
         }
 
         private ExporterViewModel CreateExporterViewModel()

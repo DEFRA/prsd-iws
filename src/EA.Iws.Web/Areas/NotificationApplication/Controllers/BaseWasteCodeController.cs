@@ -1,14 +1,15 @@
 ﻿namespace EA.Iws.Web.Areas.NotificationApplication.Controllers
 {
+    using Core.Notification.Audit;
+    using Core.WasteCodes;
+    using Infrastructure;
+    using Prsd.Core.Mediator;
+    using Requests.WasteCodes;
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Mvc;
-    using Core.WasteCodes;
-    using Infrastructure;
-    using Prsd.Core.Mediator;
-    using Requests.WasteCodes;
     using ViewModels.WasteCodes;
     using Views.Shared;
 
@@ -19,12 +20,14 @@
         protected const string AddCode = "addcode";
         protected const string Continue = "continue";
         protected readonly IMediator Mediator;
+        protected readonly IAuditService AuditService;
         private readonly CodeType codeType;
 
-        protected BaseWasteCodeController(IMediator mediator, CodeType codeType)
+        protected BaseWasteCodeController(IMediator mediator, CodeType codeType, IAuditService auditService)
         {
             this.Mediator = mediator;
             this.codeType = codeType;
+            this.AuditService = auditService;
         }
 
         public async Task<ActionResult> Post(Guid id, BaseWasteCodeViewModel viewModel, string command, string remove, bool backToOverview)
@@ -126,6 +129,62 @@
         protected ActionResult BackToOverviewResult(Guid id)
         {
             return RedirectToAction("Index", "Home", new { id });
+        }
+
+        protected bool CodeBeenRemoved(BaseWasteCodeViewModel model, WasteCodeDataAndNotificationData existingData)
+        {
+            foreach (var code in existingData.NotificationWasteCodeData[this.codeType])
+            {
+                if (model.EnterWasteCodesViewModel.SelectedWasteCodes.Count(p => p == code.Id) == 0)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        protected bool CodeBeenAdded(BaseWasteCodeViewModel model, WasteCodeDataAndNotificationData existingData)
+        {
+            foreach (var code in model.EnterWasteCodesViewModel.SelectedWasteCodes)
+            {
+                if (existingData.NotificationWasteCodeData[this.codeType].Count(p => p.Id == code) == 0)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        protected async Task AddAuditEntries(WasteCodeDataAndNotificationData existingData, BaseWasteCodeViewModel viewModel, Guid id, string screenName)
+        {
+            if (existingData.NotificationWasteCodeData[this.codeType].Count() == 0)
+            {
+                await this.AuditService.AddAuditEntry(this.Mediator,
+                   id,
+                   User.GetUserId(),
+                   NotificationAuditType.Create,
+                   screenName);
+            }
+            else
+            {
+                if (this.CodeBeenRemoved(viewModel, existingData))
+                {
+                    await this.AuditService.AddAuditEntry(this.Mediator,
+                       id,
+                       User.GetUserId(),
+                        NotificationAuditType.Delete,
+                       screenName);
+                }
+
+                if (this.CodeBeenAdded(viewModel, existingData))
+                {
+                    await this.AuditService.AddAuditEntry(this.Mediator,
+                       id,
+                       User.GetUserId(),
+                        NotificationAuditType.Update,
+                       screenName);
+                }
+            }
         }
     }
 }
