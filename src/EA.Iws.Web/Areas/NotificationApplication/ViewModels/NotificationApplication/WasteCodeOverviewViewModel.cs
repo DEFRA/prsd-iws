@@ -69,14 +69,14 @@
         {
             NotificationId = classifyYourWasteInfo.NotificationId;
             BaselOecdCode = classifyYourWasteInfo.BaselOecdCode;
-            EwcCodes = classifyYourWasteInfo.EwcCodes;
+            EwcCodes = classifyYourWasteInfo.EwcCodes.OrderBy(w => w.Code).ToArray();
             NationExportCode = classifyYourWasteInfo.NationExportCode;
             NationImportCode = classifyYourWasteInfo.NationImportCode;
             OtherCodes = classifyYourWasteInfo.OtherCodes;
-            YCodes = classifyYourWasteInfo.YCodes;
-            HCodes = classifyYourWasteInfo.HCodes;
-            UnClass = classifyYourWasteInfo.UnClass;
-            UnNumber = classifyYourWasteInfo.UnNumber;
+            YCodes = classifyYourWasteInfo.YCodes.OrderBy(w => w.Code).ToArray();
+            HCodes = classifyYourWasteInfo.HCodes.OrderBy(w => w.Code).ToArray();
+            UnClass = classifyYourWasteInfo.UnClass.OrderBy(w => w.Code).ToArray();
+            UnNumber = classifyYourWasteInfo.UnNumber.OrderBy(w => w.Code).ToArray();
             CustomCodes = classifyYourWasteInfo.CustomCodes;
             IsBaselOecdCodeCompleted = progress.HasBaselOecdCode;
             AreEwcCodesCompleted = progress.HasEwcCodes;
