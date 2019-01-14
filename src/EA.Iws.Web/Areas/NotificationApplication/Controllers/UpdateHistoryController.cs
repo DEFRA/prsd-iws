@@ -25,7 +25,14 @@
             var model = new UpdateHistoryViewModel(response);
             model.NotificationId = id;
 
-            return View(model);
+            if (model.UpdateHistoryItems.Count > 0)
+            {
+                return View(model);
+            }
+            else
+            {
+                return RedirectToAction("NoChanges", "UpdateHistory", new { id });
+            }
         }
 
         [HttpGet]
