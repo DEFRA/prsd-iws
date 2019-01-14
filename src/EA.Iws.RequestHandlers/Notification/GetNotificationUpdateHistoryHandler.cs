@@ -1,27 +1,32 @@
 ﻿namespace EA.Iws.RequestHandlers.Notification
 {
+    using System.Collections.Generic;
     using System.Data.SqlClient;
+    using System.Linq;
     using System.Threading.Tasks;
     using DataAccess;
-    using Prsd.Core.Domain;
+    using Prsd.Core.Mapper;
     using Prsd.Core.Mediator;
     using Requests.Notification;
 
     internal class GetNotificationUpdateHistoryHandler :
-        IRequestHandler<GetNotificationUpdateHistory, NotificationUpdateHistory>
+        IRequestHandler<GetNotificationUpdateHistory, IList<NotificationUpdateHistory>>
     {
         private readonly IwsContext context;
+        private readonly IMapper mapper;
 
-        public GetNotificationUpdateHistoryHandler(IwsContext context)
+        public GetNotificationUpdateHistoryHandler(IwsContext context,
+            IMapper mapper)
         {
             this.context = context;
+            this.mapper = mapper;
         }
 
-        public async Task<NotificationUpdateHistory> HandleAsync(GetNotificationUpdateHistory message)
+        public async Task<IList<NotificationUpdateHistory>> HandleAsync(GetNotificationUpdateHistory message)
         {
             var notificationUpdateHistory = await context.Database.SqlQuery<NotificationUpdateHistorySummaryData>(@"
                 SELECT
-	                NEWID() AS Id,
+	                A.Id AS Id,
 	                CASE WHEN IU.Id IS NULL THEN U.FirstName + ' ' + U.Surname ELSE 'Internal User' END AS Name,
 	                FORMAT(A.DateAdded, 'yyyy-MM-dd') AS Date,
 	                FORMAT(A.DateAdded, 'hh:mm:ss') AS Time,
@@ -40,7 +45,9 @@
                     A.DateAdded DESC",
             new SqlParameter("@NotificationId", message.NotificationId)).ToListAsync();
 
-            return new NotificationUpdateHistory(notificationUpdateHistory);
+            return notificationUpdateHistory
+                .Select(updateHistoryItem => mapper.Map<NotificationUpdateHistory>(updateHistoryItem))
+                .ToList();
         }
     }
 }

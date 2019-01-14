@@ -1,14 +1,20 @@
 ﻿namespace EA.Iws.Requests.Notification
 {
-    using System.Collections.Generic;
+    using System;
 
+    [Serializable]
     public class NotificationUpdateHistory
     {
-        public NotificationUpdateHistory(IList<NotificationUpdateHistorySummaryData> notificationUpdateHistory)
-        {
-            UpdateHistory = notificationUpdateHistory;
-        }
+        public Guid Id { get; set; }
+        
+        public string UserName { get; set; }
+        
+        public string ChangeDate { get; set; }
+        
+        public string ChangeTime { get; set; }
+        
+        public string InformationChange { get; set; }
 
-        public IList<NotificationUpdateHistorySummaryData> UpdateHistory { get; private set; }
+        public string TypeOfChange { get; set; }
     }
 }
