@@ -191,12 +191,14 @@
     <Compile Include="TestHelpers\TestExtensions.cs" />
     <Compile Include="TestHelpers\ViewModelValidator.cs" />
     <Compile Include="Controllers\RegistrationControllerTests.cs" />
+    <Compile Include="TestHelpers\WasteCodeComparer.cs" />
     <Compile Include="ViewModels\AdminExportNotificationMovements\CaptureViewModelTests.cs" />
     <Compile Include="ViewModels\AdminImportNotificationMovements\CaptureViewModelTests.cs" />
     <Compile Include="ViewModels\Admin\AdvancedSearch\IndexViewModelTests.cs" />
     <Compile Include="ViewModels\Admin\NotificationNumberViewModelTests.cs" />
     <Compile Include="ViewModels\DisposalCostViewModelTests.cs" />
     <Compile Include="ViewModels\CustomsOfficeViewModelTests.cs" />
+    <Compile Include="ViewModels\ImportNotification\SummaryTableContainerViewModelTests.cs" />
     <Compile Include="ViewModels\NotificationApplication\SubmitSideBarViewModelTests.cs" />
     <Compile Include="ViewModels\NotificationMovements\CancelSuccessViewModelTests.cs" />
     <Compile Include="ViewModels\TechnologyEmployedViewModelTests.cs" />
