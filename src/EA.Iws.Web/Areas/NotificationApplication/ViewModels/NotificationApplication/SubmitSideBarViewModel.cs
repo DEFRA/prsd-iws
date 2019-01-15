@@ -27,6 +27,8 @@
 
         public bool IsSharedUser { get; set; }
 
+        public bool IsInternalUser { get; set; }
+
         public string AccessLevelText
         {
             get
@@ -56,6 +58,14 @@
             get
             {
                 return Status == NotificationStatus.Unlocked;
+            }
+        }
+
+        public bool ShowViewUpdateHistoryLink
+        {
+            get
+            {
+                return !IsInternalUser && (IsOwner || IsSharedUser);
             }
         }
 
