@@ -2,6 +2,7 @@
 {
     using System;
     using System.Linq;
+    using System.Text.RegularExpressions;
     using Core.Notification;
     using Core.Notification.Overview;
     using Core.WasteCodes;
@@ -69,14 +70,24 @@
         {
             NotificationId = classifyYourWasteInfo.NotificationId;
             BaselOecdCode = classifyYourWasteInfo.BaselOecdCode;
-            EwcCodes = classifyYourWasteInfo.EwcCodes;
+            EwcCodes = classifyYourWasteInfo.EwcCodes.OrderBy(w => w.Code).ToArray();
             NationExportCode = classifyYourWasteInfo.NationExportCode;
             NationImportCode = classifyYourWasteInfo.NationImportCode;
             OtherCodes = classifyYourWasteInfo.OtherCodes;
-            YCodes = classifyYourWasteInfo.YCodes;
-            HCodes = classifyYourWasteInfo.HCodes;
-            UnClass = classifyYourWasteInfo.UnClass;
-            UnNumber = classifyYourWasteInfo.UnNumber;
+            YCodes = classifyYourWasteInfo.YCodes.OrderBy(w => Regex.Match(w.Code, @"(\D+)").Value).ThenBy(w =>
+            {
+                int val;
+                int.TryParse(Regex.Match(w.Code, @"(\d+)").Value, out val);
+                return val;
+            }).ToArray();
+            HCodes = classifyYourWasteInfo.HCodes.OrderBy(w => Regex.Match(w.Code, @"(\D+)").Value).ThenBy(w =>
+            {
+                int val;
+                int.TryParse(Regex.Match(w.Code, @"(\d+)").Value, out val);
+                return val;
+            }).ToArray();
+            UnClass = classifyYourWasteInfo.UnClass.OrderBy(w => w.Code).ToArray();
+            UnNumber = classifyYourWasteInfo.UnNumber.OrderBy(w => w.Code).ToArray();
             CustomCodes = classifyYourWasteInfo.CustomCodes;
             IsBaselOecdCodeCompleted = progress.HasBaselOecdCode;
             AreEwcCodesCompleted = progress.HasEwcCodes;
