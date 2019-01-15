@@ -12,6 +12,7 @@
     using Prsd.Core.Mapper;
     using RequestHandlers.Notification;
     using Requests.Notification;
+    using TestHelpers.Helpers;
     using Xunit;
 
     public class NotificationAuditGetHandlerTests
@@ -19,31 +20,42 @@
         private readonly GetNotificationAuditHandler handler;
         private readonly GetNotificationAudits message;
         private readonly IwsContext context;
+        private readonly IMapper mapper;
+        private readonly Audit notificationAudit;
+        private readonly List<Audit> notificationAudits;
 
-        public NotificationAuditGetHandlerTests(IMapper mapper)
+        public NotificationAuditGetHandlerTests()
         {
             context = new TestIwsContext();
-
+            
             var repo = A.Fake<INotificationAuditRepository>();
+            mapper = A.Fake<IMapper>();
 
-            var notificationUpdateHistory = new List<Audit>()
+            var notificationId = Guid.NewGuid();
+            notificationAudit = new Audit(Guid.NewGuid(), "UserGuid1", 1, 1, new DateTimeOffset());
+            notificationAudits = new List<Audit>()
             {
-                new Audit(Guid.NewGuid(), "UserName1", 1, 1, new DateTimeOffset()),
-                new Audit(Guid.NewGuid(), "UserName2", 1, 1, new DateTimeOffset())
+                notificationAudit,
+                notificationAudit
             };
+            var notificationAuditForDisplay = new NotificationAuditForDisplay("UserName1", "Screen1", "AuditType1", new DateTimeOffset());
 
-            A.CallTo(() => repo.GetNotificationAuditsById(Guid.NewGuid())).Returns(notificationUpdateHistory);
+            A.CallTo(() => repo.GetNotificationAuditsById(notificationId)).Returns(notificationAudits);
+            A.CallTo(() => mapper.Map<NotificationAuditForDisplay>(notificationAudit)).Returns(notificationAuditForDisplay);
 
             handler = new GetNotificationAuditHandler(context, mapper, repo);
-            message = new GetNotificationAudits(Guid.NewGuid());
+            message = new GetNotificationAudits(notificationId);
         }
 
         [Fact]
         public async Task NotificationUpdateHistoryIsRetrieved()
         {
             var result = await handler.HandleAsync(message);
-
+            
             Assert.Equal(result.Count(), 2);
+            // mapper.Map should be called once for each item in notificationAudits
+            A.CallTo(() => mapper.Map<NotificationAuditForDisplay>(notificationAudit))
+                .MustHaveHappened(Repeated.Exactly.Times(notificationAudits.Count()));
         }
     }
 }
