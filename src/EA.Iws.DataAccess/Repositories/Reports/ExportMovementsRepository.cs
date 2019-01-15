@@ -91,7 +91,7 @@
                 new SqlParameter("@from", from),
                 new SqlParameter("@to", to)).ToListAsync();
 
-            var filesUploadedByExternalUser = new HashSet<string>();
+            var movementsUploadedByExternalUser = 0;
 
             foreach (var notificationGroup in userActions.GroupBy(a => a.RecordId))
             {
@@ -102,13 +102,13 @@
 
                     if (o.FileId == null && n.FileId != null)
                     {
-                        filesUploadedByExternalUser.Add(n.FileId);
+                        movementsUploadedByExternalUser++;
                         i = notificationGroup.Count();
                     }
                 }
             }
 
-            movementData.FilesUploadedExternally = filesUploadedByExternalUser.Count;
+            movementData.FilesUploadedExternally = movementsUploadedByExternalUser;
 
             return movementData;
         }
