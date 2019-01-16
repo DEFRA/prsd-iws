@@ -1,5 +1,6 @@
 ﻿namespace EA.Iws.Web.Controllers
 {
+    using System.Security;
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Core.NotificationAssessment;
@@ -39,27 +40,23 @@
             {
                 if (!string.IsNullOrWhiteSpace(model.SearchTerm))
                 {
-                    var id = await mediator.SendAsync(new GetNotificationIdByNumber(model.SearchTerm));
-
-                    if (id.HasValue)
+                    try
                     {
-                        return RedirectToAction("Index", "Options", new { area = "NotificationApplication", id });
+                        var id = await mediator.SendAsync(new GetNotificationIdByNumber(model.SearchTerm));
+
+                        return id.HasValue ? RedirectToAction("Index", "Options", new { area = "NotificationApplication", id }) : RedirectToAction("NotFound");
                     }
-                    else
+                    catch (SecurityException)
                     {
                         return RedirectToAction("NotFound");
                     }
                 }
-                else
-                {
-                    ModelState.AddModelError("SearchTerm", "Please enter a valid search term");
-                    return await Home(null, page);
-                }
+
+                ModelState.AddModelError("SearchTerm", "Please enter a valid search term");
+                return await Home(null, page);
             }
-            else
-            {
-                return RedirectToAction("Home", new { page = 1, status = (int?)model.SelectedNotificationStatus });
-            }
+
+            return RedirectToAction("Home", new { page = 1, status = (int?)model.SelectedNotificationStatus });
         }
 
         [HttpGet]
