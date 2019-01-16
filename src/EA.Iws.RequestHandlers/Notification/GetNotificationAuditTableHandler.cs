@@ -33,7 +33,7 @@
             var notificationAuditTable = mapper.Map<IEnumerable<Audit>, NotificationAuditTable>(notificationAudits);
             notificationAuditTable.PageNumber = message.PageNumber;
             notificationAuditTable.PageSize = PageSize;
-            notificationAuditTable.NumberOfShipments = await repository.GetTotalNumberOfNotificationAudits(message.NotificationId);
+            notificationAuditTable.NumberOfNotificationAudits = await repository.GetTotalNumberOfNotificationAudits(message.NotificationId);
 
             return notificationAuditTable;
         }

@@ -20,7 +20,7 @@
 
             PageSize = data.PageSize;
             PageNumber = data.PageNumber;
-            NumberOfShipments = data.NumberOfShipments;
+            NumberOfNotificationAudits = data.NumberOfNotificationAudits;
         }
 
         public Guid NotificationId { get; set; }
@@ -30,8 +30,7 @@
         public int PageSize { get; set; }
 
         public int PageNumber { get; set; }
-
-        //Rename this
-        public int NumberOfShipments { get; set; }
+        
+        public int NumberOfNotificationAudits { get; set; }
     }
 }

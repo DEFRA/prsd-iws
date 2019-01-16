@@ -9,9 +9,8 @@
     public class NotificationAuditTable
     {
         public List<NotificationAuditForDisplay> TableData { get; set; }
-
-        //COULLM: rename this property
-        public int NumberOfShipments { get; set; }
+        
+        public int NumberOfNotificationAudits { get; set; }
 
         public int PageNumber { get; set; }
 
