@@ -29,7 +29,14 @@
 
             if (id != null)
             {
-                await notificationApplicationAuthorization.EnsureAccessAsync(id.Value);
+                try
+                {
+                    await notificationApplicationAuthorization.EnsureAccessAsync(id.Value);
+                }
+                catch (Exception)
+                {
+                    return null;
+                }
             }
 
             return id;
