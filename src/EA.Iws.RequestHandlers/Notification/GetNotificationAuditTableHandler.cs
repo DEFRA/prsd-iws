@@ -16,7 +16,7 @@
         private readonly IMapper mapper;
         private readonly INotificationAuditRepository repository;
 
-        private const int PageSize = 1;
+        private const int PageSize = 20;
 
         public GetNotificationAuditTableHandler(IwsContext context, IMapper mapper, 
             INotificationAuditRepository repository)
@@ -33,8 +33,7 @@
             var notificationAuditTable = mapper.Map<IEnumerable<Audit>, NotificationAuditTable>(notificationAudits);
             notificationAuditTable.PageNumber = message.PageNumber;
             notificationAuditTable.PageSize = PageSize;
-            //COULLM: Replace the hardcoded value below
-            notificationAuditTable.NumberOfShipments = 2;
+            notificationAuditTable.NumberOfShipments = await repository.GetTotalNumberOfNotificationAudits(message.NotificationId);
 
             return notificationAuditTable;
         }

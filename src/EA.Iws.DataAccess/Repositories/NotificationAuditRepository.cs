@@ -58,5 +58,13 @@
 
             return retval;
         }
+
+        public async Task<int> GetTotalNumberOfNotificationAudits(Guid notificationId)
+        {
+            await notificationApplicationAuthorization.EnsureAccessAsync(notificationId);
+
+            return await context.NotificationAudit
+                .CountAsync(m => m.NotificationId == notificationId);
+        }
     }
 }
