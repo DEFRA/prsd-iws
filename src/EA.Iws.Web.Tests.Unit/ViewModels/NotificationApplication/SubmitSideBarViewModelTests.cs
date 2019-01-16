@@ -101,14 +101,13 @@
         [InlineData(false, false, true)]
         [InlineData(false, true, false)]
         [InlineData(false, true, true)]
-        
         public void ShowViewUpdateHistoryLink_LinkShown(bool isInternalUser, bool isOwner, bool isSharedUser)
         {
-            var model = A.Fake<SubmitSideBarViewModel>();
+            var model = new SubmitSideBarViewModel();
 
-            A.CallTo(() => model.IsInternalUser).Returns(isInternalUser);
-            A.CallTo(() => model.IsOwner).Returns(isOwner);
-            A.CallTo(() => model.IsSharedUser).Returns(isSharedUser);
+            model.IsOwner = isOwner;
+            model.IsSharedUser = isSharedUser;
+            model.IsInternalUser = isInternalUser;
 
             Assert.True(model.ShowViewUpdateHistoryLink);
         }
@@ -121,11 +120,11 @@
         [InlineData(true, true, true)]
         public void ShowViewUpdateHistoryLink_LinkHidden(bool isInternalUser, bool isOwner, bool isSharedUser)
         {
-            var model = A.Fake<SubmitSideBarViewModel>();
+            var model = new SubmitSideBarViewModel();
 
-            A.CallTo(() => model.IsInternalUser).Returns(isInternalUser);
-            A.CallTo(() => model.IsOwner).Returns(isOwner);
-            A.CallTo(() => model.IsSharedUser).Returns(isSharedUser);
+            model.IsOwner = isOwner;
+            model.IsSharedUser = isSharedUser;
+            model.IsInternalUser = isInternalUser;
 
             Assert.False(model.ShowViewUpdateHistoryLink);
         }
