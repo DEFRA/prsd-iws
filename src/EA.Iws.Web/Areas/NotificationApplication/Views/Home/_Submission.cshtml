@@ -9,24 +9,29 @@
                 <h2 class="heading-medium">@Model.NotificationNumber</h2>
                 <h1 class="heading-large">Notification overview</h1>
             </div>
-            <div id="submit-side-bar" style="background-color:#f8f8f8">
-                <h3 style="text-align:center; font-size:24px">Notification access level:</h3>
-                <h3 style="text-align:center; font-size:36px" >@Model.AccessLevelText</h3>
-            </div>
+            @if (Model.Status != NotificationStatus.NotSubmitted)
+            {
+                <div class="column" style="width:75%">
+                    <div id="submit-side-bar" style="background-color:#f8f8f8">
+                        <h3 style="text-align:center; font-size:24px">Notification access level:</h3>
+                        <h3 style="text-align:center; font-size:36px">@Model.AccessLevelText</h3>
+                    </div>
+                </div>
+            }
             <div>
                 <br />
             </div>
 
             <div>
                 @if (Model.ShowSubmitButton)
-            {
+                {
                     @Html.ActionLink("Submit notification", "Disclaimer", "Submit", null, new { @class = "button" })
                 }
 
                 else if (Model.ShowDisabledSubmitButtonAndGuidanceText)
                 {
                     <a href="#" class="button" disabled="disabled">Submit notification</a>
-                    <p>You can submit this notification once you've completed all sections</p>
+                            <p>You can submit this notification once you've completed all sections</p>
                 }
 
                 else if (Model.ShowResubmitButton)
@@ -89,7 +94,20 @@
                         new { data_track = "link", data_category = "Export notification", data_action = "Download" })
                 }
             </div>
+
+            @if (Model.Status == NotificationStatus.NotSubmitted)
+            {
+                
+                    <div class="pull-right">
+                        <div id="submit-side-bar" style="background-color:#f8f8f8">
+                            <h3 style="text-align:center; font-size:24px">Notification access level:</h3>
+                            <h3 style="text-align:center; font-size:36px">@Model.AccessLevelText</h3>
+                        </div>
+                        <div><br /></div>
+                    </div>
+            }
         </div>
+        
     </div>
 
     @if (!Model.IsNotificationComplete)

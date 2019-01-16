@@ -51,10 +51,10 @@
                 model.NumberToCreate = tempMovement.NumberToCreate;
                 model.Quantity = tempMovement.Quantity.ToString();
                 model.Units = tempMovement.ShipmentQuantityUnits;
-                model.PackagingTypes.SetSelectedValues(tempMovement.PackagingTypes);                      
+                model.PackagingTypes.SetSelectedValues(tempMovement.PackagingTypes);
             }
 
-            return View(model);
+            return View("Index", model);
         }
 
         [HttpPost]

@@ -1,15 +1,19 @@
 ﻿namespace EA.Iws.Web.Controllers
 {
-    using System;
-    using System.Threading.Tasks;
-    using System.Web.Mvc;
     using Infrastructure.Authorization;
     using Prsd.Core.Mediator;
     using Requests.Notification;
+    using Requests.SharedUsers;
     using Requests.Users;
+    using System;
+    using System.Linq;
+    using System.Threading.Tasks;
+    using System.Web.Mvc;
+    using Infrastructure;
     using ViewModels.ChangeNotificationOwner;
 
     [AuthorizeActivity(typeof(ChangeUser))]
+    [NotificationOwnerFilter]
     public class ChangeNotificationOwnerController : Controller
     {
         private readonly IMediator mediator;
@@ -42,6 +46,13 @@
                 ModelState.AddModelError("EmailAddress",
                     "The email address you have entered is not registered in IWS Online");
                 return View(model);
+            }
+
+            var existingSharedUsers = await mediator.SendAsync(new GetSharedUsersByNotificationId(model.NotificationId));
+
+            if (existingSharedUsers.Count(p => p.Email == model.EmailAddress) > 0)
+            {
+                return RedirectToAction("ReviewAccess", new { id = model.NotificationId });
             }
 
             TempData["EmailAddress"] = model.EmailAddress;
@@ -84,10 +95,19 @@
         }
 
         [HttpGet]
+        [SkipNotificationOwnerFilter]
         public ActionResult Success(Guid id)
         {
             var model = (ConfirmViewModel)TempData["ConfirmViewModel"];
 
+            return View(model);
+        }
+
+        [HttpGet]
+        public ActionResult ReviewAccess(Guid id)
+        {
+            var model = new ReviewAccessViewModel();
+            model.NotificationId = id;
             return View(model);
         }
     }
