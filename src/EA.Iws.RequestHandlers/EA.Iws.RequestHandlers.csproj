@@ -391,6 +391,7 @@
     <Compile Include="Mappings\Movement\MovementMap.cs" />
     <Compile Include="Mappings\NotificationAssessment\AccountManageDataMap.cs" />
     <Compile Include="Mappings\NotificationAssessment\ConsultationMap.cs" />
+    <Compile Include="Mappings\NotificationAssessment\NotificationAuditMap.cs" />
     <Compile Include="Mappings\NotificationAssessment\NotificationTransactionMap.cs" />
     <Compile Include="Mappings\Reports\DataImportNotificationMap.cs" />
     <Compile Include="Mappings\Reports\DataExportNotificationMap.cs" />
@@ -543,6 +544,7 @@
     <Compile Include="Notification\GetNotificationIdByNumberHandler.cs" />
     <Compile Include="Notification\GetNotificationNumberHandler.cs" />
     <Compile Include="Notification\GetNotificationOverviewInternalHandler.cs" />
+    <Compile Include="Notification\GetNotificationAuditHandler.cs" />
     <Compile Include="Notification\GetUserNotificationsSummaryHandler.cs" />
     <Compile Include="Notification\GetWhatToDoNextDataForNotificationHandler.cs" />
     <Compile Include="Notification\GetUnitedKingdomCompetentAuthorityByNotificationIdHandler.cs" />

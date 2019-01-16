@@ -8,5 +8,9 @@
         Task<InternalUser> GetByUserId(string userId);
 
         Task<InternalUser> GetByUserId(Guid userId);
+
+        Task<bool> IsUserInternal(string userId);
+
+        Task<bool> IsUserInternal(Guid userId);
     }
 }

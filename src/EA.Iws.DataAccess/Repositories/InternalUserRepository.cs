@@ -23,5 +23,15 @@
         {
             return await GetByUserId(userId.ToString());
         }
+
+        public async Task<bool> IsUserInternal(string userId)
+        {
+            return await context.InternalUsers.AnyAsync(u => u.UserId == userId.ToString());
+        }
+
+        public async Task<bool> IsUserInternal(Guid userId)
+        {
+            return await IsUserInternal(userId);
+        }
     }
 }

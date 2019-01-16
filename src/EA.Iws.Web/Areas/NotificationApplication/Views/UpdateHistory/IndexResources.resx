@@ -117,11 +117,32 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="TableCaption" xml:space="preserve">
+    <value>Notification Update History Search Results</value>
+  </data>
   <data name="TabTitle" xml:space="preserve">
     <value>Notification update history</value>
   </data>
+  <data name="ThDate" xml:space="preserve">
+    <value>Date</value>
+  </data>
+  <data name="ThInformationChange" xml:space="preserve">
+    <value>Information Change</value>
+  </data>
+  <data name="ThName" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="ThTime" xml:space="preserve">
+    <value>Time</value>
+  </data>
+  <data name="ThTypeOfChange" xml:space="preserve">
+    <value>Type of Change</value>
+  </data>
   <data name="Title" xml:space="preserve">
     <value>Notification update history</value>
+  </data>
+  <data name="TitleNotificationUpdateHistorySearchResults" xml:space="preserve">
+    <value>Notification Update History Search Results</value>
   </data>
   <data name="UpdateHistoryInfo" xml:space="preserve">
     <value>Information changes reflect the changes made by officers and administrators.</value>
