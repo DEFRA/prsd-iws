@@ -61,6 +61,15 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.UpdateHistory {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Notification Update History Search Results.
+        /// </summary>
+        public static string TableCaption {
+            get {
+                return ResourceManager.GetString("TableCaption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Notification update history.
         /// </summary>
         public static string TabTitle {
@@ -70,11 +79,65 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.UpdateHistory {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Date.
+        /// </summary>
+        public static string ThDate {
+            get {
+                return ResourceManager.GetString("ThDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Information Change.
+        /// </summary>
+        public static string ThInformationChange {
+            get {
+                return ResourceManager.GetString("ThInformationChange", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Name.
+        /// </summary>
+        public static string ThName {
+            get {
+                return ResourceManager.GetString("ThName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Time.
+        /// </summary>
+        public static string ThTime {
+            get {
+                return ResourceManager.GetString("ThTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Type of Change.
+        /// </summary>
+        public static string ThTypeOfChange {
+            get {
+                return ResourceManager.GetString("ThTypeOfChange", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Notification update history.
         /// </summary>
         public static string Title {
             get {
                 return ResourceManager.GetString("Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Notification Update History Search Results.
+        /// </summary>
+        public static string TitleNotificationUpdateHistorySearchResults {
+            get {
+                return ResourceManager.GetString("TitleNotificationUpdateHistorySearchResults", resourceCulture);
             }
         }
         

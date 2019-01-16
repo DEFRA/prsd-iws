@@ -6,5 +6,7 @@
     public interface INotificationAuditScreenRepository
     {
         Task<IEnumerable<AuditScreen>> GetNotificationAuditScreens();
+
+        Task<AuditScreen> GetNotificationAuditScreenById(int id);
     }
 }
