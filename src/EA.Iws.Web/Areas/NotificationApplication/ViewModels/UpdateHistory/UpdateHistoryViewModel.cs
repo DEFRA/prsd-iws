@@ -10,17 +10,28 @@
         {
         }
         
-        public UpdateHistoryViewModel(IEnumerable<NotificationAuditForDisplay> notificationUpdateHistory)
+        public UpdateHistoryViewModel(NotificationAuditTable data)
         {
             UpdateHistoryItems = new List<NotificationAuditForDisplay>();
-            foreach (NotificationAuditForDisplay updateHistory in notificationUpdateHistory)
+            foreach (NotificationAuditForDisplay updateHistory in data.TableData)
             {
                 UpdateHistoryItems.Add(updateHistory);
             }
+
+            PageSize = data.PageSize;
+            PageNumber = data.PageNumber;
+            NumberOfShipments = data.NumberOfShipments;
         }
 
         public Guid NotificationId { get; set; }
 
         public List<NotificationAuditForDisplay> UpdateHistoryItems { get; set; }
+
+        public int PageSize { get; set; }
+
+        public int PageNumber { get; set; }
+
+        //Rename this
+        public int NumberOfShipments { get; set; }
     }
 }
