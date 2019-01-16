@@ -2,20 +2,29 @@
 {
     using Areas.NotificationApplication.Controllers;
     using Areas.NotificationApplication.ViewModels.PhysicalCharacteristics;
+    using Core.Notification.Audit;
     using FakeItEasy;
     using Prsd.Core.Mediator;
+    using System;
     using System.Threading.Tasks;
     using System.Web.Mvc;
+    using Web.Infrastructure;
     using Web.ViewModels.Shared;
     using Xunit;
 
     public class PhysicalCharacteristicsControllerTests
     {
         private readonly PhysicalCharacteristicsController physicalCharacteristicsController;
+        private readonly IAuditService auditService;
+        private readonly IMediator mediator;
+        private readonly Guid notificationId = new Guid("DD1F019D-BD85-4A6F-89AB-328A7BD53CEA");
 
         public PhysicalCharacteristicsControllerTests()
         {
-            physicalCharacteristicsController = new PhysicalCharacteristicsController(A.Fake<IMediator>());
+            this.mediator = A.Fake<IMediator>();
+            this.auditService = A.Fake<IAuditService>();
+            physicalCharacteristicsController = new PhysicalCharacteristicsController(this.mediator, this.auditService);
+            A.CallTo(() => auditService.AddAuditEntry(this.mediator, notificationId, "user", NotificationAuditType.Create, "screen"));
         }
 
         [Fact]

@@ -1,12 +1,9 @@
 ﻿namespace EA.Iws.Web.Tests.Unit.Controllers.NotificationApplication
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Threading.Tasks;
-    using System.Web.Mvc;
     using Api.Client;
     using Areas.NotificationApplication.Controllers;
     using Areas.NotificationApplication.ViewModels.Producer;
+    using Core.Notification.Audit;
     using Core.Producers;
     using Core.Shared;
     using FakeItEasy;
@@ -14,11 +11,17 @@
     using Prsd.Core.Mediator;
     using Requests.Producers;
     using Requests.Shared;
+    using System;
+    using System.Collections.Generic;
+    using System.Threading.Tasks;
+    using System.Web.Mvc;
+    using Web.Infrastructure;
     using Xunit;
 
     public class ProducerControllerTests
     {
         private readonly IMediator mediator;
+        private readonly IAuditService auditService;
 
         private readonly Guid notificationId = new Guid("4AB23CDF-9B24-4598-A302-A69EBB5F2152");
         private readonly Guid producerId = new Guid("2196585B-F0F0-4A01-BC2F-EB8191B30FC6");
@@ -28,6 +31,7 @@
         public ProducerControllerTests()
         {
             mediator = A.Fake<IMediator>();
+            this.auditService = A.Fake<IAuditService>();
             A.CallTo(() => mediator.SendAsync(A<GetCountries>._)).Returns(new List<CountryData>
             {
                 new CountryData
@@ -43,7 +47,8 @@
             });
 
             A.CallTo(() => mediator.SendAsync(A<GetProducerForNotification>._)).Returns(CreateProducer(producerId));
-            producerController = new ProducerController(mediator, new AddAddressBookEntryMap());
+            producerController = new ProducerController(mediator, new AddAddressBookEntryMap(), this.auditService);
+            A.CallTo(() => auditService.AddAuditEntry(this.mediator, notificationId, "user", NotificationAuditType.Create, "screen"));
         }
 
         private ProducerData CreateProducer(Guid producerId)

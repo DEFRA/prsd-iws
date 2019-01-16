@@ -1,13 +1,12 @@
 ﻿namespace EA.Iws.Web.Areas.NotificationApplication.Controllers
 {
+    using Core.Notification.Audit;
+    using Infrastructure;
+    using Prsd.Core.Mediator;
+    using Requests.IntendedShipments;
     using System;
     using System.Threading.Tasks;
     using System.Web.Mvc;
-    using Infrastructure;
-    using Prsd.Core.Mediator;
-    using Prsd.Core.Web.ApiClient;
-    using Prsd.Core.Web.Mvc.Extensions;
-    using Requests.IntendedShipments;
     using ViewModels.Shipment;
 
     [Authorize]
@@ -15,10 +14,12 @@
     public class ShipmentController : Controller
     {
         private readonly IMediator mediator;
+        private readonly IAuditService auditService;
 
-        public ShipmentController(IMediator mediator)
+        public ShipmentController(IMediator mediator, IAuditService auditService)
         {
             this.mediator = mediator;
+            this.auditService = auditService;
         }
 
         [HttpGet]
@@ -42,7 +43,15 @@
                 return View(model);
             }
 
+            var existingShipmentData = await mediator.SendAsync(new GetIntendedShipmentInfoForNotification(id));
+
             await mediator.SendAsync(model.ToRequest(id));
+
+            await this.auditService.AddAuditEntry(this.mediator,
+                   id,
+                   User.GetUserId(),
+                   existingShipmentData.HasShipmentData ? NotificationAuditType.Update : NotificationAuditType.Create,
+                   "Amounts and dates");
 
             if (backToOverview.GetValueOrDefault())
             {

@@ -1,13 +1,14 @@
 ﻿namespace EA.Iws.Web.Areas.NotificationApplication.Controllers
 {
-    using System;
-    using System.Threading.Tasks;
-    using System.Web.Mvc;
+    using Core.Notification.Audit;
     using Infrastructure;
     using Prsd.Core.Mediator;
     using Prsd.Core.Web.ApiClient;
     using Prsd.Core.Web.Mvc.Extensions;
     using Requests.Notification;
+    using System;
+    using System.Threading.Tasks;
+    using System.Web.Mvc;
     using ViewModels.SpecialHandling;
 
     [Authorize]
@@ -15,10 +16,12 @@
     public class SpecialHandlingController : Controller
     {
         private readonly IMediator mediator;
+        private readonly IAuditService auditService;
 
-        public SpecialHandlingController(IMediator mediator)
+        public SpecialHandlingController(IMediator mediator, IAuditService auditService)
         {
             this.mediator = mediator;
+            this.auditService = auditService;
         }
 
         [HttpGet]
@@ -48,9 +51,16 @@
 
             try
             {
-                await
-                mediator.SendAsync(new SetSpecialHandling(model.NotificationId, model.HasSpecialHandlingRequirements.GetValueOrDefault(),
+                var specialHandlingData = await mediator.SendAsync(new GetSpecialHandingForNotification(model.NotificationId));
+
+                await mediator.SendAsync(new SetSpecialHandling(model.NotificationId, model.HasSpecialHandlingRequirements.GetValueOrDefault(),
                         model.SpecialHandlingDetails));
+
+                await this.auditService.AddAuditEntry(this.mediator,
+                    model.NotificationId,
+                    User.GetUserId(),
+                    specialHandlingData.HasSpecialHandlingRequirements == null ? NotificationAuditType.Create : NotificationAuditType.Update,
+                    "Special handling");
 
                 if (backToOverview.GetValueOrDefault())
                 {

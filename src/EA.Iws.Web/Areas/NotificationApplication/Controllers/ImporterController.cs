@@ -1,9 +1,7 @@
 ﻿namespace EA.Iws.Web.Areas.NotificationApplication.Controllers
 {
-    using System;
-    using System.Threading.Tasks;
-    using System.Web.Mvc;
     using Core.AddressBook;
+    using Core.Notification.Audit;
     using Infrastructure;
     using Prsd.Core.Mapper;
     using Prsd.Core.Mediator;
@@ -11,6 +9,9 @@
     using Prsd.Core.Web.Mvc.Extensions;
     using Requests.AddressBook;
     using Requests.Importer;
+    using System;
+    using System.Threading.Tasks;
+    using System.Web.Mvc;
     using ViewModels.Importer;
 
     [Authorize]
@@ -19,11 +20,13 @@
     {
         private readonly IMediator mediator;
         private readonly IMapWithParameter<ImporterViewModel, AddressRecordType, AddAddressBookEntry> addressBookMapper;
+        private readonly IAuditService auditService;
 
-        public ImporterController(IMediator mediator, IMapWithParameter<ImporterViewModel, AddressRecordType, AddAddressBookEntry> addressBookMapper)
+        public ImporterController(IMediator mediator, IMapWithParameter<ImporterViewModel, AddressRecordType, AddAddressBookEntry> addressBookMapper, IAuditService auditService)
         {
             this.mediator = mediator;
             this.addressBookMapper = addressBookMapper;
+            this.auditService = auditService;
         }
 
         [HttpGet]
@@ -57,7 +60,16 @@
 
             try
             {
+                var importer = await mediator.SendAsync(new GetImporterByNotificationId(model.NotificationId));
+
                 await mediator.SendAsync(model.ToRequest());
+
+                await this.auditService.AddAuditEntry(this.mediator,
+                   model.NotificationId,
+                   User.GetUserId(),
+                   importer.HasImporter ? NotificationAuditType.Update : NotificationAuditType.Create,
+                   "Importer");
+
                 await AddToProducerAddressBook(model);
 
                 if (backToOverview.GetValueOrDefault())

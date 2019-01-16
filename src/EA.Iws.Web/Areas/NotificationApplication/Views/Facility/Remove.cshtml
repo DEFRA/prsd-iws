@@ -14,6 +14,7 @@
         @Html.Gds().ValidationSummary()
         @Html.HiddenFor(m => m.NotificationId)
         @Html.HiddenFor(m => m.FacilityId)
+        @Html.HiddenFor(m => m.NotificationType)
 
         <p>@Html.Raw(string.Format(RemoveFacilityResources.RemoveMessage, Model.FacilityName))</p>
 

@@ -80,6 +80,10 @@
     <Content Include="scripts\Update\0004-CI\Sprint4\20170829-141800-update-shipments-cache.sql" />
     <Content Include="scripts\Update\0005-Beta\Sprint1\20181213-094200-add-shared-user-table.sql" />
     <Content Include="scripts\Update\0005-Beta\Sprint1\20181213-094300-add-shared-user-history-table.sql" />
+    <Content Include="scripts\Update\0005-Beta\Sprint3\20190108-141200-add-lookup-audit-type-table.sql" />
+    <Content Include="scripts\Update\0005-Beta\Sprint3\20190108-141300-add-lookup-audit-screen-table.sql" />
+    <Content Include="scripts\Update\0005-Beta\Sprint3\20190108-141400-add-notification-audit-table.sql" />
+    <Content Include="scripts\Update\0005-Beta\Sprint3\20190108-141500-add-lookup-audit-data.sql" />
     <Content Include="unindexed-foreign-keys.sql" />
     <Content Include="scripts\Everytime\01-Functions\0003-Reports-PricingInfo.sql" />
     <Content Include="scripts\Everytime\03-StoredProcedures\0003-uspUpdateImportNotificationKeyDates.sql" />

@@ -1,14 +1,16 @@
 ﻿namespace EA.Iws.Web.Areas.NotificationApplication.Controllers
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Threading.Tasks;
-    using System.Web.Mvc;
+    using Core.Notification.Audit;
     using Core.WasteCodes;
     using Infrastructure;
     using Prsd.Core.Mapper;
     using Prsd.Core.Mediator;
     using Requests.WasteCodes;
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
+    using System.Web.Mvc;
     using ViewModels.EwcCode;
     using ViewModels.WasteCodes;
 
@@ -16,11 +18,11 @@
     [NotificationReadOnlyFilter]
     public class EwcCodeController : BaseWasteCodeController
     {
-        private static readonly IList<CodeType> ewcCodeTypes = new[] { CodeType.Ewc }; 
+        private static readonly IList<CodeType> ewcCodeTypes = new[] { CodeType.Ewc };
         private readonly IMap<WasteCodeDataAndNotificationData, EwcCodeViewModel> mapper;
 
-        public EwcCodeController(IMediator mediator, 
-            IMap<WasteCodeDataAndNotificationData, EwcCodeViewModel> mapper) : base(mediator, CodeType.Ewc)
+        public EwcCodeController(IMediator mediator,
+            IMap<WasteCodeDataAndNotificationData, EwcCodeViewModel> mapper, IAuditService auditService) : base(mediator, CodeType.Ewc, auditService)
         {
             this.mapper = mapper;
         }
@@ -45,8 +47,12 @@
 
         protected override async Task<ActionResult> ContinueAction(Guid id, BaseWasteCodeViewModel viewModel, bool backToOverview)
         {
+            var existingData = await Mediator.SendAsync(new GetWasteCodeLookupAndNotificationDataByTypes(id, ewcCodeTypes, ewcCodeTypes));
+
             await
                 Mediator.SendAsync(new SetEwcCodes(id, viewModel.EnterWasteCodesViewModel.SelectedWasteCodes));
+
+            await this.AddAuditEntries(existingData, viewModel, id, "EWC codes");
 
             return (backToOverview)
                 ? BackToOverviewResult(id)

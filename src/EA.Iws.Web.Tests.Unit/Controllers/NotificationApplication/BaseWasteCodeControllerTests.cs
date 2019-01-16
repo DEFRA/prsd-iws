@@ -1,14 +1,16 @@
 ﻿namespace EA.Iws.Web.Tests.Unit.Controllers.NotificationApplication
 {
+    using Areas.NotificationApplication.Controllers;
+    using Areas.NotificationApplication.ViewModels.WasteCodes;
+    using Core.Notification.Audit;
+    using Core.WasteCodes;
+    using FakeItEasy;
+    using Prsd.Core.Mediator;
     using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
     using System.Web.Mvc;
-    using Areas.NotificationApplication.Controllers;
-    using Areas.NotificationApplication.ViewModels.WasteCodes;
-    using Core.WasteCodes;
-    using FakeItEasy;
-    using Prsd.Core.Mediator;
+    using Web.Infrastructure;
     using Xunit;
 
     public class BaseWasteCodeControllerTests
@@ -21,11 +23,15 @@
         private readonly List<Guid> selectedCodes = new List<Guid>();
         private readonly TestViewModel viewModel;
 
+        private readonly IMediator mediator;
+        private readonly IAuditService auditService;
+
         public BaseWasteCodeControllerTests()
         {
-            var mediator = A.Fake<IMediator>();
+            this.mediator = A.Fake<IMediator>();
+            this.auditService = A.Fake<IAuditService>();
 
-            controller = new TestController(mediator, CodeType.Y);
+            controller = new TestController(mediator, CodeType.Y, this.auditService);
 
             viewModel = new TestViewModel
             {
@@ -34,6 +40,8 @@
                     SelectedWasteCodes = selectedCodes
                 }
             };
+
+            A.CallTo(() => auditService.AddAuditEntry(this.mediator, AnyGuid, "user", NotificationAuditType.Create, "screen"));
         }
 
         [Fact]
@@ -177,8 +185,8 @@
 
         private class TestController : BaseWasteCodeController
         {
-            public TestController(IMediator mediator, CodeType codeType)
-                : base(mediator, codeType)
+            public TestController(IMediator mediator, CodeType codeType, IAuditService auditService)
+                : base(mediator, codeType, auditService)
             {
             }
 

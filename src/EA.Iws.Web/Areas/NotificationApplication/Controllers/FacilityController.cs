@@ -1,9 +1,6 @@
 ﻿namespace EA.Iws.Web.Areas.NotificationApplication.Controllers
 {
-    using System;
-    using System.Linq;
-    using System.Threading.Tasks;
-    using System.Web.Mvc;
+    using Core.Notification.Audit;
     using Core.Shared;
     using Infrastructure;
     using Prsd.Core.Mapper;
@@ -13,6 +10,10 @@
     using Requests.AddressBook;
     using Requests.Facilities;
     using Requests.Notification;
+    using System;
+    using System.Linq;
+    using System.Threading.Tasks;
+    using System.Web.Mvc;
     using ViewModels.Facility;
     using Web.ViewModels.Shared;
 
@@ -22,11 +23,13 @@
     {
         private readonly IMediator mediator;
         private readonly IMap<AddFacilityViewModel, AddAddressBookEntry> addFacilityAddressBookMap;
+        private readonly IAuditService auditService;
 
-        public FacilityController(IMediator mediator, IMap<AddFacilityViewModel, AddAddressBookEntry> addFacilityAddressBookMap)
+        public FacilityController(IMediator mediator, IMap<AddFacilityViewModel, AddAddressBookEntry> addFacilityAddressBookMap, IAuditService auditService)
         {
             this.mediator = mediator;
             this.addFacilityAddressBookMap = addFacilityAddressBookMap;
+            this.auditService = auditService;
         }
 
         [HttpGet]
@@ -58,6 +61,12 @@
             try
             {
                 await mediator.SendAsync(model.ToRequest());
+
+                await this.auditService.AddAuditEntry(this.mediator,
+                    model.NotificationId,
+                    User.GetUserId(),
+                    NotificationAuditType.Create,
+                    model.NotificationType == NotificationType.Disposal ? "Disposal facilities" : "Recovery facilities");
 
                 if (model.IsAddedToAddressBook)
                 {
@@ -112,6 +121,12 @@
                 var request = model.ToRequest();
 
                 await mediator.SendAsync(request);
+
+                await this.auditService.AddAuditEntry(this.mediator,
+                    model.NotificationId,
+                    User.GetUserId(),
+                    NotificationAuditType.Update,
+                    model.NotificationType == NotificationType.Disposal ? "Disposal facilities" : "Recovery facilities");
 
                 if (model.IsAddedToAddressBook)
                 {
@@ -187,10 +202,25 @@
                     return View(model);
                 }
 
+                var existingFacilities = await mediator.SendAsync(new GetFacilitiesByNotificationId(model.NotificationId));
+
                 await
                     mediator.SendAsync(
                         new SetActualSiteOfTreatment(model.SelectedSiteOfTreatment.GetValueOrDefault(),
                             model.NotificationId));
+
+                NotificationAuditType type = NotificationAuditType.Create;
+
+                if (existingFacilities != null && existingFacilities.Count(p => p.IsActualSiteOfTreatment) > 0)
+                {
+                    type = NotificationAuditType.Update;
+                }
+
+                await this.auditService.AddAuditEntry(mediator,
+                    model.NotificationId,
+                    User.GetUserId(),
+                    type,
+                    model.NotificationType == NotificationType.Disposal ? "Disposal site" : "Recovery site");
 
                 if (backToList.GetValueOrDefault())
                 {
@@ -246,9 +276,17 @@
                 return View(model);
             }
 
+            var preconsentedFacilityData = await mediator.SendAsync(new GetIsPreconsentedRecoveryFacility(id));
+
             var isPreconsented = model.Value.Value;
 
             await mediator.SendAsync(new SetPreconsentedRecoveryFacility(id, isPreconsented));
+
+            await this.auditService.AddAuditEntry(this.mediator,
+                    id,
+                    User.GetUserId(),
+                    preconsentedFacilityData.IsPreconsentedRecoveryFacility == null ? NotificationAuditType.Create : NotificationAuditType.Update,
+                    "Pre-consented facility");
 
             if (backToOverview.GetValueOrDefault())
             {
@@ -295,6 +333,13 @@
             try
             {
                 await mediator.SendAsync(new DeleteFacilityForNotification(model.NotificationId, model.FacilityId));
+
+                await this.auditService.AddAuditEntry(this.mediator,
+                    model.NotificationId,
+                    User.GetUserId(),
+                    NotificationAuditType.Delete,
+                    model.NotificationType == NotificationType.Disposal ? "Disposal facilities" : "Recovery facilities");
+
                 return RedirectToAction("List", "Facility", new { id = model.NotificationId, backToOverview });
             }
             catch (ApiBadRequestException ex)

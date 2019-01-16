@@ -1,8 +1,6 @@
 ﻿namespace EA.Iws.Web.Areas.NotificationApplication.Controllers
 {
-    using System;
-    using System.Threading.Tasks;
-    using System.Web.Mvc;
+    using Core.Notification.Audit;
     using Core.Shared;
     using Core.WasteCodes;
     using Infrastructure;
@@ -10,6 +8,10 @@
     using Prsd.Core.Mediator;
     using Requests.Notification;
     using Requests.WasteCodes;
+    using System;
+    using System.Linq;
+    using System.Threading.Tasks;
+    using System.Web.Mvc;
     using ViewModels.CustomWasteCode;
 
     [Authorize]
@@ -18,11 +20,13 @@
     {
         private readonly IMediator mediator;
         private readonly IMap<WasteCodeDataAndNotificationData, CustomWasteCodesViewModel> mapper;
+        private readonly IAuditService auditService;
 
-        public CustomWasteCodeController(IMediator mediator, IMap<WasteCodeDataAndNotificationData, CustomWasteCodesViewModel> mapper)
+        public CustomWasteCodeController(IMediator mediator, IMap<WasteCodeDataAndNotificationData, CustomWasteCodesViewModel> mapper, IAuditService auditService)
         {
             this.mediator = mediator;
             this.mapper = mapper;
+            this.auditService = auditService;
         }
 
         [HttpGet]
@@ -49,6 +53,15 @@
                 return View(model);
             }
 
+            var existingData = await mediator.SendAsync(
+                        new GetWasteCodeLookupAndNotificationDataByTypes(id, null, new[]
+                            {
+                                CodeType.ExportCode,
+                                CodeType.ImportCode,
+                                CodeType.CustomsCode,
+                                CodeType.OtherCode
+                            }));
+
             await
                 mediator.SendAsync(new SetCustomWasteCodes(id,
                         model.ExportNationalCode,
@@ -59,6 +72,12 @@
                         model.CustomsCodeNotApplicable,
                         model.OtherCode,
                         model.OtherCodeNotApplicable));
+
+            await this.auditService.AddAuditEntry(this.mediator,
+                      id,
+                      User.GetUserId(),
+                      existingData.NotificationWasteCodeData[CodeType.ExportCode].Count() == 0 ? NotificationAuditType.Create : NotificationAuditType.Update,
+                      "Other codes");
 
             var notificationInfo = await mediator.SendAsync(new GetNotificationBasicInfo(id));
 

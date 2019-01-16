@@ -96,6 +96,8 @@
     <Compile Include="Mappings\Exports\AddressMapping.cs" />
     <Compile Include="Mappings\Common\BankHolidayMapping.cs" />
     <Compile Include="Mappings\Exports\AnnexCollectionMapping.cs" />
+    <Compile Include="Mappings\Exports\AuditMapping.cs" />
+    <Compile Include="Mappings\Exports\AuditScreenMapping.cs" />
     <Compile Include="Mappings\Exports\CarrierCollectionMapping.cs" />
     <Compile Include="Mappings\Exports\ConsentMapping.cs" />
     <Compile Include="Mappings\Common\CompetentAuthorityBacsDetailsMapping.cs" />
@@ -260,6 +262,8 @@
     <Compile Include="Repositories\NotificationAssessmentDatesSummaryRepository.cs" />
     <Compile Include="Repositories\NotificationAssessmentDecisionRepository.cs" />
     <Compile Include="Repositories\NotificationAttentionSummaryRepository.cs" />
+    <Compile Include="Repositories\NotificationAuditRepository.cs" />
+    <Compile Include="Repositories\NotificationAuditScreenRepository.cs" />
     <Compile Include="Repositories\NotificationConsentRepository.cs" />
     <Compile Include="Repositories\NotificationApplicationOverviewRepository.cs" />
     <Compile Include="Repositories\NotificationMovementsSummaryRepository.cs" />

@@ -20,7 +20,7 @@
 
         private static readonly IList<CodeType> codeTypes = new[] { CodeType.H }; 
 
-        public HCodeController(IMediator mediator, IMap<WasteCodeDataAndNotificationData, HCodeViewModel> mapper) : base(mediator, CodeType.H)
+        public HCodeController(IMediator mediator, IMap<WasteCodeDataAndNotificationData, HCodeViewModel> mapper, IAuditService auditService) : base(mediator, CodeType.H, auditService)
         {
             this.mapper = mapper;
         }
@@ -44,9 +44,13 @@
 
         protected override async Task<ActionResult> ContinueAction(Guid id, BaseWasteCodeViewModel viewModel, bool backToOverview)
         {
+            var existingData = await Mediator.SendAsync(new GetWasteCodeLookupAndNotificationDataByTypes(id, codeTypes, codeTypes));
+
             await
                 Mediator.SendAsync(new SetHCodes(id, viewModel.EnterWasteCodesViewModel.SelectedWasteCodes,
                         viewModel.EnterWasteCodesViewModel.IsNotApplicable));
+
+            await this.AddAuditEntries(existingData, viewModel, id, "H or HP codes");
 
             return (backToOverview) ? BackToOverviewResult(id) 
                 : RedirectToAction("Index", "UnClass", new { id });
