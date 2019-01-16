@@ -72,13 +72,17 @@
                 {
                     @Html.ActionLink("Download financial guarantee", "GenerateFinancialGuaranteeDocument", "Home", new { area = "FinancialGuarantee", competentAuthority = Model.CompetentAuthority }, null)
                 }
-                <br />
                 @if (Model.Status != NotificationStatus.NotSubmitted)
                 {
+                    <br />
                     @Html.ActionLink("Download notification", "GenerateNotificationDocument", "Home", new { id = Model.NotificationId },
                         new { data_track = "link", data_category = "Export notification", data_action = "Download" })
                 }
-
+                @if (Model.ShowViewUpdateHistoryLink)
+                {
+                    <br />
+                    @Html.ActionLink("View update history", "Index", "UpdateHistory", new { id = Model.NotificationId }, null)
+                }
                 @if (Model.ShowSubmitButton)
                 {
                     @Html.ActionLink("View preview of my notification", "GenerateNotificationPreviewDocument", "Home", new { id = Model.NotificationId },

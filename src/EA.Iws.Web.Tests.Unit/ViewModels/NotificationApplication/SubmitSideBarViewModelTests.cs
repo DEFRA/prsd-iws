@@ -3,6 +3,7 @@
     using Areas.NotificationApplication.ViewModels.NotificationApplication;
     using Core.Notification;
     using Core.NotificationAssessment;
+    using FakeItEasy;
     using Xunit;
 
     public class SubmitSideBarViewModelTests
@@ -20,6 +21,16 @@
             };
 
             return new SubmitSideBarViewModel(submitSummaryData, 500, progress);
+        }
+
+        public SubmitSideBarViewModel CreateModel(bool isOwner, bool isSharedUser)
+        {
+            var model = new SubmitSideBarViewModel();
+
+            model.IsOwner = isOwner;
+            model.IsSharedUser = isSharedUser;
+
+            return model;
         }
 
         [Fact]
@@ -84,6 +95,38 @@
             var model = CreateModel(isComplete: true, status: NotificationStatus.Unlocked);
 
             Assert.True(model.ShowResubmitButton);
+        }
+
+        [Theory]
+        [InlineData(false, false, true)]
+        [InlineData(false, true, false)]
+        [InlineData(false, true, true)]
+        public void ShowViewUpdateHistoryLink_LinkShown(bool isInternalUser, bool isOwner, bool isSharedUser)
+        {
+            var model = new SubmitSideBarViewModel();
+
+            model.IsOwner = isOwner;
+            model.IsSharedUser = isSharedUser;
+            model.IsInternalUser = isInternalUser;
+
+            Assert.True(model.ShowViewUpdateHistoryLink);
+        }
+
+        [Theory]
+        [InlineData(false, false, false)]
+        [InlineData(true, false, false)]
+        [InlineData(true, false, true)]
+        [InlineData(true, true, false)]
+        [InlineData(true, true, true)]
+        public void ShowViewUpdateHistoryLink_LinkHidden(bool isInternalUser, bool isOwner, bool isSharedUser)
+        {
+            var model = new SubmitSideBarViewModel();
+
+            model.IsOwner = isOwner;
+            model.IsSharedUser = isSharedUser;
+            model.IsInternalUser = isInternalUser;
+
+            Assert.False(model.ShowViewUpdateHistoryLink);
         }
     }
 }
