@@ -1,16 +1,18 @@
 ﻿namespace EA.Iws.Web.Tests.Unit.Controllers.NotificationApplication
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Threading.Tasks;
-    using System.Web.Mvc;
     using Areas.NotificationApplication.Controllers;
     using Areas.NotificationApplication.ViewModels.ChemicalComposition;
+    using Core.Notification.Audit;
     using Core.WasteType;
     using FakeItEasy;
     using Mappings;
     using Prsd.Core.Mediator;
     using Requests.WasteType;
+    using System;
+    using System.Collections.Generic;
+    using System.Threading.Tasks;
+    using System.Web.Mvc;
+    using Web.Infrastructure;
     using Web.ViewModels.Shared;
     using Xunit;
 
@@ -19,11 +21,14 @@
         private readonly IMediator mediator;
         private readonly ChemicalCompositionController chemicalCompositionController;
         private readonly Guid notificationId = new Guid("D711F96B-3AF8-46BC-91B9-B906F764FF22");
+        private readonly IAuditService auditService;
 
         public ChemicalCompositionControllerTests()
         {
             mediator = A.Fake<IMediator>();
-            chemicalCompositionController = new ChemicalCompositionController(mediator, new ChemicalCompositionMap());
+            this.auditService = A.Fake<IAuditService>();
+            chemicalCompositionController = new ChemicalCompositionController(mediator, new ChemicalCompositionMap(), this.auditService);
+            A.CallTo(() => auditService.AddAuditEntry(this.mediator, notificationId, "user", NotificationAuditType.Create, "screen"));
         }
 
         [Theory]

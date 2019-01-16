@@ -1,9 +1,5 @@
 ﻿namespace EA.Iws.DataAccess
 {
-    using System;
-    using System.Data.Entity;
-    using System.Security;
-    using System.Threading.Tasks;
     using Domain;
     using Domain.AddressBook;
     using Domain.Finance;
@@ -20,6 +16,10 @@
     using Mappings.Exports;
     using Prsd.Core.Domain;
     using Prsd.Core.Domain.Auditing;
+    using System;
+    using System.Data.Entity;
+    using System.Security;
+    using System.Threading.Tasks;
 
     public class IwsContext : ContextBase
     {
@@ -103,6 +103,10 @@
         public virtual DbSet<SharedUser> SharedUser { get; set; }
 
         public virtual DbSet<SharedUserHistory> SharedUserHistory { get; set; }
+
+        public virtual DbSet<Audit> NotificationAudit { get; set; }
+
+        public virtual DbSet<AuditScreen> NotificationAuditScreens { get; set; }
 
         public virtual DbSet<CarrierCollection> Carriers { get; set; }
 

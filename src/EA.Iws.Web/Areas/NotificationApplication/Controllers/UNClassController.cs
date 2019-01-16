@@ -19,7 +19,7 @@
         private readonly IMap<WasteCodeDataAndNotificationData, UNClassViewModel> mapper;
         private static readonly IList<CodeType> codeTypes = new[] { CodeType.Un }; 
 
-        public UnClassController(IMediator mediator, IMap<WasteCodeDataAndNotificationData, UNClassViewModel> mapper) : base(mediator, CodeType.Un)
+        public UnClassController(IMediator mediator, IMap<WasteCodeDataAndNotificationData, UNClassViewModel> mapper, IAuditService auditService) : base(mediator, CodeType.Un, auditService)
         {
             this.mapper = mapper;
         }
@@ -43,9 +43,13 @@
 
         protected override async Task<ActionResult> ContinueAction(Guid id, BaseWasteCodeViewModel viewModel, bool backToOverview)
         {
+            var existingData = await Mediator.SendAsync(new GetWasteCodeLookupAndNotificationDataByTypes(id, codeTypes, codeTypes));
+
             await
                 Mediator.SendAsync(new SetUNClasses(id, viewModel.EnterWasteCodesViewModel.SelectedWasteCodes,
                         viewModel.EnterWasteCodesViewModel.IsNotApplicable));
+
+            await this.AddAuditEntries(existingData, viewModel, id, "UN classes");
 
             return (backToOverview) ? BackToOverviewResult(id) 
                 : RedirectToAction("Index", "UnNumber", new { id });

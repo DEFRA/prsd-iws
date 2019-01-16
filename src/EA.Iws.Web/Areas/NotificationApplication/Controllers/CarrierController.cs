@@ -1,12 +1,8 @@
 ﻿namespace EA.Iws.Web.Areas.NotificationApplication.Controllers
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Threading.Tasks;
-    using System.Web.Mvc;
     using Core.AddressBook;
     using Core.Carriers;
+    using Core.Notification.Audit;
     using Infrastructure;
     using Prsd.Core.Mapper;
     using Prsd.Core.Mediator;
@@ -14,6 +10,11 @@
     using Prsd.Core.Web.Mvc.Extensions;
     using Requests.AddressBook;
     using Requests.Carriers;
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
+    using System.Web.Mvc;
     using ViewModels.Carrier;
 
     [Authorize]
@@ -22,11 +23,13 @@
     {
         private readonly IMediator mediator;
         private readonly IMap<AddCarrierViewModel, AddAddressBookEntry> addCarrierAddressBookMap;
+        private readonly IAuditService auditService;
 
-        public CarrierController(IMediator mediator, IMap<AddCarrierViewModel, AddAddressBookEntry> addCarrierAddressBookMap)
+        public CarrierController(IMediator mediator, IMap<AddCarrierViewModel, AddAddressBookEntry> addCarrierAddressBookMap, IAuditService auditService)
         {
             this.mediator = mediator;
             this.addCarrierAddressBookMap = addCarrierAddressBookMap;
+            this.auditService = auditService;
         }
 
         [HttpGet]
@@ -51,6 +54,12 @@
             try
             {
                 await mediator.SendAsync(model.ToRequest());
+
+                await this.auditService.AddAuditEntry(this.mediator,
+                    model.NotificationId,
+                    User.GetUserId(),
+                    NotificationAuditType.Create,
+                    "Intended carrier");
 
                 if (model.IsAddedToAddressBook)
                 {
@@ -99,6 +108,12 @@
                 var request = model.ToRequest();
 
                 await mediator.SendAsync(request);
+
+                await this.auditService.AddAuditEntry(this.mediator,
+                    model.NotificationId,
+                    User.GetUserId(),
+                    NotificationAuditType.Update,
+                    "Intended carrier");
 
                 if (model.IsAddedToAddressBook)
                 {
@@ -160,6 +175,12 @@
             try
             {
                 await mediator.SendAsync(new DeleteCarrierForNotification(model.NotificationId, model.CarrierId));
+
+                await this.auditService.AddAuditEntry(this.mediator,
+                    model.NotificationId,
+                    User.GetUserId(),
+                    NotificationAuditType.Delete,
+                    "Intended carrier");
             }
             catch (ApiBadRequestException ex)
             {

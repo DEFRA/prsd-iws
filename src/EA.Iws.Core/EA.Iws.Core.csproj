@@ -199,6 +199,9 @@
     <Compile Include="NotificationAssessment\NotificationAssessmentDecisionData.cs" />
     <Compile Include="NotificationAssessment\NotificationAttentionSummaryTableData.cs" />
     <Compile Include="NotificationAssessment\NotificationTransactionData.cs" />
+    <Compile Include="Notification\Audit\NotificationAudit.cs" />
+    <Compile Include="Notification\Audit\NotificationAuditScreen.cs" />
+    <Compile Include="Notification\Audit\NotificationAuditType.cs" />
     <Compile Include="Notification\NotificationSharedUser.cs" />
     <Compile Include="Notification\NotificationSharedUserHistory.cs" />
     <Compile Include="Notification\UserNotificationsSummary.cs" />

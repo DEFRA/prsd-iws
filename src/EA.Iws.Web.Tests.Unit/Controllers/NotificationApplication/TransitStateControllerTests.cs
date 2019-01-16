@@ -2,6 +2,7 @@
 {
     using Areas.NotificationApplication.Controllers;
     using Areas.NotificationApplication.ViewModels.TransitState;
+    using Core.Notification.Audit;
     using Core.Shared;
     using Core.TransportRoute;
     using FakeItEasy;
@@ -14,11 +15,13 @@
     using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Mvc;
+    using Web.Infrastructure;
     using Xunit;
 
     public class TransitStateControllerTests
     {
         private readonly IMediator mediator;
+        private readonly IAuditService auditService;
         private readonly TransitStateController transitStateController;
         private const string UnitedKingdom = "United Kingdom";
         private const string anyString = "test";
@@ -32,6 +35,7 @@
         public TransitStateControllerTests()
         {
             mediator = A.Fake<IMediator>();
+            this.auditService = A.Fake<IAuditService>();
             var competentAuthorties = new[] 
                 {
                     new CompetentAuthorityData { Id = environmentAgency.Id, Name = anyString }
@@ -47,7 +51,8 @@
                     CompetentAuthorities = competentAuthorties,
                     EntryOrExitPoints = entryOrExitPoints
                 });
-            transitStateController = new TransitStateController(mediator, new TestMap());
+            transitStateController = new TransitStateController(mediator, new TestMap(), this.auditService);
+            A.CallTo(() => auditService.AddAuditEntry(this.mediator, notificationId, "user", NotificationAuditType.Create, "screen"));
         }
 
         [Theory]
