@@ -1,13 +1,14 @@
 ﻿namespace EA.Iws.Web.Areas.NotificationApplication.Controllers
 {
-    using System;
-    using System.Threading.Tasks;
-    using System.Web.Mvc;
+    using Core.Notification.Audit;
     using Infrastructure;
     using Prsd.Core.Mediator;
     using Prsd.Core.Web.ApiClient;
     using Prsd.Core.Web.Mvc.Extensions;
     using Requests.WasteType;
+    using System;
+    using System.Threading.Tasks;
+    using System.Web.Mvc;
     using ViewModels.WasteGenerationProcess;
 
     [Authorize]
@@ -15,10 +16,12 @@
     public class WasteGenerationProcessController : Controller
     {
         private readonly IMediator mediator;
+        private readonly IAuditService auditService;
 
-        public WasteGenerationProcessController(IMediator mediator)
+        public WasteGenerationProcessController(IMediator mediator, IAuditService auditService)
         {
             this.mediator = mediator;
+            this.auditService = auditService;
         }
 
         [HttpGet]
@@ -43,7 +46,15 @@
 
             try
             {
+                var wasteGenerationProcessData = await mediator.SendAsync(new GetWasteGenerationProcess(model.NotificationId));
+
                 await mediator.SendAsync(model.ToRequest());
+
+                await this.auditService.AddAuditEntry(this.mediator,
+                   model.NotificationId,
+                   User.GetUserId(),
+                   wasteGenerationProcessData.Process == null ? NotificationAuditType.Create : NotificationAuditType.Update,
+                   "Process of generation");
                 if (backToOverview.GetValueOrDefault())
                 {
                     return RedirectToAction("Index", "Home", new { id = model.NotificationId });

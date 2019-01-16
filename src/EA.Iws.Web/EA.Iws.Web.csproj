@@ -2266,6 +2266,8 @@
       <DependentUpon>NoChangesResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Areas\NotificationApplication\Controllers\ShareNotificationController.cs" />
+    <Compile Include="Infrastructure\AuditService.cs" />
+    <Compile Include="Infrastructure\IAuditService.cs" />
     <Compile Include="Infrastructure\Validation\NotificationShareUserValidationAttribute.cs" />
     <Compile Include="ViewModels\ChangeNotificationOwner\ChangeOwnerViewModel.cs" />
     <Compile Include="ViewModels\ChangeNotificationOwner\ConfirmViewModel.cs" />

@@ -1,9 +1,6 @@
 ﻿namespace EA.Iws.Web.Areas.NotificationApplication.Controllers
 {
-    using System;
-    using System.Linq;
-    using System.Threading.Tasks;
-    using System.Web.Mvc;
+    using Core.Notification.Audit;
     using Infrastructure;
     using Prsd.Core.Mapper;
     using Prsd.Core.Mediator;
@@ -11,6 +8,10 @@
     using Prsd.Core.Web.Mvc.Extensions;
     using Requests.AddressBook;
     using Requests.Producers;
+    using System;
+    using System.Linq;
+    using System.Threading.Tasks;
+    using System.Web.Mvc;
     using ViewModels.Producer;
 
     [Authorize]
@@ -19,11 +20,13 @@
     {
         private readonly IMediator mediator;
         private readonly IMap<AddProducerViewModel, AddAddressBookEntry> producerAddressBookMap;
+        private readonly IAuditService auditService;
 
-        public ProducerController(IMediator mediator, IMap<AddProducerViewModel, AddAddressBookEntry> producerAddressBookMap)
+        public ProducerController(IMediator mediator, IMap<AddProducerViewModel, AddAddressBookEntry> producerAddressBookMap, IAuditService auditService)
         {
             this.mediator = mediator;
             this.producerAddressBookMap = producerAddressBookMap;
+            this.auditService = auditService;
         }
 
         [HttpGet]
@@ -52,6 +55,12 @@
                 var request = model.ToRequest();
 
                 await mediator.SendAsync(request);
+
+                await this.auditService.AddAuditEntry(this.mediator,
+                    model.NotificationId,
+                    User.GetUserId(),
+                    NotificationAuditType.Create,
+                    "Producers");
 
                 if (model.IsAddedToAddressBook)
                 {
@@ -102,6 +111,12 @@
                 var request = model.ToRequest();
 
                 await mediator.SendAsync(request);
+
+                await this.auditService.AddAuditEntry(this.mediator,
+                    model.NotificationId,
+                    User.GetUserId(),
+                    NotificationAuditType.Update,
+                    "Producers");
 
                 if (model.IsAddedToAddressBook)
                 {
@@ -158,6 +173,13 @@
             try
             {
                 await mediator.SendAsync(new DeleteProducerForNotification(model.ProducerId, model.NotificationId));
+
+                await this.auditService.AddAuditEntry(this.mediator,
+                    model.NotificationId,
+                    User.GetUserId(),
+                    NotificationAuditType.Delete,
+                    "Producers");
+
                 return RedirectToAction("List", "Producer", new { id = model.NotificationId, backToOverview });
             }
             catch (ApiBadRequestException ex)
@@ -221,9 +243,25 @@
                 return View(model);
             }
 
+            var existingProducers =
+                await mediator.SendAsync(new GetProducersByNotificationId(model.NotificationId));
+
             await mediator.SendAsync(new SetSiteOfExport(
                 model.SelectedSiteOfExport.GetValueOrDefault(),
                 model.NotificationId));
+
+            NotificationAuditType type = NotificationAuditType.Create;
+
+            if (existingProducers != null && existingProducers.Count(p => p.IsSiteOfExport) > 0)
+            {
+                type = NotificationAuditType.Update;
+            }
+
+            await this.auditService.AddAuditEntry(mediator,
+                    model.NotificationId,
+                    User.GetUserId(),
+                    type,
+                    "Site of export");
 
             if (backToList.GetValueOrDefault())
             {

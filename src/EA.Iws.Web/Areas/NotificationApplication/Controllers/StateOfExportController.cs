@@ -1,5 +1,6 @@
 ﻿namespace EA.Iws.Web.Areas.NotificationApplication.Controllers
 {
+    using Core.Notification.Audit;
     using Core.Shared;
     using Core.StateOfExport;
     using Infrastructure;
@@ -19,11 +20,13 @@
     {
         private readonly IMediator mediator;
         private readonly IMap<StateOfExportWithTransportRouteData, StateOfExportViewModel> mapper;
+        private readonly IAuditService auditService;
 
-        public StateOfExportController(IMediator mediator, IMap<StateOfExportWithTransportRouteData, StateOfExportViewModel> mapper)
+        public StateOfExportController(IMediator mediator, IMap<StateOfExportWithTransportRouteData, StateOfExportViewModel> mapper, IAuditService auditService)
         {
             this.mediator = mediator;
             this.mapper = mapper;
+            this.auditService = auditService;
         }
 
         [HttpGet]
@@ -55,7 +58,15 @@
 
         private async Task<ActionResult> SubmitAction(Guid id, StateOfExportViewModel model, IMediator mediator, bool? backToOverview)
         {
+            var stateOfExportSetData = await mediator.SendAsync(new GetStateOfExportWithTransportRouteDataByNotificationId(id));
+
             await mediator.SendAsync(new SetStateOfExportForNotification(id, model.EntryOrExitPointId.Value));
+
+            await this.auditService.AddAuditEntry(this.mediator,
+                    id,
+                    User.GetUserId(),
+                    stateOfExportSetData.StateOfExport.ExitPoint == null ? NotificationAuditType.Create : NotificationAuditType.Update,
+                    "Export route");
 
             if (backToOverview.GetValueOrDefault())
             {

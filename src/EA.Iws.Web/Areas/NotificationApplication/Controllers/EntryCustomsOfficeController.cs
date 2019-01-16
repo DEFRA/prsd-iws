@@ -1,13 +1,14 @@
 ﻿namespace EA.Iws.Web.Areas.NotificationApplication.Controllers
 {
-    using System;
-    using System.Threading.Tasks;
-    using System.Web.Mvc;
     using Core.CustomsOffice;
+    using Core.Notification.Audit;
     using Infrastructure;
     using Prsd.Core.Mediator;
     using Requests.CustomsOffice;
     using Requests.Shared;
+    using System;
+    using System.Threading.Tasks;
+    using System.Web.Mvc;
     using ViewModels.CustomsOffice;
 
     [Authorize]
@@ -15,10 +16,12 @@
     public class EntryCustomsOfficeController : Controller
     {
         private readonly IMediator mediator;
+        private readonly IAuditService auditService;
 
-        public EntryCustomsOfficeController(IMediator mediator)
+        public EntryCustomsOfficeController(IMediator mediator, IAuditService auditService)
         {
             this.mediator = mediator;
+            this.auditService = auditService;
         }
 
         [HttpGet]
@@ -71,10 +74,18 @@
                 return View(model);
             }
 
+            var existingData = await mediator.SendAsync(new GetEntryCustomsOfficeAddDataByNotificationId(id));
+
             await mediator.SendAsync(new SetEntryCustomsOfficeForNotificationById(id,
                 model.Name,
                 model.Address,
                 model.SelectedCountry.Value));
+
+            await this.auditService.AddAuditEntry(this.mediator,
+                   id,
+                   User.GetUserId(),
+                   existingData.CustomsOfficeData == null ? NotificationAuditType.Create : NotificationAuditType.Update,
+                   "Customs office");
 
             return RedirectToAction("Index", "Shipment", new { id });
         }

@@ -2,12 +2,14 @@
 {
     using Areas.NotificationApplication.Controllers;
     using Areas.NotificationApplication.ViewModels.PackagingTypes;
+    using Core.Notification.Audit;
     using Core.PackagingType;
     using FakeItEasy;
     using Prsd.Core.Mediator;
     using System;
     using System.Threading.Tasks;
     using System.Web.Mvc;
+    using Web.Infrastructure;
     using Web.ViewModels.Shared;
     using Xunit;
 
@@ -15,10 +17,15 @@
     {
         private readonly Guid notificationId = new Guid("DD1F019D-BD85-4A6F-89AB-328A7BD53CEA");
         private readonly PackagingTypesController packagingTypesController;
+        private readonly IMediator mediator;
+        private readonly IAuditService auditService;
 
         public PackagingTypesControllerTests()
         {
-            packagingTypesController = new PackagingTypesController(A.Fake<IMediator>());
+            this.mediator = A.Fake<IMediator>();
+            this.auditService = A.Fake<IAuditService>();
+            packagingTypesController = new PackagingTypesController(A.Fake<IMediator>(), this.auditService);
+            A.CallTo(() => auditService.AddAuditEntry(this.mediator, notificationId, "user", NotificationAuditType.Create, "screen"));
         }
 
         private PackagingTypesViewModel CreateValidPackagingTypesViewModel()

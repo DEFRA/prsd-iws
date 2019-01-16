@@ -1,13 +1,14 @@
 ﻿namespace EA.Iws.Web.Areas.NotificationApplication.Controllers
 {
-    using System;
-    using System.Threading.Tasks;
-    using System.Web.Mvc;
     using Core.CustomsOffice;
+    using Core.Notification.Audit;
     using Infrastructure;
     using Prsd.Core.Mediator;
     using Requests.CustomsOffice;
     using Requests.Shared;
+    using System;
+    using System.Threading.Tasks;
+    using System.Web.Mvc;
     using ViewModels.CustomsOffice;
 
     [Authorize]
@@ -15,10 +16,12 @@
     public class ExitCustomsOfficeController : Controller
     {
         private readonly IMediator mediator;
+        private readonly IAuditService auditService;
 
-        public ExitCustomsOfficeController(IMediator mediator)
+        public ExitCustomsOfficeController(IMediator mediator, IAuditService auditService)
         {
             this.mediator = mediator;
+            this.auditService = auditService;
         }
 
         [HttpGet]
@@ -71,11 +74,19 @@
                 return View(model);
             }
 
+            var existingData = await mediator.SendAsync(new GetExitCustomsOfficeAddDataByNotificationId(id));
+
             CustomsOfficeCompletionStatus result = await mediator.SendAsync(
                 new SetExitCustomsOfficeForNotificationById(id,
                 model.Name,
                 model.Address,
                 model.SelectedCountry.Value));
+
+            await this.auditService.AddAuditEntry(this.mediator,
+                   id,
+                   User.GetUserId(),
+                   existingData.CustomsOfficeData == null ? NotificationAuditType.Create : NotificationAuditType.Update,
+                   "Customs office");
 
             switch (result.CustomsOfficesRequired)
             {

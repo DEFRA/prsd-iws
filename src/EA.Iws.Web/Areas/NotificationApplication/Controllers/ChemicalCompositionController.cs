@@ -1,15 +1,16 @@
 ﻿namespace EA.Iws.Web.Areas.NotificationApplication.Controllers
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Threading.Tasks;
-    using System.Web.Mvc;
+    using Core.Notification.Audit;
     using Core.WasteType;
     using Infrastructure;
     using Prsd.Core.Mapper;
     using Prsd.Core.Mediator;
     using Requests.WasteType;
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
+    using System.Web.Mvc;
     using ViewModels.ChemicalComposition;
     using Web.ViewModels.Shared;
 
@@ -20,6 +21,7 @@
         private const int NumberOfOtherCodesFields = 8;
         private const string NotApplicable = "NA";
         private readonly IMediator mediator;
+        private readonly IAuditService auditService;
 
         private readonly IMapWithParameter<WasteTypeData,
             ICollection<WoodInformationData>,
@@ -28,10 +30,12 @@
         public ChemicalCompositionController(IMediator mediator,
             IMapWithParameter<WasteTypeData,
             ICollection<WoodInformationData>,
-            ChemicalCompositionViewModel> chemicalCompositionInformationMap)
+            ChemicalCompositionViewModel> chemicalCompositionInformationMap,
+            IAuditService auditService)
         {
             this.mediator = mediator;
             this.chemicalCompositionInformationMap = chemicalCompositionInformationMap;
+            this.auditService = auditService;
         }
 
         [HttpGet]
@@ -101,12 +105,20 @@
                 return View(model);
             }
 
+            var existingWasteTypeData = await mediator.SendAsync(new GetWasteType(model.NotificationId));
+
             await mediator.SendAsync(new CreateWasteType
             {
                 NotificationId = model.NotificationId,
                 WasteCompositionName = model.Description,
                 ChemicalCompositionType = ChemicalComposition.Other
             });
+
+            await this.auditService.AddAuditEntry(this.mediator,
+                   model.NotificationId,
+                   User.GetUserId(),
+                   existingWasteTypeData == null ? NotificationAuditType.Create : NotificationAuditType.Update,
+                   "Chemical composition");
 
             return RedirectToAction("OtherWasteAdditionalInformation", new { id = model.NotificationId, backToOverview });
         }
@@ -137,8 +149,16 @@
             {
                 return View(model);
             }
-            
+
+            var existingWasteTypeData = await mediator.SendAsync(new GetWasteType(model.NotificationId));
+
             await mediator.SendAsync(new SetOtherWasteAdditionalInformation(model.NotificationId, model.Description, model.HasAttachement));
+
+            await this.auditService.AddAuditEntry(this.mediator,
+                   model.NotificationId,
+                   User.GetUserId(),
+                   existingWasteTypeData == null ? NotificationAuditType.Create : NotificationAuditType.Update,
+                   "Chemical composition");
 
             if (backToOverview.GetValueOrDefault())
             {
@@ -168,6 +188,8 @@
                 return View(model);
             }
 
+            var existingWasteTypeData = await mediator.SendAsync(new GetWasteType(model.NotificationId));
+
             var filteredWasteCompositions = RemoveNotApplicableValues(model.WasteComposition);
 
             var createNewWasteType = new CreateWasteType
@@ -179,6 +201,13 @@
 
             await mediator.SendAsync(createNewWasteType);
             await mediator.SendAsync(new SetEnergy(model.Energy, model.NotificationId));
+
+            await this.auditService.AddAuditEntry(this.mediator,
+                   model.NotificationId,
+                   User.GetUserId(),
+                   existingWasteTypeData == null ? NotificationAuditType.Create : NotificationAuditType.Update,
+                   "Chemical composition");
+
             if (model.ChemicalCompositionType == ChemicalComposition.Wood)
             {
                 await mediator.SendAsync(new SetWoodTypeDescription(model.Description, model.NotificationId));
@@ -210,6 +239,8 @@
                 return View(model);
             }
 
+            var existingWasteTypeData = await mediator.SendAsync(new GetWasteType(model.NotificationId));
+
             //Join optional and mandatory collections
             model.WasteComposition.AddRange(model.OtherCodes);
             
@@ -219,6 +250,12 @@
 
             await mediator.SendAsync(new UpdateWasteType(model.NotificationId, model.ChemicalCompositionType, model.FurtherInformation, filteredWasteCompositions));
             await mediator.SendAsync(new SetOptionalInformation(model.FurtherInformation, model.HasAnnex, model.NotificationId));
+
+            await this.auditService.AddAuditEntry(this.mediator,
+                   model.NotificationId,
+                   User.GetUserId(),
+                   existingWasteTypeData == null ? NotificationAuditType.Create : NotificationAuditType.Update,
+                   "Chemical composition");
 
             if (backToOverview.GetValueOrDefault())
             {

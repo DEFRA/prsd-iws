@@ -1,5 +1,6 @@
 ﻿namespace EA.Iws.Web.Areas.NotificationApplication.Controllers
 {
+    using Core.Notification.Audit;
     using Infrastructure;
     using Prsd.Core.Mapper;
     using Prsd.Core.Mediator;
@@ -21,14 +22,16 @@
     {
         private readonly IMediator mediator;
         private readonly IMap<TransitStateWithTransportRouteData, TransitStateViewModel> transitStateMapper;
+        private readonly IAuditService auditService;
 
         private const string SelectCountry = "country";
         private const string ChangeCountry = "changeCountry";
 
-        public TransitStateController(IMediator mediator, IMap<TransitStateWithTransportRouteData, TransitStateViewModel> transitStateMapper)
+        public TransitStateController(IMediator mediator, IMap<TransitStateWithTransportRouteData, TransitStateViewModel> transitStateMapper, IAuditService auditService)
         {
             this.mediator = mediator;
             this.transitStateMapper = transitStateMapper;
+            this.auditService = auditService;
         }
 
         [HttpGet]
@@ -90,6 +93,8 @@
         {
             try
             {
+                TransitStateWithTransportRouteData existingData = await mediator.SendAsync(new GetTransitStateWithTransportRouteDataByNotificationId(id, transitStateId));
+
                 var request = new SetTransitStateForNotification(id,
                     model.CountryId.Value,
                     model.EntryPointId.Value,
@@ -99,6 +104,12 @@
                     model.OrdinalPosition);
 
                 await mediator.SendAsync(request);
+
+                await this.auditService.AddAuditEntry(this.mediator,
+                    id,
+                    User.GetUserId(),
+                    existingData.TransitState == null ? NotificationAuditType.Create : NotificationAuditType.Update,
+                    "Transits");
 
                 return RedirectToAction("Summary", "TransportRoute", new { id, backToOverview });
             }
@@ -114,6 +125,12 @@
         public async Task<ActionResult> Delete(Guid id, Guid delete, bool? backToOverview = null)
         {
             await mediator.SendAsync(new RemoveTransitStateForNotification(id, delete));
+
+            await this.auditService.AddAuditEntry(this.mediator,
+                    id,
+                    User.GetUserId(),
+                    NotificationAuditType.Delete,
+                    "Transits");
 
             return RedirectToAction("Summary", "TransportRoute", new { id, backToOverview });
         }

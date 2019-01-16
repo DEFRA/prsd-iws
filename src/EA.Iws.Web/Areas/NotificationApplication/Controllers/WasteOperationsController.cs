@@ -1,14 +1,15 @@
 ﻿namespace EA.Iws.Web.Areas.NotificationApplication.Controllers
 {
-    using System;
-    using System.Threading.Tasks;
-    using System.Web.Mvc;
+    using Core.Notification.Audit;
     using Core.Shared;
     using Infrastructure;
     using Prsd.Core.Mediator;
     using Requests.Notification;
     using Requests.OperationCodes;
     using Requests.TechnologyEmployed;
+    using System;
+    using System.Threading.Tasks;
+    using System.Web.Mvc;
     using ViewModels.WasteOperations;
 
     [Authorize]
@@ -16,10 +17,12 @@
     public class WasteOperationsController : Controller
     {
         private readonly IMediator mediator;
+        private readonly IAuditService auditService;
 
-        public WasteOperationsController(IMediator mediator)
+        public WasteOperationsController(IMediator mediator, IAuditService auditService)
         {
             this.mediator = mediator;
+            this.auditService = auditService;
         }
 
         [HttpGet]
@@ -53,7 +56,16 @@
                 return View(model);
             }
 
+            var existingsCodes =
+                    await mediator.SendAsync(new GetOperationCodesByNotificationId(id));
+
             await mediator.SendAsync(new AddRecoveryCodes(id, model.SelectedValues));
+
+            await this.auditService.AddAuditEntry(mediator,
+                    id,
+                    User.GetUserId(),
+                    existingsCodes.Count == 0 ? NotificationAuditType.Create : NotificationAuditType.Update,
+                    "Recovery codes");
 
             return backToOverview.GetValueOrDefault() ? 
                 RedirectToAction("Index", "Home")
@@ -80,7 +92,16 @@
                 return View(model);
             }
 
+            var existingsCodes =
+                    await mediator.SendAsync(new GetOperationCodesByNotificationId(id));
+
             await mediator.SendAsync(new AddDisposalCodes(id, model.SelectedValues));
+
+            await this.auditService.AddAuditEntry(mediator,
+                    id,
+                    User.GetUserId(),
+                    existingsCodes.Count == 0 ? NotificationAuditType.Create : NotificationAuditType.Update,
+                    "Disposal codes");
 
             return backToOverview.GetValueOrDefault() ?
                 RedirectToAction("Index", "Home")
@@ -105,8 +126,17 @@
                 return View(model);
             }
 
+            var existingTechnologyEmployedData =
+                await mediator.SendAsync(new GetTechnologyEmployed(model.NotificationId));
+
             await
                 mediator.SendAsync(new SetTechnologyEmployed(model.NotificationId, model.AnnexProvided, model.Details, model.FurtherDetails));
+
+            await this.auditService.AddAuditEntry(mediator,
+                    model.NotificationId,
+                    User.GetUserId(),
+                    existingTechnologyEmployedData.HasTechnologyEmployed ? NotificationAuditType.Update : NotificationAuditType.Create,
+                    "Technology employed");
 
             return backToOverview.GetValueOrDefault() ? 
                 RedirectToAction("Index", "Home")
