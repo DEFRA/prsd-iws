@@ -1,7 +1,3 @@
-
-USE [EA.Iws]
-GO
-
 INSERT INTO [Lookup].[AuditType]
 (Id, AuditType)
 VALUES
