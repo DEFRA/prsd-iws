@@ -69,6 +69,10 @@
             }
         }
 
+        public SubmitSideBarViewModel()
+        {
+        }
+
         public SubmitSideBarViewModel(SubmitSummaryData submitSummaryData, int notificationCharge, NotificationApplicationCompletionProgress progress)
         {
             NotificationId = submitSummaryData.NotificationId;
