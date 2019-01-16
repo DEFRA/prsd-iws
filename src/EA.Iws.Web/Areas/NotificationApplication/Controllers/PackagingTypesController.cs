@@ -1,15 +1,16 @@
 ﻿namespace EA.Iws.Web.Areas.NotificationApplication.Controllers
 {
-    using System;
-    using System.Linq;
-    using System.Threading.Tasks;
-    using System.Web.Mvc;
+    using Core.Notification.Audit;
     using Core.PackagingType;
     using Infrastructure;
     using Prsd.Core.Mediator;
     using Prsd.Core.Web.ApiClient;
     using Prsd.Core.Web.Mvc.Extensions;
     using Requests.PackagingType;
+    using System;
+    using System.Linq;
+    using System.Threading.Tasks;
+    using System.Web.Mvc;
     using ViewModels.PackagingTypes;
     using Views.PackagingTypes;
     using Web.ViewModels.Shared;
@@ -19,10 +20,12 @@
     public class PackagingTypesController : Controller
     {
         private readonly IMediator mediator;
+        private readonly IAuditService auditService;
 
-        public PackagingTypesController(IMediator mediator)
+        public PackagingTypesController(IMediator mediator, IAuditService auditService)
         {
             this.mediator = mediator;
+            this.auditService = auditService;
         }
 
         [HttpGet]
@@ -85,8 +88,16 @@
                     return View(model);
                 }
 
+                var existingPackagingData = await mediator.SendAsync(new GetPackagingInfoForNotification(model.NotificationId));
+
                 await mediator.SendAsync(new SetPackagingInfoForNotification(selectedPackagingTypes, model.NotificationId,
                         model.OtherDescription));
+
+                await this.auditService.AddAuditEntry(this.mediator,
+                    model.NotificationId,
+                    User.GetUserId(),
+                    existingPackagingData.PackagingTypes.Count == 0 ? NotificationAuditType.Create : NotificationAuditType.Update,
+                    "Packaging types");
 
                 if (backToOverview.GetValueOrDefault())
                 {

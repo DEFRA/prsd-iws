@@ -1,18 +1,20 @@
 ﻿namespace EA.Iws.Web.Tests.Unit.Controllers.NotificationApplication
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Threading.Tasks;
-    using System.Web.Mvc;
     using Areas.NotificationApplication.Controllers;
     using Areas.NotificationApplication.ViewModels.Carrier;
     using Core.Carriers;
+    using Core.Notification.Audit;
     using Core.Shared;
     using FakeItEasy;
     using Mappings;
     using Prsd.Core.Mediator;
     using Requests.Carriers;
     using Requests.Shared;
+    using System;
+    using System.Collections.Generic;
+    using System.Threading.Tasks;
+    using System.Web.Mvc;
+    using Web.Infrastructure;
     using Web.ViewModels.Shared;
     using Xunit;
 
@@ -21,11 +23,13 @@
         private readonly CarrierController carrierController;
         private readonly Guid carrierId = new Guid("2196585B-F0F0-4A01-BC2F-EB8191B30FC6");
         private readonly IMediator mediator;
+        private readonly IAuditService auditService;
         private readonly Guid notificationId = new Guid("4AB23CDF-9B24-4598-A302-A69EBB5F2152");
 
         public CarrierControllerTests()
         {
             mediator = A.Fake<IMediator>();
+            this.auditService = A.Fake<IAuditService>();
             A.CallTo(() => mediator.SendAsync(A<GetCountries>._)).Returns(new List<CountryData>
             {
                 new CountryData
@@ -45,7 +49,8 @@
                     mediator.SendAsync(A<GetCarrierForNotification>.That.Matches(p => p.CarrierId == carrierId)))
                 .Returns(CreateCarrier(carrierId));
 
-            carrierController = new CarrierController(mediator, new AddAddressBookEntryMap());
+            carrierController = new CarrierController(mediator, new AddAddressBookEntryMap(), this.auditService);
+            A.CallTo(() => auditService.AddAuditEntry(this.mediator, notificationId, "user", NotificationAuditType.Create, "screen"));
         }
 
         private AddCarrierViewModel CreateValidAddCarrier()

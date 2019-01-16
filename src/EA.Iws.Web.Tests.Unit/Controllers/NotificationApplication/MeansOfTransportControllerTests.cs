@@ -2,21 +2,28 @@
 {
     using Areas.NotificationApplication.Controllers;
     using Areas.NotificationApplication.ViewModels.MeansOfTransport;
+    using Core.Notification.Audit;
     using FakeItEasy;
+    using Prsd.Core.Mediator;
     using System;
     using System.Threading.Tasks;
     using System.Web.Mvc;
-    using Prsd.Core.Mediator;
+    using Web.Infrastructure;
     using Xunit;
 
     public class MeansOfTransportControllerTests
     {
         private readonly Guid notificationId = new Guid("09237AF4-F46B-4191-AAB7-6404D0A1A751");
         private readonly MeansOfTransportController meansOfTransportController;
+        private readonly IMediator mediator;
+        private readonly IAuditService auditService;
 
         public MeansOfTransportControllerTests()
         {
-            meansOfTransportController = new MeansOfTransportController(A.Fake<IMediator>());
+            this.mediator = A.Fake<IMediator>();
+            this.auditService = A.Fake<IAuditService>();
+            meansOfTransportController = new MeansOfTransportController(A.Fake<IMediator>(), this.auditService);
+            A.CallTo(() => auditService.AddAuditEntry(this.mediator, notificationId, "user", NotificationAuditType.Create, "screen"));
         }
 
         private MeansOfTransportViewModel CreateValidMeansOfTransportViewModel()

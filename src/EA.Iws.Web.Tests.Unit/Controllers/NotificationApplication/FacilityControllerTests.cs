@@ -1,13 +1,10 @@
 ﻿namespace EA.Iws.Web.Tests.Unit.Controllers.NotificationApplication
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Threading.Tasks;
-    using System.Web.Mvc;
     using Areas.NotificationApplication.Controllers;
     using Areas.NotificationApplication.ViewModels.Facility;
     using Core.Facilities;
     using Core.Notification;
+    using Core.Notification.Audit;
     using Core.Shared;
     using FakeItEasy;
     using Mappings;
@@ -15,12 +12,18 @@
     using Requests.Facilities;
     using Requests.Notification;
     using Requests.Shared;
+    using System;
+    using System.Collections.Generic;
+    using System.Threading.Tasks;
+    using System.Web.Mvc;
+    using Web.Infrastructure;
     using Web.ViewModels.Shared;
     using Xunit;
 
     public class FacilityControllerTests
     {
         private readonly IMediator mediator;
+        private readonly IAuditService auditService;
         private readonly Guid notificationId = new Guid("4AB23CDF-9B24-4598-A302-A69EBB5F2152");
         private readonly Guid facilityId = new Guid("2196585B-F0F0-4A01-BC2F-EB8191B30FC6");
         private readonly FacilityController facilityController;
@@ -29,6 +32,7 @@
         public FacilityControllerTests()
         {
             mediator = A.Fake<IMediator>();
+            this.auditService = A.Fake<IAuditService>();
 
             A.CallTo(() => mediator.SendAsync(A<GetCountries>._)).Returns(new List<CountryData>
             {
@@ -55,7 +59,9 @@
                     NotificationType = NotificationType.Recovery
                 });
 
-            facilityController = new FacilityController(mediator, new AddAddressBookEntryMap());
+            facilityController = new FacilityController(mediator, new AddAddressBookEntryMap(), this.auditService);
+
+            A.CallTo(() => auditService.AddAuditEntry(this.mediator, notificationId, "user", NotificationAuditType.Create, "screen"));
         }
 
         private AddFacilityViewModel CreateValidAddFacility()
