@@ -24,7 +24,7 @@
                 @event.UserId,
                 SystemTime.UtcNow);
 
-            repository.AddSharedUser(sharedUser);
+            await repository.AddSharedUser(sharedUser);
 
             await context.SaveChangesAsync();
         }

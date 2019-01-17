@@ -133,7 +133,7 @@
             return notification;
         }
 
-        private async Task<bool> IsInternal()
+        public async Task<bool> IsInternal()
         {
             return await InternalUsers.AnyAsync(u => u.UserId == UserContext.UserId.ToString());
         }

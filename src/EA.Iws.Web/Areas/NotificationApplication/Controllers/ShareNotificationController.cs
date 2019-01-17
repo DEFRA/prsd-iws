@@ -15,6 +15,7 @@
     using ViewModels.ShareNotification;
 
     [AuthorizeActivity(typeof(AddSharedUser))]
+    [NotificationOwnerFilter]
     public class ShareNotificationController : Controller
     {
         private readonly IMediator mediator;
@@ -27,12 +28,16 @@
         // If the previous controller is the notifications options page, then remove the temp data for shared owners
         private void CheckSharedDataIsValid()
         {
-            var previousController = (Request.UrlReferrer.Segments.Skip(3).Take(1).SingleOrDefault() ?? "Home").Trim('/');
-            if (previousController == "options")
+            if (Request.UrlReferrer != null)
             {
-                if (TempData.ContainsKey("SharedUsers"))
+                var previousController =
+                    (Request.UrlReferrer.Segments.Skip(3).Take(1).SingleOrDefault() ?? "Home").Trim('/');
+                if (previousController == "options")
                 {
-                    TempData.Remove("SharedUsers");
+                    if (TempData.ContainsKey("SharedUsers"))
+                    {
+                        TempData.Remove("SharedUsers");
+                    }
                 }
             }
         }
@@ -131,7 +136,7 @@
 
                 if (!isInternalUser)
                 {
-                    model = this.PrepareModelWithErrors("Email Address", "Enter a valid email address", model);
+                    model = this.PrepareModelWithErrors("Email Address", "You cannot share this notification with a competent authority user", model);
                     return View(model);
                 }
 

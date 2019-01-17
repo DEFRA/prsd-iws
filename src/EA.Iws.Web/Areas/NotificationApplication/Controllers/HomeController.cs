@@ -11,6 +11,7 @@
     using Prsd.Core.Web.Mvc.Extensions;
     using Requests.Notification;
     using Requests.SharedUsers;
+    using Requests.Users;
     using ViewModels.Home;
     using ViewModels.NotificationApplication;
 
@@ -101,6 +102,8 @@
                 var sharedUsers = await mediator.SendAsync(new GetSharedUsersByNotificationId(id));
                 model.SubmitSideBarViewModel.IsSharedUser = sharedUsers.Count(p => p.UserId == User.GetUserId()) > 0;
             }
+
+            model.SubmitSideBarViewModel.IsInternalUser = await mediator.SendAsync(new GetUserIsInternal());
 
             ViewBag.Charge = response.NotificationCharge;
 

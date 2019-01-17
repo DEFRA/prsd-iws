@@ -10,9 +10,11 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
     using System.Web.Mvc;
+    using Infrastructure;
     using ViewModels.ReviewUserAccess;
 
     [Authorize]
+    [NotificationOwnerFilter]
     public class ReviewUserAccessController : Controller
     {
       private readonly IMediator mediator;

@@ -19,12 +19,11 @@
         }
 
         [HttpGet]
-        public async Task<ActionResult> Index(Guid id, string filter, DateTime? startDate, DateTime? endDate)
+        public async Task<ActionResult> Index(Guid id, int page = 1, string filter, DateTime? startDate, DateTime? endDate)
         {
             int screenId = 0;
             int.TryParse(filter, out screenId);
-
-            var response = await mediator.SendAsync(new GetNotificationAudits(id));
+            var response = await mediator.SendAsync(new GetNotificationAuditTable(id, page));
             var screens = await mediator.SendAsync(new GetNotificationAuditScreens());
 
             var model = new UpdateHistoryViewModel(response, screens);

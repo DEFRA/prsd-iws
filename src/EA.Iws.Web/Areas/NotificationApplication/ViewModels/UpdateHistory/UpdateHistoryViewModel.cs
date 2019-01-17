@@ -107,6 +107,10 @@
             {
                 yield return new ValidationResult(IndexResources.FromDateAfterToDate, new[] { "StartYear" });
             }
+
+            PageSize = data.PageSize;
+            PageNumber = data.PageNumber;
+            NumberOfNotificationAudits = data.NumberOfNotificationAudits;
         }
 
         public void SetDates(DateTime? startDate, DateTime? endDate)
@@ -124,5 +128,12 @@
             this.EndMonth = endDate.GetValueOrDefault().Month;
             this.EndYear = endDate.GetValueOrDefault().Year;
         }
+        public List<NotificationAuditForDisplay> UpdateHistoryItems { get; set; }
+
+        public int PageSize { get; set; }
+
+        public int PageNumber { get; set; }
+        
+        public int NumberOfNotificationAudits { get; set; }
     }
 }

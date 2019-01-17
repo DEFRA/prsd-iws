@@ -138,8 +138,26 @@
   <data name="NotificationWillBeAssignedTo" xml:space="preserve">
     <value>This notification will be assigned to {0}.</value>
   </data>
+  <data name="OptionsLink" xml:space="preserve">
+    <value>Go to notification options</value>
+  </data>
+  <data name="Reason" xml:space="preserve">
+    <value>You've already shared the notification to this user. You can't assign a notification to a current notification administrator.</value>
+  </data>
+  <data name="ReviewLink" xml:space="preserve">
+    <value>Review user access levels</value>
+  </data>
   <data name="SuccessTitle" xml:space="preserve">
     <value>Notification owner changed</value>
+  </data>
+  <data name="Transfer" xml:space="preserve">
+    <value>To transfer the notification, go to</value>
+  </data>
+  <data name="TransferRemainingText" xml:space="preserve">
+    <value>, remove the user as an administrator, and try the action again.</value>
+  </data>
+  <data name="UnableToShare" xml:space="preserve">
+    <value>Unable to assign ownership of the notification to this user</value>
   </data>
   <data name="YouAreCurrentlyTheOwner" xml:space="preserve">
     <value>You are currently the owner of this notification.</value>
