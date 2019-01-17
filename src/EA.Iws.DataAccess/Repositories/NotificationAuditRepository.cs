@@ -31,7 +31,29 @@
         {
             await notificationApplicationAuthorization.EnsureAccessAsync(notificationId);
 
-            return await this.context.NotificationAudit.Where(p => p.NotificationId == notificationId).ToArrayAsync();
+            return await this.context.NotificationAudit
+                .Where(p => p.NotificationId == notificationId)
+                .ToArrayAsync();
+        }
+
+        public async Task<IEnumerable<Audit>> GetPagedNotificationAuditsById(Guid notificationId, int pageNumber, int pageSize)
+        {
+            await notificationApplicationAuthorization.EnsureAccessAsync(notificationId);
+
+            return await this.context.NotificationAudit
+                .Where(p => p.NotificationId == notificationId)
+                .OrderByDescending(x => x.DateAdded)
+                .Skip((pageNumber - 1) * pageSize)
+                .Take(pageSize)
+                .ToArrayAsync();
+        }
+
+        public async Task<int> GetTotalNumberOfNotificationAudits(Guid notificationId)
+        {
+            await notificationApplicationAuthorization.EnsureAccessAsync(notificationId);
+
+            return await context.NotificationAudit
+                .CountAsync(m => m.NotificationId == notificationId);
         }
     }
 }

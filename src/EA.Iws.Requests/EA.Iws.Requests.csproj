@@ -297,6 +297,7 @@
     <Compile Include="Notification\GeneratePostageLabel.cs" />
     <Compile Include="Annexes\GetAnnexes.cs" />
     <Compile Include="Notification\GetNotificationAuditScreens.cs" />
+    <Compile Include="Notification\GetNotificationAuditTable.cs" />
     <Compile Include="Notification\GetNotificationIdByNumber.cs" />
     <Compile Include="Notification\GetNotificationNumber.cs" />
     <Compile Include="Admin\GetNotificationInfo.cs" />

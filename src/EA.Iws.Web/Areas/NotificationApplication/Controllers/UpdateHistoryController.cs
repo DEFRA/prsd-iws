@@ -18,9 +18,9 @@
         }
 
         [HttpGet]
-        public async Task<ActionResult> Index(Guid id)
+        public async Task<ActionResult> Index(Guid id, int page = 1)
         {
-            var response = await mediator.SendAsync(new GetNotificationAudits(id));
+            var response = await mediator.SendAsync(new GetNotificationAuditTable(id, page));
 
             var model = new UpdateHistoryViewModel(response);
             model.NotificationId = id;
