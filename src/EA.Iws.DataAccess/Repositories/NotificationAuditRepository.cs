@@ -40,23 +40,12 @@
         {
             await notificationApplicationAuthorization.EnsureAccessAsync(notificationId);
 
-            IEnumerable<Audit> retval = new List<Audit>();
-
-            try
-            {
-                retval = await this.context.NotificationAudit
-                    .Where(p => p.NotificationId == notificationId)
-                    .OrderByDescending(x => x.DateAdded)
-                    .Skip((pageNumber - 1) * pageSize)
-                    .Take(pageSize)
-                    .ToArrayAsync();
-            }
-            catch (Exception ex)
-            {
-                string test = ex.ToString();
-            }
-
-            return retval;
+            return await this.context.NotificationAudit
+                .Where(p => p.NotificationId == notificationId)
+                .OrderByDescending(x => x.DateAdded)
+                .Skip((pageNumber - 1) * pageSize)
+                .Take(pageSize)
+                .ToArrayAsync();
         }
 
         public async Task<int> GetTotalNumberOfNotificationAudits(Guid notificationId)
