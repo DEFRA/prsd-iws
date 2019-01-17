@@ -90,6 +90,7 @@
                 }
                 @if (Model.ShowSubmitButton)
                 {
+                    <br />
                     @Html.ActionLink("View preview of my notification", "GenerateNotificationPreviewDocument", "Home", new { id = Model.NotificationId },
                         new { data_track = "link", data_category = "Export notification", data_action = "Download" })
                 }
