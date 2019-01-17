@@ -61,7 +61,7 @@
 
             facilityController = new FacilityController(mediator, new AddAddressBookEntryMap(), this.auditService);
 
-            A.CallTo(() => auditService.AddAuditEntry(this.mediator, notificationId, "user", NotificationAuditType.Create, "screen"));
+            A.CallTo(() => auditService.AddAuditEntry(this.mediator, notificationId, "user", NotificationAuditType.Create, NotificationAuditScreenType.RecoveryFacilities));
         }
 
         private AddFacilityViewModel CreateValidAddFacility()

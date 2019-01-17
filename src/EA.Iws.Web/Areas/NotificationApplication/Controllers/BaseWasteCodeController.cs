@@ -155,34 +155,34 @@
             return false;
         }
 
-        protected async Task AddAuditEntries(WasteCodeDataAndNotificationData existingData, BaseWasteCodeViewModel viewModel, Guid id, string screenName)
+        protected async Task AddAuditEntries(WasteCodeDataAndNotificationData existingData, BaseWasteCodeViewModel viewModel, Guid id, NotificationAuditScreenType screenType)
         {
-            if (existingData.NotificationWasteCodeData[this.codeType].Count() == 0)
+            if (!existingData.NotificationWasteCodeData[codeType].Any())
             {
-                await this.AuditService.AddAuditEntry(this.Mediator,
+                await AuditService.AddAuditEntry(Mediator,
                    id,
                    User.GetUserId(),
                    NotificationAuditType.Create,
-                   screenName);
+                   screenType);
             }
             else
             {
-                if (this.CodeBeenRemoved(viewModel, existingData))
+                if (CodeBeenRemoved(viewModel, existingData))
                 {
-                    await this.AuditService.AddAuditEntry(this.Mediator,
+                    await AuditService.AddAuditEntry(Mediator,
                        id,
                        User.GetUserId(),
                         NotificationAuditType.Delete,
-                       screenName);
+                       screenType);
                 }
 
-                if (this.CodeBeenAdded(viewModel, existingData))
+                if (CodeBeenAdded(viewModel, existingData))
                 {
-                    await this.AuditService.AddAuditEntry(this.Mediator,
+                    await AuditService.AddAuditEntry(Mediator,
                        id,
                        User.GetUserId(),
                         NotificationAuditType.Update,
-                       screenName);
+                       screenType);
                 }
             }
         }

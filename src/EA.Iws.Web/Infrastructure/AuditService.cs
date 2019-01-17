@@ -1,27 +1,31 @@
 ﻿namespace EA.Iws.Web.Infrastructure
 {
+    using System;
+    using System.Threading.Tasks;
     using Core.Notification.Audit;
     using Prsd.Core.Mediator;
     using Requests.Notification;
-    using System;
-    using System.Linq;
-    using System.Threading.Tasks;
 
     public class AuditService : IAuditService
     {
-        public async Task AddAuditEntry(IMediator mediator, Guid notificationId, string userId, NotificationAuditType auditType, string screenName)
+        public async Task AddAuditEntry(IMediator mediator, 
+            Guid notificationId, 
+            string userId, 
+            NotificationAuditType auditType, 
+            NotificationAuditScreenType screenType)
         {
-            var screens = await mediator.SendAsync(new GetNotificationAuditScreens());
-
             var audit = CreateAudit(notificationId,
                 userId,
-                screens.FirstOrDefault(p => p.ScreenName == screenName).Id,
+                screenType,
                 auditType);
 
             await mediator.SendAsync(audit);
         }
 
-        private CreateNotificationAudit CreateAudit(Guid notificationId, string userId, int screen, NotificationAuditType type)
+        private static CreateNotificationAudit CreateAudit(Guid notificationId, 
+            string userId, 
+            NotificationAuditScreenType screen, 
+            NotificationAuditType type)
         {
             return new CreateNotificationAudit()
             {

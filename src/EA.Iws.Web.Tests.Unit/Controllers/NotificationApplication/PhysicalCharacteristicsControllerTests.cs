@@ -24,7 +24,7 @@
             this.mediator = A.Fake<IMediator>();
             this.auditService = A.Fake<IAuditService>();
             physicalCharacteristicsController = new PhysicalCharacteristicsController(this.mediator, this.auditService);
-            A.CallTo(() => auditService.AddAuditEntry(this.mediator, notificationId, "user", NotificationAuditType.Create, "screen"));
+            A.CallTo(() => auditService.AddAuditEntry(this.mediator, notificationId, "user", NotificationAuditType.Create, NotificationAuditScreenType.PhysicalCharacteristics));
         }
 
         [Fact]
