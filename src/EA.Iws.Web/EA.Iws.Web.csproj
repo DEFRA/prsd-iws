@@ -2268,6 +2268,7 @@
     </Compile>
     <Compile Include="Areas\NotificationApplication\Controllers\ShareNotificationController.cs" />
     <Compile Include="Areas\NotificationMovements\Controllers\PrenotificationBulkUploadController.cs" />
+    <Compile Include="Areas\NotificationMovements\ViewModels\PrenotificationBulkUpload\PrenotificationBulkUploadViewModel.cs" />
     <Compile Include="Areas\NotificationMovements\Views\PrenotificationBulkUpload\PrenotificationBulkUploadResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -3487,7 +3488,6 @@
     <Folder Include="Areas\Admin\Views\SmokeTest\" />
     <Folder Include="Areas\FinancialGuarantee\ViewModels\" />
     <Folder Include="Areas\FinancialGuarantee\Views\Shared\" />
-    <Folder Include="Areas\NotificationMovements\ViewModels\PrenotificationBulkUpload\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Areas\AdminExportAssessment\Controllers\DecisionControllerResources.resx">
