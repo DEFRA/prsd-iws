@@ -88,6 +88,24 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.UpdateHistory {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The from date must be before the to date.
+        /// </summary>
+        public static string FromDateAfterToDate {
+            get {
+                return ResourceManager.GetString("FromDateAfterToDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please enter a valid from date.
+        /// </summary>
+        public static string FromValid {
+            get {
+                return ResourceManager.GetString("FromValid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Month.
         /// </summary>
         public static string Month {
@@ -201,6 +219,15 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.UpdateHistory {
         public static string To {
             get {
                 return ResourceManager.GetString("To", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please enter a valid to date.
+        /// </summary>
+        public static string ToValid {
+            get {
+                return ResourceManager.GetString("ToValid", resourceCulture);
             }
         }
         

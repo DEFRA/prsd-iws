@@ -1,6 +1,7 @@
 ﻿namespace EA.Iws.Web.Areas.NotificationApplication.Controllers
 {
     using System;
+    using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Prsd.Core.Mediator;
@@ -18,7 +19,7 @@
         }
 
         [HttpGet]
-        public async Task<ActionResult> Index(Guid id, string filter)
+        public async Task<ActionResult> Index(Guid id, string filter, DateTime? startDate, DateTime? endDate)
         {
             int screenId = 0;
             int.TryParse(filter, out screenId);
@@ -31,6 +32,8 @@
             model.SelectedScreen = filter;
 
             model.HasHistoryItems = model.UpdateHistoryItems.Count == 0 ? false : true;
+
+            model.SetDates(startDate, endDate);
 
             return View(model);
         }
@@ -45,10 +48,23 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Index(UpdateHistoryViewModel model)
-        { 
-            // convert model date time to date time and send in redirect
-            return RedirectToAction("Index", new { filter = model.SelectedScreen });
+        public async Task<ActionResult> Index(Guid id, UpdateHistoryViewModel model)
+        {
+            var errors = ModelState.Values.SelectMany(v => v.Errors);
+
+            if (!ModelState.IsValid)
+            {
+                var screens = await mediator.SendAsync(new GetNotificationAuditScreens());
+                var response = await mediator.SendAsync(new GetNotificationAudits(id));
+                model.Screens = screens.ToList();
+                model.UpdateHistoryItems = response.ToList();
+                return View(model);
+            }
+
+            DateTime startDate = new DateTime(model.StartYear.GetValueOrDefault(), model.StartMonth.GetValueOrDefault(), model.StartDay.GetValueOrDefault());
+            DateTime endDate = new DateTime(model.EndYear.GetValueOrDefault(), model.EndMonth.GetValueOrDefault(), model.EndDay.GetValueOrDefault());
+
+            return RedirectToAction("Index", new { filter = model.SelectedScreen, startDate = startDate, endDate = endDate });
         }
     }
 }

@@ -6,23 +6,22 @@
     using System.Linq;
     using System.Web.Mvc;
     using Core.Notification.Audit;
+    using Prsd.Core;
     using Views.UpdateHistory;
 
     public class UpdateHistoryViewModel : IValidatableObject
     {
         public UpdateHistoryViewModel()
         {
+            this.Screens = new List<NotificationAuditScreen>();
+            this.UpdateHistoryItems = new List<NotificationAuditForDisplay>();
         }
         
         public UpdateHistoryViewModel(IEnumerable<NotificationAuditForDisplay> notificationUpdateHistory, IEnumerable<NotificationAuditScreen> screens)
         {
             this.Screens = screens.ToList();
 
-            UpdateHistoryItems = new List<NotificationAuditForDisplay>();
-            foreach (NotificationAuditForDisplay updateHistory in notificationUpdateHistory)
-            {
-                UpdateHistoryItems.Add(updateHistory);
-            }
+            UpdateHistoryItems = new List<NotificationAuditForDisplay>(notificationUpdateHistory);
         }
 
         public Guid NotificationId { get; set; }
@@ -81,5 +80,49 @@
         [Display(Name = "Year", ResourceType = typeof(IndexResources))]
         [Range(2015, 3000, ErrorMessageResourceName = "YearError", ErrorMessageResourceType = typeof(IndexResources))]
         public int? EndYear { get; set; }
+
+        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+        { 
+            DateTime startDate;
+            bool isValidStartDate = SystemTime.TryParse(StartYear.GetValueOrDefault(), StartMonth.GetValueOrDefault(), StartDay.GetValueOrDefault(), out startDate);
+            if (!isValidStartDate)
+            {
+                yield return new ValidationResult(IndexResources.FromValid, new[] { "StartDay" });
+            }
+
+            DateTime endDate;
+            bool isValidEndDate = SystemTime.TryParse(EndYear.GetValueOrDefault(), EndMonth.GetValueOrDefault(), EndDay.GetValueOrDefault(), out endDate);
+            if (!isValidEndDate)
+            {
+                yield return new ValidationResult(IndexResources.ToValid, new[] { "EndDay" });
+            }
+
+            if (!(isValidStartDate && isValidEndDate))
+            {
+                // Stop further validation if either date is not a valid date
+                yield break;
+            }
+
+            if (startDate > endDate)
+            {
+                yield return new ValidationResult(IndexResources.FromDateAfterToDate, new[] { "StartYear" });
+            }
+        }
+
+        public void SetDates(DateTime? startDate, DateTime? endDate)
+        {
+            if (startDate == null || endDate == null)
+            {
+                return;
+            }
+
+            this.StartDay = startDate.GetValueOrDefault().Day;
+            this.StartMonth = startDate.GetValueOrDefault().Month;
+            this.StartYear = startDate.GetValueOrDefault().Year;
+
+            this.EndDay = endDate.GetValueOrDefault().Day;
+            this.EndMonth = endDate.GetValueOrDefault().Month;
+            this.EndYear = endDate.GetValueOrDefault().Year;
+        }
     }
 }
