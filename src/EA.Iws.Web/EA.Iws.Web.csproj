@@ -3482,6 +3482,8 @@
     <Folder Include="Areas\Admin\Views\SmokeTest\" />
     <Folder Include="Areas\FinancialGuarantee\ViewModels\" />
     <Folder Include="Areas\FinancialGuarantee\Views\Shared\" />
+    <Folder Include="Areas\NotificationMovements\ViewModels\PrenotificationBulkUpload\" />
+    <Folder Include="Areas\NotificationMovements\Views\PrenotificationBulkUpload\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Areas\AdminExportAssessment\Controllers\DecisionControllerResources.resx">
