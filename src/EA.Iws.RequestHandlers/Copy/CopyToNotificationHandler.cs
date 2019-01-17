@@ -229,18 +229,21 @@
 
         private async Task<TransportRoute> CloneTransportRoute(Guid sourceNotificationId, Guid destinationNotificationId, UKCompetentAuthority destinationCompetentAuthority)
         {
-            var transportRoute = await context.TransportRoutes.SingleAsync(p => p.NotificationId == sourceNotificationId);
-            var sourceCompetentAuthority = (await notificationApplicationRepository.GetById(sourceNotificationId)).CompetentAuthority;
+            var transportRoute = await context.TransportRoutes.SingleOrDefaultAsync(p => p.NotificationId == sourceNotificationId);
 
             var destinationTransportRoute = new TransportRoute(destinationNotificationId);
 
-            if (destinationCompetentAuthority == sourceCompetentAuthority)
+            if (transportRoute != null)
             {
-                transportRouteCopier.CopyTransportRoute(transportRoute, destinationTransportRoute);
-            }
-            else
-            {
-                transportRouteCopier.CopyTransportRouteWithoutExport(transportRoute, destinationTransportRoute);
+                var sourceCompetentAuthority = (await notificationApplicationRepository.GetById(sourceNotificationId)).CompetentAuthority;
+                if (destinationCompetentAuthority == sourceCompetentAuthority)
+                {
+                    transportRouteCopier.CopyTransportRoute(transportRoute, destinationTransportRoute);
+                }
+                else
+                {
+                    transportRouteCopier.CopyTransportRouteWithoutExport(transportRoute, destinationTransportRoute);
+                }
             }
 
             context.TransportRoutes.Add(destinationTransportRoute);
@@ -253,28 +256,31 @@
         private async Task CloneTechnologyEmployed(Guid sourceNotificationId, Guid destinationNotificationId)
         {
             var technologyEmployed =
-                await context.TechnologiesEmployed.SingleAsync(p => p.NotificationId == sourceNotificationId);
+                await context.TechnologiesEmployed.SingleOrDefaultAsync(p => p.NotificationId == sourceNotificationId);
 
-            TechnologyEmployed destinationTechnologyEmployed;
-
-            if (technologyEmployed.AnnexProvided)
+            if (technologyEmployed != null)
             {
-                destinationTechnologyEmployed =
-                    TechnologyEmployed.CreateTechnologyEmployedWithAnnex(destinationNotificationId,
-                        technologyEmployed.Details);
-            }
-            else
-            {
-                destinationTechnologyEmployed = 
-                    TechnologyEmployed.CreateTechnologyEmployedWithFurtherDetails(
-                        destinationNotificationId,
-                        technologyEmployed.Details,
-                        technologyEmployed.FurtherDetails);
-            }
+                TechnologyEmployed destinationTechnologyEmployed;
 
-            context.TechnologiesEmployed.Add(destinationTechnologyEmployed);
+                if (technologyEmployed.AnnexProvided)
+                {
+                    destinationTechnologyEmployed =
+                        TechnologyEmployed.CreateTechnologyEmployedWithAnnex(destinationNotificationId,
+                            technologyEmployed.Details);
+                }
+                else
+                {
+                    destinationTechnologyEmployed =
+                        TechnologyEmployed.CreateTechnologyEmployedWithFurtherDetails(
+                            destinationNotificationId,
+                            technologyEmployed.Details,
+                            technologyEmployed.FurtherDetails);
+                }
 
-            await context.SaveChangesAsync();
+                context.TechnologiesEmployed.Add(destinationTechnologyEmployed);
+
+                await context.SaveChangesAsync();
+            }
         }
     }
 }
