@@ -4697,7 +4697,7 @@
       <LastGenOutput>SummaryResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\NotificationMovements\Views\PrenotificationBulkUpload\PrenotificationBulkUploadResources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
+      <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>PrenotificationBulkUploadResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\NotificationMovements\Views\ReceiptRecovery\IndexResources.resx">
