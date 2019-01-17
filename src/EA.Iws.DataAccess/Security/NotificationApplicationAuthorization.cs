@@ -34,6 +34,24 @@
             }
         }
 
+        public async Task EnsureAccessIsOwnerAsync(Guid notificationId)
+        {
+            var notification = await context.NotificationApplications.Where(n => n.Id == notificationId).SingleAsync();
+
+            if (await IsInternal())
+            {
+                await CheckCompetentAuthority(notification);
+            }
+            else
+            {
+                if (notification.UserId != userContext.UserId)
+                {
+                    throw new SecurityException(string.Format("Access denied to this notification {0} for user {1}",
+                        notificationId, userContext.UserId));
+                }
+            }
+        }
+
         private async Task CheckCompetentAuthority(NotificationApplication notification)
         {
             var userCompetentAuthority = await context.GetUsersCompetentAuthority(userContext);

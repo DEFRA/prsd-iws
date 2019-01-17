@@ -77,11 +77,11 @@
                     {
                         @Html.ActionLink(Resource.AssignNotification, "Index", "ChangeNotificationOwner", new { id = Model.NotificationId, area = string.Empty }, null)
                         @Html.ActionLink(Resource.ShareNotification, "ShareNotification", "ShareNotification", new { id = Model.NotificationId, area = "NotificationApplication" }, null)
-                    }
 
-                    @if (Model.HasSharedUsers)
-                    {
-                        @Html.ActionLink(Resource.ReviewAccess, "UserList", "ReviewUserAccess", new { id = Model.NotificationId, area = "NotificationApplication" }, null)
+                        if (Model.HasSharedUsers)
+                        {
+                            @Html.ActionLink(Resource.ReviewAccess, "UserList", "ReviewUserAccess", new { id = Model.NotificationId, area = "NotificationApplication" }, null)
+                        }
                     }
 
                     @if (Model.NotificationStatus == NotificationStatus.NotSubmitted)

@@ -25,15 +25,15 @@
 
         public async Task<IList<NotificationApplicationCopyData>> HandleAsync(GetNotificationsToCopyForUser message)
         {
-            var notificationType =
-                (await context.GetNotificationApplication(message.DestinationNotificationId)).NotificationType;
+            var notification = await context.GetNotificationApplication(message.DestinationNotificationId);
 
             var notificationData = await context.NotificationApplications
                 .Join(context.Exporters, n => n.Id, e => e.NotificationId, (n, e) => new { Notification = n, Exporter = e })
                 .Join(context.Importers, x => x.Notification.Id, i => i.NotificationId, (x, i) => new { Notification = x.Notification, Exporter = x.Exporter, Importer = i })
                 .Where(x => x.Notification.UserId == userContext.UserId
-                    && x.Notification.NotificationType == notificationType
-                    && x.Notification.WasteType != null)
+                    && x.Notification.NotificationType == notification.NotificationType
+                    && x.Notification.WasteType != null
+                    && x.Notification.CompetentAuthority == notification.CompetentAuthority)
                 .Select(x => new
                 {
                     id = x.Notification.Id,
