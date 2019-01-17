@@ -60,5 +60,14 @@ namespace EA.Iws.Web.Areas.NotificationMovements.Views.PrenotificationBulkUpload
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to test.
+        /// </summary>
+        public static string UploadPrenotificationsTitle {
+            get {
+                return ResourceManager.GetString("UploadPrenotificationsTitle", resourceCulture);
+            }
+        }
     }
 }

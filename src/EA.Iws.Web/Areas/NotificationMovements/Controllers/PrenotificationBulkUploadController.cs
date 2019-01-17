@@ -1,8 +1,8 @@
 ﻿namespace EA.Iws.Web.Areas.NotificationMovements.Controllers
 {
-    using System.Threading.Tasks;
     using System.Web.Mvc;
     using Prsd.Core.Mediator;
+    using ViewModels.PrenotificationBulkUpload;
 
     public class PrenotificationBulkUploadController : Controller
     {
@@ -16,9 +16,9 @@
         [HttpGet]
         public ActionResult UploadPrenotifications()
         {
-            var model = new NoChangesViewModel();
+            var model = new PrenotificationBulkUploadViewModel();
 
-            return View(null);
+            return View(model);
         }
     }
 }
