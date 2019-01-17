@@ -61,6 +61,60 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.UpdateHistory {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Day.
+        /// </summary>
+        public static string Day {
+            get {
+                return ResourceManager.GetString("Day", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please enter a valid number in the &apos;Day&apos; field.
+        /// </summary>
+        public static string DayError {
+            get {
+                return ResourceManager.GetString("DayError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to From.
+        /// </summary>
+        public static string From {
+            get {
+                return ResourceManager.GetString("From", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Month.
+        /// </summary>
+        public static string Month {
+            get {
+                return ResourceManager.GetString("Month", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please enter a valid number in the &apos;Month&apos; field.
+        /// </summary>
+        public static string MonthError {
+            get {
+                return ResourceManager.GetString("MonthError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Search.
+        /// </summary>
+        public static string Search {
+            get {
+                return ResourceManager.GetString("Search", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Notification Update History Search Results.
         /// </summary>
         public static string TableCaption {
@@ -142,11 +196,38 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.UpdateHistory {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to To.
+        /// </summary>
+        public static string To {
+            get {
+                return ResourceManager.GetString("To", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Information changes reflect the changes made by officers and administrators..
         /// </summary>
         public static string UpdateHistoryInfo {
             get {
                 return ResourceManager.GetString("UpdateHistoryInfo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Year.
+        /// </summary>
+        public static string Year {
+            get {
+                return ResourceManager.GetString("Year", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please enter a valid number in the &apos;Year&apos; field.
+        /// </summary>
+        public static string YearError {
+            get {
+                return ResourceManager.GetString("YearError", resourceCulture);
             }
         }
     }

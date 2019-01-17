@@ -18,21 +18,21 @@
         }
 
         [HttpGet]
-        public async Task<ActionResult> Index(Guid id)
+        public async Task<ActionResult> Index(Guid id, string filter)
         {
+            int screenId = 0;
+            int.TryParse(filter, out screenId);
+
             var response = await mediator.SendAsync(new GetNotificationAudits(id));
+            var screens = await mediator.SendAsync(new GetNotificationAuditScreens());
 
-            var model = new UpdateHistoryViewModel(response);
+            var model = new UpdateHistoryViewModel(response, screens);
             model.NotificationId = id;
+            model.SelectedScreen = filter;
 
-            if (model.UpdateHistoryItems.Count > 0)
-            {
-                return View(model);
-            }
-            else
-            {
-                return RedirectToAction("NoChanges", "UpdateHistory", new { id });
-            }
+            model.HasHistoryItems = model.UpdateHistoryItems.Count == 0 ? false : true;
+
+            return View(model);
         }
 
         [HttpGet]
@@ -41,6 +41,14 @@
             var model = new NoChangesViewModel { NotificationId = id };
 
             return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Index(UpdateHistoryViewModel model)
+        { 
+            // convert model date time to date time and send in redirect
+            return RedirectToAction("Index", new { filter = model.SelectedScreen });
         }
     }
 }
