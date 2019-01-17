@@ -16,7 +16,7 @@
         private readonly IMapper mapper;
         private readonly INotificationAuditRepository repository;
 
-        private const int PageSize = 20;
+        private const int PageSize = 10;
 
         public GetNotificationAuditTableHandler(IwsContext context, IMapper mapper, 
             INotificationAuditRepository repository)
