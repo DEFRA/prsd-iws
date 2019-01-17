@@ -28,7 +28,7 @@
 
         public async Task<NotificationAuditTable> HandleAsync(GetNotificationAuditTable message)
         {
-            IEnumerable<Audit> notificationAudits = await repository.GetPagedNotificationAuditsById(message.NotificationId, message.PageNumber, PageSize);
+            IEnumerable<Audit> notificationAudits = await repository.GetPagedNotificationAuditsById(message.NotificationId, message.PageNumber, PageSize, message.Screen, message.StartDate, message.EndDate);
 
             var notificationAuditTable = mapper.Map<IEnumerable<Audit>, NotificationAuditTable>(notificationAudits);
             notificationAuditTable.PageNumber = message.PageNumber;

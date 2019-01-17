@@ -17,11 +17,19 @@
             this.UpdateHistoryItems = new List<NotificationAuditForDisplay>();
         }
         
-        public UpdateHistoryViewModel(IEnumerable<NotificationAuditForDisplay> notificationUpdateHistory, IEnumerable<NotificationAuditScreen> screens)
+        public UpdateHistoryViewModel(NotificationAuditTable data, IEnumerable<NotificationAuditScreen> screens)
         {
             this.Screens = screens.ToList();
 
-            UpdateHistoryItems = new List<NotificationAuditForDisplay>(notificationUpdateHistory);
+            UpdateHistoryItems = new List<NotificationAuditForDisplay>();
+            foreach (NotificationAuditForDisplay updateHistory in data.TableData)
+            {
+                UpdateHistoryItems.Add(updateHistory);
+            }
+
+            PageSize = data.PageSize;
+            PageNumber = data.PageNumber;
+            NumberOfNotificationAudits = data.NumberOfNotificationAudits;
         }
 
         public Guid NotificationId { get; set; }
@@ -107,10 +115,6 @@
             {
                 yield return new ValidationResult(IndexResources.FromDateAfterToDate, new[] { "StartYear" });
             }
-
-            PageSize = data.PageSize;
-            PageNumber = data.PageNumber;
-            NumberOfNotificationAudits = data.NumberOfNotificationAudits;
         }
 
         public void SetDates(DateTime? startDate, DateTime? endDate)
@@ -119,7 +123,6 @@
             {
                 return;
             }
-
             this.StartDay = startDate.GetValueOrDefault().Day;
             this.StartMonth = startDate.GetValueOrDefault().Month;
             this.StartYear = startDate.GetValueOrDefault().Year;
@@ -128,7 +131,6 @@
             this.EndMonth = endDate.GetValueOrDefault().Month;
             this.EndYear = endDate.GetValueOrDefault().Year;
         }
-        public List<NotificationAuditForDisplay> UpdateHistoryItems { get; set; }
 
         public int PageSize { get; set; }
 

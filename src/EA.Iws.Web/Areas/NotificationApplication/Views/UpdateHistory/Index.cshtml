@@ -18,7 +18,8 @@
 }
 
 @Html.Partial("_Title", null)
-
+@if (Model.HasHistoryItems)
+{
     <div class="grid-row">
         <div class="column-two-thirds">
             @using (Html.BeginForm())
@@ -27,19 +28,18 @@
                 @Html.Gds().ValidationSummary()
                 @Html.HiddenFor(m => m.NotificationId)
                 @Html.HiddenFor(m => m.HasHistoryItems)
+                @Html.HiddenFor(m => m.PageNumber)
 
                 <div class="form-group">
                     @Html.DropDownListFor(m => m.SelectedScreen, Model.FilterTerms, new { @class = "form-control view-by" })
                 </div>
                 if (Model.SelectedScreen == "date")
                 {
-
                     <div class="form-group @Html.Gds().FormGroupClass(m => m.StartDay) @Html.Gds().FormGroupClass(m => m.StartMonth) @Html.Gds().FormGroupClass(m => m.StartYear)">
                         <fieldset>
-                            <div>
-                                @Resource.From
-                            </div>
-
+                            <legend>
+                                <span class="form-label">From</span>
+                            </legend>
                             <div class="form-date">
                                 @Html.Gds().ValidationMessageFor(m => m.StartDay)
                                 @Html.Gds().ValidationMessageFor(m => m.StartMonth)
@@ -62,9 +62,9 @@
                     <br />
                     <div class="form-group @Html.Gds().FormGroupClass(m => m.EndDay) @Html.Gds().FormGroupClass(m => m.EndMonth) @Html.Gds().FormGroupClass(m => m.EndYear)">
                         <fieldset>
-                            <div>
-                                @Resource.To
-                            </div>
+                            <legend>
+                                <span class="form-label">To</span>
+                            </legend>
                             <div class="form-date">
                                 @Html.Gds().ValidationMessageFor(m => m.EndDay)
                                 @Html.Gds().ValidationMessageFor(m => m.EndMonth)
@@ -85,15 +85,15 @@
                         </fieldset>
                     </div>
                     <div class="form-group">
-                        <button class="button" type="submit">@Resource.Search</button>
+                        <button class="button" type="submit" name="command" value="search">@Resource.Search</button>
                     </div>
                 }
             }
         </div>
     </div>
-
-    @if (Model.HasHistoryItems)
+    if (Model.UpdateHistoryItems.Count > 0)
     {
+
         <table class="odd-table" title="@Resource.TitleNotificationUpdateHistorySearchResults">
             <caption class="visuallyhidden">@Resource.TableCaption</caption>
             <thead>
@@ -142,12 +142,22 @@
     }
     else
     {
+
         <div class="margin-bottom-30 margin-top-30 ">
             <h3 style="text-align:center; font-size:36px">No updates available</h3>
         </div>
     }
-
-@Html.Pager(Model.PageSize, Model.PageNumber, Model.NumberOfNotificationAudits)
+}
+else
+{
+    <div class="margin-bottom-30 margin-top-30 ">
+        <h3 style="text-align:center; font-size:36px">No updates available</h3>
+    </div>
+}
+@if (Model.UpdateHistoryItems.Count > 0)
+{
+    @Html.Pager(Model.PageSize, Model.PageNumber, Model.NumberOfNotificationAudits)
+}
 
 @Html.ActionLink("Go to Notification Overview", "Index", "Home", new { @Model.NotificationId, backToOverview = true }, null)
 

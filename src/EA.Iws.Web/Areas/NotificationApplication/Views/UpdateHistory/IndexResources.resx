@@ -151,13 +151,13 @@
     <value>Please enter a valid number in the 'Day' field</value>
   </data>
   <data name="From" xml:space="preserve">
-    <value>From</value>
+    <value>Enter the start date for your search</value>
   </data>
   <data name="MonthError" xml:space="preserve">
     <value>Please enter a valid number in the 'Month' field</value>
   </data>
   <data name="To" xml:space="preserve">
-    <value>To</value>
+    <value>Enter the end date for your search</value>
   </data>
   <data name="YearError" xml:space="preserve">
     <value>Please enter a valid number in the 'Year' field</value>

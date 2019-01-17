@@ -60,7 +60,7 @@
                     model.NotificationId,
                     User.GetUserId(),
                     NotificationAuditType.Create,
-                    "Producers");
+                    "Producer");
 
                 if (model.IsAddedToAddressBook)
                 {

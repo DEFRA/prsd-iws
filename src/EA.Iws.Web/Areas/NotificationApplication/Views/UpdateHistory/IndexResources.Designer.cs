@@ -79,7 +79,7 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.UpdateHistory {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to From.
+        ///   Looks up a localized string similar to Enter the start date for your search.
         /// </summary>
         public static string From {
             get {
@@ -214,7 +214,7 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.UpdateHistory {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to To.
+        ///   Looks up a localized string similar to Enter the end date for your search.
         /// </summary>
         public static string To {
             get {
