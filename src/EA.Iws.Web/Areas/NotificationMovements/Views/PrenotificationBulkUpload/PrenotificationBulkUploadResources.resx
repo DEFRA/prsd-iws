@@ -117,7 +117,34 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="UploadPrenotificationsList1" xml:space="preserve">
+    <value>The data file should not exceed 2GB in size.</value>
+  </data>
+  <data name="UploadPrenotificationsList2" xml:space="preserve">
+    <value>Remove all column headings from a CSV file type.</value>
+  </data>
+  <data name="UploadPrenotificationsList3" xml:space="preserve">
+    <value>Only contain shipment records for new shipments, no duplicates will be accepted.</value>
+  </data>
+  <data name="UploadPrenotificationsList4" xml:space="preserve">
+    <value>The actual shipment date should be recorded in dd/mm/yyyy format.</value>
+  </data>
+  <data name="UploadPrenotificationsList5" xml:space="preserve">
+    <value>The actual shipment date must be at least 3 working days from the current date.</value>
+  </data>
+  <data name="UploadPrenotificationsList6" xml:space="preserve">
+    <value>The quantity unit of measurement and packaging type must adhere to those that have been consented to.</value>
+  </data>
+  <data name="UploadPrenotificationsTabTitle" xml:space="preserve">
+    <value>Prenotifications Bulk Upload</value>
+  </data>
+  <data name="UploadPrenotificationsText1" xml:space="preserve">
+    <value>Upload the prenotification data file in an Excel or .CSV format.</value>
+  </data>
+  <data name="UploadPrenotificationsText2" xml:space="preserve">
+    <value>Make sure all data matches the correct template format to avoid validation errors.</value>
+  </data>
   <data name="UploadPrenotificationsTitle" xml:space="preserve">
-    <value>test</value>
+    <value>Bulk upload of prenotification data</value>
   </data>
 </root>

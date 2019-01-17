@@ -2,12 +2,31 @@
 @model EA.Iws.Web.Areas.NotificationMovements.ViewModels.PrenotificationBulkUpload.PrenotificationBulkUploadViewModel
 
 @{
-    ViewBag.Title = @Resource.UploadPrenotificationsTitle;
+    ViewBag.Title = @Resource.UploadPrenotificationsTabTitle;
     Layout = "~/Views/Shared/_Layout.GovUK.Sections.cshtml";
 }
 
-<div class="margin-bottom-30 margin-top-30 ">
-    <h3 style="text-align:center; font-size:36px">No updates available</h3>
+<div>
+    <h1 class="heading-large">@Resource.UploadPrenotificationsTitle</h1>
+    <p>@Resource.UploadPrenotificationsText1</p>
+    <p>@Resource.UploadPrenotificationsText2</p>
+    <p>
+        <ul class="grey-text">
+            For example:
+            <li>@Resource.UploadPrenotificationsList1</li>
+            <li>@Resource.UploadPrenotificationsList2</li>
+            <li>@Resource.UploadPrenotificationsList3</li>
+            <li>@Resource.UploadPrenotificationsList4</li>
+            <li>@Resource.UploadPrenotificationsList5</li>
+            <li>@Resource.UploadPrenotificationsList6</li>
+        </ul>
+    </p>
+    <p>
+        @Html.Gds().TextBoxFor(m => m.File, new { type = "file" })
+    </p>
+    <p>
+        @Html.ActionLink(@Constants.ContinueButtonText, "", "PrenotificationBulkUpload", null, new { @class = "button" })
+    </p>
 </div>
 
-@Html.ActionLink("Go to Notification Overview", "Index", "Home", new { @Model.NotificationId, backToOverview = true }, null)
+@Html.ActionLink("Go to notification options", "Index", "Home", new { @Model.NotificationId, backToOverview = true }, null)
