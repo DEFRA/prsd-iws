@@ -144,7 +144,8 @@
             stateMachine.OnTransitioned(OnTransitionAction);
 
             stateMachine.Configure(MovementStatus.New)
-                .Permit(Trigger.Submit, MovementStatus.Submitted);
+                .Permit(Trigger.Submit, MovementStatus.Submitted)
+                .Permit(Trigger.ReceiveInternal, MovementStatus.Received);
 
             stateMachine.Configure(MovementStatus.Submitted)
                 .OnEntryFrom(submittedTrigger, OnSubmitted)
