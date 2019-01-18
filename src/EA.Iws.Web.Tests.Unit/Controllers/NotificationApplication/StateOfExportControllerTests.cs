@@ -57,7 +57,7 @@
                 {    
                     StateOfExport = new StateOfExportData()          
                 });
-            A.CallTo(() => auditService.AddAuditEntry(this.mediator, notificationId, "user", NotificationAuditType.Create, "screen"));
+            A.CallTo(() => auditService.AddAuditEntry(this.mediator, notificationId, "user", NotificationAuditType.Create, NotificationAuditScreenType.ExportRoute));
         }
 
         [Fact]

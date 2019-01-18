@@ -23,7 +23,7 @@
             this.mediator = A.Fake<IMediator>();
             this.auditService = A.Fake<IAuditService>();
             reasonForExportController = new ReasonForExportController(A.Fake<IMediator>(), this.auditService);
-            A.CallTo(() => auditService.AddAuditEntry(this.mediator, notificationId, "user", NotificationAuditType.Create, "screen"));
+            A.CallTo(() => auditService.AddAuditEntry(this.mediator, notificationId, "user", NotificationAuditType.Create, NotificationAuditScreenType.ReasonForExport));
         }
 
         [Fact]

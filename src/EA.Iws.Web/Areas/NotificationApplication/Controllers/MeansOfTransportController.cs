@@ -64,7 +64,7 @@
                     id,
                     User.GetUserId(),
                     currentMeans.Count == 0 ? NotificationAuditType.Create : NotificationAuditType.Update,
-                    "Means of transport");
+                    NotificationAuditScreenType.MeansOfTransport);
 
                 await mediator.SendAsync(new SetMeansOfTransportForNotification(id, meansList));
             }

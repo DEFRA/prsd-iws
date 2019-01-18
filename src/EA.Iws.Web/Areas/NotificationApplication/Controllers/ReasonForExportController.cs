@@ -57,7 +57,7 @@
                     model.NotificationId,
                     User.GetUserId(),
                     existingReasonForExport == null ? NotificationAuditType.Create : NotificationAuditType.Update,
-                    "Reason for export");
+                    NotificationAuditScreenType.ReasonForExport);
 
                 if (backToOverview.GetValueOrDefault())
                 {

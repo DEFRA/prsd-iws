@@ -90,7 +90,7 @@
                 });
 
             this.controller = new StateOfImportController(mediator, new TestMap(), this.auditService);
-            A.CallTo(() => auditService.AddAuditEntry(this.mediator, notificationId, "user", NotificationAuditType.Create, "screen"));
+            A.CallTo(() => auditService.AddAuditEntry(this.mediator, notificationId, "user", NotificationAuditType.Create, NotificationAuditScreenType.ImportRoute));
         }
 
         [Fact]

@@ -59,7 +59,7 @@
                     model.NotificationId,
                     User.GetUserId(),
                     NotificationAuditType.Create,
-                    "Intended carrier");
+                    NotificationAuditScreenType.IntendedCarrier);
 
                 if (model.IsAddedToAddressBook)
                 {
@@ -113,7 +113,7 @@
                     model.NotificationId,
                     User.GetUserId(),
                     NotificationAuditType.Update,
-                    "Intended carrier");
+                    NotificationAuditScreenType.IntendedCarrier);
 
                 if (model.IsAddedToAddressBook)
                 {
@@ -180,7 +180,7 @@
                     model.NotificationId,
                     User.GetUserId(),
                     NotificationAuditType.Delete,
-                    "Intended carrier");
+                    NotificationAuditScreenType.IntendedCarrier);
             }
             catch (ApiBadRequestException ex)
             {
