@@ -13,10 +13,19 @@
 
         public int PageNumber { get; private set; }
 
-        public GetNotificationAuditTable(Guid notificationId, int pageNumber)
+        public int Screen { get;  private set; }
+
+        public DateTime StartDate { get; private set; }
+
+        public DateTime EndDate { get; private set; }
+
+        public GetNotificationAuditTable(Guid notificationId, int pageNumber, int screen, DateTime? startDate, DateTime? endDate)
         {
             this.NotificationId = notificationId;
             this.PageNumber = pageNumber;
+            this.Screen = screen;
+            this.StartDate = startDate == null ? DateTime.MinValue : startDate.GetValueOrDefault();
+            this.EndDate = endDate == null ? DateTime.MaxValue : endDate.GetValueOrDefault();
         }
     }
 }
