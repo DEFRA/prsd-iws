@@ -56,8 +56,8 @@
             var result = model.Details.WasteType.YCodes.WasteCodes;
             var expected = CreateYCodes().OrderBy(w => Regex.Match(w.Name, @"(\D+)").Value).ThenBy(w =>
             {
-                int val;
-                int.TryParse(Regex.Match(w.Name, @"(\d+)").Value, out val);
+                double val;
+                double.TryParse(Regex.Match(w.Name, @"(\d+(\.\d*)?|\.\d+)").Value, out val);
                 return val;
             });
 
@@ -72,8 +72,8 @@
             var result = model.Details.WasteType.HCodes.WasteCodes;
             var expected = CreateHCodes().OrderBy(w => Regex.Match(w.Name, @"(\D+)").Value).ThenBy(w =>
             {
-                int val;
-                int.TryParse(Regex.Match(w.Name, @"(\d+)").Value, out val);
+                double val;
+                double.TryParse(Regex.Match(w.Name, @"(\d+(\.\d*)?|\.\d+)").Value, out val);
                 return val;
             });
 
@@ -134,7 +134,8 @@
             {
                 new WasteCode() { Name = "Y10", Description = "Metal carbonyls" },
                 new WasteCode() { Name = "Y4", Description = "Copper compounds" },
-                new WasteCode() { Name = "Y1", Description = "Zinc compounds" }
+                new WasteCode() { Name = "Y1.3", Description = "Copper compounds" },
+                new WasteCode() { Name = "Y1.1", Description = "Zinc compounds" }
             };
         }
 
@@ -144,7 +145,8 @@
             {
                 new WasteCode() { Name = "H1", Description = "Explosive" },
                 new WasteCode() { Name = "H10", Description = "Liberation of toxic gases in contact with air or water" },
-                new WasteCode() { Name = "H2", Description = "Ecotoxic" }
+                new WasteCode() { Name = "H2.3", Description = "Ecotoxic" },
+                new WasteCode() { Name = "H2.2", Description = "Ecotoxic" }
             };
         }
 
