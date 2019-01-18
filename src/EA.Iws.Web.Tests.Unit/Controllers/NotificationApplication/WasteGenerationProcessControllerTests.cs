@@ -23,7 +23,7 @@
             this.mediator = A.Fake<IMediator>();
             this.auditService = A.Fake<IAuditService>();
             wasteGenerationProcessController = new WasteGenerationProcessController(A.Fake<IMediator>(), this.auditService);
-            A.CallTo(() => auditService.AddAuditEntry(this.mediator, notificationId, "user", NotificationAuditType.Create, "screen"));
+            A.CallTo(() => auditService.AddAuditEntry(this.mediator, notificationId, "user", NotificationAuditType.Create, NotificationAuditScreenType.ProcessOfGeneration));
         }
 
         [Fact]

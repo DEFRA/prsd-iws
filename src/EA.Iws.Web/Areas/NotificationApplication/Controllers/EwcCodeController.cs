@@ -52,7 +52,7 @@
             await
                 Mediator.SendAsync(new SetEwcCodes(id, viewModel.EnterWasteCodesViewModel.SelectedWasteCodes));
 
-            await this.AddAuditEntries(existingData, viewModel, id, "EWC codes");
+            await this.AddAuditEntries(existingData, viewModel, id, NotificationAuditScreenType.EwcCodes);
 
             return (backToOverview)
                 ? BackToOverviewResult(id)

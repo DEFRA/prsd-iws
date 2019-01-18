@@ -91,7 +91,7 @@
                    model.NotificationId,
                    User.GetUserId(),
                    existingPhysicalCharacteristicsData.PhysicalCharacteristics.Count == 0 ? NotificationAuditType.Create : NotificationAuditType.Update,
-                   "Physical characteristics");
+                   NotificationAuditScreenType.PhysicalCharacteristics);
 
                 if (backToOverview.GetValueOrDefault())
                 {

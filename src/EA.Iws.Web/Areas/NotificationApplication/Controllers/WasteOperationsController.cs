@@ -65,7 +65,7 @@
                     id,
                     User.GetUserId(),
                     existingsCodes.Count == 0 ? NotificationAuditType.Create : NotificationAuditType.Update,
-                    "Recovery codes");
+                    NotificationAuditScreenType.RecoveryCodes);
 
             return backToOverview.GetValueOrDefault() ? 
                 RedirectToAction("Index", "Home")
@@ -101,7 +101,7 @@
                     id,
                     User.GetUserId(),
                     existingsCodes.Count == 0 ? NotificationAuditType.Create : NotificationAuditType.Update,
-                    "Disposal codes");
+                    NotificationAuditScreenType.DisposalCodes);
 
             return backToOverview.GetValueOrDefault() ?
                 RedirectToAction("Index", "Home")
@@ -136,7 +136,7 @@
                     model.NotificationId,
                     User.GetUserId(),
                     existingTechnologyEmployedData.HasTechnologyEmployed ? NotificationAuditType.Update : NotificationAuditType.Create,
-                    "Technology employed");
+                    NotificationAuditScreenType.TechnologyEmployed);
 
             return backToOverview.GetValueOrDefault() ? 
                 RedirectToAction("Index", "Home")

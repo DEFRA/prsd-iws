@@ -27,7 +27,7 @@
             auditService = A.Fake<IAuditService>();
             exporterController = new ExporterController(client, new AddAddressBookEntryMap(), auditService);
 
-            A.CallTo(() => auditService.AddAuditEntry(client, notificationId, "user", NotificationAuditType.Create, "screen"));
+            A.CallTo(() => auditService.AddAuditEntry(client, notificationId, "user", NotificationAuditType.Create, NotificationAuditScreenType.Exporter));
         }
 
         private ExporterViewModel CreateExporterViewModel()

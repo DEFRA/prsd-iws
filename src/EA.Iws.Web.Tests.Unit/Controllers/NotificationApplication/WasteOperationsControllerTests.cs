@@ -27,7 +27,7 @@
 
             A.CallTo(() => mediator.SendAsync(A<SetTechnologyEmployed>.Ignored))
                 .Returns(Guid.Empty);
-            A.CallTo(() => auditService.AddAuditEntry(this.mediator, notificationId, "user", NotificationAuditType.Create, "screen"));
+            A.CallTo(() => auditService.AddAuditEntry(this.mediator, notificationId, "user", NotificationAuditType.Create, NotificationAuditScreenType.RecoveryCodes));
         }
 
         [Fact]

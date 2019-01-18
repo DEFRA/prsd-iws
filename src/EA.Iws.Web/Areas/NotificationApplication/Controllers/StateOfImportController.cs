@@ -98,7 +98,7 @@
                     id,
                     User.GetUserId(),
                     stateOfImportSetData.StateOfImport == null ? NotificationAuditType.Create : NotificationAuditType.Update,
-                    "Import route");
+                    NotificationAuditScreenType.ImportRoute);
 
             if (backToOverview.GetValueOrDefault())
             {

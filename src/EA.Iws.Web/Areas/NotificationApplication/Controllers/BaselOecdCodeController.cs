@@ -65,7 +65,7 @@
                    id,
                    User.GetUserId(),
                    existingData.NotificationWasteCodeData[CodeType.Basel].Count() == 0 && existingData.NotificationWasteCodeData[CodeType.Oecd].Count() == 0 ? NotificationAuditType.Create : NotificationAuditType.Update,
-                   "Basel/OECD code");
+                   NotificationAuditScreenType.BaselOecdCodes);
 
             return backToOverview ? RedirectToAction("Index", "Home", new { id })
                 : RedirectToAction("Index", "EwcCode", new { id });

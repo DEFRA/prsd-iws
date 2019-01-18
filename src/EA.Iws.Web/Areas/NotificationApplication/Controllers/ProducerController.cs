@@ -60,7 +60,7 @@
                     model.NotificationId,
                     User.GetUserId(),
                     NotificationAuditType.Create,
-                    "Producers");
+                    NotificationAuditScreenType.Producer);
 
                 if (model.IsAddedToAddressBook)
                 {
@@ -116,7 +116,7 @@
                     model.NotificationId,
                     User.GetUserId(),
                     NotificationAuditType.Update,
-                    "Producers");
+                    NotificationAuditScreenType.Producer);
 
                 if (model.IsAddedToAddressBook)
                 {
@@ -178,7 +178,7 @@
                     model.NotificationId,
                     User.GetUserId(),
                     NotificationAuditType.Delete,
-                    "Producers");
+                    NotificationAuditScreenType.Producer);
 
                 return RedirectToAction("List", "Producer", new { id = model.NotificationId, backToOverview });
             }
@@ -261,7 +261,7 @@
                     model.NotificationId,
                     User.GetUserId(),
                     type,
-                    "Site of export");
+                    NotificationAuditScreenType.SiteOfExport);
 
             if (backToList.GetValueOrDefault())
             {

@@ -60,7 +60,7 @@
                     model.NotificationId,
                     User.GetUserId(),
                     specialHandlingData.HasSpecialHandlingRequirements == null ? NotificationAuditType.Create : NotificationAuditType.Update,
-                    "Special handling");
+                    NotificationAuditScreenType.SpecialHandling);
 
                 if (backToOverview.GetValueOrDefault())
                 {
