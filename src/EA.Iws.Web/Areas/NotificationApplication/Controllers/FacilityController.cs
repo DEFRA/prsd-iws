@@ -66,7 +66,7 @@
                     model.NotificationId,
                     User.GetUserId(),
                     NotificationAuditType.Create,
-                    model.NotificationType == NotificationType.Disposal ? "Disposal facilities" : "Recovery facilities");
+                    model.NotificationType == NotificationType.Disposal ? NotificationAuditScreenType.DisposalFacilities : NotificationAuditScreenType.RecoveryFacilities);
 
                 if (model.IsAddedToAddressBook)
                 {
@@ -126,7 +126,7 @@
                     model.NotificationId,
                     User.GetUserId(),
                     NotificationAuditType.Update,
-                    model.NotificationType == NotificationType.Disposal ? "Disposal facilities" : "Recovery facilities");
+                    model.NotificationType == NotificationType.Disposal ? NotificationAuditScreenType.DisposalFacilities : NotificationAuditScreenType.RecoveryFacilities);
 
                 if (model.IsAddedToAddressBook)
                 {
@@ -220,7 +220,7 @@
                     model.NotificationId,
                     User.GetUserId(),
                     type,
-                    model.NotificationType == NotificationType.Disposal ? "Disposal site" : "Recovery site");
+                    model.NotificationType == NotificationType.Disposal ? NotificationAuditScreenType.DisposalSite : NotificationAuditScreenType.RecoverySite);
 
                 if (backToList.GetValueOrDefault())
                 {
@@ -286,7 +286,7 @@
                     id,
                     User.GetUserId(),
                     preconsentedFacilityData.IsPreconsentedRecoveryFacility == null ? NotificationAuditType.Create : NotificationAuditType.Update,
-                    "Pre-consented facility");
+                    NotificationAuditScreenType.PreConsentedFacility);
 
             if (backToOverview.GetValueOrDefault())
             {
@@ -338,7 +338,7 @@
                     model.NotificationId,
                     User.GetUserId(),
                     NotificationAuditType.Delete,
-                    model.NotificationType == NotificationType.Disposal ? "Disposal facilities" : "Recovery facilities");
+                    model.NotificationType == NotificationType.Disposal ? NotificationAuditScreenType.DisposalFacilities : NotificationAuditScreenType.RecoveryFacilities);
 
                 return RedirectToAction("List", "Facility", new { id = model.NotificationId, backToOverview });
             }

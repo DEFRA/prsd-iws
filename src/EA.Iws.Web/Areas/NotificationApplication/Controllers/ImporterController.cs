@@ -68,7 +68,7 @@
                    model.NotificationId,
                    User.GetUserId(),
                    importer.HasImporter ? NotificationAuditType.Update : NotificationAuditType.Create,
-                   "Importer");
+                   NotificationAuditScreenType.Importer);
 
                 await AddToProducerAddressBook(model);
 

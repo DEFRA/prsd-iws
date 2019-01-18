@@ -118,7 +118,7 @@
                    model.NotificationId,
                    User.GetUserId(),
                    existingWasteTypeData == null ? NotificationAuditType.Create : NotificationAuditType.Update,
-                   "Chemical composition");
+                   NotificationAuditScreenType.ChemicalComposition);
 
             return RedirectToAction("OtherWasteAdditionalInformation", new { id = model.NotificationId, backToOverview });
         }
@@ -158,7 +158,7 @@
                    model.NotificationId,
                    User.GetUserId(),
                    existingWasteTypeData == null ? NotificationAuditType.Create : NotificationAuditType.Update,
-                   "Chemical composition");
+                   NotificationAuditScreenType.ChemicalComposition);
 
             if (backToOverview.GetValueOrDefault())
             {
@@ -206,7 +206,7 @@
                    model.NotificationId,
                    User.GetUserId(),
                    existingWasteTypeData == null ? NotificationAuditType.Create : NotificationAuditType.Update,
-                   "Chemical composition");
+                   NotificationAuditScreenType.ChemicalComposition);
 
             if (model.ChemicalCompositionType == ChemicalComposition.Wood)
             {
@@ -255,7 +255,7 @@
                    model.NotificationId,
                    User.GetUserId(),
                    existingWasteTypeData == null ? NotificationAuditType.Create : NotificationAuditType.Update,
-                   "Chemical composition");
+                   NotificationAuditScreenType.ChemicalComposition);
 
             if (backToOverview.GetValueOrDefault())
             {

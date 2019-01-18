@@ -11,7 +11,7 @@
     {
         public Guid NotificationId { get; set; }
         public string UserId { get; set; }
-        public int Screen { get; set; }
+        public NotificationAuditScreenType Screen { get; set; }
         public NotificationAuditType Type { get; set; }
         public DateTimeOffset DateAdded { get; set; }
     }

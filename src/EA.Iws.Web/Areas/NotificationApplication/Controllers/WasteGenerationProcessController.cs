@@ -54,7 +54,7 @@
                    model.NotificationId,
                    User.GetUserId(),
                    wasteGenerationProcessData.Process == null ? NotificationAuditType.Create : NotificationAuditType.Update,
-                   "Process of generation");
+                   NotificationAuditScreenType.ProcessOfGeneration);
                 if (backToOverview.GetValueOrDefault())
                 {
                     return RedirectToAction("Index", "Home", new { id = model.NotificationId });

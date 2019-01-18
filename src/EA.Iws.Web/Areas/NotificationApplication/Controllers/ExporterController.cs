@@ -75,7 +75,7 @@
                     model.NotificationId,
                     User.GetUserId(),
                     exporter.HasExporter ? NotificationAuditType.Update : NotificationAuditType.Create,
-                    "Exporter");
+                    NotificationAuditScreenType.Exporter);
 
                 if (backToOverview.GetValueOrDefault())
                 {
