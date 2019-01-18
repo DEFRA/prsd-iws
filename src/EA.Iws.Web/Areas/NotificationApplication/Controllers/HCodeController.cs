@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
     using System.Web.Mvc;
+    using Core.Notification.Audit;
     using Core.WasteCodes;
     using Infrastructure;
     using Prsd.Core.Mapper;
@@ -50,7 +51,7 @@
                 Mediator.SendAsync(new SetHCodes(id, viewModel.EnterWasteCodesViewModel.SelectedWasteCodes,
                         viewModel.EnterWasteCodesViewModel.IsNotApplicable));
 
-            await this.AddAuditEntries(existingData, viewModel, id, "H or HP codes");
+            await this.AddAuditEntries(existingData, viewModel, id, NotificationAuditScreenType.HorHpCodes);
 
             return (backToOverview) ? BackToOverviewResult(id) 
                 : RedirectToAction("Index", "UnClass", new { id });

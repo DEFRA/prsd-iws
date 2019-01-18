@@ -51,7 +51,7 @@
                    id,
                    User.GetUserId(),
                    existingShipmentData.HasShipmentData ? NotificationAuditType.Update : NotificationAuditType.Create,
-                   "Amounts and dates");
+                   NotificationAuditScreenType.AmountsAndDates);
 
             if (backToOverview.GetValueOrDefault())
             {

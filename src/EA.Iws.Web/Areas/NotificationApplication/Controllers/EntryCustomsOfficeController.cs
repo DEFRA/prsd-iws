@@ -85,7 +85,7 @@
                    id,
                    User.GetUserId(),
                    existingData.CustomsOfficeData == null ? NotificationAuditType.Create : NotificationAuditType.Update,
-                   "Customs office");
+                   NotificationAuditScreenType.CustomsOffice);
 
             return RedirectToAction("Index", "Shipment", new { id });
         }

@@ -202,6 +202,7 @@
     <Compile Include="Notification\Audit\NotificationAudit.cs" />
     <Compile Include="Notification\Audit\NotificationAuditForDisplay.cs" />
     <Compile Include="Notification\Audit\NotificationAuditScreen.cs" />
+    <Compile Include="Notification\Audit\NotificationAuditScreenType.cs" />
     <Compile Include="Notification\Audit\NotificationAuditTable.cs" />
     <Compile Include="Notification\Audit\NotificationAuditType.cs" />
     <Compile Include="Notification\NotificationSharedUser.cs" />

@@ -66,7 +66,7 @@
                     id,
                     User.GetUserId(),
                     stateOfExportSetData.StateOfExport.ExitPoint == null ? NotificationAuditType.Create : NotificationAuditType.Update,
-                    "Export route");
+                    NotificationAuditScreenType.ExportRoute);
 
             if (backToOverview.GetValueOrDefault())
             {

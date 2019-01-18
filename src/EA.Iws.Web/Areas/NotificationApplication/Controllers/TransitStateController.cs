@@ -109,7 +109,7 @@
                     id,
                     User.GetUserId(),
                     existingData.TransitState == null ? NotificationAuditType.Create : NotificationAuditType.Update,
-                    "Transits");
+                    NotificationAuditScreenType.Transits);
 
                 return RedirectToAction("Summary", "TransportRoute", new { id, backToOverview });
             }
@@ -130,7 +130,7 @@
                     id,
                     User.GetUserId(),
                     NotificationAuditType.Delete,
-                    "Transits");
+                    NotificationAuditScreenType.Transits);
 
             return RedirectToAction("Summary", "TransportRoute", new { id, backToOverview });
         }
