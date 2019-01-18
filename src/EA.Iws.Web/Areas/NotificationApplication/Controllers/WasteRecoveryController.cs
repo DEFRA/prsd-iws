@@ -275,7 +275,7 @@
                    id,
                    User.GetUserId(),
                    type,
-                   "Waste recovery");
+                   NotificationAuditScreenType.WasteRecovery);
         }
     }
 }

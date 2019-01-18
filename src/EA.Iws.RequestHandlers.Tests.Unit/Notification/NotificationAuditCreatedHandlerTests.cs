@@ -25,13 +25,13 @@
             var audit = A.Fake<Audit>();
             context.NotificationAudit.Add(audit);
 
-            handler = new CreateNotificationAuditHandler(context, repo);
+            handler = new CreateNotificationAuditHandler(repo);
             message = new CreateNotificationAudit()
             {
                 NotificationId = audit.NotificationId,
                 UserId = audit.UserId,
                 DateAdded = audit.DateAdded,
-                Screen = audit.Screen,
+                Screen = (NotificationAuditScreenType)audit.Screen,
                 Type = (NotificationAuditType)audit.Type
             };
         }

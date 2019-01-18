@@ -97,7 +97,7 @@
                     model.NotificationId,
                     User.GetUserId(),
                     existingPackagingData.PackagingTypes.Count == 0 ? NotificationAuditType.Create : NotificationAuditType.Update,
-                    "Packaging types");
+                    NotificationAuditScreenType.PackagingTypes);
 
                 if (backToOverview.GetValueOrDefault())
                 {

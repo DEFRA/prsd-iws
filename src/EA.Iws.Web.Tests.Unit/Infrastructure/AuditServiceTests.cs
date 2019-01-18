@@ -1,12 +1,11 @@
 ﻿namespace EA.Iws.Web.Tests.Unit.Infrastructure
 {
+    using System;
+    using System.Threading.Tasks;
     using Core.Notification.Audit;
     using FakeItEasy;
     using Prsd.Core.Mediator;
     using Requests.Notification;
-    using System;
-    using System.Linq;
-    using System.Threading.Tasks;
     using Web.Infrastructure;
     using Xunit;
 
@@ -27,12 +26,7 @@
         [Fact]
         public async Task Exporter_AddExporter_AuditMustBeCalled()
         {
-            var screens = A.CollectionOfFake<NotificationAuditScreen>(1);
-            A.CallTo(() => mediator.SendAsync(A<GetNotificationAuditScreens>.Ignored)).Returns(screens);
-
-            await this.auditService.AddAuditEntry(this.mediator, notificationId, userId.ToString(), NotificationAuditType.Create, screens.FirstOrDefault().ScreenName);
-
-            A.CallTo(() => mediator.SendAsync(A<GetNotificationAuditScreens>.Ignored)).MustHaveHappened(Repeated.AtLeast.Once);
+            await auditService.AddAuditEntry(this.mediator, notificationId, userId.ToString(), NotificationAuditType.Create, NotificationAuditScreenType.Exporter);
 
             A.CallTo(() => mediator.SendAsync(A<CreateNotificationAudit>.Ignored)).MustHaveHappened(Repeated.AtLeast.Once);
         }

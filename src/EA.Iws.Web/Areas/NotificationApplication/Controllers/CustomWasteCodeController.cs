@@ -77,7 +77,7 @@
                       id,
                       User.GetUserId(),
                       existingData.NotificationWasteCodeData[CodeType.ExportCode].Count() == 0 ? NotificationAuditType.Create : NotificationAuditType.Update,
-                      "Other codes");
+                      NotificationAuditScreenType.OtherCodes);
 
             var notificationInfo = await mediator.SendAsync(new GetNotificationBasicInfo(id));
 
