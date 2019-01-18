@@ -30,6 +30,7 @@
             PageSize = data.PageSize;
             PageNumber = data.PageNumber;
             NumberOfNotificationAudits = data.NumberOfNotificationAudits;
+            NumberOfFilterdNotificationAudits = data.NumberOfFilteredNotificationAudits;
         }
 
         public Guid NotificationId { get; set; }
@@ -137,5 +138,7 @@
         public int PageNumber { get; set; }
         
         public int NumberOfNotificationAudits { get; set; }
+
+        public int NumberOfFilterdNotificationAudits { get; set; }
     }
 }

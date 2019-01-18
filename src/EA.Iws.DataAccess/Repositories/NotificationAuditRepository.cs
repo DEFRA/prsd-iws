@@ -57,6 +57,18 @@
                 .ToArrayAsync();
         }
 
+        public async Task<int> GetTotalNumberOfFilteredAudits(Guid notificationId, int screen, DateTime startDate, DateTime endDate)
+        {
+            await notificationApplicationAuthorization.EnsureAccessAsync(notificationId);
+
+            if (screen == 0)
+            {
+                return await context.NotificationAudit.CountAsync(p => p.NotificationId == notificationId && p.DateAdded >= startDate && p.DateAdded <= endDate);
+            }
+
+            return await context.NotificationAudit.CountAsync(p => p.NotificationId == notificationId && p.Screen == screen && p.DateAdded >= startDate && p.DateAdded <= endDate);
+        }
+
         public async Task<int> GetTotalNumberOfNotificationAudits(Guid notificationId)
         {
             await notificationApplicationAuthorization.EnsureAccessAsync(notificationId);

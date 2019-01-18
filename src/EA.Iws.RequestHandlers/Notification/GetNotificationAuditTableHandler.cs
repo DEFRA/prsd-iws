@@ -34,6 +34,7 @@
             notificationAuditTable.PageNumber = message.PageNumber;
             notificationAuditTable.PageSize = PageSize;
             notificationAuditTable.NumberOfNotificationAudits = await repository.GetTotalNumberOfNotificationAudits(message.NotificationId);
+            notificationAuditTable.NumberOfFilteredNotificationAudits = await repository.GetTotalNumberOfFilteredAudits(message.NotificationId, message.Screen, message.StartDate, message.EndDate);
 
             return notificationAuditTable;
         }

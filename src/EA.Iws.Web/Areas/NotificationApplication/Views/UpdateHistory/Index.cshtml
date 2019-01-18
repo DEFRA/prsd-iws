@@ -156,7 +156,7 @@ else
 }
 @if (Model.UpdateHistoryItems.Count > 0)
 {
-    @Html.Pager(Model.PageSize, Model.PageNumber, Model.NumberOfNotificationAudits)
+    @Html.Pager(Model.PageSize, Model.PageNumber, Model.NumberOfFilterdNotificationAudits)
 }
 
 @Html.ActionLink("Go to Notification Overview", "Index", "Home", new { @Model.NotificationId, backToOverview = true }, null)
