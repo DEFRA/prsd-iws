@@ -24,27 +24,36 @@
 
         protected virtual void CopyStateOfExport(TransportRoute source, TransportRoute destination)
         {
-            destination.SetStateOfExportForNotification(new StateOfExport(source.StateOfExport.Country,
-                source.StateOfExport.CompetentAuthority,
-                source.StateOfExport.ExitPoint));
+            if (source.StateOfExport != null)
+            {
+                destination.SetStateOfExportForNotification(new StateOfExport(source.StateOfExport.Country,
+                    source.StateOfExport.CompetentAuthority,
+                    source.StateOfExport.ExitPoint));
+            }
         }
 
         protected virtual void CopyStateOfImport(TransportRoute source, TransportRoute destination)
         {
-            destination.SetStateOfImportForNotification(new StateOfImport(source.StateOfImport.Country,
-                source.StateOfImport.CompetentAuthority,
-                source.StateOfImport.EntryPoint));
+            if (source.StateOfImport != null)
+            {
+                destination.SetStateOfImportForNotification(new StateOfImport(source.StateOfImport.Country,
+                    source.StateOfImport.CompetentAuthority,
+                    source.StateOfImport.EntryPoint));
+            }
         }
 
         protected virtual void CopyTransitStates(TransportRoute source, TransportRoute destination)
         {
-            foreach (var transitState in source.TransitStates.OrderBy(ts => ts.OrdinalPosition))
+            if (source.TransitStates != null)
             {
-                destination.AddTransitStateToNotification(new TransitState(transitState.Country,
-                    transitState.CompetentAuthority,
-                    transitState.EntryPoint,
-                    transitState.ExitPoint,
-                    transitState.OrdinalPosition));
+                foreach (var transitState in source.TransitStates.OrderBy(ts => ts.OrdinalPosition))
+                {
+                    destination.AddTransitStateToNotification(new TransitState(transitState.Country,
+                        transitState.CompetentAuthority,
+                        transitState.EntryPoint,
+                        transitState.ExitPoint,
+                        transitState.OrdinalPosition));
+                }
             }
         }
 
