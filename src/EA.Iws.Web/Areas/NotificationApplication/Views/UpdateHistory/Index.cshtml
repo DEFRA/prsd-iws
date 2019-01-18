@@ -18,57 +18,155 @@
 }
 
 @Html.Partial("_Title", null)
-
-<div class="form-group">
-
-    <table class="odd-table" title="@Resource.TitleNotificationUpdateHistorySearchResults">
-        <caption class="visuallyhidden">@Resource.TableCaption</caption>
-        <thead>
-            <tr>
-                <th>
-                    @Resource.ThName
-                </th>
-                <th>
-                    @Resource.ThDate
-                </th>
-                <th>
-                    @Resource.ThTime
-                </th>
-                <th>
-                    @Resource.ThInformationChange
-                </th>
-                <th>
-                    @Resource.ThTypeOfChange
-                </th>
-            </tr>
-        </thead>
-
-        <tbody>
-            @for (int i = 0; i < Model.UpdateHistoryItems.Count; i++)
+@if (Model.HasHistoryItems)
+{
+    <div class="grid-row">
+        <div class="column-two-thirds">
+            @using (Html.BeginForm())
             {
-                <tr>
-                    <td>
-                        @Model.UpdateHistoryItems[i].UserName
-                    </td>
-                    <td>
-                        @DisplayDate(@Model.UpdateHistoryItems[i].DateAdded)
-                    </td>
-                    <td>
-                        @DisplayTime(@Model.UpdateHistoryItems[i].DateAdded)
-                    </td>
-                    <td>
-                        @Model.UpdateHistoryItems[i].ScreenName
-                    </td>
-                    <td>
-                        @Model.UpdateHistoryItems[i].AuditType
-                    </td>
-                </tr>
+                @Html.AntiForgeryToken()
+                @Html.Gds().ValidationSummary()
+                @Html.HiddenFor(m => m.NotificationId)
+                @Html.HiddenFor(m => m.HasHistoryItems)
+                @Html.HiddenFor(m => m.PageNumber)
+
+                <div class="form-group">
+                    @Html.DropDownListFor(m => m.SelectedScreen, Model.FilterTerms, new { @class = "form-control view-by" })
+                </div>
+                if (Model.SelectedScreen == "date")
+                {
+                    <div class="form-group @Html.Gds().FormGroupClass(m => m.StartDay) @Html.Gds().FormGroupClass(m => m.StartMonth) @Html.Gds().FormGroupClass(m => m.StartYear)">
+                        <fieldset>
+                            <legend>
+                                <span class="form-label">From</span>
+                            </legend>
+                            <div class="form-date">
+                                @Html.Gds().ValidationMessageFor(m => m.StartDay)
+                                @Html.Gds().ValidationMessageFor(m => m.StartMonth)
+                                @Html.Gds().ValidationMessageFor(m => m.StartYear)
+                                <div class="form-group form-group-day">
+                                    @Html.Gds().LabelFor(m => m.StartDay)
+                                    @Html.Gds().TextBoxFor(m => m.StartDay, new { type = "number", min = "1", max = "31" })
+                                </div>
+                                <div class="form-group form-group-month">
+                                    @Html.Gds().LabelFor(m => m.StartMonth)
+                                    @Html.Gds().TextBoxFor(m => m.StartMonth, new { type = "number", min = "1", max = "12" })
+                                </div>
+                                <div class="form-group form-group-year">
+                                    @Html.Gds().LabelFor(m => m.StartYear)
+                                    @Html.Gds().TextBoxFor(m => m.StartYear, new { type = "number", min = "2015" })
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                    <br />
+                    <div class="form-group @Html.Gds().FormGroupClass(m => m.EndDay) @Html.Gds().FormGroupClass(m => m.EndMonth) @Html.Gds().FormGroupClass(m => m.EndYear)">
+                        <fieldset>
+                            <legend>
+                                <span class="form-label">To</span>
+                            </legend>
+                            <div class="form-date">
+                                @Html.Gds().ValidationMessageFor(m => m.EndDay)
+                                @Html.Gds().ValidationMessageFor(m => m.EndMonth)
+                                @Html.Gds().ValidationMessageFor(m => m.EndYear)
+                                <div class="form-group form-group-day">
+                                    @Html.Gds().LabelFor(m => m.EndDay)
+                                    @Html.Gds().TextBoxFor(m => m.EndDay, new { type = "number", min = "1", max = "31" })
+                                </div>
+                                <div class="form-group form-group-month">
+                                    @Html.Gds().LabelFor(m => m.EndMonth)
+                                    @Html.Gds().TextBoxFor(m => m.EndMonth, new { type = "number", min = "1", max = "12" })
+                                </div>
+                                <div class="form-group form-group-year">
+                                    @Html.Gds().LabelFor(m => m.EndYear)
+                                    @Html.Gds().TextBoxFor(m => m.EndYear, new { type = "number", min = "2015" })
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                    <div class="form-group">
+                        <button class="button" type="submit" name="command" value="search">@Resource.Search</button>
+                    </div>
+                }
             }
-        </tbody>
-    </table>
+        </div>
+    </div>
+    if (Model.UpdateHistoryItems.Count > 0)
+    {
 
-</div>
+        <table class="odd-table" title="@Resource.TitleNotificationUpdateHistorySearchResults">
+            <caption class="visuallyhidden">@Resource.TableCaption</caption>
+            <thead>
+                <tr>
+                    <th>
+                        @Resource.ThName
+                    </th>
+                    <th>
+                        @Resource.ThDate
+                    </th>
+                    <th>
+                        @Resource.ThTime
+                    </th>
+                    <th>
+                        @Resource.ThInformationChange
+                    </th>
+                    <th>
+                        @Resource.ThTypeOfChange
+                    </th>
+                </tr>
+            </thead>
 
-@Html.Pager(Model.PageSize, Model.PageNumber, Model.NumberOfNotificationAudits)
+            <tbody>
+                @for (int i = 0; i < Model.UpdateHistoryItems.Count; i++)
+                {
+                    <tr>
+                        <td>
+                            @Model.UpdateHistoryItems[i].UserName
+                        </td>
+                        <td>
+                            @DisplayDate(@Model.UpdateHistoryItems[i].DateAdded)
+                        </td>
+                        <td>
+                            @DisplayTime(@Model.UpdateHistoryItems[i].DateAdded)
+                        </td>
+                        <td>
+                            @Model.UpdateHistoryItems[i].ScreenName
+                        </td>
+                        <td>
+                            @Model.UpdateHistoryItems[i].AuditType
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+
+        <div class="margin-bottom-30 margin-top-30 ">
+            <h3 style="text-align:center; font-size:36px">No updates available</h3>
+        </div>
+    }
+}
+else
+{
+    <div class="margin-bottom-30 margin-top-30 ">
+        <h3 style="text-align:center; font-size:36px">No updates available</h3>
+    </div>
+}
+@if (Model.UpdateHistoryItems.Count > 0)
+{
+    @Html.Pager(Model.PageSize, Model.PageNumber, Model.NumberOfFilterdNotificationAudits)
+}
 
 @Html.ActionLink("Go to Notification Overview", "Index", "Home", new { @Model.NotificationId, backToOverview = true }, null)
+
+@section scripts {
+    <script>
+        $(function () {
+            $("#@Html.NameFor(m => m.SelectedScreen)").change(function () {
+                $("form").submit();
+            });
+        });
+    </script>
+}

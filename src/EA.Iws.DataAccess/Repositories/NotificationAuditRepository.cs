@@ -36,16 +36,37 @@
                 .ToArrayAsync();
         }
 
-        public async Task<IEnumerable<Audit>> GetPagedNotificationAuditsById(Guid notificationId, int pageNumber, int pageSize)
+        public async Task<IEnumerable<Audit>> GetPagedNotificationAuditsById(Guid notificationId, int pageNumber, int pageSize, int screen, DateTime startDate, DateTime endDate)
         {
             await notificationApplicationAuthorization.EnsureAccessAsync(notificationId);
 
-            return await this.context.NotificationAudit
-                .Where(p => p.NotificationId == notificationId)
+            if (screen == 0)
+            {
+                return await this.context.NotificationAudit
+                .Where(p => p.NotificationId == notificationId && p.DateAdded >= startDate && p.DateAdded <= endDate)
                 .OrderByDescending(x => x.DateAdded)
                 .Skip((pageNumber - 1) * pageSize)
                 .Take(pageSize)
                 .ToArrayAsync();
+            }
+            return await this.context.NotificationAudit
+                .Where(p => p.NotificationId == notificationId && p.Screen == screen && p.DateAdded >= startDate && p.DateAdded <= endDate)
+                .OrderByDescending(x => x.DateAdded)
+                .Skip((pageNumber - 1) * pageSize)
+                .Take(pageSize)
+                .ToArrayAsync();
+        }
+
+        public async Task<int> GetTotalNumberOfFilteredAudits(Guid notificationId, int screen, DateTime startDate, DateTime endDate)
+        {
+            await notificationApplicationAuthorization.EnsureAccessAsync(notificationId);
+
+            if (screen == 0)
+            {
+                return await context.NotificationAudit.CountAsync(p => p.NotificationId == notificationId && p.DateAdded >= startDate && p.DateAdded <= endDate);
+            }
+
+            return await context.NotificationAudit.CountAsync(p => p.NotificationId == notificationId && p.Screen == screen && p.DateAdded >= startDate && p.DateAdded <= endDate);
         }
 
         public async Task<int> GetTotalNumberOfNotificationAudits(Guid notificationId)
