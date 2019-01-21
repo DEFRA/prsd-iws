@@ -249,4 +249,7 @@
   <data name="AccessLevel" xml:space="preserve">
     <value>Notification access level:</value>
   </data>
+  <data name="BulkUploadPrenotificationData" xml:space="preserve">
+    <value>Bulk upload prenotification data</value>
+  </data>
 </root>
