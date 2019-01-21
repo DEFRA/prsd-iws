@@ -43,7 +43,7 @@
             {
                 var response = await mediator.SendAsync(new GetBulkUploadTemplate(BulkType.Prenotification));
 
-                var downloadName = "BulkUploadPrenotificationTemplate" + SystemTime.UtcNow + ".xlsx";
+                var downloadName = "BulkUploadPrenotificationTemplate-" + SystemTime.UtcNow.ToString("yyyy-MM-dd-HH-mm-ss") + ".xlsx";
 
                 return File(response, MimeTypes.MSExcelXml, downloadName);
             }
