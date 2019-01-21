@@ -11,9 +11,9 @@ WHILE @shipmentNumber < 5
 BEGIN
 
 	INSERT INTO [Notification].[Movement]
-			([Id],[Number],[NotificationId],[Date],[Status],[PrenotificationDate], [CreatedBy])
+			([Id],[Number],[NotificationId],[Date],[Status],[PrenotificationDate], [CreatedBy], [CreatedOnDate])
 		   VALUES
-			(NEWID(),@shipmentNumber,@notificationId,Cast(N'2016-11-01' AS DATE),2,Cast(N'2016-10-26' AS DATE), @userId);
+			(NEWID(), @shipmentNumber, @notificationId, Cast(N'2016-11-01' AS DATE),2, Cast(N'2016-10-26' AS DATE), @userId, Cast(N'2016-10-26' AS DATE));
 
 	SET @shipmentNumber = @shipmentNumber + 1;
 
