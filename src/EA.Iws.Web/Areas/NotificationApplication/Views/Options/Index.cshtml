@@ -146,12 +146,15 @@
                         {
                             @Html.ActionLink(Resource.CreatePrenotification, "Index", "Create", new { notificationId = Model.NotificationId, area = "NotificationMovements" }, null)
                             @Html.ActionLink(Resource.UploadPrenotification, "Index", "UploadChoice", new { notificationId = Model.NotificationId, area = "NotificationMovements" }, null)
-                            @Html.ActionLink(string.Format(Resource.CertificateOfReceipt, certificateLinkText), "CertificateTypes", "Certificate", new { notificationId = Model.NotificationId, area = "NotificationMovements" }, null)
+                            @Html.ActionLink(Resource.BulkUploadPrenotificationData, "Index", "PrenotificationBulkUpload", new { notificationId = Model.NotificationId, area = "NotificationMovements" }, null)
                             @Html.ActionLink(Resource.CancelPrenotification, "Index", "CancelMovement", new { notificationId = Model.NotificationId, area = "NotificationMovements" }, null)
                             @Html.ActionLink(Resource.EditPrenotification, "Index", "Edit", new { notificationId = Model.NotificationId, area = "NotificationMovements" }, null)
+                            <br />
+                            @Html.ActionLink(string.Format(Resource.CertificateOfReceipt, certificateLinkText), "CertificateTypes", "Certificate", new { notificationId = Model.NotificationId, area = "NotificationMovements" }, null)
                             @Html.ActionLink(Resource.Reject, "Index", "Reject", new { notificationId = Model.NotificationId, area = "NotificationMovements" }, null)
+                            <br />
                             if (Model.ShowGenerateInterimDocumentLink)
-                                {
+                            {
                                     @Html.ActionLink(Resource.GenerateInterimDoc, "GenerateInterimMovementDocument", "Home", new { id = Model.NotificationId, area = "NotificationApplication" }, null)
                             }
                                 if (Model.ShowDownloadMovementsLink)
