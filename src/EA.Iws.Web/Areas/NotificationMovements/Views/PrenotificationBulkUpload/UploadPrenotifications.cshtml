@@ -1,0 +1,44 @@
+﻿@using Resource = EA.Iws.Web.Areas.NotificationMovements.Views.PrenotificationBulkUpload.PrenotificationBulkUploadResources
+@model EA.Iws.Web.Areas.NotificationMovements.ViewModels.PrenotificationBulkUpload.PrenotificationBulkUploadViewModel
+
+@{
+    ViewBag.Title = @Resource.UploadPrenotificationsTabTitle;
+    Layout = "~/Views/Shared/_Layout.GovUK.Sections.cshtml";
+}
+
+<div>
+    <h1 class="heading-large">@Resource.UploadPrenotificationsTitle</h1>
+    <p>@Resource.UploadPrenotificationsText1</p>
+    <p>@Resource.UploadPrenotificationsText2</p>
+    <p>
+        <ul class="grey-text">
+            For example:
+            <li>@Resource.UploadPrenotificationsList1</li>
+            <li>@Resource.UploadPrenotificationsList2</li>
+            <li>@Resource.UploadPrenotificationsList3</li>
+            <li>@Resource.UploadPrenotificationsList4</li>
+            <li>@Resource.UploadPrenotificationsList5</li>
+            <li>@Resource.UploadPrenotificationsList6</li>
+        </ul>
+    </p>
+    <p>
+</div>
+
+@using (Html.BeginForm("UploadPrenotifications", null, null,
+                FormMethod.Post, HtmlHelper.AnonymousObjectToHtmlAttributes(new { enctype = "multipart/form-data" })))
+{
+    @Html.AntiForgeryToken()
+    @Html.Gds().ValidationSummary()
+
+    <div class="form-group @Html.Gds().FormGroupClass(m => m.File)">
+        <label for="@Html.NameFor(m => m.File)" class="visually-hidden">@Html.DisplayNameFor(m => m.File)</label>
+        @Html.Gds().ValidationMessageFor(m => m.File)
+        @Html.Gds().TextBoxFor(m => m.File, new { type = "file" })
+    </div>
+
+    <div class="form-group-compound">
+        <button class="button" type="submit">@Constants.ContinueButtonText</button>
+    </div>
+}
+
+@Html.ActionLink(Resource.NotificationOptionsLink, "Index", "Options", new { id = @Model.NotificationId, area = "NotificationApplication" }, null)

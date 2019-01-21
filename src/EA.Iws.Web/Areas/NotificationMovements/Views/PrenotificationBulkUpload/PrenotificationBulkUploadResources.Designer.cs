@@ -60,5 +60,104 @@ namespace EA.Iws.Web.Areas.NotificationMovements.Views.PrenotificationBulkUpload
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Go to notification options.
+        /// </summary>
+        public static string NotificationOptionsLink {
+            get {
+                return ResourceManager.GetString("NotificationOptionsLink", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The data file should not exceed 2GB in size..
+        /// </summary>
+        public static string UploadPrenotificationsList1 {
+            get {
+                return ResourceManager.GetString("UploadPrenotificationsList1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Remove all column headings from a CSV file type..
+        /// </summary>
+        public static string UploadPrenotificationsList2 {
+            get {
+                return ResourceManager.GetString("UploadPrenotificationsList2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Only contain shipment records for new shipments, no duplicates will be accepted..
+        /// </summary>
+        public static string UploadPrenotificationsList3 {
+            get {
+                return ResourceManager.GetString("UploadPrenotificationsList3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The actual shipment date should be recorded in dd/mm/yyyy format..
+        /// </summary>
+        public static string UploadPrenotificationsList4 {
+            get {
+                return ResourceManager.GetString("UploadPrenotificationsList4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The actual shipment date must be at least 3 working days from the current date..
+        /// </summary>
+        public static string UploadPrenotificationsList5 {
+            get {
+                return ResourceManager.GetString("UploadPrenotificationsList5", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The quantity unit of measurement and packaging type must adhere to those that have been consented to..
+        /// </summary>
+        public static string UploadPrenotificationsList6 {
+            get {
+                return ResourceManager.GetString("UploadPrenotificationsList6", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Prenotifications Bulk Upload.
+        /// </summary>
+        public static string UploadPrenotificationsTabTitle {
+            get {
+                return ResourceManager.GetString("UploadPrenotificationsTabTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Upload the prenotification data file in an Excel or .CSV format..
+        /// </summary>
+        public static string UploadPrenotificationsText1 {
+            get {
+                return ResourceManager.GetString("UploadPrenotificationsText1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Make sure all data matches the correct template format to avoid validation errors..
+        /// </summary>
+        public static string UploadPrenotificationsText2 {
+            get {
+                return ResourceManager.GetString("UploadPrenotificationsText2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bulk upload of prenotification data.
+        /// </summary>
+        public static string UploadPrenotificationsTitle {
+            get {
+                return ResourceManager.GetString("UploadPrenotificationsTitle", resourceCulture);
+            }
+        }
     }
 }
