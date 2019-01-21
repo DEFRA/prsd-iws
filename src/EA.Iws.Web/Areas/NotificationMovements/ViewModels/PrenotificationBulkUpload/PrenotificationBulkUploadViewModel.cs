@@ -19,7 +19,7 @@
 
         public Guid NotificationId { get; set; }
 
-        [Display(Name = "Upload the signed copy of the prenotification document")]
+        [Display(Name = "Upload the data file containing your prenotification data")]
         [RestrictToAllowedUploadTypes]
         public HttpPostedFileBase File { get; set; }
 
@@ -27,7 +27,7 @@
         {
             if (File == null || File.InputStream.Length == 0)
             {
-                yield return new ValidationResult("Please upload the signed copy of the prenotification document", new[] { "File" });
+                yield return new ValidationResult("Upload the data file containing your prenotification data", new[] { "File" });
             }
         }
     }
