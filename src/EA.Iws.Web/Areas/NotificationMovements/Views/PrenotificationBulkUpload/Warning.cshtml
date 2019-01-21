@@ -1,0 +1,28 @@
+﻿@using Resources = EA.Iws.Web.Areas.NotificationMovements.Views.PrenotificationBulkUpload.PrenotificationBulkUploadResources
+@model EA.Iws.Web.Areas.NotificationMovements.ViewModels.PrenotificationBulkUpload.WarningChoiceViewModel
+
+@{
+    ViewBag.Title = @Resources.UploadPrenotificationsTabTitle;
+    Layout = "~/Views/Shared/_Layout.GovUK.Sections.cshtml";
+}
+
+<div>
+    <h1 class="heading-large">You haven't added any shipment movement documents</h1>
+    <p class="margin-top-30">You must upload shipment movement documents with your prenotification data file to finish the process.</p>
+    <p class="bold-small">If you leave the process before adding your accompanying shipment movement documents, your bulk upload of prenotifications will not be saved.</p>
+</div>
+
+@using (Html.BeginForm())
+{
+    @Html.Gds().ValidationSummary()
+    @Html.AntiForgeryToken()
+
+    <div class="form-group margin-top-30 @Html.Gds().FormGroupClass(m => m.WarningChoices.SelectedValue)">
+        @Html.Gds().ValidationMessageFor(model => model.WarningChoices.SelectedValue)
+        @Html.EditorFor(m => m.WarningChoices)
+    </div>
+
+    <div class="form-group">
+        <button class="button" type="submit">@Constants.ContinueOnlyButtonText</button>
+    </div>
+}

@@ -37,5 +37,13 @@
 
             return View(model);
         }
+
+        [HttpGet]
+        public ActionResult Warning()
+        {
+            var model = new WarningChoiceViewModel();
+
+            return View(model);
+        }
     }
 }
