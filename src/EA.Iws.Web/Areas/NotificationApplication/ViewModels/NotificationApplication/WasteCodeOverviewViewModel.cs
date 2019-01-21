@@ -76,14 +76,14 @@
             OtherCodes = classifyYourWasteInfo.OtherCodes;
             YCodes = classifyYourWasteInfo.YCodes.OrderBy(w => Regex.Match(w.Code, @"(\D+)").Value).ThenBy(w =>
             {
-                int val;
-                int.TryParse(Regex.Match(w.Code, @"(\d+)").Value, out val);
+                double val;
+                double.TryParse(Regex.Match(w.Code, @"(\d+(\.\d*)?|\.\d+)").Value, out val);
                 return val;
             }).ToArray();
             HCodes = classifyYourWasteInfo.HCodes.OrderBy(w => Regex.Match(w.Code, @"(\D+)").Value).ThenBy(w =>
             {
-                int val;
-                int.TryParse(Regex.Match(w.Code, @"(\d+)").Value, out val);
+                double val;
+                double.TryParse(Regex.Match(w.Code, @"(\d+(\.\d*)?|\.\d+)").Value, out val);
                 return val;
             }).ToArray();
             UnClass = classifyYourWasteInfo.UnClass.OrderBy(w => w.Code).ToArray();

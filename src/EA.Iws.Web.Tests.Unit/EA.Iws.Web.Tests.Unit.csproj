@@ -206,6 +206,7 @@
     <Compile Include="ViewModels\CustomsOfficeViewModelTests.cs" />
     <Compile Include="ViewModels\ImportNotification\SummaryTableContainerViewModelTests.cs" />
     <Compile Include="ViewModels\NotificationApplication\SubmitSideBarViewModelTests.cs" />
+    <Compile Include="ViewModels\NotificationApplication\UpdateHistoryViewModelTests.cs" />
     <Compile Include="ViewModels\NotificationApplication\WasteCodeOverviewViewModelTests.cs" />
     <Compile Include="ViewModels\NotificationMovements\CancelSuccessViewModelTests.cs" />
     <Compile Include="ViewModels\TechnologyEmployedViewModelTests.cs" />

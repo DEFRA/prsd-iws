@@ -147,4 +147,40 @@
   <data name="UpdateHistoryInfo" xml:space="preserve">
     <value>Information changes reflect the changes made by officers and administrators.</value>
   </data>
+  <data name="DayError" xml:space="preserve">
+    <value>Please enter a valid number in the 'Day' field</value>
+  </data>
+  <data name="From" xml:space="preserve">
+    <value>Enter the start date for your search</value>
+  </data>
+  <data name="MonthError" xml:space="preserve">
+    <value>Please enter a valid number in the 'Month' field</value>
+  </data>
+  <data name="To" xml:space="preserve">
+    <value>Enter the end date for your search</value>
+  </data>
+  <data name="YearError" xml:space="preserve">
+    <value>Please enter a valid number in the 'Year' field</value>
+  </data>
+  <data name="Day" xml:space="preserve">
+    <value>Day</value>
+  </data>
+  <data name="Month" xml:space="preserve">
+    <value>Month</value>
+  </data>
+  <data name="Search" xml:space="preserve">
+    <value>Search</value>
+  </data>
+  <data name="Year" xml:space="preserve">
+    <value>Year</value>
+  </data>
+  <data name="FromDateAfterToDate" xml:space="preserve">
+    <value>The from date must be before the to date</value>
+  </data>
+  <data name="FromValid" xml:space="preserve">
+    <value>Please enter a valid from date</value>
+  </data>
+  <data name="ToValid" xml:space="preserve">
+    <value>Please enter a valid to date</value>
+  </data>
 </root>
