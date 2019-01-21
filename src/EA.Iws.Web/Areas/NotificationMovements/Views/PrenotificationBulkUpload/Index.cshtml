@@ -1,5 +1,29 @@
-﻿@using Resources = EA.Iws.Web.Areas.NotificationMovements.Views.PrenotificationBulkUpload.PrenotificationBulkUploadResources
+﻿@using Resource = EA.Iws.Web.Areas.NotificationMovements.Views.PrenotificationBulkUpload.PrenotificationBulkUploadResources
+@model EA.Iws.Web.Areas.NotificationMovements.ViewModels.PrenotificationBulkUpload.PrenotificationBulkUploadViewModel
+
 @{
     ViewBag.Title = "Start";
-    Layout = "~/Areas/NotificationMovements/Views/Shared/_CreateSummaryLayout.cshtml";
+    Layout = "~/Views/Shared/_Layout.GovUK.Sections.cshtml";
 }
+
+<section class="grid-row">
+    <div class="column-full">
+        <h1 class="heading-large">Bulk upload of prenotification data</h1>
+        <p>Upload multiple prenotications and the accompanying shipment movement documents to your notification.</p>
+        <p>Download the data file templates to avoid any errors in your data.</p>
+        <p class="bold-small">If you leave the process before adding your accompanying shipment movement documents, your bulk upload of prenotifications will not be saved.</p>
+    </div>
+</section>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-group">
+        <p>
+            <button class="button" type="submit">Start</button>
+        </p>
+    </div>
+}
+
+@Html.ActionLink(Resource.NotificationOptionsLink, "Index", "Options", new { id = @Model.NotificationId, area = "NotificationApplication" }, null)
