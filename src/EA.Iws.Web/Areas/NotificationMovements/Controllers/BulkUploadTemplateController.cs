@@ -3,8 +3,14 @@
     using System;
     using System.Threading.Tasks;
     using System.Web.Mvc;
+    using Core.Documents;
+    using Infrastructure;
+    using Prsd.Core;
     using Prsd.Core.Mediator;
+    using Prsd.Core.Web.ApiClient;
+    using Prsd.Core.Web.Mvc.Extensions;
     using Requests.Notification;
+    using Requests.NotificationMovements.BulkUpload;
     using ViewModels.BulkUploadTemplate;
 
     [Authorize]
@@ -31,9 +37,25 @@
         }
 
         [HttpGet]
-        public ActionResult PrenotificationTemplate()
+        public async Task<ActionResult> PrenotificationTemplate()
         {
-            return View("Index");
+            try
+            {
+                var response = await mediator.SendAsync(new GetBulkUploadTemplate(BulkType.Prenotification));
+
+                var downloadName = "BulkUploadPrenotificationTemplate" + SystemTime.UtcNow + ".xlsx";
+
+                return File(response, MimeTypes.MSExcelXml, downloadName);
+            }
+            catch (ApiBadRequestException ex)
+            {
+                this.HandleBadRequest(ex);
+                if (ModelState.IsValid)
+                {
+                    throw;
+                }
+                return HttpNotFound();
+            }
         }
     }
 }
