@@ -153,6 +153,7 @@
                             @Html.ActionLink(string.Format(Resource.CertificateOfReceipt, certificateLinkText), "CertificateTypes", "Certificate", new { notificationId = Model.NotificationId, area = "NotificationMovements" }, null)
                             @Html.ActionLink(Resource.Reject, "Index", "Reject", new { notificationId = Model.NotificationId, area = "NotificationMovements" }, null)
                             <br />
+                            @Html.ActionLink(Resource.BulkUploadTemplate, "Index", "BulkUploadTemplate", new { notificationId = Model.NotificationId, area = "NotificationMovements" }, null)
                             if (Model.ShowGenerateInterimDocumentLink)
                             {
                                     @Html.ActionLink(Resource.GenerateInterimDoc, "GenerateInterimMovementDocument", "Home", new { id = Model.NotificationId, area = "NotificationApplication" }, null)
