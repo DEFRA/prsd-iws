@@ -1,7 +1,6 @@
 ﻿namespace EA.Iws.Web.Areas.NotificationMovements.Controllers
 {
     using System;
-    using System.Threading.Tasks;
     using System.Web.Mvc;
     using Prsd.Core.Mediator;
     using ViewModels.PrenotificationBulkUpload;
@@ -14,6 +13,21 @@
         public PrenotificationBulkUploadController(IMediator mediator)
         {
             this.mediator = mediator;
+        }
+
+        [HttpGet]
+        public ActionResult Index(Guid notificationId)
+        {
+            ViewBag.NotificationId = notificationId;
+            var model = new PrenotificationBulkUploadViewModel(notificationId);
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Index(Guid notificationId, PrenotificationBulkUploadViewModel model)
+        {
+            return RedirectToAction("UploadPrenotifications");
         }
 
         [HttpGet]
