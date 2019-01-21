@@ -6,6 +6,7 @@
     using Prsd.Core.Mediator;
     using ViewModels.PrenotificationBulkUpload;
 
+    [Authorize]
     public class PrenotificationBulkUploadController : Controller
     {
         private readonly IMediator mediator;
