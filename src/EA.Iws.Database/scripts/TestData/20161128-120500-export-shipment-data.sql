@@ -24,8 +24,8 @@ DECLARE @movementId uniqueidentifier
 SELECT @movementId = [Id] FROM [Notification].[Movement]
 WHERE NotificationId = @notificationId and Number = 1
 
-INSERT INTO [Notification].[MovementReceipt]([Id], [MovementId], [Date], [Quantity], [Unit], [CreatedBy])
-VALUES (NEWID(), @movementId, Cast(N'2016-11-10' AS DATE), 1, 3, @userId)
+INSERT INTO [Notification].[MovementReceipt]([Id], [MovementId], [Date], [Quantity], [Unit], [CreatedBy], [CreatedOnDate])
+VALUES (NEWID(), @movementId, Cast(N'2016-11-10' AS DATE), 1, 3, @userId, Cast(N'2016-11-10' AS DATE))
 
 UPDATE [Notification].[Movement]
 SET [Status] = 3
@@ -35,11 +35,11 @@ WHERE [Id] = @movementId
 SELECT @movementId = [Id] FROM [Notification].[Movement]
 WHERE NotificationId = @notificationId and Number = 2
 
-INSERT INTO [Notification].[MovementReceipt]([Id], [MovementId], [Date], [Quantity], [Unit], [CreatedBy])
-VALUES (NEWID(), @movementId, Cast(N'2016-11-10' AS DATE), 1, 3, @userId)
+INSERT INTO [Notification].[MovementReceipt]([Id], [MovementId], [Date], [Quantity], [Unit], [CreatedBy], [CreatedOnDate])
+VALUES (NEWID(), @movementId, Cast(N'2016-11-10' AS DATE), 1, 3, @userId, Cast(N'2016-11-10' AS DATE))
 
-INSERT INTO [Notification].[MovementOperationReceipt]([Id], [MovementId], [Date], [CreatedBy])
-VALUES (NEWID(), @movementId, Cast(N'2016-11-15' AS DATE), @userId)
+INSERT INTO [Notification].[MovementOperationReceipt]([Id], [MovementId], [Date], [CreatedBy], [CreatedOnDate])
+VALUES (NEWID(), @movementId, Cast(N'2016-11-15' AS DATE), @userId, Cast(N'2016-11-10' AS DATE))
 
 UPDATE [Notification].[Movement]
 SET [Status] = 4
