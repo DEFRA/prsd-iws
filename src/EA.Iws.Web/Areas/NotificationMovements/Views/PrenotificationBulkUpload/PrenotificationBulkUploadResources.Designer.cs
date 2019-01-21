@@ -62,6 +62,15 @@ namespace EA.Iws.Web.Areas.NotificationMovements.Views.PrenotificationBulkUpload
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Go to notification options.
+        /// </summary>
+        public static string NotificationOptionsLink {
+            get {
+                return ResourceManager.GetString("NotificationOptionsLink", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The data file should not exceed 2GB in size..
         /// </summary>
         public static string UploadPrenotificationsList1 {

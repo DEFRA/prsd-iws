@@ -8,8 +8,9 @@
 
     public class PrenotificationBulkUploadViewModel : IValidatableObject
     {
-        public PrenotificationBulkUploadViewModel()
+        public PrenotificationBulkUploadViewModel(Guid notificationId)
         {
+            this.NotificationId = notificationId;
         }
 
         public Guid NotificationId { get; set; }

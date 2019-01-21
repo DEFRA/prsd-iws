@@ -18,7 +18,7 @@
         [HttpGet]
         public ActionResult UploadPrenotifications(Guid notificationId)
         {
-            var model = new PrenotificationBulkUploadViewModel();
+            var model = new PrenotificationBulkUploadViewModel(notificationId);
 
             return View(model);
         }
@@ -30,7 +30,7 @@
             if (!ModelState.IsValid)
             {
                 ViewBag.NotificationId = notificationId;
-                model = new PrenotificationBulkUploadViewModel();
+                model = new PrenotificationBulkUploadViewModel(notificationId);
                 return View(model);
             }
 
