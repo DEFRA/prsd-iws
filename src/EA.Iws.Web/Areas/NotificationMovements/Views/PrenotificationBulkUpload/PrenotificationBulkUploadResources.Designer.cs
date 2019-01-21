@@ -71,6 +71,51 @@ namespace EA.Iws.Web.Areas.NotificationMovements.Views.PrenotificationBulkUpload
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Start.
+        /// </summary>
+        public static string StartButtonText {
+            get {
+                return ResourceManager.GetString("StartButtonText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bulk upload of prenotification data.
+        /// </summary>
+        public static string StartHeader {
+            get {
+                return ResourceManager.GetString("StartHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Upload multiple prenotifications and the accompanying shipment movement documents to your notification..
+        /// </summary>
+        public static string StartText1 {
+            get {
+                return ResourceManager.GetString("StartText1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Download the data file templates to avoid any errors in your data..
+        /// </summary>
+        public static string StartText2 {
+            get {
+                return ResourceManager.GetString("StartText2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to If you leave the process before adding your accompanying shipment movement documents, your bulk upload of prenotifications will not be saved..
+        /// </summary>
+        public static string StartText3 {
+            get {
+                return ResourceManager.GetString("StartText3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The data file should not exceed 2GB in size..
         /// </summary>
         public static string UploadPrenotificationsList1 {
