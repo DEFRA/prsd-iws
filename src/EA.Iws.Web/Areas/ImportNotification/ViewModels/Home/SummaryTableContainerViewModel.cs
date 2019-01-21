@@ -34,14 +34,14 @@
             var ewcCodesOrdered = details.WasteType.EwcCodes.WasteCodes.OrderBy(w => w.Name).ToList();
             var ycodesOrdered = details.WasteType.YCodes.WasteCodes.OrderBy(w => Regex.Match(w.Name, @"(\D+)").Value).ThenBy(w =>
             {
-                int val;
-                int.TryParse(Regex.Match(w.Name, @"(\d+)").Value, out val);
+                double val;
+                double.TryParse(Regex.Match(w.Name, @"(\d+(\.\d*)?|\.\d+)").Value, out val);
                 return val;
             }).ToList();
             var hcodesOrdered = details.WasteType.HCodes.WasteCodes.OrderBy(w => Regex.Match(w.Name, @"(\D+)").Value).ThenBy(w =>
             {
-                int val;
-                int.TryParse(Regex.Match(w.Name, @"(\d+)").Value, out val);
+                double val;
+                double.TryParse(Regex.Match(w.Name, @"(\d+(\.\d*)?|\.\d+)").Value, out val);
                 return val;
             }).ToList();
             var unclassesOrdered = details.WasteType.UnClasses.WasteCodes.OrderBy(w => w.Name).ToList();

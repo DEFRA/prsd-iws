@@ -11,6 +11,7 @@
         public List<NotificationAuditForDisplay> TableData { get; set; }
         
         public int NumberOfNotificationAudits { get; set; }
+        public int NumberOfFilteredNotificationAudits { get; set; }
 
         public int PageNumber { get; set; }
 

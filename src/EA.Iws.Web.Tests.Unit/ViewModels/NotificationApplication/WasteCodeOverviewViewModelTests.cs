@@ -31,8 +31,8 @@
             var result = model.YCodes;
             var expected = CreateYCodes().OrderBy(w => Regex.Match(w.Code, @"(\D+)").Value).ThenBy(w =>
             {
-                int val;
-                int.TryParse(Regex.Match(w.Code, @"(\d+)").Value, out val);
+                double val;
+                double.TryParse(Regex.Match(w.Code, @"(\d+(\.\d*)?|\.\d+)").Value, out val);
                 return val;
             }).ToArray();
 
@@ -47,8 +47,8 @@
             var result = model.HCodes;
             var expected = CreateHCodes().OrderBy(w => Regex.Match(w.Code, @"(\D+)").Value).ThenBy(w =>
             {
-                int val;
-                int.TryParse(Regex.Match(w.Code, @"(\d+)").Value, out val);
+                double val;
+                double.TryParse(Regex.Match(w.Code, @"(\d+(\.\d*)?|\.\d+)").Value, out val);
                 return val;
             }).ToArray();
 
@@ -124,6 +124,7 @@
             return new[]
             {
                 new WasteCodeData() { Code = "Y11" },
+                new WasteCodeData() { Code = "Y1.4" },
                 new WasteCodeData() { Code = "Y1" },
                 new WasteCodeData() { Code = "Y2" }
             };
@@ -134,6 +135,7 @@
             return new[]
             {
                 new WasteCodeData() { Code = "H12" },
+                new WasteCodeData() { Code = "HP2.2" },
                 new WasteCodeData() { Code = "HP21" },
                 new WasteCodeData() { Code = "H1" },
                 new WasteCodeData() { Code = "HP2" },
@@ -145,7 +147,7 @@
         {
             return new[]
             {
-                new WasteCodeData() { Code = "4.1" },
+                new WasteCodeData() { Code = "4.3" },
                 new WasteCodeData() { Code = "7" },
                 new WasteCodeData() { Code = "2" }
             };

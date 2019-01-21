@@ -1006,7 +1006,6 @@
     <Content Include="Areas\NotificationApplication\Views\ReviewUserAccess\UserList.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\ReviewUserAccess\Remove.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\ShareNotification\Success.cshtml" />
-    <Content Include="Areas\NotificationApplication\Views\UpdateHistory\NoChanges.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\UpdateHistory\Index.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\UpdateHistory\_Title.cshtml" />
     <Content Include="Areas\NotificationMovements\Views\PrenotificationBulkUpload\UploadPrenotifications.cshtml" />
@@ -2261,11 +2260,6 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>IndexResources.resx</DependentUpon>
-    </Compile>
-    <Compile Include="Areas\NotificationApplication\Views\UpdateHistory\NoChangesResources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>NoChangesResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Areas\NotificationApplication\Controllers\ShareNotificationController.cs" />
     <Compile Include="Areas\NotificationMovements\Controllers\PrenotificationBulkUploadController.cs" />
@@ -4490,10 +4484,6 @@
     <EmbeddedResource Include="Areas\NotificationApplication\Views\UpdateHistory\IndexResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Areas\NotificationApplication\Views\UpdateHistory\NoChangesResources.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>NoChangesResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\NotificationApplication\Views\WasteGenerationProcess\WasteGenerationProcessResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
