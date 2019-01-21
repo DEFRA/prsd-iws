@@ -26,7 +26,7 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> UploadPrenotifications(Guid notificationId, PrenotificationBulkUploadViewModel model)
+        public ActionResult UploadPrenotifications(Guid notificationId, PrenotificationBulkUploadViewModel model)
         {
             if (!ModelState.IsValid)
             {
