@@ -10,7 +10,7 @@
     <div class="column-full">
         <h1 class="heading-large">@Resources.StartHeader</h1>
         <p>@Resources.StartText1</p>
-        <p>@Resources.StartText2</p>
+        <p>@Html.ActionLink(Resources.TemplateLinkText, "Index", "BulkUploadTemplate", new { id = @Model.NotificationId }, null) @Resources.StartText2</p>
         <p class="bold-small">@Resources.StartText3</p>
     </div>
 </section>
