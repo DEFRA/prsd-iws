@@ -9,5 +9,7 @@
         public Guid ProducerId { get; set; }
 
         public string ProducerName { get; set; }
+
+        public bool IsOnlySiteOfExport { get; set; }
     }
 }
