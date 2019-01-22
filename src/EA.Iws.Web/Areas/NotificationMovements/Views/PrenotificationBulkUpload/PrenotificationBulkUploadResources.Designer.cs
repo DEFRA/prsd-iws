@@ -98,7 +98,7 @@ namespace EA.Iws.Web.Areas.NotificationMovements.Views.PrenotificationBulkUpload
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Download the data file templates to avoid any errors in your data..
+        ///   Looks up a localized string similar to  to avoid any errors in your data..
         /// </summary>
         public static string StartText2 {
             get {
@@ -112,6 +112,15 @@ namespace EA.Iws.Web.Areas.NotificationMovements.Views.PrenotificationBulkUpload
         public static string StartText3 {
             get {
                 return ResourceManager.GetString("StartText3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Download the data file templates.
+        /// </summary>
+        public static string TemplateLinkText {
+            get {
+                return ResourceManager.GetString("TemplateLinkText", resourceCulture);
             }
         }
         

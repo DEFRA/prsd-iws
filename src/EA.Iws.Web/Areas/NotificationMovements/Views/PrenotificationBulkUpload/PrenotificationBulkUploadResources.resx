@@ -130,10 +130,13 @@
     <value>Upload multiple prenotifications and the accompanying shipment movement documents to your notification.</value>
   </data>
   <data name="StartText2" xml:space="preserve">
-    <value>Download the data file templates to avoid any errors in your data.</value>
+    <value> to avoid any errors in your data.</value>
   </data>
   <data name="StartText3" xml:space="preserve">
     <value>If you leave the process before adding your accompanying shipment movement documents, your bulk upload of prenotifications will not be saved.</value>
+  </data>
+  <data name="TemplateLinkText" xml:space="preserve">
+    <value>Download the data file templates</value>
   </data>
   <data name="UploadPrenotificationsList1" xml:space="preserve">
     <value>The data file should not exceed 2GB in size.</value>
