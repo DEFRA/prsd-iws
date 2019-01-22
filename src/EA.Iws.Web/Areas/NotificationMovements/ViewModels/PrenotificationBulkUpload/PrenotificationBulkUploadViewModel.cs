@@ -19,6 +19,8 @@
 
         public Guid NotificationId { get; set; }
 
+        public int ErrorsCount { get; set; }
+
         [Display(Name = "Upload the data file containing your prenotification data")]
         [RestrictToAllowedUploadTypes]
         public HttpPostedFileBase File { get; set; }

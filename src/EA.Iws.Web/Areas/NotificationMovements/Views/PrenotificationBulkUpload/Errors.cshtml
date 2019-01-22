@@ -1,0 +1,35 @@
+﻿@using Resources = EA.Iws.Web.Areas.NotificationMovements.Views.PrenotificationBulkUpload.PrenotificationBulkUploadResources
+@model EA.Iws.Web.Areas.NotificationMovements.ViewModels.PrenotificationBulkUpload.PrenotificationBulkUploadViewModel
+
+@{
+    ViewBag.Title = Resources.ErrorsTitle;
+    Layout = "~/Views/Shared/_Layout.GovUK.Sections.cshtml";
+}
+<div class="grid-row">
+    <div class="column-two-thirds">
+        <header class="hgroup text">
+            <h1 class="heading-large">@string.Format(@Resources.ErrorsHeaderText, @Model.ErrorsCount)</h1>
+        </header>
+
+        <p class="bold-small">@Resources.ErrorsContactUs</p>
+
+        <p>@Resources.ErrorsFileAdvice</p>
+
+        <div class="form-group">
+            <details>
+                <summary class="summary-error">
+                    <h2 class="summary-error-header heading-xsmall">View Errors</h2>
+                </summary>
+                <div class="summary-error-panel">
+                    <ul class="summary-error-list">
+                        <li>Shipment number 12: the unit of measurement is invalid</li>
+                        <li>Shipment number 11: the packaging type is invalid</li>
+                        <li>Shipment number 10: the date format for the actual shipment should be in dd/mm/yyyy format</li>
+                    </ul>
+                </div>
+            </details>
+        </div>
+    </div>
+</div>
+
+@Html.ActionLink(Resources.ReturnToUpload, "UploadPrenotifications", "PrenotificationBulkUpload", new { notificationId = @Model.NotificationId, area = "NotificationMovements" }, new { @class = "button" })

@@ -728,3 +728,53 @@ table.table-pad-bottom {
 	position: absolute;
 	right: 0;
 }
+
+.details-summary-error{
+    background-color: rgba(175, 4, 35, 1);
+    width:100%;
+
+}
+
+details {
+    .summary-error {
+        color: white !important;
+        background-color: rgba(175, 4, 35, 1) !important;
+        width: 100%;
+        padding-left: 10px;
+        height: 45px;
+        padding-top: 10px;
+        margin-bottom: 0px !important;
+        box-sizing: border-box;
+
+        &:hover {
+            color: none !important;
+        }
+
+        &:focus {
+            outline: none !important;
+        }
+    }
+
+    .summary-error-header {
+        padding-left: 20px;
+        text-decoration: none !important;
+    }
+
+    .summary-error-panel {
+        box-sizing: border-box;
+        clear: both;
+        background-color: rgba(204, 204, 204, 0.23921568627451) !important;
+        margin-bottom: em(15, 19);
+    }
+
+    .summary-error-list {
+        > li {
+            padding: em(15, 19);
+            border-top: 1px solid $border-colour;
+        }
+
+        > li:first-child {
+            border-top: none;
+        }
+    }
+}

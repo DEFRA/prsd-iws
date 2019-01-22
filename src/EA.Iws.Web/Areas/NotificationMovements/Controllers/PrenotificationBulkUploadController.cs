@@ -49,6 +49,13 @@
                 return View(model);
             }
 
+            return View("Errors", model);
+        }
+
+        [HttpGet]
+        public ActionResult Errors(Guid notificationId, PrenotificationBulkUploadViewModel model)
+        {
+            model.ErrorsCount = 5;
             return View(model);
         }
     }
