@@ -168,4 +168,13 @@
   <data name="UploadPrenotificationsTitle" xml:space="preserve">
     <value>Bulk upload of prenotification data</value>
   </data>
+  <data name="WarningHeader" xml:space="preserve">
+    <value>You haven't added any shipment movement documents</value>
+  </data>
+  <data name="WarningText1" xml:space="preserve">
+    <value>You must upload shipment movement documents with your prenotification data file to finish the process.</value>
+  </data>
+  <data name="WarningText2" xml:space="preserve">
+    <value>If you leave the process before adding your accompanying shipment movement documents, your bulk upload of prenotifications will not be saved.</value>
+  </data>
 </root>
