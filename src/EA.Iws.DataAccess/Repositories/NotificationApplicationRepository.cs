@@ -123,6 +123,8 @@
                 DELETE FROM [Notification].[WasteAdditionalInformation] WHERE WasteTypeId IN (SELECT [Id] FROM [Notification].[WasteType] WHERE NotificationId = @Id)
                 DELETE FROM [Notification].[WasteComposition] WHERE WasteTypeId IN (SELECT [Id] FROM [Notification].[WasteType] WHERE NotificationId = @Id)
                 DELETE FROM [Notification].[WasteType] WHERE NotificationId = @Id
+                DELETE FROM [Notification].[SharedUser] WHERE NotificationId = @Id
+                DELETE FROM [Notification].[SharedUserHistory] WHERE NotificationId = @Id
                 DELETE FROM [Notification].[Notification] WHERE Id = @Id",
                 new SqlParameter("@Id", notificationId));
 
