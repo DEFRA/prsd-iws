@@ -1010,6 +1010,7 @@
     <Content Include="Areas\NotificationApplication\Views\UpdateHistory\_Title.cshtml" />
     <Content Include="Areas\NotificationMovements\Views\PrenotificationBulkUpload\Index.cshtml" />
     <Content Include="Areas\NotificationMovements\Views\PrenotificationBulkUpload\UploadPrenotifications.cshtml" />
+    <Content Include="Areas\NotificationMovements\Views\BulkUploadTemplate\Index.cshtml" />
     <Content Include="Areas\NotificationMovements\Views\PrenotificationBulkUpload\Warning.cshtml" />
     <None Include="Scripts\jquery-2.1.3.intellisense.js" />
     <Content Include="Scripts\govuk\govuk-template.js" />
@@ -2264,8 +2265,15 @@
       <DependentUpon>IndexResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Areas\NotificationApplication\Controllers\ShareNotificationController.cs" />
+    <Compile Include="Areas\NotificationMovements\Controllers\BulkUploadTemplateController.cs" />
     <Compile Include="Areas\NotificationMovements\Controllers\PrenotificationBulkUploadController.cs" />
+    <Compile Include="Areas\NotificationMovements\ViewModels\BulkUploadTemplate\BulkUploadTemplateViewModel.cs" />
     <Compile Include="Areas\NotificationMovements\ViewModels\PrenotificationBulkUpload\PrenotificationBulkUploadViewModel.cs" />
+    <Compile Include="Areas\NotificationMovements\Views\BulkUploadTemplate\BulkUploadTemplateResources.Designer.cs">
+      <DependentUpon>BulkUploadTemplateResources.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Areas\NotificationMovements\ViewModels\PrenotificationBulkUpload\WarningChoiceViewModel.cs" />
     <Compile Include="Areas\NotificationMovements\Views\PrenotificationBulkUpload\PrenotificationBulkUploadResources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -4540,6 +4548,7 @@
     <EmbeddedResource Include="Areas\NotificationApplication\Views\WhatToDoNext\IndexResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\NotificationApplication\Views\WhatToDoNext\PaymentResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -4548,6 +4557,7 @@
     <EmbeddedResource Include="Areas\NotificationApplication\Views\WhatToDoNext\PrintResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>PrintResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\NotificationApplication\Views\WhatToDoNext\ContractGuidanceResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -4616,6 +4626,11 @@
     <EmbeddedResource Include="Areas\NotificationMovements\ViewModels\UploadChoice\UploadChoiceViewModelResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>UploadChoiceViewModelResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\NotificationMovements\Views\BulkUploadTemplate\BulkUploadTemplateResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>BulkUploadTemplateResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\NotificationMovements\Views\Certificate\CertificateShipmentResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

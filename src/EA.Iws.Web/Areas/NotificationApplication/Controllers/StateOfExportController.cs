@@ -65,7 +65,7 @@
             await this.auditService.AddAuditEntry(this.mediator,
                     id,
                     User.GetUserId(),
-                    stateOfExportSetData.StateOfExport.ExitPoint == null ? NotificationAuditType.Create : NotificationAuditType.Update,
+                    stateOfExportSetData.StateOfExport.ExitPoint == null ? NotificationAuditType.Added : NotificationAuditType.Updated,
                     NotificationAuditScreenType.ExportRoute);
 
             if (backToOverview.GetValueOrDefault())

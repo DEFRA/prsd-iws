@@ -156,6 +156,7 @@
     <Compile Include="Controllers\NotificationApplication\AddSharedUserForNotificationControllerTests.cs" />
     <Compile Include="Controllers\NotificationApplication\SharedUser\NotificationOwnerFilterControllerAttributeTests.cs" />
     <Compile Include="Controllers\NotificationAssessment\DecisionControllerTests.cs" />
+    <Compile Include="Controllers\NotificationMovements\BulkUploadTemplateControllerTests.cs" />
     <Compile Include="Controllers\NotificationMovements\CancelMovementControllerTests.cs" />
     <Compile Include="Controllers\NotificationApplication\BaseWasteCodeControllerTests.cs" />
     <Compile Include="Controllers\NotificationApplication\CarrierControllerTests.cs" />

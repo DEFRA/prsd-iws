@@ -97,6 +97,15 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.Options {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Template for bulk uploading shipment data.
+        /// </summary>
+        public static string BulkUploadTemplate {
+            get {
+                return ResourceManager.GetString("BulkUploadTemplate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cancel a prenotification.
         /// </summary>
         public static string CancelPrenotification {

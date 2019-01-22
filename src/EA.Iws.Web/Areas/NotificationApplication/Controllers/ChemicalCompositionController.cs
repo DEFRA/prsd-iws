@@ -117,7 +117,7 @@
             await this.auditService.AddAuditEntry(this.mediator,
                    model.NotificationId,
                    User.GetUserId(),
-                   existingWasteTypeData == null ? NotificationAuditType.Create : NotificationAuditType.Update,
+                   existingWasteTypeData == null ? NotificationAuditType.Added : NotificationAuditType.Updated,
                    NotificationAuditScreenType.ChemicalComposition);
 
             return RedirectToAction("OtherWasteAdditionalInformation", new { id = model.NotificationId, backToOverview });
@@ -157,7 +157,7 @@
             await this.auditService.AddAuditEntry(this.mediator,
                    model.NotificationId,
                    User.GetUserId(),
-                   existingWasteTypeData == null ? NotificationAuditType.Create : NotificationAuditType.Update,
+                   existingWasteTypeData == null ? NotificationAuditType.Added : NotificationAuditType.Updated,
                    NotificationAuditScreenType.ChemicalComposition);
 
             if (backToOverview.GetValueOrDefault())
@@ -205,7 +205,7 @@
             await this.auditService.AddAuditEntry(this.mediator,
                    model.NotificationId,
                    User.GetUserId(),
-                   existingWasteTypeData == null ? NotificationAuditType.Create : NotificationAuditType.Update,
+                   existingWasteTypeData == null ? NotificationAuditType.Added : NotificationAuditType.Updated,
                    NotificationAuditScreenType.ChemicalComposition);
 
             if (model.ChemicalCompositionType == ChemicalComposition.Wood)
@@ -254,7 +254,7 @@
             await this.auditService.AddAuditEntry(this.mediator,
                    model.NotificationId,
                    User.GetUserId(),
-                   existingWasteTypeData == null ? NotificationAuditType.Create : NotificationAuditType.Update,
+                   existingWasteTypeData == null ? NotificationAuditType.Added : NotificationAuditType.Updated,
                    NotificationAuditScreenType.ChemicalComposition);
 
             if (backToOverview.GetValueOrDefault())

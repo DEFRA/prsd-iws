@@ -63,7 +63,7 @@
                 await this.auditService.AddAuditEntry(this.mediator,
                     id,
                     User.GetUserId(),
-                    currentMeans.Count == 0 ? NotificationAuditType.Create : NotificationAuditType.Update,
+                    currentMeans.Count == 0 ? NotificationAuditType.Added : NotificationAuditType.Updated,
                     NotificationAuditScreenType.MeansOfTransport);
 
                 await mediator.SendAsync(new SetMeansOfTransportForNotification(id, meansList));

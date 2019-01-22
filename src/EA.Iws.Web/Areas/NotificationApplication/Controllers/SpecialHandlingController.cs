@@ -59,7 +59,7 @@
                 await this.auditService.AddAuditEntry(this.mediator,
                     model.NotificationId,
                     User.GetUserId(),
-                    specialHandlingData.HasSpecialHandlingRequirements == null ? NotificationAuditType.Create : NotificationAuditType.Update,
+                    specialHandlingData.HasSpecialHandlingRequirements == null ? NotificationAuditType.Added : NotificationAuditType.Updated,
                     NotificationAuditScreenType.SpecialHandling);
 
                 if (backToOverview.GetValueOrDefault())

@@ -53,7 +53,7 @@
                 await this.auditService.AddAuditEntry(this.mediator,
                    model.NotificationId,
                    User.GetUserId(),
-                   wasteGenerationProcessData.Process == null ? NotificationAuditType.Create : NotificationAuditType.Update,
+                   wasteGenerationProcessData.Process == null ? NotificationAuditType.Added : NotificationAuditType.Updated,
                    NotificationAuditScreenType.ProcessOfGeneration);
                 if (backToOverview.GetValueOrDefault())
                 {

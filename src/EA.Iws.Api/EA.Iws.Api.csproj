@@ -276,6 +276,7 @@
     <Content Include="Documents\NrwAddress.pdf" />
     <Content Include="Documents\SepaAddress.pdf" />
     <Content Include="Documents\InterimMovementMergeTemplate.docx" />
+    <Content Include="Documents\BulkUploadPrenotificationTemplate.xlsx" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
