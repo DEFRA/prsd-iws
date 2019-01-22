@@ -64,7 +64,7 @@
             await this.auditService.AddAuditEntry(mediator,
                     id,
                     User.GetUserId(),
-                    existingsCodes.Count == 0 ? NotificationAuditType.Create : NotificationAuditType.Update,
+                    existingsCodes.Count == 0 ? NotificationAuditType.Added : NotificationAuditType.Updated,
                     NotificationAuditScreenType.RecoveryCodes);
 
             return backToOverview.GetValueOrDefault() ? 
@@ -100,7 +100,7 @@
             await this.auditService.AddAuditEntry(mediator,
                     id,
                     User.GetUserId(),
-                    existingsCodes.Count == 0 ? NotificationAuditType.Create : NotificationAuditType.Update,
+                    existingsCodes.Count == 0 ? NotificationAuditType.Added : NotificationAuditType.Updated,
                     NotificationAuditScreenType.DisposalCodes);
 
             return backToOverview.GetValueOrDefault() ?
@@ -135,7 +135,7 @@
             await this.auditService.AddAuditEntry(mediator,
                     model.NotificationId,
                     User.GetUserId(),
-                    existingTechnologyEmployedData.HasTechnologyEmployed ? NotificationAuditType.Update : NotificationAuditType.Create,
+                    existingTechnologyEmployedData.HasTechnologyEmployed ? NotificationAuditType.Updated : NotificationAuditType.Added,
                     NotificationAuditScreenType.TechnologyEmployed);
 
             return backToOverview.GetValueOrDefault() ? 

@@ -50,7 +50,7 @@
             await this.auditService.AddAuditEntry(this.mediator,
                    id,
                    User.GetUserId(),
-                   existingShipmentData.HasShipmentData ? NotificationAuditType.Update : NotificationAuditType.Create,
+                   existingShipmentData.HasShipmentData ? NotificationAuditType.Updated : NotificationAuditType.Added,
                    NotificationAuditScreenType.AmountsAndDates);
 
             if (backToOverview.GetValueOrDefault())

@@ -23,7 +23,7 @@
             this.mediator = A.Fake<IMediator>();
             this.auditService = A.Fake<IAuditService>();
             specialHandlingController = new SpecialHandlingController(A.Fake<IMediator>(), this.auditService);
-            A.CallTo(() => auditService.AddAuditEntry(this.mediator, notificationId, "user", NotificationAuditType.Create, NotificationAuditScreenType.SpecialHandling));
+            A.CallTo(() => auditService.AddAuditEntry(this.mediator, notificationId, "user", NotificationAuditType.Added, NotificationAuditScreenType.SpecialHandling));
         }
 
         [Fact]

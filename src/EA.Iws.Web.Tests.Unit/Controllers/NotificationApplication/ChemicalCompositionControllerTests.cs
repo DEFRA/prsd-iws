@@ -28,7 +28,7 @@
             mediator = A.Fake<IMediator>();
             this.auditService = A.Fake<IAuditService>();
             chemicalCompositionController = new ChemicalCompositionController(mediator, new ChemicalCompositionMap(), this.auditService);
-            A.CallTo(() => auditService.AddAuditEntry(this.mediator, notificationId, "user", NotificationAuditType.Create, NotificationAuditScreenType.ChemicalComposition));
+            A.CallTo(() => auditService.AddAuditEntry(this.mediator, notificationId, "user", NotificationAuditType.Added, NotificationAuditScreenType.ChemicalComposition));
         }
 
         [Theory]
