@@ -238,7 +238,7 @@
             await this.auditService.AddAuditEntry(this.mediator,
                     id,
                     User.GetUserId(),
-                    NotificationAuditType.Create,
+                    NotificationAuditType.Added,
                     NotificationAuditScreenType.IntendedCarrier);
 
             return View(model);
