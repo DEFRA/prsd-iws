@@ -59,5 +59,26 @@
 
             return View(model);
         }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Warning(WarningChoiceViewModel model, string cfp)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            if (model.GetEnumDisplayValue(WarningChoicesList.Leave).Equals(model.WarningChoices.SelectedValue))
+            {
+                // COULLM: Send user to relevant page
+            }
+            else if (model.GetEnumDisplayValue(WarningChoicesList.Return).Equals(model.WarningChoices.SelectedValue))
+            {
+                // COULLM: Send user to relevant page
+            }
+
+            throw new InvalidOperationException("Radio selection not per expectations");
+        }
     }
 }
