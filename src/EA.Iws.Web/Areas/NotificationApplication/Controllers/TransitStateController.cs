@@ -108,7 +108,7 @@
                 await this.auditService.AddAuditEntry(this.mediator,
                     id,
                     User.GetUserId(),
-                    existingData.TransitState == null ? NotificationAuditType.Create : NotificationAuditType.Update,
+                    existingData.TransitState == null ? NotificationAuditType.Added : NotificationAuditType.Updated,
                     NotificationAuditScreenType.Transits);
 
                 return RedirectToAction("Summary", "TransportRoute", new { id, backToOverview });
@@ -129,7 +129,7 @@
             await this.auditService.AddAuditEntry(this.mediator,
                     id,
                     User.GetUserId(),
-                    NotificationAuditType.Delete,
+                    NotificationAuditType.Deleted,
                     NotificationAuditScreenType.Transits);
 
             return RedirectToAction("Summary", "TransportRoute", new { id, backToOverview });

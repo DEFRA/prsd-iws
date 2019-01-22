@@ -162,7 +162,7 @@
                 await AuditService.AddAuditEntry(Mediator,
                    id,
                    User.GetUserId(),
-                   NotificationAuditType.Create,
+                   NotificationAuditType.Added,
                    screenType);
             }
             else
@@ -172,7 +172,7 @@
                     await AuditService.AddAuditEntry(Mediator,
                        id,
                        User.GetUserId(),
-                        NotificationAuditType.Delete,
+                        NotificationAuditType.Deleted,
                        screenType);
                 }
 
@@ -181,7 +181,7 @@
                     await AuditService.AddAuditEntry(Mediator,
                        id,
                        User.GetUserId(),
-                        NotificationAuditType.Update,
+                        NotificationAuditType.Updated,
                        screenType);
                 }
             }

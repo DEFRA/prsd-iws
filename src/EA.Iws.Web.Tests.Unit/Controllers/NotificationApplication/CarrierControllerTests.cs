@@ -50,7 +50,7 @@
                 .Returns(CreateCarrier(carrierId));
 
             carrierController = new CarrierController(mediator, new AddAddressBookEntryMap(), this.auditService);
-            A.CallTo(() => auditService.AddAuditEntry(this.mediator, notificationId, "user", NotificationAuditType.Create, NotificationAuditScreenType.IntendedCarrier));
+            A.CallTo(() => auditService.AddAuditEntry(this.mediator, notificationId, "user", NotificationAuditType.Added, NotificationAuditScreenType.IntendedCarrier));
         }
 
         private AddCarrierViewModel CreateValidAddCarrier()

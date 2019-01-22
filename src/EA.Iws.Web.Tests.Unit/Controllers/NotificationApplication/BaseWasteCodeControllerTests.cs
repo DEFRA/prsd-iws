@@ -41,7 +41,7 @@
                 }
             };
 
-            A.CallTo(() => auditService.AddAuditEntry(this.mediator, AnyGuid, "user", NotificationAuditType.Create, NotificationAuditScreenType.BaselOecdCodes));
+            A.CallTo(() => auditService.AddAuditEntry(this.mediator, AnyGuid, "user", NotificationAuditType.Added, NotificationAuditScreenType.BaselOecdCodes));
         }
 
         [Fact]
