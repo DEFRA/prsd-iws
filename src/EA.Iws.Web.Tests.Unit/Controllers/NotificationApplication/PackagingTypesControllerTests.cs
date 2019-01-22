@@ -25,7 +25,7 @@
             this.mediator = A.Fake<IMediator>();
             this.auditService = A.Fake<IAuditService>();
             packagingTypesController = new PackagingTypesController(A.Fake<IMediator>(), this.auditService);
-            A.CallTo(() => auditService.AddAuditEntry(this.mediator, notificationId, "user", NotificationAuditType.Create, NotificationAuditScreenType.PackagingTypes));
+            A.CallTo(() => auditService.AddAuditEntry(this.mediator, notificationId, "user", NotificationAuditType.Added, NotificationAuditScreenType.PackagingTypes));
         }
 
         private PackagingTypesViewModel CreateValidPackagingTypesViewModel()

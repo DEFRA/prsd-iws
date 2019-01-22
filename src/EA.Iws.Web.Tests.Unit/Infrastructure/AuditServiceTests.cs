@@ -26,7 +26,7 @@
         [Fact]
         public async Task Exporter_AddExporter_AuditMustBeCalled()
         {
-            await auditService.AddAuditEntry(this.mediator, notificationId, userId.ToString(), NotificationAuditType.Create, NotificationAuditScreenType.Exporter);
+            await auditService.AddAuditEntry(this.mediator, notificationId, userId.ToString(), NotificationAuditType.Added, NotificationAuditScreenType.Exporter);
 
             A.CallTo(() => mediator.SendAsync(A<CreateNotificationAudit>.Ignored)).MustHaveHappened(Repeated.AtLeast.Once);
         }

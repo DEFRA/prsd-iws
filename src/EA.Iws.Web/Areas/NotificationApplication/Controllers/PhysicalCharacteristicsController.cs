@@ -90,7 +90,7 @@
                 await this.auditService.AddAuditEntry(this.mediator,
                    model.NotificationId,
                    User.GetUserId(),
-                   existingPhysicalCharacteristicsData.PhysicalCharacteristics.Count == 0 ? NotificationAuditType.Create : NotificationAuditType.Update,
+                   existingPhysicalCharacteristicsData.PhysicalCharacteristics.Count == 0 ? NotificationAuditType.Added : NotificationAuditType.Updated,
                    NotificationAuditScreenType.PhysicalCharacteristics);
 
                 if (backToOverview.GetValueOrDefault())

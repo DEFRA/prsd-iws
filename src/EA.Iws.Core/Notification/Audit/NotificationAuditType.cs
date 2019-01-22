@@ -2,8 +2,8 @@
 {
     public enum NotificationAuditType
     {
-        Create = 1,
-        Update = 2,
-        Delete = 3
+        Added = 1,
+        Updated = 2,
+        Deleted = 3
     }
 }

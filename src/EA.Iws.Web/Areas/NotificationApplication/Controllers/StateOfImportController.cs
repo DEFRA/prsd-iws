@@ -97,7 +97,7 @@
             await this.auditService.AddAuditEntry(this.mediator,
                     id,
                     User.GetUserId(),
-                    stateOfImportSetData.StateOfImport == null ? NotificationAuditType.Create : NotificationAuditType.Update,
+                    stateOfImportSetData.StateOfImport == null ? NotificationAuditType.Added : NotificationAuditType.Updated,
                     NotificationAuditScreenType.ImportRoute);
 
             if (backToOverview.GetValueOrDefault())
