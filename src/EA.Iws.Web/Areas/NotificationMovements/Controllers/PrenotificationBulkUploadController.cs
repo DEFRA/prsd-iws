@@ -79,7 +79,7 @@
                 throw new NotImplementedException("Redirection to upload page for the shipment movement document not yet implemented");
             }
 
-            throw new InvalidOperationException("Radio selection not per expectations");
+            return View(model);
         }
     }
 }
