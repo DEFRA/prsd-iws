@@ -29,7 +29,7 @@
             this.auditService = A.Fake<IAuditService>();
             importerController = new ImporterController(A.Fake<IMediator>(), 
                 A.Fake<IMapWithParameter<ImporterViewModel, AddressRecordType, AddAddressBookEntry>>(), this.auditService);
-            A.CallTo(() => auditService.AddAuditEntry(this.mediator, notificationId, "user", NotificationAuditType.Create, NotificationAuditScreenType.Importer));
+            A.CallTo(() => auditService.AddAuditEntry(this.mediator, notificationId, "user", NotificationAuditType.Added, NotificationAuditScreenType.Importer));
         }
 
         private ImporterViewModel CreateImporterViewModel()

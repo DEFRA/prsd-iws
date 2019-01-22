@@ -74,7 +74,7 @@
                 await this.auditService.AddAuditEntry(this.mediator,
                     model.NotificationId,
                     User.GetUserId(),
-                    exporter.HasExporter ? NotificationAuditType.Update : NotificationAuditType.Create,
+                    exporter.HasExporter ? NotificationAuditType.Updated : NotificationAuditType.Added,
                     NotificationAuditScreenType.Exporter);
 
                 if (backToOverview.GetValueOrDefault())

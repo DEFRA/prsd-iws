@@ -96,7 +96,7 @@
                 await this.auditService.AddAuditEntry(this.mediator,
                     model.NotificationId,
                     User.GetUserId(),
-                    existingPackagingData.PackagingTypes.Count == 0 ? NotificationAuditType.Create : NotificationAuditType.Update,
+                    existingPackagingData.PackagingTypes.Count == 0 ? NotificationAuditType.Added : NotificationAuditType.Updated,
                     NotificationAuditScreenType.PackagingTypes);
 
                 if (backToOverview.GetValueOrDefault())

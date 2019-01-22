@@ -64,7 +64,7 @@
             await this.auditService.AddAuditEntry(this.mediator,
                    id,
                    User.GetUserId(),
-                   existingData.NotificationWasteCodeData[CodeType.Basel].Count() == 0 && existingData.NotificationWasteCodeData[CodeType.Oecd].Count() == 0 ? NotificationAuditType.Create : NotificationAuditType.Update,
+                   existingData.NotificationWasteCodeData[CodeType.Basel].Count() == 0 && existingData.NotificationWasteCodeData[CodeType.Oecd].Count() == 0 ? NotificationAuditType.Added : NotificationAuditType.Updated,
                    NotificationAuditScreenType.BaselOecdCodes);
 
             return backToOverview ? RedirectToAction("Index", "Home", new { id })
