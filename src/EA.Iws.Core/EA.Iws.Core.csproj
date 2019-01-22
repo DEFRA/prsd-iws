@@ -60,6 +60,7 @@
     <Compile Include="Admin\Reports\ImportStatsData.cs" />
     <Compile Include="Admin\Reports\UserActionData.cs" />
     <Compile Include="Admin\Reports\UserActionJsonModel.cs" />
+    <Compile Include="Documents\BulkType.cs" />
     <Compile Include="FinancialGuarantee\FinancialGuaranteeData.cs" />
     <Compile Include="FinancialGuarantee\FinancialGuaranteeDecision.cs" />
     <Compile Include="Admin\InternalUserData.cs" />

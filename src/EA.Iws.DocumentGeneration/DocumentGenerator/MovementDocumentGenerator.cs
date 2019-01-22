@@ -5,10 +5,9 @@
     using System.IO;
     using System.Linq;
     using System.Threading.Tasks;
-    using System.Xml.Linq;
+    using Core.Documents;
     using DocumentFormat.OpenXml;
     using DocumentFormat.OpenXml.Packaging;
-    using DocumentFormat.OpenXml.Validation;
     using DocumentFormat.OpenXml.Wordprocessing;
     using Domain;
     using Domain.Movement;
@@ -66,6 +65,14 @@
                 docs.Add(doc);
             }
             return CombineDocuments(docs);
+        }
+
+        public byte[] GenerateBulkUploadTemplate(BulkType bulkType)
+        {
+            using (var memoryStream = DocumentHelper.ReadDocumentStreamShared("BulkUploadPrenotificationTemplate.xlsx"))
+            {
+                return memoryStream.ToArray();
+            }
         }
 
         private static byte[] CombineDocuments(IList<byte[]> documents)
