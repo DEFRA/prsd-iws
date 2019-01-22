@@ -235,6 +235,12 @@
             var carriers = await mediator.SendAsync(new GetUserAddressBookByType(AddressRecordType.Carrier));
             model.SetCarriers(carriers.AddressRecords);
 
+            await this.auditService.AddAuditEntry(this.mediator,
+                    id,
+                    User.GetUserId(),
+                    NotificationAuditType.Create,
+                    NotificationAuditScreenType.IntendedCarrier);
+
             return View(model);
         } 
     }
