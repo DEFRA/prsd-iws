@@ -346,7 +346,7 @@
                     await this.auditService.AddAuditEntry(this.mediator,
                     model.NotificationId,
                     User.GetUserId(),
-                    NotificationAuditType.Delete,
+                    NotificationAuditType.Deleted,
                     NotificationAuditScreenType.SiteOfExport);
                 }
 
