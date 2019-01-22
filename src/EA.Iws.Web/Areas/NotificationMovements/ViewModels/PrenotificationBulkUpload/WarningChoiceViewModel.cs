@@ -11,8 +11,15 @@
     {
         public WarningChoiceViewModel()
         {
-            WarningChoices = RadioButtonStringCollectionViewModel.CreateFromEnum<WarningChoicesList>();
         }
+
+        public WarningChoiceViewModel(Guid notificationId)
+        {
+            WarningChoices = RadioButtonStringCollectionViewModel.CreateFromEnum<WarningChoicesList>();
+            this.NotificationId = notificationId;
+        }
+
+        public Guid NotificationId { get; set; }
 
         public RadioButtonStringCollectionViewModel WarningChoices { get; set; }
 

@@ -53,9 +53,9 @@
         }
 
         [HttpGet]
-        public ActionResult Warning()
+        public ActionResult Warning(Guid notificationId)
         {
-            var model = new WarningChoiceViewModel();
+            var model = new WarningChoiceViewModel(notificationId);
 
             return View(model);
         }
@@ -71,11 +71,12 @@
 
             if (model.GetEnumDisplayValue(WarningChoicesList.Leave).Equals(model.WarningChoices.SelectedValue))
             {
-                // COULLM: Send user to relevant page
+                return RedirectToAction("Index", "Options", new { area = "NotificationApplication", id = model.NotificationId });
             }
             else if (model.GetEnumDisplayValue(WarningChoicesList.Return).Equals(model.WarningChoices.SelectedValue))
             {
-                // COULLM: Send user to relevant page
+                // To do: Send user to upload page for the shipment movement document
+                throw new NotImplementedException("Redirection to upload page for the shipment movement document not yet implemented");
             }
 
             throw new InvalidOperationException("Radio selection not per expectations");
