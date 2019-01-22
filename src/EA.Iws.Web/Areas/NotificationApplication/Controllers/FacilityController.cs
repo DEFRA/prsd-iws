@@ -311,7 +311,8 @@
                 NotificationId = id,
                 FacilityId = entityId,
                 FacilityName = facility.Business.Name,
-                NotificationType = notificationInfo.NotificationType
+                NotificationType = notificationInfo.NotificationType,
+                IsOnlySiteOfTreatment = facility.IsActualSiteOfTreatment && response.Count == 1 ? true : false
             };
 
             if (facility.IsActualSiteOfTreatment && response.Count > 1)
@@ -339,6 +340,15 @@
                     User.GetUserId(),
                     NotificationAuditType.Delete,
                     model.NotificationType == NotificationType.Disposal ? NotificationAuditScreenType.DisposalFacilities : NotificationAuditScreenType.RecoveryFacilities);
+
+                if (model.IsOnlySiteOfTreatment)
+                {
+                    await this.auditService.AddAuditEntry(this.mediator,
+                    model.NotificationId,
+                    User.GetUserId(),
+                    NotificationAuditType.Delete,
+                    NotificationAuditScreenType.SiteOfExport);
+                }
 
                 return RedirectToAction("List", "Facility", new { id = model.NotificationId, backToOverview });
             }

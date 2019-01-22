@@ -151,7 +151,8 @@
             {
                 NotificationId = id,
                 ProducerId = entityId,
-                ProducerName = producer.Business.Name
+                ProducerName = producer.Business.Name,
+                IsOnlySiteOfExport = producer.IsSiteOfExport && response.Count == 1 ? true : false
             };
 
             if (producer.IsSiteOfExport && response.Count > 1)
@@ -179,6 +180,15 @@
                     User.GetUserId(),
                     NotificationAuditType.Delete,
                     NotificationAuditScreenType.Producer);
+
+                if (model.IsOnlySiteOfExport)
+                {
+                    await this.auditService.AddAuditEntry(this.mediator,
+                    model.NotificationId,
+                    User.GetUserId(),
+                    NotificationAuditType.Delete,
+                    NotificationAuditScreenType.SiteOfExport);
+                }
 
                 return RedirectToAction("List", "Producer", new { id = model.NotificationId, backToOverview });
             }
