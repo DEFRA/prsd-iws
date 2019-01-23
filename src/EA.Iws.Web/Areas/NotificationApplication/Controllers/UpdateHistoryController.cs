@@ -77,7 +77,9 @@
                 var screens = await mediator.SendAsync(new GetNotificationAuditScreens());
                 var response = await mediator.SendAsync(new GetNotificationAuditTable(id, model.PageNumber, screenId, null, null));
                 model.Screens = screens.ToList();
+                model.PageSize = response.PageSize;
                 model.UpdateHistoryItems = response.TableData.ToList();
+                model.NumberOfFilterdNotificationAudits = response.NumberOfFilteredNotificationAudits;
                 return View(model);
             }
 
