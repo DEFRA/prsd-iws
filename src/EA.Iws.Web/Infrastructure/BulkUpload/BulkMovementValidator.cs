@@ -28,19 +28,28 @@
         {
             var rules = new List<RuleResult<BulkMovementFileRules>>();
             var fileExtension = Path.GetExtension(file.FileName);
+            int maximumFileSize = 2147483647; // 4GB
+            var validMimeTypes = new List<string>
+            {
+                MimeTypes.MSExcel
+            };
 
             var fileTypeResult = MessageLevel.Success;
-            if (string.IsNullOrEmpty(fileExtension) || fileExtension != ".xlsx" || fileExtension != ".csv")
+            var mimeType = file.ContentType;
+            if (string.IsNullOrEmpty(mimeType) || !validMimeTypes.Contains(mimeType))
             {
                 fileTypeResult = MessageLevel.Error;
             }
 
             var fileSizeResult = MessageLevel.Success;
-            var fileVirusScanResult = MessageLevel.Success;
+            if (file.ContentLength >= maximumFileSize)
+            {
+                fileSizeResult = MessageLevel.Error;
+            }
 
+            var fileVirusScanResult = MessageLevel.Success;
             try
             {
-                // TODO: Check for file size.
                 var data = await fileReader.GetFileBytes(file);
             }
             catch (VirusFoundException)
