@@ -258,5 +258,14 @@ namespace EA.Iws.Web.Areas.NotificationMovements.Views.PrenotificationBulkUpload
                 return ResourceManager.GetString("UploadPrenotificationsTitle", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to View Errors.
+        /// </summary>
+        public static string ViewErrors {
+            get {
+                return ResourceManager.GetString("ViewErrors", resourceCulture);
+            }
+        }
     }
 }

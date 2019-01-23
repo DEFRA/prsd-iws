@@ -382,6 +382,7 @@
     <Content Include="Content\govuk_toolkit\images\player-icon-volume.png" />
     <Content Include="Content\govuk_toolkit\images\separator-2x.png" />
     <Content Include="Content\govuk_toolkit\images\separator.png" />
+    <Content Include="Content\images\error-icon.png" />
     <Content Include="Content\iws\_entry-or-exit-point.scss" />
     <Content Include="Content\iws\_notification-switcher.scss" />
     <Content Include="Areas\ImportNotification\Views\Facility\Add.cshtml" />

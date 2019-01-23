@@ -739,9 +739,9 @@ details {
     .summary-error {
         color: white !important;
         background-color: rgba(175, 4, 35, 1) !important;
-        width: 100%;
-        padding-left: 10px;
+        width: 100%;        
         height: 45px;
+        padding-left: 10px;
         padding-top: 10px;
         margin-bottom: 0px !important;
         box-sizing: border-box;
@@ -769,6 +769,7 @@ details {
 
     .summary-error-list {
         > li {
+            box-sizing: border-box;
             padding: em(15, 19);
             border-top: 1px solid $border-colour;
         }
@@ -776,5 +777,10 @@ details {
         > li:first-child {
             border-top: none;
         }
+    }
+
+    .summary-error-icon {
+        float: right;
+        vertical-align: top;
     }
 }

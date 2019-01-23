@@ -183,4 +183,7 @@
   <data name="UploadPrenotificationsTitle" xml:space="preserve">
     <value>Bulk upload of prenotification data</value>
   </data>
+  <data name="ViewErrors" xml:space="preserve">
+    <value>View Errors</value>
+  </data>
 </root>
