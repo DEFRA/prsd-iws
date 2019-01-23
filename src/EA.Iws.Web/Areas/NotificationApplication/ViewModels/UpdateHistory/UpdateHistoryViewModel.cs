@@ -120,7 +120,7 @@
 
         public void SetDates(DateTime? startDate, DateTime? endDate)
         {
-            if (startDate == null || endDate == null)
+            if (startDate == null || endDate == null || startDate == DateTime.MinValue || endDate == DateTime.MaxValue)
             {
                 return;
             }

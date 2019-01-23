@@ -1,6 +1,7 @@
 ﻿namespace EA.Iws.Web.Areas.NotificationApplication.Controllers
 {
     using System;
+    using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Mvc;
@@ -19,8 +20,27 @@
         }
 
         [HttpGet]
-        public async Task<ActionResult> Index(Guid id, string filter, DateTime? startDate, DateTime? endDate, int page = 1)
+        public async Task<ActionResult> Index(Guid id, string filter, int page = 1)
         {
+            DateTime startDate = new DateTime();
+            DateTime endDate = new DateTime();
+
+            if (filter == "date" && TempData.ContainsKey("startDate") && TempData.ContainsKey("endDate"))
+            {
+                startDate = DateTime.Parse(TempData["startDate"].ToString());
+                endDate = DateTime.Parse(TempData["endDate"].ToString());
+
+                TempData["startDate"] = filter == "date" ? startDate.ToString() : null;
+                TempData["endDate"] = filter == "date" ? endDate.ToString() : null;
+            }
+            else
+            {
+                startDate = DateTime.MinValue;
+                endDate = DateTime.MaxValue;
+                TempData.Remove("startDate");
+                TempData.Remove("endDate");
+            }
+
             int screenId = 0;
             int.TryParse(filter, out screenId);
             var response = await mediator.SendAsync(new GetNotificationAuditTable(id, page, screenId, startDate, endDate));
@@ -28,6 +48,7 @@
 
             var model = new UpdateHistoryViewModel(response, screens);
             model.NotificationId = id;
+
             model.SelectedScreen = filter;
 
             model.HasHistoryItems = model.NumberOfNotificationAudits == 0 ? false : true;
@@ -65,7 +86,10 @@
                 DateTime startDate = new DateTime(model.StartYear.GetValueOrDefault(), model.StartMonth.GetValueOrDefault(), model.StartDay.GetValueOrDefault());
                 DateTime endDate = new DateTime(model.EndYear.GetValueOrDefault(), model.EndMonth.GetValueOrDefault(), model.EndDay.GetValueOrDefault());
 
-                return RedirectToAction("Index", new { filter = model.SelectedScreen, startDate = startDate, endDate = endDate });
+                TempData["startDate"] = startDate;
+                TempData["endDate"] = endDate;
+
+                return RedirectToAction("Index", new { filter = model.SelectedScreen});
             }
 
             return RedirectToAction("Index", new { filter = model.SelectedScreen});
