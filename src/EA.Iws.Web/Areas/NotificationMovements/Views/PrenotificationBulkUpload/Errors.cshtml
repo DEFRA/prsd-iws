@@ -1,0 +1,40 @@
+﻿@using Resources = EA.Iws.Web.Areas.NotificationMovements.Views.PrenotificationBulkUpload.PrenotificationBulkUploadResources
+@model EA.Iws.Web.Areas.NotificationMovements.ViewModels.PrenotificationBulkUpload.PrenotificationBulkUploadViewModel
+
+@{
+    ViewBag.Title = Resources.ErrorsTitle;
+    Layout = "~/Views/Shared/_Layout.GovUK.Sections.cshtml";
+}
+
+<div class="grid-row">
+    <div class="column-two-thirds">
+        <header class="hgroup text">
+            <h1 class="heading-large">@string.Format(Resources.ErrorsHeaderText, Model.ErrorsCount)</h1>
+        </header>
+
+        <p class="bold-small">@Resources.ErrorsContactUs</p>
+
+        <p>@Resources.ErrorsFileAdvice</p>
+
+        @if (Model.ErrorsCount > 0 && Model.FailedFileRules != null)
+        {
+            <div class="form-group">
+                <details>
+                    <summary class="summary-error">
+                        <h2 class="summary-error-header heading-xsmall">@Resources.ViewErrors</h2>
+                    </summary>
+                    <div class="summary-error-panel">
+                        <ul class="summary-error-list">
+                            @foreach (var rule in Model.FailedFileRules)
+                            {
+                                <li>@Html.Raw(EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(rule)) <img class="summary-error-icon" src="@Url.Content("~/Content/images/error-icon.png")" alt=""></li>
+                            }
+                        </ul>
+                    </div>
+                </details>
+            </div>
+        }
+    </div>
+</div>
+
+@Html.ActionLink(Resources.ReturnToUpload, "UploadPrenotifications", "PrenotificationBulkUpload", new { notificationId = @Model.NotificationId, area = "NotificationMovements" }, new { @class = "button" })

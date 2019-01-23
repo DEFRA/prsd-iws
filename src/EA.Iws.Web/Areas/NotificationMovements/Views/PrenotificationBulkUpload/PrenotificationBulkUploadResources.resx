@@ -117,8 +117,23 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="ErrorsContactUs" xml:space="preserve">
+    <value>You must resolve all errors listed below before uploading your prenotification data again. If you experience further problems, contact askshipments@environment-agency.gov.uk for further advice.</value>
+  </data>
+  <data name="ErrorsFileAdvice" xml:space="preserve">
+    <value>The errors listed below are problems found during the validation of the .xlsx or. csv file content. These errors prevent the service from accepting your data, therefore all errors must be amended before attempting to re-upload your data.</value>
+  </data>
+  <data name="ErrorsHeaderText" xml:space="preserve">
+    <value>Your prenotification data file contains {0} errors</value>
+  </data>
+  <data name="ErrorsTitle" xml:space="preserve">
+    <value>Bulk upload errors</value>
+  </data>
   <data name="NotificationOptionsLink" xml:space="preserve">
     <value>Go to notification options</value>
+  </data>
+  <data name="ReturnToUpload" xml:space="preserve">
+    <value>Return to upload</value>
   </data>
   <data name="StartButtonText" xml:space="preserve">
     <value>Start</value>
@@ -176,5 +191,8 @@
   </data>
   <data name="WarningText2" xml:space="preserve">
     <value>If you leave the process before adding your accompanying shipment movement documents, your bulk upload of prenotifications will not be saved.</value>
+  </data>
+  <data name="ViewErrors" xml:space="preserve">
+    <value>View Errors</value>
   </data>
 </root>

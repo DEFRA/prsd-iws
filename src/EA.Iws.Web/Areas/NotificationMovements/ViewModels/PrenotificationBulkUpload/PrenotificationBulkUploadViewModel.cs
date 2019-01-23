@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.Web;
+    using Core.Movement.Bulk;
     using Infrastructure.Validation;
 
     public class PrenotificationBulkUploadViewModel : IValidatableObject
@@ -18,6 +19,16 @@
         }
 
         public Guid NotificationId { get; set; }
+
+        public int ErrorsCount
+        {
+            get
+            {
+                return FailedFileRules != null ? FailedFileRules.Count : 0;
+            }
+        }
+
+        public List<BulkMovementFileRules> FailedFileRules { get; set; }
 
         [Display(Name = "Upload the data file containing your prenotification data")]
         [RestrictToAllowedUploadTypes]

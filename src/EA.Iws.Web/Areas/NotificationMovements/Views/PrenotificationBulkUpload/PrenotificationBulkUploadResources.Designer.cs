@@ -62,11 +62,56 @@ namespace EA.Iws.Web.Areas.NotificationMovements.Views.PrenotificationBulkUpload
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You must resolve all errors listed below before uploading your prenotification data again. If you experience further problems, contact askshipments@environment-agency.gov.uk for further advice..
+        /// </summary>
+        public static string ErrorsContactUs {
+            get {
+                return ResourceManager.GetString("ErrorsContactUs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The errors listed below are problems found during the validation of the .xlsx or. csv file content. These errors prevent the service from accepting your data, therefore all errors must be amended before attempting to re-upload your data..
+        /// </summary>
+        public static string ErrorsFileAdvice {
+            get {
+                return ResourceManager.GetString("ErrorsFileAdvice", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your prenotification data file contains {0} errors.
+        /// </summary>
+        public static string ErrorsHeaderText {
+            get {
+                return ResourceManager.GetString("ErrorsHeaderText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bulk upload errors.
+        /// </summary>
+        public static string ErrorsTitle {
+            get {
+                return ResourceManager.GetString("ErrorsTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Go to notification options.
         /// </summary>
         public static string NotificationOptionsLink {
             get {
                 return ResourceManager.GetString("NotificationOptionsLink", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Return to upload.
+        /// </summary>
+        public static string ReturnToUpload {
+            get {
+                return ResourceManager.GetString("ReturnToUpload", resourceCulture);
             }
         }
         
@@ -238,6 +283,15 @@ namespace EA.Iws.Web.Areas.NotificationMovements.Views.PrenotificationBulkUpload
         public static string WarningText2 {
             get {
                 return ResourceManager.GetString("WarningText2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to View Errors.
+        /// </summary>
+        public static string ViewErrors {
+            get {
+                return ResourceManager.GetString("ViewErrors", resourceCulture);
             }
         }
     }
