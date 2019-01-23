@@ -24,7 +24,7 @@
         {
             get
             {
-                return FailedFileRules?.Count ?? 0;
+                return FailedFileRules != null ? FailedFileRules.Count : 0;
             }
         }
 
