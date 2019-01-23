@@ -1144,6 +1144,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\Modules\AuthorizationModule.cs" />
+    <Compile Include="App_Start\Modules\BulkUploadModule.cs" />
     <Compile Include="App_Start\Modules\MappingModule.cs" />
     <Compile Include="App_Start\Modules\ApiClientModule.cs" />
     <Compile Include="App_Start\Modules\FileAccessModule.cs" />
@@ -2280,6 +2281,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>PrenotificationBulkUploadResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Infrastructure\BulkUpload\BulkMovementValidator.cs" />
+    <Compile Include="Infrastructure\BulkUpload\IBulkMovementValidator.cs" />
     <Compile Include="Infrastructure\NotificationOwnerFilter.cs" />
     <Compile Include="Infrastructure\SkipNotificationOwnerFilter.cs" />
     <Compile Include="Infrastructure\AuditService.cs" />
