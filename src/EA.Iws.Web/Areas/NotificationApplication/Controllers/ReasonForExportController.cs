@@ -56,7 +56,7 @@
                 await this.auditService.AddAuditEntry(this.mediator,
                     model.NotificationId,
                     User.GetUserId(),
-                    existingReasonForExport == null ? NotificationAuditType.Create : NotificationAuditType.Update,
+                    existingReasonForExport == null ? NotificationAuditType.Added : NotificationAuditType.Updated,
                     NotificationAuditScreenType.ReasonForExport);
 
                 if (backToOverview.GetValueOrDefault())

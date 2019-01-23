@@ -58,7 +58,7 @@
                 await this.auditService.AddAuditEntry(this.mediator,
                     model.NotificationId,
                     User.GetUserId(),
-                    NotificationAuditType.Create,
+                    NotificationAuditType.Added,
                     NotificationAuditScreenType.IntendedCarrier);
 
                 if (model.IsAddedToAddressBook)
@@ -112,7 +112,7 @@
                 await this.auditService.AddAuditEntry(this.mediator,
                     model.NotificationId,
                     User.GetUserId(),
-                    NotificationAuditType.Update,
+                    NotificationAuditType.Updated,
                     NotificationAuditScreenType.IntendedCarrier);
 
                 if (model.IsAddedToAddressBook)
@@ -179,7 +179,7 @@
                 await this.auditService.AddAuditEntry(this.mediator,
                     model.NotificationId,
                     User.GetUserId(),
-                    NotificationAuditType.Delete,
+                    NotificationAuditType.Deleted,
                     NotificationAuditScreenType.IntendedCarrier);
             }
             catch (ApiBadRequestException ex)
@@ -238,7 +238,7 @@
             await this.auditService.AddAuditEntry(this.mediator,
                     id,
                     User.GetUserId(),
-                    NotificationAuditType.Create,
+                    NotificationAuditType.Added,
                     NotificationAuditScreenType.IntendedCarrier);
 
             return View(model);

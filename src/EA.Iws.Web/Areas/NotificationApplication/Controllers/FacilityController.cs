@@ -65,7 +65,7 @@
                 await this.auditService.AddAuditEntry(this.mediator,
                     model.NotificationId,
                     User.GetUserId(),
-                    NotificationAuditType.Create,
+                    NotificationAuditType.Added,
                     model.NotificationType == NotificationType.Disposal ? NotificationAuditScreenType.DisposalFacilities : NotificationAuditScreenType.RecoveryFacilities);
 
                 if (model.IsAddedToAddressBook)
@@ -125,7 +125,7 @@
                 await this.auditService.AddAuditEntry(this.mediator,
                     model.NotificationId,
                     User.GetUserId(),
-                    NotificationAuditType.Update,
+                    NotificationAuditType.Updated,
                     model.NotificationType == NotificationType.Disposal ? NotificationAuditScreenType.DisposalFacilities : NotificationAuditScreenType.RecoveryFacilities);
 
                 if (model.IsAddedToAddressBook)
@@ -209,11 +209,11 @@
                         new SetActualSiteOfTreatment(model.SelectedSiteOfTreatment.GetValueOrDefault(),
                             model.NotificationId));
 
-                NotificationAuditType type = NotificationAuditType.Create;
+                NotificationAuditType type = NotificationAuditType.Added;
 
                 if (existingFacilities != null && existingFacilities.Count(p => p.IsActualSiteOfTreatment) > 0)
                 {
-                    type = NotificationAuditType.Update;
+                    type = NotificationAuditType.Updated;
                 }
 
                 await this.auditService.AddAuditEntry(mediator,
@@ -285,7 +285,7 @@
             await this.auditService.AddAuditEntry(this.mediator,
                     id,
                     User.GetUserId(),
-                    preconsentedFacilityData.IsPreconsentedRecoveryFacility == null ? NotificationAuditType.Create : NotificationAuditType.Update,
+                    preconsentedFacilityData.IsPreconsentedRecoveryFacility == null ? NotificationAuditType.Added : NotificationAuditType.Updated,
                     NotificationAuditScreenType.PreConsentedFacility);
 
             if (backToOverview.GetValueOrDefault())
@@ -338,7 +338,7 @@
                 await this.auditService.AddAuditEntry(this.mediator,
                     model.NotificationId,
                     User.GetUserId(),
-                    NotificationAuditType.Delete,
+                    NotificationAuditType.Deleted,
                     model.NotificationType == NotificationType.Disposal ? NotificationAuditScreenType.DisposalFacilities : NotificationAuditScreenType.RecoveryFacilities);
 
                 if (model.IsOnlySiteOfTreatment)
@@ -346,7 +346,7 @@
                     await this.auditService.AddAuditEntry(this.mediator,
                     model.NotificationId,
                     User.GetUserId(),
-                    NotificationAuditType.Delete,
+                    NotificationAuditType.Deleted,
                     NotificationAuditScreenType.SiteOfExport);
                 }
 

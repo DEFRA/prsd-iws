@@ -67,7 +67,7 @@
                 await this.auditService.AddAuditEntry(this.mediator,
                    model.NotificationId,
                    User.GetUserId(),
-                   importer.HasImporter ? NotificationAuditType.Update : NotificationAuditType.Create,
+                   importer.HasImporter ? NotificationAuditType.Updated : NotificationAuditType.Added,
                    NotificationAuditScreenType.Importer);
 
                 await AddToProducerAddressBook(model);

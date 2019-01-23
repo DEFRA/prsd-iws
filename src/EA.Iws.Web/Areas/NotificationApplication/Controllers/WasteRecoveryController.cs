@@ -50,7 +50,7 @@
 
             await mediator.SendAsync(new SetWasteRecoveryProvider(model.ProvidedBy.Value, id));
 
-            await this.AddAuditData(id, existingData == null ? NotificationAuditType.Create : NotificationAuditType.Update);
+            await this.AddAuditData(id, existingData == null ? NotificationAuditType.Added : NotificationAuditType.Updated);
 
             return model.ProvidedBy == ProvidedBy.Notifier
                 ? RedirectToAction("Percentage", "WasteRecovery", new { backToOverview })
@@ -169,7 +169,7 @@
 
             await mediator.SendAsync(saveData);
 
-            await this.AddAuditData(id, NotificationAuditType.Update);
+            await this.AddAuditData(id, NotificationAuditType.Updated);
 
             if (model.PercentageRecoverable < 100)
             {
@@ -252,7 +252,7 @@
 
             await mediator.SendAsync(new SetWasteDisposal(model.NotificationId, model.DisposalMethod, model.Amount.ToMoneyDecimal(), model.Units));
 
-            await this.AddAuditData(model.NotificationId, NotificationAuditType.Update);
+            await this.AddAuditData(model.NotificationId, NotificationAuditType.Updated);
 
             return RedirectToAction("Index", "Home", new { backToOverview });
         }

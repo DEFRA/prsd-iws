@@ -84,7 +84,7 @@
             await this.auditService.AddAuditEntry(this.mediator,
                    id,
                    User.GetUserId(),
-                   existingData.CustomsOfficeData == null ? NotificationAuditType.Create : NotificationAuditType.Update,
+                   existingData.CustomsOfficeData == null ? NotificationAuditType.Added : NotificationAuditType.Updated,
                    NotificationAuditScreenType.CustomsOffice);
 
             return RedirectToAction("Index", "Shipment", new { id });

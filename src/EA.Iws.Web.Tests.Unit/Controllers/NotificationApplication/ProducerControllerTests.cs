@@ -48,7 +48,7 @@
 
             A.CallTo(() => mediator.SendAsync(A<GetProducerForNotification>._)).Returns(CreateProducer(producerId));
             producerController = new ProducerController(mediator, new AddAddressBookEntryMap(), this.auditService);
-            A.CallTo(() => auditService.AddAuditEntry(this.mediator, notificationId, "user", NotificationAuditType.Create, NotificationAuditScreenType.Producer));
+            A.CallTo(() => auditService.AddAuditEntry(this.mediator, notificationId, "user", NotificationAuditType.Added, NotificationAuditScreenType.Producer));
         }
 
         private ProducerData CreateProducer(Guid producerId)

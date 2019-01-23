@@ -59,7 +59,7 @@
                 await this.auditService.AddAuditEntry(this.mediator,
                     model.NotificationId,
                     User.GetUserId(),
-                    NotificationAuditType.Create,
+                    NotificationAuditType.Added,
                     NotificationAuditScreenType.Producer);
 
                 if (model.IsAddedToAddressBook)
@@ -115,7 +115,7 @@
                 await this.auditService.AddAuditEntry(this.mediator,
                     model.NotificationId,
                     User.GetUserId(),
-                    NotificationAuditType.Update,
+                    NotificationAuditType.Updated,
                     NotificationAuditScreenType.Producer);
 
                 if (model.IsAddedToAddressBook)
@@ -178,7 +178,7 @@
                 await this.auditService.AddAuditEntry(this.mediator,
                     model.NotificationId,
                     User.GetUserId(),
-                    NotificationAuditType.Delete,
+                    NotificationAuditType.Deleted,
                     NotificationAuditScreenType.Producer);
 
                 if (model.IsOnlySiteOfExport)
@@ -186,7 +186,7 @@
                     await this.auditService.AddAuditEntry(this.mediator,
                     model.NotificationId,
                     User.GetUserId(),
-                    NotificationAuditType.Delete,
+                    NotificationAuditType.Deleted,
                     NotificationAuditScreenType.SiteOfExport);
                 }
 
@@ -260,11 +260,11 @@
                 model.SelectedSiteOfExport.GetValueOrDefault(),
                 model.NotificationId));
 
-            NotificationAuditType type = NotificationAuditType.Create;
+            NotificationAuditType type = NotificationAuditType.Added;
 
             if (existingProducers != null && existingProducers.Count(p => p.IsSiteOfExport) > 0)
             {
-                type = NotificationAuditType.Update;
+                type = NotificationAuditType.Updated;
             }
 
             await this.auditService.AddAuditEntry(mediator,

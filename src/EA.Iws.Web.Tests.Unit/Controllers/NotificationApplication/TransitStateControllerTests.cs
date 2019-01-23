@@ -52,7 +52,7 @@
                     EntryOrExitPoints = entryOrExitPoints
                 });
             transitStateController = new TransitStateController(mediator, new TestMap(), this.auditService);
-            A.CallTo(() => auditService.AddAuditEntry(this.mediator, notificationId, "user", NotificationAuditType.Create, NotificationAuditScreenType.Transits));
+            A.CallTo(() => auditService.AddAuditEntry(this.mediator, notificationId, "user", NotificationAuditType.Added, NotificationAuditScreenType.Transits));
         }
 
         [Theory]

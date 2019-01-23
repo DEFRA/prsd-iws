@@ -27,7 +27,7 @@
             mediator = A.Fake<IMediator>();
             auditService = A.Fake<IAuditService>();
             controller = new WasteRecoveryController(mediator, auditService);
-            A.CallTo(() => auditService.AddAuditEntry(this.mediator, notificationId, "user", NotificationAuditType.Create, NotificationAuditScreenType.WasteRecovery));
+            A.CallTo(() => auditService.AddAuditEntry(this.mediator, notificationId, "user", NotificationAuditType.Added, NotificationAuditScreenType.WasteRecovery));
         }
 
         [Fact]

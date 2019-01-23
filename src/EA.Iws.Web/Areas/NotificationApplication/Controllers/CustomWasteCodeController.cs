@@ -76,7 +76,7 @@
             await this.auditService.AddAuditEntry(this.mediator,
                       id,
                       User.GetUserId(),
-                      existingData.NotificationWasteCodeData[CodeType.ExportCode].Count() == 0 ? NotificationAuditType.Create : NotificationAuditType.Update,
+                      existingData.NotificationWasteCodeData[CodeType.ExportCode].Count() == 0 ? NotificationAuditType.Added : NotificationAuditType.Updated,
                       NotificationAuditScreenType.OtherCodes);
 
             var notificationInfo = await mediator.SendAsync(new GetNotificationBasicInfo(id));
