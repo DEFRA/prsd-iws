@@ -74,16 +74,16 @@
             NationExportCode = classifyYourWasteInfo.NationExportCode;
             NationImportCode = classifyYourWasteInfo.NationImportCode;
             OtherCodes = classifyYourWasteInfo.OtherCodes;
-            YCodes = classifyYourWasteInfo.YCodes.OrderBy(w => Regex.Match(w.Code, @"(\D+)").Value).ThenBy(w =>
+            YCodes = classifyYourWasteInfo.YCodes.OrderBy(w => Regex.Match(!string.IsNullOrEmpty(w.Code) ? w.Code : string.Empty, @"(\D+)").Value).ThenBy(w =>
             {
                 double val;
-                double.TryParse(Regex.Match(w.Code, @"(\d+(\.\d*)?|\.\d+)").Value, out val);
+                double.TryParse(Regex.Match(!string.IsNullOrEmpty(w.Code) ? w.Code : string.Empty, @"(\d+(\.\d*)?|\.\d+)").Value, out val);
                 return val;
             }).ToArray();
-            HCodes = classifyYourWasteInfo.HCodes.OrderBy(w => Regex.Match(w.Code, @"(\D+)").Value).ThenBy(w =>
+            HCodes = classifyYourWasteInfo.HCodes.OrderBy(w => Regex.Match(!string.IsNullOrEmpty(w.Code) ? w.Code : string.Empty, @"(\D+)").Value).ThenBy(w =>
             {
                 double val;
-                double.TryParse(Regex.Match(w.Code, @"(\d+(\.\d*)?|\.\d+)").Value, out val);
+                double.TryParse(Regex.Match(!string.IsNullOrEmpty(w.Code) ? w.Code : string.Empty, @"(\d+(\.\d*)?|\.\d+)").Value, out val);
                 return val;
             }).ToArray();
             UnClass = classifyYourWasteInfo.UnClass.OrderBy(w => w.Code).ToArray();
