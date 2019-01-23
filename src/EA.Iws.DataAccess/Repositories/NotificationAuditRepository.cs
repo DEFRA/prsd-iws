@@ -40,17 +40,19 @@
         {
             await notificationApplicationAuthorization.EnsureAccessAsync(notificationId);
 
+            DateTime endDateForQuery = endDate == DateTime.MaxValue ? endDate : endDate.AddDays(1);
+
             if (screen == 0)
             {
                 return await this.context.NotificationAudit
-                .Where(p => p.NotificationId == notificationId && p.DateAdded >= startDate && p.DateAdded <= endDate)
+                .Where(p => p.NotificationId == notificationId && p.DateAdded >= startDate && p.DateAdded < endDateForQuery)
                 .OrderByDescending(x => x.DateAdded)
                 .Skip((pageNumber - 1) * pageSize)
                 .Take(pageSize)
                 .ToArrayAsync();
             }
             return await this.context.NotificationAudit
-                .Where(p => p.NotificationId == notificationId && p.Screen == screen && p.DateAdded >= startDate && p.DateAdded <= endDate)
+                .Where(p => p.NotificationId == notificationId && p.Screen == screen && p.DateAdded >= startDate && p.DateAdded < endDateForQuery)
                 .OrderByDescending(x => x.DateAdded)
                 .Skip((pageNumber - 1) * pageSize)
                 .Take(pageSize)
@@ -61,12 +63,14 @@
         {
             await notificationApplicationAuthorization.EnsureAccessAsync(notificationId);
 
+            DateTime endDateForQuery = endDate == DateTime.MaxValue ? endDate : endDate.AddDays(1);
+
             if (screen == 0)
             {
-                return await context.NotificationAudit.CountAsync(p => p.NotificationId == notificationId && p.DateAdded >= startDate && p.DateAdded <= endDate);
+                return await context.NotificationAudit.CountAsync(p => p.NotificationId == notificationId && p.DateAdded >= startDate && p.DateAdded < endDateForQuery);
             }
 
-            return await context.NotificationAudit.CountAsync(p => p.NotificationId == notificationId && p.Screen == screen && p.DateAdded >= startDate && p.DateAdded <= endDate);
+            return await context.NotificationAudit.CountAsync(p => p.NotificationId == notificationId && p.Screen == screen && p.DateAdded >= startDate && p.DateAdded < endDateForQuery);
         }
 
         public async Task<int> GetTotalNumberOfNotificationAudits(Guid notificationId)
