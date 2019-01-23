@@ -63,6 +63,9 @@
     <Content Include="scripts\Everytime\03-StoredProcedures\0010-uspUpdateImportMovementData.sql" />
     <Content Include="scripts\Everytime\04-Synonyms\0001-elmah.sql" />
     <Content Include="scripts\Everytime\02-Views\0025-Reports-BlanketBonds.sql" />
+    <Content Include="scripts\TestData\20190123-175000-create-submitted-notification-2504.sql" />
+    <Content Include="scripts\TestData\20190123-175000-create-submitted-notification-2503.sql" />
+    <Content Include="scripts\TestData\20190123-175000-create-submitted-notification-2502.sql" />
     <Content Include="scripts\Update\0003-Migration\Sprint1\20170118-153400-drop-countryid.sql" />
     <Content Include="scripts\Update\0003-Migration\Sprint1\20170118-160400-add-indexes.sql" />
     <Content Include="scripts\Update\0003-Migration\Sprint1\20170119-114000-add-indexes.sql" />
