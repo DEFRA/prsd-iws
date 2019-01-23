@@ -260,6 +260,33 @@ namespace EA.Iws.Web.Areas.NotificationMovements.Views.PrenotificationBulkUpload
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You haven&apos;t added any shipment movement documents.
+        /// </summary>
+        public static string WarningHeader {
+            get {
+                return ResourceManager.GetString("WarningHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You must upload shipment movement documents with your prenotification data file to finish the process..
+        /// </summary>
+        public static string WarningText1 {
+            get {
+                return ResourceManager.GetString("WarningText1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to If you leave the process before adding your accompanying shipment movement documents, your bulk upload of prenotifications will not be saved..
+        /// </summary>
+        public static string WarningText2 {
+            get {
+                return ResourceManager.GetString("WarningText2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to View Errors.
         /// </summary>
         public static string ViewErrors {

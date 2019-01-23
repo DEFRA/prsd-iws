@@ -15,6 +15,7 @@
         @Html.HiddenFor(m => m.NotificationId)
         @Html.HiddenFor(m => m.FacilityId)
         @Html.HiddenFor(m => m.NotificationType)
+        @Html.HiddenFor(m => m.IsOnlySiteOfTreatment)
 
         <p>@Html.Raw(string.Format(RemoveFacilityResources.RemoveMessage, Model.FacilityName))</p>
 
