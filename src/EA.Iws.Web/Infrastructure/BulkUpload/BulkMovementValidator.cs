@@ -28,7 +28,7 @@
         {
             var rules = new List<RuleResult<BulkMovementFileRules>>();
             var fileExtension = Path.GetExtension(file.FileName);
-            int maximumFileSize = 2147483647; // 4GB
+            int maximumFileSize = int.MaxValue; // 2147483647 bytes = 4GB
             var validMimeTypes = new List<string>
             {
                 MimeTypes.MSExcel
