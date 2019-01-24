@@ -41,7 +41,7 @@
             }
 
             var fileSizeResult = MessageLevel.Success;
-            // int.MaxValue is 2147483647 bytes which is 4GB
+            // int.MaxValue is 2147483647 bytes which is 2GB
             if (file.ContentLength >= int.MaxValue)
             {
                 fileSizeResult = MessageLevel.Error;
