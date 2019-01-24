@@ -35,6 +35,8 @@
         UnClasses = 31,
         UnNumbers = 32,
         OtherCodes = 33,
-        WasteRecovery = 34
+        WasteRecoveryProvider = 34,
+        WasteRecovery = 35,
+        WasteRecoveryForDisposal = 36
     }
 }

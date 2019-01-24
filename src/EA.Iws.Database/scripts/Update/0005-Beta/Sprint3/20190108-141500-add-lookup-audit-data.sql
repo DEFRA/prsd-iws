@@ -43,4 +43,6 @@ VALUES
 (31,'UN classes'),
 (32,'UN numbers'),
 (33,'Other codes'),
-(34,'Waste recovery')
+(34,'Waste recovery (data provider)'),
+(35,'Waste recovery (recovery data)'),
+(36, 'Waste recovery (disposal data)')
