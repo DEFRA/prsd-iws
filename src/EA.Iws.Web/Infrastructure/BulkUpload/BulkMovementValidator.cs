@@ -28,9 +28,10 @@
             var resultFileRules = await GetFileRules(file);
 
             var bulkMovementRulesSummary = new BulkMovementRulesSummary(resultFileRules);
-            // COULLM: Suspect we need a way identify, and thus prevent GetContentRules from being run if we have at least one error in the FileRules
-            bulkMovementRulesSummary = await mediator.SendAsync(new PerformBulkUploadContentValidation(bulkMovementRulesSummary));
-            
+            if (bulkMovementRulesSummary.IsFileRulesSuccess)
+            {
+                bulkMovementRulesSummary = await mediator.SendAsync(new PerformBulkUploadContentValidation(bulkMovementRulesSummary));
+            }
             return bulkMovementRulesSummary;
         }
 
