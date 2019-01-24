@@ -9,6 +9,10 @@
         [Display(Name = "The file size must not be larger than 2GB.")]
         FileSize,
         [Display(Name = "We've detected a virus in the file you uploaded.")]
-        Virus
+        Virus,
+        [Display(Name = "Unable to read the file.")]
+        InvalidFile,
+        [Display(Name = "The file format is invalid.")]
+        InvalidFormat
     }
 }
