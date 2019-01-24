@@ -30,8 +30,8 @@
             var fileExtension = Path.GetExtension(file.FileName).ToLower();
             var validExtensions = new List<string>
             {
-                "xls",
-                ".xslx",
+                ".xls",
+                ".xlsx",
                 ".csv"
             };
 
