@@ -25,15 +25,16 @@
         CustomsOffice = 21,
         AmountsAndDates = 22,
         ChemicalComposition = 23,
-        ProcessOfGeneration = 24,
-        PhysicalCharacteristics = 25,
-        BaselOecdCodes = 26,
-        EwcCodes = 27,
-        YCodes = 28,
-        HorHpCodes = 29,
-        UnClasses = 30,
-        UnNumbers = 31,
-        OtherCodes = 32,
-        WasteRecovery = 33
+        ChemicalCompositionContinued = 24,
+        ProcessOfGeneration = 25,
+        PhysicalCharacteristics = 26,
+        BaselOecdCodes = 27,
+        EwcCodes = 28,
+        YCodes = 29,
+        HorHpCodes = 30,
+        UnClasses = 31,
+        UnNumbers = 32,
+        OtherCodes = 33,
+        WasteRecovery = 34
     }
 }

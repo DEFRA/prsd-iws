@@ -202,11 +202,21 @@
             await mediator.SendAsync(createNewWasteType);
             await mediator.SendAsync(new SetEnergy(model.Energy, model.NotificationId));
 
-            await this.auditService.AddAuditEntry(this.mediator,
-                   model.NotificationId,
-                   User.GetUserId(),
-                   existingWasteTypeData == null ? NotificationAuditType.Added : NotificationAuditType.Updated,
-                   NotificationAuditScreenType.ChemicalComposition);
+            bool dataHasChanged = false;
+
+            if (existingWasteTypeData != null)
+            {
+                dataHasChanged = CheckForChangesInFirstScreen(existingWasteTypeData, filteredWasteCompositions, model.Energy, model.ChemicalCompositionType);
+            }
+
+            if (existingWasteTypeData == null || dataHasChanged)
+            {
+                await this.auditService.AddAuditEntry(this.mediator,
+                       model.NotificationId,
+                       User.GetUserId(),
+                       dataHasChanged == false ? NotificationAuditType.Added : NotificationAuditType.Updated,
+                       NotificationAuditScreenType.ChemicalComposition);
+            }
 
             if (model.ChemicalCompositionType == ChemicalComposition.Wood)
             {
@@ -214,6 +224,31 @@
             }
 
             return RedirectToAction("Constituents", new { id = model.NotificationId, chemicalCompositionType = model.ChemicalCompositionType, backToOverview });
+        }
+
+        private bool CheckForChangesInFirstScreen(WasteTypeData existingWasteTypeData, List<WoodInformationData> filteredWasteCompositions, string energy, ChemicalComposition chemicalCompositionType)
+        {
+            if (existingWasteTypeData.EnergyInformation != energy)
+            {
+                return true;
+            }
+
+            if (existingWasteTypeData.ChemicalCompositionType != chemicalCompositionType)
+            {
+                return true;
+            }
+
+            foreach (var newData in filteredWasteCompositions)
+            {
+                var existingData = existingWasteTypeData.WasteAdditionalInformation.FirstOrDefault(p => p.WasteInformationType == newData.WasteInformationType);
+
+                if (existingData.Constituent != newData.Constituent || Double.Parse(existingData.MaxConcentration) != Double.Parse(newData.MaxConcentration) || Double.Parse(existingData.MinConcentration) != Double.Parse(newData.MinConcentration))
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
 
         [HttpGet]
@@ -251,11 +286,21 @@
             await mediator.SendAsync(new UpdateWasteType(model.NotificationId, model.ChemicalCompositionType, model.FurtherInformation, filteredWasteCompositions));
             await mediator.SendAsync(new SetOptionalInformation(model.FurtherInformation, model.HasAnnex, model.NotificationId));
 
-            await this.auditService.AddAuditEntry(this.mediator,
-                   model.NotificationId,
-                   User.GetUserId(),
-                   existingWasteTypeData == null ? NotificationAuditType.Added : NotificationAuditType.Updated,
-                   NotificationAuditScreenType.ChemicalComposition);
+            bool dataHasChanged = false;
+
+            if (existingWasteTypeData.WasteCompositionData.Count != 0)
+            {
+                dataHasChanged = CheckForChangesInSecondScreen(existingWasteTypeData, filteredWasteCompositions, model.FurtherInformation, model.HasAnnex, model.ChemicalCompositionType);
+            }
+
+            if (existingWasteTypeData.WasteCompositionData.Count == 0 || dataHasChanged)
+            {
+                await this.auditService.AddAuditEntry(this.mediator,
+                       model.NotificationId,
+                       User.GetUserId(),
+                       dataHasChanged == false ? NotificationAuditType.Added : NotificationAuditType.Updated,
+                       NotificationAuditScreenType.ChemicalCompositionContinued);
+            }
 
             if (backToOverview.GetValueOrDefault())
             {
@@ -264,7 +309,47 @@
 
             return RedirectToAction("Index", "WasteGenerationProcess", new { id = model.NotificationId });
         }
-        
+
+        private bool CheckForChangesInSecondScreen(WasteTypeData existingWasteTypeData, List<WasteTypeCompositionData> filteredWasteCompositions, string futherInformation, bool hasAnnex, ChemicalComposition chemicalCompositionType)
+        {
+            if (chemicalCompositionType != existingWasteTypeData.ChemicalCompositionType)
+            {
+                return true;
+            }
+
+            if (futherInformation != existingWasteTypeData.FurtherInformation)
+            {
+                return true;
+            }
+
+            if (hasAnnex != existingWasteTypeData.HasAnnex)
+            {
+                return true;
+            }
+
+            if (filteredWasteCompositions.Count != existingWasteTypeData.WasteCompositionData.Count)
+            {
+                return true;
+            }
+
+            foreach (var newData in filteredWasteCompositions)
+            {
+                var existingData = existingWasteTypeData.WasteCompositionData.FirstOrDefault(p => p.ChemicalCompositionCategory == newData.ChemicalCompositionCategory);
+
+                if (existingData == null)
+                {
+                    return true;
+                }
+
+                if (existingData.Constituent != newData.Constituent || existingData.MaxConcentration != Decimal.Parse(newData.MaxConcentration) || existingData.MinConcentration != Decimal.Parse(newData.MinConcentration) || existingData.Constituent != newData.Constituent)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
         private List<WasteTypeCompositionData> GetChemicalCompositionContinuedCategories()
         {
             return Enum.GetValues(typeof(ChemicalCompositionCategory)).Cast<int>()
