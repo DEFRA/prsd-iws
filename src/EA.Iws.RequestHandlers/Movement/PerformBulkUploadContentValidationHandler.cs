@@ -31,7 +31,19 @@
         {
             var rules = new List<ContentRuleResult<BulkMovementContentRules>>();
 
-            rules.Add(new ContentRuleResult<BulkMovementContentRules>(BulkMovementContentRules.MissingData, MessageLevel.Error, new List<string> { "1", "2" }));
+            var missingDataResult = MessageLevel.Success;
+            var missingDataShipmentNumbers = new List<string>();
+            var dtoList = new ContentRulesDTOList();
+            foreach (ContentRulesDTO dto in dtoList.ObjectsList)
+            {
+                if (dto.ActualDateOfShipment.Equals(string.Empty) || dto.NotificationNumber.Equals(string.Empty) || dto.PackagingType.Equals(string.Empty) || dto.Quantity.Equals(string.Empty) || dto.Unit.Equals(string.Empty))
+                {
+                    missingDataResult = MessageLevel.Error;
+                    missingDataShipmentNumbers.Add(dto.ShipmentNumber);
+                }
+            }
+
+            rules.Add(new ContentRuleResult<BulkMovementContentRules>(BulkMovementContentRules.MissingData, missingDataResult, missingDataShipmentNumbers));
 
             return rules;
         }
