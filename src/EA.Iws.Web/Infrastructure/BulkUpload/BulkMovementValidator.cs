@@ -6,25 +6,30 @@
     using System.Web;
     using Core.Movement.Bulk;
     using Core.Rules;
+    using Prsd.Core.Mediator;
+    using Requests.Movement;
     using VirusScanning;
 
     public class BulkMovementValidator : IBulkMovementValidator
     {
+        private readonly IMediator mediator;
         private readonly IFileReader fileReader;
 
-        public BulkMovementValidator(IFileReader fileReader)
+        public BulkMovementValidator(IMediator mediator, IFileReader fileReader)
         {
+            this.mediator = mediator;
             this.fileReader = fileReader;
         }
 
         public async Task<BulkMovementRulesSummary> GetValidationSummary(HttpPostedFileBase file)
         {
-            var contentRules = new List<ContentRuleResult<BulkMovementContentRules>>();
             var fileRules = await GetFileRules(file);
-            // COULLM: Suspect we need a way identify, and thus prevent GetContentRules from being run if we have at least one error in the FileRules
-            contentRules = GetContentRules();
 
-            return new BulkMovementRulesSummary(fileRules, contentRules);
+            var bulkMovementRulesSummary = new BulkMovementRulesSummary(fileRules);
+            // COULLM: Suspect we need a way identify, and thus prevent GetContentRules from being run if we have at least one error in the FileRules
+            bulkMovementRulesSummary = await mediator.SendAsync(new PerformBulkUploadContentValidation(bulkMovementRulesSummary));
+            
+            return bulkMovementRulesSummary;
         }
 
         private async Task<List<RuleResult<BulkMovementFileRules>>> GetFileRules(HttpPostedFileBase file)
@@ -64,15 +69,6 @@
             rules.Add(new RuleResult<BulkMovementFileRules>(BulkMovementFileRules.FileType, fileTypeResult));
             rules.Add(new RuleResult<BulkMovementFileRules>(BulkMovementFileRules.FileSize, fileSizeResult));
             rules.Add(new RuleResult<BulkMovementFileRules>(BulkMovementFileRules.Virus, fileVirusScanResult));
-
-            return rules;
-        }
-
-        private List<ContentRuleResult<BulkMovementContentRules>> GetContentRules()
-        {
-            var rules = new List<ContentRuleResult<BulkMovementContentRules>>();
-
-            rules.Add(new ContentRuleResult<BulkMovementContentRules>(BulkMovementContentRules.MissingData, MessageLevel.Error, new List<string> { "1", "2" }));
 
             return rules;
         }

@@ -16,13 +16,13 @@
 
         public MessageLevel MessageLevel { get; private set; }
 
-        private List<string> ErroneousShipmentNumbers { get; set; }
+        public List<string> ErroneousShipmentNumbers { get; set; }
 
         private string GetShipmentNumbers
         {
             get
             {
-                if(ErroneousShipmentNumbers != null && ErroneousShipmentNumbers.Count > 0)
+                if (ErroneousShipmentNumbers != null && ErroneousShipmentNumbers.Count > 0)
                 {
                     string shipmentNosString = string.Empty;
                     foreach (string shipmentNo in ErroneousShipmentNumbers)
