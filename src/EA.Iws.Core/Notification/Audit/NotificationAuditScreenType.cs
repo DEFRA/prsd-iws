@@ -37,6 +37,7 @@
         OtherCodes = 33,
         WasteRecoveryProvider = 34,
         WasteRecovery = 35,
-        WasteRecoveryForDisposal = 36
+        WasteRecoveryForDisposal = 36,
+        CopiedFromNotification = 37
     }
 }

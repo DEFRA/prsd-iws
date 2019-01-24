@@ -45,4 +45,5 @@ VALUES
 (33,'Other codes'),
 (34,'Waste recovery (data provider)'),
 (35,'Waste recovery (recovery data)'),
-(36, 'Waste recovery (disposal data)')
+(36, 'Waste recovery (disposal data)'),
+(37, 'Copied from notification')
