@@ -4,7 +4,9 @@
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Core.Exporters;
+    using Core.Notification.Audit;
     using Core.Shared;
+    using Infrastructure;
     using Infrastructure.Authorization;
     using Prsd.Core.Mediator;
     using Requests.Exporters;
@@ -17,10 +19,12 @@
     public class EditContactController : Controller
     {
         private readonly IMediator mediator;
+        private readonly IAuditService auditService;
 
-        public EditContactController(IMediator mediator)
+        public EditContactController(IMediator mediator, IAuditService auditService)
         {
             this.mediator = mediator;
+            this.auditService = auditService;
         }
 
         [HttpGet]
@@ -46,6 +50,12 @@
             var contactData = GetNewContactData(model, exporter.Contact);
 
             await mediator.SendAsync(new SetExporterContact(id, contactData));
+
+            await this.auditService.AddAuditEntry(this.mediator,
+                    id,
+                    User.GetUserId(),
+                    NotificationAuditType.Updated,
+                    NotificationAuditScreenType.Exporter);
 
             return RedirectToAction("Index", "Overview");
         }
@@ -73,6 +83,12 @@
             var contactData = GetNewContactData(model, importer.Contact);
 
             await mediator.SendAsync(new SetImporterContact(id, contactData));
+
+            await this.auditService.AddAuditEntry(this.mediator,
+                    id,
+                    User.GetUserId(),
+                    NotificationAuditType.Updated,
+                    NotificationAuditScreenType.Importer);
 
             return RedirectToAction("Index", "Overview");
         }
