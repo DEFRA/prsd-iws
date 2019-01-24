@@ -22,7 +22,19 @@
         {
             get
             {
-                return "1, 2";
+                if(ErroneousShipmentNumbers != null && ErroneousShipmentNumbers.Count > 0)
+                {
+                    string shipmentNosString = string.Empty;
+                    foreach (string shipmentNo in ErroneousShipmentNumbers)
+                    {
+                        shipmentNosString += string.Concat(shipmentNo, ", ");
+                    }
+                    // Remove the final instance of ", "
+                    shipmentNosString = shipmentNosString.Remove(shipmentNosString.Length - 2);
+                    
+                    return shipmentNosString;
+                }
+                return "None";
             }
         }
 
