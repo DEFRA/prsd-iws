@@ -2293,7 +2293,12 @@
       <DependentUpon>PrenotificationBulkUploadResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Infrastructure\BulkUpload\BulkMovementValidator.cs" />
+    <Compile Include="Infrastructure\BulkUpload\PrenotificationFileSizeRule.cs" />
+    <Compile Include="Infrastructure\BulkUpload\PrenotificationFileTypeRule.cs" />
+    <Compile Include="Infrastructure\BulkUpload\IBulkMovementPrenotificationFileRule.cs" />
     <Compile Include="Infrastructure\BulkUpload\IBulkMovementValidator.cs" />
+    <Compile Include="Infrastructure\BulkUpload\FileParsePrenotificationFileRule.cs" />
+    <Compile Include="Infrastructure\BulkUpload\VirusRule.cs" />
     <Compile Include="Infrastructure\NotificationOwnerFilter.cs" />
     <Compile Include="Infrastructure\SkipNotificationOwnerFilter.cs" />
     <Compile Include="Infrastructure\AuditService.cs" />

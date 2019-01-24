@@ -8,6 +8,6 @@
     {
         Task<byte[]> GetFileBytes(HttpPostedFileBase file);
 
-        Task<DataTable> GetDataTable(HttpPostedFileBase file, bool isCsv, bool useHeaderRow);
+        Task<DataTable> GetFirstDataTable(HttpPostedFileBase file, bool isCsv, bool useHeaderRow);
     }
 }

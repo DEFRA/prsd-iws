@@ -10,9 +10,7 @@
         FileSize,
         [Display(Name = "We've detected a virus in the file you uploaded.")]
         Virus,
-        [Display(Name = "Unable to read the file.")]
-        InvalidFile,
         [Display(Name = "The file format is invalid.")]
-        InvalidFormat
+        FileParse
     }
 }

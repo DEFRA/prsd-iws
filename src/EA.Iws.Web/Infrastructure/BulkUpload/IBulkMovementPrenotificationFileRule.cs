@@ -4,10 +4,11 @@
     using System.Threading.Tasks;
     using System.Web;
     using Core.Movement.Bulk;
+    using Core.Rules;
 
-    public interface IBulkMovementValidator
+    public interface IBulkMovementPrenotificationFileRule
     {
         DataTable DataTable { get; set; }
-        Task<BulkMovementRulesSummary> GetValidationSummary(HttpPostedFileBase file);
+        Task<RuleResult<BulkMovementFileRules>> GetResult(HttpPostedFileBase file);
     }
 }

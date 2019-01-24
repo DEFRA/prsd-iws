@@ -35,7 +35,7 @@
             return fileBytes;
         }
 
-        public async Task<DataTable> GetDataTable(HttpPostedFileBase file, bool isCsv, bool useHeaderRow)
+        public async Task<DataTable> GetFirstDataTable(HttpPostedFileBase file, bool isCsv, bool useHeaderRow)
         {
             DataTable result = null;
 
