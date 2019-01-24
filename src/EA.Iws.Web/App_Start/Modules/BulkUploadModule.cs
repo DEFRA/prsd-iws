@@ -8,6 +8,9 @@
         protected override void Load(ContainerBuilder builder)
         {
             builder.RegisterType<BulkMovementValidator>().As<IBulkMovementValidator>();
+            builder.RegisterAssemblyTypes(ThisAssembly)
+                .AssignableTo<IBulkMovementPrenotificationFileRule>()
+                .As<IBulkMovementPrenotificationFileRule>();
         }
     }
 }
