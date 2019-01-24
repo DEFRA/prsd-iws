@@ -1,7 +1,7 @@
 ﻿namespace EA.Iws.Web.Infrastructure.BulkUpload
 {
     using System.Collections.Generic;
-    using System.IO;
+    using System.Data;
     using System.Threading.Tasks;
     using System.Web;
     using Core.Movement.Bulk;
@@ -13,19 +13,21 @@
     public class BulkMovementValidator : IBulkMovementValidator
     {
         private readonly IMediator mediator;
-        private readonly IFileReader fileReader;
+        private readonly IEnumerable<IBulkMovementPrenotificationFileRule> fileRules;
 
-        public BulkMovementValidator(IMediator mediator, IFileReader fileReader)
+        public DataTable DataTable { get; set; }
+
+        public BulkMovementValidator(IMediator mediator, IEnumerable<IBulkMovementPrenotificationFileRule> fileRules)
         {
             this.mediator = mediator;
-            this.fileReader = fileReader;
+            this.fileRules = fileRules;
         }
 
         public async Task<BulkMovementRulesSummary> GetValidationSummary(HttpPostedFileBase file)
         {
-            var fileRules = await GetFileRules(file);
+            var resultFileRules = await GetFileRules(file);
 
-            var bulkMovementRulesSummary = new BulkMovementRulesSummary(fileRules);
+            var bulkMovementRulesSummary = new BulkMovementRulesSummary(resultFileRules);
             // COULLM: Suspect we need a way identify, and thus prevent GetContentRules from being run if we have at least one error in the FileRules
             bulkMovementRulesSummary = await mediator.SendAsync(new PerformBulkUploadContentValidation(bulkMovementRulesSummary));
             
@@ -35,41 +37,19 @@
         private async Task<List<RuleResult<BulkMovementFileRules>>> GetFileRules(HttpPostedFileBase file)
         {
             var rules = new List<RuleResult<BulkMovementFileRules>>();
-            var fileExtension = Path.GetExtension(file.FileName).ToLower();
-            var validExtensions = new List<string>
-            {
-                "xls",
-                ".xslx",
-                ".csv"
-            };
 
-            var fileTypeResult = MessageLevel.Success;
-            if (string.IsNullOrEmpty(fileExtension) || !validExtensions.Contains(fileExtension))
+            foreach (var rule in fileRules)
             {
-                fileTypeResult = MessageLevel.Error;
+                var result = await rule.GetResult(file);
+                // Grab the DataTable from the File Parse rule.
+                if (result.Rule == BulkMovementFileRules.FileParse)
+                {
+                    DataTable = rule.DataTable;
+                }
+
+                rules.Add(result);
             }
-
-            var fileSizeResult = MessageLevel.Success;
-            // int.MaxValue is 2147483647 bytes which is 2GB
-            if (file.ContentLength >= int.MaxValue)
-            {
-                fileSizeResult = MessageLevel.Error;
-            }
-
-            var fileVirusScanResult = MessageLevel.Success;
-            try
-            {
-                var data = await fileReader.GetFileBytes(file);
-            }
-            catch (VirusFoundException)
-            {
-                fileVirusScanResult = MessageLevel.Error;
-            }
-
-            rules.Add(new RuleResult<BulkMovementFileRules>(BulkMovementFileRules.FileType, fileTypeResult));
-            rules.Add(new RuleResult<BulkMovementFileRules>(BulkMovementFileRules.FileSize, fileSizeResult));
-            rules.Add(new RuleResult<BulkMovementFileRules>(BulkMovementFileRules.Virus, fileVirusScanResult));
-
+            
             return rules;
         }
     }

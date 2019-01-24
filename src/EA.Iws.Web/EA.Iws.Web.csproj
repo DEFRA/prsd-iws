@@ -101,6 +101,14 @@
       <HintPath>..\packages\Elmah.Mvc.2.1.2\lib\net40\Elmah.Mvc.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="ExcelDataReader, Version=3.4.2.0, Culture=neutral, PublicKeyToken=93517dbe6a4012fa, processorArchitecture=MSIL">
+      <HintPath>..\packages\ExcelDataReader.3.4.2\lib\net45\ExcelDataReader.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ExcelDataReader.DataSet, Version=3.4.2.0, Culture=neutral, PublicKeyToken=93517dbe6a4012fa, processorArchitecture=MSIL">
+      <HintPath>..\packages\ExcelDataReader.DataSet.3.4.2\lib\net35\ExcelDataReader.DataSet.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="FastMember.Signed, Version=1.0.0.9, Culture=neutral, PublicKeyToken=9e8f22703bef9a29, processorArchitecture=MSIL">
       <HintPath>..\packages\FastMember.Signed.1.1.0\lib\net40\FastMember.Signed.dll</HintPath>
       <Private>True</Private>
@@ -159,6 +167,7 @@
       <HintPath>..\packages\System.IdentityModel.Tokens.Jwt.4.0.3.308261200\lib\net45\System.IdentityModel.Tokens.Jwt.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.IO.Compression" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
@@ -2284,7 +2293,12 @@
       <DependentUpon>PrenotificationBulkUploadResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Infrastructure\BulkUpload\BulkMovementValidator.cs" />
+    <Compile Include="Infrastructure\BulkUpload\PrenotificationFileSizeRule.cs" />
+    <Compile Include="Infrastructure\BulkUpload\PrenotificationFileTypeRule.cs" />
+    <Compile Include="Infrastructure\BulkUpload\IBulkMovementPrenotificationFileRule.cs" />
     <Compile Include="Infrastructure\BulkUpload\IBulkMovementValidator.cs" />
+    <Compile Include="Infrastructure\BulkUpload\FileParsePrenotificationFileRule.cs" />
+    <Compile Include="Infrastructure\BulkUpload\VirusRule.cs" />
     <Compile Include="Infrastructure\NotificationOwnerFilter.cs" />
     <Compile Include="Infrastructure\SkipNotificationOwnerFilter.cs" />
     <Compile Include="Infrastructure\AuditService.cs" />
