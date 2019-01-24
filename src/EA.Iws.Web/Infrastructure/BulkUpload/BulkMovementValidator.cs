@@ -27,15 +27,16 @@
         private async Task<List<RuleResult<BulkMovementFileRules>>> GetFileRules(HttpPostedFileBase file)
         {
             var rules = new List<RuleResult<BulkMovementFileRules>>();
-            var fileExtension = Path.GetExtension(file.FileName);
-            var validMimeTypes = new List<string>
+            var fileExtension = Path.GetExtension(file.FileName).ToLower();
+            var validExtensions = new List<string>
             {
-                MimeTypes.MSExcel
+                "xls",
+                ".xslx",
+                ".csv"
             };
 
             var fileTypeResult = MessageLevel.Success;
-            var mimeType = file.ContentType;
-            if (string.IsNullOrEmpty(mimeType) || !validMimeTypes.Contains(mimeType))
+            if (string.IsNullOrEmpty(fileExtension) || !validExtensions.Contains(fileExtension))
             {
                 fileTypeResult = MessageLevel.Error;
             }
