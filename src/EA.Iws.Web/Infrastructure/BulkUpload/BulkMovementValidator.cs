@@ -38,7 +38,7 @@
                     DataTable = rule.DataTable;
                 }
 
-                rules.Add(await rule.GetResult(file));
+                rules.Add(result);
             }
             
             return rules;

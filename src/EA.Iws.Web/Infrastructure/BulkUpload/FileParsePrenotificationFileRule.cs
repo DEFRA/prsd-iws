@@ -25,8 +25,12 @@
 
             try
             {
-                var dataTable = await fileReader.GetFirstDataTable(file, true, true);
+                var isCsv = file.ContentType == MimeTypes.Csv;
+
+                var dataTable = await fileReader.GetFirstDataTable(file, isCsv, !isCsv);
+
                 result = IsDataTableValid(dataTable) ? MessageLevel.Success : MessageLevel.Error;
+
                 DataTable = dataTable;
             }
             catch (Exception)
