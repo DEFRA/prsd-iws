@@ -50,7 +50,10 @@
 
             await mediator.SendAsync(new SetWasteRecoveryProvider(model.ProvidedBy.Value, id));
 
-            await this.AddAuditData(id, existingData == null ? NotificationAuditType.Added : NotificationAuditType.Updated);
+            if (existingData == null || existingData.Value != model.ProvidedBy.Value)
+            {
+                await this.AddAuditData(id, existingData == null ? NotificationAuditType.Added : NotificationAuditType.Updated, NotificationAuditScreenType.WasteRecoveryProvider);
+            }
 
             return model.ProvidedBy == ProvidedBy.Notifier
                 ? RedirectToAction("Percentage", "WasteRecovery", new { backToOverview })
@@ -166,10 +169,24 @@
                 new ValuePerWeightData(model.Amount.ToMoneyDecimal(), model.SelectedUnits.Value));
 
             var recoveryCost = await mediator.SendAsync(new GetRecoveryCost(id));
+            var estimatedValue = await mediator.SendAsync(new GetEstimatedValue(id));
+            var percentageRecoverable = await mediator.SendAsync(new GetRecoverablePercentage(id));
 
             await mediator.SendAsync(saveData);
 
-            await this.AddAuditData(id, NotificationAuditType.Updated);
+            if (recoveryCost == null || estimatedValue == null || percentageRecoverable == null)
+            {
+                await this.AddAuditData(id, NotificationAuditType.Added, NotificationAuditScreenType.WasteRecovery);
+            }
+            else
+            {
+                if (recoveryCost.Amount != saveData.RecoveryCost.Amount || recoveryCost.Unit != saveData.RecoveryCost.Unit
+                    || estimatedValue.Amount != saveData.EstimatedValue.Amount || estimatedValue.Unit != saveData.EstimatedValue.Unit
+                    || percentageRecoverable != saveData.PercentageRecoverable)
+                {
+                    await this.AddAuditData(id, NotificationAuditType.Updated, NotificationAuditScreenType.WasteRecovery);
+                }
+            }
 
             if (model.PercentageRecoverable < 100)
             {
@@ -248,11 +265,22 @@
                 return View(model);
             }
 
+            var disposalMethod = await mediator.SendAsync(new GetDisposalMethod(model.NotificationId));
             var disposalCost = await mediator.SendAsync(new GetDisposalCost(model.NotificationId));
 
             await mediator.SendAsync(new SetWasteDisposal(model.NotificationId, model.DisposalMethod, model.Amount.ToMoneyDecimal(), model.Units));
 
-            await this.AddAuditData(model.NotificationId, NotificationAuditType.Updated);
+            if (disposalMethod == null || disposalCost == null)
+            {
+                await this.AddAuditData(model.NotificationId, NotificationAuditType.Added, NotificationAuditScreenType.WasteRecoveryForDisposal);
+            }
+            else
+            {
+                if (disposalCost.Amount != Decimal.Parse(model.Amount) || disposalCost.Unit != model.Units || disposalMethod != model.DisposalMethod)
+                {
+                    await this.AddAuditData(model.NotificationId, NotificationAuditType.Updated, NotificationAuditScreenType.WasteRecoveryForDisposal);
+                }
+            }
 
             return RedirectToAction("Index", "Home", new { backToOverview });
         }
@@ -269,13 +297,13 @@
 
             return units;
         }
-        private async Task AddAuditData(Guid id, NotificationAuditType type)
+        private async Task AddAuditData(Guid id, NotificationAuditType type, NotificationAuditScreenType screen)
         {
             await this.auditService.AddAuditEntry(this.mediator,
                    id,
                    User.GetUserId(),
                    type,
-                   NotificationAuditScreenType.WasteRecovery);
+                   screen);
         }
     }
-}
+} 

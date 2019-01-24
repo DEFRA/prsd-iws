@@ -3,6 +3,8 @@
     using System;
     using System.Threading.Tasks;
     using System.Web.Mvc;
+    using Core.Notification.Audit;
+    using Infrastructure;
     using Prsd.Core.Mediator;
     using Prsd.Core.Web.ApiClient;
     using Requests.Copy;
@@ -12,10 +14,12 @@
     public class CopyFromNotificationController : Controller
     {
         private readonly IMediator mediator;
+        private readonly IAuditService auditService;
 
-        public CopyFromNotificationController(IMediator mediator)
+        public CopyFromNotificationController(IMediator mediator, IAuditService auditService)
         {
             this.mediator = mediator;
+            this.auditService = auditService;
         }
 
         [HttpGet]
@@ -42,6 +46,12 @@
 
                 if (resultId != Guid.Empty)
                 {
+                    await this.auditService.AddAuditEntry(this.mediator,
+                        resultId,
+                        User.GetUserId(),
+                        NotificationAuditType.Added,
+                        NotificationAuditScreenType.CopiedFromNotification);
+
                     return RedirectToAction("Result", "CopyFromNotification", new { id = resultId });
                 }
             }
