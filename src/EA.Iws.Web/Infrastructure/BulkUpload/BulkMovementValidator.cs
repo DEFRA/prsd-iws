@@ -30,20 +30,30 @@
         private async Task<List<RuleResult<BulkMovementFileRules>>> GetFileRules(HttpPostedFileBase file)
         {
             var rules = new List<RuleResult<BulkMovementFileRules>>();
-            var fileExtension = Path.GetExtension(file.FileName);
+            var fileExtension = Path.GetExtension(file.FileName).ToLower();
+            var validExtensions = new List<string>
+            {
+                "xls",
+                ".xslx",
+                ".csv"
+            };
 
             var fileTypeResult = MessageLevel.Success;
-            if (string.IsNullOrEmpty(fileExtension) || fileExtension != ".xlsx" || fileExtension != ".csv")
+            if (string.IsNullOrEmpty(fileExtension) || !validExtensions.Contains(fileExtension))
             {
                 fileTypeResult = MessageLevel.Error;
             }
 
             var fileSizeResult = MessageLevel.Success;
-            var fileVirusScanResult = MessageLevel.Success;
+            // int.MaxValue is 2147483647 bytes which is 2GB
+            if (file.ContentLength >= int.MaxValue)
+            {
+                fileSizeResult = MessageLevel.Error;
+            }
 
+            var fileVirusScanResult = MessageLevel.Success;
             try
             {
-                // TODO: Check for file size.
                 var data = await fileReader.GetFileBytes(file);
             }
             catch (VirusFoundException)

@@ -35,7 +35,6 @@
         public List<ContentRuleResult<BulkMovementContentRules>> FailedContentRules { get; set; }
 
         [Display(Name = "Upload the data file containing your prenotification data")]
-        [RestrictToAllowedUploadTypes]
         public HttpPostedFileBase File { get; set; }
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
