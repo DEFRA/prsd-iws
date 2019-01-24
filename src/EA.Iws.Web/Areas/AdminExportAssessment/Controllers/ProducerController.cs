@@ -4,6 +4,7 @@
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Core.AddressBook;
+    using Core.Notification.Audit;
     using Infrastructure;
     using Infrastructure.Authorization;
     using Prsd.Core.Mediator;
@@ -15,10 +16,12 @@
     public class ProducerController : Controller
     {
         private readonly IMediator mediator;
+        private readonly IAuditService auditService;
 
-        public ProducerController(IMediator mediator)
+        public ProducerController(IMediator mediator, IAuditService auditService)
         {
             this.mediator = mediator;
+            this.auditService = auditService;
         }
 
         [HttpGet]
@@ -56,6 +59,12 @@
             };
 
             await mediator.SendAsync(request);
+
+            await this.auditService.AddAuditEntry(this.mediator,
+                    id,
+                    User.GetUserId(),
+                    NotificationAuditType.Added,
+                    NotificationAuditScreenType.Producer);
 
             if (model.IsAddedToAddressBook)
             {

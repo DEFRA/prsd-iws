@@ -28,6 +28,18 @@
             mediator = A.Fake<IMediator>();
             this.auditService = A.Fake<IAuditService>();
             chemicalCompositionController = new ChemicalCompositionController(mediator, new ChemicalCompositionMap(), this.auditService);
+
+            A.CallTo(
+                () =>
+                    mediator.SendAsync(A<GetWasteType>.That.Matches(p => p.NotificationId == notificationId)))
+                .Returns(new WasteTypeData()
+                {
+                    WasteCompositionData = new List<WasteCompositionData>()
+                    {
+                        A.Fake<WasteCompositionData>()
+                    }
+                });
+
             A.CallTo(() => auditService.AddAuditEntry(this.mediator, notificationId, "user", NotificationAuditType.Added, NotificationAuditScreenType.ChemicalComposition));
         }
 
@@ -104,7 +116,7 @@
         public async Task WoodContined_Post_BackToOverviewTrue_RedirectsToOverview()
         {
             var wasteComposition = new List<WasteTypeCompositionData>();
-            var model = new ChemicalCompositionContinuedViewModel() 
+            var model = new ChemicalCompositionContinuedViewModel()
             {
                 NotificationId = notificationId,
                 ChemicalCompositionType = ChemicalComposition.Wood,
@@ -115,7 +127,7 @@
             var result = await chemicalCompositionController.Constituents(model, true) as RedirectToRouteResult;
             RouteAssert.RoutesTo(result.RouteValues, "Index", "Home");
         }
-        
+
         [Fact]
         public async Task Wood_Post_BackToOverviewFalse_RedirectsToWasteGenerationProcess()
         {
