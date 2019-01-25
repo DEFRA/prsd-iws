@@ -1,16 +1,17 @@
 ﻿namespace EA.Iws.Web.Areas.NotificationApplication.Controllers
 {
-    using Core.Notification.Audit;
-    using Core.WasteType;
-    using Infrastructure;
-    using Prsd.Core.Mapper;
-    using Prsd.Core.Mediator;
-    using Requests.WasteType;
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Mvc;
+    using Core.Notification.Audit;
+    using Core.WasteType;
+    using Infrastructure;
+    using Prsd.Core.Mapper;
+    using Prsd.Core.Mediator;
+    using Requests.Notification;
+    using Requests.WasteType;
     using ViewModels.ChemicalComposition;
     using Web.ViewModels.Shared;
 
@@ -278,9 +279,9 @@
 
             //Join optional and mandatory collections
             model.WasteComposition.AddRange(model.OtherCodes);
-            
+
             var blanksRemoved = model.WasteComposition.Where(c => !string.IsNullOrEmpty(c.Constituent));
-            
+
             var filteredWasteCompositions = RemoveNotApplicableValues(blanksRemoved);
 
             await mediator.SendAsync(new UpdateWasteType(model.NotificationId, model.ChemicalCompositionType, model.FurtherInformation, filteredWasteCompositions));
@@ -288,18 +289,39 @@
 
             bool dataHasChanged = false;
 
-            if (existingWasteTypeData.WasteCompositionData.Count != 0)
-            {
-                dataHasChanged = CheckForChangesInSecondScreen(existingWasteTypeData, filteredWasteCompositions, model.FurtherInformation, model.HasAnnex, model.ChemicalCompositionType);
-            }
+            string firstScreensLastAuditType = await GetFirstScreensLastAuditType(model.NotificationId);
 
-            if (existingWasteTypeData.WasteCompositionData.Count == 0 || dataHasChanged)
+            if (firstScreensLastAuditType == NotificationAuditType.Added.ToString() && existingWasteTypeData.WasteCompositionData.Count == 0)
             {
                 await this.auditService.AddAuditEntry(this.mediator,
                        model.NotificationId,
                        User.GetUserId(),
-                       dataHasChanged == false ? NotificationAuditType.Added : NotificationAuditType.Updated,
+                       NotificationAuditType.Added,
                        NotificationAuditScreenType.ChemicalCompositionContinued);
+            }
+            else
+            {
+                if (existingWasteTypeData.WasteCompositionData.Count != 0)
+                {
+                    dataHasChanged = CheckForChangesInSecondScreen(existingWasteTypeData, filteredWasteCompositions, model.FurtherInformation, model.HasAnnex, model.ChemicalCompositionType);
+
+                    if (dataHasChanged)
+                    {
+                        await this.auditService.AddAuditEntry(this.mediator,
+                           model.NotificationId,
+                           User.GetUserId(),
+                           NotificationAuditType.Updated,
+                           NotificationAuditScreenType.ChemicalCompositionContinued);
+                    }
+                }
+                else
+                {
+                    await this.auditService.AddAuditEntry(this.mediator,
+                       model.NotificationId,
+                       User.GetUserId(),
+                       NotificationAuditType.Updated,
+                       NotificationAuditScreenType.ChemicalCompositionContinued);
+                }
             }
 
             if (backToOverview.GetValueOrDefault())
@@ -308,6 +330,13 @@
             }
 
             return RedirectToAction("Index", "WasteGenerationProcess", new { id = model.NotificationId });
+        }
+
+        private async Task<string> GetFirstScreensLastAuditType(Guid id)
+        {
+            var response = await mediator.SendAsync(new GetNotificationAuditTable(id, 1, (int)NotificationAuditScreenType.ChemicalComposition, null, null));
+
+            return response.TableData.OrderByDescending(p => p.DateAdded).FirstOrDefault().AuditType;
         }
 
         private bool CheckForChangesInSecondScreen(WasteTypeData existingWasteTypeData, List<WasteTypeCompositionData> filteredWasteCompositions, string futherInformation, bool hasAnnex, ChemicalComposition chemicalCompositionType)
@@ -390,12 +419,12 @@
             }
 
             var compositions = wasteTypeData.WasteCompositionData.Select(c => new WasteTypeCompositionData
-                {
-                    ChemicalCompositionCategory = c.ChemicalCompositionCategory,
-                    Constituent = c.Constituent,
-                    MinConcentration = c.MinConcentration.ToString(),
-                    MaxConcentration = c.MaxConcentration.ToString()
-                }).ToList();
+            {
+                ChemicalCompositionCategory = c.ChemicalCompositionCategory,
+                Constituent = c.Constituent,
+                MinConcentration = c.MinConcentration.ToString(),
+                MaxConcentration = c.MaxConcentration.ToString()
+            }).ToList();
 
             // Where the waste concentration is not applicable it is not stored.
             var notApplicableCompositions =
@@ -456,7 +485,7 @@
             model.WasteComposition = compositions;
 
             model.Energy = wasteTypeData.EnergyInformation;
-            
+
             if (chemicalCompositionType == ChemicalComposition.Wood)
             {
                 model.Description = wasteTypeData.WoodTypeDescription;
