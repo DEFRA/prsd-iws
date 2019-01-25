@@ -4,7 +4,7 @@
 
     public enum BulkMovementContentRules
     {
-        [Display(Name = "Shipment number/s {0}: there is missing data")]
-        MissingData
+        MissingData,
+        ExcessiveShipments
     }
 }
