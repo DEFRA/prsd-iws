@@ -9,7 +9,7 @@
 
     public class PrenotificationContentDateHistoricRule : IBulkMovementPrenotificationContentRule
     {
-        public async Task<ContentRuleResult<BulkMovementContentRules>> GetResult(List<PrenotificationMovement> shipments)
+        public async Task<ContentRuleResult<BulkMovementContentRules>> GetResult(List<PrenotificationMovement> shipments, Guid notificationId)
         {
             return await Task.Run(() =>
             {

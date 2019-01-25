@@ -1,5 +1,6 @@
 ﻿namespace EA.Iws.Web.Infrastructure.BulkUpload
 {
+    using System;
     using System.Collections.Generic;
     using System.Data;
     using System.Threading.Tasks;
@@ -23,14 +24,14 @@
             this.fileRules = fileRules;
         }
 
-        public async Task<BulkMovementRulesSummary> GetValidationSummary(HttpPostedFileBase file)
+        public async Task<BulkMovementRulesSummary> GetValidationSummary(HttpPostedFileBase file, Guid notificationId)
         {
             var resultFileRules = await GetFileRules(file);
 
             var bulkMovementRulesSummary = new BulkMovementRulesSummary(resultFileRules);
             if (bulkMovementRulesSummary.IsFileRulesSuccess)
             {
-                bulkMovementRulesSummary = await mediator.SendAsync(new PerformBulkUploadContentValidation(bulkMovementRulesSummary));
+                bulkMovementRulesSummary = await mediator.SendAsync(new PerformBulkUploadContentValidation(bulkMovementRulesSummary, notificationId));
             }
             return bulkMovementRulesSummary;
         }
