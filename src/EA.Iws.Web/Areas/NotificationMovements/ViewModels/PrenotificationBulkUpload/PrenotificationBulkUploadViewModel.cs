@@ -24,11 +24,15 @@
         {
             get
             {
-                return FailedFileRules != null ? FailedFileRules.Count : 0;
+                var failedFileRulesCount = FailedFileRules != null ? FailedFileRules.Count : 0;
+                var failedContentRulesCount = FailedContentRules != null ? FailedContentRules.Count : 0;
+                return failedFileRulesCount + failedContentRulesCount;
             }
         }
 
         public List<BulkMovementFileRules> FailedFileRules { get; set; }
+
+        public List<ContentRuleResult<BulkMovementContentRules>> FailedContentRules { get; set; }
 
         [Display(Name = "Upload the data file containing your prenotification data")]
         public HttpPostedFileBase File { get; set; }
