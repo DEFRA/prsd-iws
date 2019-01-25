@@ -53,7 +53,6 @@
                 }
 
                 return string.Format(Prsd.Core.Helpers.EnumHelper.GetDisplayName(Rule), errorMessageArg);
-
             }
         }
 
