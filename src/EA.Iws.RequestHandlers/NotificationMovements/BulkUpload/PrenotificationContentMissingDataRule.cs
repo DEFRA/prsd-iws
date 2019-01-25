@@ -7,10 +7,6 @@
 
     public class PrenotificationContentMissingDataRule : IBulkMovementPrenotificationContentRule
     {
-        public PrenotificationContentMissingDataRule()
-        {
-        }
-
         public async Task<ContentRuleResult<BulkMovementContentRules>> GetResult(List<PrenotificationMovement> shipments)
         {
             return await Task.Run(() =>
@@ -18,16 +14,16 @@
                 var missingDataResult = MessageLevel.Success;
                 var missingDataShipmentNumbers = new List<string>();
 
-                foreach (PrenotificationMovement dto in shipments)
+                foreach (PrenotificationMovement shipment in shipments)
                 {
-                    if (dto.ActualDateOfShipment.Equals(string.Empty) ||
-                    dto.NotificationNumber.Equals(string.Empty) ||
-                    dto.PackagingType.Equals(string.Empty) ||
-                    dto.Quantity.Equals(string.Empty) ||
-                    dto.Unit.Equals(string.Empty))
+                    if (shipment.ActualDateOfShipment.Equals(string.Empty) ||
+                    shipment.NotificationNumber.Equals(string.Empty) ||
+                    shipment.PackagingType.Equals(string.Empty) ||
+                    shipment.Quantity.Equals(string.Empty) ||
+                    shipment.Unit.Equals(string.Empty))
                     {
                         missingDataResult = MessageLevel.Error;
-                        missingDataShipmentNumbers.Add(dto.ShipmentNumber);
+                        missingDataShipmentNumbers.Add(shipment.ShipmentNumber);
                     }
                 }
 
