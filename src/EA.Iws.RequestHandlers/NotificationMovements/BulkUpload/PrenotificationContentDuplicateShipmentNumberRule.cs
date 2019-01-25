@@ -14,7 +14,8 @@
             return await Task.Run(() =>
             {
                 var duplicateShipmentNumberResult = MessageLevel.Success;
-                var duplicateShipmentNumbers = shipments.GroupBy(x => x.ShipmentNumber)
+                var duplicateShipmentNumbers = shipments.Where(h => h.HasShipmentNumber)
+                    .GroupBy(x => x.ShipmentNumber)
                     .Where(g => g.Count() > 1)
                     .Select(y => y.Key)
                     .ToList();
