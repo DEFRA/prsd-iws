@@ -2,11 +2,11 @@
 {
     using System.Collections.Generic;
 
-    public class ContentRulesDTOList
+    public class PrenotificationMovementCollection
     {
-        public ContentRulesDTOList()
+        public PrenotificationMovementCollection()
         {
-            ContentRulesDTO obj1 = new ContentRulesDTO()
+            PrenotificationMovement obj1 = new PrenotificationMovement()
             {
                 NotificationNumber = string.Empty,
                 ShipmentNumber = "1",
@@ -16,7 +16,7 @@
                 ActualDateOfShipment = string.Empty
             };
             ObjectsList.Add(obj1);
-            ContentRulesDTO obj2 = new ContentRulesDTO()
+            PrenotificationMovement obj2 = new PrenotificationMovement()
             {
                 NotificationNumber = string.Empty,
                 ShipmentNumber = "1",
@@ -28,6 +28,6 @@
             ObjectsList.Add(obj1);
         }
 
-        public List<ContentRulesDTO> ObjectsList = new List<ContentRulesDTO>();
+        public List<PrenotificationMovement> ObjectsList = new List<PrenotificationMovement>();
     }
 }

@@ -1,8 +1,8 @@
 ﻿namespace EA.Iws.Core.Movement.Bulk
 {
-    public class ContentRulesDTO
+    public class PrenotificationMovement
     {
-        public ContentRulesDTO()
+        public PrenotificationMovement()
         {
         }
 

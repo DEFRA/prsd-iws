@@ -17,12 +17,12 @@
 
         public async Task<BulkMovementRulesSummary> HandleAsync(PerformBulkUploadContentValidation message)
         {
-            var shipments = new ContentRulesDTOList();
+            var shipments = new PrenotificationMovementCollection();
             message.BulkMovementRulesSummary.ContentRulesResults = await GetContentRules(shipments.ObjectsList);
             return message.BulkMovementRulesSummary;
         }
 
-        private async Task<List<ContentRuleResult<BulkMovementContentRules>>> GetContentRules(List<ContentRulesDTO> shipments)
+        private async Task<List<ContentRuleResult<BulkMovementContentRules>>> GetContentRules(List<PrenotificationMovement> shipments)
         {
             var rules = new List<ContentRuleResult<BulkMovementContentRules>>();
 
