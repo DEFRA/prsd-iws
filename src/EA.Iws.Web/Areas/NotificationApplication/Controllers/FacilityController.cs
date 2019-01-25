@@ -347,7 +347,7 @@
                     model.NotificationId,
                     User.GetUserId(),
                     NotificationAuditType.Deleted,
-                    NotificationAuditScreenType.SiteOfExport);
+                    NotificationAuditScreenType.RecoverySite);
                 }
 
                 return RedirectToAction("List", "Facility", new { id = model.NotificationId, backToOverview });

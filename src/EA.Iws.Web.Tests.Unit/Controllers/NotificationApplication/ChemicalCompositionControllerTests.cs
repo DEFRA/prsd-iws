@@ -1,5 +1,9 @@
 ﻿namespace EA.Iws.Web.Tests.Unit.Controllers.NotificationApplication
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Threading.Tasks;
+    using System.Web.Mvc;
     using Areas.NotificationApplication.Controllers;
     using Areas.NotificationApplication.ViewModels.ChemicalComposition;
     using Core.Notification.Audit;
@@ -7,11 +11,8 @@
     using FakeItEasy;
     using Mappings;
     using Prsd.Core.Mediator;
+    using Requests.Notification;
     using Requests.WasteType;
-    using System;
-    using System.Collections.Generic;
-    using System.Threading.Tasks;
-    using System.Web.Mvc;
     using Web.Infrastructure;
     using Web.ViewModels.Shared;
     using Xunit;
@@ -40,7 +41,22 @@
                     }
                 });
 
+            A.CallTo(
+                () => mediator.SendAsync(A<GetNotificationAuditTable>.That.Matches
+                (p => p.NotificationId == notificationId)))
+                .Returns(CreateTestAuditTable());
+            
             A.CallTo(() => auditService.AddAuditEntry(this.mediator, notificationId, "user", NotificationAuditType.Added, NotificationAuditScreenType.ChemicalComposition));
+        }
+
+        private NotificationAuditTable CreateTestAuditTable()
+        {
+            NotificationAuditTable table = new NotificationAuditTable();
+
+            table.TableData = new List<NotificationAuditForDisplay>();
+            table.TableData.Add(new NotificationAuditForDisplay(string.Empty, NotificationAuditScreenType.ChemicalComposition.ToString(), NotificationAuditType.Added.ToString(), DateTime.Now));
+
+            return table;
         }
 
         [Theory]
