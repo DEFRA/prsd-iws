@@ -1,5 +1,6 @@
 ﻿namespace EA.Iws.RequestHandlers.NotificationMovements.BulkUpload
 {
+    using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
     using Core.Movement.Bulk;
@@ -11,7 +12,7 @@
         {
         }
 
-        public async Task<ContentRuleResult<BulkMovementContentRules>> GetResult(List<PrenotificationMovement> shipments)
+        public async Task<ContentRuleResult<BulkMovementContentRules>> GetResult(List<PrenotificationMovement> shipments, Guid notificationId)
         {
             return await Task.Run(() =>
             {
