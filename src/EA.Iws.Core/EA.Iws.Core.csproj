@@ -169,6 +169,9 @@
     <Compile Include="Movement\Bulk\BulkMovementFileRules.cs" />
     <Compile Include="Movement\Bulk\BulkMovementRulesSummary.cs" />
     <Compile Include="Movement\Bulk\ContentRuleResult.cs" />
+    <Compile Include="Movement\Bulk\ContentRulesDTO.cs" />
+    <Compile Include="Movement\Bulk\ContentRulesDTOList.cs" />
+    <Compile Include="Movement\Bulk\IBulkMovementPrenotificationContentRule.cs" />
     <Compile Include="Movement\DateHistory.cs" />
     <Compile Include="Movement\IMovementRule.cs" />
     <Compile Include="Movement\InternalMovementSummary.cs" />

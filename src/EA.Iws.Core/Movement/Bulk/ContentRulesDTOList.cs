@@ -1,4 +1,4 @@
-﻿namespace EA.Iws.RequestHandlers.Movement
+﻿namespace EA.Iws.Core.Movement.Bulk
 {
     using System.Collections.Generic;
 
