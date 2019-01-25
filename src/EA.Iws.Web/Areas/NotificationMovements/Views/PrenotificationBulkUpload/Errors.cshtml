@@ -16,7 +16,7 @@
 
         <p>@Resources.ErrorsFileAdvice</p>
 
-        @if (Model.ErrorsCount > 0 && Model.FailedFileRules != null)
+        @if (Model.ErrorsCount > 0)
         {
             <div class="form-group">
                 <details>
@@ -25,9 +25,19 @@
                     </summary>
                     <div class="summary-error-panel">
                         <ul class="summary-error-list">
-                            @foreach (var rule in Model.FailedFileRules)
+                            @if (Model.FailedFileRules != null)
                             {
-                                <li>@Html.Raw(EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(rule)) <img class="summary-error-icon" src="@Url.Content("~/Content/images/error-icon.png")" alt=""></li>
+                                foreach (var rule in Model.FailedFileRules)
+                                {
+                                    <li>@Html.Raw(EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(rule)) <img class="summary-error-icon" src="@Url.Content("~/Content/images/error-icon.png")" alt=""></li>
+                                }
+                            }
+                            @if (Model.FailedContentRules != null)
+                            {
+                                foreach (var rule in Model.FailedContentRules)
+                                {
+                                    <li>@Html.Raw(rule.GetErrorMessage) <img class="summary-error-icon" src="@Url.Content("~/Content/images/error-icon.png")" alt=""></li>
+                                }
                             }
                         </ul>
                     </div>

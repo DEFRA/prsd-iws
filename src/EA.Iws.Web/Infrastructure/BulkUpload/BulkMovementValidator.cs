@@ -6,15 +6,20 @@
     using System.Web;
     using Core.Movement.Bulk;
     using Core.Rules;
+    using Prsd.Core.Mediator;
+    using Requests.Movement;
+    using VirusScanning;
 
     public class BulkMovementValidator : IBulkMovementValidator
     {
+        private readonly IMediator mediator;
         private readonly IEnumerable<IBulkMovementPrenotificationFileRule> fileRules;
 
         public DataTable DataTable { get; set; }
 
-        public BulkMovementValidator(IEnumerable<IBulkMovementPrenotificationFileRule> fileRules)
+        public BulkMovementValidator(IMediator mediator, IEnumerable<IBulkMovementPrenotificationFileRule> fileRules)
         {
+            this.mediator = mediator;
             this.fileRules = fileRules;
         }
 
@@ -22,7 +27,12 @@
         {
             var resultFileRules = await GetFileRules(file);
 
-            return new BulkMovementRulesSummary(resultFileRules);
+            var bulkMovementRulesSummary = new BulkMovementRulesSummary(resultFileRules);
+            if (bulkMovementRulesSummary.IsFileRulesSuccess)
+            {
+                bulkMovementRulesSummary = await mediator.SendAsync(new PerformBulkUploadContentValidation(bulkMovementRulesSummary));
+            }
+            return bulkMovementRulesSummary;
         }
 
         private async Task<List<RuleResult<BulkMovementFileRules>>> GetFileRules(HttpPostedFileBase file)
