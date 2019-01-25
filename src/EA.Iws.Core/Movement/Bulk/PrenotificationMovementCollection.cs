@@ -13,7 +13,7 @@
                 Quantity = string.Empty,
                 Unit = string.Empty,
                 PackagingType = string.Empty,
-                ActualDateOfShipment = string.Empty
+                ActualDateOfShipment = "InvalidFormat"
             };
             ObjectsList.Add(obj1);
             PrenotificationMovement obj2 = new PrenotificationMovement()
@@ -23,9 +23,9 @@
                 Quantity = string.Empty,
                 Unit = string.Empty,
                 PackagingType = string.Empty,
-                ActualDateOfShipment = string.Empty
+                ActualDateOfShipment = "20/03/1987"
             };
-            ObjectsList.Add(obj1);
+            ObjectsList.Add(obj2);
         }
 
         public List<PrenotificationMovement> ObjectsList = new List<PrenotificationMovement>();

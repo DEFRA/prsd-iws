@@ -442,6 +442,8 @@
     <Compile Include="NotificationAssessment\SetEntryPointHandler.cs" />
     <Compile Include="NotificationMovements\BulkUpload\GetBulkUploadTemplateHandler.cs" />
     <Compile Include="NotificationMovements\BulkUpload\PerformBulkUploadContentValidationHandler.cs" />
+    <Compile Include="NotificationMovements\BulkUpload\PrenotificationContentDateFormatRule.cs" />
+    <Compile Include="NotificationMovements\BulkUpload\PrenotificationContentDateHistoricRule.cs" />
     <Compile Include="NotificationMovements\BulkUpload\PrenotificationContentMissingDataRule.cs" />
     <Compile Include="NotificationMovements\Create\GetInternalMovementSummaryHandler.cs" />
     <Compile Include="NotificationMovements\Create\GetRemainingShipmentsHandler.cs" />
