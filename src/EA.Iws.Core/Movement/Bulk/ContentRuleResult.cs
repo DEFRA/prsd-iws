@@ -42,7 +42,39 @@
         {
             get
             {
-                return string.Format(EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(Rule), GetShipmentNumbers);
+                var errorMessageArg = string.Empty;
+                if (ErroneousShipmentNumbers != null && ErroneousShipmentNumbers.Count > 0)
+                {
+                    errorMessageArg = GetShipmentNumbers;
+                }
+                else
+                {
+                    errorMessageArg = ErroneousShipmentCount.ToString();
+                }
+
+                return string.Format(Prsd.Core.Helpers.EnumHelper.GetDisplayName(Rule), errorMessageArg);
+
+            }
+        }
+
+        private int erroneousShipmentCount = 0;
+
+        public int ErroneousShipmentCount
+        {
+            get
+            {
+                if (ErroneousShipmentNumbers != null && ErroneousShipmentNumbers.Count > 0)
+                {
+                    return ErroneousShipmentNumbers.Count;
+                }
+                else
+                {
+                    return erroneousShipmentCount;
+                }
+            }
+            set
+            {
+                erroneousShipmentCount = value;
             }
         }
     }

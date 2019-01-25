@@ -18,13 +18,17 @@
 
                 foreach (PrenotificationMovement shipment in shipments)
                 {
-                    DateTime date;
-                    if (DateTime.TryParseExact(shipment.ActualDateOfShipment, "dd/MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out date))
+                    // Only report an error if shipment has a shipment number, otherwise record will be picked up by the PrenotificationContentMissingShipmentNumberRule
+                    if (shipment.HasShipmentNumber)
                     {
-                        if (DateTime.Compare(date, DateTime.UtcNow) < 0)
+                        DateTime date;
+                        if (DateTime.TryParseExact(shipment.ActualDateOfShipment, "dd/MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out date))
                         {
-                            historicDateResult = MessageLevel.Error;
-                            historicDateShipmentNumbers.Add(shipment.ShipmentNumber);
+                            if (DateTime.Compare(date, DateTime.UtcNow) < 0)
+                            {
+                                historicDateResult = MessageLevel.Error;
+                                historicDateShipmentNumbers.Add(shipment.ShipmentNumber);
+                            }
                         }
                     }
                 }

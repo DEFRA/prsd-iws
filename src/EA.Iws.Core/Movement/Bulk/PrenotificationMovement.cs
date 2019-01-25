@@ -17,5 +17,13 @@
         public string PackagingType { get; set; }
 
         public string ActualDateOfShipment { get; set; }
+
+        public bool HasShipmentNumber
+        {
+            get
+            {
+                return !ShipmentNumber.Trim().Equals(string.Empty);
+            }
+        }
     }
 }

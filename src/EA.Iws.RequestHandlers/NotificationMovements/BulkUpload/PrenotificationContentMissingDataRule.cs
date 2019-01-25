@@ -17,14 +17,18 @@
 
                 foreach (PrenotificationMovement shipment in shipments)
                 {
-                    if (shipment.ActualDateOfShipment.Equals(string.Empty) ||
-                    shipment.NotificationNumber.Equals(string.Empty) ||
-                    shipment.PackagingType.Equals(string.Empty) ||
-                    shipment.Quantity.Equals(string.Empty) ||
-                    shipment.Unit.Equals(string.Empty))
+                    // Only report an error if shipment has a shipment number, otherwise record will be picked up by the PrenotificationContentMissingShipmentNumberRule
+                    if (shipment.HasShipmentNumber)
                     {
-                        missingDataResult = MessageLevel.Error;
-                        missingDataShipmentNumbers.Add(shipment.ShipmentNumber);
+                        if (shipment.ActualDateOfShipment.Equals(string.Empty) ||
+                        shipment.NotificationNumber.Equals(string.Empty) ||
+                        shipment.PackagingType.Equals(string.Empty) ||
+                        shipment.Quantity.Equals(string.Empty) ||
+                        shipment.Unit.Equals(string.Empty))
+                        {
+                            missingDataResult = MessageLevel.Error;
+                            missingDataShipmentNumbers.Add(shipment.ShipmentNumber);
+                        }
                     }
                 }
 

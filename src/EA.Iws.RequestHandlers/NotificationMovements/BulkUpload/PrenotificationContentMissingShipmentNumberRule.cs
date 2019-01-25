@@ -17,16 +17,17 @@
 
                 foreach (PrenotificationMovement shipment in shipments)
                 {
-                    if (shipment.ShipmentNumber.Equals(string.Empty))
+                    if (!shipment.HasShipmentNumber)
                     {
                         missingShipmentNumberResult = MessageLevel.Error;
                         missingShipmentNumberCount++;
                     }
                 }
 
-                // COULLM: missingShipmentNumberCount needs to be used to populate error message in ContentRuleResult 
+                var ruleResult = new ContentRuleResult<BulkMovementContentRules>(BulkMovementContentRules.MissingShipmentNumbers, missingShipmentNumberResult, new List<string>());
+                ruleResult.ErroneousShipmentCount = missingShipmentNumberCount;
 
-                return new ContentRuleResult<BulkMovementContentRules>(BulkMovementContentRules.MissingShipmentNumbers, missingShipmentNumberResult, new List<string>());
+                return ruleResult;
             });
         }
     }
