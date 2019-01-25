@@ -91,7 +91,7 @@
             {
                 return RedirectToAction("Index", "Options", new { area = "NotificationApplication", id = model.NotificationId });
             }
-            else if (model.GetEnumDisplayValue(WarningChoicesList.Return).Equals(model.WarningChoices.SelectedValue))
+            if (model.GetEnumDisplayValue(WarningChoicesList.Return).Equals(model.WarningChoices.SelectedValue))
             {
                 // To do: Send user to upload page for the shipment movement document
                 throw new NotImplementedException("Redirection to upload page for the shipment movement document not yet implemented");
