@@ -14,8 +14,13 @@
 
             try
             {
-                var val = source.Field<double>(ColumnIndex);
-                result = Convert.ToDecimal(val);
+                var val = source.ItemArray[ColumnIndex].ToString();
+                decimal parsed;
+
+                if (decimal.TryParse(val, out parsed))
+                {
+                    result = parsed;
+                }
             }
             catch
             {

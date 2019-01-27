@@ -133,7 +133,7 @@ namespace EA.Iws.RequestHandlers.ImportNotification.Validate {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to please enter a valid total number of movements.
+        ///   Looks up a localized string similar to please enter a valid total number of shipments.
         /// </summary>
         public static string TotalShipmentsPositive {
             get {

@@ -11,7 +11,17 @@
 
         public string Map(DataRow source)
         {
-            var result = source.Field<string>(ColumnIndex);
+            string result = null;
+
+            try
+            {
+                result = source.ItemArray[ColumnIndex].ToString();
+            }
+            catch
+            {
+                //ignored
+            }
+
             return FormatNotificationNumber(result);
         }
 

@@ -15,17 +15,24 @@
         {
             var result = new List<PackagingType>();
 
-            var data = source.Field<string>(ColumnIndex);
-            var packagingTypes = data.Split(separator, StringSplitOptions.RemoveEmptyEntries);
-
-            foreach (var packaging in packagingTypes)
+            try
             {
-                PackagingType parsed;
+                var data = source.ItemArray[ColumnIndex].ToString();
+                var packagingTypes = data.Split(separator, StringSplitOptions.RemoveEmptyEntries);
 
-                if (Enum.TryParse(packaging, out parsed))
+                foreach (var packaging in packagingTypes)
                 {
-                    result.Add(parsed);
+                    PackagingType parsed;
+
+                    if (Enum.TryParse(packaging, out parsed))
+                    {
+                        result.Add(parsed);
+                    }
                 }
+            }
+            catch
+            {
+                //ignored
             }
 
             return result;

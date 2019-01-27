@@ -12,12 +12,20 @@
         public ShipmentQuantityUnits? Map(DataRow source)
         {
             ShipmentQuantityUnits? result = null;
-            ShipmentQuantityUnits parsed;
-            var data = source.Field<string>(ColumnIndex);
-            
-            if (Enum.TryParse(data, out parsed))
+
+            try
             {
-                result = parsed;
+                ShipmentQuantityUnits parsed;
+                var data = source.ItemArray[ColumnIndex].ToString();
+
+                if (Enum.TryParse(data, out parsed))
+                {
+                    result = parsed;
+                }
+            }
+            catch
+            {
+                // ignored
             }
 
             return result;

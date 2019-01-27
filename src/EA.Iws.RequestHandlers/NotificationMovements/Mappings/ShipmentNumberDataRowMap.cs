@@ -14,8 +14,13 @@
 
             try
             {
-                var val = source.Field<double>(ColumnIndex);
-                result = Convert.ToInt32(val);
+                var val = source.ItemArray[ColumnIndex].ToString();
+                int parsed;
+
+                if (int.TryParse(val, out parsed))
+                {
+                    result = parsed;
+                }
             }
             catch
             {
