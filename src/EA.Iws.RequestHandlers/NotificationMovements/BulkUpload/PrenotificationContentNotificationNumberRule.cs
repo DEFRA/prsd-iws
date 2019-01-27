@@ -39,17 +39,11 @@
                     }
                 }
 
-                var errorMessage = GenerateErrorMessage(notificationNumberShipmentNumbers, notificationNumber);
+                var shipmentNumbers = string.Join(", ", notificationNumberShipmentNumbers);
+                var errorMessage = string.Format("Shipment number/s {0}: data must only be for notification number {1}", shipmentNumbers, notificationNumber);
 
                 return new ContentRuleResult<BulkMovementContentRules>(BulkMovementContentRules.WrongNotificationNumber, notificationNumberResult, errorMessage);
             });
-        }
-
-        private string GenerateErrorMessage(List<string> shipmentNumbers, string notificationNumber)
-        {
-            var errorArg1 = string.Join(", ", shipmentNumbers);
-                        
-            return string.Format("Shipment number/s {0}: data must only be for notification number {1}", errorArg1, notificationNumber);
         }
     }
 }
