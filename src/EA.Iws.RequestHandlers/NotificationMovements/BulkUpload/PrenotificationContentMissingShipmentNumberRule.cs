@@ -8,16 +8,16 @@
 
     public class PrenotificationContentMissingShipmentNumberRule : IBulkMovementPrenotificationContentRule
     {
-        public async Task<ContentRuleResult<BulkMovementContentRules>> GetResult(List<PrenotificationMovement> shipments, Guid notificationId)
+        public async Task<ContentRuleResult<BulkMovementContentRules>> GetResult(List<PrenotificationMovement> movements, Guid notificationId)
         {
             return await Task.Run(() =>
             {
                 var missingShipmentNumberResult = MessageLevel.Success;
-                int missingShipmentNumberCount = 0;
+                var missingShipmentNumberCount = 0;
 
-                foreach (PrenotificationMovement shipment in shipments)
+                foreach (var movement in movements)
                 {
-                    if (!shipment.HasShipmentNumber)
+                    if (!movement.ShipmentNumber.HasValue)
                     {
                         missingShipmentNumberResult = MessageLevel.Error;
                         missingShipmentNumberCount++;

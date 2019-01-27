@@ -9,15 +9,15 @@
 
     public class PrenotificationContentDuplicateShipmentNumberRule : IBulkMovementPrenotificationContentRule
     {
-        public async Task<ContentRuleResult<BulkMovementContentRules>> GetResult(List<PrenotificationMovement> shipments, Guid notificationId)
+        public async Task<ContentRuleResult<BulkMovementContentRules>> GetResult(List<PrenotificationMovement> movements, Guid notificationId)
         {
             return await Task.Run(() =>
             {
                 var duplicateShipmentNumberResult = MessageLevel.Success;
-                var duplicateShipmentNumbers = shipments.Where(h => h.HasShipmentNumber)
+                var duplicateShipmentNumbers = movements.Where(m => m.ShipmentNumber.HasValue)
                     .GroupBy(x => x.ShipmentNumber)
                     .Where(g => g.Count() > 1)
-                    .Select(y => y.Key)
+                    .Select(y => y.Key.ToString())
                     .ToList();
 
                 if (duplicateShipmentNumbers.Count > 0)

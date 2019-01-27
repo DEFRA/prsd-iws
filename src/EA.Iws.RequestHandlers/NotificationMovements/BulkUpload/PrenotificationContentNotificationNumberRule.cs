@@ -18,7 +18,7 @@
             this.notificationApplicationRepository = notificationApplicationRepository;
         }
 
-        public async Task<ContentRuleResult<BulkMovementContentRules>> GetResult(List<PrenotificationMovement> shipments, Guid notificationId)
+        public async Task<ContentRuleResult<BulkMovementContentRules>> GetResult(List<PrenotificationMovement> movements, Guid notificationId)
         {
             var notificationNumber = await notificationApplicationRepository.GetNumber(notificationId);
             return await Task.Run(() =>
@@ -26,16 +26,13 @@
                 var notificationNumberResult = MessageLevel.Success;
                 var notificationNumberShipmentNumbers = new List<string>();
                 
-                foreach (PrenotificationMovement shipment in shipments)
+                foreach (var movement in movements)
                 {
                     // Only report an error if shipment has a shipment number, otherwise record will be picked up by the PrenotificationContentMissingShipmentNumberRule
-                    if (shipment.HasShipmentNumber)
+                    if (movement.ShipmentNumber.HasValue && movement.NotificationNumber != notificationNumber)
                     {
-                        if (!shipment.NotificationNumber.Trim().ToLower().Equals(notificationNumber))
-                        {
-                                notificationNumberResult = MessageLevel.Error;
-                                notificationNumberShipmentNumbers.Add(shipment.ShipmentNumber);
-                        }
+                        notificationNumberResult = MessageLevel.Error;
+                        notificationNumberShipmentNumbers.Add(movement.ShipmentNumber.ToString());
                     }
                 }
                 

@@ -2,31 +2,26 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Globalization;
     using System.Threading.Tasks;
     using Core.Movement.Bulk;
     using Core.Rules;
 
     public class PrenotificationContentDateFormatRule : IBulkMovementPrenotificationContentRule
     {
-        public async Task<ContentRuleResult<BulkMovementContentRules>> GetResult(List<PrenotificationMovement> shipments, Guid notificationId)
+        public async Task<ContentRuleResult<BulkMovementContentRules>> GetResult(List<PrenotificationMovement> movements, Guid notificationId)
         {
             return await Task.Run(() =>
             {
                 var invalidFormatResult = MessageLevel.Success;
                 var invalidFormatShipmentNumbers = new List<string>();
 
-                foreach (PrenotificationMovement shipment in shipments)
+                foreach (var movement in movements)
                 {
                     // Only report an error if shipment has a shipment number, otherwise record will be picked up by the PrenotificationContentMissingShipmentNumberRule
-                    if (shipment.HasShipmentNumber)
+                    if (movement.ShipmentNumber.HasValue && !movement.ActualDateOfShipment.HasValue)
                     {
-                        DateTime date;
-                        if (!DateTime.TryParseExact(shipment.ActualDateOfShipment, "dd/MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None, out date))
-                        {
-                            invalidFormatResult = MessageLevel.Error;
-                            invalidFormatShipmentNumbers.Add(shipment.ShipmentNumber);
-                        }
+                        invalidFormatResult = MessageLevel.Error;
+                        invalidFormatShipmentNumbers.Add(movement.ShipmentNumber.Value.ToString());
                     }
                 }
 
