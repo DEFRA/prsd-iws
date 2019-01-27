@@ -31,7 +31,10 @@
                     }
                 }
 
-                return new ContentRuleResult<BulkMovementContentRules>(BulkMovementContentRules.MissingData, missingDataResult, missingDataShipmentNumbers);
+                var shipmentNumbers = string.Join(", ", missingDataShipmentNumbers);
+                var errorMessage = string.Format(Prsd.Core.Helpers.EnumHelper.GetDisplayName(BulkMovementContentRules.MissingData), shipmentNumbers);
+
+                return new ContentRuleResult<BulkMovementContentRules>(BulkMovementContentRules.MissingData, missingDataResult, errorMessage);
             });
         }
     }

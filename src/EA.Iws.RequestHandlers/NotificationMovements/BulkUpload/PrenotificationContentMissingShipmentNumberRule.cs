@@ -23,15 +23,10 @@
                         missingShipmentNumberCount++;
                     }
                 }
+                
+                var errorMessage = string.Format(Prsd.Core.Helpers.EnumHelper.GetDisplayName(BulkMovementContentRules.MissingShipmentNumbers), missingShipmentNumberCount);
 
-                var ruleResult =
-                    new ContentRuleResult<BulkMovementContentRules>(BulkMovementContentRules.MissingShipmentNumbers,
-                        missingShipmentNumberResult, new List<string>())
-                    {
-                        ErroneousShipmentCount = missingShipmentNumberCount
-                    };
-
-                return ruleResult;
+                return new ContentRuleResult<BulkMovementContentRules>(BulkMovementContentRules.MissingShipmentNumbers, missingShipmentNumberResult, errorMessage);
             });
         }
     }

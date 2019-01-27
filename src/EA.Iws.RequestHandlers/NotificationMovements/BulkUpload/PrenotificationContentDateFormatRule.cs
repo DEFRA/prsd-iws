@@ -25,7 +25,10 @@
                     }
                 }
 
-                return new ContentRuleResult<BulkMovementContentRules>(BulkMovementContentRules.InvalidDateFormat, invalidFormatResult, invalidFormatShipmentNumbers);
+                var shipmentNumbers = string.Join(", ", invalidFormatShipmentNumbers);
+                var errorMessage = string.Format(Prsd.Core.Helpers.EnumHelper.GetDisplayName(BulkMovementContentRules.InvalidDateFormat), shipmentNumbers);
+
+                return new ContentRuleResult<BulkMovementContentRules>(BulkMovementContentRules.InvalidDateFormat, invalidFormatResult, errorMessage);
             });
         }
     }
