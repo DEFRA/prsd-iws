@@ -2,33 +2,32 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
     using System.Threading.Tasks;
     using Core.Movement.Bulk;
     using Core.Rules;
 
     public class PrenotificationContentMissingDataRule : IBulkMovementPrenotificationContentRule
     {
-        public async Task<ContentRuleResult<BulkMovementContentRules>> GetResult(List<PrenotificationMovement> shipments, Guid notificationId)
+        public async Task<ContentRuleResult<BulkMovementContentRules>> GetResult(List<PrenotificationMovement> movements, Guid notificationId)
         {
             return await Task.Run(() =>
             {
                 var missingDataResult = MessageLevel.Success;
                 var missingDataShipmentNumbers = new List<string>();
 
-                foreach (PrenotificationMovement shipment in shipments)
+                foreach (var movement in movements)
                 {
                     // Only report an error if shipment has a shipment number, otherwise record will be picked up by the PrenotificationContentMissingShipmentNumberRule
-                    if (shipment.HasShipmentNumber)
+                    if (movement.ShipmentNumber.HasValue && 
+                        (string.IsNullOrEmpty(movement.NotificationNumber) || 
+                        !movement.ActualDateOfShipment.HasValue || 
+                        !movement.PackagingTypes.Any() || 
+                        !movement.Quantity.HasValue || 
+                        !movement.Unit.HasValue))
                     {
-                        if (shipment.ActualDateOfShipment.Equals(string.Empty) ||
-                        shipment.NotificationNumber.Equals(string.Empty) ||
-                        shipment.PackagingType.Equals(string.Empty) ||
-                        shipment.Quantity.Equals(string.Empty) ||
-                        shipment.Unit.Equals(string.Empty))
-                        {
-                            missingDataResult = MessageLevel.Error;
-                            missingDataShipmentNumbers.Add(shipment.ShipmentNumber);
-                        }
+                        missingDataResult = MessageLevel.Error;
+                        missingDataShipmentNumbers.Add(movement.ShipmentNumber.ToString());
                     }
                 }
 

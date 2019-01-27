@@ -483,6 +483,7 @@
     <Compile Include="NotificationMovements\GetRejectedMovementDetailsHandler.cs" />
     <Compile Include="NotificationMovements\GetRejectedMovementsHandler.cs" />
     <Compile Include="NotificationMovements\GetWorkingDaysUntilHandler.cs" />
+    <Compile Include="NotificationMovements\Mappings\ActualDateOfShipmentDataRowMap.cs" />
     <Compile Include="NotificationMovements\Mappings\NotificationMovementsSummaryAndTableMap.cs" />
     <Compile Include="NotificationMovements\Mappings\MovementTableDataRowMap.cs" />
     <Compile Include="Mappings\NotificationApplicationCompletionProgressMap.cs" />
@@ -523,8 +524,14 @@
     <Compile Include="NotificationAssessment\ObjectNotificationApplicationHandler.cs" />
     <Compile Include="NotificationAssessment\WithdrawNotificationApplicationHandler.cs" />
     <Compile Include="NotificationMovements\GetReceivedMovementsHandler.cs" />
+    <Compile Include="NotificationMovements\Mappings\NotificationNumberDataRowMap.cs" />
     <Compile Include="NotificationMovements\Mappings\PackagingDataMap.cs" />
+    <Compile Include="NotificationMovements\Mappings\PackagingTypesDataRowMap.cs" />
+    <Compile Include="NotificationMovements\Mappings\PrenotificationMovementCollectionMap.cs" />
+    <Compile Include="NotificationMovements\Mappings\QuantityDataRowMap.cs" />
     <Compile Include="NotificationMovements\Mappings\ShipmentDatesMap.cs" />
+    <Compile Include="NotificationMovements\Mappings\ShipmentNumberDataRowMap.cs" />
+    <Compile Include="NotificationMovements\Mappings\ShipmentQuantityUnitDataRowMap.cs" />
     <Compile Include="NotificationMovements\Rules\ActiveApprovedFinancialGuarantee.cs" />
     <Compile Include="NotificationMovements\Rules\ConsentExpiresInThreeOrLessWorkingDays.cs" />
     <Compile Include="NotificationMovements\Rules\ConsentExpiresInFourWorkingDays.cs" />
@@ -809,6 +816,7 @@
     <EmbeddedResource Include="ImportNotification\Validate\ShipmentValidatorResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>ShipmentValidatorResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="ImportNotification\Validate\StateOfExportValidatorResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

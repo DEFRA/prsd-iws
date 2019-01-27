@@ -6,8 +6,11 @@
 
     public class BulkMovementRulesSummary
     {
-        public IEnumerable<RuleResult<BulkMovementFileRules>> FileRulesResults { get; private set; }
+        public IEnumerable<RuleResult<BulkMovementFileRules>> FileRulesResults { get; set; }
+
         public IEnumerable<ContentRuleResult<BulkMovementContentRules>> ContentRulesResults { get; set; }
+
+        public List<PrenotificationMovement> PrenotificationMovements { get; set; }
 
         public bool IsFileRulesSuccess
         {

@@ -7,6 +7,6 @@
 
     public interface IBulkMovementPrenotificationContentRule
     {
-        Task<ContentRuleResult<BulkMovementContentRules>> GetResult(List<PrenotificationMovement> shipments, Guid notificationId);
+        Task<ContentRuleResult<BulkMovementContentRules>> GetResult(List<PrenotificationMovement> movements, Guid notificationId);
     }
 }

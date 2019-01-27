@@ -139,10 +139,10 @@
     <value>please enter an intended shipment range start date</value>
   </data>
   <data name="TotalShipmentsNotNull" xml:space="preserve">
-    <value>please enter the total number of shipments</value>
+    <value>please enter the total number of movements</value>
   </data>
   <data name="TotalShipmentsPositive" xml:space="preserve">
-    <value>please enter a valid total number of shipments</value>
+    <value>please enter a valid total number of movements</value>
   </data>
   <data name="UnitNotNull" xml:space="preserve">
     <value>please select a unit for the quantity</value>
