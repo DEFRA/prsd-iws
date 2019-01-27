@@ -2,19 +2,19 @@
 {
     using System;
     using System.Data;
+    using Core.Movement.Bulk;
     using Prsd.Core.Mapper;
 
     public class QuantityDataRowMap : IMap<DataRow, decimal?>
     {
-        private const int ColumnIndex = 2;
-
+        
         public decimal? Map(DataRow source)
         {
             decimal? result = null;
 
             try
             {
-                var val = source.ItemArray[ColumnIndex].ToString();
+                var val = source.ItemArray[(int)PrenotificationColumnIndex.Quantity].ToString();
                 decimal parsed;
 
                 if (decimal.TryParse(val, out parsed))

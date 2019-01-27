@@ -3,10 +3,10 @@
     using System;
     using System.Data;
     using System.Text.RegularExpressions;
+    using Core.Movement.Bulk;
     using Prsd.Core.Mapper;
     public class NotificationNumberDataRowMap : IMap<DataRow, string>
     {
-        private const int ColumnIndex = 0;
         private static readonly Regex NotificationNumberRegex = new Regex(@"(GB)(\d{4})(\d{6})", RegexOptions.Compiled);
 
         public string Map(DataRow source)
@@ -15,7 +15,7 @@
 
             try
             {
-                result = source.ItemArray[ColumnIndex].ToString();
+                result = source.ItemArray[(int)PrenotificationColumnIndex.NotificationNumber].ToString();
             }
             catch
             {

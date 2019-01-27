@@ -3,12 +3,12 @@
     using System;
     using System.Collections.Generic;
     using System.Data;
+    using Core.Movement.Bulk;
     using Core.PackagingType;
     using Prsd.Core.Mapper;
 
     public class PackagingTypesDataRowMap : IMap<DataRow, IList<PackagingType>>
     {
-        private const int ColumnIndex = 4;
         private readonly char[] separator = { ';' };
 
         public IList<PackagingType> Map(DataRow source)
@@ -17,7 +17,7 @@
 
             try
             {
-                var data = source.ItemArray[ColumnIndex].ToString();
+                var data = source.ItemArray[(int)PrenotificationColumnIndex.PackagingType].ToString();
                 var packagingTypes = data.Split(separator, StringSplitOptions.RemoveEmptyEntries);
 
                 foreach (var packaging in packagingTypes)

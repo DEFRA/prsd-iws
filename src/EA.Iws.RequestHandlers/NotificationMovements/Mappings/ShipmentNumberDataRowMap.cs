@@ -2,11 +2,11 @@
 {
     using System;
     using System.Data;
+    using Core.Movement.Bulk;
     using Prsd.Core.Mapper;
 
     public class ShipmentNumberDataRowMap : IMap<DataRow, int?>
     {
-        private const int ColumnIndex = 1;
 
         public int? Map(DataRow source)
         {
@@ -14,7 +14,7 @@
 
             try
             {
-                var val = source.ItemArray[ColumnIndex].ToString();
+                var val = source.ItemArray[(int)PrenotificationColumnIndex.ShipmentNumber].ToString();
                 int parsed;
 
                 if (int.TryParse(val, out parsed))

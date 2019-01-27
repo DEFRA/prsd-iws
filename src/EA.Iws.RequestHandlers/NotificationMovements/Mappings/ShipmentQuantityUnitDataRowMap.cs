@@ -2,12 +2,12 @@
 {
     using System;
     using System.Data;
+    using Core.Movement.Bulk;
     using Core.Shared;
     using Prsd.Core.Mapper;
 
     public class ShipmentQuantityUnitDataRowMap : IMap<DataRow, ShipmentQuantityUnits?>
     {
-        private const int ColumnIndex = 3;
 
         public ShipmentQuantityUnits? Map(DataRow source)
         {
@@ -16,7 +16,7 @@
             try
             {
                 ShipmentQuantityUnits parsed;
-                var data = source.ItemArray[ColumnIndex].ToString();
+                var data = source.ItemArray[(int)PrenotificationColumnIndex.Quantity].ToString();
 
                 if (Enum.TryParse(data, out parsed))
                 {
