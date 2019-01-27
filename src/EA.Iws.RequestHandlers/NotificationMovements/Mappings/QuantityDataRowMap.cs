@@ -7,7 +7,6 @@
 
     public class QuantityDataRowMap : IMap<DataRow, decimal?>
     {
-        
         public decimal? Map(DataRow source)
         {
             decimal? result = null;

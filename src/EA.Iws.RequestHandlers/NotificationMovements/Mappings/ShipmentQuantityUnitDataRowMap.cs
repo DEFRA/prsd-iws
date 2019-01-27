@@ -8,7 +8,6 @@
 
     public class ShipmentQuantityUnitDataRowMap : IMap<DataRow, ShipmentQuantityUnits?>
     {
-
         public ShipmentQuantityUnits? Map(DataRow source)
         {
             ShipmentQuantityUnits? result = null;

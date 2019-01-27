@@ -8,7 +8,6 @@
 
     public class ActualDateOfShipmentDataRowMap : IMap<DataRow, DateTime?>
     {
- 
         public DateTime? Map(DataRow source)
         {
             DateTime? result = null;

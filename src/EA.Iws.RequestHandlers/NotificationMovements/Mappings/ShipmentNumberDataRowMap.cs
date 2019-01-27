@@ -7,7 +7,6 @@
 
     public class ShipmentNumberDataRowMap : IMap<DataRow, int?>
     {
-
         public int? Map(DataRow source)
         {
             int? result = null;
