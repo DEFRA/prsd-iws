@@ -5,6 +5,10 @@
 
     public class ContentRuleResult<BulkMovementContentRules>
     {
+        public ContentRuleResult()
+        {
+        }
+
         public ContentRuleResult(BulkMovementContentRules rule, MessageLevel messageLevel, List<string> erroneousShipmentNumbers)
         {
             Rule = rule;
@@ -12,11 +16,20 @@
             ErroneousShipmentNumbers = erroneousShipmentNumbers;
         }
 
+        public ContentRuleResult(BulkMovementContentRules rule, MessageLevel messageLevel, string errorMessage)
+        {
+            Rule = rule;
+            MessageLevel = messageLevel;
+            this.errorMessage = errorMessage;
+        }
+
         public BulkMovementContentRules Rule { get; private set; }
 
         public MessageLevel MessageLevel { get; private set; }
 
         public List<string> ErroneousShipmentNumbers { get; set; }
+
+        private string errorMessage;
 
         private string GetShipmentNumbers
         {
@@ -42,6 +55,11 @@
         {
             get
             {
+                if (errorMessage != null && !errorMessage.Equals(string.Empty))
+                {
+                    return errorMessage;
+                }
+
                 var errorMessageArg = string.Empty;
                 if (ErroneousShipmentNumbers != null && ErroneousShipmentNumbers.Count > 0)
                 {
