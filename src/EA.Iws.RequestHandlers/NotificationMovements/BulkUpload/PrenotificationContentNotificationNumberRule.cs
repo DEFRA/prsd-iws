@@ -38,9 +38,9 @@
                         }
                     }
                 }
-
+                
                 var shipmentNumbers = string.Join(", ", notificationNumberShipmentNumbers);
-                var errorMessage = string.Format("Shipment number/s {0}: data must only be for notification number {1}", shipmentNumbers, notificationNumber);
+                var errorMessage = string.Format(Prsd.Core.Helpers.EnumHelper.GetDisplayName(BulkMovementContentRules.WrongNotificationNumber), shipmentNumbers, notificationNumber);
 
                 return new ContentRuleResult<BulkMovementContentRules>(BulkMovementContentRules.WrongNotificationNumber, notificationNumberResult, errorMessage);
             });

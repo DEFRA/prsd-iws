@@ -25,7 +25,10 @@
                     duplicateShipmentNumberResult = MessageLevel.Error;
                 }
 
-                return new ContentRuleResult<BulkMovementContentRules>(BulkMovementContentRules.DuplicateShipmentNumber, duplicateShipmentNumberResult, duplicateShipmentNumbers);
+                var shipmentNumbers = string.Join(", ", duplicateShipmentNumbers);
+                var errorMessage = string.Format(Prsd.Core.Helpers.EnumHelper.GetDisplayName(BulkMovementContentRules.DuplicateShipmentNumber), shipmentNumbers);
+
+                return new ContentRuleResult<BulkMovementContentRules>(BulkMovementContentRules.DuplicateShipmentNumber, duplicateShipmentNumberResult, errorMessage);
             });
         }
     }
