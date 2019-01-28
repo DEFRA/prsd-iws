@@ -17,6 +17,8 @@
         [Display(Name = "Shipment number/s {0}: data must only be for notification number {1}")]
         WrongNotificationNumber,
         [Display(Name = "Shipment number {0}: the date of shipment is less than three working days from the notification expiry date. Remove the shipment data from the data file and use the existing ‘generate a prenotification’ journey to inform us of this shipment.")]
-        ThreeWorkingDaysToConsentDate
+        ThreeWorkingDaysToConsentDate,
+        [Display(Name = "Shipment {0}: the actual shipment date is less than 3 working days.")]
+        ThreeWorkingDaysToShipment
     }
 }
