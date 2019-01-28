@@ -124,7 +124,7 @@ namespace EA.Iws.RequestHandlers.ImportNotification.Validate {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to please enter the total number of shipments.
+        ///   Looks up a localized string similar to please enter the total number of movements.
         /// </summary>
         public static string TotalShipmentsNotNull {
             get {

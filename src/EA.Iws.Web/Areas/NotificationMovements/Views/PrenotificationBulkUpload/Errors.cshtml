@@ -7,7 +7,7 @@
 }
 
 <div class="grid-row">
-    <div class="column-two-thirds">
+    <div class="column-full">
         <header class="hgroup text">
             <h1 class="heading-large">@string.Format(Resources.ErrorsHeaderText, Model.ErrorsCount)</h1>
         </header>
@@ -24,22 +24,38 @@
                         <h2 class="summary-error-header heading-xsmall">@Resources.ViewErrors</h2>
                     </summary>
                     <div class="summary-error-panel">
-                        <ul class="summary-error-list">
-                            @if (Model.FailedFileRules != null)
+                        @if (Model.FailedFileRules != null)
+                        {
+                            foreach (var rule in Model.FailedFileRules)
                             {
-                                foreach (var rule in Model.FailedFileRules)
-                                {
-                                    <li>@Html.Raw(EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(rule)) <img class="summary-error-icon" src="@Url.Content("~/Content/images/error-icon.png")" alt=""></li>
-                                }
+                                <div class="summary-error-row">
+                                    <div class="grid-row">
+                                        <div class="column-two-thirds">
+                                            @Html.Raw(EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(rule))
+                                        </div>
+                                        <div class="column-third">
+                                            <img class="summary-error-icon" src="@Url.Content("~/Content/images/error-icon.png")" alt="">
+                                        </div>
+                                    </div>
+                                </div>
                             }
-                            @if (Model.FailedContentRules != null)
+                        }
+                        @if (Model.FailedContentRules != null)
+                        {
+                            foreach (var rule in Model.FailedContentRules)
                             {
-                                foreach (var rule in Model.FailedContentRules)
-                                {
-                                    <li>@Html.Raw(rule.GetErrorMessage) <img class="summary-error-icon" src="@Url.Content("~/Content/images/error-icon.png")" alt=""></li>
-                                }
+                                <div class="summary-error-row">
+                                    <div class="grid-row">
+                                        <div class="column-two-thirds">
+                                            @Html.Raw(rule.ErrorMessage)
+                                        </div>
+                                        <div class="column-third">
+                                            <img class="summary-error-icon" src="@Url.Content("~/Content/images/error-icon.png")" alt="">
+                                        </div>
+                                    </div>
+                                </div>
                             }
-                        </ul>
+                        }
                     </div>
                 </details>
             </div>

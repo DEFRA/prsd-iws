@@ -1,5 +1,10 @@
 ﻿namespace EA.Iws.Core.Movement.Bulk
 {
+    using System;
+    using System.Collections.Generic;
+    using PackagingType;
+    using Shared;
+
     public class PrenotificationMovement
     {
         public PrenotificationMovement()
@@ -8,14 +13,14 @@
 
         public string NotificationNumber { get; set; }
 
-        public string ShipmentNumber { get; set; }
+        public int? ShipmentNumber { get; set; }
 
-        public string Quantity { get; set; }
+        public decimal? Quantity { get; set; }
 
-        public string Unit { get; set; }
+        public ShipmentQuantityUnits? Unit { get; set; }
 
-        public string PackagingType { get; set; }
+        public IList<PackagingType> PackagingTypes { get; set; }
 
-        public string ActualDateOfShipment { get; set; }
+        public DateTime? ActualDateOfShipment { get; set; }
     }
 }

@@ -6,24 +6,28 @@
     Layout = "~/Views/Shared/_Layout.GovUK.Sections.cshtml";
 }
 
-<section class="grid-row">
-    <div class="column-full">
-        <h1 class="heading-large">@Resources.StartHeader</h1>
-        <p>@Resources.StartText1</p>
-        <p>@Html.ActionLink(Resources.TemplateLinkText, "Index", "BulkUploadTemplate", new { id = @Model.NotificationId }, null) @Resources.StartText2</p>
-        <p class="bold-small">@Resources.StartText3</p>
-    </div>
-</section>
+<div class="grid-row">
+    <div class="column-two-thirds">
+        <section class="grid-row">
+            <div class="column-full">
+                <h1 class="heading-large">@Resources.StartHeader</h1>
+                <p>@Resources.StartText1</p>
+                <p>@Html.ActionLink(Resources.TemplateLinkText, "Index", "BulkUploadTemplate", new { id = @Model.NotificationId }, null) @Resources.StartText2</p>
+                <p class="bold-small">@Resources.StartText3</p>
+            </div>
+        </section>
 
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
 
-    <div class="form-group">
-        <p>
-            <button class="button" type="submit">@Resources.StartButtonText</button>
-        </p>
+            <div class="form-group">
+                <p>
+                    <button class="button" type="submit">@Resources.StartButtonText</button>
+                </p>
+            </div>
+        }
     </div>
-}
+</div>
 
 @Html.ActionLink(Resources.NotificationOptionsLink, "Index", "Options", new { id = @Model.NotificationId, area = "NotificationApplication" }, null)

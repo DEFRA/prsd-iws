@@ -1,6 +1,8 @@
 ﻿namespace EA.Iws.Requests.Movement
 {
     using System;
+    using System.Collections.Generic;
+    using System.Data;
     using Core.Authorization;
     using Core.Authorization.Permissions;
     using Core.Movement.Bulk;
@@ -13,10 +15,15 @@
 
         public Guid NotificationId { get; private set; }
 
-        public PerformBulkUploadContentValidation(BulkMovementRulesSummary bulkMovementRulesSummary, Guid notificationId)
+        public DataTable DataTable { get; private set; }
+
+        public PerformBulkUploadContentValidation(BulkMovementRulesSummary bulkMovementRulesSummary, 
+            Guid notificationId, 
+            DataTable dataTable)
         {
             BulkMovementRulesSummary = bulkMovementRulesSummary;
             NotificationId = notificationId;
+            DataTable = dataTable;
         }
     }
 }
