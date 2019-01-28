@@ -61,7 +61,23 @@
             model.FailedFileRules = failedFileRules;
             model.FailedContentRules = failedContentRules;
 
-            return View("Errors", model);
+            if (model.ErrorsCount > 0)
+            {
+                return View("Errors", model);
+            }
+
+            var shipments = validationSummary.PrenotificationMovements.Select(p => p.ShipmentNumber).ToList();
+
+            var shipmentsModel = new ShipmentMovementDocumentsViewModel(notificationId, shipments, model.File.FileName);
+
+            return View("Documents", shipmentsModel);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Documents(Guid notificationId, ShipmentMovementDocumentsViewModel model)
+        {
+            return View();
         }
 
         [HttpGet]

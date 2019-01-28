@@ -207,4 +207,13 @@
   <data name="RemoveShipment" xml:space="preserve">
     <value>Remove the row of data from the data file and use the existing ‘generate a prenotification’ journey to inform us of these shipments</value>
   </data>
+  <data name="ShipmentMovementDocumentHeader" xml:space="preserve">
+    <value>Accompanying shipment movement documents</value>
+  </data>
+  <data name="ShipmentMovementInstructions" xml:space="preserve">
+    <value>Upload the accompanying shipment movement documents for shipments:</value>
+  </data>
+  <data name="ShipmentMovementsSuccessText" xml:space="preserve">
+    <value>There were no errors within the {filename} data file.</value>
+  </data>
 </root>
