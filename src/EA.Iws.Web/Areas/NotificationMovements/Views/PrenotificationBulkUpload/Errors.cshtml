@@ -1,4 +1,5 @@
-﻿@using Resources = EA.Iws.Web.Areas.NotificationMovements.Views.PrenotificationBulkUpload.PrenotificationBulkUploadResources
+﻿@using EA.Iws.Core.Movement.Bulk
+@using Resources = EA.Iws.Web.Areas.NotificationMovements.Views.PrenotificationBulkUpload.PrenotificationBulkUploadResources
 @model EA.Iws.Web.Areas.NotificationMovements.ViewModels.PrenotificationBulkUpload.PrenotificationBulkUploadViewModel
 
 @{
@@ -53,6 +54,35 @@
                                             <img class="summary-error-icon" src="@Url.Content("~/Content/images/error-icon.png")" alt="">
                                         </div>
                                     </div>
+                                    @if (rule.Rule == BulkMovementContentRules.ThreeWorkingDaysToShipment)
+                                    {
+                                        <br />
+                                        <div class="grid-row">
+                                            <div class="column-quarter" style="max-width: 5%">
+                                                <i class="icon icon-important">
+                                                    <span class="visually-hidden">Warning</span>
+                                                </i>
+                                            </div>
+                                            <div class="column-two-thirds">
+                                                <p>
+                                                    <strong class="bold-small">
+                                                        @Resources.Action
+                                                    </strong>
+                                                </p>
+                                                <p>
+                                                    @Resources.AmendActualDate
+                                                </p>
+                                                <p>
+                                                    <strong class="bold-small">
+                                                        @Resources.Or
+                                                    </strong>
+                                                </p>
+                                                <p>
+                                                    @Resources.RemoveShipment
+                                                </p>
+                                            </div>
+                                        </div>
+                                    }
                                 </div>
                             }
                         }

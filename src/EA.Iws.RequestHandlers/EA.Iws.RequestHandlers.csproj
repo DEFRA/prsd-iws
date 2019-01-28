@@ -457,6 +457,8 @@
     <Compile Include="NotificationMovements\BulkUpload\PrenotificationContentShipmentBeyondConsentedDateRule.cs" />
     <Compile Include="NotificationMovements\BulkUpload\PrenotificationContentQuantityRule.cs" />
     <Compile Include="NotificationMovements\BulkUpload\PrenotificationContentQuantityUnitRule.cs" />
+    <Compile Include="NotificationMovements\BulkUpload\PrenotificationContentThreeWorkingDaysConsentDateRule.cs" />
+    <Compile Include="NotificationMovements\BulkUpload\PrenotificationContentThreeWorkingDaysRule.cs" />
     <Compile Include="NotificationMovements\Create\GetInternalMovementSummaryHandler.cs" />
     <Compile Include="NotificationMovements\Create\GetRemainingShipmentsHandler.cs" />
     <Compile Include="NotificationMovements\Create\HasExceededConsentedQuantityHandler.cs" />
