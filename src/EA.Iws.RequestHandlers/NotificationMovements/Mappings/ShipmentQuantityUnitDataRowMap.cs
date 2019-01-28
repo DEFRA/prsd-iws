@@ -15,7 +15,7 @@
             try
             {
                 ShipmentQuantityUnits parsed;
-                var data = source.ItemArray[(int)PrenotificationColumnIndex.Quantity].ToString();
+                var data = source.ItemArray[(int)PrenotificationColumnIndex.Unit].ToString();
 
                 if (Enum.TryParse(data, out parsed))
                 {
