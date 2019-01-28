@@ -91,19 +91,19 @@
                 {
                     NotificationNumber = "GB 0001 001234",
                     ShipmentNumber = 1,
-                    ActualDateOfShipment = new DateTime(2019, 1, 26)
+                    ActualDateOfShipment = DateTime.Now.AddMonths(1)
                 },
                 new PrenotificationMovement()
                 {
                     NotificationNumber = "GB 0001 001234",
                     ShipmentNumber = 2,
-                    ActualDateOfShipment = new DateTime(2019, 2, 14)
+                    ActualDateOfShipment = DateTime.Now.AddMonths(2)
                 },
                 new PrenotificationMovement()
                 {
                     NotificationNumber = "GB 0001 001234",
                     ShipmentNumber = 3,
-                    ActualDateOfShipment = new DateTime(2019, 3, 15)
+                    ActualDateOfShipment = DateTime.Now.AddMonths(3)
                 }
             };
         }

@@ -39,7 +39,8 @@
 
                 foreach (var movement in movements)
                 {
-                    if (movement.ShipmentNumber.HasValue && movement.ActualDateOfShipment.HasValue && !consentHasExpired)
+                    if (movement.ShipmentNumber.HasValue && movement.ActualDateOfShipment.HasValue &&
+                        movement.ActualDateOfShipment.Value > SystemTime.UtcNow && !consentHasExpired)
                     {
                         var workingDays = workingDayCalculator.GetWorkingDays(SystemTime.UtcNow,
                             movement.ActualDateOfShipment.Value, true, ca);
