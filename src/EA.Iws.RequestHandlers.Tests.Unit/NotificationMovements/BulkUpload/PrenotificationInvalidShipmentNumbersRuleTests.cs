@@ -7,13 +7,11 @@
     using Core.Rules;
     using Domain.Movement;
     using FakeItEasy;
-    using Prsd.Core.Mediator;
     using RequestHandlers.NotificationMovements.BulkUpload;
     using Xunit;
 
     public class PrenotificationInvalidShipmentNumbersRuleTests
     {
-        private readonly IMediator mediator;
         private readonly IMovementRepository repo;
         private readonly Guid notificationId = new Guid("DD1F019D-BD85-4A6F-89AB-328A7BD53CEA");
 
@@ -21,7 +19,6 @@
 
         public PrenotificationInvalidShipmentNumbersRuleTests()
         {
-            this.mediator = A.Fake<IMediator>();
             this.repo = A.Fake<IMovementRepository>();
 
             A.CallTo(() => repo.GetAllMovements(notificationId)).Returns(A.CollectionOfFake<Movement>(2));

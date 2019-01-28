@@ -7,16 +7,13 @@
     using Core.Movement.Bulk;
     using Core.Rules;
     using Domain;
-    using Domain.Movement;
     using Domain.NotificationApplication.Shipment;
     using FakeItEasy;
-    using Prsd.Core.Mediator;
     using RequestHandlers.NotificationMovements.BulkUpload;
     using Xunit;
 
     public class PrenotificationShipmentBeyondConsentWindowRuleTests
     {
-        private readonly IMediator mediator;
         private readonly IShipmentInfoRepository repo;
         private readonly Guid notificationId = new Guid("DD1F019D-BD85-4A6F-89AB-328A7BD53CEA");
 
@@ -24,7 +21,6 @@
 
         public PrenotificationShipmentBeyondConsentWindowRuleTests()
         {
-            this.mediator = A.Fake<IMediator>();
             this.repo = A.Fake<IShipmentInfoRepository>();
 
             A.CallTo(() => this.repo.GetByNotificationId(notificationId)).Returns(new ShipmentInfo(this.notificationId, new ShipmentPeriod(DateTime.Now.AddDays(1), DateTime.Now.AddDays(20), false), 10, new ShipmentQuantity(10, Core.Shared.ShipmentQuantityUnits.Kilograms)));

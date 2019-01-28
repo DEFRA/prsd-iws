@@ -7,13 +7,11 @@
     using Core.Rules;
     using Domain.NotificationApplication;
     using FakeItEasy;
-    using Prsd.Core.Mediator;
     using RequestHandlers.NotificationMovements.BulkUpload;
     using Xunit;
 
     public class PrenotificationInvalidPackagingTypeRuleTests
     {
-        private readonly IMediator mediator;
         private readonly INotificationApplicationRepository repo;
         private readonly Guid notificationId = new Guid("DD1F019D-BD85-4A6F-89AB-328A7BD53CEA");
 
@@ -23,7 +21,6 @@
 
         public PrenotificationInvalidPackagingTypeRuleTests()
         {
-            this.mediator = A.Fake<IMediator>();
             this.repo = A.Fake<INotificationApplicationRepository>();
 
             notificationApplication = new NotificationApplication(Guid.NewGuid(), Core.Shared.NotificationType.Disposal, Core.Notification.UKCompetentAuthority.England, 1);

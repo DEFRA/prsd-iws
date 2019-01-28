@@ -8,13 +8,11 @@
     using Core.Rules;
     using Domain.Movement;
     using FakeItEasy;
-    using Prsd.Core.Mediator;
     using RequestHandlers.NotificationMovements.BulkUpload;
     using Xunit;
 
     public class PrenotificationExcessiveShipmentsRuleTests
     {
-        private readonly IMediator mediator;
         private readonly INotificationMovementsSummaryRepository repo;
         private readonly Guid notificationId = new Guid("DD1F019D-BD85-4A6F-89AB-328A7BD53CEA");
 
@@ -22,7 +20,6 @@
 
         public PrenotificationExcessiveShipmentsRuleTests()
         {
-            this.mediator = A.Fake<IMediator>();
             this.repo = A.Fake<INotificationMovementsSummaryRepository>();
 
             int maxActiveLoads = 5;
