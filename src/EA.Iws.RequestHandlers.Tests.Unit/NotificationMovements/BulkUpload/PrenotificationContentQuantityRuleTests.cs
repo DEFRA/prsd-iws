@@ -8,54 +8,40 @@
     using Core.Shared;
     using Domain;
     using Domain.NotificationApplication.Shipment;
-    using FakeItEasy;
     using RequestHandlers.NotificationMovements.BulkUpload;
     using Xunit;
 
-    public class PrenotificationContentQuantityUnitRuleTests
+    public class PrenotificationContentQuantityRuleTests
     {
-        private readonly PrenotificationContentQuantityUnitRule rule;
-        private readonly IShipmentInfoRepository shipmentInfoRepository;
+        private readonly PrenotificationContentQuantityRule rule;
         private readonly Guid notificationId;
 
-        public PrenotificationContentQuantityUnitRuleTests()
+        public PrenotificationContentQuantityRuleTests()
         {
-            shipmentInfoRepository = A.Fake<IShipmentInfoRepository>();
-            rule = new PrenotificationContentQuantityUnitRule(shipmentInfoRepository);
+            rule = new PrenotificationContentQuantityRule();
             notificationId = Guid.NewGuid();
         }
 
         [Fact]
         public async Task GetResult_MatchingUnits_Success()
         {
-            var notificationUnit = ShipmentQuantityUnits.Tonnes;
+            var result = await rule.GetResult(GetTestData(ShipmentQuantityUnits.Tonnes), notificationId);
 
-            A.CallTo(() => shipmentInfoRepository.GetByNotificationId(notificationId))
-                .Returns(GetTestShipmentInfo(notificationUnit));
-
-            var result = await rule.GetResult(GetTestData(notificationUnit), notificationId);
-
-            Assert.Equal(BulkMovementContentRules.QuantityUnit, result.Rule);
+            Assert.Equal(BulkMovementContentRules.QuantityPrecision, result.Rule);
             Assert.Equal(MessageLevel.Success, result.MessageLevel);
         }
 
         [Fact]
         public async Task GetResult_NotMatchingUnits_Error()
         {
-            var notificationUnit = ShipmentQuantityUnits.Tonnes;
-            var dataUnit = ShipmentQuantityUnits.Kilograms;
-
-            A.CallTo(() => shipmentInfoRepository.GetByNotificationId(notificationId))
-                .Returns(GetTestShipmentInfo(notificationUnit));
-
-            var result = await rule.GetResult(GetTestData(dataUnit), notificationId);
+            var result = await rule.GetResult(GetTestData(ShipmentQuantityUnits.Kilograms), notificationId);
 
             Assert.Equal(MessageLevel.Error, result.MessageLevel);
         }
 
         private ShipmentInfo GetTestShipmentInfo(ShipmentQuantityUnits unit)
         {
-            var shipmentPeriod = new ShipmentPeriod(DateTime.Now, DateTime.Now.AddMonths(12), true); 
+            var shipmentPeriod = new ShipmentPeriod(DateTime.Now, DateTime.Now.AddMonths(12), true);
             var shipmentQuantity = new ShipmentQuantity(1.0m, unit);
             return new ShipmentInfo(notificationId, shipmentPeriod, 100, shipmentQuantity);
         }
@@ -68,19 +54,22 @@
                 {
                     NotificationNumber = "GB 0001 001234",
                     ShipmentNumber = 1,
-                    Unit = unit
+                    Unit = unit,
+                    Quantity = 1.1m
                 },
                 new PrenotificationMovement()
                 {
                     NotificationNumber = "GB 0001 001234",
                     ShipmentNumber = 2,
-                    Unit = unit
+                    Unit = unit,
+                    Quantity = 1.1234m
                 },
                 new PrenotificationMovement()
                 {
                     NotificationNumber = "GB 0001 001234",
                     ShipmentNumber = 3,
-                    Unit = unit
+                    Unit = unit,
+                    Quantity = 10m
                 }
             };
         }

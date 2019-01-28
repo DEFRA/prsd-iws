@@ -142,6 +142,8 @@
     <Compile Include="Movement\GetNotificationIdByMovementIdHandlerTests.cs" />
     <Compile Include="Movement\RecordMovementStatusChangeTest.cs" />
     <Compile Include="NotificationMovements\BulkUpload\GetBulkUploadTemplateHandlerTests.cs" />
+    <Compile Include="NotificationMovements\BulkUpload\PrenotificationContentQuantityRuleTests.cs" />
+    <Compile Include="NotificationMovements\BulkUpload\PrenotificationContentQuantityUnitRuleTests.cs" />
     <Compile Include="NotificationMovements\Capture\EnsureMovementNumberAvailableHandlerTests.cs" />
     <Compile Include="Notification\NotifcationAuditGetHandlerTests.cs" />
     <Compile Include="Notification\NotificationAuditCreatedHandlerTests.cs" />
