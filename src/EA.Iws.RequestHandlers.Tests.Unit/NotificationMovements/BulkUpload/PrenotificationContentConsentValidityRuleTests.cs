@@ -25,7 +25,7 @@
             consent = new Consent(Guid.NewGuid(), GetTestConsentDateRange(), string.Empty, Guid.NewGuid());
         }
 
-        public static object[][] CorrectData
+        public static IEnumerable<object[]> CorrectData
         {
             get
             {
@@ -40,7 +40,7 @@
             }
         }
 
-        public static object[][] ErrorData
+        public static IEnumerable<object[]> ErrorData
         {
             get
             {
@@ -52,7 +52,8 @@
             }
         }
 
-        [Theory, MemberData(nameof(CorrectData))]
+        [Theory]
+        [MemberData("CorrectData")]
         public async Task GetResult_ConsentRange_Success(DateTime? shipmentDate)
         {
             A.CallTo(() => notificationConsentRepository.GetByNotificationId(notificationId)).Returns(consent);
@@ -63,7 +64,8 @@
             Assert.Equal(MessageLevel.Success, result.MessageLevel);
         }
 
-        [Theory, MemberData(nameof(ErrorData))]
+        [Theory]
+        [MemberData("ErrorData")]
         public async Task GetResult_ConsentRange_Error(DateTime? shipmentDate)
         {
             A.CallTo(() => notificationConsentRepository.GetByNotificationId(notificationId)).Returns(consent);
