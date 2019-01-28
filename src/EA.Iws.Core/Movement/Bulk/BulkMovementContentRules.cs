@@ -15,6 +15,8 @@
         [Display(Name = "You can't create {0} shipment(s) as they are missing a value for shipment number ")]
         MissingShipmentNumbers,
         [Display(Name = "Shipment number/s {0}: data must only be for notification number {1}")]
-        WrongNotificationNumber
+        WrongNotificationNumber,
+        [Display(Name = "Shipment number {0}: the date of shipment is less than three working days from the notification expiry date. Remove the shipment data from the data file and use the existing ‘generate a prenotification’ journey to inform us of this shipment.")]
+        ThreeWorkingDaysToConsentDate
     }
 }
