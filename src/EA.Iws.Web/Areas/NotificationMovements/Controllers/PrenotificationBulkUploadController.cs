@@ -76,9 +76,9 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> UploadShipmentMovements(Guid notificationId, ShipmentMovementDocumentsViewModel model)
+        public ActionResult UploadShipmentMovements(Guid notificationId, ShipmentMovementDocumentsViewModel model)
         {
-            return View();
+            return View("ShipmentMovementDocuments", model);
         }
 
         [HttpGet]
