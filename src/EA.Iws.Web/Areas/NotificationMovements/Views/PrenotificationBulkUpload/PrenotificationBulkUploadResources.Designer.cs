@@ -116,6 +116,33 @@ namespace EA.Iws.Web.Areas.NotificationMovements.Views.PrenotificationBulkUpload
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Accompanying shipment movement documents.
+        /// </summary>
+        public static string ShipmentMovementDocumentHeader {
+            get {
+                return ResourceManager.GetString("ShipmentMovementDocumentHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Upload the accompanying shipment movement documents for shipments:.
+        /// </summary>
+        public static string ShipmentMovementInstructions {
+            get {
+                return ResourceManager.GetString("ShipmentMovementInstructions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to There were no errors within the {filename} data file..
+        /// </summary>
+        public static string ShipmentMovementsSuccessText {
+            get {
+                return ResourceManager.GetString("ShipmentMovementsSuccessText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Start.
         /// </summary>
         public static string StartButtonText {
@@ -260,6 +287,15 @@ namespace EA.Iws.Web.Areas.NotificationMovements.Views.PrenotificationBulkUpload
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to View Errors.
+        /// </summary>
+        public static string ViewErrors {
+            get {
+                return ResourceManager.GetString("ViewErrors", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to You haven&apos;t added any shipment movement documents.
         /// </summary>
         public static string WarningHeader {
@@ -283,15 +319,6 @@ namespace EA.Iws.Web.Areas.NotificationMovements.Views.PrenotificationBulkUpload
         public static string WarningText2 {
             get {
                 return ResourceManager.GetString("WarningText2", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to View Errors.
-        /// </summary>
-        public static string ViewErrors {
-            get {
-                return ResourceManager.GetString("ViewErrors", resourceCulture);
             }
         }
     }

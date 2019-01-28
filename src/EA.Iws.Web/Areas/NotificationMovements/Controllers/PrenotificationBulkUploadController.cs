@@ -1,6 +1,7 @@
 ﻿namespace EA.Iws.Web.Areas.NotificationMovements.Controllers
 {
     using System;
+    using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Mvc;
@@ -61,7 +62,23 @@
             model.FailedFileRules = failedFileRules;
             model.FailedContentRules = failedContentRules;
 
-            return View("Errors", model);
+            if (model.ErrorsCount > 0)
+            {
+                return View("Errors", model);
+            }
+
+            var shipments = validationSummary.PrenotificationMovements.Select(p => p.ShipmentNumber).ToList();
+
+            ShipmentMovementDocumentsViewModel shipmentsModel = new ShipmentMovementDocumentsViewModel(notificationId, shipments, model.File.FileName);
+
+            return View("ShipmentMovementDocuments", shipmentsModel);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> UploadShipmentMovements(Guid notificationId, ShipmentMovementDocumentsViewModel model)
+        {
+            return View();
         }
 
         [HttpGet]
