@@ -32,27 +32,8 @@
                     }
                 }
 
-                string errorMessage = GetErrorMessage(missingDataShipmentNumbers);
-
-                return new ContentRuleResult<BulkMovementContentRules>(BulkMovementContentRules.MissingData, missingDataResult, missingDataShipmentNumbers, errorMessage);
+                return new ContentRuleResult<BulkMovementContentRules>(BulkMovementContentRules.MissingData, missingDataResult, missingDataShipmentNumbers);
             });
-        }
-
-        private string GetErrorMessage(List<string> erroneousShipmentNumbers)
-        {
-            if (erroneousShipmentNumbers != null && erroneousShipmentNumbers.Count > 0)
-            {
-                string shipmentNosString = string.Empty;
-                foreach (string shipmentNo in erroneousShipmentNumbers)
-                {
-                    shipmentNosString += string.Concat(shipmentNo, ", ");
-                }
-                // Remove the final instance of ", "
-                shipmentNosString = shipmentNosString.Remove(shipmentNosString.Length - 2);
-
-                return string.Format("Shipment number/s {0}: there is missing data", shipmentNosString);
-            }
-            return string.Empty;
         }
     }
 }

@@ -36,7 +36,7 @@
                             {
                                 foreach (var rule in Model.FailedContentRules)
                                 {
-                                    <li>@Html.Raw(rule.ErrorMessage) <img class="summary-error-icon" src="@Url.Content("~/Content/images/error-icon.png")" alt=""></li>
+                                    <li>@Html.Raw(rule.GetErrorMessage) <img class="summary-error-icon" src="@Url.Content("~/Content/images/error-icon.png")" alt=""></li>
                                 }
                             }
                         </ul>
