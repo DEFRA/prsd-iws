@@ -21,6 +21,12 @@
         [Display(Name = "Shipment number {0}: this shipment number already exists.")]
         OnlyNewShipments,
         [Display(Name = "Shipment number {0}: the shipment number is invalid - you've reached your shipment limit.")]
-        InvalidShipmentNumber
+        InvalidShipmentNumber,
+        [Display(Name = "Shipment {0}: the quantity of waste will exceed your permitted allowance and can't be prenotified.")]
+        QuantityExceeded,
+        [Display(Name = "Shipment {0}: the actual date of shipment is beyond your permitted Consent Window and therefore you are not allowed to prenotify this shipment.")]
+        BeyondConsentWindow,
+        [Display(Name = "Shipment number {0}: the packaging type is not permitted on this notification.")]
+        InvalidPackagingType
     }
 }

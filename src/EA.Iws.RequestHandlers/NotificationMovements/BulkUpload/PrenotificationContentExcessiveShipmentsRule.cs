@@ -33,7 +33,7 @@
                 
                 var errorMessage = string.Format(Prsd.Core.Helpers.EnumHelper.GetDisplayName(BulkMovementContentRules.ExcessiveShipments), movements.Count, remainingShipments);
 
-                return new ContentRuleResult<BulkMovementContentRules>(BulkMovementContentRules.MissingData, missingDataResult, errorMessage);
+                return new ContentRuleResult<BulkMovementContentRules>(BulkMovementContentRules.ExcessiveShipments, missingDataResult, errorMessage);
             });
         }
     }
