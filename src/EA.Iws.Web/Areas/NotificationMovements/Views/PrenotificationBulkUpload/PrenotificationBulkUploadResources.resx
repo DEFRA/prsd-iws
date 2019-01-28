@@ -195,4 +195,16 @@
   <data name="ViewErrors" xml:space="preserve">
     <value>View Errors</value>
   </data>
+  <data name="Action" xml:space="preserve">
+    <value>Action</value>
+  </data>
+  <data name="AmendActualDate" xml:space="preserve">
+    <value>Amend the actual date of shipment to be greater than three working days</value>
+  </data>
+  <data name="Or" xml:space="preserve">
+    <value>or</value>
+  </data>
+  <data name="RemoveShipment" xml:space="preserve">
+    <value>Remove the row of data from the data file and use the existing ‘generate a prenotification’ journey to inform us of these shipments</value>
+  </data>
 </root>

@@ -62,6 +62,24 @@ namespace EA.Iws.Web.Areas.NotificationMovements.Views.PrenotificationBulkUpload
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Action.
+        /// </summary>
+        public static string Action {
+            get {
+                return ResourceManager.GetString("Action", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Amend the actual date of shipment to be greater than three working days.
+        /// </summary>
+        public static string AmendActualDate {
+            get {
+                return ResourceManager.GetString("AmendActualDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to You must resolve all errors listed below before uploading your prenotification data again. If you experience further problems, contact askshipments@environment-agency.gov.uk for further advice..
         /// </summary>
         public static string ErrorsContactUs {
@@ -103,6 +121,24 @@ namespace EA.Iws.Web.Areas.NotificationMovements.Views.PrenotificationBulkUpload
         public static string NotificationOptionsLink {
             get {
                 return ResourceManager.GetString("NotificationOptionsLink", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to or.
+        /// </summary>
+        public static string Or {
+            get {
+                return ResourceManager.GetString("Or", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Remove the row of data from the data file and use the existing ‘generate a prenotification’ journey to inform us of these shipments.
+        /// </summary>
+        public static string RemoveShipment {
+            get {
+                return ResourceManager.GetString("RemoveShipment", resourceCulture);
             }
         }
         
@@ -260,6 +296,15 @@ namespace EA.Iws.Web.Areas.NotificationMovements.Views.PrenotificationBulkUpload
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to View Errors.
+        /// </summary>
+        public static string ViewErrors {
+            get {
+                return ResourceManager.GetString("ViewErrors", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to You haven&apos;t added any shipment movement documents.
         /// </summary>
         public static string WarningHeader {
@@ -283,15 +328,6 @@ namespace EA.Iws.Web.Areas.NotificationMovements.Views.PrenotificationBulkUpload
         public static string WarningText2 {
             get {
                 return ResourceManager.GetString("WarningText2", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to View Errors.
-        /// </summary>
-        public static string ViewErrors {
-            get {
-                return ResourceManager.GetString("ViewErrors", resourceCulture);
             }
         }
     }
