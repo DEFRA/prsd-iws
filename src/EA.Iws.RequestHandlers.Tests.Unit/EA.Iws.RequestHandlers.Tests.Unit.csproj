@@ -149,6 +149,8 @@
     <Compile Include="NotificationMovements\BulkUpload\PrenotificationQuantityExceededRuleTests.cs" />
     <Compile Include="NotificationMovements\BulkUpload\PrenotificationShipmentBeyondConsentWindowRuleTests.cs" />
     <Compile Include="NotificationMovements\BulkUpload\PrenotificationContentConsentValidityRuleTests.cs" />
+    <Compile Include="NotificationMovements\BulkUpload\PrenotificationContentQuantityRuleTests.cs" />
+    <Compile Include="NotificationMovements\BulkUpload\PrenotificationContentQuantityUnitRuleTests.cs" />
     <Compile Include="NotificationMovements\Capture\EnsureMovementNumberAvailableHandlerTests.cs" />
     <Compile Include="Notification\NotifcationAuditGetHandlerTests.cs" />
     <Compile Include="Notification\NotificationAuditCreatedHandlerTests.cs" />
