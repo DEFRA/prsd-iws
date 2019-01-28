@@ -19,6 +19,8 @@
 
         public async Task<ContentRuleResult<BulkMovementContentRules>> GetResult(List<PrenotificationMovement> movements, Guid notificationId)
         {
+            var consent = await notificationConsentRepository.GetByNotificationId(notificationId);
+
             return await Task.Run(() =>
             {
                 var contentValidityResult = MessageLevel.Success;
@@ -28,8 +30,7 @@
                 {
                     if (shipment.ShipmentNumber.HasValue && shipment.ActualDateOfShipment.HasValue)
                     {
-                        var consent = notificationConsentRepository.GetByNotificationId(notificationId);
-                        if (!consent.Result.ConsentRange.Contains(shipment.ActualDateOfShipment.GetValueOrDefault()))
+                        if (!consent.ConsentRange.Contains(shipment.ActualDateOfShipment.GetValueOrDefault()))
                         {
                             contentValidityResult = MessageLevel.Error;
                             contentValidityShipmentNumbers.Add(shipment.ShipmentNumber.ToString());
