@@ -19,6 +19,8 @@
         [Display(Name = "Shipment number/s {0}: data must only be for notification number {1}")]
         WrongNotificationNumber,
         [Display(Name = "Shipment number {0}: this shipment number already exists.")]
-        OnlyNewShipments
+        OnlyNewShipments,
+        [Display(Name = "Shipment number {0}: the shipment number is invalid - you've reached your shipment limit.")]
+        InvalidShipmentNumber
     }
 }

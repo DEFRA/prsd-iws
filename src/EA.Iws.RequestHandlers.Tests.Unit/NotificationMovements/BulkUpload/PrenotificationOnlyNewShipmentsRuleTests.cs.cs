@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
     using System.Threading.Tasks;
     using Core.Movement.Bulk;
     using Core.Rules;
@@ -14,54 +15,51 @@
     public class PrenotificationOnlyNewShipmentsRuleTests
     {
         private readonly IMediator mediator;
-        private readonly IMovementRepository repo;
+        private readonly INotificationMovementsSummaryRepository repo;
         private readonly Guid notificationId = new Guid("DD1F019D-BD85-4A6F-89AB-328A7BD53CEA");
 
-        private PrenotificationContentOnlyNewShipmentsRule rule; 
+        private PrenotificationContentInvalidShipmentNumberRule rule;
 
         public PrenotificationOnlyNewShipmentsRuleTests()
         {
             this.mediator = A.Fake<IMediator>();
-            this.repo = A.Fake<IMovementRepository>();
+            this.repo = A.Fake<INotificationMovementsSummaryRepository>();
 
-            A.CallTo(() => repo.GetAllMovements(notificationId)).Returns(A.CollectionOfFake<Movement>(2));
+            int maxShipments = 5;
+            int currentShipments = 3;
+
+            A.CallTo(() => repo.GetById(notificationId)).Returns(NotificationMovementsSummary.Load(notificationId, string.Empty, Core.Shared.NotificationType.Disposal, maxShipments, currentShipments, 5, 3, 100, 10, Core.Shared.ShipmentQuantityUnits.Kilograms, Core.FinancialGuarantee.FinancialGuaranteeStatus.Approved, Core.Notification.UKCompetentAuthority.England, Core.NotificationAssessment.NotificationStatus.Consented, new Domain.ShipmentQuantity(1, Core.Shared.ShipmentQuantityUnits.Kilograms)));
         }
 
         [Fact]
-        public async Task ShipmentNumberGreaterThanExistingShipmentNumber()
+        public async Task LastShipmentInUploadList_LessThanMaxShipments()
         {
-            rule = new PrenotificationContentOnlyNewShipmentsRule(repo);
+            rule = new PrenotificationContentInvalidShipmentNumberRule(repo);
 
-            List<PrenotificationMovement> movements = new List<PrenotificationMovement>()
-            {
-                new PrenotificationMovement()
-                {
-                   ShipmentNumber = 3
-                }
-            };
+            var movements = A.CollectionOfFake<PrenotificationMovement>(1);
 
-            var result = await rule.GetResult(movements, notificationId);
+            var result = await rule.GetResult(movements.ToList(), notificationId);
 
             Assert.Equal(MessageLevel.Success.ToString(), result.MessageLevel.ToString());
         }
 
         [Fact]
-        public async Task ShipmentNumberLessThanExistingShipmentNumber()
+        public async Task LastShipmentInUploadList_GreaterThanMaxShipments()
         {
-            rule = new PrenotificationContentOnlyNewShipmentsRule(repo);
+            rule = new PrenotificationContentInvalidShipmentNumberRule(repo);
 
-            List<PrenotificationMovement> movements = new List<PrenotificationMovement>()
+            var movements = new List<PrenotificationMovement>()
             {
                 new PrenotificationMovement()
                 {
-                   ShipmentNumber = 1
+                    ShipmentNumber = 6
                 }
             };
 
-            var result = await rule.GetResult(movements, notificationId);
+            var result = await rule.GetResult(movements.ToList(), notificationId);
 
             Assert.Equal(MessageLevel.Error.ToString(), result.MessageLevel.ToString());
-            Assert.Equal("Shipment number 1: this shipment number already exists.", result.ErrorMessage);
+            Assert.Equal("Shipment number 6: the shipment number is invalid - you've reached your shipment limit.", result.ErrorMessage);
         }
     }
 }
