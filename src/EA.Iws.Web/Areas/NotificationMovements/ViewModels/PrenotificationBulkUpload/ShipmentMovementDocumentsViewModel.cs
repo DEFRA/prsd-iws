@@ -6,7 +6,7 @@
     using System.Web;
     using Views.PrenotificationBulkUpload;
 
-    public class ShipmentMovementDocumentsViewModel
+    public class ShipmentMovementDocumentsViewModel : IValidatableObject
     {
         public ShipmentMovementDocumentsViewModel()
         {

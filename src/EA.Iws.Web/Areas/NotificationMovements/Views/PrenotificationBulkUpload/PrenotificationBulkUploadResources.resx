@@ -216,4 +216,13 @@
   <data name="ShipmentMovementsSuccessText" xml:space="preserve">
     <value>There were no errors within the {filename} data file.</value>
   </data>
+  <data name="FinishButton" xml:space="preserve">
+    <value>Finish</value>
+  </data>
+  <data name="SuccessHeaderText" xml:space="preserve">
+    <value>Your bulk upload has been successful</value>
+  </data>
+  <data name="SuccessTitle" xml:space="preserve">
+    <value>Success</value>
+  </data>
 </root>
