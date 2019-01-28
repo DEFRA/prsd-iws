@@ -29,8 +29,7 @@
         [Display(Name = "Shipment {0}: the actual date of shipment is beyond your permitted Consent Window and therefore you are not allowed to prenotify this shipment.")]
         BeyondConsentWindow,
         [Display(Name = "Shipment number {0}: the packaging type is not permitted on this notification.")]
-        InvalidPackagingType
-        WrongNotificationNumber,
+        InvalidPackagingType,
         [Display(Name = "Shipment number {0}: the waste quantity should have no more than 4 decimal places.")]
         QuantityPrecision,
         [Display(Name = "Shipment number {0}: the quantity unit of measurement is not permitted on this notification.")]
