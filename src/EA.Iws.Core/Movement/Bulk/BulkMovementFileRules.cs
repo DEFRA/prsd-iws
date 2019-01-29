@@ -4,7 +4,7 @@
 
     public enum BulkMovementFileRules
     {
-        [Display(Name = "The file type must be either an EXCEL or .CSV format.")]
+        [Display(Name = "The file type must be either in .XLS or .XLSX or .CSV format.")]
         FileType,
         [Display(Name = "The file size must not be larger than 2GB.")]
         FileSize,
