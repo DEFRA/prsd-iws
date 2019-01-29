@@ -116,6 +116,15 @@ namespace EA.Iws.Web.Areas.NotificationMovements.Views.PrenotificationBulkUpload
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Finish.
+        /// </summary>
+        public static string FinishButton {
+            get {
+                return ResourceManager.GetString("FinishButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Go to notification options.
         /// </summary>
         public static string NotificationOptionsLink {
@@ -148,6 +157,33 @@ namespace EA.Iws.Web.Areas.NotificationMovements.Views.PrenotificationBulkUpload
         public static string ReturnToUpload {
             get {
                 return ResourceManager.GetString("ReturnToUpload", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Accompanying shipment movement documents.
+        /// </summary>
+        public static string ShipmentMovementDocumentHeader {
+            get {
+                return ResourceManager.GetString("ShipmentMovementDocumentHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Upload the accompanying shipment movement documents for shipments:.
+        /// </summary>
+        public static string ShipmentMovementInstructions {
+            get {
+                return ResourceManager.GetString("ShipmentMovementInstructions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to There were no errors within the {filename} data file..
+        /// </summary>
+        public static string ShipmentMovementsSuccessText {
+            get {
+                return ResourceManager.GetString("ShipmentMovementsSuccessText", resourceCulture);
             }
         }
         
@@ -193,6 +229,24 @@ namespace EA.Iws.Web.Areas.NotificationMovements.Views.PrenotificationBulkUpload
         public static string StartText3 {
             get {
                 return ResourceManager.GetString("StartText3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your bulk upload has been successful.
+        /// </summary>
+        public static string SuccessHeaderText {
+            get {
+                return ResourceManager.GetString("SuccessHeaderText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Success.
+        /// </summary>
+        public static string SuccessTitle {
+            get {
+                return ResourceManager.GetString("SuccessTitle", resourceCulture);
             }
         }
         

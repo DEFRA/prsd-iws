@@ -5,7 +5,6 @@
     using System.ComponentModel.DataAnnotations;
     using System.Web;
     using Core.Movement.Bulk;
-    using Infrastructure.Validation;
 
     public class PrenotificationBulkUploadViewModel : IValidatableObject
     {

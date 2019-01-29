@@ -1,6 +1,7 @@
 ﻿namespace EA.Iws.Web.Areas.NotificationMovements.Controllers
 {
     using System;
+    using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Mvc;
@@ -61,7 +62,58 @@
             model.FailedFileRules = failedFileRules;
             model.FailedContentRules = failedContentRules;
 
-            return View("Errors", model);
+            if (model.ErrorsCount > 0)
+            {
+                return RedirectToAction("Errors", model);
+            }
+
+            var shipments = validationSummary.PrenotificationMovements.Select(p => p.ShipmentNumber).ToList();
+
+            var shipmentsModel = new ShipmentMovementDocumentsViewModel(notificationId, shipments, model.File.FileName);
+
+            TempData["PrenotificationShipments"] = shipments;
+            TempData["PreNotificationFileName"] = model.File.FileName;
+
+            return View("Documents", shipmentsModel);
+        }
+
+        [HttpGet]
+        public ActionResult Documents(Guid notificationId)
+        {
+            var fileName = string.Empty;
+            var shipments = new List<int?>();
+            object fileNameObj;
+            object shipmentsObj;
+
+            if (TempData.TryGetValue("PreNotificationFileName", out fileNameObj))
+            {
+                fileName = fileNameObj as string;
+            }
+            if (TempData.TryGetValue("PrenotificationShipments", out shipmentsObj))
+            {
+                shipments = shipmentsObj as List<int?>;
+            }
+
+            TempData["PrenotificationShipments"] = shipments;
+            TempData["PreNotificationFileName"] = fileName;
+
+            var model = new ShipmentMovementDocumentsViewModel(notificationId, shipments, fileName);
+
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Documents(Guid notificationId, ShipmentMovementDocumentsViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return RedirectToAction("Warning");
+            }
+
+            // TODO: save data...
+
+            return View("Succes", model);
         }
 
         [HttpGet]
@@ -89,12 +141,14 @@
 
             if (model.GetEnumDisplayValue(WarningChoicesList.Leave).Equals(model.WarningChoices.SelectedValue))
             {
+                TempData.Remove("PrenotificationShipments");
+                TempData.Remove("PreNotificationFileName");
+
                 return RedirectToAction("Index", "Options", new { area = "NotificationApplication", id = model.NotificationId });
             }
             if (model.GetEnumDisplayValue(WarningChoicesList.Return).Equals(model.WarningChoices.SelectedValue))
             {
-                // To do: Send user to upload page for the shipment movement document
-                throw new NotImplementedException("Redirection to upload page for the shipment movement document not yet implemented");
+                return RedirectToAction("Documents");
             }
 
             return View(model);
