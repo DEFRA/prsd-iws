@@ -5,6 +5,7 @@
     using PackagingType;
     using Shared;
 
+    [Serializable]
     public class PrenotificationMovement
     {
         public PrenotificationMovement()
