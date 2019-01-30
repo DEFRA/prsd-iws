@@ -1,0 +1,26 @@
+﻿@using Resource = EA.Iws.Web.Areas.NotificationMovements.Views.BulkUploadTemplate.BulkUploadTemplateResources
+@model EA.Iws.Web.Areas.NotificationMovements.ViewModels.BulkUploadTemplate.BulkUploadTemplateViewModel
+@{
+    ViewBag.Title = @Resource.Title;
+    Layout = "~/Views/Shared/_Layout.GovUK.Sections.cshtml";
+}
+
+<header class="hgroup text">
+    <h1 class="heading-large">@Resource.Header</h1>
+</header>
+
+<p class="text">@string.Format(@Resource.Description, @Model.NotificationNumber)</p>
+
+<div class="form-group">
+    <ul class="list list-bullet">
+        <li>
+            @Html.ActionLink(@Resource.PrenotificationTemplate, "PrenotificationTemplate", "BulkUploadTemplate", null, null)
+        </li>
+    </ul>
+</div>
+
+<br/>
+
+<div>
+    @Html.ActionLink(@Resource.NotificationOptions, "Index", "Options", new { id = @Model.NotificationId, area = "NotificationApplication" }, null)
+</div>

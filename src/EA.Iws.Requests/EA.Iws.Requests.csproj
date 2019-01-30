@@ -213,6 +213,7 @@
     <Compile Include="Movement\GetMovementsByIds.cs" />
     <Compile Include="Movement\GetNewMovementIdsByNotificationId.cs" />
     <Compile Include="Movement\GetNotificationNumberByMovementId.cs" />
+    <Compile Include="Movement\PerformBulkUploadContentValidation.cs" />
     <Compile Include="Movement\SetMovementComments.cs" />
     <Compile Include="Movement\SetMultipleMovementFileId.cs" />
     <Compile Include="Movement\SetMovementReceiptAndRecoveryData.cs" />
@@ -235,6 +236,7 @@
     <Compile Include="NotificationAssessment\SetExporterContact.cs" />
     <Compile Include="NotificationAssessment\SetNewNumberOfShipments.cs" />
     <Compile Include="NotificationAssessment\SetEntryPoint.cs" />
+    <Compile Include="NotificationMovements\BulkUpload\GetBulkUploadTemplate.cs" />
     <Compile Include="NotificationMovements\Create\GetInternalMovementSummary.cs" />
     <Compile Include="NotificationMovements\Create\GetRemainingShipments.cs" />
     <Compile Include="NotificationMovements\Create\HasExceededConsentedQuantity.cs" />
