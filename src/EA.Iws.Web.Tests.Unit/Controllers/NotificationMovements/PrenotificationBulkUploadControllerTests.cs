@@ -76,17 +76,6 @@
         }
 
         [Fact]
-        public void GetErrors_ReturnsView()
-        {
-            var model = new PrenotificationBulkUploadViewModel(Guid.NewGuid());
-
-            var result = controller.Errors(model.NotificationId, model) as ViewResult;
-
-            Assert.NotNull(result);
-            Assert.Equal(string.Empty, result.ViewName);
-        }
-
-        [Fact]
         public void GetWarning_ReturnsView()
         {
             var result = controller.Warning(Guid.NewGuid()) as ViewResult;
