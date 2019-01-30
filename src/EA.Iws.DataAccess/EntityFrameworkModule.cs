@@ -3,6 +3,7 @@
     using Autofac;
     using Domain.FileStore;
     using Draft;
+    using Draft.BulkUpload;
     using Filestore;
     using Prsd.Core.DataAccess.Mapper;
     using Prsd.Core.Mapper;
@@ -26,6 +27,7 @@
 
             builder.RegisterType<DbFileRepository>().As<IFileRepository>();
             builder.RegisterType<DraftImportNotificationRepository>().As<IDraftImportNotificationRepository>();
+            builder.RegisterType<DraftMovementRepository>().As<IDraftMovementRepository>();
 
             builder.RegisterType<EfTypeResolver>().As<ITypeResolver>();
         }

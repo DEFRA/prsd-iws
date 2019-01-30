@@ -14,6 +14,8 @@
 
         public List<PrenotificationMovement> PrenotificationMovements { get; set; }
 
+        public bool DraftSaved { get; set; }
+
         public bool IsFileRulesSuccess
         {
             get { return FileRulesResults.All(r => r.MessageLevel == MessageLevel.Success); }

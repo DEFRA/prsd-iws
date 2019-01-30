@@ -5,6 +5,7 @@
     using System.Data;
     using System.Threading.Tasks;
     using Core.Movement.Bulk;
+    using DataAccess.Draft.BulkUpload;
     using Prsd.Core.Mapper;
     using Prsd.Core.Mediator;
     using Requests.Movement;
@@ -13,12 +14,15 @@
     {
         private readonly IEnumerable<IBulkMovementPrenotificationContentRule> contentRules;
         private readonly IMap<DataTable, List<PrenotificationMovement>> mapper;
+        private readonly IDraftMovementRepository repository;
 
         public PerformBulkUploadContentValidationHandler(IEnumerable<IBulkMovementPrenotificationContentRule> contentRules,
-            IMap<DataTable, List<PrenotificationMovement>> mapper)
+            IMap<DataTable, List<PrenotificationMovement>> mapper,
+            IDraftMovementRepository repository)
         {
             this.contentRules = contentRules;
             this.mapper = mapper;
+            this.repository = repository;
         }
 
         public async Task<BulkMovementRulesSummary> HandleAsync(PerformBulkUploadContentValidation message)
@@ -28,6 +32,11 @@
             result.PrenotificationMovements = mapper.Map(message.DataTable);
 
             result.ContentRulesResults = await GetContentRules(result.PrenotificationMovements, message.NotificationId);
+
+            if (result.IsContentRulesSuccess)
+            {
+                result.DraftSaved = await SaveAsDraft(message.NotificationId, result.PrenotificationMovements);
+            }
 
             return result;
         }
@@ -42,6 +51,22 @@
             }
 
             return rules;
+        }
+
+        private async Task<bool> SaveAsDraft(Guid notificationId, List<PrenotificationMovement> movements)
+        {
+            Guid id;
+
+            try
+            {
+                id = await repository.Add(notificationId, movements);
+            }
+            catch (Exception e)
+            {
+                id = Guid.Empty;
+            }
+
+            return id != Guid.Empty;
         }
     }
 }
