@@ -44,7 +44,7 @@
             var result = await controller.Index(Guid.NewGuid()) as ViewResult;
 
             Assert.NotNull(result);
-            Assert.Equal(string.Empty, result.ViewName);
+            Assert.Equal("Index", result.ViewName);
         }
 
         [Fact]
@@ -64,7 +64,7 @@
             var result = await controller.Index(Guid.NewGuid()) as ViewResult;
 
             Assert.NotNull(result);
-            Assert.Equal(string.Empty, result.ViewName);
+            Assert.Equal("Index", result.ViewName);
         }
 
         [Fact]
