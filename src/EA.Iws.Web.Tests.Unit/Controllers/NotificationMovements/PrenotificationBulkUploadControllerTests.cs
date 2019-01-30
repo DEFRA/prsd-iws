@@ -1,14 +1,18 @@
 ﻿namespace EA.Iws.Web.Tests.Unit.Controllers.NotificationMovements
 {
     using System;
+    using System.Collections.Generic;
     using System.Threading.Tasks;
     using System.Web;
     using System.Web.Mvc;
     using System.Web.Routing;
     using Areas.NotificationMovements.Controllers;
     using Areas.NotificationMovements.ViewModels.PrenotificationBulkUpload;
+    using Core.Movement;
+    using Core.Rules;
     using FakeItEasy;
     using Prsd.Core.Mediator;
+    using Requests.NotificationMovements;
     using Web.Infrastructure.BulkUpload;
     using Web.ViewModels.Shared;
     using Xunit;
@@ -16,13 +20,14 @@
     public class PrenotificationBulkUploadControllerTests
     {
         private readonly PrenotificationBulkUploadController controller;
+        private readonly IMediator mediator;
 
         public PrenotificationBulkUploadControllerTests()
         {
-            var mediator = A.Fake<IMediator>();
+            this.mediator = A.Fake<IMediator>();
             var validator = A.Fake<IBulkMovementValidator>();
 
-            controller = new PrenotificationBulkUploadController(mediator, validator);
+            controller = new PrenotificationBulkUploadController(this.mediator, validator);
 
             var request = A.Fake<HttpRequestBase>();
             var context = A.Fake<HttpContextBase>();
@@ -34,9 +39,9 @@
         }
 
         [Fact]
-        public void GetIndex_ReturnsView()
+        public async Task GetIndex_ReturnsView()
         {
-            var result = controller.Index(Guid.NewGuid()) as ViewResult;
+            var result = await controller.Index(Guid.NewGuid()) as ViewResult;
 
             Assert.NotNull(result);
             Assert.Equal(string.Empty, result.ViewName);
@@ -54,9 +59,9 @@
         }
 
         [Fact]
-        public void GetUploadPrenotifications_ReturnsView()
+        public async Task GetUploadPrenotifications_ReturnsView()
         {
-            var result = controller.Index(Guid.NewGuid()) as ViewResult;
+            var result = await controller.Index(Guid.NewGuid()) as ViewResult;
 
             Assert.NotNull(result);
             Assert.Equal(string.Empty, result.ViewName);
@@ -109,6 +114,106 @@
             Assert.NotNull(result);
             Assert.Equal("Index", (string)result.RouteValues["action"]);
             Assert.Equal("Options", (string)result.RouteValues["controller"]);
+        }
+
+        private List<RuleResult<MovementRules>> CreateRule(MovementRules rule)
+        {
+            List<RuleResult<MovementRules>> rules = new List<RuleResult<MovementRules>>();
+
+            RuleResult<MovementRules> ruleResult = new RuleResult<MovementRules>(rule, MessageLevel.Error);
+            rules.Add(ruleResult);
+
+            return rules;
+        }
+
+        [Fact]
+        public async Task Index_Send_Request()
+        {
+            MovementRulesSummary movementRulesSummary = new MovementRulesSummary(new List<RuleResult<MovementRules>>());
+            A.CallTo(() => mediator.SendAsync(A<GetMovementRulesSummary>.Ignored)).Returns(movementRulesSummary);
+
+            var result = await controller.Index(Guid.NewGuid()) as ViewResult;
+
+            A.CallTo(() => mediator.SendAsync(A<GetMovementRulesSummary>.Ignored))
+                .MustHaveHappened(Repeated.Exactly.Once);
+
+            Assert.NotNull(result);
+            Assert.True(result.ViewName == "Index");
+        }
+
+        [Fact]
+        public async Task Index_Send_Request_ConsentWithdrawn()
+        {
+            MovementRulesSummary movementRulesSummary = new MovementRulesSummary(CreateRule(MovementRules.ConsentWithdrawn));
+            A.CallTo(() => mediator.SendAsync(A<GetMovementRulesSummary>.Ignored)).Returns(movementRulesSummary);
+
+            var result = await controller.Index(Guid.NewGuid()) as RedirectToRouteResult;
+
+            A.CallTo(() => mediator.SendAsync(A<GetMovementRulesSummary>.Ignored))
+                .MustHaveHappened(Repeated.Exactly.Once);
+
+            Assert.NotNull(result);
+            Assert.True(result.RouteValues["action"].ToString() == "ConsentWithdrawn");
+        }
+
+        [Fact]
+        public async Task Index_Send_Request_ShipmentLimitReached()
+        {
+            MovementRulesSummary movementRulesSummary = new MovementRulesSummary(CreateRule(MovementRules.TotalShipmentsReached));
+            A.CallTo(() => mediator.SendAsync(A<GetMovementRulesSummary>.Ignored)).Returns(movementRulesSummary);
+
+            var result = await controller.Index(Guid.NewGuid()) as RedirectToRouteResult;
+
+            A.CallTo(() => mediator.SendAsync(A<GetMovementRulesSummary>.Ignored))
+                .MustHaveHappened(Repeated.Exactly.Once);
+
+            Assert.NotNull(result);
+            Assert.True(result.RouteValues["action"].ToString() == "TotalMovementsReached");
+        }
+
+        [Fact]
+        public async Task Index_Send_Request_QuantityReached()
+        {
+            MovementRulesSummary movementRulesSummary = new MovementRulesSummary(CreateRule(MovementRules.TotalIntendedQuantityReached));
+            A.CallTo(() => mediator.SendAsync(A<GetMovementRulesSummary>.Ignored)).Returns(movementRulesSummary);
+
+            var result = await controller.Index(Guid.NewGuid()) as RedirectToRouteResult;
+
+            A.CallTo(() => mediator.SendAsync(A<GetMovementRulesSummary>.Ignored))
+                .MustHaveHappened(Repeated.Exactly.Once);
+
+            Assert.NotNull(result);
+            Assert.True(result.RouteValues["action"].ToString() == "TotalIntendedQuantityReached");
+        }
+
+        [Fact]
+        public async Task Index_Send_Request_QuantityExceeded()
+        {
+            MovementRulesSummary movementRulesSummary = new MovementRulesSummary(CreateRule(MovementRules.TotalIntendedQuantityExceeded));
+            A.CallTo(() => mediator.SendAsync(A<GetMovementRulesSummary>.Ignored)).Returns(movementRulesSummary);
+
+            var result = await controller.Index(Guid.NewGuid()) as RedirectToRouteResult;
+
+            A.CallTo(() => mediator.SendAsync(A<GetMovementRulesSummary>.Ignored))
+                .MustHaveHappened(Repeated.Exactly.Once);
+
+            Assert.NotNull(result);
+            Assert.True(result.RouteValues["action"].ToString() == "TotalIntendedQuantityExceeded");
+        }
+
+        [Fact]
+        public async Task Index_Send_Request_ConsentExpired()
+        {
+            MovementRulesSummary movementRulesSummary = new MovementRulesSummary(CreateRule(MovementRules.ConsentPeriodExpired));
+            A.CallTo(() => mediator.SendAsync(A<GetMovementRulesSummary>.Ignored)).Returns(movementRulesSummary);
+
+            var result = await controller.Index(Guid.NewGuid()) as RedirectToRouteResult;
+
+            A.CallTo(() => mediator.SendAsync(A<GetMovementRulesSummary>.Ignored))
+                .MustHaveHappened(Repeated.Exactly.Once);
+
+            Assert.NotNull(result);
+            Assert.True(result.RouteValues["action"].ToString() == "ConsentPeriodExpired");
         }
     }
 }

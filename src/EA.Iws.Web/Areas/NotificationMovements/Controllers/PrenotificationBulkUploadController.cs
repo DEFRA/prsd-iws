@@ -5,9 +5,11 @@
     using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Mvc;
+    using Core.Movement;
     using Core.Rules;
     using Infrastructure.BulkUpload;
     using Prsd.Core.Mediator;
+    using Requests.NotificationMovements;
     using ViewModels.PrenotificationBulkUpload;
 
     [Authorize]
@@ -23,11 +25,57 @@
         }
 
         [HttpGet]
-        public ActionResult Index(Guid notificationId)
+        public async Task<ActionResult> Index(Guid notificationId)
         {
             ViewBag.NotificationId = notificationId;
+
+            var ruleSummary = await mediator.SendAsync(new GetMovementRulesSummary(notificationId));
+
+            var updatedRules = ruleSummary.RuleResults.Where(p => p.Rule != MovementRules.ConsentExpiresInThreeOrLessWorkingDays
+            && p.Rule != MovementRules.ConsentExpiresInFourWorkingDays
+            && p.Rule != MovementRules.HasApprovedFinancialGuarantee
+            && p.Rule != MovementRules.FileClosed
+            && p.Rule != MovementRules.ActiveLoadsReached);
+
+            MovementRulesSummary v = new MovementRulesSummary(updatedRules);
+
+            if (!v.IsSuccess)
+            {
+                return GetRuleErrorView(ruleSummary);
+            }
+
             var model = new PrenotificationBulkUploadViewModel(notificationId);
-            return View(model);
+            return View("Index", model);
+        }
+
+        [HttpGet]
+        public ActionResult ConsentWithdrawn(Guid notificationId)
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public ActionResult ConsentPeriodExpired(Guid notificationId)
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public ActionResult TotalIntendedQuantityReached(Guid notificationId)
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public ActionResult TotalMovementsReached(Guid notificationId)
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public ActionResult TotalIntendedQuantityExceeded(Guid notificationId)
+        {
+            return View();
         }
 
         [HttpPost]
@@ -152,6 +200,52 @@
             }
 
             return View(model);
+        }
+
+        private ActionResult GetRuleErrorView(MovementRulesSummary ruleSummary)
+        {
+            if (ruleSummary.RuleResults.Any(r => r.Rule == MovementRules.TotalShipmentsReached && r.MessageLevel == MessageLevel.Error))
+            {
+                return RedirectToAction("TotalMovementsReached");
+            }
+            if (ruleSummary.RuleResults.Any(r => r.Rule == MovementRules.TotalIntendedQuantityReached && r.MessageLevel == MessageLevel.Error))
+            {
+                return RedirectToAction("TotalIntendedQuantityReached");
+            }
+            if (ruleSummary.RuleResults.Any(r => r.Rule == MovementRules.TotalIntendedQuantityExceeded && r.MessageLevel == MessageLevel.Error))
+            {
+                return RedirectToAction("TotalIntendedQuantityExceeded");
+            }
+            if (ruleSummary.RuleResults.Any(r => r.Rule == MovementRules.HasApprovedFinancialGuarantee && r.MessageLevel == MessageLevel.Error))
+            {
+                return RedirectToAction("NoApprovedFinancialGuarantee");
+            }
+            if (ruleSummary.RuleResults.Any(r => r.Rule == MovementRules.ActiveLoadsReached && r.MessageLevel == MessageLevel.Error))
+            {
+                return RedirectToAction("TotalActiveLoadsReached");
+            }
+            if (ruleSummary.RuleResults.Any(r => r.Rule == MovementRules.ConsentPeriodExpired && r.MessageLevel == MessageLevel.Error))
+            {
+                return RedirectToAction("ConsentPeriodExpired");
+            }
+            if (ruleSummary.RuleResults.Any(r => r.Rule == MovementRules.ConsentExpiresInFourWorkingDays && r.MessageLevel == MessageLevel.Error))
+            {
+                return RedirectToAction("ConsentExpiresInFourWorkingDays");
+            }
+            if (ruleSummary.RuleResults.Any(r => r.Rule == MovementRules.ConsentExpiresInThreeOrLessWorkingDays && r.MessageLevel == MessageLevel.Error))
+            {
+                return RedirectToAction("ConsentExpiresInThreeOrLessWorkingDays");
+            }
+            if (ruleSummary.RuleResults.Any(r => r.Rule == MovementRules.ConsentWithdrawn && r.MessageLevel == MessageLevel.Error))
+            {
+                return RedirectToAction("ConsentWithdrawn");
+            }
+            if (ruleSummary.RuleResults.Any(r => r.Rule == MovementRules.FileClosed && r.MessageLevel == MessageLevel.Error))
+            {
+                return RedirectToAction("FileClosed");
+            }
+
+            throw new InvalidOperationException("Unknown rule view");
         }
     }
 }
