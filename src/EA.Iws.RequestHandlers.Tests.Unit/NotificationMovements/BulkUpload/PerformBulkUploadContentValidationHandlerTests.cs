@@ -41,7 +41,7 @@
         {
             var notificationId = Guid.NewGuid();
             var summary = new BulkMovementRulesSummary();
-            var message = new PerformBulkUploadContentValidation(summary, notificationId, new DataTable(), "Test");
+            var message = new PerformBulkUploadContentValidation(summary, notificationId, new DataTable(), "Test", false);
 
             A.CallTo(() => mapper.Map(A<DataTable>.Ignored)).Returns(A.CollectionOfFake<PrenotificationMovement>(5).ToList());
             A.CallTo(() => contentRule.GetResult(A<List<PrenotificationMovement>>.Ignored, notificationId))
@@ -59,7 +59,7 @@
         {
             var notificationId = Guid.NewGuid();
             var summary = new BulkMovementRulesSummary();
-            var message = new PerformBulkUploadContentValidation(summary, notificationId, new DataTable(), "Test");
+            var message = new PerformBulkUploadContentValidation(summary, notificationId, new DataTable(), "Test", false);
 
             A.CallTo(() => mapper.Map(A<DataTable>.Ignored)).Returns(A.CollectionOfFake<PrenotificationMovement>(5).ToList());
             A.CallTo(() => contentRule.GetResult(A<List<PrenotificationMovement>>.Ignored, notificationId))

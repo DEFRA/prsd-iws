@@ -18,15 +18,19 @@
 
         public string FileName { get; private set; }
 
+        public bool IsCsv { get; private set; }
+
         public PerformBulkUploadContentValidation(BulkMovementRulesSummary bulkMovementRulesSummary, 
             Guid notificationId, 
             DataTable dataTable,
-            string fileName)
+            string fileName,
+            bool isCsv)
         {
             BulkMovementRulesSummary = bulkMovementRulesSummary;
             NotificationId = notificationId;
             DataTable = dataTable;
             FileName = fileName;
+            IsCsv = isCsv;
         }
     }
 }

@@ -2,6 +2,8 @@
 {
     using System;
     using System.Data;
+    using System.IO;
+    using System.Linq;
     using System.Threading.Tasks;
     using System.Web;
     using Core.Movement.Bulk;
@@ -25,7 +27,8 @@
 
             try
             {
-                var isCsv = file.ContentType == MimeTypes.Csv;
+                var extension = Path.GetExtension(file.FileName);
+                var isCsv = extension == ".csv" ? true : false;
 
                 var dataTable = await fileReader.GetFirstDataTable(file, isCsv, !isCsv);
 

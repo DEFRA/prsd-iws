@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.Data;
     using System.Linq;
+    using System.Text.RegularExpressions;
     using System.Threading.Tasks;
     using Core.Movement.Bulk;
     using Domain.Movement.BulkUpload;
@@ -32,7 +33,9 @@
 
             var movements = mapper.Map(message.DataTable);
 
-            result.ContentRulesResults = await GetContentRules(movements, message.NotificationId);
+            var addFirstRowWarningRule = message.IsCsv && !CheckFirstRow(movements);
+
+            result.ContentRulesResults = await GetContentRules(movements, message.NotificationId, addFirstRowWarningRule);
 
             if (result.IsContentRulesSuccess)
             {
@@ -45,7 +48,7 @@
             return result;
         }
 
-        private async Task<List<ContentRuleResult<BulkMovementContentRules>>> GetContentRules(List<PrenotificationMovement> movements, Guid notificationId)
+        private async Task<List<ContentRuleResult<BulkMovementContentRules>>> GetContentRules(List<PrenotificationMovement> movements, Guid notificationId, bool addFirstRowWarningRule)
         {
             var rules = new List<ContentRuleResult<BulkMovementContentRules>>();
 
@@ -54,7 +57,35 @@
                 rules.Add(await rule.GetResult(movements, notificationId));
             }
 
+            if (addFirstRowWarningRule)
+            {
+                rules.Add(new ContentRuleResult<BulkMovementContentRules>(BulkMovementContentRules.HeaderDataRemoved, Core.Rules.MessageLevel.Warning, Prsd.Core.Helpers.EnumHelper.GetDisplayName(BulkMovementContentRules.HeaderDataRemoved)));
+            }
+
             return rules;
+        }
+
+        private static bool CheckFirstRow(IList<PrenotificationMovement> movements)
+        {
+            if (!IsValidNotificationNumber(movements[0].NotificationNumber))
+            {
+                movements.RemoveAt(0);
+                return false;
+            }
+            
+            return true;
+        }
+
+        private static bool IsValidNotificationNumber(string input)
+        {
+            var match = Regex.Match(input.Replace(" ", string.Empty), @"(GB)(\d{4})(\d{6})");
+
+            if (match.Success)
+            {
+                return true;
+            }
+
+            return false;
         }
     }
 }
