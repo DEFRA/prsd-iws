@@ -90,6 +90,39 @@
                 </details>
             </div>
         }
+
+        @if (Model.WarningsCount > 0)
+        {
+            <div class="form-group">
+                <details>
+                    <summary class="summary-warning">
+                        <h2 class="summary-warning-heading-xsmall">@Resources.ViewErrors</h2>
+                    </summary>
+                    <div class="summary-warning-panel">
+                        @if (Model.WarningContentRules != null)
+                        {
+                            foreach (var rule in Model.WarningContentRules)
+                            {
+                                <div class="summary-warning-row">
+                                    <div class="grid-row">
+                                        <div class="column-two-thirds">
+                                            @Html.Raw(rule.ErrorMessage)
+                                        </div>
+                                        <div class="column-third">
+                                            <img class="summary-error-icon" src="@Url.Content("~/Content/images/error-icon.png")" alt="">
+                                        </div>
+                                    </div>
+                                </div>
+                                if (rule.Rule == BulkMovementContentRules.HeaderDataRemoved && Model.ErrorsCount == 0)
+                                {
+                                    <button class="button" type="submit">@Constants.ContinueOnlyButtonText</button>
+                                }
+                            }
+                        }
+                    </div>
+                </details>
+            </div>
+        }
     </div>
 </div>
 

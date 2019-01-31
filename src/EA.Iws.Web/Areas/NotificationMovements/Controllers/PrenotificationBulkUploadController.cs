@@ -107,10 +107,12 @@
             var validationSummary = await validator.GetValidationSummary(model.File, notificationId);
             var failedFileRules = validationSummary.FileRulesResults.Where(r => r.MessageLevel == MessageLevel.Error).Select(r => r.Rule).ToList();
             var failedContentRules = validationSummary.ContentRulesResults.Where(r => r.MessageLevel == MessageLevel.Error).ToList();
+            var warningContentRule = validationSummary.ContentRulesResults.Where(r => r.MessageLevel == MessageLevel.Warning).ToList();
             model.FailedFileRules = failedFileRules;
             model.FailedContentRules = failedContentRules;
+            model.WarningContentRules = warningContentRule;
 
-            if (model.ErrorsCount > 0)
+            if (model.ErrorsCount > 0 || model.WarningsCount > 0)
             {
                 return RedirectToAction("Errors", model);
             }

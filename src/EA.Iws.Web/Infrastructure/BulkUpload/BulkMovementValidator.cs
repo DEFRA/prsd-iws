@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Data;
+    using System.IO;
     using System.Threading.Tasks;
     using System.Web;
     using Core.Movement.Bulk;
@@ -28,10 +29,13 @@
         {
             var resultFileRules = await GetFileRules(file);
 
+            var extension = Path.GetExtension(file.FileName);
+            var isCsv = extension == ".csv" ? true : false;
+
             var bulkMovementRulesSummary = new BulkMovementRulesSummary(resultFileRules);
             if (bulkMovementRulesSummary.IsFileRulesSuccess)
             {
-                bulkMovementRulesSummary = await mediator.SendAsync(new PerformBulkUploadContentValidation(bulkMovementRulesSummary, notificationId, DataTable));
+                bulkMovementRulesSummary = await mediator.SendAsync(new PerformBulkUploadContentValidation(bulkMovementRulesSummary, notificationId, DataTable, isCsv));
             }
             return bulkMovementRulesSummary;
         }

@@ -225,4 +225,7 @@
   <data name="SuccessTitle" xml:space="preserve">
     <value>Success</value>
   </data>
+  <data name="RemovedFirstRowWarning" xml:space="preserve">
+    <value>We think that the first row of data in your CSV was header data, and removed it. If it is not header data, please check your data and try uploading again.</value>
+  </data>
 </root>

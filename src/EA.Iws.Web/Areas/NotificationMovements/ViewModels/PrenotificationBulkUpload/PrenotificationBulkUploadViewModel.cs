@@ -29,7 +29,17 @@
             }
         }
 
+        public int WarningsCount
+        {
+            get
+            {
+                return WarningContentRules != null ? WarningContentRules.Count : 0;
+            }
+        }
+
         public List<BulkMovementFileRules> FailedFileRules { get; set; }
+
+        public List<ContentRuleResult<BulkMovementContentRules>> WarningContentRules { get; set; }
 
         public List<ContentRuleResult<BulkMovementContentRules>> FailedContentRules { get; set; }
 

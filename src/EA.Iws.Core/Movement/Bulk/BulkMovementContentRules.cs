@@ -37,6 +37,8 @@
         [Display(Name = "Shipment number {0}: the date of shipment is less than three working days from the notification expiry date. Remove the shipment data from the data file and use the existing ‘generate a prenotification’ journey to inform us of this shipment.")]
         ThreeWorkingDaysToConsentDate,
         [Display(Name = "Shipment {0}: the actual shipment date is less than 3 working days.")]
-        ThreeWorkingDaysToShipment
+        ThreeWorkingDaysToShipment,
+        [Display(Name = "We think the first row was header data and have removed it. If the data was not header data, please check the first row and try to upload again")]
+        HeaderDataRemoved,
     }
 }

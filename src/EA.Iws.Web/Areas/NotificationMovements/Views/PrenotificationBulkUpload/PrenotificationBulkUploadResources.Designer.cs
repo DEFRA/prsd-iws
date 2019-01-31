@@ -143,6 +143,15 @@ namespace EA.Iws.Web.Areas.NotificationMovements.Views.PrenotificationBulkUpload
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to We think that the first row of data in your CSV was header data, and removed it. If it is not header data, please check your data and try uploading again..
+        /// </summary>
+        public static string RemovedFirstRowWarning {
+            get {
+                return ResourceManager.GetString("RemovedFirstRowWarning", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Remove the row of data from the data file and use the existing ‘generate a prenotification’ journey to inform us of these shipments.
         /// </summary>
         public static string RemoveShipment {
