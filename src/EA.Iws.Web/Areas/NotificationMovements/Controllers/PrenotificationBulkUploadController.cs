@@ -111,20 +111,28 @@
             model.FailedFileRules = failedFileRules;
             model.FailedContentRules = failedContentRules;
             model.WarningContentRules = warningContentRule;
-
-            if (model.ErrorsCount > 0 || model.WarningsCount > 0)
-            {
-                return RedirectToAction("Errors", model);
-            }
-
             var shipments = validationSummary.PrenotificationMovements.Select(p => p.ShipmentNumber).ToList();
 
             var shipmentsModel = new ShipmentMovementDocumentsViewModel(notificationId, shipments, model.File.FileName);
+
+            if (model.ErrorsCount > 0 || model.WarningsCount > 0)
+            {
+                TempData["PrenotificationShipments"] = shipments;
+                TempData["PreNotificationFileName"] = model.File.FileName;
+                return View("Errors", model);
+            }
 
             TempData["PrenotificationShipments"] = shipments;
             TempData["PreNotificationFileName"] = model.File.FileName;
 
             return View("Documents", shipmentsModel);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Errors(Guid notificationId, PrenotificationBulkUploadViewModel model)
+        {
+            return RedirectToAction("Documents");
         }
 
         [HttpGet]
@@ -162,13 +170,44 @@
             }
 
             // TODO: save data...
+            
+            object fileNameObj;
+            object shipmentsObj;
 
-            return View("Succes", model);
+            if (TempData.TryGetValue("PreNotificationFileName", out fileNameObj))
+            {
+                model.PreNotificationFileName = fileNameObj as string;
+            }
+            if (TempData.TryGetValue("PrenotificationShipments", out shipmentsObj))
+            {
+                model.Shipments = shipmentsObj as List<int?>;
+            }
+
+            return View("Success", model);
         }
 
         [HttpGet]
-        public ActionResult Errors(Guid notificationId, PrenotificationBulkUploadViewModel model)
+        public ActionResult Success(Guid notificationId)
         {
+            var fileName = string.Empty;
+            var shipments = new List<int?>();
+            object fileNameObj;
+            object shipmentsObj;
+
+            if (TempData.TryGetValue("PreNotificationFileName", out fileNameObj))
+            {
+                fileName = fileNameObj as string;
+            }
+            if (TempData.TryGetValue("PrenotificationShipments", out shipmentsObj))
+            {
+                shipments = shipmentsObj as List<int?>;
+            }
+
+            TempData["PrenotificationShipments"] = shipments;
+            TempData["PreNotificationFileName"] = fileName;
+
+            var model = new ShipmentMovementDocumentsViewModel(notificationId, shipments, fileName);
+
             return View(model);
         }
 

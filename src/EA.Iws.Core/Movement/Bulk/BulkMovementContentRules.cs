@@ -38,7 +38,7 @@
         ThreeWorkingDaysToConsentDate,
         [Display(Name = "Shipment {0}: the actual shipment date is less than 3 working days.")]
         ThreeWorkingDaysToShipment,
-        [Display(Name = "We think the first row was header data and have removed it. If the data was not header data, please check the first row and try to upload again")]
+        [Display(Name = "We think the first row was header data and have removed it. If the data was not header data, please check the first row and try to upload again. If the data was header data, and there are no errors, press continue.")]
         HeaderDataRemoved,
     }
 }

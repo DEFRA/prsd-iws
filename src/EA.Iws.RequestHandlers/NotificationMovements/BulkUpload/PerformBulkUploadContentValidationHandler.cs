@@ -55,7 +55,7 @@
 
             if (addFirstRowWarningRule)
             {
-                rules.Add(new ContentRuleResult<BulkMovementContentRules>(BulkMovementContentRules.HeaderDataRemoved, Core.Rules.MessageLevel.Warning, "We think the first row was header data and have removed it.If the data was not header data, please check the first row and try to upload again"));
+                rules.Add(new ContentRuleResult<BulkMovementContentRules>(BulkMovementContentRules.HeaderDataRemoved, Core.Rules.MessageLevel.Warning, Prsd.Core.Helpers.EnumHelper.GetDisplayName(BulkMovementContentRules.HeaderDataRemoved)));
             }
 
             return rules;
