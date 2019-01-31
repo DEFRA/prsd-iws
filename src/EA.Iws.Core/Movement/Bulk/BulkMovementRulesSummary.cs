@@ -14,6 +14,8 @@
 
         public List<PrenotificationMovement> PrenotificationMovements { get; set; }
 
+        public bool RemovedFirstRow { get; set; }
+
         public bool IsFileRulesSuccess
         {
             get { return FileRulesResults.All(r => r.MessageLevel == MessageLevel.Success); }

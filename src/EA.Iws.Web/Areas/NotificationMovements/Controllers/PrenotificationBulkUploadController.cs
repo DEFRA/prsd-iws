@@ -107,22 +107,32 @@
             var validationSummary = await validator.GetValidationSummary(model.File, notificationId);
             var failedFileRules = validationSummary.FileRulesResults.Where(r => r.MessageLevel == MessageLevel.Error).Select(r => r.Rule).ToList();
             var failedContentRules = validationSummary.ContentRulesResults.Where(r => r.MessageLevel == MessageLevel.Error).ToList();
+            var warningContentRule = validationSummary.ContentRulesResults.Where(r => r.MessageLevel == MessageLevel.Warning).ToList();
             model.FailedFileRules = failedFileRules;
             model.FailedContentRules = failedContentRules;
-
-            if (model.ErrorsCount > 0)
-            {
-                return View("Errors", model);
-            }
-
+            model.WarningContentRules = warningContentRule;
             var shipments = validationSummary.PrenotificationMovements.Select(p => p.ShipmentNumber).ToList();
 
             var shipmentsModel = new ShipmentMovementDocumentsViewModel(notificationId, shipments, model.File.FileName);
+
+            if (model.ErrorsCount > 0 || model.WarningsCount > 0)
+            {
+                TempData["PrenotificationShipments"] = shipments;
+                TempData["PreNotificationFileName"] = model.File.FileName;
+                return View("Errors", model);
+            }
 
             TempData["PrenotificationShipments"] = shipments;
             TempData["PreNotificationFileName"] = model.File.FileName;
 
             return View("Documents", shipmentsModel);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Errors(Guid notificationId, PrenotificationBulkUploadViewModel model)
+        {
+            return RedirectToAction("Documents");
         }
 
         [HttpGet]
