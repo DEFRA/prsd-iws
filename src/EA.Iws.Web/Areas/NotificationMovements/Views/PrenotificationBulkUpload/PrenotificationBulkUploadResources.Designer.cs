@@ -242,6 +242,33 @@ namespace EA.Iws.Web.Areas.NotificationMovements.Views.PrenotificationBulkUpload
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You have uploaded:.
+        /// </summary>
+        public static string SuccessText {
+            get {
+                return ResourceManager.GetString("SuccessText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your prenotifications of shipments {0} have now been recorded in the IWS service..
+        /// </summary>
+        public static string SuccessTextMultipleShipments {
+            get {
+                return ResourceManager.GetString("SuccessTextMultipleShipments", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your prenotification of shipment {0} has now been recorded in the IWS service..
+        /// </summary>
+        public static string SuccessTextSingleShipment {
+            get {
+                return ResourceManager.GetString("SuccessTextSingleShipment", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Success.
         /// </summary>
         public static string SuccessTitle {
