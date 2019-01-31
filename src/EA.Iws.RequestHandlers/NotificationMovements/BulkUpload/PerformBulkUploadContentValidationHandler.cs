@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Data;
+    using System.Linq;
     using System.Threading.Tasks;
     using Core.Movement.Bulk;
     using Domain.Movement.BulkUpload;
@@ -29,13 +30,16 @@
         {
             var result = message.BulkMovementRulesSummary;
 
-            result.PrenotificationMovements = mapper.Map(message.DataTable);
+            var movements = mapper.Map(message.DataTable);
 
-            result.ContentRulesResults = await GetContentRules(result.PrenotificationMovements, message.NotificationId);
+            result.ContentRulesResults = await GetContentRules(movements, message.NotificationId);
 
             if (result.IsContentRulesSuccess)
             {
-                result.DraftSaved = await SaveAsDraft(message.NotificationId, result.PrenotificationMovements, message.FileName);
+                result.ShipmentNumbers =
+                    movements.Where(m => m.ShipmentNumber.HasValue).Select(m => m.ShipmentNumber.Value);
+
+                result.DraftBulkUploadId = await SaveAsDraft(message.NotificationId, movements, message.FileName);
             }
 
             return result;
@@ -53,7 +57,7 @@
             return rules;
         }
 
-        private async Task<bool> SaveAsDraft(Guid notificationId, List<PrenotificationMovement> movements, string fileName)
+        private async Task<Guid> SaveAsDraft(Guid notificationId, List<PrenotificationMovement> movements, string fileName)
         {
             Guid id;
 
@@ -66,7 +70,7 @@
                 id = Guid.Empty;
             }
 
-            return id != Guid.Empty;
+            return id;
         }
     }
 }
