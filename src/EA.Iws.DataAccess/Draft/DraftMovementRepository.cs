@@ -21,8 +21,6 @@
 
         public async Task<Guid> Add(Guid notificationId, List<PrenotificationMovement> movements, string fileName)
         {
-            Guid result;
-
             using (var transaction = context.Database.BeginTransaction())
             {
                 try
@@ -48,7 +46,7 @@
                         await context.SaveChangesAsync();
                     }
 
-                    result = draftMovement.Id;
+                    return draftMovement.Id;
                 }
                 catch
                 {
@@ -56,9 +54,9 @@
                 }
 
                 transaction.Commit();
-            }
 
-            return result;
+                return Guid.Empty;
+            }
         }
     }
 }
