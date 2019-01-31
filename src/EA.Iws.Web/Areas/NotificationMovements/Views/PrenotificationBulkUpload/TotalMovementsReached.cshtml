@@ -1,0 +1,17 @@
+﻿@using EA.Iws.Web.Areas.NotificationMovements.Views.PrenotificationBulkUpload
+@{
+    ViewBag.Title = TotalMovementsReachedResources.Title;
+}
+
+<h1 class="heading-large">@TotalMovementsReachedResources.Title</h1>
+
+<p>@TotalMovementsReachedResources.YouCantGenerateAnyMorePrenotificationsParagraph</p>
+
+<ol class="list-number">
+    <li>@TotalMovementsReachedResources.ListItem1</li>
+    <li>@TotalMovementsReachedResources.ListItem2 @Html.IwsContactEmail()</li>
+</ol>
+
+<p>@TotalMovementsReachedResources.PleaseNoteParagraph</p>
+
+@Html.ActionLink("Continue", "Index", "Options", new { area = "NotificationApplication", id = ViewContext.RouteData.Values["notificationId"] }, new { @class = "button" })

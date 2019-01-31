@@ -1,0 +1,11 @@
+﻿@using EA.Iws.Web.Areas.NotificationMovements.Views.PrenotificationBulkUpload
+@{
+    ViewBag.Title = @ConsentPeriodExpiredResources.Title;
+}
+
+<h1 class="heading-large">@ConsentPeriodExpiredResources.Title</h1>
+
+<p>@ConsentPeriodExpiredResources.YouCantGenerateAnyMorePrenotificationsParagraph</p>
+
+
+@Html.ActionLink("Continue", "Index", "Options", new { area = "NotificationApplication", id = ViewContext.RouteData.Values["notificationId"] }, new { @class = "button" })
