@@ -6,26 +6,40 @@
     Layout = "~/Views/Shared/_Layout.GovUK.Sections.cshtml";
 }
 
+<style>
+
+    .margin-left-75
+    {
+        margin-left: 75px !important;
+    }
+
+    .summary-file-icon
+    {
+        position: absolute;
+    }
+
+</style>
+
 <div class="grid-row">
     <div class="column-full">
-        <h1 class="heading-large">@Resources.SuccessHeaderText</h1>
+        <div class="margin-bottom-30">
+            <h1 class="heading-large">@Resources.SuccessHeaderText</h1>
+        </div>
         <div>
-            <div class="grid-row column-quarter">
-                <img class="summary-file-icon" src="@Url.Content("~/Content/images/file-icon.png")" alt="">
-            </div>
-            <div class="column-quarter">
-                <span class="margin-bottom-30 margin-top-30">@Resources.SuccessText</span>
-                <div class="grid-row margin-bottom-30 margin-top-30">
+            <img class="summary-file-icon" src="@Url.Content("~/Content/images/file-icon.png")" alt="">
+            <span class="margin-left-75 margin-bottom-30 margin-top-30">@Resources.SuccessText</span>
+            <div class="margin-left-75">
+                <div class="margin-bottom-30 margin-top-30">
+                    <img class="summary-confirmation-icon" src="@Url.Content("~/Content/images/confirmation-icon.png")" alt="">
                     <span>@Model.PreNotificationFileName</span>
-                    <img class="summary-confirmation-icon" src="@Url.Content("~/Content/images/confirmation-icon.png")" alt="">
                 </div>
-                <div class="grid-row margin-bottom-30 margin-top-30">
-                    <span>@Model.ShipmentMovementFileName</span>
+                <div class="margin-bottom-30 margin-top-30">
                     <img class="summary-confirmation-icon" src="@Url.Content("~/Content/images/confirmation-icon.png")" alt="">
+                    <span>@Model.ShipmentMovementFileName</span>
                 </div>
             </div>
         </div>
-        <div class="column-full">
+        <div>
             @if (Model.Shipments.Count > 1)
             {
                 <p>@string.Format(Resources.SuccessTextMultipleShipments, Model.GetShipments)</p>
