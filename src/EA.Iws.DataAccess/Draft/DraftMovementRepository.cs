@@ -50,10 +50,9 @@
 
                     result = draftMovement.Id;
                 }
-                catch (Exception e)
+                catch
                 {
                     transaction.Rollback();
-                    throw e;
                 }
 
                 transaction.Commit();

@@ -65,7 +65,7 @@
             {
                 id = await repository.Add(notificationId, movements, fileName);
             }
-            catch (Exception e)
+            catch
             {
                 id = Guid.Empty;
             }
