@@ -3,6 +3,8 @@
     using System;
     using System.Collections.Generic;
     using System.Data;
+    using System.Linq;
+    using System.Text.RegularExpressions;
     using System.Threading.Tasks;
     using Core.Movement.Bulk;
     using Prsd.Core.Mapper;
@@ -27,12 +29,22 @@
 
             result.PrenotificationMovements = mapper.Map(message.DataTable);
 
-            result.ContentRulesResults = await GetContentRules(result.PrenotificationMovements, message.NotificationId);
+            bool addFirstRowWarningRule = false;
+
+            if (message.IsCsv)
+            {
+                if (!CheckFirstRow(result.PrenotificationMovements))
+                {
+                    addFirstRowWarningRule = true;
+                }
+            }
+
+            result.ContentRulesResults = await GetContentRules(result.PrenotificationMovements, message.NotificationId, addFirstRowWarningRule);
 
             return result;
         }
 
-        private async Task<List<ContentRuleResult<BulkMovementContentRules>>> GetContentRules(List<PrenotificationMovement> movements, Guid notificationId)
+        private async Task<List<ContentRuleResult<BulkMovementContentRules>>> GetContentRules(List<PrenotificationMovement> movements, Guid notificationId, bool addFirstRowWarningRule)
         {
             var rules = new List<ContentRuleResult<BulkMovementContentRules>>();
 
@@ -41,7 +53,35 @@
                 rules.Add(await rule.GetResult(movements, notificationId));
             }
 
+            if (addFirstRowWarningRule)
+            {
+                rules.Add(new ContentRuleResult<BulkMovementContentRules>(BulkMovementContentRules.HeaderDataRemoved, Core.Rules.MessageLevel.Warning, Prsd.Core.Helpers.EnumHelper.GetDisplayName(BulkMovementContentRules.HeaderDataRemoved)));
+            }
+
             return rules;
+        }
+
+        private bool CheckFirstRow(List<PrenotificationMovement> movements)
+        {
+            if (!IsValidNotificationNumber(movements[0].NotificationNumber))
+            {
+                movements.RemoveAt(0);
+                return false;
+            }
+            
+            return true;
+        }
+
+        private bool IsValidNotificationNumber(string input)
+        {
+            var match = Regex.Match(input.Replace(" ", string.Empty), @"(GB)(\d{4})(\d{6})");
+
+            if (match.Success)
+            {
+                return true;
+            }
+
+            return false;
         }
     }
 }

@@ -6,7 +6,6 @@
     ViewBag.Title = Resources.ErrorsTitle;
     Layout = "~/Views/Shared/_Layout.GovUK.Sections.cshtml";
 }
-
 <div class="grid-row">
     <div class="column-full">
         <header class="hgroup text">
@@ -18,7 +17,7 @@
         <p>@Resources.ErrorsFileAdvice</p>
 
         @if (Model.ErrorsCount > 0)
-        {
+            {
             <div class="form-group">
                 <details>
                     <summary class="summary-error">
@@ -57,31 +56,31 @@
                                     @if (rule.Rule == BulkMovementContentRules.ThreeWorkingDaysToShipment)
                                     {
                                         <br />
-                                        <div class="grid-row">
-                                            <div class="column-quarter" style="max-width: 5%">
-                                                <i class="icon icon-important">
-                                                    <span class="visually-hidden">Warning</span>
-                                                </i>
+                                            <div class="grid-row">
+                                                <div class="column-quarter" style="max-width: 5%">
+                                                    <i class="icon icon-important">
+                                                        <span class="visually-hidden">Warning</span>
+                                                    </i>
+                                                </div>
+                                                <div class="column-two-thirds">
+                                                    <p>
+                                                        <strong class="bold-small">
+                                                            @Resources.Action
+                                                        </strong>
+                                                    </p>
+                                                    <p>
+                                                        @Resources.AmendActualDate
+                                                    </p>
+                                                    <p>
+                                                        <strong class="bold-small">
+                                                            @Resources.Or
+                                                        </strong>
+                                                    </p>
+                                                    <p>
+                                                        @Resources.RemoveShipment
+                                                    </p>
+                                                </div>
                                             </div>
-                                            <div class="column-two-thirds">
-                                                <p>
-                                                    <strong class="bold-small">
-                                                        @Resources.Action
-                                                    </strong>
-                                                </p>
-                                                <p>
-                                                    @Resources.AmendActualDate
-                                                </p>
-                                                <p>
-                                                    <strong class="bold-small">
-                                                        @Resources.Or
-                                                    </strong>
-                                                </p>
-                                                <p>
-                                                    @Resources.RemoveShipment
-                                                </p>
-                                            </div>
-                                        </div>
                                     }
                                 </div>
                             }
@@ -90,7 +89,43 @@
                 </details>
             </div>
         }
+
+        @if (Model.WarningsCount > 0)
+            {
+            <div class="form-group">
+                <details>
+                    <summary class="summary-warning">
+                        <h2 class="summary-warning-heading-xsmall">@Resources.ViewWarnings</h2>
+                    </summary>
+                    <div class="summary-warning-panel">
+                        @if (Model.WarningContentRules != null)
+                        {
+                            foreach (var rule in Model.WarningContentRules)
+                            {
+                                <div class="summary-warning-row">
+                                    <div class="grid-row">
+                                        <div class="column-two-thirds">
+                                            @Html.Raw(rule.ErrorMessage)
+                                        </div>
+                                    </div>
+                                </div>
+                                if (rule.Rule == BulkMovementContentRules.HeaderDataRemoved && Model.ErrorsCount == 0)
+                                {
+                                    using (Html.BeginForm("Errors", null, null))
+                                    {
+                                        @Html.AntiForgeryToken()
+                                        @Html.Gds().ValidationSummary()
+                                        <button class="button" type="submit">@Constants.ContinueOnlyButtonText</button>
+                                    }
+                                }
+                            }
+                        }
+                    </div>
+                </details>
+            </div>
+        }
     </div>
 </div>
+
 
 @Html.ActionLink(Resources.ReturnToUpload, "UploadPrenotifications", "PrenotificationBulkUpload", new { notificationId = @Model.NotificationId, area = "NotificationMovements" }, new { @class = "button" })

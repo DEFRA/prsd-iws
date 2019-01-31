@@ -17,13 +17,17 @@
 
         public DataTable DataTable { get; private set; }
 
+        public bool IsCsv { get; private set; }
+
         public PerformBulkUploadContentValidation(BulkMovementRulesSummary bulkMovementRulesSummary, 
             Guid notificationId, 
-            DataTable dataTable)
+            DataTable dataTable,
+            bool isCsv)
         {
             BulkMovementRulesSummary = bulkMovementRulesSummary;
             NotificationId = notificationId;
             DataTable = dataTable;
+            IsCsv = isCsv;
         }
     }
 }
