@@ -2,8 +2,8 @@
 {
     using Autofac;
     using Domain.FileStore;
+    using Domain.Movement.BulkUpload;
     using Draft;
-    using Draft.BulkUpload;
     using Filestore;
     using Prsd.Core.DataAccess.Mapper;
     using Prsd.Core.Mapper;

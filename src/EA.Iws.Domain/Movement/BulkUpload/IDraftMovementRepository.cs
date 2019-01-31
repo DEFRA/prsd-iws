@@ -1,4 +1,4 @@
-﻿namespace EA.Iws.DataAccess.Draft.BulkUpload
+﻿namespace EA.Iws.Domain.Movement.BulkUpload
 {
     using System;
     using System.Collections.Generic;

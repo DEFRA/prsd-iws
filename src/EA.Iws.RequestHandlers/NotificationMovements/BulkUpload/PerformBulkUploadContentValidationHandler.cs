@@ -5,7 +5,7 @@
     using System.Data;
     using System.Threading.Tasks;
     using Core.Movement.Bulk;
-    using DataAccess.Draft.BulkUpload;
+    using Domain.Movement.BulkUpload;
     using Prsd.Core.Mapper;
     using Prsd.Core.Mediator;
     using Requests.Movement;

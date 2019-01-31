@@ -1,4 +1,4 @@
-﻿namespace EA.Iws.DataAccess.Draft.BulkUpload
+﻿namespace EA.Iws.DataAccess.Draft
 {
     using System;
     using System.Collections.Generic;

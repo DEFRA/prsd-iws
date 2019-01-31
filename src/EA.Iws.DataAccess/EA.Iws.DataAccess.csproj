@@ -75,8 +75,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConfigurationRegistrarExtensions.cs" />
-    <Compile Include="Draft\BulkUpload\DraftMovementRepository.cs" />
-    <Compile Include="Draft\BulkUpload\IDraftMovementRepository.cs" />
+    <Compile Include="Draft\DraftMovementRepository.cs" />
     <Compile Include="Draft\DraftContext.cs" />
     <Compile Include="Draft\DraftImportNotificationRepository.cs" />
     <Compile Include="Draft\IDraftImportNotificationRepository.cs" />
