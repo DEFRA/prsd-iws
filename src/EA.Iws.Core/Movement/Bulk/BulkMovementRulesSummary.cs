@@ -27,6 +27,12 @@
             get { return ContentRulesResults.All(r => r.MessageLevel == MessageLevel.Success); }
         }
 
+        public BulkMovementRulesSummary()
+        {
+            FileRulesResults = new List<RuleResult<BulkMovementFileRules>>();
+            ContentRulesResults = new List<ContentRuleResult<BulkMovementContentRules>>();
+        }
+
         public BulkMovementRulesSummary(IEnumerable<RuleResult<BulkMovementFileRules>> fileRules)
         {
             FileRulesResults = fileRules ?? new List<RuleResult<BulkMovementFileRules>>();

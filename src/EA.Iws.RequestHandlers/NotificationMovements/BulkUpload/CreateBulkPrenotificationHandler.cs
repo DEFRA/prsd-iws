@@ -23,7 +23,7 @@
         private readonly IFileRepository fileRepository;
 
         public CreateBulkPrenotificationHandler(INotificationApplicationRepository notificationRepository,
-        IDraftMovementRepository draftMovementRepository,
+            IDraftMovementRepository draftMovementRepository,
             IwsContext context,
             MovementFactory movementFactory,
             MovementDetailsFactory movementDetailsFactory,
