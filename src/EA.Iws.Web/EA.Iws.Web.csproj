@@ -1024,7 +1024,7 @@
     <Content Include="Areas\NotificationMovements\Views\PrenotificationBulkUpload\Warning.cshtml" />
     <Content Include="Areas\NotificationMovements\Views\PrenotificationBulkUpload\Errors.cshtml" />
     <Content Include="Areas\NotificationMovements\Views\PrenotificationBulkUpload\Documents.cshtml" />
-    <Content Include="Areas\NotificationMovements\Views\PrenotificationBulkUpload\Succes.cshtml" />
+    <Content Include="Areas\NotificationMovements\Views\PrenotificationBulkUpload\Success.cshtml" />
     <Content Include="Areas\NotificationMovements\Views\PrenotificationBulkUpload\ConsentWithdrawn.cshtml" />
     <Content Include="Areas\NotificationMovements\Views\PrenotificationBulkUpload\TotalIntendedQuantityReached.cshtml" />
     <Content Include="Areas\NotificationMovements\Views\PrenotificationBulkUpload\TotalIntendedQuantityExceeded.cshtml" />

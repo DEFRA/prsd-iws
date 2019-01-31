@@ -27,6 +27,14 @@
 
         public string PreNotificationFileName { get; set; }
 
+        public string ShipmentMovementFileName
+        {
+            get
+            {
+                return File.FileName;
+            }
+        }
+
         public string FileSuccessMessage { get; set; }
 
         [Display(Name = "Upload the file containing your shipment movement documents")]
@@ -46,9 +54,17 @@
             {
                 string returnString = string.Empty;
 
-                foreach (int? shipment in Shipments)
+                for (int i = 0; i < Shipments.Count; i++)
                 {
-                    returnString += shipment + ", ";
+                    returnString += Shipments[i].ToString() + ", ";
+                    if (i == Shipments.Count - 2)
+                    {
+                        if (Shipments.Count.Equals(2))
+                        {
+                            returnString = returnString.Trim().TrimEnd(',');
+                        }
+                        returnString = string.Concat(returnString.Trim(), " and ");
+                    }
                 }
 
                 return returnString.Trim().TrimEnd(',');

@@ -112,7 +112,7 @@
 
             if (model.ErrorsCount > 0)
             {
-                return RedirectToAction("Errors", model);
+                return View("Errors", model);
             }
 
             var shipments = validationSummary.PrenotificationMovements.Select(p => p.ShipmentNumber).ToList();
@@ -160,13 +160,44 @@
             }
 
             // TODO: save data...
+            
+            object fileNameObj;
+            object shipmentsObj;
 
-            return View("Succes", model);
+            if (TempData.TryGetValue("PreNotificationFileName", out fileNameObj))
+            {
+                model.PreNotificationFileName = fileNameObj as string;
+            }
+            if (TempData.TryGetValue("PrenotificationShipments", out shipmentsObj))
+            {
+                model.Shipments = shipmentsObj as List<int?>;
+            }
+
+            return View("Success", model);
         }
 
         [HttpGet]
-        public ActionResult Errors(Guid notificationId, PrenotificationBulkUploadViewModel model)
+        public ActionResult Success(Guid notificationId)
         {
+            var fileName = string.Empty;
+            var shipments = new List<int?>();
+            object fileNameObj;
+            object shipmentsObj;
+
+            if (TempData.TryGetValue("PreNotificationFileName", out fileNameObj))
+            {
+                fileName = fileNameObj as string;
+            }
+            if (TempData.TryGetValue("PrenotificationShipments", out shipmentsObj))
+            {
+                shipments = shipmentsObj as List<int?>;
+            }
+
+            TempData["PrenotificationShipments"] = shipments;
+            TempData["PreNotificationFileName"] = fileName;
+
+            var model = new ShipmentMovementDocumentsViewModel(notificationId, shipments, fileName);
+
             return View(model);
         }
 
