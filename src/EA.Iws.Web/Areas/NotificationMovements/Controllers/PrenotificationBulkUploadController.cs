@@ -2,14 +2,17 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.IO;
     using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Core.Movement;
     using Core.Rules;
+    using Infrastructure;
     using Infrastructure.BulkUpload;
     using Prsd.Core.Mediator;
     using Requests.NotificationMovements;
+    using Requests.NotificationMovements.BulkUpload;
     using ViewModels.PrenotificationBulkUpload;
 
     [Authorize]
@@ -17,11 +20,13 @@
     {
         private readonly IMediator mediator;
         private readonly IBulkMovementValidator validator;
+        private readonly IFileReader fileReader;
 
-        public PrenotificationBulkUploadController(IMediator mediator, IBulkMovementValidator validator)
+        public PrenotificationBulkUploadController(IMediator mediator, IBulkMovementValidator validator, IFileReader fileReader)
         {
             this.mediator = mediator;
             this.validator = validator;
+            this.fileReader = fileReader;
         }
 
         [HttpGet]
@@ -154,7 +159,7 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Documents(Guid notificationId, ShipmentMovementDocumentsViewModel model)
+        public async Task<ActionResult> Documents(Guid notificationId, ShipmentMovementDocumentsViewModel model)
         {
             if (!ModelState.IsValid)
             {
@@ -169,7 +174,12 @@
 
                 if (draftBulkUploadId != null && draftBulkUploadId != Guid.Empty)
                 {
-                    // TODO: Save data
+                    var fileExtension = Path.GetExtension(model.File.FileName);
+                    var uploadedFile = await fileReader.GetFileBytes(model.File);
+
+                    await
+                        mediator.SendAsync(new CreateBulkPrenotification(notificationId, draftBulkUploadId.Value,
+                            uploadedFile, fileExtension));
 
                     TempData["ShipmentMovementFileName"] = model.File.FileName;
                     return RedirectToAction("Success");

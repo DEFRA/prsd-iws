@@ -15,8 +15,6 @@
         public List<PrenotificationMovement> PrenotificationMovements { get; set; }
         public IEnumerable<int> ShipmentNumbers { get; set; }
 
-        public bool DraftSaved { get; set; }
-
         public Guid DraftBulkUploadId { get; set; }
 
         public bool IsFileRulesSuccess

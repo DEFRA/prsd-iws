@@ -12,5 +12,13 @@
         public string CreatedBy { get; set; }
 
         public string FileName { get; set; }
+
+        public DraftBulkUpload(Guid notificationId, DateTime createDate, string createdBy, string fileName)
+        {
+            NotificationId = notificationId;
+            CreatedDate = createDate;
+            CreatedBy = createdBy;
+            FileName = fileName;
+        }
     }
 }

@@ -39,7 +39,7 @@
                 result.ShipmentNumbers =
                     movements.Where(m => m.ShipmentNumber.HasValue).Select(m => m.ShipmentNumber.Value);
 
-                result.DraftBulkUploadId = await SaveAsDraft(message.NotificationId, movements, message.FileName);
+                result.DraftBulkUploadId = await repository.Add(message.NotificationId, movements, message.FileName);
             }
 
             return result;
@@ -55,22 +55,6 @@
             }
 
             return rules;
-        }
-
-        private async Task<Guid> SaveAsDraft(Guid notificationId, List<PrenotificationMovement> movements, string fileName)
-        {
-            Guid id;
-
-            try
-            {
-                id = await repository.Add(notificationId, movements, fileName);
-            }
-            catch
-            {
-                id = Guid.Empty;
-            }
-
-            return id;
         }
     }
 }
