@@ -7,6 +7,6 @@
 
     public interface IDraftMovementRepository
     {
-        Task<Guid> Add(Guid notificationId, List<PrenotificationMovement> movements);
+        Task<Guid> Add(Guid notificationId, List<PrenotificationMovement> movements, string fileName);
     }
 }

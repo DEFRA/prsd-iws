@@ -31,7 +31,10 @@
             var bulkMovementRulesSummary = new BulkMovementRulesSummary(resultFileRules);
             if (bulkMovementRulesSummary.IsFileRulesSuccess)
             {
-                bulkMovementRulesSummary = await mediator.SendAsync(new PerformBulkUploadContentValidation(bulkMovementRulesSummary, notificationId, DataTable));
+                bulkMovementRulesSummary =
+                    await
+                        mediator.SendAsync(new PerformBulkUploadContentValidation(bulkMovementRulesSummary,
+                            notificationId, DataTable, file.FileName));
             }
             return bulkMovementRulesSummary;
         }

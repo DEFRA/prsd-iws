@@ -4,6 +4,7 @@ CREATE TABLE [Draft].[BulkUpload]
     [NotificationId] UNIQUEIDENTIFIER NOT NULL, 
     [CreatedDate] DATE NULL, 
     [CreatedBy] NVARCHAR(256) NULL,
+	[FileName] NVARCHAR(256) NULL,
 	[RowVersion] [timestamp] NOT NULL,
     CONSTRAINT [PK_Draft_BulkUpload] PRIMARY KEY CLUSTERED ([Id] ASC)
 )

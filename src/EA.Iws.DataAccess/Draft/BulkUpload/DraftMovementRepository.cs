@@ -19,7 +19,7 @@
             this.userContext = userContext;
         }
 
-        public async Task<Guid> Add(Guid notificationId, List<PrenotificationMovement> movements)
+        public async Task<Guid> Add(Guid notificationId, List<PrenotificationMovement> movements, string fileName)
         {
             Guid result;
 
@@ -31,7 +31,8 @@
                     {
                         NotificationId = notificationId,
                         CreatedDate = SystemTime.UtcNow,
-                        CreatedBy = userContext.UserId.ToString()
+                        CreatedBy = userContext.UserId.ToString(),
+                        FileName = fileName
                     };
 
                     context.DraftBulkUploads.Add(draftMovement);

@@ -35,7 +35,7 @@
 
             if (result.IsContentRulesSuccess)
             {
-                result.DraftSaved = await SaveAsDraft(message.NotificationId, result.PrenotificationMovements);
+                result.DraftSaved = await SaveAsDraft(message.NotificationId, result.PrenotificationMovements, message.FileName);
             }
 
             return result;
@@ -53,13 +53,13 @@
             return rules;
         }
 
-        private async Task<bool> SaveAsDraft(Guid notificationId, List<PrenotificationMovement> movements)
+        private async Task<bool> SaveAsDraft(Guid notificationId, List<PrenotificationMovement> movements, string fileName)
         {
             Guid id;
 
             try
             {
-                id = await repository.Add(notificationId, movements);
+                id = await repository.Add(notificationId, movements, fileName);
             }
             catch (Exception e)
             {
