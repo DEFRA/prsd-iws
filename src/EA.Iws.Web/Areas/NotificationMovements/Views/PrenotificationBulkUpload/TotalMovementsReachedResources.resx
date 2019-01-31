@@ -117,121 +117,22 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="ErrorsContactUs" xml:space="preserve">
-    <value>You must resolve all errors listed below before uploading your prenotification data again. If you experience further problems, contact askshipments@environment-agency.gov.uk for further advice.</value>
+  <data name="ContactEmail" xml:space="preserve">
+    <value>askshipments@environment-agency.gov.uk</value>
   </data>
-  <data name="ErrorsFileAdvice" xml:space="preserve">
-    <value>The errors listed below are problems found during the validation of the .xlsx or. csv file content. These errors prevent the service from accepting your data, therefore all errors must be amended before attempting to re-upload your data.</value>
+  <data name="ListItem1" xml:space="preserve">
+    <value>submit a new notification and get consent for it, or</value>
   </data>
-  <data name="ErrorsHeaderText" xml:space="preserve">
-    <value>Your prenotification data file contains {0} errors</value>
+  <data name="ListItem2" xml:space="preserve">
+    <value>request an increase in your shipment limit by contacting us at</value>
   </data>
-  <data name="ErrorsTitle" xml:space="preserve">
-    <value>Bulk upload errors</value>
+  <data name="PleaseNoteParagraph" xml:space="preserve">
+    <value>Please note: Before we can approve an increase in your shipment limit, we need to check that you have sufficient quantity and time left.</value>
   </data>
-  <data name="NotificationOptionsLink" xml:space="preserve">
-    <value>Go to notification options</value>
+  <data name="Title" xml:space="preserve">
+    <value>You've reached your shipment limit</value>
   </data>
-  <data name="ReturnToUpload" xml:space="preserve">
-    <value>Return to upload</value>
-  </data>
-  <data name="StartButtonText" xml:space="preserve">
-    <value>Start</value>
-  </data>
-  <data name="StartHeader" xml:space="preserve">
-    <value>Bulk upload of prenotification data</value>
-  </data>
-  <data name="StartText1" xml:space="preserve">
-    <value>Upload multiple prenotifications and the accompanying shipment movement documents to your notification.</value>
-  </data>
-  <data name="StartText2" xml:space="preserve">
-    <value> to avoid any errors in your data.</value>
-  </data>
-  <data name="StartText3" xml:space="preserve">
-    <value>If you leave the process before adding your accompanying shipment movement documents, your bulk upload of prenotifications will not be saved.</value>
-  </data>
-  <data name="TemplateLinkText" xml:space="preserve">
-    <value>Download the data file templates</value>
-  </data>
-  <data name="UploadPrenotificationsList1" xml:space="preserve">
-    <value>The data file should not exceed 2GB in size.</value>
-  </data>
-  <data name="UploadPrenotificationsList2" xml:space="preserve">
-    <value>Remove all column headings from a CSV file type.</value>
-  </data>
-  <data name="UploadPrenotificationsList3" xml:space="preserve">
-    <value>Only contain shipment records for new shipments, no duplicates will be accepted.</value>
-  </data>
-  <data name="UploadPrenotificationsList4" xml:space="preserve">
-    <value>The actual shipment date should be recorded in dd/mm/yyyy format.</value>
-  </data>
-  <data name="UploadPrenotificationsList5" xml:space="preserve">
-    <value>The actual shipment date must be at least 3 working days from the current date.</value>
-  </data>
-  <data name="UploadPrenotificationsList6" xml:space="preserve">
-    <value>The quantity unit of measurement and packaging type must adhere to those that have been consented to.</value>
-  </data>
-  <data name="UploadPrenotificationsTabTitle" xml:space="preserve">
-    <value>Prenotifications Bulk Upload</value>
-  </data>
-  <data name="UploadPrenotificationsText1" xml:space="preserve">
-    <value>Upload the prenotification data file in an Excel or .CSV format.</value>
-  </data>
-  <data name="UploadPrenotificationsText2" xml:space="preserve">
-    <value>Make sure all data matches the correct template format to avoid validation errors.</value>
-  </data>
-  <data name="UploadPrenotificationsTitle" xml:space="preserve">
-    <value>Bulk upload of prenotification data</value>
-  </data>
-  <data name="WarningHeader" xml:space="preserve">
-    <value>You haven't added any shipment movement documents</value>
-  </data>
-  <data name="WarningText1" xml:space="preserve">
-    <value>You must upload shipment movement documents with your prenotification data file to finish the process.</value>
-  </data>
-  <data name="WarningText2" xml:space="preserve">
-    <value>If you leave the process before adding your accompanying shipment movement documents, your bulk upload of prenotifications will not be saved.</value>
-  </data>
-  <data name="ViewErrors" xml:space="preserve">
-    <value>View Errors</value>
-  </data>
-  <data name="Action" xml:space="preserve">
-    <value>Action</value>
-  </data>
-  <data name="AmendActualDate" xml:space="preserve">
-    <value>Amend the actual date of shipment to be greater than three working days</value>
-  </data>
-  <data name="Or" xml:space="preserve">
-    <value>or</value>
-  </data>
-  <data name="RemoveShipment" xml:space="preserve">
-    <value>Remove the row of data from the data file and use the existing ‘generate a prenotification’ journey to inform us of these shipments</value>
-  </data>
-  <data name="ShipmentMovementDocumentHeader" xml:space="preserve">
-    <value>Accompanying shipment movement documents</value>
-  </data>
-  <data name="ShipmentMovementInstructions" xml:space="preserve">
-    <value>Upload the accompanying shipment movement documents for shipments:</value>
-  </data>
-  <data name="ShipmentMovementsSuccessText" xml:space="preserve">
-    <value>There were no errors within the {filename} data file.</value>
-  </data>
-  <data name="FinishButton" xml:space="preserve">
-    <value>Finish</value>
-  </data>
-  <data name="SuccessHeaderText" xml:space="preserve">
-    <value>Your bulk upload has been successful</value>
-  </data>
-  <data name="SuccessTitle" xml:space="preserve">
-    <value>Success</value>
-  </data>
-  <data name="SuccessTextMultipleShipments" xml:space="preserve">
-    <value>Your prenotifications of shipments {0} have now been recorded in the IWS service.</value>
-  </data>
-  <data name="SuccessText" xml:space="preserve">
-    <value>You have uploaded:</value>
-  </data>
-  <data name="SuccessTextSingleShipment" xml:space="preserve">
-    <value>Your prenotification of shipment {0} has now been recorded in the IWS service.</value>
+  <data name="YouCantGenerateAnyMorePrenotificationsParagraph" xml:space="preserve">
+    <value>You can't generate any more prenotifications. To continue shipping, you can either:</value>
   </data>
 </root>

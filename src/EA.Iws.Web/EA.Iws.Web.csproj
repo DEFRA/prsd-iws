@@ -1024,7 +1024,12 @@
     <Content Include="Areas\NotificationMovements\Views\PrenotificationBulkUpload\Warning.cshtml" />
     <Content Include="Areas\NotificationMovements\Views\PrenotificationBulkUpload\Errors.cshtml" />
     <Content Include="Areas\NotificationMovements\Views\PrenotificationBulkUpload\Documents.cshtml" />
-    <Content Include="Areas\NotificationMovements\Views\PrenotificationBulkUpload\Succes.cshtml" />
+    <Content Include="Areas\NotificationMovements\Views\PrenotificationBulkUpload\Success.cshtml" />
+    <Content Include="Areas\NotificationMovements\Views\PrenotificationBulkUpload\ConsentWithdrawn.cshtml" />
+    <Content Include="Areas\NotificationMovements\Views\PrenotificationBulkUpload\TotalIntendedQuantityReached.cshtml" />
+    <Content Include="Areas\NotificationMovements\Views\PrenotificationBulkUpload\TotalIntendedQuantityExceeded.cshtml" />
+    <Content Include="Areas\NotificationMovements\Views\PrenotificationBulkUpload\TotalMovementsReached.cshtml" />
+    <Content Include="Areas\NotificationMovements\Views\PrenotificationBulkUpload\ConsentPeriodExpired.cshtml" />
     <None Include="Scripts\jquery-2.1.3.intellisense.js" />
     <Content Include="Scripts\govuk\govuk-template.js" />
     <Content Include="Scripts\govuk\ie.js" />
@@ -2290,10 +2295,35 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Areas\NotificationMovements\ViewModels\PrenotificationBulkUpload\WarningChoiceViewModel.cs" />
+    <Compile Include="Areas\NotificationMovements\Views\PrenotificationBulkUpload\ConsentPeriodExpiredResources.Designer.cs">
+      <DependentUpon>ConsentPeriodExpiredResources.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Areas\NotificationMovements\Views\PrenotificationBulkUpload\ConsentWithdrawnResources.Designer.cs">
+      <DependentUpon>ConsentWithdrawnResources.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Areas\NotificationMovements\Views\PrenotificationBulkUpload\PrenotificationBulkUploadResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>PrenotificationBulkUploadResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\NotificationMovements\Views\PrenotificationBulkUpload\TotalIntendedQuantityExceededResources.Designer.cs">
+      <DependentUpon>TotalIntendedQuantityExceededResources.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Areas\NotificationMovements\Views\PrenotificationBulkUpload\TotalIntendedQuantityReachedResources.Designer.cs">
+      <DependentUpon>TotalIntendedQuantityReachedResources.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Areas\NotificationMovements\Views\PrenotificationBulkUpload\TotalMovementsReachedResources.Designer.cs">
+      <DependentUpon>TotalMovementsReachedResources.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Infrastructure\BulkUpload\BulkMovementValidator.cs" />
     <Compile Include="Infrastructure\BulkUpload\PrenotificationFileSizeRule.cs" />
@@ -4726,9 +4756,29 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>SummaryResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Areas\NotificationMovements\Views\PrenotificationBulkUpload\ConsentPeriodExpiredResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ConsentPeriodExpiredResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\NotificationMovements\Views\PrenotificationBulkUpload\ConsentWithdrawnResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ConsentWithdrawnResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Areas\NotificationMovements\Views\PrenotificationBulkUpload\PrenotificationBulkUploadResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>PrenotificationBulkUploadResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\NotificationMovements\Views\PrenotificationBulkUpload\TotalIntendedQuantityExceededResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>TotalIntendedQuantityExceededResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\NotificationMovements\Views\PrenotificationBulkUpload\TotalIntendedQuantityReachedResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>TotalIntendedQuantityReachedResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\NotificationMovements\Views\PrenotificationBulkUpload\TotalMovementsReachedResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>TotalMovementsReachedResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\NotificationMovements\Views\ReceiptRecovery\IndexResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
