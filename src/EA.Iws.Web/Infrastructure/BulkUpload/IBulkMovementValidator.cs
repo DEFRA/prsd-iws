@@ -9,6 +9,7 @@
     public interface IBulkMovementValidator
     {
         DataTable DataTable { get; set; }
-        Task<BulkMovementRulesSummary> GetValidationSummary(HttpPostedFileBase file, Guid notificationId);
+        Task<BulkMovementRulesSummary> GetPrenotificationValidationSummary(HttpPostedFileBase file, Guid notificationId);
+        Task<BulkMovementRulesSummary> GetShipmentMovementValidationSummary(HttpPostedFileBase file, Guid notificationId);
     }
 }

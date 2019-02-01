@@ -50,7 +50,7 @@
                     result = draftBulkUpload.Id;
                 }
                 catch
-                {
+                { 
                     transaction.Rollback();
                     throw;
                 }
