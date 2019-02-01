@@ -19,23 +19,27 @@
 
         public async Task<ContentRuleResult<BulkMovementContentRules>> GetResult(List<PrenotificationMovement> movements, Guid notificationId)
         {
-            var existingMovements = await this.repo.GetAllMovements(notificationId);
+            var result = MessageLevel.Success;
 
-            return await Task.Run(() =>
+            var existingShipments =
+                (await repo.GetAllMovements(notificationId)).Join(
+                        movements.Where(m => m.ShipmentNumber.HasValue).Select(m => m.ShipmentNumber.Value),
+                        m => m.Number, s => s,
+                        (m, s) => new { Movement = m, ShipmentNumber = s })
+                    .OrderBy(x => x.ShipmentNumber)
+                    .Select(x => x.ShipmentNumber)
+                    .ToList();
+
+            if (existingShipments.Any())
             {
-                var missingDataResult = MessageLevel.Success;
+                result = MessageLevel.Error;
+            }
 
-                int firstNumber = movements.OrderBy(p => p.ShipmentNumber).First().ShipmentNumber.GetValueOrDefault();
+            var shipmentNumbers = string.Join(", ", existingShipments);
 
-                if (firstNumber < existingMovements.Count())
-                {
-                    missingDataResult = MessageLevel.Error;
-                }
+            var errorMessage = string.Format(Prsd.Core.Helpers.EnumHelper.GetDisplayName(BulkMovementContentRules.OnlyNewShipments), shipmentNumbers);
 
-                var errorMessage = string.Format(Prsd.Core.Helpers.EnumHelper.GetDisplayName(BulkMovementContentRules.OnlyNewShipments), firstNumber);
-
-                return new ContentRuleResult<BulkMovementContentRules>(BulkMovementContentRules.OnlyNewShipments, missingDataResult, errorMessage);
-            });
+            return new ContentRuleResult<BulkMovementContentRules>(BulkMovementContentRules.OnlyNewShipments, result, errorMessage);
         }
     }
 }

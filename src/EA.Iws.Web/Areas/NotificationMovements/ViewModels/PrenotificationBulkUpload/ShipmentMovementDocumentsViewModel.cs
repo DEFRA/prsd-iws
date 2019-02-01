@@ -48,17 +48,19 @@
             get
             {
                 var returnString = string.Empty;
-
-                for (var i = 0; i < Shipments.Count(); i++)
+                if (Shipments != null)
                 {
-                    returnString += Shipments.ElementAt(i).ToString() + ", ";
-                    if (i == Shipments.Count() - 2)
+                    for (var i = 0; i < Shipments.Count(); i++)
                     {
-                        if (Shipments.Count() == 2)
+                        returnString += Shipments.ElementAt(i).ToString() + ", ";
+                        if (i == Shipments.Count() - 2)
                         {
-                            returnString = returnString.Trim().TrimEnd(',');
+                            if (Shipments.Count() == 2)
+                            {
+                                returnString = returnString.Trim().TrimEnd(',');
+                            }
+                            returnString = string.Concat(returnString.Trim(), " and ");
                         }
-                        returnString = string.Concat(returnString.Trim(), " and ");
                     }
                 }
 
