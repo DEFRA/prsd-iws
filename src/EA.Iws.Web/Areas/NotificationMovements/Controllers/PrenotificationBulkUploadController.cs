@@ -116,7 +116,7 @@
             model.FailedFileRules = failedFileRules;
             model.FailedContentRules = failedContentRules;
             model.WarningContentRules = warningContentRule;
-            var shipments = validationSummary.PrenotificationMovements != null ? validationSummary.PrenotificationMovements.Select(p => p.ShipmentNumber).ToList() : null;
+            var shipments = validationSummary.ShipmentNumbers != null ? validationSummary.ShipmentNumbers.ToList() : null;
 
             var shipmentsModel = new ShipmentMovementDocumentsViewModel(notificationId, shipments, model.File.FileName);
 
@@ -174,17 +174,12 @@
                 return RedirectToAction("Warning");
             }
 
-
             var validationSummary = await validator.GetShipmentMovementValidationSummary(model.File, notificationId);
             var failedFileRules = validationSummary.FileRulesResults.Where(r => r.MessageLevel == MessageLevel.Error).Select(r => r.Rule).ToList();
 
             // TODO: save data...
 
-            object fileNameObj;
-            object shipmentsObj;
-
             object draftBulkUploadIdObj;
-
 
             if (TempData.TryGetValue("DraftBulkUploadId", out draftBulkUploadIdObj))
             {
