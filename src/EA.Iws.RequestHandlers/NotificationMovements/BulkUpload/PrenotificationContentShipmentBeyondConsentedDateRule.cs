@@ -19,27 +19,25 @@
 
         public async Task<ContentRuleResult<BulkMovementContentRules>> GetResult(List<PrenotificationMovement> movements, Guid notificationId)
         {
-            var shipmentInfo = await this.repo.GetByNotificationId(notificationId);
+            var shipmentInfo = await repo.GetByNotificationId(notificationId);
 
             return await Task.Run(() =>
             {
-                var missingDataResult = MessageLevel.Success;
+                var shipments =
+                    movements.Where(
+                            m =>
+                                m.ShipmentNumber.HasValue && m.ActualDateOfShipment.HasValue &&
+                                m.ActualDateOfShipment.Value > shipmentInfo.ShipmentPeriod.LastDate)
+                                .OrderBy(m => m.ActualDateOfShipment.Value)
+                        .Select(m => m.ShipmentNumber.GetValueOrDefault())
+                        .ToList();
 
-                int errorShipmentNumber = 0;
+                var result = shipments.Any() ? MessageLevel.Error : MessageLevel.Success;
 
-                foreach (var movement in movements.OrderBy(p => p.ActualDateOfShipment))
-                {
-                    if (movement.ActualDateOfShipment > shipmentInfo.ShipmentPeriod.LastDate)
-                    {
-                        missingDataResult = MessageLevel.Error;
-                        errorShipmentNumber = movement.ShipmentNumber.GetValueOrDefault();
-                        break;
-                    }
-                }
+                var shipmentNumbers = string.Join(", ", shipments);
+                var errorMessage = string.Format(Prsd.Core.Helpers.EnumHelper.GetDisplayName(BulkMovementContentRules.BeyondConsentWindow), shipmentNumbers);
 
-                var errorMessage = string.Format(Prsd.Core.Helpers.EnumHelper.GetDisplayName(BulkMovementContentRules.BeyondConsentWindow), errorShipmentNumber);
-
-                return new ContentRuleResult<BulkMovementContentRules>(BulkMovementContentRules.BeyondConsentWindow, missingDataResult, errorMessage);
+                return new ContentRuleResult<BulkMovementContentRules>(BulkMovementContentRules.BeyondConsentWindow, result, errorMessage);
             });
         }
     }

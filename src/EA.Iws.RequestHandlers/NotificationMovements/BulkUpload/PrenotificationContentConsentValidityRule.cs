@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
     using System.Threading.Tasks;
     using Core.Movement.Bulk;
     using Core.Rules;
@@ -22,25 +23,21 @@
 
             return await Task.Run(() =>
             {
-                var contentValidityResult = MessageLevel.Success;
-                var contentValidityShipmentNumbers = new List<string>();
+                var shipments =
+                    movements.Where(
+                            m =>
+                                m.ShipmentNumber.HasValue &&
+                                (m.ActualDateOfShipment.HasValue &&
+                                 !consent.ConsentRange.Contains(m.ActualDateOfShipment.Value)))
+                        .Select(m => m.ShipmentNumber.Value)
+                        .ToList();
 
-                foreach (var movement in movements)
-                {
-                    if (movement.ShipmentNumber.HasValue && movement.ActualDateOfShipment.HasValue)
-                    {
-                        if (!consent.ConsentRange.Contains(movement.ActualDateOfShipment.GetValueOrDefault()))
-                        {
-                            contentValidityResult = MessageLevel.Error;
-                            contentValidityShipmentNumbers.Add(movement.ShipmentNumber.ToString());
-                        }
-                    }
-                }
+                var result = shipments.Any() ? MessageLevel.Error : MessageLevel.Success;
                 
-                var shipmentNumbers = string.Join(", ", contentValidityShipmentNumbers);
+                var shipmentNumbers = string.Join(", ", shipments);
                 var errorMessage = string.Format(Prsd.Core.Helpers.EnumHelper.GetDisplayName(BulkMovementContentRules.ConsentValidity), shipmentNumbers);
 
-                return new ContentRuleResult<BulkMovementContentRules>(BulkMovementContentRules.ConsentValidity, contentValidityResult, errorMessage);
+                return new ContentRuleResult<BulkMovementContentRules>(BulkMovementContentRules.ConsentValidity, result, errorMessage);
             });
         }
     }

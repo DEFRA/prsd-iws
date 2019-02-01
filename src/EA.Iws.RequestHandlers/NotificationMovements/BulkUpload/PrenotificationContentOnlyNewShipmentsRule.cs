@@ -19,9 +19,7 @@
 
         public async Task<ContentRuleResult<BulkMovementContentRules>> GetResult(List<PrenotificationMovement> movements, Guid notificationId)
         {
-            var result = MessageLevel.Success;
-
-            var existingShipments =
+            var shipments =
                 (await repo.GetAllMovements(notificationId)).Join(
                         movements.Where(m => m.ShipmentNumber.HasValue).Select(m => m.ShipmentNumber.Value),
                         m => m.Number, s => s,
@@ -30,13 +28,9 @@
                     .Select(x => x.ShipmentNumber)
                     .ToList();
 
-            if (existingShipments.Any())
-            {
-                result = MessageLevel.Error;
-            }
+            var result = shipments.Any() ? MessageLevel.Error : MessageLevel.Success;
 
-            var shipmentNumbers = string.Join(", ", existingShipments);
-
+            var shipmentNumbers = string.Join(", ", shipments);
             var errorMessage = string.Format(Prsd.Core.Helpers.EnumHelper.GetDisplayName(BulkMovementContentRules.OnlyNewShipments), shipmentNumbers);
 
             return new ContentRuleResult<BulkMovementContentRules>(BulkMovementContentRules.OnlyNewShipments, result, errorMessage);

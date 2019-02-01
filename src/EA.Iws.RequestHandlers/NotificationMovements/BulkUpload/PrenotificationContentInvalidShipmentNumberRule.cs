@@ -23,18 +23,15 @@
 
             return await Task.Run(() =>
             {
-                var missingDataResult = MessageLevel.Success;
+                var lastNumber = movements.OrderByDescending(m => m.ShipmentNumber).First().ShipmentNumber.GetValueOrDefault();
 
-                int lastNumber = movements.OrderByDescending(p => p.ShipmentNumber).First().ShipmentNumber.GetValueOrDefault();
-
-                if (lastNumber > movementSummary.IntendedTotalShipments)
-                {
-                    missingDataResult = MessageLevel.Error;
-                }
+                var result = lastNumber > movementSummary.IntendedTotalShipments
+                    ? MessageLevel.Error
+                    : MessageLevel.Success;
 
                 var errorMessage = string.Format(Prsd.Core.Helpers.EnumHelper.GetDisplayName(BulkMovementContentRules.InvalidShipmentNumber), lastNumber);
 
-                return new ContentRuleResult<BulkMovementContentRules>(BulkMovementContentRules.InvalidShipmentNumber, missingDataResult, errorMessage);
+                return new ContentRuleResult<BulkMovementContentRules>(BulkMovementContentRules.InvalidShipmentNumber, result, errorMessage);
             });
         }
     }

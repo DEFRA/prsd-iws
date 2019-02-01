@@ -13,22 +13,18 @@
         {
             return await Task.Run(() =>
             {
-                var duplicateShipmentNumberResult = MessageLevel.Success;
-                var duplicateShipmentNumbers = movements.Where(m => m.ShipmentNumber.HasValue)
+                var shipments = movements.Where(m => m.ShipmentNumber.HasValue)
                     .GroupBy(x => x.ShipmentNumber)
                     .Where(g => g.Count() > 1)
-                    .Select(y => y.Key.ToString())
+                    .Select(y => y.Key)
                     .ToList();
 
-                if (duplicateShipmentNumbers.Count > 0)
-                {
-                    duplicateShipmentNumberResult = MessageLevel.Error;
-                }
+                var result = shipments.Any() ? MessageLevel.Error : MessageLevel.Success;
 
-                var shipmentNumbers = string.Join(", ", duplicateShipmentNumbers);
+                var shipmentNumbers = string.Join(", ", duplicateShishipmentspmentNumbers);
                 var errorMessage = string.Format(Prsd.Core.Helpers.EnumHelper.GetDisplayName(BulkMovementContentRules.DuplicateShipmentNumber), shipmentNumbers);
 
-                return new ContentRuleResult<BulkMovementContentRules>(BulkMovementContentRules.DuplicateShipmentNumber, duplicateShipmentNumberResult, errorMessage);
+                return new ContentRuleResult<BulkMovementContentRules>(BulkMovementContentRules.DuplicateShipmentNumber, result, errorMessage);
             });
         }
     }

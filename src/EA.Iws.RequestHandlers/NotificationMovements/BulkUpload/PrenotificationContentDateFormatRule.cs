@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
     using System.Threading.Tasks;
     using Core.Movement.Bulk;
     using Core.Rules;
@@ -12,25 +13,17 @@
         {
             return await Task.Run(() =>
             {
-                var invalidFormatResult = MessageLevel.Success;
-                var invalidFormatShipmentNumbers = new List<string>();
+                var shipments =
+                    movements.Where(m => m.ShipmentNumber.HasValue && !m.ActualDateOfShipment.HasValue)
+                        .Select(m => m.ShipmentNumber.Value)
+                        .ToList();
 
-                foreach (var movement in movements)
-                {
-                    // Only report an error if shipment has a shipment number, otherwise record will be picked up by the PrenotificationContentMissingShipmentNumberRule
-                    if (movement.ShipmentNumber.HasValue && 
-                    !movement.MissingDateOfShipment && 
-                    !movement.ActualDateOfShipment.HasValue)
-                    {
-                        invalidFormatResult = MessageLevel.Error;
-                        invalidFormatShipmentNumbers.Add(movement.ShipmentNumber.Value.ToString());
-                    }
-                }
+                var result = shipments.Any() ? MessageLevel.Error : MessageLevel.Success;
 
-                var shipmentNumbers = string.Join(", ", invalidFormatShipmentNumbers);
+                var shipmentNumbers = string.Join(", ", shipments);
                 var errorMessage = string.Format(Prsd.Core.Helpers.EnumHelper.GetDisplayName(BulkMovementContentRules.InvalidDateFormat), shipmentNumbers);
 
-                return new ContentRuleResult<BulkMovementContentRules>(BulkMovementContentRules.InvalidDateFormat, invalidFormatResult, errorMessage);
+                return new ContentRuleResult<BulkMovementContentRules>(BulkMovementContentRules.InvalidDateFormat, result, errorMessage);
             });
         }
     }
