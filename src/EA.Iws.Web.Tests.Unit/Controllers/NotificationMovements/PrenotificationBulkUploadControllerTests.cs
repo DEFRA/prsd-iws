@@ -13,6 +13,7 @@
     using FakeItEasy;
     using Prsd.Core.Mediator;
     using Requests.NotificationMovements;
+    using Web.Infrastructure;
     using Web.Infrastructure.BulkUpload;
     using Web.ViewModels.Shared;
     using Xunit;
@@ -24,10 +25,11 @@
 
         public PrenotificationBulkUploadControllerTests()
         {
-            this.mediator = A.Fake<IMediator>();
+            mediator = A.Fake<IMediator>();
             var validator = A.Fake<IBulkMovementValidator>();
+            var fileReader = A.Fake<IFileReader>();
 
-            controller = new PrenotificationBulkUploadController(this.mediator, validator);
+            controller = new PrenotificationBulkUploadController(this.mediator, validator, fileReader);
 
             var request = A.Fake<HttpRequestBase>();
             var context = A.Fake<HttpContextBase>();

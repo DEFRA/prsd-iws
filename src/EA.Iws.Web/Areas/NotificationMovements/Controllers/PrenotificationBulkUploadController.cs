@@ -2,14 +2,17 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.IO;
     using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Core.Movement;
     using Core.Rules;
+    using Infrastructure;
     using Infrastructure.BulkUpload;
     using Prsd.Core.Mediator;
     using Requests.NotificationMovements;
+    using Requests.NotificationMovements.BulkUpload;
     using ViewModels.PrenotificationBulkUpload;
 
     [Authorize]
@@ -17,11 +20,13 @@
     {
         private readonly IMediator mediator;
         private readonly IBulkMovementValidator validator;
+        private readonly IFileReader fileReader;
 
-        public PrenotificationBulkUploadController(IMediator mediator, IBulkMovementValidator validator)
+        public PrenotificationBulkUploadController(IMediator mediator, IBulkMovementValidator validator, IFileReader fileReader)
         {
             this.mediator = mediator;
             this.validator = validator;
+            this.fileReader = fileReader;
         }
 
         [HttpGet]
@@ -139,7 +144,7 @@
         public ActionResult Documents(Guid notificationId)
         {
             var fileName = string.Empty;
-            var shipments = new List<int?>();
+            var shipments = new List<int>();
             object fileNameObj;
             object shipmentsObj;
 
@@ -149,7 +154,7 @@
             }
             if (TempData.TryGetValue("PrenotificationShipments", out shipmentsObj))
             {
-                shipments = shipmentsObj as List<int?>;
+                shipments = shipmentsObj as List<int>;
             }
 
             TempData["PrenotificationShipments"] = shipments;
@@ -169,6 +174,7 @@
                 return RedirectToAction("Warning");
             }
 
+
             var validationSummary = await validator.GetShipmentMovementValidationSummary(model.File, notificationId);
             var failedFileRules = validationSummary.FileRulesResults.Where(r => r.MessageLevel == MessageLevel.Error).Select(r => r.Rule).ToList();
 
@@ -177,25 +183,39 @@
             object fileNameObj;
             object shipmentsObj;
 
-            if (TempData.TryGetValue("PreNotificationFileName", out fileNameObj))
+            object draftBulkUploadIdObj;
+
+
+            if (TempData.TryGetValue("DraftBulkUploadId", out draftBulkUploadIdObj))
             {
-                model.PreNotificationFileName = fileNameObj as string;
-            }
-            if (TempData.TryGetValue("PrenotificationShipments", out shipmentsObj))
-            {
-                model.Shipments = shipmentsObj as List<int?>;
+                var draftBulkUploadId = draftBulkUploadIdObj as Guid?;
+
+                if (draftBulkUploadId != null && draftBulkUploadId != Guid.Empty)
+                {
+                    var fileExtension = Path.GetExtension(model.File.FileName);
+                    var uploadedFile = await fileReader.GetFileBytes(model.File);
+
+                    await
+                        mediator.SendAsync(new CreateBulkPrenotification(notificationId, draftBulkUploadId.Value,
+                            uploadedFile, fileExtension));
+
+                    TempData["ShipmentMovementFileName"] = model.File.FileName;
+                    return RedirectToAction("Success");
+                }
             }
 
-            return View("Success", model);
+            return View(model);
         }
 
         [HttpGet]
         public ActionResult Success(Guid notificationId)
         {
             var fileName = string.Empty;
-            var shipments = new List<int?>();
+            var shipments = new List<int>();
+            var shipmentMovementFileName = string.Empty;
             object fileNameObj;
             object shipmentsObj;
+            object shipmentDocumentNameObj;
 
             if (TempData.TryGetValue("PreNotificationFileName", out fileNameObj))
             {
@@ -203,13 +223,16 @@
             }
             if (TempData.TryGetValue("PrenotificationShipments", out shipmentsObj))
             {
-                shipments = shipmentsObj as List<int?>;
+                shipments = shipmentsObj as List<int>;
+            }
+            if (TempData.TryGetValue("ShipmentMovementFileName", out shipmentDocumentNameObj))
+            {
+                shipmentMovementFileName = shipmentDocumentNameObj as string;
             }
 
-            TempData["PrenotificationShipments"] = shipments;
-            TempData["PreNotificationFileName"] = fileName;
-
             var model = new ShipmentMovementDocumentsViewModel(notificationId, shipments, fileName);
+
+            model.ShipmentMovementFileName = shipmentMovementFileName;
 
             return View(model);
         }
@@ -235,6 +258,7 @@
             {
                 TempData.Remove("PrenotificationShipments");
                 TempData.Remove("PreNotificationFileName");
+                TempData.Remove("DraftBulkUploadId");
 
                 return RedirectToAction("Index", "Options", new { area = "NotificationApplication", id = model.NotificationId });
             }

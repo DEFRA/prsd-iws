@@ -440,6 +440,7 @@
     <Compile Include="NotificationAssessment\SetExporterContactHandler.cs" />
     <Compile Include="NotificationAssessment\SetNewNumberOfShipmentsHandler.cs" />
     <Compile Include="NotificationAssessment\SetEntryPointHandler.cs" />
+    <Compile Include="NotificationMovements\BulkUpload\CreateBulkPrenotificationHandler.cs" />
     <Compile Include="NotificationMovements\BulkUpload\GetBulkUploadTemplateHandler.cs" />
     <Compile Include="NotificationMovements\BulkUpload\PerformBulkUploadContentValidationHandler.cs" />
     <Compile Include="NotificationMovements\BulkUpload\PrenotificationContentConsentValidityRule.cs" />
