@@ -5,6 +5,7 @@
     using System.Threading.Tasks;
     using Core.Movement.Bulk;
     using Core.Rules;
+    using Prsd.Core;
 
     public class PrenotificationContentDateHistoricRule : IBulkMovementPrenotificationContentRule
     {
@@ -18,7 +19,9 @@
                 foreach (var movement in movements)
                 {
                     // Only report an error if shipment has a shipment number, otherwise record will be picked up by the PrenotificationContentMissingShipmentNumberRule
-                    if (movement.ShipmentNumber.HasValue && movement.ActualDateOfShipment.HasValue && DateTime.Compare(movement.ActualDateOfShipment.Value, DateTime.UtcNow) < 0)
+                    if (movement.ShipmentNumber.HasValue && 
+                    movement.ActualDateOfShipment.HasValue && 
+                    movement.ActualDateOfShipment.Value < SystemTime.UtcNow)
                     {
                         historicDateResult = MessageLevel.Error;
                         historicDateShipmentNumbers.Add(movement.ShipmentNumber.ToString());

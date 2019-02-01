@@ -29,7 +29,9 @@
                 foreach (var movement in movements)
                 {
                     // Only report an error if shipment has a shipment number, otherwise record will be picked up by the PrenotificationContentMissingShipmentNumberRule
-                    if (movement.ShipmentNumber.HasValue && movement.NotificationNumber != notificationNumber)
+                    if (movement.ShipmentNumber.HasValue && 
+                    !movement.MissingNotificationNumber && 
+                    movement.NotificationNumber != notificationNumber)
                     {
                         notificationNumberResult = MessageLevel.Error;
                         notificationNumberShipmentNumbers.Add(movement.ShipmentNumber.ToString());

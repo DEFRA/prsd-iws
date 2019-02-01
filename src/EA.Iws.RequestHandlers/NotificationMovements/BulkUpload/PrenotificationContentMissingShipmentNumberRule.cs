@@ -17,7 +17,7 @@
 
                 foreach (var movement in movements)
                 {
-                    if (!movement.ShipmentNumber.HasValue)
+                    if (movement.MissingShipmentNumber || !movement.ShipmentNumber.HasValue)
                     {
                         missingShipmentNumberResult = MessageLevel.Error;
                         missingShipmentNumberCount++;

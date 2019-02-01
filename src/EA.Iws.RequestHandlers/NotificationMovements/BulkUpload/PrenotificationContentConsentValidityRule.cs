@@ -2,7 +2,6 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Linq;
     using System.Threading.Tasks;
     using Core.Movement.Bulk;
     using Core.Rules;
@@ -26,14 +25,14 @@
                 var contentValidityResult = MessageLevel.Success;
                 var contentValidityShipmentNumbers = new List<string>();
 
-                foreach (var shipment in movements)
+                foreach (var movement in movements)
                 {
-                    if (shipment.ShipmentNumber.HasValue && shipment.ActualDateOfShipment.HasValue)
+                    if (movement.ShipmentNumber.HasValue && movement.ActualDateOfShipment.HasValue)
                     {
-                        if (!consent.ConsentRange.Contains(shipment.ActualDateOfShipment.GetValueOrDefault()))
+                        if (!consent.ConsentRange.Contains(movement.ActualDateOfShipment.GetValueOrDefault()))
                         {
                             contentValidityResult = MessageLevel.Error;
-                            contentValidityShipmentNumbers.Add(shipment.ShipmentNumber.ToString());
+                            contentValidityShipmentNumbers.Add(movement.ShipmentNumber.ToString());
                         }
                     }
                 }
