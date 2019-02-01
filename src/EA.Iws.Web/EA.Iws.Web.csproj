@@ -2286,9 +2286,11 @@
     <Compile Include="Areas\NotificationApplication\Controllers\ShareNotificationController.cs" />
     <Compile Include="Areas\NotificationMovements\Controllers\BulkUploadTemplateController.cs" />
     <Compile Include="Areas\NotificationMovements\Controllers\PrenotificationBulkUploadController.cs" />
+    <Compile Include="Areas\NotificationMovements\Controllers\ReceiptRecoveryBulkUploadController.cs" />
     <Compile Include="Areas\NotificationMovements\ViewModels\BulkUploadTemplate\BulkUploadTemplateViewModel.cs" />
     <Compile Include="Areas\NotificationMovements\ViewModels\PrenotificationBulkUpload\PrenotificationBulkUploadViewModel.cs" />
     <Compile Include="Areas\NotificationMovements\ViewModels\PrenotificationBulkUpload\ShipmentMovementDocumentsViewModel.cs" />
+    <Compile Include="Areas\NotificationMovements\ViewModels\ReceiptRecoveryBulkUpload\ReceiptRecoveryBulkUploadViewModel.cs" />
     <Compile Include="Areas\NotificationMovements\Views\BulkUploadTemplate\BulkUploadTemplateResources.Designer.cs">
       <DependentUpon>BulkUploadTemplateResources.resx</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -2324,6 +2326,11 @@
       <DependentUpon>TotalMovementsReachedResources.resx</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Areas\NotificationMovements\Views\ReceiptRecoveryBulkUpload\ReceiptRecoveryBulkUploadResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReceiptRecoveryBulkUploadResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Infrastructure\BulkUpload\BulkMovementValidator.cs" />
     <Compile Include="Infrastructure\BulkUpload\PrenotificationFileSizeRule.cs" />
@@ -4780,6 +4787,10 @@
     <EmbeddedResource Include="Areas\NotificationMovements\Views\PrenotificationBulkUpload\TotalMovementsReachedResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>TotalMovementsReachedResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\NotificationMovements\Views\ReceiptRecoveryBulkUpload\ReceiptRecoveryBulkUploadResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ReceiptRecoveryBulkUploadResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\NotificationMovements\Views\ReceiptRecovery\IndexResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
