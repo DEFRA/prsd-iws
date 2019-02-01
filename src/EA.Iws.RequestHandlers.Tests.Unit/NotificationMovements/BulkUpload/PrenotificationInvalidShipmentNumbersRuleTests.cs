@@ -8,6 +8,7 @@
     using Domain.Movement;
     using FakeItEasy;
     using RequestHandlers.NotificationMovements.BulkUpload;
+    using TestHelpers.DomainFakes;
     using Xunit;
 
     public class PrenotificationInvalidShipmentNumbersRuleTests
@@ -21,7 +22,19 @@
         {
             this.repo = A.Fake<IMovementRepository>();
 
-            A.CallTo(() => repo.GetAllMovements(notificationId)).Returns(A.CollectionOfFake<Movement>(2));
+            var testMovements = new List<Movement>()
+            {
+                new TestableMovement()
+                {
+                    Number = 1
+                },
+                new TestableMovement()
+                {
+                    Number = 2
+                }
+            };
+
+            A.CallTo(() => repo.GetAllMovements(notificationId)).Returns(testMovements);
         }
 
         [Fact]
@@ -29,7 +42,7 @@
         {
             rule = new PrenotificationContentOnlyNewShipmentsRule(repo);
 
-            List<PrenotificationMovement> movements = new List<PrenotificationMovement>()
+            var movements = new List<PrenotificationMovement>()
             {
                 new PrenotificationMovement()
                 {
@@ -39,6 +52,7 @@
 
             var result = await rule.GetResult(movements, notificationId);
 
+            Assert.Equal(BulkMovementContentRules.OnlyNewShipments, result.Rule);
             Assert.Equal(MessageLevel.Success.ToString(), result.MessageLevel.ToString());
         }
 
@@ -47,7 +61,7 @@
         {
             rule = new PrenotificationContentOnlyNewShipmentsRule(repo);
 
-            List<PrenotificationMovement> movements = new List<PrenotificationMovement>()
+            var movements = new List<PrenotificationMovement>()
             {
                 new PrenotificationMovement()
                 {
@@ -58,7 +72,6 @@
             var result = await rule.GetResult(movements, notificationId);
 
             Assert.Equal(MessageLevel.Error.ToString(), result.MessageLevel.ToString());
-            Assert.Equal("Shipment number 1: this shipment number already exists.", result.ErrorMessage);
         }
     }
 }
