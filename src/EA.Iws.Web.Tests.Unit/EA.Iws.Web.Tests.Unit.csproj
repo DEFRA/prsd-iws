@@ -184,6 +184,7 @@
     <Compile Include="Controllers\NotificationApplication\WasteOperationsControllerTests.cs" />
     <Compile Include="Controllers\NotificationMovements\CreateControllerTests.cs" />
     <Compile Include="Controllers\NotificationMovements\PrenotificationBulkUploadControllerTests.cs" />
+    <Compile Include="Controllers\NotificationMovements\ReceiptRecoveryBulkUploadControllerTests.cs" />
     <Compile Include="Extensions\StringExtensionsTests.cs" />
     <Compile Include="Infrastructure\AuditServiceTests.cs" />
     <Compile Include="Infrastructure\HtmlHelperExtensionsTests.cs" />
