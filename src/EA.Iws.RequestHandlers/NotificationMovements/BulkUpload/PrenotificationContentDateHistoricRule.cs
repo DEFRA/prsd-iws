@@ -18,7 +18,7 @@
                     movements.Where(
                             m =>
                                 m.ShipmentNumber.HasValue && m.ActualDateOfShipment.HasValue &&
-                                m.ActualDateOfShipment.Value < SystemTime.UtcNow)
+                                m.ActualDateOfShipment.Value.Date < SystemTime.UtcNow.Date)
                         .Select(m => m.ShipmentNumber.Value)
                         .ToList();
 
