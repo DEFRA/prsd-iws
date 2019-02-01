@@ -21,7 +21,7 @@
 
                 var result = shipments.Any() ? MessageLevel.Error : MessageLevel.Success;
 
-                var shipmentNumbers = string.Join(", ", duplicateShishipmentspmentNumbers);
+                var shipmentNumbers = string.Join(", ", shipments);
                 var errorMessage = string.Format(Prsd.Core.Helpers.EnumHelper.GetDisplayName(BulkMovementContentRules.DuplicateShipmentNumber), shipmentNumbers);
 
                 return new ContentRuleResult<BulkMovementContentRules>(BulkMovementContentRules.DuplicateShipmentNumber, result, errorMessage);
