@@ -120,15 +120,13 @@
 
             var shipmentsModel = new ShipmentMovementDocumentsViewModel(notificationId, shipments, model.File.FileName);
 
-            if (model.ErrorsCount > 0 || model.WarningsCount > 0)
-            {
-                TempData["PrenotificationShipments"] = shipments;
-                TempData["PreNotificationFileName"] = model.File.FileName;
-                return View("Errors", model);
-            }
-
             TempData["PrenotificationShipments"] = shipments;
             TempData["PreNotificationFileName"] = model.File.FileName;
+
+            if (model.ErrorsCount > 0 || model.WarningsCount > 0)
+            {
+                return View("Errors", model);
+            }
 
             TempData["DraftBulkUploadId"] = validationSummary.DraftBulkUploadId;
 
