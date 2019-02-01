@@ -109,25 +109,24 @@
                 return View(model);
             }
 
-            var validationSummary = await validator.GetValidationSummary(model.File, notificationId);
-
+            var validationSummary = await validator.GetPrenotificationValidationSummary(model.File, notificationId);
             var failedFileRules = validationSummary.FileRulesResults.Where(r => r.MessageLevel == MessageLevel.Error).Select(r => r.Rule).ToList();
             var failedContentRules = validationSummary.ContentRulesResults.Where(r => r.MessageLevel == MessageLevel.Error).ToList();
             var warningContentRule = validationSummary.ContentRulesResults.Where(r => r.MessageLevel == MessageLevel.Warning).ToList();
-
             model.FailedFileRules = failedFileRules;
             model.FailedContentRules = failedContentRules;
             model.WarningContentRules = warningContentRule;
+            var shipments = validationSummary.ShipmentNumbers != null ? validationSummary.ShipmentNumbers.ToList() : null;
 
-            TempData["PrenotificationShipments"] = validationSummary.ShipmentNumbers;
+            var shipmentsModel = new ShipmentMovementDocumentsViewModel(notificationId, shipments, model.File.FileName);
+
+            TempData["PrenotificationShipments"] = shipments;
             TempData["PreNotificationFileName"] = model.File.FileName;
 
             if (model.ErrorsCount > 0 || model.WarningsCount > 0)
             {
                 return View("Errors", model);
             }
-
-            var shipmentsModel = new ShipmentMovementDocumentsViewModel(notificationId, validationSummary.ShipmentNumbers, model.File.FileName);
 
             TempData["DraftBulkUploadId"] = validationSummary.DraftBulkUploadId;
 
@@ -173,6 +172,19 @@
             if (!ModelState.IsValid)
             {
                 return RedirectToAction("Warning");
+            }
+
+            var validationSummary = await validator.GetShipmentMovementValidationSummary(model.File, notificationId);
+            var failedFileRules = validationSummary.FileRulesResults.Where(r => r.MessageLevel == MessageLevel.Error).Select(r => r.Rule).ToList();
+
+            if (failedFileRules.Count > 0)
+            {
+                foreach (var rule in failedFileRules)
+                {
+                    ModelState.AddModelError(string.Empty, Prsd.Core.Helpers.EnumHelper.GetDisplayName(rule));
+                }
+                
+                return View(model);
             }
 
             object draftBulkUploadIdObj;
