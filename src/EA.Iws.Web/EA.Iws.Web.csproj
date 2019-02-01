@@ -2286,9 +2286,11 @@
     <Compile Include="Areas\NotificationApplication\Controllers\ShareNotificationController.cs" />
     <Compile Include="Areas\NotificationMovements\Controllers\BulkUploadTemplateController.cs" />
     <Compile Include="Areas\NotificationMovements\Controllers\PrenotificationBulkUploadController.cs" />
+    <Compile Include="Areas\NotificationMovements\Controllers\ReceiptRecoveryBulkUploadController.cs" />
     <Compile Include="Areas\NotificationMovements\ViewModels\BulkUploadTemplate\BulkUploadTemplateViewModel.cs" />
     <Compile Include="Areas\NotificationMovements\ViewModels\PrenotificationBulkUpload\PrenotificationBulkUploadViewModel.cs" />
     <Compile Include="Areas\NotificationMovements\ViewModels\PrenotificationBulkUpload\ShipmentMovementDocumentsViewModel.cs" />
+    <Compile Include="Areas\NotificationMovements\ViewModels\ReceiptRecoveryBulkUpload\ReceiptRecoveryBulkUploadViewModel.cs" />
     <Compile Include="Areas\NotificationMovements\Views\BulkUploadTemplate\BulkUploadTemplateResources.Designer.cs">
       <DependentUpon>BulkUploadTemplateResources.resx</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -3546,6 +3548,7 @@
     <Folder Include="Areas\Admin\Views\SmokeTest\" />
     <Folder Include="Areas\FinancialGuarantee\ViewModels\" />
     <Folder Include="Areas\FinancialGuarantee\Views\Shared\" />
+    <Folder Include="Areas\NotificationMovements\Views\ReceiptRecoveryBulkUpload\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Areas\AdminExportAssessment\Controllers\DecisionControllerResources.resx">
