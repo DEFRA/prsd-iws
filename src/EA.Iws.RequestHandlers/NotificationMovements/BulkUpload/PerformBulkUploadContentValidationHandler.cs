@@ -7,6 +7,7 @@
     using System.Text.RegularExpressions;
     using System.Threading.Tasks;
     using Core.Movement.Bulk;
+    using Core.Rules;
     using Domain.Movement.BulkUpload;
     using Prsd.Core.Mapper;
     using Prsd.Core.Mediator;
@@ -48,21 +49,61 @@
             return result;
         }
 
-        private async Task<List<ContentRuleResult<BulkMovementContentRules>>> GetContentRules(List<PrenotificationMovement> movements, Guid notificationId, bool addFirstRowWarningRule)
+        private async Task<List<ContentRuleResult<BulkMovementContentRules>>> GetContentRules(List<PrenotificationMovement> movements, 
+            Guid notificationId, bool addFirstRowWarningRule)
         {
             var rules = new List<ContentRuleResult<BulkMovementContentRules>>();
 
-            foreach (var rule in contentRules)
-            {
-                rules.Add(await rule.GetResult(movements, notificationId));
-            }
-
             if (addFirstRowWarningRule)
             {
-                rules.Add(new ContentRuleResult<BulkMovementContentRules>(BulkMovementContentRules.HeaderDataRemoved, Core.Rules.MessageLevel.Warning, Prsd.Core.Helpers.EnumHelper.GetDisplayName(BulkMovementContentRules.HeaderDataRemoved)));
+                rules.Add(new ContentRuleResult<BulkMovementContentRules>(BulkMovementContentRules.HeaderDataRemoved,
+                    MessageLevel.Warning,
+                    Prsd.Core.Helpers.EnumHelper.GetDisplayName(BulkMovementContentRules.HeaderDataRemoved)));
+            }
+
+            var missingData = await GetMissingDataResult(movements, notificationId);
+
+            rules.Add(missingData);
+
+            // Only run rest of validations if there are no missing/blank data.
+            if (missingData.MessageLevel == MessageLevel.Success)
+            {
+                foreach (var rule in contentRules)
+                {
+                    rules.Add(await rule.GetResult(movements, notificationId));
+                }
             }
 
             return rules;
+        }
+
+        private async Task<ContentRuleResult<BulkMovementContentRules>> GetMissingDataResult(List<PrenotificationMovement> movements, Guid notificationId)
+        {
+            return await Task.Run(() =>
+            {
+                var missingDataResult = MessageLevel.Success;
+                var missingDataShipmentNumbers = new List<string>();
+
+                foreach (var movement in movements)
+                {
+                    // Only report an error if shipment has a shipment number, otherwise record will be picked up by the PrenotificationContentMissingShipmentNumberRule
+                    if (movement.ShipmentNumber.HasValue &&
+                        (movement.MissingNotificationNumber ||
+                        movement.MissingQuantity ||
+                        movement.MissingUnits ||
+                        movement.MissingPackagingTypes ||
+                        movement.MissingDateOfShipment))
+                    {
+                        missingDataResult = MessageLevel.Error;
+                        missingDataShipmentNumbers.Add(movement.ShipmentNumber.ToString());
+                    }
+                }
+
+                var shipmentNumbers = string.Join(", ", missingDataShipmentNumbers);
+                var errorMessage = string.Format(Prsd.Core.Helpers.EnumHelper.GetDisplayName(BulkMovementContentRules.MissingData), shipmentNumbers);
+
+                return new ContentRuleResult<BulkMovementContentRules>(BulkMovementContentRules.MissingData, missingDataResult, errorMessage);
+            });
         }
 
         private static bool CheckFirstRow(IList<PrenotificationMovement> movements)
