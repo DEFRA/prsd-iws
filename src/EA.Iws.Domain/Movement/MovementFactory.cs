@@ -106,5 +106,10 @@
 
             return new Movement(newNumber, notificationId, actualMovementDate, userContext.UserId);
         }
+
+        public Movement Create(Guid notificationId, int shipmentNumber, DateTime actualDateOfShipment)
+        {
+            return new Movement(shipmentNumber, notificationId, actualDateOfShipment, userContext.UserId);
+        }
     }
 }

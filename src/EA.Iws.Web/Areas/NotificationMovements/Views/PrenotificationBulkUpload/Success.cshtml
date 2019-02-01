@@ -40,7 +40,7 @@
             </div>
         </div>
         <div>
-            @if (Model.Shipments.Count > 1)
+            @if (Model.Shipments.Count() > 1)
             {
                 <p>@string.Format(Resources.SuccessTextMultipleShipments, Model.GetShipments)</p>
             }

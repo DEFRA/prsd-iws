@@ -7,6 +7,7 @@
     using System.Text.RegularExpressions;
     using System.Threading.Tasks;
     using Core.Movement.Bulk;
+    using Domain.Movement.BulkUpload;
     using Prsd.Core.Mapper;
     using Prsd.Core.Mediator;
     using Requests.Movement;
@@ -15,31 +16,34 @@
     {
         private readonly IEnumerable<IBulkMovementPrenotificationContentRule> contentRules;
         private readonly IMap<DataTable, List<PrenotificationMovement>> mapper;
+        private readonly IDraftMovementRepository repository;
 
         public PerformBulkUploadContentValidationHandler(IEnumerable<IBulkMovementPrenotificationContentRule> contentRules,
-            IMap<DataTable, List<PrenotificationMovement>> mapper)
+            IMap<DataTable, List<PrenotificationMovement>> mapper,
+            IDraftMovementRepository repository)
         {
             this.contentRules = contentRules;
             this.mapper = mapper;
+            this.repository = repository;
         }
 
         public async Task<BulkMovementRulesSummary> HandleAsync(PerformBulkUploadContentValidation message)
         {
             var result = message.BulkMovementRulesSummary;
 
-            result.PrenotificationMovements = mapper.Map(message.DataTable);
+            var movements = mapper.Map(message.DataTable);
 
-            bool addFirstRowWarningRule = false;
+            var addFirstRowWarningRule = message.IsCsv && !CheckFirstRow(movements);
 
-            if (message.IsCsv)
+            result.ContentRulesResults = await GetContentRules(movements, message.NotificationId, addFirstRowWarningRule);
+
+            if (result.IsContentRulesSuccess)
             {
-                if (!CheckFirstRow(result.PrenotificationMovements))
-                {
-                    addFirstRowWarningRule = true;
-                }
-            }
+                result.ShipmentNumbers =
+                    movements.Where(m => m.ShipmentNumber.HasValue).Select(m => m.ShipmentNumber.Value);
 
-            result.ContentRulesResults = await GetContentRules(result.PrenotificationMovements, message.NotificationId, addFirstRowWarningRule);
+                result.DraftBulkUploadId = await repository.Add(message.NotificationId, movements, message.FileName);
+            }
 
             return result;
         }
@@ -61,7 +65,7 @@
             return rules;
         }
 
-        private bool CheckFirstRow(List<PrenotificationMovement> movements)
+        private static bool CheckFirstRow(IList<PrenotificationMovement> movements)
         {
             if (!IsValidNotificationNumber(movements[0].NotificationNumber))
             {
@@ -72,7 +76,7 @@
             return true;
         }
 
-        private bool IsValidNotificationNumber(string input)
+        private static bool IsValidNotificationNumber(string input)
         {
             var match = Regex.Match(input.Replace(" ", string.Empty), @"(GB)(\d{4})(\d{6})");
 
