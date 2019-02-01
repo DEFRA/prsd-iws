@@ -2327,6 +2327,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="Areas\NotificationMovements\Views\ReceiptRecoveryBulkUpload\ReceiptRecoveryBulkUploadResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReceiptRecoveryBulkUploadResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Infrastructure\BulkUpload\BulkMovementValidator.cs" />
     <Compile Include="Infrastructure\BulkUpload\PrenotificationFileSizeRule.cs" />
     <Compile Include="Infrastructure\BulkUpload\PrenotificationFileTypeRule.cs" />
@@ -3548,7 +3553,6 @@
     <Folder Include="Areas\Admin\Views\SmokeTest\" />
     <Folder Include="Areas\FinancialGuarantee\ViewModels\" />
     <Folder Include="Areas\FinancialGuarantee\Views\Shared\" />
-    <Folder Include="Areas\NotificationMovements\Views\ReceiptRecoveryBulkUpload\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Areas\AdminExportAssessment\Controllers\DecisionControllerResources.resx">
@@ -4782,6 +4786,10 @@
     <EmbeddedResource Include="Areas\NotificationMovements\Views\PrenotificationBulkUpload\TotalMovementsReachedResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>TotalMovementsReachedResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\NotificationMovements\Views\ReceiptRecoveryBulkUpload\ReceiptRecoveryBulkUploadResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ReceiptRecoveryBulkUploadResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\NotificationMovements\Views\ReceiptRecovery\IndexResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
