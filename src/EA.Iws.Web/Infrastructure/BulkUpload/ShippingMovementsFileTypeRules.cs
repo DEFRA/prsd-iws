@@ -5,6 +5,7 @@
     using System.Linq;
     using System.Threading.Tasks;
     using System.Web;
+    using Core.Documents;
     using Core.Movement.Bulk;
     using Core.Rules;
 
@@ -43,7 +44,7 @@
                 MimeTypes.OpenOfficePresentation,
                 MimeTypes.OpenOfficeSpreadsheet,
                 MimeTypes.OpenOfficeText,
-                //MimeTypes.Pdf,
+                MimeTypes.Pdf,
                 MimeTypes.Png
             };
         }

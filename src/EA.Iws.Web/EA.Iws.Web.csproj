@@ -2326,7 +2326,6 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Infrastructure\BulkUpload\BulkMovementValidator.cs" />
-    <Compile Include="Infrastructure\BulkUpload\FileUploadType.cs" />
     <Compile Include="Infrastructure\BulkUpload\PrenotificationFileSizeRule.cs" />
     <Compile Include="Infrastructure\BulkUpload\PrenotificationFileTypeRule.cs" />
     <Compile Include="Infrastructure\BulkUpload\IBulkMovementPrenotificationFileRule.cs" />

@@ -111,7 +111,7 @@
             model.FailedFileRules = failedFileRules;
             model.FailedContentRules = failedContentRules;
             model.WarningContentRules = warningContentRule;
-            var shipments = validationSummary.PrenotificationMovements?.Select(p => p.ShipmentNumber).ToList();
+            var shipments = validationSummary.PrenotificationMovements != null ? validationSummary.PrenotificationMovements.Select(p => p.ShipmentNumber).ToList() : null;
 
             var shipmentsModel = new ShipmentMovementDocumentsViewModel(notificationId, shipments, model.File.FileName);
 

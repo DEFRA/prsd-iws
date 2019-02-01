@@ -5,6 +5,7 @@
     using System.IO;
     using System.Threading.Tasks;
     using System.Web;
+    using Core.Documents;
     using Core.Movement.Bulk;
     using Core.Rules;
     using VirusScanning;
