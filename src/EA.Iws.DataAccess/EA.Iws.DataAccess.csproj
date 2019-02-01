@@ -75,6 +75,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConfigurationRegistrarExtensions.cs" />
+    <Compile Include="Draft\DraftMovementRepository.cs" />
     <Compile Include="Draft\DraftContext.cs" />
     <Compile Include="Draft\DraftImportNotificationRepository.cs" />
     <Compile Include="Draft\IDraftImportNotificationRepository.cs" />
@@ -104,6 +105,9 @@
     <Compile Include="Mappings\Common\DisposalCostMapping.cs" />
     <Compile Include="Mappings\Common\EmailAddressMapping.cs" />
     <Compile Include="Mappings\Exports\ConsultationMapping.cs" />
+    <Compile Include="Mappings\Exports\DraftBulkUploadMapping.cs" />
+    <Compile Include="Mappings\Exports\DraftMovementMapping.cs" />
+    <Compile Include="Mappings\Exports\DraftPackagingInfoMapping.cs" />
     <Compile Include="Mappings\Exports\FacilityCollectionMapping.cs" />
     <Compile Include="Mappings\Exports\FinancialGuaranteeCollectionMapping.cs" />
     <Compile Include="Mappings\Exports\MeansOfTransportMapping.cs" />

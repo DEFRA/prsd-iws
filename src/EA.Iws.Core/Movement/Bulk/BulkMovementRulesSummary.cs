@@ -12,7 +12,9 @@
 
         public IEnumerable<ContentRuleResult<BulkMovementContentRules>> ContentRulesResults { get; set; }
 
-        public List<PrenotificationMovement> PrenotificationMovements { get; set; }
+        public IEnumerable<int> ShipmentNumbers { get; set; }
+
+        public Guid DraftBulkUploadId { get; set; }
 
         public bool RemovedFirstRow { get; set; }
 
@@ -24,6 +26,12 @@
         public bool IsContentRulesSuccess
         {
             get { return ContentRulesResults.All(r => r.MessageLevel == MessageLevel.Success); }
+        }
+
+        public BulkMovementRulesSummary()
+        {
+            FileRulesResults = new List<RuleResult<BulkMovementFileRules>>();
+            ContentRulesResults = new List<ContentRuleResult<BulkMovementContentRules>>();
         }
 
         public BulkMovementRulesSummary(IEnumerable<RuleResult<BulkMovementFileRules>> fileRules)

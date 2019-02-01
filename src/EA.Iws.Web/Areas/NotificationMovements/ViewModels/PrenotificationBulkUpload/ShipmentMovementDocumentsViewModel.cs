@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using System.Linq;
     using System.Web;
     using Views.PrenotificationBulkUpload;
 
@@ -10,10 +11,10 @@
     {
         public ShipmentMovementDocumentsViewModel()
         {
-            this.Shipments = new List<int?>();
+            this.Shipments = new List<int>();
         }
 
-        public ShipmentMovementDocumentsViewModel(Guid notificationId, List<int?> shipments, string preNotificationFileName)
+        public ShipmentMovementDocumentsViewModel(Guid notificationId, IEnumerable<int> shipments, string preNotificationFileName)
         {
             this.NotificationId = notificationId;
             this.Shipments = shipments;
@@ -23,17 +24,11 @@
 
         public Guid NotificationId { get; set; }
 
-        public List<int?> Shipments { get; set; }
+        public IEnumerable<int> Shipments { get; set; }
 
         public string PreNotificationFileName { get; set; }
 
-        public string ShipmentMovementFileName
-        {
-            get
-            {
-                return File.FileName;
-            }
-        }
+        public string ShipmentMovementFileName { get; set; }
 
         public string FileSuccessMessage { get; set; }
 
@@ -52,14 +47,14 @@
         {
             get
             {
-                string returnString = string.Empty;
+                var returnString = string.Empty;
 
-                for (int i = 0; i < Shipments.Count; i++)
+                for (var i = 0; i < Shipments.Count(); i++)
                 {
-                    returnString += Shipments[i].ToString() + ", ";
-                    if (i == Shipments.Count - 2)
+                    returnString += Shipments.ElementAt(i).ToString() + ", ";
+                    if (i == Shipments.Count() - 2)
                     {
-                        if (Shipments.Count.Equals(2))
+                        if (Shipments.Count() == 2)
                         {
                             returnString = returnString.Trim().TrimEnd(',');
                         }

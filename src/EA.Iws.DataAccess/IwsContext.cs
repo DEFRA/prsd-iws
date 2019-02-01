@@ -20,6 +20,7 @@
     using System.Data.Entity;
     using System.Security;
     using System.Threading.Tasks;
+    using Domain.Movement.BulkUpload;
 
     public class IwsContext : ContextBase
     {
@@ -119,6 +120,12 @@
         public virtual DbSet<TechnologyEmployed> TechnologiesEmployed { get; set; }
 
         public virtual DbSet<NumberOfShipmentsHistory> NumberOfShipmentsHistories { get; set; }
+
+        public virtual DbSet<DraftBulkUpload> DraftBulkUploads { get; set; }
+
+        public virtual DbSet<DraftMovement> DraftMovements { get; set; }
+
+        public virtual DbSet<DraftPackagingInfo> DraftPackagingInfos { get; set; }
 
         public async Task<NotificationApplication> GetNotificationApplication(Guid notificationId)
         {
