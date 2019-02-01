@@ -29,5 +29,27 @@
             var model = new ReceiptRecoveryBulkUploadViewModel(notificationId);
             return View("Index", model);
         }
+
+        [HttpGet]
+        public ActionResult Upload(Guid notificationId)
+        {
+            var model = new ReceiptRecoveryBulkUploadViewModel(notificationId);
+
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Upload(Guid notificationId, ReceiptRecoveryBulkUploadViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                ViewBag.NotificationId = notificationId;
+                model = new ReceiptRecoveryBulkUploadViewModel(notificationId);
+                return View(model);
+            }
+
+            return View(model);
+        }
     }
 }

@@ -60,5 +60,104 @@ namespace EA.Iws.Web.Areas.NotificationMovements.Views.ReceiptRecoveryBulkUpload
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Go to notification options.
+        /// </summary>
+        public static string NotificationOptionsLink {
+            get {
+                return ResourceManager.GetString("NotificationOptionsLink", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The data file should not exceed 2GB in size..
+        /// </summary>
+        public static string UploadReceiptRecoveryList1 {
+            get {
+                return ResourceManager.GetString("UploadReceiptRecoveryList1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Remove all column headings from a CSV file type..
+        /// </summary>
+        public static string UploadReceiptRecoveryList2 {
+            get {
+                return ResourceManager.GetString("UploadReceiptRecoveryList2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Only contain shipment records for shipments that have already been prenotified..
+        /// </summary>
+        public static string UploadReceiptRecoveryList3 {
+            get {
+                return ResourceManager.GetString("UploadReceiptRecoveryList3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No duplicate receipt or recovery information will be accepted..
+        /// </summary>
+        public static string UploadReceiptRecoveryList4 {
+            get {
+                return ResourceManager.GetString("UploadReceiptRecoveryList4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The tonnage quantity must not exceed 4 decimal places..
+        /// </summary>
+        public static string UploadReceiptRecoveryList5 {
+            get {
+                return ResourceManager.GetString("UploadReceiptRecoveryList5", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The quantity unit of measurement must meet the criteria permitted on the notification..
+        /// </summary>
+        public static string UploadReceiptRecoveryList6 {
+            get {
+                return ResourceManager.GetString("UploadReceiptRecoveryList6", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Receipt / Recovery Bulk Upload.
+        /// </summary>
+        public static string UploadReceiptRecoveryTabTitle {
+            get {
+                return ResourceManager.GetString("UploadReceiptRecoveryTabTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Upload the receipt and/or recovery data file in an Excel or .CSV format..
+        /// </summary>
+        public static string UploadReceiptRecoveryText1 {
+            get {
+                return ResourceManager.GetString("UploadReceiptRecoveryText1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Make sure all data matches the correct template format to avoid validation errors..
+        /// </summary>
+        public static string UploadReceiptRecoveryText2 {
+            get {
+                return ResourceManager.GetString("UploadReceiptRecoveryText2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bulk upload of receipt and/or recovery data.
+        /// </summary>
+        public static string UploadReceiptRecoveryTitle {
+            get {
+                return ResourceManager.GetString("UploadReceiptRecoveryTitle", resourceCulture);
+            }
+        }
     }
 }
