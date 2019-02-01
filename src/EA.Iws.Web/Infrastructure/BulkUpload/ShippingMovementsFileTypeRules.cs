@@ -55,7 +55,7 @@
             {
                 var result = allowedTypes.Contains(file.ContentType) ? MessageLevel.Success : MessageLevel.Error;
 
-                return new RuleResult<BulkMovementFileRules>(BulkMovementFileRules.FileType, result);
+                return new RuleResult<BulkMovementFileRules>(BulkMovementFileRules.FileTypeShipmentDocuments, result);
             });
         }
     }

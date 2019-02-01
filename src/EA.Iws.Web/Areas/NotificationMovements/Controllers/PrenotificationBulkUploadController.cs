@@ -130,6 +130,8 @@
             TempData["PrenotificationShipments"] = shipments;
             TempData["PreNotificationFileName"] = model.File.FileName;
 
+            TempData["DraftBulkUploadId"] = validationSummary.DraftBulkUploadId;
+
             return View("Documents", shipmentsModel);
         }
 
@@ -177,7 +179,15 @@
             var validationSummary = await validator.GetShipmentMovementValidationSummary(model.File, notificationId);
             var failedFileRules = validationSummary.FileRulesResults.Where(r => r.MessageLevel == MessageLevel.Error).Select(r => r.Rule).ToList();
 
-            // TODO: save data...
+            if (failedFileRules.Count > 0)
+            {
+                foreach (var rule in failedFileRules)
+                {
+                    ModelState.AddModelError(string.Empty, Prsd.Core.Helpers.EnumHelper.GetDisplayName(rule));
+                }
+                
+                return View(model);
+            }
 
             object draftBulkUploadIdObj;
 
