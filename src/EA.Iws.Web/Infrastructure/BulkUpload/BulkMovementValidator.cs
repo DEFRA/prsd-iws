@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.Data;
     using System.IO;
+    using System.Linq;
     using System.Threading.Tasks;
     using System.Web;
     using Core.Movement.Bulk;
@@ -25,9 +26,9 @@
             this.fileRules = fileRules;
         }
 
-        public async Task<BulkMovementRulesSummary> GetValidationSummary(HttpPostedFileBase file, Guid notificationId)
+        public async Task<BulkMovementRulesSummary> GetPrenotificationValidationSummary(HttpPostedFileBase file, Guid notificationId)
         {
-            var resultFileRules = await GetFileRules(file);
+            var resultFileRules = await GetFileRules(file, FileUploadType.Prenotification);
 
             var extension = Path.GetExtension(file.FileName);
             var isCsv = extension == ".csv" ? true : false;
@@ -40,11 +41,23 @@
             return bulkMovementRulesSummary;
         }
 
-        private async Task<List<RuleResult<BulkMovementFileRules>>> GetFileRules(HttpPostedFileBase file)
+        public async Task<BulkMovementRulesSummary> GetShipmentMovementValidationSummary(HttpPostedFileBase file, Guid notificationId)
+        {
+            var resultFileRules = await GetFileRules(file, FileUploadType.ShipmentMovementDocuments);
+
+            var extension = Path.GetExtension(file.FileName);
+            var isCsv = extension == ".csv" ? true : false;
+
+            var bulkMovementRulesSummary = new BulkMovementRulesSummary(resultFileRules);
+            
+            return bulkMovementRulesSummary;
+        }
+
+        private async Task<List<RuleResult<BulkMovementFileRules>>> GetFileRules(HttpPostedFileBase file, FileUploadType type)
         {
             var rules = new List<RuleResult<BulkMovementFileRules>>();
 
-            foreach (var rule in fileRules)
+            foreach (var rule in fileRules.Where(p => p.UploadType.Contains(type)))
             {
                 var result = await rule.GetResult(file);
                 // Grab the DataTable from the File Parse rule.

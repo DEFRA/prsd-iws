@@ -1,6 +1,7 @@
 ﻿namespace EA.Iws.Web.Infrastructure.BulkUpload
 {
     using System;
+    using System.Collections.Generic;
     using System.Data;
     using System.IO;
     using System.Linq;
@@ -15,6 +16,19 @@
         private const int MaxColumns = 6;
 
         public DataTable DataTable { get; set; }
+
+        public List<FileUploadType> UploadType
+        {
+            get
+            {
+                var x = new List<FileUploadType>()
+                {
+                    FileUploadType.Prenotification,
+                };
+
+                return x;
+            }
+        }
 
         public FileParsePrenotificationFileRule(IFileReader fileReader)
         {

@@ -104,14 +104,14 @@
                 return View(model);
             }
 
-            var validationSummary = await validator.GetValidationSummary(model.File, notificationId);
+            var validationSummary = await validator.GetPrenotificationValidationSummary(model.File, notificationId);
             var failedFileRules = validationSummary.FileRulesResults.Where(r => r.MessageLevel == MessageLevel.Error).Select(r => r.Rule).ToList();
             var failedContentRules = validationSummary.ContentRulesResults.Where(r => r.MessageLevel == MessageLevel.Error).ToList();
             var warningContentRule = validationSummary.ContentRulesResults.Where(r => r.MessageLevel == MessageLevel.Warning).ToList();
             model.FailedFileRules = failedFileRules;
             model.FailedContentRules = failedContentRules;
             model.WarningContentRules = warningContentRule;
-            var shipments = validationSummary.PrenotificationMovements.Select(p => p.ShipmentNumber).ToList();
+            var shipments = validationSummary.PrenotificationMovements?.Select(p => p.ShipmentNumber).ToList();
 
             var shipmentsModel = new ShipmentMovementDocumentsViewModel(notificationId, shipments, model.File.FileName);
 
@@ -162,15 +162,18 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Documents(Guid notificationId, ShipmentMovementDocumentsViewModel model)
+        public async Task<ActionResult> Documents(Guid notificationId, ShipmentMovementDocumentsViewModel model)
         {
             if (!ModelState.IsValid)
             {
                 return RedirectToAction("Warning");
             }
 
+            var validationSummary = await validator.GetShipmentMovementValidationSummary(model.File, notificationId);
+            var failedFileRules = validationSummary.FileRulesResults.Where(r => r.MessageLevel == MessageLevel.Error).Select(r => r.Rule).ToList();
+
             // TODO: save data...
-            
+
             object fileNameObj;
             object shipmentsObj;
 

@@ -2,14 +2,13 @@
 {
     using System.Collections.Generic;
     using System.Data;
-    using System.IO;
     using System.Linq;
     using System.Threading.Tasks;
     using System.Web;
     using Core.Movement.Bulk;
     using Core.Rules;
 
-    public class PrenotificationFileTypeRule : IBulkMovementPrenotificationFileRule
+    public class ShippingMovementsFileTypeRules : IBulkMovementPrenotificationFileRule
     {
         private readonly string[] allowedTypes;
 
@@ -21,20 +20,31 @@
             {
                 var x = new List<FileUploadType>()
                 {
-                    FileUploadType.Prenotification
+                    FileUploadType.ShipmentMovementDocuments
                 };
 
                 return x;
             }
         }
 
-        public PrenotificationFileTypeRule()
+        public ShippingMovementsFileTypeRules()
         {
-            allowedTypes = new[] 
-            {
+            allowedTypes = new[]
+            {    
+                MimeTypes.Bitmap,
+                MimeTypes.Gif,
+                MimeTypes.Jpeg,
                 MimeTypes.MSExcel,
                 MimeTypes.MSExcelXml,
-                MimeTypes.Csv
+                MimeTypes.MSPowerPoint,
+                MimeTypes.MSPowerPointXml,
+                MimeTypes.MSWord,
+                MimeTypes.MSWordXml,
+                MimeTypes.OpenOfficePresentation,
+                MimeTypes.OpenOfficeSpreadsheet,
+                MimeTypes.OpenOfficeText,
+                //MimeTypes.Pdf,
+                MimeTypes.Png
             };
         }
 
