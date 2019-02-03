@@ -7,31 +7,33 @@
     using Core.Movement.Bulk;
     using Core.Rules;
     using Domain;
-    using Domain.NotificationApplication.Shipment;
+    using Domain.NotificationConsent;
     using FakeItEasy;
     using RequestHandlers.NotificationMovements.BulkUpload;
     using Xunit;
 
     public class PrenotificationShipmentBeyondConsentWindowRuleTests
     {
-        private readonly IShipmentInfoRepository repo;
+        private readonly INotificationConsentRepository repo;
         private readonly Guid notificationId = new Guid("DD1F019D-BD85-4A6F-89AB-328A7BD53CEA");
 
         private PrenotificationContentShipmentBeyondConsentedDateRule rule;
 
         public PrenotificationShipmentBeyondConsentWindowRuleTests()
         {
-            this.repo = A.Fake<IShipmentInfoRepository>();
+            repo = A.Fake<INotificationConsentRepository>();
 
-            A.CallTo(() => this.repo.GetByNotificationId(notificationId)).Returns(new ShipmentInfo(this.notificationId, new ShipmentPeriod(DateTime.Now.AddDays(1), DateTime.Now.AddDays(20), false), 10, new ShipmentQuantity(10, Core.Shared.ShipmentQuantityUnits.Kilograms)));
-            }
+            var dateRange = new DateRange(DateTime.Now.AddDays(1), DateTime.Now.AddDays(20));
+            var consent = new Consent(notificationId, dateRange, "Test", Guid.NewGuid());
+            A.CallTo(() => this.repo.GetByNotificationId(notificationId)).Returns(consent);
+
+            rule = new PrenotificationContentShipmentBeyondConsentedDateRule(repo);
+        }
 
         [Fact]
         public async Task NewShipmentsDateBeforeConsentedEndDate()
         {
-            rule = new PrenotificationContentShipmentBeyondConsentedDateRule(repo);
-
-            List<PrenotificationMovement> movements = new List<PrenotificationMovement>()
+            var movements = new List<PrenotificationMovement>()
             {
                 new PrenotificationMovement()
                 {
@@ -48,9 +50,7 @@
         [Fact]
         public async Task NewShipmentsDateAfterConsentedEndDate()
         {
-            rule = new PrenotificationContentShipmentBeyondConsentedDateRule(repo);
-
-            List<PrenotificationMovement> movements = new List<PrenotificationMovement>()
+            var movements = new List<PrenotificationMovement>()
             {
                 new PrenotificationMovement()
                 {
@@ -73,9 +73,7 @@
         [Fact]
         public async Task NewShipmentsDateBeforeConsentedEndDate_ShippingDatesEnteredInReverse()
         {
-            rule = new PrenotificationContentShipmentBeyondConsentedDateRule(repo);
-
-            List<PrenotificationMovement> movements = new List<PrenotificationMovement>()
+            var movements = new List<PrenotificationMovement>()
             {
                 new PrenotificationMovement()
                 {

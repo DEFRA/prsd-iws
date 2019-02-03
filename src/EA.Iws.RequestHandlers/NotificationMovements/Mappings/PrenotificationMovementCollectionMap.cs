@@ -43,7 +43,13 @@
                     Quantity = quantityMapper.Map(data),
                     Unit = unitsMapper.Map(data),
                     PackagingTypes = packagingMapper.Map(data),
-                    ActualDateOfShipment = actualDateOfShipmentMapper.Map(data)
+                    ActualDateOfShipment = actualDateOfShipmentMapper.Map(data),
+                    MissingNotificationNumber = string.IsNullOrWhiteSpace(data.ItemArray[(int)PrenotificationColumnIndex.NotificationNumber].ToString()),
+                    MissingShipmentNumber = string.IsNullOrWhiteSpace(data.ItemArray[(int)PrenotificationColumnIndex.ShipmentNumber].ToString()),
+                    MissingQuantity = string.IsNullOrWhiteSpace(data.ItemArray[(int)PrenotificationColumnIndex.Quantity].ToString()),
+                    MissingUnits = string.IsNullOrWhiteSpace(data.ItemArray[(int)PrenotificationColumnIndex.Unit].ToString()),
+                    MissingPackagingTypes = string.IsNullOrWhiteSpace(data.ItemArray[(int)PrenotificationColumnIndex.PackagingType].ToString()),
+                    MissingDateOfShipment = string.IsNullOrWhiteSpace(data.ItemArray[(int)PrenotificationColumnIndex.ActualDateOfShipment].ToString())
                 }).ToList();
         }
     }

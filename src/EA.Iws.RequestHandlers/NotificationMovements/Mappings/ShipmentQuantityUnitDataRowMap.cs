@@ -17,6 +17,9 @@
                 ShipmentQuantityUnits parsed;
                 var data = source.ItemArray[(int)PrenotificationColumnIndex.Unit].ToString();
 
+                // Small 'hack' when this is supplied as the unit.
+                data = data == "m3" ? "CubicMetres" : data;
+
                 if (Enum.TryParse(data, out parsed))
                 {
                     result = parsed;

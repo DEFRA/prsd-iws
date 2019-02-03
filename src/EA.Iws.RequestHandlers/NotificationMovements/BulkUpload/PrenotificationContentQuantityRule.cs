@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
     using System.Threading.Tasks;
     using Core.Movement.Bulk;
     using Core.Rules;
@@ -14,23 +15,19 @@
         {
             return await Task.Run(() =>
             {
-                var result = MessageLevel.Success;
-                var failedShipments = new List<string>();
+                var shipments =
+                    movements.Where(
+                            m =>
+                                m.ShipmentNumber.HasValue &&
+                                m.Quantity.HasValue && m.Unit.HasValue &&
+                                decimal.Round(m.Quantity.Value, ShipmentQuantityUnitsMetadata.Precision[m.Unit.Value]) !=
+                                m.Quantity.Value)
+                        .Select(m => m.ShipmentNumber.Value)
+                        .ToList();
 
-                foreach (var movement in movements)
-                {
-                    var quantity = movement.Quantity;
-                    var unit = movement.Unit;
+                var result = shipments.Any() ? MessageLevel.Error : MessageLevel.Success;
 
-                    if (movement.ShipmentNumber.HasValue && quantity.HasValue && unit.HasValue &&
-                        decimal.Round(quantity.Value, ShipmentQuantityUnitsMetadata.Precision[unit.Value]) != quantity)
-                    {
-                        result = MessageLevel.Error;
-                        failedShipments.Add(movement.ShipmentNumber.Value.ToString());
-                    }
-                }
-
-                var shipmentNumbers = string.Join(", ", failedShipments);
+                var shipmentNumbers = string.Join(", ", shipments);
                 var errorMessage =
                     string.Format(
                         Prsd.Core.Helpers.EnumHelper.GetDisplayName(BulkMovementContentRules.QuantityPrecision),

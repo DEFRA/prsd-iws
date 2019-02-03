@@ -6,40 +6,38 @@
     using System.Threading.Tasks;
     using Core.Movement.Bulk;
     using Core.Rules;
-    using Domain.NotificationApplication.Shipment;
+    using Domain.NotificationConsent;
 
     public class PrenotificationContentShipmentBeyondConsentedDateRule : IBulkMovementPrenotificationContentRule
     {
-        private readonly IShipmentInfoRepository repo;
+        private readonly INotificationConsentRepository consentRepository;
 
-        public PrenotificationContentShipmentBeyondConsentedDateRule(IShipmentInfoRepository repo)
+        public PrenotificationContentShipmentBeyondConsentedDateRule(INotificationConsentRepository consentRepository)
         {
-            this.repo = repo;
+            this.consentRepository = consentRepository;
         }
 
         public async Task<ContentRuleResult<BulkMovementContentRules>> GetResult(List<PrenotificationMovement> movements, Guid notificationId)
         {
-            var shipmentInfo = await this.repo.GetByNotificationId(notificationId);
+            var consentEndDate = (await consentRepository.GetByNotificationId(notificationId)).ConsentRange.To;
 
             return await Task.Run(() =>
             {
-                var missingDataResult = MessageLevel.Success;
+                var shipments =
+                    movements.Where(
+                            m =>
+                                m.ShipmentNumber.HasValue && m.ActualDateOfShipment.HasValue &&
+                                m.ActualDateOfShipment.Value > consentEndDate)
+                                .OrderBy(m => m.ActualDateOfShipment.Value)
+                        .Select(m => m.ShipmentNumber.GetValueOrDefault())
+                        .ToList();
 
-                int errorShipmentNumber = 0;
+                var result = shipments.Any() ? MessageLevel.Error : MessageLevel.Success;
 
-                foreach (var movement in movements.OrderBy(p => p.ActualDateOfShipment))
-                {
-                    if (movement.ActualDateOfShipment > shipmentInfo.ShipmentPeriod.LastDate)
-                    {
-                        missingDataResult = MessageLevel.Error;
-                        errorShipmentNumber = movement.ShipmentNumber.GetValueOrDefault();
-                        break;
-                    }
-                }
+                var shipmentNumbers = string.Join(", ", shipments);
+                var errorMessage = string.Format(Prsd.Core.Helpers.EnumHelper.GetDisplayName(BulkMovementContentRules.BeyondConsentWindow), shipmentNumbers);
 
-                var errorMessage = string.Format(Prsd.Core.Helpers.EnumHelper.GetDisplayName(BulkMovementContentRules.BeyondConsentWindow), errorShipmentNumber);
-
-                return new ContentRuleResult<BulkMovementContentRules>(BulkMovementContentRules.BeyondConsentWindow, missingDataResult, errorMessage);
+                return new ContentRuleResult<BulkMovementContentRules>(BulkMovementContentRules.BeyondConsentWindow, result, errorMessage);
             });
         }
     }
