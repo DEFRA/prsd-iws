@@ -6,20 +6,20 @@
     using System.Threading.Tasks;
     using Core.Movement.Bulk;
     using Core.Rules;
-    using Domain.NotificationApplication.Shipment;
+    using Domain.NotificationConsent;
 
     public class PrenotificationContentShipmentBeyondConsentedDateRule : IBulkMovementPrenotificationContentRule
     {
-        private readonly IShipmentInfoRepository repo;
+        private readonly INotificationConsentRepository consentRepository;
 
-        public PrenotificationContentShipmentBeyondConsentedDateRule(IShipmentInfoRepository repo)
+        public PrenotificationContentShipmentBeyondConsentedDateRule(INotificationConsentRepository consentRepository)
         {
-            this.repo = repo;
+            this.consentRepository = consentRepository;
         }
 
         public async Task<ContentRuleResult<BulkMovementContentRules>> GetResult(List<PrenotificationMovement> movements, Guid notificationId)
         {
-            var shipmentInfo = await repo.GetByNotificationId(notificationId);
+            var consentEndDate = (await consentRepository.GetByNotificationId(notificationId)).ConsentRange.To;
 
             return await Task.Run(() =>
             {
@@ -27,7 +27,7 @@
                     movements.Where(
                             m =>
                                 m.ShipmentNumber.HasValue && m.ActualDateOfShipment.HasValue &&
-                                m.ActualDateOfShipment.Value > shipmentInfo.ShipmentPeriod.LastDate)
+                                m.ActualDateOfShipment.Value > consentEndDate)
                                 .OrderBy(m => m.ActualDateOfShipment.Value)
                         .Select(m => m.ShipmentNumber.GetValueOrDefault())
                         .ToList();
