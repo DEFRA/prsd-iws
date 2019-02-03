@@ -12,6 +12,8 @@
         Virus,
         [Display(Name = "Unable to read the file, format is invalid.")]
         FileParse,
+        [Display(Name = "The file does not contain any data.")]
+        EmptyData,
         [Display(Name = "The file type is unsupported: please upload a PDF, image or standard MS Office or Open Office file.")]
         FileTypeShipmentDocuments
     }

@@ -23,11 +23,11 @@
 
             return await Task.Run(() =>
             {
-                var missingDataResult = MessageLevel.Success;
+                var result = MessageLevel.Success;
 
-                decimal remainingQuantity = movementSummary.QuantityRemaining;
-                decimal newQuantityCount = 0;
-                int errorShipmentNumber = 0;
+                var remainingQuantity = movementSummary.QuantityRemaining;
+                var newQuantityCount = 0m;
+                var errorShipmentNumber = 0;
 
                 foreach (var movement in movements.OrderBy(p => p.ShipmentNumber))
                 {
@@ -35,7 +35,7 @@
 
                     if (newQuantityCount > remainingQuantity)
                     {
-                        missingDataResult = MessageLevel.Error;
+                        result = MessageLevel.Error;
                         errorShipmentNumber = movement.ShipmentNumber.GetValueOrDefault();
                         break;
                     }
@@ -43,7 +43,7 @@
 
                 var errorMessage = string.Format(Prsd.Core.Helpers.EnumHelper.GetDisplayName(BulkMovementContentRules.QuantityExceeded), errorShipmentNumber);
 
-                return new ContentRuleResult<BulkMovementContentRules>(BulkMovementContentRules.QuantityExceeded, missingDataResult, errorMessage);
+                return new ContentRuleResult<BulkMovementContentRules>(BulkMovementContentRules.QuantityExceeded, result, errorMessage);
             });
         }
     }
