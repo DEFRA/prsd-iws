@@ -36,7 +36,7 @@
 
             var addFirstRowWarningRule = message.IsCsv && !CheckFirstRow(movements);
 
-            result.ContentRulesResults = await GetContentRules(movements, message.NotificationId, addFirstRowWarningRule);
+            result.ContentRulesResults = await GetOrderedContentRules(movements, message.NotificationId, addFirstRowWarningRule);
 
             if (result.IsContentRulesSuccess)
             {
@@ -49,7 +49,7 @@
             return result;
         }
 
-        private async Task<List<ContentRuleResult<BulkMovementContentRules>>> GetContentRules(List<PrenotificationMovement> movements, 
+        private async Task<List<ContentRuleResult<BulkMovementContentRules>>> GetOrderedContentRules(List<PrenotificationMovement> movements, 
             Guid notificationId, bool addFirstRowWarningRule)
         {
             var rules = new List<ContentRuleResult<BulkMovementContentRules>>();
@@ -74,7 +74,7 @@
                 }
             }
 
-            return rules;
+            return rules.OrderBy(r => r.Rule).ToList();
         }
 
         private async Task<ContentRuleResult<BulkMovementContentRules>> GetMissingDataResult(List<PrenotificationMovement> movements, Guid notificationId)
@@ -108,12 +108,12 @@
 
         private static bool CheckFirstRow(IList<PrenotificationMovement> movements)
         {
-            if (!IsValidNotificationNumber(movements[0].NotificationNumber))
+            if (!IsValidNotificationNumber(movements[(int)PrenotificationColumnIndex.NotificationNumber].NotificationNumber))
             {
                 movements.RemoveAt(0);
                 return false;
             }
-            
+
             return true;
         }
 
@@ -121,12 +121,7 @@
         {
             var match = Regex.Match(input.Replace(" ", string.Empty), @"(GB)(\d{4})(\d{6})");
 
-            if (match.Success)
-            {
-                return true;
-            }
-
-            return false;
+            return match.Success;
         }
     }
 }
