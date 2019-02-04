@@ -23,13 +23,19 @@
 
             return await Task.Run(() =>
             {
-                var lastNumber = movements.OrderByDescending(m => m.ShipmentNumber).First().ShipmentNumber.GetValueOrDefault();
+                var shipments =
+                    movements.Where(
+                            m =>
+                                m.ShipmentNumber.HasValue &&
+                                m.ShipmentNumber.Value > movementSummary.IntendedTotalShipments)
+                        .Select(m => m.ShipmentNumber.Value)
+                        .OrderBy(m => m)
+                        .ToList();
 
-                var result = lastNumber > movementSummary.IntendedTotalShipments
-                    ? MessageLevel.Error
-                    : MessageLevel.Success;
+                var result = shipments.Any() ? MessageLevel.Error : MessageLevel.Success;
 
-                var errorMessage = string.Format(Prsd.Core.Helpers.EnumHelper.GetDisplayName(BulkMovementContentRules.InvalidShipmentNumber), lastNumber);
+                var shipmentNumbers = string.Join(", ", shipments);
+                var errorMessage = string.Format(Prsd.Core.Helpers.EnumHelper.GetDisplayName(BulkMovementContentRules.InvalidShipmentNumber), shipmentNumbers);
 
                 return new ContentRuleResult<BulkMovementContentRules>(BulkMovementContentRules.InvalidShipmentNumber, result, errorMessage);
             });
