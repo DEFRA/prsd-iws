@@ -23,25 +23,21 @@
 
             return await Task.Run(() =>
             {
-                var contentValidityResult = MessageLevel.Success;
-                var contentValidityShipmentNumbers = new List<string>();
+                var shipments =
+                    movements.Where(
+                            m =>
+                                m.ShipmentNumber.HasValue &&
+                                (m.ActualDateOfShipment.HasValue &&
+                                 !consent.ConsentRange.Contains(m.ActualDateOfShipment.Value)))
+                        .Select(m => m.ShipmentNumber.Value)
+                        .ToList();
 
-                foreach (var shipment in movements)
-                {
-                    if (shipment.ShipmentNumber.HasValue && shipment.ActualDateOfShipment.HasValue)
-                    {
-                        if (!consent.ConsentRange.Contains(shipment.ActualDateOfShipment.GetValueOrDefault()))
-                        {
-                            contentValidityResult = MessageLevel.Error;
-                            contentValidityShipmentNumbers.Add(shipment.ShipmentNumber.ToString());
-                        }
-                    }
-                }
+                var result = shipments.Any() ? MessageLevel.Error : MessageLevel.Success;
                 
-                var shipmentNumbers = string.Join(", ", contentValidityShipmentNumbers);
+                var shipmentNumbers = string.Join(", ", shipments);
                 var errorMessage = string.Format(Prsd.Core.Helpers.EnumHelper.GetDisplayName(BulkMovementContentRules.ConsentValidity), shipmentNumbers);
 
-                return new ContentRuleResult<BulkMovementContentRules>(BulkMovementContentRules.ConsentValidity, contentValidityResult, errorMessage);
+                return new ContentRuleResult<BulkMovementContentRules>(BulkMovementContentRules.ConsentValidity, result, errorMessage);
             });
         }
     }

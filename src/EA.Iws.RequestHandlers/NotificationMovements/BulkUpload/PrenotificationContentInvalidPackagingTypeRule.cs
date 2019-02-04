@@ -3,7 +3,6 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Text;
     using System.Threading.Tasks;
     using Core.Movement.Bulk;
     using Core.Rules;
@@ -24,29 +23,21 @@
 
             return await Task.Run(() =>
             {
-                var notificationNumberResult = MessageLevel.Success;
-                var notificationNumberShipmentNumbers = new List<string>();
+                var shipments =
+                    movements.Where(
+                            m =>
+                                m.ShipmentNumber.HasValue &&
+                                m.PackagingTypes.Any(
+                                    p => notificationApplication.PackagingInfos.Count(t => t.PackagingType == p) == 0))
+                        .Select(m => m.ShipmentNumber.Value)
+                        .ToList();
 
-                foreach (var movement in movements)
-                {
-                    foreach (var packageType in movement.PackagingTypes)
-                    {
-                        if (notificationApplication.PackagingInfos.Count(p => p.PackagingType == packageType) == 0)
-                        {
-                            notificationNumberShipmentNumbers.Add(movement.ShipmentNumber.ToString());
-                            break;
-                        }
-                    }
-                }
-                if (notificationNumberShipmentNumbers.Count > 0)
-                {
-                    notificationNumberResult = MessageLevel.Error;
-                }
+                var result = shipments.Any() ? MessageLevel.Error : MessageLevel.Success;
 
-                var shipmentNumbers = string.Join(", ", notificationNumberShipmentNumbers);
+                var shipmentNumbers = string.Join(", ", shipments);
                 var errorMessage = string.Format(Prsd.Core.Helpers.EnumHelper.GetDisplayName(BulkMovementContentRules.InvalidPackagingType), shipmentNumbers);
 
-                return new ContentRuleResult<BulkMovementContentRules>(BulkMovementContentRules.InvalidPackagingType, notificationNumberResult, errorMessage);
+                return new ContentRuleResult<BulkMovementContentRules>(BulkMovementContentRules.InvalidPackagingType, result, errorMessage);
             });
         }
     }

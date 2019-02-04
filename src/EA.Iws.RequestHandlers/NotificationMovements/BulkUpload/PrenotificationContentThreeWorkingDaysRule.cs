@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
     using System.Threading.Tasks;
     using Core.Movement.Bulk;
     using Core.Rules;
@@ -34,26 +35,19 @@
 
             return await Task.Run(() =>
             {
-                var result = MessageLevel.Success;
-                var failedShipmentNumbers = new List<string>();
+                var shipments =
+                    movements.Where(
+                            m =>
+                                m.ShipmentNumber.HasValue && m.ActualDateOfShipment.HasValue &&
+                                m.ActualDateOfShipment.Value > SystemTime.UtcNow && !consentHasExpired &&
+                                workingDayCalculator.GetWorkingDays(SystemTime.UtcNow, m.ActualDateOfShipment.Value,
+                                    true, ca) < 4)
+                        .Select(m => m.ShipmentNumber.Value)
+                        .ToList();
 
-                foreach (var movement in movements)
-                {
-                    if (movement.ShipmentNumber.HasValue && movement.ActualDateOfShipment.HasValue &&
-                        movement.ActualDateOfShipment.Value > SystemTime.UtcNow && !consentHasExpired)
-                    {
-                        var workingDays = workingDayCalculator.GetWorkingDays(SystemTime.UtcNow,
-                            movement.ActualDateOfShipment.Value, true, ca);
+                var result = shipments.Any() ? MessageLevel.Error : MessageLevel.Success;
 
-                        if (workingDays < 4)
-                        {
-                            result = MessageLevel.Error;
-                            failedShipmentNumbers.Add(movement.ShipmentNumber.Value.ToString());
-                        }
-                    }
-                }
-
-                var shipmentNumbers = string.Join(", ", failedShipmentNumbers);
+                var shipmentNumbers = string.Join(", ", shipments);
                 var errorMessage = string.Format(Prsd.Core.Helpers.EnumHelper.GetDisplayName(BulkMovementContentRules.ThreeWorkingDaysToShipment), shipmentNumbers);
 
                 return new ContentRuleResult<BulkMovementContentRules>(BulkMovementContentRules.ThreeWorkingDaysToShipment, result, errorMessage);
