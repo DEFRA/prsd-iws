@@ -27,8 +27,9 @@
                     movements.Where(
                             m =>
                                 m.ShipmentNumber.HasValue &&
-                                m.PackagingTypes.Any(
-                                    p => notificationApplication.PackagingInfos.Count(t => t.PackagingType == p) == 0))
+                                (!m.PackagingTypes.Any() ||
+                                m.PackagingTypes.All(
+                                    p => notificationApplication.PackagingInfos.All(t => t.PackagingType != p))))
                         .Select(m => m.ShipmentNumber.Value)
                         .ToList();
 
