@@ -50,7 +50,8 @@
                     ConfigureDataTable = (tableReader) => new ExcelDataTableConfiguration()
                     {
                         UseHeaderRow = useHeaderRow
-                    }
+                    },
+                    UseColumnDataType = true
                 });
 
                 if (dataSet.Tables.Count > 0)
