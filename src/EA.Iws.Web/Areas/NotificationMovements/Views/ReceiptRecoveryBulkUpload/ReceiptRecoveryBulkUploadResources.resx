@@ -159,9 +159,6 @@
   <data name="UploadReceiptRecoveryList6" xml:space="preserve">
     <value>The quantity unit of measurement must meet the criteria permitted on the notification.</value>
   </data>
-  <data name="UploadReceiptRecoveryTabTitle" xml:space="preserve">
-    <value>Receipt / Recovery Bulk Upload</value>
-  </data>
   <data name="UploadReceiptRecoveryText1" xml:space="preserve">
     <value>Upload the receipt and/or recovery data file in an Excel or .CSV format.</value>
   </data>
@@ -170,5 +167,14 @@
   </data>
   <data name="UploadReceiptRecoveryTitle" xml:space="preserve">
     <value>Bulk upload of receipt and/or recovery data</value>
+  </data>
+  <data name="WarningHeader" xml:space="preserve">
+    <value>You haven't added any shipment movement documents</value>
+  </data>
+  <data name="WarningText1" xml:space="preserve">
+    <value>You must upload shipment movement documents with your receipt and/or recovery data file to finish the process.</value>
+  </data>
+  <data name="WarningText2" xml:space="preserve">
+    <value>If you leave the process before adding your accompanying shipment movement documents, your bulk upload of receipt and/or recovery data will not be saved.</value>
   </data>
 </root>

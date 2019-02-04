@@ -58,5 +58,38 @@
 
             return View(model);
         }
+
+        [HttpGet]
+        public ActionResult Warning(Guid notificationId)
+        {
+            var model = new WarningChoiceViewModel(notificationId);
+
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Warning(WarningChoiceViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            if (model.GetEnumDisplayValue(WarningChoicesList.Leave).Equals(model.WarningChoices.SelectedValue))
+            {
+                TempData.Remove("ReceiptRecoveryShipments");
+                TempData.Remove("ReceiptRecoveryFileName");
+                TempData.Remove("DraftBulkUploadId");
+
+                return RedirectToAction("Index", "Options", new { area = "NotificationApplication", id = model.NotificationId });
+            }
+            if (model.GetEnumDisplayValue(WarningChoicesList.Return).Equals(model.WarningChoices.SelectedValue))
+            {
+                return RedirectToAction("Documents");
+            }
+
+            return View(model);
+        }
     }
 }
