@@ -8,6 +8,8 @@
 
     public class ActualDateOfShipmentDataRowMap : IMap<DataRow, DateTime?>
     {
+        private readonly string[] formats = { "dd/MM/yyyy", "d/MM/yyyy", "d/M/yyyy", "dd/M/yyyy" };
+
         public DateTime? Map(DataRow source)
         {
             DateTime? result = null;
@@ -18,10 +20,14 @@
                 data = data.Trim().Split(' ')[0];
                 DateTime parsed;
 
-                if (DateTime.TryParseExact(data, "dd/MM/yyyy", CultureInfo.InvariantCulture, DateTimeStyles.None,
-                    out parsed))
+                foreach (var format in formats)
                 {
-                    result = parsed;
+                    if (DateTime.TryParseExact(data, format, CultureInfo.InvariantCulture, DateTimeStyles.None,
+                        out parsed))
+                    {
+                        result = parsed;
+                        break;
+                    }
                 }
             }
             catch

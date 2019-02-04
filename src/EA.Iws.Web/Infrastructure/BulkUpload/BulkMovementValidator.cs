@@ -72,6 +72,11 @@
 
                 rules.Add(result);
             }
+
+            if (DataTable != null && DataTable.Rows.Count == 0)
+            {
+                rules.Add(new RuleResult<BulkMovementFileRules>(BulkMovementFileRules.EmptyData, MessageLevel.Error));
+            }
             
             return rules;
         }

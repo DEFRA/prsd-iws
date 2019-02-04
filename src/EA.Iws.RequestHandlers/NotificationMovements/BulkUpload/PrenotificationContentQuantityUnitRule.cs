@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
     using System.Threading.Tasks;
     using Core.Movement.Bulk;
     using Core.Rules;
@@ -25,19 +26,14 @@
 
             return await Task.Run(() =>
             {
-                var result = MessageLevel.Success;
-                var failedShipments = new List<string>();
+                var shipments =
+                    movements.Where(m => m.ShipmentNumber.HasValue && (!m.Unit.HasValue || m.Unit.Value != units))
+                        .Select(m => m.ShipmentNumber.Value)
+                        .ToList();
 
-                foreach (var movement in movements)
-                {
-                    if (movement.ShipmentNumber.HasValue && movement.Unit.HasValue && movement.Unit.Value != units)
-                    {
-                        result = MessageLevel.Error;
-                        failedShipments.Add(movement.ShipmentNumber.Value.ToString());
-                    }
-                }
+                var result = shipments.Any() ? MessageLevel.Error : MessageLevel.Success;
 
-                var shipmentNumbers = string.Join(", ", failedShipments);
+                var shipmentNumbers = string.Join(", ", shipments);
                 var errorMessage =
                     string.Format(
                         Prsd.Core.Helpers.EnumHelper.GetDisplayName(BulkMovementContentRules.QuantityUnit),
