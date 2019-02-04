@@ -2,7 +2,7 @@
 {
     public enum BulkType
     {
-        // TODO: Add Receipt/Recovery here
-        Prenotification
+        Prenotification,
+        ReceiptRecovery
     }
 }

@@ -69,7 +69,19 @@
 
         public byte[] GenerateBulkUploadTemplate(BulkType bulkType)
         {
-            using (var memoryStream = DocumentHelper.ReadDocumentStreamShared("BulkUploadPrenotificationTemplate.xlsx"))
+            var templateName = string.Empty;
+
+            switch (bulkType)
+            {
+                case BulkType.Prenotification:
+                    templateName = "BulkUploadPrenotificationTemplate.xlsx";
+                    break;
+                case BulkType.ReceiptRecovery:
+                    templateName = "BulkUploadReceiptRecoveryTemplate.xlsx";
+                    break;
+            }
+
+            using (var memoryStream = DocumentHelper.ReadDocumentStreamShared(templateName))
             {
                 return memoryStream.ToArray();
             }
