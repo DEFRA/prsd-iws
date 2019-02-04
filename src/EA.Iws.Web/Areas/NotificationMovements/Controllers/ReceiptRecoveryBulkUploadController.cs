@@ -30,6 +30,13 @@
             return View("Index", model);
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Index(Guid notificationId, ReceiptRecoveryBulkUploadViewModel model)
+        {
+            return RedirectToAction("Upload");
+        }
+
         [HttpGet]
         public ActionResult Upload(Guid notificationId)
         {
