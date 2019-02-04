@@ -11,6 +11,7 @@
     using Prsd.Core.Mediator;
     using Web.Infrastructure;
     using Web.Infrastructure.BulkUpload;
+    using Web.ViewModels.Shared;
     using Xunit;
 
     public class ReceiptRecoverBulkUploadControllerTests
@@ -76,6 +77,31 @@
 
             Assert.NotNull(result);
             Assert.Equal(string.Empty, result.ViewName);
+        }
+
+        [Fact]
+        public void GetWarning_ReturnsView()
+        {
+            var result = controller.Warning(Guid.NewGuid()) as ViewResult;
+
+            Assert.NotNull(result);
+            Assert.Equal(string.Empty, result.ViewName);
+        }
+
+        [Fact]
+        public void PostWarning_LeaveUpload_RedirectsToOptions()
+        {
+            var model = new WarningChoiceViewModel(Guid.NewGuid());
+
+            var warningChoice = RadioButtonStringCollectionViewModel.CreateFromEnum(WarningChoicesList.Leave);
+
+            model.WarningChoices = warningChoice;
+
+            var result = controller.Warning(model) as RedirectToRouteResult;
+
+            Assert.NotNull(result);
+            Assert.Equal("Index", (string)result.RouteValues["action"]);
+            Assert.Equal("Options", (string)result.RouteValues["controller"]);
         }
     }
 }
