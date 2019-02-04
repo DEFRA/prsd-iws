@@ -6,6 +6,7 @@
     using System.Web.Mvc;
     using System.Web.Routing;
     using Areas.NotificationMovements.Controllers;
+    using Areas.NotificationMovements.ViewModels.PrenotificationBulkUpload;
     using FakeItEasy;
     using Prsd.Core.Mediator;
     using Web.Infrastructure;
@@ -41,6 +42,40 @@
 
             Assert.NotNull(result);
             Assert.Equal("Index", result.ViewName);
+        }
+
+        [Fact]
+        public void PostIndex_RedirectsToUpload()
+        {
+            var model = new ReceiptRecoveryBulkUploadViewModel(Guid.NewGuid());
+
+            var result = controller.Index(model.NotificationId, model) as RedirectToRouteResult;
+
+            Assert.NotNull(result);
+            Assert.Equal("Upload", (string)result.RouteValues["action"]);
+        }
+
+        [Fact]
+        public void GetUpload_ReturnsView()
+        {
+            var model = new ReceiptRecoveryBulkUploadViewModel(Guid.NewGuid());
+            var result = controller.Upload(Guid.NewGuid(), model) as ViewResult;
+
+            Assert.NotNull(result);
+            Assert.Equal(string.Empty, result.ViewName);
+        }
+
+        [Fact]
+        public void PostUpload_MissingFile_ReturnsView()
+        {
+            controller.ModelState.AddModelError("File", "Missing file");
+
+            var model = new ReceiptRecoveryBulkUploadViewModel(Guid.NewGuid());
+
+            var result = controller.Upload(model.NotificationId, model) as ViewResult;
+
+            Assert.NotNull(result);
+            Assert.Equal(string.Empty, result.ViewName);
         }
     }
 }
