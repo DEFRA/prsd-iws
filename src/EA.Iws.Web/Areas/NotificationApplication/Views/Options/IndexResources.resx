@@ -253,6 +253,6 @@
     <value>Bulk upload prenotification data</value>
   </data>
   <data name="BulkUploadTemplate" xml:space="preserve">
-    <value>Template for bulk uploading shipment data</value>
+    <value>Templates for bulk uploading shipment data</value>
   </data>
 </root>
