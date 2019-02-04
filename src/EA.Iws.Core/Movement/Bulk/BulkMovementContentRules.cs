@@ -6,10 +6,10 @@
     {
         [Display(Name = "We think the first row was header data and have removed it. If the data was not header data, please check the first row and try to upload again. If the data was header data, and there are no errors, press continue.")]
         HeaderDataRemoved,
+        [Display(Name = "You can't create {0} shipment(s), there is missing notification and shipment number.")]
+        MissingShipmentNumbers,
         [Display(Name = "Shipment number {0}: there is missing data.")]
         MissingData,
-        [Display(Name = "You can't create {0} shipment(s) as they are missing a value for shipment number.")]
-        MissingShipmentNumbers,
         [Display(Name = "You can't create {0} shipments as there are only {1} active loads remaining.")]
         ExcessiveShipments,
         [Display(Name = "Shipment number {0}: is duplicated within the data file.")]

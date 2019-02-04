@@ -61,48 +61,69 @@
                     Prsd.Core.Helpers.EnumHelper.GetDisplayName(BulkMovementContentRules.HeaderDataRemoved)));
             }
 
-            var missingData = await GetMissingDataResult(movements, notificationId);
+            var missingNotificationShipment = await GetMissingNotificationShipmentNumbers(movements);
 
-            rules.Add(missingData);
+            rules.Add(missingNotificationShipment);
 
-            // Only run rest of validations if there are no missing/blank data.
-            if (missingData.MessageLevel == MessageLevel.Success)
+            if (missingNotificationShipment.MessageLevel == MessageLevel.Success)
             {
-                foreach (var rule in contentRules)
+                var missingData = await GetMissingDataResult(movements);
+
+                rules.Add(missingData);
+
+                // Only run rest of validations if there are no missing/blank data.
+                if (missingData.MessageLevel == MessageLevel.Success)
                 {
-                    rules.Add(await rule.GetResult(movements, notificationId));
+                    foreach (var rule in contentRules)
+                    {
+                        rules.Add(await rule.GetResult(movements, notificationId));
+                    }
                 }
             }
 
             return rules.OrderBy(r => r.Rule).ToList();
         }
 
-        private async Task<ContentRuleResult<BulkMovementContentRules>> GetMissingDataResult(List<PrenotificationMovement> movements, Guid notificationId)
+        private static async Task<ContentRuleResult<BulkMovementContentRules>> GetMissingNotificationShipmentNumbers(
+            IReadOnlyCollection<PrenotificationMovement> movements)
         {
             return await Task.Run(() =>
             {
-                var missingDataResult = MessageLevel.Success;
-                var missingDataShipmentNumbers = new List<string>();
+                var result = movements.Any(m => m.MissingNotificationNumber
+                || m.MissingShipmentNumber
+                || !m.ShipmentNumber.HasValue)
+                    ? MessageLevel.Error
+                    : MessageLevel.Success;
 
-                foreach (var movement in movements)
-                {
-                    // Only report an error if shipment has a shipment number, otherwise record will be picked up by the PrenotificationContentMissingShipmentNumberRule
-                    if (movement.ShipmentNumber.HasValue &&
-                        (movement.MissingNotificationNumber ||
-                        movement.MissingQuantity ||
-                        movement.MissingUnits ||
-                        movement.MissingPackagingTypes ||
-                        movement.MissingDateOfShipment))
-                    {
-                        missingDataResult = MessageLevel.Error;
-                        missingDataShipmentNumbers.Add(movement.ShipmentNumber.ToString());
-                    }
-                }
+                var errorMessage = string.Format(Prsd.Core.Helpers.EnumHelper.GetDisplayName(BulkMovementContentRules.MissingShipmentNumbers), movements.Count);
 
-                var shipmentNumbers = string.Join(", ", missingDataShipmentNumbers);
-                var errorMessage = string.Format(Prsd.Core.Helpers.EnumHelper.GetDisplayName(BulkMovementContentRules.MissingData), shipmentNumbers);
+                return new ContentRuleResult<BulkMovementContentRules>(BulkMovementContentRules.MissingShipmentNumbers, result, errorMessage);
+            });
+        }
 
-                return new ContentRuleResult<BulkMovementContentRules>(BulkMovementContentRules.MissingData, missingDataResult, errorMessage);
+        private static async Task<ContentRuleResult<BulkMovementContentRules>> GetMissingDataResult(
+            List<PrenotificationMovement> movements)
+        {
+            return await Task.Run(() =>
+            {
+                var shipments =
+                    movements.Where(
+                            m =>
+                                m.ShipmentNumber.HasValue &&
+                                (m.MissingQuantity || m.MissingUnits || m.MissingPackagingTypes ||
+                                 m.MissingDateOfShipment))
+                        .Select(m => m.ShipmentNumber.Value)
+                        .ToList();
+
+                var result = shipments.Any() ? MessageLevel.Error : MessageLevel.Success;
+
+                var shipmentNumbers = string.Join(", ", shipments);
+                var errorMessage =
+                    string.Format(Prsd.Core.Helpers.EnumHelper.GetDisplayName(BulkMovementContentRules.MissingData),
+                        shipmentNumbers);
+
+                return new ContentRuleResult<BulkMovementContentRules>(BulkMovementContentRules.MissingData,
+                    result, errorMessage);
             });
         }
 
