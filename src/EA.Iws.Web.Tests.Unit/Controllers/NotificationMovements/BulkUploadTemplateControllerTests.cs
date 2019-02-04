@@ -37,5 +37,22 @@
             Assert.Equal(MimeTypes.MSExcelXml, fileResult.ContentType);
             Assert.True(fileResult.FileDownloadName.EndsWith(".xlsx"));
         }
+
+        [Fact]
+        public async Task GetReceiptRecoveryTemplateReturnsExcelFile()
+        {
+            A.CallTo(() => mediator.SendAsync(new GetBulkUploadTemplate(BulkType.ReceiptRecovery)))
+                .Returns(new byte[100]);
+
+            var result = await controller.ReceiptRecoveryTemplate();
+
+            Assert.IsType<FileContentResult>(result);
+
+            var fileResult = result as FileContentResult;
+
+            Assert.NotNull(fileResult);
+            Assert.Equal(MimeTypes.MSExcelXml, fileResult.ContentType);
+            Assert.True(fileResult.FileDownloadName.EndsWith(".xlsx"));
+        }
     }
 }

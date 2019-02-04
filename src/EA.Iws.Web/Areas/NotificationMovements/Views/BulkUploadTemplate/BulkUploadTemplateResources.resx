@@ -118,10 +118,10 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Description" xml:space="preserve">
-    <value>Use the link below to download a blank Excel template for bulk uploading your shipment data for notification {0}</value>
+    <value>Use the links below to download a blank Excel template for bulk uploading your shipment data for notification {0}</value>
   </data>
   <data name="Header" xml:space="preserve">
-    <value>Template for bulk uploading shipment movements</value>
+    <value>Templates for bulk uploading shipment movements</value>
   </data>
   <data name="NotificationOptions" xml:space="preserve">
     <value>Go to notification options</value>
@@ -129,7 +129,10 @@
   <data name="PrenotificationTemplate" xml:space="preserve">
     <value>Bulk upload prenotification template</value>
   </data>
+  <data name="ReceiptRecoveryTemplate" xml:space="preserve">
+    <value>Bulk upload receipt and/or recovery template</value>
+  </data>
   <data name="Title" xml:space="preserve">
-    <value>Bulk upload template</value>
+    <value>Bulk upload templates</value>
   </data>
 </root>
