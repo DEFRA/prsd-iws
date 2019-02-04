@@ -141,4 +141,34 @@
   <data name="UploadReceiptRecoveryTabTitle" xml:space="preserve">
     <value>Receipt / Recovery Bulk Upload</value>
   </data>
+  <data name="UploadReceiptRecoveryList1" xml:space="preserve">
+    <value>The data file should not exceed 2GB in size.</value>
+  </data>
+  <data name="UploadReceiptRecoveryList2" xml:space="preserve">
+    <value>Remove all column headings from a CSV file type.</value>
+  </data>
+  <data name="UploadReceiptRecoveryList3" xml:space="preserve">
+    <value>Only contain shipment records for shipments that have already been prenotified.</value>
+  </data>
+  <data name="UploadReceiptRecoveryList4" xml:space="preserve">
+    <value>No duplicate receipt or recovery information will be accepted.</value>
+  </data>
+  <data name="UploadReceiptRecoveryList5" xml:space="preserve">
+    <value>The tonnage quantity must not exceed 4 decimal places.</value>
+  </data>
+  <data name="UploadReceiptRecoveryList6" xml:space="preserve">
+    <value>The quantity unit of measurement must meet the criteria permitted on the notification.</value>
+  </data>
+  <data name="UploadReceiptRecoveryTabTitle" xml:space="preserve">
+    <value>Receipt / Recovery Bulk Upload</value>
+  </data>
+  <data name="UploadReceiptRecoveryText1" xml:space="preserve">
+    <value>Upload the receipt and/or recovery data file in an Excel or .CSV format.</value>
+  </data>
+  <data name="UploadReceiptRecoveryText2" xml:space="preserve">
+    <value>Make sure all data matches the correct template format to avoid validation errors.</value>
+  </data>
+  <data name="UploadReceiptRecoveryTitle" xml:space="preserve">
+    <value>Bulk upload of receipt and/or recovery data</value>
+  </data>
 </root>

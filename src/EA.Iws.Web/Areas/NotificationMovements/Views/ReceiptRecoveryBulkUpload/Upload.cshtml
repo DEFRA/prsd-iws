@@ -1,0 +1,48 @@
+﻿@using Resource = EA.Iws.Web.Areas.NotificationMovements.Views.ReceiptRecoveryBulkUpload.ReceiptRecoveryBulkUploadResources
+@model EA.Iws.Web.Areas.NotificationMovements.ViewModels.PrenotificationBulkUpload.ReceiptRecoveryBulkUploadViewModel
+
+@{
+    ViewBag.Title = @Resource.UploadReceiptRecoveryTabTitle;
+    Layout = "~/Views/Shared/_Layout.GovUK.Sections.cshtml";
+}
+
+<div class="grid-row">
+    <div class="column-full">
+        <div>
+            <h1 class="heading-large">@Resource.UploadReceiptRecoveryTitle</h1>
+            <p>@Resource.UploadReceiptRecoveryText1</p>
+            <p>@Resource.UploadReceiptRecoveryText2</p>
+            <p>
+                <ul class="list-bullet grey-text">
+                    For example:
+                    <li>@Resource.UploadReceiptRecoveryList1</li>
+                    <li>@Resource.UploadReceiptRecoveryList2</li>
+                    <li>@Resource.UploadReceiptRecoveryList3</li>
+                    <li>@Resource.UploadReceiptRecoveryList4</li>
+                    <li>@Resource.UploadReceiptRecoveryList5</li>
+                    <li>@Resource.UploadReceiptRecoveryList6</li>
+                </ul>
+            </p>
+            <p>
+        </div>
+
+        @using (Html.BeginForm("Upload", null, null,
+            FormMethod.Post, HtmlHelper.AnonymousObjectToHtmlAttributes(new { enctype = "multipart/form-data" })))
+        {
+            @Html.AntiForgeryToken()
+            @Html.Gds().ValidationSummary()
+
+            <div class="form-group @Html.Gds().FormGroupClass(m => m.File)">
+                <label for="@Html.NameFor(m => m.File)" class="visually-hidden">@Html.DisplayNameFor(m => m.File)</label>
+                @Html.Gds().ValidationMessageFor(m => m.File)
+                @Html.Gds().TextBoxFor(m => m.File, new { type = "file" })
+            </div>
+
+            <div class="form-group-compound">
+                <button class="button" type="submit">@Constants.ContinueButtonText</button>
+            </div>
+        }
+    </div>
+</div>
+
+@Html.ActionLink(Resource.NotificationOptionsLink, "Index", "Options", new { id = @Model.NotificationId, area = "NotificationApplication" }, null)
