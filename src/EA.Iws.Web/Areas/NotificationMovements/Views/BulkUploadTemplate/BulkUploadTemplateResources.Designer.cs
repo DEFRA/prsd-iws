@@ -62,7 +62,7 @@ namespace EA.Iws.Web.Areas.NotificationMovements.Views.BulkUploadTemplate {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Use the link below to download a blank Excel template for bulk uploading your shipment data for notification {0}.
+        ///   Looks up a localized string similar to Use the links below to download a blank Excel template for bulk uploading your shipment data for notification {0}.
         /// </summary>
         public static string Description {
             get {
@@ -71,7 +71,7 @@ namespace EA.Iws.Web.Areas.NotificationMovements.Views.BulkUploadTemplate {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Template for bulk uploading shipment movements.
+        ///   Looks up a localized string similar to Templates for bulk uploading shipment movements.
         /// </summary>
         public static string Header {
             get {
@@ -98,7 +98,16 @@ namespace EA.Iws.Web.Areas.NotificationMovements.Views.BulkUploadTemplate {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Bulk upload template.
+        ///   Looks up a localized string similar to Bulk upload receipt and/or recovery template.
+        /// </summary>
+        public static string ReceiptRecoveryTemplate {
+            get {
+                return ResourceManager.GetString("ReceiptRecoveryTemplate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bulk upload templates.
         /// </summary>
         public static string Title {
             get {

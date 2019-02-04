@@ -57,5 +57,27 @@
                 return HttpNotFound();
             }
         }
+
+        [HttpGet]
+        public async Task<ActionResult> ReceiptRecoveryTemplate()
+        {
+            try
+            {
+                var response = await mediator.SendAsync(new GetBulkUploadTemplate(BulkType.ReceiptRecovery));
+
+                var downloadName = "BulkUploadReceiptRecoveryTemplate-" + SystemTime.UtcNow.ToString("yyyy-MM-dd-HH-mm-ss") + ".xlsx";
+
+                return File(response, MimeTypes.MSExcelXml, downloadName);
+            }
+            catch (ApiBadRequestException ex)
+            {
+                this.HandleBadRequest(ex);
+                if (ModelState.IsValid)
+                {
+                    throw;
+                }
+                return HttpNotFound();
+            }
+        }
     }
 }
