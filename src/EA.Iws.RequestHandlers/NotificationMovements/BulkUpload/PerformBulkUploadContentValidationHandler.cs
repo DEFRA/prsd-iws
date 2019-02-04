@@ -18,6 +18,7 @@
         private readonly IEnumerable<IBulkMovementPrenotificationContentRule> contentRules;
         private readonly IMap<DataTable, List<PrenotificationMovement>> mapper;
         private readonly IDraftMovementRepository repository;
+        private const int MaxShipments = 50;
 
         public PerformBulkUploadContentValidationHandler(IEnumerable<IBulkMovementPrenotificationContentRule> contentRules,
             IMap<DataTable, List<PrenotificationMovement>> mapper,
@@ -61,27 +62,51 @@
                     Prsd.Core.Helpers.EnumHelper.GetDisplayName(BulkMovementContentRules.HeaderDataRemoved)));
             }
 
-            var missingNotificationShipment = await GetMissingNotificationShipmentNumbers(movements);
+            var maxShipments = await GetMaxShipments(movements);
+            
+            rules.Add(maxShipments);
 
-            rules.Add(missingNotificationShipment);
-
-            if (missingNotificationShipment.MessageLevel == MessageLevel.Success)
+            if (maxShipments.MessageLevel == MessageLevel.Success)
             {
-                var missingData = await GetMissingDataResult(movements);
+                var missingNotificationShipment = await GetMissingNotificationShipmentNumbers(movements);
 
-                rules.Add(missingData);
+                rules.Add(missingNotificationShipment);
 
-                // Only run rest of validations if there are no missing/blank data.
-                if (missingData.MessageLevel == MessageLevel.Success)
+                if (missingNotificationShipment.MessageLevel == MessageLevel.Success)
                 {
-                    foreach (var rule in contentRules)
+                    var missingData = await GetMissingDataResult(movements);
+
+                    rules.Add(missingData);
+
+                    // Only run rest of validations if there are no missing/blank data.
+                    if (missingData.MessageLevel == MessageLevel.Success)
                     {
-                        rules.Add(await rule.GetResult(movements, notificationId));
+                        foreach (var rule in contentRules)
+                        {
+                            rules.Add(await rule.GetResult(movements, notificationId));
+                        }
                     }
                 }
             }
 
             return rules.OrderBy(r => r.Rule).ToList();
+        }
+
+        private static async Task<ContentRuleResult<BulkMovementContentRules>> GetMaxShipments(
+            IReadOnlyCollection<PrenotificationMovement> movements)
+        {
+            return await Task.Run(() =>
+            {
+                var result = movements.Count > MaxShipments ? MessageLevel.Error : MessageLevel.Success;
+
+                var errorMessage =
+                    string.Format(
+                        Prsd.Core.Helpers.EnumHelper.GetDisplayName(BulkMovementContentRules.MaximumShipments),
+                        MaxShipments);
+
+                return new ContentRuleResult<BulkMovementContentRules>(BulkMovementContentRules.MaximumShipments,
+                    result, errorMessage);
+            });
         }
 
         private static async Task<ContentRuleResult<BulkMovementContentRules>> GetMissingNotificationShipmentNumbers(
@@ -90,14 +115,18 @@
             return await Task.Run(() =>
             {
                 var result = movements.Any(m => m.MissingNotificationNumber
-                || m.MissingShipmentNumber
-                || !m.ShipmentNumber.HasValue)
+                                                || m.MissingShipmentNumber
+                                                || !m.ShipmentNumber.HasValue)
                     ? MessageLevel.Error
                     : MessageLevel.Success;
 
-                var errorMessage = string.Format(Prsd.Core.Helpers.EnumHelper.GetDisplayName(BulkMovementContentRules.MissingShipmentNumbers), movements.Count);
+                var errorMessage =
+                    string.Format(
+                        Prsd.Core.Helpers.EnumHelper.GetDisplayName(BulkMovementContentRules.MissingShipmentNumbers),
+                        movements.Count);
 
-                return new ContentRuleResult<BulkMovementContentRules>(BulkMovementContentRules.MissingShipmentNumbers, result, errorMessage);
+                return new ContentRuleResult<BulkMovementContentRules>(BulkMovementContentRules.MissingShipmentNumbers,
+                    result, errorMessage);
             });
         }
 
