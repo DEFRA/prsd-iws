@@ -97,6 +97,15 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.Options {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Bulk upload receipt and/or {0} data.
+        /// </summary>
+        public static string BulkUploadReceipt {
+            get {
+                return ResourceManager.GetString("BulkUploadReceipt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Templates for bulk uploading shipment data.
         /// </summary>
         public static string BulkUploadTemplate {
