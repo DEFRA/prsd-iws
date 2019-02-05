@@ -2338,6 +2338,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ReceiptRecoveryBulkUploadResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Infrastructure\BulkUploadReceiptRecovery\ReceiptRecoveryValidator.cs" />
+    <Compile Include="Infrastructure\BulkUploadReceiptRecovery\IReceiptRecoveryFileRule.cs" />
+    <Compile Include="Infrastructure\BulkUploadReceiptRecovery\IReceiptRecoveryValidator.cs" />
     <Compile Include="Infrastructure\BulkUpload\BulkMovementValidator.cs" />
     <Compile Include="Infrastructure\BulkUpload\PrenotificationFileSizeRule.cs" />
     <Compile Include="Infrastructure\BulkUpload\PrenotificationFileTypeRule.cs" />
