@@ -35,9 +35,7 @@
 
             var movements = mapper.Map(message.DataTable);
 
-            var addFirstRowWarningRule = message.IsCsv && !CheckFirstRow(movements);
-
-            result.ContentRulesResults = await GetOrderedContentRules(movements, message.NotificationId, addFirstRowWarningRule);
+            result.ContentRulesResults = await GetOrderedContentRules(movements, message.NotificationId);
 
             if (result.IsContentRulesSuccess)
             {
@@ -51,16 +49,9 @@
         }
 
         private async Task<List<ContentRuleResult<BulkMovementContentRules>>> GetOrderedContentRules(List<PrenotificationMovement> movements, 
-            Guid notificationId, bool addFirstRowWarningRule)
+            Guid notificationId)
         {
             var rules = new List<ContentRuleResult<BulkMovementContentRules>>();
-
-            if (addFirstRowWarningRule)
-            {
-                rules.Add(new ContentRuleResult<BulkMovementContentRules>(BulkMovementContentRules.HeaderDataRemoved,
-                    MessageLevel.Warning,
-                    Prsd.Core.Helpers.EnumHelper.GetDisplayName(BulkMovementContentRules.HeaderDataRemoved)));
-            }
 
             var maxShipments = await GetMaxShipments(movements);
             
@@ -156,7 +147,7 @@
             });
         }
 
-        private static bool CheckFirstRow(IList<PrenotificationMovement> movements)
+        /*private static bool CheckFirstRow(IList<PrenotificationMovement> movements)
         {
             if (!IsValidNotificationNumber(movements[(int)PrenotificationColumnIndex.NotificationNumber].NotificationNumber))
             {
@@ -172,6 +163,6 @@
             var match = Regex.Match(input.Replace(" ", string.Empty), @"(GB)(\d{4})(\d{6})");
 
             return match.Success;
-        }
+        }*/
     }
 }

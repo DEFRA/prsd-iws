@@ -89,41 +89,6 @@
                 </details>
             </div>
         }
-
-        @if (Model.WarningsCount > 0)
-            {
-            <div class="form-group">
-                <details>
-                    <summary class="summary-warning">
-                        <h2 class="summary-warning-heading-xsmall">@Resources.ViewWarnings</h2>
-                    </summary>
-                    <div class="summary-warning-panel">
-                        @if (Model.WarningContentRules != null)
-                        {
-                            foreach (var rule in Model.WarningContentRules)
-                            {
-                                <div class="summary-warning-row">
-                                    <div class="grid-row">
-                                        <div class="column-two-thirds">
-                                            @Html.Raw(rule.ErrorMessage)
-                                        </div>
-                                    </div>
-                                </div>
-                                if (rule.Rule == BulkMovementContentRules.HeaderDataRemoved && Model.ErrorsCount == 0)
-                                {
-                                    using (Html.BeginForm("Errors", null, null))
-                                    {
-                                        @Html.AntiForgeryToken()
-                                        @Html.Gds().ValidationSummary()
-                                        <button class="button" type="submit">@Constants.ContinueOnlyButtonText</button>
-                                    }
-                                }
-                            }
-                        }
-                    </div>
-                </details>
-            </div>
-        }
     </div>
 </div>
 
