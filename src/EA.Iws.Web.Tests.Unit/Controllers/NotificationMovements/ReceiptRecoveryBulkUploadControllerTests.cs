@@ -6,11 +6,11 @@
     using System.Web.Mvc;
     using System.Web.Routing;
     using Areas.NotificationMovements.Controllers;
-    using Areas.NotificationMovements.ViewModels.PrenotificationBulkUpload;
+    using Areas.NotificationMovements.ViewModels.ReceiptRecoveryBulkUpload;
     using FakeItEasy;
     using Prsd.Core.Mediator;
     using Web.Infrastructure;
-    using Web.Infrastructure.BulkUpload;
+    using Web.Infrastructure.BulkUploadReceiptRecovery;
     using Web.ViewModels.Shared;
     using Xunit;
 
@@ -22,7 +22,7 @@
         public ReceiptRecoverBulkUploadControllerTests()
         {
             mediator = A.Fake<IMediator>();
-            var validator = A.Fake<IBulkMovementValidator>();
+            var validator = A.Fake<IReceiptRecoveryValidator>();
             var fileReader = A.Fake<IFileReader>();
 
             controller = new ReceiptRecoveryBulkUploadController(this.mediator, validator, fileReader);
@@ -57,23 +57,22 @@
         }
 
         [Fact]
-        public void GetUpload_ReturnsView()
+        public async Task GetUpload_ReturnsView()
         {
             var model = new ReceiptRecoveryBulkUploadViewModel(Guid.NewGuid());
-            var result = controller.Upload(Guid.NewGuid(), model) as ViewResult;
+            var result = await controller.Upload(Guid.NewGuid(), model) as ViewResult;
 
             Assert.NotNull(result);
             Assert.Equal(string.Empty, result.ViewName);
         }
 
         [Fact]
-        public void PostUpload_MissingFile_ReturnsView()
+        public async Task PostUpload_MissingFile_ReturnsView()
         {
             controller.ModelState.AddModelError("File", "Missing file");
 
             var model = new ReceiptRecoveryBulkUploadViewModel(Guid.NewGuid());
-
-            var result = controller.Upload(model.NotificationId, model) as ViewResult;
+            var result = await controller.Upload(model.NotificationId, model) as ViewResult;
 
             Assert.NotNull(result);
             Assert.Equal(string.Empty, result.ViewName);

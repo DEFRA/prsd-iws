@@ -1,20 +1,23 @@
 ﻿namespace EA.Iws.Web.Areas.NotificationMovements.Controllers
 {
     using System;
+    using System.Linq;
+    using System.Threading.Tasks;
     using System.Web.Mvc;
+    using Core.Rules;
     using Infrastructure;
-    using Infrastructure.BulkUpload;
+    using Infrastructure.BulkUploadReceiptRecovery;
     using Prsd.Core.Mediator;
-    using ViewModels.PrenotificationBulkUpload;
+    using ViewModels.ReceiptRecoveryBulkUpload;
 
     [Authorize]
     public class ReceiptRecoveryBulkUploadController : Controller
     {
         private readonly IMediator mediator;
-        private readonly IBulkMovementValidator validator;
+        private readonly IReceiptRecoveryValidator validator;
         private readonly IFileReader fileReader;
 
-        public ReceiptRecoveryBulkUploadController(IMediator mediator, IBulkMovementValidator validator, IFileReader fileReader)
+        public ReceiptRecoveryBulkUploadController(IMediator mediator, IReceiptRecoveryValidator validator, IFileReader fileReader)
         {
             this.mediator = mediator;
             this.validator = validator;
@@ -47,13 +50,26 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Upload(Guid notificationId, ReceiptRecoveryBulkUploadViewModel model)
+        public async Task<ActionResult> Upload(Guid notificationId, ReceiptRecoveryBulkUploadViewModel model)
         {
             if (!ModelState.IsValid)
             {
                 ViewBag.NotificationId = notificationId;
                 model = new ReceiptRecoveryBulkUploadViewModel(notificationId);
                 return View(model);
+            }
+
+            var validationSummary = await validator.GetValidationSummary(model.File, notificationId);
+            var failedFileRules = validationSummary.FileRulesResults.Where(r => r.MessageLevel == MessageLevel.Error).Select(r => r.Rule).ToList();
+            var failedContentRules = validationSummary.ContentRulesResults.Where(r => r.MessageLevel == MessageLevel.Error).ToList();
+            var warningContentRule = validationSummary.ContentRulesResults.Where(r => r.MessageLevel == MessageLevel.Warning).ToList();
+            model.FailedFileRules = failedFileRules;
+            model.FailedContentRules = failedContentRules;
+            model.WarningContentRules = warningContentRule;
+
+            if (model.ErrorsCount > 0 || model.WarningsCount > 0)
+            {
+                return View("Errors", model);
             }
 
             return View(model);
