@@ -3,19 +3,19 @@
     using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
-    using Core.Movement.Bulk;
+    using Core.Movement.BulkPrenotification;
     using Core.Rules;
-    using RequestHandlers.NotificationMovements.BulkUpload;
+    using RequestHandlers.NotificationMovements.BulkPrenotification;
     using Xunit;
 
     public class PrenotificationContentDuplicateShipmentNumberRuleTests
     {
-        private readonly PrenotificationContentDuplicateShipmentNumberRule rule;
+        private readonly PrenotificationDuplicateShipmentNumberRule rule;
         private readonly Guid notificationId;
 
         public PrenotificationContentDuplicateShipmentNumberRuleTests()
         {
-            rule = new PrenotificationContentDuplicateShipmentNumberRule();
+            rule = new PrenotificationDuplicateShipmentNumberRule();
             notificationId = Guid.NewGuid();
         }
 
@@ -24,7 +24,7 @@
         {
             var result = await rule.GetResult(GetTestData(false), notificationId);
 
-            Assert.Equal(BulkMovementContentRules.DuplicateShipmentNumber, result.Rule);
+            Assert.Equal(PrenotificationContentRules.DuplicateShipmentNumber, result.Rule);
             Assert.Equal(MessageLevel.Success, result.MessageLevel);
         }
 
@@ -33,7 +33,7 @@
         {
             var result = await rule.GetResult(GetTestData(true), notificationId);
 
-            Assert.Equal(BulkMovementContentRules.DuplicateShipmentNumber, result.Rule);
+            Assert.Equal(PrenotificationContentRules.DuplicateShipmentNumber, result.Rule);
             Assert.Equal(MessageLevel.Error, result.MessageLevel);
         }
 

@@ -2,7 +2,7 @@
 {
     using System.Data;
     using System.Text.RegularExpressions;
-    using Core.Movement.Bulk;
+    using Core.Movement.BulkPrenotification;
     using Prsd.Core.Mapper;
 
     public class NotificationNumberDataRowMap : IMap<DataRow, string>

@@ -9,7 +9,7 @@
     using Core.Movement;
     using Core.Rules;
     using Infrastructure;
-    using Infrastructure.BulkUpload;
+    using Infrastructure.BulkPrenotification;
     using Prsd.Core.Mediator;
     using Requests.NotificationMovements;
     using Requests.NotificationMovements.BulkUpload;
@@ -19,10 +19,10 @@
     public class PrenotificationBulkUploadController : Controller
     {
         private readonly IMediator mediator;
-        private readonly IBulkMovementValidator validator;
+        private readonly IPrenotificationValidator validator;
         private readonly IFileReader fileReader;
 
-        public PrenotificationBulkUploadController(IMediator mediator, IBulkMovementValidator validator, IFileReader fileReader)
+        public PrenotificationBulkUploadController(IMediator mediator, IPrenotificationValidator validator, IFileReader fileReader)
         {
             this.mediator = mediator;
             this.validator = validator;

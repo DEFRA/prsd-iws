@@ -3,7 +3,7 @@
     using System;
     using System.Data;
     using System.Globalization;
-    using Core.Movement.Bulk;
+    using Core.Movement.BulkPrenotification;
     using Prsd.Core.Mapper;
 
     public class ActualDateOfShipmentDataRowMap : IMap<DataRow, DateTime?>
