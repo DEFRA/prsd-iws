@@ -255,4 +255,7 @@
   <data name="BulkUploadTemplate" xml:space="preserve">
     <value>Templates for bulk uploading shipment data</value>
   </data>
+  <data name="BulkUploadReceipt" xml:space="preserve">
+    <value>Bulk upload receipt and/or {0} data</value>
+  </data>
 </root>
