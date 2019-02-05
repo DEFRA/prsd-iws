@@ -440,6 +440,7 @@
     <Compile Include="NotificationAssessment\SetExporterContactHandler.cs" />
     <Compile Include="NotificationAssessment\SetNewNumberOfShipmentsHandler.cs" />
     <Compile Include="NotificationAssessment\SetEntryPointHandler.cs" />
+    <Compile Include="NotificationMovements\BulkUploadReceiptRecovery\PerformReceiptRecoveryContentValidationHandler.cs" />
     <Compile Include="NotificationMovements\BulkUpload\CreateBulkPrenotificationHandler.cs" />
     <Compile Include="NotificationMovements\BulkUpload\GetBulkUploadTemplateHandler.cs" />
     <Compile Include="NotificationMovements\BulkUpload\PerformBulkUploadContentValidationHandler.cs" />
@@ -541,6 +542,7 @@
     <Compile Include="NotificationMovements\Mappings\PackagingTypesDataRowMap.cs" />
     <Compile Include="NotificationMovements\Mappings\PrenotificationMovementCollectionMap.cs" />
     <Compile Include="NotificationMovements\Mappings\QuantityDataRowMap.cs" />
+    <Compile Include="NotificationMovements\Mappings\ReceiptRecoveryMovementCollectionMap.cs" />
     <Compile Include="NotificationMovements\Mappings\ShipmentDatesMap.cs" />
     <Compile Include="NotificationMovements\Mappings\ShipmentNumberDataRowMap.cs" />
     <Compile Include="NotificationMovements\Mappings\ShipmentQuantityUnitDataRowMap.cs" />
@@ -855,9 +857,7 @@
       <LastGenOutput>WasteTypeValidatorResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="NotificationMovements\BulkUploadReceiptRecovery\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
