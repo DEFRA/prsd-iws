@@ -1,0 +1,54 @@
+﻿@using Resources = EA.Iws.Web.Areas.NotificationMovements.Views.ReceiptRecoveryBulkUpload.ReceiptRecoveryBulkUploadResources
+@model EA.Iws.Web.Areas.NotificationMovements.ViewModels.ReceiptRecoveryBulkUpload.ShipmentMovementDocumentsViewModel
+
+@{
+    ViewBag.Title = @Resources.SuccessTitle;
+    Layout = "~/Views/Shared/_Layout.GovUK.Sections.cshtml";
+}
+
+<style>
+
+    .margin-left-75
+    {
+        margin-left: 75px !important;
+    }
+
+    .summary-file-icon
+    {
+        position: absolute;
+    }
+
+</style>
+
+<div class="grid-row">
+    <div class="column-full">
+        <div class="margin-bottom-30">
+            <h1 class="heading-large">@Resources.SuccessHeaderText</h1>
+        </div>
+        <div>
+            <img class="summary-file-icon" src="@Url.Content("~/Content/images/file-icon.png")" alt="">
+            <span class="margin-left-75 margin-bottom-30 margin-top-30">@Resources.SuccessText</span>
+            <div class="margin-left-75">
+                <div class="margin-bottom-30 margin-top-30">
+                    <img class="summary-confirmation-icon" src="@Url.Content("~/Content/images/confirmation-icon.png")" alt="">
+                    <span>@Model.ReceiptRecoveryFileName</span>
+                </div>
+                <div class="margin-bottom-30 margin-top-30">
+                    <img class="summary-confirmation-icon" src="@Url.Content("~/Content/images/confirmation-icon.png")" alt="">
+                    <span>@Model.ShipmentMovementFileName</span>
+                </div>
+            </div>
+        </div>
+        <div>
+            @if (Model.Shipments.Count() > 1)
+            {
+                <p>@string.Format(Resources.SuccessTextMultipleShipments, Model.GetShipments)</p>
+            }
+            else
+            {
+                <p>@string.Format(Resources.SuccessTextSingleShipment, Model.GetShipments)</p>
+            }
+        </div>
+
+    </div>
+</div>

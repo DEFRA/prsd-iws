@@ -1,11 +1,12 @@
 ﻿namespace EA.Iws.Web.Areas.NotificationMovements.Controllers
 {
     using System;
+    using System.Collections.Generic;
     using System.Web.Mvc;
     using Infrastructure;
     using Infrastructure.BulkUpload;
     using Prsd.Core.Mediator;
-    using ViewModels.PrenotificationBulkUpload;
+    using ViewModels.ReceiptRecoveryBulkUpload;
 
     [Authorize]
     public class ReceiptRecoveryBulkUploadController : Controller
@@ -55,6 +56,39 @@
                 model = new ReceiptRecoveryBulkUploadViewModel(notificationId);
                 return View(model);
             }
+
+            return View(model);
+        }
+
+        [HttpGet]
+        public ActionResult Success(Guid notificationId)
+        {
+            var fileName = string.Empty;
+            var shipments = new List<int>();
+            var shipmentMovementFileName = string.Empty;
+
+            // TODO: Uncomment and update these comments when the DocumentUpload page is added
+            /*object fileNameObj;
+            object shipmentsObj;
+            object shipmentDocumentNameObj;
+
+            
+            if (TempData.TryGetValue("PreNotificationFileName", out fileNameObj))
+            {
+                fileName = fileNameObj as string;
+            }
+            if (TempData.TryGetValue("PrenotificationShipments", out shipmentsObj))
+            {
+                shipments = shipmentsObj as List<int>;
+            }
+            if (TempData.TryGetValue("ShipmentMovementFileName", out shipmentDocumentNameObj))
+            {
+                shipmentMovementFileName = shipmentDocumentNameObj as string;
+            }*/
+
+            var model = new ShipmentMovementDocumentsViewModel(notificationId, shipments, fileName);
+
+            model.ShipmentMovementFileName = shipmentMovementFileName;
 
             return View(model);
         }

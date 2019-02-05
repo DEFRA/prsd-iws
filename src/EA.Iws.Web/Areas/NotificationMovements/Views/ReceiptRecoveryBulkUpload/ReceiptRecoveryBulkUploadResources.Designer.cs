@@ -71,6 +71,15 @@ namespace EA.Iws.Web.Areas.NotificationMovements.Views.ReceiptRecoveryBulkUpload
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to There were no errors within the {filename} data file..
+        /// </summary>
+        public static string ShipmentMovementsSuccessText {
+            get {
+                return ResourceManager.GetString("ShipmentMovementsSuccessText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Start.
         /// </summary>
         public static string StartButtonText {
@@ -112,6 +121,51 @@ namespace EA.Iws.Web.Areas.NotificationMovements.Views.ReceiptRecoveryBulkUpload
         public static string StartText3 {
             get {
                 return ResourceManager.GetString("StartText3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your bulk upload has been successful.
+        /// </summary>
+        public static string SuccessHeaderText {
+            get {
+                return ResourceManager.GetString("SuccessHeaderText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You have uploaded:.
+        /// </summary>
+        public static string SuccessText {
+            get {
+                return ResourceManager.GetString("SuccessText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your prenotifications of shipments {0} have now been recorded in the IWS service..
+        /// </summary>
+        public static string SuccessTextMultipleShipments {
+            get {
+                return ResourceManager.GetString("SuccessTextMultipleShipments", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your prenotification of shipment {0} has now been recorded in the IWS service..
+        /// </summary>
+        public static string SuccessTextSingleShipment {
+            get {
+                return ResourceManager.GetString("SuccessTextSingleShipment", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Success.
+        /// </summary>
+        public static string SuccessTitle {
+            get {
+                return ResourceManager.GetString("SuccessTitle", resourceCulture);
             }
         }
         
