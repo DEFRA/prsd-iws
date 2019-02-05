@@ -151,6 +151,7 @@
                             @Html.ActionLink(Resource.EditPrenotification, "Index", "Edit", new { notificationId = Model.NotificationId, area = "NotificationMovements" }, null)
                             <br />
                             @Html.ActionLink(string.Format(Resource.CertificateOfReceipt, certificateLinkText), "CertificateTypes", "Certificate", new { notificationId = Model.NotificationId, area = "NotificationMovements" }, null)
+                            @Html.ActionLink(string.Format(Resource.BulkUploadReceipt, certificateLinkText), "Index", "ReceiptRecoveryBulkUpload", new { notificationId = Model.NotificationId, area = "NotificationMovements" }, null)
                             @Html.ActionLink(Resource.Reject, "Index", "Reject", new { notificationId = Model.NotificationId, area = "NotificationMovements" }, null)
                             <br />
                             @Html.ActionLink(Resource.BulkUploadTemplate, "Index", "BulkUploadTemplate", new { notificationId = Model.NotificationId, area = "NotificationMovements" }, null)
