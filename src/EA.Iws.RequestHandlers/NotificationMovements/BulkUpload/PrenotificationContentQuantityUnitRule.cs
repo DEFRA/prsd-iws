@@ -23,11 +23,16 @@
         {
             var shipment = await shipmentInfoRepository.GetByNotificationId(notificationId);
             var units = shipment == null ? default(ShipmentQuantityUnits) : shipment.Units;
+            var availableUnits = ShipmentQuantityUnitsMetadata.GetUnitsOfThisType(units).ToList();
 
             return await Task.Run(() =>
             {
                 var shipments =
-                    movements.Where(m => m.ShipmentNumber.HasValue && (!m.Unit.HasValue || m.Unit.Value != units))
+                    movements.Where(
+                            m =>
+                                m.ShipmentNumber.HasValue &&
+                                (!m.Unit.HasValue ||
+                                availableUnits.All(u => u != m.Unit.Value)))
                         .Select(m => m.ShipmentNumber.Value)
                         .ToList();
 
