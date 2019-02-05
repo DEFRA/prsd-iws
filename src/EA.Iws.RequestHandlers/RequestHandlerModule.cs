@@ -9,7 +9,7 @@
     using Core.Authorization;
     using Core.ComponentRegistration;
     using Core.Movement;
-    using Core.Movement.Bulk;
+    using Core.Movement.BulkPrenotification;
     using Decorators;
     using Documents;
     using Domain.ImportNotification;
@@ -77,8 +77,8 @@
                 .As<IMovementRule>();
 
             builder.RegisterAssemblyTypes(ThisAssembly)
-                .AssignableTo<IBulkMovementPrenotificationContentRule>()
-                .As<IBulkMovementPrenotificationContentRule>();
+                .AssignableTo<IPrenotificationContentRule>()
+                .As<IPrenotificationContentRule>();
         }
 
         private static bool HasAsposeLicense()

@@ -9,7 +9,7 @@
     using Core.Movement;
     using Core.Rules;
     using Infrastructure;
-    using Infrastructure.BulkUpload;
+    using Infrastructure.BulkPrenotification;
     using Prsd.Core.Mediator;
     using Requests.NotificationMovements;
     using Requests.NotificationMovements.BulkUpload;

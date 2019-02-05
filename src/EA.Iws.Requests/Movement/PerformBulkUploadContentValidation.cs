@@ -4,7 +4,7 @@
     using System.Data;
     using Core.Authorization;
     using Core.Authorization.Permissions;
-    using Core.Movement.Bulk;
+    using Core.Movement.BulkPrenotification;
     using Prsd.Core.Mediator;
 
     [RequestAuthorization(ExportMovementPermissions.CanEditExportMovements)]

@@ -4,12 +4,12 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
-    using Core.Movement.Bulk;
+    using Core.Movement.BulkPrenotification;
     using Core.Rules;
     using Domain;
     using Domain.NotificationConsent;
     using FakeItEasy;
-    using RequestHandlers.NotificationMovements.BulkUpload;
+    using RequestHandlers.NotificationMovements.BulkPrenotification;
     using Xunit;
 
     public class PrenotificationShipmentBeyondConsentWindowRuleTests

@@ -14,7 +14,7 @@
     using Prsd.Core.Mediator;
     using Requests.NotificationMovements;
     using Web.Infrastructure;
-    using Web.Infrastructure.BulkUpload;
+    using Web.Infrastructure.BulkPrenotification;
     using Web.ViewModels.Shared;
     using Xunit;
 

@@ -3,7 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Data;
-    using Core.Movement.Bulk;
+    using Core.Movement.BulkPrenotification;
     using Core.PackagingType;
     using Prsd.Core.Mapper;
 

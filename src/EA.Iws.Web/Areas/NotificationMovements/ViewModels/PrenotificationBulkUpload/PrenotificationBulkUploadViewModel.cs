@@ -4,7 +4,7 @@
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.Web;
-    using Core.Movement.Bulk;
+    using Core.Movement.BulkPrenotification;
 
     public class PrenotificationBulkUploadViewModel : IValidatableObject
     {

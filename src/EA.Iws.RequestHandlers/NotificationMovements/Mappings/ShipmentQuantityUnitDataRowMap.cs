@@ -2,7 +2,7 @@
 {
     using System;
     using System.Data;
-    using Core.Movement.Bulk;
+    using Core.Movement.BulkPrenotification;
     using Core.Shared;
     using Prsd.Core.Mapper;
 

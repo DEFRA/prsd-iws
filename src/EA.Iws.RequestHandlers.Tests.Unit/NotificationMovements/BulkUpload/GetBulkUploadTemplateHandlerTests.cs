@@ -4,7 +4,7 @@
     using Core.Documents;
     using Domain;
     using FakeItEasy;
-    using RequestHandlers.NotificationMovements.BulkUpload;
+    using RequestHandlers.NotificationMovements.BulkPrenotification;
     using Requests.NotificationMovements.BulkUpload;
     using Xunit;
 

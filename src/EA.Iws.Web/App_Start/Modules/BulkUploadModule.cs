@@ -1,7 +1,7 @@
 ﻿namespace EA.Iws.Web.App_Start.Modules
 {
     using Autofac;
-    using Infrastructure.BulkUpload;
+    using Infrastructure.BulkPrenotification;
 
     public class BulkUploadModule : Module
     {

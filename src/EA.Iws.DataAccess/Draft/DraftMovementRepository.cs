@@ -6,7 +6,7 @@
     using System.Data.SqlClient;
     using System.Linq;
     using System.Threading.Tasks;
-    using Core.Movement.Bulk;
+    using Core.Movement.BulkPrenotification;
     using Core.Shared;
     using Domain.Movement.BulkUpload;
     using Prsd.Core;

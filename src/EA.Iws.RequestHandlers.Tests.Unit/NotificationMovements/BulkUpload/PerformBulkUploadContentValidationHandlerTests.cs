@@ -5,7 +5,7 @@
     using System.Data;
     using System.Linq;
     using System.Threading.Tasks;
-    using Core.Movement.Bulk;
+    using Core.Movement.BulkPrenotification;
     using Core.PackagingType;
     using Core.Rules;
     using Core.Shared;
@@ -13,26 +13,26 @@
     using FakeItEasy;
     using Prsd.Core;
     using Prsd.Core.Mapper;
-    using RequestHandlers.NotificationMovements.BulkUpload;
+    using RequestHandlers.NotificationMovements.BulkPrenotification;
     using Requests.Movement;
     using Xunit;
 
     public class PerformBulkUploadContentValidationHandlerTests
     {
         private readonly PerformBulkUploadContentValidationHandler handler;
-        private readonly IEnumerable<IBulkMovementPrenotificationContentRule> contentRules;
+        private readonly IEnumerable<IPrenotificationContentRule> contentRules;
         private readonly IMap<DataTable, List<PrenotificationMovement>> mapper;
         private readonly IDraftMovementRepository repository;
-        private readonly IBulkMovementPrenotificationContentRule contentRule;
+        private readonly IPrenotificationContentRule contentRule;
         private const int MaxShipments = 50;
 
         public PerformBulkUploadContentValidationHandlerTests()
         {
             mapper = A.Fake<IMap<DataTable, List<PrenotificationMovement>>>();
             repository = A.Fake<IDraftMovementRepository>();
-            contentRule = A.Fake<IBulkMovementPrenotificationContentRule>();
+            contentRule = A.Fake<IPrenotificationContentRule>();
 
-            contentRules = new List<IBulkMovementPrenotificationContentRule>(1)
+            contentRules = new List<IPrenotificationContentRule>(1)
             {
                 contentRule
             };
