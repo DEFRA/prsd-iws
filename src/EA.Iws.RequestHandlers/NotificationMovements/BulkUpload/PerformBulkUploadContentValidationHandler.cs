@@ -4,7 +4,6 @@
     using System.Collections.Generic;
     using System.Data;
     using System.Linq;
-    using System.Text.RegularExpressions;
     using System.Threading.Tasks;
     using Core.Movement.Bulk;
     using Core.Rules;
@@ -146,23 +145,5 @@
                     result, errorMessage);
             });
         }
-
-        /*private static bool CheckFirstRow(IList<PrenotificationMovement> movements)
-        {
-            if (!IsValidNotificationNumber(movements[(int)PrenotificationColumnIndex.NotificationNumber].NotificationNumber))
-            {
-                movements.RemoveAt(0);
-                return false;
-            }
-
-            return true;
-        }
-
-        private static bool IsValidNotificationNumber(string input)
-        {
-            var match = Regex.Match(input.Replace(" ", string.Empty), @"(GB)(\d{4})(\d{6})");
-
-            return match.Success;
-        }*/
     }
 }
