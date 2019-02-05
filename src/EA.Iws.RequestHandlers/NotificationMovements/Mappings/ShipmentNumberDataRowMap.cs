@@ -2,7 +2,7 @@
 {
     using System;
     using System.Data;
-    using Core.Movement.Bulk;
+    using Core.Movement.BulkPrenotification;
     using Prsd.Core.Mapper;
 
     public class ShipmentNumberDataRowMap : IMap<DataRow, int?>

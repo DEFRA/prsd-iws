@@ -213,7 +213,7 @@
     <Compile Include="Movement\GetMovementsByIds.cs" />
     <Compile Include="Movement\GetNewMovementIdsByNotificationId.cs" />
     <Compile Include="Movement\GetNotificationNumberByMovementId.cs" />
-    <Compile Include="Movement\PerformBulkUploadContentValidation.cs" />
+    <Compile Include="NotificationMovements\BulkUpload\PerformPrenotificationContentValidation.cs" />
     <Compile Include="Movement\SetMovementComments.cs" />
     <Compile Include="Movement\SetMultipleMovementFileId.cs" />
     <Compile Include="Movement\SetMovementReceiptAndRecoveryData.cs" />

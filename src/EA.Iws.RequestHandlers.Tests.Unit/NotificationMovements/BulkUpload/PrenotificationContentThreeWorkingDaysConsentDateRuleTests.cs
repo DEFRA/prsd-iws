@@ -3,19 +3,19 @@
     using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
-    using Core.Movement.Bulk;
+    using Core.Movement.BulkPrenotification;
     using Core.Notification;
     using Core.Rules;
     using Domain;
     using Domain.NotificationApplication;
     using Domain.NotificationConsent;
     using FakeItEasy;
-    using RequestHandlers.NotificationMovements.BulkUpload;
+    using RequestHandlers.NotificationMovements.BulkPrenotification;
     using Xunit;
 
     public class PrenotificationContentThreeWorkingDaysConsentDateRuleTests
     {
-        private readonly PrenotificationContentThreeWorkingDaysConsentDateRule rule;
+        private readonly PrenotificationThreeWorkingDaysConsentRule rule;
         private readonly INotificationConsentRepository consentRepository;
         private readonly IWorkingDayCalculator workingDayCalculator;
         private readonly Guid notificationId;
@@ -26,7 +26,7 @@
             workingDayCalculator = A.Fake<IWorkingDayCalculator>();
             var notificationApplicationRepository = A.Fake<INotificationApplicationRepository>();
 
-            rule = new PrenotificationContentThreeWorkingDaysConsentDateRule(consentRepository, workingDayCalculator,
+            rule = new PrenotificationThreeWorkingDaysConsentRule(consentRepository, workingDayCalculator,
                 notificationApplicationRepository);
 
             notificationId = Guid.NewGuid();
@@ -42,7 +42,7 @@
 
             var result = await rule.GetResult(GetTestData(), notificationId);
 
-            Assert.Equal(BulkMovementContentRules.ThreeWorkingDaysToConsentDate, result.Rule);
+            Assert.Equal(PrenotificationContentRules.ThreeWorkingDaysToConsentDate, result.Rule);
             Assert.Equal(MessageLevel.Success, result.MessageLevel);
         }
 
@@ -61,7 +61,7 @@
 
             var result = await rule.GetResult(GetTestData(), notificationId);
 
-            Assert.Equal(BulkMovementContentRules.ThreeWorkingDaysToConsentDate, result.Rule);
+            Assert.Equal(PrenotificationContentRules.ThreeWorkingDaysToConsentDate, result.Rule);
             Assert.Equal(MessageLevel.Success, result.MessageLevel);
         }
 
