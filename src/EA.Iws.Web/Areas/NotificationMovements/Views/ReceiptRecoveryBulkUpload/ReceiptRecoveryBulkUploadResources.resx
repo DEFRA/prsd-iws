@@ -177,4 +177,22 @@
   <data name="WarningText2" xml:space="preserve">
     <value>If you leave the process before adding your accompanying shipment movement documents, your bulk upload of receipt and/or recovery data will not be saved.</value>
   </data>
+  <data name="ShipmentMovementsSuccessText" xml:space="preserve">
+    <value>There were no errors within the {filename} data file.</value>
+  </data>
+  <data name="SuccessHeaderText" xml:space="preserve">
+    <value>Your bulk upload has been successful</value>
+  </data>
+  <data name="SuccessText" xml:space="preserve">
+    <value>You have uploaded:</value>
+  </data>
+  <data name="SuccessTextMultipleShipments" xml:space="preserve">
+    <value>Your prenotifications of shipments {0} have now been recorded in the IWS service.</value>
+  </data>
+  <data name="SuccessTextSingleShipment" xml:space="preserve">
+    <value>Your prenotification of shipment {0} has now been recorded in the IWS service.</value>
+  </data>
+  <data name="SuccessTitle" xml:space="preserve">
+    <value>Success</value>
+  </data>
 </root>
