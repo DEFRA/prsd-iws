@@ -8,16 +8,16 @@
     using Core.Rules;
     using Domain.NotificationApplication;
 
-    public class PrenotificationContentNotificationNumberRule : IPrenotificationContentRule
+    public class PrenotificationNotificationNumberRule : IPrenotificationContentRule
     {
         private readonly INotificationApplicationRepository notificationApplicationRepository;
 
-        public PrenotificationContentNotificationNumberRule(INotificationApplicationRepository notificationApplicationRepository)
+        public PrenotificationNotificationNumberRule(INotificationApplicationRepository notificationApplicationRepository)
         {
             this.notificationApplicationRepository = notificationApplicationRepository;
         }
 
-        public async Task<ContentRuleResult<BulkMovementContentRules>> GetResult(List<PrenotificationMovement> movements, Guid notificationId)
+        public async Task<PrenotificationContentRuleResult<PrenotificationContentRules>> GetResult(List<PrenotificationMovement> movements, Guid notificationId)
         {
             var notificationNumber = await notificationApplicationRepository.GetNumber(notificationId);
             return await Task.Run(() =>
@@ -30,9 +30,9 @@
                 var result = shipments.Any() ? MessageLevel.Error : MessageLevel.Success;
                 
                 var shipmentNumbers = string.Join(", ", result);
-                var errorMessage = string.Format(Prsd.Core.Helpers.EnumHelper.GetDisplayName(BulkMovementContentRules.WrongNotificationNumber), shipmentNumbers, notificationNumber);
+                var errorMessage = string.Format(Prsd.Core.Helpers.EnumHelper.GetDisplayName(PrenotificationContentRules.WrongNotificationNumber), shipmentNumbers, notificationNumber);
 
-                return new ContentRuleResult<BulkMovementContentRules>(BulkMovementContentRules.WrongNotificationNumber, result, errorMessage);
+                return new PrenotificationContentRuleResult<PrenotificationContentRules>(PrenotificationContentRules.WrongNotificationNumber, result, errorMessage);
             });
         }
     }

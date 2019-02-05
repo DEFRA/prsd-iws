@@ -6,6 +6,6 @@
 
     public interface IPrenotificationContentRule
     {
-        Task<ContentRuleResult<BulkMovementContentRules>> GetResult(List<PrenotificationMovement> movements, Guid notificationId);
+        Task<PrenotificationContentRuleResult<PrenotificationContentRules>> GetResult(List<PrenotificationMovement> movements, Guid notificationId);
     }
 }

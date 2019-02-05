@@ -15,7 +15,7 @@
         private readonly INotificationApplicationRepository repo;
         private readonly Guid notificationId = new Guid("DD1F019D-BD85-4A6F-89AB-328A7BD53CEA");
 
-        private readonly PrenotificationContentInvalidPackagingTypeRule rule;
+        private readonly PrenotificationInvalidPackagingTypeRule rule;
         private readonly NotificationApplication notificationApplication;
 
         public PrenotificationInvalidPackagingTypeRuleTests()
@@ -34,7 +34,7 @@
 
             A.CallTo(() => repo.GetById(notificationId)).Returns(notificationApplication);
 
-            rule = new PrenotificationContentInvalidPackagingTypeRule(repo);
+            rule = new PrenotificationInvalidPackagingTypeRule(repo);
         }
 
         [Fact]

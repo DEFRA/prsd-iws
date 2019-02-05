@@ -11,13 +11,13 @@
 
     public class PrenotificationContentDateHistoricRuleTests
     {
-        private readonly PrenotificationContentDateHistoricRule rule;
+        private readonly PrenotificationDateHistoricRule rule;
         private readonly Guid notificationId;
         private static DateTime dateTimeNow;
 
         public PrenotificationContentDateHistoricRuleTests()
         {
-            rule = new PrenotificationContentDateHistoricRule();
+            rule = new PrenotificationDateHistoricRule();
             notificationId = Guid.NewGuid();
 
             // Add a minute to the current time so that when processing it is still in the future
@@ -53,7 +53,7 @@
         {
             var result = await rule.GetResult(GetTestData(shipmentDate), notificationId);
 
-            Assert.Equal(BulkMovementContentRules.HistoricDate, result.Rule);
+            Assert.Equal(PrenotificationContentRules.HistoricDate, result.Rule);
             Assert.Equal(MessageLevel.Success, result.MessageLevel);
         }
 
@@ -63,7 +63,7 @@
         {
             var result = await rule.GetResult(GetTestData(shipmentDate), notificationId);
 
-            Assert.Equal(BulkMovementContentRules.HistoricDate, result.Rule);
+            Assert.Equal(PrenotificationContentRules.HistoricDate, result.Rule);
             Assert.Equal(MessageLevel.Error, result.MessageLevel);
         }
 

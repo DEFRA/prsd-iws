@@ -26,7 +26,7 @@
             this.notificationApplicationRepository = notificationApplicationRepository;
         }
 
-        public async Task<ContentRuleResult<BulkMovementContentRules>> GetResult(List<PrenotificationMovement> movements,
+        public async Task<PrenotificationContentRuleResult<PrenotificationContentRules>> GetResult(List<PrenotificationMovement> movements,
             Guid notificationId)
         {
             var ca = (await notificationApplicationRepository.GetById(notificationId)).CompetentAuthority;
@@ -48,9 +48,9 @@
                 var result = shipments.Any() ? MessageLevel.Error : MessageLevel.Success;
 
                 var shipmentNumbers = string.Join(", ", shipments);
-                var errorMessage = string.Format(Prsd.Core.Helpers.EnumHelper.GetDisplayName(BulkMovementContentRules.ThreeWorkingDaysToShipment), shipmentNumbers);
+                var errorMessage = string.Format(Prsd.Core.Helpers.EnumHelper.GetDisplayName(PrenotificationContentRules.ThreeWorkingDaysToShipment), shipmentNumbers);
 
-                return new ContentRuleResult<BulkMovementContentRules>(BulkMovementContentRules.ThreeWorkingDaysToShipment, result, errorMessage);
+                return new PrenotificationContentRuleResult<PrenotificationContentRules>(PrenotificationContentRules.ThreeWorkingDaysToShipment, result, errorMessage);
             });
         }
     }

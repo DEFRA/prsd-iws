@@ -7,9 +7,9 @@
     using Core.Movement.BulkPrenotification;
     using Core.Rules;
 
-    public class PrenotificationContentDuplicateShipmentNumberRule : IPrenotificationContentRule
+    public class PrenotificationDuplicateShipmentNumberRule : IPrenotificationContentRule
     {
-        public async Task<ContentRuleResult<BulkMovementContentRules>> GetResult(List<PrenotificationMovement> movements, Guid notificationId)
+        public async Task<PrenotificationContentRuleResult<PrenotificationContentRules>> GetResult(List<PrenotificationMovement> movements, Guid notificationId)
         {
             return await Task.Run(() =>
             {
@@ -22,9 +22,9 @@
                 var result = shipments.Any() ? MessageLevel.Error : MessageLevel.Success;
 
                 var shipmentNumbers = string.Join(", ", shipments);
-                var errorMessage = string.Format(Prsd.Core.Helpers.EnumHelper.GetDisplayName(BulkMovementContentRules.DuplicateShipmentNumber), shipmentNumbers);
+                var errorMessage = string.Format(Prsd.Core.Helpers.EnumHelper.GetDisplayName(PrenotificationContentRules.DuplicateShipmentNumber), shipmentNumbers);
 
-                return new ContentRuleResult<BulkMovementContentRules>(BulkMovementContentRules.DuplicateShipmentNumber, result, errorMessage);
+                return new PrenotificationContentRuleResult<PrenotificationContentRules>(PrenotificationContentRules.DuplicateShipmentNumber, result, errorMessage);
             });
         }
     }

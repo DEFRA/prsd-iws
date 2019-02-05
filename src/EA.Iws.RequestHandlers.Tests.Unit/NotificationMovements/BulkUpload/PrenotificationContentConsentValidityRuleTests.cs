@@ -12,7 +12,7 @@
 
     public class PrenotificationContentConsentValidityRuleTests
     {
-        private readonly PrenotificationContentConsentValidityRule rule;
+        private readonly PrenotificationConsentValidityRule rule;
         private readonly INotificationConsentRepository notificationConsentRepository;
         private readonly Guid notificationId;
         private readonly Consent consent;
@@ -20,7 +20,7 @@
         public PrenotificationContentConsentValidityRuleTests()
         {
             notificationConsentRepository = A.Fake<INotificationConsentRepository>();
-            rule = new PrenotificationContentConsentValidityRule(notificationConsentRepository);
+            rule = new PrenotificationConsentValidityRule(notificationConsentRepository);
             notificationId = Guid.NewGuid();
             consent = new Consent(Guid.NewGuid(), GetTestConsentDateRange(), string.Empty, Guid.NewGuid());
         }
@@ -60,7 +60,7 @@
 
             var result = await rule.GetResult(GetTestData(shipmentDate), notificationId);
 
-            Assert.Equal(BulkMovementContentRules.ConsentValidity, result.Rule);
+            Assert.Equal(PrenotificationContentRules.ConsentValidity, result.Rule);
             Assert.Equal(MessageLevel.Success, result.MessageLevel);
         }
 
@@ -72,7 +72,7 @@
 
             var result = await rule.GetResult(GetTestData(shipmentDate), notificationId);
 
-            Assert.Equal(BulkMovementContentRules.ConsentValidity, result.Rule);
+            Assert.Equal(PrenotificationContentRules.ConsentValidity, result.Rule);
             Assert.Equal(MessageLevel.Error, result.MessageLevel);
         }
 

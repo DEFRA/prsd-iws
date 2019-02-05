@@ -8,16 +8,16 @@
     using Core.Rules;
     using Domain.NotificationConsent;
 
-    public class PrenotificationContentShipmentBeyondConsentedDateRule : IPrenotificationContentRule
+    public class PrenotificationShipmentBeyondConsentRule : IPrenotificationContentRule
     {
         private readonly INotificationConsentRepository consentRepository;
 
-        public PrenotificationContentShipmentBeyondConsentedDateRule(INotificationConsentRepository consentRepository)
+        public PrenotificationShipmentBeyondConsentRule(INotificationConsentRepository consentRepository)
         {
             this.consentRepository = consentRepository;
         }
 
-        public async Task<ContentRuleResult<BulkMovementContentRules>> GetResult(List<PrenotificationMovement> movements, Guid notificationId)
+        public async Task<PrenotificationContentRuleResult<PrenotificationContentRules>> GetResult(List<PrenotificationMovement> movements, Guid notificationId)
         {
             var consentEndDate = (await consentRepository.GetByNotificationId(notificationId)).ConsentRange.To;
 
@@ -35,9 +35,9 @@
                 var result = shipments.Any() ? MessageLevel.Error : MessageLevel.Success;
 
                 var shipmentNumbers = string.Join(", ", shipments);
-                var errorMessage = string.Format(Prsd.Core.Helpers.EnumHelper.GetDisplayName(BulkMovementContentRules.BeyondConsentWindow), shipmentNumbers);
+                var errorMessage = string.Format(Prsd.Core.Helpers.EnumHelper.GetDisplayName(PrenotificationContentRules.BeyondConsentWindow), shipmentNumbers);
 
-                return new ContentRuleResult<BulkMovementContentRules>(BulkMovementContentRules.BeyondConsentWindow, result, errorMessage);
+                return new PrenotificationContentRuleResult<PrenotificationContentRules>(PrenotificationContentRules.BeyondConsentWindow, result, errorMessage);
             });
         }
     }

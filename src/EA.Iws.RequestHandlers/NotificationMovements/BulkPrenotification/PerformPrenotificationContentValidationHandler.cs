@@ -11,15 +11,16 @@
     using Prsd.Core.Mapper;
     using Prsd.Core.Mediator;
     using Requests.Movement;
+    using Requests.NotificationMovements.BulkUpload;
 
-    internal class PerformBulkUploadContentValidationHandler : IRequestHandler<PerformBulkUploadContentValidation, BulkMovementRulesSummary>
+    internal class PerformPrenotificationContentValidationHandler : IRequestHandler<PerformPrenotificationContentValidation, PrenotificationRulesSummary>
     {
         private readonly IEnumerable<IPrenotificationContentRule> contentRules;
         private readonly IMap<DataTable, List<PrenotificationMovement>> mapper;
         private readonly IDraftMovementRepository repository;
         private const int MaxShipments = 50;
 
-        public PerformBulkUploadContentValidationHandler(IEnumerable<IPrenotificationContentRule> contentRules,
+        public PerformPrenotificationContentValidationHandler(IEnumerable<IPrenotificationContentRule> contentRules,
             IMap<DataTable, List<PrenotificationMovement>> mapper,
             IDraftMovementRepository repository)
         {
@@ -28,9 +29,9 @@
             this.repository = repository;
         }
 
-        public async Task<BulkMovementRulesSummary> HandleAsync(PerformBulkUploadContentValidation message)
+        public async Task<PrenotificationRulesSummary> HandleAsync(PerformPrenotificationContentValidation message)
         {
-            var result = message.BulkMovementRulesSummary;
+            var result = message.RulesSummary;
 
             var movements = mapper.Map(message.DataTable);
 
@@ -47,10 +48,10 @@
             return result;
         }
 
-        private async Task<List<ContentRuleResult<BulkMovementContentRules>>> GetOrderedContentRules(List<PrenotificationMovement> movements, 
+        private async Task<List<PrenotificationContentRuleResult<PrenotificationContentRules>>> GetOrderedContentRules(List<PrenotificationMovement> movements, 
             Guid notificationId)
         {
-            var rules = new List<ContentRuleResult<BulkMovementContentRules>>();
+            var rules = new List<PrenotificationContentRuleResult<PrenotificationContentRules>>();
 
             var maxShipments = await GetMaxShipments(movements);
             
@@ -82,7 +83,7 @@
             return rules.OrderBy(r => r.Rule).ToList();
         }
 
-        private static async Task<ContentRuleResult<BulkMovementContentRules>> GetMaxShipments(
+        private static async Task<PrenotificationContentRuleResult<PrenotificationContentRules>> GetMaxShipments(
             IReadOnlyCollection<PrenotificationMovement> movements)
         {
             return await Task.Run(() =>
@@ -91,15 +92,15 @@
 
                 var errorMessage =
                     string.Format(
-                        Prsd.Core.Helpers.EnumHelper.GetDisplayName(BulkMovementContentRules.MaximumShipments),
+                        Prsd.Core.Helpers.EnumHelper.GetDisplayName(PrenotificationContentRules.MaximumShipments),
                         MaxShipments);
 
-                return new ContentRuleResult<BulkMovementContentRules>(BulkMovementContentRules.MaximumShipments,
+                return new PrenotificationContentRuleResult<PrenotificationContentRules>(PrenotificationContentRules.MaximumShipments,
                     result, errorMessage);
             });
         }
 
-        private static async Task<ContentRuleResult<BulkMovementContentRules>> GetMissingNotificationShipmentNumbers(
+        private static async Task<PrenotificationContentRuleResult<PrenotificationContentRules>> GetMissingNotificationShipmentNumbers(
             IReadOnlyCollection<PrenotificationMovement> movements)
         {
             return await Task.Run(() =>
@@ -112,15 +113,15 @@
 
                 var errorMessage =
                     string.Format(
-                        Prsd.Core.Helpers.EnumHelper.GetDisplayName(BulkMovementContentRules.MissingShipmentNumbers),
+                        Prsd.Core.Helpers.EnumHelper.GetDisplayName(PrenotificationContentRules.MissingShipmentNumbers),
                         movements.Count);
 
-                return new ContentRuleResult<BulkMovementContentRules>(BulkMovementContentRules.MissingShipmentNumbers,
+                return new PrenotificationContentRuleResult<PrenotificationContentRules>(PrenotificationContentRules.MissingShipmentNumbers,
                     result, errorMessage);
             });
         }
 
-        private static async Task<ContentRuleResult<BulkMovementContentRules>> GetMissingDataResult(
+        private static async Task<PrenotificationContentRuleResult<PrenotificationContentRules>> GetMissingDataResult(
             List<PrenotificationMovement> movements)
         {
             return await Task.Run(() =>
@@ -138,10 +139,10 @@
 
                 var shipmentNumbers = string.Join(", ", shipments);
                 var errorMessage =
-                    string.Format(Prsd.Core.Helpers.EnumHelper.GetDisplayName(BulkMovementContentRules.MissingData),
+                    string.Format(Prsd.Core.Helpers.EnumHelper.GetDisplayName(PrenotificationContentRules.MissingData),
                         shipmentNumbers);
 
-                return new ContentRuleResult<BulkMovementContentRules>(BulkMovementContentRules.MissingData,
+                return new PrenotificationContentRuleResult<PrenotificationContentRules>(PrenotificationContentRules.MissingData,
                     result, errorMessage);
             });
         }

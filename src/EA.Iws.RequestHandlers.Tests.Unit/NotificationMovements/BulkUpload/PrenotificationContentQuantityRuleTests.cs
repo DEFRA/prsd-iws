@@ -13,12 +13,12 @@
 
     public class PrenotificationContentQuantityRuleTests
     {
-        private readonly PrenotificationContentQuantityRule rule;
+        private readonly PrenotificationQuantityPrecisionRule rule;
         private readonly Guid notificationId;
 
         public PrenotificationContentQuantityRuleTests()
         {
-            rule = new PrenotificationContentQuantityRule();
+            rule = new PrenotificationQuantityPrecisionRule();
             notificationId = Guid.NewGuid();
         }
 
@@ -27,7 +27,7 @@
         {
             var result = await rule.GetResult(GetTestData(ShipmentQuantityUnits.Tonnes), notificationId);
 
-            Assert.Equal(BulkMovementContentRules.QuantityPrecision, result.Rule);
+            Assert.Equal(PrenotificationContentRules.QuantityPrecision, result.Rule);
             Assert.Equal(MessageLevel.Success, result.MessageLevel);
         }
 

@@ -1,4 +1,4 @@
-﻿namespace EA.Iws.RequestHandlers.NotificationMovements.BulkPrenotification
+﻿namespace EA.Iws.RequestHandlers.NotificationMovements.BulkUpload
 {
     using System.Threading.Tasks;
     using Domain;

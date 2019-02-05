@@ -2,16 +2,16 @@
 {
     using Rules;
 
-    public class ContentRuleResult<BulkMovementContentRules>
+    public class PrenotificationContentRuleResult<PrenotificationContentRules>
     {
-        public ContentRuleResult(BulkMovementContentRules rule, MessageLevel messageLevel, string errorMessage)
+        public PrenotificationContentRuleResult(PrenotificationContentRules rule, MessageLevel messageLevel, string errorMessage)
         {
             Rule = rule;
             MessageLevel = messageLevel;
             ErrorMessage = errorMessage;
         }
 
-        public BulkMovementContentRules Rule { get; private set; }
+        public PrenotificationContentRules Rule { get; private set; }
 
         public MessageLevel MessageLevel { get; private set; }
 

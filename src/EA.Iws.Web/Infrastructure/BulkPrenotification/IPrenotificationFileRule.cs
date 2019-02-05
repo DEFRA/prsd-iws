@@ -8,10 +8,10 @@
     using Core.Movement.BulkPrenotification;
     using Core.Rules;
 
-    public interface IBulkMovementPrenotificationFileRule
+    public interface IPrenotificationFileRule
     {
         List<FileUploadType> UploadType { get; }
         DataTable DataTable { get; set; }
-        Task<RuleResult<BulkMovementFileRules>> GetResult(HttpPostedFileBase file);
+        Task<RuleResult<PrenotificationFileRules>> GetResult(HttpPostedFileBase file);
     }
 }

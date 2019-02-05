@@ -11,13 +11,13 @@
     using Domain.NotificationConsent;
     using Prsd.Core;
 
-    public class PrenotificationContentThreeWorkingDaysConsentDateRule : IPrenotificationContentRule
+    public class PrenotificationThreeWorkingDaysConsentRule : IPrenotificationContentRule
     {
         private readonly INotificationConsentRepository consentRepository;
         private readonly IWorkingDayCalculator workingDayCalculator;
         private readonly INotificationApplicationRepository notificationApplicationRepository;
 
-        public PrenotificationContentThreeWorkingDaysConsentDateRule(INotificationConsentRepository consentRepository,
+        public PrenotificationThreeWorkingDaysConsentRule(INotificationConsentRepository consentRepository,
             IWorkingDayCalculator workingDayCalculator,
             INotificationApplicationRepository notificationApplicationRepository)
         {
@@ -26,7 +26,7 @@
             this.notificationApplicationRepository = notificationApplicationRepository;
         }
 
-        public async Task<ContentRuleResult<BulkMovementContentRules>> GetResult(List<PrenotificationMovement> movements,
+        public async Task<PrenotificationContentRuleResult<PrenotificationContentRules>> GetResult(List<PrenotificationMovement> movements,
             Guid notificationId)
         {
             var ca = (await notificationApplicationRepository.GetById(notificationId)).CompetentAuthority;
@@ -47,9 +47,9 @@
                 var result = shipments.Any() ? MessageLevel.Error : MessageLevel.Success;
 
                 var shipmentNumbers = string.Join(", ", shipments);
-                var errorMessage = string.Format(Prsd.Core.Helpers.EnumHelper.GetDisplayName(BulkMovementContentRules.ThreeWorkingDaysToConsentDate), shipmentNumbers);
+                var errorMessage = string.Format(Prsd.Core.Helpers.EnumHelper.GetDisplayName(PrenotificationContentRules.ThreeWorkingDaysToConsentDate), shipmentNumbers);
 
-                return new ContentRuleResult<BulkMovementContentRules>(BulkMovementContentRules.ThreeWorkingDaysToConsentDate, result, errorMessage);
+                return new PrenotificationContentRuleResult<PrenotificationContentRules>(PrenotificationContentRules.ThreeWorkingDaysToConsentDate, result, errorMessage);
             });
         }
     }

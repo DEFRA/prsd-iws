@@ -10,7 +10,7 @@
     using Core.Rules;
     using VirusScanning;
 
-    public class VirusRule : IBulkMovementPrenotificationFileRule
+    public class VirusRule : IPrenotificationFileRule
     {
         private readonly IVirusScanner virusScanner;
 
@@ -35,7 +35,7 @@
             }
         }
 
-        public async Task<RuleResult<BulkMovementFileRules>> GetResult(HttpPostedFileBase file)
+        public async Task<RuleResult<PrenotificationFileRules>> GetResult(HttpPostedFileBase file)
         {
             var result = MessageLevel.Success;
             byte[] fileBytes;
@@ -52,7 +52,7 @@
                 result = MessageLevel.Error;
             }
 
-            return new RuleResult<BulkMovementFileRules>(BulkMovementFileRules.Virus, result);
+            return new RuleResult<PrenotificationFileRules>(PrenotificationFileRules.Virus, result);
         }
     }
 }

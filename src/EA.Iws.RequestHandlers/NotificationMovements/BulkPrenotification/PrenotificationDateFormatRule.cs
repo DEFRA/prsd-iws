@@ -7,9 +7,9 @@
     using Core.Movement.BulkPrenotification;
     using Core.Rules;
 
-    public class PrenotificationContentDateFormatRule : IPrenotificationContentRule
+    public class PrenotificationDateFormatRule : IPrenotificationContentRule
     {
-        public async Task<ContentRuleResult<BulkMovementContentRules>> GetResult(List<PrenotificationMovement> movements, Guid notificationId)
+        public async Task<PrenotificationContentRuleResult<PrenotificationContentRules>> GetResult(List<PrenotificationMovement> movements, Guid notificationId)
         {
             return await Task.Run(() =>
             {
@@ -21,9 +21,9 @@
                 var result = shipments.Any() ? MessageLevel.Error : MessageLevel.Success;
 
                 var shipmentNumbers = string.Join(", ", shipments);
-                var errorMessage = string.Format(Prsd.Core.Helpers.EnumHelper.GetDisplayName(BulkMovementContentRules.InvalidDateFormat), shipmentNumbers);
+                var errorMessage = string.Format(Prsd.Core.Helpers.EnumHelper.GetDisplayName(PrenotificationContentRules.InvalidDateFormat), shipmentNumbers);
 
-                return new ContentRuleResult<BulkMovementContentRules>(BulkMovementContentRules.InvalidDateFormat, result, errorMessage);
+                return new PrenotificationContentRuleResult<PrenotificationContentRules>(PrenotificationContentRules.InvalidDateFormat, result, errorMessage);
             });
         }
     }

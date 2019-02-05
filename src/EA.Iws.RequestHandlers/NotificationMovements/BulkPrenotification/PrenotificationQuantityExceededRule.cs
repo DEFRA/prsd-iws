@@ -8,16 +8,16 @@
     using Core.Rules;
     using Domain.Movement;
 
-    public class PrenotificationContentQuantityExceededRule : IPrenotificationContentRule
+    public class PrenotificationQuantityExceededRule : IPrenotificationContentRule
     {
         private readonly INotificationMovementsSummaryRepository repo;
 
-        public PrenotificationContentQuantityExceededRule(INotificationMovementsSummaryRepository repo)
+        public PrenotificationQuantityExceededRule(INotificationMovementsSummaryRepository repo)
         {
             this.repo = repo;
         }
 
-        public async Task<ContentRuleResult<BulkMovementContentRules>> GetResult(List<PrenotificationMovement> movements, Guid notificationId)
+        public async Task<PrenotificationContentRuleResult<PrenotificationContentRules>> GetResult(List<PrenotificationMovement> movements, Guid notificationId)
         {
             var movementSummary = await this.repo.GetById(notificationId);
 
@@ -41,9 +41,9 @@
                     }
                 }
 
-                var errorMessage = string.Format(Prsd.Core.Helpers.EnumHelper.GetDisplayName(BulkMovementContentRules.QuantityExceeded), errorShipmentNumber);
+                var errorMessage = string.Format(Prsd.Core.Helpers.EnumHelper.GetDisplayName(PrenotificationContentRules.QuantityExceeded), errorShipmentNumber);
 
-                return new ContentRuleResult<BulkMovementContentRules>(BulkMovementContentRules.QuantityExceeded, result, errorMessage);
+                return new PrenotificationContentRuleResult<PrenotificationContentRules>(PrenotificationContentRules.QuantityExceeded, result, errorMessage);
             });
         }
     }

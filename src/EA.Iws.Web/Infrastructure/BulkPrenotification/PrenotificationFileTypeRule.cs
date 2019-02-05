@@ -9,7 +9,7 @@
     using Core.Movement.BulkPrenotification;
     using Core.Rules;
 
-    public class PrenotificationFileTypeRule : IBulkMovementPrenotificationFileRule
+    public class PrenotificationFileTypeRule : IPrenotificationFileRule
     {
         private readonly string[] allowedTypes;
 
@@ -38,13 +38,13 @@
             };
         }
 
-        public async Task<RuleResult<BulkMovementFileRules>> GetResult(HttpPostedFileBase file)
+        public async Task<RuleResult<PrenotificationFileRules>> GetResult(HttpPostedFileBase file)
         {
             return await Task.Run(() =>
             {
                 var result = allowedTypes.Contains(file.ContentType) ? MessageLevel.Success : MessageLevel.Error;
 
-                return new RuleResult<BulkMovementFileRules>(BulkMovementFileRules.FileTypePrenotification, result);
+                return new RuleResult<PrenotificationFileRules>(PrenotificationFileRules.FileTypePrenotification, result);
             });
         }
 

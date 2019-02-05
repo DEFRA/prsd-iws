@@ -13,7 +13,7 @@
     using Prsd.Core.Mediator;
     using Requests.NotificationMovements.BulkUpload;
 
-    internal class CreateBulkPrenotificationHandler : IRequestHandler<CreateBulkPrenotification, bool>
+    internal class CreatePrenotificationHandler : IRequestHandler<CreateBulkPrenotification, bool>
     {
         private readonly INotificationApplicationRepository notificationRepository;
         private readonly IDraftMovementRepository draftMovementRepository;
@@ -22,7 +22,7 @@
         private readonly MovementDetailsFactory movementDetailsFactory;
         private readonly IFileRepository fileRepository;
 
-        public CreateBulkPrenotificationHandler(INotificationApplicationRepository notificationRepository,
+        public CreatePrenotificationHandler(INotificationApplicationRepository notificationRepository,
             IDraftMovementRepository draftMovementRepository,
             IwsContext context,
             MovementFactory movementFactory,

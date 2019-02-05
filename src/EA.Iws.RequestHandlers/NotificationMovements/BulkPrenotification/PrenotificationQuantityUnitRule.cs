@@ -9,16 +9,16 @@
     using Core.Shared;
     using Domain.NotificationApplication.Shipment;
 
-    public class PrenotificationContentQuantityUnitRule : IPrenotificationContentRule
+    public class PrenotificationQuantityUnitRule : IPrenotificationContentRule
     {
         private readonly IShipmentInfoRepository shipmentInfoRepository;
 
-        public PrenotificationContentQuantityUnitRule(IShipmentInfoRepository shipmentInfoRepository)
+        public PrenotificationQuantityUnitRule(IShipmentInfoRepository shipmentInfoRepository)
         {
             this.shipmentInfoRepository = shipmentInfoRepository;
         }
 
-        public async Task<ContentRuleResult<BulkMovementContentRules>> GetResult(
+        public async Task<PrenotificationContentRuleResult<PrenotificationContentRules>> GetResult(
             List<PrenotificationMovement> movements, Guid notificationId)
         {
             var shipment = await shipmentInfoRepository.GetByNotificationId(notificationId);
@@ -41,10 +41,10 @@
                 var shipmentNumbers = string.Join(", ", shipments);
                 var errorMessage =
                     string.Format(
-                        Prsd.Core.Helpers.EnumHelper.GetDisplayName(BulkMovementContentRules.QuantityUnit),
+                        Prsd.Core.Helpers.EnumHelper.GetDisplayName(PrenotificationContentRules.QuantityUnit),
                         shipmentNumbers);
 
-                return new ContentRuleResult<BulkMovementContentRules>(BulkMovementContentRules.QuantityUnit,
+                return new PrenotificationContentRuleResult<PrenotificationContentRules>(PrenotificationContentRules.QuantityUnit,
                     result, errorMessage);
             });
         }

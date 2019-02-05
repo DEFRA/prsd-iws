@@ -26,7 +26,7 @@
         public PrenotificationBulkUploadControllerTests()
         {
             mediator = A.Fake<IMediator>();
-            var validator = A.Fake<IBulkMovementValidator>();
+            var validator = A.Fake<IPrenotificationValidator>();
             var fileReader = A.Fake<IFileReader>();
 
             controller = new PrenotificationBulkUploadController(this.mediator, validator, fileReader);

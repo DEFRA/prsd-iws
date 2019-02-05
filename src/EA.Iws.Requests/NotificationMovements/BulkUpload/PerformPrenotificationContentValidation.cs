@@ -1,4 +1,4 @@
-﻿namespace EA.Iws.Requests.Movement
+﻿namespace EA.Iws.Requests.NotificationMovements.BulkUpload
 {
     using System;
     using System.Data;
@@ -8,9 +8,9 @@
     using Prsd.Core.Mediator;
 
     [RequestAuthorization(ExportMovementPermissions.CanEditExportMovements)]
-    public class PerformBulkUploadContentValidation : IRequest<BulkMovementRulesSummary>
+    public class PerformPrenotificationContentValidation : IRequest<PrenotificationRulesSummary>
     {
-        public BulkMovementRulesSummary BulkMovementRulesSummary { get; private set; }
+        public PrenotificationRulesSummary RulesSummary { get; private set; }
 
         public Guid NotificationId { get; private set; }
 
@@ -20,13 +20,13 @@
 
         public bool IsCsv { get; private set; }
 
-        public PerformBulkUploadContentValidation(BulkMovementRulesSummary bulkMovementRulesSummary, 
+        public PerformPrenotificationContentValidation(PrenotificationRulesSummary rulesSummary, 
             Guid notificationId, 
             DataTable dataTable,
             string fileName,
             bool isCsv)
         {
-            BulkMovementRulesSummary = bulkMovementRulesSummary;
+            RulesSummary = rulesSummary;
             NotificationId = notificationId;
             DataTable = dataTable;
             FileName = fileName;

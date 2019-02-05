@@ -8,16 +8,16 @@
     using Core.Rules;
     using Domain.NotificationConsent;
 
-    public class PrenotificationContentConsentValidityRule : IPrenotificationContentRule
+    public class PrenotificationConsentValidityRule : IPrenotificationContentRule
     {
         private readonly INotificationConsentRepository notificationConsentRepository;
 
-        public PrenotificationContentConsentValidityRule(INotificationConsentRepository notificationConsentRepository)
+        public PrenotificationConsentValidityRule(INotificationConsentRepository notificationConsentRepository)
         {
             this.notificationConsentRepository = notificationConsentRepository;
         }
 
-        public async Task<ContentRuleResult<BulkMovementContentRules>> GetResult(List<PrenotificationMovement> movements, Guid notificationId)
+        public async Task<PrenotificationContentRuleResult<PrenotificationContentRules>> GetResult(List<PrenotificationMovement> movements, Guid notificationId)
         {
             var consent = await notificationConsentRepository.GetByNotificationId(notificationId);
 
@@ -35,9 +35,9 @@
                 var result = shipments.Any() ? MessageLevel.Error : MessageLevel.Success;
                 
                 var shipmentNumbers = string.Join(", ", shipments);
-                var errorMessage = string.Format(Prsd.Core.Helpers.EnumHelper.GetDisplayName(BulkMovementContentRules.ConsentValidity), shipmentNumbers);
+                var errorMessage = string.Format(Prsd.Core.Helpers.EnumHelper.GetDisplayName(PrenotificationContentRules.ConsentValidity), shipmentNumbers);
 
-                return new ContentRuleResult<BulkMovementContentRules>(BulkMovementContentRules.ConsentValidity, result, errorMessage);
+                return new PrenotificationContentRuleResult<PrenotificationContentRules>(PrenotificationContentRules.ConsentValidity, result, errorMessage);
             });
         }
     }

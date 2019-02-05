@@ -16,7 +16,7 @@
         private readonly INotificationMovementsSummaryRepository repo;
         private readonly Guid notificationId = new Guid("DD1F019D-BD85-4A6F-89AB-328A7BD53CEA");
 
-        private readonly PrenotificationContentInvalidShipmentNumberRule rule;
+        private readonly PrenotificationInvalidShipmentNumberRule rule;
 
         public PrenotificationOnlyNewShipmentsRuleTests()
         {
@@ -33,7 +33,7 @@
 
             A.CallTo(() => repo.GetById(notificationId)).Returns(movementSummary);
 
-            rule = new PrenotificationContentInvalidShipmentNumberRule(repo);
+            rule = new PrenotificationInvalidShipmentNumberRule(repo);
         }
 
         [Fact]

@@ -166,10 +166,10 @@
     <Compile Include="MeansOfTransport\TransportMethod.cs" />
     <Compile Include="MovementOperation\MovementOperationData.cs" />
     <Compile Include="MovementReceipt\Decision.cs" />
-    <Compile Include="Movement\BulkPrenotification\BulkMovementContentRules.cs" />
-    <Compile Include="Movement\BulkPrenotification\BulkMovementFileRules.cs" />
-    <Compile Include="Movement\BulkPrenotification\BulkMovementRulesSummary.cs" />
-    <Compile Include="Movement\BulkPrenotification\ContentRuleResult.cs" />
+    <Compile Include="Movement\BulkPrenotification\PrenotificationContentRules.cs" />
+    <Compile Include="Movement\BulkPrenotification\PrenotificationFileRules.cs" />
+    <Compile Include="Movement\BulkPrenotification\PrenotificationRulesSummary.cs" />
+    <Compile Include="Movement\BulkPrenotification\PrenotificationContentRuleResult.cs" />
     <Compile Include="Movement\BulkPrenotification\PrenotificationColumnIndex.cs" />
     <Compile Include="Movement\BulkPrenotification\PrenotificationMovement.cs" />
     <Compile Include="Movement\BulkPrenotification\IPrenotificationContentRule.cs" />

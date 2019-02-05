@@ -8,7 +8,7 @@
     using Core.Movement.BulkPrenotification;
     using Core.Rules;
 
-    public class PrenotificationFileSizeRule : IBulkMovementPrenotificationFileRule
+    public class PrenotificationFileSizeRule : IPrenotificationFileRule
     {   
         public DataTable DataTable { get; set; }
 
@@ -26,12 +26,12 @@
             }
         }
 
-        public async Task<RuleResult<BulkMovementFileRules>> GetResult(HttpPostedFileBase file)
+        public async Task<RuleResult<PrenotificationFileRules>> GetResult(HttpPostedFileBase file)
         {
             return await Task.Run(() =>
             {
                 var result = file.ContentLength < int.MaxValue ? MessageLevel.Success : MessageLevel.Error;
-                return new RuleResult<BulkMovementFileRules>(BulkMovementFileRules.FileSize, result);
+                return new RuleResult<PrenotificationFileRules>(PrenotificationFileRules.FileSize, result);
             });
         }
     }

@@ -16,7 +16,7 @@
         private readonly INotificationMovementsSummaryRepository repo;
         private readonly Guid notificationId = new Guid("DD1F019D-BD85-4A6F-89AB-328A7BD53CEA");
 
-        private PrenotificationContentQuantityExceededRule rule;
+        private PrenotificationQuantityExceededRule rule;
 
         public PrenotificationQuantityExceededRuleTests()
         {
@@ -31,7 +31,7 @@
         [Fact]
         public async Task NewShipmentsQuantityLessThanQuantityAvailable()
         {
-            rule = new PrenotificationContentQuantityExceededRule(repo);
+            rule = new PrenotificationQuantityExceededRule(repo);
 
             var movements = A.CollectionOfFake<PrenotificationMovement>(1);
 
@@ -43,7 +43,7 @@
         [Fact]
         public async Task NewShipmentsQuantityMoreThanQuantityAvailable()
         {
-            rule = new PrenotificationContentQuantityExceededRule(repo);
+            rule = new PrenotificationQuantityExceededRule(repo);
 
             List<PrenotificationMovement> movements = new List<PrenotificationMovement>()
             {
@@ -68,7 +68,7 @@
         [Fact]
         public async Task NewShipmentsQuantityMoreThanQuantityAvailable_ShippingNumbersEnteredInReverse()
         {
-            rule = new PrenotificationContentQuantityExceededRule(repo);
+            rule = new PrenotificationQuantityExceededRule(repo);
 
             List<PrenotificationMovement> movements = new List<PrenotificationMovement>()
             {

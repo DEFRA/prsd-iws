@@ -14,14 +14,14 @@
 
     public class PrenotificationContentQuantityUnitRuleTests
     {
-        private readonly PrenotificationContentQuantityUnitRule rule;
+        private readonly PrenotificationQuantityUnitRule rule;
         private readonly IShipmentInfoRepository shipmentInfoRepository;
         private readonly Guid notificationId;
 
         public PrenotificationContentQuantityUnitRuleTests()
         {
             shipmentInfoRepository = A.Fake<IShipmentInfoRepository>();
-            rule = new PrenotificationContentQuantityUnitRule(shipmentInfoRepository);
+            rule = new PrenotificationQuantityUnitRule(shipmentInfoRepository);
             notificationId = Guid.NewGuid();
         }
 
@@ -35,7 +35,7 @@
 
             var result = await rule.GetResult(GetTestData(notificationUnit), notificationId);
 
-            Assert.Equal(BulkMovementContentRules.QuantityUnit, result.Rule);
+            Assert.Equal(PrenotificationContentRules.QuantityUnit, result.Rule);
             Assert.Equal(MessageLevel.Success, result.MessageLevel);
         }
 

@@ -8,16 +8,16 @@
     using Core.Rules;
     using Domain.Movement;
 
-    public class PrenotificationContentOnlyNewShipmentsRule : IPrenotificationContentRule
+    public class PrenotificationOnlyNewShipmentsRule : IPrenotificationContentRule
     {
         private readonly IMovementRepository repo;
 
-        public PrenotificationContentOnlyNewShipmentsRule(IMovementRepository repo)
+        public PrenotificationOnlyNewShipmentsRule(IMovementRepository repo)
         {
             this.repo = repo;
         }
 
-        public async Task<ContentRuleResult<BulkMovementContentRules>> GetResult(List<PrenotificationMovement> movements, Guid notificationId)
+        public async Task<PrenotificationContentRuleResult<PrenotificationContentRules>> GetResult(List<PrenotificationMovement> movements, Guid notificationId)
         {
             var shipments =
                 (await repo.GetAllMovements(notificationId)).Join(
@@ -31,9 +31,9 @@
             var result = shipments.Any() ? MessageLevel.Error : MessageLevel.Success;
 
             var shipmentNumbers = string.Join(", ", shipments);
-            var errorMessage = string.Format(Prsd.Core.Helpers.EnumHelper.GetDisplayName(BulkMovementContentRules.OnlyNewShipments), shipmentNumbers);
+            var errorMessage = string.Format(Prsd.Core.Helpers.EnumHelper.GetDisplayName(PrenotificationContentRules.OnlyNewShipments), shipmentNumbers);
 
-            return new ContentRuleResult<BulkMovementContentRules>(BulkMovementContentRules.OnlyNewShipments, result, errorMessage);
+            return new PrenotificationContentRuleResult<PrenotificationContentRules>(PrenotificationContentRules.OnlyNewShipments, result, errorMessage);
         }
     }
 }

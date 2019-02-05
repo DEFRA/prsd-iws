@@ -2,7 +2,7 @@
 {
     using System.ComponentModel.DataAnnotations;
 
-    public enum BulkMovementContentRules
+    public enum PrenotificationContentRules
     {
         [Display(Name = "The maximum number of shipments that can be uploaded is {0}")]
         MaximumShipments,

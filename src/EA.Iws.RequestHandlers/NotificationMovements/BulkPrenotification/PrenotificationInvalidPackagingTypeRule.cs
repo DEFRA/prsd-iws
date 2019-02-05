@@ -8,16 +8,16 @@
     using Core.Rules;
     using Domain.NotificationApplication;
 
-    public class PrenotificationContentInvalidPackagingTypeRule : IPrenotificationContentRule
+    public class PrenotificationInvalidPackagingTypeRule : IPrenotificationContentRule
     {
         private readonly INotificationApplicationRepository notificationApplicationRepository;
 
-        public PrenotificationContentInvalidPackagingTypeRule(INotificationApplicationRepository notificationApplicationRepository)
+        public PrenotificationInvalidPackagingTypeRule(INotificationApplicationRepository notificationApplicationRepository)
         {
             this.notificationApplicationRepository = notificationApplicationRepository;
         }
 
-        public async Task<ContentRuleResult<BulkMovementContentRules>> GetResult(List<PrenotificationMovement> movements, Guid notificationId)
+        public async Task<PrenotificationContentRuleResult<PrenotificationContentRules>> GetResult(List<PrenotificationMovement> movements, Guid notificationId)
         {
             var notificationApplication = await notificationApplicationRepository.GetById(notificationId);
 
@@ -36,9 +36,9 @@
                 var result = shipments.Any() ? MessageLevel.Error : MessageLevel.Success;
 
                 var shipmentNumbers = string.Join(", ", shipments);
-                var errorMessage = string.Format(Prsd.Core.Helpers.EnumHelper.GetDisplayName(BulkMovementContentRules.InvalidPackagingType), shipmentNumbers);
+                var errorMessage = string.Format(Prsd.Core.Helpers.EnumHelper.GetDisplayName(PrenotificationContentRules.InvalidPackagingType), shipmentNumbers);
 
-                return new ContentRuleResult<BulkMovementContentRules>(BulkMovementContentRules.InvalidPackagingType, result, errorMessage);
+                return new PrenotificationContentRuleResult<PrenotificationContentRules>(PrenotificationContentRules.InvalidPackagingType, result, errorMessage);
             });
         }
     }

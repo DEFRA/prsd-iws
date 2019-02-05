@@ -7,16 +7,16 @@
     using Core.Rules;
     using Domain.Movement;
 
-    public class PrenotificationContentExcessiveShipmentsRule : IPrenotificationContentRule
+    public class PrenotificationExcessiveShipmentsRule : IPrenotificationContentRule
     {
         private readonly INotificationMovementsSummaryRepository repo;
 
-       public PrenotificationContentExcessiveShipmentsRule(INotificationMovementsSummaryRepository repo)
+       public PrenotificationExcessiveShipmentsRule(INotificationMovementsSummaryRepository repo)
         {
             this.repo = repo;
         }
 
-        public async Task<ContentRuleResult<BulkMovementContentRules>> GetResult(List<PrenotificationMovement> movements, Guid notificationId)
+        public async Task<PrenotificationContentRuleResult<PrenotificationContentRules>> GetResult(List<PrenotificationMovement> movements, Guid notificationId)
         {
             var movementSummary = await repo.GetById(notificationId);
 
@@ -26,9 +26,9 @@
 
                 var result = remainingShipments < movements.Count ? MessageLevel.Error : MessageLevel.Success;
                 
-                var errorMessage = string.Format(Prsd.Core.Helpers.EnumHelper.GetDisplayName(BulkMovementContentRules.ExcessiveShipments), movements.Count, remainingShipments);
+                var errorMessage = string.Format(Prsd.Core.Helpers.EnumHelper.GetDisplayName(PrenotificationContentRules.ExcessiveShipments), movements.Count, remainingShipments);
 
-                return new ContentRuleResult<BulkMovementContentRules>(BulkMovementContentRules.ExcessiveShipments, result, errorMessage);
+                return new PrenotificationContentRuleResult<PrenotificationContentRules>(PrenotificationContentRules.ExcessiveShipments, result, errorMessage);
             });
         }
     }

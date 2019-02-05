@@ -2,7 +2,7 @@
 {
     using System.ComponentModel.DataAnnotations;
 
-    public enum BulkMovementFileRules
+    public enum PrenotificationFileRules
     {
         [Display(Name = "The file type must be either in .XLS or .XLSX or .CSV format.")]
         FileTypePrenotification,

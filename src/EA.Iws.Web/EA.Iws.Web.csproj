@@ -2325,11 +2325,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Infrastructure\BulkPrenotification\BulkMovementValidator.cs" />
+    <Compile Include="Infrastructure\BulkPrenotification\PrenotificationValidator.cs" />
     <Compile Include="Infrastructure\BulkPrenotification\PrenotificationFileSizeRule.cs" />
     <Compile Include="Infrastructure\BulkPrenotification\PrenotificationFileTypeRule.cs" />
-    <Compile Include="Infrastructure\BulkPrenotification\IBulkMovementPrenotificationFileRule.cs" />
-    <Compile Include="Infrastructure\BulkPrenotification\IBulkMovementValidator.cs" />
+    <Compile Include="Infrastructure\BulkPrenotification\IPrenotificationFileRule.cs" />
+    <Compile Include="Infrastructure\BulkPrenotification\IPrenotificationValidator.cs" />
     <Compile Include="Infrastructure\BulkPrenotification\FileParsePrenotificationFileRule.cs" />
     <Compile Include="Infrastructure\BulkPrenotification\ShippingMovementsFileTypeRules.cs" />
     <Compile Include="Infrastructure\BulkPrenotification\VirusRule.cs" />

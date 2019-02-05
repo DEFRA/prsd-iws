@@ -17,7 +17,7 @@
         private readonly INotificationConsentRepository repo;
         private readonly Guid notificationId = new Guid("DD1F019D-BD85-4A6F-89AB-328A7BD53CEA");
 
-        private PrenotificationContentShipmentBeyondConsentedDateRule rule;
+        private PrenotificationShipmentBeyondConsentRule rule;
 
         public PrenotificationShipmentBeyondConsentWindowRuleTests()
         {
@@ -27,7 +27,7 @@
             var consent = new Consent(notificationId, dateRange, "Test", Guid.NewGuid());
             A.CallTo(() => this.repo.GetByNotificationId(notificationId)).Returns(consent);
 
-            rule = new PrenotificationContentShipmentBeyondConsentedDateRule(repo);
+            rule = new PrenotificationShipmentBeyondConsentRule(repo);
         }
 
         [Fact]

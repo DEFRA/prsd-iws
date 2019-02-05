@@ -29,9 +29,9 @@
             }
         }
 
-        public List<BulkMovementFileRules> FailedFileRules { get; set; }
+        public List<PrenotificationFileRules> FailedFileRules { get; set; }
 
-        public List<ContentRuleResult<BulkMovementContentRules>> FailedContentRules { get; set; }
+        public List<PrenotificationContentRuleResult<PrenotificationContentRules>> FailedContentRules { get; set; }
 
         [Display(Name = "Upload the data file containing your prenotification data")]
         public HttpPostedFileBase File { get; set; }

@@ -10,7 +10,7 @@
     using Core.Movement.BulkPrenotification;
     using Core.Rules;
 
-    public class FileParsePrenotificationFileRule : IBulkMovementPrenotificationFileRule
+    public class FileParsePrenotificationFileRule : IPrenotificationFileRule
     {
         private readonly IFileReader fileReader;
         private const int MaxColumns = 6;
@@ -35,7 +35,7 @@
             this.fileReader = fileReader;
         }
 
-        public async Task<RuleResult<BulkMovementFileRules>> GetResult(HttpPostedFileBase file)
+        public async Task<RuleResult<PrenotificationFileRules>> GetResult(HttpPostedFileBase file)
         {
             MessageLevel result;
 
@@ -55,7 +55,7 @@
                 result = MessageLevel.Error;
             }
 
-            return new RuleResult<BulkMovementFileRules>(BulkMovementFileRules.FileParse, result);
+            return new RuleResult<PrenotificationFileRules>(PrenotificationFileRules.FileParse, result);
         }
 
         private static bool IsDataTableValid(DataTable dataTable)
