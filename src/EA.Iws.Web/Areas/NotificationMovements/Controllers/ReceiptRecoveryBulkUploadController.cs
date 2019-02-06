@@ -63,6 +63,7 @@
             var validationSummary = await validator.GetValidationSummary(model.File, notificationId);
             var failedFileRules = validationSummary.FileRulesResults.Where(r => r.MessageLevel == MessageLevel.Error).Select(r => r.Rule).ToList();
             var failedContentRules = validationSummary.ContentRulesResults.Where(r => r.MessageLevel == MessageLevel.Error).ToList();
+
             model.FailedFileRules = failedFileRules;
             model.FailedContentRules = failedContentRules;
 
