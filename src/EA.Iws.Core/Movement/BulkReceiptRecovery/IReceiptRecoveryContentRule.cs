@@ -6,6 +6,6 @@
 
     public interface IReceiptRecoveryContentRule
     {
-        Task<ContentRuleResult<ReceiptRecoveryContentRules>> GetResult(List<ReceiptRecoveryMovement> movements, Guid notificationId);
+        Task<ReceiptRecoveryContentRuleResult<ReceiptRecoveryContentRules>> GetResult(List<ReceiptRecoveryMovement> movements, Guid notificationId);
     }
 }
