@@ -30,6 +30,8 @@
         InvalidDateFormat,
         [Display(Name = "Shipment number {0}: the date of shipment must not be historic.")]
         HistoricDate,
+        [Display(Name = "Shipment number {0}: the actual date of shipment cannot be more than {1} calendar days in the future.")]
+        FutureDate,
         [Display(Name = "Shipment number {0}: the actual date of shipment can't be outside of the consent validity period.")]
         ConsentValidity,
         [Display(Name = "Shipment number {0}: the date of shipment is less than three working days from the notification expiry date. Remove the shipment data from the data file and use the existing ‘generate a prenotification’ journey to inform us of this shipment.")]
