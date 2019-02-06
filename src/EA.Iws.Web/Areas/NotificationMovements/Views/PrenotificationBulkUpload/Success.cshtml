@@ -49,6 +49,7 @@
                 <p>@string.Format(Resources.SuccessTextSingleShipment, Model.GetShipments)</p>
             }
         </div>
-
     </div>
 </div>
+
+@Html.ActionLink("Finish", "Index", "Options", new { area = "NotificationApplication", id = ViewContext.RouteData.Values["notificationId"] }, new { @class = "button" })
