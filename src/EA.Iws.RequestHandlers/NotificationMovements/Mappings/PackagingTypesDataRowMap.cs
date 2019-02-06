@@ -24,7 +24,8 @@
                 {
                     PackagingType parsed;
 
-                    if (Enum.TryParse(packaging, out parsed))
+                    if (Enum.TryParse(packaging, out parsed) &&
+                        Enum.IsDefined(typeof(PackagingType), parsed))
                     {
                         result.Add(parsed);
                     }
