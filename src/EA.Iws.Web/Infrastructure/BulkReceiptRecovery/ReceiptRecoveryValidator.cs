@@ -31,25 +31,22 @@
             var resultFileRules = await GetFileRules(file, FileUploadType.ReceiptRecovery);
 
             var extension = Path.GetExtension(file.FileName);
-            var isCsv = extension == ".csv" ? true : false;
+            var isCsv = extension == ".csv";
 
-            var bulkMovementRulesSummary = new ReceiptRecoveryRulesSummary(resultFileRules);
-            if (bulkMovementRulesSummary.IsFileRulesSuccess)
+            var rulesSummary = new ReceiptRecoveryRulesSummary(resultFileRules);
+            if (rulesSummary.IsFileRulesSuccess)
             {
-                bulkMovementRulesSummary =
+                rulesSummary =
                     await
-                        mediator.SendAsync(new PerformReceiptRecoveryContentValidation(bulkMovementRulesSummary,
+                        mediator.SendAsync(new PerformReceiptRecoveryContentValidation(rulesSummary,
                             notificationId, DataTable, file.FileName, isCsv));
             }
-            return bulkMovementRulesSummary;
+            return rulesSummary;
         }
 
         public async Task<ReceiptRecoveryRulesSummary> GetShipmentMovementValidationSummary(HttpPostedFileBase file, Guid notificationId)
         {
             var resultFileRules = await GetFileRules(file, FileUploadType.ShipmentMovementDocuments);
-
-            var extension = Path.GetExtension(file.FileName);
-            var isCsv = extension == ".csv" ? true : false;
 
             var bulkMovementRulesSummary = new ReceiptRecoveryRulesSummary(resultFileRules);
             
@@ -72,7 +69,7 @@
                 rules.Add(result);
             }
 
-            if (DataTable != null && DataTable.Rows.Count == 0)
+            if (DataTable == null || (DataTable != null && DataTable.Rows.Count == 0))
             {
                 rules.Add(new RuleResult<ReceiptRecoveryFileRules>(ReceiptRecoveryFileRules.EmptyData, MessageLevel.Error));
             }
