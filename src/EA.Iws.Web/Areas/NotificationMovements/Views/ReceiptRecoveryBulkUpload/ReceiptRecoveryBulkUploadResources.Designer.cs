@@ -62,11 +62,92 @@ namespace EA.Iws.Web.Areas.NotificationMovements.Views.ReceiptRecoveryBulkUpload
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Action.
+        /// </summary>
+        public static string Action {
+            get {
+                return ResourceManager.GetString("Action", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Amend the actual date of shipment to be greater than three working days.
+        /// </summary>
+        public static string AmendActualDate {
+            get {
+                return ResourceManager.GetString("AmendActualDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You must resolve all errors listed below before uploading your prenotification data again. If you experience further problems, contact askshipments@environment-agency.gov.uk for further advice..
+        /// </summary>
+        public static string ErrorsContactUs {
+            get {
+                return ResourceManager.GetString("ErrorsContactUs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The errors listed below are problems found during the validation of the .xlsx or. csv file content. These errors prevent the service from accepting your data, therefore all errors must be amended before attempting to re-upload your data..
+        /// </summary>
+        public static string ErrorsFileAdvice {
+            get {
+                return ResourceManager.GetString("ErrorsFileAdvice", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your prenotification data file contains {0} errors.
+        /// </summary>
+        public static string ErrorsHeaderText {
+            get {
+                return ResourceManager.GetString("ErrorsHeaderText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bulk upload errors.
+        /// </summary>
+        public static string ErrorsTitle {
+            get {
+                return ResourceManager.GetString("ErrorsTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Go to notification options.
         /// </summary>
         public static string NotificationOptionsLink {
             get {
                 return ResourceManager.GetString("NotificationOptionsLink", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to or.
+        /// </summary>
+        public static string Or {
+            get {
+                return ResourceManager.GetString("Or", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Remove the row of data from the data file and use the existing ‘generate a prenotification’ journey to inform us of these shipments.
+        /// </summary>
+        public static string RemoveShipment {
+            get {
+                return ResourceManager.GetString("RemoveShipment", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Return to upload.
+        /// </summary>
+        public static string ReturnToUpload {
+            get {
+                return ResourceManager.GetString("ReturnToUpload", resourceCulture);
             }
         }
         
@@ -265,6 +346,15 @@ namespace EA.Iws.Web.Areas.NotificationMovements.Views.ReceiptRecoveryBulkUpload
         public static string UploadReceiptRecoveryTitle {
             get {
                 return ResourceManager.GetString("UploadReceiptRecoveryTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to View Errors.
+        /// </summary>
+        public static string ViewErrors {
+            get {
+                return ResourceManager.GetString("ViewErrors", resourceCulture);
             }
         }
         

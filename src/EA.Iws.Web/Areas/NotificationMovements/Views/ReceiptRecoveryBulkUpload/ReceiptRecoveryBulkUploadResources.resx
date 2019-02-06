@@ -195,4 +195,34 @@
   <data name="SuccessTitle" xml:space="preserve">
     <value>Success</value>
   </data>
+  <data name="Action" xml:space="preserve">
+    <value>Action</value>
+  </data>
+  <data name="AmendActualDate" xml:space="preserve">
+    <value>Amend the actual date of shipment to be greater than three working days</value>
+  </data>
+  <data name="ErrorsContactUs" xml:space="preserve">
+    <value>You must resolve all errors listed below before uploading your prenotification data again. If you experience further problems, contact askshipments@environment-agency.gov.uk for further advice.</value>
+  </data>
+  <data name="ErrorsFileAdvice" xml:space="preserve">
+    <value>The errors listed below are problems found during the validation of the .xlsx or. csv file content. These errors prevent the service from accepting your data, therefore all errors must be amended before attempting to re-upload your data.</value>
+  </data>
+  <data name="ErrorsHeaderText" xml:space="preserve">
+    <value>Your prenotification data file contains {0} errors</value>
+  </data>
+  <data name="ErrorsTitle" xml:space="preserve">
+    <value>Bulk upload errors</value>
+  </data>
+  <data name="Or" xml:space="preserve">
+    <value>or</value>
+  </data>
+  <data name="RemoveShipment" xml:space="preserve">
+    <value>Remove the row of data from the data file and use the existing ‘generate a prenotification’ journey to inform us of these shipments</value>
+  </data>
+  <data name="ReturnToUpload" xml:space="preserve">
+    <value>Return to upload</value>
+  </data>
+  <data name="ViewErrors" xml:space="preserve">
+    <value>View Errors</value>
+  </data>
 </root>
