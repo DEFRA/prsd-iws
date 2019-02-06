@@ -4,7 +4,7 @@
     using System.Collections.Generic;
     using System.Data;
     using System.Linq;
-    using Core.Movement.Bulk;
+    using Core.Movement.BulkPrenotification;
     using Core.PackagingType;
     using Core.Shared;
     using Prsd.Core.Mapper;

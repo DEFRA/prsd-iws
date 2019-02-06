@@ -4,11 +4,11 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
-    using Core.Movement.Bulk;
+    using Core.Movement.BulkPrenotification;
     using Core.Rules;
     using Domain.Movement;
     using FakeItEasy;
-    using RequestHandlers.NotificationMovements.BulkUpload;
+    using RequestHandlers.NotificationMovements.BulkPrenotification;
     using Xunit;
 
     public class PrenotificationExcessiveShipmentsRuleTests
@@ -16,7 +16,7 @@
         private readonly INotificationMovementsSummaryRepository repo;
         private readonly Guid notificationId = new Guid("DD1F019D-BD85-4A6F-89AB-328A7BD53CEA");
 
-        private PrenotificationContentExcessiveShipmentsRule rule;
+        private PrenotificationExcessiveShipmentsRule rule;
 
         public PrenotificationExcessiveShipmentsRuleTests()
         {
@@ -31,7 +31,7 @@
         [Fact]
         public async Task NewShipmentsLessThanActiveLoadsAvailable()
         {
-            rule = new PrenotificationContentExcessiveShipmentsRule(repo);
+            rule = new PrenotificationExcessiveShipmentsRule(repo);
 
             var movements = A.CollectionOfFake<PrenotificationMovement>(1);
 
@@ -43,7 +43,7 @@
         [Fact]
         public async Task ShipmentNumberLessThanExistingShipmentNumber()
         {
-            rule = new PrenotificationContentExcessiveShipmentsRule(repo);
+            rule = new PrenotificationExcessiveShipmentsRule(repo);
 
             var movements = A.CollectionOfFake<PrenotificationMovement>(3);
 

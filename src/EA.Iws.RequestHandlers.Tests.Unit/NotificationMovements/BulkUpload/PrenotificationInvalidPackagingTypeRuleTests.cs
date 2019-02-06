@@ -3,11 +3,11 @@
     using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
-    using Core.Movement.Bulk;
+    using Core.Movement.BulkPrenotification;
     using Core.Rules;
     using Domain.NotificationApplication;
     using FakeItEasy;
-    using RequestHandlers.NotificationMovements.BulkUpload;
+    using RequestHandlers.NotificationMovements.BulkPrenotification;
     using Xunit;
 
     public class PrenotificationInvalidPackagingTypeRuleTests
@@ -15,9 +15,8 @@
         private readonly INotificationApplicationRepository repo;
         private readonly Guid notificationId = new Guid("DD1F019D-BD85-4A6F-89AB-328A7BD53CEA");
 
-        private PrenotificationContentInvalidPackagingTypeRule rule;
-
-        private NotificationApplication notificationApplication;
+        private readonly PrenotificationInvalidPackagingTypeRule rule;
+        private readonly NotificationApplication notificationApplication;
 
         public PrenotificationInvalidPackagingTypeRuleTests()
         {
@@ -25,7 +24,7 @@
 
             notificationApplication = new NotificationApplication(Guid.NewGuid(), Core.Shared.NotificationType.Disposal, Core.Notification.UKCompetentAuthority.England, 1);
 
-            List<PackagingInfo> packagingInfos = new List<PackagingInfo>()
+            var packagingInfos = new List<PackagingInfo>()
             {
                 PackagingInfo.CreatePackagingInfo(Core.PackagingType.PackagingType.Bag),
                 PackagingInfo.CreatePackagingInfo(Core.PackagingType.PackagingType.Box)
@@ -34,14 +33,14 @@
             notificationApplication.SetPackagingInfo(packagingInfos);
 
             A.CallTo(() => repo.GetById(notificationId)).Returns(notificationApplication);
+
+            rule = new PrenotificationInvalidPackagingTypeRule(repo);
         }
 
         [Fact]
         public async Task AllPackagingTypesAreAllowedOnNotification()
         {
-            rule = new PrenotificationContentInvalidPackagingTypeRule(repo);
-
-            List<PrenotificationMovement> movements = new List<PrenotificationMovement>()
+            var movements = new List<PrenotificationMovement>()
             {
                 new PrenotificationMovement()
                 {
@@ -70,9 +69,7 @@
         [Fact]
         public async Task SomePackagingTypesNotAllowedOnNotification()
         {
-            rule = new PrenotificationContentInvalidPackagingTypeRule(repo);
-
-            List<PrenotificationMovement> movements = new List<PrenotificationMovement>()
+            var movements = new List<PrenotificationMovement>()
             {
                 new PrenotificationMovement()
                 {
@@ -80,7 +77,7 @@
                    PackagingTypes = new List<Core.PackagingType.PackagingType>()
                    {
                        Core.PackagingType.PackagingType.Jerrican,
-                       Core.PackagingType.PackagingType.Box
+                       Core.PackagingType.PackagingType.Drum
                    }
                 },
                 new PrenotificationMovement()

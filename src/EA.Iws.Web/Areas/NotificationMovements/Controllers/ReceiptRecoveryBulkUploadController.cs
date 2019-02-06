@@ -7,7 +7,7 @@
     using System.Web.Mvc;
     using Core.Rules;
     using Infrastructure;
-    using Infrastructure.BulkUploadReceiptRecovery;
+    using Infrastructure.BulkReceiptRecovery;
     using Prsd.Core.Mediator;
     using ViewModels.ReceiptRecoveryBulkUpload;
 
