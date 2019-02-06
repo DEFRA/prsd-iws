@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace EA.Iws.Web.Areas.NotificationMovements.Views.Create {
+namespace EA.Iws.Web.Areas.NotificationMovements.Views.PrenotificationBulkUpload {
     using System;
     
     
@@ -39,8 +39,8 @@ namespace EA.Iws.Web.Areas.NotificationMovements.Views.Create {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EA.Iws.Web.Areas.NotificationMovements.Views.Create.TotalActiveLoadsReachedResour" +
-                            "ces", typeof(TotalActiveLoadsReachedResources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EA.Iws.Web.Areas.NotificationMovements.Views.PrenotificationBulkUpload.TotalActiv" +
+                            "eLoadsReachedResources", typeof(TotalActiveLoadsReachedResources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;

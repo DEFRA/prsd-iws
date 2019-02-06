@@ -2312,9 +2312,9 @@
       <DependentUpon>PrenotificationBulkUploadResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Areas\NotificationMovements\Views\PrenotificationBulkUpload\TotalActiveLoadsReachedResources.Designer.cs">
-      <DependentUpon>TotalActiveLoadsReachedResources.resx</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
+      <DependentUpon>TotalActiveLoadsReachedResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Areas\NotificationMovements\Views\PrenotificationBulkUpload\TotalIntendedQuantityExceededResources.Designer.cs">
       <DependentUpon>TotalIntendedQuantityExceededResources.resx</DependentUpon>
