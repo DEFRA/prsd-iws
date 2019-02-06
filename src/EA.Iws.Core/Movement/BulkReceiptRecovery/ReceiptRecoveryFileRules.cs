@@ -4,6 +4,12 @@
 
     public enum ReceiptRecoveryFileRules
     {
+        [Display(Name = "The file type must be either in .XLS or .XLSX or .CSV format.")]
+        FileTypeReceiptRecovery,
+        [Display(Name = "The file size must not be larger than 2GB.")]
+        FileSize,
+        [Display(Name = "We've detected a virus in the file you uploaded.")]
+        Virus,
         [Display(Name = "Unable to read the file, format is invalid.")]
         FileParse,
         [Display(Name = "The file does not contain any data.")]
