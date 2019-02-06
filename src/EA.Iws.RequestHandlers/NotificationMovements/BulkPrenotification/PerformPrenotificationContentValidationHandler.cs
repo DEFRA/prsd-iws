@@ -50,33 +50,33 @@
         private async Task<List<PrenotificationContentRuleResult<PrenotificationContentRules>>> GetOrderedContentRules(List<PrenotificationMovement> movements, 
             Guid notificationId)
         {
-            var rules = new List<PrenotificationContentRuleResult<PrenotificationContentRules>>();
-
-            var maxShipments = await GetMaxShipments(movements);
-            
-            rules.Add(maxShipments);
-
-            if (maxShipments.MessageLevel == MessageLevel.Success)
+            var rules = new List<PrenotificationContentRuleResult<PrenotificationContentRules>>
             {
-                var missingNotificationShipment = await GetMissingNotificationShipmentNumbers(movements);
+                await GetMaxShipments(movements)
+            };
 
-                rules.Add(missingNotificationShipment);
+            if (rules.Any(r => r.MessageLevel == MessageLevel.Error))
+            {
+                return rules;
+            }
 
-                if (missingNotificationShipment.MessageLevel == MessageLevel.Success)
-                {
-                    var missingData = await GetMissingDataResult(movements);
+            rules.Add(await GetMissingNotificationShipmentNumbers(movements));
 
-                    rules.Add(missingData);
+            if (rules.Any(r => r.MessageLevel == MessageLevel.Error))
+            {
+                return rules;
+            }
 
-                    // Only run rest of validations if there are no missing/blank data.
-                    if (missingData.MessageLevel == MessageLevel.Success)
-                    {
-                        foreach (var rule in contentRules)
-                        {
-                            rules.Add(await rule.GetResult(movements, notificationId));
-                        }
-                    }
-                }
+            rules.Add(await GetMissingDataResult(movements));
+
+            if (rules.Any(r => r.MessageLevel == MessageLevel.Error))
+            {
+                return rules;
+            }
+
+            foreach (var rule in contentRules)
+            {
+                rules.Add(await rule.GetResult(movements, notificationId));
             }
 
             return rules.OrderBy(r => r.Rule).ToList();
@@ -104,11 +104,13 @@
         {
             return await Task.Run(() =>
             {
-                var result = movements.Any(m => m.MissingNotificationNumber
-                                                || m.MissingShipmentNumber
-                                                || !m.ShipmentNumber.HasValue)
-                    ? MessageLevel.Error
-                    : MessageLevel.Success;
+                var result =
+                    movements.Any(m => m.MissingNotificationNumber 
+                                       || string.IsNullOrWhiteSpace(m.NotificationNumber)
+                                       || m.MissingShipmentNumber
+                                       || !m.ShipmentNumber.HasValue)
+                        ? MessageLevel.Error
+                        : MessageLevel.Success;
 
                 var errorMessage =
                     string.Format(
@@ -118,7 +120,7 @@
                 return new PrenotificationContentRuleResult<PrenotificationContentRules>(PrenotificationContentRules.MissingShipmentNumbers,
                     result, errorMessage);
             });
-        }
+       }
 
         private static async Task<PrenotificationContentRuleResult<PrenotificationContentRules>> GetMissingDataResult(
             List<PrenotificationMovement> movements)
