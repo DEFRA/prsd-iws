@@ -2,6 +2,7 @@
 {
     using System.Collections.Generic;
     using System.Data;
+    using System.IO;
     using System.Linq;
     using System.Threading.Tasks;
     using System.Web;
@@ -32,9 +33,9 @@
         {
             allowedTypes = new[] 
             {
-                MimeTypes.MSExcel,
-                MimeTypes.MSExcelXml,
-                MimeTypes.Csv
+                ".xlsx",
+                ".xls",
+                ".csv"
             };
         }
 
@@ -42,15 +43,12 @@
         {
             return await Task.Run(() =>
             {
-                var result = allowedTypes.Contains(file.ContentType) ? MessageLevel.Success : MessageLevel.Error;
+                var extension = Path.GetExtension(file.FileName);
+
+                var result = allowedTypes.Contains(extension) ? MessageLevel.Success : MessageLevel.Error;
 
                 return new RuleResult<PrenotificationFileRules>(PrenotificationFileRules.FileTypePrenotification, result);
             });
-        }
-
-        public string GetErrorMessage()
-        {
-            return "error";
         }
     }
 }
