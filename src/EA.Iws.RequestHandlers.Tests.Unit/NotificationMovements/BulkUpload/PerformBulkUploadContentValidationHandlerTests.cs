@@ -5,47 +5,136 @@
     using System.Data;
     using System.Linq;
     using System.Threading.Tasks;
-    using Core.Movement.Bulk;
+    using Core.Movement.BulkPrenotification;
+    using Core.PackagingType;
     using Core.Rules;
+    using Core.Shared;
     using Domain.Movement.BulkUpload;
     using FakeItEasy;
+    using Prsd.Core;
     using Prsd.Core.Mapper;
-    using RequestHandlers.NotificationMovements.BulkUpload;
-    using Requests.Movement;
+    using RequestHandlers.NotificationMovements.BulkPrenotification;
+    using Requests.NotificationMovements.BulkUpload;
     using Xunit;
 
     public class PerformBulkUploadContentValidationHandlerTests
     {
-        private readonly PerformBulkUploadContentValidationHandler handler;
-        private readonly IEnumerable<IBulkMovementPrenotificationContentRule> contentRules;
+        private readonly PerformPrenotificationContentValidationHandler handler;
+        private readonly IEnumerable<IPrenotificationContentRule> contentRules;
         private readonly IMap<DataTable, List<PrenotificationMovement>> mapper;
         private readonly IDraftMovementRepository repository;
-        private readonly IBulkMovementPrenotificationContentRule contentRule;
+        private readonly IPrenotificationContentRule contentRule;
+        private const int MaxShipments = 50;
 
         public PerformBulkUploadContentValidationHandlerTests()
         {
             mapper = A.Fake<IMap<DataTable, List<PrenotificationMovement>>>();
             repository = A.Fake<IDraftMovementRepository>();
-            contentRule = A.Fake<IBulkMovementPrenotificationContentRule>();
+            contentRule = A.Fake<IPrenotificationContentRule>();
 
-            contentRules = new List<IBulkMovementPrenotificationContentRule>(1)
+            contentRules = new List<IPrenotificationContentRule>(1)
             {
                 contentRule
             };
 
-            handler = new PerformBulkUploadContentValidationHandler(contentRules, mapper, repository);
+            handler = new PerformPrenotificationContentValidationHandler(contentRules, mapper, repository);
+        }
+
+        [Fact]
+        public async Task ExceedsMaxRows_ContentRulesFailed()
+        {
+            var notificationId = Guid.NewGuid();
+            var summary = new PrenotificationRulesSummary();
+            var message = new PerformPrenotificationContentValidation(summary, notificationId, new DataTable(), "Test", false);
+
+            A.CallTo(() => mapper.Map(A<DataTable>.Ignored))
+                .Returns(A.CollectionOfFake<PrenotificationMovement>(MaxShipments + 1).ToList());
+
+            var response = await handler.HandleAsync(message);
+
+            Assert.False(response.IsContentRulesSuccess);
+        }
+
+        [Fact]
+        public async Task MissingShipmentNumber_ContentRulesFailed()
+        {
+            var notificationId = Guid.NewGuid();
+            var summary = new PrenotificationRulesSummary();
+            var message = new PerformPrenotificationContentValidation(summary, notificationId, new DataTable(), "Test", false);
+
+            var movements = new List<PrenotificationMovement>()
+            {
+                new PrenotificationMovement()
+                {
+                    ShipmentNumber = null,
+                    MissingShipmentNumber = true
+                }
+            };
+
+            A.CallTo(() => mapper.Map(A<DataTable>.Ignored)).Returns(movements);
+
+            var response = await handler.HandleAsync(message);
+
+            Assert.False(response.IsContentRulesSuccess);
+        }
+
+        [Fact]
+        public async Task MissingNotificationNumber_ContentRulesFailed()
+        {
+            var notificationId = Guid.NewGuid();
+            var summary = new PrenotificationRulesSummary();
+            var message = new PerformPrenotificationContentValidation(summary, notificationId, new DataTable(), "Test", false);
+
+            var movements = new List<PrenotificationMovement>()
+            {
+                new PrenotificationMovement()
+                {
+                    MissingNotificationNumber = true
+                }
+            };
+
+            A.CallTo(() => mapper.Map(A<DataTable>.Ignored)).Returns(movements);
+
+            var response = await handler.HandleAsync(message);
+
+            Assert.False(response.IsContentRulesSuccess);
+        }
+
+        [Fact]
+        public async Task MissingData_ContentRulesFailed()
+        {
+            var notificationId = Guid.NewGuid();
+            var summary = new PrenotificationRulesSummary();
+            var message = new PerformPrenotificationContentValidation(summary, notificationId, new DataTable(), "Test", false);
+
+            var movements = new List<PrenotificationMovement>()
+            {
+                new PrenotificationMovement()
+                {
+                    NotificationNumber = "GB 0001 123456",
+                    ShipmentNumber = 1,
+                    MissingQuantity = true,
+                    MissingDateOfShipment = true
+                }
+            };
+
+            A.CallTo(() => mapper.Map(A<DataTable>.Ignored)).Returns(movements);
+
+            var response = await handler.HandleAsync(message);
+
+            Assert.False(response.IsContentRulesSuccess);
         }
 
         [Fact]
         public async Task ContentRulesFailed_DoesNotSaveToDraft()
         {
             var notificationId = Guid.NewGuid();
-            var summary = new BulkMovementRulesSummary();
-            var message = new PerformBulkUploadContentValidation(summary, notificationId, new DataTable(), "Test", false);
+            var summary = new PrenotificationRulesSummary();
+            var message = new PerformPrenotificationContentValidation(summary, notificationId, new DataTable(), "Test", false);
 
             A.CallTo(() => mapper.Map(A<DataTable>.Ignored)).Returns(A.CollectionOfFake<PrenotificationMovement>(5).ToList());
             A.CallTo(() => contentRule.GetResult(A<List<PrenotificationMovement>>.Ignored, notificationId))
-                .Returns(new ContentRuleResult<BulkMovementContentRules>(BulkMovementContentRules.MissingData,
+                .Returns(new PrenotificationContentRuleResult<PrenotificationContentRules>(PrenotificationContentRules.MissingData,
                     MessageLevel.Error, "Missing data"));
 
             var response = await handler.HandleAsync(message);
@@ -58,13 +147,26 @@
         public async Task ContentRulesSuccess_SavesToDraft()
         {
             var notificationId = Guid.NewGuid();
-            var summary = new BulkMovementRulesSummary();
-            var message = new PerformBulkUploadContentValidation(summary, notificationId, new DataTable(), "Test", false);
+            var summary = new PrenotificationRulesSummary();
+            var message = new PerformPrenotificationContentValidation(summary, notificationId, new DataTable(), "Test", false);
 
-            A.CallTo(() => mapper.Map(A<DataTable>.Ignored)).Returns(A.CollectionOfFake<PrenotificationMovement>(5).ToList());
+            var movements = new List<PrenotificationMovement>()
+            {
+                new PrenotificationMovement()
+                {
+                    NotificationNumber = "GB 0001 123456",
+                    ShipmentNumber = 1,
+                    Quantity = 1m,
+                    Unit = ShipmentQuantityUnits.Tonnes,
+                    PackagingTypes = new List<PackagingType>() { PackagingType.Drum, PackagingType.Bag },
+                    ActualDateOfShipment = SystemTime.UtcNow
+                }
+            };
+
+            A.CallTo(() => mapper.Map(A<DataTable>.Ignored)).Returns(movements);
             A.CallTo(() => contentRule.GetResult(A<List<PrenotificationMovement>>.Ignored, notificationId))
-                .Returns(new ContentRuleResult<BulkMovementContentRules>(BulkMovementContentRules.MissingData,
-                    MessageLevel.Success, "Missing data"));
+                .Returns(new PrenotificationContentRuleResult<PrenotificationContentRules>(PrenotificationContentRules.MissingData,
+                    MessageLevel.Success, "Test"));
 
             var response = await handler.HandleAsync(message);
 

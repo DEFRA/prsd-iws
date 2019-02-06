@@ -10,7 +10,7 @@
     using FakeItEasy;
     using Prsd.Core.Mediator;
     using Web.Infrastructure;
-    using Web.Infrastructure.BulkUploadReceiptRecovery;
+    using Web.Infrastructure.BulkReceiptRecovery;
     using Web.ViewModels.Shared;
     using Xunit;
 

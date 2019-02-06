@@ -9,7 +9,7 @@
     using Core.Movement;
     using Core.Rules;
     using Infrastructure;
-    using Infrastructure.BulkUpload;
+    using Infrastructure.BulkPrenotification;
     using Prsd.Core.Mediator;
     using Requests.NotificationMovements;
     using Requests.NotificationMovements.BulkUpload;
@@ -19,10 +19,10 @@
     public class PrenotificationBulkUploadController : Controller
     {
         private readonly IMediator mediator;
-        private readonly IBulkMovementValidator validator;
+        private readonly IPrenotificationValidator validator;
         private readonly IFileReader fileReader;
 
-        public PrenotificationBulkUploadController(IMediator mediator, IBulkMovementValidator validator, IFileReader fileReader)
+        public PrenotificationBulkUploadController(IMediator mediator, IPrenotificationValidator validator, IFileReader fileReader)
         {
             this.mediator = mediator;
             this.validator = validator;
@@ -112,10 +112,9 @@
             var validationSummary = await validator.GetPrenotificationValidationSummary(model.File, notificationId);
             var failedFileRules = validationSummary.FileRulesResults.Where(r => r.MessageLevel == MessageLevel.Error).Select(r => r.Rule).ToList();
             var failedContentRules = validationSummary.ContentRulesResults.Where(r => r.MessageLevel == MessageLevel.Error).ToList();
-            var warningContentRule = validationSummary.ContentRulesResults.Where(r => r.MessageLevel == MessageLevel.Warning).ToList();
+
             model.FailedFileRules = failedFileRules;
             model.FailedContentRules = failedContentRules;
-            model.WarningContentRules = warningContentRule;
             var shipments = validationSummary.ShipmentNumbers != null ? validationSummary.ShipmentNumbers.ToList() : null;
 
             var shipmentsModel = new ShipmentMovementDocumentsViewModel(notificationId, shipments, model.File.FileName);
@@ -123,7 +122,7 @@
             TempData["PrenotificationShipments"] = shipments;
             TempData["PreNotificationFileName"] = model.File.FileName;
 
-            if (model.ErrorsCount > 0 || model.WarningsCount > 0)
+            if (model.ErrorsCount > 0)
             {
                 return View("Errors", model);
             }

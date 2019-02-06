@@ -2338,17 +2338,17 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ReceiptRecoveryBulkUploadResources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Infrastructure\BulkUploadReceiptRecovery\ReceiptRecoveryValidator.cs" />
-    <Compile Include="Infrastructure\BulkUploadReceiptRecovery\IReceiptRecoveryFileRule.cs" />
-    <Compile Include="Infrastructure\BulkUploadReceiptRecovery\IReceiptRecoveryValidator.cs" />
-    <Compile Include="Infrastructure\BulkUpload\BulkMovementValidator.cs" />
-    <Compile Include="Infrastructure\BulkUpload\PrenotificationFileSizeRule.cs" />
-    <Compile Include="Infrastructure\BulkUpload\PrenotificationFileTypeRule.cs" />
-    <Compile Include="Infrastructure\BulkUpload\IBulkMovementPrenotificationFileRule.cs" />
-    <Compile Include="Infrastructure\BulkUpload\IBulkMovementValidator.cs" />
-    <Compile Include="Infrastructure\BulkUpload\FileParsePrenotificationFileRule.cs" />
-    <Compile Include="Infrastructure\BulkUpload\ShippingMovementsFileTypeRules.cs" />
-    <Compile Include="Infrastructure\BulkUpload\VirusRule.cs" />
+    <Compile Include="Infrastructure\BulkReceiptRecovery\ReceiptRecoveryValidator.cs" />
+    <Compile Include="Infrastructure\BulkReceiptRecovery\IReceiptRecoveryFileRule.cs" />
+    <Compile Include="Infrastructure\BulkReceiptRecovery\IReceiptRecoveryValidator.cs" />
+    <Compile Include="Infrastructure\BulkPrenotification\PrenotificationValidator.cs" />
+    <Compile Include="Infrastructure\BulkPrenotification\PrenotificationFileSizeRule.cs" />
+    <Compile Include="Infrastructure\BulkPrenotification\PrenotificationFileTypeRule.cs" />
+    <Compile Include="Infrastructure\BulkPrenotification\IPrenotificationFileRule.cs" />
+    <Compile Include="Infrastructure\BulkPrenotification\IPrenotificationValidator.cs" />
+    <Compile Include="Infrastructure\BulkPrenotification\FileParsePrenotificationFileRule.cs" />
+    <Compile Include="Infrastructure\BulkPrenotification\ShippingMovementsFileTypeRules.cs" />
+    <Compile Include="Infrastructure\BulkPrenotification\VirusRule.cs" />
     <Compile Include="Infrastructure\NotificationOwnerFilter.cs" />
     <Compile Include="Infrastructure\SkipNotificationOwnerFilter.cs" />
     <Compile Include="Infrastructure\AuditService.cs" />

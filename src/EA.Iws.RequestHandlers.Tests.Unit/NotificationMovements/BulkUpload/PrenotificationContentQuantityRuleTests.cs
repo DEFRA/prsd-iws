@@ -3,22 +3,22 @@
     using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
-    using Core.Movement.Bulk;
+    using Core.Movement.BulkPrenotification;
     using Core.Rules;
     using Core.Shared;
     using Domain;
     using Domain.NotificationApplication.Shipment;
-    using RequestHandlers.NotificationMovements.BulkUpload;
+    using RequestHandlers.NotificationMovements.BulkPrenotification;
     using Xunit;
 
     public class PrenotificationContentQuantityRuleTests
     {
-        private readonly PrenotificationContentQuantityRule rule;
+        private readonly PrenotificationQuantityPrecisionRule rule;
         private readonly Guid notificationId;
 
         public PrenotificationContentQuantityRuleTests()
         {
-            rule = new PrenotificationContentQuantityRule();
+            rule = new PrenotificationQuantityPrecisionRule();
             notificationId = Guid.NewGuid();
         }
 
@@ -27,7 +27,7 @@
         {
             var result = await rule.GetResult(GetTestData(ShipmentQuantityUnits.Tonnes), notificationId);
 
-            Assert.Equal(BulkMovementContentRules.QuantityPrecision, result.Rule);
+            Assert.Equal(PrenotificationContentRules.QuantityPrecision, result.Rule);
             Assert.Equal(MessageLevel.Success, result.MessageLevel);
         }
 

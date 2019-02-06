@@ -1,19 +1,19 @@
-﻿namespace EA.Iws.Web.App_Start.Modules
+﻿namespace EA.Iws.Web.Modules
 {
     using Autofac;
-    using Infrastructure.BulkUpload;
-    using Infrastructure.BulkUploadReceiptRecovery;
+    using Infrastructure.BulkPrenotification;
+    using Infrastructure.BulkReceiptRecovery;
 
     public class BulkUploadModule : Module
     {
         protected override void Load(ContainerBuilder builder)
         {
-            builder.RegisterType<Infrastructure.BulkUpload.BulkMovementValidator>().As<Infrastructure.BulkUpload.IBulkMovementValidator>();
+            builder.RegisterType<PrenotificationValidator>().As<IPrenotificationValidator>();
             builder.RegisterAssemblyTypes(ThisAssembly)
-                .AssignableTo<IBulkMovementPrenotificationFileRule>()
-                .As<IBulkMovementPrenotificationFileRule>();
+                .AssignableTo<IPrenotificationFileRule>()
+                .As<IPrenotificationFileRule>();
 
-            builder.RegisterType<Infrastructure.BulkUploadReceiptRecovery.ReceiptRecoveryValidator>().As<Infrastructure.BulkUploadReceiptRecovery.IReceiptRecoveryValidator>();
+            builder.RegisterType<ReceiptRecoveryValidator>().As<IReceiptRecoveryValidator>();
             builder.RegisterAssemblyTypes(ThisAssembly)
                 .AssignableTo<IReceiptRecoveryFileRule>()
                 .As<IReceiptRecoveryFileRule>();

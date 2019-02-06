@@ -6,6 +6,7 @@
     using System.Web;
     using ExcelDataReader;
     using VirusScanning;
+    using DataTable = System.Data.DataTable;
 
     internal class FileReader : IFileReader
     {
@@ -50,12 +51,23 @@
                     ConfigureDataTable = (tableReader) => new ExcelDataTableConfiguration()
                     {
                         UseHeaderRow = useHeaderRow
-                    }
+                    },
+                    UseColumnDataType = false
                 });
-
+                
                 if (dataSet.Tables.Count > 0)
                 {
-                    result = dataSet.Tables[0];
+                    // Set the default types to string for all columns.
+                    var cloned = dataSet.Tables[0].Clone();
+
+                    foreach (DataColumn column in cloned.Columns)
+                    {
+                        column.DataType = typeof(string);
+                    }
+
+                    cloned.Load(dataSet.CreateDataReader());
+
+                    result = cloned;
                 }
             }
 

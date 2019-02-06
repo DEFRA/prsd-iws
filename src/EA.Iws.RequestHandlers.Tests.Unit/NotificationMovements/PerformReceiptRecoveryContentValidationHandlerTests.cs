@@ -5,7 +5,7 @@
     using Core.Movement.BulkReceiptRecovery;
     using FakeItEasy;
     using Prsd.Core.Mapper;
-    using RequestHandlers.NotificationMovements.BulkUploadReceiptRecovery;
+    using RequestHandlers.NotificationMovements.BulkReceiptRecovery;
 
     public class PerformReceiptRecoveryContentValidationHandlerTests
     {
