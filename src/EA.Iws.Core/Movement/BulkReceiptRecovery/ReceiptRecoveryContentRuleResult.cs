@@ -2,9 +2,9 @@
 {
     using Rules;
 
-    public class ContentRuleResult<ReceiptRecoveryContentRules>
+    public class ReceiptRecoveryContentRuleResult<ReceiptRecoveryContentRules>
     {
-        public ContentRuleResult(ReceiptRecoveryContentRules rule, MessageLevel messageLevel, string errorMessage)
+        public ReceiptRecoveryContentRuleResult(ReceiptRecoveryContentRules rule, MessageLevel messageLevel, string errorMessage)
         {
             Rule = rule;
             MessageLevel = messageLevel;

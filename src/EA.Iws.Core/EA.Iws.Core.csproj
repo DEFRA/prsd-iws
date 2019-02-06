@@ -168,7 +168,7 @@
     <Compile Include="MovementReceipt\Decision.cs" />
     <Compile Include="Movement\BulkReceiptRecovery\ReceiptRecoveryFileRules.cs" />
     <Compile Include="Movement\BulkReceiptRecovery\ReceiptRecoveryRulesSummary.cs" />
-    <Compile Include="Movement\BulkReceiptRecovery\ContentRuleResult.cs" />
+    <Compile Include="Movement\BulkReceiptRecovery\ReceiptRecoveryContentRuleResult.cs" />
     <Compile Include="Movement\BulkReceiptRecovery\ReceiptRecoveryColumnIndex.cs" />
     <Compile Include="Movement\BulkReceiptRecovery\ReceiptRecoveryContentRules.cs" />
     <Compile Include="Movement\BulkReceiptRecovery\IReceiptRecoveryContentRule.cs" />

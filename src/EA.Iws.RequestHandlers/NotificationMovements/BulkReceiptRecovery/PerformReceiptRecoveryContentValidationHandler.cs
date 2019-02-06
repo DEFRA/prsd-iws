@@ -16,6 +16,7 @@
     {
         private readonly IEnumerable<IReceiptRecoveryContentRule> contentRules;
         private readonly IMap<DataTable, List<ReceiptRecoveryMovement>> mapper;
+        private const int MaxShipments = 50;
 
         public PerformReceiptRecoveryContentValidationHandler(IEnumerable<IReceiptRecoveryContentRule> contentRules,
             IMap<DataTable, List<ReceiptRecoveryMovement>> mapper)
@@ -43,28 +44,80 @@
             return result;
         }
 
-        private async Task<List<ContentRuleResult<ReceiptRecoveryContentRules>>> GetOrderedContentRules(List<ReceiptRecoveryMovement> movements,
+        private async Task<List<ReceiptRecoveryContentRuleResult<ReceiptRecoveryContentRules>>> GetOrderedContentRules(List<ReceiptRecoveryMovement> movements,
             Guid notificationId)
         {
-            var rules = new List<ContentRuleResult<ReceiptRecoveryContentRules>>();
+            var rules = new List<ReceiptRecoveryContentRuleResult<ReceiptRecoveryContentRules>>();
 
-            var missingData = await GetMissingDataResult(movements, notificationId);
+            var maxShipments = await GetMaxShipments(movements);
 
-            rules.Add(missingData);
+            rules.Add(maxShipments);
 
-            // Only run rest of validations if there are no missing/blank data.
-            if (missingData.MessageLevel == MessageLevel.Success)
+            if (maxShipments.MessageLevel == MessageLevel.Success)
             {
-                foreach (var rule in contentRules)
+                var missingNotificationShipment = await GetMissingNotificationShipmentNumbers(movements);
+
+                rules.Add(missingNotificationShipment);
+
+                if (missingNotificationShipment.MessageLevel == MessageLevel.Success)
                 {
-                    rules.Add(await rule.GetResult(movements, notificationId));
+                    var missingData = await GetMissingDataResult(movements, notificationId);
+
+                    rules.Add(missingData);
+
+                    // Only run rest of validations if there are no missing/blank data.
+                    if (missingData.MessageLevel == MessageLevel.Success)
+                    {
+                        foreach (var rule in contentRules)
+                        {
+                            rules.Add(await rule.GetResult(movements, notificationId));
+                        }
+                    }
                 }
             }
-
+            
             return rules.OrderBy(r => r.Rule).ToList();
         }
 
-        private async Task<ContentRuleResult<ReceiptRecoveryContentRules>> GetMissingDataResult(List<ReceiptRecoveryMovement> movements, Guid notificationId)
+        private static async Task<ReceiptRecoveryContentRuleResult<ReceiptRecoveryContentRules>> GetMaxShipments(
+            IReadOnlyCollection<ReceiptRecoveryMovement> movements)
+        {
+            return await Task.Run(() =>
+            {
+                var result = movements.Count > MaxShipments ? MessageLevel.Error : MessageLevel.Success;
+
+                var errorMessage =
+                    string.Format(
+                        Prsd.Core.Helpers.EnumHelper.GetDisplayName(ReceiptRecoveryContentRules.MaximumShipments),
+                        MaxShipments);
+
+                return new ReceiptRecoveryContentRuleResult<ReceiptRecoveryContentRules>(ReceiptRecoveryContentRules.MaximumShipments,
+                    result, errorMessage);
+            });
+        }
+
+        private static async Task<ReceiptRecoveryContentRuleResult<ReceiptRecoveryContentRules>> GetMissingNotificationShipmentNumbers(
+            IReadOnlyCollection<ReceiptRecoveryMovement> movements)
+        {
+            return await Task.Run(() =>
+            {
+                var result = movements.Any(m => m.MissingNotificationNumber
+                                                || m.MissingShipmentNumber
+                                                || !m.ShipmentNumber.HasValue)
+                    ? MessageLevel.Error
+                    : MessageLevel.Success;
+
+                var errorMessage =
+                    string.Format(
+                        Prsd.Core.Helpers.EnumHelper.GetDisplayName(ReceiptRecoveryContentRules.MissingShipmentNumbers),
+                        movements.Count);
+
+                return new ReceiptRecoveryContentRuleResult<ReceiptRecoveryContentRules>(ReceiptRecoveryContentRules.MissingShipmentNumbers,
+                    result, errorMessage);
+            });
+        }
+
+        private async Task<ReceiptRecoveryContentRuleResult<ReceiptRecoveryContentRules>> GetMissingDataResult(List<ReceiptRecoveryMovement> movements, Guid notificationId)
         {
             return await Task.Run(() =>
             {
@@ -89,7 +142,7 @@
                 var shipmentNumbers = string.Join(", ", missingDataShipmentNumbers);
                 var errorMessage = string.Format(Prsd.Core.Helpers.EnumHelper.GetDisplayName(ReceiptRecoveryContentRules.MissingData), shipmentNumbers);
 
-                return new ContentRuleResult<ReceiptRecoveryContentRules>(ReceiptRecoveryContentRules.MissingData, missingDataResult, errorMessage);
+                return new ReceiptRecoveryContentRuleResult<ReceiptRecoveryContentRules>(ReceiptRecoveryContentRules.MissingData, missingDataResult, errorMessage);
             });
         }
     }

@@ -10,7 +10,7 @@
     {
         public IEnumerable<RuleResult<ReceiptRecoveryFileRules>> FileRulesResults { get; set; }
 
-        public IEnumerable<ContentRuleResult<ReceiptRecoveryContentRules>> ContentRulesResults { get; set; }
+        public IEnumerable<ReceiptRecoveryContentRuleResult<ReceiptRecoveryContentRules>> ContentRulesResults { get; set; }
 
         public IEnumerable<int> ShipmentNumbers { get; set; }
 
@@ -31,13 +31,13 @@
         public ReceiptRecoveryRulesSummary()
         {
             FileRulesResults = new List<RuleResult<ReceiptRecoveryFileRules>>();
-            ContentRulesResults = new List<ContentRuleResult<ReceiptRecoveryContentRules>>();
+            ContentRulesResults = new List<ReceiptRecoveryContentRuleResult<ReceiptRecoveryContentRules>>();
         }
 
         public ReceiptRecoveryRulesSummary(IEnumerable<RuleResult<ReceiptRecoveryFileRules>> fileRules)
         {
             FileRulesResults = fileRules ?? new List<RuleResult<ReceiptRecoveryFileRules>>();
-            ContentRulesResults = new List<ContentRuleResult<ReceiptRecoveryContentRules>>(); 
+            ContentRulesResults = new List<ReceiptRecoveryContentRuleResult<ReceiptRecoveryContentRules>>(); 
         }
     }
 }

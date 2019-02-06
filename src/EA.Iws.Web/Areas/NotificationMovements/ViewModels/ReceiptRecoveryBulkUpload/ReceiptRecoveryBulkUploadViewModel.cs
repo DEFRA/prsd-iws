@@ -31,7 +31,7 @@
 
         public List<ReceiptRecoveryFileRules> FailedFileRules { get; set; }
 
-        public List<ContentRuleResult<ReceiptRecoveryContentRules>> FailedContentRules { get; set; }
+        public List<ReceiptRecoveryContentRuleResult<ReceiptRecoveryContentRules>> FailedContentRules { get; set; }
 
         [Display(Name = "Upload the data file containing your receipt / recovery data")]
         public HttpPostedFileBase File { get; set; }
