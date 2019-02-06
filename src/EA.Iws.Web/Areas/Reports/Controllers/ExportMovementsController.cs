@@ -35,7 +35,7 @@
             }
 
             var from = model.From.AsDateTime().Value;
-            var to = model.To.AsDateTime().Value;
+            var to = model.To.AsDateTime().Value.AddDays(1);
 
             var report = await mediator.SendAsync(new GetExportMovementsReport(from, to));
 
