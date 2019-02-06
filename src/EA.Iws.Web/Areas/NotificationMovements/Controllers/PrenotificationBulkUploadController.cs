@@ -39,14 +39,13 @@
             var updatedRules = ruleSummary.RuleResults.Where(p => p.Rule != MovementRules.ConsentExpiresInThreeOrLessWorkingDays
             && p.Rule != MovementRules.ConsentExpiresInFourWorkingDays
             && p.Rule != MovementRules.HasApprovedFinancialGuarantee
-            && p.Rule != MovementRules.FileClosed
-            && p.Rule != MovementRules.ActiveLoadsReached);
+            && p.Rule != MovementRules.FileClosed);
 
-            MovementRulesSummary v = new MovementRulesSummary(updatedRules);
+            var updatedSummary = new MovementRulesSummary(updatedRules);
 
-            if (!v.IsSuccess)
+            if (!updatedSummary.IsSuccess)
             {
-                return GetRuleErrorView(ruleSummary);
+                return GetRuleErrorView(updatedSummary);
             }
 
             var model = new PrenotificationBulkUploadViewModel(notificationId);
@@ -79,6 +78,12 @@
 
         [HttpGet]
         public ActionResult TotalIntendedQuantityExceeded(Guid notificationId)
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public ActionResult TotalActiveLoadsReached(Guid notificationId)
         {
             return View();
         }
@@ -306,10 +311,6 @@
             {
                 return RedirectToAction("TotalIntendedQuantityExceeded");
             }
-            if (ruleSummary.RuleResults.Any(r => r.Rule == MovementRules.HasApprovedFinancialGuarantee && r.MessageLevel == MessageLevel.Error))
-            {
-                return RedirectToAction("NoApprovedFinancialGuarantee");
-            }
             if (ruleSummary.RuleResults.Any(r => r.Rule == MovementRules.ActiveLoadsReached && r.MessageLevel == MessageLevel.Error))
             {
                 return RedirectToAction("TotalActiveLoadsReached");
@@ -318,21 +319,9 @@
             {
                 return RedirectToAction("ConsentPeriodExpired");
             }
-            if (ruleSummary.RuleResults.Any(r => r.Rule == MovementRules.ConsentExpiresInFourWorkingDays && r.MessageLevel == MessageLevel.Error))
-            {
-                return RedirectToAction("ConsentExpiresInFourWorkingDays");
-            }
-            if (ruleSummary.RuleResults.Any(r => r.Rule == MovementRules.ConsentExpiresInThreeOrLessWorkingDays && r.MessageLevel == MessageLevel.Error))
-            {
-                return RedirectToAction("ConsentExpiresInThreeOrLessWorkingDays");
-            }
             if (ruleSummary.RuleResults.Any(r => r.Rule == MovementRules.ConsentWithdrawn && r.MessageLevel == MessageLevel.Error))
             {
                 return RedirectToAction("ConsentWithdrawn");
-            }
-            if (ruleSummary.RuleResults.Any(r => r.Rule == MovementRules.FileClosed && r.MessageLevel == MessageLevel.Error))
-            {
-                return RedirectToAction("FileClosed");
             }
 
             throw new InvalidOperationException("Unknown rule view");
