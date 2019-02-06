@@ -19,7 +19,6 @@
             this.NotificationId = notificationId;
             this.Shipments = shipments;
             this.PreNotificationFileName = preNotificationFileName;
-            this.FileSuccessMessage = PrenotificationBulkUploadResources.ShipmentMovementsSuccessText.Replace("{filename}", preNotificationFileName);
         }
 
         public Guid NotificationId { get; set; }
@@ -30,7 +29,14 @@
 
         public string ShipmentMovementFileName { get; set; }
 
-        public string FileSuccessMessage { get; set; }
+        public string FileSuccessMessage
+        {
+            get
+            {
+                return PrenotificationBulkUploadResources.ShipmentMovementsSuccessText.Replace("{filename}",
+                    PreNotificationFileName);
+            }
+        }
 
         [Display(Name = "Upload the file containing your shipment movement documents")]
         public HttpPostedFileBase File { get; set; }
