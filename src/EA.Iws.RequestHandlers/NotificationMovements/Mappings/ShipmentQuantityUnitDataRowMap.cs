@@ -20,7 +20,8 @@
                 // Small 'hack' when this is supplied as the unit.
                 data = data == "m3" ? "CubicMetres" : data;
 
-                if (Enum.TryParse(data, out parsed))
+                if (Enum.TryParse(data, out parsed) &&
+                    Enum.IsDefined(typeof(ShipmentQuantityUnits), parsed))
                 {
                     result = parsed;
                 }
