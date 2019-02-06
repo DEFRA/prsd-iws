@@ -10,7 +10,6 @@
     using Domain.Movement.BulkUpload;
     using Prsd.Core.Mapper;
     using Prsd.Core.Mediator;
-    using Requests.Movement;
     using Requests.NotificationMovements.BulkUpload;
 
     internal class PerformPrenotificationContentValidationHandler : IRequestHandler<PerformPrenotificationContentValidation, PrenotificationRulesSummary>
