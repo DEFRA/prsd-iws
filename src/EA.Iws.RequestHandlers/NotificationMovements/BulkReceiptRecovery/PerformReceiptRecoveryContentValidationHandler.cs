@@ -30,9 +30,7 @@
 
             var movements = mapper.Map(message.DataTable);
 
-            var addFirstRowWarningRule = message.IsCsv && !CheckFirstRow(movements);
-
-            result.ContentRulesResults = await GetOrderedContentRules(movements, message.NotificationId, addFirstRowWarningRule);
+            result.ContentRulesResults = await GetOrderedContentRules(movements, message.NotificationId);
 
             if (result.IsContentRulesSuccess)
             {
@@ -46,16 +44,9 @@
         }
 
         private async Task<List<ContentRuleResult<ReceiptRecoveryContentRules>>> GetOrderedContentRules(List<ReceiptRecoveryMovement> movements,
-            Guid notificationId, bool addFirstRowWarningRule)
+            Guid notificationId)
         {
             var rules = new List<ContentRuleResult<ReceiptRecoveryContentRules>>();
-
-            if (addFirstRowWarningRule)
-            {
-                rules.Add(new ContentRuleResult<ReceiptRecoveryContentRules>(ReceiptRecoveryContentRules.HeaderDataRemoved,
-                    MessageLevel.Warning,
-                    Prsd.Core.Helpers.EnumHelper.GetDisplayName(ReceiptRecoveryContentRules.HeaderDataRemoved)));
-            }
 
             var missingData = await GetMissingDataResult(movements, notificationId);
 
@@ -100,24 +91,6 @@
 
                 return new ContentRuleResult<ReceiptRecoveryContentRules>(ReceiptRecoveryContentRules.MissingData, missingDataResult, errorMessage);
             });
-        }
-
-        private static bool CheckFirstRow(IList<ReceiptRecoveryMovement> movements)
-        {
-            if (!IsValidNotificationNumber(movements[(int)ReceiptRecoveryColumnIndex.NotificationNumber].NotificationNumber))
-            {
-                movements.RemoveAt(0);
-                return false;
-            }
-
-            return true;
-        }
-
-        private static bool IsValidNotificationNumber(string input)
-        {
-            var match = Regex.Match(input.Replace(" ", string.Empty), @"(GB)(\d{4})(\d{6})");
-
-            return match.Success;
         }
     }
 }
