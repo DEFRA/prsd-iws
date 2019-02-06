@@ -55,13 +55,16 @@
 
             if (maxShipments.MessageLevel == MessageLevel.Success)
             {
-                var missingNotificationShipment = await GetMissingNotificationShipmentNumbers(movements);
+                var missingShipmentNumbers = await GetMissingShipmentNumbers(movements);
+                var missingNotificationNumbers = await GetMissingNotificationNumbers(movements);
 
-                rules.Add(missingNotificationShipment);
+                rules.Add(missingShipmentNumbers);
+                rules.Add(missingNotificationNumbers);
 
-                if (missingNotificationShipment.MessageLevel == MessageLevel.Success)
+                if (missingShipmentNumbers.MessageLevel == MessageLevel.Success &&
+                    missingNotificationNumbers.MessageLevel == MessageLevel.Success)
                 {
-                    var missingData = await GetMissingDataResult(movements, notificationId);
+                    var missingData = await GetMissingReceiptDataResult(movements, notificationId);
 
                     rules.Add(missingData);
 
@@ -96,14 +99,12 @@
             });
         }
 
-        private static async Task<ReceiptRecoveryContentRuleResult<ReceiptRecoveryContentRules>> GetMissingNotificationShipmentNumbers(
+        private static async Task<ReceiptRecoveryContentRuleResult<ReceiptRecoveryContentRules>> GetMissingShipmentNumbers(
             IReadOnlyCollection<ReceiptRecoveryMovement> movements)
         {
             return await Task.Run(() =>
             {
-                var result = movements.Any(m => m.MissingNotificationNumber
-                                                || m.MissingShipmentNumber
-                                                || !m.ShipmentNumber.HasValue)
+                var result = movements.Any(m => m.MissingShipmentNumber || !m.ShipmentNumber.HasValue)
                     ? MessageLevel.Error
                     : MessageLevel.Success;
 
@@ -117,7 +118,32 @@
             });
         }
 
-        private async Task<ReceiptRecoveryContentRuleResult<ReceiptRecoveryContentRules>> GetMissingDataResult(List<ReceiptRecoveryMovement> movements, Guid notificationId)
+        private static async Task<ReceiptRecoveryContentRuleResult<ReceiptRecoveryContentRules>> GetMissingNotificationNumbers(
+            IReadOnlyCollection<ReceiptRecoveryMovement> movements)
+        {
+            return await Task.Run(() =>
+            {
+                var result = MessageLevel.Success;
+                var missingNotificationNumberShipmentNumbers = new List<string>();
+
+                foreach (var movement in movements)
+                {
+                    // Only report an error if record has a shipment number, otherwise record will be picked up by the GetMissingShipmentNumbers method
+                    if (movement.ShipmentNumber.HasValue && movement.MissingNotificationNumber)
+                    {
+                        result = MessageLevel.Error;
+                        missingNotificationNumberShipmentNumbers.Add(movement.ShipmentNumber.ToString());
+                    }
+                }
+
+                var shipmentNumbers = string.Join(", ", missingNotificationNumberShipmentNumbers);
+                var errorMessage = string.Format(Prsd.Core.Helpers.EnumHelper.GetDisplayName(ReceiptRecoveryContentRules.MissingNotificationNumber), shipmentNumbers);
+
+                return new ReceiptRecoveryContentRuleResult<ReceiptRecoveryContentRules>(ReceiptRecoveryContentRules.MissingNotificationNumber, result, errorMessage);
+            });
+        }
+
+        private async Task<ReceiptRecoveryContentRuleResult<ReceiptRecoveryContentRules>> GetMissingReceiptDataResult(List<ReceiptRecoveryMovement> movements, Guid notificationId)
         {
             return await Task.Run(() =>
             {
@@ -126,13 +152,13 @@
 
                 foreach (var movement in movements)
                 {
-                    // Only report an error if shipment has a shipment number, otherwise record will be picked up by the PrenotificationContentMissingShipmentNumberRule
+                    // Only report an error if record has a shipment number, otherwise record will be picked up by the GetMissingShipmentNumbers method
+                    // Only report an error if record has a notification number, otherwise record will be picked up by the GetMissingNotificationNumbers method
                     if (movement.ShipmentNumber.HasValue &&
-                        (movement.MissingNotificationNumber ||
-                        movement.MissingReceivedDate ||
+                        !string.IsNullOrEmpty(movement.NotificationNumber) &&
+                        (movement.MissingReceivedDate ||
                         movement.MissingQuantity ||
-                        movement.MissingUnits ||
-                        movement.MissingRecoveredDisposedDate))
+                        movement.MissingUnits))
                     {
                         missingDataResult = MessageLevel.Error;
                         missingDataShipmentNumbers.Add(movement.ShipmentNumber.ToString());
@@ -140,9 +166,9 @@
                 }
 
                 var shipmentNumbers = string.Join(", ", missingDataShipmentNumbers);
-                var errorMessage = string.Format(Prsd.Core.Helpers.EnumHelper.GetDisplayName(ReceiptRecoveryContentRules.MissingData), shipmentNumbers);
+                var errorMessage = string.Format(Prsd.Core.Helpers.EnumHelper.GetDisplayName(ReceiptRecoveryContentRules.MissingReceiptData), shipmentNumbers);
 
-                return new ReceiptRecoveryContentRuleResult<ReceiptRecoveryContentRules>(ReceiptRecoveryContentRules.MissingData, missingDataResult, errorMessage);
+                return new ReceiptRecoveryContentRuleResult<ReceiptRecoveryContentRules>(ReceiptRecoveryContentRules.MissingReceiptData, missingDataResult, errorMessage);
             });
         }
     }
