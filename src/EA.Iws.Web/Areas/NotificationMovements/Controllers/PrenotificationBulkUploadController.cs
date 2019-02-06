@@ -182,7 +182,27 @@
                 {
                     ModelState.AddModelError(string.Empty, Prsd.Core.Helpers.EnumHelper.GetDisplayName(rule));
                 }
-                
+
+                var fileName = string.Empty;
+                var shipments = new List<int>();
+                object fileNameObj;
+                object shipmentsObj;
+
+                if (TempData.TryGetValue("PreNotificationFileName", out fileNameObj))
+                {
+                    fileName = fileNameObj as string;
+                }
+                if (TempData.TryGetValue("PrenotificationShipments", out shipmentsObj))
+                {
+                    shipments = shipmentsObj as List<int>;
+                }
+
+                TempData["PrenotificationShipments"] = shipments;
+                TempData["PreNotificationFileName"] = fileName;
+
+                model.PreNotificationFileName = fileName;
+                model.Shipments = shipments;
+
                 return View(model);
             }
 
