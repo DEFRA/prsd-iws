@@ -81,6 +81,7 @@
     <Content Include="scripts\Update\0004-CI\Sprint3\20170818-165900-add-uk-transit-authority.sql" />
     <Content Include="scripts\Update\0004-CI\Sprint4\20170824-094800-update-un-3077.sql" />
     <Content Include="scripts\Update\0004-CI\Sprint4\20170829-141800-update-shipments-cache.sql" />
+	<Content Include="scripts\Update\0004-CI\SupportUpdate\20190121-090200-add-created-on-date-to-movements.sql" />
     <Content Include="scripts\Update\0005-Beta\Sprint1\20181213-094200-add-shared-user-table.sql" />
     <Content Include="scripts\Update\0005-Beta\Sprint1\20181213-094300-add-shared-user-history-table.sql" />
     <Content Include="unindexed-foreign-keys.sql" />
