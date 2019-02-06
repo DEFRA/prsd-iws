@@ -29,7 +29,7 @@
                         LEFT JOIN [Notification].[Notification] N ON M.NotificationId = N.Id
                         LEFT JOIN [Person].[InternalUser] IU ON M.CreatedBy = IU.UserId
                     WHERE N.CompetentAuthority = @ca
-                        AND M.Date BETWEEN @from AND @to),
+                        AND M.CreatedOnDate BETWEEN @from AND @to),
 
                 receiptdata AS (
                     SELECT MR.*, IU.Id AS InternalUserId
@@ -38,7 +38,7 @@
 	                    INNER JOIN [Notification].[Notification] N ON M.NotificationId = N.Id
                         LEFT JOIN [Person].[InternalUser] IU ON MR.CreatedBy = IU.UserId
 	                WHERE N.CompetentAuthority = @ca
-		                AND MR.Date BETWEEN @from AND @to),
+		                AND MR.CreatedOnDate BETWEEN @from AND @to),
 
                 operationreceiptdata AS (
                     SELECT MOR.*, IU.Id AS InternalUserId
@@ -47,7 +47,7 @@
 	                    INNER JOIN [Notification].[Notification] N ON M.NotificationId = N.Id
                         LEFT JOIN [Person].[InternalUser] IU ON MOR.CreatedBy = IU.UserId
 	                WHERE N.CompetentAuthority = @ca
-		                AND MOR.Date BETWEEN @from AND @to),
+		                AND MOR.CreatedOnDate BETWEEN @from AND @to),
 
                 movementcreatedresult AS (
                     SELECT
@@ -57,14 +57,14 @@
 
                 receiptresult AS (
                     SELECT 
-	                    COUNT(CASE WHEN InternalUserId IS NULL AND Date IS NOT NULL THEN 1 ELSE NULL END) AS MovementReceiptsCreatedExternally,
-                        COUNT(CASE WHEN InternalUserId IS NOT NULL AND Date IS NOT NULL THEN 1 ELSE NULL END) AS MovementReceiptsCreatedInternally
+	                    COUNT(CASE WHEN InternalUserId IS NULL THEN 1 ELSE NULL END) AS MovementReceiptsCreatedExternally,
+                        COUNT(CASE WHEN InternalUserId IS NOT NULL THEN 1 ELSE NULL END) AS MovementReceiptsCreatedInternally
                     FROM receiptdata),
 
                 operationresult AS (
                     SELECT 
-                        COUNT(CASE WHEN InternalUserId IS NULL AND Date IS NOT NULL THEN 1 ELSE NULL END) AS MovementOperationReceiptsCreatedExternally,
-                        COUNT(CASE WHEN InternalUserId IS NOT NULL AND Date IS NOT NULL THEN 1 ELSE NULL END) AS MovementOperationReceiptsCreatedInternally
+                        COUNT(CASE WHEN InternalUserId IS NULL THEN 1 ELSE NULL END) AS MovementOperationReceiptsCreatedExternally,
+                        COUNT(CASE WHEN InternalUserId IS NOT NULL THEN 1 ELSE NULL END) AS MovementOperationReceiptsCreatedInternally
                     FROM operationreceiptdata)
 
                 SELECT * FROM movementcreatedresult, receiptresult, operationresult",
