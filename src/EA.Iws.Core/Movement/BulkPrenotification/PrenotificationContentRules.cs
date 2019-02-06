@@ -4,9 +4,9 @@
 
     public enum PrenotificationContentRules
     {
-        [Display(Name = "The maximum number of shipments that can be uploaded is {0}")]
+        [Display(Name = "The data file must not contain more than {0} rows of data.")]
         MaximumShipments,
-        [Display(Name = "You can't create {0} shipment(s), there is missing notification and shipment number.")]
+        [Display(Name = "All rows of data must contain valid notification and/or shipment numbers")]
         MissingShipmentNumbers,
         [Display(Name = "Shipment number {0}: there is missing data.")]
         MissingData,
