@@ -442,6 +442,7 @@
     <Compile Include="NotificationAssessment\SetEntryPointHandler.cs" />
     <Compile Include="NotificationMovements\BulkReceiptRecovery\PerformReceiptRecoveryContentValidationHandler.cs" />
     <Compile Include="NotificationMovements\BulkPrenotification\CreatePrenotificationHandler.cs" />
+    <Compile Include="NotificationMovements\BulkPrenotification\PrenotificationDateFutureRule.cs" />
     <Compile Include="NotificationMovements\BulkPrenotification\PerformPrenotificationContentValidationHandler.cs" />
     <Compile Include="NotificationMovements\BulkPrenotification\PrenotificationConsentValidityRule.cs" />
     <Compile Include="NotificationMovements\BulkPrenotification\PrenotificationDateFormatRule.cs" />

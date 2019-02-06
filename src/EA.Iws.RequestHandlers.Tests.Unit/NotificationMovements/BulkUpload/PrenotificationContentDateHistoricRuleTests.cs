@@ -5,7 +5,6 @@
     using System.Threading.Tasks;
     using Core.Movement.BulkPrenotification;
     using Core.Rules;
-    using Prsd.Core;
     using RequestHandlers.NotificationMovements.BulkPrenotification;
     using Xunit;
 
