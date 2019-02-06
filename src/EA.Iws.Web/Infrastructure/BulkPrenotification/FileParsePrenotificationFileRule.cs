@@ -9,6 +9,7 @@
     using Core.Documents;
     using Core.Movement.BulkPrenotification;
     using Core.Rules;
+    using Prsd.Core.Helpers;
 
     public class FileParsePrenotificationFileRule : IPrenotificationFileRule
     {
@@ -42,7 +43,7 @@
             try
             {
                 var extension = Path.GetExtension(file.FileName);
-                var isCsv = extension == ".csv" ? true : false;
+                var isCsv = extension == ".csv";
 
                 var dataTable = await fileReader.GetFirstDataTable(file, isCsv, !isCsv);
 
@@ -68,12 +69,12 @@
             {
                 return false;
             }
-            if (dataTable.Columns.Count != MaxColumns)
-            {
-                return false;
-            }
 
-            return true;
+            var columns = EnumHelper.GetValues(typeof(PrenotificationColumnIndex));
+
+            var maxColumns = columns != null ? columns.Count : MaxColumns;
+
+            return dataTable.Columns.Count == maxColumns;
         }
     }
 }
