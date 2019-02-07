@@ -28,8 +28,8 @@
                             m =>
                                 m.ShipmentNumber.HasValue &&
                                 (!m.PackagingTypes.Any() ||
-                                m.PackagingTypes.All(
-                                    p => notificationApplication.PackagingInfos.All(t => t.PackagingType != p))))
+                                !m.PackagingTypes.All(
+                                    p => notificationApplication.PackagingInfos.Any(t => t.PackagingType == p))))
                         .Select(m => m.ShipmentNumber.Value)
                         .ToList();
 

@@ -459,6 +459,7 @@
     <Compile Include="NotificationMovements\BulkPrenotification\PrenotificationQuantityUnitRule.cs" />
     <Compile Include="NotificationMovements\BulkPrenotification\PrenotificationThreeWorkingDaysConsentRule.cs" />
     <Compile Include="NotificationMovements\BulkPrenotification\PrenotificationContentThreeWorkingDaysRule.cs" />
+    <Compile Include="NotificationMovements\BulkReceiptRecovery\ReceiptRecoveryDuplicateShipmentNumberRule.cs" />
     <Compile Include="NotificationMovements\BulkUpload\GetBulkUploadTemplateHandler.cs" />
     <Compile Include="NotificationMovements\Create\CreateMovementCarriersHandler.cs" />
     <Compile Include="NotificationMovements\Create\GetInternalMovementSummaryHandler.cs" />

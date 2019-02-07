@@ -225,4 +225,10 @@
   <data name="ViewErrors" xml:space="preserve">
     <value>View Errors</value>
   </data>
+  <data name="ShipmentMovementDocumentHeader" xml:space="preserve">
+    <value>Accompanying shipment movement documents</value>
+  </data>
+  <data name="ShipmentMovementInstructions" xml:space="preserve">
+    <value>Upload the accompanying shipment movement documents for shipments:</value>
+  </data>
 </root>
