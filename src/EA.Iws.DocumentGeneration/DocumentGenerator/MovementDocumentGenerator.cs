@@ -8,26 +8,32 @@
     using Core.Documents;
     using DocumentFormat.OpenXml;
     using DocumentFormat.OpenXml.Packaging;
+    using DocumentFormat.OpenXml.Spreadsheet;
     using DocumentFormat.OpenXml.Wordprocessing;
     using Domain;
     using Domain.Movement;
     using Domain.NotificationApplication;
     using Formatters;
     using Movement;
+    using Break = DocumentFormat.OpenXml.Wordprocessing.Break;
+    using Run = DocumentFormat.OpenXml.Wordprocessing.Run;
 
     public class MovementDocumentGenerator : IMovementDocumentGenerator
     {
         private readonly ICarrierRepository carrierRepository;
         private readonly IMovementDetailsRepository movementDetailsRepository;
+        private readonly INotificationApplicationRepository notificationApplicationRepository;
         private readonly MovementBlocksFactory blocksFactory;
 
         public MovementDocumentGenerator(ICarrierRepository carrierRepository,
             IMovementDetailsRepository movementDetailsRepository,
+            INotificationApplicationRepository notificationApplicationRepository,
             MovementBlocksFactory blocksFactory)
         {
             this.blocksFactory = blocksFactory;
             this.movementDetailsRepository = movementDetailsRepository;
             this.carrierRepository = carrierRepository;
+            this.notificationApplicationRepository = notificationApplicationRepository;
         }
 
         public async Task<byte[]> Generate(Guid movementId)
@@ -67,10 +73,33 @@
             return CombineDocuments(docs);
         }
 
-        public byte[] GenerateBulkUploadTemplate(BulkType bulkType)
+        public async Task<byte[]> GenerateBulkUploadTemplate(Guid notificationId, BulkType bulkType)
         {
             using (var memoryStream = DocumentHelper.ReadDocumentStreamShared("BulkUploadPrenotificationTemplate.xlsx"))
             {
+                var notificatioNumber = await notificationApplicationRepository.GetNumber(notificationId);
+
+                using (var document = SpreadsheetDocument.Open(memoryStream, true))
+                {
+                    var workbookPart = document.WorkbookPart;
+                    var sheet = workbookPart.Workbook.Descendants<Sheet>().FirstOrDefault();
+
+                    if (sheet != null)
+                    {
+                        var worksheetPart = workbookPart.GetPartById(sheet.Id.Value) as WorksheetPart;
+
+                        if (worksheetPart != null)
+                        {
+                            var cell = GetCell(worksheetPart.Worksheet, "A", 2);
+
+                            cell.CellValue = new CellValue(notificatioNumber);
+                            cell.DataType = new EnumValue<CellValues>(CellValues.String);
+
+                            worksheetPart.Worksheet.Save();
+                        }
+                    }
+                }
+
                 return memoryStream.ToArray();
             }
         }
@@ -108,6 +137,50 @@
 
                 return memoryStream.ToArray();
             }
+        }
+
+        private static void UpdateNotificationNumber(Stream stream, string notificatioNumber)
+        {
+            using (var document = SpreadsheetDocument.Open(stream, true))
+            {
+                var workbookPart = document.WorkbookPart;
+                var sheet = workbookPart.Workbook.Descendants<Sheet>().FirstOrDefault();
+
+                if (sheet != null)
+                {
+                    var worksheetPart = workbookPart.GetPartById(sheet.Id.Value) as WorksheetPart;
+
+                    if (worksheetPart != null)
+                    {
+                        var cell = GetCell(worksheetPart.Worksheet, "A", 2);
+
+                        cell.CellValue = new CellValue(notificatioNumber);
+                        cell.DataType = new EnumValue<CellValues>(CellValues.String);
+
+                        worksheetPart.Worksheet.Save();
+                    }
+                }
+            }
+        }
+
+        private static Cell GetCell(Worksheet worksheet,
+            string columnName, uint rowIndex)
+        {
+            var row = worksheet.GetFirstChild<SheetData>().Elements<Row>().FirstOrDefault(r => r.RowIndex == rowIndex);
+
+            if (row == null)
+            {
+                return null;
+            }
+
+            var firstRow =
+                row.Elements<Cell>()
+                    .FirstOrDefault(
+                        c =>
+                            string.Compare(c.CellReference.Value, columnName + rowIndex,
+                                StringComparison.OrdinalIgnoreCase) == 0);
+
+            return firstRow;
         }
     }
 }
