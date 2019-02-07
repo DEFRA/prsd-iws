@@ -44,10 +44,10 @@
         [Fact]
         public async Task GetReceiptRecoveryTemplateReturnsExcelFile()
         {
-            A.CallTo(() => mediator.SendAsync(new GetBulkUploadTemplate(BulkType.ReceiptRecovery)))
+            A.CallTo(() => mediator.SendAsync(new GetBulkUploadTemplate(notificationId, BulkType.ReceiptRecovery)))
                 .Returns(new byte[100]);
 
-            var result = await controller.ReceiptRecoveryTemplate();
+            var result = await controller.ReceiptRecoveryTemplate(notificationId);
 
             Assert.IsType<FileContentResult>(result);
 
