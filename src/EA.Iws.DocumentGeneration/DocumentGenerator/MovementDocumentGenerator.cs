@@ -168,8 +168,13 @@
         {
             var row = worksheet.GetFirstChild<SheetData>().Elements<Row>().FirstOrDefault(r => r.RowIndex == rowIndex);
 
+            if (row == null)
+            {
+                return null;
+            }
+
             var firstRow =
-                row?.Elements<Cell>()
+                row.Elements<Cell>()
                     .FirstOrDefault(
                         c =>
                             string.Compare(c.CellReference.Value, columnName + rowIndex,
