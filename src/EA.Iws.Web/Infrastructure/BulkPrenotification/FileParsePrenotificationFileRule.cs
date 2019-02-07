@@ -24,7 +24,7 @@
             {
                 var x = new List<FileUploadType>()
                 {
-                    FileUploadType.Prenotification,
+                    FileUploadType.Prenotification
                 };
 
                 return x;

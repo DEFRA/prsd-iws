@@ -60,10 +60,11 @@
         public async Task GetUpload_ReturnsView()
         {
             var model = new ReceiptRecoveryBulkUploadViewModel(Guid.NewGuid());
+            model.File = A.Fake<HttpPostedFileBase>();
             var result = await controller.Upload(Guid.NewGuid(), model) as ViewResult;
 
             Assert.NotNull(result);
-            Assert.Equal(string.Empty, result.ViewName);
+            Assert.Equal("Documents", result.ViewName);
         }
 
         [Fact]

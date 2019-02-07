@@ -67,12 +67,90 @@
             model.FailedFileRules = failedFileRules;
             model.FailedContentRules = failedContentRules;
 
+            var shipments = validationSummary.ShipmentNumbers != null ? validationSummary.ShipmentNumbers.ToList() : null;
+
+            var shipmentsModel = new ShipmentMovementDocumentsViewModel(notificationId, shipments, model.File.FileName);
+
             if (model.ErrorsCount > 0)
             {
                 return View("Errors", model);
             }
 
+            TempData["PrenotificationShipments"] = shipments;
+            TempData["PreNotificationFileName"] = model.File.FileName;
+
+            return View("Documents", shipmentsModel);
+        }
+
+        [HttpGet]
+        public ActionResult Documents(Guid notificationId)
+        {
+            var fileName = string.Empty;
+            var shipments = new List<int>();
+            object fileNameObj;
+            object shipmentsObj;
+
+            if (TempData.TryGetValue("PreNotificationFileName", out fileNameObj))
+            {
+                fileName = fileNameObj as string;
+            }
+            if (TempData.TryGetValue("PrenotificationShipments", out shipmentsObj))
+            {
+                shipments = shipmentsObj as List<int>;
+            }
+
+            TempData["PrenotificationShipments"] = shipments;
+            TempData["PreNotificationFileName"] = fileName;
+
+            var model = new ShipmentMovementDocumentsViewModel(notificationId, shipments, fileName);
+
             return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Documents(Guid notificationId, ShipmentMovementDocumentsViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            var validationSummary = await validator.GetShipmentMovementValidationSummary(model.File, notificationId);
+            var failedFileRules = validationSummary.FileRulesResults.Where(r => r.MessageLevel == MessageLevel.Error).Select(r => r.Rule).ToList();
+
+            var fileName = string.Empty;
+            var shipments = new List<int>();
+            object fileNameObj;
+            object shipmentsObj;
+
+            if (TempData.TryGetValue("PreNotificationFileName", out fileNameObj))
+            {
+                fileName = fileNameObj as string;
+            }
+            if (TempData.TryGetValue("PrenotificationShipments", out shipmentsObj))
+            {
+                shipments = shipmentsObj as List<int>;
+            }
+
+            TempData["PrenotificationShipments"] = shipments;
+            TempData["PreNotificationFileName"] = fileName;
+            TempData["ShipmentMovementFileName"] = model.File.FileName;
+
+            if (failedFileRules.Count > 0)
+            {
+                foreach (var rule in failedFileRules)
+                {
+                    ModelState.AddModelError(string.Empty, Prsd.Core.Helpers.EnumHelper.GetDisplayName(rule));
+                }
+
+                model.ReceiptRecoveryFileName = fileName;
+                model.Shipments = shipments;
+
+                return View(model);
+            }
+
+            return RedirectToAction("Success");
         }
 
         [HttpGet]
@@ -82,12 +160,10 @@
             var shipments = new List<int>();
             var shipmentMovementFileName = string.Empty;
 
-            // TODO: Uncomment and update these comments when the DocumentUpload page is added
-            /*object fileNameObj;
+            object fileNameObj;
             object shipmentsObj;
             object shipmentDocumentNameObj;
 
-            
             if (TempData.TryGetValue("PreNotificationFileName", out fileNameObj))
             {
                 fileName = fileNameObj as string;
@@ -99,7 +175,7 @@
             if (TempData.TryGetValue("ShipmentMovementFileName", out shipmentDocumentNameObj))
             {
                 shipmentMovementFileName = shipmentDocumentNameObj as string;
-            }*/
+            }
 
             var model = new ShipmentMovementDocumentsViewModel(notificationId, shipments, fileName);
 
