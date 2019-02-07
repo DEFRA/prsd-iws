@@ -39,7 +39,7 @@
                     movements.Where(
                             m =>
                                 m.ShipmentNumber.HasValue && m.ActualDateOfShipment.HasValue &&
-                                m.ActualDateOfShipment.Value > SystemTime.UtcNow && !consentHasExpired &&
+                                m.ActualDateOfShipment.Value >= SystemTime.UtcNow && !consentHasExpired &&
                                 workingDayCalculator.GetWorkingDays(SystemTime.UtcNow, m.ActualDateOfShipment.Value,
                                     true, ca) < 4)
                         .Select(m => m.ShipmentNumber.Value)
