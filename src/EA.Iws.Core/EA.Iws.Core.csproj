@@ -166,6 +166,7 @@
     <Compile Include="MeansOfTransport\TransportMethod.cs" />
     <Compile Include="MovementOperation\MovementOperationData.cs" />
     <Compile Include="MovementReceipt\Decision.cs" />
+    <Compile Include="Movement\BulkReceiptRecovery\ReceiptRecoveryDataRow.cs" />
     <Compile Include="Movement\BulkReceiptRecovery\ReceiptRecoveryFileRules.cs" />
     <Compile Include="Movement\BulkReceiptRecovery\ReceiptRecoveryRulesSummary.cs" />
     <Compile Include="Movement\BulkReceiptRecovery\ReceiptRecoveryContentRuleResult.cs" />
