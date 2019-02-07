@@ -8,6 +8,6 @@
     {
         Task<byte[]> Generate(Guid movementId);
         Task<byte[]> GenerateMultiple(Guid[] movementIds);
-        byte[] GenerateBulkUploadTemplate(BulkType bulkType);
+        Task<byte[]> GenerateBulkUploadTemplate(Guid notificationId, BulkType bulkType);
     }
 }

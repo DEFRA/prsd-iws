@@ -29,7 +29,7 @@
 
                 var result = shipments.Any() ? MessageLevel.Error : MessageLevel.Success;
                 
-                var shipmentNumbers = string.Join(", ", result);
+                var shipmentNumbers = string.Join(", ", shipments);
                 var errorMessage = string.Format(Prsd.Core.Helpers.EnumHelper.GetDisplayName(PrenotificationContentRules.WrongNotificationNumber), shipmentNumbers, notificationNumber);
 
                 return new PrenotificationContentRuleResult<PrenotificationContentRules>(PrenotificationContentRules.WrongNotificationNumber, result, errorMessage);

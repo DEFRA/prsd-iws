@@ -20,7 +20,7 @@
                     movements.Where(
                             m =>
                                 m.ShipmentNumber.HasValue && m.ActualDateOfShipment.HasValue &&
-                                m.ActualDateOfShipment.Value.Date > SystemTime.UtcNow.Date &&
+                                m.ActualDateOfShipment.Value.Date >= SystemTime.UtcNow.Date &&
                                 (m.ActualDateOfShipment.Value.Date - SystemTime.UtcNow.Date).TotalDays >= MaxDays) //Equal will include the current date as the first day.
                         .Select(m => m.ShipmentNumber.Value)
                         .ToList();
