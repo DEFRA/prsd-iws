@@ -141,6 +141,7 @@
     <Compile Include="Movement\GetSubmittedMovementsHandlerTests.cs" />
     <Compile Include="Movement\GetNotificationIdByMovementIdHandlerTests.cs" />
     <Compile Include="Movement\RecordMovementStatusChangeTest.cs" />
+    <Compile Include="NotificationMovements\BulkReceiptRecovery\ReceiptRecoveryNotificationNumberRuleTests.cs" />
     <Compile Include="NotificationMovements\BulkReceiptRecovery\ReceiptRecoveryDuplicateShipmentNumberRuleTests.cs" />
     <Compile Include="NotificationMovements\BulkUpload\GetBulkUploadTemplateHandlerTests.cs" />
     <Compile Include="NotificationMovements\BulkUpload\PerformBulkUploadContentValidationHandlerTests.cs" />
