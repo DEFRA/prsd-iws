@@ -1,5 +1,6 @@
 ﻿namespace EA.Iws.Requests.NotificationMovements.BulkUpload
 {
+    using System;
     using Core.Authorization;
     using Core.Authorization.Permissions;
     using Core.Documents;
@@ -8,10 +9,13 @@
     [RequestAuthorization(ExportMovementPermissions.CanReadExportMovementsExternal)]
     public class GetBulkUploadTemplate : IRequest<byte[]>
     {
-        public BulkType BulkType;
+        public Guid NotificationId { get; set; }
 
-        public GetBulkUploadTemplate(BulkType bulkType)
+        public BulkType BulkType { get; set; }
+
+        public GetBulkUploadTemplate(Guid notificationId, BulkType bulkType)
         {
+            NotificationId = notificationId;
             BulkType = bulkType;
         }
     }

@@ -14,7 +14,7 @@
 <div class="form-group">
     <ul class="list list-bullet">
         <li>
-            @Html.ActionLink(@Resource.PrenotificationTemplate, "PrenotificationTemplate", "BulkUploadTemplate", null, null)
+            @Html.ActionLink(@Resource.PrenotificationTemplate, "PrenotificationTemplate", "BulkUploadTemplate", new { id = @Model.NotificationId }, null)
         </li>
     </ul>
     <br/>
