@@ -141,6 +141,7 @@
     <Compile Include="Movement\GetSubmittedMovementsHandlerTests.cs" />
     <Compile Include="Movement\GetNotificationIdByMovementIdHandlerTests.cs" />
     <Compile Include="Movement\RecordMovementStatusChangeTest.cs" />
+    <Compile Include="NotificationMovements\BulkReceiptRecovery\ReceiptRecoveryDuplicateShipmentNumberRuleTests.cs" />
     <Compile Include="NotificationMovements\BulkUpload\GetBulkUploadTemplateHandlerTests.cs" />
     <Compile Include="NotificationMovements\BulkUpload\PerformBulkUploadContentValidationHandlerTests.cs" />
     <Compile Include="NotificationMovements\BulkUpload\PrenotificationContentDateHistoricRuleTests.cs" />
@@ -158,7 +159,7 @@
     <Compile Include="NotificationMovements\BulkUpload\PrenotificationContentThreeWorkingDaysConsentDateRuleTests.cs" />
     <Compile Include="NotificationMovements\BulkUpload\PrenotificationContentThreeWorkingDaysRuleTests.cs" />
     <Compile Include="NotificationMovements\Capture\EnsureMovementNumberAvailableHandlerTests.cs" />
-    <Compile Include="NotificationMovements\PerformReceiptRecoveryContentValidationHandlerTests.cs" />
+    <Compile Include="NotificationMovements\BulkReceiptRecovery\PerformReceiptRecoveryContentValidationHandlerTests.cs" />
     <Compile Include="Notification\NotifcationAuditGetHandlerTests.cs" />
     <Compile Include="Notification\NotificationAuditCreatedHandlerTests.cs" />
     <Compile Include="Notification\NotificationAuditScreenGetHandlerTests.cs" />
