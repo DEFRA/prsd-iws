@@ -1038,6 +1038,8 @@
     <Content Include="Areas\NotificationMovements\Views\ReceiptRecoveryBulkUpload\Warning.cshtml" />
     <Content Include="Areas\NotificationMovements\Views\ReceiptRecoveryBulkUpload\Success.cshtml" />
     <Content Include="Areas\NotificationMovements\Views\ReceiptRecoveryBulkUpload\Errors.cshtml" />
+    <Content Include="Areas\NotificationMovements\Views\Create\AddIntendedCarrier.cshtml" />
+    <Content Include="Areas\NotificationMovements\Views\Create\WhoAreYourCarriers.cshtml" />
     <None Include="Scripts\jquery-2.1.3.intellisense.js" />
     <Content Include="Scripts\govuk\govuk-template.js" />
     <Content Include="Scripts\govuk\ie.js" />
@@ -2296,6 +2298,8 @@
     <Compile Include="Areas\NotificationMovements\Controllers\PrenotificationBulkUploadController.cs" />
     <Compile Include="Areas\NotificationMovements\Controllers\ReceiptRecoveryBulkUploadController.cs" />
     <Compile Include="Areas\NotificationMovements\ViewModels\BulkUploadTemplate\BulkUploadTemplateViewModel.cs" />
+    <Compile Include="Areas\NotificationMovements\ViewModels\Create\CarrierViewModel.cs" />
+    <Compile Include="Areas\NotificationMovements\ViewModels\Create\WhoAreYourCarrierViewModel.cs" />
     <Compile Include="Areas\NotificationMovements\ViewModels\PrenotificationBulkUpload\PrenotificationBulkUploadViewModel.cs" />
     <Compile Include="Areas\NotificationMovements\ViewModels\PrenotificationBulkUpload\ShipmentMovementDocumentsViewModel.cs" />
     <Compile Include="Areas\NotificationMovements\ViewModels\ReceiptRecoveryBulkUpload\ReceiptRecoveryBulkUploadViewModel.cs" />
@@ -2307,6 +2311,16 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Areas\NotificationMovements\ViewModels\PrenotificationBulkUpload\WarningChoiceViewModel.cs" />
+    <Compile Include="Areas\NotificationMovements\Views\Create\AddIntendedCarrierResource.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AddIntendedCarrierResource.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\NotificationMovements\Views\Create\WhoAreYourCarriersResource.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>WhoAreYourCarriersResource.resx</DependentUpon>
+    </Compile>
     <Compile Include="Areas\NotificationMovements\Views\PrenotificationBulkUpload\ConsentPeriodExpiredResources.Designer.cs">
       <DependentUpon>ConsentPeriodExpiredResources.resx</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -4718,6 +4732,10 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>CertificateShipmentResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Areas\NotificationMovements\Views\Create\AddIntendedCarrierResource.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AddIntendedCarrierResource.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Areas\NotificationMovements\Views\Create\ConsentExpiresInFourWorkingDaysResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>ConsentExpiresInFourWorkingDaysResources.Designer.cs</LastGenOutput>
@@ -4769,6 +4787,10 @@
     <EmbeddedResource Include="Areas\NotificationMovements\Views\Create\TotalMovementsReachedResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>TotalMovementsReachedResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\NotificationMovements\Views\Create\WhoAreYourCarriersResource.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>WhoAreYourCarriersResource.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\NotificationMovements\Views\Documents\DocumentsResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
