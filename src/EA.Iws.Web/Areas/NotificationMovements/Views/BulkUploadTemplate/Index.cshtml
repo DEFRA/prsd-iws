@@ -20,7 +20,7 @@
     <br/>
     <ul class="list list-bullet">
         <li>
-            @Html.ActionLink(@Resource.ReceiptRecoveryTemplate, "ReceiptRecoveryTemplate", "BulkUploadTemplate", null, null)
+            @Html.ActionLink(@Resource.ReceiptRecoveryTemplate, "ReceiptRecoveryTemplate", "BulkUploadTemplate", new { id = @Model.NotificationId }, null)
         </li>
     </ul>
 </div>
