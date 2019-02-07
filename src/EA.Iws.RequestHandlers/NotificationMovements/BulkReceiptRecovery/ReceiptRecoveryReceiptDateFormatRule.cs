@@ -4,8 +4,8 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
-    using EA.Iws.Core.Movement.BulkReceiptRecovery;
-    using EA.Iws.Core.Rules;
+    using Core.Movement.BulkReceiptRecovery;
+    using Core.Rules;
 
     public class ReceiptRecoveryReceiptDateFormatRule : IReceiptRecoveryContentRule
     {
