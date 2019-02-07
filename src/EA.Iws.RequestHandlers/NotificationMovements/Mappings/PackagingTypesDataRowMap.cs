@@ -30,6 +30,12 @@
                         result.Add(parsed);
                     }
                 }
+
+                // Clear the list if not ALL of the data is valid.
+                if (result.Count != packagingTypes.Length)
+                {
+                    result.Clear();
+                }
             }
             catch
             {
