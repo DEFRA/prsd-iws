@@ -33,14 +33,14 @@
 
         public List<ReceiptRecoveryContentRuleResult<ReceiptRecoveryContentRules>> FailedContentRules { get; set; }
 
-        [Display(Name = "Upload the data file containing your receipt / recovery data")]
+        [Display(Name = "Upload the data file containing your receipt and/or recovery data")]
         public HttpPostedFileBase File { get; set; }
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             if (File == null || File.InputStream.Length == 0)
             {
-                yield return new ValidationResult("Upload the data file containing your receipt / recovery data", new[] { "File" });
+                yield return new ValidationResult("Upload the data file containing your receipt and/or recovery data", new[] { "File" });
             }
         }
     }
