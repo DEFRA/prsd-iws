@@ -59,11 +59,11 @@
         }
 
         [HttpGet]
-        public async Task<ActionResult> ReceiptRecoveryTemplate()
+        public async Task<ActionResult> ReceiptRecoveryTemplate(Guid notificationId)
         {
             try
             {
-                var response = await mediator.SendAsync(new GetBulkUploadTemplate(BulkType.ReceiptRecovery));
+                var response = await mediator.SendAsync(new GetBulkUploadTemplate(notificationId, BulkType.ReceiptRecovery));
 
                 var downloadName = "BulkUploadReceiptRecoveryTemplate-" + SystemTime.UtcNow.ToString("yyyy-MM-dd-HH-mm-ss") + ".xlsx";
 
