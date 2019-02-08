@@ -56,16 +56,20 @@
         }
 
         private List<ReceiptRecoveryMovement> GetTestData()
-        {
+        { 
             return new List<ReceiptRecoveryMovement>()
             {
                 new ReceiptRecoveryMovement()
                 {
-                    ShipmentNumber = 1
+                    ShipmentNumber = 1,
+                    ReceivedDate = DateTime.Now,
+                    RecoveredDisposedDate = DateTime.Now
                 },
                 new ReceiptRecoveryMovement()
                 {
-                    ShipmentNumber = 2
+                    ShipmentNumber = 2,
+                    ReceivedDate = DateTime.Now,
+                    RecoveredDisposedDate = DateTime.Now
                 }
             };
         }

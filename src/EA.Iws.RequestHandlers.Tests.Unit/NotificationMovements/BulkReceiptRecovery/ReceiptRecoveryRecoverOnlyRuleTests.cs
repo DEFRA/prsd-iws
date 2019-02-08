@@ -47,16 +47,26 @@
 
         private List<ReceiptRecoveryMovement> GetTestData(bool received)
         {
+            DateTime? date = null;
+
+            if (received)
+            {
+                date = DateTime.Now;
+            }
+
             return new List<ReceiptRecoveryMovement>()
             {
                 new ReceiptRecoveryMovement()
                 {
                     ShipmentNumber = 1,
-                    MissingReceivedDate = received
+                    MissingReceivedDate = received,
+                    RecoveredDisposedDate = date
                 },
                 new ReceiptRecoveryMovement()
                 {
-                    ShipmentNumber = 2
+                    ShipmentNumber = 2,
+                    MissingReceivedDate = received,
+                    RecoveredDisposedDate = date
                 }
             };
         }

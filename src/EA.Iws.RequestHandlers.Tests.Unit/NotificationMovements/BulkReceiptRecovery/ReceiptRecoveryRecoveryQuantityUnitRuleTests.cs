@@ -59,15 +59,13 @@
                 new ReceiptRecoveryMovement()
                 {
                     ShipmentNumber = 2,
-                    Unit = ShipmentQuantityUnits.Kilograms
+                    Unit = correctUnit ? ShipmentQuantityUnits.Tonnes : ShipmentQuantityUnits.Litres
                 }
             };
         }
         private ShipmentInfo GetRepoData(bool correctUnit)
         {
-            var a = new ShipmentInfo(notificationId, new ShipmentPeriod(DateTime.Now, DateTime.Now, false), 10, new ShipmentQuantity(10, ShipmentQuantityUnits.Kilograms));
-            a.UpdateQuantity(new ShipmentQuantity(10, correctUnit ? ShipmentQuantityUnits.Kilograms : ShipmentQuantityUnits.CubicMetres));
-            return a;
+            return new ShipmentInfo(notificationId, new ShipmentPeriod(DateTime.Now, DateTime.Now, false), 10, new ShipmentQuantity(10, ShipmentQuantityUnits.Kilograms));
         }
     }
 }

@@ -25,13 +25,13 @@
             List<int> shipments = new List<int>();
             MessageLevel result = MessageLevel.Success;
 
-            foreach (var movement in movements.Where(p => !p.MissingReceivedDate && !p.MissingRecoveredDisposedDate))
+            foreach (var movement in movements.Where(p => p.ReceivedDate.HasValue && p.RecoveredDisposedDate.HasValue))
             {
                 var actualMovement = actualMovements.FirstOrDefault(p => p.Number == movement.ShipmentNumber);
 
                 if (actualMovement.Status == MovementStatus.Captured)
                 {
-                    if (actualMovement.Date < DateTime.Now)
+                    if (actualMovement.Date.Date < DateTime.UtcNow.Date)
                     {
                         result = MessageLevel.Error;
                         shipments.Add(movement.ShipmentNumber.GetValueOrDefault());
@@ -42,6 +42,11 @@
                     result = MessageLevel.Error;
                     shipments.Add(movement.ShipmentNumber.GetValueOrDefault());
                 }
+                else if (actualMovement.Status == MovementStatus.Submitted && actualMovement.Date.Date < DateTime.UtcNow.Date)
+                {
+                    result = MessageLevel.Error;
+                    shipments.Add(movement.ShipmentNumber.GetValueOrDefault());
+                }               
             }
 
             var shipmentNumbers = string.Join(", ", shipments);

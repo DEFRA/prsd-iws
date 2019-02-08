@@ -7,6 +7,7 @@
     using Core.Movement;
     using Core.Movement.BulkReceiptRecovery;
     using Core.Rules;
+    using Core.Shared;
     using Domain.Movement;
     using Domain.NotificationApplication.Shipment;
 
@@ -22,13 +23,15 @@
         public async Task<ReceiptRecoveryContentRuleResult<ReceiptRecoveryContentRules>> GetResult(List<ReceiptRecoveryMovement> movements, Guid notificationId)
         {
             var shippingInfo = await repo.GetByNotificationId(notificationId);
+            var units = shippingInfo == null ? default(ShipmentQuantityUnits) : shippingInfo.Units;
+            var availableUnits = ShipmentQuantityUnitsMetadata.GetUnitsOfThisType(units).ToList();
 
             List<int> shipments = new List<int>();
             MessageLevel result = MessageLevel.Success;
 
             foreach (var movement in movements)
             {
-                if (shippingInfo.Units != movement.Unit)
+                if (availableUnits.Count(p => p == movement.Unit) == 0)
                 {
                     result = MessageLevel.Error;
                     shipments.Add(movement.ShipmentNumber.GetValueOrDefault());

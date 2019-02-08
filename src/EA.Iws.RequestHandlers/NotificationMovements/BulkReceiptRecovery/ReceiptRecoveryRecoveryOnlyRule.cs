@@ -25,7 +25,7 @@
             List<int> shipments = new List<int>();
             MessageLevel result = MessageLevel.Success;
 
-            foreach (var movement in movements.Where(p => p.MissingReceivedDate))
+            foreach (var movement in movements.Where(p => !p.ReceivedDate.HasValue && p.RecoveredDisposedDate.HasValue && !p.MissingRecoveredDisposedDate))
             {
                 var actualMovement = actualMovements.FirstOrDefault(p => p.Number == movement.ShipmentNumber);
 

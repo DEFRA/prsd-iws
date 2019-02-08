@@ -31,7 +31,7 @@
 
                 if (actualMovement.Status == MovementStatus.Captured)
                 {
-                    if (actualMovement.Date < DateTime.Now)
+                    if (actualMovement.Date.Date < DateTime.UtcNow.Date)
                     {
                         result = MessageLevel.Error;
                         shipments.Add(movement.ShipmentNumber.GetValueOrDefault());
@@ -42,6 +42,11 @@
                     result = MessageLevel.Error;
                     shipments.Add(movement.ShipmentNumber.GetValueOrDefault());
                 }
+                else if (actualMovement.Status == MovementStatus.Submitted && actualMovement.Date.Date > DateTime.UtcNow.Date)
+                {
+                    result = MessageLevel.Error;
+                    shipments.Add(movement.ShipmentNumber.GetValueOrDefault());
+                }  
             }
 
             var shipmentNumbers = string.Join(", ", shipments);
@@ -50,4 +55,4 @@
             return new ReceiptRecoveryContentRuleResult<ReceiptRecoveryContentRules>(ReceiptRecoveryContentRules.PrenotifiedShipment, result, errorMessage);
         }
     }
-}
+} 
