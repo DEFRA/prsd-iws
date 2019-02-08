@@ -113,7 +113,7 @@
         {
             if (!ModelState.IsValid)
             {
-                return View(model);
+                return RedirectToAction("Warning");
             }
 
             var validationSummary = await validator.GetShipmentMovementValidationSummary(model.File, notificationId);
