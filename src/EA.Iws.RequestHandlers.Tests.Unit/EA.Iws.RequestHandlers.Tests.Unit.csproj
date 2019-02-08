@@ -141,12 +141,17 @@
     <Compile Include="Movement\GetSubmittedMovementsHandlerTests.cs" />
     <Compile Include="Movement\GetNotificationIdByMovementIdHandlerTests.cs" />
     <Compile Include="Movement\RecordMovementStatusChangeTest.cs" />
+
     <Compile Include="NotificationMovements\BulkReceiptRecovery\ReceiptRecoveryRecoveryDateFormatRuleTests.cs" />
     <Compile Include="NotificationMovements\BulkReceiptRecovery\ReceiptRecoveryRecoveryQuantityUnitRuleTests.cs" />
     <Compile Include="NotificationMovements\BulkReceiptRecovery\ReceiptRecoveryRecoveryMustBeInPastRuleTests.cs" />
     <Compile Include="NotificationMovements\BulkReceiptRecovery\ReceiptRecoveryReceiptOnlyRuleTests.cs" />
     <Compile Include="NotificationMovements\BulkReceiptRecovery\ReceiptRecoveryRecoverOnlyRuleTests.cs" />
     <Compile Include="NotificationMovements\BulkReceiptRecovery\ReceiptRecoveryShipmentMustBePrenotifiedRuleTests.cs" />
+
+    <Compile Include="NotificationMovements\BulkReceiptRecovery\ReceiptRecoveryQuantityPrecisionRuleTests.cs" />
+    <Compile Include="NotificationMovements\BulkReceiptRecovery\ReceiptRecoveryNotificationNumberRuleTests.cs" />
+
     <Compile Include="NotificationMovements\BulkReceiptRecovery\ReceiptRecoveryDuplicateShipmentNumberRuleTests.cs" />
     <Compile Include="NotificationMovements\BulkReceiptRecovery\ReceiptRecoveryReceiptDateFormatRuleTests.cs" />
     <Compile Include="NotificationMovements\BulkReceiptRecovery\ReceiptRecoveryReceiptDateValidationRuleTests.cs" />
