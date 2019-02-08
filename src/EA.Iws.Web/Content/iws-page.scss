@@ -828,3 +828,7 @@ details {
         vertical-align: top;
     }
 }
+
+.column-three-quarters {
+  @include grid-column(3 / 4);
+}
