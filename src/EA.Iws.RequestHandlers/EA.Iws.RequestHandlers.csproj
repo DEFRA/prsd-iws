@@ -465,6 +465,7 @@
     <Compile Include="NotificationMovements\BulkReceiptRecovery\ReceiptRecoveryRecoveryOnlyRule.cs" />
     <Compile Include="NotificationMovements\BulkReceiptRecovery\ReceiptRecoveryRecoveryQuantityUnitRule.cs" />
     <Compile Include="NotificationMovements\BulkReceiptRecovery\ReceiptRecoveryShipmentMustBePrenotifiedRule.cs" />
+	<Compile Include="NotificationMovements\BulkReceiptRecovery\ReceiptRecoveryNotificationNumberRule.cs" />
     <Compile Include="NotificationMovements\BulkReceiptRecovery\ReceiptRecoveryDuplicateShipmentNumberRule.cs" />
     <Compile Include="NotificationMovements\BulkReceiptRecovery\ReceiptRecoveryQuantityPrecisionRule.cs" />
     <Compile Include="NotificationMovements\BulkReceiptRecovery\ReceiptRecoveryReceiptDateFormatRule.cs" />
