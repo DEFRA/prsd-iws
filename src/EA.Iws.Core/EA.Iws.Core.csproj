@@ -60,6 +60,7 @@
     <Compile Include="Admin\Reports\ImportStatsData.cs" />
     <Compile Include="Admin\Reports\UserActionData.cs" />
     <Compile Include="Admin\Reports\UserActionJsonModel.cs" />
+    <Compile Include="Carriers\CarrierList.cs" />
     <Compile Include="Documents\BulkType.cs" />
     <Compile Include="Documents\FileUploadType.cs" />
     <Compile Include="FinancialGuarantee\FinancialGuaranteeData.cs" />
@@ -166,6 +167,7 @@
     <Compile Include="MeansOfTransport\TransportMethod.cs" />
     <Compile Include="MovementOperation\MovementOperationData.cs" />
     <Compile Include="MovementReceipt\Decision.cs" />
+    <Compile Include="Movement\BulkReceiptRecovery\ReceiptRecoveryDataRow.cs" />
     <Compile Include="Movement\BulkReceiptRecovery\ReceiptRecoveryFileRules.cs" />
     <Compile Include="Movement\BulkReceiptRecovery\ReceiptRecoveryRulesSummary.cs" />
     <Compile Include="Movement\BulkReceiptRecovery\ReceiptRecoveryContentRuleResult.cs" />

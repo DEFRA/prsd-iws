@@ -148,6 +148,8 @@
     <Compile Include="NotificationMovements\BulkReceiptRecovery\ReceiptRecoveryRecoverOnlyRuleTests.cs" />
     <Compile Include="NotificationMovements\BulkReceiptRecovery\ReceiptRecoveryShipmentMustBePrenotifiedRuleTests.cs" />
     <Compile Include="NotificationMovements\BulkReceiptRecovery\ReceiptRecoveryDuplicateShipmentNumberRuleTests.cs" />
+    <Compile Include="NotificationMovements\BulkReceiptRecovery\ReceiptRecoveryReceiptDateFormatRuleTests.cs" />
+    <Compile Include="NotificationMovements\BulkReceiptRecovery\ReceiptRecoveryReceiptDateValidationRuleTests.cs" />
     <Compile Include="NotificationMovements\BulkUpload\GetBulkUploadTemplateHandlerTests.cs" />
     <Compile Include="NotificationMovements\BulkUpload\PerformBulkUploadContentValidationHandlerTests.cs" />
     <Compile Include="NotificationMovements\BulkUpload\PrenotificationContentDateHistoricRuleTests.cs" />
@@ -156,6 +158,7 @@
     <Compile Include="NotificationMovements\BulkUpload\PrenotificationExcessiveShipmentsRuleTests.cs" />
     <Compile Include="NotificationMovements\BulkUpload\PrenotificationInvalidPackagingTypeRuleTests.cs" />
     <Compile Include="NotificationMovements\BulkUpload\PrenotificationInvalidShipmentNumbersRuleTests.cs" />
+    <Compile Include="NotificationMovements\BulkUpload\PrenotificationNotificationNumberRuleTests.cs" />
     <Compile Include="NotificationMovements\BulkUpload\PrenotificationOnlyNewShipmentsRuleTests.cs.cs" />
     <Compile Include="NotificationMovements\BulkUpload\PrenotificationQuantityExceededRuleTests.cs" />
     <Compile Include="NotificationMovements\BulkUpload\PrenotificationShipmentBeyondConsentWindowRuleTests.cs" />

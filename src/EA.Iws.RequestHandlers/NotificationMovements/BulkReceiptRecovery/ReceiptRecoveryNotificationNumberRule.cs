@@ -1,23 +1,23 @@
-﻿namespace EA.Iws.RequestHandlers.NotificationMovements.BulkPrenotification
+﻿namespace EA.Iws.RequestHandlers.NotificationMovements.BulkReceiptRecovery
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
-    using Core.Movement.BulkPrenotification;
+    using Core.Movement.BulkReceiptRecovery;
     using Core.Rules;
     using Domain.NotificationApplication;
 
-    public class PrenotificationNotificationNumberRule : IPrenotificationContentRule
+    public class ReceiptRecoveryNotificationNumberRule : IReceiptRecoveryContentRule
     {
         private readonly INotificationApplicationRepository notificationApplicationRepository;
 
-        public PrenotificationNotificationNumberRule(INotificationApplicationRepository notificationApplicationRepository)
+        public ReceiptRecoveryNotificationNumberRule(INotificationApplicationRepository notificationApplicationRepository)
         {
             this.notificationApplicationRepository = notificationApplicationRepository;
         }
 
-        public async Task<PrenotificationContentRuleResult<PrenotificationContentRules>> GetResult(List<PrenotificationMovement> movements, Guid notificationId)
+        public async Task<ReceiptRecoveryContentRuleResult<ReceiptRecoveryContentRules>> GetResult(List<ReceiptRecoveryMovement> movements, Guid notificationId)
         {
             var notificationNumber = await notificationApplicationRepository.GetNumber(notificationId);
             return await Task.Run(() =>
@@ -30,9 +30,9 @@
                 var result = shipments.Any() ? MessageLevel.Error : MessageLevel.Success;
                 
                 var shipmentNumbers = string.Join(", ", shipments);
-                var errorMessage = string.Format(Prsd.Core.Helpers.EnumHelper.GetDisplayName(PrenotificationContentRules.WrongNotificationNumber), shipmentNumbers, notificationNumber);
+                var errorMessage = string.Format(Prsd.Core.Helpers.EnumHelper.GetDisplayName(ReceiptRecoveryContentRules.WrongNotificationNumber), shipmentNumbers, notificationNumber);
 
-                return new PrenotificationContentRuleResult<PrenotificationContentRules>(PrenotificationContentRules.WrongNotificationNumber, result, errorMessage);
+                return new ReceiptRecoveryContentRuleResult<ReceiptRecoveryContentRules>(ReceiptRecoveryContentRules.WrongNotificationNumber, result, errorMessage);
             });
         }
     }

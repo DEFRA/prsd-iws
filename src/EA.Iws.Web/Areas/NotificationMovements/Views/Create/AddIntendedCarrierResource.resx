@@ -117,118 +117,37 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="NotificationOptionsLink" xml:space="preserve">
+  <data name="AddCarrier" xml:space="preserve">
+    <value>Add carrier</value>
+  </data>
+  <data name="AwaitingCarriers" xml:space="preserve">
+    <value>Awaiting carriers...</value>
+  </data>
+  <data name="Carrier" xml:space="preserve">
+    <value>Carrier Name</value>
+  </data>
+  <data name="CarrierListTitle" xml:space="preserve">
+    <value>carrier list</value>
+  </data>
+  <data name="CarrierTableTitle" xml:space="preserve">
+    <value>Carriers</value>
+  </data>
+  <data name="ChosenCarriers" xml:space="preserve">
+    <value>Your chosen carriers</value>
+  </data>
+  <data name="IntroText" xml:space="preserve">
+    <value>You can add multiple carriers from your intended carrier list below which is taken from the list you provided on your application. Please add them in the order they will carry the waste during the journey.</value>
+  </data>
+  <data name="OptionLink" xml:space="preserve">
     <value>Go to notification options</value>
   </data>
-  <data name="StartButtonText" xml:space="preserve">
-    <value>Start</value>
+  <data name="Order" xml:space="preserve">
+    <value>Order</value>
   </data>
-  <data name="StartHeader" xml:space="preserve">
-    <value>Bulk upload of receipt and/or recovery data</value>
+  <data name="Remove" xml:space="preserve">
+    <value>Remove</value>
   </data>
-  <data name="StartText1" xml:space="preserve">
-    <value>Upload multiple receipt and/or recovery data and shipment movement documents to your notification.</value>
-  </data>
-  <data name="StartText2" xml:space="preserve">
-    <value>to avoid any errors in your data.</value>
-  </data>
-  <data name="StartText3" xml:space="preserve">
-    <value>If you leave the journey before adding your accompanying shipment movement documents, your bulk upload of the receipt and/or recovery data will not be saved.</value>
-  </data>
-  <data name="TemplateLinkText" xml:space="preserve">
-    <value>Download the data file templates</value>
-  </data>
-  <data name="UploadReceiptRecoveryTabTitle" xml:space="preserve">
-    <value>Receipt / Recovery Bulk Upload</value>
-  </data>
-  <data name="UploadReceiptRecoveryList1" xml:space="preserve">
-    <value>The data file should not exceed 2GB in size.</value>
-  </data>
-  <data name="UploadReceiptRecoveryList2" xml:space="preserve">
-    <value>Remove all column headings from a CSV file type.</value>
-  </data>
-  <data name="UploadReceiptRecoveryList3" xml:space="preserve">
-    <value>Only contain shipment records for shipments that have already been prenotified.</value>
-  </data>
-  <data name="UploadReceiptRecoveryList4" xml:space="preserve">
-    <value>No duplicate receipt or recovery information will be accepted.</value>
-  </data>
-  <data name="UploadReceiptRecoveryList5" xml:space="preserve">
-    <value>The tonnage quantity must not exceed 4 decimal places.</value>
-  </data>
-  <data name="UploadReceiptRecoveryList6" xml:space="preserve">
-    <value>The quantity unit of measurement must meet the criteria permitted on the notification.</value>
-  </data>
-  <data name="UploadReceiptRecoveryText1" xml:space="preserve">
-    <value>Upload the receipt and/or recovery data file in an Excel or .CSV format.</value>
-  </data>
-  <data name="UploadReceiptRecoveryText2" xml:space="preserve">
-    <value>Make sure all data matches the correct template format to avoid validation errors.</value>
-  </data>
-  <data name="UploadReceiptRecoveryTitle" xml:space="preserve">
-    <value>Bulk upload of receipt and/or recovery data</value>
-  </data>
-  <data name="WarningHeader" xml:space="preserve">
-    <value>You haven't added any shipment movement documents</value>
-  </data>
-  <data name="WarningText1" xml:space="preserve">
-    <value>You must upload shipment movement documents with your receipt and/or recovery data file to finish the process.</value>
-  </data>
-  <data name="WarningText2" xml:space="preserve">
-    <value>If you leave the process before adding your accompanying shipment movement documents, your bulk upload of receipt and/or recovery data will not be saved.</value>
-  </data>
-  <data name="ShipmentMovementsSuccessText" xml:space="preserve">
-    <value>There were no errors within the {filename} data file.</value>
-  </data>
-  <data name="SuccessHeaderText" xml:space="preserve">
-    <value>Your bulk upload has been successful</value>
-  </data>
-  <data name="SuccessText" xml:space="preserve">
-    <value>You have uploaded:</value>
-  </data>
-  <data name="SuccessTextMultipleShipments" xml:space="preserve">
-    <value>Your prenotifications of shipments {0} have now been recorded in the IWS service.</value>
-  </data>
-  <data name="SuccessTextSingleShipment" xml:space="preserve">
-    <value>Your prenotification of shipment {0} has now been recorded in the IWS service.</value>
-  </data>
-  <data name="SuccessTitle" xml:space="preserve">
-    <value>Success</value>
-  </data>
-  <data name="Action" xml:space="preserve">
-    <value>Action</value>
-  </data>
-  <data name="AmendActualDate" xml:space="preserve">
-    <value>Amend the actual date of shipment to be greater than three working days</value>
-  </data>
-  <data name="ErrorsContactUs" xml:space="preserve">
-    <value>You must resolve all errors listed below before uploading your prenotification data again. If you experience further problems, contact askshipments@environment-agency.gov.uk for further advice.</value>
-  </data>
-  <data name="ErrorsFileAdvice" xml:space="preserve">
-    <value>The errors listed below are problems found during the validation of the .xlsx or. csv file content. These errors prevent the service from accepting your data, therefore all errors must be amended before attempting to re-upload your data.</value>
-  </data>
-  <data name="ErrorsHeaderText" xml:space="preserve">
-    <value>Your prenotification data file contains {0} errors</value>
-  </data>
-  <data name="ErrorsTitle" xml:space="preserve">
-    <value>Bulk upload errors</value>
-  </data>
-  <data name="Or" xml:space="preserve">
-    <value>or</value>
-  </data>
-  <data name="RemoveShipment" xml:space="preserve">
-    <value>Remove the row of data from the data file and use the existing ‘generate a prenotification’ journey to inform us of these shipments</value>
-  </data>
-  <data name="ReturnToUpload" xml:space="preserve">
-    <value>Return to upload</value>
-  </data>
-  <data name="ViewErrors" xml:space="preserve">
-    <value>View Errors</value>
-  </data>
-  <data name="ShipmentMovementDocumentHeader" xml:space="preserve">
-    <value>Accompanying shipment movement documents</value>
-  </data>
-  <data name="ShipmentMovementInstructions" xml:space="preserve">
-    <value>Upload the accompanying shipment movement documents for shipments:</value>
+  <data name="Title" xml:space="preserve">
+    <value>Add carriers from your intended carrier list</value>
   </data>
 </root>

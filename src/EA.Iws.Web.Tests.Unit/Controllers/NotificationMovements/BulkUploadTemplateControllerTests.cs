@@ -1,5 +1,6 @@
 ﻿namespace EA.Iws.Web.Tests.Unit.Controllers.NotificationMovements
 {
+    using System;
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Areas.NotificationMovements.Controllers;
@@ -14,9 +15,11 @@
     {
         private readonly BulkUploadTemplateController controller;
         private readonly IMediator mediator;
+        private readonly Guid notificationId;
 
         public BulkUploadTemplateControllerTests()
         {
+            notificationId = Guid.NewGuid();
             mediator = A.Fake<IMediator>();
             controller = new BulkUploadTemplateController(mediator);
         }
@@ -24,10 +27,10 @@
         [Fact]
         public async Task GetPrenotificationTemplateReturnsExcelFile()
         {
-            A.CallTo(() => mediator.SendAsync(new GetBulkUploadTemplate(BulkType.Prenotification)))
+            A.CallTo(() => mediator.SendAsync(new GetBulkUploadTemplate(notificationId, BulkType.Prenotification)))
                 .Returns(new byte[100]);
             
-            var result = await controller.PrenotificationTemplate();
+            var result = await controller.PrenotificationTemplate(notificationId);
 
             Assert.IsType<FileContentResult>(result);
 
@@ -41,10 +44,10 @@
         [Fact]
         public async Task GetReceiptRecoveryTemplateReturnsExcelFile()
         {
-            A.CallTo(() => mediator.SendAsync(new GetBulkUploadTemplate(BulkType.ReceiptRecovery)))
+            A.CallTo(() => mediator.SendAsync(new GetBulkUploadTemplate(notificationId, BulkType.ReceiptRecovery)))
                 .Returns(new byte[100]);
 
-            var result = await controller.ReceiptRecoveryTemplate();
+            var result = await controller.ReceiptRecoveryTemplate(notificationId);
 
             Assert.IsType<FileContentResult>(result);
 

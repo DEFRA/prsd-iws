@@ -14,9 +14,9 @@
             this.generator = generator;
         }
 
-        public Task<byte[]> HandleAsync(GetBulkUploadTemplate message)
+        public async Task<byte[]> HandleAsync(GetBulkUploadTemplate message)
         {
-            return Task.FromResult(generator.GenerateBulkUploadTemplate(message.BulkType));
+            return await generator.GenerateBulkUploadTemplate(message.NotificationId, message.BulkType);
         }
     }
 }

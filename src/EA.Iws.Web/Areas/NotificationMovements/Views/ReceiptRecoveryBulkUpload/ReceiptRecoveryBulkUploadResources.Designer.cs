@@ -269,7 +269,7 @@ namespace EA.Iws.Web.Areas.NotificationMovements.Views.ReceiptRecoveryBulkUpload
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Download the bulk upload templates.
+        ///   Looks up a localized string similar to Download the data file templates.
         /// </summary>
         public static string TemplateLinkText {
             get {

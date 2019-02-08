@@ -466,7 +466,10 @@
     <Compile Include="NotificationMovements\BulkReceiptRecovery\ReceiptRecoveryRecoveryQuantityUnitRule.cs" />
     <Compile Include="NotificationMovements\BulkReceiptRecovery\ReceiptRecoveryShipmentMustBePrenotifiedRule.cs" />
     <Compile Include="NotificationMovements\BulkReceiptRecovery\ReceiptRecoveryDuplicateShipmentNumberRule.cs" />
+    <Compile Include="NotificationMovements\BulkReceiptRecovery\ReceiptRecoveryReceiptDateFormatRule.cs" />
+    <Compile Include="NotificationMovements\BulkReceiptRecovery\ReceiptRecoveryReceiptDateValidationRule.cs" />
     <Compile Include="NotificationMovements\BulkUpload\GetBulkUploadTemplateHandler.cs" />
+    <Compile Include="NotificationMovements\Create\CreateMovementCarriersHandler.cs" />
     <Compile Include="NotificationMovements\Create\GetInternalMovementSummaryHandler.cs" />
     <Compile Include="NotificationMovements\Create\GetRemainingShipmentsHandler.cs" />
     <Compile Include="NotificationMovements\Create\HasExceededConsentedQuantityHandler.cs" />
@@ -549,6 +552,11 @@
     <Compile Include="NotificationMovements\Mappings\PackagingTypesDataRowMap.cs" />
     <Compile Include="NotificationMovements\Mappings\PrenotificationMovementCollectionMap.cs" />
     <Compile Include="NotificationMovements\Mappings\QuantityDataRowMap.cs" />
+    <Compile Include="NotificationMovements\Mappings\ReceiptRecoveryMappings\DateDataRowMap.cs" />
+    <Compile Include="NotificationMovements\Mappings\ReceiptRecoveryMappings\NotificationNumberDataRowMap.cs" />
+    <Compile Include="NotificationMovements\Mappings\ReceiptRecoveryMappings\QuantityDataRowMap.cs" />
+    <Compile Include="NotificationMovements\Mappings\ReceiptRecoveryMappings\ShipmentNumberDataRowMap.cs" />
+    <Compile Include="NotificationMovements\Mappings\ReceiptRecoveryMappings\ShipmentQuantityUnitDataRowMap.cs" />
     <Compile Include="NotificationMovements\Mappings\ReceiptRecoveryMovementCollectionMap.cs" />
     <Compile Include="NotificationMovements\Mappings\ShipmentDatesMap.cs" />
     <Compile Include="NotificationMovements\Mappings\ShipmentNumberDataRowMap.cs" />

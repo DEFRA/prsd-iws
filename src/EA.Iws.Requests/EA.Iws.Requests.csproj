@@ -239,6 +239,7 @@
     <Compile Include="NotificationAssessment\SetEntryPoint.cs" />
     <Compile Include="NotificationMovements\BulkUpload\CreateBulkPrenotification.cs" />
     <Compile Include="NotificationMovements\BulkUpload\GetBulkUploadTemplate.cs" />
+    <Compile Include="NotificationMovements\Create\CreateMovementCarriers.cs" />
     <Compile Include="NotificationMovements\Create\GetInternalMovementSummary.cs" />
     <Compile Include="NotificationMovements\Create\GetRemainingShipments.cs" />
     <Compile Include="NotificationMovements\Create\HasExceededConsentedQuantity.cs" />
