@@ -10,6 +10,7 @@
     using Core.ComponentRegistration;
     using Core.Movement;
     using Core.Movement.BulkPrenotification;
+    using Core.Movement.BulkReceiptRecovery;
     using Decorators;
     using Documents;
     using Domain.ImportNotification;
@@ -79,6 +80,10 @@
             builder.RegisterAssemblyTypes(ThisAssembly)
                 .AssignableTo<IPrenotificationContentRule>()
                 .As<IPrenotificationContentRule>();
+
+            builder.RegisterAssemblyTypes(ThisAssembly)
+                .AssignableTo<IReceiptRecoveryContentRule>()
+                .As<IReceiptRecoveryContentRule>();
         }
 
         private static bool HasAsposeLicense()
