@@ -167,6 +167,7 @@
     <Compile Include="Movement\BulkUpload\DraftPackagingInfo.cs" />
     <Compile Include="Movement\BulkUpload\DraftMovement.cs" />
     <Compile Include="Movement\BulkUpload\IDraftMovementRepository.cs" />
+    <Compile Include="Movement\IMovementCarrierRepository.cs" />
     <Compile Include="Movement\MovementDetailsFactory.cs" />
     <Compile Include="Movement\NumberOfActiveLoads.cs" />
     <Compile Include="Movement\ConsentPeriod.cs" />
