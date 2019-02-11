@@ -30,6 +30,11 @@
         {
             var resultFileRules = await GetFileRules(file, FileUploadType.ReceiptRecovery);
 
+            if (DataTable == null || (DataTable != null && DataTable.Rows.Count == 0))
+            {
+                resultFileRules.Add(new RuleResult<ReceiptRecoveryFileRules>(ReceiptRecoveryFileRules.EmptyData, MessageLevel.Error));
+            }
+
             var extension = Path.GetExtension(file.FileName);
             var isCsv = extension == ".csv";
 
@@ -67,11 +72,6 @@
                 }
 
                 rules.Add(result);
-            }
-
-            if (DataTable == null || (DataTable != null && DataTable.Rows.Count == 0))
-            {
-                rules.Add(new RuleResult<ReceiptRecoveryFileRules>(ReceiptRecoveryFileRules.EmptyData, MessageLevel.Error));
             }
             
             return rules;

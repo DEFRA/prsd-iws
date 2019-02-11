@@ -26,6 +26,7 @@
         public async Task<bool> HandleAsync(CreateMovementCarriers message)
         {
             var movementCarriers = new List<MovementCarrier>();
+
             var carriers = await repository.GetByNotificationId(message.NotificationId);
 
             foreach (var movementId in message.MovementId)

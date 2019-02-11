@@ -354,7 +354,7 @@
                     {
                         selectedCarriers.Add(carrier.Order, carrier.Id);
                     }
-                    await mediator.SendAsync(new CreateMovementCarriers(notificationId, model.MovementIds, selectedCarriers));
+                    await mediator.SendAsync(new CreateMovementCarriers(notificationId, newMovementIds, selectedCarriers));
 
                     return RedirectToAction("Summary", model.MovementIds.ToRouteValueDictionary("newMovementIds"));
                 }             

@@ -1040,6 +1040,7 @@
     <Content Include="Areas\NotificationMovements\Views\ReceiptRecoveryBulkUpload\Errors.cshtml" />
     <Content Include="Areas\NotificationMovements\Views\Create\AddIntendedCarrier.cshtml" />
     <Content Include="Areas\NotificationMovements\Views\Create\WhoAreYourCarriers.cshtml" />
+    <Content Include="Areas\NotificationMovements\Views\ReceiptRecoveryBulkUpload\Documents.cshtml" />
     <None Include="Scripts\jquery-2.1.3.intellisense.js" />
     <Content Include="Scripts\govuk\govuk-template.js" />
     <Content Include="Scripts\govuk\ie.js" />
@@ -2375,6 +2376,7 @@
     <Compile Include="Infrastructure\BulkPrenotification\FileParsePrenotificationFileRule.cs" />
     <Compile Include="Infrastructure\BulkPrenotification\ShippingMovementsFileTypeRules.cs" />
     <Compile Include="Infrastructure\BulkPrenotification\VirusRule.cs" />
+    <Compile Include="Infrastructure\BulkReceiptRecovery\ReceiptRecoveryMovementsFileTypeRules.cs" />
     <Compile Include="Infrastructure\BulkReceiptRecovery\VirusRule.cs" />
     <Compile Include="Infrastructure\NotificationOwnerFilter.cs" />
     <Compile Include="Infrastructure\SkipNotificationOwnerFilter.cs" />

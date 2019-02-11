@@ -152,6 +152,24 @@ namespace EA.Iws.Web.Areas.NotificationMovements.Views.ReceiptRecoveryBulkUpload
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Accompanying shipment movement documents.
+        /// </summary>
+        public static string ShipmentMovementDocumentHeader {
+            get {
+                return ResourceManager.GetString("ShipmentMovementDocumentHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Upload the accompanying shipment movement documents for shipments:.
+        /// </summary>
+        public static string ShipmentMovementInstructions {
+            get {
+                return ResourceManager.GetString("ShipmentMovementInstructions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to There were no errors within the {filename} data file..
         /// </summary>
         public static string ShipmentMovementsSuccessText {
@@ -251,7 +269,7 @@ namespace EA.Iws.Web.Areas.NotificationMovements.Views.ReceiptRecoveryBulkUpload
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Download the bulk upload templates.
+        ///   Looks up a localized string similar to Download the data file templates.
         /// </summary>
         public static string TemplateLinkText {
             get {

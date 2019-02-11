@@ -136,7 +136,7 @@
     <value>If you leave the journey before adding your accompanying shipment movement documents, your bulk upload of the receipt and/or recovery data will not be saved.</value>
   </data>
   <data name="TemplateLinkText" xml:space="preserve">
-    <value>Download the bulk upload templates</value>
+    <value>Download the data file templates</value>
   </data>
   <data name="UploadReceiptRecoveryTabTitle" xml:space="preserve">
     <value>Receipt / Recovery Bulk Upload</value>
@@ -224,5 +224,11 @@
   </data>
   <data name="ViewErrors" xml:space="preserve">
     <value>View Errors</value>
+  </data>
+  <data name="ShipmentMovementDocumentHeader" xml:space="preserve">
+    <value>Accompanying shipment movement documents</value>
+  </data>
+  <data name="ShipmentMovementInstructions" xml:space="preserve">
+    <value>Upload the accompanying shipment movement documents for shipments:</value>
   </data>
 </root>

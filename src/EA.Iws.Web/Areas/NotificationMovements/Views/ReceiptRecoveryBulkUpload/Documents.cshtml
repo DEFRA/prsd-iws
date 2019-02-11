@@ -1,0 +1,35 @@
+﻿@using Resource = EA.Iws.Web.Areas.NotificationMovements.Views.ReceiptRecoveryBulkUpload.ReceiptRecoveryBulkUploadResources
+@model EA.Iws.Web.Areas.NotificationMovements.ViewModels.ReceiptRecoveryBulkUpload.ShipmentMovementDocumentsViewModel
+
+@{
+    ViewBag.Title = @Resource.UploadReceiptRecoveryTabTitle;
+    Layout = "~/Views/Shared/_Layout.GovUK.Sections.cshtml";
+}
+
+<div class="grid-row">
+    <div class="column-two-thirds">
+        <div>
+            <h1 class="heading-large">@Resource.ShipmentMovementDocumentHeader</h1>
+            <p>@Model.FileSuccessMessage</p>
+            <p>@Resource.ShipmentMovementInstructions</p>
+            <p>@Model.GetShipments</p>
+        </div>
+
+        @using (Html.BeginForm("Documents", null, null,
+                FormMethod.Post, HtmlHelper.AnonymousObjectToHtmlAttributes(new { enctype = "multipart/form-data" })))
+        {
+            @Html.AntiForgeryToken()
+            @Html.Gds().ValidationSummary()
+
+            <div class="form-group @Html.Gds().FormGroupClass(m => m.File)">
+                <label for="@Html.NameFor(m => m.File)" class="visually-hidden">@Html.DisplayNameFor(m => m.File)</label>
+                @Html.Gds().ValidationMessageFor(m => m.File)
+                @Html.Gds().TextBoxFor(m => m.File, new { type = "file" })
+            </div>
+
+            <div class="form-group-compound">
+                <button class="button" type="submit">@Constants.ContinueButtonText</button>
+            </div>
+        }
+    </div>
+</div>
