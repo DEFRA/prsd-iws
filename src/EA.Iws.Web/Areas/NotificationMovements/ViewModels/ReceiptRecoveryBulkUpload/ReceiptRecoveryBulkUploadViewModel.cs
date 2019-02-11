@@ -5,6 +5,7 @@
     using System.ComponentModel.DataAnnotations;
     using System.Web;
     using Core.Movement.BulkReceiptRecovery;
+    using Core.Shared;
 
     public class ReceiptRecoveryBulkUploadViewModel : IValidatableObject
     {
@@ -12,12 +13,14 @@
         {
         }
 
-        public ReceiptRecoveryBulkUploadViewModel(Guid notificationId)
+        public ReceiptRecoveryBulkUploadViewModel(Guid notificationId, NotificationType type)
         {
             this.NotificationId = notificationId;
+            this.NotificationType = type;
         }
 
         public Guid NotificationId { get; set; }
+        public NotificationType NotificationType { get; set; }
 
         public int ErrorsCount
         {

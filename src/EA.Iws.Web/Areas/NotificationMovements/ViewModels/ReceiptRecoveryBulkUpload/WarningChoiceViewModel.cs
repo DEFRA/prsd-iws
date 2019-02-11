@@ -4,6 +4,7 @@
     using System.ComponentModel.DataAnnotations;
     using System.Linq;
     using System.Reflection;
+    using Core.Shared;
     using Web.ViewModels.Shared;
 
     public class WarningChoiceViewModel
@@ -12,13 +13,14 @@
         {
         }
 
-        public WarningChoiceViewModel(Guid notificationId)
+        public WarningChoiceViewModel(Guid notificationId, NotificationType type)
         {
             WarningChoices = RadioButtonStringCollectionViewModel.CreateFromEnum<WarningChoicesList>();
             this.NotificationId = notificationId;
         }
 
         public Guid NotificationId { get; set; }
+        public NotificationType NotificationType { get; set; }
 
         public RadioButtonStringCollectionViewModel WarningChoices { get; set; }
 

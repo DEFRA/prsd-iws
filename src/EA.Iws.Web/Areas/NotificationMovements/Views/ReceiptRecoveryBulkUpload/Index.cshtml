@@ -1,9 +1,12 @@
 ﻿@using Resources = EA.Iws.Web.Areas.NotificationMovements.Views.ReceiptRecoveryBulkUpload.ReceiptRecoveryBulkUploadResources
+@using EA.Iws.Core.Shared
 @model EA.Iws.Web.Areas.NotificationMovements.ViewModels.ReceiptRecoveryBulkUpload.ReceiptRecoveryBulkUploadViewModel
 
 @{
-    ViewBag.Title = Resources.UploadReceiptRecoveryTabTitle;
+    var typeText = Model.NotificationType == NotificationType.Disposal ? "disposal" : "recovery";
+    ViewBag.Title = string.Format(Resources.UploadReceiptRecoveryTabTitle, typeText);
     Layout = "~/Views/Shared/_Layout.GovUK.Sections.cshtml";
+
 }
 
 <style>
@@ -20,10 +23,10 @@
     <div class="column-full">
         <section class="grid-row">
             <div class="column-full">
-                <h1 class="heading-large">@Resources.StartHeader</h1>
-                <p>@Resources.StartText1</p>
+                <h1 class="heading-large">@string.Format(Resources.StartHeader, typeText)</h1>
+                <p>@string.Format(Resources.StartText1, typeText)</p>
                 <p>@Html.ActionLink(Resources.TemplateLinkText, "Index", "BulkUploadTemplate", new { id = @Model.NotificationId }, null) @Resources.StartText2</p>
-                <p class="bold-small">@Resources.StartText3</p>
+                <p class="bold-small">@string.Format(Resources.StartText3, typeText)</p>
             </div>
         </section>
 

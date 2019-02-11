@@ -80,7 +80,7 @@ namespace EA.Iws.Web.Areas.NotificationMovements.Views.ReceiptRecoveryBulkUpload
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You must resolve all errors listed below before uploading your prenotification data again. If you experience further problems, contact askshipments@environment-agency.gov.uk for further advice..
+        ///   Looks up a localized string similar to You must resolve all errors listed below before uploading your receipt and/or {0} data again. If you experience further problems, contact askshipments@environment-agency.gov.uk for further advice..
         /// </summary>
         public static string ErrorsContactUs {
             get {
@@ -98,7 +98,7 @@ namespace EA.Iws.Web.Areas.NotificationMovements.Views.ReceiptRecoveryBulkUpload
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Your prenotification data file contains {0} errors.
+        ///   Looks up a localized string similar to Your receipt and/or {0} data file contains {1} errors.
         /// </summary>
         public static string ErrorsHeaderText {
             get {
@@ -188,7 +188,7 @@ namespace EA.Iws.Web.Areas.NotificationMovements.Views.ReceiptRecoveryBulkUpload
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Bulk upload of receipt and/or recovery data.
+        ///   Looks up a localized string similar to Bulk upload of receipt and/or {0} data.
         /// </summary>
         public static string StartHeader {
             get {
@@ -197,7 +197,7 @@ namespace EA.Iws.Web.Areas.NotificationMovements.Views.ReceiptRecoveryBulkUpload
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Upload multiple receipt and/or recovery data and shipment movement documents to your notification..
+        ///   Looks up a localized string similar to Upload multiple receipt and/or {0} data and shipment movement documents to your notification..
         /// </summary>
         public static string StartText1 {
             get {
@@ -305,7 +305,7 @@ namespace EA.Iws.Web.Areas.NotificationMovements.Views.ReceiptRecoveryBulkUpload
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to No duplicate receipt or recovery information will be accepted..
+        ///   Looks up a localized string similar to No duplicate receipt or {0} information will be accepted..
         /// </summary>
         public static string UploadReceiptRecoveryList4 {
             get {
@@ -332,7 +332,7 @@ namespace EA.Iws.Web.Areas.NotificationMovements.Views.ReceiptRecoveryBulkUpload
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Receipt / Recovery Bulk Upload.
+        ///   Looks up a localized string similar to Receipt / {0} Bulk Upload.
         /// </summary>
         public static string UploadReceiptRecoveryTabTitle {
             get {
@@ -341,7 +341,7 @@ namespace EA.Iws.Web.Areas.NotificationMovements.Views.ReceiptRecoveryBulkUpload
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Upload the receipt and/or recovery data file in an Excel or .CSV format..
+        ///   Looks up a localized string similar to Upload the receipt and/or {0} data file in an Excel or .CSV format..
         /// </summary>
         public static string UploadReceiptRecoveryText1 {
             get {
@@ -359,7 +359,7 @@ namespace EA.Iws.Web.Areas.NotificationMovements.Views.ReceiptRecoveryBulkUpload
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Bulk upload of receipt and/or recovery data.
+        ///   Looks up a localized string similar to Bulk upload of receipt and/or {0} data.
         /// </summary>
         public static string UploadReceiptRecoveryTitle {
             get {
@@ -386,7 +386,7 @@ namespace EA.Iws.Web.Areas.NotificationMovements.Views.ReceiptRecoveryBulkUpload
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You must upload shipment movement documents with your receipt and/or recovery data file to finish the process..
+        ///   Looks up a localized string similar to You must upload shipment movement documents with your receipt and/or {0} data file to finish the process..
         /// </summary>
         public static string WarningText1 {
             get {
@@ -395,7 +395,7 @@ namespace EA.Iws.Web.Areas.NotificationMovements.Views.ReceiptRecoveryBulkUpload
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to If you leave the process before adding your accompanying shipment movement documents, your bulk upload of receipt and/or recovery data will not be saved..
+        ///   Looks up a localized string similar to If you leave the process before adding your accompanying shipment movement documents, your bulk upload of receipt and/or {0} data will not be saved..
         /// </summary>
         public static string WarningText2 {
             get {
