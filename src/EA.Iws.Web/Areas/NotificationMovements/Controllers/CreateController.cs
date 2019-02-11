@@ -357,7 +357,16 @@
                     await mediator.SendAsync(new CreateMovementCarriers(notificationId, model.MovementIds, selectedCarriers));
 
                     return RedirectToAction("Summary", model.MovementIds.ToRouteValueDictionary("newMovementIds"));
-                }             
+                }    
+                else
+                {
+                    if (!ModelState.IsValid)
+                    {
+                        var z = await mediator.SendAsync(new GetCarriersByNotificationId(notificationId));
+                        model.SetCarriers(z);
+                        return View(model);
+                    }
+                }
             }
             else if (remove != null)
             {
