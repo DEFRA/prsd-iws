@@ -24,7 +24,7 @@
             this.userContext = userContext;
         }
 
-        public async Task<Guid> Add(Guid notificationId, List<PrenotificationMovement> movements, string fileName)
+        public async Task<Guid> AddPrenotifications(Guid notificationId, List<PrenotificationMovement> movements, string fileName)
         {
             Guid result;
 
@@ -62,7 +62,7 @@
             return result;
         }
 
-        public async Task<Guid> Add(Guid notificationId, List<ReceiptRecoveryMovement> movements, string fileName)
+        public async Task<Guid> AddReceiptRecovery(Guid notificationId, List<ReceiptRecoveryMovement> movements, string fileName)
         {
             Guid result;
 

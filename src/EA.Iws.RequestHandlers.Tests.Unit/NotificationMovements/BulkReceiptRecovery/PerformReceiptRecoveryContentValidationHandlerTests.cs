@@ -6,6 +6,7 @@
     using System.Linq;
     using System.Threading.Tasks;
     using Core.Movement.BulkReceiptRecovery;
+    using Domain.Movement.BulkUpload;
     using FakeItEasy;
     using Prsd.Core.Mapper;
     using RequestHandlers.NotificationMovements.BulkReceiptRecovery;
@@ -18,19 +19,21 @@
         private readonly IEnumerable<IReceiptRecoveryContentRule> contentRules;
         private readonly IMap<DataTable, List<ReceiptRecoveryMovement>> mapper;
         private readonly IReceiptRecoveryContentRule contentRule;
+        private readonly IDraftMovementRepository repository;
         private const int MaxShipments = 50;
 
         public PerformReceiptRecoveryContentValidationHandlerTests()
         {
             mapper = A.Fake<IMap<DataTable, List<ReceiptRecoveryMovement>>>();
             contentRule = A.Fake<IReceiptRecoveryContentRule>();
+            repository = A.Fake<IDraftMovementRepository>();
 
             contentRules = new List<IReceiptRecoveryContentRule>(1)
             {
                 contentRule
             };
 
-            handler = new PerformReceiptRecoveryContentValidationHandler(contentRules, mapper);
+            handler = new PerformReceiptRecoveryContentValidationHandler(contentRules, mapper, repository);
         }
 
         [Fact]
