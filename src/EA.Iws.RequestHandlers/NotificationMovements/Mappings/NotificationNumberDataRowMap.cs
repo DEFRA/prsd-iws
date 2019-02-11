@@ -34,12 +34,8 @@
 
             number = number.ToUpper().Replace(" ", string.Empty);
 
-            if (NotificationNumberRegex.IsMatch(number))
-            {
-                number = NotificationNumberRegex.Replace(number, "$1 $2 $3");
-            }
-
-            return number;
+            return NotificationNumberRegex.IsMatch(number) ? 
+                NotificationNumberRegex.Replace(number, "$1 $2 $3") : null;
         }
     }
 }
