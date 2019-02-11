@@ -48,7 +48,7 @@
         [Fact]
         public async Task ShipmentNotPrenotified_CapturedButDateInFuture_Success()
         {
-            A.CallTo(() => repo.GetAllMovements(notificationId)).Returns(GetRepoMovements(false, DateTime.Now.AddDays(1)));
+            A.CallTo(() => repo.GetAllMovements(notificationId)).Returns(GetRepoMovements(false, DateTime.Now));
             var result = await rule.GetResult(GetTestData(), notificationId);
 
             Assert.Equal(ReceiptRecoveryContentRules.ReceivedRecoveredValidation, result.Rule);
