@@ -42,7 +42,7 @@
                     result = MessageLevel.Error;
                     shipments.Add(movement.ShipmentNumber.GetValueOrDefault());
                 }
-                else if (actualMovement.Status == MovementStatus.Submitted && actualMovement.Date.Date < DateTime.UtcNow.Date)
+                else if (actualMovement.Status == MovementStatus.Submitted && actualMovement.Date.Date > DateTime.UtcNow.Date)
                 {
                     result = MessageLevel.Error;
                     shipments.Add(movement.ShipmentNumber.GetValueOrDefault());
