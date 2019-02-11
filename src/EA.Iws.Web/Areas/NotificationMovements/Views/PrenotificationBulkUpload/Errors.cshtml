@@ -8,7 +8,7 @@
 }
 <div class="grid-row">
     <div class="column-full">
-        <header class="hgroup text">
+        <header>
             <h1 class="heading-large">@string.Format(Resources.ErrorsHeaderText, Model.ErrorsCount)</h1>
         </header>
 
@@ -30,10 +30,10 @@
                             {
                                 <div class="summary-error-row">
                                     <div class="grid-row">
-                                        <div class="column-two-thirds">
+                                        <div class="column-nine-tenths">
                                             @Html.Raw(EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(rule))
                                         </div>
-                                        <div class="column-third">
+                                        <div class="column-tenth">
                                             <img class="summary-error-icon" src="@Url.Content("~/Content/images/error-icon.png")" alt="">
                                         </div>
                                     </div>
@@ -46,10 +46,10 @@
                             {
                                 <div class="summary-error-row">
                                     <div class="grid-row">
-                                        <div class="column-two-thirds">
+                                        <div class="column-nine-tenths">
                                             @Html.Raw(rule.ErrorMessage)
                                         </div>
-                                        <div class="column-third">
+                                        <div class="column-tenth">
                                             <img class="summary-error-icon" src="@Url.Content("~/Content/images/error-icon.png")" alt="">
                                         </div>
                                     </div>
@@ -57,12 +57,12 @@
                                     {
                                         <br />
                                         <div class="grid-row">
-                                            <div class="column-quarter" style="max-width: 5%">
+                                            <div class="column-tenth" style="max-width: 5%">
                                                 <i class="icon icon-important">
                                                     <span class="visually-hidden">Warning</span>
                                                 </i>
                                             </div>
-                                            <div class="column-two-thirds">
+                                            <div class="column-nine-tenths">
                                                 <p>
                                                     <strong class="bold-small">
                                                         @Resources.Action
