@@ -28,9 +28,9 @@
 
         protected virtual ICollection<DraftPackagingInfo> PackagingInfosCollection { get; set; }
 
-        public DateTime ReceivedDate { get; set; }
+        public DateTime? ReceivedDate { get; set; }
 
-        public DateTime RecoveredDisposedDate { get; set; }
+        public DateTime? RecoveredDisposedDate { get; set; }
 
         public DraftMovement()
         {
@@ -57,10 +57,10 @@
         public DraftMovement(Guid draftMovementId,
             string notificationNumber,
             int shipmentNumber,
-            DateTime receivedDate,
+            DateTime? receivedDate,
             decimal quantity,
             ShipmentQuantityUnits units,
-            DateTime recoveredDisposedDate)
+            DateTime? recoveredDisposedDate)
         {
             BulkUploadId = draftMovementId;
             NotificationNumber = notificationNumber;

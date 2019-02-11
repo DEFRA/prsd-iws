@@ -92,6 +92,7 @@
     <Content Include="scripts\Update\0005-Beta\Sprint3\20190108-141400-add-notification-audit-table.sql" />
     <Content Include="scripts\Update\0005-Beta\Sprint3\20190108-141500-add-lookup-audit-data.sql" />
     <Content Include="scripts\Update\0005-Beta\Sprint5\20190131-141400-add-bulk-prenote-draft.sql" />
+    <Content Include="scripts\Update\0005-Beta\Sprint5\20190211-150500-update-draft.sql" />
     <Content Include="scripts\Update\0005-Beta\Sprint5\20190208-092800-update-movement-carrier-keys.sql" />
     <Content Include="unindexed-foreign-keys.sql" />
     <Content Include="scripts\Everytime\01-Functions\0003-Reports-PricingInfo.sql" />

@@ -144,16 +144,13 @@
                 return movements.Select(movement =>
                 {
                     var shipmentNumber = movement.ShipmentNumber.HasValue ? movement.ShipmentNumber.Value : 0;
+                    var receivedDate = movement.ReceivedDate.HasValue ? movement.ReceivedDate : default(DateTime);
                     var quantity = movement.Quantity.HasValue ? movement.Quantity.Value : 0m;
                     var units = movement.Unit.HasValue ? movement.Unit.Value : default(ShipmentQuantityUnits);
-                    var shipmentDate = movement.ActualDateOfShipment.HasValue
-                        ? movement.ActualDateOfShipment.Value
-                        : default(DateTime);
-                    var packagingInfos = movement.PackagingTypes.Select(p => new DraftPackagingInfo() { PackagingType = p }).ToList();
+                    var recoveredDisposedDate = movement.RecoveredDisposedDate.HasValue
+                        ? movement.RecoveredDisposedDate.Value : default(DateTime);
 
-                    return new DraftMovement(draftMovementId, movement.NotificationNumber,
-                            shipmentNumber, quantity, units,
-                            shipmentDate, packagingInfos);
+                    return new DraftMovement(draftMovementId, movement.NotificationNumber, shipmentNumber, receivedDate, quantity, units, recoveredDisposedDate);
                 });
             });
         }
