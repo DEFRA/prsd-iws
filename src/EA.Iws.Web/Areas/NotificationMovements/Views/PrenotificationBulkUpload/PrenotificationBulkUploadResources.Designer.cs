@@ -296,7 +296,7 @@ namespace EA.Iws.Web.Areas.NotificationMovements.Views.PrenotificationBulkUpload
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The data file should not exceed 2GB in size..
+        ///   Looks up a localized string similar to The data file must not exceed 2GB in size..
         /// </summary>
         public static string UploadPrenotificationsList1 {
             get {
@@ -323,7 +323,7 @@ namespace EA.Iws.Web.Areas.NotificationMovements.Views.PrenotificationBulkUpload
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The actual shipment date should be recorded in dd/mm/yyyy format..
+        ///   Looks up a localized string similar to The actual shipment date must be recorded in dd/mm/yyyy format..
         /// </summary>
         public static string UploadPrenotificationsList4 {
             get {
