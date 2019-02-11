@@ -31,18 +31,21 @@
         public string FirstTel { get; private set; }
         public string FirstFax { get; private set; }
         public string FirstEmail { get; private set; }
+        public string FirstContact { get; private set; }
 
         public string SecondReg { get; private set; }
         public string SecondName { get; private set; }
         public string SecondTel { get; private set; }
         public string SecondFax { get; private set; }
         public string SecondEmail { get; private set; }
+        public string SecondContact { get; private set; }
 
         public string LastReg { get; private set; }
         public string LastName { get; private set; }
         public string LastTel { get; private set; }
         public string LastFax { get; private set; }
         public string LastEmail { get; private set; }
+        public string LastContact { get; private set; }
 
         public string AnnexMessage { get; private set; }
 
@@ -86,6 +89,7 @@
             FirstTel = string.Empty;
             FirstFax = string.Empty;
             FirstEmail = string.Empty;
+            FirstContact = string.Empty;
 
             SecondReg = string.Empty;
             SecondName = string.Empty;
@@ -93,6 +97,7 @@
             SecondTel = string.Empty;
             SecondFax = string.Empty;
             SecondEmail = string.Empty;
+            SecondContact = string.Empty;
 
             LastReg = string.Empty;
             LastName = string.Empty;
@@ -100,6 +105,7 @@
             LastTel = string.Empty;
             LastFax = string.Empty;
             LastEmail = string.Empty;
+            LastContact = string.Empty;
 
             AnnexMessage = string.Empty;
         }
@@ -134,7 +140,8 @@
                     AddressViewModel = new AddressViewModel(sortedCarriersList[i].Carrier.Address),
                     Tel = sortedCarriersList[i].Carrier.Contact.Telephone.ToFormattedContact(),
                     Fax = sortedCarriersList[i].Carrier.Contact.Fax.ToFormattedContact(),
-                    Email = sortedCarriersList[i].Carrier.Contact.Email
+                    Email = sortedCarriersList[i].Carrier.Contact.Email,
+                    ContactPerson = sortedCarriersList[i].Carrier.Contact.FullName
                 };
 
                 CarrierDetails.Add(mcd);
@@ -152,6 +159,7 @@
             FirstTel = carrier.Contact.Telephone.ToFormattedContact();
             FirstFax = carrier.Contact.Fax.ToFormattedContact();
             FirstEmail = carrier.Contact.Email;
+            FirstContact = carrier.Contact.FullName;
         }
 
         private void AddCarrierToSecondFields(Carrier carrier)
@@ -162,6 +170,7 @@
             SecondTel = carrier.Contact.Telephone.ToFormattedContact();
             SecondFax = carrier.Contact.Fax.ToFormattedContact();
             SecondEmail = carrier.Contact.Email;
+            SecondContact = carrier.Contact.FullName;
         }
 
         private void AddCarrierToLastFields(Carrier carrier)
@@ -172,6 +181,7 @@
             LastTel = carrier.Contact.Telephone.ToFormattedContact();
             LastFax = carrier.Contact.Fax.ToFormattedContact();
             LastEmail = carrier.Contact.Email;
+            LastContact = carrier.Contact.FullName;
         }
     }
 }
