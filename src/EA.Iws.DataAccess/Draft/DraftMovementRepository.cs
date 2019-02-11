@@ -23,7 +23,7 @@
             this.userContext = userContext;
         }
 
-        public async Task<Guid> Add(Guid notificationId, List<PrenotificationMovement> movements, string fileName)
+        public async Task<Guid> AddPrenotifications(Guid notificationId, List<PrenotificationMovement> movements, string fileName)
         {
             Guid result;
 

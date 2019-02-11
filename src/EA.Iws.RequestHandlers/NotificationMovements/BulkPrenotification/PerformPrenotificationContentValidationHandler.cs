@@ -18,6 +18,7 @@
         private readonly IMap<DataTable, List<PrenotificationMovement>> mapper;
         private readonly IDraftMovementRepository repository;
         private const int MaxShipments = 50;
+        private const PrenotificationContentRules LastRule = PrenotificationContentRules.ThreeWorkingDaysToShipment;
 
         public PerformPrenotificationContentValidationHandler(IEnumerable<IPrenotificationContentRule> contentRules,
             IMap<DataTable, List<PrenotificationMovement>> mapper,
@@ -41,7 +42,7 @@
                 result.ShipmentNumbers =
                     movements.Where(m => m.ShipmentNumber.HasValue).Select(m => m.ShipmentNumber.Value);
 
-                result.DraftBulkUploadId = await repository.Add(message.NotificationId, movements, message.FileName);
+                result.DraftBulkUploadId = await repository.AddPrenotifications(message.NotificationId, movements, message.FileName);
             }
 
             return result;
@@ -79,7 +80,20 @@
                 rules.Add(await rule.GetResult(movements, notificationId));
             }
 
-            return rules.OrderBy(r => r.Rule).ToList();
+            var lastRuleResult = rules.FirstOrDefault(r => r.Rule == LastRule);
+
+            var orderedRules = rules.Where(r => r.Rule != LastRule).OrderBy(r =>
+            {
+                var shipments = r.ErrorMessage.Split(new[] { ':' }, StringSplitOptions.RemoveEmptyEntries)[0];
+                return shipments;
+            }).ThenBy(r => r.Rule).ToList();
+
+            if (lastRuleResult != null)
+            {
+                orderedRules.Add(lastRuleResult);
+            }
+
+            return orderedRules;
         }
 
         private static async Task<PrenotificationContentRuleResult<PrenotificationContentRules>> GetMaxShipments(
