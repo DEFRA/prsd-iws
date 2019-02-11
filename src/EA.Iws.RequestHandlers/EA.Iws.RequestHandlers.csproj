@@ -440,6 +440,7 @@
     <Compile Include="NotificationAssessment\SetExporterContactHandler.cs" />
     <Compile Include="NotificationAssessment\SetNewNumberOfShipmentsHandler.cs" />
     <Compile Include="NotificationAssessment\SetEntryPointHandler.cs" />
+    <Compile Include="NotificationMovements\BulkReceiptRecovery\CreateReceiptRecoveryHandler.cs" />
     <Compile Include="NotificationMovements\BulkReceiptRecovery\PerformReceiptRecoveryContentValidationHandler.cs" />
     <Compile Include="NotificationMovements\BulkPrenotification\CreatePrenotificationHandler.cs" />
     <Compile Include="NotificationMovements\BulkPrenotification\PrenotificationDateFutureRule.cs" />
@@ -465,7 +466,7 @@
     <Compile Include="NotificationMovements\BulkReceiptRecovery\ReceiptRecoveryRecoveryOnlyRule.cs" />
     <Compile Include="NotificationMovements\BulkReceiptRecovery\ReceiptRecoveryRecoveryQuantityUnitRule.cs" />
     <Compile Include="NotificationMovements\BulkReceiptRecovery\ReceiptRecoveryShipmentMustBePrenotifiedRule.cs" />
-	<Compile Include="NotificationMovements\BulkReceiptRecovery\ReceiptRecoveryNotificationNumberRule.cs" />
+    <Compile Include="NotificationMovements\BulkReceiptRecovery\ReceiptRecoveryNotificationNumberRule.cs" />
     <Compile Include="NotificationMovements\BulkReceiptRecovery\ReceiptRecoveryDuplicateShipmentNumberRule.cs" />
     <Compile Include="NotificationMovements\BulkReceiptRecovery\ReceiptRecoveryQuantityPrecisionRule.cs" />
     <Compile Include="NotificationMovements\BulkReceiptRecovery\ReceiptRecoveryReceiptDateFormatRule.cs" />

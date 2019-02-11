@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.IO;
     using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Mvc;
@@ -10,6 +11,7 @@
     using Infrastructure.BulkReceiptRecovery;
     using Prsd.Core.Mediator;
     using Requests.Notification;
+    using Requests.NotificationMovements.BulkUpload;
     using ViewModels.ReceiptRecoveryBulkUpload;
 
     [Authorize]
@@ -19,7 +21,9 @@
         private readonly IReceiptRecoveryValidator validator;
         private readonly IFileReader fileReader;
 
-        public ReceiptRecoveryBulkUploadController(IMediator mediator, IReceiptRecoveryValidator validator, IFileReader fileReader)
+        public ReceiptRecoveryBulkUploadController(IMediator mediator, 
+            IReceiptRecoveryValidator validator, 
+            IFileReader fileReader)
         {
             this.mediator = mediator;
             this.validator = validator;
@@ -83,6 +87,8 @@
             TempData["PrenotificationShipments"] = shipments;
             TempData["PreNotificationFileName"] = model.File.FileName;
 
+            TempData["DraftBulkUploadId"] = validationSummary.DraftBulkUploadId;
+
             return View("Documents", shipmentsModel);
         }
 
@@ -123,24 +129,6 @@
             var validationSummary = await validator.GetShipmentMovementValidationSummary(model.File, notificationId);
             var failedFileRules = validationSummary.FileRulesResults.Where(r => r.MessageLevel == MessageLevel.Error).Select(r => r.Rule).ToList();
 
-            var fileName = string.Empty;
-            var shipments = new List<int>();
-            object fileNameObj;
-            object shipmentsObj;
-
-            if (TempData.TryGetValue("PreNotificationFileName", out fileNameObj))
-            {
-                fileName = fileNameObj as string;
-            }
-            if (TempData.TryGetValue("PrenotificationShipments", out shipmentsObj))
-            {
-                shipments = shipmentsObj as List<int>;
-            }
-
-            TempData["PrenotificationShipments"] = shipments;
-            TempData["PreNotificationFileName"] = fileName;
-            TempData["ShipmentMovementFileName"] = model.File.FileName;
-
             if (failedFileRules.Count > 0)
             {
                 foreach (var rule in failedFileRules)
@@ -148,10 +136,47 @@
                     ModelState.AddModelError(string.Empty, Prsd.Core.Helpers.EnumHelper.GetDisplayName(rule));
                 }
 
+                var fileName = string.Empty;
+                var shipments = new List<int>();
+                object fileNameObj;
+                object shipmentsObj;
+
+                if (TempData.TryGetValue("PreNotificationFileName", out fileNameObj))
+                {
+                    fileName = fileNameObj as string;
+                }
+                if (TempData.TryGetValue("PrenotificationShipments", out shipmentsObj))
+                {
+                    shipments = shipmentsObj as List<int>;
+                }
+
+                TempData["PrenotificationShipments"] = shipments;
+                TempData["PreNotificationFileName"] = fileName;
+
                 model.ReceiptRecoveryFileName = fileName;
                 model.Shipments = shipments;
 
                 return View(model);
+            }
+
+            object draftBulkUploadIdObj;
+
+            if (TempData.TryGetValue("DraftBulkUploadId", out draftBulkUploadIdObj))
+            {
+                var draftBulkUploadId = draftBulkUploadIdObj as Guid?;
+
+                if (draftBulkUploadId != null && draftBulkUploadId != Guid.Empty)
+                {
+                    var fileExtension = Path.GetExtension(model.File.FileName);
+                    var uploadedFile = await fileReader.GetFileBytes(model.File);
+
+                    await
+                        mediator.SendAsync(new CreateReceiptRecovery(notificationId, draftBulkUploadId.Value,
+                            uploadedFile, fileExtension));
+
+                    TempData["ShipmentMovementFileName"] = model.File.FileName;
+                    return RedirectToAction("Success");
+                }
             }
 
             return RedirectToAction("Success");
