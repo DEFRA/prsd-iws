@@ -8,19 +8,24 @@
     using Core.Movement.BulkReceiptRecovery;
     using Core.Rules;
     using Domain.Movement;
+    using Domain.NotificationApplication;
 
     public class ReceiptRecoveryShipmentMustBePrenotifiedRule : IReceiptRecoveryContentRule
     {
-        private readonly IMovementRepository repo;
+        private readonly IMovementRepository movementRepo;
+        private readonly INotificationApplicationRepository notificationRepo;
 
-        public ReceiptRecoveryShipmentMustBePrenotifiedRule(IMovementRepository repo)
+        public ReceiptRecoveryShipmentMustBePrenotifiedRule(IMovementRepository movementRepo, INotificationApplicationRepository notificationRepo)
         {
-            this.repo = repo;
+            this.movementRepo = movementRepo;
+            this.notificationRepo = notificationRepo;
         }
 
         public async Task<ReceiptRecoveryContentRuleResult<ReceiptRecoveryContentRules>> GetResult(List<ReceiptRecoveryMovement> movements, Guid notificationId)
         {
-            var actualMovements = await repo.GetAllMovements(notificationId);
+            var actualMovements = await movementRepo.GetAllMovements(notificationId);
+
+            var notification = await notificationRepo.GetById(notificationId);
 
             List<int> shipments = new List<int>();
             MessageLevel result = MessageLevel.Success;
@@ -53,7 +58,10 @@
             }
 
             var shipmentNumbers = string.Join(", ", shipments);
-            var errorMessage = string.Format(Prsd.Core.Helpers.EnumHelper.GetDisplayName(ReceiptRecoveryContentRules.ReceivedRecoveredValidation), shipmentNumbers);
+
+            string type = notification.NotificationType == Core.Shared.NotificationType.Disposal ? "disposed" : "recovered";
+
+            var errorMessage = string.Format(Prsd.Core.Helpers.EnumHelper.GetDisplayName(ReceiptRecoveryContentRules.ReceivedRecoveredValidation), shipmentNumbers, type);
 
             return new ReceiptRecoveryContentRuleResult<ReceiptRecoveryContentRules>(ReceiptRecoveryContentRules.ReceivedRecoveredValidation, result, errorMessage);
         }

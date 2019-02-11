@@ -5,15 +5,20 @@
     using System.Threading.Tasks;
     using Core.Movement.BulkReceiptRecovery;
     using Core.Rules;
+    using Domain.NotificationApplication;
 
     public class ReceiptRecoveryRecoveryDateFormatRule : IReceiptRecoveryContentRule
     {
-        public ReceiptRecoveryRecoveryDateFormatRule()
+        private readonly INotificationApplicationRepository notificationRepo;
+
+        public ReceiptRecoveryRecoveryDateFormatRule(INotificationApplicationRepository notificationRepo)
         {
+            this.notificationRepo = notificationRepo;
         }
 
         public async Task<ReceiptRecoveryContentRuleResult<ReceiptRecoveryContentRules>> GetResult(List<ReceiptRecoveryMovement> movements, Guid notificationId)
         {
+            var notification = await notificationRepo.GetById(notificationId);
             return await Task.Run(() =>
             {
                 List<int> shipments = new List<int>();
@@ -29,7 +34,8 @@
                 }
 
                 var shipmentNumbers = string.Join(", ", shipments);
-                var errorMessage = string.Format(Prsd.Core.Helpers.EnumHelper.GetDisplayName(ReceiptRecoveryContentRules.RecoveryDateFormat), shipmentNumbers);
+                string type = notification.NotificationType == Core.Shared.NotificationType.Disposal ? "disposal" : "recovery";
+                var errorMessage = string.Format(Prsd.Core.Helpers.EnumHelper.GetDisplayName(ReceiptRecoveryContentRules.RecoveryDateFormat), shipmentNumbers, type);
 
                 return new ReceiptRecoveryContentRuleResult<ReceiptRecoveryContentRules>(ReceiptRecoveryContentRules.RecoveryDateFormat, result, errorMessage);
             });

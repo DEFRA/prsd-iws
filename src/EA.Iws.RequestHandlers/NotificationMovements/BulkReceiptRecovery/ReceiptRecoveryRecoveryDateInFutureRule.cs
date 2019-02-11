@@ -8,15 +8,21 @@
     using Core.Movement.BulkReceiptRecovery;
     using Core.Rules;
     using Domain.Movement;
+    using Domain.NotificationApplication;
 
     public class ReceiptRecoveryRecoveryDateInFutureRule : IReceiptRecoveryContentRule
     {
-        public ReceiptRecoveryRecoveryDateInFutureRule()
+        private readonly INotificationApplicationRepository notificationRepo;
+
+        public ReceiptRecoveryRecoveryDateInFutureRule(INotificationApplicationRepository notificationRepo)
         {
+            this.notificationRepo = notificationRepo;
         }
 
         public async Task<ReceiptRecoveryContentRuleResult<ReceiptRecoveryContentRules>> GetResult(List<ReceiptRecoveryMovement> movements, Guid notificationId)
         {
+            var notification = await notificationRepo.GetById(notificationId);
+
             return await Task.Run(() =>
             {
                 List<int> shipments = new List<int>();
@@ -32,7 +38,8 @@
                 }
 
                 var shipmentNumbers = string.Join(", ", shipments);
-                var errorMessage = string.Format(Prsd.Core.Helpers.EnumHelper.GetDisplayName(ReceiptRecoveryContentRules.RecoveryDateValidation), shipmentNumbers);
+                string type = notification.NotificationType == Core.Shared.NotificationType.Disposal ? "disposal" : "recovery";
+                var errorMessage = string.Format(Prsd.Core.Helpers.EnumHelper.GetDisplayName(ReceiptRecoveryContentRules.RecoveryDateValidation), shipmentNumbers, type);
 
                 return new ReceiptRecoveryContentRuleResult<ReceiptRecoveryContentRules>(ReceiptRecoveryContentRules.RecoveryDateValidation, result, errorMessage);
             });

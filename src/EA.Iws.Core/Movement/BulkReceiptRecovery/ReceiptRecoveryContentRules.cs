@@ -24,15 +24,15 @@
         QuantityPrecision,
         [Display(Name = "Shipment number {0}: the quantity unit of measurement is not permitted on this notification.")]
         QuantityUnit,
-        [Display(Name = "Shipment number {0}: the recovery date format must be in dd/mm/yyyy format.")]
+        [Display(Name = "Shipment number {0}: the {1} date format must be in dd/mm/yyyy format.")]
         RecoveryDateFormat,
-        [Display(Name = "Shipment number {0}: the recovery date must not be in the future and must be after the date of Receipt.")]
+        [Display(Name = "Shipment number {0}: the {1} date must not be in the future and must be after the date of Receipt.")]
         RecoveryDateValidation,
         [Display(Name = "Shipment number {0}: this shipment hasn’t been prenotified and/or shipped therefore can’t be received.")]
         PrenotifiedShipment,
-        [Display(Name = "Shipment number {0}: this shipment hasn’t been received and therefore can’t be recovered.")]
+        [Display(Name = "Shipment number {0}: this shipment hasn’t been received and therefore can’t be {1}.")]
         RecoveredValidation,
-        [Display(Name = "Shipment number {0}: this shipment hasn’t been prenotified and therefore can’t be received and recovered.")]
+        [Display(Name = "Shipment number {0}: this shipment hasn’t been prenotified and therefore can’t be received and {1}.")]
         ReceivedRecoveredValidation
     }
 }
