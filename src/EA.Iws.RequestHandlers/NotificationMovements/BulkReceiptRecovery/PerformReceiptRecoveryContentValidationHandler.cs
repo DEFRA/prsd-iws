@@ -126,7 +126,7 @@
                     // Only report an error if record has a notification number, otherwise record will be picked up by the GetMissingNotificationNumbers method
                     if (movement.ShipmentNumber.HasValue &&
                         !string.IsNullOrEmpty(movement.NotificationNumber) &&
-                        (movement.MissingReceivedDate ||
+                        ((movement.MissingReceivedDate && movement.MissingRecoveredDisposedDate) ||
                         movement.MissingQuantity ||
                         movement.MissingUnits))
                     {
