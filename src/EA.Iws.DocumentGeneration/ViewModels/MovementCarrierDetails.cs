@@ -8,6 +8,7 @@
         public string Tel { get; set; }
         public string Fax { get; set; }
         public string Email { get; set; }
+        public string ContactPerson { get; set; }
 
         public AddressViewModel AddressViewModel { private get; set; }
 
