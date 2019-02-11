@@ -15,7 +15,7 @@
 
         public Dictionary<int, Guid> SelectedCarriers { get; private set; }
 
-        public CreateMovementCarriers(Guid notificationId, Guid[] movementId, Dictionary<int, Guid> selectedCarriers)
+        public CreateMovementCarriers(Guid notificationId, IEnumerable<Guid> movementId, Dictionary<int, Guid> selectedCarriers)
         {
             NotificationId = notificationId;
             MovementId = movementId;
