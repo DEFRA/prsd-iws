@@ -333,7 +333,7 @@
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> AddIntendedCarrier(Guid notificationId, Guid[] newMovementIds, CarrierViewModel model,
-            string command, string remove)
+            string command, string remove, string up, string down)
         {
             int selectedCarriersCount = 0;
             if (command != null && command == "addcarrier")
@@ -372,25 +372,38 @@
                     }
                 }
             }
+            else if (!string.IsNullOrEmpty(up) || !string.IsNullOrEmpty(down))
+            {
+                var carriersTempData = new List<CarrierList>();
+                object carriersObj;
 
-            if (command != null && command == "addcarrier" || remove != null)
+                if (TempData.TryGetValue("SelectedCarriers", out carriersObj))
+                {
+                    carriersTempData = carriersObj as List<CarrierList>;
+                }
+
+                var orderedCarriers = ReOrderCarriers(up, down, carriersTempData);
+
+                model.SelectedCarriers = orderedCarriers;
+            }
+
+            // Ensure the order label is correct.
+            if (command != null && command == "addcarrier" || 
+                remove != null || 
+                !string.IsNullOrEmpty(up) || 
+                !string.IsNullOrEmpty(down))
             {
                 selectedCarriersCount = model.SelectedCarriers.Count;
                 if (selectedCarriersCount > 2)
                 {
                     foreach (var carrier in model.SelectedCarriers)
                     {
-                        if (carrier.Order == selectedCarriersCount)
-                        {
-                            carrier.OrderName = "Last";
-                        }
-                        else
-                        {
-                            carrier.OrderName = AddOrdinal(carrier.Order);
-                        }
+                        carrier.OrderName = carrier.Order == selectedCarriersCount ? "Last" : AddOrdinal(carrier.Order);
                     }
                 }
             }
+
+            TempData["SelectedCarriers"] = model.SelectedCarriers;
 
             var carriers = await mediator.SendAsync(new GetCarriersByNotificationId(notificationId));
             model.SetCarriers(carriers);
@@ -425,6 +438,53 @@
                     return number + "th";
             }
         }
+
+        private static List<CarrierList> ReOrderCarriers(string up, string down, List<CarrierList> carrierList)
+        {
+            if (carrierList.Any())
+            {
+                if (!string.IsNullOrEmpty(up))
+                {
+                    var selectedCarrier = carrierList.FirstOrDefault(c => c.Id.ToString() == up);
+
+                    if (selectedCarrier != null)
+                    {
+                        var higherCarrier = carrierList.FirstOrDefault(c => c.Order == selectedCarrier.Order - 1);
+
+                        if (higherCarrier != null)
+                        {
+                            higherCarrier.Order++;
+                            higherCarrier.OrderName = AddOrdinal(higherCarrier.Order);
+
+                            selectedCarrier.Order--;
+                            selectedCarrier.OrderName = AddOrdinal(selectedCarrier.Order);
+                        }
+                    }
+                }
+
+                if (!string.IsNullOrEmpty(down))
+                {
+                    var selectedCarrier = carrierList.FirstOrDefault(c => c.Id.ToString() == down);
+
+                    if (selectedCarrier != null)
+                    {
+                        var lowerCarrier = carrierList.FirstOrDefault(c => c.Order == selectedCarrier.Order + 1);
+
+                        if (lowerCarrier != null)
+                        {
+                            lowerCarrier.Order--;
+                            lowerCarrier.OrderName = AddOrdinal(lowerCarrier.Order);
+
+                            selectedCarrier.Order++;
+                            selectedCarrier.OrderName = AddOrdinal(selectedCarrier.Order);
+                        }
+                    }
+                }
+            }
+
+            return carrierList.OrderBy(c => c.Order).ToList();
+        }
+
         [Serializable]
         private class TempMovement
         {
