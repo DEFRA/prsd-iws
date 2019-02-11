@@ -7,6 +7,7 @@
     using System.Linq;
     using System.Threading.Tasks;
     using Core.Movement.BulkPrenotification;
+    using Core.Movement.BulkReceiptRecovery;
     using Core.Shared;
     using Domain.Movement.BulkUpload;
     using Prsd.Core;
@@ -61,6 +62,44 @@
             return result;
         }
 
+        public async Task<Guid> Add(Guid notificationId, List<ReceiptRecoveryMovement> movements, string fileName)
+        {
+            Guid result;
+
+            using (var transaction = context.Database.BeginTransaction())
+            {
+                try
+                {
+                    var draftBulkUpload = new DraftBulkUpload(notificationId, SystemTime.UtcNow,
+                        userContext.UserId.ToString(), fileName);
+
+                    context.DraftBulkUploads.Add(draftBulkUpload);
+
+                    await context.SaveChangesAsync();
+
+                    var draftMovements = await GetDraftMovements(draftBulkUpload.Id, movements);
+
+                    foreach (var draftMovement in draftMovements)
+                    {
+                        context.DraftMovements.Add(draftMovement);
+
+                        await context.SaveChangesAsync();
+                    }
+
+                    result = draftBulkUpload.Id;
+                }
+                catch
+                {
+                    transaction.Rollback();
+                    throw;
+                }
+
+                transaction.Commit();
+            }
+
+            return result;
+        }
+
         public async Task<IEnumerable<DraftMovement>> GetDraftMovementById(Guid draftBulkUploadId)
         {
             return await context.DraftMovements.Where(m => m.BulkUploadId == draftBulkUploadId).ToArrayAsync();
@@ -78,6 +117,27 @@
         }
 
         private static async Task<IEnumerable<DraftMovement>> GetDraftMovements(Guid draftMovementId, List<PrenotificationMovement> movements)
+        {
+            return await Task.Run(() =>
+            {
+                return movements.Select(movement =>
+                {
+                    var shipmentNumber = movement.ShipmentNumber.HasValue ? movement.ShipmentNumber.Value : 0;
+                    var quantity = movement.Quantity.HasValue ? movement.Quantity.Value : 0m;
+                    var units = movement.Unit.HasValue ? movement.Unit.Value : default(ShipmentQuantityUnits);
+                    var shipmentDate = movement.ActualDateOfShipment.HasValue
+                        ? movement.ActualDateOfShipment.Value
+                        : default(DateTime);
+                    var packagingInfos = movement.PackagingTypes.Select(p => new DraftPackagingInfo() { PackagingType = p }).ToList();
+
+                    return new DraftMovement(draftMovementId, movement.NotificationNumber,
+                            shipmentNumber, quantity, units,
+                            shipmentDate, packagingInfos);
+                });
+            });
+        }
+
+        private static async Task<IEnumerable<DraftMovement>> GetDraftMovements(Guid draftMovementId, List<ReceiptRecoveryMovement> movements)
         {
             return await Task.Run(() =>
             {
