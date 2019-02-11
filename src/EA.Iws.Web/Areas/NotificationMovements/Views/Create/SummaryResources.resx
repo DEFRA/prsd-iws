@@ -138,8 +138,11 @@
   <data name="PackagingTypes" xml:space="preserve">
     <value>Packaging type(s)</value>
   </data>
+  <data name="PrintAnnex" xml:space="preserve">
+    <value>If applicable, print a copy of the intended carrier annex for each shipment</value>
+  </data>
   <data name="PrintTheDocuments" xml:space="preserve">
-    <value>Print the documents</value>
+    <value>Print the movement document(s)</value>
   </data>
   <data name="Quantity" xml:space="preserve">
     <value>Quantity</value>
@@ -148,7 +151,7 @@
     <value>Shipment number(s)</value>
   </data>
   <data name="SignIt" xml:space="preserve">
-    <value>Sign the completed documents</value>
+    <value>Sign the completed document(s)</value>
   </data>
   <data name="SummaryParagraph" xml:space="preserve">
     <value>You've created IWS movement documents for {0} shipments, totalling {1}.</value>
@@ -160,7 +163,7 @@
     <value>You can {0} now, or do it later by visiting your {1} page.</value>
   </data>
   <data name="UploadTheSignedDocuments" xml:space="preserve">
-    <value>Upload your signed documents</value>
+    <value>Upload your signed document(s)</value>
   </data>
   <data name="UploadTheSignedFilesNow" xml:space="preserve">
     <value>upload your signed documents</value>

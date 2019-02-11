@@ -124,7 +124,16 @@ namespace EA.Iws.Web.Areas.NotificationMovements.Views.Create {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Print the documents.
+        ///   Looks up a localized string similar to If applicable, print a copy of the intended carrier annex for each shipment.
+        /// </summary>
+        public static string PrintAnnex {
+            get {
+                return ResourceManager.GetString("PrintAnnex", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Print the movement document(s).
         /// </summary>
         public static string PrintTheDocuments {
             get {
@@ -151,7 +160,7 @@ namespace EA.Iws.Web.Areas.NotificationMovements.Views.Create {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Sign the completed documents.
+        ///   Looks up a localized string similar to Sign the completed document(s).
         /// </summary>
         public static string SignIt {
             get {
@@ -187,7 +196,7 @@ namespace EA.Iws.Web.Areas.NotificationMovements.Views.Create {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Upload your signed documents.
+        ///   Looks up a localized string similar to Upload your signed document(s).
         /// </summary>
         public static string UploadTheSignedDocuments {
             get {
