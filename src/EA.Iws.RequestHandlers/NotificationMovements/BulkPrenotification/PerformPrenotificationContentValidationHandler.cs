@@ -88,7 +88,10 @@
                 return shipments;
             }).ThenBy(r => r.Rule).ToList();
 
-            orderedRules.Add(lastRuleResult);
+            if (lastRuleResult != null)
+            {
+                orderedRules.Add(lastRuleResult);
+            }
 
             return orderedRules;
         }
