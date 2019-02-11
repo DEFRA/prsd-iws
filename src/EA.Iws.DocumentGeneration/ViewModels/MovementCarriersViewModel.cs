@@ -112,7 +112,7 @@
         private void SetPropertiesForTwoCarriers(List<MovementCarrier> movementCarriersList)
         {
             AddCarrierToFirstFields(movementCarriersList[0].Carrier);
-            AddCarrierToLastFields(movementCarriersList[1].Carrier);
+            AddCarrierToSecondFields(movementCarriersList[1].Carrier);
         }
 
         private void SetPropertiesForThreeCarriers(List<MovementCarrier> movementCarriersList)
