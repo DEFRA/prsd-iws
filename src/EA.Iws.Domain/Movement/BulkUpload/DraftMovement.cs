@@ -19,7 +19,7 @@
         public ShipmentQuantityUnits Units { get; set; }
 
         // Actual Date of Shipment
-        public DateTime Date { get; set; }
+        public DateTime? Date { get; set; }
 
         public IEnumerable<DraftPackagingInfo> PackagingInfos
         {
