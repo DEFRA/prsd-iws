@@ -49,7 +49,7 @@
                     foreach (var draftMovement in draftMovements)
                     {
                         var movement = movementFactory.Create(message.NotificationId, draftMovement.ShipmentNumber,
-                            draftMovement.Date);
+                            draftMovement.Date.Value);
 
                         context.Movements.Add(movement);
 

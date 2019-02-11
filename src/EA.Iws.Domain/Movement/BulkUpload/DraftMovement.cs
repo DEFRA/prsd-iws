@@ -18,7 +18,8 @@
 
         public ShipmentQuantityUnits Units { get; set; }
 
-        public DateTime Date { get; set; }
+        // Actual Date of Shipment
+        public DateTime? Date { get; set; }
 
         public IEnumerable<DraftPackagingInfo> PackagingInfos
         {
@@ -26,6 +27,10 @@
         }
 
         protected virtual ICollection<DraftPackagingInfo> PackagingInfosCollection { get; set; }
+
+        public DateTime? ReceivedDate { get; set; }
+
+        public DateTime? RecoveredDisposedDate { get; set; }
 
         public DraftMovement()
         {
@@ -47,6 +52,23 @@
             Date = date;
 
             PackagingInfosCollection = packagingInfos;
+        }
+
+        public DraftMovement(Guid draftMovementId,
+            string notificationNumber,
+            int shipmentNumber,
+            DateTime? receivedDate,
+            decimal quantity,
+            ShipmentQuantityUnits units,
+            DateTime? recoveredDisposedDate)
+        {
+            BulkUploadId = draftMovementId;
+            NotificationNumber = notificationNumber;
+            ShipmentNumber = shipmentNumber;
+            ReceivedDate = receivedDate;
+            Quantity = quantity;
+            Units = units;
+            RecoveredDisposedDate = recoveredDisposedDate;
         }
     }
 }
