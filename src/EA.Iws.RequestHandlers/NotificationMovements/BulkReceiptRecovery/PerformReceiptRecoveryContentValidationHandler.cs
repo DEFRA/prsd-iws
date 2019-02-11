@@ -55,14 +55,11 @@
 
             if (maxShipments.MessageLevel == MessageLevel.Success)
             {
-                var missingShipmentNumbers = await GetMissingShipmentNumbers(movements);
-                var missingNotificationNumbers = await GetMissingNotificationNumbers(movements);
+                var missingNotificationNumbersOrShipmentNumbers = await GetMissingNotificationNumbersOrShipmentNumbers(movements);
 
-                rules.Add(missingShipmentNumbers);
-                rules.Add(missingNotificationNumbers);
+                rules.Add(missingNotificationNumbersOrShipmentNumbers);
 
-                if (missingShipmentNumbers.MessageLevel == MessageLevel.Success &&
-                    missingNotificationNumbers.MessageLevel == MessageLevel.Success)
+                if (missingNotificationNumbersOrShipmentNumbers.MessageLevel == MessageLevel.Success)
                 {
                     var missingData = await GetMissingReceiptDataResult(movements, notificationId);
 
@@ -99,47 +96,20 @@
             });
         }
 
-        private static async Task<ReceiptRecoveryContentRuleResult<ReceiptRecoveryContentRules>> GetMissingShipmentNumbers(
+        private static async Task<ReceiptRecoveryContentRuleResult<ReceiptRecoveryContentRules>> GetMissingNotificationNumbersOrShipmentNumbers(
             IReadOnlyCollection<ReceiptRecoveryMovement> movements)
         {
             return await Task.Run(() =>
             {
-                var result = movements.Any(m => m.MissingShipmentNumber || !m.ShipmentNumber.HasValue)
+                var result = movements.Any(m => m.MissingShipmentNumber || !m.ShipmentNumber.HasValue 
+                    || m.MissingNotificationNumber || string.IsNullOrEmpty(m.NotificationNumber))
                     ? MessageLevel.Error
                     : MessageLevel.Success;
 
-                var errorMessage =
-                    string.Format(
-                        Prsd.Core.Helpers.EnumHelper.GetDisplayName(ReceiptRecoveryContentRules.MissingShipmentNumbers),
-                        movements.Count);
+                var errorMessage = Prsd.Core.Helpers.EnumHelper.GetDisplayName(ReceiptRecoveryContentRules.InvalidNotificationOrShipmentNumbers);
 
-                return new ReceiptRecoveryContentRuleResult<ReceiptRecoveryContentRules>(ReceiptRecoveryContentRules.MissingShipmentNumbers,
+                return new ReceiptRecoveryContentRuleResult<ReceiptRecoveryContentRules>(ReceiptRecoveryContentRules.InvalidNotificationOrShipmentNumbers,
                     result, errorMessage);
-            });
-        }
-
-        private static async Task<ReceiptRecoveryContentRuleResult<ReceiptRecoveryContentRules>> GetMissingNotificationNumbers(
-            IReadOnlyCollection<ReceiptRecoveryMovement> movements)
-        {
-            return await Task.Run(() =>
-            {
-                var result = MessageLevel.Success;
-                var missingNotificationNumberShipmentNumbers = new List<string>();
-
-                foreach (var movement in movements)
-                {
-                    // Only report an error if record has a shipment number, otherwise record will be picked up by the GetMissingShipmentNumbers method
-                    if (movement.ShipmentNumber.HasValue && movement.MissingNotificationNumber)
-                    {
-                        result = MessageLevel.Error;
-                        missingNotificationNumberShipmentNumbers.Add(movement.ShipmentNumber.ToString());
-                    }
-                }
-
-                var shipmentNumbers = string.Join(", ", missingNotificationNumberShipmentNumbers);
-                var errorMessage = string.Format(Prsd.Core.Helpers.EnumHelper.GetDisplayName(ReceiptRecoveryContentRules.MissingNotificationNumber), shipmentNumbers);
-
-                return new ReceiptRecoveryContentRuleResult<ReceiptRecoveryContentRules>(ReceiptRecoveryContentRules.MissingNotificationNumber, result, errorMessage);
             });
         }
 

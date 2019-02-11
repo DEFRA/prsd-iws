@@ -37,6 +37,10 @@
             {
                 number = NotificationNumberRegex.Replace(number, "$1 $2 $3");
             }
+            else
+            {
+                number = string.Empty;
+            }
 
             return number;
         }
