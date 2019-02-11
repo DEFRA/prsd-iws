@@ -259,6 +259,7 @@
     <Compile Include="Repositories\InternalUserRepository.cs" />
     <Compile Include="Repositories\KeyDatesOverrideRepository.cs" />
     <Compile Include="Repositories\MeansOfTransportRepository.cs" />
+    <Compile Include="Repositories\MovementCarrierRepository.cs" />
     <Compile Include="Repositories\MovementDateHistoryRepository.cs" />
     <Compile Include="Repositories\MovementDetailsRepository.cs" />
     <Compile Include="Repositories\MovementRejectionRepository.cs" />
