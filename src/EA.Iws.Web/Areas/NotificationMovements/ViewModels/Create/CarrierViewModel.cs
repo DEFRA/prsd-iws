@@ -1,12 +1,14 @@
 ﻿namespace EA.Iws.Web.Areas.NotificationMovements.ViewModels.Create
 {
-    using Core.AddressBook;
-    using Core.Carriers;
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     using System.Linq;
     using System.Web.Mvc;
-    public class CarrierViewModel
+    using Core.AddressBook;
+    using Core.Carriers;
+
+    public class CarrierViewModel : IValidatableObject
     {
         public CarrierViewModel()
         {
@@ -20,6 +22,14 @@
                 Text = c.Business.Name + ", " + c.Address.ToString(),
                 Value = c.Id.ToString()
             }), "Value", "Text", SelectedCarriersId);
+        }
+
+        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+        {
+            if (SelectedCarriers.Count == 0)
+            {
+                yield return new ValidationResult("Select a carrier from the list");
+            }
         }
 
         public Guid SelectedCarrier { get; set; }
