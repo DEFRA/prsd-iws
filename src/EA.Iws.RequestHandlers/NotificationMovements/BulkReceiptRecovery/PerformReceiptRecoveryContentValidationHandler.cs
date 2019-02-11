@@ -4,10 +4,10 @@
     using System.Collections.Generic;
     using System.Data;
     using System.Linq;
-    using System.Text.RegularExpressions;
     using System.Threading.Tasks;
     using Core.Movement.BulkReceiptRecovery;
     using Core.Rules;
+    using Domain.Movement.BulkUpload;
     using Prsd.Core.Mapper;
     using Prsd.Core.Mediator;
     using Requests.NotificationMovements.BulkUpload;
@@ -16,13 +16,16 @@
     {
         private readonly IEnumerable<IReceiptRecoveryContentRule> contentRules;
         private readonly IMap<DataTable, List<ReceiptRecoveryMovement>> mapper;
+        private readonly IDraftMovementRepository repository;
         private const int MaxShipments = 50;
 
         public PerformReceiptRecoveryContentValidationHandler(IEnumerable<IReceiptRecoveryContentRule> contentRules,
-            IMap<DataTable, List<ReceiptRecoveryMovement>> mapper)
+            IMap<DataTable, List<ReceiptRecoveryMovement>> mapper,
+            IDraftMovementRepository repository)
         {
             this.contentRules = contentRules;
             this.mapper = mapper;
+            this.repository = repository;
         }
 
         public async Task<ReceiptRecoveryRulesSummary> HandleAsync(PerformReceiptRecoveryContentValidation message)
@@ -38,7 +41,7 @@
                 result.ShipmentNumbers =
                     movements.Where(m => m.ShipmentNumber.HasValue).Select(m => m.ShipmentNumber.Value);
 
-                //result.DraftBulkUploadId = await repository.Add(message.NotificationId, movements, message.FileName);
+                result.DraftBulkUploadId = await repository.AddReceiptRecovery(message.NotificationId, movements, message.FileName);
             }
 
             return result;
