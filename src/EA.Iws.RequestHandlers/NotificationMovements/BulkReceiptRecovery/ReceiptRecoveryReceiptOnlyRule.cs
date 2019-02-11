@@ -29,6 +29,11 @@
             {
                 var actualMovement = actualMovements.FirstOrDefault(p => p.Number == movement.ShipmentNumber);
 
+                if (actualMovement == null)
+                {
+                    continue;
+                }
+
                 if (actualMovement.Status == MovementStatus.Captured)
                 {
                     if (actualMovement.Date.Date < DateTime.UtcNow.Date)

@@ -34,7 +34,7 @@
         public async Task ShipmentsArePrenotified_Success()
         {
             A.CallTo(() => movementRepo.GetAllMovements(notificationId)).Returns(GetRepoMovements(true, DateTime.Now));
-            var result = await rule.GetResult(GetTestData(), notificationId);
+            var result = await rule.GetResult(GetTestData(false), notificationId);
 
             Assert.Equal(ReceiptRecoveryContentRules.ReceivedRecoveredValidation, result.Rule);
             Assert.Equal(MessageLevel.Success, result.MessageLevel);
@@ -44,7 +44,7 @@
         public async Task ShipmentNotPrenotified_CapturedButDateInPast_Failure()
         {
             A.CallTo(() => movementRepo.GetAllMovements(notificationId)).Returns(GetRepoMovements(false, DateTime.Now.AddDays(-1)));
-            var result = await rule.GetResult(GetTestData(), notificationId);
+            var result = await rule.GetResult(GetTestData(false), notificationId);
 
             Assert.Equal(ReceiptRecoveryContentRules.ReceivedRecoveredValidation, result.Rule);
             Assert.Equal(MessageLevel.Error, result.MessageLevel);
@@ -54,19 +54,29 @@
         public async Task ShipmentNotPrenotified_CapturedButDateInFuture_Success()
         {
             A.CallTo(() => movementRepo.GetAllMovements(notificationId)).Returns(GetRepoMovements(false, DateTime.Now));
-            var result = await rule.GetResult(GetTestData(), notificationId);
+            var result = await rule.GetResult(GetTestData(false), notificationId);
 
             Assert.Equal(ReceiptRecoveryContentRules.ReceivedRecoveredValidation, result.Rule);
             Assert.Equal(MessageLevel.Success, result.MessageLevel);
         }
 
-        private List<ReceiptRecoveryMovement> GetTestData()
+        [Fact]
+        public async Task ShipmentDoesntExist_Fail()
+        {
+            A.CallTo(() => movementRepo.GetAllMovements(notificationId)).Returns(GetRepoMovements(false, DateTime.Now));
+            var result = await rule.GetResult(GetTestData(true), notificationId);
+
+            Assert.Equal(ReceiptRecoveryContentRules.ReceivedRecoveredValidation, result.Rule);
+            Assert.Equal(MessageLevel.Error, result.MessageLevel);
+        }
+
+        private List<ReceiptRecoveryMovement> GetTestData(bool nonExistingShipment)
         { 
             return new List<ReceiptRecoveryMovement>()
             {
                 new ReceiptRecoveryMovement()
                 {
-                    ShipmentNumber = 1,
+                    ShipmentNumber = nonExistingShipment ? 9 : 1,
                     ReceivedDate = DateTime.Now,
                     RecoveredDisposedDate = DateTime.Now
                 },

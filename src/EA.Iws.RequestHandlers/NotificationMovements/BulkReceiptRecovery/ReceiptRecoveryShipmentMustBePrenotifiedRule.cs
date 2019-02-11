@@ -34,26 +34,34 @@
             {
                 var actualMovement = actualMovements.FirstOrDefault(p => p.Number == movement.ShipmentNumber);
 
-                if (actualMovement.Status == MovementStatus.Captured)
-                {
-                    if (actualMovement.Date.Date < DateTime.UtcNow.Date)
-                    {
-                        result = MessageLevel.Error;
-                        shipments.Add(movement.ShipmentNumber.GetValueOrDefault());
-                    }
-                }           
-                else if (actualMovement.Status == MovementStatus.Submitted)
-                {
-                    if (actualMovement.Date.Date > DateTime.UtcNow.Date)
-                    {
-                        result = MessageLevel.Error;
-                        shipments.Add(movement.ShipmentNumber.GetValueOrDefault());
-                    }
-                }
-                else
+                if (actualMovement == null)
                 {
                     result = MessageLevel.Error;
                     shipments.Add(movement.ShipmentNumber.GetValueOrDefault());
+                }
+                else
+                {
+                    if (actualMovement.Status == MovementStatus.Captured)
+                    {
+                        if (actualMovement.Date.Date < DateTime.UtcNow.Date)
+                        {
+                            result = MessageLevel.Error;
+                            shipments.Add(movement.ShipmentNumber.GetValueOrDefault());
+                        }
+                    }
+                    else if (actualMovement.Status == MovementStatus.Submitted)
+                    {
+                        if (actualMovement.Date.Date > DateTime.UtcNow.Date)
+                        {
+                            result = MessageLevel.Error;
+                            shipments.Add(movement.ShipmentNumber.GetValueOrDefault());
+                        }
+                    }
+                    else
+                    {
+                        result = MessageLevel.Error;
+                        shipments.Add(movement.ShipmentNumber.GetValueOrDefault());
+                    }
                 }
             }
 
