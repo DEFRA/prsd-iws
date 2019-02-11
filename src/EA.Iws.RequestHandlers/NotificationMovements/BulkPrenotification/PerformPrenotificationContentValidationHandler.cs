@@ -42,7 +42,7 @@
                 result.ShipmentNumbers =
                     movements.Where(m => m.ShipmentNumber.HasValue).Select(m => m.ShipmentNumber.Value);
 
-                result.DraftBulkUploadId = await repository.Add(message.NotificationId, movements, message.FileName);
+                result.DraftBulkUploadId = await repository.AddPrenotifications(message.NotificationId, movements, message.FileName);
             }
 
             return result;

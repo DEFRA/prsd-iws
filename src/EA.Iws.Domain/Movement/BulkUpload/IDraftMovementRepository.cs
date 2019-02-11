@@ -7,7 +7,7 @@
 
     public interface IDraftMovementRepository
     {
-        Task<Guid> Add(Guid notificationId, List<PrenotificationMovement> movements, string fileName);
+        Task<Guid> AddPrenotifications(Guid notificationId, List<PrenotificationMovement> movements, string fileName);
 
         Task<IEnumerable<DraftMovement>> GetDraftMovementById(Guid draftBulkUploadId);
 

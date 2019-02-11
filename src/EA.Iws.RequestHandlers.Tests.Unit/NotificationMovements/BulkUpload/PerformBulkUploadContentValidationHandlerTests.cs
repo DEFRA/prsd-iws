@@ -140,7 +140,7 @@
             var response = await handler.HandleAsync(message);
 
             Assert.False(response.IsContentRulesSuccess);
-            A.CallTo(() => repository.Add(A<Guid>.Ignored, A<List<PrenotificationMovement>>.Ignored, "Test")).MustNotHaveHappened();
+            A.CallTo(() => repository.AddPrenotifications(A<Guid>.Ignored, A<List<PrenotificationMovement>>.Ignored, "Test")).MustNotHaveHappened();
         }
 
         [Fact]
@@ -171,7 +171,7 @@
             var response = await handler.HandleAsync(message);
 
             Assert.True(response.IsContentRulesSuccess);
-            A.CallTo(() => repository.Add(A<Guid>.Ignored, A<List<PrenotificationMovement>>.Ignored, "Test"))
+            A.CallTo(() => repository.AddPrenotifications(A<Guid>.Ignored, A<List<PrenotificationMovement>>.Ignored, "Test"))
                 .MustHaveHappened(Repeated.Exactly.Once);
         }
     }
