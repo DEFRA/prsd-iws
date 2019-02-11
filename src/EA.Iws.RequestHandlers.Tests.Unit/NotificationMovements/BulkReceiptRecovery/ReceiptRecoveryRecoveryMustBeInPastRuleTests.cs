@@ -7,6 +7,7 @@
     using Core.Rules;
     using Domain;
     using Domain.Movement;
+    using Domain.NotificationApplication;
     using FakeItEasy;
     using RequestHandlers.NotificationMovements.BulkReceiptRecovery;
     using TestHelpers.DomainFakes;
@@ -16,11 +17,15 @@
     {
         private readonly ReceiptRecoveryRecoveryDateInFutureRule rule;
         private readonly Guid notificationId;
+        private readonly INotificationApplicationRepository notificationRepo;
 
         public ReceiptRecoveryRecoveryMustBeInPastRuleTests()
         {
-            rule = new ReceiptRecoveryRecoveryDateInFutureRule();
+            notificationRepo = A.Fake<INotificationApplicationRepository>();
+            rule = new ReceiptRecoveryRecoveryDateInFutureRule(notificationRepo);
             notificationId = Guid.NewGuid();
+
+            A.CallTo(() => notificationRepo.GetById(notificationId)).Returns(A.Fake<NotificationApplication>());
         }
 
         [Fact]

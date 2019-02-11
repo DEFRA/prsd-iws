@@ -7,8 +7,10 @@
     using System.Web.Routing;
     using Areas.NotificationMovements.Controllers;
     using Areas.NotificationMovements.ViewModels.ReceiptRecoveryBulkUpload;
+    using Core.Shared;
     using FakeItEasy;
     using Prsd.Core.Mediator;
+    using Requests.Notification;
     using Web.Infrastructure;
     using Web.Infrastructure.BulkReceiptRecovery;
     using Web.ViewModels.Shared;
@@ -18,6 +20,7 @@
     {
         private readonly ReceiptRecoveryBulkUploadController controller;
         private readonly IMediator mediator;
+        private NotificationType type = NotificationType.Recovery;
 
         public ReceiptRecoverBulkUploadControllerTests()
         {
@@ -32,14 +35,15 @@
 
             A.CallTo(() => request.Url).Returns(new Uri("https://test.com"));
             A.CallTo(() => context.Request).Returns(request);
+            A.CallTo(() => mediator.SendAsync(A<GetNotificationBasicInfo>._)).Returns(A.Fake<NotificationBasicInfo>());
 
             controller.ControllerContext = new ControllerContext(context, new RouteData(), controller);
         }
 
         [Fact]
-        public void GetIndex_ReturnsView()
+        public async Task GetIndex_ReturnsView()
         {
-            var result = controller.Index(Guid.NewGuid()) as ViewResult;
+            var result = await controller.Index(Guid.NewGuid()) as ViewResult;
 
             Assert.NotNull(result);
             Assert.Equal("Index", result.ViewName);
@@ -48,7 +52,7 @@
         [Fact]
         public void PostIndex_RedirectsToUpload()
         {
-            var model = new ReceiptRecoveryBulkUploadViewModel(Guid.NewGuid());
+            var model = new ReceiptRecoveryBulkUploadViewModel(Guid.NewGuid(), type);
 
             var result = controller.Index(model.NotificationId, model) as RedirectToRouteResult;
 
@@ -59,7 +63,7 @@
         [Fact]
         public async Task GetUpload_ReturnsView()
         {
-            var model = new ReceiptRecoveryBulkUploadViewModel(Guid.NewGuid());
+            var model = new ReceiptRecoveryBulkUploadViewModel(Guid.NewGuid(), type);
             model.File = A.Fake<HttpPostedFileBase>();
             var result = await controller.Upload(Guid.NewGuid(), model) as ViewResult;
 
@@ -72,7 +76,7 @@
         {
             controller.ModelState.AddModelError("File", "Missing file");
 
-            var model = new ReceiptRecoveryBulkUploadViewModel(Guid.NewGuid());
+            var model = new ReceiptRecoveryBulkUploadViewModel(Guid.NewGuid(), type);
             var result = await controller.Upload(model.NotificationId, model) as ViewResult;
 
             Assert.NotNull(result);
@@ -80,9 +84,9 @@
         }
 
         [Fact]
-        public void GetWarning_ReturnsView()
+        public async Task GetWarning_ReturnsView()
         {
-            var result = controller.Warning(Guid.NewGuid()) as ViewResult;
+            var result = await controller.Warning(Guid.NewGuid()) as ViewResult;
 
             Assert.NotNull(result);
             Assert.Equal(string.Empty, result.ViewName);
@@ -91,7 +95,7 @@
         [Fact]
         public void PostWarning_LeaveUpload_RedirectsToOptions()
         {
-            var model = new WarningChoiceViewModel(Guid.NewGuid());
+            var model = new WarningChoiceViewModel(Guid.NewGuid(), type);
 
             var warningChoice = RadioButtonStringCollectionViewModel.CreateFromEnum(WarningChoicesList.Leave);
 

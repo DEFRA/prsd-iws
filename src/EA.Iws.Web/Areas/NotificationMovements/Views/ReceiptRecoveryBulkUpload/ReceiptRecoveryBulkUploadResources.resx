@@ -124,10 +124,10 @@
     <value>Start</value>
   </data>
   <data name="StartHeader" xml:space="preserve">
-    <value>Bulk upload of receipt and/or recovery data</value>
+    <value>Bulk upload of receipt and/or {0} data</value>
   </data>
   <data name="StartText1" xml:space="preserve">
-    <value>Upload multiple receipt and/or recovery data and shipment movement documents to your notification.</value>
+    <value>Upload multiple receipt and/or {0} data and shipment movement documents to your notification.</value>
   </data>
   <data name="StartText2" xml:space="preserve">
     <value>to avoid any errors in your data.</value>
@@ -139,7 +139,7 @@
     <value>Download the data file templates</value>
   </data>
   <data name="UploadReceiptRecoveryTabTitle" xml:space="preserve">
-    <value>Receipt / Recovery Bulk Upload</value>
+    <value>Receipt / {0} Bulk Upload</value>
   </data>
   <data name="UploadReceiptRecoveryList1" xml:space="preserve">
     <value>The data file should not exceed 2GB in size.</value>
@@ -151,7 +151,7 @@
     <value>Only contain shipment records for shipments that have already been prenotified.</value>
   </data>
   <data name="UploadReceiptRecoveryList4" xml:space="preserve">
-    <value>No duplicate receipt or recovery information will be accepted.</value>
+    <value>No duplicate receipt or {0} information will be accepted.</value>
   </data>
   <data name="UploadReceiptRecoveryList5" xml:space="preserve">
     <value>The tonnage quantity must not exceed 4 decimal places.</value>
@@ -160,22 +160,22 @@
     <value>The quantity unit of measurement must meet the criteria permitted on the notification.</value>
   </data>
   <data name="UploadReceiptRecoveryText1" xml:space="preserve">
-    <value>Upload the receipt and/or recovery data file in an Excel or .CSV format.</value>
+    <value>Upload the receipt and/or {0} data file in an Excel or .CSV format.</value>
   </data>
   <data name="UploadReceiptRecoveryText2" xml:space="preserve">
     <value>Make sure all data matches the correct template format to avoid validation errors.</value>
   </data>
   <data name="UploadReceiptRecoveryTitle" xml:space="preserve">
-    <value>Bulk upload of receipt and/or recovery data</value>
+    <value>Bulk upload of receipt and/or {0} data</value>
   </data>
   <data name="WarningHeader" xml:space="preserve">
     <value>You haven't added any shipment movement documents</value>
   </data>
   <data name="WarningText1" xml:space="preserve">
-    <value>You must upload shipment movement documents with your receipt and/or recovery data file to finish the process.</value>
+    <value>You must upload shipment movement documents with your receipt and/or {0} data file to finish the process.</value>
   </data>
   <data name="WarningText2" xml:space="preserve">
-    <value>If you leave the process before adding your accompanying shipment movement documents, your bulk upload of receipt and/or recovery data will not be saved.</value>
+    <value>If you leave the process before adding your accompanying shipment movement documents, your bulk upload of receipt and/or {0} data will not be saved.</value>
   </data>
   <data name="ShipmentMovementsSuccessText" xml:space="preserve">
     <value>There were no errors within the {filename} data file.</value>
@@ -202,13 +202,13 @@
     <value>Amend the actual date of shipment to be greater than three working days</value>
   </data>
   <data name="ErrorsContactUs" xml:space="preserve">
-    <value>You must resolve all errors listed below before uploading your prenotification data again. If you experience further problems, contact askshipments@environment-agency.gov.uk for further advice.</value>
+    <value>You must resolve all errors listed below before uploading your receipt and/or {0} data again. If you experience further problems, contact askshipments@environment-agency.gov.uk for further advice.</value>
   </data>
   <data name="ErrorsFileAdvice" xml:space="preserve">
     <value>The errors listed below are problems found during the validation of the .xlsx or. csv file content. These errors prevent the service from accepting your data, therefore all errors must be amended before attempting to re-upload your data.</value>
   </data>
   <data name="ErrorsHeaderText" xml:space="preserve">
-    <value>Your prenotification data file contains {0} errors</value>
+    <value>Your receipt and/or {0} data file contains {1} errors</value>
   </data>
   <data name="ErrorsTitle" xml:space="preserve">
     <value>Bulk upload errors</value>

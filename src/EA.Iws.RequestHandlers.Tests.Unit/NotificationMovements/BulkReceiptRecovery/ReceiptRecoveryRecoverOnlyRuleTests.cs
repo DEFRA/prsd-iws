@@ -7,6 +7,7 @@
     using Core.Rules;
     using Domain;
     using Domain.Movement;
+    using Domain.NotificationApplication;
     using FakeItEasy;
     using RequestHandlers.NotificationMovements.BulkReceiptRecovery;
     using TestHelpers.DomainFakes;
@@ -16,19 +17,23 @@
     {
         private readonly ReceiptRecoveryRecoveryOnlyRule rule;
         private readonly Guid notificationId;
-        private readonly IMovementRepository repo;
+        private readonly IMovementRepository movementRepo;
+        private readonly INotificationApplicationRepository notificationRepo;
 
         public ReceiptRecoveryRecoverOnlyRuleTests()
         {
-            repo = A.Fake<IMovementRepository>();
-            rule = new ReceiptRecoveryRecoveryOnlyRule(repo);
+            movementRepo = A.Fake<IMovementRepository>();
+            notificationRepo = A.Fake<INotificationApplicationRepository>();
+            rule = new ReceiptRecoveryRecoveryOnlyRule(movementRepo, notificationRepo);
             notificationId = Guid.NewGuid();
+
+            A.CallTo(() => notificationRepo.GetById(notificationId)).Returns(A.Fake<NotificationApplication>());
         }
 
         [Fact]
         public async Task RecoverOnly_Received_Success()
         {
-            A.CallTo(() => repo.GetAllMovements(notificationId)).Returns(GetRepoMovements(true));
+            A.CallTo(() => movementRepo.GetAllMovements(notificationId)).Returns(GetRepoMovements(true));
             var result = await rule.GetResult(GetTestData(false), notificationId);
 
             Assert.Equal(ReceiptRecoveryContentRules.RecoveredValidation, result.Rule);
@@ -38,7 +43,7 @@
         [Fact]
         public async Task RecoverOnly_NotReceived_Failure()
         {
-            A.CallTo(() => repo.GetAllMovements(notificationId)).Returns(GetRepoMovements(false));
+            A.CallTo(() => movementRepo.GetAllMovements(notificationId)).Returns(GetRepoMovements(false));
             var result = await rule.GetResult(GetTestData(true), notificationId);
 
             Assert.Equal(ReceiptRecoveryContentRules.RecoveredValidation, result.Rule);

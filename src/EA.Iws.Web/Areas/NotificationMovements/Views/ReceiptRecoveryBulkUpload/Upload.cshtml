@@ -1,16 +1,19 @@
 ﻿@using Resource = EA.Iws.Web.Areas.NotificationMovements.Views.ReceiptRecoveryBulkUpload.ReceiptRecoveryBulkUploadResources
+@using EA.Iws.Core.Shared
 @model EA.Iws.Web.Areas.NotificationMovements.ViewModels.ReceiptRecoveryBulkUpload.ReceiptRecoveryBulkUploadViewModel
 
 @{
-    ViewBag.Title = @Resource.UploadReceiptRecoveryTabTitle;
+    var typeText = Model.NotificationType == NotificationType.Disposal ? "disposal" : "recovery";
+    ViewBag.Title = string.Format(Resource.UploadReceiptRecoveryTabTitle, typeText);
     Layout = "~/Views/Shared/_Layout.GovUK.Sections.cshtml";
+
 }
 
 <div class="grid-row">
     <div class="column-full">
         <div>
-            <h1 class="heading-large">@Resource.UploadReceiptRecoveryTitle</h1>
-            <p>@Resource.UploadReceiptRecoveryText1</p>
+            <h1 class="heading-large">@string.Format(Resource.UploadReceiptRecoveryTitle, typeText)</h1>
+            <p>@string.Format(Resource.UploadReceiptRecoveryText1, typeText)</p>
             <p>@Resource.UploadReceiptRecoveryText2</p>
             <p>
                 <ul class="list-bullet grey-text">
@@ -18,7 +21,7 @@
                     <li>@Resource.UploadReceiptRecoveryList1</li>
                     <li>@Resource.UploadReceiptRecoveryList2</li>
                     <li>@Resource.UploadReceiptRecoveryList3</li>
-                    <li>@Resource.UploadReceiptRecoveryList4</li>
+                    <li>@string.Format(Resource.UploadReceiptRecoveryList4, typeText)</li>
                     <li>@Resource.UploadReceiptRecoveryList5</li>
                     <li>@Resource.UploadReceiptRecoveryList6</li>
                 </ul>
