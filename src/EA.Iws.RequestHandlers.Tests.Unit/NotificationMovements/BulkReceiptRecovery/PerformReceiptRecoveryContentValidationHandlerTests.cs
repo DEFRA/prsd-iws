@@ -60,7 +60,9 @@
                 new ReceiptRecoveryMovement()
                 {
                     ShipmentNumber = null,
-                    MissingShipmentNumber = true
+                    MissingShipmentNumber = true,
+                    NotificationNumber = "GB 0001 001234",
+                    MissingNotificationNumber = false
                 }
             };
 
@@ -82,7 +84,34 @@
             {
                 new ReceiptRecoveryMovement()
                 {
+                    ShipmentNumber = 1,
+                    MissingShipmentNumber = false,
                     MissingNotificationNumber = true
+                }
+            };
+
+            A.CallTo(() => mapper.Map(A<DataTable>.Ignored)).Returns(movements);
+
+            var response = await handler.HandleAsync(message);
+
+            Assert.False(response.IsContentRulesSuccess);
+        }
+
+        [Fact]
+        public async Task InvalidNotificationNumber_ContentRulesFailed()
+        {
+            var notificationId = Guid.NewGuid();
+            var summary = new ReceiptRecoveryRulesSummary();
+            var message = new PerformReceiptRecoveryContentValidation(summary, notificationId, new DataTable(), "Test", false);
+
+            var movements = new List<ReceiptRecoveryMovement>()
+            {
+                new ReceiptRecoveryMovement()
+                {
+                    ShipmentNumber = 1,
+                    MissingShipmentNumber = false,
+                    NotificationNumber = "invalid",
+                    MissingNotificationNumber = false
                 }
             };
 
