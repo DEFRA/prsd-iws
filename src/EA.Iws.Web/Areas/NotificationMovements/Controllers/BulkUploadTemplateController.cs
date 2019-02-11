@@ -30,7 +30,8 @@
             var model = new BulkUploadTemplateViewModel()
             {
                 NotificationId = data.NotificationId,
-                NotificationNumber = data.NotificationNumber
+                NotificationNumber = data.NotificationNumber,
+                NotificationType = data.NotificationType
             };
         
             return View(model);

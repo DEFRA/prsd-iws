@@ -9,6 +9,7 @@
     using Infrastructure;
     using Infrastructure.BulkReceiptRecovery;
     using Prsd.Core.Mediator;
+    using Requests.Notification;
     using ViewModels.ReceiptRecoveryBulkUpload;
 
     [Authorize]
@@ -26,11 +27,12 @@
         }
 
         [HttpGet]
-        public ActionResult Index(Guid notificationId)
+        public async Task<ActionResult> Index(Guid notificationId)
         {
             ViewBag.NotificationId = notificationId;
+            var data = await mediator.SendAsync(new GetNotificationBasicInfo(notificationId));
 
-            var model = new ReceiptRecoveryBulkUploadViewModel(notificationId);
+            var model = new ReceiptRecoveryBulkUploadViewModel(notificationId, data.NotificationType);
             return View("Index", model);
         }
 
@@ -42,9 +44,11 @@
         }
 
         [HttpGet]
-        public ActionResult Upload(Guid notificationId)
+        public async Task<ActionResult> Upload(Guid notificationId)
         {
-            var model = new ReceiptRecoveryBulkUploadViewModel(notificationId);
+            var data = await mediator.SendAsync(new GetNotificationBasicInfo(notificationId));
+
+            var model = new ReceiptRecoveryBulkUploadViewModel(notificationId, data.NotificationType);
 
             return View(model);
         }
@@ -56,7 +60,7 @@
             if (!ModelState.IsValid)
             {
                 ViewBag.NotificationId = notificationId;
-                model = new ReceiptRecoveryBulkUploadViewModel(notificationId);
+                model = new ReceiptRecoveryBulkUploadViewModel(notificationId, model.NotificationType);
                 return View(model);
             }
 
@@ -185,9 +189,10 @@
         }
 
         [HttpGet]
-        public ActionResult Warning(Guid notificationId)
+        public async Task<ActionResult> Warning(Guid notificationId)
         {
-            var model = new WarningChoiceViewModel(notificationId);
+            var data = await mediator.SendAsync(new GetNotificationBasicInfo(notificationId));
+            var model = new WarningChoiceViewModel(notificationId, data.NotificationType);
 
             return View(model);
         }

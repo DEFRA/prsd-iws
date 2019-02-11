@@ -5,6 +5,8 @@
     using System.Threading.Tasks;
     using Core.Movement.BulkReceiptRecovery;
     using Core.Rules;
+    using Domain.NotificationApplication;
+    using FakeItEasy;
     using RequestHandlers.NotificationMovements.BulkReceiptRecovery;
     using Xunit;
 
@@ -12,11 +14,14 @@
     {
         private readonly ReceiptRecoveryRecoveryDateFormatRule rule;
         private readonly Guid notificationId;
+        private readonly INotificationApplicationRepository notificationRepo;
 
         public ReceiptRecoveryRecoveryDateFormatRuleTests()
         {
-            rule = new ReceiptRecoveryRecoveryDateFormatRule();
+            notificationRepo = A.Fake<INotificationApplicationRepository>();
+            rule = new ReceiptRecoveryRecoveryDateFormatRule(notificationRepo);
             notificationId = Guid.NewGuid();
+            A.CallTo(() => notificationRepo.GetById(notificationId)).Returns(A.Fake<NotificationApplication>());
         }
 
         [Fact]

@@ -98,7 +98,7 @@ namespace EA.Iws.Web.Areas.NotificationMovements.Views.BulkUploadTemplate {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Bulk upload receipt and/or recovery template.
+        ///   Looks up a localized string similar to Bulk upload receipt and/or {0} template.
         /// </summary>
         public static string ReceiptRecoveryTemplate {
             get {

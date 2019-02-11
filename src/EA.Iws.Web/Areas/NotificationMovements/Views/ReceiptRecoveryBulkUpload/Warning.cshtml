@@ -1,15 +1,17 @@
 ﻿@using Resources = EA.Iws.Web.Areas.NotificationMovements.Views.ReceiptRecoveryBulkUpload.ReceiptRecoveryBulkUploadResources
+@using EA.Iws.Core.Shared
 @model EA.Iws.Web.Areas.NotificationMovements.ViewModels.ReceiptRecoveryBulkUpload.WarningChoiceViewModel
 
 @{
     ViewBag.Title = @Resources.UploadReceiptRecoveryTabTitle;
     Layout = "~/Views/Shared/_Layout.GovUK.Sections.cshtml";
+    var typeText = Model.NotificationType == NotificationType.Disposal ? "disposal" : "recovery";
 }
 
 <div>
-    <h1 class="heading-large">@Resources.WarningHeader</h1>
-    <p class="margin-top-30">@Resources.WarningText1</p>
-    <p class="bold-small">@Resources.WarningText2</p>
+    <h1 class="heading-large">@string.Format(Resources.WarningHeader, typeText)</h1>
+    <p class="margin-top-30">@string.Format(Resources.WarningText1, typeText)</p>
+    <p class="bold-small">@string.Format(Resources.WarningText2, typeText)</p>
 </div>
 
 @using (Html.BeginForm())

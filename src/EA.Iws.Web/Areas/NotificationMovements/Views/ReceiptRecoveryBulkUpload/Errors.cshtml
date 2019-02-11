@@ -1,18 +1,20 @@
 ﻿@using EA.Iws.Core.Movement.BulkReceiptRecovery
+@using EA.Iws.Core.Shared
 @using Resources = EA.Iws.Web.Areas.NotificationMovements.Views.ReceiptRecoveryBulkUpload.ReceiptRecoveryBulkUploadResources
 @model EA.Iws.Web.Areas.NotificationMovements.ViewModels.ReceiptRecoveryBulkUpload.ReceiptRecoveryBulkUploadViewModel
 
 @{
     ViewBag.Title = Resources.ErrorsTitle;
     Layout = "~/Views/Shared/_Layout.GovUK.Sections.cshtml";
+    var typeText = Model.NotificationType == NotificationType.Disposal ? "disposal" : "recovery";
 }
 <div class="grid-row">
     <div class="column-full">
         <header class="hgroup text">
-            <h1 class="heading-large">@string.Format(Resources.ErrorsHeaderText, Model.ErrorsCount)</h1>
+            <h1 class="heading-large">@string.Format(Resources.ErrorsHeaderText, typeText, Model.ErrorsCount)</h1>
         </header>
 
-        <p class="bold-small">@Resources.ErrorsContactUs</p>
+        <p class="bold-small">@string.Format(Resources.ErrorsContactUs, typeText)</p>
 
         <p>@Resources.ErrorsFileAdvice</p>
 
