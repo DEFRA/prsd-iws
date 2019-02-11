@@ -31,7 +31,7 @@
         }
 
         [Fact]
-        public void TwoCarriers_FirstAndLastFieldsCompleted()
+        public void TwoCarriers_FirstAndSecondFieldsCompleted()
         {
             var carriers = GetCarriersList();
 
@@ -41,8 +41,8 @@
             var vm = new MovementCarriersViewModel(carriers);
 
             AssertFirstCarrierIsDefault(vm);
-            AssertSecondCarrierIsEmpty(vm);
-            AssertLastCarrierIsDefault(vm);
+            AssertSecondCarrierIsDefault(vm);
+            AssertLastCarrierIsEmpty(vm);
             Assert.Equal(string.Empty, vm.AnnexMessage);
         }
 
