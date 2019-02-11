@@ -828,3 +828,31 @@ details {
         vertical-align: top;
     }
 }
+
+.column-nine-tenths {
+    padding: 0 15px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box
+}
+
+@media(min-width: 641px) {
+    .column-nine-tenths {
+        float:left;
+        width: 90%
+    }
+}
+
+.column-tenth {
+    padding: 0 15px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box
+}
+
+@media(min-width: 641px) {
+    .column-tenth {
+        float:left;
+        width: 10%
+    }
+}
