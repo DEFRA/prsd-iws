@@ -1,7 +1,9 @@
 ﻿namespace EA.Iws.DataAccess.Repositories
 {
     using System;
+    using System.Collections.Generic;
     using System.Data.Entity;
+    using System.Linq;
     using System.Threading.Tasks;
     using Domain.Movement;
     using Domain.Security;
@@ -20,6 +22,13 @@
         public void Add(MovementCarrier movementCarrier)
         {
             context.MovementCarrier.Add(movementCarrier);
+        }
+
+        public async Task<IEnumerable<MovementCarrier>> GetCarriersByMovementId(Guid movementId)
+        {
+            await authorization.EnsureAccessAsync(movementId);
+
+            return await context.MovementCarrier.Where(md => md.MovementId == movementId).ToArrayAsync();
         }
     }
 }
