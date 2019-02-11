@@ -353,7 +353,6 @@
                     foreach (var carrier in model.SelectedCarriers)
                     {
                         selectedCarriers.Add(carrier.Order, carrier.Id);
-                        //save & redirect
                     }
                     await mediator.SendAsync(new CreateMovementCarriers(notificationId, newMovementIds, selectedCarriers));
 

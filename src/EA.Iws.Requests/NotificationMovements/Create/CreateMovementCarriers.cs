@@ -10,8 +10,8 @@
     public class CreateMovementCarriers : IRequest<bool>
     {
         public Guid NotificationId { get; private set; }
-
-        public Guid[] MovementId { get; private set; }
+        
+        public IEnumerable<Guid> MovementId { get; private set; }
 
         public Dictionary<int, Guid> SelectedCarriers { get; private set; }
 
