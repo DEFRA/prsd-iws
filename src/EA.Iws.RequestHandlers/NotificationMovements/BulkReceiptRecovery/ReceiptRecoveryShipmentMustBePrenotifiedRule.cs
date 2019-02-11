@@ -36,17 +36,20 @@
                         result = MessageLevel.Error;
                         shipments.Add(movement.ShipmentNumber.GetValueOrDefault());
                     }
+                }           
+                else if (actualMovement.Status == MovementStatus.Submitted)
+                {
+                    if (actualMovement.Date.Date > DateTime.UtcNow.Date)
+                    {
+                        result = MessageLevel.Error;
+                        shipments.Add(movement.ShipmentNumber.GetValueOrDefault());
+                    }
                 }
-                else if (actualMovement.Status != MovementStatus.Submitted)
+                else
                 {
                     result = MessageLevel.Error;
                     shipments.Add(movement.ShipmentNumber.GetValueOrDefault());
                 }
-                else if (actualMovement.Status == MovementStatus.Submitted && actualMovement.Date.Date < DateTime.UtcNow.Date)
-                {
-                    result = MessageLevel.Error;
-                    shipments.Add(movement.ShipmentNumber.GetValueOrDefault());
-                }               
             }
 
             var shipmentNumbers = string.Join(", ", shipments);
