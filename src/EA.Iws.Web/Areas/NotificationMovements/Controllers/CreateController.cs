@@ -335,14 +335,16 @@
         public async Task<ActionResult> AddIntendedCarrier(Guid notificationId, Guid[] newMovementIds, CarrierViewModel model,
             string command, string remove, string up, string down)
         {
+            if (ModelState.IsValid)
+            {
             int selectedCarriersCount = 0;
             if (command != null && command == "addcarrier")
             {
-                selectedCarriersCount = model.SelectedCarriers.Count;
-                if (model.SelectedCarrier != null && !model.SelectedCarriers.Any(x => x.Id == model.SelectedCarrier))
+                if (model.SelectedCarrier != null && model.SelectedCarrier != Guid.Empty && !model.SelectedCarriers.Any(x => x.Id == model.SelectedCarrier))
                 {
+                    selectedCarriersCount = model.SelectedCarriers.Count;
                     model.SelectedCarriers.Add(new CarrierList { Id = model.SelectedCarrier, Order = (selectedCarriersCount + 1), OrderName = AddOrdinal((selectedCarriersCount + 1)) });
-                }              
+                }
             }
             else if (command != null && command == "continue")
             {
@@ -357,15 +359,6 @@
                     await mediator.SendAsync(new CreateMovementCarriers(notificationId, model.MovementIds, selectedCarriers));
 
                     return RedirectToAction("Summary", model.MovementIds.ToRouteValueDictionary("newMovementIds"));
-                }    
-                else
-                {
-                    if (!ModelState.IsValid)
-                    {
-                        var z = await mediator.SendAsync(new GetCarriersByNotificationId(notificationId));
-                        model.SetCarriers(z);
-                        return View(model);
-                    }
                 }
             }
             else if (remove != null)
@@ -413,10 +406,10 @@
             }
 
             TempData["SelectedCarriers"] = model.SelectedCarriers;
+            }
 
             var carriers = await mediator.SendAsync(new GetCarriersByNotificationId(notificationId));
             model.SetCarriers(carriers);
-
             return View(model);
         }
 

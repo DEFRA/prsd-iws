@@ -8,7 +8,7 @@
     using Core.AddressBook;
     using Core.Carriers;
 
-    public class CarrierViewModel : IValidatableObject
+    public class CarrierViewModel
     {
         public CarrierViewModel()
         {
@@ -24,14 +24,7 @@
             }), "Value", "Text", SelectedCarriersId);
         }
 
-        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
-        {
-            if (SelectedCarriers.Count == 0)
-            {
-                yield return new ValidationResult("Select a carrier from the list");
-            }
-        }
-
+        [Required(ErrorMessage = "Select a carrier from the list")]
         public Guid SelectedCarrier { get; set; }
 
         public SelectList CarriersList { get; set; }
