@@ -19,7 +19,8 @@
                             m =>
                                 m.ShipmentNumber.HasValue && m.ActualDateOfShipment.HasValue &&
                                 m.ActualDateOfShipment.Value.Date < SystemTime.UtcNow.Date)
-                        .Select(m => m.ShipmentNumber.Value)
+                        .GroupBy(x => x.ShipmentNumber)
+                        .Select(x => x.Key)
                         .ToList();
 
                 var result = shipments.Any() ? MessageLevel.Error : MessageLevel.Success;

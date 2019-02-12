@@ -7,32 +7,26 @@
     using Core.Movement.BulkPrenotification;
     using Core.Rules;
     using Core.Shared;
-    using Domain.NotificationApplication.Shipment;
 
-    public class PrenotificationQuantityUnitRule : IPrenotificationContentRule
+    public class PrenotificationQuantityPrecisionForCubicMetresAndTonnesRule : IPrenotificationContentRule
     {
-        private readonly IShipmentInfoRepository shipmentInfoRepository;
-
-        public PrenotificationQuantityUnitRule(IShipmentInfoRepository shipmentInfoRepository)
-        {
-            this.shipmentInfoRepository = shipmentInfoRepository;
-        }
-
         public async Task<PrenotificationContentRuleResult<PrenotificationContentRules>> GetResult(
             List<PrenotificationMovement> movements, Guid notificationId)
         {
-            var shipment = await shipmentInfoRepository.GetByNotificationId(notificationId);
-            var units = shipment == null ? default(ShipmentQuantityUnits) : shipment.Units;
-            var availableUnits = ShipmentQuantityUnitsMetadata.GetUnitsOfThisType(units).ToList();
-
             return await Task.Run(() =>
             {
+                // This rule only works while the precision for CubicMetres and Tonnes is the same
+                var precision = ShipmentQuantityUnitsMetadata.Precision[ShipmentQuantityUnits.CubicMetres];
+
                 var shipments =
                     movements.Where(
                             m =>
                                 m.ShipmentNumber.HasValue &&
-                                (!m.Unit.HasValue ||
-                                availableUnits.All(u => u != m.Unit.Value)))
+                                m.Quantity.HasValue && m.Unit.HasValue &&
+                                (m.Unit.Value == ShipmentQuantityUnits.CubicMetres ||
+                                m.Unit.Value == ShipmentQuantityUnits.Tonnes) &&
+                                decimal.Round(m.Quantity.Value, ShipmentQuantityUnitsMetadata.Precision[m.Unit.Value]) !=
+                                m.Quantity.Value)
                         .GroupBy(x => x.ShipmentNumber)
                         .Select(x => x.Key)
                         .ToList();
@@ -42,10 +36,10 @@
                 var shipmentNumbers = string.Join(", ", shipments);
                 var errorMessage =
                     string.Format(
-                        Prsd.Core.Helpers.EnumHelper.GetDisplayName(PrenotificationContentRules.QuantityUnit),
-                        shipmentNumbers);
+                        Prsd.Core.Helpers.EnumHelper.GetDisplayName(PrenotificationContentRules.QuantityPrecision),
+                        shipmentNumbers, precision);
 
-                return new PrenotificationContentRuleResult<PrenotificationContentRules>(PrenotificationContentRules.QuantityUnit,
+                return new PrenotificationContentRuleResult<PrenotificationContentRules>(PrenotificationContentRules.QuantityPrecision,
                     result, errorMessage);
             });
         }
