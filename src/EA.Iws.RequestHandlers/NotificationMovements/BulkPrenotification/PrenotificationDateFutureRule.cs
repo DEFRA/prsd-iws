@@ -22,7 +22,8 @@
                                 m.ShipmentNumber.HasValue && m.ActualDateOfShipment.HasValue &&
                                 m.ActualDateOfShipment.Value.Date >= SystemTime.UtcNow.Date &&
                                 (m.ActualDateOfShipment.Value.Date - SystemTime.UtcNow.Date).TotalDays >= MaxDays) //Equal will include the current date as the first day.
-                        .Select(m => m.ShipmentNumber.Value)
+                        .GroupBy(x => x.ShipmentNumber)
+                        .Select(x => x.Key)
                         .ToList();
 
                 var result = shipments.Any() ? MessageLevel.Error : MessageLevel.Success;
