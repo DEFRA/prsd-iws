@@ -446,7 +446,6 @@
     <Compile Include="NotificationMovements\BulkPrenotification\PrenotificationDateFutureRule.cs" />
     <Compile Include="NotificationMovements\BulkPrenotification\PrenotificationQuantityPrecisionForCubicMetresAndTonnesRule.cs" />
     <Compile Include="NotificationMovements\BulkPrenotification\PrenotificationQuantityPrecisionForLitresAndKilogramsRule.cs" />
-    <Compile Include="NotificationMovements\BulkUpload\GetBulkUploadTemplateHandler.cs" />
     <Compile Include="NotificationMovements\BulkPrenotification\PerformPrenotificationContentValidationHandler.cs" />
     <Compile Include="NotificationMovements\BulkPrenotification\PrenotificationConsentValidityRule.cs" />
     <Compile Include="NotificationMovements\BulkPrenotification\PrenotificationDateFormatRule.cs" />
