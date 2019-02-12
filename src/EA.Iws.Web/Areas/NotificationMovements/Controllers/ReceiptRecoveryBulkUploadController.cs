@@ -72,12 +72,12 @@
             var failedFileRules = validationSummary.FileRulesResults.Where(r => r.MessageLevel == MessageLevel.Error).Select(r => r.Rule).ToList();
             var failedContentRules = validationSummary.ContentRulesResults.Where(r => r.MessageLevel == MessageLevel.Error).ToList();
 
-            model.FailedFileRules = failedFileRules;
-            model.FailedContentRules = failedContentRules;
+            //model.FailedFileRules = failedFileRules;
+            //model.FailedContentRules = failedContentRules;
 
             var shipments = validationSummary.ShipmentNumbers != null ? validationSummary.ShipmentNumbers.ToList() : null;
-
-            var shipmentsModel = new ShipmentMovementDocumentsViewModel(notificationId, shipments, model.File.FileName);
+            var data = await mediator.SendAsync(new GetNotificationBasicInfo(notificationId));
+            var shipmentsModel = new ShipmentMovementDocumentsViewModel(notificationId, shipments, model.File.FileName, data.NotificationType);
 
             if (model.ErrorsCount > 0)
             {
@@ -93,7 +93,7 @@
         }
 
         [HttpGet]
-        public ActionResult Documents(Guid notificationId)
+        public async Task<ActionResult> Documents(Guid notificationId)
         {
             var fileName = string.Empty;
             var shipments = new List<int>();
@@ -112,7 +112,8 @@
             TempData["PrenotificationShipments"] = shipments;
             TempData["PreNotificationFileName"] = fileName;
 
-            var model = new ShipmentMovementDocumentsViewModel(notificationId, shipments, fileName);
+            var data = await mediator.SendAsync(new GetNotificationBasicInfo(notificationId));
+            var model = new ShipmentMovementDocumentsViewModel(notificationId, shipments, fileName, data.NotificationType);
 
             return View(model);
         }
@@ -183,7 +184,7 @@
         }
 
         [HttpGet]
-        public ActionResult Success(Guid notificationId)
+        public async Task<ActionResult> Success(Guid notificationId)
         {
             var fileName = string.Empty;
             var shipments = new List<int>();
@@ -206,7 +207,8 @@
                 shipmentMovementFileName = shipmentDocumentNameObj as string;
             }
 
-            var model = new ShipmentMovementDocumentsViewModel(notificationId, shipments, fileName);
+            var data = await mediator.SendAsync(new GetNotificationBasicInfo(notificationId));
+            var model = new ShipmentMovementDocumentsViewModel(notificationId, shipments, fileName, data.NotificationType);
 
             model.ShipmentMovementFileName = shipmentMovementFileName;
 

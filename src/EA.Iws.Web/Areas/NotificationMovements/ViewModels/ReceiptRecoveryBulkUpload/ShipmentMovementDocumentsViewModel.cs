@@ -5,6 +5,7 @@
     using System.ComponentModel.DataAnnotations;
     using System.Linq;
     using System.Web;
+    using Core.Shared;
     using Views.ReceiptRecoveryBulkUpload;
 
     public class ShipmentMovementDocumentsViewModel : IValidatableObject
@@ -14,15 +15,17 @@
             this.Shipments = new List<int>();
         }
 
-        public ShipmentMovementDocumentsViewModel(Guid notificationId, IEnumerable<int> shipments, string receiptRecoveryFileName)
+        public ShipmentMovementDocumentsViewModel(Guid notificationId, IEnumerable<int> shipments, string receiptRecoveryFileName, NotificationType type)
         {
             this.NotificationId = notificationId;
             this.Shipments = shipments;
             this.ReceiptRecoveryFileName = receiptRecoveryFileName;
-            this.FileSuccessMessage = ReceiptRecoveryBulkUploadResources.ShipmentMovementsSuccessText.Replace("{filename}", receiptRecoveryFileName);
+            this.NotificationType = type;
         }
 
         public Guid NotificationId { get; set; }
+
+        public NotificationType NotificationType { get; set; }
 
         public IEnumerable<int> Shipments { get; set; }
 
@@ -30,7 +33,14 @@
 
         public string ShipmentMovementFileName { get; set; }
 
-        public string FileSuccessMessage { get; set; }
+        public string FileSuccessMessage
+        {
+            get
+            {
+                return ReceiptRecoveryBulkUploadResources.ShipmentMovementsSuccessText.Replace("{filename}",
+                    this.ReceiptRecoveryFileName);
+            }
+        }
 
         [Display(Name = "Upload the file containing your shipment movement documents")]
         public HttpPostedFileBase File { get; set; }
