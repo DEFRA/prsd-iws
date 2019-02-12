@@ -24,8 +24,9 @@
                         movements.Where(m => m.ShipmentNumber.HasValue).Select(m => m.ShipmentNumber.Value),
                         m => m.Number, s => s,
                         (m, s) => new { Movement = m, ShipmentNumber = s })
-                    .OrderBy(x => x.ShipmentNumber)
-                    .Select(x => x.ShipmentNumber)
+                    .GroupBy(x => x.ShipmentNumber)
+                    .OrderBy(y => y.Key)
+                    .Select(y => y.Key)
                     .ToList();
 
             var result = shipments.Any() ? MessageLevel.Error : MessageLevel.Success;

@@ -33,7 +33,8 @@
                                 m.ShipmentNumber.HasValue &&
                                 (!m.Unit.HasValue ||
                                 availableUnits.All(u => u != m.Unit.Value)))
-                        .Select(m => m.ShipmentNumber.Value)
+                        .GroupBy(x => x.ShipmentNumber)
+                        .Select(x => x.Key)
                         .ToList();
 
                 var result = shipments.Any() ? MessageLevel.Error : MessageLevel.Success;
