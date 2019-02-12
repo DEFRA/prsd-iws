@@ -116,7 +116,7 @@
                 {
                     ShipmentNumber = 1,
                     MissingShipmentNumber = false,
-                    NotificationNumber = "invalid",
+                    NotificationNumber = null,
                     MissingNotificationNumber = false
                 }
             };
@@ -130,7 +130,7 @@
 
         [Theory]
         [MemberData("MissingReceiptData")]
-        public async Task MissingReceiptData_ContentRulesFailed(List<ReceiptRecoveryMovement> movements)
+        public async Task MissingReceiptAndRecoveryData_ContentRulesFailed(List<ReceiptRecoveryMovement> movements)
         {
             var notificationId = Guid.NewGuid();
             var summary = new ReceiptRecoveryRulesSummary();
@@ -141,23 +141,6 @@
             var response = await handler.HandleAsync(message);
 
             Assert.False(response.IsContentRulesSuccess);
-        }
-
-        [Theory]
-        [MemberData("CorrectReceiptData")]
-        public async Task MissingReceiptData_ContentRulesSuccess(List<ReceiptRecoveryMovement> movements)
-        {
-            var notificationId = Guid.NewGuid();
-            var summary = new ReceiptRecoveryRulesSummary();
-            var message = new PerformReceiptRecoveryContentValidation(summary, notificationId, new DataTable(), "Test", false);
-
-            A.CallTo(() => mapper.Map(A<DataTable>.Ignored)).Returns(movements);
-
-            var response = await handler.HandleAsync(message);
-            
-            Assert.True(response.ContentRulesResults
-                .Where(r => r.Rule == ReceiptRecoveryContentRules.MissingReceiptData)
-                .Single().MessageLevel == Core.Rules.MessageLevel.Success);
         }
 
         [Fact]
@@ -225,6 +208,7 @@
                                 NotificationNumber = "GB 0001 123456",
                                 ShipmentNumber = 1,
                                 MissingReceivedDate = true,
+                                MissingRecoveredDisposedDate = true,
                                 MissingQuantity = false,
                                 MissingUnits = false
                             }
@@ -238,7 +222,8 @@
                             {
                                 NotificationNumber = "GB 0001 123456",
                                 ShipmentNumber = 2,
-                                MissingReceivedDate = false,
+                                MissingReceivedDate = true,
+                                MissingRecoveredDisposedDate = true,
                                 MissingQuantity = true,
                                 MissingUnits = false
                             }
@@ -255,30 +240,6 @@
                                 MissingReceivedDate = false,
                                 MissingQuantity = false,
                                 MissingUnits = true
-                            }
-                        }
-                    }
-                };
-            }
-        }
-
-        public static IEnumerable<object[]> CorrectReceiptData
-        {
-            get
-            {
-                return new[]
-                {
-                    new object[]
-                    {
-                        new List<ReceiptRecoveryMovement>()
-                        {
-                            new ReceiptRecoveryMovement()
-                            {
-                                NotificationNumber = "GB 0001 123456",
-                                ShipmentNumber = 1,
-                                MissingReceivedDate = false,
-                                MissingQuantity = false,
-                                MissingUnits = false
                             }
                         }
                     }
