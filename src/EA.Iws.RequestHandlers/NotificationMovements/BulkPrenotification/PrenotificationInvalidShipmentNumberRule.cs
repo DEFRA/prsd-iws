@@ -28,7 +28,8 @@
                             m =>
                                 m.ShipmentNumber.HasValue &&
                                 m.ShipmentNumber.Value > movementSummary.IntendedTotalShipments)
-                        .Select(m => m.ShipmentNumber.Value)
+                        .GroupBy(x => x.ShipmentNumber)
+                        .Select(x => x.Key)
                         .OrderBy(m => m)
                         .ToList();
 

@@ -30,7 +30,8 @@
                                 (!m.PackagingTypes.Any() ||
                                 !m.PackagingTypes.All(
                                     p => notificationApplication.PackagingInfos.Any(t => t.PackagingType == p))))
-                        .Select(m => m.ShipmentNumber.Value)
+                        .GroupBy(x => x.ShipmentNumber)
+                        .Select(x => x.Key)
                         .ToList();
 
                 var result = shipments.Any() ? MessageLevel.Error : MessageLevel.Success;
