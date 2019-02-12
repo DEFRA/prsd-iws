@@ -12,18 +12,25 @@
     using Core.Rules;
     using Prsd.Core.Mediator;
     using Requests.NotificationMovements.BulkUpload;
+    using VirusScanning;
 
     public class PrenotificationValidator : IPrenotificationValidator
     {
         private readonly IMediator mediator;
         private readonly IEnumerable<IPrenotificationFileRule> fileRules;
+        private readonly IVirusScanner virusScanner;
 
         public DataTable DataTable { get; set; }
 
-        public PrenotificationValidator(IMediator mediator, IEnumerable<IPrenotificationFileRule> fileRules)
+        public byte[] FileBytes { get; set; }
+
+        public PrenotificationValidator(IMediator mediator, 
+            IEnumerable<IPrenotificationFileRule> fileRules,
+            IVirusScanner virusScanner)
         {
             this.mediator = mediator;
             this.fileRules = fileRules;
+            this.virusScanner = virusScanner;
         }
 
         public async Task<PrenotificationRulesSummary> GetPrenotificationValidationSummary(HttpPostedFileBase file, Guid notificationId)
@@ -34,6 +41,7 @@
             var isCsv = extension == ".csv";
 
             var rulesSummary = new PrenotificationRulesSummary(resultFileRules);
+
             if (rulesSummary.IsFileRulesSuccess)
             {
                 rulesSummary =
@@ -48,8 +56,8 @@
         {
             var resultFileRules = await GetFileRules(file, FileUploadType.ShipmentMovementDocuments);
 
-            var bulkMovementRulesSummary = new PrenotificationRulesSummary(resultFileRules);
-            
+            var bulkMovementRulesSummary = new PrenotificationRulesSummary(resultFileRules) { FileBytes = FileBytes };
+
             return bulkMovementRulesSummary;
         }
 
@@ -69,12 +77,36 @@
                 rules.Add(result);
             }
 
+            rules.Add(await GetVirusScanResult(file));
+
             if (DataTable != null && DataTable.Rows.Count == 0)
             {
                 rules.Add(new RuleResult<PrenotificationFileRules>(PrenotificationFileRules.EmptyData, MessageLevel.Error));
             }
             
             return rules;
+        }
+
+        private async Task<RuleResult<PrenotificationFileRules>> GetVirusScanResult(HttpPostedFileBase file)
+        {
+            var result = MessageLevel.Success;
+            byte[] fileBytes;
+
+            using (var memoryStream = new MemoryStream())
+            {
+                await file.InputStream.CopyToAsync(memoryStream);
+
+                fileBytes = memoryStream.ToArray();
+
+                FileBytes = fileBytes;
+            }
+
+            if (await virusScanner.ScanFileAsync(fileBytes) == ScanResult.Virus)
+            {
+                result = MessageLevel.Error;
+            }
+
+            return new RuleResult<PrenotificationFileRules>(PrenotificationFileRules.Virus, result);
         }
     }
 }

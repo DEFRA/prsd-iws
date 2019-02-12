@@ -2340,7 +2340,6 @@
     <Compile Include="Infrastructure\BulkPrenotification\IPrenotificationValidator.cs" />
     <Compile Include="Infrastructure\BulkPrenotification\FileParsePrenotificationFileRule.cs" />
     <Compile Include="Infrastructure\BulkPrenotification\ShippingMovementsFileTypeRules.cs" />
-    <Compile Include="Infrastructure\BulkPrenotification\VirusRule.cs" />
     <Compile Include="Infrastructure\NotificationOwnerFilter.cs" />
     <Compile Include="Infrastructure\SkipNotificationOwnerFilter.cs" />
     <Compile Include="Infrastructure\AuditService.cs" />
