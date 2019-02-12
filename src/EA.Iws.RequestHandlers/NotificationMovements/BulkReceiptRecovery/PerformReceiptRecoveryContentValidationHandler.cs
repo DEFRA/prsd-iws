@@ -134,8 +134,9 @@
                     if (movement.ShipmentNumber.HasValue &&
                         !string.IsNullOrEmpty(movement.NotificationNumber) &&
                         ((movement.MissingReceivedDate && movement.MissingRecoveredDisposedDate) ||
-                        movement.MissingQuantity ||
-                        movement.MissingUnits))
+                        (!movement.MissingReceivedDate &&
+                        (movement.MissingQuantity ||
+                        movement.MissingUnits))))
                     {
                         missingDataResult = MessageLevel.Error;
                         missingDataShipmentNumbers.Add(movement.ShipmentNumber.ToString());
