@@ -13,12 +13,17 @@
         {
             return await Task.Run(() =>
             {
-                var shipments =
-                    movements.Where(m => m.ShipmentNumber.HasValue && !m.ReceivedDate.HasValue)
-                        .Select(m => m.ShipmentNumber.Value)
-                        .ToList();
+                List<int> shipments = new List<int>();
+                MessageLevel result = MessageLevel.Success;
 
-                var result = shipments.Any() ? MessageLevel.Error : MessageLevel.Success;
+                foreach (var movement in movements)
+                {
+                    if (!movement.MissingReceivedDate && movement.ReceivedDate == null)
+                    {
+                        result = MessageLevel.Error;
+                        shipments.Add(movement.ShipmentNumber.GetValueOrDefault());
+                    }
+                }
 
                 var shipmentNumbers = string.Join(", ", shipments);
                 var errorMessage = string.Format(Prsd.Core.Helpers.EnumHelper.GetDisplayName(ReceiptRecoveryContentRules.ReceiptDateFormat), shipmentNumbers);

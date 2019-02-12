@@ -26,7 +26,7 @@
 
                 foreach (var movement in movements)
                 {
-                    if (movement.RecoveredDisposedDate == null)
+                    if (!movement.MissingRecoveredDisposedDate && movement.RecoveredDisposedDate == null)
                     {
                         result = MessageLevel.Error;
                         shipments.Add(movement.ShipmentNumber.GetValueOrDefault());

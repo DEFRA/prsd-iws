@@ -36,11 +36,11 @@
 
             result.ContentRulesResults = await GetOrderedContentRules(movements, message.NotificationId);
 
-            if (result.IsContentRulesSuccess)
-            {
-                result.ShipmentNumbers =
+            result.ShipmentNumbers =
                     movements.Where(m => m.ShipmentNumber.HasValue).Select(m => m.ShipmentNumber.Value);
 
+            if (result.IsContentRulesSuccess)
+            { 
                 result.DraftBulkUploadId = await repository.AddReceiptRecovery(message.NotificationId, movements, message.FileName);
             }
 
@@ -134,8 +134,9 @@
                     if (movement.ShipmentNumber.HasValue &&
                         !string.IsNullOrEmpty(movement.NotificationNumber) &&
                         ((movement.MissingReceivedDate && movement.MissingRecoveredDisposedDate) ||
-                        movement.MissingQuantity ||
-                        movement.MissingUnits))
+                        (!movement.MissingReceivedDate &&
+                        (movement.MissingQuantity ||
+                        movement.MissingUnits))))
                     {
                         missingDataResult = MessageLevel.Error;
                         missingDataShipmentNumbers.Add(movement.ShipmentNumber.ToString());

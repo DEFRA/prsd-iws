@@ -1,8 +1,10 @@
 ﻿@using Resource = EA.Iws.Web.Areas.NotificationMovements.Views.ReceiptRecoveryBulkUpload.ReceiptRecoveryBulkUploadResources
+@using EA.Iws.Core.Shared
 @model EA.Iws.Web.Areas.NotificationMovements.ViewModels.ReceiptRecoveryBulkUpload.ShipmentMovementDocumentsViewModel
 
 @{
-    ViewBag.Title = @Resource.UploadReceiptRecoveryTabTitle;
+    var typeText = Model.NotificationType == NotificationType.Disposal ? "disposal" : "recovery";
+    ViewBag.Title = string.Format(Resource.UploadReceiptRecoveryTabTitle, typeText);
     Layout = "~/Views/Shared/_Layout.GovUK.Sections.cshtml";
 }
 
