@@ -9,6 +9,7 @@
     public interface IPrenotificationValidator
     {
         DataTable DataTable { get; set; }
+        byte[] FileBytes { get; set; }
         Task<PrenotificationRulesSummary> GetPrenotificationValidationSummary(HttpPostedFileBase file, Guid notificationId);
         Task<PrenotificationRulesSummary> GetShipmentMovementValidationSummary(HttpPostedFileBase file, Guid notificationId);
     }
