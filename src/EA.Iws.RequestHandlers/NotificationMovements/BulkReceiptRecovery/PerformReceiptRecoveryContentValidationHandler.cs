@@ -50,36 +50,40 @@
         private async Task<List<ReceiptRecoveryContentRuleResult<ReceiptRecoveryContentRules>>> GetOrderedContentRules(List<ReceiptRecoveryMovement> movements,
             Guid notificationId)
         {
-            var rules = new List<ReceiptRecoveryContentRuleResult<ReceiptRecoveryContentRules>>();
-
-            var maxShipments = await GetMaxShipments(movements);
-
-            rules.Add(maxShipments);
-
-            if (maxShipments.MessageLevel == MessageLevel.Success)
+            var rules = new List<ReceiptRecoveryContentRuleResult<ReceiptRecoveryContentRules>>()
             {
-                var missingNotificationNumbersOrShipmentNumbers = await GetMissingNotificationNumbersOrShipmentNumbers(movements);
+                await GetMaxShipments(movements)
+            };
 
-                rules.Add(missingNotificationNumbersOrShipmentNumbers);
-
-                if (missingNotificationNumbersOrShipmentNumbers.MessageLevel == MessageLevel.Success)
-                {
-                    var missingData = await GetMissingReceiptDataResult(movements, notificationId);
-
-                    rules.Add(missingData);
-
-                    // Only run rest of validations if there are no missing/blank data.
-                    if (missingData.MessageLevel == MessageLevel.Success)
-                    {
-                        foreach (var rule in contentRules)
-                        {
-                            rules.Add(await rule.GetResult(movements, notificationId));
-                        }
-                    }
-                }
+            if (rules.Any(r => r.MessageLevel == MessageLevel.Error))
+            {
+                return rules;
             }
-            
-            return rules.OrderBy(r => r.Rule).ToList();
+
+            rules.Add(await GetMissingNotificationNumbersOrShipmentNumbers(movements));
+
+            if (rules.Any(r => r.MessageLevel == MessageLevel.Error))
+            {
+                return rules;
+            }
+
+            rules.Add(await GetMissingReceiptDataResult(movements, notificationId));
+
+            if (rules.Any(r => r.MessageLevel == MessageLevel.Error))
+            {
+                return rules;
+            }
+
+            foreach (var rule in contentRules)
+            {
+                rules.Add(await rule.GetResult(movements, notificationId));
+            }
+
+            return rules.OrderBy(r =>
+            {
+                var shipments = r.ErrorMessage.Split(new[] { ':' }, StringSplitOptions.RemoveEmptyEntries)[0];
+                return shipments;
+            }).ThenBy(r => r.Rule).ToList();
         }
 
         private static async Task<ReceiptRecoveryContentRuleResult<ReceiptRecoveryContentRules>> GetMaxShipments(
