@@ -10,6 +10,8 @@
         MissingShipmentNumbers,
         [Display(Name = "Shipment number {0}: there is missing data.")]
         MissingData,
+        [Display(Name = "You can't create {0} shipments as you are only permitted {1} active loads")]
+        ActiveLoadsGrouped,
         [Display(Name = "You can't create {0} shipments as there are only {1} active loads remaining.")]
         ExcessiveShipments,
         [Display(Name = "Shipment number {0}: is duplicated within the data file.")]
