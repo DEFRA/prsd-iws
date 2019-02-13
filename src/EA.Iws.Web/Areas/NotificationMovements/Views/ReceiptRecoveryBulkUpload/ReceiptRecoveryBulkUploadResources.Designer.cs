@@ -278,7 +278,7 @@ namespace EA.Iws.Web.Areas.NotificationMovements.Views.ReceiptRecoveryBulkUpload
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The data file should not exceed 2GB in size..
+        ///   Looks up a localized string similar to The data file must not exceed 2GB in size..
         /// </summary>
         public static string UploadReceiptRecoveryList1 {
             get {
