@@ -135,7 +135,7 @@
             A.CallTo(() => mapper.Map(A<DataTable>.Ignored)).Returns(A.CollectionOfFake<PrenotificationMovement>(5).ToList());
             A.CallTo(() => contentRule.GetResult(A<List<PrenotificationMovement>>.Ignored, notificationId))
                 .Returns(new PrenotificationContentRuleResult<PrenotificationContentRules>(PrenotificationContentRules.MissingData,
-                    MessageLevel.Error, "Missing data"));
+                    MessageLevel.Error, "Missing data", 0));
 
             var response = await handler.HandleAsync(message);
 
@@ -166,7 +166,7 @@
             A.CallTo(() => mapper.Map(A<DataTable>.Ignored)).Returns(movements);
             A.CallTo(() => contentRule.GetResult(A<List<PrenotificationMovement>>.Ignored, notificationId))
                 .Returns(new PrenotificationContentRuleResult<PrenotificationContentRules>(PrenotificationContentRules.MissingData,
-                    MessageLevel.Success, "Test"));
+                    MessageLevel.Success, "Test", 0));
 
             var response = await handler.HandleAsync(message);
 
