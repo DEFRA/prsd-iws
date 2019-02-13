@@ -168,7 +168,6 @@
     <Compile Include="NotificationMovements\BulkUpload\PrenotificationQuantityExceededRuleTests.cs" />
     <Compile Include="NotificationMovements\BulkUpload\PrenotificationQuantityPrecisionForCubicMetresAndTonnesRuleTests.cs" />
     <Compile Include="NotificationMovements\BulkUpload\PrenotificationQuantityPrecisionForLitresAndKilogramsRuleTests.cs" />
-    <Compile Include="NotificationMovements\BulkUpload\PrenotificationShipmentBeyondConsentWindowRuleTests.cs" />
     <Compile Include="NotificationMovements\BulkUpload\PrenotificationContentConsentValidityRuleTests.cs" />
     <Compile Include="NotificationMovements\BulkUpload\PrenotificationContentQuantityUnitRuleTests.cs" />
     <Compile Include="NotificationMovements\BulkUpload\PrenotificationContentThreeWorkingDaysConsentDateRuleTests.cs" />

@@ -82,11 +82,8 @@
 
             var lastRuleResult = rules.FirstOrDefault(r => r.Rule == LastRule);
 
-            var orderedRules = rules.Where(r => r.Rule != LastRule).OrderBy(r =>
-            {
-                var shipments = r.ErrorMessage.Split(new[] { ':' }, StringSplitOptions.RemoveEmptyEntries)[0];
-                return shipments;
-            }).ThenBy(r => r.Rule).ToList();
+            var orderedRules =
+                rules.Where(r => r.Rule != LastRule).OrderBy(r => r.MinShipmentNumber).ThenBy(r => r.Rule).ToList();
 
             if (lastRuleResult != null)
             {
@@ -109,7 +106,7 @@
                         MaxShipments);
 
                 return new PrenotificationContentRuleResult<PrenotificationContentRules>(PrenotificationContentRules.MaximumShipments,
-                    result, errorMessage);
+                    result, errorMessage, 0);
             });
         }
 
@@ -132,7 +129,7 @@
                         movements.Count);
 
                 return new PrenotificationContentRuleResult<PrenotificationContentRules>(PrenotificationContentRules.MissingShipmentNumbers,
-                    result, errorMessage);
+                    result, errorMessage, 0);
             });
        }
 
@@ -147,10 +144,12 @@
                                 m.ShipmentNumber.HasValue &&
                                 (m.MissingQuantity || m.MissingUnits || m.MissingPackagingTypes ||
                                  m.MissingDateOfShipment))
-                        .Select(m => m.ShipmentNumber.Value)
+                        .OrderBy(m => m.ShipmentNumber)
+                        .Select(m => m.ShipmentNumber)
                         .ToList();
 
                 var result = shipments.Any() ? MessageLevel.Error : MessageLevel.Success;
+                var minShipment = shipments.FirstOrDefault() ?? 0;
 
                 var shipmentNumbers = string.Join(", ", shipments);
                 var errorMessage =
@@ -158,7 +157,7 @@
                         shipmentNumbers);
 
                 return new PrenotificationContentRuleResult<PrenotificationContentRules>(PrenotificationContentRules.MissingData,
-                    result, errorMessage);
+                    result, errorMessage, minShipment);
             });
         }
     }
