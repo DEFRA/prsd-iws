@@ -34,7 +34,7 @@
             {
                 var actualMovement = actualMovements.FirstOrDefault(p => p.Number == movement.ShipmentNumber);
 
-                if (actualMovement != null && (actualMovement.Status == MovementStatus.Completed || actualMovement.Status == MovementStatus.Completed))
+                if (actualMovement != null && actualMovement.Status == MovementStatus.Completed))
                 {
                     result = MessageLevel.Error;
                     shipments.Add(movement.ShipmentNumber.GetValueOrDefault());
