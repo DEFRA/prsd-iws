@@ -24,7 +24,8 @@
             {
                 var shipments =
                     movements.Where(m => m.ShipmentNumber.HasValue && m.NotificationNumber != notificationNumber)
-                        .Select(m => m.ShipmentNumber.Value)
+                        .GroupBy(x => x.ShipmentNumber)
+                        .Select(x => x.Key)
                         .ToList();
 
                 var result = shipments.Any() ? MessageLevel.Error : MessageLevel.Success;

@@ -29,7 +29,8 @@
                                 m.ShipmentNumber.HasValue && m.ActualDateOfShipment.HasValue &&
                                 m.ActualDateOfShipment.Value > consentEndDate)
                                 .OrderBy(m => m.ActualDateOfShipment.Value)
-                        .Select(m => m.ShipmentNumber.GetValueOrDefault())
+                        .GroupBy(x => x.ShipmentNumber)
+                        .Select(x => x.Key)
                         .ToList();
 
                 var result = shipments.Any() ? MessageLevel.Error : MessageLevel.Success;

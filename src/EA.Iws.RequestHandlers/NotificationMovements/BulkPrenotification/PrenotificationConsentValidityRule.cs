@@ -29,7 +29,8 @@
                                 m.ShipmentNumber.HasValue &&
                                 (m.ActualDateOfShipment.HasValue &&
                                  !consent.ConsentRange.Contains(m.ActualDateOfShipment.Value)))
-                        .Select(m => m.ShipmentNumber.Value)
+                        .GroupBy(m => m.ShipmentNumber)
+                        .Select(x => x.Key)
                         .ToList();
 
                 var result = shipments.Any() ? MessageLevel.Error : MessageLevel.Success;

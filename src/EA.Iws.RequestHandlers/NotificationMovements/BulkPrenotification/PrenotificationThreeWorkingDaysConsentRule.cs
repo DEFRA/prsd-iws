@@ -41,7 +41,8 @@
                                 m.ShipmentNumber.HasValue && m.ActualDateOfShipment.HasValue &&
                                 m.ActualDateOfShipment.Value.Date >= SystemTime.UtcNow.Date && !consentHasExpired &&
                                 workingDayCalculator.GetWorkingDays(m.ActualDateOfShipment.Value, consentEndDate, true, ca) < 4)
-                        .Select(m => m.ShipmentNumber.Value)
+                        .GroupBy(x => x.ShipmentNumber)
+                        .Select(x => x.Key)
                         .ToList();
 
                 var result = shipments.Any() ? MessageLevel.Error : MessageLevel.Success;
