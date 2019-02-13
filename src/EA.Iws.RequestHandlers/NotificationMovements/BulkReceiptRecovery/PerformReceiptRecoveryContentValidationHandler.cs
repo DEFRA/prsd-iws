@@ -79,11 +79,7 @@
                 rules.Add(await rule.GetResult(movements, notificationId));
             }
 
-            return rules.OrderBy(r =>
-            {
-                var shipments = r.ErrorMessage.Split(new[] { ':' }, StringSplitOptions.RemoveEmptyEntries)[0];
-                return shipments;
-            }).ThenBy(r => r.Rule).ToList();
+            return rules.OrderBy(r => r.MinShipmentNumber).ThenBy(r => r.Rule).ToList();
         }
 
         private static async Task<ReceiptRecoveryContentRuleResult<ReceiptRecoveryContentRules>> GetMaxShipments(
@@ -99,7 +95,7 @@
                         MaxShipments);
 
                 return new ReceiptRecoveryContentRuleResult<ReceiptRecoveryContentRules>(ReceiptRecoveryContentRules.MaximumShipments,
-                    result, errorMessage);
+                    result, errorMessage, 0);
             });
         }
 
@@ -116,7 +112,7 @@
                 var errorMessage = Prsd.Core.Helpers.EnumHelper.GetDisplayName(ReceiptRecoveryContentRules.InvalidNotificationOrShipmentNumbers);
 
                 return new ReceiptRecoveryContentRuleResult<ReceiptRecoveryContentRules>(ReceiptRecoveryContentRules.InvalidNotificationOrShipmentNumbers,
-                    result, errorMessage);
+                    result, errorMessage, 0);
             });
         }
 
@@ -146,7 +142,9 @@
                 var shipmentNumbers = string.Join(", ", missingDataShipmentNumbers);
                 var errorMessage = string.Format(Prsd.Core.Helpers.EnumHelper.GetDisplayName(ReceiptRecoveryContentRules.MissingReceiptData), shipmentNumbers);
 
-                return new ReceiptRecoveryContentRuleResult<ReceiptRecoveryContentRules>(ReceiptRecoveryContentRules.MissingReceiptData, missingDataResult, errorMessage);
+                return
+                    new ReceiptRecoveryContentRuleResult<ReceiptRecoveryContentRules>(
+                        ReceiptRecoveryContentRules.MissingReceiptData, missingDataResult, errorMessage, 0);
             });
         }
     }

@@ -24,7 +24,10 @@
                 var shipmentNumbers = string.Join(", ", shipments.Distinct());
                 var errorMessage = string.Format(Prsd.Core.Helpers.EnumHelper.GetDisplayName(ReceiptRecoveryContentRules.DuplicateShipmentNumber), shipmentNumbers);
 
-                return new ReceiptRecoveryContentRuleResult<ReceiptRecoveryContentRules>(ReceiptRecoveryContentRules.DuplicateShipmentNumber, result, errorMessage);
+                return
+                    new ReceiptRecoveryContentRuleResult<ReceiptRecoveryContentRules>(
+                        ReceiptRecoveryContentRules.DuplicateShipmentNumber, result, errorMessage,
+                        shipments.FirstOrDefault() ?? 0);
             });
         }
     }

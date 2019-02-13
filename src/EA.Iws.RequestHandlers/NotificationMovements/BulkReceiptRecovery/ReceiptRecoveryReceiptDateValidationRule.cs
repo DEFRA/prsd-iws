@@ -24,7 +24,7 @@
                 var shipments = new List<int>();
                 var existingMovements = repository.GetAllMovements(notificationId).Result;
 
-                foreach (var movement in movements)
+                foreach (var movement in movements.Where(m => m.ShipmentNumber.HasValue && m.ReceivedDate.HasValue))
                 {
                     if (movement.ShipmentNumber.HasValue && movement.ReceivedDate.HasValue)
                     {
@@ -48,7 +48,7 @@
                 var shipmentNumbers = string.Join(", ", shipments.Distinct());
                 var errorMessage = string.Format(Prsd.Core.Helpers.EnumHelper.GetDisplayName(ReceiptRecoveryContentRules.ReceiptDateValidation), shipmentNumbers);
 
-                return new ReceiptRecoveryContentRuleResult<ReceiptRecoveryContentRules>(ReceiptRecoveryContentRules.ReceiptDateValidation, result, errorMessage);
+                return new ReceiptRecoveryContentRuleResult<ReceiptRecoveryContentRules>(ReceiptRecoveryContentRules.ReceiptDateValidation, result, errorMessage, shipments.Min());
             });
         }
     }
