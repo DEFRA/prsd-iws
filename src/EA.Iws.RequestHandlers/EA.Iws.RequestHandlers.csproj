@@ -456,7 +456,6 @@
     <Compile Include="NotificationMovements\BulkPrenotification\PrenotificationNotificationNumberRule.cs" />
     <Compile Include="NotificationMovements\BulkPrenotification\PrenotificationOnlyNewShipmentsRule.cs" />
     <Compile Include="NotificationMovements\BulkPrenotification\PrenotificationQuantityExceededRule.cs" />
-    <Compile Include="NotificationMovements\BulkPrenotification\PrenotificationShipmentBeyondConsentRule.cs" />
     <Compile Include="NotificationMovements\BulkPrenotification\PrenotificationQuantityUnitRule.cs" />
     <Compile Include="NotificationMovements\BulkPrenotification\PrenotificationThreeWorkingDaysConsentRule.cs" />
     <Compile Include="NotificationMovements\BulkPrenotification\PrenotificationContentThreeWorkingDaysRule.cs" />

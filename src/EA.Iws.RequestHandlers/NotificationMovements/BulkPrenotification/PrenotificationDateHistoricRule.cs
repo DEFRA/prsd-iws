@@ -20,15 +20,17 @@
                                 m.ShipmentNumber.HasValue && m.ActualDateOfShipment.HasValue &&
                                 m.ActualDateOfShipment.Value.Date < SystemTime.UtcNow.Date)
                         .GroupBy(x => x.ShipmentNumber)
+                        .OrderBy(x => x.Key)
                         .Select(x => x.Key)
                         .ToList();
 
                 var result = shipments.Any() ? MessageLevel.Error : MessageLevel.Success;
+                var minShipment = shipments.FirstOrDefault() ?? 0;
 
                 var shipmentNumbers = string.Join(", ", shipments);
                 var errorMessage = string.Format(Prsd.Core.Helpers.EnumHelper.GetDisplayName(PrenotificationContentRules.HistoricDate), shipmentNumbers);
 
-                return new PrenotificationContentRuleResult<PrenotificationContentRules>(PrenotificationContentRules.HistoricDate, result, errorMessage);
+                return new PrenotificationContentRuleResult<PrenotificationContentRules>(PrenotificationContentRules.HistoricDate, result, errorMessage, minShipment);
             });
         }
     }

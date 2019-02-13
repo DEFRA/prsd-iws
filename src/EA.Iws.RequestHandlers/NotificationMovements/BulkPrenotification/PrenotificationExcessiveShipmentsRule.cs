@@ -45,7 +45,7 @@
 
             if (result == MessageLevel.Error)
             {
-                return new PrenotificationContentRuleResult<PrenotificationContentRules>(PrenotificationContentRules.ActiveLoadsGrouped, result, errorMessage);
+                return new PrenotificationContentRuleResult<PrenotificationContentRules>(PrenotificationContentRules.ActiveLoadsGrouped, result, errorMessage, 0);
             }
 
             var currentActiveLoads = (await movementRepository.GetActiveMovements(notificationId)).Count();
@@ -54,7 +54,7 @@
             result = remainingShipments < movements.Count ? MessageLevel.Error : MessageLevel.Success;
             errorMessage = string.Format(Prsd.Core.Helpers.EnumHelper.GetDisplayName(PrenotificationContentRules.ExcessiveShipments), movements.Count, remainingShipments);
 
-            return new PrenotificationContentRuleResult<PrenotificationContentRules>(PrenotificationContentRules.ExcessiveShipments, result, errorMessage);
+            return new PrenotificationContentRuleResult<PrenotificationContentRules>(PrenotificationContentRules.ExcessiveShipments, result, errorMessage, 0);
         }
     }
 }

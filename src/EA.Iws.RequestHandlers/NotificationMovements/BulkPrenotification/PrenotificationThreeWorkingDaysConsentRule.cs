@@ -26,7 +26,8 @@
             this.notificationApplicationRepository = notificationApplicationRepository;
         }
 
-        public async Task<PrenotificationContentRuleResult<PrenotificationContentRules>> GetResult(List<PrenotificationMovement> movements,
+        public async Task<PrenotificationContentRuleResult<PrenotificationContentRules>> GetResult(
+            List<PrenotificationMovement> movements,
             Guid notificationId)
         {
             var ca = (await notificationApplicationRepository.GetById(notificationId)).CompetentAuthority;
@@ -40,17 +41,25 @@
                             m =>
                                 m.ShipmentNumber.HasValue && m.ActualDateOfShipment.HasValue &&
                                 m.ActualDateOfShipment.Value.Date >= SystemTime.UtcNow.Date && !consentHasExpired &&
-                                workingDayCalculator.GetWorkingDays(m.ActualDateOfShipment.Value, consentEndDate, true, ca) < 4)
+                                workingDayCalculator.GetWorkingDays(m.ActualDateOfShipment.Value, consentEndDate, true,
+                                    ca) < 4)
                         .GroupBy(x => x.ShipmentNumber)
+                        .OrderBy(x => x.Key)
                         .Select(x => x.Key)
                         .ToList();
 
                 var result = shipments.Any() ? MessageLevel.Error : MessageLevel.Success;
+                var minShipment = shipments.FirstOrDefault() ?? 0;
 
                 var shipmentNumbers = string.Join(", ", shipments);
-                var errorMessage = string.Format(Prsd.Core.Helpers.EnumHelper.GetDisplayName(PrenotificationContentRules.ThreeWorkingDaysToConsentDate), shipmentNumbers);
+                var errorMessage =
+                    string.Format(
+                        Prsd.Core.Helpers.EnumHelper.GetDisplayName(
+                            PrenotificationContentRules.ThreeWorkingDaysToConsentDate), shipmentNumbers);
 
-                return new PrenotificationContentRuleResult<PrenotificationContentRules>(PrenotificationContentRules.ThreeWorkingDaysToConsentDate, result, errorMessage);
+                return
+                    new PrenotificationContentRuleResult<PrenotificationContentRules>(
+                        PrenotificationContentRules.ThreeWorkingDaysToConsentDate, result, errorMessage, minShipment);
             });
         }
     }
