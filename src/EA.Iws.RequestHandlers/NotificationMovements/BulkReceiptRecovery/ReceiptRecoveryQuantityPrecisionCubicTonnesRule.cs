@@ -9,18 +9,23 @@
     using Core.Rules;
     using Core.Shared;
 
-    public class ReceiptRecoveryQuantityPrecisionRule : IReceiptRecoveryContentRule
+    public class ReceiptRecoveryQuantityPrecisionCubicTonnesRule : IReceiptRecoveryContentRule
     {
         public async Task<ReceiptRecoveryContentRuleResult<ReceiptRecoveryContentRules>> GetResult(
             List<ReceiptRecoveryMovement> movements, Guid notificationId)
         {
             return await Task.Run(() =>
             {
+                // This rule only works while the precision for CubicMetres and Tonnes is the same
+                var precision = ShipmentQuantityUnitsMetadata.Precision[ShipmentQuantityUnits.Tonnes];
+
                 var shipments =
                     movements.Where(
                             m =>
                                 m.ShipmentNumber.HasValue &&
                                 m.Quantity.HasValue && m.Unit.HasValue &&
+                                (m.Unit.Value == ShipmentQuantityUnits.CubicMetres ||
+                                m.Unit.Value == ShipmentQuantityUnits.Tonnes) &&
                                 decimal.Round(m.Quantity.Value, ShipmentQuantityUnitsMetadata.Precision[m.Unit.Value]) !=
                                 m.Quantity.Value)
                         .Select(m => m.ShipmentNumber.Value)
@@ -32,7 +37,7 @@
                 var errorMessage =
                     string.Format(
                         Prsd.Core.Helpers.EnumHelper.GetDisplayName(ReceiptRecoveryContentRules.QuantityPrecision),
-                        shipmentNumbers);
+                        shipmentNumbers, precision);
 
                 return new ReceiptRecoveryContentRuleResult<ReceiptRecoveryContentRules>(ReceiptRecoveryContentRules.QuantityPrecision,
                     result, errorMessage);
