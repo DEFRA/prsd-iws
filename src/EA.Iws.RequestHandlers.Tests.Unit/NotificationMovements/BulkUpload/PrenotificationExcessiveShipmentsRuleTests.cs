@@ -15,14 +15,12 @@
 
     public class PrenotificationExcessiveShipmentsRuleTests
     {
-        private readonly INotificationMovementsSummaryRepository repo;
+        private readonly PrenotificationExcessiveShipmentsRule rule;
         private readonly Guid notificationId = new Guid("DD1F019D-BD85-4A6F-89AB-328A7BD53CEA");
         private readonly IMovementRepository movementRepository;
         private readonly IFinancialGuaranteeRepository financialGuaranteeRepository;
         private const int MaxActiveLoads = 5;
-        private const int CurrentActiveLoads = 3;
-
-        private PrenotificationExcessiveShipmentsRule rule;
+        private const int CurrentActiveLoads = 2;
 
         public PrenotificationExcessiveShipmentsRuleTests()
         {
@@ -80,13 +78,63 @@
                 new PrenotificationMovement()
                 {
                     ActualDateOfShipment = new DateTime(2019, 2, 2)
-                },
+                }
             };
 
             var result = await rule.GetResult(movements, notificationId);
 
             Assert.Equal(PrenotificationContentRules.ActiveLoadsGrouped, result.Rule);
             Assert.Equal(MessageLevel.Error, result.MessageLevel);
+        }
+
+        [Fact]
+        public async Task ShipmentsMoreThanRemaningActiveLoads_Error()
+        {
+            var movements = new List<PrenotificationMovement>()
+            {
+                new PrenotificationMovement()
+                {
+                    ActualDateOfShipment = new DateTime(2019, 1, 1)
+                },
+                new PrenotificationMovement()
+                {
+                    ActualDateOfShipment = new DateTime(2019, 1, 1)
+                },
+                new PrenotificationMovement()
+                {
+                    ActualDateOfShipment = new DateTime(2019, 1, 1)
+                },
+                new PrenotificationMovement()
+                {
+                    ActualDateOfShipment = new DateTime(2019, 1, 1)
+                }
+            };
+
+            var result = await rule.GetResult(movements, notificationId);
+
+            Assert.Equal(PrenotificationContentRules.ExcessiveShipments, result.Rule);
+            Assert.Equal(MessageLevel.Error, result.MessageLevel);
+        }
+
+        [Fact]
+        public async Task ShipmentsSameDates_LessThanMaxActiveLoads_LessThanCurrentLoads_Success()
+        {
+            var movements = new List<PrenotificationMovement>()
+            {
+                new PrenotificationMovement()
+                {
+                    ActualDateOfShipment = new DateTime(2019, 1, 1)
+                },
+                new PrenotificationMovement()
+                {
+                    ActualDateOfShipment = new DateTime(2019, 1, 1)
+                }
+            };
+
+            var result = await rule.GetResult(movements, notificationId);
+
+            Assert.Equal(PrenotificationContentRules.ExcessiveShipments, result.Rule);
+            Assert.Equal(MessageLevel.Success, result.MessageLevel);
         }
     }
 }
