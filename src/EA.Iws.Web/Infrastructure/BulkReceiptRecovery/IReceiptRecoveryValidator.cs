@@ -9,6 +9,7 @@
     public interface IReceiptRecoveryValidator
     {
         DataTable DataTable { get; set; }
+        byte[] FileBytes { get; set; }
         Task<ReceiptRecoveryRulesSummary> GetValidationSummary(HttpPostedFileBase file, Guid notificationId);
         Task<ReceiptRecoveryRulesSummary> GetShipmentMovementValidationSummary(HttpPostedFileBase file, Guid notificationId);
     }

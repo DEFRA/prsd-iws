@@ -18,6 +18,8 @@
 
         public bool RemovedFirstRow { get; set; }
 
+        public byte[] FileBytes { get; set; }
+
         public bool IsFileRulesSuccess
         {
             get { return FileRulesResults.All(r => r.MessageLevel == MessageLevel.Success); }
