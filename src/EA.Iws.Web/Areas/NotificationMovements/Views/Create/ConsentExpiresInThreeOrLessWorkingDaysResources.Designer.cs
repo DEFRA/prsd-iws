@@ -62,11 +62,29 @@ namespace EA.Iws.Web.Areas.NotificationMovements.Views.Create {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to I would like to abandon creating this shipment.
+        /// </summary>
+        public static string AbandonOption {
+            get {
+                return ResourceManager.GetString("AbandonOption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to This notification will expire in less than three working days&apos; time..
         /// </summary>
         public static string Body {
             get {
                 return ResourceManager.GetString("Body", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to I understand, and would like to continue to consign this shipment.
+        /// </summary>
+        public static string ContinueAnywayOption {
+            get {
+                return ResourceManager.GetString("ContinueAnywayOption", resourceCulture);
             }
         }
         

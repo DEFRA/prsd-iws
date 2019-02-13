@@ -2300,6 +2300,7 @@
     <Compile Include="Areas\NotificationMovements\Controllers\ReceiptRecoveryBulkUploadController.cs" />
     <Compile Include="Areas\NotificationMovements\ViewModels\BulkUploadTemplate\BulkUploadTemplateViewModel.cs" />
     <Compile Include="Areas\NotificationMovements\ViewModels\Create\CarrierViewModel.cs" />
+    <Compile Include="Areas\NotificationMovements\ViewModels\Create\ThreeOrLessDaysViewModel.cs" />
     <Compile Include="Areas\NotificationMovements\ViewModels\Create\WhoAreYourCarrierViewModel.cs" />
     <Compile Include="Areas\NotificationMovements\ViewModels\PrenotificationBulkUpload\PrenotificationBulkUploadViewModel.cs" />
     <Compile Include="Areas\NotificationMovements\ViewModels\PrenotificationBulkUpload\ShipmentMovementDocumentsViewModel.cs" />
