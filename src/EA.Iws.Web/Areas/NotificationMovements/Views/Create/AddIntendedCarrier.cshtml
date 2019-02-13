@@ -16,7 +16,7 @@
 
 	<div class="form-group-compound @Html.Gds().FormGroupClass(m => m.SelectedCarrier)">
 		@Html.Gds().ValidationMessageFor(m => m.SelectedCarrier)
-		@Html.Gds().DropDownListFor(m => m.SelectedCarrier, Model.CarriersList, "Choose from Carriers...", new { title = Resources.CarrierListTitle, data_select_box = "true", tabindex = 1 })
+		@Html.Gds().DropDownListFor(m => m.SelectedCarrier, Model.CarriersList, string.Empty, new { title = Resources.CarrierListTitle, data_select_box = "true", tabindex = 1, placeholder = "Choose from Carriers..." })
 		<button type="submit" name="command" value="addcarrier" tabindex="2" class="button-secondary">@Resources.AddCarrier</button>
 	</div>
 	<h2 class="heading-medium">@Resources.ChosenCarriers</h2>
