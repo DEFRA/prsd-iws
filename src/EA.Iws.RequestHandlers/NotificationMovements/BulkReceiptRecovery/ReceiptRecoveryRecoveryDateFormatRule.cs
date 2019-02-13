@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
     using System.Threading.Tasks;
     using Core.Movement.BulkReceiptRecovery;
     using Core.Rules;
@@ -33,7 +34,7 @@
                     }
                 }
 
-                var shipmentNumbers = string.Join(", ", shipments);
+                var shipmentNumbers = string.Join(", ", shipments.Distinct());
                 string type = notification.NotificationType == Core.Shared.NotificationType.Disposal ? "disposal" : "recovery";
                 var errorMessage = string.Format(Prsd.Core.Helpers.EnumHelper.GetDisplayName(ReceiptRecoveryContentRules.RecoveryDateFormat), shipmentNumbers, type);
 

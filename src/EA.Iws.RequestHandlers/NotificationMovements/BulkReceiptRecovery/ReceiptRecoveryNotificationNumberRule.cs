@@ -29,7 +29,7 @@
 
                 var result = shipments.Any() ? MessageLevel.Error : MessageLevel.Success;
                 
-                var shipmentNumbers = string.Join(", ", shipments);
+                var shipmentNumbers = string.Join(", ", shipments.Distinct());
                 var errorMessage = string.Format(Prsd.Core.Helpers.EnumHelper.GetDisplayName(ReceiptRecoveryContentRules.WrongNotificationNumber), shipmentNumbers, notificationNumber);
 
                 return new ReceiptRecoveryContentRuleResult<ReceiptRecoveryContentRules>(ReceiptRecoveryContentRules.WrongNotificationNumber, result, errorMessage);

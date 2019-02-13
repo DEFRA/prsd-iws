@@ -37,7 +37,7 @@
                     }
                 }
 
-                var shipmentNumbers = string.Join(", ", shipments);
+                var shipmentNumbers = string.Join(", ", shipments.Distinct());
                 string type = notification.NotificationType == Core.Shared.NotificationType.Disposal ? "disposal" : "recovery";
                 var errorMessage = string.Format(Prsd.Core.Helpers.EnumHelper.GetDisplayName(ReceiptRecoveryContentRules.RecoveryDateValidation), shipmentNumbers, type);
 
