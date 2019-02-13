@@ -16,15 +16,17 @@
                 var shipments = movements.Where(m => m.ShipmentNumber.HasValue)
                     .GroupBy(x => x.ShipmentNumber)
                     .Where(g => g.Count() > 1)
+                    .OrderBy(x => x.Key)
                     .Select(y => y.Key)
                     .ToList();
 
                 var result = shipments.Any() ? MessageLevel.Error : MessageLevel.Success;
+                var minShipment = shipments.FirstOrDefault() ?? 0;
 
                 var shipmentNumbers = string.Join(", ", shipments);
                 var errorMessage = string.Format(Prsd.Core.Helpers.EnumHelper.GetDisplayName(PrenotificationContentRules.DuplicateShipmentNumber), shipmentNumbers);
 
-                return new PrenotificationContentRuleResult<PrenotificationContentRules>(PrenotificationContentRules.DuplicateShipmentNumber, result, errorMessage);
+                return new PrenotificationContentRuleResult<PrenotificationContentRules>(PrenotificationContentRules.DuplicateShipmentNumber, result, errorMessage, minShipment);
             });
         }
     }
