@@ -299,6 +299,7 @@
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult ConsentExpiresInThreeOrLessWorkingDays(Guid notificationId, ThreeOrLessDaysViewModel model)
         {
             if (!ModelState.IsValid)
