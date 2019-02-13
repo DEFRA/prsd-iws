@@ -43,7 +43,7 @@
 
                 var errorMessage = string.Format(Prsd.Core.Helpers.EnumHelper.GetDisplayName(PrenotificationContentRules.QuantityExceeded), errorShipmentNumber);
 
-                return new PrenotificationContentRuleResult<PrenotificationContentRules>(PrenotificationContentRules.QuantityExceeded, result, errorMessage);
+                return new PrenotificationContentRuleResult<PrenotificationContentRules>(PrenotificationContentRules.QuantityExceeded, result, errorMessage, errorShipmentNumber);
             });
         }
     }

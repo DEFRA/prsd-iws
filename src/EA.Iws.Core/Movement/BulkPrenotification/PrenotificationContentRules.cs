@@ -10,6 +10,8 @@
         MissingShipmentNumbers,
         [Display(Name = "Shipment number {0}: there is missing data.")]
         MissingData,
+        [Display(Name = "You can't create {0} shipments as you are only permitted {1} active loads")]
+        ActiveLoadsGrouped,
         [Display(Name = "You can't create {0} shipments as there are only {1} active loads remaining.")]
         ExcessiveShipments,
         [Display(Name = "Shipment number {0}: is duplicated within the data file.")]
@@ -38,8 +40,6 @@
         ThreeWorkingDaysToConsentDate,
         [Display(Name = "Shipment {0}: the quantity of waste will exceed your permitted allowance and can't be prenotified.")]
         QuantityExceeded,
-        [Display(Name = "Shipment {0}: the actual date of shipment is beyond your permitted Consent Window and therefore you are not allowed to prenotify this shipment.")]
-        BeyondConsentWindow,
         [Display(Name = "Shipment {0}: the actual shipment date is less than 3 working days.")]
         ThreeWorkingDaysToShipment
     }

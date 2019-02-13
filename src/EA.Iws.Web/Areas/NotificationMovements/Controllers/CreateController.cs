@@ -63,6 +63,8 @@
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Index(Guid notificationId, CreateMovementsViewModel model)
         {
+            ViewBag.NotificationId = notificationId;
+
             if (!ModelState.IsValid)
             {
                 return View(model);

@@ -34,7 +34,7 @@
             var shipmentNumbers = string.Join(", ", shipments);
             var errorMessage = string.Format(Prsd.Core.Helpers.EnumHelper.GetDisplayName(PrenotificationContentRules.OnlyNewShipments), shipmentNumbers);
 
-            return new PrenotificationContentRuleResult<PrenotificationContentRules>(PrenotificationContentRules.OnlyNewShipments, result, errorMessage);
+            return new PrenotificationContentRuleResult<PrenotificationContentRules>(PrenotificationContentRules.OnlyNewShipments, result, errorMessage, shipments.FirstOrDefault());
         }
     }
 }

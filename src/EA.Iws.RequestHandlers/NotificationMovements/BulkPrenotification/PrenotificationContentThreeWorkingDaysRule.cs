@@ -43,15 +43,17 @@
                                 workingDayCalculator.GetWorkingDays(SystemTime.UtcNow, m.ActualDateOfShipment.Value,
                                     true, ca) < 4)
                         .GroupBy(m => m.ShipmentNumber)
+                        .OrderBy(x => x.Key)
                         .Select(x => x.Key)
                         .ToList();
 
                 var result = shipments.Any() ? MessageLevel.Error : MessageLevel.Success;
+                var minShipment = shipments.FirstOrDefault() ?? 0;
 
                 var shipmentNumbers = string.Join(", ", shipments);
                 var errorMessage = string.Format(Prsd.Core.Helpers.EnumHelper.GetDisplayName(PrenotificationContentRules.ThreeWorkingDaysToShipment), shipmentNumbers);
 
-                return new PrenotificationContentRuleResult<PrenotificationContentRules>(PrenotificationContentRules.ThreeWorkingDaysToShipment, result, errorMessage);
+                return new PrenotificationContentRuleResult<PrenotificationContentRules>(PrenotificationContentRules.ThreeWorkingDaysToShipment, result, errorMessage, minShipment);
             });
         }
     }
