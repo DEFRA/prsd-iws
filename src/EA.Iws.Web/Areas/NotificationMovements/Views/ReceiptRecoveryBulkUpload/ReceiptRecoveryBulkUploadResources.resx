@@ -142,7 +142,7 @@
     <value>Receipt / {0} Bulk Upload</value>
   </data>
   <data name="UploadReceiptRecoveryList1" xml:space="preserve">
-    <value>The data file should not exceed 2GB in size.</value>
+    <value>The data file must not exceed 2GB in size.</value>
   </data>
   <data name="UploadReceiptRecoveryList2" xml:space="preserve">
     <value>Remove all column headings from a CSV file type.</value>

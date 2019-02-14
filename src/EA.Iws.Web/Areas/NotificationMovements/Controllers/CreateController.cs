@@ -32,13 +32,13 @@
         }
 
         [HttpGet]
-        public async Task<ActionResult> Index(Guid notificationId)
+        public async Task<ActionResult> Index(Guid notificationId, bool overrideRule = false)
         {
             ViewBag.NotificationId = notificationId;
 
             var ruleSummary = await mediator.SendAsync(new GetMovementRulesSummary(notificationId));
 
-            if (!ruleSummary.IsSuccess)
+            if (!ruleSummary.IsSuccess && !overrideRule)
             {
                 return GetRuleErrorView(ruleSummary);
             }
@@ -63,6 +63,8 @@
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Index(Guid notificationId, CreateMovementsViewModel model)
         {
+            ViewBag.NotificationId = notificationId;
+
             if (!ModelState.IsValid)
             {
                 return View(model);
@@ -222,7 +224,7 @@
 
             TempData["TempMovement"] = null;
 
-            return RedirectToAction("Summary", newMovementIds.ToRouteValueDictionary("newMovementIds"));
+            return RedirectToAction("WhoAreYourCarriers", newMovementIds.ToRouteValueDictionary("newMovementIds"));
         }
 
         [HttpGet]
@@ -295,6 +297,27 @@
         [HttpGet]
         public ActionResult ConsentExpiresInThreeOrLessWorkingDays(Guid notificationId)
         {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult ConsentExpiresInThreeOrLessWorkingDays(Guid notificationId, ThreeOrLessDaysViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View("ConsentExpiresInThreeOrLessWorkingDays", model);
+            }
+
+            if (model.Selection == ThreeOrLessWorkingDaysSelection.ContinueAnyway)
+            {
+                return RedirectToAction("Index", new { overrideRule = true});
+            }
+
+            if (model.Selection == ThreeOrLessWorkingDaysSelection.AbandonCreation)
+            {
+                return RedirectToAction("Index", "Options", new { area = "NotificationApplication", id = notificationId });
+            }
             return View();
         }
 

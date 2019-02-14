@@ -18,6 +18,12 @@
             ExitAddress = transportRoute.ExitCustomsOffice != null
                 ? transportRoute.ExitCustomsOffice.Address
                 : string.Empty;
+            EntryCountry = transportRoute.EntryCustomsOffice != null
+                ? transportRoute.EntryCustomsOffice.Country.Name
+                : string.Empty;
+            ExitCountry = transportRoute.ExitCustomsOffice != null
+                ? transportRoute.ExitCustomsOffice.Country.Name
+                : string.Empty;
             EntryAnnexMessage = string.Empty;
             ExitAnnexMessage = string.Empty;
             SetIsAnnexNeeded(transportRoute);
@@ -34,6 +40,10 @@
         public string EntryAddress { get; private set; }
 
         public string ExitAddress { get; private set; }
+
+        public string EntryCountry { get; private set; }
+
+        public string ExitCountry { get; private set; }
 
         public string EntryAnnexMessage { get; private set; }
 

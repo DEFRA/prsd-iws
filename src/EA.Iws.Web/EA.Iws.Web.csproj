@@ -2301,6 +2301,7 @@
     <Compile Include="Areas\NotificationMovements\Controllers\ReceiptRecoveryBulkUploadController.cs" />
     <Compile Include="Areas\NotificationMovements\ViewModels\BulkUploadTemplate\BulkUploadTemplateViewModel.cs" />
     <Compile Include="Areas\NotificationMovements\ViewModels\Create\CarrierViewModel.cs" />
+    <Compile Include="Areas\NotificationMovements\ViewModels\Create\ThreeOrLessDaysViewModel.cs" />
     <Compile Include="Areas\NotificationMovements\ViewModels\Create\WhoAreYourCarrierViewModel.cs" />
     <Compile Include="Areas\NotificationMovements\ViewModels\PrenotificationBulkUpload\PrenotificationBulkUploadViewModel.cs" />
     <Compile Include="Areas\NotificationMovements\ViewModels\PrenotificationBulkUpload\ShipmentMovementDocumentsViewModel.cs" />
@@ -2377,7 +2378,6 @@
     <Compile Include="Infrastructure\BulkPrenotification\FileParsePrenotificationFileRule.cs" />
     <Compile Include="Infrastructure\BulkPrenotification\ShippingMovementsFileTypeRules.cs" />
     <Compile Include="Infrastructure\BulkReceiptRecovery\ReceiptRecoveryMovementsFileTypeRules.cs" />
-    <Compile Include="Infrastructure\BulkReceiptRecovery\VirusRule.cs" />
     <Compile Include="Infrastructure\NotificationOwnerFilter.cs" />
     <Compile Include="Infrastructure\SkipNotificationOwnerFilter.cs" />
     <Compile Include="Infrastructure\AuditService.cs" />

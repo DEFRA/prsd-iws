@@ -34,10 +34,12 @@
                                 (!m.Unit.HasValue ||
                                 availableUnits.All(u => u != m.Unit.Value)))
                         .GroupBy(x => x.ShipmentNumber)
+                        .OrderBy(x => x.Key)
                         .Select(x => x.Key)
                         .ToList();
 
                 var result = shipments.Any() ? MessageLevel.Error : MessageLevel.Success;
+                var minShipment = shipments.FirstOrDefault() ?? 0;
 
                 var shipmentNumbers = string.Join(", ", shipments);
                 var errorMessage =
@@ -45,8 +47,7 @@
                         Prsd.Core.Helpers.EnumHelper.GetDisplayName(PrenotificationContentRules.QuantityUnit),
                         shipmentNumbers);
 
-                return new PrenotificationContentRuleResult<PrenotificationContentRules>(PrenotificationContentRules.QuantityUnit,
-                    result, errorMessage);
+                return new PrenotificationContentRuleResult<PrenotificationContentRules>(PrenotificationContentRules.QuantityUnit, result, errorMessage, minShipment);
             });
         }
     }

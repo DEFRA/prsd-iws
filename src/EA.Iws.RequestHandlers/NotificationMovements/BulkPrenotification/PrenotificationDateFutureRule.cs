@@ -23,15 +23,17 @@
                                 m.ActualDateOfShipment.Value.Date >= SystemTime.UtcNow.Date &&
                                 (m.ActualDateOfShipment.Value.Date - SystemTime.UtcNow.Date).TotalDays >= MaxDays) //Equal will include the current date as the first day.
                         .GroupBy(x => x.ShipmentNumber)
+                        .OrderBy(x => x.Key)
                         .Select(x => x.Key)
                         .ToList();
 
                 var result = shipments.Any() ? MessageLevel.Error : MessageLevel.Success;
+                var minShipment = shipments.FirstOrDefault() ?? 0;
 
                 var shipmentNumbers = string.Join(", ", shipments);
                 var errorMessage = string.Format(Prsd.Core.Helpers.EnumHelper.GetDisplayName(PrenotificationContentRules.FutureDate), shipmentNumbers, MaxDays);
 
-                return new PrenotificationContentRuleResult<PrenotificationContentRules>(PrenotificationContentRules.FutureDate, result, errorMessage);
+                return new PrenotificationContentRuleResult<PrenotificationContentRules>(PrenotificationContentRules.FutureDate, result, errorMessage, minShipment);
             });
         }
     }

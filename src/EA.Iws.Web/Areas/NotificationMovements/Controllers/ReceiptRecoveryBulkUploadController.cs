@@ -169,11 +169,10 @@
                 if (draftBulkUploadId != null && draftBulkUploadId != Guid.Empty)
                 {
                     var fileExtension = Path.GetExtension(model.File.FileName);
-                    var uploadedFile = await fileReader.GetFileBytes(model.File);
 
                     await
                         mediator.SendAsync(new CreateReceiptRecovery(notificationId, draftBulkUploadId.Value,
-                            uploadedFile, fileExtension));
+                            validationSummary.FileBytes, fileExtension));
 
                     TempData["ShipmentMovementFileName"] = model.File.FileName;
                     return RedirectToAction("Success");

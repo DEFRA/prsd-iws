@@ -115,7 +115,7 @@
         {
             var result = requiredCustomsOffices.GetForTransportRoute(transportRoute);
 
-            Assert.Equal(CustomsOffices.TransitStatesNotSet, result);
+            Assert.Equal(CustomsOffices.EntryAndExit, result);
         }
 
         [Fact]
@@ -129,7 +129,7 @@
 
             var result = requiredCustomsOffices.GetForTransportRoute(transportRoute);
 
-            Assert.Equal(CustomsOffices.None, result);
+            Assert.Equal(CustomsOffices.EntryAndExit, result);
         }
 
         [Fact]
@@ -144,7 +144,7 @@
 
             var result = requiredCustomsOffices.GetForTransportRoute(transportRoute);
 
-            Assert.Equal(CustomsOffices.Exit, result);
+            Assert.Equal(CustomsOffices.EntryAndExit, result);
         }
 
         [Fact]
@@ -211,7 +211,7 @@
 
             var result = requiredCustomsOffices.GetForTransportRoute(transportRoute);
 
-            Assert.Equal(CustomsOffices.Exit, result);
+            Assert.Equal(CustomsOffices.EntryAndExit, result);
         }
 
         [Fact]
@@ -227,7 +227,7 @@
 
             var result = requiredCustomsOffices.GetForTransportRoute(transportRoute);
 
-            Assert.Equal(CustomsOffices.None, result);
+            Assert.Equal(CustomsOffices.EntryAndExit, result);
         }
     }
 }

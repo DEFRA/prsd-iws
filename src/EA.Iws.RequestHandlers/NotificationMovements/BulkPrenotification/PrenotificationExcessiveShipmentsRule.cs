@@ -2,34 +2,59 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
     using System.Threading.Tasks;
+    using Core.FinancialGuarantee;
     using Core.Movement.BulkPrenotification;
     using Core.Rules;
+    using Domain.FinancialGuarantee;
     using Domain.Movement;
 
     public class PrenotificationExcessiveShipmentsRule : IPrenotificationContentRule
     {
-        private readonly INotificationMovementsSummaryRepository repo;
+        private readonly IMovementRepository movementRepository;
+        private readonly IFinancialGuaranteeRepository financialGuaranteeRepository;
 
-       public PrenotificationExcessiveShipmentsRule(INotificationMovementsSummaryRepository repo)
+        public PrenotificationExcessiveShipmentsRule(IMovementRepository movementRepository,
+            IFinancialGuaranteeRepository financialGuaranteeRepository)
         {
-            this.repo = repo;
+            this.movementRepository = movementRepository;
+            this.financialGuaranteeRepository = financialGuaranteeRepository;
         }
 
         public async Task<PrenotificationContentRuleResult<PrenotificationContentRules>> GetResult(List<PrenotificationMovement> movements, Guid notificationId)
         {
-            var movementSummary = await repo.GetById(notificationId);
+            var financialGuaranteeCollection = await financialGuaranteeRepository.GetByNotificationId(notificationId);
+            var currentFinancialGuarantee =
+                financialGuaranteeCollection.FinancialGuarantees.SingleOrDefault(
+                    fg => fg.Status == FinancialGuaranteeStatus.Approved);
+            var activeLoadsPermitted = currentFinancialGuarantee == null ? 0 : currentFinancialGuarantee.ActiveLoadsPermitted.GetValueOrDefault();
 
-            return await Task.Run(() =>
+            var groupedByDateOfShipment =
+                movements.Where(m => m.ActualDateOfShipment.HasValue)
+                    .GroupBy(m => m.ActualDateOfShipment.Value)
+                    .Where(g => g.Count() > activeLoadsPermitted)
+                    .Select(m => m.Key);
+
+            var result = groupedByDateOfShipment.Any() ? MessageLevel.Error : MessageLevel.Success;
+
+            var errorMessage =
+                string.Format(
+                    Prsd.Core.Helpers.EnumHelper.GetDisplayName(PrenotificationContentRules.ActiveLoadsGrouped),
+                    movements.Count, activeLoadsPermitted);
+
+            if (result == MessageLevel.Error)
             {
-                var remainingShipments = movementSummary.ActiveLoadsPermitted - movementSummary.CurrentActiveLoads;
+                return new PrenotificationContentRuleResult<PrenotificationContentRules>(PrenotificationContentRules.ActiveLoadsGrouped, result, errorMessage, 0);
+            }
 
-                var result = remainingShipments < movements.Count ? MessageLevel.Error : MessageLevel.Success;
-                
-                var errorMessage = string.Format(Prsd.Core.Helpers.EnumHelper.GetDisplayName(PrenotificationContentRules.ExcessiveShipments), movements.Count, remainingShipments);
+            var currentActiveLoads = (await movementRepository.GetActiveMovements(notificationId)).Count();
+            var remainingShipments = activeLoadsPermitted - currentActiveLoads;
 
-                return new PrenotificationContentRuleResult<PrenotificationContentRules>(PrenotificationContentRules.ExcessiveShipments, result, errorMessage);
-            });
+            result = remainingShipments < movements.Count ? MessageLevel.Error : MessageLevel.Success;
+            errorMessage = string.Format(Prsd.Core.Helpers.EnumHelper.GetDisplayName(PrenotificationContentRules.ExcessiveShipments), movements.Count, remainingShipments);
+
+            return new PrenotificationContentRuleResult<PrenotificationContentRules>(PrenotificationContentRules.ExcessiveShipments, result, errorMessage, 0);
         }
     }
 }
