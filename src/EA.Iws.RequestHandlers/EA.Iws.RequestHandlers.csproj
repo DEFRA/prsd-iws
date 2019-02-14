@@ -148,6 +148,8 @@
     <Compile Include="Annexes\DeleteAnnex.cs" />
     <Compile Include="Annexes\DeleteAnnexFileHandler.cs" />
     <Compile Include="Carrier\AddCarriersToNotificationFromAddressBookHandler.cs" />
+    <Compile Include="CustomsOffice\GetExitCustomsSelectionForNotificationByIdHandler.cs" />
+    <Compile Include="CustomsOffice\SetExitCustomsSelectionForNotificationByIdHandler.cs" />
     <Compile Include="CustomsOffice\DeleteEntryCustomsOfficeByNotificationIdHandler.cs" />
     <Compile Include="Files\GetFileHandler.cs" />
     <Compile Include="Annexes\SetTechnologyEmployedAnnexHandler.cs" />

@@ -15,22 +15,27 @@
 
         [StringLength(1024)]
         public string Name { get; set; }
-        
+
         [StringLength(4000)]
         [DataType(DataType.MultilineText)]
         public string Address { get; set; }
 
         public SelectList Countries { get; set; }
-        
+
         [Display(Name = "Country", ResourceType = typeof(EntryCustomsOfficeResources))]
         public Guid? SelectedCountry { get; set; }
 
         public int Steps { get; set; }
-        
+
         public bool? CustomsOfficeRequired { get; set; }
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
+            if (CustomsOfficeRequired == null)
+            {
+                yield return new ValidationResult("Select an option for your transport route customs office information", new[] { "CustomsOfficeRequired" });
+            }
+
             if (CustomsOfficeRequired.GetValueOrDefault())
             {
                 if (SelectedCountry == null)
@@ -44,13 +49,6 @@
                 if (Name == null)
                 {
                     yield return new ValidationResult("The Name field is required.", new[] { "Name" });
-                }
-            }
-            else
-            {
-                if (CustomsOfficeRequired == null)
-                {
-                    yield return new ValidationResult("Please select if this is an export or import notification.", new[] { "CustomsOfficeRequired" });
                 }
             }
         }
