@@ -31,6 +31,11 @@
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
+            if (CustomsOfficeRequired == null)
+            {
+                yield return new ValidationResult("Select an option for your transport route customs office information", new[] { "CustomsOfficeRequired" });
+            }
+
             if (CustomsOfficeRequired.GetValueOrDefault())
             {
                 if (SelectedCountry == null)
