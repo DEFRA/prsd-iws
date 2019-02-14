@@ -41,6 +41,7 @@
         public virtual ExitCustomsOffice ExitCustomsOffice { get; private set; }
 
         public virtual EntryCustomsOffice EntryCustomsOffice { get; private set; }
+        public virtual EntryExitCustomsSelection EntryExitCustomsSelection { get; private set; }
 
         public void SetStateOfExportForNotification(StateOfExport stateOfExport)
         {
@@ -204,6 +205,11 @@
                     throw new InvalidOperationException("Cannot set an entry customs office for Notification " + this.Id
                         + ". The Notification only requires the following customs offices: " + customsOfficeRequiredStatus);
             }
+        }
+
+        public void SetEntryExitCustomsSelection(EntryExitCustomsSelection selection)
+        {
+            this.EntryExitCustomsSelection = selection;
         }
 
         private void CheckAllTransitStatesInEU()
