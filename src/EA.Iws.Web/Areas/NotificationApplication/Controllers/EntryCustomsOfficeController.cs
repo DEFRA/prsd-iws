@@ -52,7 +52,8 @@
                 model = new CustomsOfficeViewModel
                 {
                     Countries = new SelectList(data.Countries, "Id", "Name"),
-                    Steps = (data.CustomsOfficesRequired == CustomsOffices.EntryAndExit) ? 2 : 1
+                    Steps = (data.CustomsOfficesRequired == CustomsOffices.EntryAndExit) ? 2 : 1,
+                    CustomsOfficeRequired = true
                 };
             }
 
@@ -76,16 +77,26 @@
 
             var existingData = await mediator.SendAsync(new GetEntryCustomsOfficeAddDataByNotificationId(id));
 
-            await mediator.SendAsync(new SetEntryCustomsOfficeForNotificationById(id,
-                model.Name,
-                model.Address,
-                model.SelectedCountry.Value));
+            if (model.CustomsOfficeRequired.GetValueOrDefault())
+            {
+                await mediator.SendAsync(new SetEntryCustomsOfficeForNotificationById(id,
+                    model.Name,
+                    model.Address,
+                    model.SelectedCountry.Value));
+            }
+            else
+            {
+                if (existingData.CustomsOfficeData != null)
+                {
+                    await mediator.SendAsync(new DeleteEntryCustomsOfficeByNotificationId(id));
+                }
+            }
 
             await this.auditService.AddAuditEntry(this.mediator,
-                   id,
-                   User.GetUserId(),
-                   existingData.CustomsOfficeData == null ? NotificationAuditType.Added : NotificationAuditType.Updated,
-                   NotificationAuditScreenType.CustomsOffice);
+                       id,
+                       User.GetUserId(),
+                       existingData.CustomsOfficeData == null ? NotificationAuditType.Added : NotificationAuditType.Updated,
+                       NotificationAuditScreenType.CustomsOffice);
 
             return RedirectToAction("Index", "Shipment", new { id });
         }

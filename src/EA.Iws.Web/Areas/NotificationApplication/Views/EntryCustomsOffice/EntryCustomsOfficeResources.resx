@@ -121,9 +121,6 @@
     <value>Country</value>
   </data>
   <data name="Header" xml:space="preserve">
-    <value>What is the name and address for the entry customs office?</value>
-  </data>
-  <data name="HeaderDescription" xml:space="preserve">
     <value>Does the transport route require customs office of entry information?</value>
   </data>
   <data name="Title" xml:space="preserve">

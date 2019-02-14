@@ -71,20 +71,11 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.EntryCustomsOffice {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to What is the name and address for the entry customs office?.
+        ///   Looks up a localized string similar to Does the transport route require customs office of entry information?.
         /// </summary>
         public static string Header {
             get {
                 return ResourceManager.GetString("Header", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Does the transport route require customs office of entry information?.
-        /// </summary>
-        public static string HeaderDescription {
-            get {
-                return ResourceManager.GetString("HeaderDescription", resourceCulture);
             }
         }
         
