@@ -128,10 +128,39 @@
             Assert.False(response.IsContentRulesSuccess);
         }
 
-        [Theory]
-        [MemberData("MissingReceiptData")]
-        public async Task MissingReceiptAndRecoveryData_ContentRulesFailed(List<ReceiptRecoveryMovement> movements)
+        [Fact]
+        public async Task MissingReceiptAndRecoveryData_ContentRulesFailed()
         {
+            var movements = new List<ReceiptRecoveryMovement>()
+            {
+                new ReceiptRecoveryMovement()
+                {
+                    NotificationNumber = "GB 0001 123456",
+                    ShipmentNumber = 1,
+                    MissingReceivedDate = true,
+                    MissingRecoveredDisposedDate = true,
+                    MissingQuantity = false,
+                    MissingUnits = false
+                },
+                new ReceiptRecoveryMovement()
+                {
+                    NotificationNumber = "GB 0001 123456",
+                    ShipmentNumber = 2,
+                    MissingReceivedDate = true,
+                    MissingRecoveredDisposedDate = true,
+                    MissingQuantity = true,
+                    MissingUnits = false
+                },
+                new ReceiptRecoveryMovement()
+                {
+                    NotificationNumber = "GB 0001 123456",
+                    ShipmentNumber = 3,
+                    MissingReceivedDate = false,
+                    MissingQuantity = false,
+                    MissingUnits = true
+                }
+            };
+
             var notificationId = Guid.NewGuid();
             var summary = new ReceiptRecoveryRulesSummary();
             var message = new PerformReceiptRecoveryContentValidation(summary, notificationId, new DataTable(), "Test", false);
@@ -153,7 +182,7 @@
             A.CallTo(() => mapper.Map(A<DataTable>.Ignored)).Returns(A.CollectionOfFake<ReceiptRecoveryMovement>(5).ToList());
             A.CallTo(() => contentRule.GetResult(A<List<ReceiptRecoveryMovement>>.Ignored, notificationId))
                 .Returns(new ReceiptRecoveryContentRuleResult<ReceiptRecoveryContentRules>(ReceiptRecoveryContentRules.MaximumShipments,
-                    MessageLevel.Error, "Missing data"));
+                    MessageLevel.Error, "Missing data", 0));
 
             var response = await handler.HandleAsync(message);
 
@@ -184,67 +213,13 @@
             A.CallTo(() => mapper.Map(A<DataTable>.Ignored)).Returns(movements);
             A.CallTo(() => contentRule.GetResult(A<List<ReceiptRecoveryMovement>>.Ignored, notificationId))
                 .Returns(new ReceiptRecoveryContentRuleResult<ReceiptRecoveryContentRules>(ReceiptRecoveryContentRules.MaximumShipments,
-                    MessageLevel.Success, "Test"));
+                    MessageLevel.Success, "Test", 0));
 
             var response = await handler.HandleAsync(message);
 
             Assert.True(response.IsContentRulesSuccess);
             A.CallTo(() => repository.AddReceiptRecovery(A<Guid>.Ignored, A<List<ReceiptRecoveryMovement>>.Ignored, "Test"))
                 .MustHaveHappened(Repeated.Exactly.Once);
-        }
-
-        public static IEnumerable<object[]> MissingReceiptData
-        {
-            get
-            {
-                return new[]
-                {
-                    new object[]
-                    {
-                        new List<ReceiptRecoveryMovement>()
-                        {
-                            new ReceiptRecoveryMovement()
-                            {
-                                NotificationNumber = "GB 0001 123456",
-                                ShipmentNumber = 1,
-                                MissingReceivedDate = true,
-                                MissingRecoveredDisposedDate = true,
-                                MissingQuantity = false,
-                                MissingUnits = false
-                            }
-                        }
-                    },
-                    new object[] 
-                    {
-                        new List<ReceiptRecoveryMovement>()
-                        {
-                            new ReceiptRecoveryMovement()
-                            {
-                                NotificationNumber = "GB 0001 123456",
-                                ShipmentNumber = 2,
-                                MissingReceivedDate = true,
-                                MissingRecoveredDisposedDate = true,
-                                MissingQuantity = true,
-                                MissingUnits = false
-                            }
-                        }
-                    },
-                    new object[]
-                    {
-                        new List<ReceiptRecoveryMovement>()
-                        {
-                            new ReceiptRecoveryMovement()
-                            {
-                                NotificationNumber = "GB 0001 123456",
-                                ShipmentNumber = 3,
-                                MissingReceivedDate = false,
-                                MissingQuantity = false,
-                                MissingUnits = true
-                            }
-                        }
-                    }
-                };
-            }
         }
     }
 }
