@@ -44,7 +44,8 @@
                     Name = data.CustomsOfficeData.Name,
                     SelectedCountry = data.CustomsOfficeData.Country.Id,
                     Countries = new SelectList(data.Countries, "Id", "Name", data.CustomsOfficeData.Country.Id),
-                    Steps = (data.CustomsOffices == CustomsOffices.EntryAndExit) ? 2 : 1
+                    Steps = (data.CustomsOffices == CustomsOffices.EntryAndExit) ? 2 : 1,
+                    CustomsOfficeRequired = true
                 };
             }
             else
@@ -74,21 +75,33 @@
                 return View(model);
             }
 
-            var existingData = await mediator.SendAsync(new GetExitCustomsOfficeAddDataByNotificationId(id));
+            CustomsOffices customOffices;
 
-            CustomsOfficeCompletionStatus result = await mediator.SendAsync(
-                new SetExitCustomsOfficeForNotificationById(id,
-                model.Name,
-                model.Address,
-                model.SelectedCountry.Value));
+            if (model.CustomsOfficeRequired.GetValueOrDefault())
+            {
+                var existingData = await mediator.SendAsync(new GetExitCustomsOfficeAddDataByNotificationId(id));
 
-            await this.auditService.AddAuditEntry(this.mediator,
-                   id,
-                   User.GetUserId(),
-                   existingData.CustomsOfficeData == null ? NotificationAuditType.Added : NotificationAuditType.Updated,
-                   NotificationAuditScreenType.CustomsOffice);
+                CustomsOfficeCompletionStatus result = await mediator.SendAsync(
+                    new SetExitCustomsOfficeForNotificationById(id,
+                    model.Name,
+                    model.Address,
+                    model.SelectedCountry.Value));
 
-            switch (result.CustomsOfficesRequired)
+                customOffices = result.CustomsOfficesRequired;
+
+                await this.auditService.AddAuditEntry(this.mediator,
+                       id,
+                       User.GetUserId(),
+                       existingData.CustomsOfficeData == null ? NotificationAuditType.Added : NotificationAuditType.Updated,
+                       NotificationAuditScreenType.CustomsOffice);
+            }
+            else
+            {
+                var data = await mediator.SendAsync(new GetExitCustomsOfficeAddDataByNotificationId(id));
+
+                customOffices = data.CustomsOffices;
+            }
+            switch (customOffices)
             {
                 case CustomsOffices.EntryAndExit:
                     return RedirectToAction("Index", "EntryCustomsOffice", new { id });
