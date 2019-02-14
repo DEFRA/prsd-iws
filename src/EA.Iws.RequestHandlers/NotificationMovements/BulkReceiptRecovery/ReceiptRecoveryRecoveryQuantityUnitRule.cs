@@ -41,7 +41,7 @@
             var shipmentNumbers = string.Join(", ", shipments.Distinct());
             var errorMessage = string.Format(Prsd.Core.Helpers.EnumHelper.GetDisplayName(ReceiptRecoveryContentRules.QuantityUnit), shipmentNumbers);
 
-            return new ReceiptRecoveryContentRuleResult<ReceiptRecoveryContentRules>(ReceiptRecoveryContentRules.QuantityUnit, result, errorMessage, shipments.Min());
+            return new ReceiptRecoveryContentRuleResult<ReceiptRecoveryContentRules>(ReceiptRecoveryContentRules.QuantityUnit, result, errorMessage, shipments.DefaultIfEmpty(0).Min());
         }
     }
 }

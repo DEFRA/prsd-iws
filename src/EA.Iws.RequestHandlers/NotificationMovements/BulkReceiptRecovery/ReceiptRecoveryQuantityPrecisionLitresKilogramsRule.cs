@@ -40,7 +40,7 @@
                         shipmentNumbers, precision);
 
                 return new ReceiptRecoveryContentRuleResult<ReceiptRecoveryContentRules>(ReceiptRecoveryContentRules.QuantityPrecision,
-                    result, errorMessage, shipments.Min());
+                    result, errorMessage, shipments.DefaultIfEmpty(0).Min());
             });
         }
     }

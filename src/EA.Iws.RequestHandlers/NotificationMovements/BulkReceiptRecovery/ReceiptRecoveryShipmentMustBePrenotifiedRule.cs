@@ -71,7 +71,7 @@
 
             var errorMessage = string.Format(Prsd.Core.Helpers.EnumHelper.GetDisplayName(ReceiptRecoveryContentRules.ReceivedRecoveredValidation), shipmentNumbers, type);
 
-            return new ReceiptRecoveryContentRuleResult<ReceiptRecoveryContentRules>(ReceiptRecoveryContentRules.ReceivedRecoveredValidation, result, errorMessage, shipments.Min());
+            return new ReceiptRecoveryContentRuleResult<ReceiptRecoveryContentRules>(ReceiptRecoveryContentRules.ReceivedRecoveredValidation, result, errorMessage, shipments.DefaultIfEmpty(0).Min());
         }
     }
 }

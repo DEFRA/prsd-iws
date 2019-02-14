@@ -79,7 +79,11 @@
                 rules.Add(await rule.GetResult(movements, notificationId));
             }
 
-            return rules.OrderBy(r => r.MinShipmentNumber).ThenBy(r => r.Rule).ToList();
+            return rules.OrderBy(r => r.MinShipmentNumber).ThenBy(r =>
+            {
+                var shipments = r.ErrorMessage.Split(new[] { ':' }, StringSplitOptions.RemoveEmptyEntries)[0];
+                return shipments;
+            }).ThenBy(r => r.Rule).ToList();
         }
 
         private static async Task<ReceiptRecoveryContentRuleResult<ReceiptRecoveryContentRules>> GetMaxShipments(

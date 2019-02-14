@@ -38,7 +38,7 @@
                 string type = notification.NotificationType == Core.Shared.NotificationType.Disposal ? "disposal" : "recovery";
                 var errorMessage = string.Format(Prsd.Core.Helpers.EnumHelper.GetDisplayName(ReceiptRecoveryContentRules.RecoveryDateFormat), shipmentNumbers, type);
 
-                return new ReceiptRecoveryContentRuleResult<ReceiptRecoveryContentRules>(ReceiptRecoveryContentRules.RecoveryDateFormat, result, errorMessage, shipments.Min());
+                return new ReceiptRecoveryContentRuleResult<ReceiptRecoveryContentRules>(ReceiptRecoveryContentRules.RecoveryDateFormat, result, errorMessage, shipments.DefaultIfEmpty(0).Min());
             });
         }
     }
