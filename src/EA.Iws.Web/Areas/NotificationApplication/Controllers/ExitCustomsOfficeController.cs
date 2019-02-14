@@ -29,7 +29,7 @@
         {
             var data = await mediator.SendAsync(new GetExitCustomsOfficeAddDataByNotificationId(id));
 
-            var existing = await mediator.SendAsync(new GetEntryExitCustomsSelectionForNotificationById(id));
+            var existing = await mediator.SendAsync(new GetEntryExitCustomsOfficeSelectionForNotificationById(id));
 
             if (data.CustomsOffices != CustomsOffices.EntryAndExit
                 && data.CustomsOffices != CustomsOffices.Exit)
@@ -102,9 +102,9 @@
                        NotificationAuditScreenType.CustomsOffice);
             }
 
-            var addSelection = await mediator.SendAsync(new SetExitCustomsSelectionForNotificationById(id, model.CustomsOfficeRequired.GetValueOrDefault()));
+            var addSelection = await mediator.SendAsync(new SetExitCustomsOfficeSelectionForNotificationById(id, model.CustomsOfficeRequired.GetValueOrDefault()));
 
-            return RedirectToAction("Index", "Shipment", new { id });
+            return RedirectToAction("Index", "EntryCustomsOffice", new { id });
         }
     }
 }

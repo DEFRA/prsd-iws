@@ -57,6 +57,17 @@
                 };
             }
 
+            var existing = await mediator.SendAsync(new GetEntryExitCustomsOfficeSelectionForNotificationById(id));
+
+            if (existing == null)
+            {
+                model.CustomsOfficeRequired = null;
+            }
+            else
+            {
+                model.CustomsOfficeRequired = existing.Entry;
+            }
+
             return View(model);
         }
 
@@ -97,6 +108,8 @@
                        User.GetUserId(),
                        existingData.CustomsOfficeData == null ? NotificationAuditType.Added : NotificationAuditType.Updated,
                        NotificationAuditScreenType.CustomsOffice);
+
+            await mediator.SendAsync(new SetEntryCustomsOfficeSelectionForNotificationById(id, model.CustomsOfficeRequired.GetValueOrDefault()));
 
             return RedirectToAction("Index", "Shipment", new { id });
         }

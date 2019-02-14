@@ -3,7 +3,7 @@
     using System.Data.Entity.ModelConfiguration;
     using Domain.TransportRoute;
 
-    internal class EntryExitCustomsSelectionsMapping : EntityTypeConfiguration<EntryExitCustomsSelection>
+    internal class EntryExitCustomsSelectionsMapping : EntityTypeConfiguration<EntryExitCustomsOfficeSelection>
     {
         public EntryExitCustomsSelectionsMapping()
         {
