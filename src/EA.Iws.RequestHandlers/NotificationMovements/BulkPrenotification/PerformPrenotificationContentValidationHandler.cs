@@ -83,7 +83,11 @@
             var lastRuleResult = rules.FirstOrDefault(r => r.Rule == LastRule);
 
             var orderedRules =
-                rules.Where(r => r.Rule != LastRule).OrderBy(r => r.MinShipmentNumber).ThenBy(r => r.Rule).ToList();
+                rules.Where(r => r.Rule != LastRule).OrderBy(r => r.MinShipmentNumber).ThenBy(r =>
+                {
+                    var shipments = r.ErrorMessage.Split(new[] { ':' }, StringSplitOptions.RemoveEmptyEntries)[0];
+                    return shipments;
+                }).ThenBy(r => r.Rule).ToList();
 
             if (lastRuleResult != null)
             {
