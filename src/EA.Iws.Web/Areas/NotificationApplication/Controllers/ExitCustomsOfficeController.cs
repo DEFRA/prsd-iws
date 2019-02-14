@@ -29,6 +29,8 @@
         {
             var data = await mediator.SendAsync(new GetExitCustomsOfficeAddDataByNotificationId(id));
 
+            var existing = await mediator.SendAsync(new GetEntryExitCustomsSelectionForNotificationById(id));
+
             if (data.CustomsOffices != CustomsOffices.EntryAndExit
                 && data.CustomsOffices != CustomsOffices.Exit)
             {
@@ -44,8 +46,7 @@
                     Name = data.CustomsOfficeData.Name,
                     SelectedCountry = data.CustomsOfficeData.Country.Id,
                     Countries = new SelectList(data.Countries, "Id", "Name", data.CustomsOfficeData.Country.Id),
-                    Steps = (data.CustomsOffices == CustomsOffices.EntryAndExit) ? 2 : 1,
-                    CustomsOfficeRequired = true
+                    Steps = (data.CustomsOffices == CustomsOffices.EntryAndExit) ? 2 : 1
                 };
             }
             else
@@ -55,6 +56,15 @@
                     Countries = new SelectList(data.Countries, "Id", "Name"),
                     Steps = (data.CustomsOffices == CustomsOffices.EntryAndExit) ? 2 : 1
                 };
+            }
+
+            if (existing == null)
+            {
+                model.CustomsOfficeRequired = null;
+            }
+            else
+            {
+                model.CustomsOfficeRequired = existing.Exit;
             }
 
             return View(model);
@@ -75,8 +85,6 @@
                 return View(model);
             }
 
-            CustomsOffices customOffices;
-
             if (model.CustomsOfficeRequired.GetValueOrDefault())
             {
                 var existingData = await mediator.SendAsync(new GetExitCustomsOfficeAddDataByNotificationId(id));
@@ -87,27 +95,16 @@
                     model.Address,
                     model.SelectedCountry.Value));
 
-                customOffices = result.CustomsOfficesRequired;
-
                 await this.auditService.AddAuditEntry(this.mediator,
                        id,
                        User.GetUserId(),
                        existingData.CustomsOfficeData == null ? NotificationAuditType.Added : NotificationAuditType.Updated,
                        NotificationAuditScreenType.CustomsOffice);
             }
-            else
-            {
-                var data = await mediator.SendAsync(new GetExitCustomsOfficeAddDataByNotificationId(id));
 
-                customOffices = data.CustomsOffices;
-            }
-            switch (customOffices)
-            {
-                case CustomsOffices.EntryAndExit:
-                    return RedirectToAction("Index", "EntryCustomsOffice", new { id });
-                default:
-                    return RedirectToAction("Index", "Shipment", new { id });
-            }
+            var addSelection = await mediator.SendAsync(new SetExitCustomsSelectionForNotificationById(id, model.CustomsOfficeRequired.GetValueOrDefault()));
+
+            return RedirectToAction("Index", "Shipment", new { id });
         }
     }
 }
