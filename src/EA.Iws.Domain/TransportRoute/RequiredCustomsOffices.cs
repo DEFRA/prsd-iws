@@ -7,10 +7,6 @@
     {
         public CustomsOffices GetForTransportRoute(TransportRoute transportRoute)
         {
-            if (transportRoute == null || transportRoute.StateOfExport == null || transportRoute.StateOfImport == null)
-            {
-                return CustomsOffices.TransitStatesNotSet;
-            }
             return CustomsOffices.EntryAndExit;
         }
     }
