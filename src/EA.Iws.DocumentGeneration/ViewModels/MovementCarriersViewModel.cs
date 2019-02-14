@@ -134,7 +134,7 @@
             {
                 var mcd = new MovementCarrierDetails
                 {
-                    Order = (i + 1).ToString(),
+                    Order = AddOrdinal(sortedCarriersList[i].Order, sortedCarriersList.Count),
                     Reg = sortedCarriersList[i].Carrier.Business.RegistrationNumber,
                     Name = sortedCarriersList[i].Carrier.Business.Name,
                     AddressViewModel = new AddressViewModel(sortedCarriersList[i].Carrier.Address),
@@ -182,6 +182,39 @@
             LastFax = carrier.Contact.Fax.ToFormattedContact();
             LastEmail = carrier.Contact.Email;
             LastContact = carrier.Contact.FullName;
+        }
+
+        public static string AddOrdinal(int number, int carrierCount)
+        {
+            if (number <= 0)
+            {
+                return number.ToString();
+            }
+
+            if (number == carrierCount)
+            {
+                return "Last";
+            }
+
+            switch (number % 100)
+            {
+                case 11:
+                case 12:
+                case 13:
+                    return number + "th";
+            }
+
+            switch (number % 10)
+            {
+                case 1:
+                    return number + "st";
+                case 2:
+                    return number + "nd";
+                case 3:
+                    return number + "rd";
+                default:
+                    return number + "th";
+            }
         }
     }
 }
