@@ -8,5 +8,7 @@
         Task<TransportRoute> GetByNotificationId(Guid notificationId);
 
         void Add(TransportRoute transportRoute);
+
+        Task DeleteEntryCustomsOfficeByNotificationId(Guid notificationId);
     }
 }

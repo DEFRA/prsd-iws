@@ -2,6 +2,7 @@
 {
     using System;
     using System.Data.Entity;
+    using System.Data.SqlClient;
     using System.Threading.Tasks;
     using Domain.ImportNotification;
     using Domain.Security;
@@ -26,6 +27,13 @@
         public void Add(TransportRoute transportRoute)
         {
             context.TransportRoutes.Add(transportRoute);
+        }
+
+        public async Task DeleteEntryCustomsOfficeByNotificationId(Guid notificationId)
+        {
+            await context.Database.ExecuteSqlCommandAsync(@"
+                DELETE FROM[Notification].[EntryCustomsOffice] WHERE TransportRouteId IN(SELECT[Id] FROM [Notification].[TransportRoute] WHERE NotificationId = @Id)",
+                new SqlParameter("@Id", notificationId));
         }
     }
 }
