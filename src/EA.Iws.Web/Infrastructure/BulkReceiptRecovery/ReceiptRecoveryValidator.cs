@@ -12,18 +12,25 @@
     using Core.Rules;
     using Prsd.Core.Mediator;
     using Requests.NotificationMovements.BulkUpload;
+    using VirusScanning;
 
     public class ReceiptRecoveryValidator : IReceiptRecoveryValidator
     {
         private readonly IMediator mediator;
         private readonly IEnumerable<IReceiptRecoveryFileRule> fileRules;
+        private readonly IVirusScanner virusScanner;
 
         public DataTable DataTable { get; set; }
 
-        public ReceiptRecoveryValidator(IMediator mediator, IEnumerable<IReceiptRecoveryFileRule> fileRules)
+        public byte[] FileBytes { get; set; }
+
+        public ReceiptRecoveryValidator(IMediator mediator, 
+            IEnumerable<IReceiptRecoveryFileRule> fileRules,
+            IVirusScanner virusScanner)
         {
             this.mediator = mediator;
             this.fileRules = fileRules;
+            this.virusScanner = virusScanner;
         }
 
         public async Task<ReceiptRecoveryRulesSummary> GetValidationSummary(HttpPostedFileBase file, Guid notificationId)
@@ -53,8 +60,8 @@
         {
             var resultFileRules = await GetFileRules(file, FileUploadType.ShipmentMovementDocuments);
 
-            var bulkMovementRulesSummary = new ReceiptRecoveryRulesSummary(resultFileRules);
-            
+            var bulkMovementRulesSummary = new ReceiptRecoveryRulesSummary(resultFileRules) { FileBytes = FileBytes };
+
             return bulkMovementRulesSummary;
         }
 
@@ -73,8 +80,37 @@
 
                 rules.Add(result);
             }
-            
+
+            rules.Add(await GetVirusScanResult(file));
+
+            if (DataTable != null && DataTable.Rows.Count == 0)
+            {
+                rules.Add(new RuleResult<ReceiptRecoveryFileRules>(ReceiptRecoveryFileRules.EmptyData, MessageLevel.Error));
+            }
+
             return rules;
+        }
+
+        private async Task<RuleResult<ReceiptRecoveryFileRules>> GetVirusScanResult(HttpPostedFileBase file)
+        {
+            var result = MessageLevel.Success;
+            byte[] fileBytes;
+
+            using (var memoryStream = new MemoryStream())
+            {
+                await file.InputStream.CopyToAsync(memoryStream);
+
+                fileBytes = memoryStream.ToArray();
+
+                FileBytes = fileBytes;
+            }
+
+            if (await virusScanner.ScanFileAsync(fileBytes) == ScanResult.Virus)
+            {
+                result = MessageLevel.Error;
+            }
+
+            return new RuleResult<ReceiptRecoveryFileRules>(ReceiptRecoveryFileRules.Virus, result);
         }
     }
 }
