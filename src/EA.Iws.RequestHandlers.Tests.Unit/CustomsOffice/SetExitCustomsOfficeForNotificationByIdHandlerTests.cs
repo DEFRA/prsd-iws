@@ -67,17 +67,6 @@
         }
 
         [Fact]
-        public async Task NotificationExistsButDoesNotRequireCustomsOffice_Throws()
-        {
-            var request = new SetExitCustomsOfficeForNotificationById(notificationId,
-                AnyName,
-                AnyAddress,
-                country.Id);
-
-            await Assert.ThrowsAsync<InvalidOperationException>(() => handler.HandleAsync(request));
-        }
-
-        [Fact]
         public async Task NotificationExistsAndRequiresExitCustomsOffice_SetsExitOffice()
         {
             transport.SetStateOfExportForNotification(stateOfExport);
