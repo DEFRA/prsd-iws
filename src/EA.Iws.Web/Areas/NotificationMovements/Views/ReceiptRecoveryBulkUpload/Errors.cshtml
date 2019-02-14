@@ -1,5 +1,4 @@
-﻿@using EA.Iws.Core.Movement.BulkReceiptRecovery
-@using EA.Iws.Core.Shared
+﻿@using EA.Iws.Core.Shared
 @using Resources = EA.Iws.Web.Areas.NotificationMovements.Views.ReceiptRecoveryBulkUpload.ReceiptRecoveryBulkUploadResources
 @model EA.Iws.Web.Areas.NotificationMovements.ViewModels.ReceiptRecoveryBulkUpload.ReceiptRecoveryBulkUploadViewModel
 
@@ -10,7 +9,7 @@
 }
 <div class="grid-row">
     <div class="column-full">
-        <header class="hgroup text">
+        <header>
             <h1 class="heading-large">@string.Format(Resources.ErrorsHeaderText, typeText, Model.ErrorsCount)</h1>
         </header>
 

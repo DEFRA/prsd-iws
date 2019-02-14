@@ -24,13 +24,13 @@
                 var shipments = new List<int>();
                 var existingMovements = repository.GetAllMovements(notificationId).Result;
 
-                foreach (ReceiptRecoveryMovement movement in movements)
+                foreach (var movement in movements.Where(m => m.ShipmentNumber.HasValue && m.ReceivedDate.HasValue))
                 {
                     if (movement.ShipmentNumber.HasValue && movement.ReceivedDate.HasValue)
                     {
                         try
                         {
-                            var existingMovement = existingMovements.Where(m => m.Number == movement.ShipmentNumber).Single();
+                            var existingMovement = existingMovements.Single(m => m.Number == movement.ShipmentNumber);
                             if (movement.ReceivedDate > DateTime.UtcNow || movement.ReceivedDate < existingMovement.Date)
                             {
                                 shipments.Add(movement.ShipmentNumber.Value);
@@ -45,10 +45,10 @@
 
                 var result = shipments.Any() ? MessageLevel.Error : MessageLevel.Success;
 
-                var shipmentNumbers = string.Join(", ", shipments);
+                var shipmentNumbers = string.Join(", ", shipments.Distinct());
                 var errorMessage = string.Format(Prsd.Core.Helpers.EnumHelper.GetDisplayName(ReceiptRecoveryContentRules.ReceiptDateValidation), shipmentNumbers);
 
-                return new ReceiptRecoveryContentRuleResult<ReceiptRecoveryContentRules>(ReceiptRecoveryContentRules.ReceiptDateValidation, result, errorMessage);
+                return new ReceiptRecoveryContentRuleResult<ReceiptRecoveryContentRules>(ReceiptRecoveryContentRules.ReceiptDateValidation, result, errorMessage, shipments.DefaultIfEmpty(0).Min());
             });
         }
     }

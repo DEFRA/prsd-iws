@@ -25,10 +25,10 @@
                     }
                 }
 
-                var shipmentNumbers = string.Join(", ", shipments);
+                var shipmentNumbers = string.Join(", ", shipments.Distinct());
                 var errorMessage = string.Format(Prsd.Core.Helpers.EnumHelper.GetDisplayName(ReceiptRecoveryContentRules.ReceiptDateFormat), shipmentNumbers);
 
-                return new ReceiptRecoveryContentRuleResult<ReceiptRecoveryContentRules>(ReceiptRecoveryContentRules.ReceiptDateFormat, result, errorMessage);
+                return new ReceiptRecoveryContentRuleResult<ReceiptRecoveryContentRules>(ReceiptRecoveryContentRules.ReceiptDateFormat, result, errorMessage, shipments.DefaultIfEmpty(0).Min());
             });
         }
     }
