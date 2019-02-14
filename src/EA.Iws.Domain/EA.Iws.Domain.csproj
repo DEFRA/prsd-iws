@@ -410,6 +410,7 @@
     <Compile Include="TransportRoute\AllTransitStatesInEUEvent.cs" />
     <Compile Include="TransportRoute\CustomsOffice.cs" />
     <Compile Include="TransportRoute\EntryCustomsOffice.cs" />
+    <Compile Include="TransportRoute\EntryExitCustomsSelection.cs" />
     <Compile Include="TransportRoute\EntryOrExitPoint.cs" />
     <Compile Include="TransportRoute\ExitCustomsOffice.cs" />
     <Compile Include="TransportRoute\IEntryOrExitPointRepository.cs" />
