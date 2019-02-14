@@ -111,6 +111,7 @@
     <Compile Include="Admin\UserAdministration\UpdateInternalUserStatus.cs" />
     <Compile Include="Annexes\DeleteAnnexFile.cs" />
     <Compile Include="Carriers\AddCarriersToNotificationFromAddressBook.cs" />
+    <Compile Include="CustomsOffice\DeleteEntryCustomsOfficeByNotificationId.cs" />
     <Compile Include="Files\GetFile.cs" />
     <Compile Include="Annexes\SetWasteCompositionAnnex.cs" />
     <Compile Include="Annexes\SetTechnologyEmployedAnnex.cs" />
