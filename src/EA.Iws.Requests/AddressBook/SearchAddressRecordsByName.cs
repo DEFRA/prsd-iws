@@ -14,11 +14,14 @@
 
         public AddressRecordType Type { get; private set; }
 
-        public SearchAddressRecordsByName(string searchTerm, AddressRecordType type)
+        public int PageNumber { get; private set; }
+
+        public SearchAddressRecordsByName(string searchTerm, AddressRecordType type, int pageNumber)
         {
             Guard.ArgumentNotNull(() => searchTerm, searchTerm);
             SearchTerm = searchTerm;
             Type = type;
+            PageNumber = pageNumber;
         }
     }
 }

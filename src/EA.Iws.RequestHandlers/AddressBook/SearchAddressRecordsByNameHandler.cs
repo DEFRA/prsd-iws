@@ -15,6 +15,8 @@
         private readonly IMap<AddressBook, AddressBookData> addressBookMap;
         private readonly IAddressBookRepository addressBookRepository;
 
+        private const int PageSize = 5;
+
         public SearchAddressRecordsByNameHandler(IUserContext userContext,
             IMap<AddressBook, AddressBookData> addressBookMap,
             IAddressBookRepository addressBookRepository)
@@ -33,9 +35,16 @@
                 return new AddressBookData();
             }
 
-            AddressBook result = new AddressBook(addressBook.Addresses.Where(p => p.Business.Name.ToLower().Contains(message.SearchTerm.ToLower())), message.Type, userContext.UserId);
+            var addresses = addressBook.Addresses.Where(p => p.Business.Name.ToLower().Contains(message.SearchTerm.ToLower()));
 
-            return addressBookMap.Map(result);
+            AddressBook result = new AddressBook(addresses.Skip((message.PageNumber - 1) * PageSize).Take(PageSize), message.Type, userContext.UserId);
+
+            var returnData = addressBookMap.Map(result);
+            returnData.NumberOfMatchedRecords = addresses.Count();
+            returnData.PageNumber = message.PageNumber;
+            returnData.PageSize = PageSize;
+
+            return returnData;
         }
     }
 }

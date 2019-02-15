@@ -1,5 +1,6 @@
 ﻿namespace EA.Iws.RequestHandlers.AddressBook
 {
+    using System.Linq;
     using System.Threading.Tasks;
     using Core.AddressBook;
     using Domain.AddressBook;
@@ -14,6 +15,8 @@
         private readonly IAddressBookRepository addressBookRepository;
         private readonly IUserContext userContext;
 
+        private const int PageSize = 5;
+
         public GetUserAddressBookByTypeHandler(IUserContext userContext,
             IMap<AddressBook, AddressBookData> addressBookMap,
             IAddressBookRepository addressBookRepository)
@@ -27,7 +30,21 @@
         {
             var addressBook = await addressBookRepository.GetAddressBookForUser(userContext.UserId, message.Type);
 
-            return addressBookMap.Map(addressBook);
+            if (message.PageNumber == 0)
+            {
+                return addressBookMap.Map(addressBook);
+            }
+
+            var addresses = addressBook.Addresses;
+
+            AddressBook result = new AddressBook(addresses.Skip((message.PageNumber - 1) * PageSize).Take(PageSize), message.Type, userContext.UserId);
+
+            var returnData = addressBookMap.Map(result);
+            returnData.NumberOfMatchedRecords = addresses.Count();
+            returnData.PageNumber = message.PageNumber;
+            returnData.PageSize = PageSize;
+
+            return returnData;
         }
     }
 }
