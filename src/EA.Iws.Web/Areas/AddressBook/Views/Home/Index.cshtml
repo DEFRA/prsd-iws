@@ -78,6 +78,6 @@
 {
     @Html.AntiForgeryToken()
     <div class="form-group">
-        <button name="button" class="button" value="home" type="submit">Continue</button>
+        @Html.ActionLink(Resource.GoToHomepage, "Home", "Applicant", new { area = string.Empty }, null)
     </div>
 }

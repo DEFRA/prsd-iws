@@ -120,6 +120,9 @@
   <data name="AddToAddressBook" xml:space="preserve">
     <value>Add as new address to address book</value>
   </data>
+  <data name="GoToHomepage" xml:space="preserve">
+    <value>Go to my homepage</value>
+   </data>
   <data name="Search" xml:space="preserve">
     <value>Search</value>
   </data>

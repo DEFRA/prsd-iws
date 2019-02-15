@@ -70,6 +70,13 @@ namespace EA.Iws.Web.Areas.AddressBook.Views {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Go to my homepage.
+        /// </summary>
+        public static string GoToHomepage {
+            get {
+                return ResourceManager.GetString("GoToHomepage", resourceCulture);
+            }
+        }
         ///   Looks up a localized string similar to Search.
         /// </summary>
         public static string Search {
