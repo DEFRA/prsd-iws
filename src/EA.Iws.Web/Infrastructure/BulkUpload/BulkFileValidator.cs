@@ -59,9 +59,13 @@
         {
             var allowedTypes = GetAllowedFileTypes(type);
 
-            var extension = Path.GetExtension(file.FileName);
+            // For data uploads, it's diificult to identify CSV files correctly using Content Type,
+            // hence opting for the filaname extention.
+            var fileType = type == BulkFileType.SupportingDocument
+                ? file.ContentType
+                : Path.GetExtension(file.FileName);
 
-            var result = allowedTypes.Contains(extension) ? MessageLevel.Success : MessageLevel.Error;
+            var result = allowedTypes.Contains(fileType) ? MessageLevel.Success : MessageLevel.Error;
 
             var rule = type == BulkFileType.SupportingDocument
                 ? BulkFileRules.SupportingDocumentFileType
