@@ -3,22 +3,19 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using BulkUpload;
     using Rules;
 
     [Serializable]
     public class ReceiptRecoveryRulesSummary
     {
-        public IEnumerable<RuleResult<ReceiptRecoveryFileRules>> FileRulesResults { get; set; }
+        public IEnumerable<RuleResult<BulkFileRules>> FileRulesResults { get; set; }
 
         public IEnumerable<ReceiptRecoveryContentRuleResult<ReceiptRecoveryContentRules>> ContentRulesResults { get; set; }
 
         public IEnumerable<int> ShipmentNumbers { get; set; }
 
         public Guid DraftBulkUploadId { get; set; }
-
-        public bool RemovedFirstRow { get; set; }
-
-        public byte[] FileBytes { get; set; }
 
         public bool IsFileRulesSuccess
         {
@@ -32,13 +29,13 @@
 
         public ReceiptRecoveryRulesSummary()
         {
-            FileRulesResults = new List<RuleResult<ReceiptRecoveryFileRules>>();
+            FileRulesResults = new List<RuleResult<BulkFileRules>>();
             ContentRulesResults = new List<ReceiptRecoveryContentRuleResult<ReceiptRecoveryContentRules>>();
         }
 
-        public ReceiptRecoveryRulesSummary(IEnumerable<RuleResult<ReceiptRecoveryFileRules>> fileRules)
+        public ReceiptRecoveryRulesSummary(IEnumerable<RuleResult<BulkFileRules>> fileRules)
         {
-            FileRulesResults = fileRules ?? new List<RuleResult<ReceiptRecoveryFileRules>>();
+            FileRulesResults = fileRules ?? new List<RuleResult<BulkFileRules>>();
             ContentRulesResults = new List<ReceiptRecoveryContentRuleResult<ReceiptRecoveryContentRules>>(); 
         }
     }

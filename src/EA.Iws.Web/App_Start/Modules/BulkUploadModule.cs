@@ -11,9 +11,6 @@
         {
             builder.RegisterType<PrenotificationValidator>().As<IPrenotificationValidator>();
             builder.RegisterType<ReceiptRecoveryValidator>().As<IReceiptRecoveryValidator>();
-            builder.RegisterAssemblyTypes(ThisAssembly)
-                .AssignableTo<IReceiptRecoveryFileRule>()
-                .As<IReceiptRecoveryFileRule>();
             builder.RegisterType<BulkFileValidator>().As<IBulkFileValidator>();
         }
     }
