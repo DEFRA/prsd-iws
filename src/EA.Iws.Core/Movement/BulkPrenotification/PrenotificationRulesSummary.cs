@@ -3,22 +3,19 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using BulkUpload;
     using Rules;
 
     [Serializable]
     public class PrenotificationRulesSummary
     {
-        public IEnumerable<RuleResult<PrenotificationFileRules>> FileRulesResults { get; set; }
+        public IEnumerable<RuleResult<BulkFileRules>> FileRulesResults { get; set; }
 
         public IEnumerable<PrenotificationContentRuleResult<PrenotificationContentRules>> ContentRulesResults { get; set; }
 
         public IEnumerable<int> ShipmentNumbers { get; set; }
 
         public Guid DraftBulkUploadId { get; set; }
-
-        public bool RemovedFirstRow { get; set; }
-
-        public byte[] FileBytes { get; set; }
 
         public bool IsFileRulesSuccess
         {
@@ -32,13 +29,13 @@
 
         public PrenotificationRulesSummary()
         {
-            FileRulesResults = new List<RuleResult<PrenotificationFileRules>>();
+            FileRulesResults = new List<RuleResult<BulkFileRules>>();
             ContentRulesResults = new List<PrenotificationContentRuleResult<PrenotificationContentRules>>();
         }
 
-        public PrenotificationRulesSummary(IEnumerable<RuleResult<PrenotificationFileRules>> fileRules)
+        public PrenotificationRulesSummary(IEnumerable<RuleResult<BulkFileRules>> fileRules)
         {
-            FileRulesResults = fileRules ?? new List<RuleResult<PrenotificationFileRules>>();
+            FileRulesResults = fileRules ?? new List<RuleResult<BulkFileRules>>();
             ContentRulesResults = new List<PrenotificationContentRuleResult<PrenotificationContentRules>>(); 
         }
     }
