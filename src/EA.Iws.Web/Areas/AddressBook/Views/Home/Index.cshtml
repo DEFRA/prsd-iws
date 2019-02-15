@@ -18,6 +18,11 @@
             <tr>
                 <th>Name</th>
                 <th>Address</th>
+				@if (Model.Type == EA.Iws.Core.AddressBook.AddressRecordType.Carrier)
+				{
+					<th>Contact person</th>
+					<th>Registration number</th>
+				}
                 <th>Action</th>
             </tr>
             </thead>
@@ -35,6 +40,12 @@
                         @Html.DisplayFor(m => m.AddressRecords[i].AddressData.TownOrCity),
                         @Html.DisplayFor(m => m.AddressRecords[i].AddressData.PostalCode)
                     </td>
+					@if (Model.Type == EA.Iws.Core.AddressBook.AddressRecordType.Carrier)
+					{
+						<td>@Html.DisplayFor(m => m.AddressRecords[i].ContactData.FullName)</td>
+						<td>@Html.DisplayFor(m => m.AddressRecords[i].BusinessData.RegistrationNumber)
+						</td>
+					}
                     <td>@Html.ActionLink("Delete", "Index", "Delete", new { id = Model.AddressRecords[i].Id, type = Model.Type }, null)</td>
                 </tr>
             }
