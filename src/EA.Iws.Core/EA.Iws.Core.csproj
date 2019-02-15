@@ -173,6 +173,9 @@
     <Compile Include="Movement\BulkPrenotification\PrenotificationColumnIndex.cs" />
     <Compile Include="Movement\BulkPrenotification\PrenotificationMovement.cs" />
     <Compile Include="Movement\BulkPrenotification\IPrenotificationContentRule.cs" />
+    <Compile Include="Movement\BulkUpload\BulkFileRulesSummary.cs" />
+    <Compile Include="Movement\BulkUpload\BulkFileType.cs" />
+    <Compile Include="Movement\BulkUpload\BulkFileRules.cs" />
     <Compile Include="Movement\DateHistory.cs" />
     <Compile Include="Movement\IMovementRule.cs" />
     <Compile Include="Movement\InternalMovementSummary.cs" />

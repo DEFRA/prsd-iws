@@ -5,6 +5,7 @@
     using System.ComponentModel.DataAnnotations;
     using System.Web;
     using Core.Movement.BulkPrenotification;
+    using Core.Movement.BulkUpload;
 
     public class PrenotificationBulkUploadViewModel : IValidatableObject
     {
@@ -29,7 +30,7 @@
             }
         }
 
-        public List<PrenotificationFileRules> FailedFileRules { get; set; }
+        public List<BulkFileRules> FailedFileRules { get; set; }
 
         public List<PrenotificationContentRuleResult<PrenotificationContentRules>> FailedContentRules { get; set; }
 
