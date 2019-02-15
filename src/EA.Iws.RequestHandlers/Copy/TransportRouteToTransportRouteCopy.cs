@@ -13,7 +13,7 @@
             CopyStateOfImport(source, destination);
             CopyTransitStates(source, destination);
             CopyCustomsOffices(source, destination);
-            CopyEntryExitCustomsSelection(source, destination);
+            CopyEntryExitCustomsOfficeSelection(source, destination);
         }
 
         public virtual void CopyTransportRouteWithoutExport(TransportRoute source, TransportRoute destination)
@@ -21,7 +21,7 @@
             CopyStateOfImport(source, destination);
             CopyTransitStates(source, destination);
             CopyCustomsOffices(source, destination);
-            CopyEntryExitCustomsSelection(source, destination);
+            CopyEntryExitCustomsOfficeSelection(source, destination);
         }
 
         protected virtual void CopyStateOfExport(TransportRoute source, TransportRoute destination)
@@ -76,12 +76,12 @@
             }
         }
 
-        protected virtual void CopyEntryExitCustomsSelection(TransportRoute source, TransportRoute destination)
+        protected virtual void CopyEntryExitCustomsOfficeSelection(TransportRoute source, TransportRoute destination)
         {
-            if (source.EntryExitCustomsSelection != null)
+            if (source.EntryExitCustomsOfficeSelection != null)
             {
-                destination.SetEntryExitCustomsSelection(new EntryExitCustomsSelection(source.EntryExitCustomsSelection.Entry,
-                    source.EntryExitCustomsSelection.Exit));
+                destination.SetEntryExitCustomsOfficeSelection(new EntryExitCustomsOfficeSelection(source.EntryExitCustomsOfficeSelection.Entry,
+                    source.EntryExitCustomsOfficeSelection.Exit));
             }
         }
     }

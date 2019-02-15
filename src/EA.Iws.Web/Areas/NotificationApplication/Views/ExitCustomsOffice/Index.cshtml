@@ -13,6 +13,7 @@
     }
     <h2 class="heading-large">@ExitCustomsOfficeResources.Header</h2>
 </header>
+
 @using (Html.BeginForm())
 {
     @Html.Gds().ValidationSummary()
@@ -23,19 +24,16 @@
                 @ExitCustomsOfficeResources.CustomsRequiredText
             </label>
         </div>
-
+        <div class="panel hide-for-initial-load @(Model.CustomsOfficeRequired == true ? "js-hidden" : "js-hidden")" id="other-description">
+            @Html.AntiForgeryToken()
+            @Html.Partial("~/Areas/NotificationApplication/Views/CustomsOffice/_Index.cshtml", Model)
+        </div>
         <div class="multiple-choice" data-target="no-message">
             @Html.RadioButtonFor(m => m.CustomsOfficeRequired, false, new { @class = "customs-office-not-required-radio-button", @id = "rdoNo" })
             <label for="rdoNo">
                 @ExitCustomsOfficeResources.CustomsNotRequiredText
             </label>
         </div>
-        <div class="panel hide-for-initial-load @(Model.CustomsOfficeRequired == true ? "js-hidden" : "js-hidden")" id="other-description">
-            @Html.AntiForgeryToken()
-            @Html.Partial("~/Areas/NotificationApplication/Views/CustomsOffice/_Index.cshtml", Model)
-        </div>
     </div>
-
-   
     <button class="button" type="submit">@Constants.ContinueButtonText</button>
 }

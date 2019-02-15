@@ -2,6 +2,7 @@
 {
     using System;
     using System.Data.Entity;
+    using System.Data.SqlClient;
     using System.Threading.Tasks;
     using Domain.ImportNotification;
     using Domain.Security;
