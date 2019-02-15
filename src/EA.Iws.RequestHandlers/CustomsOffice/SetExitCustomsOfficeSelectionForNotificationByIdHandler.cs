@@ -7,18 +7,18 @@
     using Prsd.Core.Mediator;
     using Requests.CustomsOffice;
 
-    internal class SetExitCustomsSelectionForNotificationByIdHandler : IRequestHandler<SetExitCustomsSelectionForNotificationById, bool>
+    internal class SetExitCustomsOfficeSelectionForNotificationByIdHandler : IRequestHandler<SetExitCustomsOfficeSelectionForNotificationById, bool>
     {
         private readonly IwsContext context;
         private readonly ITransportRouteRepository repository;
 
-        public SetExitCustomsSelectionForNotificationByIdHandler(IwsContext context, ITransportRouteRepository repository)
+        public SetExitCustomsOfficeSelectionForNotificationByIdHandler(IwsContext context, ITransportRouteRepository repository)
         {
             this.context = context;
             this.repository = repository;
         }
 
-        public async Task<bool> HandleAsync(SetExitCustomsSelectionForNotificationById message)
+        public async Task<bool> HandleAsync(SetExitCustomsOfficeSelectionForNotificationById message)
         {
             var transportRoute = await repository.GetByNotificationId(message.Id);
             var requiredCustomsOffices = new RequiredCustomsOffices();
@@ -29,11 +29,11 @@
                 context.TransportRoutes.Add(transportRoute);
             }
 
-            bool existingEntry = transportRoute.EntryExitCustomsSelection != null ? transportRoute.EntryExitCustomsSelection.Entry : false;
+            bool? existingEntry = transportRoute.EntryExitCustomsOfficeSelection != null ? transportRoute.EntryExitCustomsOfficeSelection.Entry : false;
 
-            var selection = new EntryExitCustomsSelection(existingEntry, message.ExitSelection);
+            var selection = new EntryExitCustomsOfficeSelection(existingEntry, message.Selection);
 
-            transportRoute.SetEntryExitCustomsSelection(selection);
+            transportRoute.SetEntryExitCustomsOfficeSelection(selection);
 
             await context.SaveChangesAsync();
 

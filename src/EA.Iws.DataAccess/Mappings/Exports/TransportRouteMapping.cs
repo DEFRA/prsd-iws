@@ -33,7 +33,7 @@
                 .WithRequired()
                 .Map(m => m.MapKey("TransportRouteId"));
 
-            HasOptional(x => x.EntryExitCustomsSelection)
+            HasOptional(x => x.EntryExitCustomsOfficeSelection)
                .WithRequired()
                .Map(m => m.MapKey("TransportRouteId"));
         }

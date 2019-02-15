@@ -500,7 +500,7 @@
     </Content>
     <Content Include="Scripts\datable.min.js" />
     <Content Include="Scripts\decision-dropdown.js" />
-    <Content Include="Scripts\exit-customs-office-required-radio-buttons.js" />
+    <Content Include="Scripts\customs-office-required-radio-buttons.js" />
     <Content Include="Scripts\govuk_elements\application.js" />
     <Content Include="Scripts\govuk_elements\govuk\details.polyfill.js" />
     <Content Include="Scripts\govuk_toolkit\govuk\analytics\analytics.js" />
@@ -2275,6 +2275,11 @@
     <Compile Include="Areas\NotificationApplication\ViewModels\ReviewUserAccess\RemoveUserViewModel.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\ShareNotification\SuccessViewModel.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\ReviewUserAccess\UserListViewModel.cs" />
+    <Compile Include="Areas\NotificationApplication\Views\CustomsOffice\CustomsOfficeResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CustomsOfficeResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Areas\NotificationApplication\Views\ReviewUserAccess\RemoveResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -4404,6 +4409,10 @@
     <EmbeddedResource Include="Areas\NotificationApplication\Views\ChemicalComposition\ParametersResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>ParametersResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\NotificationApplication\Views\CustomsOffice\CustomsOfficeResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>CustomsOfficeResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\NotificationApplication\Views\CustomsOffice\NoCustomsOfficeResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
