@@ -5,6 +5,7 @@
     using System.ComponentModel.DataAnnotations;
     using System.Web;
     using Core.Movement.BulkReceiptRecovery;
+    using Core.Movement.BulkUpload;
     using Core.Shared;
 
     public class ReceiptRecoveryBulkUploadViewModel : IValidatableObject
@@ -32,7 +33,7 @@
             }
         }
 
-        public List<ReceiptRecoveryFileRules> FailedFileRules { get; set; }
+        public List<BulkFileRules> FailedFileRules { get; set; }
 
         public List<ReceiptRecoveryContentRuleResult<ReceiptRecoveryContentRules>> FailedContentRules { get; set; }
 
