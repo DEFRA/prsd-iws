@@ -77,5 +77,39 @@ namespace EA.Iws.Web.Areas.AddressBook.Views {
                 return ResourceManager.GetString("GoToHomepage", resourceCulture);
             }
         }
+        ///   Looks up a localized string similar to Search.
+        /// </summary>
+        public static string Search {
+            get {
+                return ResourceManager.GetString("Search", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Search for an organisation&apos;s address within the current tab.
+        /// </summary>
+        public static string SearchHeader {
+            get {
+                return ResourceManager.GetString("SearchHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter the organisation name below, for example Enivironment Agency.
+        /// </summary>
+        public static string SearchHint {
+            get {
+                return ResourceManager.GetString("SearchHint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter organisation name.
+        /// </summary>
+        public static string SearchPlaceholder {
+            get {
+                return ResourceManager.GetString("SearchPlaceholder", resourceCulture);
+            }
+        }
     }
 }

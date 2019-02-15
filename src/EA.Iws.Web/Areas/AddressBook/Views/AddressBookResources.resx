@@ -122,5 +122,17 @@
   </data>
   <data name="GoToHomepage" xml:space="preserve">
     <value>Go to my homepage</value>
+   </data>
+  <data name="Search" xml:space="preserve">
+    <value>Search</value>
+  </data>
+  <data name="SearchHeader" xml:space="preserve">
+    <value>Search for an organisation's address within the current tab</value>
+  </data>
+  <data name="SearchHint" xml:space="preserve">
+    <value>Enter the organisation name below, for example Enivironment Agency</value>
+  </data>
+  <data name="SearchPlaceholder" xml:space="preserve">
+    <value>Enter organisation name</value>
   </data>
 </root>

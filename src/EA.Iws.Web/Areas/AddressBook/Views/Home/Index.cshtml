@@ -9,6 +9,24 @@
     <p class="subtitle">Manage your address book</p>
 </header>
 
+<div class="grid-row">
+    <div class="column-two-thirds">
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            <h3 class="heading-small">@Resource.SearchHeader</h3>
+            <div id="search-container" class="form-group @Html.Gds().FormGroupClass(m => m.SearchTerm)">
+                @Html.Gds().ValidationMessageFor(m => m.SearchTerm)
+                @Html.Gds().HintParagraph(Resource.SearchHint)
+                @Html.Gds().TextBoxFor(m => m.SearchTerm, new { @title = "Search term", placeholder = Resource.SearchPlaceholder })
+                @Html.HiddenFor(m => m.Type)
+                <button name="button" value="search" class="button" type="submit">@Resource.Search</button>
+            </div>
+        }
+    </div>
+</div>
+
 @Html.Partial("_Navigation")
 
 @if (Model.AddressRecords.Count > 0)
@@ -46,7 +64,14 @@
 
 @if (Model.AddressRecords.Count == 0)
 {
-    <p>You have no address records for this business type.</p>
+    if (Model.SearchTerm == null)
+    {
+        <p>You have no address records for this business type.</p>
+    }
+    else
+    {
+        <p>Address not found</p>
+    }
 }
 
 @using (Html.BeginForm())
