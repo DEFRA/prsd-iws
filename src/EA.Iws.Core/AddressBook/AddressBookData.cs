@@ -11,6 +11,14 @@
 
         public AddressRecordType Type { get; set; }
 
+        public string SearchTerm { get; set; }
+
+        public int PageSize { get; set; }
+
+        public int PageNumber { get; set; }
+
+        public int NumberOfMatchedRecords { get; set; }
+
         public AddressBookData()
         {
             AddressRecords = new List<AddressBookRecordData>();
