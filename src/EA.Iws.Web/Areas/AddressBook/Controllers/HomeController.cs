@@ -1,5 +1,7 @@
 ﻿namespace EA.Iws.Web.Areas.AddressBook.Controllers
 {
+    using System.Linq;
+    using System.Security;
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Core.AddressBook;
@@ -27,9 +29,26 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Index()
+        public async Task<ActionResult> Index(AddressBookData model, string button, int page = 1)
         {
-            return RedirectToAction("Home", "Applicant", new { area = string.Empty });
+            if (button == "home")
+            {
+                return RedirectToAction("Home", "Applicant", new { area = string.Empty });
+            }
+
+            if (button == "search")
+            {
+                if (!string.IsNullOrWhiteSpace(model.SearchTerm))
+                {
+                    var result = await mediator.SendAsync(new SearchAddressRecordsByName(model.SearchTerm, model.Type));
+
+                    model.AddressRecords = result.AddressRecords;
+
+                    return View(model);
+                }
+            }
+
+            return RedirectToAction("Index", new { model.Type });
         }
     }
 }
