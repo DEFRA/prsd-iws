@@ -10,7 +10,7 @@
     using Core.Movement.BulkReceiptRecovery;
     using Core.Rules;
 
-    public class PrenotificationFileTypeRule : IReceiptRecoveryFileRule
+    public class ReceiptRecoveryFileTypeRule : IReceiptRecoveryFileRule
     {
         private readonly string[] allowedTypes;
 
@@ -29,7 +29,7 @@
             }
         }
 
-        public PrenotificationFileTypeRule()
+        public ReceiptRecoveryFileTypeRule()
         {
             allowedTypes = new[] 
             {
@@ -49,11 +49,6 @@
 
                 return new RuleResult<ReceiptRecoveryFileRules>(ReceiptRecoveryFileRules.FileTypeReceiptRecovery, result);
             });
-        }
-
-        public string GetErrorMessage()
-        {
-            return "error";
         }
     }
 }
