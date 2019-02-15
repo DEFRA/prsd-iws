@@ -16,6 +16,7 @@
                 var shipments = movements.Where(m => m.ShipmentNumber.HasValue)
                     .GroupBy(x => x.ShipmentNumber)
                     .Where(g => g.Count() > 1)
+                    .OrderBy(x => x.Key)
                     .Select(y => y.Key)
                     .ToList();
 
