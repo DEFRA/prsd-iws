@@ -1,4 +1,5 @@
 ﻿@using Resource = EA.Iws.Web.Areas.AddressBook.Views.AddressBookResources
+@using EA.Iws.Web.Infrastructure.Paging
 @model EA.Iws.Core.AddressBook.AddressBookData
 @{
     ViewBag.Title = "Address Book - " + Model.Type;
@@ -21,6 +22,7 @@
                 @Html.Gds().HintParagraph(Resource.SearchHint)
                 @Html.Gds().TextBoxFor(m => m.SearchTerm, new { @title = "Search term", placeholder = Resource.SearchPlaceholder })
                 @Html.HiddenFor(m => m.Type)
+                @Html.HiddenFor(m => m.PageNumber)
                 <button name="button" value="search" class="button" type="submit">@Resource.Search</button>
             </div>
         }
@@ -34,33 +36,38 @@
     <div class="form-group table-container">
         <table title="Address book records">
             <thead>
-            <tr>
-                <th>Name</th>
-                <th>Address</th>
-                <th>Action</th>
-            </tr>
+                <tr>
+                    <th>Name</th>
+                    <th>Address</th>
+                    <th>Action</th>
+                </tr>
             </thead>
             <tbody>
-            @for (int i = 0; i < Model.AddressRecords.Count; i++)
-            {
-                <tr>
-                    <td>@Html.DisplayFor(m => m.AddressRecords[i].BusinessData.Name)</td>
-                    <td>
-                        @Html.DisplayFor(m => m.AddressRecords[i].AddressData.StreetOrSuburb),
-                        @if (Model.AddressRecords[i].AddressData.Address2 != null)
-                        {
-                            @Html.DisplayFor(m => m.AddressRecords[i].AddressData.Address2)<text>,</text>
-                        }
-                        @Html.DisplayFor(m => m.AddressRecords[i].AddressData.TownOrCity),
-                        @Html.DisplayFor(m => m.AddressRecords[i].AddressData.PostalCode)
-                    </td>
-                    <td>@Html.ActionLink("Delete", "Index", "Delete", new { id = Model.AddressRecords[i].Id, type = Model.Type }, null)</td>
-                </tr>
-            }
+                @for (int i = 0; i < Model.AddressRecords.Count; i++)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(m => m.AddressRecords[i].BusinessData.Name)</td>
+                        <td>
+                            @Html.DisplayFor(m => m.AddressRecords[i].AddressData.StreetOrSuburb),
+                            @if (Model.AddressRecords[i].AddressData.Address2 != null)
+                            {
+                                @Html.DisplayFor(m => m.AddressRecords[i].AddressData.Address2)<text>,</text>
+                            }
+                            @Html.DisplayFor(m => m.AddressRecords[i].AddressData.TownOrCity),
+                            @Html.DisplayFor(m => m.AddressRecords[i].AddressData.PostalCode)
+                        </td>
+                        <td>@Html.ActionLink("Delete", "Index", "Delete", new { id = Model.AddressRecords[i].Id, type = Model.Type }, null)</td>
+                    </tr>
+                }
             </tbody>
         </table>
+        @Html.Pager(Model.PageSize, Model.PageNumber, Model.NumberOfMatchedRecords).Options(o =>
+       {
+           o.AddRouteValue("type", Model.Type);
+           o.AddRouteValue("searchTerm", Model.SearchTerm);
+       })
     </div>
-} 
+}
 
 @if (Model.AddressRecords.Count == 0)
 {
