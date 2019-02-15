@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace EA.Iws.Web.Areas.NotificationApplication.Views.EntryCustomsOffice {
+namespace EA.Iws.Web.Areas.NotificationApplication.Views.CustomsOffice {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.EntryCustomsOffice {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class EntryCustomsOfficeResources {
+    public class CustomsOfficeResources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal EntryCustomsOfficeResources() {
+        internal CustomsOfficeResources() {
         }
         
         /// <summary>
@@ -39,8 +39,8 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.EntryCustomsOffice {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EA.Iws.Web.Areas.NotificationApplication.Views.EntryCustomsOffice.EntryCustomsOff" +
-                            "iceResources", typeof(EntryCustomsOfficeResources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EA.Iws.Web.Areas.NotificationApplication.Views.CustomsOffice.CustomsOfficeResourc" +
+                            "es", typeof(CustomsOfficeResources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -62,38 +62,65 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.EntryCustomsOffice {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to My transport route doesn&apos;t require the customs office of entry information.
+        ///   Looks up a localized string similar to Address.
         /// </summary>
-        public static string CustomsNotRequiredText {
+        public static string Address {
             get {
-                return ResourceManager.GetString("CustomsNotRequiredText", resourceCulture);
+                return ResourceManager.GetString("Address", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to My transport route requires the customs office of entry information.
+        ///   Looks up a localized string similar to The Address field is required..
         /// </summary>
-        public static string CustomsRequiredText {
+        public static string AddressRequired {
             get {
-                return ResourceManager.GetString("CustomsRequiredText", resourceCulture);
+                return ResourceManager.GetString("AddressRequired", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Does the transport route require customs office of entry information?.
+        ///   Looks up a localized string similar to Country.
         /// </summary>
-        public static string Header {
+        public static string Country {
             get {
-                return ResourceManager.GetString("Header", resourceCulture);
+                return ResourceManager.GetString("Country", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Entry Customs Office.
+        ///   Looks up a localized string similar to The Country field is required..
         /// </summary>
-        public static string Title {
+        public static string CountryRequired {
             get {
-                return ResourceManager.GetString("Title", resourceCulture);
+                return ResourceManager.GetString("CountryRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Name.
+        /// </summary>
+        public static string Name {
+            get {
+                return ResourceManager.GetString("Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The Name field is required..
+        /// </summary>
+        public static string NameRequired {
+            get {
+                return ResourceManager.GetString("NameRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select an option for your transport route customs office information.
+        /// </summary>
+        public static string TransportRouteRequired {
+            get {
+                return ResourceManager.GetString("TransportRouteRequired", resourceCulture);
             }
         }
     }
