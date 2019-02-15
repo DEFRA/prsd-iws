@@ -114,7 +114,6 @@
     <Compile Include="CustomsOffice\GetEntryExitCustomsOfficeSelectionForNotificationById.cs" />
     <Compile Include="CustomsOffice\SetEntryCustomsOfficeSelectionForNotificationById.cs" />
     <Compile Include="CustomsOffice\SetExitCustomsOfficeSelectionForNotificationById.cs" />
-    <Compile Include="CustomsOffice\DeleteEntryCustomsOfficeByNotificationId.cs" />
     <Compile Include="Files\GetFile.cs" />
     <Compile Include="Annexes\SetWasteCompositionAnnex.cs" />
     <Compile Include="Annexes\SetTechnologyEmployedAnnex.cs" />

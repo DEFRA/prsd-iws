@@ -95,13 +95,6 @@
                     model.Address,
                     model.SelectedCountry.Value));
             }
-            else
-            {
-                if (existingData.CustomsOfficeData != null)
-                {
-                    await mediator.SendAsync(new DeleteEntryCustomsOfficeByNotificationId(id));
-                }
-            }
 
             await this.auditService.AddAuditEntry(this.mediator,
                        id,

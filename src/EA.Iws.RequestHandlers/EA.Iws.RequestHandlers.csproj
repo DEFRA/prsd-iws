@@ -151,7 +151,6 @@
     <Compile Include="CustomsOffice\GetEntryExitCustomsOfficeSelectionForNotificationByIdHandler.cs" />
     <Compile Include="CustomsOffice\SetEntryCustomsOfficeSelectionForNotificationByIdHandler.cs" />
     <Compile Include="CustomsOffice\SetExitCustomsOfficeSelectionForNotificationByIdHandler.cs" />
-    <Compile Include="CustomsOffice\DeleteEntryCustomsOfficeByNotificationIdHandler.cs" />
     <Compile Include="Files\GetFileHandler.cs" />
     <Compile Include="Annexes\SetTechnologyEmployedAnnexHandler.cs" />
     <Compile Include="Annexes\SetWasteCompositionAnnexHandler.cs" />
