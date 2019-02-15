@@ -11,6 +11,8 @@
 
         public AddressRecordType Type { get; set; }
 
+        public string SearchTerm { get; set; }
+
         public AddressBookData()
         {
             AddressRecords = new List<AddressBookRecordData>();
