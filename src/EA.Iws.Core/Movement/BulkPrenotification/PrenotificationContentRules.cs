@@ -28,7 +28,7 @@
         QuantityUnit,
         [Display(Name = "Shipment number {0}: the packaging type is not permitted on this notification.")]
         InvalidPackagingType,
-        [Display(Name = "Shipment number {0}: the actual date of shipment must be recorded in dd/mm/yyyy format.")]
+        [Display(Name = "Shipment number {0}: the actual shipment date must be in dd/mm/yyyy format.")]
         InvalidDateFormat,
         [Display(Name = "Shipment number {0}: the actual date of shipment must not be historic.")]
         HistoricDate,

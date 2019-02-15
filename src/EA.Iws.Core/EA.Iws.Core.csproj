@@ -167,7 +167,6 @@
     <Compile Include="MovementOperation\MovementOperationData.cs" />
     <Compile Include="MovementReceipt\Decision.cs" />
     <Compile Include="Movement\BulkPrenotification\PrenotificationContentRules.cs" />
-    <Compile Include="Movement\BulkPrenotification\PrenotificationFileRules.cs" />
     <Compile Include="Movement\BulkPrenotification\PrenotificationRulesSummary.cs" />
     <Compile Include="Movement\BulkPrenotification\PrenotificationContentRuleResult.cs" />
     <Compile Include="Movement\BulkPrenotification\PrenotificationColumnIndex.cs" />
