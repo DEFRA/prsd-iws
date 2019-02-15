@@ -73,7 +73,8 @@
                             await context.SaveChangesAsync();
                         }
 
-                        if (draftMovement.RecoveredDisposedDate.HasValue)
+                        if (draftMovement.RecoveredDisposedDate.HasValue && 
+                            draftMovement.RecoveredDisposedDate.Value != DateTime.MinValue)
                         {
                             var fileId =
                                 await
