@@ -1,16 +1,15 @@
-﻿namespace EA.Iws.Web.App_Start.Modules
+﻿namespace EA.Iws.Web.Modules
 {
     using Autofac;
     using Infrastructure.BulkPrenotification;
+    using Infrastructure.BulkUpload;
 
     public class BulkUploadModule : Module
     {
         protected override void Load(ContainerBuilder builder)
         {
             builder.RegisterType<PrenotificationValidator>().As<IPrenotificationValidator>();
-            builder.RegisterAssemblyTypes(ThisAssembly)
-                .AssignableTo<IPrenotificationFileRule>()
-                .As<IPrenotificationFileRule>();
+            builder.RegisterType<BulkFileValidator>().As<IBulkFileValidator>();
         }
     }
 }
