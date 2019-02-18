@@ -35,8 +35,7 @@
                 var actualMovement = actualMovements.FirstOrDefault(p => p.Number == movement.ShipmentNumber);
 
                 if (actualMovement != null &&
-                    actualMovement.Status != MovementStatus.Received &&
-                    actualMovement.Status != MovementStatus.Completed)
+                    actualMovement.Status != MovementStatus.Received)
                 {
                     if (actualMovement.Status == MovementStatus.Captured)
                     {
