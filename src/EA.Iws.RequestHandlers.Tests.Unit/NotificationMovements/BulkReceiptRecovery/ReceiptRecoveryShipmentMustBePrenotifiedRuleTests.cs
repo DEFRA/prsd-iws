@@ -5,7 +5,6 @@
     using System.Threading.Tasks;
     using Core.Movement.BulkReceiptRecovery;
     using Core.Rules;
-    using Domain;
     using Domain.Movement;
     using Domain.NotificationApplication;
     using FakeItEasy;
@@ -58,16 +57,6 @@
 
             Assert.Equal(ReceiptRecoveryContentRules.ReceivedRecoveredValidation, result.Rule);
             Assert.Equal(MessageLevel.Success, result.MessageLevel);
-        }
-
-        [Fact]
-        public async Task ShipmentDoesntExist_Fail()
-        {
-            A.CallTo(() => movementRepo.GetAllMovements(notificationId)).Returns(GetRepoMovements(false, DateTime.Now));
-            var result = await rule.GetResult(GetTestData(true), notificationId);
-
-            Assert.Equal(ReceiptRecoveryContentRules.ReceivedRecoveredValidation, result.Rule);
-            Assert.Equal(MessageLevel.Error, result.MessageLevel);
         }
 
         private List<ReceiptRecoveryMovement> GetTestData(bool nonExistingShipment)
