@@ -144,6 +144,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\AccountControllerTests.cs" />
+    <Compile Include="Controllers\AddressBook\EditControllerTests.cs" />
     <Compile Include="Controllers\AdminImportAssessment\DecisionControllerTests.cs" />
     <Compile Include="Controllers\AdminImportAssessment\KeyDatesControllerTests.cs" />
     <Compile Include="Controllers\Admin\AdminRegistrationControllerTests.cs" />

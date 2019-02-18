@@ -16,7 +16,7 @@
         [Display(Name = "OrganisationType", ResourceType = typeof(AddEditResource))]
         public BusinessType? BusinessType { get; set; }
 
-        [RequiredIf("BusinessType", Core.Shared.BusinessType.LimitedCompany, ErrorMessageResourceName = "RegistrationNumberRequired", ErrorMessageResourceType = typeof(AddEditResource))]
+        [Required(ErrorMessageResourceName = "RegistrationNumberRequired", ErrorMessageResourceType = typeof(AddEditResource))]
         [Display(Name = "RegistrationNumber", ResourceType = typeof(AddEditResource))]
         [MaxLength(100, ErrorMessageResourceType = typeof(BusinessResources), ErrorMessageResourceName = "RegistrationNumberMaxLength")]
         public string RegistrationNumber { get; set; }

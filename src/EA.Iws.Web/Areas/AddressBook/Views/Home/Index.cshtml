@@ -1,7 +1,6 @@
 ﻿@using Resource = EA.Iws.Web.Areas.AddressBook.Views.AddressBookResources
 @using EA.Iws.Web.Infrastructure.Paging
 @using EA.Iws.Web.Areas.AddressBook.Views.Edit
-@model EA.Iws.Web.Areas.AddressBook.ViewModels.EditAddressViewModel
 @model EA.Iws.Core.AddressBook.AddressBookData
 @{
     ViewBag.Title = "Address Book - " + Model.Type;
@@ -9,7 +8,7 @@
 
 <header>
     <h1 class="heading-large">Your address book</h1>
-    <p class="subtitle">Manage your address book</p>
+    <p class="subtitle">View and manage your address book</p>
 </header>
 
 <div class="grid-row">
@@ -18,6 +17,8 @@
         @using (Html.BeginForm())
         {
             @Html.AntiForgeryToken()
+			@Html.ActionLink(@Resource.AddAddress,  "Add", "Edit", new { type = Model.Type }, new { @class = "button" })
+
             <h3 class="heading-small">@Resource.SearchHeader</h3>
             <div id="search-container" class="form-group @Html.Gds().FormGroupClass(m => m.SearchTerm)">
                 @Html.Gds().ValidationMessageFor(m => m.SearchTerm)

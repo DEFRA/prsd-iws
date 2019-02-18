@@ -63,5 +63,52 @@
             await this.BindCountryList(mediator);
             return View(model);
         }
+
+        [HttpGet]
+        public async Task<ActionResult> Add(AddressRecordType type)
+        {
+            ViewBag.Type = type;
+            var model = new AddAddressViewModel();
+            model.Type = type;
+            await this.BindCountryList(mediator);
+            model.Address.DefaultCountryId = this.GetDefaultCountryId();
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Add(AddAddressViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                await this.BindCountryList(mediator);
+                return View(model);
+            }
+
+            try
+            {
+                await mediator.SendAsync(
+                    new AddNewAddressBookEntry
+                    {
+                        Address = model.Address,
+                        Business = model.Business.ToBusinessInfoData(),
+                        Contact = model.Contact,
+                        Type = model.Type
+                    });
+
+                return RedirectToAction("Index", "Home", new { type = model.Type });
+            }
+            catch (ApiBadRequestException ex)
+            {
+                this.HandleBadRequest(ex);
+
+                if (ModelState.IsValid)
+                {
+                    throw;
+                }
+            }
+            await this.BindCountryList(mediator);
+            return View(model);
+        }
     }
 }

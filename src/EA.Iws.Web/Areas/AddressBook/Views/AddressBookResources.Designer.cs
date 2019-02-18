@@ -61,6 +61,15 @@ namespace EA.Iws.Web.Areas.AddressBook.Views {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add address.
+        /// </summary>
+        public static string AddAddress {
+            get {
+                return ResourceManager.GetString("AddAddress", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Add as new address to address book.
         /// </summary>
         public static string AddToAddressBook {
@@ -77,6 +86,8 @@ namespace EA.Iws.Web.Areas.AddressBook.Views {
                 return ResourceManager.GetString("GoToHomepage", resourceCulture);
             }
         }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Search.
         /// </summary>
         public static string Search {
@@ -95,7 +106,7 @@ namespace EA.Iws.Web.Areas.AddressBook.Views {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Enter the organisation name below, for example Enivironment Agency.
+        ///   Looks up a localized string similar to Enter the organisation name below, for example Environment Agency.
         /// </summary>
         public static string SearchHint {
             get {
