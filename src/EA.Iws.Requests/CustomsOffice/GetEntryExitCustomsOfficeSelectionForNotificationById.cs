@@ -8,11 +8,11 @@
     using Prsd.Core.Mediator;
 
     [RequestAuthorization(ExportNotificationPermissions.CanReadExportNotification)]
-    public class GetEntryExitCustomsSelectionForNotificationById : IRequest<EntryExitCustomsSelectionData>
+    public class GetEntryExitCustomsOfficeSelectionForNotificationById : IRequest<EntryExitCustomsOfficeSelectionData>
     {
         public Guid Id { get; private set; }
 
-        public GetEntryExitCustomsSelectionForNotificationById(Guid id)
+        public GetEntryExitCustomsOfficeSelectionForNotificationById(Guid id)
         {
             Id = id;
         }

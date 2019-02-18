@@ -41,7 +41,8 @@
         public virtual ExitCustomsOffice ExitCustomsOffice { get; private set; }
 
         public virtual EntryCustomsOffice EntryCustomsOffice { get; private set; }
-        public virtual EntryExitCustomsSelection EntryExitCustomsSelection { get; private set; }
+
+        public virtual EntryExitCustomsOfficeSelection EntryExitCustomsOfficeSelection { get; private set; }
 
         public void SetStateOfExportForNotification(StateOfExport stateOfExport)
         {
@@ -207,9 +208,9 @@
             }
         }
 
-        public void SetEntryExitCustomsSelection(EntryExitCustomsSelection selection)
+        public void SetEntryExitCustomsOfficeSelection(EntryExitCustomsOfficeSelection selection)
         {
-            this.EntryExitCustomsSelection = selection;
+            this.EntryExitCustomsOfficeSelection = selection;
         }
 
         private void CheckAllTransitStatesInEU()

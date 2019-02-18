@@ -61,7 +61,7 @@
     <Compile Include="Admin\Reports\UserActionData.cs" />
     <Compile Include="Admin\Reports\UserActionJsonModel.cs" />
     <Compile Include="Carriers\CarrierList.cs" />
-    <Compile Include="CustomsOffice\EntryExitCustomsSelection.cs" />
+    <Compile Include="CustomsOffice\EntryExitCustomsOfficeSelection.cs" />
     <Compile Include="Documents\BulkType.cs" />
     <Compile Include="Documents\FileUploadType.cs" />
     <Compile Include="FinancialGuarantee\FinancialGuaranteeData.cs" />
@@ -169,7 +169,6 @@
     <Compile Include="MovementOperation\MovementOperationData.cs" />
     <Compile Include="MovementReceipt\Decision.cs" />
     <Compile Include="Movement\BulkReceiptRecovery\ReceiptRecoveryDataRow.cs" />
-    <Compile Include="Movement\BulkReceiptRecovery\ReceiptRecoveryFileRules.cs" />
     <Compile Include="Movement\BulkReceiptRecovery\ReceiptRecoveryRulesSummary.cs" />
     <Compile Include="Movement\BulkReceiptRecovery\ReceiptRecoveryContentRuleResult.cs" />
     <Compile Include="Movement\BulkReceiptRecovery\ReceiptRecoveryColumnIndex.cs" />
@@ -177,12 +176,14 @@
     <Compile Include="Movement\BulkReceiptRecovery\IReceiptRecoveryContentRule.cs" />
     <Compile Include="Movement\BulkReceiptRecovery\ReceiptRecoveryMovement.cs" />
     <Compile Include="Movement\BulkPrenotification\PrenotificationContentRules.cs" />
-    <Compile Include="Movement\BulkPrenotification\PrenotificationFileRules.cs" />
     <Compile Include="Movement\BulkPrenotification\PrenotificationRulesSummary.cs" />
     <Compile Include="Movement\BulkPrenotification\PrenotificationContentRuleResult.cs" />
     <Compile Include="Movement\BulkPrenotification\PrenotificationColumnIndex.cs" />
     <Compile Include="Movement\BulkPrenotification\PrenotificationMovement.cs" />
     <Compile Include="Movement\BulkPrenotification\IPrenotificationContentRule.cs" />
+    <Compile Include="Movement\BulkUpload\BulkFileRulesSummary.cs" />
+    <Compile Include="Movement\BulkUpload\BulkFileType.cs" />
+    <Compile Include="Movement\BulkUpload\BulkFileRules.cs" />
     <Compile Include="Movement\DateHistory.cs" />
     <Compile Include="Movement\IMovementRule.cs" />
     <Compile Include="Movement\InternalMovementSummary.cs" />

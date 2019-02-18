@@ -26,22 +26,25 @@
             var units = shippingInfo == null ? default(ShipmentQuantityUnits) : shippingInfo.Units;
             var availableUnits = ShipmentQuantityUnitsMetadata.GetUnitsOfThisType(units).ToList();
 
-            List<int> shipments = new List<int>();
-            MessageLevel result = MessageLevel.Success;
+            var shipments =
+                    movements.Where(
+                            m =>
+                                m.ShipmentNumber.HasValue &&
+                                !m.MissingUnits &&
+                                (!m.Unit.HasValue ||
+                                availableUnits.All(u => u != m.Unit.Value)))
+                        .GroupBy(x => x.ShipmentNumber)
+                        .OrderBy(x => x.Key)
+                        .Select(x => x.Key)
+                        .ToList();
 
-            foreach (var movement in movements)
-            {
-                if (availableUnits.Count(p => p == movement.Unit) == 0)
-                {
-                    result = MessageLevel.Error;
-                    shipments.Add(movement.ShipmentNumber.GetValueOrDefault());
-                }
-            }
+            var result = shipments.Any() ? MessageLevel.Error : MessageLevel.Success;
+            var minShipment = shipments.FirstOrDefault() ?? 0;
 
-            var shipmentNumbers = string.Join(", ", shipments.Distinct());
+            var shipmentNumbers = string.Join(", ", shipments);
             var errorMessage = string.Format(Prsd.Core.Helpers.EnumHelper.GetDisplayName(ReceiptRecoveryContentRules.QuantityUnit), shipmentNumbers);
 
-            return new ReceiptRecoveryContentRuleResult<ReceiptRecoveryContentRules>(ReceiptRecoveryContentRules.QuantityUnit, result, errorMessage, shipments.DefaultIfEmpty(0).Min());
+            return new ReceiptRecoveryContentRuleResult<ReceiptRecoveryContentRules>(ReceiptRecoveryContentRules.QuantityUnit, result, errorMessage, minShipment);
         }
     }
 }

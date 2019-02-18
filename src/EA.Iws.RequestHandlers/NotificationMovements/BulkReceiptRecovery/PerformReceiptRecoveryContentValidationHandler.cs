@@ -7,6 +7,7 @@
     using System.Threading.Tasks;
     using Core.Movement.BulkReceiptRecovery;
     using Core.Rules;
+    using Domain.Movement;
     using Domain.Movement.BulkUpload;
     using Prsd.Core.Mapper;
     using Prsd.Core.Mediator;
@@ -17,15 +18,18 @@
         private readonly IEnumerable<IReceiptRecoveryContentRule> contentRules;
         private readonly IMap<DataTable, List<ReceiptRecoveryMovement>> mapper;
         private readonly IDraftMovementRepository repository;
+        private readonly IMovementRepository movementRepository;
         private const int MaxShipments = 50;
 
         public PerformReceiptRecoveryContentValidationHandler(IEnumerable<IReceiptRecoveryContentRule> contentRules,
             IMap<DataTable, List<ReceiptRecoveryMovement>> mapper,
-            IDraftMovementRepository repository)
+            IDraftMovementRepository repository,
+            IMovementRepository movementRepository)
         {
             this.contentRules = contentRules;
             this.mapper = mapper;
             this.repository = repository;
+            this.movementRepository = movementRepository;
         }
 
         public async Task<ReceiptRecoveryRulesSummary> HandleAsync(PerformReceiptRecoveryContentValidation message)
@@ -60,7 +64,9 @@
                 return rules;
             }
 
-            rules.Add(await GetMissingNotificationNumbersOrShipmentNumbers(movements));
+            var actualMovements = (await movementRepository.GetAllMovements(notificationId)).ToList();
+
+            rules.Add(await GetMissingNotificationNumbersOrShipmentNumbers(movements, actualMovements));
 
             if (rules.Any(r => r.MessageLevel == MessageLevel.Error))
             {
@@ -104,7 +110,7 @@
         }
 
         private static async Task<ReceiptRecoveryContentRuleResult<ReceiptRecoveryContentRules>> GetMissingNotificationNumbersOrShipmentNumbers(
-            IReadOnlyCollection<ReceiptRecoveryMovement> movements)
+            IReadOnlyCollection<ReceiptRecoveryMovement> movements, IReadOnlyCollection<Movement> actualMovements)
         {
             return await Task.Run(() =>
             {
@@ -112,6 +118,15 @@
                     || m.MissingNotificationNumber || string.IsNullOrEmpty(m.NotificationNumber))
                     ? MessageLevel.Error
                     : MessageLevel.Success;
+
+                if (result == MessageLevel.Success && movements.All(m => m.ShipmentNumber.HasValue))
+                {
+                    var allShipmentNumbersExist =
+                        movements.Where(m => m.ShipmentNumber.HasValue)
+                            .All(m => actualMovements.Any(a => a.Number == m.ShipmentNumber.Value));
+
+                    result = !allShipmentNumbersExist ? MessageLevel.Error : MessageLevel.Success;
+                }
 
                 var errorMessage = Prsd.Core.Helpers.EnumHelper.GetDisplayName(ReceiptRecoveryContentRules.InvalidNotificationOrShipmentNumbers);
 

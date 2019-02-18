@@ -8,6 +8,7 @@
     using Core.Movement.BulkReceiptRecovery;
     using Core.Rules;
     using Domain.Movement;
+    using Prsd.Core;
 
     public class ReceiptRecoveryReceiptOnlyRule : IReceiptRecoveryContentRule
     {
@@ -20,40 +21,44 @@
 
         public async Task<ReceiptRecoveryContentRuleResult<ReceiptRecoveryContentRules>> GetResult(List<ReceiptRecoveryMovement> movements, Guid notificationId)
         {
-            var actualMovements = await repo.GetAllMovements(notificationId);
+            var actualMovements = (await repo.GetAllMovements(notificationId)).ToList();
+            var shipments = new List<int>();
 
-            List<int> shipments = new List<int>();
-            MessageLevel result = MessageLevel.Success;
+            var validMovements =
+                movements.Where(
+                    p =>
+                        !p.MissingReceivedDate && p.MissingRecoveredDisposedDate &&
+                        p.ReceivedDate.HasValue);
 
-            foreach (var movement in movements.Where(p => p.MissingRecoveredDisposedDate))
+            foreach (var movement in validMovements)
             {
                 var actualMovement = actualMovements.FirstOrDefault(p => p.Number == movement.ShipmentNumber);
 
-                if (actualMovement == null)
+                if (actualMovement != null &&
+                    actualMovement.Status != MovementStatus.Received)
                 {
-                    continue;
-                }
-
-                if (actualMovement.Status == MovementStatus.Captured)
-                {
-                    if (actualMovement.Date.Date < DateTime.UtcNow.Date)
+                    if (actualMovement.Status == MovementStatus.Captured)
                     {
-                        result = MessageLevel.Error;
+                        if (actualMovement.Date.Date < SystemTime.UtcNow.Date)
+                        {
+                            shipments.Add(movement.ShipmentNumber.GetValueOrDefault());
+                        }
+                    }
+                    else if (actualMovement.Status == MovementStatus.Submitted)
+                    {
+                        if (actualMovement.Date.Date > SystemTime.UtcNow.Date)
+                        {
+                            shipments.Add(movement.ShipmentNumber.GetValueOrDefault());
+                        }
+                    }
+                    else
+                    {
                         shipments.Add(movement.ShipmentNumber.GetValueOrDefault());
                     }
                 }
-                else if (actualMovement.Status != MovementStatus.Submitted)
-                {
-                    result = MessageLevel.Error;
-                    shipments.Add(movement.ShipmentNumber.GetValueOrDefault());
-                }
-                else if (actualMovement.Status == MovementStatus.Submitted && actualMovement.Date.Date > DateTime.UtcNow.Date)
-                {
-                    result = MessageLevel.Error;
-                    shipments.Add(movement.ShipmentNumber.GetValueOrDefault());
-                }  
             }
 
+            var result = shipments.Any() ? MessageLevel.Error : MessageLevel.Success;
             var shipmentNumbers = string.Join(", ", shipments.Distinct());
             var errorMessage = string.Format(Prsd.Core.Helpers.EnumHelper.GetDisplayName(ReceiptRecoveryContentRules.PrenotifiedShipment), shipmentNumbers);
 

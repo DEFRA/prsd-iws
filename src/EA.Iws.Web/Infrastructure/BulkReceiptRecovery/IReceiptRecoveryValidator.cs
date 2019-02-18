@@ -1,16 +1,14 @@
 ﻿namespace EA.Iws.Web.Infrastructure.BulkReceiptRecovery
 {
     using System;
-    using System.Data;
     using System.Threading.Tasks;
     using System.Web;
     using Core.Movement.BulkReceiptRecovery;
+    using Core.Movement.BulkUpload;
 
     public interface IReceiptRecoveryValidator
     {
-        DataTable DataTable { get; set; }
-        byte[] FileBytes { get; set; }
         Task<ReceiptRecoveryRulesSummary> GetValidationSummary(HttpPostedFileBase file, Guid notificationId);
-        Task<ReceiptRecoveryRulesSummary> GetShipmentMovementValidationSummary(HttpPostedFileBase file, Guid notificationId);
+        Task<BulkFileRulesSummary> GetShipmentMovementValidationSummary(HttpPostedFileBase file, Guid notificationId);
     }
 }

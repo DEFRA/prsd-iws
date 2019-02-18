@@ -5,7 +5,6 @@
     using System.Threading.Tasks;
     using Core.Movement.BulkReceiptRecovery;
     using Core.Rules;
-    using Domain;
     using Domain.Movement;
     using FakeItEasy;
     using RequestHandlers.NotificationMovements.BulkReceiptRecovery;
@@ -62,7 +61,9 @@
                 new ReceiptRecoveryMovement()
                 {
                     ShipmentNumber = 1,
-                    MissingRecoveredDisposedDate = recovered
+                    MissingRecoveredDisposedDate = recovered,
+                    MissingReceivedDate = false,
+                    ReceivedDate = DateTime.Now
                 },
                 new ReceiptRecoveryMovement()
                 {

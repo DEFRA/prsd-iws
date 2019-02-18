@@ -39,11 +39,16 @@
     <div class="form-group table-container">
         <table title="Address book records">
             <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Address</th>
-                    <th>Action</th>
-                </tr>
+              <tr>
+                  <th>Name</th>
+                  <th>Address</th>
+                  @if (Model.Type == EA.Iws.Core.AddressBook.AddressRecordType.Carrier)
+                  {
+                    <th>Contact person</th>
+                    <th>Registration number</th>
+                  }
+                  <th>Action</th>
+              </tr>
             </thead>
             <tbody>
                 @for (int i = 0; i < Model.AddressRecords.Count; i++)
@@ -59,14 +64,20 @@
                             @Html.DisplayFor(m => m.AddressRecords[i].AddressData.TownOrCity),
                             @Html.DisplayFor(m => m.AddressRecords[i].AddressData.PostalCode)
                         </td>
-                    <td>
-						<nobr>
-							@Html.ActionLink("Edit", "Index", "Edit", new { id = Model.AddressRecords[i].Id, type = Model.Type }, null) <span>&nbsp;</span>
-							@Html.ActionLink("Delete", "Index", "Delete", new { id = Model.AddressRecords[i].Id, type = Model.Type }, null)
-						</nobr>
-					</td>
-                    </tr>
-                }
+                        @if (Model.Type == EA.Iws.Core.AddressBook.AddressRecordType.Carrier)
+                        {
+                          <td>@Html.DisplayFor(m => m.AddressRecords[i].ContactData.FullName)</td>
+                          <td>@Html.DisplayFor(m => m.AddressRecords[i].BusinessData.RegistrationNumber)
+                          </td>
+                        }
+                        <td>
+                          <nobr>
+                            @Html.ActionLink("Edit", "Index", "Edit", new { id = Model.AddressRecords[i].Id, type = Model.Type }, null) <span>&nbsp;</span>
+                            @Html.ActionLink("Delete", "Index", "Delete", new { id = Model.AddressRecords[i].Id, type = Model.Type }, null)
+                          </nobr>
+                        </td>
+                </tr>
+            }
             </tbody>
         </table>
         @Html.Pager(Model.PageSize, Model.PageNumber, Model.NumberOfMatchedRecords).Options(o =>

@@ -18,7 +18,7 @@
         ReceiptDateFormat,
         [Display(Name = "Shipment number {0}: the receipt date must not be in the future and must be after the Actual Date of Shipment.")]
         ReceiptDateValidation,
-        [Display(Name = "Shipment number {0}: the waste quantity must have no more than {0} decimal places.")]
+        [Display(Name = "Shipment number {0}: the waste quantity must have no more than {1} decimal places.")]
         QuantityPrecision,
         [Display(Name = "Shipment number {0}: the quantity unit of measurement is not permitted on this notification.")]
         QuantityUnit,
@@ -28,7 +28,7 @@
         RecoveryDateValidation,
         [Display(Name = "Shipment number {0}: this shipment hasn’t been prenotified and/or shipped therefore can’t be received.")]
         PrenotifiedShipment,
-        [Display(Name = "Shipment number {0}: this shipment hasn’t been prenotified and/or shipped therefore can’t be {1}.")]
+        [Display(Name = "Shipment number {0}: this shipment hasn’t been received therefore can’t be {1}.")]
         RecoveredValidation,
         [Display(Name = "Shipment number {0}: this shipment hasn’t been prenotified and/or shipped therefore can’t be received and {1}.")]
         ReceivedRecoveredValidation,

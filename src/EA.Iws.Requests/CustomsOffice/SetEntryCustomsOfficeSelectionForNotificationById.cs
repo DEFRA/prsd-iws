@@ -8,15 +8,15 @@
 
     [NotificationReadOnlyAuthorize]
     [RequestAuthorization(ExportNotificationPermissions.CanEditExportNotification)]
-    public class SetExitCustomsSelectionForNotificationById : IRequest<bool>
+    public class SetEntryCustomsOfficeSelectionForNotificationById : IRequest<bool>
     {
         public Guid Id { get; private set; }
-        public bool ExitSelection { get; private set; }
+        public bool Selection { get; private set; }
 
-        public SetExitCustomsSelectionForNotificationById(Guid id, bool exitSelection)
+        public SetEntryCustomsOfficeSelectionForNotificationById(Guid id, bool selection)
         {
             Id = id;
-            ExitSelection = exitSelection;
+            Selection = selection;
         }
     }
 }

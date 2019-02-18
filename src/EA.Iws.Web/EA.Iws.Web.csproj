@@ -500,7 +500,7 @@
     </Content>
     <Content Include="Scripts\datable.min.js" />
     <Content Include="Scripts\decision-dropdown.js" />
-    <Content Include="Scripts\exit-customs-office-required-radio-buttons.js" />
+    <Content Include="Scripts\customs-office-required-radio-buttons.js" />
     <Content Include="Scripts\govuk_elements\application.js" />
     <Content Include="Scripts\govuk_elements\govuk\details.polyfill.js" />
     <Content Include="Scripts\govuk_toolkit\govuk\analytics\analytics.js" />
@@ -2287,6 +2287,11 @@
     <Compile Include="Areas\NotificationApplication\ViewModels\ReviewUserAccess\RemoveUserViewModel.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\ShareNotification\SuccessViewModel.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\ReviewUserAccess\UserListViewModel.cs" />
+    <Compile Include="Areas\NotificationApplication\Views\CustomsOffice\CustomsOfficeResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CustomsOfficeResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Areas\NotificationApplication\Views\ReviewUserAccess\RemoveResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -2376,20 +2381,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ReceiptRecoveryBulkUploadResources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Infrastructure\BulkReceiptRecovery\FileParseReceiptRecoveryFileRule.cs" />
-    <Compile Include="Infrastructure\BulkReceiptRecovery\ReceiptRecoveryFileSizeRule.cs" />
-    <Compile Include="Infrastructure\BulkReceiptRecovery\ReceiptRecoveryFileTypeRule.cs" />
     <Compile Include="Infrastructure\BulkReceiptRecovery\ReceiptRecoveryValidator.cs" />
-    <Compile Include="Infrastructure\BulkReceiptRecovery\IReceiptRecoveryFileRule.cs" />
     <Compile Include="Infrastructure\BulkReceiptRecovery\IReceiptRecoveryValidator.cs" />
     <Compile Include="Infrastructure\BulkPrenotification\PrenotificationValidator.cs" />
-    <Compile Include="Infrastructure\BulkPrenotification\PrenotificationFileSizeRule.cs" />
-    <Compile Include="Infrastructure\BulkPrenotification\PrenotificationFileTypeRule.cs" />
-    <Compile Include="Infrastructure\BulkPrenotification\IPrenotificationFileRule.cs" />
     <Compile Include="Infrastructure\BulkPrenotification\IPrenotificationValidator.cs" />
-    <Compile Include="Infrastructure\BulkPrenotification\FileParsePrenotificationFileRule.cs" />
-    <Compile Include="Infrastructure\BulkPrenotification\ShippingMovementsFileTypeRules.cs" />
-    <Compile Include="Infrastructure\BulkReceiptRecovery\ReceiptRecoveryMovementsFileTypeRules.cs" />
+    <Compile Include="Infrastructure\BulkUpload\BulkFileValidator.cs" />
+    <Compile Include="Infrastructure\BulkUpload\IBulkFileValidator.cs" />
     <Compile Include="Infrastructure\NotificationOwnerFilter.cs" />
     <Compile Include="Infrastructure\SkipNotificationOwnerFilter.cs" />
     <Compile Include="Infrastructure\AuditService.cs" />
@@ -4427,6 +4424,10 @@
     <EmbeddedResource Include="Areas\NotificationApplication\Views\ChemicalComposition\ParametersResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>ParametersResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\NotificationApplication\Views\CustomsOffice\CustomsOfficeResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>CustomsOfficeResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\NotificationApplication\Views\CustomsOffice\NoCustomsOfficeResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

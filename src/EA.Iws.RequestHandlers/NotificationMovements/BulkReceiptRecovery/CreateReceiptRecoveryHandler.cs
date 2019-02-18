@@ -48,7 +48,8 @@
             {
                 try
                 {
-                    var draftMovements = await draftMovementRepository.GetDraftMovementById(message.DraftBulkUploadId);
+                    var draftMovements =
+                        (await draftMovementRepository.GetDraftMovementById(message.DraftBulkUploadId)).ToList();
 
                     if (!draftMovements.Any())
                     {
@@ -60,7 +61,8 @@
                         var movement = await movementRepository.GetByNumberOrDefault(draftMovement.ShipmentNumber,
                             message.NotificationId);
 
-                        if (draftMovement.ReceivedDate.HasValue)
+                        if (draftMovement.ReceivedDate.HasValue &&
+                            draftMovement.ReceivedDate.Value != DateTime.MinValue)
                         {
                             var fileId =
                                 await
@@ -73,7 +75,8 @@
                             await context.SaveChangesAsync();
                         }
 
-                        if (draftMovement.RecoveredDisposedDate.HasValue)
+                        if (draftMovement.RecoveredDisposedDate.HasValue && 
+                            draftMovement.RecoveredDisposedDate.Value != DateTime.MinValue)
                         {
                             var fileId =
                                 await
