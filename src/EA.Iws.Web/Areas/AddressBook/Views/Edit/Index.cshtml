@@ -1,0 +1,42 @@
+﻿@using EA.Iws.Web.Areas.AddressBook.Views.Edit
+@model EA.Iws.Web.Areas.AddressBook.ViewModels.EditAddressViewModel
+
+
+@using (Html.BeginForm())
+{
+	@Html.AntiForgeryToken()
+	@Html.Gds().ValidationSummary()
+	@Html.HiddenFor(m => m.AddressBookRecordId)
+	@Html.HiddenFor(m => m.Type)
+
+
+	<header class="hgroup">
+		<h1 class="heading-large">@AddEditResource.Header</h1>
+	</header>
+
+	<h2 class="heading-medium">@AddEditResource.OrgDetails</h2>
+	<hr />
+	<fieldset>
+		<legend class="visuallyhidden">@AddEditResource.OrgDetails</legend>
+		@Html.Partial("_BusinessType", Model)
+	</fieldset>
+
+	<h2 class="heading-medium">@AddEditResource.Address</h2>
+	<hr />
+
+	<fieldset>
+		<legend class="visuallyhidden">@AddEditResource.Address</legend>
+		@Html.EditorFor(m => m.Address)
+	</fieldset>
+
+	<h2 class="heading-medium">@AddEditResource.Contact</h2>
+	<hr />
+
+	<fieldset>
+		<legend class="visuallyhidden">@AddEditResource.Contact</legend>
+		@Html.EditorFor(m => m.Contact)
+	</fieldset>
+
+
+	<button class="button" type="submit">@Constants.ContinueButtonText</button>
+}

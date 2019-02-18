@@ -80,7 +80,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AddressBook\AddAddressBookEntryHandler.cs" />
+    <Compile Include="AddressBook\AddNewAddressBookEntryHandler.cs" />
     <Compile Include="AddressBook\DeleteAddressBookRecordHandler.cs" />
+    <Compile Include="AddressBook\EditAddressBookEntryHandler.cs" />
     <Compile Include="AddressBook\GetAddressBookRecordById.cs" />
     <Compile Include="AddressBook\GetUserAddressBookByTypeHandler.cs" />
     <Compile Include="AddressBook\SearchAddressRecordsByNameHandler.cs" />

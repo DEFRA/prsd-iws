@@ -1042,6 +1042,9 @@
     <Content Include="Areas\NotificationMovements\Views\Create\AddIntendedCarrier.cshtml" />
     <Content Include="Areas\NotificationMovements\Views\Create\WhoAreYourCarriers.cshtml" />
     <Content Include="Areas\NotificationMovements\Views\ReceiptRecoveryBulkUpload\Documents.cshtml" />
+    <Content Include="Areas\AddressBook\Views\Edit\Index.cshtml" />
+    <Content Include="Areas\AddressBook\Views\Edit\_BusinessType.cshtml" />
+    <Content Include="Areas\AddressBook\Views\Edit\Add.cshtml" />
     <None Include="Scripts\jquery-2.1.3.intellisense.js" />
     <Content Include="Scripts\govuk\govuk-template.js" />
     <Content Include="Scripts\govuk\ie.js" />
@@ -1181,11 +1184,20 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Areas\AddressBook\AddressBookAreaRegistration.cs" />
     <Compile Include="Areas\AddressBook\Controllers\DeleteController.cs" />
+    <Compile Include="Areas\AddressBook\Controllers\EditController.cs" />
     <Compile Include="Areas\AddressBook\Controllers\HomeController.cs" />
+    <Compile Include="Areas\AddressBook\ViewModels\AddAddressViewModel.cs" />
+    <Compile Include="Areas\AddressBook\ViewModels\EditAddressViewModel.cs" />
+    <Compile Include="Areas\AddressBook\ViewModels\AddressBusinessTypeViewModel.cs" />
     <Compile Include="Areas\AddressBook\Views\AddressBookResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>AddressBookResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\AddressBook\Views\Edit\AddEditResource.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AddEditResource.resx</DependentUpon>
     </Compile>
     <Compile Include="Areas\AdminExportAssessment\Controllers\AnnexController.cs" />
     <Compile Include="Areas\AdminExportAssessment\Controllers\DecisionControllerResources.Designer.cs">
@@ -3585,7 +3597,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Areas\AddressBook\Models\" />
     <Folder Include="Areas\AdminExportAssessment\Views\Home\" />
     <Folder Include="Areas\AdminImportAssessment\Views\Home\" />
     <Folder Include="Areas\Admin\Views\Shared\EditorTemplates\" />
@@ -3594,6 +3605,10 @@
     <Folder Include="Areas\FinancialGuarantee\Views\Shared\" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Areas\AddressBook\Views\Edit\AddEditResource.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AddEditResource.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Areas\AdminExportAssessment\Controllers\DecisionControllerResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>DecisionControllerResources.Designer.cs</LastGenOutput>

@@ -47,7 +47,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AddressBook\AddAddressBookEntry.cs" />
+    <Compile Include="AddressBook\AddNewAddressBookEntry.cs" />
     <Compile Include="AddressBook\DeleteAddressBookRecord.cs" />
+    <Compile Include="AddressBook\EditAddressBookEntry.cs" />
     <Compile Include="AddressBook\GetAddressBookRecordById.cs" />
     <Compile Include="AddressBook\GetUserAddressBookByType.cs" />
     <Compile Include="AddressBook\SearchAddressRecords.cs" />
