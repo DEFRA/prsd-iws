@@ -8,6 +8,7 @@
     using Infrastructure.Authorization;
     using Prsd.Core.Mediator;
     using Requests.AddressBook;
+    using Requests.Users;
 
     [AuthorizeActivity(typeof(GetUserAddressBookByType))]
     public class HomeController : Controller
@@ -24,6 +25,9 @@
         {
             AddressBookData model = new AddressBookData();
             AddressBookData result = null;
+
+            var isInternalUser = await mediator.SendAsync(new GetUserIsInternal());
+            model.IsInternalUser = isInternalUser;
 
             if (searchTerm == null)
             {
