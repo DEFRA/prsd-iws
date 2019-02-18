@@ -23,25 +23,30 @@
 
         public async Task<ReceiptRecoveryContentRuleResult<ReceiptRecoveryContentRules>> GetResult(List<ReceiptRecoveryMovement> movements, Guid notificationId)
         {
-            var actualMovements = await movementRepo.GetAllMovements(notificationId);
+            var actualMovements = (await movementRepo.GetAllMovements(notificationId)).ToList();
             var notification = await notificationRepo.GetById(notificationId);
+            var shipments = new List<int>();
 
-            List<int> shipments = new List<int>();
-            MessageLevel result = MessageLevel.Success;
+            var validMovements =
+                movements.Where(
+                    p =>
+                        p.MissingReceivedDate && !p.MissingRecoveredDisposedDate &&
+                        p.ReceivedDate.HasValue && p.RecoveredDisposedDate.HasValue);
 
-            foreach (var movement in movements.Where(p => !p.ReceivedDate.HasValue && p.RecoveredDisposedDate.HasValue && !p.MissingRecoveredDisposedDate))
+            foreach (var movement in validMovements)
             {
                 var actualMovement = actualMovements.FirstOrDefault(p => p.Number == movement.ShipmentNumber);
 
                 if (actualMovement != null && actualMovement.Status != MovementStatus.Received)
                 {
-                    result = MessageLevel.Error;
                     shipments.Add(movement.ShipmentNumber.GetValueOrDefault());
                 }
             }
 
+            var result = shipments.Any() ? MessageLevel.Error : MessageLevel.Success;
             var shipmentNumbers = string.Join(", ", shipments.Distinct());
-            string type = notification.NotificationType == Core.Shared.NotificationType.Disposal ? "disposed" : "recovered";
+
+            var type = notification.NotificationType == Core.Shared.NotificationType.Disposal ? "disposed" : "recovered";
             var errorMessage = string.Format(Prsd.Core.Helpers.EnumHelper.GetDisplayName(ReceiptRecoveryContentRules.RecoveredValidation), shipmentNumbers, type);
 
             return new ReceiptRecoveryContentRuleResult<ReceiptRecoveryContentRules>(ReceiptRecoveryContentRules.RecoveredValidation, result, errorMessage, shipments.DefaultIfEmpty(0).Min());
