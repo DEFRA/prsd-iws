@@ -37,7 +37,7 @@ AS
         N.CompetentAuthorityId,
         NA.ReceivedDate,
         CASE WHEN FC.IsInterim IS NULL THEN InS.IsInterim ELSE FC.IsInterim END AS IsInterim,
-		P.Comments AS PaymentComments
+        P.Comments AS PaymentComments
     FROM [Reports].[NotificationOrganisations] NO
     INNER JOIN [Reports].[NotificationAssessment] NA ON NO.Id = NA.NotificationId
     INNER JOIN [Reports].[Notification] N ON NO.Id = N.Id
