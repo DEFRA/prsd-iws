@@ -93,6 +93,14 @@
 {
     @Html.AntiForgeryToken()
     <div class="form-group">
-        @Html.ActionLink(Resource.GoToHomepage, "Home", "Applicant", new { area = string.Empty }, null)
+        @if (Model.IsInternalUser)
+        {
+            @Html.ActionLink(Resource.GoToHomepage, "Index", "Home", new { area = "Admin" }, null)
+        }
+        else
+        {
+            @Html.ActionLink(Resource.GoToHomepage, "Home", "Applicant", new { area = string.Empty }, null)
+        }
+        
     </div>
 }

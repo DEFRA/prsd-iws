@@ -19,6 +19,8 @@
 
         public int NumberOfMatchedRecords { get; set; }
 
+        public bool IsInternalUser { get; set; }
+
         public AddressBookData()
         {
             AddressRecords = new List<AddressBookRecordData>();
