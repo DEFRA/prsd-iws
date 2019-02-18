@@ -28,7 +28,7 @@
         RecoveryDateValidation,
         [Display(Name = "Shipment number {0}: this shipment hasn’t been prenotified and/or shipped therefore can’t be received.")]
         PrenotifiedShipment,
-        [Display(Name = "Shipment number {0}: this shipment hasn’t been prenotified and/or shipped therefore can’t be {1}.")]
+        [Display(Name = "Shipment number {0}: this shipment hasn’t been received therefore can’t be {1}.")]
         RecoveredValidation,
         [Display(Name = "Shipment number {0}: this shipment hasn’t been prenotified and/or shipped therefore can’t be received and {1}.")]
         ReceivedRecoveredValidation,

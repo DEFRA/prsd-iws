@@ -8,12 +8,14 @@
     using Core.Movement.BulkReceiptRecovery;
     using Core.Rules;
     using Core.Shared;
+    using Domain.Movement;
     using Domain.Movement.BulkUpload;
     using FakeItEasy;
     using Prsd.Core;
     using Prsd.Core.Mapper;
     using RequestHandlers.NotificationMovements.BulkReceiptRecovery;
     using Requests.NotificationMovements.BulkUpload;
+    using TestHelpers.DomainFakes;
     using Xunit;
 
     public class PerformReceiptRecoveryContentValidationHandlerTests
@@ -23,6 +25,7 @@
         private readonly IMap<DataTable, List<ReceiptRecoveryMovement>> mapper;
         private readonly IReceiptRecoveryContentRule contentRule;
         private readonly IDraftMovementRepository repository;
+        private readonly IMovementRepository movementRepository;
         private const int MaxShipments = 50;
 
         public PerformReceiptRecoveryContentValidationHandlerTests()
@@ -30,13 +33,15 @@
             mapper = A.Fake<IMap<DataTable, List<ReceiptRecoveryMovement>>>();
             contentRule = A.Fake<IReceiptRecoveryContentRule>();
             repository = A.Fake<IDraftMovementRepository>();
+            movementRepository = A.Fake<IMovementRepository>();
 
             contentRules = new List<IReceiptRecoveryContentRule>(1)
             {
                 contentRule
             };
 
-            handler = new PerformReceiptRecoveryContentValidationHandler(contentRules, mapper, repository);
+            handler = new PerformReceiptRecoveryContentValidationHandler(contentRules, mapper, repository,
+                movementRepository);
         }
 
         [Fact]
@@ -210,6 +215,7 @@
                 }
             };
 
+            A.CallTo(() => movementRepository.GetAllMovements(notificationId)).Returns(GetRepoMovements());
             A.CallTo(() => mapper.Map(A<DataTable>.Ignored)).Returns(movements);
             A.CallTo(() => contentRule.GetResult(A<List<ReceiptRecoveryMovement>>.Ignored, notificationId))
                 .Returns(new ReceiptRecoveryContentRuleResult<ReceiptRecoveryContentRules>(ReceiptRecoveryContentRules.MaximumShipments,
@@ -220,6 +226,30 @@
             Assert.True(response.IsContentRulesSuccess);
             A.CallTo(() => repository.AddReceiptRecovery(A<Guid>.Ignored, A<List<ReceiptRecoveryMovement>>.Ignored, "Test"))
                 .MustHaveHappened(Repeated.Exactly.Once);
+        }
+
+        private List<Movement> GetRepoMovements()
+        {
+            var notificationId = Guid.NewGuid();
+
+            return new List<Movement>()
+            {
+                new TestableMovement()
+                {
+                    NotificationId = notificationId,
+                    Status = Core.Movement.MovementStatus.Submitted,
+                    Date = SystemTime.UtcNow.AddDays(-10),
+                    Number = 1
+                },
+
+                new TestableMovement()
+                {
+                    NotificationId = notificationId,
+                    Status = Core.Movement.MovementStatus.Submitted,
+                    Date = SystemTime.UtcNow.AddDays(-5),
+                    Number = 2
+                }
+            };
         }
     }
 }

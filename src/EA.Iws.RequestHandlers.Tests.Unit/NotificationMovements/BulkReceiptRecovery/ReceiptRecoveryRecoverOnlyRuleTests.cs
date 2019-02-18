@@ -5,7 +5,6 @@
     using System.Threading.Tasks;
     using Core.Movement.BulkReceiptRecovery;
     using Core.Rules;
-    using Domain;
     using Domain.Movement;
     using Domain.NotificationApplication;
     using FakeItEasy;
