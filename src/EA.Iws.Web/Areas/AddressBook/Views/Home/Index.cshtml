@@ -1,12 +1,36 @@
-﻿@model EA.Iws.Core.AddressBook.AddressBookData
+﻿@using Resource = EA.Iws.Web.Areas.AddressBook.Views.AddressBookResources
+@using EA.Iws.Web.Infrastructure.Paging
+@using EA.Iws.Web.Areas.AddressBook.Views.Edit
+@model EA.Iws.Core.AddressBook.AddressBookData
 @{
     ViewBag.Title = "Address Book - " + Model.Type;
 }
 
 <header>
     <h1 class="heading-large">Your address book</h1>
-    <p class="subtitle">Manage your address book</p>
+    <p class="subtitle">View and manage your address book</p>
 </header>
+
+<div class="grid-row">
+    <div class="column-two-thirds">
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+			@Html.ActionLink(@Resource.AddAddress,  "Add", "Edit", new { type = Model.Type }, new { @class = "button" })
+
+            <h3 class="heading-small">@Resource.SearchHeader</h3>
+            <div id="search-container" class="form-group @Html.Gds().FormGroupClass(m => m.SearchTerm)">
+                @Html.Gds().ValidationMessageFor(m => m.SearchTerm)
+                @Html.Gds().HintParagraph(Resource.SearchHint)
+                @Html.Gds().TextBoxFor(m => m.SearchTerm, new { @title = "Search term", placeholder = Resource.SearchPlaceholder })
+                @Html.HiddenFor(m => m.Type)
+                @Html.HiddenFor(m => m.PageNumber)
+                <button name="button" value="search" class="button" type="submit">@Resource.Search</button>
+            </div>
+        }
+    </div>
+</div>
 
 @Html.Partial("_Navigation")
 
@@ -15,54 +39,79 @@
     <div class="form-group table-container">
         <table title="Address book records">
             <thead>
-            <tr>
-                <th>Name</th>
-                <th>Address</th>
-				@if (Model.Type == EA.Iws.Core.AddressBook.AddressRecordType.Carrier)
-				{
-					<th>Contact person</th>
-					<th>Registration number</th>
-				}
-                <th>Action</th>
-            </tr>
+              <tr>
+                  <th>Name</th>
+                  <th>Address</th>
+                  @if (Model.Type == EA.Iws.Core.AddressBook.AddressRecordType.Carrier)
+                  {
+                    <th>Contact person</th>
+                    <th>Registration number</th>
+                  }
+                  <th>Action</th>
+              </tr>
             </thead>
             <tbody>
-            @for (int i = 0; i < Model.AddressRecords.Count; i++)
-            {
-                <tr>
-                    <td>@Html.DisplayFor(m => m.AddressRecords[i].BusinessData.Name)</td>
-                    <td>
-                        @Html.DisplayFor(m => m.AddressRecords[i].AddressData.StreetOrSuburb),
-                        @if (Model.AddressRecords[i].AddressData.Address2 != null)
+                @for (int i = 0; i < Model.AddressRecords.Count; i++)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(m => m.AddressRecords[i].BusinessData.Name)</td>
+                        <td>
+                            @Html.DisplayFor(m => m.AddressRecords[i].AddressData.StreetOrSuburb),
+                            @if (Model.AddressRecords[i].AddressData.Address2 != null)
+                            {
+                                @Html.DisplayFor(m => m.AddressRecords[i].AddressData.Address2)<text>,</text>
+                            }
+                            @Html.DisplayFor(m => m.AddressRecords[i].AddressData.TownOrCity),
+                            @Html.DisplayFor(m => m.AddressRecords[i].AddressData.PostalCode)
+                        </td>
+                        @if (Model.Type == EA.Iws.Core.AddressBook.AddressRecordType.Carrier)
                         {
-                            @Html.DisplayFor(m => m.AddressRecords[i].AddressData.Address2)<text>,</text>
+                          <td>@Html.DisplayFor(m => m.AddressRecords[i].ContactData.FullName)</td>
+                          <td>@Html.DisplayFor(m => m.AddressRecords[i].BusinessData.RegistrationNumber)
+                          </td>
                         }
-                        @Html.DisplayFor(m => m.AddressRecords[i].AddressData.TownOrCity),
-                        @Html.DisplayFor(m => m.AddressRecords[i].AddressData.PostalCode)
-                    </td>
-					@if (Model.Type == EA.Iws.Core.AddressBook.AddressRecordType.Carrier)
-					{
-						<td>@Html.DisplayFor(m => m.AddressRecords[i].ContactData.FullName)</td>
-						<td>@Html.DisplayFor(m => m.AddressRecords[i].BusinessData.RegistrationNumber)
-						</td>
-					}
-                    <td>@Html.ActionLink("Delete", "Index", "Delete", new { id = Model.AddressRecords[i].Id, type = Model.Type }, null)</td>
+                        <td>
+                          <nobr>
+                            @Html.ActionLink("Edit", "Index", "Edit", new { id = Model.AddressRecords[i].Id, type = Model.Type }, null) <span>&nbsp;</span>
+                            @Html.ActionLink("Delete", "Index", "Delete", new { id = Model.AddressRecords[i].Id, type = Model.Type }, null)
+                          </nobr>
+                        </td>
                 </tr>
             }
             </tbody>
         </table>
+        @Html.Pager(Model.PageSize, Model.PageNumber, Model.NumberOfMatchedRecords).Options(o =>
+       {
+           o.AddRouteValue("type", Model.Type);
+           o.AddRouteValue("searchTerm", Model.SearchTerm);
+       })
     </div>
-} 
+}
 
 @if (Model.AddressRecords.Count == 0)
 {
-    <p>You have no address records for this business type.</p>
+    if (Model.SearchTerm == null)
+    {
+        <p>You have no address records for this business type.</p>
+    }
+    else
+    {
+        <p>Address not found</p>
+    }
 }
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
     <div class="form-group">
-        <button class="button" type="submit">Continue</button>
+        @if (Model.IsInternalUser)
+        {
+            @Html.ActionLink(Resource.GoToHomepage, "Index", "Home", new { area = "Admin" }, null)
+        }
+        else
+        {
+            @Html.ActionLink(Resource.GoToHomepage, "Home", "Applicant", new { area = string.Empty }, null)
+        }
+        
     </div>
 }

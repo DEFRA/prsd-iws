@@ -47,10 +47,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AddressBook\AddAddressBookEntry.cs" />
+    <Compile Include="AddressBook\AddNewAddressBookEntry.cs" />
     <Compile Include="AddressBook\DeleteAddressBookRecord.cs" />
+    <Compile Include="AddressBook\EditAddressBookEntry.cs" />
     <Compile Include="AddressBook\GetAddressBookRecordById.cs" />
     <Compile Include="AddressBook\GetUserAddressBookByType.cs" />
     <Compile Include="AddressBook\SearchAddressRecords.cs" />
+    <Compile Include="AddressBook\SearchAddressRecordsByName.cs" />
     <Compile Include="Admin\EntryOrExitPoints\AddEntryOrExitPoint.cs" />
     <Compile Include="Admin\EntryOrExitPoints\CheckEntryOrExitPointUnique.cs" />
     <Compile Include="Admin\EntryOrExitPoints\GetEntryOrExitPointsGroupedByCountry.cs" />

@@ -1,0 +1,57 @@
+﻿@using EA.Iws.Core.Shared
+@using EnumHelper = EA.Prsd.Core.Helpers.EnumHelper
+@using EA.Iws.Web.Areas.AddressBook.Views.Edit
+@model EA.Iws.Web.Areas.AddressBook.ViewModels.AddAddressViewModel
+
+<div class="form-group @Html.Gds().FormGroupClass(m => m.Business.Name)">
+    @Html.Gds().LabelFor(m => m.Business.Name)
+    @Html.Gds().ValidationMessageFor(m => m.Business.Name)
+    @Html.Gds().TextBoxFor(m => m.Business.Name)
+    
+</div>
+
+<div class="form-group @Html.Gds().FormGroupClass(m => m.Business.BusinessType)">
+	<span class="form-hint">@AddEditResource.OthersHint</span>
+    @Html.Gds().ValidationMessageFor(m => m.Business.BusinessType)
+
+    <div class="multiple-choice" data-target="sole-trader-number">
+        @Html.RadioButtonFor(m => m.Business.BusinessType, "SoleTrader", new { @class = "business-type-radio-button", @id = "SoleTrader" })
+        <label for="SoleTrader">
+            @EnumHelper.GetDisplayName(BusinessType.SoleTrader)
+        </label>
+    </div>
+
+    <div class="multiple-choice" data-target="partnership-number">
+        @Html.RadioButtonFor(m => m.Business.BusinessType, "Partnership", new { @class = "business-type-radio-button", @id = "Partnership" })
+        <label for="Partnership">
+            @EnumHelper.GetDisplayName(BusinessType.Partnership)
+        </label>
+    </div>
+
+    <div class="multiple-choice" data-target="companies-house-number">
+        @Html.RadioButtonFor(m => m.Business.BusinessType, "LimitedCompany", new { @class = "business-type-radio-button", @id = "LimitedCompany" })
+        <label for="LimitedCompany">
+            @EnumHelper.GetDisplayName(BusinessType.LimitedCompany)
+        </label>
+    </div>
+    
+     <div class="multiple-choice" data-target="other-description">
+        @Html.RadioButtonFor(m => m.Business.BusinessType, BusinessType.Other, new { @class = "business-type-radio-button", @id = "Other" })
+        <label for="Other">
+            @EnumHelper.GetDisplayName(BusinessType.Other)
+        </label>
+    </div>
+    
+    <div class="panel hide-for-initial-load @(Model.Business.BusinessType != null && Model.Business.BusinessType == BusinessType.Other ? "" : "js-hidden")" id="other-description">
+        <div class="form-group @Html.Gds().FormGroupClass(m => m.Business.OtherDescription)">
+            @Html.Gds().LabelFor(m => m.Business.OtherDescription)
+            @Html.Gds().ValidationMessageFor(m => m.Business.OtherDescription)
+            @Html.Gds().TextBoxFor(m => m.Business.OtherDescription)
+        </div>
+    </div>
+</div>
+<div class="form-group @Html.Gds().FormGroupClass(m => m.Business.RegistrationNumber)" data-validation-behaviour="ignore-parent">
+	@Html.Gds().LabelFor(m => m.Business.RegistrationNumber)
+	@Html.Gds().ValidationMessageFor(m => m.Business.RegistrationNumber)
+	@Html.Gds().TextBoxFor(m => m.Business.RegistrationNumber)
+</div>
