@@ -11,7 +11,7 @@ AS
         SUM(T.Debit) AS TotalRefunded,
         (SELECT TOP 1 [Date] FROM [Notification].[Transaction] WHERE NotificationId = N.Id AND Credit IS NOT NULL ORDER BY [Date] DESC) AS [LatestPaymentDate],
         (SELECT TOP 1 [Date] FROM [Notification].[Transaction] WHERE NotificationId = N.Id AND Debit IS NOT NULL ORDER BY [Date] DESC) AS [LatestRefundDate],
-		(SELECT CASE WHEN RIGHT(LTRIM(RTRIM(T2.Comments)),1) = '.' THEN LTRIM(RTRIM(T2.Comments)) + ' ' ELSE LTRIM(RTRIM(T2.Comments)) + '. ' END AS Comments
+        (SELECT CASE WHEN RIGHT(LTRIM(RTRIM(T2.Comments)),1) = '.' THEN LTRIM(RTRIM(T2.Comments)) + ' ' ELSE LTRIM(RTRIM(T2.Comments)) + '. ' END AS Comments
           FROM [Notification].[Transaction] T2
           WHERE T2.NotificationId = N.Id
 		  ORDER BY [Date] ASC
@@ -29,7 +29,7 @@ AS
         SUM(T.Debit) AS TotalRefunded,
         (SELECT TOP 1 [Date] FROM [ImportNotification].[Transaction] WHERE NotificationId = N.Id AND Credit IS NOT NULL ORDER BY [Date] DESC) AS [LatestPaymentDate],
         (SELECT TOP 1 [Date] FROM [ImportNotification].[Transaction] WHERE NotificationId = N.Id AND Debit IS NOT NULL ORDER BY [Date] DESC) AS [LatestRefundDate],
-		(SELECT CASE WHEN RIGHT(LTRIM(RTRIM(T2.Comments)),1) = '.' THEN LTRIM(RTRIM(T2.Comments)) + ' ' ELSE LTRIM(RTRIM(T2.Comments)) + '. ' END AS Comments
+        (SELECT CASE WHEN RIGHT(LTRIM(RTRIM(T2.Comments)),1) = '.' THEN LTRIM(RTRIM(T2.Comments)) + ' ' ELSE LTRIM(RTRIM(T2.Comments)) + '. ' END AS Comments
           FROM [ImportNotification].[Transaction] T2
           WHERE T2.NotificationId = N.Id
 		  ORDER BY [Date] ASC
