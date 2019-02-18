@@ -8,6 +8,7 @@
     using Core.Movement.BulkReceiptRecovery;
     using Core.Rules;
     using Domain.Movement;
+    using Prsd.Core;
 
     public class ReceiptRecoveryReceiptOnlyRule : IReceiptRecoveryContentRule
     {
@@ -27,21 +28,34 @@
                 movements.Where(
                     p =>
                         !p.MissingReceivedDate && p.MissingRecoveredDisposedDate &&
-                        p.ReceivedDate.HasValue && p.RecoveredDisposedDate.HasValue);
+                        p.ReceivedDate.HasValue);
 
             foreach (var movement in validMovements)
             {
                 var actualMovement = actualMovements.FirstOrDefault(p => p.Number == movement.ShipmentNumber);
 
                 if (actualMovement != null &&
-                    (actualMovement.Status != MovementStatus.Captured ||
-                     actualMovement.Status != MovementStatus.Submitted ||
-                     (actualMovement.Status == MovementStatus.Captured &&
-                      actualMovement.Date.Date < DateTime.UtcNow.Date) ||
-                     (actualMovement.Status == MovementStatus.Submitted &&
-                      actualMovement.Date.Date > DateTime.UtcNow.Date)))
+                    actualMovement.Status != MovementStatus.Received &&
+                    actualMovement.Status != MovementStatus.Completed)
                 {
-                    shipments.Add(movement.ShipmentNumber.GetValueOrDefault());
+                    if (actualMovement.Status == MovementStatus.Captured)
+                    {
+                        if (actualMovement.Date.Date < SystemTime.UtcNow.Date)
+                        {
+                            shipments.Add(movement.ShipmentNumber.GetValueOrDefault());
+                        }
+                    }
+                    else if (actualMovement.Status == MovementStatus.Submitted)
+                    {
+                        if (actualMovement.Date.Date > SystemTime.UtcNow.Date)
+                        {
+                            shipments.Add(movement.ShipmentNumber.GetValueOrDefault());
+                        }
+                    }
+                    else
+                    {
+                        shipments.Add(movement.ShipmentNumber.GetValueOrDefault());
+                    }
                 }
             }
 

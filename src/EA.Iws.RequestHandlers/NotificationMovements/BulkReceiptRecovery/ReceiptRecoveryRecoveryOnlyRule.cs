@@ -31,7 +31,7 @@
                 movements.Where(
                     p =>
                         p.MissingReceivedDate && !p.MissingRecoveredDisposedDate &&
-                        p.ReceivedDate.HasValue && p.RecoveredDisposedDate.HasValue);
+                        p.RecoveredDisposedDate.HasValue);
 
             foreach (var movement in validMovements)
             {

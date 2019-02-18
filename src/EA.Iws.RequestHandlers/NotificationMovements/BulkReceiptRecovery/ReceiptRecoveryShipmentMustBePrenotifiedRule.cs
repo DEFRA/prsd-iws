@@ -39,14 +39,27 @@
                 var actualMovement = actualMovements.FirstOrDefault(p => p.Number == movement.ShipmentNumber);
 
                 if (actualMovement != null &&
-                    (actualMovement.Status != MovementStatus.Captured ||
-                     actualMovement.Status != MovementStatus.Submitted ||
-                     (actualMovement.Status == MovementStatus.Captured &&
-                      actualMovement.Date.Date < SystemTime.UtcNow.Date) ||
-                     (actualMovement.Status == MovementStatus.Submitted &&
-                      actualMovement.Date.Date > SystemTime.UtcNow.Date)))
+                    actualMovement.Status != MovementStatus.Received &&
+                    actualMovement.Status != MovementStatus.Completed)
                 {
-                    shipments.Add(movement.ShipmentNumber.GetValueOrDefault());
+                    if (actualMovement.Status == MovementStatus.Captured)
+                    {
+                        if (actualMovement.Date.Date < SystemTime.UtcNow.Date)
+                        {
+                            shipments.Add(movement.ShipmentNumber.GetValueOrDefault());
+                        }
+                    }
+                    else if (actualMovement.Status == MovementStatus.Submitted)
+                    {
+                        if (actualMovement.Date.Date > SystemTime.UtcNow.Date)
+                        {
+                            shipments.Add(movement.ShipmentNumber.GetValueOrDefault());
+                        }
+                    }
+                    else
+                    {
+                        shipments.Add(movement.ShipmentNumber.GetValueOrDefault());
+                    }
                 }
             }
 
