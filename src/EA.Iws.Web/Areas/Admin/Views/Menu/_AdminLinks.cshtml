@@ -1,5 +1,6 @@
 ﻿@model EA.Iws.Web.Areas.Admin.ViewModels.Menu.AdminLinksViewModel
 <ul>
+    <li>@Html.ActionLink("Address book", "Index", "Home", new { area = "AddressBook" }, null)</li>
     @if (Model.ShowApproveNewInternalUserLink)
     {
         <li>@Html.ActionLink("Manage new users", "ManageNewUsers", "UserAdministration", new { area = "Admin" }, null)</li>
