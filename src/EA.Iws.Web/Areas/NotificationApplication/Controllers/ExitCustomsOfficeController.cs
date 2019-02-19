@@ -85,22 +85,30 @@
                 return View(model);
             }
 
+            var existingData = await mediator.SendAsync(new GetExitCustomsOfficeAddDataByNotificationId(id));
+            NotificationAuditType auditType = NotificationAuditType.Added;
+
             if (model.CustomsOfficeRequired.GetValueOrDefault())
             {
-                var existingData = await mediator.SendAsync(new GetExitCustomsOfficeAddDataByNotificationId(id));
-
-                CustomsOfficeCompletionStatus result = await mediator.SendAsync(
+                await mediator.SendAsync(
                     new SetExitCustomsOfficeForNotificationById(id,
                     model.Name,
                     model.Address,
                     model.SelectedCountry.Value));
+                auditType = existingData.CustomsOfficeData == null ? NotificationAuditType.Added : NotificationAuditType.Updated;
+            }
+            else if (existingData.CustomsOfficeData != null)
+            {
+                // If customs office required is set to false but there is existing data in the database, delete it
+                await mediator.SendAsync(new DeleteExitCustomsOfficeByNotificationId(id));
+                auditType = NotificationAuditType.Deleted;
+            }
 
-                await this.auditService.AddAuditEntry(this.mediator,
+            await this.auditService.AddAuditEntry(this.mediator,
                        id,
                        User.GetUserId(),
-                       existingData.CustomsOfficeData == null ? NotificationAuditType.Added : NotificationAuditType.Updated,
+                       auditType,
                        NotificationAuditScreenType.CustomsOffice);
-            }
 
             var addSelection = await mediator.SendAsync(new SetExitCustomsOfficeSelectionForNotificationById(id, model.CustomsOfficeRequired.GetValueOrDefault()));
 
