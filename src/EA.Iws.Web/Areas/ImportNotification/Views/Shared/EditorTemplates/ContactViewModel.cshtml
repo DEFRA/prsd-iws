@@ -14,9 +14,18 @@
 <div class="form-group @Html.Gds().FormGroupClass(m => m.Telephone)">
     @Html.Gds().LabelFor(m => m.Telephone, false)
     @Html.Gds().ValidationMessageFor(m => m.Telephone)
-    @Html.Gds().TextBoxFor(m => m.Telephone)
+    <div class="international-number">
+        <div class="plus-label">
+            +
+        </div>
+        <div class="international-number-prefix">
+            @Html.Gds().TextBoxFor(m => m.TelephonePrefix, new { @title = Resource.TelephonePrefixTitle })
+        </div>
+        <div class="international-number-body">
+            @Html.Gds().TextBoxFor(m => m.Telephone)
+        </div>
+    </div>
 </div>
-
 <div class="form-group @Html.Gds().FormGroupClass(m => m.Email)">
     @Html.Gds().LabelFor(m => m.Email, false)
     @Html.Gds().ValidationMessageFor(m => m.Email)

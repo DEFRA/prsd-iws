@@ -10,7 +10,8 @@
             {
                 ContactName = "Mike Merry",
                 Email = "mike@merry.com",
-                Telephone = "01234 567890"
+                Telephone = "01234 567890",
+                TelephonePrefix = "44"
             };
         }
     }

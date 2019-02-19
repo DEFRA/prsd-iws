@@ -86,10 +86,8 @@
                     Composition = GetChemicalComposition(data)
                 };
             }
-            else
-            {
-                return mapper.Map<ImportNotificationSummary>(await summaryRepository.Get(message.Id));
-            }
+
+            return mapper.Map<ImportNotificationSummary>(await summaryRepository.Get(message.Id));
         }
 
         private Producer GetProducer(Draft.ImportNotification notification)
