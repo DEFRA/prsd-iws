@@ -28,5 +28,19 @@
         {
             context.TransportRoutes.Add(transportRoute);
         }
+
+        public async Task DeleteEntryCustomsOfficeByNotificationId(Guid notificationId)
+        {
+            await context.Database.ExecuteSqlCommandAsync(@"
+                DELETE FROM [Notification].[EntryCustomsOffice] WHERE TransportRouteId IN (SELECT [Id] FROM [Notification].[TransportRoute] WHERE NotificationId = @Id)",
+                new SqlParameter("@Id", notificationId));
+        }
+
+        public async Task DeleteExitCustomsOfficeByNotificationId(Guid notificationId)
+        {
+            await context.Database.ExecuteSqlCommandAsync(@"
+                DELETE FROM [Notification].[ExitCustomsOffice] WHERE TransportRouteId IN (SELECT [Id] FROM [Notification].[TransportRoute] WHERE NotificationId = @Id)",
+                new SqlParameter("@Id", notificationId));
+        }
     }
 }
