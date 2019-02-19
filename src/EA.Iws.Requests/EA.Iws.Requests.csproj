@@ -115,6 +115,7 @@
     <Compile Include="Annexes\DeleteAnnexFile.cs" />
     <Compile Include="Carriers\AddCarriersToNotificationFromAddressBook.cs" />
     <Compile Include="CustomsOffice\DeleteEntryCustomsOfficeByNotificationId.cs" />
+    <Compile Include="CustomsOffice\DeleteExitCustomsOfficeByNotificationId.cs" />
     <Compile Include="CustomsOffice\GetEntryExitCustomsOfficeSelectionForNotificationById.cs" />
     <Compile Include="CustomsOffice\SetEntryCustomsOfficeSelectionForNotificationById.cs" />
     <Compile Include="CustomsOffice\SetExitCustomsOfficeSelectionForNotificationById.cs" />
