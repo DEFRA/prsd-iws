@@ -46,7 +46,7 @@
             var shipmentInfo = await mediator.SendAsync(new GetShipmentInfo(notificationId));
 
             var model = new CreateMovementsViewModel(shipmentInfo);
-
+            model.OverrideRule = overrideRule;
             if (TempData["TempMovement"] != null)
             {
                 var tempMovement = (TempMovement)TempData["TempMovement"];
@@ -125,7 +125,7 @@
 
                 TempData["TempMovement"] = tempMovement;
 
-                return RedirectToAction("ThreeWorkingDaysWarning", "Create");
+                return RedirectToAction("ThreeWorkingDaysWarning", "Create", new {rejectRules = model.OverrideRule });
             }
 
             var newMovementIds = await mediator.SendAsync(new CreateMovements(
@@ -186,10 +186,10 @@
         }
 
         [HttpGet]
-        public ActionResult ThreeWorkingDaysWarning(Guid notificationId)
+        public ActionResult ThreeWorkingDaysWarning(Guid notificationId, bool rejectRules)
         {
             var model = new ThreeWorkingDaysWarningViewModel();
-
+            model.RejectRules = rejectRules;
             return View("ThreeWorkingDays", model);
         }
 
@@ -204,7 +204,7 @@
 
             if (model.Selection == ThreeWorkingDaysSelection.ChangeDate)
             {
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", new {overrideRule = model.RejectRules});
             }
 
             if (TempData["TempMovement"] == null)
