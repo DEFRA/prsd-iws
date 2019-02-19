@@ -31,6 +31,7 @@
                 Notifier = source.Notifier,
                 NotifierAddress = source.NotifierAddress,
                 NotifierPostalCode = source.NotifierPostalCode,
+                PaymentComments = source.PaymentComments,
                 PaymentReceivedDate = source.PaymentReceivedDate,
                 ReceivedDate = source.ReceivedDate,
                 TotalBillable = source.TotalBillable,
