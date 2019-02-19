@@ -1,5 +1,6 @@
 ﻿namespace EA.Iws.Web.Areas.AdminImportAssessment.ViewModels.AccountManagement
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
     using Core.ImportNotificationAssessment.Transactions;
@@ -10,6 +11,10 @@
 
     public class AccountManagementViewModel
     {
+        public AccountManagementViewModel()
+        {
+        }
+
         public AccountManagementViewModel(AccountOverviewData data)
         {
             TotalCharge = data.TotalCharge;

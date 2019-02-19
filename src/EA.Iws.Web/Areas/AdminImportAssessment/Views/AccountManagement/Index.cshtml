@@ -116,7 +116,71 @@
     </details>
 </div>
 
-<div class="form-group">
+@using (Html.BeginForm("EditComment", "AccountManagement", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <div class="form-group">
+        <details id="comments" role="group">
+
+            <summary role="button"><span class="summary">@Resource.CommentSectionHeading</span></summary>
+
+            <div class="panel-border-narrow">
+                <table>
+                    <thead>
+                        <tr>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        @for (var i = 0; i < Model.Transactions.Count(); i++)
+                        {
+
+                            if (!string.IsNullOrWhiteSpace(Model.Transactions[i].Comments))
+                            {
+                                var trans = (TransactionType)Model.Transactions[i].Transaction;
+                                var commentId = "id=comment-" + i;
+                                var editId = "id=edit-" + i;
+                                var comment = Model.Transactions[i].Comments;
+                                <tr>
+                                    <td class="nav-bloc">
+                                        <span>@trans&nbsp;&nbsp;&nbsp;@Model.Transactions[i].Date.ToString("dd/MM/yyyy")</span>
+                                        <div @commentId class="">
+                                            <p>
+                                                @Model.Transactions[i].Comments
+                                            </p>
+                                            <p>
+                                                <a href="#comment" + @i onclick='editComment(@i, @Model.Transactions.Count())'>Edit</a>
+                                            </p>
+                                        </div>
+                                        <div @editId class="hidden">
+                                            <div>
+                                                @Html.TextAreaFor(m => m.Transactions[i].Comments, new { @MaxLength = 500, @display = "block", @style = "width: 50%; height: 100px", @class = "form-control" })
+                                                @Html.HiddenFor(m => m.Transactions[i].TransactionId)
+                                            </div>
+                                            <div>
+                                                <button class="link-submit" type="submit" name="commentId" value="@i">Save</button>
+                                                &nbsp;&nbsp;&nbsp;
+                                                <button class="link-submit" type="submit">Cancel</button>
+                                                @*this code is for canceling the edit client side, but the view model data overrides the value. Look at later
+                                                    <a href="#cancel-" + @i onclick='cancelComment(@i, @Model.TableData.Count())'>Cancel</a>*@
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
+
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+        </details>
+    </div>
+}
+
+
+@*<div class="form-group">
     <details role="group" id="comments">
 
         <summary role="button"><span class="summary">@Resource.CommentSectionHeading</span></summary>
@@ -131,13 +195,14 @@
                     var commentId = "id=comment-" + i;
 
                     <span>@trans&nbsp;&nbsp;&nbsp;@Model.Transactions[i].Date.ToString("dd/MM/yyyy")</span>
+
                     <p @commentId>@Model.Transactions[i].Comments</p>
                 }
             }
         </div>
 
     </details>
-</div>
+</div>*@
 
 <div class="form-group">
     @if (Model.CanDeleteTransaction && Model.HasPayments)
@@ -182,6 +247,39 @@
 
         function openComments() {
             $comments.attr('open', '');
+        }
+
+        function editComment(id, commentCount) {
+
+            resetComments(commentCount);
+
+            var editTextBox = $("#edit-" + id);
+            editTextBox.removeClass('hidden');
+
+            var editButton = $("#comment-" + id);
+            editButton.addClass('hidden');
+        }
+
+        function cancelComment(id, commentCount) {
+
+            resetComments(commentCount);
+
+            var editTextBox = $("#edit-" + id);
+            editTextBox.addClass('hidden');
+
+            var editButton = $("#comment-" + id);
+            editButton.removeClass('hidden');
+        }
+
+        function resetComments(commentCount) {
+            // This resets the edit div and comment div back to their original state, so that only 1 comment can be edited at once
+            for (i = 0; i < commentCount; i ++) {
+                var editTextBox = $("#edit-" + i);
+                editTextBox.addClass('hidden');
+
+                var editButton = $("#comment-" + i);
+                editButton.removeClass('hidden');
+            }
         }
     </script>
 }

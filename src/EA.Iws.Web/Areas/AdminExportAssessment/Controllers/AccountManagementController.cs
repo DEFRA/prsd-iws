@@ -114,5 +114,17 @@
 
             return RedirectToAction("index", "AccountManagement", new { id = model.NotificationId });
         }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> EditComment(Guid id, AccountManagementViewModel model, int? commentId)
+        {
+            if (commentId != null)
+            {
+                var result = await mediator.SendAsync(new UpdateExportNotificationAssementComments(model.TableData[commentId.GetValueOrDefault()].TransactionId, model.TableData[commentId.GetValueOrDefault()].Comments));
+            }
+
+            return RedirectToAction("index", "AccountManagement", new { id = id });
+        }
     }
 }
