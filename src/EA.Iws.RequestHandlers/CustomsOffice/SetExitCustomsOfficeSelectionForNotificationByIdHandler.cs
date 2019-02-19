@@ -29,7 +29,7 @@
                 context.TransportRoutes.Add(transportRoute);
             }
 
-            bool? existingEntry = transportRoute.EntryExitCustomsOfficeSelection != null ? transportRoute.EntryExitCustomsOfficeSelection.Entry : false;
+            bool? existingEntry = transportRoute.EntryExitCustomsOfficeSelection != null ? transportRoute.EntryExitCustomsOfficeSelection.Entry : null;
 
             var selection = new EntryExitCustomsOfficeSelection(existingEntry, message.Selection);
 
