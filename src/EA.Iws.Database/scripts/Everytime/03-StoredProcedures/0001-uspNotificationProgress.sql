@@ -135,11 +135,14 @@ BEGIN
         ExportCountry.IsEuropeanUnionMember AS ExportIsEuMember,
         TransitCountry.IsEuropeanUnionMember AS TransitIsEuMember,
         ECO.Id AS EntryCustomsOfficeId,
-        XCO.Id AS ExitCustomsOfficeId
+        XCO.Id AS ExitCustomsOfficeId,
+        EECS.[Entry] AS IsEntryCustomsOfficeRequired,
+        EECS.[Exit] AS IsExitCustomsOfficeRequired
     FROM
         [Notification].[TransportRoute] TR
         LEFT JOIN [Notification].[EntryCustomsOffice] ECO on TR.Id = ECO.TransportRouteId
         LEFT JOIN [Notification].[ExitCustomsOffice] XCO on TR.Id = XCO.TransportRouteId
+        LEFT JOIN [Notification].[EntryExitCustomsSelection] EECS on TR.Id = EECS.TransportRouteId
         LEFT JOIN [Notification].[StateOfExport] SE on TR.Id = SE.TransportRouteId 
         LEFT JOIN [Notification].[StateOfImport] SI on TR.Id = SI.TransportRouteId
         LEFT JOIN [Notification].[TransitState] TS on TR.Id = TS.TransportRouteId
