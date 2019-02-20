@@ -87,6 +87,7 @@
             }
 
             var existingData = await mediator.SendAsync(new GetEntryCustomsOfficeAddDataByNotificationId(id));
+            NotificationAuditType auditType = NotificationAuditType.Added;
 
             if (model.CustomsOfficeRequired.GetValueOrDefault())
             {
@@ -94,12 +95,19 @@
                     model.Name,
                     model.Address,
                     model.SelectedCountry.Value));
+                auditType = existingData.CustomsOfficeData == null ? NotificationAuditType.Added : NotificationAuditType.Updated;
+            }
+            else if (existingData.CustomsOfficeData != null)
+            {
+                // If customs office required is set to false but there is existing data in the database, delete it
+                await mediator.SendAsync(new DeleteEntryCustomsOfficeByNotificationId(id));
+                auditType = NotificationAuditType.Deleted;
             }
 
             await this.auditService.AddAuditEntry(this.mediator,
                        id,
                        User.GetUserId(),
-                       existingData.CustomsOfficeData == null ? NotificationAuditType.Added : NotificationAuditType.Updated,
+                       auditType,
                        NotificationAuditScreenType.CustomsOffice);
 
             await mediator.SendAsync(new SetEntryCustomsOfficeSelectionForNotificationById(id, model.CustomsOfficeRequired.GetValueOrDefault()));
