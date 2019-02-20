@@ -65,5 +65,10 @@
                 Comments = comments
             };
         }
+
+        public void UpdateComments(string comment)
+        {
+            this.Comments = comment;
+        }
     }
 }

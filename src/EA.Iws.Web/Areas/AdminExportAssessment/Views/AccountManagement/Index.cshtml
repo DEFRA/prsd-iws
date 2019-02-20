@@ -31,15 +31,15 @@
 <div class="grid-row">
 
     <div class="column-one-third bold-medium">
-            @Model.TotalBillable.ToString("C")
+        @Model.TotalBillable.ToString("C")
     </div>
 
     <div class="column-one-third bold-medium">
-            @Model.Balance.ToString("C")
+        @Model.Balance.ToString("C")
     </div>
 
     <div class="column-one-third bold-medium">
-            @Model.AmountRemaining.ToString("C")
+        @Model.AmountRemaining.ToString("C")
     </div>
 
 </div>
@@ -51,43 +51,43 @@
 <div class="form-group">
     <table title=@IndexResources.HistoryHeading>
         <thead>
-        <tr>
-            <th>@IndexResources.TableHeaderTranaction</th>
-            <th>@IndexResources.TableHeaderDate</th>
-            <th>@IndexResources.TableHeaderAmount</th>
-            <th>@IndexResources.TableHeaderType</th>
-            <th>@IndexResources.TableHeaderReceipt</th>
-            <th>@IndexResources.TableHeaderComments</th>
-        </tr>
+            <tr>
+                <th>@IndexResources.TableHeaderTranaction</th>
+                <th>@IndexResources.TableHeaderDate</th>
+                <th>@IndexResources.TableHeaderAmount</th>
+                <th>@IndexResources.TableHeaderType</th>
+                <th>@IndexResources.TableHeaderReceipt</th>
+                <th>@IndexResources.TableHeaderComments</th>
+            </tr>
         </thead>
         <tbody>
-        @{
-            for (var i = 0; i < Model.TableData.Count(); i++)
-            {
-                var trans = (TransactionType)Model.TableData[i].Transaction;
-
-                Enum type;
-                if (trans == TransactionType.Refund)
+            @{
+                for (var i = 0; i < Model.TableData.Count(); i++)
                 {
-                    type = TransactionType.Refund;
-                }
-                else
-                {
-                    type = (PaymentMethod)Model.TableData[i].Type;
-                }
+                    var trans = (TransactionType)Model.TableData[i].Transaction;
 
-                var comment = string.IsNullOrWhiteSpace(Model.TableData[i].Comments) ? "No" : "<a href=\"#comment-" + i + "\" onclick='openComments()'>Yes</a>";
+                    Enum type;
+                    if (trans == TransactionType.Refund)
+                    {
+                        type = TransactionType.Refund;
+                    }
+                    else
+                    {
+                        type = (PaymentMethod)Model.TableData[i].Type;
+                    }
 
-                <tr>
-                    <td>@trans</td>
-                    <td>@Model.TableData[i].Date.ToString("dd/MM/yyyy")</td>
-                    <td>@Model.TableData[i].Amount.ToString("C")</td>
-                    <td>@EnumHelper.GetDescription(type)</td>
-                    <td>@Model.TableData[i].ReceiptNumber</td>
-                    <td>@Html.Raw(comment)</td>
-                </tr>
+                    var comment = string.IsNullOrWhiteSpace(Model.TableData[i].Comments) ? "No" : "<a href=\"#comment-" + i + "\" onclick='openComments()'>Yes</a>";
+
+                    <tr>
+                        <td>@trans</td>
+                        <td>@Model.TableData[i].Date.ToString("dd/MM/yyyy")</td>
+                        <td>@Model.TableData[i].Amount.ToString("C")</td>
+                        <td>@EnumHelper.GetDescription(type)</td>
+                        <td>@Model.TableData[i].ReceiptNumber</td>
+                        <td>@Html.Raw(comment)</td>
+                    </tr>
+                }
             }
-        }
         </tbody>
     </table>
 </div>
@@ -116,28 +116,68 @@
     </details>
 </div>
 
-<div class="form-group">
-    <details id="comments" role="group">
+@using (Html.BeginForm("Index", "AccountManagement", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    <div class="form-group">
+        <details id="comments" role="group">
 
-        <summary role="button"><span class="summary">@IndexResources.CommentSectionHeading</span></summary>
+            <summary role="button"><span class="summary">@IndexResources.CommentSectionHeading</span></summary>
 
-        <div class="panel-border-narrow">
+            <div class="panel-border-narrow">
+                <table>
+                    <thead>
+                        <tr>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
 
-            @for (var i = 0; i < Model.TableData.Count(); i++)
-            {
-                if (!string.IsNullOrWhiteSpace(Model.TableData[i].Comments))
-                {
-                    var trans = (TransactionType)Model.TableData[i].Transaction;
-                    var commentId = "id=comment-" + i;
+                        @for (var i = 0; i < Model.TableData.Count(); i++)
+                        {
 
-                    <span>@trans&nbsp;&nbsp;&nbsp;@Model.TableData[i].Date.ToString("dd/MM/yyyy")</span>
-                    <p @commentId>@Model.TableData[i].Comments</p>
-                }
-            }
-        </div>
+                            if (!string.IsNullOrWhiteSpace(Model.TableData[i].Comments))
+                            {
+                                var trans = (TransactionType)Model.TableData[i].Transaction;
+                                var commentId = "id=comment-" + i;
+                                var editId = "id=edit-" + i;
+                                var comment = Model.TableData[i].Comments;
+                                <tr>
+                                    <td class="nav-bloc">
+                                        <span>@trans&nbsp;&nbsp;&nbsp;@Model.TableData[i].Date.ToString("dd/MM/yyyy")</span>
+                                        <div @commentId class="">
+                                            <p>
+                                                @Model.TableData[i].Comments
+                                            </p>
+                                            <p>
+                                                <a href="#comment" + @i onclick='editComment(@i, @Model.TableData.Count())'>Edit</a>
+                                            </p>
+                                        </div>
+                                        <div @editId class="hidden">
+                                            <div>
+                                                @Html.TextAreaFor(m => m.TableData[i].Comments, new { @MaxLength = 500, @display = "block", @style = "width: 50%; height: 100px", @class = "form-control"})
+                                                @Html.HiddenFor(m => m.TableData[i].TransactionId)
+                                            </div>
+                                            <div>
+                                                <button class="link-submit" type="submit" name="commentId" value="@i">Save</button>
+                                                &nbsp;&nbsp;&nbsp;
+                                                <button class="link-submit" type="submit" >Cancel</button>
+                                                @*this code is for canceling the edit client side, but the view model data overrides the value. Look at later
+                                                <a href="#cancel-" + @i onclick='cancelComment(@i, @Model.TableData.Count())'>Cancel</a>*@
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            }
 
-    </details>
-</div>
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+        </details>
+    </div>
+}
 
 <div class="form-group">
     @if (Model.CanDeleteTransaction && Model.HasPayments)
@@ -159,8 +199,7 @@
     <script>
 
         $comments = $("#comments");
-
-        $(function () 
+        $(function ()
         {
             var showPayment = @Model.ShowPaymentDetails.ToString().ToLower();
             if (showPayment) { $("#paymentDetails").attr("open", "open"); }
@@ -186,6 +225,39 @@
 
         function openComments() {
             $comments.attr('open', '');
+        }
+
+        function editComment(id, commentCount) {
+
+            resetComments(commentCount);
+
+            var editTextBox = $("#edit-" + id);
+            editTextBox.removeClass('hidden');
+
+            var editButton = $("#comment-" + id);
+            editButton.addClass('hidden');
+        }
+
+        function cancelComment(id, commentCount) {
+
+            resetComments(commentCount);
+
+            var editTextBox = $("#edit-" + id);
+            editTextBox.addClass('hidden');
+
+            var editButton = $("#comment-" + id);
+            editButton.removeClass('hidden');
+        }
+
+        function resetComments(commentCount) {
+            // This resets the edit div and comment div back to their original state, so that only 1 comment can be edited at once
+            for (i = 0; i < commentCount; i ++) {
+                var editTextBox = $("#edit-" + i);
+                editTextBox.addClass('hidden');
+
+                var editButton = $("#comment-" + i);
+                editButton.removeClass('hidden');
+            }
         }
     </script>
 }
