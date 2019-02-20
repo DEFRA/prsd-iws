@@ -136,8 +136,8 @@ BEGIN
         TransitCountry.IsEuropeanUnionMember AS TransitIsEuMember,
         ECO.Id AS EntryCustomsOfficeId,
         XCO.Id AS ExitCustomsOfficeId,
-		EECS.[Entry] AS IsEntryCustomsOfficeRequired,
-		EECS.[Exit] AS IsExitCustomsOfficeRequired
+        EECS.[Entry] AS IsEntryCustomsOfficeRequired,
+        EECS.[Exit] AS IsExitCustomsOfficeRequired
     FROM
         [Notification].[TransportRoute] TR
         LEFT JOIN [Notification].[EntryCustomsOffice] ECO on TR.Id = ECO.TransportRouteId
