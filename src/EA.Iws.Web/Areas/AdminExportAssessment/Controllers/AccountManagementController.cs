@@ -117,14 +117,34 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> EditComment(Guid id, AccountManagementViewModel model, int? commentId)
+        public async Task<ActionResult> Index(Guid id, AccountManagementViewModel model, int? commentId)
         {
             if (commentId != null)
             {
+                if (string.IsNullOrEmpty(model.TableData[commentId.GetValueOrDefault()].Comments))
+                {
+                    model = await this.PrepareViewModel(id);
+
+                    ModelState.AddModelError("Comment", "Enter a comment");
+                    return View(model);
+                }
                 var result = await mediator.SendAsync(new UpdateExportNotificationAssementComments(model.TableData[commentId.GetValueOrDefault()].TransactionId, model.TableData[commentId.GetValueOrDefault()].Comments));
             }
 
             return RedirectToAction("index", "AccountManagement", new { id = id });
+        }
+
+        private async Task<AccountManagementViewModel> PrepareViewModel(Guid id)
+        {
+            var data = await mediator.SendAsync(new GetAccountManagementData(id));
+            var model = new AccountManagementViewModel(data);
+            var canDeleteTransaction = await authorizationService.AuthorizeActivity(typeof(DeleteTransactionController));
+
+            model.PaymentViewModel = new PaymentDetailsViewModel { NotificationId = id };
+            model.RefundViewModel = await GetNewRefundDetailsViewModel(id);
+            model.CanDeleteTransaction = canDeleteTransaction;
+
+            return model;
         }
     }
 }
