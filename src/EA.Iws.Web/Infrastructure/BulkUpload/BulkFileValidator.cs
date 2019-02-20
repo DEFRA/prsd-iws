@@ -37,7 +37,9 @@
                 await GetVirusScan(file)
             };
 
-            if (type != BulkFileType.SupportingDocument)
+            if (type != BulkFileType.SupportingDocument &&
+                // Only run this rule if all rules above have passed.
+                rules.All(r => r.MessageLevel == MessageLevel.Success))
             {
                 rules.Add(await GetFileParse(file));
 
