@@ -88,7 +88,8 @@
                 RegistrationNumber = model.RegistrationNumber,
                 Type = model.Type,
                 Id = Guid.NewGuid(),
-                IsActualSite = model.IsActualSite
+                IsActualSite = model.IsActualSite,
+                IsAddedToAddressBook = model.IsAddedToAddressBook
             };
 
             facilityCollection.Facilities.Add(newFacility);
@@ -156,7 +157,8 @@
                     RegistrationNumber = model.RegistrationNumber,
                     Type = model.Type,
                     Id = model.FacilityId,
-                    IsActualSite = model.IsActualSite
+                    IsActualSite = model.IsActualSite,
+                    IsAddedToAddressBook = model.IsAddedToAddressBook
                 };
 
                 facilityCollection.Facilities.Add(newFacility);

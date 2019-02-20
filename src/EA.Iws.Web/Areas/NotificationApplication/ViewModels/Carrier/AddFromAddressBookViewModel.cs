@@ -18,11 +18,11 @@
         {
             CarriersList = new SelectList(carriers.Select(c => new SelectListItem()
             {
-                Text = c.ContactData.FullName + ", " 
+                Text = c.ContactData.FullName + ", " + "\n" 
                     + c.BusinessData.RegistrationNumber + ", " 
                     + (string.IsNullOrEmpty(c.BusinessData.AdditionalRegistrationNumber) 
                         ? string.Empty 
-                        : c.BusinessData.AdditionalRegistrationNumber + ", ") 
+                        : c.BusinessData.AdditionalRegistrationNumber + ", ") + "\n"
                     + c.BusinessData.Name + ", " 
                     + c.AddressData.ToString(),
                 Value = c.Id.ToString()

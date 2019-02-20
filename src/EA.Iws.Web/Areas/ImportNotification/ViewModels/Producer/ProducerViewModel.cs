@@ -15,6 +15,8 @@
 
         public bool AreMultiple { get; set; }
 
+        public bool IsAddedToAddressBook { get; set; }
+
         public ProducerViewModel()
         {
         }
@@ -25,6 +27,7 @@
             AreMultiple = producer.AreMultiple;
             BusinessName = producer.BusinessName;
             Contact = new ContactViewModel(producer.Contact);
+            IsAddedToAddressBook = producer.IsAddedToAddressBook;
         }
     }
 }

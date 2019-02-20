@@ -1,4 +1,5 @@
 ﻿@using Resource = EA.Iws.Web.Areas.ImportNotification.Views.Exporter.IndexResources
+@using EA.Iws.Web.Areas.AddressBook.Views
 @model EA.Iws.Web.Areas.ImportNotification.ViewModels.Exporter.ExporterViewModel
 
 @{
@@ -23,6 +24,15 @@
     @Html.EditorFor(m => m.Address)
 
     @Html.EditorFor(m => m.Contact)
+
+    <div class="form-group no-js-hidden">
+        <div class="multiple-choice">
+            @Html.CheckBoxFor(m => m.IsAddedToAddressBook, new { id = "addressBook" })
+            <label for="addressBook">
+                @AddressBookResources.AddToAddressBook
+            </label>
+        </div>
+    </div>
 
     <div class="form-group">
         <button class="button" type="submit">@Constants.ContinueButtonText</button>

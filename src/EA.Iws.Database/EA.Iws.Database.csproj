@@ -94,6 +94,8 @@
     <Content Include="scripts\Update\0005-Beta\Sprint5\20190131-141400-add-bulk-prenote-draft.sql" />
     <Content Include="scripts\Update\0005-Beta\Sprint5\20190211-150500-update-draft.sql" />
     <Content Include="scripts\Update\0005-Beta\Sprint5\20190208-092800-update-movement-carrier-keys.sql" />
+    <Content Include="scripts\Update\0005-Beta\Sprint6\20190218-144700-alter-reports-finance-view.sql" />
+    <Content Include="scripts\Update\0005-Beta\Sprint6\20190218-134200-alter-reports-payments-view.sql" />
     <Content Include="scripts\Update\0005-Beta\Sprint6\20190214-133900-add-entryExitCustomsTable.sql" />
     <Content Include="unindexed-foreign-keys.sql" />
     <Content Include="scripts\Everytime\01-Functions\0003-Reports-PricingInfo.sql" />
