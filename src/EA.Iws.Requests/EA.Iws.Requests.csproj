@@ -178,6 +178,7 @@
     <Compile Include="ImportNotificationAssessment\Transactions\GetImportNotificationAccountOverview.cs" />
     <Compile Include="ImportNotificationAssessment\Transactions\GetImportNotificationTransactions.cs" />
     <Compile Include="ImportNotificationAssessment\Transactions\GetTransactionById.cs" />
+    <Compile Include="ImportNotificationAssessment\UpdateImportNotificationAssesmentComments.cs" />
     <Compile Include="ImportNotificationAssessment\UpdateInterimStatus.cs" />
     <Compile Include="ImportNotificationAssessment\WithdrawConsentForImportNotification.cs" />
     <Compile Include="ImportNotificationAssessment\WithdrawImportNotification.cs" />
@@ -221,6 +222,7 @@
     <Compile Include="Movement\GetMovementsByIds.cs" />
     <Compile Include="Movement\GetNewMovementIdsByNotificationId.cs" />
     <Compile Include="Movement\GetNotificationNumberByMovementId.cs" />
+    <Compile Include="NotificationAssessment\UpdateExportNotificationAssementCommets.cs" />
     <Compile Include="NotificationMovements\BulkUpload\CreateReceiptRecovery.cs" />
     <Compile Include="NotificationMovements\BulkUpload\PerformReceiptRecoveryContentValidation.cs" />
     <Compile Include="NotificationMovements\BulkUpload\PerformPrenotificationContentValidation.cs" />

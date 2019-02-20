@@ -9,6 +9,10 @@
 
     public class AccountManagementViewModel
     {
+        public AccountManagementViewModel()
+        {
+        }
+
         public AccountManagementViewModel(AccountManagementData data)
         {
             TotalBillable = data.TotalBillable;
