@@ -22,7 +22,9 @@
         public string RegistrationNumber { get; set; }
 
         public ContactViewModel Contact { get; set; }
-        
+
+        public bool IsAddedToAddressBook { get; set; }
+
         public ImporterViewModel()
         {
         }
@@ -34,6 +36,7 @@
             Contact = new ContactViewModel(importer.Contact);
             RegistrationNumber = importer.RegistrationNumber;
             Type = importer.Type;
+            IsAddedToAddressBook = importer.IsAddedToAddressBook;
         }
 
         public void DefaultUkIfUnselected(IEnumerable<CountryData> countries)
