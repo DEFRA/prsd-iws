@@ -50,7 +50,8 @@
                 BusinessName = model.BusinessName,
                 Type = model.Type,
                 RegistrationNumber = model.RegistrationNumber,
-                Contact = model.Contact.AsContact()
+                Contact = model.Contact.AsContact(),
+                IsAddedToAddressBook = model.IsAddedToAddressBook
             };
 
             await mediator.SendAsync(new SetDraftData<Importer>(id, importer));
