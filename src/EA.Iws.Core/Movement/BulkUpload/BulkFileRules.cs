@@ -10,9 +10,9 @@
         FileSize,
         [Display(Name = "We've detected a virus in the file you uploaded.")]
         Virus,
-        [Display(Name = "Unable to read the file, format is invalid.")]
+        [Display(Name = "Unable to read the data, the column format is invalid.")]
         FileParse,
-        [Display(Name = "The file does not contain any data.")]
+        [Display(Name = "The file must contain valid data.")]
         EmptyData,
         [Display(Name = "The file type is unsupported: please upload a PDF, image or standard MS Office or Open Office file.")]
         SupportingDocumentFileType
