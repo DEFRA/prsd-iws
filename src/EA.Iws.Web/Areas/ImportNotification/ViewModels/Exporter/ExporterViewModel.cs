@@ -12,6 +12,8 @@
 
         public ContactViewModel Contact { get; set; }
 
+        public bool IsAddedToAddressBook { get; set; }
+
         public ExporterViewModel()
         {
             Address = new AddressViewModel();
@@ -26,6 +28,8 @@
             Address = new AddressViewModel(exporter.Address);
 
             Contact = new ContactViewModel(exporter.Contact);
+
+            IsAddedToAddressBook = exporter.IsAddedToAddressBook;
         }
     }
 }

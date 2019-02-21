@@ -30,6 +30,8 @@
 
         public ContactViewModel Contact { get; set; }
 
+        public bool IsAddedToAddressBook { get; set; }
+
         public FacilityViewModel()
         {
             FacilityId = Guid.NewGuid();
@@ -46,6 +48,7 @@
             Contact = new ContactViewModel(facility.Contact);
             BusinessType = facility.Type;
             IsActualSite = facility.IsActualSite;
+            IsAddedToAddressBook = facility.IsAddedToAddressBook;
         }
 
         public void DefaultUkIfUnselected(IEnumerable<CountryData> countries)

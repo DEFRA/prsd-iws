@@ -18,7 +18,9 @@
         public BusinessType? BusinessType { get; set; }
 
         public ContactViewModel Contact { get; set; }
-        
+
+        public bool IsAddedToAddressBook { get; set; }
+
         public ImporterViewModel()
         {
         }
@@ -29,6 +31,7 @@
             Business = new BusinessViewModel(importer.BusinessName, importer.RegistrationNumber);
             Contact = new ContactViewModel(importer.Contact);
             BusinessType = importer.Type;
+            IsAddedToAddressBook = importer.IsAddedToAddressBook;
         }
 
         public void DefaultUkIfUnselected(IEnumerable<CountryData> countries)
