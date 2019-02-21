@@ -46,6 +46,7 @@
                 ConsentedDate = model.ConsentedDate.AsDateTime(),
                 ConsentValidFromDate = model.ConsentValidFromDate.AsDateTime(),
                 ConsentValidToDate = model.ConsentValidToDate.AsDateTime(),
+                DecisionRequiredByDate = model.DecisionRequiredByDate.AsDateTime(),
                 NotificationId = id,
                 NotificationReceivedDate = model.NotificationReceivedDate.AsDateTime(),
                 ObjectedDate = model.ObjectedDate.AsDateTime(),
