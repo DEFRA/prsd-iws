@@ -5,6 +5,7 @@
     using System.Linq;
     using System.Threading.Tasks;
     using Core.FinancialGuarantee;
+    using Core.Movement;
     using Core.Movement.BulkPrenotification;
     using Core.Rules;
     using Domain.FinancialGuarantee;
@@ -48,10 +49,22 @@
                 return new PrenotificationContentRuleResult<PrenotificationContentRules>(PrenotificationContentRules.ActiveLoadsGrouped, result, errorMessage, 0);
             }
 
+            var actualMovements = (await movementRepository.GetAllMovements(notificationId)).ToList();
+            var shipments =
+                movements.Where(movement => movement.ActualDateOfShipment.HasValue)
+                    .Select(
+                        movement =>
+                            actualMovements.Count(
+                                m =>
+                                    (m.Status == MovementStatus.Submitted || m.Status == MovementStatus.Received) &&
+                                    m.Date.Date == movement.ActualDateOfShipment.Value))
+                    .Where(totalMovementsByDate => totalMovementsByDate >= activeLoadsPermitted)
+                    .ToList();
+
             var currentActiveLoads = (await movementRepository.GetActiveMovements(notificationId)).Count();
             var remainingShipments = activeLoadsPermitted - currentActiveLoads;
 
-            result = remainingShipments < movements.Count ? MessageLevel.Error : MessageLevel.Success;
+            result = shipments.Any() ? MessageLevel.Error : MessageLevel.Success;
             errorMessage = string.Format(Prsd.Core.Helpers.EnumHelper.GetDisplayName(PrenotificationContentRules.ExcessiveShipments), movements.Count, remainingShipments);
 
             return new PrenotificationContentRuleResult<PrenotificationContentRules>(PrenotificationContentRules.ExcessiveShipments, result, errorMessage, 0);
