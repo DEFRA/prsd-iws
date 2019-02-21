@@ -1,6 +1,5 @@
 ﻿namespace EA.Iws.RequestHandlers.Admin.KeyDates
 {
-    using System;
     using System.Threading.Tasks;
     using Domain.NotificationApplication;
     using Domain.NotificationAssessment;
