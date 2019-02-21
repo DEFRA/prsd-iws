@@ -57,6 +57,15 @@
             </div>
         }
 
+        @if (Model.DecisionRequiredByDate.IsCompleted)
+        {
+            <div class="form-group @Html.Gds().FormGroupClass(m => m.DecisionRequiredByDate) @Html.Gds().FormGroupClass(m => m.DecisionRequiredByDate.Day) @Html.Gds().FormGroupClass(m => m.DecisionRequiredByDate.Month) @Html.Gds().FormGroupClass(m => m.DecisionRequiredByDate.Year)">
+                @Html.Gds().LabelFor(m => m.DecisionRequiredByDate, showOptionalLabel: false)
+                @Html.Gds().ValidationMessageFor(m => m.DecisionRequiredByDate)
+                @Html.EditorFor(m => m.DecisionRequiredByDate)
+            </div>
+        }
+
         @if (Model.WithdrawnDate.IsCompleted)
         {
             <div class="form-group @Html.Gds().FormGroupClass(m => m.WithdrawnDate) @Html.Gds().FormGroupClass(m => m.WithdrawnDate.Day) @Html.Gds().FormGroupClass(m => m.WithdrawnDate.Month) @Html.Gds().FormGroupClass(m => m.WithdrawnDate.Year)">

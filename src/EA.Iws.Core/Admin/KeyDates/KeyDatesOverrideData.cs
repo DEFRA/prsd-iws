@@ -16,6 +16,8 @@
 
         public DateTime? AcknowledgedDate { get; set; }
 
+        public DateTime? DecisionRequiredByDate { get; set; }
+
         public DateTime? WithdrawnDate { get; set; }
 
         public DateTime? ObjectedDate { get; set; }
