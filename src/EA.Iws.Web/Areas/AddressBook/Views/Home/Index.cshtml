@@ -53,31 +53,30 @@
             <tbody>
                 @for (int i = 0; i < Model.AddressRecords.Count; i++)
                 {
-                    <tr>
-                        <td>@Html.DisplayFor(m => m.AddressRecords[i].BusinessData.Name)</td>
-                        <td>
-                            @Html.DisplayFor(m => m.AddressRecords[i].AddressData.StreetOrSuburb),
-                            @if (Model.AddressRecords[i].AddressData.Address2 != null)
-                            {
-                                @Html.DisplayFor(m => m.AddressRecords[i].AddressData.Address2)<text>,</text>
-                            }
-                            @Html.DisplayFor(m => m.AddressRecords[i].AddressData.TownOrCity),
-                            @Html.DisplayFor(m => m.AddressRecords[i].AddressData.PostalCode)
-                        </td>
-                        @if (Model.Type == EA.Iws.Core.AddressBook.AddressRecordType.Carrier)
-                        {
-                          <td>@Html.DisplayFor(m => m.AddressRecords[i].ContactData.FullName)</td>
-                          <td>@Html.DisplayFor(m => m.AddressRecords[i].BusinessData.RegistrationNumber)
-                          </td>
-                        }
-                        <td>
-                          <nobr>
-                            @Html.ActionLink("Edit", "Index", "Edit", new { id = Model.AddressRecords[i].Id, type = Model.Type }, null) <span>&nbsp;</span>
-                            @Html.ActionLink("Delete", "Index", "Delete", new { id = Model.AddressRecords[i].Id, type = Model.Type }, null)
-                          </nobr>
-                        </td>
-                </tr>
-            }
+					<tr>
+						<td>@Html.DisplayFor(m => m.AddressRecords[i].BusinessData.Name)</td>
+						<td>
+							@Html.DisplayFor(m => m.AddressRecords[i].AddressData.StreetOrSuburb),
+							@if (Model.AddressRecords[i].AddressData.Address2 != null)
+							{
+								@Html.DisplayFor(m => m.AddressRecords[i].AddressData.Address2)<text>,</text>
+							}
+							@Html.DisplayFor(m => m.AddressRecords[i].AddressData.TownOrCity),
+							@Html.DisplayFor(m => m.AddressRecords[i].AddressData.PostalCode)
+						</td>
+						@if (Model.Type == EA.Iws.Core.AddressBook.AddressRecordType.Carrier)
+						{
+							<td>@Html.DisplayFor(m => m.AddressRecords[i].ContactData.FullName)</td>
+							<td>@Html.DisplayFor(m => m.AddressRecords[i].BusinessData.RegistrationNumber)</td>
+						}
+						<td>
+							<span style="white-space: nowrap">
+								@Html.ActionLink("Edit", "Index", "Edit", new { id = Model.AddressRecords[i].Id, type = Model.Type, page = Model.PageNumber }, null) <span>&nbsp;</span>
+								@Html.ActionLink("Delete", "Index", "Delete", new { id = Model.AddressRecords[i].Id, type = Model.Type }, null)
+							</span>
+						</td>
+					</tr>
+				}
             </tbody>
         </table>
         @Html.Pager(Model.PageSize, Model.PageNumber, Model.NumberOfMatchedRecords).Options(o =>
@@ -96,7 +95,9 @@
     }
     else
     {
-        <p>Address not found</p>
+        <h1 class="heading-large">Address not found</h1>
+
+        <p>No matching organisations were found with the name you entered. Please make sure you have entered the organisation name correctly.</p>
     }
 }
 

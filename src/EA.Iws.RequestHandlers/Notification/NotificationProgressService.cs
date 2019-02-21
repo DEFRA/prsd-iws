@@ -165,8 +165,15 @@
                 progress.HasCustomsOffice = false;
             }
 
+            progress.HasCustomsOfficeSelections = progressResult.CustomsOffices.Any() &&
+                                                  (progressResult.CustomsOffices.First().IsEntryCustomsOfficeRequired !=
+                                                   null &&
+                                                   progressResult.CustomsOffices.First().IsExitCustomsOfficeRequired !=
+                                                   null);
+
             return progress.HasStateOfExport
-                && progress.HasStateOfImport;
+                && progress.HasStateOfImport
+                && progress.HasCustomsOfficeSelections;
         }
 
         private bool MapProgressForAmountsAndDates(NotificationApplicationCompletionProgress progress, NotificationProgressResult progressResult)
@@ -291,6 +298,8 @@
             public bool? TransitIsEuMember { get; set; }
             public Guid? EntryCustomsOfficeId { get; set; }
             public Guid? ExitCustomsOfficeId { get; set; }
+            public bool? IsEntryCustomsOfficeRequired { get; set; }
+            public bool? IsExitCustomsOfficeRequired { get; set; }
         }
     }
 }

@@ -7,9 +7,7 @@
     using Core.Movement;
     using Core.Movement.BulkReceiptRecovery;
     using Core.Rules;
-    using Core.Shared;
     using Domain.Movement;
-    using Domain.NotificationApplication;
 
     public class ReceiptRecoveryAlreadyReceivedRule : IReceiptRecoveryContentRule
     {
@@ -22,21 +20,22 @@
 
         public async Task<ReceiptRecoveryContentRuleResult<ReceiptRecoveryContentRules>> GetResult(List<ReceiptRecoveryMovement> movements, Guid notificationId)
         {
-            var actualMovements = await movementRepo.GetAllMovements(notificationId);
+            var actualMovements = (await movementRepo.GetAllMovements(notificationId)).ToList();
+            var shipments = new List<int>();
 
-            List<int> shipments = new List<int>();
-            MessageLevel result = MessageLevel.Success;
+            var validMovements = movements.Where(p => !p.MissingReceivedDate && p.ReceivedDate.HasValue);
 
-            foreach (var movement in movements.Where(p => p.ReceivedDate.HasValue))
+            foreach (var movement in validMovements)
             {
                 var actualMovement = actualMovements.FirstOrDefault(p => p.Number == movement.ShipmentNumber);
 
                 if (actualMovement != null && actualMovement.Status == MovementStatus.Received)
                 {
-                    result = MessageLevel.Error;
                     shipments.Add(movement.ShipmentNumber.GetValueOrDefault());
                 }
             }
+
+            var result = shipments.Any() ? MessageLevel.Error : MessageLevel.Success;
 
             var shipmentNumbers = string.Join(", ", shipments.Distinct());
 
