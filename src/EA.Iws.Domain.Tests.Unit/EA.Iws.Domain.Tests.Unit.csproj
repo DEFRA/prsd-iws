@@ -155,6 +155,7 @@
     <Compile Include="NotificationApplication\NotificationWasteGenerationProcessTests.cs" />
     <Compile Include="NotificationApplication\NotificationWasteTypeTests.cs" />
     <Compile Include="NotificationAssessment\CompleteNotificationTests.cs" />
+    <Compile Include="NotificationAssessment\DecisionRequiredByTests.cs" />
     <Compile Include="NotificationAssessment\FinancialGuaranteeDecisionRequiredTests.cs" />
     <Compile Include="NotificationAssessment\NotificationAssessmentEditableTests.cs" />
     <Compile Include="NotificationAssessment\NotificationAssessmentStatusTests.cs" />
