@@ -360,75 +360,74 @@
         {
             if (ModelState.IsValid)
             {
-            int selectedCarriersCount = 0;
-            if (command != null && command == "addcarrier")
-            {
-                if (model.SelectedCarrier != null && model.SelectedCarrier != Guid.Empty && !model.SelectedCarriers.Any(x => x.Id == model.SelectedCarrier))
+                int selectedCarriersCount = 0;
+                if (command != null && command == "addcarrier")
+                {
+                    if (model.SelectedCarrier != null && model.SelectedCarrier != Guid.Empty && !model.SelectedCarriers.Any(x => x.Id == model.SelectedCarrier))
+                    {
+                        selectedCarriersCount = model.SelectedCarriers.Count;
+                        model.SelectedCarriers.Add(new CarrierList { Id = model.SelectedCarrier, Order = (selectedCarriersCount + 1), OrderName = AddOrdinal((selectedCarriersCount + 1)) });
+                    }
+                }
+                else if (command != null && command == "continue")
+                {
+                    if (model.SelectedCarriers.Any())
+                    {
+                        var selectedCarriers = new Dictionary<int, Guid>();
+
+                        foreach (var carrier in model.SelectedCarriers)
+                        {
+                            selectedCarriers.Add(carrier.Order, carrier.Id);
+                        }
+                        await mediator.SendAsync(new CreateMovementCarriers(notificationId, model.MovementIds, selectedCarriers));
+
+                        return RedirectToAction("Summary", model.MovementIds.ToRouteValueDictionary("newMovementIds"));
+                    }
+                }
+                else if (remove != null)
+                {
+                    var indexToRemove = model.SelectedCarriers.FirstOrDefault(c => c.Id.ToString() == remove);
+                    model.SelectedCarriers.RemoveAll(c => c.Id.ToString() == remove);
+                    foreach (var newOrder in model.SelectedCarriers.Where(w => w.Order > indexToRemove.Order))
+                    {
+                        if (newOrder.Order != 1)
+                        {
+                            newOrder.Order = newOrder.Order - 1;
+                            newOrder.OrderName = AddOrdinal(newOrder.Order);
+                        }
+                    }
+                    ModelState.Clear();
+                }
+                else if (!string.IsNullOrEmpty(up) || !string.IsNullOrEmpty(down))
+                {
+                    var carriersTempData = new List<CarrierList>();
+                    object carriersObj;
+
+                    if (TempData.TryGetValue("SelectedCarriers", out carriersObj))
+                    {
+                        carriersTempData = carriersObj as List<CarrierList>;
+                    }
+
+                    var orderedCarriers = ReOrderCarriers(up, down, carriersTempData);
+
+                    model.SelectedCarriers = orderedCarriers;
+                }
+
+                // Ensure the order label is correct.
+                if (command != null && command == "addcarrier" ||
+                    remove != null ||
+                    !string.IsNullOrEmpty(up) ||
+                    !string.IsNullOrEmpty(down))
                 {
                     selectedCarriersCount = model.SelectedCarriers.Count;
-                    model.SelectedCarriers.Add(new CarrierList { Id = model.SelectedCarrier, Order = (selectedCarriersCount + 1), OrderName = AddOrdinal((selectedCarriersCount + 1)) });
-                }
-            }
-            else if (command != null && command == "continue")
-            {
-                if (model.SelectedCarriers.Any())
-                {
-                    var selectedCarriers = new Dictionary<int, Guid>();
-
-                    foreach (var carrier in model.SelectedCarriers)
+                    if (selectedCarriersCount > 2)
                     {
-                        selectedCarriers.Add(carrier.Order, carrier.Id);
-                    }
-                    await mediator.SendAsync(new CreateMovementCarriers(notificationId, model.MovementIds, selectedCarriers));
-
-                    return RedirectToAction("Summary", model.MovementIds.ToRouteValueDictionary("newMovementIds"));
-                }
-            }
-            else if (remove != null)
-            {
-                var indexToRemove = model.SelectedCarriers.FirstOrDefault(c => c.Id.ToString() == remove);
-                model.SelectedCarriers.RemoveAll(c => c.Id.ToString() == remove);
-                foreach (var newOrder in model.SelectedCarriers.Where(w => w.Order > indexToRemove.Order))
-                {
-                    if (newOrder.Order != 1)
-                    {
-                        newOrder.Order = newOrder.Order - 1;
-                        newOrder.OrderName = AddOrdinal(newOrder.Order);
+                        foreach (var carrier in model.SelectedCarriers)
+                        {
+                            carrier.OrderName = carrier.Order == selectedCarriersCount ? "Last" : AddOrdinal(carrier.Order);
+                        }
                     }
                 }
-            }
-            else if (!string.IsNullOrEmpty(up) || !string.IsNullOrEmpty(down))
-            {
-                var carriersTempData = new List<CarrierList>();
-                object carriersObj;
-
-                if (TempData.TryGetValue("SelectedCarriers", out carriersObj))
-                {
-                    carriersTempData = carriersObj as List<CarrierList>;
-                }
-
-                var orderedCarriers = ReOrderCarriers(up, down, carriersTempData);
-
-                model.SelectedCarriers = orderedCarriers;
-            }
-
-            // Ensure the order label is correct.
-            if (command != null && command == "addcarrier" || 
-                remove != null || 
-                !string.IsNullOrEmpty(up) || 
-                !string.IsNullOrEmpty(down))
-            {
-                selectedCarriersCount = model.SelectedCarriers.Count;
-                if (selectedCarriersCount > 2)
-                {
-                    foreach (var carrier in model.SelectedCarriers)
-                    {
-                        carrier.OrderName = carrier.Order == selectedCarriersCount ? "Last" : AddOrdinal(carrier.Order);
-                    }
-                }
-            }
-
-            TempData["SelectedCarriers"] = model.SelectedCarriers;
             }
 
             var carriers = await mediator.SendAsync(new GetCarriersByNotificationId(notificationId));

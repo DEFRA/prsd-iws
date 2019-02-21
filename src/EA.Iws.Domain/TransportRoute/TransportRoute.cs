@@ -134,8 +134,6 @@
             }
 
             targetTransitState.UpdateTransitState(country, competentAuthority, entryPoint, exitPoint, ordinalPosition);
-
-            CheckAllTransitStatesInEU();
         }
 
         public int[] GetAvailableTransitStatePositions()
@@ -172,8 +170,6 @@
             {
                 state.UpdateOrdinalPosition(state.OrdinalPosition - 1);
             }
-
-            CheckAllTransitStatesInEU();
         }
 
         public void SetExitCustomsOffice(ExitCustomsOffice customsOffice)
