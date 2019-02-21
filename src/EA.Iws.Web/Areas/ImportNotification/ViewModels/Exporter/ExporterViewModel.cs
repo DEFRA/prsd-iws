@@ -6,8 +6,7 @@
 
     public class ExporterViewModel
     {
-        [Display(Name = "BusinessName", ResourceType = typeof(ExporterViewModelResources))]
-        public string BusinessName { get; set; }
+        public BusinessViewModel Business { get; set; }
 
         public AddressViewModel Address { get; set; }
 
@@ -22,7 +21,7 @@
 
         public ExporterViewModel(Exporter exporter)
         {
-            BusinessName = exporter.BusinessName;
+            Business = new BusinessViewModel(exporter.BusinessName);
 
             Address = new AddressViewModel(exporter.Address);
 

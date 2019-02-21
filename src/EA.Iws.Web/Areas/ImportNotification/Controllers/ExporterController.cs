@@ -46,7 +46,7 @@
             var exporter = new Exporter(id)
             {
                 Address = model.Address.AsAddress(),
-                BusinessName = model.BusinessName,
+                BusinessName = model.Business.Name,
                 Contact = model.Contact.AsContact()
             };
 

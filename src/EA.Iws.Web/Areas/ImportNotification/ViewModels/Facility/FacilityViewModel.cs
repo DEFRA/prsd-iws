@@ -14,14 +14,10 @@
 
         public AddressViewModel Address { get; set; }
 
-        [Display(Name = "BusinessName", ResourceType = typeof(FacilityViewModelResources))]
-        public string BusinessName { get; set; }
+        public BusinessViewModel Business { get; set; }
 
         [Display(Name = "Type", ResourceType = typeof(FacilityViewModelResources))]
-        public BusinessType? Type { get; set; }
-
-        [Display(Name = "RegistrationNumber", ResourceType = typeof(FacilityViewModelResources))]
-        public string RegistrationNumber { get; set; }
+        public BusinessType? BusinessType { get; set; }
 
         public NotificationType NotificationType { get; set; }
 
@@ -39,16 +35,16 @@
             FacilityId = Guid.NewGuid();
             Address = new AddressViewModel();
             Contact = new ContactViewModel();
+            Business = new BusinessViewModel();
         }
 
         public FacilityViewModel(Facility facility)
         {
             FacilityId = facility.Id;
             Address = new AddressViewModel(facility.Address);
-            BusinessName = facility.BusinessName;
+            Business = new BusinessViewModel(facility.BusinessName, facility.RegistrationNumber);
             Contact = new ContactViewModel(facility.Contact);
-            RegistrationNumber = facility.RegistrationNumber;
-            Type = facility.Type;
+            BusinessType = facility.Type;
             IsActualSite = facility.IsActualSite;
         }
 
