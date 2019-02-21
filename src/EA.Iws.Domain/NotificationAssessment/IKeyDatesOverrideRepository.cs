@@ -10,6 +10,6 @@
 
         Task SetKeyDatesForNotification(KeyDatesOverrideData data);
 
-        Task SetDecisionRequiredByDateForNotification(Guid notificationId, DateTime? decisionRequiredByDate);
+        Task SetDecisionRequiredByDateForNotification(Guid notificationAssessmentId, DateTime? decisionRequiredByDate);
     }
 }

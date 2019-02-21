@@ -72,6 +72,6 @@
                 UPDATE [Notification].[NotificationDates] SET [DecisionRequiredByDate] = @DecisionRequiredByDate WHERE [NotificationAssessmentId] = @NotificationAssessmentId",
                 new SqlParameter("@NotificationAssessmentId", notificationAssessmentId),
                 new SqlParameter("@DecisionRequiredByDate", decisionRequiredByDate));
-    }
+        }
     }
 }

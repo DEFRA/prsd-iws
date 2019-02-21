@@ -1,6 +1,5 @@
 ﻿namespace EA.Iws.Web.Areas.AdminExportAssessment.ViewModels.KeyDatesOverride
 {
-    using System;
     using System.ComponentModel.DataAnnotations;
     using Core.Admin.KeyDates;
     using Web.ViewModels.Shared;
