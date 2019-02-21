@@ -18,6 +18,7 @@
             DecisionRequiredBy decisionRequiredBy)
         {
             this.repository = repository;
+            this.assessmentRepository = assessmentRepository;
             this.decisionRequiredBy = decisionRequiredBy;
         }
 
