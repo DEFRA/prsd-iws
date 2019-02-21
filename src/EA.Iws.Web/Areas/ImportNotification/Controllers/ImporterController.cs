@@ -47,9 +47,9 @@
             var importer = new Importer(id)
             {
                 Address = model.Address.AsAddress(),
-                BusinessName = model.BusinessName,
-                Type = model.Type,
-                RegistrationNumber = model.RegistrationNumber,
+                BusinessName = model.Business.Name,
+                Type = model.BusinessType,
+                RegistrationNumber = model.Business.RegistrationNumber,
                 Contact = model.Contact.AsContact(),
                 IsAddedToAddressBook = model.IsAddedToAddressBook
             };

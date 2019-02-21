@@ -2071,6 +2071,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>AddressViewModelResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Areas\ImportNotification\ViewModels\Shared\BusinessResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BusinessResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\ImportNotification\ViewModels\Shared\BusinessViewModel.cs" />
     <Compile Include="Areas\ImportNotification\ViewModels\Shared\ContactViewModel.cs" />
     <Compile Include="Areas\ImportNotification\ViewModels\Shared\ContactViewModelResources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -4179,6 +4185,10 @@
     <EmbeddedResource Include="Areas\ImportNotification\ViewModels\Shared\AddressViewModelResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>AddressViewModelResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\ImportNotification\ViewModels\Shared\BusinessResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>BusinessResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\ImportNotification\ViewModels\Shared\ContactViewModelResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

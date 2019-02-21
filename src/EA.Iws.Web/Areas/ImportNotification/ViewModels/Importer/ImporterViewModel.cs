@@ -12,14 +12,10 @@
     {
         public AddressViewModel Address { get; set; }
 
-        [Display(Name = "BusinessName", ResourceType = typeof(ImporterViewModelResources))]
-        public string BusinessName { get; set; }
+        public BusinessViewModel Business { get; set; }
 
         [Display(Name = "Type", ResourceType = typeof(ImporterViewModelResources))]
-        public BusinessType? Type { get; set; }
-
-        [Display(Name = "RegistrationNumber", ResourceType = typeof(ImporterViewModelResources))]
-        public string RegistrationNumber { get; set; }
+        public BusinessType? BusinessType { get; set; }
 
         public ContactViewModel Contact { get; set; }
 
@@ -32,10 +28,9 @@
         public ImporterViewModel(Importer importer)
         {
             Address = new AddressViewModel(importer.Address);
-            BusinessName = importer.BusinessName;
+            Business = new BusinessViewModel(importer.BusinessName, importer.RegistrationNumber);
             Contact = new ContactViewModel(importer.Contact);
-            RegistrationNumber = importer.RegistrationNumber;
-            Type = importer.Type;
+            BusinessType = importer.Type;
             IsAddedToAddressBook = importer.IsAddedToAddressBook;
         }
 
