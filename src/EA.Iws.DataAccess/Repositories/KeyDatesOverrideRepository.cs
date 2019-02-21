@@ -25,7 +25,6 @@
                     D.[CompleteDate],
                     D.[TransmittedDate],
                     D.[AcknowledgedDate],
-                    D.[DecisionRequiredByDate],
                     D.[WithdrawnDate],
                     D.[ObjectedDate],
                     D.[ConsentedDate],
