@@ -23,12 +23,12 @@
         }
 
         [HttpGet]
-        public async Task<ActionResult> Index(Guid id, AddressRecordType type)
+        public async Task<ActionResult> Index(Guid id, AddressRecordType type, int page = 1)
         {
             var result = await mediator.SendAsync(new GetAddressBookRecordById(id, type));
 
             ViewBag.Type = type;
-            var model = new EditAddressViewModel(result, type);
+            var model = new EditAddressViewModel(result, type, page);
 
             await this.BindCountryList(mediator);
             model.Address.DefaultCountryId = this.GetDefaultCountryId();
@@ -49,7 +49,7 @@
             {
                 await mediator.SendAsync(new EditAddressBookEntry(model.AddressBookRecordId, model.Type, model.Address, model.Business.ToBusinessInfoData(), model.Contact));
                                 
-                return RedirectToAction("Index", "Home", new { type = model.Type });
+                return RedirectToAction("Index", "Home", new { type = model.Type, page = model.PageNumber });
             }
             catch (ApiBadRequestException ex)
             {
