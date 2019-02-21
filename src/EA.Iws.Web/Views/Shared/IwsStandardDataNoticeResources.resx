@@ -132,8 +132,37 @@
   <data name="DealWithApplication" xml:space="preserve">
     <value>deal with your notification</value>
   </data>
+  <data name="EA" xml:space="preserve">
+    <value>Environment Agency:</value>
+  </data>
+  <data name="EAAddress" xml:space="preserve">
+    <value>Data Protection Officer
+Environment Agency
+Horizon House
+Deanery Road
+Bristol
+BS1 5AH</value>
+  </data>
+  <data name="EAPara" xml:space="preserve">
+    <value>You can access the charter using the link or go to GOV.UK and search 'Environment Agency personal information charter'.</value>
+  </data>
+  <data name="EASubHeading" xml:space="preserve">
+    <value>Personal information charter:</value>
+  </data>
   <data name="Header" xml:space="preserve">
-    <value>Read our standard data notice</value>
+    <value>Read our privacy notice</value>
+  </data>
+  <data name="HowWeKeep" xml:space="preserve">
+    <value>How long we keep your personal data</value>
+  </data>
+  <data name="HowWeKeepPara" xml:space="preserve">
+    <value>When the consent period for your notifications has expired and we have received all the required shipment recovery information for that notification, we will keep your personal data for a further 3 years in line with our standard information retention policy.</value>
+  </data>
+  <data name="NIEA" xml:space="preserve">
+    <value>NIEA:</value>
+  </data>
+  <data name="NRW" xml:space="preserve">
+    <value>Natural Resources Wales:</value>
   </data>
   <data name="OfferYouDocuments" xml:space="preserve">
     <value>offer you documents or services relating to environmental matters</value>
@@ -141,11 +170,29 @@
   <data name="PassInformationToAgents" xml:space="preserve">
     <value>We may pass the information on to our agents or representatives to do these things for us.</value>
   </data>
+  <data name="PersonalDataHeading" xml:space="preserve">
+    <value>The personal data we need</value>
+  </data>
+  <data name="PersonalDataListItem1" xml:space="preserve">
+    <value>A warning (e.g. informing you to increase the financial guarantee)</value>
+  </data>
+  <data name="PersonalDataListItem2" xml:space="preserve">
+    <value>A formal caution (e.g. informing you to stop shipping waste)</value>
+  </data>
+  <data name="PersonalDataListItem3" xml:space="preserve">
+    <value>A prosecution depending on the breach of condition.</value>
+  </data>
+  <data name="PersonalDataPara1" xml:space="preserve">
+    <value>The personal data we collect includes names, addresses and contact details (including email addresses). We are allowed to process your data because we have official authority as the environmental regulators from the Regulation (EC) No. 1013/2006 (“the Waste Shipment Regulation”). The lawful basis for processing your personal data is to perform a task in the public interest that is set out in law.</value>
+  </data>
+  <data name="PersonalDataPara2" xml:space="preserve">
+    <value>If you do not give us the information requested during the application process, this may halt the processing of your application. During the lifespan of the notification if you do not provide us with the information we require or we find out that some of the information is incorrect you may be in breach of your conditions of approval. This may result in</value>
+  </data>
   <data name="PersonalInfoHeading" xml:space="preserve">
-    <value>How we will use your personal information</value>
+    <value>How we use your personal information</value>
   </data>
   <data name="PersonalInfoIntro" xml:space="preserve">
-    <value>We, the Competent Authority, will process the information you provide so that we can:</value>
+    <value>The Environment Agency, Scottish Environment Protection Agency (SEPA), Northern Ireland Environment Agency (NIEA) and Natural Resources Wales (known as ‘environmental regulators’) run the IWS (International Waste Shipments) Online service. The environmental regulator you submit your data to is the data controller for your personal data. A data controller determines how and why personal data (personal information) is processed. Each environmental regulator has their own policy explaining your rights and how they deal with your personal information:</value>
   </data>
   <data name="PreventLawBreaking" xml:space="preserve">
     <value>prevent anyone from breaking environmental law, investigate cases where environmental law may have been broken, and take any action that is needed</value>
@@ -154,12 +201,64 @@
     <value>process renewals</value>
   </data>
   <data name="ReadCarefully" xml:space="preserve">
-    <value>Please read carefully, accept and proceed.</value>
+    <value>Privacy notice</value>
   </data>
   <data name="RequestsForInformation" xml:space="preserve">
     <value>respond to information requests under applicable freedom of information legislation (if the Data Protection Act allows)</value>
   </data>
+  <data name="ResponsibleHeading" xml:space="preserve">
+    <value>Your responsibility</value>
+  </data>
+  <data name="ResponsiblePara" xml:space="preserve">
+    <value>If you have included personal data about any other individuals in your submissions, you must inform them of this. You must provide them with a copy of this privacy notice so that they are aware of how their personal data will be used.</value>
+  </data>
+  <data name="SEPA" xml:space="preserve">
+    <value>SEPA:</value>
+  </data>
   <data name="WeMayAlsoHeading" xml:space="preserve">
     <value>We may also process or release the information to:</value>
+  </data>
+  <data name="WhatWeDoHeading" xml:space="preserve">
+    <value>What we do with your personal data</value>
+  </data>
+  <data name="WhatWeDoPara1" xml:space="preserve">
+    <value>We use the personal data to regulate you in accordance with the Regulation (EC) No. 1013/2006 (“the Waste Shipment Regulation”).</value>
+  </data>
+  <data name="WhatWeDoPara2" xml:space="preserve">
+    <value>We do not use your data to make an automated decision or for automated profiling.</value>
+  </data>
+  <data name="WhatWeDoPara3Part1" xml:space="preserve">
+    <value>Any personal data that you provide directly to the IWS service or we input on your behalf is shared with our IT providers</value>
+  </data>
+  <data name="WhatWeDoPara3Part2" xml:space="preserve">
+    <value>who host and assist in the processing of the data for us through the IWS service. We may share some of your data for the purpose of analytics that assist us in the improvement and optimisation of our service. Any data that they process is under a maintenance contract. They do not use any data contained within the service for their own usage.</value>
+  </data>
+  <data name="WhatWeDoPara4Part1" xml:space="preserve">
+    <value>We publish some of your analysed data along with the associated business names onto the governmental open data platform (</value>
+  </data>
+  <data name="WhatWeDoPara4Part2" xml:space="preserve">
+    <value>). When we receive a Freedom of Information request, the same format is applied to any data that we release. No personal data is ever released as part of these publications. No other data will be shared or disclosed to any other party outside EA without your explicit consent.</value>
+  </data>
+  <data name="WhereWeKeep" xml:space="preserve">
+    <value>Where your personal data is processed and stored</value>
+  </data>
+  <data name="WhereWeKeepPara1" xml:space="preserve">
+    <value>We store and process your personal data on servers in the UK.</value>
+  </data>
+  <data name="WhereWeKeepPara2" xml:space="preserve">
+    <value>As part of the application process, we may transfer your personal data outside the European Economic Area. For example, if you are exporting waste to China, then we will send your data to the Chinese Competent Authority in order to carry out the regulatory requirements and gain their consent.</value>
+  </data>
+  <data name="WhereWeKeepPara3" xml:space="preserve">
+    <value>By submitting your personal data, you agree to this transfer, storing or processing. We will take all steps reasonably necessary to ensure that your data is treated securely.
+Unfortunately, the transmission of information via the internet is not completely secure.</value>
+  </data>
+  <data name="WhereWeKeepPara4" xml:space="preserve">
+    <value>Although we will do our best to protect your personal data, we cannot guarantee the security of your data transmitted to our site; any transmission is at your own risk. Once we have received your information, we will use strict procedures and security features to try to prevent unauthorised access.</value>
+  </data>
+  <data name="WhoIsCollecting" xml:space="preserve">
+    <value>Who is collecting my data?</value>
+  </data>
+  <data name="WhoIsCollectingPara1" xml:space="preserve">
+    <value>The data controller is either, the Environment Agency, SEPA, NIEA or Natural Resources Wales. You can contact the relevant Data Protection Officer at:</value>
   </data>
 </root>
