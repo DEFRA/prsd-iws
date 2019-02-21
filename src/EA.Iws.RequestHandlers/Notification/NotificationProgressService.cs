@@ -165,9 +165,11 @@
                 progress.HasCustomsOffice = false;
             }
 
-            bool? isEntryCustomsOfficeRequired = progressResult.CustomsOffices.First().IsEntryCustomsOfficeRequired;
-            bool? isExitCustomsOfficeRequired = progressResult.CustomsOffices.First().IsExitCustomsOfficeRequired;
-            progress.HasCustomsOfficeSelections = isEntryCustomsOfficeRequired != null && isExitCustomsOfficeRequired != null;
+            progress.HasCustomsOfficeSelections = progressResult.CustomsOffices.Any() &&
+                                                  (progressResult.CustomsOffices.First().IsEntryCustomsOfficeRequired !=
+                                                   null &&
+                                                   progressResult.CustomsOffices.First().IsExitCustomsOfficeRequired !=
+                                                   null);
 
             return progress.HasStateOfExport
                 && progress.HasStateOfImport
