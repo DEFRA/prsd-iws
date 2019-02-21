@@ -173,9 +173,6 @@
                 new TestableEntryOrExitPoint() { Country = transitCountry },
                 new TestableEntryOrExitPoint() { Country = transitCountry },
                 1);
-
-            Assert.Equal(transportRoute,
-                transportRoute.Events.OfType<AllTransitStatesInEUEvent>().SingleOrDefault().TransportRoute);
         }
 
         [Fact]
@@ -212,9 +209,6 @@
             transportRoute.SetExitCustomsOffice(new ExitCustomsOffice("exit", "exit", exportCountry));
 
             transportRoute.RemoveTransitState(transitStateId);
-
-            Assert.Equal(transportRoute,
-                transportRoute.Events.OfType<AllTransitStatesInEUEvent>().SingleOrDefault().TransportRoute);
         }
     }
 }
