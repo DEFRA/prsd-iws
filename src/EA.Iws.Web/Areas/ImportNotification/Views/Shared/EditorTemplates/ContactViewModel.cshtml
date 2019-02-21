@@ -5,10 +5,10 @@
 
 <hr/>
 
-<div class="form-group @Html.Gds().FormGroupClass(m => m.Name)">
-    @Html.Gds().LabelFor(m => m.Name, false)
-    @Html.Gds().ValidationMessageFor(m => m.Name)
-    @Html.Gds().TextBoxFor(m => m.Name)
+<div class="form-group @Html.Gds().FormGroupClass(m => m.FullName)">
+    @Html.Gds().LabelFor(m => m.FullName, false)
+    @Html.Gds().ValidationMessageFor(m => m.FullName)
+    @Html.Gds().TextBoxFor(m => m.FullName)
 </div>
 
 <div class="form-group @Html.Gds().FormGroupClass(m => m.Telephone)">

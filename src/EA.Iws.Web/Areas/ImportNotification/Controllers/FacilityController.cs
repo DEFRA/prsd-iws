@@ -83,10 +83,10 @@
             var newFacility = new Facility(id)
             {
                 Address = model.Address.AsAddress(),
-                BusinessName = model.BusinessName,
+                BusinessName = model.Business.Name,
                 Contact = model.Contact.AsContact(),
-                RegistrationNumber = model.RegistrationNumber,
-                Type = model.Type,
+                RegistrationNumber = model.Business.RegistrationNumber,
+                Type = model.BusinessType,
                 Id = Guid.NewGuid(),
                 IsActualSite = model.IsActualSite,
                 IsAddedToAddressBook = model.IsAddedToAddressBook
@@ -152,10 +152,10 @@
                 var newFacility = new Facility(id)
                 {
                     Address = model.Address.AsAddress(),
-                    BusinessName = model.BusinessName,
+                    BusinessName = model.Business.Name,
                     Contact = model.Contact.AsContact(),
-                    RegistrationNumber = model.RegistrationNumber,
-                    Type = model.Type,
+                    RegistrationNumber = model.Business.RegistrationNumber,
+                    Type = model.BusinessType,
                     Id = model.FacilityId,
                     IsActualSite = model.IsActualSite,
                     IsAddedToAddressBook = model.IsAddedToAddressBook
