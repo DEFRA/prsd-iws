@@ -38,9 +38,14 @@
             {
                 var actualMovement = actualMovements.FirstOrDefault(p => p.Number == movement.ShipmentNumber);
 
-                if (actualMovement != null &&
-                    //Exclude these statuses as these will be picked up by Already Received and Already Recovered rules.
-                    actualMovement.Status != MovementStatus.Received &&
+                if (actualMovement == null)
+                {
+                    shipments.Add(movement.ShipmentNumber.GetValueOrDefault());
+                    continue;
+                }
+
+                //Exclude these statuses as these will be picked up by Already Received and Already Recovered rules.
+                if (actualMovement.Status != MovementStatus.Received &&
                     actualMovement.Status != MovementStatus.Completed)
                 {
                     if (actualMovement.Status == MovementStatus.Captured)

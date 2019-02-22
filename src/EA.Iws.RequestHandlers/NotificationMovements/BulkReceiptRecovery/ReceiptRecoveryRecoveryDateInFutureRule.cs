@@ -26,7 +26,9 @@
             {
                 var shipments = new List<int>();
 
-                foreach (var movement in movements.Where(p => !p.MissingRecoveredDisposedDate))
+                foreach (
+                    var movement in
+                    movements.Where(p => !p.MissingRecoveredDisposedDate && p.RecoveredDisposedDate.HasValue))
                 {
                     if (movement.RecoveredDisposedDate > SystemTime.UtcNow ||
                         movement.RecoveredDisposedDate < movement.ReceivedDate)

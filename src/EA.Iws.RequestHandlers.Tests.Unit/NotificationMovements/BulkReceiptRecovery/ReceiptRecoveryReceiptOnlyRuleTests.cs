@@ -54,7 +54,28 @@
             Assert.Equal(MessageLevel.Success, result.MessageLevel);
         }
 
-        private List<ReceiptRecoveryMovement> GetTestData(bool recovered)
+        [Fact]
+        public async Task ReceiptOnly_ShipmentDoesNotExist_Failure()
+        {
+            var testData = new List<ReceiptRecoveryMovement>()
+            {
+                new ReceiptRecoveryMovement()
+                {
+                    ShipmentNumber = 3,
+                    MissingReceivedDate = false,
+                    MissingRecoveredDisposedDate = true,
+                    ReceivedDate = DateTime.Now
+                }
+            };
+
+            A.CallTo(() => repo.GetAllMovements(notificationId)).Returns(GetRepoMovements(true, DateTime.Now));
+            var result = await rule.GetResult(testData, notificationId);
+
+            Assert.Equal(ReceiptRecoveryContentRules.PrenotifiedShipment, result.Rule);
+            Assert.Equal(MessageLevel.Error, result.MessageLevel);
+        }
+
+        private static List<ReceiptRecoveryMovement> GetTestData(bool recovered)
         {
             return new List<ReceiptRecoveryMovement>()
             {
@@ -72,11 +93,11 @@
             };
         }
 
-        private List<Movement> GetRepoMovements(bool prenotified, DateTime shipmentDate)
+        private IEnumerable<Movement> GetRepoMovements(bool prenotified, DateTime shipmentDate)
         {
             return new List<Movement>()
             {
-             new TestableMovement()
+                new TestableMovement()
                 {
                     NotificationId = notificationId,
                     Status = prenotified ? Core.Movement.MovementStatus.Received : Core.Movement.MovementStatus.Captured,
@@ -84,7 +105,7 @@
                     Date = shipmentDate
                 },
 
-            new TestableMovement()
+                new TestableMovement()
                 {
                     NotificationId = notificationId,
                     Status = Core.Movement.MovementStatus.Submitted,
