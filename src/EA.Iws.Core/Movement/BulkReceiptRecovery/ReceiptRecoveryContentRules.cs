@@ -16,7 +16,7 @@
         WrongNotificationNumber,
         [Display(Name = "Shipment number {0}: the receipt date format must be in dd/mm/yyyy format.")]
         ReceiptDateFormat,
-        [Display(Name = "Shipment number {0}: the receipt date must not be in the future and must be after the Actual Date of Shipment.")]
+        [Display(Name = "Shipment number {0}: the receipt date must not be in the future and must be equal to or after the Actual Date of Shipment.")]
         ReceiptDateValidation,
         [Display(Name = "Shipment number {0}: the waste quantity must have no more than {1} decimal places.")]
         QuantityPrecision,
