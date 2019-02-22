@@ -36,6 +36,12 @@
         {
             var draft = await draftImportNotificationRepository.Get(message.ImportNotificationId);
 
+            int addressesToUpdate = AddressesToUpdate(draft);
+            if (addressesToUpdate == 0)
+            {
+                return false;
+            }
+
             var types = Enum.GetValues(typeof(AddressRecordType)).Cast<AddressRecordType>();
 
             foreach (var type in types)
@@ -83,6 +89,22 @@
                     break;
             }
             await addressBookRepository.Update(addressBook);
+        }
+
+        private int AddressesToUpdate(ImportNotification draft)
+        {
+            int x = 0;
+
+            x += draft.Exporter.IsAddedToAddressBook ? 1 : 0;
+            x += draft.Importer.IsAddedToAddressBook ? 1 : 0;
+            x += draft.Producer.IsAddedToAddressBook ? 1 : 0;
+            
+            foreach (var facility in draft.Facilities.Facilities)
+            {
+                x += facility.IsAddedToAddressBook ? 1 : 0;
+            }
+
+            return x;
         }
 
         private async Task<AddressBookRecord> ProducerAddressBookRecord(Producer producer)
