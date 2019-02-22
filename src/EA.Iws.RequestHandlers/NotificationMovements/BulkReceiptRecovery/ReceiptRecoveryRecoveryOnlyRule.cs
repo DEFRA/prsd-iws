@@ -37,10 +37,10 @@
             {
                 var actualMovement = actualMovements.FirstOrDefault(p => p.Number == movement.ShipmentNumber);
 
-                if (actualMovement != null && 
-                    actualMovement.Status != MovementStatus.Received &&
+                if (actualMovement == null ||
+                    (actualMovement.Status != MovementStatus.Received &&
                     //Exclude Completed ones as these will be picked up by Already Recovered Rule
-                    actualMovement.Status != MovementStatus.Completed)
+                    actualMovement.Status != MovementStatus.Completed))
                 {
                     shipments.Add(movement.ShipmentNumber.GetValueOrDefault());
                 }

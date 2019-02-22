@@ -49,7 +49,28 @@
             Assert.Equal(MessageLevel.Error, result.MessageLevel);
         }
 
-        private List<ReceiptRecoveryMovement> GetTestData(bool received)
+        [Fact]
+        public async Task RecoverOnly_ShipmentDoesNotExist_Failure()
+        {
+            var testData = new List<ReceiptRecoveryMovement>()
+            {
+                new ReceiptRecoveryMovement()
+                {
+                    ShipmentNumber = 3,
+                    MissingReceivedDate = true,
+                    MissingRecoveredDisposedDate = false,
+                    RecoveredDisposedDate = DateTime.Now
+                }
+            };
+
+            A.CallTo(() => movementRepo.GetAllMovements(notificationId)).Returns(GetRepoMovements(true));
+            var result = await rule.GetResult(testData, notificationId);
+
+            Assert.Equal(ReceiptRecoveryContentRules.RecoveredValidation, result.Rule);
+            Assert.Equal(MessageLevel.Error, result.MessageLevel);
+        }
+
+        private static List<ReceiptRecoveryMovement> GetTestData(bool received)
         {
             DateTime? date = null;
 
@@ -75,7 +96,7 @@
             };
         }
 
-        private List<Movement> GetRepoMovements(bool received)
+        private IEnumerable<Movement> GetRepoMovements(bool received)
         {
             return new List<Movement>()
             {
