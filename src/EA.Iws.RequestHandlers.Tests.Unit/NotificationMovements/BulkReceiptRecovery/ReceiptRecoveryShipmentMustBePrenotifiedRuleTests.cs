@@ -59,7 +59,17 @@
             Assert.Equal(MessageLevel.Success, result.MessageLevel);
         }
 
-        private List<ReceiptRecoveryMovement> GetTestData(bool nonExistingShipment)
+        [Fact]
+        public async Task ShipmentMustbePrenotified_ShipmentDoesNotExist_Failure()
+        {
+            A.CallTo(() => movementRepo.GetAllMovements(notificationId)).Returns(GetRepoMovements(true, DateTime.Now));
+            var result = await rule.GetResult(GetTestData(true), notificationId);
+
+            Assert.Equal(ReceiptRecoveryContentRules.ReceivedRecoveredValidation, result.Rule);
+            Assert.Equal(MessageLevel.Error, result.MessageLevel);
+        }
+
+        private static List<ReceiptRecoveryMovement> GetTestData(bool nonExistingShipment)
         { 
             return new List<ReceiptRecoveryMovement>()
             {
@@ -78,19 +88,20 @@
             };
         }
 
-        private List<Movement> GetRepoMovements(bool prenotified, DateTime shipmentDate)
+        private IEnumerable<Movement> GetRepoMovements(bool prenotified, DateTime shipmentDate)
         {
             return new List<Movement>()
             {
-             new TestableMovement()
+                new TestableMovement()
                 {
                     NotificationId = notificationId,
-                    Status = prenotified ? Core.Movement.MovementStatus.Submitted : Core.Movement.MovementStatus.Captured,
+                    Status =
+                        prenotified ? Core.Movement.MovementStatus.Submitted : Core.Movement.MovementStatus.Captured,
                     Date = shipmentDate,
                     Number = 1
                 },
 
-            new TestableMovement()
+                new TestableMovement()
                 {
                     NotificationId = notificationId,
                     Status = Core.Movement.MovementStatus.Submitted,

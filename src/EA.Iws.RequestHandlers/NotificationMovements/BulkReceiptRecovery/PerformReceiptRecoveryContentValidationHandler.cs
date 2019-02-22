@@ -119,15 +119,6 @@
                     ? MessageLevel.Error
                     : MessageLevel.Success;
 
-                if (result == MessageLevel.Success && movements.All(m => m.ShipmentNumber.HasValue))
-                {
-                    var allShipmentNumbersExist =
-                        movements.Where(m => m.ShipmentNumber.HasValue)
-                            .All(m => actualMovements.Any(a => a.Number == m.ShipmentNumber.Value));
-
-                    result = !allShipmentNumbersExist ? MessageLevel.Error : MessageLevel.Success;
-                }
-
                 var errorMessage = Prsd.Core.Helpers.EnumHelper.GetDisplayName(ReceiptRecoveryContentRules.InvalidNotificationOrShipmentNumbers);
 
                 return new ReceiptRecoveryContentRuleResult<ReceiptRecoveryContentRules>(ReceiptRecoveryContentRules.InvalidNotificationOrShipmentNumbers,
