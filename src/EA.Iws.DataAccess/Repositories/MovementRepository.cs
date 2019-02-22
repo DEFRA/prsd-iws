@@ -126,6 +126,20 @@
             return currentActiveLoads;
         }
 
+        public async Task<IEnumerable<Movement>> GetFutureActiveMovements(Guid notificationId)
+        {
+            await notificationAuthorization.EnsureAccessAsync(notificationId);
+
+            var currentActiveLoads = await context.Movements
+                .Where(m =>
+                    m.NotificationId == notificationId
+                    && (m.Status == MovementStatus.Submitted
+                        || m.Status == MovementStatus.Received)
+                    && m.Date.Date >= SystemTime.UtcNow.Date).ToArrayAsync();
+
+            return currentActiveLoads;
+        }
+
         public async Task<int> GetLatestMovementNumber(Guid notificationId)
         {
             await notificationAuthorization.EnsureAccessAsync(notificationId);
