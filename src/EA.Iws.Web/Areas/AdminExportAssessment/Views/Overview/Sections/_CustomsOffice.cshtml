@@ -1,7 +1,7 @@
 ﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.NotificationApplication.JourneyViewModel
 
 <div class="overview-block">
-    @if (!string.IsNullOrWhiteSpace(Model.ExitCustomsOffice.Name) || !string.IsNullOrWhiteSpace(Model.EntryCustomsOffice.Name))
+    @if (Model.IsCustomsOfficeCompleted)
     {
         if (!string.IsNullOrWhiteSpace(Model.ExitCustomsOffice.Name))
         {
@@ -18,9 +18,18 @@
                     <div class="column-half">@Html.DisplayFor(m => m.ExitCustomsOffice.Address)</div>
                 </div>
             </div>
-        }
-        if (!string.IsNullOrWhiteSpace(Model.EntryCustomsOffice.Name))
-        {
+		}
+		else
+		{
+			<div class="overview-block-element">
+				<div class="grid-row">
+					<div class="column-half">Exit customs office:</div>
+					<div class="column-half">Not required</div>
+				</div>
+			</div>
+		}
+		if (!string.IsNullOrWhiteSpace(Model.EntryCustomsOffice.Name))
+		{
             <div class="overview-block-element">
                 <div class="grid-row">
                     <div class="column-half">Entry customs office:</div>
@@ -34,15 +43,19 @@
                     <div class="column-half">@Html.DisplayFor(m => m.EntryCustomsOffice.Address)</div>
                 </div>
             </div>
-        }
-    }
-    else if (Model.IsCustomsOfficeCompleted)
-    {
-
-        <div class="overview-block-element">Not applicable</div>
-    }
-    else
-    {
+		}
+		else
+		{
+			<div class="overview-block-element">
+				<div class="grid-row">
+					<div class="column-half">Entry customs office:</div>
+					<div class="column-half">Not required</div>
+				</div>
+			</div>
+		}
+	}
+	else
+	{
         <div class="overview-block-element">@ViewBag.SectionIncompleteText</div>
     }
 </div>
