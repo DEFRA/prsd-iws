@@ -450,7 +450,6 @@
     <Compile Include="NotificationMovements\BulkPrenotification\PrenotificationDateFormatRule.cs" />
     <Compile Include="NotificationMovements\BulkPrenotification\PrenotificationDateHistoricRule.cs" />
     <Compile Include="NotificationMovements\BulkPrenotification\PrenotificationDuplicateShipmentNumberRule.cs" />
-    <Compile Include="NotificationMovements\BulkPrenotification\PrenotificationExcessiveShipmentsRule.cs" />
     <Compile Include="NotificationMovements\BulkPrenotification\PrenotificationInvalidPackagingTypeRule.cs" />
     <Compile Include="NotificationMovements\BulkPrenotification\PrenotificationInvalidShipmentNumberRule.cs" />
     <Compile Include="NotificationMovements\BulkPrenotification\PrenotificationNotificationNumberRule.cs" />

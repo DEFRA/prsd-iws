@@ -147,7 +147,6 @@
     <Compile Include="NotificationMovements\BulkUpload\PrenotificationContentDuplicateShipmentNumberRuleTests.cs" />
     <Compile Include="NotificationMovements\BulkUpload\PrenotificationDateFormatRuleTests.cs" />
     <Compile Include="NotificationMovements\BulkUpload\PrenotificationDateFutureRuleTests.cs" />
-    <Compile Include="NotificationMovements\BulkUpload\PrenotificationExcessiveShipmentsRuleTests.cs" />
     <Compile Include="NotificationMovements\BulkUpload\PrenotificationInvalidPackagingTypeRuleTests.cs" />
     <Compile Include="NotificationMovements\BulkUpload\PrenotificationInvalidShipmentNumbersRuleTests.cs" />
     <Compile Include="NotificationMovements\BulkUpload\PrenotificationNotificationNumberRuleTests.cs" />

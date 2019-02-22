@@ -5,45 +5,97 @@
     using System.Data;
     using System.Linq;
     using System.Threading.Tasks;
+    using Core.FinancialGuarantee;
+    using Core.Movement;
     using Core.Movement.BulkPrenotification;
     using Core.PackagingType;
     using Core.Rules;
     using Core.Shared;
+    using Domain.FinancialGuarantee;
+    using Domain.Movement;
     using Domain.Movement.BulkUpload;
     using FakeItEasy;
     using Prsd.Core;
     using Prsd.Core.Mapper;
     using RequestHandlers.NotificationMovements.BulkPrenotification;
     using Requests.NotificationMovements.BulkUpload;
+    using TestHelpers.DomainFakes;
     using Xunit;
 
     public class PerformBulkUploadContentValidationHandlerTests
     {
         private readonly PerformPrenotificationContentValidationHandler handler;
-        private readonly IEnumerable<IPrenotificationContentRule> contentRules;
         private readonly IMap<DataTable, List<PrenotificationMovement>> mapper;
         private readonly IDraftMovementRepository repository;
         private readonly IPrenotificationContentRule contentRule;
+        private readonly IMovementRepository movementRepository;
+        private readonly IFinancialGuaranteeRepository financialGuaranteeRepository;
+        private readonly Guid notificationId;
         private const int MaxShipments = 50;
+        private const int MaxActiveLoads = 3;
+        private const int DateGroups = 2;
 
         public PerformBulkUploadContentValidationHandlerTests()
         {
+            notificationId = Guid.NewGuid();
+
             mapper = A.Fake<IMap<DataTable, List<PrenotificationMovement>>>();
             repository = A.Fake<IDraftMovementRepository>();
             contentRule = A.Fake<IPrenotificationContentRule>();
+            movementRepository = A.Fake<IMovementRepository>();
+            financialGuaranteeRepository = A.Fake<IFinancialGuaranteeRepository>();
 
-            contentRules = new List<IPrenotificationContentRule>(1)
+            var contentRules = new List<IPrenotificationContentRule>()
             {
                 contentRule
             };
 
-            handler = new PerformPrenotificationContentValidationHandler(contentRules, mapper, repository);
+            var testCollection = new TestableFinancialGuaranteeCollection(notificationId)
+            {
+                FinancialGuarantees = new List<TestableFinancialGuarantee>()
+                {
+                    new TestableFinancialGuarantee()
+                    {
+                        ActiveLoadsPermitted = MaxActiveLoads,
+                        Status = FinancialGuaranteeStatus.Approved
+                    }
+                }
+            };
+
+            var testFutureActiveMovements = new List<TestableMovement>()
+            {
+                new TestableMovement()
+                {
+                    Status = MovementStatus.Submitted,
+                    Date = new DateTime(2019, 1, 1)
+                },
+                new TestableMovement()
+                {
+                    Status = MovementStatus.Submitted,
+                    Date = new DateTime(2019, 1, 1)
+                },
+                new TestableMovement()
+                {
+                    Status = MovementStatus.Submitted,
+                    Date = new DateTime(2019, 1, 15)
+                },
+                new TestableMovement()
+                {
+                    Status = MovementStatus.Submitted,
+                    Date = new DateTime(2019, 1, 15)
+                }
+            };
+
+            A.CallTo(() => financialGuaranteeRepository.GetByNotificationId(notificationId)).Returns(testCollection);
+            A.CallTo(() => movementRepository.GetFutureActiveMovements(notificationId))
+                .Returns(testFutureActiveMovements);
+
+            handler = new PerformPrenotificationContentValidationHandler(contentRules, mapper, repository, movementRepository, financialGuaranteeRepository);
         }
 
         [Fact]
         public async Task ExceedsMaxRows_ContentRulesFailed()
         {
-            var notificationId = Guid.NewGuid();
             var summary = new PrenotificationRulesSummary();
             var message = new PerformPrenotificationContentValidation(summary, notificationId, new DataTable(), "Test", false);
 
@@ -58,7 +110,6 @@
         [Fact]
         public async Task MissingShipmentNumber_ContentRulesFailed()
         {
-            var notificationId = Guid.NewGuid();
             var summary = new PrenotificationRulesSummary();
             var message = new PerformPrenotificationContentValidation(summary, notificationId, new DataTable(), "Test", false);
 
@@ -81,7 +132,6 @@
         [Fact]
         public async Task MissingNotificationNumber_ContentRulesFailed()
         {
-            var notificationId = Guid.NewGuid();
             var summary = new PrenotificationRulesSummary();
             var message = new PerformPrenotificationContentValidation(summary, notificationId, new DataTable(), "Test", false);
 
@@ -103,7 +153,6 @@
         [Fact]
         public async Task MissingData_ContentRulesFailed()
         {
-            var notificationId = Guid.NewGuid();
             var summary = new PrenotificationRulesSummary();
             var message = new PerformPrenotificationContentValidation(summary, notificationId, new DataTable(), "Test", false);
 
@@ -128,7 +177,6 @@
         [Fact]
         public async Task ContentRulesFailed_DoesNotSaveToDraft()
         {
-            var notificationId = Guid.NewGuid();
             var summary = new PrenotificationRulesSummary();
             var message = new PerformPrenotificationContentValidation(summary, notificationId, new DataTable(), "Test", false);
 
@@ -146,7 +194,6 @@
         [Fact]
         public async Task ContentRulesSuccess_SavesToDraft()
         {
-            var notificationId = Guid.NewGuid();
             var summary = new PrenotificationRulesSummary();
             var message = new PerformPrenotificationContentValidation(summary, notificationId, new DataTable(), "Test", false);
 
@@ -173,6 +220,118 @@
             Assert.True(response.IsContentRulesSuccess);
             A.CallTo(() => repository.AddPrenotifications(A<Guid>.Ignored, A<List<PrenotificationMovement>>.Ignored, "Test"))
                 .MustHaveHappened(Repeated.Exactly.Once);
+        }
+
+        [Fact]
+        public async Task NewShipmentsGroupedByDate_MoreThanActiveLoads_Error()
+        {
+            var movements = new List<PrenotificationMovement>()
+            {
+                new PrenotificationMovement()
+                {
+                    ShipmentNumber = 1,
+                    ActualDateOfShipment = new DateTime(2019, 1, 1)
+                },
+                new PrenotificationMovement()
+                {
+                    ShipmentNumber = 2,
+                    ActualDateOfShipment = new DateTime(2019, 1, 1)
+                },
+                new PrenotificationMovement()
+                {
+                    ShipmentNumber = 3,
+                    ActualDateOfShipment = new DateTime(2019, 1, 1)
+                },
+                new PrenotificationMovement()
+                {
+                    ShipmentNumber = 4,
+                    ActualDateOfShipment = new DateTime(2019, 1, 1)
+                },
+                new PrenotificationMovement()
+                {
+                    ShipmentNumber = 5,
+                    ActualDateOfShipment = new DateTime(2019, 1, 15)
+                },
+                 new PrenotificationMovement()
+                {
+                     ShipmentNumber = 6,
+                    ActualDateOfShipment = new DateTime(2019, 1, 15)
+                },
+                new PrenotificationMovement()
+                {
+                    ShipmentNumber = 7,
+                    ActualDateOfShipment = new DateTime(2019, 1, 15)
+                },
+                new PrenotificationMovement()
+                {
+                    ShipmentNumber = 8,
+                    ActualDateOfShipment = new DateTime(2019, 1, 15)
+                }
+            };
+
+            var rules = (await handler.GetActiveLoadsRule(movements, notificationId)).ToList();
+
+            Assert.True(rules.Any());
+            Assert.True(rules.Count == DateGroups);
+            Assert.True(rules.All(r => r.Rule == PrenotificationContentRules.ActiveLoadsDataShipments));
+            Assert.True(rules.All(r => r.MessageLevel == MessageLevel.Error));
+        }
+
+        [Fact]
+        public async Task NewAndExistingShipmentsGroupedByDate_MoreThanActiveLoads_Error()
+        {
+            var movements = new List<PrenotificationMovement>()
+            {
+                new PrenotificationMovement()
+                {
+                    ShipmentNumber = 1,
+                    ActualDateOfShipment = new DateTime(2019, 1, 1)
+                },
+                new PrenotificationMovement()
+                {
+                    ShipmentNumber = 2,
+                    ActualDateOfShipment = new DateTime(2019, 1, 1)
+                },
+                new PrenotificationMovement()
+                {
+                    ShipmentNumber = 3,
+                    ActualDateOfShipment = new DateTime(2019, 1, 15)
+                },
+                new PrenotificationMovement()
+                {
+                    ShipmentNumber = 4,
+                    ActualDateOfShipment = new DateTime(2019, 1, 15)
+                }
+            };
+
+            var rules = (await handler.GetActiveLoadsRule(movements, notificationId)).ToList();
+
+            Assert.True(rules.Any());
+            Assert.True(rules.Count == DateGroups);
+            Assert.True(rules.All(r => r.Rule == PrenotificationContentRules.ActiveLoadsWithExistingShipments));
+            Assert.True(rules.All(r => r.MessageLevel == MessageLevel.Error));
+        }
+
+        [Fact]
+        public async Task NewAndExistingShipmentsGroupedByDate_LessThanEqualActiveLoads_Success()
+        {
+            var movements = new List<PrenotificationMovement>()
+            {
+                new PrenotificationMovement()
+                {
+                    ShipmentNumber = 1,
+                    ActualDateOfShipment = new DateTime(2019, 1, 1)
+                },
+                new PrenotificationMovement()
+                {
+                    ShipmentNumber = 2,
+                    ActualDateOfShipment = new DateTime(2019, 1, 15)
+                }
+            };
+
+            var rules = (await handler.GetActiveLoadsRule(movements, notificationId)).ToList();
+
+            Assert.False(rules.Any());
         }
     }
 }
