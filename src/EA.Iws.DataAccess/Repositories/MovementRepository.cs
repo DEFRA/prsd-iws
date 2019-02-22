@@ -135,7 +135,7 @@
                     m.NotificationId == notificationId
                     && (m.Status == MovementStatus.Submitted
                         || m.Status == MovementStatus.Received)
-                    && m.Date.Date >= SystemTime.UtcNow.Date).ToArrayAsync();
+                    && m.Date >= SystemTime.UtcNow).ToArrayAsync();
 
             return currentActiveLoads;
         }
