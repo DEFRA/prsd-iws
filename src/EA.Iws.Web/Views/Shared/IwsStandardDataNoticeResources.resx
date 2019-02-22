@@ -136,18 +136,30 @@
     <value>Environment Agency:</value>
   </data>
   <data name="EAAddress" xml:space="preserve">
-    <value>Data Protection Officer
-Environment Agency
-Horizon House
-Deanery Road
-Bristol
-BS1 5AH</value>
+    <value>Data Protection Officer&lt;/br&gt;
+Environment Agency&lt;/br&gt;
+Horizon House&lt;/br&gt;
+Deanery Road&lt;/br&gt;
+Bristol&lt;/br&gt;
+BS1 5AH&lt;/br&gt;</value>
+  </data>
+  <data name="EAEmail" xml:space="preserve">
+    <value>dataprotection@environment‐agency.gov.uk</value>
   </data>
   <data name="EAPara" xml:space="preserve">
     <value>You can access the charter using the link or go to GOV.UK and search 'Environment Agency personal information charter'.</value>
   </data>
   <data name="EASubHeading" xml:space="preserve">
     <value>Personal information charter:</value>
+  </data>
+  <data name="Email" xml:space="preserve">
+    <value>Email:</value>
+  </data>
+  <data name="FootNote1" xml:space="preserve">
+    <value>The Information Commissioner's Office (ICO) is the supervisory authority for data protection legislation. The ICO website has a full list of your rights under data protection legislation. You can access this at the following link:</value>
+  </data>
+  <data name="FootNote2" xml:space="preserve">
+    <value>You have the right to lodge a complaint with the ICO at any time. Should you wish to exercise that right full details are available at:</value>
   </data>
   <data name="Header" xml:space="preserve">
     <value>Read our privacy notice</value>
@@ -161,8 +173,29 @@ BS1 5AH</value>
   <data name="NIEA" xml:space="preserve">
     <value>NIEA:</value>
   </data>
+  <data name="NIEAAddress" xml:space="preserve">
+    <value>Data Protection Officer&lt;/br&gt;
+DAERA&lt;/br&gt;
+Dundonald House&lt;/br&gt;
+Upper Newtownards Road&lt;/br&gt;
+Ballymiscaw&lt;/br&gt;
+Belfast&lt;/br&gt;
+BT4 3SB&lt;/br&gt;
+Phone: 0300 200 7850&lt;/br&gt;</value>
+  </data>
   <data name="NRW" xml:space="preserve">
     <value>Natural Resources Wales:</value>
+  </data>
+  <data name="NRWAddress" xml:space="preserve">
+    <value>Data Protection Officer&lt;/br&gt;
+Natural Resources Wales&lt;/br&gt;
+Ty Cambria&lt;/br&gt;
+29 Newport Road&lt;/br&gt;
+Cardiff&lt;/br&gt;
+CF24 0TP&lt;/br&gt;</value>
+  </data>
+  <data name="NRWEmail" xml:space="preserve">
+    <value>dataprotection@cyfoethnaturiolcymru.gov.uk</value>
   </data>
   <data name="OfferYouDocuments" xml:space="preserve">
     <value>offer you documents or services relating to environmental matters</value>
@@ -214,6 +247,17 @@ BS1 5AH</value>
   </data>
   <data name="SEPA" xml:space="preserve">
     <value>SEPA:</value>
+  </data>
+  <data name="SEPAAddress" xml:space="preserve">
+    <value>Information Governance Unit&lt;/br&gt;
+Scottish Environment Protection Agency&lt;/br&gt;
+Strathallan House&lt;/br&gt;
+Castle Business Park&lt;/br&gt;
+Stirling&lt;/br&gt;
+FK9 4TZ&lt;/br&gt;</value>
+  </data>
+  <data name="SEPAEmail" xml:space="preserve">
+    <value>dataprotection@sepa.org.uk</value>
   </data>
   <data name="WeMayAlsoHeading" xml:space="preserve">
     <value>We may also process or release the information to:</value>

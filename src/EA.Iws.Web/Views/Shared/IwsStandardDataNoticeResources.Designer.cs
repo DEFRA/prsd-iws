@@ -115,16 +115,25 @@ namespace EA.Iws.Web.Views.Shared {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Data Protection Officer
-        ///Environment Agency
-        ///Horizon House
-        ///Deanery Road
-        ///Bristol
-        ///BS1 5AH.
+        ///   Looks up a localized string similar to Data Protection Officer&lt;/br&gt;
+        ///Environment Agency&lt;/br&gt;
+        ///Horizon House&lt;/br&gt;
+        ///Deanery Road&lt;/br&gt;
+        ///Bristol&lt;/br&gt;
+        ///BS1 5AH&lt;/br&gt;.
         /// </summary>
         public static string EAAddress {
             get {
                 return ResourceManager.GetString("EAAddress", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to dataprotection@environment‐agency.gov.uk.
+        /// </summary>
+        public static string EAEmail {
+            get {
+                return ResourceManager.GetString("EAEmail", resourceCulture);
             }
         }
         
@@ -143,6 +152,33 @@ namespace EA.Iws.Web.Views.Shared {
         public static string EASubHeading {
             get {
                 return ResourceManager.GetString("EASubHeading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Email:.
+        /// </summary>
+        public static string Email {
+            get {
+                return ResourceManager.GetString("Email", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The Information Commissioner&apos;s Office (ICO) is the supervisory authority for data protection legislation. The ICO website has a full list of your rights under data protection legislation. You can access this at the following link:.
+        /// </summary>
+        public static string FootNote1 {
+            get {
+                return ResourceManager.GetString("FootNote1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You have the right to lodge a complaint with the ICO at any time. Should you wish to exercise that right full details are available at:.
+        /// </summary>
+        public static string FootNote2 {
+            get {
+                return ResourceManager.GetString("FootNote2", resourceCulture);
             }
         }
         
@@ -183,11 +219,50 @@ namespace EA.Iws.Web.Views.Shared {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Data Protection Officer&lt;/br&gt;
+        ///DAERA&lt;/br&gt;
+        ///Dundonald House&lt;/br&gt;
+        ///Upper Newtownards Road&lt;/br&gt;
+        ///Ballymiscaw&lt;/br&gt;
+        ///Belfast&lt;/br&gt;
+        ///BT4 3SB&lt;/br&gt;
+        ///Phone: 0300 200 7850&lt;/br&gt;.
+        /// </summary>
+        public static string NIEAAddress {
+            get {
+                return ResourceManager.GetString("NIEAAddress", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Natural Resources Wales:.
         /// </summary>
         public static string NRW {
             get {
                 return ResourceManager.GetString("NRW", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Data Protection Officer&lt;/br&gt;
+        ///Natural Resources Wales&lt;/br&gt;
+        ///Ty Cambria&lt;/br&gt;
+        ///29 Newport Road&lt;/br&gt;
+        ///Cardiff&lt;/br&gt;
+        ///CF24 0TP&lt;/br&gt;.
+        /// </summary>
+        public static string NRWAddress {
+            get {
+                return ResourceManager.GetString("NRWAddress", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to dataprotection@cyfoethnaturiolcymru.gov.uk.
+        /// </summary>
+        public static string NRWEmail {
+            get {
+                return ResourceManager.GetString("NRWEmail", resourceCulture);
             }
         }
         
@@ -341,6 +416,29 @@ namespace EA.Iws.Web.Views.Shared {
         public static string SEPA {
             get {
                 return ResourceManager.GetString("SEPA", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Information Governance Unit&lt;/br&gt;
+        ///Scottish Environment Protection Agency&lt;/br&gt;
+        ///Strathallan House&lt;/br&gt;
+        ///Castle Business Park&lt;/br&gt;
+        ///Stirling&lt;/br&gt;
+        ///FK9 4TZ&lt;/br&gt;.
+        /// </summary>
+        public static string SEPAAddress {
+            get {
+                return ResourceManager.GetString("SEPAAddress", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to dataprotection@sepa.org.uk.
+        /// </summary>
+        public static string SEPAEmail {
+            get {
+                return ResourceManager.GetString("SEPAEmail", resourceCulture);
             }
         }
         

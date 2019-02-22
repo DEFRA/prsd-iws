@@ -5,30 +5,29 @@
         <h2 class="summary heading-xsmall" data-track="disclosure" data-category="Data notice" data-action="Read">@IwsStandardDataNoticeResources.Header</h2>
     </summary>
     <div class="panel">
-        <p>
-            @IwsStandardDataNoticeResources.ReadCarefully
-        </p>
+		<h2 class="heading-medium">
+			@IwsStandardDataNoticeResources.ReadCarefully
+			</h2>
 
-        <h2 class="heading-small">@IwsStandardDataNoticeResources.PersonalInfoHeading</h2>
-        <p>
-            @IwsStandardDataNoticeResources.PersonalInfoIntro
-		</p>
-		<h2 class="heading-small">@IwsStandardDataNoticeResources.EA</h2>
-		<p>@IwsStandardDataNoticeResources.EASubHeading</p>
+			<h2 class="heading-small">@IwsStandardDataNoticeResources.PersonalInfoHeading</h2>
+			<p>
+				@IwsStandardDataNoticeResources.PersonalInfoIntro
+			</p>
+			<h2 class="heading-small">@IwsStandardDataNoticeResources.EA</h2>
+		<h2>@IwsStandardDataNoticeResources.EASubHeading</h2>
 		<p>
-			<a href="https://www.gov.uk/government/organisations/environment-agency/about/personal-information-charter" target="_blank">https://www.gov.uk/government/organisations/environment-agency/about/personal-information-charter</a>		
-		</p>  
-		<p>@IwsStandardDataNoticeResources.EAPara</p>
+			<a href="https://www.gov.uk/government/organisations/environment-agency/about/personal-information-charter" target="_blank">https://www.gov.uk/government/organisations/environment-agency/about/personal-information-charter</a><br>
+		@IwsStandardDataNoticeResources.EAPara</p>
 
 		<h2 class="heading-small">@IwsStandardDataNoticeResources.SEPA</h2>
 		<p>
 			<a href="https://www.sepa.org.uk/help/privacy-policy/" target="_blank">Privacy Policy</a>
-		</p>  
+		</p>
 
 		<h2 class="heading-small">@IwsStandardDataNoticeResources.NIEA</h2>
 		<p>
 			<a href="https://www.daera-ni.gov.uk/daera-privacy-statement" target="_blank">DAERA Privacy Statement</a>
-		</p>  
+		</p>
 
 		<h2 class="heading-small">@IwsStandardDataNoticeResources.PersonalDataHeading</h2>
 		<p>@IwsStandardDataNoticeResources.PersonalDataPara1</p>
@@ -47,7 +46,7 @@
 		<p>@IwsStandardDataNoticeResources.WhatWeDoPara1</p>
 		<p>@IwsStandardDataNoticeResources.WhatWeDoPara2</p>
 		<p>
-			@IwsStandardDataNoticeResources.WhatWeDoPara3Part1 <a href="https://www.civica.com/en-gb/" target="_blank">Civica Digital </a> @IwsStandardDataNoticeResources.WhatWeDoPara3Part2 
+			@IwsStandardDataNoticeResources.WhatWeDoPara3Part1 <a href="https://www.civica.com/en-gb/" target="_blank">Civica Digital </a> @IwsStandardDataNoticeResources.WhatWeDoPara3Part2
 		</p>
 		<p>
 			@IwsStandardDataNoticeResources.WhatWeDoPara4Part1<a href="https://data.gov.uk/dataset/fb973a82-c484-4b14-8209-01bbea39c87b/international-waste-shipments-exported-from-england" target="_blank">data.gov.uk</a>@IwsStandardDataNoticeResources.WhatWeDoPara4Part2
@@ -65,6 +64,26 @@
 		<h2 class="heading-small">@IwsStandardDataNoticeResources.WhoIsCollecting</h2>
 		<p>@IwsStandardDataNoticeResources.WhoIsCollectingPara1</p>
 		<h2 class="heading-small">@IwsStandardDataNoticeResources.EA</h2>
-		@IwsStandardDataNoticeResources.EAAddress
-    </div>
+		@Html.Raw(IwsStandardDataNoticeResources.EAAddress)
+		@IwsStandardDataNoticeResources.Email @Html.MailtoLink(IwsStandardDataNoticeResources.EAEmail)
+
+		<p><h2 class="heading-small">@IwsStandardDataNoticeResources.SEPA</h2>
+		@Html.Raw(IwsStandardDataNoticeResources.SEPAAddress)
+		@IwsStandardDataNoticeResources.Email @Html.MailtoLink(IwsStandardDataNoticeResources.SEPAEmail)</p>
+
+		<p><h2 class="heading-small">@IwsStandardDataNoticeResources.NIEA</h2>
+		@Html.Raw(IwsStandardDataNoticeResources.NIEAAddress)</p>
+
+		<p>
+			<h2 class="heading-small">@IwsStandardDataNoticeResources.NRW</h2>
+			@Html.Raw(IwsStandardDataNoticeResources.NRWAddress)
+			@IwsStandardDataNoticeResources.Email @Html.MailtoLink(IwsStandardDataNoticeResources.NRWEmail)
+		</p>
+		<p>
+			@IwsStandardDataNoticeResources.FootNote1 <a href="https://ico.org.uk/your‐data‐matters" target="_blank">https://ico.org.uk/your‐data‐matters</a>.
+		</p>
+		<p>
+			@IwsStandardDataNoticeResources.FootNote2 <a href="https://ico.org.uk/make-a-complaint" target="_blank">https://ico.org.uk/make-a-complaint</a>.
+		</p>
+</div>
 </details>
