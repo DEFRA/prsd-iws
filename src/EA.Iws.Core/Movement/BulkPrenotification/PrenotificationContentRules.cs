@@ -10,10 +10,10 @@
         MissingShipmentNumbers,
         [Display(Name = "Shipment number {0}: there is missing data.")]
         MissingData,
-        [Display(Name = "You can't create {0} shipments as you are only permitted {1} active loads")]
-        ActiveLoadsGrouped,
-        [Display(Name = "You can't create {0} shipments as there are only {1} active loads remaining.")]
-        ExcessiveShipments,
+        [Display(Name = "Shipment number {0}: you can't create {1} shipments for the same date as you are only permitted {2} active loads.")]
+        ActiveLoadsDataShipments,
+        [Display(Name = "Shipment number {0}: {1} shipments already exist for this date. You can't create an additional {2} shipments for the same date as you are only permitted {3} active loads")]
+        ActiveLoadsWithExistingShipments,
         [Display(Name = "Shipment number {0}: is duplicated within the data file.")]
         DuplicateShipmentNumber,
         [Display(Name = "Shipment number {0}: data must only be for notification number {1}")]

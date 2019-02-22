@@ -1,13 +1,19 @@
 ﻿namespace EA.Iws.RequestHandlers.NotificationMovements.BulkPrenotification
 {
     using System;
+    using System.Collections;
     using System.Collections.Generic;
     using System.Data;
     using System.Linq;
     using System.Threading.Tasks;
+    using Core.FinancialGuarantee;
+    using Core.Movement;
     using Core.Movement.BulkPrenotification;
     using Core.Rules;
+    using Domain.FinancialGuarantee;
+    using Domain.Movement;
     using Domain.Movement.BulkUpload;
+    using Prsd.Core.Helpers;
     using Prsd.Core.Mapper;
     using Prsd.Core.Mediator;
     using Requests.NotificationMovements.BulkUpload;
@@ -16,17 +22,24 @@
     {
         private readonly IEnumerable<IPrenotificationContentRule> contentRules;
         private readonly IMap<DataTable, List<PrenotificationMovement>> mapper;
-        private readonly IDraftMovementRepository repository;
+        private readonly IDraftMovementRepository draftRepository;
+        private readonly IMovementRepository movementRepository;
+        private readonly IFinancialGuaranteeRepository financialGuaranteeRepository;
+
         private const int MaxShipments = 50;
         private const PrenotificationContentRules LastRule = PrenotificationContentRules.ThreeWorkingDaysToShipment;
 
         public PerformPrenotificationContentValidationHandler(IEnumerable<IPrenotificationContentRule> contentRules,
             IMap<DataTable, List<PrenotificationMovement>> mapper,
-            IDraftMovementRepository repository)
+            IDraftMovementRepository draftRepository,
+            IMovementRepository movementRepository,
+            IFinancialGuaranteeRepository financialGuaranteeRepository)
         {
             this.contentRules = contentRules;
             this.mapper = mapper;
-            this.repository = repository;
+            this.draftRepository = draftRepository;
+            this.movementRepository = movementRepository;
+            this.financialGuaranteeRepository = financialGuaranteeRepository;
         }
 
         public async Task<PrenotificationRulesSummary> HandleAsync(PerformPrenotificationContentValidation message)
@@ -42,7 +55,7 @@
                 result.ShipmentNumbers =
                     movements.Where(m => m.ShipmentNumber.HasValue).Select(m => m.ShipmentNumber.Value);
 
-                result.DraftBulkUploadId = await repository.AddPrenotifications(message.NotificationId, movements, message.FileName);
+                result.DraftBulkUploadId = await draftRepository.AddPrenotifications(message.NotificationId, movements, message.FileName);
             }
 
             return result;
@@ -80,6 +93,8 @@
                 rules.Add(await rule.GetResult(movements, notificationId));
             }
 
+            rules.AddRange(await GetActiveLoadsRule(movements, notificationId));
+
             var lastRuleResult = rules.FirstOrDefault(r => r.Rule == LastRule);
 
             var orderedRules =
@@ -97,6 +112,84 @@
             return orderedRules;
         }
 
+        public async Task<IEnumerable<PrenotificationContentRuleResult<PrenotificationContentRules>>> GetActiveLoadsRule(List<PrenotificationMovement> movements, Guid notificationId)
+        {
+            var rules = new List<PrenotificationContentRuleResult<PrenotificationContentRules>>();
+
+            var financialGuaranteeCollection = await financialGuaranteeRepository.GetByNotificationId(notificationId);
+            var currentFinancialGuarantee =
+                financialGuaranteeCollection.FinancialGuarantees.SingleOrDefault(
+                    fg => fg.Status == FinancialGuaranteeStatus.Approved);
+            var activeLoadsPermitted = currentFinancialGuarantee == null ? 0 : currentFinancialGuarantee.ActiveLoadsPermitted.GetValueOrDefault();
+
+            var newShipmentsGroupedByDate =
+                movements.Where(m => m.ActualDateOfShipment.HasValue && m.ShipmentNumber.HasValue)
+                    .GroupBy(m => m.ActualDateOfShipment.Value)
+                    .Where(g => g.Count() > activeLoadsPermitted)
+                    .Select(
+                        m =>
+                            new
+                            {
+                                Date = m.Key,
+                                ShipmentCount = m.Select(mm => mm.ShipmentNumber).Count(),
+                                MinShipmentNumber = m.Min(mm => mm.ShipmentNumber),
+                                Shipments = string.Join(", ", m.OrderBy(mm => mm.ShipmentNumber).Select(mm => mm.ShipmentNumber))
+                            })
+                    .ToList();
+
+            if (newShipmentsGroupedByDate.Any())
+            {
+                newShipmentsGroupedByDate.ForEach(dateOfShipment =>
+                {
+                    var validationMessage =
+                        string.Format(EnumHelper.GetDisplayName(PrenotificationContentRules.ActiveLoadsDataShipments),
+                            dateOfShipment.Shipments, dateOfShipment.ShipmentCount, activeLoadsPermitted);
+                    var rule =
+                        new PrenotificationContentRuleResult<PrenotificationContentRules>(
+                            PrenotificationContentRules.ActiveLoadsDataShipments, MessageLevel.Error, validationMessage,
+                            dateOfShipment.MinShipmentNumber.Value);
+
+                    rules.Add(rule);
+                });
+
+                return rules;
+            }
+
+            var existingMovements = await movementRepository.GetFutureActiveMovements(notificationId);
+
+            var newAndExistingGroupedByDate =
+                movements.Where(m => m.ActualDateOfShipment.HasValue && m.ShipmentNumber.HasValue)
+                    .GroupBy(m => m.ActualDateOfShipment.Value)
+                    .Where(m => m.Count() + existingMovements.Count(mm => mm.Date.Date == m.Key) > activeLoadsPermitted)
+                    .Select(
+                        m =>
+                            new
+                            {
+                                Date = m.Key,
+                                ExistingShipmentCount = existingMovements.Count(mm => mm.Date.Date == m.Key),
+                                NewShipmentsCount = m.Select(mm => mm.ShipmentNumber).Count(),
+                                MinNewShipmentNumber = m.Min(mm => mm.ShipmentNumber),
+                                NewShipments =
+                                string.Join(", ", m.OrderBy(mm => mm.ShipmentNumber).Select(mm => mm.ShipmentNumber))
+                            })
+                    .ToList();
+
+            newAndExistingGroupedByDate.ForEach(dateOfShipment =>
+            {
+                var validationMessage =
+                    string.Format(EnumHelper.GetDisplayName(PrenotificationContentRules.ActiveLoadsWithExistingShipments),
+                        dateOfShipment.NewShipments, dateOfShipment.ExistingShipmentCount, dateOfShipment.NewShipmentsCount, activeLoadsPermitted);
+                var rule =
+                    new PrenotificationContentRuleResult<PrenotificationContentRules>(
+                        PrenotificationContentRules.ActiveLoadsWithExistingShipments, MessageLevel.Error, validationMessage,
+                        dateOfShipment.MinNewShipmentNumber.Value);
+
+                rules.Add(rule);
+            });
+
+            return rules;
+        }
+
         private static async Task<PrenotificationContentRuleResult<PrenotificationContentRules>> GetMaxShipments(
             IReadOnlyCollection<PrenotificationMovement> movements)
         {
@@ -106,7 +199,7 @@
 
                 var errorMessage =
                     string.Format(
-                        Prsd.Core.Helpers.EnumHelper.GetDisplayName(PrenotificationContentRules.MaximumShipments),
+                        EnumHelper.GetDisplayName(PrenotificationContentRules.MaximumShipments),
                         MaxShipments);
 
                 return new PrenotificationContentRuleResult<PrenotificationContentRules>(PrenotificationContentRules.MaximumShipments,
@@ -129,7 +222,7 @@
 
                 var errorMessage =
                     string.Format(
-                        Prsd.Core.Helpers.EnumHelper.GetDisplayName(PrenotificationContentRules.MissingShipmentNumbers),
+                        EnumHelper.GetDisplayName(PrenotificationContentRules.MissingShipmentNumbers),
                         movements.Count);
 
                 return new PrenotificationContentRuleResult<PrenotificationContentRules>(PrenotificationContentRules.MissingShipmentNumbers,
@@ -157,7 +250,7 @@
 
                 var shipmentNumbers = string.Join(", ", shipments);
                 var errorMessage =
-                    string.Format(Prsd.Core.Helpers.EnumHelper.GetDisplayName(PrenotificationContentRules.MissingData),
+                    string.Format(EnumHelper.GetDisplayName(PrenotificationContentRules.MissingData),
                         shipmentNumbers);
 
                 return new PrenotificationContentRuleResult<PrenotificationContentRules>(PrenotificationContentRules.MissingData,
