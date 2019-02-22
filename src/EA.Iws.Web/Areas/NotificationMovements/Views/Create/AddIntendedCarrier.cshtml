@@ -43,12 +43,15 @@
 				<tr>
 					<td>@Model.SelectedCarriers[i].OrderName</td>
                     <td>@Html.HiddenFor(m => m.SelectedCarriers[i].Id) @Html.HiddenFor(m => m.SelectedCarriers[i].Order) @Html.HiddenFor(m => m.SelectedCarriers[i].OrderName) @Html.Raw(carrier.Text)</td>
-                    <td>
-                        <div style="display: grid;">
-                            <button class="link-submit" type="submit" name="up" value="@Model.SelectedCarriers[i].Id"><i class="up-arrow"></i></button>
-                            <button class="link-submit" type="submit" name="down" value="@Model.SelectedCarriers[i].Id"><i class="down-arrow"></i></button>
-                        </div>
-                    </td>
+                    @if (Model.SelectedCarriers.Count > 1)
+                    {
+                        <td>
+                            <div style="display: grid;">
+                                <button class="link-submit" type="submit" name="up" value="@Model.SelectedCarriers[i].Id"><i class="up-arrow"></i></button>
+                                <button class="link-submit" type="submit" name="down" value="@Model.SelectedCarriers[i].Id"><i class="down-arrow"></i></button>
+                            </div>
+                        </td>
+                    }
 					<td><button class="link-submit" type="submit" name="remove" value="@Model.SelectedCarriers[i].Id">@Resources.Remove</button></td>
 				</tr>
 			}
