@@ -24,7 +24,7 @@
         QuantityUnit,
         [Display(Name = "Shipment number {0}: the {1} date format must be in dd/mm/yyyy format.")]
         RecoveryDateFormat,
-        [Display(Name = "Shipment number {0}: the {1} date must not be in the future and must be after the date of Receipt.")]
+        [Display(Name = "Shipment number {0}: the {1} date must not be in the future and must be equal to or after the date of Receipt.")]
         RecoveryDateValidation,
         [Display(Name = "Shipment number {0}: this shipment hasn’t been prenotified and/or shipped therefore can’t be received.")]
         PrenotifiedShipment,
