@@ -1,11 +1,13 @@
 ﻿namespace EA.Iws.RequestHandlers.Notification
 {
     using System;
+    using System.Collections.Generic;
     using System.Data.Entity.Infrastructure;
     using System.Data.SqlClient;
     using System.Linq;
     using Core.ComponentRegistration;
     using Core.Notification;
+    using Core.NotificationAssessment;
     using DataAccess;
     using Domain.NotificationApplication;
     using CodeType = Core.WasteCodes.CodeType;
@@ -165,11 +167,25 @@
                 progress.HasCustomsOffice = false;
             }
 
-            progress.HasCustomsOfficeSelections = progressResult.CustomsOffices.Any() &&
+            var exemptStatusList = new List<NotificationStatus>()
+            {
+                NotificationStatus.Transmitted,
+                NotificationStatus.Withdrawn,
+                NotificationStatus.Objected,
+                NotificationStatus.Consented,
+                NotificationStatus.ConsentWithdrawn,
+                NotificationStatus.FileClosed
+            };
+            
+            // Identify whether the notification is exempt from the customs office selections check
+            // This is necessary as historic data does not have data present in the EntryExitCustomsSelection table
+            bool exemptFromCheck = exemptStatusList.Contains(progressResult.Notification.NotificationStatus);
+
+            progress.HasCustomsOfficeSelections = exemptFromCheck || (progressResult.CustomsOffices.Any() &&
                                                   (progressResult.CustomsOffices.First().IsEntryCustomsOfficeRequired !=
                                                    null &&
                                                    progressResult.CustomsOffices.First().IsExitCustomsOfficeRequired !=
-                                                   null);
+                                                   null));
 
             return progress.HasStateOfExport
                 && progress.HasStateOfImport
@@ -246,6 +262,7 @@
             public Guid Id { get; set; }
             public NotificationType NotificationType { get; set; }
             public UKCompetentAuthority CompetentAuthority { get; set; }
+            public NotificationStatus NotificationStatus { get; set; }
             public string NotificationNumber { get; set; }
             public bool? IsPreconsentedRecoveryFacility { get; set; }
             public string ReasonForExport { get; set; }
