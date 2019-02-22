@@ -24,14 +24,7 @@
     </p>
 
     <div class="form-group">
-        @if (Model.CompetentAuthority == UKCompetentAuthority.Scotland)
-        {
-            @Html.Partial("_IwsSepaStandardDataNotice")
-        }
-        else
-        {
-            @Html.Partial("_IwsStandardDataNotice")
-        }
+        @Html.Partial("_IwsStandardDataNotice")
     </div>
     
     <div class="form-group @Html.Gds().FormGroupClass(m => m.TermsAndConditions)">
