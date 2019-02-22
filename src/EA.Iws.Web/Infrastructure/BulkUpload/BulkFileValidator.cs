@@ -41,7 +41,7 @@
                 // Only run this rule if all rules above have passed.
                 rules.All(r => r.MessageLevel == MessageLevel.Success))
             {
-                rules.Add(await GetFileParse(file));
+                rules.Add(await GetFileParse(file, type));
 
                 if (DataTable != null && DataTable.Rows.Count == 0)
                 {
@@ -104,7 +104,7 @@
             return new RuleResult<BulkFileRules>(BulkFileRules.Virus, result);
         }
 
-        private async Task<RuleResult<BulkFileRules>> GetFileParse(HttpPostedFileBase file)
+        private async Task<RuleResult<BulkFileRules>> GetFileParse(HttpPostedFileBase file, BulkFileType type)
         {
             MessageLevel result;
 
@@ -115,6 +115,8 @@
                 var isCsv = extension == ".csv";
 
                 var dataTable = await fileReader.GetFirstDataTable(file, isCsv, !isCsv);
+
+                PadMissingColumn(dataTable, type);
 
                 result = IsDataTableValid(dataTable) ? MessageLevel.Success : MessageLevel.Error;
 
@@ -172,6 +174,16 @@
                 ".xls",
                 ".csv"
             };
+        }
+
+        private static void PadMissingColumn(DataTable dataTable, BulkFileType type)
+        {
+            if (type == BulkFileType.ReceiptRecovery &&
+                dataTable != null &&
+                dataTable.Columns.Count == MaxColumns - 1)
+            {
+                dataTable.Columns.Add("RecoveredDisposed", typeof(string));
+            }
         }
     }
 }
