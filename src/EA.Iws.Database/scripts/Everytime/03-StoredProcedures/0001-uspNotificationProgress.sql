@@ -12,6 +12,7 @@ BEGIN
         N.[Id],
         N.[NotificationType],
         N.[CompetentAuthority],
+		NA.[Status] AS [NotificationStatus],
         N.[NotificationNumber],
         FC.[AllFacilitiesPreconsented] AS [IsPreconsentedRecoveryFacility],
         N.[ReasonForExport],
@@ -89,6 +90,8 @@ BEGIN
         ON N.Id = CC.NotificationId
 
         LEFT JOIN [Notification].[MeansOfTransport] MOT ON N.Id = MOT.NotificationId
+
+		LEFT JOIN [Notification].[NotificationAssessment] NA ON N.Id = NA.NotificationApplicationId
     WHERE
         N.Id = @NotificationId;
 
