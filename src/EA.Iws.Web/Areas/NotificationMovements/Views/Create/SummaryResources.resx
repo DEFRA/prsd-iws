@@ -139,7 +139,7 @@
     <value>Packaging type(s)</value>
   </data>
   <data name="PrintAnnex" xml:space="preserve">
-    <value>If applicable, print a copy of the intended carrier annex for each shipment</value>
+    <value>If applicable, print a copy of the carrier annex for each shipment</value>
   </data>
   <data name="PrintTheDocuments" xml:space="preserve">
     <value>Print the movement document(s)</value>
