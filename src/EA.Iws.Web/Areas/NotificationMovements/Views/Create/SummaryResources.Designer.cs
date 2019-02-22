@@ -124,7 +124,7 @@ namespace EA.Iws.Web.Areas.NotificationMovements.Views.Create {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to If applicable, print a copy of the intended carrier annex for each shipment.
+        ///   Looks up a localized string similar to If applicable, print a copy of the carrier annex for each shipment.
         /// </summary>
         public static string PrintAnnex {
             get {
