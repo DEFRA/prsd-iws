@@ -428,6 +428,8 @@
                         }
                     }
                 }
+
+                TempData["SelectedCarriers"] = model.SelectedCarriers;
             }
 
             var carriers = await mediator.SendAsync(new GetCarriersByNotificationId(notificationId));
