@@ -161,6 +161,9 @@ BS1 5AH&lt;/br&gt;</value>
   <data name="FootNote2" xml:space="preserve">
     <value>You have the right to lodge a complaint with the ICO at any time. Should you wish to exercise that right full details are available at:</value>
   </data>
+  <data name="Header" xml:space="preserve">
+    <value>Read our privacy notice</value>
+  </data>
   <data name="HowWeKeep" xml:space="preserve">
     <value>How long we keep your personal data</value>
   </data>

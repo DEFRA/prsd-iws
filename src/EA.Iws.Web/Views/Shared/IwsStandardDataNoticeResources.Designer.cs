@@ -183,6 +183,15 @@ namespace EA.Iws.Web.Views.Shared {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Read our privacy notice.
+        /// </summary>
+        public static string Header {
+            get {
+                return ResourceManager.GetString("Header", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to How long we keep your personal data.
         /// </summary>
         public static string HowWeKeep {

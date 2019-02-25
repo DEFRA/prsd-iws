@@ -63,14 +63,7 @@
                    @Html.Partial("_IwsTermsAndConditions")
                </div>
            </details>
-	   		<details>
-	   			<summary>
-	   				<h2 class="summary heading-xsmall" data-track="disclosure" data-category="Data notice" data-action="Read">Read our privacy notice</h2>
-	   			</summary>
-	   			<div class="panel">
-	   				@Html.Partial("_IwsStandardDataNotice")
-				</div>
-		   </details>
+           @Html.Partial("_IwsStandardDataNotice")
        </div>
 
        <div class="form-group @Html.Gds().FormGroupClass(m => m.TermsAndConditions)">
