@@ -28,11 +28,11 @@
         RecoveryDateFormat,
         [Display(Name = "Shipment number {0}: the {1} date must not be in the future and must be equal to or after the date of Receipt.")]
         RecoveryDateValidation,
-        [Display(Name = "Shipment number {0}: this shipment hasn’t been prenotified and/or shipped therefore can’t be received.")]
+        [Display(Name = "Shipment number {0}: you can't record Receipt information as the shipment is in an incorrect status or has not been shipped.")]
         PrenotifiedShipment,
-        [Display(Name = "Shipment number {0}: this shipment hasn’t been received therefore can’t be {1}.")]
+        [Display(Name = "Shipment number {0}: you can't record {1} information as the shipment is in an incorrect status or has not been shipped.")]
         RecoveredValidation,
-        [Display(Name = "Shipment number {0}: this shipment hasn’t been prenotified and/or shipped therefore can’t be received and {1}.")]
+        [Display(Name = "Shipment number {0}: you can't record Receipt and {1} information as the shipment is in an incorrect status or has not been shipped.")]
         ReceivedRecoveredValidation,
         [Display(Name = "Shipment number {0}: this shipment has already been {1}.")]
         AlreadyRecievedRecoveredDisposed
