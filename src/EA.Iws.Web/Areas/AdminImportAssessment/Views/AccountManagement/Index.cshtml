@@ -119,6 +119,7 @@
 @using (Html.BeginForm("Index", "AccountManagement", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
+    @Html.Gds().ValidationMessageFor(m => m.CommentError)
     <div class="form-group">
         <details id="comments" role="group">
 
