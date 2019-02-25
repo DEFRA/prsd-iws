@@ -18,7 +18,7 @@
                 var data = source.ItemArray[(int)PrenotificationColumnIndex.Unit].ToString();
 
                 // Small 'hack' when this is supplied as the unit.
-                data = data == "m3" ? "CubicMetres" : data;
+                data = string.Equals(data, "m3", StringComparison.InvariantCultureIgnoreCase) ? "CubicMetres" : data;
 
                 if (Enum.TryParse(data, true, out parsed) &&
                     Enum.IsDefined(typeof(ShipmentQuantityUnits), parsed))
