@@ -125,7 +125,7 @@
                 {
                     model = await this.PrepareViewModel(id);
 
-                    ModelState.AddModelError("Comment", "Enter a comment");
+                    ModelState.AddModelError("CommentError", "Enter a comment");
                     return View(model);
                 }
                 var result = await mediator.SendAsync(new UpdateExportNotificationAssementComments(model.TableData[commentId.GetValueOrDefault()].TransactionId, model.TableData[commentId.GetValueOrDefault()].Comments));
