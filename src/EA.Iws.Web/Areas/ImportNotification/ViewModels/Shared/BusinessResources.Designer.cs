@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace EA.Iws.Web.Areas.ImportNotification.Views.Shared.EditorTemplates {
+namespace EA.Iws.Web.Areas.ImportNotification.ViewModels.Shared {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace EA.Iws.Web.Areas.ImportNotification.Views.Shared.EditorTemplates {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class ContactViewModelEditorResources {
+    public class BusinessResources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal ContactViewModelEditorResources() {
+        internal BusinessResources() {
         }
         
         /// <summary>
@@ -39,8 +39,7 @@ namespace EA.Iws.Web.Areas.ImportNotification.Views.Shared.EditorTemplates {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EA.Iws.Web.Areas.ImportNotification.Views.Shared.EditorTemplates.ContactViewModel" +
-                            "EditorResources", typeof(ContactViewModelEditorResources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EA.Iws.Web.Areas.ImportNotification.ViewModels.Shared.BusinessResources", typeof(BusinessResources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -62,20 +61,20 @@ namespace EA.Iws.Web.Areas.ImportNotification.Views.Shared.EditorTemplates {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Enter only up to 3 digits in the telephone prefix field.
+        ///   Looks up a localized string similar to Organisation name.
         /// </summary>
-        public static string TelephonePrefixTitle {
+        public static string BusinessName {
             get {
-                return ResourceManager.GetString("TelephonePrefixTitle", resourceCulture);
+                return ResourceManager.GetString("BusinessName", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Their contact person.
+        ///   Looks up a localized string similar to Registration number.
         /// </summary>
-        public static string Title {
+        public static string RegistrationNumber {
             get {
-                return ResourceManager.GetString("Title", resourceCulture);
+                return ResourceManager.GetString("RegistrationNumber", resourceCulture);
             }
         }
     }

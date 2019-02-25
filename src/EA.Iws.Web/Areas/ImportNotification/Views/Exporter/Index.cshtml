@@ -1,4 +1,5 @@
 ﻿@using Resource = EA.Iws.Web.Areas.ImportNotification.Views.Exporter.IndexResources
+@using EA.Iws.Web.Areas.AddressBook.Views
 @model EA.Iws.Web.Areas.ImportNotification.ViewModels.Exporter.ExporterViewModel
 
 @{
@@ -14,15 +15,28 @@
 
     <h2 class="heading-medium">@Resource.OrganisationSubtitle</h2>
 
-    <div class="form-group @Html.Gds().FormGroupClass(m => m.BusinessName)">
-        @Html.Gds().LabelFor(m => m.BusinessName, false)
-        @Html.Gds().ValidationMessageFor(m => m.BusinessName)
-        @Html.Gds().TextBoxFor(m => m.BusinessName)
+    <div class="form-group @Html.Gds().FormGroupClass(m => m.Business.Name)">
+        @Html.Gds().LabelFor(m => m.Business.Name, false)
+        @Html.Gds().ValidationMessageFor(m => m.Business.Name)
+        @Html.Gds().TextBoxFor(m => m.Business.Name, new
+    {
+        data_addressbook_url = Url.Action("Index", "Search", new { area = "AddressBook" }),
+        data_addressbook_type = "Producer"
+    })
     </div>
 
     @Html.EditorFor(m => m.Address)
 
     @Html.EditorFor(m => m.Contact)
+
+    <div class="form-group no-js-hidden">
+        <div class="multiple-choice">
+            @Html.CheckBoxFor(m => m.IsAddedToAddressBook, new { id = "addressBook" })
+            <label for="addressBook">
+                @AddressBookResources.AddToAddressBook
+            </label>
+        </div>
+    </div>
 
     <div class="form-group">
         <button class="button" type="submit">@Constants.ContinueButtonText</button>

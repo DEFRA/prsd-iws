@@ -8,9 +8,17 @@
     {
         public Domain.ImportNotification.Contact Map(Contact source)
         {
+            var prefixedTelephone = source.Telephone;
+
+            if (!string.IsNullOrEmpty(source.Telephone)
+                && !string.IsNullOrEmpty(source.TelephonePrefix))
+            {
+                prefixedTelephone = string.Format("{0}-{1}", source.TelephonePrefix, source.Telephone);
+            }
+
             return new Domain.ImportNotification.Contact(
                 source.ContactName,
-                new PhoneNumber(source.Telephone),
+                new PhoneNumber(prefixedTelephone),
                 new EmailAddress(source.Email));
         }
     }
