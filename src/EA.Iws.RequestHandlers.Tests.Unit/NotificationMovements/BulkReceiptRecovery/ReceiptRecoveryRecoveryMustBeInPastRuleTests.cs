@@ -5,10 +5,10 @@
     using System.Threading.Tasks;
     using Core.Movement.BulkReceiptRecovery;
     using Core.Rules;
-    using Domain;
     using Domain.Movement;
     using Domain.NotificationApplication;
     using FakeItEasy;
+    using Prsd.Core;
     using RequestHandlers.NotificationMovements.BulkReceiptRecovery;
     using TestHelpers.DomainFakes;
     using Xunit;
@@ -18,14 +18,18 @@
         private readonly ReceiptRecoveryRecoveryDateInFutureRule rule;
         private readonly Guid notificationId;
         private readonly INotificationApplicationRepository notificationRepo;
+        private readonly IMovementRepository movementRepository;
 
         public ReceiptRecoveryRecoveryMustBeInPastRuleTests()
         {
             notificationRepo = A.Fake<INotificationApplicationRepository>();
-            rule = new ReceiptRecoveryRecoveryDateInFutureRule(notificationRepo);
+            movementRepository = A.Fake<IMovementRepository>();
+            rule = new ReceiptRecoveryRecoveryDateInFutureRule(notificationRepo, movementRepository);
             notificationId = Guid.NewGuid();
 
             A.CallTo(() => notificationRepo.GetById(notificationId)).Returns(A.Fake<NotificationApplication>());
+            A.CallTo(() => movementRepository.GetAllMovements(notificationId))
+                .Returns(GetRepoMovements(true, SystemTime.UtcNow.AddDays(-10)));
         }
 
         [Fact]
@@ -70,6 +74,29 @@
                     ShipmentNumber = 2,
                     ReceivedDate = receivedDate,
                     RecoveredDisposedDate = recoveredDate
+                }
+            };
+        }
+
+        private IEnumerable<Movement> GetRepoMovements(bool prenotified, DateTime shipmentDate)
+        {
+            return new List<Movement>()
+            {
+                new TestableMovement()
+                {
+                    NotificationId = notificationId,
+                    Status =
+                    prenotified ? Core.Movement.MovementStatus.Submitted : Core.Movement.MovementStatus.Captured,
+                    Date = shipmentDate,
+                    Number = 1
+                },
+
+                new TestableMovement()
+                {
+                    NotificationId = notificationId,
+                    Status = Core.Movement.MovementStatus.Submitted,
+                    Date = shipmentDate,
+                    Number = 2
                 }
             };
         }
