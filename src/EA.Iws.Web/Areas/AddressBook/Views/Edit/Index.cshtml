@@ -1,6 +1,8 @@
 ﻿@using EA.Iws.Web.Areas.AddressBook.Views.Edit
 @model EA.Iws.Web.Areas.AddressBook.ViewModels.EditAddressViewModel
-
+@{
+	ViewBag.Title = "Edit Address - " + Model.Type;
+}
 
 @using (Html.BeginForm())
 {
