@@ -1,0 +1,15 @@
+﻿@using EA.Iws.Core.Admin
+@model EA.Iws.Web.Areas.AdminImportAssessment.ViewModels.Comments.CommentsViewModel
+
+<nav class="tabbed-nav">
+    @Html.ActionLink("Notification", "Index", "Home", new { },
+        new
+        {
+            @class = "tabbed-tab" + ((Model.Type == NotificationShipmentsCommentsType.Notification) ? " active" : "")
+        })
+    @Html.ActionLink("Shipments", "Index", "Home", new { },
+        new
+        {
+            @class = "tabbed-tab" + ((Model.Type == NotificationShipmentsCommentsType.Shipments) ? " active" : "")
+        })
+</nav>

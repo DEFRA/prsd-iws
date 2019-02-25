@@ -1,0 +1,77 @@
+﻿@using Resource = EA.Iws.Web.Areas.AdminImportAssessment.Views.Comments.IndexResources
+@model EA.Iws.Web.Areas.AdminImportAssessment.ViewModels.Comments.CommentsViewModel
+@{
+    ViewBag.Title = "Review Comments";
+}
+
+@{
+    Layout = "~/Views/Shared/_Layout.GovUK.Sections.cshtml";
+}
+
+<header>
+    <h1 class="heading-large">@Resource.CommentsHeader</h1>
+    <p class="subtitle">@Resource.Subtitle</p>
+</header>
+
+<div class="grid-row">
+    <div class="column-two-thirds">
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            @Html.ActionLink(@Resource.AddButton, "Add", "Comments", new { }, new { @class = "button" })
+        }
+    </div>
+</div>
+
+<br />
+
+@Html.Partial("_Navigation")
+
+
+@if (Model.Comments.Count > 0)
+{
+    <div class="form-group table-container">
+        <table title="Comments">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Date</th>
+                    @if (Model.Type == EA.Iws.Core.Admin.NotificationShipmentsCommentsType.Shipments)
+                    {
+                        <th>Shipment no.</th>
+                    }
+                    <th>Comment</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (int i = 0; i < Model.Comments.Count; i++)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(m => m.Comments[i])</td>
+                        <td>@Html.DisplayFor(m => m.Comments[i])</td>
+                        @if (Model.Type == EA.Iws.Core.Admin.NotificationShipmentsCommentsType.Shipments)
+                        {
+                            <td>@Html.DisplayFor(m => m.Comments[i])</td>
+                        }
+                        <td>@Html.DisplayFor(m => m.Comments[i])</td>
+                        <td>
+                            <span style="white-space: nowrap">
+                                @Html.ActionLink("Edit", "Index", "Edit", new { }, null) <span>&nbsp;</span>
+                                @Html.ActionLink("Delete", "Index", "Delete", new { }, null)
+                            </span>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="form-group">
+        @Html.ActionLink(Resource.GoToOverview, "Index", "Home", new { area = "ImportNotification", id = Model.NotificationId }, null)
+    </div>
+}
