@@ -4,6 +4,7 @@
     using System.Web.Mvc;
     using ViewModels.Comments;
 
+    [Authorize(Roles = "internal,readonly")]
     public class CommentsController : Controller
     {
         [HttpGet]
