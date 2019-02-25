@@ -17,6 +17,7 @@
                 var shipments =
                     movements.Where(
                             m => m.ShipmentNumber.HasValue && 
+                            !m.MissingQuantity && //quantity is optional
                             !m.Quantity.HasValue)
                         .GroupBy(x => x.ShipmentNumber)
                         .OrderBy(x => x.Key)
