@@ -442,6 +442,7 @@
     <Compile Include="NotificationAssessment\SetEntryPointHandler.cs" />
     <Compile Include="NotificationMovements\BulkPrenotification\CreatePrenotificationHandler.cs" />
     <Compile Include="NotificationMovements\BulkPrenotification\PrenotificationDateFutureRule.cs" />
+    <Compile Include="NotificationMovements\BulkPrenotification\PrenotificationQuantityNumericRule.cs" />
     <Compile Include="NotificationMovements\BulkPrenotification\PrenotificationQuantityPrecisionForCubicMetresAndTonnesRule.cs" />
     <Compile Include="NotificationMovements\BulkPrenotification\PrenotificationQuantityPrecisionForLitresAndKilogramsRule.cs" />
     <Compile Include="NotificationMovements\BulkUpload\GetBulkUploadTemplateHandler.cs" />
