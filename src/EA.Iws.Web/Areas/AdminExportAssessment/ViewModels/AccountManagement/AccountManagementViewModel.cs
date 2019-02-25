@@ -40,6 +40,7 @@
         public bool ShowRefundDetails { get; set; }
 
         public bool CanDeleteTransaction { get; set; }
+        public string CommentError { get; set; }
 
         public bool HasPayments
         {

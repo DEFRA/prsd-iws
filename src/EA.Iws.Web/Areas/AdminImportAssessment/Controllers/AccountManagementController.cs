@@ -115,7 +115,7 @@
                 {
                     model = await this.PrepareViewModel(id);
 
-                    ModelState.AddModelError("Comment", "Enter a comment");
+                    ModelState.AddModelError("CommentError", "Enter a comment");
                     return View(model);
                 }
 

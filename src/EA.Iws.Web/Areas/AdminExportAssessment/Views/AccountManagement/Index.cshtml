@@ -119,11 +119,11 @@
 @using (Html.BeginForm("Index", "AccountManagement", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
+    @Html.Gds().ValidationMessageFor(m => m.CommentError)
     <div class="form-group">
         <details id="comments" role="group">
 
             <summary role="button"><span class="summary">@IndexResources.CommentSectionHeading</span></summary>
-
             <div class="panel-border-narrow">
                 <table>
                     <thead>
@@ -132,10 +132,8 @@
                         </tr>
                     </thead>
                     <tbody>
-
                         @for (var i = 0; i < Model.TableData.Count(); i++)
                         {
-
                             if (!string.IsNullOrWhiteSpace(Model.TableData[i].Comments))
                             {
                                 var trans = (TransactionType)Model.TableData[i].Transaction;
