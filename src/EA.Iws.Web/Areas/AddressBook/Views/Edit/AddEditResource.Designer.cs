@@ -61,6 +61,15 @@ namespace EA.Iws.Web.Areas.AddressBook.Views.Edit {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Enter address and organisation information of the {0}.
+        /// </summary>
+        public static string AddHeader {
+            get {
+                return ResourceManager.GetString("AddHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Address.
         /// </summary>
         public static string Address {
