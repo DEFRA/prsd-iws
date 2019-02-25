@@ -55,15 +55,22 @@
        </div>
 
        <div class="form-group">
-           <details>
+			<details>
                <summary>
                    <h2 class="summary heading-xsmall" data-track="disclosure" data-category="Terms and conditions" data-action="Read">@ApplicantRegistrationResources.TermsAndConditionsHeader</h2>
                </summary>
                <div class="panel">
                    @Html.Partial("_IwsTermsAndConditions")
                </div>
-           </details>
-           @Html.Partial("_IwsStandardDataNotice")
+			</details>
+			<details>
+				<summary>
+					<h2 class="summary heading-xsmall" data-track="disclosure" data-category="Data notice" data-action="Read">Read our privacy notice</h2>
+				</summary>
+				<div class="panel">
+					@Html.Partial("_IwsStandardDataNotice")
+				</div>
+			</details>
        </div>
 
        <div class="form-group @Html.Gds().FormGroupClass(m => m.TermsAndConditions)">
