@@ -145,6 +145,7 @@
     <Compile Include="Movement\RecordMovementStatusChangeTest.cs" />
     <Compile Include="NotificationMovements\BulkReceiptRecovery\ReceiptRecoveryAlreadyRecoveredRuleTests.cs" />
     <Compile Include="NotificationMovements\BulkReceiptRecovery\ReceiptRecoveryAlreadyRecievedRuleTests.cs" />
+    <Compile Include="NotificationMovements\BulkReceiptRecovery\ReceiptRecoveryQuantityNumericRuleTests.cs" />
     <Compile Include="NotificationMovements\BulkReceiptRecovery\ReceiptRecoveryQuantityPrecisionLitresKilogramsRuleTests.cs" />
     <Compile Include="NotificationMovements\BulkReceiptRecovery\ReceiptRecoveryRecoveryDateFormatRuleTests.cs" />
     <Compile Include="NotificationMovements\BulkReceiptRecovery\ReceiptRecoveryRecoveryQuantityUnitRuleTests.cs" />

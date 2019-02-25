@@ -18,6 +18,8 @@
         ReceiptDateFormat,
         [Display(Name = "Shipment number {0}: the receipt date must not be in the future and must be equal to or after the Actual Date of Shipment.")]
         ReceiptDateValidation,
+        [Display(Name = "Shipment number {0}: the shipment quantity must be numeric.")]
+        QuantityNumeric,
         [Display(Name = "Shipment number {0}: the waste quantity must have no more than {1} decimal places.")]
         QuantityPrecision,
         [Display(Name = "Shipment number {0}: the quantity unit of measurement is not permitted on this notification.")]

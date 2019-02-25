@@ -470,6 +470,7 @@
     <Compile Include="NotificationMovements\BulkPrenotification\PrenotificationThreeWorkingDaysConsentRule.cs" />
     <Compile Include="NotificationMovements\BulkPrenotification\PrenotificationContentThreeWorkingDaysRule.cs" />
     <Compile Include="NotificationMovements\BulkReceiptRecovery\ReceiptRecoveryAlreadyRecoveredRule.cs" />
+    <Compile Include="NotificationMovements\BulkReceiptRecovery\ReceiptRecoveryQuantityNumericRule.cs" />
     <Compile Include="NotificationMovements\BulkReceiptRecovery\ReceiptRecoveryQuantityPrecisionLitresKilogramsRule.cs" />
     <Compile Include="NotificationMovements\BulkReceiptRecovery\ReceiptRecoveryReceiptOnlyRule.cs" />
     <Compile Include="NotificationMovements\BulkReceiptRecovery\ReceiptRecoveryRecoveryDateInFutureRule.cs" />
