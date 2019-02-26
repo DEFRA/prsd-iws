@@ -355,34 +355,55 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> AddIntendedCarrier(Guid notificationId, Guid[] newMovementIds, CarrierViewModel model,
+        public async Task<ActionResult> AddIntendedCarrier(Guid notificationId, Guid[] newMovementIds,
+            CarrierViewModel model,
             string command, string remove, string up, string down)
         {
             if (ModelState.IsValid)
             {
-                int selectedCarriersCount = 0;
+                int selectedCarriersCount;
+                object carriersObj;
+
+                if (TempData.TryGetValue("SelectedCarriers", out carriersObj))
+                {
+                    var carriersTempData = carriersObj as List<CarrierList>;
+
+                    if (carriersTempData != null)
+                    {
+                        model.SelectedCarriers = carriersTempData;
+                    }
+                }
+
                 if (command != null && command == "addcarrier")
                 {
-                    if (model.SelectedCarrier != null && model.SelectedCarrier != Guid.Empty && !model.SelectedCarriers.Any(x => x.Id == model.SelectedCarrier))
+                    if (model.SelectedCarrier.HasValue && model.SelectedCarriers.All(x => x.Id != model.SelectedCarrier))
                     {
                         selectedCarriersCount = model.SelectedCarriers.Count;
-                        model.SelectedCarriers.Add(new CarrierList { Id = model.SelectedCarrier, Order = (selectedCarriersCount + 1), OrderName = AddOrdinal((selectedCarriersCount + 1)) });
+                        model.SelectedCarriers.Add(new CarrierList
+                        {
+                            Id = model.SelectedCarrier.Value,
+                            Order = (selectedCarriersCount + 1),
+                            OrderName = AddOrdinal((selectedCarriersCount + 1))
+                        });
                     }
                 }
                 else if (command != null && command == "continue")
                 {
                     if (model.SelectedCarriers.Any())
                     {
-                        var selectedCarriers = new Dictionary<int, Guid>();
+                        TempData.Remove("SelectedCarriers");
 
-                        foreach (var carrier in model.SelectedCarriers)
-                        {
-                            selectedCarriers.Add(carrier.Order, carrier.Id);
-                        }
-                        await mediator.SendAsync(new CreateMovementCarriers(notificationId, model.MovementIds, selectedCarriers));
+                        var selectedCarriers = model.SelectedCarriers.ToDictionary(carrier => carrier.Order,
+                            carrier => carrier.Id);
+
+                        await
+                            mediator.SendAsync(new CreateMovementCarriers(notificationId, model.MovementIds,
+                                selectedCarriers));
 
                         return RedirectToAction("Summary", model.MovementIds.ToRouteValueDictionary("newMovementIds"));
                     }
+
+                    ModelState.AddModelError("SelectedCarrier", "Select a carrier from the list");
                 }
                 else if (remove != null)
                 {
@@ -400,17 +421,7 @@
                 }
                 else if (!string.IsNullOrEmpty(up) || !string.IsNullOrEmpty(down))
                 {
-                    var carriersTempData = new List<CarrierList>();
-                    object carriersObj;
-
-                    if (TempData.TryGetValue("SelectedCarriers", out carriersObj))
-                    {
-                        carriersTempData = carriersObj as List<CarrierList>;
-                    }
-
-                    var orderedCarriers = ReOrderCarriers(up, down, carriersTempData);
-
-                    model.SelectedCarriers = orderedCarriers;
+                    model.SelectedCarriers = ReOrderCarriers(up, down, model.SelectedCarriers);
                 }
 
                 // Ensure the order label is correct.
@@ -424,7 +435,9 @@
                     {
                         foreach (var carrier in model.SelectedCarriers)
                         {
-                            carrier.OrderName = carrier.Order == selectedCarriersCount ? "Last" : AddOrdinal(carrier.Order);
+                            carrier.OrderName = carrier.Order == selectedCarriersCount
+                                ? "Last"
+                                : AddOrdinal(carrier.Order);
                         }
                     }
                 }
