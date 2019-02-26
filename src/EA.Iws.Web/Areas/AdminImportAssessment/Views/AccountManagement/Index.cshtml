@@ -136,17 +136,27 @@
 
                         @for (var i = 0; i < Model.Transactions.Count(); i++)
                         {
-
-                            if (!string.IsNullOrWhiteSpace(Model.Transactions[i].Comments))
-                            {
                                 var trans = (TransactionType)Model.Transactions[i].Transaction;
                                 var commentId = "id=comment-" + i;
                                 var editId = "id=edit-" + i;
                                 var comment = Model.Transactions[i].Comments;
+
+                                var nonEdit = "class=";
+                                var edit = "class=";
                                 <tr>
                                     <td class="nav-bloc">
+                                        @if (i == Model.ErrorCommentId && Model.CommentError != null)
+                                        {
+                                            edit = edit + @"";
+                                            nonEdit = nonEdit + @"hidden";
+                                        }
+                                        else
+                                        {
+                                            edit = edit + @"hidden";
+                                            nonEdit = nonEdit + @"";
+                                        }
                                         <span>@trans&nbsp;&nbsp;&nbsp;@Model.Transactions[i].Date.ToString("dd/MM/yyyy")</span>
-                                        <div @commentId class="">
+                                        <div @commentId @nonEdit>
                                             <p>
                                                 @Model.Transactions[i].Comments
                                             </p>
@@ -154,7 +164,7 @@
                                                 <a href="#comment" + @i onclick='editComment(@i, @Model.Transactions.Count())'>Edit</a>
                                             </p>
                                         </div>
-                                        <div @editId class="hidden">
+                                        <div @editId @edit>
                                             <div>
                                                 @Html.TextAreaFor(m => m.Transactions[i].Comments, new { @MaxLength = 500, @display = "block", @style = "width: 50%; height: 100px", @class = "form-control" })
                                                 @Html.HiddenFor(m => m.Transactions[i].TransactionId)
@@ -169,8 +179,6 @@
                                         </div>
                                     </td>
                                 </tr>
-                            }
-
                         }
                     </tbody>
                 </table>
