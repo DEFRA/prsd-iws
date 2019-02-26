@@ -39,7 +39,7 @@
                 var receivedDate = GetReceivedDate(movement, actualMovements);
 
                 if (movement.RecoveredDisposedDate > SystemTime.UtcNow ||
-                    movement.RecoveredDisposedDate < receivedDate)
+                    (receivedDate.HasValue && movement.RecoveredDisposedDate < receivedDate))
                 {
                     shipments.Add(movement.ShipmentNumber.GetValueOrDefault());
                 }
@@ -73,7 +73,8 @@
 
             var actualMovement = acualMovements.FirstOrDefault(p => p.Number == movement.ShipmentNumber);
 
-            if (actualMovement != null)
+            if (actualMovement != null && 
+                actualMovement.Receipt != null)
             {
                 receivedDate = actualMovement.Receipt.Date;
             }
