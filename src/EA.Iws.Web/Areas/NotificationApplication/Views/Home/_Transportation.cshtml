@@ -6,10 +6,10 @@
 }
 
 @{
-    var carriersClass = Model.IsCarrierCompleted ? string.Empty : "over-alert";
-    var meansClass = Model.IsMeansOfTransportCompleted ? string.Empty : "over-alert";
-    var packagingClass = Model.IsPackagingTypesCompleted ? string.Empty : "over-alert";
-    var handlingClass = Model.IsSpecialHandlingCompleted ? string.Empty : "over-alert";
+    var carriersClass = Model.IsCarrierCompleted ? "over-no-alert" : "over-alert";
+    var meansClass = Model.IsMeansOfTransportCompleted ? "over-no-alert" : "over-alert";
+    var packagingClass = Model.IsPackagingTypesCompleted ? "over-no-alert" : "over-alert";
+    var handlingClass = Model.IsSpecialHandlingCompleted ? "over-no-alert" : "over-alert";
 }
 
 <table class="overview-table">
