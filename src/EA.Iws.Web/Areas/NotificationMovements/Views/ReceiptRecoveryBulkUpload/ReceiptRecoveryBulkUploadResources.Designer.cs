@@ -242,7 +242,7 @@ namespace EA.Iws.Web.Areas.NotificationMovements.Views.ReceiptRecoveryBulkUpload
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Your prenotifications of shipments {0} have now been recorded in the IWS service..
+        ///   Looks up a localized string similar to Your receipt and/or {0} of shipments {1} have now been recorded in the IWS service..
         /// </summary>
         public static string SuccessTextMultipleShipments {
             get {
@@ -251,7 +251,7 @@ namespace EA.Iws.Web.Areas.NotificationMovements.Views.ReceiptRecoveryBulkUpload
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Your prenotification of shipment {0} has now been recorded in the IWS service..
+        ///   Looks up a localized string similar to Your receipt and/or {0} of shipment {1} has now been recorded in the IWS service..
         /// </summary>
         public static string SuccessTextSingleShipment {
             get {

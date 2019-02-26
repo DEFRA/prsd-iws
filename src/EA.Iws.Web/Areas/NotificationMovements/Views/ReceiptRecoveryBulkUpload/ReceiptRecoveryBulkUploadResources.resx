@@ -187,10 +187,10 @@
     <value>You have uploaded:</value>
   </data>
   <data name="SuccessTextMultipleShipments" xml:space="preserve">
-    <value>Your prenotifications of shipments {0} have now been recorded in the IWS service.</value>
+    <value>Your receipt and/or {0} of shipments {1} have now been recorded in the IWS service.</value>
   </data>
   <data name="SuccessTextSingleShipment" xml:space="preserve">
-    <value>Your prenotification of shipment {0} has now been recorded in the IWS service.</value>
+    <value>Your receipt and/or {0} of shipment {1} has now been recorded in the IWS service.</value>
   </data>
   <data name="SuccessTitle" xml:space="preserve">
     <value>Success</value>

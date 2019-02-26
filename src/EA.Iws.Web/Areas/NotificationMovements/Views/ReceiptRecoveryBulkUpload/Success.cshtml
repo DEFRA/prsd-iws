@@ -42,11 +42,11 @@
         <div>
             @if (Model.Shipments.Count() > 1)
             {
-                <p>@string.Format(Resources.SuccessTextMultipleShipments, Model.GetShipments)</p>
+                <p>@string.Format(Resources.SuccessTextMultipleShipments, Model.NotificationType.ToString().ToLower(), Model.GetShipments)</p>
             }
             else
             {
-                <p>@string.Format(Resources.SuccessTextSingleShipment, Model.GetShipments)</p>
+                <p>@string.Format(Resources.SuccessTextSingleShipment, Model.NotificationType.ToString().ToLower(),  Model.GetShipments)</p>
             }
         </div>
     </div>
