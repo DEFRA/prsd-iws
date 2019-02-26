@@ -138,14 +138,26 @@
                             var commentId = "id=comment-" + i;
                             var editId = "id=edit-" + i;
                             var comment = Model.TableData[i].Comments;
+
+                            var x = "class=";
+                            var y = "class=";
+
                             <tr>
                                 <td class="nav-bloc">
-                                    <span>@trans&nbsp;&nbsp;&nbsp;@Model.TableData[i].Date.ToString("dd/MM/yyyy")</span>
                                     @if (i == Model.ErrorCommentId && Model.CommentError != null)
                                     {
+                                        x = x + @"";
+                                        y = y + @"hidden";
+
                                         @Html.Gds().ValidationMessageFor(m => m.CommentError)
                                     }
-                                    <div @commentId class="">
+                                    else
+                                    {
+                                        x = x + @"hidden";
+                                        y = y + @"";
+                                    }
+                                    <span>@trans&nbsp;&nbsp;&nbsp;@Model.TableData[i].Date.ToString("dd/MM/yyyy")</span>
+                                    <div @commentId @y>
                                         <p>
                                             @Model.TableData[i].Comments
                                         </p>
@@ -153,7 +165,7 @@
                                             <a href="#comment" + @i onclick='editComment(@i, @Model.TableData.Count())'>Edit</a>
                                         </p>
                                     </div>
-                                    <div @editId class="hidden">
+                                    <div @editId @x>
                                         <div>
                                             @Html.TextAreaFor(m => m.TableData[i].Comments, new { @MaxLength = 500, @display = "block", @style = "width: 50%; height: 100px", @class = "form-control" })
                                             @Html.HiddenFor(m => m.TableData[i].TransactionId)
