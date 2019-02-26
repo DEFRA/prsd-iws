@@ -44,6 +44,8 @@
         public bool CanDeleteTransaction { get; set; }
         public string CommentError { get; set; }
 
+        public int ErrorCommentId { get; set; }
+
         public bool HasPayments
         {
             get
