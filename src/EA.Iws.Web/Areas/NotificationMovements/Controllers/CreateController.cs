@@ -238,6 +238,8 @@
         [HttpGet]
         public ActionResult WhoAreYourCarriers(Guid notificationId, Guid[] newMovementIds)
         {
+            TempData.Remove("SelectedCarriers");
+
             var model = new WhoAreYourCarrierViewModel();
             model.MovementIds = newMovementIds;
             return View(model);
