@@ -23,7 +23,10 @@
             var actualMovements = (await movementRepo.GetAllMovements(notificationId)).ToList();
             var shipments = new List<int>();
 
-            var validMovements = movements.Where(p => !p.MissingReceivedDate && p.ReceivedDate.HasValue);
+            var validMovements =
+                movements.Where(p => !p.MissingReceivedDate && p.ReceivedDate.HasValue)
+                    .OrderBy(p => p.ShipmentNumber)
+                    .ToList();
 
             foreach (var movement in validMovements)
             {

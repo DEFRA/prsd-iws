@@ -27,17 +27,19 @@
         {
             var notification = await notificationRepo.GetById(notificationId);
             var actualMovements = (await movementRepo.GetAllMovements(notificationId)).ToList();
-
             var shipments = new List<int>();
 
-            foreach (
-                var movement in
-                movements.Where(p => !p.MissingRecoveredDisposedDate && p.RecoveredDisposedDate.HasValue))
+            var validMovements =
+                movements.Where(p => !p.MissingRecoveredDisposedDate && p.RecoveredDisposedDate.HasValue)
+                    .OrderBy(p => p.ShipmentNumber)
+                    .ToList();
+
+            foreach (var movement in validMovements)
             {
                 var receivedDate = GetReceivedDate(movement, actualMovements);
 
                 if (movement.RecoveredDisposedDate > SystemTime.UtcNow ||
-                    movement.RecoveredDisposedDate < receivedDate)
+                    (receivedDate.HasValue && movement.RecoveredDisposedDate < receivedDate))
                 {
                     shipments.Add(movement.ShipmentNumber.GetValueOrDefault());
                 }
@@ -71,7 +73,8 @@
 
             var actualMovement = acualMovements.FirstOrDefault(p => p.Number == movement.ShipmentNumber);
 
-            if (actualMovement != null)
+            if (actualMovement != null && 
+                actualMovement.Receipt != null)
             {
                 receivedDate = actualMovement.Receipt.Date;
             }
