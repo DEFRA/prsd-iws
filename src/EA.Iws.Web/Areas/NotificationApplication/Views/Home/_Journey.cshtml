@@ -70,7 +70,7 @@
             </td>
             @if (ViewBag.CanEditNotification)
             {
-                <td class="change">@Html.ActionLink("Change", "Index", "CustomsOffice", new { id }, null)</td>
+                <td class="change">@Html.ActionLink("Change", "Index", "CustomsOffice", new { id, backToOverview = true }, null)</td>
             }
         </tr>
     </tbody>
