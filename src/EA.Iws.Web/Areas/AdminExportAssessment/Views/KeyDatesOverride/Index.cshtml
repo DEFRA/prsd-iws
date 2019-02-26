@@ -57,7 +57,7 @@
             </div>
         }
 
-        @if (Model.DecisionRequiredByDate.IsCompleted)
+        @if (Model.DecisionRequiredByDate.HasAnyValues)
         {
             <div class="form-group @Html.Gds().FormGroupClass(m => m.DecisionRequiredByDate) @Html.Gds().FormGroupClass(m => m.DecisionRequiredByDate.Day) @Html.Gds().FormGroupClass(m => m.DecisionRequiredByDate.Month) @Html.Gds().FormGroupClass(m => m.DecisionRequiredByDate.Year)">
                 @Html.Gds().LabelFor(m => m.DecisionRequiredByDate, showOptionalLabel: false)
