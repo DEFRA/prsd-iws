@@ -192,4 +192,10 @@
   <data name="DownloadShipmentDocumentsLinkText" xml:space="preserve">
     <value>Download shipment documents</value>
   </data>
+  <data name="CommentsHeading" xml:space="preserve">
+    <value>Comments</value>
+  </data>
+  <data name="CommentsLinkText" xml:space="preserve">
+    <value>Review Comments</value>
+  </data>
 </root>

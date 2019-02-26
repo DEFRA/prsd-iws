@@ -106,6 +106,24 @@ namespace EA.Iws.Web.Areas.Admin.Views.Menu {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Comments.
+        /// </summary>
+        public static string CommentsHeading {
+            get {
+                return ResourceManager.GetString("CommentsHeading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Review Comments.
+        /// </summary>
+        public static string CommentsLinkText {
+            get {
+                return ResourceManager.GetString("CommentsLinkText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Assessment decision.
         /// </summary>
         public static string DecisionLinkText {
