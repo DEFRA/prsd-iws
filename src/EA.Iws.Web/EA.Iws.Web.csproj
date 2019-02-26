@@ -1160,6 +1160,7 @@
     <Content Include="Areas\NotificationApplication\Views\ShareNotification\ShareNotification.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\ShareNotification\Confirm.cshtml" />
     <Content Include="Views\ChangeNotificationOwner\ReviewAccess.cshtml" />
+    <Content Include="Views\PrivacyPolicy\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -2380,6 +2381,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ReceiptRecoveryBulkUploadResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Controllers\PrivacyPolicyController.cs" />
     <Compile Include="Infrastructure\BulkReceiptRecovery\ReceiptRecoveryValidator.cs" />
     <Compile Include="Infrastructure\BulkReceiptRecovery\IReceiptRecoveryValidator.cs" />
     <Compile Include="Infrastructure\BulkPrenotification\PrenotificationValidator.cs" />

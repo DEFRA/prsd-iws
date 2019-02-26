@@ -24,7 +24,14 @@
     </p>
 
     <div class="form-group">
-        @Html.Partial("_IwsStandardDataNotice")
+        <details>
+            <summary>
+                <h2 class="summary heading-xsmall" data-track="disclosure" data-category="Data notice" data-action="Read">Read our privacy notice</h2>
+            </summary>
+            <div class="panel">
+                @Html.Partial("_IwsStandardDataNotice")
+            </div>
+        </details>
     </div>
     
     <div class="form-group @Html.Gds().FormGroupClass(m => m.TermsAndConditions)">
@@ -39,6 +46,6 @@
         </fieldset>
     </div>
     <div class="form-group">
-        <input type="submit" class="button" value="@DisclaimerResources.Confirm" data-track = "element" data-category = "Export notification" data-action = "Submit"/>
+        <input type="submit" class="button" value="@DisclaimerResources.Confirm" data-track="element" data-category="Export notification" data-action="Submit" />
     </div>
 }
