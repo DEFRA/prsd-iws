@@ -215,7 +215,7 @@ namespace EA.Iws.Web.Areas.NotificationMovements.Views.ReceiptRecoveryBulkUpload
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to If you leave the journey before adding your accompanying shipment movement documents, your bulk upload of the receipt and/or recovery data will not be saved..
+        ///   Looks up a localized string similar to If you leave the journey before adding your accompanying shipment movement documents, your bulk upload of the receipt and/or {0} data will not be saved..
         /// </summary>
         public static string StartText3 {
             get {
