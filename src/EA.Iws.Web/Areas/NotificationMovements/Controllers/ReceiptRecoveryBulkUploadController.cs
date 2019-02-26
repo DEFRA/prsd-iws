@@ -61,6 +61,10 @@
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Upload(Guid notificationId, ReceiptRecoveryBulkUploadViewModel model)
         {
+            var notificationType =
+                (await mediator.SendAsync(new GetNotificationBasicInfo(notificationId))).NotificationType;
+            model.NotificationType = notificationType;
+
             if (!ModelState.IsValid)
             {
                 ViewBag.NotificationId = notificationId;
