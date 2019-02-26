@@ -6,9 +6,9 @@
 }
 
 @{
-    var chemicalClass = Model.IsChemicalCompositionCompleted ? string.Empty : "over-alert";
-    var processClass = Model.IsProcessOfGenerationCompleted ? string.Empty : "over-alert";
-    var physicalClass = Model.ArePhysicalCharacteristicsCompleted ? string.Empty : "over-alert";
+    var chemicalClass = Model.IsChemicalCompositionCompleted ? "over-no-alert" : "over-alert";
+    var processClass = Model.IsProcessOfGenerationCompleted ? "over-no-alert" : "over-alert";
+    var physicalClass = Model.ArePhysicalCharacteristicsCompleted ? "over-no-alert" : "over-alert";
 }
 
 <table class="overview-table">

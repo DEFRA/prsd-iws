@@ -7,9 +7,9 @@
 }
 
 @{
-    var exportClass = Model.IsStateOfExportCompleted ? string.Empty : "over-alert";
-    var importClass = Model.IsStateOfImportCompleted ? string.Empty : "over-alert";
-    var customsClass = Model.IsCustomsOfficeCompleted ? string.Empty : "over-alert";
+    var exportClass = Model.IsStateOfExportCompleted ? "over-no-alert" : "over-alert";
+    var importClass = Model.IsStateOfImportCompleted ? "over-no-alert" : "over-alert";
+    var customsClass = Model.IsCustomsOfficeCompleted ? "over-no-alert" : "over -alert";
 }
 
 <table class="overview-table">
