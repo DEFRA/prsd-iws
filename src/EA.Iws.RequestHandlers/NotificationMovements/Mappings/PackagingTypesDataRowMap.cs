@@ -28,7 +28,6 @@
             {
                 var data = source.ItemArray[(int)PrenotificationColumnIndex.PackagingType].ToString();
                 var packagingTypes = data.Split(separator, StringSplitOptions.RemoveEmptyEntries);
-                //GetEnumDisplayNames();
 
                 foreach (var packaging in packagingTypes)
                 {
