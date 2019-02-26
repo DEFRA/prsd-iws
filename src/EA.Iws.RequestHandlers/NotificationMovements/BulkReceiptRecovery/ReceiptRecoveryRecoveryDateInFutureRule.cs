@@ -27,12 +27,14 @@
         {
             var notification = await notificationRepo.GetById(notificationId);
             var actualMovements = (await movementRepo.GetAllMovements(notificationId)).ToList();
-
             var shipments = new List<int>();
 
-            foreach (
-                var movement in
-                movements.Where(p => !p.MissingRecoveredDisposedDate && p.RecoveredDisposedDate.HasValue))
+            var validMovements =
+                movements.Where(p => !p.MissingRecoveredDisposedDate && p.RecoveredDisposedDate.HasValue)
+                    .OrderBy(p => p.ShipmentNumber)
+                    .ToList();
+
+            foreach (var movement in validMovements)
             {
                 var receivedDate = GetReceivedDate(movement, actualMovements);
 
