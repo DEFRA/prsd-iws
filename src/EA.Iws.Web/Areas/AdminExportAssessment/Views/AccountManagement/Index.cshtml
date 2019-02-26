@@ -134,40 +134,40 @@
                     <tbody>
                         @for (var i = 0; i < Model.TableData.Count(); i++)
                         {
-                            if (!string.IsNullOrWhiteSpace(Model.TableData[i].Comments))
-                            {
-                                var trans = (TransactionType)Model.TableData[i].Transaction;
-                                var commentId = "id=comment-" + i;
-                                var editId = "id=edit-" + i;
-                                var comment = Model.TableData[i].Comments;
-                                <tr>
-                                    <td class="nav-bloc">
-                                        <span>@trans&nbsp;&nbsp;&nbsp;@Model.TableData[i].Date.ToString("dd/MM/yyyy")</span>
-                                        <div @commentId class="">
-                                            <p>
-                                                @Model.TableData[i].Comments
-                                            </p>
-                                            <p>
-                                                <a href="#comment" + @i onclick='editComment(@i, @Model.TableData.Count())'>Edit</a>
-                                            </p>
+                            var trans = (TransactionType)Model.TableData[i].Transaction;
+                            var commentId = "id=comment-" + i;
+                            var editId = "id=edit-" + i;
+                            var comment = Model.TableData[i].Comments;
+                            <tr>
+                                <td class="nav-bloc">
+                                    <span>@trans&nbsp;&nbsp;&nbsp;@Model.TableData[i].Date.ToString("dd/MM/yyyy")</span>
+                                    @if (i == Model.ErrorCommentId && Model.CommentError != null)
+                                    {
+                                        @Html.Gds().ValidationMessageFor(m => m.CommentError)
+                                    }
+                                    <div @commentId class="">
+                                        <p>
+                                            @Model.TableData[i].Comments
+                                        </p>
+                                        <p>
+                                            <a href="#comment" + @i onclick='editComment(@i, @Model.TableData.Count())'>Edit</a>
+                                        </p>
+                                    </div>
+                                    <div @editId class="hidden">
+                                        <div>
+                                            @Html.TextAreaFor(m => m.TableData[i].Comments, new { @MaxLength = 500, @display = "block", @style = "width: 50%; height: 100px", @class = "form-control" })
+                                            @Html.HiddenFor(m => m.TableData[i].TransactionId)
                                         </div>
-                                        <div @editId class="hidden">
-                                            <div>
-                                                @Html.TextAreaFor(m => m.TableData[i].Comments, new { @MaxLength = 500, @display = "block", @style = "width: 50%; height: 100px", @class = "form-control"})
-                                                @Html.HiddenFor(m => m.TableData[i].TransactionId)
-                                            </div>
-                                            <div>
-                                                <button class="link-submit" type="submit" name="commentId" value="@i">Save</button>
-                                                &nbsp;&nbsp;&nbsp;
-                                                <button class="link-submit" type="submit" >Cancel</button>
-                                                @*this code is for canceling the edit client side, but the view model data overrides the value. Look at later
+                                        <div>
+                                            <button class="link-submit" type="submit" name="commentId" value="@i">Save</button>
+                                            &nbsp;&nbsp;&nbsp;
+                                            <button class="link-submit" type="submit">Cancel</button>
+                                            @*this code is for canceling the edit client side, but the view model data overrides the value. Look at later
                                                 <a href="#cancel-" + @i onclick='cancelComment(@i, @Model.TableData.Count())'>Cancel</a>*@
-                                            </div>
                                         </div>
-                                    </td>
-                                </tr>
-                            }
-
+                                    </div>
+                                </td>
+                            </tr>
                         }
                     </tbody>
                 </table>

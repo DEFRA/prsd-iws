@@ -38,6 +38,25 @@
             return View(model);
         }
 
+        [HttpGet]
+        public async Task<ActionResult> IndexWithError(Guid id, int commentId)
+        {
+            var data = await mediator.SendAsync(new GetAccountManagementData(id));
+            var model = new AccountManagementViewModel(data);
+            var canDeleteTransaction = await authorizationService.AuthorizeActivity(typeof(DeleteTransactionController));
+
+            model.PaymentViewModel = new PaymentDetailsViewModel { NotificationId = id };
+            model.RefundViewModel = await GetNewRefundDetailsViewModel(id);
+            model.CanDeleteTransaction = canDeleteTransaction;
+
+            model.TableData[commentId].Comments = string.Empty;
+            model.ErrorCommentId = commentId;
+            model.CommentError = "Enter a comment";
+            ModelState.AddModelError("CommentError", "Enter a comment");
+
+            return View("index", model);
+        }
+
         private async Task<RefundDetailsViewModel> GetNewRefundDetailsViewModel(Guid id)
         {
             var limit = await mediator.SendAsync(new GetRefundLimit(id));
@@ -123,28 +142,12 @@
             {
                 if (string.IsNullOrEmpty(model.TableData[commentId.GetValueOrDefault()].Comments))
                 {
-                    model = await this.PrepareViewModel(id);
-
-                    ModelState.AddModelError("CommentError", "Enter a comment");
-                    return View(model);
+                    return RedirectToAction("IndexWithError", "AccountManagement", new { id = id, commentId = commentId });
                 }
                 var result = await mediator.SendAsync(new UpdateExportNotificationAssementComments(model.TableData[commentId.GetValueOrDefault()].TransactionId, model.TableData[commentId.GetValueOrDefault()].Comments));
             }
 
             return RedirectToAction("index", "AccountManagement", new { id = id });
-        }
-
-        private async Task<AccountManagementViewModel> PrepareViewModel(Guid id)
-        {
-            var data = await mediator.SendAsync(new GetAccountManagementData(id));
-            var model = new AccountManagementViewModel(data);
-            var canDeleteTransaction = await authorizationService.AuthorizeActivity(typeof(DeleteTransactionController));
-
-            model.PaymentViewModel = new PaymentDetailsViewModel { NotificationId = id };
-            model.RefundViewModel = await GetNewRefundDetailsViewModel(id);
-            model.CanDeleteTransaction = canDeleteTransaction;
-
-            return model;
         }
     }
 }
