@@ -55,6 +55,7 @@
     <Compile Include="Admin\ExternalUserData.cs" />
     <Compile Include="Admin\ExternalUserStatus.cs" />
     <Compile Include="Admin\NotificationInfo.cs" />
+    <Compile Include="Admin\NotificationShipmentsCommentsType.cs" />
     <Compile Include="Admin\Reports\FinancialGuaranteesData.cs" />
     <Compile Include="Admin\Reports\ExportMovementsData.cs" />
     <Compile Include="Admin\Reports\ImportStatsData.cs" />
