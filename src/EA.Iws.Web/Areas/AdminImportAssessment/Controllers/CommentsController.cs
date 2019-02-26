@@ -2,9 +2,11 @@
 {
     using System;
     using System.Web.Mvc;
+    using Core.Authorization.Permissions;
+    using Infrastructure.Authorization;
     using ViewModels.Comments;
 
-    [Authorize(Roles = "internal")]
+    [AuthorizeActivity(ImportNotificationPermissions.CanEditComments)]
     public class CommentsController : Controller
     {
         [HttpGet]

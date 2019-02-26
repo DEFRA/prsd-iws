@@ -33,5 +33,7 @@
         public const string CanAddRemoveTransitState = "Can Add Remove Transit State";
 
         public const string CanEditContactDetails = "Can Edit Contact Details";
+
+        public const string CanEditInternalComments = "Can edit internal comments";
     }
 }
