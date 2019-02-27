@@ -113,7 +113,7 @@
                         yield return new ValidationResult("The year must be greater than 2010", new[] { "Year" });
                     }
 
-                    if (Day.Value > DateTime.DaysInMonth(Year.Value, Month.Value))
+                    if (CheckRange(1, 12, Month.Value) && Day.Value > DateTime.DaysInMonth(Year.Value, Month.Value))
                     {
                         yield return new ValidationResult("The Day does not exist in the given month", new[] { "Day" });
                     }
