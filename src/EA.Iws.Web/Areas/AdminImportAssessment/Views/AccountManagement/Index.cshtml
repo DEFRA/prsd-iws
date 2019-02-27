@@ -120,8 +120,11 @@
 {
     @Html.AntiForgeryToken()
     @Html.Gds().ValidationMessageFor(m => m.CommentError)
+
+    var openComments = Model.CommentError != null ? "open = true" : string.Empty;
+
     <div class="form-group">
-        <details id="comments" role="group">
+        <details id="comments" role="group" @openComments>
 
             <summary role="button"><span class="summary">@Resource.CommentSectionHeading</span></summary>
 
