@@ -123,8 +123,8 @@
   <data name="Contact" xml:space="preserve">
     <value>Contact person</value>
   </data>
-  <data name="Header" xml:space="preserve">
-    <value>Enter address and organisation information</value>
+  <data name="EditHeader" xml:space="preserve">
+    <value>Edit address and organisation information</value>
   </data>
   <data name="OrganisationName" xml:space="preserve">
     <value>Organisation name</value>
@@ -155,5 +155,8 @@
   </data>
   <data name="OthersHint" xml:space="preserve">
     <value>If none of these options apply, please select "Other" and add details</value>
+  </data>
+  <data name="AddHeader" xml:space="preserve">
+    <value>Enter address and organisation information of the {0}</value>
   </data>
 </root>
