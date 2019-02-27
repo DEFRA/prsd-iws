@@ -10,10 +10,10 @@
     public class AddressViewModel
     {
         [Display(Name = "AddressLine1", ResourceType = typeof(AddressViewModelResources))]
-        public string AddressLine1 { get; set; }
+        public string StreetOrSuburb { get; set; }
 
         [Display(Name = "AddressLine2", ResourceType = typeof(AddressViewModelResources))]
-        public string AddressLine2 { get; set; }
+        public string Address2 { get; set; }
 
         [Display(Name = "TownOrCity", ResourceType = typeof(AddressViewModelResources))]
         public string TownOrCity { get; set; }
@@ -42,8 +42,8 @@
         {
             if (address != null)
             {
-                AddressLine1 = address.AddressLine1;
-                AddressLine2 = address.AddressLine2;
+                StreetOrSuburb = address.AddressLine1;
+                Address2 = address.AddressLine2;
                 TownOrCity = address.TownOrCity;
                 PostalCode = address.PostalCode;
                 CountryId = address.CountryId;
@@ -54,8 +54,8 @@
         {
             return new Address
             {
-                AddressLine1 = AddressLine1,
-                AddressLine2 = AddressLine2,
+                AddressLine1 = StreetOrSuburb,
+                AddressLine2 = Address2,
                 TownOrCity = TownOrCity,
                 PostalCode = PostalCode,
                 CountryId = CountryId
