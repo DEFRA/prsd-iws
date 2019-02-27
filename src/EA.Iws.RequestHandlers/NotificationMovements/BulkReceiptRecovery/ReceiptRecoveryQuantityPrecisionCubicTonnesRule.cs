@@ -28,19 +28,22 @@
                                 m.Unit.Value == ShipmentQuantityUnits.Tonnes) &&
                                 decimal.Round(m.Quantity.Value, ShipmentQuantityUnitsMetadata.Precision[m.Unit.Value]) !=
                                 m.Quantity.Value)
-                        .Select(m => m.ShipmentNumber.Value)
+                        .GroupBy(x => x.ShipmentNumber)
+                        .OrderBy(x => x.Key)
+                        .Select(x => x.Key)
                         .ToList();
 
                 var result = shipments.Any() ? MessageLevel.Error : MessageLevel.Success;
+                var minShipment = shipments.FirstOrDefault() ?? 0;
 
-                var shipmentNumbers = string.Join(", ", shipments.Distinct());
+                var shipmentNumbers = string.Join(", ", shipments);
                 var errorMessage =
                     string.Format(
                         Prsd.Core.Helpers.EnumHelper.GetDisplayName(ReceiptRecoveryContentRules.QuantityPrecision),
                         shipmentNumbers, precision);
 
                 return new ReceiptRecoveryContentRuleResult<ReceiptRecoveryContentRules>(ReceiptRecoveryContentRules.QuantityPrecision,
-                    result, errorMessage, shipments.DefaultIfEmpty(0).Min());
+                    result, errorMessage, minShipment);
             });
         }
     }

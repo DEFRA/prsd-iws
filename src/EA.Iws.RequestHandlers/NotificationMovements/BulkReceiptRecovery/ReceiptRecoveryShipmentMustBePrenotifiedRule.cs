@@ -30,9 +30,11 @@
 
             var validMovements =
                 movements.Where(
-                    p =>
-                        !p.MissingReceivedDate && !p.MissingRecoveredDisposedDate &&
-                        p.ReceivedDate.HasValue && p.RecoveredDisposedDate.HasValue);
+                        p =>
+                            !p.MissingReceivedDate && !p.MissingRecoveredDisposedDate &&
+                            p.ReceivedDate.HasValue && p.RecoveredDisposedDate.HasValue)
+                    .OrderBy(p => p.ShipmentNumber)
+                    .ToList();
 
             foreach (var movement in validMovements)
             {
@@ -72,8 +74,10 @@
             var result = shipments.Any() ? MessageLevel.Error : MessageLevel.Success;
             var shipmentNumbers = string.Join(", ", shipments.Distinct());
 
-            var type = notification.NotificationType == Core.Shared.NotificationType.Disposal ? "disposed" : "recovered";
-            var errorMessage = string.Format(Prsd.Core.Helpers.EnumHelper.GetDisplayName(ReceiptRecoveryContentRules.ReceivedRecoveredValidation), shipmentNumbers, type);
+            var errorMessage =
+                string.Format(
+                    Prsd.Core.Helpers.EnumHelper.GetDisplayName(ReceiptRecoveryContentRules.ReceivedRecoveredValidation),
+                    shipmentNumbers, Prsd.Core.Helpers.EnumHelper.GetDisplayName(notification.NotificationType));
 
             return new ReceiptRecoveryContentRuleResult<ReceiptRecoveryContentRules>(ReceiptRecoveryContentRules.ReceivedRecoveredValidation, result, errorMessage, shipments.DefaultIfEmpty(0).Min());
         }

@@ -26,9 +26,11 @@
 
             var validMovements =
                 movements.Where(
-                    p =>
-                        !p.MissingReceivedDate && p.MissingRecoveredDisposedDate &&
-                        p.ReceivedDate.HasValue);
+                        p =>
+                            !p.MissingReceivedDate && p.MissingRecoveredDisposedDate &&
+                            p.ReceivedDate.HasValue)
+                    .OrderBy(p => p.ShipmentNumber)
+                    .ToList();
 
             foreach (var movement in validMovements)
             {

@@ -1,6 +1,8 @@
 ﻿namespace EA.Iws.Core.Shared
 {
     using System;
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     using NotificationAssessment;
 
     public class TransactionRecordData

@@ -798,3 +798,14 @@ VALUES
 							   + Cast(Getdate() AS BINARY(6)) AS UNIQUEIDENTIFIER)),
 				@NotificationId
 			)
+
+INSERT [Notification].[EntryExitCustomsSelection]
+		(Id,
+		[Entry],
+		[Exit],
+		TransportRouteId
+		)
+VALUES (NEWID(),
+		0,
+		0,
+		@TransportRouteId)

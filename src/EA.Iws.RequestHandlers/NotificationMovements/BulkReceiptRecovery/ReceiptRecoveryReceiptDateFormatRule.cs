@@ -13,22 +13,20 @@
         {
             return await Task.Run(() =>
             {
-                List<int> shipments = new List<int>();
-                MessageLevel result = MessageLevel.Success;
+                var shipments =
+                    movements.Where(m => m.ShipmentNumber.HasValue && !m.MissingReceivedDate && !m.ReceivedDate.HasValue)
+                        .GroupBy(x => x.ShipmentNumber)
+                        .OrderBy(x => x.Key)
+                        .Select(x => x.Key)
+                        .ToList();
 
-                foreach (var movement in movements)
-                {
-                    if (!movement.MissingReceivedDate && movement.ReceivedDate == null)
-                    {
-                        result = MessageLevel.Error;
-                        shipments.Add(movement.ShipmentNumber.GetValueOrDefault());
-                    }
-                }
+                var result = shipments.Any() ? MessageLevel.Error : MessageLevel.Success;
+                var minShipment = shipments.FirstOrDefault() ?? 0;
 
-                var shipmentNumbers = string.Join(", ", shipments.Distinct());
+                var shipmentNumbers = string.Join(", ", shipments);
                 var errorMessage = string.Format(Prsd.Core.Helpers.EnumHelper.GetDisplayName(ReceiptRecoveryContentRules.ReceiptDateFormat), shipmentNumbers);
 
-                return new ReceiptRecoveryContentRuleResult<ReceiptRecoveryContentRules>(ReceiptRecoveryContentRules.ReceiptDateFormat, result, errorMessage, shipments.DefaultIfEmpty(0).Min());
+                return new ReceiptRecoveryContentRuleResult<ReceiptRecoveryContentRules>(ReceiptRecoveryContentRules.ReceiptDateFormat, result, errorMessage, minShipment);
             });
         }
     }

@@ -14,7 +14,7 @@ AS
         (SELECT CASE WHEN RIGHT(LTRIM(RTRIM(T2.Comments)),1) = '.' THEN LTRIM(RTRIM(T2.Comments)) + ' ' ELSE LTRIM(RTRIM(T2.Comments)) + '. ' END AS Comments
           FROM [Notification].[Transaction] T2
           WHERE T2.NotificationId = N.Id
-		  ORDER BY [Date] ASC
+		  ORDER BY [Date] DESC
           FOR XML PATH(''), TYPE).value('.', 'NVARCHAR(MAX)') AS Comments
     FROM [Notification].[Transaction] T
     INNER JOIN [Notification].[Notification] N ON N.Id = T.NotificationId
@@ -32,7 +32,7 @@ AS
         (SELECT CASE WHEN RIGHT(LTRIM(RTRIM(T2.Comments)),1) = '.' THEN LTRIM(RTRIM(T2.Comments)) + ' ' ELSE LTRIM(RTRIM(T2.Comments)) + '. ' END AS Comments
           FROM [ImportNotification].[Transaction] T2
           WHERE T2.NotificationId = N.Id
-		  ORDER BY [Date] ASC
+		  ORDER BY [Date] DESC
           FOR XML PATH(''), TYPE).value('.', 'NVARCHAR(MAX)') AS Comments
     FROM [ImportNotification].[Transaction] T
     INNER JOIN [ImportNotification].[Notification] N ON N.Id = T.NotificationId
