@@ -1,4 +1,5 @@
 ﻿@using EA.Iws.Core.Shared
+@using EA.Iws.Web.Areas.AddressBook.Views
 @using Resource = EA.Iws.Web.Areas.ImportNotification.Views.Importer.IndexResources
 @model EA.Iws.Web.Areas.ImportNotification.ViewModels.Importer.ImporterViewModel
     
@@ -15,25 +16,29 @@
 
     <h2 class="heading-medium">@Resource.OrganisationSubtitle</h2>
 
-    <div class="form-group @Html.Gds().FormGroupClass(m => m.BusinessName)">
-        @Html.Gds().LabelFor(m => m.BusinessName, false)
-        @Html.Gds().ValidationMessageFor(m => m.BusinessName)
-        @Html.Gds().TextBoxFor(m => m.BusinessName)
+    <div class="form-group @Html.Gds().FormGroupClass(m => m.Business.Name)">
+        @Html.Gds().LabelFor(m => m.Business.Name, false)
+        @Html.Gds().ValidationMessageFor(m => m.Business.Name)
+        @Html.Gds().TextBoxFor(m => m.Business.Name, new
+   {
+	   data_addressbook_url = Url.Action("Index", "Search", new { area = "AddressBook" }),
+	   data_addressbook_type = "Facility"
+   })
     </div>
 
-    <div class="form-group @Html.Gds().FormGroupClass(m => m.Type)">
-        @Html.Gds().LabelFor(m => m.Type, false)
-        @Html.Gds().ValidationMessageFor(m => m.Type)
+    <div class="form-group @Html.Gds().FormGroupClass(m => m.BusinessType)">
+        @Html.Gds().LabelFor(m => m.BusinessType, false)
+        @Html.Gds().ValidationMessageFor(m => m.BusinessType)
         <fieldset>
             <div class="multiple-choice">
-                @Html.RadioButtonFor(m => m.Type, BusinessType.LimitedCompany, new { id = "LimitedCompany" })
+                @Html.RadioButtonFor(m => m.BusinessType, BusinessType.LimitedCompany, new { id = "LimitedCompany" })
                 <label for="LimitedCompany">
                     @Resource.LimitedCompanyLabel
                 </label>
             </div>
 
             <div class="multiple-choice">
-                @Html.RadioButtonFor(m => m.Type, BusinessType.Other, new { id = "Other" })
+                @Html.RadioButtonFor(m => m.BusinessType, BusinessType.Other, new { id = "Other" })
                 <label for="Other">
                     @Resource.OtherLabel
                 </label>
@@ -41,15 +46,24 @@
         </fieldset>
     </div>
 
-    <div class="form-group @Html.Gds().FormGroupClass(m => m.RegistrationNumber)">
-        @Html.Gds().LabelFor(m => m.RegistrationNumber)
-        @Html.Gds().ValidationMessageFor(m => m.RegistrationNumber)
-        @Html.Gds().TextBoxFor(m => m.RegistrationNumber)
+    <div class="form-group @Html.Gds().FormGroupClass(m => m.Business.RegistrationNumber)">
+        @Html.Gds().LabelFor(m => m.Business.RegistrationNumber)
+        @Html.Gds().ValidationMessageFor(m => m.Business.RegistrationNumber)
+        @Html.Gds().TextBoxFor(m => m.Business.RegistrationNumber)
     </div>
 
     @Html.EditorFor(m => m.Address)
 
     @Html.EditorFor(m => m.Contact)
+
+    <div class="form-group no-js-hidden">
+        <div class="multiple-choice">
+            @Html.CheckBoxFor(m => m.IsAddedToAddressBook, new { id = "addressBook" })
+            <label for="addressBook">
+                @AddressBookResources.AddToAddressBook
+            </label>
+        </div>
+    </div>
 
     <div class="form-group">
         <button class="button" type="submit">@Constants.ContinueButtonText</button>

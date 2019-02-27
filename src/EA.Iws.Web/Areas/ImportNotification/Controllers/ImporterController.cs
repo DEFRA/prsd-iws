@@ -47,10 +47,11 @@
             var importer = new Importer(id)
             {
                 Address = model.Address.AsAddress(),
-                BusinessName = model.BusinessName,
-                Type = model.Type,
-                RegistrationNumber = model.RegistrationNumber,
-                Contact = model.Contact.AsContact()
+                BusinessName = model.Business.Name,
+                Type = model.BusinessType,
+                RegistrationNumber = model.Business.RegistrationNumber,
+                Contact = model.Contact.AsContact(),
+                IsAddedToAddressBook = model.IsAddedToAddressBook
             };
 
             await mediator.SendAsync(new SetDraftData<Importer>(id, importer));
