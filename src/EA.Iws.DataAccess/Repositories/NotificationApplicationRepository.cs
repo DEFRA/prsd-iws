@@ -114,6 +114,7 @@
                 DELETE FROM [Notification].[Transaction] WHERE NotificationId = @Id
                 DELETE FROM [Notification].[EntryCustomsOffice] WHERE TransportRouteId IN (SELECT [Id] FROM [Notification].[TransportRoute] WHERE NotificationId = @Id)
                 DELETE FROM [Notification].[ExitCustomsOffice] WHERE TransportRouteId IN (SELECT [Id] FROM [Notification].[TransportRoute] WHERE NotificationId = @Id)
+                DELETE FROM [Notification].[EntryExitCustomsSelection] WHERE TransportRouteId IN (SELECT [Id] FROM [Notification].[TransportRoute] WHERE NotificationId = @Id)
                 DELETE FROM [Notification].[StateOfExport] WHERE TransportRouteId IN (SELECT [Id] FROM [Notification].[TransportRoute] WHERE NotificationId = @Id)
                 DELETE FROM [Notification].[StateOfImport] WHERE TransportRouteId IN (SELECT [Id] FROM [Notification].[TransportRoute] WHERE NotificationId = @Id)
                 DELETE FROM [Notification].[TransitState] WHERE TransportRouteId IN (SELECT [Id] FROM [Notification].[TransportRoute] WHERE NotificationId = @Id)
