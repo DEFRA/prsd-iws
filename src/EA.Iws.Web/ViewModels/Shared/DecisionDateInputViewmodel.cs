@@ -3,18 +3,27 @@
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using Prsd.Core;
 
     public class DecisionDateInputViewmodel : IValidatableObject
     {
+        [Required(ErrorMessageResourceName = "DayError", ErrorMessageResourceType = typeof(DecisionDateResources))]
+        [Range(1, 31, ErrorMessageResourceName = "DayError", ErrorMessageResourceType = typeof(DecisionDateResources))]
         public int? Day { get; set; }
 
+        [Required(ErrorMessageResourceName = "MonthError", ErrorMessageResourceType = typeof(DecisionDateResources))]
+        [Range(1, 12, ErrorMessageResourceName = "MonthError", ErrorMessageResourceType = typeof(DecisionDateResources))]
         public int? Month { get; set; }
 
+        [Required(ErrorMessageResourceName = "YearError", ErrorMessageResourceType = typeof(DecisionDateResources))]
+        [Range(2000, 3000, ErrorMessageResourceName = "YearError", ErrorMessageResourceType = typeof(DecisionDateResources))]
         public int? Year { get; set; }
 
         public bool AllowPastDates { get; set; }
 
         public bool ShowLabels { get; set; }
+
+        public bool HadValues { get; set; }
 
         public bool HasAnyValues
         {
@@ -43,6 +52,11 @@
                 Day = date.Value.Day;
                 Month = date.Value.Month;
                 Year = date.Value.Year;
+                HadValues = true;
+            }
+            else
+            {
+                HadValues = false;
             }
         }
 
@@ -66,57 +80,15 @@
 
         public bool IsAutoTabEnabled { get; set; }
 
-        public bool CheckRange(int start, int end, int value)
-        {
-            return (value >= start && value <= end);
-        }
-
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
-        {
-            if (Day.HasValue || Month.HasValue || Year.HasValue)
+        {                      
+            if (Day.HasValue && Month.HasValue && Year.HasValue)
             {
-                if (!Day.HasValue)
+                DateTime decisionRequireByDate;
+                bool isValidDate = SystemTime.TryParse(Year.GetValueOrDefault(), Month.GetValueOrDefault(), Day.GetValueOrDefault(), out decisionRequireByDate);
+                if (!isValidDate)
                 {
-                    yield return new ValidationResult("The Day field is required", new[] { "Day" });
-                }
-
-                if (!Month.HasValue)
-                {
-                    yield return new ValidationResult("The Month field is required", new[] { "Month" });
-                }
-
-                if (!Year.HasValue)
-                {
-                    yield return new ValidationResult("The Year field is required", new[] { "Year" });
-                }
-
-                if (Day.HasValue && !CheckRange(1, 31, Day.Value))
-                {
-                    yield return new ValidationResult("You must enter a value between 1 and 31", new[] { "Day" });
-                }
-
-                if (Month.HasValue && !CheckRange(1, 12, Month.Value))
-                {
-                    yield return new ValidationResult("You must enter a value between 1 and 12", new[] { "Month" });
-                }
-
-                if (Day.HasValue && Month.HasValue && Year.HasValue)
-                {
-                    if ((Year > 9999) || (AllowPastDates && Year < 2000))
-                    {
-                        yield return new ValidationResult("The year must be greater than 2000", new[] { "Year" });
-                        yield break;
-                    }
-
-                    if (!AllowPastDates && Year < 2010)
-                    {
-                        yield return new ValidationResult("The year must be greater than 2010", new[] { "Year" });
-                    }
-
-                    if (CheckRange(1, 12, Month.Value) && Day.Value > DateTime.DaysInMonth(Year.Value, Month.Value))
-                    {
-                        yield return new ValidationResult("The Day does not exist in the given month", new[] { "Day" });
-                    }
+                    yield return new ValidationResult(DecisionDateResources.FromValid, new[] { "Day" });
                 }
             }
         }
