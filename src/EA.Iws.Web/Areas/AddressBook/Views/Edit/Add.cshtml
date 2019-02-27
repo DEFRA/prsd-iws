@@ -1,6 +1,10 @@
 ﻿@using EA.Iws.Web.Areas.AddressBook.Views.Edit
+@using EA.Iws.Core.AddressBook
 @model EA.Iws.Web.Areas.AddressBook.ViewModels.AddAddressViewModel
-
+@{
+	ViewBag.Title = "Add Address - " + Model.Type;
+	var titleText = Model.Type == AddressRecordType.Carrier ? "Carrier" : (Model.Type == AddressRecordType.Facility ? "Importer-consignee or facility" : "Exporter-notifier or producer");
+}
 
 @using (Html.BeginForm())
 {
@@ -10,7 +14,7 @@
 
 
 	<header class="hgroup">
-		<h1 class="heading-large">@AddEditResource.Header</h1>
+		<h1 class="heading-large">@Html.Raw(string.Format(AddEditResource.AddHeader, titleText))</h1>
 	</header>
 
 	<h2 class="heading-medium">@AddEditResource.OrgDetails</h2>

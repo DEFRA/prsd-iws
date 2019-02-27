@@ -15,16 +15,23 @@
         }
 
         public void SetCarriers(IEnumerable<AddressBookRecordData> carriers)
-        {
-            CarriersList = new SelectList(carriers.Select(c => new SelectListItem()
+        {         
+            CarriersList = new SelectList(carriers.OrderBy(order => order.BusinessData.Name)
+                .ThenBy(order => order.AddressData.StreetOrSuburb)
+                .ThenBy(order => order.AddressData.Address2)
+                .ThenBy(order => order.AddressData.TownOrCity)
+                .ThenBy(order => order.AddressData.PostalCode)
+                .ThenBy(order => order.ContactData.FullName)
+                .ThenBy(order => order.BusinessData.RegistrationNumber)
+                .Select(c => new SelectListItem()
             {
-                Text = c.ContactData.FullName + ", " + "\n" 
-                    + c.BusinessData.RegistrationNumber + ", " 
-                    + (string.IsNullOrEmpty(c.BusinessData.AdditionalRegistrationNumber) 
-                        ? string.Empty 
-                        : c.BusinessData.AdditionalRegistrationNumber + ", ") + "\n"
-                    + c.BusinessData.Name + ", " 
-                    + c.AddressData.ToString(),
+                Text = c.BusinessData.Name + ", " 
+                    + c.AddressData.ToString() + ", " + "\n"
+                    + c.ContactData.FullName + ", " + "\n"
+                    + c.BusinessData.RegistrationNumber 
+                    + (string.IsNullOrEmpty(c.BusinessData.AdditionalRegistrationNumber)
+                        ? string.Empty
+                        : ", " + c.BusinessData.AdditionalRegistrationNumber),
                 Value = c.Id.ToString()
             }), "Value", "Text", SelectedCarrier);
         }

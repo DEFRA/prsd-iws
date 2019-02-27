@@ -872,3 +872,14 @@ VALUES
 	(SELECT Id FROM [Notification].[FinancialGuaranteeCollection] WHERE [NotificationId] = @NotificationId),
 	1
 )
+
+INSERT [Notification].[EntryExitCustomsSelection]
+		(Id,
+		[Entry],
+		[Exit],
+		TransportRouteId
+		)
+VALUES (NEWID(),
+		0,
+		0,
+		@TransportRouteId)

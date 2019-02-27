@@ -24,7 +24,12 @@
                 var shipments = new List<int>();
                 var existingMovements = repository.GetAllMovements(notificationId).Result;
 
-                foreach (var movement in movements.Where(m => m.ShipmentNumber.HasValue && m.ReceivedDate.HasValue))
+                var validMovements =
+                    movements.Where(m => m.ShipmentNumber.HasValue && m.ReceivedDate.HasValue)
+                        .OrderBy(m => m.ShipmentNumber)
+                        .ToList();
+
+                foreach (var movement in validMovements)
                 {
                     if (movement.ShipmentNumber.HasValue && movement.ReceivedDate.HasValue)
                     {

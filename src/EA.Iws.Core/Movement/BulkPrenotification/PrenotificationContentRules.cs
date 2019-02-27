@@ -22,6 +22,8 @@
         OnlyNewShipments,
         [Display(Name = "Shipment number {0}: the shipment number is invalid - you've reached your shipment limit.")]
         InvalidShipmentNumber,
+        [Display(Name = "Shipment number {0}: the shipment quantity must be numeric.")]
+        QuantityNumeric,
         [Display(Name = "Shipment number {0}: the waste quantity must have no more than {1} decimal places.")]
         QuantityPrecision,
         [Display(Name = "Shipment number {0}: the quantity unit of measurement is not permitted on this notification.")]
