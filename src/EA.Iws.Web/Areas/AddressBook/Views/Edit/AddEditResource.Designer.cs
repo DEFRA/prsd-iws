@@ -88,11 +88,11 @@ namespace EA.Iws.Web.Areas.AddressBook.Views.Edit {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Enter address and organisation information.
+        ///   Looks up a localized string similar to Edit address and organisation information.
         /// </summary>
-        public static string Header {
+        public static string EditHeader {
             get {
-                return ResourceManager.GetString("Header", resourceCulture);
+                return ResourceManager.GetString("EditHeader", resourceCulture);
             }
         }
         

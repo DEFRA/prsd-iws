@@ -123,8 +123,8 @@
   <data name="Contact" xml:space="preserve">
     <value>Contact person</value>
   </data>
-  <data name="Header" xml:space="preserve">
-    <value>Enter address and organisation information</value>
+  <data name="EditHeader" xml:space="preserve">
+    <value>Edit address and organisation information</value>
   </data>
   <data name="OrganisationName" xml:space="preserve">
     <value>Organisation name</value>
