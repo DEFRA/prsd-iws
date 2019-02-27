@@ -21,7 +21,20 @@
         public ActionResult Add(Guid id)
         {
             AddCommentsViewModel model = new AddCommentsViewModel();
-            //model.NotificationId = id;
+            model.NotificationId = id;
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult Add(AddCommentsViewModel m)
+        {
+            if (!ModelState.IsValid)
+            {
+                m.ModelIsValid = false;
+                return View(m);
+            }
+            AddCommentsViewModel model = new AddCommentsViewModel();
+
             return View(model);
         }
     }

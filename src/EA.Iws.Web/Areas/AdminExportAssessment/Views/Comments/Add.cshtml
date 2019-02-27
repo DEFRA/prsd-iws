@@ -1,0 +1,94 @@
+﻿@using Resource = EA.Iws.Web.Areas.AdminExportAssessment.Views.Comments.IndexResources
+@using EA.Iws.Core.Admin;
+@model EA.Iws.Web.Areas.AdminExportAssessment.ViewModels.Comments.AddCommentsViewModel
+@{
+    ViewBag.Title = "Add Comment";
+}
+
+@{
+    Layout = "~/Areas/AdminExportAssessment/Views/Comments/_Layout.cshtml";
+}
+
+
+<header>
+    <h1 class="heading-large">@Resource.AddHeader</h1>
+    <p class="subtitle">@Resource.AddSubtitle</p>
+</header>
+
+<hr class="section-bottom" />
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.Gds().ValidationSummary()
+
+    <div>
+        <div class="column-two-thirds">
+            <div class="form-group @Html.Gds().FormGroupClass(m => m.SelectedType)">
+                @Html.Gds().LabelFor(m => m.SelectedType, showOptionalLabel: false)
+                @Html.Gds().ValidationMessageFor(m => m.SelectedType)
+                @Html.Gds().DropDownListFor(m => m.SelectedType, Model.CommentTypes, "Choose a category", new { @id = "categorySelectList" })
+            </div>
+                    
+            @{ 
+                var commentsClass = Model.ModelIsValid == false && Model.SelectedType != null ? "" : "class=hidden";
+
+                var shipmentNumberClass = Model.ModelIsValid == false && Model.SelectedType == NotificationShipmentsCommentsType.Shipments ? "" : "class=hidden";
+            }
+
+                <div id="shipmentNumberTextbox" @shipmentNumberClass>
+
+                    <div class="form-group @Html.Gds().FormGroupClass(m => m.ShipmentNumber)">
+                        @Html.Gds().LabelFor(m => m.ShipmentNumber, showOptionalLabel: false)
+                        @Html.Gds().ValidationMessageFor(m => m.ShipmentNumber)
+                        @Html.TextBoxFor(m => m.ShipmentNumber, new { @MaxLength = 500, @display = "block", @style = "width: 25%; height: 50px", @class = "form-control" })
+                    </div>
+
+                </div>
+
+                <div id="commentsTextbox" @commentsClass>
+                    <div class="form-group @Html.Gds().FormGroupClass(m => m.Comment)">
+                        @Html.Gds().LabelFor(m => m.Comment, showOptionalLabel: false)
+                        @Html.TextAreaFor(m => m.Comment, new { @MaxLength = 500, @display = "block", @style = "width: 100%; height: 200px", @class = "form-control" })
+                    </div>
+                
+            </div>
+            <div>
+                <button type="submit" class="button">@Resource.ContinueButton</button>
+            </div>
+            <div>
+                @Html.ActionLink(Resource.BackButton, "Index", "Comments", new { id = Model.NotificationId }, null)
+            </div>
+        </div>
+    </div>
+
+    
+}
+
+
+@section scripts
+{
+    <script>
+        $(function () {
+            $('select#categorySelectList').change(function () {
+                var SelectedValue = $(this).val();
+
+                var comments = $("#commentsTextbox");
+                var shipmentNumber = $("#shipmentNumberTextbox");
+
+                if (SelectedValue == 1) {
+                    comments.removeClass('hidden');
+                    shipmentNumber.addClass('hidden');
+                }
+                else if (SelectedValue == 2) {
+                    comments.removeClass('hidden');
+                    shipmentNumber.removeClass('hidden');
+                }
+                else {
+                    comments.addClass('hidden');
+                    shipmentNumber.addClass('hidden');
+                }
+
+            });
+        });
+    </script>
+}

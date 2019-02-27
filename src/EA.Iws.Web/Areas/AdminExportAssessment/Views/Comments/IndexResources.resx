@@ -126,8 +126,14 @@
   <data name="AddSubtitle" xml:space="preserve">
     <value>These comments will only be viewed by the internal users with access to the notification.</value>
   </data>
+  <data name="BackButton" xml:space="preserve">
+    <value>Back</value>
+  </data>
   <data name="CommentsHeader" xml:space="preserve">
     <value>Reivew Comments</value>
+  </data>
+  <data name="ContinueButton" xml:space="preserve">
+    <value>Save and continue</value>
   </data>
   <data name="GoToOverview" xml:space="preserve">
     <value>Go to Notification overview</value>

@@ -88,11 +88,29 @@ namespace EA.Iws.Web.Areas.AdminExportAssessment.Views.Comments {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Back.
+        /// </summary>
+        public static string BackButton {
+            get {
+                return ResourceManager.GetString("BackButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Reivew Comments.
         /// </summary>
         public static string CommentsHeader {
             get {
                 return ResourceManager.GetString("CommentsHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save and continue.
+        /// </summary>
+        public static string ContinueButton {
+            get {
+                return ResourceManager.GetString("ContinueButton", resourceCulture);
             }
         }
         
