@@ -47,7 +47,7 @@
                 @Html.EditorFor(m => m.AcknowledgedDate)
             </div>
         }
-		@if (Model.DecisionRequiredByDate.HasAnyValues)
+		@if (Model.DecisionRequiredByDate.HasAnyValues || Model.DecisionRequiredByDate.HadValues)
 		{
            <div class="form-group @Html.Gds().FormGroupClass(m => m.DecisionRequiredByDate) @Html.Gds().FormGroupClass(m => m.DecisionRequiredByDate.Day) @Html.Gds().FormGroupClass(m => m.DecisionRequiredByDate.Month) @Html.Gds().FormGroupClass(m => m.DecisionRequiredByDate.Year)">
                 @Html.Gds().LabelFor(m => m.DecisionRequiredByDate, showOptionalLabel: false)
