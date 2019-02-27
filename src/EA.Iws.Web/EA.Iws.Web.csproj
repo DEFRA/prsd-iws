@@ -3381,6 +3381,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>BusinessResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\Shared\DecisionDateResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DecisionDateResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="ViewModels\Shared\KeyValuePairViewModel.cs" />
     <Compile Include="ViewModels\Shared\KeyValueRadioButtons.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\StateOfExport\EditStateOfExportViewModel.cs" />
@@ -4960,6 +4965,10 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>BusinessResources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ViewModels\Shared\DecisionDateResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>DecisionDateResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="ViewModels\Shared\RadioButtonsResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

@@ -9,6 +9,7 @@
 	@Html.Gds().ValidationMessageFor(m => m.Year)
 	@Html.HiddenFor(m => m.IsAutoTabEnabled)
 	@Html.HiddenFor(m => m.AllowPastDates)
+	@Html.HiddenFor(m => m.HadValues)
 	<div class="form-group form-group-day">
 		@if (Model.ShowLabels)
 		{
@@ -16,13 +17,12 @@
 		}
 		@if (isDisabled)
 		{
-			@Html.Gds().TextBoxFor(m => m.Day, new { type = "number", min = "1", max = "31", disabled = true })
+			@Html.Gds().TextBoxFor(m => m.Day, new { disabled = true })
 		}
 		else
 		{
 			@Html.Gds().TextBoxFor(m => m.Day, new
-	   {
-		   type = "number",
+	   {		   
 		   data_type = (Model.IsAutoTabEnabled) ? "date" : string.Empty,
 		   placeholder = Model.ShowLabels ? string.Empty : "DD"
 	   })
@@ -35,13 +35,12 @@
 		}
 		@if (isDisabled)
 		{
-			@Html.Gds().TextBoxFor(m => m.Month, new { type = "number", min = "1", max = "12", disabled = true })
+			@Html.Gds().TextBoxFor(m => m.Month, new { disabled = true })
 		}
 		else
 		{
 			@Html.Gds().TextBoxFor(m => m.Month, new
 	   {
-		   type = "number",
 		   data_type = (Model.IsAutoTabEnabled) ? "date" : string.Empty,
 		   placeholder = Model.ShowLabels ? string.Empty : "MM"
 	   })
@@ -54,13 +53,12 @@
 		}
 		@if (isDisabled)
 		{
-			@Html.Gds().TextBoxFor(m => m.Year, new { type = "number", min = "2015", disabled = true })
+			@Html.Gds().TextBoxFor(m => m.Year, new { disabled = true })
 		}
 		else
 		{
 			@Html.Gds().TextBoxFor(m => m.Year, new
 	   {
-		   type = "number",
 		   placeholder = Model.ShowLabels ? string.Empty : "YYYY"
 	   })
 		}
