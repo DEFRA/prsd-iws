@@ -120,6 +120,12 @@
   <data name="AddButton" xml:space="preserve">
     <value>Add a comment</value>
   </data>
+  <data name="AddHeader" xml:space="preserve">
+    <value>Add a comment</value>
+  </data>
+  <data name="AddSubtitle" xml:space="preserve">
+    <value>These comments will only be viewed by the internal users with access to the notification.</value>
+  </data>
   <data name="CommentsHeader" xml:space="preserve">
     <value>Reivew Comments</value>
   </data>

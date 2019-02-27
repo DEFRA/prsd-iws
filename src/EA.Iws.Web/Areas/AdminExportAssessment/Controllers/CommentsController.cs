@@ -16,5 +16,13 @@
             model.NotificationId = id;
             return View(model);
         }
+
+        [HttpGet]
+        public ActionResult Add(Guid id)
+        {
+            AddCommentsViewModel model = new AddCommentsViewModel();
+            //model.NotificationId = id;
+            return View(model);
+        }
     }
 }
