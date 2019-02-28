@@ -1,0 +1,39 @@
+﻿@using EA.Iws.Web.ViewModels.Shared
+@model EA.Iws.Web.ViewModels.Shared.ReportInputParametersViewModel
+    
+<div class="form-group @Html.Gds().FormGroupClass(m => m.DateType)">
+    @Html.Gds().LabelFor(m => m.DateType)
+    @Html.Gds().ValidationMessageFor(m => m.DateType)
+    @Html.Gds().DropDownListFor(m => m.DateType, Model.DateSelectList, "")
+</div>
+
+<div class="form-group @Html.Gds().FormGroupClass(m => m.FromDate) @Html.Gds().FormGroupClass(m => m.FromDate.Day) @Html.Gds().FormGroupClass(m => m.FromDate.Month) @Html.Gds().FormGroupClass(m => m.FromDate.Year)">
+    @Html.Gds().LabelFor(m => m.FromDate, false)
+    @Html.Gds().ValidationMessageFor(m => m.FromDate)
+    @Html.EditorFor(m => m.FromDate)
+</div>
+
+<div class="form-group @Html.Gds().FormGroupClass(m => m.ToDate) @Html.Gds().FormGroupClass(m => m.ToDate.Day) @Html.Gds().FormGroupClass(m => m.ToDate.Month) @Html.Gds().FormGroupClass(m => m.ToDate.Year)">
+    @Html.Gds().LabelFor(m => m.ToDate, false)
+    @Html.Gds().ValidationMessageFor(m => m.ToDate)
+    @Html.EditorFor(m => m.ToDate)
+</div>
+
+<div class="form-group @Html.Gds().FormGroupClass(m => m.TextFieldType)">
+    @Html.Gds().LabelFor(m => m.TextFieldType)
+    @Html.Gds().ValidationMessageFor(m => m.TextFieldType)
+    @Html.Gds().DropDownListFor(m => m.TextFieldType, Model.TextFieldSelectList, "")
+</div>
+
+<div class="form-group @Html.Gds().FormGroupClass(m => m.TextOperatorType)">
+    @Html.Gds().LabelFor(m => m.TextOperatorType)
+    @Html.Gds().ValidationMessageFor(m => m.TextOperatorType)
+    @Html.Gds().DropDownListFor(m => m.TextOperatorType, Model.TextOperatorSelectList, "")
+</div>
+
+<div class="form-group @Html.Gds().FormGroupClass(m => m.TextSearch)">
+    @Html.Gds().LabelFor(m => m.TextSearch)
+    @Html.Gds().ValidationMessageFor(m => m.TextSearch)
+    @Html.Gds().HintParagraph(ReportInputParametersResources.TextSearchHint)
+    @Html.Gds().TextBoxFor(m => m.TextSearch)
+</div>
