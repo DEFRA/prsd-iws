@@ -13,7 +13,7 @@
             CompleteDate = new OptionalDateInputViewModel(allowPastDates: true, showLabels: false);
             TransmittedDate = new OptionalDateInputViewModel(allowPastDates: true, showLabels: false);
             AcknowledgedDate = new OptionalDateInputViewModel(allowPastDates: true, showLabels: false);
-            DecisionRequiredByDate = new OptionalDateInputViewModel(allowPastDates: true, showLabels: false);
+            DecisionRequiredByDate = new DecisionDateInputViewmodel(allowPastDates: true, showLabels: false);
             WithdrawnDate = new OptionalDateInputViewModel(allowPastDates: true, showLabels: false);
             ObjectedDate = new OptionalDateInputViewModel(allowPastDates: true, showLabels: false);
             ConsentedDate = new OptionalDateInputViewModel(allowPastDates: true, showLabels: false);
@@ -28,7 +28,7 @@
             CompleteDate = new OptionalDateInputViewModel(data.CompleteDate, allowPastDates: true, showLabels: false);
             TransmittedDate = new OptionalDateInputViewModel(data.TransmittedDate, allowPastDates: true, showLabels: false);
             AcknowledgedDate = new OptionalDateInputViewModel(data.AcknowledgedDate, allowPastDates: true, showLabels: false);
-            DecisionRequiredByDate = new OptionalDateInputViewModel(data.DecisionRequiredByDate, allowPastDates: true, showLabels: false);
+            DecisionRequiredByDate = new DecisionDateInputViewmodel(data.DecisionRequiredByDate, allowPastDates: true, showLabels: false);
             WithdrawnDate = new OptionalDateInputViewModel(data.WithdrawnDate, allowPastDates: true, showLabels: false);
             ObjectedDate = new OptionalDateInputViewModel(data.ObjectedDate, allowPastDates: true, showLabels: false);
             ConsentedDate = new OptionalDateInputViewModel(data.ConsentedDate, allowPastDates: true, showLabels: false);
@@ -52,7 +52,7 @@
         public OptionalDateInputViewModel AcknowledgedDate { get; set; }
 
         [Display(Name = "DecisionRequiredByDate", ResourceType = typeof(IndexViewModelResources))]
-        public OptionalDateInputViewModel DecisionRequiredByDate { get; set; }
+        public DecisionDateInputViewmodel DecisionRequiredByDate { get; set; }
 
         [Display(Name = "WithdrawnDate", ResourceType = typeof(IndexViewModelResources))]
         public OptionalDateInputViewModel WithdrawnDate { get; set; }

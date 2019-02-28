@@ -1049,9 +1049,12 @@
     <Content Include="Areas\AdminExportAssessment\Views\Comments\_Navigation.cshtml" />
     <Content Include="Areas\AdminImportAssessment\Views\Comments\_Navigation.cshtml" />
     <Content Include="Areas\AdminImportAssessment\Views\Comments\Index.cshtml" />
+
     <Content Include="Areas\AdminExportAssessment\Views\Comments\Add.cshtml" />
     <Content Include="Areas\AdminExportAssessment\Views\Comments\_Layout.cshtml" />
-    <Content Include="Areas\AdminImportAssessment\Views\Comments\Add.cshtml" />
+
+    <Content Include="Views\Shared\EditorTemplates\DecisionDateInputViewModel.cshtml" />
+
     <None Include="Scripts\jquery-2.1.3.intellisense.js" />
     <Content Include="Scripts\govuk\govuk-template.js" />
     <Content Include="Scripts\govuk\ie.js" />
@@ -1538,6 +1541,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>FinancialGuaranteeDecisionViewModelResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\Shared\DecisionDateInputViewmodel.cs" />
     <Compile Include="Areas\AdminImportAssessment\ViewModels\KeyDatesOverride\IndexViewModel.cs" />
     <Compile Include="Areas\AdminImportAssessment\ViewModels\KeyDatesOverride\IndexViewModelResources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -3409,6 +3413,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>BusinessResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\Shared\DecisionDateResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DecisionDateResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="ViewModels\Shared\KeyValuePairViewModel.cs" />
     <Compile Include="ViewModels\Shared\KeyValueRadioButtons.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\StateOfExport\EditStateOfExportViewModel.cs" />
@@ -4995,6 +5004,10 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>BusinessResources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ViewModels\Shared\DecisionDateResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>DecisionDateResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="ViewModels\Shared\RadioButtonsResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

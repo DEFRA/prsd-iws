@@ -25,7 +25,7 @@
         }
 
         [HttpGet]
-        public async Task<ActionResult> Index(Guid id)
+        public async Task<ActionResult> Index(Guid id, bool? backToOverview = null)
         {
             var data = await mediator.SendAsync(new GetExitCustomsOfficeAddDataByNotificationId(id));
 
@@ -72,7 +72,7 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Index(Guid id, CustomsOfficeViewModel model)
+        public async Task<ActionResult> Index(Guid id, CustomsOfficeViewModel model, bool? backToOverview = null)
         {
             var countries = await mediator.SendAsync(new GetEuropeanUnionCountries());
 
@@ -112,7 +112,7 @@
 
             var addSelection = await mediator.SendAsync(new SetExitCustomsOfficeSelectionForNotificationById(id, model.CustomsOfficeRequired.GetValueOrDefault()));
 
-            return RedirectToAction("Index", "EntryCustomsOffice", new { id });
+            return RedirectToAction("Index", "EntryCustomsOffice", new { id, backToOverview = backToOverview });
         }
     }
 }

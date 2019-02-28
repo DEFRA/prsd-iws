@@ -24,15 +24,18 @@
             {
                 var shipments =
                     movements.Where(m => m.ShipmentNumber.HasValue && m.NotificationNumber != notificationNumber)
-                        .Select(m => m.ShipmentNumber.Value)
+                        .GroupBy(x => x.ShipmentNumber)
+                        .OrderBy(x => x.Key)
+                        .Select(x => x.Key)
                         .ToList();
 
                 var result = shipments.Any() ? MessageLevel.Error : MessageLevel.Success;
-                
-                var shipmentNumbers = string.Join(", ", shipments.Distinct());
+                var minShipment = shipments.FirstOrDefault() ?? 0;
+
+                var shipmentNumbers = string.Join(", ", shipments);
                 var errorMessage = string.Format(Prsd.Core.Helpers.EnumHelper.GetDisplayName(ReceiptRecoveryContentRules.WrongNotificationNumber), shipmentNumbers, notificationNumber);
 
-                return new ReceiptRecoveryContentRuleResult<ReceiptRecoveryContentRules>(ReceiptRecoveryContentRules.WrongNotificationNumber, result, errorMessage, shipments.DefaultIfEmpty(0).Min());
+                return new ReceiptRecoveryContentRuleResult<ReceiptRecoveryContentRules>(ReceiptRecoveryContentRules.WrongNotificationNumber, result, errorMessage, minShipment);
             });
         }
     }
