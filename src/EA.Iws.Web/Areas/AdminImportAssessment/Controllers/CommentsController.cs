@@ -26,6 +26,7 @@
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Add(AddCommentsViewModel m)
         {
             if (!ModelState.IsValid)
