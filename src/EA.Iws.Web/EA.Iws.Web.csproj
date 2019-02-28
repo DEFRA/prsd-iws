@@ -1049,12 +1049,10 @@
     <Content Include="Areas\AdminExportAssessment\Views\Comments\_Navigation.cshtml" />
     <Content Include="Areas\AdminImportAssessment\Views\Comments\_Navigation.cshtml" />
     <Content Include="Areas\AdminImportAssessment\Views\Comments\Index.cshtml" />
-
     <Content Include="Areas\AdminExportAssessment\Views\Comments\Add.cshtml" />
     <Content Include="Areas\AdminExportAssessment\Views\Comments\_Layout.cshtml" />
-
+	<Content Include="Areas\AdminImportAssessment\Views\Comments\Add.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\DecisionDateInputViewModel.cshtml" />
-
     <None Include="Scripts\jquery-2.1.3.intellisense.js" />
     <Content Include="Scripts\govuk\govuk-template.js" />
     <Content Include="Scripts\govuk\ie.js" />
