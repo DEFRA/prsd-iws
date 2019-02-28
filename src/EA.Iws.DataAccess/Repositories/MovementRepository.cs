@@ -152,7 +152,7 @@
         public async Task<bool> DeleteById(Guid movementId)
         {
             var rowsAffected = await context.Database.ExecuteSqlCommandAsync(
-                @"DELETE from [Notification].[MovementCarrier] WHERE MovementDetailsId in (SELECT Id FROM [Notification].[MovementDetails] WHERE MovementId = @movementId)
+                @"DELETE from [Notification].[MovementCarrier] WHERE MovementId = @movementId
                   DELETE from [Notification].[MovementPackagingInfo] WHERE MovementDetailsId in (SELECT Id FROM [Notification].[MovementDetails] WHERE MovementId = @movementId)
                   DELETE from [Notification].[MovementDetails] WHERE MovementId = @movementId
                   DELETE from [Notification].[MovementDateHistory] WHERE MovementId = @movementId
