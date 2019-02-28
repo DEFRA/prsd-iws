@@ -18,7 +18,7 @@
         {
             ImportNotificationComment comment = new ImportNotificationComment(message.ImportNotificationId, message.UserId, message.Comment, message.ShipmentNumber, message.DateAdded);
 
-           return await this.repository.Add(comment);
+            return await this.repository.Add(comment);
         }
     }
 }

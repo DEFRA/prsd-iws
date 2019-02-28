@@ -38,23 +38,21 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Add(AddCommentsViewModel m)
+        public async Task<ActionResult> Add(AddCommentsViewModel model)
         {
             if (!ModelState.IsValid)
             {
-                m.ModelIsValid = false;
-                return View(m);
+                model.ModelIsValid = false;
+                return View(model);
             }
 
             Guid userId = Guid.Parse(User.GetUserId());
 
-            var request = new AddImportNotificationComment(m.NotificationId, userId, m.Comment, m.ShipmentNumber.GetValueOrDefault(), DateTime.Now);
+            var request = new AddImportNotificationComment(model.NotificationId, userId, model.Comment, model.ShipmentNumber.GetValueOrDefault(), DateTime.Now);
 
             await this.mediator.SendAsync(request);
 
-            AddCommentsViewModel model = new AddCommentsViewModel();
-
-            return View(model);
+            return RedirectToAction("Index", new { id = model.NotificationId });
         }
     }
 }
