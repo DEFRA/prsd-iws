@@ -195,6 +195,7 @@
     <Compile Include="ImportMovement\Reject\RecordRejectionHandler.cs" />
     <Compile Include="ImportMovement\SetImportMovementReceiptAndRecoveryDataHandler.cs" />
     <Compile Include="ImportMovement\SetMovementCommentsHandler.cs" />
+    <Compile Include="ImportNotificationAssessment\AddImportNotificationCommentHandler.cs" />
     <Compile Include="ImportNotificationAssessment\ConsentHandler.cs" />
     <Compile Include="ImportNotificationAssessment\DeleteImportNotificationHandler.cs" />
     <Compile Include="ImportNotificationAssessment\Events\ChangeImportNotificationAssessmentStatus.cs" />
@@ -431,6 +432,7 @@
     <Compile Include="Movement\SetMovementCommentsHandler.cs" />
     <Compile Include="Movement\SetMultipleMovementFileIdHandler.cs" />
     <Compile Include="Movement\SetMovementReceiptAndRecoveryDataHandler.cs" />
+    <Compile Include="NotificationAssessment\AddNotificationCommentHandler.cs" />
     <Compile Include="NotificationAssessment\AddProducerHandler.cs" />
     <Compile Include="NotificationAssessment\AddTransitStateHandler.cs" />
     <Compile Include="NotificationAssessment\DeleteExportNotificationHandler.cs" />

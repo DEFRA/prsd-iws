@@ -26,6 +26,7 @@
             <div class="form-group @Html.Gds().FormGroupClass(m => m.SelectedType)">
                 @Html.Gds().LabelFor(m => m.SelectedType, showOptionalLabel: false)
                 @Html.Gds().ValidationMessageFor(m => m.SelectedType)
+                @Html.HiddenFor(m => m.NotificationId)
                 @Html.Gds().DropDownListFor(m => m.SelectedType, Model.CommentTypes, "Choose a category", new { @id = "categorySelectList" })
             </div>
                     
