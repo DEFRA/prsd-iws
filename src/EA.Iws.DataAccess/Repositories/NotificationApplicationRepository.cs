@@ -126,7 +126,7 @@
                 DELETE FROM [Notification].[WasteType] WHERE NotificationId = @Id
                 DELETE FROM [Notification].[SharedUser] WHERE NotificationId = @Id
                 DELETE FROM [Notification].[SharedUserHistory] WHERE NotificationId = @Id
-                DELETE FROM [Notification].[Audit] WHERE Id = @Id
+                DELETE FROM [Notification].[Audit] WHERE NotificationId = @Id
                 DELETE FROM [Notification].[Notification] WHERE Id = @Id",
                 new SqlParameter("@Id", notificationId));
 
