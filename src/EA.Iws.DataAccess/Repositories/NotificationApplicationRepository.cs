@@ -77,7 +77,7 @@
         {
             var rowsAffected = await context.Database.ExecuteSqlCommandAsync(@"
                 DELETE FROM [Notification].[MovementDateHistory] WHERE MovementId IN (SELECT [Id] FROM [Notification].[Movement] WHERE NotificationId = @Id)
-                DELETE FROM [Notification].[MovementCarrier] WHERE MovementDetailsId IN (SELECT [Id] FROM [Notification].[MovementDetails] WHERE MovementId IN (SELECT [Id] FROM [Notification].[Movement] WHERE NotificationId = @Id))
+                DELETE FROM [Notification].[MovementCarrier] WHERE MovementId IN (SELECT [Id] FROM [Notification].[Movement] WHERE NotificationId = @Id)
                 DELETE FROM [Notification].[MovementPackagingInfo] WHERE MovementDetailsId IN (SELECT [Id] FROM [Notification].[MovementDetails] WHERE MovementId IN (SELECT [Id] FROM [Notification].[Movement] WHERE NotificationId = @Id))
                 DELETE FROM [Notification].[MovementDetails] WHERE MovementId IN (SELECT [Id] FROM [Notification].[Movement] WHERE NotificationId = @Id)
                 DELETE FROM [Notification].[MovementOperationReceipt] WHERE MovementId IN (SELECT [Id] FROM [Notification].[Movement] WHERE NotificationId = @Id)
