@@ -197,6 +197,7 @@
     <Compile Include="ImportMovement\SetMovementCommentsHandler.cs" />
     <Compile Include="ImportNotificationAssessment\AddImportNotificationCommentHandler.cs" />
     <Compile Include="ImportNotificationAssessment\ConsentHandler.cs" />
+    <Compile Include="ImportNotificationAssessment\DeleteImportNotificationCommentHandler.cs" />
     <Compile Include="ImportNotificationAssessment\DeleteImportNotificationHandler.cs" />
     <Compile Include="ImportNotificationAssessment\Events\ChangeImportNotificationAssessmentStatus.cs" />
     <Compile Include="ImportNotificationAssessment\Events\CheckImportNotificationPaymentStatus.cs" />
@@ -439,6 +440,7 @@
     <Compile Include="NotificationAssessment\AddProducerHandler.cs" />
     <Compile Include="NotificationAssessment\AddTransitStateHandler.cs" />
     <Compile Include="NotificationAssessment\DeleteExportNotificationHandler.cs" />
+    <Compile Include="NotificationAssessment\DeleteNotificationCommentHandler.cs" />
     <Compile Include="NotificationAssessment\DeleteTransactionHandler.cs" />
     <Compile Include="NotificationAssessment\GetChangeNumberOfShipmentConfrimationDataHandler.cs" />
     <Compile Include="NotificationAssessment\GetChargeDueHandler.cs" />

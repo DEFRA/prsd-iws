@@ -1,0 +1,40 @@
+﻿@using Resource = EA.Iws.Web.Areas.AdminImportAssessment.Views.Comments.IndexResources
+@using EA.Iws.Core.Admin;
+@model EA.Iws.Web.Areas.AdminImportAssessment.ViewModels.Comments.DeleteCommentViewModel
+@{
+    ViewBag.Title = "Delete Comment";
+}
+
+@{
+    Layout = "~/Areas/AdminImportAssessment/Views/Comments/_Layout.cshtml";
+}
+
+<div class="column-two-thirds">
+    <header>
+        <h1 class="heading-large">@Resource.DeleteHeader</h1>
+    </header>
+</div>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(m => m.NotificationId)
+    @Html.HiddenFor(m => m.CommentId)
+    <div>
+        <div class="column-two-thirds">
+            <div>
+                <p>@Model.ConfirmationText</p>
+            </div>
+            <div>
+                <p>@Resource.DeleteReminder</p>
+            </div>
+            <div>
+                <button type="submit" class="button">@Resource.ContinueButton</button>
+            </div>
+            <br />
+            <div>
+                @Html.ActionLink(Resource.CancelButton, "Index", "Comments", new { id = Model.NotificationId }, null)
+            </div>
+        </div>
+    </div>
+}

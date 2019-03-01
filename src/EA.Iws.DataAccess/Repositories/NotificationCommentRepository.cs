@@ -28,5 +28,20 @@
         {
             return await context.NotificationComments.Where(p => p.NotificationId == notificationId).ToListAsync();
         }
+
+        public async Task<bool> Delete(Guid commentId)
+        {
+            var comment = await context.NotificationComments.SingleOrDefaultAsync(p => p.Id == commentId);
+
+            if (comment == null)
+            {
+                return false;
+            }
+            context.NotificationComments.Remove(comment);
+
+            await context.SaveChangesAsync();
+
+            return true;
+        }
     }
 }

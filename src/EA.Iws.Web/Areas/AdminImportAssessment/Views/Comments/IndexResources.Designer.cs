@@ -19,7 +19,7 @@ namespace EA.Iws.Web.Areas.AdminImportAssessment.Views.Comments {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class IndexResources {
@@ -97,6 +97,15 @@ namespace EA.Iws.Web.Areas.AdminImportAssessment.Views.Comments {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cancel.
+        /// </summary>
+        public static string CancelButton {
+            get {
+                return ResourceManager.GetString("CancelButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Reivew Comments.
         /// </summary>
         public static string CommentsHeader {
@@ -106,11 +115,38 @@ namespace EA.Iws.Web.Areas.AdminImportAssessment.Views.Comments {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Save and continue.
+        ///   Looks up a localized string similar to Continue.
         /// </summary>
         public static string ContinueButton {
             get {
                 return ResourceManager.GetString("ContinueButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Are you sure you want to permenantly delete this comment?.
+        /// </summary>
+        public static string DeleteHeader {
+            get {
+                return ResourceManager.GetString("DeleteHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to By continuing you are permanently deleting this comment and won&apos;t be able to recover the information..
+        /// </summary>
+        public static string DeleteReminder {
+            get {
+                return ResourceManager.GetString("DeleteReminder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You are about to remove a comment by.
+        /// </summary>
+        public static string DeleteText {
+            get {
+                return ResourceManager.GetString("DeleteText", resourceCulture);
             }
         }
         
@@ -120,6 +156,15 @@ namespace EA.Iws.Web.Areas.AdminImportAssessment.Views.Comments {
         public static string GoToOverview {
             get {
                 return ResourceManager.GetString("GoToOverview", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save and continue.
+        /// </summary>
+        public static string SaveAndContinueButton {
+            get {
+                return ResourceManager.GetString("SaveAndContinueButton", resourceCulture);
             }
         }
         

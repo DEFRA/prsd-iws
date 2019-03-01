@@ -8,5 +8,7 @@
         Task<bool> Add(ImportNotificationComment comment);
 
         Task<List<ImportNotificationComment>> GetComments(Guid notificationId);
+
+        Task<bool> Delete(Guid commentId);
     }
 }

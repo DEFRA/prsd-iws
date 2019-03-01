@@ -147,6 +147,8 @@
     <Compile Include="ImportNotificationAssessment\AddImportNotificationComment.cs" />
     <Compile Include="ImportNotificationAssessment\Consent.cs" />
     <Compile Include="ImportNotificationAssessment\DeleteImportNotification.cs" />
+    <Compile Include="ImportNotificationAssessment\DeleteImportNotificationComment.cs" />
+    <Compile Include="ImportNotificationAssessment\DeleteNotificationComment.cs" />
     <Compile Include="ImportNotificationAssessment\FinancialGuarantee\ApproveFinancialGuarantee.cs" />
     <Compile Include="ImportNotificationAssessment\FinancialGuarantee\CreateFinancialGuarantee.cs" />
     <Compile Include="ImportNotificationAssessment\FinancialGuarantee\FinancialGuaranteeDecisionRequest.cs" />
