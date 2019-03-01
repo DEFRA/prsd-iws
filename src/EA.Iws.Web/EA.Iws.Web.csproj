@@ -593,6 +593,7 @@
     <Content Include="Areas\NotificationApplication\Views\Carrier\Remove.cshtml" />
     <Content Include="Scripts\jquery.prevent-double-click.js" />
     <Content Include="Scripts\jquery.stickem.js" />
+    <Content Include="Scripts\report-input-parameters.js" />
     <Content Include="Scripts\select2\select2.js" />
     <Content Include="Scripts\show-hide-content.js" />
     <Content Include="Views\Shared\EditorTemplates\OptionalDateInputViewModel.cshtml" />
@@ -1053,6 +1054,7 @@
     <Content Include="Areas\AdminExportAssessment\Views\Comments\_Layout.cshtml" />
     <Content Include="Areas\AdminImportAssessment\Views\Comments\Add.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\DecisionDateInputViewModel.cshtml" />
+    <Content Include="Areas\Reports\Views\Producer\Index.cshtml" />
     <None Include="Scripts\jquery-2.1.3.intellisense.js" />
     <Content Include="Scripts\govuk\govuk-template.js" />
     <Content Include="Scripts\govuk\ie.js" />
@@ -1168,7 +1170,8 @@
     <Content Include="Areas\NotificationApplication\Views\ShareNotification\ShareNotification.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\ShareNotification\Confirm.cshtml" />
     <Content Include="Views\ChangeNotificationOwner\ReviewAccess.cshtml" />
-    <Content Include="Views\PrivacyPolicy\Index.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\RequiredDateInputViewModel.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\ReportInputParametersViewModel.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -1538,6 +1541,13 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>FinancialGuaranteeDecisionViewModelResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Reports\Controllers\ProducerController.cs" />
+    <Compile Include="Areas\Reports\ViewModels\Producer\IndexViewModel.cs" />
+    <Compile Include="Areas\Reports\Views\Producer\ProducerResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ProducerResources.resx</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\Shared\DecisionDateInputViewmodel.cs" />
     <Compile Include="Areas\AdminImportAssessment\ViewModels\KeyDatesOverride\IndexViewModel.cs" />
@@ -3430,6 +3440,18 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>RadioButtonsResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\Shared\ReportInputParametersResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReportInputParametersResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\Shared\ReportInputParametersViewModel.cs" />
+    <Compile Include="ViewModels\Shared\RequiredDateInputResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RequiredDateInputResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\Shared\RequiredDateInputViewModel.cs" />
     <Compile Include="ViewModels\Shared\StringIntRadioButtons.cs" />
     <Compile Include="ViewModels\Shared\StringGuidRadioButtons.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\SpecialHandling\SpecialHandlingViewModel.cs" />
@@ -4965,6 +4987,7 @@
     <EmbeddedResource Include="Areas\Reports\ViewModels\FreedomOfInformation\IndexViewModelResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>IndexViewModelResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\Reports\Views\FinancialGuarantees\IndexResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -4985,6 +5008,11 @@
     <EmbeddedResource Include="Areas\Reports\Views\ImportNotifications\IndexResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\Reports\Views\Producer\ProducerResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ProducerResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\Reports\Views\Shipments\IndexResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -5014,6 +5042,14 @@
     <EmbeddedResource Include="ViewModels\Shared\RadioButtonsResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>RadioButtonsResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ViewModels\Shared\ReportInputParametersResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ReportInputParametersResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ViewModels\Shared\RequiredDateInputResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>RequiredDateInputResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\Account\EmailVerificationRequiredResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

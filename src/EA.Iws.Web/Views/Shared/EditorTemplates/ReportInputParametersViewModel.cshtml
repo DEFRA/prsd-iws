@@ -1,0 +1,41 @@
+﻿@using EA.Iws.Web.ViewModels.Shared
+@model EA.Iws.Web.ViewModels.Shared.ReportInputParametersViewModel
+    
+<div class="form-group @Html.Gds().FormGroupClass(m => m.SelectedDate)">
+    @Html.Gds().LabelFor(m => m.SelectedDate)
+    @Html.Gds().ValidationMessageFor(m => m.SelectedDate)
+    @Html.Gds().DropDownListFor(m => m.SelectedDate, Model.DateSelectList, "")
+</div>
+
+<div class="form-group @Html.Gds().FormGroupClass(m => m.FromDate) @Html.Gds().FormGroupClass(m => m.FromDate.Day) @Html.Gds().FormGroupClass(m => m.FromDate.Month) @Html.Gds().FormGroupClass(m => m.FromDate.Year)">
+    @Html.Gds().LabelFor(m => m.FromDate, false)
+    @Html.Gds().ValidationMessageFor(m => m.FromDate)
+    @Html.EditorFor(m => m.FromDate)
+</div>
+
+<div class="form-group @Html.Gds().FormGroupClass(m => m.ToDate) @Html.Gds().FormGroupClass(m => m.ToDate.Day) @Html.Gds().FormGroupClass(m => m.ToDate.Month) @Html.Gds().FormGroupClass(m => m.ToDate.Year)">
+    @Html.Gds().LabelFor(m => m.ToDate, false)
+    @Html.Gds().ValidationMessageFor(m => m.ToDate)
+    @Html.EditorFor(m => m.ToDate)
+</div>
+
+<div class="form-group @Html.Gds().FormGroupClass(m => m.SelectedTextField)">
+    @Html.Gds().LabelFor(m => m.SelectedTextField, false)
+    @Html.Gds().ValidationMessageFor(m => m.SelectedTextField)
+    @Html.Gds().DropDownListFor(m => m.SelectedTextField, Model.TextFieldSelectList, "", new { @class = "text-field-select-list"})
+</div>
+
+<div class="operator-text-panel">
+    <div class="form-group @Html.Gds().FormGroupClass(m => m.SelectedOperator)">
+        @Html.Gds().LabelFor(m => m.SelectedOperator, false)
+        @Html.Gds().ValidationMessageFor(m => m.SelectedOperator)
+        @Html.Gds().DropDownListFor(m => m.SelectedOperator, Model.TextOperatorSelectList, "")
+    </div>
+
+    <div class="form-group @Html.Gds().FormGroupClass(m => m.TextSearch)">
+        @Html.Gds().LabelFor(m => m.TextSearch, false)
+        @Html.Gds().ValidationMessageFor(m => m.TextSearch)
+        @Html.Gds().HintParagraph(ReportInputParametersResources.TextSearchHint)
+        @Html.Gds().TextBoxFor(m => m.TextSearch)
+    </div>
+</div>
