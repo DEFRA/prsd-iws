@@ -69,6 +69,8 @@
 
         public virtual DbSet<NumberOfShipmentsHistory> NumberOfShipmentsHistories { get; set; }
 
+        public virtual DbSet<ImportNotificationComment> ImportNotificationComments { get; set; }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
