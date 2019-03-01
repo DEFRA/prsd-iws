@@ -6,6 +6,7 @@
     using System.Web.Mvc;
     using Core.Admin;
     using Core.Authorization.Permissions;
+    using EA.Iws.Requests.ImportNotificationAssessment;
     using Infrastructure;
     using Infrastructure.Authorization;
     using Prsd.Core.Mediator;
@@ -87,9 +88,9 @@
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Delete(DeleteCommentViewModel model)
         {
-            //var request = new AddNotificationComment(model.NotificationId, User.GetUserId(), model.Comment, model.ShipmentNumber.GetValueOrDefault(), DateTime.Now);
+            var request = new DeleteNotificationComment(model.CommentId);
 
-            //await this.mediator.SendAsync(request);
+            await this.mediator.SendAsync(request);
 
             return RedirectToAction("Index", new { id = model.NotificationId });
         }

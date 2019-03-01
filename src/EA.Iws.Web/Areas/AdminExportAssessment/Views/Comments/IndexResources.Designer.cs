@@ -133,7 +133,7 @@ namespace EA.Iws.Web.Areas.AdminExportAssessment.Views.Comments {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to By continuing you are permenantly deleting this comment and won&apos;t be able to recover the information..
+        ///   Looks up a localized string similar to By continuing you are permanently deleting this comment and won&apos;t be able to recover the information..
         /// </summary>
         public static string DeleteReminder {
             get {

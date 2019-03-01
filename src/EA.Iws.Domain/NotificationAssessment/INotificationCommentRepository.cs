@@ -8,5 +8,6 @@
     {
         Task<bool> Add(NotificationComment comment);
         Task<List<NotificationComment>> GetComments(Guid notificationId);
+        Task<bool> Delete(Guid commentId);
     }
 }

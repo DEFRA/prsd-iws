@@ -87,9 +87,9 @@
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Delete(DeleteCommentViewModel model)
         {
-            //var request = new AddNotificationComment(model.NotificationId, User.GetUserId(), model.Comment, model.ShipmentNumber.GetValueOrDefault(), DateTime.Now);
+            var request = new DeleteImportNotificationComment(model.CommentId);
 
-            //await this.mediator.SendAsync(request);
+            await this.mediator.SendAsync(request);
 
             return RedirectToAction("Index", new { id = model.NotificationId });
         }

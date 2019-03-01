@@ -24,6 +24,21 @@
             return true;
         }
 
+        public async Task<bool> Delete(Guid commentId)
+        {
+            var comment = await context.ImportNotificationComments.FirstOrDefaultAsync(p => p.Id == commentId);
+
+            if (comment == null)
+            {
+                return false;
+            }
+            context.ImportNotificationComments.Remove(comment);
+
+            await context.SaveChangesAsync();
+
+            return true;
+        }
+
         public async Task<List<ImportNotificationComment>> GetComments(Guid notificationId)
         {
             return await context.ImportNotificationComments.Where(p => p.NotificationId == notificationId).ToListAsync();
