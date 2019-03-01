@@ -39,7 +39,7 @@ namespace EA.Iws.Web.Areas.AdminImportAssessment.Views.Comments {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EA.Iws.Web.Areas.AdminExportAssessment.Views.Comments.IndexResources", typeof(IndexResources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EA.Iws.Web.Areas.AdminImportAssessment.Views.Comments.IndexResources", typeof(IndexResources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -70,11 +70,47 @@ namespace EA.Iws.Web.Areas.AdminImportAssessment.Views.Comments {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add a comment.
+        /// </summary>
+        public static string AddHeader {
+            get {
+                return ResourceManager.GetString("AddHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to These comments will only be viewed by the internal users with access to the notification..
+        /// </summary>
+        public static string AddSubtitle {
+            get {
+                return ResourceManager.GetString("AddSubtitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Back.
+        /// </summary>
+        public static string BackButton {
+            get {
+                return ResourceManager.GetString("BackButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Reivew Comments.
         /// </summary>
         public static string CommentsHeader {
             get {
                 return ResourceManager.GetString("CommentsHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save and continue.
+        /// </summary>
+        public static string ContinueButton {
+            get {
+                return ResourceManager.GetString("ContinueButton", resourceCulture);
             }
         }
         
