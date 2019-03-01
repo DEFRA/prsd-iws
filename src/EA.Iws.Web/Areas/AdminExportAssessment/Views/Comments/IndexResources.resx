@@ -129,14 +129,29 @@
   <data name="BackButton" xml:space="preserve">
     <value>Back</value>
   </data>
+  <data name="CancelButton" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
   <data name="CommentsHeader" xml:space="preserve">
     <value>Reivew Comments</value>
   </data>
   <data name="ContinueButton" xml:space="preserve">
-    <value>Save and continue</value>
+    <value>Continue</value>
+  </data>
+  <data name="DeleteHeader" xml:space="preserve">
+    <value>Are you sure you want to permenantly delete this comment?</value>
+  </data>
+  <data name="DeleteReminder" xml:space="preserve">
+    <value>By continuing you are permanently deleting this comment and won't be able to recover the information.</value>
+  </data>
+  <data name="DeleteText" xml:space="preserve">
+    <value>You are about to remove a comment by</value>
   </data>
   <data name="GoToOverview" xml:space="preserve">
     <value>Go to Notification overview</value>
+  </data>
+  <data name="SaveAndContinueButton" xml:space="preserve">
+    <value>Save and continue</value>
   </data>
   <data name="Subtitle" xml:space="preserve">
     <value>Review and write comments for this notification and it's shipments for Internal users</value>

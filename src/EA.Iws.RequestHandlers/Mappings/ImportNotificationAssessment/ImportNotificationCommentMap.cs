@@ -26,7 +26,8 @@
                 DateAdded = source.DateAdded.UtcDateTime,
                 NotificationId = source.NotificationId,
                 ShipmentNumber = source.ShipmentNumber,
-                Username = user.FullName
+                Username = user.FullName,
+                CommentId = source.Id
             };
         }
     }
