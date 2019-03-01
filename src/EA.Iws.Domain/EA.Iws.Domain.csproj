@@ -104,7 +104,9 @@
     <Compile Include="ImportNotificationAssessment\IConsultationRepository.cs" />
     <Compile Include="ImportNotificationAssessment\IImportNotificationAssessmentDecisionRepository.cs" />
     <Compile Include="ImportNotificationAssessment\IImportNotificationChargeCalculator.cs" />
+    <Compile Include="ImportNotificationAssessment\IImportNotificationCommentRepository.cs" />
     <Compile Include="ImportNotificationAssessment\IKeyDatesOverrideRepository.cs" />
+    <Compile Include="ImportNotificationAssessment\ImportNotificationComment.cs" />
     <Compile Include="ImportNotificationAssessment\ImportNotificationChargeCalculator.cs" />
     <Compile Include="ImportNotificationAssessment\ImportNotificationDates.cs" />
     <Compile Include="ImportNotificationAssessment\ImportNotificationAssessment.cs" />
@@ -323,7 +325,9 @@
     <Compile Include="DaysRemainingCalculator.cs" />
     <Compile Include="NotificationAssessment\IKeyDatesOverrideRepository.cs" />
     <Compile Include="NotificationAssessment\INotificationAttentionSummaryRepository.cs" />
+    <Compile Include="NotificationAssessment\INotificationCommentRepository.cs" />
     <Compile Include="NotificationAssessment\NotificationAttentionSummary.cs" />
+    <Compile Include="NotificationAssessment\NotificationComment.cs" />
     <Compile Include="NotificationAssessment\NotificationInterim.cs" />
     <Compile Include="NotificationAssessment\NotificationIsInterimSetEvent.cs" />
     <Compile Include="NotificationAssessment\NotificationTransmittedEvent.cs" />

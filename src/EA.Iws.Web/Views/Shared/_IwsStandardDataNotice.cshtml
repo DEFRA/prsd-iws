@@ -1,40 +1,94 @@
 ﻿@using EA.Iws.Web.Views.Shared
 
-<details>
-    <summary>
-        <h2 class="summary heading-xsmall" data-track="disclosure" data-category="Data notice" data-action="Read">@IwsStandardDataNoticeResources.Header</h2>
-    </summary>
-    <div class="panel">
-        <p>
-            @IwsStandardDataNoticeResources.ReadCarefully
-        </p>
+<div>
+    <h2 class="heading-medium">
+        @IwsStandardDataNoticeResources.ReadCarefully
+    </h2>
 
-        <h2 class="heading-small">@IwsStandardDataNoticeResources.PersonalInfoHeading</h2>
-        <p>
-            @IwsStandardDataNoticeResources.PersonalInfoIntro
+    <h2 class="heading-small">@IwsStandardDataNoticeResources.PersonalInfoHeading</h2>
+    <p>
+        @IwsStandardDataNoticeResources.PersonalInfoIntro
+    </p>
+    <h2 class="heading-small">@IwsStandardDataNoticeResources.EA</h2>
+    <h2>@IwsStandardDataNoticeResources.EASubHeading</h2>
+    <p>
+        <a href="https://www.gov.uk/government/organisations/environment-agency/about/personal-information-charter" target="_blank">https://www.gov.uk/government/organisations/environment-agency/about/personal-information-charter</a><br>
+        @IwsStandardDataNoticeResources.EAPara
+    </p>
 
-            <ul class="list-bullet">
-                <li>@IwsStandardDataNoticeResources.DealWithApplication</li>
-                <li>@IwsStandardDataNoticeResources.ConditionsOfLicence</li>
-                <li>@IwsStandardDataNoticeResources.ProcessRenewals</li>
-            </ul>
-        </p>
+    <h2 class="heading-small">@IwsStandardDataNoticeResources.SEPA</h2>
+    <p>
+        <a href="https://www.sepa.org.uk/help/privacy-policy/" target="_blank">Privacy Policy</a>
+    </p>
 
-        <h2 class="heading-small">@IwsStandardDataNoticeResources.WeMayAlsoHeading</h2>
+    <h2 class="heading-small">@IwsStandardDataNoticeResources.NIEA</h2>
+    <p>
+        <a href="https://www.daera-ni.gov.uk/daera-privacy-statement" target="_blank">DAERA Privacy Statement</a>
+    </p>
 
-        <p>
-            <ul class="list-bullet">
-                <li>@IwsStandardDataNoticeResources.OfferYouDocuments</li>
-                <li>@IwsStandardDataNoticeResources.ConsultThePublic</li>
-                <li>@IwsStandardDataNoticeResources.CarryOutResearch</li>
-                <li>@IwsStandardDataNoticeResources.PreventLawBreaking</li>
-                <li>@IwsStandardDataNoticeResources.CustomerSatisfaction</li>
-                <li>@IwsStandardDataNoticeResources.RequestsForInformation</li>
-            </ul>
-        </p>
+    <h2 class="heading-small">@IwsStandardDataNoticeResources.NRW</h2>
+    <p>
+        <a href="https://naturalresources.wales/footer-links/privacy-notice/?lang=en" target="_blank">Privacy Notice</a>
+    </p>
 
-        <p>
-            @IwsStandardDataNoticeResources.PassInformationToAgents
-        </p>
-    </div>
-</details>
+    <h2 class="heading-small">@IwsStandardDataNoticeResources.PersonalDataHeading</h2>
+    <p>@IwsStandardDataNoticeResources.PersonalDataPara1</p>
+    <p>@IwsStandardDataNoticeResources.PersonalDataPara2</p>
+    <p>
+        <ul class="list list-bullet">
+            <li>@IwsStandardDataNoticeResources.PersonalDataListItem1</li>
+            <li>@IwsStandardDataNoticeResources.PersonalDataListItem2</li>
+            <li>@IwsStandardDataNoticeResources.PersonalDataListItem3</li>
+        </ul>
+    </p>
+    <h2 class="heading-small">@IwsStandardDataNoticeResources.ResponsibleHeading</h2>
+    <p>@IwsStandardDataNoticeResources.ResponsiblePara</p>
+
+    <h2 class="heading-small">@IwsStandardDataNoticeResources.WhatWeDoHeading</h2>
+    <p>@IwsStandardDataNoticeResources.WhatWeDoPara1</p>
+    <p>@IwsStandardDataNoticeResources.WhatWeDoPara2</p>
+    <p>
+        @IwsStandardDataNoticeResources.WhatWeDoPara3Part1 <a href="https://www.civica.com/en-gb/" target="_blank">Civica Digital </a> @IwsStandardDataNoticeResources.WhatWeDoPara3Part2
+    </p>
+    <p>
+        @IwsStandardDataNoticeResources.WhatWeDoPara4Part1<a href="https://data.gov.uk/dataset/fb973a82-c484-4b14-8209-01bbea39c87b/international-waste-shipments-exported-from-england" target="_blank">data.gov.uk</a>@IwsStandardDataNoticeResources.WhatWeDoPara4Part2
+    </p>
+
+    <h2 class="heading-small">@IwsStandardDataNoticeResources.HowWeKeep</h2>
+    <p>@IwsStandardDataNoticeResources.HowWeKeepPara</p>
+
+    <h2 class="heading-small">@IwsStandardDataNoticeResources.WhereWeKeep</h2>
+    <p>@IwsStandardDataNoticeResources.WhereWeKeepPara1</p>
+    <p>@IwsStandardDataNoticeResources.WhereWeKeepPara2</p>
+    <p>@IwsStandardDataNoticeResources.WhereWeKeepPara3</p>
+    <p>@IwsStandardDataNoticeResources.WhereWeKeepPara4</p>
+
+    <h2 class="heading-small">@IwsStandardDataNoticeResources.WhoIsCollecting</h2>
+    <p>@IwsStandardDataNoticeResources.WhoIsCollectingPara1</p>
+    <h2 class="heading-small">@IwsStandardDataNoticeResources.EA</h2>
+    @Html.Raw(IwsStandardDataNoticeResources.EAAddress)
+    @IwsStandardDataNoticeResources.Email @Html.MailtoLink(IwsStandardDataNoticeResources.EAEmail)
+
+    <p>
+        <h2 class="heading-small">@IwsStandardDataNoticeResources.SEPA</h2>
+        @Html.Raw(IwsStandardDataNoticeResources.SEPAAddress)
+        @IwsStandardDataNoticeResources.Email @Html.MailtoLink(IwsStandardDataNoticeResources.SEPAEmail)
+    </p>
+
+    <p>
+        <h2 class="heading-small">@IwsStandardDataNoticeResources.NIEA</h2>
+        @Html.Raw(IwsStandardDataNoticeResources.NIEAAddress)
+    </p>
+
+    <p>
+        <h2 class="heading-small">@IwsStandardDataNoticeResources.NRW</h2>
+        @Html.Raw(IwsStandardDataNoticeResources.NRWAddress)
+        @IwsStandardDataNoticeResources.Email @Html.MailtoLink(IwsStandardDataNoticeResources.NRWEmail)
+    </p>
+    <p>
+        @IwsStandardDataNoticeResources.FootNote1 <a href="https://ico.org.uk/your-data-matters" target="_blank">https://ico.org.uk/your‐data‐matters</a>.
+    </p>
+    <p>
+        @IwsStandardDataNoticeResources.FootNote2 <a href="https://ico.org.uk/make-a-complaint" target="_blank">https://ico.org.uk/make-a-complaint</a>.
+    </p>
+</div>

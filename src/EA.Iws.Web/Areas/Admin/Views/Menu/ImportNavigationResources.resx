@@ -216,4 +216,10 @@
   <data name="Preconsented" xml:space="preserve">
     <value>Pre-consented</value>
   </data>
+  <data name="CommentsHeading" xml:space="preserve">
+    <value>Comments</value>
+  </data>
+  <data name="CommentsLinkText" xml:space="preserve">
+    <value>Review Comments</value>
+  </data>
 </root>

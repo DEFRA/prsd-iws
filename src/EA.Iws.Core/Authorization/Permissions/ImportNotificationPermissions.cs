@@ -19,5 +19,7 @@
         public const string CanChangeNumberOfShipmentsOnImportNotification = "Can Change Number Of Shipments On Import Notification";
 
         public const string CanChangeImportEntryExitPoint = "Can Change Import Entry Exit Point";
+
+        public const string CanEditComments = "Can edit comments";
     }
 }

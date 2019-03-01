@@ -55,6 +55,7 @@
     <Compile Include="Admin\ExternalUserData.cs" />
     <Compile Include="Admin\ExternalUserStatus.cs" />
     <Compile Include="Admin\NotificationInfo.cs" />
+    <Compile Include="Admin\NotificationShipmentsCommentsType.cs" />
     <Compile Include="Admin\Reports\FinancialGuaranteesData.cs" />
     <Compile Include="Admin\Reports\ExportMovementsData.cs" />
     <Compile Include="Admin\Reports\ImportStatsData.cs" />
@@ -122,6 +123,7 @@
     <Compile Include="ImportNotificationAssessment\FinancialGuarantee\ImportFinancialGuaranteeStatus.cs" />
     <Compile Include="ImportNotificationAssessment\FinancialGuarantee\ReceivedAndCompletedDateData.cs" />
     <Compile Include="ImportNotificationAssessment\ImportNotificationAssessmentDecisionData.cs" />
+    <Compile Include="ImportNotificationAssessment\ImportNotificationCommentsData.cs" />
     <Compile Include="ImportNotificationAssessment\ImportNotificationStatus.cs" />
     <Compile Include="ImportNotificationAssessment\KeyDatesData.cs" />
     <Compile Include="ImportNotificationAssessment\Transactions\AccountOverviewData.cs" />
@@ -164,6 +166,7 @@
     <Compile Include="ImportNotification\Summary\WasteCodeSelection.cs" />
     <Compile Include="ImportNotification\Summary\WasteOperation.cs" />
     <Compile Include="ImportNotification\Summary\WasteType.cs" />
+    <Compile Include="InternalComments\InternalComment.cs" />
     <Compile Include="MeansOfTransport\MeansOfTransportHelper.cs" />
     <Compile Include="MeansOfTransport\TransportMethod.cs" />
     <Compile Include="MovementOperation\MovementOperationData.cs" />
@@ -218,6 +221,7 @@
     <Compile Include="NotificationAssessment\NotificationAssessmentDecision.cs" />
     <Compile Include="NotificationAssessment\NotificationAssessmentDecisionData.cs" />
     <Compile Include="NotificationAssessment\NotificationAttentionSummaryTableData.cs" />
+    <Compile Include="NotificationAssessment\NotificationCommentData.cs" />
     <Compile Include="NotificationAssessment\NotificationTransactionData.cs" />
     <Compile Include="Notification\Audit\NotificationAudit.cs" />
     <Compile Include="Notification\Audit\NotificationAuditForDisplay.cs" />

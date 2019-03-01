@@ -117,58 +117,28 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AddressQuestions" xml:space="preserve">
-    <value>Please address any questions, comments and request regarding the processing of your data to: {0}</value>
+  <data name="AddButton" xml:space="preserve">
+    <value>Add a comment</value>
   </data>
-  <data name="AddressQuestionsEmail" xml:space="preserve">
-    <value>transfrontier@sepa.org.uk</value>
+  <data name="AddHeader" xml:space="preserve">
+    <value>Add a comment</value>
   </data>
-  <data name="CarryOutResearch" xml:space="preserve">
-    <value>carry out research and development work on environmental issues</value>
+  <data name="AddSubtitle" xml:space="preserve">
+    <value>These comments will only be viewed by the internal users with access to the notification.</value>
   </data>
-  <data name="ConditionsOfLicence" xml:space="preserve">
-    <value>make sure you keep to the conditions of the licence, permit or registration</value>
+  <data name="BackButton" xml:space="preserve">
+    <value>Back</value>
   </data>
-  <data name="ConsultThePublic" xml:space="preserve">
-    <value>consult the public, public organisations and other organisations (for example the Health and Safety Executive) on environmental issues</value>
+  <data name="CommentsHeader" xml:space="preserve">
+    <value>Reivew Comments</value>
   </data>
-  <data name="CustomerSatisfaction" xml:space="preserve">
-    <value>assess whether customers are satisfied with our service, and improve our service</value>
+  <data name="ContinueButton" xml:space="preserve">
+    <value>Save and continue</value>
   </data>
-  <data name="DealWithApplication" xml:space="preserve">
-    <value>deal with your notification</value>
+  <data name="GoToOverview" xml:space="preserve">
+    <value>Go to Notification overview</value>
   </data>
-  <data name="Header" xml:space="preserve">
-    <value>Read our standard data notice</value>
-  </data>
-  <data name="OfferYouDocuments" xml:space="preserve">
-    <value>offer you documents or services relating to environmental matters</value>
-  </data>
-  <data name="PassInformationToAgents" xml:space="preserve">
-    <value>We may pass this information on to our agents or representatives to do these things for us or for research purposes.  If we do pass this information on we will do so in a redacted and/or anonymised form as far as possible.</value>
-  </data>
-  <data name="PersonalInfoHeading" xml:space="preserve">
-    <value>How we will use your personal information</value>
-  </data>
-  <data name="PersonalInfoIntro" xml:space="preserve">
-    <value>We, the Scottish Environment Protection Agency (SEPA), will process the information (full name, company/organisation name, business contact phone number, business email address) you provide so that we can:</value>
-  </data>
-  <data name="PreventLawBreaking" xml:space="preserve">
-    <value>prevent anyone from breaking environmental law, investigate cases where environmental law may have been broken, and take any action that is needed</value>
-  </data>
-  <data name="ProcessRenewals" xml:space="preserve">
-    <value>process renewals</value>
-  </data>
-  <data name="ReadCarefully" xml:space="preserve">
-    <value>Please read carefully, accept by ticking the box provided, and proceed.</value>
-  </data>
-  <data name="RequestsForInformation" xml:space="preserve">
-    <value>respond to information requests under the Freedom of Information (Scotland) Act 2002 and the Environmental Information (Scotland) Regulations 2004 (if the Data Protection Act allows)</value>
-  </data>
-  <data name="RetainDetails" xml:space="preserve">
-    <value>We will only retain your details for as long as required in relation to your licence, permit or registration.</value>
-  </data>
-  <data name="WeMayAlsoHeading" xml:space="preserve">
-    <value>We may also process or release the information to:</value>
+  <data name="Subtitle" xml:space="preserve">
+    <value>Review and write comments for this notification and it's shipments for Internal users</value>
   </data>
 </root>
