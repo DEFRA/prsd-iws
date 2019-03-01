@@ -9,6 +9,5 @@
         public string Comment { get; set; }
         public int ShipmentNumber { get; set; }
         public DateTime DateAdded { get; set; }
-
     }
 }
