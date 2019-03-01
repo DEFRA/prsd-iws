@@ -110,6 +110,7 @@
     <Compile Include="Helpers\AddressDataEqualityComparer.cs" />
     <Compile Include="ImportNotification\AddImportNotificationCommentsHandlerTests.cs" />
     <Compile Include="ImportNotification\Draft\TransitStateCollectionTests.cs" />
+    <Compile Include="ImportNotification\GetImportNotificationCommentsHandlerTests.cs" />
     <Compile Include="ImportNotification\Summary\TransportRouteIdContainerTests.cs" />
     <Compile Include="ImportNotification\Validate\AddressTestData.cs" />
     <Compile Include="ImportNotification\Validate\AddressValidatorTests.cs" />
@@ -182,6 +183,7 @@
     <Compile Include="NotificationMovements\Create\CreateMovementCarriersHandlerTests.cs" />
     <Compile Include="NotificationMovements\BulkReceiptRecovery\PerformReceiptRecoveryContentValidationHandlerTests.cs" />
     <Compile Include="Notification\AddNotificationCommentsHandlerTests.cs" />
+    <Compile Include="Notification\GetNotificationCommentsHandlerTests.cs" />
     <Compile Include="Notification\NotifcationAuditGetHandlerTests.cs" />
     <Compile Include="Notification\NotificationAuditCreatedHandlerTests.cs" />
     <Compile Include="Notification\NotificationAuditScreenGetHandlerTests.cs" />

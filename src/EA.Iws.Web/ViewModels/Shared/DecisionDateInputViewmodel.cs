@@ -80,15 +80,23 @@
 
         public bool IsAutoTabEnabled { get; set; }
 
+        public bool CheckRange(int start, int end, int value)
+        {
+            return (value >= start && value <= end);
+        }
+
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {                      
             if (Day.HasValue && Month.HasValue && Year.HasValue)
             {
-                DateTime decisionRequireByDate;
-                bool isValidDate = SystemTime.TryParse(Year.GetValueOrDefault(), Month.GetValueOrDefault(), Day.GetValueOrDefault(), out decisionRequireByDate);
-                if (!isValidDate)
+                if (CheckRange(1, 31, Day.Value) && CheckRange(1, 12, Month.Value) && CheckRange(2000, 3000, Year.Value))
                 {
-                    yield return new ValidationResult(DecisionDateResources.FromValid, new[] { "Day" });
+                    DateTime decisionRequireByDate;
+                    bool isValidDate = SystemTime.TryParse(Year.GetValueOrDefault(), Month.GetValueOrDefault(), Day.GetValueOrDefault(), out decisionRequireByDate);
+                    if (!isValidDate)
+                    {
+                        yield return new ValidationResult(DecisionDateResources.FromValid, new[] { "Day" });
+                    }
                 }
             }
         }

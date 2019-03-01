@@ -10,7 +10,7 @@
     {
         public Guid ImportNotificationId { get; private set; }
 
-        public Guid UserId { get; private set; }
+        public string UserId { get; private set; }
 
         public string Comment { get; private set; }
 
@@ -18,7 +18,7 @@
 
         public DateTime DateAdded { get; private set; }
 
-        public AddImportNotificationComment(Guid importNotificationId, Guid userId, string comment, int shipmentNumber, DateTime dateAdded)
+        public AddImportNotificationComment(Guid importNotificationId, string userId, string comment, int shipmentNumber, DateTime dateAdded)
         {
             this.ImportNotificationId = importNotificationId;
             this.UserId = userId;

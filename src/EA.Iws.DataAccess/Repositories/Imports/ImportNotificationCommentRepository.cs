@@ -1,5 +1,7 @@
 ﻿namespace EA.Iws.DataAccess.Repositories.Imports
 {
+    using System;
+    using System.Collections.Generic;
     using System.Data.Entity;
     using System.Linq;
     using System.Threading.Tasks;
@@ -20,6 +22,11 @@
             await context.SaveChangesAsync();
 
             return true;
+        }
+
+        public async Task<List<ImportNotificationComment>> GetComments(Guid notificationId)
+        {
+            return await context.ImportNotificationComments.Where(p => p.NotificationId == notificationId).ToListAsync();
         }
     }
 }

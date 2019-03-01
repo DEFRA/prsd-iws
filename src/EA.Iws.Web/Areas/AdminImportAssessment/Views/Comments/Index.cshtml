@@ -49,13 +49,13 @@
                 @for (int i = 0; i < Model.Comments.Count; i++)
                 {
                     <tr>
-                        <td>@Html.DisplayFor(m => m.Comments[i])</td>
-                        <td>@Html.DisplayFor(m => m.Comments[i])</td>
+                        <td>@Html.DisplayFor(m => m.Comments[i].Username)</td>
+                        <td>@Model.Comments[i].DateAdded.ToString("dd MMM yyyy")</td>
                         @if (Model.Type == EA.Iws.Core.Admin.NotificationShipmentsCommentsType.Shipments)
                         {
-                            <td>@Html.DisplayFor(m => m.Comments[i])</td>
+                            <td>@Html.DisplayFor(m => m.Comments[i].ShipmentNumber)</td>
                         }
-                        <td>@Html.DisplayFor(m => m.Comments[i])</td>
+                        <td>@Html.DisplayFor(m => m.Comments[i].Comment)</td>
                         <td>
                             <span style="white-space: nowrap">
                                 @Html.ActionLink("Edit", "Index", "Edit", new { }, null) <span>&nbsp;</span>
@@ -66,6 +66,12 @@
                 }
             </tbody>
         </table>
+    </div>
+}
+else
+{
+    <div class="margin-bottom-30 margin-top-30 ">
+        <h3 style="text-align:center; font-size:36px">No comments available</h3>
     </div>
 }
 @using (Html.BeginForm())

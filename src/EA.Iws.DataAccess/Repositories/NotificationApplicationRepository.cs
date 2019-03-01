@@ -77,7 +77,7 @@
         {
             var rowsAffected = await context.Database.ExecuteSqlCommandAsync(@"
                 DELETE FROM [Notification].[MovementDateHistory] WHERE MovementId IN (SELECT [Id] FROM [Notification].[Movement] WHERE NotificationId = @Id)
-                DELETE FROM [Notification].[MovementCarrier] WHERE MovementDetailsId IN (SELECT [Id] FROM [Notification].[MovementDetails] WHERE MovementId IN (SELECT [Id] FROM [Notification].[Movement] WHERE NotificationId = @Id))
+                DELETE FROM [Notification].[MovementCarrier] WHERE MovementId IN (SELECT [Id] FROM [Notification].[Movement] WHERE NotificationId = @Id)
                 DELETE FROM [Notification].[MovementPackagingInfo] WHERE MovementDetailsId IN (SELECT [Id] FROM [Notification].[MovementDetails] WHERE MovementId IN (SELECT [Id] FROM [Notification].[Movement] WHERE NotificationId = @Id))
                 DELETE FROM [Notification].[MovementDetails] WHERE MovementId IN (SELECT [Id] FROM [Notification].[Movement] WHERE NotificationId = @Id)
                 DELETE FROM [Notification].[MovementOperationReceipt] WHERE MovementId IN (SELECT [Id] FROM [Notification].[Movement] WHERE NotificationId = @Id)
@@ -114,6 +114,7 @@
                 DELETE FROM [Notification].[Transaction] WHERE NotificationId = @Id
                 DELETE FROM [Notification].[EntryCustomsOffice] WHERE TransportRouteId IN (SELECT [Id] FROM [Notification].[TransportRoute] WHERE NotificationId = @Id)
                 DELETE FROM [Notification].[ExitCustomsOffice] WHERE TransportRouteId IN (SELECT [Id] FROM [Notification].[TransportRoute] WHERE NotificationId = @Id)
+                DELETE FROM [Notification].[EntryExitCustomsSelection] WHERE TransportRouteId IN (SELECT [Id] FROM [Notification].[TransportRoute] WHERE NotificationId = @Id)
                 DELETE FROM [Notification].[StateOfExport] WHERE TransportRouteId IN (SELECT [Id] FROM [Notification].[TransportRoute] WHERE NotificationId = @Id)
                 DELETE FROM [Notification].[StateOfImport] WHERE TransportRouteId IN (SELECT [Id] FROM [Notification].[TransportRoute] WHERE NotificationId = @Id)
                 DELETE FROM [Notification].[TransitState] WHERE TransportRouteId IN (SELECT [Id] FROM [Notification].[TransportRoute] WHERE NotificationId = @Id)
@@ -125,7 +126,7 @@
                 DELETE FROM [Notification].[WasteType] WHERE NotificationId = @Id
                 DELETE FROM [Notification].[SharedUser] WHERE NotificationId = @Id
                 DELETE FROM [Notification].[SharedUserHistory] WHERE NotificationId = @Id
-                DELETE FROM [Notification].[Audit] WHERE Id = @Id
+                DELETE FROM [Notification].[Audit] WHERE NotificationId = @Id
                 DELETE FROM [Notification].[Notification] WHERE Id = @Id",
                 new SqlParameter("@Id", notificationId));
 
