@@ -80,6 +80,15 @@ $(document).ready(function () {
 
     // Datable
     $("input[data-datable]").datable();
+
+	//Autocomplete
+    $.extend($.ui.autocomplete.prototype.options, {
+    	open: function (event, ui) {
+    		$(this).autocomplete("widget").css({
+    			"width": ($(this).outerWidth() + "px")
+    		});
+    	}
+    });
 });
 
 $(window).load(function () {
