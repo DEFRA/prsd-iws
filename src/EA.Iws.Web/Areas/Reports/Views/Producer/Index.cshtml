@@ -1,0 +1,22 @@
+﻿@model EA.Iws.Web.Areas.Reports.ViewModels.Producer.IndexViewModel
+@using Resources = EA.Iws.Web.Areas.Reports.Views.Producer.ProducerResources
+
+@{
+    ViewBag.Title = Resources.Title;
+}
+
+<h1 class="heading-large">@Resources.Heading</h1>
+
+<p>@Resources.ReportInfo</p>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.Gds().ValidationSummary()
+
+    @Html.EditorFor(m => m.InputParameters)
+
+    <div class="form-group">
+        <button class="button" type="submit">@Resources.ButtonText</button>
+    </div>
+}

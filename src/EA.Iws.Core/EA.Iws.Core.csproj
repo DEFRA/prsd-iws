@@ -232,7 +232,10 @@
     <Compile Include="OperationCodes\OperationCodeMetadata.cs" />
     <Compile Include="OperationCodes\OperationCodeTypeAttribute.cs" />
     <Compile Include="Reports\FoiReportDates.cs" />
+    <Compile Include="Reports\Producer\ProducerReportDates.cs" />
+    <Compile Include="Reports\Producer\ProducerReportTextFields.cs" />
     <Compile Include="Reports\ShipmentsReportDates.cs" />
+    <Compile Include="Reports\TextFieldOperator.cs" />
     <Compile Include="Rules\MessageLevel.cs" />
     <Compile Include="Rules\RuleResult.cs" />
     <Compile Include="Shared\CertificateType.cs" />
