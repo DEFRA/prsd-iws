@@ -5,6 +5,7 @@
     public class InternalComment
     {
         public Guid NotificationId { get; set; }
+        public Guid CommentId { get; set; }
         public string Username { get; set; }
         public string Comment { get; set; }
         public int ShipmentNumber { get; set; }

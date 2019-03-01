@@ -67,5 +67,31 @@
 
             return RedirectToAction("Index", new { id = model.NotificationId });
         }
+
+        [HttpGet]
+        public async Task<ActionResult> Delete(Guid id, Guid commentId)
+        {
+            var comments = await this.mediator.SendAsync(new GetNotificationComments(id));
+
+            DeleteCommentViewModel model = new DeleteCommentViewModel()
+            {
+                NotificationId = id,
+                CommentId = commentId,
+                Comment = comments.NotificationComments.FirstOrDefault(p => p.CommentId == commentId)
+            };
+
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Delete(DeleteCommentViewModel model)
+        {
+            //var request = new AddNotificationComment(model.NotificationId, User.GetUserId(), model.Comment, model.ShipmentNumber.GetValueOrDefault(), DateTime.Now);
+
+            //await this.mediator.SendAsync(request);
+
+            return RedirectToAction("Index", new { id = model.NotificationId });
+        }
     }
 }

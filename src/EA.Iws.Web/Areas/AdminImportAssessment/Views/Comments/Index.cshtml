@@ -59,7 +59,7 @@
                         <td>
                             <span style="white-space: nowrap">
                                 @Html.ActionLink("Edit", "Index", "Edit", new { }, null) <span>&nbsp;</span>
-                                @Html.ActionLink("Delete", "Index", "Delete", new { }, null)
+                                @Html.ActionLink("Delete", "Delete", "Comments", new { commentId = @Model.Comments[i].CommentId }, null)
                             </span>
                         </td>
                     </tr>
