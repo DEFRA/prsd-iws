@@ -133,7 +133,16 @@
 
             importer.RegistrationNumber = importer.RegistrationNumber == null ? notApplicable : importer.RegistrationNumber;
 
-            FinalBusiness business = FinalBusiness.CreateBusiness(importer.BusinessName, importer.Type.GetValueOrDefault(), importer.RegistrationNumber, notApplicable);
+            FinalBusiness business;
+            if (importer.Type == Core.Shared.BusinessType.Other)
+            {
+                business = FinalBusiness.CreateOtherBusiness(importer.BusinessName, importer.RegistrationNumber, notApplicable, notApplicable);
+            }
+            else
+            {
+                business = FinalBusiness.CreateBusiness(importer.BusinessName, importer.Type.GetValueOrDefault(), importer.RegistrationNumber, notApplicable);
+            }
+
             return new AddressBookRecord(address, business, contact);
         }
 
@@ -144,7 +153,15 @@
 
             facility.RegistrationNumber = facility.RegistrationNumber == null ? notApplicable : facility.RegistrationNumber;
 
-            FinalBusiness business = FinalBusiness.CreateBusiness(facility.BusinessName, facility.Type.GetValueOrDefault(), facility.RegistrationNumber, string.Empty);
+            FinalBusiness business;
+            if (facility.Type == Core.Shared.BusinessType.Other)
+            {
+                business = FinalBusiness.CreateOtherBusiness(facility.BusinessName, facility.RegistrationNumber, notApplicable, notApplicable);
+            }
+            else
+            {
+                business = FinalBusiness.CreateBusiness(facility.BusinessName, facility.Type.GetValueOrDefault(), facility.RegistrationNumber, notApplicable);
+            }
             return new AddressBookRecord(address, business, contact);
         }
 
