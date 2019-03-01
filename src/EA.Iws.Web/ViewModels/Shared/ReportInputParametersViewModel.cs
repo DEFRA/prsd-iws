@@ -11,15 +11,13 @@
     {
         [Display(Name = "DateType", ResourceType = typeof(ReportInputParametersResources))]
         [Required(ErrorMessageResourceName = "DateTypeRequired", ErrorMessageResourceType = typeof(ReportInputParametersResources))]
-        public Type DateType { get; }
+        public string SelectedDate { get; set; }
 
         [Display(Name = "TextFieldType", ResourceType = typeof(ReportInputParametersResources))]
-        [Required(ErrorMessageResourceName = "TextFieldRequired", ErrorMessageResourceType = typeof(ReportInputParametersResources))]
-        public Type TextFieldType { get; }
+        public string SelectedTextField { get; set; }
 
         [Display(Name = "TextFieldOperator", ResourceType = typeof(ReportInputParametersResources))]
-        [Required(ErrorMessageResourceName = "TextFieldOperatorRequired", ErrorMessageResourceType = typeof(ReportInputParametersResources))]
-        public Type TextOperatorType { get; }
+        public string SelectedOperator { get; set; }
 
         [Display(Name = "FromDate", ResourceType = typeof(ReportInputParametersResources))]
         public RequiredDateInputViewModel FromDate { get; set; }
@@ -28,7 +26,6 @@
         public RequiredDateInputViewModel ToDate { get; set; }
 
         [Display(Name = "TextSearch", ResourceType = typeof(ReportInputParametersResources))]
-        [Required(ErrorMessageResourceName = "TextSearchRequired", ErrorMessageResourceType = typeof(ReportInputParametersResources))]
         public string TextSearch { get; set; }
 
         public SelectList DateSelectList { get; set; }
@@ -37,22 +34,18 @@
 
         public SelectList TextOperatorSelectList { get; set; }
 
-        public ReportInputParametersViewModel(Type date, Type textField, Type textOperator)
+        public ReportInputParametersViewModel(Type dateType, Type textFieldType, Type textOperatorType)
         {
-            DateType = date;
-            TextFieldType = textField;
-            TextOperatorType = textOperator;
-
             FromDate = new RequiredDateInputViewModel(true);
             ToDate = new RequiredDateInputViewModel(true);
 
-            var textFieldTypes = EnumHelper.GetValues(TextFieldType);
+            var textFieldTypes = EnumHelper.GetValues(textFieldType);
             textFieldTypes.Add(-1, "View all");
             var orderedTextFieldTypes = textFieldTypes.OrderBy(x => x.Key);
 
-            DateSelectList = new SelectList(EnumHelper.GetValues(DateType), "Key", "Value", null);
+            DateSelectList = new SelectList(EnumHelper.GetValues(dateType), "Key", "Value", null);
             TextFieldSelectList = new SelectList(orderedTextFieldTypes, "Key", "Value", null);
-            TextOperatorSelectList = new SelectList(EnumHelper.GetValues(TextOperatorType), "Key", "Value", null);
+            TextOperatorSelectList = new SelectList(EnumHelper.GetValues(textOperatorType), "Key", "Value", null);
         }
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
@@ -61,6 +54,45 @@
             {
                 yield return new ValidationResult(ReportInputParametersResources.FromDateBeforeToDate, new[] { "FromDate" });
             }
+
+            if (string.IsNullOrEmpty(SelectedTextField) || SelectedTextField != "-1")
+            {
+                if (string.IsNullOrEmpty(SelectedTextField))
+                {
+                    yield return
+                        new ValidationResult(ReportInputParametersResources.DateTypeRequired, new[] { "SelectedDate" });
+                }
+
+                if (!string.IsNullOrEmpty(SelectedTextField) && string.IsNullOrEmpty(SelectedOperator))
+                {
+                    yield return
+                        new ValidationResult(ReportInputParametersResources.TextFieldOperatorRequired, new[] { "SelectedOperator" });
+                }
+
+                if (!string.IsNullOrEmpty(SelectedTextField) && string.IsNullOrEmpty(TextSearch))
+                {
+                    yield return
+                        new ValidationResult(ReportInputParametersResources.TextSearchRequired, new[] { "TextSearch" });
+                }
+            }
+        }
+
+        public T? TryParse<T>(string value) where T : struct
+        {
+            if (string.IsNullOrEmpty(value))
+            {
+                return null;
+            }
+
+            T result;
+
+            if (Enum.TryParse<T>(value, true, out result) &&
+                Enum.IsDefined(typeof(T), result))
+            {
+                return result;
+            }
+
+            return null;
         }
     }
 }

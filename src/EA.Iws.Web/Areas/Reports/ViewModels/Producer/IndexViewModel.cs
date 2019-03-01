@@ -8,6 +8,21 @@
     {
         public ReportInputParametersViewModel InputParameters { get; set; }
 
+        public ProducerReportDates? DateType
+        {
+            get { return InputParameters.TryParse<ProducerReportDates>(InputParameters.SelectedDate); }
+        }
+
+        public ProducerReportTextFields? TextFieldType
+        {
+            get { return InputParameters.TryParse<ProducerReportTextFields>(InputParameters.SelectedDate); }
+        }
+
+        public TextFieldOperator? OperatorType
+        {
+            get { return InputParameters.TryParse<TextFieldOperator>(InputParameters.SelectedDate); }
+        }
+
         public IndexViewModel()
         {
             InputParameters = new ReportInputParametersViewModel(typeof(ProducerReportDates),

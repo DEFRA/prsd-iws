@@ -593,6 +593,7 @@
     <Content Include="Areas\NotificationApplication\Views\Carrier\Remove.cshtml" />
     <Content Include="Scripts\jquery.prevent-double-click.js" />
     <Content Include="Scripts\jquery.stickem.js" />
+    <Content Include="Scripts\report-input-parameters.js" />
     <Content Include="Scripts\select2\select2.js" />
     <Content Include="Scripts\show-hide-content.js" />
     <Content Include="Views\Shared\EditorTemplates\OptionalDateInputViewModel.cshtml" />
