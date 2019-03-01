@@ -3,6 +3,7 @@
     using System.Web.Mvc;
     using ViewModels.Producer;
 
+    [Authorize]
     public class ProducerController : Controller
     {
         [HttpGet]
