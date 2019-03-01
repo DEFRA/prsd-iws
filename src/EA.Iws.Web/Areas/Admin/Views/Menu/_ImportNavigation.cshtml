@@ -112,6 +112,16 @@
             </li>
         }
 
+        <li class="@GetClassForSection(ImportNavigationSection.Comments, "active")">
+            <h3 class="@GetClassForSection(ImportNavigationSection.Comments, "current")">
+                <span></span>
+                @Resources.CommentsHeading
+            </h3>
+            <ul>
+                <li>@Html.ActionLink(Resources.CommentsLinkText, "Index", "Comments", new { area = "AdminImportAssessment", id }, null)</li>
+            </ul>
+        </li>
+
         <li class="">
             <h3 class="">
                 <span></span>

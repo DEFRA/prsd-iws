@@ -1046,6 +1046,13 @@
     <Content Include="Areas\AddressBook\Views\Edit\Index.cshtml" />
     <Content Include="Areas\AddressBook\Views\Edit\_BusinessType.cshtml" />
     <Content Include="Areas\AddressBook\Views\Edit\Add.cshtml" />
+    <Content Include="Areas\AdminExportAssessment\Views\Comments\Index.cshtml" />
+    <Content Include="Areas\AdminExportAssessment\Views\Comments\_Navigation.cshtml" />
+    <Content Include="Areas\AdminImportAssessment\Views\Comments\_Navigation.cshtml" />
+    <Content Include="Areas\AdminImportAssessment\Views\Comments\Index.cshtml" />
+    <Content Include="Areas\AdminExportAssessment\Views\Comments\Add.cshtml" />
+    <Content Include="Areas\AdminExportAssessment\Views\Comments\_Layout.cshtml" />
+    <Content Include="Areas\AdminImportAssessment\Views\Comments\Add.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\DecisionDateInputViewModel.cshtml" />
     <Content Include="Areas\Reports\Views\Producer\Index.cshtml" />
     <None Include="Scripts\jquery-2.1.3.intellisense.js" />
@@ -1157,7 +1164,6 @@
     <Content Include="Views\Shared\_IwsTermsAndConditions.cshtml" />
     <Content Include="Views\NewUser\TermsAndConditions.cshtml" />
     <Content Include="Views\Errors\_GenericError.cshtml" />
-    <Content Include="Views\Shared\_IwsSepaStandardDataNotice.cshtml" />
     <Content Include="Views\Applicant\NotFound.cshtml" />
     <Content Include="Views\Shared\_NotificationSwitcher.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\MaskedDateInputViewModel.cshtml" />
@@ -1205,6 +1211,7 @@
       <DependentUpon>AddEditResource.resx</DependentUpon>
     </Compile>
     <Compile Include="Areas\AdminExportAssessment\Controllers\AnnexController.cs" />
+    <Compile Include="Areas\AdminExportAssessment\Controllers\CommentsController.cs" />
     <Compile Include="Areas\AdminExportAssessment\Controllers\DecisionControllerResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -1224,6 +1231,8 @@
     <Compile Include="Areas\AdminExportAssessment\Controllers\ProducerController.cs" />
     <Compile Include="Areas\AdminExportAssessment\Controllers\UpdateJourneyController.cs" />
     <Compile Include="Areas\AdminExportAssessment\ViewModels\Annex\DownloadAnnexViewModel.cs" />
+    <Compile Include="Areas\AdminExportAssessment\ViewModels\Comments\AddCommentsViewModel.cs" />
+    <Compile Include="Areas\AdminExportAssessment\ViewModels\Comments\CommentsViewModel.cs" />
     <Compile Include="Areas\AdminExportAssessment\ViewModels\DateInputViewModelResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -1300,6 +1309,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>AnnexResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\AdminExportAssessment\Views\Comments\IndexResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IndexResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Areas\AdminExportAssessment\Views\Decision\DecisionResources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -1484,6 +1498,7 @@
     <Compile Include="Areas\AdminImportAssessment\AdminImportAssessmentAreaRegistration.cs" />
     <Compile Include="Areas\AdminImportAssessment\Controllers\AccountManagementController.cs" />
     <Compile Include="Areas\AdminImportAssessment\Controllers\AssignAreaController.cs" />
+    <Compile Include="Areas\AdminImportAssessment\Controllers\CommentsController.cs" />
     <Compile Include="Areas\AdminImportAssessment\Controllers\DecisionController.cs" />
     <Compile Include="Areas\AdminImportAssessment\Controllers\DecisionControllerResources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -1499,6 +1514,8 @@
     <Compile Include="Areas\AdminImportAssessment\Controllers\MarkAsInterimController.cs" />
     <Compile Include="Areas\AdminImportAssessment\ViewModels\AccountManagement\AccountManagementViewModel.cs" />
     <Compile Include="Areas\AdminImportAssessment\ViewModels\AssignArea\AssignAreaViewModel.cs" />
+    <Compile Include="Areas\AdminImportAssessment\ViewModels\Comments\AddCommentsViewModel.cs" />
+    <Compile Include="Areas\AdminImportAssessment\ViewModels\Comments\CommentsViewModel.cs" />
     <Compile Include="Areas\AdminImportAssessment\ViewModels\Decision\DecisionViewModel.cs" />
     <Compile Include="Areas\AdminImportAssessment\ViewModels\Decision\DecisionViewModelResources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -1562,6 +1579,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>IndexResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\AdminImportAssessment\Views\Comments\IndexResources.Designer.cs">
+      <DependentUpon>IndexResources.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Areas\AdminImportAssessment\Views\Decision\IndexResources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -2400,6 +2422,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ReceiptRecoveryBulkUploadResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Controllers\PrivacyPolicyController.cs" />
     <Compile Include="Infrastructure\BulkReceiptRecovery\ReceiptRecoveryValidator.cs" />
     <Compile Include="Infrastructure\BulkReceiptRecovery\IReceiptRecoveryValidator.cs" />
     <Compile Include="Infrastructure\BulkPrenotification\PrenotificationValidator.cs" />
@@ -3598,11 +3621,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ThreeWorkingDaysResources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Views\Shared\IwsSepaStandardDataNoticeResources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>IwsSepaStandardDataNoticeResources.resx</DependentUpon>
-    </Compile>
     <Compile Include="Views\Shared\IwsStandardDataNoticeResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -3623,6 +3641,10 @@
     <ProjectReference Include="..\EA.Iws.Core\EA.Iws.Core.csproj">
       <Project>{DD2A73A4-A652-4ECC-87EE-24239CE45AD4}</Project>
       <Name>EA.Iws.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EA.Iws.Domain\EA.Iws.Domain.csproj">
+      <Project>{A987FFF6-5386-419E-AF0A-E6C74E3323CF}</Project>
+      <Name>EA.Iws.Domain</Name>
     </ProjectReference>
     <ProjectReference Include="..\EA.Iws.Requests\EA.Iws.Requests.csproj">
       <Project>{87FBB5CC-A732-4363-A158-39DBF3707407}</Project>
@@ -3693,6 +3715,10 @@
     <EmbeddedResource Include="Areas\AdminExportAssessment\Views\Annex\AnnexResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>AnnexResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\AdminExportAssessment\Views\Comments\IndexResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\AdminExportAssessment\Views\Decision\DecisionResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -3865,6 +3891,10 @@
       <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\AdminImportAssessment\Views\AssignArea\IndexResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\AdminImportAssessment\Views\Comments\IndexResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
@@ -5119,10 +5149,6 @@
     <EmbeddedResource Include="Views\Registration\SelectOrganisationResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>SelectOrganisationResources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Views\Shared\IwsSepaStandardDataNoticeResources.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>IwsSepaStandardDataNoticeResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\Shared\IwsStandardDataNoticeResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

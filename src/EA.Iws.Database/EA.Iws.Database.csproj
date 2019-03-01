@@ -96,6 +96,8 @@
     <Content Include="scripts\Update\0005-Beta\Sprint5\20190208-092800-update-movement-carrier-keys.sql" />
     <Content Include="scripts\Update\0005-Beta\Sprint6\20190220-124500-alter-notificationdates.sql" />
     <Content Include="scripts\Update\0005-Beta\Sprint6\20190214-133900-add-entryExitCustomsTable.sql" />
+    <Content Include="scripts\Update\0005-Beta\Sprint7\20190228-1147-AddExpoirtNotificationCommentsTable.sql" />
+    <Content Include="scripts\Update\0005-Beta\Sprint7\20190228-1147-AddImportNotificationCommentsTable.sql" />
     <Content Include="unindexed-foreign-keys.sql" />
     <Content Include="scripts\Everytime\01-Functions\0003-Reports-PricingInfo.sql" />
     <Content Include="scripts\Everytime\03-StoredProcedures\0003-uspUpdateImportNotificationKeyDates.sql" />

@@ -129,6 +129,8 @@
 
         public virtual DbSet<DraftPackagingInfo> DraftPackagingInfos { get; set; }
 
+        public virtual DbSet<NotificationComment> NotificationComments { get; set; }
+
         public async Task<NotificationApplication> GetNotificationApplication(Guid notificationId)
         {
             //TODO: Remove this method and replace usages with repositories

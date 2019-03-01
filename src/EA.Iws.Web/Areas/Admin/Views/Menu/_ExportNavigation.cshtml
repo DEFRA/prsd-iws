@@ -86,6 +86,16 @@
             </ul>
         </li>
 
+        <li class="@GetClassForSection(ExportNavigationSection.Comments, "active")">
+            <h3 class="@GetClassForSection(ExportNavigationSection.Comments, "current")">
+                <span></span>
+                @Resources.CommentsHeading
+            </h3>
+            <ul>
+                <li>@Html.ActionLink(Resources.CommentsLinkText, "Index", "Comments", new { area = "AdminExportAssessment", Model.Data.Id }, null)</li>
+            </ul>
+        </li>
+
         <li class="">
             <h3 class="">
                 <span></span>

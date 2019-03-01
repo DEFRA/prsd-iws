@@ -1,0 +1,83 @@
+﻿@using Resource = EA.Iws.Web.Areas.AdminExportAssessment.Views.Comments.IndexResources
+@model EA.Iws.Web.Areas.AdminExportAssessment.ViewModels.Comments.CommentsViewModel
+@{
+    ViewBag.Title = "Review Comments";
+}
+
+@{
+    Layout = "~/Areas/AdminExportAssessment/Views/Comments/_Layout.cshtml";
+}
+
+<header>
+    <h1 class="heading-large">@Resource.CommentsHeader</h1>
+    <p class="subtitle">@Resource.Subtitle</p>
+</header>
+
+<div class="grid-row">
+    <div class="column-two-thirds">
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            @Html.ActionLink(@Resource.AddButton, "Add", "Comments", new { }, new { @class = "button" })
+        }
+    </div>
+</div>
+
+<br />
+
+@Html.Partial("_Navigation")
+
+
+@if (Model.Comments.Count > 0)
+{
+    <div class="form-group table-container">
+        <table title="Comments">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Date</th>
+                    @if (Model.Type == EA.Iws.Core.Admin.NotificationShipmentsCommentsType.Shipments)
+                    {
+                        <th>Shipment no.</th>
+                    }
+                    <th>Comment</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (int i = 0; i < Model.Comments.Count; i++)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(m => m.Comments[i].Username)</td>
+                        <td>@Model.Comments[i].DateAdded.ToString("dd MMM yyyy")</td>
+                        @if (Model.Type == EA.Iws.Core.Admin.NotificationShipmentsCommentsType.Shipments)
+                        {
+                            <td>@Html.DisplayFor(m => m.Comments[i].ShipmentNumber)</td>
+                        }
+                        <td>@Html.DisplayFor(m => m.Comments[i].Comment)</td>
+                        <td>
+                            <span style="white-space: nowrap">
+                                @Html.ActionLink("Edit", "Index", "Edit", new { }, null) <span>&nbsp;</span>
+                                @Html.ActionLink("Delete", "Index", "Delete", new { }, null)
+                            </span>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}
+else
+{
+    <div class="margin-bottom-30 margin-top-30 ">
+        <h3 style="text-align:center; font-size:36px">No comments available</h3>
+    </div>
+}
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="form-group">
+        @Html.ActionLink(Resource.GoToOverview, "Index", "Home", new { area = "AdminExportAssessment", id = Model.NotificationId }, null)
+    </div>
+}
