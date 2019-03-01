@@ -6,6 +6,7 @@ ALTER VIEW [Reports].[Producers]
 AS
 	SELECT
 		REPLACE(N.[NotificationNumber], ' ', '') AS [NotificationNumber],
+		N.[CompetentAuthority] AS [CompetentAuthorityId],
 		E.[Name] AS [NotifierName],
 		P.[Name] AS [ProducerName],
 		P.[Address1] AS [ProducerAddress1],
@@ -117,6 +118,7 @@ AS
 
 	SELECT
 		REPLACE(N.[NotificationNumber], ' ', '') AS [NotificationNumber],
+		N.[CompetentAuthority] AS [CompetentAuthorityId],
 		E.[Name] AS [NotifierName],
 		P.[Name] AS [ProducerName],
 		P.[Address1] AS [ProducerAddress1],

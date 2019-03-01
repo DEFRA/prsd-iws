@@ -59,6 +59,7 @@
     <Compile Include="Admin\Reports\FinancialGuaranteesData.cs" />
     <Compile Include="Admin\Reports\ExportMovementsData.cs" />
     <Compile Include="Admin\Reports\ImportStatsData.cs" />
+    <Compile Include="Admin\Reports\ProducerData.cs" />
     <Compile Include="Admin\Reports\UserActionData.cs" />
     <Compile Include="Admin\Reports\UserActionJsonModel.cs" />
     <Compile Include="Carriers\CarrierList.cs" />

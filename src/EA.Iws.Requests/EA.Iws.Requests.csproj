@@ -90,6 +90,7 @@
     <Compile Include="Admin\Reports\GetExportNotificationsReport.cs" />
     <Compile Include="Admin\Reports\GetExportStatsReport.cs" />
     <Compile Include="Admin\Reports\GetFinanceReport.cs" />
+    <Compile Include="Admin\Reports\GetProducerReport.cs" />
     <Compile Include="Admin\Reports\GetShipmentsReport.cs" />
     <Compile Include="Admin\Reports\GetFreedomOfInformationReport.cs" />
     <Compile Include="Admin\Search\NotificaitonsAdvancedSearch.cs" />

@@ -124,6 +124,7 @@
     <Compile Include="Admin\Reports\GetExportNotificationsReportHandler.cs" />
     <Compile Include="Admin\Reports\GetExportStatsReportHandler.cs" />
     <Compile Include="Admin\Reports\GetFinanceReportHandler.cs" />
+    <Compile Include="Admin\Reports\GetProducerReportHandler.cs" />
     <Compile Include="Admin\Reports\GetShipmentsReportHandler.cs" />
     <Compile Include="Admin\Reports\GetFreedomOfInformationReportHandler.cs" />
     <Compile Include="Admin\Search\NotificaitonsAdvancedSearchHandler.cs" />
