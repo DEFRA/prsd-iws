@@ -6,7 +6,7 @@
     public class NotificationComment : Entity
     {
         public Guid NotificationId { get; private set; }
-        public Guid UserId { get; private set; }
+        public string UserId { get; private set; }
         public string Comment { get; private set; }
         public int ShipmentNumber { get; private set; }
         public DateTimeOffset DateAdded { get; private set; }
@@ -15,7 +15,7 @@
         {
         }
 
-        public NotificationComment(Guid notificationId, Guid userId, string comment, int shipmentNumber, DateTimeOffset dateAdded)
+        public NotificationComment(Guid notificationId, string userId, string comment, int shipmentNumber, DateTimeOffset dateAdded)
         {
             this.NotificationId = notificationId;
             this.UserId = userId;

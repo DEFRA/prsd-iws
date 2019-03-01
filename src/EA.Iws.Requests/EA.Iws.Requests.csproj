@@ -158,6 +158,7 @@
     <Compile Include="ImportNotificationAssessment\FinancialGuarantee\SetCompletedDate.cs" />
     <Compile Include="ImportNotificationAssessment\FinancialGuarantee\SetReceivedAndCompletedDate.cs" />
     <Compile Include="ImportNotificationAssessment\GetImportNotificationAssessmentDecisionData.cs" />
+    <Compile Include="ImportNotificationAssessment\GetImportNotificationComments.cs" />
     <Compile Include="ImportNotificationAssessment\GetImportNotificationConsentedDate.cs" />
     <Compile Include="ImportNotificationAssessment\GetImportNotificationConsultation.cs" />
     <Compile Include="ImportNotificationAssessment\GetStateOfExportData.cs" />
@@ -225,6 +226,7 @@
     <Compile Include="Movement\GetNewMovementIdsByNotificationId.cs" />
     <Compile Include="Movement\GetNotificationNumberByMovementId.cs" />
     <Compile Include="NotificationAssessment\AddNotificationComment.cs" />
+    <Compile Include="NotificationAssessment\GetNotificationComments.cs" />
     <Compile Include="NotificationAssessment\UpdateExportNotificationAssementCommets.cs" />
     <Compile Include="NotificationMovements\BulkUpload\CreateReceiptRecovery.cs" />
     <Compile Include="NotificationMovements\BulkUpload\PerformReceiptRecoveryContentValidation.cs" />

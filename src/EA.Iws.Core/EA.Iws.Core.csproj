@@ -123,6 +123,7 @@
     <Compile Include="ImportNotificationAssessment\FinancialGuarantee\ImportFinancialGuaranteeStatus.cs" />
     <Compile Include="ImportNotificationAssessment\FinancialGuarantee\ReceivedAndCompletedDateData.cs" />
     <Compile Include="ImportNotificationAssessment\ImportNotificationAssessmentDecisionData.cs" />
+    <Compile Include="ImportNotificationAssessment\ImportNotificationCommentsData.cs" />
     <Compile Include="ImportNotificationAssessment\ImportNotificationStatus.cs" />
     <Compile Include="ImportNotificationAssessment\KeyDatesData.cs" />
     <Compile Include="ImportNotificationAssessment\Transactions\AccountOverviewData.cs" />
@@ -165,6 +166,7 @@
     <Compile Include="ImportNotification\Summary\WasteCodeSelection.cs" />
     <Compile Include="ImportNotification\Summary\WasteOperation.cs" />
     <Compile Include="ImportNotification\Summary\WasteType.cs" />
+    <Compile Include="InternalComments\InternalComment.cs" />
     <Compile Include="MeansOfTransport\MeansOfTransportHelper.cs" />
     <Compile Include="MeansOfTransport\TransportMethod.cs" />
     <Compile Include="MovementOperation\MovementOperationData.cs" />
@@ -219,6 +221,7 @@
     <Compile Include="NotificationAssessment\NotificationAssessmentDecision.cs" />
     <Compile Include="NotificationAssessment\NotificationAssessmentDecisionData.cs" />
     <Compile Include="NotificationAssessment\NotificationAttentionSummaryTableData.cs" />
+    <Compile Include="NotificationAssessment\NotificationCommentData.cs" />
     <Compile Include="NotificationAssessment\NotificationTransactionData.cs" />
     <Compile Include="Notification\Audit\NotificationAudit.cs" />
     <Compile Include="Notification\Audit\NotificationAuditForDisplay.cs" />
@@ -233,7 +236,10 @@
     <Compile Include="OperationCodes\OperationCodeMetadata.cs" />
     <Compile Include="OperationCodes\OperationCodeTypeAttribute.cs" />
     <Compile Include="Reports\FoiReportDates.cs" />
+    <Compile Include="Reports\Producer\ProducerReportDates.cs" />
+    <Compile Include="Reports\Producer\ProducerReportTextFields.cs" />
     <Compile Include="Reports\ShipmentsReportDates.cs" />
+    <Compile Include="Reports\TextFieldOperator.cs" />
     <Compile Include="Rules\MessageLevel.cs" />
     <Compile Include="Rules\RuleResult.cs" />
     <Compile Include="Shared\CertificateType.cs" />

@@ -1,8 +1,10 @@
 ﻿namespace EA.Iws.Web.Areas.AdminImportAssessment.Controllers
 {
     using System;
+    using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Mvc;
+    using Core.Admin;
     using Core.Authorization.Permissions;
     using Infrastructure;
     using Infrastructure.Authorization;
@@ -21,10 +23,23 @@
         }
 
         [HttpGet]
-        public ActionResult Index(Guid id)
+        public async Task<ActionResult> Index(Guid id, NotificationShipmentsCommentsType type = NotificationShipmentsCommentsType.Notification)
         {
             CommentsViewModel model = new CommentsViewModel();
             model.NotificationId = id;
+            model.Type = type;
+
+            var comments = await this.mediator.SendAsync(new GetImportNotificationComments(id));
+
+            if (type == NotificationShipmentsCommentsType.Notification)
+            {
+                model.Comments = comments.NotificationComments.Where(p => p.ShipmentNumber == 0).ToList();
+            }
+            else
+            {
+                model.Comments = comments.NotificationComments.Where(p => p.ShipmentNumber != 0).ToList();
+            }
+
             return View(model);
         }
 
@@ -46,9 +61,7 @@
                 return View(model);
             }
 
-            Guid userId = Guid.Parse(User.GetUserId());
-
-            var request = new AddImportNotificationComment(model.NotificationId, userId, model.Comment, model.ShipmentNumber.GetValueOrDefault(), DateTime.Now);
+            var request = new AddImportNotificationComment(model.NotificationId, User.GetUserId(), model.Comment, model.ShipmentNumber.GetValueOrDefault(), DateTime.Now);
 
             await this.mediator.SendAsync(request);
 
