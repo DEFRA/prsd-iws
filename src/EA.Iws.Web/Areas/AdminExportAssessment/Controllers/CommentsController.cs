@@ -1,6 +1,7 @@
 ﻿namespace EA.Iws.Web.Areas.AdminExportAssessment.Controllers
 {
     using System;
+    using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Core.Authorization.Permissions;
@@ -21,10 +22,15 @@
         }
 
         [HttpGet]
-        public ActionResult Index(Guid id)
+        public async Task<ActionResult> Index(Guid id)
         {
             CommentsViewModel model = new CommentsViewModel();
             model.NotificationId = id;
+
+            var comments = await this.mediator.SendAsync(new GetNotificationComments(id));
+
+            model.Comments = comments.NotificationComments.ToList();
+
             return View(model);
         }
 
@@ -45,9 +51,8 @@
                 model.ModelIsValid = false;
                 return View(model);
             }
-            Guid userId = Guid.Parse(User.GetUserId());
 
-            var request = new AddNotificationComment(model.NotificationId, userId, model.Comment, model.ShipmentNumber.GetValueOrDefault(), DateTime.Now);
+            var request = new AddNotificationComment(model.NotificationId, User.GetUserId(), model.Comment, model.ShipmentNumber.GetValueOrDefault(), DateTime.Now);
 
             await this.mediator.SendAsync(request);
 

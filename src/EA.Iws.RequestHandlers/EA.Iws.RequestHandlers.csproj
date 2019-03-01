@@ -211,6 +211,7 @@
     <Compile Include="ImportNotificationAssessment\FinancialGuarantee\SetCompletedDateHandler.cs" />
     <Compile Include="ImportNotificationAssessment\FinancialGuarantee\SetReceivedAndCompletedDateHandler.cs" />
     <Compile Include="ImportNotificationAssessment\GetImportNotificationAssessmentDecisionDataHandler.cs" />
+    <Compile Include="ImportNotificationAssessment\GetImportNotificationCommentsHandler.cs" />
     <Compile Include="ImportNotificationAssessment\GetImportNotificationConsentedDateHandler.cs" />
     <Compile Include="ImportNotificationAssessment\GetImportNotificationConsultationHandler.cs" />
     <Compile Include="ImportNotificationAssessment\GetKeyDatesHandler.cs" />
@@ -382,6 +383,7 @@
     <Compile Include="Mappings\ImportMovement\MovementDataMap.cs" />
     <Compile Include="Mappings\ImportMovement\MovementTableDataMap.cs" />
     <Compile Include="Mappings\ImportNotificationAssessment\ConsultationMap.cs" />
+    <Compile Include="Mappings\ImportNotificationAssessment\ImportNotificationCommentMap.cs" />
     <Compile Include="Mappings\ImportNotificationAssessment\ImportNotificationTransactionMap.cs" />
     <Compile Include="Mappings\ImportNotification\AddressMap.cs" />
     <Compile Include="Mappings\ImportNotification\ContactMap.cs" />
@@ -404,6 +406,7 @@
     <Compile Include="Mappings\NotificationAssessment\ConsultationMap.cs" />
     <Compile Include="Mappings\NotificationAssessment\NotificationAuditMap.cs" />
     <Compile Include="Mappings\NotificationAssessment\NotificationAuditTableMap.cs" />
+    <Compile Include="Mappings\NotificationAssessment\NotificationCommentMap.cs" />
     <Compile Include="Mappings\NotificationAssessment\NotificationTransactionMap.cs" />
     <Compile Include="Mappings\Reports\DataImportNotificationMap.cs" />
     <Compile Include="Mappings\Reports\DataExportNotificationMap.cs" />
@@ -441,6 +444,7 @@
     <Compile Include="NotificationAssessment\GetChargeDueHandler.cs" />
     <Compile Include="NotificationAssessment\GetExportNotificationTransactionsHandler.cs" />
     <Compile Include="NotificationAssessment\GetInterimStatusHandler.cs" />
+    <Compile Include="NotificationAssessment\GetNotificationCommentsHandler.cs" />
     <Compile Include="NotificationAssessment\GetOriginalNumberOfShipmentsHandler.cs" />
     <Compile Include="NotificationAssessment\GetStateOfExportDataHandler.cs" />
     <Compile Include="NotificationAssessment\GetStateOfImportDataHandler.cs" />
