@@ -16,12 +16,12 @@
 
         public ProducerReportTextFields? TextFieldType
         {
-            get { return InputParameters.TryParse<ProducerReportTextFields>(InputParameters.SelectedDate); }
+            get { return InputParameters.TryParse<ProducerReportTextFields>(InputParameters.SelectedTextField); }
         }
 
         public TextFieldOperator? OperatorType
         {
-            get { return InputParameters.TryParse<TextFieldOperator>(InputParameters.SelectedDate); }
+            get { return InputParameters.TryParse<TextFieldOperator>(InputParameters.SelectedOperator); }
         }
 
         public DateTime From
