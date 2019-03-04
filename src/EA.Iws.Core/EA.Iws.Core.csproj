@@ -241,6 +241,7 @@
     <Compile Include="Reports\Producer\ProducerReportTextFields.cs" />
     <Compile Include="Reports\ShipmentsReportDates.cs" />
     <Compile Include="Reports\TextFieldOperator.cs" />
+    <Compile Include="Reports\TextFilterHelper.cs" />
     <Compile Include="Rules\MessageLevel.cs" />
     <Compile Include="Rules\RuleResult.cs" />
     <Compile Include="Shared\CertificateType.cs" />

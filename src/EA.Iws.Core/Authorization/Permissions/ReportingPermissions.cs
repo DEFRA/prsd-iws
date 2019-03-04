@@ -20,6 +20,6 @@
 
         public const string CanViewBlanketBondsReport = "Can View Blanket Bonds Report";
 
-        public const string CanViewProducerReport = "Can View Producer Report"
+        public const string CanViewProducerReport = "Can View Producer Report";
     }
 }

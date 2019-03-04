@@ -18,10 +18,9 @@ AS
 			ELSE ''
 		END AS [SiteOfExport],
 		LA.[Name] AS [LocalArea],
-		WT.[ChemicalCompositionType] AS [ChemicalCompositionTypeId],
-		NA.[Status] AS [ExportStatusId],
-        NULL AS [ImportStatusId],
-		I.[Name] AS [ImporterName],
+		CCT.[Description] AS [WasteType],
+		NS.[Description] AS [NotificationStatus],
+		I.[Name] AS [ConsigneeName],
 		C.[From] AS [ConsentFrom],
         C.[To] AS [ConsentTo],
 		D.[NotificationReceivedDate] AS [NotificationReceivedDate],
@@ -33,7 +32,7 @@ AS
             WHERE WCI.NotificationId = N.Id AND WC.CodeType = 3
             order by 1
             FOR XML PATH('')
-            ), 1, 1, '' ) AS [EWC],
+            ), 1, 1, '' ) AS [EwcCode],
 		STUFF(( SELECT ', ' + WC.Code AS [text()]
             FROM [Notification].[WasteCodeInfo] WCI
             LEFT JOIN [Lookup].[WasteCode] WC ON WCI.WasteCodeId = WC.Id
@@ -41,7 +40,7 @@ AS
             order by 1
             FOR XML PATH('')
             ), 1, 1, '' ) AS [YCode],
-		SE_EEP.[Name] AS [PointOfExport],
+		SE_EEP.[Name] AS [PointOfExit],
         SI_EEP.[Name] AS [PointOfEntry],
 		SE_C.[Name] AS [ExportCountryName],
         SI_C.[Name] AS [ImportCountryName],
@@ -54,19 +53,8 @@ AS
 		[Notification].[Notification] N
 		INNER JOIN [Notification].[Exporter] E ON E.NotificationId = N.Id
 		INNER JOIN [Notification].[Importer] I ON I.NotificationId = N.Id
-		INNER JOIN [Notification].[Producer] P
-        ON P.Id = 
-        (
-            SELECT TOP 1 P1.Id
-
-            FROM		[Notification].[ProducerCollection] AS PC
-
-            INNER JOIN [Notification].[Producer] AS P1
-            ON		   PC.Id = P1.ProducerCollectionId
-
-            WHERE		PC.NotificationId = N.Id
-            ORDER BY	P1.[IsSiteOfExport] DESC
-        )
+		INNER JOIN [Notification].[ProducerCollection] PC ON PC.NotificationId = N.Id
+		INNER JOIN [Notification].[Producer] P ON P.ProducerCollectionId = PC.Id
 		LEFT JOIN [Notification].[Producer] SiteOfExport
         ON SiteOfExport.Id = 
         (
@@ -87,7 +75,7 @@ AS
 		INNER JOIN [Notification].[WasteType] WT ON WT.NotificationId = N.Id
 		INNER JOIN [Lookup].[ChemicalCompositionType] CCT ON CCT.Id = WT.ChemicalCompositionType
 		INNER JOIN [Notification].[NotificationAssessment] NA ON NA.NotificationApplicationId = N.Id
-		INNER JOIN	[Lookup].[NotificationStatus] AS S ON [S].[Id] = [NA].[Status]
+		INNER JOIN	[Lookup].[NotificationStatus] AS NS ON [NS].[Id] = [NA].[Status]
 		LEFT JOIN [Notification].[Consent] C ON C.NotificationApplicationId = N.Id
 		LEFT JOIN [Notification].NotificationDates D ON D.[NotificationAssessmentId] = NA.[Id]
 		LEFT JOIN [Notification].[Movement] M ON M.[NotificationId] = N.Id
@@ -127,10 +115,9 @@ AS
 		P.[PostalCode] AS [ProducerPostCode],
 		CONCAT(P.[Name], '/', P.[PostalCode]) [SiteOfExport],
 		LA.[Name] AS [LocalArea],
-		WT.[ChemicalCompositionType] AS [ChemicalCompositionTypeId],
-		NULL AS [ExportStatusId],
-        NA.[Status] AS [ImportStatusId],
-		I.[Name] AS [ImporterName],
+		CCT.[Description] AS [WasteType],
+		NS.[Description] AS [NotificationStatus],
+		I.[Name] AS [ConsigneeName],
 		C.[From] AS [ConsentFrom],
         C.[To] AS [ConsentTo],
 		D.[NotificationReceivedDate] AS [NotificationReceivedDate],
@@ -143,7 +130,7 @@ AS
             WHERE WT.ImportNotificationId = N.Id AND WC.CodeType = 3
             order by 1
             FOR XML PATH('')
-            ), 1, 1, '' ) AS [EWC],
+            ), 1, 1, '' ) AS [EwcCode],
 		STUFF(( SELECT ', ' + WC.Code AS [text()]
             FROM [ImportNotification].[WasteType] WT
             INNER JOIN [ImportNotification].[WasteCode] WCI ON WT.Id = WCI.WasteTypeId
@@ -152,7 +139,7 @@ AS
             order by 1
             FOR XML PATH('')
             ), 1, 1, '' ) AS [YCode],
-		SE_EEP.[Name] AS [PointOfExport],
+		SE_EEP.[Name] AS [PointOfExit],
         SI_EEP.[Name] AS [PointOfEntry],
 		SE_C.[Name] AS [ExportCountryName],
         SI_C.[Name] AS [ImportCountryName],
@@ -169,7 +156,7 @@ AS
 		INNER JOIN [ImportNotification].[WasteType] WT ON WT.ImportNotificationId = N.Id
 		INNER JOIN [Lookup].[ChemicalCompositionType] CCT ON CCT.Id = WT.ChemicalCompositionType
 		INNER JOIN [ImportNotification].[NotificationAssessment] AS NA ON NA.[NotificationApplicationId] = N.Id
-		INNER JOIN	[Lookup].[ImportNotificationStatus] AS S ON	[S].[Id] = [NA].[Status]
+		INNER JOIN	[Lookup].[ImportNotificationStatus] AS NS ON [NS].[Id] = [NA].[Status]
 		LEFT JOIN [ImportNotification].[Consent] C ON C.NotificationId = N.Id
 		LEFT JOIN [ImportNotification].NotificationDates D ON D.[NotificationAssessmentId] = NA.[Id]
 		LEFT JOIN [ImportNotification].[Movement] M ON M.[NotificationId] = N.Id

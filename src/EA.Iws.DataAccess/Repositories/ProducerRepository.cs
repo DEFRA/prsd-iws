@@ -55,8 +55,10 @@
             string textSearch,
             UKCompetentAuthority competentAuthority)
         {
+            var textFilter = TextFilterHelper.GetTextFilter(textFieldType, operatorType, textSearch);
+
             return await context.Database.SqlQuery<ProducerData>(
-                @"SELECT 
+                @"SELECT DISTINCT
 	                [NotificationNumber]
 	                ,[NotifierName]
 	                ,[ProducerName]
@@ -66,10 +68,9 @@
 	                ,[ProducerPostCode]
 	                ,[SiteOfExport]
 	                ,[LocalArea]
-	                ,[ChemicalCompositionTypeId]
-	                ,[ExportStatusId]
-	                ,[ImportStatusId]
-	                ,[ImporterName]
+	                ,[WasteType]
+	                ,[NotificationStatus]
+	                ,[ConsigneeName]
                 FROM 
 	                [Reports].[Producers]
                 WHERE
@@ -78,13 +79,13 @@
                                          OR @dateType = 'ConsentFrom' AND  [ConsentFrom] BETWEEN @from AND @to
                                          OR @dateType = 'ConsentTo' AND  [ConsentTo] BETWEEN @from AND @to
                                          OR @dateType = 'ReceivedDate' AND [MovementReceivedDate] BETWEEN @from AND @to
-                                         OR @dateType = 'CompletedDate' AND [MovementCompletedDate] BETWEEN @from AND @to)",
+                                         OR @dateType = 'CompletedDate' AND [MovementCompletedDate] BETWEEN @from AND @to)
+                    AND (@textFilter IS NULL OR @textFilter = @textFilter)",
                 new SqlParameter("@dateType", dateType.ToString()),
                 new SqlParameter("@from", from),
                 new SqlParameter("@to", to),
-                new SqlParameter("@textFieldType", (textFieldType.HasValue ? (object)textFieldType.Value.ToString() : DBNull.Value)),
-                new SqlParameter("@operatorType", (operatorType.HasValue ? (object)operatorType.Value.ToString() : DBNull.Value)),
-                new SqlParameter("@textSearch", (!string.IsNullOrEmpty(textSearch) ? (object)textSearch : DBNull.Value)),
+                new SqlParameter("@textFilter",
+                    (!string.IsNullOrEmpty(textFilter) ? (object)textFilter : DBNull.Value)),
                 new SqlParameter("@competentAuthority", (int)competentAuthority)).ToArrayAsync();
         }
     }

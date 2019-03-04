@@ -6,7 +6,7 @@
     {
         public string NotificationNumber { get; set; }
 
-        [DisplayName("Notifier")]
+        [DisplayName("Notifier name")]
         public string NotifierName { get; set; }
 
         [DisplayName("Producer name")]
@@ -21,13 +21,16 @@
         [DisplayName("Producer Town or City")]
         public string ProducerTownOrCity { get; set; }
 
+        [DisplayName("Producer postcode")]
+        public string ProducerPostcode { get; set; }
+        
         [DisplayName("Site of Export / Postcode")]
         public string SiteOfExport { get; set; }
 
         [DisplayName("Area")]
-        public string Area { get; set; }
+        public string LocalArea { get; set; }
 
-        [DisplayName("Site of Export / Postcode")]
+        [DisplayName("Waste type")]
         public string WasteType { get; set; }
 
         [DisplayName("Status")]
