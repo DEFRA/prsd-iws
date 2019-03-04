@@ -6,7 +6,6 @@
     using System.Threading.Tasks;
     using Core.Notification;
     using Core.Reports;
-    using Core.WasteType;
     using Domain.Reports;
 
     internal class ShipmentsRepository : IShipmentsRepository
@@ -19,8 +18,11 @@
         }
 
         public async Task<IEnumerable<Shipment>> Get(DateTime from, DateTime to, UKCompetentAuthority competentAuthority, 
-            ShipmentsReportDates dateType, ChemicalComposition? chemicalComposition)
+            ShipmentsReportDates dateType, ShipmentReportTextFields? textFieldType,
+            TextFieldOperator? textFieldOperatorType, string textSearch)
         {
+            var textFilter = TextFilterHelper.GetTextFilter(textFieldType, textFieldOperatorType, textSearch);
+
             return await context.Database.SqlQuery<Shipment>(
                 @"SELECT 
                     [NotificationNumber],
@@ -61,12 +63,13 @@
                      OR @dateType = 'ReceivedDate' and  [ReceivedDate] BETWEEN @from AND @to
                      OR @dateType = 'CompletedDate' and  [CompletedDate] BETWEEN @from AND @to
                      OR @dateType = 'ActualDateOfShipment' and  [ActualDateOfShipment] BETWEEN @from AND @to)
-                AND (@chemicalComposition IS NULL OR [ChemicalCompositionTypeId] = @chemicalComposition)",
+                AND (@textFilter IS NULL OR @textFilter = @textFilter)",
                 new SqlParameter("@from", from),
                 new SqlParameter("@to", to),
                 new SqlParameter("@ca", (int)competentAuthority),
                 new SqlParameter("@dateType", dateType.ToString()),
-                new SqlParameter("@chemicalComposition", (chemicalComposition.HasValue ? (object)(int)chemicalComposition.Value : DBNull.Value))).ToArrayAsync();
+                new SqlParameter("@textFilter",
+                    !string.IsNullOrEmpty(textFilter) ? (object)textFilter : DBNull.Value)).ToArrayAsync();
         }
     }
 }
