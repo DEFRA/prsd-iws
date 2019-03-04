@@ -26,10 +26,10 @@
         PointOfEntry,
 
         [Display(Name = "Country of despatch")]
-        CountryOfDespatch,
+        ExportCountryName,
 
         [Display(Name = "Country of destination")]
-        CountryOfDestination,
+        ImportCountryName,
 
         [Display(Name = "Site of export name")]
         SiteOfExportName,
