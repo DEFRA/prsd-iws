@@ -4,9 +4,8 @@
     using System.Threading.Tasks;
     using Core.Notification;
     using Core.Reports;
-    using Core.Reports.Producer;
     using Domain;
-    using Domain.NotificationApplication;
+    using Domain.Reports;
     using FakeItEasy;
     using Prsd.Core;
     using Prsd.Core.Domain;

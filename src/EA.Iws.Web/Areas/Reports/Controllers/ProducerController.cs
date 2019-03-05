@@ -5,7 +5,6 @@
     using System.Web.Mvc;
     using Core.Admin.Reports;
     using Core.Reports;
-    using Core.Reports.Producer;
     using Infrastructure;
     using Infrastructure.Authorization;
     using Prsd.Core.Mediator;
@@ -62,7 +61,7 @@
 
             var fileName = string.Format("producer-report-{0}-{1}.xlsx", from.ToShortDateString(), to.ToShortDateString());
 
-            return new XlsxActionResult<ProducerData>(report, fileName);
+            return new XlsxActionResult<ProducerData>(report, fileName, true);
         }
     }
 }
