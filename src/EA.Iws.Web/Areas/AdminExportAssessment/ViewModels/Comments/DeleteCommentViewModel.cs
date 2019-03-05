@@ -3,12 +3,15 @@
     using EA.Iws.Core.InternalComments;
     using System;
     using AdminExportAssessment.Views.Comments;
+    using EA.Iws.Core.Admin;
 
     public class DeleteCommentViewModel
     {
         public Guid NotificationId { get; set; }
         public Guid CommentId { get; set; }
         public InternalComment Comment { get; set; }
+
+        public NotificationShipmentsCommentsType Type {get; set; }
         public string ConfirmationText
         {
             get

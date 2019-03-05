@@ -22,10 +22,11 @@
 
         public async Task<ImportNotificationCommentsData> HandleAsync(GetImportNotificationComments message)
         {
-            var result = await this.repository.GetComments(message.NotificationId);
+            var result = await this.repository.GetComments(message.NotificationId, message.StartDate, message.EndDate, message.ShipmentNumber);
 
             ImportNotificationCommentsData returnData = new ImportNotificationCommentsData();
             returnData.NotificationComments = MapReturnData(result);
+            returnData.NumberOfComments = await this.repository.GetTotalNumberOfComments(message.NotificationId, message.Type);
 
             return returnData;
         }

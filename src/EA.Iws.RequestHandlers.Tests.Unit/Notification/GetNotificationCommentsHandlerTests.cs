@@ -26,7 +26,7 @@
             this.repo = A.Fake<INotificationCommentRepository>();
             this.mapper = A.Fake<IMap<NotificationComment, InternalComment>>();
 
-            A.CallTo(() => repo.GetComments(A<Guid>.Ignored)).Returns(this.GetFakeComments());
+            A.CallTo(() => repo.GetComments(A<Guid>.Ignored, A<DateTime>.Ignored, A<DateTime>.Ignored, A<int>.Ignored)).Returns(this.GetFakeComments());
             this.message = A.Fake<GetNotificationComments>();
             this.handler = new GetNotificationCommentsHandler(this.repo, this.mapper);
         }
@@ -37,7 +37,7 @@
             var result = await handler.HandleAsync(this.message);
 
             Assert.Equal(GetFakeComments().Count, result.NotificationComments.Count);
-            A.CallTo(() => this.repo.GetComments(A<Guid>.Ignored))
+            A.CallTo(() => this.repo.GetComments(A<Guid>.Ignored, A<DateTime>.Ignored, A<DateTime>.Ignored, A<int>.Ignored))
                .MustHaveHappened();
         }
 

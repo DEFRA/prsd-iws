@@ -22,10 +22,11 @@
 
         public async Task<NotificationCommentData> HandleAsync(GetNotificationComments message)
         {
-            var data = await this.repository.GetComments(message.NotificationId);
+            var result = await this.repository.GetComments(message.NotificationId, message.StartDate, message.EndDate, message.ShipmentNumber);
 
             NotificationCommentData returnData = new NotificationCommentData();
-            returnData.NotificationComments = MapReturnData(data);
+            returnData.NotificationComments = MapReturnData(result);
+            returnData.NumberOfComments = await this.repository.GetTotalNumberOfComments(message.NotificationId, message.Type);
 
             return returnData;
         }
