@@ -7,11 +7,12 @@
     using Core.Reports;
     using Core.Reports.Producer;
     using Infrastructure;
+    using Infrastructure.Authorization;
     using Prsd.Core.Mediator;
     using Requests.Admin.Reports;
     using ViewModels.Producer;
 
-    [Authorize]
+    [AuthorizeActivity(typeof(GetProducerReport))]
     public class ProducerController : Controller
     {
         private readonly IMediator mediator;
