@@ -36,14 +36,18 @@
                 return View(model);
             }
 
+            var dateType = model.InputParameters.TryParse<ProducerReportDates>(model.InputParameters.SelectedDate);
+            var textFieldType = model.InputParameters.TryParse<ProducerReportTextFields>(model.InputParameters.SelectedTextField);
+            var operatorType = model.InputParameters.TryParse<TextFieldOperator>(model.InputParameters.SelectedOperator);
+
             return RedirectToAction("Download", new
             {
-                model.DateType,
-                From = model.From,
-                To = model.To,
-                model.TextFieldType,
-                model.OperatorType,
-                model.TextSearch
+                dateType,
+                From = model.InputParameters.FromDate.AsDateTime().Value,
+                To = model.InputParameters.ToDate.AsDateTime().Value,
+                textFieldType,
+                operatorType,
+                model.InputParameters.TextSearch
             });
         }
 

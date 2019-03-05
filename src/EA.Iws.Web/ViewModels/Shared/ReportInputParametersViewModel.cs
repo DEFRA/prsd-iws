@@ -60,7 +60,7 @@
                 if (string.IsNullOrEmpty(SelectedTextField))
                 {
                     yield return
-                        new ValidationResult(ReportInputParametersResources.DateTypeRequired, new[] { "SelectedDate" });
+                        new ValidationResult(ReportInputParametersResources.TextFieldRequired, new[] { "SelectedTextField" });
                 }
 
                 if (!string.IsNullOrEmpty(SelectedTextField) && string.IsNullOrEmpty(SelectedOperator))
