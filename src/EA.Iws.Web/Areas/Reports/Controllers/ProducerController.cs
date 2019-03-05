@@ -61,7 +61,7 @@
 
             var fileName = string.Format("producer-report-{0}-{1}.xlsx", from.ToShortDateString(), to.ToShortDateString());
 
-            return new XlsxActionResult<ProducerData>(report, fileName);
+            return new XlsxActionResult<ProducerData>(report, fileName, true);
         }
     }
 }
