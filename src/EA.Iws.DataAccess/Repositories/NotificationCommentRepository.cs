@@ -6,6 +6,7 @@
     using System.Linq;
     using System.Threading.Tasks;
     using Domain.NotificationAssessment;
+    using EA.Iws.Core.Admin;
 
     internal class NotificationCommentRepository : INotificationCommentRepository
     {
@@ -24,9 +25,16 @@
             return true;
         }
 
-        public async Task<List<NotificationComment>> GetComments(Guid notificationId)
+        public async Task<List<NotificationComment>> GetComments(Guid notificationId, DateTime startDate, DateTime endDate, int shipmentNumber)
         {
-            return await context.NotificationComments.Where(p => p.NotificationId == notificationId).ToListAsync();
+            DateTime endDateForQuery = endDate == DateTime.MaxValue ? endDate : endDate.AddDays(1);
+
+            if (shipmentNumber == default(int))
+            {
+                return await context.NotificationComments.Where(p => p.NotificationId == notificationId && p.DateAdded >= startDate && p.DateAdded < endDateForQuery).ToListAsync();
+            }
+
+            return await context.NotificationComments.Where(p => p.NotificationId == notificationId && p.DateAdded >= startDate && p.DateAdded < endDateForQuery && p.ShipmentNumber == shipmentNumber).ToListAsync();
         }
 
         public async Task<bool> Delete(Guid commentId)
@@ -42,6 +50,16 @@
             await context.SaveChangesAsync();
 
             return true;
+        }
+
+        public async Task<int> GetTotalNumberOfComments(Guid notificationId, NotificationShipmentsCommentsType type)
+        {
+            if (type == NotificationShipmentsCommentsType.Shipments)
+            {
+                return await context.NotificationComments.CountAsync(p => p.NotificationId == notificationId & p.ShipmentNumber > 0);
+            }
+
+            return await context.NotificationComments.CountAsync(p => p.NotificationId == notificationId && p.ShipmentNumber == 0);
         }
     }
 }

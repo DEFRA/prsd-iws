@@ -138,6 +138,12 @@
   <data name="ContinueButton" xml:space="preserve">
     <value>Continue</value>
   </data>
+  <data name="Day" xml:space="preserve">
+    <value>Day</value>
+  </data>
+  <data name="DayError" xml:space="preserve">
+    <value>Please enter a valid number in the 'Day' field</value>
+  </data>
   <data name="DeleteHeader" xml:space="preserve">
     <value>Are you sure you want to permenantly delete this comment?</value>
   </data>
@@ -147,13 +153,49 @@
   <data name="DeleteText" xml:space="preserve">
     <value>You are about to remove a comment by</value>
   </data>
+  <data name="From" xml:space="preserve">
+    <value>Enter the start date for your search</value>
+  </data>
+  <data name="FromDateAfterToDate" xml:space="preserve">
+    <value>The from date must be before the to date</value>
+  </data>
+  <data name="FromValid" xml:space="preserve">
+    <value>Please enter a valid from date</value>
+  </data>
   <data name="GoToOverview" xml:space="preserve">
     <value>Go to Notification overview</value>
+  </data>
+  <data name="Month" xml:space="preserve">
+    <value>Month</value>
+  </data>
+  <data name="MonthError" xml:space="preserve">
+    <value>Please enter a valid number in the 'Month' field</value>
   </data>
   <data name="SaveAndContinueButton" xml:space="preserve">
     <value>Save and continue</value>
   </data>
+  <data name="Search" xml:space="preserve">
+    <value>Search</value>
+  </data>
+  <data name="ShipmentNumber" xml:space="preserve">
+    <value>Shipment Number</value>
+  </data>
+  <data name="ShipmentNumberError" xml:space="preserve">
+    <value>Enter a valid shipment number</value>
+  </data>
   <data name="Subtitle" xml:space="preserve">
     <value>Review and write comments for this notification and it's shipments for Internal users</value>
+  </data>
+  <data name="To" xml:space="preserve">
+    <value>Enter the end date for your search</value>
+  </data>
+  <data name="ToValid" xml:space="preserve">
+    <value>Please enter a valid to date</value>
+  </data>
+  <data name="Year" xml:space="preserve">
+    <value>Year</value>
+  </data>
+  <data name="YearError" xml:space="preserve">
+    <value>Please enter a valid number in the 'Year' field</value>
   </data>
 </root>

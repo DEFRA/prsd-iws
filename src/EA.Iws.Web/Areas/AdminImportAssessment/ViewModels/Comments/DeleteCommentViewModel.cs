@@ -2,6 +2,7 @@
 {
     using System;
     using AdminImportAssessment.Views.Comments;
+    using EA.Iws.Core.Admin;
     using EA.Iws.Core.InternalComments;
 
     public class DeleteCommentViewModel
@@ -9,6 +10,7 @@
         public Guid NotificationId { get; set; }
         public Guid CommentId { get; set; }
         public InternalComment Comment { get; set; }
+        public NotificationShipmentsCommentsType Type { get; set; }
         public string ConfirmationText
         {
             get
