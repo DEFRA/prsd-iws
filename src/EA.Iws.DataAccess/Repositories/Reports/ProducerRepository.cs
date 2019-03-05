@@ -31,9 +31,9 @@
             UKCompetentAuthority competentAuthority)
         {
             var textFilter = TextFilterHelper.GetTextFilter(textFieldType, operatorType, textSearch);
+            textFilter = !string.IsNullOrEmpty(textFilter) ? string.Format("AND {0}", textFilter) : string.Empty;
 
-            return await context.Database.SqlQuery<ProducerData>(
-                @"SELECT DISTINCT
+            var query = @"SELECT DISTINCT
 	                [NotificationNumber]
 	                ,[NotifierName]
 	                ,[ProducerName]
@@ -55,12 +55,12 @@
                                          OR @dateType = 'ConsentTo' AND  [ConsentTo] BETWEEN @from AND @to
                                          OR @dateType = 'ReceivedDate' AND [MovementReceivedDate] BETWEEN @from AND @to
                                          OR @dateType = 'CompletedDate' AND [MovementCompletedDate] BETWEEN @from AND @to)
-                    AND (@textFilter IS NULL OR @textFilter = @textFilter)",
+                    {0}";
+
+            return await context.Database.SqlQuery<ProducerData>(string.Format(query, textFilter),
                 new SqlParameter("@dateType", dateType.ToString()),
                 new SqlParameter("@from", from),
                 new SqlParameter("@to", to),
-                new SqlParameter("@textFilter",
-                    (!string.IsNullOrEmpty(textFilter) ? (object)textFilter : DBNull.Value)),
                 new SqlParameter("@competentAuthority", (int)competentAuthority)).ToArrayAsync();
         }
     }

@@ -3,6 +3,7 @@
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Core.Admin.Reports;
+    using Core.Reports;
     using Infrastructure;
     using Infrastructure.Authorization;
     using Prsd.Core.Mediator;
@@ -34,12 +35,19 @@
                 return View(model);
             }
 
+            var from = model.InputParameters.FromDate.AsDateTime().Value;
+            var to = model.InputParameters.ToDate.AsDateTime().Value;
+
+            var dateType = model.InputParameters.TryParse<ShipmentsReportDates>(model.InputParameters.SelectedDate);
+            var textFieldType = model.InputParameters.TryParse<ShipmentReportTextFields>(model.InputParameters.SelectedTextField);
+            var operatorType = model.InputParameters.TryParse<TextFieldOperator>(model.InputParameters.SelectedOperator);
+
             var report =
                 await
-                    mediator.SendAsync(new GetShipmentsReport(model.From, model.To, model.DateType.Value,
-                        model.TextFieldType, model.OperatorType, model.TextSearch));
+                    mediator.SendAsync(new GetShipmentsReport(from, to,
+                        dateType.Value, textFieldType, operatorType, model.InputParameters.TextSearch));
 
-            var fileName = string.Format("shipments-{0}-{1}.xlsx", model.From.ToShortDateString(), model.To.ToShortDateString());
+            var fileName = string.Format("shipments-{0}-{1}.xlsx", from.ToShortDateString(), to.ToShortDateString());
 
             return new XlsxActionResult<ShipmentData>(report, fileName, true);
         }
