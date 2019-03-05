@@ -21,6 +21,7 @@ AS
         M.PrenotificationDate,
         MR.Date AS ReceivedDate,
         MOR.Date AS CompletedDate,
+		MREJECT.Date AS RejectedShipmentDate,
         MR.Quantity AS QuantityReceived,
         MR_U.Description AS [QuantityReceivedUnit],
         MR_U.Id AS [QuantityReceivedUnitId],
@@ -74,8 +75,11 @@ AS
             WHERE WCI.NotificationId = N.Id AND WC.CodeType = 6
             order by 1
             FOR XML PATH('')
-            ), 1, 1, '' ) AS [UNClass]
-        
+            ), 1, 1, '' ) AS [UNClass],
+		CASE
+			WHEN SiteOfExport.[Id] IS NOT NULL THEN SiteOfExport.[Name]
+			ELSE ''
+		END AS [SiteOfExportName]       
         
     
     FROM [Notification].[Movement] AS M
@@ -115,6 +119,9 @@ AS
     LEFT JOIN	[Notification].[MovementOperationReceipt] AS MOR
     ON			[M].[Id] = [MOR].[MovementId]
 
+	LEFT JOIN	[Notification].[MovementRejection] AS MREJECT
+	ON			[M].[Id] = [MREJECT].[MovementId]
+
     LEFT JOIN	[Lookup].[ShipmentQuantityUnit] AS MR_U 
     ON			[MR].[Unit] = [MR_U].[Id]
 
@@ -148,6 +155,20 @@ AS
     LEFT JOIN   [Notification].[WasteCodeInfo] BaselCode
                 LEFT JOIN [Lookup].[WasteCode] BaselCodeInfo ON BaselCode.WasteCodeId = BaselCodeInfo.Id
     ON          BaselCode.NotificationId = N.Id AND BaselCode.CodeType IN (1, 2)
+	LEFT JOIN	[Notification].[Producer] AS SiteOfExport
+	ON			SiteOfExport.Id = 
+				(
+					SELECT TOP 1 P1.Id
+
+					FROM		[Notification].[ProducerCollection] AS PC
+
+					INNER JOIN [Notification].[Producer] AS P1
+					ON		   PC.Id = P1.ProducerCollectionId
+
+					WHERE		PC.NotificationId = N.Id 
+								AND [IsSiteOfExport] = 1
+					ORDER BY	P1.[IsSiteOfExport] DESC
+				)
 
     UNION ALL
 
@@ -167,6 +188,7 @@ AS
         M.PrenotificationDate,
         MR.Date AS ReceivedDate,
         MOR.Date AS CompletedDate,
+		MREJECT.Date AS RejectedShipmentDate,
         MR.Quantity AS QuantityReceived,
         MR_U.Description AS [QuantityReceivedUnit],
         MR_U.Id AS [QuantityReceivedUnitId],
@@ -224,7 +246,8 @@ AS
             WHERE WT.ImportNotificationId = N.Id AND WC.CodeType = 6
             order by 1
             FOR XML PATH('')
-            ), 1, 1, '' ) AS [UNClass]
+            ), 1, 1, '' ) AS [UNClass],
+		P.[Name] [SiteOfExportName]
     
     FROM [ImportNotification].[Movement] AS M
 
@@ -257,11 +280,17 @@ AS
                     ORDER BY	F1.IsActualSiteOfTreatment DESC
                 )
 
+	INNER JOIN	[ImportNotification].[Producer] AS P 
+	ON			P.ImportNotificationId = N.Id
+
     LEFT JOIN	[ImportNotification].[MovementReceipt] AS MR
     ON			[M].[Id] = [MR].[MovementId]
 
     LEFT JOIN	[ImportNotification].[MovementOperationReceipt] AS MOR
     ON			[M].[Id] = [MOR].[MovementId]
+
+	LEFT JOIN	[ImportNotification].[MovementRejection] AS MREJECT
+	ON			[M].[Id] = [MREJECT].[MovementId]
 
     LEFT JOIN	[Lookup].[ShipmentQuantityUnit] AS MR_U 
     ON			[MR].[Unit] = [MR_U].[Id]

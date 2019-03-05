@@ -125,7 +125,9 @@ BEGIN
           ,[OperationCodes]
           ,[YCode]
           ,[HCode]
-          ,[UNClass] )
+          ,[UNClass]
+		  ,[SiteOfExportName]
+		  ,[RejectedShipmentDate] )
     SELECT [NotificationId]
           ,[NotificationNumber]
           ,[CompetentAuthorityId]
@@ -161,6 +163,8 @@ BEGIN
           ,[YCode]
           ,[HCode]
           ,[UNClass]
+		  ,[SiteOfExportName]
+		  ,[RejectedShipmentDate]
       FROM [Reports].[Shipments]
 
 END

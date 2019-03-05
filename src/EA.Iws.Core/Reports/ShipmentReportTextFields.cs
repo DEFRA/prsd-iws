@@ -5,34 +5,34 @@
     public enum ShipmentReportTextFields
     {
         [Display(Name = "Notifier name")]
-        NotifierName,
+        Exporter,
 
         [Display(Name = "Consignee name")]
-        ConsigneeName,
+        Importer,
 
         [Display(Name = "Site of export name")]
         SiteOfExportName,
 
         [Display(Name = "Facility name")]
-        FacilityName,
+        Facility,
 
         [Display(Name = "Point of exit")]
-        PointOfExit,
+        ExitPort,
 
         [Display(Name = "Point of entry")]
-        PointOfEntry,
+        EntryPort,
 
         [Display(Name = "Country of despatch")]
-        ExportCountryName,
+        OriginatingCountry,
 
         [Display(Name = "Country of destination")]
-        ImportCountryName,
+        DestinationCountry,
 
         [Display(Name = "Waste type")]
-        WasteType,
+        ChemicalComposition,
 
         [Display(Name = "EWC code")]
-        EwcCode,
+        EwcCodes,
 
         [Display(Name = "Y code")]
         YCode

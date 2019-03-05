@@ -62,7 +62,8 @@
                      OR @dateType = 'ConsentTo' and  [ConsentTo] BETWEEN @from AND @to
                      OR @dateType = 'ReceivedDate' and  [ReceivedDate] BETWEEN @from AND @to
                      OR @dateType = 'CompletedDate' and  [CompletedDate] BETWEEN @from AND @to
-                     OR @dateType = 'ActualDateOfShipment' and  [ActualDateOfShipment] BETWEEN @from AND @to)
+                     OR @dateType = 'ActualDateOfShipment' and  [ActualDateOfShipment] BETWEEN @from AND @to
+                     OR @dateType = 'RejectedShipmentDate' and  [RejectedShipmentDate] BETWEEN @from AND @to)
                 AND (@textFilter IS NULL OR @textFilter = @textFilter)",
                 new SqlParameter("@from", from),
                 new SqlParameter("@to", to),
