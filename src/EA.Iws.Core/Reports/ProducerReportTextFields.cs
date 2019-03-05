@@ -1,4 +1,4 @@
-﻿namespace EA.Iws.Core.Reports.Producer
+﻿namespace EA.Iws.Core.Reports
 {
     using System.ComponentModel.DataAnnotations;
 

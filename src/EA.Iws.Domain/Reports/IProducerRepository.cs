@@ -6,7 +6,6 @@
     using Core.Admin.Reports;
     using Core.Notification;
     using Core.Reports;
-    using Core.Reports.Producer;
 
     public interface IProducerRepository
     {

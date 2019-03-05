@@ -237,8 +237,8 @@
     <Compile Include="OperationCodes\OperationCodeMetadata.cs" />
     <Compile Include="OperationCodes\OperationCodeTypeAttribute.cs" />
     <Compile Include="Reports\FoiReportDates.cs" />
-    <Compile Include="Reports\Producer\ProducerReportDates.cs" />
-    <Compile Include="Reports\Producer\ProducerReportTextFields.cs" />
+    <Compile Include="Reports\ProducerReportDates.cs" />
+    <Compile Include="Reports\ProducerReportTextFields.cs" />
     <Compile Include="Reports\ShipmentReportTextFields.cs" />
     <Compile Include="Reports\ShipmentsReportDates.cs" />
     <Compile Include="Reports\TextFieldOperator.cs" />

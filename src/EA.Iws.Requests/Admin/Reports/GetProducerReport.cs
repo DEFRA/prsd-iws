@@ -5,7 +5,6 @@
     using Core.Authorization;
     using Core.Authorization.Permissions;
     using Core.Reports;
-    using Core.Reports.Producer;
     using Prsd.Core.Mediator;
 
     [RequestAuthorization(ReportingPermissions.CanViewProducerReport)]

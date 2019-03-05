@@ -5,7 +5,6 @@
     using System.Web.Mvc;
     using Core.Admin.Reports;
     using Core.Reports;
-    using Core.Reports.Producer;
     using Infrastructure;
     using Infrastructure.Authorization;
     using Prsd.Core.Mediator;

@@ -2,7 +2,6 @@
 {
     using System;
     using Core.Reports;
-    using Core.Reports.Producer;
     using Web.ViewModels.Shared;
 
     public class IndexViewModel

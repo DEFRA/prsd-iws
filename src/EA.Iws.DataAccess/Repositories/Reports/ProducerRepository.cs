@@ -7,7 +7,6 @@
     using Core.Admin.Reports;
     using Core.Notification;
     using Core.Reports;
-    using Core.Reports.Producer;
     using Domain.Reports;
     using Domain.Security;
 

@@ -4,7 +4,6 @@
     using System.Threading.Tasks;
     using Core.Notification;
     using Core.Reports;
-    using Core.Reports.Producer;
     using Domain;
     using Domain.Reports;
     using FakeItEasy;
