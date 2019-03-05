@@ -4,7 +4,7 @@
     using System.Threading.Tasks;
     using Core.Admin.Reports;
     using Domain;
-    using Domain.NotificationApplication;
+    using Domain.Reports;
     using Prsd.Core.Domain;
     using Prsd.Core.Mediator;
     using Requests.Admin.Reports;
