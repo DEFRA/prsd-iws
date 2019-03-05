@@ -1176,6 +1176,7 @@
     <Content Include="Views\ChangeNotificationOwner\ReviewAccess.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\RequiredDateInputViewModel.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\ReportInputParametersViewModel.cshtml" />
+    <Content Include="Views\PrivacyPolicy\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
