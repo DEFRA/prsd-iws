@@ -1,4 +1,5 @@
 ﻿@using Resource = EA.Iws.Web.Areas.AdminImportAssessment.Views.Comments.IndexResources
+@using EA.Iws.Web.Infrastructure.Paging
 @model EA.Iws.Web.Areas.AdminImportAssessment.ViewModels.Comments.CommentsViewModel
 @{
     ViewBag.Title = "Review Comments";
@@ -23,6 +24,108 @@
         }
     </div>
 </div>
+@if (Model.HasComments)
+{
+    <div class="grid-row">
+        <div class="column-two-thirds">
+
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+                @Html.Gds().ValidationSummary()
+                @Html.HiddenFor(m => m.NotificationId)
+
+                <div>
+                    Filter by:
+                </div>
+                <div>
+                    @Html.Gds().DropDownListFor(m => m.SelectedFilter, Model.FilterTerms, new { @id = "filterSelectList" })
+                </div>
+
+
+                <br />
+
+                var dateClass = Model.SelectedFilter == "date" ? "" : "class=hidden";
+                var shipmentClass = Model.SelectedFilter == "shipment" ? "" : "class=hidden";
+
+                <div @dateClass id="dateSection">
+                    <div class="form-group @Html.Gds().FormGroupClass(m => m.StartDay) @Html.Gds().FormGroupClass(m => m.StartMonth) @Html.Gds().FormGroupClass(m => m.StartYear)">
+                        <fieldset>
+                            <legend>
+                                <span class="form-label">From</span>
+                            </legend>
+                            <div class="form-date">
+                                @Html.Gds().ValidationMessageFor(m => m.StartDay)
+                                @Html.Gds().ValidationMessageFor(m => m.StartMonth)
+                                @Html.Gds().ValidationMessageFor(m => m.StartYear)
+                                <div class="form-group form-group-day">
+                                    @Resource.Day
+                                    @Html.Gds().TextBoxFor(m => m.StartDay)
+                                </div>
+                                <div class="form-group form-group-month">
+                                    @Resource.Month
+                                    @Html.Gds().TextBoxFor(m => m.StartMonth)
+                                </div>
+                                <div class="form-group form-group-year">
+                                    @Resource.Year
+                                    @Html.Gds().TextBoxFor(m => m.StartYear)
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                    <br />
+                    <div class="form-group @Html.Gds().FormGroupClass(m => m.EndDay) @Html.Gds().FormGroupClass(m => m.EndMonth) @Html.Gds().FormGroupClass(m => m.EndYear)">
+                        <fieldset>
+                            <legend>
+                                <span class="form-label">To</span>
+                            </legend>
+                            <div class="form-date">
+                                @Html.Gds().ValidationMessageFor(m => m.EndDay)
+                                @Html.Gds().ValidationMessageFor(m => m.EndMonth)
+                                @Html.Gds().ValidationMessageFor(m => m.EndYear)
+                                <div class="form-group form-group-day">
+                                    @Resource.Day
+                                    @Html.Gds().TextBoxFor(m => m.EndDay)
+                                </div>
+                                <div class="form-group form-group-month">
+                                    @Resource.Month
+                                    @Html.Gds().TextBoxFor(m => m.EndMonth)
+                                </div>
+                                <div class="form-group form-group-year">
+                                    @Resource.Year
+                                    @Html.Gds().TextBoxFor(m => m.EndYear)
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                    <div class="form-group">
+                        <button class="button" type="submit" name="command" value="search">Search</button>
+                    </div>
+                </div>
+
+
+
+                <div @shipmentClass id="shipmentSection">
+                    <div class="form-group @Html.Gds().FormGroupClass(m => m.ShipmentNumber)">
+
+                        @Html.Gds().ValidationMessageFor(m => m.ShipmentNumber)
+                        <div>
+                            @Resource.ShipmentNumber
+                        </div>
+                        <div>
+                            @Html.Gds().TextBoxFor(m => m.ShipmentNumber)
+                        </div>
+                        <br />
+                        <div class="form-group">
+                            <button class="button" type="submit" name="command" value="search">Search</button>
+                        </div>
+                    </div>
+                    <br />
+                </div>
+            }
+        </div>
+    </div>
+}
 
 <br />
 
@@ -48,34 +151,34 @@
             <tbody>
                 @for (int i = 0; i < Model.Comments.Count; i++)
                 {
-                <tr>
-                    <td>
-                        <span style="white-space: nowrap">
-                            @Html.DisplayFor(m => m.Comments[i].Username)
-                        </span>
-                    </td>
-                    <td>
-                        <span style="white-space: nowrap">
-                            @Model.Comments[i].DateAdded.ToString("dd MMM yyyy")
-                        </span>
-                    </td>
-                    @if (Model.Type == EA.Iws.Core.Admin.NotificationShipmentsCommentsType.Shipments)
-                    {
+                    <tr>
                         <td>
                             <span style="white-space: nowrap">
-                                @Html.DisplayFor(m => m.Comments[i].ShipmentNumber)
+                                @Html.DisplayFor(m => m.Comments[i].Username)
                             </span>
                         </td>
-                    }
-                    <td>
-                        @Html.DisplayFor(m => m.Comments[i].Comment)
-                    </td>
-                    <td>
-                        <span style="white-space: nowrap">
-                            @Html.ActionLink("Delete", "Delete", "Comments", new { commentId = @Model.Comments[i].CommentId }, null)
-                        </span>
-                    </td>
-                </tr>
+                        <td>
+                            <span style="white-space: nowrap">
+                                @Model.Comments[i].DateAdded.ToString("dd MMM yyyy")
+                            </span>
+                        </td>
+                        @if (Model.Type == EA.Iws.Core.Admin.NotificationShipmentsCommentsType.Shipments)
+                        {
+                            <td>
+                                <span style="white-space: nowrap">
+                                    @Html.DisplayFor(m => m.Comments[i].ShipmentNumber)
+                                </span>
+                            </td>
+                        }
+                        <td>
+                            @Html.DisplayFor(m => m.Comments[i].Comment)
+                        </td>
+                        <td>
+                            <span style="white-space: nowrap">
+                                @Html.ActionLink("Delete", "Delete", "Comments", new { commentId = @Model.Comments[i].CommentId, type = Model.Type }, null)
+                            </span>
+                        </td>
+                    </tr>
                 }
             </tbody>
         </table>
@@ -87,10 +190,37 @@ else
         <h3 style="text-align:center; font-size:36px">No comments available</h3>
     </div>
 }
+
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
     <div class="form-group">
         @Html.ActionLink(Resource.GoToOverview, "Index", "Home", new { area = "ImportNotification", id = Model.NotificationId }, null)
     </div>
+}
+
+@section scripts {
+    <script>
+        $(function () {
+            $('select#filterSelectList').change(function () {
+                var SelectedValue = $(this).val();
+
+                var dateSection = $("#dateSection");
+                var shipmentSection = $("#shipmentSection");
+
+                if (SelectedValue == "date") {
+                    dateSection.removeClass('hidden');
+                    shipmentSection.addClass('hidden');
+                }
+                else if (SelectedValue == "shipment") {
+                    shipmentSection.removeClass('hidden');
+                    dateSection.addClass('hidden');
+                }
+                else {
+                    $("form").submit();
+                }
+
+            });
+        });
+    </script>
 }

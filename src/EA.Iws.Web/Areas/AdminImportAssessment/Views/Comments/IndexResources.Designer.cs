@@ -124,6 +124,24 @@ namespace EA.Iws.Web.Areas.AdminImportAssessment.Views.Comments {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Day.
+        /// </summary>
+        public static string Day {
+            get {
+                return ResourceManager.GetString("Day", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please enter a valid number in the &apos;Day&apos; field.
+        /// </summary>
+        public static string DayError {
+            get {
+                return ResourceManager.GetString("DayError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Are you sure you want to permenantly delete this comment?.
         /// </summary>
         public static string DeleteHeader {
@@ -151,11 +169,56 @@ namespace EA.Iws.Web.Areas.AdminImportAssessment.Views.Comments {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Enter the start date for your search.
+        /// </summary>
+        public static string From {
+            get {
+                return ResourceManager.GetString("From", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The from date must be before the to date.
+        /// </summary>
+        public static string FromDateAfterToDate {
+            get {
+                return ResourceManager.GetString("FromDateAfterToDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please enter a valid from date.
+        /// </summary>
+        public static string FromValid {
+            get {
+                return ResourceManager.GetString("FromValid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Go to Notification overview.
         /// </summary>
         public static string GoToOverview {
             get {
                 return ResourceManager.GetString("GoToOverview", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Month.
+        /// </summary>
+        public static string Month {
+            get {
+                return ResourceManager.GetString("Month", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please enter a valid number in the &apos;Month&apos; field.
+        /// </summary>
+        public static string MonthError {
+            get {
+                return ResourceManager.GetString("MonthError", resourceCulture);
             }
         }
         
@@ -169,11 +232,74 @@ namespace EA.Iws.Web.Areas.AdminImportAssessment.Views.Comments {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Search.
+        /// </summary>
+        public static string Search {
+            get {
+                return ResourceManager.GetString("Search", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Shipment Number.
+        /// </summary>
+        public static string ShipmentNumber {
+            get {
+                return ResourceManager.GetString("ShipmentNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter a valid shipment number.
+        /// </summary>
+        public static string ShipmentNumberError {
+            get {
+                return ResourceManager.GetString("ShipmentNumberError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Review and write comments for this notification and it&apos;s shipments for Internal users.
         /// </summary>
         public static string Subtitle {
             get {
                 return ResourceManager.GetString("Subtitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter the end date for your search.
+        /// </summary>
+        public static string To {
+            get {
+                return ResourceManager.GetString("To", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please enter a valid to date.
+        /// </summary>
+        public static string ToValid {
+            get {
+                return ResourceManager.GetString("ToValid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Year.
+        /// </summary>
+        public static string Year {
+            get {
+                return ResourceManager.GetString("Year", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please enter a valid number in the &apos;Year&apos; field.
+        /// </summary>
+        public static string YearError {
+            get {
+                return ResourceManager.GetString("YearError", resourceCulture);
             }
         }
     }

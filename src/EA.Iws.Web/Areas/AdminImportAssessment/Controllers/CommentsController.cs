@@ -1,11 +1,13 @@
 ﻿namespace EA.Iws.Web.Areas.AdminImportAssessment.Controllers
 {
     using System;
+    using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Core.Admin;
     using Core.Authorization.Permissions;
+    using EA.Iws.Core.ImportNotificationAssessment;
     using Infrastructure;
     using Infrastructure.Authorization;
     using Prsd.Core.Mediator;
@@ -23,24 +25,92 @@
         }
 
         [HttpGet]
-        public async Task<ActionResult> Index(Guid id, NotificationShipmentsCommentsType type = NotificationShipmentsCommentsType.Notification)
+        public async Task<ActionResult> Index(Guid id, string filter, NotificationShipmentsCommentsType type = NotificationShipmentsCommentsType.Notification)
         {
-            CommentsViewModel model = new CommentsViewModel();
-            model.NotificationId = id;
-            model.Type = type;
+            DateTime startDate = new DateTime();
+            DateTime endDate = new DateTime();
 
-            var comments = await this.mediator.SendAsync(new GetImportNotificationComments(id));
-
-            if (type == NotificationShipmentsCommentsType.Notification)
+            if (filter == "date" && TempData.ContainsKey("startDate") && TempData.ContainsKey("endDate"))
             {
-                model.Comments = comments.NotificationComments.Where(p => p.ShipmentNumber == 0).ToList();
+                startDate = DateTime.Parse(TempData["startDate"].ToString());
+                endDate = DateTime.Parse(TempData["endDate"].ToString());
+
+                TempData["startDate"] = filter == "date" ? startDate.ToString() : null;
+                TempData["endDate"] = filter == "date" ? endDate.ToString() : null;
             }
             else
             {
-                model.Comments = comments.NotificationComments.Where(p => p.ShipmentNumber != 0).ToList();
+                startDate = DateTime.MinValue;
+                endDate = DateTime.MaxValue;
+                TempData.Remove("startDate");
+                TempData.Remove("endDate");
             }
 
+            int? shipmentNumber;
+
+            if (filter == "shipment" && TempData.ContainsKey("shipmentNumber"))
+            {
+                shipmentNumber = int.Parse(TempData["shipmentNumber"].ToString());
+
+                TempData["shipmentNumber"] = shipmentNumber.ToString();
+            }
+            else
+            {
+                shipmentNumber = null;
+                TempData.Remove("shipmentNumber");
+            }
+
+            var comments = await this.mediator.SendAsync(new GetImportNotificationComments(id, type, startDate, endDate, shipmentNumber));
+
+            CommentsViewModel model = new CommentsViewModel
+            {
+                NotificationId = id,
+                Type = type,
+                SelectedFilter = filter,
+                TotalNumberOfComments = comments.NumberOfComments,
+                ShipmentNumber = shipmentNumber
+            };
+
+            SetModelComments(model, comments);
+
+            model.SetDates(startDate, endDate);
+
             return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Index(Guid id, CommentsViewModel model, string command)
+        {
+            if (command == null)
+            {
+                return RedirectToAction("Index", new { filter = model.SelectedFilter, type = model.Type });
+            }
+
+            if (command == "search" && !ModelState.IsValid)
+            {
+                var comments = await this.mediator.SendAsync(new GetImportNotificationComments(id, model.Type, null, null, null));
+                model.TotalNumberOfComments = comments.NumberOfComments;
+                SetModelComments(model, comments);
+
+                return View(model);
+            }
+
+            if (model.SelectedFilter == "date")
+            {
+                DateTime startDate = new DateTime(model.StartYear.GetValueOrDefault(), model.StartMonth.GetValueOrDefault(), model.StartDay.GetValueOrDefault());
+                DateTime endDate = new DateTime(model.EndYear.GetValueOrDefault(), model.EndMonth.GetValueOrDefault(), model.EndDay.GetValueOrDefault());
+
+                TempData["startDate"] = startDate;
+                TempData["endDate"] = endDate;
+            }
+
+            if (model.SelectedFilter == "shipment")
+            {
+                TempData["shipmentNumber"] = model.ShipmentNumber;
+            }
+
+            return RedirectToAction("Index", new { filter = model.SelectedFilter, type = model.Type });
         }
 
         [HttpGet]
@@ -65,19 +135,20 @@
 
             await this.mediator.SendAsync(request);
 
-            return RedirectToAction("Index", new { id = model.NotificationId });
+            return RedirectToAction("Index", new { id = model.NotificationId, type = model.SelectedType });
         }
 
         [HttpGet]
-        public async Task<ActionResult> Delete(Guid id, Guid commentId)
+        public async Task<ActionResult> Delete(Guid id, Guid commentId, NotificationShipmentsCommentsType type)
         {
-            var comments = await this.mediator.SendAsync(new GetImportNotificationComments(id));
+            var comments = await this.mediator.SendAsync(new GetImportNotificationComments(id, type, null, null, null));
 
             DeleteCommentViewModel model = new DeleteCommentViewModel()
             {
                 NotificationId = id,
                 CommentId = commentId,
-                Comment = comments.NotificationComments.FirstOrDefault(p => p.CommentId == commentId)
+                Comment = comments.NotificationComments.FirstOrDefault(p => p.CommentId == commentId),
+                Type = type
             };
 
             return View(model);
@@ -91,7 +162,19 @@
 
             await this.mediator.SendAsync(request);
 
-            return RedirectToAction("Index", new { id = model.NotificationId });
+            return RedirectToAction("Index", new { id = model.NotificationId, type = model.Type });
+        }
+
+        private void SetModelComments(CommentsViewModel model, ImportNotificationCommentsData data)
+        {
+            if (model.Type == NotificationShipmentsCommentsType.Notification)
+            {
+                model.Comments = data.NotificationComments.Where(p => p.ShipmentNumber == 0).ToList();
+            }
+            else
+            {
+                model.Comments = data.NotificationComments.Where(p => p.ShipmentNumber != 0).ToList();
+            }
         }
     }
 }

@@ -6,6 +6,7 @@
     public class ImportNotificationCommentsData
     {
         public IList<InternalComment> NotificationComments { get; set; }
+        public int NumberOfComments { get; set; }
 
         public ImportNotificationCommentsData()
         {
