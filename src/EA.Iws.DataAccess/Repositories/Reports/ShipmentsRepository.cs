@@ -22,9 +22,9 @@
             TextFieldOperator? textFieldOperatorType, string textSearch)
         {
             var textFilter = TextFilterHelper.GetTextFilter(textFieldType, textFieldOperatorType, textSearch);
+            textFilter = !string.IsNullOrEmpty(textFilter) ? string.Format("AND {0}", textFilter) : string.Empty;
 
-            return await context.Database.SqlQuery<Shipment>(
-                @"SELECT 
+            var query = @"SELECT 
                     [NotificationNumber],
                     [ImportOrExport],
                     [Exporter],
@@ -64,13 +64,13 @@
                      OR @dateType = 'CompletedDate' and  [CompletedDate] BETWEEN @from AND @to
                      OR @dateType = 'ActualDateOfShipment' and  [ActualDateOfShipment] BETWEEN @from AND @to
                      OR @dateType = 'RejectedShipmentDate' and  [RejectedShipmentDate] BETWEEN @from AND @to)
-                AND (@textFilter IS NULL OR @textFilter = @textFilter)",
+                {0}";            
+
+            return await context.Database.SqlQuery<Shipment>(string.Format(query, textFilter),
                 new SqlParameter("@from", from),
                 new SqlParameter("@to", to),
                 new SqlParameter("@ca", (int)competentAuthority),
-                new SqlParameter("@dateType", dateType.ToString()),
-                new SqlParameter("@textFilter",
-                    !string.IsNullOrEmpty(textFilter) ? (object)textFilter : DBNull.Value)).ToArrayAsync();
+                new SqlParameter("@dateType", dateType.ToString())).ToArrayAsync();
         }
     }
 }
