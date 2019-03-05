@@ -41,7 +41,7 @@
 
             var fileName = string.Format("shipments-{0}-{1}.xlsx", model.From.ToShortDateString(), model.To.ToShortDateString());
 
-            return new XlsxActionResult<ShipmentData>(report, fileName);
+            return new XlsxActionResult<ShipmentData>(report, fileName, true);
         }
     }
 }
