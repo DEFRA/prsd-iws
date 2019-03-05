@@ -373,6 +373,7 @@
     <Compile Include="Reports\IFinanceReportRepository.cs" />
     <Compile Include="Reports\IImportNotificationsRepository.cs" />
     <Compile Include="Reports\IImportStatsRepository.cs" />
+    <Compile Include="Reports\IProducerRepository.cs" />
     <Compile Include="Reports\IShipmentsRepository.cs" />
     <Compile Include="Reports\IFreedomOfInformationRepository.cs" />
     <Compile Include="Reports\ImportStats.cs" />
