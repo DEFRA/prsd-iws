@@ -17,14 +17,16 @@
         private IXLWorksheet workSheet;
         private bool fixedWidthFormat;
         private const int MaxPixelColWidth = 150;
+        private string columnsToHide;
 
         public XlsxActionResult(IEnumerable<T> data, 
             string fileDownloadName, 
-            bool fixedWidthFormat = false) : base(MimeTypes.MSExcelXml)
+            bool fixedWidthFormat = false, string columnsToHide = null) : base(MimeTypes.MSExcelXml)
         {
             this.data = data;
             FileDownloadName = fileDownloadName;
             this.fixedWidthFormat = fixedWidthFormat;
+            this.columnsToHide = columnsToHide;
         }
 
         protected override void WriteFile(HttpResponseBase response)
@@ -43,9 +45,14 @@
             
             workSheet.Cell(2, 1).Value = data.AsEnumerable();
 
-            AddHeaderRow();
+            AddHeaderRow();         
 
             FormatTitles();
+
+            if (!string.IsNullOrEmpty(columnsToHide))
+            {
+                workSheet.Columns(columnsToHide).Delete();
+            }
 
             if (fixedWidthFormat)
             {
