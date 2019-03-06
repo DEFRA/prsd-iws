@@ -180,6 +180,9 @@
   <data name="SearchPlaceholder" xml:space="preserve">
     <value>Enter notification number or organisation name</value>
   </data>
+  <data name="ShipmentSummaryTableHeading" xml:space="preserve">
+    <value>Shipment summary</value>
+  </data>
   <data name="StatusTableHeading" xml:space="preserve">
     <value>Status</value>
   </data>
