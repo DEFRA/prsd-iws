@@ -147,6 +147,9 @@
   <data name="NotificationNumberTableHeading" xml:space="preserve">
     <value>Notification number</value>
   </data>
+  <data name="ShipmentSummaryLinkText" xml:space="preserve">
+    <value>Go to summary</value>
+  </data>
   <data name="ShipmentSummaryTableHeading" xml:space="preserve">
     <value>Shipment summary</value>
   </data>

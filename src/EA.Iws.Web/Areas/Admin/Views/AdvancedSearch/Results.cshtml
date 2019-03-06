@@ -91,6 +91,10 @@ else
                         @Html.DisplayFor(m => m.ImportResults[i].BaselOecdCode)
                     </td>
                     <td>
+                        @if (Model.ImportResults[i].ShowShipmentSummaryLink)
+                        {
+                            @Resources.ShipmentSummaryLinkText
+                        }
                     </td>
                 </tr>
             }
