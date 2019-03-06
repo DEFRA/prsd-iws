@@ -21,6 +21,7 @@
                 <th>@Resources.StatusTableHeading</th>
                 <th>@Resources.CompanyNameTableHeading</th>
                 <th>@Resources.WasteTypeTableHeading</th>
+                <th>@Resources.ShipmentSummaryTableHeading</th>
             </tr>
         </thead>
         <tbody>
@@ -43,6 +44,8 @@
                     <td>
                         @Html.DisplayFor(m => m.ExportResults[i].WasteType)
                     </td>
+                    <td>
+                    </td>
                 </tr>
             }
         </tbody>
@@ -64,6 +67,7 @@ else
                 <th>@Resources.StatusTableHeading</th>
                 <th>@Resources.CompanyNameTableHeading</th>
                 <th>@Resources.BaselCodeTableHeading</th>
+                <th>@Resources.ShipmentSummaryTableHeading</th>
             </tr>
         </thead>
         <tbody>
@@ -85,6 +89,8 @@ else
                     </td>
                     <td>
                         @Html.DisplayFor(m => m.ImportResults[i].BaselOecdCode)
+                    </td>
+                    <td>
                     </td>
                 </tr>
             }

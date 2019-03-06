@@ -151,6 +151,15 @@ namespace EA.Iws.Web.Areas.Admin.Views.AdvancedSearch {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Shipment summary.
+        /// </summary>
+        public static string ShipmentSummaryTableHeading {
+            get {
+                return ResourceManager.GetString("ShipmentSummaryTableHeading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Status.
         /// </summary>
         public static string StatusTableHeading {
