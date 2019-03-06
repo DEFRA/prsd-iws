@@ -1059,6 +1059,7 @@
     <Content Include="Areas\AdminExportAssessment\Views\Comments\Delete.cshtml" />
     <Content Include="Areas\AdminImportAssessment\Views\Comments\Delete.cshtml" />
     <Content Include="Areas\AdminImportAssessment\Views\Comments\_Layout.cshtml" />
+    <Content Include="Areas\Reports\Views\FreedomOfInformation\ColumnSelection.cshtml" />
     <None Include="Scripts\jquery-2.1.3.intellisense.js" />
     <Content Include="Scripts\govuk\govuk-template.js" />
     <Content Include="Scripts\govuk\ie.js" />
@@ -1177,6 +1178,7 @@
     <Content Include="Views\Shared\EditorTemplates\RequiredDateInputViewModel.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\ReportInputParametersViewModel.cshtml" />
     <Content Include="Views\PrivacyPolicy\Index.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\ReportOutputParametersViewModel.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -1550,6 +1552,7 @@
       <DependentUpon>FinancialGuaranteeDecisionViewModelResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Areas\Reports\Controllers\ProducerController.cs" />
+    <Compile Include="Areas\Reports\ViewModels\FreedomOfInformation\ColumnSelectionViewModel.cs" />
     <Compile Include="Areas\Reports\ViewModels\Producer\IndexViewModel.cs" />
     <Compile Include="Areas\Reports\Views\Producer\ProducerResources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -3453,6 +3456,7 @@
       <DependentUpon>ReportInputParametersResources.resx</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\Shared\ReportInputParametersViewModel.cs" />
+    <Compile Include="ViewModels\Shared\ReportOutputParametersViewModel.cs" />
     <Compile Include="ViewModels\Shared\RequiredDateInputResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

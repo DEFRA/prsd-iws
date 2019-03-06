@@ -120,8 +120,17 @@
   <data name="ButtonText" xml:space="preserve">
     <value>Generate report</value>
   </data>
+  <data name="ContinueButtonText" xml:space="preserve">
+    <value>Continue</value>
+  </data>
   <data name="Heading" xml:space="preserve">
     <value>FOI Report</value>
+  </data>
+  <data name="InfoText" xml:space="preserve">
+    <value>Select the information you wish to show in the report.</value>
+  </data>
+  <data name="ReportHeading" xml:space="preserve">
+    <value>Information generated</value>
   </data>
   <data name="ReportInfo" xml:space="preserve">
     <value>Please note this report is run against a copy of the live data which is a day behind. Anything input today will not be on the report.</value>
