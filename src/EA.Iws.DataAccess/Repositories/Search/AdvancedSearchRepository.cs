@@ -67,7 +67,8 @@
                     N.[NotificationNumber],
                     NS.[Description] AS [NotificationStatus],
                     E.[Name] AS [ExporterName],
-                    CCT.[Description] AS [WasteType]
+                    CCT.[Description] AS [WasteType],
+					CASE WHEN NS.[Description] IN ('Consented', 'Consent withdrawn') THEN CAST(1 AS BIT) ELSE CAST(0 AS BIT) END AS [ShowShipmentSummaryLink]
                 FROM
                     [Notification].[Notification] N
                     INNER JOIN [Notification].[NotificationAssessment] NA 
