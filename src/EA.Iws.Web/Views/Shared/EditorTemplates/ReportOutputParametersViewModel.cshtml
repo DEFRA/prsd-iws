@@ -1,0 +1,35 @@
+﻿@model EA.Iws.Web.ViewModels.Shared.ReportOutputParametersViewModel
+<div class="form-group">
+	@Html.Gds().ValidationMessageFor(m => m.ReportColumns)
+	@Html.HiddenFor(m => m.DateType)
+	@Html.HiddenFor(m => m.FromDate)
+	@Html.HiddenFor(m => m.ToDate)
+	@Html.HiddenFor(m => m.TextFieldType)
+	@Html.HiddenFor(m => m.OperatorType)
+	@Html.HiddenFor(m => m.SearchText)
+	<fieldset>
+		<div class="multiple-choice">
+			@Html.CheckBox("Select all", new { @id = "selectAllCheckbox" })
+			<label for="selectAllCheckbox" id="selectAllCheckboxLabel">
+				Select all
+			</label>
+		</div>
+		<br />
+		<hr />
+		@for (int i = 0; i < Model.ReportColumns.PossibleValues.Count; i++)
+		{
+			MvcHtmlString idForThisCheckBox = Html.NameFor(m => m.ReportColumns.PossibleValues[i]);
+
+			<div class="multiple-choice">
+				@Html.CheckBoxFor(m => m.ReportColumns.PossibleValues[i].Selected, new { id = idForThisCheckBox })
+				<label for="@idForThisCheckBox">
+					@Html.DisplayFor(m => m.ReportColumns.PossibleValues[i].Text)
+				</label>
+			</div>
+
+				@Html.HiddenFor(m => m.ReportColumns.PossibleValues[i].Text)
+				@Html.HiddenFor(m => m.ReportColumns.PossibleValues[i].Value)
+		}
+	</fieldset>
+</div>
+

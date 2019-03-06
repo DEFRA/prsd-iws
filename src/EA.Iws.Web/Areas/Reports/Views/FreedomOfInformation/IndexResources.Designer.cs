@@ -70,11 +70,38 @@ namespace EA.Iws.Web.Areas.Reports.Views.FreedomOfInformation {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Continue.
+        /// </summary>
+        public static string ContinueButtonText {
+            get {
+                return ResourceManager.GetString("ContinueButtonText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to FOI Report.
         /// </summary>
         public static string Heading {
             get {
                 return ResourceManager.GetString("Heading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select the information you wish to show in the report..
+        /// </summary>
+        public static string InfoText {
+            get {
+                return ResourceManager.GetString("InfoText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Information generated.
+        /// </summary>
+        public static string ReportHeading {
+            get {
+                return ResourceManager.GetString("ReportHeading", resourceCulture);
             }
         }
         

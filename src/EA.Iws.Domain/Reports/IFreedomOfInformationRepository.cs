@@ -6,10 +6,12 @@
     using Core.Admin.Reports;
     using Core.Notification;
     using Core.Reports;
-    using Core.WasteType;
+    using Core.Reports.FOI;
 
     public interface IFreedomOfInformationRepository
     {
-        Task<IEnumerable<FreedomOfInformationData>> Get(DateTime from, DateTime to, ChemicalComposition? chemicalComposition, UKCompetentAuthority competentAuthority, FoiReportDates dateType);
+        Task<IEnumerable<FreedomOfInformationData>> Get(DateTime from, DateTime to, UKCompetentAuthority competentAuthority, FOIReportDates dateType, FOIReportTextFields? searchField,
+            TextFieldOperator? searchType,
+            string comparisonText);
     }
 }
