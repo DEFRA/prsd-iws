@@ -62,11 +62,12 @@
                 s.NotificationNumber,
                 s.ExporterName,
                 s.WasteType,
-                s.Status)).ToList();
+                s.Status,
+                s.Status.Equals(NotificationStatus.Consented) || s.Status.Equals(NotificationStatus.ConsentWithdrawn))).ToList();
         }
 
         private static BasicSearchResult ConvertToSearchResults(Guid notificationId, string notificationNumber,
-            string exporterName, ChemicalComposition wasteTypeValue, NotificationStatus status)
+            string exporterName, ChemicalComposition wasteTypeValue, NotificationStatus status, bool showSummaryLink)
         {
             var searchResult = new BasicSearchResult
             {
@@ -75,7 +76,8 @@
                 ExporterName = exporterName,
                 WasteType = wasteTypeValue != default(ChemicalComposition)
                     ? EnumHelper.GetShortName(wasteTypeValue) : string.Empty,
-                NotificationStatus = EnumHelper.GetDisplayName(status)
+                NotificationStatus = EnumHelper.GetDisplayName(status),
+                ShowShipmentSummaryLink = showSummaryLink
             };
 
             return searchResult;

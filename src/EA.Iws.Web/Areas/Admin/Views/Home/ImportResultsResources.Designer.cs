@@ -97,6 +97,15 @@ namespace EA.Iws.Web.Areas.Admin.Views.Home {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Go to summary.
+        /// </summary>
+        public static string ShipmentSummaryLinkText {
+            get {
+                return ResourceManager.GetString("ShipmentSummaryLinkText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Shipment summary.
         /// </summary>
         public static string ShipmentSummaryTableHeading {
