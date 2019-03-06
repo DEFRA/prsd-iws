@@ -6,6 +6,7 @@
     using System.Linq;
     using System.Threading.Tasks;
     using Core.Admin.Search;
+    using Core.FinancialGuarantee;
     using Core.NotificationAssessment;
     using Core.WasteType;
     using DataAccess;
@@ -44,6 +45,8 @@
                 .Join(context.NotificationAssessments
                     .Where(p => p.Status != NotificationStatus.NotSubmitted), x => x.Notification.Id,
                     na => na.NotificationApplicationId, (n, na) => new { n.Notification, n.Exporter, Assessment = na })
+                .GroupJoin(context.FinancialGuarantees, x => x.Notification.Id, 
+                    fg => fg.NotificationId, (n, fg) => new { Notification = n.Notification, Exporter = n.Exporter, Assessment = n.Assessment, FinancialGuarantees = fg })
                 .Select(s =>
                     new
                     {
@@ -52,18 +55,21 @@
                         ExporterName = s.Exporter.Business.Name,
                         WasteType = s.Notification.WasteType.ChemicalCompositionType,
                         s.Assessment.Status,
-                        s.Notification.CompetentAuthority
+                        s.Notification.CompetentAuthority,
+                        FinancialGuarantees = s.FinancialGuarantees
                     })
                 .OrderBy(x => x.NotificationNumber)
                 .ToListAsync();
-
+            
             return result.Select(s => ConvertToSearchResults(
                 s.Id,
                 s.NotificationNumber,
                 s.ExporterName,
                 s.WasteType,
                 s.Status,
-                s.Status.Equals(NotificationStatus.Consented) || s.Status.Equals(NotificationStatus.ConsentWithdrawn))).ToList();
+                (s.Status.Equals(NotificationStatus.Consented) || s.Status.Equals(NotificationStatus.ConsentWithdrawn)) 
+                    && (s.FinancialGuarantees.First().GetCurrentApprovedFinancialGuarantee() ??
+                    s.FinancialGuarantees.First().GetLatestFinancialGuarantee()).Status.Equals(FinancialGuaranteeStatus.Approved))).ToList();
         }
 
         private static BasicSearchResult ConvertToSearchResults(Guid notificationId, string notificationNumber,
