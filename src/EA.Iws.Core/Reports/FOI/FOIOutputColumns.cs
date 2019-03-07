@@ -124,7 +124,7 @@
         [Display(Name = "Decision date")]
         DecisionRequiredByDate,
 
-        [Display(Name = "Financial guarantee approved ")]
+        [Display(Name = "Financial guarantee approved")]
         IsFinancialGuaranteeApproved,
 
         [Display(Name = "File closure date")]

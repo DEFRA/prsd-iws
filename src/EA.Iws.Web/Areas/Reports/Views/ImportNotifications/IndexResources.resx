@@ -120,6 +120,9 @@
   <data name="ButtonText" xml:space="preserve">
     <value>Generate report</value>
   </data>
+  <data name="InfoText" xml:space="preserve">
+    <value>Select your notification received dates for this report</value>
+  </data>
   <data name="MainHeading" xml:space="preserve">
     <value>Data Import notifications</value>
   </data>
