@@ -2,10 +2,12 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Data.Entity;
     using System.Data.SqlClient;
     using System.Linq;
     using System.Threading.Tasks;
     using Core.Admin.Search;
+    using Core.FinancialGuarantee;
     using Core.Notification;
     using Core.OperationCodes;
     using Core.Shared;
@@ -83,7 +85,25 @@
 
             var query = string.Format(queryFormat, string.Join(",", parameters.Select(x => x.ParameterName)));
 
-            return await context.Database.SqlQuery<ExportAdvancedSearchResult>(query, parameters).ToListAsync();
+            var returnResults = await context.Database.SqlQuery<ExportAdvancedSearchResult>(query, parameters).ToListAsync();
+            
+            // Update the ShowShipmentSummaryLink value based upon the notification's financial guarantee status
+            foreach (var a in returnResults)
+            {
+                var fgCollection = await context.FinancialGuarantees.SingleAsync(fg => fg.NotificationId == a.Id);
+                if (fgCollection != null)
+                {
+                    var financialGuarantee = fgCollection.GetCurrentApprovedFinancialGuarantee() ??
+                                         fgCollection.GetLatestFinancialGuarantee();
+                    a.ShowShipmentSummaryLink = a.ShowShipmentSummaryLink && financialGuarantee.Status.Equals(FinancialGuaranteeStatus.Approved);
+                }
+                else
+                {
+                    a.ShowShipmentSummaryLink = false;
+                }
+            }
+
+            return returnResults;
         }
 
         public async Task<IEnumerable<ImportAdvancedSearchResult>> SearchImportNotificationsByCriteria(AdvancedSearchCriteria criteria, UKCompetentAuthority competentAuthority)
