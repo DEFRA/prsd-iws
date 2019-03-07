@@ -75,24 +75,6 @@
                         new ValidationResult(ReportInputParametersResources.TextSearchRequired, new[] { "TextSearch" });
                 }
             }
-        }
-
-        public T? TryParse<T>(string value) where T : struct
-        {
-            if (string.IsNullOrEmpty(value))
-            {
-                return null;
-            }
-
-            T result;
-
-            if (Enum.TryParse<T>(value, true, out result) &&
-                Enum.IsDefined(typeof(T), result))
-            {
-                return result;
-            }
-
-            return null;
-        }
+        }     
     }
 }
