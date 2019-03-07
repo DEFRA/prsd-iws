@@ -8,10 +8,13 @@
     using System.Threading.Tasks;
     using Core.Admin.Search;
     using Core.FinancialGuarantee;
+    using Core.ImportNotificationAssessment;
     using Core.Notification;
+    using Core.NotificationAssessment;
     using Core.OperationCodes;
     using Core.Shared;
     using Domain.Search;
+    using Prsd.Core.Helpers;
 
     internal class AdvancedSearchRepository : IAdvancedSearchRepository
     {
@@ -70,7 +73,7 @@
                     NS.[Description] AS [NotificationStatus],
                     E.[Name] AS [ExporterName],
                     CCT.[Description] AS [WasteType],
-					CASE WHEN NS.[Description] IN ('Consented', 'Consent withdrawn') THEN CAST(1 AS BIT) ELSE CAST(0 AS BIT) END AS [ShowShipmentSummaryLink]
+					CASE WHEN NS.[Description] IN ('{1}', '{2}') THEN CAST(1 AS BIT) ELSE CAST(0 AS BIT) END AS [ShowShipmentSummaryLink]
                 FROM
                     [Notification].[Notification] N
                     INNER JOIN [Notification].[NotificationAssessment] NA 
@@ -83,18 +86,20 @@
                 WHERE
                     N.[Id] IN ({0})";
 
-            var query = string.Format(queryFormat, string.Join(",", parameters.Select(x => x.ParameterName)));
+            var query = string.Format(queryFormat, string.Join(",", parameters.Select(x => x.ParameterName)),
+                EnumHelper.GetDisplayName(NotificationStatus.Consented),
+                EnumHelper.GetDisplayName(NotificationStatus.ConsentWithdrawn));
 
             var returnResults = await context.Database.SqlQuery<ExportAdvancedSearchResult>(query, parameters).ToListAsync();
             
             // Update the ShowShipmentSummaryLink value based upon the notification's financial guarantee status
             foreach (var a in returnResults)
             {
-                var fgCollection = await context.FinancialGuarantees.SingleAsync(fg => fg.NotificationId == a.Id);
-                if (fgCollection != null)
+                var financialGuaranteeCollection = await context.FinancialGuarantees.SingleAsync(fg => fg.NotificationId == a.Id);
+                if (financialGuaranteeCollection != null)
                 {
-                    var financialGuarantee = fgCollection.GetCurrentApprovedFinancialGuarantee() ??
-                                         fgCollection.GetLatestFinancialGuarantee();
+                    var financialGuarantee = financialGuaranteeCollection.GetCurrentApprovedFinancialGuarantee() ??
+                                         financialGuaranteeCollection.GetLatestFinancialGuarantee();
                     a.ShowShipmentSummaryLink = a.ShowShipmentSummaryLink && financialGuarantee.Status.Equals(FinancialGuaranteeStatus.Approved);
                 }
                 else
@@ -129,7 +134,7 @@
                     S.[Description] AS [Status],
                     E.Name AS [Exporter],
                     CASE WHEN WT.BaselOecdCodeNotListed = 1 THEN 'Not listed' ELSE WC.Code END AS [BaselOecdCode],
-					CASE WHEN S.[Description] IN ('Consented', 'Consent withdrawn') THEN CAST(1 AS BIT) ELSE CAST(0 AS BIT) END AS [ShowShipmentSummaryLink]
+					CASE WHEN S.[Description] IN ('{1}', '{2}') THEN CAST(1 AS BIT) ELSE CAST(0 AS BIT) END AS [ShowShipmentSummaryLink]
                 FROM
                     [ImportNotification].[Notification] N
                     INNER JOIN [ImportNotification].[NotificationAssessment] NA ON N.Id = NA.NotificationApplicationId
@@ -142,8 +147,10 @@
                 WHERE
                     N.[Id] IN ({0})";
 
-            var query = string.Format(queryFormat, string.Join(",", parameters.Select(x => x.ParameterName)));
-
+            var query = string.Format(queryFormat, string.Join(",", parameters.Select(x => x.ParameterName)),
+                EnumHelper.GetDisplayName(ImportNotificationStatus.Consented),
+                EnumHelper.GetDisplayName(ImportNotificationStatus.ConsentWithdrawn));
+            
             return await context.Database.SqlQuery<ImportAdvancedSearchResult>(query, parameters).ToListAsync();
         }
 
