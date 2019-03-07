@@ -3,6 +3,7 @@
     using System;
     using System.Threading.Tasks;
     using System.Web.Mvc;
+    using Core.ImportNotificationAssessment;
     using Core.NotificationAssessment;
     using Core.Shared;
     using Infrastructure.Authorization;
@@ -36,15 +37,30 @@
 
             if (info.IsExistingNotification)
             {
-                if (info.TradeDirection == TradeDirection.Export &&
-                    info.ExportNotificationStatus != NotificationStatus.NotSubmitted)
+                if (info.TradeDirection == TradeDirection.Export)
                 {
-                    return RedirectToAction("Index", "Home", new { id = info.Id, area = "AdminExportAssessment" });
+                    switch (info.ExportNotificationStatus)
+                    {
+                        case NotificationStatus.Consented:
+                        case NotificationStatus.ConsentWithdrawn:
+                            return RedirectToAction("Index", "Home", new { id = info.Id, area = "AdminExportNotificationMovements" });
+                        case NotificationStatus.NotSubmitted:
+                            break;
+                        default:
+                            return RedirectToAction("Index", "Home", new { id = info.Id, area = "AdminExportAssessment" });
+                    }
                 }
 
                 if (info.TradeDirection == TradeDirection.Import)
                 {
-                    return RedirectToAction("Index", "Home", new { id = info.Id, area = "ImportNotification" });
+                    switch (info.ImportNotificationStatus)
+                    {
+                        case ImportNotificationStatus.Consented:
+                        case ImportNotificationStatus.ConsentWithdrawn:
+                            return RedirectToAction("Index", "Home", new { id = info.Id, area = "AdminImportNotificationMovements" });
+                        default:
+                            return RedirectToAction("Index", "Home", new { id = info.Id, area = "ImportNotification" });
+                    }
                 }
             }
 
