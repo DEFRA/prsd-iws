@@ -38,9 +38,9 @@
                 return View(model);
             }
 
-            var dateType = model.InputParameters.TryParse<FOIReportDates>(model.InputParameters.SelectedDate);
-            var textFieldType = model.InputParameters.TryParse<FOIReportTextFields>(model.InputParameters.SelectedTextField);
-            var operatorType = model.InputParameters.TryParse<TextFieldOperator>(model.InputParameters.SelectedOperator);
+            var dateType = ReportEnumParser.TryParse<FOIReportDates>(model.InputParameters.SelectedDate);
+            var textFieldType = ReportEnumParser.TryParse<FOIReportTextFields>(model.InputParameters.SelectedTextField);
+            var operatorType = ReportEnumParser.TryParse<TextFieldOperator>(model.InputParameters.SelectedOperator);
 
             return RedirectToAction("ColumnSelection", new
             {
@@ -78,9 +78,9 @@
             }
 
             var columnsToHide = model.FOIReportColumns.GetColumnsToHide();
-            var dateType = model.FOIReportColumns.TryParse<FOIReportDates>(model.FOIReportColumns.DateType);
-            var textFieldType = model.FOIReportColumns.TryParse<FOIReportTextFields>(model.FOIReportColumns.TextFieldType);
-            var operatorType = model.FOIReportColumns.TryParse<TextFieldOperator>(model.FOIReportColumns.OperatorType);
+            var dateType = ReportEnumParser.TryParse<FOIReportDates>(model.FOIReportColumns.DateType);
+            var textFieldType = ReportEnumParser.TryParse<FOIReportTextFields>(model.FOIReportColumns.TextFieldType);
+            var operatorType = ReportEnumParser.TryParse<TextFieldOperator>(model.FOIReportColumns.OperatorType);
 
             return RedirectToAction("Download", new
             {

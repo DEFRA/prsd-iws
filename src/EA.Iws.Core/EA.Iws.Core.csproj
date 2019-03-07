@@ -241,6 +241,7 @@
     <Compile Include="Reports\FOI\FOIReportTextFields.cs" />
     <Compile Include="Reports\ProducerReportDates.cs" />
     <Compile Include="Reports\ProducerReportTextFields.cs" />
+    <Compile Include="Reports\ShipmentReportOutputColumns.cs" />
     <Compile Include="Reports\ShipmentReportTextFields.cs" />
     <Compile Include="Reports\ShipmentsReportDates.cs" />
     <Compile Include="Reports\TextFieldOperator.cs" />

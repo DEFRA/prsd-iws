@@ -36,9 +36,9 @@
                 return View(model);
             }
 
-            var dateType = model.InputParameters.TryParse<ProducerReportDates>(model.InputParameters.SelectedDate);
-            var textFieldType = model.InputParameters.TryParse<ProducerReportTextFields>(model.InputParameters.SelectedTextField);
-            var operatorType = model.InputParameters.TryParse<TextFieldOperator>(model.InputParameters.SelectedOperator);
+            var dateType = ReportEnumParser.TryParse<ProducerReportDates>(model.InputParameters.SelectedDate);
+            var textFieldType = ReportEnumParser.TryParse<ProducerReportTextFields>(model.InputParameters.SelectedTextField);
+            var operatorType = ReportEnumParser.TryParse<TextFieldOperator>(model.InputParameters.SelectedOperator);
 
             return RedirectToAction("Download", new
             {

@@ -1,24 +1,23 @@
-﻿namespace EA.Iws.Web.Areas.Reports.ViewModels.FreedomOfInformation
+﻿namespace EA.Iws.Web.Areas.Reports.ViewModels.Shipments
 {
     using System;
     using Core.Reports;
-    using Core.Reports.FOI;
     using EA.Iws.Web.ViewModels.Shared;
 
     public class ColumnSelectionViewModel
     {
-        public ReportOutputParametersViewModel FOIReportColumns { get; set; }
+        public ReportOutputParametersViewModel ShipmentReportColumns { get; set; }
 
         public ColumnSelectionViewModel()
         {
         }
-        public ColumnSelectionViewModel(FOIReportDates dateType,
+        public ColumnSelectionViewModel(ShipmentsReportDates dateType,
             DateTime from,
             DateTime to,
-            FOIReportTextFields? textFieldType,
-            TextFieldOperator? operatorType, string searchText, CheckBoxCollectionViewModel foiOutputColumns)
+            ShipmentReportTextFields? textFieldType,
+            TextFieldOperator? operatorType, string searchText, CheckBoxCollectionViewModel shipmentOutputColumns)
         {
-            FOIReportColumns = new ReportOutputParametersViewModel()
+            ShipmentReportColumns = new ReportOutputParametersViewModel()
             {
                 DateType = dateType.ToString(),
                 FromDate = from,
@@ -26,8 +25,8 @@
                 TextFieldType = textFieldType.ToString(),
                 OperatorType = operatorType.ToString(),
                 SearchText = searchText,
-                ReportColumns = foiOutputColumns
+                ReportColumns = shipmentOutputColumns
             };
-         }
+        }
     }
 }
