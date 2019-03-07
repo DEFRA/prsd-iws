@@ -1060,6 +1060,7 @@
     <Content Include="Areas\AdminImportAssessment\Views\Comments\Delete.cshtml" />
     <Content Include="Areas\AdminImportAssessment\Views\Comments\_Layout.cshtml" />
     <Content Include="Areas\Reports\Views\FreedomOfInformation\ColumnSelection.cshtml" />
+    <Content Include="Areas\Reports\Views\Shipments\ColumnSelection.cshtml" />
     <None Include="Scripts\jquery-2.1.3.intellisense.js" />
     <Content Include="Scripts\govuk\govuk-template.js" />
     <Content Include="Scripts\govuk\ie.js" />
@@ -1554,11 +1555,13 @@
     <Compile Include="Areas\Reports\Controllers\ProducerController.cs" />
     <Compile Include="Areas\Reports\ViewModels\FreedomOfInformation\ColumnSelectionViewModel.cs" />
     <Compile Include="Areas\Reports\ViewModels\Producer\IndexViewModel.cs" />
+    <Compile Include="Areas\Reports\ViewModels\Shipments\ColumnSelectionViewModel.cs" />
     <Compile Include="Areas\Reports\Views\Producer\ProducerResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ProducerResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Infrastructure\ReportEnumParser.cs" />
     <Compile Include="ViewModels\Shared\DecisionDateInputViewmodel.cs" />
     <Compile Include="Areas\AdminImportAssessment\ViewModels\KeyDatesOverride\IndexViewModel.cs" />
     <Compile Include="Areas\AdminImportAssessment\ViewModels\KeyDatesOverride\IndexViewModelResources.Designer.cs">
