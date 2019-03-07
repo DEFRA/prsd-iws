@@ -9,6 +9,7 @@
     using Infrastructure.Authorization;
     using Prsd.Core.Mediator;
     using Requests.Admin;
+    using Requests.NotificationAssessment;
     using ViewModels.NotificationSwitch;
     using ViewModels.Shared;
 
@@ -39,10 +40,20 @@
             {
                 if (info.TradeDirection == TradeDirection.Export)
                 {
+                    var financialGuaranteeApproved = await mediator.SendAsync(new HasApprovedFinancialGuarantee(info.Id.Value));
                     switch (info.ExportNotificationStatus)
                     {
                         case NotificationStatus.Consented:
+                            if (!financialGuaranteeApproved)
+                            {
+                                return RedirectToAction("Index", "FinancialGuaranteeAssessment", new { id = info.Id, area = "AdminExportAssessment" });
+                            }
+                            return RedirectToAction("Index", "Home", new { id = info.Id, area = "AdminExportNotificationMovements" });
                         case NotificationStatus.ConsentWithdrawn:
+                            if (!financialGuaranteeApproved)
+                            {
+                                return RedirectToAction("Index", "Home", new { id = info.Id, area = "AdminExportAssessment" });
+                            }
                             return RedirectToAction("Index", "Home", new { id = info.Id, area = "AdminExportNotificationMovements" });
                         case NotificationStatus.NotSubmitted:
                             break;
