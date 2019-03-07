@@ -134,7 +134,7 @@
                     S.[Description] AS [Status],
                     E.Name AS [Exporter],
                     CASE WHEN WT.BaselOecdCodeNotListed = 1 THEN 'Not listed' ELSE WC.Code END AS [BaselOecdCode],
-					CASE WHEN S.[Description] IN ('{1}', '{2}') THEN CAST(1 AS BIT) ELSE CAST(0 AS BIT) END AS [ShowShipmentSummaryLink]
+                    CASE WHEN S.[Description] IN ('{1}', '{2}') THEN CAST(1 AS BIT) ELSE CAST(0 AS BIT) END AS [ShowShipmentSummaryLink]
                 FROM
                     [ImportNotification].[Notification] N
                     INNER JOIN [ImportNotification].[NotificationAssessment] NA ON N.Id = NA.NotificationApplicationId
