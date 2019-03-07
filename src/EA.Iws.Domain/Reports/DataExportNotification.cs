@@ -33,5 +33,7 @@
         public bool? Preconsented { get; protected set; }
 
         public string SubmittedBy { get; protected set; }
+
+        public DateTime? ConsentTo { get; protected set; }
     }
 }
