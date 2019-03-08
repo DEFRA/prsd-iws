@@ -106,7 +106,7 @@ namespace EA.Iws.Web.Areas.AdminImportAssessment.Views.Comments {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Reivew comments.
+        ///   Looks up a localized string similar to Review comments.
         /// </summary>
         public static string CommentsHeader {
             get {
