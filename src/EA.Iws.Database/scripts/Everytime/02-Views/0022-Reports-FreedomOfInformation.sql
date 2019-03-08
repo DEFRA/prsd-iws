@@ -148,7 +148,10 @@ AS
     LEFT JOIN [Notification].[MovementOperationReceipt] MOR ON MOR.MovementId = M.Id
 	LEFT JOIN [Reports].[TransitStatesConcat] ETS on ETS.NotificationId = N.Id
 	LEFT JOIN  [Notification].[FinancialGuaranteeCollection] FGC ON FGC.[NotificationId] = N.Id
-	LEFT JOIN [Notification].[FinancialGuarantee] FG ON FG.[FinancialGuaranteeCollectionId] = FGC.[Id]
+	LEFT JOIN [Notification].[FinancialGuarantee] FG ON FG.Id = 
+		(SELECT TOP 1 FG1.Id from [Notification].[FinancialGuarantee] FG1 
+		 WHERE FG1.FinancialGuaranteeCollectionId = FGC.Id 
+		 ORDER BY FG1.CreatedDate DESC)
 
     UNION ALL
 
