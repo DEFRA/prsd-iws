@@ -25,7 +25,7 @@
     @Html.Gds().DropDownListFor(m => m.SelectedTextField, Model.TextFieldSelectList, "", new { @class = "text-field-select-list"})
 </div>
 
-<div class="operator-text-panel">
+<div class="operator-text-panel @(!string.IsNullOrEmpty(Model.SelectedTextField) && Model.SelectedTextField == "-1" ? "js-hidden" : string.Empty)">
     <div class="form-group @Html.Gds().FormGroupClass(m => m.SelectedOperator)">
         @Html.Gds().LabelFor(m => m.SelectedOperator, false)
         @Html.Gds().ValidationMessageFor(m => m.SelectedOperator)
