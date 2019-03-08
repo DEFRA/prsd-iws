@@ -36,19 +36,20 @@
                 var shipmentNumberClass = Model.ModelIsValid == false && Model.SelectedType == NotificationShipmentsCommentsType.Shipments ? "" : "class=hidden";
             }
 
-                <div id="shipmentNumberTextbox" @shipmentNumberClass>
+            <div id="shipmentNumberTextbox" @shipmentNumberClass>
 
-                    <div class="form-group @Html.Gds().FormGroupClass(m => m.ShipmentNumber)">
-                        @Html.Gds().LabelFor(m => m.ShipmentNumber, showOptionalLabel: false)
-                        @Html.Gds().ValidationMessageFor(m => m.ShipmentNumber)
-                        @Html.TextBoxFor(m => m.ShipmentNumber, new { @MaxLength = 500, @display = "block", @style = "width: 25%; height: 50px", @class = "form-control" })
-                    </div>
-
+                <div class="form-group @Html.Gds().FormGroupClass(m => m.ShipmentNumberStr)">
+                    @Html.Gds().LabelFor(m => m.ShipmentNumberStr, showOptionalLabel: false)
+                    @Html.Gds().ValidationMessageFor(m => m.ShipmentNumberStr)
+                    @Html.TextBoxFor(m => m.ShipmentNumberStr, new { @MaxLength = 500, @display = "block", @style = "width: 25%; height: 50px", @class = "form-control" })
                 </div>
+
+            </div>
 
                 <div id="commentsTextbox" @commentsClass>
                     <div class="form-group @Html.Gds().FormGroupClass(m => m.Comment)">
                         @Html.Gds().LabelFor(m => m.Comment, showOptionalLabel: false)
+                        @Html.Gds().ValidationMessageFor(m => m.Comment)
                         @Html.TextAreaFor(m => m.Comment, new { @MaxLength = 500, @display = "block", @style = "width: 100%; height: 200px", @class = "form-control" })
                     </div>
                 

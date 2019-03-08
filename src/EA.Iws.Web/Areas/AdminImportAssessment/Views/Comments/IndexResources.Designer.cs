@@ -106,7 +106,7 @@ namespace EA.Iws.Web.Areas.AdminImportAssessment.Views.Comments {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Reivew Comments.
+        ///   Looks up a localized string similar to Review comments.
         /// </summary>
         public static string CommentsHeader {
             get {
@@ -142,7 +142,7 @@ namespace EA.Iws.Web.Areas.AdminImportAssessment.Views.Comments {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Are you sure you want to permenantly delete this comment?.
+        ///   Looks up a localized string similar to Are you sure you want to permanently delete this comment?.
         /// </summary>
         public static string DeleteHeader {
             get {

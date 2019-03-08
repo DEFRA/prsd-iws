@@ -106,15 +106,15 @@
 
 
                 <div @shipmentClass id="shipmentSection">
-                    <div class="form-group @Html.Gds().FormGroupClass(m => m.ShipmentNumber)">
+                    <div class="form-group @Html.Gds().FormGroupClass(m => m.ShipmentNumberStr)">
 
 
                         <div>
                             @Resource.ShipmentNumber
                         </div>
                         <div>
-                            @Html.Gds().ValidationMessageFor(m => m.ShipmentNumber)
-                            @Html.Gds().TextBoxFor(m => m.ShipmentNumber)
+                            @Html.Gds().ValidationMessageFor(m => m.ShipmentNumberStr)
+                            @Html.Gds().TextBoxFor(m => m.ShipmentNumberStr)
                         </div>
                         <br />
                         <div class="form-group">
@@ -206,7 +206,7 @@ else
 {
     @Html.AntiForgeryToken()
     <div class="form-group">
-        @Html.ActionLink(Resource.GoToOverview, "Index", "Home", new { area = "ExportNotification", id = Model.NotificationId }, null)
+        @Html.ActionLink(Resource.GoToOverview, "Index", "Overview", new { area = "AdminExportAssessment", id = Model.NotificationId }, null)
     </div>
 }
 

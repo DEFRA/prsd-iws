@@ -79,7 +79,7 @@
                 }
                 @if (Model.Details.CompetentAuthority == UKCompetentAuthority.England)
                 {
-                    <li>@Html.ActionLink(Resources.AreaLinkText, "Index", "AssignArea", new { area = "AdminImportAssessment", id}, null)</li>
+                    <li>@Html.ActionLink(Resources.AreaLinkText, "Index", "AssignArea", new { area = "AdminImportAssessment", id }, null)</li>
                 }
                 <li>@Html.ActionLink(Resources.MarkAsInterimLinkText, "Index", "MarkAsInterim", new { area = "AdminImportAssessment", id }, null)</li>
                 <li>@Html.ActionLink(Resources.FGDatesLinkText, "ReceivedDate", "FinancialGuaranteeDates", new { area = "AdminImportAssessment", id }, null)</li>
@@ -87,15 +87,6 @@
             </ul>
         </li>
 
-        <li class="@GetClassForSection(ImportNavigationSection.Finance, "active")">
-            <h3 class="@GetClassForSection(ImportNavigationSection.Finance, "current")">
-                <span></span>
-                @Resources.FinanceHeading
-            </h3>
-            <ul>
-                <li>@Html.ActionLink(Resources.FinanceLinkText, "Index", "AccountManagement", new { area = "AdminImportAssessment", id }, null)</li>
-            </ul>
-        </li>
 
         @if (Model.Details.Status == ImportNotificationStatus.Consented || Model.Details.Status == ImportNotificationStatus.ConsentWithdrawn
              || Model.Details.Status == ImportNotificationStatus.FileClosed)
@@ -111,6 +102,16 @@
                 </ul>
             </li>
         }
+
+        <li class="@GetClassForSection(ImportNavigationSection.Finance, "active")">
+            <h3 class="@GetClassForSection(ImportNavigationSection.Finance, "current")">
+                <span></span>
+                @Resources.FinanceHeading
+            </h3>
+            <ul>
+                <li>@Html.ActionLink(Resources.FinanceLinkText, "Index", "AccountManagement", new { area = "AdminImportAssessment", id }, null)</li>
+            </ul>
+        </li>
 
         <li class="@GetClassForSection(ImportNavigationSection.Comments, "active")">
             <h3 class="@GetClassForSection(ImportNavigationSection.Comments, "current")">

@@ -106,14 +106,14 @@
 
 
                 <div @shipmentClass id="shipmentSection">
-                    <div class="form-group @Html.Gds().FormGroupClass(m => m.ShipmentNumber)">
+                    <div class="form-group @Html.Gds().FormGroupClass(m => m.ShipmentNumberStr)">
 
-                        @Html.Gds().ValidationMessageFor(m => m.ShipmentNumber)
+                        @Html.Gds().ValidationMessageFor(m => m.ShipmentNumberStr)
                         <div>
                             @Resource.ShipmentNumber
                         </div>
                         <div>
-                            @Html.Gds().TextBoxFor(m => m.ShipmentNumber)
+                            @Html.Gds().TextBoxFor(m => m.ShipmentNumberStr)
                         </div>
                         <br />
                         <div class="form-group">
@@ -228,7 +228,6 @@ else
                 else {
                     $("form").submit();
                 }
-
             });
         });
     </script>

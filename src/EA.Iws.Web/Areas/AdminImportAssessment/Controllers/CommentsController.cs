@@ -68,11 +68,11 @@
                 Type = type,
                 SelectedFilter = filter,
                 TotalNumberOfComments = comments.NumberOfComments,
-                ShipmentNumber = shipmentNumber,
+                ShipmentNumberStr = shipmentNumber.ToString(),
                 PageNumber = comments.PageNumber,
                 PageSize = comments.PageSize,
                 TotalNumberOfFilteredComments = comments.NumberOfFilteredComments,
-                Comments = comments.NotificationComments.ToList()
+                Comments = comments.NotificationComments.OrderBy(p => p.ShipmentNumber).ThenBy(p => p.DateAdded).ToList()
             };
 
             model.SetDates(startDate, endDate);
