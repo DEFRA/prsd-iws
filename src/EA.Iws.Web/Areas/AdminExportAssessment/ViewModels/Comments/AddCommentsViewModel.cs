@@ -35,9 +35,16 @@
         {
             get
             {
-                int number;
-                int.TryParse(this.ShipmentNumberStr, out number);
-                return number;
+                if (this.SelectedType == NotificationShipmentsCommentsType.Shipments)
+                {
+                    int number;
+                    int.TryParse(this.ShipmentNumberStr, out number);
+                    return number;
+                }
+                else
+                {
+                    return 0;
+                }
             }
         }
 
