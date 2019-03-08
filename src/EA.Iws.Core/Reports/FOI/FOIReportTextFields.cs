@@ -10,7 +10,7 @@
         ProducerName,
 
         [Display(Name = "Consignee name")]
-        ConsigneeName,
+        ImporterName,
 
         [Display(Name = "Facility name")]
         FacilityName,
@@ -19,22 +19,22 @@
         SiteOfExportName,
 
         [Display(Name = "Point of exit")]
-        PointOfExit,
+        PointOfExport,
 
         [Display(Name = "Point of entry")]
         PointOfEntry,
 
-        [Display(Name = "Country of despatch")]
-        CountryOfDespatch,
+        [Display(Name = "Country of dispatch")]
+        ExportCountryName,
 
         [Display(Name = "Country of destination")]
-        CountryOfDestination,
+        ImportCountryName,
 
         [Display(Name = "Waste type")]
-        WasteType,
+        NameOfWaste,
 
         [Display(Name = "EWC code")]
-        EwcCode,
+        Ewc,
 
         [Display(Name = "Y code")]
         YCode     
