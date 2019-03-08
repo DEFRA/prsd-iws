@@ -91,7 +91,7 @@
                     allDateFieldsValid = false;
                     yield return new ValidationResult(IndexResources.MonthError, new[] { "StartMonth" });
                 }
-                if (StartYear == null || StartYear < 2013 || StartYear > 3000)
+                if (StartYear == null || StartYear < 2014 || StartYear > 3000)
                 {
                     allDateFieldsValid = false;
                     yield return new ValidationResult(IndexResources.YearError, new[] { "StartYear" });
@@ -107,7 +107,7 @@
                     allDateFieldsValid = false;
                     yield return new ValidationResult(IndexResources.MonthError, new[] { "EndMonth" });
                 }
-                if (EndYear == null || EndYear < 2013 || EndYear > 3000)
+                if (EndYear == null || EndYear < 2014 || EndYear > 3000)
                 {
                     allDateFieldsValid = false;
                     yield return new ValidationResult(IndexResources.YearError, new[] { "EndYear" });
