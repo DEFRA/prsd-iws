@@ -73,7 +73,8 @@
                     NS.[Description] AS [NotificationStatus],
                     E.[Name] AS [ExporterName],
                     CCT.[Description] AS [WasteType],
-					CASE WHEN NS.[Description] IN ('{1}', '{2}') THEN CAST(1 AS BIT) ELSE CAST(0 AS BIT) END AS [ShowShipmentSummaryLink]
+					CASE WHEN NS.[Description] IN ('{1}', '{2}') AND FG.Id IS NOT NULL THEN CAST(1 AS BIT) ELSE CAST(0 AS BIT) 
+                        END AS [ShowShipmentSummaryLink]
                 FROM
                     [Notification].[Notification] N
                     INNER JOIN [Notification].[NotificationAssessment] NA 
@@ -83,32 +84,20 @@
                     LEFT JOIN [Notification].[WasteType] WT 
                         INNER JOIN [Lookup].[ChemicalCompositionType] CCT ON WT.ChemicalCompositionType = CCT.Id
                     ON N.Id = WT.NotificationId
+                    LEFT JOIN  [Notification].[FinancialGuaranteeCollection] FGC ON FGC.[NotificationId] = N.Id
+						LEFT JOIN [Notification].[FinancialGuarantee] FG ON FG.Id = 
+							(SELECT TOP 1 FG1.Id from [Notification].[FinancialGuarantee] FG1 
+							WHERE FG1.FinancialGuaranteeCollectionId = FGC.Id
+							AND FG1.Status = {3})
                 WHERE
                     N.[Id] IN ({0})";
 
             var query = string.Format(queryFormat, string.Join(",", parameters.Select(x => x.ParameterName)),
                 EnumHelper.GetDisplayName(NotificationStatus.Consented),
-                EnumHelper.GetDisplayName(NotificationStatus.ConsentWithdrawn));
+                EnumHelper.GetDisplayName(NotificationStatus.ConsentWithdrawn),
+                (int)FinancialGuaranteeStatus.Approved);
 
-            var returnResults = await context.Database.SqlQuery<ExportAdvancedSearchResult>(query, parameters).ToListAsync();
-            
-            // Update the ShowShipmentSummaryLink value based upon the notification's financial guarantee status
-            foreach (var a in returnResults)
-            {
-                var financialGuaranteeCollection = await context.FinancialGuarantees.SingleAsync(fg => fg.NotificationId == a.Id);
-                if (financialGuaranteeCollection != null)
-                {
-                    var financialGuarantee = financialGuaranteeCollection.GetCurrentApprovedFinancialGuarantee() ??
-                                         financialGuaranteeCollection.GetLatestFinancialGuarantee();
-                    a.ShowShipmentSummaryLink = a.ShowShipmentSummaryLink && financialGuarantee.Status.Equals(FinancialGuaranteeStatus.Approved);
-                }
-                else
-                {
-                    a.ShowShipmentSummaryLink = false;
-                }
-            }
-
-            return returnResults;
+            return await context.Database.SqlQuery<ExportAdvancedSearchResult>(query, parameters).ToListAsync();
         }
 
         public async Task<IEnumerable<ImportAdvancedSearchResult>> SearchImportNotificationsByCriteria(AdvancedSearchCriteria criteria, UKCompetentAuthority competentAuthority)
