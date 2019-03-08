@@ -56,7 +56,7 @@
                     bool shipmentNumberIsValid = this.ShipmentNumber == null || this.ShipmentNumber < 1 || this.ShipmentNumber.ToString().Length > 6 ? false : true;
                     if (!shipmentNumberIsValid)
                     {
-                        yield return new ValidationResult("Enter a valid shipment number", new[] { "ShipmentNumber" });
+                        yield return new ValidationResult("Enter a valid shipment number", new[] { "ShipmentNumberStr" });
                     }
                 }
 
