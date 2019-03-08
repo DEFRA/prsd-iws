@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel;
     using System.ComponentModel.DataAnnotations;
     using System.Web.Mvc;
     using Core.Admin;
@@ -56,16 +57,22 @@
             }
         }
 
+        [DisplayName("Start Day")]
         public int? StartDay { get; set; }
 
+        [DisplayName("Start Month")]
         public int? StartMonth { get; set; }
 
+        [DisplayName("Start Year")]
         public int? StartYear { get; set; }
 
+        [DisplayName("End Day")]
         public int? EndDay { get; set; }
 
+        [DisplayName("End Month")]
         public int? EndMonth { get; set; }
 
+        [DisplayName("End Year")]
         public int? EndYear { get; set; }
 
         public int PageSize { get; set; }
