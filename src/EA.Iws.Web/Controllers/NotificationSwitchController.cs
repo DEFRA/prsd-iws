@@ -40,17 +40,17 @@
             {
                 if (info.TradeDirection == TradeDirection.Export)
                 {
-                    var financialGuaranteeApproved = await mediator.SendAsync(new HasApprovedFinancialGuarantee(info.Id.Value));
+                    var financialGuaranteeDecisionRequired = await mediator.SendAsync(new GetFinancialGuaranteeDecisionRequired(info.Id.Value));
                     switch (info.ExportNotificationStatus)
                     {
                         case NotificationStatus.Consented:
-                            if (!financialGuaranteeApproved)
+                            if (financialGuaranteeDecisionRequired)
                             {
                                 return RedirectToAction("Index", "FinancialGuaranteeAssessment", new { id = info.Id, area = "AdminExportAssessment" });
                             }
                             return RedirectToAction("Index", "Home", new { id = info.Id, area = "AdminExportNotificationMovements" });
                         case NotificationStatus.ConsentWithdrawn:
-                            if (!financialGuaranteeApproved)
+                            if (financialGuaranteeDecisionRequired)
                             {
                                 return RedirectToAction("Index", "Home", new { id = info.Id, area = "AdminExportAssessment" });
                             }

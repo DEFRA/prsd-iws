@@ -229,7 +229,6 @@
     <Compile Include="Movement\GetNewMovementIdsByNotificationId.cs" />
     <Compile Include="Movement\GetNotificationNumberByMovementId.cs" />
     <Compile Include="NotificationAssessment\AddNotificationComment.cs" />
-    <Compile Include="NotificationAssessment\HasApprovedFinancialGuarantee.cs" />
     <Compile Include="NotificationAssessment\GetNotificationComments.cs" />
     <Compile Include="NotificationAssessment\UpdateExportNotificationAssementCommets.cs" />
     <Compile Include="NotificationMovements\BulkUpload\CreateReceiptRecovery.cs" />
