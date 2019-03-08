@@ -73,7 +73,7 @@
                     NS.[Description] AS [NotificationStatus],
                     E.[Name] AS [ExporterName],
                     CCT.[Description] AS [WasteType],
-					CASE WHEN NS.[Description] IN ('{1}', '{2}') AND FG.Id IS NOT NULL THEN CAST(1 AS BIT) ELSE CAST(0 AS BIT) 
+                    CASE WHEN NS.[Description] IN ('{1}', '{2}') AND FG.Id IS NOT NULL THEN CAST(1 AS BIT) ELSE CAST(0 AS BIT) 
                         END AS [ShowShipmentSummaryLink]
                 FROM
                     [Notification].[Notification] N
@@ -85,10 +85,10 @@
                         INNER JOIN [Lookup].[ChemicalCompositionType] CCT ON WT.ChemicalCompositionType = CCT.Id
                     ON N.Id = WT.NotificationId
                     LEFT JOIN  [Notification].[FinancialGuaranteeCollection] FGC ON FGC.[NotificationId] = N.Id
-						LEFT JOIN [Notification].[FinancialGuarantee] FG ON FG.Id = 
-							(SELECT TOP 1 FG1.Id from [Notification].[FinancialGuarantee] FG1 
-							WHERE FG1.FinancialGuaranteeCollectionId = FGC.Id
-							AND FG1.Status = {3})
+                        LEFT JOIN [Notification].[FinancialGuarantee] FG ON FG.Id = 
+                            (SELECT TOP 1 FG1.Id from [Notification].[FinancialGuarantee] FG1 
+                            WHERE FG1.FinancialGuaranteeCollectionId = FGC.Id
+                            AND FG1.Status = {3})
                 WHERE
                     N.[Id] IN ({0})";
 
