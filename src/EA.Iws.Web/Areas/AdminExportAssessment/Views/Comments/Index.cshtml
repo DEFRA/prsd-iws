@@ -1,4 +1,5 @@
-﻿@using Resource = EA.Iws.Web.Areas.AdminExportAssessment.Views.Comments.IndexResources
+@using Resource = EA.Iws.Web.Areas.AdminExportAssessment.Views.Comments.IndexResources
+@using EA.Iws.Web.Infrastructure.Paging
 @model EA.Iws.Web.Areas.AdminExportAssessment.ViewModels.Comments.CommentsViewModel
 @{
     ViewBag.Title = "Review Comments";
@@ -28,102 +29,102 @@
     <div class="grid-row">
         <div class="column-two-thirds">
 
-                @using (Html.BeginForm())
-                {
-                    @Html.AntiForgeryToken()
-                    @Html.Gds().ValidationSummary()
-                    @Html.HiddenFor(m => m.NotificationId)
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+                @Html.Gds().ValidationSummary()
+                @Html.HiddenFor(m => m.NotificationId)
 
-            <div>
-                Filter by:
-            </div>
-                    <div>
-                        @Html.Gds().DropDownListFor(m => m.SelectedFilter, Model.FilterTerms, new { @id = "filterSelectList" })
-                    </div>
+                <div>
+                    Filter by:
+                </div>
+                <div>
+                    @Html.Gds().DropDownListFor(m => m.SelectedFilter, Model.FilterTerms, new { @id = "filterSelectList" })
+                </div>
 
 
-                    <br />
+                <br />
 
-                    var dateClass = Model.SelectedFilter == "date" ? "" : "class=hidden";
-                    var shipmentClass = Model.SelectedFilter == "shipment" ? "" : "class=hidden";
+                var dateClass = Model.SelectedFilter == "date" ? "" : "class=hidden";
+                var shipmentClass = Model.SelectedFilter == "shipment" ? "" : "class=hidden";
 
-                    <div @dateClass id="dateSection">
-                        <div class="form-group @Html.Gds().FormGroupClass(m => m.StartDay) @Html.Gds().FormGroupClass(m => m.StartMonth) @Html.Gds().FormGroupClass(m => m.StartYear)">
-                            <fieldset>
-                                <legend>
-                                    <span class="form-label">From</span>
-                                </legend>
-                                <div class="form-date">
-                                    @Html.Gds().ValidationMessageFor(m => m.StartDay)
-                                    @Html.Gds().ValidationMessageFor(m => m.StartMonth)
-                                    @Html.Gds().ValidationMessageFor(m => m.StartYear)
-                                    <div class="form-group form-group-day">
-                                        @Resource.Day
-                                        @Html.Gds().TextBoxFor(m => m.StartDay)
-                                    </div>
-                                    <div class="form-group form-group-month">
-                                        @Resource.Month
-                                        @Html.Gds().TextBoxFor(m => m.StartMonth)
-                                    </div>
-                                    <div class="form-group form-group-year">
-                                        @Resource.Year
-                                        @Html.Gds().TextBoxFor(m => m.StartYear)
-                                    </div>
+                <div @dateClass id="dateSection">
+                    <div class="form-group @Html.Gds().FormGroupClass(m => m.StartDay) @Html.Gds().FormGroupClass(m => m.StartMonth) @Html.Gds().FormGroupClass(m => m.StartYear)">
+                        <fieldset>
+                            <legend>
+                                <span class="form-label">From</span>
+                            </legend>
+                            <div class="form-date">
+                                @Html.Gds().ValidationMessageFor(m => m.StartDay)
+                                @Html.Gds().ValidationMessageFor(m => m.StartMonth)
+                                @Html.Gds().ValidationMessageFor(m => m.StartYear)
+                                <div class="form-group form-group-day">
+                                    @Resource.Day
+                                    @Html.Gds().TextBoxFor(m => m.StartDay)
                                 </div>
-                            </fieldset>
+                                <div class="form-group form-group-month">
+                                    @Resource.Month
+                                    @Html.Gds().TextBoxFor(m => m.StartMonth)
+                                </div>
+                                <div class="form-group form-group-year">
+                                    @Resource.Year
+                                    @Html.Gds().TextBoxFor(m => m.StartYear)
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                    <br />
+                    <div class="form-group @Html.Gds().FormGroupClass(m => m.EndDay) @Html.Gds().FormGroupClass(m => m.EndMonth) @Html.Gds().FormGroupClass(m => m.EndYear)">
+                        <fieldset>
+                            <legend>
+                                <span class="form-label">To</span>
+                            </legend>
+                            <div class="form-date">
+                                @Html.Gds().ValidationMessageFor(m => m.EndDay)
+                                @Html.Gds().ValidationMessageFor(m => m.EndMonth)
+                                @Html.Gds().ValidationMessageFor(m => m.EndYear)
+                                <div class="form-group form-group-day">
+                                    @Resource.Day
+                                    @Html.Gds().TextBoxFor(m => m.EndDay)
+                                </div>
+                                <div class="form-group form-group-month">
+                                    @Resource.Month
+                                    @Html.Gds().TextBoxFor(m => m.EndMonth)
+                                </div>
+                                <div class="form-group form-group-year">
+                                    @Resource.Year
+                                    @Html.Gds().TextBoxFor(m => m.EndYear)
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                    <div class="form-group">
+                        <button class="button" type="submit" name="command" value="search">Search</button>
+                    </div>
+                </div>
+
+
+
+                <div @shipmentClass id="shipmentSection">
+                    <div class="form-group @Html.Gds().FormGroupClass(m => m.ShipmentNumberStr)">
+
+
+                        <div>
+                            @Resource.ShipmentNumber
+                        </div>
+                        <div>
+                            @Html.Gds().ValidationMessageFor(m => m.ShipmentNumberStr)
+                            @Html.Gds().TextBoxFor(m => m.ShipmentNumberStr)
                         </div>
                         <br />
-                        <div class="form-group @Html.Gds().FormGroupClass(m => m.EndDay) @Html.Gds().FormGroupClass(m => m.EndMonth) @Html.Gds().FormGroupClass(m => m.EndYear)">
-                            <fieldset>
-                                <legend>
-                                    <span class="form-label">To</span>
-                                </legend>
-                                <div class="form-date">
-                                    @Html.Gds().ValidationMessageFor(m => m.EndDay)
-                                    @Html.Gds().ValidationMessageFor(m => m.EndMonth)
-                                    @Html.Gds().ValidationMessageFor(m => m.EndYear)
-                                    <div class="form-group form-group-day">
-                                        @Resource.Day
-                                        @Html.Gds().TextBoxFor(m => m.EndDay)
-                                    </div>
-                                    <div class="form-group form-group-month">
-                                        @Resource.Month
-                                        @Html.Gds().TextBoxFor(m => m.EndMonth)
-                                    </div>
-                                    <div class="form-group form-group-year">
-                                        @Resource.Year
-                                        @Html.Gds().TextBoxFor(m => m.EndYear)
-                                    </div>
-                                </div>
-                            </fieldset>
-                        </div>
                         <div class="form-group">
                             <button class="button" type="submit" name="command" value="search">Search</button>
                         </div>
                     </div>
+                    <br />
+                </div>
 
-
-
-                    <div @shipmentClass id="shipmentSection">
-                        <div class="form-group @Html.Gds().FormGroupClass(m => m.ShipmentNumber)">
-
-                            
-                            <div>
-                                @Resource.ShipmentNumber
-                            </div>
-                            <div>
-                                @Html.Gds().ValidationMessageFor(m => m.ShipmentNumber)
-                                @Html.Gds().TextBoxFor(m => m.ShipmentNumber)
-                            </div>
-                            <br />
-                            <div class="form-group">
-                                <button class="button" type="submit" name="command" value="search">Search</button>
-                            </div>
-                        </div>
-                        <br />
-                    </div>
-
-                }
+            }
         </div>
     </div>
 }
@@ -192,11 +193,20 @@ else
     </div>
 }
 
+@if (Model.HasComments)
+{
+    @Html.Pager(Model.PageSize, Model.PageNumber, Model.TotalNumberOfFilteredComments).Options(o =>
+    {
+        o.AddRouteValue("filter", Model.SelectedFilter);
+        o.AddRouteValue("type", Model.Type);
+    })
+}
+
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
     <div class="form-group">
-        @Html.ActionLink(Resource.GoToOverview, "Index", "Home", new { area = "ExportNotification", id = Model.NotificationId }, null)
+        @Html.ActionLink(Resource.GoToOverview, "Index", "Overview", new { area = "AdminExportAssessment", id = Model.NotificationId }, null)
     </div>
 }
 

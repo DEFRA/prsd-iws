@@ -1,7 +1,8 @@
-﻿namespace EA.Iws.Web.Areas.AdminExportAssessment.ViewModels.Comments
+namespace EA.Iws.Web.Areas.AdminExportAssessment.ViewModels.Comments
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel;
     using System.ComponentModel.DataAnnotations;
     using System.Web.Mvc;
     using Core.Admin;
@@ -43,24 +44,41 @@
 
         public string SelectedFilter { get; set; }
 
-        public int? ShipmentNumber { get; set; }
+        public string ShipmentNumberStr { get; set; }
 
+        public int? ShipmentNumber
+        {
+            get
+            {
+                int number;
+                int.TryParse(this.ShipmentNumberStr, out number);
+                return number;
+            }
+        }
+
+        [DisplayName("Start Day")]
         public int? StartDay { get; set; }
 
+        [DisplayName("Start Month")]
         public int? StartMonth { get; set; }
 
+        [DisplayName("Start Year")]
         public int? StartYear { get; set; }
 
+        [DisplayName("End Day")]
         public int? EndDay { get; set; }
 
+        [DisplayName("End Month")]
         public int? EndMonth { get; set; }
 
+        [DisplayName("End Year")]
         public int? EndYear { get; set; }
 
         public int PageSize { get; set; }
 
         public int PageNumber { get; set; }
         public int TotalNumberOfComments { get; set; }
+        public int TotalNumberOfFilteredComments { get; set; }
 
         public CommentsViewModel()
         {
@@ -72,7 +90,7 @@
         {
             if (this.SelectedFilter == "shipment")
             {
-                if (this.ShipmentNumber == null || this.ShipmentNumber < 1 || this.ShipmentNumber > 999999)
+                if (this.ShipmentNumber == null || this.ShipmentNumber < 1 || this.ShipmentNumber.ToString().Length > 6)
                 {
                     yield return new ValidationResult(IndexResources.ShipmentNumberError, new[] { "ShipmentNumber" });
                 }
@@ -90,7 +108,7 @@
                     allDateFieldsValid = false;
                     yield return new ValidationResult(IndexResources.MonthError, new[] { "StartMonth" });
                 }
-                if (StartYear == null || StartYear < 2013 || StartYear > 3000)
+                if (StartYear == null || StartYear < 2014 || StartYear > 3000)
                 {
                     allDateFieldsValid = false;
                     yield return new ValidationResult(IndexResources.YearError, new[] { "StartYear" });
@@ -106,7 +124,7 @@
                     allDateFieldsValid = false;
                     yield return new ValidationResult(IndexResources.MonthError, new[] { "EndMonth" });
                 }
-                if (EndYear == null || EndYear < 2013 || EndYear > 3000)
+                if (EndYear == null || EndYear < 2014 || EndYear > 3000)
                 {
                     allDateFieldsValid = false;
                     yield return new ValidationResult(IndexResources.YearError, new[] { "EndYear" });

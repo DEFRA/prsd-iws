@@ -28,8 +28,25 @@
         [DisplayName("Comment")]
         public string Comment { get; set; }
 
-        [DisplayName("Shipment Type")]
-        public int? ShipmentNumber { get; set; }
+        [DisplayName("Shipment number")]
+        public string ShipmentNumberStr { get; set; }
+
+        public int? ShipmentNumber
+        {
+            get
+            {
+                if (this.SelectedType == NotificationShipmentsCommentsType.Shipments)
+                {
+                    int number;
+                    int.TryParse(this.ShipmentNumberStr, out number);
+                    return number;
+                }
+                else
+                {
+                    return 0;
+                }
+            }
+        }
 
         public bool ModelIsValid { get; set; }
 
@@ -43,10 +60,10 @@
             {
                 if (this.SelectedType == NotificationShipmentsCommentsType.Shipments)
                 {
-                    bool shipmentNumberIsValid = this.ShipmentNumber == null || this.ShipmentNumber > 999999 ? false : true;
+                    bool shipmentNumberIsValid = this.ShipmentNumber == null || this.ShipmentNumber < 0 || this.ShipmentNumber.ToString().Length > 6 ? false : true;
                     if (!shipmentNumberIsValid)
                     {
-                        yield return new ValidationResult("Enter a valid shipment number", new[] { "ShipmentNumber" });
+                        yield return new ValidationResult("Enter a valid shipment number", new[] { "ShipmentNumberStr" });
                     }
                 }
 

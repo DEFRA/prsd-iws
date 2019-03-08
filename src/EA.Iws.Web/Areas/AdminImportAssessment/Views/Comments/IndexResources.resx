@@ -133,7 +133,7 @@
     <value>Cancel</value>
   </data>
   <data name="CommentsHeader" xml:space="preserve">
-    <value>Reivew Comments</value>
+    <value>Review comments</value>
   </data>
   <data name="ContinueButton" xml:space="preserve">
     <value>Continue</value>
@@ -145,7 +145,7 @@
     <value>Please enter a valid number in the 'Day' field</value>
   </data>
   <data name="DeleteHeader" xml:space="preserve">
-    <value>Are you sure you want to permenantly delete this comment?</value>
+    <value>Are you sure you want to permanently delete this comment?</value>
   </data>
   <data name="DeleteReminder" xml:space="preserve">
     <value>By continuing you are permanently deleting this comment and won't be able to recover the information.</value>

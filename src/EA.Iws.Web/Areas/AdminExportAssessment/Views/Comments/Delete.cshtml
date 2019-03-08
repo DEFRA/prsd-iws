@@ -33,7 +33,7 @@
             </div>
             <br />
             <div>
-                @Html.ActionLink(Resource.CancelButton, "Index", "Comments", new { id = Model.NotificationId }, null)
+                @Html.ActionLink(Resource.CancelButton, "Index", "Comments", new { id = Model.NotificationId, type = Model.Type }, null)
             </div>
         </div>
     </div>
