@@ -29,7 +29,17 @@
         public string Comment { get; set; }
 
         [DisplayName("Shipment number")]
-        public int? ShipmentNumber { get; set; }
+        public string ShipmentNumberStr { get; set; }
+
+        public int? ShipmentNumber
+        {
+            get
+            {
+                int number;
+                int.TryParse(this.ShipmentNumberStr, out number);
+                return number;
+            }
+        }
 
         public bool ModelIsValid { get; set; }
 

@@ -29,7 +29,17 @@
         public string Comment { get; set; }
 
         [DisplayName("Shipment number")]
-        public int? ShipmentNumber { get; set; }
+        public string ShipmentNumberStr { get; set; }
+
+        public int? ShipmentNumber
+        {
+            get
+            {
+                int number;
+                int.TryParse(this.ShipmentNumberStr, out number);
+                return number;
+            }
+        }
 
         public bool ModelIsValid { get; set; }
 
@@ -43,7 +53,7 @@
             {
                 if (this.SelectedType == NotificationShipmentsCommentsType.Shipments)
                 {
-                    bool shipmentNumberIsValid = this.ShipmentNumber == null || this.ShipmentNumber < 0 || this.ShipmentNumber.ToString().Length > 6 ? false : true;
+                    bool shipmentNumberIsValid = this.ShipmentNumber == null || this.ShipmentNumber < 1 || this.ShipmentNumber.ToString().Length > 6 ? false : true;
                     if (!shipmentNumberIsValid)
                     {
                         yield return new ValidationResult("Enter a valid shipment number", new[] { "ShipmentNumber" });

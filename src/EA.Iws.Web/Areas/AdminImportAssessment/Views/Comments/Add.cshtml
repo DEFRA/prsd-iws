@@ -38,10 +38,10 @@
 
             <div id="shipmentNumberTextbox" @shipmentNumberClass>
 
-                <div class="form-group @Html.Gds().FormGroupClass(m => m.ShipmentNumber)">
-                    @Html.Gds().LabelFor(m => m.ShipmentNumber, showOptionalLabel: false)
-                    @Html.Gds().ValidationMessageFor(m => m.ShipmentNumber)
-                    @Html.TextBoxFor(m => m.ShipmentNumber, new { @MaxLength = 500, @display = "block", @style = "width: 25%; height: 50px", @class = "form-control" })
+                <div class="form-group @Html.Gds().FormGroupClass(m => m.ShipmentNumberStr)">
+                    @Html.Gds().LabelFor(m => m.ShipmentNumberStr, showOptionalLabel: false)
+                    @Html.Gds().ValidationMessageFor(m => m.ShipmentNumberStr)
+                    @Html.TextBoxFor(m => m.ShipmentNumberStr, new { @MaxLength = 500, @display = "block", @style = "width: 25%; height: 50px", @class = "form-control" })
                 </div>
 
             </div>
