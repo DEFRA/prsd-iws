@@ -43,7 +43,7 @@
             {
                 if (this.SelectedType == NotificationShipmentsCommentsType.Shipments)
                 {
-                    bool shipmentNumberIsValid = this.ShipmentNumber == null || this.ShipmentNumber > 999999 ? false : true;
+                    bool shipmentNumberIsValid = this.ShipmentNumber == null || this.ShipmentNumber < 0 || this.ShipmentNumber.ToString().Length > 6 ? false : true;
                     if (!shipmentNumberIsValid)
                     {
                         yield return new ValidationResult("Enter a valid shipment number", new[] { "ShipmentNumber" });
