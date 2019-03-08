@@ -206,7 +206,7 @@ else
 {
     @Html.AntiForgeryToken()
     <div class="form-group">
-        @Html.ActionLink(Resource.GoToOverview, "Index", "Home", new { area = "ExportNotification", id = Model.NotificationId }, null)
+        @Html.ActionLink(Resource.GoToOverview, "Index", "Overview", new { area = "AdminExportAssessment", id = Model.NotificationId }, null)
     </div>
 }
 
