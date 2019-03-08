@@ -4,7 +4,7 @@ GO
 
 ALTER VIEW [Reports].[FreedomOfInformation]
 AS
-    SELECT
+SELECT
         REPLACE(N.[NotificationNumber], ' ', '') AS [NotificationNumber],
         'Export' AS [ImportOrExport],
         FC.[IsInterim],
@@ -80,14 +80,19 @@ AS
 		I.[FullName] AS [ImporterContactName],
 		I.[Email] AS [ImporterContactEmail],
 		NS.[Description] AS [NotificationStatus],
-		D.DecisionRequiredByDate,
-		CASE when FG.[Status] = 4 Then 'Y' ELSE 'N' END AS [IsFinancialGuaranteeApproved],
+		 -- Decision date will be the date it was withdrawn, objected or consented and it will only be one of these.
+        CAST(COALESCE(D.WithdrawnDate, COALESCE(D.[ObjectedDate], D.[ConsentedDate])) AS DATE) AS DecisionRequiredByDate,
+		CASE WHEN FG.[Status] = 4 THEN 'Y' ELSE 'N' END AS [IsFinancialGuaranteeApproved],
 		D.[FileClosedDate],
 		TE.[Details] AS [TechnologyEmployed],
 		M.[Date] AS [ActualDate],
 		D.AcknowledgedDate,
 		D.ObjectedDate AS [ObjectionDate],
-		D.WithdrawnDate
+		D.WithdrawnDate,
+		CASE
+			WHEN P.[IsSiteOfExport] = 1 THEN P.[Name]
+			ELSE NULL
+		END AS [SiteOfExportName]
     FROM [Notification].[Notification] N
     INNER JOIN [Notification].[FacilityCollection] FC ON FC.[NotificationId] = N.[Id]
     INNER JOIN [Notification].[NotificationAssessment] NA ON NA.[NotificationApplicationId] = N.[Id]
@@ -235,14 +240,16 @@ AS
 		I.[ContactName] AS [ImporterContactName],
 		I.[Email] AS [ImporterContactEmail],
 		NS.[Description] as [NotificationStatus],
-		D.DecisionRequiredByDate,
+		-- Decision date will be the date it was withdrawn, objected or consented and it will only be one of these.
+        CAST(COALESCE(D.WithdrawnDate, COALESCE(O.[Date], D.[ConsentedDate])) AS DATE) AS DecisionRequiredByDate,
 		CASE when FG.[Status] = 4 Then 'Y' ELSE 'N' END AS [IsFinancialGuaranteeApproved],
 		D.FileClosedDate,
 	    WO.TechnologyEmployed,
 		M.ActualShipmentDate AS [ActualDate],
 		D.AcknowledgedDate,
 		O.[Date] AS [ObjectionDate],
-		D.WithdrawnDate 
+		D.WithdrawnDate,
+		NULL as [SiteOfExportName] 
     FROM [ImportNotification].[Notification] N
     INNER JOIN [ImportNotification].[FacilityCollection] FC ON FC.[ImportNotificationId] = N.[Id]
     INNER JOIN [ImportNotification].[NotificationAssessment] NA ON NA.[NotificationApplicationId] = N.[Id]
