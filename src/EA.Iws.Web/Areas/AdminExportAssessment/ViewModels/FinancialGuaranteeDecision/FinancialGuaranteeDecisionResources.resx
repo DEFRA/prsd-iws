@@ -126,6 +126,18 @@
   <data name="ActiveLoadsPermittedRequired" xml:space="preserve">
     <value>Please enter the number of active loads permitted</value>
   </data>
+  <data name="CalculationContinued" xml:space="preserve">
+    <value>Calculation continued [£] (10d)</value>
+  </data>
+  <data name="CalculationContinuedRequired" xml:space="preserve">
+    <value>Please enter the value for the continued calculation</value>
+  </data>
+  <data name="CoverAmount" xml:space="preserve">
+    <value>Amount of cover provided [£] (8)</value>
+  </data>
+  <data name="CoverAmountRequired" xml:space="preserve">
+    <value>Please enter the cover amount</value>
+  </data>
   <data name="DecisionMadeDate" xml:space="preserve">
     <value>Date decision made</value>
   </data>

@@ -89,6 +89,42 @@ namespace EA.Iws.Web.Areas.AdminExportAssessment.ViewModels.FinancialGuaranteeDe
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Calculation continued [£] (10d).
+        /// </summary>
+        public static string CalculationContinued {
+            get {
+                return ResourceManager.GetString("CalculationContinued", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please enter the value for the continued calculation.
+        /// </summary>
+        public static string CalculationContinuedRequired {
+            get {
+                return ResourceManager.GetString("CalculationContinuedRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Amount of cover provided [£] (8).
+        /// </summary>
+        public static string CoverAmount {
+            get {
+                return ResourceManager.GetString("CoverAmount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please enter the cover amount.
+        /// </summary>
+        public static string CoverAmountRequired {
+            get {
+                return ResourceManager.GetString("CoverAmountRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Date decision made.
         /// </summary>
         public static string DecisionMadeDate {

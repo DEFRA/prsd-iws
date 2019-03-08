@@ -47,10 +47,22 @@
         </div>
     </div>
 
+    <div class="form-group @Html.Gds().FormGroupClass(m => m.CoverAmount)">
+        @Html.Gds().LabelFor(m => m.CoverAmount)
+        @Html.Gds().ValidationMessageFor(m => m.CoverAmount)
+        @Html.Gds().TextBoxFor(m => m.CoverAmount, new { type = "number", pattern = "[0-9]*" })
+    </div>
+
     <div class="form-group @Html.Gds().FormGroupClass(m => m.ActiveLoadsPermitted)">
         @Html.Gds().LabelFor(m => m.ActiveLoadsPermitted, false)
         @Html.Gds().ValidationMessageFor(m => m.ActiveLoadsPermitted)
         @Html.Gds().TextBoxFor(m => m.ActiveLoadsPermitted, new { type = "number", min = "1", step = "1", pattern = "[0-9]*" })
+    </div>
+
+    <div class="form-group @Html.Gds().FormGroupClass(m => m.CalculationContinued)">
+        @Html.Gds().LabelFor(m => m.CalculationContinued)
+        @Html.Gds().ValidationMessageFor(m => m.CalculationContinued)
+        @Html.Gds().TextBoxFor(m => m.CalculationContinued, new { type = "number", pattern = "[0-9]*" })
     </div>
 
     <div class="form-group">
