@@ -70,7 +70,7 @@ namespace EA.Iws.Web.Areas.Reports.Views.Producer {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Producer Report.
+        ///   Looks up a localized string similar to Producer report.
         /// </summary>
         public static string Heading {
             get {
@@ -88,7 +88,7 @@ namespace EA.Iws.Web.Areas.Reports.Views.Producer {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Producer Report.
+        ///   Looks up a localized string similar to Producer report.
         /// </summary>
         public static string Title {
             get {
