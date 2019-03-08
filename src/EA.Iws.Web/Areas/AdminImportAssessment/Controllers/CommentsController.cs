@@ -68,7 +68,7 @@
                 Type = type,
                 SelectedFilter = filter,
                 TotalNumberOfComments = comments.NumberOfComments,
-                ShipmentNumber = shipmentNumber,
+                ShipmentNumberStr = shipmentNumber.ToString(),
                 PageNumber = comments.PageNumber,
                 PageSize = comments.PageSize,
                 TotalNumberOfFilteredComments = comments.NumberOfFilteredComments,

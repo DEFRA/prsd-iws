@@ -43,7 +43,17 @@
 
         public string SelectedFilter { get; set; }
 
-        public int? ShipmentNumber { get; set; }
+        public string ShipmentNumberStr { get; set; }
+
+        public int? ShipmentNumber
+        {
+            get
+            {
+                int number;
+                int.TryParse(this.ShipmentNumberStr, out number);
+                return number;
+            }
+        }
 
         public int? StartDay { get; set; }
 
@@ -73,7 +83,7 @@
         {
             if (this.SelectedFilter == "shipment")
             {
-                if (this.ShipmentNumber == null || this.ShipmentNumber < 1 || this.ShipmentNumber > 999999)
+                if (this.ShipmentNumber == null || this.ShipmentNumber < 1 || this.ShipmentNumber.ToString().Length > 6)
                 {
                     yield return new ValidationResult(IndexResources.ShipmentNumberError, new[] { "ShipmentNumber" });
                 }
