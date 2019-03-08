@@ -1061,6 +1061,8 @@
     <Content Include="Areas\AdminImportAssessment\Views\Comments\_Layout.cshtml" />
     <Content Include="Areas\Reports\Views\FreedomOfInformation\ColumnSelection.cshtml" />
     <Content Include="Areas\Reports\Views\Shipments\ColumnSelection.cshtml" />
+    <Content Include="Areas\NotificationApplication\Views\ExitCustomsOffice\_ExitCustomsOfficeGuidance.cshtml" />
+    <Content Include="Areas\NotificationApplication\Views\EntryCustomsOffice\_EntryCustomsOfficeGuidance.cshtml" />
     <None Include="Scripts\jquery-2.1.3.intellisense.js" />
     <Content Include="Scripts\govuk\govuk-template.js" />
     <Content Include="Scripts\govuk\ie.js" />
