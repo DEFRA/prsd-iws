@@ -28,7 +28,7 @@
         [DisplayName("Comment")]
         public string Comment { get; set; }
 
-        [DisplayName("Shipment Type")]
+        [DisplayName("Shipment number")]
         public int? ShipmentNumber { get; set; }
 
         public bool ModelIsValid { get; set; }

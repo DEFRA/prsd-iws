@@ -9,7 +9,8 @@
     {
         Task<bool> Add(ImportNotificationComment comment);
 
-        Task<List<ImportNotificationComment>> GetComments(Guid notificationId, DateTime startDate, DateTime endDate, int shipmentNumber);
+        Task<List<ImportNotificationComment>> GetComments(Guid notificationId, NotificationShipmentsCommentsType type, DateTime startDate, DateTime endDate, int shipmentNumber);
+        Task<List<ImportNotificationComment>> GetPagedComments(Guid notificationId, NotificationShipmentsCommentsType type, int pageNumber, int pageSize, DateTime startDate, DateTime endDate, int shipmentNumber);
 
         Task<bool> Delete(Guid commentId);
 

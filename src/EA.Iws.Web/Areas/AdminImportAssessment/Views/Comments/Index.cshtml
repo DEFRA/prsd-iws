@@ -191,6 +191,15 @@ else
     </div>
 }
 
+@if (Model.HasComments)
+{
+    @Html.Pager(Model.PageSize, Model.PageNumber, Model.TotalNumberOfFilteredComments).Options(o =>
+    {
+        o.AddRouteValue("filter", Model.SelectedFilter);
+        o.AddRouteValue("type", Model.Type);
+    })
+}
+
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()

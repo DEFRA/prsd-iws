@@ -25,16 +25,37 @@
             return true;
         }
 
-        public async Task<List<NotificationComment>> GetComments(Guid notificationId, DateTime startDate, DateTime endDate, int shipmentNumber)
+        public async Task<List<NotificationComment>> GetComments(Guid notificationId, NotificationShipmentsCommentsType type, DateTime startDate, DateTime endDate, int shipmentNumber)
         {
+            var allCommentsForType = await this.GetCommentsByType(notificationId, type);
+
             DateTime endDateForQuery = endDate == DateTime.MaxValue ? endDate : endDate.AddDays(1);
 
             if (shipmentNumber == default(int))
             {
-                return await context.NotificationComments.Where(p => p.NotificationId == notificationId && p.DateAdded >= startDate && p.DateAdded < endDateForQuery).ToListAsync();
+                return allCommentsForType.Where(p => p.DateAdded >= startDate && p.DateAdded < endDateForQuery).ToList();
             }
 
-            return await context.NotificationComments.Where(p => p.NotificationId == notificationId && p.DateAdded >= startDate && p.DateAdded < endDateForQuery && p.ShipmentNumber == shipmentNumber).ToListAsync();
+            return allCommentsForType.Where(p => p.DateAdded >= startDate && p.DateAdded < endDateForQuery && p.ShipmentNumber == shipmentNumber).ToList();
+        }
+
+        public async Task<List<NotificationComment>> GetPagedComments(Guid notificationId, NotificationShipmentsCommentsType type, int pageNumber, int pageSize, DateTime startDate, DateTime endDate, int shipmentNumber)
+        {
+            var allCommentsForType = await this.GetCommentsByType(notificationId, type);
+
+            DateTime endDateForQuery = endDate == DateTime.MaxValue ? endDate : endDate.AddDays(1);
+
+            var returnComments = allCommentsForType.Where(p => p.DateAdded >= startDate && p.DateAdded < endDateForQuery);
+            if (shipmentNumber != default(int))
+            {
+                returnComments = returnComments.Where(p => p.ShipmentNumber == shipmentNumber);
+            }
+
+            return returnComments
+                    .OrderByDescending(x => x.DateAdded)
+                    .Skip((pageNumber - 1) * pageSize)
+                    .Take(pageSize)
+                    .ToList();
         }
 
         public async Task<bool> Delete(Guid commentId)
@@ -61,5 +82,14 @@
 
             return await context.NotificationComments.CountAsync(p => p.NotificationId == notificationId && p.ShipmentNumber == 0);
         }
-    }
+
+            private async Task<IEnumerable<NotificationComment>> GetCommentsByType(Guid notificationId, NotificationShipmentsCommentsType type)
+            {
+                if (type == NotificationShipmentsCommentsType.Notification)
+                {
+                    return await context.NotificationComments.Where(p => p.NotificationId == notificationId && p.ShipmentNumber == 0).ToListAsync();
+                }
+                return await context.NotificationComments.Where(p => p.NotificationId == notificationId && p.ShipmentNumber != 0).ToListAsync();
+            }
+        }
 }

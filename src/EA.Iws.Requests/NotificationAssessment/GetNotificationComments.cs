@@ -16,11 +16,13 @@
 
         public DateTime EndDate { get; private set; }
         public int ShipmentNumber { get; private set; }
+        public int PageNumber { get; private set; }
 
-        public GetNotificationComments(Guid notificationId, NotificationShipmentsCommentsType type, DateTime? startDate, DateTime? endDate, int? shipmentNumber)
+        public GetNotificationComments(Guid notificationId, NotificationShipmentsCommentsType type, int pageNumber, DateTime? startDate, DateTime? endDate, int? shipmentNumber)
         {
             this.NotificationId = notificationId;
             this.Type = type;
+            this.PageNumber = pageNumber;
             this.StartDate = startDate == null ? DateTime.MinValue : startDate.GetValueOrDefault();
             this.EndDate = endDate == null ? DateTime.MaxValue : endDate.GetValueOrDefault();
             this.ShipmentNumber = shipmentNumber.GetValueOrDefault();

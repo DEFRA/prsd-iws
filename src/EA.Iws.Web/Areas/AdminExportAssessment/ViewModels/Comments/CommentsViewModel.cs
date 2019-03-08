@@ -61,6 +61,7 @@
 
         public int PageNumber { get; set; }
         public int TotalNumberOfComments { get; set; }
+        public int TotalNumberOfFilteredComments { get; set; }
 
         public CommentsViewModel()
         {

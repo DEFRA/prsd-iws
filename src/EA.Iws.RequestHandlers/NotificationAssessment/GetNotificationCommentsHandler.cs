@@ -14,6 +14,8 @@
         private readonly INotificationCommentRepository repository;
         private readonly IMap<NotificationComment, InternalComment> mapper;
 
+        private const int PageSize = 10;
+
         public GetNotificationCommentsHandler(INotificationCommentRepository repository, IMap<NotificationComment, InternalComment> mapper)
         {
             this.repository = repository;
@@ -22,11 +24,15 @@
 
         public async Task<NotificationCommentData> HandleAsync(GetNotificationComments message)
         {
-            var result = await this.repository.GetComments(message.NotificationId, message.StartDate, message.EndDate, message.ShipmentNumber);
+            var pagedComments = await this.repository.GetPagedComments(message.NotificationId, message.Type, message.PageNumber, PageSize, message.StartDate, message.EndDate, message.ShipmentNumber);
+            var allComments = await this.repository.GetComments(message.NotificationId, message.Type, message.StartDate, message.EndDate, message.ShipmentNumber);
 
             NotificationCommentData returnData = new NotificationCommentData();
-            returnData.NotificationComments = MapReturnData(result);
+            returnData.NotificationComments = MapReturnData(pagedComments);
             returnData.NumberOfComments = await this.repository.GetTotalNumberOfComments(message.NotificationId, message.Type);
+            returnData.PageSize = PageSize;
+            returnData.PageNumber = message.PageNumber;
+            returnData.NumberOfFilteredComments = allComments.Count;
 
             return returnData;
         }
