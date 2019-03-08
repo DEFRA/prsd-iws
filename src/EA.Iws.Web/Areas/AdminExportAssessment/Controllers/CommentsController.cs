@@ -72,7 +72,7 @@
                 PageNumber = comments.PageNumber,
                 PageSize = comments.PageSize,
                 TotalNumberOfFilteredComments = comments.NumberOfFilteredComments,
-                Comments = comments.NotificationComments.ToList()
+                Comments = comments.NotificationComments.OrderBy(p => p.DateAdded).ToList()
             };
 
             model.SetDates(startDate, endDate);
