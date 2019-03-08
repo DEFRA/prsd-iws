@@ -15,11 +15,18 @@
         private readonly IEnumerable<T> data;
         private XLWorkbook workBook;
         private IXLWorksheet workSheet;
+        private bool fixedWidthFormat;
+        private const int MaxPixelColWidth = 150;
+        private string columnsToHide;
 
-        public XlsxActionResult(IEnumerable<T> data, string fileDownloadName) : base(MimeTypes.MSExcelXml)
+        public XlsxActionResult(IEnumerable<T> data, 
+            string fileDownloadName, 
+            bool fixedWidthFormat = false, string columnsToHide = null) : base(MimeTypes.MSExcelXml)
         {
             this.data = data;
             FileDownloadName = fileDownloadName;
+            this.fixedWidthFormat = fixedWidthFormat;
+            this.columnsToHide = columnsToHide;
         }
 
         protected override void WriteFile(HttpResponseBase response)
@@ -38,11 +45,24 @@
             
             workSheet.Cell(2, 1).Value = data.AsEnumerable();
 
-            AddHeaderRow();
+            AddHeaderRow();         
 
             FormatTitles();
 
-            workSheet.Columns().AdjustToContents();
+            if (!string.IsNullOrEmpty(columnsToHide))
+            {
+                workSheet.Columns(columnsToHide).Delete();
+            }
+
+            if (fixedWidthFormat)
+            {
+                workSheet.Columns().Width = PixelWidthToExcel(MaxPixelColWidth);
+                workSheet.Cells().Style.Alignment.WrapText = true;
+            }
+            else
+            {
+                workSheet.Columns().AdjustToContents();
+            }
 
             workBook.SaveAs(stream);
         }
@@ -88,6 +108,16 @@
             workBook.NamedRanges.NamedRange("Titles").Ranges.Style = titlesStyle;
 
             workSheet.SheetView.FreezeRows(1);
+        }
+
+        private static double PixelWidthToExcel(int pixels)
+        {
+            if (pixels <= 0)
+            {
+                return 0;
+            }
+
+            return ((pixels * 256 / 7) - (128 / 7)) / 256;
         }
     }
 }

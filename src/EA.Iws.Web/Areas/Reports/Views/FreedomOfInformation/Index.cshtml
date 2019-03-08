@@ -11,34 +11,12 @@
 
 @using (Html.BeginForm())
 {
-    @Html.AntiForgeryToken()
-    @Html.Gds().ValidationSummary()
+	@Html.AntiForgeryToken()
+	@Html.Gds().ValidationSummary()
 
-    <div class="form-group @Html.Gds().FormGroupClass(m => m.DateType)">
-        @Html.Gds().LabelFor(m => m.DateType)
-        @Html.Gds().ValidationMessageFor(m => m.DateType)
-        @Html.Gds().DropDownListFor(m => m.DateType, Model.DateSelectList, "")
-    </div>
+	@Html.EditorFor(m => m.InputParameters)
 
-    <div class="form-group @Html.Gds().FormGroupClass(m => m.FromDate) @Html.Gds().FormGroupClass(m => m.FromDate.Day) @Html.Gds().FormGroupClass(m => m.FromDate.Month) @Html.Gds().FormGroupClass(m => m.FromDate.Year)">
-        @Html.Gds().LabelFor(m => m.FromDate, false)
-        @Html.Gds().ValidationMessageFor(m => m.FromDate)
-        @Html.EditorFor(m => m.FromDate)
-    </div>
-
-    <div class="form-group @Html.Gds().FormGroupClass(m => m.ToDate) @Html.Gds().FormGroupClass(m => m.ToDate.Day) @Html.Gds().FormGroupClass(m => m.ToDate.Month) @Html.Gds().FormGroupClass(m => m.ToDate.Year)">
-        @Html.Gds().LabelFor(m => m.ToDate, false)
-        @Html.Gds().ValidationMessageFor(m => m.ToDate)
-        @Html.EditorFor(m => m.ToDate)
-    </div>
-
-    <div class="form-group @Html.Gds().FormGroupClass(m => m.ChemicalComposition)">
-        @Html.Gds().LabelFor(m => m.ChemicalComposition)
-        @Html.Gds().ValidationMessageFor(m => m.ChemicalComposition)
-        @Html.Gds().DropDownListFor(m => m.ChemicalComposition, Model.ChemicalCompositions, "")
-    </div>
-
-    <div class="form-group">
-        <button class="button" type="submit">@Resources.ButtonText</button>
-    </div>
+	<div class="form-group">
+		<button class="button" type="submit">@Resources.ContinueButtonText</button>
+	</div>
 }

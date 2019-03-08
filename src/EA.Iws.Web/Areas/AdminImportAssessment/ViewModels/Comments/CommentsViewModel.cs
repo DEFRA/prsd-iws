@@ -1,4 +1,4 @@
-﻿namespace EA.Iws.Web.Areas.AdminImportAssessment.ViewModels.Comments
+namespace EA.Iws.Web.Areas.AdminImportAssessment.ViewModels.Comments
 {
     using System;
     using System.Collections.Generic;

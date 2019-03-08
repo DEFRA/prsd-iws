@@ -69,8 +69,25 @@ AS
         MR.[Date] AS [MovementReceivedDate],
         MOR.[Date] AS [MovementCompletedDate],
         MR.[Unit] AS [MovementQuantityReceviedUnitId],
-        MR.[Quantity] AS [MovementQuantityReceived]
-
+        MR.[Quantity] AS [MovementQuantityReceived],
+		ET.[Description] AS [NotifierType],
+		E.[FullName] As [NotifierContactName],
+		E.[Email] as [NotifierContactEmail],
+		PT.[Description] AS [ProducerType],
+		P.[Email] AS [ProducerContactEmail],
+		ETS.TransitStates AS [TransitStates],
+		IT.[Description] AS [ImporterType],
+		I.[FullName] AS [ImporterContactName],
+		I.[Email] AS [ImporterContactEmail],
+		NS.[Description] AS [NotificationStatus],
+		D.DecisionRequiredByDate,
+		CASE when FG.[Status] = 4 Then 'Y' ELSE 'N' END AS [IsFinancialGuaranteeApproved],
+		D.[FileClosedDate],
+		TE.[Details] AS [TechnologyEmployed],
+		M.[Date] AS [ActualDate],
+		D.AcknowledgedDate,
+		D.ObjectedDate AS [ObjectionDate],
+		D.WithdrawnDate
     FROM [Notification].[Notification] N
     INNER JOIN [Notification].[FacilityCollection] FC ON FC.[NotificationId] = N.[Id]
     INNER JOIN [Notification].[NotificationAssessment] NA ON NA.[NotificationApplicationId] = N.[Id]
@@ -110,10 +127,15 @@ AS
     INNER JOIN [Notification].[EntryOrExitPoint] SI_EEP ON SI_EEP.Id = SI.EntryPointId
     INNER JOIN [Lookup].[Country] SI_C ON SI_C.Id = SI.CountryId
     INNER JOIN [Lookup].[Country] SE_C ON SE_C.Id = SE.CountryId
+	INNER JOIN [Lookup].[BusinessType] ET ON ET.Id = E.[Type]
+	INNER JOIN [Lookup].[BusinessType] PT ON PT.Id = P.[Type] 
+	INNER JOIN [Lookup].[BusinessType] IT ON IT.Id = I.[Type] 
     INNER JOIN [Notification].[WasteType] WT ON WT.NotificationId = N.Id
     INNER JOIN [Lookup].[ChemicalCompositionType] CCT ON CCT.Id = WT.ChemicalCompositionType
     INNER JOIN [Notification].[ShipmentInfo] S ON S.NotificationId = N.Id
     INNER JOIN [Lookup].[ShipmentQuantityUnit] SU ON SU.Id = S.Units
+    INNER JOIN	[Lookup].[NotificationStatus] NS  ON [NS].[Id] = [NA].[Status]
+    INNER JOIN	[Notification].[TechnologyEmployed] TE ON TE.NotificationId = N.Id
     LEFT JOIN [Notification].[WasteCodeInfo] BaselCode
         LEFT JOIN [Lookup].[WasteCode] BaselCodeInfo ON BaselCode.WasteCodeId = BaselCodeInfo.Id
     ON BaselCode.NotificationId = N.Id AND BaselCode.CodeType IN (1, 2)
@@ -124,6 +146,12 @@ AS
     LEFT JOIN [Notification].[Movement] M ON M.[NotificationId] = N.Id
     LEFT JOIN [Notification].[MovementReceipt] MR ON MR.MovementId = M.Id
     LEFT JOIN [Notification].[MovementOperationReceipt] MOR ON MOR.MovementId = M.Id
+	LEFT JOIN [Reports].[TransitStatesConcat] ETS on ETS.NotificationId = N.Id
+	LEFT JOIN  [Notification].[FinancialGuaranteeCollection] FGC ON FGC.[NotificationId] = N.Id
+	LEFT JOIN [Notification].[FinancialGuarantee] FG ON FG.Id = 
+		(SELECT TOP 1 FG1.Id from [Notification].[FinancialGuarantee] FG1 
+		 WHERE FG1.FinancialGuaranteeCollectionId = FGC.Id 
+		 ORDER BY FG1.CreatedDate DESC)
 
     UNION ALL
 
@@ -196,8 +224,25 @@ AS
         MR.[Date] AS [MovementReceivedDate],
         MOR.[Date] AS [MovementCompletedDate],
         MR.[Unit] AS [MovementQuantityReceviedUnitId],
-        MR.[Quantity] AS [MovementQuantityReceived]
-
+        MR.[Quantity] AS [MovementQuantityReceived],
+		NULL AS [NotifierType],
+		E.[ContactName] As [NotifierContactName],
+		E.[Email] as [NotifierContactEmail],
+		NULL AS [ProducerType],
+		P.[Email] AS [ProducerContactEmail],
+		ETS.TransitStates AS [TransitStates],
+		IT.[Description] AS [ImporterType],
+		I.[ContactName] AS [ImporterContactName],
+		I.[Email] AS [ImporterContactEmail],
+		NS.[Description] as [NotificationStatus],
+		D.DecisionRequiredByDate,
+		CASE when FG.[Status] = 4 Then 'Y' ELSE 'N' END AS [IsFinancialGuaranteeApproved],
+		D.FileClosedDate,
+	    WO.TechnologyEmployed,
+		M.ActualShipmentDate AS [ActualDate],
+		D.AcknowledgedDate,
+		O.[Date] AS [ObjectionDate],
+		D.WithdrawnDate 
     FROM [ImportNotification].[Notification] N
     INNER JOIN [ImportNotification].[FacilityCollection] FC ON FC.[ImportNotificationId] = N.[Id]
     INNER JOIN [ImportNotification].[NotificationAssessment] NA ON NA.[NotificationApplicationId] = N.[Id]
@@ -225,6 +270,7 @@ AS
             ORDER BY	F1.IsActualSiteOfTreatment DESC
         )
     INNER JOIN [Lookup].[Country] AS C_F ON F.[CountryId] = C_F.[Id]
+	INNER JOIN [Lookup].[BusinessType] IT ON IT.Id = I.[Type] 
     INNER JOIN [ImportNotification].[TransportRoute] TR ON TR.ImportNotificationId = N.Id
     INNER JOIN [ImportNotification].[StateOfExport] SE ON SE.TransportRouteId = TR.Id
     INNER JOIN [ImportNotification].[StateOfImport] SI ON SI.TransportRouteId = TR.Id
@@ -239,6 +285,8 @@ AS
     INNER JOIN [Lookup].[ChemicalCompositionType] CCT ON CCT.Id = WT.ChemicalCompositionType
     INNER JOIN [ImportNotification].[Shipment] S ON S.ImportNotificationId = N.Id
     INNER JOIN [Lookup].[ShipmentQuantityUnit] SU ON SU.Id = S.Units
+	INNER JOIN	[Lookup].[NotificationStatus] NS  ON [NS].[Id] = [NA].[Status]
+	INNER JOIN	[ImportNotification].[WasteOperation] WO ON WO.ImportNotificationId = N.Id
     LEFT JOIN [ImportNotification].[WasteType] WasteType
         INNER JOIN [ImportNotification].[WasteCode] WasteCode ON WasteType.Id = WasteCode.WasteTypeId
         LEFT JOIN [Lookup].[WasteCode] WasteCodeInfo ON WasteCode.WasteCodeId = WasteCodeInfo.Id
@@ -251,4 +299,7 @@ AS
     LEFT JOIN [ImportNotification].[Movement] M ON M.[NotificationId] = N.Id
     LEFT JOIN [ImportNotification].[MovementReceipt] MR ON MR.MovementId = M.Id
     LEFT JOIN [ImportNotification].[MovementOperationReceipt] MOR ON MOR.MovementId = M.Id
+	LEFT JOIN [Reports].[TransitStatesConcat] ETS on ETS.NotificationId = N.Id
+	LEFT JOIN [ImportNotification].[FinancialGuarantee] FG ON FG.[ImportNotificationId] = N.[Id] 
+    LEFT JOIN [ImportNotification].[Objection] O ON NA.NotificationApplicationId = O.NotificationId
 GO

@@ -1,4 +1,4 @@
-﻿namespace EA.Iws.RequestHandlers.Tests.Unit.Notification
+namespace EA.Iws.RequestHandlers.Tests.Unit.Notification
 {
     using System;
     using System.Collections.Generic;

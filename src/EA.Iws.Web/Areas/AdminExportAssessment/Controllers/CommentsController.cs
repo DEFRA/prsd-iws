@@ -1,4 +1,4 @@
-﻿namespace EA.Iws.Web.Areas.AdminExportAssessment.Controllers
+namespace EA.Iws.Web.Areas.AdminExportAssessment.Controllers
 {
     using System;
     using System.Linq;

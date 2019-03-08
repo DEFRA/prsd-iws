@@ -10,6 +10,7 @@
     public interface IShipmentsRepository
     {
         Task<IEnumerable<Shipment>> Get(DateTime from, DateTime to, UKCompetentAuthority competentAuthority,
-            ShipmentsReportDates dateType, ChemicalComposition? chemicalComposition);
+            ShipmentsReportDates dateType, ShipmentReportTextFields? textFieldType,
+            TextFieldOperator? textFieldOperatorType, string textSearch);
     }
 }

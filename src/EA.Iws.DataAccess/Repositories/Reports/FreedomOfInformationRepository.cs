@@ -7,6 +7,7 @@
     using Core.Admin.Reports;
     using Core.Notification;
     using Core.Reports;
+    using Core.Reports.FOI;
     using Core.WasteType;
     using Domain.Reports;
 
@@ -20,23 +21,33 @@
         }
 
         public async Task<IEnumerable<FreedomOfInformationData>> Get(DateTime from, DateTime to,
-            ChemicalComposition? chemicalComposition, UKCompetentAuthority competentAuthority, FoiReportDates dateType)
+             UKCompetentAuthority competentAuthority, FOIReportDates dateType, FOIReportTextFields? searchField,
+            TextFieldOperator? searchType,
+            string comparisonText)
         {
-            return await context.Database.SqlQuery<FreedomOfInformationData>(
-                @"SELECT DISTINCT
+            var textFilter = TextFilterHelper.GetTextFilter(searchField, searchType, comparisonText);
+            textFilter = !string.IsNullOrEmpty(textFilter) ? string.Format("AND {0}", textFilter) : string.Empty;
+
+            var query = @"SELECT DISTINCT
                     [NotificationNumber],
                     [ImportOrExport],
                     CASE WHEN [IsInterim] = 1 THEN 'Interim' WHEN [IsInterim] = 0 THEN 'Non-interim' ELSE NULL END AS [Interim],
                     [NotifierName],
                     [NotifierAddress],
                     [NotifierPostalCode],
+                    [NotifierType],
+                    [NotifierContactName],
+                    [NotifierContactEmail],
                     [ProducerName],
                     [ProducerAddress],
                     [ProducerPostalCode],
+                    [ProducerType],
+                    [ProducerContactEmail],
                     [PointOfExport],
                     [PointOfEntry],
                     [ExportCountryName],
                     [ImportCountryName],
+                    [TransitStates],
                     [BaselOecdCode],
                     [NameOfWaste],
                     [EWC],
@@ -46,6 +57,9 @@
                     [ImporterName],
                     [ImporterAddress],
                     [ImporterPostalCode],
+                    [ImporterType],
+                    [ImporterContactName],
+                    [ImporterContactEmail],
                     [FacilityName],
                     [FacilityAddress],
                     [FacilityPostalCode],
@@ -67,17 +81,28 @@
                     [IntendedQuantityUnit],
                     [ConsentFrom],
                     [ConsentTo],
-                    [LocalArea]
+                    [NotificationStatus],
+                    [DecisionRequiredByDate],
+                    [IsFinancialGuaranteeApproved],
+                    [FileClosedDate],
+                    [LocalArea],
+                    [TechnologyEmployed]
                 FROM 
                     [Reports].[FreedomOfInformationCache]
                 WHERE 
                     [CompetentAuthorityId] = @competentAuthority
-                    AND (@chemicalComposition IS NULL OR [ChemicalCompositionTypeId] = @chemicalComposition)
                     AND (@dateType = 'NotificationReceivedDate' AND  [ReceivedDate] BETWEEN @from AND @to
                          OR @dateType = 'ConsentFrom' AND  [ConsentFrom] BETWEEN @from AND @to
                          OR @dateType = 'ConsentTo' AND  [ConsentTo] BETWEEN @from AND @to
                          OR @dateType = 'ReceivedDate' AND [MovementReceivedDate] BETWEEN @from AND @to
-                         OR @dateType = 'CompletedDate' AND [MovementCompletedDate] BETWEEN @from AND @to)
+                         OR @dateType = 'CompletedDate' AND [MovementCompletedDate] BETWEEN @from AND @to
+                         OR @dateType = 'ActualDate' AND [ActualDate] BETWEEN @from AND @to
+                         OR @dateType = 'DecisionDate' AND [DecisionRequiredByDate] BETWEEN @from AND @to
+                         OR @dateType = 'AcknowledgedDate' AND [AcknowledgedDate] BETWEEN @from AND @to
+                         OR @dateType = 'ObjectionDate' AND [ObjectionDate] BETWEEN @from AND @to
+                         OR @dateType = 'FileClosedDate' AND [FileClosedDate] BETWEEN @from AND @to
+                         OR @dateType = 'WithdrawnDate' AND [WithdrawnDate] BETWEEN @from AND @to)    
+                     {0}
                 GROUP BY
                     [NotificationNumber],
                     [ImportOrExport],
@@ -85,13 +110,19 @@
                     [NotifierName],
                     [NotifierAddress],
                     [NotifierPostalCode],
+                    [NotifierType],
+                    [NotifierContactName],
+                    [NotifierContactEmail],
                     [ProducerName],
                     [ProducerAddress],
                     [ProducerPostalCode],
+                    [ProducerType],
+                    [ProducerContactEmail],
                     [PointOfExport],
                     [PointOfEntry],
                     [ExportCountryName],
                     [ImportCountryName],
+                    [TransitStates],
                     [BaselOecdCode],
                     [NameOfWaste],
                     [EWC],
@@ -101,6 +132,9 @@
                     [ImporterName],
                     [ImporterAddress],
                     [ImporterPostalCode],
+                    [ImporterType],
+                    [ImporterContactName],
+                    [ImporterContactEmail],
                     [FacilityName],
                     [FacilityAddress],
                     [FacilityPostalCode],
@@ -110,10 +144,16 @@
                     [IntendedQuantityUnit],
                     [ConsentFrom],
                     [ConsentTo],
-                    [LocalArea]",
+                    [NotificationStatus],
+                    [DecisionRequiredByDate],
+                    [IsFinancialGuaranteeApproved],
+                    [FileClosedDate],
+                    [LocalArea],
+                    [TechnologyEmployed]";
+
+              return await context.Database.SqlQuery<FreedomOfInformationData>(string.Format(query, textFilter),
                 new SqlParameter("@from", from),
                 new SqlParameter("@to", to),
-                new SqlParameter("@chemicalComposition", (chemicalComposition.HasValue ? (object)(int)chemicalComposition.Value : DBNull.Value)),
                 new SqlParameter("@competentAuthority", (int)competentAuthority),
                 new SqlParameter("@dateType", dateType.ToString())).ToArrayAsync();
         }

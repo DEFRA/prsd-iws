@@ -29,7 +29,7 @@
 
             var query = from notification
                 in importNotificationContext.ImportNotifications
-                where notification.NotificationNumber.Contains(number)
+                where notification.NotificationNumber.Replace(" ", string.Empty).Contains(number.Replace(" ", string.Empty))
                     && notification.CompetentAuthority == userCompetentAuthority
                 from assessment 
                     in importNotificationContext.ImportNotificationAssessments

@@ -39,7 +39,7 @@
 
             return true;
         }
-
+        
         public async Task<List<ImportNotificationComment>> GetComments(Guid notificationId, NotificationShipmentsCommentsType type, DateTime startDate, DateTime endDate, int shipmentNumber)
         {
             var allCommentsForType = await this.GetCommentsByType(notificationId, type);

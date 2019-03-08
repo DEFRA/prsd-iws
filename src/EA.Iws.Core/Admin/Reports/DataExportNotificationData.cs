@@ -44,5 +44,8 @@
         public string Officer { get; set; }
 
         public string SubmittedBy { get; set; }
+
+        [DisplayName("Consent valid To date")]
+        public DateTime? ConsentTo { get; set; }
     }
 }

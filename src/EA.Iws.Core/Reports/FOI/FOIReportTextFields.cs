@@ -1,23 +1,22 @@
-﻿namespace EA.Iws.Core.Reports.Producer
+﻿namespace EA.Iws.Core.Reports.FOI
 {
     using System.ComponentModel.DataAnnotations;
-
-    public enum ProducerReportTextFields
+    public enum FOIReportTextFields
     {
         [Display(Name = "Notifier name")]
         NotifierName,
 
+        [Display(Name = "Producer name")]
+        ProducerName,
+
         [Display(Name = "Consignee name")]
         ConsigneeName,
 
-        [Display(Name = "Waste type")]
-        WasteType,
+        [Display(Name = "Facility name")]
+        FacilityName,
 
-        [Display(Name = "EWC code")]
-        EwcCode,
-
-        [Display(Name = "Y code")]
-        YCode,
+        [Display(Name = "Site of export name")]
+        SiteOfExportName,
 
         [Display(Name = "Point of exit")]
         PointOfExit,
@@ -31,10 +30,13 @@
         [Display(Name = "Country of destination")]
         CountryOfDestination,
 
-        [Display(Name = "Site of export name")]
-        SiteOfExportName,
+        [Display(Name = "Waste type")]
+        WasteType,
 
-        [Display(Name = "Facility name")]
-        FacilityName
+        [Display(Name = "EWC code")]
+        EwcCode,
+
+        [Display(Name = "Y code")]
+        YCode     
     }
 }
