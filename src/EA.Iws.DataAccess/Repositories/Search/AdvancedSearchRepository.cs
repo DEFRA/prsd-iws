@@ -2,14 +2,19 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Data.Entity;
     using System.Data.SqlClient;
     using System.Linq;
     using System.Threading.Tasks;
     using Core.Admin.Search;
+    using Core.FinancialGuarantee;
+    using Core.ImportNotificationAssessment;
     using Core.Notification;
+    using Core.NotificationAssessment;
     using Core.OperationCodes;
     using Core.Shared;
     using Domain.Search;
+    using Prsd.Core.Helpers;
 
     internal class AdvancedSearchRepository : IAdvancedSearchRepository
     {
@@ -67,7 +72,9 @@
                     N.[NotificationNumber],
                     NS.[Description] AS [NotificationStatus],
                     E.[Name] AS [ExporterName],
-                    CCT.[Description] AS [WasteType]
+                    CCT.[Description] AS [WasteType],
+                    CASE WHEN NS.[Description] IN ('{1}', '{2}') AND FG.Id IS NOT NULL THEN CAST(1 AS BIT) ELSE CAST(0 AS BIT) 
+                        END AS [ShowShipmentSummaryLink]
                 FROM
                     [Notification].[Notification] N
                     INNER JOIN [Notification].[NotificationAssessment] NA 
@@ -77,10 +84,18 @@
                     LEFT JOIN [Notification].[WasteType] WT 
                         INNER JOIN [Lookup].[ChemicalCompositionType] CCT ON WT.ChemicalCompositionType = CCT.Id
                     ON N.Id = WT.NotificationId
+                    LEFT JOIN  [Notification].[FinancialGuaranteeCollection] FGC ON FGC.[NotificationId] = N.Id
+                        LEFT JOIN [Notification].[FinancialGuarantee] FG ON FG.Id = 
+                            (SELECT TOP 1 FG1.Id from [Notification].[FinancialGuarantee] FG1 
+                            WHERE FG1.FinancialGuaranteeCollectionId = FGC.Id
+                            AND FG1.Status = {3})
                 WHERE
                     N.[Id] IN ({0})";
 
-            var query = string.Format(queryFormat, string.Join(",", parameters.Select(x => x.ParameterName)));
+            var query = string.Format(queryFormat, string.Join(",", parameters.Select(x => x.ParameterName)),
+                EnumHelper.GetDisplayName(NotificationStatus.Consented),
+                EnumHelper.GetDisplayName(NotificationStatus.ConsentWithdrawn),
+                (int)FinancialGuaranteeStatus.Approved);
 
             return await context.Database.SqlQuery<ExportAdvancedSearchResult>(query, parameters).ToListAsync();
         }
@@ -107,7 +122,8 @@
                     N.[NotificationNumber],
                     S.[Description] AS [Status],
                     E.Name AS [Exporter],
-                    CASE WHEN WT.BaselOecdCodeNotListed = 1 THEN 'Not listed' ELSE WC.Code END AS [BaselOecdCode]
+                    CASE WHEN WT.BaselOecdCodeNotListed = 1 THEN 'Not listed' ELSE WC.Code END AS [BaselOecdCode],
+                    CASE WHEN S.[Description] IN ('{1}', '{2}') THEN CAST(1 AS BIT) ELSE CAST(0 AS BIT) END AS [ShowShipmentSummaryLink]
                 FROM
                     [ImportNotification].[Notification] N
                     INNER JOIN [ImportNotification].[NotificationAssessment] NA ON N.Id = NA.NotificationApplicationId
@@ -120,8 +136,10 @@
                 WHERE
                     N.[Id] IN ({0})";
 
-            var query = string.Format(queryFormat, string.Join(",", parameters.Select(x => x.ParameterName)));
-
+            var query = string.Format(queryFormat, string.Join(",", parameters.Select(x => x.ParameterName)),
+                EnumHelper.GetDisplayName(ImportNotificationStatus.Consented),
+                EnumHelper.GetDisplayName(ImportNotificationStatus.ConsentWithdrawn));
+            
             return await context.Database.SqlQuery<ImportAdvancedSearchResult>(query, parameters).ToListAsync();
         }
 
