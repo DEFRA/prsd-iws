@@ -1,4 +1,4 @@
-﻿namespace EA.Iws.Web.Areas.AdminExportAssessment.Controllers
+namespace EA.Iws.Web.Areas.AdminExportAssessment.Controllers
 {
     using System;
     using System.Linq;
@@ -25,7 +25,7 @@
         }
 
         [HttpGet]
-        public async Task<ActionResult> Index(Guid id, string filter, NotificationShipmentsCommentsType type = NotificationShipmentsCommentsType.Notification)
+        public async Task<ActionResult> Index(Guid id, string filter, NotificationShipmentsCommentsType type = NotificationShipmentsCommentsType.Notification, int page = 1)
         {
             DateTime startDate = new DateTime();
             DateTime endDate = new DateTime();
@@ -60,7 +60,7 @@
                 TempData.Remove("shipmentNumber");
             }
 
-            var comments = await this.mediator.SendAsync(new GetNotificationComments(id, type, startDate, endDate, shipmentNumber));
+            var comments = await this.mediator.SendAsync(new GetNotificationComments(id, type, page, startDate, endDate, shipmentNumber));
 
             CommentsViewModel model = new CommentsViewModel
             {
@@ -68,10 +68,12 @@
                 Type = type,
                 SelectedFilter = filter,
                 TotalNumberOfComments = comments.NumberOfComments,
-                ShipmentNumber = shipmentNumber
+                ShipmentNumberStr = shipmentNumber.ToString(),
+                PageNumber = comments.PageNumber,
+                PageSize = comments.PageSize,
+                TotalNumberOfFilteredComments = comments.NumberOfFilteredComments,
+                Comments = comments.NotificationComments.OrderBy(p => p.ShipmentNumber).ThenBy(p => p.DateAdded).ToList()
             };
-
-            SetModelComments(model, comments);
 
             model.SetDates(startDate, endDate);
 
@@ -89,9 +91,9 @@
 
             if (command == "search" && !ModelState.IsValid)
             {
-                var comments = await this.mediator.SendAsync(new GetNotificationComments(id, model.Type, null, null, null));
+                var comments = await this.mediator.SendAsync(new GetNotificationComments(id, model.Type, model.PageNumber, null, null, null));
                 model.TotalNumberOfComments = comments.NumberOfComments;
-                SetModelComments(model, comments);
+                model.Comments = comments.NotificationComments.ToList();
 
                 return View(model);
             }
@@ -141,7 +143,7 @@
         [HttpGet]
         public async Task<ActionResult> Delete(Guid id, Guid commentId, NotificationShipmentsCommentsType type)
         {
-            var comments = await this.mediator.SendAsync(new GetNotificationComments(id, type, null, null, null));
+            var comments = await this.mediator.SendAsync(new GetNotificationComments(id, type, 1, null, null, null));
 
             DeleteCommentViewModel model = new DeleteCommentViewModel()
             {
@@ -163,18 +165,6 @@
             await this.mediator.SendAsync(request);
 
             return RedirectToAction("Index", new { id = model.NotificationId, type = model.Type });
-        }
-
-        private void SetModelComments(CommentsViewModel model, NotificationCommentData data)
-        {
-            if (model.Type == NotificationShipmentsCommentsType.Notification)
-            {
-                model.Comments = data.NotificationComments.Where(p => p.ShipmentNumber == 0).ToList();
-            }
-            else
-            {
-                model.Comments = data.NotificationComments.Where(p => p.ShipmentNumber != 0).ToList();
-            }
         }
     }
 }
