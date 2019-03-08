@@ -30,7 +30,11 @@
             string textSearch,
             UKCompetentAuthority competentAuthority)
         {
-            var textFilter = TextFilterHelper.GetTextFilter(textFieldType, operatorType, textSearch);
+            var overrideOperator = operatorType != TextFieldOperator.DoesNotContain && 
+                textFieldType.HasValue && 
+                (textFieldType.Value == ProducerReportTextFields.EwcCode 
+                || textFieldType.Value == ProducerReportTextFields.YCode) ? TextFieldOperator.Contains : operatorType;
+            var textFilter = TextFilterHelper.GetTextFilter(textFieldType, overrideOperator, textSearch);
             textFilter = !string.IsNullOrEmpty(textFilter) ? string.Format("AND {0}", textFilter) : string.Empty;
 
             var query = @"SELECT DISTINCT
