@@ -2,7 +2,6 @@
 {
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-    using Infrastructure.Validation;
     using Web.ViewModels.Shared;
 
     public class IndexViewModel : IValidatableObject
