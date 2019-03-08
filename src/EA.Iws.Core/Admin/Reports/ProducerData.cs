@@ -24,7 +24,7 @@
         [DisplayName("Producer postcode")]
         public string ProducerPostcode { get; set; }
         
-        [DisplayName("Site of Export / Postcode")]
+        [DisplayName("Site of export/Postcode")]
         public string SiteOfExport { get; set; }
 
         [DisplayName("Area")]
@@ -33,7 +33,7 @@
         [DisplayName("Waste type")]
         public string WasteType { get; set; }
 
-        [DisplayName("Status")]
+        [DisplayName("Notification status")]
         public string NotificationStatus { get; set; }
 
         [DisplayName("Consignee name")]
