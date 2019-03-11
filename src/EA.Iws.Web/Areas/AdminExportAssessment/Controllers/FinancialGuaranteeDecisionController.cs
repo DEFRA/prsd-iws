@@ -91,7 +91,8 @@
 
             await mediator.SendAsync(new ApproveFinancialGuarantee(id, model.FinancialGuaranteeId,
                 model.DecisionMadeDate.AsDateTime().Value,
-                model.ReferenceNumber, model.ActiveLoadsPermitted.Value, model.IsBlanketBond.Value));
+                model.ReferenceNumber, model.ActiveLoadsPermitted.Value, model.IsBlanketBond.Value,
+                model.CoverAmount, model.CalculationContinued));
 
             return RedirectToAction("Index", "FinancialGuaranteeAssessment");
         }

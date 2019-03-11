@@ -98,11 +98,29 @@ namespace EA.Iws.Web.Areas.AdminExportAssessment.ViewModels.FinancialGuaranteeDe
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Please enter the value for the continued calculation.
+        ///   Looks up a localized string similar to Please enter no more than 2 decimal places.
+        /// </summary>
+        public static string CalculationContinuedDecimalPlaces {
+            get {
+                return ResourceManager.GetString("CalculationContinuedDecimalPlaces", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please enter the Calculation amount.
         /// </summary>
         public static string CalculationContinuedRequired {
             get {
                 return ResourceManager.GetString("CalculationContinuedRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please enter a Calculation amount that is less than 9999999.99.
+        /// </summary>
+        public static string CalculationContinuedTooMuch {
+            get {
+                return ResourceManager.GetString("CalculationContinuedTooMuch", resourceCulture);
             }
         }
         
@@ -116,11 +134,29 @@ namespace EA.Iws.Web.Areas.AdminExportAssessment.ViewModels.FinancialGuaranteeDe
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Please enter the cover amount.
+        ///   Looks up a localized string similar to Please enter no more than 2 decimal places.
+        /// </summary>
+        public static string CoverAmountDecimalPlaces {
+            get {
+                return ResourceManager.GetString("CoverAmountDecimalPlaces", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please enter the Amount of cover required.
         /// </summary>
         public static string CoverAmountRequired {
             get {
                 return ResourceManager.GetString("CoverAmountRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please enter an Amount of cover provided that is less than 9999999.99.
+        /// </summary>
+        public static string CoverAmountTooMuch {
+            get {
+                return ResourceManager.GetString("CoverAmountTooMuch", resourceCulture);
             }
         }
         
