@@ -28,11 +28,23 @@ AS
         MOR.[Date] AS [MovementCompletedDate],
 		CASE
 			WHEN WCI_EWC.IsNotApplicable = 1 THEN 'Not applicable'
-			ELSE WC_EWC.Code
+			ELSE STUFF(( SELECT ', ' + WC.Code AS [text()]
+					FROM [Notification].[WasteCodeInfo] WCI
+					LEFT JOIN [Lookup].[WasteCode] WC ON WCI.WasteCodeId = WC.Id
+					WHERE WCI.NotificationId = N.Id AND WC.CodeType = 3
+					order by 1
+					FOR XML PATH('')
+					), 1, 1, '' )
 		END AS [EwcCode],
 		CASE
 			WHEN WCI_YCODE.IsNotApplicable = 1 THEN 'Not applicable'
-			ELSE WC_YCODE.Code
+			ELSE STUFF(( SELECT ', ' + WC.Code AS [text()]
+					FROM [Notification].[WasteCodeInfo] WCI
+					LEFT JOIN [Lookup].[WasteCode] WC ON WCI.WasteCodeId = WC.Id
+					WHERE WCI.NotificationId = N.Id AND WC.CodeType = 4
+					order by 1
+					FOR XML PATH('')
+					), 1, 1, '' ) 
 		END AS [YCode],
 		SE_EEP.[Name] AS [PointOfExit],
         SI_EEP.[Name] AS [PointOfEntry],
@@ -42,7 +54,13 @@ AS
 			WHEN SiteOfExport.[Id] IS NOT NULL THEN SiteOfExport.[Name]
 			ELSE ''
 		END AS [SiteOfExportName],
-		F.[Name] AS [FacilityName]
+		STUFF(( SELECT ', ' + F.[Name] AS [text()]
+					FROM [Notification].[Facility] F
+					INNER JOIN [Notification].[FacilityCollection] FC ON F.FacilityCollectionId = FC.Id
+					WHERE FC.NotificationId = N.Id
+					order by 1
+					FOR XML PATH('')
+					), 1, 1, '' ) AS [FacilityName]
 	FROM
 		[Notification].[Notification] N
 		INNER JOIN [Notification].[Exporter] E ON E.NotificationId = N.Id
@@ -82,12 +100,8 @@ AS
 		INNER JOIN [Notification].[EntryOrExitPoint] SI_EEP ON SI_EEP.Id = SI.EntryPointId
 		INNER JOIN [Lookup].[Country] SI_C ON SI_C.Id = SI.CountryId
 		INNER JOIN [Lookup].[Country] SE_C ON SE_C.Id = SE.CountryId
-		INNER JOIN [Notification].[FacilityCollection] AS FC ON FC.NotificationId = N.Id
-		INNER JOIN [Notification].[Facility] F ON F.FacilityCollectionId = FC.Id
 		INNER JOIN [Notification].[WasteCodeInfo] WCI_EWC ON WCI_EWC.NotificationId = N.Id AND WCI_EWC.CodeType = 3
-		LEFT JOIN [Lookup].[WasteCode] WC_EWC ON WCI_EWC.WasteCodeId = WC_EWC.Id
 		INNER JOIN [Notification].[WasteCodeInfo] WCI_YCODE ON WCI_YCODE.NotificationId = N.Id AND WCI_YCODE.CodeType = 4
-		LEFT JOIN [Lookup].[WasteCode] WC_YCODE ON WCI_YCODE.WasteCodeId = WC_YCODE.Id
 
 	UNION ALL
 
@@ -110,17 +124,37 @@ AS
 		D.[NotificationReceivedDate] AS [NotificationReceivedDate],
 		MR.[Date] AS [MovementReceivedDate],
         MOR.[Date] AS [MovementCompletedDate],
-		WC_EWC.Code AS [EwcCode],
+		STUFF(( SELECT ', ' + WC.Code AS [text()]
+            FROM [ImportNotification].[WasteType] WT
+            INNER JOIN [ImportNotification].[WasteCode] WCI ON WT.Id = WCI.WasteTypeId
+            INNER JOIN [Lookup].[WasteCode] WC ON WCI.WasteCodeId = WC.Id
+            WHERE WT.ImportNotificationId = N.Id AND WC.CodeType = 3
+            order by 1
+            FOR XML PATH('')
+            ), 1, 1, '' ) AS [EwcCode],
 		CASE
 			WHEN WT.YCodeNotApplicable = 1 THEN 'Not applicable'
-			ELSE WC_YCODE.Code
+			ELSE STUFF(( SELECT ', ' + WC.Code AS [text()]
+					FROM [ImportNotification].[WasteType] WT
+					INNER JOIN [ImportNotification].[WasteCode] WCI ON WT.Id = WCI.WasteTypeId
+					LEFT JOIN [Lookup].[WasteCode] WC ON WCI.WasteCodeId = WC.Id
+					WHERE WT.ImportNotificationId = N.Id AND WC.CodeType = 4
+					order by 1
+					FOR XML PATH('')
+					), 1, 1, '' )
 		END AS [YCode],
 		SE_EEP.[Name] AS [PointOfExit],
         SI_EEP.[Name] AS [PointOfEntry],
 		SE_C.[Name] AS [ExportCountryName],
         SI_C.[Name] AS [ImportCountryName],
 		P.[Name] [SiteOfExportName],
-		F.[Name] AS [FacilityName]
+		STUFF(( SELECT ', ' + F.[Name] AS [text()]
+			FROM [ImportNotification].[Facility] F
+			INNER JOIN [ImportNotification].[FacilityCollection] FC ON F.FacilityCollectionId = FC.Id
+			WHERE FC.ImportNotificationId = N.Id
+			order by 1
+			FOR XML PATH('')
+			), 1, 1, '' ) AS [FacilityName]
 	FROM
 		[ImportNotification].[Notification] N
 		INNER JOIN [ImportNotification].[Exporter] E ON E.ImportNotificationId = N.Id
@@ -148,10 +182,6 @@ AS
 			FROM [Lookup].[Country] 
 			WHERE IsoAlpha2Code = 'GB' ) AS SI_C ON 1 = 1
 		INNER JOIN [Lookup].[Country] SE_C ON SE_C.Id = SE.CountryId
-		INNER JOIN [ImportNotification].[FacilityCollection] AS FC ON FC.ImportNotificationId = N.Id
-		INNER JOIN [ImportNotification].[Facility] F ON F.FacilityCollectionId = FC.Id
 		INNER JOIN [ImportNotification].[WasteCode] WCI ON WT.Id = WCI.WasteTypeId
-		INNER JOIN [Lookup].[WasteCode] WC_EWC ON WCI.WasteCodeId = WC_EWC.Id AND WC_EWC.CodeType = 3
-		LEFT JOIN [Lookup].[WasteCode] WC_YCODE ON WCI.WasteCodeId = WC_YCODE.Id AND WC_EWC.CodeType = 4
 
 GO
