@@ -60,8 +60,7 @@
             {
                 if (this.SelectedType == NotificationShipmentsCommentsType.Shipments)
                 {
-                    bool shipmentNumberIsValid = this.ShipmentNumber == null || this.ShipmentNumber < 0 || this.ShipmentNumber.ToString().Length > 6 ? false : true;
-                    if (!shipmentNumberIsValid)
+                    if (string.IsNullOrEmpty(ShipmentNumberStr) || this.ShipmentNumber < 1 || this.ShipmentNumber.ToString().Length > 6)
                     {
                         yield return new ValidationResult("Enter a valid shipment number", new[] { "ShipmentNumberStr" });
                     }
