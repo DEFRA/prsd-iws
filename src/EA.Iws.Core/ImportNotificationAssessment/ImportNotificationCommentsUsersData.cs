@@ -4,7 +4,7 @@
 
     public class ImportNotificationCommentsUsersData
     {
-        public IDictionary<string, string> Users {get; set;}
+        public IDictionary<string, string> Users { get; set;}
 
         public ImportNotificationCommentsUsersData()
         {
