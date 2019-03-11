@@ -79,15 +79,6 @@ namespace EA.Iws.Web.Areas.Reports.Views.Finance {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Select your notification received dates for this report.
-        /// </summary>
-        public static string ReportInfo {
-            get {
-                return ResourceManager.GetString("ReportInfo", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Finance report.
         /// </summary>
         public static string Title {

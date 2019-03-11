@@ -6,15 +6,21 @@
 
     public class IndexViewModel : IValidatableObject
     {
-        public RequiredDateInputViewModel From { get; set; }
-
-        public RequiredDateInputViewModel To { get; set; }
-
         public IndexViewModel()
         {
-            From = new RequiredDateInputViewModel();
-            To = new RequiredDateInputViewModel();
+            From = new OptionalDateInputViewModel(true);
+            To = new OptionalDateInputViewModel(true);
         }
+
+        [Display(Name = "From", ResourceType = typeof(IndexViewModelResources))]
+        [RequiredDateInput(ErrorMessageResourceName = "FromRequired",
+            ErrorMessageResourceType = typeof(IndexViewModelResources))]
+        public OptionalDateInputViewModel From { get; set; }
+
+        [Display(Name = "To", ResourceType = typeof(IndexViewModelResources))]
+        [RequiredDateInput(ErrorMessageResourceName = "ToRequired",
+            ErrorMessageResourceType = typeof(IndexViewModelResources))]
+        public OptionalDateInputViewModel To { get; set; }
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
