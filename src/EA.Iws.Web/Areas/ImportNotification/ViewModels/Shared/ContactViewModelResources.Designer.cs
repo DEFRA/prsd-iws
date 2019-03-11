@@ -106,6 +106,15 @@ namespace EA.Iws.Web.Areas.ImportNotification.ViewModels.Shared {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Telephone prefix.
+        /// </summary>
+        public static string TelephonePrefix {
+            get {
+                return ResourceManager.GetString("TelephonePrefix", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Please enter a valid telephone prefix number.
         /// </summary>
         public static string TelephonePrefixInvalid {
