@@ -3,11 +3,13 @@
     using System;
     using System.Threading.Tasks;
     using System.Web.Mvc;
+    using Core.ImportNotificationAssessment;
     using Core.NotificationAssessment;
     using Core.Shared;
     using Infrastructure.Authorization;
     using Prsd.Core.Mediator;
     using Requests.Admin;
+    using Requests.NotificationAssessment;
     using ViewModels.NotificationSwitch;
     using ViewModels.Shared;
 
@@ -36,15 +38,40 @@
 
             if (info.IsExistingNotification)
             {
-                if (info.TradeDirection == TradeDirection.Export &&
-                    info.ExportNotificationStatus != NotificationStatus.NotSubmitted)
+                if (info.TradeDirection == TradeDirection.Export)
                 {
-                    return RedirectToAction("Index", "Home", new { id = info.Id, area = "AdminExportAssessment" });
+                    var financialGuaranteeDecisionRequired = await mediator.SendAsync(new GetFinancialGuaranteeDecisionRequired(info.Id.Value));
+                    switch (info.ExportNotificationStatus)
+                    {
+                        case NotificationStatus.Consented:
+                            if (financialGuaranteeDecisionRequired)
+                            {
+                                return RedirectToAction("Index", "FinancialGuaranteeAssessment", new { id = info.Id, area = "AdminExportAssessment" });
+                            }
+                            return RedirectToAction("Index", "Home", new { id = info.Id, area = "AdminExportNotificationMovements" });
+                        case NotificationStatus.ConsentWithdrawn:
+                            if (financialGuaranteeDecisionRequired)
+                            {
+                                return RedirectToAction("Index", "Home", new { id = info.Id, area = "AdminExportAssessment" });
+                            }
+                            return RedirectToAction("Index", "Home", new { id = info.Id, area = "AdminExportNotificationMovements" });
+                        case NotificationStatus.NotSubmitted:
+                            break;
+                        default:
+                            return RedirectToAction("Index", "Home", new { id = info.Id, area = "AdminExportAssessment" });
+                    }
                 }
 
                 if (info.TradeDirection == TradeDirection.Import)
                 {
-                    return RedirectToAction("Index", "Home", new { id = info.Id, area = "ImportNotification" });
+                    switch (info.ImportNotificationStatus)
+                    {
+                        case ImportNotificationStatus.Consented:
+                        case ImportNotificationStatus.ConsentWithdrawn:
+                            return RedirectToAction("Index", "Home", new { id = info.Id, area = "AdminImportNotificationMovements" });
+                        default:
+                            return RedirectToAction("Index", "Home", new { id = info.Id, area = "ImportNotification" });
+                    }
                 }
             }
 

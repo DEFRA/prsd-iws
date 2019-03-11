@@ -2,12 +2,11 @@ namespace EA.Iws.Web.Areas.AdminImportAssessment.ViewModels.Comments
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel;
     using System.ComponentModel.DataAnnotations;
     using System.Web.Mvc;
     using Core.Admin;
     using Core.InternalComments;
-    using EA.Iws.Web.Infrastructure.Validation;
+    using EA.Iws.Web.ViewModels.Shared;
     using EA.Prsd.Core;
     using Views.Comments;
 
@@ -45,7 +44,22 @@ namespace EA.Iws.Web.Areas.AdminImportAssessment.ViewModels.Comments
 
         public string SelectedFilter { get; set; }
 
-        public string ShipmentNumberStr { get; set; }
+        private string shipmentNumberStr;
+        public string ShipmentNumberStr
+        {
+            get
+            {
+                if (shipmentNumberStr == null || shipmentNumberStr == "0")
+                {
+                    return string.Empty;
+                }
+                return shipmentNumberStr;
+            }
+            set
+            {
+                shipmentNumberStr = value;
+            }
+        }
 
         public int? ShipmentNumber
         {
@@ -57,23 +71,9 @@ namespace EA.Iws.Web.Areas.AdminImportAssessment.ViewModels.Comments
             }
         }
 
-        [DisplayName("Start Day")]
-        public int? StartDay { get; set; }
+        public DateEntryViewModel From { get; set; }
 
-        [DisplayName("Start Month")]
-        public int? StartMonth { get; set; }
-
-        [DisplayName("Start Year")]
-        public int? StartYear { get; set; }
-
-        [DisplayName("End Day")]
-        public int? EndDay { get; set; }
-
-        [DisplayName("End Month")]
-        public int? EndMonth { get; set; }
-
-        [DisplayName("End Year")]
-        public int? EndYear { get; set; }
+        public DateEntryViewModel To { get; set; }
 
         public int PageSize { get; set; }
 
@@ -85,6 +85,9 @@ namespace EA.Iws.Web.Areas.AdminImportAssessment.ViewModels.Comments
         {
             this.Comments = new List<InternalComment>();
             this.Type = NotificationShipmentsCommentsType.Notification;
+
+            this.From = new DateEntryViewModel(showLabels: false);
+            this.To = new DateEntryViewModel(showLabels: false);
         }
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
@@ -96,62 +99,29 @@ namespace EA.Iws.Web.Areas.AdminImportAssessment.ViewModels.Comments
                     yield return new ValidationResult(IndexResources.ShipmentNumberError, new[] { "ShipmentNumber" });
                 }
             }
-            else
+            else if (this.SelectedFilter == "date")
             {
-                bool allDateFieldsValid = true;
-                if (StartDay == null || StartDay < 1 || StartDay > 31)
+                DateTime startDate;
+                bool isValidstartDate = SystemTime.TryParse(this.From.Year.GetValueOrDefault(), this.From.Month.GetValueOrDefault(), this.From.Day.GetValueOrDefault(), out startDate);
+                if (!isValidstartDate)
                 {
-                    allDateFieldsValid = false;
-                    yield return new ValidationResult(IndexResources.DayError, new[] { "StartDay" });
-                }
-                if (StartMonth == null || StartMonth < 1 || StartMonth > 12)
-                {
-                    allDateFieldsValid = false;
-                    yield return new ValidationResult(IndexResources.MonthError, new[] { "StartMonth" });
-                }
-                if (StartYear == null || StartYear < 2014 || StartYear > 3000)
-                {
-                    allDateFieldsValid = false;
-                    yield return new ValidationResult(IndexResources.YearError, new[] { "StartYear" });
+                    yield return new ValidationResult("Please enter a valid start date", new[] { "StartDay" });
                 }
 
-                if (EndDay == null || EndDay < 1 || EndDay > 31)
+                if (!(isValidstartDate))
                 {
-                    allDateFieldsValid = false;
-                    yield return new ValidationResult(IndexResources.DayError, new[] { "EndDay" });
-                }
-                if (EndMonth == null || EndMonth < 1 || EndMonth > 12)
-                {
-                    allDateFieldsValid = false;
-                    yield return new ValidationResult(IndexResources.MonthError, new[] { "EndMonth" });
-                }
-                if (EndYear == null || EndYear < 2014 || EndYear > 3000)
-                {
-                    allDateFieldsValid = false;
-                    yield return new ValidationResult(IndexResources.YearError, new[] { "EndYear" });
-                }
-
-                if (!allDateFieldsValid)
-                {
-                    // Stop further validation if any of the date fields are empty
+                    // Stop further validation if either date is not a valid date
                     yield break;
                 }
 
-                DateTime startDate;
-                bool isValidStartDate = SystemTime.TryParse(StartYear.GetValueOrDefault(), StartMonth.GetValueOrDefault(), StartDay.GetValueOrDefault(), out startDate);
-                if (!isValidStartDate)
-                {
-                    yield return new ValidationResult(IndexResources.FromValid, new[] { "StartDay" });
-                }
-
                 DateTime endDate;
-                bool isValidEndDate = SystemTime.TryParse(EndYear.GetValueOrDefault(), EndMonth.GetValueOrDefault(), EndDay.GetValueOrDefault(), out endDate);
+                bool isValidEndDate = SystemTime.TryParse(this.To.Year.GetValueOrDefault(), this.To.Month.GetValueOrDefault(), this.To.Day.GetValueOrDefault(), out endDate);
                 if (!isValidEndDate)
                 {
-                    yield return new ValidationResult(IndexResources.ToValid, new[] { "EndDay" });
+                    yield return new ValidationResult("Please enter a valid end date", new[] { "EndDay" });
                 }
 
-                if (!(isValidStartDate && isValidEndDate))
+                if (!(isValidEndDate))
                 {
                     // Stop further validation if either date is not a valid date
                     yield break;
@@ -159,7 +129,7 @@ namespace EA.Iws.Web.Areas.AdminImportAssessment.ViewModels.Comments
 
                 if (startDate > endDate)
                 {
-                    yield return new ValidationResult(IndexResources.FromDateAfterToDate, new[] { "StartYear" });
+                    yield return new ValidationResult("The from date must be before the to date", new[] { "StartYear" });
                 }
             }
         }
@@ -170,13 +140,13 @@ namespace EA.Iws.Web.Areas.AdminImportAssessment.ViewModels.Comments
             {
                 return;
             }
-            this.StartDay = startDate.GetValueOrDefault().Day;
-            this.StartMonth = startDate.GetValueOrDefault().Month;
-            this.StartYear = startDate.GetValueOrDefault().Year;
+            this.From.Day = startDate.GetValueOrDefault().Day;
+            this.From.Month = startDate.GetValueOrDefault().Month;
+            this.From.Year = startDate.GetValueOrDefault().Year;
 
-            this.EndDay = endDate.GetValueOrDefault().Day;
-            this.EndMonth = endDate.GetValueOrDefault().Month;
-            this.EndYear = endDate.GetValueOrDefault().Year;
+            this.To.Day = endDate.GetValueOrDefault().Day;
+            this.To.Month = endDate.GetValueOrDefault().Month;
+            this.To.Year = endDate.GetValueOrDefault().Year;
         }
     }
 }

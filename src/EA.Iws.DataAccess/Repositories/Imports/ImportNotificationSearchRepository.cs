@@ -4,6 +4,7 @@
     using System.Data.Entity;
     using System.Linq;
     using System.Threading.Tasks;
+    using Core.ImportNotificationAssessment;
     using Domain.ImportNotification;
     using Prsd.Core.Domain;
 
@@ -59,7 +60,8 @@
                 x.Assessment.Status,
                 x.Exporter == null ? string.Empty : x.Exporter.Name,
                 x.Importer == null ? string.Empty : x.Importer.Name,
-                x.Notification.NotificationType));
+                x.Notification.NotificationType,
+                x.Assessment.Status.Equals(ImportNotificationStatus.Consented) || x.Assessment.Status.Equals(ImportNotificationStatus.ConsentWithdrawn)));
         }
     }
 }

@@ -129,6 +129,12 @@
   <data name="ResultsCount" xml:space="preserve">
     <value>Your search returned {0} import notification(s)</value>
   </data>
+  <data name="ShipmentSummaryLinkText" xml:space="preserve">
+    <value>Go to summary</value>
+  </data>
+  <data name="ShipmentSummaryTableHeading" xml:space="preserve">
+    <value>Shipment summary</value>
+  </data>
   <data name="Subheading" xml:space="preserve">
     <value>Import notifications</value>
   </data>

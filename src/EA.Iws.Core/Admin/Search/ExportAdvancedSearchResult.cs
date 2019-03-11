@@ -13,5 +13,7 @@
         public string ExporterName { get; set; }
 
         public string WasteType { get; set; }
+
+        public bool ShowShipmentSummaryLink { get; set; }
     }
 }

@@ -25,6 +25,11 @@
             TextFieldOperator? searchType,
             string comparisonText)
         {
+            var overrideOperator = searchType != TextFieldOperator.DoesNotContain &&
+            searchField.HasValue &&
+            (searchField.Value == FOIReportTextFields.Ewc
+            || searchField.Value == FOIReportTextFields.YCode) ? TextFieldOperator.Contains : searchType;
+
             var textFilter = TextFilterHelper.GetTextFilter(searchField, searchType, comparisonText);
             textFilter = !string.IsNullOrEmpty(textFilter) ? string.Format("AND {0}", textFilter) : string.Empty;
 

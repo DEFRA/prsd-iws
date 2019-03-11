@@ -16,6 +16,7 @@
             <th>@Resource.NotificationNumberTableHeading</th>
             <th>Status</th>
             <th>@Resource.NotificationTypeTableHeading</th>
+            <th>@Resource.ShipmentSummaryTableHeading</th>
         </tr>
     </thead>
     <tbody>
@@ -34,6 +35,12 @@
             </td>
             <td>
                 @Html.DisplayFor(m => m.ImportSearchResults[i].NotificationType)
+            </td>
+            <td>
+                @if (Model.ImportSearchResults[i].ShowShipmentSummaryLink)
+                {
+                    @Html.ActionLink(@Resource.ShipmentSummaryLinkText, "Index", "Home", new { area = "AdminImportNotificationMovements", id = Model.ImportSearchResults[i].Id }, null)
+                }
             </td>
         </tr>
         }
