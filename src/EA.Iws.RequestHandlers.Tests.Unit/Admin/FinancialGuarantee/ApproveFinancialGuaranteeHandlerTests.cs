@@ -12,12 +12,11 @@
     public class ApproveFinancialGuaranteeHandlerTests : FinancialGuaranteeDecisionTests
     {
         private const int AnyInt = 7;
-        private const decimal AnyDec = (decimal)12.34;
         private const string BlanketBondReference = "ref 23";
         private readonly ApproveFinancialGuaranteeHandler handler;
         private readonly TestFinancialGuarantee financialGuarantee;
         private readonly ApproveFinancialGuarantee approveFinancialGuarantee =
-            new ApproveFinancialGuarantee(ApplicationCompletedId, FinancialGuaranteeId, FirstDate, BlanketBondReference, AnyInt, true, AnyDec, AnyDec);
+            new ApproveFinancialGuarantee(ApplicationCompletedId, FinancialGuaranteeId, FirstDate, BlanketBondReference, AnyInt, true);
 
         private readonly IFinancialGuaranteeRepository repository;
 
@@ -45,7 +44,7 @@
             await
                 Assert.ThrowsAsync<InvalidOperationException>(
                     () =>
-                        handler.HandleAsync(new ApproveFinancialGuarantee(Guid.Empty, FinancialGuaranteeId, FirstDate, BlanketBondReference, AnyInt, true, AnyDec, AnyDec)));
+                        handler.HandleAsync(new ApproveFinancialGuarantee(Guid.Empty, FinancialGuaranteeId, FirstDate, BlanketBondReference, AnyInt, true)));
         }
 
         [Fact]
@@ -54,7 +53,7 @@
             await
                 Assert.ThrowsAsync<InvalidOperationException>(
                     () =>
-                        handler.HandleAsync(new ApproveFinancialGuarantee(Guid.Empty, FinancialGuaranteeId, FirstDate, BlanketBondReference, AnyInt, true, AnyDec, AnyDec)));
+                        handler.HandleAsync(new ApproveFinancialGuarantee(Guid.Empty, FinancialGuaranteeId, FirstDate, BlanketBondReference, AnyInt, true)));
         }
 
         [Fact]

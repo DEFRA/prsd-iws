@@ -12,19 +12,12 @@
 
         public bool IsBlanketBond { get; private set; }
 
-        public decimal? CoverAmount { get; private set; }
-
-        public decimal? CalculationContinued { get; private set; }
-
-        public ApprovalData(DateTime decisionDate, string referenceNumber, int activeLoadsPermitted, bool isBlanketBond,
-            decimal? coverAmount, decimal? calculationContinued)
+        public ApprovalData(DateTime decisionDate, string referenceNumber, int activeLoadsPermitted, bool isBlanketBond)
         {
             DecisionDate = decisionDate;
             ActiveLoadsPermitted = activeLoadsPermitted;
             ReferenceNumber = referenceNumber;
             IsBlanketBond = isBlanketBond;
-            CoverAmount = coverAmount;
-            CalculationContinued = calculationContinued;
         }
     }
 }

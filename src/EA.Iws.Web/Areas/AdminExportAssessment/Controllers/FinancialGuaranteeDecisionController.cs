@@ -4,11 +4,9 @@
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Core.FinancialGuarantee;
-    using Core.Notification;
     using Infrastructure.Authorization;
     using Prsd.Core.Mediator;
     using Requests.Admin.FinancialGuarantee;
-    using Requests.Notification;
     using ViewModels.FinancialGuaranteeDecision;
 
     [AuthorizeActivity(typeof(GetFinancialGuaranteeDataByNotificationApplicationId))]
@@ -67,18 +65,16 @@
         {
             var financialGuarantee = await mediator.SendAsync(
                 new GetFinancialGuaranteeDataByNotificationApplicationId(id, financialGuaranteeId));
-            
+
             if (financialGuarantee.Status != FinancialGuaranteeStatus.ApplicationComplete)
             {
                 return RedirectToAction("Index", "FinancialGuaranteeAssessment");
             }
 
-            bool showExtraData = await ShowExtraData(id);
             var model = new ApproveFinancialGuaranteeViewModel(financialGuarantee)
             {
                 NotificationId = id,
-                FinancialGuaranteeId = financialGuaranteeId,
-                ShowExtraData = showExtraData
+                FinancialGuaranteeId = financialGuaranteeId
             };
 
             return View(model);
@@ -88,13 +84,6 @@
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Approve(Guid id, ApproveFinancialGuaranteeViewModel model)
         {
-            model.ShowExtraData = await ShowExtraData(id);
-
-            if (!model.ShowExtraData)
-            {
-                PrepareApproveModelErrors();
-            }
-
             if (!ModelState.IsValid)
             {
                 return View(model);
@@ -102,8 +91,7 @@
 
             await mediator.SendAsync(new ApproveFinancialGuarantee(id, model.FinancialGuaranteeId,
                 model.DecisionMadeDate.AsDateTime().Value,
-                model.ReferenceNumber, model.ActiveLoadsPermitted.Value, model.IsBlanketBond.Value,
-                model.CoverAmount, model.CalculationContinued));
+                model.ReferenceNumber, model.ActiveLoadsPermitted.Value, model.IsBlanketBond.Value));
 
             return RedirectToAction("Index", "FinancialGuaranteeAssessment");
         }
@@ -182,25 +170,6 @@
         public ActionResult Released()
         {
             return View();
-        }
-
-        private void PrepareApproveModelErrors()
-        {
-            if (ModelState.ContainsKey("CoverAmount"))
-            {
-                ModelState["CoverAmount"].Errors.Clear();
-            }
-            if (ModelState.ContainsKey("CalculationContinued"))
-            {
-                ModelState["CalculationContinued"].Errors.Clear();
-            }
-        }
-
-        private async Task<bool> ShowExtraData(Guid notificationId)
-        {
-            var notification = await mediator.SendAsync(new GetNotificationBasicInfo(notificationId));
-            return notification.CompetentAuthority == UKCompetentAuthority.England
-                || notification.CompetentAuthority == UKCompetentAuthority.Wales;
         }
     }
 }
