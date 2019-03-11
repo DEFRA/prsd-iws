@@ -13,7 +13,7 @@
         public string Telephone { get; set; }
 
         [DataType(DataType.PhoneNumber)]
-        [Display(Name = "TelephoneInvalid", ResourceType = typeof(ContactViewModelResources))]
+        [Display(Name = "TelephonePrefix", ResourceType = typeof(ContactViewModelResources))]
         [StringLength(3)]
         [RegularExpression("\\d+", ErrorMessageResourceType = typeof(ContactViewModelResources), ErrorMessageResourceName = "TelephonePrefixInvalid")]
         public string TelephonePrefix { get; set; }
