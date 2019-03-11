@@ -75,6 +75,10 @@
 
         public bool? IsBlanketBond { get; private set; }
 
+        public decimal? CoverAmount { get; private set; }
+
+        public decimal? CalculationContinued { get; private set; }
+
         public void Complete(DateTime date)
         {
             if (date < ReceivedDate)
@@ -162,6 +166,8 @@
             ActiveLoadsPermitted = approvalData.ActiveLoadsPermitted;
             ReferenceNumber = approvalData.ReferenceNumber;
             IsBlanketBond = approvalData.IsBlanketBond;
+            CoverAmount = approvalData.CoverAmount;
+            CalculationContinued = approvalData.CalculationContinued;
         }
 
         public virtual void Refuse(DateTime decisionDate, string refusalReason)
