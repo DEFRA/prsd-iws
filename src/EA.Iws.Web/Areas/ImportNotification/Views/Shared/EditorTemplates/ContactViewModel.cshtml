@@ -13,6 +13,7 @@
 
 <div class="form-group @Html.Gds().FormGroupClass(m => m.Telephone)">
     @Html.Gds().LabelFor(m => m.Telephone, false)
+    @Html.Gds().ValidationMessageFor(m => m.TelephonePrefix)
     @Html.Gds().ValidationMessageFor(m => m.Telephone)
     <div class="international-number">
         <div class="plus-label">

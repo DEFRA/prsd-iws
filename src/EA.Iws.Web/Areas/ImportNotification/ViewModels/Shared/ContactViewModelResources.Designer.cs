@@ -104,5 +104,14 @@ namespace EA.Iws.Web.Areas.ImportNotification.ViewModels.Shared {
                 return ResourceManager.GetString("TelephoneInvalid", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please enter a valid telephone prefix number.
+        /// </summary>
+        public static string TelephonePrefixInvalid {
+            get {
+                return ResourceManager.GetString("TelephonePrefixInvalid", resourceCulture);
+            }
+        }
     }
 }
