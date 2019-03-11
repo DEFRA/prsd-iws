@@ -26,8 +26,14 @@ AS
 		D.[NotificationReceivedDate] AS [NotificationReceivedDate],
 		MR.[Date] AS [MovementReceivedDate],
         MOR.[Date] AS [MovementCompletedDate],
-		WCEWC.Code AS [EwcCode],
-		WCYCODE.Code AS [YCode],
+		CASE
+			WHEN WCI_EWC.IsNotApplicable = 1 THEN 'Not applicable'
+			ELSE WC_EWC.Code
+		END AS [EwcCode],
+		CASE
+			WHEN WCI_YCODE.IsNotApplicable = 1 THEN 'Not applicable'
+			ELSE WC_YCODE.Code
+		END AS [YCode],
 		SE_EEP.[Name] AS [PointOfExit],
         SI_EEP.[Name] AS [PointOfEntry],
 		SE_C.[Name] AS [ExportCountryName],
@@ -78,9 +84,10 @@ AS
 		INNER JOIN [Lookup].[Country] SE_C ON SE_C.Id = SE.CountryId
 		INNER JOIN [Notification].[FacilityCollection] AS FC ON FC.NotificationId = N.Id
 		INNER JOIN [Notification].[Facility] F ON F.FacilityCollectionId = FC.NotificationId
-		INNER JOIN [Notification].[WasteCodeInfo] WCI ON WCI.NotificationId = N.Id
-		LEFT JOIN [Lookup].[WasteCode] WCEWC ON WCI.WasteCodeId = WCEWC.Id AND WCEWC.CodeType = 3
-		LEFT JOIN [Lookup].[WasteCode] WCYCODE ON WCI.WasteCodeId = WCYCODE.Id AND WCYCODE.CodeType = 3
+		INNER JOIN [Notification].[WasteCodeInfo] WCI_EWC ON WCI_EWC.NotificationId = N.Id AND WCI_EWC.CodeType = 3
+		LEFT JOIN [Lookup].[WasteCode] WC_EWC ON WCI_EWC.WasteCodeId = WC_EWC.Id
+		INNER JOIN [Notification].[WasteCodeInfo] WCI_YCODE ON WCI_YCODE.NotificationId = N.Id AND WCI_YCODE.CodeType = 4
+		LEFT JOIN [Lookup].[WasteCode] WC_YCODE ON WCI_YCODE.WasteCodeId = WC_YCODE.Id
 
 	UNION ALL
 
@@ -103,8 +110,11 @@ AS
 		D.[NotificationReceivedDate] AS [NotificationReceivedDate],
 		MR.[Date] AS [MovementReceivedDate],
         MOR.[Date] AS [MovementCompletedDate],
-		WCEWC.Code AS [EwcCode],
-		WCYCODE.Code AS [YCode],
+		WC_EWC.Code AS [EwcCode],
+		CASE
+			WHEN WT.YCodeNotApplicable = 1 THEN 'Not applicable'
+			ELSE WC_YCODE.Code
+		END AS [YCode],
 		SE_EEP.[Name] AS [PointOfExit],
         SI_EEP.[Name] AS [PointOfEntry],
 		SE_C.[Name] AS [ExportCountryName],
@@ -141,7 +151,7 @@ AS
 		INNER JOIN [ImportNotification].[FacilityCollection] AS FC ON FC.ImportNotificationId = N.Id
 		INNER JOIN [ImportNotification].[Facility] F ON F.FacilityCollectionId = FC.Id
 		INNER JOIN [ImportNotification].[WasteCode] WCI ON WT.Id = WCI.WasteTypeId
-		INNER JOIN [Lookup].[WasteCode] WCEWC ON WCI.WasteCodeId = WCEWC.Id AND WCEWC.CodeType = 3
-		LEFT JOIN [Lookup].[WasteCode] WCYCODE ON WCI.WasteCodeId = WCYCODE.Id AND WCEWC.CodeType = 4
+		INNER JOIN [Lookup].[WasteCode] WC_EWC ON WCI.WasteCodeId = WC_EWC.Id AND WC_EWC.CodeType = 3
+		LEFT JOIN [Lookup].[WasteCode] WC_YCODE ON WCI.WasteCodeId = WC_YCODE.Id AND WC_EWC.CodeType = 4
 
 GO
