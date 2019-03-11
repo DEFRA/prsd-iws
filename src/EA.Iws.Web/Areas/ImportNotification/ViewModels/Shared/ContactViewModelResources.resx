@@ -132,4 +132,7 @@
   <data name="TelephoneInvalid" xml:space="preserve">
     <value>Please enter a valid telephone number</value>
   </data>
+  <data name="TelephonePrefixInvalid" xml:space="preserve">
+    <value>Please enter a valid telephone prefix number</value>
+  </data>
 </root>
