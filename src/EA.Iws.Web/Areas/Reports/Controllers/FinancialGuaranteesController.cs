@@ -47,18 +47,18 @@
 
             var filename = string.Format("financial-guarantees-{0}.xlsx", SystemTime.UtcNow.ToShortDateString());
 
-            var columnsToRemove = new List<int>();
+            var columnsToRemove = new List<char>();
             var competentAuthority = await mediator.SendAsync(new GetUserCompetentAuthority());
 
             if (competentAuthority != UKCompetentAuthority.England 
                 && competentAuthority != UKCompetentAuthority.Wales)
             {
                 // CoverAmount
-                columnsToRemove.Add(10);
+                columnsToRemove.Add('J');
                 // CalculationContinued
-                columnsToRemove.Add(11);
+                columnsToRemove.Add('K');
                 // OverActiveLoads
-                columnsToRemove.Add(12);
+                columnsToRemove.Add('L');
             }
 
             return new XlsxActionResult<FinancialGuaranteesData>(report, filename, columnsToHide: string.Join(",", columnsToRemove));
