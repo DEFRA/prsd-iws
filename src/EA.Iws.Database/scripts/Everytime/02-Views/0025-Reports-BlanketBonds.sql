@@ -22,7 +22,9 @@ SELECT
         WHEN FG.[IsBlanketBond] = 1 THEN 'Yes'
         WHEN FG.[IsBlanketBond] = 0 THEN 'No'
         ELSE '- -' 
-    END AS [IsBlanketBond]
+    END AS [IsBlanketBond],
+    FG.[CoverAmount],
+    FG.[CalculationContinued]
 FROM
     [Notification].[Notification] N
     INNER JOIN  [Notification].[FinancialGuaranteeCollection] FGC

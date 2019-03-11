@@ -31,6 +31,8 @@
                       ,[ImporterName]
                       ,[ProducerName]
                       ,[IsBlanketBond]
+                      ,[CoverAmount]
+                      ,[CalculationContinued]
                   FROM [Reports].[BlanketBonds]
                  WHERE [CompetentAuthority] = @ca
                    AND (@financialGuaranteeReferenceNumber IS NULL OR [ReferenceNumber] LIKE '%' + @financialGuaranteeReferenceNumber + '%')
