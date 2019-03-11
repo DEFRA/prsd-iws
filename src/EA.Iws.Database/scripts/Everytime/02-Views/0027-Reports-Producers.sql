@@ -83,7 +83,7 @@ AS
 		INNER JOIN [Lookup].[Country] SI_C ON SI_C.Id = SI.CountryId
 		INNER JOIN [Lookup].[Country] SE_C ON SE_C.Id = SE.CountryId
 		INNER JOIN [Notification].[FacilityCollection] AS FC ON FC.NotificationId = N.Id
-		INNER JOIN [Notification].[Facility] F ON F.FacilityCollectionId = FC.NotificationId
+		INNER JOIN [Notification].[Facility] F ON F.FacilityCollectionId = FC.Id
 		INNER JOIN [Notification].[WasteCodeInfo] WCI_EWC ON WCI_EWC.NotificationId = N.Id AND WCI_EWC.CodeType = 3
 		LEFT JOIN [Lookup].[WasteCode] WC_EWC ON WCI_EWC.WasteCodeId = WC_EWC.Id
 		INNER JOIN [Notification].[WasteCodeInfo] WCI_YCODE ON WCI_YCODE.NotificationId = N.Id AND WCI_YCODE.CodeType = 4
