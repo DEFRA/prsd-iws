@@ -26,20 +26,8 @@ AS
 		D.[NotificationReceivedDate] AS [NotificationReceivedDate],
 		MR.[Date] AS [MovementReceivedDate],
         MOR.[Date] AS [MovementCompletedDate],
-		STUFF(( SELECT ', ' + WC.Code AS [text()]
-            FROM [Notification].[WasteCodeInfo] WCI
-            LEFT JOIN [Lookup].[WasteCode] WC ON WCI.WasteCodeId = WC.Id
-            WHERE WCI.NotificationId = N.Id AND WC.CodeType = 3
-            order by 1
-            FOR XML PATH('')
-            ), 1, 1, '' ) AS [EwcCode],
-		STUFF(( SELECT ', ' + WC.Code AS [text()]
-            FROM [Notification].[WasteCodeInfo] WCI
-            LEFT JOIN [Lookup].[WasteCode] WC ON WCI.WasteCodeId = WC.Id
-            WHERE WCI.NotificationId = N.Id AND WC.CodeType = 4
-            order by 1
-            FOR XML PATH('')
-            ), 1, 1, '' ) AS [YCode],
+		WCEWC.Code AS [EwcCode],
+		WCYCODE.Code AS [YCode],
 		SE_EEP.[Name] AS [PointOfExit],
         SI_EEP.[Name] AS [PointOfEntry],
 		SE_C.[Name] AS [ExportCountryName],
@@ -88,19 +76,11 @@ AS
 		INNER JOIN [Notification].[EntryOrExitPoint] SI_EEP ON SI_EEP.Id = SI.EntryPointId
 		INNER JOIN [Lookup].[Country] SI_C ON SI_C.Id = SI.CountryId
 		INNER JOIN [Lookup].[Country] SE_C ON SE_C.Id = SE.CountryId
-		INNER JOIN [Notification].[Facility] F
-        ON F.Id = 
-        (
-            SELECT TOP 1 F1.Id
-
-            FROM		[Notification].[FacilityCollection] AS FC
-
-            INNER JOIN	[Notification].[Facility] AS F1
-            ON			FC.Id = F1.FacilityCollectionId
-
-            WHERE		NotificationId = N.Id
-            ORDER BY	F1.IsActualSiteOfTreatment DESC
-        )
+		INNER JOIN [Notification].[FacilityCollection] AS FC ON FC.NotificationId = N.Id
+		INNER JOIN [Notification].[Facility] F ON F.FacilityCollectionId = FC.NotificationId
+		INNER JOIN [Notification].[WasteCodeInfo] WCI ON WCI.NotificationId = N.Id
+		LEFT JOIN [Lookup].[WasteCode] WCEWC ON WCI.WasteCodeId = WCEWC.Id AND WCEWC.CodeType = 3
+		LEFT JOIN [Lookup].[WasteCode] WCYCODE ON WCI.WasteCodeId = WCYCODE.Id AND WCYCODE.CodeType = 3
 
 	UNION ALL
 
@@ -123,22 +103,8 @@ AS
 		D.[NotificationReceivedDate] AS [NotificationReceivedDate],
 		MR.[Date] AS [MovementReceivedDate],
         MOR.[Date] AS [MovementCompletedDate],
-		STUFF(( SELECT ', ' + WC.Code AS [text()]
-            FROM [ImportNotification].[WasteType] WT
-            INNER JOIN [ImportNotification].[WasteCode] WCI ON WT.Id = WCI.WasteTypeId
-            INNER JOIN [Lookup].[WasteCode] WC ON WCI.WasteCodeId = WC.Id
-            WHERE WT.ImportNotificationId = N.Id AND WC.CodeType = 3
-            order by 1
-            FOR XML PATH('')
-            ), 1, 1, '' ) AS [EwcCode],
-		STUFF(( SELECT ', ' + WC.Code AS [text()]
-            FROM [ImportNotification].[WasteType] WT
-            INNER JOIN [ImportNotification].[WasteCode] WCI ON WT.Id = WCI.WasteTypeId
-            LEFT JOIN [Lookup].[WasteCode] WC ON WCI.WasteCodeId = WC.Id
-            WHERE WT.ImportNotificationId = N.Id AND WC.CodeType = 4
-            order by 1
-            FOR XML PATH('')
-            ), 1, 1, '' ) AS [YCode],
+		WCEWC.Code AS [EwcCode],
+		WCYCODE.Code AS [YCode],
 		SE_EEP.[Name] AS [PointOfExit],
         SI_EEP.[Name] AS [PointOfEntry],
 		SE_C.[Name] AS [ExportCountryName],
@@ -172,17 +138,10 @@ AS
 			FROM [Lookup].[Country] 
 			WHERE IsoAlpha2Code = 'GB' ) AS SI_C ON 1 = 1
 		INNER JOIN [Lookup].[Country] SE_C ON SE_C.Id = SE.CountryId
-		INNER JOIN [ImportNotification].[Facility] F
-        ON F.Id = 
-        (
-            SELECT TOP 1 F1.Id
+		INNER JOIN [ImportNotification].[FacilityCollection] AS FC ON FC.ImportNotificationId = N.Id
+		INNER JOIN [ImportNotification].[Facility] F ON F.FacilityCollectionId = FC.Id
+		INNER JOIN [ImportNotification].[WasteCode] WCI ON WT.Id = WCI.WasteTypeId
+		INNER JOIN [Lookup].[WasteCode] WCEWC ON WCI.WasteCodeId = WCEWC.Id AND WCEWC.CodeType = 3
+		LEFT JOIN [Lookup].[WasteCode] WCYCODE ON WCI.WasteCodeId = WCYCODE.Id AND WCEWC.CodeType = 4
 
-            FROM		[ImportNotification].[FacilityCollection] AS FC
-
-            INNER JOIN	[ImportNotification].[Facility] AS F1
-            ON			FC.Id = F1.FacilityCollectionId
-
-            WHERE		ImportNotificationId = N.Id
-            ORDER BY	F1.IsActualSiteOfTreatment DESC
-        )
 GO
