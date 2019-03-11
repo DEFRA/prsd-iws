@@ -27,6 +27,8 @@
         [Display(ResourceType = typeof(FinancialGuaranteeDecisionResources), Name = "CalculationContinued")]
         public decimal? CalculationContinued { get; set; }
 
+        public bool ShowExtraData { get; set; }
+
         public ApproveFinancialGuaranteeViewModel()
         {
             DecisionMadeDate = new OptionalDateInputViewModel();
@@ -83,7 +85,7 @@
             {
                 yield return new ValidationResult(FinancialGuaranteeDecisionResources.ReferenceNumberRequired, new[] { "ReferenceNumber" });
             }
-
+            
             if (!CoverAmount.HasValue)
             {
                 yield return new ValidationResult(FinancialGuaranteeDecisionResources.CoverAmountRequired, new[] { "CoverAmount" });
