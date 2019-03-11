@@ -21,18 +21,12 @@
 
         public bool IsBlanketbond { get; set; }
 
-        public decimal? CoverAmount { get; set; }
-
-        public decimal? CalculationContinued { get; set; }
-
         public ApproveFinancialGuarantee(Guid notificationId, 
             Guid financialGuaranteeId,
             DateTime decisionDate,
             string blanketBondReference,
             int activeLoadsPermitted,
-            bool isBlanketBond,
-            decimal? coverAmount,
-            decimal? calculationContinued)
+            bool isBlanketBond)
         {
             Guard.ArgumentNotZeroOrNegative(() => activeLoadsPermitted, activeLoadsPermitted);
 
@@ -42,8 +36,6 @@
             ActiveLoadsPermitted = activeLoadsPermitted;
             ReferenceNumber = blanketBondReference;
             IsBlanketbond = isBlanketBond;
-            CoverAmount = coverAmount;
-            CalculationContinued = calculationContinued;
         }
     }
 }
