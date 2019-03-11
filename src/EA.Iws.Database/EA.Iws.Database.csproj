@@ -101,6 +101,7 @@
     <Content Include="scripts\Update\0005-Beta\Sprint7\20190304-1730-AlterReportShipmentsTable.sql" />
     <Content Include="scripts\Update\0005-Beta\Sprint7\20190228-1147-AddExpoirtNotificationCommentsTable.sql" />
     <Content Include="scripts\Update\0005-Beta\Sprint7\20190228-1147-AddImportNotificationCommentsTable.sql" />
+    <Content Include="scripts\Update\0005-Beta\Sprint7\20190308-1620-alter-foi-report-table2.sql" />
     <Content Include="unindexed-foreign-keys.sql" />
     <Content Include="scripts\Everytime\01-Functions\0003-Reports-PricingInfo.sql" />
     <Content Include="scripts\Everytime\03-StoredProcedures\0003-uspUpdateImportNotificationKeyDates.sql" />

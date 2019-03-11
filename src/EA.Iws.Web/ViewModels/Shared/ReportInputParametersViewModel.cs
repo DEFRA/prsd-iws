@@ -36,8 +36,8 @@
 
         public ReportInputParametersViewModel(Type dateType, Type textFieldType, Type textOperatorType)
         {
-            FromDate = new RequiredDateInputViewModel(true);
-            ToDate = new RequiredDateInputViewModel(true);
+            FromDate = new RequiredDateInputViewModel();
+            ToDate = new RequiredDateInputViewModel();
 
             var textFieldTypes = EnumHelper.GetValues(textFieldType);
             textFieldTypes.Add(-1, "View all");

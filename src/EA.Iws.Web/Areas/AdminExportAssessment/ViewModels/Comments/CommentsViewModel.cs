@@ -2,6 +2,7 @@ namespace EA.Iws.Web.Areas.AdminExportAssessment.ViewModels.Comments
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel;
     using System.ComponentModel.DataAnnotations;
     using System.Web.Mvc;
     using Core.Admin;
@@ -43,7 +44,6 @@ namespace EA.Iws.Web.Areas.AdminExportAssessment.ViewModels.Comments
         }
 
         public string SelectedFilter { get; set; }
-
         private string shipmentNumberStr;
         public string ShipmentNumberStr
         {
