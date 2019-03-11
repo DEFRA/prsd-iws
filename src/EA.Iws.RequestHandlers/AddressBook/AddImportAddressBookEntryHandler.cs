@@ -112,7 +112,7 @@
             var address = await GetAddress(producer.Address);
             var contact = GetContact(producer.Contact);
 
-            FinalBusiness business = FinalBusiness.CreateOtherBusiness(producer.BusinessName, notApplicable, notApplicable, notApplicable);
+            FinalBusiness business = FinalBusiness.CreateOtherBusiness(producer.BusinessName, notApplicable, null, notApplicable);
 
             return new AddressBookRecord(address, business, contact);
         }
@@ -136,11 +136,11 @@
             FinalBusiness business;
             if (importer.Type == Core.Shared.BusinessType.Other)
             {
-                business = FinalBusiness.CreateOtherBusiness(importer.BusinessName, importer.RegistrationNumber, notApplicable, notApplicable);
+                business = FinalBusiness.CreateOtherBusiness(importer.BusinessName, importer.RegistrationNumber, null, notApplicable);
             }
             else
             {
-                business = FinalBusiness.CreateBusiness(importer.BusinessName, importer.Type.GetValueOrDefault(), importer.RegistrationNumber, notApplicable);
+                business = FinalBusiness.CreateBusiness(importer.BusinessName, importer.Type.GetValueOrDefault(), importer.RegistrationNumber, null);
             }
 
             return new AddressBookRecord(address, business, contact);
@@ -156,11 +156,11 @@
             FinalBusiness business;
             if (facility.Type == Core.Shared.BusinessType.Other)
             {
-                business = FinalBusiness.CreateOtherBusiness(facility.BusinessName, facility.RegistrationNumber, notApplicable, notApplicable);
+                business = FinalBusiness.CreateOtherBusiness(facility.BusinessName, facility.RegistrationNumber, null, notApplicable);
             }
             else
             {
-                business = FinalBusiness.CreateBusiness(facility.BusinessName, facility.Type.GetValueOrDefault(), facility.RegistrationNumber, notApplicable);
+                business = FinalBusiness.CreateBusiness(facility.BusinessName, facility.Type.GetValueOrDefault(), facility.RegistrationNumber, null);
             }
             return new AddressBookRecord(address, business, contact);
         }
