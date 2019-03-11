@@ -168,7 +168,7 @@
         private async Task<FinalAddress> GetAddress(Address address)
         {
             var country = await context.Countries.SingleAsync(c => c.Id == address.CountryId);
-            return new FinalAddress(address.AddressLine1, address.AddressLine2, address.TownOrCity, string.Empty, address.PostalCode, country.Name);
+            return new FinalAddress(address.AddressLine1, address.AddressLine2, address.TownOrCity, null, address.PostalCode, country.Name);
         }
 
         private FinalContact GetContact(Contact contact)
