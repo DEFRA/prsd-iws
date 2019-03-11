@@ -57,6 +57,8 @@
                 columnsToRemove.Add(10);
                 // CalculationContinued
                 columnsToRemove.Add(11);
+                // OverActiveLoads
+                columnsToRemove.Add(12);
             }
 
             return new XlsxActionResult<FinancialGuaranteesData>(report, filename, columnsToHide: string.Join(",", columnsToRemove));

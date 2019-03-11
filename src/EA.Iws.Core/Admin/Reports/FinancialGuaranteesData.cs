@@ -27,5 +27,8 @@
         public decimal? CoverAmount { get; set; }
 
         public decimal? CalculationContinued { get; set; }
+
+        [DisplayName("Over active loads (Y/N)")]
+        public string OverActiveLoads { get; set; }
     }
 }

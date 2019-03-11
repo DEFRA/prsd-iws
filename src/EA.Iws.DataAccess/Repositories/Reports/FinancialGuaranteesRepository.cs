@@ -33,6 +33,7 @@
                       ,[IsBlanketBond]
                       ,[CoverAmount]
                       ,[CalculationContinued]
+                      ,[OverActiveLoads]
                   FROM [Reports].[BlanketBonds]
                  WHERE [CompetentAuthority] = @ca
                    AND (@financialGuaranteeReferenceNumber IS NULL OR [ReferenceNumber] LIKE '%' + @financialGuaranteeReferenceNumber + '%')
