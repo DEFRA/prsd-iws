@@ -18,17 +18,9 @@
         [Display(ResourceType = typeof(FinancialGuaranteeDecisionResources), Name = "DecisionMadeDate")]
         public OptionalDateInputViewModel DecisionMadeDate { get; set; }
 
-        [Display(ResourceType = typeof(FinancialGuaranteeDecisionResources), Name = "CoverAmount")]
-        public decimal? CoverAmount { get; set; }
-
         [Display(ResourceType = typeof(FinancialGuaranteeDecisionResources), Name = "ActiveLoadsPermitted")]
         public int? ActiveLoadsPermitted { get; set; }
-
-        [Display(ResourceType = typeof(FinancialGuaranteeDecisionResources), Name = "CalculationContinued")]
-        public decimal? CalculationContinued { get; set; }
-
-        public bool ShowExtraData { get; set; }
-
+        
         public ApproveFinancialGuaranteeViewModel()
         {
             DecisionMadeDate = new OptionalDateInputViewModel();
@@ -84,44 +76,6 @@
             if (string.IsNullOrWhiteSpace(ReferenceNumber))
             {
                 yield return new ValidationResult(FinancialGuaranteeDecisionResources.ReferenceNumberRequired, new[] { "ReferenceNumber" });
-            }
-            
-            if (!CoverAmount.HasValue)
-            {
-                yield return new ValidationResult(FinancialGuaranteeDecisionResources.CoverAmountRequired, new[] { "CoverAmount" });
-            }
-
-            if (CoverAmount.HasValue && CoverAmount.Value.ToString().Contains("."))
-            {
-                var splitArray = CoverAmount.Value.ToString().Split('.');
-                if (splitArray.Length > 2 || splitArray[1].Length > 2)
-                {
-                    yield return new ValidationResult(FinancialGuaranteeDecisionResources.CoverAmountDecimalPlaces, new[] { "CoverAmount" });
-                }
-            }
-
-            if (CoverAmount.HasValue && CoverAmount.Value > (decimal)9999999.99)
-            {
-                yield return new ValidationResult(FinancialGuaranteeDecisionResources.CoverAmountTooMuch, new[] { "CoverAmount" });
-            }
-
-            if (!CalculationContinued.HasValue)
-            {
-                yield return new ValidationResult(FinancialGuaranteeDecisionResources.CalculationContinuedRequired, new[] { "CalculationContinued" });
-            }
-
-            if (CalculationContinued.HasValue && CalculationContinued.Value.ToString().Contains("."))
-            {
-                var splitArray = CalculationContinued.Value.ToString().Split('.');
-                if (splitArray.Length > 2 || splitArray[1].Length > 2)
-                {
-                    yield return new ValidationResult(FinancialGuaranteeDecisionResources.CalculationContinuedDecimalPlaces, new[] { "CalculationContinued" });
-                }
-            }
-
-            if (CalculationContinued.HasValue && CalculationContinued.Value > (decimal)9999999.99)
-            {
-                yield return new ValidationResult(FinancialGuaranteeDecisionResources.CalculationContinuedTooMuch, new[] { "CalculationContinued" });
             }
         }
     }
