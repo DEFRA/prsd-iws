@@ -62,7 +62,20 @@ namespace EA.Iws.Web.Areas.AdminImportAssessment.Controllers
                 TempData.Remove("shipmentNumber");
             }
 
-            var comments = await this.mediator.SendAsync(new GetImportNotificationComments(id, type, page, startDate, endDate, shipmentNumber));
+            string user;
+            if (filter == "user" && TempData.ContainsKey("user"))
+            {
+                user = TempData["user"].ToString();
+                TempData["user"] = user;
+            }
+            else
+            {
+                user = null;
+                TempData.Remove("user");
+            }
+
+            var comments = await this.mediator.SendAsync(new GetImportNotificationComments(id, type, page, startDate, endDate, shipmentNumber, user));
+            var users = await this.mediator.SendAsync(new GetImportNotificationCommentsUsers(id, type));
 
             CommentsViewModel model = new CommentsViewModel
             {
@@ -74,8 +87,14 @@ namespace EA.Iws.Web.Areas.AdminImportAssessment.Controllers
                 PageNumber = comments.PageNumber,
                 PageSize = comments.PageSize,
                 TotalNumberOfFilteredComments = comments.NumberOfFilteredComments,
-                Comments = comments.NotificationComments.OrderBy(p => p.ShipmentNumber).ThenBy(p => p.DateAdded).ToList()
+                Comments = comments.NotificationComments.OrderBy(p => p.ShipmentNumber).ThenByDescending(p => p.DateAdded).ToList(),
+                SelectedUser = user
             };
+
+            foreach (KeyValuePair<string, string> u in users.Users)
+            {
+                model.Users.Add(u.Key, u.Value);
+            }
 
             model.SetDates(startDate, endDate);
 
@@ -95,9 +114,14 @@ namespace EA.Iws.Web.Areas.AdminImportAssessment.Controllers
 
             if (command == "search" && !ModelState.IsValid)
             {
-                var comments = await this.mediator.SendAsync(new GetImportNotificationComments(id, model.Type, model.PageNumber, null, null, null));
+                var comments = await this.mediator.SendAsync(new GetImportNotificationComments(id, model.Type, model.PageNumber, null, null, null, null));
+                var users = await this.mediator.SendAsync(new GetImportNotificationCommentsUsers(id, model.Type));
                 model.TotalNumberOfComments = comments.NumberOfComments;
                 model.Comments = comments.NotificationComments.ToList();
+                foreach (KeyValuePair<string, string> u in users.Users)
+                {
+                    model.Users.Add(u.Key, u.Value);
+                }
 
                 return View(model);
             }
@@ -114,6 +138,11 @@ namespace EA.Iws.Web.Areas.AdminImportAssessment.Controllers
             if (model.SelectedFilter == "shipment")
             {
                 TempData["shipmentNumber"] = model.ShipmentNumber;
+            }
+
+            if (model.SelectedFilter == "user")
+            {
+                TempData["user"] = model.SelectedUser;
             }
 
             return RedirectToAction("Index", new { filter = model.SelectedFilter, type = model.Type });
@@ -147,7 +176,7 @@ namespace EA.Iws.Web.Areas.AdminImportAssessment.Controllers
         [HttpGet]
         public async Task<ActionResult> Delete(Guid id, Guid commentId, NotificationShipmentsCommentsType type)
         {
-            var comments = await this.mediator.SendAsync(new GetImportNotificationComments(id, type, 1, null, null, null));
+            var comments = await this.mediator.SendAsync(new GetImportNotificationComments(id, type, 1, null, null, null, null));
 
             DeleteCommentViewModel model = new DeleteCommentViewModel()
             {
@@ -194,6 +223,18 @@ namespace EA.Iws.Web.Areas.AdminImportAssessment.Controllers
                     if (shipmentNumberErrors == null || shipmentNumberErrors.Errors.Count == 0)
                     {
                         ModelState.AddModelError("shipmentNumberStr", "Enter a valid shipment number");
+                    }
+                }
+            }
+            else if (filter == "user")
+            {
+                // Get all of the date property names and then remove them from the modelstate errors
+                List<string> properties = GetViewModelDatePropertyNames();
+                foreach (string name in properties)
+                {
+                    if (ModelState.ContainsKey(name))
+                    {
+                        ModelState[name].Errors.Clear();
                     }
                 }
             }

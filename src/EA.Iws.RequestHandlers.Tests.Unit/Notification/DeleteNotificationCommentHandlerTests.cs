@@ -4,7 +4,7 @@
     using System.Threading.Tasks;
     using EA.Iws.Domain.NotificationAssessment;
     using EA.Iws.RequestHandlers.NotificationAssessment;
-    using EA.Iws.Requests.ImportNotificationAssessment;
+    using EA.Iws.Requests.NotificationAssessment;
     using FakeItEasy;
     using Xunit;
 

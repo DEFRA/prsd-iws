@@ -17,6 +17,8 @@ namespace EA.Iws.Web.Areas.AdminImportAssessment.ViewModels.Comments
 
         public List<InternalComment> Comments { get; set; }
 
+        public Dictionary<string, string> Users { get; set; }
+
         public SelectList FilterTerms
         {
             get
@@ -25,12 +27,29 @@ namespace EA.Iws.Web.Areas.AdminImportAssessment.ViewModels.Comments
 
                 filterTerms.Insert(0, new SelectListItem { Text = "View all", Value = string.Empty });
                 filterTerms.Insert(1, new SelectListItem { Text = "Date", Value = "date" });
+                filterTerms.Insert(2, new SelectListItem { Text = "User", Value = "user" });
                 if (this.Type == NotificationShipmentsCommentsType.Shipments)
                 {
-                    filterTerms.Insert(2, new SelectListItem { Text = "Shipment Number", Value = "shipment" });
+                    filterTerms.Insert(3, new SelectListItem { Text = "Shipment Number", Value = "shipment" });
                 }
 
                 return new SelectList(filterTerms, "Value", "Text", "View all");
+            }
+        }
+
+        public SelectList UserFilters
+        {
+            get
+            {
+                var users = new List<SelectListItem>();
+                int i = 0;
+                foreach (KeyValuePair<string, string> user in this.Users)
+                {
+                    users.Insert(i, new SelectListItem { Text = user.Value, Value = user.Key });
+                    i++;
+                }
+
+                return new SelectList(users, "Value", "Text", this.SelectedUser);
             }
         }
 
@@ -43,6 +62,8 @@ namespace EA.Iws.Web.Areas.AdminImportAssessment.ViewModels.Comments
         }
 
         public string SelectedFilter { get; set; }
+
+        public string SelectedUser { get; set; }
 
         private string shipmentNumberStr;
         public string ShipmentNumberStr
@@ -88,6 +109,8 @@ namespace EA.Iws.Web.Areas.AdminImportAssessment.ViewModels.Comments
 
             this.From = new DateEntryViewModel(showLabels: false);
             this.To = new DateEntryViewModel(showLabels: false);
+
+            this.Users = new Dictionary<string, string>();
         }
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)

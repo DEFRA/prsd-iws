@@ -125,6 +125,7 @@
     <Compile Include="ImportNotificationAssessment\FinancialGuarantee\ReceivedAndCompletedDateData.cs" />
     <Compile Include="ImportNotificationAssessment\ImportNotificationAssessmentDecisionData.cs" />
     <Compile Include="ImportNotificationAssessment\ImportNotificationCommentsData.cs" />
+    <Compile Include="ImportNotificationAssessment\ImportNotificationCommentsUsersData.cs" />
     <Compile Include="ImportNotificationAssessment\ImportNotificationStatus.cs" />
     <Compile Include="ImportNotificationAssessment\KeyDatesData.cs" />
     <Compile Include="ImportNotificationAssessment\Transactions\AccountOverviewData.cs" />
@@ -223,6 +224,7 @@
     <Compile Include="NotificationAssessment\NotificationAssessmentDecisionData.cs" />
     <Compile Include="NotificationAssessment\NotificationAttentionSummaryTableData.cs" />
     <Compile Include="NotificationAssessment\NotificationCommentData.cs" />
+    <Compile Include="NotificationAssessment\NotificationCommentsUsersData.cs" />
     <Compile Include="NotificationAssessment\NotificationTransactionData.cs" />
     <Compile Include="Notification\Audit\NotificationAudit.cs" />
     <Compile Include="Notification\Audit\NotificationAuditForDisplay.cs" />
