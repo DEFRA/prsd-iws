@@ -1,9 +1,8 @@
 ﻿namespace EA.Iws.RequestHandlers.NotificationAssessment
 {
     using System.Threading.Tasks;
-    using EA.Iws.Domain.ImportNotificationAssessment;
     using EA.Iws.Domain.NotificationAssessment;
-    using EA.Iws.Requests.ImportNotificationAssessment;
+    using EA.Iws.Requests.NotificationAssessment;
     using EA.Prsd.Core.Mediator;
 
     internal class DeleteNotificationCommentHandler : IRequestHandler<DeleteNotificationComment, bool>

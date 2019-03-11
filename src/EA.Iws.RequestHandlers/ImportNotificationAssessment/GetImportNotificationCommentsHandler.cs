@@ -26,8 +26,8 @@
 
         public async Task<ImportNotificationCommentsData> HandleAsync(GetImportNotificationComments message)
         {
-            var pagedComments = await this.repository.GetPagedComments(message.NotificationId, message.Type, message.PageNumber, PageSize, message.StartDate, message.EndDate, message.ShipmentNumber);
-            var allComments = await this.repository.GetComments(message.NotificationId, message.Type, message.StartDate, message.EndDate, message.ShipmentNumber);
+            var pagedComments = await this.repository.GetPagedComments(message.NotificationId, message.Type, message.PageNumber, PageSize, message.StartDate, message.EndDate, message.ShipmentNumber, message.UserId);
+            var allComments = await this.repository.GetComments(message.NotificationId, message.Type, message.StartDate, message.EndDate, message.ShipmentNumber, message.UserId);
 
             ImportNotificationCommentsData returnData = new ImportNotificationCommentsData();
             returnData.NotificationComments = MapReturnData(pagedComments);

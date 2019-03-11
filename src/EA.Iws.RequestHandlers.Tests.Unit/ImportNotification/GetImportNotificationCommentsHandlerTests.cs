@@ -27,7 +27,7 @@ namespace EA.Iws.RequestHandlers.Tests.Unit.ImportNotification
             this.repo = A.Fake<IImportNotificationCommentRepository>();
             this.mapper = A.Fake<IMap<ImportNotificationComment, InternalComment>>();
 
-               A.CallTo(() => repo.GetPagedComments(A<Guid>.Ignored, A<NotificationShipmentsCommentsType>.Ignored, A<int>.Ignored, A<int>.Ignored, A<DateTime>.Ignored, A<DateTime>.Ignored, A<int>.Ignored)).Returns(this.GetFakeComments());
+               A.CallTo(() => repo.GetPagedComments(A<Guid>.Ignored, A<NotificationShipmentsCommentsType>.Ignored, A<int>.Ignored, A<int>.Ignored, A<DateTime>.Ignored, A<DateTime>.Ignored, A<int>.Ignored, A<String>.Ignored)).Returns(this.GetFakeComments());
             this.message = A.Fake<GetImportNotificationComments>();
             this.handler = new GetImportNotificationCommentsHandler(this.repo, this.mapper);
         }
@@ -38,7 +38,7 @@ namespace EA.Iws.RequestHandlers.Tests.Unit.ImportNotification
             var result = await handler.HandleAsync(this.message);
 
             Assert.Equal(GetFakeComments().Count, result.NotificationComments.Count);
-            A.CallTo(() => this.repo.GetPagedComments(A<Guid>.Ignored, A<NotificationShipmentsCommentsType>.Ignored, A<int>.Ignored, A<int>.Ignored, A<DateTime>.Ignored, A<DateTime>.Ignored, A<int>.Ignored))
+            A.CallTo(() => this.repo.GetPagedComments(A<Guid>.Ignored, A<NotificationShipmentsCommentsType>.Ignored, A<int>.Ignored, A<int>.Ignored, A<DateTime>.Ignored, A<DateTime>.Ignored, A<int>.Ignored, A<String>.Ignored))
                .MustHaveHappened();
         }
 

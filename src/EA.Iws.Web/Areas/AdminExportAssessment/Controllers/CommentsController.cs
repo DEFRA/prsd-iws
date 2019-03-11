@@ -8,7 +8,6 @@ namespace EA.Iws.Web.Areas.AdminExportAssessment.Controllers
     using System.Web.Mvc;
     using Core.Admin;
     using Core.Authorization.Permissions;
-    using EA.Iws.Requests.ImportNotificationAssessment;
     using EA.Iws.Web.ViewModels.Shared;
     using Infrastructure;
     using Infrastructure.Authorization;
@@ -37,8 +36,8 @@ namespace EA.Iws.Web.Areas.AdminExportAssessment.Controllers
                 startDate = DateTime.Parse(TempData["startDate"].ToString());
                 endDate = DateTime.Parse(TempData["endDate"].ToString());
 
-                TempData["startDate"] = startDate.ToString();
-                TempData["endDate"] = endDate.ToString();
+                TempData["startDate"] = filter == "date" ? startDate.ToString() : null;
+                TempData["endDate"] = filter == "date" ? endDate.ToString() : null;
             }
             else
             {
@@ -62,7 +61,20 @@ namespace EA.Iws.Web.Areas.AdminExportAssessment.Controllers
                 TempData.Remove("shipmentNumber");
             }
 
-            var comments = await this.mediator.SendAsync(new GetNotificationComments(id, type, page, startDate, endDate, shipmentNumber));
+            string user;
+            if (filter == "user" && TempData.ContainsKey("user"))
+            {
+                user = TempData["user"].ToString();
+                TempData["user"] = user;
+            }
+            else
+            {
+                user = null;
+                TempData.Remove("user");
+            }
+
+            var comments = await this.mediator.SendAsync(new GetNotificationComments(id, type, page, startDate, endDate, shipmentNumber, user));
+            var users = await this.mediator.SendAsync(new GetNotificationCommentsUsers(id, type));
 
             CommentsViewModel model = new CommentsViewModel
             {
@@ -74,8 +86,14 @@ namespace EA.Iws.Web.Areas.AdminExportAssessment.Controllers
                 PageNumber = comments.PageNumber,
                 PageSize = comments.PageSize,
                 TotalNumberOfFilteredComments = comments.NumberOfFilteredComments,
-                Comments = comments.NotificationComments.OrderBy(p => p.ShipmentNumber).ThenBy(p => p.DateAdded).ToList()
+                Comments = comments.NotificationComments.OrderBy(p => p.ShipmentNumber).ThenByDescending(p => p.DateAdded).ToList(),
+                SelectedUser = user
             };
+
+            foreach (KeyValuePair<string, string> u in users.Users)
+            {
+                model.Users.Add(u.Key, u.Value);
+            }
 
             model.SetDates(startDate, endDate);
 
@@ -95,9 +113,14 @@ namespace EA.Iws.Web.Areas.AdminExportAssessment.Controllers
 
             if (command == "search" && !ModelState.IsValid)
             {
-                var comments = await this.mediator.SendAsync(new GetNotificationComments(id, model.Type, model.PageNumber, null, null, null));
+                var comments = await this.mediator.SendAsync(new GetNotificationComments(id, model.Type, model.PageNumber, null, null, null, null));
+                var users = await this.mediator.SendAsync(new GetNotificationCommentsUsers(id, model.Type));
                 model.TotalNumberOfComments = comments.NumberOfComments;
                 model.Comments = comments.NotificationComments.ToList();
+                foreach (KeyValuePair<string, string> u in users.Users)
+                {
+                    model.Users.Add(u.Key, u.Value);
+                }
 
                 return View(model);
             }
@@ -114,6 +137,11 @@ namespace EA.Iws.Web.Areas.AdminExportAssessment.Controllers
             if (model.SelectedFilter == "shipment")
             {
                 TempData["shipmentNumber"] = model.ShipmentNumber;
+            }
+
+            if (model.SelectedFilter == "user")
+            {
+                TempData["user"] = model.SelectedUser;
             }
 
             return RedirectToAction("Index", new { filter = model.SelectedFilter, type = model.Type });
@@ -147,7 +175,7 @@ namespace EA.Iws.Web.Areas.AdminExportAssessment.Controllers
         [HttpGet]
         public async Task<ActionResult> Delete(Guid id, Guid commentId, NotificationShipmentsCommentsType type)
         {
-            var comments = await this.mediator.SendAsync(new GetNotificationComments(id, type, 1, null, null, null));
+            var comments = await this.mediator.SendAsync(new GetNotificationComments(id, type, 1, null, null, null, null));
 
             DeleteCommentViewModel model = new DeleteCommentViewModel()
             {
@@ -197,6 +225,18 @@ namespace EA.Iws.Web.Areas.AdminExportAssessment.Controllers
                     }
                 }
             }
+            else if (filter == "user")
+            {
+                // Get all of the date property names and then remove them from the modelstate errors
+                List<string> properties = GetViewModelDatePropertyNames();
+                foreach (string name in properties)
+                {
+                    if (ModelState.ContainsKey(name))
+                    {
+                        ModelState[name].Errors.Clear();
+                    }
+                }
+            }
             else if (filter == "date")
             {
                 if (ModelState.ContainsKey("shipmentNumberStr"))
@@ -226,6 +266,6 @@ namespace EA.Iws.Web.Areas.AdminExportAssessment.Controllers
             }
 
             return datePropertyNames;
-       }
+        }
     }
 }
