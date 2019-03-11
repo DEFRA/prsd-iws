@@ -47,6 +47,7 @@
 
                 var dateClass = Model.SelectedFilter == "date" ? "" : "class=hidden";
                 var shipmentClass = Model.SelectedFilter == "shipment" ? "" : "class=hidden";
+                var userClass = Model.SelectedFilter == "user" ? "" : "class=hidden";
 
                 <div @dateClass id="dateSection">
                     <div class="form-group @Html.Gds().FormGroupClass(m => m.From) @Html.Gds().FormGroupClass(m => m.From.Day) @Html.Gds().FormGroupClass(m => m.From.Month) @Html.Gds().FormGroupClass(m => m.From.Year)">
@@ -81,6 +82,21 @@
                         <div class="form-group">
                             <button class="button" type="submit" name="command" value="search">Search</button>
                         </div>
+                    </div>
+                    <br />
+                </div>
+
+                <div @userClass id="userSection">
+
+                    <div>
+                        User:
+                    </div>
+                    <div>
+                        @Html.Gds().DropDownListFor(m => m.SelectedUser, Model.UserFilters, new { @id = "userSelectList" })
+                    </div>
+                    <br />
+                    <div class="form-group">
+                        <button class="button" type="submit" name="command" value="search">Search</button>
                     </div>
                     <br />
                 </div>
@@ -178,14 +194,22 @@ else
 
                 var dateSection = $("#dateSection");
                 var shipmentSection = $("#shipmentSection");
+                var userSection = $("#userSection");
 
                 if (SelectedValue == "date") {
                     dateSection.removeClass('hidden');
                     shipmentSection.addClass('hidden');
+                    userSection.addClass('hidden')
                 }
                 else if (SelectedValue == "shipment") {
                     shipmentSection.removeClass('hidden');
                     dateSection.addClass('hidden');
+                    userSection.addClass('hidden')
+                }
+                else if (SelectedValue == "user") {
+                    userSection.removeClass('hidden')
+                    dateSection.addClass('hidden');
+                    shipmentSection.addClass('hidden');
                 }
                 else {
                     $("form").submit();

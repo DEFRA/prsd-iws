@@ -17,8 +17,9 @@
         public DateTime EndDate { get; private set; }
         public int ShipmentNumber { get; private set; }
         public int PageNumber { get; private set; }
+        public string UserId { get; private set; }
 
-        public GetImportNotificationComments(Guid notificationId, NotificationShipmentsCommentsType type, int pageNumber, DateTime? startDate, DateTime? endDate, int? shipmentNumber)
+        public GetImportNotificationComments(Guid notificationId, NotificationShipmentsCommentsType type, int pageNumber, DateTime? startDate, DateTime? endDate, int? shipmentNumber, string userId)
         {
             this.NotificationId = notificationId;
             this.Type = type;
@@ -26,6 +27,7 @@
             this.StartDate = startDate == null ? DateTime.MinValue : startDate.GetValueOrDefault();
             this.EndDate = endDate == null ? DateTime.MaxValue : endDate.GetValueOrDefault();
             this.ShipmentNumber = shipmentNumber.GetValueOrDefault();
+            this.UserId = userId;
         }
     }
 }

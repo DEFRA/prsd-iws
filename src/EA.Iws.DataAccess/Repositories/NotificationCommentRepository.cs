@@ -24,22 +24,27 @@
 
             return true;
         }
-        
-        public async Task<List<NotificationComment>> GetComments(Guid notificationId, NotificationShipmentsCommentsType type, DateTime startDate, DateTime endDate, int shipmentNumber)
+
+        public async Task<List<NotificationComment>> GetComments(Guid notificationId, NotificationShipmentsCommentsType type, DateTime startDate, DateTime endDate, int shipmentNumber, string user)
         {
             var allCommentsForType = await this.GetCommentsByType(notificationId, type);
 
             DateTime endDateForQuery = endDate == DateTime.MaxValue ? endDate : endDate.AddDays(1);
 
-            if (shipmentNumber == default(int))
+            if (shipmentNumber != default(int))
             {
-                return allCommentsForType.Where(p => p.DateAdded >= startDate && p.DateAdded < endDateForQuery).ToList();
+                return allCommentsForType.Where(p => p.DateAdded >= startDate && p.DateAdded < endDateForQuery && p.ShipmentNumber == shipmentNumber).ToList();
             }
 
-            return allCommentsForType.Where(p => p.DateAdded >= startDate && p.DateAdded < endDateForQuery && p.ShipmentNumber == shipmentNumber).ToList();
+            if (user != null)
+            {
+                return allCommentsForType.Where(p => p.DateAdded >= startDate && p.DateAdded < endDateForQuery && p.UserId == user).ToList();
+            }
+
+            return allCommentsForType.Where(p => p.DateAdded >= startDate && p.DateAdded < endDateForQuery).ToList();
         }
 
-        public async Task<List<NotificationComment>> GetPagedComments(Guid notificationId, NotificationShipmentsCommentsType type, int pageNumber, int pageSize, DateTime startDate, DateTime endDate, int shipmentNumber)
+        public async Task<List<NotificationComment>> GetPagedComments(Guid notificationId, NotificationShipmentsCommentsType type, int pageNumber, int pageSize, DateTime startDate, DateTime endDate, int shipmentNumber, string user)
         {
             var allCommentsForType = await this.GetCommentsByType(notificationId, type);
 
@@ -49,6 +54,11 @@
             if (shipmentNumber != default(int))
             {
                 returnComments = returnComments.Where(p => p.ShipmentNumber == shipmentNumber);
+            }
+
+            if (user != null)
+            {
+                returnComments = returnComments.Where(p => p.UserId == user);
             }
 
             return returnComments
@@ -81,6 +91,13 @@
             }
 
             return await context.NotificationComments.CountAsync(p => p.NotificationId == notificationId && p.ShipmentNumber == 0);
+        }
+
+        public async Task<List<string>> GetUsers(Guid notificationId, NotificationShipmentsCommentsType type)
+        {
+            var allComments = await this.GetCommentsByType(notificationId, type);
+
+            return allComments.Select(p => p.UserId).Distinct().ToList();
         }
 
         private async Task<IEnumerable<NotificationComment>> GetCommentsByType(Guid notificationId, NotificationShipmentsCommentsType type)

@@ -8,10 +8,12 @@
     public interface INotificationCommentRepository
     {
         Task<bool> Add(NotificationComment comment);
-        Task<List<NotificationComment>> GetComments(Guid notificationId, NotificationShipmentsCommentsType type, DateTime startDate, DateTime endDate, int shipmentNumber);
-        Task<List<NotificationComment>> GetPagedComments(Guid notificationId, NotificationShipmentsCommentsType type, int pageNumber, int pageSize, DateTime startDate, DateTime endDate, int shipmentNumber);
+        Task<List<NotificationComment>> GetComments(Guid notificationId, NotificationShipmentsCommentsType type, DateTime startDate, DateTime endDate, int shipmentNumber, string user);
+        Task<List<NotificationComment>> GetPagedComments(Guid notificationId, NotificationShipmentsCommentsType type, int pageNumber, int pageSize, DateTime startDate, DateTime endDate, int shipmentNumber, string user);
 
         Task<bool> Delete(Guid commentId);
         Task<int> GetTotalNumberOfComments(Guid notificationId, NotificationShipmentsCommentsType type);
+
+        Task<List<String>> GetUsers(Guid notificationId, NotificationShipmentsCommentsType type);
     }
 }
