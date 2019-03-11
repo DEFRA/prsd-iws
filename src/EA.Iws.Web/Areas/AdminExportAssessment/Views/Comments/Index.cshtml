@@ -41,8 +41,7 @@
                 <div>
                     @Html.Gds().DropDownListFor(m => m.SelectedFilter, Model.FilterTerms, new { @id = "filterSelectList" })
                 </div>
-
-
+				<br />
                 <br />
 
                 var dateClass = Model.SelectedFilter == "date" ? "" : "class=hidden";
