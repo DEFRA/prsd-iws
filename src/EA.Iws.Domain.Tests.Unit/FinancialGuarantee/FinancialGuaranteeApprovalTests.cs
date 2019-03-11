@@ -31,7 +31,7 @@
             var approvedFinancialGuarantee = financialGuaranteeCollection.AddFinancialGuarantee(today.AddDays(-10));
             EntityHelper.SetEntityId(approvedFinancialGuarantee, approvedFinancialGuaranteeId);
             approvedFinancialGuarantee.Complete(today.AddDays(-9));
-            approvedFinancialGuarantee.Approve(new ApprovalData(today.AddDays(-8), "123", 10, false));
+            approvedFinancialGuarantee.Approve(new ApprovalData(today.AddDays(-8), "123", 10, false, (decimal)12.34, (decimal)56.78));
 
             var newFinancialGuarantee = financialGuaranteeCollection.AddFinancialGuarantee(today.AddDays(-5));
             newFinancialGuarantee.Complete(today.AddDays(-4));
@@ -50,7 +50,7 @@
         [Fact]
         public async Task SetsStatusToApproved()
         {
-            await approval.Approve(notificationId, financialGuaranteeId, new ApprovalData(today, "456", 5, false));
+            await approval.Approve(notificationId, financialGuaranteeId, new ApprovalData(today, "456", 5, false, (decimal)12.34, (decimal)56.78));
 
             var financialGuarantee = financialGuaranteeCollection.GetFinancialGuarantee(financialGuaranteeId);
 
@@ -60,7 +60,7 @@
         [Fact]
         public async Task SameReferenceNumber_OldFinancialGuaranteeIsSuperseded()
         {
-            await approval.Approve(notificationId, financialGuaranteeId, new ApprovalData(today, "123", 5, false));
+            await approval.Approve(notificationId, financialGuaranteeId, new ApprovalData(today, "123", 5, false, (decimal)12.34, (decimal)56.78));
 
             var oldFinancialGuarantee = financialGuaranteeCollection.GetFinancialGuarantee(approvedFinancialGuaranteeId);
 
@@ -70,7 +70,7 @@
         [Fact]
         public async Task NewReferenceNumber_OldFinancialGuaranteeIsReleased()
         {
-            await approval.Approve(notificationId, financialGuaranteeId, new ApprovalData(today, "456", 5, false));
+            await approval.Approve(notificationId, financialGuaranteeId, new ApprovalData(today, "456", 5, false, (decimal)12.34, (decimal)56.78));
 
             var oldFinancialGuarantee = financialGuaranteeCollection.GetFinancialGuarantee(approvedFinancialGuaranteeId);
 
@@ -80,7 +80,7 @@
         [Fact]
         public async Task ReleaseDateIsTodaysDate()
         {
-            await approval.Approve(notificationId, financialGuaranteeId, new ApprovalData(today.AddDays(-1), "456", 5, false));
+            await approval.Approve(notificationId, financialGuaranteeId, new ApprovalData(today.AddDays(-1), "456", 5, false, (decimal)12.34, (decimal)56.78));
 
             var oldFinancialGuarantee = financialGuaranteeCollection.GetFinancialGuarantee(approvedFinancialGuaranteeId);
 

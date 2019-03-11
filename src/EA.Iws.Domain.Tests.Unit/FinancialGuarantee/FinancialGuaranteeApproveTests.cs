@@ -9,18 +9,19 @@
     {
         private const int AnyInt = 7;
         private const string BlanketBondReference = "ref 23";
+        private const decimal AnyDec = (decimal)12.34;
 
         private readonly Action<FinancialGuarantee> setGuaranteeApproved =
             fg =>
                 fg.Approve(new ApprovalData(AfterCompletionDate, 
                     BlanketBondReference, 
-                    AnyInt, false));
+                    AnyInt, false, AnyDec, AnyDec));
 
         private readonly Action<FinancialGuarantee> setGuaranteeApprovedIsBlanketBond =
             fg =>
                 fg.Approve(new ApprovalData(AfterCompletionDate,
                     BlanketBondReference,
-                    AnyInt, true));
+                    AnyInt, true, AnyDec, AnyDec));
 
         [Fact]
         public void StatusNotCompletedThrows()
@@ -33,7 +34,7 @@
         {
             Assert.Throws<InvalidOperationException>(
                 () =>
-                    CompletedFinancialGuarantee.Approve(new ApprovalData(BeforeCompletionDate, BlanketBondReference, AnyInt, true)));
+                    CompletedFinancialGuarantee.Approve(new ApprovalData(BeforeCompletionDate, BlanketBondReference, AnyInt, true, AnyDec, AnyDec)));
         }
 
         [Fact]
