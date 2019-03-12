@@ -41,7 +41,7 @@
         {
             @Html.Gds().TextBoxFor(m => m.Month, new
             {
-                type = "number", min = "1", max = "12", data_type = (Model.IsAutoTabEnabled) ? "date" : string.Empty,
+                type = "number", data_type = (Model.IsAutoTabEnabled) ? "date" : string.Empty,
                 placeholder = Model.ShowLabels ? string.Empty : "MM"
             })
         }
