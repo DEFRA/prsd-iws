@@ -63,7 +63,7 @@ namespace EA.Iws.Web.Areas.AdminImportAssessment.Controllers
             }
 
             string user;
-            if (filter == "user" && TempData.ContainsKey("user"))
+            if (filter == "name" && TempData.ContainsKey("user"))
             {
                 user = TempData["user"].ToString();
                 TempData["user"] = user;
@@ -140,7 +140,7 @@ namespace EA.Iws.Web.Areas.AdminImportAssessment.Controllers
                 TempData["shipmentNumber"] = model.ShipmentNumber;
             }
 
-            if (model.SelectedFilter == "user")
+            if (model.SelectedFilter == "name")
             {
                 TempData["user"] = model.SelectedUser;
             }
@@ -226,7 +226,7 @@ namespace EA.Iws.Web.Areas.AdminImportAssessment.Controllers
                     }
                 }
             }
-            else if (filter == "user")
+            else if (filter == "name")
             {
                 // Get all of the date property names and then remove them from the modelstate errors
                 List<string> properties = GetViewModelDatePropertyNames();
