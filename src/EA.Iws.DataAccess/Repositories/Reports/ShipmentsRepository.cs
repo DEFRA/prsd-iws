@@ -21,11 +21,7 @@
             ShipmentsReportDates dateType, ShipmentReportTextFields? textFieldType,
             TextFieldOperator? textFieldOperatorType, string textSearch)
         {
-            var overrideOperator = textFieldOperatorType != TextFieldOperator.DoesNotContain &&
-                textFieldType.HasValue &&
-                (textFieldType.Value == ShipmentReportTextFields.EwcCodes
-                || textFieldType.Value == ShipmentReportTextFields.YCode) ? TextFieldOperator.Contains : textFieldOperatorType;
-            var textFilter = TextFilterHelper.GetTextFilter(textFieldType, overrideOperator, textSearch);
+            var textFilter = TextFilterHelper.GetTextFilter(textFieldType, textFieldOperatorType, textSearch);
             textFilter = !string.IsNullOrEmpty(textFilter) ? string.Format("AND {0}", textFilter) : string.Empty;
 
             var query = @"SELECT 
