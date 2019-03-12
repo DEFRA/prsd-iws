@@ -152,7 +152,7 @@ namespace EA.Iws.Web.Areas.AdminExportAssessment.ViewModels.Comments
 
                 if (startDate > endDate)
                 {
-                    yield return new ValidationResult("The from date must be before the to date", new[] { "StartYear" });
+                    yield return new ValidationResult("The from date must be before the to date", new[] { "From" });
                 }
             }
         }
