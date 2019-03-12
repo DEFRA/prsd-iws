@@ -67,9 +67,10 @@
                 s.ExporterName,
                 s.WasteType,
                 s.Status,
-                (s.Status == NotificationStatus.Consented || s.Status == NotificationStatus.ConsentWithdrawn) 
-                    && (s.FinancialGuarantees.FirstOrDefault() != null && (s.FinancialGuarantees.FirstOrDefault().GetCurrentApprovedFinancialGuarantee() ??
-                    s.FinancialGuarantees.FirstOrDefault().GetLatestFinancialGuarantee()).Status == FinancialGuaranteeStatus.Approved))).ToList();
+                (s.Status == NotificationStatus.Consented || s.Status == NotificationStatus.ConsentWithdrawn)
+                    && s.FinancialGuarantees.FirstOrDefault() != null && 
+                    ((s.FinancialGuarantees.FirstOrDefault().GetCurrentApprovedFinancialGuarantee() != null && s.FinancialGuarantees.FirstOrDefault().GetCurrentApprovedFinancialGuarantee().Status == FinancialGuaranteeStatus.Approved) || 
+                    (s.FinancialGuarantees.FirstOrDefault().GetLatestFinancialGuarantee() != null && s.FinancialGuarantees.FirstOrDefault().GetLatestFinancialGuarantee().Status == FinancialGuaranteeStatus.Approved)))).ToList();
         }
 
         private static BasicSearchResult ConvertToSearchResults(Guid notificationId, string notificationNumber,
