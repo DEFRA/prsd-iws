@@ -26,7 +26,7 @@ namespace EA.Iws.Web.Areas.AdminExportAssessment.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult> Index(Guid id, string filter = "", NotificationShipmentsCommentsType type = NotificationShipmentsCommentsType.Notification, int page = 1)
+        public async Task<ActionResult> Index(Guid id, string filter, NotificationShipmentsCommentsType type = NotificationShipmentsCommentsType.Notification, int page = 1)
         {
             DateTime startDate = new DateTime();
             DateTime endDate = new DateTime();
