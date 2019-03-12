@@ -14,8 +14,7 @@
 
         [DataType(DataType.PhoneNumber)]
         [Display(Name = "TelephonePrefix", ResourceType = typeof(ContactViewModelResources))]
-        [StringLength(3)]
-        [RegularExpression("\\d+", ErrorMessageResourceType = typeof(ContactViewModelResources), ErrorMessageResourceName = "TelephonePrefixInvalid")]
+        [RegularExpression(@"(\b\d{1,3}\b)", ErrorMessageResourceType = typeof(ContactViewModelResources), ErrorMessageResourceName = "TelephonePrefixInvalid")]
         public string TelephonePrefix { get; set; }
 
         [EmailAddress(ErrorMessageResourceType = typeof(ContactViewModelResources), ErrorMessageResourceName = "EmailInvalid", ErrorMessage = null)]
