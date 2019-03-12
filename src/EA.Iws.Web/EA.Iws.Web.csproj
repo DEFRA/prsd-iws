@@ -1243,7 +1243,17 @@
     <Compile Include="Areas\AdminExportAssessment\Controllers\UpdateJourneyController.cs" />
     <Compile Include="Areas\AdminExportAssessment\ViewModels\Annex\DownloadAnnexViewModel.cs" />
     <Compile Include="Areas\AdminExportAssessment\ViewModels\Comments\AddCommentsViewModel.cs" />
+    <Compile Include="Areas\AdminExportAssessment\ViewModels\Comments\CommentsResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CommentsResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Areas\AdminExportAssessment\ViewModels\Comments\CommentsViewModel.cs" />
+    <Compile Include="Areas\AdminImportAssessment\ViewModels\Comments\CommentsResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CommentsResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="ViewModels\Shared\DateEntryViewModel.cs" />
     <Compile Include="Areas\AdminExportAssessment\ViewModels\Comments\DeleteCommentViewModel.cs" />
     <Compile Include="Areas\AdminExportAssessment\ViewModels\DateInputViewModelResources.Designer.cs">
@@ -3686,6 +3696,10 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>DecisionControllerResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Areas\AdminExportAssessment\ViewModels\Comments\CommentsResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>CommentsResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Areas\AdminExportAssessment\ViewModels\DateInputViewModelResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>DateInputViewModelResources.Designer.cs</LastGenOutput>
@@ -3875,6 +3889,10 @@
     <EmbeddedResource Include="Areas\AdminImportAssessment\Controllers\DecisionControllerResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>DecisionControllerResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\AdminImportAssessment\ViewModels\Comments\CommentsResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>CommentsResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\AdminImportAssessment\ViewModels\Decision\DecisionViewModelResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
