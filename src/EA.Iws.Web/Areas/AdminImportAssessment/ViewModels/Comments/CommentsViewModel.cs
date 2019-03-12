@@ -27,7 +27,7 @@ namespace EA.Iws.Web.Areas.AdminImportAssessment.ViewModels.Comments
 
                 filterTerms.Insert(0, new SelectListItem { Text = "View all", Value = string.Empty });
                 filterTerms.Insert(1, new SelectListItem { Text = "Date", Value = "date" });
-                filterTerms.Insert(2, new SelectListItem { Text = "User", Value = "user" });
+                filterTerms.Insert(2, new SelectListItem { Text = "Name", Value = "name" });
                 if (this.Type == NotificationShipmentsCommentsType.Shipments)
                 {
                     filterTerms.Insert(3, new SelectListItem { Text = "Shipment Number", Value = "shipment" });
