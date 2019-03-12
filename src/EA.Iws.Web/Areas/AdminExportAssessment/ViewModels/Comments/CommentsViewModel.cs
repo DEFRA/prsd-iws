@@ -128,14 +128,14 @@ namespace EA.Iws.Web.Areas.AdminExportAssessment.ViewModels.Comments
                 bool isValidstartDate = SystemTime.TryParse(this.From.Year.GetValueOrDefault(), this.From.Month.GetValueOrDefault(), this.From.Day.GetValueOrDefault(), out startDate);
                 if (!isValidstartDate)
                 {
-                    yield return new ValidationResult("Please enter a valid start date", new[] { "From" });
+                    yield return new ValidationResult("Please enter a valid from date", new[] { "From" });
                 }
 
                 DateTime endDate;
                 bool isValidEndDate = SystemTime.TryParse(this.To.Year.GetValueOrDefault(), this.To.Month.GetValueOrDefault(), this.To.Day.GetValueOrDefault(), out endDate);
                 if (!isValidEndDate)
                 {
-                    yield return new ValidationResult("Please enter a valid end date", new[] { "To" });
+                    yield return new ValidationResult("Please enter a valid to date", new[] { "To" });
                 }
 
                 if (!isValidEndDate || !isValidstartDate)
