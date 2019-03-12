@@ -122,7 +122,7 @@
             var address = await GetAddress(exporter.Address);
             var contact = GetContact(exporter.Contact);
 
-            FinalBusiness business = FinalBusiness.CreateOtherBusiness(exporter.BusinessName, notApplicable, notApplicable, notApplicable);
+            FinalBusiness business = FinalBusiness.CreateOtherBusiness(exporter.BusinessName, notApplicable, null, notApplicable);
             return new AddressBookRecord(address, business, contact);
         }
 
