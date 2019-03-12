@@ -86,7 +86,7 @@ namespace EA.Iws.Web.Areas.AdminExportAssessment.Controllers
                 PageNumber = comments.PageNumber,
                 PageSize = comments.PageSize,
                 TotalNumberOfFilteredComments = comments.NumberOfFilteredComments,
-                Comments = comments.NotificationComments.OrderBy(p => p.ShipmentNumber).ThenByDescending(p => p.DateAdded).ToList(),
+                Comments = comments.NotificationComments.OrderByDescending(p => p.ShipmentNumber).ThenByDescending(p => p.DateAdded).ToList(),
                 SelectedUser = user
             };
 
