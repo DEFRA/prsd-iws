@@ -24,7 +24,7 @@
             var textFilter = TextFilterHelper.GetTextFilter(textFieldType, textFieldOperatorType, textSearch);
             textFilter = !string.IsNullOrEmpty(textFilter) ? string.Format("AND {0}", textFilter) : string.Empty;
 
-            var query = @"SELECT 
+            var query = @"SELECT DISTINCT 
                     [NotificationNumber],
                     [ImportOrExport],
                     [Exporter],
@@ -64,7 +64,10 @@
                      OR @dateType = 'CompletedDate' and  [CompletedDate] BETWEEN @from AND @to
                      OR @dateType = 'ActualDateOfShipment' and  [ActualDateOfShipment] BETWEEN @from AND @to
                      OR @dateType = 'RejectedShipmentDate' and  [RejectedShipmentDate] BETWEEN @from AND @to)
-                {0}";            
+                {0}
+                ORDER BY
+                    [NotificationNumber],
+                    [ShipmentNumber]";            
 
             return await context.Database.SqlQuery<Shipment>(string.Format(query, textFilter),
                 new SqlParameter("@from", from),
