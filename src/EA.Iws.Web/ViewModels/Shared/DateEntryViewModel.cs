@@ -7,10 +7,8 @@
 
     public class DateEntryViewModel : IValidatableObject
     {
-        [Range(1, 31)]
         public int? Day { get; set; }
 
-        [Range(1, 12)]
         public int? Month { get; set; }
 
         public int? Year { get; set; }
@@ -27,6 +25,7 @@
                 && Month.HasValue
                 && Year.HasValue
                 && Year.Value > 1 && Year.Value < 9999
+                && Month.Value > 0 && Month.Value < 13
                 && Day.Value <= DateTime.DaysInMonth(Year.Value, Month.Value);
             }
         }
