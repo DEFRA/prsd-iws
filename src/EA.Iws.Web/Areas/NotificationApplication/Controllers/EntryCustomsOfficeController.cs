@@ -116,7 +116,7 @@
             {
                 return RedirectToAction("Index", "Home", new { id });
             }
-            return RedirectToAction("Index", "Shipment", new { id });
+            return RedirectToAction("Index", "ExitCustomsOffice", new { id, backToOverview = backToOverview });
         }
     }
 }
