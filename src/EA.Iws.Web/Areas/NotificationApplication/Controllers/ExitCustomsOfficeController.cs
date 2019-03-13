@@ -112,7 +112,7 @@
 
             var addSelection = await mediator.SendAsync(new SetExitCustomsOfficeSelectionForNotificationById(id, model.CustomsOfficeRequired.GetValueOrDefault()));
 
-            return RedirectToAction("Index", "EntryCustomsOffice", new { id, backToOverview = backToOverview });
+            return RedirectToAction("Index", "Shipment", new { id });
         }
     }
 }
