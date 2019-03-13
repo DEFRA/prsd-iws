@@ -78,7 +78,7 @@
         }
 
         [Fact]
-        public async Task Index_CustomOfficesEntryAndExit_RedirectsToExitCustomsOfficePage()
+        public async Task Index_CustomOfficesEntryAndExit_RedirectsToEntryCustomsOfficePage()
         {
             A.CallTo(
                 () => mediator.SendAsync(A<GetCustomsCompletionStatusByNotificationId>.Ignored)).Returns(new CustomsOfficeCompletionStatus
@@ -88,7 +88,7 @@
 
             var result = await controller.Index(guid) as RedirectToRouteResult;
 
-            result.AssertControllerReturn("Index", "ExitCustomsOffice");
+            result.AssertControllerReturn("Index", "EntryCustomsOffice");
         }
 
         [Fact]
@@ -107,7 +107,7 @@
         }
 
         [Fact]
-        public async Task Index_CustomOfficesEntryAndExitWithExitAlreadyCompleted_RedirectsToExit()
+        public async Task Index_CustomOfficesEntryAndExitWithExitAlreadyCompleted_RedirectsToEntry()
         {
             A.CallTo(
                () => mediator.SendAsync(A<GetCustomsCompletionStatusByNotificationId>.Ignored)).Returns(new CustomsOfficeCompletionStatus
@@ -117,7 +117,7 @@
 
             var result = await controller.Index(guid) as RedirectToRouteResult;
 
-            result.AssertControllerReturn("Index", "ExitCustomsOffice");
+            result.AssertControllerReturn("Index", "EntryCustomsOffice");
             Assert.Equal(guid, result.RouteValues["id"]);
         }
     }
