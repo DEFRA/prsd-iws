@@ -441,6 +441,7 @@
     <Compile Include="NotificationAssessment\AddNotificationCommentHandler.cs" />
     <Compile Include="NotificationAssessment\AddProducerHandler.cs" />
     <Compile Include="NotificationAssessment\AddTransitStateHandler.cs" />
+    <Compile Include="NotificationAssessment\CheckFinancialGuranteeStatusHandler.cs" />
     <Compile Include="NotificationAssessment\DeleteExportNotificationHandler.cs" />
     <Compile Include="NotificationAssessment\DeleteNotificationCommentHandler.cs" />
     <Compile Include="NotificationAssessment\DeleteTransactionHandler.cs" />
