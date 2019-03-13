@@ -88,14 +88,15 @@
                         LEFT JOIN [Notification].[FinancialGuarantee] FG ON FG.Id = 
                             (SELECT TOP 1 FG1.Id from [Notification].[FinancialGuarantee] FG1 
                             WHERE FG1.FinancialGuaranteeCollectionId = FGC.Id
-                            AND FG1.Status = {3})
+                            AND (FG1.Status = {3} OR FG1.Status = {4}))
                 WHERE
                     N.[Id] IN ({0})";
 
             var query = string.Format(queryFormat, string.Join(",", parameters.Select(x => x.ParameterName)),
                 EnumHelper.GetDisplayName(NotificationStatus.Consented),
                 EnumHelper.GetDisplayName(NotificationStatus.ConsentWithdrawn),
-                (int)FinancialGuaranteeStatus.Approved);
+                (int)FinancialGuaranteeStatus.Approved,
+                (int)FinancialGuaranteeStatus.Released);
 
             return await context.Database.SqlQuery<ExportAdvancedSearchResult>(query, parameters).ToListAsync();
         }
