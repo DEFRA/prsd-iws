@@ -319,7 +319,7 @@ AS
     INNER JOIN	[ImportNotification].[NotificationDates] AS ND
     ON			ND.[NotificationAssessmentId] = NA.Id
 
-	INNER JOIN	[Lookup].[NotificationStatus] NS  
+	INNER JOIN	[Lookup].[ImportNotificationStatus] NS  
 	ON [NS].[Id] = [NA].[Status]
 
     LEFT JOIN   [ImportNotification].[WasteType] WasteType
