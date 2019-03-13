@@ -19,7 +19,7 @@ namespace EA.Iws.Web.Areas.AdminImportAssessment.Views.Comments {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class IndexResources {
@@ -106,6 +106,15 @@ namespace EA.Iws.Web.Areas.AdminImportAssessment.Views.Comments {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Please limit your comment to 500 characters or less..
+        /// </summary>
+        public static string CommentLimitHint {
+            get {
+                return ResourceManager.GetString("CommentLimitHint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Review comments.
         /// </summary>
         public static string CommentsHeader {
@@ -142,7 +151,7 @@ namespace EA.Iws.Web.Areas.AdminImportAssessment.Views.Comments {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Are you sure you want to permenantly delete this comment?.
+        ///   Looks up a localized string similar to Are you sure you want to permanently delete this comment?.
         /// </summary>
         public static string DeleteHeader {
             get {

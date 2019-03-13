@@ -61,7 +61,7 @@
                 x.Exporter == null ? string.Empty : x.Exporter.Name,
                 x.Importer == null ? string.Empty : x.Importer.Name,
                 x.Notification.NotificationType,
-                x.Assessment.Status.Equals(ImportNotificationStatus.Consented) || x.Assessment.Status.Equals(ImportNotificationStatus.ConsentWithdrawn)));
+                x.Assessment != null && (x.Assessment.Status == ImportNotificationStatus.Consented || x.Assessment.Status == ImportNotificationStatus.ConsentWithdrawn)));
         }
     }
 }

@@ -50,7 +50,8 @@
                             }
                             return RedirectToAction("Index", "Home", new { id = info.Id, area = "AdminExportNotificationMovements" });
                         case NotificationStatus.ConsentWithdrawn:
-                            if (financialGuaranteeDecisionRequired)
+                            var hasHadAnyFinancialGuarantee = await mediator.SendAsync(new CheckFinancialGuaranteeStatus(info.Id.Value));
+                            if (!hasHadAnyFinancialGuarantee)
                             {
                                 return RedirectToAction("Index", "Home", new { id = info.Id, area = "AdminExportAssessment" });
                             }

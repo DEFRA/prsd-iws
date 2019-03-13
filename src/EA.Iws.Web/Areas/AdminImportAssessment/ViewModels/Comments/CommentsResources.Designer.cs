@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace EA.Iws.Web.Areas.ImportNotification.ViewModels.Shared {
+namespace EA.Iws.Web.Areas.AdminImportAssessment.ViewModels.Comments {
     using System;
     
     
@@ -22,24 +22,24 @@ namespace EA.Iws.Web.Areas.ImportNotification.ViewModels.Shared {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class ContactViewModelResources {
+    internal class CommentsResources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal ContactViewModelResources() {
+        internal CommentsResources() {
         }
         
         /// <summary>
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        public static global::System.Resources.ResourceManager ResourceManager {
+        internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EA.Iws.Web.Areas.ImportNotification.ViewModels.Shared.ContactViewModelResources", typeof(ContactViewModelResources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EA.Iws.Web.Areas.AdminImportAssessment.ViewModels.Comments.CommentsResources", typeof(CommentsResources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -51,7 +51,7 @@ namespace EA.Iws.Web.Areas.ImportNotification.ViewModels.Shared {
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        public static global::System.Globalization.CultureInfo Culture {
+        internal static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -61,65 +61,20 @@ namespace EA.Iws.Web.Areas.ImportNotification.ViewModels.Shared {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Email address.
+        ///   Looks up a localized string similar to Comment must be 500 characters or less.
         /// </summary>
-        public static string Email {
+        internal static string CommentsMaxLength {
             get {
-                return ResourceManager.GetString("Email", resourceCulture);
+                return ResourceManager.GetString("CommentsMaxLength", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Please enter a valid email address.
+        ///   Looks up a localized string similar to The shipment number cannot be greater than 6 digits.
         /// </summary>
-        public static string EmailInvalid {
+        internal static string ShipmentNumberMaxLength {
             get {
-                return ResourceManager.GetString("EmailInvalid", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Full name.
-        /// </summary>
-        public static string Name {
-            get {
-                return ResourceManager.GetString("Name", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Telephone number.
-        /// </summary>
-        public static string Telephone {
-            get {
-                return ResourceManager.GetString("Telephone", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Please enter a valid telephone number.
-        /// </summary>
-        public static string TelephoneInvalid {
-            get {
-                return ResourceManager.GetString("TelephoneInvalid", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Telephone prefix.
-        /// </summary>
-        public static string TelephonePrefix {
-            get {
-                return ResourceManager.GetString("TelephonePrefix", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Please enter a valid telephone prefix number with a maximum length of 3.
-        /// </summary>
-        public static string TelephonePrefixInvalid {
-            get {
-                return ResourceManager.GetString("TelephonePrefixInvalid", resourceCulture);
+                return ResourceManager.GetString("ShipmentNumberMaxLength", resourceCulture);
             }
         }
     }

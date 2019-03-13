@@ -55,7 +55,9 @@
                                          OR @dateType = 'ConsentTo' AND  [ConsentTo] BETWEEN @from AND @to
                                          OR @dateType = 'ReceivedDate' AND [MovementReceivedDate] BETWEEN @from AND @to
                                          OR @dateType = 'CompletedDate' AND [MovementCompletedDate] BETWEEN @from AND @to)
-                    {0}";
+                    {0}
+                ORDER BY
+                    [NotificationNumber]";
 
             return await context.Database.SqlQuery<ProducerData>(string.Format(query, textFilter),
                 new SqlParameter("@dateType", dateType.ToString()),

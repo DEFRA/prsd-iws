@@ -79,7 +79,7 @@ namespace EA.Iws.Web.Areas.Reports.Views.FreedomOfInformation {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to FOI Report.
+        ///   Looks up a localized string similar to FOI report.
         /// </summary>
         public static string Heading {
             get {
@@ -115,7 +115,7 @@ namespace EA.Iws.Web.Areas.Reports.Views.FreedomOfInformation {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to FOI Report.
+        ///   Looks up a localized string similar to FOI report.
         /// </summary>
         public static string Title {
             get {
