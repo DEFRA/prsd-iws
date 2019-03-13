@@ -132,6 +132,9 @@
   <data name="CancelButton" xml:space="preserve">
     <value>Cancel</value>
   </data>
+  <data name="CommentLimitHint" xml:space="preserve">
+    <value>Please limit your comment to 500 characters or less.</value>
+  </data>
   <data name="CommentsHeader" xml:space="preserve">
     <value>Review  comments</value>
   </data>
