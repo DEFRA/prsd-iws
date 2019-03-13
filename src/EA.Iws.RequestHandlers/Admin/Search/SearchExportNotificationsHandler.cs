@@ -56,11 +56,11 @@
                         WasteType = s.Notification.WasteType.ChemicalCompositionType,
                         s.Assessment.Status,
                         s.Notification.CompetentAuthority,
-                        FinancialGuarantees = s.FinancialGuarantees
+                        FinancialGuaranteeCollection = s.FinancialGuarantees.FirstOrDefault()
                     })
                 .OrderBy(x => x.NotificationNumber)
                 .ToListAsync();
-            
+
             return result.Select(s => ConvertToSearchResults(
                 s.Id,
                 s.NotificationNumber,
@@ -68,9 +68,10 @@
                 s.WasteType,
                 s.Status,
                 (s.Status == NotificationStatus.Consented || s.Status == NotificationStatus.ConsentWithdrawn)
-                    && s.FinancialGuarantees.FirstOrDefault() != null && 
-                    ((s.FinancialGuarantees.FirstOrDefault().GetCurrentApprovedFinancialGuarantee() != null && s.FinancialGuarantees.FirstOrDefault().GetCurrentApprovedFinancialGuarantee().Status == FinancialGuaranteeStatus.Approved) || 
-                    (s.FinancialGuarantees.FirstOrDefault().GetLatestFinancialGuarantee() != null && s.FinancialGuarantees.FirstOrDefault().GetLatestFinancialGuarantee().Status == FinancialGuaranteeStatus.Approved)))).ToList();
+                    && s.FinancialGuaranteeCollection != null &&
+                    s.FinancialGuaranteeCollection.FinancialGuarantees != null &&
+                    s.FinancialGuaranteeCollection.FinancialGuarantees.Any(fg => fg.Status == FinancialGuaranteeStatus.Approved || 
+                                                                           fg.Status == FinancialGuaranteeStatus.Released))).ToList();
         }
 
         private static BasicSearchResult ConvertToSearchResults(Guid notificationId, string notificationNumber,
