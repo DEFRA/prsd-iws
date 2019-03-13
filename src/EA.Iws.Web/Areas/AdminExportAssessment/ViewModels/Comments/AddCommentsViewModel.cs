@@ -28,7 +28,6 @@
         public string Comment { get; set; }
 
         [DisplayName("Shipment number")]
-        [MaxLength(6, ErrorMessageResourceType = typeof(CommentsResources), ErrorMessageResourceName = "ShipmentNumberMaxLength")]
         public string ShipmentNumberStr { get; set; }
 
         public int? ShipmentNumber

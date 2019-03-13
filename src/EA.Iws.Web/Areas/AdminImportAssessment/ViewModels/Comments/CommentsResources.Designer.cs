@@ -61,7 +61,7 @@ namespace EA.Iws.Web.Areas.AdminImportAssessment.ViewModels.Comments {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The comment cannot be greater than 500 characters.
+        ///   Looks up a localized string similar to Comment must be 500 characters or less.
         /// </summary>
         internal static string CommentsMaxLength {
             get {

@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="CommentsMaxLength" xml:space="preserve">
-    <value>The comment cannot be greater than 500 characters</value>
+    <value>Comment must be 500 characters or less</value>
   </data>
   <data name="ShipmentNumberMaxLength" xml:space="preserve">
     <value>The shipment number cannot be greater than 6 digits</value>
