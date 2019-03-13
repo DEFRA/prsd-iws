@@ -22,7 +22,7 @@
 {
     <div class="grid-row">
         <div class="column-two-thirds">
-            @using (Html.BeginForm())
+            @using (Html.BeginForm("Index", "UpdateHistory", new { }, FormMethod.Post, new { id = "historyForm" }))
             {
                 @Html.AntiForgeryToken()
                 @Html.Gds().ValidationSummary()
@@ -168,7 +168,9 @@ else
     <script>
         $(function () {
             $("#@Html.NameFor(m => m.SelectedScreen)").change(function () {
-                $("form").submit();
+                var theForm = document.getElementById("historyForm");
+
+                theForm.submit();
             });
         });
     </script>

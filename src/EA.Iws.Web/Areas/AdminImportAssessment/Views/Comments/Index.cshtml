@@ -29,7 +29,7 @@
     <div class="grid-row">
         <div class="column-two-thirds">
 
-            @using (Html.BeginForm())
+            @using (Html.BeginForm("Index", "Comments", new { type = Model.Type, filter = Model.SelectedFilter }, FormMethod.Post, new { id = "commentsForm" }))
             {
                 @Html.AntiForgeryToken()
                 @Html.Gds().ValidationSummary()
@@ -42,7 +42,7 @@
                     @Html.Gds().DropDownListFor(m => m.SelectedFilter, Model.FilterTerms, new { @id = "filterSelectList" })
                 </div>
 
-				<br />
+                <br />
                 <br />
 
                 var dateClass = Model.SelectedFilter == "date" ? "" : "class=hidden";
@@ -212,7 +212,9 @@ else
                     shipmentSection.addClass('hidden');
                 }
                 else {
-                    $("form").submit();
+                    var theForm = document.getElementById("commentsForm");
+
+                    theForm.submit();
                 }
             });
         });
