@@ -292,7 +292,7 @@ SELECT
     INNER JOIN [Lookup].[ChemicalCompositionType] CCT ON CCT.Id = WT.ChemicalCompositionType
     INNER JOIN [ImportNotification].[Shipment] S ON S.ImportNotificationId = N.Id
     INNER JOIN [Lookup].[ShipmentQuantityUnit] SU ON SU.Id = S.Units
-	INNER JOIN	[Lookup].[NotificationStatus] NS  ON [NS].[Id] = [NA].[Status]
+	INNER JOIN	[Lookup].[ImportNotificationStatus] NS  ON [NS].[Id] = [NA].[Status]
 	INNER JOIN	[ImportNotification].[WasteOperation] WO ON WO.ImportNotificationId = N.Id
     LEFT JOIN [ImportNotification].[WasteType] WasteType
         INNER JOIN [ImportNotification].[WasteCode] WasteCode ON WasteType.Id = WasteCode.WasteTypeId
