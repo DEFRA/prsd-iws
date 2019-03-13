@@ -8,7 +8,6 @@ namespace EA.Iws.Web.Areas.AdminImportAssessment.Controllers
     using System.Web.Mvc;
     using Core.Admin;
     using Core.Authorization.Permissions;
-    using EA.Iws.Core.ImportNotificationAssessment;
     using EA.Iws.Web.ViewModels.Shared;
     using Infrastructure;
     using Infrastructure.Authorization;
@@ -31,48 +30,10 @@ namespace EA.Iws.Web.Areas.AdminImportAssessment.Controllers
         {
             DateTime startDate = new DateTime();
             DateTime endDate = new DateTime();
+            int? shipmentNumber = null;
+            string user = string.Empty;
 
-            if (filter == "date" && TempData.ContainsKey("startDate") && TempData.ContainsKey("endDate"))
-            {
-                startDate = DateTime.Parse(TempData["startDate"].ToString());
-                endDate = DateTime.Parse(TempData["endDate"].ToString());
-
-                TempData["startDate"] = filter == "date" ? startDate.ToString() : null;
-                TempData["endDate"] = filter == "date" ? endDate.ToString() : null;
-            }
-            else
-            {
-                startDate = DateTime.MinValue;
-                endDate = DateTime.MaxValue;
-                TempData.Remove("startDate");
-                TempData.Remove("endDate");
-            }
-
-            int? shipmentNumber;
-
-            if (filter == "shipment" && TempData.ContainsKey("shipmentNumber"))
-            {
-                shipmentNumber = int.Parse(TempData["shipmentNumber"].ToString());
-
-                TempData["shipmentNumber"] = shipmentNumber.ToString();
-            }
-            else
-            {
-                shipmentNumber = null;
-                TempData.Remove("shipmentNumber");
-            }
-
-            string user;
-            if (filter == "name" && TempData.ContainsKey("user"))
-            {
-                user = TempData["user"].ToString();
-                TempData["user"] = user;
-            }
-            else
-            {
-                user = null;
-                TempData.Remove("user");
-            }
+            GetFilteredTempData(filter, out startDate, out endDate, out shipmentNumber, out user);
 
             var comments = await this.mediator.SendAsync(new GetImportNotificationComments(id, type, page, startDate, endDate, shipmentNumber, user));
             var users = await this.mediator.SendAsync(new GetImportNotificationCommentsUsers(id, type));
@@ -174,16 +135,24 @@ namespace EA.Iws.Web.Areas.AdminImportAssessment.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult> Delete(Guid id, Guid commentId, NotificationShipmentsCommentsType type)
+        public async Task<ActionResult> Delete(Guid id, Guid commentId, NotificationShipmentsCommentsType type, string filter, int page = 1)
         {
-            var comments = await this.mediator.SendAsync(new GetImportNotificationComments(id, type, 1, null, null, null, null));
+            DateTime startDate = new DateTime();
+            DateTime endDate = new DateTime();
+            int? shipmentNumber = null;
+            string user = string.Empty;
+
+            GetFilteredTempData(filter, out startDate, out endDate, out shipmentNumber, out user);
+
+            var comments = await this.mediator.SendAsync(new GetImportNotificationComments(id, type, page, startDate, endDate, shipmentNumber, user));
 
             DeleteCommentViewModel model = new DeleteCommentViewModel()
             {
                 NotificationId = id,
                 CommentId = commentId,
                 Comment = comments.NotificationComments.FirstOrDefault(p => p.CommentId == commentId),
-                Type = type
+                Type = type,
+                Page = page
             };
 
             return View(model);
@@ -197,7 +166,63 @@ namespace EA.Iws.Web.Areas.AdminImportAssessment.Controllers
 
             await this.mediator.SendAsync(request);
 
-            return RedirectToAction("Index", new { id = model.NotificationId, type = model.Type });
+            DateTime startDate = new DateTime();
+            DateTime endDate = new DateTime();
+            int? shipmentNumber = null;
+            string user = string.Empty;
+
+            GetFilteredTempData(model.Filter, out startDate, out endDate, out shipmentNumber, out user);
+
+            var comments = await this.mediator.SendAsync(new GetImportNotificationComments(model.NotificationId, model.Type, model.Page, startDate, endDate, shipmentNumber, user));
+
+            if (comments.NotificationComments.Count == 0 && model.Page > 1)
+            {
+                model.Page--;
+            }
+
+            return RedirectToAction("Index", new { id = model.NotificationId, type = model.Type, page = model.Page, filter = model.Filter });
+        }
+
+        private void GetFilteredTempData(string filter, out DateTime startDate, out DateTime endDate, out int? shipmentNumber, out string user)
+        {
+            if (filter == "date" && TempData.ContainsKey("startDate") && TempData.ContainsKey("endDate"))
+            {
+                startDate = DateTime.Parse(TempData["startDate"].ToString());
+                endDate = DateTime.Parse(TempData["endDate"].ToString());
+
+                TempData["startDate"] = filter == "date" ? startDate.ToString() : null;
+                TempData["endDate"] = filter == "date" ? endDate.ToString() : null;
+            }
+            else
+            {
+                startDate = DateTime.MinValue;
+                endDate = DateTime.MaxValue;
+                TempData.Remove("startDate");
+                TempData.Remove("endDate");
+            }
+
+            if (filter == "shipment" && TempData.ContainsKey("shipmentNumber"))
+            {
+                shipmentNumber = int.Parse(TempData["shipmentNumber"].ToString());
+
+                TempData["shipmentNumber"] = shipmentNumber.ToString();
+            }
+            else
+            {
+                shipmentNumber = null;
+                TempData.Remove("shipmentNumber");
+            }
+
+            if (filter == "name" && TempData.ContainsKey("user"))
+            {
+                user = TempData["user"].ToString();
+                TempData["user"] = user;
+            }
+            else
+            {
+                user = null;
+                TempData.Remove("user");
+            }
         }
 
         private void PrepareModelErrors(string filter, CommentsViewModel model)

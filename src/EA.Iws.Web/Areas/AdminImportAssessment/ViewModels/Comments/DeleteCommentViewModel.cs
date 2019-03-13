@@ -10,6 +10,8 @@
         public Guid NotificationId { get; set; }
         public Guid CommentId { get; set; }
         public InternalComment Comment { get; set; }
+        public int Page { get; set; }
+        public string Filter { get; set; }
         public NotificationShipmentsCommentsType Type { get; set; }
         public string ConfirmationText
         {
