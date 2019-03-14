@@ -20,7 +20,7 @@
         {
             if (From.AsDateTime() > To.AsDateTime())
             {
-                yield return new ValidationResult(IndexViewModelResources.FromDateBeforeToDate, new[] { "FromDate" });
+                yield return new ValidationResult(IndexViewModelResources.FromDateBeforeToDate, new[] { "From" });
             }
         }
     }
