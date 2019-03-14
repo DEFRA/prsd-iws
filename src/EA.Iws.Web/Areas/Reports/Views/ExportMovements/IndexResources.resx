@@ -126,6 +126,9 @@
   <data name="MainHeading" xml:space="preserve">
     <value>Export Movement Documents Input</value>
   </data>
+  <data name="OrganisationNameRequiredError" xml:space="preserve">
+    <value>Enter a partial organisation name to filter on</value>
+  </data>
   <data name="OrganistationName" xml:space="preserve">
     <value>Partial organisation name (optional)</value>
   </data>

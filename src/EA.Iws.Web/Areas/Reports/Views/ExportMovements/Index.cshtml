@@ -42,13 +42,14 @@
 
     <br />
 
-    var organisationNameClass = Model.SelectedOrganistationFilter == null || Model.SelectedOrganistationFilter == string.Empty ? "class=hidden" : "";
+    var organisationNameClass = Model.SelectedOrganistationFilter == null || Model.SelectedOrganistationFilter == "-1" ? "class=hidden" : "";
 
     <div @organisationNameClass id="organisationNameSection">
        <div class="heading-small">
            @Resource.OrganistationName
        </div>
        <div>
+           @Html.Gds().ValidationMessageFor(m => m.OrganisationName)
            @Html.Gds().TextBoxFor(m => m.OrganisationName)
        </div>
     </div>
