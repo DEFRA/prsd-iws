@@ -49,6 +49,7 @@
            @Resource.OrganistationName
        </div>
        <div>
+           @Html.Gds().ValidationMessageFor(m => m.OrganisationName)
            @Html.Gds().TextBoxFor(m => m.OrganisationName)
        </div>
     </div>

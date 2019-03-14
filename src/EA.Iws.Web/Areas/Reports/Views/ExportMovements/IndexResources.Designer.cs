@@ -88,6 +88,15 @@ namespace EA.Iws.Web.Areas.Reports.Views.ExportMovements {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Enter a partial organisation name to filter on.
+        /// </summary>
+        public static string OrganisationNameRequiredError {
+            get {
+                return ResourceManager.GetString("OrganisationNameRequiredError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Partial organisation name (optional).
         /// </summary>
         public static string OrganistationName {
