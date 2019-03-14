@@ -62,7 +62,7 @@
                 yield return new ValidationResult(IndexViewModelResources.FromDateBeforeToDate, new[] { "FromDate" });
             }
 
-            if ((SelectedOrganistationFilter != null && SelectedOrganistationFilter != string.Empty) && (OrganisationName == null || OrganisationName == string.Empty))
+            if ((SelectedOrganistationFilter != null && SelectedOrganistationFilter != "-1") && (OrganisationName == null || OrganisationName == string.Empty))
             {
                 yield return new ValidationResult(IndexResources.OrganisationNameRequiredError, new[] { "OrganisationName" });
             }
