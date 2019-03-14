@@ -2,7 +2,10 @@
 {
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using System.Linq;
     using System.Web.Mvc;
+    using EA.Iws.Core.Reports;
+    using EA.Prsd.Core.Helpers;
     using Infrastructure.Validation;
     using Web.Areas.Reports.Views.ExportMovements;
     using Web.ViewModels.Shared;
@@ -17,20 +20,7 @@
         [RequiredDateInput(ErrorMessageResourceName = "ToRequired", ErrorMessageResourceType = typeof(IndexViewModelResources))]
         public OptionalDateInputViewModel To { get; set; }
 
-        public SelectList OrganisationTypes
-        {
-            get
-            {
-                var organisations = new List<SelectListItem>()
-                {
-                    new SelectListItem { Text = string.Empty, Value = string.Empty},
-                    new SelectListItem { Text = "Notifier name", Value = "notifier"},
-                    new SelectListItem { Text = "Consignee  name", Value = "consignee "}
-                };
-
-                return new SelectList(organisations, "Value", "Text", string.Empty);
-            }
-        }
+        public SelectList OrganisationTypesSelectList { get; set; }
 
         public string SelectedOrganistationFilter { get; set; }
 
@@ -53,6 +43,11 @@
         {
             From = new OptionalDateInputViewModel(true);
             To = new OptionalDateInputViewModel(true);
+
+            var organisationOptions = EnumHelper.GetValues(typeof(OrganisationFilterOptions));
+            organisationOptions.Add(-1, "View all");
+            var orderedOrganisationOptions = organisationOptions.OrderBy(p => p.Key);
+            OrganisationTypesSelectList = new SelectList(orderedOrganisationOptions, "Key", "Value", null);
         }
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)

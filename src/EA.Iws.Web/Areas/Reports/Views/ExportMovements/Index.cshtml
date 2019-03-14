@@ -36,13 +36,13 @@
             @Resource.OrganistationType
         </div>
         <div>
-            @Html.Gds().DropDownListFor(m => m.SelectedOrganistationFilter, Model.OrganisationTypes, new { @id = "organisationsSelectList" })
+            @Html.Gds().DropDownListFor(m => m.SelectedOrganistationFilter, Model.OrganisationTypesSelectList, new { @id = "organisationsSelectList" })
         </div>
     </div>
 
     <br />
 
-    var organisationNameClass = Model.SelectedOrganistationFilter == null || Model.SelectedOrganistationFilter == string.Empty ? "class=hidden" : "";
+    var organisationNameClass = Model.SelectedOrganistationFilter == null || Model.SelectedOrganistationFilter == "-1" ? "class=hidden" : "";
 
     <div @organisationNameClass id="organisationNameSection">
        <div class="heading-small">
@@ -69,7 +69,7 @@
 
                 var organisationNameSection = $("#organisationNameSection");
 
-                if (SelectedValue != "") {
+                if (SelectedValue != -1) {
                     organisationNameSection.removeClass('hidden');
                 }
                 else {
