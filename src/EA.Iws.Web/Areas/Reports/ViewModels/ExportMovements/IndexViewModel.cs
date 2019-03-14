@@ -44,7 +44,7 @@
             To = new OptionalDateInputViewModel(true);
 
             var organisationOptions = EnumHelper.GetValues(typeof(OrganisationFilterOptions));
-            organisationOptions.Add(-1, string.Empty);
+            organisationOptions.Add(-1, "View all");
             var orderedOrganisationOptions = organisationOptions.OrderBy(p => p.Key);
             OrganisationTypesSelectList = new SelectList(orderedOrganisationOptions, "Key", "Value", null);
         }
