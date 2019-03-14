@@ -7,6 +7,7 @@
     using EA.Iws.Core.Reports;
     using EA.Prsd.Core.Helpers;
     using Infrastructure.Validation;
+    using Web.Areas.Reports.Views.ExportMovements;
     using Web.ViewModels.Shared;
 
     public class IndexViewModel : IValidatableObject
@@ -54,6 +55,11 @@
             if (From.AsDateTime() > To.AsDateTime())
             {
                 yield return new ValidationResult(IndexViewModelResources.FromDateBeforeToDate, new[] { "FromDate" });
+            }
+
+            if ((SelectedOrganistationFilter != null && SelectedOrganistationFilter != "-1") && (OrganisationName == null || OrganisationName == string.Empty))
+            {
+                yield return new ValidationResult(IndexResources.OrganisationNameRequiredError, new[] { "OrganisationName" });
             }
         }
     }
