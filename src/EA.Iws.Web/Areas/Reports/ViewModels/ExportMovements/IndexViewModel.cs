@@ -2,6 +2,7 @@
 {
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using System.Web.Mvc;
     using Infrastructure.Validation;
     using Web.ViewModels.Shared;
 
@@ -14,6 +15,38 @@
         [Display(Name = "To", ResourceType = typeof(IndexViewModelResources))]
         [RequiredDateInput(ErrorMessageResourceName = "ToRequired", ErrorMessageResourceType = typeof(IndexViewModelResources))]
         public OptionalDateInputViewModel To { get; set; }
+
+        public SelectList OrganisationTypes
+        {
+            get
+            {
+                var organisations = new List<SelectListItem>()
+                {
+                    new SelectListItem { Text = string.Empty, Value = string.Empty},
+                    new SelectListItem { Text = "Notifier name", Value = "notifier"},
+                    new SelectListItem { Text = "Consignee  name", Value = "consignee "}
+                };
+
+                return new SelectList(organisations, "Value", "Text", string.Empty);
+            }
+        }
+
+        public string SelectedOrganistationFilter { get; set; }
+
+        private string organisationName;
+        public string OrganisationName
+        {
+            get
+            {
+                if (this.SelectedOrganistationFilter == null || this.SelectedOrganistationFilter == string.Empty)
+                {
+                    return string.Empty;
+                }
+
+                return organisationName;
+            }
+            set { organisationName = value; }
+        }
 
         public IndexViewModel()
         {
