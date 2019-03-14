@@ -104,7 +104,8 @@
 			@Html.Partial("~/Areas/Admin/Views/Menu/_ReportingLinks.cshtml")
 		</li>
 
-
+@if (Model.AdminLinksModel.ShowNotificationLinks)
+{
 		<li class="">
 			<h3 class="">
 				<span></span>
@@ -113,12 +114,13 @@
 			<ul>
 				<li>@Html.ActionLink("Address book", "Index", "Home", new { area = "AddressBook" }, null)</li>
 				@if (Model.AdminLinksModel.ShowAddNewEntryOrExitPointLink
-			|| Model.AdminLinksModel.ShowApproveNewInternalUserLink)
+|| Model.AdminLinksModel.ShowApproveNewInternalUserLink)
 				{
 					@Html.Partial("~/Areas/Admin/Views/Menu/_AdminLinks.cshtml", Model.AdminLinksModel)
 				}
 			</ul>
 		</li>
+}
 
 
 		<li class="@GetClassForSection(ExportNavigationSection.ChangeOwner, "active")">
