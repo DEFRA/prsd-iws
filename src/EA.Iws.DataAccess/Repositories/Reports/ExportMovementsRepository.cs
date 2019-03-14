@@ -8,6 +8,7 @@
     using Core.Admin.Reports;
     using Core.Notification;
     using Domain.Reports;
+    using EA.Iws.Core.Reports;
     using Newtonsoft.Json;
 
     internal class ExportMovementsRepository : IExportMovementsRepository
@@ -19,58 +20,94 @@
             this.context = context;
         }
 
-        public async Task<ExportMovementsData> Get(DateTime from, DateTime to, UKCompetentAuthority competentAuthority)
+        public async Task<ExportMovementsData> Get(DateTime from, DateTime to, UKCompetentAuthority competentAuthority, OrganisationFilterOptions? organisationFilter, string organisationName)
         {
-            var movementData = await context.Database.SqlQuery<ExportMovementsData>(
-                @"WITH 
-                movementcreateddata AS (
+            string type = string.Empty;
+
+            if (organisationFilter == OrganisationFilterOptions.Notifier)
+            {
+                type = "Exporter";
+            }
+            else if (organisationFilter == OrganisationFilterOptions.Consignee)
+            {
+                type = "Importer";
+            }
+            string organisationJoin = organisationFilter == null ? string.Empty : string.Format("LEFT JOIN[Notification].[{0}] O ON M.NotificationId = O.NotificationId", type);
+            string organisationQuery = organisationFilter == null ? string.Empty : string.Format("AND O.Name LIKE %@org%", organisationName);
+
+            string query = string.Format(@"WITH 
+                movementcreateddata AS(
                     SELECT M.NotificationId, IU.Id AS InternalUserId
-                    FROM [Notification].[Movement] M
-                        LEFT JOIN [Notification].[Notification] N ON M.NotificationId = N.Id
-                        LEFT JOIN [Person].[InternalUser] IU ON M.CreatedBy = IU.UserId
+                    FROM[Notification].[Movement] M
+                        LEFT JOIN[Notification].[Notification] N ON M.NotificationId = N.Id
+                        LEFT JOIN[Person].[InternalUser] IU ON M.CreatedBy = IU.UserId
+                        {0}
                     WHERE N.CompetentAuthority = @ca
-                        AND M.CreatedOnDate BETWEEN @from AND @to),
+                        AND M.CreatedOnDate BETWEEN @from AND @to
+                        {1}),
 
-                receiptdata AS (
+                receiptdata AS(
                     SELECT MR.*, IU.Id AS InternalUserId
-					FROM [Notification].[MovementReceipt] MR
-	                    INNER JOIN [Notification].[Movement] M ON M.Id = MR.MovementId
-	                    INNER JOIN [Notification].[Notification] N ON M.NotificationId = N.Id
-                        LEFT JOIN [Person].[InternalUser] IU ON MR.CreatedBy = IU.UserId
-	                WHERE N.CompetentAuthority = @ca
-		                AND MR.CreatedOnDate BETWEEN @from AND @to),
 
-                operationreceiptdata AS (
+                    FROM[Notification].[MovementReceipt] MR
+
+                        INNER JOIN[Notification].[Movement] M ON M.Id = MR.MovementId
+
+                        INNER JOIN[Notification].[Notification] N ON M.NotificationId = N.Id
+                        LEFT JOIN[Person].[InternalUser] IU ON MR.CreatedBy = IU.UserId
+
+                    WHERE N.CompetentAuthority = @ca
+
+                        AND MR.CreatedOnDate BETWEEN @from AND @to),
+
+                operationreceiptdata AS(
                     SELECT MOR.*, IU.Id AS InternalUserId
-					FROM [Notification].[MovementOperationReceipt] MOR
-	                    INNER JOIN [Notification].[Movement] M ON M.Id = MOR.MovementId
-	                    INNER JOIN [Notification].[Notification] N ON M.NotificationId = N.Id
-                        LEFT JOIN [Person].[InternalUser] IU ON MOR.CreatedBy = IU.UserId
-	                WHERE N.CompetentAuthority = @ca
-		                AND MOR.CreatedOnDate BETWEEN @from AND @to),
 
-                movementcreatedresult AS (
+                    FROM[Notification].[MovementOperationReceipt] MOR
+
+                        INNER JOIN[Notification].[Movement] M ON M.Id = MOR.MovementId
+
+                        INNER JOIN[Notification].[Notification] N ON M.NotificationId = N.Id
+                        LEFT JOIN[Person].[InternalUser] IU ON MOR.CreatedBy = IU.UserId
+
+                    WHERE N.CompetentAuthority = @ca
+
+                        AND MOR.CreatedOnDate BETWEEN @from AND @to),
+
+                movementcreatedresult AS(
                     SELECT
                         COUNT(CASE WHEN InternalUserId IS NULL THEN 1 ELSE NULL END) AS MovementsCreatedExternally,
                         COUNT(InternalUserId) AS MovementsCreatedInternally
                     FROM movementcreateddata),
 
-                receiptresult AS (
-                    SELECT 
-	                    COUNT(CASE WHEN InternalUserId IS NULL THEN 1 ELSE NULL END) AS MovementReceiptsCreatedExternally,
+                receiptresult AS(
+                    SELECT
+
+                        COUNT(CASE WHEN InternalUserId IS NULL THEN 1 ELSE NULL END) AS MovementReceiptsCreatedExternally,
                         COUNT(CASE WHEN InternalUserId IS NOT NULL THEN 1 ELSE NULL END) AS MovementReceiptsCreatedInternally
                     FROM receiptdata),
 
-                operationresult AS (
-                    SELECT 
+                operationresult AS(
+                    SELECT
                         COUNT(CASE WHEN InternalUserId IS NULL THEN 1 ELSE NULL END) AS MovementOperationReceiptsCreatedExternally,
                         COUNT(CASE WHEN InternalUserId IS NOT NULL THEN 1 ELSE NULL END) AS MovementOperationReceiptsCreatedInternally
                     FROM operationreceiptdata)
 
-                SELECT * FROM movementcreatedresult, receiptresult, operationresult",
-                    new SqlParameter("@ca", (int)competentAuthority),
-                    new SqlParameter("@from", from),
-                    new SqlParameter("@to", to)).SingleAsync();
+                SELECT * FROM movementcreatedresult, receiptresult, operationresult", organisationJoin, organisationQuery);
+
+            List<SqlParameter> parameters = new List<SqlParameter>
+            {
+                new SqlParameter("@ca", (int)competentAuthority),
+                new SqlParameter("@from", from),
+                new SqlParameter("@to", to)
+            };
+
+            if (organisationFilter != null)
+            {
+                parameters.Add(new SqlParameter("@org", organisationName));
+            }
+
+            var movementData = await context.Database.SqlQuery<ExportMovementsData>(query, parameters.ToArray()).SingleAsync();
 
             var userActions = await context.Database.SqlQuery<UserActionData>(
                 @"SELECT
