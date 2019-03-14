@@ -1,7 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-namespace EA.Iws.Core.Reports
+﻿namespace EA.Iws.Core.Reports
 {
+    using System.ComponentModel.DataAnnotations;
+
     public enum OrganisationFilterOptions
     {
         [Display(Name = "Notifier name")]
