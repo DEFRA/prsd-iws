@@ -19,8 +19,8 @@ SELECT
 	[CoverAmount],
 	[CalculationContinued],
 	CASE
-		WHEN [CurrentActiveLoads] > [ActiveLoadsPermitted] THEN 'Yes'
-		WHEN [CurrentActiveLoads] <= [ActiveLoadsPermitted] THEN 'No'
+		WHEN [CurrentActiveLoads] > [ActiveLoadsPermitted] THEN 'Y'
+		WHEN [CurrentActiveLoads] <= [ActiveLoadsPermitted] THEN 'N'
 		ELSE NULL 
 	END AS [OverActiveLoads]
 FROM
