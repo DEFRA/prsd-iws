@@ -22,17 +22,7 @@
 
         public async Task<ExportMovementsData> Get(DateTime from, DateTime to, UKCompetentAuthority competentAuthority, OrganisationFilterOptions? organisationFilter, string organisationName)
         {
-            string type = string.Empty;
-
-            if (organisationFilter == OrganisationFilterOptions.Notifier)
-            {
-                type = "Exporter";
-            }
-            else if (organisationFilter == OrganisationFilterOptions.Consignee)
-            {
-                type = "Importer";
-            }
-            string organisationJoin = organisationFilter == null ? string.Empty : string.Format("LEFT JOIN[Notification].[{0}] O ON M.NotificationId = O.NotificationId", type);
+            string organisationJoin = organisationFilter == null ? string.Empty : string.Format("LEFT JOIN[Notification].[{0}] O ON M.NotificationId = O.NotificationId", organisationFilter.ToString());
             string organisationQuery = organisationFilter == null ? string.Empty : string.Format("AND O.Name LIKE '%{0}%'", organisationName);
 
             string query = string.Format(@"WITH 
