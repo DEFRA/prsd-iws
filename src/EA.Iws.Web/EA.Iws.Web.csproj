@@ -1251,6 +1251,12 @@
       <DependentUpon>CommentsResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Areas\AdminExportAssessment\ViewModels\Comments\CommentsViewModel.cs" />
+    <Compile Include="Areas\AdminExportAssessment\ViewModels\OperationCodes\OperationCodesViewModel.cs" />
+    <Compile Include="Areas\AdminExportAssessment\Views\OperationCodes\EditResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EditResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Areas\AdminImportAssessment\ViewModels\Comments\CommentsResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -3805,6 +3811,10 @@
     <EmbeddedResource Include="Areas\AdminExportAssessment\Views\NumberOfShipments\IndexResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\AdminExportAssessment\Views\OperationCodes\EditResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>EditResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\AdminExportAssessment\Views\Producer\ProducerResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

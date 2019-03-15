@@ -1,17 +1,26 @@
-﻿
+﻿@model EA.Iws.Web.Areas.AdminExportAssessment.ViewModels.OperationCodes.OperationCodesViewModel
+@using Resource = EA.Iws.Web.Areas.AdminExportAssessment.Views.OperationCodes.EditResources
+
 @{
-    Layout = null;
+    ViewBag.Title = "";
 }
 
-<!DOCTYPE html>
+<div class="grid-row">
+    <div class="column-two-thirds">
+        <h1 class="heading-large">@Model.Header</h1>
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>OperationCodes</title>
-</head>
-<body>
-    <div> 
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            @Html.Gds().ValidationSummary()
+
+
+            <button type="submit" class="button">@Constants.ContinueButtonText</button>
+        }
     </div>
-</body>
-</html>
+</div>
+
+
+@section menu {
+    @Html.Action("ExportNavigation", "Menu", new { area = "Admin", section = ExportNavigationSection.Assessment })
+}
