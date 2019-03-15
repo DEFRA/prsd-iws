@@ -1064,6 +1064,7 @@
     <Content Include="Areas\NotificationApplication\Views\ExitCustomsOffice\_ExitCustomsOfficeGuidance.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\EntryCustomsOffice\_EntryCustomsOfficeGuidance.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\DateEntryViewModel.cshtml" />
+    <Content Include="Areas\AdminExportAssessment\Views\OperationCodes\Edit.cshtml" />
     <None Include="Scripts\jquery-2.1.3.intellisense.js" />
     <Content Include="Scripts\govuk\govuk-template.js" />
     <Content Include="Scripts\govuk\ie.js" />
@@ -1237,6 +1238,7 @@
     <Compile Include="Areas\AdminExportAssessment\Controllers\FinancialGuaranteeDetailsController.cs" />
     <Compile Include="Areas\AdminExportAssessment\Controllers\KeyDatesOverrideController.cs" />
     <Compile Include="Areas\AdminExportAssessment\Controllers\MarkAsInterimController.cs" />
+    <Compile Include="Areas\AdminExportAssessment\Controllers\OperationCodesController.cs" />
     <Compile Include="Areas\AdminExportAssessment\Controllers\OverviewController.cs" />
     <Compile Include="Areas\AdminExportAssessment\Controllers\NumberOfShipmentsController.cs" />
     <Compile Include="Areas\AdminExportAssessment\Controllers\ProducerController.cs" />
