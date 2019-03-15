@@ -15,8 +15,8 @@ $(document).ready(function () {
   // with role="button" when the space key is pressed.
   GOVUK.shimLinksWithButtonRole.init()
 
-  // Details/summary polyfill from frontend toolkit
-  GOVUK.details.init()
+  // Details/summary polyfill
+  // See /javascripts/vendor/details.polyfill.js
 })
 
 $(window).load(function () {
