@@ -110,7 +110,7 @@
       .mute {
         position: absolute;
         bottom: 0;
-        right: 0;
+        left: 120px;
         height: 40px;
         width: 50px;
         padding-top: 1px;
@@ -141,6 +141,7 @@
         bottom: 0;
         height: 40px;
         width: 60px;
+        padding-top: 2px;
         font-size: 24px;
         line-height: 40px;
         text-align: center;
@@ -149,21 +150,6 @@
         &:hover,
         &:focus {
           color: $light-blue;
-          background-color: transparent;
-          outline: none;
-
-          &:before {
-            background-color: $focus-colour;
-          }
-        }
-
-        &:before {
-          content: "";
-          display: inline-block;
-          position: absolute;
-          width: 50%;
-          height: 100%;
-          z-index: -1;
         }
       }
 
@@ -171,26 +157,18 @@
         text-align: left;
         padding-left: 10px;
         left: 0;
-
-        &:before {
-          left: 0;
-        }
       }
 
       .vol-up {
         text-align: right;
         padding-right: 10px;
-        left: 65px;
-
-        &:before {
-          right: 0;
-        }
+        left: 60px;
       }
 
       .vol-display {
         position: absolute;
         bottom: 0;
-        left: 25px;
+        left: 20px;
         height: 40px;
         width: 0;
         padding-left: 35px;
@@ -207,7 +185,7 @@
     .current-time {
       position: absolute;
       bottom: 0;
-      left: 45px;
+      left: 50px;
       height: 40px;
       font-size: 14px;
       line-height: 40px;
