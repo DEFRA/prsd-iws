@@ -45,12 +45,12 @@
 
                         INNER JOIN[Notification].[Notification] N ON M.NotificationId = N.Id
                         LEFT JOIN[Person].[InternalUser] IU ON MR.CreatedBy = IU.UserId
-                        {2}
+                        {0}
 
                     WHERE N.CompetentAuthority = @ca
 
                         AND MR.CreatedOnDate BETWEEN @from AND @to
-                        {3}),
+                        {1}),
 
                 operationreceiptdata AS(
                     SELECT MOR.*, IU.Id AS InternalUserId
@@ -61,12 +61,12 @@
 
                         INNER JOIN[Notification].[Notification] N ON M.NotificationId = N.Id
                         LEFT JOIN[Person].[InternalUser] IU ON MOR.CreatedBy = IU.UserId
-                        {4}
+                        {0}
 
                     WHERE N.CompetentAuthority = @ca
 
                         AND MOR.CreatedOnDate BETWEEN @from AND @to
-                        {5}),
+                        {1}),
 
                 movementcreatedresult AS(
                     SELECT
@@ -87,7 +87,7 @@
                         COUNT(CASE WHEN InternalUserId IS NOT NULL THEN 1 ELSE NULL END) AS MovementOperationReceiptsCreatedInternally
                     FROM operationreceiptdata)
 
-                SELECT * FROM movementcreatedresult, receiptresult, operationresult", organisationJoin, organisationQuery, organisationJoin, organisationQuery, organisationJoin, organisationQuery);
+                SELECT * FROM movementcreatedresult, receiptresult, operationresult", organisationJoin, organisationQuery);
 
             List<SqlParameter> parameters = new List<SqlParameter>
             {
