@@ -145,7 +145,7 @@
     <value>Please enter no more than 2 decimal places</value>
   </data>
   <data name="CoverAmountRequired" xml:space="preserve">
-    <value>Please enter the Amount of cover required</value>
+    <value>Please enter the Amount of cover provided</value>
   </data>
   <data name="CoverAmountTooMuch" xml:space="preserve">
     <value>Please enter an Amount of cover provided that is less than 9999999.99</value>
