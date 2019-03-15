@@ -2,7 +2,12 @@
 {
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using System.Linq;
+    using System.Web.Mvc;
+    using EA.Iws.Core.Reports;
+    using EA.Prsd.Core.Helpers;
     using Infrastructure.Validation;
+    using Web.Areas.Reports.Views.ExportMovements;
     using Web.ViewModels.Shared;
 
     public class IndexViewModel : IValidatableObject
@@ -15,10 +20,34 @@
         [RequiredDateInput(ErrorMessageResourceName = "ToRequired", ErrorMessageResourceType = typeof(IndexViewModelResources))]
         public OptionalDateInputViewModel To { get; set; }
 
+        public SelectList OrganisationTypesSelectList { get; set; }
+
+        public string SelectedOrganistationFilter { get; set; }
+
+        private string organisationName;
+        public string OrganisationName
+        {
+            get
+            {
+                if (this.SelectedOrganistationFilter == null || this.SelectedOrganistationFilter == string.Empty)
+                {
+                    return string.Empty;
+                }
+
+                return organisationName;
+            }
+            set { organisationName = value; }
+        }
+
         public IndexViewModel()
         {
             From = new OptionalDateInputViewModel(true);
             To = new OptionalDateInputViewModel(true);
+
+            var organisationOptions = EnumHelper.GetValues(typeof(OrganisationFilterOptions));
+            organisationOptions.Add(-1, "View all");
+            var orderedOrganisationOptions = organisationOptions.OrderBy(p => p.Key);
+            OrganisationTypesSelectList = new SelectList(orderedOrganisationOptions, "Key", "Value", null);
         }
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
@@ -26,6 +55,11 @@
             if (From.AsDateTime() > To.AsDateTime())
             {
                 yield return new ValidationResult(IndexViewModelResources.FromDateBeforeToDate, new[] { "FromDate" });
+            }
+
+            if ((SelectedOrganistationFilter != null && SelectedOrganistationFilter != "-1") && (OrganisationName == null || OrganisationName == string.Empty))
+            {
+                yield return new ValidationResult(IndexResources.OrganisationNameRequiredError, new[] { "OrganisationName" });
             }
         }
     }
