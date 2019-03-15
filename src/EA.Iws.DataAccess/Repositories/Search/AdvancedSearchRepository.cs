@@ -129,8 +129,8 @@
                     [ImportNotification].[Notification] N
                     INNER JOIN [ImportNotification].[NotificationAssessment] NA ON N.Id = NA.NotificationApplicationId
                     INNER JOIN [Lookup].[ImportNotificationStatus] S ON NA.[Status] = S.Id
-                    INNER JOIN [ImportNotification].[Exporter] E ON N.Id = E.ImportNotificationId
-                    INNER JOIN [ImportNotification].[WasteType] WT ON N.Id = WT.ImportNotificationId
+                    LEFT JOIN [ImportNotification].[Exporter] E ON N.Id = E.ImportNotificationId
+                    LEFT JOIN [ImportNotification].[WasteType] WT ON N.Id = WT.ImportNotificationId
                     LEFT JOIN [ImportNotification].[WasteCode] W 
                         INNER JOIN [Lookup].[WasteCode] WC ON W.WasteCodeId = WC.Id
                         ON WT.Id = W.WasteTypeId AND WC.CodeType IN (1, 2)
