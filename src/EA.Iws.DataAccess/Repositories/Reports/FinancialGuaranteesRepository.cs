@@ -33,7 +33,7 @@
                       ,[IsBlanketBond]
                       ,[CoverAmount]
                       ,[CalculationContinued]
-                      ,[OverActiveLoads]
+                      ,[OverActiveLoads] = CASE WHEN [OverActiveLoads] = 'Yes' THEN 'Y' WHEN [OverActiveLoads] = 'No' THEN 'N' ELSE 'N' END
                   FROM [Reports].[BlanketBonds]
                  WHERE [CompetentAuthority] = @ca
                    AND (@financialGuaranteeReferenceNumber IS NULL OR [ReferenceNumber] LIKE '%' + @financialGuaranteeReferenceNumber + '%')
