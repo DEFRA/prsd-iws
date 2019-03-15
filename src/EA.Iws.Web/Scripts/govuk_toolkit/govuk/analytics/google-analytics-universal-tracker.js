@@ -20,10 +20,6 @@
       sendToGa('set', 'displayFeaturesTask', null)
     }
 
-    function stripLocationPII () {
-      sendToGa('set', 'location', stripEmailAddressesFromString(window.location.href))
-    }
-
     // Support legacy cookieDomain param
     if (typeof fieldsObject === 'string') {
       fieldsObject = { cookieDomain: fieldsObject }
@@ -32,7 +28,6 @@
     configureProfile()
     anonymizeIp()
     disableAdTracking()
-    stripLocationPII()
   }
 
   GoogleAnalyticsUniversalTracker.load = function () {
@@ -74,7 +69,6 @@
   GoogleAnalyticsUniversalTracker.prototype.trackEvent = function (category, action, options) {
     options = options || {}
     var value
-    var trackerName = ''
     var evt = {
       hitType: 'event',
       eventCategory: category,
@@ -98,12 +92,6 @@
       delete options.value
     }
 
-    // trackerName is optional
-    if (typeof options.trackerName === 'string') {
-      trackerName = options.trackerName + '.'
-      delete options.trackerName
-    }
-
     // Prevents an event from affecting bounce rate
     // https://developers.google.com/analytics/devguides/collection/analyticsjs/events#implementation
     if (options.nonInteraction) {
@@ -114,7 +102,7 @@
       $.extend(evt, options)
     }
 
-    sendToGa(trackerName + 'send', evt)
+    sendToGa('send', evt)
   }
 
   /*
@@ -139,13 +127,11 @@
 
   /*
    https://developers.google.com/analytics/devguides/collection/analyticsjs/cross-domain
-   trackerId    - the UA account code to track the domain against
-   name         - name for the tracker
-   domain       - the domain to track
-   sendPageView - optional argument which controls the legacy behaviour of sending a pageview
-                  on creation of the linked domain.
+   trackerId - the UA account code to track the domain against
+   name      - name for the tracker
+   domain    - the domain to track
   */
-  GoogleAnalyticsUniversalTracker.prototype.addLinkedTrackerDomain = function (trackerId, name, domain, sendPageView) {
+  GoogleAnalyticsUniversalTracker.prototype.addLinkedTrackerDomain = function (trackerId, name, domain) {
     sendToGa('create',
              trackerId,
              'auto',
@@ -160,10 +146,7 @@
 
     sendToGa(name + '.set', 'anonymizeIp', true)
     sendToGa(name + '.set', 'displayFeaturesTask', null)
-
-    if (typeof sendPageView === 'undefined' || sendPageView === true) {
-      sendToGa(name + '.send', 'pageview')
-    }
+    sendToGa(name + '.send', 'pageview')
   }
 
   // https://developers.google.com/analytics/devguides/collection/analyticsjs/custom-dims-mets
@@ -175,11 +158,6 @@
     if (typeof global.ga === 'function') {
       global.ga.apply(global, arguments)
     }
-  }
-
-  function stripEmailAddressesFromString (string) {
-    var stripped = string.replace(/[^\s=/?&]+(?:@|%40)[^\s=/?&]+/g, '[email]')
-    return stripped
   }
 
   GOVUK.GoogleAnalyticsUniversalTracker = GoogleAnalyticsUniversalTracker

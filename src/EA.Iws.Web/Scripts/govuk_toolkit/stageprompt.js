@@ -62,13 +62,7 @@
   }())
 
   GOVUK.performance.sendGoogleAnalyticsEvent = function (category, event, label) {
-    if (global.ga && typeof global.ga === 'function') {
-      global.ga('send', 'event', category, event, label, {
-        nonInteraction: true
-      })
-    } else {
-      global._gaq.push(['_trackEvent', category, event, label, undefined, true])
-    }
+    global._gaq.push(['_trackEvent', category, event, label, undefined, true])
   }
 
   global.GOVUK = GOVUK

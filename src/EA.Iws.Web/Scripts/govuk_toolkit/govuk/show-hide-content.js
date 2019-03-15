@@ -14,6 +14,12 @@
       checkbox: '[data-target] > input[type="checkbox"]'
     }
 
+    // Escape name attribute for use in DOM selector
+    function escapeElementName (str) {
+      var result = str.replace('[', '\\[').replace(']', '\\]')
+      return result
+    }
+
     // Adds ARIA attributes to control + associated content
     function initToggledContent () {
       var $control = $(this)
@@ -73,7 +79,7 @@
     // Handle radio show/hide
     function handleRadioContent ($control, $content) {
       // All radios in this group which control content
-      var selector = selectors.radio + '[name="' + $control.attr('name') + '"][aria-controls]'
+      var selector = selectors.radio + '[name=' + escapeElementName($control.attr('name')) + '][aria-controls]'
       var $form = $control.closest('form')
       var $radios = $form.length ? $form.find(selector) : $(selector)
 
