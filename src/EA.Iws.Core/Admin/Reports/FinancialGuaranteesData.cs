@@ -24,6 +24,7 @@
         [DisplayName("Blanket bond?")]
         public string IsBlanketBond { get; set; }
 
+        [DisplayName("Amount of cover provided")]
         public decimal? CoverAmount { get; set; }
 
         public decimal? CalculationContinued { get; set; }
