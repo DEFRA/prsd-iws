@@ -61,7 +61,7 @@ namespace EA.Iws.Web.Areas.AdminExportAssessment.Views.YCode {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to What Y codes apply to the waste?.
+        ///   Looks up a localized string similar to Change Y codes.
         /// </summary>
         public static string Header {
             get {
