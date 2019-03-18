@@ -96,31 +96,33 @@
                 new SqlParameter("@to", to)
             };
 
-            if (organisationFilter != null)
-            {
-                parameters.Add(new SqlParameter("@org", organisationName));
-            }
-
             var movementData = await context.Database.SqlQuery<ExportMovementsData>(query, parameters.ToArray()).SingleAsync();
 
-            var userActions = await context.Database.SqlQuery<UserActionData>(
-                @"SELECT
+            string userActionQuery = string.Format(@"SELECT
                     A.OriginalValue,
                     A.NewValue,
                     A.RecordId
                 FROM[Auditing].[AuditLog] AS A
                 INNER JOIN[Notification].[Movement] AS M ON M.Id = A.RecordId
                 INNER JOIN[Notification].[Notification] AS N ON M.NotificationId = N.Id
+                {0}
                 LEFT JOIN[Person].[InternalUser] AS IU ON A.UserId = IU.UserId
                 WHERE TableName = '[Notification].[Movement]'
                     AND EventType != 0
                     AND IU.UserId IS NULL
                     AND N.CompetentAuthority = @ca
                     AND A.EventDate BETWEEN @from AND @to
-                ORDER BY RecordId, EventDate",
+                    {1}
+                ORDER BY RecordId, EventDate", organisationJoin, organisationQuery);
+
+            List<SqlParameter> userActionParameters = new List<SqlParameter>
+            {
                 new SqlParameter("@ca", (int)competentAuthority),
                 new SqlParameter("@from", from),
-                new SqlParameter("@to", to)).ToListAsync();
+                new SqlParameter("@to", to)
+            };
+
+            var userActions = await context.Database.SqlQuery<UserActionData>(userActionQuery, userActionParameters.ToArray()).ToListAsync();
 
             var movementsUploadedByExternalUser = 0;
 
