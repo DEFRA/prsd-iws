@@ -1,6 +1,7 @@
 ﻿namespace EA.Iws.Web.Areas.AdminExportAssessment.ViewModels.OperationCodes
 {
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
     using System.Linq;
     using EA.Iws.Core.Notification.Overview;
     using EA.Iws.Core.OperationCodes;
@@ -9,7 +10,7 @@
     using EA.Prsd.Core.Helpers;
     using Web.Areas.AdminExportAssessment.Views.OperationCodes;
 
-    public class OperationCodesViewModel
+    public class OperationCodesViewModel : IValidatableObject
     {
         public string Title
         {
@@ -62,6 +63,17 @@
             PossibleCodes = OperationCodeMetadata.GetCodesForOperation(type)
                 .Select(c => new KeyValuePairViewModel<OperationCode, bool>(c, selectedCodes.Contains(c)))
                 .ToList();
+        }
+
+        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+        {
+            if (PossibleCodes != null && !PossibleCodes.Any(c => c.Value))
+            {
+                var error = string.Format(EditResources.SelectionRequired,
+                    NotificationType.ToString().ToLowerInvariant());
+
+                yield return new ValidationResult(error, new[] { "PossibleCodes" });
+            }
         }
     }
 }

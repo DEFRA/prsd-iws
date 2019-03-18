@@ -70,6 +70,15 @@ namespace EA.Iws.Web.Areas.AdminExportAssessment.Views.OperationCodes {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Please select at least one {0} code.
+        /// </summary>
+        public static string SelectionRequired {
+            get {
+                return ResourceManager.GetString("SelectionRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Which {type} codes apply to this notification?.
         /// </summary>
         public static string Title {

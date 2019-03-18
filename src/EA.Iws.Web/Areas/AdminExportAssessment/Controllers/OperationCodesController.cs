@@ -1,12 +1,11 @@
 ﻿namespace EA.Iws.Web.Areas.AdminExportAssessment.Controllers
 {
     using System;
-    using System.Collections.Generic;
-    using System.Linq;
     using System.Threading.Tasks;
-    using System.Web;
     using System.Web.Mvc;
+    using EA.Iws.Core.Notification.Audit;
     using EA.Iws.Requests.Notification;
+    using EA.Iws.Requests.NotificationAssessment;
     using EA.Iws.Requests.OperationCodes;
     using EA.Iws.Web.Areas.AdminExportAssessment.ViewModels.OperationCodes;
     using EA.Iws.Web.Infrastructure;
@@ -46,13 +45,13 @@
                 return await Edit(id);
             }
 
-            //await mediator.SendAsync(new SetEntryPoint(id, model.SelectedEntryPoint.Value));
+            await mediator.SendAsync(new SetOperationCodes(id, model.SelectedValues));
 
-            /*await this.auditService.AddAuditEntry(this.mediator,
+            await this.auditService.AddAuditEntry(this.mediator,
                     id,
                     User.GetUserId(),
                     NotificationAuditType.Updated,
-                    NotificationAuditScreenType.ImportRoute);*/
+                    model.NotificationType == Core.Shared.NotificationType.Disposal ? NotificationAuditScreenType.DisposalCodes : NotificationAuditScreenType.RecoveryCodes);
 
             return RedirectToAction("Index", "Overview");
         }
