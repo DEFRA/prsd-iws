@@ -27,7 +27,7 @@
         {
             var user = await internalUserRepository.GetByUserId(userContext.UserId);
 
-            return await repository.Get(message.From, message.To, user.CompetentAuthority);
+            return await repository.Get(message.From, message.To, user.CompetentAuthority, message.OrganisationFilter, message.OrganisationName);
         }
     }
 }
