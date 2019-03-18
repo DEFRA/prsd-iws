@@ -96,11 +96,6 @@
                 new SqlParameter("@to", to)
             };
 
-            if (organisationFilter != null)
-            {
-                parameters.Add(new SqlParameter("@org", organisationName));
-            }
-
             var movementData = await context.Database.SqlQuery<ExportMovementsData>(query, parameters.ToArray()).SingleAsync();
 
             string userActionQuery = string.Format(@"SELECT
@@ -126,11 +121,6 @@
                 new SqlParameter("@from", from),
                 new SqlParameter("@to", to)
             };
-
-            if (organisationFilter != null)
-            {
-                userActionParameters.Add(new SqlParameter("@org", organisationName));
-            }
 
             var userActions = await context.Database.SqlQuery<UserActionData>(userActionQuery, userActionParameters.ToArray()).ToListAsync();
 
