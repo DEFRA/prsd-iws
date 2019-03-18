@@ -15,11 +15,9 @@
     public class IndexViewModel : IValidatableObject
     {
         [Display(Name = "From", ResourceType = typeof(IndexViewModelResources))]
-        //[RequiredDateInput(ErrorMessageResourceName = "FromRequired", ErrorMessageResourceType = typeof(IndexViewModelResources))]
         public OptionalDateInputViewModel From { get; set; }
 
         [Display(Name = "To", ResourceType = typeof(IndexViewModelResources))]
-        //[RequiredDateInput(ErrorMessageResourceName = "ToRequired", ErrorMessageResourceType = typeof(IndexViewModelResources))]
         public OptionalDateInputViewModel To { get; set; }
 
         public SelectList OrganisationTypesSelectList { get; set; }
