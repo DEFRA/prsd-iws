@@ -15,7 +15,7 @@
     using Requests.WasteCodes;
     using ViewModels.YCode;
 
-    [AuthorizeActivity(typeof(SetYCodes))]
+    [AuthorizeActivity(typeof(EditYCodes))]
     public class YCodeController : BaseWasteCodeController
     {
         private readonly IMap<WasteCodeDataAndNotificationData, EditYCodeViewModel> mapper;
@@ -33,8 +33,8 @@
             var result =
                 await
                     Mediator.SendAsync(new GetWasteCodeLookupAndNotificationDataByTypes(id, RequiredCodeTypes, RequiredCodeTypes));
-            var model = mapper.Map(result);
-            return View(model);
+
+            return View(mapper.Map(result));
         }
 
         [HttpPost]
@@ -49,7 +49,7 @@
             var existingData = await Mediator.SendAsync(new GetWasteCodeLookupAndNotificationDataByTypes(id, RequiredCodeTypes, RequiredCodeTypes));
 
             await
-                Mediator.SendAsync(new SetYCodes(id, viewModel.EnterWasteCodesViewModel.SelectedWasteCodes,
+                Mediator.SendAsync(new EditYCodes(id, viewModel.EnterWasteCodesViewModel.SelectedWasteCodes,
                         viewModel.EnterWasteCodesViewModel.IsNotApplicable));
 
             await AddAuditEntries(existingData, viewModel, id, NotificationAuditScreenType.YCodes);
