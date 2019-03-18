@@ -50,6 +50,7 @@
             { ExportNotificationPermissions.CanAddProducer, new[] { UserRole.Administrator } },
             { ExportNotificationPermissions.CanAddRemoveTransitState, new[] { UserRole.Administrator } },
             { ExportNotificationPermissions.CanEditContactDetails, new[] { UserRole.Administrator } },
+            { ExportNotificationPermissions.CanEditYCodes, new[] { UserRole.Administrator } },
             {ExportNotificationPermissions.CanEditInternalComments, new[] {UserRole.Internal, UserRole.Administrator, UserRole.ReadOnly} },
             { ExportMovementPermissions.CanCreateExportMovements, new[] { UserRole.External, UserRole.Internal, UserRole.Administrator } },
             { ExportMovementPermissions.CanReadExportMovements, new[] { UserRole.Internal, UserRole.External, UserRole.Administrator, UserRole.ReadOnly } },

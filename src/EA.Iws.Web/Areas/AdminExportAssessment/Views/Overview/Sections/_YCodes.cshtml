@@ -14,6 +14,11 @@
         {
             @Html.Partial(codeDefinitionListPartialName, Model.YCodes)
         }
+
+        if (Model.ShowChangeYCodesLink)
+        {
+            <div class="change-answer">@Html.ActionLink("Change", "Index", "YCode", new { id = Model.NotificationId }, null)</div>
+        }
     }
     else
     {

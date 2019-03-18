@@ -74,6 +74,7 @@
             progress.NotificationType = progressResult.Notification.NotificationType;
             progress.CompetentAuthority = progressResult.Notification.CompetentAuthority;
             progress.NotificationNumber = progressResult.Notification.NotificationNumber;
+            progress.NotificationStatus = progressResult.Notification.NotificationStatus;
 
             var organisationsInvolvedComplete = MapProgressForOrganisationsInvolved(progress, progressResult);
             var recoveryOperationComplete = MapProgressForRecoveryOperation(progress, progressResult);

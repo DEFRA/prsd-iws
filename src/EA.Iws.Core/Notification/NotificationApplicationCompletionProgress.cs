@@ -1,6 +1,7 @@
 ﻿namespace EA.Iws.Core.Notification
 {
     using System;
+    using NotificationAssessment;
     using Shared;
 
     public class NotificationApplicationCompletionProgress
@@ -12,6 +13,8 @@
         public NotificationType NotificationType { get; set; }
 
         public UKCompetentAuthority CompetentAuthority { get; set; }
+
+        public NotificationStatus NotificationStatus { get; set; }
 
         public bool HasExporter { get; set; }
         public bool HasProducer { get; set; }
