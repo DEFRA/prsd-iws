@@ -14,6 +14,19 @@
             @Html.AntiForgeryToken()
             @Html.Gds().ValidationSummary()
 
+            for (int i = 0; i < Model.PossibleCodes.Count; i++)
+            {
+                MvcHtmlString idForThisCheckBox = Html.NameFor(m => m.PossibleCodes[i].Key);
+                @Html.HiddenFor(m => m.PossibleCodes[i].Key)
+
+                <div class="multiple-choice">
+                    @Html.CheckBoxFor(m => m.PossibleCodes[i].Value, new { id = idForThisCheckBox })
+                    <label for="@idForThisCheckBox" class="grid-view">
+                        @Html.Raw(Model.DisplayValues[i])
+                    </label>
+                </div>
+            }
+
 
             <button type="submit" class="button">@Constants.ContinueButtonText</button>
         }
