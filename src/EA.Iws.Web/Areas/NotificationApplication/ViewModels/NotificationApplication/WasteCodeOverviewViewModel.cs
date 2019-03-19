@@ -11,7 +11,6 @@
     public class WasteCodeOverviewViewModel
     {
         public Guid NotificationId { get; set; }
-        public NotificationStatus NotificationStatus { get; set; }
         public WasteCodeData[] BaselOecdCode { get; set; }
         public WasteCodeData[] EwcCodes { get; set; }
         public WasteCodeData[] NationExportCode { get; set; }
@@ -54,11 +53,6 @@
         public bool AreUnNumbersNotApplicable
         {
             get { return IsCodeTypeNotApplicable(AreUnNumbersCompleted, UnNumber); }
-        }
-
-        public bool ShowChangeYCodesLink
-        {
-            get { return CanEditYCodes && NotificationStatus == NotificationStatus.Consented; }
         }
 
         public bool AreUnClassesNotApplicable
@@ -104,7 +98,6 @@
             AreUnClassesCompleted = progress.HasUnClasses;
             AreUnNumbersCompleted = progress.HasUnNumbers;
             AreOtherCodesCompleted = progress.HasOtherCodes;
-            NotificationStatus = progress.NotificationStatus;
         }
     }
 }

@@ -14,8 +14,6 @@
 
         public UKCompetentAuthority CompetentAuthority { get; set; }
 
-        public NotificationStatus NotificationStatus { get; set; }
-
         public bool HasExporter { get; set; }
         public bool HasProducer { get; set; }
         public bool HasImporter { get; set; }

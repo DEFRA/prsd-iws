@@ -6,7 +6,7 @@
 <div class="overview-block">
     @if (Model.AreYCodesCompleted)
     {
-        if (Model.ShowChangeYCodesLink)
+        if (Model.CanEditYCodes)
         {
             <div class="change-answer">@Html.ActionLink("Change", "Index", "YCode", new { id = Model.NotificationId }, null)</div>
         }
