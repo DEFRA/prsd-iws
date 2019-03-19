@@ -93,6 +93,7 @@
     <Compile Include="Admin\NotificationAssessment\SetNotificationAcknowledgedDateHandlerTests.cs" />
     <Compile Include="Admin\NotificationAssessment\SetNotificationReceivedDateHandlerTests.cs" />
     <Compile Include="Admin\NotificationAssessment\SetNotificationTransmittedDateHandlerTests.cs" />
+    <Compile Include="Admin\NotificationAssessment\SetOperationCodesHandlerTests.cs" />
     <Compile Include="Admin\NotificationAssessment\UpdateExportAccountManagementCommentsHandlerTests.cs" />
     <Compile Include="Admin\NotificationAssessment\UpdateImportAccountManagementCommentsHandlerTests.cs" />
     <Compile Include="Admin\Reports\GetProducerReportHandlerTests.cs" />

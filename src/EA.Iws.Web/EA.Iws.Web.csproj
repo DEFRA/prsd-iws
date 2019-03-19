@@ -1027,6 +1027,7 @@
     <Content Include="Areas\NotificationApplication\Views\ExitCustomsOffice\_ExitCustomsOfficeGuidance.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\EntryCustomsOffice\_EntryCustomsOfficeGuidance.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\DateEntryViewModel.cshtml" />
+    <Content Include="Areas\AdminExportAssessment\Views\OperationCodes\Edit.cshtml" />
     <Content Include="Content\govuk_toolkit\stylesheets\_url-helpers.scss" />
     <Content Include="Content\govuk_toolkit\stylesheets\_typography.scss" />
     <Content Include="Content\govuk_toolkit\stylesheets\_shims.scss" />
@@ -1236,6 +1237,7 @@
     <Compile Include="Areas\AdminExportAssessment\Controllers\FinancialGuaranteeDetailsController.cs" />
     <Compile Include="Areas\AdminExportAssessment\Controllers\KeyDatesOverrideController.cs" />
     <Compile Include="Areas\AdminExportAssessment\Controllers\MarkAsInterimController.cs" />
+    <Compile Include="Areas\AdminExportAssessment\Controllers\OperationCodesController.cs" />
     <Compile Include="Areas\AdminExportAssessment\Controllers\OverviewController.cs" />
     <Compile Include="Areas\AdminExportAssessment\Controllers\NumberOfShipmentsController.cs" />
     <Compile Include="Areas\AdminExportAssessment\Controllers\ProducerController.cs" />
@@ -1248,6 +1250,12 @@
       <DependentUpon>CommentsResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Areas\AdminExportAssessment\ViewModels\Comments\CommentsViewModel.cs" />
+    <Compile Include="Areas\AdminExportAssessment\ViewModels\OperationCodes\OperationCodesViewModel.cs" />
+    <Compile Include="Areas\AdminExportAssessment\Views\OperationCodes\EditResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EditResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Areas\AdminImportAssessment\ViewModels\Comments\CommentsResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -3802,6 +3810,10 @@
     <EmbeddedResource Include="Areas\AdminExportAssessment\Views\NumberOfShipments\IndexResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\AdminExportAssessment\Views\OperationCodes\EditResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>EditResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\AdminExportAssessment\Views\Producer\ProducerResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

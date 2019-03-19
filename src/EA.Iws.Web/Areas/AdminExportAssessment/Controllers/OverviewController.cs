@@ -33,6 +33,7 @@
             var canAddProducer = Task.Run(() => authorizationService.AuthorizeActivity(ExportNotificationPermissions.CanAddProducer)).Result;
             var canAddRemoveTransitState = Task.Run(() => authorizationService.AuthorizeActivity(ExportNotificationPermissions.CanAddRemoveTransitState)).Result;
             var canEditContactDetails = Task.Run(() => authorizationService.AuthorizeActivity(ExportNotificationPermissions.CanEditContactDetails)).Result;
+            var canEditOperationCodes = Task.Run(() => authorizationService.AuthorizeActivity(ExportNotificationPermissions.CanEditOperationCodes)).Result;
 
             var model = new NotificationOverviewViewModel(result);
             model.AmountsAndDatesViewModel.CanChangeNumberOfShipments = canChangeNumberOfShipments;
@@ -40,6 +41,7 @@
             model.JourneyViewModel.CanAddRemoveTransitState = canAddRemoveTransitState && IsEditableStatus(result.SubmitSummaryData.Status);
             model.OrganisationsInvolvedViewModel.CanAddProducer = canAddProducer;
             model.OrganisationsInvolvedViewModel.CanEditContactDetails = canEditContactDetails;
+            model.RecoveryOperationViewModel.CanEditCodes = canEditOperationCodes && result.SubmitSummaryData.Status == NotificationStatus.Consented;
 
             return View(model);
         }
