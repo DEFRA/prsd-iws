@@ -1,7 +1,6 @@
 ﻿namespace EA.Iws.Core.Notification
 {
     using System;
-    using NotificationAssessment;
     using Shared;
 
     public class NotificationApplicationCompletionProgress
