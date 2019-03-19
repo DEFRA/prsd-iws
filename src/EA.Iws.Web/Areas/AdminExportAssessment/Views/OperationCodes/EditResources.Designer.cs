@@ -61,7 +61,7 @@ namespace EA.Iws.Web.Areas.AdminExportAssessment.Views.OperationCodes {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Which {type} codes apply to this notification?.
+        ///   Looks up a localized string similar to Change {type} codes.
         /// </summary>
         public static string Header {
             get {
@@ -79,7 +79,7 @@ namespace EA.Iws.Web.Areas.AdminExportAssessment.Views.OperationCodes {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Which {type} codes apply to this notification?.
+        ///   Looks up a localized string similar to Operation codes.
         /// </summary>
         public static string Title {
             get {
