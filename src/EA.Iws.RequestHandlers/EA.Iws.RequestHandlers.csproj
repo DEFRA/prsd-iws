@@ -645,6 +645,7 @@
     <Compile Include="Users\GetUserIsInternalHandler.cs" />
     <Compile Include="Validation\IValidator.cs" />
     <Compile Include="Validation\Validator.cs" />
+    <Compile Include="WasteCodes\EditYCodesHandler.cs" />
     <Compile Include="WasteRecovery\DeleteWasteDisposalWhenRecoverablePercentageChangedToMax.cs" />
     <Compile Include="WasteRecovery\GetEstimatedValueHandler.cs" />
     <Compile Include="WasteRecovery\GetRecoverablePercentageHandler.cs" />

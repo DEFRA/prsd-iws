@@ -35,6 +35,9 @@
         public const string CanEditContactDetails = "Can Edit Contact Details";
 
         public const string CanEditInternalComments = "Can edit internal comments";
+
+        public const string CanEditYCodes = "Can Edit Y Codes";
+
         public const string CanEditOperationCodes = "Can edit operation codes";
     }
 }

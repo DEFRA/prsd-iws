@@ -33,6 +33,7 @@
             var canAddProducer = Task.Run(() => authorizationService.AuthorizeActivity(ExportNotificationPermissions.CanAddProducer)).Result;
             var canAddRemoveTransitState = Task.Run(() => authorizationService.AuthorizeActivity(ExportNotificationPermissions.CanAddRemoveTransitState)).Result;
             var canEditContactDetails = Task.Run(() => authorizationService.AuthorizeActivity(ExportNotificationPermissions.CanEditContactDetails)).Result;
+            var canEditYCodes = Task.Run(() => authorizationService.AuthorizeActivity(ExportNotificationPermissions.CanEditYCodes)).Result;
             var canEditOperationCodes = Task.Run(() => authorizationService.AuthorizeActivity(ExportNotificationPermissions.CanEditOperationCodes)).Result;
 
             var model = new NotificationOverviewViewModel(result);
@@ -41,6 +42,7 @@
             model.JourneyViewModel.CanAddRemoveTransitState = canAddRemoveTransitState && IsEditableStatus(result.SubmitSummaryData.Status);
             model.OrganisationsInvolvedViewModel.CanAddProducer = canAddProducer;
             model.OrganisationsInvolvedViewModel.CanEditContactDetails = canEditContactDetails;
+            model.WasteCodeOverviewViewModel.CanEditYCodes = canEditYCodes && result.SubmitSummaryData.Status == NotificationStatus.Consented;
             model.RecoveryOperationViewModel.CanEditCodes = canEditOperationCodes && result.SubmitSummaryData.Status == NotificationStatus.Consented;
 
             return View(model);

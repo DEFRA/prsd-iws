@@ -394,6 +394,7 @@
     <Compile Include="Users\GetUserId.cs" />
     <Compile Include="Users\ExternalUserExists.cs" />
     <Compile Include="Users\GetUserIsInternal.cs" />
+    <Compile Include="WasteCodes\EditYCodes.cs" />
     <Compile Include="WasteRecovery\GetRecoveryCost.cs" />
     <Compile Include="WasteRecovery\SaveWasteRecovery.cs" />
     <Compile Include="WasteRecovery\GetEstimatedValue.cs" />
