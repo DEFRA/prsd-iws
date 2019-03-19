@@ -234,6 +234,7 @@
     <Compile Include="NotificationAssessment\DeleteNotificationComment.cs" />
     <Compile Include="NotificationAssessment\GetNotificationComments.cs" />
     <Compile Include="NotificationAssessment\GetNotificationCommentsUsers.cs" />
+    <Compile Include="NotificationAssessment\UpdateEwcCode.cs" />
     <Compile Include="NotificationAssessment\SetOperationCodes.cs" />
     <Compile Include="NotificationAssessment\UpdateExportNotificationAssementCommets.cs" />
     <Compile Include="NotificationMovements\BulkUpload\CreateReceiptRecovery.cs" />
