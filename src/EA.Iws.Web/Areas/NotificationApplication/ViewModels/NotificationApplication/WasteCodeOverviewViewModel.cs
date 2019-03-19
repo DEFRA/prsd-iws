@@ -27,6 +27,7 @@
         public bool AreUnClassesCompleted { get; set; }
         public bool AreUnNumbersCompleted { get; set; }
         public bool AreOtherCodesCompleted { get; set; }
+        public bool CanEditEWCCodes { get; set; }
 
         public bool IsBaselOecdCodeNotApplicable
         {
