@@ -102,28 +102,28 @@ AS
         CON.[To] AS ConsentValidTo
     FROM
         [ImportNotification].[Notification] AS N
-        INNER JOIN [ImportNotification].[WasteType] WT_Basel
+        LEFT JOIN [ImportNotification].[WasteType] WT_Basel
             LEFT JOIN [ImportNotification].[WasteCode] WCI_Basel 
-                INNER JOIN [Lookup].[WasteCode] WC_Basel ON WCI_Basel.WasteCodeId = WC_Basel.Id AND WC_Basel.CodeType IN (1, 2)
+                LEFT JOIN [Lookup].[WasteCode] WC_Basel ON WCI_Basel.WasteCodeId = WC_Basel.Id AND WC_Basel.CodeType IN (1, 2)
             ON WCI_Basel.WasteTypeId = WT_Basel.Id 
         ON N.Id = WT_Basel.ImportNotificationId
-        INNER JOIN [ImportNotification].[WasteType] WT_Ewc
+        LEFT JOIN [ImportNotification].[WasteType] WT_Ewc
             LEFT JOIN [ImportNotification].[WasteCode] WCI_Ewc 
                 INNER JOIN [Lookup].[WasteCode] WC_Ewc ON WCI_Ewc.WasteCodeId = WC_Ewc.Id AND WC_Ewc.CodeType = 3
             ON WCI_Ewc.WasteTypeId = WT_Ewc.Id             
         ON N.Id = WT_Ewc.ImportNotificationId
-        INNER JOIN [ImportNotification].[Producer] P ON N.Id = P.ImportNotificationId
-        INNER JOIN [ImportNotification].[Importer] I ON N.Id = I.ImportNotificationId
-        INNER JOIN [ImportNotification].[TransportRoute] TR
-            INNER JOIN [ImportNotification].[StateOfImport] SOI ON TR.Id = SOI.TransportRouteId
-            INNER JOIN [Notification].[EntryOrExitPoint] EnPt ON SOI.EntryPointId = EnPt.Id
+        LEFT JOIN [ImportNotification].[Producer] P ON N.Id = P.ImportNotificationId
+        LEFT JOIN [ImportNotification].[Importer] I ON N.Id = I.ImportNotificationId
+        LEFT JOIN [ImportNotification].[TransportRoute] TR
+            LEFT JOIN [ImportNotification].[StateOfImport] SOI ON TR.Id = SOI.TransportRouteId
+            LEFT JOIN [Notification].[EntryOrExitPoint] EnPt ON SOI.EntryPointId = EnPt.Id
             INNER JOIN [Lookup].[Country] SOI_C ON EnPt.CountryId = SOI_C.Id
-            INNER JOIN [ImportNotification].[StateOfExport] SOE ON TR.Id = SOE.TransportRouteId
+            LEFT JOIN [ImportNotification].[StateOfExport] SOE ON TR.Id = SOE.TransportRouteId
             INNER JOIN [Lookup].[Country] SOE_C ON SOE.CountryId = SOE_C.Id
-            INNER JOIN [Notification].[EntryOrExitPoint] ExPt ON SOE.ExitPointId = ExPt.Id
+            LEFT JOIN [Notification].[EntryOrExitPoint] ExPt ON SOE.ExitPointId = ExPt.Id
         ON N.Id = TR.ImportNotificationId
-        INNER JOIN [ImportNotification].[Exporter] E ON N.Id = E.ImportNotificationId
-        INNER JOIN [ImportNotification].[FacilityCollection] FC
+        LEFT JOIN [ImportNotification].[Exporter] E ON N.Id = E.ImportNotificationId
+        LEFT JOIN [ImportNotification].[FacilityCollection] FC
             INNER JOIN [ImportNotification].[Facility] F ON FC.Id = F.FacilityCollectionId
         ON N.Id = FC.ImportNotificationId
         INNER JOIN [ImportNotification].[NotificationAssessment] NA ON N.Id = NA.NotificationApplicationId
