@@ -41,7 +41,7 @@
             model.JourneyViewModel.CanAddRemoveTransitState = canAddRemoveTransitState && IsEditableStatus(result.SubmitSummaryData.Status);
             model.OrganisationsInvolvedViewModel.CanAddProducer = canAddProducer;
             model.OrganisationsInvolvedViewModel.CanEditContactDetails = canEditContactDetails;
-            model.RecoveryOperationViewModel.CanEditCodes = canEditOperationCodes;
+            model.RecoveryOperationViewModel.CanEditCodes = canEditOperationCodes && result.SubmitSummaryData.Status == NotificationStatus.Consented;
 
             return View(model);
         }
