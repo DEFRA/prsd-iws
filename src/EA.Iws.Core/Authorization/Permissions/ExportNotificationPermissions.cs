@@ -37,5 +37,10 @@
         public const string CanEditInternalComments = "Can edit internal comments";
 
         public const string CanEditEwcCodes = "Can edit EWC codes";
+        public const string CanEditYCodes = "Can Edit Y Codes";
+
+        public const string CanEditOperationCodes = "Can edit operation codes";
+        
+        
     }
 }

@@ -4,6 +4,10 @@
     <div class="overview-block-element">
         @if (Model.OperationCodes.Any())
         {
+            if (Model.CanEditCodes)
+            {
+                <div class="change-answer">@Html.ActionLink("Edit", "Edit", "OperationCodes", new { id = Model.NotificationId }, null)</div>
+            }
             @Html.Raw(string.Join(", ", Model.OperationCodes))
         }
         else

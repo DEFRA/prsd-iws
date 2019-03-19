@@ -235,6 +235,7 @@
     <Compile Include="NotificationAssessment\GetNotificationComments.cs" />
     <Compile Include="NotificationAssessment\GetNotificationCommentsUsers.cs" />
     <Compile Include="NotificationAssessment\UpdateEwcCode.cs" />
+    <Compile Include="NotificationAssessment\SetOperationCodes.cs" />
     <Compile Include="NotificationAssessment\UpdateExportNotificationAssementCommets.cs" />
     <Compile Include="NotificationMovements\BulkUpload\CreateReceiptRecovery.cs" />
     <Compile Include="NotificationMovements\BulkUpload\PerformReceiptRecoveryContentValidation.cs" />
@@ -394,6 +395,7 @@
     <Compile Include="Users\GetUserId.cs" />
     <Compile Include="Users\ExternalUserExists.cs" />
     <Compile Include="Users\GetUserIsInternal.cs" />
+    <Compile Include="WasteCodes\EditYCodes.cs" />
     <Compile Include="WasteRecovery\GetRecoveryCost.cs" />
     <Compile Include="WasteRecovery\SaveWasteRecovery.cs" />
     <Compile Include="WasteRecovery\GetEstimatedValue.cs" />
