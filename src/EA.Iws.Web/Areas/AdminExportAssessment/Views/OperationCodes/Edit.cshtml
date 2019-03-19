@@ -1,0 +1,40 @@
+﻿@model EA.Iws.Web.Areas.AdminExportAssessment.ViewModels.OperationCodes.OperationCodesViewModel
+@using Resource = EA.Iws.Web.Areas.AdminExportAssessment.Views.OperationCodes.EditResources
+
+@{
+    ViewBag.Title = "";
+}
+
+<div class="grid-row">
+    <div class="column-two-thirds">
+        <h1 class="heading-large">@Model.Header</h1>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            @Html.Gds().ValidationSummary()
+            @Html.HiddenFor(m => m.NotificationType)
+
+            for (int i = 0; i < Model.PossibleCodes.Count; i++)
+            {
+                MvcHtmlString idForThisCheckBox = Html.NameFor(m => m.PossibleCodes[i].Key);
+                @Html.HiddenFor(m => m.PossibleCodes[i].Key)
+
+                <div class="multiple-choice">
+                    @Html.CheckBoxFor(m => m.PossibleCodes[i].Value, new { id = idForThisCheckBox })
+                    <label for="@idForThisCheckBox" class="grid-view">
+                        @Html.Raw(Model.DisplayValues[i])
+                    </label>
+                </div>
+            }
+
+
+            <button type="submit" class="button">@Constants.ContinueButtonText</button>
+        }
+    </div>
+</div>
+
+
+@section menu {
+    @Html.Action("ExportNavigation", "Menu", new { area = "Admin", section = ExportNavigationSection.Assessment })
+}
