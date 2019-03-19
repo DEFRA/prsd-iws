@@ -6,7 +6,7 @@
         {
             if (Model.CanEditCodes)
             {
-                <div class="change-answer">@Html.ActionLink("Edit", "Edit", "OperationCodes", new { id = Model.NotificationId }, null)</div>
+                <div class="change-answer">@Html.ActionLink("Change", "Edit", "OperationCodes", new { id = Model.NotificationId }, null)</div>
             }
             @Html.Raw(string.Join(", ", Model.OperationCodes))
         }
