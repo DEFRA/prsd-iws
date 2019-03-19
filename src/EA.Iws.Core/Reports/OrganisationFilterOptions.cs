@@ -5,9 +5,9 @@
     public enum OrganisationFilterOptions
     {
         [Display(Name = "Notifier name")]
-        Notifier,
+        Exporter,
 
         [Display(Name = "Consignee name")]
-        Consignee
+        Importer
     }
 }
