@@ -22,6 +22,8 @@
         public TechnologyEmployedData TechnologyEmployed { get; set; }
         public string ReasonForExport { get; set; }
 
+        public bool CanEditCodes { get; set; }
+
         public RecoveryOperationViewModel()
         {
         }
