@@ -42,9 +42,7 @@
 
     <br />
 
-    var organisationNameClass = Model.SelectedOrganistationFilter == null || Model.SelectedOrganistationFilter == "-1" ? "class=hidden" : "";
-
-    <div @organisationNameClass id="organisationNameSection">
+    <div class="@(Model.SelectedOrganistationFilter == null || Model.SelectedOrganistationFilter == "-1" ? "hidden" : string.Empty) @Html.Gds().FormGroupClass(m => m.OrganisationName)" id="organisationNameSection">
        <div class="heading-small">
            @Resource.OrganistationName
        </div>
