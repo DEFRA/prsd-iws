@@ -3,14 +3,17 @@
     using System;
     using System.Threading.Tasks;
     using System.Web.Mvc;
+    using EA.Iws.Core.Authorization.Permissions;
     using EA.Iws.Core.Notification.Audit;
     using EA.Iws.Requests.Notification;
     using EA.Iws.Requests.NotificationAssessment;
     using EA.Iws.Requests.OperationCodes;
     using EA.Iws.Web.Areas.AdminExportAssessment.ViewModels.OperationCodes;
     using EA.Iws.Web.Infrastructure;
+    using EA.Iws.Web.Infrastructure.Authorization;
     using EA.Prsd.Core.Mediator;
 
+    [AuthorizeActivity(ExportNotificationPermissions.CanEditOperationCodes)]
     public class OperationCodesController : Controller
     {
         private readonly IMediator mediator;
