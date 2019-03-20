@@ -22,7 +22,7 @@
             var approvedFinancialGuarantee = financialGuaranteeCollection.AddFinancialGuarantee(today.AddDays(-10));
             EntityHelper.SetEntityId(approvedFinancialGuarantee, approvedFinancialGuaranteeId);
             approvedFinancialGuarantee.Complete(today.AddDays(-9));
-            approvedFinancialGuarantee.Approve(new ApprovalData(today.AddDays(-8), "123", 10, false));
+            approvedFinancialGuarantee.Approve(new ApprovalData(today.AddDays(-8), "123", 10, false, (decimal)12.34, (decimal)56.78));
         }
 
         public void Dispose()

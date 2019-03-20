@@ -30,17 +30,23 @@
             @Html.Partial("~/Areas/Admin/Views/Menu/_ReportingLinks.cshtml", Model)
         </li>
 
-        @if (Model.ShowAddNewEntryOrExitPointLink
-             || Model.ShowApproveNewInternalUserLink)
-        {
-            <li class="@GetClassForSection(AdminHomeNavigationSection.AccountServices, "active")">
-                <h3 class="@GetClassForSection(AdminHomeNavigationSection.AccountServices, "current")">
-                    <span></span>
-                    Account services
-                </h3>
-                @Html.Partial("~/Areas/Admin/Views/Menu/_AdminLinks.cshtml", Model)
-            </li>
-        }
+      @if (Model.ShowNotificationLinks)
+	  {
+		<li class="@GetClassForSection(AdminHomeNavigationSection.AccountServices, "active")">
+			<h3 class="@GetClassForSection(AdminHomeNavigationSection.AccountServices, "current")">
+				<span></span>
+				Account services
+			</h3>
+			<ul>
+				<li>@Html.ActionLink("Address book", "Index", "Home", new { area = "AddressBook" }, null)</li>
 
+				@if (Model.ShowAddNewEntryOrExitPointLink
+			   || Model.ShowApproveNewInternalUserLink)
+				{
+					@Html.Partial("~/Areas/Admin/Views/Menu/_AdminLinks.cshtml", Model)
+				}
+			</ul>
+            </li>
+	  }
     </ul>
 </div>

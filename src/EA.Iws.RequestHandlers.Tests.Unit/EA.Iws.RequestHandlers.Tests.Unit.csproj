@@ -93,6 +93,7 @@
     <Compile Include="Admin\NotificationAssessment\SetNotificationAcknowledgedDateHandlerTests.cs" />
     <Compile Include="Admin\NotificationAssessment\SetNotificationReceivedDateHandlerTests.cs" />
     <Compile Include="Admin\NotificationAssessment\SetNotificationTransmittedDateHandlerTests.cs" />
+    <Compile Include="Admin\NotificationAssessment\SetOperationCodesHandlerTests.cs" />
     <Compile Include="Admin\NotificationAssessment\UpdateExportAccountManagementCommentsHandlerTests.cs" />
     <Compile Include="Admin\NotificationAssessment\UpdateImportAccountManagementCommentsHandlerTests.cs" />
     <Compile Include="Admin\Reports\GetProducerReportHandlerTests.cs" />
@@ -197,6 +198,7 @@
     <Compile Include="Organisations\GetOrganisationDetailsByUserHandlerTests.cs" />
     <Compile Include="Organisations\UpdateOrganisationDetailsHandlerTests.cs" />
     <Compile Include="RequestAuthorizationAttributeTests.cs" />
+    <Compile Include="WasteCodes\EditYCodesHandlerTests.cs" />
     <Compile Include="WasteRecovery\DeleteWasteDisposalWhenRecoverablePercentageChangedToMaxTests.cs" />
     <Compile Include="WasteRecovery\GetEstimatedValueHandlerTests.cs" />
     <Compile Include="WasteRecovery\GetRecoverablePercentageHandlerTests.cs" />

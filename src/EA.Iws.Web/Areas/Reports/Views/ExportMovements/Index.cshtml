@@ -12,19 +12,68 @@
     @Html.AntiForgeryToken()
     @Html.Gds().ValidationSummary()
 
-    <div class="form-group @Html.Gds().FormGroupClass(m => m.From) @Html.Gds().FormGroupClass(m => m.From.Day) @Html.Gds().FormGroupClass(m => m.From.Month) @Html.Gds().FormGroupClass(m => m.From.Year)">
-        @Html.LabelFor(m => m.From)
-        @Html.Gds().ValidationMessageFor(m => m.From)
-        @Html.EditorFor(m => m.From)
+    <div>
+        <div class="heading-small">
+            @Resource.DatesLabel
+        </div>
+        <div>
+            <div class="form-group @Html.Gds().FormGroupClass(m => m.From) @Html.Gds().FormGroupClass(m => m.From.Day) @Html.Gds().FormGroupClass(m => m.From.Month) @Html.Gds().FormGroupClass(m => m.From.Year)">
+                @Html.LabelFor(m => m.From)
+                @Html.Gds().ValidationMessageFor(m => m.From)
+                @Html.EditorFor(m => m.From)
+            </div>
+
+            <div class="form-group @Html.Gds().FormGroupClass(m => m.To) @Html.Gds().FormGroupClass(m => m.To.Day) @Html.Gds().FormGroupClass(m => m.To.Month) @Html.Gds().FormGroupClass(m => m.To.Year)">
+                @Html.LabelFor(m => m.To)
+                @Html.Gds().ValidationMessageFor(m => m.To)
+                @Html.EditorFor(m => m.To)
+            </div>
+        </div>
     </div>
 
-    <div class="form-group @Html.Gds().FormGroupClass(m => m.To) @Html.Gds().FormGroupClass(m => m.To.Day) @Html.Gds().FormGroupClass(m => m.To.Month) @Html.Gds().FormGroupClass(m => m.To.Year)">
-        @Html.LabelFor(m => m.To)
-        @Html.Gds().ValidationMessageFor(m => m.To)
-        @Html.EditorFor(m => m.To)
+    <div>
+        <div class="heading-small">
+            @Resource.OrganistationType
+        </div>
+        <div>
+            @Html.Gds().DropDownListFor(m => m.SelectedOrganistationFilter, Model.OrganisationTypesSelectList, new { @id = "organisationsSelectList" })
+        </div>
     </div>
+
+    <br />
+
+    <div class="@(Model.SelectedOrganistationFilter == null || Model.SelectedOrganistationFilter == "-1" ? "hidden" : string.Empty) @Html.Gds().FormGroupClass(m => m.OrganisationName)" id="organisationNameSection">
+       <div class="heading-small">
+           @Resource.OrganistationName
+       </div>
+       <div>
+           @Html.Gds().ValidationMessageFor(m => m.OrganisationName)
+           @Html.Gds().TextBoxFor(m => m.OrganisationName)
+       </div>
+    </div>
+
+    <br />
 
     <div class="form-group">
         <button class="button" type="submit">@Resource.ButtonText</button>
     </div>
+}
+
+@section scripts {
+    <script>
+        $(function () {
+            $('select#organisationsSelectList').change(function () {
+                var SelectedValue = $(this).val();
+
+                var organisationNameSection = $("#organisationNameSection");
+
+                if (SelectedValue != -1) {
+                    organisationNameSection.removeClass('hidden');
+                }
+                else {
+                    organisationNameSection.addClass('hidden')
+                }
+            });
+        });
+    </script>
 }

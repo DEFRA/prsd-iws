@@ -5,6 +5,7 @@
     using System.Text.RegularExpressions;
     using Core.Notification;
     using Core.Notification.Overview;
+    using Core.NotificationAssessment;
     using Core.WasteCodes;
 
     public class WasteCodeOverviewViewModel
@@ -27,6 +28,8 @@
         public bool AreUnClassesCompleted { get; set; }
         public bool AreUnNumbersCompleted { get; set; }
         public bool AreOtherCodesCompleted { get; set; }
+        public bool CanEditEWCCodes { get; set; }
+        public bool CanEditYCodes { get; set; }        
 
         public bool IsBaselOecdCodeNotApplicable
         {
