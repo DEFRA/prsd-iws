@@ -40,6 +40,8 @@
 
         public const string CanEditYCodes = "Can Edit Y Codes";
 
+        public const string CanEditHCodes = "Can Edit H Codes";
+
         public const string CanEditOperationCodes = "Can edit operation codes";                
     }
 }

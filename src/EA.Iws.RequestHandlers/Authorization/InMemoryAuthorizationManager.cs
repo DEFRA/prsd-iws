@@ -51,6 +51,7 @@
             { ExportNotificationPermissions.CanAddRemoveTransitState, new[] { UserRole.Administrator } },
             { ExportNotificationPermissions.CanEditContactDetails, new[] { UserRole.Administrator } },
             { ExportNotificationPermissions.CanEditYCodes, new[] { UserRole.Administrator } },
+            { ExportNotificationPermissions.CanEditHCodes, new[] { UserRole.Administrator } },
             { ExportNotificationPermissions.CanEditInternalComments, new[] {UserRole.Internal, UserRole.Administrator, UserRole.ReadOnly} },
             { ExportNotificationPermissions.CanEditEwcCodes, new[] { UserRole.Administrator } },
             { ExportNotificationPermissions.CanEditOperationCodes, new[] { UserRole.Administrator } },
