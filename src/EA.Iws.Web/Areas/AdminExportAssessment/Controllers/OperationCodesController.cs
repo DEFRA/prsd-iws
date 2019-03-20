@@ -9,7 +9,6 @@
     using EA.Iws.Requests.NotificationAssessment;
     using EA.Iws.Requests.OperationCodes;
     using EA.Iws.Web.Areas.AdminExportAssessment.ViewModels.OperationCodes;
-    using EA.Iws.Web.Areas.AdminExportAssessment.Views.OperationCodes;
     using EA.Iws.Web.Infrastructure;
     using EA.Iws.Web.Infrastructure.Authorization;
     using EA.Prsd.Core.Mediator;
