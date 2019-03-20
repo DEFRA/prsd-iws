@@ -9,9 +9,13 @@
         if (Model.AreEwcCodesNotApplicable)
         {
             <div class="overview-block">Not applicable</div>
-        }
-        else
-        {
+		}
+		else
+		{
+			if (Model.CanEditEWCCodes)
+			{
+				<div class="change-answer">@Html.ActionLink("Change", "Index", "EditEwcCode", new { id = Model.NotificationId }, null)</div>
+			}
             @Html.Partial(codeDefinitionListPartialName, Model.EwcCodes)
         }
     }

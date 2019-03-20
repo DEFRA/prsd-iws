@@ -21,7 +21,8 @@
         {
             await financialGuaranteeApproval.Approve(message.NotificationId, message.FinancialGuaranteeId,
                 new ApprovalData(message.DecisionDate, 
-                    message.ReferenceNumber, message.ActiveLoadsPermitted, message.IsBlanketbond));
+                    message.ReferenceNumber, message.ActiveLoadsPermitted, message.IsBlanketbond,
+                    message.CoverAmount, message.CalculationContinued));
 
             await context.SaveChangesAsync();
 

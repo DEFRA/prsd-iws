@@ -462,6 +462,8 @@
     <Compile Include="NotificationAssessment\SetExporterContactHandler.cs" />
     <Compile Include="NotificationAssessment\SetNewNumberOfShipmentsHandler.cs" />
     <Compile Include="NotificationAssessment\SetEntryPointHandler.cs" />
+    <Compile Include="NotificationAssessment\UpdateEwcCodeHandler.cs" />
+    <Compile Include="NotificationAssessment\SetOperationCodesHandler.cs" />
     <Compile Include="NotificationAssessment\UpdateExportAccountManagementCommentsHandler.cs" />
     <Compile Include="NotificationMovements\BulkReceiptRecovery\CreateReceiptRecoveryHandler.cs" />
     <Compile Include="NotificationMovements\BulkReceiptRecovery\PerformReceiptRecoveryContentValidationHandler.cs" />
@@ -644,6 +646,7 @@
     <Compile Include="Users\GetUserIsInternalHandler.cs" />
     <Compile Include="Validation\IValidator.cs" />
     <Compile Include="Validation\Validator.cs" />
+    <Compile Include="WasteCodes\EditYCodesHandler.cs" />
     <Compile Include="WasteRecovery\DeleteWasteDisposalWhenRecoverablePercentageChangedToMax.cs" />
     <Compile Include="WasteRecovery\GetEstimatedValueHandler.cs" />
     <Compile Include="WasteRecovery\GetRecoverablePercentageHandler.cs" />
