@@ -79,7 +79,7 @@ namespace EA.Iws.Web.Areas.AdminExportAssessment.Views.OperationCodes {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Operation codes.
+        ///   Looks up a localized string similar to Change {0} codes.
         /// </summary>
         public static string Title {
             get {

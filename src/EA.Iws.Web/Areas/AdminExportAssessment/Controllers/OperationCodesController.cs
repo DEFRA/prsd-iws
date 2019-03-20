@@ -35,7 +35,6 @@
                     await mediator.SendAsync(new GetOperationCodesByNotificationId(id));
 
             OperationCodesViewModel model = new OperationCodesViewModel(basicInfo.NotificationType, selectedCodes);
-
             return View(model);
         }
 
