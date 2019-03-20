@@ -36,7 +36,6 @@
                     await mediator.SendAsync(new GetOperationCodesByNotificationId(id));
 
             OperationCodesViewModel model = new OperationCodesViewModel(basicInfo.NotificationType, selectedCodes);
-            ViewBag.Title = string.Format(EditResources.Title, model.NotificationType);
             return View(model);
         }
 

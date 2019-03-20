@@ -1,5 +1,11 @@
 ﻿@model EA.Iws.Web.Areas.AdminExportAssessment.ViewModels.OperationCodes.OperationCodesViewModel
+@using EA.Iws.Core.Shared
 @using Resource = EA.Iws.Web.Areas.AdminExportAssessment.Views.OperationCodes.EditResources
+
+@{
+    var typeText = Model.NotificationType == NotificationType.Disposal ? "Disposal" : "Recovery";
+    ViewBag.Title = string.Format(Resource.Title, typeText);
+}
 
 <div class="grid-row">
     <div class="column-two-thirds">
