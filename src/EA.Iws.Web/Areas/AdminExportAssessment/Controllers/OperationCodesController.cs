@@ -9,6 +9,7 @@
     using EA.Iws.Requests.NotificationAssessment;
     using EA.Iws.Requests.OperationCodes;
     using EA.Iws.Web.Areas.AdminExportAssessment.ViewModels.OperationCodes;
+    using EA.Iws.Web.Areas.AdminExportAssessment.Views.OperationCodes;
     using EA.Iws.Web.Infrastructure;
     using EA.Iws.Web.Infrastructure.Authorization;
     using EA.Prsd.Core.Mediator;
@@ -35,7 +36,7 @@
                     await mediator.SendAsync(new GetOperationCodesByNotificationId(id));
 
             OperationCodesViewModel model = new OperationCodesViewModel(basicInfo.NotificationType, selectedCodes);
-
+            ViewBag.Title = string.Format(EditResources.Title, model.NotificationType);
             return View(model);
         }
 
