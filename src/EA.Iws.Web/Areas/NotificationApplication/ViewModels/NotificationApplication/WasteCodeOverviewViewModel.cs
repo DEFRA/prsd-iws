@@ -29,7 +29,8 @@
         public bool AreUnNumbersCompleted { get; set; }
         public bool AreOtherCodesCompleted { get; set; }
         public bool CanEditEWCCodes { get; set; }
-        public bool CanEditYCodes { get; set; }        
+        public bool CanEditYCodes { get; set; }     
+        public bool CanEditHCodes { get; set; }
 
         public bool IsBaselOecdCodeNotApplicable
         {

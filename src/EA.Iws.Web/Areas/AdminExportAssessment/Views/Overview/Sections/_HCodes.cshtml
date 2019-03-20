@@ -6,6 +6,10 @@
 <div class="overview-block">
     @if (Model.AreHCodesCompleted)
     {
+        if (Model.CanEditHCodes)
+        {
+            <div class="change-answer">@Html.ActionLink("Change", "Index", "HCode", new { id = Model.NotificationId }, null)</div>
+        }
         if (Model.AreHCodesNotApplicable)
         {
             <div class="overview-block-element">Not applicable</div>

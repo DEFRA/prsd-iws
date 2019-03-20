@@ -36,6 +36,7 @@
             var canEditEwcCodes = Task.Run(() => authorizationService.AuthorizeActivity(ExportNotificationPermissions.CanEditEwcCodes)).Result;
             var canEditYCodes = Task.Run(() => authorizationService.AuthorizeActivity(ExportNotificationPermissions.CanEditYCodes)).Result;
             var canEditOperationCodes = Task.Run(() => authorizationService.AuthorizeActivity(ExportNotificationPermissions.CanEditOperationCodes)).Result;
+            var canEditHCodes = Task.Run(() => authorizationService.AuthorizeActivity(ExportNotificationPermissions.CanEditHCodes)).Result;
 
             var model = new NotificationOverviewViewModel(result);
             model.AmountsAndDatesViewModel.CanChangeNumberOfShipments = canChangeNumberOfShipments;
@@ -46,6 +47,7 @@
             model.WasteCodeOverviewViewModel.CanEditEWCCodes = canEditEwcCodes && result.SubmitSummaryData.Status == NotificationStatus.Consented;
             model.WasteCodeOverviewViewModel.CanEditYCodes = canEditYCodes && result.SubmitSummaryData.Status == NotificationStatus.Consented;
             model.RecoveryOperationViewModel.CanEditCodes = canEditOperationCodes && result.SubmitSummaryData.Status == NotificationStatus.Consented;
+            model.WasteCodeOverviewViewModel.CanEditHCodes = canEditHCodes && result.SubmitSummaryData.Status == NotificationStatus.Consented;
 
             return View(model);
         }
