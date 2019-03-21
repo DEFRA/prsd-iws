@@ -64,6 +64,18 @@
                     Code = "2",
                     CodeType = CodeType.Ewc,
                     Id = new Guid("2BBFA83C-E33B-46DC-9BEC-92F13F78DE29")
+                },
+                new TestableWasteCode
+                {
+                    Code = "2",
+                    CodeType = CodeType.H,
+                    Id = new Guid("882B4E36-A6B5-494F-B08F-89E2FDF9A875")
+                },
+                new TestableWasteCode
+                {
+                    Code = "2",
+                    CodeType = CodeType.H,
+                    Id = new Guid("382D0431-A296-48EE-BBDE-1DDD4F5801DC")
                 }
         };
     }
