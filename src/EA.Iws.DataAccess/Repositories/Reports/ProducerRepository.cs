@@ -47,7 +47,7 @@
 	                ,[NotificationStatus]
 	                ,[ConsigneeName]
                 FROM 
-	                [Reports].[Producers]
+	                [Reports].[ProducerCache]
                 WHERE
 	                [CompetentAuthorityId] = @competentAuthority
 	                AND (@dateType = 'NotificationReceivedDate' AND  [NotificationReceivedDate] BETWEEN @from AND @to

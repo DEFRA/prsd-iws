@@ -120,6 +120,9 @@
   <data name="ButtonText" xml:space="preserve">
     <value>Generate report</value>
   </data>
+  <data name="CacheInfo" xml:space="preserve">
+    <value>Please note this report is run against a copy of the live data which is a day behind. Anything input today will not be on the report.</value>
+  </data>
   <data name="Heading" xml:space="preserve">
     <value>Producer report</value>
   </data>
