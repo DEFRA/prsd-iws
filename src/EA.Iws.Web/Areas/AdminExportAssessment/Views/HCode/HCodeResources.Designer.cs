@@ -61,7 +61,7 @@ namespace EA.Iws.Web.Areas.AdminExportAssessment.Views.HCode {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Change H codes.
+        ///   Looks up a localized string similar to Change H or HP codes.
         /// </summary>
         public static string Header {
             get {
@@ -70,7 +70,7 @@ namespace EA.Iws.Web.Areas.AdminExportAssessment.Views.HCode {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Change H codes.
+        ///   Looks up a localized string similar to Change H or HP codes.
         /// </summary>
         public static string Title {
             get {

@@ -70,6 +70,15 @@ namespace EA.Iws.Web.Areas.Reports.Views.Producer {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Please note this report is run against a copy of the live data which is a day behind. Anything input today will not be on the report..
+        /// </summary>
+        public static string CacheInfo {
+            get {
+                return ResourceManager.GetString("CacheInfo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Producer report.
         /// </summary>
         public static string Heading {
