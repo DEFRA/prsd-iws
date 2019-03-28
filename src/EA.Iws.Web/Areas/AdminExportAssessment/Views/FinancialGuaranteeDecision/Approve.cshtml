@@ -52,14 +52,14 @@
         <div class="form-group @Html.Gds().FormGroupClass(m => m.CoverAmount)">
             @Html.Gds().LabelFor(m => m.CoverAmount, false)
             @Html.Gds().ValidationMessageFor(m => m.CoverAmount)
-            @Html.Gds().TextBoxFor(m => m.CoverAmount, new { type = "number", step = "0.00001", pattern = "[0-9]*" })
+            @Html.Gds().TextBoxFor(m => m.CoverAmount)
         </div>
     }
 
     <div class="form-group @Html.Gds().FormGroupClass(m => m.ActiveLoadsPermitted)">
         @Html.Gds().LabelFor(m => m.ActiveLoadsPermitted, false)
         @Html.Gds().ValidationMessageFor(m => m.ActiveLoadsPermitted)
-        @Html.Gds().TextBoxFor(m => m.ActiveLoadsPermitted, new { type = "number", min = "1", step = "1", pattern = "[0-9]*" })
+        @Html.Gds().TextBoxFor(m => m.ActiveLoadsPermitted)
     </div>
 
     if (Model.ShowExtraData)
@@ -67,7 +67,7 @@
         <div class="form-group @Html.Gds().FormGroupClass(m => m.CalculationContinued)">
             @Html.Gds().LabelFor(m => m.CalculationContinued, false)
             @Html.Gds().ValidationMessageFor(m => m.CalculationContinued)
-            @Html.Gds().TextBoxFor(m => m.CalculationContinued, new { type = "number", step = "0.00001", pattern = "[0-9]*" })
+            @Html.Gds().TextBoxFor(m => m.CalculationContinued)
         </div>
     }
 
