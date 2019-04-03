@@ -15,5 +15,7 @@
         public const string ExternalNotificationOverviewSectionsLocation = "~/Areas/NotificationApplication/Views/Home/OverviewSections/";
 
         public const string InternalExportNotificationOverviewSectionsLocation = "~/Areas/AdminExportAssessment/Views/Overview/Sections/";
+
+        public const string ExportNotificationEnterWasteCodesEditorTemplateLocation = "~/Areas/NotificationApplication/Views/Shared/EditorTemplates/";
     }
 }

@@ -29,5 +29,7 @@
         public string Officer { get; set; }
 
         public bool? Preconsented { get; protected set; }
+
+        public DateTime? ConsentTo { get; set; }
     }
 }

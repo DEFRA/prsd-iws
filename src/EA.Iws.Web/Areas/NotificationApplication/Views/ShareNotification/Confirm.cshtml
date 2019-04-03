@@ -1,0 +1,46 @@
+﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.ShareNotification.SharedUserListConfirmViewModel
+@using Resources = EA.Iws.Web.Areas.NotificationApplication.Views.ShareNotification.ShareNotificationResources
+@{
+    Layout = "~/Views/Shared/_Layout.GovUK.Sections.cshtml";
+    ViewBag.Title = Resources.ShareNotificationTitle;
+}
+
+<div class="grid-row">
+    <div class="column-two-thirds">
+        <h1 class="heading-large">@Model.ConfirmTitle</h1>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            @Html.Gds().ValidationSummary()
+            @Html.HiddenFor(m => m.NotificationId)
+            @Html.HiddenFor(m => m.SharedUserIds)
+            @Html.HiddenFor(m => m.SharedUsers)
+
+            <div class="form-group">
+                <h2 class="heading-medium">@Resources.ShareNotificationConfirmShareUsers</h2>
+                <table title="@Resources.ShareNotificationTitle">
+
+                    <thead>
+                        <tr>
+                            <th>@Resources.Email</th>
+                        </tr>
+                    </thead>
+                    @for (int i = 0; i < Model.SharedUsers.Count; i++)
+                    {
+                        var sharedUser = Model.SharedUsers[i];
+
+                        <tr>
+                            <td>@Html.Raw(sharedUser.Email)</td>
+                        </tr>
+                    }
+                </table>
+            </div>
+
+            <div>
+                <button class="button" type="submit">@Constants.ContinueButtonText</button>
+            </div>
+            @Html.ActionLink(@Resources.Back, "ShareNotification", "ShareNotification", new { id = Model.NotificationId, area = "NotificationApplication" }, null)
+        }
+    </div>
+</div>

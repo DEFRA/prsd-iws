@@ -35,8 +35,10 @@
         {
             var result = await mediator.SendAsync(new GetFile(notificationId, fileId));
 
+            var fileExtension = result.Type.Replace(".", string.Empty);
+
             return File(result.Content, MimeTypeHelper.GetMimeType(result.Type),
-                string.Format("{0}.{1}", result.Name, result.Type));
+                string.Format("{0}.{1}", result.Name, fileExtension));
         }
     }
 }

@@ -116,6 +116,15 @@ namespace EA.Iws.Web.Areas.AdminImportAssessment.ViewModels.KeyDatesOverride {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Decision required by.
+        /// </summary>
+        public static string DecisionRequiredByDate {
+            get {
+                return ResourceManager.GetString("DecisionRequiredByDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Notification received.
         /// </summary>
         public static string NotificationReceivedDate {

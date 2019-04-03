@@ -12,6 +12,7 @@
         public const string MSExcel = "application/vnd.ms-excel";
         public const string MSExcelXml = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
         public const string MSPowerPoint = "application/vnd.ms-powerpoint";
+        public const string Csv = "text/csv";
 
         public const string MSPowerPointXml =
             "application/vnd.openxmlformats-officedocument.presentationml.presentation";

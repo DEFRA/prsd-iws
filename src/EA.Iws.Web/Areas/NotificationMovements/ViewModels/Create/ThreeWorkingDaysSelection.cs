@@ -6,4 +6,11 @@
 
         ChangeDate = 2
     }
+
+    public enum ThreeOrLessWorkingDaysSelection
+    {
+        ContinueAnyway = 1,
+
+        AbandonCreation = 2
+    }
 }

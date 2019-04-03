@@ -55,9 +55,17 @@
     <Compile Include="Admin\ExternalUserData.cs" />
     <Compile Include="Admin\ExternalUserStatus.cs" />
     <Compile Include="Admin\NotificationInfo.cs" />
+    <Compile Include="Admin\NotificationShipmentsCommentsType.cs" />
     <Compile Include="Admin\Reports\FinancialGuaranteesData.cs" />
     <Compile Include="Admin\Reports\ExportMovementsData.cs" />
     <Compile Include="Admin\Reports\ImportStatsData.cs" />
+    <Compile Include="Admin\Reports\ProducerData.cs" />
+    <Compile Include="Admin\Reports\UserActionData.cs" />
+    <Compile Include="Admin\Reports\UserActionJsonModel.cs" />
+    <Compile Include="Carriers\CarrierList.cs" />
+    <Compile Include="CustomsOffice\EntryExitCustomsOfficeSelection.cs" />
+    <Compile Include="Documents\BulkType.cs" />
+    <Compile Include="Documents\FileUploadType.cs" />
     <Compile Include="FinancialGuarantee\FinancialGuaranteeData.cs" />
     <Compile Include="FinancialGuarantee\FinancialGuaranteeDecision.cs" />
     <Compile Include="Admin\InternalUserData.cs" />
@@ -116,6 +124,8 @@
     <Compile Include="ImportNotificationAssessment\FinancialGuarantee\ImportFinancialGuaranteeStatus.cs" />
     <Compile Include="ImportNotificationAssessment\FinancialGuarantee\ReceivedAndCompletedDateData.cs" />
     <Compile Include="ImportNotificationAssessment\ImportNotificationAssessmentDecisionData.cs" />
+    <Compile Include="ImportNotificationAssessment\ImportNotificationCommentsData.cs" />
+    <Compile Include="ImportNotificationAssessment\ImportNotificationCommentsUsersData.cs" />
     <Compile Include="ImportNotificationAssessment\ImportNotificationStatus.cs" />
     <Compile Include="ImportNotificationAssessment\KeyDatesData.cs" />
     <Compile Include="ImportNotificationAssessment\Transactions\AccountOverviewData.cs" />
@@ -158,10 +168,27 @@
     <Compile Include="ImportNotification\Summary\WasteCodeSelection.cs" />
     <Compile Include="ImportNotification\Summary\WasteOperation.cs" />
     <Compile Include="ImportNotification\Summary\WasteType.cs" />
+    <Compile Include="InternalComments\InternalComment.cs" />
     <Compile Include="MeansOfTransport\MeansOfTransportHelper.cs" />
     <Compile Include="MeansOfTransport\TransportMethod.cs" />
     <Compile Include="MovementOperation\MovementOperationData.cs" />
     <Compile Include="MovementReceipt\Decision.cs" />
+    <Compile Include="Movement\BulkReceiptRecovery\ReceiptRecoveryDataRow.cs" />
+    <Compile Include="Movement\BulkReceiptRecovery\ReceiptRecoveryRulesSummary.cs" />
+    <Compile Include="Movement\BulkReceiptRecovery\ReceiptRecoveryContentRuleResult.cs" />
+    <Compile Include="Movement\BulkReceiptRecovery\ReceiptRecoveryColumnIndex.cs" />
+    <Compile Include="Movement\BulkReceiptRecovery\ReceiptRecoveryContentRules.cs" />
+    <Compile Include="Movement\BulkReceiptRecovery\IReceiptRecoveryContentRule.cs" />
+    <Compile Include="Movement\BulkReceiptRecovery\ReceiptRecoveryMovement.cs" />
+    <Compile Include="Movement\BulkPrenotification\PrenotificationContentRules.cs" />
+    <Compile Include="Movement\BulkPrenotification\PrenotificationRulesSummary.cs" />
+    <Compile Include="Movement\BulkPrenotification\PrenotificationContentRuleResult.cs" />
+    <Compile Include="Movement\BulkPrenotification\PrenotificationColumnIndex.cs" />
+    <Compile Include="Movement\BulkPrenotification\PrenotificationMovement.cs" />
+    <Compile Include="Movement\BulkPrenotification\IPrenotificationContentRule.cs" />
+    <Compile Include="Movement\BulkUpload\BulkFileRulesSummary.cs" />
+    <Compile Include="Movement\BulkUpload\BulkFileType.cs" />
+    <Compile Include="Movement\BulkUpload\BulkFileRules.cs" />
     <Compile Include="Movement\DateHistory.cs" />
     <Compile Include="Movement\IMovementRule.cs" />
     <Compile Include="Movement\InternalMovementSummary.cs" />
@@ -196,13 +223,32 @@
     <Compile Include="NotificationAssessment\NotificationAssessmentDecision.cs" />
     <Compile Include="NotificationAssessment\NotificationAssessmentDecisionData.cs" />
     <Compile Include="NotificationAssessment\NotificationAttentionSummaryTableData.cs" />
+    <Compile Include="NotificationAssessment\NotificationCommentData.cs" />
+    <Compile Include="NotificationAssessment\NotificationCommentsUsersData.cs" />
     <Compile Include="NotificationAssessment\NotificationTransactionData.cs" />
+    <Compile Include="Notification\Audit\NotificationAudit.cs" />
+    <Compile Include="Notification\Audit\NotificationAuditForDisplay.cs" />
+    <Compile Include="Notification\Audit\NotificationAuditScreen.cs" />
+    <Compile Include="Notification\Audit\NotificationAuditScreenType.cs" />
+    <Compile Include="Notification\Audit\NotificationAuditTable.cs" />
+    <Compile Include="Notification\Audit\NotificationAuditType.cs" />
+    <Compile Include="Notification\NotificationSharedUser.cs" />
+    <Compile Include="Notification\NotificationSharedUserHistory.cs" />
     <Compile Include="Notification\UserNotificationsSummary.cs" />
     <Compile Include="OperationCodes\OperationCode.cs" />
     <Compile Include="OperationCodes\OperationCodeMetadata.cs" />
     <Compile Include="OperationCodes\OperationCodeTypeAttribute.cs" />
-    <Compile Include="Reports\FoiReportDates.cs" />
+    <Compile Include="Reports\FOI\FOIOutputColumns.cs" />
+    <Compile Include="Reports\FOI\FOIReportDates.cs" />
+    <Compile Include="Reports\FOI\FOIReportTextFields.cs" />
+    <Compile Include="Reports\OrganisationFilterOptions.cs" />
+    <Compile Include="Reports\ProducerReportDates.cs" />
+    <Compile Include="Reports\ProducerReportTextFields.cs" />
+    <Compile Include="Reports\ShipmentReportOutputColumns.cs" />
+    <Compile Include="Reports\ShipmentReportTextFields.cs" />
     <Compile Include="Reports\ShipmentsReportDates.cs" />
+    <Compile Include="Reports\TextFieldOperator.cs" />
+    <Compile Include="Reports\TextFilterHelper.cs" />
     <Compile Include="Rules\MessageLevel.cs" />
     <Compile Include="Rules\RuleResult.cs" />
     <Compile Include="Shared\CertificateType.cs" />
@@ -304,6 +350,7 @@
       <LastGenOutput>ContactDataResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\StyleCop.MSBuild.4.7.54.0\build\StyleCop.MSBuild.Targets" Condition="Exists('..\packages\StyleCop.MSBuild.4.7.54.0\build\StyleCop.MSBuild.Targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

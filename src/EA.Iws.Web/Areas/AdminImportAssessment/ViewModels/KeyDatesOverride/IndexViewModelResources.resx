@@ -144,4 +144,7 @@
   <data name="WithdrawnDate" xml:space="preserve">
     <value>Withdrawn</value>
   </data>
+  <data name="DecisionRequiredByDate" xml:space="preserve">
+    <value>Decision required by</value>
+  </data>
 </root>

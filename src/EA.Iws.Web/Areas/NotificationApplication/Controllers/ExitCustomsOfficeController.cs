@@ -1,13 +1,14 @@
 ﻿namespace EA.Iws.Web.Areas.NotificationApplication.Controllers
 {
-    using System;
-    using System.Threading.Tasks;
-    using System.Web.Mvc;
     using Core.CustomsOffice;
+    using Core.Notification.Audit;
     using Infrastructure;
     using Prsd.Core.Mediator;
     using Requests.CustomsOffice;
     using Requests.Shared;
+    using System;
+    using System.Threading.Tasks;
+    using System.Web.Mvc;
     using ViewModels.CustomsOffice;
 
     [Authorize]
@@ -15,16 +16,20 @@
     public class ExitCustomsOfficeController : Controller
     {
         private readonly IMediator mediator;
+        private readonly IAuditService auditService;
 
-        public ExitCustomsOfficeController(IMediator mediator)
+        public ExitCustomsOfficeController(IMediator mediator, IAuditService auditService)
         {
             this.mediator = mediator;
+            this.auditService = auditService;
         }
 
         [HttpGet]
-        public async Task<ActionResult> Index(Guid id)
+        public async Task<ActionResult> Index(Guid id, bool? backToOverview = null)
         {
             var data = await mediator.SendAsync(new GetExitCustomsOfficeAddDataByNotificationId(id));
+
+            var existing = await mediator.SendAsync(new GetEntryExitCustomsOfficeSelectionForNotificationById(id));
 
             if (data.CustomsOffices != CustomsOffices.EntryAndExit
                 && data.CustomsOffices != CustomsOffices.Exit)
@@ -53,12 +58,21 @@
                 };
             }
 
+            if (existing == null)
+            {
+                model.CustomsOfficeRequired = null;
+            }
+            else
+            {
+                model.CustomsOfficeRequired = existing.Exit;
+            }
+
             return View(model);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Index(Guid id, CustomsOfficeViewModel model)
+        public async Task<ActionResult> Index(Guid id, CustomsOfficeViewModel model, bool? backToOverview = null)
         {
             var countries = await mediator.SendAsync(new GetEuropeanUnionCountries());
 
@@ -71,19 +85,34 @@
                 return View(model);
             }
 
-            CustomsOfficeCompletionStatus result = await mediator.SendAsync(
-                new SetExitCustomsOfficeForNotificationById(id,
-                model.Name,
-                model.Address,
-                model.SelectedCountry.Value));
+            var existingData = await mediator.SendAsync(new GetExitCustomsOfficeAddDataByNotificationId(id));
+            NotificationAuditType auditType = NotificationAuditType.Added;
 
-            switch (result.CustomsOfficesRequired)
+            if (model.CustomsOfficeRequired.GetValueOrDefault())
             {
-                case CustomsOffices.EntryAndExit:
-                    return RedirectToAction("Index", "EntryCustomsOffice", new { id });
-                default:
-                    return RedirectToAction("Index", "Shipment", new { id });
+                await mediator.SendAsync(
+                    new SetExitCustomsOfficeForNotificationById(id,
+                    model.Name,
+                    model.Address,
+                    model.SelectedCountry.Value));
+                auditType = existingData.CustomsOfficeData == null ? NotificationAuditType.Added : NotificationAuditType.Updated;
             }
+            else if (existingData.CustomsOfficeData != null)
+            {
+                // If customs office required is set to false but there is existing data in the database, delete it
+                await mediator.SendAsync(new DeleteExitCustomsOfficeByNotificationId(id));
+                auditType = NotificationAuditType.Deleted;
+            }
+
+            await this.auditService.AddAuditEntry(this.mediator,
+                       id,
+                       User.GetUserId(),
+                       auditType,
+                       NotificationAuditScreenType.CustomsOffice);
+
+            var addSelection = await mediator.SendAsync(new SetExitCustomsOfficeSelectionForNotificationById(id, model.CustomsOfficeRequired.GetValueOrDefault()));
+
+            return RedirectToAction("Index", "EntryCustomsOffice", new { id, backToOverview = backToOverview });
         }
     }
 }

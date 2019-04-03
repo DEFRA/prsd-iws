@@ -44,5 +44,14 @@
         {
             return await context.ImportNotificationTransactions.Where(t => t.Id == transactionId).SingleAsync();
         }
+
+        public async Task UpdateById(Guid id, string comment)
+        {
+            var existing = await context.ImportNotificationTransactions.Where(t => t.Id == id).SingleAsync();
+
+            existing.UpdateComments(comment);
+
+            await context.SaveChangesAsync();
+        }
     }
 }

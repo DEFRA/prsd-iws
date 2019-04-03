@@ -5,6 +5,8 @@
     using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Mvc;
+    using Core.Notification.Audit;
+    using Infrastructure;
     using Infrastructure.Authorization;
     using Prsd.Core.Mediator;
     using Requests.NotificationAssessment;
@@ -20,10 +22,12 @@
     public class UpdateJourneyController : Controller
     {
         private readonly IMediator mediator;
+        private readonly IAuditService auditService;
 
-        public UpdateJourneyController(IMediator mediator)
+        public UpdateJourneyController(IMediator mediator, IAuditService auditService)
         {
             this.mediator = mediator;
+            this.auditService = auditService;
         }
 
         [HttpGet]
@@ -47,6 +51,12 @@
             }
 
             await mediator.SendAsync(new SetEntryPoint(id, model.SelectedEntryPoint.Value));
+
+            await this.auditService.AddAuditEntry(this.mediator,
+                    id,
+                    User.GetUserId(),
+                    NotificationAuditType.Updated,
+                    NotificationAuditScreenType.ImportRoute);
 
             return RedirectToAction("EntryPointChanged");
         }
@@ -82,6 +92,12 @@
             }
 
             await mediator.SendAsync(new SetExitPoint(id, model.SelectedExitPoint.Value));
+
+            await this.auditService.AddAuditEntry(this.mediator,
+                    id,
+                    User.GetUserId(),
+                    NotificationAuditType.Updated,
+                    NotificationAuditScreenType.ExportRoute);
 
             return RedirectToAction("ExitPointChanged");
         }
@@ -151,6 +167,12 @@
                 mediator.SendAsync(new AddTransitState(id, model.CountryId.Value, model.EntryPointId.Value,
                     model.ExitPointId.Value, model.CompetentAuthorities.SelectedValue));
 
+            await this.auditService.AddAuditEntry(this.mediator,
+                    id,
+                    User.GetUserId(),
+                    NotificationAuditType.Added,
+                    NotificationAuditScreenType.Transits);
+
             return RedirectToAction("Index", "Overview");
         }
 
@@ -169,6 +191,12 @@
         public async Task<ActionResult> RemoveTransitStatePost(Guid id, Guid entityId)
         {
             await mediator.SendAsync(new RemoveTransitState(id, entityId));
+
+            await this.auditService.AddAuditEntry(this.mediator,
+                    id,
+                    User.GetUserId(),
+                    NotificationAuditType.Deleted,
+                    NotificationAuditScreenType.Transits);
 
             return RedirectToAction("Index", "Overview");
         }

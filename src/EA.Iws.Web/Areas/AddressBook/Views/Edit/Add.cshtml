@@ -1,0 +1,45 @@
+﻿@using EA.Iws.Web.Areas.AddressBook.Views.Edit
+@using EA.Iws.Core.AddressBook
+@model EA.Iws.Web.Areas.AddressBook.ViewModels.AddAddressViewModel
+@{
+	ViewBag.Title = "Add Address - " + Model.Type;
+	var titleText = Model.Type == AddressRecordType.Carrier ? "Carrier" : (Model.Type == AddressRecordType.Facility ? "Importer-consignee or facility" : "Exporter-notifier or producer");
+}
+
+@using (Html.BeginForm())
+{
+	@Html.AntiForgeryToken()
+	@Html.Gds().ValidationSummary()
+	@Html.HiddenFor(m => m.Type)
+
+
+	<header class="hgroup">
+		<h1 class="heading-large">@Html.Raw(string.Format(AddEditResource.AddHeader, titleText))</h1>
+	</header>
+
+	<h2 class="heading-medium">@AddEditResource.OrgDetails</h2>
+	<hr />
+	<fieldset>
+		<legend class="visuallyhidden">@AddEditResource.OrgDetails</legend>
+		@Html.Partial("_BusinessType", Model)
+	</fieldset>
+
+	<h2 class="heading-medium">@AddEditResource.Address</h2>
+	<hr />
+
+	<fieldset>
+		<legend class="visuallyhidden">@AddEditResource.Address</legend>
+		@Html.EditorFor(m => m.Address)
+	</fieldset>
+
+	<h2 class="heading-medium">@AddEditResource.Contact</h2>
+	<hr />
+
+	<fieldset>
+		<legend class="visuallyhidden">@AddEditResource.Contact</legend>
+		@Html.EditorFor(m => m.Contact)
+	</fieldset>
+
+
+	<button class="button" type="submit">@Constants.ContinueButtonText</button>
+}

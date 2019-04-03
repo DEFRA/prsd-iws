@@ -3,7 +3,8 @@
 <dl>
     <dd>Name: @Html.DisplayFor(m => m.Name)</dd>
     <dd>
-        Tel: @Html.DisplayFor(m => m.Telephone)
+        Tel: +@Html.DisplayFor(m => m.TelephonePrefix)
+        @Html.DisplayFor(m => m.Telephone)
     </dd>
     <dd>Email: @Html.DisplayFor(m => m.Email)</dd>
 </dl>

@@ -1,9 +1,5 @@
 ﻿namespace EA.Iws.DataAccess
 {
-    using System;
-    using System.Data.Entity;
-    using System.Security;
-    using System.Threading.Tasks;
     using Domain;
     using Domain.AddressBook;
     using Domain.Finance;
@@ -20,6 +16,11 @@
     using Mappings.Exports;
     using Prsd.Core.Domain;
     using Prsd.Core.Domain.Auditing;
+    using System;
+    using System.Data.Entity;
+    using System.Security;
+    using System.Threading.Tasks;
+    using Domain.Movement.BulkUpload;
 
     public class IwsContext : ContextBase
     {
@@ -92,13 +93,23 @@
 
         public virtual DbSet<MovementRejection> MovementRejections { get; set; }
 
+        public virtual DbSet<MovementCarrier> MovementCarrier { get; set; }
+
         public virtual DbSet<AnnexCollection> AnnexCollections { get; set; }
 
         public virtual DbSet<Domain.NotificationApplication.Importer.Importer> Importers { get; set; }
 
         public virtual DbSet<FacilityCollection> Facilities { get; set; }
 
-        public virtual DbSet<UserHistory> UserHistory { get; set; } 
+        public virtual DbSet<UserHistory> UserHistory { get; set; }
+
+        public virtual DbSet<SharedUser> SharedUser { get; set; }
+
+        public virtual DbSet<SharedUserHistory> SharedUserHistory { get; set; }
+
+        public virtual DbSet<Audit> NotificationAudit { get; set; }
+
+        public virtual DbSet<AuditScreen> NotificationAuditScreens { get; set; }
 
         public virtual DbSet<CarrierCollection> Carriers { get; set; }
 
@@ -112,12 +123,20 @@
 
         public virtual DbSet<NumberOfShipmentsHistory> NumberOfShipmentsHistories { get; set; }
 
+        public virtual DbSet<DraftBulkUpload> DraftBulkUploads { get; set; }
+
+        public virtual DbSet<DraftMovement> DraftMovements { get; set; }
+
+        public virtual DbSet<DraftPackagingInfo> DraftPackagingInfos { get; set; }
+
+        public virtual DbSet<NotificationComment> NotificationComments { get; set; }
+
         public async Task<NotificationApplication> GetNotificationApplication(Guid notificationId)
         {
             //TODO: Remove this method and replace usages with repositories
 
             var notification = await NotificationApplications.SingleAsync(n => n.Id == notificationId);
-            if (!(await IsInternal()) && notification.UserId != UserContext.UserId)
+            if (!(await IsInternal()) && notification.UserId != UserContext.UserId && !(await IsSharedUser(notificationId)))
             {
                 throw new SecurityException(string.Format("Access denied to this notification {0} for user {1}",
                     notificationId, UserContext.UserId));
@@ -125,9 +144,17 @@
             return notification;
         }
 
-        private async Task<bool> IsInternal()
+        public async Task<bool> IsInternal()
         {
             return await InternalUsers.AnyAsync(u => u.UserId == UserContext.UserId.ToString());
+        }
+
+        private async Task<bool> IsSharedUser(Guid notificationId)
+        {
+            return
+                await
+                    SharedUser.AnyAsync(
+                        u => u.NotificationId == notificationId && u.UserId == UserContext.UserId.ToString());
         }
     }
 }

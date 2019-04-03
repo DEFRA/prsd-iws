@@ -38,7 +38,9 @@
                 "~/Scripts/vendor/modernizr.custom.77028.js",
                 "~/Scripts/vendor/details.polyfill.js",
                 "~/Scripts/application.js",
-                "~/Scripts/business-type-radio-buttons.js"));
+                "~/Scripts/business-type-radio-buttons.js",
+                "~/Scripts/customs-office-required-radio-buttons.js",
+                "~/Scripts/report-input-parameters.js"));
 
             bundles.Add(new StyleBundle("~/Content/iws-page-ie6").Include(
                 "~/Content/iws-page-ie6.css"));

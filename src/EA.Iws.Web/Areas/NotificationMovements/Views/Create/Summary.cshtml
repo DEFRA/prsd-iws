@@ -36,6 +36,7 @@
             @Html.Raw(string.Format(Resources.DownloadTheDocuments, Html.ActionLink(Resources.Download, "GenerateDocuments", "Download", Model.MovementIds.ToRouteValueDictionary("movementIds"), null)))
         </li>
         <li>@Resources.PrintTheDocuments</li>
+		<li>@Resources.PrintAnnex</li>
         <li>@Resources.CompleteBlocks7And8</li>
         <li>@Resources.SignIt</li>
         <li>@Resources.UploadTheSignedDocuments</li>

@@ -11,7 +11,7 @@
 {
     @Html.AntiForgeryToken()
     @Html.Gds().ValidationSummary()
-
+	<p>@Resource.InfoText</p>
     <div class="form-group @Html.Gds().FormGroupClass(m => m.From) @Html.Gds().FormGroupClass(m => m.From.Day) @Html.Gds().FormGroupClass(m => m.From.Month) @Html.Gds().FormGroupClass(m => m.From.Year)">
         @Html.LabelFor(m => m.From)
         @Html.Gds().ValidationMessageFor(m => m.From)

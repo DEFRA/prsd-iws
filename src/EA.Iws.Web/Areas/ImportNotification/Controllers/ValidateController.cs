@@ -5,6 +5,7 @@
     using System.Web.Mvc;
     using Infrastructure.Authorization;
     using Prsd.Core.Mediator;
+    using Requests.AddressBook;
     using Requests.ImportNotification;
     using Requests.ImportNotification.Validate;
     using ViewModels.Validate;
@@ -37,6 +38,7 @@
 
             if (result)
             {
+                var addresses = await mediator.SendAsync(new AddImportAddressBookEntry(id));
                 return RedirectToAction("Index", "Complete");
             }
 

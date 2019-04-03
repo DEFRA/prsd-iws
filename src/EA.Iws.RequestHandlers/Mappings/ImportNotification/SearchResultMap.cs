@@ -13,7 +13,8 @@
                 Id = source.NotificationId,
                 NotificationType = source.NotificationType,
                 NotificationNumber = source.Number,
-                Status = source.Status
+                Status = source.Status,
+                ShowShipmentSummaryLink = source.ShowShipmentSummaryLink
             };
         }
     }

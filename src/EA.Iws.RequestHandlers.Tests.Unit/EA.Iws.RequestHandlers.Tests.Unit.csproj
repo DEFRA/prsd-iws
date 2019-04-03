@@ -87,11 +87,16 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddressBook\AddImportAddressBookEntryHandlerTests.cs" />
     <Compile Include="Admin\NotificationAssessment\AddNotificationTransactionHandlerTests.cs" />
     <Compile Include="Admin\NotificationAssessment\SetCommencedDateHandlerTests.cs" />
     <Compile Include="Admin\NotificationAssessment\SetNotificationAcknowledgedDateHandlerTests.cs" />
     <Compile Include="Admin\NotificationAssessment\SetNotificationReceivedDateHandlerTests.cs" />
     <Compile Include="Admin\NotificationAssessment\SetNotificationTransmittedDateHandlerTests.cs" />
+    <Compile Include="Admin\NotificationAssessment\SetOperationCodesHandlerTests.cs" />
+    <Compile Include="Admin\NotificationAssessment\UpdateExportAccountManagementCommentsHandlerTests.cs" />
+    <Compile Include="Admin\NotificationAssessment\UpdateImportAccountManagementCommentsHandlerTests.cs" />
+    <Compile Include="Admin\Reports\GetProducerReportHandlerTests.cs" />
     <Compile Include="Admin\UserAdministration\CreateInternalUserHandlerTests.cs" />
     <Compile Include="Admin\FinancialGuarantee\ReleaseFinancialGuaranteeHandlerTests.cs" />
     <Compile Include="Admin\FinancialGuarantee\RefuseFinancialGuaranteeHandlerTests.cs" />
@@ -105,7 +110,11 @@
     <Compile Include="Copy\GetNotificationsToCopyForUserHandlerTests.cs" />
     <Compile Include="Helpers\TestDbSet.cs" />
     <Compile Include="Helpers\AddressDataEqualityComparer.cs" />
+    <Compile Include="ImportNotification\AddImportNotificationCommentsHandlerTests.cs" />
+    <Compile Include="ImportNotification\DeleteImportNotificationCommentHandlerTest.cs" />
     <Compile Include="ImportNotification\Draft\TransitStateCollectionTests.cs" />
+    <Compile Include="ImportNotification\GetImportNotificationCommentsHandlerTests.cs" />
+    <Compile Include="ImportNotification\GetImportNotificationCommentsUsersHandlerTests.cs" />
     <Compile Include="ImportNotification\Summary\TransportRouteIdContainerTests.cs" />
     <Compile Include="ImportNotification\Validate\AddressTestData.cs" />
     <Compile Include="ImportNotification\Validate\AddressValidatorTests.cs" />
@@ -141,12 +150,56 @@
     <Compile Include="Movement\GetSubmittedMovementsHandlerTests.cs" />
     <Compile Include="Movement\GetNotificationIdByMovementIdHandlerTests.cs" />
     <Compile Include="Movement\RecordMovementStatusChangeTest.cs" />
+    <Compile Include="NotificationMovements\BulkReceiptRecovery\ReceiptRecoveryAlreadyRecoveredRuleTests.cs" />
+    <Compile Include="NotificationMovements\BulkReceiptRecovery\ReceiptRecoveryAlreadyRecievedRuleTests.cs" />
+    <Compile Include="NotificationMovements\BulkReceiptRecovery\ReceiptRecoveryQuantityNumericRuleTests.cs" />
+    <Compile Include="NotificationMovements\BulkReceiptRecovery\ReceiptRecoveryQuantityPrecisionLitresKilogramsRuleTests.cs" />
+    <Compile Include="NotificationMovements\BulkReceiptRecovery\ReceiptRecoveryRecoveryDateFormatRuleTests.cs" />
+    <Compile Include="NotificationMovements\BulkReceiptRecovery\ReceiptRecoveryRecoveryQuantityUnitRuleTests.cs" />
+    <Compile Include="NotificationMovements\BulkReceiptRecovery\ReceiptRecoveryRecoveryMustBeInPastRuleTests.cs" />
+    <Compile Include="NotificationMovements\BulkReceiptRecovery\ReceiptRecoveryReceiptOnlyRuleTests.cs" />
+    <Compile Include="NotificationMovements\BulkReceiptRecovery\ReceiptRecoveryRecoverOnlyRuleTests.cs" />
+    <Compile Include="NotificationMovements\BulkReceiptRecovery\ReceiptRecoveryShipmentMustBePrenotifiedRuleTests.cs" />
+    <Compile Include="NotificationMovements\BulkReceiptRecovery\ReceiptRecoveryQuantityPrecisionCubicTonnesRuleTests.cs" />
+    <Compile Include="NotificationMovements\BulkReceiptRecovery\ReceiptRecoveryNotificationNumberRuleTests.cs" />
+    <Compile Include="NotificationMovements\BulkReceiptRecovery\ReceiptRecoveryDuplicateShipmentNumberRuleTests.cs" />
+    <Compile Include="NotificationMovements\BulkReceiptRecovery\ReceiptRecoveryReceiptDateFormatRuleTests.cs" />
+    <Compile Include="NotificationMovements\BulkReceiptRecovery\ReceiptRecoveryReceiptDateValidationRuleTests.cs" />
+    <Compile Include="NotificationMovements\BulkUpload\GetBulkUploadTemplateHandlerTests.cs" />
+    <Compile Include="NotificationMovements\BulkUpload\PerformBulkUploadContentValidationHandlerTests.cs" />
+    <Compile Include="NotificationMovements\BulkUpload\PrenotificationContentDateHistoricRuleTests.cs" />
+    <Compile Include="NotificationMovements\BulkUpload\PrenotificationContentDuplicateShipmentNumberRuleTests.cs" />
+    <Compile Include="NotificationMovements\BulkUpload\PrenotificationDateFormatRuleTests.cs" />
+    <Compile Include="NotificationMovements\BulkUpload\PrenotificationDateFutureRuleTests.cs" />
+    <Compile Include="NotificationMovements\BulkUpload\PrenotificationInvalidPackagingTypeRuleTests.cs" />
+    <Compile Include="NotificationMovements\BulkUpload\PrenotificationInvalidShipmentNumbersRuleTests.cs" />
+    <Compile Include="NotificationMovements\BulkUpload\PrenotificationNotificationNumberRuleTests.cs" />
+    <Compile Include="NotificationMovements\BulkUpload\PrenotificationOnlyNewShipmentsRuleTests.cs.cs" />
+    <Compile Include="NotificationMovements\BulkUpload\PrenotificationQuantityExceededRuleTests.cs" />
+    <Compile Include="NotificationMovements\BulkUpload\PrenotificationQuantityNumericTests.cs" />
+    <Compile Include="NotificationMovements\BulkUpload\PrenotificationQuantityPrecisionForCubicMetresAndTonnesRuleTests.cs" />
+    <Compile Include="NotificationMovements\BulkUpload\PrenotificationQuantityPrecisionForLitresAndKilogramsRuleTests.cs" />
+    <Compile Include="NotificationMovements\BulkUpload\PrenotificationContentConsentValidityRuleTests.cs" />
+    <Compile Include="NotificationMovements\BulkUpload\PrenotificationContentQuantityUnitRuleTests.cs" />
+    <Compile Include="NotificationMovements\BulkUpload\PrenotificationContentThreeWorkingDaysConsentDateRuleTests.cs" />
+    <Compile Include="NotificationMovements\BulkUpload\PrenotificationContentThreeWorkingDaysRuleTests.cs" />
     <Compile Include="NotificationMovements\Capture\EnsureMovementNumberAvailableHandlerTests.cs" />
+    <Compile Include="NotificationMovements\Create\CreateMovementCarriersHandlerTests.cs" />
+    <Compile Include="NotificationMovements\BulkReceiptRecovery\PerformReceiptRecoveryContentValidationHandlerTests.cs" />
+    <Compile Include="Notification\AddNotificationCommentsHandlerTests.cs" />
+    <Compile Include="Notification\DeleteNotificationCommentHandlerTests.cs" />
+    <Compile Include="Notification\GetNotificationCommentsHandlerTests.cs" />
+    <Compile Include="Notification\GetNotificationCommentsUsersHandlerTests.cs" />
+    <Compile Include="Notification\NotifcationAuditGetHandlerTests.cs" />
+    <Compile Include="Notification\NotificationAuditCreatedHandlerTests.cs" />
+    <Compile Include="Notification\NotificationAuditScreenGetHandlerTests.cs" />
     <Compile Include="Notification\NotificationCreatedEventHandlerTests.cs" />
     <Compile Include="Notification\SubmitNotificationHandlerTests.cs" />
     <Compile Include="Organisations\GetOrganisationDetailsByUserHandlerTests.cs" />
     <Compile Include="Organisations\UpdateOrganisationDetailsHandlerTests.cs" />
     <Compile Include="RequestAuthorizationAttributeTests.cs" />
+    <Compile Include="WasteCodes\EditHCodesHandlerTests.cs" />
+    <Compile Include="WasteCodes\EditYCodesHandlerTests.cs" />
     <Compile Include="WasteRecovery\DeleteWasteDisposalWhenRecoverablePercentageChangedToMaxTests.cs" />
     <Compile Include="WasteRecovery\GetEstimatedValueHandlerTests.cs" />
     <Compile Include="WasteRecovery\GetRecoverablePercentageHandlerTests.cs" />
@@ -213,9 +266,7 @@
   <ItemGroup>
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="AddressBook\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

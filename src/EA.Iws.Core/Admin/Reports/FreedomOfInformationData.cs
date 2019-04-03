@@ -23,12 +23,22 @@ namespace EA.Iws.Core.Admin.Reports
 
         public string NotifierPostalCode { get; set; }
 
+        public string NotifierType { get; set; }
+
+        public string NotifierContactName { get; set; }
+
+        public string NotifierContactEmail { get; set; }
+
         [DisplayName("Producer")]
         public string ProducerName { get; set; }
 
         public string ProducerAddress { get; set; }
 
         public string ProducerPostalCode { get; set; }
+
+        public string ProducerType { get; set; }
+
+        public string ProducerContactEmail { get; set; }
 
         [DisplayName("Point of Exit")]
         public string PointOfExport { get; set; }
@@ -41,6 +51,9 @@ namespace EA.Iws.Core.Admin.Reports
 
         [DisplayName("Country of Destination")]
         public string ImportCountryName { get; set; }
+
+        [DisplayName("Countries of Transit")]
+        public string TransitStates { get; set; }
 
         [DisplayName("Waste Type")]
         public string NameOfWaste { get; set; }
@@ -64,6 +77,15 @@ namespace EA.Iws.Core.Admin.Reports
         [DisplayName("Consignee Postal Code")]
         public string ImporterPostalCode { get; set; }
 
+        [DisplayName("Consignee Type")]
+        public string ImporterType { get; set; }
+
+        [DisplayName("Consignee contact name")]
+        public string ImporterContactName { get; set; }
+
+        [DisplayName("Consignee contact email address")]
+        public string ImporterContactEmail { get; set; }
+
         [DisplayName("Facility")]
         public string FacilityName { get; set; }
 
@@ -85,7 +107,20 @@ namespace EA.Iws.Core.Admin.Reports
         [DisplayName("Consent Valid To")]
         public DateTime? ConsentTo { get; set; }
 
+        public string NotificationStatus { get; set; }
+
+        [DisplayName("Decision date")]
+        public DateTime? DecisionRequiredByDate { get; set; }
+
+        [DisplayName("Financial guarantee approved ")]
+        public string IsFinancialGuaranteeApproved { get; set; }
+
+        [DisplayName("File closure date")]
+        public DateTime? FileClosedDate { get; set; }
+
         [DisplayName("Area")]
         public string LocalArea { get; set; }
+
+        public string TechnologyEmployed { get; set; }
     }
 }

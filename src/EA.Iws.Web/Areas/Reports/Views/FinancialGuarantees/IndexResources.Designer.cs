@@ -70,6 +70,15 @@ namespace EA.Iws.Web.Areas.Reports.Views.FinancialGuarantees {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Select your parameters for this report as appropriate.
+        /// </summary>
+        public static string Text {
+            get {
+                return ResourceManager.GetString("Text", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Financial guarantees.
         /// </summary>
         public static string Title {

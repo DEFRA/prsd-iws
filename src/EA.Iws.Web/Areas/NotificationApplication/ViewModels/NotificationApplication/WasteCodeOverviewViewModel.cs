@@ -2,8 +2,10 @@
 {
     using System;
     using System.Linq;
+    using System.Text.RegularExpressions;
     using Core.Notification;
     using Core.Notification.Overview;
+    using Core.NotificationAssessment;
     using Core.WasteCodes;
 
     public class WasteCodeOverviewViewModel
@@ -26,6 +28,9 @@
         public bool AreUnClassesCompleted { get; set; }
         public bool AreUnNumbersCompleted { get; set; }
         public bool AreOtherCodesCompleted { get; set; }
+        public bool CanEditEWCCodes { get; set; }
+        public bool CanEditYCodes { get; set; }     
+        public bool CanEditHCodes { get; set; }
 
         public bool IsBaselOecdCodeNotApplicable
         {
@@ -69,14 +74,24 @@
         {
             NotificationId = classifyYourWasteInfo.NotificationId;
             BaselOecdCode = classifyYourWasteInfo.BaselOecdCode;
-            EwcCodes = classifyYourWasteInfo.EwcCodes;
+            EwcCodes = classifyYourWasteInfo.EwcCodes.OrderBy(w => w.Code).ToArray();
             NationExportCode = classifyYourWasteInfo.NationExportCode;
             NationImportCode = classifyYourWasteInfo.NationImportCode;
             OtherCodes = classifyYourWasteInfo.OtherCodes;
-            YCodes = classifyYourWasteInfo.YCodes;
-            HCodes = classifyYourWasteInfo.HCodes;
-            UnClass = classifyYourWasteInfo.UnClass;
-            UnNumber = classifyYourWasteInfo.UnNumber;
+            YCodes = classifyYourWasteInfo.YCodes.OrderBy(w => Regex.Match(!string.IsNullOrEmpty(w.Code) ? w.Code : string.Empty, @"(\D+)").Value).ThenBy(w =>
+            {
+                double val;
+                double.TryParse(Regex.Match(!string.IsNullOrEmpty(w.Code) ? w.Code : string.Empty, @"(\d+(\.\d*)?|\.\d+)").Value, out val);
+                return val;
+            }).ToArray();
+            HCodes = classifyYourWasteInfo.HCodes.OrderBy(w => Regex.Match(!string.IsNullOrEmpty(w.Code) ? w.Code : string.Empty, @"(\D+)").Value).ThenBy(w =>
+            {
+                double val;
+                double.TryParse(Regex.Match(!string.IsNullOrEmpty(w.Code) ? w.Code : string.Empty, @"(\d+(\.\d*)?|\.\d+)").Value, out val);
+                return val;
+            }).ToArray();
+            UnClass = classifyYourWasteInfo.UnClass.OrderBy(w => w.Code).ToArray();
+            UnNumber = classifyYourWasteInfo.UnNumber.OrderBy(w => w.Code).ToArray();
             CustomCodes = classifyYourWasteInfo.CustomCodes;
             IsBaselOecdCodeCompleted = progress.HasBaselOecdCode;
             AreEwcCodesCompleted = progress.HasEwcCodes;

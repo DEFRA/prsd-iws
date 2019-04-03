@@ -22,7 +22,7 @@
             IsStateOfExportCompleted = progress.HasStateOfExport;
             IsStateOfImportCompleted = progress.HasStateOfImport;
             AreTransitStatesCompleted = progress.HasTransitState;
-            IsCustomsOfficeCompleted = progress.HasCustomsOffice;
+            IsCustomsOfficeCompleted = progress.HasCustomsOfficeSelections;
             StateOfExportData = journeyInfo.TransportRoute.StateOfExport;
             TransitStates = journeyInfo.TransportRoute.TransitStates.ToList();
             StateOfImportData = journeyInfo.TransportRoute.StateOfImport;

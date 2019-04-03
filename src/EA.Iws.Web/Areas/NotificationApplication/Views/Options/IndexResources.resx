@@ -240,4 +240,22 @@
   <data name="AssignNotification" xml:space="preserve">
     <value>Assign notification to another user</value>
   </data>
+  <data name="ShareNotification" xml:space="preserve">
+    <value>Share notification with other users</value>
+  </data>
+  <data name="ReviewAccess" xml:space="preserve">
+    <value>Review user access levels</value>
+  </data>
+  <data name="AccessLevel" xml:space="preserve">
+    <value>Notification access level:</value>
+  </data>
+  <data name="BulkUploadPrenotificationData" xml:space="preserve">
+    <value>Bulk upload prenotification data</value>
+  </data>
+  <data name="BulkUploadTemplate" xml:space="preserve">
+    <value>Templates for bulk uploading shipment data</value>
+  </data>
+  <data name="BulkUploadReceipt" xml:space="preserve">
+    <value>Bulk upload receipt and/or {0} data</value>
+  </data>
 </root>

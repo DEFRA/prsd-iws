@@ -1,0 +1,224 @@
+@using Resource = EA.Iws.Web.Areas.AdminExportAssessment.Views.Comments.IndexResources
+@using EA.Iws.Web.Infrastructure.Paging
+@model EA.Iws.Web.Areas.AdminExportAssessment.ViewModels.Comments.CommentsViewModel
+@{
+    ViewBag.Title = "Review Comments";
+}
+
+@{
+    Layout = "~/Areas/AdminExportAssessment/Views/Comments/_Layout.cshtml";
+}
+
+<header>
+    <h1 class="heading-large">@Resource.CommentsHeader</h1>
+    <p class="subtitle">@Resource.Subtitle</p>
+</header>
+
+<div class="grid-row">
+    <div class="column-two-thirds">
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            @Html.ActionLink(@Resource.AddButton, "Add", "Comments", new { }, new { @class = "button" })
+        }
+    </div>
+</div>
+@if (Model.HasComments)
+{
+    <div class="grid-row">
+        <div class="column-two-thirds">
+
+            @using (Html.BeginForm("Index", "Comments", new { type = Model.Type, filter = Model.SelectedFilter }, FormMethod.Post, new { id = "commentsForm" }))
+            {
+                @Html.AntiForgeryToken()
+                @Html.Gds().ValidationSummary()
+                @Html.HiddenFor(m => m.NotificationId)
+
+
+                <div>
+                    Filter by:
+                </div>
+                <div>
+                    @Html.Gds().DropDownListFor(m => m.SelectedFilter, Model.FilterTerms, new { @id = "filterSelectList" })
+                </div>
+                <br />
+                <br />
+
+                var dateClass = Model.SelectedFilter == "date" ? "" : "class=hidden";
+                var shipmentClass = Model.SelectedFilter == "shipment" ? "" : "class=hidden";
+                var nameClass = Model.SelectedFilter == "name" ? "" : "class=hidden";
+
+                <div @dateClass id="dateSection">
+                    <div class="form-group @Html.Gds().FormGroupClass(m => m.From) @Html.Gds().FormGroupClass(m => m.From.Day) @Html.Gds().FormGroupClass(m => m.From.Month) @Html.Gds().FormGroupClass(m => m.From.Year)">
+                        @Html.LabelFor(m => m.From)
+                        @Html.Gds().ValidationMessageFor(m => m.From)
+                        @Html.EditorFor(m => m.From)
+                    </div>
+                    <br />
+                    <div class="form-group @Html.Gds().FormGroupClass(m => m.To) @Html.Gds().FormGroupClass(m => m.To.Day) @Html.Gds().FormGroupClass(m => m.To.Month) @Html.Gds().FormGroupClass(m => m.To.Year)">
+                        @Html.LabelFor(m => m.To)
+                        @Html.Gds().ValidationMessageFor(m => m.To)
+                        @Html.EditorFor(m => m.To)
+                    </div>
+                    <div class="form-group">
+                        <button class="button" type="submit" name="command" value="search">Search</button>
+                    </div>
+                </div>
+
+
+
+                <div @shipmentClass id="shipmentSection">
+                    <div class="form-group @Html.Gds().FormGroupClass(m => m.ShipmentNumberStr)">
+
+
+                        <div>
+                            @Resource.ShipmentNumber
+                        </div>
+                        <div>
+                            @Html.Gds().ValidationMessageFor(m => m.ShipmentNumberStr)
+                            @Html.Gds().TextBoxFor(m => m.ShipmentNumberStr)
+                        </div>
+                        <br />
+                        <div class="form-group">
+                            <button class="button" type="submit" name="command" value="search">Search</button>
+                        </div>
+                    </div>
+                    <br />
+                </div>
+
+                <div @nameClass id="nameSection">
+
+                    <div>
+                        Name:
+                    </div>
+                    <div>
+                        @Html.Gds().DropDownListFor(m => m.SelectedUser, Model.UserFilters, new { @id = "nameSelectList" })
+                    </div>
+                    <br />
+                    <div class="form-group">
+                        <button class="button" type="submit" name="command" value="search">Search</button>
+                    </div>
+                    <br />
+                </div>
+
+            }
+        </div>
+    </div>
+}
+
+<br />
+
+@Html.Partial("_Navigation")
+
+
+@if (Model.Comments.Count > 0)
+{
+    <div class="form-group table-container">
+        <table title="Comments">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Date</th>
+                    @if (Model.Type == EA.Iws.Core.Admin.NotificationShipmentsCommentsType.Shipments)
+                    {
+                        <th>Shipment no.</th>
+                    }
+                    <th>Comment</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (int i = 0; i < Model.Comments.Count; i++)
+                {
+                    <tr>
+                        <td>
+                            <span style="white-space: nowrap">
+                                @Html.DisplayFor(m => m.Comments[i].Username)
+                            </span>
+                        </td>
+                        <td>
+                            <span style="white-space: nowrap">
+                                @Model.Comments[i].DateAdded.ToString("dd MMM yyyy")
+                            </span>
+                        </td>
+                        @if (Model.Type == EA.Iws.Core.Admin.NotificationShipmentsCommentsType.Shipments)
+                        {
+                            <td>
+                                <span style="white-space: nowrap">
+                                    @Html.DisplayFor(m => m.Comments[i].ShipmentNumber)
+                                </span>
+                            </td>
+                        }
+                        <td>
+                            @Html.DisplayFor(m => m.Comments[i].Comment)
+                        </td>
+                        <td>
+                            <span style="white-space: nowrap">
+                                @Html.ActionLink("Delete", "Delete", "Comments", new { commentId = @Model.Comments[i].CommentId, type = Model.Type, @Page = Model.PageNumber, @Filter = Model.SelectedFilter }, null)
+                            </span>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}
+else
+{
+    <div class="margin-bottom-30 margin-top-30 ">
+        <h3 style="text-align:center; font-size:36px">No comments available</h3>
+    </div>
+}
+
+@if (Model.HasComments)
+{
+    @Html.Pager(Model.PageSize, Model.PageNumber, Model.TotalNumberOfFilteredComments).Options(o =>
+    {
+        o.AddRouteValue("filter", Model.SelectedFilter);
+        o.AddRouteValue("type", Model.Type);
+    })
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="form-group">
+        @Html.ActionLink(Resource.GoToOverview, "Index", "Overview", new { area = "AdminExportAssessment", id = Model.NotificationId }, null)
+    </div>
+}
+
+@section scripts {
+    <script>
+        $(function () {
+            $('select#filterSelectList').change(function () {
+                var SelectedValue = $(this).val();
+
+                var dateSection = $("#dateSection");
+                var shipmentSection = $("#shipmentSection");
+                var nameSection = $("#nameSection");
+
+                if (SelectedValue == "date") {
+                    dateSection.removeClass('hidden');
+                    shipmentSection.addClass('hidden');
+                    nameSection.addClass('hidden')
+                }
+                else if (SelectedValue == "shipment") {
+                    shipmentSection.removeClass('hidden');
+                    dateSection.addClass('hidden');
+                    nameSection.addClass('hidden')
+                }
+                else if (SelectedValue == "name") {
+                    nameSection.removeClass('hidden')
+                    dateSection.addClass('hidden');
+                    shipmentSection.addClass('hidden');
+                }
+                else {
+                    var theForm = document.getElementById("commentsForm");
+
+                    theForm.submit();
+                }
+            });
+        });
+    </script>
+}

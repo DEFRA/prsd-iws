@@ -25,17 +25,21 @@ else
             </thead>
             <tbody>
                 @for (int i = 0; i < Model.Count; i++)
-                {
-                    <tr>
-                        <td>@Html.Raw(Model[i].OrdinalPosition)</td>
-                        <td>@Html.Raw(Model[i].Country.Name)</td>
-                        <td>@Html.Raw(Model[i].CompetentAuthority.Code) - @Html.Raw(Model[i].CompetentAuthority.Name)</td>
-                        <td>@Html.Raw(Model[i].EntryPoint.Name)</td>
-                        <td>@Html.Raw(Model[i].ExitPoint.Name)</td>
-                        <th>@Html.ActionLink(TransitStatesSummaryResources.Edit, "Index", "TransitState", new { id = ViewData["Id"], entityId = Model[i].Id, backToOverview = ViewData["BackToOverview"] }, null) |
-                        <button type="submit" class="link-submit in-table" name="delete" value="@Model[i].Id">@TransitStatesSummaryResources.Delete</button></th>
-                    </tr>
-                }
+				{
+					<tr>
+						<td>@Html.Raw(Model[i].OrdinalPosition)</td>
+						<td>@Html.Raw(Model[i].Country.Name)</td>
+						<td>@Html.Raw(Model[i].CompetentAuthority.Code) - @Html.Raw(Model[i].CompetentAuthority.Name)</td>
+						<td>@Html.Raw(Model[i].EntryPoint.Name)</td>
+						<td>@Html.Raw(Model[i].ExitPoint.Name)</td>
+						<th>
+							<span style="white-space: nowrap">
+								@Html.ActionLink(TransitStatesSummaryResources.Edit, "Index", "TransitState", new { id = ViewData["Id"], entityId = Model[i].Id, backToOverview = ViewData["BackToOverview"] }, null) |
+								<button type="submit" class="link-submit in-table" name="delete" value="@Model[i].Id">@TransitStatesSummaryResources.Delete</button>
+							</span>
+						</th>
+					</tr>
+				}
             </tbody>
         </table>
     }

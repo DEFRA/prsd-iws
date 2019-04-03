@@ -7,6 +7,8 @@
     {
         public ThreeWorkingDaysSelection Selection { get; set; }
 
+        public bool RejectRules { get; set; }
+
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             if (!(Selection == ThreeWorkingDaysSelection.ContinueAnyway || Selection == ThreeWorkingDaysSelection.ChangeDate))

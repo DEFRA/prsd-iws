@@ -120,8 +120,20 @@
   <data name="ButtonText" xml:space="preserve">
     <value>Generate report</value>
   </data>
+  <data name="DatesLabel" xml:space="preserve">
+    <value>Enter the activity dates that need to be reported on</value>
+  </data>
   <data name="MainHeading" xml:space="preserve">
     <value>Export Movement Documents Input</value>
+  </data>
+  <data name="OrganisationNameRequiredError" xml:space="preserve">
+    <value>Enter a partial organisation name to filter on</value>
+  </data>
+  <data name="OrganistationName" xml:space="preserve">
+    <value>Partial organisation name (optional)</value>
+  </data>
+  <data name="OrganistationType" xml:space="preserve">
+    <value>Select the type of organisation filter (optional)</value>
   </data>
   <data name="Title" xml:space="preserve">
     <value>Export Movement Documents Input</value>

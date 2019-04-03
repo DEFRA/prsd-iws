@@ -4,6 +4,8 @@
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Core.Authorization.Permissions;
+    using Core.Notification.Audit;
+    using Infrastructure;
     using Infrastructure.Authorization;
     using Prsd.Core.Mediator;
     using Requests.NotificationAssessment;
@@ -13,10 +15,12 @@
     public class NumberOfShipmentsController : Controller
     {
         private readonly IMediator mediator;
+        private readonly IAuditService auditService;
 
-        public NumberOfShipmentsController(IMediator mediator)
+        public NumberOfShipmentsController(IMediator mediator, IAuditService auditService)
         {
             this.mediator = mediator;
+            this.auditService = auditService;
         }
 
         [HttpGet]
@@ -49,9 +53,15 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Confirm(ConfirmViewModel model)
+        public async Task<ActionResult> Confirm(ConfirmViewModel model)
         {
-            mediator.SendAsync(new SetNewNumberOfShipments(model.NotificationId, model.OldNumberOfShipments, model.NewNumberOfShipments));
+           await mediator.SendAsync(new SetNewNumberOfShipments(model.NotificationId, model.OldNumberOfShipments, model.NewNumberOfShipments));
+
+            await this.auditService.AddAuditEntry(this.mediator,
+                    model.NotificationId,
+                    User.GetUserId(),
+                    NotificationAuditType.Updated,
+                    NotificationAuditScreenType.AmountsAndDates);
 
             return RedirectToAction("Index", "Overview");
         }

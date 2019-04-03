@@ -64,5 +64,8 @@
         public DateTime? PaymentReceivedDate { get; set; }
 
         public decimal? TotalBillable { get; set; }
+
+        [DisplayName("Payment Comments")]
+        public string PaymentComments { get; set; }
     }
 }

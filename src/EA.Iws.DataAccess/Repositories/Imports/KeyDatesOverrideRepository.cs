@@ -65,5 +65,13 @@
                 new SqlParameter("@ConsentValidFromDate", (object)data.ConsentValidFromDate ?? DBNull.Value),
                 new SqlParameter("@ConsentValidToDate", (object)data.ConsentValidToDate ?? DBNull.Value));
         }
+
+        public async Task SetDecisionRequiredByDateForNotification(Guid notificationAssessmentId, DateTime? decisionRequiredByDate)
+        {
+            await context.Database.ExecuteSqlCommandAsync(@"
+                UPDATE [ImportNotification].[NotificationDates] SET [DecisionRequiredByDate] = @DecisionRequiredByDate WHERE [NotificationAssessmentId] = @NotificationAssessmentId",
+                new SqlParameter("@NotificationAssessmentId", notificationAssessmentId),
+                new SqlParameter("@DecisionRequiredByDate", decisionRequiredByDate));
+        }
     }
 }

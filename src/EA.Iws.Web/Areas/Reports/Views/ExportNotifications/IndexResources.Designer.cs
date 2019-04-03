@@ -70,6 +70,15 @@ namespace EA.Iws.Web.Areas.Reports.Views.ExportNotifications {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Select your notification received dates for this report.
+        /// </summary>
+        public static string InfoText {
+            get {
+                return ResourceManager.GetString("InfoText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Data Export notifications.
         /// </summary>
         public static string MainHeading {

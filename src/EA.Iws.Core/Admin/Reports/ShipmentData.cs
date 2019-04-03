@@ -85,5 +85,7 @@
 
         [DisplayName("UN Class")]
         public string UNClass { get; set; }
+
+        public string NotificationStatus { get; set; }
     }
 }

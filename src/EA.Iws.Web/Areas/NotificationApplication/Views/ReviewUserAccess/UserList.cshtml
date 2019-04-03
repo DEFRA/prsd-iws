@@ -1,0 +1,43 @@
+﻿@using EA.Iws.Web.Areas.NotificationApplication.Views.ReviewUserAccess
+
+@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.ReviewUserAccess.UserListViewModel
+@{
+	ViewBag.Title = "List Shared Users";
+	Layout = "~/Views/Shared/_Layout.GovUK.Sections.cshtml";
+}
+<h1 class="heading-large">@string.Format(UserListResources.HeaderText, Model.NotificationNumber)</h1>
+<p>@UserListResources.ActivityText</p>
+<b>@UserListResources.Shared</b>
+
+@if (Model != null && Model.SharedUsers.Any())
+{
+	<div class="form-group">
+		<table title="Carriers">
+			<thead>
+				<tr>
+					<th>@UserListResources.Email</th>
+					<th>@UserListResources.Action</th>
+					<th></th>
+				</tr>
+			</thead>
+			<tbody>
+				@for (var i = 0; i < Model.SharedUsers.Count; i++)
+				{
+					<tr>
+						<td>
+							@Html.DisplayFor(m => m.SharedUsers[i].Email)
+						</td>
+						<td>
+							@Html.ActionLink(UserListResources.Remove, "Remove", "ReviewUserAccess",
+                                new { id = Model.SharedUsers[i].NotificationId, sharedId = Model.SharedUsers[i].Id }, null)
+						</td>
+					</tr>
+				}
+			</tbody>
+		</table>
+	</div>
+}
+
+<div>
+	@Html.ActionLink(UserListResources.NotificationOption, "Index", "Options", new { area = "NotificationApplication", id = Model.NotificationId}, null)
+</div>

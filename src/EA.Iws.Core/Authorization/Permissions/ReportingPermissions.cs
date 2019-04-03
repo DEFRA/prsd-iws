@@ -19,5 +19,7 @@
         public const string CanViewExportMovementsReport = "Can View Export Movements Report";
 
         public const string CanViewBlanketBondsReport = "Can View Blanket Bonds Report";
+
+        public const string CanViewProducerReport = "Can View Producer Report";
     }
 }

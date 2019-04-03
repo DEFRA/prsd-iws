@@ -1,5 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+  </PropertyGroup>
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -53,6 +56,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Content Include="missing-indexes.sql" />
     <Content Include="script-views-as-tables.sql" />
+    <Content Include="scripts\Everytime\02-Views\0027-Reports-Producers.sql" />
     <Content Include="scripts\Everytime\02-Views\0026-Reports-Shipments.sql" />
     <Content Include="scripts\Everytime\03-StoredProcedures\0004-uspUpdateExportFinancialGuaranteeDates.sql" />
     <Content Include="scripts\Everytime\03-StoredProcedures\0008-uspUpdateReportCache.sql" />
@@ -63,6 +67,9 @@
     <Content Include="scripts\Everytime\03-StoredProcedures\0010-uspUpdateImportMovementData.sql" />
     <Content Include="scripts\Everytime\04-Synonyms\0001-elmah.sql" />
     <Content Include="scripts\Everytime\02-Views\0025-Reports-BlanketBonds.sql" />
+    <Content Include="scripts\TestData\20190123-175000-create-submitted-notification-2504.sql" />
+    <Content Include="scripts\TestData\20190123-175000-create-submitted-notification-2503.sql" />
+    <Content Include="scripts\TestData\20190123-175000-create-submitted-notification-2502.sql" />
     <Content Include="scripts\Update\0003-Migration\Sprint1\20170118-153400-drop-countryid.sql" />
     <Content Include="scripts\Update\0003-Migration\Sprint1\20170118-160400-add-indexes.sql" />
     <Content Include="scripts\Update\0003-Migration\Sprint1\20170119-114000-add-indexes.sql" />
@@ -78,6 +85,25 @@
     <Content Include="scripts\Update\0004-CI\Sprint3\20170818-165900-add-uk-transit-authority.sql" />
     <Content Include="scripts\Update\0004-CI\Sprint4\20170824-094800-update-un-3077.sql" />
     <Content Include="scripts\Update\0004-CI\Sprint4\20170829-141800-update-shipments-cache.sql" />
+    <Content Include="scripts\Update\0004-CI\SupportUpdate\20190121-090200-add-created-on-date-to-movements.sql" />
+    <Content Include="scripts\Update\0005-Beta\Sprint1\20181213-094200-add-shared-user-table.sql" />
+    <Content Include="scripts\Update\0005-Beta\Sprint1\20181213-094300-add-shared-user-history-table.sql" />
+    <Content Include="scripts\Update\0005-Beta\Sprint3\20190108-141200-add-lookup-audit-type-table.sql" />
+    <Content Include="scripts\Update\0005-Beta\Sprint3\20190108-141300-add-lookup-audit-screen-table.sql" />
+    <Content Include="scripts\Update\0005-Beta\Sprint3\20190108-141400-add-notification-audit-table.sql" />
+    <Content Include="scripts\Update\0005-Beta\Sprint3\20190108-141500-add-lookup-audit-data.sql" />
+    <Content Include="scripts\Update\0005-Beta\Sprint5\20190131-141400-add-bulk-prenote-draft.sql" />
+    <Content Include="scripts\Update\0005-Beta\Sprint5\20190211-150500-update-draft.sql" />
+    <Content Include="scripts\Update\0005-Beta\Sprint5\20190208-092800-update-movement-carrier-keys.sql" />
+    <Content Include="scripts\Update\0005-Beta\Sprint6\20190220-124500-alter-notificationdates.sql" />
+    <Content Include="scripts\Update\0005-Beta\Sprint6\20190214-133900-add-entryExitCustomsTable.sql" />
+    <Content Include="scripts\Update\0005-Beta\Sprint7\20190311-0951-alter-notification-fg-table.sql" />
+    <Content Include="scripts\Update\0005-Beta\Sprint7\20190306-1050-alter-foi-report-table.sql" />
+    <Content Include="scripts\Update\0005-Beta\Sprint7\20190304-1730-AlterReportShipmentsTable.sql" />
+    <Content Include="scripts\Update\0005-Beta\Sprint7\20190228-1147-AddExpoirtNotificationCommentsTable.sql" />
+    <Content Include="scripts\Update\0005-Beta\Sprint7\20190228-1147-AddImportNotificationCommentsTable.sql" />
+    <Content Include="scripts\Update\0005-Beta\Sprint7\20190308-1620-alter-foi-report-table2.sql" />
+    <Content Include="scripts\Update\0005-Beta\Sprint8\20190322-1353-create-producer-report-cache-table.sql" />
     <Content Include="unindexed-foreign-keys.sql" />
     <Content Include="scripts\Everytime\01-Functions\0003-Reports-PricingInfo.sql" />
     <Content Include="scripts\Everytime\03-StoredProcedures\0003-uspUpdateImportNotificationKeyDates.sql" />
@@ -438,6 +464,11 @@
   </Target>
   <Import Project="..\packages\StyleCop.Error.MSBuild.1.0.0\build\StyleCop.Error.MSBuild.Targets" Condition="Exists('..\packages\StyleCop.Error.MSBuild.1.0.0\build\StyleCop.Error.MSBuild.Targets')" />
   <Import Project="..\packages\StyleCop.MSBuild.4.7.54.0\build\StyleCop.MSBuild.Targets" Condition="Exists('..\packages\StyleCop.MSBuild.4.7.54.0\build\StyleCop.MSBuild.Targets')" />
+  <Import Project="$(SQLDBExtensionsRefPath)\Microsoft.Data.Tools.Schema.Sql.UnitTesting.targets" Condition="'$(SQLDBExtensionsRefPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.Sql.UnitTesting.targets" Condition="'$(SQLDBExtensionsRefPath)' == ''" />
+  <PropertyGroup>
+    <SsdtUnitTestVersion>2.0</SsdtUnitTestVersion>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

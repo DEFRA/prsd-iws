@@ -1,11 +1,15 @@
 ﻿namespace EA.Iws.DataAccess.Repositories.Reports
 {
     using System;
+    using System.Collections.Generic;
     using System.Data.SqlClient;
+    using System.Linq;
     using System.Threading.Tasks;
     using Core.Admin.Reports;
     using Core.Notification;
     using Domain.Reports;
+    using EA.Iws.Core.Reports;
+    using Newtonsoft.Json;
 
     internal class ExportMovementsRepository : IExportMovementsRepository
     {
@@ -16,26 +20,130 @@
             this.context = context;
         }
 
-        public async Task<ExportMovementsData> Get(DateTime from, DateTime to, UKCompetentAuthority competentAuthority)
+        public async Task<ExportMovementsData> Get(DateTime from, DateTime to, UKCompetentAuthority competentAuthority, OrganisationFilterOptions? organisationFilter, string organisationName)
         {
-            return await context.Database.SqlQuery<ExportMovementsData>(
-                @"SELECT
-                      COUNT(CASE WHEN MovementInternalUserId IS NULL AND FileId IS NOT NULL THEN 1 ELSE NULL END) AS FilesUploadedExternally,
-                      COUNT(CASE WHEN MovementInternalUserId IS NOT NULL AND FileId IS NOT NULL THEN 1 ELSE NULL END) AS FilesUploadedInternally,
-                      COUNT(CASE WHEN MovementInternalUserId IS NULL THEN 1 ELSE NULL END) AS MovementsCreatedExternally,
-                      COUNT(MovementInternalUserId) AS MovementsCreatedInternally,
-                      COUNT(CASE WHEN MovementReceiptInternalUserId IS NULL AND ReceiptDate IS NOT NULL THEN 1 ELSE NULL END) AS MovementReceiptsCreatedExternally,
-                      COUNT(CASE WHEN MovementReceiptInternalUserId IS NOT NULL AND ReceiptDate IS NOT NULL THEN 1 ELSE NULL END) AS MovementReceiptsCreatedInternally,
-                      COUNT(CASE WHEN MovementOperationReceiptInternalUserId IS NULL AND OperationDate IS NOT NULL THEN 1 ELSE NULL END) AS MovementOperationReceiptsCreatedExternally,
-                      COUNT(CASE WHEN MovementOperationReceiptInternalUserId IS NOT NULL AND OperationDate IS NOT NULL THEN 1 ELSE NULL END) AS MovementOperationReceiptsCreatedInternally
-                  FROM
-                      [Reports].[ExportMovements]
-                  WHERE 
-                      [CompetentAuthority] = @ca
-                      AND ShipmentDate BETWEEN @from AND @to",
+            string organisationJoin = organisationFilter == null ? string.Empty : string.Format("LEFT JOIN[Notification].[{0}] O ON M.NotificationId = O.NotificationId", organisationFilter.ToString());
+            string organisationQuery = organisationFilter == null ? string.Empty : string.Format("AND O.Name LIKE '%{0}%'", organisationName);
+
+            string query = string.Format(@"WITH 
+                movementcreateddata AS(
+                    SELECT M.NotificationId, IU.Id AS InternalUserId
+                    FROM[Notification].[Movement] M
+                        LEFT JOIN[Notification].[Notification] N ON M.NotificationId = N.Id
+                        LEFT JOIN[Person].[InternalUser] IU ON M.CreatedBy = IU.UserId
+                        {0}
+                    WHERE N.CompetentAuthority = @ca
+                        AND M.CreatedOnDate BETWEEN @from AND @to
+                        {1}),
+
+                receiptdata AS(
+                    SELECT MR.*, IU.Id AS InternalUserId
+
+                    FROM[Notification].[MovementReceipt] MR
+
+                        INNER JOIN[Notification].[Movement] M ON M.Id = MR.MovementId
+
+                        INNER JOIN[Notification].[Notification] N ON M.NotificationId = N.Id
+                        LEFT JOIN[Person].[InternalUser] IU ON MR.CreatedBy = IU.UserId
+                        {0}
+
+                    WHERE N.CompetentAuthority = @ca
+
+                        AND MR.CreatedOnDate BETWEEN @from AND @to
+                        {1}),
+
+                operationreceiptdata AS(
+                    SELECT MOR.*, IU.Id AS InternalUserId
+
+                    FROM[Notification].[MovementOperationReceipt] MOR
+
+                        INNER JOIN[Notification].[Movement] M ON M.Id = MOR.MovementId
+
+                        INNER JOIN[Notification].[Notification] N ON M.NotificationId = N.Id
+                        LEFT JOIN[Person].[InternalUser] IU ON MOR.CreatedBy = IU.UserId
+                        {0}
+
+                    WHERE N.CompetentAuthority = @ca
+
+                        AND MOR.CreatedOnDate BETWEEN @from AND @to
+                        {1}),
+
+                movementcreatedresult AS(
+                    SELECT
+                        COUNT(CASE WHEN InternalUserId IS NULL THEN 1 ELSE NULL END) AS MovementsCreatedExternally,
+                        COUNT(InternalUserId) AS MovementsCreatedInternally
+                    FROM movementcreateddata),
+
+                receiptresult AS(
+                    SELECT
+
+                        COUNT(CASE WHEN InternalUserId IS NULL THEN 1 ELSE NULL END) AS MovementReceiptsCreatedExternally,
+                        COUNT(CASE WHEN InternalUserId IS NOT NULL THEN 1 ELSE NULL END) AS MovementReceiptsCreatedInternally
+                    FROM receiptdata),
+
+                operationresult AS(
+                    SELECT
+                        COUNT(CASE WHEN InternalUserId IS NULL THEN 1 ELSE NULL END) AS MovementOperationReceiptsCreatedExternally,
+                        COUNT(CASE WHEN InternalUserId IS NOT NULL THEN 1 ELSE NULL END) AS MovementOperationReceiptsCreatedInternally
+                    FROM operationreceiptdata)
+
+                SELECT * FROM movementcreatedresult, receiptresult, operationresult", organisationJoin, organisationQuery);
+
+            List<SqlParameter> parameters = new List<SqlParameter>
+            {
                 new SqlParameter("@ca", (int)competentAuthority),
                 new SqlParameter("@from", from),
-                new SqlParameter("@to", to)).SingleAsync();
+                new SqlParameter("@to", to)
+            };
+
+            var movementData = await context.Database.SqlQuery<ExportMovementsData>(query, parameters.ToArray()).SingleAsync();
+
+            string userActionQuery = string.Format(@"SELECT
+                    A.OriginalValue,
+                    A.NewValue,
+                    A.RecordId
+                FROM[Auditing].[AuditLog] AS A
+                INNER JOIN[Notification].[Movement] AS M ON M.Id = A.RecordId
+                INNER JOIN[Notification].[Notification] AS N ON M.NotificationId = N.Id
+                {0}
+                LEFT JOIN[Person].[InternalUser] AS IU ON A.UserId = IU.UserId
+                WHERE TableName = '[Notification].[Movement]'
+                    AND EventType != 0
+                    AND IU.UserId IS NULL
+                    AND N.CompetentAuthority = @ca
+                    AND A.EventDate BETWEEN @from AND @to
+                    {1}
+                ORDER BY RecordId, EventDate", organisationJoin, organisationQuery);
+
+            List<SqlParameter> userActionParameters = new List<SqlParameter>
+            {
+                new SqlParameter("@ca", (int)competentAuthority),
+                new SqlParameter("@from", from),
+                new SqlParameter("@to", to)
+            };
+
+            var userActions = await context.Database.SqlQuery<UserActionData>(userActionQuery, userActionParameters.ToArray()).ToListAsync();
+
+            var movementsUploadedByExternalUser = 0;
+
+            foreach (var notificationGroup in userActions.GroupBy(a => a.RecordId))
+            {
+                for (var i = 0; i < notificationGroup.Count(); i++)
+                {
+                    UserActionJsonModel o = JsonConvert.DeserializeObject<UserActionJsonModel>(notificationGroup.ElementAt(i).OriginalValue);
+                    UserActionJsonModel n = JsonConvert.DeserializeObject<UserActionJsonModel>(notificationGroup.ElementAt(i).NewValue);
+
+                    if (o.FileId == null && n.FileId != null)
+                    {
+                        movementsUploadedByExternalUser++;
+                        i = notificationGroup.Count();
+                    }
+                }
+            }
+
+            movementData.FilesUploadedExternally = movementsUploadedByExternalUser;
+
+            return movementData;
         }
     }
 }

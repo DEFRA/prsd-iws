@@ -26,6 +26,11 @@
         {
             Guard.ArgumentNotNull(() => notificationAssessment, notificationAssessment);
 
+            if (notificationAssessment.Dates.DecisionRequiredByDate != null)
+            {
+                return notificationAssessment.Dates.DecisionRequiredByDate;
+            }
+
             if (!notificationAssessment.Dates.AcknowledgedDate.HasValue)
             {
                 return null;

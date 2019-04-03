@@ -46,8 +46,9 @@
             var exporter = new Exporter(id)
             {
                 Address = model.Address.AsAddress(),
-                BusinessName = model.BusinessName,
-                Contact = model.Contact.AsContact()
+                BusinessName = model.Business.Name,
+                Contact = model.Contact.AsContact(),
+                IsAddedToAddressBook = model.IsAddedToAddressBook
             };
 
             await mediator.SendAsync(new SetDraftData<Exporter>(id, exporter));

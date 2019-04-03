@@ -21,6 +21,7 @@
                 <th>@Resources.StatusTableHeading</th>
                 <th>@Resources.CompanyNameTableHeading</th>
                 <th>@Resources.WasteTypeTableHeading</th>
+                <th>@Resources.ShipmentSummaryTableHeading</th>
             </tr>
         </thead>
         <tbody>
@@ -43,6 +44,12 @@
                     <td>
                         @Html.DisplayFor(m => m.ExportResults[i].WasteType)
                     </td>
+                    <td>
+                        @if (Model.ExportResults[i].ShowShipmentSummaryLink)
+                        {
+                            @Html.ActionLink(@Resources.ShipmentSummaryLinkText, "Index", "Home", new { area = "AdminExportNotificationMovements", id = Model.ExportResults[i].Id }, null)
+                        }
+                    </td>
                 </tr>
             }
         </tbody>
@@ -64,6 +71,7 @@ else
                 <th>@Resources.StatusTableHeading</th>
                 <th>@Resources.CompanyNameTableHeading</th>
                 <th>@Resources.BaselCodeTableHeading</th>
+                <th>@Resources.ShipmentSummaryTableHeading</th>
             </tr>
         </thead>
         <tbody>
@@ -85,6 +93,12 @@ else
                     </td>
                     <td>
                         @Html.DisplayFor(m => m.ImportResults[i].BaselOecdCode)
+                    </td>
+                    <td>
+                        @if (Model.ImportResults[i].ShowShipmentSummaryLink)
+                        {
+                            @Html.ActionLink(@Resources.ShipmentSummaryLinkText, "Index", "Home", new { area = "AdminImportNotificationMovements", id = Model.ImportResults[i].Id }, null)
+                        }
                     </td>
                 </tr>
             }

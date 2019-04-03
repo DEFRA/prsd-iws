@@ -20,6 +20,10 @@
             RuleFor(x => x.Telephone)
                 .NotEmpty()
                 .WithLocalizedMessage(() => ContactValidatorResources.TelephoneNotEmpty);
+
+            RuleFor(x => x.TelephonePrefix)
+                .NotEmpty()
+                .WithLocalizedMessage(() => ContactValidatorResources.TelephonePrefixNotEmpty);
         }
     }
 }

@@ -95,5 +95,14 @@ namespace EA.Iws.RequestHandlers.ImportNotification.Validate {
                 return ResourceManager.GetString("TelephoneNotEmpty", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to please enter the telephone prefix.
+        /// </summary>
+        public static string TelephonePrefixNotEmpty {
+            get {
+                return ResourceManager.GetString("TelephonePrefixNotEmpty", resourceCulture);
+            }
+        }
     }
 }

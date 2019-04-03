@@ -104,7 +104,9 @@
     <Compile Include="ImportNotificationAssessment\IConsultationRepository.cs" />
     <Compile Include="ImportNotificationAssessment\IImportNotificationAssessmentDecisionRepository.cs" />
     <Compile Include="ImportNotificationAssessment\IImportNotificationChargeCalculator.cs" />
+    <Compile Include="ImportNotificationAssessment\IImportNotificationCommentRepository.cs" />
     <Compile Include="ImportNotificationAssessment\IKeyDatesOverrideRepository.cs" />
+    <Compile Include="ImportNotificationAssessment\ImportNotificationComment.cs" />
     <Compile Include="ImportNotificationAssessment\ImportNotificationChargeCalculator.cs" />
     <Compile Include="ImportNotificationAssessment\ImportNotificationDates.cs" />
     <Compile Include="ImportNotificationAssessment\ImportNotificationAssessment.cs" />
@@ -160,8 +162,14 @@
     <Compile Include="ImportNotification\Producer.cs" />
     <Compile Include="ImportNotification\WasteOperationCode.cs" />
     <Compile Include="ImportNotification\Shipment.cs" />
+    <Compile Include="INotificationPreviewWatermarkGenerator.cs" />
     <Compile Include="INotificationUserRepository.cs" />
     <Compile Include="IPostageLabelGenerator.cs" />
+    <Compile Include="Movement\BulkUpload\DraftBulkUpload.cs" />
+    <Compile Include="Movement\BulkUpload\DraftPackagingInfo.cs" />
+    <Compile Include="Movement\BulkUpload\DraftMovement.cs" />
+    <Compile Include="Movement\BulkUpload\IDraftMovementRepository.cs" />
+    <Compile Include="Movement\IMovementCarrierRepository.cs" />
     <Compile Include="Movement\MovementDetailsFactory.cs" />
     <Compile Include="Movement\NumberOfActiveLoads.cs" />
     <Compile Include="Movement\ConsentPeriod.cs" />
@@ -171,6 +179,7 @@
     <Compile Include="Movement\MovementDateOutsideConsentPeriodException.cs" />
     <Compile Include="Movement\MovementDateValidator.cs" />
     <Compile Include="Movement\NumberOfMovements.cs" />
+    <Compile Include="NotificationApplication\AddNotificationSharedUser.cs" />
     <Compile Include="NotificationApplication\Address.cs" />
     <Compile Include="AddressBook\AddressBookRecordComparer.cs" />
     <Compile Include="AddressBook\IAddressBookRespository.cs" />
@@ -188,6 +197,7 @@
     <Compile Include="NotificationApplication\Annexes\RequiredAnnexes.cs" />
     <Compile Include="NotificationApplication\Annexes\TechnologyEmployedAnnex.cs" />
     <Compile Include="NotificationApplication\Annexes\WasteCompositionAnnex.cs" />
+    <Compile Include="NotificationApplication\AuditScreen.cs" />
     <Compile Include="NotificationApplication\CarrierCollection.cs" />
     <Compile Include="NotificationApplication\ContactComparer.cs" />
     <Compile Include="NotificationApplication\BusinessComparer.cs" />
@@ -263,6 +273,10 @@
     <Compile Include="Movement\RejectMovement.cs" />
     <Compile Include="Finance\Activity.cs" />
     <Compile Include="NotificationApplication\IMeansOfTransportRepository.cs" />
+    <Compile Include="NotificationApplication\INotificationAuditRepository.cs" />
+    <Compile Include="NotificationApplication\INotificationAuditScreenRepository.cs" />
+    <Compile Include="NotificationApplication\ISharedUserHistoryRepository.cs" />
+    <Compile Include="NotificationApplication\ISharedUserRepository.cs" />
     <Compile Include="NotificationApplication\ITechnologyEmployedRepository.cs" />
     <Compile Include="NotificationApplication\MeansOfTransport.cs" />
     <Compile Include="NotificationApplication\NotificationApplicationFactory.cs" />
@@ -282,9 +296,13 @@
     <Compile Include="NotificationApplication\NotificationApplicationOverview.cs" />
     <Compile Include="NotificationApplication\IWasteCodeRepository.cs" />
     <Compile Include="NotificationApplication\ChangeNotificationUser.cs" />
+    <Compile Include="NotificationApplication\Audit.cs" />
     <Compile Include="NotificationApplication\NotificationNumberFormatter.cs" />
+    <Compile Include="NotificationApplication\NotificationSharedUserAddedEvent.cs" />
     <Compile Include="NotificationApplication\ProducerCollection.cs" />
     <Compile Include="NotificationApplication\SetAllFacilitiesPreconsented.cs" />
+    <Compile Include="NotificationApplication\SharedUser.cs" />
+    <Compile Include="NotificationApplication\SharedUserHistory.cs" />
     <Compile Include="NotificationApplication\Shipment\INumberOfShipmentsHistotyRepository.cs" />
     <Compile Include="NotificationApplication\Shipment\NumberOfShipmentsHistory.cs" />
     <Compile Include="NotificationApplication\UserHistory.cs" />
@@ -307,7 +325,9 @@
     <Compile Include="DaysRemainingCalculator.cs" />
     <Compile Include="NotificationAssessment\IKeyDatesOverrideRepository.cs" />
     <Compile Include="NotificationAssessment\INotificationAttentionSummaryRepository.cs" />
+    <Compile Include="NotificationAssessment\INotificationCommentRepository.cs" />
     <Compile Include="NotificationAssessment\NotificationAttentionSummary.cs" />
+    <Compile Include="NotificationAssessment\NotificationComment.cs" />
     <Compile Include="NotificationAssessment\NotificationInterim.cs" />
     <Compile Include="NotificationAssessment\NotificationIsInterimSetEvent.cs" />
     <Compile Include="NotificationAssessment\NotificationTransmittedEvent.cs" />
@@ -353,6 +373,7 @@
     <Compile Include="Reports\IFinanceReportRepository.cs" />
     <Compile Include="Reports\IImportNotificationsRepository.cs" />
     <Compile Include="Reports\IImportStatsRepository.cs" />
+    <Compile Include="Reports\IProducerRepository.cs" />
     <Compile Include="Reports\IShipmentsRepository.cs" />
     <Compile Include="Reports\IFreedomOfInformationRepository.cs" />
     <Compile Include="Reports\ImportStats.cs" />
@@ -394,6 +415,7 @@
     <Compile Include="TransportRoute\AllTransitStatesInEUEvent.cs" />
     <Compile Include="TransportRoute\CustomsOffice.cs" />
     <Compile Include="TransportRoute\EntryCustomsOffice.cs" />
+    <Compile Include="TransportRoute\EntryExitCustomsOfficeSelection.cs" />
     <Compile Include="TransportRoute\EntryOrExitPoint.cs" />
     <Compile Include="TransportRoute\ExitCustomsOffice.cs" />
     <Compile Include="TransportRoute\IEntryOrExitPointRepository.cs" />

@@ -6,6 +6,7 @@
         Shipments,
         Finance,
         Reporting,
-        ChangeOwner
+        ChangeOwner,
+        Comments
     }
 }

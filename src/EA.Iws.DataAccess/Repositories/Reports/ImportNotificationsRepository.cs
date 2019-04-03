@@ -31,8 +31,8 @@
                             [Acknowledged],
                             [DecisionDate],
                             [Consented],
-                            [Officer]
-
+                            [Officer],
+                            [ConsentTo]
                     FROM	[Reports].[DataImportNotifications]
 
                     WHERE	[CompetentAuthorityId] = @ca

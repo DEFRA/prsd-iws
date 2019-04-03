@@ -9,6 +9,10 @@
 
     public class AccountManagementViewModel
     {
+        public AccountManagementViewModel()
+        {
+        }
+
         public AccountManagementViewModel(AccountManagementData data)
         {
             TotalBillable = data.TotalBillable;
@@ -36,6 +40,9 @@
         public bool ShowRefundDetails { get; set; }
 
         public bool CanDeleteTransaction { get; set; }
+        public string CommentError { get; set; }
+
+        public int ErrorCommentId { get; set; }
 
         public bool HasPayments
         {

@@ -6,6 +6,7 @@
     using System.Linq;
     using System.Threading.Tasks;
     using Core.Admin.Search;
+    using Core.FinancialGuarantee;
     using Core.NotificationAssessment;
     using Core.WasteType;
     using DataAccess;
@@ -44,6 +45,8 @@
                 .Join(context.NotificationAssessments
                     .Where(p => p.Status != NotificationStatus.NotSubmitted), x => x.Notification.Id,
                     na => na.NotificationApplicationId, (n, na) => new { n.Notification, n.Exporter, Assessment = na })
+                .GroupJoin(context.FinancialGuarantees, x => x.Notification.Id, 
+                    fg => fg.NotificationId, (n, fg) => new { Notification = n.Notification, Exporter = n.Exporter, Assessment = n.Assessment, FinancialGuarantees = fg })
                 .Select(s =>
                     new
                     {
@@ -52,7 +55,8 @@
                         ExporterName = s.Exporter.Business.Name,
                         WasteType = s.Notification.WasteType.ChemicalCompositionType,
                         s.Assessment.Status,
-                        s.Notification.CompetentAuthority
+                        s.Notification.CompetentAuthority,
+                        FinancialGuaranteeCollection = s.FinancialGuarantees.FirstOrDefault()
                     })
                 .OrderBy(x => x.NotificationNumber)
                 .ToListAsync();
@@ -62,11 +66,16 @@
                 s.NotificationNumber,
                 s.ExporterName,
                 s.WasteType,
-                s.Status)).ToList();
+                s.Status,
+                (s.Status == NotificationStatus.Consented || s.Status == NotificationStatus.ConsentWithdrawn)
+                    && s.FinancialGuaranteeCollection != null &&
+                    s.FinancialGuaranteeCollection.FinancialGuarantees != null &&
+                    s.FinancialGuaranteeCollection.FinancialGuarantees.Any(fg => fg.Status == FinancialGuaranteeStatus.Approved || 
+                                                                           fg.Status == FinancialGuaranteeStatus.Released))).ToList();
         }
 
         private static BasicSearchResult ConvertToSearchResults(Guid notificationId, string notificationNumber,
-            string exporterName, ChemicalComposition wasteTypeValue, NotificationStatus status)
+            string exporterName, ChemicalComposition wasteTypeValue, NotificationStatus status, bool showSummaryLink)
         {
             var searchResult = new BasicSearchResult
             {
@@ -75,7 +84,8 @@
                 ExporterName = exporterName,
                 WasteType = wasteTypeValue != default(ChemicalComposition)
                     ? EnumHelper.GetShortName(wasteTypeValue) : string.Empty,
-                NotificationStatus = EnumHelper.GetDisplayName(status)
+                NotificationStatus = EnumHelper.GetDisplayName(status),
+                ShowShipmentSummaryLink = showSummaryLink
             };
 
             return searchResult;

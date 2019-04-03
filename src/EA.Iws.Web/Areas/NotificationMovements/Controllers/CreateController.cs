@@ -1,10 +1,6 @@
 ﻿namespace EA.Iws.Web.Areas.NotificationMovements.Controllers
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Threading.Tasks;
-    using System.Web.Mvc;
+    using Core.Carriers;
     using Core.Movement;
     using Core.PackagingType;
     using Core.Rules;
@@ -12,10 +8,16 @@
     using Infrastructure;
     using Infrastructure.Authorization;
     using Prsd.Core.Mediator;
+    using Requests.Carriers;
     using Requests.Movement;
     using Requests.Notification;
     using Requests.NotificationMovements;
     using Requests.NotificationMovements.Create;
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
+    using System.Web.Mvc;
     using ViewModels.Create;
     using ViewModels.Summary;
 
@@ -30,13 +32,13 @@
         }
 
         [HttpGet]
-        public async Task<ActionResult> Index(Guid notificationId)
+        public async Task<ActionResult> Index(Guid notificationId, bool overrideRule = false)
         {
             ViewBag.NotificationId = notificationId;
 
             var ruleSummary = await mediator.SendAsync(new GetMovementRulesSummary(notificationId));
 
-            if (!ruleSummary.IsSuccess)
+            if (!ruleSummary.IsSuccess && !overrideRule)
             {
                 return GetRuleErrorView(ruleSummary);
             }
@@ -44,23 +46,25 @@
             var shipmentInfo = await mediator.SendAsync(new GetShipmentInfo(notificationId));
 
             var model = new CreateMovementsViewModel(shipmentInfo);
-
+            model.OverrideRule = overrideRule;
             if (TempData["TempMovement"] != null)
             {
                 var tempMovement = (TempMovement)TempData["TempMovement"];
                 model.NumberToCreate = tempMovement.NumberToCreate;
                 model.Quantity = tempMovement.Quantity.ToString();
                 model.Units = tempMovement.ShipmentQuantityUnits;
-                model.PackagingTypes.SetSelectedValues(tempMovement.PackagingTypes);                      
+                model.PackagingTypes.SetSelectedValues(tempMovement.PackagingTypes);
             }
 
-            return View(model);
+            return View("Index", model);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Index(Guid notificationId, CreateMovementsViewModel model)
         {
+            ViewBag.NotificationId = notificationId;
+
             if (!ModelState.IsValid)
             {
                 return View(model);
@@ -121,7 +125,7 @@
 
                 TempData["TempMovement"] = tempMovement;
 
-                return RedirectToAction("ThreeWorkingDaysWarning", "Create");
+                return RedirectToAction("ThreeWorkingDaysWarning", "Create", new {rejectRules = model.OverrideRule });
             }
 
             var newMovementIds = await mediator.SendAsync(new CreateMovements(
@@ -132,7 +136,7 @@
                 model.Units.Value,
                 model.SelectedPackagingTypes));
 
-            return RedirectToAction("Summary", newMovementIds.ToRouteValueDictionary("newMovementIds"));
+            return RedirectToAction("WhoAreYourCarriers", newMovementIds.ToRouteValueDictionary("newMovementIds"));
         }
 
         private ActionResult GetRuleErrorView(MovementRulesSummary ruleSummary)
@@ -182,10 +186,10 @@
         }
 
         [HttpGet]
-        public ActionResult ThreeWorkingDaysWarning(Guid notificationId)
+        public ActionResult ThreeWorkingDaysWarning(Guid notificationId, bool rejectRules)
         {
             var model = new ThreeWorkingDaysWarningViewModel();
-
+            model.RejectRules = rejectRules;
             return View("ThreeWorkingDays", model);
         }
 
@@ -200,7 +204,7 @@
 
             if (model.Selection == ThreeWorkingDaysSelection.ChangeDate)
             {
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", new {overrideRule = model.RejectRules});
             }
 
             if (TempData["TempMovement"] == null)
@@ -220,7 +224,7 @@
 
             TempData["TempMovement"] = null;
 
-            return RedirectToAction("Summary", newMovementIds.ToRouteValueDictionary("newMovementIds"));
+            return RedirectToAction("WhoAreYourCarriers", newMovementIds.ToRouteValueDictionary("newMovementIds"));
         }
 
         [HttpGet]
@@ -229,6 +233,31 @@
             var movements = await mediator.SendAsync(new GetMovementsByIds(notificationId, newMovementIds));
             var model = new SummaryViewModel(movements);
             return View(model);
+        }
+
+        [HttpGet]
+        public ActionResult WhoAreYourCarriers(Guid notificationId, Guid[] newMovementIds)
+        {
+            TempData.Remove("SelectedCarriers");
+
+            var model = new WhoAreYourCarrierViewModel();
+            model.MovementIds = newMovementIds;
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult WhoAreYourCarriers(Guid notificationId, Guid[] newMovementIds, WhoAreYourCarrierViewModel model)
+        {
+            if (!model.AddCarriersLater)
+            {
+                ModelState.AddModelError("AddCarriersLater", "Select an option for adding carriers");
+            }
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+         return RedirectToAction("Summary", model.MovementIds.ToRouteValueDictionary("newMovementIds"));
         }
 
         [HttpGet]
@@ -273,6 +302,27 @@
             return View();
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult ConsentExpiresInThreeOrLessWorkingDays(Guid notificationId, ThreeOrLessDaysViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View("ConsentExpiresInThreeOrLessWorkingDays", model);
+            }
+
+            if (model.Selection == ThreeOrLessWorkingDaysSelection.ContinueAnyway)
+            {
+                return RedirectToAction("Index", new { overrideRule = true});
+            }
+
+            if (model.Selection == ThreeOrLessWorkingDaysSelection.AbandonCreation)
+            {
+                return RedirectToAction("Index", "Options", new { area = "NotificationApplication", id = notificationId });
+            }
+            return View();
+        }
+
         [HttpGet]
         public ActionResult ConsentWithdrawn(Guid notificationId)
         {
@@ -292,6 +342,188 @@
                 await mediator.SendAsync(new GetUnitedKingdomCompetentAuthorityByNotificationId(notificationId));
 
             return View(competentAuthority.AsUKCompetantAuthority());
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> AddIntendedCarrier(Guid notificationId, Guid[] newMovementIds)
+        {
+            var carriers =
+              await mediator.SendAsync(new GetCarriersByNotificationId(notificationId));
+            var model = new CarrierViewModel();
+            model.SetCarriers(carriers);
+            model.MovementIds = newMovementIds;
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> AddIntendedCarrier(Guid notificationId, Guid[] newMovementIds,
+            CarrierViewModel model,
+            string command, string remove, string up, string down)
+        {
+            if (ModelState.IsValid)
+            {
+                int selectedCarriersCount;
+                object carriersObj;
+
+                if (TempData.TryGetValue("SelectedCarriers", out carriersObj))
+                {
+                    var carriersTempData = carriersObj as List<CarrierList>;
+
+                    if (carriersTempData != null)
+                    {
+                        model.SelectedCarriers = carriersTempData;
+                    }
+                }
+
+                if (command != null && command == "addcarrier")
+                {
+                    if (model.SelectedCarrier.HasValue && model.SelectedCarriers.All(x => x.Id != model.SelectedCarrier))
+                    {
+                        selectedCarriersCount = model.SelectedCarriers.Count;
+                        model.SelectedCarriers.Add(new CarrierList
+                        {
+                            Id = model.SelectedCarrier.Value,
+                            Order = (selectedCarriersCount + 1),
+                            OrderName = AddOrdinal((selectedCarriersCount + 1))
+                        });
+                    }
+                }
+                else if (command != null && command == "continue")
+                {
+                    if (model.SelectedCarriers.Any())
+                    {
+                        TempData.Remove("SelectedCarriers");
+
+                        var selectedCarriers = model.SelectedCarriers.ToDictionary(carrier => carrier.Order,
+                            carrier => carrier.Id);
+
+                        await
+                            mediator.SendAsync(new CreateMovementCarriers(notificationId, model.MovementIds,
+                                selectedCarriers));
+
+                        return RedirectToAction("Summary", model.MovementIds.ToRouteValueDictionary("newMovementIds"));
+                    }
+
+                    ModelState.AddModelError("SelectedCarrier", "Select a carrier from the list");
+                }
+                else if (remove != null)
+                {
+                    var indexToRemove = model.SelectedCarriers.FirstOrDefault(c => c.Id.ToString() == remove);
+                    model.SelectedCarriers.RemoveAll(c => c.Id.ToString() == remove);
+                    foreach (var newOrder in model.SelectedCarriers.Where(w => w.Order > indexToRemove.Order))
+                    {
+                        if (newOrder.Order != 1)
+                        {
+                            newOrder.Order = newOrder.Order - 1;
+                            newOrder.OrderName = AddOrdinal(newOrder.Order);
+                        }
+                    }
+                    ModelState.Clear();
+                }
+                else if (!string.IsNullOrEmpty(up) || !string.IsNullOrEmpty(down))
+                {
+                    model.SelectedCarriers = ReOrderCarriers(up, down, model.SelectedCarriers);
+                }
+
+                // Ensure the order label is correct.
+                if (command != null && command == "addcarrier" ||
+                    remove != null ||
+                    !string.IsNullOrEmpty(up) ||
+                    !string.IsNullOrEmpty(down))
+                {
+                    selectedCarriersCount = model.SelectedCarriers.Count;
+                    if (selectedCarriersCount > 2)
+                    {
+                        foreach (var carrier in model.SelectedCarriers)
+                        {
+                            carrier.OrderName = carrier.Order == selectedCarriersCount
+                                ? "Last"
+                                : AddOrdinal(carrier.Order);
+                        }
+                    }
+                }
+
+                TempData["SelectedCarriers"] = model.SelectedCarriers;
+            }
+
+            var carriers = await mediator.SendAsync(new GetCarriersByNotificationId(notificationId));
+            model.SetCarriers(carriers);
+            return View(model);
+        }
+
+        public static string AddOrdinal(int number)
+        {
+            if (number <= 0)
+            {
+                return number.ToString();
+            }
+
+            switch (number % 100)
+            {
+                case 11:
+                case 12:
+                case 13:
+                    return number + "th";
+            }
+
+            switch (number % 10)
+            {
+                case 1:
+                    return number + "st";
+                case 2:
+                    return number + "nd";
+                case 3:
+                    return number + "rd";
+                default:
+                    return number + "th";
+            }
+        }
+
+        private static List<CarrierList> ReOrderCarriers(string up, string down, List<CarrierList> carrierList)
+        {
+            if (carrierList.Any())
+            {
+                if (!string.IsNullOrEmpty(up))
+                {
+                    var selectedCarrier = carrierList.FirstOrDefault(c => c.Id.ToString() == up);
+
+                    if (selectedCarrier != null)
+                    {
+                        var higherCarrier = carrierList.FirstOrDefault(c => c.Order == selectedCarrier.Order - 1);
+
+                        if (higherCarrier != null)
+                        {
+                            higherCarrier.Order++;
+                            higherCarrier.OrderName = AddOrdinal(higherCarrier.Order);
+
+                            selectedCarrier.Order--;
+                            selectedCarrier.OrderName = AddOrdinal(selectedCarrier.Order);
+                        }
+                    }
+                }
+
+                if (!string.IsNullOrEmpty(down))
+                {
+                    var selectedCarrier = carrierList.FirstOrDefault(c => c.Id.ToString() == down);
+
+                    if (selectedCarrier != null)
+                    {
+                        var lowerCarrier = carrierList.FirstOrDefault(c => c.Order == selectedCarrier.Order + 1);
+
+                        if (lowerCarrier != null)
+                        {
+                            lowerCarrier.Order--;
+                            lowerCarrier.OrderName = AddOrdinal(lowerCarrier.Order);
+
+                            selectedCarrier.Order++;
+                            selectedCarrier.OrderName = AddOrdinal(selectedCarrier.Order);
+                        }
+                    }
+                }
+            }
+
+            return carrierList.OrderBy(c => c.Order).ToList();
         }
 
         [Serializable]

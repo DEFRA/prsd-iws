@@ -129,4 +129,7 @@
   <data name="TelephoneNotEmpty" xml:space="preserve">
     <value>please enter a telephone number</value>
   </data>
+  <data name="TelephonePrefixNotEmpty" xml:space="preserve">
+    <value>please enter the telephone prefix</value>
+  </data>
 </root>

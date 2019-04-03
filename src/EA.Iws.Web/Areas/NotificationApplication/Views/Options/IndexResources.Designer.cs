@@ -61,6 +61,15 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.Options {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Notification access level:.
+        /// </summary>
+        public static string AccessLevel {
+            get {
+                return ResourceManager.GetString("AccessLevel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Active loads permitted:.
         /// </summary>
         public static string ActiveLoadsPermitted {
@@ -75,6 +84,33 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.Options {
         public static string AssignNotification {
             get {
                 return ResourceManager.GetString("AssignNotification", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bulk upload prenotification data.
+        /// </summary>
+        public static string BulkUploadPrenotificationData {
+            get {
+                return ResourceManager.GetString("BulkUploadPrenotificationData", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bulk upload receipt and/or {0} data.
+        /// </summary>
+        public static string BulkUploadReceipt {
+            get {
+                return ResourceManager.GetString("BulkUploadReceipt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Templates for bulk uploading shipment data.
+        /// </summary>
+        public static string BulkUploadTemplate {
+            get {
+                return ResourceManager.GetString("BulkUploadTemplate", resourceCulture);
             }
         }
         
@@ -273,6 +309,24 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.Options {
         public static string Reject {
             get {
                 return ResourceManager.GetString("Reject", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Review user access levels.
+        /// </summary>
+        public static string ReviewAccess {
+            get {
+                return ResourceManager.GetString("ReviewAccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Share notification with other users.
+        /// </summary>
+        public static string ShareNotification {
+            get {
+                return ResourceManager.GetString("ShareNotification", resourceCulture);
             }
         }
         

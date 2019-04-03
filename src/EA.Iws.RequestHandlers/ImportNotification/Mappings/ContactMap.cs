@@ -8,12 +8,25 @@
     {
         public Core.Contact Map(Domain.Contact source)
         {
-            return new Core.Contact
+            var contact = new Core.Contact
             {
                 Email = source.Email,
-                Name = source.Name,
-                Telephone = source.Telephone.Value
+                Name = source.Name
             };
+
+            if (source.Telephone != null
+                && source.Telephone.Value.Contains("-")
+                && (source.Telephone.Value.Split('-').Length > 0))
+            {
+                contact.TelephonePrefix = source.Telephone.Value.Split('-')[0];
+                contact.Telephone = source.Telephone.Value.Split('-')[1];
+            }
+            else
+            {
+                contact.Telephone = source.Telephone;
+            }
+
+            return contact;
         }
     }
 }

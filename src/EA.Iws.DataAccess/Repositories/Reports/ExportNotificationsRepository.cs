@@ -32,8 +32,8 @@
                             [DecisionDate],
                             [Consented],
                             [Officer],
-                            [SubmittedBy]
-
+                            [SubmittedBy],
+                            [ConsentTo]
                     FROM	[Reports].[DataExportNotifications]
 
                     WHERE	[CompetentAuthorityId] = @ca

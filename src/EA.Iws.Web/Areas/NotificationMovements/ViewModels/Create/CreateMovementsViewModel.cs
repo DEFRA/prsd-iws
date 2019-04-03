@@ -137,6 +137,8 @@
             }
         }
 
+        public bool OverrideRule { get; set; }
+
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             if (NumberToCreate == null)

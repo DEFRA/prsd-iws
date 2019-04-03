@@ -1,0 +1,25 @@
+﻿@model EA.Iws.Web.Areas.Reports.ViewModels.FreedomOfInformation.ColumnSelectionViewModel
+@using Resources = EA.Iws.Web.Areas.Reports.Views.FreedomOfInformation.IndexResources
+@{
+	ViewBag.Title = Resources.Title;
+}
+
+<h1 class="heading-large">@Resources.ReportHeading</h1>
+
+<p>@Resources.InfoText</p>
+
+@using (Html.BeginForm())
+{
+	@Html.AntiForgeryToken()
+	@Html.Gds().ValidationSummary()
+
+	@Html.EditorFor(m => m.FOIReportColumns);
+
+	<div class="form-group">
+		<button class="button" type="submit">@Resources.ButtonText</button>
+	</div>
+}
+@section scripts
+{
+	@Html.Partial("_SelectAllCheckBoxScript")
+}

@@ -25,7 +25,7 @@
         public async Task<FreedomOfInformationData[]> HandleAsync(GetFreedomOfInformationReport message)
         {
             var user = await internalUserRepository.GetByUserId(userContext.UserId);
-            return (await repository.Get(message.From, message.To, message.ChemicalComposition, user.CompetentAuthority, message.DateType)).ToArray();
+            return (await repository.Get(message.From, message.To, user.CompetentAuthority, message.DateType, message.SearchField, message.ComparisonType, message.SearchText)).ToArray();
         }
     }
 }

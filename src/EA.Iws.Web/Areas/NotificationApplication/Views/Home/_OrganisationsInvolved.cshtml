@@ -7,12 +7,12 @@
 }
 
 @{
-    var exporterClass = Model.IsExporterCompleted ? string.Empty : "over-alert";
-    var producerClass = Model.IsProducerCompleted ? string.Empty : "over-alert";
-    var siteOfExportClass = Model.HasSiteOfExport ? string.Empty : "over-alert";
-    var importerClass = Model.IsImporterCompleted ? string.Empty : "over-alert";
-    var facilitiesClass = Model.IsFacilityCompleted ? string.Empty : "over-alert";
-    var actualSiteClass = Model.HasActualSiteOfTreatment ? string.Empty : "over-alert";
+    var exporterClass = Model.IsExporterCompleted ? "over-no-alert" : "over-alert";
+    var producerClass = Model.IsProducerCompleted ? "over-no-alert" : "over-alert";
+    var siteOfExportClass = Model.HasSiteOfExport ? "over-no-alert" : "over-alert";
+    var importerClass = Model.IsImporterCompleted ? "over-no-alert" : "over-alert";
+    var facilitiesClass = Model.IsFacilityCompleted ? "over-no-alert" : "over-alert";
+    var actualSiteClass = Model.HasActualSiteOfTreatment ? "over-no-alert" : "over-alert";
 }
 
 <table class="overview-table">

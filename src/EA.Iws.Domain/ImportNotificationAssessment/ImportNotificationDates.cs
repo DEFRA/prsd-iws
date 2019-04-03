@@ -17,6 +17,8 @@
 
         public DateTime? AcknowledgedDate { get; internal set; }
 
+        public DateTime? DecisionRequiredByDate { get; internal set; }
+
         public DateTime? ConsentedDate { get; internal set; }
 
         public DateTime? ConsentWithdrawnDate { get; internal set; }

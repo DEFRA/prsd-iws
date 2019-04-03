@@ -41,6 +41,7 @@
                 <th>@Resource.StatusTableHeading</th>
                 <th>@Resource.CompanyNameTableHeading</th>
                 <th>@Resource.WasteTypeTableHeading</th>
+                <th>@Resource.ShipmentSummaryTableHeading</th>
             </tr>
         </thead>
         <tbody>
@@ -62,6 +63,12 @@
                     </td>
                     <td>
                         @Html.DisplayFor(m => m.ExportSearchResults[i].WasteType)
+                    </td>
+                    <td>
+                        @if (Model.ExportSearchResults[i].ShowShipmentSummaryLink)
+                        {
+                            @Html.ActionLink(@Resource.ShipmentSummaryLinkText, "Index", "Home", new { area = "AdminExportNotificationMovements", id = Model.ExportSearchResults[i].Id }, null)
+                        }
                     </td>
                 </tr>
             }

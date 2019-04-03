@@ -65,5 +65,10 @@
 
         private DateTime date;
         private Guid notificationId;
+        
+        public void UpdateComments(string comment)
+        {
+            this.Comments = comment;
+        }
     }
 }

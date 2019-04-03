@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
     using System.Web.Mvc;
+    using Core.Notification.Audit;
     using Core.WasteCodes;
     using Infrastructure;
     using Prsd.Core.Mapper;
@@ -19,8 +20,8 @@
         private readonly IMap<WasteCodeDataAndNotificationData, UNNumberViewModel> mapper;
         private readonly IList<CodeType> requiredCodeTypes = new[] { CodeType.UnNumber }; 
 
-        public UnNumberController(IMediator mediator, IMap<WasteCodeDataAndNotificationData, UNNumberViewModel> mapper) 
-            : base(mediator, CodeType.UnNumber)
+        public UnNumberController(IMediator mediator, IMap<WasteCodeDataAndNotificationData, UNNumberViewModel> mapper, IAuditService auditService) 
+            : base(mediator, CodeType.UnNumber, auditService)
         {
             this.mapper = mapper;
         }
@@ -44,9 +45,13 @@
 
         protected override async Task<ActionResult> ContinueAction(Guid id, BaseWasteCodeViewModel viewModel, bool backToOverview)
         {
+            var existingData = await Mediator.SendAsync(new GetWasteCodeLookupAndNotificationDataByTypes(id, requiredCodeTypes, requiredCodeTypes));
+
             await
                 Mediator.SendAsync(new SetUNNumbers(id, viewModel.EnterWasteCodesViewModel.SelectedWasteCodes,
                         viewModel.EnterWasteCodesViewModel.IsNotApplicable));
+
+            await this.AddAuditEntries(existingData, viewModel, id, NotificationAuditScreenType.UnNumbers);
 
             return (backToOverview) ? BackToOverviewResult(id) 
                 : RedirectToAction("Index", "CustomWasteCode", new { id });

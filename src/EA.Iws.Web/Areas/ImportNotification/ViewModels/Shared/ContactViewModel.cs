@@ -6,11 +6,16 @@
     public class ContactViewModel
     {
         [Display(Name = "Name", ResourceType = typeof(ContactViewModelResources))]
-        public string Name { get; set; }
+        public string FullName { get; set; }
         
         [Display(Name = "Telephone", ResourceType = typeof(ContactViewModelResources))]
         [RegularExpression(@"^[+]?[\d]+(( |-)?[\d]+)+?$", ErrorMessageResourceType = typeof(ContactViewModelResources), ErrorMessageResourceName = "TelephoneInvalid")]
         public string Telephone { get; set; }
+
+        [DataType(DataType.PhoneNumber)]
+        [Display(Name = "TelephonePrefix", ResourceType = typeof(ContactViewModelResources))]
+        [RegularExpression(@"(\b\d{1,3}\b)", ErrorMessageResourceType = typeof(ContactViewModelResources), ErrorMessageResourceName = "TelephonePrefixInvalid")]
+        public string TelephonePrefix { get; set; }
 
         [EmailAddress(ErrorMessageResourceType = typeof(ContactViewModelResources), ErrorMessageResourceName = "EmailInvalid", ErrorMessage = null)]
         [Display(Name = "Email", ResourceType = typeof(ContactViewModelResources))]
@@ -24,9 +29,10 @@
         {
             if (contact != null)
             {
-                Name = contact.ContactName;
+                FullName = contact.ContactName;
                 Telephone = contact.Telephone;
                 Email = contact.Email;
+                TelephonePrefix = contact.TelephonePrefix;
             }
         }
 
@@ -34,9 +40,10 @@
         {
             return new Contact
             {
-                ContactName = Name,
+                ContactName = FullName,
                 Email = Email,
-                Telephone = Telephone
+                Telephone = Telephone,
+                TelephonePrefix = TelephonePrefix
             };
         }
     }

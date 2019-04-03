@@ -16,5 +16,17 @@
                 TownOrCity = "Eliotsville"
             };
         }
+
+        public static Address GetValidTestAddress(Guid countryId)
+        {
+            return new Address
+            {
+                AddressLine1 = "Eliot House",
+                AddressLine2 = "Eliot Lane",
+                CountryId = countryId,
+                PostalCode = "EL10TJ",
+                TownOrCity = "Eliotsville"
+            };
+        }
     }
 }

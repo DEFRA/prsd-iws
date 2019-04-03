@@ -57,6 +57,7 @@
             this.ShipmentInfos = new TestDbSet<ShipmentInfo>();
             this.WasteRecoveries = new TestDbSet<Domain.NotificationApplication.WasteRecovery.WasteRecovery>();
             this.Importers = new TestDbSet<Importer>();
+            this.NotificationAudit = new TestDbSet<Audit>();
         }
 
         public int SaveChangesCount { get; private set; }

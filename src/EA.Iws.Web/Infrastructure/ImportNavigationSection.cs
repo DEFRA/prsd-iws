@@ -5,6 +5,7 @@
         Notification,
         Assessment,
         Shipments,
-        Finance
+        Finance,
+        Comments
     }
 }

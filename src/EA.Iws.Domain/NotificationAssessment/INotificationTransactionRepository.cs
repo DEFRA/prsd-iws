@@ -13,5 +13,7 @@
         Task<NotificationTransaction> GetById(Guid transactionId);
 
         Task DeleteById(Guid transactionId);
+
+        Task UpdateById(Guid id, string comment);
     }
 }

@@ -67,7 +67,7 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Shipments(Guid notificationId, ShipmentViewModel model)
+        public ActionResult Shipments(Guid notificationId, ShipmentViewModel model)
         {
             if (!ModelState.IsValid)
             {
@@ -85,31 +85,21 @@
                 movementId = model.ReceiveShipments.SelectedValue;
             }
 
-            var shipmentExists = await mediator.SendAsync(new DoesMovementDetailsExist(movementId));
+            TempData[CertificateKey] = model.Certificate;
 
-            if (shipmentExists)
+            if (model.Certificate == CertificateType.ReceiptRecovery)
             {
-                TempData[CertificateKey] = model.Certificate;
-
-                if (model.Certificate == CertificateType.ReceiptRecovery)
-                {
-                    return RedirectToAction("Index", "ReceiptRecovery", new { movementId = model.ReceiveShipments.SelectedValue});
-                }
-
-                if (model.Certificate == CertificateType.Receipt)
-                {
-                    return RedirectToAction("Receipt", "ReceiptRecovery", new { movementId = model.ReceiveShipments.SelectedValue});
-                }
-
-                if (model.Certificate == CertificateType.Recovery)
-                {
-                    return RedirectToAction("Recovery", "ReceiptRecovery", new { movementId = model.RecoveryShipments.SelectedValue});
-                }
+                return RedirectToAction("Index", "ReceiptRecovery", new { movementId = model.ReceiveShipments.SelectedValue});
             }
-            else
+
+            if (model.Certificate == CertificateType.Receipt)
             {
-                var notification = await mediator.SendAsync(new GetWhatToDoNextDataForNotification(notificationId));
-                return View("WhatNext", notification);
+                return RedirectToAction("Receipt", "ReceiptRecovery", new { movementId = model.ReceiveShipments.SelectedValue});
+            }
+
+            if (model.Certificate == CertificateType.Recovery)
+            {
+                return RedirectToAction("Recovery", "ReceiptRecovery", new { movementId = model.RecoveryShipments.SelectedValue});
             }
 
             return View(model);

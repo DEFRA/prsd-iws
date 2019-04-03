@@ -1,0 +1,20 @@
+ALTER TABLE [Reports].[FreedomOfInformationCache]
+ADD NotifierType nvarchar(64) null,
+ NotifierContactName nvarchar(2048)  null,
+ NotifierContactEmail nvarchar(256) null,
+ ProducerType nvarchar(64)  null,
+ ProducerContactEmail nvarchar(256)  null,
+ TransitStates nvarchar(2048) null,
+ ImporterType nvarchar(64)  null,
+ ImporterContactName nvarchar(2048)  null,
+ ImporterContactEmail nvarchar(256)  null,
+ NotificationStatus nvarchar(64)  null,
+ DecisionRequiredByDate date null,
+ IsFinancialGuaranteeApproved char(1)  null,
+ FileClosedDate date null,
+ TechnologyEmployed nvarchar(70)  null,
+ ActualDate date null,
+ AcknowledgedDate date null,
+ ObjectionDate date null,
+ WithdrawnDate date null
+;

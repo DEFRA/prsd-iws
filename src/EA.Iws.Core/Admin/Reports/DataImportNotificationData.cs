@@ -49,5 +49,8 @@
         public int? DecisionToConsentElapsedWorkingDays { get; set; }
 
         public string Officer { get; set; }
+
+        [DisplayName("Consent valid To date")]
+        public DateTime? ConsentTo { get; set; }
     }
 }

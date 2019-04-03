@@ -24,15 +24,7 @@
     // Send ga event when a user clicks a link to another internal page
     $('[data-track="link"]').each(function () {
         $(this).click(function (event) {
-            event.preventDefault();
-
-            var href = $(this).attr("href");
-
-            ga("send", "event", category($(this)), action($(this)), label($(this)), value($(this)), {
-                hitCallback: createFunctionWithTimeout(function () {
-                    window.location.href = href;
-                })
-            });
+            ga("send", "event", category($(this)), action($(this)), label($(this)), value($(this)));
         });
     });
 });

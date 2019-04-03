@@ -30,7 +30,25 @@
             }
             else
             {
-                CheckUserId(notificationId, notification.UserId);
+                await CheckUserId(notificationId, notification.UserId);
+            }
+        }
+
+        public async Task EnsureAccessIsOwnerAsync(Guid notificationId)
+        {
+            var notification = await context.NotificationApplications.Where(n => n.Id == notificationId).SingleAsync();
+
+            if (await IsInternal())
+            {
+                await CheckCompetentAuthority(notification);
+            }
+            else
+            {
+                if (notification.UserId != userContext.UserId)
+                {
+                    throw new SecurityException(string.Format("Access denied to this notification {0} for user {1}",
+                        notificationId, userContext.UserId));
+                }
             }
         }
 
@@ -50,13 +68,21 @@
             return await context.InternalUsers.AnyAsync(u => u.UserId == userContext.UserId.ToString());
         }
 
-        private void CheckUserId(Guid notificationId, Guid notificationUserId)
+        private async Task CheckUserId(Guid notificationId, Guid notificationUserId)
         {
-            if (notificationUserId != userContext.UserId)
+            if (notificationUserId != userContext.UserId && !(await IsSharedUser(notificationId)))
             {
                 throw new SecurityException(string.Format("Access denied to this notification {0} for user {1}",
                     notificationId, userContext.UserId));
             }
+        }
+
+        private async Task<bool> IsSharedUser(Guid notificationId)
+        {
+            return
+                await
+                    context.SharedUser.AnyAsync(
+                        u => u.NotificationId == notificationId && u.UserId == userContext.UserId.ToString());
         }
     }
 }

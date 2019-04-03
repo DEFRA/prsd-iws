@@ -106,11 +106,154 @@ namespace EA.Iws.Web.Views.Shared {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Read our standard data notice.
+        ///   Looks up a localized string similar to Environment Agency:.
         /// </summary>
-        public static string Header {
+        public static string EA {
             get {
-                return ResourceManager.GetString("Header", resourceCulture);
+                return ResourceManager.GetString("EA", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Data Protection Officer&lt;/br&gt;
+        ///Environment Agency&lt;/br&gt;
+        ///Horizon House&lt;/br&gt;
+        ///Deanery Road&lt;/br&gt;
+        ///Bristol&lt;/br&gt;
+        ///BS1 5AH&lt;/br&gt;.
+        /// </summary>
+        public static string EAAddress {
+            get {
+                return ResourceManager.GetString("EAAddress", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to dataprotection@environment‐agency.gov.uk.
+        /// </summary>
+        public static string EAEmail {
+            get {
+                return ResourceManager.GetString("EAEmail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You can access the charter using the link or go to GOV.UK and search &apos;Environment Agency personal information charter&apos;..
+        /// </summary>
+        public static string EAPara {
+            get {
+                return ResourceManager.GetString("EAPara", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Personal information charter:.
+        /// </summary>
+        public static string EASubHeading {
+            get {
+                return ResourceManager.GetString("EASubHeading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Email:.
+        /// </summary>
+        public static string Email {
+            get {
+                return ResourceManager.GetString("Email", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The Information Commissioner&apos;s Office (ICO) is the supervisory authority for data protection legislation. The ICO website has a full list of your rights under data protection legislation. You can access this at the following link:.
+        /// </summary>
+        public static string FootNote1 {
+            get {
+                return ResourceManager.GetString("FootNote1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You have the right to lodge a complaint with the ICO at any time. Should you wish to exercise that right full details are available at:.
+        /// </summary>
+        public static string FootNote2 {
+            get {
+                return ResourceManager.GetString("FootNote2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to How long we keep your personal data.
+        /// </summary>
+        public static string HowWeKeep {
+            get {
+                return ResourceManager.GetString("HowWeKeep", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to When the consent period for your notifications has expired and we have received all the required shipment recovery information for that notification, we will keep your personal data for a further 3 years in line with our standard information retention policy..
+        /// </summary>
+        public static string HowWeKeepPara {
+            get {
+                return ResourceManager.GetString("HowWeKeepPara", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to NIEA:.
+        /// </summary>
+        public static string NIEA {
+            get {
+                return ResourceManager.GetString("NIEA", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Data Protection Officer&lt;/br&gt;
+        ///DAERA&lt;/br&gt;
+        ///Dundonald House&lt;/br&gt;
+        ///Upper Newtownards Road&lt;/br&gt;
+        ///Ballymiscaw&lt;/br&gt;
+        ///Belfast&lt;/br&gt;
+        ///BT4 3SB&lt;/br&gt;
+        ///Phone: 0300 200 7850&lt;/br&gt;.
+        /// </summary>
+        public static string NIEAAddress {
+            get {
+                return ResourceManager.GetString("NIEAAddress", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Natural Resources Wales:.
+        /// </summary>
+        public static string NRW {
+            get {
+                return ResourceManager.GetString("NRW", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Data Protection Officer&lt;/br&gt;
+        ///Natural Resources Wales&lt;/br&gt;
+        ///Ty Cambria&lt;/br&gt;
+        ///29 Newport Road&lt;/br&gt;
+        ///Cardiff&lt;/br&gt;
+        ///CF24 0TP&lt;/br&gt;.
+        /// </summary>
+        public static string NRWAddress {
+            get {
+                return ResourceManager.GetString("NRWAddress", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to dataprotection@cyfoethnaturiolcymru.gov.uk.
+        /// </summary>
+        public static string NRWEmail {
+            get {
+                return ResourceManager.GetString("NRWEmail", resourceCulture);
             }
         }
         
@@ -133,7 +276,61 @@ namespace EA.Iws.Web.Views.Shared {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to How we will use your personal information.
+        ///   Looks up a localized string similar to The personal data we need.
+        /// </summary>
+        public static string PersonalDataHeading {
+            get {
+                return ResourceManager.GetString("PersonalDataHeading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A warning (e.g. informing you to increase the financial guarantee).
+        /// </summary>
+        public static string PersonalDataListItem1 {
+            get {
+                return ResourceManager.GetString("PersonalDataListItem1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A formal caution (e.g. informing you to stop shipping waste).
+        /// </summary>
+        public static string PersonalDataListItem2 {
+            get {
+                return ResourceManager.GetString("PersonalDataListItem2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A prosecution depending on the breach of condition..
+        /// </summary>
+        public static string PersonalDataListItem3 {
+            get {
+                return ResourceManager.GetString("PersonalDataListItem3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The personal data we collect includes names, addresses and contact details (including email addresses). We are allowed to process your data because we have official authority as the environmental regulators from the Regulation (EC) No. 1013/2006 (“the Waste Shipment Regulation”). The lawful basis for processing your personal data is to perform a task in the public interest that is set out in law..
+        /// </summary>
+        public static string PersonalDataPara1 {
+            get {
+                return ResourceManager.GetString("PersonalDataPara1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to If you do not give us the information requested during the application process, this may halt the processing of your application. During the lifespan of the notification if you do not provide us with the information we require or we find out that some of the information is incorrect you may be in breach of your conditions of approval. This may result in.
+        /// </summary>
+        public static string PersonalDataPara2 {
+            get {
+                return ResourceManager.GetString("PersonalDataPara2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to How we use your personal information.
         /// </summary>
         public static string PersonalInfoHeading {
             get {
@@ -142,7 +339,7 @@ namespace EA.Iws.Web.Views.Shared {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to We, the Competent Authority, will process the information you provide so that we can:.
+        ///   Looks up a localized string similar to The Environment Agency, Scottish Environment Protection Agency (SEPA), Northern Ireland Environment Agency (NIEA) and Natural Resources Wales (known as ‘environmental regulators’) run the IWS (International Waste Shipments) Online service. The environmental regulator you submit your data to is the data controller for your personal data. A data controller determines how and why personal data (personal information) is processed. Each environmental regulator has their own policy explaining your rights and how  [rest of string was truncated]&quot;;.
         /// </summary>
         public static string PersonalInfoIntro {
             get {
@@ -169,7 +366,7 @@ namespace EA.Iws.Web.Views.Shared {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Please read carefully, accept and proceed..
+        ///   Looks up a localized string similar to Privacy notice.
         /// </summary>
         public static string ReadCarefully {
             get {
@@ -187,11 +384,188 @@ namespace EA.Iws.Web.Views.Shared {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Your responsibility.
+        /// </summary>
+        public static string ResponsibleHeading {
+            get {
+                return ResourceManager.GetString("ResponsibleHeading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to If you have included personal data about any other individuals in your submissions, you must inform them of this. You must provide them with a copy of this privacy notice so that they are aware of how their personal data will be used..
+        /// </summary>
+        public static string ResponsiblePara {
+            get {
+                return ResourceManager.GetString("ResponsiblePara", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SEPA:.
+        /// </summary>
+        public static string SEPA {
+            get {
+                return ResourceManager.GetString("SEPA", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Information Governance Unit&lt;/br&gt;
+        ///Scottish Environment Protection Agency&lt;/br&gt;
+        ///Strathallan House&lt;/br&gt;
+        ///Castle Business Park&lt;/br&gt;
+        ///Stirling&lt;/br&gt;
+        ///FK9 4TZ&lt;/br&gt;.
+        /// </summary>
+        public static string SEPAAddress {
+            get {
+                return ResourceManager.GetString("SEPAAddress", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to dataprotection@sepa.org.uk.
+        /// </summary>
+        public static string SEPAEmail {
+            get {
+                return ResourceManager.GetString("SEPAEmail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to We may also process or release the information to:.
         /// </summary>
         public static string WeMayAlsoHeading {
             get {
                 return ResourceManager.GetString("WeMayAlsoHeading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to What we do with your personal data.
+        /// </summary>
+        public static string WhatWeDoHeading {
+            get {
+                return ResourceManager.GetString("WhatWeDoHeading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to We use the personal data to regulate you in accordance with the Regulation (EC) No. 1013/2006 (“the Waste Shipment Regulation”)..
+        /// </summary>
+        public static string WhatWeDoPara1 {
+            get {
+                return ResourceManager.GetString("WhatWeDoPara1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to We do not use your data to make an automated decision or for automated profiling..
+        /// </summary>
+        public static string WhatWeDoPara2 {
+            get {
+                return ResourceManager.GetString("WhatWeDoPara2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Any personal data that you provide directly to the IWS service or we input on your behalf is shared with our IT providers.
+        /// </summary>
+        public static string WhatWeDoPara3Part1 {
+            get {
+                return ResourceManager.GetString("WhatWeDoPara3Part1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to who host and assist in the processing of the data for us through the IWS service. We may share some of your data for the purpose of analytics that assist us in the improvement and optimisation of our service. Any data that they process is under a maintenance contract. They do not use any data contained within the service for their own usage..
+        /// </summary>
+        public static string WhatWeDoPara3Part2 {
+            get {
+                return ResourceManager.GetString("WhatWeDoPara3Part2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to We publish some of your analysed data along with the associated business names onto the governmental open data platform (.
+        /// </summary>
+        public static string WhatWeDoPara4Part1 {
+            get {
+                return ResourceManager.GetString("WhatWeDoPara4Part1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ). When we receive a Freedom of Information request, the same format is applied to any data that we release. No personal data is ever released as part of these publications. No other data will be shared or disclosed to any other party outside EA without your explicit consent..
+        /// </summary>
+        public static string WhatWeDoPara4Part2 {
+            get {
+                return ResourceManager.GetString("WhatWeDoPara4Part2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Where your personal data is processed and stored.
+        /// </summary>
+        public static string WhereWeKeep {
+            get {
+                return ResourceManager.GetString("WhereWeKeep", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to We store and process your personal data on servers in the UK..
+        /// </summary>
+        public static string WhereWeKeepPara1 {
+            get {
+                return ResourceManager.GetString("WhereWeKeepPara1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to As part of the application process, we may transfer your personal data outside the European Economic Area. For example, if you are exporting waste to China, then we will send your data to the Chinese Competent Authority in order to carry out the regulatory requirements and gain their consent..
+        /// </summary>
+        public static string WhereWeKeepPara2 {
+            get {
+                return ResourceManager.GetString("WhereWeKeepPara2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to By submitting your personal data, you agree to this transfer, storing or processing. We will take all steps reasonably necessary to ensure that your data is treated securely.
+        ///Unfortunately, the transmission of information via the internet is not completely secure..
+        /// </summary>
+        public static string WhereWeKeepPara3 {
+            get {
+                return ResourceManager.GetString("WhereWeKeepPara3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Although we will do our best to protect your personal data, we cannot guarantee the security of your data transmitted to our site; any transmission is at your own risk. Once we have received your information, we will use strict procedures and security features to try to prevent unauthorised access..
+        /// </summary>
+        public static string WhereWeKeepPara4 {
+            get {
+                return ResourceManager.GetString("WhereWeKeepPara4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Who is collecting my data?.
+        /// </summary>
+        public static string WhoIsCollecting {
+            get {
+                return ResourceManager.GetString("WhoIsCollecting", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The data controller is either, the Environment Agency, SEPA, NIEA or Natural Resources Wales. You can contact the relevant Data Protection Officer at:.
+        /// </summary>
+        public static string WhoIsCollectingPara1 {
+            get {
+                return ResourceManager.GetString("WhoIsCollectingPara1", resourceCulture);
             }
         }
     }

@@ -19,7 +19,8 @@
             {
                 Address = AnyAddress,
                 Name = AnyName,
-                SelectedCountry = Guid.Empty
+                SelectedCountry = Guid.Empty,
+                CustomsOfficeRequired = true
             };
         }
 
@@ -27,31 +28,6 @@
         public void SelectedCountryIsNull_ReturnsError()
         {
             model.SelectedCountry = null;
-
-            List<ValidationResult> result = ViewModelValidator.ValidateViewModel(model);
-
-            Assert.Equal(1, result.Count);
-        }
-
-        [Theory]
-        [InlineData(null)]
-        [InlineData("")]
-        public void NameIsNullOrEmpty_ReturnsError(string name)
-        {
-            model.Name = null;
-
-            List<ValidationResult> result = ViewModelValidator.ValidateViewModel(model);
-
-            Assert.Equal(1, result.Count);
-        }
-
-        [Theory]
-        [InlineData(null)]
-        [InlineData("")]
-        [InlineData(" ")]
-        public void AddressIsNullOrEmpty_ReturnsError(string address)
-        {
-            model.Address = address;
 
             List<ValidationResult> result = ViewModelValidator.ValidateViewModel(model);
 

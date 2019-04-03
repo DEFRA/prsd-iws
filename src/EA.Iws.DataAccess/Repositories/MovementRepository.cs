@@ -126,6 +126,20 @@
             return currentActiveLoads;
         }
 
+        public async Task<IEnumerable<Movement>> GetFutureActiveMovements(Guid notificationId)
+        {
+            await notificationAuthorization.EnsureAccessAsync(notificationId);
+
+            var currentActiveLoads = await context.Movements
+                .Where(m =>
+                    m.NotificationId == notificationId
+                    && (m.Status == MovementStatus.Submitted
+                        || m.Status == MovementStatus.Received)
+                    && m.Date >= SystemTime.UtcNow).ToArrayAsync();
+
+            return currentActiveLoads;
+        }
+
         public async Task<int> GetLatestMovementNumber(Guid notificationId)
         {
             await notificationAuthorization.EnsureAccessAsync(notificationId);
@@ -138,7 +152,7 @@
         public async Task<bool> DeleteById(Guid movementId)
         {
             var rowsAffected = await context.Database.ExecuteSqlCommandAsync(
-                @"DELETE from [Notification].[MovementCarrier] WHERE MovementDetailsId in (SELECT Id FROM [Notification].[MovementDetails] WHERE MovementId = @movementId)
+                @"DELETE from [Notification].[MovementCarrier] WHERE MovementId = @movementId
                   DELETE from [Notification].[MovementPackagingInfo] WHERE MovementDetailsId in (SELECT Id FROM [Notification].[MovementDetails] WHERE MovementId = @movementId)
                   DELETE from [Notification].[MovementDetails] WHERE MovementId = @movementId
                   DELETE from [Notification].[MovementDateHistory] WHERE MovementId = @movementId

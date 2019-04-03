@@ -7,6 +7,7 @@
     using Core.NotificationAssessment;
     using Infrastructure.Authorization;
     using Prsd.Core.Mediator;
+    using Requests.ImportNotificationAssessment;
     using Requests.ImportNotificationAssessment.Transactions;
     using ViewModels.AccountManagement;
     using ViewModels.PaymentDetails;
@@ -36,6 +37,25 @@
             accountManagementViewModel.CanDeleteTransaction = canDeleteTransaction;
 
             return View(accountManagementViewModel);
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> IndexWithError(Guid id, int commentId)
+        {
+            var data = await mediator.SendAsync(new GetImportNotificationAccountOverview(id));
+            var accountManagementViewModel = new AccountManagementViewModel(data);
+            var canDeleteTransaction = await authorizationService.AuthorizeActivity(typeof(DeleteTransaction));
+
+            accountManagementViewModel.PaymentViewModel = new PaymentDetailsViewModel();
+            accountManagementViewModel.RefundViewModel = await GetNewRefundDetailsViewModel(id);
+            accountManagementViewModel.CanDeleteTransaction = canDeleteTransaction;
+
+            accountManagementViewModel.Transactions[commentId].Comments = string.Empty;
+            accountManagementViewModel.ErrorCommentId = commentId;
+            accountManagementViewModel.CommentError = "Enter a comment";
+            ModelState.AddModelError("CommentError", "Enter a comment");
+
+            return View("index", accountManagementViewModel);
         }
 
         [HttpPost]
@@ -102,6 +122,23 @@
             };
 
             return model;
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Index(Guid id, AccountManagementViewModel model, int? commentId)
+        {
+            if (commentId != null)
+            {
+                if (string.IsNullOrEmpty(model.Transactions[commentId.GetValueOrDefault()].Comments))
+                {
+                    return RedirectToAction("IndexWithError", "AccountManagement", new { id = id, commentId = commentId });
+                }
+
+                var result = await mediator.SendAsync(new UpdateImportNotificationAssesmentComments(model.Transactions[commentId.GetValueOrDefault()].TransactionId, model.Transactions[commentId.GetValueOrDefault()].Comments));
+            }
+
+            return RedirectToAction("index", "AccountManagement", new { id = id });
         }
     }
 }

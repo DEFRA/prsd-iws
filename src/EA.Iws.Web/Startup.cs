@@ -14,6 +14,7 @@ namespace EA.Iws.Web
     using Infrastructure;
     using Infrastructure.Paging;
     using Owin;
+    using Prsd.Core.Mediator;
     using Services;
 
     public partial class Startup
@@ -21,11 +22,13 @@ namespace EA.Iws.Web
         public void Configuration(IAppBuilder app)
         {
             var configuration = new ConfigurationService();
+            var auditService = new AuditService();
 
             var builder = new ContainerBuilder();
             builder.Register(c => configuration).As<ConfigurationService>().SingleInstance();
             builder.Register(c => configuration.CurrentConfiguration).As<AppConfiguration>().SingleInstance();
             builder.Register(c => HttpContext.Current.GetOwinContext().Authentication).InstancePerRequest();
+            builder.Register(c => auditService).As<IAuditService>().SingleInstance();
 
             var container = AutofacBootstrapper.Initialize(builder);
 

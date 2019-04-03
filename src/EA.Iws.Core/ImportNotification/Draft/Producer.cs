@@ -15,6 +15,7 @@
         public bool AreMultiple { get; set; }
 
         public Guid ImportNotificationId { get; private set; }
+        public bool IsAddedToAddressBook { get; set; }
 
         public Producer(Guid importNotificationId)
         {

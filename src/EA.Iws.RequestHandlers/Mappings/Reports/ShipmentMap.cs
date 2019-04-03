@@ -49,7 +49,8 @@
                 BaselOecdCode = source.BaselOecdCode,
                 HCode = source.HCode,
                 UNClass = source.UNClass,
-                YCode = source.YCode
+                YCode = source.YCode,
+                NotificationStatus = source.Status
             };
         }
 

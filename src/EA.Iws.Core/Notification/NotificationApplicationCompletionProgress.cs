@@ -35,6 +35,7 @@
         public bool HasStateOfImport { get; set; }
         public bool HasTransitState { get; set; }
         public bool HasCustomsOffice { get; set; }
+        public bool HasCustomsOfficeSelections { get; set; }
         
         public bool HasShipmentInfo { get; set; }
 

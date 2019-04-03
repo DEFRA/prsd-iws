@@ -13,5 +13,7 @@
         public NotificationType NotificationType { get; set; }
 
         public ImportNotificationStatus Status { get; set; }
+
+        public bool ShowShipmentSummaryLink { get; set; }
     }
 }

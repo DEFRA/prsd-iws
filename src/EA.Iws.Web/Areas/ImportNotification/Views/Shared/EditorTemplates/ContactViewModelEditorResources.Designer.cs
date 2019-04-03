@@ -62,6 +62,15 @@ namespace EA.Iws.Web.Areas.ImportNotification.Views.Shared.EditorTemplates {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Enter only up to 3 digits in the telephone prefix field.
+        /// </summary>
+        public static string TelephonePrefixTitle {
+            get {
+                return ResourceManager.GetString("TelephonePrefixTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Their contact person.
         /// </summary>
         public static string Title {

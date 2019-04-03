@@ -1,6 +1,7 @@
 ﻿namespace EA.Iws.Domain.AddressBook
 {
     using NotificationApplication;
+    using Prsd.Core;
     using Prsd.Core.Domain;
 
     public class AddressBookRecord : Entity
@@ -21,6 +22,17 @@
         {
             Address = address;
             Business = business;
+            Contact = contact;
+        }
+
+        public void Update(Address address, Business business, Contact contact)
+        {
+            Guard.ArgumentNotNull(() => business, business);
+            Guard.ArgumentNotNull(() => address, address);
+            Guard.ArgumentNotNull(() => contact, contact);
+
+            Business = business;
+            Address = address;
             Contact = contact;
         }
     }

@@ -75,6 +75,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConfigurationRegistrarExtensions.cs" />
+    <Compile Include="Draft\DraftMovementRepository.cs" />
     <Compile Include="Draft\DraftContext.cs" />
     <Compile Include="Draft\DraftImportNotificationRepository.cs" />
     <Compile Include="Draft\IDraftImportNotificationRepository.cs" />
@@ -96,17 +97,26 @@
     <Compile Include="Mappings\Exports\AddressMapping.cs" />
     <Compile Include="Mappings\Common\BankHolidayMapping.cs" />
     <Compile Include="Mappings\Exports\AnnexCollectionMapping.cs" />
+    <Compile Include="Mappings\Exports\AuditMapping.cs" />
+    <Compile Include="Mappings\Exports\AuditScreenMapping.cs" />
     <Compile Include="Mappings\Exports\CarrierCollectionMapping.cs" />
     <Compile Include="Mappings\Exports\ConsentMapping.cs" />
     <Compile Include="Mappings\Common\CompetentAuthorityBacsDetailsMapping.cs" />
     <Compile Include="Mappings\Common\DisposalCostMapping.cs" />
     <Compile Include="Mappings\Common\EmailAddressMapping.cs" />
     <Compile Include="Mappings\Exports\ConsultationMapping.cs" />
+    <Compile Include="Mappings\Exports\DraftBulkUploadMapping.cs" />
+    <Compile Include="Mappings\Exports\DraftMovementMapping.cs" />
+    <Compile Include="Mappings\Exports\DraftPackagingInfoMapping.cs" />
+    <Compile Include="Mappings\Exports\EntryExitCustomsSelectionsMapping.cs" />
     <Compile Include="Mappings\Exports\FacilityCollectionMapping.cs" />
     <Compile Include="Mappings\Exports\FinancialGuaranteeCollectionMapping.cs" />
     <Compile Include="Mappings\Exports\MeansOfTransportMapping.cs" />
+    <Compile Include="Mappings\Exports\NotificationCommentMapping.cs" />
     <Compile Include="Mappings\Exports\ProducerCollectionMapping.cs" />
     <Compile Include="Mappings\Exports\NumberOfShipmentsHistoryMapping.cs" />
+    <Compile Include="Mappings\Exports\SharedUserHistoryMapping.cs" />
+    <Compile Include="Mappings\Exports\SharedUserMapping.cs" />
     <Compile Include="Mappings\Exports\UserHistoryMapping.cs" />
     <Compile Include="Mappings\Exports\WasteCompositionAnnexMapping.cs" />
     <Compile Include="Mappings\Exports\TechnologyEmployedAnnexMapping.cs" />
@@ -118,6 +128,7 @@
     <Compile Include="Mappings\Imports\ImportFinancialGuaranteeRefusalMapping.cs" />
     <Compile Include="Mappings\Imports\ImportFinancialGuaranteeReleaseMapping.cs" />
     <Compile Include="Mappings\Imports\ImportFinancialGuaranteeStatusChange.cs" />
+    <Compile Include="Mappings\Imports\ImportNotificationCommentMapping.cs" />
     <Compile Include="Mappings\Imports\ImportObjectionMapping.cs" />
     <Compile Include="Mappings\Imports\ImportWithdrawnMapping.cs" />
     <Compile Include="Mappings\Imports\ImportConsentMapping.cs" />
@@ -234,6 +245,7 @@
     <Compile Include="Repositories\Imports\ImportMovementTableDataRepository.cs" />
     <Compile Include="Repositories\Imports\ImportNotificationAssessmentDecisionRepository.cs" />
     <Compile Include="Repositories\Imports\ImportNotificationAssessmentRepository.cs" />
+    <Compile Include="Repositories\Imports\ImportNotificationCommentRepository.cs" />
     <Compile Include="Repositories\Imports\ImportNotificationRepository.cs" />
     <Compile Include="Repositories\Imports\ImportNotificationSearchRepository.cs" />
     <Compile Include="Repositories\Imports\ImportNotificationOverviewRepository.cs" />
@@ -251,6 +263,7 @@
     <Compile Include="Repositories\InternalUserRepository.cs" />
     <Compile Include="Repositories\KeyDatesOverrideRepository.cs" />
     <Compile Include="Repositories\MeansOfTransportRepository.cs" />
+    <Compile Include="Repositories\MovementCarrierRepository.cs" />
     <Compile Include="Repositories\MovementDateHistoryRepository.cs" />
     <Compile Include="Repositories\MovementDetailsRepository.cs" />
     <Compile Include="Repositories\MovementRejectionRepository.cs" />
@@ -258,6 +271,9 @@
     <Compile Include="Repositories\NotificationAssessmentDatesSummaryRepository.cs" />
     <Compile Include="Repositories\NotificationAssessmentDecisionRepository.cs" />
     <Compile Include="Repositories\NotificationAttentionSummaryRepository.cs" />
+    <Compile Include="Repositories\NotificationAuditRepository.cs" />
+    <Compile Include="Repositories\NotificationAuditScreenRepository.cs" />
+    <Compile Include="Repositories\NotificationCommentRepository.cs" />
     <Compile Include="Repositories\NotificationConsentRepository.cs" />
     <Compile Include="Repositories\NotificationApplicationOverviewRepository.cs" />
     <Compile Include="Repositories\NotificationMovementsSummaryRepository.cs" />
@@ -272,9 +288,12 @@
     <Compile Include="Repositories\Reports\FinanceReportRepository.cs" />
     <Compile Include="Repositories\Reports\ImportNotificationsRepository.cs" />
     <Compile Include="Repositories\Reports\ImportStatsRepository.cs" />
+    <Compile Include="Repositories\Reports\ProducerRepository.cs" />
     <Compile Include="Repositories\Reports\ShipmentsRepository.cs" />
     <Compile Include="Repositories\Reports\FreedomOfInformationRepository.cs" />
     <Compile Include="Repositories\NumberOfShipmentsHistoryRepository.cs" />
+    <Compile Include="Repositories\SharedUserHistoryRepository.cs" />
+    <Compile Include="Repositories\SharedUserRepository.cs" />
     <Compile Include="Repositories\TechnologyEmployedRepository.cs" />
     <Compile Include="Repositories\Search\AdvancedSearchRepository.cs" />
     <Compile Include="Repositories\UserHistoryRepository.cs" />

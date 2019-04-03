@@ -84,6 +84,7 @@
     <Compile Include="ImportMovement\ImportMovementFactoryTests.cs" />
     <Compile Include="ImportMovement\ReceiveImportMovementTests.cs" />
     <Compile Include="ImportMovement\RejectImportMovementTests.cs" />
+    <Compile Include="ImportNotificationAssessment\DecisionRequiredByTests.cs" />
     <Compile Include="ImportNotificationAssessment\ImportNotificationAssessmentTests.cs" />
     <Compile Include="ImportNotificationAssessment\Transactions\ImportNotificationTransactionCalculatorTests.cs" />
     <Compile Include="ImportNotificationAssessment\Transactions\ImportPaymentTransactionTests.cs" />
@@ -155,6 +156,7 @@
     <Compile Include="NotificationApplication\NotificationWasteGenerationProcessTests.cs" />
     <Compile Include="NotificationApplication\NotificationWasteTypeTests.cs" />
     <Compile Include="NotificationAssessment\CompleteNotificationTests.cs" />
+    <Compile Include="NotificationAssessment\DecisionRequiredByTests.cs" />
     <Compile Include="NotificationAssessment\FinancialGuaranteeDecisionRequiredTests.cs" />
     <Compile Include="NotificationAssessment\NotificationAssessmentEditableTests.cs" />
     <Compile Include="NotificationAssessment\NotificationAssessmentStatusTests.cs" />

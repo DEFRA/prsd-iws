@@ -47,6 +47,14 @@
                 @Html.EditorFor(m => m.AcknowledgedDate)
             </div>
         }
+		@if (Model.DecisionRequiredByDate.HasAnyValues || Model.DecisionRequiredByDate.HadValues)
+		{
+           <div class="form-group @Html.Gds().FormGroupClass(m => m.DecisionRequiredByDate) @Html.Gds().FormGroupClass(m => m.DecisionRequiredByDate.Day) @Html.Gds().FormGroupClass(m => m.DecisionRequiredByDate.Month) @Html.Gds().FormGroupClass(m => m.DecisionRequiredByDate.Year)">
+                @Html.Gds().LabelFor(m => m.DecisionRequiredByDate, showOptionalLabel: false)
+                @Html.Gds().ValidationMessageFor(m => m.DecisionRequiredByDate)
+                @Html.EditorFor(m => m.DecisionRequiredByDate)
+            </div>
+        }
 
         @if (Model.WithdrawnDate.IsCompleted)
         {

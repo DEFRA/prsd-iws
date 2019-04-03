@@ -75,6 +75,9 @@
         {
             if (!ModelState.IsValid)
             {
+                var details = await mediator.SendAsync(new GetNotificationDetails(id));
+                model.NotificationType = details.NotificationType;
+
                 return View(model);
             }
 
@@ -83,12 +86,13 @@
             var newFacility = new Facility(id)
             {
                 Address = model.Address.AsAddress(),
-                BusinessName = model.BusinessName,
+                BusinessName = model.Business.Name,
                 Contact = model.Contact.AsContact(),
-                RegistrationNumber = model.RegistrationNumber,
-                Type = model.Type,
+                RegistrationNumber = model.Business.RegistrationNumber,
+                Type = model.BusinessType,
                 Id = Guid.NewGuid(),
-                IsActualSite = model.IsActualSite
+                IsActualSite = model.IsActualSite,
+                IsAddedToAddressBook = model.IsAddedToAddressBook
             };
 
             facilityCollection.Facilities.Add(newFacility);
@@ -151,12 +155,13 @@
                 var newFacility = new Facility(id)
                 {
                     Address = model.Address.AsAddress(),
-                    BusinessName = model.BusinessName,
+                    BusinessName = model.Business.Name,
                     Contact = model.Contact.AsContact(),
-                    RegistrationNumber = model.RegistrationNumber,
-                    Type = model.Type,
+                    RegistrationNumber = model.Business.RegistrationNumber,
+                    Type = model.BusinessType,
                     Id = model.FacilityId,
-                    IsActualSite = model.IsActualSite
+                    IsActualSite = model.IsActualSite,
+                    IsAddedToAddressBook = model.IsAddedToAddressBook
                 };
 
                 facilityCollection.Facilities.Add(newFacility);

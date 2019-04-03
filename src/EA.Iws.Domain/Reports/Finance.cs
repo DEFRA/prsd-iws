@@ -65,5 +65,7 @@
         public string Status { get; protected set; }
 
         public bool? IsInterim { get; protected set; }
+
+        public string PaymentComments { get; protected set; }
     }
 }

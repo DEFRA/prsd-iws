@@ -19,6 +19,8 @@
 
         public Guid ImportNotificationId { get; private set; }
 
+        public bool IsAddedToAddressBook { get; set; }
+
         public Importer(Guid importNotificationId)
         {
             ImportNotificationId = importNotificationId;

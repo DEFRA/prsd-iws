@@ -20,6 +20,9 @@
         CompletedDate,
 
         [Display(Name = "Actual date of shipment")]
-        ActualDateOfShipment
+        ActualDateOfShipment,
+
+        [Display(Name = "Rejected shipment date")]
+        RejectedShipmentDate
     }
 }

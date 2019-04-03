@@ -71,6 +71,7 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -79,9 +80,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AddressBook\AddAddressBookEntryHandler.cs" />
+    <Compile Include="AddressBook\AddImportAddressBookEntryHandler.cs" />
+    <Compile Include="AddressBook\AddNewAddressBookEntryHandler.cs" />
     <Compile Include="AddressBook\DeleteAddressBookRecordHandler.cs" />
+    <Compile Include="AddressBook\EditAddressBookEntryHandler.cs" />
     <Compile Include="AddressBook\GetAddressBookRecordById.cs" />
     <Compile Include="AddressBook\GetUserAddressBookByTypeHandler.cs" />
+    <Compile Include="AddressBook\SearchAddressRecordsByNameHandler.cs" />
     <Compile Include="AddressBook\SearchAddressRecordsHandler.cs" />
     <Compile Include="Admin\EntryOrExitPoints\AddEntryOrExitPointHandler.cs" />
     <Compile Include="Admin\EntryOrExitPoints\CheckEntryOrExitPointUniqueHandler.cs" />
@@ -119,6 +124,7 @@
     <Compile Include="Admin\Reports\GetExportNotificationsReportHandler.cs" />
     <Compile Include="Admin\Reports\GetExportStatsReportHandler.cs" />
     <Compile Include="Admin\Reports\GetFinanceReportHandler.cs" />
+    <Compile Include="Admin\Reports\GetProducerReportHandler.cs" />
     <Compile Include="Admin\Reports\GetShipmentsReportHandler.cs" />
     <Compile Include="Admin\Reports\GetFreedomOfInformationReportHandler.cs" />
     <Compile Include="Admin\Search\NotificaitonsAdvancedSearchHandler.cs" />
@@ -147,6 +153,11 @@
     <Compile Include="Annexes\DeleteAnnex.cs" />
     <Compile Include="Annexes\DeleteAnnexFileHandler.cs" />
     <Compile Include="Carrier\AddCarriersToNotificationFromAddressBookHandler.cs" />
+    <Compile Include="CustomsOffice\DeleteEntryCustomsOfficeByNotificationIdHandler.cs" />
+    <Compile Include="CustomsOffice\DeleteExitCustomsOfficeByNotificationIdHandler.cs" />
+    <Compile Include="CustomsOffice\GetEntryExitCustomsOfficeSelectionForNotificationByIdHandler.cs" />
+    <Compile Include="CustomsOffice\SetEntryCustomsOfficeSelectionForNotificationByIdHandler.cs" />
+    <Compile Include="CustomsOffice\SetExitCustomsOfficeSelectionForNotificationByIdHandler.cs" />
     <Compile Include="Files\GetFileHandler.cs" />
     <Compile Include="Annexes\SetTechnologyEmployedAnnexHandler.cs" />
     <Compile Include="Annexes\SetWasteCompositionAnnexHandler.cs" />
@@ -185,7 +196,9 @@
     <Compile Include="ImportMovement\Reject\RecordRejectionHandler.cs" />
     <Compile Include="ImportMovement\SetImportMovementReceiptAndRecoveryDataHandler.cs" />
     <Compile Include="ImportMovement\SetMovementCommentsHandler.cs" />
+    <Compile Include="ImportNotificationAssessment\AddImportNotificationCommentHandler.cs" />
     <Compile Include="ImportNotificationAssessment\ConsentHandler.cs" />
+    <Compile Include="ImportNotificationAssessment\DeleteImportNotificationCommentHandler.cs" />
     <Compile Include="ImportNotificationAssessment\DeleteImportNotificationHandler.cs" />
     <Compile Include="ImportNotificationAssessment\Events\ChangeImportNotificationAssessmentStatus.cs" />
     <Compile Include="ImportNotificationAssessment\Events\CheckImportNotificationPaymentStatus.cs" />
@@ -200,6 +213,8 @@
     <Compile Include="ImportNotificationAssessment\FinancialGuarantee\SetCompletedDateHandler.cs" />
     <Compile Include="ImportNotificationAssessment\FinancialGuarantee\SetReceivedAndCompletedDateHandler.cs" />
     <Compile Include="ImportNotificationAssessment\GetImportNotificationAssessmentDecisionDataHandler.cs" />
+    <Compile Include="ImportNotificationAssessment\GetImportNotificationCommentsHandler.cs" />
+    <Compile Include="ImportNotificationAssessment\GetImportNotificationCommentsUsersHandler.cs" />
     <Compile Include="ImportNotificationAssessment\GetImportNotificationConsentedDateHandler.cs" />
     <Compile Include="ImportNotificationAssessment\GetImportNotificationConsultationHandler.cs" />
     <Compile Include="ImportNotificationAssessment\GetKeyDatesHandler.cs" />
@@ -222,6 +237,7 @@
     <Compile Include="ImportNotificationAssessment\Transactions\GetImportNotificationAccountOverviewHandler.cs" />
     <Compile Include="ImportNotificationAssessment\Transactions\GetImportNotificationTransactionsHandler.cs" />
     <Compile Include="ImportNotificationAssessment\Transactions\GetTransactionByIdHandler.cs" />
+    <Compile Include="ImportNotificationAssessment\UpdateImportAccountManagementCommentsHandler.cs" />
     <Compile Include="ImportNotificationAssessment\UpdateInterimStatusHandler.cs" />
     <Compile Include="ImportNotificationAssessment\WithdrawConsentForImportNotificationHandler.cs" />
     <Compile Include="ImportNotificationAssessment\WithdrawImportNotificationHandler.cs" />
@@ -370,6 +386,7 @@
     <Compile Include="Mappings\ImportMovement\MovementDataMap.cs" />
     <Compile Include="Mappings\ImportMovement\MovementTableDataMap.cs" />
     <Compile Include="Mappings\ImportNotificationAssessment\ConsultationMap.cs" />
+    <Compile Include="Mappings\ImportNotificationAssessment\ImportNotificationCommentMap.cs" />
     <Compile Include="Mappings\ImportNotificationAssessment\ImportNotificationTransactionMap.cs" />
     <Compile Include="Mappings\ImportNotification\AddressMap.cs" />
     <Compile Include="Mappings\ImportNotification\ContactMap.cs" />
@@ -390,6 +407,9 @@
     <Compile Include="Mappings\Movement\MovementMap.cs" />
     <Compile Include="Mappings\NotificationAssessment\AccountManageDataMap.cs" />
     <Compile Include="Mappings\NotificationAssessment\ConsultationMap.cs" />
+    <Compile Include="Mappings\NotificationAssessment\NotificationAuditMap.cs" />
+    <Compile Include="Mappings\NotificationAssessment\NotificationAuditTableMap.cs" />
+    <Compile Include="Mappings\NotificationAssessment\NotificationCommentMap.cs" />
     <Compile Include="Mappings\NotificationAssessment\NotificationTransactionMap.cs" />
     <Compile Include="Mappings\Reports\DataImportNotificationMap.cs" />
     <Compile Include="Mappings\Reports\DataExportNotificationMap.cs" />
@@ -398,6 +418,7 @@
     <Compile Include="Mappings\Reports\ShipmentMap.cs" />
     <Compile Include="Mappings\Reports\ExportStatsMap.cs" />
     <Compile Include="Mappings\NumberOfShipmentsHistoryMap.cs" />
+    <Compile Include="Mappings\SharedUserMap.cs" />
     <Compile Include="Mappings\UserMap.cs" />
     <Compile Include="Mappings\UsersMap.cs" />
     <Compile Include="Movement\Complete\GetOperationCompleteDataHandler.cs" />
@@ -417,14 +438,19 @@
     <Compile Include="Movement\SetMovementCommentsHandler.cs" />
     <Compile Include="Movement\SetMultipleMovementFileIdHandler.cs" />
     <Compile Include="Movement\SetMovementReceiptAndRecoveryDataHandler.cs" />
+    <Compile Include="NotificationAssessment\AddNotificationCommentHandler.cs" />
     <Compile Include="NotificationAssessment\AddProducerHandler.cs" />
     <Compile Include="NotificationAssessment\AddTransitStateHandler.cs" />
+    <Compile Include="NotificationAssessment\CheckFinancialGuranteeStatusHandler.cs" />
     <Compile Include="NotificationAssessment\DeleteExportNotificationHandler.cs" />
+    <Compile Include="NotificationAssessment\DeleteNotificationCommentHandler.cs" />
     <Compile Include="NotificationAssessment\DeleteTransactionHandler.cs" />
     <Compile Include="NotificationAssessment\GetChangeNumberOfShipmentConfrimationDataHandler.cs" />
     <Compile Include="NotificationAssessment\GetChargeDueHandler.cs" />
     <Compile Include="NotificationAssessment\GetExportNotificationTransactionsHandler.cs" />
     <Compile Include="NotificationAssessment\GetInterimStatusHandler.cs" />
+    <Compile Include="NotificationAssessment\GetNotificationCommentsHandler.cs" />
+    <Compile Include="NotificationAssessment\GetNotificationCommentsUsersHandler.cs" />
     <Compile Include="NotificationAssessment\GetOriginalNumberOfShipmentsHandler.cs" />
     <Compile Include="NotificationAssessment\GetStateOfExportDataHandler.cs" />
     <Compile Include="NotificationAssessment\GetStateOfImportDataHandler.cs" />
@@ -436,6 +462,46 @@
     <Compile Include="NotificationAssessment\SetExporterContactHandler.cs" />
     <Compile Include="NotificationAssessment\SetNewNumberOfShipmentsHandler.cs" />
     <Compile Include="NotificationAssessment\SetEntryPointHandler.cs" />
+    <Compile Include="NotificationAssessment\UpdateEwcCodeHandler.cs" />
+    <Compile Include="NotificationAssessment\SetOperationCodesHandler.cs" />
+    <Compile Include="NotificationAssessment\UpdateExportAccountManagementCommentsHandler.cs" />
+    <Compile Include="NotificationMovements\BulkReceiptRecovery\CreateReceiptRecoveryHandler.cs" />
+    <Compile Include="NotificationMovements\BulkReceiptRecovery\PerformReceiptRecoveryContentValidationHandler.cs" />
+    <Compile Include="NotificationMovements\BulkPrenotification\CreatePrenotificationHandler.cs" />
+    <Compile Include="NotificationMovements\BulkPrenotification\PrenotificationDateFutureRule.cs" />
+    <Compile Include="NotificationMovements\BulkPrenotification\PrenotificationQuantityNumericRule.cs" />
+    <Compile Include="NotificationMovements\BulkPrenotification\PrenotificationQuantityPrecisionForCubicMetresAndTonnesRule.cs" />
+    <Compile Include="NotificationMovements\BulkPrenotification\PrenotificationQuantityPrecisionForLitresAndKilogramsRule.cs" />
+    <Compile Include="NotificationMovements\BulkPrenotification\PerformPrenotificationContentValidationHandler.cs" />
+    <Compile Include="NotificationMovements\BulkPrenotification\PrenotificationConsentValidityRule.cs" />
+    <Compile Include="NotificationMovements\BulkPrenotification\PrenotificationDateFormatRule.cs" />
+    <Compile Include="NotificationMovements\BulkPrenotification\PrenotificationDateHistoricRule.cs" />
+    <Compile Include="NotificationMovements\BulkPrenotification\PrenotificationDuplicateShipmentNumberRule.cs" />
+    <Compile Include="NotificationMovements\BulkPrenotification\PrenotificationInvalidPackagingTypeRule.cs" />
+    <Compile Include="NotificationMovements\BulkPrenotification\PrenotificationInvalidShipmentNumberRule.cs" />
+    <Compile Include="NotificationMovements\BulkPrenotification\PrenotificationNotificationNumberRule.cs" />
+    <Compile Include="NotificationMovements\BulkPrenotification\PrenotificationOnlyNewShipmentsRule.cs" />
+    <Compile Include="NotificationMovements\BulkPrenotification\PrenotificationQuantityExceededRule.cs" />
+    <Compile Include="NotificationMovements\BulkPrenotification\PrenotificationQuantityUnitRule.cs" />
+    <Compile Include="NotificationMovements\BulkPrenotification\PrenotificationThreeWorkingDaysConsentRule.cs" />
+    <Compile Include="NotificationMovements\BulkPrenotification\PrenotificationContentThreeWorkingDaysRule.cs" />
+    <Compile Include="NotificationMovements\BulkReceiptRecovery\ReceiptRecoveryAlreadyRecoveredRule.cs" />
+    <Compile Include="NotificationMovements\BulkReceiptRecovery\ReceiptRecoveryQuantityNumericRule.cs" />
+    <Compile Include="NotificationMovements\BulkReceiptRecovery\ReceiptRecoveryQuantityPrecisionLitresKilogramsRule.cs" />
+    <Compile Include="NotificationMovements\BulkReceiptRecovery\ReceiptRecoveryReceiptOnlyRule.cs" />
+    <Compile Include="NotificationMovements\BulkReceiptRecovery\ReceiptRecoveryRecoveryDateInFutureRule.cs" />
+    <Compile Include="NotificationMovements\BulkReceiptRecovery\ReceiptRecoveryRecoveryDateFormatRule.cs" />
+    <Compile Include="NotificationMovements\BulkReceiptRecovery\ReceiptRecoveryAlreadyReceivedRule.cs" />
+    <Compile Include="NotificationMovements\BulkReceiptRecovery\ReceiptRecoveryRecoveryOnlyRule.cs" />
+    <Compile Include="NotificationMovements\BulkReceiptRecovery\ReceiptRecoveryRecoveryQuantityUnitRule.cs" />
+    <Compile Include="NotificationMovements\BulkReceiptRecovery\ReceiptRecoveryShipmentMustBePrenotifiedRule.cs" />
+    <Compile Include="NotificationMovements\BulkReceiptRecovery\ReceiptRecoveryNotificationNumberRule.cs" />
+    <Compile Include="NotificationMovements\BulkReceiptRecovery\ReceiptRecoveryDuplicateShipmentNumberRule.cs" />
+    <Compile Include="NotificationMovements\BulkReceiptRecovery\ReceiptRecoveryQuantityPrecisionCubicTonnesRule.cs" />
+    <Compile Include="NotificationMovements\BulkReceiptRecovery\ReceiptRecoveryReceiptDateFormatRule.cs" />
+    <Compile Include="NotificationMovements\BulkReceiptRecovery\ReceiptRecoveryReceiptDateValidationRule.cs" />
+    <Compile Include="NotificationMovements\BulkUpload\GetBulkUploadTemplateHandler.cs" />
+    <Compile Include="NotificationMovements\Create\CreateMovementCarriersHandler.cs" />
     <Compile Include="NotificationMovements\Create\GetInternalMovementSummaryHandler.cs" />
     <Compile Include="NotificationMovements\Create\GetRemainingShipmentsHandler.cs" />
     <Compile Include="NotificationMovements\Create\HasExceededConsentedQuantityHandler.cs" />
@@ -472,6 +538,7 @@
     <Compile Include="NotificationMovements\GetRejectedMovementDetailsHandler.cs" />
     <Compile Include="NotificationMovements\GetRejectedMovementsHandler.cs" />
     <Compile Include="NotificationMovements\GetWorkingDaysUntilHandler.cs" />
+    <Compile Include="NotificationMovements\Mappings\ActualDateOfShipmentDataRowMap.cs" />
     <Compile Include="NotificationMovements\Mappings\NotificationMovementsSummaryAndTableMap.cs" />
     <Compile Include="NotificationMovements\Mappings\MovementTableDataRowMap.cs" />
     <Compile Include="Mappings\NotificationApplicationCompletionProgressMap.cs" />
@@ -512,8 +579,20 @@
     <Compile Include="NotificationAssessment\ObjectNotificationApplicationHandler.cs" />
     <Compile Include="NotificationAssessment\WithdrawNotificationApplicationHandler.cs" />
     <Compile Include="NotificationMovements\GetReceivedMovementsHandler.cs" />
+    <Compile Include="NotificationMovements\Mappings\NotificationNumberDataRowMap.cs" />
     <Compile Include="NotificationMovements\Mappings\PackagingDataMap.cs" />
+    <Compile Include="NotificationMovements\Mappings\PackagingTypesDataRowMap.cs" />
+    <Compile Include="NotificationMovements\Mappings\PrenotificationMovementCollectionMap.cs" />
+    <Compile Include="NotificationMovements\Mappings\QuantityDataRowMap.cs" />
+    <Compile Include="NotificationMovements\Mappings\ReceiptRecoveryMappings\DateDataRowMap.cs" />
+    <Compile Include="NotificationMovements\Mappings\ReceiptRecoveryMappings\NotificationNumberDataRowMap.cs" />
+    <Compile Include="NotificationMovements\Mappings\ReceiptRecoveryMappings\QuantityDataRowMap.cs" />
+    <Compile Include="NotificationMovements\Mappings\ReceiptRecoveryMappings\ShipmentNumberDataRowMap.cs" />
+    <Compile Include="NotificationMovements\Mappings\ReceiptRecoveryMappings\ShipmentQuantityUnitDataRowMap.cs" />
+    <Compile Include="NotificationMovements\Mappings\ReceiptRecoveryMovementCollectionMap.cs" />
     <Compile Include="NotificationMovements\Mappings\ShipmentDatesMap.cs" />
+    <Compile Include="NotificationMovements\Mappings\ShipmentNumberDataRowMap.cs" />
+    <Compile Include="NotificationMovements\Mappings\ShipmentQuantityUnitDataRowMap.cs" />
     <Compile Include="NotificationMovements\Rules\ActiveApprovedFinancialGuarantee.cs" />
     <Compile Include="NotificationMovements\Rules\ConsentExpiresInThreeOrLessWorkingDays.cs" />
     <Compile Include="NotificationMovements\Rules\ConsentExpiresInFourWorkingDays.cs" />
@@ -524,18 +603,25 @@
     <Compile Include="NotificationMovements\Rules\TotalIntendedQuantityReached.cs" />
     <Compile Include="NotificationMovements\Rules\TotalShipmentsReached.cs" />
     <Compile Include="NotificationMovements\Rules\WithinConsentPeriod.cs" />
+    <Compile Include="Notification\AddSharedUserHandler.cs" />
     <Compile Include="Notification\CanEditNotificationHandler.cs" />
     <Compile Include="Notification\ChangeUserHandler.cs" />
+    <Compile Include="Notification\CheckIfNotificationOwnerHandler.cs" />
     <Compile Include="Notification\CheckNotificationNumberUniqueHandler.cs" />
     <Compile Include="Notification\CreateLegacyNotificationApplicationHandler.cs" />
+    <Compile Include="Notification\CreateNotificationAuditHandler.cs" />
     <Compile Include="Notification\GenerateInterimMovementDocumentHandler.cs" />
+    <Compile Include="Notification\GenerateNotificationPreviewDocumentHandler.cs" />
     <Compile Include="Notification\GeneratePostageLabelHandler.cs" />
     <Compile Include="Annexes\GetAnnexesHandler.cs" />
     <Compile Include="Notification\CreateAnnexCollection.cs" />
     <Compile Include="Admin\GetNotificationInfoHandler.cs" />
+    <Compile Include="Notification\GetNotificationAuditScreensHandler.cs" />
+    <Compile Include="Notification\GetNotificationAuditTableHandler.cs" />
     <Compile Include="Notification\GetNotificationIdByNumberHandler.cs" />
     <Compile Include="Notification\GetNotificationNumberHandler.cs" />
     <Compile Include="Notification\GetNotificationOverviewInternalHandler.cs" />
+    <Compile Include="Notification\GetNotificationAuditHandler.cs" />
     <Compile Include="Notification\GetUserNotificationsSummaryHandler.cs" />
     <Compile Include="Notification\GetWhatToDoNextDataForNotificationHandler.cs" />
     <Compile Include="Notification\GetUnitedKingdomCompetentAuthorityByNotificationIdHandler.cs" />
@@ -546,14 +632,22 @@
     <Compile Include="Notification\RecordUserChange.cs" />
     <Compile Include="Authorization\AuthorizeActivityHandler.cs" />
     <Compile Include="Notification\GetNotificationTypeHandler.cs" />
+    <Compile Include="Notification\SharedUserAdded.cs" />
+    <Compile Include="SharedUsers\CheckIfSharedUserExistsHandler.cs" />
+    <Compile Include="SharedUsers\DeleteSharedUserForNotificationHandler.cs" />
+    <Compile Include="SharedUsers\GetSharedUserByIdHandler.cs" />
+    <Compile Include="SharedUsers\GetSharedUsersByNotificationIdHandler.cs" />
     <Compile Include="TransitState\DeleteCustomsOfficesWhenAllTransitStatesInEU.cs" />
     <Compile Include="TransportRoute\GetAllCountriesHavingCompetentAuthoritiesHandler.cs" />
     <Compile Include="TransportRoute\GetTransitAuthoritiesAndEntryOrExitPointsByCountryIdHandler.cs" />
     <Compile Include="TransportRoute\GetUnitedKingdomCompetentAuthoritiesAndEntryOrExitPointsHandler.cs" />
     <Compile Include="Users\ExternalUserExistsHandler.cs" />
     <Compile Include="Users\GetUserIdHandler.cs" />
+    <Compile Include="Users\GetUserIsInternalHandler.cs" />
     <Compile Include="Validation\IValidator.cs" />
     <Compile Include="Validation\Validator.cs" />
+    <Compile Include="WasteCodes\CanEditHCodesHandler.cs" />
+    <Compile Include="WasteCodes\EditYCodesHandler.cs" />
     <Compile Include="WasteRecovery\DeleteWasteDisposalWhenRecoverablePercentageChangedToMax.cs" />
     <Compile Include="WasteRecovery\GetEstimatedValueHandler.cs" />
     <Compile Include="WasteRecovery\GetRecoverablePercentageHandler.cs" />
@@ -722,6 +816,10 @@
       <Project>{46300373-D7AE-40AA-BF96-3FC3889825A4}</Project>
       <Name>EA.Iws.DataAccess</Name>
     </ProjectReference>
+    <ProjectReference Include="..\EA.Iws.DocumentGeneration\EA.Iws.DocumentGeneration.csproj">
+      <Project>{4E8F11AB-ABC4-4B67-BBDE-0A50E51580DE}</Project>
+      <Name>EA.Iws.DocumentGeneration</Name>
+    </ProjectReference>
     <ProjectReference Include="..\EA.Iws.Domain\EA.Iws.Domain.csproj">
       <Project>{a987fff6-5386-419e-af0a-e6c74e3323cf}</Project>
       <Name>EA.Iws.Domain</Name>
@@ -781,6 +879,7 @@
     <EmbeddedResource Include="ImportNotification\Validate\ShipmentValidatorResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>ShipmentValidatorResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="ImportNotification\Validate\StateOfExportValidatorResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

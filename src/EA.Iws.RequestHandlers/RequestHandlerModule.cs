@@ -9,15 +9,19 @@
     using Core.Authorization;
     using Core.ComponentRegistration;
     using Core.Movement;
+    using Core.Movement.BulkPrenotification;
+    using Core.Movement.BulkReceiptRecovery;
     using Decorators;
     using Documents;
     using Domain.ImportNotification;
     using Domain.NotificationApplication;
     using ImportNotification;
+    using Movement;
     using Prsd.Core.Autofac;
     using Prsd.Core.Decorators;
     using Prsd.Core.Domain;
     using Prsd.Core.Mediator;
+    using Requests.Movement;
     using Module = Autofac.Module;
 
     public class RequestHandlerModule : Module
@@ -72,6 +76,14 @@
             builder.RegisterAssemblyTypes(ThisAssembly)
                 .AssignableTo<IMovementRule>()
                 .As<IMovementRule>();
+
+            builder.RegisterAssemblyTypes(ThisAssembly)
+                .AssignableTo<IPrenotificationContentRule>()
+                .As<IPrenotificationContentRule>();
+
+            builder.RegisterAssemblyTypes(ThisAssembly)
+                .AssignableTo<IReceiptRecoveryContentRule>()
+                .As<IReceiptRecoveryContentRule>();
         }
 
         private static bool HasAsposeLicense()

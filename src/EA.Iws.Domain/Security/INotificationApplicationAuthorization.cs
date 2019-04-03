@@ -6,5 +6,7 @@
     public interface INotificationApplicationAuthorization
     {
         Task EnsureAccessAsync(Guid notificationId);
+
+        Task EnsureAccessIsOwnerAsync(Guid notificationId);
     }
 }

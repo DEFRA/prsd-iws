@@ -1,7 +1,6 @@
 ﻿namespace EA.Iws.Core.Admin.Search
 {
     using System;
-    using ImportNotificationAssessment;
 
     public class ImportAdvancedSearchResult
     {
@@ -14,5 +13,7 @@
         public string Exporter { get; set; }
 
         public string BaselOecdCode { get; set; }
+
+        public bool ShowShipmentSummaryLink { get; set; }
     }
 }

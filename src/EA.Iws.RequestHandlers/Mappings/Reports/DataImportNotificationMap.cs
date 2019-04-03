@@ -40,7 +40,8 @@
                 CompleteToAcknowledgedElapsedWorkingDays = GetCompleteToAcknowledgedElapsedWorkingDays(source, parameter),
                 DecisionToConsentElapsedWorkingDays = GetDecisionToConsentElapsedWorkingDays(source, parameter),
                 ReceivedToAcknowledgedElapsedWorkingDays = GetReceivedToAcknowledgedElapsedWorkingDays(source, parameter),
-                ReceivedToConsentElapsedWorkingDays = GetReceivedToConsentElapsedWorkingDays(source, parameter)
+                ReceivedToConsentElapsedWorkingDays = GetReceivedToConsentElapsedWorkingDays(source, parameter),
+                ConsentTo = source.ConsentTo
             };
         }
 

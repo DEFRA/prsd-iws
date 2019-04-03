@@ -3,6 +3,7 @@
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Core.Admin.Reports;
+    using EA.Iws.Core.Reports;
     using Infrastructure;
     using Infrastructure.Authorization;
     using Prsd.Core.Mediator;
@@ -35,9 +36,13 @@
             }
 
             var from = model.From.AsDateTime().Value;
-            var to = model.To.AsDateTime().Value;
+            var to = model.To.AsDateTime().Value.AddDays(1);
 
-            var report = await mediator.SendAsync(new GetExportMovementsReport(from, to));
+            var organisationType = ReportEnumParser.TryParse<OrganisationFilterOptions>(model.SelectedOrganistationFilter);
+
+            string organisationName = organisationType == null ? null : model.OrganisationName;
+
+            var report = await mediator.SendAsync(new GetExportMovementsReport(from, to, organisationType, organisationName));
 
             var filename = string.Format("export-movement-documents-input-{0}-{1}.xlsx",
                 from.ToShortDateString(),

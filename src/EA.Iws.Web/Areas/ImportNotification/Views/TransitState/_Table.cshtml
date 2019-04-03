@@ -54,11 +54,13 @@
                     <td>
                         @(Model.TransitStates[i].ExitPoint != null ? Model.TransitStates[i].ExitPoint.Name : string.Empty)
                     </td>
-                    <td>
-                        @Html.ActionLink("Edit", "Edit", new { entityId = Model.TransitStates[i].Id })
-                        |
-                        <button class="link-submit in-table" type="submit" name="deleteId" onclick="deletePost(event)" value="@Model.TransitStates[i].Id">Delete</button>
-                    </td>
+					<td>
+						<span style="white-space: nowrap">
+							@Html.ActionLink("Edit", "Edit", new { entityId = Model.TransitStates[i].Id })
+							|
+							<button class="link-submit in-table" type="submit" name="deleteId" onclick="deletePost(event)" value="@Model.TransitStates[i].Id">Delete</button>
+						</span>
+					</td>
                 </tr>
             }
         </tbody>

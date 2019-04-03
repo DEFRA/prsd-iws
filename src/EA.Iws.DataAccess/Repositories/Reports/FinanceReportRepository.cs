@@ -50,7 +50,8 @@
                     [ConsentFrom],
                     [ConsentTo],
                     [Status],
-                    [IsInterim]
+                    [IsInterim],
+                    [PaymentComments]
                   FROM
                     [Reports].[Finance]
                   WHERE

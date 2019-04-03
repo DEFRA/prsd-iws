@@ -9,10 +9,12 @@
     public class GetUserAddressBookByType : IRequest<AddressBookData>
     {
         public AddressRecordType Type { get; private set; }
+        public int PageNumber { get; private set; }
 
-        public GetUserAddressBookByType(AddressRecordType type)
+        public GetUserAddressBookByType(AddressRecordType type, int pageNumber = 0)
         {
             Type = type;
+            PageNumber = pageNumber;
         }
     }
 }

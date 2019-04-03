@@ -6,11 +6,14 @@
     using System.Web.Mvc;
     using Areas.NotificationApplication.Controllers;
     using Areas.NotificationApplication.ViewModels.ChemicalComposition;
+    using Core.Notification.Audit;
     using Core.WasteType;
     using FakeItEasy;
     using Mappings;
     using Prsd.Core.Mediator;
+    using Requests.Notification;
     using Requests.WasteType;
+    using Web.Infrastructure;
     using Web.ViewModels.Shared;
     using Xunit;
 
@@ -19,11 +22,41 @@
         private readonly IMediator mediator;
         private readonly ChemicalCompositionController chemicalCompositionController;
         private readonly Guid notificationId = new Guid("D711F96B-3AF8-46BC-91B9-B906F764FF22");
+        private readonly IAuditService auditService;
 
         public ChemicalCompositionControllerTests()
         {
             mediator = A.Fake<IMediator>();
-            chemicalCompositionController = new ChemicalCompositionController(mediator, new ChemicalCompositionMap());
+            this.auditService = A.Fake<IAuditService>();
+            chemicalCompositionController = new ChemicalCompositionController(mediator, new ChemicalCompositionMap(), this.auditService);
+
+            A.CallTo(
+                () =>
+                    mediator.SendAsync(A<GetWasteType>.That.Matches(p => p.NotificationId == notificationId)))
+                .Returns(new WasteTypeData()
+                {
+                    WasteCompositionData = new List<WasteCompositionData>()
+                    {
+                        A.Fake<WasteCompositionData>()
+                    }
+                });
+
+            A.CallTo(
+                () => mediator.SendAsync(A<GetNotificationAuditTable>.That.Matches
+                (p => p.NotificationId == notificationId)))
+                .Returns(CreateTestAuditTable());
+            
+            A.CallTo(() => auditService.AddAuditEntry(this.mediator, notificationId, "user", NotificationAuditType.Added, NotificationAuditScreenType.ChemicalComposition));
+        }
+
+        private NotificationAuditTable CreateTestAuditTable()
+        {
+            NotificationAuditTable table = new NotificationAuditTable();
+
+            table.TableData = new List<NotificationAuditForDisplay>();
+            table.TableData.Add(new NotificationAuditForDisplay(string.Empty, NotificationAuditScreenType.ChemicalComposition.ToString(), NotificationAuditType.Added.ToString(), DateTime.Now));
+
+            return table;
         }
 
         [Theory]
@@ -99,7 +132,7 @@
         public async Task WoodContined_Post_BackToOverviewTrue_RedirectsToOverview()
         {
             var wasteComposition = new List<WasteTypeCompositionData>();
-            var model = new ChemicalCompositionContinuedViewModel() 
+            var model = new ChemicalCompositionContinuedViewModel()
             {
                 NotificationId = notificationId,
                 ChemicalCompositionType = ChemicalComposition.Wood,
@@ -110,7 +143,7 @@
             var result = await chemicalCompositionController.Constituents(model, true) as RedirectToRouteResult;
             RouteAssert.RoutesTo(result.RouteValues, "Index", "Home");
         }
-        
+
         [Fact]
         public async Task Wood_Post_BackToOverviewFalse_RedirectsToWasteGenerationProcess()
         {

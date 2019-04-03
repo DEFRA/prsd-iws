@@ -6,6 +6,8 @@
 
         public string Telephone { get; set; }
 
+        public string TelephonePrefix { get; set; }
+
         public string Email { get; set; }
 
         public bool IsEmpty
@@ -14,6 +16,7 @@
             {
                 return string.IsNullOrEmpty(ContactName)
                     && string.IsNullOrEmpty(Telephone)
+                    && string.IsNullOrEmpty(TelephonePrefix)
                     && string.IsNullOrEmpty(Email);
             }
         }

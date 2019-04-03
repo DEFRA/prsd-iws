@@ -1,0 +1,28 @@
+﻿@using Resources = EA.Iws.Web.Areas.NotificationMovements.Views.PrenotificationBulkUpload.PrenotificationBulkUploadResources
+@model EA.Iws.Web.Areas.NotificationMovements.ViewModels.PrenotificationBulkUpload.WarningChoiceViewModel
+
+@{
+    ViewBag.Title = @Resources.UploadPrenotificationsTabTitle;
+    Layout = "~/Views/Shared/_Layout.GovUK.Sections.cshtml";
+}
+
+<div>
+    <h1 class="heading-large">@Resources.WarningHeader</h1>
+    <p class="margin-top-30">@Resources.WarningText1</p>
+    <p class="bold-small">@Resources.WarningText2</p>
+</div>
+
+@using (Html.BeginForm())
+{
+    @Html.Gds().ValidationSummary()
+    @Html.AntiForgeryToken()
+
+    <div class="form-group margin-top-30 @Html.Gds().FormGroupClass(m => m.WarningChoices.SelectedValue)">
+        @Html.Gds().ValidationMessageFor(model => model.WarningChoices.SelectedValue)
+        @Html.EditorFor(m => m.WarningChoices)
+    </div>
+
+    <div class="form-group">
+        <button class="button" type="submit">@Constants.ContinueOnlyButtonText</button>
+    </div>
+}

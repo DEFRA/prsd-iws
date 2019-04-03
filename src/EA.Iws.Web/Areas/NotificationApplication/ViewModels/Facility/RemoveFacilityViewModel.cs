@@ -12,5 +12,6 @@
         public Guid FacilityId { get; set; }
 
         public string FacilityName { get; set; }
+        public bool IsOnlySiteOfTreatment { get; set; }
     }
 }

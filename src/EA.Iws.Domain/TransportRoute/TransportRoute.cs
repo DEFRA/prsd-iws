@@ -42,6 +42,8 @@
 
         public virtual EntryCustomsOffice EntryCustomsOffice { get; private set; }
 
+        public virtual EntryExitCustomsOfficeSelection EntryExitCustomsOfficeSelection { get; private set; }
+
         public void SetStateOfExportForNotification(StateOfExport stateOfExport)
         {
             Guard.ArgumentNotNull(() => stateOfExport, stateOfExport);
@@ -132,8 +134,6 @@
             }
 
             targetTransitState.UpdateTransitState(country, competentAuthority, entryPoint, exitPoint, ordinalPosition);
-
-            CheckAllTransitStatesInEU();
         }
 
         public int[] GetAvailableTransitStatePositions()
@@ -170,8 +170,6 @@
             {
                 state.UpdateOrdinalPosition(state.OrdinalPosition - 1);
             }
-
-            CheckAllTransitStatesInEU();
         }
 
         public void SetExitCustomsOffice(ExitCustomsOffice customsOffice)
@@ -204,6 +202,11 @@
                     throw new InvalidOperationException("Cannot set an entry customs office for Notification " + this.Id
                         + ". The Notification only requires the following customs offices: " + customsOfficeRequiredStatus);
             }
+        }
+
+        public void SetEntryExitCustomsOfficeSelection(EntryExitCustomsOfficeSelection selection)
+        {
+            this.EntryExitCustomsOfficeSelection = selection;
         }
 
         private void CheckAllTransitStatesInEU()

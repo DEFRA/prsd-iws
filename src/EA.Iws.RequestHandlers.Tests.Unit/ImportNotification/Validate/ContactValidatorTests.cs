@@ -57,5 +57,14 @@
         {
             validator.ShouldHaveValidationErrorFor(x => x.Telephone, telephone);
         }
+
+        [Theory]
+        [InlineData(null)]
+        [InlineData("")]
+        [InlineData(" ")]
+        public void TelephonePrefixMissing_ReturnsFailure(string telephonePrefix)
+        {
+            validator.ShouldHaveValidationErrorFor(x => x.TelephonePrefix, telephonePrefix);
+        }
     }
 }

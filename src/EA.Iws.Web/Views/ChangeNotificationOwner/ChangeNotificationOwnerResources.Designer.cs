@@ -124,11 +124,65 @@ namespace EA.Iws.Web.Views.ChangeNotificationOwner {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Go to notification options.
+        /// </summary>
+        public static string OptionsLink {
+            get {
+                return ResourceManager.GetString("OptionsLink", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You&apos;ve already shared the notification to this user. You can&apos;t assign a notification to a current notification administrator..
+        /// </summary>
+        public static string Reason {
+            get {
+                return ResourceManager.GetString("Reason", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Review user access levels.
+        /// </summary>
+        public static string ReviewLink {
+            get {
+                return ResourceManager.GetString("ReviewLink", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Notification owner changed.
         /// </summary>
         public static string SuccessTitle {
             get {
                 return ResourceManager.GetString("SuccessTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to To transfer the notification, go to.
+        /// </summary>
+        public static string Transfer {
+            get {
+                return ResourceManager.GetString("Transfer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to , remove the user as an administrator, and try the action again..
+        /// </summary>
+        public static string TransferRemainingText {
+            get {
+                return ResourceManager.GetString("TransferRemainingText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unable to assign ownership of the notification to this user.
+        /// </summary>
+        public static string UnableToShare {
+            get {
+                return ResourceManager.GetString("UnableToShare", resourceCulture);
             }
         }
         

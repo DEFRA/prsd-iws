@@ -49,7 +49,7 @@
         }
 
         [Fact]
-        public void SetExitCustomsOffice_NotRequired_Throws()
+        public void SetExitCustomsOffice_Required_European()
         {
             var stateOfExport = new StateOfExport(europeanCountry1, europeanCompetentAuthority1,
                 europeanEntryOrExitPoints1[0]);
@@ -60,9 +60,16 @@
             SetStateOfExport(stateOfExport);
             SetStateOfImport(stateOfImport);
 
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                    transportRoute.SetExitCustomsOffice(new ExitCustomsOffice("test", "test", europeanCountry1)));
+            transportRoute.SetExitCustomsOffice(new ExitCustomsOffice("test", "test", europeanCountry1));
+            transportRoute.SetEntryCustomsOffice(new EntryCustomsOffice("test2", "test2", europeanCountry2));
+
+            Assert.Equal("test", transportRoute.ExitCustomsOffice.Name);
+            Assert.Equal("test", transportRoute.ExitCustomsOffice.Address);
+            Assert.Equal(europeanCountry1.Id, transportRoute.ExitCustomsOffice.Country.Id);
+
+            Assert.Equal("test2", transportRoute.EntryCustomsOffice.Name);
+            Assert.Equal("test2", transportRoute.EntryCustomsOffice.Address);
+            Assert.Equal(europeanCountry2.Id, transportRoute.EntryCustomsOffice.Country.Id);
         }
 
         [Fact]
@@ -106,7 +113,7 @@
         }
 
         [Fact]
-        public void SetEntryCustomsOffice_NotRequired_Throws()
+        public void SetEntryCustomsOffice_Required_BothEuropean()
         {
             var stateOfExport = new StateOfExport(europeanCountry1, europeanCompetentAuthority1,
                 europeanEntryOrExitPoints1[0]);
@@ -117,9 +124,16 @@
             SetStateOfExport(stateOfExport);
             SetStateOfImport(stateOfImport);
 
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                    transportRoute.SetEntryCustomsOffice(new EntryCustomsOffice("test", "test", europeanCountry1)));
+            transportRoute.SetExitCustomsOffice(new ExitCustomsOffice("test", "test", europeanCountry1));
+            transportRoute.SetEntryCustomsOffice(new EntryCustomsOffice("test2", "test2", europeanCountry2));
+
+            Assert.Equal("test", transportRoute.ExitCustomsOffice.Name);
+            Assert.Equal("test", transportRoute.ExitCustomsOffice.Address);
+            Assert.Equal(europeanCountry1.Id, transportRoute.ExitCustomsOffice.Country.Id);
+
+            Assert.Equal("test2", transportRoute.EntryCustomsOffice.Name);
+            Assert.Equal("test2", transportRoute.EntryCustomsOffice.Address);
+            Assert.Equal(europeanCountry2.Id, transportRoute.EntryCustomsOffice.Country.Id);
         }
 
         [Fact]

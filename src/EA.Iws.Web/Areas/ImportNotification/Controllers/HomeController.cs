@@ -30,13 +30,7 @@
             var canChangeNumberOfShipments = Task.Run(() => authorizationService.AuthorizeActivity(typeof(GetOriginalNumberOfShipments))).Result;
             var canChangeEntryExitPoint = Task.Run(() => authorizationService.AuthorizeActivity(ImportNotificationPermissions.CanChangeImportEntryExitPoint)).Result;
 
-            var model = new SummaryTableContainerViewModel
-            {
-                Details = details,
-                ShowChangeLinks = details.Status == ImportNotificationStatus.NotificationReceived,
-                ShowChangeNumberOfShipmentsLink = canChangeNumberOfShipments && details.Status == ImportNotificationStatus.Consented,
-                ShowChangeEntryExitPointLink = canChangeEntryExitPoint && details.Status != ImportNotificationStatus.New && details.Status != ImportNotificationStatus.NotificationReceived
-            };
+            var model = new SummaryTableContainerViewModel(details, canChangeNumberOfShipments, canChangeEntryExitPoint);
 
             return View(model);
         }

@@ -1,5 +1,5 @@
 ﻿@model EA.Iws.Web.Areas.Admin.ViewModels.Menu.AdminLinksViewModel
-<ul>
+
     @if (Model.ShowApproveNewInternalUserLink)
     {
         <li>@Html.ActionLink("Manage new users", "ManageNewUsers", "UserAdministration", new { area = "Admin" }, null)</li>
@@ -22,4 +22,4 @@
     {
         <li>@Html.ActionLink("Delete a notification", "Index", "DeleteNotification", new { area = "Admin" }, null)</li>
     }
-</ul>
+

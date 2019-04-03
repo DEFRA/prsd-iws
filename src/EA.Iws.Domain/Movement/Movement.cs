@@ -53,8 +53,9 @@
                 Date = actualDate,
                 Status = MovementStatus.Captured,
                 HasNoPrenotification = hasNoPrenotification,
-                CreatedBy = createdBy.ToString()
-            };
+                CreatedBy = createdBy.ToString(),
+                CreatedOnDate = SystemTime.UtcNow
+        };
 
             if (prenotificationDate.HasValue)
             {
@@ -70,6 +71,7 @@
             NotificationId = notificationId;
             Date = date;
             CreatedBy = createdBy.ToString();
+            CreatedOnDate = SystemTime.UtcNow;
 
             Status = MovementStatus.New;
             StatusChangeCollection = new List<MovementStatusChange>();
@@ -108,6 +110,8 @@
 
         public string CreatedBy { get; private set; }
 
+        public DateTime CreatedOnDate { get; internal set; }
+
         public string Comments { get; private set; }
 
         public string StatsMarking { get; private set; }
@@ -144,7 +148,8 @@
             stateMachine.OnTransitioned(OnTransitionAction);
 
             stateMachine.Configure(MovementStatus.New)
-                .Permit(Trigger.Submit, MovementStatus.Submitted);
+                .Permit(Trigger.Submit, MovementStatus.Submitted)
+                .Permit(Trigger.ReceiveInternal, MovementStatus.Received);
 
             stateMachine.Configure(MovementStatus.Submitted)
                 .OnEntryFrom(submittedTrigger, OnSubmitted)
@@ -200,8 +205,7 @@
             PrenotificationDate = prenotificationDate;
         }
 
-        internal MovementRejection Reject(DateTime dateReceived,
-            string reason)
+        internal MovementRejection Reject(DateTime dateReceived, string reason)
         {
             Guard.ArgumentNotDefaultValue(() => dateReceived, dateReceived);
             Guard.ArgumentNotDefaultValue(() => reason, reason);

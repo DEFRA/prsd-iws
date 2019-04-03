@@ -3,6 +3,7 @@
     using System;
     using Core.Admin.Reports;
     using Core.Notification;
+    using Core.Shared;
     using Domain;
     using Domain.NotificationAssessment;
     using Domain.Reports;
@@ -25,7 +26,7 @@
             {
                 NotificationType = source.NotificationType,
                 Status = source.Status,
-                Preconsented = GetPreconsented(source),
+                Preconsented = GetPreconsented(source, source.NotificationType),
                 NotificationNumber = source.NotificationNumber,
                 Acknowledged = source.Acknowledged,
                 ApplicationCompleted = source.ApplicationCompleted,
@@ -39,12 +40,18 @@
                 DecisionRequiredDate = GetDecisionRequiredByDate(source, parameter),
                 ConsentDate = source.Consented,
                 Officer = source.Officer,
-                SubmittedBy = source.SubmittedBy
+                SubmittedBy = source.SubmittedBy,
+                ConsentTo = source.ConsentTo
             };
         }
 
-        private static string GetPreconsented(DataExportNotification source)
+        private static string GetPreconsented(DataExportNotification source, NotificationType notificationType)
         {
+            if (notificationType == NotificationType.Disposal)
+            {
+                return "No";
+            }
+
             if (source.Preconsented.HasValue)
             {
                 return source.Preconsented.Value ? "Yes" : "No";

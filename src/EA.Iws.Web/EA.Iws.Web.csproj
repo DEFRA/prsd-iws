@@ -22,6 +22,7 @@
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
     <UseGlobalApplicationHostFile />
+    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -101,6 +102,14 @@
       <HintPath>..\packages\Elmah.Mvc.2.1.2\lib\net40\Elmah.Mvc.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="ExcelDataReader, Version=3.4.2.0, Culture=neutral, PublicKeyToken=93517dbe6a4012fa, processorArchitecture=MSIL">
+      <HintPath>..\packages\ExcelDataReader.3.4.2\lib\net45\ExcelDataReader.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ExcelDataReader.DataSet, Version=3.4.2.0, Culture=neutral, PublicKeyToken=93517dbe6a4012fa, processorArchitecture=MSIL">
+      <HintPath>..\packages\ExcelDataReader.DataSet.3.4.2\lib\net35\ExcelDataReader.DataSet.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="FastMember.Signed, Version=1.0.0.9, Culture=neutral, PublicKeyToken=9e8f22703bef9a29, processorArchitecture=MSIL">
       <HintPath>..\packages\FastMember.Signed.1.1.0\lib\net40\FastMember.Signed.dll</HintPath>
       <Private>True</Private>
@@ -159,6 +168,7 @@
       <HintPath>..\packages\System.IdentityModel.Tokens.Jwt.4.0.3.308261200\lib\net45\System.IdentityModel.Tokens.Jwt.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.IO.Compression" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
@@ -382,6 +392,9 @@
     <Content Include="Content\govuk_toolkit\images\player-icon-volume.png" />
     <Content Include="Content\govuk_toolkit\images\separator-2x.png" />
     <Content Include="Content\govuk_toolkit\images\separator.png" />
+    <Content Include="Content\images\confirmation-icon.png" />
+    <Content Include="Content\images\error-icon.png" />
+    <Content Include="Content\images\file-icon.png" />
     <Content Include="Content\iws\_entry-or-exit-point.scss" />
     <Content Include="Content\iws\_notification-switcher.scss" />
     <Content Include="Areas\ImportNotification\Views\Facility\Add.cshtml" />
@@ -488,8 +501,8 @@
     </Content>
     <Content Include="Scripts\datable.min.js" />
     <Content Include="Scripts\decision-dropdown.js" />
+    <Content Include="Scripts\customs-office-required-radio-buttons.js" />
     <Content Include="Scripts\govuk_elements\application.js" />
-    <Content Include="Scripts\govuk_elements\govuk\details.polyfill.js" />
     <Content Include="Scripts\govuk_toolkit\govuk\analytics\analytics.js" />
     <Content Include="Scripts\govuk_toolkit\govuk\analytics\download-link-tracker.js" />
     <Content Include="Scripts\govuk_toolkit\govuk\analytics\error-tracking.js" />
@@ -498,6 +511,7 @@
     <Content Include="Scripts\govuk_toolkit\govuk\analytics\govuk-tracker.js" />
     <Content Include="Scripts\govuk_toolkit\govuk\analytics\mailto-link-tracker.js" />
     <Content Include="Scripts\govuk_toolkit\govuk\analytics\print-intent.js" />
+    <Content Include="Scripts\govuk_toolkit\govuk\details.polyfill.js" />
     <Content Include="Scripts\govuk_toolkit\govuk\modules.js" />
     <Content Include="Scripts\govuk_toolkit\govuk\modules\auto-track-event.js" />
     <Content Include="Scripts\govuk_toolkit\govuk\primary-links.js" />
@@ -580,6 +594,7 @@
     <Content Include="Areas\NotificationApplication\Views\Carrier\Remove.cshtml" />
     <Content Include="Scripts\jquery.prevent-double-click.js" />
     <Content Include="Scripts\jquery.stickem.js" />
+    <Content Include="Scripts\report-input-parameters.js" />
     <Content Include="Scripts\select2\select2.js" />
     <Content Include="Scripts\show-hide-content.js" />
     <Content Include="Views\Shared\EditorTemplates\OptionalDateInputViewModel.cshtml" />
@@ -913,43 +928,6 @@
     <Content Include="Areas\AdminExportNotificationMovements\Views\Shared\EditorTemplates\RecoveryViewModel.cshtml" />
     <Content Include="Areas\AdminImportNotificationMovements\Views\Shared\EditorTemplates\ReceiptViewModel.cshtml" />
     <Content Include="Areas\AdminImportNotificationMovements\Views\Shared\EditorTemplates\RecoveryViewModel.cshtml" />
-    <Content Include="Content\govuk_elements\_tables.scss" />
-    <Content Include="Content\govuk_elements\_shame.scss" />
-    <Content Include="Content\govuk_elements\_reset.scss" />
-    <Content Include="Content\govuk_elements\_phase-banner.scss" />
-    <Content Include="Content\govuk_elements\_panels.scss" />
-    <Content Include="Content\govuk_elements\_lists.scss" />
-    <Content Include="Content\govuk_elements\_layout.scss" />
-    <Content Include="Content\govuk_elements\_icons.scss" />
-    <Content Include="Content\govuk_elements\_helpers.scss" />
-    <Content Include="Content\govuk_elements\_govuk-template-base.scss" />
-    <Content Include="Content\govuk_elements\_forms.scss" />
-    <Content Include="Content\govuk_elements\_elements-typography.scss" />
-    <Content Include="Content\govuk_elements\_details.scss" />
-    <Content Include="Content\govuk_elements\_components.scss" />
-    <Content Include="Content\govuk_elements\_buttons.scss" />
-    <Content Include="Content\govuk_elements\_breadcrumbs.scss" />
-    <Content Include="Content\govuk_elements\forms\_form-validation.scss" />
-    <Content Include="Content\govuk_elements\forms\_form-multiple-choice.scss" />
-    <Content Include="Content\govuk_elements\forms\_form-date.scss" />
-    <Content Include="Content\govuk_toolkit\stylesheets\_url-helpers.scss" />
-    <Content Include="Content\govuk_toolkit\stylesheets\_typography.scss" />
-    <Content Include="Content\govuk_toolkit\stylesheets\_shims.scss" />
-    <Content Include="Content\govuk_toolkit\stylesheets\_measurements.scss" />
-    <Content Include="Content\govuk_toolkit\stylesheets\_helpers.scss" />
-    <Content Include="Content\govuk_toolkit\stylesheets\_grid_layout.scss" />
-    <Content Include="Content\govuk_toolkit\stylesheets\_font_stack.scss" />
-    <Content Include="Content\govuk_toolkit\stylesheets\_device-pixels.scss" />
-    <Content Include="Content\govuk_toolkit\stylesheets\_css3.scss" />
-    <Content Include="Content\govuk_toolkit\stylesheets\_conditionals.scss" />
-    <Content Include="Content\govuk_toolkit\stylesheets\_colours.scss" />
-    <Content Include="Content\govuk_toolkit\stylesheets\design-patterns\_media-player.scss" />
-    <Content Include="Content\govuk_toolkit\stylesheets\design-patterns\_buttons.scss" />
-    <Content Include="Content\govuk_toolkit\stylesheets\design-patterns\_breadcrumbs.scss" />
-    <Content Include="Content\govuk_toolkit\stylesheets\design-patterns\_alpha-beta.scss" />
-    <Content Include="Content\govuk_toolkit\stylesheets\colours\_palette.scss" />
-    <Content Include="Content\govuk_toolkit\stylesheets\colours\_organisation.scss" />
-    <Content Include="Content\govuk_toolkit\stylesheets\.gitkeep" />
     <Content Include="Content\iws\_form-multiple-choice.scss" />
     <Content Include="Areas\AdminExportNotificationMovements\Views\CaptureMovement\Cancelled.cshtml" />
     <Content Include="Areas\AdminExportNotificationMovements\Views\CaptureMovement\Edit.cshtml" />
@@ -993,7 +971,6 @@
     <Content Include="Views\ChangeNotificationOwner\Index.cshtml" />
     <Content Include="Views\ChangeNotificationOwner\Confirm.cshtml" />
     <Content Include="Views\ChangeNotificationOwner\Success.cshtml" />
-    <Content Include="Areas\NotificationMovements\Views\Certificate\WhatNext.cshtml" />
     <Content Include="Areas\Admin\Views\ExternalUserAdministration\Deactivate.cshtml" />
     <Content Include="Areas\Admin\Views\ExternalUserAdministration\DeactivateSummary.cshtml" />
     <Content Include="Areas\Admin\Views\ExternalUserAdministration\DeactivateConfirmation.cshtml" />
@@ -1004,6 +981,93 @@
     <Content Include="Areas\AdminExportAssessment\Views\EditContact\Exporter.cshtml" />
     <Content Include="Areas\AdminExportAssessment\Views\EditContact\EditorTemplates\EditContactViewModel.cshtml" />
     <Content Include="Areas\AdminExportAssessment\Views\EditContact\Importer.cshtml" />
+    <Content Include="Areas\NotificationApplication\Views\ReviewUserAccess\UserList.cshtml" />
+    <Content Include="Areas\NotificationApplication\Views\ReviewUserAccess\Remove.cshtml" />
+    <Content Include="Areas\NotificationApplication\Views\ShareNotification\Success.cshtml" />
+    <Content Include="Areas\NotificationApplication\Views\UpdateHistory\Index.cshtml" />
+    <Content Include="Areas\NotificationApplication\Views\UpdateHistory\_Title.cshtml" />
+    <Content Include="Areas\NotificationMovements\Views\PrenotificationBulkUpload\Index.cshtml" />
+    <Content Include="Areas\NotificationMovements\Views\PrenotificationBulkUpload\UploadPrenotifications.cshtml" />
+    <Content Include="Areas\NotificationMovements\Views\BulkUploadTemplate\Index.cshtml" />
+    <Content Include="Areas\NotificationMovements\Views\PrenotificationBulkUpload\Warning.cshtml" />
+    <Content Include="Areas\NotificationMovements\Views\PrenotificationBulkUpload\Errors.cshtml" />
+    <Content Include="Areas\NotificationMovements\Views\PrenotificationBulkUpload\Documents.cshtml" />
+    <Content Include="Areas\NotificationMovements\Views\PrenotificationBulkUpload\Success.cshtml" />
+    <Content Include="Areas\NotificationMovements\Views\PrenotificationBulkUpload\ConsentWithdrawn.cshtml" />
+    <Content Include="Areas\NotificationMovements\Views\PrenotificationBulkUpload\TotalIntendedQuantityReached.cshtml" />
+    <Content Include="Areas\NotificationMovements\Views\PrenotificationBulkUpload\TotalIntendedQuantityExceeded.cshtml" />
+    <Content Include="Areas\NotificationMovements\Views\PrenotificationBulkUpload\TotalMovementsReached.cshtml" />
+    <Content Include="Areas\NotificationMovements\Views\PrenotificationBulkUpload\ConsentPeriodExpired.cshtml" />
+    <Content Include="Areas\NotificationMovements\Views\PrenotificationBulkUpload\TotalActiveLoadsReached.cshtml" />
+    <Content Include="Areas\NotificationMovements\Views\ReceiptRecoveryBulkUpload\Index.cshtml" />
+    <Content Include="Areas\NotificationMovements\Views\ReceiptRecoveryBulkUpload\Upload.cshtml" />
+    <Content Include="Areas\NotificationMovements\Views\ReceiptRecoveryBulkUpload\Warning.cshtml" />
+    <Content Include="Areas\NotificationMovements\Views\ReceiptRecoveryBulkUpload\Success.cshtml" />
+    <Content Include="Areas\NotificationMovements\Views\ReceiptRecoveryBulkUpload\Errors.cshtml" />
+    <Content Include="Areas\NotificationMovements\Views\Create\AddIntendedCarrier.cshtml" />
+    <Content Include="Areas\NotificationMovements\Views\Create\WhoAreYourCarriers.cshtml" />
+    <Content Include="Areas\NotificationMovements\Views\ReceiptRecoveryBulkUpload\Documents.cshtml" />
+    <Content Include="Areas\AddressBook\Views\Edit\Index.cshtml" />
+    <Content Include="Areas\AddressBook\Views\Edit\_BusinessType.cshtml" />
+    <Content Include="Areas\AddressBook\Views\Edit\Add.cshtml" />
+    <Content Include="Areas\AdminExportAssessment\Views\Comments\Index.cshtml" />
+    <Content Include="Areas\AdminExportAssessment\Views\Comments\_Navigation.cshtml" />
+    <Content Include="Areas\AdminImportAssessment\Views\Comments\_Navigation.cshtml" />
+    <Content Include="Areas\AdminImportAssessment\Views\Comments\Index.cshtml" />
+    <Content Include="Areas\AdminExportAssessment\Views\Comments\Add.cshtml" />
+    <Content Include="Areas\AdminExportAssessment\Views\Comments\_Layout.cshtml" />
+    <Content Include="Areas\AdminImportAssessment\Views\Comments\Add.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\DecisionDateInputViewModel.cshtml" />
+    <Content Include="Areas\Reports\Views\Producer\Index.cshtml" />
+    <Content Include="Areas\AdminExportAssessment\Views\Comments\Delete.cshtml" />
+    <Content Include="Areas\AdminImportAssessment\Views\Comments\Delete.cshtml" />
+    <Content Include="Areas\AdminImportAssessment\Views\Comments\_Layout.cshtml" />
+    <Content Include="Areas\Reports\Views\FreedomOfInformation\ColumnSelection.cshtml" />
+    <Content Include="Areas\Reports\Views\Shipments\ColumnSelection.cshtml" />
+    <Content Include="Areas\NotificationApplication\Views\ExitCustomsOffice\_ExitCustomsOfficeGuidance.cshtml" />
+    <Content Include="Areas\NotificationApplication\Views\EntryCustomsOffice\_EntryCustomsOfficeGuidance.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\DateEntryViewModel.cshtml" />
+    <Content Include="Areas\AdminExportAssessment\Views\OperationCodes\Edit.cshtml" />
+    <Content Include="Content\govuk_toolkit\stylesheets\_url-helpers.scss" />
+    <Content Include="Content\govuk_toolkit\stylesheets\_typography.scss" />
+    <Content Include="Content\govuk_toolkit\stylesheets\_shims.scss" />
+    <Content Include="Content\govuk_toolkit\stylesheets\_measurements.scss" />
+    <Content Include="Content\govuk_toolkit\stylesheets\_helpers.scss" />
+    <Content Include="Content\govuk_toolkit\stylesheets\_grid_layout.scss" />
+    <Content Include="Content\govuk_toolkit\stylesheets\_font_stack.scss" />
+    <Content Include="Content\govuk_toolkit\stylesheets\_device-pixels.scss" />
+    <Content Include="Content\govuk_toolkit\stylesheets\_css3.scss" />
+    <Content Include="Content\govuk_toolkit\stylesheets\_conditionals.scss" />
+    <Content Include="Content\govuk_toolkit\stylesheets\_colours.scss" />
+    <Content Include="Content\govuk_toolkit\stylesheets\design-patterns\_media-player.scss" />
+    <Content Include="Content\govuk_toolkit\stylesheets\design-patterns\_buttons.scss" />
+    <Content Include="Content\govuk_toolkit\stylesheets\design-patterns\_breadcrumbs.scss" />
+    <Content Include="Content\govuk_toolkit\stylesheets\design-patterns\_alpha-beta.scss" />
+    <Content Include="Content\govuk_toolkit\stylesheets\colours\_palette.scss" />
+    <Content Include="Content\govuk_toolkit\stylesheets\colours\_organisation.scss" />
+    <Content Include="Content\govuk_toolkit\stylesheets\.gitkeep" />
+    <Content Include="Content\govuk_elements\_tables.scss" />
+    <Content Include="Content\govuk_elements\_reset.scss" />
+    <Content Include="Content\govuk_elements\_phase-banner.scss" />
+    <Content Include="Content\govuk_elements\_panels.scss" />
+    <Content Include="Content\govuk_elements\_lists.scss" />
+    <Content Include="Content\govuk_elements\_layout.scss" />
+    <Content Include="Content\govuk_elements\_icons.scss" />
+    <Content Include="Content\govuk_elements\_helpers.scss" />
+    <Content Include="Content\govuk_elements\_govuk-template-base.scss" />
+    <Content Include="Content\govuk_elements\_forms.scss" />
+    <Content Include="Content\govuk_elements\_elements-typography.scss" />
+    <Content Include="Content\govuk_elements\_details.scss" />
+    <Content Include="Content\govuk_elements\_components.scss" />
+    <Content Include="Content\govuk_elements\_buttons.scss" />
+    <Content Include="Content\govuk_elements\_breadcrumbs.scss" />
+    <Content Include="Content\govuk_elements\forms\_form-validation.scss" />
+    <Content Include="Content\govuk_elements\forms\_form-multiple-choice.scss" />
+    <Content Include="Content\govuk_elements\forms\_form-date.scss" />
+    <Content Include="Areas\AdminExportAssessment\Views\YCode\Index.cshtml" />
+    <Content Include="Areas\AdminExportAssessment\Views\Shared\EditorTemplates\EnterWasteCodesViewModel.cshtml" />
+    <Content Include="Areas\AdminExportAssessment\Views\EditEwcCode\Index.cshtml" />
+    <Content Include="Areas\AdminExportAssessment\Views\HCode\Index.cshtml" />
     <None Include="Scripts\jquery-2.1.3.intellisense.js" />
     <Content Include="Scripts\govuk\govuk-template.js" />
     <Content Include="Scripts\govuk\ie.js" />
@@ -1113,10 +1177,16 @@
     <Content Include="Views\Shared\_IwsTermsAndConditions.cshtml" />
     <Content Include="Views\NewUser\TermsAndConditions.cshtml" />
     <Content Include="Views\Errors\_GenericError.cshtml" />
-    <Content Include="Views\Shared\_IwsSepaStandardDataNotice.cshtml" />
     <Content Include="Views\Applicant\NotFound.cshtml" />
     <Content Include="Views\Shared\_NotificationSwitcher.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\MaskedDateInputViewModel.cshtml" />
+    <Content Include="Areas\NotificationApplication\Views\ShareNotification\ShareNotification.cshtml" />
+    <Content Include="Areas\NotificationApplication\Views\ShareNotification\Confirm.cshtml" />
+    <Content Include="Views\ChangeNotificationOwner\ReviewAccess.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\RequiredDateInputViewModel.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\ReportInputParametersViewModel.cshtml" />
+    <Content Include="Views\PrivacyPolicy\Index.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\ReportOutputParametersViewModel.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -1132,6 +1202,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\Modules\AuthorizationModule.cs" />
+    <Compile Include="App_Start\Modules\BulkUploadModule.cs" />
     <Compile Include="App_Start\Modules\MappingModule.cs" />
     <Compile Include="App_Start\Modules\ApiClientModule.cs" />
     <Compile Include="App_Start\Modules\FileAccessModule.cs" />
@@ -1139,13 +1210,23 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Areas\AddressBook\AddressBookAreaRegistration.cs" />
     <Compile Include="Areas\AddressBook\Controllers\DeleteController.cs" />
+    <Compile Include="Areas\AddressBook\Controllers\EditController.cs" />
     <Compile Include="Areas\AddressBook\Controllers\HomeController.cs" />
+    <Compile Include="Areas\AddressBook\ViewModels\AddAddressViewModel.cs" />
+    <Compile Include="Areas\AddressBook\ViewModels\EditAddressViewModel.cs" />
+    <Compile Include="Areas\AddressBook\ViewModels\AddressBusinessTypeViewModel.cs" />
     <Compile Include="Areas\AddressBook\Views\AddressBookResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>AddressBookResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Areas\AddressBook\Views\Edit\AddEditResource.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AddEditResource.resx</DependentUpon>
+    </Compile>
     <Compile Include="Areas\AdminExportAssessment\Controllers\AnnexController.cs" />
+    <Compile Include="Areas\AdminExportAssessment\Controllers\CommentsController.cs" />
     <Compile Include="Areas\AdminExportAssessment\Controllers\DecisionControllerResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -1153,18 +1234,60 @@
     </Compile>
     <Compile Include="Areas\AdminExportAssessment\Controllers\DeleteTransactionController.cs" />
     <Compile Include="Areas\AdminExportAssessment\Controllers\EditContactController.cs" />
+    <Compile Include="Areas\AdminExportAssessment\Controllers\EditEwcCodeController.cs" />
     <Compile Include="Areas\AdminExportAssessment\Controllers\FinancialGuaranteeAssessmentController.cs" />
     <Compile Include="Areas\AdminExportAssessment\Controllers\FinancialGuaranteeDatesController.cs" />
     <Compile Include="Areas\AdminExportAssessment\Controllers\FinancialGuaranteeDecisionController.cs" />
     <Compile Include="Areas\AdminExportAssessment\Controllers\FinancialGuaranteeDecisionHistoryController.cs" />
     <Compile Include="Areas\AdminExportAssessment\Controllers\FinancialGuaranteeDetailsController.cs" />
+    <Compile Include="Areas\AdminExportAssessment\Controllers\HCodeController.cs" />
     <Compile Include="Areas\AdminExportAssessment\Controllers\KeyDatesOverrideController.cs" />
     <Compile Include="Areas\AdminExportAssessment\Controllers\MarkAsInterimController.cs" />
+    <Compile Include="Areas\AdminExportAssessment\Controllers\OperationCodesController.cs" />
     <Compile Include="Areas\AdminExportAssessment\Controllers\OverviewController.cs" />
     <Compile Include="Areas\AdminExportAssessment\Controllers\NumberOfShipmentsController.cs" />
     <Compile Include="Areas\AdminExportAssessment\Controllers\ProducerController.cs" />
     <Compile Include="Areas\AdminExportAssessment\Controllers\UpdateJourneyController.cs" />
+    <Compile Include="Areas\AdminExportAssessment\Controllers\YCodeController.cs" />
     <Compile Include="Areas\AdminExportAssessment\ViewModels\Annex\DownloadAnnexViewModel.cs" />
+    <Compile Include="Areas\AdminExportAssessment\ViewModels\Comments\AddCommentsViewModel.cs" />
+    <Compile Include="Areas\AdminExportAssessment\ViewModels\Comments\CommentsResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CommentsResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\AdminExportAssessment\ViewModels\Comments\CommentsViewModel.cs" />
+    <Compile Include="Areas\AdminExportAssessment\ViewModels\EditEwcCode\EditEwcCodeViewModel.cs" />
+    <Compile Include="Areas\AdminExportAssessment\ViewModels\EditEwcCode\EditEwcEnterCodesViewModel.cs" />
+    <Compile Include="Areas\AdminExportAssessment\ViewModels\HCode\EditHCodeViewModel.cs" />
+    <Compile Include="Areas\AdminExportAssessment\ViewModels\YCode\EditYCodeViewModel.cs" />
+    <Compile Include="Areas\AdminExportAssessment\Views\EditEwcCode\EditEwcCodeResources.Designer.cs" />
+    <Compile Include="Areas\AdminExportAssessment\Views\HCode\HCodeResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>HCodeResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\AdminExportAssessment\Views\YCode\YCodeResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>YCodeResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\AdminExportAssessment\ViewModels\OperationCodes\OperationCodesViewModel.cs" />
+    <Compile Include="Areas\AdminExportAssessment\Views\OperationCodes\EditResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EditResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\AdminImportAssessment\ViewModels\Comments\CommentsResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CommentsResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Mappings\AdminExportAssessment\EditEwcMap.cs" />
+    <Compile Include="Mappings\NotificationAssessment\EditHCodeMap.cs" />
+    <Compile Include="Mappings\NotificationAssessment\EditYCodeMap.cs" />
+    <Compile Include="ViewModels\Shared\DateEntryViewModel.cs" />
+    <Compile Include="Areas\AdminExportAssessment\ViewModels\Comments\DeleteCommentViewModel.cs" />
     <Compile Include="Areas\AdminExportAssessment\ViewModels\DateInputViewModelResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -1241,6 +1364,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>AnnexResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\AdminExportAssessment\Views\Comments\IndexResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IndexResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Areas\AdminExportAssessment\Views\Decision\DecisionResources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -1425,6 +1553,7 @@
     <Compile Include="Areas\AdminImportAssessment\AdminImportAssessmentAreaRegistration.cs" />
     <Compile Include="Areas\AdminImportAssessment\Controllers\AccountManagementController.cs" />
     <Compile Include="Areas\AdminImportAssessment\Controllers\AssignAreaController.cs" />
+    <Compile Include="Areas\AdminImportAssessment\Controllers\CommentsController.cs" />
     <Compile Include="Areas\AdminImportAssessment\Controllers\DecisionController.cs" />
     <Compile Include="Areas\AdminImportAssessment\Controllers\DecisionControllerResources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -1440,6 +1569,9 @@
     <Compile Include="Areas\AdminImportAssessment\Controllers\MarkAsInterimController.cs" />
     <Compile Include="Areas\AdminImportAssessment\ViewModels\AccountManagement\AccountManagementViewModel.cs" />
     <Compile Include="Areas\AdminImportAssessment\ViewModels\AssignArea\AssignAreaViewModel.cs" />
+    <Compile Include="Areas\AdminImportAssessment\ViewModels\Comments\AddCommentsViewModel.cs" />
+    <Compile Include="Areas\AdminImportAssessment\ViewModels\Comments\CommentsViewModel.cs" />
+    <Compile Include="Areas\AdminImportAssessment\ViewModels\Comments\DeleteCommentViewModel.cs" />
     <Compile Include="Areas\AdminImportAssessment\ViewModels\Decision\DecisionViewModel.cs" />
     <Compile Include="Areas\AdminImportAssessment\ViewModels\Decision\DecisionViewModelResources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -1466,6 +1598,17 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>FinancialGuaranteeDecisionViewModelResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Areas\Reports\Controllers\ProducerController.cs" />
+    <Compile Include="Areas\Reports\ViewModels\FreedomOfInformation\ColumnSelectionViewModel.cs" />
+    <Compile Include="Areas\Reports\ViewModels\Producer\IndexViewModel.cs" />
+    <Compile Include="Areas\Reports\ViewModels\Shipments\ColumnSelectionViewModel.cs" />
+    <Compile Include="Areas\Reports\Views\Producer\ProducerResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ProducerResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Infrastructure\ReportEnumParser.cs" />
+    <Compile Include="ViewModels\Shared\DecisionDateInputViewmodel.cs" />
     <Compile Include="Areas\AdminImportAssessment\ViewModels\KeyDatesOverride\IndexViewModel.cs" />
     <Compile Include="Areas\AdminImportAssessment\ViewModels\KeyDatesOverride\IndexViewModelResources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -1495,6 +1638,11 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>IndexResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\AdminImportAssessment\Views\Comments\IndexResources.Designer.cs">
+      <DependentUpon>IndexResources.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="Areas\AdminImportAssessment\Views\Decision\IndexResources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -2017,6 +2165,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>AddressViewModelResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Areas\ImportNotification\ViewModels\Shared\BusinessResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BusinessResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\ImportNotification\ViewModels\Shared\BusinessViewModel.cs" />
     <Compile Include="Areas\ImportNotification\ViewModels\Shared\ContactViewModel.cs" />
     <Compile Include="Areas\ImportNotification\ViewModels\Shared\ContactViewModelResources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -2224,13 +2378,121 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>IndexResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Areas\NotificationApplication\Controllers\ReviewUserAccessController.cs" />
+    <Compile Include="Areas\NotificationApplication\Controllers\UpdateHistoryController.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\Annex\SuccessViewModel.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\Carrier\AddFromAddressBookViewModel.cs" />
-    <Compile Include="Areas\NotificationMovements\Views\Certificate\WhatNextResources.Designer.cs">
+    <Compile Include="Areas\NotificationApplication\ViewModels\UpdateHistory\NoChangesViewModel.cs" />
+    <Compile Include="Areas\NotificationApplication\ViewModels\UpdateHistory\UpdateHistoryViewModel.cs" />
+    <Compile Include="Areas\NotificationApplication\ViewModels\ReviewUserAccess\RemoveUserViewModel.cs" />
+    <Compile Include="Areas\NotificationApplication\ViewModels\ShareNotification\SuccessViewModel.cs" />
+    <Compile Include="Areas\NotificationApplication\ViewModels\ReviewUserAccess\UserListViewModel.cs" />
+    <Compile Include="Areas\NotificationApplication\Views\CustomsOffice\CustomsOfficeResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>WhatNextResources.resx</DependentUpon>
+      <DependentUpon>CustomsOfficeResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Areas\NotificationApplication\Views\ReviewUserAccess\RemoveResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RemoveResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\NotificationApplication\Views\ShareNotification\SuccessResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SuccessResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\NotificationApplication\Views\ReviewUserAccess\UserListResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>UserListResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\NotificationApplication\Views\UpdateHistory\IndexResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IndexResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\NotificationApplication\Controllers\ShareNotificationController.cs" />
+    <Compile Include="Areas\NotificationMovements\Controllers\BulkUploadTemplateController.cs" />
+    <Compile Include="Areas\NotificationMovements\Controllers\PrenotificationBulkUploadController.cs" />
+    <Compile Include="Areas\NotificationMovements\Controllers\ReceiptRecoveryBulkUploadController.cs" />
+    <Compile Include="Areas\NotificationMovements\ViewModels\BulkUploadTemplate\BulkUploadTemplateViewModel.cs" />
+    <Compile Include="Areas\NotificationMovements\ViewModels\Create\CarrierViewModel.cs" />
+    <Compile Include="Areas\NotificationMovements\ViewModels\Create\ThreeOrLessDaysViewModel.cs" />
+    <Compile Include="Areas\NotificationMovements\ViewModels\Create\WhoAreYourCarrierViewModel.cs" />
+    <Compile Include="Areas\NotificationMovements\ViewModels\PrenotificationBulkUpload\PrenotificationBulkUploadViewModel.cs" />
+    <Compile Include="Areas\NotificationMovements\ViewModels\PrenotificationBulkUpload\ShipmentMovementDocumentsViewModel.cs" />
+    <Compile Include="Areas\NotificationMovements\ViewModels\ReceiptRecoveryBulkUpload\ReceiptRecoveryBulkUploadViewModel.cs" />
+    <Compile Include="Areas\NotificationMovements\ViewModels\ReceiptRecoveryBulkUpload\ShipmentMovementDocumentsViewModel.cs" />
+    <Compile Include="Areas\NotificationMovements\ViewModels\ReceiptRecoveryBulkUpload\WarningChoiceViewModel.cs" />
+    <Compile Include="Areas\NotificationMovements\Views\BulkUploadTemplate\BulkUploadTemplateResources.Designer.cs">
+      <DependentUpon>BulkUploadTemplateResources.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Areas\NotificationMovements\ViewModels\PrenotificationBulkUpload\WarningChoiceViewModel.cs" />
+    <Compile Include="Areas\NotificationMovements\Views\Create\AddIntendedCarrierResource.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AddIntendedCarrierResource.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\NotificationMovements\Views\Create\WhoAreYourCarriersResource.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>WhoAreYourCarriersResource.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\NotificationMovements\Views\PrenotificationBulkUpload\ConsentPeriodExpiredResources.Designer.cs">
+      <DependentUpon>ConsentPeriodExpiredResources.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Areas\NotificationMovements\Views\PrenotificationBulkUpload\ConsentWithdrawnResources.Designer.cs">
+      <DependentUpon>ConsentWithdrawnResources.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Areas\NotificationMovements\Views\PrenotificationBulkUpload\PrenotificationBulkUploadResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PrenotificationBulkUploadResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\NotificationMovements\Views\PrenotificationBulkUpload\TotalActiveLoadsReachedResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TotalActiveLoadsReachedResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\NotificationMovements\Views\PrenotificationBulkUpload\TotalIntendedQuantityExceededResources.Designer.cs">
+      <DependentUpon>TotalIntendedQuantityExceededResources.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Areas\NotificationMovements\Views\PrenotificationBulkUpload\TotalIntendedQuantityReachedResources.Designer.cs">
+      <DependentUpon>TotalIntendedQuantityReachedResources.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Areas\NotificationMovements\Views\PrenotificationBulkUpload\TotalMovementsReachedResources.Designer.cs">
+      <DependentUpon>TotalMovementsReachedResources.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Areas\NotificationMovements\Views\ReceiptRecoveryBulkUpload\ReceiptRecoveryBulkUploadResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReceiptRecoveryBulkUploadResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\PrivacyPolicyController.cs" />
+    <Compile Include="Infrastructure\BulkReceiptRecovery\ReceiptRecoveryValidator.cs" />
+    <Compile Include="Infrastructure\BulkReceiptRecovery\IReceiptRecoveryValidator.cs" />
+    <Compile Include="Infrastructure\BulkPrenotification\PrenotificationValidator.cs" />
+    <Compile Include="Infrastructure\BulkPrenotification\IPrenotificationValidator.cs" />
+    <Compile Include="Infrastructure\BulkUpload\BulkFileValidator.cs" />
+    <Compile Include="Infrastructure\BulkUpload\IBulkFileValidator.cs" />
+    <Compile Include="Infrastructure\NotificationOwnerFilter.cs" />
+    <Compile Include="Infrastructure\SkipNotificationOwnerFilter.cs" />
+    <Compile Include="Infrastructure\AuditService.cs" />
+    <Compile Include="Infrastructure\IAuditService.cs" />
+    <Compile Include="Infrastructure\Validation\NotificationShareUserValidationAttribute.cs" />
     <Compile Include="ViewModels\ChangeNotificationOwner\ChangeOwnerViewModel.cs" />
     <Compile Include="ViewModels\ChangeNotificationOwner\ConfirmViewModel.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\Home\ResubmissionSuccessViewModel.cs" />
@@ -3064,6 +3326,7 @@
     <Compile Include="Mappings\ImportNotification\WasteCodesMap.cs" />
     <Compile Include="Mappings\NotificationAssessment\NotificationAssessmentDecisionDataMap.cs" />
     <Compile Include="ViewModels\Account\ResetPasswordViewModel.cs" />
+    <Compile Include="ViewModels\ChangeNotificationOwner\ReviewAccessViewModel.cs" />
     <Compile Include="ViewModels\Movement\MovementsViewModel.cs" />
     <Compile Include="Areas\ExportMovement\MovementAreaRegistration.cs" />
     <Compile Include="Areas\NotificationApplication\Controllers\BaseWasteCodeController.cs" />
@@ -3217,6 +3480,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>BusinessResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\Shared\DecisionDateResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DecisionDateResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="ViewModels\Shared\KeyValuePairViewModel.cs" />
     <Compile Include="ViewModels\Shared\KeyValueRadioButtons.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\StateOfExport\EditStateOfExportViewModel.cs" />
@@ -3231,6 +3499,19 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>RadioButtonsResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\Shared\ReportInputParametersResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReportInputParametersResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\Shared\ReportInputParametersViewModel.cs" />
+    <Compile Include="ViewModels\Shared\ReportOutputParametersViewModel.cs" />
+    <Compile Include="ViewModels\Shared\RequiredDateInputResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RequiredDateInputResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\Shared\RequiredDateInputViewModel.cs" />
     <Compile Include="ViewModels\Shared\StringIntRadioButtons.cs" />
     <Compile Include="ViewModels\Shared\StringGuidRadioButtons.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\SpecialHandling\SpecialHandlingViewModel.cs" />
@@ -3257,6 +3538,9 @@
     <Compile Include="Areas\NotificationApplication\ViewModels\WasteGenerationProcess\WasteGenerationProcessViewModel.cs" />
     <Compile Include="ViewModels\Shared\TrueFalseViewModel.cs" />
     <Compile Include="ViewModels\Account\ForgotPasswordViewModel.cs" />
+    <Compile Include="Areas\NotificationApplication\ViewModels\ShareNotification\SharedUserListConfirmViewModel.cs" />
+    <Compile Include="Areas\NotificationApplication\ViewModels\ShareNotification\SharedUserListViewModel.cs" />
+    <Compile Include="Areas\NotificationApplication\ViewModels\ShareNotification\ShareNotificationViewModel.cs" />
     <Compile Include="Views\Account\EmailVerificationRequiredResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -3397,17 +3681,17 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ThreeWorkingDaysResources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Views\Shared\IwsSepaStandardDataNoticeResources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>IwsSepaStandardDataNoticeResources.resx</DependentUpon>
-    </Compile>
     <Compile Include="Views\Shared\IwsStandardDataNoticeResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>IwsStandardDataNoticeResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Views\Shared\ViewBase.cs" />
+    <Compile Include="Areas\NotificationApplication\Views\ShareNotification\ShareNotificationResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ShareNotificationResources.resx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\EA.Iws.Api.Client\EA.Iws.Api.Client.csproj">
@@ -3418,13 +3702,16 @@
       <Project>{DD2A73A4-A652-4ECC-87EE-24239CE45AD4}</Project>
       <Name>EA.Iws.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\EA.Iws.Domain\EA.Iws.Domain.csproj">
+      <Project>{A987FFF6-5386-419E-AF0A-E6C74E3323CF}</Project>
+      <Name>EA.Iws.Domain</Name>
+    </ProjectReference>
     <ProjectReference Include="..\EA.Iws.Requests\EA.Iws.Requests.csproj">
       <Project>{87FBB5CC-A732-4363-A158-39DBF3707407}</Project>
       <Name>EA.Iws.Requests</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Areas\AddressBook\Models\" />
     <Folder Include="Areas\AdminExportAssessment\Views\Home\" />
     <Folder Include="Areas\AdminImportAssessment\Views\Home\" />
     <Folder Include="Areas\Admin\Views\Shared\EditorTemplates\" />
@@ -3433,9 +3720,17 @@
     <Folder Include="Areas\FinancialGuarantee\Views\Shared\" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Areas\AddressBook\Views\Edit\AddEditResource.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AddEditResource.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Areas\AdminExportAssessment\Controllers\DecisionControllerResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>DecisionControllerResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\AdminExportAssessment\ViewModels\Comments\CommentsResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>CommentsResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\AdminExportAssessment\ViewModels\DateInputViewModelResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -3485,6 +3780,10 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>AnnexResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Areas\AdminExportAssessment\Views\Comments\IndexResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Areas\AdminExportAssessment\Views\Decision\DecisionResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>DecisionResources.Designer.cs</LastGenOutput>
@@ -3497,6 +3796,7 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Areas\AdminExportAssessment\Views\EditEwcCode\EditEwcCodeResources.resx" />
     <EmbeddedResource Include="Areas\AdminExportAssessment\Views\FinancialGuaranteeAssessment\FinancialGuaranteeAssessmentResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>FinancialGuaranteeAssessmentResources.Designer.cs</LastGenOutput>
@@ -3516,6 +3816,10 @@
     <EmbeddedResource Include="Areas\AdminExportAssessment\Views\FinancialGuaranteeDetails\FinancialGuaranteeDetailsResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>FinancialGuaranteeDetailsResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\AdminExportAssessment\Views\HCode\HCodeResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>HCodeResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\AdminExportAssessment\Views\KeyDatesOverride\IndexResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -3537,6 +3841,10 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Areas\AdminExportAssessment\Views\OperationCodes\EditResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>EditResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Areas\AdminExportAssessment\Views\Producer\ProducerResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>ProducerResources.Designer.cs</LastGenOutput>
@@ -3552,6 +3860,10 @@
     <EmbeddedResource Include="Areas\AdminExportAssessment\Views\UpdateJourney\UpdateJourneyResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>UpdateJourneyResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\AdminExportAssessment\Views\YCode\YCodeResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>YCodeResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\AdminExportNotificationMovements\Controllers\DeleteControllerResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -3597,6 +3909,7 @@
     <EmbeddedResource Include="Areas\AdminExportNotificationMovements\Views\Home\IndexResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\AdminExportNotificationMovements\Views\MovementOverride\IndexResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -3621,6 +3934,10 @@
     <EmbeddedResource Include="Areas\AdminImportAssessment\Controllers\DecisionControllerResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>DecisionControllerResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\AdminImportAssessment\ViewModels\Comments\CommentsResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>CommentsResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\AdminImportAssessment\ViewModels\Decision\DecisionViewModelResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -3655,6 +3972,10 @@
       <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\AdminImportAssessment\Views\AssignArea\IndexResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\AdminImportAssessment\Views\Comments\IndexResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
@@ -3775,6 +4096,7 @@
     <EmbeddedResource Include="Areas\AdminImportNotificationMovements\Views\Home\IndexResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\AdminImportNotificationMovements\Views\MovementOverride\IndexResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -4004,6 +4326,10 @@
     <EmbeddedResource Include="Areas\ImportNotification\ViewModels\Shared\AddressViewModelResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>AddressViewModelResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\ImportNotification\ViewModels\Shared\BusinessResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>BusinessResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\ImportNotification\ViewModels\Shared\ContactViewModelResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -4250,6 +4576,10 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>ParametersResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Areas\NotificationApplication\Views\CustomsOffice\CustomsOfficeResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>CustomsOfficeResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Areas\NotificationApplication\Views\CustomsOffice\NoCustomsOfficeResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>NoCustomsOfficeResources.Designer.cs</LastGenOutput>
@@ -4325,6 +4655,7 @@
     <EmbeddedResource Include="Areas\NotificationApplication\Views\Options\IndexResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\NotificationApplication\Views\Options\PostageLabelUnavailableResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -4357,6 +4688,18 @@
     <EmbeddedResource Include="Areas\NotificationApplication\Views\ReasonForExport\ReasonForExportResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>ReasonForExportResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\NotificationApplication\Views\ReviewUserAccess\RemoveResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>RemoveResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\NotificationApplication\Views\ShareNotification\SuccessResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>SuccessResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\NotificationApplication\Views\ReviewUserAccess\UserListResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>UserListResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\NotificationApplication\Views\Shared\CountryNotListedDisclosureResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -4414,6 +4757,10 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>UnNumberResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Areas\NotificationApplication\Views\UpdateHistory\IndexResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Areas\NotificationApplication\Views\WasteGenerationProcess\WasteGenerationProcessResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>WasteGenerationProcessResources.Designer.cs</LastGenOutput>
@@ -4466,6 +4813,7 @@
     <EmbeddedResource Include="Areas\NotificationApplication\Views\WhatToDoNext\IndexResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\NotificationApplication\Views\WhatToDoNext\PaymentResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -4474,6 +4822,7 @@
     <EmbeddedResource Include="Areas\NotificationApplication\Views\WhatToDoNext\PrintResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>PrintResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\NotificationApplication\Views\WhatToDoNext\ContractGuidanceResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -4543,13 +4892,18 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>UploadChoiceViewModelResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Areas\NotificationMovements\Views\BulkUploadTemplate\BulkUploadTemplateResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>BulkUploadTemplateResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Areas\NotificationMovements\Views\Certificate\CertificateShipmentResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>CertificateShipmentResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Areas\NotificationMovements\Views\Certificate\WhatNextResources.resx">
+    <EmbeddedResource Include="Areas\NotificationMovements\Views\Create\AddIntendedCarrierResource.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>WhatNextResources.Designer.cs</LastGenOutput>
+      <LastGenOutput>AddIntendedCarrierResource.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\NotificationMovements\Views\Create\ConsentExpiresInFourWorkingDaysResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -4603,6 +4957,10 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>TotalMovementsReachedResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Areas\NotificationMovements\Views\Create\WhoAreYourCarriersResource.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>WhoAreYourCarriersResource.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Areas\NotificationMovements\Views\Documents\DocumentsResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>DocumentsResources.Designer.cs</LastGenOutput>
@@ -4618,6 +4976,38 @@
     <EmbeddedResource Include="Areas\NotificationMovements\Views\Home\SummaryResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>SummaryResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\NotificationMovements\Views\PrenotificationBulkUpload\ConsentPeriodExpiredResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ConsentPeriodExpiredResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\NotificationMovements\Views\PrenotificationBulkUpload\ConsentWithdrawnResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ConsentWithdrawnResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\NotificationMovements\Views\PrenotificationBulkUpload\PrenotificationBulkUploadResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>PrenotificationBulkUploadResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\NotificationMovements\Views\PrenotificationBulkUpload\TotalActiveLoadsReachedResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>TotalActiveLoadsReachedResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\NotificationMovements\Views\PrenotificationBulkUpload\TotalIntendedQuantityExceededResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>TotalIntendedQuantityExceededResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\NotificationMovements\Views\PrenotificationBulkUpload\TotalIntendedQuantityReachedResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>TotalIntendedQuantityReachedResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\NotificationMovements\Views\PrenotificationBulkUpload\TotalMovementsReachedResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>TotalMovementsReachedResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\NotificationMovements\Views\ReceiptRecoveryBulkUpload\ReceiptRecoveryBulkUploadResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ReceiptRecoveryBulkUploadResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\NotificationMovements\Views\ReceiptRecovery\IndexResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -4678,6 +5068,7 @@
     <EmbeddedResource Include="Areas\Reports\ViewModels\FreedomOfInformation\IndexViewModelResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>IndexViewModelResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\Reports\Views\FinancialGuarantees\IndexResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -4698,6 +5089,11 @@
     <EmbeddedResource Include="Areas\Reports\Views\ImportNotifications\IndexResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\Reports\Views\Producer\ProducerResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ProducerResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\Reports\Views\Shipments\IndexResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -4720,9 +5116,21 @@
       <LastGenOutput>BusinessResources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="ViewModels\Shared\DecisionDateResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>DecisionDateResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="ViewModels\Shared\RadioButtonsResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>RadioButtonsResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ViewModels\Shared\ReportInputParametersResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ReportInputParametersResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ViewModels\Shared\RequiredDateInputResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>RequiredDateInputResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\Account\EmailVerificationRequiredResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -4769,6 +5177,7 @@
     <EmbeddedResource Include="Views\ChangeNotificationOwner\ChangeNotificationOwnerResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>ChangeNotificationOwnerResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\CopyFromNotification\CopyFromNotificationResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -4822,13 +5231,13 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>SelectOrganisationResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\Shared\IwsSepaStandardDataNoticeResources.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>IwsSepaStandardDataNoticeResources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
     <EmbeddedResource Include="Views\Shared\IwsStandardDataNoticeResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>IwsStandardDataNoticeResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\NotificationApplication\Views\ShareNotification\ShareNotificationResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ShareNotificationResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

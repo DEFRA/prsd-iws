@@ -1,0 +1,16 @@
+﻿@using Resourse = EA.Iws.Web.Areas.NotificationMovements.Views.PrenotificationBulkUpload.TotalActiveLoadsReachedResources
+@{
+    ViewBag.Title = Resourse.Title;
+}
+
+<h1 class="heading-large">@Resourse.Title</h1>
+
+<p>@Resourse.Body</p>
+
+<ol class="list-number">
+    <li>@Resourse.ListItem1</li>
+    <li>@Resourse.ListItem2</li>
+</ol>
+
+
+@Html.ActionLink("Continue", "Index", "Options", new { area = "NotificationApplication", id = ViewContext.RouteData.Values["notificationId"] }, new { @class = "button" })

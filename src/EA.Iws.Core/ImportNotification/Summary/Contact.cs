@@ -6,6 +6,8 @@
 
         public string Telephone { get; set; }
 
+        public string TelephonePrefix { get; set; }
+
         public string Email { get; set; }
 
         public bool IsEmpty()
@@ -26,6 +28,7 @@
             {
                 Email = contact.Email,
                 Telephone = contact.Telephone,
+                TelephonePrefix = contact.TelephonePrefix,
                 Name = contact.ContactName
             };
         }

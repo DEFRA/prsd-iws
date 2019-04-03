@@ -101,9 +101,13 @@
             AddWasteRecovery(sourceId);
             AddExporter(sourceId);
             AddImporter(sourceId);
+            AddTechnologyEmployed(sourceId);
 
             AddNotificationAssessments(sourceId, destinationId);
             AddFinancialGuarantees(sourceId, destinationId);
+            AddFacilities(sourceId, destinationId);
+            AddCarriers(sourceId, destinationId);
+            AddProducers(sourceId, destinationId);
         }
 
         private void AddShipmentInfo(Guid id)
@@ -146,6 +150,13 @@
             context.Importers.Add(importer);
         }
 
+        private void AddTechnologyEmployed(Guid id)
+        {
+            var technologyEmployed = TechnologyEmployed.CreateTechnologyEmployedWithAnnex(id, "test");
+
+            context.TechnologiesEmployed.Add(technologyEmployed);
+        }
+
         private void AddNotificationAssessments(Guid sourceId, Guid destinationId)
         {
             var sourceAssessment = new NotificationAssessment(sourceId);
@@ -160,6 +171,30 @@
             var destinationFinancialGuarantee = new FinancialGuaranteeCollection(destinationId);
             context.FinancialGuarantees.Add(sourceFinancialGuarantee);
             context.FinancialGuarantees.Add(destinationFinancialGuarantee);
+        }
+
+        private void AddFacilities(Guid sourceId, Guid destinationId)
+        {
+            var sourceFacilities = new FacilityCollection(sourceId);
+            var destinationFacilities = new FacilityCollection(destinationId);
+            context.Facilities.Add(sourceFacilities);
+            context.Facilities.Add(destinationFacilities);
+        }
+
+        private void AddCarriers(Guid sourceId, Guid destinationId)
+        {
+            var sourceCarriers = new CarrierCollection(sourceId);
+            var destinationCarriers = new CarrierCollection(destinationId);
+            context.Carriers.Add(sourceCarriers);
+            context.Carriers.Add(destinationCarriers);
+        }
+
+        private void AddProducers(Guid sourceId, Guid destinationId)
+        {
+            var sourceProducers = new ProducerCollection(sourceId);
+            var destinationProducers = new ProducerCollection(destinationId);
+            context.Producers.Add(sourceProducers);
+            context.Producers.Add(destinationProducers);
         }
 
         [Fact]

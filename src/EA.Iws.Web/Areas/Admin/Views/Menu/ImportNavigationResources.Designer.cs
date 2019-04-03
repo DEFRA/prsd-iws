@@ -19,7 +19,7 @@ namespace EA.Iws.Web.Areas.Admin.Views.Menu {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class ImportNavigationResources {
@@ -102,6 +102,24 @@ namespace EA.Iws.Web.Areas.Admin.Views.Menu {
         public static string CodesLinkText {
             get {
                 return ResourceManager.GetString("CodesLinkText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Comments.
+        /// </summary>
+        public static string CommentsHeading {
+            get {
+                return ResourceManager.GetString("CommentsHeading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Review comments.
+        /// </summary>
+        public static string CommentsLinkText {
+            get {
+                return ResourceManager.GetString("CommentsLinkText", resourceCulture);
             }
         }
         

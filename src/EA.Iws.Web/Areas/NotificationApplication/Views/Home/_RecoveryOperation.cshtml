@@ -7,10 +7,10 @@
 }
 
 @{
-    var codesClass = Model.AreOperationCodesChosen ? string.Empty : "over-alert";
-    var facilityClass = Model.IsPreconsentStatusChosen ? string.Empty : "over-alert";
-    var technologyClass = Model.IsTechnologyEmployedCompleted ? string.Empty : "over-alert";
-    var exportClass = Model.IsReasonForExportCompleted ? string.Empty : "over-alert";
+    var codesClass = Model.AreOperationCodesChosen ? "over-no-alert" : "over-alert";
+    var facilityClass = Model.IsPreconsentStatusChosen ? "over-no-alert" : "over-alert";
+    var technologyClass = Model.IsTechnologyEmployedCompleted ? "over-no-alert" : "over-alert";
+    var exportClass = Model.IsReasonForExportCompleted ? "over-no-alert" : "over-alert";
 }
 
 <table class="overview-table">

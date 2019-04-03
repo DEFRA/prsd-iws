@@ -10,7 +10,7 @@
         [DisplayName("Number of prenotifications entered in by external user")]
         public int MovementsCreatedExternally { get; set; }
 
-        [DisplayName("Number of prenotifications input by an internal user")]
+        [DisplayName("Number of prenotifications (or not prenotified records) input by an internal user")]
         public int MovementsCreatedInternally { get; set; }
 
         [DisplayName("Number of certificates of receipt entered by external user ")]

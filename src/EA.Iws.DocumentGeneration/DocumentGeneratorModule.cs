@@ -13,6 +13,7 @@
         protected override void Load(ContainerBuilder builder)
         {
             builder.RegisterType<NotificationDocumentGenerator>().As<INotificationDocumentGenerator>();
+            builder.RegisterType<NotificationPreviewWatermarkGenerator>().As<INotificationPreviewWatermarkGenerator>();
             builder.RegisterType<MovementDocumentGenerator>().As<IMovementDocumentGenerator>();
             builder.RegisterType<FinancialGuaranteeDocumentGenerator>().As<IFinancialGuaranteeDocumentGenerator>();
             builder.RegisterType<PostageLabelGenerator>().As<IPostageLabelGenerator>();

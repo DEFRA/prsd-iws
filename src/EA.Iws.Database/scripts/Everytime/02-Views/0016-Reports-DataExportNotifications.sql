@@ -20,8 +20,8 @@ AS
         D.[NameOfOfficer] AS [Officer],
         -- Decision date will be the date it was withdrawn, objected or consented and it will only be one of these.
         CAST(COALESCE(D.WithdrawnDate, COALESCE(D.[ObjectedDate], D.[ConsentedDate])) AS DATE) AS [DecisionDate],
-        [SubmittedBy].[SubmittedBy]
-
+        [SubmittedBy].[SubmittedBy],
+		C.[To] AS [ConsentTo]
     FROM [Notification].[Notification] AS [N]
 
     LEFT JOIN   [Notification].[FacilityCollection] AS FC

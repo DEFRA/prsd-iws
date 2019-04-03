@@ -6,12 +6,13 @@
 
     public class ExporterViewModel
     {
-        [Display(Name = "BusinessName", ResourceType = typeof(ExporterViewModelResources))]
-        public string BusinessName { get; set; }
+        public BusinessViewModel Business { get; set; }
 
         public AddressViewModel Address { get; set; }
 
         public ContactViewModel Contact { get; set; }
+
+        public bool IsAddedToAddressBook { get; set; }
 
         public ExporterViewModel()
         {
@@ -22,11 +23,13 @@
 
         public ExporterViewModel(Exporter exporter)
         {
-            BusinessName = exporter.BusinessName;
+            Business = new BusinessViewModel(exporter.BusinessName);
 
             Address = new AddressViewModel(exporter.Address);
 
             Contact = new ContactViewModel(exporter.Contact);
+
+            IsAddedToAddressBook = exporter.IsAddedToAddressBook;
         }
     }
 }

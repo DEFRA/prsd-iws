@@ -1,12 +1,15 @@
 ﻿namespace EA.Iws.Web.Areas.Reports.Controllers
 {
+    using System.Collections.Generic;
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Core.Admin.Reports;
+    using Core.Notification;
     using Infrastructure;
     using Infrastructure.Authorization;
     using Prsd.Core;
     using Prsd.Core.Mediator;
+    using Requests.Admin;
     using Requests.Admin.Reports;
     using ViewModels.FinancialGuarantees;
 
@@ -44,7 +47,21 @@
 
             var filename = string.Format("financial-guarantees-{0}.xlsx", SystemTime.UtcNow.ToShortDateString());
 
-            return new XlsxActionResult<FinancialGuaranteesData>(report, filename);
+            var columnsToRemove = new List<char>();
+            var competentAuthority = await mediator.SendAsync(new GetUserCompetentAuthority());
+
+            if (competentAuthority != UKCompetentAuthority.England 
+                && competentAuthority != UKCompetentAuthority.Wales)
+            {
+                // CoverAmount
+                columnsToRemove.Add('J');
+                // CalculationContinued
+                columnsToRemove.Add('K');
+                // OverActiveLoads
+                columnsToRemove.Add('L');
+            }
+
+            return new XlsxActionResult<FinancialGuaranteesData>(report, filename, columnsToHide: string.Join(",", columnsToRemove));
         }
     }
 }

@@ -1,0 +1,69 @@
+﻿@using EA.Iws.Core.Shared
+@using Resources = EA.Iws.Web.Areas.NotificationMovements.Views.ReceiptRecoveryBulkUpload.ReceiptRecoveryBulkUploadResources
+@model EA.Iws.Web.Areas.NotificationMovements.ViewModels.ReceiptRecoveryBulkUpload.ReceiptRecoveryBulkUploadViewModel
+
+@{
+    ViewBag.Title = Resources.ErrorsTitle;
+    Layout = "~/Views/Shared/_Layout.GovUK.Sections.cshtml";
+    var typeText = Model.NotificationType == NotificationType.Disposal ? "disposal" : "recovery";
+}
+<div class="grid-row">
+    <div class="column-full">
+        <header>
+            <h1 class="heading-large">@string.Format(Resources.ErrorsHeaderText, typeText, Model.ErrorsCount)</h1>
+        </header>
+
+        <p class="bold-small">@string.Format(Resources.ErrorsContactUs, typeText)</p>
+
+        <p>@Resources.ErrorsFileAdvice</p>
+
+        @if (Model.ErrorsCount > 0)
+            {
+            <div class="form-group">
+                <details>
+                    <summary class="summary-error">
+                        <h2 class="summary-error-header heading-xsmall">@Resources.ViewErrors</h2>
+                    </summary>
+                    <div class="summary-error-panel">
+                        @if (Model.FailedFileRules != null)
+                        {
+                            foreach (var rule in Model.FailedFileRules)
+                            {
+                                <div class="summary-error-row">
+                                    <div class="grid-row">
+                                        <div class="column-nine-tenths">
+                                            @Html.Raw(EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(rule))
+                                        </div>
+                                        <div class="column-tenth">
+                                            <img class="summary-error-icon" src="@Url.Content("~/Content/images/error-icon.png")" alt="">
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        }
+                        @if (Model.FailedContentRules != null)
+                        {
+                            foreach (var rule in Model.FailedContentRules)
+                            {
+                                <div class="summary-error-row">
+                                    <div class="grid-row">
+                                        <div class="column-nine-tenths">
+                                            @Html.Raw(rule.ErrorMessage)
+                                        </div>
+                                        <div class="column-tenth">
+                                            <img class="summary-error-icon" src="@Url.Content("~/Content/images/error-icon.png")" alt="">
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        }
+                    </div>
+                </details>
+            </div>
+        }
+        @Html.ActionLink(Resources.ReturnToUpload, "Upload", "ReceiptRecoveryBulkUpload", new { notificationId = @Model.NotificationId, area = "NotificationMovements" }, new { @class = "button" })
+    </div>
+</div>
+
+
+@Html.ActionLink(Resources.NotificationOptionsLink, "Index", "Options", new { id = @Model.NotificationId, area = "NotificationApplication" }, null)
