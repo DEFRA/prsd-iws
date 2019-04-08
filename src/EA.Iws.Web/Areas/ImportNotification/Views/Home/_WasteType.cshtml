@@ -2,7 +2,7 @@
 
 <div class="overview-block">
     <div class="overview-block-element">
-        @if (Model.Details.Composition.Composition.HasValue)
+        @if (Model.Details.Composition != null && Model.Details.Composition.Composition.HasValue)
         {
             @EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(Model.Details.Composition.Composition.Value)
         }
