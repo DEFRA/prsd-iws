@@ -15,13 +15,20 @@
 
         public Core.Producer Map(Domain.Producer source)
         {
-            return new Core.Producer
+            Core.Producer result = null;
+
+            if (source != null)
             {
-                AreMultiple = !source.IsOnlyProducer,
-                Name = source.Name,
-                Address = mapper.Map<Core.Address>(source.Address),
-                Contact = mapper.Map<Core.Contact>(source.Contact)
-            };
+                result = new Core.Producer
+                {
+                    AreMultiple = !source.IsOnlyProducer,
+                    Name = source.Name,
+                    Address = mapper.Map<Core.Address>(source.Address),
+                    Contact = mapper.Map<Core.Contact>(source.Contact)
+                };
+            }
+
+            return result;
         }
     }
 }

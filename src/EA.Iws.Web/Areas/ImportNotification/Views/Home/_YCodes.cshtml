@@ -2,7 +2,7 @@
 @using Resource = EA.Iws.Web.Areas.ImportNotification.Views.Home.IndexResources
 
 <div class="overview-block">
-    @if (!Model.Details.WasteType.YCodes.IsEmpty())
+    @if (Model.Details.WasteType != null && !Model.Details.WasteType.YCodes.IsEmpty())
             {
                 if (Model.Details.WasteType.YCodes.IsNotApplicable)
                 {
