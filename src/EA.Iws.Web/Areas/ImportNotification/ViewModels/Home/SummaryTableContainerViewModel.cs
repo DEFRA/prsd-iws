@@ -31,25 +31,28 @@
             ShowChangeEntryExitPointLink = canChangeEntryExitPoint && details.Status != ImportNotificationStatus.New &&
                                            details.Status != ImportNotificationStatus.NotificationReceived;
 
-            var ewcCodesOrdered = details.WasteType.EwcCodes.WasteCodes.OrderBy(w => w.Name).ToList();
-            var ycodesOrdered = details.WasteType.YCodes.WasteCodes.OrderBy(w => Regex.Match(!string.IsNullOrEmpty(w.Name) ? w.Name : string.Empty, @"(\D+)").Value).ThenBy(w =>
+            if (details.WasteType != null)
             {
-                double val;
-                double.TryParse(Regex.Match(!string.IsNullOrEmpty(w.Name) ? w.Name : string.Empty, @"(\d+(\.\d*)?|\.\d+)").Value, out val);
-                return val;
-            }).ToList();
-            var hcodesOrdered = details.WasteType.HCodes.WasteCodes.OrderBy(w => Regex.Match(!string.IsNullOrEmpty(w.Name) ? w.Name : string.Empty, @"(\D+)").Value).ThenBy(w =>
-            {
-                double val;
-                double.TryParse(Regex.Match(!string.IsNullOrEmpty(w.Name) ? w.Name : string.Empty, @"(\d+(\.\d*)?|\.\d+)").Value, out val);
-                return val;
-            }).ToList();
-            var unclassesOrdered = details.WasteType.UnClasses.WasteCodes.OrderBy(w => w.Name).ToList();
+                var ewcCodesOrdered = details.WasteType.EwcCodes.WasteCodes.OrderBy(w => w.Name).ToList();
+                var ycodesOrdered = details.WasteType.YCodes.WasteCodes.OrderBy(w => Regex.Match(!string.IsNullOrEmpty(w.Name) ? w.Name : string.Empty, @"(\D+)").Value).ThenBy(w =>
+                {
+                    double val;
+                    double.TryParse(Regex.Match(!string.IsNullOrEmpty(w.Name) ? w.Name : string.Empty, @"(\d+(\.\d*)?|\.\d+)").Value, out val);
+                    return val;
+                }).ToList();
+                var hcodesOrdered = details.WasteType.HCodes.WasteCodes.OrderBy(w => Regex.Match(!string.IsNullOrEmpty(w.Name) ? w.Name : string.Empty, @"(\D+)").Value).ThenBy(w =>
+                {
+                    double val;
+                    double.TryParse(Regex.Match(!string.IsNullOrEmpty(w.Name) ? w.Name : string.Empty, @"(\d+(\.\d*)?|\.\d+)").Value, out val);
+                    return val;
+                }).ToList();
+                var unclassesOrdered = details.WasteType.UnClasses.WasteCodes.OrderBy(w => w.Name).ToList();
 
-            Details.WasteType.EwcCodes.WasteCodes = ewcCodesOrdered;
-            Details.WasteType.YCodes.WasteCodes = ycodesOrdered;
-            Details.WasteType.HCodes.WasteCodes = hcodesOrdered;
-            Details.WasteType.UnClasses.WasteCodes = unclassesOrdered;
+                Details.WasteType.EwcCodes.WasteCodes = ewcCodesOrdered;
+                Details.WasteType.YCodes.WasteCodes = ycodesOrdered;
+                Details.WasteType.HCodes.WasteCodes = hcodesOrdered;
+                Details.WasteType.UnClasses.WasteCodes = unclassesOrdered;
+            }
         }
     }
 }

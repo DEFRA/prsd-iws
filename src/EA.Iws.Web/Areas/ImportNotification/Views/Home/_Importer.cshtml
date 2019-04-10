@@ -9,7 +9,7 @@
                 @Html.DisplayFor(m => m.Details.Importer.Name)<br />
             }
 
-            @if (!Model.Details.Exporter.Address.IsEmpty())
+            @if (!Model.Details.Importer.Address.IsEmpty())
             {
                 @Html.DisplayFor(m => m.Details.Importer.Address.AddressLine1)<text>, </text>
                 @Html.DisplayFor(m => m.Details.Importer.Address.AddressLine2)<text>, </text>

@@ -15,14 +15,21 @@
 
         public Core.Importer Map(Domain.Importer source)
         {
-            return new Core.Importer
+            Core.Importer result = null;
+
+            if (source != null)
             {
-                Name = source.Name,
-                BusinessType = source.Type,
-                RegistrationNumber = source.RegistrationNumber,
-                Address = mapper.Map<Core.Address>(source.Address),
-                Contact = mapper.Map<Core.Contact>(source.Contact)
-            };
+                result = new Core.Importer
+                {
+                    Name = source.Name,
+                    BusinessType = source.Type,
+                    RegistrationNumber = source.RegistrationNumber,
+                    Address = mapper.Map<Core.Address>(source.Address),
+                    Contact = mapper.Map<Core.Contact>(source.Contact)
+                };
+            }
+
+            return result;
         }
     }
 }

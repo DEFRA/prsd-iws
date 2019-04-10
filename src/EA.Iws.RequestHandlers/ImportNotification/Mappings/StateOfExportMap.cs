@@ -21,16 +21,23 @@
 
         public Core.StateOfExport Map(Domain.StateOfExport source)
         {
-            var competentAuthority = Task.Run(() => competentAuthorityRepository.GetById(source.CompetentAuthorityId)).Result;
-            var exitPoint = Task.Run(() => pointRepository.GetById(source.ExitPointId)).Result;
+            Core.StateOfExport result = null;
 
-            return new Core.StateOfExport
+            if (source != null)
             {
-                CompetentAuthorityCode = competentAuthority.Code,
-                CompetentAuthorityName = competentAuthority.Name,
-                ExitPointName = exitPoint.Name,
-                CountryName = exitPoint.Country.Name
-            };
+                var competentAuthority = Task.Run(() => competentAuthorityRepository.GetById(source.CompetentAuthorityId)).Result;
+                var exitPoint = Task.Run(() => pointRepository.GetById(source.ExitPointId)).Result;
+
+                result = new Core.StateOfExport
+                {
+                    CompetentAuthorityCode = competentAuthority.Code,
+                    CompetentAuthorityName = competentAuthority.Name,
+                    ExitPointName = exitPoint.Name,
+                    CountryName = exitPoint.Country.Name
+                };
+            }
+
+            return result;
         }
     }
 }

@@ -14,12 +14,19 @@
         }
         public Core.Exporter Map(Domain.Exporter source)
         {
-            return new Core.Exporter
+            Core.Exporter result = null;
+
+            if (source != null)
             {
-                Name = source.Name,
-                Address = mapper.Map<Core.Address>(source.Address),
-                Contact = mapper.Map<Core.Contact>(source.Contact)
-            };
+                result = new Core.Exporter
+                {
+                    Name = source.Name,
+                    Address = mapper.Map<Core.Address>(source.Address),
+                    Contact = mapper.Map<Core.Contact>(source.Contact)
+                };
+            }
+
+            return result;
         }
     }
 }
