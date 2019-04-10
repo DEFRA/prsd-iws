@@ -8,14 +8,21 @@
     {
         public Core.IntendedShipment Map(Domain.Shipment source)
         {
-            return new Core.IntendedShipment
+            Core.IntendedShipment result = null;
+
+            if (source != null)
             {
-                Start = source.Period.FirstDate,
-                End = source.Period.LastDate,
-                TotalShipments = source.NumberOfShipments,
-                Quantity = source.Quantity.Quantity,
-                Units = source.Quantity.Units
-            };
+                result = new Core.IntendedShipment
+                {
+                    Start = source.Period.FirstDate,
+                    End = source.Period.LastDate,
+                    TotalShipments = source.NumberOfShipments,
+                    Quantity = source.Quantity.Quantity,
+                    Units = source.Quantity.Units
+                };
+            }
+
+            return result;
         }
     }
 }

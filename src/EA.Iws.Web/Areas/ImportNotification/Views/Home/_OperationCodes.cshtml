@@ -2,7 +2,7 @@
 @model EA.Iws.Web.Areas.ImportNotification.ViewModels.Home.SummaryTableContainerViewModel
 
 <div class="overview-block">
-        @if (Model.Details.WasteOperation.OperationCodes != null && Model.Details.WasteOperation.OperationCodes.Any())
+        @if (Model.Details.WasteOperation != null && Model.Details.WasteOperation.OperationCodes != null && Model.Details.WasteOperation.OperationCodes.Any())
         {
             <div class="overview-block-element">
                 @string.Join(", ", Model.Details.WasteOperation.OperationCodes)

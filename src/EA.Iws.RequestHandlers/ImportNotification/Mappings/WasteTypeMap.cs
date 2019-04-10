@@ -20,7 +20,14 @@
 
         public Core.WasteType Map(Domain.WasteType source)
         {
-            var wasteType = new Core.WasteType { Name = source.Name };
+            var wasteType = new Core.WasteType();
+
+            if (source == null)
+            {
+                return wasteType;
+            }
+
+            wasteType.Name = source.Name;
 
             var wasteCodes = Task.Run(() => wasteCodeRepository
                 .GetWasteCodesByIds(source.WasteCodes.Select(x => x.WasteCodeId))).Result;

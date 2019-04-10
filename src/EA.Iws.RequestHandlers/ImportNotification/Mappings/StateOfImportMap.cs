@@ -21,14 +21,21 @@
 
         public Core.StateOfImport Map(Domain.StateOfImport source)
         {
-            var competentAuthority = Task.Run(() => competentAuthorityRepository.GetById(source.CompetentAuthorityId)).Result;
+            Core.StateOfImport result = null;
 
-            return new Core.StateOfImport
+            if (source != null)
             {
-                CompetentAuthorityCode = competentAuthority.Code,
-                CompetentAuthorityName = competentAuthority.Name,
-                EntryPointName = Task.Run(() => pointRepository.GetById(source.EntryPointId)).Result.Name
-            };
+                var competentAuthority = Task.Run(() => competentAuthorityRepository.GetById(source.CompetentAuthorityId)).Result;
+
+                result = new Core.StateOfImport
+                {
+                    CompetentAuthorityCode = competentAuthority.Code,
+                    CompetentAuthorityName = competentAuthority.Name,
+                    EntryPointName = Task.Run(() => pointRepository.GetById(source.EntryPointId)).Result.Name
+                };
+            }
+
+            return result;
         }
     }
 }

@@ -8,10 +8,17 @@
     {
         public Core.ChemicalComposition Map(Domain.WasteType source)
         {
-            return new Core.ChemicalComposition
+            Core.ChemicalComposition result = null;
+
+            if (source != null)
             {
-                Composition = source.ChemicalCompositionType
-            };
+                result = new Core.ChemicalComposition
+                {
+                    Composition = source.ChemicalCompositionType
+                };
+            }
+
+            return result;
         }
     }
 }
