@@ -40,13 +40,21 @@
 
             var activeLoadsPermitted = currentFinancialGuarantee == null ? 0 : currentFinancialGuarantee.ActiveLoadsPermitted.GetValueOrDefault();
 
+            var futureShipmentsByDate = message.ShipmentDate.HasValue
+                ? (await movementRepository.GetFutureActiveMovements(message.NotificationId)).Count(
+                    m => m.Date == message.ShipmentDate.Value)
+                : 0;
+
             var remainingShipments = maxNumberOfShipments - currentNumberOfShipments;
             var remainingActiveLoads = activeLoadsPermitted - currentActiveLoads;
+            var shipmentsRemainingByDate = activeLoadsPermitted - futureShipmentsByDate;
 
             return new RemainingShipmentsData
             {
+                ActiveLoadsPermitted = activeLoadsPermitted,
                 ActiveLoadsRemaining = remainingActiveLoads,
-                ShipmentsRemaining = remainingShipments
+                ShipmentsRemaining = remainingShipments,
+                ShipmentsRemainingByDate = shipmentsRemainingByDate
             };
         }
     }
