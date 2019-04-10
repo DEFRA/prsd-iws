@@ -1,7 +1,7 @@
 ﻿@model EA.Iws.Web.Areas.ImportNotification.ViewModels.Home.SummaryTableContainerViewModel
 
 <div class="overview-block">
-    @if (!string.IsNullOrWhiteSpace(Model.Details.WasteOperation.TechnologyEmployed))
+    @if (Model.Details.WasteOperation != null && !string.IsNullOrWhiteSpace(Model.Details.WasteOperation.TechnologyEmployed))
     {
         <div class="overview-block-element">
             @Html.DisplayFor(m => m.Details.WasteOperation.TechnologyEmployed)
