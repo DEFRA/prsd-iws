@@ -82,12 +82,6 @@
             return View();
         }
 
-        [HttpGet]
-        public ActionResult TotalActiveLoadsReached(Guid notificationId)
-        {
-            return View();
-        }
-
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Index(Guid notificationId, PrenotificationBulkUploadViewModel model)
@@ -309,10 +303,6 @@
             if (ruleSummary.RuleResults.Any(r => r.Rule == MovementRules.TotalIntendedQuantityExceeded && r.MessageLevel == MessageLevel.Error))
             {
                 return RedirectToAction("TotalIntendedQuantityExceeded");
-            }
-            if (ruleSummary.RuleResults.Any(r => r.Rule == MovementRules.ActiveLoadsReached && r.MessageLevel == MessageLevel.Error))
-            {
-                return RedirectToAction("TotalActiveLoadsReached");
             }
             if (ruleSummary.RuleResults.Any(r => r.Rule == MovementRules.ConsentPeriodExpired && r.MessageLevel == MessageLevel.Error))
             {
