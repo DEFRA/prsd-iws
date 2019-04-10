@@ -157,10 +157,6 @@
             {
                 return RedirectToAction("NoApprovedFinancialGuarantee");
             }
-            if (ruleSummary.RuleResults.Any(r => r.Rule == MovementRules.ActiveLoadsReached && r.MessageLevel == MessageLevel.Error))
-            {
-                return RedirectToAction("TotalActiveLoadsReached");
-            }
             if (ruleSummary.RuleResults.Any(r => r.Rule == MovementRules.ConsentPeriodExpired && r.MessageLevel == MessageLevel.Error))
             {
                 return RedirectToAction("ConsentPeriodExpired");
@@ -262,12 +258,6 @@
 
         [HttpGet]
         public ActionResult TotalMovementsReached(Guid notificationId)
-        {
-            return View();
-        }
-
-        [HttpGet]
-        public ActionResult TotalActiveLoadsReached(Guid notificationId)
         {
             return View();
         }
