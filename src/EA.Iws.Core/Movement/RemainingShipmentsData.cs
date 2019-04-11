@@ -6,8 +6,8 @@
 
         public int ActiveLoadsRemaining { get; set; }
 
+        public int ActiveLoadsRemainingByDate { get; set; }
+
         public int ShipmentsRemaining { get; set; }      
-        
-        public int ShipmentsRemainingByDate { get; set; }  
     }
 }

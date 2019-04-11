@@ -169,7 +169,7 @@
 
             var response = await handler.HandleAsync(request);
 
-            Assert.Equal(ActiveLoadsPermitted - futureShipmentsTotal, response.ShipmentsRemainingByDate);
+            Assert.Equal(ActiveLoadsPermitted - futureShipmentsTotal, response.ActiveLoadsRemainingByDate);
         }
 
         [Fact]
@@ -189,7 +189,7 @@
 
             var response = await handler.HandleAsync(request);
 
-            Assert.Equal(noApprovedFGActiveLoads - futureShipmentsTotal, response.ShipmentsRemainingByDate);
+            Assert.Equal(noApprovedFGActiveLoads - futureShipmentsTotal, response.ActiveLoadsRemainingByDate);
         }
 
         public void Dispose()
