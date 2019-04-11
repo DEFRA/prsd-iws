@@ -15,6 +15,7 @@
     using Requests.NotificationMovements.Create;
     using System;
     using System.Collections.Generic;
+    using System.Globalization;
     using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Mvc;
@@ -93,17 +94,29 @@
                 ModelState.AddModelError("Quantity", CreateMovementsViewModelResources.HasExceededTotalQuantity);
             }
 
-            var remainingShipmentsData = await mediator.SendAsync(new GetRemainingShipments(notificationId));
+            var remainingShipmentsData = await mediator.SendAsync(new GetRemainingShipments(notificationId, model.ShipmentDate));
 
             if (model.NumberToCreate > remainingShipmentsData.ShipmentsRemaining)
             {
                 ModelState.AddModelError("NumberToCreate", 
                     string.Format("You cannot create {0} shipments as there are only {1} remaining", model.NumberToCreate, remainingShipmentsData.ShipmentsRemaining));
             }
-            else if (model.NumberToCreate > remainingShipmentsData.ActiveLoadsRemaining)
+            else if (model.NumberToCreate > remainingShipmentsData.ActiveLoadsPermitted)
             {
                 ModelState.AddModelError("NumberToCreate",
-                    string.Format("You cannot create {0} shipments as there are only {1} active loads remaining", model.NumberToCreate, remainingShipmentsData.ActiveLoadsRemaining));
+                    string.Format(
+                        "You can't generate more than {0} prenotifications on {1}, as this will exceed your permitted active loads.",
+                        remainingShipmentsData.ActiveLoadsPermitted,
+                        model.ShipmentDate.Value.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture)));
+            }
+            else if (model.NumberToCreate > remainingShipmentsData.ActiveLoadsRemainingByDate)
+            {
+                ModelState.AddModelError("NumberToCreate",
+                    string.Format("You already have {0} prenotifcations for {1} and you are only permitted to prenotify {2} shipments. {3} shipment will exceed your limit on that date.",
+                        remainingShipmentsData.ActiveLoadsPermitted - remainingShipmentsData.ActiveLoadsRemainingByDate,
+                        model.ShipmentDate.Value.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture),
+                        remainingShipmentsData.ActiveLoadsPermitted,
+                        model.NumberToCreate));
             }
 
             if (!ModelState.IsValid)

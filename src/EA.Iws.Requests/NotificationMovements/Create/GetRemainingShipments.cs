@@ -9,11 +9,14 @@
     [RequestAuthorization(ExportMovementPermissions.CanCreateExportMovements)]
     public class GetRemainingShipments : IRequest<RemainingShipmentsData>
     {
-        public GetRemainingShipments(Guid notificationId)
+        public Guid NotificationId { get; private set; }
+
+        public DateTime? ShipmentDate { get; private set; }
+
+        public GetRemainingShipments(Guid notificationId, DateTime? shipmentDate = null)
         {
             NotificationId = notificationId;
+            ShipmentDate = shipmentDate;
         }
-
-        public Guid NotificationId { get; private set; }
     }
 }
