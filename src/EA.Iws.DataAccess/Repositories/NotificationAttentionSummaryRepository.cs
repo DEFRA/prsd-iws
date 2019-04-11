@@ -1,5 +1,6 @@
 ﻿namespace EA.Iws.DataAccess.Repositories
 {
+    using System;
     using System.Collections.Generic;
     using System.Data.Entity;
     using System.Linq;
@@ -28,7 +29,7 @@
                     assessment => assessment.NotificationApplicationId,
                     notification => notification.Id,
                     (a, n) => new { Assessment = a, Notification = n })
-                .Where(x => x.Notification.CompetentAuthority == competentAuthority)
+                .Where(x => x.Notification.CompetentAuthority == competentAuthority && x.Assessment.Dates.AcknowledgedDate.HasValue == true)
                 .Select(x => new
                 {
                     x.Notification.Id,
