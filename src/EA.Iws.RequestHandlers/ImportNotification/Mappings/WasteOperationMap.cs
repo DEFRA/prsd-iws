@@ -9,11 +9,18 @@
     {
         public Core.WasteOperation Map(Domain.WasteOperation source)
         {
-            return new Core.WasteOperation
+            Core.WasteOperation result = null;
+
+            if (source != null)
             {
-                TechnologyEmployed = source.TechnologyEmployed,
-                OperationCodes = source.Codes.Select(x => x.OperationCode).ToList()
-            };
+                result = new Core.WasteOperation
+                {
+                    TechnologyEmployed = source.TechnologyEmployed,
+                    OperationCodes = source.Codes.Select(x => x.OperationCode).ToList()
+                };
+            }
+
+            return result;
         }
     }
 }
