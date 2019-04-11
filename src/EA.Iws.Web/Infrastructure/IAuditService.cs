@@ -13,5 +13,8 @@
 
         Task AddMovementAudit(IMediator mediator, Guid notificationId, int shipmentNumber, string userId,
             MovementAuditType type);
+
+        Task AddImportMovementAudit(IMediator mediator, Guid notificationId, int shipmentNumber, string userId,
+            MovementAuditType type);
     }
 }

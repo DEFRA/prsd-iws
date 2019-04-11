@@ -192,7 +192,6 @@
     <Compile Include="Movement\DateHistory.cs" />
     <Compile Include="Movement\IMovementRule.cs" />
     <Compile Include="Movement\InternalMovementSummary.cs" />
-    <Compile Include="Movement\MovementAudit.cs" />
     <Compile Include="Movement\MovementAuditType.cs" />
     <Compile Include="Movement\MovementBasicDetails.cs" />
     <Compile Include="Movement\MovementFileData.cs" />

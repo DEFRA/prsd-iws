@@ -29,6 +29,8 @@
 
         public virtual DbSet<ImportMovementCompletedReceipt> ImportMovementCompletedReceipts { get; set; }
 
+        public virtual DbSet<ImportMovementAudit> ImportMovementAudits { get; set; }
+
         public virtual DbSet<Importer> Importers { get; set; }
 
         public virtual DbSet<Exporter> Exporters { get; set; }

@@ -6,6 +6,7 @@
     using Core.Notification.Audit;
     using Prsd.Core;
     using Prsd.Core.Mediator;
+    using Requests.ImportMovement;
     using Requests.Movement;
     using Requests.Notification;
 
@@ -29,6 +30,14 @@
             MovementAuditType type)
         {
             var audit = new AuditMovement(notificationId, shipmentNumber, userId, type, SystemTime.UtcNow);
+
+            await mediator.SendAsync(audit);
+        }
+
+        public async Task AddImportMovementAudit(IMediator mediator, Guid notificationId, int shipmentNumber, string userId,
+            MovementAuditType type)
+        {
+            var audit = new AuditImportMovement(notificationId, shipmentNumber, userId, type, SystemTime.UtcNow);
 
             await mediator.SendAsync(audit);
         }

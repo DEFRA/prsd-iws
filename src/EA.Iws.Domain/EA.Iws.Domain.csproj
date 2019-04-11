@@ -59,12 +59,14 @@
     <Compile Include="ImportMovement\CancelImportMovement.cs" />
     <Compile Include="ImportMovement\CompleteImportMovement.cs" />
     <Compile Include="ImportMovement\ICompleteImportMovement.cs" />
+    <Compile Include="ImportMovement\IImportMovementAuditRepository.cs" />
     <Compile Include="ImportMovement\IImportMovementCompletedReceiptRepository.cs" />
     <Compile Include="ImportMovement\IImportMovementReceiptRepository.cs" />
     <Compile Include="ImportMovement\IImportMovementRejectionRepository.cs" />
     <Compile Include="ImportMovement\IImportMovementsSummaryRepository.cs" />
     <Compile Include="ImportMovement\IImportMovementSummaryRepository.cs" />
     <Compile Include="ImportMovement\IImportMovementTableDataRepository.cs" />
+    <Compile Include="ImportMovement\ImportMovementAudit.cs" />
     <Compile Include="ImportMovement\ImportMovementReceipt.cs" />
     <Compile Include="ImportMovement\ImportMovementRejection.cs" />
     <Compile Include="ImportMovement\ImportMovementCompletedReceipt.cs" />
