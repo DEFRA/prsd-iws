@@ -350,6 +350,16 @@
         }
 
         [Fact]
+        public void CanUnlockWhenTransmitted()
+        {
+            SetNotificationStatus(NotificationStatus.Transmitted);
+
+            notificationAssessment.Unlock();
+
+            Assert.Equal(NotificationStatus.Unlocked, notificationAssessment.Status);
+        }
+
+        [Fact]
         public void CantUnlockWhenNotAcknowledged()
         {
             Action unlock = () => notificationAssessment.Unlock();
@@ -379,10 +389,32 @@
         public void AcceptChanges_GoesToDecisionRequiredBy_FromReassessment()
         {
             SetNotificationStatus(NotificationStatus.Reassessment);
-
+            notificationAssessment.Dates.AcknowledgedDate = acknowledgedDate;
             notificationAssessment.AcceptChanges();
 
             Assert.Equal(NotificationStatus.DecisionRequiredBy, notificationAssessment.Status);
+        }
+ 
+        [Fact]
+        public void AcceptChanges_GoesToTransmitted_FromReassessment()
+        {
+            SetNotificationStatus(NotificationStatus.Reassessment);
+            notificationAssessment.Dates.TransmittedDate = transmittedDate;
+            notificationAssessment.Dates.AcknowledgedDate = null;
+            notificationAssessment.AcceptChanges();
+
+            Assert.Equal(NotificationStatus.Transmitted, notificationAssessment.Status);
+        }
+
+        [Fact]
+        public void AcceptChanges_DoesnotGoesToTransmitted_FromReassessment()
+        {
+            SetNotificationStatus(NotificationStatus.Reassessment);
+            notificationAssessment.Dates.TransmittedDate = transmittedDate;
+            notificationAssessment.Dates.AcknowledgedDate = acknowledgedDate;
+            notificationAssessment.AcceptChanges();
+
+            Assert.NotEqual(NotificationStatus.Transmitted, notificationAssessment.Status);
         }
 
         [Fact]

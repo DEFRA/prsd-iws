@@ -371,7 +371,7 @@ else
     }
 }
 
-@if (Model.CurrentStatus == NotificationStatus.DecisionRequiredBy)
+@if (Model.CurrentStatus == NotificationStatus.DecisionRequiredBy || Model.CurrentStatus == NotificationStatus.Transmitted)
 {
     using (Html.BeginForm("UnlockNotification", "KeyDates", FormMethod.Post, new { id = Model.NotificationId }))
     {
