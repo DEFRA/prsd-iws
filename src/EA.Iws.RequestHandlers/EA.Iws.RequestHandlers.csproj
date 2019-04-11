@@ -423,6 +423,7 @@
     <Compile Include="Mappings\UsersMap.cs" />
     <Compile Include="Movement\Complete\GetOperationCompleteDataHandler.cs" />
     <Compile Include="Movement\Complete\RecordOperationCompleteInternalHandler.cs" />
+    <Compile Include="Movement\AuditMovementHandler.cs" />
     <Compile Include="Movement\DeleteMovementHandler.cs" />
     <Compile Include="Movement\DoesMovementDetailsExistHandler.cs" />
     <Compile Include="Movement\Edit\GetMovementDateHistoryHandler.cs" />
@@ -435,6 +436,7 @@
     <Compile Include="Movement\GetMovementsByIdsHandler.cs" />
     <Compile Include="Movement\GetNewMovementIdsByNotificationIdHandler.cs" />
     <Compile Include="Movement\GetNotificationNumberByMovementIdHandler.cs" />
+    <Compile Include="Movement\Mappings\MovementAuditMap.cs" />
     <Compile Include="Movement\SetMovementCommentsHandler.cs" />
     <Compile Include="Movement\SetMultipleMovementFileIdHandler.cs" />
     <Compile Include="Movement\SetMovementReceiptAndRecoveryDataHandler.cs" />
