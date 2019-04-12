@@ -131,6 +131,7 @@
     <Compile Include="FinancialGuarantee\GenerateParentCompanyDocument.cs" />
     <Compile Include="FinancialGuarantee\GenerateBankGuaranteeDocument.cs" />
     <Compile Include="FinancialGuarantee\GenerateFinancialGuaranteeDocument.cs" />
+    <Compile Include="ImportMovement\AuditImportMovement.cs" />
     <Compile Include="ImportMovement\Cancel\CancelImportMovements.cs" />
     <Compile Include="ImportMovement\Capture\CreateImportMovement.cs" />
     <Compile Include="ImportMovement\Capture\GetImportMovementDates.cs" />
@@ -209,6 +210,7 @@
     <Compile Include="ImportNotification\Validate\ValidateImportNotification.cs" />
     <Compile Include="ImportNotification\Validate\ValidationResults.cs" />
     <Compile Include="ImportNotification\WasteType\GetAllWasteCodes.cs" />
+    <Compile Include="Movement\AuditMovement.cs" />
     <Compile Include="Movement\Complete\GetOperationCompleteData.cs" />
     <Compile Include="Movement\Complete\SaveMovementCompletedReceipt.cs" />
     <Compile Include="ImportNotification\CheckImportNumberUnique.cs" />
