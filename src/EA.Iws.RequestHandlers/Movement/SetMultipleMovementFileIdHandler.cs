@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
+    using Core.Movement;
     using DataAccess;
     using Domain.FileStore;
     using Domain.Movement;
@@ -17,16 +18,19 @@
         private readonly IMovementRepository movementRepository;
         private readonly INotificationApplicationRepository notificationRepository;
         private readonly IFileRepository fileRepository;
+        private readonly IMovementAuditRepository movementAuditRepository;
 
         public SetMultipleMovementFileIdHandler(IwsContext context,
             IMovementRepository movementRepository,
             INotificationApplicationRepository notificationRepository,
-            IFileRepository fileRepository)
+            IFileRepository fileRepository,
+            IMovementAuditRepository movementAuditRepository)
         {
             this.context = context;
             this.movementRepository = movementRepository;
             this.notificationRepository = notificationRepository;
             this.fileRepository = fileRepository;
+            this.movementAuditRepository = movementAuditRepository;
         }
 
         public async Task<Guid> HandleAsync(SetMultipleMovementFileId message)
@@ -47,6 +51,8 @@
             foreach (var movement in movements)
             {
                 movement.Submit(fileId);
+
+                await movementAuditRepository.Add(movement, MovementAuditType.Prenotified);
             }
 
             await context.SaveChangesAsync();
