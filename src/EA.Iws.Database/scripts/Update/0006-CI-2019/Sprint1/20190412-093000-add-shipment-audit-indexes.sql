@@ -1,4 +1,2 @@
-CREATE INDEX [IX_Notification_MovementAudit_NotificationId] ON [Notification].[MovementAudit] ([NotificationId]) INCLUDE ([Id], [ShipmentNumber], [UserId], [Type], [DateAdded], [RowVersion]);
-CREATE INDEX [IX_Notification_MovementAudit_ShipmentNumber] ON [Notification].[MovementAudit] ([ShipmentNumber]) INCLUDE ([Id], [NotificationId], [UserId], [Type], [DateAdded]);
-CREATE INDEX [IX_ImportNotification_MovementAudit_NotificationId] ON [ImportNotification].[MovementAudit] ([NotificationId]) INCLUDE ([Id], [ShipmentNumber], [UserId], [Type], [DateAdded], [RowVersion]);
-CREATE INDEX [IX_ImportNotification_MovementAudit_ShipmentNumber] ON [ImportNotification].[MovementAudit] ([ShipmentNumber]) INCLUDE ([Id], [NotificationId], [UserId], [Type], [DateAdded]);
+CREATE INDEX [IX_Notification_MovementAudit_NotificationId_ShipmentNumber] ON [Notification].[MovementAudit] ([NotificationId], [ShipmentNumber]) INCLUDE ([UserId], [Type], [DateAdded]);
+CREATE INDEX [IX_ImportNotification_MovementAudit_NotificationId_ShipmentNumber] ON [ImportNotification].[MovementAudit] ([NotificationId], [ShipmentNumber]) INCLUDE ([UserId], [Type], [DateAdded]);
