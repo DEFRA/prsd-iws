@@ -104,6 +104,7 @@
     <Content Include="scripts\Update\0005-Beta\Sprint7\20190228-1147-AddImportNotificationCommentsTable.sql" />
     <Content Include="scripts\Update\0005-Beta\Sprint7\20190308-1620-alter-foi-report-table2.sql" />
     <Content Include="scripts\Update\0005-Beta\Sprint8\20190322-1353-create-producer-report-cache-table.sql" />
+    <Content Include="scripts\Update\0006-CI-2019\Sprint1\20190412-093000-add-shipment-audit-indexes.sql" />
     <Content Include="scripts\Update\0006-CI-2019\Sprint1\20190411-155000-add-lookup-shipment-audit-type-data.sql" />
     <Content Include="scripts\Update\0006-CI-2019\Sprint1\20190411-154500-add-shipment-audit-table.sql" />
     <Content Include="scripts\Update\0006-CI-2019\Sprint1\20190411-153000-add-lookup-shipment-audit-type-table.sql" />
