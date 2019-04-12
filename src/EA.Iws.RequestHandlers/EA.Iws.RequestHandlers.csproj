@@ -182,6 +182,7 @@
     <Compile Include="Feedback\FeedbackDataRequestHandler.cs" />
     <Compile Include="Feedback\FeedbackInformation.cs" />
     <Compile Include="FinancialGuarantee\GenerateParentCompanyDocumentHandler.cs" />
+    <Compile Include="ImportMovement\AuditImportMovementHandler.cs" />
     <Compile Include="ImportMovement\Cancel\CancelImportMovementsHandler.cs" />
     <Compile Include="ImportMovement\Capture\CreateImportMovementHandler.cs" />
     <Compile Include="ImportMovement\Capture\GetImportMovementDatesHandler.cs" />
@@ -383,6 +384,7 @@
     <Compile Include="Mappings\AddressBook\AddressBookRecordMap.cs" />
     <Compile Include="Mappings\ExportNotificationOwnerDisplayMap.cs" />
     <Compile Include="Mappings\ImportMovement\CancellableMovementMap.cs" />
+    <Compile Include="Mappings\ImportMovement\ImportMovementAuditMap.cs" />
     <Compile Include="Mappings\ImportMovement\MovementDataMap.cs" />
     <Compile Include="Mappings\ImportMovement\MovementTableDataMap.cs" />
     <Compile Include="Mappings\ImportNotificationAssessment\ConsultationMap.cs" />
@@ -423,6 +425,7 @@
     <Compile Include="Mappings\UsersMap.cs" />
     <Compile Include="Movement\Complete\GetOperationCompleteDataHandler.cs" />
     <Compile Include="Movement\Complete\RecordOperationCompleteInternalHandler.cs" />
+    <Compile Include="Movement\AuditMovementHandler.cs" />
     <Compile Include="Movement\DeleteMovementHandler.cs" />
     <Compile Include="Movement\DoesMovementDetailsExistHandler.cs" />
     <Compile Include="Movement\Edit\GetMovementDateHistoryHandler.cs" />
@@ -435,6 +438,7 @@
     <Compile Include="Movement\GetMovementsByIdsHandler.cs" />
     <Compile Include="Movement\GetNewMovementIdsByNotificationIdHandler.cs" />
     <Compile Include="Movement\GetNotificationNumberByMovementIdHandler.cs" />
+    <Compile Include="Movement\Mappings\MovementAuditMap.cs" />
     <Compile Include="Movement\SetMovementCommentsHandler.cs" />
     <Compile Include="Movement\SetMultipleMovementFileIdHandler.cs" />
     <Compile Include="Movement\SetMovementReceiptAndRecoveryDataHandler.cs" />
