@@ -24,7 +24,7 @@
         private readonly DateTime prenotifiedDate = new DateTime(2019, 3, 2);
         private readonly DateTime actualDate = new DateTime(2019, 3, 2);
         private readonly DateTime rejectedDate = new DateTime(2019, 3, 2);
-        private Guid? movementId;
+        private Guid? movementId = null;
 
         public CaptureControllerTests()
         {
