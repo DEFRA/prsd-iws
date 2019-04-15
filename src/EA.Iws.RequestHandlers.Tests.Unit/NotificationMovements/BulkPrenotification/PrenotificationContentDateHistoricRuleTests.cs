@@ -1,4 +1,4 @@
-﻿namespace EA.Iws.RequestHandlers.Tests.Unit.NotificationMovements.BulkUpload
+﻿namespace EA.Iws.RequestHandlers.Tests.Unit.NotificationMovements.BulkPrenotification
 {
     using System;
     using System.Collections.Generic;

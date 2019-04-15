@@ -1,4 +1,4 @@
-﻿namespace EA.Iws.RequestHandlers.Tests.Unit.NotificationMovements.BulkUpload
+﻿namespace EA.Iws.RequestHandlers.Tests.Unit.NotificationMovements.BulkPrenotification
 {
     using System;
     using System.Collections.Generic;
@@ -13,14 +13,14 @@
     using RequestHandlers.NotificationMovements.BulkPrenotification;
     using Xunit;
 
-    public class PrenotificationContentThreeWorkingDaysRuleTests
+    public class PrenotificationContentThreeWorkingDaysConsentDateRuleTests
     {
         private readonly PrenotificationThreeWorkingDaysConsentRule rule;
         private readonly INotificationConsentRepository consentRepository;
         private readonly IWorkingDayCalculator workingDayCalculator;
         private readonly Guid notificationId;
 
-        public PrenotificationContentThreeWorkingDaysRuleTests()
+        public PrenotificationContentThreeWorkingDaysConsentDateRuleTests()
         {
             consentRepository = A.Fake<INotificationConsentRepository>();
             workingDayCalculator = A.Fake<IWorkingDayCalculator>();
