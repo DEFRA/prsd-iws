@@ -103,15 +103,15 @@
 
         private void SetMovements(IReadOnlyList<Guid> movementIds)
         {
-            for (var i = 0; i < movementIds.Count; i++)
+            foreach (var id in movementIds)
             {
                 var movement = new TestableMovement
                 {
-                    Id = movementIds[i],
+                    Id = id,
                     NotificationId = notificationId,
                     Status = MovementStatus.New
                 };
-                A.CallTo(() => movementRepository.GetById(movementIds[i])).Returns(movement);
+                A.CallTo(() => movementRepository.GetById(id)).Returns(movement);
             }
         }
     }
