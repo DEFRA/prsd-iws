@@ -152,6 +152,7 @@
     <Compile Include="Movement\GetSubmittedMovementsHandlerTests.cs" />
     <Compile Include="Movement\GetNotificationIdByMovementIdHandlerTests.cs" />
     <Compile Include="Movement\RecordMovementStatusChangeTest.cs" />
+    <Compile Include="Movement\Reject\SetMovementRejectedHandlerTests.cs" />
     <Compile Include="Movement\SetMultipleMovementFileIdHandlerTests.cs" />
     <Compile Include="NotificationMovements\BulkReceiptRecovery\ReceiptRecoveryAlreadyRecoveredRuleTests.cs" />
     <Compile Include="NotificationMovements\BulkReceiptRecovery\ReceiptRecoveryAlreadyRecievedRuleTests.cs" />
