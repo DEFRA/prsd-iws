@@ -3,6 +3,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
+    using Core.Movement;
     using DataAccess;
     using Domain;
     using Domain.FileStore;
@@ -21,13 +22,15 @@
         private readonly MovementFactory movementFactory;
         private readonly MovementDetailsFactory movementDetailsFactory;
         private readonly IFileRepository fileRepository;
+        private readonly IMovementAuditRepository movementAuditRepository;
 
         public CreatePrenotificationHandler(INotificationApplicationRepository notificationRepository,
             IDraftMovementRepository draftMovementRepository,
             IwsContext context,
             MovementFactory movementFactory,
             MovementDetailsFactory movementDetailsFactory,
-            IFileRepository fileRepository)
+            IFileRepository fileRepository,
+            IMovementAuditRepository movementAuditRepository)
         {
             this.notificationRepository = notificationRepository;
             this.draftMovementRepository = draftMovementRepository;
@@ -35,6 +38,7 @@
             this.movementFactory = movementFactory;
             this.movementDetailsFactory = movementDetailsFactory;
             this.fileRepository = fileRepository;
+            this.movementAuditRepository = movementAuditRepository;
         }
 
         public async Task<bool> HandleAsync(CreateBulkPrenotification message)
@@ -100,6 +104,8 @@
             var fileId = await fileRepository.Store(file);
 
             movement.Submit(fileId);
+
+            await movementAuditRepository.Add(movement, MovementAuditType.Prenotified);
 
             await context.SaveChangesAsync();
         }
