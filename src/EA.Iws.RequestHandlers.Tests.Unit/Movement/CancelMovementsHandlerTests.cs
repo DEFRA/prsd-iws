@@ -20,7 +20,6 @@
         private readonly IMovementAuditRepository movementAuditRepository;
 
         private readonly Guid notificationId;
-
         private const string AnyString = "test";
         private const int CancelMovementCount = 5;
 

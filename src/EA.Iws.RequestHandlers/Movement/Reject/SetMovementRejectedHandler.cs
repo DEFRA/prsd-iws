@@ -2,6 +2,7 @@
 {
     using System;
     using System.Threading.Tasks;
+    using Core.Movement;
     using DataAccess;
     using Domain.FileStore;
     using Domain.Movement;
@@ -16,13 +17,15 @@
         private readonly ICertificateNameGenerator nameGenerator;
         private readonly CertificateFactory certificateFactory;
         private readonly IFileRepository fileRepository;
+        private readonly IMovementAuditRepository movementAuditRepository;
 
         public SetMovementRejectedHandler(IRejectMovement rejectMovement, 
             IMovementRepository movementRepository, 
             IwsContext context,
             MovementFileNameGenerator nameGenerator,
             CertificateFactory certificateFactory,
-            IFileRepository fileRepository)
+            IFileRepository fileRepository,
+            IMovementAuditRepository movementAuditRepository)
         {
             this.rejectMovement = rejectMovement;
             this.movementRepository = movementRepository;
@@ -30,6 +33,7 @@
             this.nameGenerator = nameGenerator;
             this.certificateFactory = certificateFactory;
             this.fileRepository = fileRepository;
+            this.movementAuditRepository = movementAuditRepository;
         }
 
         public async Task<Guid> HandleAsync(SetMovementRejected message)
@@ -44,6 +48,8 @@
                 message.Reason);
 
             movementRejection.SetFile(fileId);
+
+            await movementAuditRepository.Add(movement, MovementAuditType.Rejected);
             
             await context.SaveChangesAsync();
 

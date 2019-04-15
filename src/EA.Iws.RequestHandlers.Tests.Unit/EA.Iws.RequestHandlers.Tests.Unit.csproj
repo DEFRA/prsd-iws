@@ -148,6 +148,7 @@
     <Compile Include="MovementReceipt\GetMovementDateByMovementIdHandlerTests.cs" />
     <Compile Include="Movement\CancelMovementsHandlerTests.cs" />
     <Compile Include="Movement\DoesQuantityReceivedExceedToleranceHandlerTests.cs" />
+    <Compile Include="Movement\Edit\UpdateMovementDateHandlerTests.cs" />
     <Compile Include="Movement\GetSubmittedMovementsHandlerTests.cs" />
     <Compile Include="Movement\GetNotificationIdByMovementIdHandlerTests.cs" />
     <Compile Include="Movement\RecordMovementStatusChangeTest.cs" />

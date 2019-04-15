@@ -77,7 +77,7 @@
         }
 
         [Fact]
-        public async Task SetMultipleMovementFileIdHandler_SetsAudit()
+        public async Task SetMultipleMovementFileIdHandler_LogsAuditAsPrenotified()
         {
             await handler.HandleAsync(GetRequest(MovementCount));
 
