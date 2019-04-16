@@ -139,7 +139,7 @@
                         || m.Status == MovementStatus.Received
                         || m.Status == MovementStatus.New
                         || m.Status == MovementStatus.Captured)
-                    && m.Date >= SystemTime.UtcNow).ToArrayAsync();
+                    && DbFunctions.TruncateTime(m.Date) >= SystemTime.UtcNow.Date).ToArrayAsync();
 
             return currentActiveLoads;
         }
