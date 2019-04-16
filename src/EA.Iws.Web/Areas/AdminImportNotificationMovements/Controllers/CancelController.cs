@@ -88,7 +88,7 @@
 
                 TempData[SubmittedMovementListKey] = selectedMovements;
 
-                await mediator.SendAsync(new CancelImportMovements(selectedMovements));
+                await mediator.SendAsync(new CancelImportMovements(id, selectedMovements));
 
                 return RedirectToAction("Success");
             }
