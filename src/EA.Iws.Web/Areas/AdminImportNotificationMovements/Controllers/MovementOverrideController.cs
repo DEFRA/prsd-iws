@@ -2,7 +2,9 @@
 {
     using Areas.AdminImportNotificationMovements.ViewModels.MovementOverride;
     using Core.ImportMovement;
+    using Core.Movement;
     using EA.Iws.Core.Authorization.Permissions;
+    using Infrastructure;
     using Infrastructure.Authorization;
     using Prsd.Core.Mediator;
     using Requests.ImportMovement;
@@ -19,9 +21,11 @@
     public class MovementOverrideController : Controller
     {
         private readonly IMediator mediator;
-        public MovementOverrideController(IMediator mediator)
+        private readonly IAuditService auditService;
+        public MovementOverrideController(IMediator mediator, IAuditService auditService)
         {
             this.mediator = mediator;
+            this.auditService = auditService;
         }
         public async Task<ActionResult> Index(Guid id, Guid movementId)
         {
@@ -69,6 +73,11 @@
             };
 
             await mediator.SendAsync(new SetImportMovementReceiptAndRecoveryData(data));
+
+            await this.auditService.AddImportMovementAudit(this.mediator,
+                id, model.ShipmentNumber,
+                User.GetUserId(),
+                MovementAuditType.Edited);
 
             return RedirectToAction("Edit", "Capture", new { movementId });
         }
