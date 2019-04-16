@@ -52,7 +52,7 @@
 
             A.CallTo(() => shipmentRepository.GetByNotificationId(NotificationId)).Returns(shipment);
             A.CallTo(() => movementRepository.GetAllMovements(NotificationId)).Returns(GetShipments(TotalMovements, Today));
-            A.CallTo(() => movementRepository.GetActiveMovements(NotificationId)).Returns(GetShipments(ActiveMovements, Today));
+            A.CallTo(() => movementRepository.GetAllActiveMovements(NotificationId)).Returns(GetShipments(ActiveMovements, Today));
 
             handler = new GetRemainingShipmentsHandler(movementRepository, shipmentRepository, financialGuaranteeRepository);
         }
