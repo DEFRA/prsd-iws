@@ -3,6 +3,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
+    using Core.Movement;
     using DataAccess;
     using Domain;
     using Domain.FileStore;
@@ -10,6 +11,7 @@
     using Domain.Movement.BulkUpload;
     using Domain.NotificationApplication;
     using Prsd.Core;
+    using Prsd.Core.Domain;
     using Prsd.Core.Mediator;
     using Requests.NotificationMovements.BulkUpload;
 
@@ -21,13 +23,17 @@
         private readonly MovementFactory movementFactory;
         private readonly MovementDetailsFactory movementDetailsFactory;
         private readonly IFileRepository fileRepository;
+        private readonly IMovementAuditRepository movementAuditRepository;
+        private readonly IUserContext userContext;
 
         public CreatePrenotificationHandler(INotificationApplicationRepository notificationRepository,
             IDraftMovementRepository draftMovementRepository,
             IwsContext context,
             MovementFactory movementFactory,
             MovementDetailsFactory movementDetailsFactory,
-            IFileRepository fileRepository)
+            IFileRepository fileRepository,
+            IMovementAuditRepository movementAuditRepository,
+            IUserContext userContext)
         {
             this.notificationRepository = notificationRepository;
             this.draftMovementRepository = draftMovementRepository;
@@ -35,6 +41,8 @@
             this.movementFactory = movementFactory;
             this.movementDetailsFactory = movementDetailsFactory;
             this.fileRepository = fileRepository;
+            this.movementAuditRepository = movementAuditRepository;
+            this.userContext = userContext;
         }
 
         public async Task<bool> HandleAsync(CreateBulkPrenotification message)
@@ -60,6 +68,8 @@
                         await
                             SaveSupportingDocument(movement, draftMovement, message.FileExtension,
                                 message.SupportingDocument);
+
+                        await SavePrenotifiedAudit(movement);
                     }
 
                     await draftMovementRepository.DeleteDraftMovementByNotificationId(message.NotificationId);
@@ -100,6 +110,14 @@
             var fileId = await fileRepository.Store(file);
 
             movement.Submit(fileId);
+
+            await context.SaveChangesAsync();
+        }
+
+        private async Task SavePrenotifiedAudit(Movement movement)
+        {
+            await movementAuditRepository.Add(new MovementAudit(movement.NotificationId, movement.Number,
+                userContext.UserId.ToString(), (int)MovementAuditType.Prenotified, SystemTime.UtcNow));
 
             await context.SaveChangesAsync();
         }

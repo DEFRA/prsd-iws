@@ -4,10 +4,13 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
+    using Core.Movement;
     using DataAccess;
     using Domain.FileStore;
     using Domain.Movement;
     using Domain.NotificationApplication;
+    using Prsd.Core;
+    using Prsd.Core.Domain;
     using Prsd.Core.Mediator;
     using Requests.Movement;
     
@@ -17,16 +20,22 @@
         private readonly IMovementRepository movementRepository;
         private readonly INotificationApplicationRepository notificationRepository;
         private readonly IFileRepository fileRepository;
+        private readonly IMovementAuditRepository movementAuditRepository;
+        private readonly IUserContext userContext;
 
         public SetMultipleMovementFileIdHandler(IwsContext context,
             IMovementRepository movementRepository,
             INotificationApplicationRepository notificationRepository,
-            IFileRepository fileRepository)
+            IFileRepository fileRepository,
+            IMovementAuditRepository movementAuditRepository,
+            IUserContext userContext)
         {
             this.context = context;
             this.movementRepository = movementRepository;
             this.notificationRepository = notificationRepository;
             this.fileRepository = fileRepository;
+            this.movementAuditRepository = movementAuditRepository;
+            this.userContext = userContext;
         }
 
         public async Task<Guid> HandleAsync(SetMultipleMovementFileId message)
@@ -47,6 +56,14 @@
             foreach (var movement in movements)
             {
                 movement.Submit(fileId);
+            }
+
+            await context.SaveChangesAsync();
+
+            foreach (var movement in movements)
+            {
+                await movementAuditRepository.Add(new MovementAudit(movement.NotificationId, movement.Number,
+                    userContext.UserId.ToString(), (int)MovementAuditType.Prenotified, SystemTime.UtcNow));
             }
 
             await context.SaveChangesAsync();
