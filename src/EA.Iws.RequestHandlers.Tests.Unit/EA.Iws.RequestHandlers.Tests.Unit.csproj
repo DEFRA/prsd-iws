@@ -147,6 +147,7 @@
     <Compile Include="Mappings\WasteCodeMapTests.cs" />
     <Compile Include="MovementReceipt\GetMovementDateByMovementIdHandlerTests.cs" />
     <Compile Include="Movement\CancelMovementsHandlerTests.cs" />
+    <Compile Include="Movement\Complete\SaveMovementCompletedReceiptHandlerTests.cs" />
     <Compile Include="Movement\DoesQuantityReceivedExceedToleranceHandlerTests.cs" />
     <Compile Include="Movement\Edit\UpdateMovementDateHandlerTests.cs" />
     <Compile Include="Movement\GetSubmittedMovementsHandlerTests.cs" />
