@@ -8,6 +8,7 @@
     using Domain.Movement;
     using Domain.NotificationApplication;
     using FakeItEasy;
+    using Prsd.Core.Domain;
     using RequestHandlers.Movement;
     using Requests.Movement;
     using TestHelpers.DomainFakes;
@@ -36,19 +37,23 @@
 
             notificationId = Guid.NewGuid();
             fileId = Guid.NewGuid();
+            var userId = TestIwsContext.UserId;
 
             movementRepository = A.Fake<IMovementRepository>();
             notificationRepository = A.Fake<INotificationApplicationRepository>();
             fileRepository = A.Fake<IFileRepository>();
             movementAuditRepository = A.Fake<IMovementAuditRepository>();
+            var userContext = A.Fake<IUserContext>();
 
             A.CallTo(() => notificationRepository.GetById(notificationId))
-                .Returns(new TestableNotificationApplication() { NotificationNumber = NotificatioNumber});
+                .Returns(new TestableNotificationApplication() { NotificationNumber = NotificatioNumber });
 
             A.CallTo(() => fileRepository.Store(A<File>.Ignored)).Returns(fileId);
 
+            A.CallTo(() => userContext.UserId).Returns(userId);
+
             handler = new SetMultipleMovementFileIdHandler(context, movementRepository, notificationRepository,
-                fileRepository, movementAuditRepository);
+                fileRepository, movementAuditRepository, userContext);
         }
 
         [Fact]
@@ -84,8 +89,8 @@
             A.CallTo(
                     () =>
                         movementAuditRepository.Add(
-                            A<Movement>.That.Matches(m => m.NotificationId == notificationId),
-                            MovementAuditType.Prenotified))
+                            A<MovementAudit>.That.Matches(
+                                m => m.NotificationId == notificationId && m.Type == (int)MovementAuditType.Prenotified)))
                 .MustHaveHappened(Repeated.Exactly.Times(MovementCount));
         }
 

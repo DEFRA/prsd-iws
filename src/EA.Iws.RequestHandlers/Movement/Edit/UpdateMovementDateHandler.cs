@@ -4,6 +4,8 @@
     using Core.Movement;
     using DataAccess;
     using Domain.Movement;
+    using Prsd.Core;
+    using Prsd.Core.Domain;
     using Prsd.Core.Mediator;
     using Requests.Movement.Edit;
 
@@ -13,16 +15,19 @@
         private readonly IwsContext context;
         private readonly IMovementRepository repository;
         private readonly IMovementAuditRepository movementAuditRepository;
+        private readonly IUserContext userContext;
 
         public UpdateMovementDateHandler(IMovementRepository repository,
             IUpdatedMovementDateValidator validator,
             IwsContext context,
-            IMovementAuditRepository movementAuditRepository)
+            IMovementAuditRepository movementAuditRepository,
+            IUserContext userContext)
         {
             this.repository = repository;
             this.context = context;
             this.validator = validator;
             this.movementAuditRepository = movementAuditRepository;
+            this.userContext = userContext;
         }
 
         public async Task<bool> HandleAsync(UpdateMovementDate message)
@@ -31,7 +36,10 @@
 
             await movement.UpdateDate(message.NewDate, validator);
 
-            await movementAuditRepository.Add(movement, MovementAuditType.Edited);
+            await context.SaveChangesAsync();
+
+            await movementAuditRepository.Add(new MovementAudit(movement.NotificationId, movement.Number,
+                userContext.UserId.ToString(), (int)MovementAuditType.Edited, SystemTime.UtcNow));
 
             await context.SaveChangesAsync();
 

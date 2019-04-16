@@ -9,6 +9,8 @@
     using Domain.FileStore;
     using Domain.Movement;
     using Domain.NotificationApplication;
+    using Prsd.Core;
+    using Prsd.Core.Domain;
     using Prsd.Core.Mediator;
     using Requests.Movement;
     
@@ -19,18 +21,21 @@
         private readonly INotificationApplicationRepository notificationRepository;
         private readonly IFileRepository fileRepository;
         private readonly IMovementAuditRepository movementAuditRepository;
+        private readonly IUserContext userContext;
 
         public SetMultipleMovementFileIdHandler(IwsContext context,
             IMovementRepository movementRepository,
             INotificationApplicationRepository notificationRepository,
             IFileRepository fileRepository,
-            IMovementAuditRepository movementAuditRepository)
+            IMovementAuditRepository movementAuditRepository,
+            IUserContext userContext)
         {
             this.context = context;
             this.movementRepository = movementRepository;
             this.notificationRepository = notificationRepository;
             this.fileRepository = fileRepository;
             this.movementAuditRepository = movementAuditRepository;
+            this.userContext = userContext;
         }
 
         public async Task<Guid> HandleAsync(SetMultipleMovementFileId message)
@@ -51,8 +56,14 @@
             foreach (var movement in movements)
             {
                 movement.Submit(fileId);
+            }
 
-                await movementAuditRepository.Add(movement, MovementAuditType.Prenotified);
+            await context.SaveChangesAsync();
+
+            foreach (var movement in movements)
+            {
+                await movementAuditRepository.Add(new MovementAudit(movement.NotificationId, movement.Number,
+                    userContext.UserId.ToString(), (int)MovementAuditType.Prenotified, SystemTime.UtcNow));
             }
 
             await context.SaveChangesAsync();

@@ -5,6 +5,8 @@
     using Core.Movement;
     using DataAccess;
     using Domain.Movement;
+    using Prsd.Core;
+    using Prsd.Core.Domain;
     using Prsd.Core.Mediator;
     using Requests.Movement;
 
@@ -13,26 +15,35 @@
         private readonly IwsContext context;
         private readonly IMovementRepository repository;
         private readonly IMovementAuditRepository movementAuditRepository;
+        private readonly IUserContext userContext;
 
         public CancelMovementsHandler(IwsContext context, IMovementRepository repository,
-            IMovementAuditRepository movementAuditRepository)
+            IMovementAuditRepository movementAuditRepository,
+            IUserContext userContext)
         {
             this.repository = repository;
             this.context = context;
             this.movementAuditRepository = movementAuditRepository;
+            this.userContext = userContext;
         }
 
         public async Task<bool> HandleAsync(CancelMovements message)
         {
             var movementIds = message.CancelledMovements.Select(m => m.Id);
 
-            var movements = await repository.GetMovementsByIds(message.NotificationId, movementIds);
+            var movements = (await repository.GetMovementsByIds(message.NotificationId, movementIds)).ToList();
 
             foreach (var movement in movements)
             {
                 movement.Cancel();
+            }
 
-                await movementAuditRepository.Add(movement, MovementAuditType.Cancelled);
+            await context.SaveChangesAsync();
+
+            foreach (var movement in movements)
+            {
+                await movementAuditRepository.Add(new MovementAudit(movement.NotificationId, movement.Number,
+                    userContext.UserId.ToString(), (int)MovementAuditType.Cancelled, SystemTime.UtcNow));
             }
 
             await context.SaveChangesAsync();

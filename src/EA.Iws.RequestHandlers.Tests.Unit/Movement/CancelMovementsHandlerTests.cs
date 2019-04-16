@@ -7,6 +7,7 @@
     using Core.Movement;
     using Domain.Movement;
     using FakeItEasy;
+    using Prsd.Core.Domain;
     using RequestHandlers.Movement;
     using Requests.Movement;
     using TestHelpers.DomainFakes;
@@ -26,14 +27,18 @@
         public CancelMovementsHandlerTests()
         {
             notificationId = Guid.NewGuid();
+            var userId = TestIwsContext.UserId;
 
             var context = new TestIwsContext();
             context.Users.Add(UserFactory.Create(TestIwsContext.UserId, AnyString, AnyString, AnyString, AnyString));
 
             repository = A.Fake<IMovementRepository>();
             movementAuditRepository = A.Fake<IMovementAuditRepository>();
+            var userContext = A.Fake<IUserContext>();
 
-            handler = new CancelMovementsHandler(context, repository, movementAuditRepository);
+            A.CallTo(() => userContext.UserId).Returns(userId);
+
+            handler = new CancelMovementsHandler(context, repository, movementAuditRepository, userContext);
         }
 
         [Fact]
@@ -60,9 +65,8 @@
             A.CallTo(
                     () =>
                         movementAuditRepository.Add(
-                            A<Movement>.That.Matches(
-                                m =>
-                                    m.NotificationId == notificationId), MovementAuditType.Cancelled))
+                            A<MovementAudit>.That.Matches(
+                                m => m.NotificationId == notificationId && m.Type == (int)MovementAuditType.Cancelled)))
                 .MustHaveHappened(Repeated.Exactly.Times(CancelMovementCount));
         }
 

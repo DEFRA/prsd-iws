@@ -8,6 +8,7 @@
     using Domain.NotificationApplication;
     using FakeItEasy;
     using Prsd.Core;
+    using Prsd.Core.Domain;
     using RequestHandlers.Movement.Reject;
     using Requests.Movement.Reject;
     using TestHelpers.DomainFakes;
@@ -45,14 +46,17 @@
             var notificationRepository = A.Fake<INotificationApplicationRepository>();
             var nameGenerator = new MovementFileNameGenerator(notificationRepository);
             var certificateFactory = new CertificateFactory();
+            var userContext = A.Fake<IUserContext>();
 
             A.CallTo(() => notificationRepository.GetById(notificationId))
                 .Returns(new TestableNotificationApplication() { NotificationNumber = NotificatioNumber });
 
             A.CallTo(() => fileRepository.Store(A<File>.Ignored)).Returns(Guid.NewGuid());
 
+            A.CallTo(() => userContext.UserId).Returns(TestIwsContext.UserId);
+
             handler = new SetMovementRejectedHandler(rejectMovement, movementRepository, context, nameGenerator,
-                certificateFactory, fileRepository, movementAuditRepository);
+                certificateFactory, fileRepository, movementAuditRepository, userContext);
         }
 
         [Fact]
@@ -101,8 +105,10 @@
             A.CallTo(
                     () =>
                         movementAuditRepository.Add(
-                            A<Movement>.That.Matches(m => m.NotificationId == notificationId && m.Id == movementId),
-                            MovementAuditType.Rejected))
+                            A<MovementAudit>.That.Matches(
+                                m =>
+                                    m.NotificationId == notificationId &&
+                                    m.Type == (int)MovementAuditType.Rejected)))
                 .MustHaveHappened(Repeated.Exactly.Once);
         }
 

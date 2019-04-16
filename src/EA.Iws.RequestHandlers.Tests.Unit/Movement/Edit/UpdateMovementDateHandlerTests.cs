@@ -6,6 +6,7 @@
     using Domain.Movement;
     using FakeItEasy;
     using Prsd.Core;
+    using Prsd.Core.Domain;
     using RequestHandlers.Movement.Edit;
     using Requests.Movement.Edit;
     using TestHelpers.DomainFakes;
@@ -32,8 +33,11 @@
             var validator = A.Fake<IUpdatedMovementDateValidator>();
             repository = A.Fake<IMovementRepository>();
             movementAuditRepository = A.Fake<IMovementAuditRepository>();
+            var userContext = A.Fake<IUserContext>();
 
-            handler = new UpdateMovementDateHandler(repository, validator, context, movementAuditRepository);
+            A.CallTo(() => userContext.UserId).Returns(TestIwsContext.UserId);
+
+            handler = new UpdateMovementDateHandler(repository, validator, context, movementAuditRepository, userContext);
         }
 
         [Fact]
@@ -55,10 +59,11 @@
             await handler.HandleAsync(request);
 
             A.CallTo(
-                () =>
-                    movementAuditRepository.Add(
-                        A<Movement>.That.Matches(m => m.NotificationId == notificationId && m.Number == ShipmentNumber),
-                        MovementAuditType.Edited)).MustHaveHappened(Repeated.Exactly.Once);
+                    () =>
+                        movementAuditRepository.Add(
+                            A<MovementAudit>.That.Matches(
+                                m => m.NotificationId == notificationId && m.Type == (int)MovementAuditType.Edited)))
+                .MustHaveHappened(Repeated.Exactly.Once);
         }
 
         private UpdateMovementDate GetRequest()
