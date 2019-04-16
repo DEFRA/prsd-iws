@@ -72,7 +72,7 @@
         [Fact]
         public async Task NewMovementExceedsShipmentLimit_Throws()
         {
-            CreateShipmentInfo(maxNumberOfShipments: 1);
+            CreateShipmentInfo(1);
 
             var existingMovement = new TestableMovement
             {
@@ -88,7 +88,7 @@
         [Fact]
         public async Task NotificationNotConsented_Throws()
         {
-            CreateShipmentInfo(maxNumberOfShipments: 1);
+            CreateShipmentInfo(1);
 
             A.CallTo(() => movementRepository.GetAllMovements(NotificationId)).Returns(new Movement[0]);
 
@@ -112,7 +112,7 @@
         {
             SetupMovements(500, 100);
             A.CallTo(() => financialGuaranteeRepository.GetByNotificationId(NotificationId)).Returns(GetFinancialGuarantee(FinancialGuaranteeStatus.Approved));
-            A.CallTo(() => movementRepository.GetActiveMovements(NotificationId)).Returns(GetMovementArray(1));
+            A.CallTo(() => movementRepository.GetAllActiveMovements(NotificationId)).Returns(GetMovementArray(1));
 
             var date = Today.AddDays(5);
 
@@ -124,7 +124,7 @@
         [Fact]
         public async Task ReturnsMovement()
         {
-            CreateShipmentInfo(maxNumberOfShipments: 1);
+            CreateShipmentInfo(1);
 
             A.CallTo(() => movementRepository.GetAllMovements(NotificationId))
                 .Returns(new Movement[0]);
@@ -133,7 +133,7 @@
                 .Returns(new TestableNotificationAssessment { Status = NotificationStatus.Consented });
 
             A.CallTo(() => financialGuaranteeRepository.GetByNotificationId(NotificationId)).Returns(GetFinancialGuarantee(FinancialGuaranteeStatus.Approved));
-            A.CallTo(() => movementRepository.GetActiveMovements(NotificationId)).Returns(GetMovementArray(1));
+            A.CallTo(() => movementRepository.GetAllActiveMovements(NotificationId)).Returns(GetMovementArray(1));
             A.CallTo(() => consentRepository.GetByNotificationId(NotificationId)).Returns(ValidConsent());
 
             var movement = await factory.Create(NotificationId, Today);
@@ -142,9 +142,9 @@
         }
 
         [Fact]
-        public async Task CurrentActiveLoadsEqualsPermitted_Throws()
+        public async Task CurrentActiveLoadByDateEqualsPermitted_Throws()
         {
-            CreateShipmentInfo(maxNumberOfShipments: 1);
+            CreateShipmentInfo(1);
 
             A.CallTo(() => movementRepository.GetAllMovements(NotificationId))
                 .Returns(new Movement[0]);
@@ -153,7 +153,7 @@
                 .Returns(new TestableNotificationAssessment { Status = NotificationStatus.Consented });
 
             A.CallTo(() => financialGuaranteeRepository.GetByNotificationId(NotificationId)).Returns(GetFinancialGuarantee(FinancialGuaranteeStatus.Approved));
-            A.CallTo(() => movementRepository.GetActiveMovements(NotificationId)).Returns(GetMovementArray(2));
+            A.CallTo(() => movementRepository.GetAllActiveMovements(NotificationId)).Returns(GetMovementArray(2));
 
             await Assert.ThrowsAsync<InvalidOperationException>(() => factory.Create(NotificationId, Today));
         }
@@ -180,7 +180,7 @@
             SetupMovements(1000, 900);
 
             A.CallTo(() => financialGuaranteeRepository.GetByNotificationId(NotificationId)).Returns(GetFinancialGuarantee(FinancialGuaranteeStatus.Approved));
-            A.CallTo(() => movementRepository.GetActiveMovements(NotificationId)).Returns(GetMovementArray(1));
+            A.CallTo(() => movementRepository.GetAllActiveMovements(NotificationId)).Returns(GetMovementArray(1));
 
             await factory.Create(NotificationId, Today);
         }

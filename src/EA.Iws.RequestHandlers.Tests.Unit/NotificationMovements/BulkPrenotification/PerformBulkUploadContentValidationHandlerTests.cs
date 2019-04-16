@@ -87,7 +87,7 @@
             };
 
             A.CallTo(() => financialGuaranteeRepository.GetByNotificationId(notificationId)).Returns(testCollection);
-            A.CallTo(() => movementRepository.GetFutureActiveMovements(notificationId))
+            A.CallTo(() => movementRepository.GetAllActiveMovements(notificationId))
                 .Returns(testFutureActiveMovements);
 
             handler = new PerformPrenotificationContentValidationHandler(contentRules, mapper, repository, movementRepository, financialGuaranteeRepository);
