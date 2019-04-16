@@ -27,13 +27,13 @@
                 financialGuaranteeCollection.FinancialGuarantees.SingleOrDefault(
                     fg => fg.Status == FinancialGuaranteeStatus.Approved);
 
-            var futureActiveShipmentsByDate =
-                (await movementRepository.GetFutureActiveMovements(notificationId)).Count(
+            var activeShipmentsByDate =
+                (await movementRepository.GetAllActiveMovements(notificationId)).Count(
                     m => m.Date.Date == actualMovementDate.Date);
 
             var activeLoadsPermitted = currentFinancialGuarantee == null ? 0 : currentFinancialGuarantee.ActiveLoadsPermitted.GetValueOrDefault();
 
-            return futureActiveShipmentsByDate >= activeLoadsPermitted;
+            return activeShipmentsByDate >= activeLoadsPermitted;
         }
     }
 }

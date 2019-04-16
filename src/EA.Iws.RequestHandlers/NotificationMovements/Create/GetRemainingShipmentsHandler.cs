@@ -31,7 +31,6 @@
                 (await shipmentRepository.GetByNotificationId(message.NotificationId)).NumberOfShipments;
             var currentNumberOfShipments = (await movementRepository.GetAllMovements(message.NotificationId)).Count();
 
-            var currentActiveLoads = (await movementRepository.GetActiveMovements(message.NotificationId)).Count();
             var financialGuaranteeCollection = await financialGuaranteeRepository.GetByNotificationId(message.NotificationId);
 
             var currentFinancialGuarantee =
@@ -40,19 +39,17 @@
 
             var activeLoadsPermitted = currentFinancialGuarantee == null ? 0 : currentFinancialGuarantee.ActiveLoadsPermitted.GetValueOrDefault();
 
-            var futureActiveShipmentsByDate = message.ShipmentDate.HasValue
-                ? (await movementRepository.GetFutureActiveMovements(message.NotificationId)).Count(
+            var activeShipmentsByDate = message.ShipmentDate.HasValue
+                ? (await movementRepository.GetAllActiveMovements(message.NotificationId)).Count(
                     m => m.Date.Date == message.ShipmentDate.Value.Date)
                 : 0;
 
             var remainingShipments = maxNumberOfShipments - currentNumberOfShipments;
-            var remainingActiveLoads = activeLoadsPermitted - currentActiveLoads;
-            var activeLoadsRemainingByDate = activeLoadsPermitted - futureActiveShipmentsByDate;
+            var activeLoadsRemainingByDate = activeLoadsPermitted - activeShipmentsByDate;
 
             return new RemainingShipmentsData
             {
                 ActiveLoadsPermitted = activeLoadsPermitted,
-                ActiveLoadsRemaining = remainingActiveLoads,
                 ActiveLoadsRemainingByDate = activeLoadsRemainingByDate,
                 ShipmentsRemaining = remainingShipments,
             };

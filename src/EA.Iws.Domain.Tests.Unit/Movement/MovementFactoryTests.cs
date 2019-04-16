@@ -112,7 +112,7 @@
         {
             SetupMovements(500, 100);
             A.CallTo(() => financialGuaranteeRepository.GetByNotificationId(NotificationId)).Returns(GetFinancialGuarantee(FinancialGuaranteeStatus.Approved));
-            A.CallTo(() => movementRepository.GetFutureActiveMovements(NotificationId)).Returns(GetMovementArray(1));
+            A.CallTo(() => movementRepository.GetAllActiveMovements(NotificationId)).Returns(GetMovementArray(1));
 
             var date = Today.AddDays(5);
 
@@ -133,7 +133,7 @@
                 .Returns(new TestableNotificationAssessment { Status = NotificationStatus.Consented });
 
             A.CallTo(() => financialGuaranteeRepository.GetByNotificationId(NotificationId)).Returns(GetFinancialGuarantee(FinancialGuaranteeStatus.Approved));
-            A.CallTo(() => movementRepository.GetFutureActiveMovements(NotificationId)).Returns(GetMovementArray(1));
+            A.CallTo(() => movementRepository.GetAllActiveMovements(NotificationId)).Returns(GetMovementArray(1));
             A.CallTo(() => consentRepository.GetByNotificationId(NotificationId)).Returns(ValidConsent());
 
             var movement = await factory.Create(NotificationId, Today);
@@ -153,7 +153,7 @@
                 .Returns(new TestableNotificationAssessment { Status = NotificationStatus.Consented });
 
             A.CallTo(() => financialGuaranteeRepository.GetByNotificationId(NotificationId)).Returns(GetFinancialGuarantee(FinancialGuaranteeStatus.Approved));
-            A.CallTo(() => movementRepository.GetFutureActiveMovements(NotificationId)).Returns(GetMovementArray(2));
+            A.CallTo(() => movementRepository.GetAllActiveMovements(NotificationId)).Returns(GetMovementArray(2));
 
             await Assert.ThrowsAsync<InvalidOperationException>(() => factory.Create(NotificationId, Today));
         }
@@ -180,7 +180,7 @@
             SetupMovements(1000, 900);
 
             A.CallTo(() => financialGuaranteeRepository.GetByNotificationId(NotificationId)).Returns(GetFinancialGuarantee(FinancialGuaranteeStatus.Approved));
-            A.CallTo(() => movementRepository.GetFutureActiveMovements(NotificationId)).Returns(GetMovementArray(1));
+            A.CallTo(() => movementRepository.GetAllActiveMovements(NotificationId)).Returns(GetMovementArray(1));
 
             await factory.Create(NotificationId, Today);
         }

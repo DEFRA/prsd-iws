@@ -112,7 +112,7 @@
             return movements;
         }
 
-        public async Task<IEnumerable<Movement>> GetActiveMovements(Guid notificationId)
+        public async Task<IEnumerable<Movement>> GetAllActiveMovements(Guid notificationId)
         {
             await notificationAuthorization.EnsureAccessAsync(notificationId);
 
@@ -122,24 +122,7 @@
                     && (m.Status == MovementStatus.Submitted
                         || m.Status == MovementStatus.Received
                         || m.Status == MovementStatus.New
-                        || m.Status == MovementStatus.Captured)
-                    && m.Date < SystemTime.UtcNow).ToArrayAsync();
-
-            return currentActiveLoads;
-        }
-
-        public async Task<IEnumerable<Movement>> GetFutureActiveMovements(Guid notificationId)
-        {
-            await notificationAuthorization.EnsureAccessAsync(notificationId);
-
-            var currentActiveLoads = await context.Movements
-                .Where(m =>
-                    m.NotificationId == notificationId
-                    && (m.Status == MovementStatus.Submitted
-                        || m.Status == MovementStatus.Received
-                        || m.Status == MovementStatus.New
-                        || m.Status == MovementStatus.Captured)
-                    && DbFunctions.TruncateTime(m.Date) >= SystemTime.UtcNow.Date).ToArrayAsync();
+                        || m.Status == MovementStatus.Captured)).ToArrayAsync();
 
             return currentActiveLoads;
         }

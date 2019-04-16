@@ -23,9 +23,7 @@
 
         Task<Movement> GetByNumberOrDefault(int movementNumber, Guid notificationId);
 
-        Task<IEnumerable<Movement>> GetActiveMovements(Guid notificationId);
-
-        Task<IEnumerable<Movement>> GetFutureActiveMovements(Guid notificationId);
+        Task<IEnumerable<Movement>> GetAllActiveMovements(Guid notificationId);
 
         void Add(Movement movement);
 

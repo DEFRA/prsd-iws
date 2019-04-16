@@ -60,7 +60,6 @@
             var remainingshipment = new RemainingShipmentsData
             {
                 ShipmentsRemaining = 400,
-                ActiveLoadsRemaining = 300,
                 ActiveLoadsPermitted = 300,
                 ActiveLoadsRemainingByDate = 100
             };
@@ -103,7 +102,6 @@
             var remainingshipment = new RemainingShipmentsData
             {
                 ShipmentsRemaining = 100,
-                ActiveLoadsRemaining = 20,
                 ActiveLoadsPermitted = 20,
                 ActiveLoadsRemainingByDate = 20
             };
@@ -140,7 +138,6 @@
             var remainingshipment = new RemainingShipmentsData
             {
                 ShipmentsRemaining = 100,
-                ActiveLoadsRemaining = 20,
                 ActiveLoadsPermitted = 20,
                 ActiveLoadsRemainingByDate = 20
             };
@@ -177,7 +174,6 @@
             var remainingshipment = new RemainingShipmentsData
             {
                 ShipmentsRemaining = 100,
-                ActiveLoadsRemaining = 20,
                 ActiveLoadsPermitted = 20,
                 ActiveLoadsRemainingByDate = 3
             };

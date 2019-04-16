@@ -80,17 +80,6 @@
         }
 
         [Fact]
-        public async Task GetRemainingShipmentsHandler_GetsActiveMovements()
-        {
-            var request = new GetRemainingShipments(NotificationId);
-
-            await handler.HandleAsync(request);
-
-            A.CallTo(() => movementRepository.GetActiveMovements(NotificationId))
-                .MustHaveHappened(Repeated.Exactly.Once);
-        }
-
-        [Fact]
         public async Task GetRemainingShipmentsHandler_GetsFinancialGuaranteeCollection()
         {
             var request = new GetRemainingShipments(NotificationId);
@@ -108,7 +97,7 @@
 
             await handler.HandleAsync(request);
 
-            A.CallTo(() => movementRepository.GetFutureActiveMovements(NotificationId))
+            A.CallTo(() => movementRepository.GetAllActiveMovements(NotificationId))
                 .MustNotHaveHappened();
         }
 
@@ -119,7 +108,7 @@
 
             await handler.HandleAsync(request);
 
-            A.CallTo(() => movementRepository.GetFutureActiveMovements(NotificationId))
+            A.CallTo(() => movementRepository.GetAllActiveMovements(NotificationId))
                 .MustHaveHappened(Repeated.Exactly.Once);
         }
 
@@ -134,7 +123,6 @@
             var response = await handler.HandleAsync(request);
 
             Assert.Equal(ActiveLoadsPermitted, response.ActiveLoadsPermitted);
-            Assert.Equal(ActiveLoadsPermitted - ActiveMovements, response.ActiveLoadsRemaining);
             Assert.Equal(MaxNumberOfShipments - TotalMovements, response.ShipmentsRemaining);
         }
 
@@ -150,7 +138,6 @@
             var response = await handler.HandleAsync(request);
 
             Assert.Equal(noApprovedFGActiveLoads, response.ActiveLoadsPermitted);
-            Assert.Equal(noApprovedFGActiveLoads - ActiveMovements, response.ActiveLoadsRemaining);
         }
 
         [Fact]
@@ -164,7 +151,7 @@
             A.CallTo(() => financialGuaranteeRepository.GetByNotificationId(NotificationId))
                 .Returns(GetFinancialGuarantee(FinancialGuaranteeStatus.Approved));
 
-            A.CallTo(() => movementRepository.GetFutureActiveMovements(NotificationId))
+            A.CallTo(() => movementRepository.GetAllActiveMovements(NotificationId))
                 .Returns(GetShipments(futureShipmentsTotal, futureShipmentsDate));
 
             var response = await handler.HandleAsync(request);
@@ -184,7 +171,7 @@
             A.CallTo(() => financialGuaranteeRepository.GetByNotificationId(NotificationId))
                 .Returns(GetFinancialGuarantee(FinancialGuaranteeStatus.Refused));
 
-            A.CallTo(() => movementRepository.GetFutureActiveMovements(NotificationId))
+            A.CallTo(() => movementRepository.GetAllActiveMovements(NotificationId))
                 .Returns(GetShipments(futureShipmentsTotal, futureShipmentsDate));
 
             var response = await handler.HandleAsync(request);

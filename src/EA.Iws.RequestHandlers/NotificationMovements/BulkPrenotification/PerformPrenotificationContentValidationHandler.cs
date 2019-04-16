@@ -155,7 +155,7 @@
                 return rules;
             }
 
-            var existingMovements = await movementRepository.GetFutureActiveMovements(notificationId);
+            var existingMovements = await movementRepository.GetAllActiveMovements(notificationId);
 
             var newAndExistingGroupedByDate =
                 movements.Where(m => m.ActualDateOfShipment.HasValue && m.ShipmentNumber.HasValue)
