@@ -42,7 +42,7 @@
 
             var futureActiveShipmentsByDate = message.ShipmentDate.HasValue
                 ? (await movementRepository.GetFutureActiveMovements(message.NotificationId)).Count(
-                    m => m.Date == message.ShipmentDate.Value)
+                    m => m.Date.Date == message.ShipmentDate.Value.Date)
                 : 0;
 
             var remainingShipments = maxNumberOfShipments - currentNumberOfShipments;

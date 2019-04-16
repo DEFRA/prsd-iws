@@ -19,18 +19,21 @@
             this.financialGuaranteeRepository = financialGuaranteeRepository;
         }
 
-        public async Task<bool> HasMaximum(Guid notificationId)
+        public async Task<bool> HasMaximum(Guid notificationId, DateTime actualMovementDate)
         {
-            var currentActiveLoads = (await movementRepository.GetActiveMovements(notificationId)).Count();
             var financialGuaranteeCollection = await financialGuaranteeRepository.GetByNotificationId(notificationId);
 
             var currentFinancialGuarantee =
                 financialGuaranteeCollection.FinancialGuarantees.SingleOrDefault(
                     fg => fg.Status == FinancialGuaranteeStatus.Approved);
 
+            var futureActiveShipmentsByDate =
+                (await movementRepository.GetFutureActiveMovements(notificationId)).Count(
+                    m => m.Date.Date == actualMovementDate.Date);
+
             var activeLoadsPermitted = currentFinancialGuarantee == null ? 0 : currentFinancialGuarantee.ActiveLoadsPermitted.GetValueOrDefault();
 
-            return currentActiveLoads >= activeLoadsPermitted;
+            return futureActiveShipmentsByDate >= activeLoadsPermitted;
         }
     }
 }
