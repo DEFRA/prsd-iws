@@ -25,7 +25,14 @@
             int intendedQuantity = 100;
             int quantityReceived = 80;
 
-            A.CallTo(() => repo.GetById(notificationId)).Returns(NotificationMovementsSummary.Load(notificationId, string.Empty, Core.Shared.NotificationType.Disposal, 10, 5, 10, 5, intendedQuantity, quantityReceived, Core.Shared.ShipmentQuantityUnits.Kilograms, Core.FinancialGuarantee.FinancialGuaranteeStatus.Approved, Core.Notification.UKCompetentAuthority.England, Core.NotificationAssessment.NotificationStatus.Consented, new Domain.ShipmentQuantity(1, Core.Shared.ShipmentQuantityUnits.Kilograms)));
+            A.CallTo(() => repo.GetById(notificationId))
+                .Returns(NotificationMovementsSummary.Load(notificationId, string.Empty,
+                    Core.Shared.NotificationType.Disposal, 10, 5, 10, 5, intendedQuantity, quantityReceived,
+                    Core.Shared.ShipmentQuantityUnits.Kilograms,
+                    Core.FinancialGuarantee.FinancialGuaranteeStatus.Approved,
+                    Core.Notification.UKCompetentAuthority.England,
+                    Core.NotificationAssessment.NotificationStatus.Consented,
+                    new Domain.ShipmentQuantity(1, Core.Shared.ShipmentQuantityUnits.Kilograms)));
         }
 
         [Fact]
