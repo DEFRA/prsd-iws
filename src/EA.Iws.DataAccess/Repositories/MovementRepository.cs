@@ -120,7 +120,9 @@
                 .Where(m =>
                     m.NotificationId == notificationId
                     && (m.Status == MovementStatus.Submitted
-                        || m.Status == MovementStatus.Received)
+                        || m.Status == MovementStatus.Received
+                        || m.Status == MovementStatus.New
+                        || m.Status == MovementStatus.Captured)
                     && m.Date < SystemTime.UtcNow).ToArrayAsync();
 
             return currentActiveLoads;
@@ -134,7 +136,9 @@
                 .Where(m =>
                     m.NotificationId == notificationId
                     && (m.Status == MovementStatus.Submitted
-                        || m.Status == MovementStatus.Received)
+                        || m.Status == MovementStatus.Received
+                        || m.Status == MovementStatus.New
+                        || m.Status == MovementStatus.Captured)
                     && m.Date >= SystemTime.UtcNow).ToArrayAsync();
 
             return currentActiveLoads;
