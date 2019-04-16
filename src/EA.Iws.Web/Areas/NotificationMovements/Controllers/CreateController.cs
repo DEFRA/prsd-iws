@@ -112,7 +112,7 @@
             else if (model.NumberToCreate > remainingShipmentsData.ActiveLoadsRemainingByDate)
             {
                 ModelState.AddModelError("NumberToCreate",
-                    string.Format("You already have {0} prenotifcations for {1} and you are only permitted to prenotify {2} shipments. {3} shipment will exceed your limit on that date.",
+                    string.Format("You already have {0} prenotifications for {1} and you are only permitted to prenotify {2} shipments. {3} shipment will exceed your limit on that date.",
                         remainingShipmentsData.ActiveLoadsPermitted - remainingShipmentsData.ActiveLoadsRemainingByDate,
                         model.ShipmentDate.Value.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture),
                         remainingShipmentsData.ActiveLoadsPermitted,
