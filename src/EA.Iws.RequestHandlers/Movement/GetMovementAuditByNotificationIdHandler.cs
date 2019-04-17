@@ -2,15 +2,12 @@
 {
     using System.Collections.Generic;
     using System.Threading.Tasks;
-    using Core.Notification.Audit;
     using Core.Shared;
     using DataAccess;
     using Domain.Movement;
-    using Domain.NotificationApplication;
     using Prsd.Core.Mapper;
     using Prsd.Core.Mediator;
     using Requests.Movement;
-    using Requests.Notification;
 
     internal class GetMovementAuditByNotificationIdHandler : IRequestHandler<GetMovementAuditByNotificationId, ShipmentAuditData>
     {

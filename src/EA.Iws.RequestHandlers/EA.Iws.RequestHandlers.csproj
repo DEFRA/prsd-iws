@@ -192,6 +192,7 @@
     <Compile Include="ImportMovement\CompletedReceipt\RecordCompletedReceiptHandler.cs" />
     <Compile Include="ImportMovement\Delete\DeleteMovementHandler.cs" />
     <Compile Include="ImportMovement\Edit\SetImportMovementDatesHandler.cs" />
+    <Compile Include="ImportMovement\GetImportMovementAuditByNotificationIdHandler.cs" />
     <Compile Include="ImportMovement\GetNotificationIdByMovementIdHandler.cs" />
     <Compile Include="ImportMovement\Receipt\RecordReceiptHandler.cs" />
     <Compile Include="ImportMovement\Reject\RecordRejectionHandler.cs" />
@@ -255,6 +256,7 @@
     <Compile Include="ImportNotification\GetChangeNumberOfShipmentConfrimationDataHandler.cs" />
     <Compile Include="ImportNotification\GetDraftDataHandler.cs" />
     <Compile Include="ImportNotification\GetImportNotificationIdByNumberHandler.cs" />
+    <Compile Include="ImportNotification\GetImportNotificationNumberByIdHandler.cs" />
     <Compile Include="ImportNotification\GetInternalUserCompetentAuthorityHandler.cs" />
     <Compile Include="ImportNotification\GetNotificationDetailsHandler.cs" />
     <Compile Include="ImportNotification\GetOriginalNumberOfShipmentsHandler.cs" />
@@ -385,6 +387,8 @@
     <Compile Include="Mappings\ExportNotificationOwnerDisplayMap.cs" />
     <Compile Include="Mappings\ImportMovement\CancellableMovementMap.cs" />
     <Compile Include="Mappings\ImportMovement\ImportMovementAuditMap.cs" />
+    <Compile Include="Mappings\ImportMovement\MovementAuditMap.cs" />
+    <Compile Include="Mappings\ImportMovement\MovementAuditRecordMap.cs" />
     <Compile Include="Mappings\ImportMovement\MovementDataMap.cs" />
     <Compile Include="Mappings\ImportMovement\MovementTableDataMap.cs" />
     <Compile Include="Mappings\ImportNotificationAssessment\ConsultationMap.cs" />

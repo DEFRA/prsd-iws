@@ -1,82 +1,14 @@
 ﻿@using Resource = EA.Iws.Web.Areas.AdminExportNotificationMovements.Views.ShipmentAudit.IndexResources
-@using EA.Iws.Web.Infrastructure.Paging
+@using EA.Iws.Web.Views.Shared
 @model EA.Iws.Web.Areas.AdminExportNotificationMovements.ViewModels.ShipmentAudit.ShipmentAuditViewModel
 @{
 	ViewBag.Title = "Audit trail shipments";
 }
-@helper DisplayDate(DateTimeOffset date)
-{
-	@date.ToString("d MMM yyyy")
-}
-
-@helper DisplayTime(DateTimeOffset time)
-{
-	@time.ToString("HH:mm")
-}
 <header class="hgroup">
 	<h1 class="heading-large">@string.Format("Shipment changes for Notification {0}", Model.NotificationNumber) </h1>
-<p>@Resource.InfoText</p></header>
- @if (Model.ShipmentAuditItems.Count > 0)
- {
-	<div class="form-group">
-		<table class="odd-table">
-			<thead>
-				<tr>
-					<th>
-						@Resource.ThShipmentNumber
-					</th>
-					<th>
-						@Resource.ThTypeOfChange
-					</th>
-					<th>
-						@Resource.ThDate
-					</th>
-					<th>
-						@Resource.ThTime
-					</th>
-					<th>
-						@Resource.ThUser
-					</th>
-				</tr>
-			</thead>
-
-			<tbody>
-				@for (int i = 0; i < Model.ShipmentAuditItems.Count; i++)
-				{
-					<tr>
-						<td>
-							@Model.ShipmentAuditItems[i].ShipmentNumber
-						</td>
-						<td>
-							@Model.ShipmentAuditItems[i].AuditType
-						</td>
-						<td>
-							@DisplayDate(@Model.ShipmentAuditItems[i].DateAdded)
-						</td>
-						<td>
-							@DisplayTime(@Model.ShipmentAuditItems[i].DateAdded)
-						</td>
-						<td>
-							@Model.ShipmentAuditItems[i].UserName
-						</td>
-					</tr>
-				}
-			</tbody>
-		</table>
-		</div>
-		}
-		else
-		{
-
-		<div class="margin-bottom-30 margin-top-30 ">
-			<h3 style="text-align:center; font-size:36px">No updates available</h3>
-		</div>
-
-		}
-@if (Model.ShipmentAuditItems.Count > 0)
-{
-	@Html.Pager(Model.PageSize, Model.PageNumber, Model.NumberOfShipmentAudits)
-}
+	<p>The type of changes reflect changes made by all users.</p>
+</header>
+@Html.Partial("_ShipmentAudit", Model.ShipmentAuditModel)
 <div class="form-group">
 	@Html.ActionLink(@Resource.OverviewLink, "Index", "Home", new { area = "AdminExportAssessment", id = Model.NotificationId }, null)
 </div>

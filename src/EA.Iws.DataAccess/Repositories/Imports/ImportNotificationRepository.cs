@@ -59,6 +59,14 @@
                 .SingleOrDefaultAsync();
         }
 
+        public async Task<string> GetNumber(Guid id)
+        {
+            return await context.ImportNotifications
+                .Where(n => n.Id == id)
+                .Select(n => n.NotificationNumber)
+                .SingleAsync();
+        }
+
         public async Task<bool> Delete(Guid notificationId)
         {
             var rowsAffected = await context.Database.ExecuteSqlCommandAsync(@"
