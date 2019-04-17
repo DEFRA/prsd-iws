@@ -405,6 +405,8 @@
     <Compile Include="Mappings\ImportNotification\TransitStateMap.cs" />
     <Compile Include="Mappings\ImportNotification\WasteOperationMap.cs" />
     <Compile Include="Mappings\ImportNotification\WasteTypeMap.cs" />
+    <Compile Include="Mappings\Movement\MovementAuditMap.cs" />
+    <Compile Include="Mappings\Movement\MovementAuditRecordMap.cs" />
     <Compile Include="Mappings\Movement\MovementFileMap.cs" />
     <Compile Include="Mappings\Movement\MovementMap.cs" />
     <Compile Include="Mappings\NotificationAssessment\AccountManageDataMap.cs" />
@@ -432,6 +434,7 @@
     <Compile Include="Movement\Edit\IsProposedUpdatedMovementDateValidHandler.cs" />
     <Compile Include="Movement\Edit\UpdateMovementDateHandler.cs" />
     <Compile Include="Movement\GenerateMovementDocumentsHandler.cs" />
+    <Compile Include="Movement\GetMovementAuditByNotificationIdHandler.cs" />
     <Compile Include="Movement\GetMovementDetailsByIdHandler.cs" />
     <Compile Include="Movement\GetMovementFilesHandler.cs" />
     <Compile Include="Movement\GetMovementIdByNumberHandler.cs" />
