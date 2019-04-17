@@ -30,7 +30,7 @@
             return new ShipmentAuditRecord()
             {
                 ShipmentNumber = audit.ShipmentNumber,
-                AuditType = ((MovementAuditType)audit.Type).ToString(),
+                AuditType = ((MovementAuditType)audit.Type),
                 DateAdded = audit.DateAdded,
                 UserName = userName
             };

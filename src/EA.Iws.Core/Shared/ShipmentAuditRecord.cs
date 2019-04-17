@@ -1,6 +1,7 @@
 ﻿namespace EA.Iws.Core.Shared
 {
     using System;
+    using Movement;
 
     public class ShipmentAuditRecord
     {
@@ -8,7 +9,7 @@
         {
         }
 
-        public ShipmentAuditRecord(int shipmentNumber, string auditType, string userName,  DateTimeOffset dateAdded)
+        public ShipmentAuditRecord(int shipmentNumber, MovementAuditType auditType, string userName,  DateTimeOffset dateAdded)
         {
             this.UserName = userName;
             this.ShipmentNumber = shipmentNumber;
@@ -20,7 +21,7 @@
 
         public int ShipmentNumber { get; set; }
 
-        public string AuditType { get; set; }
+        public MovementAuditType AuditType { get; set; }
 
         public DateTimeOffset DateAdded { get; set; }
     }
