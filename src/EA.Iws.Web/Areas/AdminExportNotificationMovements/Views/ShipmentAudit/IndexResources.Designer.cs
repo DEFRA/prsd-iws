@@ -62,6 +62,15 @@ namespace EA.Iws.Web.Areas.AdminExportNotificationMovements.Views.ShipmentAudit 
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Filter by:.
+        /// </summary>
+        public static string FilterBy {
+            get {
+                return ResourceManager.GetString("FilterBy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The type of changes reflect changes made by all users..
         /// </summary>
         public static string InfoText {

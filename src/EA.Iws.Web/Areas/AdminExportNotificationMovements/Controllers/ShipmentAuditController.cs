@@ -8,6 +8,7 @@
     using Requests.Movement;
     using Requests.Notification;
     using ViewModels.ShipmentAudit;
+    using Web.ViewModels;
 
     [AuthorizeActivity(typeof(GetMovementAuditByNotificationId))]
     public class ShipmentAuditController : Controller
@@ -20,13 +21,42 @@
         }
 
         [HttpGet]
-        public async Task<ActionResult> Index(Guid id, int page = 1)
+        public async Task<ActionResult> Index(Guid id, ShipmentAuditFilterType? filter, int? number = null, int page = 1)
         {
             var response = await mediator.SendAsync(new GetMovementAuditByNotificationId(id, page));
-            var model = new ShipmentAuditViewModel(response);
-            model.NotificationId = id;
-            model.NotificationNumber = await mediator.SendAsync(new GetNotificationNumber(id));
+            var model = new ShipmentAuditViewModel(response)
+            {
+                NotificationId = id,
+                SelectedFilter = filter,
+                NotificationNumber = await mediator.SendAsync(new GetNotificationNumber(id))
+            };
+
             return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Index(Guid id, ShipmentAuditViewModel model)
+        {
+            if (model.SelectedFilter == null)
+            {
+                return RedirectToAction("Index");
+            }
+
+            if (!ModelState.IsValid)
+            {
+                var selectedFilter = model.SelectedFilter;
+                var response = await mediator.SendAsync(new GetMovementAuditByNotificationId(id, 1));
+                model = new ShipmentAuditViewModel(response)
+                {
+                    NotificationId = id,
+                    SelectedFilter = selectedFilter,
+                    NotificationNumber = await mediator.SendAsync(new GetNotificationNumber(id))
+                };
+                return View(model);
+            }
+
+            return RedirectToAction("Index", new { id = id, filter = model.SelectedFilter, number = model.ShipmentNumber, page = 1 });
         }
     }
 }
