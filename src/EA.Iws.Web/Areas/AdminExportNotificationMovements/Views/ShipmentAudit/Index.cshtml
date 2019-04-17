@@ -9,7 +9,8 @@
     <h1 class="heading-large">@string.Format("Shipment changes for Notification {0}", Model.NotificationNumber) </h1>
     <p>The type of changes reflect changes made by all users.</p>
 </header>
-@if (Model.ShipmentAuditModel.ShipmentAuditItems.Any())
+
+@if (Model.DisplayFilter)
 {
     <div class="grid-row">
         <div class="column-two-thirds">

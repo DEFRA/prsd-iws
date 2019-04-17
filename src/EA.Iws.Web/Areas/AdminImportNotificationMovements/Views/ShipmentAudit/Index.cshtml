@@ -1,14 +1,76 @@
-﻿@using EA.Iws.Web.Views.Shared
+﻿@using EA.Iws.Web.ViewModels
+@using EA.Iws.Web.Views.Shared
 
 @model EA.Iws.Web.Areas.AdminImportNotificationMovements.ViewModels.ShipmentAudit.ShipmentAuditViewModel
 @{
 	ViewBag.Title = "Audit trail shipments";
 }
 <header class="hgroup">
-	<h1 class="heading-large">@string.Format("Shipment changes for Notification {0}", Model.NotificationNumber) </h1>
-	<p>The type of changes reflect changes made by all users.</p>
+    <h1 class="heading-large">@string.Format("Shipment changes for Notification {0}", Model.NotificationNumber) </h1>
+    <p>The type of changes reflect changes made by all users.</p>
 </header>
+
+@if (Model.DisplayFilter)
+{
+    <div class="grid-row">
+        <div class="column-two-thirds">
+            @using (Html.BeginForm("Index", "ShipmentAudit", FormMethod.Post, new { id = "searchForm" }))
+            {
+                @Html.AntiForgeryToken()
+                ;
+                @Html.Gds().ValidationSummary()
+                @Html.HiddenFor(m => m.NotificationId)
+
+                <div>
+                    Filter by:
+                </div>
+                <div>
+                    @Html.Gds().DropDownListFor(m => m.SelectedFilter, Model.FilterTerms, new { @id = "filterSelectList" })
+                </div>
+
+                <br/>
+
+                <div class="@(Model.SelectedFilter.HasValue && Model.SelectedFilter.Value == ShipmentAuditFilterType.ShipmentNumber ? string.Empty : "hidden")" id="shipmentSection">
+                    <div class="form-group @Html.Gds().FormGroupClass(m => m.ShipmentNumberSearch)">
+                        <div>
+                            @Html.Gds().LabelFor(m => m.ShipmentNumberSearch, false)
+                        </div>
+                        <div>
+                            @Html.Gds().ValidationMessageFor(m => m.ShipmentNumberSearch)
+                            @Html.Gds().TextBoxFor(m => m.ShipmentNumberSearch)
+                        </div>
+                        <br/>
+                        <div class="form-group">
+                            <button class="button" type="submit" name="command" value="search">Search</button>
+                        </div>
+                    </div>
+                    <br/>
+                </div>
+            }
+        </div>
+    </div>
+}
+<br />
+
 @Html.Partial("_ShipmentAudit", Model.ShipmentAuditModel)
 <div class="form-group">
-	@Html.ActionLink("Go to Notification Overview", "Index", "Home", new { area = "ImportNotification", id = Model.NotificationId }, null)
+    @Html.ActionLink("Go to Notification Overview", "Index", "Home", new { area = "ImportNotification", id = Model.NotificationId }, null)
 </div>
+
+@section scripts {
+    <script>
+        $(function () {
+            $('select#filterSelectList').change(function () {
+                var selectedValue = $(this).val();
+                var shipmentSection = $("#shipmentSection");
+                var shipmentFilter = @(((int)ShipmentAuditFilterType.ShipmentNumber).ToString());
+
+                if (selectedValue == shipmentFilter) {
+                    shipmentSection.removeClass('hidden');
+                } else {
+                    $("#searchForm").submit();
+                }
+            });
+        });
+    </script>
+}

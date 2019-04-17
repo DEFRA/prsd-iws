@@ -20,6 +20,11 @@
 
         public int NumberOfShipmentAudits { get; set; }
 
+        public bool DisplayFilter
+        {
+            get { return (SelectedFilter.HasValue || ShipmentAuditModel.NumberOfShipmentAudits > 0); }
+        }
+
         public ShipmentAuditFilterType? SelectedFilter { get; set; }
 
         [Display(Name = "Shipment Number")]
