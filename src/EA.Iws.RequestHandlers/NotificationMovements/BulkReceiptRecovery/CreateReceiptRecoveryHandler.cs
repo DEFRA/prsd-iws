@@ -3,11 +3,14 @@
     using System;
     using System.Linq;
     using System.Threading.Tasks;
+    using Core.Movement;
+    using Core.Shared;
     using DataAccess;
     using Domain.FileStore;
     using Domain.Movement;
     using Domain.Movement.BulkUpload;
     using Domain.NotificationApplication;
+    using Prsd.Core;
     using Prsd.Core.Domain;
     using Prsd.Core.Mediator;
     using Requests.NotificationMovements.BulkUpload;
@@ -22,6 +25,8 @@
         private readonly CertificateFactory certificateFactory;
         private readonly CertificateOfReceiptNameGenerator receiptNameGenerator;
         private readonly CertificateOfRecoveryNameGenerator recoveryNameGenerator;
+        private readonly INotificationApplicationRepository notificationRepository;
+        private readonly IMovementAuditRepository movementAuditRepository;
 
         public CreateReceiptRecoveryHandler(IDraftMovementRepository draftMovementRepository,
             IMovementRepository movementRepository,
@@ -30,7 +35,9 @@
             IFileRepository fileRepository,
             CertificateFactory certificateFactory,
             CertificateOfReceiptNameGenerator receiptNameGenerator,
-            CertificateOfRecoveryNameGenerator recoveryNameGenerator)
+            CertificateOfRecoveryNameGenerator recoveryNameGenerator,
+            INotificationApplicationRepository notificationRepository,
+            IMovementAuditRepository movementAuditRepository)
         {
             this.draftMovementRepository = draftMovementRepository;
             this.movementRepository = movementRepository;
@@ -40,6 +47,8 @@
             this.certificateFactory = certificateFactory;
             this.receiptNameGenerator = receiptNameGenerator;
             this.recoveryNameGenerator = recoveryNameGenerator;
+            this.notificationRepository = notificationRepository;
+            this.movementAuditRepository = movementAuditRepository;
         }
 
         public async Task<bool> HandleAsync(CreateReceiptRecovery message)
@@ -55,6 +64,8 @@
                     {
                         return false;
                     }
+
+                    var notificationType = (await notificationRepository.GetById(message.NotificationId)).NotificationType;
 
                     foreach (var draftMovement in draftMovements)
                     {
@@ -73,6 +84,8 @@
                                 userContext.UserId);
 
                             await context.SaveChangesAsync();
+
+                            await SaveReceivedAudit(movement);
                         }
 
                         if (draftMovement.RecoveredDisposedDate.HasValue && 
@@ -86,6 +99,8 @@
                             movement.Complete(draftMovement.RecoveredDisposedDate.Value, fileId, userContext.UserId);
 
                             await context.SaveChangesAsync();
+
+                            await SaveRecoveredDisposedAudit(movement, notificationType);
                         }
                     }
 
@@ -115,6 +130,26 @@
             await context.SaveChangesAsync();
 
             return fileId;
+        }
+
+        private async Task SaveReceivedAudit(Movement movement)
+        {
+            await movementAuditRepository.Add(new MovementAudit(movement.NotificationId, movement.Number,
+                userContext.UserId.ToString(), (int)MovementAuditType.Received, SystemTime.UtcNow));
+
+            await context.SaveChangesAsync();
+        }
+
+        private async Task SaveRecoveredDisposedAudit(Movement movement, NotificationType notificationType)
+        {
+            var movementAuditType = notificationType == NotificationType.Recovery
+                ? MovementAuditType.Recovered
+                : MovementAuditType.Disposed;
+
+            await movementAuditRepository.Add(new MovementAudit(movement.NotificationId, movement.Number,
+                userContext.UserId.ToString(), (int)movementAuditType, SystemTime.UtcNow));
+
+            await context.SaveChangesAsync();
         }
     }
 }

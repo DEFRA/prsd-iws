@@ -147,10 +147,12 @@
     <Compile Include="Mappings\WasteCodeMapTests.cs" />
     <Compile Include="MovementReceipt\GetMovementDateByMovementIdHandlerTests.cs" />
     <Compile Include="Movement\CancelMovementsHandlerTests.cs" />
+    <Compile Include="Movement\Complete\SaveMovementCompletedReceiptHandlerTests.cs" />
     <Compile Include="Movement\DoesQuantityReceivedExceedToleranceHandlerTests.cs" />
     <Compile Include="Movement\Edit\UpdateMovementDateHandlerTests.cs" />
     <Compile Include="Movement\GetSubmittedMovementsHandlerTests.cs" />
     <Compile Include="Movement\GetNotificationIdByMovementIdHandlerTests.cs" />
+    <Compile Include="Movement\Receive\SetMovementAcceptedHandlerTests.cs" />
     <Compile Include="Movement\RecordMovementStatusChangeTest.cs" />
     <Compile Include="Movement\Reject\SetMovementRejectedHandlerTests.cs" />
     <Compile Include="Movement\SetMultipleMovementFileIdHandlerTests.cs" />
