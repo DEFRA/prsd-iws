@@ -223,6 +223,7 @@
     <Compile Include="Movement\Edit\UpdateMovementDate.cs" />
     <Compile Include="Movement\GenerateMovementDocuments.cs" />
     <Compile Include="Movement\GenerateMovementDocument.cs" />
+    <Compile Include="Movement\GetMovementAuditByNotificationId.cs" />
     <Compile Include="Movement\GetMovementDateByMovementId.cs" />
     <Compile Include="Movement\GetMovementDetailsById.cs" />
     <Compile Include="Movement\GetMovementFiles.cs" />
