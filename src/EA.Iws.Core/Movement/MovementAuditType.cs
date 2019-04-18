@@ -1,8 +1,11 @@
 ﻿namespace EA.Iws.Core.Movement
 {
+    using System.ComponentModel.DataAnnotations;
+
     public enum MovementAuditType
     {
         Prenotified = 1,
+        [Display(Name = "No prenotification received (internal user only change)")]
         NoPrenotificationReceived = 2,
         Received = 3,
         Recovered = 4,

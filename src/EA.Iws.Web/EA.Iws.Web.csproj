@@ -3542,6 +3542,7 @@
     <Compile Include="Areas\NotificationApplication\ViewModels\ShareNotification\SharedUserListConfirmViewModel.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\ShareNotification\SharedUserListViewModel.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\ShareNotification\ShareNotificationViewModel.cs" />
+    <Compile Include="ViewModels\ShipmentAuditFilterType.cs" />
     <Compile Include="Views\Account\EmailVerificationRequiredResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

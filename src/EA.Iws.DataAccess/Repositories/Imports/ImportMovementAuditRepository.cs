@@ -29,20 +29,33 @@
             await context.SaveChangesAsync();
         }
 
-        public async Task<IEnumerable<ImportMovementAudit>> GetPagedShipmentAuditsById(Guid notificationId, int pageNumber, int pageSize)
+        public async Task<IEnumerable<ImportMovementAudit>> GetPagedShipmentAuditsById(Guid notificationId,
+            int pageNumber, int pageSize, int? shipmentNumber)
         {
-            return await this.context.ImportMovementAudits
-            .Where(p => p.NotificationId == notificationId)
-            .OrderByDescending(x => x.DateAdded)
-            .Skip((pageNumber - 1) * pageSize)
-            .Take(pageSize)
-            .ToArrayAsync();
+            var query = context.ImportMovementAudits
+                .Where(p => p.NotificationId == notificationId)
+                .OrderByDescending(x => x.DateAdded)
+                .Skip((pageNumber - 1) * pageSize)
+                .Take(pageSize);
+
+            if (shipmentNumber.HasValue)
+            {
+                query = query.Where(m => m.ShipmentNumber == shipmentNumber.Value);
+            }
+
+            return await query.ToArrayAsync();
         }
 
-        public async Task<int> GetTotalNumberOfShipmentAudits(Guid notificationId)
+        public async Task<int> GetTotalNumberOfShipmentAudits(Guid notificationId, int? shipmentNumber)
         {
-            return await context.ImportMovementAudits
-                .CountAsync(m => m.NotificationId == notificationId);
+            var query = context.ImportMovementAudits.Where(m => m.NotificationId == notificationId);
+
+            if (shipmentNumber.HasValue)
+            {
+                query = query.Where(m => m.ShipmentNumber == shipmentNumber.Value);
+            }
+
+            return await query.CountAsync();
         }
     }
 }

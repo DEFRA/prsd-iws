@@ -1,4 +1,7 @@
 ﻿@using EA.Iws.Web.Infrastructure.Paging
+@using EA.Iws.Web.ViewModels
+@using EnumHelper = EA.Prsd.Core.Helpers.EnumHelper
+
 @model EA.Iws.Web.ViewModels.Shared.ShipmentAuditTrailViewModel
 @helper DisplayDate(DateTimeOffset date)
 {
@@ -36,26 +39,26 @@
 			</thead>
 
 			<tbody>
-				@for (int i = 0; i < Model.ShipmentAuditItems.Count; i++)
-				{
-					<tr>
-						<td>
-							@Model.ShipmentAuditItems[i].ShipmentNumber
-						</td>
-						<td>
-							@Model.ShipmentAuditItems[i].AuditType
-						</td>
-						<td>
-							@DisplayDate(@Model.ShipmentAuditItems[i].DateAdded)
-						</td>
-						<td>
-							@DisplayTime(@Model.ShipmentAuditItems[i].DateAdded)
-						</td>
-						<td>
-							@Model.ShipmentAuditItems[i].UserName
-						</td>
-					</tr>
-				}
+			@foreach (var auditRecord in Model.ShipmentAuditItems)
+			{
+			    <tr>
+			        <td>
+			            @auditRecord.ShipmentNumber
+			        </td>
+			        <td>
+			            @EnumHelper.GetDisplayName(auditRecord.AuditType)
+			        </td>
+			        <td>
+			            @DisplayDate(auditRecord.DateAdded)
+			        </td>
+			        <td>
+			            @DisplayTime(auditRecord.DateAdded)
+			        </td>
+			        <td>
+			            @auditRecord.UserName
+			        </td>
+			    </tr>
+			}
 			</tbody>
 		</table>
 	</div>
@@ -64,11 +67,25 @@ else
 {
 
 	<div class="margin-bottom-30 margin-top-30 ">
-		<h3 style="text-align:center; font-size:36px">No updates available</h3>
+		<h3 style="text-align:center; font-size:36px">No changes available</h3>
 	</div>
 
 }
 @if (Model.ShipmentAuditItems.Count > 0)
 {
-	@Html.Pager(Model.PageSize, Model.PageNumber, Model.NumberOfShipmentAudits)
+    @Html.Pager(Model.PageSize, Model.PageNumber, Model.NumberOfShipmentAudits).Options(o =>
+    {
+        var selectedFilter = (ShipmentAuditFilterType?)ViewData["Filter"];
+        var number = (int?)ViewData["ShipmentNumber"];
+
+        if (selectedFilter.HasValue)
+        {
+            o.AddRouteValue("filter", (int)selectedFilter.Value);
+        }
+        if (number.HasValue)
+        {
+            o.AddRouteValue("number", (int)number.Value);
+        }
+    })
 }
+
