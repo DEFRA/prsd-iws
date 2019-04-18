@@ -23,11 +23,15 @@
         [HttpGet]
         public async Task<ActionResult> Index(Guid id, ShipmentAuditFilterType? filter, int? number = null, int page = 1)
         {
+            number = filter.HasValue && filter == ShipmentAuditFilterType.ShipmentNumber ? number : null;
+
             var response = await mediator.SendAsync(new GetImportMovementAuditByNotificationId(id, page, number));
+
             var model = new ShipmentAuditViewModel(response)
             {
                 NotificationId = id,
                 SelectedFilter = filter,
+                ShipmentNumberSearch = number.HasValue ? number.ToString() : null,
                 NotificationNumber = await mediator.SendAsync(new GetImportNotificationNumberById(id))
             };
 

@@ -51,7 +51,8 @@
 }
 <br />
 
-@Html.Partial("_ShipmentAudit", Model.ShipmentAuditModel)
+@Html.Partial("_ShipmentAudit", Model.ShipmentAuditModel, new ViewDataDictionary() { { "Filter", Model.SelectedFilter }, { "ShipmentNumber", Model.ShipmentNumber } })
+
 <div class="form-group">
     @Html.ActionLink("Go to Notification Overview", "Index", "Home", new { area = "ImportNotification", id = Model.NotificationId }, null)
 </div>

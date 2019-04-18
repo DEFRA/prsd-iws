@@ -33,7 +33,8 @@
             var movementAuditTable = mapper.Map<IEnumerable<ImportMovementAudit>, ShipmentAuditData>(notificationAudits);
             movementAuditTable.PageNumber = message.PageNumber;
             movementAuditTable.PageSize = PageSize;
-            movementAuditTable.NumberOfShipmentAudits = notificationAudits.Count;
+            movementAuditTable.NumberOfShipmentAudits =
+                await repository.GetTotalNumberOfShipmentAudits(message.NotificationId, message.ShipmentNumber);
 
             return movementAuditTable;
         }

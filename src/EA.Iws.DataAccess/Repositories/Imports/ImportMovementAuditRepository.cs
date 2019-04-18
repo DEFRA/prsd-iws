@@ -46,10 +46,16 @@
             return await query.ToArrayAsync();
         }
 
-        public async Task<int> GetTotalNumberOfShipmentAudits(Guid notificationId)
+        public async Task<int> GetTotalNumberOfShipmentAudits(Guid notificationId, int? shipmentNumber)
         {
-            return await context.ImportMovementAudits
-                .CountAsync(m => m.NotificationId == notificationId);
+            var query = context.ImportMovementAudits.Where(m => m.NotificationId == notificationId);
+
+            if (shipmentNumber.HasValue)
+            {
+                query = query.Where(m => m.ShipmentNumber == shipmentNumber.Value);
+            }
+
+            return await query.CountAsync();
         }
     }
 }

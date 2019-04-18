@@ -1,5 +1,7 @@
 ﻿@using EA.Iws.Web.Infrastructure.Paging
+@using EA.Iws.Web.ViewModels
 @using EnumHelper = EA.Prsd.Core.Helpers.EnumHelper
+
 @model EA.Iws.Web.ViewModels.Shared.ShipmentAuditTrailViewModel
 @helper DisplayDate(DateTimeOffset date)
 {
@@ -71,5 +73,19 @@ else
 }
 @if (Model.ShipmentAuditItems.Count > 0)
 {
-	@Html.Pager(Model.PageSize, Model.PageNumber, Model.NumberOfShipmentAudits)
+    @Html.Pager(Model.PageSize, Model.PageNumber, Model.NumberOfShipmentAudits).Options(o =>
+    {
+        var selectedFilter = (ShipmentAuditFilterType?)ViewData["Filter"];
+        var number = (int?)ViewData["ShipmentNumber"];
+
+        if (selectedFilter.HasValue)
+        {
+            o.AddRouteValue("filter", (int)selectedFilter.Value);
+        }
+        if (number.HasValue)
+        {
+            o.AddRouteValue("number", (int)number.Value);
+        }
+    })
 }
+
