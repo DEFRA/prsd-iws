@@ -13,10 +13,13 @@
 
         public int PageNumber { get; private set; }
 
-        public GetImportMovementAuditByNotificationId(Guid notificationId, int pageNumber)
+        public int? ShipmentNumber { get; private set; }
+
+        public GetImportMovementAuditByNotificationId(Guid notificationId, int pageNumber, int? shipmentNumber = null)
         {
-            this.NotificationId = notificationId;
-            this.PageNumber = pageNumber;
+            NotificationId = notificationId;
+            PageNumber = pageNumber;
+            ShipmentNumber = shipmentNumber;
         }
     }
 }

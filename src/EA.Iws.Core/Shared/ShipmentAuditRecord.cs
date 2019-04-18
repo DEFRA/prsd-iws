@@ -11,10 +11,10 @@
 
         public ShipmentAuditRecord(int shipmentNumber, MovementAuditType auditType, string userName,  DateTimeOffset dateAdded)
         {
-            this.UserName = userName;
-            this.ShipmentNumber = shipmentNumber;
-            this.AuditType = auditType;
-            this.DateAdded = dateAdded;
+            UserName = userName;
+            ShipmentNumber = shipmentNumber;
+            AuditType = auditType;
+            DateAdded = dateAdded;
         }
 
         public string UserName { get; set; }

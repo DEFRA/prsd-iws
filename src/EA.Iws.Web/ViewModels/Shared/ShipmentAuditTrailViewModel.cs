@@ -21,7 +21,7 @@
         public ShipmentAuditTrailViewModel(ShipmentAuditData data)
         {
             ShipmentAuditItems = new List<ShipmentAuditRecord>();
-            foreach (ShipmentAuditRecord shipmentAudit in data.TableData)
+            foreach (var shipmentAudit in data.TableData)
             {
                 ShipmentAuditItems.Add(shipmentAudit);
             }
