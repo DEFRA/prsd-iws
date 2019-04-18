@@ -60,7 +60,8 @@
 @section scripts
 {
 	@Html.Partial("_ShipmentGroupScript")
-	
+	<script>
+		$(function () {
             $('select#filterSelectList').change(function () {
                 var selectedValue = $(this).val();
                 var shipmentSection = $("#shipmentSection");
@@ -73,5 +74,5 @@
                 }
             });
         });
-    </script>
+</script>
 }
