@@ -30,13 +30,12 @@
         [Display(Name = "Shipment Number")]
         public string ShipmentNumberSearch { get; set; }
 
-        public int ShipmentNumber
+        public int? ShipmentNumber
         {
             get
             {
-                int result;
-                int.TryParse(ShipmentNumberSearch, out result);
-                return result;
+                int value;
+                return int.TryParse(ShipmentNumberSearch, out value) ? (int?)value : null;
             }
         }
 
@@ -75,7 +74,10 @@
         {
             if (SelectedFilter == ShipmentAuditFilterType.ShipmentNumber)
             {
-                if (string.IsNullOrEmpty(ShipmentNumberSearch) || ShipmentNumberSearch.Length > 6 || ShipmentNumber < 1)
+                if (string.IsNullOrEmpty(ShipmentNumberSearch) ||
+                    ShipmentNumberSearch.Length > 6 ||
+                    !ShipmentNumber.HasValue ||
+                    ShipmentNumber.Value < 1)
                 {
                     yield return new ValidationResult("Enter a valid shipment number", new[] { "ShipmentNumberSearch" });
                 }

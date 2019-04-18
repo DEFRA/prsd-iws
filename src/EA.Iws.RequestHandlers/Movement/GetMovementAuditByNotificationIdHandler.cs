@@ -1,6 +1,7 @@
 ﻿namespace EA.Iws.RequestHandlers.Movement
 {
     using System.Collections.Generic;
+    using System.Linq;
     using System.Threading.Tasks;
     using Core.Shared;
     using DataAccess;
@@ -24,14 +25,14 @@
         public async Task<ShipmentAuditData> HandleAsync(GetMovementAuditByNotificationId message)
         {
             var notificationAudits =
-                await
+                (await
                     repository.GetPagedShipmentAuditsById(message.NotificationId, message.PageNumber, PageSize,
-                        message.ShipmentNumber);
+                        message.ShipmentNumber)).ToList();
 
             var movementAuditTable = mapper.Map<IEnumerable<MovementAudit>, ShipmentAuditData>(notificationAudits);
             movementAuditTable.PageNumber = message.PageNumber;
             movementAuditTable.PageSize = PageSize;
-            movementAuditTable.NumberOfShipmentAudits = await repository.GetTotalNumberOfShipmentAudits(message.NotificationId);
+            movementAuditTable.NumberOfShipmentAudits = notificationAudits.Count;
 
             return movementAuditTable;
         }
