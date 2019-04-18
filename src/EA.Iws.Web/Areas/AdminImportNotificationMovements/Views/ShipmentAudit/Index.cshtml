@@ -17,7 +17,6 @@
             @using (Html.BeginForm("Index", "ShipmentAudit", FormMethod.Post, new { id = "searchForm" }))
             {
                 @Html.AntiForgeryToken()
-                ;
                 @Html.Gds().ValidationSummary()
                 @Html.HiddenFor(m => m.NotificationId)
 
