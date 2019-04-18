@@ -36,7 +36,8 @@
         {
             var query = context.MovementAudits
                 .Where(p => p.NotificationId == notificationId)
-                .OrderByDescending(x => x.DateAdded)
+                .OrderByDescending(x => x.ShipmentNumber)
+                .ThenByDescending(x => x.DateAdded)
                 .Skip((pageNumber - 1) * pageSize)
                 .Take(pageSize);
 
