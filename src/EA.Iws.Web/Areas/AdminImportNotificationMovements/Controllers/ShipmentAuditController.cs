@@ -23,7 +23,7 @@
         [HttpGet]
         public async Task<ActionResult> Index(Guid id, ShipmentAuditFilterType? filter, int? number = null, int page = 1)
         {
-            var response = await mediator.SendAsync(new GetImportMovementAuditByNotificationId(id, page));
+            var response = await mediator.SendAsync(new GetImportMovementAuditByNotificationId(id, page, number));
             var model = new ShipmentAuditViewModel(response)
             {
                 NotificationId = id,

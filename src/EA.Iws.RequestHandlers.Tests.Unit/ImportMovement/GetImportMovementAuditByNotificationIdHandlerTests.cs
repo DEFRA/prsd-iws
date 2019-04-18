@@ -1,4 +1,4 @@
-﻿namespace EA.Iws.RequestHandlers.Tests.Unit.Movement
+﻿namespace EA.Iws.RequestHandlers.Tests.Unit.ImportMovement
 {
     using System;
     using System.Collections.Generic;
@@ -6,37 +6,37 @@
     using System.Threading.Tasks;
     using Core.Movement;
     using Core.Shared;
-    using Domain.Movement;
+    using Domain.ImportMovement;
     using FakeItEasy;
     using Prsd.Core;
     using Prsd.Core.Mapper;
-    using RequestHandlers.Movement;
-    using Requests.Movement;
+    using RequestHandlers.ImportMovement;
+    using Requests.ImportMovement;
     using Xunit;
 
-    public class GetMovementAuditByNotificationIdHandlerTests
+    public class GetImportMovementAuditByNotificationIdHandlerTests
     {
-        private readonly GetMovementAuditByNotificationIdHandler handler;
+        private readonly GetImportMovementAuditByNotificationIdHandler handler;
         private readonly IMapper mapper;
-        private readonly IMovementAuditRepository repository;
+        private readonly IImportMovementAuditRepository repository;
 
         private readonly Guid notificationId;
         private const int AuditCount = 10;
         private const int PageSize = 15;
         private const string AnyString = "test";
 
-        public GetMovementAuditByNotificationIdHandlerTests()
+        public GetImportMovementAuditByNotificationIdHandlerTests()
         {
             notificationId = Guid.NewGuid();
 
             mapper = A.Fake<IMapper>();
-            repository = A.Fake<IMovementAuditRepository>();
+            repository = A.Fake<IImportMovementAuditRepository>();
 
-            handler = new GetMovementAuditByNotificationIdHandler(mapper, repository);
+            handler = new GetImportMovementAuditByNotificationIdHandler(mapper, repository);
         }
 
         [Fact]
-        public async Task GetMovementAuditByNotificationIdHandler_GetPagedShipmentAuditsById()
+        public async Task GetImportMovementAuditByNotificationIdHandler_GetPagedShipmentAuditsById()
         {
             var request = GetRequest(1, 5);
 
@@ -47,26 +47,28 @@
         }
 
         [Fact]
-        public async Task GetMovementAuditByNotificationIdHandler_MapsToShipmentAudit()
+        public async Task GetImportMovementAuditByNotificationIdHandle_MapsToShipmentAudit()
         {
             var request = GetRequest(1, 5);
 
             await handler.HandleAsync(request);
 
             A.CallTo(
-                    () => mapper.Map<IEnumerable<MovementAudit>, ShipmentAuditData>(A<IEnumerable<MovementAudit>>.Ignored))
+                    () =>
+                        mapper.Map<IEnumerable<ImportMovementAudit>, ShipmentAuditData>(
+                            A<IEnumerable<ImportMovementAudit>>.Ignored))
                 .MustHaveHappened(Repeated.Exactly.Once);
         }
 
-        private GetMovementAuditByNotificationId GetRequest(int pageNumber, int? shipmentNumber)
+        private GetImportMovementAuditByNotificationId GetRequest(int pageNumber, int? shipmentNumber)
         {
             SetAuditData(pageNumber, shipmentNumber);
-            return new GetMovementAuditByNotificationId(notificationId, pageNumber, shipmentNumber);
+            return new GetImportMovementAuditByNotificationId(notificationId, pageNumber, shipmentNumber);
         }
 
         private void SetAuditData(int pageNumber, int? shipmentNumber)
         {
-            var audits = new List<MovementAudit>();
+            var audits = new List<ImportMovementAudit>();
 
             var auditTypeValues = Enum.GetValues(typeof(MovementAuditType));
             var random = new Random();
@@ -76,7 +78,7 @@
                 var number = shipmentNumber.HasValue ? shipmentNumber.Value : i + 1;
                 var auditType = (MovementAuditType)auditTypeValues.GetValue(random.Next(auditTypeValues.Length));
 
-                audits.Add(new MovementAudit(notificationId, number, AnyString, (int)auditType,
+                audits.Add(new ImportMovementAudit(notificationId, number, AnyString, (int)auditType,
                     SystemTime.UtcNow));
             }
 
@@ -85,7 +87,7 @@
             A.CallTo(() => repository.GetPagedShipmentAuditsById(notificationId, pageNumber, PageSize, shipmentNumber)).Returns(audits);
         }
 
-        private void SetMapper(IEnumerable<MovementAudit> movementAudits)
+        private void SetMapper(IEnumerable<ImportMovementAudit> movementAudits)
         {
             var data = new ShipmentAuditData
             {
@@ -97,7 +99,7 @@
             };
 
             A.CallTo(
-                    () => mapper.Map<IEnumerable<MovementAudit>, ShipmentAuditData>(A<IEnumerable<MovementAudit>>.Ignored))
+                    () => mapper.Map<IEnumerable<ImportMovementAudit>, ShipmentAuditData>(A<IEnumerable<ImportMovementAudit>>.Ignored))
                 .Returns(data);
         }
     }

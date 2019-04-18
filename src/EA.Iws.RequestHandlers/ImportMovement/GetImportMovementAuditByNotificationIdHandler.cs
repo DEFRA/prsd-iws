@@ -4,11 +4,11 @@
     using System.Linq;
     using System.Threading.Tasks;
     using Core.Shared;
-    using DataAccess;
     using Domain.ImportMovement;
     using Prsd.Core.Mapper;
     using Prsd.Core.Mediator;
     using Requests.ImportMovement;
+
     internal class GetImportMovementAuditByNotificationIdHandler : IRequestHandler<GetImportMovementAuditByNotificationId, ShipmentAuditData>
     {
         private readonly IMapper mapper;
@@ -25,7 +25,9 @@
         public async Task<ShipmentAuditData> HandleAsync(GetImportMovementAuditByNotificationId message)
         {
             var notificationAudits =
-                (await repository.GetPagedShipmentAuditsById(message.NotificationId, message.PageNumber, PageSize))
+                (await
+                        repository.GetPagedShipmentAuditsById(message.NotificationId, message.PageNumber, PageSize,
+                            message.ShipmentNumber))
                     .ToList();
 
             var movementAuditTable = mapper.Map<IEnumerable<ImportMovementAudit>, ShipmentAuditData>(notificationAudits);
