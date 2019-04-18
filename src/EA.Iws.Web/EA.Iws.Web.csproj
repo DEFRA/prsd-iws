@@ -1188,6 +1188,7 @@
     <Content Include="Views\PrivacyPolicy\Index.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\ReportOutputParametersViewModel.cshtml" />
     <Content Include="Views\Shared\_ShipmentAudit.cshtml" />
+    <Content Include="Views\Shared\_ShipmentGroupScript.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

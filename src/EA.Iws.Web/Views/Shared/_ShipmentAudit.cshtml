@@ -10,11 +10,10 @@
 	@time.ToString("HH:mm")
 }
 
-
 @if (Model.ShipmentAuditItems.Count > 0)
 {
-	<div class="form-group">
-		<table class="odd-table">
+	<div class="form-group" id="audit-trail">
+		<table class="group-table">
 			<thead>
 				<tr>
 					<th>
@@ -58,7 +57,7 @@
 				}
 			</tbody>
 		</table>
-	</div>
+	</div>	
 }
 else
 {

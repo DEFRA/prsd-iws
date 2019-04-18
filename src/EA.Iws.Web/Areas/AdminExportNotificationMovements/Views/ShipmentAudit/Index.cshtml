@@ -12,3 +12,7 @@
 <div class="form-group">
 	@Html.ActionLink(@Resource.OverviewLink, "Index", "Home", new { area = "AdminExportAssessment", id = Model.NotificationId }, null)
 </div>
+@section scripts
+{
+	@Html.Partial("_ShipmentGroupScript")
+}
