@@ -57,10 +57,11 @@
 <div class="form-group">
     @Html.ActionLink(@Resource.OverviewLink, "Index", "Home", new { area = "AdminExportAssessment", id = Model.NotificationId }, null)
 </div>
-
-@section scripts {
-    <script>
-        $(function () {
+@section scripts
+{
+	@Html.Partial("_ShipmentGroupScript")
+	<script>
+		$(function () {
             $('select#filterSelectList').change(function () {
                 var selectedValue = $(this).val();
                 var shipmentSection = $("#shipmentSection");
@@ -73,5 +74,5 @@
                 }
             });
         });
-    </script>
+</script>
 }

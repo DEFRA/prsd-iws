@@ -41,3 +41,24 @@ table.fraction
         padding-right: 10px;
     }
 }
+
+.group-table
+{
+	border-collapse: separate;
+	th 
+	{
+        background: $grey-2; 
+		border-top: 1px solid $grey-1;
+		border-bottom: 1px solid $grey-1;
+    }
+	tbody tr
+	{
+		border-top: none;
+		border-bottom: none;
+	}
+
+	.altColor {
+		background:  $grey-3;
+        border-top: 1px solid $grey-1;
+	}
+}
