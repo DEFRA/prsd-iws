@@ -150,6 +150,7 @@
     <Compile Include="Movement\Complete\SaveMovementCompletedReceiptHandlerTests.cs" />
     <Compile Include="Movement\DoesQuantityReceivedExceedToleranceHandlerTests.cs" />
     <Compile Include="Movement\Edit\UpdateMovementDateHandlerTests.cs" />
+    <Compile Include="Movement\GetMovementAuditByNotificationIdHandlerTests.cs" />
     <Compile Include="Movement\GetSubmittedMovementsHandlerTests.cs" />
     <Compile Include="Movement\GetNotificationIdByMovementIdHandlerTests.cs" />
     <Compile Include="Movement\Receive\SetMovementAcceptedHandlerTests.cs" />

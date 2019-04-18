@@ -8,7 +8,7 @@
     {
         Task Add(MovementAudit audit);
 
-        Task<IEnumerable<MovementAudit>> GetPagedShipmentAuditsById(Guid notificationId, int pageNumber, int pageSize);
+        Task<IEnumerable<MovementAudit>> GetPagedShipmentAuditsById(Guid notificationId, int pageNumber, int pageSize, int? shipmentNumber);
 
         Task<int> GetTotalNumberOfShipmentAudits(Guid notificationId);
     }

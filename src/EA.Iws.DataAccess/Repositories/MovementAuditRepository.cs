@@ -31,14 +31,21 @@
             context.MovementAudits.Add(audit);
         }
 
-        public async Task<IEnumerable<MovementAudit>> GetPagedShipmentAuditsById(Guid notificationId, int pageNumber, int pageSize)
+        public async Task<IEnumerable<MovementAudit>> GetPagedShipmentAuditsById(Guid notificationId, int pageNumber,
+            int pageSize, int? shipmentNumber)
         {
-                return await this.context.MovementAudits
+            var query = context.MovementAudits
                 .Where(p => p.NotificationId == notificationId)
                 .OrderByDescending(x => x.DateAdded)
                 .Skip((pageNumber - 1) * pageSize)
-                .Take(pageSize)
-                .ToArrayAsync();
+                .Take(pageSize);
+
+            if (shipmentNumber.HasValue)
+            {
+                query = query.Where(m => m.ShipmentNumber == shipmentNumber.Value);
+            }
+
+            return await query.ToArrayAsync();
         }
 
         public async Task<int> GetTotalNumberOfShipmentAudits(Guid notificationId)
