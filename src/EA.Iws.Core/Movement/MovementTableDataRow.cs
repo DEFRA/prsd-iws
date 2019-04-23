@@ -17,6 +17,8 @@
 
         public bool HasShipped { get; set; }
 
+        public bool IsShipmentActive { get; set; }
+
         public DateTime? ReceivedDate { get; set; }
 
         public decimal? Quantity { get; set; }

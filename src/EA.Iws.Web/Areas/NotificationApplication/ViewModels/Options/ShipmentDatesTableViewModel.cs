@@ -16,6 +16,8 @@
 
         public bool HasShipped { get; set; }
 
+        public bool IsShipmentActive { get; set; }
+
         public DateTime? Received { get; set; }
 
         public decimal? Quantity { get; set; }
@@ -31,6 +33,7 @@
             PreNotification = data.SubmittedDate;
             ShipmentDate = data.ShipmentDate;
             HasShipped = data.HasShipped;
+            IsShipmentActive = data.IsShipmentActive;
             Received = data.ReceivedDate;
             Quantity = data.Quantity;
             Unit = data.QuantityUnits;
