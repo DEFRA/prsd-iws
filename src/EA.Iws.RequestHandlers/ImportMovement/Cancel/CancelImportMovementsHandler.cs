@@ -38,7 +38,9 @@
 
             foreach (var movement in message.CancelledMovements)
             {
-                await repository.Add(new ImportMovementAudit(message.NotificationId, movement.Number, userContext.UserId.ToString().ToUpper(), (int)MovementAuditType.Cancelled, SystemTime.UtcNow));
+                await
+                    repository.Add(new ImportMovementAudit(message.NotificationId, movement.Number,
+                        userContext.UserId.ToString().ToUpper(), (int)MovementAuditType.Cancelled, SystemTime.Now));
             }
 
             return true;
