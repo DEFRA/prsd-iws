@@ -7,21 +7,17 @@
     using System.Threading.Tasks;
     using Domain.Movement;
     using Domain.Security;
-    using Prsd.Core.Domain;
 
     internal class MovementAuditRepository : IMovementAuditRepository
     {
         private readonly IwsContext context;
         private readonly INotificationApplicationAuthorization notificationApplicationAuthorization;
-        private readonly IUserContext userContext;
 
         public MovementAuditRepository(IwsContext context,
-            INotificationApplicationAuthorization notificationApplicationAuthorization,
-            IUserContext userContext)
+            INotificationApplicationAuthorization notificationApplicationAuthorization)
         {
             this.context = context;
             this.notificationApplicationAuthorization = notificationApplicationAuthorization;
-            this.userContext = userContext;
         }
 
         public async Task Add(MovementAudit audit)
@@ -35,16 +31,17 @@
             int pageSize, int? shipmentNumber)
         {
             var query = context.MovementAudits
-                .Where(p => p.NotificationId == notificationId)
-                .OrderByDescending(x => x.ShipmentNumber)
-                .ThenByDescending(x => x.DateAdded)
-                .Skip((pageNumber - 1) * pageSize)
-                .Take(pageSize);
+                .Where(p => p.NotificationId == notificationId);
 
             if (shipmentNumber.HasValue)
             {
                 query = query.Where(m => m.ShipmentNumber == shipmentNumber.Value);
             }
+
+            query = query.OrderByDescending(x => x.ShipmentNumber)
+                .ThenByDescending(x => x.DateAdded)
+                .Skip((pageNumber - 1) * pageSize)
+                .Take(pageSize);
 
             return await query.ToArrayAsync();
         }

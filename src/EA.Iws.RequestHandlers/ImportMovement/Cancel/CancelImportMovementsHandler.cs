@@ -43,6 +43,8 @@
                         userContext.UserId.ToString().ToUpper(), (int)MovementAuditType.Cancelled, SystemTime.Now));
             }
 
+            await context.SaveChangesAsync();
+
             return true;
         }
     }

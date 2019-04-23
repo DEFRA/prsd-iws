@@ -1,6 +1,7 @@
 ﻿namespace EA.Iws.RequestHandlers.ImportMovement
 {
     using System.Threading.Tasks;
+    using DataAccess;
     using Domain.ImportMovement;
     using Prsd.Core.Mapper;
     using Prsd.Core.Mediator;
@@ -10,8 +11,10 @@
     {
         private readonly IImportMovementAuditRepository repository;
         private readonly IMapper mapper;
+        private readonly ImportNotificationContext context;
 
-        public AuditImportMovementHandler(IImportMovementAuditRepository repository, IMapper mapper)
+        public AuditImportMovementHandler(IImportMovementAuditRepository repository, IMapper mapper,
+            ImportNotificationContext context)
         {
             this.repository = repository;
             this.mapper = mapper;
@@ -20,6 +23,8 @@
         public async Task<bool> HandleAsync(AuditImportMovement message)
         {
             await repository.Add(mapper.Map<ImportMovementAudit>(message));
+
+            await context.SaveChangesAsync();
 
             return true;
         }
