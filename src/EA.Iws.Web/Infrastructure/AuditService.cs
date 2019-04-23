@@ -29,7 +29,7 @@
         public async Task AddMovementAudit(IMediator mediator, Guid notificationId, int shipmentNumber, string userId,
             MovementAuditType type)
         {
-            var audit = new AuditMovement(notificationId, shipmentNumber, userId, type, SystemTime.UtcNow);
+            var audit = new AuditMovement(notificationId, shipmentNumber, userId, type, SystemTime.Now);
 
             await mediator.SendAsync(audit);
         }
@@ -37,7 +37,7 @@
         public async Task AddImportMovementAudit(IMediator mediator, Guid notificationId, int shipmentNumber, string userId,
             MovementAuditType type)
         {
-            var audit = new AuditImportMovement(notificationId, shipmentNumber, userId, type, SystemTime.UtcNow);
+            var audit = new AuditImportMovement(notificationId, shipmentNumber, userId, type, SystemTime.Now);
 
             await mediator.SendAsync(audit);
         }
@@ -49,7 +49,7 @@
         {
             return new CreateNotificationAudit()
             {
-                DateAdded = DateTime.Now,
+                DateAdded = SystemTime.Now,
                 NotificationId = notificationId,
                 UserId = userId,
                 Screen = screen,

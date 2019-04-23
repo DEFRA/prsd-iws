@@ -135,7 +135,7 @@
         private async Task SaveReceivedAudit(Movement movement)
         {
             await movementAuditRepository.Add(new MovementAudit(movement.NotificationId, movement.Number,
-                userContext.UserId.ToString(), (int)MovementAuditType.Received, SystemTime.UtcNow));
+                userContext.UserId.ToString(), (int)MovementAuditType.Received, SystemTime.Now));
 
             await context.SaveChangesAsync();
         }
@@ -147,7 +147,7 @@
                 : MovementAuditType.Disposed;
 
             await movementAuditRepository.Add(new MovementAudit(movement.NotificationId, movement.Number,
-                userContext.UserId.ToString(), (int)movementAuditType, SystemTime.UtcNow));
+                userContext.UserId.ToString(), (int)movementAuditType, SystemTime.Now));
 
             await context.SaveChangesAsync();
         }

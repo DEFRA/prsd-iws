@@ -5,7 +5,7 @@
     public enum MovementAuditType
     {
         Prenotified = 1,
-        [Display(Name = "No prenotification received (internal user only change)")]
+        [Display(Name = "No prenotification received")]
         NoPrenotificationReceived = 2,
         Received = 3,
         Recovered = 4,
