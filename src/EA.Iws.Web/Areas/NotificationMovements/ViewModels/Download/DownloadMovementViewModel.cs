@@ -47,7 +47,7 @@
 
         private string DateValue(DateTime? date, MovementStatus status)
         {
-            if (date.HasValue && status != MovementStatus.New && status != MovementStatus.Cancelled)
+            if (date.HasValue && status != MovementStatus.Cancelled)
             {
                 return date.Value.ToString("d MMM yyyy");
             }
