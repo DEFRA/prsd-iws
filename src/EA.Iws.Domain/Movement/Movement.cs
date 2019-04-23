@@ -108,6 +108,11 @@
             get { return Status == MovementStatus.Submitted && Date < SystemTime.UtcNow; }
         }
 
+        public bool IsShipmentActive
+        {
+            get { return (Status == MovementStatus.Captured || Status == MovementStatus.New) && Date <= SystemTime.UtcNow; }
+        }
+
         public string CreatedBy { get; private set; }
 
         public DateTime CreatedOnDate { get; internal set; }
