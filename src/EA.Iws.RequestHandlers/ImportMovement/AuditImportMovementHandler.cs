@@ -13,11 +13,13 @@
         private readonly IMapper mapper;
         private readonly ImportNotificationContext context;
 
-        public AuditImportMovementHandler(IImportMovementAuditRepository repository, IMapper mapper,
+        public AuditImportMovementHandler(IImportMovementAuditRepository repository, 
+            IMapper mapper,
             ImportNotificationContext context)
         {
             this.repository = repository;
             this.mapper = mapper;
+            this.context = context;
         }
 
         public async Task<bool> HandleAsync(AuditImportMovement message)
