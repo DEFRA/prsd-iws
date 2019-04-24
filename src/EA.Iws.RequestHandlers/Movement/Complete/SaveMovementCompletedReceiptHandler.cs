@@ -62,7 +62,7 @@
 
             await
                 movementAuditRepository.Add(new MovementAudit(movement.NotificationId, movement.Number,
-                    userContext.UserId.ToString(), (int)movementAuditType, SystemTime.Now));
+                    userContext.UserId.ToString(), (int)movementAuditType, message.AuditDate));
 
             await context.SaveChangesAsync();
 

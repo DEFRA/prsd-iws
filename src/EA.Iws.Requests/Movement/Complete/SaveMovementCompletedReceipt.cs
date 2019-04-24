@@ -12,13 +12,16 @@
         public DateTime CompletedDate { get; private set; }
         public byte[] CertificateBytes { get; private set; }
         public string FileType { get; private set; }
+        public DateTime AuditDate { get; private set; }
 
-        public SaveMovementCompletedReceipt(Guid movementId, DateTime completedDate, byte[] certificateBytes, string fileType)
+        public SaveMovementCompletedReceipt(Guid movementId, DateTime completedDate, byte[] certificateBytes,
+            string fileType, DateTime auditDate)
         {
             MovementId = movementId;
             CompletedDate = completedDate;
             CertificateBytes = certificateBytes;
             FileType = fileType;
+            AuditDate = auditDate;
         }
     }
 }

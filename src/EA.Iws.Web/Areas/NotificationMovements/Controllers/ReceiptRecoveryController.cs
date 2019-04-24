@@ -14,6 +14,7 @@
     using System.IO;
     using System.Threading.Tasks;
     using System.Web.Mvc;
+    using Prsd.Core;
     using ViewModels.ReceiptRecovery;
 
     [AuthorizeActivity(typeof(SaveMovementCompletedReceipt))]
@@ -28,6 +29,9 @@
         private const string ToleranceKey = "Tolerance";
         private const string CertificateKey = "CertificateType";
         private const string NotificationTypeKey = "NotificationType";
+
+        // Add delay to the recovery/disposal audit time to ensure this is logged after received audit.
+        private const int AuditTimeOffSet = 2;
 
         public ReceiptRecoveryController(IMediator mediator, IFileReader fileReader)
         {
@@ -312,7 +316,9 @@
             var id = model.MovementId;
            var fileId = await mediator.SendAsync(new SaveCertificateOfReceiptFile(id, uploadedFile, fileExtension));
 
-            await mediator.SendAsync(new SetMovementAccepted(id, fileId, model.DateReceived, model.Quantity.GetValueOrDefault(), model.Unit.GetValueOrDefault()));           
+            await
+                mediator.SendAsync(new SetMovementAccepted(id, fileId, model.DateReceived,
+                    model.Quantity.GetValueOrDefault(), model.Unit.GetValueOrDefault(), SystemTime.Now));
         }
 
         private async Task SaveCompleteData(Guid notificationId, UploadCertificateViewModel model)
@@ -322,7 +328,7 @@
 
             var id = model.MovementId;
 
-            await mediator.SendAsync(new SaveMovementCompletedReceipt(id, model.DateRecovered, uploadedFile, fileExtension));           
+            await mediator.SendAsync(new SaveMovementCompletedReceipt(id, model.DateRecovered, uploadedFile, fileExtension, SystemTime.Now));           
         }
 
         private async Task SaveReceiptRecoveryData(Guid notificationId, UploadCertificateViewModel model)
@@ -333,8 +339,14 @@
             var id = model.MovementId;
             var fileId = await mediator.SendAsync(new SaveCertificateOfReceiptFile(id, uploadedFile, fileExtension));
 
-            await mediator.SendAsync(new SetMovementAccepted(id, fileId, model.DateReceived, model.Quantity.GetValueOrDefault(), model.Unit.GetValueOrDefault()));
-            await mediator.SendAsync(new SaveMovementCompletedReceipt(id, model.DateRecovered, uploadedFile, fileExtension));
+            var auditDate = SystemTime.Now;
+
+            await
+                mediator.SendAsync(new SetMovementAccepted(id, fileId, model.DateReceived,
+                    model.Quantity.GetValueOrDefault(), model.Unit.GetValueOrDefault(), auditDate));
+            await
+                mediator.SendAsync(new SaveMovementCompletedReceipt(id, model.DateRecovered, uploadedFile, fileExtension,
+                    auditDate.AddSeconds(AuditTimeOffSet)));
         }
 
         [HttpGet]
