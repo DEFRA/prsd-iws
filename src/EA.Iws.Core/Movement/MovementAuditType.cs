@@ -4,6 +4,7 @@
 
     public enum MovementAuditType
     {
+        Incomplete = 0,
         Prenotified = 1,
         [Display(Name = "No prenotification received")]
         NoPrenotificationReceived = 2,
