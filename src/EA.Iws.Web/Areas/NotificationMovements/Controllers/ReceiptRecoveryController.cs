@@ -30,7 +30,7 @@
         private const string CertificateKey = "CertificateType";
         private const string NotificationTypeKey = "NotificationType";
 
-        // Add delay to the audit time to ensure this is logged after Received audit.
+        // Add delay to the recovery/disposal audit time to ensure this is logged after received audit.
         private const int AuditTimeOffSet = 2;
 
         public ReceiptRecoveryController(IMediator mediator, IFileReader fileReader)
