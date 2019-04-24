@@ -24,6 +24,9 @@
         private readonly INotificationApplicationRepository notificationRepository;
         private readonly IMovementAuditRepository movementAuditRepository;
 
+        // Add delay to the audit time to ensure this is logged after Received audit.
+        private const int AuditTimeOffSet = 5;
+
         public SaveMovementCompletedReceiptHandler(IwsContext context,
             IFileRepository fileRepository,
             IMovementRepository movementRepository,
@@ -62,7 +65,7 @@
 
             await
                 movementAuditRepository.Add(new MovementAudit(movement.NotificationId, movement.Number,
-                    userContext.UserId.ToString(), (int)movementAuditType, SystemTime.Now));
+                    userContext.UserId.ToString(), (int)movementAuditType, SystemTime.Now.AddSeconds(AuditTimeOffSet)));
 
             await context.SaveChangesAsync();
 
