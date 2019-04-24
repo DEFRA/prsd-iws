@@ -108,6 +108,7 @@
     <Content Include="scripts\Update\0006-CI-2019\Sprint1\20190411-155000-add-lookup-shipment-audit-type-data.sql" />
     <Content Include="scripts\Update\0006-CI-2019\Sprint1\20190411-154500-add-shipment-audit-table.sql" />
     <Content Include="scripts\Update\0006-CI-2019\Sprint1\20190411-153000-add-lookup-shipment-audit-type-table.sql" />
+    <Content Include="scripts\Update\0006-CI-2019\Sprint2\20190424-110200-add-incomplete-lookup-shipment-audit-type-data.sql" />
     <Content Include="unindexed-foreign-keys.sql" />
     <Content Include="scripts\Everytime\01-Functions\0003-Reports-PricingInfo.sql" />
     <Content Include="scripts\Everytime\03-StoredProcedures\0003-uspUpdateImportNotificationKeyDates.sql" />

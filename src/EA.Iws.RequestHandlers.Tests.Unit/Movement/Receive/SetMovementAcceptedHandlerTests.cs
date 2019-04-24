@@ -81,7 +81,7 @@
             SetMovement();
 
             return new SetMovementAccepted(movementId, Guid.NewGuid(), SystemTime.UtcNow, 1m,
-                ShipmentQuantityUnits.Tonnes);
+                ShipmentQuantityUnits.Tonnes, SystemTime.UtcNow);
         }
 
         private void SetMovement()

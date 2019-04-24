@@ -13,13 +13,15 @@
             Guid fileId,
             DateTime dateReceived,
             decimal quantity,
-            ShipmentQuantityUnits units)
+            ShipmentQuantityUnits units,
+            DateTime auditDate)
         {
             MovementId = movementId;
             FileId = fileId;
             DateReceived = dateReceived;
             Quantity = quantity;
             Units = units;
+            AuditDate = auditDate;
         }
 
         public Guid MovementId { get; private set; }
@@ -31,5 +33,7 @@
         public decimal Quantity { get; private set; }
 
         public ShipmentQuantityUnits Units { get; private set; }
+
+        public DateTime AuditDate { get; private set; }
     }
 }
