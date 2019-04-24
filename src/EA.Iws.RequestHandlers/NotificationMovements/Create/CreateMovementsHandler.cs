@@ -4,11 +4,14 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
+    using Core.Movement;
     using Core.PackagingType;
     using DataAccess;
     using Domain;
     using Domain.Movement;
     using Domain.NotificationApplication;
+    using Prsd.Core;
+    using Prsd.Core.Domain;
     using Prsd.Core.Mediator;
     using Requests.NotificationMovements.Create;
 
@@ -18,16 +21,22 @@
         private readonly IwsContext context;
         private readonly MovementFactory movementFactory;
         private readonly MovementDetailsFactory movementDetailsFactory;
+        private readonly IMovementAuditRepository movementAuditRepository;
+        private readonly IUserContext userContext;
 
         public CreateMovementsHandler(MovementFactory movementFactory,
             MovementDetailsFactory movementDetailsFactory,
             INotificationApplicationRepository notificationRepository,
-            IwsContext context)
+            IwsContext context,
+            IMovementAuditRepository movementAuditRepository,
+            IUserContext userContext)
         {
             this.movementFactory = movementFactory;
             this.movementDetailsFactory = movementDetailsFactory;
             this.context = context;
             this.notificationRepository = notificationRepository;
+            this.movementAuditRepository = movementAuditRepository;
+            this.userContext = userContext;
         }
 
         public async Task<Guid[]> HandleAsync(CreateMovements message)
@@ -59,6 +68,11 @@
                         await context.SaveChangesAsync();
 
                         newIds.Add(movement.Id);
+
+                        await movementAuditRepository.Add(new MovementAudit(movement.NotificationId, movement.Number,
+                            userContext.UserId.ToString(), (int)MovementAuditType.Incomplete, SystemTime.Now));
+
+                        await context.SaveChangesAsync();
                     }
                 }
                 catch

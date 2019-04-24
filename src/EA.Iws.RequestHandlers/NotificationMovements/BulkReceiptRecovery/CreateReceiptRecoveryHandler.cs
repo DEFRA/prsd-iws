@@ -28,6 +28,9 @@
         private readonly INotificationApplicationRepository notificationRepository;
         private readonly IMovementAuditRepository movementAuditRepository;
 
+        // Add delay to the audit time to ensure this is logged after Received audit.
+        private const int AuditTimeOffSet = 2;
+
         public CreateReceiptRecoveryHandler(IDraftMovementRepository draftMovementRepository,
             IMovementRepository movementRepository,
             IwsContext context,
@@ -72,6 +75,8 @@
                         var movement = await movementRepository.GetByNumberOrDefault(draftMovement.ShipmentNumber,
                             message.NotificationId);
 
+                        var auditDate = SystemTime.Now;
+
                         if (draftMovement.ReceivedDate.HasValue &&
                             draftMovement.ReceivedDate.Value != DateTime.MinValue)
                         {
@@ -85,7 +90,7 @@
 
                             await context.SaveChangesAsync();
 
-                            await SaveReceivedAudit(movement);
+                            await SaveReceivedAudit(movement, auditDate);
                         }
 
                         if (draftMovement.RecoveredDisposedDate.HasValue && 
@@ -100,7 +105,9 @@
 
                             await context.SaveChangesAsync();
 
-                            await SaveRecoveredDisposedAudit(movement, notificationType);
+                            await
+                                SaveRecoveredDisposedAudit(movement, notificationType,
+                                    auditDate.AddSeconds(AuditTimeOffSet));
                         }
                     }
 
@@ -132,22 +139,22 @@
             return fileId;
         }
 
-        private async Task SaveReceivedAudit(Movement movement)
+        private async Task SaveReceivedAudit(Movement movement, DateTime auditDate)
         {
             await movementAuditRepository.Add(new MovementAudit(movement.NotificationId, movement.Number,
-                userContext.UserId.ToString(), (int)MovementAuditType.Received, SystemTime.Now));
+                userContext.UserId.ToString(), (int)MovementAuditType.Received, auditDate));
 
             await context.SaveChangesAsync();
         }
 
-        private async Task SaveRecoveredDisposedAudit(Movement movement, NotificationType notificationType)
+        private async Task SaveRecoveredDisposedAudit(Movement movement, NotificationType notificationType, DateTime auditDate)
         {
             var movementAuditType = notificationType == NotificationType.Recovery
                 ? MovementAuditType.Recovered
                 : MovementAuditType.Disposed;
 
             await movementAuditRepository.Add(new MovementAudit(movement.NotificationId, movement.Number,
-                userContext.UserId.ToString(), (int)movementAuditType, SystemTime.Now));
+                userContext.UserId.ToString(), (int)movementAuditType, auditDate));
 
             await context.SaveChangesAsync();
         }
