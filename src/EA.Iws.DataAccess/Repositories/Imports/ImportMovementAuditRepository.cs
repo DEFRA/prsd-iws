@@ -25,24 +25,23 @@
             await authorization.EnsureAccessAsync(audit.NotificationId);
 
             context.ImportMovementAudits.Add(audit);
-
-            await context.SaveChangesAsync();
         }
 
         public async Task<IEnumerable<ImportMovementAudit>> GetPagedShipmentAuditsById(Guid notificationId,
             int pageNumber, int pageSize, int? shipmentNumber)
         {
             var query = context.ImportMovementAudits
-                .Where(p => p.NotificationId == notificationId)
-                .OrderByDescending(x => x.ShipmentNumber)
-                .ThenByDescending(x => x.DateAdded)
-                .Skip((pageNumber - 1) * pageSize)
-                .Take(pageSize);
+                .Where(p => p.NotificationId == notificationId);
 
             if (shipmentNumber.HasValue)
             {
                 query = query.Where(m => m.ShipmentNumber == shipmentNumber.Value);
             }
+
+            query = query.OrderByDescending(x => x.ShipmentNumber)
+                .ThenByDescending(x => x.DateAdded)
+                .Skip((pageNumber - 1) * pageSize)
+                .Take(pageSize);
 
             return await query.ToArrayAsync();
         }
