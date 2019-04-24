@@ -127,7 +127,7 @@
         private SaveMovementCompletedReceipt GetRequest()
         {
             SetMovement();
-            return new SaveMovementCompletedReceipt(movementId, SystemTime.UtcNow, new byte[1], AnyString);
+            return new SaveMovementCompletedReceipt(movementId, SystemTime.UtcNow, new byte[1], AnyString, SystemTime.UtcNow);
         }
 
         private void SetMovement()
