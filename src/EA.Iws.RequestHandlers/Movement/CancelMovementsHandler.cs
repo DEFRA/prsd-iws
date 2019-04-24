@@ -43,7 +43,7 @@
             foreach (var movement in movements)
             {
                 await movementAuditRepository.Add(new MovementAudit(movement.NotificationId, movement.Number,
-                    userContext.UserId.ToString(), (int)MovementAuditType.Cancelled, SystemTime.UtcNow));
+                    userContext.UserId.ToString(), (int)MovementAuditType.Cancelled, SystemTime.Now));
             }
 
             await context.SaveChangesAsync();
