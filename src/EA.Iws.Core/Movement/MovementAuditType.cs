@@ -13,6 +13,7 @@
         Rejected = 6,
         Cancelled = 7,
         Edited = 8,
-        Deleted = 9
+        Deleted = 9,
+        Incomplete = 10
     }
 }
