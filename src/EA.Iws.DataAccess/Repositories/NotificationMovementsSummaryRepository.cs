@@ -65,7 +65,7 @@
                         || m.Status == MovementStatus.Received
                         || m.Status == MovementStatus.New
                         || m.Status == MovementStatus.Captured) 
-                    && m.Date < SystemTime.UtcNow)
+                    && m.Date <= SystemTime.UtcNow)
                 .CountAsync();
 
             var financialGuaranteeCollection =
