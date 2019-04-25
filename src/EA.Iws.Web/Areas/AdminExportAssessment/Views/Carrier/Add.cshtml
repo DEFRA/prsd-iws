@@ -1,0 +1,30 @@
+﻿@using EA.Iws.Web.Areas.AdminExportAssessment.Views.Carrier
+@model EA.Iws.Web.Areas.AdminExportAssessment.ViewModels.Carrier.AddCarrierViewModel
+@{
+    ViewBag.Title = AddCarrierResources.Title;
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.Gds().ValidationSummary()
+    @Html.HiddenFor(m => m.NotificationId)
+
+    <header class="hgroup">
+        <h1 class="heading-large">@AddCarrierResources.Header</h1>
+    </header>
+
+    @Html.Partial("CarrierBusinessTypeViewModel", Model)
+
+    <h2 class="heading-medium">@AddCarrierResources.Address</h2>
+    <hr />
+
+    @Html.EditorFor(m => m.Address)
+
+    <h2 class="heading-medium">@AddCarrierResources.Contact</h2>
+    <hr />
+
+    @Html.EditorFor(m => m.Contact)
+
+    <button class="button" type="submit">@Constants.ContinueButtonText</button>
+}
