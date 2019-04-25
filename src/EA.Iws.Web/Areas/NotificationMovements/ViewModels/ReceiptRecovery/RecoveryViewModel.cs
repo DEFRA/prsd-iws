@@ -32,11 +32,11 @@
             DateTime dateComplete;
             if (!ParseCompleteDateInput(out dateComplete))
             {
-                yield return new ValidationResult("Please enter a valid date", new[] { "Recovery.Day" });
+                yield return new ValidationResult("Please enter a valid date", new[] { "Day" });
             }
             if (dateComplete > SystemTime.UtcNow)
             {
-                yield return new ValidationResult("This date cannot be in the future. Please enter a different date.", new[] { "Recovery.Day" });
+                yield return new ValidationResult("This date cannot be in the future. Please enter a different date.", new[] { "Day" });
             }
         }
 
