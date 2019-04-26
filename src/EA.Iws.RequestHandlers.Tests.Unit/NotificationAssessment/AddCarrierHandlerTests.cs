@@ -19,14 +19,12 @@
 
         private readonly Guid notificationId;
         private readonly Guid countryId;
-        private readonly Guid carrierId;
         private const string AnyString = "test";
 
         public AddCarrierHandlerTests()
         {
             notificationId = Guid.NewGuid();
             countryId = Guid.NewGuid();
-            carrierId = new Guid();
 
             countryRepository = A.Fake<ICountryRepository>();
             repository = A.Fake<ICarrierRepository>();
