@@ -42,6 +42,8 @@
 
         public const string CanEditHCodes = "Can Edit H Codes";
 
-        public const string CanEditOperationCodes = "Can edit operation codes";                
+        public const string CanEditOperationCodes = "Can edit operation codes";
+
+        public const string CanAddCarrier = "Can Add Carrier";
     }
 }
