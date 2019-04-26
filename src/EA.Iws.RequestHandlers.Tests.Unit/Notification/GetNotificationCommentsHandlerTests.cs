@@ -7,8 +7,8 @@ namespace EA.Iws.RequestHandlers.Tests.Unit.Notification
     using Domain.NotificationAssessment;
     using EA.Iws.Core.Admin;
     using FakeItEasy;
-    using NotificationAssessment;
     using Prsd.Core.Mapper;
+    using RequestHandlers.NotificationAssessment;
     using Requests.NotificationAssessment;
     using Xunit;
 

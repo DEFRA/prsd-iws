@@ -9,10 +9,10 @@
     using Prsd.Core.Mediator;
     using Prsd.Core.Web.ApiClient;
     using Prsd.Core.Web.Mvc.Extensions;
-    using Requests.Carriers;
+    using Requests.NotificationAssessment;
     using ViewModels.Carrier;
 
-    [AuthorizeActivity(typeof(AddCarrierToNotification))]
+    [AuthorizeActivity(typeof(AddCarrier))]
     public class CarrierController : Controller
     {
         private readonly IMediator mediator;
@@ -35,7 +35,7 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Add(NotificationApplication.ViewModels.Carrier.AddCarrierViewModel model)
+        public async Task<ActionResult> Add(AddCarrierViewModel model)
         {
             if (!ModelState.IsValid)
             {

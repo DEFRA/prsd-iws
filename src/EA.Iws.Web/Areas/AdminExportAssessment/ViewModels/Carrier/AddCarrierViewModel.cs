@@ -2,7 +2,7 @@
 {
     using System;
     using Core.Shared;
-    using Requests.Carriers;
+    using Requests.NotificationAssessment;
     using Web.ViewModels.Shared;
 
     public class AddCarrierViewModel
@@ -26,9 +26,9 @@
             Business = new BusinessTypeViewModel();
         }
 
-        public AddCarrierToNotification ToRequest()
+        public AddCarrier ToRequest()
         {
-            return new AddCarrierToNotification
+            return new AddCarrier
             {
                 NotificationId = NotificationId,
                 Address = Address,
