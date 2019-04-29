@@ -11,7 +11,6 @@
     using Domain.NotificationApplication.Exporter;
     using Domain.NotificationApplication.Importer;
     using Domain.NotificationApplication.Shipment;
-    using Domain.NotificationAssessment;
     using Domain.TransportRoute;
     using FakeItEasy;
     using Helpers;
@@ -44,7 +43,7 @@
             this.InternalUsers = new TestDbSet<InternalUser>();
             this.LocalAreas = new TestDbSet<LocalArea>();
             this.NotificationApplications = new TestDbSet<NotificationApplication>();
-            this.NotificationAssessments = new TestDbSet<NotificationAssessment>();
+            this.NotificationAssessments = new TestDbSet<Domain.NotificationAssessment.NotificationAssessment>();
             this.Organisations = new TestDbSet<Organisation>();
             this.PricingStructures = new TestDbSet<PricingStructure>();
             this.UnitedKingdomCompetentAuthorities = new TestDbSet<UnitedKingdomCompetentAuthority>();

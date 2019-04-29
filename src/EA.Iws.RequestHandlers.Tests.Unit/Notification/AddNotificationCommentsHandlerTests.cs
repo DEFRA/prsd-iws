@@ -3,7 +3,7 @@
     using System.Threading.Tasks;
     using Domain.NotificationAssessment;
     using FakeItEasy;
-    using NotificationAssessment;
+    using RequestHandlers.NotificationAssessment;
     using Requests.NotificationAssessment;
     using Xunit;
 
