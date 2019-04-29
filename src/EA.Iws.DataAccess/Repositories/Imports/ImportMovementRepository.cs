@@ -9,6 +9,7 @@
     using System.Data.SqlClient;
     using System.Linq;
     using System.Threading.Tasks;
+    using Core.Shared;
 
     internal class ImportMovementRepository : IImportMovementRepository
     {
@@ -122,13 +123,17 @@
                 new SqlParameter("@PrenotificationDate", (object)data.Data.PreNotificationDate ?? DBNull.Value),
                 new SqlParameter("@ActualDate", (object)data.Data.ActualDate ?? DBNull.Value),
                 new SqlParameter("@ReceiptDate", (object)data.ReceiptData.ReceiptDate ?? DBNull.Value),
-                new SqlParameter("@Quantity", (object)data.ReceiptData.ActualQuantity ?? DBNull.Value),
+                new SqlParameter("@Quantity", data.ReceiptData.ActualQuantity != null
+                    ? (object)decimal.Round(data.ReceiptData.ActualQuantity.Value, data.ReceiptData.ReceiptUnits != null
+                        ? ShipmentQuantityUnitsMetadata.Precision[data.ReceiptData.ReceiptUnits.Value]
+                        : ShipmentQuantityUnitsMetadata.Precision.Values.Min())
+                    : DBNull.Value),
                 new SqlParameter("@Unit", (object)data.ReceiptData.ReceiptUnits ?? DBNull.Value),
                 new SqlParameter("@RejectiontDate", (object)data.RejectionDate ?? DBNull.Value),
                 new SqlParameter("@RejectionReason", (object)data.ReceiptData.RejectionReason ?? DBNull.Value),
                 new SqlParameter("@StatsMarking", (object)data.StatsMarking ?? DBNull.Value),
                 new SqlParameter("@Comments", (object)data.Comments ?? DBNull.Value),
-                 new SqlParameter("@RecoveryDate", (object)data.RecoveryData.OperationCompleteDate ?? DBNull.Value),
+                new SqlParameter("@RecoveryDate", (object)data.RecoveryData.OperationCompleteDate ?? DBNull.Value),
                 new SqlParameter("@CreatedBy", createdBy));
         }
     }
