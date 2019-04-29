@@ -1,15 +1,15 @@
 ﻿namespace EA.Iws.DataAccess.Repositories.Imports
 {
-    using Core.ImportMovement;
-    using Domain.ImportMovement;
-    using Domain.Security;
     using System;
     using System.Collections.Generic;
     using System.Data.Entity;
     using System.Data.SqlClient;
     using System.Linq;
     using System.Threading.Tasks;
+    using Core.ImportMovement;
     using Core.Shared;
+    using Domain.ImportMovement;
+    using Domain.Security;
 
     internal class ImportMovementRepository : IImportMovementRepository
     {
