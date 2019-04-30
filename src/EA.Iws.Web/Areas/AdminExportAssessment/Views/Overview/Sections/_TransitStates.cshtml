@@ -18,6 +18,8 @@
                     <div class="column-half">
                         @transitState.EntryPoint.Name,
                         @transitState.Country.Name
+                        
+                        <div class="change-answer">@Html.ActionLink("Change", "TransitEntryPoint", "UpdateJourney", new { id = Model.NotificationId, transitStateId = transitState.Id }, null)</div>
                     </div>
                 </div>
                 <div class="grid-row">

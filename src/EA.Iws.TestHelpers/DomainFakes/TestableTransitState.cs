@@ -1,12 +1,19 @@
 ﻿namespace EA.Iws.TestHelpers.DomainFakes
 {
+    using System;
     using Domain;
     using Domain.TransportRoute;
+    using Helpers;
 
     public class TestableTransitState : TransitState
     {
         public TestableTransitState()
         {
+        }
+        public new Guid Id
+        {
+            get { return base.Id; }
+            set { ObjectInstantiator<TransitState>.SetProperty(x => x.Id, value, this); }
         }
 
         public new Country Country

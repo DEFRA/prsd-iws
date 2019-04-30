@@ -47,6 +47,7 @@
             { ExportNotificationPermissions.CanMakeExportNotificationAssessmentDecision, new[] { UserRole.Administrator } },
             { ExportNotificationPermissions.CanChangeNumberOfShipmentsOnExportNotification, new[] { UserRole.Administrator } },
             { ExportNotificationPermissions.CanChangeEntryExitPoint, new[] { UserRole.Administrator } },
+            { ExportNotificationPermissions.CanChangeTransitStateEntryExitPoint, new[] { UserRole.Administrator } },
             { ExportNotificationPermissions.CanAddProducer, new[] { UserRole.Administrator } },
             { ExportNotificationPermissions.CanAddRemoveTransitState, new[] { UserRole.Administrator } },
             { ExportNotificationPermissions.CanEditContactDetails, new[] { UserRole.Administrator } },

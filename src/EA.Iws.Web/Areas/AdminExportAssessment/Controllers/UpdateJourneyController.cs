@@ -200,5 +200,16 @@
 
             return RedirectToAction("Index", "Overview");
         }
+
+        [HttpGet]
+        public async Task<ActionResult> TransitEntryPoint(Guid id, Guid transitStateId)
+        {
+            var transitStateData =
+                await mediator.SendAsync(new GetTransitStateWithEntryOrExitData(id, transitStateId));
+
+            var model = new TransitEntryPointViewModel(transitStateData.TransitState, transitStateData.EntryOrExitPoints);
+
+            return View(model);
+        }
     }
 }
