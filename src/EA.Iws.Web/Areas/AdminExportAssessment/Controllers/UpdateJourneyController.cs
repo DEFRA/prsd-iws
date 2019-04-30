@@ -211,5 +211,16 @@
 
             return View(model);
         }
+
+        [HttpGet]
+        public async Task<ActionResult> TransitExitPoint(Guid id, Guid transitStateId)
+        {
+            var transitStateData =
+                await mediator.SendAsync(new GetTransitStateWithEntryOrExitData(id, transitStateId));
+
+            var model = new TransitExitPointViewModel(transitStateData.TransitState, transitStateData.EntryOrExitPoints);
+
+            return View(model);
+        }
     }
 }
