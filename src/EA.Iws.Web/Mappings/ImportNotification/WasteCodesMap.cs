@@ -4,14 +4,17 @@
     using System.Collections.Generic;
     using System.Linq;
     using Areas.ImportNotification.ViewModels.Shared;
+    using Areas.ImportNotification.ViewModels.UpdateJourney;
     using Areas.ImportNotification.ViewModels.WasteCodes;
     using Core.ImportNotification.Draft;
+    using Core.ImportNotification.Update;
     using Core.WasteCodes;
     using Newtonsoft.Json;
     using Prsd.Core.Mapper;
 
     public class WasteCodesMap : IMap<WasteCodesViewModel, WasteType>,
-        IMapWithParameter<WasteType, List<WasteCodeData>, WasteCodesViewModel>
+        IMapWithParameter<WasteType, List<WasteCodeData>, WasteCodesViewModel>,
+        IMap<WasteTypes, UpdateWasteCodesViewModel>
     {
         private readonly IMapper mapper;
 
@@ -101,6 +104,52 @@
             }
 
             model.AllCodes = mapper.Map<List<WasteCodeViewModel>>(parameter);
+
+            return model;
+        }
+
+        public UpdateWasteCodesViewModel Map(WasteTypes source)
+        {
+            var model = new UpdateWasteCodesViewModel(source);
+            model.ImportNotificationId = source.ImportNotificationId;
+
+            if (source.SelectedEwcCodes != null)
+            {
+                model.SelectedEwcCodesJson = JsonConvert.SerializeObject(source.SelectedEwcCodes);
+                model.SelectedEwcCodesDisplay = mapper.Map<List<WasteCodeViewModel>>(source.AllCodes
+                    .Where(p =>
+                        source.SelectedEwcCodes.Contains(p.Id))
+                    .ToList());
+            }
+
+            if (source.SelectedYCodes != null)
+            {
+                model.SelectedYCodesJson = JsonConvert.SerializeObject(source.SelectedYCodes);
+                model.SelectedYCodesDisplay = mapper.Map<List<WasteCodeViewModel>>(source.AllCodes
+                    .Where(p =>
+                        source.SelectedYCodes.Contains(p.Id))
+                    .ToList());
+            }
+
+            if (source.SelectedHCodes != null)
+            {
+                model.SelectedHCodesJson = JsonConvert.SerializeObject(source.SelectedHCodes);
+                model.SelectedHCodesDisplay = mapper.Map<List<WasteCodeViewModel>>(source.AllCodes
+                    .Where(p =>
+                        source.SelectedHCodes.Contains(p.Id))
+                    .ToList());
+            }
+
+            if (source.SelectedUnClasses != null)
+            {
+                model.SelectedUnClassesJson = JsonConvert.SerializeObject(source.SelectedUnClasses);
+                model.SelectedUnClassesDisplay = mapper.Map<List<WasteCodeViewModel>>(source.AllCodes
+                    .Where(p =>
+                        source.SelectedUnClasses.Contains(p.Id))
+                        .ToList());
+            }
+
+            model.AllCodes = mapper.Map<List<WasteCodeViewModel>>(source.AllCodes);
 
             return model;
         }

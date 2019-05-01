@@ -1,15 +1,20 @@
 ﻿namespace EA.Iws.RequestHandlers.ImportNotification.Mappings
 {
+    using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Runtime.Remoting.Channels;
     using System.Threading.Tasks;
+    using Core.ImportNotification.Update;
     using Core.WasteCodes;
+    using Domain.ImportNotification.WasteCodes;
     using Domain.NotificationApplication;
     using Prsd.Core.Mapper;
     using Core = Core.ImportNotification.Summary;
     using Domain = Domain.ImportNotification;
 
-    internal class WasteTypeMap : IMap<Domain.WasteType, Core.WasteType>
+    internal class WasteTypeMap : IMap<Domain.WasteType, Core.WasteType>, 
+        IMapWithParameter<Domain.WasteType, IList<WasteCodeData>, WasteTypes>
     {
         private readonly IWasteCodeRepository wasteCodeRepository;
 
@@ -91,6 +96,58 @@
             return wasteType;
         }
 
+        public WasteTypes Map(Domain.WasteType source, IList<WasteCodeData> wasteCodeData)
+        {
+            if (source == null)
+            {
+                return new WasteTypes();
+            }
+
+            var result = new WasteTypes(source.ImportNotificationId)
+            {
+                Name = source.Name,
+                BaselCodeNotListed = source.BaselOecdCodeNotListed,
+                HCodeNotApplicable = source.HCodeNotApplicable,
+                YCodeNotApplicable = source.YCodeNotApplicable,
+                UnClassNotApplicable = source.UnClassNotApplicable,
+                AllCodes = wasteCodeData
+            };
+
+            var wasteCodes = Task.Run(() => wasteCodeRepository
+                .GetWasteCodesByIds(source.WasteCodes.Select(x => x.WasteCodeId))).Result.ToList();
+
+            if (!source.BaselOecdCodeNotListed)
+            {
+                var baselOecdCode = wasteCodes
+                    .Single(x =>
+                        x.CodeType == CodeType.Basel
+                        || x.CodeType == CodeType.Oecd);
+
+                var selectedBaselCode = source.WasteCodes.SingleOrDefault(wc => wc.WasteCodeId == baselOecdCode.Id);
+
+                result.SelectedBaselCode = selectedBaselCode != null ? selectedBaselCode.WasteCodeId : (Guid?)null;
+            }
+
+            result.SelectedEwcCodes = wasteCodes.Where(x => x.CodeType == CodeType.Ewc).Select(code => code.Id).ToList();
+
+            if (!source.HCodeNotApplicable)
+            {
+                result.SelectedHCodes = wasteCodes.Where(x => x.CodeType == CodeType.H).Select(code => code.Id).ToList();
+            }
+
+            if (!source.YCodeNotApplicable)
+            {
+                result.SelectedYCodes = wasteCodes.Where(x => x.CodeType == CodeType.Y).Select(code => code.Id).ToList();
+            }
+
+            if (!source.UnClassNotApplicable)
+            {
+                result.SelectedUnClasses = wasteCodes.Where(x => x.CodeType == CodeType.Un).Select(code => code.Id).ToList();
+            }
+
+            return result;
+        }
+
         private Core.WasteCodeSelection MapWasteCodes(CodeType codeType, IEnumerable<WasteCode> wasteCodes)
         {
             var coreWasteCodes = new List<Core.WasteCode>();
@@ -111,6 +168,11 @@
                 IsNotApplicable = false,
                 WasteCodes = coreWasteCodes
             };
+        }
+
+        private IList<Guid> MapWasteCodesToIds(CodeType codeType, IEnumerable<WasteCode> wasteCodes)
+        {
+            return wasteCodes.Where(x => x.CodeType == codeType).Select(code => code.Id).ToList();
         }
     }
 }

@@ -4,7 +4,9 @@
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Infrastructure.Authorization;
+    using Prsd.Core.Mapper;
     using Prsd.Core.Mediator;
+    using Requests.ImportNotification;
     using Requests.ImportNotificationAssessment;
     using Requests.TransportRoute;
     using ViewModels.UpdateJourney;
@@ -14,10 +16,12 @@
     public class UpdateJourneyController : Controller
     {
         private readonly IMediator mediator;
+        private readonly IMapper mapper;
 
-        public UpdateJourneyController(IMediator mediator)
+        public UpdateJourneyController(IMediator mediator, IMapper mapper)
         {
             this.mediator = mediator;
+            this.mapper = mapper;
         }
 
         [HttpGet]
@@ -88,6 +92,16 @@
             ViewBag.ExitPoint = stateOfImport.ExitPoint.Name;
 
             return View();
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> WasteCodes(Guid id)
+        {
+            var wasteCodes = await mediator.SendAsync(new GetImportNotificationWasteTypes(id));
+
+            var model = mapper.Map<UpdateWasteCodesViewModel>(wasteCodes);
+
+            return View(model);
         }
     }
 }
