@@ -26,5 +26,9 @@
             ExitPoint = transitState.ExitPoint.Name;
             ExitPoints = new SelectList(entryOrExitPoints, "Id", "Name");
         }
+
+        public TransitExitPointViewModel()
+        {
+        }
     }
 }

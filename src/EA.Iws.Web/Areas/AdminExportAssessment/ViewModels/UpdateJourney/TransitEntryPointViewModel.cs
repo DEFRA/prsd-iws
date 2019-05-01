@@ -26,5 +26,9 @@
             EntryPoint = transitState.EntryPoint.Name;
             EntryPoints = new SelectList(entryOrExitPoints, "Id", "Name");
         }
+
+        public TransitEntryPointViewModel()
+        {
+        }
     }
 }

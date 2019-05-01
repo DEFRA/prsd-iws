@@ -475,6 +475,7 @@
     <Compile Include="NotificationAssessment\SetExporterContactHandler.cs" />
     <Compile Include="NotificationAssessment\SetNewNumberOfShipmentsHandler.cs" />
     <Compile Include="NotificationAssessment\SetEntryPointHandler.cs" />
+    <Compile Include="NotificationAssessment\UpdateTransitStateEntryOrExitHandler.cs" />
     <Compile Include="NotificationAssessment\UpdateEwcCodeHandler.cs" />
     <Compile Include="NotificationAssessment\SetOperationCodesHandler.cs" />
     <Compile Include="NotificationAssessment\UpdateExportAccountManagementCommentsHandler.cs" />
