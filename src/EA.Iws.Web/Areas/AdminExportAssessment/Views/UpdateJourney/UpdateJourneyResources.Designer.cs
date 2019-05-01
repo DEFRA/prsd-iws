@@ -80,6 +80,24 @@ namespace EA.Iws.Web.Areas.AdminExportAssessment.Views.UpdateJourney {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Change transit state point of entry.
+        /// </summary>
+        public static string ChangeTransitStateEntryPointTitle {
+            get {
+                return ResourceManager.GetString("ChangeTransitStateEntryPointTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Change transit state point of exit.
+        /// </summary>
+        public static string ChangeTransitStateExitPointTitle {
+            get {
+                return ResourceManager.GetString("ChangeTransitStateExitPointTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Competent authority.
         /// </summary>
         public static string CompetentAuthority {
@@ -157,6 +175,42 @@ namespace EA.Iws.Web.Areas.AdminExportAssessment.Views.UpdateJourney {
         public static string PointOfExitCurrently {
             get {
                 return ResourceManager.GetString("PointOfExitCurrently", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The transit state point of entry has been changed to {0}.
+        /// </summary>
+        public static string TransitStateEntryPointChangedDescription {
+            get {
+                return ResourceManager.GetString("TransitStateEntryPointChangedDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Transit state point of entry changed.
+        /// </summary>
+        public static string TransitStateEntryPointChangedTitle {
+            get {
+                return ResourceManager.GetString("TransitStateEntryPointChangedTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The transit state point of exit has been changed to {0}.
+        /// </summary>
+        public static string TransitStateExitPointChangedDescription {
+            get {
+                return ResourceManager.GetString("TransitStateExitPointChangedDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Transit state point of exit changed.
+        /// </summary>
+        public static string TransitStateExitPointChangedTitle {
+            get {
+                return ResourceManager.GetString("TransitStateExitPointChangedTitle", resourceCulture);
             }
         }
     }
