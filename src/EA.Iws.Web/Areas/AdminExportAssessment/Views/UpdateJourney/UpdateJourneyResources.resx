@@ -123,6 +123,12 @@
   <data name="ChangeExitPointTitle" xml:space="preserve">
     <value>Change point of exit</value>
   </data>
+  <data name="ChangeTransitStateEntryPointTitle" xml:space="preserve">
+    <value>Change transit state point of entry</value>
+  </data>
+  <data name="ChangeTransitStateExitPointTitle" xml:space="preserve">
+    <value>Change transit state point of exit</value>
+  </data>
   <data name="CompetentAuthority" xml:space="preserve">
     <value>Competent authority</value>
   </data>
@@ -149,5 +155,17 @@
   </data>
   <data name="PointOfExitCurrently" xml:space="preserve">
     <value>The point of exit is currently {0}</value>
+  </data>
+  <data name="TransitStateEntryPointChangedDescription" xml:space="preserve">
+    <value>The transit state point of entry has been changed to {0}</value>
+  </data>
+  <data name="TransitStateEntryPointChangedTitle" xml:space="preserve">
+    <value>Transit state point of entry changed</value>
+  </data>
+  <data name="TransitStateExitPointChangedDescription" xml:space="preserve">
+    <value>The transit state point of exit has been changed to {0}</value>
+  </data>
+  <data name="TransitStateExitPointChangedTitle" xml:space="preserve">
+    <value>Transit state point of exit changed</value>
   </data>
 </root>

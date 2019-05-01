@@ -18,6 +18,11 @@
                     <div class="column-half">
                         @transitState.EntryPoint.Name,
                         @transitState.Country.Name
+                        
+                        @if (Model.CanChangeTransitStateEntryExitPoint)
+                        {
+                            <div class="change-answer">@Html.ActionLink("Change", "TransitEntryPoint", "UpdateJourney", new { id = Model.NotificationId, transitStateId = transitState.Id }, null)</div>
+                        }
                     </div>
                 </div>
                 <div class="grid-row">
@@ -27,6 +32,11 @@
                     <div class="column-half">
                         @transitState.ExitPoint.Name,
                         @transitState.Country.Name
+                        
+                        @if (Model.CanChangeTransitStateEntryExitPoint)
+                        {
+                            <div class="change-answer">@Html.ActionLink("Change", "TransitExitPoint", "UpdateJourney", new { id = Model.NotificationId, transitStateId = transitState.Id }, null)</div>
+                        }
                     </div>
                 </div>
                 <div class="grid-row">
