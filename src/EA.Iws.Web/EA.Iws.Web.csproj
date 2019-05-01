@@ -1070,6 +1070,7 @@
     <Content Include="Areas\AdminImportNotificationMovements\Views\ShipmentAudit\Index.cshtml" />
     <Content Include="Areas\AdminExportAssessment\Views\Carrier\Add.cshtml" />
     <Content Include="Areas\AdminExportAssessment\Views\Carrier\CarrierBusinessTypeViewModel.cshtml" />
+    <Content Include="Areas\Reports\Views\Compliance\Index.cshtml" />
     <Content Include="Areas\AdminExportAssessment\Views\UpdateJourney\TransitEntryPoint.cshtml" />
     <Content Include="Areas\AdminExportAssessment\Views\UpdateJourney\TransitExitPoint.cshtml" />
     <Content Include="Areas\AdminExportAssessment\Views\UpdateJourney\TransitEntryPointChanged.cshtml" />
@@ -1314,6 +1315,13 @@
     </Compile>
     <Compile Include="Areas\AdminImportNotificationMovements\Controllers\ShipmentAuditController.cs" />
     <Compile Include="Areas\AdminImportNotificationMovements\ViewModels\ShipmentAudit\ShipmentAuditViewModel.cs" />
+    <Compile Include="Areas\Reports\Controllers\ComplianceController.cs" />
+    <Compile Include="Areas\Reports\ViewModels\Compliance\IndexViewModel.cs" />
+    <Compile Include="Areas\Reports\Views\Compliance\ComplianceResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ComplianceResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Mappings\AdminExportAssessment\EditEwcMap.cs" />
     <Compile Include="Mappings\NotificationAssessment\EditHCodeMap.cs" />
     <Compile Include="Mappings\NotificationAssessment\EditYCodeMap.cs" />
@@ -5096,6 +5104,10 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>IndexViewModelResources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\Reports\Views\Compliance\ComplianceResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ComplianceResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\Reports\Views\FinancialGuarantees\IndexResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

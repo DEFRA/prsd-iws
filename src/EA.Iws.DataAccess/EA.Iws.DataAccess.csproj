@@ -285,6 +285,7 @@
     <Compile Include="Repositories\NotificationUserRepository.cs" />
     <Compile Include="Repositories\PricingStructureRepository.cs" />
     <Compile Include="Repositories\ProducerRepository.cs" />
+    <Compile Include="Repositories\Reports\ComplianceRepository.cs" />
     <Compile Include="Repositories\Reports\FinancialGuaranteesRepository.cs" />
     <Compile Include="Repositories\Reports\ExportMovementsRepository.cs" />
     <Compile Include="Repositories\Reports\ExportStatsRepository.cs" />

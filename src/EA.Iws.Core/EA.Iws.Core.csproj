@@ -56,6 +56,8 @@
     <Compile Include="Admin\ExternalUserStatus.cs" />
     <Compile Include="Admin\NotificationInfo.cs" />
     <Compile Include="Admin\NotificationShipmentsCommentsType.cs" />
+    <Compile Include="Admin\Reports\ComplianceData.cs" />
+    <Compile Include="Admin\Reports\ComplianceDataReport.cs" />
     <Compile Include="Admin\Reports\FinancialGuaranteesData.cs" />
     <Compile Include="Admin\Reports\ExportMovementsData.cs" />
     <Compile Include="Admin\Reports\ImportStatsData.cs" />
@@ -239,6 +241,8 @@
     <Compile Include="OperationCodes\OperationCode.cs" />
     <Compile Include="OperationCodes\OperationCodeMetadata.cs" />
     <Compile Include="OperationCodes\OperationCodeTypeAttribute.cs" />
+    <Compile Include="Reports\Compliance\ComplianceReportDates.cs" />
+    <Compile Include="Reports\Compliance\ComplianceTextFields.cs" />
     <Compile Include="Reports\FOI\FOIOutputColumns.cs" />
     <Compile Include="Reports\FOI\FOIReportDates.cs" />
     <Compile Include="Reports\FOI\FOIReportTextFields.cs" />
