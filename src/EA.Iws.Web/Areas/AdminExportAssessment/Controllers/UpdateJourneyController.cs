@@ -19,6 +19,7 @@
     [AuthorizeActivity(typeof(SetExitPoint))]
     [AuthorizeActivity(typeof(AddTransitState))]
     [AuthorizeActivity(typeof(RemoveTransitState))]
+    [AuthorizeActivity(typeof(UpdateTransitStateEntryOrExit))]
     public class UpdateJourneyController : Controller
     {
         private readonly IMediator mediator;
@@ -199,6 +200,90 @@
                     NotificationAuditScreenType.Transits);
 
             return RedirectToAction("Index", "Overview");
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> TransitEntryPoint(Guid id, Guid transitStateId)
+        {
+            var transitStateData =
+                await mediator.SendAsync(new GetTransitStateWithEntryOrExitData(id, transitStateId));
+
+            var model = new TransitEntryPointViewModel(transitStateData.TransitState, transitStateData.EntryOrExitPoints);
+
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> TransitEntryPoint(Guid id, Guid transitStateId, TransitEntryPointViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return await TransitEntryPoint(id, transitStateId);
+            }
+
+            await mediator.SendAsync(new UpdateTransitStateEntryOrExit(id, transitStateId, model.SelectedEntryPoint, null));
+
+            await auditService.AddAuditEntry(mediator,
+                id,
+                User.GetUserId(),
+                NotificationAuditType.Updated,
+                NotificationAuditScreenType.Transits);
+
+            return RedirectToAction("TransitEntryPointChanged", new { id, transitStateId });
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> TransitEntryPointChanged(Guid id, Guid transitStateId)
+        {
+            var transitStateData =
+                await mediator.SendAsync(new GetTransitStateWithEntryOrExitData(id, transitStateId));
+
+            ViewBag.TransitEntryPoint = transitStateData.TransitState.EntryPoint.Name;
+
+            return View();
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> TransitExitPoint(Guid id, Guid transitStateId)
+        {
+            var transitStateData =
+                await mediator.SendAsync(new GetTransitStateWithEntryOrExitData(id, transitStateId));
+
+            var model = new TransitExitPointViewModel(transitStateData.TransitState, transitStateData.EntryOrExitPoints);
+
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> TransitExitPoint(Guid id, Guid transitStateId, TransitExitPointViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return await TransitExitPoint(id, transitStateId);
+            }
+
+            await mediator.SendAsync(new UpdateTransitStateEntryOrExit(id, transitStateId, null, model.SelectedExitPoint));
+
+            await auditService.AddAuditEntry(mediator,
+                id,
+                User.GetUserId(),
+                NotificationAuditType.Updated,
+                NotificationAuditScreenType.Transits);
+
+            return RedirectToAction("TransitExitPointChanged", new { id, transitStateId });
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> TransitExitPointChanged(Guid id, Guid transitStateId)
+        {
+            var transitStateData =
+                await mediator.SendAsync(new GetTransitStateWithEntryOrExitData(id, transitStateId));
+
+            ViewBag.TransitExitPoint = transitStateData.TransitState.ExitPoint.Name;
+
+            return View();
         }
     }
 }
