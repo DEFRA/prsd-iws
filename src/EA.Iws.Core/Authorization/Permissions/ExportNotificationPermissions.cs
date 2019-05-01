@@ -28,6 +28,8 @@
 
         public const string CanChangeEntryExitPoint = "Can Change Entry Exit Point";
 
+        public const string CanChangeTransitStateEntryExitPoint = "Can Change Transit Entry Exit Point";
+
         public const string CanAddProducer = "Can Add Producer";
 
         public const string CanAddRemoveTransitState = "Can Add Remove Transit State";

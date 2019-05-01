@@ -53,5 +53,7 @@
         public bool CanChangeEntryExitPoint { get; set; }
 
         public bool CanAddRemoveTransitState { get; set; }
+
+        public bool CanChangeTransitStateEntryExitPoint { get; set; }
     }
 }
