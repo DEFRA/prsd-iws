@@ -29,6 +29,7 @@
             { ReportingPermissions.CanViewFinanceReport, new[] { UserRole.Internal, UserRole.Administrator, UserRole.ReadOnly } },
             { ReportingPermissions.CanViewMissingShipmentsReport, new[] { UserRole.Internal, UserRole.Administrator, UserRole.ReadOnly } },
             { ReportingPermissions.CanViewFoiReport, new[] { UserRole.Internal, UserRole.Administrator, UserRole.ReadOnly } },
+            { ReportingPermissions.CanViewComplianceReport, new[] { UserRole.Internal, UserRole.Administrator, UserRole.ReadOnly } },
             { ReportingPermissions.CanViewImportNotificationsReport, new[] { UserRole.Internal, UserRole.Administrator, UserRole.ReadOnly } },
             { ReportingPermissions.CanViewImportStatsReport, new[] { UserRole.Internal, UserRole.Administrator, UserRole.ReadOnly } },
             { ReportingPermissions.CanViewExportMovementsReport, new[] { UserRole.Internal, UserRole.Administrator, UserRole.ReadOnly } },
