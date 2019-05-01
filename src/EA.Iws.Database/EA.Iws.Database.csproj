@@ -65,6 +65,9 @@
     <Content Include="scripts\Everytime\03-StoredProcedures\0007-elmah-LogError.sql" />
     <Content Include="scripts\Everytime\03-StoredProcedures\0009-uspUpdateExportMovementData.sql" />
     <Content Include="scripts\Everytime\03-StoredProcedures\0010-uspUpdateImportMovementData.sql" />
+    <Content Include="scripts\Everytime\03-StoredProcedures\0011-ExportCompliance.sql" />
+    <Content Include="scripts\Everytime\03-StoredProcedures\0012-ImportCompliance.sql" />
+    <Content Include="scripts\Everytime\03-StoredProcedures\0013-Compliance.sql" />
     <Content Include="scripts\Everytime\04-Synonyms\0001-elmah.sql" />
     <Content Include="scripts\Everytime\02-Views\0025-Reports-BlanketBonds.sql" />
     <Content Include="scripts\TestData\20190123-175000-create-submitted-notification-2504.sql" />
