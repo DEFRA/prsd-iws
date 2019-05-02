@@ -14,15 +14,13 @@
 
     internal class GetImportNotificationWasteTypesHandler : IRequestHandler<GetImportNotificationWasteTypes, WasteTypes>
     {
-        private readonly ImportNotificationContext context;
         private readonly IWasteTypeRepository wasteTypeRepository;
         private readonly IWasteCodeRepository wasteCodeRepository;
         private readonly IMapper mapper;
-        
-        public GetImportNotificationWasteTypesHandler(ImportNotificationContext context, 
-            IWasteCodeRepository wasteCodeRepository, IWasteTypeRepository wasteTypeRepository, IMapper mapper)
+
+        public GetImportNotificationWasteTypesHandler(IWasteCodeRepository wasteCodeRepository,
+            IWasteTypeRepository wasteTypeRepository, IMapper mapper)
         {
-            this.context = context;
             this.wasteTypeRepository = wasteTypeRepository;
             this.wasteCodeRepository = wasteCodeRepository;
             this.mapper = mapper;

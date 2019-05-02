@@ -110,8 +110,7 @@
 
         public UpdateWasteCodesViewModel Map(WasteTypes source)
         {
-            var model = new UpdateWasteCodesViewModel(source);
-            model.ImportNotificationId = source.ImportNotificationId;
+            var model = new UpdateWasteCodesViewModel(source) { ImportNotificationId = source.ImportNotificationId };
 
             if (source.SelectedEwcCodes != null)
             {

@@ -97,9 +97,18 @@
         [HttpGet]
         public async Task<ActionResult> WasteCodes(Guid id)
         {
-            var wasteCodes = await mediator.SendAsync(new GetImportNotificationWasteTypes(id));
+            var data = await mediator.SendAsync(new GetImportNotificationWasteTypes(id));
 
-            var model = mapper.Map<UpdateWasteCodesViewModel>(wasteCodes);
+            var model = mapper.Map<UpdateWasteCodesViewModel>(data);
+
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> WasteCodes(Guid id, UpdateWasteCodesViewModel model)
+        {
+            var data = await mediator.SendAsync(new GetImportNotificationWasteTypes(id));
 
             return View(model);
         }

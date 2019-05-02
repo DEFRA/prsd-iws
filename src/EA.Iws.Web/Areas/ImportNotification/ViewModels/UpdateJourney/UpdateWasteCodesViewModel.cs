@@ -34,36 +34,36 @@
 
         public Guid ImportNotificationId { get; set; }
 
-        [Display(Name = "BaselCodeNotListed", ResourceType = typeof(WasteCodesViewModelResources))]
+        [Display(Name = "BaselCodeNotListed", ResourceType = typeof(UpdateWasteCodesViewModelResources))]
         public bool BaselCodeNotListed { get; set; }
 
-        [Display(Name = "YCodeNotApplicable", ResourceType = typeof(WasteCodesViewModelResources))]
+        [Display(Name = "YCodeNotApplicable", ResourceType = typeof(UpdateWasteCodesViewModelResources))]
         public bool YCodeNotApplicable { get; set; }
 
-        [Display(Name = "HCodeNotApplicable", ResourceType = typeof(WasteCodesViewModelResources))]
+        [Display(Name = "HCodeNotApplicable", ResourceType = typeof(UpdateWasteCodesViewModelResources))]
         public bool HCodeNotApplicable { get; set; }
 
-        [Display(Name = "UnClassNotApplicable", ResourceType = typeof(WasteCodesViewModelResources))]
+        [Display(Name = "UnClassNotApplicable", ResourceType = typeof(UpdateWasteCodesViewModelResources))]
         public bool UnClassNotApplicable { get; set; }
 
-        [Display(Name = "WasteTypeName", ResourceType = typeof(WasteCodesViewModelResources))]
+        [Display(Name = "WasteTypeName", ResourceType = typeof(UpdateWasteCodesViewModelResources))]
         public string Name { get; set; }
 
         public IList<WasteCodeViewModel> AllCodes { get; set; }
 
-        [Display(Name = "BaselCode", ResourceType = typeof(WasteCodesViewModelResources))]
+        [Display(Name = "BaselCode", ResourceType = typeof(UpdateWasteCodesViewModelResources))]
         public Guid? SelectedBaselCode { get; set; }
 
-        [Display(Name = "EwcCode", ResourceType = typeof(WasteCodesViewModelResources))]
+        [Display(Name = "EwcCode", ResourceType = typeof(UpdateWasteCodesViewModelResources))]
         public Guid? SelectedEwcCode { get; set; }
 
-        [Display(Name = "YCode", ResourceType = typeof(WasteCodesViewModelResources))]
+        [Display(Name = "YCode", ResourceType = typeof(UpdateWasteCodesViewModelResources))]
         public Guid? SelectedYCode { get; set; }
 
-        [Display(Name = "HCode", ResourceType = typeof(WasteCodesViewModelResources))]
+        [Display(Name = "HCode", ResourceType = typeof(UpdateWasteCodesViewModelResources))]
         public Guid? SelectedHCode { get; set; }
 
-        [Display(Name = "UnClass", ResourceType = typeof(WasteCodesViewModelResources))]
+        [Display(Name = "UnClass", ResourceType = typeof(UpdateWasteCodesViewModelResources))]
         public Guid? SelectedUnClass { get; set; }
 
         public string SelectedEwcCodesJson { get; set; }

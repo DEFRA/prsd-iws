@@ -21,8 +21,10 @@
 
         public bool ShowChangeEntryExitPointLink { get; set; }
 
+        public bool ShowChangeWasteTypesLink { get; set; }
+
         public SummaryTableContainerViewModel(ImportNotificationSummary details, bool canChangeNumberOfShipments,
-            bool canChangeEntryExitPoint)
+            bool canChangeEntryExitPoint, bool canChangeWasteTypes)
         {
             Details = details;
             ShowChangeLinks = details.Status == ImportNotificationStatus.NotificationReceived;
@@ -30,6 +32,13 @@
                                               details.Status == ImportNotificationStatus.Consented;
             ShowChangeEntryExitPointLink = canChangeEntryExitPoint && details.Status != ImportNotificationStatus.New &&
                                            details.Status != ImportNotificationStatus.NotificationReceived;
+            ShowChangeWasteTypesLink = canChangeEntryExitPoint &&
+                                       (details.Status == ImportNotificationStatus.AwaitingPayment ||
+                                        details.Status == ImportNotificationStatus.AwaitingAssessment ||
+                                        details.Status == ImportNotificationStatus.InAssessment ||
+                                        details.Status == ImportNotificationStatus.ReadyToAcknowledge ||
+                                        details.Status == ImportNotificationStatus.DecisionRequiredBy ||
+                                        details.Status == ImportNotificationStatus.Consented);
 
             if (details.WasteType != null)
             {

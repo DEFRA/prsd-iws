@@ -3,18 +3,16 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Runtime.Remoting.Channels;
     using System.Threading.Tasks;
     using Core.ImportNotification.Update;
     using Core.WasteCodes;
-    using Domain.ImportNotification.WasteCodes;
     using Domain.NotificationApplication;
     using Prsd.Core.Mapper;
     using Core = Core.ImportNotification.Summary;
     using Domain = Domain.ImportNotification;
 
     internal class WasteTypeMap : IMap<Domain.WasteType, Core.WasteType>, 
-        IMapWithParameter<Domain.WasteType, IList<WasteCodeData>, WasteTypes>
+        IMapWithParameter<Domain.WasteType, List<WasteCodeData>, WasteTypes>
     {
         private readonly IWasteCodeRepository wasteCodeRepository;
 
@@ -96,7 +94,7 @@
             return wasteType;
         }
 
-        public WasteTypes Map(Domain.WasteType source, IList<WasteCodeData> wasteCodeData)
+        public WasteTypes Map(Domain.WasteType source, List<WasteCodeData> wasteCodeData)
         {
             if (source == null)
             {
