@@ -144,7 +144,7 @@
                     }
                     else if (value.Equals("G"))
                     {                      
-                        dataRow.Cell(column).FormulaA1 = "=CHAR(252)";
+                        dataRow.Cell(column).Value = "ü";
                         dataRow.Cell(column).Style.Fill.BackgroundColor = XLColor.FromHtml("#85994b");
                         dataRow.Cell(column).Style.Font.FontName = "Wingdings";
                         dataRow.Cell(column).Style.Font.FontSize = 24;
