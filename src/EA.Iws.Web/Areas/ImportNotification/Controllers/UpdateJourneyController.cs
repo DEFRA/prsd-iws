@@ -111,6 +111,10 @@
         {
             if (!ModelState.IsValid)
             {
+                var data = await mediator.SendAsync(new GetImportNotificationWasteTypes(id));
+
+                model = mapper.Map<UpdateWasteCodesViewModel>(model, data.AllCodes);
+
                 return View(model);
             }
 

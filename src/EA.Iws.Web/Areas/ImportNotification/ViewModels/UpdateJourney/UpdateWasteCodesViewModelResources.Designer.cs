@@ -80,11 +80,29 @@ namespace EA.Iws.Web.Areas.ImportNotification.ViewModels.UpdateJourney {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Please select a Basel or OECD code or mark as not listed.
+        /// </summary>
+        public static string BaselCodeRequired {
+            get {
+                return ResourceManager.GetString("BaselCodeRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to EWC code(s).
         /// </summary>
         public static string EwcCode {
             get {
                 return ResourceManager.GetString("EwcCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please select an EWC code.
+        /// </summary>
+        public static string EwcCodeRequired {
+            get {
+                return ResourceManager.GetString("EwcCodeRequired", resourceCulture);
             }
         }
         
@@ -107,6 +125,15 @@ namespace EA.Iws.Web.Areas.ImportNotification.ViewModels.UpdateJourney {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Please select a H code or mark as not applicable.
+        /// </summary>
+        public static string HCodeRequired {
+            get {
+                return ResourceManager.GetString("HCodeRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to UN class(es).
         /// </summary>
         public static string UnClass {
@@ -121,6 +148,24 @@ namespace EA.Iws.Web.Areas.ImportNotification.ViewModels.UpdateJourney {
         public static string UnClassNotApplicable {
             get {
                 return ResourceManager.GetString("UnClassNotApplicable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please select a UN class or mark as not applicable.
+        /// </summary>
+        public static string UnClassRequired {
+            get {
+                return ResourceManager.GetString("UnClassRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please enter the name of the waste.
+        /// </summary>
+        public static string WasteNameRequired {
+            get {
+                return ResourceManager.GetString("WasteNameRequired", resourceCulture);
             }
         }
         
@@ -148,6 +193,15 @@ namespace EA.Iws.Web.Areas.ImportNotification.ViewModels.UpdateJourney {
         public static string YCodeNotApplicable {
             get {
                 return ResourceManager.GetString("YCodeNotApplicable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please select a Y code or mark as not applicable.
+        /// </summary>
+        public static string YCodeRequired {
+            get {
+                return ResourceManager.GetString("YCodeRequired", resourceCulture);
             }
         }
     }

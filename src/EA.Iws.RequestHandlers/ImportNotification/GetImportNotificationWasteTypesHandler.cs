@@ -1,11 +1,9 @@
 ﻿namespace EA.Iws.RequestHandlers.ImportNotification
 {
-    using System;
     using System.Linq;
     using System.Threading.Tasks;
     using Core.ImportNotification.Update;
     using Core.WasteCodes;
-    using DataAccess;
     using Domain.ImportNotification;
     using Domain.NotificationApplication;
     using Prsd.Core.Mapper;

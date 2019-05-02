@@ -38,16 +38,19 @@
     @using (Html.BeginForm())
     {
         @Html.AntiForgeryToken()
+        @Html.Gds().ValidationSummary()
         @Html.HiddenFor(m => m.ImportNotificationId)
 
         <div class="form-group @Html.Gds().FormGroupClass(m => m.Name)">
             @Html.Gds().LabelFor(m => m.Name, showOptionalLabel: false)
+            @Html.Gds().ValidationMessageFor(m => m.Name)
             @Html.Gds().TextBoxFor(m => m.Name, new { maxLength = 70 })
         </div>
 
         <div class="form-group">
             <div class="form-group-compound @Html.Gds().FormGroupClass(m => m.SelectedBaselCode)">
                 @Html.Gds().LabelFor(m => m.SelectedBaselCode, showOptionalLabel: false)
+                @Html.Gds().ValidationMessageFor(m => m.SelectedBaselCode)
                 @Html.Gds().DropDownListFor(m => m.SelectedBaselCode, Model.BaselCodes, string.Empty, new { data_select_box = "true" })
             </div>
 
@@ -62,6 +65,7 @@
         <div class="form-group">
             <div class="form-group-compound @Html.Gds().FormGroupClass(m => m.SelectedEwcCode)">
                 @Html.Gds().LabelFor(m => m.SelectedEwcCode, showOptionalLabel: false)
+                @Html.Gds().ValidationMessageFor(m => m.SelectedEwcCode)
                 @Html.Gds().DropDownListFor(m => m.SelectedEwcCode, Model.EwcCodes, string.Empty, new { data_select_box = "true" })
                 @Html.HiddenFor(model => Model.SelectedEwcCodesJson)
                 <button type="button"
@@ -82,6 +86,7 @@
         <div class="form-group">
             <div class="form-group-compound @Html.Gds().FormGroupClass(m => m.SelectedHCode)">
                 @Html.Gds().LabelFor(m => m.SelectedHCode, showOptionalLabel: false)
+                @Html.Gds().ValidationMessageFor(m => m.SelectedHCode)
                 @Html.Gds().DropDownListFor(m => m.SelectedHCode, Model.HCodes, string.Empty, new { data_select_box = "true" })
                 @Html.HiddenFor(model => Model.SelectedHCodesJson)
                 <button type="button"
@@ -109,6 +114,7 @@
         <div class="form-group">
             <div class="form-group-compound @Html.Gds().FormGroupClass(m => m.SelectedYCode)">
                 @Html.Gds().LabelFor(m => m.SelectedYCode, showOptionalLabel: false)
+                @Html.Gds().ValidationMessageFor(m => m.SelectedYCode)
                 @Html.Gds().DropDownListFor(m => m.SelectedYCode, Model.YCodes, string.Empty, new { data_select_box = "true" })
                 @Html.HiddenFor(model => Model.SelectedYCodesJson)
                 <button type="button"
@@ -136,6 +142,7 @@
         <div class="form-group">
             <div class="form-group-compound @Html.Gds().FormGroupClass(m => m.SelectedUnClass)">
                 @Html.Gds().LabelFor(m => m.SelectedUnClass, showOptionalLabel: false)
+                @Html.Gds().ValidationMessageFor(m => m.SelectedUnClass)
                 @Html.Gds().DropDownListFor(m => m.SelectedUnClass, Model.UnClasses, string.Empty, new { data_select_box = "true" })
                 @Html.HiddenFor(model => Model.SelectedUnClassesJson)
                 <button type="button"

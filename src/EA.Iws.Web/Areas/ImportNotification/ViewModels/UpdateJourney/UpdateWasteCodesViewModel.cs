@@ -7,10 +7,10 @@
     using System.Web.Mvc;
     using Core.ImportNotification.Update;
     using Core.WasteCodes;
+    using Newtonsoft.Json;
     using Shared;
-    using WasteCodes;
 
-    public class UpdateWasteCodesViewModel
+    public class UpdateWasteCodesViewModel : IValidatableObject
     {
         public UpdateWasteCodesViewModel()
         {
@@ -133,6 +133,44 @@
                     "Id",
                     "Name",
                     SelectedUnClass);
+            }
+        }
+
+        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+        {
+            if (string.IsNullOrWhiteSpace(Name))
+            {
+                yield return new ValidationResult(UpdateWasteCodesViewModelResources.WasteNameRequired, new[] { "Name" });
+            }
+
+            if (!BaselCodeNotListed && !SelectedBaselCode.HasValue)
+            {
+                yield return new ValidationResult(UpdateWasteCodesViewModelResources.BaselCodeRequired, new[] { "SelectedBaselCode" });
+            }
+
+            var selectedEwcCodes = JsonConvert.DeserializeObject<List<Guid>>(SelectedEwcCodesJson);
+            var selectedHCodes = JsonConvert.DeserializeObject<List<Guid>>(SelectedHCodesJson);
+            var selectedYCodes = JsonConvert.DeserializeObject<List<Guid>>(SelectedYCodesJson);
+            var selectedUnCodes = JsonConvert.DeserializeObject<List<Guid>>(SelectedUnClassesJson);
+
+            if (!selectedEwcCodes.Any())
+            {
+                yield return new ValidationResult(UpdateWasteCodesViewModelResources.EwcCodeRequired, new[] { "SelectedEwcCode" });
+            }
+
+            if (!HCodeNotApplicable && !selectedHCodes.Any())
+            {
+                yield return new ValidationResult(UpdateWasteCodesViewModelResources.HCodeRequired, new[] { "SelectedHCode" });
+            }
+
+            if (!YCodeNotApplicable && !selectedYCodes.Any())
+            {
+                yield return new ValidationResult(UpdateWasteCodesViewModelResources.YCodeRequired, new[] { "SelectedYCode" });
+            }
+
+            if (!UnClassNotApplicable && !selectedUnCodes.Any())
+            {
+                yield return new ValidationResult(UpdateWasteCodesViewModelResources.UnClassRequired, new[] { "SelectedUnClass" });
             }
         }
     }

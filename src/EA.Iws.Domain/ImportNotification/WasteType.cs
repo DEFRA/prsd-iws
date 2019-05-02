@@ -4,7 +4,6 @@
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
     using System.Linq;
-    using Core.WasteCodes;
     using Core.WasteType;
     using Prsd.Core;
     using Prsd.Core.Domain;

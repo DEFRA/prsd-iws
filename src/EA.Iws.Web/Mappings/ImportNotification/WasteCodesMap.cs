@@ -15,7 +15,8 @@
     public class WasteCodesMap : IMap<WasteCodesViewModel, WasteType>,
         IMapWithParameter<WasteType, List<WasteCodeData>, WasteCodesViewModel>,
         IMap<WasteTypes, UpdateWasteCodesViewModel>,
-        IMap<UpdateWasteCodesViewModel, WasteTypes>
+        IMap<UpdateWasteCodesViewModel, WasteTypes>,
+        IMapWithParameter<UpdateWasteCodesViewModel, List<WasteCodeData>, UpdateWasteCodesViewModel>
     {
         private readonly IMapper mapper;
 
@@ -152,6 +153,49 @@
             model.AllCodes = mapper.Map<List<WasteCodeViewModel>>(source.AllCodes);
 
             return model;
+        }
+
+        public UpdateWasteCodesViewModel Map(UpdateWasteCodesViewModel source, List<WasteCodeData> parameter)
+        {
+            if (source.SelectedEwcCodesJson != null)
+            {
+                var selectedCodes = JsonConvert.DeserializeObject<List<Guid>>(source.SelectedEwcCodesJson);
+                source.SelectedEwcCodesDisplay = mapper.Map<List<WasteCodeViewModel>>(parameter
+                    .Where(p =>
+                        selectedCodes.Contains(p.Id))
+                    .ToList());
+            }
+
+            if (source.SelectedYCodesJson != null)
+            {
+                var selectedCodes = JsonConvert.DeserializeObject<List<Guid>>(source.SelectedYCodesJson);
+                source.SelectedYCodesDisplay = mapper.Map<List<WasteCodeViewModel>>(parameter
+                    .Where(p =>
+                        selectedCodes.Contains(p.Id))
+                    .ToList());
+            }
+
+            if (source.SelectedHCodesJson != null)
+            {
+                var selectedCodes = JsonConvert.DeserializeObject<List<Guid>>(source.SelectedHCodesJson);
+                source.SelectedHCodesDisplay = mapper.Map<List<WasteCodeViewModel>>(parameter
+                    .Where(p =>
+                        selectedCodes.Contains(p.Id))
+                    .ToList());
+            }
+
+            if (source.SelectedUnClassesJson != null)
+            {
+                var selectedCodes = JsonConvert.DeserializeObject<List<Guid>>(source.SelectedUnClassesJson);
+                source.SelectedUnClassesDisplay = mapper.Map<List<WasteCodeViewModel>>(parameter
+                    .Where(p =>
+                        selectedCodes.Contains(p.Id))
+                        .ToList());
+            }
+
+            source.AllCodes = mapper.Map<List<WasteCodeViewModel>>(parameter);
+
+            return source;
         }
 
         public WasteTypes Map(UpdateWasteCodesViewModel source)
