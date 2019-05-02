@@ -84,34 +84,6 @@
         </div>
 
         <div class="form-group">
-            <div class="form-group-compound @Html.Gds().FormGroupClass(m => m.SelectedHCode)">
-                @Html.Gds().LabelFor(m => m.SelectedHCode, showOptionalLabel: false)
-                @Html.Gds().ValidationMessageFor(m => m.SelectedHCode)
-                @Html.Gds().DropDownListFor(m => m.SelectedHCode, Model.HCodes, string.Empty, new { data_select_box = "true" })
-                @Html.HiddenFor(model => Model.SelectedHCodesJson)
-                <button type="button"
-                        class="add"
-                        data-action="add"
-                        data-json-codes-id="#SelectedHCodesJson"
-                        data-selected-code-id="#SelectedHCode"
-                        data-table-id="#h-codes-table">
-                    Add
-                </button>
-            </div>
-
-            <div class="form-group-compound @Html.Gds().FormGroupClass(m => m.HCodeNotApplicable)">
-                <label for="HCodeNotApplicable">
-                    @Html.CheckBoxFor(m => m.HCodeNotApplicable)
-                    @Html.DisplayNameFor(m => m.HCodeNotApplicable)
-                </label>
-            </div>
-
-            <div class="form-group">
-                @DisplayCodeTable("h-codes-table", WasteCodesResources.HCodesTableHeading, "#SelectedHCodesJson", Model.SelectedHCodesDisplay)
-            </div>
-        </div>
-
-        <div class="form-group">
             <div class="form-group-compound @Html.Gds().FormGroupClass(m => m.SelectedYCode)">
                 @Html.Gds().LabelFor(m => m.SelectedYCode, showOptionalLabel: false)
                 @Html.Gds().ValidationMessageFor(m => m.SelectedYCode)
@@ -136,6 +108,34 @@
 
             <div class="form-group">
                 @DisplayCodeTable("y-codes-table", WasteCodesResources.YCodesTableHeading, "#SelectedYCodesJson", Model.SelectedYCodesDisplay)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="form-group-compound @Html.Gds().FormGroupClass(m => m.SelectedHCode)">
+                @Html.Gds().LabelFor(m => m.SelectedHCode, showOptionalLabel: false)
+                @Html.Gds().ValidationMessageFor(m => m.SelectedHCode)
+                @Html.Gds().DropDownListFor(m => m.SelectedHCode, Model.HCodes, string.Empty, new { data_select_box = "true" })
+                @Html.HiddenFor(model => Model.SelectedHCodesJson)
+                <button type="button"
+                        class="add"
+                        data-action="add"
+                        data-json-codes-id="#SelectedHCodesJson"
+                        data-selected-code-id="#SelectedHCode"
+                        data-table-id="#h-codes-table">
+                    Add
+                </button>
+            </div>
+
+            <div class="form-group-compound @Html.Gds().FormGroupClass(m => m.HCodeNotApplicable)">
+                <label for="HCodeNotApplicable">
+                    @Html.CheckBoxFor(m => m.HCodeNotApplicable)
+                    @Html.DisplayNameFor(m => m.HCodeNotApplicable)
+                </label>
+            </div>
+
+            <div class="form-group">
+                @DisplayCodeTable("h-codes-table", WasteCodesResources.HCodesTableHeading, "#SelectedHCodesJson", Model.SelectedHCodesDisplay)
             </div>
         </div>
 
