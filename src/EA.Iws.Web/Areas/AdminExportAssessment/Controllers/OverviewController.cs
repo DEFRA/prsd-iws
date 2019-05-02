@@ -38,11 +38,19 @@
             var canEditOperationCodes = Task.Run(() => authorizationService.AuthorizeActivity(ExportNotificationPermissions.CanEditOperationCodes)).Result;
             var canEditHCodes = Task.Run(() => authorizationService.AuthorizeActivity(ExportNotificationPermissions.CanEditHCodes)).Result;
             var canAddCarrier = Task.Run(() => authorizationService.AuthorizeActivity(ExportNotificationPermissions.CanAddCarrier)).Result;
+            var canChangeTransitStateEntryExitPoint =
+                Task.Run(
+                    () =>
+                        authorizationService.AuthorizeActivity(
+                            ExportNotificationPermissions.CanChangeTransitStateEntryExitPoint)).Result;
 
             var model = new NotificationOverviewViewModel(result);
             model.AmountsAndDatesViewModel.CanChangeNumberOfShipments = canChangeNumberOfShipments;
             model.JourneyViewModel.CanChangeEntryExitPoint = canChangeEntryExitPoints;
             model.JourneyViewModel.CanAddRemoveTransitState = canAddRemoveTransitState && IsEditableStatus(result.SubmitSummaryData.Status);
+            model.JourneyViewModel.CanChangeTransitStateEntryExitPoint = canChangeTransitStateEntryExitPoint &&
+                                                                         result.SubmitSummaryData.Status ==
+                                                                         NotificationStatus.Consented;
             model.OrganisationsInvolvedViewModel.CanAddProducer = canAddProducer;
             model.OrganisationsInvolvedViewModel.CanEditContactDetails = canEditContactDetails;
             model.WasteCodeOverviewViewModel.CanEditEWCCodes = canEditEwcCodes && result.SubmitSummaryData.Status == NotificationStatus.Consented;

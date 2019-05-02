@@ -117,6 +117,7 @@
     <Compile Include="Admin\NotificationAssessment\SetNotificationTransmittedDateHandler.cs" />
     <Compile Include="Admin\NotificationAssessment\SetNotificationAcknowledgedDateHandler.cs" />
     <Compile Include="Admin\NotificationAssessment\UnlockNotificationHandler.cs" />
+    <Compile Include="Admin\Reports\GetComplianceReportHandler.cs" />
     <Compile Include="Admin\Reports\GetFinancialGuaranteesReportHandler.cs" />
     <Compile Include="Admin\Reports\GetExportMovementsReportHandler.cs" />
     <Compile Include="Admin\Reports\GetImportStatsReportHandler.cs" />
@@ -470,6 +471,7 @@
     <Compile Include="NotificationAssessment\GetStateOfExportDataHandler.cs" />
     <Compile Include="NotificationAssessment\GetStateOfImportDataHandler.cs" />
     <Compile Include="NotificationAssessment\GetTransactionByIdHandler.cs" />
+    <Compile Include="NotificationAssessment\GetTransitStateWithEntryOrExitDataHandler.cs" />
     <Compile Include="NotificationAssessment\MarkAsInterimHandler.cs" />
     <Compile Include="NotificationAssessment\RemoveTransitStateHandler.cs" />
     <Compile Include="NotificationAssessment\SetExitPointHandler.cs" />
@@ -477,6 +479,7 @@
     <Compile Include="NotificationAssessment\SetExporterContactHandler.cs" />
     <Compile Include="NotificationAssessment\SetNewNumberOfShipmentsHandler.cs" />
     <Compile Include="NotificationAssessment\SetEntryPointHandler.cs" />
+    <Compile Include="NotificationAssessment\UpdateTransitStateEntryOrExitHandler.cs" />
     <Compile Include="NotificationAssessment\UpdateEwcCodeHandler.cs" />
     <Compile Include="NotificationAssessment\SetOperationCodesHandler.cs" />
     <Compile Include="NotificationAssessment\UpdateExportAccountManagementCommentsHandler.cs" />

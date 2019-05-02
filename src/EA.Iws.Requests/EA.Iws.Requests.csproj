@@ -83,6 +83,7 @@
     <Compile Include="Admin\NotificationAssessment\SetNotificationAcknowledgedDate.cs" />
     <Compile Include="Admin\NotificationAssessment\SetNotificationReceivedDate.cs" />
     <Compile Include="Admin\NotificationAssessment\UnlockNotification.cs" />
+    <Compile Include="Admin\Reports\GetComplianceReport.cs" />
     <Compile Include="Admin\Reports\GetFinancialGuaranteesReport.cs" />
     <Compile Include="Admin\Reports\GetExportMovementsReport.cs" />
     <Compile Include="Admin\Reports\GetImportStatsReport.cs" />
@@ -242,6 +243,9 @@
     <Compile Include="NotificationAssessment\DeleteNotificationComment.cs" />
     <Compile Include="NotificationAssessment\GetNotificationComments.cs" />
     <Compile Include="NotificationAssessment\GetNotificationCommentsUsers.cs" />
+    <Compile Include="NotificationAssessment\GetTransitStateWithEntryOrExitData.cs" />
+    <Compile Include="NotificationAssessment\UpdateTransitStateEntryOrExit.cs" />
+    <Compile Include="NotificationAssessment\TransitStateWithEntryOrExitPointsData.cs" />
     <Compile Include="NotificationAssessment\UpdateEwcCode.cs" />
     <Compile Include="NotificationAssessment\SetOperationCodes.cs" />
     <Compile Include="NotificationAssessment\UpdateExportNotificationAssementCommets.cs" />
