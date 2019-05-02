@@ -128,10 +128,10 @@ FROM
 		INNER JOIN	[ImportNotification].[Consent] AS C
 		ON	[N].[Id] = [C].NotificationId
 		INNER JOIN [ImportNotification].Shipment S ON S.ImportNotificationId = N.Id	
-		LEFT JOIN [Notification].NotificationDates D ON D.[NotificationAssessmentId] = NA.[Id]			 
+		LEFT JOIN [ImportNotification].NotificationDates D ON D.[NotificationAssessmentId] = NA.[Id]			 
 		WHERE
 		CompetentAuthority = @competentAuthority
-	                AND (@dateType = 'NotificationReceivedDate' AND  [NotificationReceivedDate] BETWEEN @from AND @to
+	                AND (@dateType = 'NotificationReceivedDate' AND  D.[NotificationReceivedDate] BETWEEN @from AND @to
                                          OR @dateType = 'ConsentFrom' AND  C.[From]  BETWEEN @from AND @to
                                          OR @dateType = 'ConsentTo' AND  C.[To] BETWEEN @from AND @to	)	
 		GROUP BY
