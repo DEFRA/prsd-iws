@@ -18,15 +18,16 @@
         private bool fixedWidthFormat;
         private const int MaxPixelColWidth = 150;
         private string columnsToHide;
-
+        private string columnsToProcess;
         public XlsxActionResult(IEnumerable<T> data, 
             string fileDownloadName, 
-            bool fixedWidthFormat = false, string columnsToHide = null) : base(MimeTypes.MSExcelXml)
+            bool fixedWidthFormat = false, string columnsToHide = null, string columnsToProcess = null) : base(MimeTypes.MSExcelXml)
         {
             this.data = data;
             FileDownloadName = fileDownloadName;
             this.fixedWidthFormat = fixedWidthFormat;
             this.columnsToHide = columnsToHide;
+            this.columnsToProcess = columnsToProcess;
         }
 
         protected override void WriteFile(HttpResponseBase response)
@@ -52,6 +53,11 @@
             if (!string.IsNullOrEmpty(columnsToHide))
             {
                 workSheet.Columns(columnsToHide).Delete();
+            }
+
+            if (!string.IsNullOrEmpty(columnsToProcess))
+            {
+                FormatColumns();
             }
 
             if (fixedWidthFormat)
@@ -119,5 +125,43 @@
 
             return ((pixels * 256 / 7) - (128 / 7)) / 256;
         }
+
+        private void FormatColumns()
+        {
+            var columnsLetters = columnsToProcess.Split(',');
+
+            var nonemptyDataRows = workSheet.RowsUsed();
+            foreach (var dataRow in nonemptyDataRows)
+            {
+                for (int i = 0; i < columnsLetters.Length; i++)
+                {
+                    string column = columnsLetters[i];
+                    string value = dataRow.Cell(column).GetValue<string>().Trim();
+                    if (value.Equals("A"))
+                    {
+                       dataRow.Cell(column).Style.Fill.BackgroundColor = XLColor.FromHtml("#ffbf47");
+                       dataRow.Cell(column).Value = string.Empty;
+                    }
+                    else if (value.Equals("G"))
+                    {                      
+                        dataRow.Cell(column).FormulaA1 = "=CHAR(252)";
+                        dataRow.Cell(column).Style.Fill.BackgroundColor = XLColor.FromHtml("#85994b");
+                        dataRow.Cell(column).Style.Font.FontName = "Wingdings";
+                        dataRow.Cell(column).Style.Font.FontSize = 24;
+                    }
+                    else if (value.Equals("R"))
+                    {                       
+                        dataRow.Cell(column).Value = "û";
+                        dataRow.Cell(column).Style.Fill.BackgroundColor = XLColor.FromHtml("#b10e1e");
+                        dataRow.Cell(column).Style.Font.FontColor = XLColor.White;
+                        dataRow.Cell(column).Style.Font.FontName = "Wingdings";
+                        dataRow.Cell(column).Style.Font.FontSize = 24;
+                    }
+                    dataRow.Cell(column).Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
+                    dataRow.Cell(column).Style.Alignment.Vertical = XLAlignmentVerticalValues.Center;                    
+                }
+                dataRow.Cells().Style.Border.OutsideBorder = XLBorderStyleValues.Thick;
+             }
+         }
     }
 }
