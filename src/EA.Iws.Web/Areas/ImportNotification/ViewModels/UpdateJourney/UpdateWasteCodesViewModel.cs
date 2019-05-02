@@ -70,6 +70,7 @@
         public string SelectedYCodesJson { get; set; }
         public string SelectedHCodesJson { get; set; }
         public string SelectedUnClassesJson { get; set; }
+
         public IList<WasteCodeViewModel> SelectedEwcCodesDisplay { get; set; }
         public IList<WasteCodeViewModel> SelectedYCodesDisplay { get; set; }
         public IList<WasteCodeViewModel> SelectedHCodesDisplay { get; set; }

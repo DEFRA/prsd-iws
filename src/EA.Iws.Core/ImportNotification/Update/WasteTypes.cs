@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using WasteCodes;
+    using WasteType;
 
     public class WasteTypes
     {

@@ -1,6 +1,7 @@
 ﻿namespace EA.Iws.Domain.ImportNotification.WasteCodes
 {
     using System;
+    using Core.WasteCodes;
     using Prsd.Core.Domain;
 
     public class WasteTypeWasteCode : Entity

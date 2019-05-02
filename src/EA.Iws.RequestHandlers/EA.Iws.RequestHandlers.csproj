@@ -284,6 +284,8 @@
     <Compile Include="ImportNotification\Summary\TransportRouteSummary.cs" />
     <Compile Include="ImportNotification\Summary\WasteTypeSummary.cs" />
     <Compile Include="ImportNotification\TransportRoute\GetTransitStateDataForTransitStateHandler.cs" />
+    <Compile Include="ImportNotification\UpdateImportNotificationWasteTypesHandler.cs" />
+    <Compile Include="ImportNotification\UpdateWasteCodeData.cs" />
     <Compile Include="ImportNotification\Validate\AddressValidator.cs" />
     <Compile Include="ImportNotification\Validate\AddressValidatorResources.Designer.cs">
       <AutoGen>True</AutoGen>

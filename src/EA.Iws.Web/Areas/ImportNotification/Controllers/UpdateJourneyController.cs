@@ -3,6 +3,7 @@
     using System;
     using System.Threading.Tasks;
     using System.Web.Mvc;
+    using Core.ImportNotification.Update;
     using Infrastructure.Authorization;
     using Prsd.Core.Mapper;
     using Prsd.Core.Mediator;
@@ -108,9 +109,16 @@
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> WasteCodes(Guid id, UpdateWasteCodesViewModel model)
         {
-            var data = await mediator.SendAsync(new GetImportNotificationWasteTypes(id));
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
 
-            return View(model);
+            var wasteTypes = mapper.Map<WasteTypes>(model);
+
+            await mediator.SendAsync(new UpdateImportNotificationWasteTypes(id, wasteTypes));
+
+            return RedirectToAction("Index", "Home");
         }
     }
 }

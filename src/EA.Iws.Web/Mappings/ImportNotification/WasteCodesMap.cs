@@ -14,7 +14,8 @@
 
     public class WasteCodesMap : IMap<WasteCodesViewModel, WasteType>,
         IMapWithParameter<WasteType, List<WasteCodeData>, WasteCodesViewModel>,
-        IMap<WasteTypes, UpdateWasteCodesViewModel>
+        IMap<WasteTypes, UpdateWasteCodesViewModel>,
+        IMap<UpdateWasteCodesViewModel, WasteTypes>
     {
         private readonly IMapper mapper;
 
@@ -151,6 +152,45 @@
             model.AllCodes = mapper.Map<List<WasteCodeViewModel>>(source.AllCodes);
 
             return model;
+        }
+
+        public WasteTypes Map(UpdateWasteCodesViewModel source)
+        {
+            var wasteType = new WasteTypes(source.ImportNotificationId)
+            {
+                Name = source.Name,
+                BaselCodeNotListed = source.BaselCodeNotListed,
+                YCodeNotApplicable = source.YCodeNotApplicable,
+                HCodeNotApplicable = source.HCodeNotApplicable,
+                UnClassNotApplicable = source.UnClassNotApplicable,
+            };
+
+            if (!source.BaselCodeNotListed)
+            {
+                wasteType.SelectedBaselCode = source.SelectedBaselCode;
+            }
+
+            if (source.SelectedEwcCodesJson != null)
+            {
+                wasteType.SelectedEwcCodes = JsonConvert.DeserializeObject<List<Guid>>(source.SelectedEwcCodesJson);
+            }
+
+            if (source.SelectedYCodesJson != null && !source.YCodeNotApplicable)
+            {
+                wasteType.SelectedYCodes = JsonConvert.DeserializeObject<List<Guid>>(source.SelectedYCodesJson);
+            }
+
+            if (source.SelectedHCodesJson != null && !source.HCodeNotApplicable)
+            {
+                wasteType.SelectedHCodes = JsonConvert.DeserializeObject<List<Guid>>(source.SelectedHCodesJson);
+            }
+
+            if (source.SelectedUnClassesJson != null && !source.UnClassNotApplicable)
+            {
+                wasteType.SelectedUnClasses = JsonConvert.DeserializeObject<List<Guid>>(source.SelectedUnClassesJson);
+            }
+
+            return wasteType;
         }
     }
 }

@@ -6,12 +6,15 @@
     using System.Linq;
     using System.Threading.Tasks;
     using Core.ImportNotification.Draft;
+    using Core.ImportNotification.Update;
     using Domain.ImportNotification.WasteCodes;
     using Prsd.Core.Mapper;
+    using RequestHandlers.ImportNotification;
     using ChemicalComposition = Core.WasteType.ChemicalComposition;
 
     [SuppressMessage("StyleCop.CSharp.NamingRules", "SA1305:FieldNamesMustNotUseHungarianNotation", Justification = "Variables relate to waste codes")]
-    internal class WasteTypeMap : IMapWithParameter<WasteType, ChemicalComposition, Domain.ImportNotification.WasteType>
+    internal class WasteTypeMap : IMapWithParameter<WasteType, ChemicalComposition, Domain.ImportNotification.WasteType>, 
+        IMap<WasteTypes, UpdateWasteCodeData>
     {
         private readonly Domain.NotificationApplication.IWasteCodeRepository wasteCodeRepository;
 
@@ -36,6 +39,19 @@
                 hCode,
                 unClass,
                 parameter);
+        }
+
+        public UpdateWasteCodeData Map(WasteTypes source)
+        {
+            return new UpdateWasteCodeData()
+            {
+                Name = source.Name,
+                BaselOecdCode = CreateBaselCode(source.BaselCodeNotListed, source.SelectedBaselCode),
+                EwcCode = CreateEwcCode(source.SelectedEwcCodes),
+                YCode = CreateYCode(source.YCodeNotApplicable, source.SelectedYCodes),
+                HCode = CreateHCode(source.HCodeNotApplicable, source.SelectedHCodes),
+                UnClass = CreateUnClass(source.UnClassNotApplicable, source.SelectedUnClasses)
+            };
         }
 
         private BaselOecdCode CreateBaselCode(bool notListed, Guid? codeId)

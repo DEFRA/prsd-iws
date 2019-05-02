@@ -6,6 +6,7 @@
     using System.Threading.Tasks;
     using Core.ImportNotification.Update;
     using Core.WasteCodes;
+    using Domain.ImportNotification.WasteCodes;
     using Domain.NotificationApplication;
     using Prsd.Core.Mapper;
     using Core = Core.ImportNotification.Summary;
