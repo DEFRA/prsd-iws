@@ -160,7 +160,7 @@
                     dataRow.Cell(column).Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
                     dataRow.Cell(column).Style.Alignment.Vertical = XLAlignmentVerticalValues.Center;                    
                 }
-                dataRow.Cells().Style.Border.OutsideBorder = XLBorderStyleValues.Thick;
+                dataRow.Cells().Style.Border.OutsideBorder = XLBorderStyleValues.Thin;
              }
          }
     }
