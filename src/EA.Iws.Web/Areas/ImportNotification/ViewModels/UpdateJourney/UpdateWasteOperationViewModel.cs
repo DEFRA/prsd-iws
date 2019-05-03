@@ -11,7 +11,7 @@
     using Prsd.Core.Helpers;
     using Web.ViewModels.Shared;
 
-    public class UpdateWasteOperationViewModel
+    public class UpdateWasteOperationViewModel : IValidatableObject
     {
         public UpdateWasteOperationViewModel()
         {
@@ -61,6 +61,14 @@
                 OperationCodeMetadata.GetCodesForOperation(details.NotificationType)
                     .Select(c => new KeyValuePairViewModel<OperationCode, bool>(c, SelectedCodes.Contains(c)))
                     .ToList();
+        }
+
+        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+        {
+            if (!SelectedCodes.Any())
+            {
+                yield return new ValidationResult(UpdateWasteOperationViewModelResources.OperationCodesEmpty, new[] { "Codes" });
+            }
         }
     }
 }

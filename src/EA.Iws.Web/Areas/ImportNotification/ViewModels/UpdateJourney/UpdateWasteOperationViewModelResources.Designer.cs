@@ -62,6 +62,15 @@ namespace EA.Iws.Web.Areas.ImportNotification.ViewModels.UpdateJourney {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Please enter the waste operation codes.
+        /// </summary>
+        public static string OperationCodesEmpty {
+            get {
+                return ResourceManager.GetString("OperationCodesEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Brief description of the technologies and processes.
         /// </summary>
         public static string TechnologyEmployed {

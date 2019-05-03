@@ -17,6 +17,7 @@
     </h2>
 
     <div class="form-group inline multi-line @Html.Gds().FormGroupClass(m => m.Codes)">
+        @Html.Gds().ValidationMessageFor(m => m.Codes)
         <fieldset>
             @for (var i = 0; i < Model.Codes.Count; i++)
             {
