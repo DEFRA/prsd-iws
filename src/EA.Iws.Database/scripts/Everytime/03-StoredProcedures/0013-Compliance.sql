@@ -38,7 +38,8 @@ BEGIN
 		ExportCountryName				NVARCHAR(2048),
         ImportCountryName				NVARCHAR(2048),
 		SiteOfExportName				NVARCHAR(2048),
-		FacilityName					NVARCHAR(MAX)  
+		FacilityName					NVARCHAR(MAX),
+		WasteType						NVARCHAR(64)  
 	)
 
 	INSERT INTO @ComplianceReport EXEC [Reports].[ExportCompliance] @DateType, @CompetentAuthority, @From, @To
