@@ -8,7 +8,7 @@
     using Core.OperationCodes;
     using Prsd.Core.Mediator;
 
-    [RequestAuthorization(ImportNotificationPermissions.CanEditImportNotification)]
+    [RequestAuthorization(ImportNotificationPermissions.CanChangeWasteOperation)]
     public class UpdateWasteOperation : IRequest<Guid>
     {
         public Guid ImportNotificationId { get; private set; }

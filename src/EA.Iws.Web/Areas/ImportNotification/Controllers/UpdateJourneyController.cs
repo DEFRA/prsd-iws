@@ -14,6 +14,8 @@
 
     [AuthorizeActivity(typeof(SetEntryPoint))]
     [AuthorizeActivity(typeof(SetExitPoint))]
+    [AuthorizeActivity(typeof(UpdateImportNotificationWasteTypes))]
+    [AuthorizeActivity(typeof(UpdateWasteOperation))]
     public class UpdateJourneyController : Controller
     {
         private readonly IMediator mediator;
