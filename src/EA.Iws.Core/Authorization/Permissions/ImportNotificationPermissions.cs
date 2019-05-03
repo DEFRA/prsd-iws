@@ -21,5 +21,7 @@
         public const string CanChangeImportEntryExitPoint = "Can Change Import Entry Exit Point";
 
         public const string CanEditComments = "Can edit comments";
+
+        public const string CanChangeWasteTypes = "Can Change Waste Types";
     }
 }

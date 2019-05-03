@@ -1070,6 +1070,7 @@
     <Content Include="Areas\AdminImportNotificationMovements\Views\ShipmentAudit\Index.cshtml" />
     <Content Include="Areas\AdminExportAssessment\Views\Carrier\Add.cshtml" />
     <Content Include="Areas\AdminExportAssessment\Views\Carrier\CarrierBusinessTypeViewModel.cshtml" />
+    <Content Include="Areas\ImportNotification\Views\UpdateJourney\WasteCodes.cshtml" />
     <Content Include="Areas\Reports\Views\Compliance\Index.cshtml" />
     <Content Include="Areas\AdminExportAssessment\Views\UpdateJourney\TransitEntryPoint.cshtml" />
     <Content Include="Areas\AdminExportAssessment\Views\UpdateJourney\TransitExitPoint.cshtml" />
@@ -1315,6 +1316,17 @@
     </Compile>
     <Compile Include="Areas\AdminImportNotificationMovements\Controllers\ShipmentAuditController.cs" />
     <Compile Include="Areas\AdminImportNotificationMovements\ViewModels\ShipmentAudit\ShipmentAuditViewModel.cs" />
+    <Compile Include="Areas\ImportNotification\ViewModels\UpdateJourney\UpdateWasteCodesViewModel.cs" />
+    <Compile Include="Areas\ImportNotification\ViewModels\UpdateJourney\UpdateWasteCodesViewModelResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>UpdateWasteCodesViewModelResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\ImportNotification\Views\UpdateJourney\WasteCodesResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>WasteCodesResources.resx</DependentUpon>
+	</Compile>
     <Compile Include="Areas\Reports\Controllers\ComplianceController.cs" />
     <Compile Include="Areas\Reports\ViewModels\Compliance\IndexViewModel.cs" />
     <Compile Include="Areas\Reports\Views\Compliance\ComplianceResources.Designer.cs">
@@ -4402,6 +4414,10 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>UpdateJourneyResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Areas\ImportNotification\ViewModels\UpdateJourney\UpdateWasteCodesViewModelResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>UpdateWasteCodesViewModelResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Areas\ImportNotification\ViewModels\WasteOperation\WasteOperationViewModelResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>WasteOperationViewModelResources.Designer.cs</LastGenOutput>
@@ -4509,6 +4525,10 @@
     <EmbeddedResource Include="Areas\ImportNotification\Views\UpdateJourney\UpdateJourneyResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>UpdateJourneyResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\ImportNotification\Views\UpdateJourney\WasteCodesResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>WasteCodesResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\ImportNotification\Views\Validate\IndexResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

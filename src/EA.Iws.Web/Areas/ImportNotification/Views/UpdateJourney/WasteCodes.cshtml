@@ -1,8 +1,8 @@
-﻿@using EA.Iws.Web.Areas.ImportNotification.Views.WasteCodes;
-@using EA.Iws.Web.Areas.ImportNotification.ViewModels.Shared;
-@model EA.Iws.Web.Areas.ImportNotification.ViewModels.WasteCodes.WasteCodesViewModel
+﻿@using EA.Iws.Web.Areas.ImportNotification.ViewModels.Shared;
+@using EA.Iws.Web.Areas.ImportNotification.Views.UpdateJourney
+@model EA.Iws.Web.Areas.ImportNotification.ViewModels.UpdateJourney.UpdateWasteCodesViewModel
 @{
-    ViewBag.Title = IndexResources.Title;
+    ViewBag.Title = WasteCodesResources.Title;
 }
 @helper DisplayCodeTable(string tableId, string tableHeading, string jsonCodesId, IList<WasteCodeViewModel> selectedCodesForDisplay)
 {
@@ -15,7 +15,7 @@
         <tbody>
             @if (!selectedCodesForDisplay.Any())
             {
-                <tr data-content="empty" class="empty"><td>@IndexResources.NoCodes</td><td>&nbsp;</td></tr>
+                <tr data-content="empty" class="empty"><td>@WasteCodesResources.NoCodes</td><td>&nbsp;</td></tr>
             }
             @foreach (var item in selectedCodesForDisplay)
             {
@@ -23,7 +23,7 @@
                     <td>@item.Name</td>
                     <td class="remove">
                         <button data-action="remove" data-code-id="@item.Id" data-json-codes-id="@jsonCodesId" type="button">
-                            @IndexResources.RemoveCodeButton
+                            @WasteCodesResources.RemoveCodeButton
                         </button>
                     </td>
                 </tr>
@@ -31,23 +31,26 @@
         </tbody>
     </table>
 }
-<header class="hgroup"><h1 class="heading-large">@IndexResources.MainHeading</h1></header>
+<header class="hgroup"><h1 class="heading-large">@WasteCodesResources.MainHeading</h1></header>
 
 <div id="import-waste-codes">
 
     @using (Html.BeginForm())
     {
         @Html.AntiForgeryToken()
+        @Html.Gds().ValidationSummary()
         @Html.HiddenFor(m => m.ImportNotificationId)
 
         <div class="form-group @Html.Gds().FormGroupClass(m => m.Name)">
             @Html.Gds().LabelFor(m => m.Name, showOptionalLabel: false)
+            @Html.Gds().ValidationMessageFor(m => m.Name)
             @Html.Gds().TextBoxFor(m => m.Name, new { maxLength = 70 })
         </div>
 
         <div class="form-group">
             <div class="form-group-compound @Html.Gds().FormGroupClass(m => m.SelectedBaselCode)">
                 @Html.Gds().LabelFor(m => m.SelectedBaselCode, showOptionalLabel: false)
+                @Html.Gds().ValidationMessageFor(m => m.SelectedBaselCode)
                 @Html.Gds().DropDownListFor(m => m.SelectedBaselCode, Model.BaselCodes, string.Empty, new { data_select_box = "true" })
             </div>
 
@@ -62,6 +65,7 @@
         <div class="form-group">
             <div class="form-group-compound @Html.Gds().FormGroupClass(m => m.SelectedEwcCode)">
                 @Html.Gds().LabelFor(m => m.SelectedEwcCode, showOptionalLabel: false)
+                @Html.Gds().ValidationMessageFor(m => m.SelectedEwcCode)
                 @Html.Gds().DropDownListFor(m => m.SelectedEwcCode, Model.EwcCodes, string.Empty, new { data_select_box = "true" })
                 @Html.HiddenFor(model => Model.SelectedEwcCodesJson)
                 <button type="button"
@@ -75,13 +79,14 @@
             </div>
 
             <div class="form-group">
-                @DisplayCodeTable("ewc-codes-table", IndexResources.EwcCodesTableHeading, "#SelectedEwcCodesJson", Model.SelectedEwcCodesDisplay)
+                @DisplayCodeTable("ewc-codes-table", WasteCodesResources.EwcCodesTableHeading, "#SelectedEwcCodesJson", Model.SelectedEwcCodesDisplay)
             </div>
         </div>
 
         <div class="form-group">
             <div class="form-group-compound @Html.Gds().FormGroupClass(m => m.SelectedYCode)">
                 @Html.Gds().LabelFor(m => m.SelectedYCode, showOptionalLabel: false)
+                @Html.Gds().ValidationMessageFor(m => m.SelectedYCode)
                 @Html.Gds().DropDownListFor(m => m.SelectedYCode, Model.YCodes, string.Empty, new { data_select_box = "true" })
                 @Html.HiddenFor(model => Model.SelectedYCodesJson)
                 <button type="button"
@@ -102,13 +107,14 @@
             </div>
 
             <div class="form-group">
-                @DisplayCodeTable("y-codes-table", IndexResources.YCodesTableHeading, "#SelectedYCodesJson", Model.SelectedYCodesDisplay)
+                @DisplayCodeTable("y-codes-table", WasteCodesResources.YCodesTableHeading, "#SelectedYCodesJson", Model.SelectedYCodesDisplay)
             </div>
         </div>
 
         <div class="form-group">
             <div class="form-group-compound @Html.Gds().FormGroupClass(m => m.SelectedHCode)">
                 @Html.Gds().LabelFor(m => m.SelectedHCode, showOptionalLabel: false)
+                @Html.Gds().ValidationMessageFor(m => m.SelectedHCode)
                 @Html.Gds().DropDownListFor(m => m.SelectedHCode, Model.HCodes, string.Empty, new { data_select_box = "true" })
                 @Html.HiddenFor(model => Model.SelectedHCodesJson)
                 <button type="button"
@@ -129,13 +135,14 @@
             </div>
 
             <div class="form-group">
-                @DisplayCodeTable("h-codes-table", IndexResources.HCodesTableHeading, "#SelectedHCodesJson", Model.SelectedHCodesDisplay)
+                @DisplayCodeTable("h-codes-table", WasteCodesResources.HCodesTableHeading, "#SelectedHCodesJson", Model.SelectedHCodesDisplay)
             </div>
         </div>
 
         <div class="form-group">
             <div class="form-group-compound @Html.Gds().FormGroupClass(m => m.SelectedUnClass)">
                 @Html.Gds().LabelFor(m => m.SelectedUnClass, showOptionalLabel: false)
+                @Html.Gds().ValidationMessageFor(m => m.SelectedUnClass)
                 @Html.Gds().DropDownListFor(m => m.SelectedUnClass, Model.UnClasses, string.Empty, new { data_select_box = "true" })
                 @Html.HiddenFor(model => Model.SelectedUnClassesJson)
                 <button type="button"
@@ -156,7 +163,7 @@
             </div>
 
             <div class="form-group">
-                @DisplayCodeTable("un-classes-table", IndexResources.UnClassesTableHeading, "#SelectedUnClassesJson", Model.SelectedUnClassesDisplay)
+                @DisplayCodeTable("un-classes-table", WasteCodesResources.UnClassesTableHeading, "#SelectedUnClassesJson", Model.SelectedUnClassesDisplay)
             </div>
         </div>
 
@@ -211,7 +218,7 @@
                     + $(selectedCodeId + ' option:selected').text()
                     + '</td><td class="remove"><button type="button" data-action="remove" '
                     + 'id="remove-' + newValue + '" data-code-id="' + newValue + '" data-json-codes-id="' + currentCodesJsonId + '">'
-                    + '@IndexResources.RemoveCodeButton</button></td></tr>');
+                    + '@WasteCodesResources.RemoveCodeButton</button></td></tr>');
 
                 //add 'remove' event handler to new button
                 $('#remove-' + newValue).click(function () {
@@ -228,7 +235,7 @@
             var codeId = $(callingButton).data('code-id');
             var jsonCodeId = $(callingButton).data('json-codes-id');
             var codes = $(jsonCodeId);
-           
+
             var elems = [];
             if (codes.val() !== '') {
                 elems = JSON.parse(codes.val());
@@ -243,7 +250,7 @@
 
             if (row.parent().children().length == 1) {
                 row.parent(':last-child').append('<tr data-content="empty" class="empty"><td>'
-                    + '@IndexResources.NoCodes</td><td>&nbsp;</td></tr>')
+                    + '@WasteCodesResources.NoCodes</td><td>&nbsp;</td></tr>')
             }
 
             row.remove();
