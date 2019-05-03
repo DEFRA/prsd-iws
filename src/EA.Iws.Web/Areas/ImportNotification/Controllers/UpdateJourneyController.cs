@@ -132,5 +132,23 @@
 
             return View(new UpdateWasteOperationViewModel(data));
         }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> WasteOperation(Guid id, UpdateWasteOperationViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                var details = await mediator.SendAsync(new GetNotificationDetails(id));
+
+                model.SetDetails(details);
+
+                return View(model);
+            }
+
+            await mediator.SendAsync(new UpdateWasteOperation(id, model.SelectedCodes, model.TechnologyEmployed));
+
+            return RedirectToAction("Index", "Home");
+        }
     }
 }

@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.Linq;
+    using Core.ImportNotification;
     using Core.ImportNotification.Update;
     using Core.OperationCodes;
     using Core.Shared;
@@ -50,5 +51,16 @@
         [Display(Name = "TechnologyEmployed", ResourceType = typeof(UpdateWasteOperationViewModelResources))]
         [StringLength(70, ErrorMessageResourceName = "TechnologyEmployedMaxLength", ErrorMessageResourceType = typeof(UpdateWasteOperationViewModelResources))]
         public string TechnologyEmployed { get; set; }
+
+        public void SetDetails(NotificationDetails details)
+        {
+            ImportNotificationId = details.ImportNotificationId;
+            NotificationType = details.NotificationType;
+
+            Codes =
+                OperationCodeMetadata.GetCodesForOperation(details.NotificationType)
+                    .Select(c => new KeyValuePairViewModel<OperationCode, bool>(c, SelectedCodes.Contains(c)))
+                    .ToList();
+        }
     }
 }
