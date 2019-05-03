@@ -208,6 +208,7 @@
     <Compile Include="ImportNotification\GetOriginalNumberOfShipments.cs" />
     <Compile Include="ImportNotification\GetSummary.cs" />
     <Compile Include="ImportNotification\GetImportNotificationWasteTypes.cs" />
+    <Compile Include="ImportNotification\GetWasteOperationData.cs" />
     <Compile Include="ImportNotification\SetDraftData.cs" />
     <Compile Include="ImportNotification\SetNewNumberOfShipments.cs" />
     <Compile Include="ImportNotification\TransportRoute\GetTransitStateDataForTransitState.cs" />

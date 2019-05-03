@@ -262,6 +262,7 @@
     <Compile Include="ImportNotification\GetNotificationDetailsHandler.cs" />
     <Compile Include="ImportNotification\GetOriginalNumberOfShipmentsHandler.cs" />
     <Compile Include="ImportNotification\GetImportNotificationWasteTypesHandler.cs" />
+    <Compile Include="ImportNotification\GetWasteOperationDataHandler.cs" />
     <Compile Include="ImportNotification\Mappings\AddressMap.cs" />
     <Compile Include="ImportNotification\Mappings\ChemicalCompositionMap.cs" />
     <Compile Include="ImportNotification\Mappings\ContactMap.cs" />

@@ -124,5 +124,13 @@
 
             return RedirectToAction("Index", "Home");
         }
+
+        [HttpGet]
+        public async Task<ActionResult> WasteOperation(Guid id)
+        {
+            var data = await mediator.SendAsync(new GetWasteOperationData(id));
+
+            return View(new UpdateWasteOperationViewModel(data));
+        }
     }
 }
