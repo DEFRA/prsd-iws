@@ -77,6 +77,7 @@
             { ImportNotificationPermissions.CanChangeNumberOfShipmentsOnImportNotification, new[] { UserRole.Administrator } },
             { ImportNotificationPermissions.CanChangeImportEntryExitPoint, new[] { UserRole.Administrator } },
             { ImportNotificationPermissions.CanEditComments, new[] {UserRole.Internal, UserRole.Administrator, UserRole.ReadOnly } },
+            { ImportNotificationPermissions.CanChangeWasteTypes, new[] { UserRole.Administrator } },
             { ImportMovementPermissions.CanCreateImportMovements, new[] { UserRole.Internal, UserRole.Administrator } },
             { ImportMovementPermissions.CanEditImportMovements, new[] { UserRole.Internal, UserRole.Administrator } },
             { ImportMovementPermissions.CanReadImportMovements, new[] { UserRole.Internal, UserRole.Administrator, UserRole.ReadOnly } },

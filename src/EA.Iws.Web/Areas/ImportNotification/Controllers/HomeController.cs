@@ -4,7 +4,6 @@
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Core.Authorization.Permissions;
-    using Core.ImportNotificationAssessment;
     using Infrastructure.Authorization;
     using Prsd.Core.Mediator;
     using Requests.ImportNotification;
@@ -29,8 +28,9 @@
             var details = await mediator.SendAsync(new GetSummary(id));
             var canChangeNumberOfShipments = Task.Run(() => authorizationService.AuthorizeActivity(typeof(GetOriginalNumberOfShipments))).Result;
             var canChangeEntryExitPoint = Task.Run(() => authorizationService.AuthorizeActivity(ImportNotificationPermissions.CanChangeImportEntryExitPoint)).Result;
+            var canChangeWasteTypes = Task.Run(() => authorizationService.AuthorizeActivity(ImportNotificationPermissions.CanChangeWasteTypes)).Result;
 
-            var model = new SummaryTableContainerViewModel(details, canChangeNumberOfShipments, canChangeEntryExitPoint);
+            var model = new SummaryTableContainerViewModel(details, canChangeNumberOfShipments, canChangeEntryExitPoint, canChangeWasteTypes);
 
             return View(model);
         }

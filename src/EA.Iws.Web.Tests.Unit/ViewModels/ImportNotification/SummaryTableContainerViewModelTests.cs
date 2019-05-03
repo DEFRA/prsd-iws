@@ -16,7 +16,7 @@
         [Fact]
         public void NotificationReceived_ShowChangeLinks()
         {
-            var model = CreateModel(ImportNotificationStatus.NotificationReceived, true, true);
+            var model = CreateModel(ImportNotificationStatus.NotificationReceived);
 
             Assert.True(model.ShowChangeLinks);
         }
@@ -24,7 +24,7 @@
         [Fact]
         public void NotificationConsented_ShowChangeNumberOfShipmentsLink()
         {
-            var model = CreateModel(ImportNotificationStatus.Consented, true, true);
+            var model = CreateModel(ImportNotificationStatus.Consented);
 
             Assert.True(model.ShowChangeNumberOfShipmentsLink);
         }
@@ -32,15 +32,48 @@
         [Fact]
         public void Notification_Not_New_Or_Received_ShowChangeEntryExitPointLink()
         {
-            var model = CreateModel(ImportNotificationStatus.InAssessment, true, true);
+            var model = CreateModel(ImportNotificationStatus.InAssessment);
 
             Assert.True(model.ShowChangeEntryExitPointLink);
         }
 
         [Fact]
+        public void Notification_Status_That_ShowChangeWasteTypesChangeLink()
+        {
+            var models = new List<SummaryTableContainerViewModel>()
+            {
+                CreateModel(ImportNotificationStatus.AwaitingPayment),
+                CreateModel(ImportNotificationStatus.AwaitingAssessment),
+                CreateModel(ImportNotificationStatus.InAssessment),
+                CreateModel(ImportNotificationStatus.ReadyToAcknowledge),
+                CreateModel(ImportNotificationStatus.DecisionRequiredBy),
+                CreateModel(ImportNotificationStatus.Consented)
+            };
+
+            Assert.All(models, model => Assert.True(model.ShowChangeWasteTypesLink));
+        }
+
+        [Fact]
+        public void Notification_Status_DoesNot_ShowChangeWasteTypesChangeLink()
+        {
+            var models = new List<SummaryTableContainerViewModel>()
+            {
+                CreateModel(ImportNotificationStatus.New),
+                CreateModel(ImportNotificationStatus.NotificationReceived),
+                CreateModel(ImportNotificationStatus.Submitted),
+                CreateModel(ImportNotificationStatus.ConsentWithdrawn),
+                CreateModel(ImportNotificationStatus.Objected),
+                CreateModel(ImportNotificationStatus.Withdrawn),
+                CreateModel(ImportNotificationStatus.FileClosed)
+            };
+
+            Assert.All(models, model => Assert.False(model.ShowChangeWasteTypesLink));
+        }
+
+        [Fact]
         public void EwcCodesAreInNumericalOrder()
         {
-            var model = CreateModel(ImportNotificationStatus.NotificationReceived, true, true);
+            var model = CreateModel(ImportNotificationStatus.NotificationReceived);
 
             var result = model.Details.WasteType.EwcCodes.WasteCodes;
             var expected = CreateEwcCodes().OrderBy(w => w.Name).ToList();
@@ -51,7 +84,7 @@
         [Fact]
         public void YCodesAreInNumericalOrder()
         {
-            var model = CreateModel(ImportNotificationStatus.NotificationReceived, true, true);
+            var model = CreateModel(ImportNotificationStatus.NotificationReceived);
 
             var result = model.Details.WasteType.YCodes.WasteCodes;
             var expected = CreateYCodes().OrderBy(w => Regex.Match(w.Name, @"(\D+)").Value).ThenBy(w =>
@@ -67,7 +100,7 @@
         [Fact]
         public void HCodesAreInNumbericalOrder()
         {
-            var model = CreateModel(ImportNotificationStatus.NotificationReceived, true, true);
+            var model = CreateModel(ImportNotificationStatus.NotificationReceived);
 
             var result = model.Details.WasteType.HCodes.WasteCodes;
             var expected = CreateHCodes().OrderBy(w => Regex.Match(w.Name, @"(\D+)").Value).ThenBy(w =>
@@ -83,7 +116,7 @@
         [Fact]
         public void UnClassesAreInNumericalOrder()
         {
-            var model = CreateModel(ImportNotificationStatus.NotificationReceived, true, true);
+            var model = CreateModel(ImportNotificationStatus.NotificationReceived);
 
             var result = model.Details.WasteType.UnClasses.WasteCodes;
             var expected = CreateUnClasses().OrderBy(w => w.Name).ToList();
@@ -91,9 +124,9 @@
             Assert.True(result.SequenceEqual(expected, new WasteCodeComparer()));
         }
 
-        private static SummaryTableContainerViewModel CreateModel(ImportNotificationStatus status, bool canChangeNumberOfShipments, bool canChangeEntryExitPoint)
+        private SummaryTableContainerViewModel CreateModel(ImportNotificationStatus status, bool canChangeNumberOfShipments = true, bool canChangeEntryExitPoint = true, bool canChangeWasteTypes = true)
         {
-            return new SummaryTableContainerViewModel(CreateImportNotifiationSummary(status), canChangeNumberOfShipments, canChangeEntryExitPoint);
+            return new SummaryTableContainerViewModel(CreateImportNotifiationSummary(status), canChangeNumberOfShipments, canChangeEntryExitPoint, canChangeWasteTypes);
         }
 
         private static ImportNotificationSummary CreateImportNotifiationSummary(ImportNotificationStatus status)
