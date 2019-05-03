@@ -140,7 +140,10 @@
                     if (value.Equals("A"))
                     {
                        dataRow.Cell(column).Style.Fill.BackgroundColor = XLColor.FromHtml("#ffbf47");
-                       dataRow.Cell(column).Value = string.Empty;
+                       dataRow.Cell(column).Value = "!";
+                       dataRow.Cell(column).Style.Font.FontName = "Times New Roman";
+                       dataRow.Cell(column).Style.Font.FontSize = 22;
+                       dataRow.Cell(column).Style.Font.Bold = true;
                     }
                     else if (value.Equals("G"))
                     {                      
@@ -157,8 +160,11 @@
                         dataRow.Cell(column).Style.Font.FontName = "Wingdings";
                         dataRow.Cell(column).Style.Font.FontSize = 24;
                     }
-                    dataRow.Cell(column).Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
-                    dataRow.Cell(column).Style.Alignment.Vertical = XLAlignmentVerticalValues.Center;                    
+                    if (value.Equals("G") || value.Equals("A") || value.Equals("R"))
+                    {
+                        dataRow.Cell(column).Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
+                        dataRow.Cell(column).Style.Alignment.Vertical = XLAlignmentVerticalValues.Center;
+                    }
                 }
                 dataRow.Cells().Style.Border.OutsideBorder = XLBorderStyleValues.Thin;
              }

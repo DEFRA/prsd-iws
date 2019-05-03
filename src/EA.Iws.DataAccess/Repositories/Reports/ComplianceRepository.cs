@@ -46,15 +46,19 @@
                 !operatorType.HasValue ||
                 string.IsNullOrEmpty(textSearch))
             {
-                return reportlist.ToArray();
+                return reportlist;
             }
-            else
+            else if (reportlist.Length > 0)
             {
-                 var predicate = CreatePredicate(textFieldType.Value.ToString(), textSearch, operatorType);
-                 var query = reportlist.AsQueryable<ComplianceDataReport>();
+                var predicate = CreatePredicate(textFieldType.Value.ToString(), textSearch, operatorType);
+                var query = reportlist.AsQueryable<ComplianceDataReport>();
 
                 return query.Where(predicate);
             }
+            else
+            {
+                return reportlist;
+            }            
         }
 
         public Expression<Func<ComplianceDataReport, bool>> CreatePredicate(string columnName, object searchValue, TextFieldOperator? operatorType)

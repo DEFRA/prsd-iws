@@ -37,7 +37,8 @@ BEGIN
 		ExportCountryName				NVARCHAR(2048),
         ImportCountryName				NVARCHAR(2048),
 		SiteOfExportName				NVARCHAR(2048),
-		FacilityName					NVARCHAR(MAX)
+		FacilityName					NVARCHAR(MAX),
+		WasteType						NVARCHAR(64)
 	)
 
 	DECLARE @ImportQuantity TABLE
@@ -57,7 +58,8 @@ BEGIN
 		NotificationId			UNIQUEIDENTIFIER NOT NULL,   
 		MovementId				UNIQUEIDENTIFIER NOT NULL,
 		HasNoPrenotification    BIT,
-		DateDifference			INT   
+		WorkingDays				INT,
+		CalendarDays			INT
 	)
 
 	INSERT INTO @ImportNotifications
@@ -92,7 +94,8 @@ BEGIN
 			WHERE FC.ImportNotificationId = A.Id
 			order by 1
 			FOR XML PATH('')
-			), 1, 1, '' ) AS [FacilityName]
+			), 1, 1, '' ) AS [FacilityName],
+		CCT.[Description] AS [WasteType]
 FROM
 (
 	SELECT DISTINCT
@@ -101,7 +104,7 @@ FROM
 		N.CompetentAuthority AS CompetentAuthorityId,
 		E.[Name]  AS [NotifierName],
 		I.[Name] AS [ConsigneeName],
-		CASE When C.[To] <= GETDATE() Then 'Y' Else 'N' End AS [FileExpired],
+		CASE When C.[To] <= GETDATE() THEN 'Y' Else 'N' End AS [FileExpired],
 		COUNT(m.id) AS [NoOfShipment]
 		,MAX(M.Number) AS [LatestShipmentNo]
 		,NULL as [NoOfActualShipment]
@@ -161,7 +164,8 @@ FROM
 			WHERE IsoAlpha2Code = 'GB' ) AS SI_C ON 1 = 1
 		INNER JOIN [Lookup].[Country] SE_C ON SE_C.Id = SE.CountryId
 		INNER JOIN [ImportNotification].[WasteCode] WCI ON WT.Id = WCI.WasteTypeId
-
+		INNER JOIN [ImportNotification].[WasteType] WT1 ON WT1.ImportNotificationId = A.Id
+		INNER JOIN [Lookup].[ChemicalCompositionType] CCT ON CCT.Id = WT1.ChemicalCompositionType
 
 	INSERT INTO @ImportPreNoteProcess
 	SELECT 
@@ -173,19 +177,20 @@ FROM
 	   - CASE WHEN DATEPART(DW, M.[PrenotificationDate]) = 1 THEN 1 ELSE 0 END 
 	   + CASE WHEN DATEPART(DW,M.ActualShipmentDate) = 1 THEN 1 ELSE 0 END 
 	   -(SELECT COUNT(*) FROM [Lookup].[BankHoliday] AS h 
-			WHERE h.CreatedDate BETWEEN M.[PrenotificationDate] AND M.ActualShipmentDate)
-		)
+			WHERE h.CompetentAuthority = @competentAuthority AND h.[Date] BETWEEN M.[PrenotificationDate] AND M.ActualShipmentDate)
+		),
+		DATEDIFF(DD, M.[PrenotificationDate],M.ActualShipmentDate) 	 
 	FROM
 	@ImportNotifications N
 	INNER JOIN [ImportNotification].[Movement] AS M
 	ON	M.NotificationId = N.NotificationId
-
+	AND M.IsCancelled = 0 -- Exclude cancelled 
 
 	INSERT INTO @ImportPreNote
 	SELECT P.NotificationId
-	,SUM(case when P.HasNoPrenotification = 1 then 1 else 0 end) 
-		+ SUM(case when P.DateDifference < 3 then 1 
-				   when P.DateDifference > 30 then 1 else 0 end) as NoPreNote
+	,SUM(CASE WHEN P.HasNoPrenotification = 1 THEN 1 ELSE 0 END) 
+		+ SUM(CASE WHEN P.WorkingDays < 3 THEN 1 
+				   WHEN P.CalendarDays > 30 THEN 1 ELSE 0 END) as NoPreNote
 	FROM @ImportPreNoteProcess P
 	GROUP BY P.NotificationId
 
@@ -210,19 +215,19 @@ FROM
 
 	--G Green R RED A AMBER
 	SELECT A.NotificationId, A.NotificationNumber, A.CompetentAuthorityId, A.PrenotificationCount,
-	CASE WHEN A.PrenotificationCount = 0 then 'G'
-		 WHEN A.PrenotificationCount <= 10 then 'A'
-		 Else 'R' end
+	CASE WHEN A.PrenotificationCount = 0 THEN 'G'
+		 WHEN A.PrenotificationCount <= 10 THEN 'A'
+		 ELSE 'R' END
 	,A.MissingShipments
-	,CASE WHEN A.MissingShipments = 0 Then 'G' 
-			WHEN A.MissingShipments <= 10 then 'A'
-		 Else 'R' end
+	,CASE WHEN A.MissingShipments = 0 THEN 'G' 
+			WHEN A.MissingShipments <= 10 THEN 'A'
+		 ELSE 'R' END
 	,OverLimit
 	,'N/A'
 	,A.Overtonnage
-	,CASE WHEN A.Overtonnage = 'Y' THEN 'R'  Else 'G' end
+	,CASE WHEN A.Overtonnage = 'Y' THEN 'R'  ELSE 'G' END
 	,A.OverShipments
-	,CASE WHEN A.OverShipments = 'Y' THEN 'R'  Else 'G' end
+	,CASE WHEN A.OverShipments = 'Y' THEN 'R'  ELSE 'G' END
 	,A.Notifier
 	,A.Consignee
 	,A.FileExpired
@@ -234,6 +239,7 @@ FROM
 	,A.ImportCountryName		
 	,A.SiteOfExportName	
 	,A.FacilityName
+	,A.WasteType
 	FROM
 	(
 		SELECT N.NotificationId, N.NotificationNumber
@@ -241,7 +247,7 @@ FROM
 		,P.PrenotificationCount
 		,N.LatestShipmentNo - N.NoOfShipmentsUsed as MissingShipments
 		,'N/A' as OverLimit
-		,CASE When N.IntendedQuantity - Q.ReceivedQuantity < 0 Then 'Y' ELSE 'N' END as Overtonnage
+		,CASE WHEN N.IntendedQuantity - Q.ReceivedQuantity < 0 THEN 'Y' ELSE 'N' END as Overtonnage
 		,CASE WHEN n.NoOfShipmentsUsed > N.IntendedNoOfShipments THEN 'Y' ELSE 'N' END AS OverShipments
 		,N.Notifier
 		,N.Consignee
@@ -254,6 +260,7 @@ FROM
 		,N.ImportCountryName		
 		,N.SiteOfExportName	
 		,N.FacilityName	
+		,N.WasteType	
 		FROM
 		@ImportNotifications N
 		LEFT JOIN	

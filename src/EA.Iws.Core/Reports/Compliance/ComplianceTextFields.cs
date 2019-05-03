@@ -4,13 +4,13 @@
     public enum ComplianceTextFields
     {
         [Display(Name = "Notifier name")]
-        NotifierName,
+        Notifier,
 
         [Display(Name = "Consignee name")]
-        ImporterName,
+        Consignee,
 
         [Display(Name = "Waste type")]
-        NameOfWaste,
+        WasteType,
 
         [Display(Name = "EWC code")]
         EWCCode,
