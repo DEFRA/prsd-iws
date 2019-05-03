@@ -13,5 +13,6 @@
 
         public string SiteOfExportName { get; set; }
         public string FacilityName { get; set; }
+        public string WasteType { get; set; }
     }
 }

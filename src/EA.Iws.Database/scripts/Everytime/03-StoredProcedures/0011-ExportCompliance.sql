@@ -37,7 +37,8 @@ SET NOCOUNT ON;
 		ExportCountryName				NVARCHAR(2048),
         ImportCountryName				NVARCHAR(2048),
 		SiteOfExportName				NVARCHAR(2048),
-		FacilityName					NVARCHAR(MAX)
+		FacilityName					NVARCHAR(MAX),
+		WasteType						NVARCHAR(64)
 	)
 
 	DECLARE @ExportPreNoteProcess TABLE
@@ -45,7 +46,9 @@ SET NOCOUNT ON;
 		NotificationId			UNIQUEIDENTIFIER NOT NULL,   
 		MovementId				UNIQUEIDENTIFIER NOT NULL,
 		HasNoPrenotification    BIT,
-		DateDifference			INT   
+		WorkingDays				INT,
+		CalendarDays			INT,
+		PendingIncomplete		INT
 	)
 
 	DECLARE @ExportPreNote TABLE
@@ -120,7 +123,8 @@ SELECT DISTINCT A.*
 					WHERE FC.NotificationId = A.Id
 					order by 1
 					FOR XML PATH('')
-					), 1, 1, '' ) AS [FacilityName]
+					), 1, 1, '' ) AS [FacilityName],
+			CCT.[Description] AS [WasteType]
 FROM
 	(SELECT DISTINCT
         N.Id,
@@ -128,7 +132,7 @@ FROM
 		N.CompetentAuthority AS CompetentAuthorityId,
 		E.[Name] AS [NotifierName],
 		I.[Name] AS [ConsigneeName],
-		CASE When C.[To] <= GETDATE() Then 'Y' Else 'N' End AS [FileExpired] ,
+		CASE When C.[To] <= GETDATE() THEN 'Y' ELSE 'N' End AS [FileExpired] ,
 		COUNT(m.id) AS [NoOfShipment]
 		,MAX(M.Number) AS [LatestShipmentNo]
 		,(SELECT COUNT(M1.Id) FROM [Notification].[Movement] M1
@@ -202,7 +206,9 @@ FROM
 		INNER JOIN [Notification].[EntryOrExitPoint] SE_EEP ON SE_EEP.Id = SE.ExitPointId
 		INNER JOIN [Notification].[EntryOrExitPoint] SI_EEP ON SI_EEP.Id = SI.EntryPointId
 		INNER JOIN [Lookup].[Country] SI_C ON SI_C.Id = SI.CountryId
-		INNER JOIN [Lookup].[Country] SE_C ON SE_C.Id = SE.CountryId		
+		INNER JOIN [Lookup].[Country] SE_C ON SE_C.Id = SE.CountryId
+		INNER JOIN [Notification].[WasteType] WT1 ON WT1.NotificationId = A.Id
+		INNER JOIN [Lookup].[ChemicalCompositionType] CCT ON CCT.Id = WT1.ChemicalCompositionType		
 
 /* Number of shipments with No Pre-notification - This is the subtotal number of shipments with
   ‘No prenotification received',PLUS the total number of shipments that the difference between the pre-notification date 
@@ -217,20 +223,25 @@ FROM
 	   - CASE WHEN DATEPART(DW, M.[PrenotificationDate]) = 1 THEN 1 ELSE 0 END 
 	   + CASE WHEN DATEPART(DW,M.[Date]) = 1 THEN 1 ELSE 0 END 
 	   -(SELECT COUNT(*) FROM [Lookup].[BankHoliday] AS h 
-			WHERE h.CreatedDate BETWEEN M.[PrenotificationDate] AND M.[Date])
-		)
+			WHERE h.CompetentAuthority = @competentAuthority AND h.[Date] BETWEEN M.[PrenotificationDate] AND M.[Date])
+		),
+		DATEDIFF(DD, M.[PrenotificationDate],M.[Date]) 
+		 ,(SELECT CASE WHEN M1.PrenotificationDate IS NULL THEN 1 ELSE 0 END 
+		FROM [Notification].[Movement] M1 
+		WHERE M1.Id = M.id and ISNULL(M1.HasNoPrenotification, 0) = 0 and M1.[Status] in (1,7,3,4) )
 	FROM
 	@ExportNotifications N
 	INNER JOIN [Notification].[Movement] AS M
 	ON	M.NotificationId = N.NotificationId
-
+	AND M.[Status] NOT IN (6) -- Exclude cancelled 
 
 
 	INSERT INTO @ExportPreNote
 	SELECT P.NotificationId
-	,SUM(case when P.HasNoPrenotification = 1 then 1 else 0 end) 
-		+ SUM(case when P.DateDifference < 3 then 1 
-				   when P.DateDifference > 30 then 1 else 0 end) as NoPreNote
+	,SUM(CASE WHEN P.HasNoPrenotification = 1 THEN 1 ELSE 0 END) 
+		+ SUM(CASE WHEN P.WorkingDays < 3 THEN 1 
+				   WHEN P.CalendarDays > 30 THEN 1 ELSE 0 END) 
+		+ SUM(CASE WHEN P.PendingIncomplete = 1 THEN 1 ELSE 0 END) as NoPreNote
 	FROM @ExportPreNoteProcess P
 	GROUP BY P.NotificationId
 
@@ -273,7 +284,7 @@ FROM
 
 	INSERT INTO @ExportQuantity
 	SELECT A.NotificationId, 
-	SUM(CASE WHEN A.ReceivedQuantityUnit = NotificationShipmentUnit Then A.ReceivedQuantity Else A.ConvertedQuantity END)
+	SUM(CASE WHEN A.ReceivedQuantityUnit = NotificationShipmentUnit THEN A.ReceivedQuantity ELSE A.ConvertedQuantity END)
 	FROM @ExportQuantityProcess A
 	GROUP BY A.NotificationId
 
@@ -281,20 +292,20 @@ FROM
 	--G Green R RED A AMBER
 
 	SELECT A.NotificationId, A.NotificationNumber, A.CompetentAuthorityId, A.PrenotificationCount,
-	CASE WHEN A.PrenotificationCount = 0 then 'G'
-		 WHEN A.PrenotificationCount <= 10 then 'A'
-		 Else 'R' end
+	CASE WHEN A.PrenotificationCount = 0 THEN 'G'
+		 WHEN A.PrenotificationCount <= 10 THEN 'A'
+		 ELSE 'R' end
 	,A.MissingShipments
-	,CASE WHEN A.MissingShipments = 0 Then 'G' 
-			WHEN A.MissingShipments <= 10 then 'A'
-		 Else 'R' end
-	,CASE WHEN A.OverLimit < 0 Then CAST(0 as NVARCHAR) else CAST(A.OverLimit as NVARCHAR) end 
+	,CASE WHEN A.MissingShipments = 0 THEN 'G' 
+			WHEN A.MissingShipments <= 10 THEN 'A'
+		 ELSE 'R' end
+	,CASE WHEN A.OverLimit < 0 THEN CAST(0 as NVARCHAR) else CAST(A.OverLimit as NVARCHAR) end 
 	,CASE WHEN A.OverLimit <= 0 THEN 'G'
-		  WHEN A.OverLimit <= 5 THEN 'A'  Else 'R' end
+		  WHEN A.OverLimit <= 5 THEN 'A'  ELSE 'R' end
 	,A.Overtonnage
-	,CASE WHEN A.Overtonnage = 'Y' THEN 'R'  Else 'G' end
+	,CASE WHEN A.Overtonnage = 'Y' THEN 'R'  ELSE 'G' end
 	,A.OverShipments
-	,CASE WHEN A.OverShipments = 'Y' THEN 'R'  Else 'G' end
+	,CASE WHEN A.OverShipments = 'Y' THEN 'R'  ELSE 'G' end
 	,A.Notifier
 	,A.Consignee
 	,A.FileExpired
@@ -305,7 +316,8 @@ FROM
 	,A.ExportCountryName	
 	,A.ImportCountryName		
 	,A.SiteOfExportName	
-	,A.FacilityName	
+	,A.FacilityName
+	,A.WasteType		
 	FROM
 	(
 		SELECT N.NotificationId, N.NotificationNumber
@@ -313,7 +325,7 @@ FROM
 		,P.PrenotificationCount
 		,N.LatestShipmentNo - N.NoOfShipmentsUsed as MissingShipments
 		,N.CurrentActiveLoads - N.PermittedActiveLoads as OverLimit
-		,CASE When N.IntendedQuantity - Q.ReceivedQuantity < 0 Then 'Y' ELSE 'N' END as Overtonnage
+		,CASE When N.IntendedQuantity - Q.ReceivedQuantity < 0 THEN 'Y' ELSE 'N' END as Overtonnage
 		,CASE WHEN n.NoOfShipmentsUsed > N.IntendedNoOfShipments THEN 'Y' ELSE 'N' END AS OverShipments
 		,N.Notifier
 		,N.Consignee
@@ -325,7 +337,8 @@ FROM
 		,N.ExportCountryName	
 		,N.ImportCountryName		
 		,N.SiteOfExportName	
-		,N.FacilityName		
+		,N.FacilityName
+		,N.WasteType		
 		FROM
 		@ExportNotifications N
 		LEFT JOIN	
