@@ -157,7 +157,7 @@ FROM
 		 ORDER BY FG1.CreatedDate DESC)	
 		INNER JOIN 
 		[Notification].[Movement] AS M
-			ON M.NotificationId = N.Id
+			ON M.NotificationId = N.Id AND m.[Status] NOT IN (6) 
 		INNER JOIN [Notification].[Exporter] E ON E.NotificationId = N.Id
 		INNER JOIN [Notification].[Importer] I ON I.NotificationId = N.Id
 		INNER JOIN	[Notification].[Consent] AS C
