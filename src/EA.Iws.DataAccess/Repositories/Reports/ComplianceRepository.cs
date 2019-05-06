@@ -68,16 +68,16 @@
             var column = columnType.GetProperties().FirstOrDefault(p => p.Name == columnName);
             var property = Expression.Property(x, columnName);
             MethodInfo method = typeof(String).GetMethod("Contains", new[] { typeof(String) });
-
+            var toLower = Expression.Call(property, typeof(string).GetMethod("ToLower", System.Type.EmptyTypes));
             Expression filter;
 
             switch (operatorType)
             {
                 case TextFieldOperator.Contains:
-                    filter = Expression.Call(property, method, Expression.Constant(searchValue, typeof(string)));
+                    filter = Expression.Call(toLower, method, Expression.Constant(searchValue.ToString().ToLower()));
                     break;
                 case TextFieldOperator.DoesNotContain:
-                    filter = Expression.Not(Expression.Call(property, method, Expression.Constant(searchValue, typeof(string))));
+                    filter = Expression.Not(Expression.Call(toLower, method, Expression.Constant(searchValue.ToString().ToLower())));
                     break;
                 default:
                     throw new ArgumentException(string.Format("Invalid operator type supplied: {0}", operatorType), "operatorType type");
