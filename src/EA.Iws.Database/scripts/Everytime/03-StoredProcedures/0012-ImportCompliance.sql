@@ -121,7 +121,7 @@ FROM
 			AND NA.[Status]  = 9 --CONSENTED
 		INNER JOIN 
 		[ImportNotification].[Movement] AS M
-			ON M.NotificationId = N.Id
+			ON M.NotificationId = N.Id AND m.IsCancelled = 0
 		INNER JOIN [ImportNotification].[Exporter] E 
 		INNER JOIN [Lookup].[Country] AS C_E ON E.[CountryId] = C_E.[Id]
 		ON E.ImportNotificationId = N.Id
