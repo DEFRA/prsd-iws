@@ -129,7 +129,7 @@
         private void FormatColumns()
         {
             var columnsLetters = columnsToProcess.Split(',');
-
+            
             var nonemptyDataRows = workSheet.RowsUsed();
             foreach (var dataRow in nonemptyDataRows)
             {
@@ -167,7 +167,14 @@
                     }
                 }
                 dataRow.Cells().Style.Border.OutsideBorder = XLBorderStyleValues.Thin;
-             }
+                //Column F has both numbers and text stored. 
+                var columnValue = dataRow.Cell("F").GetValue<string>().Trim();
+                if (dataRow.RowNumber() > 1 && !dataRow.IsEmpty() && !columnValue.Equals("N/A"))
+                {
+                        dataRow.Cell("F").Style.NumberFormat.NumberFormatId = 3;
+                        dataRow.Cell("F").Value = Convert.ToInt32(columnValue);
+                }
+            }
          }
     }
 }
