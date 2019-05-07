@@ -22,6 +22,8 @@
         public bool ShowChangeEntryExitPointLink { get; set; }
 
         public bool ShowChangeWasteTypesLink { get; set; }
+        
+        public bool CanEditContactDetails { get; set; }
 
         public SummaryTableContainerViewModel(ImportNotificationSummary details, bool canChangeNumberOfShipments,
             bool canChangeEntryExitPoint, bool canChangeWasteTypes)

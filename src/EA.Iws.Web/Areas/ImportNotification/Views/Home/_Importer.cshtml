@@ -2,7 +2,12 @@
 
 <div class="overview-block">
     @if (Model.Details.Importer != null && !Model.Details.Importer.IsEmpty())
-    {
+	{
+		if (Model.CanEditContactDetails)
+		{
+			<div class="change-answer">@Html.ActionLink("Amend contact", "Importer", "EditContact", new { id = Model.Details.Id }, null)</div>
+		}
+
         <div class="overview-block-element">
             @if (!string.IsNullOrWhiteSpace(Model.Details.Importer.Name))
             {
