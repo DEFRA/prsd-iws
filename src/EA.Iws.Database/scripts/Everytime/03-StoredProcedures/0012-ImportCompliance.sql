@@ -189,7 +189,7 @@ FROM
 	INSERT INTO @ImportPreNote
 	SELECT P.NotificationId
 	,SUM(CASE WHEN P.HasNoPrenotification = 1 THEN 1 ELSE 0 END) 
-		+ SUM(CASE WHEN P.WorkingDays < 3 THEN 1 
+		+ SUM(CASE WHEN P.WorkingDays < 4 THEN 1 
 				   WHEN P.CalendarDays > 30 THEN 1 ELSE 0 END) as NoPreNote
 	FROM @ImportPreNoteProcess P
 	GROUP BY P.NotificationId
