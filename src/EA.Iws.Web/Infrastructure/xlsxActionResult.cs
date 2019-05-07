@@ -171,8 +171,12 @@
                 var columnValue = dataRow.Cell("F").GetValue<string>().Trim();
                 if (dataRow.RowNumber() > 1 && !dataRow.IsEmpty() && !columnValue.Equals("N/A"))
                 {
+                    int overLimitCount;
+                    if (int.TryParse(columnValue, out overLimitCount))
+                    {
                         dataRow.Cell("F").Style.NumberFormat.NumberFormatId = 3;
-                        dataRow.Cell("F").Value = Convert.ToInt32(columnValue);
+                        dataRow.Cell("F").Value = overLimitCount;
+                    }
                 }
             }
          }
