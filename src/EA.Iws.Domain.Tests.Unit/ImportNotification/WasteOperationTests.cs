@@ -1,6 +1,8 @@
 ﻿namespace EA.Iws.Domain.Tests.Unit.ImportNotification
 {
     using System;
+    using System.Collections.Generic;
+    using System.Linq;
     using Core.Notification;
     using Core.OperationCodes;
     using Core.Shared;
@@ -12,6 +14,7 @@
     {
         private readonly Guid importNotificationId = new Guid("1FE8238D-BD7A-4D3A-8188-704EFB2F62F4");
         private readonly OperationCodesList validRCodesList;
+        private readonly OperationCodesList anotherValidRCodesList;
 
         public WasteOperationTests()
         {
@@ -19,6 +22,7 @@
             EntityHelper.SetEntityId(recoveryImportNotification, importNotificationId);
 
             validRCodesList = OperationCodesList.CreateForNotification(recoveryImportNotification, new[] { OperationCode.R1, OperationCode.R2 });
+            anotherValidRCodesList = OperationCodesList.CreateForNotification(recoveryImportNotification, new[] { OperationCode.R10, OperationCode.R13 });
         }
 
         [Fact]
@@ -56,23 +60,24 @@
         }
 
         [Fact]
-        public void TechnologyEmployedCantBeNull()
+        public void CanSetOperationCodes()
         {
             var operationCodes = new WasteOperation(importNotificationId, validRCodesList);
 
-            Action setTechnologyEmployed = () => operationCodes.SetTechnologyEmployed(null);
+            operationCodes.SetOperationCodes(new List<WasteOperationCode>(anotherValidRCodesList));
 
-            Assert.Throws<ArgumentNullException>("technologyEmployed", setTechnologyEmployed);
+            Assert.All(operationCodes.Codes,
+                code => Assert.True(anotherValidRCodesList.Any(x => x.OperationCode == code.OperationCode)));
         }
 
         [Fact]
-        public void TechnologyEmployedCantBeEmpty()
-        { 
+        public void SetOperationCodesCantBeNull()
+        {
             var operationCodes = new WasteOperation(importNotificationId, validRCodesList);
 
-            Action setTechnologyEmployed = () => operationCodes.SetTechnologyEmployed(string.Empty);
+            Action setOperationCodes = () => operationCodes.SetOperationCodes(null);
 
-            Assert.Throws<ArgumentException>("technologyEmployed", setTechnologyEmployed);
+            Assert.Throws<ArgumentNullException>("operationCodes", setOperationCodes);
         }
     }
 }

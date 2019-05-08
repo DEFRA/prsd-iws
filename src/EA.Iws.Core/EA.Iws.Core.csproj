@@ -170,6 +170,7 @@
     <Compile Include="ImportNotification\Summary\WasteCodeSelection.cs" />
     <Compile Include="ImportNotification\Summary\WasteOperation.cs" />
     <Compile Include="ImportNotification\Summary\WasteType.cs" />
+    <Compile Include="ImportNotification\Update\WasteOperationData.cs" />
     <Compile Include="ImportNotification\Update\WasteTypes.cs" />
     <Compile Include="InternalComments\InternalComment.cs" />
     <Compile Include="MeansOfTransport\MeansOfTransportHelper.cs" />
