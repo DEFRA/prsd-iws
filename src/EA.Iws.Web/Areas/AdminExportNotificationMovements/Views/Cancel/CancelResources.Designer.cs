@@ -106,6 +106,78 @@ namespace EA.Iws.Web.Areas.AdminExportNotificationMovements.Views.Cancel {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cancel.
+        /// </summary>
+        public static string Cancel {
+            get {
+                return ResourceManager.GetString("Cancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Date prenotified.
+        /// </summary>
+        public static string DatePrenotified {
+            get {
+                return ResourceManager.GetString("DatePrenotified", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You should only cancel a prenotified shipment if it hasn&apos;t been shipped yet..
+        /// </summary>
+        public static string IndexDescription {
+            get {
+                return ResourceManager.GetString("IndexDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Which prenotifications would you like to cancel?.
+        /// </summary>
+        public static string IndexHeader {
+            get {
+                return ResourceManager.GetString("IndexHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to There are no prenotifications to cancel..
+        /// </summary>
+        public static string IndexNoPrenotifications {
+            get {
+                return ResourceManager.GetString("IndexNoPrenotifications", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to These prenotifications can be cancelled:.
+        /// </summary>
+        public static string IndexSubHeader {
+            get {
+                return ResourceManager.GetString("IndexSubHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select prenotification to cancel.
+        /// </summary>
+        public static string IndexTitle {
+            get {
+                return ResourceManager.GetString("IndexTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Shipment due.
+        /// </summary>
+        public static string ShipmentDue {
+            get {
+                return ResourceManager.GetString("ShipmentDue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Shipment number.
         /// </summary>
         public static string ShipmentNumber {
