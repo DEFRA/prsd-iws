@@ -5,6 +5,7 @@
     using System.Data.SqlClient;
     using System.Linq;
     using System.Threading.Tasks;
+    using Core.ImportNotification;
     using Core.Shared;
     using Domain.ImportNotification;
     using Domain.Security;
@@ -65,6 +66,31 @@
                 .Where(n => n.Id == id)
                 .Select(n => n.NotificationNumber)
                 .SingleAsync();
+        }
+
+        public async Task<NotificationDetails> GetDetails(Guid id)
+        {
+            return await context.Database.SqlQuery<NotificationDetails>(
+                @"SELECT
+                    N.[Id] AS [ImportNotificationId],
+                    N.[NotificationNumber],
+                    N.[NotificationType],
+                    N.[CompetentAuthority],
+                    NA.[Status],
+                    LA.[Name] AS [Area],
+                    I.[IsInterim],
+                    FC.[AllFacilitiesPreconsented]
+                FROM
+                    [ImportNotification].[Notification] N
+                    INNER JOIN [ImportNotification].[NotificationAssessment] NA ON NA.[NotificationApplicationId] = N.[Id]
+                    LEFT JOIN [ImportNotification].[Consultation] C 
+                        INNER JOIN [Lookup].[LocalArea] LA ON LA.[Id] = C.[LocalAreaId]
+                    ON C.[NotificationId] = N.[Id]
+                    INNER JOIN [ImportNotification].[InterimStatus] I ON I.[ImportNotificationId] = N.[Id]
+                    LEFT JOIN [ImportNotification].[FacilityCollection] FC ON FC.[ImportNotificationId] = N.[Id]
+                WHERE
+                    N.[Id] = @notificationId",
+                new SqlParameter("@notificationId", id)).SingleAsync();
         }
 
         public async Task<bool> Delete(Guid notificationId)
