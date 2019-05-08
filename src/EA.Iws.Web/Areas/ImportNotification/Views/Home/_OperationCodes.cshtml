@@ -4,6 +4,11 @@
 <div class="overview-block">
         @if (Model.Details.WasteOperation != null && Model.Details.WasteOperation.OperationCodes != null && Model.Details.WasteOperation.OperationCodes.Any())
         {
+            if (Model.ShowChangeWasteOperationLink)
+            {
+                <div class="change-answer">@Html.ActionLink("Change", "WasteOperation", "UpdateJourney", new { id = Model.Details.Id }, null)</div>
+            }
+
             <div class="overview-block-element">
                 @string.Join(", ", Model.Details.WasteOperation.OperationCodes)
             </div>

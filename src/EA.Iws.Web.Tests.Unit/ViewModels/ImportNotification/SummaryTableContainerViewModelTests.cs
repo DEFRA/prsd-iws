@@ -38,7 +38,7 @@
         }
 
         [Fact]
-        public void Notification_Status_That_ShowChangeWasteTypesChangeLink()
+        public void Notification_Status_That_ShowChangeWasteTypesLink()
         {
             var models = new List<SummaryTableContainerViewModel>()
             {
@@ -54,7 +54,7 @@
         }
 
         [Fact]
-        public void Notification_Status_DoesNot_ShowChangeWasteTypesChangeLink()
+        public void Notification_Status_DoesNot_ShowChangeWasteTypesLink()
         {
             var models = new List<SummaryTableContainerViewModel>()
             {
@@ -68,6 +68,39 @@
             };
 
             Assert.All(models, model => Assert.False(model.ShowChangeWasteTypesLink));
+        }
+
+        [Fact]
+        public void Notification_Status_That_ShowChangeWasteOperationLink()
+        {
+            var models = new List<SummaryTableContainerViewModel>()
+            {
+                CreateModel(ImportNotificationStatus.AwaitingPayment),
+                CreateModel(ImportNotificationStatus.AwaitingAssessment),
+                CreateModel(ImportNotificationStatus.InAssessment),
+                CreateModel(ImportNotificationStatus.ReadyToAcknowledge),
+                CreateModel(ImportNotificationStatus.DecisionRequiredBy),
+                CreateModel(ImportNotificationStatus.Consented)
+            };
+
+            Assert.All(models, model => Assert.True(model.ShowChangeWasteOperationLink));
+        }
+
+        [Fact]
+        public void Notification_Status_DoesNot_ShowChangeWasteOperationLink()
+        {
+            var models = new List<SummaryTableContainerViewModel>()
+            {
+                CreateModel(ImportNotificationStatus.New),
+                CreateModel(ImportNotificationStatus.NotificationReceived),
+                CreateModel(ImportNotificationStatus.Submitted),
+                CreateModel(ImportNotificationStatus.ConsentWithdrawn),
+                CreateModel(ImportNotificationStatus.Objected),
+                CreateModel(ImportNotificationStatus.Withdrawn),
+                CreateModel(ImportNotificationStatus.FileClosed)
+            };
+
+            Assert.All(models, model => Assert.False(model.ShowChangeWasteOperationLink));
         }
 
         [Fact]
@@ -124,9 +157,12 @@
             Assert.True(result.SequenceEqual(expected, new WasteCodeComparer()));
         }
 
-        private SummaryTableContainerViewModel CreateModel(ImportNotificationStatus status, bool canChangeNumberOfShipments = true, bool canChangeEntryExitPoint = true, bool canChangeWasteTypes = true)
+        private static SummaryTableContainerViewModel CreateModel(ImportNotificationStatus status,
+            bool canChangeNumberOfShipments = true, bool canChangeEntryExitPoint = true, bool canChangeWasteTypes = true,
+            bool canChangeWasteOperation = true)
         {
-            return new SummaryTableContainerViewModel(CreateImportNotifiationSummary(status), canChangeNumberOfShipments, canChangeEntryExitPoint, canChangeWasteTypes);
+            return new SummaryTableContainerViewModel(CreateImportNotifiationSummary(status), canChangeNumberOfShipments,
+                canChangeEntryExitPoint, canChangeWasteTypes, canChangeWasteOperation);
         }
 
         private static ImportNotificationSummary CreateImportNotifiationSummary(ImportNotificationStatus status)
