@@ -2,6 +2,7 @@
 {
     using System;
 
+    [Serializable]
     public class AddedCancellableMovement
     {
         public Guid NotificationId { get; set; }

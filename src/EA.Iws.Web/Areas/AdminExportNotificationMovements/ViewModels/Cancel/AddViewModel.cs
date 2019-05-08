@@ -7,12 +7,13 @@
     using Core.Movement;
     using Web.ViewModels.Shared;
 
-    public class AddViewModel
+    public class AddViewModel : IValidatableObject
     {
-        [Required(ErrorMessage = "Please enter a shipment number")]
+        [Required(ErrorMessageResourceName = "AddShipmentNumberRequired", ErrorMessageResourceType = typeof(CancelViewModelResources))]
+        [Range(1, int.MaxValue, ErrorMessage = null, ErrorMessageResourceName = "AddValidShipmentNumber", ErrorMessageResourceType = typeof(CancelViewModelResources))]
         public int? NewShipmentNumber { get; set; }
 
-        [Required(ErrorMessage = "Please enter a date of shipment")]
+        [Required(ErrorMessageResourceName = "AddActualDateOfShipmentRequired", ErrorMessageResourceType = typeof(CancelViewModelResources))]
         public DateTime? NewActualShipmentDate { get; set; }
 
         public IList<AddedCancellableMovement> AddedMovements { get; set; }
@@ -25,6 +26,14 @@
         public AddViewModel()
         {
             AddedMovements = new List<AddedCancellableMovement>();
+        }
+
+        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+        {
+            if (!NewActualShipmentDate.HasValue)
+            {
+                yield return new ValidationResult(CancelViewModelResources.AddActualDateOfShipmentRequired, new[] { "NewActualShipmentDate" });
+            }
         }
     }
 }

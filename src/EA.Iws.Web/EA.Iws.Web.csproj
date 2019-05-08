@@ -1305,6 +1305,11 @@
     </Compile>
     <Compile Include="Areas\AdminExportNotificationMovements\Controllers\ShipmentAuditController.cs" />
     <Compile Include="Areas\AdminExportNotificationMovements\ViewModels\Cancel\AddViewModel.cs" />
+    <Compile Include="Areas\AdminExportNotificationMovements\ViewModels\Cancel\CancelViewModelResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CancelViewModelResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Areas\AdminExportNotificationMovements\ViewModels\ShipmentAudit\ShipmentAuditViewModel.cs" />
     <Compile Include="Areas\AdminExportNotificationMovements\Views\Cancel\CancelResources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -3927,6 +3932,10 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>DeleteControllerResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Areas\AdminExportNotificationMovements\ViewModels\Cancel\CancelViewModelResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>CancelViewModelResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Areas\AdminExportNotificationMovements\ViewModels\CaptureMovement\ReceiptViewModelResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>ReceiptViewModelResources.Designer.cs</LastGenOutput>
@@ -4941,6 +4950,7 @@
     <EmbeddedResource Include="Areas\AdminExportNotificationMovements\ViewModels\CaptureMovement\CaptureViewModelResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>CaptureViewModelResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\NotificationMovements\ViewModels\Create\ThreeWorkingDaysWarningViewModelResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
