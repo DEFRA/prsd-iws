@@ -30,5 +30,11 @@
         public Address Address { get; private set; }
 
         public Contact Contact { get; private set; }
+
+        public void UpdateContact(Contact contact)
+        {
+            Guard.ArgumentNotNull(() => contact, contact);
+            Contact = contact;
+        }
     }
 }

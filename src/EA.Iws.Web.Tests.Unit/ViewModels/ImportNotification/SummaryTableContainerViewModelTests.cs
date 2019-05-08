@@ -71,6 +71,39 @@
         }
 
         [Fact]
+        public void Notification_Status_That_ShowAmendContactLink()
+        {
+            var models = new List<SummaryTableContainerViewModel>()
+            {
+                CreateModel(ImportNotificationStatus.AwaitingPayment),
+                CreateModel(ImportNotificationStatus.AwaitingAssessment),
+                CreateModel(ImportNotificationStatus.InAssessment),
+                CreateModel(ImportNotificationStatus.ReadyToAcknowledge),
+                CreateModel(ImportNotificationStatus.DecisionRequiredBy),
+                CreateModel(ImportNotificationStatus.Consented)
+            };
+
+            Assert.All(models, model => Assert.True(model.CanEditContactDetails));
+        }
+
+        [Fact]
+        public void Notification_Status_DoesNot_ShowAmendContactLink()
+        {
+            var models = new List<SummaryTableContainerViewModel>()
+            {
+                CreateModel(ImportNotificationStatus.New),
+                CreateModel(ImportNotificationStatus.NotificationReceived),
+                CreateModel(ImportNotificationStatus.Submitted),
+                CreateModel(ImportNotificationStatus.ConsentWithdrawn),
+                CreateModel(ImportNotificationStatus.Objected),
+                CreateModel(ImportNotificationStatus.Withdrawn),
+                CreateModel(ImportNotificationStatus.FileClosed)
+            };
+
+            Assert.All(models, model => Assert.False(model.CanEditContactDetails));
+        }
+
+        [Fact]
         public void EwcCodesAreInNumericalOrder()
         {
             var model = CreateModel(ImportNotificationStatus.NotificationReceived);
