@@ -57,6 +57,21 @@
         }
 
         [HttpGet]
+        public ActionResult Add(Guid id)
+        {
+            var model = new AddViewModel();
+
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Add(Guid id, AddViewModel model, string command)
+        {
+            return View(model);
+        }
+
+        [HttpGet]
         public ActionResult Confirm(Guid id)
         {
             object result;

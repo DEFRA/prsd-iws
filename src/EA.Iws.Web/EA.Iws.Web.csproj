@@ -1076,6 +1076,7 @@
     <Content Include="Areas\AdminExportAssessment\Views\UpdateJourney\TransitExitPoint.cshtml" />
     <Content Include="Areas\AdminExportAssessment\Views\UpdateJourney\TransitEntryPointChanged.cshtml" />
     <Content Include="Areas\AdminExportAssessment\Views\UpdateJourney\TransitExitPointChanged.cshtml" />
+    <Content Include="Areas\AdminExportNotificationMovements\Views\Cancel\Add.cshtml" />
     <None Include="Scripts\jquery-2.1.3.intellisense.js" />
     <Content Include="Scripts\govuk\govuk-template.js" />
     <Content Include="Scripts\govuk\ie.js" />
@@ -1303,7 +1304,13 @@
       <DependentUpon>EditResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Areas\AdminExportNotificationMovements\Controllers\ShipmentAuditController.cs" />
+    <Compile Include="Areas\AdminExportNotificationMovements\ViewModels\Cancel\AddViewModel.cs" />
     <Compile Include="Areas\AdminExportNotificationMovements\ViewModels\ShipmentAudit\ShipmentAuditViewModel.cs" />
+    <Compile Include="Areas\AdminExportNotificationMovements\Views\Cancel\CancelResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CancelResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Areas\AdminExportNotificationMovements\Views\ShipmentAudit\IndexResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -1326,7 +1333,7 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>WasteCodesResources.resx</DependentUpon>
-	</Compile>
+    </Compile>
     <Compile Include="Areas\Reports\Controllers\ComplianceController.cs" />
     <Compile Include="Areas\Reports\ViewModels\Compliance\IndexViewModel.cs" />
     <Compile Include="Areas\Reports\Views\Compliance\ComplianceResources.Designer.cs">
@@ -3936,6 +3943,10 @@
     <EmbeddedResource Include="Areas\AdminExportNotificationMovements\ViewModels\MovementOverride\IndexViewModelResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>IndexViewModelResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\AdminExportNotificationMovements\Views\Cancel\CancelResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>CancelResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\AdminExportNotificationMovements\Views\CaptureMovement\CancelledResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
