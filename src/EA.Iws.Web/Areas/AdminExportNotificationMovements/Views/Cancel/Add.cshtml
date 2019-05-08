@@ -60,7 +60,8 @@
                 if (Model.AddedMovements.Any())
                 {
                     <div class="form-group @Html.Gds().FormGroupClass(m => m.AddedMovements)">
-                        <table id="AddedMovements" title="Add shipments to cancel">
+                        <h2 class="heading-medium">@Resources.AddSubHeader</h2>
+                        <table id="AddedMovements" title="@Resources.AddSubHeader">
                             <thead>
                                 <tr>
                                     <th>

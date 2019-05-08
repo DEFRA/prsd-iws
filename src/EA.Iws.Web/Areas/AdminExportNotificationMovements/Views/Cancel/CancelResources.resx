@@ -126,6 +126,9 @@
   <data name="AddShipmentButton" xml:space="preserve">
     <value>Add shipment</value>
   </data>
+  <data name="AddSubHeader" xml:space="preserve">
+    <value>Additional shipments to cancel</value>
+  </data>
   <data name="AddSubmitButton" xml:space="preserve">
     <value>Submit</value>
   </data>

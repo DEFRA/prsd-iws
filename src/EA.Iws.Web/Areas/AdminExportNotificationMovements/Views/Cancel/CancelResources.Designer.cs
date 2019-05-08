@@ -88,6 +88,15 @@ namespace EA.Iws.Web.Areas.AdminExportNotificationMovements.Views.Cancel {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Additional shipments to cancel.
+        /// </summary>
+        public static string AddSubHeader {
+            get {
+                return ResourceManager.GetString("AddSubHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Submit.
         /// </summary>
         public static string AddSubmitButton {
