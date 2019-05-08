@@ -26,7 +26,7 @@
         public bool CanEditContactDetails { get; set; }
 
         public SummaryTableContainerViewModel(ImportNotificationSummary details, bool canChangeNumberOfShipments,
-            bool canChangeEntryExitPoint, bool canChangeWasteTypes)
+            bool canChangeEntryExitPoint, bool canChangeWasteTypes, bool canEditContactDetails)
         {
             Details = details;
             ShowChangeLinks = details.Status == ImportNotificationStatus.NotificationReceived;
@@ -36,6 +36,13 @@
                                            details.Status != ImportNotificationStatus.NotificationReceived;
             ShowChangeWasteTypesLink = canChangeEntryExitPoint &&
                                        (details.Status == ImportNotificationStatus.AwaitingPayment ||
+                                        details.Status == ImportNotificationStatus.AwaitingAssessment ||
+                                        details.Status == ImportNotificationStatus.InAssessment ||
+                                        details.Status == ImportNotificationStatus.ReadyToAcknowledge ||
+                                        details.Status == ImportNotificationStatus.DecisionRequiredBy ||
+                                        details.Status == ImportNotificationStatus.Consented);
+
+            CanEditContactDetails = canEditContactDetails && (details.Status == ImportNotificationStatus.AwaitingPayment ||
                                         details.Status == ImportNotificationStatus.AwaitingAssessment ||
                                         details.Status == ImportNotificationStatus.InAssessment ||
                                         details.Status == ImportNotificationStatus.ReadyToAcknowledge ||

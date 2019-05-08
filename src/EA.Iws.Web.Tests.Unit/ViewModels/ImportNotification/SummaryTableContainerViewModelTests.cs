@@ -124,9 +124,9 @@
             Assert.True(result.SequenceEqual(expected, new WasteCodeComparer()));
         }
 
-        private SummaryTableContainerViewModel CreateModel(ImportNotificationStatus status, bool canChangeNumberOfShipments = true, bool canChangeEntryExitPoint = true, bool canChangeWasteTypes = true)
+        private SummaryTableContainerViewModel CreateModel(ImportNotificationStatus status, bool canChangeNumberOfShipments = true, bool canChangeEntryExitPoint = true, bool canChangeWasteTypes = true, bool canEditContactDetails = true)
         {
-            return new SummaryTableContainerViewModel(CreateImportNotifiationSummary(status), canChangeNumberOfShipments, canChangeEntryExitPoint, canChangeWasteTypes);
+            return new SummaryTableContainerViewModel(CreateImportNotifiationSummary(status), canChangeNumberOfShipments, canChangeEntryExitPoint, canChangeWasteTypes, canEditContactDetails);
         }
 
         private static ImportNotificationSummary CreateImportNotifiationSummary(ImportNotificationStatus status)

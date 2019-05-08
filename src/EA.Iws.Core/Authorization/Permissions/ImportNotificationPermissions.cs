@@ -23,5 +23,7 @@
         public const string CanEditComments = "Can edit comments";
 
         public const string CanChangeWasteTypes = "Can Change Waste Types";
+
+        public const string CanEditImportContactDetails = "Can Edit Import Contact Details";
     }
 }
