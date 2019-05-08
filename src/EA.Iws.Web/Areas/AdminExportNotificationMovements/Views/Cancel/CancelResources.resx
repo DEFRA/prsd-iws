@@ -138,6 +138,12 @@
   <data name="DatePrenotified" xml:space="preserve">
     <value>Date prenotified</value>
   </data>
+  <data name="GoToAddNewShipments" xml:space="preserve">
+    <value>I can't find the shipment(s) I want to cancel</value>
+  </data>
+  <data name="GoToShipmentSummary" xml:space="preserve">
+    <value>Go to shipment summary</value>
+  </data>
   <data name="IndexDescription" xml:space="preserve">
     <value>You should only cancel a prenotified shipment if it hasn't been shipped yet.</value>
   </data>

@@ -124,6 +124,24 @@ namespace EA.Iws.Web.Areas.AdminExportNotificationMovements.Views.Cancel {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to I can&apos;t find the shipment(s) I want to cancel.
+        /// </summary>
+        public static string GoToAddNewShipments {
+            get {
+                return ResourceManager.GetString("GoToAddNewShipments", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Go to shipment summary.
+        /// </summary>
+        public static string GoToShipmentSummary {
+            get {
+                return ResourceManager.GetString("GoToShipmentSummary", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to You should only cancel a prenotified shipment if it hasn&apos;t been shipped yet..
         /// </summary>
         public static string IndexDescription {
