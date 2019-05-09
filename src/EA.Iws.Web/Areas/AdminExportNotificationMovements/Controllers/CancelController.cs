@@ -17,6 +17,8 @@
     {
         private readonly IMediator mediator;
         private const string SubmittedMovementListKey = "SubmittedMovementListKey";
+        private const string AddedCancellableMovementsListKey = "AddedCancellableMovementsListKey";
+        private const string AddCommand = "add";
 
         public CancelController(IMediator mediator)
         {
@@ -54,6 +56,66 @@
             TempData[SubmittedMovementListKey] = selectedMovements;
 
             return RedirectToAction("Confirm");
+        }
+
+        [HttpGet]
+        public ActionResult Add(Guid id)
+        {
+            var model = new AddViewModel();
+
+            object result;
+            if (TempData.TryGetValue(AddedCancellableMovementsListKey, out result))
+            {
+                var addedCancellableMovements = result as List<AddedCancellableMovement>;
+
+                TempData[AddedCancellableMovementsListKey] = addedCancellableMovements;
+
+                model.AddedMovements = addedCancellableMovements;
+            }
+
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Add(Guid id, AddViewModel model, string command)
+        {
+            var addedCancellableMovements = new List<AddedCancellableMovement>();
+            object result;
+            if (TempData.TryGetValue(AddedCancellableMovementsListKey, out result))
+            {
+                addedCancellableMovements = result as List<AddedCancellableMovement> ??
+                                            addedCancellableMovements;
+            }
+
+            if (command == AddCommand)
+            {
+                if (!ModelState.IsValid)
+                {
+                    TempData[AddedCancellableMovementsListKey] = addedCancellableMovements;
+
+                    model.AddedMovements = addedCancellableMovements;
+
+                    return View(model);
+                }
+
+                addedCancellableMovements.Add(new AddedCancellableMovement()
+                {
+                    NotificationId = id,
+                    Number = model.NewShipmentNumber.Value,
+                    ShipmentDate = model.NewActualShipmentDate.Value
+                });
+            }
+
+            int removeShipmentNumber;
+            if (int.TryParse(command, out removeShipmentNumber))
+            {
+                addedCancellableMovements.RemoveAll(x => x.Number == removeShipmentNumber);
+            }
+
+            TempData[AddedCancellableMovementsListKey] = addedCancellableMovements;
+
+            return RedirectToAction("Add");
         }
 
         [HttpGet]

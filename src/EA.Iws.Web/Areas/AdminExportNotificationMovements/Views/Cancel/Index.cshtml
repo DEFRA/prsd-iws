@@ -1,12 +1,13 @@
-﻿@model EA.Iws.Web.Areas.AdminExportNotificationMovements.ViewModels.Cancel.SelectMovementsViewModel
+﻿@using Resources = EA.Iws.Web.Areas.AdminExportNotificationMovements.Views.Cancel.CancelResources;
+@model EA.Iws.Web.Areas.AdminExportNotificationMovements.ViewModels.Cancel.SelectMovementsViewModel
 
 @{
-    ViewBag.Title = "Select prenotification to cancel";
+    ViewBag.Title = Resources.IndexTitle;
 }
 
 <header class="hgroup">
-    <h1 class="heading-large">Which prenotifications would you like to cancel?</h1>
-    You can only cancel a prenotified shipment if it hasn't been shipped yet.
+    <h1 class="heading-large">@Resources.IndexHeader</h1>
+    @Resources.IndexDescription
 </header>
 
 @using (Html.BeginForm())
@@ -15,11 +16,11 @@
     @Html.AntiForgeryToken()
 
     <div class="form-group">
-        <h2 class="heading-medium">These prenotifications can be cancelled:</h2>
+        <h2 class="heading-medium">@Resources.IndexSubHeader</h2>
 
         @if (Model.SubmittedMovements.Count == 0)
         {
-            <p>There are no prenotifications to cancel.</p>
+            <p>@Resources.IndexNoPrenotifications</p>
         }
         else
         {
@@ -28,16 +29,16 @@
                     <thead>
                         <tr>
                             <th>
-                                Number
+                                @Resources.ShipmentNumber
                             </th>
                             <th>
-                                Date prenotified
+                                @Resources.DatePrenotified
                             </th>
                             <th>
-                                Shipment due
+                                @Resources.ShipmentDue
                             </th>
                             <th>
-                                <label class="visuallyhidden">Cancel</label>
+                                <label class="visuallyhidden">@Resources.Cancel</label>
                             </th>
                         </tr>
                     </thead>
@@ -77,11 +78,16 @@
                 </table>
             </div>
             <div class="form-group">
-                <button class="button" type="submit">@Constants.ContinueButtonText</button>
+                <button class="button" type="submit">@Constants.ContinueOnlyButtonText</button>
             </div>
         }
     </div>
 }
+
 <div class="form-group">
-    @Html.ActionLink("Go to shipment summary", "Index", "Home")
+    @Html.ActionLink(Resources.GoToAddNewShipments, "Add", "Cancel")
+</div>
+
+<div class="form-group">
+    @Html.ActionLink(Resources.GoToShipmentSummary, "Index", "Home")
 </div>
