@@ -62,6 +62,33 @@ namespace EA.Iws.Web.Areas.AdminImportNotificationMovements.ViewModels.Cancel {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Please enter a date of shipment.
+        /// </summary>
+        public static string AddActualDateOfShipmentRequired {
+            get {
+                return ResourceManager.GetString("AddActualDateOfShipmentRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please enter a shipment number.
+        /// </summary>
+        public static string AddShipmentNumberRequired {
+            get {
+                return ResourceManager.GetString("AddShipmentNumberRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please enter a valid number.
+        /// </summary>
+        public static string AddValidShipmentNumber {
+            get {
+                return ResourceManager.GetString("AddValidShipmentNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to You&apos;ve now cancelled shipments {0} and {1}.
         /// </summary>
         public static string MultipleShipmentHeading {
