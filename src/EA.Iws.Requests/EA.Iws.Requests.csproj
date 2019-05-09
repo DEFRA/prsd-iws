@@ -243,6 +243,7 @@
     <Compile Include="Movement\GetMovementsByIds.cs" />
     <Compile Include="Movement\GetNewMovementIdsByNotificationId.cs" />
     <Compile Include="Movement\GetNotificationNumberByMovementId.cs" />
+    <Compile Include="Movement\GetSubmittedPendingMovements.cs" />
     <Compile Include="NotificationAssessment\AddCarrier.cs" />
     <Compile Include="NotificationAssessment\AddNotificationComment.cs" />
     <Compile Include="NotificationAssessment\CheckFinancialGuaranteeStatus.cs" />

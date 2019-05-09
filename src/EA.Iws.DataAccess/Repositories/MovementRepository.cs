@@ -33,6 +33,19 @@
                 .ToArrayAsync();
         }
 
+        public async Task<IEnumerable<Movement>> GetCancellableMovements(Guid notificationId)
+        {
+            await notificationAuthorization.EnsureAccessAsync(notificationId);
+
+            var currentCancellableMovements = await context.Movements
+                .Where(m =>
+                    m.NotificationId == notificationId
+                    && (m.Status == MovementStatus.Submitted
+                        || m.Status == MovementStatus.Captured)).ToArrayAsync();
+
+            return currentCancellableMovements;
+        }
+
         public async Task<IEnumerable<Movement>> GetPagedMovements(Guid notificationId, int pageNumber, int pageSize)
         {
             await notificationAuthorization.EnsureAccessAsync(notificationId);
