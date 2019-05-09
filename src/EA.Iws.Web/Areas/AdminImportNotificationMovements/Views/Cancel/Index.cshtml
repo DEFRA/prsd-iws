@@ -78,14 +78,17 @@
                     </table>
                 </div>
                 <div class="form-group">
-                    <button class="button" type="submit">@Constants.ContinueButtonText</button>
+                    <button class="button" type="submit">@Constants.ContinueOnlyButtonText</button>
                 </div>
             }
         </div>
     }
+	<div class="form-group">
+		@Html.ActionLink(Resources.GoToAddNewShipments, "Add", "Cancel")
+	</div>
 
     <div class="form-group">
-        @Html.ActionLink("Go to shipment summary", "Index", "Home")
+        @Html.ActionLink(Resources.GoToShipmentSummary, "Index", "Home")
     </div>
 </div>
 

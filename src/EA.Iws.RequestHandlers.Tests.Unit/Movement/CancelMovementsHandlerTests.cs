@@ -80,7 +80,17 @@
             Assert.True(response);
         }
 
-        private CancelMovements GetRequest(int count)
+        [Fact]
+        public async Task CancelPendingMovementsHandler_ReturnsTrue()
+        {
+            var request = GetRequest(CancelMovementCount, true);
+
+            var response = await handler.HandleAsync(request);
+
+            Assert.True(response);
+        }
+
+        private CancelMovements GetRequest(int count, bool isPendingRequest = false)
         {
             var cancelledMovements = new List<MovementData>();
             for (var i = 0; i < count; i++)
@@ -88,12 +98,12 @@
                 cancelledMovements.Add(new MovementData() { Id = Guid.NewGuid(), Number = i + 1 });
             }
 
-            SetMovements(cancelledMovements);
+            SetMovements(cancelledMovements, isPendingRequest);
 
             return new CancelMovements(notificationId, cancelledMovements);
         }
 
-        private void SetMovements(IEnumerable<MovementData> movementDatas)
+        private void SetMovements(IEnumerable<MovementData> movementDatas, bool isPendingRequest)
         {
             var movements = new List<TestableMovement>();
 
@@ -104,7 +114,7 @@
                     Id = movementData.Id,
                     NotificationId = notificationId,
                     Number = movementData.Number,
-                    Status = MovementStatus.Submitted
+                    Status = isPendingRequest ? MovementStatus.Captured : MovementStatus.Submitted
                 });
             }
 
@@ -112,6 +122,6 @@
                 () =>
                     repository.GetMovementsByIds(notificationId,
                         A<IEnumerable<Guid>>.Ignored)).Returns(movements);
-        }
+        }       
     }
 }
