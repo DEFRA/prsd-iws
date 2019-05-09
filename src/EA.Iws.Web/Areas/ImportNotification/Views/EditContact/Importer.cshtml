@@ -1,0 +1,17 @@
+﻿@model EA.Iws.Web.Areas.ImportNotification.ViewModels.EditContact.EditContactViewModel
+@{
+	ViewBag.Title = "Amend importer contact details";
+}
+
+<h1 class="heading-large">Amend importer contact details</h1>
+
+@using (Html.BeginForm())
+{
+	@Html.AntiForgeryToken()
+	@Html.Gds().ValidationSummary()
+
+	@Html.EditorForModel()
+
+	<button type="submit" class="button">@Constants.ContinueButtonText</button>
+}
+

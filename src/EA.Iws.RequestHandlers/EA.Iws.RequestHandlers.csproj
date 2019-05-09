@@ -254,6 +254,8 @@
     <Compile Include="ImportNotification\CompleteDraftImportNotificationHandler.cs" />
     <Compile Include="ImportNotification\CreateImportNotificationHandler.cs" />
     <Compile Include="ImportNotification\Events\CreateImportNotificationAssessment.cs" />
+    <Compile Include="ImportNotification\Exporters\GetExporterByImportNotificationIdHandler.cs" />
+    <Compile Include="ImportNotification\Exporters\SetExporterContactForImportNotificationHandler.cs" />
     <Compile Include="ImportNotification\GetChangeNumberOfShipmentConfrimationDataHandler.cs" />
     <Compile Include="ImportNotification\GetDraftDataHandler.cs" />
     <Compile Include="ImportNotification\GetImportNotificationIdByNumberHandler.cs" />
@@ -263,6 +265,8 @@
     <Compile Include="ImportNotification\GetOriginalNumberOfShipmentsHandler.cs" />
     <Compile Include="ImportNotification\GetImportNotificationWasteTypesHandler.cs" />
     <Compile Include="ImportNotification\GetWasteOperationDataHandler.cs" />
+    <Compile Include="ImportNotification\Importers\GetImporterByImportNotificationIdHandler.cs" />   
+    <Compile Include="ImportNotification\Importers\SetImporterContactForImportNotificationHandler.cs" />
     <Compile Include="ImportNotification\Mappings\AddressMap.cs" />
     <Compile Include="ImportNotification\Mappings\ChemicalCompositionMap.cs" />
     <Compile Include="ImportNotification\Mappings\ContactMap.cs" />
