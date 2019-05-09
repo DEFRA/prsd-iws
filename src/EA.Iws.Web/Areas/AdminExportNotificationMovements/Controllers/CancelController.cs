@@ -101,6 +101,12 @@
                     return View(model);
                 }
 
+                if (addedCancellableMovements.Any(x => x.Number == model.ShipmentNumber))
+                {
+                    ModelState.AddModelError("NewShipmentNumber",
+                        "This Shipment number already exists in your list of additional shipments.");
+                }
+
                 var shipmentValidationResult =
                     await mediator.SendAsync(new IsAddedCancellableMovementValid(id, model.ShipmentNumber));
 
