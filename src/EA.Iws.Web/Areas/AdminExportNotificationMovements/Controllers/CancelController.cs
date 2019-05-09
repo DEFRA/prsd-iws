@@ -104,7 +104,7 @@
                 if (addedCancellableMovements.Any(x => x.Number == model.ShipmentNumber))
                 {
                     ModelState.AddModelError("NewShipmentNumber",
-                        "This Shipment number already exists in your list of additional shipments.");
+                        "This Shipment number already exists in the table below and will be added to the list of shipments that will be cancelled.");
                 }
 
                 var shipmentValidationResult =
