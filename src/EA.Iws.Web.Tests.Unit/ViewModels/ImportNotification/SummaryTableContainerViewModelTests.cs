@@ -102,7 +102,7 @@
 
             Assert.All(models, model => Assert.False(model.ShowChangeWasteOperationLink));
         }
-	[Fact]
+        [Fact]
         public void Notification_Status_That_ShowAmendContactLink()
         {
             var models = new List<SummaryTableContainerViewModel>()
@@ -134,13 +134,7 @@
 
             Assert.All(models, model => Assert.False(model.CanEditContactDetails));
         }
-        
-        
-        
-        
-        
-        
-        
+     
         [Fact]
         public void EwcCodesAreInNumericalOrder()
         {

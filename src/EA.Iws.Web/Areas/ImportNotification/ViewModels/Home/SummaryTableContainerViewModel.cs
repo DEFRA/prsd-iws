@@ -28,7 +28,7 @@
         public bool CanEditContactDetails { get; set; }
 
         public SummaryTableContainerViewModel(ImportNotificationSummary details, bool canChangeNumberOfShipments,
-            bool canChangeEntryExitPoint, bool canChangeWasteTypes, bool canChangeWasteOperation, bool canEditContactDetails )
+            bool canChangeEntryExitPoint, bool canChangeWasteTypes, bool canChangeWasteOperation, bool canEditContactDetails)
         {
             Details = details;
             ShowChangeLinks = details.Status == ImportNotificationStatus.NotificationReceived;
@@ -37,19 +37,8 @@
             ShowChangeEntryExitPointLink = canChangeEntryExitPoint && details.Status != ImportNotificationStatus.New &&
                                            details.Status != ImportNotificationStatus.NotificationReceived;
             ShowChangeWasteTypesLink = canChangeWasteTypes && EditableStatus(details.Status);
-            ShowChangeWasteOperationLink = canChangeWasteOperation && EditableStatus(details.Status);
-                                        details.Status == ImportNotificationStatus.AwaitingAssessment ||
-                                        details.Status == ImportNotificationStatus.InAssessment ||
-                                        details.Status == ImportNotificationStatus.ReadyToAcknowledge ||
-                                        details.Status == ImportNotificationStatus.DecisionRequiredBy ||
-                                        details.Status == ImportNotificationStatus.Consented);
-
-            CanEditContactDetails = canEditContactDetails && (details.Status == ImportNotificationStatus.AwaitingPayment ||
-                                        details.Status == ImportNotificationStatus.AwaitingAssessment ||
-                                        details.Status == ImportNotificationStatus.InAssessment ||
-                                        details.Status == ImportNotificationStatus.ReadyToAcknowledge ||
-                                        details.Status == ImportNotificationStatus.DecisionRequiredBy ||
-                                        details.Status == ImportNotificationStatus.Consented);
+            ShowChangeWasteOperationLink = canChangeWasteOperation && EditableStatus(details.Status);                                       
+            CanEditContactDetails = canEditContactDetails && EditableStatus(details.Status);
 
             if (details.WasteType != null)
             {
