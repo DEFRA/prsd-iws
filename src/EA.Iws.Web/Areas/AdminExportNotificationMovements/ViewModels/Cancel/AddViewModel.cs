@@ -13,7 +13,17 @@
         private const int MaxShipmentNumber = 999999;
 
         [Required(ErrorMessageResourceName = "ShipmentNumberRequired", ErrorMessageResourceType = typeof(CancelViewModelResources))]
-        public int? NewShipmentNumber { get; set; }
+        public string NewShipmentNumber { get; set; }
+
+        public int ShipmentNumber
+        {
+            get
+            {
+                int result;
+                int.TryParse(NewShipmentNumber, out result);
+                return result;
+            }
+        }
 
         [Display(Name = "Date")]
         [Required(ErrorMessageResourceName = "ActualDateOfShipmentRequired", ErrorMessageResourceType = typeof(CancelViewModelResources))]
@@ -33,9 +43,12 @@
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
-            if (!NewShipmentNumber.HasValue || NewShipmentNumber.Value < MinShipmentNumber || NewShipmentNumber.Value > MaxShipmentNumber)
+            int parsedShipmentNumber;
+            if (!int.TryParse(NewShipmentNumber, out parsedShipmentNumber) || parsedShipmentNumber < MinShipmentNumber ||
+                parsedShipmentNumber > MaxShipmentNumber)
             {
-                yield return new ValidationResult(CancelViewModelResources.ShipmentNumberInvalid, new[] { "NewShipmentNumber" });
+                yield return
+                    new ValidationResult(CancelViewModelResources.ShipmentNumberInvalid, new[] { "NewShipmentNumber" });
             }
         }
     }

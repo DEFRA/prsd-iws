@@ -92,17 +92,17 @@
 
             if (command == AddCommand)
             {
+                TempData[AddedCancellableMovementsListKey] = addedCancellableMovements;
+
+                model.AddedMovements = addedCancellableMovements;
+
                 if (!ModelState.IsValid)
                 {
-                    TempData[AddedCancellableMovementsListKey] = addedCancellableMovements;
-
-                    model.AddedMovements = addedCancellableMovements;
-
                     return View(model);
                 }
 
                 var shipmentValidationResult =
-                    await mediator.SendAsync(new IsAddedCancellableMovementValid(id, model.NewShipmentNumber.Value));
+                    await mediator.SendAsync(new IsAddedCancellableMovementValid(id, model.ShipmentNumber));
 
                 if (shipmentValidationResult.IsCancellableExistingShipment)
                 {
@@ -124,7 +124,7 @@
                 addedCancellableMovements.Add(new AddedCancellableMovement()
                 {
                     NotificationId = id,
-                    Number = model.NewShipmentNumber.Value,
+                    Number = model.ShipmentNumber,
                     ShipmentDate = model.NewActualShipmentDate.Value
                 });
             }
