@@ -112,7 +112,8 @@
                 if (shipmentValidationResult.IsNonCancellableExistingShipment)
                 {
                     ModelState.AddModelError("NewShipmentNumber",
-                        string.Format("This Shipment number already exists but the status is {0}",
+                        string.Format(
+                            "This Shipment number already exists but the status is {0}. Seek further advice of how to proceed with the data team leader.",
                             EnumHelper.GetDisplayName(shipmentValidationResult.Status)));
                 }
 
