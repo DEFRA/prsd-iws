@@ -9,7 +9,6 @@
     using Infrastructure.Authorization;
     using Prsd.Core.Mediator;
     using Requests.Movement;
-    using Requests.Movement.Receive;
     using ViewModels.Cancel;
 
     [AuthorizeActivity(typeof(CancelMovements))]
@@ -28,7 +27,7 @@
         [HttpGet]
         public async Task<ActionResult> Index(Guid id)
         {
-            var result = await mediator.SendAsync(new GetSubmittedMovements(id));
+            var result = await mediator.SendAsync(new GetSubmittedPendingMovements(id));
 
             var model = new SelectMovementsViewModel
             {
@@ -44,7 +43,7 @@
         {
             if (!ModelState.IsValid)
             {
-                model.SubmittedMovements = await mediator.SendAsync(new GetSubmittedMovements(id));
+                model.SubmittedMovements = await mediator.SendAsync(new GetSubmittedPendingMovements(id));
                 return View(model);
             }
 

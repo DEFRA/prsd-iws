@@ -177,7 +177,8 @@
             stateMachine.Configure(MovementStatus.Captured)
                 .Permit(Trigger.ReceiveInternal, MovementStatus.Received)
                 .Permit(Trigger.Reject, MovementStatus.Rejected)
-                .Permit(Trigger.SubmitInternal, MovementStatus.Submitted);
+                .Permit(Trigger.SubmitInternal, MovementStatus.Submitted)
+                .Permit(Trigger.Cancel, MovementStatus.Cancelled);
 
             return stateMachine;
         }
