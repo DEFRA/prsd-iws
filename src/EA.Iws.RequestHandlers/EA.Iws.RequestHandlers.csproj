@@ -264,7 +264,8 @@
     <Compile Include="ImportNotification\GetNotificationDetailsHandler.cs" />
     <Compile Include="ImportNotification\GetOriginalNumberOfShipmentsHandler.cs" />
     <Compile Include="ImportNotification\GetImportNotificationWasteTypesHandler.cs" />
-    <Compile Include="ImportNotification\Importers\GetImporterByImportNotificationIdHandler.cs" />
+    <Compile Include="ImportNotification\GetWasteOperationDataHandler.cs" />
+    <Compile Include="ImportNotification\Importers\GetImporterByImportNotificationIdHandler.cs" />   
     <Compile Include="ImportNotification\Importers\SetImporterContactForImportNotificationHandler.cs" />
     <Compile Include="ImportNotification\Mappings\AddressMap.cs" />
     <Compile Include="ImportNotification\Mappings\ChemicalCompositionMap.cs" />
@@ -291,6 +292,7 @@
     <Compile Include="ImportNotification\TransportRoute\GetTransitStateDataForTransitStateHandler.cs" />
     <Compile Include="ImportNotification\UpdateImportNotificationWasteTypesHandler.cs" />
     <Compile Include="ImportNotification\UpdateWasteCodeData.cs" />
+    <Compile Include="ImportNotification\UpdateWasteOperationHandler.cs" />
     <Compile Include="ImportNotification\Validate\AddressValidator.cs" />
     <Compile Include="ImportNotification\Validate\AddressValidatorResources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -921,6 +923,7 @@
     <EmbeddedResource Include="ImportNotification\Validate\WasteOperationValidatorResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>WasteOperationValidatorResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="ImportNotification\Validate\WasteTypeValidatorResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

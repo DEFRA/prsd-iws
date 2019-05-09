@@ -24,6 +24,8 @@
 
         public const string CanChangeWasteTypes = "Can Change Waste Types";
 
+        public const string CanChangeWasteOperation = "Can Change Waste Operation";
+        
         public const string CanEditImportContactDetails = "Can Edit Import Contact Details";
     }
 }

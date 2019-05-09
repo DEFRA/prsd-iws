@@ -23,10 +23,12 @@
 
         public bool ShowChangeWasteTypesLink { get; set; }
         
+        public bool ShowChangeWasteOperationLink { get; set; }
+        
         public bool CanEditContactDetails { get; set; }
 
         public SummaryTableContainerViewModel(ImportNotificationSummary details, bool canChangeNumberOfShipments,
-            bool canChangeEntryExitPoint, bool canChangeWasteTypes, bool canEditContactDetails)
+            bool canChangeEntryExitPoint, bool canChangeWasteTypes, bool canChangeWasteOperation, bool canEditContactDetails )
         {
             Details = details;
             ShowChangeLinks = details.Status == ImportNotificationStatus.NotificationReceived;
@@ -34,8 +36,8 @@
                                               details.Status == ImportNotificationStatus.Consented;
             ShowChangeEntryExitPointLink = canChangeEntryExitPoint && details.Status != ImportNotificationStatus.New &&
                                            details.Status != ImportNotificationStatus.NotificationReceived;
-            ShowChangeWasteTypesLink = canChangeEntryExitPoint &&
-                                       (details.Status == ImportNotificationStatus.AwaitingPayment ||
+            ShowChangeWasteTypesLink = canChangeWasteTypes && EditableStatus(details.Status);
+            ShowChangeWasteOperationLink = canChangeWasteOperation && EditableStatus(details.Status);
                                         details.Status == ImportNotificationStatus.AwaitingAssessment ||
                                         details.Status == ImportNotificationStatus.InAssessment ||
                                         details.Status == ImportNotificationStatus.ReadyToAcknowledge ||
@@ -71,6 +73,16 @@
                 Details.WasteType.HCodes.WasteCodes = hcodesOrdered;
                 Details.WasteType.UnClasses.WasteCodes = unclassesOrdered;
             }
+        }
+
+        private static bool EditableStatus(ImportNotificationStatus status)
+        {
+            return status == ImportNotificationStatus.AwaitingPayment ||
+                   status == ImportNotificationStatus.AwaitingAssessment ||
+                   status == ImportNotificationStatus.InAssessment ||
+                   status == ImportNotificationStatus.ReadyToAcknowledge ||
+                   status == ImportNotificationStatus.DecisionRequiredBy ||
+                   status == ImportNotificationStatus.Consented;
         }
     }
 }
