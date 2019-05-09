@@ -62,7 +62,7 @@ namespace EA.Iws.Web.Areas.AdminExportNotificationMovements.ViewModels.Cancel {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Please enter a date of shipment.
+        ///   Looks up a localized string similar to Please enter the Actual date of shipment.
         /// </summary>
         public static string ActualDateOfShipmentRequired {
             get {

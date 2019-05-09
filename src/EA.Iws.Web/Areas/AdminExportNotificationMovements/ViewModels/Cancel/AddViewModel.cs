@@ -15,6 +15,7 @@
         [Required(ErrorMessageResourceName = "ShipmentNumberRequired", ErrorMessageResourceType = typeof(CancelViewModelResources))]
         public int? NewShipmentNumber { get; set; }
 
+        [Display(Name = "Date")]
         [Required(ErrorMessageResourceName = "ActualDateOfShipmentRequired", ErrorMessageResourceType = typeof(CancelViewModelResources))]
         public DateTime? NewActualShipmentDate { get; set; }
 
@@ -35,11 +36,6 @@
             if (!NewShipmentNumber.HasValue || NewShipmentNumber.Value < MinShipmentNumber || NewShipmentNumber.Value > MaxShipmentNumber)
             {
                 yield return new ValidationResult(CancelViewModelResources.ShipmentNumberInvalid, new[] { "NewShipmentNumber" });
-            }
-
-            if (!NewActualShipmentDate.HasValue)
-            {
-                yield return new ValidationResult(CancelViewModelResources.ActualDateOfShipmentRequired, new[] { "NewActualShipmentDate" });
             }
         }
     }
