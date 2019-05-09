@@ -199,6 +199,8 @@
     <Compile Include="ImportNotificationMovements\GetRejectedImportMovementDetails.cs" />
     <Compile Include="ImportNotificationMovements\GetRejectedImportMovements.cs" />
     <Compile Include="ImportNotification\CompleteDraftImportNotification.cs" />
+    <Compile Include="ImportNotification\Exporters\GetExporterByImportNotificationId.cs" />
+    <Compile Include="ImportNotification\Exporters\SetExporterContactForImportNotification.cs" />
     <Compile Include="ImportNotification\GetChangeNumberOfShipmentConfrimationData.cs" />
     <Compile Include="ImportNotification\GetDraftData.cs" />
     <Compile Include="ImportNotification\GetImportNotificationNumberById.cs" />
@@ -209,6 +211,8 @@
     <Compile Include="ImportNotification\GetSummary.cs" />
     <Compile Include="ImportNotification\GetImportNotificationWasteTypes.cs" />
     <Compile Include="ImportNotification\GetWasteOperationData.cs" />
+    <Compile Include="ImportNotification\Importers\GetImporterByImportNotificationId.cs" />
+    <Compile Include="ImportNotification\Importers\SetImporterContactForImportNotification.cs" />
     <Compile Include="ImportNotification\SetDraftData.cs" />
     <Compile Include="ImportNotification\SetNewNumberOfShipments.cs" />
     <Compile Include="ImportNotification\TransportRoute\GetTransitStateDataForTransitState.cs" />
