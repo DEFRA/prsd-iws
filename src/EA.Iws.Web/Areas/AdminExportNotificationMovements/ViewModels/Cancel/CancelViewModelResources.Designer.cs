@@ -62,29 +62,29 @@ namespace EA.Iws.Web.Areas.AdminExportNotificationMovements.ViewModels.Cancel {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Please enter a date of shipment.
+        ///   Looks up a localized string similar to Please enter the Actual date of shipment.
         /// </summary>
-        public static string AddActualDateOfShipmentRequired {
+        public static string ActualDateOfShipmentRequired {
             get {
-                return ResourceManager.GetString("AddActualDateOfShipmentRequired", resourceCulture);
+                return ResourceManager.GetString("ActualDateOfShipmentRequired", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Please enter a shipment number.
+        ///   Looks up a localized string similar to The Shipment number is invalid.
         /// </summary>
-        public static string AddShipmentNumberRequired {
+        public static string ShipmentNumberInvalid {
             get {
-                return ResourceManager.GetString("AddShipmentNumberRequired", resourceCulture);
+                return ResourceManager.GetString("ShipmentNumberInvalid", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Please enter a valid number.
+        ///   Looks up a localized string similar to Please enter the Shipment number.
         /// </summary>
-        public static string AddValidShipmentNumber {
+        public static string ShipmentNumberRequired {
             get {
-                return ResourceManager.GetString("AddValidShipmentNumber", resourceCulture);
+                return ResourceManager.GetString("ShipmentNumberRequired", resourceCulture);
             }
         }
     }

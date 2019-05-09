@@ -113,6 +113,11 @@
             get { return (Status == MovementStatus.Captured || Status == MovementStatus.New) && Date <= SystemTime.UtcNow; }
         }
 
+        public bool IsInternallyCancellable
+        {
+            get { return Status == MovementStatus.Submitted || Status == MovementStatus.Captured; }
+        }
+
         public string CreatedBy { get; private set; }
 
         public DateTime CreatedOnDate { get; internal set; }

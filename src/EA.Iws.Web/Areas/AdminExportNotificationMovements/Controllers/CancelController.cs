@@ -7,11 +7,13 @@
     using System.Web.Mvc;
     using Core.Movement;
     using Infrastructure.Authorization;
+    using Prsd.Core.Helpers;
     using Prsd.Core.Mediator;
     using Requests.Movement;
     using ViewModels.Cancel;
 
     [AuthorizeActivity(typeof(CancelMovements))]
+    [AuthorizeActivity(typeof(IsAddedCancellableMovementValid))]
     public class CancelController : Controller
     {
         private readonly IMediator mediator;
@@ -92,7 +94,7 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Add(Guid id, AddViewModel model, string command)
+        public async Task<ActionResult> Add(Guid id, AddViewModel model, string command)
         {
             var addedCancellableMovements = new List<AddedCancellableMovement>();
             object result;
@@ -104,19 +106,46 @@
 
             if (command == AddCommand)
             {
+                TempData[AddedCancellableMovementsListKey] = addedCancellableMovements;
+
+                model.AddedMovements = addedCancellableMovements;
+
                 if (!ModelState.IsValid)
                 {
-                    TempData[AddedCancellableMovementsListKey] = addedCancellableMovements;
+                    return View(model);
+                }
 
-                    model.AddedMovements = addedCancellableMovements;
+                if (addedCancellableMovements.Any(x => x.Number == model.ShipmentNumber))
+                {
+                    ModelState.AddModelError("NewShipmentNumber",
+                        "This Shipment number already exists in the table below and will be added to the list of shipments that will be cancelled.");
+                }
 
+                var shipmentValidationResult =
+                    await mediator.SendAsync(new IsAddedCancellableMovementValid(id, model.ShipmentNumber));
+
+                if (shipmentValidationResult.IsCancellableExistingShipment)
+                {
+                    ModelState.AddModelError("NewShipmentNumber",
+                        "This Shipment number already exists and is shown on the previous screen. Please tick the shipment number on that screen.");
+                }
+                if (shipmentValidationResult.IsNonCancellableExistingShipment)
+                {
+                    ModelState.AddModelError("NewShipmentNumber",
+                        string.Format(
+                            "This Shipment number already exists but the status is {0}. Seek further advice of how to proceed with the data team leader.",
+                            EnumHelper.GetDisplayName(shipmentValidationResult.Status)));
+                }
+
+                if (!ModelState.IsValid)
+                {
                     return View(model);
                 }
 
                 addedCancellableMovements.Add(new AddedCancellableMovement()
                 {
                     NotificationId = id,
-                    Number = model.NewShipmentNumber.Value,
+                    Number = model.ShipmentNumber,
                     ShipmentDate = model.NewActualShipmentDate.Value
                 });
             }

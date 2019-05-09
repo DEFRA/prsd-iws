@@ -37,13 +37,11 @@
                         <tr>
                             <td style="border-bottom: none !important">
                                 <div class="form-group @Html.Gds().FormGroupClass(m => m.NewShipmentNumber)">
-                                    @Html.Gds().ValidationMessageFor(m => m.NewShipmentNumber)
                                     @Html.Gds().TextBoxFor(m => m.NewShipmentNumber)
                                 </div>
                             </td>
                             <td style="border-bottom: none !important">
                                 <div class="form-group @Html.Gds().FormGroupClass(m => m.NewActualShipmentDate)">
-                                    @Html.Gds().ValidationMessageFor(m => m.NewActualShipmentDate)
                                     @Html.Gds().TextBoxFor(m => m.NewActualShipmentDate, new { data_datable = "ddmmyy", @style = "width: 65%;" })
                                 </div>
                             </td>

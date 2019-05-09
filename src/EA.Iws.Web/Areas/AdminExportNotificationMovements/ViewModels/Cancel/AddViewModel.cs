@@ -9,11 +9,24 @@
 
     public class AddViewModel : IValidatableObject
     {
-        [Required(ErrorMessageResourceName = "AddShipmentNumberRequired", ErrorMessageResourceType = typeof(CancelViewModelResources))]
-        [Range(1, int.MaxValue, ErrorMessage = null, ErrorMessageResourceName = "AddValidShipmentNumber", ErrorMessageResourceType = typeof(CancelViewModelResources))]
-        public int? NewShipmentNumber { get; set; }
+        private const int MinShipmentNumber = 1;
+        private const int MaxShipmentNumber = 999999;
 
-        [Required(ErrorMessageResourceName = "AddActualDateOfShipmentRequired", ErrorMessageResourceType = typeof(CancelViewModelResources))]
+        [Required(ErrorMessageResourceName = "ShipmentNumberRequired", ErrorMessageResourceType = typeof(CancelViewModelResources))]
+        public string NewShipmentNumber { get; set; }
+
+        public int ShipmentNumber
+        {
+            get
+            {
+                int result;
+                int.TryParse(NewShipmentNumber, out result);
+                return result;
+            }
+        }
+
+        [Display(Name = "Date")]
+        [Required(ErrorMessageResourceName = "ActualDateOfShipmentRequired", ErrorMessageResourceType = typeof(CancelViewModelResources))]
         public DateTime? NewActualShipmentDate { get; set; }
 
         public IList<AddedCancellableMovement> AddedMovements { get; set; }
@@ -30,9 +43,12 @@
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
-            if (!NewActualShipmentDate.HasValue)
+            int parsedShipmentNumber;
+            if (!int.TryParse(NewShipmentNumber, out parsedShipmentNumber) || parsedShipmentNumber < MinShipmentNumber ||
+                parsedShipmentNumber > MaxShipmentNumber)
             {
-                yield return new ValidationResult(CancelViewModelResources.AddActualDateOfShipmentRequired, new[] { "NewActualShipmentDate" });
+                yield return
+                    new ValidationResult(CancelViewModelResources.ShipmentNumberInvalid, new[] { "NewShipmentNumber" });
             }
         }
     }
