@@ -178,6 +178,7 @@
     <Compile Include="MovementOperation\MovementOperationData.cs" />
     <Compile Include="MovementReceipt\Decision.cs" />
     <Compile Include="Movement\AddedCancellableMovement.cs" />
+    <Compile Include="Movement\AddedCancellableMovementValidation.cs" />
     <Compile Include="Movement\BulkReceiptRecovery\ReceiptRecoveryDataRow.cs" />
     <Compile Include="Movement\BulkReceiptRecovery\ReceiptRecoveryRulesSummary.cs" />
     <Compile Include="Movement\BulkReceiptRecovery\ReceiptRecoveryContentRuleResult.cs" />

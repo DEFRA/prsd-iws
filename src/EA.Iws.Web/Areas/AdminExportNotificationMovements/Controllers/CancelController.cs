@@ -7,12 +7,14 @@
     using System.Web.Mvc;
     using Core.Movement;
     using Infrastructure.Authorization;
+    using Prsd.Core.Helpers;
     using Prsd.Core.Mediator;
     using Requests.Movement;
     using Requests.Movement.Receive;
     using ViewModels.Cancel;
 
     [AuthorizeActivity(typeof(CancelMovements))]
+    [AuthorizeActivity(typeof(IsAddedCancellableMovementValid))]
     public class CancelController : Controller
     {
         private readonly IMediator mediator;
@@ -78,7 +80,7 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Add(Guid id, AddViewModel model, string command)
+        public async Task<ActionResult> Add(Guid id, AddViewModel model, string command)
         {
             var addedCancellableMovements = new List<AddedCancellableMovement>();
             object result;
@@ -96,6 +98,26 @@
 
                     model.AddedMovements = addedCancellableMovements;
 
+                    return View(model);
+                }
+
+                var shipmentValidationResult =
+                    await mediator.SendAsync(new IsAddedCancellableMovementValid(id, model.NewShipmentNumber.Value));
+
+                if (shipmentValidationResult.IsCancellableExistingShipment)
+                {
+                    ModelState.AddModelError("NewShipmentNumber",
+                        "This Shipment number already exists and is shown on the previous screen. Please tick the shipment number on that screen.");
+                }
+                if (shipmentValidationResult.IsNonCancellableExistingShipment)
+                {
+                    ModelState.AddModelError("NewShipmentNumber",
+                        string.Format("This Shipment number already exists but the status is {0}",
+                            EnumHelper.GetDisplayName(shipmentValidationResult.Status)));
+                }
+
+                if (!ModelState.IsValid)
+                {
                     return View(model);
                 }
 

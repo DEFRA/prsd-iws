@@ -265,7 +265,7 @@
     <Compile Include="ImportNotification\GetOriginalNumberOfShipmentsHandler.cs" />
     <Compile Include="ImportNotification\GetImportNotificationWasteTypesHandler.cs" />
     <Compile Include="ImportNotification\GetWasteOperationDataHandler.cs" />
-    <Compile Include="ImportNotification\Importers\GetImporterByImportNotificationIdHandler.cs" />   
+    <Compile Include="ImportNotification\Importers\GetImporterByImportNotificationIdHandler.cs" />
     <Compile Include="ImportNotification\Importers\SetImporterContactForImportNotificationHandler.cs" />
     <Compile Include="ImportNotification\Mappings\AddressMap.cs" />
     <Compile Include="ImportNotification\Mappings\ChemicalCompositionMap.cs" />
@@ -455,6 +455,7 @@
     <Compile Include="Movement\GetMovementsByIdsHandler.cs" />
     <Compile Include="Movement\GetNewMovementIdsByNotificationIdHandler.cs" />
     <Compile Include="Movement\GetNotificationNumberByMovementIdHandler.cs" />
+    <Compile Include="Movement\IsAddedCancellableMovementValidHandler.cs" />
     <Compile Include="Movement\Mappings\MovementAuditMap.cs" />
     <Compile Include="Movement\SetMovementCommentsHandler.cs" />
     <Compile Include="Movement\SetMultipleMovementFileIdHandler.cs" />
