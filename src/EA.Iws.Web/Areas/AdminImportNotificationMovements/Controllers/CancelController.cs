@@ -33,6 +33,21 @@
 
             var model = new CancellableMovementsViewModel(result);
 
+            object cancellableMovements;
+            if (TempData.TryGetValue(SubmittedMovementListKey, out cancellableMovements))
+            {
+                var selectedMovements = cancellableMovements as List<ImportCancelMovementData>;
+
+                if (selectedMovements.Count > 0)
+                {
+                    Guid[] selectedMovementIds = selectedMovements.Select(m => m.Id).ToArray();
+
+                    foreach (var movement in model.CancellableMovements.Where(x => selectedMovementIds.Contains(x.MovementId)))
+                    {
+                        movement.IsSelected = true;
+                    }
+                }
+            }
             return View(model);
         }
 
