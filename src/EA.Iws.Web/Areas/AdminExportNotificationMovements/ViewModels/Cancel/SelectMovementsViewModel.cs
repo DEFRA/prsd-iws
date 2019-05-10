@@ -9,14 +9,20 @@
     {
         public SelectMovementsViewModel()
         {
+            SubmittedMovements = new List<SubmittedMovement>();
+            AddedMovements = new List<AddedCancellableMovement>();
         }
 
-        public SelectMovementsViewModel(List<SubmittedMovement> result)
+        public SelectMovementsViewModel(IEnumerable<SubmittedMovement> result,
+            IEnumerable<AddedCancellableMovement> addedMovements)
         {
             SubmittedMovements = result.OrderByDescending(m => m.ShipmentDate).ToList();
+            AddedMovements = addedMovements.ToList();
         }
 
         public List<SubmittedMovement> SubmittedMovements { get; set; }
+
+        public IList<AddedCancellableMovement> AddedMovements { get; set; }
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {

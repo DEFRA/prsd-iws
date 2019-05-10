@@ -34,7 +34,8 @@
 
             var model = new SelectMovementsViewModel
             {
-                SubmittedMovements = result
+                SubmittedMovements = result,
+                AddedMovements = GetTempDataAddedCancellableMovements()
             };
 
             object cancellableMovements;
@@ -44,7 +45,7 @@
 
                 if (selectedMovements.Count > 0)
                 {
-                    Guid[] selectedMovementIds = selectedMovements.Select(m => m.Id).ToArray();
+                    var selectedMovementIds = selectedMovements.Select(m => m.Id).ToArray();
 
                     foreach (var movement in model.SubmittedMovements.Where(x => selectedMovementIds.Contains(x.MovementId)))
                     {
@@ -52,16 +53,28 @@
                     }
                 }
             }
+
             return View(model);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Index(Guid id, SelectMovementsViewModel model)
+        public async Task<ActionResult> Index(Guid id, SelectMovementsViewModel model, string command)
         {
+            var addedCancellableMovements = GetTempDataAddedCancellableMovements();
+
+            int removeShipmentNumber;
+            if (!string.IsNullOrEmpty(command) && int.TryParse(command, out removeShipmentNumber))
+            {
+                addedCancellableMovements.RemoveAll(x => x.Number == removeShipmentNumber);
+                TempData[AddedCancellableMovementsListKey] = addedCancellableMovements;
+                return RedirectToAction("Index");
+            }
+
             if (!ModelState.IsValid)
             {
                 model.SubmittedMovements = await mediator.SendAsync(new GetSubmittedPendingMovements(id));
+                model.AddedMovements = addedCancellableMovements;
                 return View(model);
             }
 
@@ -78,17 +91,10 @@
         [HttpGet]
         public ActionResult Add(Guid id)
         {
-            var model = new AddViewModel();
-
-            object result;
-            if (TempData.TryGetValue(AddedCancellableMovementsListKey, out result))
+            var model = new AddViewModel()
             {
-                var addedCancellableMovements = result as List<AddedCancellableMovement>;
-
-                TempData[AddedCancellableMovementsListKey] = addedCancellableMovements;
-
-                model.AddedMovements = addedCancellableMovements;
-            }
+                AddedMovements = GetTempDataAddedCancellableMovements()
+            };
 
             return View(model);
         }
@@ -97,18 +103,10 @@
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Add(Guid id, AddViewModel model, string command)
         {
-            var addedCancellableMovements = new List<AddedCancellableMovement>();
-            object result;
-            if (TempData.TryGetValue(AddedCancellableMovementsListKey, out result))
-            {
-                addedCancellableMovements = result as List<AddedCancellableMovement> ??
-                                            addedCancellableMovements;
-            }
+            var addedCancellableMovements = GetTempDataAddedCancellableMovements();
 
             if (command == AddCommand)
             {
-                TempData[AddedCancellableMovementsListKey] = addedCancellableMovements;
-
                 model.AddedMovements = addedCancellableMovements;
 
                 if (!ModelState.IsValid)
@@ -224,6 +222,21 @@
             }
 
             return RedirectToAction("Index");
+        }
+
+        private List<AddedCancellableMovement> GetTempDataAddedCancellableMovements()
+        {
+            var result = new List<AddedCancellableMovement>();
+
+            object addedMovements;
+            if (TempData.TryGetValue(AddedCancellableMovementsListKey, out addedMovements))
+            {
+                result = addedMovements as List<AddedCancellableMovement> ?? result;
+
+                TempData[AddedCancellableMovementsListKey] = result;
+            }
+
+            return result;
         }
     }
 }
