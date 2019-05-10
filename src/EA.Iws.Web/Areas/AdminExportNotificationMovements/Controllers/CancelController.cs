@@ -20,6 +20,7 @@
         private const string SubmittedMovementListKey = "SubmittedMovementListKey";
         private const string AddedCancellableMovementsListKey = "AddedCancellableMovementsListKey";
         private const string AddCommand = "add";
+        private const int AddedCancellableMovementsLimit = 20;
 
         public CancelController(IMediator mediator)
         {
@@ -115,6 +116,13 @@
                     return View(model);
                 }
 
+                if (addedCancellableMovements.Count >= AddedCancellableMovementsLimit)
+                {
+                    ModelState.AddModelError("NewShipmentNumber",
+                        string.Format(
+                            "You cannot add more than {0} extra records at a time. If more are needed to be added, please carry out this process a further time after confirmation as taken place.",
+                            AddedCancellableMovementsLimit));
+                }
                 if (addedCancellableMovements.Any(x => x.Number == model.ShipmentNumber))
                 {
                     ModelState.AddModelError("NewShipmentNumber",
