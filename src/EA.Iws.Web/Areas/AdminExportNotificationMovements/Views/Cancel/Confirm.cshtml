@@ -9,9 +9,9 @@
 </header>
 
 <div class="form-group">
-    @foreach (var movement in Model.SelectedMovements)
+    @foreach (var number in Model.SelectedShipmentNumbers)
     {
-        <span class="operation-code-list">@movement.Number</span>
+        <span class="operation-code-list">@number</span>
     }
 </div>
 

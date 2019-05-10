@@ -170,23 +170,16 @@
         [HttpGet]
         public ActionResult Confirm(Guid id)
         {
-            object result;
-            if (TempData.TryGetValue(SubmittedMovementListKey, out result))
+            var selectedMovement = GetTempDataSelectedMovements();
+            var addedMovements = GetTempDataAddedCancellableMovements();
+
+            if (!selectedMovement.Any() && !addedMovements.Any())
             {
-                var selectedMovements = result as List<MovementData>;
-
-                var model = new ConfirmViewModel
-                {
-                    NotificationId = id,
-                    SelectedMovements = selectedMovements
-                };
-
-                TempData[SubmittedMovementListKey] = selectedMovements;
-
-                return View(model);
+                return RedirectToAction("Index");
             }
 
-            return RedirectToAction("Index");
+            var model = new ConfirmViewModel(id, selectedMovement, addedMovements);
+            return View(model);
         }
 
         [HttpPost]
@@ -222,6 +215,21 @@
             }
 
             return RedirectToAction("Index");
+        }
+
+        private List<MovementData> GetTempDataSelectedMovements()
+        {
+            var result = new List<MovementData>();
+
+            object selectedMovements;
+            if (TempData.TryGetValue(SubmittedMovementListKey, out selectedMovements))
+            {
+                result = selectedMovements as List<MovementData> ?? result;
+
+                TempData[SubmittedMovementListKey] = result;
+            }
+
+            return result;
         }
 
         private List<AddedCancellableMovement> GetTempDataAddedCancellableMovements()
