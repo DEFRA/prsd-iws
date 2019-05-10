@@ -34,7 +34,8 @@
 
             var model = new SelectMovementsViewModel
             {
-                SubmittedMovements = result
+                SubmittedMovements = result,
+                AddedMovements = GetTempDataAddedCancellableMovements()
             };
 
             object cancellableMovements;
@@ -51,16 +52,6 @@
                         movement.IsSelected = true;
                     }
                 }
-            }
-
-            object addedMovements;
-            if (TempData.TryGetValue(AddedCancellableMovementsListKey, out addedMovements))
-            {
-                var addedCancellableMovements = addedMovements as List<AddedCancellableMovement>;
-
-                TempData[AddedCancellableMovementsListKey] = addedCancellableMovements;
-
-                model.AddedMovements = addedCancellableMovements;
             }
 
             return View(model);
@@ -89,17 +80,10 @@
         [HttpGet]
         public ActionResult Add(Guid id)
         {
-            var model = new AddViewModel();
-
-            object result;
-            if (TempData.TryGetValue(AddedCancellableMovementsListKey, out result))
+            var model = new AddViewModel()
             {
-                var addedCancellableMovements = result as List<AddedCancellableMovement>;
-
-                TempData[AddedCancellableMovementsListKey] = addedCancellableMovements;
-
-                model.AddedMovements = addedCancellableMovements;
-            }
+                AddedMovements = GetTempDataAddedCancellableMovements()
+            };
 
             return View(model);
         }
@@ -108,18 +92,10 @@
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Add(Guid id, AddViewModel model, string command)
         {
-            var addedCancellableMovements = new List<AddedCancellableMovement>();
-            object result;
-            if (TempData.TryGetValue(AddedCancellableMovementsListKey, out result))
-            {
-                addedCancellableMovements = result as List<AddedCancellableMovement> ??
-                                            addedCancellableMovements;
-            }
+            var addedCancellableMovements = GetTempDataAddedCancellableMovements();
 
             if (command == AddCommand)
             {
-                TempData[AddedCancellableMovementsListKey] = addedCancellableMovements;
-
                 model.AddedMovements = addedCancellableMovements;
 
                 if (!ModelState.IsValid)
@@ -235,6 +211,21 @@
             }
 
             return RedirectToAction("Index");
+        }
+
+        private List<AddedCancellableMovement> GetTempDataAddedCancellableMovements()
+        {
+            var result = new List<AddedCancellableMovement>();
+
+            object addedMovements;
+            if (TempData.TryGetValue(AddedCancellableMovementsListKey, out addedMovements))
+            {
+                result = addedMovements as List<AddedCancellableMovement> ?? result;
+
+                TempData[AddedCancellableMovementsListKey] = result;
+            }
+
+            return result;
         }
     }
 }
