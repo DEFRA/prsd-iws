@@ -59,11 +59,22 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Index(Guid id, SelectMovementsViewModel model)
+        public async Task<ActionResult> Index(Guid id, SelectMovementsViewModel model, string command)
         {
+            var addedCancellableMovements = GetTempDataAddedCancellableMovements();
+
+            int removeShipmentNumber;
+            if (!string.IsNullOrEmpty(command) && int.TryParse(command, out removeShipmentNumber))
+            {
+                addedCancellableMovements.RemoveAll(x => x.Number == removeShipmentNumber);
+                TempData[AddedCancellableMovementsListKey] = addedCancellableMovements;
+                return RedirectToAction("Index");
+            }
+
             if (!ModelState.IsValid)
             {
                 model.SubmittedMovements = await mediator.SendAsync(new GetSubmittedPendingMovements(id));
+                model.AddedMovements = addedCancellableMovements;
                 return View(model);
             }
 
