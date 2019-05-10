@@ -38,19 +38,14 @@
                 AddedMovements = GetTempDataAddedCancellableMovements()
             };
 
-            object cancellableMovements;
-            if (TempData.TryGetValue(SubmittedMovementListKey, out cancellableMovements))
+            var selectedMovements = GetTempDataSelectedMovements();
+            if (selectedMovements.Count > 0)
             {
-                var selectedMovements = cancellableMovements as List<MovementData>;
+                var selectedMovementIds = selectedMovements.Select(m => m.Id).ToArray();
 
-                if (selectedMovements.Count > 0)
+                foreach (var movement in model.SubmittedMovements.Where(x => selectedMovementIds.Contains(x.MovementId)))
                 {
-                    var selectedMovementIds = selectedMovements.Select(m => m.Id).ToArray();
-
-                    foreach (var movement in model.SubmittedMovements.Where(x => selectedMovementIds.Contains(x.MovementId)))
-                    {
-                        movement.IsSelected = true;
-                    }
+                    movement.IsSelected = true;
                 }
             }
 
@@ -202,17 +197,16 @@
         [HttpGet]
         public ActionResult Success(Guid id)
         {
-            object result;
-            if (TempData.TryGetValue(SubmittedMovementListKey, out result))
+            var selectedMovements = GetTempDataSelectedMovements();
+
+            if (!selectedMovements.Any())
             {
-                var selectedMovements = result as List<MovementData>;
-
-                var shipmentNumbers = selectedMovements.Select(m => m.Number).ToList();
-
-                return View(new SuccessViewModel(id, shipmentNumbers));
+                return RedirectToAction("Index");
             }
 
-            return RedirectToAction("Index");
+            var shipmentNumbers = selectedMovements.Select(m => m.Number).ToList();
+
+            return View(new SuccessViewModel(id, shipmentNumbers));
         }
 
         private List<MovementData> GetTempDataSelectedMovements()
