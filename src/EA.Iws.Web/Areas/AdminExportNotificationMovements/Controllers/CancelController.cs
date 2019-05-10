@@ -198,13 +198,15 @@
         public ActionResult Success(Guid id)
         {
             var selectedMovements = GetTempDataSelectedMovements();
+            var addedMovements = GetTempDataAddedCancellableMovements();
 
-            if (!selectedMovements.Any())
+            if (!selectedMovements.Any() && !addedMovements.Any())
             {
                 return RedirectToAction("Index");
             }
 
             var shipmentNumbers = selectedMovements.Select(m => m.Number).ToList();
+            shipmentNumbers.AddRange(addedMovements.Select(x => x.Number));
 
             return View(new SuccessViewModel(id, shipmentNumbers));
         }

@@ -10,7 +10,9 @@
         private const string multiShipmentsHeading = "You've now cancelled shipments {0} and {1}";
 
         public Guid NotificationId { get; private set; }
+
         public List<int> ShipmentNumbers { get; private set; }
+
         public string HeadingText
         {
             get
@@ -28,10 +30,10 @@
             }
         }
 
-        public SuccessViewModel(Guid notificationId, List<int> shipmentNumbers)
+        public SuccessViewModel(Guid notificationId, IEnumerable<int> shipmentNumbers)
         {
             NotificationId = notificationId;
-            ShipmentNumbers = shipmentNumbers;
+            ShipmentNumbers = shipmentNumbers.OrderBy(x => x).ToList();
         }
     }
 }

@@ -15,8 +15,11 @@
             IEnumerable<AddedCancellableMovement> addedMovements)
         {
             NotificationId = notificationId;
-            SelectedShipmentNumbers =
-                (selectedMovements.Select(x => x.Number).Concat(addedMovements.Select(x => x.Number))).OrderBy(x => x);
+
+            var shipmentNumbers = selectedMovements.Select(m => m.Number).ToList();
+            shipmentNumbers.AddRange(addedMovements.Select(x => x.Number));
+
+            SelectedShipmentNumbers = shipmentNumbers.OrderBy(x => x);
         }
 
         public Guid NotificationId { get; set; }
