@@ -44,7 +44,7 @@
 
                 if (selectedMovements.Count > 0)
                 {
-                    Guid[] selectedMovementIds = selectedMovements.Select(m => m.Id).ToArray();
+                    var selectedMovementIds = selectedMovements.Select(m => m.Id).ToArray();
 
                     foreach (var movement in model.SubmittedMovements.Where(x => selectedMovementIds.Contains(x.MovementId)))
                     {
@@ -52,6 +52,17 @@
                     }
                 }
             }
+
+            object addedMovements;
+            if (TempData.TryGetValue(AddedCancellableMovementsListKey, out addedMovements))
+            {
+                var addedCancellableMovements = addedMovements as List<AddedCancellableMovement>;
+
+                TempData[AddedCancellableMovementsListKey] = addedCancellableMovements;
+
+                model.AddedMovements = addedCancellableMovements;
+            }
+
             return View(model);
         }
 
