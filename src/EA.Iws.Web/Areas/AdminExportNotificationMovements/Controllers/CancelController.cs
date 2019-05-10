@@ -170,15 +170,15 @@
         [HttpGet]
         public ActionResult Confirm(Guid id)
         {
-            var selectedMovement = GetTempDataSelectedMovements();
+            var selectedMovements = GetTempDataSelectedMovements();
             var addedMovements = GetTempDataAddedCancellableMovements();
 
-            if (!selectedMovement.Any() && !addedMovements.Any())
+            if (!selectedMovements.Any() && !addedMovements.Any())
             {
                 return RedirectToAction("Index");
             }
 
-            var model = new ConfirmViewModel(id, selectedMovement, addedMovements);
+            var model = new ConfirmViewModel(id, selectedMovements, addedMovements);
             return View(model);
         }
 
@@ -186,19 +186,17 @@
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Confirm(Guid id, ConfirmViewModel model)
         {
-            object result;
-            if (TempData.TryGetValue(SubmittedMovementListKey, out result))
+            var selectedMovements = GetTempDataSelectedMovements();
+            var addedMovements = GetTempDataAddedCancellableMovements();
+
+            if (!selectedMovements.Any() && !addedMovements.Any())
             {
-                var selectedMovements = result as List<MovementData>;
-
-                TempData[SubmittedMovementListKey] = selectedMovements;
-
-                await mediator.SendAsync(new CancelMovements(model.NotificationId, selectedMovements));
-
-                return RedirectToAction("Success");
+                return RedirectToAction("Index");
             }
 
-            return RedirectToAction("Index");
+            await mediator.SendAsync(new CancelMovements(model.NotificationId, selectedMovements, addedMovements));
+
+            return RedirectToAction("Success");
         }
 
         [HttpGet]
