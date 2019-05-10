@@ -11,14 +11,16 @@
         {
         }
 
-        public ConfirmViewModel(Guid notificationId, IEnumerable<MovementData> result)
+        public ConfirmViewModel(Guid notificationId, IEnumerable<MovementData> selectedMovements,
+            IEnumerable<AddedCancellableMovement> addedMovements)
         {
             NotificationId = notificationId;
-            SelectedMovements = result.OrderBy(m => m.Number).ToList();
+            SelectedShipmentNumbers =
+                (selectedMovements.Select(x => x.Number).Concat(addedMovements.Select(x => x.Number))).OrderBy(x => x);
         }
 
         public Guid NotificationId { get; set; }
 
-        public IEnumerable<MovementData> SelectedMovements { get; set; }
+        public IEnumerable<int> SelectedShipmentNumbers { get; set; }
     }
 }

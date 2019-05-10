@@ -18,7 +18,7 @@
     <div class="form-group">
         <h2 class="heading-medium">@Resources.IndexSubHeader</h2>
 
-        @if (Model.SubmittedMovements.Count == 0)
+        @if (Model.SubmittedMovements.Count == 0 && Model.AddedMovements.Count == 0)
         {
             <p>@Resources.IndexNoPrenotifications</p>
         }
@@ -44,8 +44,8 @@
                     </thead>
                     <tbody>
                         @for (var i = 0; i < Model.SubmittedMovements.Count; i++)
-                        {
-                            var idForThisCheckBox = Html.NameFor(m => m.SubmittedMovements[i].IsSelected);
+                    {
+                        var idForThisCheckBox = Html.NameFor(m => m.SubmittedMovements[i].IsSelected);
 
                             <tr>
                                 <td>
@@ -60,7 +60,7 @@
                                     else
                                     {
                                         @:- -
-                                    }
+                                }
                                 </td>
                                 <td>
                                     @Html.Gds().DisplayShortDateFor(m => m.SubmittedMovements[i].ShipmentDate)
@@ -77,46 +77,46 @@
                     </tbody>
                 </table>
             </div>
+
+            if (Model.AddedMovements.Any())
+            {
+                <div class="form-group @Html.Gds().FormGroupClass(m => m.AddedMovements)">
+                    <h2 class="heading-medium">@Resources.AddSubHeader</h2>
+                    <table id="AddedMovements" title="@Resources.AddSubHeader">
+                        <thead>
+                            <tr>
+                                <th>
+                                    @Resources.ShipmentNumber
+                                </th>
+                                <th>
+                                    @Resources.ActualDateOfShipment
+                                </th>
+                                <th>
+                                    <label>@Constants.ActionText</label>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @for (var i = 0; i < Model.AddedMovements.OrderBy(x => x.Number).Count(); i++)
+                        {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(m => m.AddedMovements[i].Number)
+                                    </td>
+                                    <td>
+                                        @Html.Gds().DisplayShortDateFor(m => m.AddedMovements[i].ShipmentDate)
+                                    </td>
+                                    <td>
+                                        <button class="link-submit" type="submit" name="command" value="@Model.AddedMovements[i].Number">@Constants.RemoveText</button>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            }
             <div class="form-group">
                 <button class="button" type="submit">@Constants.ContinueOnlyButtonText</button>
-            </div>
-        }
-
-        @if (Model.AddedMovements.Any())
-        {
-            <div class="form-group @Html.Gds().FormGroupClass(m => m.AddedMovements)">
-                <h2 class="heading-medium">@Resources.AddSubHeader</h2>
-                <table id="AddedMovements" title="@Resources.AddSubHeader">
-                    <thead>
-                        <tr>
-                            <th>
-                                @Resources.ShipmentNumber
-                            </th>
-                            <th>
-                                @Resources.ActualDateOfShipment
-                            </th>
-                            <th>
-                                <label>@Constants.ActionText</label>
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @for (var i = 0; i < Model.AddedMovements.OrderBy(x => x.Number).Count(); i++)
-                        {
-                            <tr>
-                                <td>
-                                    @Html.DisplayFor(m => m.AddedMovements[i].Number)
-                                </td>
-                                <td>
-                                    @Html.Gds().DisplayShortDateFor(m => m.AddedMovements[i].ShipmentDate)
-                                </td>
-                                <td>
-                                    <button class="link-submit" type="submit" name="command" value="@Model.AddedMovements[i].Number">@Constants.RemoveText</button>
-                                </td>
-                            </tr>
-                        }
-                    </tbody>
-                </table>
             </div>
         }
     </div>
