@@ -71,7 +71,7 @@
                 return RedirectToAction("Index");
             }
 
-            if (!ModelState.IsValid)
+            if (!ModelState.IsValid && !addedCancellableMovements.Any())
             {
                 model.SubmittedMovements = await mediator.SendAsync(new GetSubmittedPendingMovements(id));
                 model.AddedMovements = addedCancellableMovements;
