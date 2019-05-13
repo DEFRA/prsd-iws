@@ -6,6 +6,7 @@
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Core.Movement;
+    using Core.Shared;
     using Infrastructure.Authorization;
     using Prsd.Core.Helpers;
     using Prsd.Core.Mediator;
@@ -134,10 +135,16 @@
                 }
                 if (shipmentValidationResult.IsNonCancellableExistingShipment)
                 {
+                    var completedDisplay = shipmentValidationResult.NotificationType == NotificationType.Recovery
+                        ? CancelControllerResources.Recovered
+                        : CancelControllerResources.Disposed;
+
                     ModelState.AddModelError("NewShipmentNumber",
                         string.Format(
                             "This Shipment number already exists but the status is {0}. Seek further advice of how to proceed with the data team leader.",
-                            EnumHelper.GetDisplayName(shipmentValidationResult.Status)));
+                            shipmentValidationResult.Status == MovementStatus.Completed
+                                ? completedDisplay
+                                : EnumHelper.GetDisplayName(shipmentValidationResult.Status)));
                 }
 
                 if (!ModelState.IsValid)
