@@ -5,14 +5,15 @@
     using System.ComponentModel.DataAnnotations;
     using System.Linq;
     using Core.Movement;
-    using Web.ViewModels.Shared;
+    using Infrastructure.Validation;
 
-    public class AddViewModel : IValidatableObject
+    public class AddViewModel
     {
         private const int MinShipmentNumber = 1;
         private const int MaxShipmentNumber = 999999;
 
         [Required(ErrorMessageResourceName = "ShipmentNumberRequired", ErrorMessageResourceType = typeof(CancelViewModelResources))]
+        [Range(MinShipmentNumber, MaxShipmentNumber, ErrorMessageResourceName = "ShipmentNumberInvalid", ErrorMessageResourceType = typeof(CancelViewModelResources))]
         public string NewShipmentNumber { get; set; }
 
         public int ShipmentNumber
@@ -39,17 +40,6 @@
         public AddViewModel()
         {
             AddedMovements = new List<AddedCancellableMovement>();
-        }
-
-        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
-        {
-            int parsedShipmentNumber;
-            if (!int.TryParse(NewShipmentNumber, out parsedShipmentNumber) || parsedShipmentNumber < MinShipmentNumber ||
-                parsedShipmentNumber > MaxShipmentNumber)
-            {
-                yield return
-                    new ValidationResult(CancelViewModelResources.ShipmentNumberInvalid, new[] { "NewShipmentNumber" });
-            }
         }
     }
 }
