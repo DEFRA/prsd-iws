@@ -32,8 +32,7 @@
         {
             var submittedMovements = await mediator.SendAsync(new GetSubmittedPendingMovements(id));
 
-            var addedMovements = GetTempDataAddedCancellableMovements();
-            addedMovements = addedMovements.Where(x => x.NotificationId == id).ToList();
+            var addedMovements = GetTempDataAddedCancellableMovements().Where(x => x.NotificationId == id).ToList();
             TempData[AddedCancellableMovementsListKey] = addedMovements;
 
             var model = new SelectMovementsViewModel
@@ -42,7 +41,8 @@
                 AddedMovements = addedMovements
             };
 
-            var selectedMovements = GetTempDataSelectedMovements();
+            var selectedMovements = GetTempDataSelectedMovements().Where(x => x.NotificationId == id).ToList();
+            TempData[SubmittedMovementListKey] = selectedMovements;
             if (selectedMovements.Count > 0)
             {
                 var selectedMovementIds = selectedMovements.Select(m => m.Id).ToArray();
@@ -62,7 +62,7 @@
         {
             var selectedMovements = model.SubmittedMovements
                 .Where(m => m.IsSelected)
-                .Select(p => new MovementData { Id = p.MovementId, Number = p.Number })
+                .Select(p => new MovementData { NotificationId = id, Id = p.MovementId, Number = p.Number })
                 .ToList();
 
             TempData[SubmittedMovementListKey] = selectedMovements;
@@ -91,7 +91,7 @@
 
             return RedirectToAction("Confirm");
         }
-
+        
         [HttpGet]
         public ActionResult Add(Guid id)
         {
