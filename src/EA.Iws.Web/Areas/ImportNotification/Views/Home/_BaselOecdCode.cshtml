@@ -4,11 +4,6 @@
 <div class="overview-block">
     @if (Model.Details.WasteType != null && !Model.Details.WasteType.BaselCode.IsEmpty())
     {
-        if (Model.ShowChangeWasteTypesLink)
-        {
-            <div class="change-answer">@Html.ActionLink("Change", "WasteCodes", "UpdateJourney", new { id = Model.Details.Id }, null)</div>
-        }
-
         if (Model.Details.WasteType.BaselCode.IsNotApplicable)
         {
             <div class="overview-block-element">@Resource.CodesNotApplicableText</div>
