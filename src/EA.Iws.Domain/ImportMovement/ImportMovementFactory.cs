@@ -11,6 +11,8 @@
     [AutoRegister]
     public class ImportMovementFactory : IImportMovementFactory
     {
+        private const int CalendarDaysLimit = 60;
+
         private readonly IImportMovementNumberValidator numberValidator;
         private readonly IImportNotificationAssessmentRepository assessmentRepository;
 
@@ -47,9 +49,12 @@
                 {
                     throw new InvalidOperationException("The actual date of shipment cannot be before the prenotification date.");
                 }
-                if (actualShipmentDate.Date > prenotificationDate.Value.Date.AddDays(60))
+                if (actualShipmentDate.Date > prenotificationDate.Value.Date.AddDays(CalendarDaysLimit))
                 {
-                    throw new InvalidOperationException("The actual date of shipment should not be more than 30 calendar days after the prenotification date.");
+                    throw new InvalidOperationException(
+                        string.Format(
+                            "The actual date of shipment should not be more than {0} calendar days after the prenotification date.",
+                            CalendarDaysLimit));
                 }
             }
 

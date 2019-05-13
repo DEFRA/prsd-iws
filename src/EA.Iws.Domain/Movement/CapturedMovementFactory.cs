@@ -11,10 +11,12 @@
     [AutoRegister]
     public class CapturedMovementFactory : ICapturedMovementFactory
     {
+        private const int CalendarDaysLimit = 60;
+
         private readonly IMovementNumberValidator movementNumberValidator;
         private readonly INotificationAssessmentRepository assessmentRepository;
         private readonly IUserContext userContext;
-
+        
         public CapturedMovementFactory(IMovementNumberValidator movementNumberValidator, INotificationAssessmentRepository assessmentRepository,
             IUserContext userContext)
         {
@@ -54,9 +56,12 @@
                 {
                     throw new InvalidOperationException("The actual date of shipment cannot be before the prenotification date.");
                 }
-                if (actualShipmentDate.Date > prenotificationDate.Value.Date.AddDays(60))
+                if (actualShipmentDate.Date > prenotificationDate.Value.Date.AddDays(CalendarDaysLimit))
                 {
-                    throw new InvalidOperationException("The actual date of shipment should not be more than 30 calendar days after the prenotification date.");
+                    throw new InvalidOperationException(
+                        string.Format(
+                            "The actual date of shipment should not be more than {0} calendar days after the prenotification date.",
+                            CalendarDaysLimit));
                 }
             }
 
