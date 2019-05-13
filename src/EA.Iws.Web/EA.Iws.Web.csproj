@@ -1308,6 +1308,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>EditResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Areas\AdminExportNotificationMovements\Controllers\CancelControllerResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CancelControllerResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Areas\AdminExportNotificationMovements\Controllers\ShipmentAuditController.cs" />
     <Compile Include="Areas\AdminExportNotificationMovements\ViewModels\Cancel\AddViewModel.cs" />
     <Compile Include="Areas\AdminExportNotificationMovements\ViewModels\Cancel\CancelViewModelResources.Designer.cs">
@@ -3951,6 +3956,10 @@
     <EmbeddedResource Include="Areas\AdminExportAssessment\Views\YCode\YCodeResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>YCodeResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\AdminExportNotificationMovements\Controllers\CancelControllerResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>CancelControllerResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\AdminExportNotificationMovements\Controllers\DeleteControllerResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
