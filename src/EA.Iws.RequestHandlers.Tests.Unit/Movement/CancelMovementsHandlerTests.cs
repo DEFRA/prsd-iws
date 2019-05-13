@@ -7,6 +7,7 @@
     using Core.Movement;
     using Domain.Movement;
     using FakeItEasy;
+    using Prsd.Core;
     using Prsd.Core.Domain;
     using RequestHandlers.Movement;
     using Requests.Movement;
@@ -19,6 +20,7 @@
         private readonly CancelMovementsHandler handler;
         private readonly IMovementRepository repository;
         private readonly IMovementAuditRepository movementAuditRepository;
+        private readonly ICapturedMovementFactory capturedMovementFactory;
 
         private readonly Guid notificationId;
         private const string AnyString = "test";
@@ -35,10 +37,12 @@
             repository = A.Fake<IMovementRepository>();
             movementAuditRepository = A.Fake<IMovementAuditRepository>();
             var userContext = A.Fake<IUserContext>();
+            capturedMovementFactory = A.Fake<ICapturedMovementFactory>();
 
             A.CallTo(() => userContext.UserId).Returns(userId);
 
-            handler = new CancelMovementsHandler(context, repository, movementAuditRepository, userContext);
+            handler = new CancelMovementsHandler(context, repository, movementAuditRepository, userContext,
+                capturedMovementFactory);
         }
 
         [Fact]
@@ -90,6 +94,69 @@
             Assert.True(response);
         }
 
+        [Fact]
+        public async Task CancelPendingMovementsHandler_WithAddedMovements_Captures()
+        {
+            var request = GetRequestWithAddedMovements();
+
+            var addedMovements = request.AddedMovements.ToList();
+
+            await handler.HandleAsync(request);
+
+            A.CallTo(
+                    () =>
+                        capturedMovementFactory.Create(A<Guid>.That.Matches(guid => guid == notificationId),
+                            A<int>.That.Matches(number => addedMovements.Exists(x => x.Number == number)),
+                            A<DateTime?>.Ignored, A<DateTime>.Ignored, false))
+                .MustHaveHappened(Repeated.Exactly.Times(addedMovements.Count));
+        }
+
+        [Fact]
+        public async Task CancelPendingMovementsHandler_WithAddedMovements_AuditsPrenotification()
+        {
+            var request = GetRequestWithAddedMovements();
+
+            var addedMovements = request.AddedMovements.ToList();
+
+            await handler.HandleAsync(request);
+
+            A.CallTo(
+                    () =>
+                        movementAuditRepository.Add(
+                            A<MovementAudit>.That.Matches(
+                                m =>
+                                    m.NotificationId == notificationId &&
+                                    addedMovements.Exists(x => x.Number == m.ShipmentNumber) &&
+                                    m.Type == (int)MovementAuditType.Prenotified)))
+                .MustHaveHappened(Repeated.Exactly.Times(addedMovements.Count));
+        }
+
+        [Fact]
+        public async Task CancelMovementsHandler_WithAddedMovements_LogsAuditAsCancelled()
+        {
+            var request = GetRequestWithAddedMovements();
+
+            await handler.HandleAsync(request);
+
+            A.CallTo(
+                    () =>
+                        movementAuditRepository.Add(
+                            A<MovementAudit>.That.Matches(
+                                m => m.NotificationId == notificationId && m.Type == (int)MovementAuditType.Cancelled)))
+                .MustHaveHappened(
+                    Repeated.Exactly.Times(request.CancelledMovements.Count() + request.AddedMovements.Count()));
+        }
+
+        [Fact]
+        public async Task CancelMovementsHandler_WithAddedMovements_ReturnsTrue()
+        {
+            var request = GetRequestWithAddedMovements();
+
+            var response = await handler.HandleAsync(request);
+
+            Assert.True(response);
+        }
+
         private CancelMovements GetRequest(int count, bool isPendingRequest = false)
         {
             var cancelledMovements = new List<MovementData>();
@@ -122,6 +189,78 @@
                 () =>
                     repository.GetMovementsByIds(notificationId,
                         A<IEnumerable<Guid>>.Ignored)).Returns(movements);
-        }       
+        }
+
+        private CancelMovements GetRequestWithAddedMovements()
+        {
+            var cancelledMovements = new List<MovementData>()
+            {
+                new MovementData() { Id = Guid.NewGuid(), Number = 1 },
+                new MovementData() { Id = Guid.NewGuid(), Number = 2 },
+                new MovementData() { Id = Guid.NewGuid(), Number = 3 }
+            };
+
+            var addedMovements = new List<AddedCancellableMovement>()
+            {
+                new AddedCancellableMovement()
+                {
+                    NotificationId = notificationId,
+                    Number = 4,
+                    ShipmentDate = SystemTime.Now
+                },
+                new AddedCancellableMovement()
+                {
+                    NotificationId = notificationId,
+                    Number = 5,
+                    ShipmentDate = SystemTime.Now
+                }
+            };
+
+            var firstAddedMovement = new TestableMovement()
+            {
+                Id = Guid.NewGuid(),
+                NotificationId = notificationId,
+                Number = 4,
+                Status = MovementStatus.Submitted
+            };
+
+            var secondAddedMovement = new TestableMovement()
+            {
+                Id = Guid.NewGuid(),
+                NotificationId = notificationId,
+                Number = 5,
+                Status = MovementStatus.Submitted
+            };
+
+            A.CallTo(
+                () =>
+                    capturedMovementFactory.Create(notificationId,
+                        A<int>.That.Matches(number => number == firstAddedMovement.Number), A<DateTime?>.Ignored,
+                        A<DateTime>.Ignored, false)).Returns(firstAddedMovement);
+
+            A.CallTo(
+                () =>
+                    capturedMovementFactory.Create(notificationId,
+                        A<int>.That.Matches(number => number == secondAddedMovement.Number), A<DateTime?>.Ignored,
+                        A<DateTime>.Ignored, false)).Returns(secondAddedMovement);
+
+            var movements = cancelledMovements.Select(cancelled => new TestableMovement
+            {
+                Id = cancelled.Id,
+                NotificationId = notificationId,
+                Number = cancelled.Number,
+                Status = MovementStatus.Submitted
+            }).ToList();
+
+            movements.Add(firstAddedMovement);
+            movements.Add(secondAddedMovement);
+
+            A.CallTo(
+                () =>
+                    repository.GetMovementsByIds(notificationId,
+                        A<IEnumerable<Guid>>.Ignored)).Returns(movements);
+
+            return new CancelMovements(notificationId, cancelledMovements, addedMovements);
+        }
     }
 }
