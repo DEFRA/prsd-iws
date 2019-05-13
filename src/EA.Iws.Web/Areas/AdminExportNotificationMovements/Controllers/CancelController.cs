@@ -35,11 +35,7 @@
             var addedMovements = GetTempDataAddedCancellableMovements().Where(x => x.NotificationId == id).ToList();
             TempData[AddedCancellableMovementsListKey] = addedMovements;
 
-            var model = new SelectMovementsViewModel
-            {
-                SubmittedMovements = submittedMovements,
-                AddedMovements = addedMovements
-            };
+            var model = new SelectMovementsViewModel(submittedMovements, addedMovements);
 
             var selectedMovements = GetTempDataSelectedMovements().Where(x => x.NotificationId == id).ToList();
             TempData[SubmittedMovementListKey] = selectedMovements;
@@ -95,10 +91,7 @@
         [HttpGet]
         public ActionResult Add(Guid id)
         {
-            var model = new AddViewModel()
-            {
-                AddedMovements = GetTempDataAddedCancellableMovements()
-            };
+            var model = new AddViewModel(GetTempDataAddedCancellableMovements());
 
             return View(model);
         }
@@ -256,7 +249,7 @@
                 TempData[AddedCancellableMovementsListKey] = result;
             }
 
-            return result;
+            return result.OrderBy(x => x.Number).ToList();
         }
     }
 }

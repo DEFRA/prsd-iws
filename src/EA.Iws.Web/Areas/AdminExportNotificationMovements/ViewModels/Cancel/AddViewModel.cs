@@ -33,12 +33,7 @@
 
         public AddViewModel(IEnumerable<AddedCancellableMovement> addedMovements)
         {
-            AddedMovements = addedMovements.ToList();
-        }
-
-        public AddViewModel()
-        {
-            AddedMovements = new List<AddedCancellableMovement>();
+            AddedMovements = addedMovements.OrderBy(x => x.Number).ToList();
         }
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)

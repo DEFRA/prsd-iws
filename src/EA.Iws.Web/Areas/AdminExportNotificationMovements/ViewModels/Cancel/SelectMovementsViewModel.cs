@@ -7,17 +7,11 @@
 
     public class SelectMovementsViewModel : IValidatableObject
     {
-        public SelectMovementsViewModel()
-        {
-            SubmittedMovements = new List<SubmittedMovement>();
-            AddedMovements = new List<AddedCancellableMovement>();
-        }
-
         public SelectMovementsViewModel(IEnumerable<SubmittedMovement> result,
             IEnumerable<AddedCancellableMovement> addedMovements)
         {
-            SubmittedMovements = result.OrderByDescending(m => m.ShipmentDate).ToList();
-            AddedMovements = addedMovements.ToList();
+            SubmittedMovements = result.OrderBy(x => x.Number).ToList();
+            AddedMovements = addedMovements.OrderBy(x => x.Number).ToList();
         }
 
         public List<SubmittedMovement> SubmittedMovements { get; set; }
