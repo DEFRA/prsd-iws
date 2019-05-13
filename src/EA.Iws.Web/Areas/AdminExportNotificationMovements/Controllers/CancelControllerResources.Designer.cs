@@ -71,6 +71,42 @@ namespace EA.Iws.Web.Areas.AdminExportNotificationMovements.Controllers {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to This Shipment number already exists in the table below and will be added to the list of shipments that will be cancelled..
+        /// </summary>
+        public static string DuplicateShipmentNumber {
+            get {
+                return ResourceManager.GetString("DuplicateShipmentNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You cannot add more than {0} extra records at a time. If more are needed to be added, please carry out this process a further time after confirmation as taken place..
+        /// </summary>
+        public static string ExceedShpmentLimit {
+            get {
+                return ResourceManager.GetString("ExceedShpmentLimit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This Shipment number already exists and is shown on the previous screen. Please tick the shipment number on that screen..
+        /// </summary>
+        public static string IsCancellableExistingShipment {
+            get {
+                return ResourceManager.GetString("IsCancellableExistingShipment", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This Shipment number already exists but the status is {0}. Seek further advice of how to proceed with the data team leader..
+        /// </summary>
+        public static string IsNonCancellableExistingShipment {
+            get {
+                return ResourceManager.GetString("IsNonCancellableExistingShipment", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Recovered.
         /// </summary>
         public static string Recovered {

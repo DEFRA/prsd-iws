@@ -120,6 +120,18 @@
   <data name="Disposed" xml:space="preserve">
     <value>Disposed</value>
   </data>
+  <data name="DuplicateShipmentNumber" xml:space="preserve">
+    <value>This Shipment number already exists in the table below and will be added to the list of shipments that will be cancelled.</value>
+  </data>
+  <data name="ExceedShpmentLimit" xml:space="preserve">
+    <value>You cannot add more than {0} extra records at a time. If more are needed to be added, please carry out this process a further time after confirmation as taken place.</value>
+  </data>
+  <data name="IsCancellableExistingShipment" xml:space="preserve">
+    <value>This Shipment number already exists and is shown on the previous screen. Please tick the shipment number on that screen.</value>
+  </data>
+  <data name="IsNonCancellableExistingShipment" xml:space="preserve">
+    <value>This Shipment number already exists but the status is {0}. Seek further advice of how to proceed with the data team leader.</value>
+  </data>
   <data name="Recovered" xml:space="preserve">
     <value>Recovered</value>
   </data>
