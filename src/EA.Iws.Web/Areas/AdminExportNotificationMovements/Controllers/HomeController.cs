@@ -19,6 +19,9 @@
     {
         private readonly IMediator mediator;
         private readonly AuthorizationService authorizationService;
+        // TempData stored in the Cancel controller
+        private const string SubmittedMovementListKey = "SubmittedMovementListKey";
+        private const string AddedCancellableMovementsListKey = "AddedCancellableMovementsListKey";
 
         public HomeController(IMediator mediator, AuthorizationService authorizationService)
         {
@@ -29,6 +32,9 @@
         [HttpGet]
         public async Task<ActionResult> Index(Guid id, int? status, int page = 1)
         {
+            TempData[SubmittedMovementListKey] = null;
+            TempData[AddedCancellableMovementsListKey] = null;
+
             var movementsSummary = await mediator.SendAsync(new GetSummaryAndTable(id, (MovementStatus?)status, page));
             var canDeleteMovement = await authorizationService.AuthorizeActivity(typeof(DeleteMovement));
 

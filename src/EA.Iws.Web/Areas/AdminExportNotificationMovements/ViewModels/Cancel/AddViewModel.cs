@@ -33,7 +33,7 @@
 
         public AddViewModel(IEnumerable<AddedCancellableMovement> addedMovements)
         {
-            AddedMovements = addedMovements.ToList();
+            AddedMovements = addedMovements.OrderBy(x => x.Number).ToList();
         }
 
         public AddViewModel()

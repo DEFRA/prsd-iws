@@ -30,15 +30,15 @@
         [HttpGet]
         public async Task<ActionResult> Index(Guid id)
         {
-            var result = await mediator.SendAsync(new GetSubmittedPendingMovements(id));
+            var submittedMovements = await mediator.SendAsync(new GetSubmittedPendingMovements(id));
 
-            var model = new SelectMovementsViewModel
-            {
-                SubmittedMovements = result,
-                AddedMovements = GetTempDataAddedCancellableMovements()
-            };
+            var addedMovements = GetTempDataAddedCancellableMovements().Where(x => x.NotificationId == id).ToList();
+            TempData[AddedCancellableMovementsListKey] = addedMovements;
 
-            var selectedMovements = GetTempDataSelectedMovements();
+            var model = new SelectMovementsViewModel(submittedMovements, addedMovements);
+
+            var selectedMovements = GetTempDataSelectedMovements().Where(x => x.NotificationId == id).ToList();
+            TempData[SubmittedMovementListKey] = selectedMovements;
             if (selectedMovements.Count > 0)
             {
                 var selectedMovementIds = selectedMovements.Select(m => m.Id).ToArray();
@@ -56,6 +56,18 @@
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Index(Guid id, SelectMovementsViewModel model, string command)
         {
+            var selectedMovements = model.SubmittedMovements
+                .Where(m => m.IsSelected)
+                .Select(p => new MovementData { NotificationId = id, Id = p.MovementId, Number = p.Number })
+                .ToList();
+
+            TempData[SubmittedMovementListKey] = selectedMovements;
+
+            if (command == AddCommand)
+            {
+                return RedirectToAction("Add");
+            }
+
             var addedCancellableMovements = GetTempDataAddedCancellableMovements();
 
             int removeShipmentNumber;
@@ -73,23 +85,13 @@
                 return View(model);
             }
 
-            var selectedMovements = model.SubmittedMovements
-               .Where(m => m.IsSelected)
-               .Select(p => new MovementData { Id = p.MovementId, Number = p.Number })
-               .ToList();
-
-            TempData[SubmittedMovementListKey] = selectedMovements;
-
             return RedirectToAction("Confirm");
         }
-
+        
         [HttpGet]
         public ActionResult Add(Guid id)
         {
-            var model = new AddViewModel()
-            {
-                AddedMovements = GetTempDataAddedCancellableMovements()
-            };
+            var model = new AddViewModel(GetTempDataAddedCancellableMovements());
 
             return View(model);
         }
@@ -247,7 +249,7 @@
                 TempData[AddedCancellableMovementsListKey] = result;
             }
 
-            return result;
+            return result.OrderBy(x => x.Number).ToList();
         }
     }
 }
