@@ -30,12 +30,16 @@
         [HttpGet]
         public async Task<ActionResult> Index(Guid id)
         {
-            var result = await mediator.SendAsync(new GetSubmittedPendingMovements(id));
+            var submittedMovements = await mediator.SendAsync(new GetSubmittedPendingMovements(id));
+
+            var addedMovements = GetTempDataAddedCancellableMovements();
+            addedMovements = addedMovements.Where(x => x.NotificationId == id).ToList();
+            TempData[AddedCancellableMovementsListKey] = addedMovements;
 
             var model = new SelectMovementsViewModel
             {
-                SubmittedMovements = result,
-                AddedMovements = GetTempDataAddedCancellableMovements()
+                SubmittedMovements = submittedMovements,
+                AddedMovements = addedMovements
             };
 
             var selectedMovements = GetTempDataSelectedMovements();
