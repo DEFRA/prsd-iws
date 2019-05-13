@@ -36,6 +36,11 @@
             AddedMovements = addedMovements.OrderBy(x => x.Number).ToList();
         }
 
+        public AddViewModel()
+        {
+            AddedMovements = new List<AddedCancellableMovement>();
+        }
+
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             int parsedShipmentNumber;

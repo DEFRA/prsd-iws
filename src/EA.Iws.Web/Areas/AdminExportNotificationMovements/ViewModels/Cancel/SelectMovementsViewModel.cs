@@ -7,6 +7,12 @@
 
     public class SelectMovementsViewModel : IValidatableObject
     {
+        public SelectMovementsViewModel()
+        {
+            SubmittedMovements = new List<SubmittedMovement>();
+            AddedMovements = new List<AddedCancellableMovement>();
+        }
+
         public SelectMovementsViewModel(IEnumerable<SubmittedMovement> result,
             IEnumerable<AddedCancellableMovement> addedMovements)
         {
