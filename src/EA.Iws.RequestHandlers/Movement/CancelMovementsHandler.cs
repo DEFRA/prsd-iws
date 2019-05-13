@@ -1,5 +1,7 @@
 ﻿namespace EA.Iws.RequestHandlers.Movement
 {
+    using System;
+    using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
     using Core.Movement;
@@ -16,20 +18,25 @@
         private readonly IMovementRepository repository;
         private readonly IMovementAuditRepository movementAuditRepository;
         private readonly IUserContext userContext;
+        private readonly ICapturedMovementFactory capturedMovementFactory;
 
         public CancelMovementsHandler(IwsContext context, IMovementRepository repository,
             IMovementAuditRepository movementAuditRepository,
-            IUserContext userContext)
+            IUserContext userContext,
+            ICapturedMovementFactory capturedMovementFactory)
         {
             this.repository = repository;
             this.context = context;
             this.movementAuditRepository = movementAuditRepository;
             this.userContext = userContext;
+            this.capturedMovementFactory = capturedMovementFactory;
         }
 
         public async Task<bool> HandleAsync(CancelMovements message)
         {
-            var movementIds = message.CancelledMovements.Select(m => m.Id);
+            var movementIds = message.CancelledMovements.Select(m => m.Id).ToList();
+
+            movementIds.AddRange((await CaptureAddedMovements(message)).Select(m => m.Id));
 
             var movements = (await repository.GetMovementsByIds(message.NotificationId, movementIds)).ToList();
 
@@ -49,6 +56,33 @@
             await context.SaveChangesAsync();
 
             return true;
+        }
+
+        private async Task<List<Movement>> CaptureAddedMovements(CancelMovements message)
+        {
+            var result = new List<Movement>();
+
+            foreach (var addedMovement in message.AddedMovements)
+            {
+                var movement = await capturedMovementFactory.Create(message.NotificationId, addedMovement.Number,
+                    SystemTime.Now, addedMovement.ShipmentDate, false);
+
+                repository.Add(movement);
+
+                await context.SaveChangesAsync();
+
+                result.Add(movement);
+            }
+
+            foreach (var movement in result)
+            {
+                await movementAuditRepository.Add(new MovementAudit(movement.NotificationId, movement.Number,
+                    userContext.UserId.ToString(), (int)MovementAuditType.Prenotified, SystemTime.Now));
+            }
+
+            await context.SaveChangesAsync();
+
+            return result;
         }
     }
 }
