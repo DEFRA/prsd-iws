@@ -56,6 +56,18 @@
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Index(Guid id, SelectMovementsViewModel model, string command)
         {
+            var selectedMovements = model.SubmittedMovements
+                .Where(m => m.IsSelected)
+                .Select(p => new MovementData { Id = p.MovementId, Number = p.Number })
+                .ToList();
+
+            TempData[SubmittedMovementListKey] = selectedMovements;
+
+            if (command == AddCommand)
+            {
+                return RedirectToAction("Add");
+            }
+
             var addedCancellableMovements = GetTempDataAddedCancellableMovements();
 
             int removeShipmentNumber;
@@ -72,13 +84,6 @@
                 model.AddedMovements = addedCancellableMovements;
                 return View(model);
             }
-
-            var selectedMovements = model.SubmittedMovements
-               .Where(m => m.IsSelected)
-               .Select(p => new MovementData { Id = p.MovementId, Number = p.Number })
-               .ToList();
-
-            TempData[SubmittedMovementListKey] = selectedMovements;
 
             return RedirectToAction("Confirm");
         }
