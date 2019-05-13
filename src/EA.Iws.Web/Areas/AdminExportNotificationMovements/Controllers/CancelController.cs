@@ -211,6 +211,15 @@
             return View(new SuccessViewModel(id, shipmentNumbers));
         }
 
+        [HttpGet]
+        public ActionResult Abandon(Guid id)
+        {
+            TempData[SubmittedMovementListKey] = null;
+            TempData[AddedCancellableMovementsListKey] = null;
+
+            return RedirectToAction("Index", "Home");
+        }
+
         private List<MovementData> GetTempDataSelectedMovements()
         {
             var result = new List<MovementData>();
