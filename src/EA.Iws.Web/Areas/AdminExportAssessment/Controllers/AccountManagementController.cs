@@ -97,7 +97,7 @@
                 Credit = Convert.ToDecimal(model.PaymentAmount),
                 PaymentMethod = model.PaymentMethod,
                 ReceiptNumber = model.Receipt,
-                Comments = model.PaymentComments
+                Comments = model.PaymentComments.Trim()
             };
 
             await mediator.SendAsync(new AddNotificationTransaction(paymentData));
@@ -125,7 +125,7 @@
                 Date = model.RefundDate.AsDateTime().Value,
                 NotificationId = model.NotificationId,
                 Debit = Convert.ToDecimal(model.RefundAmount),
-                Comments = model.RefundComments,
+                Comments = model.RefundComments.Trim(),
                 ReceiptNumber = "NA"
             };
 
