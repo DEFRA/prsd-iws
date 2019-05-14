@@ -20,6 +20,9 @@
         private readonly IUserContext userContext;
         private readonly ICapturedMovementFactory capturedMovementFactory;
 
+        // Add delay to the audit time to ensure this is logged after Prenotified audit.
+        private const int AuditTimeOffSet = 2;
+
         public CancelMovementsHandler(IwsContext context, IMovementRepository repository,
             IMovementAuditRepository movementAuditRepository,
             IUserContext userContext,
@@ -50,7 +53,8 @@
             foreach (var movement in movements)
             {
                 await movementAuditRepository.Add(new MovementAudit(movement.NotificationId, movement.Number,
-                    userContext.UserId.ToString(), (int)MovementAuditType.Cancelled, SystemTime.Now));
+                    userContext.UserId.ToString(), (int)MovementAuditType.Cancelled,
+                    SystemTime.Now.AddSeconds(AuditTimeOffSet)));
             }
 
             await context.SaveChangesAsync();
