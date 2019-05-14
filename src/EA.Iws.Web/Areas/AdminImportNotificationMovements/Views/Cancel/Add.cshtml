@@ -1,4 +1,4 @@
-﻿@model EA.Iws.Web.Areas.AdminImportNotificationMovements.ViewModels.Cancel.AddViewModel
+﻿	@model EA.Iws.Web.Areas.AdminImportNotificationMovements.ViewModels.Cancel.AddViewModel
 @using Resources = EA.Iws.Web.Areas.AdminImportNotificationMovements.Views.Cancel.IndexResources
 @{
 	ViewBag.Title = Resources.AddTitle;
@@ -19,13 +19,13 @@
 				<table id="NewMovement" title="Add shipments to cancel">
 					<thead>
 						<tr>
-							<th style="width: 5%">
+							<th style="width: 11%">
 								@Resources.Number
 							</th>
 							<th style="width: 15%">
 								@Resources.ActualDateOfShipment
 							</th>
-							<th style="border-bottom: none !important; width: 5%"></th>
+							<th style="border-bottom: none !important; width: 1%"></th>
 							<th style="border-bottom: none !important; width: 10%">
 								<label class="visuallyhidden">Add</label>
 							</th>
@@ -35,13 +35,11 @@
 						<tr>
 							<td style="border-bottom: none !important">
 								<div class="form-group @Html.Gds().FormGroupClass(m => m.NewShipmentNumber)">
-									@Html.Gds().ValidationMessageFor(m => m.NewShipmentNumber)
-									@Html.Gds().TextBoxFor(m => m.NewShipmentNumber)
+									@Html.Gds().TextBoxFor(m => m.NewShipmentNumber, new { @style = "width: 60%;" })
 								</div>
 							</td>
 							<td style="border-bottom: none !important">
 								<div class="form-group @Html.Gds().FormGroupClass(m => m.NewActualShipmentDate)">
-									@Html.Gds().ValidationMessageFor(m => m.NewActualShipmentDate)
 									@Html.Gds().TextBoxFor(m => m.NewActualShipmentDate, new { data_datable = "ddmmyy", @style = "width: 65%;" })
 								</div>
 							</td>
@@ -74,7 +72,7 @@
 								</tr>
 							</thead>
 							<tbody>
-								@for (var i = 0; i < Model.AddedMovements.OrderBy(x => x.Number).Count(); i++)
+								@for (var i = 0; i < Model.AddedMovements.Count(); i++)
 								{
 									<tr>
 										<td>

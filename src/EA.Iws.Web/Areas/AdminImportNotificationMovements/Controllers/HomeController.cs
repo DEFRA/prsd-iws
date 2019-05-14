@@ -19,6 +19,9 @@
     {
         private readonly IMediator mediator;
         private readonly AuthorizationService authorizationService;
+        //For Cancel prenotification
+        private const string SubmittedMovementListKey = "SubmittedMovementListKey";
+        private const string AddedCancellableMovementsListKey = "AddedCancellableMovementsListKey";
 
         public HomeController(IMediator mediator, AuthorizationService authorizationService)
         {
@@ -29,6 +32,9 @@
         [HttpGet]
         public async Task<ActionResult> Index(Guid id, int page = 1)
         {
+            TempData[SubmittedMovementListKey] = null;
+            TempData[AddedCancellableMovementsListKey] = null;
+
             var movementData = await mediator.SendAsync(new GetImportMovementsSummary(id));
             var tableData = await mediator.SendAsync(new GetImportMovementsSummaryTable(id, page));
             var canDeleteMovement = await authorizationService.AuthorizeActivity(typeof(DeleteMovement));

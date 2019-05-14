@@ -195,6 +195,7 @@
     <Compile Include="ImportMovement\Edit\SetImportMovementDatesHandler.cs" />
     <Compile Include="ImportMovement\GetImportMovementAuditByNotificationIdHandler.cs" />
     <Compile Include="ImportMovement\GetNotificationIdByMovementIdHandler.cs" />
+    <Compile Include="ImportMovement\IsAddedCancellableImportMovementValidHandler.cs" />
     <Compile Include="ImportMovement\Receipt\RecordReceiptHandler.cs" />
     <Compile Include="ImportMovement\Reject\RecordRejectionHandler.cs" />
     <Compile Include="ImportMovement\SetImportMovementReceiptAndRecoveryDataHandler.cs" />

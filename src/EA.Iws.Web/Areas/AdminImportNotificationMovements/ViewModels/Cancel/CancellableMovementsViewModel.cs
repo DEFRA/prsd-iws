@@ -5,11 +5,14 @@
     using System.ComponentModel.DataAnnotations;
     using System.Linq;
     using Core.ImportMovement;
+    using Core.Movement;
 
     public class CancellableMovementsViewModel : IValidatableObject
     {
         public CancellableMovementsViewModel()
         {
+            CancellableMovements = new List<CancellableMovementViewModel>();
+            AddedMovements = new List<AddedCancellableMovement>();
         }
 
         public CancellableMovementsViewModel(IEnumerable<ImportCancellableMovement> cancellableMovements)
@@ -21,10 +24,12 @@
                     Number = x.Number,
                     ActualShipmentDate = x.ActualShipmentDate,
                     PrenotificationDate = x.PrenotificationDate
-                }));
+                }).OrderBy(x => x.Number));
         }
 
         public IList<CancellableMovementViewModel> CancellableMovements { get; set; }
+
+        public IList<AddedCancellableMovement> AddedMovements { get; set; }
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
