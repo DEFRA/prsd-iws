@@ -65,7 +65,10 @@
             foreach (var addedMovement in message.AddedMovements)
             {
                 var movement = await capturedMovementFactory.Create(message.NotificationId, addedMovement.Number,
-                    SystemTime.Now, addedMovement.ShipmentDate, false);
+                    null, addedMovement.ShipmentDate, true);
+
+                movement.HasNoPrenotification = false;
+                movement.SubmitInternally(SystemTime.Now.Date);
 
                 repository.Add(movement);
 

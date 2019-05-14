@@ -6,11 +6,13 @@
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Core.Movement;
+    using Core.Shared;
     using Infrastructure.Authorization;
     using Prsd.Core.Helpers;
     using Prsd.Core.Mediator;
     using Requests.Movement;
     using ViewModels.Cancel;
+    using Resources = CancelControllerResources;
 
     [AuthorizeActivity(typeof(CancelMovements))]
     [AuthorizeActivity(typeof(IsAddedCancellableMovementValid))]
@@ -30,15 +32,15 @@
         [HttpGet]
         public async Task<ActionResult> Index(Guid id)
         {
-            var result = await mediator.SendAsync(new GetSubmittedPendingMovements(id));
+            var submittedMovements = await mediator.SendAsync(new GetSubmittedPendingMovements(id));
 
-            var model = new SelectMovementsViewModel
-            {
-                SubmittedMovements = result,
-                AddedMovements = GetTempDataAddedCancellableMovements()
-            };
+            var addedMovements = GetTempDataAddedCancellableMovements().Where(x => x.NotificationId == id).ToList();
+            TempData[AddedCancellableMovementsListKey] = addedMovements;
 
-            var selectedMovements = GetTempDataSelectedMovements();
+            var model = new SelectMovementsViewModel(submittedMovements, addedMovements);
+
+            var selectedMovements = GetTempDataSelectedMovements().Where(x => x.NotificationId == id).ToList();
+            TempData[SubmittedMovementListKey] = selectedMovements;
             if (selectedMovements.Count > 0)
             {
                 var selectedMovementIds = selectedMovements.Select(m => m.Id).ToArray();
@@ -56,6 +58,18 @@
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Index(Guid id, SelectMovementsViewModel model, string command)
         {
+            var selectedMovements = model.SubmittedMovements
+                .Where(m => m.IsSelected)
+                .Select(p => new MovementData { NotificationId = id, Id = p.MovementId, Number = p.Number })
+                .ToList();
+
+            TempData[SubmittedMovementListKey] = selectedMovements;
+
+            if (command == AddCommand)
+            {
+                return RedirectToAction("Add");
+            }
+
             var addedCancellableMovements = GetTempDataAddedCancellableMovements();
 
             int removeShipmentNumber;
@@ -73,23 +87,13 @@
                 return View(model);
             }
 
-            var selectedMovements = model.SubmittedMovements
-               .Where(m => m.IsSelected)
-               .Select(p => new MovementData { Id = p.MovementId, Number = p.Number })
-               .ToList();
-
-            TempData[SubmittedMovementListKey] = selectedMovements;
-
             return RedirectToAction("Confirm");
         }
-
+        
         [HttpGet]
         public ActionResult Add(Guid id)
         {
-            var model = new AddViewModel()
-            {
-                AddedMovements = GetTempDataAddedCancellableMovements()
-            };
+            var model = new AddViewModel(GetTempDataAddedCancellableMovements());
 
             return View(model);
         }
@@ -112,14 +116,11 @@
                 if (addedCancellableMovements.Count >= AddedCancellableMovementsLimit)
                 {
                     ModelState.AddModelError("NewShipmentNumber",
-                        string.Format(
-                            "You cannot add more than {0} extra records at a time. If more are needed to be added, please carry out this process a further time after confirmation as taken place.",
-                            AddedCancellableMovementsLimit));
+                        string.Format(Resources.ExceedShpmentLimit, AddedCancellableMovementsLimit));
                 }
                 if (addedCancellableMovements.Any(x => x.Number == model.ShipmentNumber))
                 {
-                    ModelState.AddModelError("NewShipmentNumber",
-                        "This Shipment number already exists in the table below and will be added to the list of shipments that will be cancelled.");
+                    ModelState.AddModelError("NewShipmentNumber", Resources.DuplicateShipmentNumber);
                 }
 
                 var shipmentValidationResult =
@@ -127,15 +128,19 @@
 
                 if (shipmentValidationResult.IsCancellableExistingShipment)
                 {
-                    ModelState.AddModelError("NewShipmentNumber",
-                        "This Shipment number already exists and is shown on the previous screen. Please tick the shipment number on that screen.");
+                    ModelState.AddModelError("NewShipmentNumber", Resources.IsCancellableExistingShipment);
                 }
                 if (shipmentValidationResult.IsNonCancellableExistingShipment)
                 {
+                    var completedDisplay = shipmentValidationResult.NotificationType == NotificationType.Recovery
+                        ? Resources.Recovered
+                        : Resources.Disposed;
+
                     ModelState.AddModelError("NewShipmentNumber",
-                        string.Format(
-                            "This Shipment number already exists but the status is {0}. Seek further advice of how to proceed with the data team leader.",
-                            EnumHelper.GetDisplayName(shipmentValidationResult.Status)));
+                        string.Format(Resources.IsNonCancellableExistingShipment,
+                            shipmentValidationResult.Status == MovementStatus.Completed
+                                ? completedDisplay
+                                : EnumHelper.GetDisplayName(shipmentValidationResult.Status)));
                 }
 
                 if (!ModelState.IsValid)
@@ -247,7 +252,7 @@
                 TempData[AddedCancellableMovementsListKey] = result;
             }
 
-            return result;
+            return result.OrderBy(x => x.Number).ToList();
         }
     }
 }

@@ -21,7 +21,7 @@
                 <table id="NewMovement" title="Add shipments to cancel">
                     <thead>
                         <tr>
-                            <th style="width: 5%">
+                            <th style="width: 8%">
                                 @Resources.ShipmentNumber
                             </th>
                             <th style="width: 15%">
@@ -37,7 +37,7 @@
                         <tr>
                             <td style="border-bottom: none !important">
                                 <div class="form-group @Html.Gds().FormGroupClass(m => m.NewShipmentNumber)">
-                                    @Html.Gds().TextBoxFor(m => m.NewShipmentNumber)
+                                    @Html.Gds().TextBoxFor(m => m.NewShipmentNumber, new { style = "width: 70%;" })
                                 </div>
                             </td>
                             <td style="border-bottom: none !important">
@@ -74,7 +74,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @for (var i = 0; i < Model.AddedMovements.OrderBy(x => x.Number).Count(); i++)
+                                @for (var i = 0; i < Model.AddedMovements.Count(); i++)
                                 {
                                     <tr>
                                         <td>
