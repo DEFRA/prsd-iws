@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using Core.ImportMovement;
+    using Core.Movement;
 
     public class ConfirmViewModel
     {
@@ -11,13 +12,18 @@
         {
         }
 
-        public ConfirmViewModel(Guid notificationId, IEnumerable<ImportCancelMovementData> result)
+        public ConfirmViewModel(Guid notificationId, IEnumerable<ImportCancelMovementData> result, IEnumerable<AddedCancellableMovement> addedMovements)
         {
             NotificationId = notificationId;
-            SelectedMovements = result.OrderBy(m => m.Number).ToList();
+            var shipmentNumbers = result.Select(m => m.Number).ToList();
+            shipmentNumbers.AddRange(addedMovements.Select(x => x.Number));
+
+            SelectedShipmentNumbers = shipmentNumbers.OrderBy(x => x);
         }
 
         public Guid NotificationId { get; set; }
+
+        public IEnumerable<int> SelectedShipmentNumbers { get; set; }
 
         public IEnumerable<ImportCancelMovementData> SelectedMovements { get; set; }
     }

@@ -6,10 +6,13 @@
 
     public class SuccessViewModel
     {
+        private const string SingleShipmentHeading = "You've now cancelled shipment {0}";
+        private const string MultiShipmentsHeading = "You've now cancelled shipments {0} and {1}";
+
         public SuccessViewModel(Guid notificationId, List<int> shipmentNumbers)
         {
             NotificationId = notificationId;
-            ShipmentNumbers = shipmentNumbers;
+            ShipmentNumbers = shipmentNumbers.OrderBy(x => x).ToList(); 
         }
 
         public Guid NotificationId { get; private set; }
@@ -22,13 +25,13 @@
             {
                 if (ShipmentNumbers.Count > 1)
                 {
-                    return string.Format(CancelResources.MultipleShipmentHeading,
+                    return string.Format(MultiShipmentsHeading,
                         string.Join(", ",
                             ShipmentNumbers.Take(ShipmentNumbers.Count - 1)),
                         ShipmentNumbers.Last());
                 }
 
-                return string.Format(CancelResources.SingleShipmentHeading,
+                return string.Format(SingleShipmentHeading,
                     ShipmentNumbers.First());
             }
         }

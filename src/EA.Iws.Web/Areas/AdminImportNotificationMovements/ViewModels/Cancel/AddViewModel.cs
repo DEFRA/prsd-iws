@@ -8,10 +8,23 @@
 
     public class AddViewModel : IValidatableObject
     {
-        [Required(ErrorMessageResourceName = "AddShipmentNumberRequired", ErrorMessageResourceType = typeof(CancelResources))]
-        [Range(1, int.MaxValue, ErrorMessage = null, ErrorMessageResourceName = "AddValidShipmentNumber", ErrorMessageResourceType = typeof(CancelResources))]
-        public int? NewShipmentNumber { get; set; }
+        private const int MinShipmentNumber = 1;
+        private const int MaxShipmentNumber = 999999;
 
+        [Required(ErrorMessageResourceName = "AddShipmentNumberRequired", ErrorMessageResourceType = typeof(CancelResources))]
+        public string NewShipmentNumber { get; set; }
+
+        public int ShipmentNumber
+        {
+            get
+            {
+                int result;
+                int.TryParse(NewShipmentNumber, out result);
+                return result;
+            }
+        }
+
+        [Display(Name = "Date")]
         [Required(ErrorMessageResourceName = "AddActualDateOfShipmentRequired", ErrorMessageResourceType = typeof(CancelResources))]
         public DateTime? NewActualShipmentDate { get; set; }
 
@@ -19,7 +32,7 @@
 
         public AddViewModel(IEnumerable<AddedCancellableMovement> addedMovements)
         {
-            AddedMovements = addedMovements.ToList();
+            AddedMovements = addedMovements.OrderBy(x => x.Number).ToList();
         }
 
         public AddViewModel()
@@ -29,7 +42,9 @@
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
-            if (!NewActualShipmentDate.HasValue)
+            int parsedShipmentNumber;
+            if (!int.TryParse(NewShipmentNumber, out parsedShipmentNumber) || parsedShipmentNumber < MinShipmentNumber ||
+                parsedShipmentNumber > MaxShipmentNumber)
             {
                 yield return new ValidationResult(CancelResources.AddActualDateOfShipmentRequired, new[] { "NewActualShipmentDate" });
             }
