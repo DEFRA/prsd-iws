@@ -107,7 +107,7 @@
                     () =>
                         capturedMovementFactory.Create(A<Guid>.That.Matches(guid => guid == notificationId),
                             A<int>.That.Matches(number => addedMovements.Exists(x => x.Number == number)),
-                            A<DateTime?>.Ignored, A<DateTime>.Ignored, false))
+                            A<DateTime?>.Ignored, A<DateTime>.Ignored, true))
                 .MustHaveHappened(Repeated.Exactly.Times(addedMovements.Count));
         }
 
@@ -221,7 +221,7 @@
                 Id = Guid.NewGuid(),
                 NotificationId = notificationId,
                 Number = 4,
-                Status = MovementStatus.Submitted
+                Status = MovementStatus.Captured
             };
 
             var secondAddedMovement = new TestableMovement()
@@ -229,20 +229,20 @@
                 Id = Guid.NewGuid(),
                 NotificationId = notificationId,
                 Number = 5,
-                Status = MovementStatus.Submitted
+                Status = MovementStatus.Captured
             };
 
             A.CallTo(
                 () =>
                     capturedMovementFactory.Create(notificationId,
-                        A<int>.That.Matches(number => number == firstAddedMovement.Number), A<DateTime?>.Ignored,
-                        A<DateTime>.Ignored, false)).Returns(firstAddedMovement);
+                        A<int>.That.Matches(number => number == firstAddedMovement.Number), null,
+                        A<DateTime>.Ignored, true)).Returns(firstAddedMovement);
 
             A.CallTo(
                 () =>
                     capturedMovementFactory.Create(notificationId,
-                        A<int>.That.Matches(number => number == secondAddedMovement.Number), A<DateTime?>.Ignored,
-                        A<DateTime>.Ignored, false)).Returns(secondAddedMovement);
+                        A<int>.That.Matches(number => number == secondAddedMovement.Number), null,
+                        A<DateTime>.Ignored, true)).Returns(secondAddedMovement);
 
             var movements = cancelledMovements.Select(cancelled => new TestableMovement
             {
