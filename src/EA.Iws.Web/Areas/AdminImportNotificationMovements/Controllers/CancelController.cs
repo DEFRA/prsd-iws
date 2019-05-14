@@ -7,6 +7,7 @@
     using System.Web.Mvc;
     using Core.ImportMovement;
     using Core.Movement;
+    using Core.Shared;
     using Infrastructure.Authorization;
     using Prsd.Core.Helpers;
     using Prsd.Core.Mediator;
@@ -14,6 +15,7 @@
     using Requests.ImportMovement.Cancel;
     using Requests.ImportNotificationMovements;
     using ViewModels.Cancel;
+    using Resources = CancelControllerResources;
 
     [AuthorizeActivity(typeof(CancelImportMovements))]
     public class CancelController : Controller
@@ -119,15 +121,11 @@
 
                 if (addedCancellableMovements.Count >= AddedCancellableMovementsLimit)
                 {
-                    ModelState.AddModelError("NewShipmentNumber",
-                        string.Format(
-                            "You cannot add more than {0} extra records at a time. If more are needed to be added, please carry out this process a further time after confirmation as taken place.",
-                            AddedCancellableMovementsLimit));
+                    ModelState.AddModelError(Resources.ShipmentNumberField, string.Format(Resources.ExceedShipmentLimit, AddedCancellableMovementsLimit));
                 }
                 if (addedCancellableMovements.Any(x => x.Number == model.ShipmentNumber))
                 {
-                    ModelState.AddModelError("NewShipmentNumber",
-                        "This Shipment number already exists in the table below and will be added to the list of shipments that will be cancelled.");
+                    ModelState.AddModelError(Resources.ShipmentNumberField, Resources.DuplicateShipmentNumber);
                 }
 
                 var shipmentValidationResult =
@@ -135,15 +133,18 @@
 
                 if (shipmentValidationResult.IsCancellableExistingShipment)
                 {
-                    ModelState.AddModelError("NewShipmentNumber",
-                        "This Shipment number already exists and is shown on the previous screen. Please tick the shipment number on that screen.");
+                    ModelState.AddModelError(Resources.ShipmentNumberField, Resources.IsCancellableExistingShipment);
                 }
                 if (shipmentValidationResult.IsNonCancellableExistingShipment)
                 {
-                    ModelState.AddModelError("NewShipmentNumber",
-                        string.Format(
-                            "This Shipment number already exists but the status is {0}. Seek further advice of how to proceed with the data team leader.",
-                            EnumHelper.GetDisplayName(shipmentValidationResult.Status)));
+                    var completedDisplay = shipmentValidationResult.NotificationType == NotificationType.Recovery
+                      ? Resources.Recovered
+                      : Resources.Disposed;
+
+                    ModelState.AddModelError(Resources.ShipmentNumberField, string.Format(Resources.IsNonCancellableExistingShipment,
+                            shipmentValidationResult.Status == MovementStatus.Completed
+                                ? completedDisplay
+                                : EnumHelper.GetDisplayName(shipmentValidationResult.Status)));
                 }
 
                 if (!ModelState.IsValid)

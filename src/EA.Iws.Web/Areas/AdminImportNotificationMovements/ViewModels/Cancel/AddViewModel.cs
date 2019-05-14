@@ -6,12 +6,13 @@
     using System.Linq;
     using Core.Movement;
 
-    public class AddViewModel : IValidatableObject
+    public class AddViewModel
     {
         private const int MinShipmentNumber = 1;
         private const int MaxShipmentNumber = 999999;
 
         [Required(ErrorMessageResourceName = "AddShipmentNumberRequired", ErrorMessageResourceType = typeof(CancelResources))]
+        [Range(MinShipmentNumber, MaxShipmentNumber, ErrorMessageResourceName = "ShipmentNumberInvalid", ErrorMessageResourceType = typeof(CancelResources))]
         public string NewShipmentNumber { get; set; }
 
         public int ShipmentNumber
@@ -38,16 +39,6 @@
         public AddViewModel()
         {
             AddedMovements = new List<AddedCancellableMovement>();
-        }
-
-        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
-        {
-            int parsedShipmentNumber;
-            if (!int.TryParse(NewShipmentNumber, out parsedShipmentNumber) || parsedShipmentNumber < MinShipmentNumber ||
-                parsedShipmentNumber > MaxShipmentNumber)
-            {
-                yield return new ValidationResult(CancelResources.AddActualDateOfShipmentRequired, new[] { "NewActualShipmentDate" });
-            }
         }
     }
 }
