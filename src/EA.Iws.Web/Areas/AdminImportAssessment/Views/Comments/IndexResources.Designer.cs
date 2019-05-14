@@ -268,7 +268,7 @@ namespace EA.Iws.Web.Areas.AdminImportAssessment.Views.Comments {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Review and write comments for this notification and it&apos;s shipments for Internal users.
+        ///   Looks up a localized string similar to Review and write comments for this notification and its shipments for Internal users.
         /// </summary>
         public static string Subtitle {
             get {
