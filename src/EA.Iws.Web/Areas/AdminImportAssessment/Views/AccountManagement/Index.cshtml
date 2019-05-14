@@ -75,8 +75,6 @@
                     type = (PaymentMethod)Model.Transactions[i].Type;
                 }
 
-                var comment = string.IsNullOrWhiteSpace(Model.Transactions[i].Comments) ? "No" : "<a href=\"#comment-" + i + "\" onclick='openComments()'>Yes</a>";
-
                 <tr>
                     <td>@trans</td>
                     <td>@Model.Transactions[i].Date.ToString("dd/MM/yyyy")</td>
@@ -253,10 +251,6 @@
             } else {
                 $('#receiptArea').hide();
             }
-        }
-
-        function openComments() {
-            $comments.attr('open', '');
         }
 
         function editComment(id, commentCount) {
