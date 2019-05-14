@@ -11,11 +11,11 @@ AS
         SUM(T.Debit) AS TotalRefunded,
         (SELECT TOP 1 [Date] FROM [Notification].[Transaction] WHERE NotificationId = N.Id AND Credit IS NOT NULL ORDER BY [Date] DESC) AS [LatestPaymentDate],
         (SELECT TOP 1 [Date] FROM [Notification].[Transaction] WHERE NotificationId = N.Id AND Debit IS NOT NULL ORDER BY [Date] DESC) AS [LatestRefundDate],
-        (SELECT CASE WHEN RIGHT(LTRIM(RTRIM(T2.Comments)),1) = '.' THEN LTRIM(RTRIM(T2.Comments)) + ' ' ELSE LTRIM(RTRIM(T2.Comments)) + '. ' END AS Comments
+        REPLACE(REPLACE((SELECT CASE WHEN RIGHT(LTRIM(RTRIM(T2.Comments)),1) = '.' THEN LTRIM(RTRIM(T2.Comments)) + ' ' ELSE LTRIM(RTRIM(T2.Comments)) + '. ' END AS Comments
           FROM [Notification].[Transaction] T2
           WHERE T2.NotificationId = N.Id
 		  ORDER BY [Date] DESC
-          FOR XML PATH(''), TYPE).value('.', 'NVARCHAR(MAX)') AS Comments
+          FOR XML PATH(''), TYPE).value('.', 'NVARCHAR(MAX)'), CHAR(13), ''), CHAR(10), '') AS Comments
     FROM [Notification].[Transaction] T
     INNER JOIN [Notification].[Notification] N ON N.Id = T.NotificationId
     GROUP BY N.Id, N.NotificationNumber
