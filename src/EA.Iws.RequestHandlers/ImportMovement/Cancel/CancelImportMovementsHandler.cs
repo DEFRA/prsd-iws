@@ -20,7 +20,8 @@
         private readonly IImportMovementAuditRepository movementAuditRepository;
         private readonly IImportMovementFactory importMovementFactory;
         private readonly IImportMovementRepository movementRepository;
-
+        // Add delay to the audit time to ensure this is logged after Prenotified audit.
+        private const int AuditTimeOffSet = 2;
         public CancelImportMovementsHandler(Domain.ImportMovement.CancelImportMovement cancelMovement, ImportNotificationContext context, IImportMovementAuditRepository repository,
             IUserContext userContext, IImportMovementAuditRepository movementAuditRepository, IImportMovementFactory importMovementFactory, IImportMovementRepository movementRepository)
         {
@@ -52,7 +53,7 @@
             {
                 await
                     repository.Add(new ImportMovementAudit(message.NotificationId, movement.Number,
-                        userContext.UserId.ToString().ToUpper(), (int)MovementAuditType.Cancelled, SystemTime.Now));
+                        userContext.UserId.ToString().ToUpper(), (int)MovementAuditType.Cancelled, SystemTime.Now.AddSeconds(AuditTimeOffSet)));
             }
 
             await context.SaveChangesAsync();
