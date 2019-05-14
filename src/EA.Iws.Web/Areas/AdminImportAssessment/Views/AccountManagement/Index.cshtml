@@ -57,7 +57,6 @@
             <th>@Resource.TableHeaderAmount</th>
             <th>@Resource.TableHeaderType</th>
             <th>@Resource.TableHeaderReceipt</th>
-            <th>@Resource.TableHeaderComments</th>
         </tr>
         </thead>
         <tbody>
@@ -84,7 +83,6 @@
                     <td>@Model.Transactions[i].Amount.ToString("C")</td>
                     <td>@EnumHelper.GetDescription(type)</td>
                     <td>@Model.Transactions[i].ReceiptNumber</td>
-                    <td>@Html.Raw(comment)</td>
                 </tr>
             }
         }
