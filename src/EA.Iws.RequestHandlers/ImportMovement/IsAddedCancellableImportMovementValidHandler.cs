@@ -24,7 +24,7 @@
 
             var result = await repository.IsShipmentExistingInNonCancellableStatus(message.ImportNotificationId, message.ShipmentNumber);
 
-            if (result != null)
+            if (result != null && result.Status != Core.Movement.MovementStatus.Submitted)
             {
                 result.NotificationType = await notificationRepository.GetTypeById(message.ImportNotificationId);
                 if (movement != null)
