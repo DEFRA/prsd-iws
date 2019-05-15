@@ -1380,6 +1380,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ComplianceResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Infrastructure\ComplianceXlsxActionResult.cs" />
     <Compile Include="Mappings\AdminExportAssessment\EditEwcMap.cs" />
     <Compile Include="Mappings\NotificationAssessment\EditHCodeMap.cs" />
     <Compile Include="Mappings\NotificationAssessment\EditYCodeMap.cs" />

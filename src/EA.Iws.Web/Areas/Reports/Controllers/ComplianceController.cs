@@ -66,7 +66,7 @@
 
             var fileName = string.Format("compliance-report-{0}-{1}.xlsx", from.ToShortDateString(), to.ToShortDateString());
 
-            return new XlsxActionResult<ComplianceData>(report, fileName, true, null, "C,E,G,I,K");
+            return new ComplianceXlsxActionResult(report, fileName, true);
         }
     }
 }
