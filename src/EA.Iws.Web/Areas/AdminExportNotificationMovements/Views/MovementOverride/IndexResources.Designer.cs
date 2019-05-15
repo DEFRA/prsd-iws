@@ -123,5 +123,14 @@ namespace EA.Iws.Web.Areas.AdminExportNotificationMovements.Views.MovementOverri
                 return ResourceManager.GetString("ShipmentNumber", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit Shipment.
+        /// </summary>
+        public static string Title {
+            get {
+                return ResourceManager.GetString("Title", resourceCulture);
+            }
+        }
     }
 }
