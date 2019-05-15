@@ -1374,6 +1374,11 @@
       <DependentUpon>WasteOperationResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Areas\Reports\Controllers\ComplianceController.cs" />
+    <Compile Include="Areas\Reports\Controllers\ComplianceGuidanceResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ComplianceGuidanceResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Areas\Reports\ViewModels\Compliance\IndexViewModel.cs" />
     <Compile Include="Areas\Reports\Views\Compliance\ComplianceResources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -5163,6 +5168,10 @@
     <EmbeddedResource Include="Areas\NotificationMovements\Views\Upload\SuccessResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>SuccessResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\Reports\Controllers\ComplianceGuidanceResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ComplianceGuidanceResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\Reports\ViewModels\FinancialGuarantees\IndexViewModelResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
