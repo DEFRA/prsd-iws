@@ -55,6 +55,7 @@
             return await context.ImportMovements.Where(m => m.NotificationId == importNotificationId)
                 .Where(m => !context.ImportMovementReceipts.Any(r => r.MovementId == m.Id))
                 .Where(m => !context.ImportMovementCompletedReceipts.Any(r => r.MovementId == m.Id))
+                .Where(m => !context.ImportMovementRejections.Any(r => r.MovementId == m.Id))
                 .ToArrayAsync();
         }
 
@@ -76,7 +77,7 @@
                    (x, movementOperationReceipt) => new { x.m, x.movementReceipt, x.movementRejection, movementOperationReceipt })
                .SelectMany(x => x.movementOperationReceipt.DefaultIfEmpty(), (x, movementOperationReceipt) => new AddedCancellableImportMovementValidation
                {
-                   Status = x.m.IsCancelled ? MovementStatus.Cancelled : (x.movementRejection.Date != null ? MovementStatus.Rejected : (x.movementOperationReceipt.FirstOrDefault().Date != null ? MovementStatus.Completed : (x.movementReceipt.Date != null ? MovementStatus.Received : MovementStatus.New))),
+                   Status = x.m.IsCancelled ? MovementStatus.Cancelled : (x.movementRejection.Date != null ? MovementStatus.Rejected : (x.movementOperationReceipt.FirstOrDefault().Date != null ? MovementStatus.Completed : (x.movementReceipt.Date != null ? MovementStatus.Received : MovementStatus.Submitted))),
                    IsNonCancellableExistingShipment = x.m != null ? true : false
                }).SingleOrDefault();
 
@@ -89,6 +90,7 @@
             return await context.ImportMovements.Where(m => m.NotificationId == importNotificationId)
                 .Where(m => m.Number == number)
                 .Where(m => !m.IsCancelled)
+                .Where(m => !context.ImportMovementRejections.Any(r => r.MovementId == m.Id))
                 .Where(m => !context.ImportMovementReceipts.Any(r => r.MovementId == m.Id))
                 .Where(m => !context.ImportMovementCompletedReceipts.Any(r => r.MovementId == m.Id)).FirstOrDefaultAsync();
         }
