@@ -32,6 +32,7 @@
                     [NotificationNumber],
                     [ImportOrExport],
                     CASE WHEN [IsInterim] = 1 THEN 'Interim' WHEN [IsInterim] = 0 THEN 'Non-interim' ELSE NULL END AS [Interim],
+                    [BaselOecdCode],
                     [NotifierName],
                     [NotifierAddress],
                     [NotifierPostalCode],
@@ -48,7 +49,6 @@
                     [ExportCountryName],
                     [ImportCountryName],
                     [TransitStates],
-                    [BaselOecdCode],
                     [NameOfWaste],
                     [EWC],
                     [YCode],
@@ -63,6 +63,7 @@
                     [FacilityName],
                     [FacilityAddress],
                     [FacilityPostalCode],
+                    [TechnologyEmployed],
                     COALESCE(
                         (SELECT	SUM(
                             CASE WHEN [MovementQuantityReceviedUnitId] IN (1, 2) -- Tonnes / Cubic Metres
@@ -86,7 +87,7 @@
                     [IsFinancialGuaranteeApproved],
                     [FileClosedDate],
                     [LocalArea],
-                    [TechnologyEmployed]
+                    [Officer]
                 FROM 
                     [Reports].[FreedomOfInformationCache]
                 WHERE 
@@ -107,6 +108,7 @@
                     [NotificationNumber],
                     [ImportOrExport],
                     [IsInterim],
+                    [BaselOecdCode],
                     [NotifierName],
                     [NotifierAddress],
                     [NotifierPostalCode],
@@ -123,7 +125,6 @@
                     [ExportCountryName],
                     [ImportCountryName],
                     [TransitStates],
-                    [BaselOecdCode],
                     [NameOfWaste],
                     [EWC],
                     [YCode],
@@ -138,6 +139,7 @@
                     [FacilityName],
                     [FacilityAddress],
                     [FacilityPostalCode],
+                    [TechnologyEmployed],
                     [IntendedQuantityUnitId],
                     [IntendedQuantityUnit],
                     [IntendedQuantity],
@@ -149,7 +151,7 @@
                     [IsFinancialGuaranteeApproved],
                     [FileClosedDate],
                     [LocalArea],
-                    [TechnologyEmployed]";
+                    [Officer]";
 
               return await context.Database.SqlQuery<FreedomOfInformationData>(string.Format(query, textFilter),
                 new SqlParameter("@from", from),
