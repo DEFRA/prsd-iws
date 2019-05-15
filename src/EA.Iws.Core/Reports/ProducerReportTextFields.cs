@@ -7,6 +7,9 @@
         [Display(Name = "Notifier name")]
         NotifierName,
 
+        [Display(Name = "Producer name")]
+        ProducerName,
+
         [Display(Name = "Consignee name")]
         ConsigneeName,
 
