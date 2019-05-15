@@ -52,6 +52,9 @@
             var guidanceProperties = typeof(ComplianceDataGuidance).GetProperties();
 
             FormatWorkSheet(guidanceProperties, MaxPixelGuidanceColWidth);
+
+            Worksheet.Range(2, 1, 2, guidanceProperties.Length)
+                .Style.Alignment.SetVertical(XLAlignmentVerticalValues.Top);
         }
 
         private void FormatSymbolColumns()
