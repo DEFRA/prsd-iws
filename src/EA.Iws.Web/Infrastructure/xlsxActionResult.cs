@@ -5,6 +5,7 @@
     using System.ComponentModel;
     using System.IO;
     using System.Linq;
+    using System.Reflection;
     using System.Text.RegularExpressions;
     using System.Web;
     using System.Web.Mvc;
@@ -12,21 +13,22 @@
 
     public class XlsxActionResult<T> : FileResult
     {
-        private readonly IEnumerable<T> data;
         private readonly bool fixedWidthFormat;
         private const int MaxPixelColWidth = 150;
         private readonly string columnsToHide;
 
-        public XLWorkbook WorkBook { get; set; }
+        protected IEnumerable<T> Data { get; set; }
 
-        public IXLWorksheet Worksheet { get; set; }
+        protected XLWorkbook WorkBook { get; set; }
+
+        protected IXLWorksheet Worksheet { get; set; }
 
         public XlsxActionResult(IEnumerable<T> data,
             string fileDownloadName,
             bool fixedWidthFormat = false,
             string columnsToHide = null) : base(MimeTypes.MSExcelXml)
         {
-            this.data = data;
+            Data = data;
             FileDownloadName = fileDownloadName;
             this.fixedWidthFormat = fixedWidthFormat;
             this.columnsToHide = columnsToHide;
@@ -48,12 +50,22 @@
         protected void WriteSheet()
         {
             CreateWorkBook();
-            
-            Worksheet.Cell(2, 1).Value = data.AsEnumerable();
 
-            AddHeaderRow();         
+            Worksheet.Cell(2, 1).Value = Data.AsEnumerable();
+           
+            FormatWorkSheet();
+        }
 
-            FormatTitles();
+        protected void FormatWorkSheet(IList<PropertyInfo> properties = null, int maxPixelColWidth = MaxPixelColWidth)
+        {
+            if (properties == null)
+            {
+                properties = typeof(T).GetProperties();
+            }
+
+            AddHeaderRow(properties);
+
+            FormatTitles(properties.Count);
 
             if (!string.IsNullOrEmpty(columnsToHide))
             {
@@ -62,7 +74,7 @@
 
             if (fixedWidthFormat)
             {
-                Worksheet.Columns().Width = PixelWidthToExcel(MaxPixelColWidth);
+                Worksheet.Columns().Width = PixelWidthToExcel(maxPixelColWidth);
                 Worksheet.Cells().Style.Alignment.WrapText = true;
             }
             else
@@ -77,10 +89,8 @@
             Worksheet = WorkBook.Worksheets.Add("Report");
         }
 
-        private void AddHeaderRow()
+        private void AddHeaderRow(IList<PropertyInfo> properties)
         {
-            var properties = typeof(T).GetProperties();
-
             for (var i = 0; i < properties.Count(); i++)
             {
                 var property = properties[i];
@@ -98,17 +108,12 @@
             return Regex.Replace(input, "(?<=[a-z])([A-Z])", " $1", RegexOptions.Compiled);
         }
 
-        private void FormatTitles()
+        private void FormatTitles(int numberOfProperties)
         {
-            var numberOfProperties = typeof(T).GetProperties().Count();
-
             Worksheet.Range(1, 1, 1, numberOfProperties).AddToNamed("Titles");
 
-            var titlesStyle = WorkBook.Style;
-            titlesStyle.Font.Bold = true;
-            titlesStyle.Fill.BackgroundColor = XLColor.LimeGreen;
-
-            WorkBook.NamedRanges.NamedRange("Titles").Ranges.Style = titlesStyle;
+            WorkBook.NamedRanges.NamedRange("Titles").Ranges.Style.Font.Bold = true;
+            WorkBook.NamedRanges.NamedRange("Titles").Ranges.Style.Fill.BackgroundColor = XLColor.LimeGreen;
 
             Worksheet.SheetView.FreezeRows(1);
         }

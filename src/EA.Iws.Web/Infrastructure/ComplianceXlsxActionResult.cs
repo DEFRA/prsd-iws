@@ -2,6 +2,7 @@
 {
     using System.Collections.Generic;
     using System.IO;
+    using System.Linq;
     using System.Web;
     using ClosedXML.Excel;
     using Core.Admin.Reports;
@@ -9,11 +10,15 @@
     public class ComplianceXlsxActionResult : XlsxActionResult<ComplianceData>
     {
         private const string ColumnsToProcess = "C,E,G,I,K";
+        private const string GuidanceSheetName = "Guidance_Key";
+        private const int MaxPixelGuidanceColWidth = 120;
+        private readonly IEnumerable<ComplianceDataGuidance> guidance;
 
-        public ComplianceXlsxActionResult(IEnumerable<ComplianceData> data, string fileDownloadName,
+        public ComplianceXlsxActionResult(IEnumerable<ComplianceData> data, IEnumerable<ComplianceDataGuidance> guidance, string fileDownloadName,
             bool fixedWidthFormat = false, string columnsToHide = null)
             : base(data, fileDownloadName, fixedWidthFormat, columnsToHide)
         {
+            this.guidance = guidance;
         }
 
         protected override void WriteFile(HttpResponseBase response)
@@ -21,9 +26,9 @@
             var outputStream = response.OutputStream;
             using (var memoryStream = new MemoryStream())
             {
-                WriteSheet();
+                CreateDataSheet();
 
-                FormatColumns();
+                CreateGuidanceSheet();
 
                 WorkBook.SaveAs(memoryStream);
 
@@ -31,7 +36,25 @@
             }
         }
 
-        private void FormatColumns()
+        private void CreateDataSheet()
+        {
+            WriteSheet();
+
+            FormatSymbolColumns();
+        }
+
+        private void CreateGuidanceSheet()
+        {
+            Worksheet = WorkBook.Worksheets.Add(GuidanceSheetName);
+
+            Worksheet.Cell(2, 1).Value = guidance.AsEnumerable();
+
+            var guidanceProperties = typeof(ComplianceDataGuidance).GetProperties();
+
+            FormatWorkSheet(guidanceProperties, MaxPixelGuidanceColWidth);
+        }
+
+        private void FormatSymbolColumns()
         {
             var columnsLetters = ColumnsToProcess.Split(',');
 

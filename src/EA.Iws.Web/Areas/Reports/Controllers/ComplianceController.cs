@@ -1,6 +1,7 @@
 ﻿namespace EA.Iws.Web.Areas.Reports.Controllers
 {
     using System;
+    using System.Collections.Generic;
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Core.Admin.Reports;
@@ -66,7 +67,25 @@
 
             var fileName = string.Format("compliance-report-{0}-{1}.xlsx", from.ToShortDateString(), to.ToShortDateString());
 
-            return new ComplianceXlsxActionResult(report, fileName, true);
+            var guidance = new ComplianceDataGuidance()
+            {
+                NotificationNumber = "This shows the relevant notification number",
+                NoPrenotificationCount = "This shows the total number of shipments recorded in the service that haven't met prenotifcation rules",
+                PreNotificationColour = "The colour indicates the level of compliance based on data shown in the previous cell. 0 = GREEN, 1 to 10 = AMBER and 11 or more = RED",
+                MissingShipments = "This shows whether there are gaps in the sequential list of shipments for the notification",
+                MissingShipmentsColour = "The colour indicates the level of compliance based on data shown in the previous cell. 0 = GREEN, 1 to 10 = AMBER and 11 or more = RED",
+                OverLimitShipments = "For export notifications: This shows the number of shipments that are 'active' which exceed the number of permitted active loads approved against the financial provision. For import notifications: not monitiored by the service N/A",
+                OverActiveLoads = "The colour indicates the level of compliance based on data shown in the previous cell. 0 = GREEN, 1 to 5 = AMBER and 6 or more = RED",
+                OverTonnage = "This shows whether the total intended quantity consented on the notification has been exceeded (Y/N)",
+                OverTonnageColour = "The colour indicates compliance based on data shown in the previous cell. N = GREEN, and Y = RED",
+                OverShipments = "This shows whether the total intended number of shipments consented on the notification has been exceeded (Y/N)",
+                OverShipmentsColour = "The colour indicates compliance based on data shown in the previous cell. N = GREEN, and Y = RED",
+                Notifier = "This shows the name of the notifier/exporter for the notification",
+                Consignee = "This shows the name of the consignee/importer for the notification",
+                FileExpired = "This shows whether the notification has expired by having gone passed the 'Consent valid to' date when this report was run"
+            };
+
+            return new ComplianceXlsxActionResult(report, new List<ComplianceDataGuidance> { guidance }, fileName, true);
         }
     }
 }
