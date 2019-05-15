@@ -2,11 +2,14 @@
 @using EA.Iws.Core.NotificationAssessment
 @using EA.Iws.Web.Areas.AdminExportAssessment.ViewModels
 @using EA.Iws.Web.Areas.AdminExportAssessment.Views.KeyDates
+@using Resources = EA.Iws.Web.Areas.AdminExportAssessment.Views.KeyDates.IndexResources
+
 @model DateInputViewModel
 
 <h1 class="heading-large">Enter the key dates for this notification</h1>
 
 @{
+    ViewBag.Title = Resources.Title;
     var nullMarker = "- -";
     var byText = " by ";
 }
