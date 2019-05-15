@@ -46,13 +46,13 @@
 
             var model = new NotificationOverviewViewModel(result);
             model.AmountsAndDatesViewModel.CanChangeNumberOfShipments = canChangeNumberOfShipments;
-            model.JourneyViewModel.CanChangeEntryExitPoint = canChangeEntryExitPoints;
+            model.JourneyViewModel.CanChangeEntryExitPoint = canChangeEntryExitPoints && result.SubmitSummaryData.Status != NotificationStatus.FileClosed;
             model.JourneyViewModel.CanAddRemoveTransitState = canAddRemoveTransitState && IsEditableStatus(result.SubmitSummaryData.Status);
             model.JourneyViewModel.CanChangeTransitStateEntryExitPoint = canChangeTransitStateEntryExitPoint &&
                                                                          result.SubmitSummaryData.Status ==
                                                                          NotificationStatus.Consented;
-            model.OrganisationsInvolvedViewModel.CanAddProducer = canAddProducer;
-            model.OrganisationsInvolvedViewModel.CanEditContactDetails = canEditContactDetails;
+            model.OrganisationsInvolvedViewModel.CanAddProducer = canAddProducer && result.SubmitSummaryData.Status != NotificationStatus.FileClosed;
+            model.OrganisationsInvolvedViewModel.CanEditContactDetails = canEditContactDetails && result.SubmitSummaryData.Status != NotificationStatus.FileClosed;
             model.WasteCodeOverviewViewModel.CanEditEWCCodes = canEditEwcCodes && result.SubmitSummaryData.Status == NotificationStatus.Consented;
             model.WasteCodeOverviewViewModel.CanEditYCodes = canEditYCodes && result.SubmitSummaryData.Status == NotificationStatus.Consented;
             model.RecoveryOperationViewModel.CanEditCodes = canEditOperationCodes && result.SubmitSummaryData.Status == NotificationStatus.Consented;

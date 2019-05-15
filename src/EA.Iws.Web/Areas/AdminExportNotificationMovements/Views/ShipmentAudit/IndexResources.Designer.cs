@@ -98,6 +98,15 @@ namespace EA.Iws.Web.Areas.AdminExportNotificationMovements.Views.ShipmentAudit 
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Go to Shipment summary.
+        /// </summary>
+        public static string ShipmentSummaryLink {
+            get {
+                return ResourceManager.GetString("ShipmentSummaryLink", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Date.
         /// </summary>
         public static string ThDate {
