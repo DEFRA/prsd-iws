@@ -1,10 +1,17 @@
-﻿@model EA.Iws.Web.Areas.ImportNotification.ViewModels.Home.SummaryTableContainerViewModel
+﻿@using EA.Iws.Core.WasteType
+@model EA.Iws.Web.Areas.ImportNotification.ViewModels.Home.SummaryTableContainerViewModel
 
 <div class="overview-block">
     <div class="overview-block-element">
         @if (Model.Details.Composition != null && Model.Details.Composition.Composition.HasValue)
         {
             @EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(Model.Details.Composition.Composition.Value)
+
+            if (Model.Details.Composition.Composition.Value == ChemicalComposition.Other && Model.Details.WasteType != null)
+            {
+                <br/>
+                @Model.Details.WasteType.Name
+            }
         }
         else
         {
