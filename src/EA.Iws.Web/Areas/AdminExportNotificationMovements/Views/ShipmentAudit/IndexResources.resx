@@ -129,6 +129,9 @@
   <data name="Search" xml:space="preserve">
     <value>Search</value>
   </data>
+  <data name="ShipmentSummaryLink" xml:space="preserve">
+    <value>Go to Shipment summary</value>
+  </data>
   <data name="ThDate" xml:space="preserve">
     <value>Date</value>
   </data>

@@ -210,4 +210,7 @@
   <data name="SearchPlaceholder" xml:space="preserve">
     <value>Go to shipment</value>
   </data>
+  <data name="ShipmentAuditLink" xml:space="preserve">
+    <value>Review shipment audit trail</value>
+  </data>
 </root>
