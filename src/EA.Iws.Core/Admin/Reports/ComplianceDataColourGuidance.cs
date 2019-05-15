@@ -2,7 +2,7 @@
 {
     public class ComplianceDataColourGuidance
     {
-        public string  HeaderText { get; set; }
+        public string HeaderText { get; set; }
 
         public string GreenText { get; set; }
 
