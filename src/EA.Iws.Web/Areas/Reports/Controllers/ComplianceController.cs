@@ -67,7 +67,7 @@
 
             var fileName = string.Format("compliance-report-{0}-{1}.xlsx", from.ToShortDateString(), to.ToShortDateString());
 
-            var guidance = new ComplianceDataGuidance()
+            var guidance = new ComplianceDataGuidance
             {
                 NotificationNumber = "This shows the relevant notification number",
                 NoPrenotificationCount = "This shows the total number of shipments recorded in the service that haven't met prenotifcation rules",
@@ -85,7 +85,16 @@
                 FileExpired = "This shows whether the notification has expired by having gone passed the 'Consent valid to' date when this report was run"
             };
 
-            return new ComplianceXlsxActionResult(report, new List<ComplianceDataGuidance> { guidance }, fileName, true);
+            var colourGuidance = new ComplianceDataColourGuidance
+            {
+                HeaderText = "Colour/Symbol key",
+                GreenText = "GREEN with a black tick overlay indicates compliance",
+                AmberText = "AMBER with a black exclamation indicates non-compliance to a lesser degree",
+                RedText = "RED with a white cross indicates non-compliance to a greater degree warranting action"
+            };
+
+            return new ComplianceXlsxActionResult(report, new List<ComplianceDataGuidance> { guidance }, colourGuidance,
+                fileName, true);
         }
     }
 }

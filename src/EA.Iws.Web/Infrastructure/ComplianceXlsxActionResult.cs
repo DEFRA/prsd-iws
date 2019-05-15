@@ -13,12 +13,15 @@
         private const string GuidanceSheetName = "Guidance_Key";
         private const int MaxPixelGuidanceColWidth = 120;
         private readonly IEnumerable<ComplianceDataGuidance> guidance;
+        private readonly ComplianceDataColourGuidance colourGuidance;
 
-        public ComplianceXlsxActionResult(IEnumerable<ComplianceData> data, IEnumerable<ComplianceDataGuidance> guidance, string fileDownloadName,
+        public ComplianceXlsxActionResult(IEnumerable<ComplianceData> data, IEnumerable<ComplianceDataGuidance> guidance,
+            ComplianceDataColourGuidance colourGuidance, string fileDownloadName,
             bool fixedWidthFormat = false, string columnsToHide = null)
             : base(data, fileDownloadName, fixedWidthFormat, columnsToHide)
         {
             this.guidance = guidance;
+            this.colourGuidance = colourGuidance;
         }
 
         protected override void WriteFile(HttpResponseBase response)
@@ -55,6 +58,14 @@
 
             Worksheet.Range(2, 1, 2, guidanceProperties.Length)
                 .Style.Alignment.SetVertical(XLAlignmentVerticalValues.Top);
+
+            Worksheet.Cell(4, 2).Value = colourGuidance.HeaderText;
+            Worksheet.Cell(4, 2).Style.Font.Bold = true;
+            Worksheet.Cell(4, 2).Style.Font.Underline = XLFontUnderlineValues.Single;
+
+            Worksheet.Cell(5, 2).Value = colourGuidance.GreenText;
+            Worksheet.Cell(6, 2).Value = colourGuidance.AmberText;
+            Worksheet.Cell(7, 2).Value = colourGuidance.RedText;
         }
 
         private void FormatSymbolColumns()
