@@ -100,6 +100,9 @@
         [Display(Name = "Facility Postal Code")]
         FacilityPostalCode,
 
+        [Display(Name = "Technology employed")]
+        TechnologyEmployed,
+
         [Display(Name = "Quantity Received")]
         QuantityReceived,
 
@@ -133,7 +136,7 @@
         [Display(Name = "Area")]
         LocalArea,
 
-        [Display(Name = "Technology employed")]
-        TechnologyEmployed,
+        [Display(Name = "Officer name")]
+        Officer,
     }
 }
