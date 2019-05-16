@@ -1015,7 +1015,7 @@
     <Content Include="Areas\AdminExportAssessment\Views\Comments\Add.cshtml" />
     <Content Include="Areas\AdminExportAssessment\Views\Comments\_Layout.cshtml" />
     <Content Include="Areas\AdminImportAssessment\Views\Comments\Add.cshtml" />
-    <Content Include="Views\Shared\EditorTemplates\DecisionDateInputViewModel.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\DateInputViewModel.cshtml" />
     <Content Include="Areas\Reports\Views\Producer\Index.cshtml" />
     <Content Include="Areas\AdminExportAssessment\Views\Comments\Delete.cshtml" />
     <Content Include="Areas\AdminImportAssessment\Views\Comments\Delete.cshtml" />

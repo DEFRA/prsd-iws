@@ -35,6 +35,11 @@
             }
         }
 
+        public bool IsCompleted
+        {
+            get { return HasAnyValues || HadValues; }
+        }
+
         public DateInputViewmodel(bool allowPastDates = false, bool showLabels = true)
         {
             AllowPastDates = allowPastDates;
