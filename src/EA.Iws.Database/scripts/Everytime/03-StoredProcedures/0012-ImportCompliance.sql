@@ -121,7 +121,7 @@ FROM
 			AND NA.[Status]  = 9 --CONSENTED
 		INNER JOIN 
 		[ImportNotification].[Movement] AS M
-			ON M.NotificationId = N.Id AND m.IsCancelled = 0
+			ON M.NotificationId = N.Id 
 		INNER JOIN [ImportNotification].[Exporter] E 
 		INNER JOIN [Lookup].[Country] AS C_E ON E.[CountryId] = C_E.[Id]
 		ON E.ImportNotificationId = N.Id
@@ -184,7 +184,7 @@ FROM
 	@ImportNotifications N
 	INNER JOIN [ImportNotification].[Movement] AS M
 	ON	M.NotificationId = N.NotificationId
-	AND M.IsCancelled = 0 -- Exclude cancelled 
+	
 
 	INSERT INTO @ImportPreNote
 	SELECT P.NotificationId
@@ -244,8 +244,8 @@ FROM
 	(
 		SELECT N.NotificationId, N.NotificationNumber
 		,N.CompetentAuthorityId
-		,P.PrenotificationCount
-		,N.LatestShipmentNo - N.NoOfShipmentsUsed as MissingShipments
+		,ISNULL(P.PrenotificationCount, 0) AS PrenotificationCount
+		,ISNULL(N.LatestShipmentNo - N.NoOfShipmentsUsed, 0) as MissingShipments
 		,'N/A' as OverLimit
 		,CASE WHEN N.IntendedQuantity - Q.ReceivedQuantity < 0 THEN 'Y' ELSE 'N' END as Overtonnage
 		,CASE WHEN n.NoOfShipmentsUsed > N.IntendedNoOfShipments THEN 'Y' ELSE 'N' END AS OverShipments
