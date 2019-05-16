@@ -57,6 +57,8 @@
     <Compile Include="Admin\NotificationInfo.cs" />
     <Compile Include="Admin\NotificationShipmentsCommentsType.cs" />
     <Compile Include="Admin\Reports\ComplianceData.cs" />
+    <Compile Include="Admin\Reports\ComplianceDataColourGuidance.cs" />
+    <Compile Include="Admin\Reports\ComplianceDataGuidance.cs" />
     <Compile Include="Admin\Reports\ComplianceDataReport.cs" />
     <Compile Include="Admin\Reports\FinancialGuaranteesData.cs" />
     <Compile Include="Admin\Reports\ExportMovementsData.cs" />
