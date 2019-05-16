@@ -157,7 +157,7 @@ FROM
 		 ORDER BY FG1.CreatedDate DESC)	
 		INNER JOIN 
 		[Notification].[Movement] AS M
-			ON M.NotificationId = N.Id AND m.[Status] NOT IN (6) 
+			ON M.NotificationId = N.Id  
 		INNER JOIN [Notification].[Exporter] E ON E.NotificationId = N.Id
 		INNER JOIN [Notification].[Importer] I ON I.NotificationId = N.Id
 		INNER JOIN	[Notification].[Consent] AS C
@@ -233,7 +233,7 @@ FROM
 	@ExportNotifications N
 	INNER JOIN [Notification].[Movement] AS M
 	ON	M.NotificationId = N.NotificationId
-	AND M.[Status] NOT IN (6) -- Exclude cancelled 
+	
 
 
 	INSERT INTO @ExportPreNote
@@ -322,8 +322,8 @@ FROM
 	(
 		SELECT N.NotificationId, N.NotificationNumber
 		,N.CompetentAuthorityId
-		,P.PrenotificationCount
-		,N.LatestShipmentNo - N.NoOfShipmentsUsed as MissingShipments
+		,ISNULL(P.PrenotificationCount, 0) AS PrenotificationCount
+		,ISNULL(N.LatestShipmentNo - N.NoOfShipmentsUsed, 0) as MissingShipments
 		,N.CurrentActiveLoads - N.PermittedActiveLoads as OverLimit
 		,CASE When N.IntendedQuantity - Q.ReceivedQuantity < 0 THEN 'Y' ELSE 'N' END as Overtonnage
 		,CASE WHEN n.NoOfShipmentsUsed > N.IntendedNoOfShipments THEN 'Y' ELSE 'N' END AS OverShipments
