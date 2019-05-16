@@ -71,9 +71,6 @@
                 var movement = await capturedMovementFactory.Create(message.NotificationId, addedMovement.Number,
                     null, addedMovement.ShipmentDate, true);
 
-                movement.HasNoPrenotification = false;
-                movement.SubmitInternally(SystemTime.Now.Date);
-
                 repository.Add(movement);
 
                 await context.SaveChangesAsync();
@@ -84,7 +81,7 @@
             foreach (var movement in result)
             {
                 await movementAuditRepository.Add(new MovementAudit(movement.NotificationId, movement.Number,
-                    userContext.UserId.ToString(), (int)MovementAuditType.Prenotified, SystemTime.Now));
+                    userContext.UserId.ToString(), (int)MovementAuditType.NoPrenotificationReceived, SystemTime.Now));
             }
 
             await context.SaveChangesAsync();
