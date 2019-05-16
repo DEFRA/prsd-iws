@@ -127,7 +127,7 @@
                                 m =>
                                     m.NotificationId == notificationId &&
                                     addedMovements.Exists(x => x.Number == m.ShipmentNumber) &&
-                                    m.Type == (int)MovementAuditType.Prenotified)))
+                                    m.Type == (int)MovementAuditType.NoPrenotificationReceived)))
                 .MustHaveHappened(Repeated.Exactly.Times(addedMovements.Count));
         }
 
