@@ -1,6 +1,7 @@
 ﻿namespace EA.Iws.Web.Areas.Reports.Controllers
 {
     using System;
+    using System.Collections.Generic;
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Core.Admin.Reports;
@@ -11,6 +12,7 @@
     using Prsd.Core.Mediator;
     using Requests.Admin.Reports;
     using ViewModels.Compliance;
+    using Resources = ComplianceGuidanceResources;
 
     [AuthorizeActivity(typeof(GetComplianceReport))]
     public class ComplianceController : Controller
@@ -66,7 +68,34 @@
 
             var fileName = string.Format("compliance-report-{0}-{1}.xlsx", from.ToShortDateString(), to.ToShortDateString());
 
-            return new XlsxActionResult<ComplianceData>(report, fileName, true, null, "C,E,G,I,K");
+            var guidance = new ComplianceDataGuidance
+            {
+                NotificationNumber = Resources.NotificationNumber,
+                NoPrenotificationCount = Resources.NoPrenotificationCount,
+                PreNotificationColour = Resources.PreNotificationColour,
+                MissingShipments = Resources.MissingShipments,
+                MissingShipmentsColour = Resources.MissingShipmentsColour,
+                OverLimitShipments = Resources.OverLimitShipments,
+                OverActiveLoads = Resources.OverActiveLoads,
+                OverTonnage = Resources.OverTonnage,
+                OverTonnageColour = Resources.OverTonnageColour,
+                OverShipments = Resources.OverShipments,
+                OverShipmentsColour = Resources.OverShipmentsColour,
+                Notifier = Resources.Notifier,
+                Consignee = Resources.Consignee,
+                FileExpired = Resources.FileExpired
+            };
+
+            var colourGuidance = new ComplianceDataColourGuidance
+            {
+                HeaderText = Resources.ColourHeaderText,
+                GreenText = Resources.GreenText,
+                AmberText = Resources.AmberText,
+                RedText = Resources.RedText
+            };
+
+            return new ComplianceXlsxActionResult(report, new List<ComplianceDataGuidance> { guidance }, colourGuidance,
+                fileName, true);
         }
     }
 }

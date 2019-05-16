@@ -1,19 +1,20 @@
 ﻿namespace EA.Iws.Core.Admin.Reports
 {
     using System.ComponentModel;
-    public class ComplianceData
+
+    public class ComplianceDataGuidance
     {
         [DisplayName("Notification number")]
         public string NotificationNumber { get; set; }
 
         [DisplayName("Number of shipments with No Prenotification")]
-        public int NoPrenotificationCount { get; set; }
+        public string NoPrenotificationCount { get; set; }
 
         [DisplayName("Prenotification")]
         public string PreNotificationColour { get; set; }
 
         [DisplayName("Number of missing shipments")]
-        public int MissingShipments { get; set; }
+        public string MissingShipments { get; set; }
 
         [DisplayName("Missing shipments")]
         public string MissingShipmentsColour { get; set; }
@@ -44,5 +45,5 @@
 
         [DisplayName("Notification expired (Y/N)")]
         public string FileExpired { get; set; }
-    }   
+    }
 }
