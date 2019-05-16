@@ -5,18 +5,18 @@
     using System.ComponentModel.DataAnnotations;
     using Prsd.Core;
 
-    public class DecisionDateInputViewmodel : IValidatableObject
+    public class DateInputViewmodel : IValidatableObject
     {
-        [Required(ErrorMessageResourceName = "DayError", ErrorMessageResourceType = typeof(DecisionDateResources))]
-        [Range(1, 31, ErrorMessageResourceName = "DayError", ErrorMessageResourceType = typeof(DecisionDateResources))]
+        [Required(ErrorMessageResourceName = "DayError", ErrorMessageResourceType = typeof(DateInputResources))]
+        [Range(1, 31, ErrorMessageResourceName = "DayError", ErrorMessageResourceType = typeof(DateInputResources))]
         public int? Day { get; set; }
 
-        [Required(ErrorMessageResourceName = "MonthError", ErrorMessageResourceType = typeof(DecisionDateResources))]
-        [Range(1, 12, ErrorMessageResourceName = "MonthError", ErrorMessageResourceType = typeof(DecisionDateResources))]
+        [Required(ErrorMessageResourceName = "MonthError", ErrorMessageResourceType = typeof(DateInputResources))]
+        [Range(1, 12, ErrorMessageResourceName = "MonthError", ErrorMessageResourceType = typeof(DateInputResources))]
         public int? Month { get; set; }
 
-        [Required(ErrorMessageResourceName = "YearError", ErrorMessageResourceType = typeof(DecisionDateResources))]
-        [Range(2000, 3000, ErrorMessageResourceName = "YearError", ErrorMessageResourceType = typeof(DecisionDateResources))]
+        [Required(ErrorMessageResourceName = "YearError", ErrorMessageResourceType = typeof(DateInputResources))]
+        [Range(2000, 3000, ErrorMessageResourceName = "YearError", ErrorMessageResourceType = typeof(DateInputResources))]
         public int? Year { get; set; }
 
         public bool AllowPastDates { get; set; }
@@ -35,14 +35,14 @@
             }
         }
 
-        public DecisionDateInputViewmodel(bool allowPastDates = false, bool showLabels = true)
+        public DateInputViewmodel(bool allowPastDates = false, bool showLabels = true)
         {
             AllowPastDates = allowPastDates;
             ShowLabels = showLabels;
             IsAutoTabEnabled = true;
         }
 
-        public DecisionDateInputViewmodel(DateTime? date, bool allowPastDates = false, bool showLabels = true)
+        public DateInputViewmodel(DateTime? date, bool allowPastDates = false, bool showLabels = true)
         {
             IsAutoTabEnabled = true;
             AllowPastDates = allowPastDates;
@@ -86,16 +86,17 @@
         }
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
-        {                      
+        {
             if (Day.HasValue && Month.HasValue && Year.HasValue)
             {
                 if (CheckRange(1, 31, Day.Value) && CheckRange(1, 12, Month.Value) && CheckRange(2000, 3000, Year.Value))
                 {
                     DateTime decisionRequireByDate;
-                    bool isValidDate = SystemTime.TryParse(Year.GetValueOrDefault(), Month.GetValueOrDefault(), Day.GetValueOrDefault(), out decisionRequireByDate);
-                    if (!isValidDate)
+                    if (
+                        !SystemTime.TryParse(Year.GetValueOrDefault(), Month.GetValueOrDefault(),
+                            Day.GetValueOrDefault(), out decisionRequireByDate))
                     {
-                        yield return new ValidationResult(DecisionDateResources.FromValid, new[] { "Day" });
+                        yield return new ValidationResult(DateInputResources.FromValid, new[] { "Day" });
                     }
                 }
             }
