@@ -25,13 +25,13 @@
                 <table id="NewMovement" title="Add shipments to cancel">
                     <thead>
                         <tr>
-                            <th style="width: 8%">
+                            <th style="width: 11%">
                                 @Resources.ShipmentNumber
                             </th>
                             <th style="width: 15%">
                                 @Resources.ActualDateOfShipment
                             </th>
-                            <th style="border-bottom: none !important; width: 5%"></th>
+                            <th style="border-bottom: none !important; width: 1%"></th>
                             <th style="border-bottom: none !important; width: 10%">
                                 <label class="visuallyhidden">Add</label>
                             </th>
@@ -41,7 +41,7 @@
                         <tr>
                             <td style="border-bottom: none !important">
                                 <div class="form-group @Html.Gds().FormGroupClass(m => m.NewShipmentNumber)">
-                                    @Html.Gds().TextBoxFor(m => m.NewShipmentNumber, new { style = "width: 70%;" })
+                                    @Html.Gds().TextBoxFor(m => m.NewShipmentNumber, new { style = "width: 60%;" })
                                 </div>
                             </td>
                             <td style="border-bottom: none !important">
