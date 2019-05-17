@@ -15,6 +15,7 @@ BEGIN
 	--Final Output table
 	DECLARE @ComplianceReport TABLE
 	(
+		Id								INT IDENTITY(1,1),
 		NotificationId					UNIQUEIDENTIFIER NOT NULL,       
 		NotificationNumber				NVARCHAR(50)  NOT NULL,     
 		CompetentAuthorityId			INT NOT NULL,
@@ -46,5 +47,5 @@ BEGIN
 
 	INSERT INTO @ComplianceReport EXEC [Reports].[ImportCompliance]	@DateType, @CompetentAuthority, @From, @To
 
-	SELECT * FROM @ComplianceReport
+	SELECT * FROM @ComplianceReport order by Id asc
 END	 
