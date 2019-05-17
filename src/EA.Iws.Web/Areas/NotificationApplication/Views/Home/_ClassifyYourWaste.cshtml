@@ -30,7 +30,10 @@
             @if (ViewBag.CanEditNotification)
             {
                 <td class="change">
-                    @Html.ActionLink("Change", "Index", "ChemicalComposition", new { id, backToOverview = true }, null)
+                    <a href="@Url.Action("Index", "ChemicalComposition", new { id, backToOverview = true })">
+                        Change
+                        <span class="screen-reader-text">Chemical composition</span>
+                    </a>
                 </td>
             }
         </tr>
@@ -44,7 +47,10 @@
             @if (ViewBag.CanEditNotification)
             {
                 <td class="change">
-                    @Html.ActionLink("Change", "Index", "WasteGenerationProcess", new { id, backToOverview = true }, null)
+                    <a href="@Url.Action("Index", "WasteGenerationProcess", new { id, backToOverview = true })">
+                        Change
+                        <span class="screen-reader-text">Process of generation</span>
+                    </a>
                 </td>
             }
         </tr>
@@ -58,7 +64,10 @@
             @if (ViewBag.CanEditNotification)
             {
                 <td class="change">
-                    @Html.ActionLink("Change", "Index", "PhysicalCharacteristics", new { id, backToOverview = true }, null)
+                    <a href="@Url.Action("Index", "PhysicalCharacteristics", new { id, backToOverview = true })">
+                        Change
+                        <span class="screen-reader-text">Physical characteristics</span>
+                    </a>
                 </td>
             }
         </tr>

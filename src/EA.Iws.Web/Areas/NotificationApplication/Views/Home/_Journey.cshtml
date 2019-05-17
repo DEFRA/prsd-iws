@@ -31,7 +31,10 @@
             @if (ViewBag.CanEditNotification)
             {
                 <td class="change">
-                    @Html.ActionLink("Change", "Index", "StateOfExport", new { id, backToOverview = true }, null)
+                    <a href="@Url.Action("Index", "StateOfExport", new { id, backToOverview = true })">
+                        Change
+                        <span class="screen-reader-text">Export route</span>
+                    </a>
                 </td>
             }
         </tr>
@@ -45,7 +48,10 @@
             @if (ViewBag.CanEditNotification)
             {
                 <td class="change">
-                    @Html.ActionLink("Change", "Index", "StateOfImport", new { id, backToOverview = true }, null)
+                    <a href="@Url.Action("Index", "StateOfImport", new { id, backToOverview = true })">
+                        Change
+                        <span class="screen-reader-text">Import route</span>
+                    </a>
                 </td>
             }
         </tr>
@@ -58,7 +64,12 @@
             </td>
             @if (ViewBag.CanEditNotification)
             {
-                <td class="change">@Html.ActionLink("Change", "Summary", "TransportRoute", new { id, backToOverview = true }, null)</td>
+                <td class="change">
+                    <a href="@Url.Action("Summary", "TransportRoute", new { id, backToOverview = true })">
+                        Change
+                        <span class="screen-reader-text">Transits (Optional)</span>
+                    </a>
+                </td>
             }
         </tr>
         <tr class = @customsClass>
@@ -70,7 +81,12 @@
             </td>
             @if (ViewBag.CanEditNotification)
             {
-                <td class="change">@Html.ActionLink("Change", "Index", "CustomsOffice", new { id, backToOverview = true }, null)</td>
+                <td class="change">
+                    <a href="@Url.Action("Index", "CustomsOffice", new { id, backToOverview = true })">
+                        Change
+                        <span class="screen-reader-text">Customs office</span>
+                    </a>
+                </td>
             }
         </tr>
     </tbody>

@@ -31,7 +31,10 @@
             @if (ViewBag.CanEditNotification)
             {
                 <td class="change">
-                    @Html.ActionLink("Change", "List", "Carrier", new { id, backToOverview = true }, null)
+                    <a href="@Url.Action("List", "Carrier", new { id, backToOverview = true })">
+                        Change
+                        <span class="screen-reader-text">Intended carriers</span>
+                    </a>
                 </td>
             }
         </tr>
@@ -45,7 +48,10 @@
             @if (ViewBag.CanEditNotification)
             {
                 <td class="change">
-                    @Html.ActionLink("Change", "Index", "MeansOfTransport", new { id, backToOverview = true }, null)
+                    <a href="@Url.Action("Index", "MeansOfTransport", new { id, backToOverview = true })">
+                        Change
+                        <span class="screen-reader-text">Means of transport</span>
+                    </a>
                 </td>
             }
         </tr>
@@ -59,7 +65,10 @@
             @if (ViewBag.CanEditNotification)
             {
                 <td class="change">
-                    @Html.ActionLink("Change", "Index", "PackagingTypes", new { id, backToOverview = true }, null)
+                    <a href="@Url.Action("Index", "PackagingTypes", new { id, backToOverview = true })">
+                        Change
+                        <span class="screen-reader-text">Packaging types</span>
+                    </a>
                 </td>
             }
         </tr>
@@ -73,7 +82,10 @@
             @if (ViewBag.CanEditNotification)
             {
                 <td class="change">
-                    @Html.ActionLink("Change", "Index", "SpecialHandling", new { id, backToOverview = true }, null)
+                    <a href="@Url.Action("Index", "SpecialHandling", new { id, backToOverview = true })">
+                        Change
+                        <span class="screen-reader-text">Special handling requirements</span>
+                    </a>
                 </td>
             }
         </tr>
