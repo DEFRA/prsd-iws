@@ -12,6 +12,10 @@
                 <h1 class="heading-large">@Resources.AddTitle</h1>
                 @Resources.AddDescription
             </header>
+            
+            <div class="form-group">
+                @Html.ActionLink(Resources.AddAbandon, "AddAbandon")
+            </div>
 
             @using (Html.BeginForm())
             {
@@ -21,13 +25,13 @@
                 <table id="NewMovement" title="Add shipments to cancel">
                     <thead>
                         <tr>
-                            <th style="width: 8%">
+                            <th style="width: 11%">
                                 @Resources.ShipmentNumber
                             </th>
                             <th style="width: 15%">
                                 @Resources.ActualDateOfShipment
                             </th>
-                            <th style="border-bottom: none !important; width: 5%"></th>
+                            <th style="border-bottom: none !important; width: 1%"></th>
                             <th style="border-bottom: none !important; width: 10%">
                                 <label class="visuallyhidden">Add</label>
                             </th>
@@ -37,7 +41,7 @@
                         <tr>
                             <td style="border-bottom: none !important">
                                 <div class="form-group @Html.Gds().FormGroupClass(m => m.NewShipmentNumber)">
-                                    @Html.Gds().TextBoxFor(m => m.NewShipmentNumber, new { style = "width: 70%;" })
+                                    @Html.Gds().TextBoxFor(m => m.NewShipmentNumber, new { style = "width: 60%;" })
                                 </div>
                             </td>
                             <td style="border-bottom: none !important">
@@ -48,7 +52,7 @@
                             <td style="border-bottom: none !important"></td>
                             <td style="border-bottom: none !important">
                                 <div class="form-group">
-                                    <button type="submit" name="command" value="add" tabindex="2" class="button-secondary">@Resources.AddShipmentButton</button>
+                                    <button type="submit" name="command" value="add" class="button">@Resources.AddShipmentButton</button>
                                 </div>
                             </td>
                         </tr>
@@ -61,41 +65,42 @@
                         <h2 class="heading-medium">@Resources.AddSubHeader</h2>
                         <table id="AddedMovements" title="@Resources.AddSubHeader">
                             <thead>
-                                <tr>
-                                    <th>
-                                        @Resources.ShipmentNumber
-                                    </th>
-                                    <th>
-                                        @Resources.ActualDateOfShipment
-                                    </th>
-                                    <th>
-                                        <label>@Constants.ActionText</label>
-                                    </th>
-                                </tr>
+                            <tr>
+                                <th>
+                                    @Resources.ShipmentNumber
+                                </th>
+                                <th>
+                                    @Resources.ActualDateOfShipment
+                                </th>
+                                <th>
+                                    <label>@Constants.ActionText</label>
+                                </th>
+                            </tr>
                             </thead>
                             <tbody>
-                                @for (var i = 0; i < Model.AddedMovements.Count(); i++)
-                                {
-                                    <tr>
-                                        <td>
-                                            @Html.DisplayFor(m => m.AddedMovements[i].Number)
-                                        </td>
-                                        <td>
-                                            @Html.Gds().DisplayShortDateFor(m => m.AddedMovements[i].ShipmentDate)
-                                        </td>
-                                        <td>
-                                            <button class="link-submit" type="submit" name="command" value="@Model.AddedMovements[i].Number">@Constants.RemoveText</button>
-                                        </td>
-                                    </tr>
-                                }
+                            @for (var i = 0; i < Model.AddedMovements.Count(); i++)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(m => m.AddedMovements[i].Number)
+                                    </td>
+                                    <td>
+                                        @Html.Gds().DisplayShortDateFor(m => m.AddedMovements[i].ShipmentDate)
+                                    </td>
+                                    <td>
+                                        <button class="link-submit" type="submit" name="command" value="@Model.AddedMovements[i].Number">@Constants.RemoveText</button>
+                                    </td>
+                                </tr>
+                            }
                             </tbody>
                         </table>
                     </div>
+
+                    <div class="form-group">
+                        @Html.ActionLink(@Constants.ContinueButtonText, "Index", "Cancel", null, new { @class = "button" })
+                    </div>
                 }
             }
-            <div class="form-group">
-                @Html.ActionLink(@Constants.SubmitButtonText, "Index", "Cancel", null, new { @class = "button" })
-            </div>
         </div>
     </div>
 </div>
