@@ -12,6 +12,10 @@
                 <h1 class="heading-large">@Resources.AddTitle</h1>
                 @Resources.AddDescription
             </header>
+            
+            <div class="form-group">
+                @Html.ActionLink(Resources.AddAbandon, "AddAbandon")
+            </div>
 
             @using (Html.BeginForm())
             {

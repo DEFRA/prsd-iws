@@ -217,6 +217,14 @@
         }
 
         [HttpGet]
+        public ActionResult AddAbandon(Guid id)
+        {
+            TempData[AddedCancellableMovementsListKey] = null;
+
+            return RedirectToAction("Index");
+        }
+
+        [HttpGet]
         public ActionResult Abandon(Guid id)
         {
             TempData[SubmittedMovementListKey] = null;
