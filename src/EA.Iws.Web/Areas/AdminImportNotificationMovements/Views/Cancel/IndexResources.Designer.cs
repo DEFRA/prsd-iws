@@ -70,6 +70,15 @@ namespace EA.Iws.Web.Areas.AdminImportNotificationMovements.Views.Cancel {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to I don&apos;t want to add any shipments.
+        /// </summary>
+        public static string AddAbandon {
+            get {
+                return ResourceManager.GetString("AddAbandon", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Add in the information of the shipment(s) that you would like to cancel..
         /// </summary>
         public static string AddDescription {

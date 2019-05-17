@@ -120,6 +120,9 @@
   <data name="ActualDateOfShipment" xml:space="preserve">
     <value>Actual date of shipment</value>
   </data>
+  <data name="AddAbandon" xml:space="preserve">
+    <value>I don't want to add any shipments</value>
+  </data>
   <data name="AddDescription" xml:space="preserve">
     <value>Add in the information of the shipment(s) that you would like to cancel.</value>
   </data>
