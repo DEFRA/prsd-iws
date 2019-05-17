@@ -141,7 +141,8 @@ else
                     <td>
                         @Html.ActionLink(linkText: HomeResources.LinkChoose, actionName: "Index", controllerName: "Options",
                             routeValues: new { id = Model.Notifications[i].Id, area = "NotificationApplication" }, htmlAttributes: new { @title = Model.Notifications[i].NotificationNumber })
-                    </td>
+						<span class="screen-reader-text">Choose notification  @Html.Raw(Model.Notifications[i].NotificationNumber.Replace(" ", ""))</span> 
+					</td>
                 </tr>
             }
             </tbody>
