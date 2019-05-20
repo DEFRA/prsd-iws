@@ -27,7 +27,7 @@
     @Html.HiddenFor(m => m.MovementId)
     if (Model.Certificate == CertificateType.ReceiptRecovery)
     {
-            <h1 class="heading-large">@Html.Raw(string.Format(@Resource.UploadCombinedTitle, operation))</h1>
+            <h1 class="heading-large">@Html.Raw(string.Format(@Resource.UploadCombinedTitle, operation, Model.ShipmentNumber))</h1>
     }
     else
     {

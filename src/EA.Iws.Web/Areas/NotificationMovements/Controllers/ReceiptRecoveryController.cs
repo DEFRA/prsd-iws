@@ -42,11 +42,16 @@
         [HttpGet]
         public async Task<ActionResult> Index(Guid notificationId, Guid movementId)
         {
-            ReceiptRecoveryViewModel model = new ReceiptRecoveryViewModel();
-            model.SelectedmovementId = movementId;
-            model.NotificationId = notificationId;
-            model.NotificationType = await mediator.SendAsync(new GetNotificationType(notificationId));
-            model.Unit = await mediator.SendAsync(new GetShipmentUnits(notificationId));
+            var movementDetails = await mediator.SendAsync(new GetMovementDetailsById(notificationId, movementId));
+
+            var model = new ReceiptRecoveryViewModel
+            {
+                SelectedmovementId = movementId,
+                NotificationId = notificationId,
+                NotificationType = await mediator.SendAsync(new GetNotificationType(notificationId)),
+                Unit = await mediator.SendAsync(new GetShipmentUnits(notificationId)),
+                ShipmentNumber = movementDetails.Number
+            };
 
             if (TempData[CertificateKey] != null)
             {
