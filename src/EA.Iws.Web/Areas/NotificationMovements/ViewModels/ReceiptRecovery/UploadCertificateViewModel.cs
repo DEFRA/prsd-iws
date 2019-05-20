@@ -36,6 +36,8 @@
         [RestrictToAllowedUploadTypes]
         public HttpPostedFileBase File { get; set; }
 
+        public int ShipmentNumber { get; set; }
+
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             if (File == null || File.InputStream.Length == 0)

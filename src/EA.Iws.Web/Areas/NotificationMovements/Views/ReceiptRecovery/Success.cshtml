@@ -23,7 +23,7 @@
     }
  }
 <header class="hgroup">
-    <h1 class="heading-large">@Html.Raw(string.Format(@Resource.SuccessTitle, titletext))</h1>
+    <h1 class="heading-large">@Html.Raw(string.Format(@Resource.SuccessTitle, titletext, Model.ShipmentNumber))</h1>
 </header>
 @Html.HiddenFor(m => m.NotificationId)
 

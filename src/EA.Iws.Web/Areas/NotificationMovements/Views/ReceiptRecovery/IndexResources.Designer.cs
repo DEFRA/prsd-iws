@@ -88,7 +88,7 @@ namespace EA.Iws.Web.Areas.NotificationMovements.Views.ReceiptRecovery {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to How much waste and when was it received?.
+        ///   Looks up a localized string similar to How much waste and when was shipment {0} received?.
         /// </summary>
         public static string ReceiptTitle {
             get {
@@ -133,7 +133,7 @@ namespace EA.Iws.Web.Areas.NotificationMovements.Views.ReceiptRecovery {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You&apos;ve successfully recorded the {0} of this shipment.
+        ///   Looks up a localized string similar to You&apos;ve successfully recorded the {0} for shipment {1}.
         /// </summary>
         public static string SuccessTitle {
             get {
@@ -196,7 +196,7 @@ namespace EA.Iws.Web.Areas.NotificationMovements.Views.ReceiptRecovery {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Your certificate of receipt is now complete.
+        ///   Looks up a localized string similar to Your certificate of receipt for shipment {0} is nearly complete.
         /// </summary>
         public static string UploadReceiptTitle {
             get {
