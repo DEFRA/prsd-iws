@@ -52,6 +52,8 @@
 
         public DateTime ReceiptDate { get; set; }
 
+        public int ShipmentNumber { get; set; }
+
         public ReceiptRecoveryViewModel()
         {
                 IsSameAsReceiptDate = true;

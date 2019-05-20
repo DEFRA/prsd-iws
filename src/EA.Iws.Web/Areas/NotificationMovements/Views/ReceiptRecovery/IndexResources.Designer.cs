@@ -88,7 +88,7 @@ namespace EA.Iws.Web.Areas.NotificationMovements.Views.ReceiptRecovery {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to How much waste and when was it received?.
+        ///   Looks up a localized string similar to How much waste and when was shipment {0} received?.
         /// </summary>
         public static string ReceiptTitle {
             get {
@@ -115,7 +115,7 @@ namespace EA.Iws.Web.Areas.NotificationMovements.Views.ReceiptRecovery {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to When was the waste {0}?.
+        ///   Looks up a localized string similar to When was the waste {0} for shipment {1} ?.
         /// </summary>
         public static string RecoveryTitle {
             get {
@@ -133,7 +133,7 @@ namespace EA.Iws.Web.Areas.NotificationMovements.Views.ReceiptRecovery {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You&apos;ve successfully recorded the {0} of this shipment.
+        ///   Looks up a localized string similar to You&apos;ve successfully recorded the {0} for shipment {1}.
         /// </summary>
         public static string SuccessTitle {
             get {
@@ -142,7 +142,7 @@ namespace EA.Iws.Web.Areas.NotificationMovements.Views.ReceiptRecovery {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to How much waste was received and when was it {0}?.
+        ///   Looks up a localized string similar to How much waste was received and when was it {0} for shipment {1}?.
         /// </summary>
         public static string Title {
             get {
@@ -151,7 +151,7 @@ namespace EA.Iws.Web.Areas.NotificationMovements.Views.ReceiptRecovery {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Your certificates of receipt and {0} are now complete.
+        ///   Looks up a localized string similar to Your certificates of receipt and {0} for shipment {1} are nearly complete.
         /// </summary>
         public static string UploadCombinedTitle {
             get {
@@ -196,7 +196,7 @@ namespace EA.Iws.Web.Areas.NotificationMovements.Views.ReceiptRecovery {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Your certificate of receipt is now complete.
+        ///   Looks up a localized string similar to Your certificate of receipt for shipment {0} is nearly complete.
         /// </summary>
         public static string UploadReceiptTitle {
             get {
@@ -205,7 +205,7 @@ namespace EA.Iws.Web.Areas.NotificationMovements.Views.ReceiptRecovery {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The shipment is now complete.
+        ///   Looks up a localized string similar to Your certificate of {0} for shipment {1} is nearly complete.
         /// </summary>
         public static string UploadRecoveryTitle {
             get {
