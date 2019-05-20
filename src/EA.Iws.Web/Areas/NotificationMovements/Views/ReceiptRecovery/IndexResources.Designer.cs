@@ -115,7 +115,7 @@ namespace EA.Iws.Web.Areas.NotificationMovements.Views.ReceiptRecovery {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to When was the waste {0}?.
+        ///   Looks up a localized string similar to When was the waste {0} for shipment {1} ?.
         /// </summary>
         public static string RecoveryTitle {
             get {
@@ -205,7 +205,7 @@ namespace EA.Iws.Web.Areas.NotificationMovements.Views.ReceiptRecovery {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The shipment is now complete.
+        ///   Looks up a localized string similar to Your certificate of {0} for shipment {1} is nearly complete.
         /// </summary>
         public static string UploadRecoveryTitle {
             get {

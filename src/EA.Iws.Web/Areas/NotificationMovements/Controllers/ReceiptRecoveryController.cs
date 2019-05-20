@@ -169,10 +169,16 @@
         [HttpGet]
         public async Task<ActionResult> Recovery(Guid notificationId, Guid movementId)
         {
-            RecoveryViewModel model = new RecoveryViewModel();
-            model.SelectedmovementId = movementId;
-            model.NotificationId = notificationId;
-            model.NotificationType = await mediator.SendAsync(new GetNotificationType(notificationId));
+            var movementDetails = await mediator.SendAsync(new GetMovementDetailsById(notificationId, movementId));
+
+            var model = new RecoveryViewModel
+            {
+                SelectedmovementId = movementId,
+                NotificationId = notificationId,
+                NotificationType = await mediator.SendAsync(new GetNotificationType(notificationId)),
+                ShipmentNumber = movementDetails.Number
+            };
+
             if (TempData[CertificateKey] != null)
             {
                 model.Certificate = (CertificateType)TempData[CertificateKey];

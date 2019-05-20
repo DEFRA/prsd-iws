@@ -7,8 +7,8 @@
 }
 
 @{ 
-    string titletext = " ";
-    string recoveryText = Model.NotificationType == NotificationType.Recovery ? "recovery" : "disposal";
+    var titletext = " ";
+    var recoveryText = Model.NotificationType == NotificationType.Recovery ? "recovery" : "disposal";
     if (Model.Certificate == CertificateType.Receipt)
     {
         titletext = "receipt";

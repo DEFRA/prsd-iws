@@ -136,7 +136,7 @@
     <value>{0} date</value>
   </data>
   <data name="RecoveryTitle" xml:space="preserve">
-    <value>When was the waste {0}?</value>
+    <value>When was the waste {0} for shipment {1} ?</value>
   </data>
   <data name="SameAsReceived" xml:space="preserve">
     <value>Is this also the date of {0}?</value>
@@ -166,7 +166,7 @@
     <value>Your certificate of receipt for shipment {0} is nearly complete</value>
   </data>
   <data name="UploadRecoveryTitle" xml:space="preserve">
-    <value>The shipment is now complete</value>
+    <value>Your certificate of {0} for shipment {1} is nearly complete</value>
   </data>
   <data name="Yes" xml:space="preserve">
     <value>Yes</value>

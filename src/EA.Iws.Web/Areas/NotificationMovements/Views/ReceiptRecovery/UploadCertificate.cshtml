@@ -8,7 +8,7 @@
 @{
     ViewBag.Title = (Model.NotificationType == NotificationType.Recovery ? "Recovery" : "Disposal") + " complete";
     var operation = Model.NotificationType == NotificationType.Recovery ? "recovery" : "disposal";
-    var titleText = Model.Certificate == CertificateType.Receipt ? string.Format(Resource.UploadReceiptTitle, Model.ShipmentNumber) : Resource.UploadRecoveryTitle;
+    var titleText = Model.Certificate == CertificateType.Receipt ? string.Format(Resource.UploadReceiptTitle, Model.ShipmentNumber) : string.Format(Resource.UploadRecoveryTitle, operation, Model.ShipmentNumber);
     var fileText = Model.Certificate == CertificateType.Receipt ? "receipt" : (Model.NotificationType == NotificationType.Recovery ? "recovery" : "disposal");
 }
 
