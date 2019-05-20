@@ -31,6 +31,9 @@
 <br />
 <br />
 
-<div>
-    @Html.ActionLink("Go to notification options", "Index", "Options")
-</div>
+@if (!Model.SubmitSideBarViewModel.IsInternalUser)
+{
+    <div>
+        @Html.ActionLink("Go to notification options", "Index", "Options")
+    </div>
+}
