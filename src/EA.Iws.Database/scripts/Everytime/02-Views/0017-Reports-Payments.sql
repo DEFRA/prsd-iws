@@ -15,7 +15,7 @@ AS
           FROM [Notification].[Transaction] T2
           WHERE T2.NotificationId = N.Id
 		  ORDER BY [Date] DESC
-          FOR XML PATH(''), TYPE).value('.', 'NVARCHAR(MAX)'), CHAR(13), ''), CHAR(10), '') AS Comments
+          FOR XML PATH(''), TYPE).value('.', 'NVARCHAR(MAX)'), CHAR(13), ''), CHAR(10), ' ') AS Comments
     FROM [Notification].[Transaction] T
     INNER JOIN [Notification].[Notification] N ON N.Id = T.NotificationId
     GROUP BY N.Id, N.NotificationNumber
@@ -33,7 +33,7 @@ AS
           FROM [ImportNotification].[Transaction] T2
           WHERE T2.NotificationId = N.Id
 		  ORDER BY [Date] DESC
-          FOR XML PATH(''), TYPE).value('.', 'NVARCHAR(MAX)'), CHAR(13), ''), CHAR(10), '') AS Comments
+          FOR XML PATH(''), TYPE).value('.', 'NVARCHAR(MAX)'), CHAR(13), ''), CHAR(10), ' ') AS Comments
     FROM [ImportNotification].[Transaction] T
     INNER JOIN [ImportNotification].[Notification] N ON N.Id = T.NotificationId
     GROUP BY N.Id, N.NotificationNumber
