@@ -18,7 +18,7 @@
         {
             var commentsCount = await repository.GetCommentsCountForImportNotification(message.ImportNotificationId);
 
-            return commentsCount > 0 ? true : false;
+            return commentsCount > 0;
         }
     }
 }

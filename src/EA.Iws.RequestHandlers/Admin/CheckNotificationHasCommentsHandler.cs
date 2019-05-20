@@ -18,7 +18,7 @@
         {
             var commentsCount = await repository.GetCommentsCountForNotification(message.NotificationId);
 
-            return commentsCount > 0 ? true : false;
+            return commentsCount > 0;
         }
     }
 }
