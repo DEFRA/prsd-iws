@@ -88,6 +88,7 @@
     <Compile Include="AddressBook\GetUserAddressBookByTypeHandler.cs" />
     <Compile Include="AddressBook\SearchAddressRecordsByNameHandler.cs" />
     <Compile Include="AddressBook\SearchAddressRecordsHandler.cs" />
+    <Compile Include="Admin\CheckNotificationHasCommentsHandler.cs" />
     <Compile Include="Admin\EntryOrExitPoints\AddEntryOrExitPointHandler.cs" />
     <Compile Include="Admin\EntryOrExitPoints\CheckEntryOrExitPointUniqueHandler.cs" />
     <Compile Include="Admin\EntryOrExitPoints\GetEntryOrExitPointsGroupedByCountryHandler.cs" />
@@ -251,6 +252,7 @@
     <Compile Include="ImportNotificationMovements\GetImportMovementsSummaryTableHandler.cs" />
     <Compile Include="ImportNotificationMovements\GetRejectedImportMovementDetailsHandler.cs" />
     <Compile Include="ImportNotificationMovements\GetRejectedImportMovementsHandler.cs" />
+    <Compile Include="ImportNotification\CheckImportNotificationHasCommentsHandler.cs" />
     <Compile Include="ImportNotification\CheckImportNumberUniqueHandler.cs" />
     <Compile Include="ImportNotification\CompleteDraftImportNotificationHandler.cs" />
     <Compile Include="ImportNotification\CreateImportNotificationHandler.cs" />

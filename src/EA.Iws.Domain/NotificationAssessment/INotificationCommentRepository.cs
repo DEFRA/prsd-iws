@@ -15,5 +15,7 @@
         Task<int> GetTotalNumberOfComments(Guid notificationId, NotificationShipmentsCommentsType type);
 
         Task<List<String>> GetUsers(Guid notificationId, NotificationShipmentsCommentsType type);
+
+        Task<int> GetCommentsCountForNotification(Guid notificationId);
     }
 }
