@@ -5,11 +5,11 @@
     Layout = "~/Areas/NotificationMovements/Views/Shared/_CreateSummaryLayout.cshtml";
     ViewBag.Title = "Recovered shipment";
 }
-@{  var labelText = Model.NotificationType == NotificationType.Recovery ? "Recovered" : "Disposed of";
+@{
+    var labelText = Model.NotificationType == NotificationType.Recovery ? "Recovered" : "Disposed of";
     var operationLabelVerb = Model.NotificationType == NotificationType.Recovery ? "recovery" : "disposal";
-    var recoveryLabelVerb = Model.NotificationType == NotificationType.Recovery ? "recovered" : "disposed of";
-
-     }
+    var recoveryLabelVerb = Model.NotificationType == NotificationType.Recovery ? "recovered" : "disposed";
+}
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
@@ -17,7 +17,7 @@
     @Html.HiddenFor(m => m.NotificationType)
     @Html.HiddenFor(m => m.Certificate)
 
-    <h1 class="heading-large">@Html.Raw(string.Format(@Resource.RecoveryTitle, recoveryLabelVerb))</h1>
+    <h1 class="heading-large">@Html.Raw(string.Format(@Resource.RecoveryTitle, recoveryLabelVerb, Model.ShipmentNumber))</h1>
 
     <div class="form-group @Html.Gds().FormGroupClass(m => m.Day) @Html.Gds().FormGroupClass(m => m.Month) @Html.Gds().FormGroupClass(m => m.Year)">
         <fieldset>
