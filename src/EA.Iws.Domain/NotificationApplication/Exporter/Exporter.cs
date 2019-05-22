@@ -41,9 +41,11 @@
             Contact = contact;
         }
 
-        public void UpdateContact(Contact contact)
+        public void UpdateContact(Contact contact, Business business)
         {
+            Guard.ArgumentNotNull(() => business, business);
             Guard.ArgumentNotNull(() => contact, contact);
+            Business = business;
             Contact = contact;
         }
     }

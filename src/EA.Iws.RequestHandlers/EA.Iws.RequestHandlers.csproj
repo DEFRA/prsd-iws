@@ -487,7 +487,7 @@
     <Compile Include="NotificationAssessment\RemoveTransitStateHandler.cs" />
     <Compile Include="NotificationAssessment\SetExitPointHandler.cs" />
     <Compile Include="NotificationAssessment\SetImporterContactHandler.cs" />
-    <Compile Include="NotificationAssessment\SetExporterContactHandler.cs" />
+    <Compile Include="NotificationAssessment\SetExporterDetailsHandler.cs" />
     <Compile Include="NotificationAssessment\SetNewNumberOfShipmentsHandler.cs" />
     <Compile Include="NotificationAssessment\SetEntryPointHandler.cs" />
     <Compile Include="NotificationAssessment\UpdateTransitStateEntryOrExitHandler.cs" />

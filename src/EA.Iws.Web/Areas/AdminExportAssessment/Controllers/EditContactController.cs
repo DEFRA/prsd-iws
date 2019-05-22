@@ -14,7 +14,7 @@
     using Requests.NotificationAssessment;
     using ViewModels.EditContact;
 
-    [AuthorizeActivity(typeof(SetExporterContact))]
+    [AuthorizeActivity(typeof(SetExporterDetails))]
     [AuthorizeActivity(typeof(SetImporterContact))]
     public class EditContactController : Controller
     {
@@ -47,9 +47,9 @@
 
             var exporter = await mediator.SendAsync(new GetExporterByNotificationId(id));
 
-            var contactData = GetNewContactData(model, exporter.Contact);
+            var exporterData = GetNewExporterData(model, exporter);
 
-            await mediator.SendAsync(new SetExporterContact(id, contactData));
+            await mediator.SendAsync(new SetExporterDetails(id, exporterData));
 
             await this.auditService.AddAuditEntry(this.mediator,
                     id,
@@ -105,6 +105,23 @@
                 Fax = oldContactData.Fax
             };
             return newContactData;
+        }
+
+        private static ExporterData GetNewExporterData(EditContactViewModel model, ExporterData oldExporterData)
+        {
+            var newExporterData = new ExporterData
+            {
+                Contact = GetNewContactData(model, oldExporterData.Contact),
+                Business = new BusinessInfoData
+                {
+                    Name = model.Name,
+                    AdditionalRegistrationNumber = oldExporterData.Business.AdditionalRegistrationNumber,
+                    BusinessType = oldExporterData.Business.BusinessType,
+                    OtherDescription = oldExporterData.Business.OtherDescription,
+                    RegistrationNumber = oldExporterData.Business.RegistrationNumber
+                }
+            };
+            return newExporterData;
         }
     }
 }

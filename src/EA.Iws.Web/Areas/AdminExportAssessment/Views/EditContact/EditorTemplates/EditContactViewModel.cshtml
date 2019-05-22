@@ -1,5 +1,13 @@
-﻿@model EA.Iws.Web.Areas.AdminExportAssessment.ViewModels.EditContact.EditContactViewModel
+﻿@using EA.Iws.Web.Areas.AdminExportAssessment.ViewModels.EditContact
+@model EA.Iws.Web.Areas.AdminExportAssessment.ViewModels.EditContact.EditContactViewModel
     
+<div class="form-group @Html.Gds().FormGroupClass(m => m.Name)">
+	@Html.Gds().LabelFor(m => m.Name)
+	@Html.Gds().ValidationMessageFor(m => m.Name)
+	@Html.Gds().HintSpan(EditContactViewModelResources.OrgNameHint)
+	@Html.Gds().TextBoxFor(m => m.Name)	
+</div>
+<hr />
 <div class="form-group @Html.Gds().FormGroupClass(m => m.FullName)">
     @Html.Gds().LabelFor(model => model.FullName)
     @Html.Gds().ValidationMessageFor(model => model.FullName)
