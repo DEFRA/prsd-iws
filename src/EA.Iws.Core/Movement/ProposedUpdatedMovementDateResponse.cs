@@ -7,5 +7,7 @@
         public bool IsOutOfRange { get; set; }
 
         public bool IsOutOfRangeOfOriginalDate { get; set; }
+
+        public bool IsOutRangeDateInPast { get; set; }
     }
 }
