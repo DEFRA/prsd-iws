@@ -3,6 +3,17 @@
 @using Resources = EA.Iws.Web.Areas.AdminExportAssessment.Views.FinancialGuaranteeAssessment.FinancialGuaranteeAssessmentResources
 @{
     ViewBag.Title = Resources.AssessmentTitle;
+
+    var statusToUse = Model.Status;
+
+    if (Model.Decision == FinancialGuaranteeDecision.Refused)
+    {
+        statusToUse = FinancialGuaranteeStatus.Refused;
+    }
+    if (Model.Decision == FinancialGuaranteeDecision.Approved)
+    {
+        statusToUse = statusToUse == FinancialGuaranteeStatus.Released ? statusToUse : FinancialGuaranteeStatus.Approved;
+    }
 }
 
 <h1 class="heading-large">@Resources.AssessmentTitle</h1>
@@ -15,27 +26,31 @@
 
         <table class="fg-decision">
             <tbody>
-            <tr>
-                <th>@Resources.Decision</th>
-                <td>@EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(Model.Decision)</td>
-            </tr>
-            <tr>
-                <th>@Resources.DateReceived</th>
-                <td>@Html.Gds().DisplayDateFor(m => m.ReceivedDate)</td>
-            </tr>
-            <tr>
-                <th>@Resources.DateCompleted</th>
-                <td>
-                    @if (Model.Status == FinancialGuaranteeStatus.ApplicationReceived)
-                    {
-                        @Html.ActionLink(Resources.AddLink, "Complete", new { financialGuaranteeId = Model.FinancialGuaranteeId })
-                    }
-                    else if (Model.CompletedDate.HasValue)
-                    {
-                        @Html.Gds().DisplayDateFor(m => m.CompletedDate.Value)
-                    }
-                </td>
-            </tr>
+                <tr>
+                    <th>@Resources.Decision</th>
+                    <td>@EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(Model.Decision)</td>
+                </tr>
+                <tr>
+                    <th>@Resources.CurrentStatus</th>
+                    <td>@EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(statusToUse)</td>
+                </tr>
+                <tr>
+                    <th>@Resources.DateReceived</th>
+                    <td>@Html.Gds().DisplayDateFor(m => m.ReceivedDate)</td>
+                </tr>
+                <tr>
+                    <th>@Resources.DateCompleted</th>
+                    <td>
+                        @if (Model.Status == FinancialGuaranteeStatus.ApplicationReceived)
+                        {
+                            @Html.ActionLink(Resources.AddLink, "Complete", new { financialGuaranteeId = Model.FinancialGuaranteeId })
+                        }
+                        else if (Model.CompletedDate.HasValue)
+                        {
+                            @Html.Gds().DisplayDateFor(m => m.CompletedDate.Value)
+                        }
+                    </td>
+                </tr>
             </tbody>
         </table>
 
