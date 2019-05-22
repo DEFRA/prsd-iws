@@ -20,6 +20,7 @@
 
         public async Task<ProposedUpdatedMovementDateResponse> HandleAsync(IsProposedUpdatedMovementDateValid message)
         {
+            var isOutRangeDateInPast = false;
             var isOutsideConsentPeriod = false;
             var isOutOfRange = false;
             var isOutOfRangeOfOriginalDate = false;
@@ -29,6 +30,10 @@
             try
             {
                 await validator.EnsureDateValid(movement, message.ProposedDate);
+            }
+            catch (MovementDateOutOfRangeDateInPastException)
+            {
+                isOutRangeDateInPast = true;
             }
             catch (MovementDateOutsideConsentPeriodException)
             {
@@ -45,6 +50,7 @@
 
             return new ProposedUpdatedMovementDateResponse
             {
+                IsOutRangeDateInPast = isOutRangeDateInPast,
                 IsOutsideConsentPeriod = isOutsideConsentPeriod,
                 IsOutOfRange = isOutOfRange,
                 IsOutOfRangeOfOriginalDate = isOutOfRangeOfOriginalDate

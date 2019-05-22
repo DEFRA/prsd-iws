@@ -29,7 +29,7 @@
 
             if (date < SystemTime.UtcNow.Date)
             {
-                throw new MovementDateException(string.Format(
+                throw new MovementDateOutOfRangeDateInPastException(string.Format(
                     "Can't set new movement date {0} since it is in the past",
                     date));
             }
