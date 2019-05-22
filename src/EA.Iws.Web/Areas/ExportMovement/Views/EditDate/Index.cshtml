@@ -38,6 +38,7 @@
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
+    @Html.HiddenFor(m => m.NotificationId)
     for (int i = 0; i < Model.DateEditHistory.Count; i++)
     {
         @Html.HiddenFor(m => m.DateEditHistory[i])

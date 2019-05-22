@@ -1,6 +1,7 @@
 ﻿namespace EA.Iws.Web.Areas.ExportMovement.Controllers
 {
     using System;
+    using System.Globalization;
     using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Mvc;
@@ -9,6 +10,7 @@
     using Requests.Movement;
     using Requests.Movement.Edit;
     using Requests.NotificationMovements;
+    using Requests.NotificationMovements.Create;
     using ViewModels.EditDate;
 
     [AuthorizeActivity(typeof(UpdateMovementDate))]
@@ -50,6 +52,7 @@
             }
 
             var proposedDate = await mediator.SendAsync(new IsProposedUpdatedMovementDateValid(id, model.AsDateTime().Value));
+            var remainingShipmentsData = await mediator.SendAsync(new GetRemainingShipments(model.NotificationId, model.AsDateTime()));
 
             if (proposedDate.IsOutsideConsentPeriod)
             {
@@ -67,6 +70,16 @@
             {
                 ModelState.AddModelError("Day",
                     "The actual date of shipment cannot be more than 10 working days after the original date. Please enter a different date.");
+            }
+
+            if (remainingShipmentsData.ActiveLoadsRemainingByDate < 1)
+            {
+                ModelState.AddModelError("NumberToCreate",
+                    string.Format("You already have {0} prenotifications for {1} and you are only permitted to prenotify {2} shipments. {3} shipment will exceed your limit on that date.",
+                        remainingShipmentsData.ActiveLoadsPermitted - remainingShipmentsData.ActiveLoadsRemainingByDate,
+                        model.AsDateTime().Value.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture),
+                        remainingShipmentsData.ActiveLoadsPermitted,
+                        1));
             }
 
             if (!ModelState.IsValid)
