@@ -53,6 +53,7 @@
                                                                          NotificationStatus.Consented;
             model.OrganisationsInvolvedViewModel.CanAddProducer = canAddProducer && result.SubmitSummaryData.Status != NotificationStatus.FileClosed;
             model.OrganisationsInvolvedViewModel.CanEditContactDetails = canEditContactDetails && result.SubmitSummaryData.Status != NotificationStatus.FileClosed;
+            model.OrganisationsInvolvedViewModel.DisplayAllProducers = IsEditableStatus(result.SubmitSummaryData.Status);
             model.WasteCodeOverviewViewModel.CanEditEWCCodes = canEditEwcCodes && result.SubmitSummaryData.Status == NotificationStatus.Consented;
             model.WasteCodeOverviewViewModel.CanEditYCodes = canEditYCodes && result.SubmitSummaryData.Status == NotificationStatus.Consented;
             model.RecoveryOperationViewModel.CanEditCodes = canEditOperationCodes && result.SubmitSummaryData.Status == NotificationStatus.Consented;
