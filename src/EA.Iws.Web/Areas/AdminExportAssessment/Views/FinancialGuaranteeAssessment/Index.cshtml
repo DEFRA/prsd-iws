@@ -78,7 +78,7 @@
     </div>
 }
 
-@if (Model.Decision != FinancialGuaranteeDecision.None || Model.IsEmpty)
+@if (Model.IsNotificationStatusRecordable && (Model.Decision != FinancialGuaranteeDecision.None || Model.IsEmpty))
 {
     <div class="form-group">
         @Html.ActionLink(Resources.RecordNew, "New", null, new { @class = "button" })
