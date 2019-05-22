@@ -81,7 +81,7 @@
     }
 </div>
 
-@if (Model.CurrentFinancialGuarantee.Decision == FinancialGuaranteeDecision.Approved)
+@if (Model.CurrentFinancialGuarantee.Status == FinancialGuaranteeStatus.Approved)
 {
     <div class="form-group">
         @Html.ActionLink(Resources.ReleaseFinancialGuarantee, "Release", "FinancialGuaranteeDecision", new { financialGuaranteeId = Model.CurrentFinancialGuarantee.FinancialGuaranteeId }, null)
