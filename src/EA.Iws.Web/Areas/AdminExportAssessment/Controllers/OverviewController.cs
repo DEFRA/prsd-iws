@@ -59,6 +59,7 @@
             model.RecoveryOperationViewModel.CanEditCodes = canEditOperationCodes && result.SubmitSummaryData.Status == NotificationStatus.Consented;
             model.WasteCodeOverviewViewModel.CanEditHCodes = canEditHCodes && result.SubmitSummaryData.Status == NotificationStatus.Consented;
             model.TransportationViewModel.CanAddCarrier = canAddCarrier && result.SubmitSummaryData.Status == NotificationStatus.Consented;
+            model.TransportationViewModel.DisplayAllCarriers = IsEditableStatus(result.SubmitSummaryData.Status);
 
             return View(model);
         }
