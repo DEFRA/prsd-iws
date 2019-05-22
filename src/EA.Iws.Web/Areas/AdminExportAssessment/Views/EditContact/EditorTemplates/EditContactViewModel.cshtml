@@ -8,6 +8,7 @@
 	@Html.Gds().TextBoxFor(m => m.Name)	
 </div>
 <hr />
+<h2 class="heading-medium">Contact details</h2>
 <div class="form-group @Html.Gds().FormGroupClass(m => m.FullName)">
     @Html.Gds().LabelFor(model => model.FullName)
     @Html.Gds().ValidationMessageFor(model => model.FullName)

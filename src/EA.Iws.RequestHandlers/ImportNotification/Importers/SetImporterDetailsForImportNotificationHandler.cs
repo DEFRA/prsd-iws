@@ -7,24 +7,24 @@
     using Prsd.Core.Mediator;
     using Requests.ImportNotification.Importers;
 
-    internal class SetImporterContactForImportNotificationHandler : IRequestHandler<SetImporterContactForImportNotification, Unit>
+    internal class SetImporterDetailsForImportNotificationHandler : IRequestHandler<SetImporterDetailsForImportNotification, Unit>
     {
         private readonly ImportNotificationContext context;
         private readonly IMapper mapper;
         private readonly IImporterRepository importerRepository;
 
-        public SetImporterContactForImportNotificationHandler(IImporterRepository importerRepository, ImportNotificationContext context, IMapper mapper)
+        public SetImporterDetailsForImportNotificationHandler(IImporterRepository importerRepository, ImportNotificationContext context, IMapper mapper)
         {
             this.importerRepository = importerRepository;
             this.context = context;
             this.mapper = mapper;
         }
 
-        public async Task<Unit> HandleAsync(SetImporterContactForImportNotification message)
+        public async Task<Unit> HandleAsync(SetImporterDetailsForImportNotification message)
         {
             var importer = await importerRepository.GetByNotificationId(message.ImportNotificationId);
-            var contact = mapper.Map<Contact>(message.Contact);
-            importer.UpdateContact(contact);
+            var contact = mapper.Map<Contact>(message.ImporterDetails.Contact);
+            importer.UpdateContactAndName(contact, message.ImporterDetails.Name);
 
             await context.SaveChangesAsync();
 

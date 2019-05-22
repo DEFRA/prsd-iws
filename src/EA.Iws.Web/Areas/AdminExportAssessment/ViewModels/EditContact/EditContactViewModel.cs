@@ -21,11 +21,13 @@
 
         public EditContactViewModel(ImporterData data)
         {
+            Name = data.Business.Name;
             FullName = data.Contact.FullName;
             Email = data.Contact.Email;
             TelephonePrefix = data.Contact.TelephonePrefix;
             Telephone = data.Contact.Telephone;
         }
+
         [Required(ErrorMessageResourceType = typeof(EditContactViewModelResources), ErrorMessageResourceName = "OrgNameRequired")]
         [Display(Name = "OrgName", ResourceType = typeof(EditContactViewModelResources))]
         public string Name { get; set; }

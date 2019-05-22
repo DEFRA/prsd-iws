@@ -129,6 +129,15 @@
   <data name="FullNameRequired" xml:space="preserve">
     <value>Please enter the full name</value>
   </data>
+  <data name="OrgName" xml:space="preserve">
+    <value>Organisation name</value>
+  </data>
+  <data name="OrgNameHint" xml:space="preserve">
+    <value>The organisation name must not be changed if this is due to a change in legal entity. If in doubt, consult with our legal advisor.</value>
+  </data>
+  <data name="OrgNameRequired" xml:space="preserve">
+    <value>Please enter the organisation's name</value>
+  </data>
   <data name="TelephoneInvalid" xml:space="preserve">
     <value>Please enter the valid telephone number</value>
   </data>
