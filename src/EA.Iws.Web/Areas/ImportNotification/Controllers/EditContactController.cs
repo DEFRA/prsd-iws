@@ -11,8 +11,8 @@
     using Requests.ImportNotification.Importers;
     using ViewModels.EditContact;
 
-    [AuthorizeActivity(typeof(SetExporterContactForImportNotification))]
-    [AuthorizeActivity(typeof(SetImporterContactForImportNotification))]
+    [AuthorizeActivity(typeof(SetExporterDetailsForImportNotification))]
+    [AuthorizeActivity(typeof(SetImporterDetailsForImportNotification))]
     public class EditContactController : Controller
     {
         private readonly IMediator mediator;
@@ -41,9 +41,13 @@
 
             var exporter = await mediator.SendAsync(new GetExporterByImportNotificationId(id));
 
-            var contactData = GetNewContactData(model, exporter.Contact);
+            var newExporterData = new Exporter
+            {
+                Contact = GetNewContactData(model, exporter.Contact),
+                Name = model.Name,
+            };
 
-            await mediator.SendAsync(new SetExporterContactForImportNotification(id, contactData));
+            await mediator.SendAsync(new SetExporterDetailsForImportNotification(id, newExporterData));
 
             return RedirectToAction("Index", "Home");
         }
@@ -65,11 +69,15 @@
                 return View(model);
             }
 
-            var exporter = await mediator.SendAsync(new GetImporterByImportNotificationId(id));
+            var importer = await mediator.SendAsync(new GetImporterByImportNotificationId(id));
 
-            var contactData = GetNewContactData(model, exporter.Contact);
+            var newImporterData = new Importer
+            {
+                Contact = GetNewContactData(model, importer.Contact),
+                Name = model.Name,
+            };
 
-            await mediator.SendAsync(new SetImporterContactForImportNotification(id, contactData));
+            await mediator.SendAsync(new SetImporterDetailsForImportNotification(id, newImporterData));
 
             return RedirectToAction("Index", "Home");
         }

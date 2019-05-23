@@ -31,10 +31,12 @@
 
         public Contact Contact { get; private set; }
 
-        public void UpdateContact(Contact contact)
+        public void UpdateContactAndName(Contact contact, string businessName)
         {
             Guard.ArgumentNotNull(() => contact, contact);
+            Guard.ArgumentNotNullOrEmpty(() => businessName, businessName);
             Contact = contact;
+            Name = businessName;
         }
     }
 }

@@ -7,22 +7,23 @@
     using Prsd.Core.Mediator;
     using Requests.NotificationAssessment;
 
-    internal class SetImporterContactHandler : IRequestHandler<SetImporterContact, Unit>
+    internal class SetImporterDetailsHandler : IRequestHandler<SetImporterDetails, Unit>
     {
         private readonly IwsContext context;
         private readonly IImporterRepository repository;
 
-        public SetImporterContactHandler(IImporterRepository repository, IwsContext context)
+        public SetImporterDetailsHandler(IImporterRepository repository, IwsContext context)
         {
             this.repository = repository;
             this.context = context;
         }
 
-        public async Task<Unit> HandleAsync(SetImporterContact message)
+        public async Task<Unit> HandleAsync(SetImporterDetails message)
         {
             var importer = await repository.GetByNotificationId(message.NotificationId);
-            var contact = ValueObjectInitializer.CreateContact(message.Contact);
-            importer.UpdateContact(contact);
+            var contact = ValueObjectInitializer.CreateContact(message.Importer.Contact);
+            var business = ValueObjectInitializer.CreateBusiness(message.Importer.Business);
+            importer.UpdateContactAndBusiness(contact, business);
 
             await context.SaveChangesAsync();
 
