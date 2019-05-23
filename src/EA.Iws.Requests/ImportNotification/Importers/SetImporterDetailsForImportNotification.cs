@@ -7,16 +7,16 @@
     using Prsd.Core.Mediator;
 
     [RequestAuthorization(ImportNotificationPermissions.CanEditImportContactDetails)]
-    public class SetImporterContactForImportNotification : IRequest<Unit>
+    public class SetImporterDetailsForImportNotification : IRequest<Unit>
     {
-        public SetImporterContactForImportNotification(Guid importNotificationId, Contact contact)
+        public SetImporterDetailsForImportNotification(Guid importNotificationId, Importer importerDetails)
         {
             ImportNotificationId = importNotificationId;
-            Contact = contact;
+            ImporterDetails = importerDetails;
         }
 
         public Guid ImportNotificationId { get; private set; }
 
-        public Contact Contact { get; private set; }
+        public Importer ImporterDetails { get; private set; }
     }
 }

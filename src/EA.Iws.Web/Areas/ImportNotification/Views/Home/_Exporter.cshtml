@@ -5,7 +5,7 @@
 	{
 		if (Model.CanEditContactDetails)
 		{
-			<div class="change-answer">@Html.ActionLink("Amend contact", "Exporter", "EditContact", new { id = Model.Details.Id }, null)</div>
+			<div class="change-answer">@Html.ActionLink("Amend exporter details", "Exporter", "EditContact", new { id = Model.Details.Id }, null)</div>
 		}
         <div class="overview-block-element">
             @if (!string.IsNullOrWhiteSpace(Model.Details.Exporter.Name))

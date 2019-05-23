@@ -98,6 +98,33 @@ namespace EA.Iws.Web.Areas.ImportNotification.ViewModels.EditContact {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Organisation name.
+        /// </summary>
+        public static string OrgName {
+            get {
+                return ResourceManager.GetString("OrgName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The organisation name must not be changed if this is due to a change in legal entity. If in doubt, consult with our legal advisor..
+        /// </summary>
+        public static string OrgNameHint {
+            get {
+                return ResourceManager.GetString("OrgNameHint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please enter the organisation&apos;s name.
+        /// </summary>
+        public static string OrgNameRequired {
+            get {
+                return ResourceManager.GetString("OrgNameRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Please enter the valid telephone number.
         /// </summary>
         public static string TelephoneInvalid {

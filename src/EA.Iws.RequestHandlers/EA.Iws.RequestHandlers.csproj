@@ -258,7 +258,7 @@
     <Compile Include="ImportNotification\CreateImportNotificationHandler.cs" />
     <Compile Include="ImportNotification\Events\CreateImportNotificationAssessment.cs" />
     <Compile Include="ImportNotification\Exporters\GetExporterByImportNotificationIdHandler.cs" />
-    <Compile Include="ImportNotification\Exporters\SetExporterContactForImportNotificationHandler.cs" />
+    <Compile Include="ImportNotification\Exporters\SetExporterDetailsForImportNotificationHandler.cs" />
     <Compile Include="ImportNotification\GetChangeNumberOfShipmentConfrimationDataHandler.cs" />
     <Compile Include="ImportNotification\GetDraftDataHandler.cs" />
     <Compile Include="ImportNotification\GetImportNotificationIdByNumberHandler.cs" />
@@ -269,7 +269,7 @@
     <Compile Include="ImportNotification\GetImportNotificationWasteTypesHandler.cs" />
     <Compile Include="ImportNotification\GetWasteOperationDataHandler.cs" />
     <Compile Include="ImportNotification\Importers\GetImporterByImportNotificationIdHandler.cs" />
-    <Compile Include="ImportNotification\Importers\SetImporterContactForImportNotificationHandler.cs" />
+    <Compile Include="ImportNotification\Importers\SetImporterDetailsForImportNotificationHandler.cs" />
     <Compile Include="ImportNotification\Mappings\AddressMap.cs" />
     <Compile Include="ImportNotification\Mappings\ChemicalCompositionMap.cs" />
     <Compile Include="ImportNotification\Mappings\ContactMap.cs" />
@@ -486,8 +486,8 @@
     <Compile Include="NotificationAssessment\MarkAsInterimHandler.cs" />
     <Compile Include="NotificationAssessment\RemoveTransitStateHandler.cs" />
     <Compile Include="NotificationAssessment\SetExitPointHandler.cs" />
-    <Compile Include="NotificationAssessment\SetImporterContactHandler.cs" />
-    <Compile Include="NotificationAssessment\SetExporterContactHandler.cs" />
+    <Compile Include="NotificationAssessment\SetImporterDetailsHandler.cs" />
+    <Compile Include="NotificationAssessment\SetExporterDetailsHandler.cs" />
     <Compile Include="NotificationAssessment\SetNewNumberOfShipmentsHandler.cs" />
     <Compile Include="NotificationAssessment\SetEntryPointHandler.cs" />
     <Compile Include="NotificationAssessment\UpdateTransitStateEntryOrExitHandler.cs" />

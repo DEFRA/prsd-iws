@@ -10,6 +10,7 @@
 
         public EditContactViewModel(Exporter data)
         {
+            Name = data.Name;
             FullName = data.Contact.Name;
             Email = data.Contact.Email;
             TelephonePrefix = data.Contact.TelephonePrefix;
@@ -18,11 +19,16 @@
 
         public EditContactViewModel(Importer data)
         {
+            Name = data.Name;
             FullName = data.Contact.Name;
             Email = data.Contact.Email;
             TelephonePrefix = data.Contact.TelephonePrefix;
             Telephone = data.Contact.Telephone;
         }
+
+        [Required(ErrorMessageResourceType = typeof(EditContactViewModelResources), ErrorMessageResourceName = "OrgNameRequired")]
+        [Display(Name = "OrgName", ResourceType = typeof(EditContactViewModelResources))]
+        public string Name { get; set; }
 
         [Required(ErrorMessageResourceType = typeof(EditContactViewModelResources), ErrorMessageResourceName = "FullNameRequired")]
         [Display(Name = "FullName", ResourceType = typeof(EditContactViewModelResources))]

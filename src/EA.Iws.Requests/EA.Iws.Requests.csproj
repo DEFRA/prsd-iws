@@ -203,7 +203,7 @@
     <Compile Include="ImportNotification\CheckImportNotificationHasComments.cs" />
     <Compile Include="ImportNotification\CompleteDraftImportNotification.cs" />
     <Compile Include="ImportNotification\Exporters\GetExporterByImportNotificationId.cs" />
-    <Compile Include="ImportNotification\Exporters\SetExporterContactForImportNotification.cs" />
+    <Compile Include="ImportNotification\Exporters\SetExporterDetailsForImportNotification.cs" />
     <Compile Include="ImportNotification\GetChangeNumberOfShipmentConfrimationData.cs" />
     <Compile Include="ImportNotification\GetDraftData.cs" />
     <Compile Include="ImportNotification\GetImportNotificationNumberById.cs" />
@@ -215,7 +215,7 @@
     <Compile Include="ImportNotification\GetImportNotificationWasteTypes.cs" />
     <Compile Include="ImportNotification\GetWasteOperationData.cs" />
     <Compile Include="ImportNotification\Importers\GetImporterByImportNotificationId.cs" />
-    <Compile Include="ImportNotification\Importers\SetImporterContactForImportNotification.cs" />
+    <Compile Include="ImportNotification\Importers\SetImporterDetailsForImportNotification.cs" />
     <Compile Include="ImportNotification\SetDraftData.cs" />
     <Compile Include="ImportNotification\SetNewNumberOfShipments.cs" />
     <Compile Include="ImportNotification\TransportRoute\GetTransitStateDataForTransitState.cs" />
@@ -281,8 +281,8 @@
     <Compile Include="NotificationAssessment\MarkAsInterim.cs" />
     <Compile Include="NotificationAssessment\RemoveTransitState.cs" />
     <Compile Include="NotificationAssessment\SetExitPoint.cs" />
-    <Compile Include="NotificationAssessment\SetImporterContact.cs" />
-    <Compile Include="NotificationAssessment\SetExporterContact.cs" />
+    <Compile Include="NotificationAssessment\SetImporterDetails.cs" />
+    <Compile Include="NotificationAssessment\SetExporterDetails.cs" />
     <Compile Include="NotificationAssessment\SetNewNumberOfShipments.cs" />
     <Compile Include="NotificationAssessment\SetEntryPoint.cs" />
     <Compile Include="NotificationMovements\BulkUpload\CreateBulkPrenotification.cs" />
