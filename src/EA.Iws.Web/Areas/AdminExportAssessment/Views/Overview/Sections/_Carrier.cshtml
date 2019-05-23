@@ -8,31 +8,98 @@
             <div class="change-answer">@Html.ActionLink("Add", "Add", "Carrier", new { id = Model.NotificationId }, null)</div>
         }
 
-        for (var i = 0; i < Model.Carriers.Count; i++)
+        if (Model.DisplayAllCarriers)
         {
-            <div class="overview-block-element">
-                @Html.DisplayFor(m => m.Carriers[i].Business.Name)
-                <br />
-                @Html.DisplayFor(m => m.Carriers[i].Address.StreetOrSuburb),
-                @Html.DisplayFor(m => m.Carriers[i].Address.TownOrCity)
-                @Html.DisplayFor(m => m.Carriers[i].Address.PostalCode),
-                @Html.DisplayFor(m => m.Carriers[i].Address.CountryName)
-            </div>
-
-            <div class="overview-block-element">
-                Organisation type:
-                @EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(Model.Carriers[i].Business.BusinessType)
-                <br />
-                Company registration:
-                @Html.DisplayFor(m => m.Carriers[i].Business.RegistrationNumber)
-            </div>
-
-            <div class="overview-block-element">
-                @Html.DisplayFor(m => m.Carriers[i].Contact)
-            </div>
-            if (i < Model.Carriers.Count - 1)
+            for (var i = 0; i < Model.Carriers.Count; i++)
             {
-                <hr />
+                <div class="overview-block-element">
+                    @Html.DisplayFor(m => m.Carriers[i].Business.Name)
+                    <br />
+                    @Html.DisplayFor(m => m.Carriers[i].Address.StreetOrSuburb),
+                    @Html.DisplayFor(m => m.Carriers[i].Address.TownOrCity)
+                    @Html.DisplayFor(m => m.Carriers[i].Address.PostalCode),
+                    @Html.DisplayFor(m => m.Carriers[i].Address.CountryName)
+                </div>
+
+                <div class="overview-block-element">
+                    Organisation type:
+                    @EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(Model.Carriers[i].Business.BusinessType)
+                    <br />
+                    Company registration:
+                    @Html.DisplayFor(m => m.Carriers[i].Business.RegistrationNumber)
+                </div>
+
+                <div class="overview-block-element">
+                    @Html.DisplayFor(m => m.Carriers[i].Contact)
+                </div>
+                if (i < Model.Carriers.Count - 1)
+                {
+                    <hr />
+                }
+            }
+        }
+        else
+        {
+            if (Model.Carriers.Any())
+            {
+                <div class="overview-block-element">
+                    @Html.DisplayFor(m => m.Carriers[0].Business.Name)
+                    <br />
+                    @Html.DisplayFor(m => m.Carriers[0].Address.StreetOrSuburb),
+                    @Html.DisplayFor(m => m.Carriers[0].Address.TownOrCity)
+                    @Html.DisplayFor(m => m.Carriers[0].Address.PostalCode),
+                    @Html.DisplayFor(m => m.Carriers[0].Address.CountryName)
+                </div>
+
+                <div class="overview-block-element">
+                    Organisation type:
+                    @EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(Model.Carriers[0].Business.BusinessType)
+                    <br />
+                    Company registration:
+                    @Html.DisplayFor(m => m.Carriers[0].Business.RegistrationNumber)
+                </div>
+
+                <div class="overview-block-element">
+                    @Html.DisplayFor(m => m.Carriers[0].Contact)
+                </div>
+            }
+
+            if (Model.Carriers.Count > 1)
+            {
+                <details>
+                    <hr />
+                    <summary class="show-all">
+                        <span class="summary">View all carriers</span>
+                    </summary>
+
+                    @for (var i = 1; i < Model.Carriers.Count; i++)
+                    {
+                        <div class="overview-block-element">
+                            @Html.DisplayFor(m => m.Carriers[i].Business.Name)
+                            <br />
+                            @Html.DisplayFor(m => m.Carriers[i].Address.StreetOrSuburb),
+                            @Html.DisplayFor(m => m.Carriers[i].Address.TownOrCity)
+                            @Html.DisplayFor(m => m.Carriers[i].Address.PostalCode),
+                            @Html.DisplayFor(m => m.Carriers[i].Address.CountryName)
+                        </div>
+
+                        <div class="overview-block-element">
+                            Organisation type:
+                            @EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(Model.Carriers[i].Business.BusinessType)
+                            <br />
+                            Company registration:
+                            @Html.DisplayFor(m => m.Carriers[i].Business.RegistrationNumber)
+                        </div>
+
+                        <div class="overview-block-element">
+                            @Html.DisplayFor(m => m.Carriers[i].Contact)
+                        </div>
+                        if (i < Model.Carriers.Count - 1)
+                        {
+                            <hr />
+                        }
+                    }
+                </details>
             }
         }
     }
