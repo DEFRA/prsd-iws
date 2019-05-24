@@ -125,7 +125,7 @@
                 }
                 if (addedCancellableMovements.Any(x => x.Number == model.ShipmentNumber))
                 {
-                    ModelState.AddModelError(Resources.ShipmentNumberField, Resources.DuplicateShipmentNumber);
+                    ModelState.AddModelError(Resources.ShipmentNumberField, string.Format(Resources.DuplicateShipmentNumber, model.ShipmentNumber));
                 }
 
                 var shipmentValidationResult =
@@ -133,7 +133,7 @@
 
                 if (shipmentValidationResult.IsCancellableExistingShipment)
                 {
-                    ModelState.AddModelError(Resources.ShipmentNumberField, Resources.IsCancellableExistingShipment);
+                    ModelState.AddModelError(Resources.ShipmentNumberField, string.Format(Resources.IsCancellableExistingShipment, model.ShipmentNumber));
                 }
                 if (shipmentValidationResult.IsNonCancellableExistingShipment)
                 {
@@ -144,7 +144,7 @@
                     ModelState.AddModelError(Resources.ShipmentNumberField, string.Format(Resources.IsNonCancellableExistingShipment,
                             shipmentValidationResult.Status == MovementStatus.Completed
                                 ? completedDisplay
-                                : EnumHelper.GetDisplayName(shipmentValidationResult.Status)));
+                                : EnumHelper.GetDisplayName(shipmentValidationResult.Status), model.ShipmentNumber));
                 }
 
                 if (!ModelState.IsValid)

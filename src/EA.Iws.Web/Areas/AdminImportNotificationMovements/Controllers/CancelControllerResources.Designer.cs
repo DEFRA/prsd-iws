@@ -71,7 +71,7 @@ namespace EA.Iws.Web.Areas.AdminImportNotificationMovements.Controllers {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This Shipment number already exists in the table below and will be added to the list of shipments that will be cancelled..
+        ///   Looks up a localized string similar to This Shipment number {0} already exists in the table below and will be added to the list of shipments that will be cancelled..
         /// </summary>
         public static string DuplicateShipmentNumber {
             get {
@@ -89,7 +89,7 @@ namespace EA.Iws.Web.Areas.AdminImportNotificationMovements.Controllers {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This Shipment number already exists and is shown on the previous screen. Please tick the shipment number on that screen..
+        ///   Looks up a localized string similar to This Shipment number {0} already exists and is shown on the previous screen. Please tick the shipment number on that screen..
         /// </summary>
         public static string IsCancellableExistingShipment {
             get {
@@ -98,7 +98,7 @@ namespace EA.Iws.Web.Areas.AdminImportNotificationMovements.Controllers {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This Shipment number already exists but the status is {0}. Seek further advice of how to proceed with the data team leader..
+        ///   Looks up a localized string similar to This Shipment number {1} already exists but the status is {0}. Seek further advice of how to proceed with the data team leader..
         /// </summary>
         public static string IsNonCancellableExistingShipment {
             get {
