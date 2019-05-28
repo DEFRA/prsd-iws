@@ -64,50 +64,50 @@
                 <div class="overview-block-element">
                     @Html.DisplayFor(m => m.Producers[0].Contact)
                 </div>
-            }
+			}
 
-            if (Model.Producers.Count > 1)
-            {
-                <details>
-                    <hr />
-                    <summary class="show-all">
-                        <span class="summary">View all producers</span>
-                    </summary>
+			if (Model.Producers.Count > 1)
+			{
+					<details>
+						<summary class="show-all">
+							<span class="summary">View all producers</span>
+						</summary>
+						<div class="panel">
+							@for (var i = 1; i < Model.Producers.Count; i++)
+							{
+								<div class="overview-block-element">
+									@Html.DisplayFor(m => m.Producers[i].Business.Name)
+									<br />
+									@Html.DisplayFor(m => m.Producers[i].Address.StreetOrSuburb),
+									@Html.DisplayFor(m => m.Producers[i].Address.Address2),
+									@Html.DisplayFor(m => m.Producers[i].Address.TownOrCity),
+									@Html.DisplayFor(m => m.Producers[i].Address.PostalCode),
+									@Html.DisplayFor(m => m.Producers[i].Address.CountryName)
+								</div>
 
-                    @for (var i = 1; i < Model.Producers.Count; i++)
-                    {
-                        <div class="overview-block-element">
-                            @Html.DisplayFor(m => m.Producers[i].Business.Name)
-                            <br />
-                            @Html.DisplayFor(m => m.Producers[i].Address.StreetOrSuburb),
-                            @Html.DisplayFor(m => m.Producers[i].Address.Address2),
-                            @Html.DisplayFor(m => m.Producers[i].Address.TownOrCity),
-                            @Html.DisplayFor(m => m.Producers[i].Address.PostalCode),
-                            @Html.DisplayFor(m => m.Producers[i].Address.CountryName)
-                        </div>
+								<div class="overview-block-element">
+									Organisation type:
+									@EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(Model.Producers[i].Business.BusinessType)
+									<br />
+									Company registration:
+									@Html.DisplayFor(m => m.Producers[i].Business.RegistrationNumber)
+								</div>
 
-                        <div class="overview-block-element">
-                            Organisation type:
-                            @EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(Model.Producers[i].Business.BusinessType)
-                            <br />
-                            Company registration:
-                            @Html.DisplayFor(m => m.Producers[i].Business.RegistrationNumber)
-                        </div>
-
-                        <div class="overview-block-element">
-                            @Html.DisplayFor(m => m.Producers[i].Contact)
-                        </div>
-                        if (i < Model.Producers.Count - 1)
-                        {
-                            <hr />
-                        }
-                    }
-                </details>
-            }
-        }
-    }
-    else
-    {
+								<div class="overview-block-element">
+									@Html.DisplayFor(m => m.Producers[i].Contact)
+								</div>
+								if (i < Model.Producers.Count - 1)
+								{
+									<hr />
+								}
+							}
+						</div>
+					</details>
+			}
+		}
+	}
+	else
+	{
         <div class="overview-block-element">@ViewBag.SectionIncompleteText</div>
     }
 </div>
