@@ -142,6 +142,7 @@
             stateMachine.Configure(NotificationStatus.Transmitted)
                 .SubstateOf(NotificationStatus.InDetermination)
                 .OnEntryFrom(transmitTrigger, OnTransmitted)
+                .Permit(Trigger.Unlock, NotificationStatus.Unlocked)
                 .Permit(Trigger.Acknowledged, NotificationStatus.DecisionRequiredBy)
                 .Permit(Trigger.Object, NotificationStatus.Objected);
 
@@ -178,7 +179,8 @@
 
             stateMachine.Configure(NotificationStatus.Reassessment)
                 .SubstateOf(NotificationStatus.InDetermination)
-                .Permit(Trigger.AcceptChanges, NotificationStatus.DecisionRequiredBy)
+                .PermitIf(Trigger.AcceptChanges, NotificationStatus.Transmitted, () => Dates.TransmittedDate.HasValue && !Dates.AcknowledgedDate.HasValue)
+                .PermitIf(Trigger.AcceptChanges, NotificationStatus.DecisionRequiredBy, () => Dates.AcknowledgedDate.HasValue)
                 .Permit(Trigger.RejectChanges, NotificationStatus.Unlocked);
 
             stateMachine.Configure(NotificationStatus.FileClosed)

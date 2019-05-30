@@ -1,14 +1,16 @@
 ﻿namespace EA.Iws.DataAccess.Repositories.Imports
 {
-    using Core.ImportMovement;
-    using Domain.ImportMovement;
-    using Domain.Security;
     using System;
     using System.Collections.Generic;
     using System.Data.Entity;
     using System.Data.SqlClient;
     using System.Linq;
     using System.Threading.Tasks;
+    using Core.ImportMovement;
+    using Core.Movement;
+    using Core.Shared;
+    using Domain.ImportMovement;
+    using Domain.Security;
 
     internal class ImportMovementRepository : IImportMovementRepository
     {
@@ -53,7 +55,44 @@
             return await context.ImportMovements.Where(m => m.NotificationId == importNotificationId)
                 .Where(m => !context.ImportMovementReceipts.Any(r => r.MovementId == m.Id))
                 .Where(m => !context.ImportMovementCompletedReceipts.Any(r => r.MovementId == m.Id))
+                .Where(m => !context.ImportMovementRejections.Any(r => r.MovementId == m.Id))
                 .ToArrayAsync();
+        }
+
+        public async Task<AddedCancellableImportMovementValidation> IsShipmentExistingInNonCancellableStatus(Guid importNotificationId, int number)
+        {
+            await notificationAuthorization.EnsureAccessAsync(importNotificationId);
+
+            var result = context.ImportMovements.Where(m => m.NotificationId == importNotificationId && m.Number == number)
+               .GroupJoin(context.ImportMovementReceipts, m => m.Id,
+                   mr => mr.MovementId, (m, movementReceipt) => new { m, movementReceipt })
+               .SelectMany(x => x.movementReceipt.DefaultIfEmpty(), (x, movementReceipt) => new { x.m, movementReceipt })
+               .GroupJoin(context.ImportMovementRejections, x => x.m.Id,
+                   movementRejection => movementRejection.MovementId,
+                   (x, movementRejection) => new { x.m, x.movementReceipt, movementRejection })
+               .SelectMany(x => x.movementRejection.DefaultIfEmpty(),
+                   (x, movementRejection) => new { x.m, x.movementReceipt, movementRejection })
+               .GroupJoin(context.ImportMovementCompletedReceipts, x => x.m.Id,
+                   movementOperationReceipt => movementOperationReceipt.MovementId,
+                   (x, movementOperationReceipt) => new { x.m, x.movementReceipt, x.movementRejection, movementOperationReceipt })
+               .SelectMany(x => x.movementOperationReceipt.DefaultIfEmpty(), (x, movementOperationReceipt) => new AddedCancellableImportMovementValidation
+               {
+                   Status = x.m.IsCancelled ? MovementStatus.Cancelled : (x.movementRejection.Date != null ? MovementStatus.Rejected : (x.movementOperationReceipt.FirstOrDefault().Date != null ? MovementStatus.Completed : (x.movementReceipt.Date != null ? MovementStatus.Received : MovementStatus.Submitted))),
+                   IsNonCancellableExistingShipment = x.m != null ? true : false
+               }).SingleOrDefault();
+
+            return result;
+        }
+
+        public async Task<ImportMovement> GetPrenotifiedForNotificationByNumber(Guid importNotificationId, int number)
+        {
+            await notificationAuthorization.EnsureAccessAsync(importNotificationId);
+            return await context.ImportMovements.Where(m => m.NotificationId == importNotificationId)
+                .Where(m => m.Number == number)
+                .Where(m => !m.IsCancelled)
+                .Where(m => !context.ImportMovementRejections.Any(r => r.MovementId == m.Id))
+                .Where(m => !context.ImportMovementReceipts.Any(r => r.MovementId == m.Id))
+                .Where(m => !context.ImportMovementCompletedReceipts.Any(r => r.MovementId == m.Id)).FirstOrDefaultAsync();
         }
 
         public void Add(ImportMovement movement)
@@ -122,14 +161,31 @@
                 new SqlParameter("@PrenotificationDate", (object)data.Data.PreNotificationDate ?? DBNull.Value),
                 new SqlParameter("@ActualDate", (object)data.Data.ActualDate ?? DBNull.Value),
                 new SqlParameter("@ReceiptDate", (object)data.ReceiptData.ReceiptDate ?? DBNull.Value),
-                new SqlParameter("@Quantity", (object)data.ReceiptData.ActualQuantity ?? DBNull.Value),
+                new SqlParameter("@Quantity", data.ReceiptData.ActualQuantity != null
+                    ? (object)decimal.Round(data.ReceiptData.ActualQuantity.Value, data.ReceiptData.ReceiptUnits != null
+                        ? ShipmentQuantityUnitsMetadata.Precision[data.ReceiptData.ReceiptUnits.Value]
+                        : ShipmentQuantityUnitsMetadata.Precision.Values.Min())
+                    : DBNull.Value),
                 new SqlParameter("@Unit", (object)data.ReceiptData.ReceiptUnits ?? DBNull.Value),
                 new SqlParameter("@RejectiontDate", (object)data.RejectionDate ?? DBNull.Value),
                 new SqlParameter("@RejectionReason", (object)data.ReceiptData.RejectionReason ?? DBNull.Value),
                 new SqlParameter("@StatsMarking", (object)data.StatsMarking ?? DBNull.Value),
                 new SqlParameter("@Comments", (object)data.Comments ?? DBNull.Value),
-                 new SqlParameter("@RecoveryDate", (object)data.RecoveryData.OperationCompleteDate ?? DBNull.Value),
+                new SqlParameter("@RecoveryDate", (object)data.RecoveryData.OperationCompleteDate ?? DBNull.Value),
                 new SqlParameter("@CreatedBy", createdBy));
+        }
+
+        public async Task<IEnumerable<ImportMovement>> GetImportMovementsByIds(Guid notificationId, IEnumerable<Guid> movementIds)
+        {
+            await notificationAuthorization.EnsureAccessAsync(notificationId);
+
+            var movements = await context.ImportMovements
+                .Where(m =>
+                    m.NotificationId == notificationId
+                    && movementIds.Contains(m.Id))
+                .ToArrayAsync();
+
+            return movements;
         }
     }
 }

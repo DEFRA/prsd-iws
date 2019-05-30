@@ -109,5 +109,10 @@
             }
             return await context.NotificationComments.Where(p => p.NotificationId == notificationId && p.ShipmentNumber != 0).ToListAsync();
         }
+
+        public async Task<int> GetCommentsCountForNotification(Guid notificationId)
+        {
+            return await context.NotificationComments.CountAsync(p => p.NotificationId == notificationId);
+        }
     }
 }

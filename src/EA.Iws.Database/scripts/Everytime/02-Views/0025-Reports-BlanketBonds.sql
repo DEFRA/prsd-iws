@@ -31,7 +31,7 @@ FROM
 		FG.[ActiveLoadsPermitted],
 		(SELECT COUNT(Id) FROM [Notification].[Movement] M
 			WHERE M.[NotificationId] = N.Id 
-			AND M.[Status] IN (2, 3)
+			AND M.[Status] IN (1, 2, 3, 7)
 			AND M.[Date] <= GETDATE()) AS [CurrentActiveLoads],
 		REPLACE(N.[NotificationNumber], ' ', '') AS [NotificationNumber],
 		E.[Name] AS [ExporterName],

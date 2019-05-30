@@ -2,8 +2,12 @@
 {
     using System;
     using System.Threading.Tasks;
+    using Core.Movement;
     using Core.Notification.Audit;
+    using Prsd.Core;
     using Prsd.Core.Mediator;
+    using Requests.ImportMovement;
+    using Requests.Movement;
     using Requests.Notification;
 
     public class AuditService : IAuditService
@@ -22,6 +26,22 @@
             await mediator.SendAsync(audit);
         }
 
+        public async Task AddMovementAudit(IMediator mediator, Guid notificationId, int shipmentNumber, string userId,
+            MovementAuditType type)
+        {
+            var audit = new AuditMovement(notificationId, shipmentNumber, userId, type, SystemTime.Now);
+
+            await mediator.SendAsync(audit);
+        }
+
+        public async Task AddImportMovementAudit(IMediator mediator, Guid notificationId, int shipmentNumber, string userId,
+            MovementAuditType type)
+        {
+            var audit = new AuditImportMovement(notificationId, shipmentNumber, userId, type, SystemTime.Now);
+
+            await mediator.SendAsync(audit);
+        }
+
         private static CreateNotificationAudit CreateAudit(Guid notificationId, 
             string userId, 
             NotificationAuditScreenType screen, 
@@ -29,7 +49,7 @@
         {
             return new CreateNotificationAudit()
             {
-                DateAdded = DateTime.Now,
+                DateAdded = SystemTime.Now,
                 NotificationId = notificationId,
                 UserId = userId,
                 Screen = screen,

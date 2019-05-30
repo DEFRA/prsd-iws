@@ -198,4 +198,7 @@
   <data name="CommentsLinkText" xml:space="preserve">
     <value>Review comments</value>
   </data>
+  <data name="ShipmentAuditTrailLinkText" xml:space="preserve">
+    <value>Review shipment audit trail</value>
+  </data>
 </root>

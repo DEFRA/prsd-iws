@@ -93,6 +93,8 @@ namespace EA.Iws.Core.Admin.Reports
 
         public string FacilityPostalCode { get; set; }
 
+        public string TechnologyEmployed { get; set; }
+
         public decimal QuantityReceived { get; set; }
 
         public string QuantityReceivedUnit { get; set; }
@@ -121,6 +123,7 @@ namespace EA.Iws.Core.Admin.Reports
         [DisplayName("Area")]
         public string LocalArea { get; set; }
 
-        public string TechnologyEmployed { get; set; }
+        [DisplayName("Officer name")]
+        public string Officer { get; set; }
     }
 }

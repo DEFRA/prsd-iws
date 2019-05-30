@@ -89,6 +89,15 @@ namespace EA.Iws.Web.Areas.AdminExportAssessment.Views.FinancialGuaranteeAssessm
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Current status.
+        /// </summary>
+        public static string CurrentStatus {
+            get {
+                return ResourceManager.GetString("CurrentStatus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Date completed.
         /// </summary>
         public static string DateCompleted {
@@ -107,7 +116,7 @@ namespace EA.Iws.Web.Areas.AdminExportAssessment.Views.FinancialGuaranteeAssessm
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Decision.
+        ///   Looks up a localized string similar to Decision made.
         /// </summary>
         public static string Decision {
             get {

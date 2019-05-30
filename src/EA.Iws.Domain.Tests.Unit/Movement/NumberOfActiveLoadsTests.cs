@@ -34,9 +34,9 @@
         public async Task ActiveLoadsPermittedReached_ReturnsTrue()
         {
             A.CallTo(() => financialGuaranteeRepository.GetByNotificationId(NotificationId)).Returns(GetFinancialGuarantee());
-            A.CallTo(() => movementRepository.GetActiveMovements(NotificationId)).Returns(GetMovementArray(2));
+            A.CallTo(() => movementRepository.GetAllActiveMovements(NotificationId)).Returns(GetMovementArray(2));
 
-            var result = await numberOfActiveLoads.HasMaximum(NotificationId);
+            var result = await numberOfActiveLoads.HasMaximum(NotificationId, SystemTime.UtcNow);
 
             Assert.True(result);
         }
@@ -45,9 +45,9 @@
         public async Task ActiveLoadsPermittedExceeded_ReturnsTrue()
         {
             A.CallTo(() => financialGuaranteeRepository.GetByNotificationId(NotificationId)).Returns(GetFinancialGuarantee());
-            A.CallTo(() => movementRepository.GetActiveMovements(NotificationId)).Returns(GetMovementArray(3));
+            A.CallTo(() => movementRepository.GetAllActiveMovements(NotificationId)).Returns(GetMovementArray(3));
 
-            var result = await numberOfActiveLoads.HasMaximum(NotificationId);
+            var result = await numberOfActiveLoads.HasMaximum(NotificationId, SystemTime.UtcNow);
 
             Assert.True(result);
         }
@@ -56,9 +56,20 @@
         public async Task ActiveLoadsPermittedNotReached_ReturnsFalse()
         {
             A.CallTo(() => financialGuaranteeRepository.GetByNotificationId(NotificationId)).Returns(GetFinancialGuarantee());
-            A.CallTo(() => movementRepository.GetActiveMovements(NotificationId)).Returns(GetMovementArray(1));
+            A.CallTo(() => movementRepository.GetAllActiveMovements(NotificationId)).Returns(GetMovementArray(1));
 
-            var result = await numberOfActiveLoads.HasMaximum(NotificationId);
+            var result = await numberOfActiveLoads.HasMaximum(NotificationId, SystemTime.UtcNow);
+
+            Assert.False(result);
+        }
+
+        [Fact]
+        public async Task ActiveLoadsPermittedReached_NewMovementForDifferentDate_ReturnsFalse()
+        {
+            A.CallTo(() => financialGuaranteeRepository.GetByNotificationId(NotificationId)).Returns(GetFinancialGuarantee());
+            A.CallTo(() => movementRepository.GetAllActiveMovements(NotificationId)).Returns(GetMovementArray(2));
+
+            var result = await numberOfActiveLoads.HasMaximum(NotificationId, SystemTime.UtcNow.AddDays(5));
 
             Assert.False(result);
         }

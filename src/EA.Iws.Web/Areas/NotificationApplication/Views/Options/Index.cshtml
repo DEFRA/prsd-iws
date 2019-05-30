@@ -17,7 +17,7 @@
 
 @helper DisplayDate(DateTime? date, MovementStatus status)
 {
-    if (date.HasValue && status != MovementStatus.New && status != MovementStatus.Cancelled)
+    if (date.HasValue && status != MovementStatus.Cancelled)
     {
         @date.Value.ToString("d MMM yyyy")
     }
@@ -252,13 +252,13 @@
 
                     <tbody>
                     @{
-                        for (int i = 0; i < Model.TableData.Count; i++)
-                        {
-                            var statusText = Model.TableData[i].Status == MovementStatus.Completed ? operationTitle : EnumHelper.GetDisplayName(Model.TableData[i].Status);
-                            if (Model.TableData[i].HasShipped)
-                            {
-                                statusText = statusText + " (Shipped)";
-                            }
+						for (int i = 0; i < Model.TableData.Count; i++)
+						{
+							var statusText = Model.TableData[i].Status == MovementStatus.Completed ? operationTitle : EnumHelper.GetDisplayName(Model.TableData[i].Status);
+							if (Model.TableData[i].HasShipped || Model.TableData[i].IsShipmentActive)
+							{
+								statusText = statusText + " (Shipped)";
+							}
                             <tr>
                                 <td>@Model.TableData[i].Number</td>
                                 <td>@statusText</td>

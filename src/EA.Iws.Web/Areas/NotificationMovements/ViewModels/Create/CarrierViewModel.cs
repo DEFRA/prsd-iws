@@ -17,11 +17,24 @@
 
         public void SetCarriers(IEnumerable<CarrierData> carriers)
         {
-            CarriersList = new SelectList(carriers.Select(c => new SelectListItem()
-            {
-                Text = c.Business.Name + ", " + c.Address.ToString(),
-                Value = c.Id.ToString()
-            }), "Value", "Text", SelectedCarriersId);
+            CarriersList = new SelectList(carriers.OrderBy(order => order.Business.Name)
+                .ThenBy(order => order.Address.StreetOrSuburb)
+                .ThenBy(order => order.Address.Address2)
+                .ThenBy(order => order.Address.TownOrCity)
+                .ThenBy(order => order.Address.PostalCode)
+                .ThenBy(order => order.Contact.FullName)
+                .ThenBy(order => order.Business.RegistrationNumber)
+                .Select(c => new SelectListItem()
+                {
+                    Text = c.Business.Name + ", "
+                           + c.Address.ToString() + ", " + "\n"
+                           + c.Contact.FullName + ", " + "\n"
+                           + c.Business.RegistrationNumber
+                           + (string.IsNullOrEmpty(c.Business.AdditionalRegistrationNumber)
+                               ? string.Empty
+                               : ", " + c.Business.AdditionalRegistrationNumber),
+                    Value = c.Id.ToString()
+                }), "Value", "Text", SelectedCarrier);
         }
 
         [Required(ErrorMessage = "Select a carrier from the list")]

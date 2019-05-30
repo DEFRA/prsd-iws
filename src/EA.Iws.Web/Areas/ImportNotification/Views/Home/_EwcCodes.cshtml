@@ -3,9 +3,9 @@
 
 <div class="overview-block">
     @if (Model.Details.WasteType != null && !Model.Details.WasteType.EwcCodes.IsEmpty())
-            {
-                if (Model.Details.WasteType.EwcCodes.IsNotApplicable)
-                {
+    {
+        if (Model.Details.WasteType.EwcCodes.IsNotApplicable)
+        {
             <div class="overview-block-element">@Resource.CodesNotApplicableText</div>
         }
         else

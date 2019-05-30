@@ -14,6 +14,7 @@
     using System.IO;
     using System.Threading.Tasks;
     using System.Web.Mvc;
+    using Prsd.Core;
     using ViewModels.ReceiptRecovery;
 
     [AuthorizeActivity(typeof(SaveMovementCompletedReceipt))]
@@ -29,6 +30,9 @@
         private const string CertificateKey = "CertificateType";
         private const string NotificationTypeKey = "NotificationType";
 
+        // Add delay to the recovery/disposal audit time to ensure this is logged after received audit.
+        private const int AuditTimeOffSet = 2;
+
         public ReceiptRecoveryController(IMediator mediator, IFileReader fileReader)
         {
             this.mediator = mediator;
@@ -38,11 +42,16 @@
         [HttpGet]
         public async Task<ActionResult> Index(Guid notificationId, Guid movementId)
         {
-            ReceiptRecoveryViewModel model = new ReceiptRecoveryViewModel();
-            model.SelectedmovementId = movementId;
-            model.NotificationId = notificationId;
-            model.NotificationType = await mediator.SendAsync(new GetNotificationType(notificationId));
-            model.Unit = await mediator.SendAsync(new GetShipmentUnits(notificationId));
+            var movementDetails = await mediator.SendAsync(new GetMovementDetailsById(notificationId, movementId));
+
+            var model = new ReceiptRecoveryViewModel
+            {
+                SelectedmovementId = movementId,
+                NotificationId = notificationId,
+                NotificationType = await mediator.SendAsync(new GetNotificationType(notificationId)),
+                Unit = await mediator.SendAsync(new GetShipmentUnits(notificationId)),
+                ShipmentNumber = movementDetails.Number
+            };
 
             if (TempData[CertificateKey] != null)
             {
@@ -101,11 +110,16 @@
         [HttpGet]
         public async Task<ActionResult> Receipt(Guid notificationId, Guid movementId)
         {
-            ReceiptViewModel model = new ReceiptViewModel();
-            model.SelectedmovementId = movementId;
-            model.NotificationId = notificationId;
-            model.NotificationType = await mediator.SendAsync(new GetNotificationType(notificationId));
-            model.Unit = await mediator.SendAsync(new GetShipmentUnits(notificationId));
+            var movementDetails = await mediator.SendAsync(new GetMovementDetailsById(notificationId, movementId));
+
+            var model = new ReceiptViewModel
+            {
+                SelectedmovementId = movementId,
+                NotificationId = notificationId,
+                NotificationType = await mediator.SendAsync(new GetNotificationType(notificationId)),
+                Unit = await mediator.SendAsync(new GetShipmentUnits(notificationId)),
+                ShipmentNumber = movementDetails.Number
+            };
 
             if (TempData[CertificateKey] != null)
             {
@@ -160,10 +174,16 @@
         [HttpGet]
         public async Task<ActionResult> Recovery(Guid notificationId, Guid movementId)
         {
-            RecoveryViewModel model = new RecoveryViewModel();
-            model.SelectedmovementId = movementId;
-            model.NotificationId = notificationId;
-            model.NotificationType = await mediator.SendAsync(new GetNotificationType(notificationId));
+            var movementDetails = await mediator.SendAsync(new GetMovementDetailsById(notificationId, movementId));
+
+            var model = new RecoveryViewModel
+            {
+                SelectedmovementId = movementId,
+                NotificationId = notificationId,
+                NotificationType = await mediator.SendAsync(new GetNotificationType(notificationId)),
+                ShipmentNumber = movementDetails.Number
+            };
+
             if (TempData[CertificateKey] != null)
             {
                 model.Certificate = (CertificateType)TempData[CertificateKey];
@@ -245,22 +265,26 @@
         }
 
         [HttpGet]
-        public ActionResult UploadCertificate(Guid notificationId, Guid movementId)
+        public async Task<ActionResult> UploadCertificate(Guid notificationId, Guid movementId)
         {
-            //Check all the values are available
-            object dateReceivedResult;
-            object unitResult;
-            object quantityResult;
+            var movementDetails = await mediator.SendAsync(new GetMovementDetailsById(notificationId, movementId));
 
-            var model = new UploadCertificateViewModel();
-
-            model.Certificate = (CertificateType)TempData[CertificateKey];
-            model.NotificationType = (NotificationType)TempData[NotificationTypeKey];
-            model.NotificationId = notificationId;
-            model.MovementId = movementId;
+            var model = new UploadCertificateViewModel
+            {
+                Certificate = (CertificateType)TempData[CertificateKey],
+                NotificationType = (NotificationType)TempData[NotificationTypeKey],
+                NotificationId = notificationId,
+                MovementId = movementId,
+                ShipmentNumber = movementDetails.Number
+            };
 
             if (model.Certificate == CertificateType.Receipt || model.Certificate == CertificateType.ReceiptRecovery)
             {
+                //Check all the values are available
+                object quantityResult;
+                object unitResult;
+                object dateReceivedResult;
+
                 if (TempData.TryGetValue(DateReceivedKey, out dateReceivedResult)
                     && TempData.TryGetValue(UnitKey, out unitResult)
                     && TempData.TryGetValue(QuantityKey, out quantityResult))
@@ -270,6 +294,7 @@
                     model.Quantity = decimal.Parse(quantityResult.ToString());
                 }
             }
+
             if (model.Certificate == CertificateType.Recovery || model.Certificate == CertificateType.ReceiptRecovery)
             {
                 model.DateRecovered = DateTime.Parse(TempData[DateRecoveredKey].ToString());
@@ -301,7 +326,7 @@
             TempData[CertificateKey] = model.Certificate;
             TempData[NotificationTypeKey] = model.NotificationType;
 
-            return RedirectToAction("Success");
+            return RedirectToAction("Success", new { movementId });
         }
 
         private async Task SaveReceiptData(Guid notificationId, UploadCertificateViewModel model)
@@ -312,7 +337,9 @@
             var id = model.MovementId;
            var fileId = await mediator.SendAsync(new SaveCertificateOfReceiptFile(id, uploadedFile, fileExtension));
 
-            await mediator.SendAsync(new SetMovementAccepted(id, fileId, model.DateReceived, model.Quantity.GetValueOrDefault(), model.Unit.GetValueOrDefault()));           
+            await
+                mediator.SendAsync(new SetMovementAccepted(id, fileId, model.DateReceived,
+                    model.Quantity.GetValueOrDefault(), model.Unit.GetValueOrDefault(), SystemTime.Now));
         }
 
         private async Task SaveCompleteData(Guid notificationId, UploadCertificateViewModel model)
@@ -322,7 +349,7 @@
 
             var id = model.MovementId;
 
-            await mediator.SendAsync(new SaveMovementCompletedReceipt(id, model.DateRecovered, uploadedFile, fileExtension));           
+            await mediator.SendAsync(new SaveMovementCompletedReceipt(id, model.DateRecovered, uploadedFile, fileExtension, SystemTime.Now));           
         }
 
         private async Task SaveReceiptRecoveryData(Guid notificationId, UploadCertificateViewModel model)
@@ -333,13 +360,21 @@
             var id = model.MovementId;
             var fileId = await mediator.SendAsync(new SaveCertificateOfReceiptFile(id, uploadedFile, fileExtension));
 
-            await mediator.SendAsync(new SetMovementAccepted(id, fileId, model.DateReceived, model.Quantity.GetValueOrDefault(), model.Unit.GetValueOrDefault()));
-            await mediator.SendAsync(new SaveMovementCompletedReceipt(id, model.DateRecovered, uploadedFile, fileExtension));
+            var auditDate = SystemTime.Now;
+
+            await
+                mediator.SendAsync(new SetMovementAccepted(id, fileId, model.DateReceived,
+                    model.Quantity.GetValueOrDefault(), model.Unit.GetValueOrDefault(), auditDate));
+            await
+                mediator.SendAsync(new SaveMovementCompletedReceipt(id, model.DateRecovered, uploadedFile, fileExtension,
+                    auditDate.AddSeconds(AuditTimeOffSet)));
         }
 
         [HttpGet]
-        public ActionResult Success(Guid notificationId)
+        public async Task<ActionResult> Success(Guid notificationId, Guid movementId)
         {
+            var movementDetails = await mediator.SendAsync(new GetMovementDetailsById(notificationId, movementId));
+
             object notificationTypeResult;
             object certificateResult;
 
@@ -350,7 +385,8 @@
                 {
                     NotificationId = notificationId,
                     NotificationType = (NotificationType)notificationTypeResult,
-                    Certificate = (CertificateType)certificateResult
+                    Certificate = (CertificateType)certificateResult,
+                    ShipmentNumber = movementDetails.Number
                 };
 
                 return View(model);

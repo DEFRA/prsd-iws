@@ -3,21 +3,28 @@
     using System;
     using System.Threading.Tasks;
     using System.Web.Mvc;
+    using Core.ImportNotification.Update;
     using Infrastructure.Authorization;
+    using Prsd.Core.Mapper;
     using Prsd.Core.Mediator;
+    using Requests.ImportNotification;
     using Requests.ImportNotificationAssessment;
     using Requests.TransportRoute;
     using ViewModels.UpdateJourney;
 
     [AuthorizeActivity(typeof(SetEntryPoint))]
     [AuthorizeActivity(typeof(SetExitPoint))]
+    [AuthorizeActivity(typeof(UpdateImportNotificationWasteTypes))]
+    [AuthorizeActivity(typeof(UpdateWasteOperation))]
     public class UpdateJourneyController : Controller
     {
         private readonly IMediator mediator;
+        private readonly IMapper mapper;
 
-        public UpdateJourneyController(IMediator mediator)
+        public UpdateJourneyController(IMediator mediator, IMapper mapper)
         {
             this.mediator = mediator;
+            this.mapper = mapper;
         }
 
         [HttpGet]
@@ -88,6 +95,62 @@
             ViewBag.ExitPoint = stateOfImport.ExitPoint.Name;
 
             return View();
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> WasteCodes(Guid id)
+        {
+            var data = await mediator.SendAsync(new GetImportNotificationWasteTypes(id));
+
+            var model = mapper.Map<UpdateWasteCodesViewModel>(data);
+
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> WasteCodes(Guid id, UpdateWasteCodesViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                var data = await mediator.SendAsync(new GetImportNotificationWasteTypes(id));
+
+                model = mapper.Map<UpdateWasteCodesViewModel>(model, data.AllCodes);
+
+                return View(model);
+            }
+
+            var wasteTypes = mapper.Map<WasteTypes>(model);
+
+            await mediator.SendAsync(new UpdateImportNotificationWasteTypes(id, wasteTypes));
+
+            return RedirectToAction("Index", "Home");
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> WasteOperation(Guid id)
+        {
+            var data = await mediator.SendAsync(new GetWasteOperationData(id));
+
+            return View(new UpdateWasteOperationViewModel(data));
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> WasteOperation(Guid id, UpdateWasteOperationViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                var details = await mediator.SendAsync(new GetNotificationDetails(id));
+
+                model.SetDetails(details);
+
+                return View(model);
+            }
+
+            await mediator.SendAsync(new UpdateWasteOperation(id, model.SelectedCodes, model.TechnologyEmployed));
+
+            return RedirectToAction("Index", "Home");
         }
     }
 }

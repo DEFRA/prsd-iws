@@ -127,7 +127,7 @@
     <value>Quantity received in {0}</value>
   </data>
   <data name="ReceiptTitle" xml:space="preserve">
-    <value>How much waste and when was it received?</value>
+    <value>How much waste and when was shipment {0} received?</value>
   </data>
   <data name="ReceivedDate" xml:space="preserve">
     <value>Received date</value>
@@ -136,19 +136,19 @@
     <value>{0} date</value>
   </data>
   <data name="RecoveryTitle" xml:space="preserve">
-    <value>When was the waste {0}?</value>
+    <value>When was the waste {0} for shipment {1} ?</value>
   </data>
   <data name="SameAsReceived" xml:space="preserve">
     <value>Is this also the date of {0}?</value>
   </data>
   <data name="SuccessTitle" xml:space="preserve">
-    <value>You've successfully recorded the {0} of this shipment</value>
+    <value>You've successfully recorded the {0} for shipment {1}</value>
   </data>
   <data name="Title" xml:space="preserve">
-    <value>How much waste was received and when was it {0}?</value>
+    <value>How much waste was received and when was it {0} for shipment {1}?</value>
   </data>
   <data name="UploadCombinedTitle" xml:space="preserve">
-    <value>Your certificates of receipt and {0} are now complete</value>
+    <value>Your certificates of receipt and {0} for shipment {1} are nearly complete</value>
   </data>
   <data name="UploadFileCombinedTitle" xml:space="preserve">
     <value>Upload combined receipt and {0} file</value>
@@ -163,10 +163,10 @@
     <value>Before you continue, you need to upload the signed copy of the certificate of receipt and {0}.</value>
   </data>
   <data name="UploadReceiptTitle" xml:space="preserve">
-    <value>Your certificate of receipt is now complete</value>
+    <value>Your certificate of receipt for shipment {0} is nearly complete</value>
   </data>
   <data name="UploadRecoveryTitle" xml:space="preserve">
-    <value>The shipment is now complete</value>
+    <value>Your certificate of {0} for shipment {1} is nearly complete</value>
   </data>
   <data name="Yes" xml:space="preserve">
     <value>Yes</value>

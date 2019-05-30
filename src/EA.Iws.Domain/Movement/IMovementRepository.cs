@@ -15,6 +15,8 @@
 
         Task<IEnumerable<Movement>> GetMovementsByStatus(Guid notificationId, MovementStatus status);
 
+        Task<IEnumerable<Movement>> GetCancellableMovements(Guid notificationId);
+
         Task<IEnumerable<Movement>> GetPagedMovements(Guid notificationId, int pageNumber, int pageSize);
 
         Task<IEnumerable<Movement>> GetPagedMovementsByStatus(Guid notificationId, MovementStatus status, int pageNumber, int pageSize);
@@ -23,9 +25,7 @@
 
         Task<Movement> GetByNumberOrDefault(int movementNumber, Guid notificationId);
 
-        Task<IEnumerable<Movement>> GetActiveMovements(Guid notificationId);
-
-        Task<IEnumerable<Movement>> GetFutureActiveMovements(Guid notificationId);
+        Task<IEnumerable<Movement>> GetAllActiveMovements(Guid notificationId);
 
         void Add(Movement movement);
 

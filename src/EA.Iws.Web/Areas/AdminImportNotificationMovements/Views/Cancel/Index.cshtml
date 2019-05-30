@@ -18,8 +18,8 @@
         <div class="form-group">
             <h2 class="heading-medium">@Resources.PrenotificationsToCancelHeading</h2>
 
-            @if (!Model.CancellableMovements.Any())
-            {
+            @if (Model.CancellableMovements.Count == 0)
+			{
                 <p>@Resources.NoPrenotificaitonsToCancel</p>
             }
             else
@@ -43,9 +43,9 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @for (int i = 0; i < Model.CancellableMovements.Count; i++)
-                            {
-                                MvcHtmlString idForThisCheckBox = Html.NameFor(m => m.CancellableMovements[i].IsSelected);
+                            @for (var i = 0; i < Model.CancellableMovements.Count; i++)
+							{
+								var idForThisCheckBox = Html.NameFor(m => m.CancellableMovements[i].IsSelected);
 
                                 <tr>
                                     <td>
@@ -54,11 +54,11 @@
                                     </td>
                                     <td>
                                         @if (Model.CancellableMovements[i].PrenotificationDate.HasValue)
-                                        {
+										{
                                             @Html.Gds().DisplayShortDateFor(m => m.CancellableMovements[i].PrenotificationDate.Value)
-                                        }
-                                        else
-                                        {
+}
+										else
+										{
                                             @:- -
                                     }
                                     </td>
@@ -73,19 +73,63 @@
                                         </label>
                                     </td>
                                 </tr>
-                            }
+							}
                         </tbody>
                     </table>
-                </div>
+                </div>   
+			}
+			@if (Model.AddedMovements.Any())
+			{
+					<div class="form-group @Html.Gds().FormGroupClass(m => m.AddedMovements)">
+						<h2 class="heading-medium">@Resources.AddSubHeader</h2>
+						<table id="AddedMovements" title="@Resources.AddSubHeader">
+							<thead>
+								<tr>
+									<th>
+										@Resources.Number
+									</th>
+									<th>
+										@Resources.ActualDateOfShipment
+									</th>
+									<th>
+										<label>@Constants.ActionText</label>
+									</th>
+								</tr>
+							</thead>
+							<tbody>
+								@for (var i = 0; i < Model.AddedMovements.Count(); i++)
+								{
+									<tr>
+										<td>
+											@Html.DisplayFor(m => m.AddedMovements[i].Number)
+										</td>
+										<td>
+											@Html.Gds().DisplayShortDateFor(m => m.AddedMovements[i].ShipmentDate)
+										</td>
+										<td>
+											<button class="link-submit" type="submit" name="command" value="@Model.AddedMovements[i].Number">@Constants.RemoveText</button>
+										</td>
+									</tr>
+								}
+							</tbody>
+						</table>
+					</div>
+				}
+			
+				@if (Model.CancellableMovements.Any() || Model.AddedMovements.Any())
+				{
                 <div class="form-group">
-                    <button class="button" type="submit">@Constants.ContinueButtonText</button>
+                    <button class="button" type="submit">@Constants.ContinueOnlyButtonText</button>
                 </div>
-            }
+				}
+			<div class="form-group">
+				<button class="link-submit" type="submit" name="command" value="add">@Resources.GoToAddNewShipments</button>
+			</div>
         </div>
     }
 
     <div class="form-group">
-        @Html.ActionLink("Go to shipment summary", "Index", "Home")
+        @Html.ActionLink(Resources.GoToShipmentSummary, "Index", "Home")
     </div>
 </div>
 

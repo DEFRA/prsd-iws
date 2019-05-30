@@ -2,6 +2,7 @@
 {
     using Core.Authorization.Permissions;
     using Core.Movement;
+    using Infrastructure;
     using Infrastructure.Authorization;
     using Prsd.Core.Mediator;
     using Requests.Movement;
@@ -17,10 +18,12 @@
     public class MovementOverrideController : Controller
     {
         private readonly IMediator mediator;
+        private readonly IAuditService auditService;
 
-        public MovementOverrideController(IMediator mediator)
+        public MovementOverrideController(IMediator mediator, IAuditService auditService)
         {
             this.mediator = mediator;
+            this.auditService = auditService;
         }
 
         public async Task<ActionResult> Index(Guid id, Guid movementId)
@@ -61,6 +64,10 @@
 
             await mediator.SendAsync(new SetMovementReceiptAndRecoveryData(data));
 
+            await this.auditService.AddMovementAudit(this.mediator,
+                id, model.ShipmentNumber,
+                User.GetUserId(),
+                MovementAuditType.Edited);
             return RedirectToAction("Edit", "CaptureMovement",  new { movementId });
         }
 

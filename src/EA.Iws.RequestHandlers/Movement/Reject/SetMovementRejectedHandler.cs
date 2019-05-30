@@ -2,9 +2,12 @@
 {
     using System;
     using System.Threading.Tasks;
+    using Core.Movement;
     using DataAccess;
     using Domain.FileStore;
     using Domain.Movement;
+    using Prsd.Core;
+    using Prsd.Core.Domain;
     using Prsd.Core.Mediator;
     using Requests.Movement.Reject;
 
@@ -16,13 +19,17 @@
         private readonly ICertificateNameGenerator nameGenerator;
         private readonly CertificateFactory certificateFactory;
         private readonly IFileRepository fileRepository;
+        private readonly IMovementAuditRepository movementAuditRepository;
+        private readonly IUserContext userContext;
 
         public SetMovementRejectedHandler(IRejectMovement rejectMovement, 
             IMovementRepository movementRepository, 
             IwsContext context,
             MovementFileNameGenerator nameGenerator,
             CertificateFactory certificateFactory,
-            IFileRepository fileRepository)
+            IFileRepository fileRepository,
+            IMovementAuditRepository movementAuditRepository,
+            IUserContext userContext)
         {
             this.rejectMovement = rejectMovement;
             this.movementRepository = movementRepository;
@@ -30,6 +37,8 @@
             this.nameGenerator = nameGenerator;
             this.certificateFactory = certificateFactory;
             this.fileRepository = fileRepository;
+            this.movementAuditRepository = movementAuditRepository;
+            this.userContext = userContext;
         }
 
         public async Task<Guid> HandleAsync(SetMovementRejected message)
@@ -45,6 +54,11 @@
 
             movementRejection.SetFile(fileId);
             
+            await context.SaveChangesAsync();
+
+            await movementAuditRepository.Add(new MovementAudit(movement.NotificationId, movement.Number,
+                userContext.UserId.ToString(), (int)MovementAuditType.Rejected, SystemTime.Now));
+
             await context.SaveChangesAsync();
 
             return message.MovementId;

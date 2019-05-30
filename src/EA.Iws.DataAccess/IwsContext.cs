@@ -95,6 +95,8 @@
 
         public virtual DbSet<MovementCarrier> MovementCarrier { get; set; }
 
+        public virtual DbSet<MovementAudit> MovementAudits { get; set; }
+
         public virtual DbSet<AnnexCollection> AnnexCollections { get; set; }
 
         public virtual DbSet<Domain.NotificationApplication.Importer.Importer> Importers { get; set; }
