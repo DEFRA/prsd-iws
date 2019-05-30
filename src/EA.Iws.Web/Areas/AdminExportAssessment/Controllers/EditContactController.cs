@@ -4,6 +4,7 @@
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Core.Exporters;
+    using Core.Importer;
     using Core.Notification.Audit;
     using Core.Shared;
     using Infrastructure;
@@ -14,8 +15,8 @@
     using Requests.NotificationAssessment;
     using ViewModels.EditContact;
 
-    [AuthorizeActivity(typeof(SetExporterContact))]
-    [AuthorizeActivity(typeof(SetImporterContact))]
+    [AuthorizeActivity(typeof(SetExporterDetails))]
+    [AuthorizeActivity(typeof(SetImporterDetails))]
     public class EditContactController : Controller
     {
         private readonly IMediator mediator;
@@ -47,9 +48,9 @@
 
             var exporter = await mediator.SendAsync(new GetExporterByNotificationId(id));
 
-            var contactData = GetNewContactData(model, exporter.Contact);
+            var exporterData = GetNewExporterData(model, exporter);
 
-            await mediator.SendAsync(new SetExporterContact(id, contactData));
+            await mediator.SendAsync(new SetExporterDetails(id, exporterData));
 
             await this.auditService.AddAuditEntry(this.mediator,
                     id,
@@ -80,9 +81,9 @@
 
             var importer = await mediator.SendAsync(new GetImporterByNotificationId(id));
 
-            var contactData = GetNewContactData(model, importer.Contact);
+            var importerData = GetNewImporterData(model, importer);
 
-            await mediator.SendAsync(new SetImporterContact(id, contactData));
+            await mediator.SendAsync(new SetImporterDetails(id, importerData));
 
             await this.auditService.AddAuditEntry(this.mediator,
                     id,
@@ -105,6 +106,39 @@
                 Fax = oldContactData.Fax
             };
             return newContactData;
+        }
+
+        private static BusinessInfoData GetNewBusinessInfoData(EditContactViewModel model, BusinessInfoData oldBusinessInfoData)
+        {
+            var newBusinessInfoData = new BusinessInfoData
+            {
+                Name = model.Name,
+                AdditionalRegistrationNumber = oldBusinessInfoData.AdditionalRegistrationNumber,
+                BusinessType = oldBusinessInfoData.BusinessType,
+                OtherDescription = oldBusinessInfoData.OtherDescription,
+                RegistrationNumber = oldBusinessInfoData.RegistrationNumber
+            };
+            return newBusinessInfoData;
+        }
+
+        private static ExporterData GetNewExporterData(EditContactViewModel model, ExporterData oldExporterData)
+        {
+            var newExporterData = new ExporterData
+            {
+                Contact = GetNewContactData(model, oldExporterData.Contact),
+                Business = GetNewBusinessInfoData(model, oldExporterData.Business)
+            };
+            return newExporterData;
+        }
+
+        private static ImporterData GetNewImporterData(EditContactViewModel model, ImporterData oldImporterData)
+        {
+            var newImporterData = new ImporterData
+            {
+                Contact = GetNewContactData(model, oldImporterData.Contact),
+                Business = GetNewBusinessInfoData(model, oldImporterData.Business)
+            };
+            return newImporterData;
         }
     }
 }

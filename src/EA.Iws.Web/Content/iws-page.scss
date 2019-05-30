@@ -878,3 +878,15 @@ details {
     transform: rotate(45deg);
     -webkit-transform: rotate(45deg);
 }
+
+details {
+    .show-all {
+        padding-right: 25px;
+        text-align: right;
+
+        &:before {
+            left: auto !important;
+            right: 0 !important;
+        }
+    }
+}

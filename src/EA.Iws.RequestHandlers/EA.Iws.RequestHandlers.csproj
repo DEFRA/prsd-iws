@@ -88,6 +88,7 @@
     <Compile Include="AddressBook\GetUserAddressBookByTypeHandler.cs" />
     <Compile Include="AddressBook\SearchAddressRecordsByNameHandler.cs" />
     <Compile Include="AddressBook\SearchAddressRecordsHandler.cs" />
+    <Compile Include="Admin\CheckNotificationHasCommentsHandler.cs" />
     <Compile Include="Admin\EntryOrExitPoints\AddEntryOrExitPointHandler.cs" />
     <Compile Include="Admin\EntryOrExitPoints\CheckEntryOrExitPointUniqueHandler.cs" />
     <Compile Include="Admin\EntryOrExitPoints\GetEntryOrExitPointsGroupedByCountryHandler.cs" />
@@ -195,6 +196,7 @@
     <Compile Include="ImportMovement\Edit\SetImportMovementDatesHandler.cs" />
     <Compile Include="ImportMovement\GetImportMovementAuditByNotificationIdHandler.cs" />
     <Compile Include="ImportMovement\GetNotificationIdByMovementIdHandler.cs" />
+    <Compile Include="ImportMovement\IsAddedCancellableImportMovementValidHandler.cs" />
     <Compile Include="ImportMovement\Receipt\RecordReceiptHandler.cs" />
     <Compile Include="ImportMovement\Reject\RecordRejectionHandler.cs" />
     <Compile Include="ImportMovement\SetImportMovementReceiptAndRecoveryDataHandler.cs" />
@@ -250,10 +252,13 @@
     <Compile Include="ImportNotificationMovements\GetImportMovementsSummaryTableHandler.cs" />
     <Compile Include="ImportNotificationMovements\GetRejectedImportMovementDetailsHandler.cs" />
     <Compile Include="ImportNotificationMovements\GetRejectedImportMovementsHandler.cs" />
+    <Compile Include="ImportNotification\CheckImportNotificationHasCommentsHandler.cs" />
     <Compile Include="ImportNotification\CheckImportNumberUniqueHandler.cs" />
     <Compile Include="ImportNotification\CompleteDraftImportNotificationHandler.cs" />
     <Compile Include="ImportNotification\CreateImportNotificationHandler.cs" />
     <Compile Include="ImportNotification\Events\CreateImportNotificationAssessment.cs" />
+    <Compile Include="ImportNotification\Exporters\GetExporterByImportNotificationIdHandler.cs" />
+    <Compile Include="ImportNotification\Exporters\SetExporterDetailsForImportNotificationHandler.cs" />
     <Compile Include="ImportNotification\GetChangeNumberOfShipmentConfrimationDataHandler.cs" />
     <Compile Include="ImportNotification\GetDraftDataHandler.cs" />
     <Compile Include="ImportNotification\GetImportNotificationIdByNumberHandler.cs" />
@@ -262,6 +267,9 @@
     <Compile Include="ImportNotification\GetNotificationDetailsHandler.cs" />
     <Compile Include="ImportNotification\GetOriginalNumberOfShipmentsHandler.cs" />
     <Compile Include="ImportNotification\GetImportNotificationWasteTypesHandler.cs" />
+    <Compile Include="ImportNotification\GetWasteOperationDataHandler.cs" />
+    <Compile Include="ImportNotification\Importers\GetImporterByImportNotificationIdHandler.cs" />
+    <Compile Include="ImportNotification\Importers\SetImporterDetailsForImportNotificationHandler.cs" />
     <Compile Include="ImportNotification\Mappings\AddressMap.cs" />
     <Compile Include="ImportNotification\Mappings\ChemicalCompositionMap.cs" />
     <Compile Include="ImportNotification\Mappings\ContactMap.cs" />
@@ -287,6 +295,7 @@
     <Compile Include="ImportNotification\TransportRoute\GetTransitStateDataForTransitStateHandler.cs" />
     <Compile Include="ImportNotification\UpdateImportNotificationWasteTypesHandler.cs" />
     <Compile Include="ImportNotification\UpdateWasteCodeData.cs" />
+    <Compile Include="ImportNotification\UpdateWasteOperationHandler.cs" />
     <Compile Include="ImportNotification\Validate\AddressValidator.cs" />
     <Compile Include="ImportNotification\Validate\AddressValidatorResources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -449,6 +458,8 @@
     <Compile Include="Movement\GetMovementsByIdsHandler.cs" />
     <Compile Include="Movement\GetNewMovementIdsByNotificationIdHandler.cs" />
     <Compile Include="Movement\GetNotificationNumberByMovementIdHandler.cs" />
+    <Compile Include="Movement\IsAddedCancellableMovementValidHandler.cs" />
+    <Compile Include="Movement\GetSubmittedPendingMovementsHandler.cs" />
     <Compile Include="Movement\Mappings\MovementAuditMap.cs" />
     <Compile Include="Movement\SetMovementCommentsHandler.cs" />
     <Compile Include="Movement\SetMultipleMovementFileIdHandler.cs" />
@@ -475,8 +486,8 @@
     <Compile Include="NotificationAssessment\MarkAsInterimHandler.cs" />
     <Compile Include="NotificationAssessment\RemoveTransitStateHandler.cs" />
     <Compile Include="NotificationAssessment\SetExitPointHandler.cs" />
-    <Compile Include="NotificationAssessment\SetImporterContactHandler.cs" />
-    <Compile Include="NotificationAssessment\SetExporterContactHandler.cs" />
+    <Compile Include="NotificationAssessment\SetImporterDetailsHandler.cs" />
+    <Compile Include="NotificationAssessment\SetExporterDetailsHandler.cs" />
     <Compile Include="NotificationAssessment\SetNewNumberOfShipmentsHandler.cs" />
     <Compile Include="NotificationAssessment\SetEntryPointHandler.cs" />
     <Compile Include="NotificationAssessment\UpdateTransitStateEntryOrExitHandler.cs" />
@@ -917,6 +928,7 @@
     <EmbeddedResource Include="ImportNotification\Validate\WasteOperationValidatorResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>WasteOperationValidatorResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="ImportNotification\Validate\WasteTypeValidatorResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

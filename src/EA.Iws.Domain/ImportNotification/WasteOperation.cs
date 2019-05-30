@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
     using Prsd.Core;
     using Prsd.Core.Domain;
     using Prsd.Core.Extensions;
@@ -27,16 +28,23 @@
 
         public string TechnologyEmployed { get; private set; }
 
-        public void SetTechnologyEmployed(string technologyEmployed)
-        {
-            Guard.ArgumentNotNullOrEmpty(() => technologyEmployed, technologyEmployed);
-
-            TechnologyEmployed = technologyEmployed;
-        }
-
         public IEnumerable<WasteOperationCode> Codes
         {
             get { return OperationCodesCollection.ToSafeIEnumerable(); }
+        }
+
+        public void SetTechnologyEmployed(string technologyEmployed)
+        {
+            TechnologyEmployed = technologyEmployed;
+        }
+
+        public void SetOperationCodes(List<WasteOperationCode> operationCodes)
+        {
+            Guard.ArgumentNotNull(() => operationCodes, operationCodes);
+
+            OperationCodesCollection.Clear();
+
+            OperationCodesCollection = operationCodes;
         }
     }
 }

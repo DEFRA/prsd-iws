@@ -57,7 +57,6 @@
             <th>@Resource.TableHeaderAmount</th>
             <th>@Resource.TableHeaderType</th>
             <th>@Resource.TableHeaderReceipt</th>
-            <th>@Resource.TableHeaderComments</th>
         </tr>
         </thead>
         <tbody>
@@ -76,15 +75,12 @@
                     type = (PaymentMethod)Model.Transactions[i].Type;
                 }
 
-                var comment = string.IsNullOrWhiteSpace(Model.Transactions[i].Comments) ? "No" : "<a href=\"#comment-" + i + "\" onclick='openComments()'>Yes</a>";
-
                 <tr>
                     <td>@trans</td>
                     <td>@Model.Transactions[i].Date.ToString("dd/MM/yyyy")</td>
                     <td>@Model.Transactions[i].Amount.ToString("C")</td>
                     <td>@EnumHelper.GetDescription(type)</td>
                     <td>@Model.Transactions[i].ReceiptNumber</td>
-                    <td>@Html.Raw(comment)</td>
                 </tr>
             }
         }
@@ -255,10 +251,6 @@
             } else {
                 $('#receiptArea').hide();
             }
-        }
-
-        function openComments() {
-            $comments.attr('open', '');
         }
 
         function editComment(id, commentCount) {

@@ -126,6 +126,9 @@
   <data name="CompleteTitle" xml:space="preserve">
     <value>Complete financial guarantee</value>
   </data>
+  <data name="CurrentStatus" xml:space="preserve">
+    <value>Current status</value>
+  </data>
   <data name="DateCompleted" xml:space="preserve">
     <value>Date completed</value>
   </data>
@@ -133,7 +136,7 @@
     <value>Date received</value>
   </data>
   <data name="Decision" xml:space="preserve">
-    <value>Decision</value>
+    <value>Decision made</value>
   </data>
   <data name="DecisionHeading" xml:space="preserve">
     <value>Financial guarantee decision</value>

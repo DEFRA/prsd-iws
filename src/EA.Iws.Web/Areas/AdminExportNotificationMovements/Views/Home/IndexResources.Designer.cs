@@ -205,6 +205,15 @@ namespace EA.Iws.Web.Areas.AdminExportNotificationMovements.Views.Home {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Review shipment audit trail.
+        /// </summary>
+        public static string ShipmentAuditLink {
+            get {
+                return ResourceManager.GetString("ShipmentAuditLink", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to (Shipped).
         /// </summary>
         public static string Shipped {

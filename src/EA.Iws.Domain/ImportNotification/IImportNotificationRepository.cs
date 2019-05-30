@@ -2,6 +2,7 @@
 {
     using System;
     using System.Threading.Tasks;
+    using Core.ImportNotification;
     using Core.Shared;
 
     public interface IImportNotificationRepository
@@ -19,5 +20,7 @@
         Task<bool> Delete(Guid notificationId);
 
         Task<string> GetNumber(Guid id);
+
+        Task<NotificationDetails> GetDetails(Guid id);
     }
 }

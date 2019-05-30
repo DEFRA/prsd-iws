@@ -78,7 +78,7 @@
                 model.PaymentMethod,
                 model.PaymentDate.AsDateTime().Value,
                 model.ReceiptNumber,
-                model.PaymentComments));
+                model.PaymentComments.Trim()));
 
             return RedirectToAction("Index", "AccountManagement");
         }
@@ -99,7 +99,7 @@
             }
 
             var refundData = new AddNotificationRefund(model.NotificationId, Convert.ToDecimal(model.RefundAmount),
-                model.RefundDate.AsDateTime().Value, model.RefundComments);
+                model.RefundDate.AsDateTime().Value, model.RefundComments.Trim());
 
             await mediator.SendAsync(refundData);
 

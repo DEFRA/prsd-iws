@@ -54,6 +54,10 @@
 @Html.Partial("_ShipmentAudit", Model.ShipmentAuditModel, new ViewDataDictionary() { { "Filter", Model.SelectedFilter }, { "ShipmentNumber", Model.ShipmentNumber } })
 
 <div class="form-group">
+	@Html.ActionLink("Go to Shipment summary", "Index", "Home", new { area = "AdminImportNotificationMovements", id = Model.NotificationId }, new { @class = "button" })
+</div>
+
+<div class="form-group">
     @Html.ActionLink("Go to Notification Overview", "Index", "Home", new { area = "ImportNotification", id = Model.NotificationId }, null)
 </div>
 @section scripts

@@ -67,7 +67,8 @@ BEGIN
 		  ,[AcknowledgedDate]
 		  ,[ObjectionDate]
 		  ,[WithdrawnDate]
-		  ,[SiteOfExportName] )
+		  ,[SiteOfExportName]
+		  ,[Officer] )
     SELECT [NotificationNumber]
           ,[ImportOrExport]
           ,[IsInterim]
@@ -126,6 +127,7 @@ BEGIN
 		  ,[ObjectionDate]
 		  ,[WithdrawnDate]
 		  ,[SiteOfExportName]
+		  ,[Officer]
       FROM [Reports].[FreedomOfInformation];
 
     INSERT INTO [Reports].[ShipmentsCache] (

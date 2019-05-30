@@ -27,6 +27,8 @@
         [Range(2015, 3000, ErrorMessageResourceName = "InvalidYear", ErrorMessageResourceType = typeof(ReceiptRecoveryViewModelResources))]
         public int? Year { get; set; }
 
+        public int ShipmentNumber { get; set; }
+
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             DateTime dateComplete;

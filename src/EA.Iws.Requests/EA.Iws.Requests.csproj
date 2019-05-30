@@ -55,6 +55,7 @@
     <Compile Include="AddressBook\GetUserAddressBookByType.cs" />
     <Compile Include="AddressBook\SearchAddressRecords.cs" />
     <Compile Include="AddressBook\SearchAddressRecordsByName.cs" />
+    <Compile Include="Admin\CheckNotificationHasComments.cs" />
     <Compile Include="Admin\EntryOrExitPoints\AddEntryOrExitPoint.cs" />
     <Compile Include="Admin\EntryOrExitPoints\CheckEntryOrExitPointUnique.cs" />
     <Compile Include="Admin\EntryOrExitPoints\GetEntryOrExitPointsGroupedByCountry.cs" />
@@ -144,6 +145,7 @@
     <Compile Include="ImportMovement\Edit\SetImportMovementDates.cs" />
     <Compile Include="ImportMovement\GetImportMovementAuditByNotificationId.cs" />
     <Compile Include="ImportMovement\GetNotificationIdByMovementId.cs" />
+    <Compile Include="ImportMovement\IsAddedCancellableImportMovementValid.cs" />
     <Compile Include="ImportMovement\Receipt\RecordReceipt.cs" />
     <Compile Include="ImportMovement\Reject\RecordRejection.cs" />
     <Compile Include="ImportMovement\SetImportMovementReceiptAndRecoveryData.cs" />
@@ -198,7 +200,10 @@
     <Compile Include="ImportNotificationMovements\GetImportMovementsSummaryTable.cs" />
     <Compile Include="ImportNotificationMovements\GetRejectedImportMovementDetails.cs" />
     <Compile Include="ImportNotificationMovements\GetRejectedImportMovements.cs" />
+    <Compile Include="ImportNotification\CheckImportNotificationHasComments.cs" />
     <Compile Include="ImportNotification\CompleteDraftImportNotification.cs" />
+    <Compile Include="ImportNotification\Exporters\GetExporterByImportNotificationId.cs" />
+    <Compile Include="ImportNotification\Exporters\SetExporterDetailsForImportNotification.cs" />
     <Compile Include="ImportNotification\GetChangeNumberOfShipmentConfrimationData.cs" />
     <Compile Include="ImportNotification\GetDraftData.cs" />
     <Compile Include="ImportNotification\GetImportNotificationNumberById.cs" />
@@ -208,10 +213,14 @@
     <Compile Include="ImportNotification\GetOriginalNumberOfShipments.cs" />
     <Compile Include="ImportNotification\GetSummary.cs" />
     <Compile Include="ImportNotification\GetImportNotificationWasteTypes.cs" />
+    <Compile Include="ImportNotification\GetWasteOperationData.cs" />
+    <Compile Include="ImportNotification\Importers\GetImporterByImportNotificationId.cs" />
+    <Compile Include="ImportNotification\Importers\SetImporterDetailsForImportNotification.cs" />
     <Compile Include="ImportNotification\SetDraftData.cs" />
     <Compile Include="ImportNotification\SetNewNumberOfShipments.cs" />
     <Compile Include="ImportNotification\TransportRoute\GetTransitStateDataForTransitState.cs" />
     <Compile Include="ImportNotification\UpdateImportNotificationWasteTypes.cs" />
+    <Compile Include="ImportNotification\UpdateWasteOperation.cs" />
     <Compile Include="ImportNotification\Validate\ValidateImportNotification.cs" />
     <Compile Include="ImportNotification\Validate\ValidationResults.cs" />
     <Compile Include="ImportNotification\WasteType\GetAllWasteCodes.cs" />
@@ -237,6 +246,8 @@
     <Compile Include="Movement\GetMovementsByIds.cs" />
     <Compile Include="Movement\GetNewMovementIdsByNotificationId.cs" />
     <Compile Include="Movement\GetNotificationNumberByMovementId.cs" />
+    <Compile Include="Movement\IsAddedCancellableMovementValid.cs" />
+    <Compile Include="Movement\GetSubmittedPendingMovements.cs" />
     <Compile Include="NotificationAssessment\AddCarrier.cs" />
     <Compile Include="NotificationAssessment\AddNotificationComment.cs" />
     <Compile Include="NotificationAssessment\CheckFinancialGuaranteeStatus.cs" />
@@ -270,8 +281,8 @@
     <Compile Include="NotificationAssessment\MarkAsInterim.cs" />
     <Compile Include="NotificationAssessment\RemoveTransitState.cs" />
     <Compile Include="NotificationAssessment\SetExitPoint.cs" />
-    <Compile Include="NotificationAssessment\SetImporterContact.cs" />
-    <Compile Include="NotificationAssessment\SetExporterContact.cs" />
+    <Compile Include="NotificationAssessment\SetImporterDetails.cs" />
+    <Compile Include="NotificationAssessment\SetExporterDetails.cs" />
     <Compile Include="NotificationAssessment\SetNewNumberOfShipments.cs" />
     <Compile Include="NotificationAssessment\SetEntryPoint.cs" />
     <Compile Include="NotificationMovements\BulkUpload\CreateBulkPrenotification.cs" />

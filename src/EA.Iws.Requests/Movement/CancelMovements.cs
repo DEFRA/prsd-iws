@@ -12,12 +12,16 @@
     {
         public IEnumerable<MovementData> CancelledMovements { get; private set; }
 
+        public IEnumerable<AddedCancellableMovement> AddedMovements { get; private set; }
+
         public Guid NotificationId { get; set; }
 
-        public CancelMovements(Guid notificationId, IEnumerable<MovementData> cancelledMovements)
+        public CancelMovements(Guid notificationId, IEnumerable<MovementData> cancelledMovements,
+            IEnumerable<AddedCancellableMovement> addedMovements = null)
         {
             NotificationId = notificationId;
             CancelledMovements = cancelledMovements;
+            AddedMovements = addedMovements ?? new List<AddedCancellableMovement>();
         }
     }
 }

@@ -57,7 +57,9 @@
                   WHERE
                     [CompetentAuthorityId] = @ca
                   AND
-                    [ReceivedDate] BETWEEN @from AND @to",
+                    [ReceivedDate] BETWEEN @from AND @to
+                  ORDER BY
+                    [NotificationNumber]",
                 new SqlParameter("@ca", (int)competentAuthority),
                 new SqlParameter("@from", from),
                 new SqlParameter("@to", to)).ToArrayAsync();

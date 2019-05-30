@@ -27,5 +27,7 @@ namespace EA.Iws.Core.FinancialGuarantee
         public Guid FinancialGuaranteeId { get; set; }
 
         public bool IsEmpty { get; set; }
+
+        public bool IsNotificationStatusRecordable { get; set; }
     }
 }
