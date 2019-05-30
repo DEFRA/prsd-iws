@@ -42,5 +42,10 @@
         {
             return Status == MovementStatus.Submitted && ShipmentDate < SystemTime.UtcNow;
         }
+
+        public bool IsShipmentActive()
+        {
+            return (Status == MovementStatus.New || Status == MovementStatus.Captured) && ShipmentDate <= SystemTime.UtcNow;
+        }
     }
 }

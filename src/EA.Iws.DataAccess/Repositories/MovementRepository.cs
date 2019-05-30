@@ -7,9 +7,9 @@
     using System.Linq;
     using System.Threading.Tasks;
     using Core.Movement;
+    using Core.Shared;
     using Domain.Movement;
     using Domain.Security;
-    using Prsd.Core;
 
     internal class MovementRepository : IMovementRepository
     {
@@ -31,6 +31,19 @@
                     m.NotificationId == notificationId
                     && m.Status == status)
                 .ToArrayAsync();
+        }
+
+        public async Task<IEnumerable<Movement>> GetCancellableMovements(Guid notificationId)
+        {
+            await notificationAuthorization.EnsureAccessAsync(notificationId);
+
+            var currentCancellableMovements = await context.Movements
+                .Where(m =>
+                    m.NotificationId == notificationId
+                    && (m.Status == MovementStatus.Submitted
+                        || m.Status == MovementStatus.Captured)).ToArrayAsync();
+
+            return currentCancellableMovements;
         }
 
         public async Task<IEnumerable<Movement>> GetPagedMovements(Guid notificationId, int pageNumber, int pageSize)
@@ -112,7 +125,7 @@
             return movements;
         }
 
-        public async Task<IEnumerable<Movement>> GetActiveMovements(Guid notificationId)
+        public async Task<IEnumerable<Movement>> GetAllActiveMovements(Guid notificationId)
         {
             await notificationAuthorization.EnsureAccessAsync(notificationId);
 
@@ -120,22 +133,9 @@
                 .Where(m =>
                     m.NotificationId == notificationId
                     && (m.Status == MovementStatus.Submitted
-                        || m.Status == MovementStatus.Received)
-                    && m.Date < SystemTime.UtcNow).ToArrayAsync();
-
-            return currentActiveLoads;
-        }
-
-        public async Task<IEnumerable<Movement>> GetFutureActiveMovements(Guid notificationId)
-        {
-            await notificationAuthorization.EnsureAccessAsync(notificationId);
-
-            var currentActiveLoads = await context.Movements
-                .Where(m =>
-                    m.NotificationId == notificationId
-                    && (m.Status == MovementStatus.Submitted
-                        || m.Status == MovementStatus.Received)
-                    && m.Date >= SystemTime.UtcNow).ToArrayAsync();
+                        || m.Status == MovementStatus.Received
+                        || m.Status == MovementStatus.New
+                        || m.Status == MovementStatus.Captured)).ToArrayAsync();
 
             return currentActiveLoads;
         }
@@ -196,13 +196,17 @@
                 new SqlParameter("@HasNoPrenotification", (object)data.HasNoPrenotification ?? DBNull.Value),
                 new SqlParameter("@ActualDate", (object)data.ActualDate ?? DBNull.Value),
                 new SqlParameter("@ReceiptDate", (object)data.ReceiptDate ?? DBNull.Value),
-                new SqlParameter("@Quantity", (object)data.ActualQuantity ?? DBNull.Value),
+                new SqlParameter("@Quantity", data.ActualQuantity != null
+                    ? (object)decimal.Round(data.ActualQuantity.Value, data.ReceiptUnits != null
+                        ? ShipmentQuantityUnitsMetadata.Precision[data.ReceiptUnits.Value]
+                        : ShipmentQuantityUnitsMetadata.Precision.Values.Min())
+                    : DBNull.Value),
                 new SqlParameter("@Unit", (object)data.ReceiptUnits ?? DBNull.Value),
                 new SqlParameter("@RejectiontDate", (object)data.RejectionDate ?? DBNull.Value),
                 new SqlParameter("@RejectionReason", (object)data.RejectionReason ?? DBNull.Value),
                 new SqlParameter("@StatsMarking", (object)data.StatsMarking ?? DBNull.Value),
                 new SqlParameter("@Comments", (object)data.Comments ?? DBNull.Value),
-                 new SqlParameter("@RecoveryDate", (object)data.OperationCompleteDate ?? DBNull.Value),
+                new SqlParameter("@RecoveryDate", (object)data.OperationCompleteDate ?? DBNull.Value),
                 new SqlParameter("@CreatedBy", createdBy));
         }
     }

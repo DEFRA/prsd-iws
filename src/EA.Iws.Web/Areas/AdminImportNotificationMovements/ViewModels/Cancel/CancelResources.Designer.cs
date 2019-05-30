@@ -62,6 +62,24 @@ namespace EA.Iws.Web.Areas.AdminImportNotificationMovements.ViewModels.Cancel {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Please enter the Actual date of shipment.
+        /// </summary>
+        public static string AddActualDateOfShipmentRequired {
+            get {
+                return ResourceManager.GetString("AddActualDateOfShipmentRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please enter the Shipment number.
+        /// </summary>
+        public static string AddShipmentNumberRequired {
+            get {
+                return ResourceManager.GetString("AddShipmentNumberRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to You&apos;ve now cancelled shipments {0} and {1}.
         /// </summary>
         public static string MultipleShipmentHeading {
@@ -76,6 +94,15 @@ namespace EA.Iws.Web.Areas.AdminImportNotificationMovements.ViewModels.Cancel {
         public static string SelectPrenotificationsToCancel {
             get {
                 return ResourceManager.GetString("SelectPrenotificationsToCancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The Shipment number is invalid.
+        /// </summary>
+        public static string ShipmentNumberInvalid {
+            get {
+                return ResourceManager.GetString("ShipmentNumberInvalid", resourceCulture);
             }
         }
         

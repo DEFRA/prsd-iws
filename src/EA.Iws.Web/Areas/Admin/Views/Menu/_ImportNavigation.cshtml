@@ -100,6 +100,7 @@
 			<ul>
 				<li>@Html.ActionLink(Resources.ShipmentSummaryLinkText, "Index", "Home", new { area = "AdminImportNotificationMovements", id }, null)</li>
 				<li>@Html.ActionLink(Resources.CancelShipmentsLinkText, "Index", "Cancel", new { area = "AdminImportNotificationMovements", id }, null)</li>
+				<li>@Html.ActionLink(Resources.ShipmentAuditTrailLinkText, "Index", "ShipmentAudit", new { area = "AdminImportNotificationMovements", id }, null)</li>
 			</ul>
 		</li>
 	}
@@ -120,7 +121,16 @@
 			@Resources.CommentsHeading
 		</h3>
 		<ul>
-			<li>@Html.ActionLink(Resources.CommentsLinkText, "Index", "Comments", new { area = "AdminImportAssessment", id }, null)</li>
+			<li>
+				<a href="@Url.Action("Index", "Comments", new { area = "AdminImportAssessment",  id = id })">
+					@Resources.CommentsLinkText
+					&nbsp; &nbsp; &nbsp;
+					@if (Model.HasComments)
+					{
+						<img src="@Url.Content("~/Content/images/comments-icon.png")" alt="">
+					}
+				</a>
+			</li>
 		</ul>
 	</li>
 

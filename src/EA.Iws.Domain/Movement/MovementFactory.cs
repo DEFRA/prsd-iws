@@ -57,7 +57,7 @@
                         notificationId));
             }
             
-            var hasMaximumActiveLoads = await numberOfActiveLoads.HasMaximum(notificationId);
+            var hasMaximumActiveLoads = await numberOfActiveLoads.HasMaximum(notificationId, actualMovementDate);
 
             if (hasMaximumActiveLoads)
             {

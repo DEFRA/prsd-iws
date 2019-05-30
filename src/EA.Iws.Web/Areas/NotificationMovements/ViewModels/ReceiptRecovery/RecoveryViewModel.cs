@@ -27,16 +27,18 @@
         [Range(2015, 3000, ErrorMessageResourceName = "InvalidYear", ErrorMessageResourceType = typeof(ReceiptRecoveryViewModelResources))]
         public int? Year { get; set; }
 
+        public int ShipmentNumber { get; set; }
+
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             DateTime dateComplete;
             if (!ParseCompleteDateInput(out dateComplete))
             {
-                yield return new ValidationResult("Please enter a valid date", new[] { "Recovery.Day" });
+                yield return new ValidationResult("Please enter a valid date", new[] { "Day" });
             }
             if (dateComplete > SystemTime.UtcNow)
             {
-                yield return new ValidationResult("This date cannot be in the future. Please enter a different date.", new[] { "Recovery.Day" });
+                yield return new ValidationResult("This date cannot be in the future. Please enter a different date.", new[] { "Day" });
             }
         }
 

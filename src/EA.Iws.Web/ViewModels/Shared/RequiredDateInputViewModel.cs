@@ -16,7 +16,7 @@
         public int? Month { get; set; }
 
         [Required(ErrorMessageResourceName = "YearError", ErrorMessageResourceType = typeof(RequiredDateInputResources))]
-        [Range(2013, 3000, ErrorMessageResourceName = "YearError", ErrorMessageResourceType = typeof(DecisionDateResources))]
+        [Range(2013, 3000, ErrorMessageResourceName = "YearError", ErrorMessageResourceType = typeof(RequiredDateInputResources))]
         public int? Year { get; set; }
 
         public bool AllowPastDates { get; set; }

@@ -1,0 +1,90 @@
+﻿@using EA.Iws.Web.Infrastructure.Paging
+@using EA.Iws.Web.ViewModels
+@using EnumHelper = EA.Prsd.Core.Helpers.EnumHelper
+
+@model EA.Iws.Web.ViewModels.Shared.ShipmentAuditTrailViewModel
+@helper DisplayDate(DateTimeOffset date)
+{
+	@date.ToString("d MMM yyyy")
+}
+
+@helper DisplayTime(DateTimeOffset time)
+{
+	@time.ToString("HH:mm")
+}
+
+@if (Model.ShipmentAuditItems.Count > 0)
+{
+	<div class="form-group" id="audit-trail">
+		<table class="group-table">
+			<thead>
+				<tr>
+					<th>
+						Shipment number
+					</th>
+					<th>
+						Type of change
+					</th>
+					<th>
+						Date of action
+					</th>
+					<th>
+						Time
+					</th>
+					<th>
+						User
+					</th>
+				</tr>
+			</thead>
+
+			<tbody>
+			@foreach (var auditRecord in Model.ShipmentAuditItems)
+			{
+			    <tr>
+			        <td>
+			            @auditRecord.ShipmentNumber
+			        </td>
+			        <td>
+			            @EnumHelper.GetDisplayName(auditRecord.AuditType)
+			        </td>
+			        <td>
+			            @DisplayDate(auditRecord.DateAdded)
+			        </td>
+			        <td>
+			            @DisplayTime(auditRecord.DateAdded)
+			        </td>
+			        <td>
+			            @auditRecord.UserName
+			        </td>
+			    </tr>
+			}
+			</tbody>
+		</table>
+	</div>	
+}
+else
+{
+
+	<div class="margin-bottom-30 margin-top-30 ">
+		<h3 style="text-align:center; font-size:36px">No changes available</h3>
+	</div>
+
+}
+@if (Model.ShipmentAuditItems.Count > 0)
+{
+    @Html.Pager(Model.PageSize, Model.PageNumber, Model.NumberOfShipmentAudits).Options(o =>
+    {
+        var selectedFilter = (ShipmentAuditFilterType?)ViewData["Filter"];
+        var number = (int?)ViewData["ShipmentNumber"];
+
+        if (selectedFilter.HasValue)
+        {
+            o.AddRouteValue("filter", (int)selectedFilter.Value);
+        }
+        if (number.HasValue)
+        {
+            o.AddRouteValue("number", (int)number.Value);
+        }
+    })
+}
+

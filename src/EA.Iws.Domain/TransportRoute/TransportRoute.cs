@@ -136,6 +136,16 @@
             targetTransitState.UpdateTransitState(country, competentAuthority, entryPoint, exitPoint, ordinalPosition);
         }
 
+        public void UpdateTransitStateEntryOrExitPoint(Guid targetTransitStateId,
+            EntryOrExitPoint entryPoint,
+            EntryOrExitPoint exitPoint)
+        {
+            var targetTransitState = TransitStatesCollection.Single(ts => ts.Id == targetTransitStateId);
+
+            targetTransitState.UpdateTransitState(targetTransitState.Country, targetTransitState.CompetentAuthority,
+                entryPoint, exitPoint, targetTransitState.OrdinalPosition);
+        }
+
         public int[] GetAvailableTransitStatePositions()
         {
             if (TransitStatesCollection.Count == 0)

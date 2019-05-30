@@ -1,8 +1,13 @@
 ﻿namespace EA.Iws.Web.Areas.AdminExportNotificationMovements.Controllers
 {
+    using System;
+    using System.Linq;
+    using System.Threading.Tasks;
+    using System.Web.Mvc;
     using Core.Authorization.Permissions;
     using Core.Movement;
     using Core.Shared;
+    using Infrastructure;
     using Infrastructure.Authorization;
     using Prsd.Core.Mediator;
     using Requests.Movement;
@@ -13,10 +18,6 @@
     using Requests.Notification;
     using Requests.NotificationMovements.Capture;
     using Requests.NotificationMovements.Create;
-    using System;
-    using System.Linq;
-    using System.Threading.Tasks;
-    using System.Web.Mvc;
     using ViewModels.CaptureMovement;
 
     [AuthorizeActivity(typeof(CreateMovementInternal))]
@@ -24,11 +25,13 @@
     {
         private readonly AuthorizationService authorizationService;
         private readonly IMediator mediator;
+        private readonly IAuditService auditService;
 
-        public CaptureMovementController(IMediator mediator, AuthorizationService authorizationService)
+        public CaptureMovementController(IMediator mediator, AuthorizationService authorizationService, IAuditService auditService)
         {
             this.mediator = mediator;
             this.authorizationService = authorizationService;
+            this.auditService = auditService;
         }
 
         [HttpGet]
@@ -74,9 +77,14 @@
                     model.ActualShipmentDate.Date.Value,
                     model.HasNoPrenotification));
 
+                await this.auditService.AddMovementAudit(this.mediator,
+                    id, model.ShipmentNumber.Value,
+                    User.GetUserId(),
+                    model.HasNoPrenotification == true ? MovementAuditType.NoPrenotificationReceived : MovementAuditType.Prenotified);
+
                 if (movementId.HasValue)
                 {
-                    await SaveMovementData(movementId.Value, model);
+                    await SaveMovementData(movementId.Value, model, id);
 
                     return RedirectToAction("Edit", new { movementId, saved = true });
                 }
@@ -121,12 +129,12 @@
                 return View(model);
             }
 
-            await SaveMovementData(movementId, model);
+            await SaveMovementData(movementId, model, id);
 
             return RedirectToAction("Edit", new { movementId, saved = true });
         }
 
-        private async Task SaveMovementData(Guid movementId, CaptureViewModel model)
+        private async Task SaveMovementData(Guid movementId, CaptureViewModel model, Guid notificationId)
         {
             if (model.Receipt.IsComplete() && !model.IsReceived && !model.IsRejected)
             {
@@ -135,6 +143,11 @@
                     await mediator.SendAsync(new RecordRejectionInternal(movementId,
                         model.Receipt.ReceivedDate.Date.Value,
                         model.Receipt.RejectionReason));
+
+                    await this.auditService.AddMovementAudit(this.mediator,
+                        notificationId, model.ShipmentNumber.Value,
+                        User.GetUserId(),
+                        MovementAuditType.Rejected);
                 }
                 else
                 {
@@ -142,6 +155,11 @@
                         model.Receipt.ReceivedDate.Date.Value,
                         model.Receipt.ActualQuantity.Value,
                         model.Receipt.Units.Value));
+
+                    await this.auditService.AddMovementAudit(this.mediator,
+                        notificationId, model.ShipmentNumber.Value,
+                        User.GetUserId(),
+                        MovementAuditType.Received);
                 }
             }
 
@@ -153,6 +171,11 @@
             {
                 await mediator.SendAsync(new RecordOperationCompleteInternal(movementId,
                     model.Recovery.RecoveryDate.Date.Value));
+
+                await this.auditService.AddMovementAudit(this.mediator,
+                    notificationId, model.ShipmentNumber.Value,
+                    User.GetUserId(),
+                    model.NotificationType == NotificationType.Disposal ? MovementAuditType.Disposed : MovementAuditType.Recovered);
             }
 
             if (model.HasComments)

@@ -112,6 +112,7 @@
     <Compile Include="Mappings\Exports\FacilityCollectionMapping.cs" />
     <Compile Include="Mappings\Exports\FinancialGuaranteeCollectionMapping.cs" />
     <Compile Include="Mappings\Exports\MeansOfTransportMapping.cs" />
+    <Compile Include="Mappings\Exports\MovementAuditMapping.cs" />
     <Compile Include="Mappings\Exports\NotificationCommentMapping.cs" />
     <Compile Include="Mappings\Exports\ProducerCollectionMapping.cs" />
     <Compile Include="Mappings\Exports\NumberOfShipmentsHistoryMapping.cs" />
@@ -128,6 +129,7 @@
     <Compile Include="Mappings\Imports\ImportFinancialGuaranteeRefusalMapping.cs" />
     <Compile Include="Mappings\Imports\ImportFinancialGuaranteeReleaseMapping.cs" />
     <Compile Include="Mappings\Imports\ImportFinancialGuaranteeStatusChange.cs" />
+    <Compile Include="Mappings\Imports\ImportMovementAuditMapping.cs" />
     <Compile Include="Mappings\Imports\ImportNotificationCommentMapping.cs" />
     <Compile Include="Mappings\Imports\ImportObjectionMapping.cs" />
     <Compile Include="Mappings\Imports\ImportWithdrawnMapping.cs" />
@@ -236,6 +238,7 @@
     <Compile Include="Repositories\Imports\ImportFinancialGuaranteeRefusalRepository.cs" />
     <Compile Include="Repositories\Imports\ImportFinancialGuaranteeReleaseRepository.cs" />
     <Compile Include="Repositories\Imports\ImportFinancialGuaranteeRepository.cs" />
+    <Compile Include="Repositories\Imports\ImportMovementAuditRepository.cs" />
     <Compile Include="Repositories\Imports\ImportMovementCompletedReceiptRepository.cs" />
     <Compile Include="Repositories\Imports\ImportMovementReceiptRepository.cs" />
     <Compile Include="Repositories\Imports\ImportMovementRejectionRepository.cs" />
@@ -263,6 +266,7 @@
     <Compile Include="Repositories\InternalUserRepository.cs" />
     <Compile Include="Repositories\KeyDatesOverrideRepository.cs" />
     <Compile Include="Repositories\MeansOfTransportRepository.cs" />
+    <Compile Include="Repositories\MovementAuditRepository.cs" />
     <Compile Include="Repositories\MovementCarrierRepository.cs" />
     <Compile Include="Repositories\MovementDateHistoryRepository.cs" />
     <Compile Include="Repositories\MovementDetailsRepository.cs" />
@@ -281,6 +285,7 @@
     <Compile Include="Repositories\NotificationUserRepository.cs" />
     <Compile Include="Repositories\PricingStructureRepository.cs" />
     <Compile Include="Repositories\ProducerRepository.cs" />
+    <Compile Include="Repositories\Reports\ComplianceRepository.cs" />
     <Compile Include="Repositories\Reports\FinancialGuaranteesRepository.cs" />
     <Compile Include="Repositories\Reports\ExportMovementsRepository.cs" />
     <Compile Include="Repositories\Reports\ExportStatsRepository.cs" />

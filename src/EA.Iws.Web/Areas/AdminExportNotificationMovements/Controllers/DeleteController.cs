@@ -4,6 +4,8 @@
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Core.Authorization.Permissions;
+    using Core.Movement;
+    using Infrastructure;
     using Infrastructure.Authorization;
     using Prsd.Core.Mediator;
     using Requests.Movement;
@@ -15,10 +17,12 @@
     {
         private const string MovementNumberKey = "MovementNumberKey";
         private readonly IMediator mediator;
+        private readonly IAuditService auditService;
 
-        public DeleteController(IMediator mediator)
+        public DeleteController(IMediator mediator, IAuditService auditService)
         {
             this.mediator = mediator;
+            this.auditService = auditService;
         }
 
         [HttpGet]
@@ -76,6 +80,11 @@
             if (movementId.HasValue)
             {
                 result = await mediator.SendAsync(new DeleteMovement(movementId.Value));
+
+                await this.auditService.AddMovementAudit(this.mediator,
+                    id, model.Number.Value,
+                    User.GetUserId(),
+                    MovementAuditType.Deleted);
             }
 
             var confirmModel = new ConfirmViewModel

@@ -16,5 +16,7 @@
         public bool ShowKeyDatesOverride { get; set; }
 
         public bool ShowFinancialGuaranteeDatesOverride { get; set; }
+
+        public bool HasComments { get; set; }
     }
 }

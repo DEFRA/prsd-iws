@@ -16,7 +16,7 @@
 
 @helper DisplayDate(DateTime? date, MovementStatus status)
 {
-    if (date.HasValue && status != MovementStatus.New && status != MovementStatus.Cancelled)
+    if (date.HasValue && status != MovementStatus.Cancelled)
     {
         @date.Value.ToString("d MMM yyyy")
     }
@@ -90,6 +90,7 @@
                         @Html.ActionLink(Resources.OptionsDelete, "Index", "Delete")
                     }
                     @Html.ActionLink(Resources.OptionsViewRejected, "List", "RejectedMovement")
+					@Html.ActionLink(Resources.ShipmentAuditLink, "Index", "ShipmentAudit")
                     @Html.ActionLink(Resources.OptionsOverview, "Index", "Home", new { area = "AdminExportAssessment", id = Model.NotificationId }, null)
                 </nav>
             </div>
@@ -147,13 +148,13 @@
 
                 <tbody>
                 @{
-                    for (int i = 0; i < Model.TableData.Count; i++)
-                    {
-                        var statusText = Model.TableData[i].Status == MovementStatus.Completed ? operationTitle : EnumHelper.GetDisplayName(Model.TableData[i].Status);
-                        if (Model.TableData[i].IsShipped())
-                        {
-                            statusText = statusText + Resources.Shipped;
-                        }
+					for (int i = 0; i < Model.TableData.Count; i++)
+					{
+						var statusText = Model.TableData[i].Status == MovementStatus.Completed ? operationTitle : EnumHelper.GetDisplayName(Model.TableData[i].Status);
+						if (Model.TableData[i].IsShipped() || Model.TableData[i].IsShipmentActive())
+						{
+							statusText = statusText + Resources.Shipped;
+						}
 
                         <tr>
                             <td>@Html.ActionLink(Model.TableData[i].Number.ToString(), 

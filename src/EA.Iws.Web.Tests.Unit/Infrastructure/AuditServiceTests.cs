@@ -2,9 +2,12 @@
 {
     using System;
     using System.Threading.Tasks;
+    using Core.Movement;
     using Core.Notification.Audit;
     using FakeItEasy;
     using Prsd.Core.Mediator;
+    using Requests.ImportMovement;
+    using Requests.Movement;
     using Requests.Notification;
     using Web.Infrastructure;
     using Xunit;
@@ -29,6 +32,22 @@
             await auditService.AddAuditEntry(this.mediator, notificationId, userId.ToString(), NotificationAuditType.Added, NotificationAuditScreenType.Exporter);
 
             A.CallTo(() => mediator.SendAsync(A<CreateNotificationAudit>.Ignored)).MustHaveHappened(Repeated.AtLeast.Once);
+        }
+
+        [Fact]
+        public async Task AddMovement_AuditMustBeCalled()
+        {
+            await auditService.AddMovementAudit(this.mediator, notificationId, 1, userId.ToString(), MovementAuditType.Prenotified);
+
+            A.CallTo(() => mediator.SendAsync(A<AuditMovement>.Ignored)).MustHaveHappened(Repeated.AtLeast.Once);
+        }
+
+        [Fact]
+        public async Task AddImportMovement_AuditMustBeCalled()
+        {
+            await auditService.AddImportMovementAudit(this.mediator, notificationId, 1, userId.ToString(), MovementAuditType.Prenotified);
+
+            A.CallTo(() => mediator.SendAsync(A<AuditImportMovement>.Ignored)).MustHaveHappened(Repeated.AtLeast.Once);
         }
     }
 }

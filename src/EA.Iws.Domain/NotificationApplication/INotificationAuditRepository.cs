@@ -1,6 +1,5 @@
 ﻿namespace EA.Iws.Domain.NotificationApplication
 {
-    using Core.Notification.Audit;
     using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;

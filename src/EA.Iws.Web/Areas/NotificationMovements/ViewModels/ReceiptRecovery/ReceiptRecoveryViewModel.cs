@@ -52,6 +52,8 @@
 
         public DateTime ReceiptDate { get; set; }
 
+        public int ShipmentNumber { get; set; }
+
         public ReceiptRecoveryViewModel()
         {
                 IsSameAsReceiptDate = true;
@@ -59,14 +61,15 @@
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
-            ValidateReceiptData();
+            var result = ValidateReceiptData();
+
             DateTime dateReceived;
             if (ParseDateInput(out dateReceived))
             {
                 ReceiptDate = dateReceived;
             }
 
-            return ValidateRecoveryData();
+            return result.Concat(ValidateRecoveryData());
         }
 
         private IEnumerable<ValidationResult> ValidateReceiptData()
@@ -98,39 +101,48 @@
 
         private IEnumerable<ValidationResult> ValidateRecoveryData()
         {
-            if (!IsSameAsReceiptDate.Value)
+            if (IsSameAsReceiptDate.HasValue && !IsSameAsReceiptDate.Value)
             {
                 if (RecoveryDay == null)
                 {
-                    yield return new ValidationResult(ReceiptRecoveryViewModelResources.InvalidDay, new[] { "RecoveryDay" });
+                    yield return
+                        new ValidationResult(ReceiptRecoveryViewModelResources.InvalidDay, new[] { "RecoveryDay" });
                 }
                 if (RecoveryMonth == null)
                 {
-                    yield return new ValidationResult(ReceiptRecoveryViewModelResources.InvalidMonth, new[] { "RecoveryMonth" });
+                    yield return
+                        new ValidationResult(ReceiptRecoveryViewModelResources.InvalidMonth, new[] { "RecoveryMonth" });
                 }
                 if (RecoveryYear == null)
                 {
-                    yield return new ValidationResult(ReceiptRecoveryViewModelResources.InvalidYear, new[] { "RecoveryYear" });
+                    yield return
+                        new ValidationResult(ReceiptRecoveryViewModelResources.InvalidYear, new[] { "RecoveryYear" });
                 }
-            }
-            DateTime dateComplete;
-            if (!ParseCompleteDateInput(out dateComplete))
-            {
-                yield return new ValidationResult("Please enter a valid date", new[] { "RecoveryDay" });
-            }
-            if (dateComplete > SystemTime.UtcNow)
-            {
-                yield return new ValidationResult("This date cannot be in the future. Please enter a different date.", new[] { "RecoveryDay" });
-            }
 
-            DateTime dateReceived;
-            if (ParseDateInput(out dateReceived))
-            {
-                if (dateComplete < dateReceived)
+                DateTime dateComplete;
+                if (!ParseCompleteDateInput(out dateComplete))
                 {
-                    yield return new ValidationResult("This date cannot be before the date of receipt. Please enter a different date.", new[] { "RecoveryDay" });
+                    yield return new ValidationResult("Please enter a valid date", new[] { "RecoveryDay" });
                 }
-            }           
+                if (dateComplete > SystemTime.UtcNow)
+                {
+                    yield return
+                        new ValidationResult("This date cannot be in the future. Please enter a different date.",
+                            new[] { "RecoveryDay" });
+                }
+
+                DateTime dateReceived;
+                if (ParseDateInput(out dateReceived))
+                {
+                    if (dateComplete < dateReceived)
+                    {
+                        yield return
+                            new ValidationResult(
+                                "This date cannot be before the date of receipt. Please enter a different date.",
+                                new[] { "RecoveryDay" });
+                    }
+                }
+            }
         }
 
         private bool ParseDateInput(out DateTime dateReceived)

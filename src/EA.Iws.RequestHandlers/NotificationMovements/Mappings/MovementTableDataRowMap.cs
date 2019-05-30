@@ -15,6 +15,7 @@
                 Number = source.Number,
                 ShipmentDate = source.Date,
                 HasShipped = source.HasShipped,
+                IsShipmentActive = source.IsShipmentActive,
                 Status = source.Status,
                 SubmittedDate = (source.PrenotificationDate.HasValue) 
                     ? source.PrenotificationDate.Value 

@@ -392,6 +392,7 @@
     <Content Include="Content\govuk_toolkit\images\player-icon-volume.png" />
     <Content Include="Content\govuk_toolkit\images\separator-2x.png" />
     <Content Include="Content\govuk_toolkit\images\separator.png" />
+    <Content Include="Content\images\comments-icon.png" />
     <Content Include="Content\images\confirmation-icon.png" />
     <Content Include="Content\images\error-icon.png" />
     <Content Include="Content\images\file-icon.png" />
@@ -901,7 +902,6 @@
     <Content Include="Areas\NotificationApplication\Views\Annex\_Uploads.cshtml" />
     <Content Include="Areas\NotificationMovements\Views\Create\TotalMovementsReached.cshtml" />
     <Content Include="Areas\NotificationMovements\Views\Create\TotalIntendedQuantityReached.cshtml" />
-    <Content Include="Areas\NotificationMovements\Views\Create\TotalActiveLoadsReached.cshtml" />
     <Content Include="Areas\NotificationMovements\Views\Create\TotalIntendedQuantityExceeded.cshtml" />
     <Content Include="Areas\NotificationMovements\Views\Create\ConsentPeriodExpired.cshtml" />
     <Content Include="Areas\NotificationMovements\Views\Create\ConsentExpiresInFourWorkingDays.cshtml" />
@@ -998,7 +998,6 @@
     <Content Include="Areas\NotificationMovements\Views\PrenotificationBulkUpload\TotalIntendedQuantityExceeded.cshtml" />
     <Content Include="Areas\NotificationMovements\Views\PrenotificationBulkUpload\TotalMovementsReached.cshtml" />
     <Content Include="Areas\NotificationMovements\Views\PrenotificationBulkUpload\ConsentPeriodExpired.cshtml" />
-    <Content Include="Areas\NotificationMovements\Views\PrenotificationBulkUpload\TotalActiveLoadsReached.cshtml" />
     <Content Include="Areas\NotificationMovements\Views\ReceiptRecoveryBulkUpload\Index.cshtml" />
     <Content Include="Areas\NotificationMovements\Views\ReceiptRecoveryBulkUpload\Upload.cshtml" />
     <Content Include="Areas\NotificationMovements\Views\ReceiptRecoveryBulkUpload\Warning.cshtml" />
@@ -1017,7 +1016,7 @@
     <Content Include="Areas\AdminExportAssessment\Views\Comments\Add.cshtml" />
     <Content Include="Areas\AdminExportAssessment\Views\Comments\_Layout.cshtml" />
     <Content Include="Areas\AdminImportAssessment\Views\Comments\Add.cshtml" />
-    <Content Include="Views\Shared\EditorTemplates\DecisionDateInputViewModel.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\DateInputViewModel.cshtml" />
     <Content Include="Areas\Reports\Views\Producer\Index.cshtml" />
     <Content Include="Areas\AdminExportAssessment\Views\Comments\Delete.cshtml" />
     <Content Include="Areas\AdminImportAssessment\Views\Comments\Delete.cshtml" />
@@ -1068,6 +1067,22 @@
     <Content Include="Areas\AdminExportAssessment\Views\Shared\EditorTemplates\EnterWasteCodesViewModel.cshtml" />
     <Content Include="Areas\AdminExportAssessment\Views\EditEwcCode\Index.cshtml" />
     <Content Include="Areas\AdminExportAssessment\Views\HCode\Index.cshtml" />
+    <Content Include="Areas\AdminExportNotificationMovements\Views\ShipmentAudit\Index.cshtml" />
+    <Content Include="Areas\AdminImportNotificationMovements\Views\ShipmentAudit\Index.cshtml" />
+    <Content Include="Areas\AdminExportAssessment\Views\Carrier\Add.cshtml" />
+    <Content Include="Areas\AdminExportAssessment\Views\Carrier\CarrierBusinessTypeViewModel.cshtml" />
+    <Content Include="Areas\ImportNotification\Views\UpdateJourney\WasteCodes.cshtml" />
+    <Content Include="Areas\Reports\Views\Compliance\Index.cshtml" />
+    <Content Include="Areas\AdminExportAssessment\Views\UpdateJourney\TransitEntryPoint.cshtml" />
+    <Content Include="Areas\AdminExportAssessment\Views\UpdateJourney\TransitExitPoint.cshtml" />
+    <Content Include="Areas\AdminExportAssessment\Views\UpdateJourney\TransitEntryPointChanged.cshtml" />
+    <Content Include="Areas\AdminExportAssessment\Views\UpdateJourney\TransitExitPointChanged.cshtml" />
+    <Content Include="Areas\AdminExportNotificationMovements\Views\Cancel\Add.cshtml" />
+    <Content Include="Areas\ImportNotification\Views\UpdateJourney\WasteOperation.cshtml" />
+    <Content Include="Areas\ImportNotification\Views\EditContact\EditorTemplates\EditContactViewModel.cshtml" />
+    <Content Include="Areas\ImportNotification\Views\EditContact\Exporter.cshtml" />
+    <Content Include="Areas\ImportNotification\Views\EditContact\Importer.cshtml" />
+    <Content Include="Areas\AdminImportNotificationMovements\Views\Cancel\Add.cshtml" />
     <None Include="Scripts\jquery-2.1.3.intellisense.js" />
     <Content Include="Scripts\govuk\govuk-template.js" />
     <Content Include="Scripts\govuk\ie.js" />
@@ -1187,6 +1202,8 @@
     <Content Include="Views\Shared\EditorTemplates\ReportInputParametersViewModel.cshtml" />
     <Content Include="Views\PrivacyPolicy\Index.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\ReportOutputParametersViewModel.cshtml" />
+    <Content Include="Views\Shared\_ShipmentAudit.cshtml" />
+    <Content Include="Views\Shared\_ShipmentGroupScript.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -1226,6 +1243,7 @@
       <DependentUpon>AddEditResource.resx</DependentUpon>
     </Compile>
     <Compile Include="Areas\AdminExportAssessment\Controllers\AnnexController.cs" />
+    <Compile Include="Areas\AdminExportAssessment\Controllers\CarrierController.cs" />
     <Compile Include="Areas\AdminExportAssessment\Controllers\CommentsController.cs" />
     <Compile Include="Areas\AdminExportAssessment\Controllers\DecisionControllerResources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -1250,6 +1268,7 @@
     <Compile Include="Areas\AdminExportAssessment\Controllers\UpdateJourneyController.cs" />
     <Compile Include="Areas\AdminExportAssessment\Controllers\YCodeController.cs" />
     <Compile Include="Areas\AdminExportAssessment\ViewModels\Annex\DownloadAnnexViewModel.cs" />
+    <Compile Include="Areas\AdminExportAssessment\ViewModels\Carrier\AddCarrierViewModel.cs" />
     <Compile Include="Areas\AdminExportAssessment\ViewModels\Comments\AddCommentsViewModel.cs" />
     <Compile Include="Areas\AdminExportAssessment\ViewModels\Comments\CommentsResources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -1260,7 +1279,19 @@
     <Compile Include="Areas\AdminExportAssessment\ViewModels\EditEwcCode\EditEwcCodeViewModel.cs" />
     <Compile Include="Areas\AdminExportAssessment\ViewModels\EditEwcCode\EditEwcEnterCodesViewModel.cs" />
     <Compile Include="Areas\AdminExportAssessment\ViewModels\HCode\EditHCodeViewModel.cs" />
+    <Compile Include="Areas\AdminExportAssessment\ViewModels\UpdateJourney\TransitEntryPointViewModel.cs" />
+    <Compile Include="Areas\AdminExportAssessment\ViewModels\UpdateJourney\TransitExitPointViewModel.cs" />
     <Compile Include="Areas\AdminExportAssessment\ViewModels\YCode\EditYCodeViewModel.cs" />
+    <Compile Include="Areas\AdminExportAssessment\Views\Carrier\AddCarrierResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AddCarrierResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\AdminExportAssessment\Views\Carrier\CarrierBusinessTypeResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CarrierBusinessTypeResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Areas\AdminExportAssessment\Views\EditEwcCode\EditEwcCodeResources.Designer.cs" />
     <Compile Include="Areas\AdminExportAssessment\Views\HCode\HCodeResources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -1278,11 +1309,84 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>EditResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Areas\AdminExportNotificationMovements\Controllers\CancelControllerResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CancelControllerResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\AdminExportNotificationMovements\Controllers\ShipmentAuditController.cs" />
+    <Compile Include="Areas\AdminExportNotificationMovements\ViewModels\Cancel\AddViewModel.cs" />
+    <Compile Include="Areas\AdminExportNotificationMovements\ViewModels\Cancel\CancelViewModelResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CancelViewModelResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\AdminExportNotificationMovements\ViewModels\ShipmentAudit\ShipmentAuditViewModel.cs" />
+    <Compile Include="Areas\AdminExportNotificationMovements\Views\Cancel\CancelResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CancelResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\AdminExportNotificationMovements\Views\ShipmentAudit\IndexResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IndexResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Areas\AdminImportAssessment\ViewModels\Comments\CommentsResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>CommentsResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Areas\AdminImportNotificationMovements\Controllers\CancelControllerResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CancelControllerResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\AdminImportNotificationMovements\Controllers\ShipmentAuditController.cs" />
+    <Compile Include="Areas\AdminImportNotificationMovements\ViewModels\Cancel\AddViewModel.cs" />
+    <Compile Include="Areas\AdminImportNotificationMovements\ViewModels\ShipmentAudit\ShipmentAuditViewModel.cs" />
+    <Compile Include="Areas\ImportNotification\Controllers\EditContactController.cs" />
+    <Compile Include="Areas\ImportNotification\ViewModels\EditContact\EditContactViewModel.cs" />
+    <Compile Include="Areas\ImportNotification\ViewModels\EditContact\EditContactViewModelResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EditContactViewModelResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\ImportNotification\ViewModels\UpdateJourney\UpdateWasteCodesViewModel.cs" />
+    <Compile Include="Areas\ImportNotification\ViewModels\UpdateJourney\UpdateWasteCodesViewModelResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>UpdateWasteCodesViewModelResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\ImportNotification\ViewModels\UpdateJourney\UpdateWasteOperationViewModel.cs" />
+    <Compile Include="Areas\ImportNotification\ViewModels\UpdateJourney\UpdateWasteOperationViewModelResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>UpdateWasteOperationViewModelResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\ImportNotification\Views\UpdateJourney\WasteCodesResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>WasteCodesResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\ImportNotification\Views\UpdateJourney\WasteOperationResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>WasteOperationResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Reports\Controllers\ComplianceController.cs" />
+    <Compile Include="Areas\Reports\Controllers\ComplianceGuidanceResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ComplianceGuidanceResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Areas\Reports\ViewModels\Compliance\IndexViewModel.cs" />
+    <Compile Include="Areas\Reports\Views\Compliance\ComplianceResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ComplianceResources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Infrastructure\ComplianceXlsxActionResult.cs" />
     <Compile Include="Mappings\AdminExportAssessment\EditEwcMap.cs" />
     <Compile Include="Mappings\NotificationAssessment\EditHCodeMap.cs" />
     <Compile Include="Mappings\NotificationAssessment\EditYCodeMap.cs" />
@@ -1608,7 +1712,7 @@
       <DependentUpon>ProducerResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Infrastructure\ReportEnumParser.cs" />
-    <Compile Include="ViewModels\Shared\DecisionDateInputViewmodel.cs" />
+    <Compile Include="ViewModels\Shared\DateInputViewmodel.cs" />
     <Compile Include="Areas\AdminImportAssessment\ViewModels\KeyDatesOverride\IndexViewModel.cs" />
     <Compile Include="Areas\AdminImportAssessment\ViewModels\KeyDatesOverride\IndexViewModelResources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -2456,11 +2560,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>PrenotificationBulkUploadResources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Areas\NotificationMovements\Views\PrenotificationBulkUpload\TotalActiveLoadsReachedResources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>TotalActiveLoadsReachedResources.resx</DependentUpon>
-    </Compile>
     <Compile Include="Areas\NotificationMovements\Views\PrenotificationBulkUpload\TotalIntendedQuantityExceededResources.Designer.cs">
       <DependentUpon>TotalIntendedQuantityExceededResources.resx</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -2677,11 +2776,6 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>SummaryResources.resx</DependentUpon>
-    </Compile>
-    <Compile Include="Areas\NotificationMovements\Views\Create\TotalActiveLoadsReachedResources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>TotalActiveLoadsReachedResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Areas\NotificationMovements\Views\Create\ConsentPeriodExpiredResources.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -3480,10 +3574,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>BusinessResources.resx</DependentUpon>
     </Compile>
-    <Compile Include="ViewModels\Shared\DecisionDateResources.Designer.cs">
+    <Compile Include="ViewModels\Shared\DateInputResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>DecisionDateResources.resx</DependentUpon>
+      <DependentUpon>DateInputResources.resx</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\Shared\KeyValuePairViewModel.cs" />
     <Compile Include="ViewModels\Shared\KeyValueRadioButtons.cs" />
@@ -3512,6 +3606,7 @@
       <DependentUpon>RequiredDateInputResources.resx</DependentUpon>
     </Compile>
     <Compile Include="ViewModels\Shared\RequiredDateInputViewModel.cs" />
+    <Compile Include="ViewModels\Shared\ShipmentAuditTrailViewModel.cs" />
     <Compile Include="ViewModels\Shared\StringIntRadioButtons.cs" />
     <Compile Include="ViewModels\Shared\StringGuidRadioButtons.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\SpecialHandling\SpecialHandlingViewModel.cs" />
@@ -3541,6 +3636,7 @@
     <Compile Include="Areas\NotificationApplication\ViewModels\ShareNotification\SharedUserListConfirmViewModel.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\ShareNotification\SharedUserListViewModel.cs" />
     <Compile Include="Areas\NotificationApplication\ViewModels\ShareNotification\ShareNotificationViewModel.cs" />
+    <Compile Include="ViewModels\ShipmentAuditFilterType.cs" />
     <Compile Include="Views\Account\EmailVerificationRequiredResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -3780,6 +3876,14 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>AnnexResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Areas\AdminExportAssessment\Views\Carrier\AddCarrierResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>AddCarrierResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\AdminExportAssessment\Views\Carrier\CarrierBusinessTypeResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>CarrierBusinessTypeResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Areas\AdminExportAssessment\Views\Comments\IndexResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
@@ -3865,9 +3969,17 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>YCodeResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Areas\AdminExportNotificationMovements\Controllers\CancelControllerResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>CancelControllerResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Areas\AdminExportNotificationMovements\Controllers\DeleteControllerResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>DeleteControllerResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\AdminExportNotificationMovements\ViewModels\Cancel\CancelViewModelResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>CancelViewModelResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\AdminExportNotificationMovements\ViewModels\CaptureMovement\ReceiptViewModelResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -3885,6 +3997,10 @@
     <EmbeddedResource Include="Areas\AdminExportNotificationMovements\ViewModels\MovementOverride\IndexViewModelResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>IndexViewModelResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\AdminExportNotificationMovements\Views\Cancel\CancelResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>CancelResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\AdminExportNotificationMovements\Views\CaptureMovement\CancelledResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -3930,6 +4046,10 @@
     <EmbeddedResource Include="Areas\AdminExportNotificationMovements\Views\Shared\EditorTemplates\RecoveryResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>RecoveryResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\AdminExportNotificationMovements\Views\ShipmentAudit\IndexResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\AdminImportAssessment\Controllers\DecisionControllerResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -4030,6 +4150,10 @@
     <EmbeddedResource Include="Areas\AdminImportAssessment\Views\MarkAsInterim\IndexResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\AdminImportNotificationMovements\Controllers\CancelControllerResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>CancelControllerResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\AdminImportNotificationMovements\Controllers\CaptureControllerResources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -4299,6 +4423,10 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>SuccessResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Areas\ImportNotification\ViewModels\EditContact\EditContactViewModelResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>EditContactViewModelResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Areas\ImportNotification\ViewModels\Exporter\ExporterViewModelResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>ExporterViewModelResources.Designer.cs</LastGenOutput>
@@ -4358,6 +4486,14 @@
     <EmbeddedResource Include="Areas\ImportNotification\ViewModels\UpdateJourney\UpdateJourneyResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>UpdateJourneyResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\ImportNotification\ViewModels\UpdateJourney\UpdateWasteCodesViewModelResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>UpdateWasteCodesViewModelResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\ImportNotification\ViewModels\UpdateJourney\UpdateWasteOperationViewModelResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>UpdateWasteOperationViewModelResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\ImportNotification\ViewModels\WasteOperation\WasteOperationViewModelResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -4466,6 +4602,14 @@
     <EmbeddedResource Include="Areas\ImportNotification\Views\UpdateJourney\UpdateJourneyResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>UpdateJourneyResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\ImportNotification\Views\UpdateJourney\WasteCodesResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>WasteCodesResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\ImportNotification\Views\UpdateJourney\WasteOperationResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>WasteOperationResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\ImportNotification\Views\Validate\IndexResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -4867,6 +5011,7 @@
     <EmbeddedResource Include="Areas\AdminExportNotificationMovements\ViewModels\CaptureMovement\CaptureViewModelResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>CaptureViewModelResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\NotificationMovements\ViewModels\Create\ThreeWorkingDaysWarningViewModelResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -4937,10 +5082,6 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>ConsentWithdrawnResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Areas\NotificationMovements\Views\Create\TotalActiveLoadsReachedResources.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>TotalActiveLoadsReachedResources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
     <EmbeddedResource Include="Areas\NotificationMovements\Views\Create\ConsentPeriodExpiredResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>ConsentPeriodExpiredResources.Designer.cs</LastGenOutput>
@@ -4989,10 +5130,6 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>PrenotificationBulkUploadResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Areas\NotificationMovements\Views\PrenotificationBulkUpload\TotalActiveLoadsReachedResources.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>TotalActiveLoadsReachedResources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
     <EmbeddedResource Include="Areas\NotificationMovements\Views\PrenotificationBulkUpload\TotalIntendedQuantityExceededResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>TotalIntendedQuantityExceededResources.Designer.cs</LastGenOutput>
@@ -5033,6 +5170,10 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>SuccessResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Areas\Reports\Controllers\ComplianceGuidanceResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ComplianceGuidanceResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Areas\Reports\ViewModels\FinancialGuarantees\IndexViewModelResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>IndexViewModelResources.Designer.cs</LastGenOutput>
@@ -5069,6 +5210,10 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>IndexViewModelResources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Areas\Reports\Views\Compliance\ComplianceResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ComplianceResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\Reports\Views\FinancialGuarantees\IndexResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -5116,9 +5261,9 @@
       <LastGenOutput>BusinessResources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="ViewModels\Shared\DecisionDateResources.resx">
+    <EmbeddedResource Include="ViewModels\Shared\DateInputResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>DecisionDateResources.Designer.cs</LastGenOutput>
+      <LastGenOutput>DateInputResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="ViewModels\Shared\RadioButtonsResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

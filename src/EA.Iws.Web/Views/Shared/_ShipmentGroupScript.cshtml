@@ -1,0 +1,14 @@
+﻿<script>
+	$(function() {
+
+		let prevValue = parseInt($("#audit-trail tbody tr").first().find("td").first().html());
+		let currentClass = '';
+		$("#audit-trail tbody tr").each(function () {
+			if (prevValue != parseInt($(this).find("td").first().html())) {
+				(currentClass == '') ? currentClass = 'altColor' : currentClass = '';
+			}
+			$(this).addClass(currentClass);
+			prevValue = parseInt($(this).find("td").first().html());
+		});
+	});
+</script>
