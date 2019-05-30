@@ -24,10 +24,10 @@
         [DisplayName("Over active loads")]
         public string OverActiveLoads { get; set; }
 
-        [DisplayName("Over tonnage (Y/N)")]
+        [DisplayName("Over quantity (Y/N)")]
         public string OverTonnage { get; set; }
 
-        [DisplayName("Over tonnage")]
+        [DisplayName("Over quantity")]
         public string OverTonnageColour { get; set; }
 
         [DisplayName("Over shipments (Y/N)")]

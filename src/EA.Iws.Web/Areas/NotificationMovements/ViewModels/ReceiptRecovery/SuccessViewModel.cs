@@ -9,5 +9,7 @@
         public CertificateType Certificate { get; set; }
 
         public NotificationType NotificationType { get; set; }
+
+        public int ShipmentNumber { get; set; }
     }
 }

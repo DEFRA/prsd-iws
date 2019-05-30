@@ -57,6 +57,8 @@
     <Compile Include="Admin\NotificationInfo.cs" />
     <Compile Include="Admin\NotificationShipmentsCommentsType.cs" />
     <Compile Include="Admin\Reports\ComplianceData.cs" />
+    <Compile Include="Admin\Reports\ComplianceDataColourGuidance.cs" />
+    <Compile Include="Admin\Reports\ComplianceDataGuidance.cs" />
     <Compile Include="Admin\Reports\ComplianceDataReport.cs" />
     <Compile Include="Admin\Reports\FinancialGuaranteesData.cs" />
     <Compile Include="Admin\Reports\ExportMovementsData.cs" />
@@ -115,6 +117,7 @@
     <Compile Include="FinancialGuarantee\FinancialGuaranteeStatus.cs" />
     <Compile Include="Importer\ImporterData.cs" />
     <Compile Include="Admin\Search\BasicSearchResults.cs" />
+    <Compile Include="ImportMovement\AddedCancellableImportMovementValidation.cs" />
     <Compile Include="ImportMovement\ImportCancellableMovement.cs" />
     <Compile Include="ImportMovement\ImportCancelMovementData.cs" />
     <Compile Include="ImportMovement\ImportMovementSummaryData.cs" />
@@ -170,12 +173,15 @@
     <Compile Include="ImportNotification\Summary\WasteCodeSelection.cs" />
     <Compile Include="ImportNotification\Summary\WasteOperation.cs" />
     <Compile Include="ImportNotification\Summary\WasteType.cs" />
+    <Compile Include="ImportNotification\Update\WasteOperationData.cs" />
     <Compile Include="ImportNotification\Update\WasteTypes.cs" />
     <Compile Include="InternalComments\InternalComment.cs" />
     <Compile Include="MeansOfTransport\MeansOfTransportHelper.cs" />
     <Compile Include="MeansOfTransport\TransportMethod.cs" />
     <Compile Include="MovementOperation\MovementOperationData.cs" />
     <Compile Include="MovementReceipt\Decision.cs" />
+    <Compile Include="Movement\AddedCancellableMovement.cs" />
+    <Compile Include="Movement\AddedCancellableMovementValidation.cs" />
     <Compile Include="Movement\BulkReceiptRecovery\ReceiptRecoveryDataRow.cs" />
     <Compile Include="Movement\BulkReceiptRecovery\ReceiptRecoveryRulesSummary.cs" />
     <Compile Include="Movement\BulkReceiptRecovery\ReceiptRecoveryContentRuleResult.cs" />

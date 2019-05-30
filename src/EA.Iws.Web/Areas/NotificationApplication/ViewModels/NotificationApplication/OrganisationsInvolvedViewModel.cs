@@ -29,6 +29,8 @@
 
         public bool CanEditContactDetails { get; set; }
 
+        public bool DisplayAllProducers { get; set; }
+
         public OrganisationsInvolvedViewModel() 
         {
         }

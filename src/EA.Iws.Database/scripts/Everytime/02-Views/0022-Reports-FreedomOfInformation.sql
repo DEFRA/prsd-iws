@@ -7,7 +7,7 @@ AS
 SELECT
         REPLACE(N.[NotificationNumber], ' ', '') AS [NotificationNumber],
         'Export' AS [ImportOrExport],
-        FC.[IsInterim],
+        FC.[IsInterim], 
         D.[NotificationReceivedDate] AS [ReceivedDate],
         N.[CompetentAuthority] AS [CompetentAuthorityId],
         E.[Name] AS [NotifierName],
@@ -92,7 +92,8 @@ SELECT
 		CASE
 			WHEN P.[IsSiteOfExport] = 1 THEN P.[Name]
 			ELSE NULL
-		END AS [SiteOfExportName]
+		END AS [SiteOfExportName],
+		D.[NameOfOfficer] AS [Officer]
     FROM [Notification].[Notification] N
     INNER JOIN [Notification].[FacilityCollection] FC ON FC.[NotificationId] = N.[Id]
     INNER JOIN [Notification].[NotificationAssessment] NA ON NA.[NotificationApplicationId] = N.[Id]
@@ -249,7 +250,8 @@ SELECT
 		D.AcknowledgedDate,
 		O.[Date] AS [ObjectionDate],
 		D.WithdrawnDate,
-		NULL as [SiteOfExportName] 
+		NULL as [SiteOfExportName],
+		D.[NameOfOfficer] AS [Officer]
     FROM [ImportNotification].[Notification] N
     INNER JOIN [ImportNotification].[FacilityCollection] FC ON FC.[ImportNotificationId] = N.[Id]
     INNER JOIN [ImportNotification].[NotificationAssessment] NA ON NA.[NotificationApplicationId] = N.[Id]

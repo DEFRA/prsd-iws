@@ -8,6 +8,7 @@
     using Infrastructure;
     using Infrastructure.Authorization;
     using Prsd.Core.Mediator;
+    using Requests.Admin;
     using Requests.Admin.EntryOrExitPoints;
     using Requests.Admin.UserAdministration;
     using Requests.ImportNotification;
@@ -89,6 +90,8 @@
                     UserAdministrationPermissions.CanOverrideKeyDates))
                 .Result;
 
+            var hasComments = Task.Run(() => mediator.SendAsync(new CheckImportNotificationHasComments(id))).Result;
+
             var model = new ImportNavigationViewModel
             {
                 Details = details,
@@ -96,7 +99,8 @@
                 ShowImportSections = details.Status == ImportNotificationStatus.NotificationReceived,
                 AdminLinksModel = CreateAdminLinksViewModel(),
                 ShowAssessmentDecision = showAssessmentDecision,
-                ShowKeyDatesOverride = showKeyDatesOverride
+                ShowKeyDatesOverride = showKeyDatesOverride,
+                HasComments = hasComments
             };
 
             return PartialView("_ImportNavigation", model);
@@ -122,6 +126,8 @@
                     UserAdministrationPermissions.CanOverrideFinancialGuaranteeDates))
                 .Result;
 
+            var hasComments = Task.Run(() => mediator.SendAsync(new CheckNotificationHasComments(id))).Result;
+
             var model = new ExportNavigationViewModel
             {
                 Data = data,
@@ -129,7 +135,8 @@
                 AdminLinksModel = CreateAdminLinksViewModel(),
                 ShowAssessmentDecision = showAssessmentDecision,
                 ShowKeyDatesOverride = showKeyDatesOverride,
-                ShowFinancialGuaranteeDatesOverride = showFinancialGuaranteeDatesOverride
+                ShowFinancialGuaranteeDatesOverride = showFinancialGuaranteeDatesOverride,
+                HasComments = hasComments
             };
 
             return PartialView("_ExportNavigation", model);

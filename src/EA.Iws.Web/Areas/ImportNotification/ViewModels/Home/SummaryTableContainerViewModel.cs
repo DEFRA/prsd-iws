@@ -22,23 +22,24 @@
         public bool ShowChangeEntryExitPointLink { get; set; }
 
         public bool ShowChangeWasteTypesLink { get; set; }
+        
+        public bool ShowChangeWasteOperationLink { get; set; }
+        
+        public bool CanEditContactDetails { get; set; }
 
         public SummaryTableContainerViewModel(ImportNotificationSummary details, bool canChangeNumberOfShipments,
-            bool canChangeEntryExitPoint, bool canChangeWasteTypes)
+            bool canChangeEntryExitPoint, bool canChangeWasteTypes, bool canChangeWasteOperation, bool canEditContactDetails)
         {
             Details = details;
             ShowChangeLinks = details.Status == ImportNotificationStatus.NotificationReceived;
             ShowChangeNumberOfShipmentsLink = canChangeNumberOfShipments &&
                                               details.Status == ImportNotificationStatus.Consented;
             ShowChangeEntryExitPointLink = canChangeEntryExitPoint && details.Status != ImportNotificationStatus.New &&
-                                           details.Status != ImportNotificationStatus.NotificationReceived;
-            ShowChangeWasteTypesLink = canChangeEntryExitPoint &&
-                                       (details.Status == ImportNotificationStatus.AwaitingPayment ||
-                                        details.Status == ImportNotificationStatus.AwaitingAssessment ||
-                                        details.Status == ImportNotificationStatus.InAssessment ||
-                                        details.Status == ImportNotificationStatus.ReadyToAcknowledge ||
-                                        details.Status == ImportNotificationStatus.DecisionRequiredBy ||
-                                        details.Status == ImportNotificationStatus.Consented);
+                                           details.Status != ImportNotificationStatus.NotificationReceived &&
+                                           details.Status != ImportNotificationStatus.FileClosed;
+            ShowChangeWasteTypesLink = canChangeWasteTypes && EditableStatus(details.Status);
+            ShowChangeWasteOperationLink = canChangeWasteOperation && EditableStatus(details.Status);                                       
+            CanEditContactDetails = canEditContactDetails && EditableStatus(details.Status);
 
             if (details.WasteType != null)
             {
@@ -62,6 +63,16 @@
                 Details.WasteType.HCodes.WasteCodes = hcodesOrdered;
                 Details.WasteType.UnClasses.WasteCodes = unclassesOrdered;
             }
+        }
+
+        private static bool EditableStatus(ImportNotificationStatus status)
+        {
+            return status == ImportNotificationStatus.AwaitingPayment ||
+                   status == ImportNotificationStatus.AwaitingAssessment ||
+                   status == ImportNotificationStatus.InAssessment ||
+                   status == ImportNotificationStatus.ReadyToAcknowledge ||
+                   status == ImportNotificationStatus.DecisionRequiredBy ||
+                   status == ImportNotificationStatus.Consented;
         }
     }
 }

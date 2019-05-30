@@ -3,20 +3,21 @@
     using System;
     using Core.Authorization;
     using Core.Authorization.Permissions;
+    using Core.Exporters;
     using Core.Shared;
     using Prsd.Core.Mediator;
 
     [RequestAuthorization(ExportNotificationPermissions.CanEditContactDetails)]
-    public class SetExporterContact : IRequest<Unit>
+    public class SetExporterDetails : IRequest<Unit>
     {
-        public SetExporterContact(Guid notificationId, ContactData contact)
+        public SetExporterDetails(Guid notificationId, ExporterData exporter)
         {
             NotificationId = notificationId;
-            Contact = contact;
+            Exporter = exporter;
         }
 
         public Guid NotificationId { get; private set; }
 
-        public ContactData Contact { get; private set; }
+        public ExporterData Exporter { get; private set; }
     }
 }

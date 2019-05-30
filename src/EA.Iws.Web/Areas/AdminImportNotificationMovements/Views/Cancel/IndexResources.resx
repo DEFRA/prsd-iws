@@ -117,11 +117,38 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="ActualDateOfShipment" xml:space="preserve">
+    <value>Actual date of shipment</value>
+  </data>
+  <data name="AddAbandon" xml:space="preserve">
+    <value>I don't want to add any shipments</value>
+  </data>
+  <data name="AddDescription" xml:space="preserve">
+    <value>Add in the information of the shipment(s) that you would like to cancel.</value>
+  </data>
+  <data name="AddShipmentButton" xml:space="preserve">
+    <value>Add shipment</value>
+  </data>
+  <data name="AddSubHeader" xml:space="preserve">
+    <value>Additional shipments to cancel</value>
+  </data>
+  <data name="AddSubmitButton" xml:space="preserve">
+    <value>Submit</value>
+  </data>
+  <data name="AddTitle" xml:space="preserve">
+    <value>Add shipments to cancel</value>
+  </data>
   <data name="Cancel" xml:space="preserve">
     <value>Cancel</value>
   </data>
   <data name="DatePrenotified" xml:space="preserve">
     <value>Date prenotified</value>
+  </data>
+  <data name="GoToAddNewShipments" xml:space="preserve">
+    <value>I can't find the shipment(s) I want to cancel</value>
+  </data>
+  <data name="GoToShipmentSummary" xml:space="preserve">
+    <value>Go to shipment summary</value>
   </data>
   <data name="Heading" xml:space="preserve">
     <value>Which prenotifications would you like to cancel?</value>
@@ -130,7 +157,7 @@
     <value>There are no prenotifications to cancel.</value>
   </data>
   <data name="Number" xml:space="preserve">
-    <value>Number</value>
+    <value>Shipment number</value>
   </data>
   <data name="PrenotificationsToCancelHeading" xml:space="preserve">
     <value>These prenotifications can be cancelled:</value>
@@ -142,7 +169,7 @@
     <value>Shipment due</value>
   </data>
   <data name="SubHeading" xml:space="preserve">
-    <value>You can only cancel a prenotified shipment if it hasn't been shipped yet.</value>
+    <value>You should only cancel a prenotified shipment if it hasn't been shipped yet.</value>
   </data>
   <data name="Title" xml:space="preserve">
     <value>Select prenotification to cancel</value>

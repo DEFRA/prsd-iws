@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace EA.Iws.Web.ViewModels.Shared {
+namespace EA.Iws.Web.Areas.ImportNotification.ViewModels.UpdateJourney {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace EA.Iws.Web.ViewModels.Shared {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    public class DecisionDateResources {
+    public class UpdateWasteOperationViewModelResources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal DecisionDateResources() {
+        internal UpdateWasteOperationViewModelResources() {
         }
         
         /// <summary>
@@ -39,7 +39,8 @@ namespace EA.Iws.Web.ViewModels.Shared {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EA.Iws.Web.ViewModels.Shared.DecisionDateResources", typeof(DecisionDateResources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("EA.Iws.Web.Areas.ImportNotification.ViewModels.UpdateJourney.UpdateWasteOperation" +
+                            "ViewModelResources", typeof(UpdateWasteOperationViewModelResources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,38 +62,29 @@ namespace EA.Iws.Web.ViewModels.Shared {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Please enter a valid number in the &apos;Day&apos; field.
+        ///   Looks up a localized string similar to Please enter the waste operation codes.
         /// </summary>
-        public static string DayError {
+        public static string OperationCodesEmpty {
             get {
-                return ResourceManager.GetString("DayError", resourceCulture);
+                return ResourceManager.GetString("OperationCodesEmpty", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Please enter a valid date.
+        ///   Looks up a localized string similar to Brief description of the technologies and processes.
         /// </summary>
-        public static string FromValid {
+        public static string TechnologyEmployed {
             get {
-                return ResourceManager.GetString("FromValid", resourceCulture);
+                return ResourceManager.GetString("TechnologyEmployed", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Please enter a valid number in the &apos;Month&apos; field.
+        ///   Looks up a localized string similar to This description cannot be longer than 70 characters.
         /// </summary>
-        public static string MonthError {
+        public static string TechnologyEmployedMaxLength {
             get {
-                return ResourceManager.GetString("MonthError", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Please enter a valid number in the &apos;Year&apos; field.
-        /// </summary>
-        public static string YearError {
-            get {
-                return ResourceManager.GetString("YearError", resourceCulture);
+                return ResourceManager.GetString("TechnologyEmployedMaxLength", resourceCulture);
             }
         }
     }

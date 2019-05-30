@@ -77,5 +77,14 @@ namespace EA.Iws.Web.Areas.AdminExportAssessment.Views.KeyDates {
                 return ResourceManager.GetString("ButtonText", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Key dates.
+        /// </summary>
+        public static string Title {
+            get {
+                return ResourceManager.GetString("Title", resourceCulture);
+            }
+        }
     }
 }

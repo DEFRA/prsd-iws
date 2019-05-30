@@ -14,6 +14,8 @@
 
     [AuthorizeActivity(typeof(SetEntryPoint))]
     [AuthorizeActivity(typeof(SetExitPoint))]
+    [AuthorizeActivity(typeof(UpdateImportNotificationWasteTypes))]
+    [AuthorizeActivity(typeof(UpdateWasteOperation))]
     public class UpdateJourneyController : Controller
     {
         private readonly IMediator mediator;
@@ -121,6 +123,32 @@
             var wasteTypes = mapper.Map<WasteTypes>(model);
 
             await mediator.SendAsync(new UpdateImportNotificationWasteTypes(id, wasteTypes));
+
+            return RedirectToAction("Index", "Home");
+        }
+
+        [HttpGet]
+        public async Task<ActionResult> WasteOperation(Guid id)
+        {
+            var data = await mediator.SendAsync(new GetWasteOperationData(id));
+
+            return View(new UpdateWasteOperationViewModel(data));
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> WasteOperation(Guid id, UpdateWasteOperationViewModel model)
+        {
+            if (!ModelState.IsValid)
+            {
+                var details = await mediator.SendAsync(new GetNotificationDetails(id));
+
+                model.SetDetails(details);
+
+                return View(model);
+            }
+
+            await mediator.SendAsync(new UpdateWasteOperation(id, model.SelectedCodes, model.TechnologyEmployed));
 
             return RedirectToAction("Index", "Home");
         }

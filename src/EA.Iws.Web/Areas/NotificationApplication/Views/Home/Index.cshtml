@@ -27,3 +27,13 @@
 {
     @Html.Partial("_WasteRecovery", Model.WasteRecoveryViewModel)
 }
+
+<br />
+<br />
+
+@if (!Model.SubmitSideBarViewModel.IsInternalUser)
+{
+    <div>
+        @Html.ActionLink("Go to notification options", "Index", "Options")
+    </div>
+}

@@ -61,6 +61,69 @@ namespace EA.Iws.Web.Areas.AdminImportNotificationMovements.Views.Cancel {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Actual date of shipment.
+        /// </summary>
+        public static string ActualDateOfShipment {
+            get {
+                return ResourceManager.GetString("ActualDateOfShipment", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to I don&apos;t want to add any shipments.
+        /// </summary>
+        public static string AddAbandon {
+            get {
+                return ResourceManager.GetString("AddAbandon", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add in the information of the shipment(s) that you would like to cancel..
+        /// </summary>
+        public static string AddDescription {
+            get {
+                return ResourceManager.GetString("AddDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add shipment.
+        /// </summary>
+        public static string AddShipmentButton {
+            get {
+                return ResourceManager.GetString("AddShipmentButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Additional shipments to cancel.
+        /// </summary>
+        public static string AddSubHeader {
+            get {
+                return ResourceManager.GetString("AddSubHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Submit.
+        /// </summary>
+        public static string AddSubmitButton {
+            get {
+                return ResourceManager.GetString("AddSubmitButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add shipments to cancel.
+        /// </summary>
+        public static string AddTitle {
+            get {
+                return ResourceManager.GetString("AddTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cancel.
         /// </summary>
         public static string Cancel {
@@ -75,6 +138,24 @@ namespace EA.Iws.Web.Areas.AdminImportNotificationMovements.Views.Cancel {
         public static string DatePrenotified {
             get {
                 return ResourceManager.GetString("DatePrenotified", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to I can&apos;t find the shipment(s) I want to cancel.
+        /// </summary>
+        public static string GoToAddNewShipments {
+            get {
+                return ResourceManager.GetString("GoToAddNewShipments", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Go to shipment summary.
+        /// </summary>
+        public static string GoToShipmentSummary {
+            get {
+                return ResourceManager.GetString("GoToShipmentSummary", resourceCulture);
             }
         }
         
@@ -97,7 +178,7 @@ namespace EA.Iws.Web.Areas.AdminImportNotificationMovements.Views.Cancel {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Number.
+        ///   Looks up a localized string similar to Shipment number.
         /// </summary>
         public static string Number {
             get {
@@ -133,7 +214,7 @@ namespace EA.Iws.Web.Areas.AdminImportNotificationMovements.Views.Cancel {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You can only cancel a prenotified shipment if it hasn&apos;t been shipped yet..
+        ///   Looks up a localized string similar to You should only cancel a prenotified shipment if it hasn&apos;t been shipped yet..
         /// </summary>
         public static string SubHeading {
             get {

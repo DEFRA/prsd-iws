@@ -1,6 +1,5 @@
 ﻿namespace EA.Iws.Web.Areas.NotificationMovements.ViewModels.ReceiptRecovery
 {
-    using Core.Movement;
     using Core.Shared;
     using Infrastructure.Validation;
     using Prsd.Core;
@@ -8,7 +7,6 @@
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.Globalization;
-    using System.Linq;
 
     public class ReceiptViewModel : IValidatableObject
     {
@@ -37,6 +35,8 @@
         [IsValidNumber(maxPrecision: 18, NumberStyle = NumberStyles.AllowDecimalPoint, ErrorMessageResourceName = "QuantityIsValid", ErrorMessageResourceType = typeof(ReceiptRecoveryViewModelResources))]
         public string Quantity { get; set; }
         public ShipmentQuantityUnits Unit { get; set; }
+
+        public int ShipmentNumber { get; set; }
       
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {

@@ -21,6 +21,7 @@
         public List<string> PackagingData { get; set; }
         public string SpecialHandlingDetails { get; set; }
         public bool CanAddCarrier { get; set; }
+        public bool DisplayAllCarriers { get; set; }
 
         public TransportationViewModel()
         {

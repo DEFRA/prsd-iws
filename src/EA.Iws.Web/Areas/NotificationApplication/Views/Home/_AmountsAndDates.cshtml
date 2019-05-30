@@ -18,7 +18,10 @@
             @if (ViewBag.CanEditNotification)
             {
                 <th class="change">
-                    @Html.ActionLink("Change", "Index", "Shipment", new { id, backToOverview = true }, null)
+                    <a href="@Url.Action("Index", "Shipment", new { id, backToOverview = true })">
+                        Change
+                        <span class="screen-reader-text">Amounts and dates</span>
+                    </a>
                 </th>
             }
         </tr>

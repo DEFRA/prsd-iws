@@ -187,7 +187,7 @@
     <value>Enter a valid shipment number</value>
   </data>
   <data name="Subtitle" xml:space="preserve">
-    <value>Review and write comments for this notification and it's shipments for Internal users</value>
+    <value>Review and write comments for this notification and its shipments for Internal users</value>
   </data>
   <data name="To" xml:space="preserve">
     <value>Enter the end date for your search</value>

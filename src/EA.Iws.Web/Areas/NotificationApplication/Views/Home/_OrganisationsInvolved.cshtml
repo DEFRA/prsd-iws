@@ -13,6 +13,8 @@
     var importerClass = Model.IsImporterCompleted ? "over-no-alert" : "over-alert";
     var facilitiesClass = Model.IsFacilityCompleted ? "over-no-alert" : "over-alert";
     var actualSiteClass = Model.HasActualSiteOfTreatment ? "over-no-alert" : "over-alert";
+    var facilityLabel = Model.NotificationType == NotificationType.Recovery ? "Recovery facilities" : "Disposal facilities";
+    var siteLabel = Model.NotificationType == NotificationType.Recovery ? "Recovery site" : "Disposal site";
 }
 
 <table class="overview-table">
@@ -34,7 +36,10 @@
             @if (ViewBag.CanEditNotification)
             {
                 <td class="change">
-                    @Html.ActionLink("Change", "Index", "Exporter", new { id, backToOverview = true }, null)
+                    <a href="@Url.Action("Index", "Exporter", new { id, backToOverview = true })">
+                        Change
+                        <span class="screen-reader-text">Exporter</span>
+                    </a>
                 </td>
             }
         </tr>
@@ -48,7 +53,10 @@
             @if (ViewBag.CanEditNotification)
             {
                 <td class="change">
-                    @Html.ActionLink("Change", "List", "Producer", new { id, backToOverview = true }, null)
+                    <a href="@Url.Action("List", "Producer", new { id, backToOverview = true })">
+                        Change
+                        <span class="screen-reader-text">Producers</span>
+                    </a>
                 </td>
             }
         </tr>
@@ -62,7 +70,10 @@
             @if (ViewBag.CanEditNotification)
             {
                 <td class="change">
-                    @Html.ActionLink("Change", "SiteOfExport", "Producer", new { id, backToOverview = true }, null)
+                    <a href="@Url.Action("SiteOfExport", "Producer", new { id, backToOverview = true })">
+                        Change
+                        <span class="screen-reader-text">Site of export</span>
+                    </a>
                 </td>
             }
         </tr>
@@ -75,12 +86,17 @@
             </td>
             @if (ViewBag.CanEditNotification)
             {
-                <td class="change">@Html.ActionLink("Change", "Index", "Importer", new { id, backToOverview = true }, null)</td>
+                <td class="change">
+                    <a href="@Url.Action("Index", "Importer", new { id, backToOverview = true })">
+                        Change
+                        <span class="screen-reader-text">Importer</span>
+                    </a>
+                </td>
             }
         </tr>
         <tr class = @facilitiesClass>
             <td>
-                @(Model.NotificationType == NotificationType.Recovery ? "Recovery facilities" : "Disposal facilities")
+                @facilityLabel
             </td>
             <td>
                 @Html.Partial(viewLocation + "_Facility.cshtml")
@@ -88,13 +104,16 @@
             @if (ViewBag.CanEditNotification)
             {
                 <td class="change">
-                    @Html.ActionLink("Change", "List", "Facility", new { id, backToOverview = true }, null)
+                    <a href="@Url.Action("List", "Facility", new { id, backToOverview = true })">
+                        Change
+                        <span class="screen-reader-text">@facilityLabel</span>
+                    </a>
                 </td>
             }
         </tr>
         <tr class = @actualSiteClass>
             <td>
-                @(Model.NotificationType == NotificationType.Recovery ? "Recovery site" : "Disposal site")
+                @siteLabel
             </td>
             <td>
                 @Html.Partial(viewLocation + "_SiteOfRecovery.cshtml")
@@ -102,7 +121,10 @@
             @if (ViewBag.CanEditNotification)
             {
                 <td class="change">
-                    @Html.ActionLink("Change", "SiteOfTreatment", "Facility", new { id, backToOverview = true }, null)
+                    <a href="@Url.Action("SiteOfTreatment", "Facility", new { id, backToOverview = true })">
+                        Change
+                        <span class="screen-reader-text">@siteLabel</span>
+                    </a>
                 </td>
             }
         </tr>

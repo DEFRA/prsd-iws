@@ -100,7 +100,7 @@
         {
             var pastDate = Today.AddDays(-1);
 
-            await Assert.ThrowsAsync<MovementDateException>(() =>
+            await Assert.ThrowsAsync<MovementDateOutOfRangeDateInPastException>(() =>
                 dateValidator.EnsureDateValid(NotificationId, pastDate));
         }
 
