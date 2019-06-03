@@ -4,6 +4,11 @@
 <div class="overview-block">
     @if (Model.Details.WasteType != null && !Model.Details.WasteType.YCodes.IsEmpty())
     {
+        if (Model.ShowChangeWasteTypesLink)
+        {
+            <div class="change-answer">@Html.ActionLink("Change", "WasteCodes", "UpdateJourney", new { id = Model.Details.Id }, null)</div>
+        }
+
         if (Model.Details.WasteType.YCodes.IsNotApplicable)
         {
             <div class="overview-block-element">@Resource.CodesNotApplicableText</div>
