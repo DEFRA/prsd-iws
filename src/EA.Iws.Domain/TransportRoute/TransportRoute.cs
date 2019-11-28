@@ -33,7 +33,7 @@
 
         public IEnumerable<TransitState> TransitStates
         {
-            get { return TransitStatesCollection.ToSafeIEnumerable(); }
+            get { return TransitStatesCollection.ToSafeIEnumerable().OrderBy(s => s.OrdinalPosition); }
         }
 
         public Guid NotificationId { get; private set; }

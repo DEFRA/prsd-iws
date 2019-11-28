@@ -308,6 +308,50 @@
         }
 
         [Fact]
+        public void AddTransitState_ReturnedInOrdinalOrder()
+        {
+            // Arrange
+            var firstCountry = countries[0];
+            var secondCountry = countries[1];
+            var thirdCountry = countries[2];
+
+            var thirdTransitState = new TransitState(thirdCountry,
+                                                    GetTestCompetentAuthority(thirdCountry),
+                                                    GetTestEntryOrExitPoint(thirdCountry, guids[5]),
+                                                    GetTestEntryOrExitPoint(thirdCountry, guids[6]),
+                                                    3);
+
+            transportRoute.AddTransitStateToNotification(thirdTransitState);
+
+            var firstTransitState = new TransitState(firstCountry,
+                                                    GetTestCompetentAuthority(firstCountry),
+                                                    GetTestEntryOrExitPoint(firstCountry, guids[1]),
+                                                    GetTestEntryOrExitPoint(firstCountry, guids[2]),
+                                                    1);
+
+            transportRoute.AddTransitStateToNotification(firstTransitState);
+
+            var secondTransitState = new TransitState(secondCountry,
+                                                    GetTestCompetentAuthority(secondCountry),
+                                                    GetTestEntryOrExitPoint(secondCountry, guids[3]),
+                                                    GetTestEntryOrExitPoint(secondCountry, guids[4]),
+                                                    2);
+
+            // Act
+            transportRoute.AddTransitStateToNotification(secondTransitState);
+
+            // Assert
+            Assert.Equal(3, transportRoute.TransitStates.Count());
+            var actualStates = transportRoute.TransitStates.GetEnumerator();
+            actualStates.MoveNext();
+            Assert.Equal(1, actualStates.Current.OrdinalPosition);
+            actualStates.MoveNext();
+            Assert.Equal(2, actualStates.Current.OrdinalPosition);
+            actualStates.MoveNext();
+            Assert.Equal(3, actualStates.Current.OrdinalPosition);
+        }
+
+        [Fact]
         public void GetAvailableTransitStatePositions_WhereNotificationIsEmpty_ReturnsOne()
         {
             int[] result = transportRoute.GetAvailableTransitStatePositions();
