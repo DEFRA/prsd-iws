@@ -2,6 +2,21 @@
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -45,6 +60,7 @@
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -70,9 +86,12 @@
     <Content Include="scripts\Everytime\03-StoredProcedures\0013-Compliance.sql" />
     <Content Include="scripts\Everytime\04-Synonyms\0001-elmah.sql" />
     <Content Include="scripts\Everytime\02-Views\0025-Reports-BlanketBonds.sql" />
+    <Content Include="scripts\TestData\20191209-123700-create-import-notification-internal-user-7702.sql" />
     <Content Include="scripts\TestData\20190123-175000-create-submitted-notification-2504.sql" />
     <Content Include="scripts\TestData\20190123-175000-create-submitted-notification-2503.sql" />
     <Content Include="scripts\TestData\20190123-175000-create-submitted-notification-2502.sql" />
+    <Content Include="scripts\TestData\20191206-173100-create-export-notification-external-user-2506-EA.sql" />
+    <Content Include="scripts\TestData\20191206-134000-create-export-notification-internal-user-2505-EA.sql" />
     <Content Include="scripts\Update\0003-Migration\Sprint1\20170118-153400-drop-countryid.sql" />
     <Content Include="scripts\Update\0003-Migration\Sprint1\20170118-160400-add-indexes.sql" />
     <Content Include="scripts\Update\0003-Migration\Sprint1\20170119-114000-add-indexes.sql" />
@@ -449,7 +468,9 @@
     <Content Include="scripts\Update\0001-Release1\Sprint10\20150623-120000-set-eu-members.sql" />
     <Content Include="scripts\Update\0001-Release1\Sprint10\20150626-112400-move-waste-generation-to-notification.sql" />
     <Content Include="scripts\Update\0001-Release1\Sprint10\20150626-140800-link-physical-characteristics-to-notification.sql" />
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config" />
     <None Include="schema_compare.ps1" />
     <Content Include="scripts\TestData\20150511-092300-Sunil-test-user.sql" />
@@ -463,7 +484,18 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.5.2">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.5.2 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
