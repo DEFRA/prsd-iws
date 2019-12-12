@@ -1,5 +1,7 @@
 DECLARE @UserId UNIQUEIDENTIFIER;
 DECLARE @NotificationId UNIQUEIDENTIFIER = '5BB496D2-0316-4E7F-8321-22F7C88D210E';
+DECLARE @ProducerId uniqueidentifier = N'8016BA3A-E240-49FD-8B74-98974621AB61';
+DECLARE @CarrierCollectionId uniqueidentifier = '5FE93EEB-8629-46EA-8C90-6D6A6700A3EE'
 
 
 SELECT @UserId = id
@@ -22,7 +24,7 @@ INSERT [Notification].[notification]
 VALUES (@NotificationId,
         @UserId,
         1,
-        4,
+        1,
         N'GB 0001 002505',
         Cast(N'2015-09-21 09:00:00.0000000' AS DATETIME2),
         N'Recycling at advanced facility',
@@ -163,8 +165,6 @@ VALUES (NEWID(),
         @NotificationId,
         NULL)
 
-DECLARE @ProducerId uniqueidentifier = N'8016BA3A-E240-49FD-8B74-98974621AB61';
-
 INSERT [Notification].[ProducerCollection]
 	   ([Id],
 	    [NotificationId])
@@ -299,8 +299,6 @@ VALUES (NEWID(),
         3,
         Cast(N'2015-09-01' AS DATE),
         Cast(N'2016-08-27' AS DATE))
-
-DECLARE @CarrierCollectionId uniqueidentifier = '5FE93EEB-8629-46EA-8C90-6D6A6700A3EE'
 
 INSERT [Notification].[CarrierCollection]
 	   ([Id],
