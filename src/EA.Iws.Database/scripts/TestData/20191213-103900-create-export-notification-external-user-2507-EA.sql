@@ -884,15 +884,13 @@ VALUES      (@NotificationAssessmentId,
 INSERT INTO [Notification].[NotificationDates]
 (
 	[Id],
-	[NotificationAssessmentId],
-	[NotificationReceivedDate]
+	[NotificationAssessmentId]
 )
 VALUES
 (
 	(SELECT Cast(Cast(Newid() AS BINARY(10))
 						   + Cast(Getdate() AS BINARY(6)) AS UNIQUEIDENTIFIER)),
 	@NotificationAssessmentId
-	--,'2016-01-02'
 )
 
 INSERT INTO [Notification].[FinancialGuaranteeCollection]
