@@ -1,10 +1,10 @@
 -- Create an export notification with an external user for testing the CreatedBy column in the report is correct
 
-DECLARE @NotificationId UNIQUEIDENTIFIER = '699DC17A-F75E-4956-A02D-1C28B83626A2';
-DECLARE @MeansOfTransportId UNIQUEIDENTIFIER = '68BE8083-8FF6-40E1-8DAC-16889AECC1FA';
-DECLARE @FacilityCollectionId UNIQUEIDENTIFIER = '2DC28A61-93EE-4C2E-9162-CEECA3FF0827';
-DECLARE @ProducerId uniqueidentifier = N'812E3098-B7E1-4972-AAC9-15D71E4B2558';
-DECLARE @CarrierCollectionId uniqueidentifier = '94A33E89-4DB9-45B2-BC5E-4692013BAED7'
+DECLARE @NotificationId UNIQUEIDENTIFIER = '28D1BA9B-9386-4ECC-B038-076C7E11E1A3';
+DECLARE @MeansOfTransportId UNIQUEIDENTIFIER = 'AF5E06E4-CEF0-48AB-A434-D86E2F7EC866';
+DECLARE @FacilityCollectionId UNIQUEIDENTIFIER = 'B5520FDE-AC75-4C91-AC4D-813F16AC18C0';
+DECLARE @ProducerId uniqueidentifier = N'44B55777-9BAE-4341-86AE-8D6D1451FC1B';
+DECLARE @CarrierCollectionId uniqueidentifier = 'C1E97153-D831-4CDD-ADBF-CB9A43D030F5'
 
 DECLARE @UserId UNIQUEIDENTIFIER;
 
@@ -29,7 +29,7 @@ VALUES (@NotificationId,
 		@UserId,
 		1,
 		1,
-		N'GB 0001 002506',
+		N'GB 0001 002507',
 		Cast(N'2015-09-21 09:00:00.0000000' AS DATETIME2),
 		N'Recycling at advanced facility',
 		0,
@@ -495,6 +495,105 @@ VALUES (NEWID(),
 		@ExitId,
 		1)
 
+-- 2nd tranist
+SELECT @CountryId = id
+FROM   [Lookup].[country]
+WHERE  [name] = 'Germany';
+
+SELECT @CAId = id
+FROM   [Lookup].[competentauthority]
+WHERE  [code] = 'DE023';
+
+SELECT @EntryId = id
+FROM   [Notification].[entryorexitpoint]
+WHERE  [name] = 'Forst';
+
+SELECT @ExitId = id
+FROM   [Notification].[entryorexitpoint]
+WHERE  [name] = 'Hartkirchen';
+
+INSERT [Notification].[transitstate]
+	   ([id],
+		[TransportRouteId],
+		[countryid],
+		[competentauthorityid],
+		[entrypointid],
+		[exitpointid],
+		[ordinalposition])
+VALUES (NEWID(),
+		@TransportRouteId,
+		@CountryId,
+		@CAId,
+		@EntryId,
+		@ExitId,
+		2)
+
+-- 3rd tranist
+SELECT @CountryId = id
+FROM   [Lookup].[country]
+WHERE  [name] = 'Poland';
+
+SELECT @CAId = id
+FROM   [Lookup].[competentauthority]
+WHERE  [code] = 'PL';
+
+SELECT @EntryId = id
+FROM   [Notification].[entryorexitpoint]
+WHERE  [name] = 'Olszyna';
+
+SELECT @ExitId = id
+FROM   [Notification].[entryorexitpoint]
+WHERE  [name] = 'Gdynia';
+
+INSERT [Notification].[transitstate]
+	   ([id],
+		[TransportRouteId],
+		[countryid],
+		[competentauthorityid],
+		[entrypointid],
+		[exitpointid],
+		[ordinalposition])
+VALUES (NEWID(),
+		@TransportRouteId,
+		@CountryId,
+		@CAId,
+		@EntryId,
+		@ExitId,
+		3)
+
+-- 4th tranist
+SELECT @CountryId = id
+FROM   [Lookup].[country]
+WHERE  [name] = 'Belgium';
+
+SELECT @CAId = id
+FROM   [Lookup].[competentauthority]
+WHERE  [code] = 'BE001';
+
+SELECT @EntryId = id
+FROM   [Notification].[entryorexitpoint]
+WHERE  [name] = 'Retie';
+
+SELECT @ExitId = id
+FROM   [Notification].[entryorexitpoint]
+WHERE  [name] = 'Lichtenbusch';
+
+INSERT [Notification].[transitstate]
+	   ([id],
+		[TransportRouteId],
+		[countryid],
+		[competentauthorityid],
+		[entrypointid],
+		[exitpointid],
+		[ordinalposition])
+VALUES (NEWID(),
+		@TransportRouteId,
+		@CountryId,
+		@CAId,
+		@EntryId,
+		@ExitId,
+		4)
+
 INSERT [Notification].[operationcodes]
 	   ([id],
 		[notificationid],
@@ -792,8 +891,8 @@ VALUES
 (
 	(SELECT Cast(Cast(Newid() AS BINARY(10))
 						   + Cast(Getdate() AS BINARY(6)) AS UNIQUEIDENTIFIER)),
-	@NotificationAssessmentId,
-	'2016-01-02'
+	@NotificationAssessmentId
+	--,'2016-01-02'
 )
 
 INSERT INTO [Notification].[FinancialGuaranteeCollection]
