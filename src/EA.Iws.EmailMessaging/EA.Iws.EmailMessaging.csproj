@@ -36,14 +36,6 @@
       <HintPath>..\packages\Autofac.4.1.1\lib\net45\Autofac.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="EA.Prsd.Core, Version=1.0.16294.2, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\EA.Prsd.Core.1.0.16294-develop2\lib\net452\EA.Prsd.Core.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="EA.Prsd.Email, Version=1.0.16294.2, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\EA.Prsd.Email.1.0.16294-develop2\lib\net451\EA.Prsd.Email.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="RazorEngine, Version=3.9.0.0, Culture=neutral, PublicKeyToken=9ee697374c7e744a, processorArchitecture=MSIL">
       <HintPath>..\packages\RazorEngine.3.9.0\lib\net45\RazorEngine.dll</HintPath>
       <Private>True</Private>
@@ -87,6 +79,14 @@
     <ProjectReference Include="..\EA.Iws.Domain\EA.Iws.Domain.csproj">
       <Project>{A987FFF6-5386-419E-AF0A-E6C74E3323CF}</Project>
       <Name>EA.Iws.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EA.Prsd.Core\EA.Prsd.Core.csproj">
+      <Project>{d38ea5ef-f9f5-480c-ae0a-214122559426}</Project>
+      <Name>EA.Prsd.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EA.Prsd.Email\EA.Prsd.Email.csproj">
+      <Project>{89e709f9-14a1-4bca-b145-76bdf4a84247}</Project>
+      <Name>EA.Prsd.Email</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

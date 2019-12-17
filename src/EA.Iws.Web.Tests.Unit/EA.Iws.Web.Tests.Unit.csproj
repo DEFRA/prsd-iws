@@ -55,14 +55,6 @@
       <HintPath>..\packages\Autofac.4.1.1\lib\net45\Autofac.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="EA.Prsd.Core, Version=1.0.16294.2, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\EA.Prsd.Core.Web.1.0.16294-develop2\lib\net452\EA.Prsd.Core.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="EA.Prsd.Core.Web, Version=1.0.16294.2, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\EA.Prsd.Core.Web.1.0.16294-develop2\lib\net452\EA.Prsd.Core.Web.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="FakeItEasy, Version=2.3.1.0, Culture=neutral, PublicKeyToken=eff28e2146d5fd2c, processorArchitecture=MSIL">
       <HintPath>..\packages\FakeItEasy.2.3.1\lib\net40\FakeItEasy.dll</HintPath>
       <Private>True</Private>
@@ -249,6 +241,14 @@
     <ProjectReference Include="..\EA.Iws.Web\EA.Iws.Web.csproj">
       <Project>{2e112d48-a841-4db7-b96f-4211c4da31c0}</Project>
       <Name>EA.Iws.Web</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EA.Prsd.Core.Web\EA.Prsd.Core.Web.csproj">
+      <Project>{67eb0694-6149-4a6f-89de-144f24802c7f}</Project>
+      <Name>EA.Prsd.Core.Web</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EA.Prsd.Core\EA.Prsd.Core.csproj">
+      <Project>{d38ea5ef-f9f5-480c-ae0a-214122559426}</Project>
+      <Name>EA.Prsd.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
