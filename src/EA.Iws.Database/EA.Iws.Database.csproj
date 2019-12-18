@@ -109,6 +109,7 @@
     <Content Include="scripts\Update\0006-CI-2019\Sprint1\20190411-153000-add-lookup-shipment-audit-type-table.sql" />
     <Content Include="scripts\Update\0006-CI-2019\Sprint2\20190424-110200-add-incomplete-lookup-shipment-audit-type-data.sql" />
     <Content Include="scripts\Update\0006-CI-2019\Sprint3\20190515-1058-alter-foi-cache-table.sql" />
+    <Content Include="scripts\Update\AzureMigration\20191218-1015-create-sessions-table.sql" />
     <Content Include="unindexed-foreign-keys.sql" />
     <Content Include="scripts\Everytime\01-Functions\0003-Reports-PricingInfo.sql" />
     <Content Include="scripts\Everytime\03-StoredProcedures\0003-uspUpdateImportNotificationKeyDates.sql" />
@@ -464,6 +465,7 @@
       <Name>EA.Prsd.Core</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
