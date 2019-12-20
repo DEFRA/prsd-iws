@@ -183,11 +183,13 @@
     <Compile Include="Extensions\StringExtensionsTests.cs" />
     <Compile Include="Infrastructure\AuditServiceTests.cs" />
     <Compile Include="Infrastructure\HtmlHelperExtensionsTests.cs" />
+    <Compile Include="Infrastructure\MaintenanceModeFilterAttributeTests.cs" />
     <Compile Include="Infrastructure\NotificationOwnerFilterTests.cs" />
     <Compile Include="Infrastructure\RangeExtensionsTests.cs" />
     <Compile Include="Infrastructure\Validation\CompetentAuthorityEmailAddressAttributeTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RouteAssert.cs" />
+    <Compile Include="Startup\GlobalFilterConfigurationTests.cs" />
     <Compile Include="TestHelpers\Factories\AutofacContainerFactory.cs" />
     <Compile Include="TestHelpers\Factories\FakeHttpPostedFileFactory.cs" />
     <Compile Include="TestHelpers\HttpContextMocker.cs" />

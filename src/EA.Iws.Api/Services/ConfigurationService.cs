@@ -1,5 +1,6 @@
 ﻿namespace EA.Iws.Api.Services
 {
+    using Microsoft.Azure;
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
@@ -8,7 +9,7 @@
     using System.Globalization;
     using System.Linq;
     using System.Web.Configuration;
-
+    
     // https://github.com/NuGet/NuGetGallery
     public class ConfigurationService
     {
@@ -95,7 +96,7 @@
 
         protected virtual string GetAppSetting(string settingName)
         {
-            return WebConfigurationManager.AppSettings[settingName];
+            return CloudConfigurationManager.GetSetting(settingName);
         }
 
         protected virtual ConnectionStringSettings GetConnectionString(string settingName)
