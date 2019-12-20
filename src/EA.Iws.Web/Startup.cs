@@ -44,6 +44,8 @@ namespace EA.Iws.Web
             AntiForgeryConfig.RequireSsl = true;
             AntiForgeryConfig.CookieName = Prsd.Core.Web.Constants.CookiePrefix + Constants.AntiForgeryCookieName;
 
+            FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters, configuration.CurrentConfiguration);
+
             MvcHandler.DisableMvcResponseHeader = true;
         }
     }

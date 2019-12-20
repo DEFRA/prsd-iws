@@ -2,7 +2,7 @@
 {
     using System.ComponentModel;
 
-    public class AppConfiguration
+    public class AppConfiguration : IAppConfiguration
     {
         [DefaultValue("Development")]
         public string Environment { get; set; }
@@ -29,5 +29,8 @@
         public int FileSafeTimerMilliseconds { get; set; }
 
         public string DonePageUrl { get; set; }
+
+        [DefaultValue(false)]
+        public bool MaintenanceMode { get; set; }
     }
 }

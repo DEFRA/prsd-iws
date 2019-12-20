@@ -51,7 +51,7 @@ namespace EA.Iws.Api
             config.MapHttpAttributeRoutes();
             config.Routes.MapHttpRoute("DefaultApi", "api/{controller}/{id}", new { id = RouteParameter.Optional });
             config.Services.Add(typeof(IExceptionLogger), new ElmahExceptionLogger());
-            config.Filters.Add(new ElmahHandleErrorApiAttribute());
+            config.Filters.AddRange(new FilterConfig(configurationService.CurrentConfiguration).Collection);
             config.DependencyResolver = new AutofacWebApiDependencyResolver(container);
             config.Formatters.JsonFormatter.SerializerSettings.ContractResolver = new DefaultContractResolver { IgnoreSerializableAttribute = true };
 
