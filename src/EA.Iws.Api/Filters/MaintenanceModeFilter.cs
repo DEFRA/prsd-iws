@@ -10,7 +10,13 @@
 
     public class MaintenanceModeFilter : IActionFilter
     {
-        public bool AllowMultiple => false;
+        public bool AllowMultiple
+        {
+            get
+            {
+                return false;
+            }
+        } 
 
         public Task<HttpResponseMessage> ExecuteActionFilterAsync(HttpActionContext actionContext, CancellationToken cancellationToken, Func<Task<HttpResponseMessage>> continuation)
         {
