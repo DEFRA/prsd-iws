@@ -16,7 +16,6 @@
             {
                 return false;
             }
-            set { AllowMultiple = false; }
         } 
 
         public Task<HttpResponseMessage> ExecuteActionFilterAsync(HttpActionContext actionContext, CancellationToken cancellationToken, Func<Task<HttpResponseMessage>> continuation)
