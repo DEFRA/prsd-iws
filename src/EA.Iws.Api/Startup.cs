@@ -79,7 +79,8 @@ namespace EA.Iws.Api
 
             return new IdentityServerOptions
             {
-                Factory = factory
+                Factory = factory,
+                EnableWelcomePage = false
             };
         }
     }
