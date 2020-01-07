@@ -21,7 +21,7 @@
 
             var result = await filter.ExecuteActionFilterAsync(httpContext, new CancellationToken(), null);
 
-            Assert.Equal(result.StatusCode, HttpStatusCode.ServiceUnavailable);
+            Assert.Equal(HttpStatusCode.ServiceUnavailable, result.StatusCode);
         }
     }
 }
