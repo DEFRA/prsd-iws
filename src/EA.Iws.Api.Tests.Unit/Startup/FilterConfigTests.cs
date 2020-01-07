@@ -22,7 +22,7 @@
         [Fact]
         public void FilterConfig_GivenConfig_ShouldContainElmahHandleErrorApiAttribute()
         {
-            Assert.Equal(config.Collection.Count(x => x.GetType() == (typeof(ElmahHandleErrorApiAttribute))), 1);
+            Assert.Equal(1, config.Collection.Count(x => x.GetType() == (typeof(ElmahHandleErrorApiAttribute))));
         }
 
         [Fact]
@@ -32,7 +32,7 @@
 
             var lconfig = new FilterConfig(configuration);
 
-            Assert.Equal(lconfig.Collection.Count(x => x.GetType() == (typeof(MaintenanceModeFilter))), 1);
+            Assert.Equal(1, lconfig.Collection.Count(x => x.GetType() == (typeof(MaintenanceModeFilter))));
         }
 
         [Fact]
@@ -40,7 +40,7 @@
         {
             A.CallTo(() => configuration.MaintenanceMode).Returns(false);
 
-            Assert.Equal(config.Collection.Count(x => x.GetType() == (typeof(MaintenanceModeFilter))), 0);
+            Assert.Equal(0, config.Collection.Count(x => x.GetType() == (typeof(MaintenanceModeFilter))));
         }
     }
 }

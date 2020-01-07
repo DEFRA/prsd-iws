@@ -8,18 +8,12 @@
 
     public class FilterConfig
     {
-        private IList<IFilter> collection;
-
-        public IList<IFilter> Collection
-        {
-            get { return collection; }
-            set { collection = value; }
-        }
+        public IList<IFilter> Collection { get; set; }
 
         public FilterConfig(IAppConfiguration configuration)
         {
-            collection = new List<IFilter> { new ElmahHandleErrorApiAttribute() };
-
+            Collection = new List<IFilter> { new ElmahHandleErrorApiAttribute() };
+            
             if (configuration.MaintenanceMode)
             {
                 Collection.Add(new MaintenanceModeFilter());
