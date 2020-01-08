@@ -5,6 +5,7 @@ using Microsoft.Owin;
 
 namespace EA.Iws.Api
 {
+    using System.Net;
     using System.Web;
     using System.Web.Http;
     using System.Web.Http.ExceptionHandling;
@@ -70,6 +71,8 @@ namespace EA.Iws.Api
             app.UseClaimsTransformation(ClaimsTransformationOptionsFactory.Create());
 
             app.UseWebApi(config);
+
+            ServicePointManager.SecurityProtocol |= SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12;
         }
 
         private static IdentityServerOptions GetIdentityServerOptions(IAppBuilder app, AppConfiguration config)
