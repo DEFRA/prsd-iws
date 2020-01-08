@@ -23,5 +23,9 @@
         string DonePageUrl { get; set; }
 
         bool MaintenanceMode { get; set; }
+
+        string ClamAvHost { get; set; }
+
+        int ClamAvPort { get; set; }
     }
 }
