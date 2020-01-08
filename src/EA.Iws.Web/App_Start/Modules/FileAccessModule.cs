@@ -19,12 +19,10 @@
                 {
                     return (IVirusScanner)new ClamAvVirusScanner(c.Resolve<IClamClientWrapper>());
                 }
-                //return new ClamAvVirusScanner(c.Resolve<IClaimClientWrapper>());
                 return (IVirusScanner)new WriteFileVirusScanner(c.Resolve<AppConfiguration>(), c.Resolve<IFileAccess>());
             }).As<IVirusScanner>().SingleInstance();
-            //builder.RegisterType<WriteFileVirusScanner>().As<IVirusScanner>();
+            
             builder.RegisterType<FileReader>().As<IFileReader>();
-            builder.RegisterType<FileAccess>().As<IFileAccess>();
         }
     }
 }
