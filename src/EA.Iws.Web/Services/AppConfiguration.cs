@@ -32,5 +32,11 @@
 
         [DefaultValue(false)]
         public bool MaintenanceMode { get; set; }
+
+        [DefaultValue(null)]
+        public string ClamAvHost { get; set; }
+
+        [DefaultValue(null)]
+        public int ClamAvPort { get; set; }
     }
 }
