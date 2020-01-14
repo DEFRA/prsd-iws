@@ -1,4 +1,4 @@
-﻿namespace EA.Iws.Api.Infrastructure
+﻿namespace EA.IWS.Api.Infrastructure.Infrastructure
 {
     using System.Diagnostics;
     using System.IO;
@@ -6,7 +6,7 @@
     using Serilog.Events;
     using Serilog.Formatting.Display;
 
-    internal class DebugLogSink : ILogEventSink
+    public class DebugLogSink : ILogEventSink
     {
         private readonly MessageTemplateTextFormatter formatter;
 

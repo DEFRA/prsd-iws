@@ -1,16 +1,9 @@
-﻿namespace EA.Iws.Api
+﻿namespace EA.Iws.Virus.Api.App_Start
 {
     using System.Web.Http;
     using Autofac;
     using Autofac.Integration.WebApi;
-    using DataAccess;
-    using DataAccess.Identity;
-    using DocumentGeneration;
-    using Identity;
-    using Infrastructure.Services;
-    using Microsoft.AspNet.Identity;
-    using Prsd.Core.Autofac;
-    using RequestHandlers;
+    using EA.Iws.DataAccess;
     using Services;
 
     public class AutofacBootstrapper
@@ -32,17 +25,12 @@
 
             // Register all Autofac specific IModule implementations
             builder.RegisterAssemblyModules(typeof(Startup).Assembly);
-            builder.RegisterAssemblyModules(typeof(AutofacMediator).Assembly);
 
-            builder.RegisterModule(new RequestHandlerModule());
+            //builder.RegisterModule(new RequestHandlerModule());
             builder.RegisterModule(new EntityFrameworkModule());
-            builder.RegisterModule(new DocumentGeneratorModule());
+            //builder.RegisterModule(new DocumentGeneratorModule());
 
             // http://www.talksharp.com/configuring-autofac-to-work-with-the-aspnet-identity-framework-in-mvc-5
-            builder.RegisterType<IwsIdentityContext>().AsSelf().InstancePerRequest();
-            builder.RegisterType<ApplicationUserStore>().As<IUserStore<ApplicationUser>>().InstancePerRequest();
-            builder.RegisterType<ApplicationUserManager>().AsSelf().InstancePerRequest();
-            builder.RegisterType<ApplicationUserManager>().As<UserManager<ApplicationUser>>().InstancePerRequest();
 
             return builder.Build();
         }
