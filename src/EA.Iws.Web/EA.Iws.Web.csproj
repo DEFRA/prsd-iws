@@ -1082,6 +1082,7 @@
     <Content Include="Areas\ImportNotification\Views\EditContact\Exporter.cshtml" />
     <Content Include="Areas\ImportNotification\Views\EditContact\Importer.cshtml" />
     <Content Include="Areas\AdminImportNotificationMovements\Views\Cancel\Add.cshtml" />
+    <Content Include="Areas\Admin\Views\VirusScan\Index.cshtml" />
     <None Include="Scripts\jquery-2.1.3.intellisense.js" />
     <Content Include="Scripts\govuk\govuk-template.js" />
     <Content Include="Scripts\govuk\ie.js" />
@@ -1345,6 +1346,8 @@
     <Compile Include="Areas\AdminImportNotificationMovements\Controllers\ShipmentAuditController.cs" />
     <Compile Include="Areas\AdminImportNotificationMovements\ViewModels\Cancel\AddViewModel.cs" />
     <Compile Include="Areas\AdminImportNotificationMovements\ViewModels\ShipmentAudit\ShipmentAuditViewModel.cs" />
+    <Compile Include="Areas\Admin\Controllers\VirusScanController.cs" />
+    <Compile Include="Areas\Admin\ViewModels\VirusScan\VirusScanViewModel.cs" />
     <Compile Include="Areas\ImportNotification\Controllers\EditContactController.cs" />
     <Compile Include="Areas\ImportNotification\ViewModels\EditContact\EditContactViewModel.cs" />
     <Compile Include="Areas\ImportNotification\ViewModels\EditContact\EditContactViewModelResources.Designer.cs">
@@ -4419,6 +4422,7 @@
     <EmbeddedResource Include="Areas\Admin\Views\TestEmail\Index.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Index.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\Admin\Views\TestEmail\Success.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

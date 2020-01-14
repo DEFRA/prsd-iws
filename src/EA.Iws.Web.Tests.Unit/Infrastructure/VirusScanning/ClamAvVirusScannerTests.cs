@@ -25,25 +25,52 @@
             Assert.Throws<NotImplementedException>(() => clamAvVirusScanner.ScanFile(A.Dummy<byte[]>()));
         }
 
-        [Theory]
-        [MemberData(nameof(VirusScanResults))]
-        public async void ScanFileAsync_GivenCleanResult_CleanResultShouldBeReturned(string clamAvError, ScanResult expectedResult)
+        [Fact]
+        public async void ScanFileAsync_GivenCleanResult_CleanResultShouldBeReturned()
         {
             var file = A.Dummy<byte[]>();
 
-            A.CallTo(() => clamClientWrapper.ScanFileAsync(file)).Returns(new ClamScanResult(clamAvError));
+            A.CallTo(() => clamClientWrapper.ScanFileAsync(file)).Returns(new ClamScanResult("ok"));
 
             var result = await clamAvVirusScanner.ScanFileAsync(file);
 
-            Assert.Equal(expectedResult, result);
+            Assert.Equal(ScanResult.Clean, result);
         }
 
-        public static IEnumerable<object[]> VirusScanResults()
+        [Fact]
+        public async void ScanFileAsync_GivenVirusResult_VirusResultShouldBeReturned()
         {
-            yield return new object[] { "ok", ScanResult.Clean };
-            yield return new object[] { "found", ScanResult.Virus };
-            yield return new object[] { "error", ScanResult.Error };
-            yield return new object[] { "unknown", ScanResult.Unknown };
+            var file = A.Dummy<byte[]>();
+
+            A.CallTo(() => clamClientWrapper.ScanFileAsync(file)).Returns(new ClamScanResult("found"));
+
+            var result = await clamAvVirusScanner.ScanFileAsync(file);
+
+            Assert.Equal(ScanResult.Virus, result);
+        }
+
+        [Fact]
+        public async void ScanFileAsync_GivenErrorResult_ErrorResultShouldBeReturned()
+        {
+            var file = A.Dummy<byte[]>();
+
+            A.CallTo(() => clamClientWrapper.ScanFileAsync(file)).Returns(new ClamScanResult("error"));
+
+            var result = await clamAvVirusScanner.ScanFileAsync(file);
+
+            Assert.Equal(ScanResult.Error, result);
+        }
+
+        [Fact]
+        public async void ScanFileAsync_GivenUnknownResult_UnknownResultShouldBeReturned()
+        {
+            var file = A.Dummy<byte[]>();
+
+            A.CallTo(() => clamClientWrapper.ScanFileAsync(file)).Returns(new ClamScanResult("unknown"));
+
+            var result = await clamAvVirusScanner.ScanFileAsync(file);
+
+            Assert.Equal(ScanResult.Unknown, result);
         }
     }
 }
