@@ -1,0 +1,27 @@
+﻿@model EA.Iws.Web.Areas.Admin.ViewModels.VirusScan.VirusScanViewModel
+@{
+    ViewBag.Title = "Scan file";
+}
+
+
+<h1 class="heading-large">Select file for scanning</h1>
+
+@using (Html.BeginForm("Index", "VirusScan", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.Gds().ValidationSummary()
+
+    @Html.AntiForgeryToken()
+
+    <div class="form-group @Html.Gds().FormGroupClass(m => m.File)">
+        @Html.Gds().LabelFor(m => m.File)
+        @Html.Gds().ValidationMessageFor(m => m.File)
+        @Html.Gds().TextBoxFor(m => m.File, new { type = "file" })
+    </div>
+  
+   <div class="form-group">
+        <button class="button" type="submit">Scan</button>
+    </div>
+    <div class="form-group">
+        @ViewBag.Message
+    </div>
+}

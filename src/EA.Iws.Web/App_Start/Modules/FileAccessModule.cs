@@ -10,6 +10,7 @@
         protected override void Load(ContainerBuilder builder)
         {
             builder.RegisterType<FileAccess>().As<IFileAccess>();
+            builder.RegisterType<ClamClientWrapper>().As<IClamClientWrapper>();
 
             builder.Register(c =>
             {
