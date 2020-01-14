@@ -1,12 +1,12 @@
-﻿namespace EA.Iws.Api.Infrastructure
+﻿namespace EA.IWS.Api.Infrastructure.Infrastructure
 {
+    using Serilog.Configuration;
     using System;
     using Prsd.Core;
     using Serilog;
-    using Serilog.Configuration;
     using Serilog.Formatting.Display;
 
-    internal static class LoggerConfigurationExtensions
+    public static class LoggerConfigurationExtensions
     {
         private const string DefaultOutputTemplate = "{Timestamp} [{Level}] {Message}{NewLine}{Exception}";
 

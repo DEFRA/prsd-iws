@@ -1,11 +1,11 @@
-﻿namespace EA.Iws.Api.Services
+﻿namespace EA.Iws.Api.Infrastructure.Services
 {
     using System.Diagnostics;
     using System.Threading;
     using System.Threading.Tasks;
     using System.Web.Http.ExceptionHandling;
 
-    internal class DebugExceptionLogger : IExceptionLogger
+    public class DebugExceptionLogger : IExceptionLogger
     {
         public Task LogAsync(ExceptionLoggerContext context, CancellationToken cancellationToken)
         {

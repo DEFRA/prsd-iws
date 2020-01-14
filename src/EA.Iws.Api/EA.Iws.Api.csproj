@@ -228,25 +228,18 @@
     <Compile Include="Filters\MaintenanceModeFilter.cs" />
     <Compile Include="IdSrv\AspNetIdentityUserService.cs" />
     <Compile Include="IdSrv\ClaimsTransformationOptionsFactory.cs" />
-    <Compile Include="Infrastructure\ElmahSqlLogger.cs" />
-    <Compile Include="Infrastructure\HttpStatusCodeResult.cs" />
     <Compile Include="Controllers\MediatorController.cs" />
     <Compile Include="Identity\ApplicationUserManager.cs" />
     <Compile Include="Controllers\RegistrationController.cs" />
     <Compile Include="Identity\UserContext.cs" />
     <Compile Include="IdSrv\Clients.cs" />
-    <Compile Include="Infrastructure\DebugLogSink.cs" />
-    <Compile Include="Infrastructure\ElmahLogSink.cs" />
     <Compile Include="IdSrv\Factory.cs" />
     <Compile Include="IdSrv\Scopes.cs" />
     <Compile Include="IdSrv\UserService.cs" />
     <Compile Include="IdSrv\UserServiceExtensions.cs" />
-    <Compile Include="Infrastructure\ApiControllerExtensions.cs" />
-    <Compile Include="Infrastructure\LoggerConfigurationExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\AppConfiguration.cs" />
     <Compile Include="Services\ConfigurationService.cs" />
-    <Compile Include="Services\DebugExceptionLogger.cs" />
     <Compile Include="Services\IAppConfiguration.cs" />
     <Compile Include="Services\NullEventDispatcher.cs" />
     <Compile Include="Startup.cs" />
@@ -283,6 +276,10 @@
     <ProjectReference Include="..\EA.Iws.Api.Client\EA.Iws.Api.Client.csproj">
       <Project>{b772429d-709e-4978-b105-a54606acc29a}</Project>
       <Name>EA.Iws.Api.Client</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EA.IWS.Api.Infrastructure\EA.Iws.Api.Infrastructure.csproj">
+      <Project>{77720566-4f8c-4284-8a91-b94495468a8f}</Project>
+      <Name>EA.Iws.Api.Infrastructure</Name>
     </ProjectReference>
     <ProjectReference Include="..\EA.Iws.Core\EA.Iws.Core.csproj">
       <Project>{DD2A73A4-A652-4ECC-87EE-24239CE45AD4}</Project>

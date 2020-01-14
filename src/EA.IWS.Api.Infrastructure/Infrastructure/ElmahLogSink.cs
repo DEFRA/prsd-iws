@@ -1,10 +1,10 @@
-﻿namespace EA.Iws.Api.Infrastructure
+﻿namespace EA.IWS.Api.Infrastructure.Infrastructure
 {
     using Elmah;
     using Serilog.Core;
     using Serilog.Events;
 
-    internal class ElmahLogSink : ILogEventSink
+    public class ElmahLogSink : ILogEventSink
     {
         public void Emit(LogEvent logEvent)
         {

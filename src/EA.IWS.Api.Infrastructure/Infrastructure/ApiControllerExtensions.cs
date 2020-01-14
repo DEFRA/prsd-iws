@@ -1,4 +1,4 @@
-﻿namespace EA.Iws.Api.Infrastructure
+﻿namespace EA.IWS.Api.Infrastructure.Infrastructure
 {
     using System.Net;
     using System.Web.Http;

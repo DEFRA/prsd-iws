@@ -20,8 +20,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-namespace EA.Iws.Api.Infrastructure
+namespace EA.IWS.Api.Infrastructure.Infrastructure
 {
+    using EA.Iws.Api.Client.Entities;
+    using EA.Iws.DataAccess;
     using System;
     using System.Collections.Generic;
     using System.Data;
@@ -31,8 +33,6 @@ namespace EA.Iws.Api.Infrastructure
     using System.Text;
     using System.Threading.Tasks;
     using System.Xml;
-    using Client.Entities;
-    using DataAccess;
     using Elmah;
 
     public class ElmahSqlLogger
