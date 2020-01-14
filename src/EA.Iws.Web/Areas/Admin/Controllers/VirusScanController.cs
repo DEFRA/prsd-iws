@@ -34,7 +34,7 @@
             
             var result = await virusScanner.ScanFileAsync(fileContents.ToArray());
 
-            ViewBag.Message = $"Started: {timeStart} Ended: {DateTime.Now} Result: {result.ToString()}";
+            ViewBag.Message = string.Format("Started: {0} Ended: {1} Result: {2}", timeStart, DateTime.UtcNow, result.ToString());
 
             return View();
         }
