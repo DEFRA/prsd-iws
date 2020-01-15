@@ -189,7 +189,6 @@
     <Compile Include="Infrastructure\NotificationOwnerFilterTests.cs" />
     <Compile Include="Infrastructure\RangeExtensionsTests.cs" />
     <Compile Include="Infrastructure\Validation\CompetentAuthorityEmailAddressAttributeTests.cs" />
-    <Compile Include="Infrastructure\VirusScanning\ClamAvVirusScannerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RouteAssert.cs" />
     <Compile Include="Startup\GlobalFilterConfigurationTests.cs" />
@@ -262,6 +261,7 @@
   <ItemGroup>
     <Analyzer Include="..\packages\xunit.analyzers.0.10.0\analyzers\dotnet\cs\xunit.analyzers.dll" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

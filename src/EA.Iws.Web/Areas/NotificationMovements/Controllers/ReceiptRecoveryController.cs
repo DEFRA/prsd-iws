@@ -332,7 +332,7 @@
         private async Task SaveReceiptData(Guid notificationId, UploadCertificateViewModel model)
         {
             var fileExtension = Path.GetExtension(model.File.FileName);
-            var uploadedFile = await fileReader.GetFileBytes(model.File);
+            var uploadedFile = await fileReader.GetFileBytes(model.File, User.GetAccessToken());
 
             var id = model.MovementId;
            var fileId = await mediator.SendAsync(new SaveCertificateOfReceiptFile(id, uploadedFile, fileExtension));
@@ -345,7 +345,7 @@
         private async Task SaveCompleteData(Guid notificationId, UploadCertificateViewModel model)
         {
             var fileExtension = Path.GetExtension(model.File.FileName);
-            var uploadedFile = await fileReader.GetFileBytes(model.File);
+            var uploadedFile = await fileReader.GetFileBytes(model.File, User.GetAccessToken());
 
             var id = model.MovementId;
 
@@ -355,7 +355,7 @@
         private async Task SaveReceiptRecoveryData(Guid notificationId, UploadCertificateViewModel model)
         {
             var fileExtension = Path.GetExtension(model.File.FileName);
-            var uploadedFile = await fileReader.GetFileBytes(model.File);
+            var uploadedFile = await fileReader.GetFileBytes(model.File, User.GetAccessToken());
 
             var id = model.MovementId;
             var fileId = await mediator.SendAsync(new SaveCertificateOfReceiptFile(id, uploadedFile, fileExtension));

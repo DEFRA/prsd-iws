@@ -11,5 +11,11 @@
         public string ConnectionString { get; set; }
 
         public string SiteRoot { get; set; }
+
+        [DefaultValue(1000)]
+        public int FileSafeTimerMilliseconds { get; set; }
+
+        [DefaultValue("~/App_Data/uploads")]
+        public string FileUploadTempPath { get; set; }
     }
 }

@@ -1,10 +1,10 @@
-﻿namespace EA.Iws.Web.Infrastructure
+﻿namespace EA.Iws.Scanning
 {
     using System.IO;
     using System.Threading.Tasks;
     using System.Web.Hosting;
 
-    internal class FileAccess : IFileAccess
+    public class FileAccess : IFileAccess
     {
         public async Task WriteFileAsync(string fileName, byte[] fileBytes)
         {

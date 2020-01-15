@@ -86,7 +86,6 @@
     <Compile Include="ImportNotification\AddressBuilderTests.cs" />
     <Compile Include="ImportNotification\ContactTests.cs" />
     <Compile Include="ImportNotification\FacilityCollectionTests.cs" />
-    <Compile Include="ImportNotification\FacilityListTests.cs" />
     <Compile Include="ImportNotification\FacilityTests.cs" />
     <Compile Include="ImportNotification\OperationCodesListTests.cs" />
     <Compile Include="ImportNotification\StateOfExportTests.cs" />

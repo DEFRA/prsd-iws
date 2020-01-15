@@ -6,6 +6,7 @@ using Microsoft.Owin;
 namespace EA.Iws.Virus.Api
 {
     using System.Net;
+    using System.Net.Http.Formatting;
     using System.Web;
     using System.Web.Http;
     using System.Web.Http.ExceptionHandling;
@@ -55,8 +56,7 @@ namespace EA.Iws.Virus.Api
             config.Services.Add(typeof(IExceptionLogger), new ElmahExceptionLogger());
             config.Filters.Add(new ElmahHandleErrorApiAttribute());
             config.DependencyResolver = new AutofacWebApiDependencyResolver(container);
-            config.Formatters.JsonFormatter.SerializerSettings.ContractResolver = new DefaultContractResolver
-                { IgnoreSerializableAttribute = true };
+            config.Formatters.JsonFormatter.SerializerSettings.ContractResolver = new DefaultContractResolver { IgnoreSerializableAttribute = true };
 
             app.UseIdentityServerBearerTokenAuthentication(new IdentityServerBearerTokenAuthenticationOptions
             {
@@ -68,7 +68,7 @@ namespace EA.Iws.Virus.Api
             app.UseAutofacMiddleware(container);
             app.UseAutofacWebApi(config);
 
-            //app.UseClaimsTransformation(ClaimsTransformationOptionsFactory.Create());
+            config.Formatters.Add(new BsonMediaTypeFormatter());
 
             app.UseWebApi(config);
 

@@ -6,6 +6,7 @@
     using Prsd.Core.Mediator;
     using Prsd.Core.Web.OAuth;
     using Prsd.Core.Web.OpenId;
+    using Scanning;
     using Services;
 
     public class ApiClientModule : Module
@@ -18,6 +19,13 @@
                 var config = cc.Resolve<AppConfiguration>();
                 return new IwsClient(config.ApiUrl);
             }).As<IIwsClient>().InstancePerRequest();
+
+            builder.Register(c =>
+            {
+                var cc = c.Resolve<IComponentContext>();
+                var config = cc.Resolve<AppConfiguration>();
+                return new IwsScanClient(config.ScanUrl);
+            }).As<IIwsScanClient>().InstancePerRequest();
 
             builder.Register(c =>
             {
