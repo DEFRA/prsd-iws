@@ -1,10 +1,9 @@
-﻿namespace EA.Iws.Web.Infrastructure.VirusScanning
+﻿namespace EA.Iws.Scanning
 {
     using System;
     using System.IO;
     using System.Threading;
     using System.Threading.Tasks;
-    using Services;
 
     /// <summary>
     ///     This implementation assumes that writing a file to disk will result in a virus
@@ -13,15 +12,15 @@
     /// </summary>
     public class WriteFileVirusScanner : IVirusScanner
     {
-        private readonly AppConfiguration config;
         private readonly IFileAccess fileAccess;
         private readonly TimeSpan fileWriteTimeout;
+        private readonly string tempPath;
 
-        public WriteFileVirusScanner(AppConfiguration config, IFileAccess fileAccess)
+        public WriteFileVirusScanner(Double timeout, IFileAccess fileAccess, string tempPath)
         {
-            this.config = config;
             this.fileAccess = fileAccess;
-            fileWriteTimeout = TimeSpan.FromMilliseconds(config.FileSafeTimerMilliseconds);
+            this.tempPath = tempPath;
+            fileWriteTimeout = TimeSpan.FromMilliseconds(timeout);
         }
 
         public ScanResult ScanFile(byte[] fileData)
@@ -62,7 +61,7 @@
 
         private string GetTempFileName()
         {
-            return Path.Combine(fileAccess.MapPath(config.FileUploadTempPath), Guid.NewGuid().ToString());
+            return Path.Combine(fileAccess.MapPath(tempPath), Guid.NewGuid().ToString());
         }
 
         private ScanResult GetScanResult(string fileName)

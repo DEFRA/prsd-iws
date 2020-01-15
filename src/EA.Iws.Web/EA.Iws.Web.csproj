@@ -148,9 +148,6 @@
     <Reference Include="Microsoft.WindowsAzure.Configuration, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.WindowsAzure.ConfigurationManager.3.2.3\lib\net40\Microsoft.WindowsAzure.Configuration.dll</HintPath>
     </Reference>
-    <Reference Include="nClam, Version=4.0.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\nClam.4.0.1\lib\net45\nClam.dll</HintPath>
-    </Reference>
     <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.8.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -1390,10 +1387,9 @@
       <DependentUpon>ComplianceResources.resx</DependentUpon>
     </Compile>
     <Compile Include="Infrastructure\ComplianceXlsxActionResult.cs" />
+    <Compile Include="Infrastructure\FileReader.cs" />
+    <Compile Include="Infrastructure\IFileReader.cs" />
     <Compile Include="Infrastructure\MaintenanceModeFilterAttribute.cs" />
-    <Compile Include="Infrastructure\VirusScanning\ClamClientWrapper.cs" />
-    <Compile Include="Infrastructure\VirusScanning\ClamAvVirusScanner.cs" />
-    <Compile Include="Infrastructure\VirusScanning\IClamClientWrapper.cs" />
     <Compile Include="Mappings\AdminExportAssessment\EditEwcMap.cs" />
     <Compile Include="Mappings\NotificationAssessment\EditHCodeMap.cs" />
     <Compile Include="Mappings\NotificationAssessment\EditYCodeMap.cs" />
@@ -2951,12 +2947,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>FeedbackLinkResources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Infrastructure\FileAccess.cs" />
-    <Compile Include="Infrastructure\FileReader.cs" />
     <Compile Include="Infrastructure\HandleApiErrorFilter.cs" />
     <Compile Include="Infrastructure\HtmlHelperExtensions.cs" />
-    <Compile Include="Infrastructure\IFileAccess.cs" />
-    <Compile Include="Infrastructure\IFileReader.cs" />
     <Compile Include="Infrastructure\MimeTypes.cs" />
     <Compile Include="Infrastructure\ExportStatus.cs" />
     <Compile Include="Infrastructure\ExportStatusExtensions.cs" />
@@ -2969,11 +2961,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>RestrictToAllowedUploadTypesAttributeResources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Infrastructure\VirusScanning\IVirusScanner.cs" />
-    <Compile Include="Infrastructure\VirusScanning\ScanResult.cs" />
     <Compile Include="Infrastructure\VirusScanning\VirusFoundException.cs" />
     <Compile Include="Infrastructure\VirusScanning\VirusFoundFilter.cs" />
-    <Compile Include="Infrastructure\VirusScanning\WriteFileVirusScanner.cs" />
     <Compile Include="Logging\ElmahFilter.cs" />
     <Compile Include="Mappings\ImportNotificationAssessment\FinancialGuarantee\FinancialGuaranteeDecisionViewModelMap.cs" />
     <Compile Include="ViewModels\Applicant\UserNotificationsViewModel.cs" />
@@ -3813,6 +3802,10 @@
     <ProjectReference Include="..\EA.Iws.Requests\EA.Iws.Requests.csproj">
       <Project>{87FBB5CC-A732-4363-A158-39DBF3707407}</Project>
       <Name>EA.Iws.Requests</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EA.Iws.Scanning\EA.Iws.Scanning.csproj">
+      <Project>{f3d22005-e199-4f2b-8344-ce2ac5148557}</Project>
+      <Name>EA.Iws.Scanning</Name>
     </ProjectReference>
     <ProjectReference Include="..\EA.Prsd.Core.Autofac\EA.Prsd.Core.Autofac.csproj">
       <Project>{333c65b9-ebb6-4d04-921e-89094f80e2e3}</Project>
@@ -5432,6 +5425,7 @@
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
+  <PropertyGroup />
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />

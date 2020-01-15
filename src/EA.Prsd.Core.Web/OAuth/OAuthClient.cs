@@ -20,7 +20,7 @@
         public async Task<TokenResponse> GetAccessTokenAsync(string username, string password)
         {
             return await oauth2Client.RequestResourceOwnerPasswordAsync(username, password,
-                "openid api1 all_claims profile offline_access");
+                "openid api1 api2 all_claims profile offline_access");
         }
 
         public async Task<TokenResponse> GetRefreshTokenAsync(string refreshToken)

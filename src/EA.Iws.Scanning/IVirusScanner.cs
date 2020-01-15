@@ -1,4 +1,4 @@
-﻿namespace EA.Iws.Web.Infrastructure.VirusScanning
+﻿namespace EA.Iws.Scanning
 {
     using System.Threading.Tasks;
 

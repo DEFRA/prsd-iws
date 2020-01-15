@@ -4,15 +4,16 @@
     using System.IO;
     using System.Threading.Tasks;
     using System.Web.Mvc;
-    using Infrastructure.VirusScanning;
+    using Infrastructure;
+    using Scanning;
     using ViewModels.VirusScan;
 
     [Authorize(Roles = "internal,readonly")]
     public class VirusScanController : Controller
     {
-        private readonly IVirusScanner virusScanner;
+        private readonly IWriteFileVirusWrapper virusScanner;
 
-        public VirusScanController(IVirusScanner virusScanner)
+        public VirusScanController(IWriteFileVirusWrapper virusScanner)
         {
             this.virusScanner = virusScanner;
         }
@@ -32,7 +33,7 @@
             var fileContents = new MemoryStream();
             model.File.InputStream.CopyTo(fileContents);
             
-            var result = await virusScanner.ScanFileAsync(fileContents.ToArray());
+            var result = await virusScanner.ScanFile(fileContents.ToArray(), User.GetAccessToken());
 
             ViewBag.Message = string.Format("Started: {0} Ended: {1} Result: {2}", timeStart, DateTime.UtcNow, result.ToString());
 

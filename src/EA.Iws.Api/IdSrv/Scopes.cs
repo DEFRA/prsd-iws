@@ -12,6 +12,10 @@
                 new Scope
                 {
                     Name = "api1"
+                },
+                new Scope()
+                {
+                    Name = "api2"
                 }
             };
 

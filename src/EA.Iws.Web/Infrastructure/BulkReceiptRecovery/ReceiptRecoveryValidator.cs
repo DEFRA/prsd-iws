@@ -22,9 +22,9 @@
             this.fileValidator = fileValidator;
         }
 
-        public async Task<ReceiptRecoveryRulesSummary> GetValidationSummary(HttpPostedFileBase file, Guid notificationId)
+        public async Task<ReceiptRecoveryRulesSummary> GetValidationSummary(HttpPostedFileBase file, Guid notificationId, string token)
         {
-            var fileRulesSummary = await fileValidator.GetFileRulesSummary(file, BulkFileType.ReceiptRecovery);
+            var fileRulesSummary = await fileValidator.GetFileRulesSummary(file, BulkFileType.ReceiptRecovery, token);
             var extension = Path.GetExtension(file.FileName);
             var isCsv = extension == ".csv";
 
@@ -41,9 +41,9 @@
             return rulesSummary;
         }
 
-        public async Task<BulkFileRulesSummary> GetShipmentMovementValidationSummary(HttpPostedFileBase file, Guid notificationId)
+        public async Task<BulkFileRulesSummary> GetShipmentMovementValidationSummary(HttpPostedFileBase file, Guid notificationId, string token)
         {
-            return await fileValidator.GetFileRulesSummary(file, BulkFileType.SupportingDocument);
+            return await fileValidator.GetFileRulesSummary(file, BulkFileType.SupportingDocument, token);
         }
     }
 }

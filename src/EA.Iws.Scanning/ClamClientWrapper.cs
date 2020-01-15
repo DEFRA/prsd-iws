@@ -1,22 +1,21 @@
-﻿namespace EA.Iws.Web.Infrastructure.VirusScanning
+﻿namespace EA.Iws.Scanning
 {
     using System;
     using System.Threading.Tasks;
     using System.Web;
+    using EA.Prsd.Core;
     using Elmah;
     using nClam;
-    using Prsd.Core;
-    using Services;
 
     public class ClamClientWrapper : IClamClientWrapper
     {
         private readonly ClamClient client;
 
-        public ClamClientWrapper(AppConfiguration config)
+        public ClamClientWrapper(string host, int port)
         {
-            Guard.ArgumentNotNullOrEmpty(() => config.ClamAvHost, config.ClamAvHost);
+            Guard.ArgumentNotNullOrEmpty(() => host, host);
             
-            client = new ClamClient(config.ClamAvHost);
+            client = new ClamClient(host, port);
         }
 
         public async Task<ClamScanResult> ScanFileAsync(byte[] fileData)

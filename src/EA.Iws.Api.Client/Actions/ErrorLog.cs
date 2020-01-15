@@ -5,7 +5,7 @@
     using Entities;
     using Prsd.Core.Web.Extensions;
 
-    internal class ErrorLog : IErrorLog
+    public class ErrorLog : IErrorLog
     {
         private const string Controller = "ErrorLog/";
         private readonly HttpClient httpClient;

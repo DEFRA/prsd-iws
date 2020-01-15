@@ -1,10 +1,8 @@
-﻿namespace EA.Iws.Web.Tests.Unit.Infrastructure.VirusScanning
+﻿namespace EA.Iws.Scanning.Tests.Unit
 {
     using System;
-    using System.Collections.Generic;
     using FakeItEasy;
     using nClam;
-    using Web.Infrastructure.VirusScanning;
     using Xunit;
 
     public class ClamAvVirusScannerTests

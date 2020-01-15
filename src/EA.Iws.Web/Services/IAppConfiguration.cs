@@ -27,5 +27,9 @@
         string ClamAvHost { get; set; }
 
         int ClamAvPort { get; set; }
+
+        bool UseLocalScan { get; set; }
+
+        string ScanUrl { get; set; }
     }
 }

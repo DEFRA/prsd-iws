@@ -46,7 +46,7 @@
             }
 
             var fileExtension = Path.GetExtension(model.File.FileName);
-            var uploadedFile = await fileReader.GetFileBytes(model.File);
+            var uploadedFile = await fileReader.GetFileBytes(model.File, User.GetAccessToken());
 
             await mediator.SendAsync(new SetMovementRejected(id, 
                 model.RejectionDate.AsDateTime().Value, 

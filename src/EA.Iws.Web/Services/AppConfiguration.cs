@@ -38,5 +38,11 @@
 
         [DefaultValue(null)]
         public int ClamAvPort { get; set; }
+
+        [DefaultValue(true)]
+        public bool UseLocalScan { get; set; }
+
+        [DefaultValue("")]
+        public string ScanUrl { get; set; }
     }
 }

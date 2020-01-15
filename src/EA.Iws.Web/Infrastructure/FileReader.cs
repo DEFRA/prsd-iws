@@ -5,19 +5,20 @@
     using System.Threading.Tasks;
     using System.Web;
     using ExcelDataReader;
+    using Scanning;
     using VirusScanning;
     using DataTable = System.Data.DataTable;
 
     internal class FileReader : IFileReader
     {
-        private readonly IVirusScanner virusScanner;
+        private readonly IWriteFileVirusWrapper virusScanner;
 
-        public FileReader(IVirusScanner virusScanner)
+        public FileReader(IWriteFileVirusWrapper virusScanner)
         {
             this.virusScanner = virusScanner;
         }
 
-        public async Task<byte[]> GetFileBytes(HttpPostedFileBase file)
+        public async Task<byte[]> GetFileBytes(HttpPostedFileBase file, string token)
         {
             byte[] fileBytes;
 
@@ -28,7 +29,7 @@
                 fileBytes = memoryStream.ToArray();
             }
 
-            if (await virusScanner.ScanFileAsync(fileBytes) == ScanResult.Virus)
+            if (await virusScanner.ScanFile(fileBytes, token) == ScanResult.Virus)
             {
                 throw new VirusFoundException(string.Format("Virus found in file {0}", file.FileName));
             }
@@ -36,11 +37,11 @@
             return fileBytes;
         }
 
-        public async Task<DataTable> GetFirstDataTable(HttpPostedFileBase file, bool isCsv, bool useHeaderRow)
+        public async Task<DataTable> GetFirstDataTable(HttpPostedFileBase file, bool isCsv, bool useHeaderRow, string token)
         {
             DataTable result = null;
 
-            await GetFileBytes(file); // Check for virus.
+            await GetFileBytes(file, token); // Check for virus.
 
             using (var reader = isCsv
                 ? ExcelReaderFactory.CreateCsvReader(file.InputStream)
