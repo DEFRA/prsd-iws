@@ -2,7 +2,6 @@
 {
     using System;
     using System.Net;
-    using System.Net.Http;
     using System.Security;
     using System.Security.Authentication;
     using System.Threading.Tasks;
@@ -22,6 +21,14 @@
         {
             this.virusScanner = virusScanner;
             this.logger = logger;
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        [Route("Scan")]
+        public IHttpActionResult Scan()
+        {
+            return Ok("ok");
         }
 
         [HttpPost]
