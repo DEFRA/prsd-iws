@@ -8,6 +8,7 @@
     using Prsd.Core.Web.OAuth;
     using Prsd.Core.Web.OpenId;
 
+    [RoutePrefix("api")]
     public class WarmupController : ApiController
     {
         [AllowAnonymous]
