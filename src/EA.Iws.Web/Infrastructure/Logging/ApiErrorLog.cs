@@ -2,12 +2,16 @@
 {
     using System;
     using System.Collections;
+    using System.IO;
     using System.Threading.Tasks;
     using System.Web;
     using System.Web.Mvc;
+    using System.Xml;
+    using System.Xml.Serialization;
     using Api.Client;
     using Api.Client.Entities;
     using Elmah;
+    using Prsd.Core.Web.ApiClient;
 
     public class ApiErrorLog : ErrorLog
     {
@@ -26,6 +30,14 @@
         {
             var errorXml = ErrorXml.EncodeString(error);
             var id = Guid.NewGuid();
+
+            var innerException = (ApiException)error.Exception;
+
+            if (innerException != null)
+            {
+                Task.Run(() => apiClient.ErrorLog.Create(new ErrorData(Guid.NewGuid(), ApplicationName, error.HostName, innerException.ErrorData.ExceptionType, innerException.Source, innerException.ErrorData.ExceptionMessage,
+                    error.User, (int)innerException.StatusCode, error.Time.ToUniversalTime(), GetApiErrorAsXml(innerException.ErrorData))));
+            }
 
             var errorData = new ErrorData(id, ApplicationName, error.HostName, error.Type, error.Source, error.Message,
                 error.User,
@@ -64,6 +76,20 @@
             }
 
             return errorList.TotalRecords;
+        }
+
+        public string GetApiErrorAsXml(ApiError error)
+        {
+            var apiError = new XmlSerializer(typeof(ApiError));
+
+            using (var sww = new StringWriter())
+            {
+                using (var writer = XmlWriter.Create(sww))
+                {
+                    apiError.Serialize(writer, error);
+                    return sww.ToString();
+                }
+            }
         }
     }
 }
