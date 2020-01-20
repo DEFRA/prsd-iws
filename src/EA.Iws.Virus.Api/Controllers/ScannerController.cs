@@ -38,7 +38,7 @@
             try
             {
                 var result = await virusScanner.ScanFileAsync(file);
-                
+
                 return Ok(result);
             }
             catch (AuthenticationException ex)

@@ -34,13 +34,12 @@
         {
             httpClient.SetBearerToken(accessToken);
             httpClient.DefaultRequestHeaders.Accept.Clear();
-            //httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/bson"));
-
-            //var formatter = new BsonMediaTypeFormatter();
 
             var response = await httpClient.PostAsJsonAsync("scanner/Scan", file).ConfigureAwait(false);
 
-            return await response.CreateResponseAsync<ScanResult>(new EnumerationConverter()).ConfigureAwait(false);
+            var result =  await response.CreateResponseAsync<ScanResult>(new EnumerationConverter()).ConfigureAwait(false);
+
+            return result;
         }
     }
 }
