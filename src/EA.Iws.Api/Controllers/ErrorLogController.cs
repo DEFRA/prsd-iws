@@ -20,7 +20,7 @@
 
         [HttpPost]
         [Route("Create")]
-        [AllowAnonymous]
+        [Authorize]
         public async Task<IHttpActionResult> Create(ErrorData errorData)
         {
             await logger.Log(errorData);

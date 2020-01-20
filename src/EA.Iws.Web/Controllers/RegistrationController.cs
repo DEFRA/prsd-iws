@@ -22,14 +22,17 @@
         private readonly IIwsClient client;
         private readonly IAuthenticationManager authenticationManager;
         private readonly Func<IOAuthClient> oauthClient;
+        private readonly Func<IOAuthClientCredentialClient> oauthClientCredentialClient;
 
         public RegistrationController(Func<IOAuthClient> oauthClient,
             IIwsClient client,
-            IAuthenticationManager authenticationManager)
+            IAuthenticationManager authenticationManager, 
+            Func<IOAuthClientCredentialClient> oauthClientCredentialClient)
         {
             this.oauthClient = oauthClient;
             this.client = client;
             this.authenticationManager = authenticationManager;
+            this.oauthClientCredentialClient = oauthClientCredentialClient;
         }
 
         [HttpGet]
@@ -41,8 +44,10 @@
                 return RedirectToAction("Index", "Home", new { area = string.Empty });
             }
 
+            var tokenResponse = await oauthClientCredentialClient().GetClientCredentialsAsync();
+
             var model = new ApplicantRegistrationViewModel();
-            await this.BindCountryList(client);
+            await this.BindCountryList(client, tokenResponse.AccessToken);
             model.Address.DefaultCountryId = this.GetDefaultCountryId();
             return View(model);
         }
@@ -52,6 +57,8 @@
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> ApplicantRegistration(ApplicantRegistrationViewModel model)
         {
+            var response = await oauthClientCredentialClient().GetClientCredentialsAsync();
+
             if (ModelState.IsValid)
             {
                 var applicantRegistrationData = new ApplicantRegistrationData
@@ -66,7 +73,7 @@
 
                 try
                 {
-                    var userId = await client.Registration.RegisterApplicantAsync(applicantRegistrationData);
+                    var userId = await client.Registration.RegisterApplicantAsync(response.AccessToken, applicantRegistrationData);
                     var signInResponse = await oauthClient().GetAccessTokenAsync(model.Email, model.Password);
                     authenticationManager.SignIn(signInResponse.GenerateUserIdentity());
 
@@ -96,11 +103,11 @@
                     }
                 }
 
-                await this.BindCountryList(client);
+                await this.BindCountryList(client, response.AccessToken);
                 return View(model);
             }
 
-            await this.BindCountryList(client);
+            await this.BindCountryList(client, response.AccessToken);
             return View(model);
         }
 
@@ -295,7 +302,7 @@
             var response = await client.SendAsync(User.GetAccessToken(), new GetOrganisationDetailsByUser());
             var model = new EditOrganisationViewModel(response);
 
-            await this.BindCountryList(client);
+            await this.BindCountryList(client, User.GetAccessToken());
             model.CountryId =
                 new Guid(
                     ((SelectList)ViewBag.Countries).Single(
@@ -313,7 +320,7 @@
         {
             if (!ModelState.IsValid)
             {
-                await this.BindCountryList(client);
+                await this.BindCountryList(client, User.GetAccessToken());
                 return View(model);
             }
 

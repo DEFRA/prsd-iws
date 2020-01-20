@@ -141,6 +141,7 @@
         private static RegistrationController GetMockAccountController(object viewModel)
         {
             var client = A.Fake<IIwsClient>();
+            
             A.CallTo(() => client.SendAsync(A<GetCountries>._)).Returns(new List<CountryData>
             {
                 new CountryData
@@ -156,8 +157,9 @@
             });
 
             var oauth = A.Fake<IOAuthClient>();
+            var clientCredentials = A.Fake<IOAuthClientCredentialClient>();
 
-            var registrationController = new RegistrationController(() => oauth, client, null);
+            var registrationController = new RegistrationController(() => oauth, client, null, () => clientCredentials);
             // Mimic the behaviour of the model binder which is responsible for Validating the Model
             var validationContext = new ValidationContext(viewModel, null, null);
             var validationResults = new List<ValidationResult>();

@@ -20,6 +20,10 @@
 
         string ApiClientId { get; set; }
 
+        string ApiClientCredentialSecret { get; set; }
+
+        string ApiClientCredentialId { get; set; }
+
         bool MaintenanceMode { get; set; }
     }
 }

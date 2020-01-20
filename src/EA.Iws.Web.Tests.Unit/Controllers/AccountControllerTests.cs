@@ -8,6 +8,7 @@
     using Api.Client;
     using Api.Client.Entities;
     using FakeItEasy;
+    using IdentityModel.Client;
     using Microsoft.Owin.Security;
     using Prsd.Core.Web.OAuth;
     using Prsd.Core.Web.OpenId;
@@ -18,14 +19,16 @@
     public class AccountControllerTests
     {
         private readonly IIwsClient client;
+        private readonly IOAuthClientCredentialClient oauthClientCredentialClient;
         private readonly AccountController controller;
 
         public AccountControllerTests()
         {
             client = A.Fake<IIwsClient>();
+            oauthClientCredentialClient = A.Fake<IOAuthClientCredentialClient>();
 
             controller = new AccountController(A.Fake<IOAuthClient>(), A.Fake<IAuthenticationManager>(), client,
-                A.Fake<IUserInfoClient>());
+                A.Fake<IUserInfoClient>(), oauthClientCredentialClient);
 
             var request = A.Fake<HttpRequestBase>();
             var context = A.Fake<HttpContextBase>();
@@ -60,15 +63,21 @@
         public async Task ForgotPassword_ValidModel_CallsApi()
         {
             await controller.ForgotPassword(new ForgotPasswordViewModel { Email = "test@email.com" });
+            var tokenResponse = A.Fake<TokenResponse>();
 
-            A.CallTo(() => client.Registration.ResetPasswordRequestAsync(A<PasswordResetRequest>._))
+            A.CallTo(() => oauthClientCredentialClient.GetClientCredentialsAsync()).Returns(tokenResponse);
+
+            A.CallTo(() => client.Registration.ResetPasswordRequestAsync(tokenResponse.AccessToken, A<PasswordResetRequest>._))
                 .MustHaveHappened(Repeated.Exactly.Once);
         }
 
         [Fact]
         public async Task ForgotPassword_ValidModel_ReturnsEmailSentView()
         {
-            A.CallTo(() => client.Registration.ResetPasswordRequestAsync(A<PasswordResetRequest>._)).Returns(true);
+            var tokenResponse = A.Fake<TokenResponse>();
+
+            A.CallTo(() => oauthClientCredentialClient.GetClientCredentialsAsync()).Returns(tokenResponse);
+            A.CallTo(() => client.Registration.ResetPasswordRequestAsync(tokenResponse.AccessToken, A<PasswordResetRequest>._)).Returns(true);
 
             var result =
                 await controller.ForgotPassword(new ForgotPasswordViewModel { Email = "test@email.com" }) as
@@ -100,8 +109,11 @@
             await
                 controller.ResetPassword(new Guid("9E6E137D-4903-414B-BE9D-1A89893C678B"), "code",
                     new ResetPasswordViewModel());
+            var tokenResponse = A.Fake<TokenResponse>();
 
-            A.CallTo(() => client.Registration.ResetPasswordAsync(A<PasswordResetData>._))
+            A.CallTo(() => oauthClientCredentialClient.GetClientCredentialsAsync()).Returns(tokenResponse);
+
+            A.CallTo(() => client.Registration.ResetPasswordAsync(tokenResponse.AccessToken, A<PasswordResetData>._))
                 .MustHaveHappened(Repeated.Exactly.Once);
         }
 

@@ -22,6 +22,10 @@
 
         public string ApiClientId { get; set; }
 
+        public string ApiClientCredentialSecret { get; set; }
+
+        public string ApiClientCredentialId { get; set; }
+
         [DefaultValue("~/App_Data/uploads")]
         public string FileUploadTempPath { get; set; }
 

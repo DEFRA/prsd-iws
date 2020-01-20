@@ -8,13 +8,14 @@
     using Api.Client;
     using Core.Shared;
     using Prsd.Core.Mediator;
+    using Prsd.Core.Web.OAuth;
     using Requests.Shared;
 
     public static class ControllerExtensions
     {
-        public static async Task BindCountryList(this Controller controller, IIwsClient client, bool setDefaultAsUnitedKingdom = true)
+        public static async Task BindCountryList(this Controller controller, IIwsClient client, string accessToken, bool setDefaultAsUnitedKingdom = true)
         {
-            var response = await client.SendAsync(new GetCountries());
+            var response = await client.SendAsync(accessToken, new GetCountries());
 
             BindCountriesToViewBag(controller, response, setDefaultAsUnitedKingdom);
         }

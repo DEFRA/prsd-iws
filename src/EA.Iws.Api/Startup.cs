@@ -63,7 +63,7 @@ namespace EA.Iws.Api
             app.UseIdentityServerBearerTokenAuthentication(new IdentityServerBearerTokenAuthenticationOptions
             {
                 Authority = configurationService.CurrentConfiguration.SiteRoot,
-                RequiredScopes = new[] { "api1" },
+                RequiredScopes = new[] { "api1", "api3" },
                 ValidationMode = ValidationMode.ValidationEndpoint
             });
 
