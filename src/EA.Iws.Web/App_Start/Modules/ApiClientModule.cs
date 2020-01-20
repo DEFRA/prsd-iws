@@ -38,6 +38,13 @@
             {
                 var cc = c.Resolve<IComponentContext>();
                 var config = cc.Resolve<AppConfiguration>();
+                return new OAuthClientCredentialClient(config.ApiUrl, config.ApiClientCredentialId, config.ApiClientCredentialSecret);
+            }).As<IOAuthClientCredentialClient>().SingleInstance();
+
+            builder.Register(c =>
+            {
+                var cc = c.Resolve<IComponentContext>();
+                var config = cc.Resolve<AppConfiguration>();
                 return new UserInfoClient(config.ApiUrl);
             }).As<IUserInfoClient>().InstancePerRequest();
 

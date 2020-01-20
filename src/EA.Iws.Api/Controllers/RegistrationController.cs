@@ -11,10 +11,10 @@
     using EmailMessaging;
     using Identity;
     using Microsoft.AspNet.Identity;
-    using Prsd.Core;
     using Prsd.Core.Domain;
 
     [RoutePrefix("api/Registration")]
+    [Authorize]
     public class RegistrationController : ApiController
     {
         private readonly IUserContext userContext;
@@ -30,7 +30,6 @@
             this.userManager = userManager;
         }
 
-        [AllowAnonymous]
         [Route("Register")]
         public async Task<IHttpActionResult> Register(ApplicantRegistrationData model)
         {
@@ -66,7 +65,6 @@
             return Ok(user.Id);
         }
 
-        [AllowAnonymous]
         [Route("RegisterAdmin")]
         public async Task<IHttpActionResult> RegisterAdmin(AdminRegistrationData model)
         {
@@ -170,7 +168,6 @@
             return Ok(user.Id);
         }
 
-        [AllowAnonymous]
         [HttpPost]
         [Route("ResetPasswordRequest")]
         public async Task<IHttpActionResult> ResetPasswordRequest(PasswordResetRequest model)
@@ -189,7 +186,6 @@
             return Ok(false);
         }
 
-        [AllowAnonymous]
         [HttpPost]
         [Route("ResetPassword")]
         public async Task<IHttpActionResult> ResetPassword(PasswordResetData model)

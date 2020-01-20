@@ -16,6 +16,10 @@
 
         string ApiClientId { get; set; }
 
+        string ApiClientCredentialSecret { get; set; }
+
+        string ApiClientCredentialId { get; set; }
+
         string FileUploadTempPath { get; set; }
 
         int FileSafeTimerMilliseconds { get; set; }

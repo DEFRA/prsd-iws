@@ -15,6 +15,7 @@
     using Serilog;
 
     [RoutePrefix("api")]
+    [Authorize]
     public class MediatorController : ApiController
     {
         private readonly IMediator mediator;
@@ -32,7 +33,6 @@
         /// <param name="apiRequest">The wrapped request object with assembly qualified type name.</param>
         /// <returns>An object of the correct type (which will be serialized as json).</returns>
         [HttpPost]
-        [Authorize]
         [Route("Send")]
         public async Task<IHttpActionResult> Send(ApiRequest apiRequest)
         {

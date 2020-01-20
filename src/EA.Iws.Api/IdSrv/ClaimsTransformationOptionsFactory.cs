@@ -1,5 +1,6 @@
 ﻿namespace EA.Iws.Api.IdSrv
 {
+    using System.Linq;
     using System.Security.Claims;
     using System.Threading.Tasks;
     using System.Web;
@@ -29,10 +30,17 @@
 
             var manager = context.Resolve<ApplicationUserManager>();
 
-            var user = await manager.FindByIdAsync(incoming.FindFirst("sub").Value);
-            var identity = await manager.CreateIdentityAsync(user, "API");
+            var id = incoming.FindAll("sub");
 
-            return new ClaimsPrincipal(identity);
+            if (id.Any())
+            {
+                var user = await manager.FindByIdAsync(incoming.FindFirst("sub").Value);
+                var identity = await manager.CreateIdentityAsync(user, "API");
+
+                return new ClaimsPrincipal(identity);
+            }
+
+            return new ClaimsPrincipal(new ClaimsIdentity(null, "Basic"));
         }
     }
 }

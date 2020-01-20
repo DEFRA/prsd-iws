@@ -24,6 +24,10 @@
 
         public string ApiClientId { get; set; }
 
+        public string ApiClientCredentialSecret { get; set; }
+
+        public string ApiClientCredentialId { get; set; }
+
         public bool MaintenanceMode { get; set; }
     }
 }

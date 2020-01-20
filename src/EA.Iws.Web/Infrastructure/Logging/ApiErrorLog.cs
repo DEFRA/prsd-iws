@@ -31,9 +31,9 @@
             var errorXml = ErrorXml.EncodeString(error);
             var id = Guid.NewGuid();
 
-            var innerException = (ApiException)error.Exception;
+            var innerException = error.Exception as ApiException;
 
-            if (innerException != null)
+            if (innerException != null && innerException.ErrorData != null)
             {
                 Task.Run(() => apiClient.ErrorLog.Create(new ErrorData(Guid.NewGuid(), ApplicationName, error.HostName, innerException.ErrorData.ExceptionType, innerException.Source, innerException.ErrorData.ExceptionMessage,
                     error.User, (int)innerException.StatusCode, error.Time.ToUniversalTime(), GetApiErrorAsXml(innerException.ErrorData))));
