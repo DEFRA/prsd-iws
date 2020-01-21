@@ -56,8 +56,17 @@
                 .Select(p => new SelectListItem() { Text = p.Value, Value = p.Key.ToString() });
 
             model.CompetentAuthorities = new SelectList(competentAuthorities, "Value", "Text");
-            
-            var result = await client.SendAsync(User.GetAccessToken(), new GetLocalAreas());
+
+            string token = User.GetAccessToken();
+            if (string.IsNullOrWhiteSpace(token))
+            {
+                var tokenResponse = await oauthClientCredentialClient().GetClientCredentialsAsync();
+
+                token = tokenResponse.AccessToken;
+            }
+
+            var result = await client.SendAsync(token, new GetLocalAreas());
+
             model.Areas = new SelectList(result.Select(area => new SelectListItem { Text = area.Name, Value = area.Id.ToString() }), "Value", "Text");
             
             return model;
