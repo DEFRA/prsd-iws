@@ -1,5 +1,10 @@
-﻿DECLARE @UserId UNIQUEIDENTIFIER;
-DECLARE @ImportNotificationId UNIQUEIDENTIFIER = 'ceb03ae8-1234-4dfc-8f87-6b2384f00001';
+﻿-- Create an import notification (by an internal user) for testing the CreatedBy column in the report is correct
+
+DECLARE @UserId UNIQUEIDENTIFIER;
+DECLARE @ImportNotificationId UNIQUEIDENTIFIER = '5126F35D-9B4C-4BEE-A837-5E11AE09ABD0';
+DECLARE @NotificationAssessmentId UNIQUEIDENTIFIER = NEWID();
+DECLARE @WasteOperationId UNIQUEIDENTIFIER = NEWID();
+DECLARE @WasteTypeId UNIQUEIDENTIFIER = NEWID();
 
 SELECT @UserId = id
 FROM   [Identity].[aspnetusers]
@@ -12,7 +17,7 @@ INSERT INTO [ImportNotification].[Notification]
            ,[CompetentAuthority])
      VALUES
            (@ImportNotificationId,
-           N'GB 0001 007701',
+           N'GR001575',
            2,
            1) 
 
@@ -213,20 +218,20 @@ INSERT INTO [ImportNotification].[TransportRoute]
 VALUES (@TransportRouteId, 
 		@ImportNotificationId)
 
-DECLARE @GermanyCountryId UNIQUEIDENTIFIER;
-SELECT @GermanyCountryId = id
+DECLARE @StateOfExportCountryId UNIQUEIDENTIFIER;
+SELECT @StateOfExportCountryId = id
 FROM   [Lookup].[country]
-WHERE  [name] = 'Germany';
+WHERE  [name] = 'France';
 
 DECLARE @CAId UNIQUEIDENTIFIER;
 SELECT @CAId = id
 FROM   [Lookup].[competentauthority]
-WHERE  [code] = 'DE018';
+WHERE  [code] = 'F';
 
 DECLARE @ExitId UNIQUEIDENTIFIER;
 SELECT @ExitId = id
 FROM   [Notification].[entryorexitpoint]
-WHERE  [name] = 'Aachen';
+WHERE  [name] = 'Bayonne';
 
 INSERT INTO [ImportNotification].[StateOfExport]
            ([Id]
@@ -237,7 +242,7 @@ INSERT INTO [ImportNotification].[StateOfExport]
      VALUES
            (NEWID(),
            @TransportRouteId,
-           @GermanyCountryId,
+           @StateOfExportCountryId,
            @CAId,
            @ExitId)
 
@@ -295,7 +300,104 @@ INSERT INTO [ImportNotification].[TransitState]
            @ExitId,
            1)
 
-DECLARE @WasteOperationId UNIQUEIDENTIFIER = NEWID();
+-- 2nd tranist
+SELECT @CountryId = id
+FROM   [Lookup].[country]
+WHERE  [name] = 'Germany';
+
+SELECT @CAId = id
+FROM   [Lookup].[competentauthority]
+WHERE  [code] = 'DE023';
+
+SELECT @EntryId = id
+FROM   [Notification].[entryorexitpoint]
+WHERE  [name] = 'Forst';
+
+SELECT @ExitId = id
+FROM   [Notification].[entryorexitpoint]
+WHERE  [name] = 'Hartkirchen';
+
+INSERT [ImportNotification].[transitstate]
+	   ([id],
+		[TransportRouteId],
+		[countryid],
+		[competentauthorityid],
+		[entrypointid],
+		[exitpointid],
+		[ordinalposition])
+VALUES (NEWID(),
+		@TransportRouteId,
+		@CountryId,
+		@CAId,
+		@EntryId,
+		@ExitId,
+		2)
+
+-- 3rd tranist
+SELECT @CountryId = id
+FROM   [Lookup].[country]
+WHERE  [name] = 'Poland';
+
+SELECT @CAId = id
+FROM   [Lookup].[competentauthority]
+WHERE  [code] = 'PL';
+
+SELECT @EntryId = id
+FROM   [Notification].[entryorexitpoint]
+WHERE  [name] = 'Olszyna';
+
+SELECT @ExitId = id
+FROM   [Notification].[entryorexitpoint]
+WHERE  [name] = 'Gdynia';
+
+INSERT [ImportNotification].[transitstate]
+	   ([id],
+		[TransportRouteId],
+		[countryid],
+		[competentauthorityid],
+		[entrypointid],
+		[exitpointid],
+		[ordinalposition])
+VALUES (NEWID(),
+		@TransportRouteId,
+		@CountryId,
+		@CAId,
+		@EntryId,
+		@ExitId,
+		3)
+
+-- 4th tranist
+SELECT @CountryId = id
+FROM   [Lookup].[country]
+WHERE  [name] = 'Belgium';
+
+SELECT @CAId = id
+FROM   [Lookup].[competentauthority]
+WHERE  [code] = 'BE001';
+
+SELECT @EntryId = id
+FROM   [Notification].[entryorexitpoint]
+WHERE  [name] = 'Retie';
+
+SELECT @ExitId = id
+FROM   [Notification].[entryorexitpoint]
+WHERE  [name] = 'Lichtenbusch';
+
+INSERT [ImportNotification].[transitstate]
+	   ([id],
+		[TransportRouteId],
+		[countryid],
+		[competentauthorityid],
+		[entrypointid],
+		[exitpointid],
+		[ordinalposition])
+VALUES (NEWID(),
+		@TransportRouteId,
+		@CountryId,
+		@CAId,
+		@EntryId,
+		@ExitId,
+		4)
 
 INSERT INTO [ImportNotification].[WasteOperation]
            ([Id]
@@ -315,7 +417,6 @@ INSERT INTO [ImportNotification].[OperationCodes]
            @WasteOperationId,
            10)
 
-DECLARE @WasteTypeId UNIQUEIDENTIFIER = NEWID();
 
 INSERT INTO [ImportNotification].[WasteType]
            ([Id]
@@ -345,8 +446,6 @@ INSERT INTO [ImportNotification].[WasteCode]
            @WasteTypeId,
            (SELECT TOP 1 id FROM [Lookup].[WasteCode] WHERE [code] = '01 01 01' AND [CodeType] = 3 ))
 
-
-DECLARE @NotificationAssessmentId UNIQUEIDENTIFIER = NEWID();
 
 INSERT INTO [ImportNotification].[NotificationAssessment]
            ([Id]
@@ -394,5 +493,3 @@ INSERT INTO [ImportNotification].[Consent]
            N'Be nice',
            @UserId,
            @ImportNotificationId)
-
-
