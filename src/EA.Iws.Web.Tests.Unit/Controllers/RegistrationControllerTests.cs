@@ -9,6 +9,7 @@
     using Api.Client;
     using Core.Shared;
     using FakeItEasy;
+    using IdentityModel.Client;
     using Prsd.Core.Web.OAuth;
     using Requests.Shared;
     using Views.Registration;
@@ -141,8 +142,8 @@
         private static RegistrationController GetMockAccountController(object viewModel)
         {
             var client = A.Fake<IIwsClient>();
-            
-            A.CallTo(() => client.SendAsync(A<GetCountries>._)).Returns(new List<CountryData>
+
+            A.CallTo(() => client.SendAsync(A<string>._, A<GetCountries>._)).Returns(new List<CountryData>
             {
                 new CountryData
                 {
@@ -156,8 +157,11 @@
                 }
             });
 
+            var tokenResponse = A.Fake<TokenResponse>();
             var oauth = A.Fake<IOAuthClient>();
             var clientCredentials = A.Fake<IOAuthClientCredentialClient>();
+
+            A.CallTo(() => clientCredentials.GetClientCredentialsAsync()).Returns(tokenResponse);
 
             var registrationController = new RegistrationController(() => oauth, client, null, () => clientCredentials);
             // Mimic the behaviour of the model binder which is responsible for Validating the Model
