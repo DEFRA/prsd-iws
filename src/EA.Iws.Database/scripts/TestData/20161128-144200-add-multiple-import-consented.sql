@@ -5,7 +5,7 @@ DECLARE @notificationNumberSeed NVARCHAR(11);
 SET @notificationNumberSeed = 'GB 9999 000'
 
 DECLARE @UserId UNIQUEIDENTIFIER;
-SELECT @UserId = id FROM   [Identity].[aspnetusers]	WHERE  [email] = 'superuser@environment-agency.gov.uk'
+SELECT @UserId = id FROM [Identity].[aspnetusers] WHERE [email] = 'superuser@environment-agency.gov.uk'
 
 WHILE @notificationNumberInc < 105
 BEGIN
@@ -431,6 +431,6 @@ BEGIN
 
 	-- Add comment
 	INSERT INTO [ImportNotification].[Comments] ([Id], [NotificationId], [UserId], [ShipmentNumber], [Comment], [DateAdded])
-	VALUES (NEWID(), @ImportNotificationId, @SuperUserId, @notificationNumberInc, 'Some really interesting comment', GETDATE());
+	VALUES (NEWID(), @ImportNotificationId, @UserId, @notificationNumberInc, 'Some really interesting comment', GETDATE());
 
 END;
