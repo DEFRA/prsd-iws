@@ -906,6 +906,6 @@ BEGIN
 
 	-- Add comment
 	INSERT INTO [Notification].[Comments] ([Id], [NotificationId], [UserId], [ShipmentNumber], [Comment], [DateAdded])
-	VALUES (NEWID(), @notificationNumber, @SuperUserId, @notificationNumberInc, 'Some really interesting comment', GETDATE());
+	VALUES (NEWID(), @NotificationId, @SuperUserId, @notificationNumberInc, 'Some really interesting comment', GETDATE());
 
 END;
