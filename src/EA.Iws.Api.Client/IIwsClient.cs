@@ -11,8 +11,6 @@
 
         IErrorLog ErrorLog { get; }
 
-        Task<TResult> SendAsync<TResult>(IRequest<TResult> request);
         Task<TResult> SendAsync<TResult>(string accessToken, IRequest<TResult> request);
-        Task<HttpResponseMessage> TaskSendAsyncTest(string token);
     }
 }

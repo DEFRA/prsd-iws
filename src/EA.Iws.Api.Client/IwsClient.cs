@@ -36,19 +36,6 @@
             get { return errorLog ?? (errorLog = new ErrorLog(httpClient)); }
         }
 
-        public async Task<HttpResponseMessage> TaskSendAsyncTest(string accessToken)
-        {
-            httpClient.SetBearerToken(accessToken);
-            var response = await httpClient.GetAsync("Scan").ConfigureAwait(false);
-
-            return response;
-        }
-
-        public async Task<TResult> SendAsync<TResult>(IRequest<TResult> request)
-        {
-            return await InternalSendAsync(request).ConfigureAwait(false);
-        }
-
         public async Task<TResult> SendAsync<TResult>(string accessToken, IRequest<TResult> request)
         {
             httpClient.SetBearerToken(accessToken);
