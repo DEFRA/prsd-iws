@@ -35,7 +35,7 @@
 
             if (innerException != null && innerException.ErrorData != null)
             {
-                Task.Run(() => apiClient.ErrorLog.Create(new ErrorData(Guid.NewGuid(), ApplicationName, error.HostName, innerException.ErrorData.ExceptionType, innerException.Source, innerException.ErrorData.ExceptionMessage,
+                Task.Run(() => apiClient.ErrorLog.Create(new ErrorData(Guid.NewGuid(), ApplicationName, error.HostName, error.Type, innerException.Source, innerException.ErrorData.ExceptionMessage,
                     error.User, (int)innerException.StatusCode, error.Time.ToUniversalTime(), GetApiErrorAsXml(innerException.ErrorData))));
             }
 
