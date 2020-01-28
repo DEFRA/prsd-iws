@@ -35,5 +35,7 @@
         bool UseLocalScan { get; set; }
 
         string ScanUrl { get; set; }
+
+        string AvCertPath { get; set; }
     }
 }

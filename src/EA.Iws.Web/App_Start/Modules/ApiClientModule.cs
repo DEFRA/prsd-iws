@@ -24,7 +24,7 @@
             {
                 var cc = c.Resolve<IComponentContext>();
                 var config = cc.Resolve<AppConfiguration>();
-                return new IwsScanClient(config.ScanUrl);
+                return new IwsScanClient(config.ScanUrl, System.Web.Hosting.HostingEnvironment.MapPath(config.AvCertPath));
             }).As<IIwsScanClient>().InstancePerRequest();
 
             builder.Register(c =>

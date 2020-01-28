@@ -3,6 +3,7 @@
     using System;
     using System.Collections;
     using System.IO;
+    using System.Security;
     using System.Threading.Tasks;
     using System.Web;
     using System.Web.Mvc;
@@ -12,18 +13,37 @@
     using Api.Client.Entities;
     using Elmah;
     using Prsd.Core.Web.ApiClient;
+    using Prsd.Core.Web.OAuth;
 
     public class ApiErrorLog : ErrorLog
     {
         private readonly IDictionary config;
         private readonly IIwsClient apiClient;
+        private readonly IOAuthClientCredentialClient oauthClientCredentialClient;
+        private readonly HttpContextBase httpContext;
 
-        public ApiErrorLog(IDictionary config)
+        public ApiErrorLog(IDictionary config, HttpContextBase httpContext)
         {
             this.config = config;
+            this.httpContext = httpContext;
             this.apiClient = DependencyResolver.Current.GetService<IIwsClient>();
+            this.oauthClientCredentialClient = DependencyResolver.Current.GetService<IOAuthClientCredentialClient>();
 
             ApplicationName = (string)(config["applicationName"] ?? string.Empty);
+        }
+
+        public async Task<string> GetAccessToken()
+        {
+            var token = httpContext.User.GetAccessToken();
+
+            if (string.IsNullOrWhiteSpace(token))
+            {
+                var tokenResponse = await oauthClientCredentialClient.GetClientCredentialsAsync();
+
+                token = tokenResponse.AccessToken;
+            }
+
+            return token;
         }
 
         public override string Log(Error error)
@@ -31,11 +51,18 @@
             var errorXml = ErrorXml.EncodeString(error);
             var id = Guid.NewGuid();
 
+            if (!httpContext.User.Identity.IsAuthenticated)
+            {
+                throw new SecurityException("Unauthenticated user");
+            }
+            
+            var token = Task.Run(GetAccessToken).Result;
+
             var innerException = error.Exception as ApiException;
 
             if (innerException != null && innerException.ErrorData != null)
             {
-                Task.Run(() => apiClient.ErrorLog.Create(new ErrorData(Guid.NewGuid(), ApplicationName, error.HostName, error.Type, innerException.Source, innerException.ErrorData.ExceptionMessage,
+                Task.Run(() => apiClient.ErrorLog.Create(token, new ErrorData(Guid.NewGuid(), ApplicationName, error.HostName, error.Type, innerException.Source, innerException.ErrorData.ExceptionMessage,
                     error.User, (int)innerException.StatusCode, error.Time.ToUniversalTime(), GetApiErrorAsXml(innerException.ErrorData))));
             }
 
@@ -43,7 +70,7 @@
                 error.User,
                 error.StatusCode, error.Time.ToUniversalTime(), errorXml);
 
-            Task.Run(() => apiClient.ErrorLog.Create(errorData));
+            Task.Run(() => apiClient.ErrorLog.Create(token, errorData));
 
             return id.ToString();
         }
