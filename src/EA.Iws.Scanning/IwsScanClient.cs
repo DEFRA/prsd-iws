@@ -2,44 +2,53 @@
 {
     using System;
     using System.Net.Http;
-    using System.Net.Http.Formatting;
-    using System.Net.Http.Headers;
+    using System.Net.Security;
+    using System.Security.Cryptography.X509Certificates;
     using System.Threading.Tasks;
-    using Api.Client;
-    using Api.Client.Actions;
     using Prsd.Core.Web.Converters;
     using Prsd.Core.Web.Extensions;
 
     public class IwsScanClient : IIwsScanClient
     {
-        private readonly HttpClient httpClient;
-        private IErrorLog errorLog;
+        private readonly string certPath;
+        private readonly Uri baseUri;
 
-        public IwsScanClient(string baseUrl)
+        public IwsScanClient(string baseUrl, string certPath)
         {
-            var baseUri = new Uri(baseUrl.EnsureTrailingSlash());
-
-            httpClient = new HttpClient
-            {
-                BaseAddress = new Uri(baseUri, "api/")
-            };
-        }
-
-        public IErrorLog ErrorLog
-        {
-            get { return errorLog ?? (errorLog = new ErrorLog(httpClient)); }
+            this.certPath = certPath;
+            this.baseUri = new Uri(baseUrl.EnsureTrailingSlash());
         }
 
         public async Task<ScanResult> ScanAsync(string accessToken, byte[] file)
         {
-            httpClient.SetBearerToken(accessToken);
-            httpClient.DefaultRequestHeaders.Accept.Clear();
+            using (var handler = new WebRequestHandler())
+            {
+                if (!string.IsNullOrWhiteSpace(certPath))
+                {
+                    handler.ServerCertificateValidationCallback += (sender, certificate, chain, sslPolicyErrors) =>
+                    {
+                        if (sslPolicyErrors == SslPolicyErrors.None)
+                        {
+                            return true;
+                        }
 
-            var response = await httpClient.PostAsJsonAsync("scanner/Scan", file).ConfigureAwait(false);
+                        return X509Certificate.CreateFromCertFile(certPath).Equals(certificate);
+                    };
+                }
 
-            var result =  await response.CreateResponseAsync<ScanResult>(new EnumerationConverter()).ConfigureAwait(false);
+                using (var httpClient = new HttpClient(handler) { BaseAddress = new Uri(baseUri, "api/") })
+                {
+                    httpClient.SetBearerToken(accessToken);
+                    httpClient.DefaultRequestHeaders.Accept.Clear();
 
-            return result;
+                    var response = await httpClient.PostAsJsonAsync("scanner/Scan", file).ConfigureAwait(false);
+
+                    var result = await response.CreateResponseAsync<ScanResult>(new EnumerationConverter())
+                        .ConfigureAwait(false);
+
+                    return result;
+                };
+            }
         }
     }
 }

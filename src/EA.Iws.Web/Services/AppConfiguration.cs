@@ -48,5 +48,8 @@
 
         [DefaultValue("")]
         public string ScanUrl { get; set; }
+
+        [DefaultValue("")]
+        public string AvCertPath { get; set; }
     }
 }

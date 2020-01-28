@@ -5,8 +5,6 @@
 
     public interface IIwsScanClient
     {
-        IErrorLog ErrorLog { get; }
-
         Task<ScanResult> ScanAsync(string token, byte[] file);
     }
 }
