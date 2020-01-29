@@ -55,8 +55,8 @@
             {
                 throw new SecurityException("Unauthenticated user");
             }
-            
-            var token = Task.Run(() => GetAccessToken()).Result;
+
+            var token = string.Empty;
 
             var innerException = error.Exception as ApiException;
 
