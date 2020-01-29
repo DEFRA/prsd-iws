@@ -17,17 +17,15 @@
 
     public class ApiErrorLog : ErrorLog
     {
-        private readonly IDictionary config;
         private readonly IIwsClient apiClient;
         private readonly IOAuthClientCredentialClient oauthClientCredentialClient;
-        private readonly HttpContextBase httpContext;
+        private readonly HttpContext httpContext;
 
-        public ApiErrorLog(IDictionary config, HttpContextBase httpContext)
+        public ApiErrorLog(IDictionary config)
         {
-            this.config = config;
-            this.httpContext = httpContext;
             this.apiClient = DependencyResolver.Current.GetService<IIwsClient>();
             this.oauthClientCredentialClient = DependencyResolver.Current.GetService<IOAuthClientCredentialClient>();
+            this.httpContext = HttpContext.Current;
 
             ApplicationName = (string)(config["applicationName"] ?? string.Empty);
         }
