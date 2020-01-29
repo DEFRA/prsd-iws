@@ -4,7 +4,6 @@
     using System.Threading.Tasks;
     using Entities;
     using Prsd.Core.Web.Extensions;
-    using Prsd.Core.Web.OAuth;
 
     public class ErrorLog : IErrorLog
     {
