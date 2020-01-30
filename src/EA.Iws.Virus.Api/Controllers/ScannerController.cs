@@ -1,6 +1,7 @@
 ﻿namespace EA.Iws.Virus.Api.Controllers
 {
     using System;
+    using System.IO;
     using System.Net;
     using System.Security;
     using System.Security.Authentication;
@@ -8,19 +9,16 @@
     using System.Web.Http;
     using IWS.Api.Infrastructure.Infrastructure;
     using Scanning;
-    using Serilog;
 
     [RoutePrefix("api/scanner")]
     [Authorize]
     public class ScannerController : ApiController
     {
-        private readonly ILogger logger;
         private readonly IVirusScanner virusScanner;
 
-        public ScannerController(IVirusScanner virusScanner, ILogger logger)
+        public ScannerController(IVirusScanner virusScanner)
         {
             this.virusScanner = virusScanner;
-            this.logger = logger;
         }
 
         [HttpGet]
@@ -43,18 +41,15 @@
             }
             catch (AuthenticationException ex)
             {
-                logger.Error(ex, "Authentication error");
                 return this.StatusCode(HttpStatusCode.Unauthorized, new HttpError(ex, includeErrorDetail: true));
             }
             catch (SecurityException ex)
             {
-                logger.Error(ex, "Authorization error");
                 return this.StatusCode(HttpStatusCode.Forbidden, new HttpError(ex, includeErrorDetail: true));
             }
-            catch (Exception ex)
+            catch (IOException ex)
             {
-                logger.Error(ex, "Unhandled error");
-                throw;
+                return this.StatusCode(HttpStatusCode.InternalServerError, new HttpError(ex, includeErrorDetail: true));
             }
         }
     }
