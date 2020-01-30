@@ -12,7 +12,7 @@
     using Scanning;
     using ViewModels.VirusScan;
 
-    [Authorize(Roles = "internal,readonly")]
+    [Authorize(Roles = "internal,administrator")]
     public class VirusScanController : Controller
     {
         private readonly IWriteFileVirusWrapper virusScanner;
