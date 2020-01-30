@@ -51,7 +51,7 @@
             }
             catch (IOException)
             {
-                return ScanResult.Error;
+                throw new IOException("Virus scan could not write to file system");
             }
 
             await Task.Delay(fileWriteTimeout);

@@ -1,5 +1,6 @@
 ﻿namespace EA.Iws.Web.Modules
 {
+    using System;
     using Api.Client;
     using Autofac;
     using Infrastructure;
@@ -19,12 +20,19 @@
                 var config = cc.Resolve<AppConfiguration>();
                 return new IwsClient(config.ApiUrl);
             }).As<IIwsClient>().InstancePerRequest();
-
+ 
             builder.Register(c =>
             {
                 var cc = c.Resolve<IComponentContext>();
                 var config = cc.Resolve<AppConfiguration>();
-                return new IwsScanClient(config.ScanUrl, System.Web.Hosting.HostingEnvironment.MapPath(config.AvCertPath));
+
+                var path = string.Empty;
+                if (!string.IsNullOrWhiteSpace(config.AvCertPath))
+                {
+                    path = System.Web.Hosting.HostingEnvironment.MapPath(config.AvCertPath);
+                }
+
+                return new IwsScanClient(config.ScanUrl, path);
             }).As<IIwsScanClient>().InstancePerRequest();
 
             builder.Register(c =>
