@@ -31,9 +31,9 @@
             {
                 fileAccess.WriteFile(fileName, fileData);
             }
-            catch (IOException)
+            catch
             {
-                return ScanResult.Error;
+                throw new IOException("Virus scan could not write to file system");
             }
 
             Thread.Sleep(fileWriteTimeout);
@@ -49,7 +49,7 @@
             {
                 await fileAccess.WriteFileAsync(fileName, fileData);
             }
-            catch (IOException)
+            catch
             {
                 throw new IOException("Virus scan could not write to file system");
             }
