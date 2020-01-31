@@ -481,7 +481,7 @@ BEGIN
 
 		SELECT @CAId = id
 		FROM   [Lookup].[competentauthority]
-		WHERE  [code] = 'FR';
+		WHERE  [code] = 'F';
 
 		SELECT @EntryId = id
 		FROM   [Notification].[entryorexitpoint]

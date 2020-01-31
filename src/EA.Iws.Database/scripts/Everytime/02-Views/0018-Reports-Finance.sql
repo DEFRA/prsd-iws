@@ -6,7 +6,7 @@ ALTER VIEW [Reports].[Finance]
 AS
     SELECT 
         NO.NotificationNumber,
-        CASE WHEN IU.Id IS NULL THEN 'External' ELSE 'Internal' END AS CreatedBy,
+		CASE WHEN N.[ImportOrExport] = 'Import' OR IU.Id IS NOT NULL THEN 'Internal' ELSE 'External' END AS CreatedBy,
         NO.Exporter AS [Notifier],
         NO.ExporterAddress AS [NotifierAddress],
         NO.ExporterPostalCode AS [NotifierPostalCode],
