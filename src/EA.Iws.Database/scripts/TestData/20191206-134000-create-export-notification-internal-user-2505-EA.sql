@@ -1,9 +1,12 @@
 DECLARE @UserId UNIQUEIDENTIFIER;
-DECLARE @NotificationId UNIQUEIDENTIFIER = 'ceb03ae8-2792-4dfc-8f87-6b2384f62503';
+DECLARE @NotificationId UNIQUEIDENTIFIER = '5BB496D2-0316-4E7F-8321-22F7C88D210E';
+DECLARE @ProducerId uniqueidentifier = N'8016BA3A-E240-49FD-8B74-98974621AB61';
+DECLARE @CarrierCollectionId uniqueidentifier = '5FE93EEB-8629-46EA-8C90-6D6A6700A3EE'
+
 
 SELECT @UserId = id
 FROM   [Identity].[aspnetusers]
-WHERE  [email] = 'sunily@sfwltd.co.uk'
+WHERE  [email] = 'superuser@environment-agency.gov.uk'
 
 INSERT [Notification].[notification]
        ([id],
@@ -22,9 +25,9 @@ VALUES (@NotificationId,
         @UserId,
         1,
         1,
-        N'GB 0001 002503',
-        Cast(N'2016-10-10 09:00:00.0000000' AS DATETIME2),
-        N'Use of advanced facilities',
+        N'GB 0001 002505',
+        Cast(N'2015-09-21 09:00:00.0000000' AS DATETIME2),
+        N'Recycling at advanced facility',
         0,
         NULL,
         1,
@@ -35,9 +38,9 @@ INSERT [Notification].[MeansOfTransport]
 	   ([Id],
 	    [NotificationId],
 		[MeansOfTransport])
-VALUES (N'C95A7DE8-3E24-4C89-AF67-42786ED91F77',
+VALUES (N'9B51CBC6-5EDC-4A3F-87ED-93C9E6196139',
 		@NotificationId,
-		N'R;S;R;T');
+		N'R;S;R;A;R');
 
 INSERT [Notification].[FacilityCollection] (
 	[Id],
@@ -45,7 +48,7 @@ INSERT [Notification].[FacilityCollection] (
 	[AllFacilitiesPreconsented]
 )
 VALUES (
-	N'0315EF80-778F-48E0-A95C-6A53A3F3ABCB',
+	N'C739EC48-E9D9-4E28-BD92-DC11D344E69B',
 	@NotificationId,
 	1
 )
@@ -70,13 +73,13 @@ INSERT [Notification].[facility]
         [FacilityCollectionId],
         [otherdescription])
 VALUES (NEWID(),
-        N'Waste Treatment Facility',
+        N'Importer Facility',
         1,
         1,
-        N'45645684546',
+        N'Micky Finns Imports',
         NULL,
-        N'1 Rue Strasse',
-        N'German Suburb',
+        N'Opp. ABCD',
+        N'Near XYZ',
         N'Dortmund',
         N'64151',
         N'Dortmund',
@@ -85,7 +88,7 @@ VALUES (NEWID(),
         N'53-2225557777',
         N'53-3336669999',
         N'test@importer.de',
-        N'0315EF80-778F-48E0-A95C-6A53A3F3ABCB',
+        N'C739EC48-E9D9-4E28-BD92-DC11D344E69B',
         NULL)
 
 INSERT [Notification].[facility]
@@ -123,7 +126,7 @@ VALUES (NEWID(),
         N'53-2225557777',
         N'53-3336669999',
         N'test@importer.de',
-        N'0315EF80-778F-48E0-A95C-6A53A3F3ABCB',
+        N'C739EC48-E9D9-4E28-BD92-DC11D344E69B',
         NULL)
 
 INSERT [Notification].[importer]
@@ -165,7 +168,7 @@ VALUES (NEWID(),
 INSERT [Notification].[ProducerCollection]
 	   ([Id],
 	    [NotificationId])
-VALUES (N'2661B295-AC6B-4680-AE62-0E5AD556C696',
+VALUES (@ProducerId,
 		@NotificationId)
 
 
@@ -204,7 +207,7 @@ VALUES (NEWID(),
         N'44-7778889999',
         N'44-1112223333',
         N'test@exporter.com',
-        N'2661B295-AC6B-4680-AE62-0E5AD556C696',
+        @ProducerId,
         NULL)
 
 INSERT [Notification].[producer]
@@ -242,7 +245,7 @@ VALUES (NEWID(),
         N'44-7778889999',
         N'44-1112223333',
         N'test@producer.com',
-        N'2661B295-AC6B-4680-AE62-0E5AD556C696',
+        @ProducerId,
         NULL)
 
 INSERT [Notification].[exporter]
@@ -292,15 +295,15 @@ INSERT [Notification].[shipmentinfo]
 VALUES (NEWID(),
         @NotificationId,
         520,
-        Cast(25000.0000 AS DECIMAL(18, 4)),
+        Cast(10.0000 AS DECIMAL(18, 4)),
         3,
-        Cast(N'2016-09-01' AS DATE),
-        Cast(N'2017-08-27' AS DATE))
+        Cast(N'2015-09-01' AS DATE),
+        Cast(N'2016-08-27' AS DATE))
 
 INSERT [Notification].[CarrierCollection]
 	   ([Id],
 	    [NotificationId])
-VALUES (N'0B23F00D-AC86-4C67-807F-1F0AD07EC96E',
+VALUES (@CarrierCollectionId,
 		@NotificationId)
 
 INSERT [Notification].[carrier]
@@ -323,7 +326,7 @@ INSERT [Notification].[carrier]
         [otherdescription])
 VALUES (NEWID(),
         N'Carrier',
-        N'0B23F00D-AC86-4C67-807F-1F0AD07EC96E',
+        @CarrierCollectionId,
         1,
         N'CARRIER12345',
         NULL,
@@ -359,7 +362,7 @@ INSERT [Notification].[carrier]
         [otherdescription])
 VALUES (NEWID(),
         N'Carrier Two',
-        N'0B23F00D-AC86-4C67-807F-1F0AD07EC96E',
+        @CarrierCollectionId,
         2,
         N'CAR98765',
         NULL,
@@ -535,20 +538,6 @@ VALUES (@WasteTypeId,
         NULL,
         N'Wooden blocks',
         NULL)
-
-INSERT [Notification].[wastecomposition]
-       ([id],
-        [constituent],
-        [minconcentration],
-        [maxconcentration],
-        [wastetypeid],
-        [chemicalcompositiontype])
-VALUES (NEWID(),
-        N'Food',
-        Cast(1.00 AS DECIMAL(5, 2)),
-        Cast(3.00 AS DECIMAL(5, 2)),
-        @WasteTypeId,
-        3)
 
 INSERT [Notification].[wastecomposition]
        ([id],
@@ -787,52 +776,20 @@ INSERT INTO [Notification].[notificationassessment]
              [status])
 VALUES      (@NotificationAssessmentId,
               @NotificationId,
-              10 ) ;
+              2 ) ;
 
 INSERT INTO [Notification].[NotificationDates]
 (
 	[Id],
 	[NotificationAssessmentId],
-	[NotificationReceivedDate],
-    [PaymentReceivedDate],
-    [CommencementDate],
-    [CompleteDate],
-    [TransmittedDate],
-    [AcknowledgedDate],
-    [NameOfOfficer]
+	[NotificationReceivedDate]
 )
 VALUES
 (
 	(SELECT Cast(Cast(Newid() AS BINARY(10))
                            + Cast(Getdate() AS BINARY(6)) AS UNIQUEIDENTIFIER)),
 	@NotificationAssessmentId,
-	'2016-10-17',
-	'2016-10-17',
-	'2016-10-18',
-	'2016-10-18',
-	'2016-10-19',
-	'2016-10-20',
-	'Jane'
-)
-
-INSERT INTO [Notification].[Consent]
-(
-	[Id],
-	[From],
-	[To],
-	[Conditions],
-	[UserId],
-	[NotificationApplicationId]
-)
-VALUES
-(
-	(SELECT Cast(Cast(Newid() AS BINARY(10))
-                           + Cast(Getdate() AS BINARY(6)) AS UNIQUEIDENTIFIER)),
-	'2016-10-20',
-	DATEADD(month, 1, CONVERT(date,GETDATE())),
-	'Let me win at chess',
-	(SELECT [Id] FROM [Identity].[AspNetUsers] WHERE [Email] LIKE 'superuser@environment-agency.gov.uk'),
-	@NotificationId
+	'2016-01-02'
 )
 
 INSERT INTO [Notification].[FinancialGuaranteeCollection]
@@ -846,32 +803,6 @@ VALUES
 							   + Cast(Getdate() AS BINARY(6)) AS UNIQUEIDENTIFIER)),
 				@NotificationId
 			)
-
-INSERT INTO [Notification].[FinancialGuarantee]
-(
-	[Id],
-	[Status],
-	[ReceivedDate],
-	[CompletedDate],
-	[CreatedDate],
-	[DecisionDate],
-	[ActiveLoadsPermitted],
-	[FinancialGuaranteeCollectionId],
-	[Decision]
-)
-VALUES
-(
-	(SELECT Cast(Cast(Newid() AS BINARY(10))
-					+ Cast(Getdate() AS BINARY(6)) AS UNIQUEIDENTIFIER)),
-	4,
-	'2016-10-13',
-	'2016-10-13',
-	GETDATE(),
-	'2016-10-20',
-	520,
-	(SELECT Id FROM [Notification].[FinancialGuaranteeCollection] WHERE [NotificationId] = @NotificationId),
-	1
-)
 
 INSERT [Notification].[EntryExitCustomsSelection]
 		(Id,
