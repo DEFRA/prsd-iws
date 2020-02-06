@@ -25,20 +25,6 @@
             {
                 var cc = c.Resolve<IComponentContext>();
                 var config = cc.Resolve<AppConfiguration>();
-
-                var path = string.Empty;
-                if (!string.IsNullOrWhiteSpace(config.AvCertPath))
-                {
-                    path = System.Web.Hosting.HostingEnvironment.MapPath(config.AvCertPath);
-                }
-
-                return new IwsScanClient(config.ScanUrl, path);
-            }).As<IIwsScanClient>().InstancePerRequest();
-
-            builder.Register(c =>
-            {
-                var cc = c.Resolve<IComponentContext>();
-                var config = cc.Resolve<AppConfiguration>();
                 return new OAuthClient(config.ApiUrl, config.ApiClientId, config.ApiSecret);
             }).As<IOAuthClient>().SingleInstance();
 

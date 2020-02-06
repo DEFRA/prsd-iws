@@ -35,7 +35,7 @@
         {
             try
             {
-                var result = await virusScanner.ScanFileAsync(file);
+                var result = await virusScanner.ScanFileAsync(file, string.Empty);
 
                 return Ok(result);
             }

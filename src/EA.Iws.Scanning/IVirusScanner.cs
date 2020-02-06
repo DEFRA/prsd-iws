@@ -4,8 +4,6 @@
 
     public interface IVirusScanner
     {
-        ScanResult ScanFile(byte[] fileData);
-
-        Task<ScanResult> ScanFileAsync(byte[] fileData);
+        Task<ScanResult> ScanFileAsync(byte[] fileData, string token);
     }
 }

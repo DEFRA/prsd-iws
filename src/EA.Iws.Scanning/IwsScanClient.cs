@@ -8,7 +8,7 @@
     using Prsd.Core.Web.Converters;
     using Prsd.Core.Web.Extensions;
 
-    public class IwsScanClient : IIwsScanClient
+    public class IwsScanClient : IVirusScanner
     {
         private readonly string certPath;
         private readonly Uri baseUri;
@@ -19,7 +19,7 @@
             this.baseUri = new Uri(baseUrl.EnsureTrailingSlash());
         }
 
-        public async Task<ScanResult> ScanAsync(string accessToken, byte[] file)
+        public async Task<ScanResult> ScanFileAsync(byte[] file, string accessToken)
         {
             using (var handler = new WebRequestHandler())
             {

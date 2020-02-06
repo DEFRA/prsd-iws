@@ -13,7 +13,7 @@
 
     public class BulkFileValidator : IBulkFileValidator
     {
-        private readonly IWriteFileVirusWrapper virusScanner;
+        private readonly IVirusScanner virusScanner;
         private readonly IFileReader fileReader;
         private const int MaxColumns = 6;
 
@@ -21,7 +21,7 @@
 
         public byte[] FileBytes { get; private set; }
 
-        public BulkFileValidator(IWriteFileVirusWrapper virusScanner,
+        public BulkFileValidator(IVirusScanner virusScanner,
             IFileReader fileReader)
         {
             this.virusScanner = virusScanner;
@@ -96,7 +96,7 @@
                 FileBytes = fileBytes;
             }
 
-            if (await virusScanner.ScanFile(fileBytes, token) == ScanResult.Virus)
+            if (await virusScanner.ScanFileAsync(fileBytes, token) == ScanResult.Virus)
             {
                 result = MessageLevel.Error;
             }
