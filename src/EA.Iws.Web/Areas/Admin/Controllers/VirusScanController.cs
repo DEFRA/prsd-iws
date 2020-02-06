@@ -15,9 +15,9 @@
     [Authorize(Roles = "internal,administrator")]
     public class VirusScanController : Controller
     {
-        private readonly IWriteFileVirusWrapper virusScanner;
+        private readonly IVirusScanner virusScanner;
 
-        public VirusScanController(IWriteFileVirusWrapper virusScanner)
+        public VirusScanController(IVirusScanner virusScanner)
         {
             this.virusScanner = virusScanner;
         }
@@ -25,7 +25,7 @@
         [HttpGet]
         public async Task<ActionResult> Index()
         {
-            await virusScanner.ScanFile(Encoding.ASCII.GetBytes("test"), User.GetAccessToken());
+            await virusScanner.ScanFileAsync(Encoding.ASCII.GetBytes("test"), User.GetAccessToken());
             
             return View();
         }
@@ -39,7 +39,7 @@
             var fileContents = new MemoryStream();
             model.File.InputStream.CopyTo(fileContents);
             
-            var result = await virusScanner.ScanFile(fileContents.ToArray(), User.GetAccessToken());
+            var result = await virusScanner.ScanFileAsync(fileContents.ToArray(), User.GetAccessToken());
 
             ViewBag.Message = string.Format("Started: {0} Ended: {1} Result: {2}", timeStart, DateTime.UtcNow, result.ToString());
 

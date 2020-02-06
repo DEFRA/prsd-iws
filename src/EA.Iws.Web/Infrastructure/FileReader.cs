@@ -11,9 +11,9 @@
 
     internal class FileReader : IFileReader
     {
-        private readonly IWriteFileVirusWrapper virusScanner;
+        private readonly IVirusScanner virusScanner;
 
-        public FileReader(IWriteFileVirusWrapper virusScanner)
+        public FileReader(IVirusScanner virusScanner)
         {
             this.virusScanner = virusScanner;
         }
@@ -29,7 +29,7 @@
                 fileBytes = memoryStream.ToArray();
             }
 
-            if (await virusScanner.ScanFile(fileBytes, token) == ScanResult.Virus)
+            if (await virusScanner.ScanFileAsync(fileBytes, token) == ScanResult.Virus)
             {
                 throw new VirusFoundException(string.Format("Virus found in file {0}", file.FileName));
             }

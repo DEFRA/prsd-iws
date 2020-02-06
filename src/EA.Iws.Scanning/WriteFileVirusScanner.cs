@@ -23,25 +23,7 @@
             fileWriteTimeout = TimeSpan.FromMilliseconds(timeout);
         }
 
-        public ScanResult ScanFile(byte[] fileData)
-        {
-            var fileName = GetTempFileName();
-
-            try
-            {
-                fileAccess.WriteFile(fileName, fileData);
-            }
-            catch
-            {
-                throw new IOException("Virus scan could not write to file system");
-            }
-
-            Thread.Sleep(fileWriteTimeout);
-
-            return GetScanResult(fileName);
-        }
-
-        public async Task<ScanResult> ScanFileAsync(byte[] fileData)
+        public async Task<ScanResult> ScanFileAsync(byte[] fileData, string accessToken)
         {
             var fileName = GetTempFileName();
 
