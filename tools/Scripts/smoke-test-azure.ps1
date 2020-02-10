@@ -5,15 +5,15 @@ param
 (
     [Parameter(Mandatory=$true)]
     [uri]$Url = $null,
+    
+    [Parameter(Mandatory=$true)]
+    [string]$TestEmail = $null,
 
     [Parameter(Mandatory=$true)]
     [string]$SiteUsername = $null,
 
     [Parameter(Mandatory=$true)]
-    [string]$SitePassword = $null,
-
-    [Parameter(Mandatory=$true)]
-    [string]$TestEmail = $null
+    [string]$SitePassword = $null
 )
 
 $exitCode = 0;
@@ -32,10 +32,9 @@ Try
       }
       catch [System.Net.WebException]
       {
-       
           # Suppress any exceptions
       }
-       
+
       if ($smokeTestResult -ne "True")
       {
           $failedTests += "Failed admin/smoke-test";
@@ -51,13 +50,11 @@ Try
       $loginPostResult = Invoke-WebRequest $loginUrl.ToString() -Method Post -Body $loginResult.Forms[0].Fields -ContentType 'application/x-www-form-urlencoded' -WebSession $session;
 
       if (!($loginPostResult.BaseResponse.ResponseUri -ne $loginUrl -and $loginPostResult.StatusCode -eq 200))
-      {
+      { 
           $failedTests += "Failed login";
       }
 
-        $requestVerificationToken  = ($loginResponse.InputFields | Where { $_.name -eq "__RequestVerificationToken" }).value
-
-      ### Send test email ###
+       ### Send test email ###
       $testEmailUrl = New-Object System.Uri($Url, "admin/test-email");
       $testEmailSuccessUrl = New-Object System.Uri($Url, "admin/test-email/success");
       $testEmailResult = Invoke-WebRequest $testEmailUrl.ToString() -WebSession $session;
@@ -87,7 +84,7 @@ Try
 
       if ( $testEmailPostResult.StatusCode -ne 200)
       {
-          $failedTests += "Sacn file failed";
+          $failedTests += "Scan file failed";
       }
 
       ### Report success or failure ###
@@ -100,13 +97,12 @@ Try
           {
               Write-Host $failure;
           }
+		$exitCode = -1;
       }
       else
       {
           Write-Host "[SUCCESS] : All smoke tests successful!";
       }
-      
-   
 }
 Catch
 {      
