@@ -68,6 +68,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WriteFileVirusScannerTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\EA.Iws.Scanning\EA.Iws.Scanning.csproj">
