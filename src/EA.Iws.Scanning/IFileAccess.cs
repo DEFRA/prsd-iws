@@ -13,5 +13,7 @@
         void DeleteFile(string filePath);
 
         string MapPath(string virtualPath);
+
+        string GetTemporaryFileName(string tempPath);
     }
 }

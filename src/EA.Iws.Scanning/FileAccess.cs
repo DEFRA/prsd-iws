@@ -1,5 +1,6 @@
 ﻿namespace EA.Iws.Scanning
 {
+    using System;
     using System.IO;
     using System.Threading.Tasks;
     using System.Web.Hosting;
@@ -39,6 +40,11 @@
         public string MapPath(string virtualPath)
         {
             return HostingEnvironment.MapPath(virtualPath);
+        }
+
+        public string GetTemporaryFileName(string tempPath)
+        {
+            return Path.Combine(MapPath(tempPath), Guid.NewGuid().ToString());
         }
 
         private static void EnsureDirectoryExists(string fileName)

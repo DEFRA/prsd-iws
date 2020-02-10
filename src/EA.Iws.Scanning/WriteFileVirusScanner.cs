@@ -25,7 +25,7 @@
 
         public async Task<ScanResult> ScanFileAsync(byte[] fileData, string accessToken)
         {
-            var fileName = GetTempFileName();
+            var fileName = fileAccess.GetTemporaryFileName(tempPath);
 
             try
             {
@@ -39,11 +39,6 @@
             await Task.Delay(fileWriteTimeout);
 
             return GetScanResult(fileName);
-        }
-
-        private string GetTempFileName()
-        {
-            return Path.Combine(fileAccess.MapPath(tempPath), Guid.NewGuid().ToString());
         }
 
         private ScanResult GetScanResult(string fileName)
