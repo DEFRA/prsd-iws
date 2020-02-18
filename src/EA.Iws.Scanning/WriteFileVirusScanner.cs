@@ -2,7 +2,6 @@
 {
     using System;
     using System.IO;
-    using System.Threading;
     using System.Threading.Tasks;
 
     /// <summary>
@@ -16,7 +15,7 @@
         private readonly TimeSpan fileWriteTimeout;
         private readonly string tempPath;
 
-        public WriteFileVirusScanner(Double timeout, IFileAccess fileAccess, string tempPath)
+        public WriteFileVirusScanner(double timeout, IFileAccess fileAccess, string tempPath)
         {
             this.fileAccess = fileAccess;
             this.tempPath = tempPath;
