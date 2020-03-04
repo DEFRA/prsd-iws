@@ -291,7 +291,7 @@ INSERT [Notification].[shipmentinfo]
 VALUES (NEWID(),
         @NotificationId,
         520,
-        Cast(25000.0000 AS DECIMAL(18, 4)),
+        Cast(35000.0000 AS DECIMAL(18, 4)),
         3,
         Cast(N'2016-09-01' AS DATE),
         Cast(N'2017-08-27' AS DATE))
