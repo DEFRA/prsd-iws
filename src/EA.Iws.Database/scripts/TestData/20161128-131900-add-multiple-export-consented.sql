@@ -4,6 +4,9 @@ SET @notificationNumberInc = 100;
 DECLARE @notificationNumberSeed NVARCHAR(11);
 SET @notificationNumberSeed = 'GB 7777 000'
 
+declare @SuperUserId uniqueidentifier;
+set @SuperUserId = (SELECT Id FROM [Identity].[AspNetUsers] WHERE Email = 'superuser@environment-agency.gov.uk');
+
 WHILE @notificationNumberInc < 105
 BEGIN
 	DECLARE @notificationNumber NVARCHAR(14)
@@ -836,7 +839,7 @@ BEGIN
 			'2016-10-20',
 			'2017-10-19',
 			'Let me win at chess',
-			(SELECT [Id] FROM [Identity].[AspNetUsers] WHERE [Email] LIKE 'superuser@environment-agency.gov.uk'),
+			@SuperUserId,
 			@NotificationId
 		)
 
@@ -900,5 +903,9 @@ BEGIN
 			END;
 
 	--End Add movements
+
+	-- Add comment
+	INSERT INTO [Notification].[Comments] ([Id], [NotificationId], [UserId], [ShipmentNumber], [Comment], [DateAdded])
+	VALUES (NEWID(), @NotificationId, @SuperUserId, @notificationNumberInc, 'Some really interesting comment', GETDATE());
 
 END;
