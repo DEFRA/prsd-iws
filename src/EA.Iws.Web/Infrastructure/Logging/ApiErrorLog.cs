@@ -48,13 +48,13 @@
         {
             var errorXml = ErrorXml.EncodeString(error);
             var id = Guid.NewGuid();
+            
+            var token = Task.Run(() => GetAccessToken()).Result;
 
-            if (!httpContext.User.Identity.IsAuthenticated)
+            if (string.IsNullOrWhiteSpace(token) && !httpContext.User.Identity.IsAuthenticated)
             {
                 throw new SecurityException("Unauthenticated user");
             }
-            
-            var token = Task.Run(() => GetAccessToken()).Result;
 
             var innerException = error.Exception as ApiException;
 

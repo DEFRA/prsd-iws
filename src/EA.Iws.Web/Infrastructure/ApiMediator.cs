@@ -35,12 +35,13 @@
                 return await client.SendAsync(await GetAccessToken(), request).ConfigureAwait(false);
             }
 
-            if (!httpContext.User.Identity.IsAuthenticated)
+            var accessToken = await GetAccessToken();
+
+            if (string.IsNullOrWhiteSpace(accessToken) && !httpContext.User.Identity.IsAuthenticated)
             {
                 throw new SecurityException("Unauthenticated user");
             }
 
-            var accessToken = await GetAccessToken();
             return await client.SendAsync(accessToken, request).ConfigureAwait(false);
         }
 
