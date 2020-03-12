@@ -13,7 +13,10 @@ param
     [string]$SiteUsername = $null,
 
     [Parameter(Mandatory=$true)]
-    [string]$SitePassword = $null
+    [string]$SitePassword = $null,
+
+    [Parameter(Mandatory=$true)]
+    [string]$VirusUrl = $null
 )
 
 $exitCode = 0;
@@ -32,6 +35,7 @@ Try
       }
       catch [System.Net.WebException]
       {
+       
           # Suppress any exceptions
       }
 
@@ -40,6 +44,21 @@ Try
           $failedTests += "Failed admin/smoke-test";
       }
 
+      ### Virus scan ###
+      try 
+      {
+          $virusUrl = New-Object System.Uri($VirusUrl, "/api/scanner/scan"); 
+          $virusResult = Invoke-RestMethod $virusUrl.ToString() -Method Post  -Body 'text' -ContentType 'application/x-www-form-urlencoded';
+          
+      }
+      catch [System.Net.WebException]
+      {
+          if (!$virusResult.StatusCode -eq 403)
+          { 
+             $virusResult += "Failed virus check";
+          }
+      }      
+      
       ### Login ###
       $loginUrl = New-Object System.Uri($Url, "account/login");
       $loginResult = Invoke-WebRequest $loginUrl.ToString() -SessionVariable session;
