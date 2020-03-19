@@ -462,7 +462,7 @@ WHERE  [name] = 'France';
 
 SELECT @CAId = id
 FROM   [Lookup].[competentauthority]
-WHERE  [code] = 'FR';
+WHERE  [code] = 'F';
 
 SELECT @EntryId = id
 FROM   [Notification].[entryorexitpoint]
@@ -829,7 +829,7 @@ VALUES
 	(SELECT Cast(Cast(Newid() AS BINARY(10))
                            + Cast(Getdate() AS BINARY(6)) AS UNIQUEIDENTIFIER)),
 	'2016-10-20',
-	'2019-10-29',
+	DATEADD(month, 1, CONVERT(date,GETDATE())),
 	'Let me win at chess',
 	(SELECT [Id] FROM [Identity].[AspNetUsers] WHERE [Email] LIKE 'superuser@environment-agency.gov.uk'),
 	@NotificationId

@@ -5,6 +5,7 @@ using Microsoft.Owin;
 
 namespace EA.Iws.Web
 {
+    using System.Net;
     using System.Web;
     using System.Web.Helpers;
     using System.Web.Mvc;
@@ -44,7 +45,11 @@ namespace EA.Iws.Web
             AntiForgeryConfig.RequireSsl = true;
             AntiForgeryConfig.CookieName = Prsd.Core.Web.Constants.CookiePrefix + Constants.AntiForgeryCookieName;
 
+            FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters, configuration.CurrentConfiguration);
+
             MvcHandler.DisableMvcResponseHeader = true;
+
+            ServicePointManager.SecurityProtocol |= SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12;
         }
     }
 }

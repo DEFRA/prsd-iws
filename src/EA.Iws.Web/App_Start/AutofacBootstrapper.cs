@@ -3,8 +3,9 @@
     using System.Web.Mvc;
     using Autofac;
     using Autofac.Integration.Mvc;
-    using Prsd.Core.Autofac;
+    using Modules;
     using Prsd.Core.Web.Mvc;
+    using MappingModule = Prsd.Core.Autofac.MappingModule;
 
     public class AutofacBootstrapper
     {

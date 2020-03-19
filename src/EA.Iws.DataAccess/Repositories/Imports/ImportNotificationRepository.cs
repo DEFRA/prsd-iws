@@ -130,6 +130,7 @@
                 DELETE FROM [ImportNotification].[WasteType] WHERE ImportNotificationId = @Id
                 DELETE FROM [ImportNotification].[Withdrawn] WHERE NotificationId = @Id
                 DELETE FROM [ImportNotification].[MovementAudit] WHERE NotificationId = @Id
+                DELETE FROM [ImportNotification].[Comments] WHERE NotificationId = @Id
                 DELETE FROM [Draft].[Import] WHERE ImportNotificationId = @Id 
                 DELETE FROM [ImportNotification].[Notification] WHERE Id = @Id",
                 new SqlParameter("@Id", notificationId));

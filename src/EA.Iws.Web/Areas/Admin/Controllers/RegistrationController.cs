@@ -18,19 +18,23 @@
     using Requests.Admin.UserAdministration;
     using ViewModels.Registration;
 
+    [Authorize]
     public class RegistrationController : Controller
     {
         private readonly IIwsClient client;
         private readonly IAuthenticationManager authenticationManager;
         private readonly Func<IOAuthClient> oauthClient;
+        private readonly Func<IOAuthClientCredentialClient> oauthClientCredentialClient;
 
         public RegistrationController(Func<IOAuthClient> oauthClient,
             IIwsClient client,
-            IAuthenticationManager authenticationManager)
+            IAuthenticationManager authenticationManager, 
+            Func<IOAuthClientCredentialClient> oauthClientCredentialClient)
         {
             this.oauthClient = oauthClient;
             this.client = client;
             this.authenticationManager = authenticationManager;
+            this.oauthClientCredentialClient = oauthClientCredentialClient;
         }
 
         [HttpGet]
@@ -52,8 +56,17 @@
                 .Select(p => new SelectListItem() { Text = p.Value, Value = p.Key.ToString() });
 
             model.CompetentAuthorities = new SelectList(competentAuthorities, "Value", "Text");
-            
-            var result = await client.SendAsync(User.GetAccessToken(), new GetLocalAreas());
+
+            string token = User.GetAccessToken();
+            if (string.IsNullOrWhiteSpace(token))
+            {
+                var tokenResponse = await oauthClientCredentialClient().GetClientCredentialsAsync();
+
+                token = tokenResponse.AccessToken;
+            }
+
+            var result = await client.SendAsync(token, new GetLocalAreas());
+
             model.Areas = new SelectList(result.Select(area => new SelectListItem { Text = area.Name, Value = area.Id.ToString() }), "Value", "Text");
             
             return model;
@@ -80,7 +93,9 @@
 
             try
             {
-                var userId = await client.Registration.RegisterAdminAsync(adminRegistrationData);
+                var response = await oauthClientCredentialClient().GetClientCredentialsAsync();
+
+                var userId = await client.Registration.RegisterAdminAsync(response.AccessToken, adminRegistrationData);
                 var signInResponse = await oauthClient().GetAccessTokenAsync(model.Email, model.Password);
                 authenticationManager.SignIn(signInResponse.GenerateUserIdentity());
 
@@ -145,10 +160,11 @@
         }
 
         [HttpGet]
-        [AllowAnonymous]
         public async Task<ActionResult> AdminVerifyEmail(Guid id, string code)
         {
-            bool result = await client.Registration.VerifyEmailAsync(new VerifiedEmailData { Id = id, Code = code });
+            var response = await oauthClientCredentialClient().GetClientCredentialsAsync();
+
+            var result = await client.Registration.VerifyEmailAsync(response.AccessToken, new VerifiedEmailData { Id = id, Code = code });
 
             if (!result)
             {

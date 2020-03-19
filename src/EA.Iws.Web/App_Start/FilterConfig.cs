@@ -3,11 +3,17 @@
     using System.Web.Mvc;
     using Infrastructure;
     using Infrastructure.VirusScanning;
+    using Services;
 
     public class FilterConfig
     {
-        public static void RegisterGlobalFilters(GlobalFilterCollection filters)
+        public static void RegisterGlobalFilters(GlobalFilterCollection filters, IAppConfiguration configuration)
         {
+            if (configuration.MaintenanceMode)
+            {
+                filters.Add(new MaintenanceModeFilterAttribute(), 0);
+            }
+
             // Order of filters depends on their type - http://stackoverflow.com/a/10232898
 
             // Authorization filters run before actions, so lower order will run first
