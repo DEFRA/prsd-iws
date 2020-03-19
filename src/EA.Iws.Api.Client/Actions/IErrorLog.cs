@@ -5,7 +5,7 @@
 
     public interface IErrorLog
     {
-        Task<bool> Create(ErrorData errorData);
+        Task<bool> Create(string accessToken, ErrorData errorData);
 
         Task<ErrorData> Get(string accessToken, string id, string applicationName = "");
 

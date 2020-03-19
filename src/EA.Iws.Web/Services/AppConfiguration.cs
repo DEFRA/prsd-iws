@@ -2,7 +2,7 @@
 {
     using System.ComponentModel;
 
-    public class AppConfiguration
+    public class AppConfiguration : IAppConfiguration
     {
         [DefaultValue("Development")]
         public string Environment { get; set; }
@@ -22,6 +22,10 @@
 
         public string ApiClientId { get; set; }
 
+        public string ApiClientCredentialSecret { get; set; }
+
+        public string ApiClientCredentialId { get; set; }
+
         [DefaultValue("~/App_Data/uploads")]
         public string FileUploadTempPath { get; set; }
 
@@ -29,5 +33,23 @@
         public int FileSafeTimerMilliseconds { get; set; }
 
         public string DonePageUrl { get; set; }
+
+        [DefaultValue(false)]
+        public bool MaintenanceMode { get; set; }
+
+        [DefaultValue(null)]
+        public string ClamAvHost { get; set; }
+
+        [DefaultValue(null)]
+        public int ClamAvPort { get; set; }
+
+        [DefaultValue(true)]
+        public bool UseLocalScan { get; set; }
+
+        [DefaultValue("")]
+        public string ScanUrl { get; set; }
+
+        [DefaultValue("")]
+        public string AvCertPath { get; set; }
     }
 }

@@ -2,7 +2,7 @@
 {
     using System.ComponentModel;
 
-    public class AppConfiguration
+    public class AppConfiguration : IAppConfiguration
     {
         [DefaultValue("Development")]
         public string Environment { get; set; }
@@ -23,5 +23,11 @@
         public string ApiSecret { get; set; }
 
         public string ApiClientId { get; set; }
+
+        public string ApiClientCredentialSecret { get; set; }
+
+        public string ApiClientCredentialId { get; set; }
+
+        public bool MaintenanceMode { get; set; }
     }
 }

@@ -5,6 +5,7 @@ using Microsoft.Owin;
 
 namespace EA.Iws.Api
 {
+    using System.Net;
     using System.Web;
     using System.Web.Http;
     using System.Web.Http.ExceptionHandling;
@@ -15,6 +16,8 @@ namespace EA.Iws.Api
     using IdentityServer3.Core.Configuration;
     using IdSrv;
     using Infrastructure;
+    using Infrastructure.Services;
+    using IWS.Api.Infrastructure.Infrastructure;
     using Microsoft.Owin.Security.DataProtection;
     using Newtonsoft.Json.Serialization;
     using Owin;
@@ -51,7 +54,7 @@ namespace EA.Iws.Api
             config.MapHttpAttributeRoutes();
             config.Routes.MapHttpRoute("DefaultApi", "api/{controller}/{id}", new { id = RouteParameter.Optional });
             config.Services.Add(typeof(IExceptionLogger), new ElmahExceptionLogger());
-            config.Filters.Add(new ElmahHandleErrorApiAttribute());
+            config.Filters.AddRange(new FilterConfig(configurationService.CurrentConfiguration).Collection);
             config.DependencyResolver = new AutofacWebApiDependencyResolver(container);
             config.Formatters.JsonFormatter.SerializerSettings.ContractResolver = new DefaultContractResolver { IgnoreSerializableAttribute = true };
 
@@ -60,7 +63,7 @@ namespace EA.Iws.Api
             app.UseIdentityServerBearerTokenAuthentication(new IdentityServerBearerTokenAuthenticationOptions
             {
                 Authority = configurationService.CurrentConfiguration.SiteRoot,
-                RequiredScopes = new[] { "api1" },
+                RequiredScopes = new[] { "api1", "api3" },
                 ValidationMode = ValidationMode.ValidationEndpoint
             });
 
@@ -70,6 +73,8 @@ namespace EA.Iws.Api
             app.UseClaimsTransformation(ClaimsTransformationOptionsFactory.Create());
 
             app.UseWebApi(config);
+
+            ServicePointManager.SecurityProtocol |= SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12;
         }
 
         private static IdentityServerOptions GetIdentityServerOptions(IAppBuilder app, AppConfiguration config)
@@ -79,7 +84,8 @@ namespace EA.Iws.Api
 
             return new IdentityServerOptions
             {
-                Factory = factory
+                Factory = factory,
+                EnableWelcomePage = false
             };
         }
     }

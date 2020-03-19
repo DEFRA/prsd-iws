@@ -38,13 +38,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="EA.Prsd.Core, Version=1.0.16294.2, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\EA.Prsd.Core.1.0.16294-develop2\lib\net452\EA.Prsd.Core.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -70,9 +67,13 @@
     <Content Include="scripts\Everytime\03-StoredProcedures\0013-Compliance.sql" />
     <Content Include="scripts\Everytime\04-Synonyms\0001-elmah.sql" />
     <Content Include="scripts\Everytime\02-Views\0025-Reports-BlanketBonds.sql" />
+    <Content Include="scripts\TestData\20191213-103900-create-export-notification-external-user-2507-EA.sql" />
+    <Content Include="scripts\TestData\20191209-123700-create-import-notification-internal-user-7702.sql" />
     <Content Include="scripts\TestData\20190123-175000-create-submitted-notification-2504.sql" />
     <Content Include="scripts\TestData\20190123-175000-create-submitted-notification-2503.sql" />
     <Content Include="scripts\TestData\20190123-175000-create-submitted-notification-2502.sql" />
+    <Content Include="scripts\TestData\20191206-173100-create-export-notification-external-user-2506-EA.sql" />
+    <Content Include="scripts\TestData\20191206-134000-create-export-notification-internal-user-2505-EA.sql" />
     <Content Include="scripts\Update\0003-Migration\Sprint1\20170118-153400-drop-countryid.sql" />
     <Content Include="scripts\Update\0003-Migration\Sprint1\20170118-160400-add-indexes.sql" />
     <Content Include="scripts\Update\0003-Migration\Sprint1\20170119-114000-add-indexes.sql" />
@@ -113,6 +114,8 @@
     <Content Include="scripts\Update\0006-CI-2019\Sprint1\20190411-153000-add-lookup-shipment-audit-type-table.sql" />
     <Content Include="scripts\Update\0006-CI-2019\Sprint2\20190424-110200-add-incomplete-lookup-shipment-audit-type-data.sql" />
     <Content Include="scripts\Update\0006-CI-2019\Sprint3\20190515-1058-alter-foi-cache-table.sql" />
+    <Content Include="scripts\Update\0006 - Azure\20191218-1015-create-sessions-table.sql" />
+    <Content Include="scripts\Update\0007-Support\20191127-1058-update-french-CA.sql" />
     <Content Include="unindexed-foreign-keys.sql" />
     <Content Include="scripts\Everytime\01-Functions\0003-Reports-PricingInfo.sql" />
     <Content Include="scripts\Everytime\03-StoredProcedures\0003-uspUpdateImportNotificationKeyDates.sql" />
@@ -461,6 +464,12 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\EA.Prsd.Core\EA.Prsd.Core.csproj">
+      <Project>{d38ea5ef-f9f5-480c-ae0a-214122559426}</Project>
+      <Name>EA.Prsd.Core</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

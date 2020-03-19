@@ -4,6 +4,9 @@ SET @notificationNumberInc = 100;
 DECLARE @notificationNumberSeed NVARCHAR(11);
 SET @notificationNumberSeed = 'GB 9999 000'
 
+DECLARE @UserId UNIQUEIDENTIFIER;
+SELECT @UserId = id FROM [Identity].[aspnetusers] WHERE [email] = 'superuser@environment-agency.gov.uk'
+
 WHILE @notificationNumberInc < 105
 BEGIN
 	DECLARE @notificationNumber NVARCHAR(14)
@@ -13,12 +16,7 @@ BEGIN
 
 	--Add notification
 
-			DECLARE @UserId UNIQUEIDENTIFIER;
 			DECLARE @ImportNotificationId UNIQUEIDENTIFIER = NEWID();
-
-			SELECT @UserId = id
-			FROM   [Identity].[aspnetusers]
-			WHERE  [email] = 'superuser@environment-agency.gov.uk'
 
 			INSERT INTO [ImportNotification].[Notification]
 					   ([Id]
@@ -283,7 +281,7 @@ BEGIN
 
 			SELECT @CAId = id
 			FROM   [Lookup].[competentauthority]
-			WHERE  [code] = 'FR';
+			WHERE  [code] = 'F';
 
 			SELECT @EntryId = id
 			FROM   [Notification].[entryorexitpoint]
@@ -430,5 +428,9 @@ BEGIN
 			END;
 
 	--End Add movements
+
+	-- Add comment
+	INSERT INTO [ImportNotification].[Comments] ([Id], [NotificationId], [UserId], [ShipmentNumber], [Comment], [DateAdded])
+	VALUES (NEWID(), @ImportNotificationId, @UserId, @notificationNumberInc, 'Some really interesting comment', GETDATE());
 
 END;

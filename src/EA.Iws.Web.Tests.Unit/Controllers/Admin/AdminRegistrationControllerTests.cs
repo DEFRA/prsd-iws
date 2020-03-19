@@ -78,7 +78,9 @@
         {
             var oauth = A.Fake<IOAuthClient>();
             var iwsClient = A.Fake<IIwsClient>();
-            var registrationController = new Areas.Admin.Controllers.RegistrationController(() => oauth, iwsClient, null);
+            var clientCredentialsClient = A.Fake<IOAuthClientCredentialClient>();
+
+            var registrationController = new Areas.Admin.Controllers.RegistrationController(() => oauth, iwsClient, null, () => clientCredentialsClient);
             // Mimic the behaviour of the model binder which is responsible for Validating the Model
             var validationContext = new ValidationContext(viewModel, null, null);
             var validationResults = new List<ValidationResult>();
