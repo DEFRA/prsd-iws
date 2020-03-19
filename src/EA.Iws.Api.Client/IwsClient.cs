@@ -18,11 +18,11 @@
 
         public IwsClient(string baseUrl)
         {
-            var baseUri = new Uri(baseUrl);
+            var baseUri = new Uri(baseUrl.EnsureTrailingSlash());
 
             httpClient = new HttpClient
             {
-                BaseAddress = new Uri(baseUri, "/api/")
+                BaseAddress = new Uri(baseUri, "api/")
             };
         }
 
@@ -34,11 +34,6 @@
         public IErrorLog ErrorLog
         {
             get { return errorLog ?? (errorLog = new ErrorLog(httpClient)); }
-        }
-
-        public async Task<TResult> SendAsync<TResult>(IRequest<TResult> request)
-        {
-            return await InternalSendAsync(request).ConfigureAwait(false);
         }
 
         public async Task<TResult> SendAsync<TResult>(string accessToken, IRequest<TResult> request)

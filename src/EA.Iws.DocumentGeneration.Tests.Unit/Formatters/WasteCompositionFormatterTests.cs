@@ -86,9 +86,9 @@
         }
 
         [Theory]
-        [InlineData(null, 1, 10, ChemicalComposition.SRF)]
-        [InlineData("toast", 1, 10, ChemicalComposition.SRF)]
-        [InlineData("A Chemical Thing", 1.3, 10, ChemicalComposition.Other)]
+        [InlineData(null, 1, 10, ChemicalCompositionCategory.Food)]
+        [InlineData("toast", 1, 10, ChemicalCompositionCategory.Food)]
+        [InlineData("A Chemical Thing", 1.3, 10, ChemicalCompositionCategory.Other)]
         public void GetWasteCompositionPercentages_ListWithOneItem_ReturnsExpectedResult(string constituent,
             decimal min,
             decimal max,

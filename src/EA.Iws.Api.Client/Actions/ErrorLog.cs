@@ -5,7 +5,7 @@
     using Entities;
     using Prsd.Core.Web.Extensions;
 
-    internal class ErrorLog : IErrorLog
+    public class ErrorLog : IErrorLog
     {
         private const string Controller = "ErrorLog/";
         private readonly HttpClient httpClient;
@@ -15,8 +15,10 @@
             this.httpClient = httpClient;
         }
 
-        public async Task<bool> Create(ErrorData errorData)
+        public async Task<bool> Create(string accessToken, ErrorData errorData)
         {
+            httpClient.SetBearerToken(accessToken);
+            
             var response = await httpClient.PostAsJsonAsync(Controller + "Create", errorData);
             return response.IsSuccessStatusCode;
         }

@@ -6,6 +6,6 @@
 
     public interface IBulkFileValidator
     {
-        Task<BulkFileRulesSummary> GetFileRulesSummary(HttpPostedFileBase file, BulkFileType type);
+        Task<BulkFileRulesSummary> GetFileRulesSummary(HttpPostedFileBase file, BulkFileType type, string token);
     }
 }

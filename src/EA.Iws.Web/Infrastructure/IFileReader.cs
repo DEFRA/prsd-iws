@@ -6,8 +6,8 @@
 
     public interface IFileReader
     {
-        Task<byte[]> GetFileBytes(HttpPostedFileBase file);
+        Task<byte[]> GetFileBytes(HttpPostedFileBase file, string token);
 
-        Task<DataTable> GetFirstDataTable(HttpPostedFileBase file, bool isCsv, bool useHeaderRow);
+        Task<DataTable> GetFirstDataTable(HttpPostedFileBase file, bool isCsv, bool useHeaderRow, string token);
     }
 }

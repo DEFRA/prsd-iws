@@ -7,7 +7,7 @@
     using System.Threading.Tasks;
     using System.Web.Http;
     using Core.Authorization;
-    using Infrastructure;
+    using EA.IWS.Api.Infrastructure.Infrastructure;
     using Newtonsoft.Json;
     using Prsd.Core.Mediator;
     using Prsd.Core.Web.ApiClient;
@@ -15,6 +15,7 @@
     using Serilog;
 
     [RoutePrefix("api")]
+    [Authorize]
     public class MediatorController : ApiController
     {
         private readonly IMediator mediator;

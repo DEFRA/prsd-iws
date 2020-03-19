@@ -22,18 +22,21 @@
     {
         private readonly IAuthenticationManager authenticationManager;
         private readonly IOAuthClient oauthClient;
+        private readonly IOAuthClientCredentialClient oauthClientCredentialClient;
         private readonly IIwsClient client;
         private readonly IUserInfoClient userInfoClient;
 
         public AccountController(IOAuthClient oauthClient,
             IAuthenticationManager authenticationManager,
             IIwsClient client,
-            IUserInfoClient userInfoClient)
+            IUserInfoClient userInfoClient, 
+            IOAuthClientCredentialClient oauthClientCredentialClient)
         {
             this.oauthClient = oauthClient;
             this.client = client;
             this.authenticationManager = authenticationManager;
             this.userInfoClient = userInfoClient;
+            this.oauthClientCredentialClient = oauthClientCredentialClient;
         }
 
         [HttpGet]
@@ -152,7 +155,9 @@
         [AllowAnonymous]
         public async Task<ActionResult> VerifyEmail(Guid id, string code)
         {
-            bool result = await client.Registration.VerifyEmailAsync(new VerifiedEmailData { Id = id, Code = code });
+            var response = await oauthClientCredentialClient.GetClientCredentialsAsync();
+
+            var result = await client.Registration.VerifyEmailAsync(response.AccessToken, new VerifiedEmailData { Id = id, Code = code });
 
             if (!result)
             {
@@ -179,7 +184,9 @@
                 return View(model);
             }
 
-            var result = await client.Registration.ResetPasswordRequestAsync(
+            var response = await oauthClientCredentialClient.GetClientCredentialsAsync();
+
+            var result = await client.Registration.ResetPasswordRequestAsync(response.AccessToken,
                 new PasswordResetRequest
                 {
                     EmailAddress = model.Email,
@@ -220,7 +227,9 @@
             {
                 try
                 {
-                    await client.Registration.ResetPasswordAsync(new PasswordResetData
+                    var response = await oauthClientCredentialClient.GetClientCredentialsAsync();
+
+                    await client.Registration.ResetPasswordAsync(response.AccessToken, new PasswordResetData
                     {
                         Password = model.Password,
                         Token = code,

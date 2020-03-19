@@ -9,7 +9,7 @@
     using System.Web;
     using Core.Movement.BulkUpload;
     using Core.Rules;
-    using VirusScanning;
+    using EA.Iws.Scanning;
 
     public class BulkFileValidator : IBulkFileValidator
     {
@@ -28,20 +28,20 @@
             this.fileReader = fileReader;
         }
 
-        public async Task<BulkFileRulesSummary> GetFileRulesSummary(HttpPostedFileBase file, BulkFileType type)
+        public async Task<BulkFileRulesSummary> GetFileRulesSummary(HttpPostedFileBase file, BulkFileType type, string token)
         {
             var rules = new List<RuleResult<BulkFileRules>>
             {
                 GetFileTypesRule(file, type),
                 GetFileSizeRule(file),
-                await GetVirusScan(file)
+                await GetVirusScan(file, token)
             };
 
             if (type != BulkFileType.SupportingDocument &&
                 // Only run this rule if all rules above have passed.
                 rules.All(r => r.MessageLevel == MessageLevel.Success))
             {
-                rules.Add(await GetFileParse(file, type));
+                rules.Add(await GetFileParse(file, type, token));
 
                 if (DataTable != null && DataTable.Rows.Count == 0)
                 {
@@ -82,7 +82,7 @@
             return new RuleResult<BulkFileRules>(BulkFileRules.FileSize, result);
         }
 
-        private async Task<RuleResult<BulkFileRules>> GetVirusScan(HttpPostedFileBase file)
+        private async Task<RuleResult<BulkFileRules>> GetVirusScan(HttpPostedFileBase file, string token)
         {
             var result = MessageLevel.Success;
             byte[] fileBytes;
@@ -96,7 +96,7 @@
                 FileBytes = fileBytes;
             }
 
-            if (await virusScanner.ScanFileAsync(fileBytes) == ScanResult.Virus)
+            if (await virusScanner.ScanFileAsync(fileBytes, token) == ScanResult.Virus)
             {
                 result = MessageLevel.Error;
             }
@@ -104,7 +104,7 @@
             return new RuleResult<BulkFileRules>(BulkFileRules.Virus, result);
         }
 
-        private async Task<RuleResult<BulkFileRules>> GetFileParse(HttpPostedFileBase file, BulkFileType type)
+        private async Task<RuleResult<BulkFileRules>> GetFileParse(HttpPostedFileBase file, BulkFileType type, string token)
         {
             MessageLevel result;
 
@@ -114,7 +114,7 @@
 
                 var isCsv = extension == ".csv";
 
-                var dataTable = await fileReader.GetFirstDataTable(file, isCsv, !isCsv);
+                var dataTable = await fileReader.GetFirstDataTable(file, isCsv, !isCsv, token);
 
                 PadMissingColumn(dataTable, type);
 
