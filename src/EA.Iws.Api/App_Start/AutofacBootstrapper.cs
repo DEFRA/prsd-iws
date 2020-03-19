@@ -7,6 +7,7 @@
     using DataAccess.Identity;
     using DocumentGeneration;
     using Identity;
+    using Infrastructure.Services;
     using Microsoft.AspNet.Identity;
     using Prsd.Core.Autofac;
     using RequestHandlers;

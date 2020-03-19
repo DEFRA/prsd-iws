@@ -72,7 +72,7 @@
                 return View(model);
             }
 
-            var validationSummary = await validator.GetValidationSummary(model.File, notificationId);
+            var validationSummary = await validator.GetValidationSummary(model.File, notificationId, User.GetAccessToken());
             var failedFileRules = validationSummary.FileRulesResults.Where(r => r.MessageLevel == MessageLevel.Error).Select(r => r.Rule).ToList();
             var failedContentRules = validationSummary.ContentRulesResults.Where(r => r.MessageLevel == MessageLevel.Error).ToList();
 
@@ -131,7 +131,7 @@
                 return RedirectToAction("Warning");
             }
 
-            var validationSummary = await validator.GetShipmentMovementValidationSummary(model.File, notificationId);
+            var validationSummary = await validator.GetShipmentMovementValidationSummary(model.File, notificationId, User.GetAccessToken());
             var failedFileRules = validationSummary.FileRulesResults.Where(r => r.MessageLevel == MessageLevel.Error).Select(r => r.Rule).ToList();
 
             if (failedFileRules.Count > 0)

@@ -5,6 +5,7 @@
     using System.Web.Http;
     using Client.Entities;
     using Infrastructure;
+    using IWS.Api.Infrastructure.Infrastructure;
 
     [RoutePrefix("api/ErrorLog")]
     [Authorize(Roles = "administrator")]
@@ -19,7 +20,7 @@
 
         [HttpPost]
         [Route("Create")]
-        [AllowAnonymous]
+        [Authorize]
         public async Task<IHttpActionResult> Create(ErrorData errorData)
         {
             await logger.Log(errorData);

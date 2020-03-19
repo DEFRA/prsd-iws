@@ -34,5 +34,11 @@
         {
             return View();
         }
+
+        [HttpGet]
+        public ActionResult Maintenance()
+        {
+            return View();
+        }
     }
 }

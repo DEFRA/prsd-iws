@@ -59,7 +59,7 @@
             {
                 await
                 mediator.SendAsync(
-                    new SetProcessOfGenerationAnnex(new AnnexUpload(await fileReader.GetFileBytes(model.ProcessOfGeneration),
+                    new SetProcessOfGenerationAnnex(new AnnexUpload(await fileReader.GetFileBytes(model.ProcessOfGeneration, User.GetAccessToken()),
                         Path.GetExtension(model.ProcessOfGeneration.FileName), id)));
                 numberOfAnnexes++;
             }
@@ -68,7 +68,7 @@
             {
                 await
                     mediator.SendAsync(
-                        new SetTechnologyEmployedAnnex(new AnnexUpload(await fileReader.GetFileBytes(model.TechnologyEmployed),
+                        new SetTechnologyEmployedAnnex(new AnnexUpload(await fileReader.GetFileBytes(model.TechnologyEmployed, User.GetAccessToken()),
                             Path.GetExtension(model.TechnologyEmployed.FileName), id)));
                 numberOfAnnexes++;
             }
@@ -77,7 +77,7 @@
             {
                 await
                     mediator.SendAsync(
-                        new SetWasteCompositionAnnex(new AnnexUpload(await fileReader.GetFileBytes(model.Composition),
+                        new SetWasteCompositionAnnex(new AnnexUpload(await fileReader.GetFileBytes(model.Composition, User.GetAccessToken()),
                             Path.GetExtension(model.Composition.FileName), id)));
                 numberOfAnnexes++;
             }

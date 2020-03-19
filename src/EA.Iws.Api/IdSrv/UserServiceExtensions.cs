@@ -6,6 +6,7 @@
     using Identity;
     using IdentityServer3.Core.Configuration;
     using IdentityServer3.Core.Services;
+    using Infrastructure.Services;
     using Microsoft.AspNet.Identity;
     using Microsoft.Owin.Security;
     using Microsoft.Owin.Security.DataProtection;
