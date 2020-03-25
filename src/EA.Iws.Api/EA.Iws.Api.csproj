@@ -227,6 +227,7 @@
     <Compile Include="Controllers\ErrorLogController.cs" />
     <Compile Include="Controllers\WarmupController.cs" />
     <Compile Include="Filters\MaintenanceModeFilter.cs" />
+    <Compile Include="Identity\PasswordPolicy.cs" />
     <Compile Include="IdSrv\AspNetIdentityUserService.cs" />
     <Compile Include="IdSrv\ClaimsTransformationOptionsFactory.cs" />
     <Compile Include="Controllers\MediatorController.cs" />

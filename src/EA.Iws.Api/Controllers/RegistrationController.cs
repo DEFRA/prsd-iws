@@ -183,7 +183,7 @@
                 return Ok(true);
             }
 
-            return Ok(false);
+            return Ok(true);
         }
 
         [HttpPost]

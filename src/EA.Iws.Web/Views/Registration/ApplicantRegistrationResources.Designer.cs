@@ -19,7 +19,7 @@ namespace EA.Iws.Web.Views.Registration {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class ApplicantRegistrationResources {
@@ -223,7 +223,16 @@ namespace EA.Iws.Web.Views.Registration {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Please check that your password has at least 8 characters and contains at least one upper case letter, one lower case letter and one number.
+        ///   Looks up a localized string similar to Password must not be the same as your email.
+        /// </summary>
+        public static string PasswordEmailMatch {
+            get {
+                return ResourceManager.GetString("PasswordEmailMatch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please check that your password has at least 8 characters and contains at least one upper case letter, one lower case letter, 1 special character and one number.
         /// </summary>
         public static string PasswordFormatValidation {
             get {
@@ -232,7 +241,7 @@ namespace EA.Iws.Web.Views.Registration {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Please check that your password has at least 8 characters and contains at least one upper case letter, one lower case letter and one number.
+        ///   Looks up a localized string similar to Please check that your password has at least 8 characters and contains at least one upper case letter, one lower case letter, 1 special character and one number.
         /// </summary>
         public static string PasswordHint {
             get {

@@ -6,7 +6,6 @@
     public class ResetPasswordViewModel
     {
         [Required]
-        [StringLength(100, ErrorMessageResourceName = "PasswordLength", ErrorMessageResourceType = typeof(ResetPasswordResources), MinimumLength = 8)]
         [DataType(DataType.Password)]
         [Display(Name = "Password", ResourceType = typeof(ResetPasswordResources))]
         public string Password { get; set; }

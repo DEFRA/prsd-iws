@@ -35,14 +35,7 @@
             };
 
             // Configure validation logic for passwords
-            PasswordValidator = new PasswordValidator
-            {
-                RequiredLength = 8,
-                RequireNonLetterOrDigit = false,
-                RequireDigit = true,
-                RequireLowercase = true,
-                RequireUppercase = true
-            };
+            PasswordValidator = new PasswordPolicy();
 
             // Configure user lockout defaults
             UserLockoutEnabledByDefault = true;

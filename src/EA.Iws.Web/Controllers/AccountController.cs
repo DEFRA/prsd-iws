@@ -193,12 +193,6 @@
                     Url = Url.Action("ResetPassword", "Account", null, Request.Url.Scheme)
                 });
 
-            if (!result)
-            {
-                    ModelState.AddModelError("Email", ForgotPasswordResources.EmailNotRegistered);
-                return View(model);
-            }
-
             return RedirectToAction("ResetPasswordEmailSent", "Account", new { email = model.Email });
         }
 
