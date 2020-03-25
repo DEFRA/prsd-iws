@@ -1394,6 +1394,7 @@
     <Compile Include="Mappings\NotificationAssessment\EditHCodeMap.cs" />
     <Compile Include="Mappings\NotificationAssessment\EditYCodeMap.cs" />
     <Compile Include="Services\IAppConfiguration.cs" />
+    <Compile Include="ViewModels\Registration\CreateUserViewModelBase.cs" />
     <Compile Include="ViewModels\Shared\DateEntryViewModel.cs" />
     <Compile Include="Areas\AdminExportAssessment\ViewModels\Comments\DeleteCommentViewModel.cs" />
     <Compile Include="Areas\AdminExportAssessment\ViewModels\DateInputViewModelResources.Designer.cs">

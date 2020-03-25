@@ -144,6 +144,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ViewModels\Registration\AdminRegistrationViewModelTests.cs" />
     <Compile Include="Controllers\AccountControllerTests.cs" />
     <Compile Include="Controllers\AddressBook\EditControllerTests.cs" />
     <Compile Include="Controllers\AdminExportNotificationMovements\CaptureMovementControllerTests.cs" />
@@ -210,6 +211,8 @@
     <Compile Include="ViewModels\AdminExportNotificationMovements\CaptureViewModelTests.cs" />
     <Compile Include="ViewModels\AdminImportNotificationMovements\CaptureViewModelTests.cs" />
     <Compile Include="ViewModels\Admin\AdvancedSearch\IndexViewModelTests.cs" />
+    <Compile Include="ViewModels\Registration\CreateUserModelTestBase.cs" />
+    <Compile Include="ViewModels\Registration\CreateViewModelBaseTests.cs" />
     <Compile Include="ViewModels\Admin\NotificationNumberViewModelTests.cs" />
     <Compile Include="ViewModels\DisposalCostViewModelTests.cs" />
     <Compile Include="ViewModels\CustomsOfficeViewModelTests.cs" />
@@ -218,6 +221,7 @@
     <Compile Include="ViewModels\NotificationApplication\UpdateHistoryViewModelTests.cs" />
     <Compile Include="ViewModels\NotificationApplication\WasteCodeOverviewViewModelTests.cs" />
     <Compile Include="ViewModels\NotificationMovements\CancelSuccessViewModelTests.cs" />
+    <Compile Include="ViewModels\Registration\ApplicantRegistrationViewModelTests.cs" />
     <Compile Include="ViewModels\TechnologyEmployedViewModelTests.cs" />
     <Compile Include="ViewModels\ReasonForExportViewModelTests.cs" />
     <Compile Include="ViewModels\ShipmentInfoViewModelTests.cs" />
@@ -268,7 +272,9 @@
   <ItemGroup>
     <Analyzer Include="..\packages\xunit.analyzers.0.10.0\analyzers\dotnet\cs\xunit.analyzers.dll" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Areas\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

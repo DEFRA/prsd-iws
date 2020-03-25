@@ -171,11 +171,14 @@
   <data name="Password" xml:space="preserve">
     <value>Password</value>
   </data>
+  <data name="PasswordEmailMatch" xml:space="preserve">
+    <value>Password must not be the same as your email</value>
+  </data>
   <data name="PasswordFormatValidation" xml:space="preserve">
-    <value>Please check that your password has at least 8 characters and contains at least one upper case letter, one lower case letter and one number</value>
+    <value>Please check that your password has at least 8 characters and contains at least one upper case letter, one lower case letter, 1 special character and one number</value>
   </data>
   <data name="PasswordHint" xml:space="preserve">
-    <value>Please check that your password has at least 8 characters and contains at least one upper case letter, one lower case letter and one number</value>
+    <value>Please check that your password has at least 8 characters and contains at least one upper case letter, one lower case letter, 1 special character and one number</value>
   </data>
   <data name="PasswordLength" xml:space="preserve">
     <value>Your password must be at least {2} characters long</value>

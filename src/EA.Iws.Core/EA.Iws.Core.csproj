@@ -66,6 +66,7 @@
     <Compile Include="CustomsOffice\EntryExitCustomsOfficeSelection.cs" />
     <Compile Include="Documents\BulkType.cs" />
     <Compile Include="Documents\FileUploadType.cs" />
+    <Compile Include="Extensions\Extensions.cs" />
     <Compile Include="FinancialGuarantee\FinancialGuaranteeData.cs" />
     <Compile Include="FinancialGuarantee\FinancialGuaranteeDecision.cs" />
     <Compile Include="Admin\InternalUserData.cs" />

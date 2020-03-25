@@ -10,7 +10,7 @@
     using Services;
     using Views.Registration;
 
-    public class ApplicantRegistrationViewModel : IValidatableObject
+    public class ApplicantRegistrationViewModel : CreateUserModelBase, IValidatableObject
     {
         public ApplicantRegistrationViewModel()
         {
@@ -43,13 +43,12 @@
         [Required(ErrorMessageResourceType = typeof(ApplicantRegistrationResources), ErrorMessageResourceName = "EmailRequired")]
         [EmailAddress(ErrorMessageResourceType = typeof(ApplicantRegistrationResources), ErrorMessageResourceName = "EmailFormatValidation", ErrorMessage = null)]
         [Display(Name = "Email", ResourceType = typeof(ApplicantRegistrationResources))]
-        public string Email { get; set; }
+        public override string Email { get; set; }
 
         [Required(ErrorMessageResourceType = typeof(ApplicantRegistrationResources), ErrorMessageResourceName = "PasswordRequired")]
-        [StringLength(100, ErrorMessageResourceName = "PasswordLength", ErrorMessageResourceType = typeof(ApplicantRegistrationResources), MinimumLength = 8)]
         [DataType(DataType.Password, ErrorMessageResourceType = typeof(ApplicantRegistrationResources), ErrorMessageResourceName = "PasswordFormatValidation")]
         [Display(Name = "Password", ResourceType = typeof(ApplicantRegistrationResources))]
-        public string Password { get; set; }
+        public override string Password { get; set; }
 
         [Required(ErrorMessageResourceType = typeof(ApplicantRegistrationResources), ErrorMessageResourceName = "ConfirmPasswordRequired")]
         [DataType(DataType.Password)]
@@ -62,8 +61,10 @@
 
         public AddressData Address { get; set; }
 
-        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+        public override IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
+            var baseValidationResults = base.Validate(validationContext).ToList();
+
             var config = DependencyResolver.Current.GetService<AppConfiguration>();
 
             if (config.Environment.Equals("LIVE", StringComparison.InvariantCultureIgnoreCase))
@@ -71,9 +72,11 @@
                 var competentAuthorityEmailDomains = CompetentAuthorityMetadata.GetValidEmailAddressDomains();
                 if (competentAuthorityEmailDomains.Any(domain => Email.ToString().EndsWith(domain)))
                 {
-                    yield return new ValidationResult(ApplicantRegistrationResources.EmailNotCompetentAuthority, new[] { "Email" });
+                    baseValidationResults.Add(new ValidationResult(ApplicantRegistrationResources.EmailNotCompetentAuthority, new[] { "Email" }));
                 }
             }
+
+            return baseValidationResults;
         }
     }
 }

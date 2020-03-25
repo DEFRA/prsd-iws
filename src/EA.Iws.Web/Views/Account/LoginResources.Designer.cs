@@ -19,7 +19,7 @@ namespace EA.Iws.Web.Views.Account {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class LoginResources {
@@ -124,7 +124,7 @@ namespace EA.Iws.Web.Views.Account {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The email address or password is incorrect. Please make sure you enter the right login details..
+        ///   Looks up a localized string similar to The email address or password is incorrect. Please make sure you enter the correct login details..
         /// </summary>
         public static string InvalidLoginDetails {
             get {
@@ -151,7 +151,7 @@ namespace EA.Iws.Web.Views.Account {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Please enter your password.
+        ///   Looks up a localized string similar to The email address or password is incorrect. Please make sure you enter the correct login details..
         /// </summary>
         public static string PasswordRequired {
             get {
