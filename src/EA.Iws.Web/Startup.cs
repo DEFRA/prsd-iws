@@ -6,6 +6,7 @@ using Microsoft.Owin;
 namespace EA.Iws.Web
 {
     using System.Net;
+    using System.Reflection;
     using System.Web;
     using System.Web.Helpers;
     using System.Web.Mvc;
@@ -20,6 +21,8 @@ namespace EA.Iws.Web
 
     public partial class Startup
     {
+        public static string ApplicationVersion { get; private set; }
+
         public void Configuration(IAppBuilder app)
         {
             var configuration = new ConfigurationService();
@@ -50,6 +53,8 @@ namespace EA.Iws.Web
             MvcHandler.DisableMvcResponseHeader = true;
 
             ServicePointManager.SecurityProtocol |= SecurityProtocolType.Tls11 | SecurityProtocolType.Tls12;
+
+            ApplicationVersion = Assembly.GetExecutingAssembly().GetName().Version.ToString();
         }
     }
 }

@@ -79,7 +79,7 @@ namespace EA.Iws.Web.Views.Account {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to If a valid e-mail address was entered, instructions to reset you password have been sent..
+        ///   Looks up a localized string similar to If a valid e-mail address was entered, instructions to reset your password have been sent..
         /// </summary>
         public static string HeaderDescription {
             get {
