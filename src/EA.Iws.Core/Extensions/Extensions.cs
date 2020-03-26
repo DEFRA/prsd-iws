@@ -6,7 +6,7 @@
     {
         public static bool IsCustom(this Type type)
         {
-            if (type.Namespace != null && type.Namespace.StartsWith("EA.Weee"))
+            if (type.Namespace != null && type.Namespace.StartsWith("EA.Iws"))
             {
                 return true;
             }
@@ -20,12 +20,12 @@
 
             if (property == null)
             {
-                throw new ArgumentException($"A property with the name '{propertyName}' was not found", nameof(propertyName));
+                throw new ArgumentException(string.Format("A property with the name '{0}' was not found", propertyName));
             }
 
             if (property.PropertyType != typeof(T))
             {
-                throw new InvalidCastException($"The property '{propertyName}' is of type '{property.PropertyType}' not the specified '{typeof(T)}'");
+                throw new InvalidCastException(string.Format("The property '{0}' is of type '{1}' not the specified '{2}'", propertyName, property.PropertyType, typeof(T)));
             }
 
             return (T)property.GetValue(obj, null);
