@@ -18,7 +18,7 @@
         {
             if (item == null)
             {
-                throw new ArgumentNullException(nameof(item));
+                throw new ArgumentNullException("item");
             }
             var result = true;
 
