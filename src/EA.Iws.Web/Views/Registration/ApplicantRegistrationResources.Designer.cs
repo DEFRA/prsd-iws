@@ -223,7 +223,7 @@ namespace EA.Iws.Web.Views.Registration {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Password must not be the same as your email.
+        ///   Looks up a localized string similar to The password cannot be the same as the email address.
         /// </summary>
         public static string PasswordEmailMatch {
             get {

@@ -35,7 +35,7 @@
             result.Should().SatisfyRespectively(
                 item =>
                 {
-                    item.ErrorMessage.Should().Be("Password must not be the same as your email");
+                    item.ErrorMessage.Should().Be("The password cannot be the same as the email address");
                     item.MemberNames.Should().Contain("Password");
                 });
         }
