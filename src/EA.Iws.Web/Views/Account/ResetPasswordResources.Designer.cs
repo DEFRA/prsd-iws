@@ -97,7 +97,7 @@ namespace EA.Iws.Web.Views.Account {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Please check that your password has at least 8 characters and contains at least one upper case letter, one lower case letter, 1 special character and one number.
+        ///   Looks up a localized string similar to Please check that your password has at least 8 characters and contains at least one upper case letter, one lower case letter, 1 special character and one number. The password cannot be the same as the email address..
         /// </summary>
         public static string PasswordHint {
             get {
@@ -106,7 +106,7 @@ namespace EA.Iws.Web.Views.Account {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Please check that your password has at least 8 characters and contains at least one upper case letter, one lower case letter, 1 special character and one number.
+        ///   Looks up a localized string similar to Please check that your password has at least 8 characters and contains at least one upper case letter, one lower case letter, 1 special character and one number. The password cannot be the same as the email address..
         /// </summary>
         public static string PasswordLength {
             get {
