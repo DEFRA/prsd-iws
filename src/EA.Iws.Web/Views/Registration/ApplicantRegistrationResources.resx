@@ -172,7 +172,7 @@
     <value>Password</value>
   </data>
   <data name="PasswordEmailMatch" xml:space="preserve">
-    <value>Password must not be the same as your email</value>
+    <value>The password cannot be the same as the email address</value>
   </data>
   <data name="PasswordFormatValidation" xml:space="preserve">
     <value>Please check that your password has at least 8 characters and contains at least one upper case letter, one lower case letter, 1 special character and one number</value>
