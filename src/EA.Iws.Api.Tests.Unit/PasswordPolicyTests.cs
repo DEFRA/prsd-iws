@@ -7,7 +7,7 @@
     public class PasswordPolicyTests
     {
         private readonly PasswordPolicy passwordPolicy;
-        private const string ErrorString = "Please check that your password has at least 8 characters and contains at least one upper case letter, one lower case letter, 1 special character and one number";
+        private const string ErrorString = "Please check that your password has at least 8 characters and contains at least one upper case letter, one lower case letter, 1 special character and one number. The password cannot be the same as the email address.";
 
         public PasswordPolicyTests()
         {

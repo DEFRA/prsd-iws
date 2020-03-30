@@ -49,7 +49,7 @@
 
             if (!result)
             {
-                return Task.FromResult(IdentityResult.Failed("Please check that your password has at least 8 characters and contains at least one upper case letter, one lower case letter, 1 special character and one number"));
+                return Task.FromResult(IdentityResult.Failed("Please check that your password has at least 8 characters and contains at least one upper case letter, one lower case letter, 1 special character and one number. The password cannot be the same as the email address."));
             }
 
             return Task.FromResult(IdentityResult.Success);
