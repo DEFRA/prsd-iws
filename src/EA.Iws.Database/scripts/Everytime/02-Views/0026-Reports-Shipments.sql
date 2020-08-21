@@ -4,8 +4,7 @@ GO
 
 ALTER VIEW [Reports].[Shipments]
 AS
-    
-    SELECT	
+	SELECT	
         M.NotificationId,
         'Export' AS [ImportOrExport],
         REPLACE(N.NotificationNumber, ' ', '') AS NotificationNumber,
@@ -39,7 +38,7 @@ AS
         TR.[ImportCountryName] AS DestinationCountry,
         TR.[ExitPoint] AS ExitPort,
         TR.[ExportCountryName] AS OriginatingCountry,
-        NS.[Description] AS [Status],
+        MS.Status,
         ND.[NotificationReceivedDate],
         STUFF(( SELECT ', ' + WC.Code AS [text()]
                 FROM [Notification].[WasteCodeInfo] WCI
@@ -143,14 +142,14 @@ AS
     INNER JOIN   [Reports].[TransportRoute] AS TR
     ON			[TR].[NotificationId] = [N].[Id]
 
+	LEFT JOIN   [Lookup].[MovementStatus] AS MS
+    ON			MS.Id = M.Status
+
     INNER JOIN	[Notification].[NotificationAssessment] AS NA
     ON			NA.NotificationApplicationId = N.Id
 
     INNER JOIN	[Notification].[NotificationDates] AS ND
     ON			ND.[NotificationAssessmentId] = NA.Id
-
-	INNER JOIN	[Lookup].[NotificationStatus] NS  
-	ON [NS].[Id] = [NA].[Status]
 
     LEFT JOIN   [Notification].[WasteCodeInfo] BaselCode
                 LEFT JOIN [Lookup].[WasteCode] BaselCodeInfo ON BaselCode.WasteCodeId = BaselCodeInfo.Id
@@ -205,7 +204,10 @@ AS
         TR.ImportCountryName AS DestinationCountry,
         TR.ExitPoint AS ExitPort,
         TR.ExportCountryName AS OriginatingCountry,
-        NS.[Description] AS [Status],
+        CASE 
+			WHEN M.[IsCancelled] = 1 THEN 'Cancelled'
+			ELSE ''
+		END AS [Status],
         ND.[NotificationReceivedDate],
         STUFF(( SELECT ', ' + WC.Code AS [text()]
                 FROM [ImportNotification].[WasteType] WT
@@ -319,12 +321,8 @@ AS
     INNER JOIN	[ImportNotification].[NotificationDates] AS ND
     ON			ND.[NotificationAssessmentId] = NA.Id
 
-	INNER JOIN	[Lookup].[ImportNotificationStatus] NS  
-	ON [NS].[Id] = [NA].[Status]
-
     LEFT JOIN   [ImportNotification].[WasteType] WasteType
                 INNER JOIN [ImportNotification].[WasteCode] WasteCode ON WasteType.Id = WasteCode.WasteTypeId
                 LEFT JOIN [Lookup].[WasteCode] WasteCodeInfo ON WasteCode.WasteCodeId = WasteCodeInfo.Id
     ON			WasteType.ImportNotificationId = N.Id AND WasteCodeInfo.CodeType IN (1, 2)
-
 GO
