@@ -1,4 +1,4 @@
-﻿BEGIN 
+﻿BEGIN
     SET NOCOUNT ON;
     DECLARE @CountryId          UNIQUEIDENTIFIER    = (SELECT NEWID()),
             @CountryName        NVARCHAR(2048)      = 'Ascension Island',
@@ -8,14 +8,14 @@
             @IsSystemUser       bit                 = 0,
             @IsTransitAuthority bit                 = NULL,
             @CAcode             NVARCHAR(25);
-    
+
     SET @CAcode = @IsoAlpha2Code; -- Currently set to be same as country code
     BEGIN TRY
-        SET XACT_ABORT ON; 
+        SET XACT_ABORT ON;
         BEGIN TRAN
 
             INSERT INTO [Lookup].[Country] ([Id],[Name],[IsoAlpha2Code],[IsEuropeanUnionMember])
-            VALUES (@CountryId, @CountryName, @IsoAlpha2Code, @IsEuropeanMemeber);
+            VALUES (@CountryId, @CountryName, @IsoAlpha2Code, @IsEuropeanMember);
 
             INSERT INTO [Lookup].[CompetentAuthority] ([Id],[Name],[Abbreviation],[IsSystemUser],[Code],[CountryId],[Region],[IsTransitAuthority])
             VALUES (NEWID(), @CAName, NULL, @IsSystemUser, @CAcode, @CountryId, NULL, @IsTransitAuthority);
