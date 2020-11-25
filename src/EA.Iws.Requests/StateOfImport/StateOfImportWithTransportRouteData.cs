@@ -21,9 +21,12 @@
 
         public CompetentAuthorityData[] CompetentAuthorities { get; set; }
 
+        public IEnumerable<IntraCountryExportAllowedData> IntraCountryExportAllowed { get; set; }
+
         public StateOfImportWithTransportRouteData()
         {
             TransitStates = new List<TransitStateData>();
+            IntraCountryExportAllowed = new IntraCountryExportAllowedData[0];
         }
     }
 }
