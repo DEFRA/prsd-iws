@@ -65,6 +65,12 @@
                     data.CompetentAuthorities = competentAuthorities.Select(ca => mapper.Map<CompetentAuthorityData>(ca)).ToArray();
                     data.EntryPoints = entryPoints.Select(e => mapper.Map<EntryOrExitPointData>(e)).ToArray();
                 }
+
+                if (data.StateOfExport != null)
+                {
+                    var allowed = await intraCountryExportAllowedRepository.GetImportCompetentAuthorities(data.StateOfExport.CompetentAuthority.Id);
+                    data.IntraCountryExportAllowed = allowed.Select(a => mapper.Map<IntraCountryExportAllowedData>(a)).ToArray();
+                }
             }
             
             data.Countries = countries.Select(c => mapper.Map<CountryData>(c)).ToArray();
