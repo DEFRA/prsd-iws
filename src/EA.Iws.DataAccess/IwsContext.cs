@@ -49,6 +49,8 @@
 
         public virtual DbSet<CompetentAuthority> CompetentAuthorities { get; set; }
 
+        public virtual DbSet<IntraCountryExportAllowed> IntraCountryExportAllowed { get; set; }
+
         public virtual DbSet<EntryOrExitPoint> EntryOrExitPoints { get; set; }
 
         public virtual DbSet<WasteCode> WasteCodes { get; set; }
