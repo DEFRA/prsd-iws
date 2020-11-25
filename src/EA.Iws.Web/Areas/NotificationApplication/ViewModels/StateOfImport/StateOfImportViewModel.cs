@@ -5,6 +5,7 @@
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using System.Linq;
     using System.Web.Mvc;
     using Views.StateOfImport;
     using Web.ViewModels.Shared;
@@ -47,7 +48,14 @@
         {
             if (CountryId.HasValue && CountryId == StateOfExportCountryId)
             {
-                yield return new ValidationResult(StateOfImportResources.ImportExportCountryShouldNotSame, new[] { "CountryId" });
+                // if StateOfExportCompetentAuthority is null, then still need to see if import CA shows up -- if not then still invalid
+
+                if (!IntraCountryExportAllowed.Any(x => CompetentAuthorities == null || CompetentAuthorities.SelectedValue == null ||
+                x == CompetentAuthorities.SelectedValue))
+                {
+                    // not allowed
+                    yield return new ValidationResult(StateOfImportResources.ImportExportCountryShouldNotSame, new[] { "CountryId" });
+                }
             }
         }
     }
