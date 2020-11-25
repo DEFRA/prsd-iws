@@ -300,6 +300,7 @@
     <Compile Include="NotificationApplication\Audit.cs" />
     <Compile Include="NotificationApplication\NotificationNumberFormatter.cs" />
     <Compile Include="NotificationApplication\NotificationSharedUserAddedEvent.cs" />
+    <Compile Include="IntraCountryExportAllowed.cs" />
     <Compile Include="NotificationApplication\ProducerCollection.cs" />
     <Compile Include="NotificationApplication\SetAllFacilitiesPreconsented.cs" />
     <Compile Include="NotificationApplication\SharedUser.cs" />
