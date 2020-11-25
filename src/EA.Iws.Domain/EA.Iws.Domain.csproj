@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IIntraCountryExportAllowedRepository.cs" />
     <Compile Include="DateTimeOffsetRange.cs" />
     <Compile Include="EmailAddress.cs" />
     <Compile Include="FinancialGuarantee\FinancialGuaranteeApproval.cs" />
