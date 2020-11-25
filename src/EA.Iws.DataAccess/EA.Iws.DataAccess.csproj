@@ -104,6 +104,7 @@
     <Compile Include="Mappings\Exports\FinancialGuaranteeCollectionMapping.cs" />
     <Compile Include="Mappings\Exports\MeansOfTransportMapping.cs" />
     <Compile Include="Mappings\Exports\MovementAuditMapping.cs" />
+    <Compile Include="Mappings\Common\IntraCountryExportAllowedMapping.cs" />
     <Compile Include="Mappings\Exports\NotificationCommentMapping.cs" />
     <Compile Include="Mappings\Exports\ProducerCollectionMapping.cs" />
     <Compile Include="Mappings\Exports\NumberOfShipmentsHistoryMapping.cs" />
