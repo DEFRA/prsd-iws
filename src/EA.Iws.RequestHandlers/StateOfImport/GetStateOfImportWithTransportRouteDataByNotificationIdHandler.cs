@@ -22,18 +22,21 @@
         private readonly ITransportRouteRepository transportRouteRepository;
         private readonly ICompetentAuthorityRepository competentAuthorityRepository;
         private readonly ICountryRepository countryRepository;
+        private readonly IIntraCountryExportAllowedRepository intraCountryExportAllowedRepository;
 
         public GetStateOfImportWithTransportRouteDataByNotificationIdHandler(IwsContext context,
             IMapper mapper,
             ITransportRouteRepository transportRouteRepository,
             ICompetentAuthorityRepository competentAuthorityRepository,
-            ICountryRepository countryRepository)
+            ICountryRepository countryRepository,
+            IIntraCountryExportAllowedRepository intraCountryExportAllowedRepository)
         {
             this.context = context;
             this.mapper = mapper;
             this.transportRouteRepository = transportRouteRepository;
             this.competentAuthorityRepository = competentAuthorityRepository;
             this.countryRepository = countryRepository;
+            this.intraCountryExportAllowedRepository = intraCountryExportAllowedRepository;
         }
 
         public async Task<StateOfImportWithTransportRouteData> HandleAsync(GetStateOfImportWithTransportRouteDataByNotificationId message)
