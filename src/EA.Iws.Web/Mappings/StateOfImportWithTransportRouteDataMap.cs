@@ -42,6 +42,13 @@
             if (source.StateOfExport != null)
             {
                 model.StateOfExportCountryId = source.StateOfExport.Country.Id;
+
+                if (source.StateOfExport.CompetentAuthority != null)
+                {
+                    model.IntraCountryExportAllowed = source
+                        .IntraCountryExportAllowed.Where(x => x.ExportCompetentAuthorityId == source.StateOfExport.CompetentAuthority.Id)
+                        .Select(a => a.ImportCompetentAuthorityId).ToArray();
+                }
             }
 
             return model;
