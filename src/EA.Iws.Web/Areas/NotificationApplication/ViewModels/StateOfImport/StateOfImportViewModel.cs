@@ -35,9 +35,12 @@
 
         public UKCompetentAuthority NotificationCompetentAuthority { get; set; }
 
+        public IList<Guid> IntraCountryExportAllowed { get; set; }
+
         public StateOfImportViewModel()
         {
             TransitStateCountryIds = new List<Guid>();
+            IntraCountryExportAllowed = new List<Guid>();
         }
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
