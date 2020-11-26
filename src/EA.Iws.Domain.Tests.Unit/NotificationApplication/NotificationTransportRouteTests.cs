@@ -242,6 +242,66 @@
             Assert.Equal(importCountry.Id, transportRoute.StateOfImport.Country.Id);
         }
 
+        [Fact]
+        public void SetStateOfImport_DifferentCountryToStateOfExportWithAnExportIntraCountryExportsAllowed_SetsSuccessfully()
+        {
+            var exportCountry = countries[0];
+            var importCountry = countries[1];
+
+            var exportCompetentAuthority = GetTestCompetentAuthority(exportCountry);
+            var exportExitPoint = GetTestEntryOrExitPoint(exportCountry);
+
+            var sameCountryCompetentAuthority = GetTestCompetentAuthority(exportCountry);
+
+            var importCompetentAuthority = GetTestCompetentAuthority(importCountry);
+            var importExitPoint = GetTestEntryOrExitPoint(importCountry);
+
+            var stateOfExport = new StateOfExport(exportCountry,
+                exportCompetentAuthority,
+                exportExitPoint);
+
+            var stateOfImport = new StateOfImport(importCountry,
+                importCompetentAuthority,
+                importExitPoint);
+
+            // Act
+            transportRoute.SetStateOfExportForNotification(stateOfExport);
+            transportRoute.SetStateOfImportForNotification(stateOfImport, new TestableIntraCountryExportAllowed[] { new TestableIntraCountryExportAllowed { ExportCompetentAuthorityId = exportCompetentAuthority.Id, ImportCompetentAuthorityId = sameCountryCompetentAuthority.Id } });
+
+            // Assert
+            Assert.Equal(importCountry.Id, transportRoute.StateOfImport.Country.Id);
+        }
+
+        [Fact]
+        public void SetStateOfImport_DifferentCountryToStateOfExportWithAnImportIntraCountryExportsAllowed_SetsSuccessfully()
+        {
+            var exportCountry = countries[0];
+            var importCountry = countries[1];
+
+            var exportCompetentAuthority = GetTestCompetentAuthority(exportCountry);
+            var exportExitPoint = GetTestEntryOrExitPoint(exportCountry);
+
+            var importCompetentAuthority = GetTestCompetentAuthority(importCountry);
+            var importExitPoint = GetTestEntryOrExitPoint(importCountry);
+
+            var sameCountryCompetentAuthority = GetTestCompetentAuthority(importCountry);
+
+            var stateOfExport = new StateOfExport(exportCountry,
+                exportCompetentAuthority,
+                exportExitPoint);
+
+            var stateOfImport = new StateOfImport(importCountry,
+                importCompetentAuthority,
+                importExitPoint);
+
+            // Act
+            transportRoute.SetStateOfExportForNotification(stateOfExport);
+            transportRoute.SetStateOfImportForNotification(stateOfImport, new TestableIntraCountryExportAllowed[] { new TestableIntraCountryExportAllowed { ExportCompetentAuthorityId = sameCountryCompetentAuthority.Id, ImportCompetentAuthorityId = importCompetentAuthority.Id } });
+
+            // Assert
+            Assert.Equal(importCountry.Id, transportRoute.StateOfImport.Country.Id);
+        }
+
         [Theory]
         [InlineData(0)]
         [InlineData(-1)]
