@@ -77,6 +77,18 @@
         }
 
         [Fact]
+        public void SetStateOfImport_WithNullStateAndNonNullCountries_Throws()
+        {
+            Assert.Throws<ArgumentNullException>(() => transportRoute.SetStateOfImportForNotification(null, new TestableIntraCountryExportAllowed[0]));
+        }
+
+        [Fact]
+        public void SetStateOfImport_WithNonNullStateAndNullCountries_Throws()
+        {
+            Assert.Throws<ArgumentNullException>(() => transportRoute.SetStateOfImportForNotification(new TestableStateOfImport(), null));
+        }
+
+        [Fact]
         public void SetStateOfImport_NotificationAlreadyHasStateOfImport_ReplacesStateOfImport()
         {
             var competentAuthority = GetTestCompetentAuthority(countries[0]);
