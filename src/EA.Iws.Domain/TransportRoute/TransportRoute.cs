@@ -67,11 +67,17 @@
 
             if (StateOfExport != null && StateOfExport.Country.Id == stateOfImport.Country.Id)
             {
-                throw new InvalidOperationException(
-                    string.Format(
-                        "Cannot add a State of Import in the same country as the State of Export for TransportRoute {0}. Country: {1}",
-                        Id,
-                        StateOfExport.Country.Name));
+                if (!intraCountryExportAlloweds.Any(
+                    x =>
+                    x.ImportCompetentAuthorityId == stateOfImport.CompetentAuthority.Id &&
+                    x.ExportCompetentAuthorityId == StateOfExport.CompetentAuthority.Id))
+                {
+                    throw new InvalidOperationException(
+                        string.Format(
+                            "Cannot add a State of Import in the same country as the State of Export for TransportRoute {0}. Country: {1}",
+                            Id,
+                            StateOfExport.Country.Name));
+                }
             }
 
             StateOfImport = stateOfImport;
