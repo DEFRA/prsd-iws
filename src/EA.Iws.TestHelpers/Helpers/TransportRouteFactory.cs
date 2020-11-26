@@ -9,7 +9,8 @@
     public class TransportRouteFactory
     {
         public static TransportRoute CreateCompleted(Guid id, Guid notificationId,
-            IList<EntryOrExitPoint> entryOrExitPoints, IList<CompetentAuthority> competentAuthorities)
+            IList<EntryOrExitPoint> entryOrExitPoints, IList<CompetentAuthority> competentAuthorities,
+            IList<IntraCountryExportAllowed> intraCountryExportAlloweds)
         {
             var transportRoute = new TransportRoute(notificationId);
             EntityHelper.SetEntityId(transportRoute, id);
@@ -25,7 +26,7 @@
                 competentAuthorities.First(ca => ca.Country.Id == entryPoint.Country.Id), entryPoint);
 
             transportRoute.SetStateOfExportForNotification(stateOfExport);
-            transportRoute.SetStateOfImportForNotification(stateOfImport);
+            transportRoute.SetStateOfImportForNotification(stateOfImport, intraCountryExportAlloweds);
 
             return transportRoute;
         }

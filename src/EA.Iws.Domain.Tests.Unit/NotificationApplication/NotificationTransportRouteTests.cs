@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using Domain.TransportRoute;
+    using TestHelpers.DomainFakes;
     using TestHelpers.Helpers;
     using Xunit;
 
@@ -70,9 +71,9 @@
         }
 
         [Fact]
-        public void SetStateOfImport_WithNullState_Throws()
+        public void SetStateOfImport_WithNullStateAndNullCountries_Throws()
         {
-            Assert.Throws<ArgumentNullException>(() => transportRoute.SetStateOfImportForNotification(null));
+            Assert.Throws<ArgumentNullException>(() => transportRoute.SetStateOfImportForNotification(null, null));
         }
 
         [Fact]
@@ -85,15 +86,15 @@
                 competentAuthority,
                 entryPoint);
 
-            transportRoute.SetStateOfImportForNotification(stateOfImport);
+            transportRoute.SetStateOfImportForNotification(stateOfImport, new TestableIntraCountryExportAllowed[0]);
 
-            transportRoute.SetStateOfImportForNotification(stateOfImport);
+            transportRoute.SetStateOfImportForNotification(stateOfImport, new TestableIntraCountryExportAllowed[0]);
 
             Assert.Equal(stateOfImport.CompetentAuthority.Id, transportRoute.StateOfImport.CompetentAuthority.Id);
         }
 
         [Fact]
-        public void SetStateOfImport_SameCountryToStateOfExport_Throws()
+        public void SetStateOfImport_SameCountryToStateOfExportIfNoSameCountryExportsAllowed_Throws()
         {
             // Arrange
             var exportCountry = countries[0];
@@ -116,11 +117,11 @@
             transportRoute.SetStateOfExportForNotification(stateOfExport);
 
             // Assert
-            Assert.Throws<InvalidOperationException>(() => transportRoute.SetStateOfImportForNotification(stateOfImport));
+            Assert.Throws<InvalidOperationException>(() => transportRoute.SetStateOfImportForNotification(stateOfImport, new TestableIntraCountryExportAllowed[0]));
         }
 
         [Fact]
-        public void SetStateOfImport_DifferentCountryToStateOfExport_SetsSuccessfully()
+        public void SetStateOfImport_DifferentCountryToStateOfExportWithNoIntraCountryExportsAllowed_SetsSuccessfully()
         {
             var exportCountry = countries[0];
             var importCountry = countries[1];
@@ -141,7 +142,7 @@
 
             // Act
             transportRoute.SetStateOfExportForNotification(stateOfExport);
-            transportRoute.SetStateOfImportForNotification(stateOfImport);
+            transportRoute.SetStateOfImportForNotification(stateOfImport, new TestableIntraCountryExportAllowed[0]);
 
             // Assert
             Assert.Equal(importCountry.Id, transportRoute.StateOfImport.Country.Id);

@@ -1,24 +1,26 @@
 ﻿namespace EA.Iws.RequestHandlers.Copy
 {
+    using System.Collections.Generic;
     using System.Linq;
     using Core.ComponentRegistration;
+    using Domain;
     using Domain.TransportRoute;
 
     [AutoRegister]
     internal class TransportRouteToTransportRouteCopy
     {
-        public virtual void CopyTransportRoute(TransportRoute source, TransportRoute destination)
+        public virtual void CopyTransportRoute(TransportRoute source, TransportRoute destination, IEnumerable<IntraCountryExportAllowed> intraCountryExportAlloweds)
         {
             CopyStateOfExport(source, destination);
-            CopyStateOfImport(source, destination);
+            CopyStateOfImport(source, destination, intraCountryExportAlloweds);
             CopyTransitStates(source, destination);
             CopyCustomsOffices(source, destination);
             CopyEntryExitCustomsOfficeSelection(source, destination);
         }
 
-        public virtual void CopyTransportRouteWithoutExport(TransportRoute source, TransportRoute destination)
+        public virtual void CopyTransportRouteWithoutExport(TransportRoute source, TransportRoute destination, IEnumerable<IntraCountryExportAllowed> intraCountryExportAlloweds)
         {
-            CopyStateOfImport(source, destination);
+            CopyStateOfImport(source, destination, intraCountryExportAlloweds);
             CopyTransitStates(source, destination);
             CopyCustomsOffices(source, destination);
             CopyEntryExitCustomsOfficeSelection(source, destination);
@@ -34,13 +36,14 @@
             }
         }
 
-        protected virtual void CopyStateOfImport(TransportRoute source, TransportRoute destination)
+        protected virtual void CopyStateOfImport(TransportRoute source, TransportRoute destination, IEnumerable<IntraCountryExportAllowed> intraCountryExportAlloweds)
         {
             if (source.StateOfImport != null)
             {
                 destination.SetStateOfImportForNotification(new StateOfImport(source.StateOfImport.Country,
                     source.StateOfImport.CompetentAuthority,
-                    source.StateOfImport.EntryPoint));
+                    source.StateOfImport.EntryPoint),
+                    intraCountryExportAlloweds);
             }
         }
 
