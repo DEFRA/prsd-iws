@@ -133,6 +133,88 @@
         }
 
         [Fact]
+        public void SetStateOfImport_SameCountryToStateOfExportIfThatSameCountryExportNotAllowed_Throws()
+        {
+            // Arrange
+            var exportCountry = countries[0];
+
+            var exportCompetentAuthority = CompetentAuthorityFactory.Create(guids[0], exportCountry);
+            var exportExitPoint = EntryOrExitPointFactory.Create(guids[0], exportCountry);
+
+            var importCompetentAuthority = CompetentAuthorityFactory.Create(guids[1], exportCountry);
+            var importExitPoint = EntryOrExitPointFactory.Create(guids[1], exportCountry);
+
+            var allowedExportCompetentAuthority = CompetentAuthorityFactory.Create(guids[2], exportCountry);
+            var allowedImportCompetentAuthority = CompetentAuthorityFactory.Create(guids[3], exportCountry);
+
+            var stateOfExport = new StateOfExport(exportCountry,
+                exportCompetentAuthority,
+                exportExitPoint);
+
+            var stateOfImport = new StateOfImport(exportCountry,
+                importCompetentAuthority,
+                importExitPoint);
+
+            // Act
+            transportRoute.SetStateOfExportForNotification(stateOfExport);
+
+            // Assert
+            Assert.Throws<InvalidOperationException>(() => transportRoute.SetStateOfImportForNotification(stateOfImport, new TestableIntraCountryExportAllowed[] { new TestableIntraCountryExportAllowed { ExportCompetentAuthorityId = allowedExportCompetentAuthority.Id, ImportCompetentAuthorityId = allowedImportCompetentAuthority.Id } }));
+        }
+
+        [Fact]
+        public void SetStateOfImport_SameCountryToStateOfExportIfOnlyReverseExportIsAllowed_Throws()
+        {
+            // Arrange
+            var exportCountry = countries[0];
+
+            var exportCompetentAuthority = CompetentAuthorityFactory.Create(guids[0], exportCountry);
+            var exportExitPoint = EntryOrExitPointFactory.Create(guids[0], exportCountry);
+
+            var importCompetentAuthority = CompetentAuthorityFactory.Create(guids[1], exportCountry);
+            var importExitPoint = EntryOrExitPointFactory.Create(guids[1], exportCountry);
+
+            var stateOfExport = new StateOfExport(exportCountry,
+                exportCompetentAuthority,
+                exportExitPoint);
+
+            var stateOfImport = new StateOfImport(exportCountry,
+                importCompetentAuthority,
+                importExitPoint);
+
+            // Act
+            transportRoute.SetStateOfExportForNotification(stateOfExport);
+
+            // Assert
+            Assert.Throws<InvalidOperationException>(() => transportRoute.SetStateOfImportForNotification(stateOfImport, new TestableIntraCountryExportAllowed[] { new TestableIntraCountryExportAllowed { ExportCompetentAuthorityId = importCompetentAuthority.Id, ImportCompetentAuthorityId = exportCompetentAuthority.Id } }));
+        }
+
+        [Fact]
+        public void SetStateOfImport_SameCountryToStateOfExportIfExportIsAllowed_Succeeds()
+        {
+            // Arrange
+            var exportCountry = countries[0];
+
+            var exportCompetentAuthority = CompetentAuthorityFactory.Create(guids[0], exportCountry);
+            var exportExitPoint = EntryOrExitPointFactory.Create(guids[0], exportCountry);
+
+            var importCompetentAuthority = CompetentAuthorityFactory.Create(guids[1], exportCountry);
+            var importExitPoint = EntryOrExitPointFactory.Create(guids[1], exportCountry);
+
+            var stateOfExport = new StateOfExport(exportCountry,
+                exportCompetentAuthority,
+                exportExitPoint);
+
+            var stateOfImport = new StateOfImport(exportCountry,
+                importCompetentAuthority,
+                importExitPoint);
+
+            // Act
+            transportRoute.SetStateOfExportForNotification(stateOfExport);
+            transportRoute.SetStateOfImportForNotification(stateOfImport, new TestableIntraCountryExportAllowed[] { new TestableIntraCountryExportAllowed { ExportCompetentAuthorityId = exportCompetentAuthority.Id, ImportCompetentAuthorityId = importCompetentAuthority.Id } });
+        }
+
+        [Fact]
         public void SetStateOfImport_DifferentCountryToStateOfExportWithNoIntraCountryExportsAllowed_SetsSuccessfully()
         {
             var exportCountry = countries[0];
