@@ -57,6 +57,7 @@
                 new WasteRecoveryToWasteRecoveryCopy(),
                 new ImporterToImporterCopy(),
                 new NotificationApplicationRepository(context, new NotificationApplicationAuthorization(context, GetUserContext())),
+                new IntraCountryExportAllowedRepository(context),
                 new FacilityCollectionCopy(),
                 new CarrierCollectionCopy(),
                 new ProducerCollectionCopy(),
@@ -122,7 +123,8 @@
             var transportRoute = TransportRouteFactory.CreateCompleted(
                 new Guid("16CE4AE7-1FCF-4A04-84A3-9067DF24DEF6"), id,
                 context.EntryOrExitPoints.ToArray(),
-                context.CompetentAuthorities.ToArray());
+                context.CompetentAuthorities.ToArray(),
+                context.IntraCountryExportAllowed.ToArray());
             context.TransportRoutes.Add(transportRoute);
         }
 

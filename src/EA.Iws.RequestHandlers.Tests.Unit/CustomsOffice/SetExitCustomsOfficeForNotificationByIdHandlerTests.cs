@@ -70,7 +70,7 @@
         public async Task NotificationExistsAndRequiresExitCustomsOffice_SetsExitOffice()
         {
             transport.SetStateOfExportForNotification(stateOfExport);
-            transport.SetStateOfImportForNotification(stateOfImportNonEu);
+            transport.SetStateOfImportForNotification(stateOfImportNonEu, new IntraCountryExportAllowed[0]);
 
             var request = new SetExitCustomsOfficeForNotificationById(notificationId,
                 AnyName,

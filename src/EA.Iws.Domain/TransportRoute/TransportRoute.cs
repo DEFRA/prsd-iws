@@ -60,9 +60,10 @@
             StateOfExport = stateOfExport;
         }
 
-        public void SetStateOfImportForNotification(StateOfImport stateOfImport)
+        public void SetStateOfImportForNotification(StateOfImport stateOfImport, IEnumerable<IntraCountryExportAllowed> intraCountryExportAlloweds)
         {
             Guard.ArgumentNotNull(() => stateOfImport, stateOfImport);
+            Guard.ArgumentNotNull(() => intraCountryExportAlloweds, intraCountryExportAlloweds);
 
             if (StateOfExport != null && StateOfExport.Country.Id == stateOfImport.Country.Id)
             {

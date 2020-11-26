@@ -146,7 +146,8 @@
                 new StateOfImport(
                     importCountry,
                     new TestableCompetentAuthority() { Country = importCountry },
-                    new TestableEntryOrExitPoint() { Country = importCountry }));
+                    new TestableEntryOrExitPoint() { Country = importCountry }),
+                new TestableIntraCountryExportAllowed[0]);
 
             transportRoute.SetStateOfExportForNotification(new StateOfExport(
                 exportCountry, 
@@ -196,7 +197,8 @@
                 new StateOfImport(
                     importCountry,
                     new TestableCompetentAuthority() { Country = importCountry },
-                    new TestableEntryOrExitPoint() { Country = importCountry }));
+                    new TestableEntryOrExitPoint() { Country = importCountry }),
+                new TestableIntraCountryExportAllowed[0]);
 
             transportRoute.SetStateOfExportForNotification(new StateOfExport(
                 exportCountry,

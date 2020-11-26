@@ -9,6 +9,7 @@
     using System.Threading.Tasks;
     using Core.Notification;
     using DataAccess;
+    using Domain;
     using Domain.FinancialGuarantee;
     using Domain.NotificationApplication;
     using Domain.NotificationApplication.Annexes;
@@ -27,6 +28,7 @@
         private readonly WasteRecoveryToWasteRecoveryCopy wasteRecoveryCopier;
         private readonly ImporterToImporterCopy importerCopier;
         private readonly INotificationApplicationRepository notificationApplicationRepository;
+        private readonly IIntraCountryExportAllowedRepository intraCountryExportAllowedRepository;
         private readonly FacilityCollectionCopy facilityCopier;
         private readonly CarrierCollectionCopy carrierCopier;
         private readonly ProducerCollectionCopy producerCopier;
@@ -39,6 +41,7 @@
             WasteRecoveryToWasteRecoveryCopy wasteRecoveryCopier,
             ImporterToImporterCopy importerCopier,
             INotificationApplicationRepository notificationApplicationRepository,
+            IIntraCountryExportAllowedRepository intraCountryExportAllowedRepository,
             FacilityCollectionCopy facilityCopier,
             CarrierCollectionCopy carrierCopier,
             ProducerCollectionCopy producerCopier,
@@ -51,6 +54,7 @@
             this.wasteRecoveryCopier = wasteRecoveryCopier;
             this.importerCopier = importerCopier;
             this.notificationApplicationRepository = notificationApplicationRepository;
+            this.intraCountryExportAllowedRepository = intraCountryExportAllowedRepository;
             this.facilityCopier = facilityCopier;
             this.carrierCopier = carrierCopier;
             this.producerCopier = producerCopier;
@@ -236,13 +240,14 @@
             if (transportRoute != null)
             {
                 var sourceCompetentAuthority = (await notificationApplicationRepository.GetById(sourceNotificationId)).CompetentAuthority;
+                var intraCountryExportAlloweds = await intraCountryExportAllowedRepository.GetAll();
                 if (destinationCompetentAuthority == sourceCompetentAuthority)
                 {
-                    transportRouteCopier.CopyTransportRoute(transportRoute, destinationTransportRoute);
+                    transportRouteCopier.CopyTransportRoute(transportRoute, destinationTransportRoute, intraCountryExportAlloweds);
                 }
                 else
                 {
-                    transportRouteCopier.CopyTransportRouteWithoutExport(transportRoute, destinationTransportRoute);
+                    transportRouteCopier.CopyTransportRouteWithoutExport(transportRoute, destinationTransportRoute, intraCountryExportAlloweds);
                 }
             }
 
