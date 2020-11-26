@@ -4,8 +4,8 @@
 
     public class IntraCountryExportAllowed
     {
-        public Guid ExportCompetentAuthorityId { get; private set; }
-        public Guid ImportCompetentAuthorityId { get; private set; }
+        public Guid ExportCompetentAuthorityId { get; protected set; }
+        public Guid ImportCompetentAuthorityId { get; protected set; }
 
         protected IntraCountryExportAllowed()
         {
