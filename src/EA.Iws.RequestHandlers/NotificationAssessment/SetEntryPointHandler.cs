@@ -16,6 +16,7 @@
 
         public SetEntryPointHandler(ITransportRouteRepository transportRouteRepository,
             IEntryOrExitPointRepository entryOrExitPointRepository,
+            IIntraCountryExportAllowedRepository intraCountryExportAllowedRepository,
             IwsContext context)
         {
             this.transportRouteRepository = transportRouteRepository;
