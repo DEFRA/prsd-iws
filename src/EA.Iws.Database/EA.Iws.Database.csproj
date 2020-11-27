@@ -116,8 +116,8 @@
     <Content Include="scripts\Update\0006-CI-2019\Sprint3\20190515-1058-alter-foi-cache-table.sql" />
     <Content Include="scripts\Update\0006 - Azure\20191218-1015-create-sessions-table.sql" />
     <Content Include="scripts\Update\0007-Support\20191127-1058-update-french-CA.sql" />
-    <Content Include="scripts\Update\CR0047-Part2\20201119-1315-create-intra-country-allowed-table.sql" />
-    <Content Include="scripts\Update\CR0047-Part2\20201119-1330-insert-initial-intra-country-allowed-table.sql" />
+    <Content Include="scripts\Update\0007-Support\20201119-1315-CR0047-Part2-create-intra-country-allowed-table.sql" />
+    <Content Include="scripts\Update\0007-Support\20201119-1330-CR0047-Part2-insert-initial-intra-country-allowed-table.sql" />
     <Content Include="unindexed-foreign-keys.sql" />
     <Content Include="scripts\Everytime\01-Functions\0003-Reports-PricingInfo.sql" />
     <Content Include="scripts\Everytime\03-StoredProcedures\0003-uspUpdateImportNotificationKeyDates.sql" />
