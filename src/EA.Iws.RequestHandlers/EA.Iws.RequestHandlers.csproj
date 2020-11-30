@@ -660,6 +660,7 @@
     <Compile Include="SharedUsers\GetSharedUsersByNotificationIdHandler.cs" />
     <Compile Include="TransitState\DeleteCustomsOfficesWhenAllTransitStatesInEU.cs" />
     <Compile Include="TransportRoute\GetAllCountriesHavingCompetentAuthoritiesHandler.cs" />
+    <Compile Include="TransportRoute\GetCompetentAuthoritiesAndEntryPointsByCountryIdHandler.cs" />
     <Compile Include="TransportRoute\GetTransitAuthoritiesAndEntryOrExitPointsByCountryIdHandler.cs" />
     <Compile Include="TransportRoute\GetUnitedKingdomCompetentAuthoritiesAndEntryOrExitPointsHandler.cs" />
     <Compile Include="Users\ExternalUserExistsHandler.cs" />
