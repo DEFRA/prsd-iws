@@ -27,6 +27,7 @@
         public StringGuidRadioButtons CompetentAuthorities { get; set; }
 
         public Guid? StateOfExportCountryId { get; set; }
+        public Guid? StateOfExportCompetentAuthorityId { get; set; }
 
         public IList<Guid> TransitStateCountryIds { get; set; }
 
