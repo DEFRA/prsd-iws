@@ -1,7 +1,6 @@
 ﻿namespace EA.Iws.RequestHandlers.StateOfImport
 {
     using System;
-    using System.Collections.Generic;
     using System.Data.Entity;
     using System.Threading.Tasks;
     using DataAccess;
@@ -40,7 +39,7 @@
 
             var stateOfImport = new StateOfImport(country, competentAuthority, entryPoint);
 
-            IEnumerable<IntraCountryExportAllowed> acceptableImportStates = await iceaRepository.GetAll();
+            var acceptableImportStates = await iceaRepository.GetAll();
             transportRoute.SetStateOfImportForNotification(stateOfImport, acceptableImportStates);
 
             await context.SaveChangesAsync();
