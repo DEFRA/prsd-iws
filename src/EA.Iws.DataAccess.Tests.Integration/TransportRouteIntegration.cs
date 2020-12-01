@@ -6,6 +6,7 @@
     using System.Threading.Tasks;
     using Core.Notification;
     using Core.Shared;
+    using Domain;
     using Domain.TransportRoute;
     using FakeItEasy;
     using Prsd.Core.Domain;
@@ -49,7 +50,8 @@
 
             var stateOfExport = new StateOfExport(country, competentAuthority, exitPoint);
 
-            transport.SetStateOfExportForNotification(stateOfExport);
+            IntraCountryExportAllowed[] intraCountryExportAlloweds = new IntraCountryExportAllowed[0];
+            transport.SetStateOfExportForNotification(stateOfExport, intraCountryExportAlloweds);
 
             await context.SaveChangesAsync();
 
@@ -83,7 +85,8 @@
 
             var stateOfExport = new StateOfExport(country, competentAuthority, exitPoint);
 
-            transport.SetStateOfExportForNotification(stateOfExport);
+            IntraCountryExportAllowed[] intraCountryExportAlloweds = new IntraCountryExportAllowed[0];
+            transport.SetStateOfExportForNotification(stateOfExport, intraCountryExportAlloweds);
 
             await context.SaveChangesAsync();
 
@@ -96,7 +99,7 @@
             }
 
             var newStateOfExport = new StateOfExport(country, competentAuthority, nextExitPoint);
-            transport.SetStateOfExportForNotification(newStateOfExport);
+            transport.SetStateOfExportForNotification(newStateOfExport, intraCountryExportAlloweds);
 
             await context.SaveChangesAsync();
 

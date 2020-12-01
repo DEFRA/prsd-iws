@@ -152,7 +152,8 @@
             transportRoute.SetStateOfExportForNotification(new StateOfExport(
                 exportCountry, 
                 new TestableCompetentAuthority() { Country = exportCountry },
-                new TestableEntryOrExitPoint() { Country = exportCountry }));
+                new TestableEntryOrExitPoint() { Country = exportCountry }),
+                new TestableIntraCountryExportAllowed[0]);
 
             var transitState = new TransitState(
                 transitCountry, 
@@ -203,7 +204,8 @@
             transportRoute.SetStateOfExportForNotification(new StateOfExport(
                 exportCountry,
                 new TestableCompetentAuthority() { Country = exportCountry },
-                new TestableEntryOrExitPoint() { Country = exportCountry }));
+                new TestableEntryOrExitPoint() { Country = exportCountry }),
+                new TestableIntraCountryExportAllowed[0]);
 
             transportRoute.AddTransitStateToNotification(transitState);
 

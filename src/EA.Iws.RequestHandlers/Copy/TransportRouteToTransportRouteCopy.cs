@@ -11,7 +11,7 @@
     {
         public virtual void CopyTransportRoute(TransportRoute source, TransportRoute destination, IEnumerable<IntraCountryExportAllowed> intraCountryExportAlloweds)
         {
-            CopyStateOfExport(source, destination);
+            CopyStateOfExport(source, destination, intraCountryExportAlloweds);
             CopyStateOfImport(source, destination, intraCountryExportAlloweds);
             CopyTransitStates(source, destination);
             CopyCustomsOffices(source, destination);
@@ -26,13 +26,14 @@
             CopyEntryExitCustomsOfficeSelection(source, destination);
         }
 
-        protected virtual void CopyStateOfExport(TransportRoute source, TransportRoute destination)
+        protected virtual void CopyStateOfExport(TransportRoute source, TransportRoute destination, IEnumerable<IntraCountryExportAllowed> intraCountryExportAlloweds)
         {
             if (source.StateOfExport != null)
             {
                 destination.SetStateOfExportForNotification(new StateOfExport(source.StateOfExport.Country,
                     source.StateOfExport.CompetentAuthority,
-                    source.StateOfExport.ExitPoint));
+                    source.StateOfExport.ExitPoint),
+                    intraCountryExportAlloweds);
             }
         }
 
