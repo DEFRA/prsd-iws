@@ -25,7 +25,7 @@
             var stateOfImport = new StateOfImport(entryPoint.Country,
                 competentAuthorities.First(ca => ca.Country.Id == entryPoint.Country.Id), entryPoint);
 
-            transportRoute.SetStateOfExportForNotification(stateOfExport);
+            transportRoute.SetStateOfExportForNotification(stateOfExport, intraCountryExportAlloweds);
             transportRoute.SetStateOfImportForNotification(stateOfImport, intraCountryExportAlloweds);
 
             return transportRoute;

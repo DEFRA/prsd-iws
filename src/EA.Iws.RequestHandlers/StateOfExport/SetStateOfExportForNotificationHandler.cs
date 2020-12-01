@@ -13,11 +13,13 @@
     {
         private readonly IwsContext context;
         private readonly ITransportRouteRepository transportRouteRepository;
+        private readonly IIntraCountryExportAllowedRepository iceaRepository;
 
-        public SetStateOfExportForNotificationHandler(IwsContext context, ITransportRouteRepository transportRouteRepository)
+        public SetStateOfExportForNotificationHandler(IwsContext context, ITransportRouteRepository transportRouteRepository, IIntraCountryExportAllowedRepository iceaRepository)
         {
             this.context = context;
             this.transportRouteRepository = transportRouteRepository;
+            this.iceaRepository = iceaRepository;
         }
 
         public async Task<Guid> HandleAsync(SetStateOfExportForNotification message)
@@ -42,7 +44,8 @@
 
             var stateOfExport = new StateOfExport(country, competentAuthority, exitPoint);
 
-            transportRoute.SetStateOfExportForNotification(stateOfExport);
+            var acceptableExportStates = await iceaRepository.GetAll();
+            transportRoute.SetStateOfExportForNotification(stateOfExport, acceptableExportStates);
 
             await context.SaveChangesAsync();
 

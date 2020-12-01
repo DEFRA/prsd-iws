@@ -44,9 +44,10 @@
 
         public virtual EntryExitCustomsOfficeSelection EntryExitCustomsOfficeSelection { get; private set; }
 
-        public void SetStateOfExportForNotification(StateOfExport stateOfExport)
+        public void SetStateOfExportForNotification(StateOfExport stateOfExport, IEnumerable<IntraCountryExportAllowed> intraCountryExportAlloweds)
         {
             Guard.ArgumentNotNull(() => stateOfExport, stateOfExport);
+            Guard.ArgumentNotNull(() => intraCountryExportAlloweds, intraCountryExportAlloweds);
 
             if (StateOfImport != null && StateOfImport.Country.Id == stateOfExport.Country.Id)
             {
