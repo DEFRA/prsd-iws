@@ -1,7 +1,7 @@
 CREATE TABLE [Lookup].[IntraCountryExportAllowed](
 	[ExportCompetentAuthority] INT NOT NULL,
 	[ImportCompetentAuthorityID] UNIQUEIDENTIFIER NOT NULL,
-	PRIMARY KEY CLUSTERED ([ExportCompetentAuthorityID], [ImportCompetentAuthorityID])
+	PRIMARY KEY CLUSTERED ([ExportCompetentAuthority], [ImportCompetentAuthorityID])
 ) ON [PRIMARY]
 GO
 
