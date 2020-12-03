@@ -68,8 +68,12 @@
 
                 if (data.StateOfExport != null)
                 {
-                    var allowed = await intraCountryExportAllowedRepository.GetImportCompetentAuthorities(data.StateOfExport.CompetentAuthority.Id);
-                    data.IntraCountryExportAllowed = allowed.Select(a => mapper.Map<IntraCountryExportAllowedData>(a)).ToArray();
+                    var ukcas = await this.context.UnitedKingdomCompetentAuthorities.Where(uk => uk.CompetentAuthority.Id == data.StateOfExport.CompetentAuthority.Id).ToArrayAsync();
+                    if (ukcas.Any())
+                    {
+                        var allowed = await intraCountryExportAllowedRepository.GetImportCompetentAuthorities(ukcas.First().AsCompetentAuthority());
+                        data.IntraCountryExportAllowed = allowed.Select(a => mapper.Map<IntraCountryExportAllowedData>(a)).ToArray();
+                    }
                 }
             }
             

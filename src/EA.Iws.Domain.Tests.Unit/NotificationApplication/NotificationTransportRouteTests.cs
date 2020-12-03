@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.Linq;
     using Domain.TransportRoute;
+    using FakeItEasy;
     using TestHelpers.DomainFakes;
     using TestHelpers.Helpers;
     using Xunit;
@@ -14,7 +15,9 @@
 
         private readonly TransportRoute transportRoute;
         private readonly IList<Country> countries;
-        private readonly IList<TransitState> transitStates; 
+        private readonly IList<TransitState> transitStates;
+
+        private readonly ITransportRouteValidator validator;
 
         public NotificationTransportRouteTests()
         {
@@ -45,18 +48,20 @@
                 EntryOrExitPointFactory.Create(guids[i + 1], c), i + 1));
                 ObjectInstantiator<TransitState>.SetProperty(x => x.Id, guids[i], transitStates[i]);
             }
+
+            this.validator = A.Fake<ITransportRouteValidator>();
         }
 
         [Fact]
         public void SetStateOfExport_WithNullStateAndNullCountries_Throws()
         {
-            Assert.Throws<ArgumentNullException>(() => transportRoute.SetStateOfExportForNotification(null, null));
+            Assert.Throws<ArgumentNullException>(() => transportRoute.SetStateOfExportForNotification(null, this.validator));
         }
 
         [Fact]
         public void SetStateOfExport_WithNullStateAndNonNullCountries_Throws()
         {
-            Assert.Throws<ArgumentNullException>(() => transportRoute.SetStateOfExportForNotification(null, new TestableIntraCountryExportAllowed[0]));
+            Assert.Throws<ArgumentNullException>(() => transportRoute.SetStateOfExportForNotification(null, this.validator));
         }
 
         [Fact]
@@ -76,9 +81,10 @@
                 exitPoint);
 
             var intraCountryExportAlloweds = new TestableIntraCountryExportAllowed[0];
-            transportRoute.SetStateOfExportForNotification(stateOfExport, intraCountryExportAlloweds);
 
-            transportRoute.SetStateOfExportForNotification(stateOfExport, intraCountryExportAlloweds);
+            A.CallTo(() => this.validator.IsImportAndExportStatesCombinationValid(null, stateOfExport)).Returns(true);
+
+            transportRoute.SetStateOfExportForNotification(stateOfExport, this.validator);
 
             Assert.Equal(stateOfExport.Country.Id, transportRoute.StateOfExport.Country.Id);
         }
@@ -92,7 +98,7 @@
         [Fact]
         public void SetStateOfImport_WithNullStateAndNonNullCountries_Throws()
         {
-            Assert.Throws<ArgumentNullException>(() => transportRoute.SetStateOfImportForNotification(null, new TestableIntraCountryExportAllowed[0]));
+            Assert.Throws<ArgumentNullException>(() => transportRoute.SetStateOfImportForNotification(null, this.validator));
         }
 
         [Fact]
@@ -112,9 +118,12 @@
                 entryPoint);
 
             var intraCountryExportAlloweds = new TestableIntraCountryExportAllowed[0];
-            transportRoute.SetStateOfImportForNotification(stateOfImport, intraCountryExportAlloweds);
 
-            transportRoute.SetStateOfImportForNotification(stateOfImport, intraCountryExportAlloweds);
+            A.CallTo(() => this.validator.IsImportAndExportStatesCombinationValid(stateOfImport, null)).Returns(true);
+
+            transportRoute.SetStateOfImportForNotification(stateOfImport, this.validator);
+
+            transportRoute.SetStateOfImportForNotification(stateOfImport, this.validator);
 
             Assert.Equal(stateOfImport.CompetentAuthority.Id, transportRoute.StateOfImport.CompetentAuthority.Id);
         }
@@ -139,188 +148,15 @@
                 importCompetentAuthority,
                 importExitPoint);
 
-            // Act
-            var intraCountryExportAlloweds = new TestableIntraCountryExportAllowed[0];
-            transportRoute.SetStateOfExportForNotification(stateOfExport, intraCountryExportAlloweds);
-
-            // Assert
-            Assert.Throws<InvalidOperationException>(() => transportRoute.SetStateOfImportForNotification(stateOfImport, intraCountryExportAlloweds));
-        }
-
-        [Fact]
-        public void SetStateOfImport_SameCountryToStateOfExportIfThatSameCountryExportNotAllowed_Throws()
-        {
-            // Arrange
-            var exportCountry = countries[0];
-
-            var exportCompetentAuthority = CompetentAuthorityFactory.Create(guids[0], exportCountry);
-            var exportExitPoint = EntryOrExitPointFactory.Create(guids[0], exportCountry);
-
-            var importCompetentAuthority = CompetentAuthorityFactory.Create(guids[1], exportCountry);
-            var importExitPoint = EntryOrExitPointFactory.Create(guids[1], exportCountry);
-
-            var allowedExportCompetentAuthority = CompetentAuthorityFactory.Create(guids[2], exportCountry);
-            var allowedImportCompetentAuthority = CompetentAuthorityFactory.Create(guids[3], exportCountry);
-
-            var stateOfExport = new StateOfExport(exportCountry,
-                exportCompetentAuthority,
-                exportExitPoint);
-
-            var stateOfImport = new StateOfImport(exportCountry,
-                importCompetentAuthority,
-                importExitPoint);
-
-            // Act
-            var intraCountryExportAlloweds = new[] { new TestableIntraCountryExportAllowed { ExportCompetentAuthorityId = allowedExportCompetentAuthority.Id, ImportCompetentAuthorityId = allowedImportCompetentAuthority.Id } };
-            transportRoute.SetStateOfExportForNotification(stateOfExport, intraCountryExportAlloweds);
-
-            // Assert
-            Assert.Throws<InvalidOperationException>(() => transportRoute.SetStateOfImportForNotification(stateOfImport, intraCountryExportAlloweds));
-        }
-
-        [Fact]
-        public void SetStateOfImport_SameCountryToStateOfExportIfOnlyReverseExportIsAllowed_Throws()
-        {
-            // Arrange
-            var exportCountry = countries[0];
-
-            var exportCompetentAuthority = CompetentAuthorityFactory.Create(guids[0], exportCountry);
-            var exportExitPoint = EntryOrExitPointFactory.Create(guids[0], exportCountry);
-
-            var importCompetentAuthority = CompetentAuthorityFactory.Create(guids[1], exportCountry);
-            var importExitPoint = EntryOrExitPointFactory.Create(guids[1], exportCountry);
-
-            var stateOfExport = new StateOfExport(exportCountry,
-                exportCompetentAuthority,
-                exportExitPoint);
-
-            var stateOfImport = new StateOfImport(exportCountry,
-                importCompetentAuthority,
-                importExitPoint);
-
-            // Act
-            var intraCountryExportAlloweds = new[] { new TestableIntraCountryExportAllowed { ExportCompetentAuthorityId = importCompetentAuthority.Id, ImportCompetentAuthorityId = exportCompetentAuthority.Id } };
-            transportRoute.SetStateOfExportForNotification(stateOfExport, intraCountryExportAlloweds);
-
-            // Assert
-            Assert.Throws<InvalidOperationException>(() => transportRoute.SetStateOfImportForNotification(stateOfImport, intraCountryExportAlloweds));
-        }
-
-        [Fact]
-        public void SetStateOfImport_SameCountryToStateOfExportIfExportIsAllowed_Succeeds()
-        {
-            // Arrange
-            var exportCountry = countries[0];
-
-            var exportCompetentAuthority = CompetentAuthorityFactory.Create(guids[0], exportCountry);
-            var exportExitPoint = EntryOrExitPointFactory.Create(guids[0], exportCountry);
-
-            var importCompetentAuthority = CompetentAuthorityFactory.Create(guids[1], exportCountry);
-            var importExitPoint = EntryOrExitPointFactory.Create(guids[1], exportCountry);
-
-            var stateOfExport = new StateOfExport(exportCountry,
-                exportCompetentAuthority,
-                exportExitPoint);
-
-            var stateOfImport = new StateOfImport(exportCountry,
-                importCompetentAuthority,
-                importExitPoint);
-
-            // Act
-            var intraCountryExportAlloweds = new[] { new TestableIntraCountryExportAllowed { ExportCompetentAuthorityId = exportCompetentAuthority.Id, ImportCompetentAuthorityId = importCompetentAuthority.Id } };
-            transportRoute.SetStateOfExportForNotification(stateOfExport, intraCountryExportAlloweds);
-            transportRoute.SetStateOfImportForNotification(stateOfImport, intraCountryExportAlloweds);
-        }
-
-        [Fact]
-        public void SetStateOfImport_DifferentCountryToStateOfExportWithNoIntraCountryExportsAllowed_SetsSuccessfully()
-        {
-            var exportCountry = countries[0];
-            var importCountry = countries[1];
-
-            var exportCompetentAuthority = GetTestCompetentAuthority(exportCountry);
-            var exportExitPoint = GetTestEntryOrExitPoint(exportCountry);
-
-            var importCompetentAuthority = GetTestCompetentAuthority(importCountry);
-            var importExitPoint = GetTestEntryOrExitPoint(importCountry);
-
-            var stateOfExport = new StateOfExport(exportCountry,
-                exportCompetentAuthority,
-                exportExitPoint);
-
-            var stateOfImport = new StateOfImport(importCountry,
-                importCompetentAuthority,
-                importExitPoint);
+            A.CallTo(() => this.validator.IsImportAndExportStatesCombinationValid(null, stateOfExport)).Returns(true);
+            A.CallTo(() => this.validator.IsImportAndExportStatesCombinationValid(stateOfImport, stateOfExport)).Returns(false);
 
             // Act
             var intraCountryExportAlloweds = new TestableIntraCountryExportAllowed[0];
-            transportRoute.SetStateOfExportForNotification(stateOfExport, intraCountryExportAlloweds);
-            transportRoute.SetStateOfImportForNotification(stateOfImport, intraCountryExportAlloweds);
+            transportRoute.SetStateOfExportForNotification(stateOfExport, this.validator);
 
             // Assert
-            Assert.Equal(importCountry.Id, transportRoute.StateOfImport.Country.Id);
-        }
-
-        [Fact]
-        public void SetStateOfImport_DifferentCountryToStateOfExportWithAnExportIntraCountryExportsAllowed_SetsSuccessfully()
-        {
-            var exportCountry = countries[0];
-            var importCountry = countries[1];
-
-            var exportCompetentAuthority = GetTestCompetentAuthority(exportCountry);
-            var exportExitPoint = GetTestEntryOrExitPoint(exportCountry);
-
-            var sameCountryCompetentAuthority = GetTestCompetentAuthority(exportCountry);
-
-            var importCompetentAuthority = GetTestCompetentAuthority(importCountry);
-            var importExitPoint = GetTestEntryOrExitPoint(importCountry);
-
-            var stateOfExport = new StateOfExport(exportCountry,
-                exportCompetentAuthority,
-                exportExitPoint);
-
-            var stateOfImport = new StateOfImport(importCountry,
-                importCompetentAuthority,
-                importExitPoint);
-
-            // Act
-            var intraCountryExportAlloweds = new[] { new TestableIntraCountryExportAllowed { ExportCompetentAuthorityId = exportCompetentAuthority.Id, ImportCompetentAuthorityId = sameCountryCompetentAuthority.Id } };
-            transportRoute.SetStateOfExportForNotification(stateOfExport, intraCountryExportAlloweds);
-            transportRoute.SetStateOfImportForNotification(stateOfImport, intraCountryExportAlloweds);
-
-            // Assert
-            Assert.Equal(importCountry.Id, transportRoute.StateOfImport.Country.Id);
-        }
-
-        [Fact]
-        public void SetStateOfImport_DifferentCountryToStateOfExportWithAnImportIntraCountryExportsAllowed_SetsSuccessfully()
-        {
-            var exportCountry = countries[0];
-            var importCountry = countries[1];
-
-            var exportCompetentAuthority = GetTestCompetentAuthority(exportCountry);
-            var exportExitPoint = GetTestEntryOrExitPoint(exportCountry);
-
-            var importCompetentAuthority = GetTestCompetentAuthority(importCountry);
-            var importExitPoint = GetTestEntryOrExitPoint(importCountry);
-
-            var sameCountryCompetentAuthority = GetTestCompetentAuthority(importCountry);
-
-            var stateOfExport = new StateOfExport(exportCountry,
-                exportCompetentAuthority,
-                exportExitPoint);
-
-            var stateOfImport = new StateOfImport(importCountry,
-                importCompetentAuthority,
-                importExitPoint);
-
-            // Act
-            var intraCountryExportAlloweds = new[] { new TestableIntraCountryExportAllowed { ExportCompetentAuthorityId = sameCountryCompetentAuthority.Id, ImportCompetentAuthorityId = importCompetentAuthority.Id } };
-            transportRoute.SetStateOfExportForNotification(stateOfExport, intraCountryExportAlloweds);
-            transportRoute.SetStateOfImportForNotification(stateOfImport, intraCountryExportAlloweds);
-
-            // Assert
-            Assert.Equal(importCountry.Id, transportRoute.StateOfImport.Country.Id);
+            Assert.Throws<InvalidOperationException>(() => transportRoute.SetStateOfImportForNotification(stateOfImport, this.validator));
         }
 
         [Theory]

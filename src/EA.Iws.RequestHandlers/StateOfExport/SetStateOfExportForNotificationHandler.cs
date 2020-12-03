@@ -24,8 +24,12 @@
 
         public async Task<Guid> HandleAsync(SetStateOfExportForNotification message)
         {
-            var notification = await context.GetNotificationApplication(message.NotificationId);
+            var notificationTask = context.GetNotificationApplication(message.NotificationId);
             var transportRoute = await transportRouteRepository.GetByNotificationId(message.NotificationId);
+            var country = context.Countries.SingleAsync(c => c.Name == UnitedKingdomCompetentAuthority.CountryName);
+            var exitPoint = context.EntryOrExitPoints.SingleAsync(ep => ep.Id == message.EntryOrExitPointId);
+            var acceptableExportStates = iceaRepository.GetAll();
+            var unitedKingdomAuthorities = this.context.UnitedKingdomCompetentAuthorities.ToArrayAsync();
 
             if (transportRoute == null)
             {
@@ -33,19 +37,14 @@
                 context.TransportRoutes.Add(transportRoute);
             }
 
+            var notification = await notificationTask;
             var ukcompAuth = await context.UnitedKingdomCompetentAuthorities.SingleAsync(ca => ca.Id == (int)notification.CompetentAuthority);
-
-            var country = await context.Countries.SingleAsync(c => c.Name == UnitedKingdomCompetentAuthority.CountryName);
-
             var caid = ukcompAuth.CompetentAuthority.Id;
-            var competentAuthority = await context.CompetentAuthorities.SingleAsync(ca => ca.Id == caid);
+            var competentAuthority = context.CompetentAuthorities.SingleAsync(ca => ca.Id == caid);
+            var stateOfExport = new StateOfExport(await country, await competentAuthority, await exitPoint);
+            var validator = new TransportRouteValidation(await acceptableExportStates, await unitedKingdomAuthorities);
 
-            var exitPoint = await context.EntryOrExitPoints.SingleAsync(ep => ep.Id == message.EntryOrExitPointId);
-
-            var stateOfExport = new StateOfExport(country, competentAuthority, exitPoint);
-
-            var acceptableExportStates = await iceaRepository.GetAll();
-            transportRoute.SetStateOfExportForNotification(stateOfExport, acceptableExportStates);
+            transportRoute.SetStateOfExportForNotification(stateOfExport, validator);
 
             await context.SaveChangesAsync();
 

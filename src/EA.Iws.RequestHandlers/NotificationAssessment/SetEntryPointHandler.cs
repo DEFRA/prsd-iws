@@ -1,5 +1,6 @@
 ﻿namespace EA.Iws.RequestHandlers.NotificationAssessment
 {
+    using System.Data.Entity;
     using System.Threading.Tasks;
     using DataAccess;
     using Domain;
@@ -27,12 +28,15 @@
 
         public async Task<Unit> HandleAsync(SetEntryPoint message)
         {
-            var transportRoute = await transportRouteRepository.GetByNotificationId(message.NotificationId);
-            var entryPoint = await entryOrExitPointRepository.GetById(message.EntryPointId);
-            var intraCountryExportAlloweds = await intraCountryExportAllowedRepository.GetAll();
+            var transportRouteTask = transportRouteRepository.GetByNotificationId(message.NotificationId);
+            var intraCountryExportAlloweds = intraCountryExportAllowedRepository.GetAll();
+            var uksAuthorities = this.context.UnitedKingdomCompetentAuthorities.ToArrayAsync();
+            var entryPoint = entryOrExitPointRepository.GetById(message.EntryPointId);
+            var transportRoute = await transportRouteTask;
+            var validator = new TransportRouteValidation(await intraCountryExportAlloweds, await uksAuthorities);
 
             transportRoute.SetStateOfImportForNotification(new StateOfImport(transportRoute.StateOfImport.Country,
-                transportRoute.StateOfImport.CompetentAuthority, entryPoint), intraCountryExportAlloweds);
+                transportRoute.StateOfImport.CompetentAuthority, await entryPoint), validator);
 
             await context.SaveChangesAsync();
 

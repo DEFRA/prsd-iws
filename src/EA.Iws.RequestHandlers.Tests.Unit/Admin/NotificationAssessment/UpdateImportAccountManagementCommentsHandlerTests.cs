@@ -29,7 +29,7 @@
             message = new UpdateImportNotificationAssesmentComments(transactionId, "something");
             var result = await handler.HandleAsync(message);
 
-            Assert.Equal(true, result);
+            Assert.True(result);
 
             A.CallTo(() => repo.UpdateById(transactionId, "something")).MustHaveHappened(Repeated.Exactly.Once);
         }

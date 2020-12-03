@@ -10,10 +10,10 @@
             ToTable("IntraCountryExportAllowed", "Lookup")
                 .HasKey(x => new
                 {
-                    x.ExportCompetentAuthorityId,
+                    x.ExportCompetentAuthority,
                     x.ImportCompetentAuthorityId
                 });
-            Property(x => x.ExportCompetentAuthorityId).IsRequired();
+            Property(x => x.ExportCompetentAuthority).IsRequired();
             Property(x => x.ImportCompetentAuthorityId).IsRequired();
         }
     }

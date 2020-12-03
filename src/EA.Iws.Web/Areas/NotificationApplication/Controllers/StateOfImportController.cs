@@ -128,7 +128,7 @@
 
             var entryPointsAndCompetentAuthorities =
                 await
-                    mediator.SendAsync(new GetCompetentAuthoritiesAndEntryPointsByCountryId(model.CountryId.Value, model.StateOfExportCompetentAuthorityId));
+                    mediator.SendAsync(new GetCompetentAuthoritiesAndEntryPointsByCountryId(model.CountryId.Value, model.NotificationCompetentAuthority));
 
             var competentAuthoritiesKeyValuePairs = entryPointsAndCompetentAuthorities.CompetentAuthorities.Select(ca =>
                 new KeyValuePair<string, Guid>(ca.Code + " -" + ca.Name, ca.Id));

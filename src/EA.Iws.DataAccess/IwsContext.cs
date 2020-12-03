@@ -153,6 +153,11 @@
             return await InternalUsers.AnyAsync(u => u.UserId == UserContext.UserId.ToString());
         }
 
+        public async Task<bool> IsCountryUk(Guid countryId)
+        {
+            return await UnitedKingdomCompetentAuthorities.AnyAsync(ukca => ukca.CompetentAuthority.Country.Id == countryId);
+        }
+
         private async Task<bool> IsSharedUser(Guid notificationId)
         {
             return

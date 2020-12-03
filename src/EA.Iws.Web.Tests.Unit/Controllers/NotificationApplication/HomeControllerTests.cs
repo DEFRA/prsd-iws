@@ -39,7 +39,7 @@
 
             var result = await homeController.GenerateNotificationPreviewDocument(notificationId) as FileContentResult;
 
-            Assert.Equal(result.FileDownloadName, ".pdf");
+            Assert.Equal(".pdf", result.FileDownloadName);
         }
     }
 }
