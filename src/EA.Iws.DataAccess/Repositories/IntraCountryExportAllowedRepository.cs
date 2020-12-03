@@ -23,14 +23,6 @@
                 context.IntraCountryExportAllowed.ToArrayAsync();
         }
 
-        //public async Task<IEnumerable<IntraCountryExportAllowed>> GetImportCompetentAuthorities(Guid exportCompetentAuthority)
-        //{
-        //    return await
-        //        context.IntraCountryExportAllowed.Where(
-        //            c => (c.ExportCompetentAuthorityId == exportCompetentAuthority))
-        //            .ToArrayAsync();
-        //}
-
         public async Task<IEnumerable<IntraCountryExportAllowed>> GetImportCompetentAuthorities(UKCompetentAuthority uksCompetentAuthority)
         {
             return await
