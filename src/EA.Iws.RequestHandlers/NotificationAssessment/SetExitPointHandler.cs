@@ -28,15 +28,14 @@
 
         public async Task<Unit> HandleAsync(SetExitPoint message)
         {
-            var intraCountryExportAlloweds = intraCountryExportAllowedRepository.GetAll();
-            var uksAuthorities = this.context.UnitedKingdomCompetentAuthorities.ToArrayAsync();
-            var transportRouteTask = transportRouteRepository.GetByNotificationId(message.NotificationId);
-            var exitPoint = entryOrExitPointRepository.GetById(message.ExitPointId);
-            var validator = new TransportRouteValidation(await intraCountryExportAlloweds, await uksAuthorities);
-            var transportRoute = await transportRouteTask;
+            var transportRoute = await transportRouteRepository.GetByNotificationId(message.NotificationId);
+            var exitPoint = await entryOrExitPointRepository.GetById(message.ExitPointId);
+            var intraCountryExportAlloweds = await intraCountryExportAllowedRepository.GetAll();
+            var uksAuthorities = await context.UnitedKingdomCompetentAuthorities.ToArrayAsync();
+            var validator = new TransportRouteValidation(intraCountryExportAlloweds, uksAuthorities);
 
             transportRoute.SetStateOfExportForNotification(new StateOfExport(transportRoute.StateOfExport.Country,
-                transportRoute.StateOfExport.CompetentAuthority, await exitPoint), validator);
+                transportRoute.StateOfExport.CompetentAuthority, exitPoint), validator);
 
             await context.SaveChangesAsync();
 

@@ -42,11 +42,11 @@
         {
             IEnumerable<CompetentAuthority> competentAuthorities;
 
-            var isUk = this.context.IsCountryUk(message.Id);
+            var isUk = await context.IsCountryUk(message.Id);
 
-            var entryOrExitPoints = entryOrExitPointRepository.GetForCountry(message.Id);
+            var entryOrExitPoints = (await entryOrExitPointRepository.GetForCountry(message.Id));
 
-            if (await isUk)
+            if (isUk)
             {
                 var ids = (await intraCountryExportAllowedRepository.GetImportCompetentAuthorities(message.NotificationUkCompetentAuthority))
                                                                     .Select(x => x.ImportCompetentAuthorityId).ToList();
@@ -60,7 +60,7 @@
             return new CompetentAuthorityAndEntryOrExitPointData
             {
                 CompetentAuthorities = competentAuthorities.Select(competentAuthorityMapper.Map).ToArray(),
-                EntryOrExitPoints = (await entryOrExitPoints).Select(entryOrExitPointMapper.Map).ToArray()
+                EntryOrExitPoints = entryOrExitPoints.Select(entryOrExitPointMapper.Map).ToArray()
             };
         }
     }
