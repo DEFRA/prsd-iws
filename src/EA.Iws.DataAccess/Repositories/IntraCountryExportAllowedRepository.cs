@@ -6,6 +6,7 @@
     using System.Linq;
     using System.Threading.Tasks;
     using Domain;
+    using EA.Iws.Core.Notification;
 
     internal class IntraCountryExportAllowedRepository : IIntraCountryExportAllowedRepository
     {
@@ -22,11 +23,19 @@
                 context.IntraCountryExportAllowed.ToArrayAsync();
         }
 
-        public async Task<IEnumerable<IntraCountryExportAllowed>> GetImportCompetentAuthorities(Guid exportCompetentAuthority)
+        //public async Task<IEnumerable<IntraCountryExportAllowed>> GetImportCompetentAuthorities(Guid exportCompetentAuthority)
+        //{
+        //    return await
+        //        context.IntraCountryExportAllowed.Where(
+        //            c => (c.ExportCompetentAuthorityId == exportCompetentAuthority))
+        //            .ToArrayAsync();
+        //}
+
+        public async Task<IEnumerable<IntraCountryExportAllowed>> GetImportCompetentAuthorities(UKCompetentAuthority uksCompetentAuthority)
         {
             return await
                 context.IntraCountryExportAllowed.Where(
-                    c => (c.ExportCompetentAuthorityId == exportCompetentAuthority))
+                    c => (c.ExportCompetentAuthority == uksCompetentAuthority))
                     .ToArrayAsync();
         }
     }

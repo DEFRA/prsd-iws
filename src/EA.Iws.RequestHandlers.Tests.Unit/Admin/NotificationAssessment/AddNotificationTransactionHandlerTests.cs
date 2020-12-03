@@ -87,7 +87,7 @@
             var incompletePayment = GetAddNotificationTransaction(existingDate, 50.00m, null);
             await handler.HandleAsync(incompletePayment);
 
-            Assert.Equal(null, context.NotificationAssessments.Single().Dates.PaymentReceivedDate);
+            Assert.Null(context.NotificationAssessments.Single().Dates.PaymentReceivedDate);
         }
 
         [Fact]
@@ -103,7 +103,7 @@
             var refundMade = GetAddNotificationTransaction(existingDate, null, 50.00m);
             await handler.HandleAsync(refundMade);
 
-            Assert.Equal(null, context.NotificationAssessments.Single().Dates.PaymentReceivedDate);
+            Assert.Null(context.NotificationAssessments.Single().Dates.PaymentReceivedDate);
         }
         
         [Fact]

@@ -1,5 +1,6 @@
 ﻿namespace EA.Iws.Domain
 {
+    using EA.Iws.Core.Notification;
     using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
@@ -8,6 +9,6 @@
     {
         Task<IEnumerable<IntraCountryExportAllowed>> GetAll();
 
-        Task<IEnumerable<IntraCountryExportAllowed>> GetImportCompetentAuthorities(Guid exportCompetentAuthorityId);
+        Task<IEnumerable<IntraCountryExportAllowed>> GetImportCompetentAuthorities(UKCompetentAuthority exportCompetentAuthorityId);
     }
 }

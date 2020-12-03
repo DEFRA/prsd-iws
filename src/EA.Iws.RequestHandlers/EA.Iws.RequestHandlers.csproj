@@ -389,7 +389,6 @@
     <Compile Include="ImportNotification\WasteType\GetAllWasteCodesHandler.cs" />
     <Compile Include="Mappings\AddressBook\AddressBookMap.cs" />
     <Compile Include="Mappings\AddressBook\AddressBookRecordMap.cs" />
-    <Compile Include="Mappings\IntraCountryExportAllowedMap.cs" />
     <Compile Include="Mappings\ExportNotificationOwnerDisplayMap.cs" />
     <Compile Include="Mappings\ImportMovement\CancellableMovementMap.cs" />
     <Compile Include="Mappings\ImportMovement\ImportMovementAuditMap.cs" />

@@ -33,7 +33,7 @@
 
             var result = await handler.HandleAsync(this.message);
 
-            Assert.Equal(true, result);
+            Assert.True(result);
             A.CallTo(() => this.repo.Delete(A<Guid>.Ignored))
                 .MustHaveHappened();
         }
@@ -46,7 +46,7 @@
 
             var result = await handler.HandleAsync(this.message);
 
-            Assert.Equal(false, result);
+            Assert.False(result);
         }
     }
 }

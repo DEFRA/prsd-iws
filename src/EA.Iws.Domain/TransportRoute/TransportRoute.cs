@@ -44,47 +44,35 @@
 
         public virtual EntryExitCustomsOfficeSelection EntryExitCustomsOfficeSelection { get; private set; }
 
-        public void SetStateOfExportForNotification(StateOfExport stateOfExport, IEnumerable<IntraCountryExportAllowed> intraCountryExportAlloweds)
+        public void SetStateOfExportForNotification(StateOfExport stateOfExport, ITransportRouteValidator validator)
         {
             Guard.ArgumentNotNull(() => stateOfExport, stateOfExport);
-            Guard.ArgumentNotNull(() => intraCountryExportAlloweds, intraCountryExportAlloweds);
+            Guard.ArgumentNotNull(() => validator, validator);
 
-            if (StateOfImport != null && StateOfImport.Country.Id == stateOfExport.Country.Id)
+            if (!validator.IsImportAndExportStatesCombinationValid(StateOfImport, stateOfExport))
             {
-                if (!intraCountryExportAlloweds.Any(
-                    x =>
-                    x.ImportCompetentAuthorityId == StateOfImport.CompetentAuthority.Id &&
-                    x.ExportCompetentAuthorityId == stateOfExport.CompetentAuthority.Id))
-                {
-                    throw new InvalidOperationException(
+                throw new InvalidOperationException(
                         string.Format(
                             "Cannot add a State of Export in the same country as the State of Import for TransportRoute {0}. Country: {1}",
                             Id,
                             stateOfExport.Country.Name));
-                }
             }
 
             StateOfExport = stateOfExport;
         }
 
-        public void SetStateOfImportForNotification(StateOfImport stateOfImport, IEnumerable<IntraCountryExportAllowed> intraCountryExportAlloweds)
+        public void SetStateOfImportForNotification(StateOfImport stateOfImport, ITransportRouteValidator validator)
         {
             Guard.ArgumentNotNull(() => stateOfImport, stateOfImport);
-            Guard.ArgumentNotNull(() => intraCountryExportAlloweds, intraCountryExportAlloweds);
+            Guard.ArgumentNotNull(() => validator, validator);
 
-            if (StateOfExport != null && StateOfExport.Country.Id == stateOfImport.Country.Id)
+            if (!validator.IsImportAndExportStatesCombinationValid(stateOfImport, StateOfExport))
             {
-                if (!intraCountryExportAlloweds.Any(
-                    x =>
-                    x.ImportCompetentAuthorityId == stateOfImport.CompetentAuthority.Id &&
-                    x.ExportCompetentAuthorityId == StateOfExport.CompetentAuthority.Id))
-                {
-                    throw new InvalidOperationException(
+                throw new InvalidOperationException(
                         string.Format(
                             "Cannot add a State of Import in the same country as the State of Export for TransportRoute {0}. Country: {1}",
                             Id,
-                            StateOfExport.Country.Name));
-                }
+                            stateOfImport.Country.Name));
             }
 
             StateOfImport = stateOfImport;

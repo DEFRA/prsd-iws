@@ -77,7 +77,7 @@
 
             var resultModel = result.Model as ShareNotificationViewModel;
 
-            Assert.Equal(1, resultModel.SelectedSharedUsers.Count);
+            Assert.Single(resultModel.SelectedSharedUsers);
         }
 
         [Fact]
@@ -91,7 +91,7 @@
 
             var resultModel = result.Model as ShareNotificationViewModel;
 
-            Assert.Equal(0, resultModel.SelectedSharedUsers.Count);
+            Assert.Empty(resultModel.SelectedSharedUsers);
         }
 
         [Fact]
@@ -107,7 +107,7 @@
 
             var resultModel = result.Model as ShareNotificationViewModel;
 
-            Assert.Equal(1, resultModel.SelectedSharedUsers.Count);
+            Assert.Single(resultModel.SelectedSharedUsers);
         }
         
         [Fact]

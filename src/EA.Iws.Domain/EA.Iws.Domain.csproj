@@ -427,11 +427,13 @@
     <Compile Include="TransportRoute\IExitPoint.cs" />
     <Compile Include="TransportRoute\IState.cs" />
     <Compile Include="TransportRoute\ITransportRouteRepository.cs" />
+    <Compile Include="TransportRoute\ITransportRouteValidation.cs" />
     <Compile Include="TransportRoute\RequiredCustomsOffices.cs" />
     <Compile Include="TransportRoute\StateOfExport.cs" />
     <Compile Include="TransportRoute\StateOfImport.cs" />
     <Compile Include="TransportRoute\TransitState.cs" />
     <Compile Include="TransportRoute\TransportRoute.cs" />
+    <Compile Include="TransportRoute\TransportRouteValidation.cs" />
     <Compile Include="UnitedKingdomCompetentAuthority.cs" />
     <Compile Include="User.cs" />
     <Compile Include="UserAddress.cs" />

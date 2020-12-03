@@ -51,7 +51,7 @@
             viewModel.Email = email;
             var validationResult = ViewModelValidator.ValidateViewModel(viewModel);
 
-            Assert.Equal(1, validationResult.Count);
+            Assert.Single(validationResult);
         }
 
         [Theory]

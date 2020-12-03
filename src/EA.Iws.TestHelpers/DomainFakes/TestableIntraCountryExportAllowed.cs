@@ -2,13 +2,14 @@
 {
     using System;
     using Domain;
+    using EA.Iws.Core.Notification;
 
     public class TestableIntraCountryExportAllowed : IntraCountryExportAllowed
     {
-        public new Guid ExportCompetentAuthorityId
+        public new UKCompetentAuthority ExportCompetentAuthority
         {
-            get { return base.ExportCompetentAuthorityId; }
-            set { base.ExportCompetentAuthorityId = value; }
+            get { return base.ExportCompetentAuthority; }
+            set { base.ExportCompetentAuthority = value; }
         }
         public new Guid ImportCompetentAuthorityId
         {
@@ -22,7 +23,7 @@
             {
                 return new TestableIntraCountryExportAllowed
                 {
-                    ExportCompetentAuthorityId = new Guid("A720D22F-FC3A-42D4-9795-BFF543E65BAE"),
+                    ExportCompetentAuthority = UKCompetentAuthority.England,
                     ImportCompetentAuthorityId = new Guid("09B5C858-2C09-4F00-B19C-1138936233C6"),
                 };
             }
@@ -34,7 +35,7 @@
             {
                 return new TestableIntraCountryExportAllowed
                 {
-                    ExportCompetentAuthorityId = new Guid("B3E1E1A6-3B80-4683-B56A-F76A4BADD2AA"),
+                    ExportCompetentAuthority = UKCompetentAuthority.England,
                     ImportCompetentAuthorityId = new Guid("09B5C858-2C09-4F00-B19C-1138936233C6"),
                 };
             }

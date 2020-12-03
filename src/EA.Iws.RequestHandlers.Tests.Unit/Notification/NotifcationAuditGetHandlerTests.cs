@@ -52,7 +52,7 @@
         {
             var result = await handler.HandleAsync(message);
             
-            Assert.Equal(result.Count(), 2);
+            Assert.Equal(2, result.Count());
             // mapper.Map should be called once for each item in notificationAudits
             A.CallTo(() => mapper.Map<NotificationAuditForDisplay>(notificationAudit))
                 .MustHaveHappened(Repeated.Exactly.Times(notificationAudits.Count()));

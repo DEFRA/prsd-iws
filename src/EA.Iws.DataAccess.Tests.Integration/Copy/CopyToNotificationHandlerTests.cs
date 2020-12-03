@@ -33,6 +33,15 @@
     [Trait("Category", "Integration")]
     public class CopyToNotificationHandlerTests : IDisposable
     {
+        private class MockValidator : ITransportRouteValidator
+        {
+            public bool Return { get; set; }
+            public bool IsImportAndExportStatesCombinationValid(StateOfImport importState, StateOfExport exportState)
+            {
+                return this.Return;
+            }
+        }
+
         private static readonly Guid UserId = new Guid("7A354C6D-BA5D-49F7-8870-73B2E74E2677");
         private const int SourceNumber = 99991;
         private const int DestinationNumber = 99992;
@@ -44,6 +53,8 @@
         private readonly IwsContext context;
         private readonly CopyToNotificationHandler handler;
         private readonly Guid[] preRunNotifications;
+
+        private readonly ITransportRouteValidator validator = new MockValidator { Return = true};
 
         public CopyToNotificationHandlerTests()
         {
@@ -124,7 +135,7 @@
                 new Guid("16CE4AE7-1FCF-4A04-84A3-9067DF24DEF6"), id,
                 context.EntryOrExitPoints.ToArray(),
                 context.CompetentAuthorities.ToArray(),
-                context.IntraCountryExportAllowed.ToArray());
+                this.validator);
             context.TransportRoutes.Add(transportRoute);
         }
 

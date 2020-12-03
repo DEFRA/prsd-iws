@@ -10,7 +10,7 @@
     {
         public static TransportRoute CreateCompleted(Guid id, Guid notificationId,
             IList<EntryOrExitPoint> entryOrExitPoints, IList<CompetentAuthority> competentAuthorities,
-            IList<IntraCountryExportAllowed> intraCountryExportAlloweds)
+            ITransportRouteValidator validator)
         {
             var transportRoute = new TransportRoute(notificationId);
             EntityHelper.SetEntityId(transportRoute, id);
@@ -25,8 +25,8 @@
             var stateOfImport = new StateOfImport(entryPoint.Country,
                 competentAuthorities.First(ca => ca.Country.Id == entryPoint.Country.Id), entryPoint);
 
-            transportRoute.SetStateOfExportForNotification(stateOfExport, intraCountryExportAlloweds);
-            transportRoute.SetStateOfImportForNotification(stateOfImport, intraCountryExportAlloweds);
+            transportRoute.SetStateOfExportForNotification(stateOfExport, validator);
+            transportRoute.SetStateOfImportForNotification(stateOfImport, validator);
 
             return transportRoute;
         }

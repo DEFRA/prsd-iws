@@ -9,6 +9,16 @@
     [AutoRegister]
     internal class TransportRouteToTransportRouteCopy
     {
+        private class TransportRouteToTransportRouteCopyValidator : ITransportRouteValidator
+        {
+            public bool IsImportAndExportStatesCombinationValid(StateOfImport importState, StateOfExport exportState)
+            {
+                return true;
+            }
+        }
+
+        private readonly ITransportRouteValidator validator = new TransportRouteToTransportRouteCopyValidator();
+
         public virtual void CopyTransportRoute(TransportRoute source, TransportRoute destination, IEnumerable<IntraCountryExportAllowed> intraCountryExportAlloweds)
         {
             CopyStateOfExport(source, destination, intraCountryExportAlloweds);
@@ -33,7 +43,7 @@
                 destination.SetStateOfExportForNotification(new StateOfExport(source.StateOfExport.Country,
                     source.StateOfExport.CompetentAuthority,
                     source.StateOfExport.ExitPoint),
-                    intraCountryExportAlloweds);
+                    validator);
             }
         }
 
@@ -44,7 +54,7 @@
                 destination.SetStateOfImportForNotification(new StateOfImport(source.StateOfImport.Country,
                     source.StateOfImport.CompetentAuthority,
                     source.StateOfImport.EntryPoint),
-                    intraCountryExportAlloweds);
+                    validator);
             }
         }
 
