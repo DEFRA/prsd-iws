@@ -14,12 +14,17 @@
         private readonly IwsContext context;
         private readonly ITransportRouteRepository transportRouteRepository;
         private readonly IIntraCountryExportAllowedRepository iceaRepository;
+        private readonly IUnitedKingdomCompetentAuthorityRepository unitedKingdomCompetentAuthorityRepository;
 
-        public SetStateOfExportForNotificationHandler(IwsContext context, ITransportRouteRepository transportRouteRepository, IIntraCountryExportAllowedRepository iceaRepository)
+        public SetStateOfExportForNotificationHandler(IwsContext context, 
+                                                    ITransportRouteRepository transportRouteRepository, 
+                                                    IIntraCountryExportAllowedRepository iceaRepository,
+                                                    IUnitedKingdomCompetentAuthorityRepository unitedKingdomCompetentAuthorityRepository)
         {
             this.context = context;
             this.transportRouteRepository = transportRouteRepository;
             this.iceaRepository = iceaRepository;
+            this.unitedKingdomCompetentAuthorityRepository = unitedKingdomCompetentAuthorityRepository;
         }
 
         public async Task<Guid> HandleAsync(SetStateOfExportForNotification message)
@@ -28,7 +33,7 @@
             var transportRoute = await transportRouteRepository.GetByNotificationId(message.NotificationId);
             var country = await context.Countries.SingleAsync(c => c.Name == UnitedKingdomCompetentAuthority.CountryName);
             var exitPoint = await context.EntryOrExitPoints.SingleAsync(ep => ep.Id == message.EntryOrExitPointId);
-            var acceptableExportStates = await iceaRepository.GetAll();
+            var acceptableExportStates = await iceaRepository.GetAllAsync();
             var unitedKingdomAuthorities = await context.UnitedKingdomCompetentAuthorities.ToArrayAsync();
 
             if (transportRoute == null)
@@ -37,7 +42,7 @@
                 context.TransportRoutes.Add(transportRoute);
             }
 
-            var ukcompAuth = await context.UnitedKingdomCompetentAuthorities.SingleAsync(ca => ca.Id == (int)notification.CompetentAuthority);
+            var ukcompAuth = await unitedKingdomCompetentAuthorityRepository.GetByCompetentAuthority(notification.CompetentAuthority);
             var caid = ukcompAuth.CompetentAuthority.Id;
             var competentAuthority = await context.CompetentAuthorities.SingleAsync(ca => ca.Id == caid);
             var stateOfExport = new StateOfExport(country, competentAuthority, exitPoint);

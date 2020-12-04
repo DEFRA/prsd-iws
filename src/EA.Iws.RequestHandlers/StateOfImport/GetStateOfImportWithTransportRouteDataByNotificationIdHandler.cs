@@ -11,6 +11,7 @@
     using DataAccess;
     using Domain;
     using Domain.TransportRoute;
+    using EA.Iws.Domain.NotificationApplication;
     using Prsd.Core.Mapper;
     using Prsd.Core.Mediator;
     using Requests.StateOfImport;
@@ -23,13 +24,15 @@
         private readonly ICompetentAuthorityRepository competentAuthorityRepository;
         private readonly ICountryRepository countryRepository;
         private readonly IIntraCountryExportAllowedRepository intraCountryExportAllowedRepository;
+        private readonly INotificationApplicationRepository notificationApplicationRepository;
 
         public GetStateOfImportWithTransportRouteDataByNotificationIdHandler(IwsContext context,
             IMapper mapper,
             ITransportRouteRepository transportRouteRepository,
             ICompetentAuthorityRepository competentAuthorityRepository,
             ICountryRepository countryRepository,
-            IIntraCountryExportAllowedRepository intraCountryExportAllowedRepository)
+            IIntraCountryExportAllowedRepository intraCountryExportAllowedRepository,
+            INotificationApplicationRepository notificationApplicationRepository)
         {
             this.context = context;
             this.mapper = mapper;
@@ -37,6 +40,7 @@
             this.competentAuthorityRepository = competentAuthorityRepository;
             this.countryRepository = countryRepository;
             this.intraCountryExportAllowedRepository = intraCountryExportAllowedRepository;
+            this.notificationApplicationRepository = notificationApplicationRepository;
         }
 
         public async Task<StateOfImportWithTransportRouteData> HandleAsync(GetStateOfImportWithTransportRouteDataByNotificationId message)
@@ -66,15 +70,9 @@
                     data.EntryPoints = entryPoints.Select(e => mapper.Map<EntryOrExitPointData>(e)).ToArray();
                 }
 
-                if (data.StateOfExport != null)
-                {
-                    var ukcas = await this.context.UnitedKingdomCompetentAuthorities.Where(uk => uk.CompetentAuthority.Id == data.StateOfExport.CompetentAuthority.Id).ToArrayAsync();
-                    if (ukcas.Any())
-                    {
-                        var allowed = await intraCountryExportAllowedRepository.GetImportCompetentAuthorities(ukcas.First().AsCompetentAuthority());
-                        data.IntraCountryExportAllowed = allowed.Select(a => mapper.Map<IntraCountryExportAllowedData>(a)).ToArray();
-                    }
-                }
+                var notification = await notificationApplicationRepository.GetById(message.Id);
+                var allowed = await intraCountryExportAllowedRepository.GetImportCompetentAuthorities(notification.CompetentAuthority);
+                data.IntraCountryExportAllowed = allowed.Select(a => mapper.Map<IntraCountryExportAllowedData>(a)).ToArray();
             }
             
             data.Countries = countries.Select(c => mapper.Map<CountryData>(c)).ToArray();

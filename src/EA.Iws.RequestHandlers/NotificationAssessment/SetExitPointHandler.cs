@@ -30,7 +30,7 @@
         {
             var transportRoute = await transportRouteRepository.GetByNotificationId(message.NotificationId);
             var exitPoint = await entryOrExitPointRepository.GetById(message.ExitPointId);
-            var intraCountryExportAlloweds = await intraCountryExportAllowedRepository.GetAll();
+            var intraCountryExportAlloweds = await intraCountryExportAllowedRepository.GetAllAsync();
             var uksAuthorities = await context.UnitedKingdomCompetentAuthorities.ToArrayAsync();
             var validator = new TransportRouteValidation(intraCountryExportAlloweds, uksAuthorities);
 

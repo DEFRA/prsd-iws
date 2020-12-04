@@ -14,22 +14,25 @@
         private readonly IwsContext context;
         private readonly ITransportRouteRepository transportRouteRepository;
         private readonly IIntraCountryExportAllowedRepository intraCountryExportAllowedRepository;
+        private readonly IUnitedKingdomCompetentAuthorityRepository unitedKingdomCompetentAuthorityRepository;
 
         public SetEntryPointHandler(ITransportRouteRepository transportRouteRepository,
             IEntryOrExitPointRepository entryOrExitPointRepository,
             IIntraCountryExportAllowedRepository intraCountryExportAllowedRepository,
+            IUnitedKingdomCompetentAuthorityRepository unitedKingdomCompetentAuthorityRepository,
             IwsContext context)
         {
             this.transportRouteRepository = transportRouteRepository;
             this.entryOrExitPointRepository = entryOrExitPointRepository;
             this.intraCountryExportAllowedRepository = intraCountryExportAllowedRepository;
+            this.unitedKingdomCompetentAuthorityRepository = unitedKingdomCompetentAuthorityRepository;
             this.context = context;
         }
 
         public async Task<Unit> HandleAsync(SetEntryPoint message)
         {
-            var intraCountryExportAlloweds = await intraCountryExportAllowedRepository.GetAll();
-            var uksAuthorities = await context.UnitedKingdomCompetentAuthorities.ToArrayAsync();
+            var intraCountryExportAlloweds = await intraCountryExportAllowedRepository.GetAllAsync();
+            var uksAuthorities = await unitedKingdomCompetentAuthorityRepository.GetAllAsync();
             var entryPoint = await entryOrExitPointRepository.GetById(message.EntryPointId);
             var transportRoute = await transportRouteRepository.GetByNotificationId(message.NotificationId);
             var validator = new TransportRouteValidation(intraCountryExportAlloweds, uksAuthorities);

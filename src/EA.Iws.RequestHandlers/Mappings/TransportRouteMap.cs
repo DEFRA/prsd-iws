@@ -22,6 +22,8 @@
         private readonly IMap<EntryOrExitPoint, EntryOrExitPointData> entryOrExitPointMapper;
         private readonly IMap<Country, CountryData> countryMapper;
         private readonly IMap<CompetentAuthority, CompetentAuthorityData> competentAuthorityMapper;
+        private readonly IIntraCountryExportAllowedRepository intraCountryExportAllowedRepository;
+        private readonly IUnitedKingdomCompetentAuthorityRepository unitedKingdomCompetentAuthorityRepository;
 
         public TransportRouteMap(IwsContext context,
             IMap<StateOfImport, StateOfImportData> stateOfImportMapper,
@@ -29,7 +31,9 @@
             IMap<IEnumerable<TransitState>, IList<TransitStateData>> transitStateMapper,
             IMap<EntryOrExitPoint, EntryOrExitPointData> entryOrExitPointMapper,
             IMap<Country, CountryData> countryMapper,
-            IMap<CompetentAuthority, CompetentAuthorityData> competentAuthorityMapper)
+            IMap<CompetentAuthority, CompetentAuthorityData> competentAuthorityMapper,
+             IIntraCountryExportAllowedRepository intraCountryExportAllowedRepository,
+             IUnitedKingdomCompetentAuthorityRepository unitedKingdomCompetentAuthorityRepository)
         {
             this.context = context;
             this.stateOfImportMapper = stateOfImportMapper;
@@ -38,6 +42,8 @@
             this.entryOrExitPointMapper = entryOrExitPointMapper;
             this.countryMapper = countryMapper;
             this.competentAuthorityMapper = competentAuthorityMapper;
+            this.intraCountryExportAllowedRepository = intraCountryExportAllowedRepository;
+            this.unitedKingdomCompetentAuthorityRepository = unitedKingdomCompetentAuthorityRepository;
         }
 
         public StateOfExportWithTransportRouteData Map(TransportRoute source, Guid parameter)
@@ -60,7 +66,7 @@
             {
                 data.StateOfExport = new StateOfExportData();
 
-                var ukcompAuth = context.UnitedKingdomCompetentAuthorities.Single(ca => ca.Id == (int)notification.CompetentAuthority);
+                var ukcompAuth = this.unitedKingdomCompetentAuthorityRepository.GetAll().Single(ca => ca.Id == (int)notification.CompetentAuthority);
 
                 data.StateOfExport.Country = countryMapper.Map(countries.Single(c => c.Name == UnitedKingdomCompetentAuthority.CountryName));
 

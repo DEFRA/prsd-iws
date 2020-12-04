@@ -164,6 +164,7 @@
     <Compile Include="INotificationPreviewWatermarkGenerator.cs" />
     <Compile Include="INotificationUserRepository.cs" />
     <Compile Include="IPostageLabelGenerator.cs" />
+    <Compile Include="IUnitedKingdomCompetentAuthorityRepository.cs" />
     <Compile Include="Movement\BulkUpload\DraftBulkUpload.cs" />
     <Compile Include="Movement\BulkUpload\DraftPackagingInfo.cs" />
     <Compile Include="Movement\BulkUpload\DraftMovement.cs" />

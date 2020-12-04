@@ -414,6 +414,7 @@
     <Compile Include="Mappings\ImportNotification\TransitStateMap.cs" />
     <Compile Include="Mappings\ImportNotification\WasteOperationMap.cs" />
     <Compile Include="Mappings\ImportNotification\WasteTypeMap.cs" />
+    <Compile Include="Mappings\IntraCountryExportAllowedMap.cs" />
     <Compile Include="Mappings\Movement\MovementAuditMap.cs" />
     <Compile Include="Mappings\Movement\MovementAuditRecordMap.cs" />
     <Compile Include="Mappings\Movement\MovementFileMap.cs" />

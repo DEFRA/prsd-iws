@@ -26,11 +26,13 @@
         private readonly IIntraCountryExportAllowedRepository intraCountryExportAllowedRepository;
         private readonly ICompetentAuthorityRepository repository;
         private readonly IEnumerable<Guid> ids;
+        private readonly IUnitedKingdomCompetentAuthorityRepository unitedKingdomCompetentAuthorityRepository;
 
         public GetCompetentAuthoritiesAndEntryPointsByCountryIdHandlerTests()
         {
             entryOrExitPointRepository = A.Fake<IEntryOrExitPointRepository>();
             intraCountryExportAllowedRepository = A.Fake<IIntraCountryExportAllowedRepository>();
+            unitedKingdomCompetentAuthorityRepository = A.Fake<IUnitedKingdomCompetentAuthorityRepository>();
             var iwsContext = new TestIwsContext();
 
             var countryWithData = CountryFactory.Create(countryWithDataId);
@@ -43,7 +45,10 @@
                 CompetentAuthorityFactory.Create(new Guid("DFD98B0D-F255-4BA0-96A5-527DE9F973E3"), countryWithData)
             };
 
-            iwsContext.UnitedKingdomCompetentAuthorities.Add(new TestableUnitedKingdomCompetentAuthority(1, competentAuthorities[0], "something", null));
+            A.CallTo(() => unitedKingdomCompetentAuthorityRepository.GetAll()).Returns(new[]
+            {
+                new TestableUnitedKingdomCompetentAuthority(1, competentAuthorities[0], "something", null)
+            });
 
             var competentAuthorityMapper = new CompetentAuthorityMap();
             var entryOrExitPointMapper = new EntryOrExitPointMap();
@@ -76,14 +81,20 @@
                                 .WithReturnType<CompetentAuthority[]>()
                                 .Returns(competentAuthorities);
 
-            handler = new GetCompetentAuthoritiesAndEntryPointsByCountryIdHandler(entryOrExitPointMapper, competentAuthorityMapper, repository, entryOrExitPointRepository, intraCountryExportAllowedRepository, iwsContext);
+            handler = new GetCompetentAuthoritiesAndEntryPointsByCountryIdHandler(entryOrExitPointMapper, competentAuthorityMapper, repository, entryOrExitPointRepository, intraCountryExportAllowedRepository, iwsContext, unitedKingdomCompetentAuthorityRepository);
         }
 
         [Fact]
         public async Task Handle_DataForCountry_NonUk()
         {
+            // Arrange
+            A.CallTo(() => unitedKingdomCompetentAuthorityRepository.IsCountryUk(countryWithDataId)).Returns(false);
+
+            // Act
             var result = await handler.HandleAsync(new GetCompetentAuthoritiesAndEntryPointsByCountryId(countryWithDataId, UKCompetentAuthority.England));
 
+            // Assert
+            A.CallTo(() => unitedKingdomCompetentAuthorityRepository.IsCountryUk(countryWithDataId)).MustHaveHappened();
             A.CallTo(() => entryOrExitPointRepository.GetForCountry(countryWithDataId)).MustHaveHappened();
             A.CallTo(() => repository.GetCompetentAuthorities(countryWithDataId));
         }
@@ -91,8 +102,14 @@
         [Fact]
         public async Task Handle_DataForCountry_Uk()
         {
+            // Arrange
+            A.CallTo(() => unitedKingdomCompetentAuthorityRepository.IsCountryUk(unitedKingdomCountryId)).Returns(true);
+
+            // Act
             var result = await handler.HandleAsync(new GetCompetentAuthoritiesAndEntryPointsByCountryId(unitedKingdomCountryId, UKCompetentAuthority.England));
 
+            // Assert
+            A.CallTo(() => unitedKingdomCompetentAuthorityRepository.IsCountryUk(unitedKingdomCountryId)).MustHaveHappened();
             A.CallTo(() => entryOrExitPointRepository.GetForCountry(unitedKingdomCountryId)).MustHaveHappened();
             A.CallTo(() => intraCountryExportAllowedRepository.GetImportCompetentAuthorities(UKCompetentAuthority.England)).MustHaveHappened();
             A.CallTo(repository).Where(call => call.Method.Name == "GetByIds").MustHaveHappened();

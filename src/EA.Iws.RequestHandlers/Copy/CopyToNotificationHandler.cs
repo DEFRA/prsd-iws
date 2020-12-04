@@ -240,7 +240,7 @@
             if (transportRoute != null)
             {
                 var sourceCompetentAuthority = (await notificationApplicationRepository.GetById(sourceNotificationId)).CompetentAuthority;
-                var intraCountryExportAlloweds = await intraCountryExportAllowedRepository.GetAll();
+                var intraCountryExportAlloweds = await intraCountryExportAllowedRepository.GetAllAsync();
                 if (destinationCompetentAuthority == sourceCompetentAuthority)
                 {
                     transportRouteCopier.CopyTransportRoute(transportRoute, destinationTransportRoute, intraCountryExportAlloweds);
