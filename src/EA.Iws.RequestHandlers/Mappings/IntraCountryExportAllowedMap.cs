@@ -10,7 +10,7 @@
         {
             return new IntraCountryExportAllowedData
             {
-                ExportCompetentAuthorityId = source.ExportCompetentAuthorityId,
+                ExportCompetentAuthority = (int)source.ExportCompetentAuthority,
                 ImportCompetentAuthorityId = source.ImportCompetentAuthorityId
             };
         }

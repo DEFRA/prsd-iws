@@ -39,9 +39,9 @@
 
             var stateOfImport = new StateOfImport(country, competentAuthority, entryPoint);
 
-            var acceptableImportStates = await iceaRepository.GetAll();
+            var acceptableImportStates = await iceaRepository.GetAllAsync();
 
-            var validator = new TransportRouteValidation(await iceaRepository.GetAll(), 
+            var validator = new TransportRouteValidation(await iceaRepository.GetAllAsync(), 
                                                         await this.context.UnitedKingdomCompetentAuthorities.ToArrayAsync());
 
             transportRoute.SetStateOfImportForNotification(stateOfImport, validator);

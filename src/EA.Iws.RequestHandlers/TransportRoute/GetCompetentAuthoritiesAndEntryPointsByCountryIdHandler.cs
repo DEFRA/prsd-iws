@@ -21,13 +21,15 @@
         private readonly IIntraCountryExportAllowedRepository intraCountryExportAllowedRepository;
         private readonly IMap<EntryOrExitPoint, EntryOrExitPointData> entryOrExitPointMapper;
         private readonly IwsContext context;
+        private readonly IUnitedKingdomCompetentAuthorityRepository unitedKingdomCompetentAuthorityRepository;
 
         public GetCompetentAuthoritiesAndEntryPointsByCountryIdHandler(IMap<EntryOrExitPoint, EntryOrExitPointData> entryOrExitPointMapper,
             IMap<CompetentAuthority, CompetentAuthorityData> competentAuthorityMapper,
             ICompetentAuthorityRepository competentAuthorityRepository,
             IEntryOrExitPointRepository entryOrExitPointRepository,
             IIntraCountryExportAllowedRepository intraCountryExportAllowedRepository,
-            IwsContext context)
+            IwsContext context,
+            IUnitedKingdomCompetentAuthorityRepository unitedKingdomCompetentAuthorityRepository)
         {
             this.entryOrExitPointRepository = entryOrExitPointRepository;
             this.entryOrExitPointMapper = entryOrExitPointMapper;
@@ -35,15 +37,14 @@
             this.competentAuthorityRepository = competentAuthorityRepository;
             this.intraCountryExportAllowedRepository = intraCountryExportAllowedRepository;
             this.context = context;
+            this.unitedKingdomCompetentAuthorityRepository = unitedKingdomCompetentAuthorityRepository;
         }
 
         public async Task<CompetentAuthorityAndEntryOrExitPointData> HandleAsync(
             GetCompetentAuthoritiesAndEntryPointsByCountryId message)
         {
             IEnumerable<CompetentAuthority> competentAuthorities;
-
-            var isUk = await context.IsCountryUk(message.Id);
-
+            var isUk = await this.unitedKingdomCompetentAuthorityRepository.IsCountryUk(message.Id);
             var entryOrExitPoints = (await entryOrExitPointRepository.GetForCountry(message.Id));
 
             if (isUk)
