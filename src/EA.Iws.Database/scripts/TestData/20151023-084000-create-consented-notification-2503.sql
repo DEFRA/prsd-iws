@@ -1,5 +1,7 @@
 DECLARE @UserId UNIQUEIDENTIFIER;
 DECLARE @NotificationId UNIQUEIDENTIFIER = 'ceb03ae8-2792-4dfc-8f87-6b2384f62503';
+DECLARE @keyDate datetime = DATEADD(m, -1, GETDATE());
+
 
 SELECT @UserId = id
 FROM   [Identity].[aspnetusers]
@@ -23,7 +25,7 @@ VALUES (@NotificationId,
         1,
         1,
         N'GB 0001 002503',
-        Cast(N'2016-10-10 09:00:00.0000000' AS DATETIME2),
+        Cast(@keyDate AS DATETIME2),
         N'Use of advanced facilities',
         0,
         NULL,
@@ -281,6 +283,9 @@ VALUES (NEWID(),
         @NotificationId,
         NULL)
 
+DECLARE @firstShipment DATE = CAST(DATEADD(d, 20, @keyDate) AS DATE);
+DECLARE @lastShipment DATE = CAST(DATEADD(y, 1, @firstShipment) AS DATE);
+
 INSERT [Notification].[shipmentinfo]
        ([id],
         [notificationid],
@@ -294,8 +299,9 @@ VALUES (NEWID(),
         520,
         Cast(25000.0000 AS DECIMAL(18, 4)),
         3,
-        Cast(N'2016-09-01' AS DATE),
-        Cast(N'2017-08-27' AS DATE))
+        @firstShipment,
+		@lastShipment
+		);
 
 INSERT [Notification].[CarrierCollection]
 	   ([Id],
@@ -806,12 +812,12 @@ VALUES
 	(SELECT Cast(Cast(Newid() AS BINARY(10))
                            + Cast(Getdate() AS BINARY(6)) AS UNIQUEIDENTIFIER)),
 	@NotificationAssessmentId,
-	'2016-10-17',
-	'2016-10-17',
-	'2016-10-18',
-	'2016-10-18',
-	'2016-10-19',
-	'2016-10-20',
+	DATEADD(d, 1, @keyDate),
+	DATEADD(d, 1, @keyDate),
+	DATEADD(d, 2, @keyDate),
+	DATEADD(d, 2, @keyDate),
+	DATEADD(d, 3, @keyDate),
+	DATEADD(d, 4, @keyDate),
 	'Jane'
 )
 
@@ -828,7 +834,7 @@ VALUES
 (
 	(SELECT Cast(Cast(Newid() AS BINARY(10))
                            + Cast(Getdate() AS BINARY(6)) AS UNIQUEIDENTIFIER)),
-	'2016-10-20',
+	DATEADD(d, 4, @keyDate),
 	DATEADD(month, 1, CONVERT(date,GETDATE())),
 	'Let me win at chess',
 	(SELECT [Id] FROM [Identity].[AspNetUsers] WHERE [Email] LIKE 'superuser@environment-agency.gov.uk'),
@@ -864,10 +870,10 @@ VALUES
 	(SELECT Cast(Cast(Newid() AS BINARY(10))
 					+ Cast(Getdate() AS BINARY(6)) AS UNIQUEIDENTIFIER)),
 	4,
-	'2016-10-13',
-	'2016-10-13',
+	DATEADD(d, 1, @keyDate),
+	DATEADD(d, 1, @keyDate),
 	GETDATE(),
-	'2016-10-20',
+	DATEADD(d, 4, @keyDate),
 	520,
 	(SELECT Id FROM [Notification].[FinancialGuaranteeCollection] WHERE [NotificationId] = @NotificationId),
 	1
