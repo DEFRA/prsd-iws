@@ -8,7 +8,6 @@
     public interface IIntraCountryExportAllowedRepository
     {
         Task<IEnumerable<IntraCountryExportAllowed>> GetAllAsync();
-        IEnumerable<IntraCountryExportAllowed> GetAll();
 
         Task<IEnumerable<IntraCountryExportAllowed>> GetImportCompetentAuthorities(UKCompetentAuthority exportCompetentAuthorityId);
     }

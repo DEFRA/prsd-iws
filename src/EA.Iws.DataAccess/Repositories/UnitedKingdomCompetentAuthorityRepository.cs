@@ -1,20 +1,20 @@
 ﻿namespace EA.Iws.DataAccess.Repositories
 {
-    using EA.Iws.Domain;
     using System;
+    using System.Collections.Generic;
+    using System.Data.Entity;
     using System.Linq;
     using System.Threading.Tasks;
     using EA.Iws.Core.Notification;
+    using EA.Iws.Domain;
 
-    public class UnitedKingdomCompetentAuthorityRepository : StaticDataCachingRepositoryBase<UnitedKingdomCompetentAuthority>, IUnitedKingdomCompetentAuthorityRepository
+    public class UnitedKingdomCompetentAuthorityRepository : IUnitedKingdomCompetentAuthorityRepository
     {
-        public UnitedKingdomCompetentAuthorityRepository(IwsContext context) : base(context)
-        {
-        }
+        private readonly IwsContext context;
 
-        protected override UnitedKingdomCompetentAuthority[] GetFromContext()
+        public UnitedKingdomCompetentAuthorityRepository(IwsContext context)
         {
-            return this.Context.UnitedKingdomCompetentAuthorities.ToArray();
+            this.context = context;
         }
 
         public async Task<bool> IsCountryUk(Guid countryId)
@@ -25,6 +25,16 @@
         public async Task<UnitedKingdomCompetentAuthority> GetByCompetentAuthority(UKCompetentAuthority competentAuthority)
         {
             return (await GetAllAsync()).Single(ca => ca.Id == (int)competentAuthority);
+        }
+
+        public async Task<IEnumerable<UnitedKingdomCompetentAuthority>> GetAllAsync()
+        {
+            return await this.context.UnitedKingdomCompetentAuthorities.ToArrayAsync();
+        }
+
+        public IEnumerable<UnitedKingdomCompetentAuthority> GetAll()
+        {
+            return this.context.UnitedKingdomCompetentAuthorities;
         }
     }
 }
