@@ -292,7 +292,6 @@
     <Compile Include="Repositories\NumberOfShipmentsHistoryRepository.cs" />
     <Compile Include="Repositories\SharedUserHistoryRepository.cs" />
     <Compile Include="Repositories\SharedUserRepository.cs" />
-    <Compile Include="Repositories\StaticDataCachingRepositoryBase.cs" />
     <Compile Include="Repositories\TechnologyEmployedRepository.cs" />
     <Compile Include="Repositories\Search\AdvancedSearchRepository.cs" />
     <Compile Include="Repositories\UnitedKingdomCompetentAuthorityRepository.cs" />
