@@ -1,17 +1,16 @@
 ﻿namespace EA.Iws.RequestHandlers.StateOfImport
 {
-    using System.Data.Entity;
     using System.Linq;
     using System.Threading.Tasks;
     using Core.Shared;
     using Core.StateOfExport;
     using Core.StateOfImport;
     using Core.TransitState;
-    using Core.TransportRoute;
     using DataAccess;
     using Domain;
     using Domain.TransportRoute;
     using EA.Iws.Domain.NotificationApplication;
+    using EA.Iws.Requests.TransportRoute;
     using Prsd.Core.Mapper;
     using Prsd.Core.Mediator;
     using Requests.StateOfImport;
@@ -25,6 +24,7 @@
         private readonly ICountryRepository countryRepository;
         private readonly IIntraCountryExportAllowedRepository intraCountryExportAllowedRepository;
         private readonly INotificationApplicationRepository notificationApplicationRepository;
+        private readonly IRequestHandler<GetCompetentAuthoritiesAndEntryPointsByCountryId, CompetentAuthorityAndEntryOrExitPointData> getCompetentAuthoritiesAndEntryPointsByCountryIdHandler;
 
         public GetStateOfImportWithTransportRouteDataByNotificationIdHandler(IwsContext context,
             IMapper mapper,
@@ -32,7 +32,8 @@
             ICompetentAuthorityRepository competentAuthorityRepository,
             ICountryRepository countryRepository,
             IIntraCountryExportAllowedRepository intraCountryExportAllowedRepository,
-            INotificationApplicationRepository notificationApplicationRepository)
+            INotificationApplicationRepository notificationApplicationRepository,
+            IRequestHandler<GetCompetentAuthoritiesAndEntryPointsByCountryId, CompetentAuthorityAndEntryOrExitPointData> getCompetentAuthoritiesAndEntryPointsByCountryIdHandler)
         {
             this.context = context;
             this.mapper = mapper;
@@ -41,6 +42,7 @@
             this.countryRepository = countryRepository;
             this.intraCountryExportAllowedRepository = intraCountryExportAllowedRepository;
             this.notificationApplicationRepository = notificationApplicationRepository;
+            this.getCompetentAuthoritiesAndEntryPointsByCountryIdHandler = getCompetentAuthoritiesAndEntryPointsByCountryIdHandler;
         }
 
         public async Task<StateOfImportWithTransportRouteData> HandleAsync(GetStateOfImportWithTransportRouteDataByNotificationId message)
@@ -55,22 +57,16 @@
                 data.StateOfImport = mapper.Map<StateOfImportData>(transportRoute.StateOfImport);
                 data.StateOfExport = mapper.Map<StateOfExportData>(transportRoute.StateOfExport);
                 data.TransitStates = transportRoute.TransitStates.Select(t => mapper.Map<TransitStateData>(t)).ToList();
+                var notification = await notificationApplicationRepository.GetById(message.Id);
 
                 if (transportRoute.StateOfImport != null)
                 {
-                    var competentAuthorities =
-                        await
-                            competentAuthorityRepository.GetCompetentAuthorities(transportRoute.StateOfImport.Country.Id);
-                    var entryPoints =
-                        await
-                            context.EntryOrExitPoints.Where(
-                                ep => ep.Country.Id == transportRoute.StateOfImport.Country.Id).ToArrayAsync();
-
-                    data.CompetentAuthorities = competentAuthorities.Select(ca => mapper.Map<CompetentAuthorityData>(ca)).ToArray();
-                    data.EntryPoints = entryPoints.Select(e => mapper.Map<EntryOrExitPointData>(e)).ToArray();
+                    var selectedCountryModel = new GetCompetentAuthoritiesAndEntryPointsByCountryId(transportRoute.StateOfImport.Country.Id, notification.CompetentAuthority);
+                    var dataForSelectedCountry = await this.getCompetentAuthoritiesAndEntryPointsByCountryIdHandler.HandleAsync(selectedCountryModel);
+                    data.CompetentAuthorities = dataForSelectedCountry.CompetentAuthorities;
+                    data.EntryPoints = dataForSelectedCountry.EntryOrExitPoints;
                 }
 
-                var notification = await notificationApplicationRepository.GetById(message.Id);
                 var allowed = await intraCountryExportAllowedRepository.GetImportCompetentAuthorities(notification.CompetentAuthority);
                 data.IntraCountryExportAllowed = allowed.Select(a => mapper.Map<IntraCountryExportAllowedData>(a)).ToArray();
             }
