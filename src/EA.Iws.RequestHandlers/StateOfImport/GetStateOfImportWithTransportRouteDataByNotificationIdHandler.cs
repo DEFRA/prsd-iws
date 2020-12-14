@@ -25,6 +25,7 @@
         private readonly IIntraCountryExportAllowedRepository intraCountryExportAllowedRepository;
         private readonly INotificationApplicationRepository notificationApplicationRepository;
         private readonly IRequestHandler<GetCompetentAuthoritiesAndEntryPointsByCountryId, CompetentAuthorityAndEntryOrExitPointData> getCompetentAuthoritiesAndEntryPointsByCountryIdHandler;
+        private readonly IUnitedKingdomCompetentAuthorityRepository unitedKingdomCompetentAuthorityRepository;
 
         public GetStateOfImportWithTransportRouteDataByNotificationIdHandler(IwsContext context,
             IMapper mapper,
@@ -33,7 +34,8 @@
             ICountryRepository countryRepository,
             IIntraCountryExportAllowedRepository intraCountryExportAllowedRepository,
             INotificationApplicationRepository notificationApplicationRepository,
-            IRequestHandler<GetCompetentAuthoritiesAndEntryPointsByCountryId, CompetentAuthorityAndEntryOrExitPointData> getCompetentAuthoritiesAndEntryPointsByCountryIdHandler)
+            IRequestHandler<GetCompetentAuthoritiesAndEntryPointsByCountryId, CompetentAuthorityAndEntryOrExitPointData> getCompetentAuthoritiesAndEntryPointsByCountryIdHandler,
+            IUnitedKingdomCompetentAuthorityRepository unitedKingdomCompetentAuthorityRepository)
         {
             this.context = context;
             this.mapper = mapper;
@@ -43,12 +45,22 @@
             this.intraCountryExportAllowedRepository = intraCountryExportAllowedRepository;
             this.notificationApplicationRepository = notificationApplicationRepository;
             this.getCompetentAuthoritiesAndEntryPointsByCountryIdHandler = getCompetentAuthoritiesAndEntryPointsByCountryIdHandler;
+            this.unitedKingdomCompetentAuthorityRepository = unitedKingdomCompetentAuthorityRepository;
         }
 
         public async Task<StateOfImportWithTransportRouteData> HandleAsync(GetStateOfImportWithTransportRouteDataByNotificationId message)
         {
             var transportRoute = await transportRouteRepository.GetByNotificationId(message.Id);
             var countries = await countryRepository.GetAllHavingCompetentAuthorities();
+
+            var notification = await notificationApplicationRepository.GetById(message.Id);
+            var allowed = await intraCountryExportAllowedRepository.GetImportCompetentAuthorities(notification.CompetentAuthority);
+            if (!allowed.Any())
+            {
+                // Need to remove the UK from the list
+                var unitedkingdomId = (await this.unitedKingdomCompetentAuthorityRepository.GetByCompetentAuthority(notification.CompetentAuthority)).CompetentAuthority.Country.Id;
+                countries = countries.Where(c => c.Id != unitedkingdomId);
+            }
 
             var data = new StateOfImportWithTransportRouteData();
 
@@ -57,7 +69,6 @@
                 data.StateOfImport = mapper.Map<StateOfImportData>(transportRoute.StateOfImport);
                 data.StateOfExport = mapper.Map<StateOfExportData>(transportRoute.StateOfExport);
                 data.TransitStates = transportRoute.TransitStates.Select(t => mapper.Map<TransitStateData>(t)).ToList();
-                var notification = await notificationApplicationRepository.GetById(message.Id);
 
                 if (transportRoute.StateOfImport != null)
                 {
@@ -67,7 +78,6 @@
                     data.EntryPoints = dataForSelectedCountry.EntryOrExitPoints;
                 }
 
-                var allowed = await intraCountryExportAllowedRepository.GetImportCompetentAuthorities(notification.CompetentAuthority);
                 data.IntraCountryExportAllowed = allowed.Select(a => mapper.Map<IntraCountryExportAllowedData>(a)).ToArray();
             }
             

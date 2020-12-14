@@ -82,7 +82,7 @@
                 }
                 });
             A.CallTo(
-                () => mediator.SendAsync(A<GetCompetentAuthoritiesAndEntryPointsByCountryId>.That.Matches(s => s.Id == AnyCountryId)))
+                () => mediator.SendAsync(A<GetCompetentAuthoritiesAndEntryPointsByCountryId>.That.Matches(s => s.CountryId == AnyCountryId)))
                 .Returns(new CompetentAuthorityAndEntryOrExitPointData()
                 {
                     CompetentAuthorities = competentAuthorties,

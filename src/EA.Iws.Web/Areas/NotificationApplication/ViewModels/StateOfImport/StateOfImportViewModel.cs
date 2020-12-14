@@ -10,7 +10,7 @@
     using Views.StateOfImport;
     using Web.ViewModels.Shared;
 
-    public class StateOfImportViewModel : IValidatableObject
+    public class StateOfImportViewModel
     {
         [Required(ErrorMessageResourceName = "CountryOfImportRequired", ErrorMessageResourceType = typeof(StateOfImportResources))]
         [Display(Name = "Country", ResourceType = typeof(StateOfImportResources))]
@@ -26,7 +26,6 @@
         [RequiredIf("ShowNextSection", true, ErrorMessageResourceName = "CARequired", ErrorMessageResourceType = typeof(StateOfImportResources))]
         public StringGuidRadioButtons CompetentAuthorities { get; set; }
 
-        public Guid? StateOfExportCountryId { get; set; }
         public Guid? StateOfExportCompetentAuthorityId { get; set; }
 
         public IList<Guid> TransitStateCountryIds { get; set; }
@@ -37,27 +36,9 @@
 
         public UKCompetentAuthority NotificationCompetentAuthority { get; set; }
 
-        public IList<Guid> IntraCountryExportAllowed { get; set; }
-
         public StateOfImportViewModel()
         {
             TransitStateCountryIds = new List<Guid>();
-            IntraCountryExportAllowed = new List<Guid>();
-        }
-
-        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
-        {
-            if (CountryId.HasValue && CountryId == StateOfExportCountryId)
-            {
-                // if StateOfExportCompetentAuthority is null, then still need to see if import CA shows up -- if not then still invalid
-
-                if (!IntraCountryExportAllowed.Any(x => CompetentAuthorities == null || CompetentAuthorities.SelectedValue == null ||
-                x == CompetentAuthorities.SelectedValue))
-                {
-                    // not allowed
-                    yield return new ValidationResult(StateOfImportResources.ImportExportCountryShouldNotSame, new[] { "CountryId" });
-                }
-            }
         }
     }
 }
