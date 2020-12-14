@@ -39,18 +39,6 @@
                 model.Countries = new SelectList(source.Countries, "Id", "Name");
             }
 
-            if (source.StateOfExport != null)
-            {
-                model.StateOfExportCountryId = source.StateOfExport.Country.Id;
-
-                if (source.StateOfExport.CompetentAuthority != null)
-                {
-                    model.StateOfExportCompetentAuthorityId = source.StateOfExport.CompetentAuthority.Id;
-                    model.IntraCountryExportAllowed = source.IntraCountryExportAllowed
-                        .Select(a => a.ImportCompetentAuthorityId).ToArray();
-                }
-            }
-
             return model;
         }
     }

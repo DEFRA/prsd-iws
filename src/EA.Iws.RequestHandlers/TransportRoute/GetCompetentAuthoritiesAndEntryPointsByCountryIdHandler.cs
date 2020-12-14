@@ -44,8 +44,8 @@
             GetCompetentAuthoritiesAndEntryPointsByCountryId message)
         {
             IEnumerable<CompetentAuthority> competentAuthorities;
-            var isUk = await this.unitedKingdomCompetentAuthorityRepository.IsCountryUk(message.Id);
-            var entryOrExitPoints = (await entryOrExitPointRepository.GetForCountry(message.Id));
+            var isUk = await this.unitedKingdomCompetentAuthorityRepository.IsCountryUk(message.CountryId);
+            var entryOrExitPoints = (await entryOrExitPointRepository.GetForCountry(message.CountryId));
 
             if (isUk)
             {
@@ -55,7 +55,7 @@
             }
             else
             {
-                competentAuthorities = (await competentAuthorityRepository.GetCompetentAuthorities(message.Id));
+                competentAuthorities = (await competentAuthorityRepository.GetCompetentAuthorities(message.CountryId));
             }
 
             return new CompetentAuthorityAndEntryOrExitPointData

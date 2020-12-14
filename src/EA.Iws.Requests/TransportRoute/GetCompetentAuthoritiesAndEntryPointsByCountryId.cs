@@ -9,13 +9,13 @@
     [RequestAuthorization(GeneralPermissions.CanReadCountryData)]
     public class GetCompetentAuthoritiesAndEntryPointsByCountryId : IRequest<CompetentAuthorityAndEntryOrExitPointData>
     {
-        public Guid Id { get; private set; }
+        public Guid CountryId { get; private set; }
 
         public UKCompetentAuthority NotificationUkCompetentAuthority { get; set; }
 
-        public GetCompetentAuthoritiesAndEntryPointsByCountryId(Guid id, UKCompetentAuthority notificationUkCompetentAuthority)
+        public GetCompetentAuthoritiesAndEntryPointsByCountryId(Guid countryId, UKCompetentAuthority notificationUkCompetentAuthority)
         {
-            Id = id;
+            CountryId = countryId;
             NotificationUkCompetentAuthority = notificationUkCompetentAuthority;
         }
     }
