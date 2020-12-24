@@ -104,6 +104,7 @@
     <Compile Include="Mappings\Exports\FinancialGuaranteeCollectionMapping.cs" />
     <Compile Include="Mappings\Exports\MeansOfTransportMapping.cs" />
     <Compile Include="Mappings\Exports\MovementAuditMapping.cs" />
+    <Compile Include="Mappings\Common\IntraCountryExportAllowedMapping.cs" />
     <Compile Include="Mappings\Exports\NotificationCommentMapping.cs" />
     <Compile Include="Mappings\Exports\ProducerCollectionMapping.cs" />
     <Compile Include="Mappings\Exports\NumberOfShipmentsHistoryMapping.cs" />
@@ -211,6 +212,7 @@
     <Compile Include="Repositories\AddressBookRepository.cs" />
     <Compile Include="Repositories\AnnexCollectionRepository.cs" />
     <Compile Include="Repositories\CarrierRepository.cs" />
+    <Compile Include="Repositories\IntraCountryExportAllowedRepository.cs" />
     <Compile Include="Repositories\CompetentAuthorityRepository.cs" />
     <Compile Include="Repositories\ConsultationRepository.cs" />
     <Compile Include="Repositories\CountryRepository.cs" />
@@ -292,6 +294,7 @@
     <Compile Include="Repositories\SharedUserRepository.cs" />
     <Compile Include="Repositories\TechnologyEmployedRepository.cs" />
     <Compile Include="Repositories\Search\AdvancedSearchRepository.cs" />
+    <Compile Include="Repositories\UnitedKingdomCompetentAuthorityRepository.cs" />
     <Compile Include="Repositories\UserHistoryRepository.cs" />
     <Compile Include="Repositories\WasteCodeRepository.cs" />
     <Compile Include="Repositories\WasteDisposalRepository.cs" />

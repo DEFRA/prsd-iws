@@ -39,11 +39,6 @@
                 model.Countries = new SelectList(source.Countries, "Id", "Name");
             }
 
-            if (source.StateOfExport != null)
-            {
-                model.StateOfExportCountryId = source.StateOfExport.Country.Id;
-            }
-
             return model;
         }
     }

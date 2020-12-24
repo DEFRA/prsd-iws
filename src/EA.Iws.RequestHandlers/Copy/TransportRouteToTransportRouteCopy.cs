@@ -1,46 +1,60 @@
 ﻿namespace EA.Iws.RequestHandlers.Copy
 {
+    using System.Collections.Generic;
     using System.Linq;
     using Core.ComponentRegistration;
+    using Domain;
     using Domain.TransportRoute;
 
     [AutoRegister]
     internal class TransportRouteToTransportRouteCopy
     {
-        public virtual void CopyTransportRoute(TransportRoute source, TransportRoute destination)
+        private class TransportRouteToTransportRouteCopyValidator : ITransportRouteValidator
         {
-            CopyStateOfExport(source, destination);
-            CopyStateOfImport(source, destination);
+            public bool IsImportAndExportStatesCombinationValid(StateOfImport importState, StateOfExport exportState)
+            {
+                return true;
+            }
+        }
+
+        private readonly ITransportRouteValidator validator = new TransportRouteToTransportRouteCopyValidator();
+
+        public virtual void CopyTransportRoute(TransportRoute source, TransportRoute destination, IEnumerable<IntraCountryExportAllowed> intraCountryExportAlloweds)
+        {
+            CopyStateOfExport(source, destination, intraCountryExportAlloweds);
+            CopyStateOfImport(source, destination, intraCountryExportAlloweds);
             CopyTransitStates(source, destination);
             CopyCustomsOffices(source, destination);
             CopyEntryExitCustomsOfficeSelection(source, destination);
         }
 
-        public virtual void CopyTransportRouteWithoutExport(TransportRoute source, TransportRoute destination)
+        public virtual void CopyTransportRouteWithoutExport(TransportRoute source, TransportRoute destination, IEnumerable<IntraCountryExportAllowed> intraCountryExportAlloweds)
         {
-            CopyStateOfImport(source, destination);
+            CopyStateOfImport(source, destination, intraCountryExportAlloweds);
             CopyTransitStates(source, destination);
             CopyCustomsOffices(source, destination);
             CopyEntryExitCustomsOfficeSelection(source, destination);
         }
 
-        protected virtual void CopyStateOfExport(TransportRoute source, TransportRoute destination)
+        protected virtual void CopyStateOfExport(TransportRoute source, TransportRoute destination, IEnumerable<IntraCountryExportAllowed> intraCountryExportAlloweds)
         {
             if (source.StateOfExport != null)
             {
                 destination.SetStateOfExportForNotification(new StateOfExport(source.StateOfExport.Country,
                     source.StateOfExport.CompetentAuthority,
-                    source.StateOfExport.ExitPoint));
+                    source.StateOfExport.ExitPoint),
+                    validator);
             }
         }
 
-        protected virtual void CopyStateOfImport(TransportRoute source, TransportRoute destination)
+        protected virtual void CopyStateOfImport(TransportRoute source, TransportRoute destination, IEnumerable<IntraCountryExportAllowed> intraCountryExportAlloweds)
         {
             if (source.StateOfImport != null)
             {
                 destination.SetStateOfImportForNotification(new StateOfImport(source.StateOfImport.Country,
                     source.StateOfImport.CompetentAuthority,
-                    source.StateOfImport.EntryPoint));
+                    source.StateOfImport.EntryPoint),
+                    validator);
             }
         }
 

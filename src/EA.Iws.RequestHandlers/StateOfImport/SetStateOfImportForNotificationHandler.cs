@@ -4,6 +4,7 @@
     using System.Data.Entity;
     using System.Threading.Tasks;
     using DataAccess;
+    using Domain;
     using Domain.TransportRoute;
     using Prsd.Core.Mediator;
     using Requests.StateOfImport;
@@ -12,11 +13,13 @@
     {
         private readonly IwsContext context;
         private readonly ITransportRouteRepository repository;
+        private readonly IIntraCountryExportAllowedRepository iceaRepository;
 
-        public SetStateOfImportForNotificationHandler(IwsContext context, ITransportRouteRepository repository)
+        public SetStateOfImportForNotificationHandler(IwsContext context, ITransportRouteRepository repository, IIntraCountryExportAllowedRepository iceaRepository)
         {
             this.context = context;
             this.repository = repository;
+            this.iceaRepository = iceaRepository;
         }
 
         public async Task<Guid> HandleAsync(SetStateOfImportForNotification message)
@@ -36,7 +39,12 @@
 
             var stateOfImport = new StateOfImport(country, competentAuthority, entryPoint);
 
-            transportRoute.SetStateOfImportForNotification(stateOfImport);
+            var acceptableImportStates = await iceaRepository.GetAllAsync();
+
+            var validator = new TransportRouteValidation(await iceaRepository.GetAllAsync(), 
+                                                        await this.context.UnitedKingdomCompetentAuthorities.ToArrayAsync());
+
+            transportRoute.SetStateOfImportForNotification(stateOfImport, validator);
 
             await context.SaveChangesAsync();
 

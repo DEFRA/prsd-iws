@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IIntraCountryExportAllowedRepository.cs" />
     <Compile Include="DateTimeOffsetRange.cs" />
     <Compile Include="EmailAddress.cs" />
     <Compile Include="FinancialGuarantee\FinancialGuaranteeApproval.cs" />
@@ -163,6 +164,7 @@
     <Compile Include="INotificationPreviewWatermarkGenerator.cs" />
     <Compile Include="INotificationUserRepository.cs" />
     <Compile Include="IPostageLabelGenerator.cs" />
+    <Compile Include="IUnitedKingdomCompetentAuthorityRepository.cs" />
     <Compile Include="Movement\BulkUpload\DraftBulkUpload.cs" />
     <Compile Include="Movement\BulkUpload\DraftPackagingInfo.cs" />
     <Compile Include="Movement\BulkUpload\DraftMovement.cs" />
@@ -300,6 +302,7 @@
     <Compile Include="NotificationApplication\Audit.cs" />
     <Compile Include="NotificationApplication\NotificationNumberFormatter.cs" />
     <Compile Include="NotificationApplication\NotificationSharedUserAddedEvent.cs" />
+    <Compile Include="IntraCountryExportAllowed.cs" />
     <Compile Include="NotificationApplication\ProducerCollection.cs" />
     <Compile Include="NotificationApplication\SetAllFacilitiesPreconsented.cs" />
     <Compile Include="NotificationApplication\SharedUser.cs" />
@@ -425,11 +428,13 @@
     <Compile Include="TransportRoute\IExitPoint.cs" />
     <Compile Include="TransportRoute\IState.cs" />
     <Compile Include="TransportRoute\ITransportRouteRepository.cs" />
+    <Compile Include="TransportRoute\ITransportRouteValidation.cs" />
     <Compile Include="TransportRoute\RequiredCustomsOffices.cs" />
     <Compile Include="TransportRoute\StateOfExport.cs" />
     <Compile Include="TransportRoute\StateOfImport.cs" />
     <Compile Include="TransportRoute\TransitState.cs" />
     <Compile Include="TransportRoute\TransportRoute.cs" />
+    <Compile Include="TransportRoute\TransportRouteValidation.cs" />
     <Compile Include="UnitedKingdomCompetentAuthority.cs" />
     <Compile Include="User.cs" />
     <Compile Include="UserAddress.cs" />

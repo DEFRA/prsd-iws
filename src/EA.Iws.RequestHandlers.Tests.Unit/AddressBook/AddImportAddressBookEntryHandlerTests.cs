@@ -124,7 +124,7 @@
 
             var result = await handler.HandleAsync(message);
 
-            Assert.Equal(result, true);
+            Assert.True(result);
             A.CallTo(() => addressBookRepository.Update(addressBook)).MustHaveHappened();
         }
 
@@ -138,7 +138,7 @@
 
             var result = await handler.HandleAsync(message);
 
-            Assert.Equal(result, false);
+            Assert.False(result);
             A.CallTo(() => addressBookRepository.Update(addressBook)).MustNotHaveHappened();
         }
     }

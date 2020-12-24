@@ -6,6 +6,7 @@
     using System.Threading.Tasks;
     using Core.Notification;
     using Core.Shared;
+    using Domain;
     using Domain.TransportRoute;
     using FakeItEasy;
     using Prsd.Core.Domain;
@@ -16,6 +17,7 @@
     public class TransportRouteIntegration
     {
         private readonly IwsContext context;
+        private readonly ITransportRouteValidator validator;
 
         public TransportRouteIntegration()
         {
@@ -24,6 +26,8 @@
             A.CallTo(() => userContext.UserId).Returns(Guid.NewGuid());
 
             context = new IwsContext(userContext, A.Fake<IEventDispatcher>());
+
+            this.validator = A.Fake<ITransportRouteValidator>();
         }
 
         [Fact]
@@ -49,7 +53,11 @@
 
             var stateOfExport = new StateOfExport(country, competentAuthority, exitPoint);
 
-            transport.SetStateOfExportForNotification(stateOfExport);
+            IntraCountryExportAllowed[] intraCountryExportAlloweds = new IntraCountryExportAllowed[0];
+
+            A.CallTo(() => this.validator.IsImportAndExportStatesCombinationValid(null, stateOfExport)).Returns(true);
+
+            transport.SetStateOfExportForNotification(stateOfExport, this.validator);
 
             await context.SaveChangesAsync();
 
@@ -83,7 +91,10 @@
 
             var stateOfExport = new StateOfExport(country, competentAuthority, exitPoint);
 
-            transport.SetStateOfExportForNotification(stateOfExport);
+            IntraCountryExportAllowed[] intraCountryExportAlloweds = new IntraCountryExportAllowed[0];
+            A.CallTo(() => this.validator.IsImportAndExportStatesCombinationValid(null, stateOfExport)).Returns(true);
+
+            transport.SetStateOfExportForNotification(stateOfExport, this.validator);
 
             await context.SaveChangesAsync();
 
@@ -96,7 +107,9 @@
             }
 
             var newStateOfExport = new StateOfExport(country, competentAuthority, nextExitPoint);
-            transport.SetStateOfExportForNotification(newStateOfExport);
+            A.CallTo(() => this.validator.IsImportAndExportStatesCombinationValid(null, newStateOfExport)).Returns(true);
+
+            transport.SetStateOfExportForNotification(newStateOfExport, this.validator);
 
             await context.SaveChangesAsync();
 

@@ -3,6 +3,7 @@
     using System;
     using System.Linq;
     using Domain.TransportRoute;
+    using FakeItEasy;
     using TestHelpers.DomainFakes;
     using TestHelpers.Helpers;
     using Xunit;
@@ -142,16 +143,27 @@
             var transitCountry = CountryFactory.Create(new Guid("873F6164-3DFE-481E-B372-9BD530304E70"), isEuMember: false);
             var transitCountryEu = CountryFactory.Create(new Guid("5B357BA4-B9E9-4325-AD26-DE7662F81FA6"));
 
-            transportRoute.SetStateOfImportForNotification(
-                new StateOfImport(
+            var stateOfImport = new StateOfImport(
                     importCountry,
                     new TestableCompetentAuthority() { Country = importCountry },
-                    new TestableEntryOrExitPoint() { Country = importCountry }));
+                    new TestableEntryOrExitPoint() { Country = importCountry });
 
-            transportRoute.SetStateOfExportForNotification(new StateOfExport(
-                exportCountry, 
+            var stateOfExport = new StateOfExport(
+                exportCountry,
                 new TestableCompetentAuthority() { Country = exportCountry },
-                new TestableEntryOrExitPoint() { Country = exportCountry }));
+                new TestableEntryOrExitPoint() { Country = exportCountry });
+
+            var validatorMock = A.Fake<ITransportRouteValidator>();
+            A.CallTo(() => validatorMock.IsImportAndExportStatesCombinationValid(stateOfImport, null)).Returns(true);
+            A.CallTo(() => validatorMock.IsImportAndExportStatesCombinationValid(stateOfImport, stateOfExport)).Returns(true);
+
+            transportRoute.SetStateOfImportForNotification(
+                stateOfImport,
+                validatorMock);
+
+            transportRoute.SetStateOfExportForNotification(
+                stateOfExport,
+                validatorMock);
 
             var transitState = new TransitState(
                 transitCountry, 
@@ -192,16 +204,26 @@
             var transitStateId = new Guid("0BE78BE8-F666-4775-B3DA-7C058BFE4F4D");
             EntityHelper.SetEntityId(transitState, transitStateId);
 
-            transportRoute.SetStateOfImportForNotification(
-                new StateOfImport(
+            var stateOfImport = new StateOfImport(
                     importCountry,
                     new TestableCompetentAuthority() { Country = importCountry },
-                    new TestableEntryOrExitPoint() { Country = importCountry }));
-
-            transportRoute.SetStateOfExportForNotification(new StateOfExport(
+                    new TestableEntryOrExitPoint() { Country = importCountry });
+            var stateOfExport = new StateOfExport(
                 exportCountry,
                 new TestableCompetentAuthority() { Country = exportCountry },
-                new TestableEntryOrExitPoint() { Country = exportCountry }));
+                new TestableEntryOrExitPoint() { Country = exportCountry });
+
+            var validatorMock = A.Fake<ITransportRouteValidator>();
+            A.CallTo(() => validatorMock.IsImportAndExportStatesCombinationValid(stateOfImport, null)).Returns(true);
+            A.CallTo(() => validatorMock.IsImportAndExportStatesCombinationValid(stateOfImport, stateOfExport)).Returns(true);
+
+            transportRoute.SetStateOfImportForNotification(
+                stateOfImport,
+                validatorMock);
+
+            transportRoute.SetStateOfExportForNotification(
+                stateOfExport,
+                validatorMock);
 
             transportRoute.AddTransitStateToNotification(transitState);
 
