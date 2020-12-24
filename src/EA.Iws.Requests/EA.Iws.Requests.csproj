@@ -409,6 +409,7 @@
     <Compile Include="SharedUsers\GetSharedUserById.cs" />
     <Compile Include="SharedUsers\GetSharedUsersByNotificationId.cs" />
     <Compile Include="TransportRoute\GetAllCountriesHavingCompetentAuthorities.cs" />
+    <Compile Include="TransportRoute\GetCompetentAuthoritiesAndEntryPointsByCountryId.cs" />
     <Compile Include="TransportRoute\GetUnitedKingdomCompetentAuthoritiesAndEntryOrExitPoints.cs" />
     <Compile Include="TransportRoute\GetTransitAuthoritiesAndEntryOrExitPointsByCountryId.cs" />
     <Compile Include="Users\GetUserId.cs" />

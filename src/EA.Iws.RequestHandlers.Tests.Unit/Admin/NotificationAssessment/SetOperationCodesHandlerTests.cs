@@ -36,7 +36,7 @@
         {
             var result = await handler.HandleAsync(this.message);
 
-            Assert.Equal(true, result);
+            Assert.True(result);
             A.CallTo(() => this.notificationRepository.GetById(A<Guid>.Ignored))
                 .MustHaveHappened();
         }

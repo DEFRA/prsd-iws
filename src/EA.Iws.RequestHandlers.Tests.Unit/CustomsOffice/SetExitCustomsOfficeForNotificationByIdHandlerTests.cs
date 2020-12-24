@@ -30,6 +30,7 @@
         private readonly StateOfExport stateOfExport;
         private readonly StateOfImport stateOfImportNonEu;
         private readonly TransportRoute transport;
+        private readonly ITransportRouteValidator validator;
 
         public SetExitCustomsOfficeForNotificationByIdHandlerTests()
         {
@@ -64,13 +65,17 @@
             A.CallTo(() => repository.GetByNotificationId(notificationId)).Returns(transport);
 
             this.handler = new SetExitCustomsOfficeForNotificationByIdHandler(context, repository);
+            this.validator = A.Fake<ITransportRouteValidator>();
+            A.CallTo(() => this.validator.IsImportAndExportStatesCombinationValid(null, stateOfExport)).Returns(true);
+            A.CallTo(() => this.validator.IsImportAndExportStatesCombinationValid(stateOfImportNonEu, stateOfExport)).Returns(true);
         }
 
         [Fact]
         public async Task NotificationExistsAndRequiresExitCustomsOffice_SetsExitOffice()
         {
-            transport.SetStateOfExportForNotification(stateOfExport);
-            transport.SetStateOfImportForNotification(stateOfImportNonEu);
+            var intraCountryExportAlloweds = new IntraCountryExportAllowed[0];
+            transport.SetStateOfExportForNotification(stateOfExport, this.validator);
+            transport.SetStateOfImportForNotification(stateOfImportNonEu, this.validator);
 
             var request = new SetExitCustomsOfficeForNotificationById(notificationId,
                 AnyName,

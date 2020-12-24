@@ -101,7 +101,7 @@
 
             Assert.True(result.LookupWasteCodeData.ContainsKey(CodeType.Basel));
             Assert.True(result.NotificationWasteCodeData.ContainsKey(CodeType.Basel));
-            Assert.Equal(1, result.NotificationWasteCodeData[CodeType.Basel].Length);
+            Assert.Single(result.NotificationWasteCodeData[CodeType.Basel]);
             Assert.Equal(wasteCodes.Count(wc => wc.CodeType == CodeType.Basel), result.LookupWasteCodeData[CodeType.Basel].Length);
         }
 

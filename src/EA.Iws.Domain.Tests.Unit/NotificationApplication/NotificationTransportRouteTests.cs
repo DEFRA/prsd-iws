@@ -4,6 +4,8 @@
     using System.Collections.Generic;
     using System.Linq;
     using Domain.TransportRoute;
+    using FakeItEasy;
+    using TestHelpers.DomainFakes;
     using TestHelpers.Helpers;
     using Xunit;
 
@@ -13,7 +15,9 @@
 
         private readonly TransportRoute transportRoute;
         private readonly IList<Country> countries;
-        private readonly IList<TransitState> transitStates; 
+        private readonly IList<TransitState> transitStates;
+
+        private readonly ITransportRouteValidator validator;
 
         public NotificationTransportRouteTests()
         {
@@ -44,12 +48,26 @@
                 EntryOrExitPointFactory.Create(guids[i + 1], c), i + 1));
                 ObjectInstantiator<TransitState>.SetProperty(x => x.Id, guids[i], transitStates[i]);
             }
+
+            this.validator = A.Fake<ITransportRouteValidator>();
         }
 
         [Fact]
-        public void SetStateOfExport_WithNullState_Throws()
+        public void SetStateOfExport_WithNullStateAndNullCountries_Throws()
         {
-            Assert.Throws<ArgumentNullException>(() => transportRoute.SetStateOfExportForNotification(null));
+            Assert.Throws<ArgumentNullException>(() => transportRoute.SetStateOfExportForNotification(null, this.validator));
+        }
+
+        [Fact]
+        public void SetStateOfExport_WithNullStateAndNonNullCountries_Throws()
+        {
+            Assert.Throws<ArgumentNullException>(() => transportRoute.SetStateOfExportForNotification(null, this.validator));
+        }
+
+        [Fact]
+        public void SetStateOfExport_WithNonNullStateAndNullCountries_Throws()
+        {
+            Assert.Throws<ArgumentNullException>(() => transportRoute.SetStateOfExportForNotification(new TestableStateOfExport(), null));
         }
 
         [Fact]
@@ -62,17 +80,31 @@
                 competentAuthority,
                 exitPoint);
 
-            transportRoute.SetStateOfExportForNotification(stateOfExport);
+            var intraCountryExportAlloweds = new TestableIntraCountryExportAllowed[0];
 
-            transportRoute.SetStateOfExportForNotification(stateOfExport);
+            A.CallTo(() => this.validator.IsImportAndExportStatesCombinationValid(null, stateOfExport)).Returns(true);
+
+            transportRoute.SetStateOfExportForNotification(stateOfExport, this.validator);
 
             Assert.Equal(stateOfExport.Country.Id, transportRoute.StateOfExport.Country.Id);
         }
 
         [Fact]
-        public void SetStateOfImport_WithNullState_Throws()
+        public void SetStateOfImport_WithNullStateAndNullCountries_Throws()
         {
-            Assert.Throws<ArgumentNullException>(() => transportRoute.SetStateOfImportForNotification(null));
+            Assert.Throws<ArgumentNullException>(() => transportRoute.SetStateOfImportForNotification(null, null));
+        }
+
+        [Fact]
+        public void SetStateOfImport_WithNullStateAndNonNullCountries_Throws()
+        {
+            Assert.Throws<ArgumentNullException>(() => transportRoute.SetStateOfImportForNotification(null, this.validator));
+        }
+
+        [Fact]
+        public void SetStateOfImport_WithNonNullStateAndNullCountries_Throws()
+        {
+            Assert.Throws<ArgumentNullException>(() => transportRoute.SetStateOfImportForNotification(new TestableStateOfImport(), null));
         }
 
         [Fact]
@@ -85,15 +117,19 @@
                 competentAuthority,
                 entryPoint);
 
-            transportRoute.SetStateOfImportForNotification(stateOfImport);
+            var intraCountryExportAlloweds = new TestableIntraCountryExportAllowed[0];
 
-            transportRoute.SetStateOfImportForNotification(stateOfImport);
+            A.CallTo(() => this.validator.IsImportAndExportStatesCombinationValid(stateOfImport, null)).Returns(true);
+
+            transportRoute.SetStateOfImportForNotification(stateOfImport, this.validator);
+
+            transportRoute.SetStateOfImportForNotification(stateOfImport, this.validator);
 
             Assert.Equal(stateOfImport.CompetentAuthority.Id, transportRoute.StateOfImport.CompetentAuthority.Id);
         }
 
         [Fact]
-        public void SetStateOfImport_SameCountryToStateOfExport_Throws()
+        public void SetStateOfImport_SameCountryToStateOfExportIfNoSameCountryExportsAllowed_Throws()
         {
             // Arrange
             var exportCountry = countries[0];
@@ -112,39 +148,15 @@
                 importCompetentAuthority,
                 importExitPoint);
 
-            // Act
-            transportRoute.SetStateOfExportForNotification(stateOfExport);
-
-            // Assert
-            Assert.Throws<InvalidOperationException>(() => transportRoute.SetStateOfImportForNotification(stateOfImport));
-        }
-
-        [Fact]
-        public void SetStateOfImport_DifferentCountryToStateOfExport_SetsSuccessfully()
-        {
-            var exportCountry = countries[0];
-            var importCountry = countries[1];
-
-            var exportCompetentAuthority = GetTestCompetentAuthority(exportCountry);
-            var exportExitPoint = GetTestEntryOrExitPoint(exportCountry);
-
-            var importCompetentAuthority = GetTestCompetentAuthority(importCountry);
-            var importExitPoint = GetTestEntryOrExitPoint(importCountry);
-
-            var stateOfExport = new StateOfExport(exportCountry,
-                exportCompetentAuthority,
-                exportExitPoint);
-
-            var stateOfImport = new StateOfImport(importCountry,
-                importCompetentAuthority,
-                importExitPoint);
+            A.CallTo(() => this.validator.IsImportAndExportStatesCombinationValid(null, stateOfExport)).Returns(true);
+            A.CallTo(() => this.validator.IsImportAndExportStatesCombinationValid(stateOfImport, stateOfExport)).Returns(false);
 
             // Act
-            transportRoute.SetStateOfExportForNotification(stateOfExport);
-            transportRoute.SetStateOfImportForNotification(stateOfImport);
+            var intraCountryExportAlloweds = new TestableIntraCountryExportAllowed[0];
+            transportRoute.SetStateOfExportForNotification(stateOfExport, this.validator);
 
             // Assert
-            Assert.Equal(importCountry.Id, transportRoute.StateOfImport.Country.Id);
+            Assert.Throws<InvalidOperationException>(() => transportRoute.SetStateOfImportForNotification(stateOfImport, this.validator));
         }
 
         [Theory]

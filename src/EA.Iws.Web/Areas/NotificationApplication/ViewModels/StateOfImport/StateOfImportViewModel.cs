@@ -5,11 +5,12 @@
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using System.Linq;
     using System.Web.Mvc;
     using Views.StateOfImport;
     using Web.ViewModels.Shared;
 
-    public class StateOfImportViewModel : IValidatableObject
+    public class StateOfImportViewModel
     {
         [Required(ErrorMessageResourceName = "CountryOfImportRequired", ErrorMessageResourceType = typeof(StateOfImportResources))]
         [Display(Name = "Country", ResourceType = typeof(StateOfImportResources))]
@@ -25,7 +26,7 @@
         [RequiredIf("ShowNextSection", true, ErrorMessageResourceName = "CARequired", ErrorMessageResourceType = typeof(StateOfImportResources))]
         public StringGuidRadioButtons CompetentAuthorities { get; set; }
 
-        public Guid? StateOfExportCountryId { get; set; }
+        public Guid? StateOfExportCompetentAuthorityId { get; set; }
 
         public IList<Guid> TransitStateCountryIds { get; set; }
 
@@ -38,14 +39,6 @@
         public StateOfImportViewModel()
         {
             TransitStateCountryIds = new List<Guid>();
-        }
-
-        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
-        {
-            if (CountryId.HasValue && CountryId == StateOfExportCountryId)
-            {
-                yield return new ValidationResult(StateOfImportResources.ImportExportCountryShouldNotSame, new[] { "CountryId" });
-            }
         }
     }
 }
