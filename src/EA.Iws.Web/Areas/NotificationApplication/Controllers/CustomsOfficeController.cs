@@ -37,10 +37,10 @@
                 case CustomsOffices.None:
                     return noCustomsOffice(id, backToOverview);
                 case CustomsOffices.EntryAndExit:
-                case CustomsOffices.Exit:
-                    return addExitCustomsOffice(id, backToOverview);
                 case CustomsOffices.Entry:
                     return addEntryCustomsOffice(id, backToOverview);
+                case CustomsOffices.Exit:
+                    return addExitCustomsOffice(id, backToOverview);    
                 default:
                     return transportRouteSummary(id, backToOverview);
             }
