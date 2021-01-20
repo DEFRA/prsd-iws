@@ -112,11 +112,7 @@
 
             await mediator.SendAsync(new SetEntryCustomsOfficeSelectionForNotificationById(id, model.CustomsOfficeRequired.GetValueOrDefault()));
 
-            if (backToOverview.GetValueOrDefault())
-            {
-                return RedirectToAction("Index", "Home", new { id });
-            }
-            return RedirectToAction("Index", "Shipment", new { id });
+            return RedirectToAction("Index", "ExitCustomsOffice", new { id, backToOverview = backToOverview });
         }
     }
 }
