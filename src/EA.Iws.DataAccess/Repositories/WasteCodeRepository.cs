@@ -18,7 +18,7 @@
 
         public async Task<IEnumerable<WasteCode>> GetAllWasteCodes()
         {
-            return await context.WasteCodes.ToArrayAsync();
+            return await context.WasteCodes.Where(p => p.Active).ToArrayAsync();
         }
 
         public async Task<IEnumerable<WasteCode>> GetWasteCodesByIds(IEnumerable<Guid> ids)

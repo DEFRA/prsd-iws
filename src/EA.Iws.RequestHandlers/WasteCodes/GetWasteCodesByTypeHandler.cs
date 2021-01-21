@@ -35,7 +35,7 @@
                 result = await context.WasteCodes.Where(p => message.CodeTypes.Contains(p.CodeType)).ToArrayAsync();
             }
             
-            return result.Select(c => mapper.Map(c)).OrderBy(m => m.Code).ToArray();
+            return result.Where(p => p.Active).Select(c => mapper.Map(c)).OrderBy(m => m.Code).ToArray();
         }
     }
 }

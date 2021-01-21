@@ -69,7 +69,7 @@
             }
 
             return await
-                context.WasteCodes.Where(wc => message.LookupWasteCodeTypes.Contains(wc.CodeType))
+                context.WasteCodes.Where(wc => message.LookupWasteCodeTypes.Contains(wc.CodeType)).Where(p => p.Active)
                     .ToArrayAsync();
         }
     }
