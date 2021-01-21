@@ -2,6 +2,8 @@
 {
     using Core.CustomsOffice;
     using Core.Notification.Audit;
+    using EA.Iws.Core.Notification;
+    using EA.Iws.Requests.Notification;
     using Infrastructure;
     using Prsd.Core.Mediator;
     using Requests.CustomsOffice;
@@ -111,6 +113,12 @@
                        NotificationAuditScreenType.CustomsOffice);
 
             var addSelection = await mediator.SendAsync(new SetExitCustomsOfficeSelectionForNotificationById(id, model.CustomsOfficeRequired.GetValueOrDefault()));
+
+            var notificationBasicDetails = await mediator.SendAsync(new GetNotificationBasicInfo(id));
+            if (notificationBasicDetails.CompetentAuthority.Equals(UKCompetentAuthority.NorthernIreland))
+            {
+                return RedirectToAction("Index", "EntryCustomsOffice", new { id, backToOverview = backToOverview });
+            }
 
             if (backToOverview.GetValueOrDefault())
             {

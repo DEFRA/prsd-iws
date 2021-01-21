@@ -4,6 +4,8 @@
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Core.CustomsOffice;
+    using EA.Iws.Core.Notification;
+    using EA.Iws.Requests.Notification;
     using Infrastructure;
     using Prsd.Core.Mediator;
     using Requests.CustomsOffice;
@@ -31,19 +33,44 @@
         public async Task<ActionResult> Index(Guid id, bool? backToOverview = null)
         {
             var customsOffice = await mediator.SendAsync(new GetCustomsCompletionStatusByNotificationId(id));
+            var notificationBasicDetails = await mediator.SendAsync(new GetNotificationBasicInfo(id));
 
-            switch (customsOffice.CustomsOfficesRequired)
+            if (notificationBasicDetails.CompetentAuthority.Equals(UKCompetentAuthority.NorthernIreland))
             {
-                case CustomsOffices.None:
-                    return noCustomsOffice(id, backToOverview);
-                case CustomsOffices.EntryAndExit:
-                case CustomsOffices.Entry:
-                    return addEntryCustomsOffice(id, backToOverview);
-                case CustomsOffices.Exit:
-                    return addExitCustomsOffice(id, backToOverview);    
-                default:
-                    return transportRouteSummary(id, backToOverview);
+                switch (customsOffice.CustomsOfficesRequired)
+                {
+                    case CustomsOffices.None:
+                        return noCustomsOffice(id, backToOverview);
+
+                    case CustomsOffices.EntryAndExit:
+                    case CustomsOffices.Exit:
+                        return addExitCustomsOffice(id, backToOverview);
+
+                    case CustomsOffices.Entry:
+                        return addEntryCustomsOffice(id, backToOverview);                    
+
+                    default:
+                        return transportRouteSummary(id, backToOverview);
+                }
             }
+            else
+            {
+                switch (customsOffice.CustomsOfficesRequired)
+                {
+                    case CustomsOffices.None:
+                        return noCustomsOffice(id, backToOverview);
+
+                    case CustomsOffices.EntryAndExit:
+                    case CustomsOffices.Entry:
+                        return addEntryCustomsOffice(id, backToOverview);
+
+                    case CustomsOffices.Exit:
+                        return addExitCustomsOffice(id, backToOverview);
+
+                    default:
+                        return transportRouteSummary(id, backToOverview);
+                }
+            }            
         }
 
         public ActionResult NoCustomsOffice(Guid id, bool? backToOverview = null)

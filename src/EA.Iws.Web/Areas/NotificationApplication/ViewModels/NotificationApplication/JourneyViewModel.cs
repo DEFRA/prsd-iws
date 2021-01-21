@@ -28,6 +28,7 @@
             StateOfImportData = journeyInfo.TransportRoute.StateOfImport;
             EntryCustomsOffice = journeyInfo.EntryCustomsOffice.CustomsOfficeData ?? new CustomsOfficeData();
             ExitCustomsOffice = journeyInfo.ExitCustomsOffice.CustomsOfficeData ?? new CustomsOfficeData();
+            IsNorthernIrelandCustomsOffice = progress.CompetentAuthority.Equals(UKCompetentAuthority.NorthernIreland);
         }
 
         public Guid NotificationId { get; set; }
@@ -55,5 +56,7 @@
         public bool CanAddRemoveTransitState { get; set; }
 
         public bool CanChangeTransitStateEntryExitPoint { get; set; }
+
+        public bool IsNorthernIrelandCustomsOffice { get; set; }
     }
 }
