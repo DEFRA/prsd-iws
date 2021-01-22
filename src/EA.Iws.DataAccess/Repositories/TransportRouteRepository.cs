@@ -2,9 +2,11 @@
 {
     using System;
     using System.Data.Entity;
+    using System.Linq;
     using System.Threading.Tasks;
     using Domain.Security;
     using Domain.TransportRoute;
+    using EA.Iws.Core.Notification;
 
     internal class TransportRouteRepository : ITransportRouteRepository
     {
@@ -21,6 +23,14 @@
         {
             await notificationApplicationAuthorization.EnsureAccessAsync(notificationId);
             return await context.TransportRoutes.SingleOrDefaultAsync(p => p.NotificationId == notificationId);
+        }
+
+        public async Task<UKCompetentAuthority> GetNotificationCompetentAuthorityById(Guid notificationId)
+        {            
+            return await context.NotificationApplications
+                .Where(n => n.Id == notificationId)
+                .Select(n => n.CompetentAuthority)
+                .SingleOrDefaultAsync();            
         }
     }
 }

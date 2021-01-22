@@ -17,7 +17,8 @@
         public async Task<IDocumentBlock> Create(Guid notificationId, IList<MergeField> mergeFields)
         {
             var transportRoute = await transportRouteRepository.GetByNotificationId(notificationId);
-            return new CustomsOfficeBlock(mergeFields, transportRoute);
+            var notificationCompetenetAuthority = await transportRouteRepository.GetNotificationCompetentAuthorityById(notificationId);
+            return new CustomsOfficeBlock(mergeFields, transportRoute, notificationCompetenetAuthority);
         }
     }
 }
