@@ -2,6 +2,7 @@
 {
     using System.Collections.Generic;
     using Domain.TransportRoute;
+    using EA.Iws.Core.Notification;
     using Mapper;
     using ViewModels;
 
@@ -10,10 +11,13 @@
         private readonly CustomsOfficeViewModel data;
 
         public ICollection<MergeField> CorrespondingMergeFields { get; private set; }
-        //public IList<MergeField> AnnexMergeFields { get; private set; }
 
-        public CustomsOfficeBlock(IList<MergeField> mergeFields, TransportRoute transportRoute)
+        public bool IsNorthenIrelandCompetentAuthority { get; set; }
+
+        public CustomsOfficeBlock(IList<MergeField> mergeFields, TransportRoute transportRoute, UKCompetentAuthority notificationCompetentAuthority)
         {
+            IsNorthenIrelandCompetentAuthority = (notificationCompetentAuthority.Equals(UKCompetentAuthority.NorthernIreland) ? true : false);
+
             CorrespondingMergeFields = MergeFieldLocator.GetCorrespondingFieldsForBlock(mergeFields, TypeName);
             data = new CustomsOfficeViewModel(transportRoute);
 
@@ -69,6 +73,7 @@
         private void MergeToMainDocument(int annexNumber)
         {
             data.SetAnnexMessages(annexNumber);
+            data.SetDisplayCustomsOfficeDetails(IsNorthenIrelandCompetentAuthority);
 
             var properties = PropertyHelper.GetPropertiesForViewModel(typeof(CustomsOfficeViewModel));
             foreach (var field in CorrespondingMergeFields)
