@@ -13,29 +13,32 @@
 
     internal class GetWasteCodesByTypeHandler : IRequestHandler<GetWasteCodesByType, WasteCodeData[]>
     {
-        private readonly IwsContext context;
+        private readonly IWasteCodeRepository wasteCodeRepository;
         private readonly IMap<WasteCode, WasteCodeData> mapper;
 
-        public GetWasteCodesByTypeHandler(IwsContext context, IMap<WasteCode, WasteCodeData> mapper)
+        public GetWasteCodesByTypeHandler(IWasteCodeRepository wasteCodeRepository, IMap<WasteCode, WasteCodeData> mapper)
         {
-            this.context = context;
+            this.wasteCodeRepository = wasteCodeRepository;
             this.mapper = mapper;
         }
 
         public async Task<WasteCodeData[]> HandleAsync(GetWasteCodesByType message)
         {
-            IList<WasteCode> result;
+            IEnumerable<WasteCode> result;
 
             if (message.CodeTypes == null || message.CodeTypes.Length == 0)
             {
-                result = await context.WasteCodes.ToArrayAsync();
+                result = await wasteCodeRepository.GetAllWasteCodes();
             }
             else
             {
-                result = await context.WasteCodes.Where(p => message.CodeTypes.Contains(p.CodeType)).ToArrayAsync();
+                result = await wasteCodeRepository.GetAllWasteCodes();
+                result = result
+                        .Where(p => message.CodeTypes.Contains(p.CodeType))
+                        .ToArray();
             }
             
-            return result.Where(p => p.Active).Select(c => mapper.Map(c)).OrderBy(m => m.Code).ToArray();
+            return result.Select(c => mapper.Map(c)).OrderBy(m => m.Code).ToArray();
         }
     }
 }
