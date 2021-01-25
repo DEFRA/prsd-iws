@@ -33,9 +33,9 @@
         public async Task<ActionResult> Index(Guid id, bool? backToOverview = null)
         {
             var customsOffice = await mediator.SendAsync(new GetCustomsCompletionStatusByNotificationId(id));
-            var notificationBasicDetails = await mediator.SendAsync(new GetNotificationBasicInfo(id));
+            var notificationCompetentAutority = await mediator.SendAsync(new GetNotificationCompetentAuthority(id));
 
-            if (notificationBasicDetails.CompetentAuthority.Equals(UKCompetentAuthority.NorthernIreland))
+            if (notificationCompetentAutority.Equals(UKCompetentAuthority.NorthernIreland))
             {
                 switch (customsOffice.CustomsOfficesRequired)
                 {

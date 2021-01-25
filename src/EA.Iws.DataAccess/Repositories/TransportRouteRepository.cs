@@ -23,14 +23,6 @@
         {
             await notificationApplicationAuthorization.EnsureAccessAsync(notificationId);
             return await context.TransportRoutes.SingleOrDefaultAsync(p => p.NotificationId == notificationId);
-        }
-
-        public async Task<UKCompetentAuthority> GetNotificationCompetentAuthorityById(Guid notificationId)
-        {            
-            return await context.NotificationApplications
-                .Where(n => n.Id == notificationId)
-                .Select(n => n.CompetentAuthority)
-                .SingleOrDefaultAsync();            
-        }
+        }        
     }
 }
