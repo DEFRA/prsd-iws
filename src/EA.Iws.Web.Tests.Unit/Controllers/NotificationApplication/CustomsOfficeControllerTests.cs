@@ -5,6 +5,7 @@
     using System.Web.Mvc;
     using Areas.NotificationApplication.Controllers;
     using Core.CustomsOffice;
+    using EA.Iws.Core.Notification;
     using EA.Iws.Requests.Notification;
     using FakeItEasy;
     using Prsd.Core.Mediator;
@@ -133,10 +134,7 @@
                 });
 
             A.CallTo(
-                () => mediator.SendAsync(A<GetNotificationBasicInfo>.Ignored)).Returns(new NotificationBasicInfo
-                {
-                    CompetentAuthority = Core.Notification.UKCompetentAuthority.NorthernIreland
-                });
+                () => mediator.SendAsync(A<GetNotificationCompetentAuthority>.Ignored)).Returns(UKCompetentAuthority.NorthernIreland);
 
             var result = await controller.Index(guid) as RedirectToRouteResult;
 
@@ -154,10 +152,7 @@
                 });
 
             A.CallTo(
-                () => mediator.SendAsync(A<GetNotificationBasicInfo>.Ignored)).Returns(new NotificationBasicInfo
-                {
-                    CompetentAuthority = Core.Notification.UKCompetentAuthority.NorthernIreland
-                });
+                () => mediator.SendAsync(A<GetNotificationCompetentAuthority>.Ignored)).Returns(UKCompetentAuthority.NorthernIreland);
 
             var result = await controller.Index(guid) as RedirectToRouteResult;
 
@@ -175,10 +170,7 @@
                 });
 
             A.CallTo(
-                () => mediator.SendAsync(A<GetNotificationBasicInfo>.Ignored)).Returns(new NotificationBasicInfo
-                {
-                    CompetentAuthority = Core.Notification.UKCompetentAuthority.NorthernIreland 
-                });
+                () => mediator.SendAsync(A<GetNotificationCompetentAuthority>.Ignored)).Returns(UKCompetentAuthority.NorthernIreland);
 
             var result = await controller.Index(guid) as RedirectToRouteResult;
 
@@ -195,10 +187,7 @@
                 });
 
             A.CallTo(
-                () => mediator.SendAsync(A<GetNotificationBasicInfo>.Ignored)).Returns(new NotificationBasicInfo
-                {
-                    CompetentAuthority = Core.Notification.UKCompetentAuthority.NorthernIreland
-                });
+                () => mediator.SendAsync(A<GetNotificationCompetentAuthority>.Ignored)).Returns(UKCompetentAuthority.NorthernIreland);
 
             var result = await controller.Index(guid) as RedirectToRouteResult;
 
@@ -215,10 +204,7 @@
                });
 
             A.CallTo(
-                () => mediator.SendAsync(A<GetNotificationBasicInfo>.Ignored)).Returns(new NotificationBasicInfo
-                {
-                    CompetentAuthority = Core.Notification.UKCompetentAuthority.NorthernIreland
-                });
+                () => mediator.SendAsync(A<GetNotificationCompetentAuthority>.Ignored)).Returns(UKCompetentAuthority.NorthernIreland);
 
             var result = await controller.Index(guid) as RedirectToRouteResult;
 

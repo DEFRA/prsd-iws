@@ -6,8 +6,6 @@
 
     public interface ITransportRouteRepository
     {
-        Task<TransportRoute> GetByNotificationId(Guid notificationId);
-
-        Task<UKCompetentAuthority> GetNotificationCompetentAuthorityById(Guid notificationId);
+        Task<TransportRoute> GetByNotificationId(Guid notificationId);        
     }
 }

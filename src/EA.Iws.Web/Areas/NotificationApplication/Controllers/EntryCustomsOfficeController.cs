@@ -114,8 +114,8 @@
 
             await mediator.SendAsync(new SetEntryCustomsOfficeSelectionForNotificationById(id, model.CustomsOfficeRequired.GetValueOrDefault()));
 
-            var notificationBasicDetails = await mediator.SendAsync(new GetNotificationBasicInfo(id));
-            if (notificationBasicDetails.CompetentAuthority.Equals(UKCompetentAuthority.NorthernIreland))
+            var notificationCompetentAutority = await mediator.SendAsync(new GetNotificationCompetentAuthority(id));
+            if (notificationCompetentAutority.Equals(UKCompetentAuthority.NorthernIreland))
             {
                 if (backToOverview.GetValueOrDefault())
                 {
