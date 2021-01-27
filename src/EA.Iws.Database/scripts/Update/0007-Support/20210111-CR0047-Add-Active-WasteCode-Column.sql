@@ -5,8 +5,8 @@ IF EXISTS
 (
     SELECT * 
     FROM INFORMATION_SCHEMA.COLUMNS 
-    WHERE table_name = 'Lookup.WasteCode'
-    AND column_name = 'Active'
+    WHERE table_name = '[Lookup].[WasteCode]'
+    AND column_name = '[Active]'
 )
 	BEGIN
 		ALTER TABLE [Lookup].[WasteCode]
