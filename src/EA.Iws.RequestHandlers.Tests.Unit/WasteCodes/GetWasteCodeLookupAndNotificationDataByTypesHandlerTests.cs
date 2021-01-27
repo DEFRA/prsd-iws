@@ -1,14 +1,15 @@
 ﻿namespace EA.Iws.RequestHandlers.Tests.Unit.WasteCodes
 {
+    using Core.WasteCodes;
+    using Domain.NotificationApplication;
+    using FakeItEasy;
+    using RequestHandlers.Mappings;
+    using RequestHandlers.WasteCodes;
+    using Requests.WasteCodes;
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
-    using Core.WasteCodes;
-    using Domain.NotificationApplication;
-    using RequestHandlers.Mappings;
-    using RequestHandlers.WasteCodes;
-    using Requests.WasteCodes;
     using TestHelpers.DomainFakes;
     using Xunit;
 
@@ -17,30 +18,34 @@
         private readonly GetWasteCodeLookupAndNotificationDataByTypesHandler handler;
         private static readonly Guid NotificationWithWasteCodesId = new Guid("BA8A31E3-7F2F-4CB3-AD18-610269FF7787");
         private static readonly Guid NotificationWithoutWasteCodesId = new Guid("C1D93DA2-E2EB-4915-AB6D-FE857E3C95EA");
+        private readonly IWasteCodeRepository wasteCodeRepository;
+        private readonly INotificationApplicationRepository notificationApplicationRepository;
 
         public GetWasteCodeLookupAndNotificationDataByTypesHandlerTests()
         {
-            var context = new TestIwsContext();
+            wasteCodeRepository = A.Fake<IWasteCodeRepository>();
+            notificationApplicationRepository = A.Fake<INotificationApplicationRepository>();
+            //var context = new TestIwsContext();
 
-            handler = new GetWasteCodeLookupAndNotificationDataByTypesHandler(context, new WasteCodeMap(), new WasteCodeMap());
+            handler = new GetWasteCodeLookupAndNotificationDataByTypesHandler(notificationApplicationRepository, wasteCodeRepository, new WasteCodeMap(), new WasteCodeMap());
 
-            context.WasteCodes.AddRange(wasteCodes.Select(wc => wc as WasteCode).ToList());
+            A.CallTo(() => wasteCodeRepository.GetAllWasteCodes()).Returns(wasteCodes);
 
-            context.NotificationApplications.AddRange(new NotificationApplication[]
-                {
-                    new TestableNotificationApplication
-                    {
-                        Id = NotificationWithWasteCodesId, 
-                        WasteCodes = new WasteCodeInfo[]
+            var notificationWithWasteCodes = new TestableNotificationApplication
+            {
+                Id = NotificationWithWasteCodesId,
+                WasteCodes = new WasteCodeInfo[]
                         {
-                            new TestableWasteCodeInfo(FirstBaselCode) 
+                            new TestableWasteCodeInfo(FirstBaselCode)
                         }
-                    },
-                    new TestableNotificationApplication
-                    {
-                        Id = NotificationWithoutWasteCodesId
-                    }
-                });
+            };
+            A.CallTo(() => notificationApplicationRepository.GetById(NotificationWithWasteCodesId)).Returns(notificationWithWasteCodes);
+
+            var notificationWithoutWasteCodes = new TestableNotificationApplication
+            {
+                Id = NotificationWithoutWasteCodesId
+            };
+            A.CallTo(() => notificationApplicationRepository.GetById(NotificationWithoutWasteCodesId)).Returns(notificationWithoutWasteCodes);
         }
 
         [Fact]
