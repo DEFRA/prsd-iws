@@ -639,6 +639,7 @@
     <Compile Include="Admin\GetNotificationInfoHandler.cs" />
     <Compile Include="Notification\GetNotificationAuditScreensHandler.cs" />
     <Compile Include="Notification\GetNotificationAuditTableHandler.cs" />
+    <Compile Include="Notification\GetNotificationCompetentAuthorityHandler.cs" />
     <Compile Include="Notification\GetNotificationIdByNumberHandler.cs" />
     <Compile Include="Notification\GetNotificationNumberHandler.cs" />
     <Compile Include="Notification\GetNotificationOverviewInternalHandler.cs" />
