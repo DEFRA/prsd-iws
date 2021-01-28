@@ -22,5 +22,7 @@
         Task<NotificationType> GetNotificationType(Guid id);
 
         Task<bool> Delete(Guid notificationId);
+
+        Task<UKCompetentAuthority> GetNotificationCompetentAuthority(Guid id);
     }
 }
