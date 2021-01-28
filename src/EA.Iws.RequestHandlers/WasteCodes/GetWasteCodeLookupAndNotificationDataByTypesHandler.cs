@@ -13,22 +13,26 @@
 
     internal class GetWasteCodeLookupAndNotificationDataByTypesHandler : IRequestHandler<GetWasteCodeLookupAndNotificationDataByTypes, WasteCodeDataAndNotificationData>
     {
-        private readonly IwsContext context;
+        private readonly INotificationApplicationRepository notificationApplicationRepository;
+        private readonly IWasteCodeRepository wasteCodeRepository;
         private readonly IMap<IEnumerable<WasteCode>, WasteCodeData[]> wasteCodeMapper;
         private readonly IMap<IEnumerable<WasteCodeInfo>, WasteCodeData[]> wasteCodeInfoMapper;
 
-        public GetWasteCodeLookupAndNotificationDataByTypesHandler(IwsContext context, 
+        public GetWasteCodeLookupAndNotificationDataByTypesHandler(INotificationApplicationRepository notificationApplicationRepository, 
+            IWasteCodeRepository wasteCodeRepository, 
             IMap<IEnumerable<WasteCode>, WasteCodeData[]> wasteCodeMapper,
             IMap<IEnumerable<WasteCodeInfo>, WasteCodeData[]> wasteCodeInfoMapper)
         {
-            this.context = context;
+            this.notificationApplicationRepository = notificationApplicationRepository;
+            this.wasteCodeRepository = wasteCodeRepository;
             this.wasteCodeMapper = wasteCodeMapper;
             this.wasteCodeInfoMapper = wasteCodeInfoMapper;
         }
 
         public async Task<WasteCodeDataAndNotificationData> HandleAsync(GetWasteCodeLookupAndNotificationDataByTypes message)
         {
-            var notification = await context.NotificationApplications.SingleAsync(na => na.Id == message.Id);
+            var notification = await notificationApplicationRepository.GetById(message.Id);
+            //var notification = await context.NotificationApplications.SingleAsync(na => na.Id == message.Id);
 
             IList<WasteCode> lookupCodes = await GetLookupCodes(message);
             IList<WasteCodeInfo> notificationCodes = GetNotificationCodes(message, notification);
@@ -68,9 +72,13 @@
                 return new WasteCode[0];
             }
 
-            return await
-                context.WasteCodes.Where(wc => message.LookupWasteCodeTypes.Contains(wc.CodeType))
-                    .ToArrayAsync();
+            IEnumerable<WasteCode> result;
+            result = await wasteCodeRepository.GetAllWasteCodes();
+
+            return
+                result
+                .Where(wc => message.LookupWasteCodeTypes.Contains(wc.CodeType))
+                .ToArray();
         }
     }
 }
