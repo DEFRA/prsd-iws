@@ -73,6 +73,13 @@
             return notification.NotificationType;
         }
 
+        public async Task<UKCompetentAuthority> GetNotificationCompetentAuthority(Guid id)
+        {
+            var notification = await GetById(id);
+
+            return notification.CompetentAuthority;
+        }
+
         public async Task<bool> Delete(Guid notificationId)
         {
             var rowsAffected = await context.Database.ExecuteSqlCommandAsync(@"
