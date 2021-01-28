@@ -16,5 +16,7 @@
         public string Code { get; protected set; }
 
         public CodeType CodeType { get; protected set; }
+
+        public bool Active { get; protected set; }
     }
 }
