@@ -19,7 +19,7 @@ namespace EA.Iws.Web.Views.Shared {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class IwsStandardDataNoticeResources {
@@ -312,7 +312,7 @@ namespace EA.Iws.Web.Views.Shared {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The personal data we collect includes names, addresses and contact details (including email addresses). We are allowed to process your data because we have official authority as the environmental regulators from the Regulation (EC) No. 1013/2006 (“the Waste Shipment Regulation”). The lawful basis for processing your personal data is to perform a task in the public interest that is set out in law..
+        ///   Looks up a localized string similar to The personal data we collect includes names, addresses and contact details (including email addresses). We are allowed to process your data because we have official authority as the environmental regulators from the Relevant Regulations. The lawful basis for processing your personal data is to perform a task in the public interest that is set out in law..
         /// </summary>
         public static string PersonalDataPara1 {
             get {
@@ -339,7 +339,7 @@ namespace EA.Iws.Web.Views.Shared {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The Environment Agency, Scottish Environment Protection Agency (SEPA), Northern Ireland Environment Agency (NIEA) and Natural Resources Wales (known as ‘environmental regulators’) run the IWS (International Waste Shipments) Online service. The environmental regulator you submit your data to is the data controller for your personal data. A data controller determines how and why personal data (personal information) is processed. Each environmental regulator has their own policy explaining your rights and how  [rest of string was truncated]&quot;;.
+        ///   Looks up a localized string similar to The Environment Agency, Scottish Environment Protection Agency (SEPA), Northern Ireland Environment Agency (NIEA) and Natural Resources Wales (known as ‘environmental regulators’) run the IWS (International Waste Shipments) Online service. The environmental regulator you submit your data to is the Controller for your personal data. A Controller determines how and why personal data (personal information) is processed. Each environmental regulator has their own policy explaining your rights and how they deal  [rest of string was truncated]&quot;;.
         /// </summary>
         public static string PersonalInfoIntro {
             get {
@@ -452,7 +452,7 @@ namespace EA.Iws.Web.Views.Shared {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to We use the personal data to regulate you in accordance with the Regulation (EC) No. 1013/2006 (“the Waste Shipment Regulation”)..
+        ///   Looks up a localized string similar to We use the personal data to regulate you in accordance with the Relevant Regulations..
         /// </summary>
         public static string WhatWeDoPara1 {
             get {
@@ -524,7 +524,7 @@ namespace EA.Iws.Web.Views.Shared {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to As part of the application process, we may transfer your personal data outside the European Economic Area. For example, if you are exporting waste to China, then we will send your data to the Chinese Competent Authority in order to carry out the regulatory requirements and gain their consent..
+        ///   Looks up a localized string similar to As part of the application process, we may transfer your personal data outside the United Kingdom. For example, if you are exporting waste to China, then we will send your data to the Chinese Competent Authority in order to carry out the regulatory requirements and gain their consent..
         /// </summary>
         public static string WhereWeKeepPara2 {
             get {
@@ -561,7 +561,7 @@ namespace EA.Iws.Web.Views.Shared {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The data controller is either, the Environment Agency, SEPA, NIEA or Natural Resources Wales. You can contact the relevant Data Protection Officer at:.
+        ///   Looks up a localized string similar to The Controller is either, the Environment Agency, SEPA, NIEA or Natural Resources Wales. You can contact the relevant Data Protection Officer at:.
         /// </summary>
         public static string WhoIsCollectingPara1 {
             get {
