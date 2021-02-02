@@ -41,6 +41,7 @@
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -118,6 +119,7 @@
     <Content Include="scripts\Update\0007-Support\20191127-1058-update-french-CA.sql" />
     <Content Include="scripts\Update\0007-Support\20201119-1315-CR0047-Part2-create-intra-country-allowed-table.sql" />
     <Content Include="scripts\Update\0007-Support\20201119-1330-CR0047-Part2-insert-initial-intra-country-allowed-table.sql" />
+    <Content Include="scripts\Update\0007-Support\20210201-CR0047-Add-Consented-Unlock.sql" />
     <Content Include="unindexed-foreign-keys.sql" />
     <Content Include="scripts\Everytime\01-Functions\0003-Reports-PricingInfo.sql" />
     <Content Include="scripts\Everytime\03-StoredProcedures\0003-uspUpdateImportNotificationKeyDates.sql" />
