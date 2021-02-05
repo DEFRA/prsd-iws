@@ -57,7 +57,7 @@
         {
             get
             {
-                return Status == NotificationStatus.Unlocked;
+                return (Status == NotificationStatus.Unlocked || Status == NotificationStatus.ConsentedUnlock);
             }
         }
 

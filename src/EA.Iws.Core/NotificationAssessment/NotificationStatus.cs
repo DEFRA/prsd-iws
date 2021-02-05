@@ -32,6 +32,8 @@
         Reassessment = 13,
         [Display(Name = "File closed")]
         FileClosed = 14,
+        [Display(Name = "Consented Unlock")]
+        ConsentedUnlock = 15,
         [Display(Name = "In Determination")]
         InDetermination = 100
     }

@@ -1,0 +1,1 @@
+﻿INSERT INTO [Lookup].[NotificationStatus] ([Id], [Description]) VALUES (15, 'Consented Unlock')
