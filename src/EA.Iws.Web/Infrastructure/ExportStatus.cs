@@ -23,6 +23,7 @@
                 case NotificationStatus.DecisionRequiredBy:
                 case NotificationStatus.Unlocked:
                 case NotificationStatus.Reassessment:
+                case NotificationStatus.ConsentedUnlock:
                     statusColor = "s-orange";
                     break;
 

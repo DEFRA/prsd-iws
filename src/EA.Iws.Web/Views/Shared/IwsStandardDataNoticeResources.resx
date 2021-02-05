@@ -213,7 +213,7 @@ CF24 0TP&lt;/br&gt;</value>
     <value>A prosecution depending on the breach of condition.</value>
   </data>
   <data name="PersonalDataPara1" xml:space="preserve">
-    <value>The personal data we collect includes names, addresses and contact details (including email addresses). We are allowed to process your data because we have official authority as the environmental regulators from the Regulation (EC) No. 1013/2006 (“the Waste Shipment Regulation”). The lawful basis for processing your personal data is to perform a task in the public interest that is set out in law.</value>
+    <value>The personal data we collect includes names, addresses and contact details (including email addresses). We are allowed to process your data because we have official authority as the environmental regulators from the Relevant Regulations. The lawful basis for processing your personal data is to perform a task in the public interest that is set out in law.</value>
   </data>
   <data name="PersonalDataPara2" xml:space="preserve">
     <value>If you do not give us the information requested during the application process, this may halt the processing of your application. During the lifespan of the notification if you do not provide us with the information we require or we find out that some of the information is incorrect you may be in breach of your conditions of approval. This may result in</value>
@@ -222,7 +222,7 @@ CF24 0TP&lt;/br&gt;</value>
     <value>How we use your personal information</value>
   </data>
   <data name="PersonalInfoIntro" xml:space="preserve">
-    <value>The Environment Agency, Scottish Environment Protection Agency (SEPA), Northern Ireland Environment Agency (NIEA) and Natural Resources Wales (known as ‘environmental regulators’) run the IWS (International Waste Shipments) Online service. The environmental regulator you submit your data to is the data controller for your personal data. A data controller determines how and why personal data (personal information) is processed. Each environmental regulator has their own policy explaining your rights and how they deal with your personal information:</value>
+    <value>The Environment Agency, Scottish Environment Protection Agency (SEPA), Northern Ireland Environment Agency (NIEA) and Natural Resources Wales (known as ‘environmental regulators’) run the IWS (International Waste Shipments) Online service. The environmental regulator you submit your data to is the Controller for your personal data. A Controller determines how and why personal data (personal information) is processed. Each environmental regulator has their own policy explaining your rights and how they deal with your personal information:</value>
   </data>
   <data name="PreventLawBreaking" xml:space="preserve">
     <value>prevent anyone from breaking environmental law, investigate cases where environmental law may have been broken, and take any action that is needed</value>
@@ -263,7 +263,7 @@ FK9 4TZ&lt;/br&gt;</value>
     <value>What we do with your personal data</value>
   </data>
   <data name="WhatWeDoPara1" xml:space="preserve">
-    <value>We use the personal data to regulate you in accordance with the Regulation (EC) No. 1013/2006 (“the Waste Shipment Regulation”).</value>
+    <value>We use the personal data to regulate you in accordance with the Relevant Regulations.</value>
   </data>
   <data name="WhatWeDoPara2" xml:space="preserve">
     <value>We do not use your data to make an automated decision or for automated profiling.</value>
@@ -287,7 +287,7 @@ FK9 4TZ&lt;/br&gt;</value>
     <value>We store and process your personal data on servers in the UK.</value>
   </data>
   <data name="WhereWeKeepPara2" xml:space="preserve">
-    <value>As part of the application process, we may transfer your personal data outside the European Economic Area. For example, if you are exporting waste to China, then we will send your data to the Chinese Competent Authority in order to carry out the regulatory requirements and gain their consent.</value>
+    <value>As part of the application process, we may transfer your personal data outside the United Kingdom. For example, if you are exporting waste to China, then we will send your data to the Chinese Competent Authority in order to carry out the regulatory requirements and gain their consent.</value>
   </data>
   <data name="WhereWeKeepPara3" xml:space="preserve">
     <value>By submitting your personal data, you agree to this transfer, storing or processing. We will take all steps reasonably necessary to ensure that your data is treated securely.
@@ -300,6 +300,6 @@ Unfortunately, the transmission of information via the internet is not completel
     <value>Who is collecting my data?</value>
   </data>
   <data name="WhoIsCollectingPara1" xml:space="preserve">
-    <value>The data controller is either, the Environment Agency, SEPA, NIEA or Natural Resources Wales. You can contact the relevant Data Protection Officer at:</value>
+    <value>The Controller is either, the Environment Agency, SEPA, NIEA or Natural Resources Wales. You can contact the relevant Data Protection Officer at:</value>
   </data>
 </root>
