@@ -212,6 +212,7 @@
     <Compile Include="Organisations\UpdateOrganisationDetailsHandlerTests.cs" />
     <Compile Include="RequestAuthorizationAttributeTests.cs" />
     <Compile Include="TransportRoute\GetCompetentAuthoritiesAndEntryPointsByCountryIdHandlerTests.cs" />
+    <Compile Include="WasteCodes\GetWasteCodesByTypeHandlerTests.cs" />
     <Compile Include="WasteCodes\EditHCodesHandlerTests.cs" />
     <Compile Include="WasteCodes\EditYCodesHandlerTests.cs" />
     <Compile Include="WasteRecovery\DeleteWasteDisposalWhenRecoverablePercentageChangedToMaxTests.cs" />
