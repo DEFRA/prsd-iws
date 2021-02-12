@@ -8,7 +8,7 @@
 
     public class SubmitSideBarViewModelTests
     {
-        private SubmitSideBarViewModel CreateModel(bool isComplete, NotificationStatus status)
+        private SubmitSideBarViewModel CreateModel(bool isComplete, NotificationStatus status, bool isInternalUser = false)
         {
             var submitSummaryData = new SubmitSummaryData
             {
@@ -20,7 +20,11 @@
                 IsAllComplete = isComplete
             };
 
-            return new SubmitSideBarViewModel(submitSummaryData, 500, progress);
+            var submitSideBarViewModel = new SubmitSideBarViewModel(submitSummaryData, 500, progress);
+            submitSideBarViewModel.ShowResubmitButton = ((status.Equals(NotificationStatus.Unlocked) || (status.Equals(NotificationStatus.ConsentedUnlock))) ? true : false);
+            submitSideBarViewModel.IsInternalUser = isInternalUser;
+
+            return submitSideBarViewModel;
         }
 
         public SubmitSideBarViewModel CreateModel(bool isOwner, bool isSharedUser)
@@ -93,6 +97,22 @@
         public void ShowResubmitButton_NotificationUnlocked_True()
         {
             var model = CreateModel(isComplete: true, status: NotificationStatus.Unlocked);
+
+            Assert.True(model.ShowResubmitButton);
+        }
+
+        [Fact]
+        public void ShowResubmitButton_NotificationConsentedUnlock_ForInternalUser_True()
+        {
+            var model = CreateModel(isComplete: true, status: NotificationStatus.ConsentedUnlock, true);
+
+            Assert.True(model.ShowResubmitButton);
+        }
+
+        [Fact]
+        public void ShowResubmitButton_NotificationConsentedUnlock_ForExternalUser_False()
+        {
+            var model = CreateModel(isComplete: true, status: NotificationStatus.ConsentedUnlock, false);
 
             Assert.True(model.ShowResubmitButton);
         }
