@@ -53,11 +53,16 @@
             }
         }
 
+        private bool showResubmitButton = false;
         public bool ShowResubmitButton
         {
             get
             {
-                return (Status == NotificationStatus.Unlocked || Status == NotificationStatus.ConsentedUnlock);
+                return showResubmitButton;
+            }
+            set
+            {
+                showResubmitButton = value;
             }
         }
 
