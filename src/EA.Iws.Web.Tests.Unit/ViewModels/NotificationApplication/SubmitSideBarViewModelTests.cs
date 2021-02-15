@@ -21,7 +21,14 @@
             };
 
             var submitSideBarViewModel = new SubmitSideBarViewModel(submitSummaryData, 500, progress);
-            submitSideBarViewModel.ShowResubmitButton = ((status.Equals(NotificationStatus.Unlocked) || (status.Equals(NotificationStatus.ConsentedUnlock))) ? true : false);
+            if (isInternalUser)
+            {
+                submitSideBarViewModel.ShowResubmitButton = ((status.Equals(NotificationStatus.Unlocked) || (status.Equals(NotificationStatus.ConsentedUnlock))) ? true : false);
+            }
+            else
+            {
+                submitSideBarViewModel.ShowResubmitButton = (status.Equals(NotificationStatus.Unlocked) ? true : false);
+            }
             submitSideBarViewModel.IsInternalUser = isInternalUser;
 
             return submitSideBarViewModel;
@@ -96,7 +103,7 @@
         [Fact]
         public void ShowResubmitButton_NotificationUnlocked_True()
         {
-            var model = CreateModel(isComplete: true, status: NotificationStatus.Unlocked);
+            var model = CreateModel(isComplete: true, status: NotificationStatus.Unlocked, isInternalUser: true);
 
             Assert.True(model.ShowResubmitButton);
         }
@@ -104,7 +111,7 @@
         [Fact]
         public void ShowResubmitButton_NotificationConsentedUnlock_ForInternalUser_True()
         {
-            var model = CreateModel(isComplete: true, status: NotificationStatus.ConsentedUnlock, true);
+            var model = CreateModel(isComplete: true, status: NotificationStatus.ConsentedUnlock, isInternalUser: true);
 
             Assert.True(model.ShowResubmitButton);
         }
@@ -112,9 +119,9 @@
         [Fact]
         public void ShowResubmitButton_NotificationConsentedUnlock_ForExternalUser_False()
         {
-            var model = CreateModel(isComplete: true, status: NotificationStatus.ConsentedUnlock, false);
+            var model = CreateModel(isComplete: true, status: NotificationStatus.ConsentedUnlock, isInternalUser: false);
 
-            Assert.True(model.ShowResubmitButton);
+            Assert.False(model.ShowResubmitButton);
         }
 
         [Theory]
