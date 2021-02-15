@@ -75,6 +75,7 @@
     <Content Include="scripts\TestData\20190123-175000-create-submitted-notification-2502.sql" />
     <Content Include="scripts\TestData\20191206-173100-create-export-notification-external-user-2506-EA.sql" />
     <Content Include="scripts\TestData\20191206-134000-create-export-notification-internal-user-2505-EA.sql" />
+    <Content Include="scripts\TestData\20210215-121200-create-consented-unlock-notification-2508.sql" />
     <Content Include="scripts\Update\0003-Migration\Sprint1\20170118-153400-drop-countryid.sql" />
     <Content Include="scripts\Update\0003-Migration\Sprint1\20170118-160400-add-indexes.sql" />
     <Content Include="scripts\Update\0003-Migration\Sprint1\20170119-114000-add-indexes.sql" />
