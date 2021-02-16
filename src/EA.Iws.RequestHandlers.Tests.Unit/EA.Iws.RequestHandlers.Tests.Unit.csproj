@@ -114,6 +114,7 @@
     <Compile Include="ImportMovement\GetImportMovementAuditByNotificationIdHandlerTests.cs" />
     <Compile Include="ImportNotification\AddImportNotificationCommentsHandlerTests.cs" />
     <Compile Include="ImportNotification\DeleteImportNotificationCommentHandlerTest.cs" />
+    <Compile Include="ImportNotification\DeleteImportNotificationHandlerTests.cs" />
     <Compile Include="ImportNotification\Draft\TransitStateCollectionTests.cs" />
     <Compile Include="ImportNotification\GetImportNotificationCommentsHandlerTests.cs" />
     <Compile Include="ImportNotification\GetImportNotificationCommentsUsersHandlerTests.cs" />
