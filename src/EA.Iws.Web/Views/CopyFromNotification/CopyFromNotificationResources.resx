@@ -127,7 +127,7 @@
     <value>No notifications available</value>
   </data>
   <data name="NoNotificationsAvailableDescription" xml:space="preserve">
-    <value>There are notifications available to copy from. Please continue with your application.</value>
+    <value>There are no notifications available to copy from. Please continue with your application.</value>
   </data>
   <data name="TableTitleForNotificationSummary" xml:space="preserve">
     <value>Notification summary to copy from existing notification</value>
