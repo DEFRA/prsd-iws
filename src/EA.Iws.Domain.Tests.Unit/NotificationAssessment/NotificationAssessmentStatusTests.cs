@@ -360,6 +360,41 @@
         }
 
         [Fact]
+        public void CanUnlockWhenConsented()
+        {
+            SetNotificationStatus(NotificationStatus.Consented);
+
+            notificationAssessment.Unlock();
+
+            Assert.Equal(NotificationStatus.ConsentedUnlock, notificationAssessment.Status);
+        }
+
+        [Fact]
+        public void CanResubmitWhenConsentedUnlocked()
+        {
+            SetNotificationStatus(NotificationStatus.ConsentedUnlock);
+
+            notificationAssessment.Resubmit();
+
+            Assert.Equal(NotificationStatus.Consented, notificationAssessment.Status);
+        }
+
+        [Fact]
+        public void CantResubmitWhenNotConsentedUnlocked()
+        {
+            Action resubmit = () => notificationAssessment.Resubmit();
+
+            Assert.Throws<InvalidOperationException>(resubmit);
+        }
+
+        [Fact]
+        public void CanNotMarkFileClosedInConcentedUnlock()
+        {
+            SetNotificationStatus(NotificationStatus.ConsentedUnlock);
+            Assert.Throws<InvalidOperationException>(() => notificationAssessment.MarkFileClosed(fileClosedDate));
+        }
+
+        [Fact]
         public void CantUnlockWhenNotAcknowledged()
         {
             Action unlock = () => notificationAssessment.Unlock();

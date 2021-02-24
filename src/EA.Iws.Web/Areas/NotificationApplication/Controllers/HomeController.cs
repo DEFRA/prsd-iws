@@ -5,6 +5,7 @@
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Core.Notification;
+    using EA.Iws.Core.NotificationAssessment;
     using Infrastructure;
     using Prsd.Core.Mediator;
     using Prsd.Core.Web.ApiClient;
@@ -104,6 +105,17 @@
             }
 
             model.SubmitSideBarViewModel.IsInternalUser = await mediator.SendAsync(new GetUserIsInternal());
+
+            //Here restricting the external user to edit the consented unlock notification
+            if (!model.SubmitSideBarViewModel.IsInternalUser && model.SubmitSideBarViewModel.Status == NotificationStatus.ConsentedUnlock)
+            {
+                model.CanEditNotification = false;
+                model.SubmitSideBarViewModel.ShowResubmitButton = false;
+            }
+            else if (model.SubmitSideBarViewModel.Status == NotificationStatus.Unlocked || model.SubmitSideBarViewModel.Status == NotificationStatus.ConsentedUnlock)
+            {
+                model.SubmitSideBarViewModel.ShowResubmitButton = true;
+            }
 
             ViewBag.Charge = response.NotificationCharge;
 

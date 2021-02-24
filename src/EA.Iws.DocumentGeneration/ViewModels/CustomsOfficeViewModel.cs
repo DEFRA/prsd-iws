@@ -1,6 +1,7 @@
 ﻿namespace EA.Iws.DocumentGeneration.ViewModels
 {
     using Domain.TransportRoute;
+    using System;
 
     internal class CustomsOfficeViewModel
     {
@@ -27,6 +28,7 @@
             EntryAnnexMessage = string.Empty;
             ExitAnnexMessage = string.Empty;
             SetIsAnnexNeeded(transportRoute);
+            CustomsOfficeData = string.Empty;
         }
 
         public string EntryTitle { get; private set; }
@@ -51,6 +53,8 @@
 
         public bool IsAnnexNeeded { get; private set; }
 
+        public string CustomsOfficeData { get; set; }
+
         public void SetAnnexMessages(int annexNumber)
         {
             if (EntryName.Length > 0)
@@ -61,6 +65,32 @@
             if (ExitName.Length > 0)
             {
                 ExitAnnexMessage = "See Annex " + annexNumber;
+            }
+        }
+
+        public void SetDisplayCustomsOfficeDetails(bool isNorthenIrelandCompetentAuthority)
+        {
+            if (isNorthenIrelandCompetentAuthority)
+            {
+                CustomsOfficeData = ExitTitle + Environment.NewLine +
+                                ExitName + Environment.NewLine +
+                                ExitAddress + Environment.NewLine +
+                                ExitCountry + Environment.NewLine + " " + Environment.NewLine +
+                                EntryTitle + Environment.NewLine +
+                                EntryName + Environment.NewLine +
+                                EntryAddress + Environment.NewLine +
+                                EntryCountry + Environment.NewLine;
+            }
+            else
+            {
+                CustomsOfficeData = EntryTitle + Environment.NewLine +
+                                EntryName + Environment.NewLine +
+                                EntryAddress + Environment.NewLine +
+                                EntryCountry + Environment.NewLine + " " + Environment.NewLine +
+                                ExitTitle + Environment.NewLine +
+                                ExitName + Environment.NewLine +
+                                ExitAddress + Environment.NewLine +
+                                ExitCountry + Environment.NewLine;
             }
         }
 

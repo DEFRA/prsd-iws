@@ -226,19 +226,22 @@
                 }
             </td>
             <td>
-                @if (!Model.NotificationFileClosedDate.IsCompleted && Model.AssessmentDecisions.Any())
+                @if (Model.CurrentStatus != NotificationStatus.ConsentedUnlock)
                 {
-                    @Html.ActionLink("Add", "Index", "KeyDates", new { command = KeyDatesStatusEnum.FileClosed }, null)
-                }
-                else if (Model.NotificationFileClosedDate.IsCompleted && string.IsNullOrWhiteSpace(Model.ArchiveReference))
-                {
-                    @Html.ActionLink("Add archive reference", "Index", "KeyDates", new { command = KeyDatesStatusEnum.ArchiveReference }, null)
-                }
-                else if (!string.IsNullOrWhiteSpace(Model.ArchiveReference))
-                {
-                    @Model.ArchiveReference
-                    @:&nbsp;
-                    @Html.ActionLink("Update", "Index", "KeyDates", new { command = KeyDatesStatusEnum.ArchiveReference }, null)
+                    if (!Model.NotificationFileClosedDate.IsCompleted && Model.AssessmentDecisions.Any())
+                    {
+                        @Html.ActionLink("Add", "Index", "KeyDates", new { command = KeyDatesStatusEnum.FileClosed }, null)
+                    }
+                    else if (Model.NotificationFileClosedDate.IsCompleted && string.IsNullOrWhiteSpace(Model.ArchiveReference))
+                    {
+                        @Html.ActionLink("Add archive reference", "Index", "KeyDates", new { command = KeyDatesStatusEnum.ArchiveReference }, null)
+                    }
+                    else if (!string.IsNullOrWhiteSpace(Model.ArchiveReference))
+                    {
+                        @Model.ArchiveReference
+                        @:&nbsp;
+                        @Html.ActionLink("Update", "Index", "KeyDates", new { command = KeyDatesStatusEnum.ArchiveReference }, null)
+                    }
                 }
             </td>
 
@@ -374,7 +377,7 @@ else
     }
 }
 
-@if (Model.CurrentStatus == NotificationStatus.DecisionRequiredBy || Model.CurrentStatus == NotificationStatus.Transmitted)
+@if (Model.CurrentStatus == NotificationStatus.DecisionRequiredBy || Model.CurrentStatus == NotificationStatus.Transmitted || Model.CurrentStatus == NotificationStatus.Consented)
 {
     using (Html.BeginForm("UnlockNotification", "KeyDates", FormMethod.Post, new { id = Model.NotificationId }))
     {
@@ -389,7 +392,7 @@ else
     }
 }
 
-@if (Model.CurrentStatus == NotificationStatus.Unlocked)
+@if (Model.CurrentStatus == NotificationStatus.Unlocked || Model.CurrentStatus == NotificationStatus.ConsentedUnlock)
 {
     <br />
     <p>To make changes to this notification you need to go to the external overview.</p>
