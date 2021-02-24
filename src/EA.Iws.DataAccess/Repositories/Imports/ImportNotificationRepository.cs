@@ -54,8 +54,8 @@
 
         public async Task<Guid?> GetIdOrDefault(string number)
         {
-            return await context.ImportNotifications
-                .Where(n => n.NotificationNumber.Replace(" ", string.Empty) == number.Replace(" ", string.Empty))
+            return await context.ImportNotifications                
+                .Where(n => n.NotificationNumber.Trim() == number.Trim())
                 .Select(n => (Guid?)n.Id)
                 .SingleOrDefaultAsync();
         }
