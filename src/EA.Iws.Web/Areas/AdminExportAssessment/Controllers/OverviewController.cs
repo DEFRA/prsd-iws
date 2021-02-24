@@ -17,6 +17,12 @@
     {
         private readonly AuthorizationService authorizationService;
         private readonly IMediator mediator;
+        private static readonly NotificationStatus[] allowedStatuses = new[]
+        {
+            NotificationStatus.Submitted, NotificationStatus.NotificationReceived, NotificationStatus.InAssessment,
+            NotificationStatus.ReadyToTransmit, NotificationStatus.Transmitted,
+            NotificationStatus.DecisionRequiredBy, NotificationStatus.Unlocked, NotificationStatus.Reassessment, NotificationStatus.ConsentedUnlock
+        };
 
         public OverviewController(IMediator mediator, AuthorizationService authorizationService)
         {
@@ -66,13 +72,6 @@
 
         private static bool IsEditableStatus(NotificationStatus status)
         {
-            var allowedStatuses = new[]
-            {
-                NotificationStatus.Submitted, NotificationStatus.NotificationReceived, NotificationStatus.InAssessment,
-                NotificationStatus.ReadyToTransmit, NotificationStatus.Transmitted,
-                NotificationStatus.DecisionRequiredBy, NotificationStatus.Unlocked, NotificationStatus.Reassessment
-            };
-
             return allowedStatuses.Contains(status);
         }
     }

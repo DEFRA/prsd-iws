@@ -78,7 +78,8 @@
                        || stateMachine.IsInState(NotificationStatus.Submitted)
                        || stateMachine.IsInState(NotificationStatus.NotificationReceived)
                        || stateMachine.IsInState(NotificationStatus.InAssessment)
-                       || stateMachine.IsInState(NotificationStatus.Unlocked);
+                       || stateMachine.IsInState(NotificationStatus.Unlocked)
+                       || stateMachine.IsInState(NotificationStatus.ConsentedUnlock);
             }
         }
 
@@ -166,6 +167,7 @@
 
             stateMachine.Configure(NotificationStatus.Consented)
                 .OnEntryFrom(consentedTrigger, OnConsented)
+                .Permit(Trigger.Unlock, NotificationStatus.ConsentedUnlock)
                 .Permit(Trigger.WithdrawConsent, NotificationStatus.ConsentWithdrawn)
                 .Permit(Trigger.Archive, NotificationStatus.FileClosed);
 
@@ -185,6 +187,10 @@
 
             stateMachine.Configure(NotificationStatus.FileClosed)
                 .OnEntryFrom(archiveTrigger, OnFileClosed);
+
+            stateMachine.Configure(NotificationStatus.ConsentedUnlock)
+                .SubstateOf(NotificationStatus.InDetermination)
+                .Permit(Trigger.Resubmit, NotificationStatus.Consented);
 
             return stateMachine;
         }
