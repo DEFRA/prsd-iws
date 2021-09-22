@@ -86,6 +86,7 @@
         [DisplayName("UN Class")]
         public string UNClass { get; set; }
 
-        public string NotificationStatus { get; set; }
+        [DisplayName("Shipment Status")]
+        public string ShipmentStatus { get; set; }
     }
 }
