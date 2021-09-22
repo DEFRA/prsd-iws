@@ -21,7 +21,7 @@
             return new ShipmentData
             {
                 Importer = source.Importer,
-                PrenotificationDate = source.PrenotificationDate,
+                PaperworkUploaded = source.PaperworkUploaded,
                 ReceivedDate = source.ReceivedDate,
                 NotificationNumber = source.NotificationNumber,
                 Exporter = source.Exporter,
@@ -116,13 +116,13 @@
 
         private bool GetWasPrenotifiedThreeWorkingDaysBeforeActualDate(Shipment source, UKCompetentAuthority competentAuthority)
         {
-            if (!source.PrenotificationDate.HasValue
+            if (!source.PaperworkUploaded.HasValue
                 || !source.ActualDateOfShipment.HasValue)
             {
                 return false;
             }
 
-            return workingDayCalculator.GetWorkingDays(source.PrenotificationDate.Value,
+            return workingDayCalculator.GetWorkingDays(source.PaperworkUploaded.Value,
                 source.ActualDateOfShipment.Value,
                 false,
                 competentAuthority) >= 3;
