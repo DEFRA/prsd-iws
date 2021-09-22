@@ -29,7 +29,7 @@
 
         public DateTime? ConsentValidTo { get; set; }
 
-        public DateTime? PrenotificationDate { get; set; }
+        public DateTime? PaperworkUploaded { get; set; }
 
         [DisplayName("Shipment Received Date")]
         public DateTime? ReceivedDate { get; set; }

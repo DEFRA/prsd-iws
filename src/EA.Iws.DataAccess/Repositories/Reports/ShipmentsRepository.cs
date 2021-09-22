@@ -35,7 +35,7 @@
                     [ActualDateOfShipment],
                     [ConsentFrom],
                     [ConsentTo],
-                    [PrenotificationDate],
+                    [PrenotificationDate] AS [PaperworkUploaded],
                     [ReceivedDate],
                     [CompletedDate],
                     [QuantityReceived],
@@ -67,7 +67,7 @@
                 {0}
                 ORDER BY
                     [NotificationNumber],
-                    [ShipmentNumber]";            
+                    [ShipmentNumber]";
 
             return await context.Database.SqlQuery<Shipment>(string.Format(query, textFilter),
                 new SqlParameter("@from", from),

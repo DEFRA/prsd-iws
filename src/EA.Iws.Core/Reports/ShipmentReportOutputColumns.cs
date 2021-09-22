@@ -29,8 +29,8 @@
         [Display(Name = "Consent Valid To")]
         ConsentValidTo,
 
-        [Display(Name = "Prenotification Date")]
-        PrenotificationDate,
+        [Display(Name = "Paperwork Uploaded")]
+        PaperworkUploaded,
 
         [Display(Name = "Shipment Received Date")]
         ReceivedDate,

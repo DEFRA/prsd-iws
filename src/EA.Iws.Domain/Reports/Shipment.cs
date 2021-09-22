@@ -25,7 +25,7 @@ namespace EA.Iws.Domain.Reports
 
         public DateTime? ConsentTo { get; protected set; }
 
-        public DateTime? PrenotificationDate { get; protected set; }
+        public DateTime? PaperworkUploaded { get; protected set; }
 
         public DateTime? ReceivedDate { get; protected set; }
 
