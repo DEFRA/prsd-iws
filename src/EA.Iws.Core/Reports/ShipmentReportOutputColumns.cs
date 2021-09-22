@@ -89,7 +89,7 @@
         [Display(Name = "UN Class")]
         UNClass,
 
-        [Display(Name = "Notification status")]
-        NotificationStatus,
+        [Display(Name = "Shipment Status")]
+        ShipmentStatus,
     }
 }

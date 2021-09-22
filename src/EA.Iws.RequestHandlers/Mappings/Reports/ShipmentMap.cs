@@ -50,7 +50,7 @@
                 HCode = source.HCode,
                 UNClass = source.UNClass,
                 YCode = source.YCode,
-                NotificationStatus = source.Status
+                ShipmentStatus = source.Status
             };
         }
 
