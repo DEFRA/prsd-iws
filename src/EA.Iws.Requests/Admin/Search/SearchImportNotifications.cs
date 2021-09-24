@@ -9,11 +9,11 @@
     [RequestAuthorization(GeneralPermissions.CanViewSearchResults)]
     public class SearchImportNotifications : IRequest<IList<ImportSearchResult>>
     {
-        public string NotificationNumber { get; private set; }
+        public string SearchTerm { get; private set; }
 
-        public SearchImportNotifications(string notificationNumber)
+        public SearchImportNotifications(string searchTerm)
         {
-            NotificationNumber = notificationNumber;
+            SearchTerm = searchTerm;
         }
     }
 }
