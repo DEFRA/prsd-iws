@@ -19,7 +19,7 @@ namespace EA.Iws.Web.Areas.Admin.Views.Home {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class ImportResultsResources {
@@ -61,11 +61,29 @@ namespace EA.Iws.Web.Areas.Admin.Views.Home {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Company name.
+        /// </summary>
+        public static string CompanyNameTableHeading {
+            get {
+                return ResourceManager.GetString("CompanyNameTableHeading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to No matching results found.
         /// </summary>
         public static string NoResults {
             get {
                 return ResourceManager.GetString("NoResults", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No matching results were found.
+        /// </summary>
+        public static string NoResultsMessage {
+            get {
+                return ResourceManager.GetString("NoResultsMessage", resourceCulture);
             }
         }
         
@@ -111,6 +129,15 @@ namespace EA.Iws.Web.Areas.Admin.Views.Home {
         public static string ShipmentSummaryTableHeading {
             get {
                 return ResourceManager.GetString("ShipmentSummaryTableHeading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Status.
+        /// </summary>
+        public static string StatusTableHeading {
+            get {
+                return ResourceManager.GetString("StatusTableHeading", resourceCulture);
             }
         }
         

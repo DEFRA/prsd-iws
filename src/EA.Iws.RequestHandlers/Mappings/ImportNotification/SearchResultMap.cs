@@ -14,7 +14,8 @@
                 NotificationType = source.NotificationType,
                 NotificationNumber = source.Number,
                 Status = source.Status,
-                ShowShipmentSummaryLink = source.ShowShipmentSummaryLink
+                ShowShipmentSummaryLink = source.ShowShipmentSummaryLink,
+                Importer = source.Importer
             };
         }
     }
