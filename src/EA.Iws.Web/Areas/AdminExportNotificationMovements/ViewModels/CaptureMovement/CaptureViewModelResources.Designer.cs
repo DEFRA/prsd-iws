@@ -19,7 +19,7 @@ namespace EA.Iws.Web.Areas.AdminExportNotificationMovements.ViewModels.CaptureMo
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class CaptureViewModelResources {
@@ -161,7 +161,7 @@ namespace EA.Iws.Web.Areas.AdminExportNotificationMovements.ViewModels.CaptureMo
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Prenotification date.
+        ///   Looks up a localized string similar to Paperwork Uploaded.
         /// </summary>
         public static string PrenotificationDateLabel {
             get {
@@ -170,7 +170,7 @@ namespace EA.Iws.Web.Areas.AdminExportNotificationMovements.ViewModels.CaptureMo
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Please tick the box or enter prenotification received date.
+        ///   Looks up a localized string similar to Please tick the box or enter paperwork uploaded received date.
         /// </summary>
         public static string PrenotificationDateRequired {
             get {
@@ -179,7 +179,7 @@ namespace EA.Iws.Web.Areas.AdminExportNotificationMovements.ViewModels.CaptureMo
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The &quot;prenotification date&quot; cannot be in the future. Please enter a different date..
+        ///   Looks up a localized string similar to The &quot;paperwork uploaded&quot; cannot be in the future. Please enter a different date..
         /// </summary>
         public static string PrenotifictaionDateInfuture {
             get {
