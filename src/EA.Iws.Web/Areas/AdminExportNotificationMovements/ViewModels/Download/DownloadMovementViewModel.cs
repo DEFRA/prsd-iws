@@ -29,7 +29,7 @@
 
         public string Status { get; set; }
 
-        [DisplayName("Prenotified")]
+        [DisplayName("paperwork uploaded")]
         public DateTime? SubmittedDate { get; set; }
 
         [DisplayName("Shipment due")]

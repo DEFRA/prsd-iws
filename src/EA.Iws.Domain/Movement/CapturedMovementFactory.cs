@@ -27,7 +27,7 @@
         {
             if (hasNoPrenotification && prenotificationDate.HasValue)
             {
-                throw new ArgumentException("Can't provide prenotification date if there is no prenotification", "prenotificationDate");
+                throw new ArgumentException("Can't provide paperwork uploaded if there is no paperwork uploaded", "paperworkuploaded");
             }
 
             if (!await movementNumberValidator.Validate(notificationId, number))
@@ -48,15 +48,15 @@
             {
                 if (prenotificationDate > SystemTime.UtcNow.Date)
                 {
-                    throw new InvalidOperationException("The prenotification date cannot be in the future.");
+                    throw new InvalidOperationException("The paperwork uploaded cannot be in the future.");
                 }
                 if (actualShipmentDate < prenotificationDate)
                 {
-                    throw new InvalidOperationException("The actual date of shipment cannot be before the prenotification date.");
+                    throw new InvalidOperationException("The actual date of shipment cannot be before the paperwork uploaded.");
                 }
                 if (actualShipmentDate > prenotificationDate.Value.AddDays(60))
                 {
-                    throw new InvalidOperationException("The actual date of shipment should not be more than 30 calendar days after the prenotification date.");
+                    throw new InvalidOperationException("The actual date of shipment should not be more than 30 calendar days after the paperwork uploaded.");
                 }
             }
 
