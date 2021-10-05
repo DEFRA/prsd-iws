@@ -62,5 +62,7 @@ namespace EA.Iws.Domain.Reports
         public string HCode { get; protected set; }
 
         public string UNClass { get; protected set; }
+
+        public BusinessType Companytype { get; protected set; }
     }
 }

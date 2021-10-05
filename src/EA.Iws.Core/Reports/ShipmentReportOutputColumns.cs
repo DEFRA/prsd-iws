@@ -9,6 +9,9 @@
         [Display(Name = "Notifier")]
         Exporter,
 
+        [Display(Name = "Company type")]
+        CompanyType,
+
         [Display(Name = "Consignee")]
         Importer,
 

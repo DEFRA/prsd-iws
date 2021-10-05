@@ -87,12 +87,12 @@
         }
         
         [Fact]
-        public async Task HasNoPrenotification_PrenotificationDateProvided_Throws()
+        public async Task HasNoPrenotification_PaperworkUploadedProvided_Throws()
         {
             A.CallTo(() => validator.Validate(NotificationId, A<int>.Ignored))
                 .Returns(false);
 
-            await Assert.ThrowsAsync<ArgumentException>("prenotificationDate", () => factory.Create(NotificationId, 1, AnyDate, AnyDate, true));
+            await Assert.ThrowsAsync<ArgumentException>("paperworkuploaded", () => factory.Create(NotificationId, 1, AnyDate, AnyDate, true));
         }
 
         [Fact]

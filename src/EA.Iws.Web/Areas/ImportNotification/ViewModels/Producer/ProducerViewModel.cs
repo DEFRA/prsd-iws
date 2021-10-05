@@ -1,7 +1,9 @@
 ﻿namespace EA.Iws.Web.Areas.ImportNotification.ViewModels.Producer
 {
     using Core.ImportNotification.Draft;
+    using EA.Iws.Core.Shared;
     using Shared;
+    using System.ComponentModel.DataAnnotations;
 
     public class ProducerViewModel
     {
@@ -15,6 +17,11 @@
 
         public bool IsAddedToAddressBook { get; set; }
 
+        [Display(Name = "Organisation type")]
+        public BusinessType BusinessType { get; set; }
+
+        public string RegistrationNumber { get; set; }
+
         public ProducerViewModel()
         {
         }
@@ -23,9 +30,10 @@
         {
             Address = new AddressViewModel(producer.Address);
             AreMultiple = producer.AreMultiple;
-            Business = new BusinessViewModel(producer.BusinessName);
+            Business = new BusinessViewModel(producer.BusinessName, producer.RegistrationNumber);
             Contact = new ContactViewModel(producer.Contact);
             IsAddedToAddressBook = producer.IsAddedToAddressBook;
+            BusinessType = producer.Type;
         }
     }
 }
