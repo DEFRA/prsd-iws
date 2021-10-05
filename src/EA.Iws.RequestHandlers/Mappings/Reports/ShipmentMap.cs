@@ -50,7 +50,8 @@
                 HCode = source.HCode,
                 UNClass = source.UNClass,
                 YCode = source.YCode,
-                ShipmentStatus = source.Status
+                ShipmentStatus = source.Status,
+                Companytype = source.Companytype.ToString()
             };
         }
 

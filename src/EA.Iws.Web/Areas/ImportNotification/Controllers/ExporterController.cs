@@ -46,7 +46,9 @@
             var exporter = new Exporter(id)
             {
                 Address = model.Address.AsAddress(),
+                Type = model.BusinessType,
                 BusinessName = model.Business.Name,
+                RegistrationNumber = model.Business.RegistrationNumber,
                 Contact = model.Contact.AsContact(),
                 IsAddedToAddressBook = model.IsAddedToAddressBook
             };

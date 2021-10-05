@@ -122,6 +122,7 @@
     <Content Include="scripts\Update\0007-Support\20201119-1315-CR0047-Part2-create-intra-country-allowed-table.sql" />
     <Content Include="scripts\Update\0007-Support\20201119-1330-CR0047-Part2-insert-initial-intra-country-allowed-table.sql" />
     <Content Include="scripts\Update\0007-Support\20210201-CR0047-Add-Consented-Unlock.sql" />
+    <Content Include="scripts\Update\0007-Support\20211004-CR0048-Add-ImportNotification-Company-Type.sql" />
     <Content Include="unindexed-foreign-keys.sql" />
     <Content Include="scripts\Everytime\01-Functions\0003-Reports-PricingInfo.sql" />
     <Content Include="scripts\Everytime\03-StoredProcedures\0003-uspUpdateImportNotificationKeyDates.sql" />

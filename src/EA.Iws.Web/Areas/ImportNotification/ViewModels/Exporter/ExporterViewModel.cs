@@ -2,11 +2,15 @@
 {
     using System.ComponentModel.DataAnnotations;
     using Core.ImportNotification.Draft;
+    using EA.Iws.Core.Shared;
     using Shared;
 
     public class ExporterViewModel
     {
         public BusinessViewModel Business { get; set; }
+
+        [Display(Name = "Organisation type")]
+        public BusinessType BusinessType { get; set; }
 
         public AddressViewModel Address { get; set; }
 
@@ -23,7 +27,9 @@
 
         public ExporterViewModel(Exporter exporter)
         {
-            Business = new BusinessViewModel(exporter.BusinessName);
+            Business = new BusinessViewModel(exporter.BusinessName, exporter.RegistrationNumber);
+
+            BusinessType = exporter.Type;
 
             Address = new AddressViewModel(exporter.Address);
 

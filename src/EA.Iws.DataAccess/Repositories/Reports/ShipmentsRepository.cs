@@ -28,6 +28,7 @@
                     [NotificationNumber],
                     [ImportOrExport],
                     [Exporter],
+                    [Companytype],
                     [Importer],
                     [Facility],
                     [BaselOecdCode],

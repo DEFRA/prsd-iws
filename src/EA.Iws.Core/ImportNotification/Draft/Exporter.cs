@@ -1,5 +1,6 @@
 ﻿namespace EA.Iws.Core.ImportNotification.Draft
 {
+    using EA.Iws.Core.Shared;
     using System;
     using System.ComponentModel;
 
@@ -9,6 +10,10 @@
         public Address Address { get; set; }
 
         public string BusinessName { get; set; }
+
+        public BusinessType Type { get; set; }
+
+        public string RegistrationNumber { get; set; }
 
         public Contact Contact { get; set; }
 

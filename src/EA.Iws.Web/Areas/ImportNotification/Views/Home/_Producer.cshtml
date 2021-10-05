@@ -21,6 +21,14 @@
 
         </div>
 
+        <div class="overview-block-element">
+            Organisation type:
+            @EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(Model.Details.Producer.BusinessType)
+            <br />
+            Company registration:
+            @Html.DisplayFor(m => m.Details.Producer.RegistrationNumber)
+        </div>
+
         if (!Model.Details.Producer.Contact.IsEmpty())
         {
             <div class="overview-block-element">
@@ -29,7 +37,7 @@
         }
 
         <div class="overview-block-element">
-            @Resource.MultipleProducersQuestion 
+            @Resource.MultipleProducersQuestion
             @if (Model.Details.Producer.AreMultiple)
             {
                 @Resource.True
