@@ -29,14 +29,14 @@
         [Fact]
         public void PrenotificationDateCannotBeInTheFuture()
         {
-            var model = CreateViewModelForPrenotificationDate(30, 7, 2016);           
+            var model = CreateViewModelForPrenotificationDate(30, 7, 2016);
             Assert.NotEmpty(ViewModelValidator.ValidateViewModel(model));
         }
 
         [Fact]
         public void PrenotificationDateCanBeToday()
         {
-            var model = CreateViewModelForPrenotificationDate(1, 6, 2016);           
+            var model = CreateViewModelForPrenotificationDate(1, 6, 2016);
             Assert.Empty(ViewModelValidator.ValidateViewModel(model));
         }
 
@@ -97,10 +97,10 @@
         }
 
         [Fact]
-        public void WasteReceivedDateNotBeforeActualShipmentDate()
+        public void WasteReceivedDateCanBeBeforeActualShipmentDate()
         {
-            var model = CreateViewModelForReceivedDate(31, 5, 2016, false);
-            Assert.NotEmpty(ViewModelValidator.ValidateViewModel(model));
+            var model = CreateViewModelForReceivedDate(31, 5, 2016, true);
+            Assert.Empty(ViewModelValidator.ValidateViewModel(model));
         }
 
         [Fact]
