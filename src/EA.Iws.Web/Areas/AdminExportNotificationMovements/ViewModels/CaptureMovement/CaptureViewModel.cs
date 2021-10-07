@@ -200,10 +200,6 @@
 
             if (Receipt.IsComplete())
             {
-                if (Receipt.ReceivedDate.Date < ActualShipmentDate.Date)
-                {
-                    yield return new ValidationResult(CaptureViewModelResources.ReceivedDateBeforeActualDate, new[] { "Receipt.ReceivedDate" });
-                }
                 if (Receipt.ReceivedDate.Date > SystemTime.UtcNow.Date)
                 {
                     yield return new ValidationResult(CaptureViewModelResources.ReceivedDateInfuture, new[] { "Receipt.ReceivedDate" });
