@@ -51,7 +51,7 @@
                 UNClass = source.UNClass,
                 YCode = source.YCode,
                 ShipmentStatus = source.Status,
-                Companytype = source.Companytype.ToString()
+                CompanyType = source.CompanyType.ToString()
             };
         }
 

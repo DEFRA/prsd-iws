@@ -1,8 +1,8 @@
 ﻿namespace EA.Iws.Core.ImportNotification.Draft
 {
-    using EA.Iws.Core.Shared;
     using System;
     using System.ComponentModel;
+    using EA.Iws.Core.Shared;
 
     [DisplayName("Exporter notifier")]
     public class Exporter : IDraftEntity
