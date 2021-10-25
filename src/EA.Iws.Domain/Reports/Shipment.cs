@@ -63,6 +63,6 @@ namespace EA.Iws.Domain.Reports
 
         public string UNClass { get; protected set; }
 
-        public BusinessType Companytype { get; protected set; }
+        public BusinessType CompanyType { get; protected set; }
     }
 }

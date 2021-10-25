@@ -13,8 +13,8 @@
         [DisplayName("Notifier")]
         public string Exporter { get; set; }
 
-        [DisplayName("Company type")]
-        public string Companytype { get; set; }
+        [DisplayName("Company Type")]
+        public string CompanyType { get; set; }
 
         [DisplayName("Consignee")]
         public string Importer { get; set; }
