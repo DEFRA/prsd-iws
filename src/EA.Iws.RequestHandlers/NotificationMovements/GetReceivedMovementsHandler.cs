@@ -27,15 +27,15 @@
 
         public async Task<MovementOperationData> HandleAsync(GetReceivedMovements message)
         {
-            var movements = await movementRepository.GetMovementsByStatus(message.NotificationId, MovementStatus.Received);
-            var notification = await notificationRepository.GetById(message.NotificationId);
+            var movements = await movementRepository.GetAllActiveMovementsForRecovery(message.NotificationId);
+            var notificationType = await notificationRepository.GetNotificationType(message.NotificationId);
 
             var movementsData = movements.Select(m => mapper.Map<MovementData>(m)).ToArray();
 
             return new MovementOperationData
             {
                 MovementDatas = movementsData,
-                NotificationType = notification.NotificationType
+                NotificationType = notificationType
             };
         }
     }
