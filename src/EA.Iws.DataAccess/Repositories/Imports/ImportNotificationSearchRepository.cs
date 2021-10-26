@@ -31,10 +31,9 @@
             var query = from notification
                 in importNotificationContext.ImportNotifications
                 join importer in importNotificationContext.Importers on notification.Id equals importer.ImportNotificationId
-                where ((notification.NotificationNumber.Replace(" ", string.Empty).Contains(searchTerm.Replace(" ", string.Empty)) 
-                        || notification.NotificationNumber.Contains(searchTerm)
-                        || importer.Name.Contains(searchTerm))
-                    && notification.CompetentAuthority == userCompetentAuthority)
+                where (notification.CompetentAuthority == userCompetentAuthority && 
+                       (notification.NotificationNumber.ToLower().Replace(" ", string.Empty).Contains(searchTerm.ToLower().Replace(" ", string.Empty)) || 
+                        importer.Name.ToLower().Contains(searchTerm.ToLower())))
                 from assessment
                 in importNotificationContext.ImportNotificationAssessments
                     .Where(a => a.NotificationApplicationId == notification.Id)
