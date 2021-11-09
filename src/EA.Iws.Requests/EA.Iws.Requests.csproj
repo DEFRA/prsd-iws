@@ -244,6 +244,7 @@
     <Compile Include="Movement\GetNotificationNumberByMovementId.cs" />
     <Compile Include="Movement\IsAddedCancellableMovementValid.cs" />
     <Compile Include="Movement\GetSubmittedPendingMovements.cs" />
+    <Compile Include="Movement\PartialReject\RecordPartialRejectionInternal.cs" />
     <Compile Include="NotificationAssessment\AddCarrier.cs" />
     <Compile Include="NotificationAssessment\AddNotificationComment.cs" />
     <Compile Include="NotificationAssessment\CheckFinancialGuaranteeStatus.cs" />

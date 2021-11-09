@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
     using Core.Movement;
+    using EA.Iws.Core.Shared;
     using Prsd.Core;
     using Prsd.Core.Domain;
     using Prsd.Core.Extensions;
@@ -216,12 +217,12 @@
             PrenotificationDate = prenotificationDate;
         }
 
-        internal MovementRejection Reject(DateTime dateReceived, string reason)
+        internal MovementRejection Reject(DateTime dateReceived, string reason, decimal? quantity, ShipmentQuantityUnits? unit)
         {
             Guard.ArgumentNotDefaultValue(() => dateReceived, dateReceived);
             Guard.ArgumentNotDefaultValue(() => reason, reason);
 
-            var rejection = new MovementRejection(Id, dateReceived, reason);
+            var rejection = new MovementRejection(Id, dateReceived, reason, quantity, unit);
 
             stateMachine.Fire(Trigger.Reject);
 

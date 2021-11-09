@@ -36,11 +36,11 @@
 
         public NotificationType NotificationType { get; set; }
 
-        public bool IsReceived { get; set; }
+        //public bool IsReceived { get; set; }
 
         public bool IsOperationCompleted { get; set; }
 
-        public bool IsRejected { get; set; }
+        //public bool IsRejected { get; set; }
 
         [Display(Name = "HasComments", ResourceType = typeof(CaptureViewModelResources))]
         public bool HasComments { get; set; }
@@ -57,9 +57,9 @@
             {
                 return new SelectList(new[]
                 {
-                    "Illegal Shipment (WSR Table 5)",
-                    "Did not proceed as intended (Basel Table 9)",
-                    "Accident occurred during transport (Basel Table 10)"
+                    "Illegal Shipment",
+                    "Did not proceed as intended",
+                    "Accident occurred during transport"
                 });
             }
         }
@@ -116,16 +116,16 @@
             }
 
             NotificationType = data.NotificationType;
-            IsReceived = data.IsReceived;
+            //IsReceived = data.IsReceived;
             IsOperationCompleted = data.IsOperationCompleted;
-            IsRejected = data.IsRejected;
+            //IsRejected = data.IsRejected;
 
             Receipt = new ReceiptViewModel
             {
                 ActualQuantity = data.ActualQuantity,
                 ReceivedDate = new MaskedDateInputViewModel(data.ReceiptDate),
-                Units = data.ReceiptUnits ?? data.NotificationUnits,
-                WasShipmentAccepted = string.IsNullOrWhiteSpace(data.RejectionReason),
+                ActualUnits = data.ReceiptUnits ?? data.NotificationUnits,
+                //WasShipmentAccepted = string.IsNullOrWhiteSpace(data.RejectionReason),
                 RejectionReason = data.RejectionReason,
                 PossibleUnits = data.PossibleUnits
             };
@@ -155,14 +155,21 @@
                 yield return new ValidationResult(CaptureViewModelResources.ReceivedDateRequired, new[] { "Receipt.ReceivedDate" });
             }
 
-            if (!Receipt.ActualQuantity.HasValue && Receipt.ReceivedDate.IsCompleted && Receipt.WasShipmentAccepted)
+            //if (!Receipt.ActualQuantity.HasValue && Receipt.ReceivedDate.IsCompleted && Receipt.WasShipmentAccepted)
+            if (!Receipt.ActualQuantity.HasValue && Receipt.ReceivedDate.IsCompleted && Receipt.ShipmentTypes == ShipmentType.Accepted)
             {
                 yield return new ValidationResult(CaptureViewModelResources.QuantityRequired, new[] { "Receipt.ActualQuantity" });
             }
 
-            if (!Receipt.WasShipmentAccepted && string.IsNullOrWhiteSpace(Receipt.RejectionReason))
+            //if (!Receipt.WasShipmentAccepted && string.IsNullOrWhiteSpace(Receipt.RejectionReason))
+            if ((Receipt.ShipmentTypes == ShipmentType.Partially || Receipt.ShipmentTypes == ShipmentType.Rejected) && string.IsNullOrWhiteSpace(Receipt.RejectionReason))
             {
                 yield return new ValidationResult(CaptureViewModelResources.RejectReasonRequired, new[] { "Receipt.RejectionReason" });
+            }
+
+            if ((Receipt.ShipmentTypes == ShipmentType.Partially || Receipt.ShipmentTypes == ShipmentType.Rejected) && string.IsNullOrWhiteSpace(StatsMarking))
+            {
+                yield return new ValidationResult(CaptureViewModelResources.StatsMarkingRequired, new[] { "StatsMarking" });
             }
 
             if (Recovery.IsComplete() && !Receipt.IsComplete())
@@ -171,7 +178,8 @@
                     new[] { "Recovery.RecoveryDate" });
             }
 
-            if (Receipt.IsComplete() && !Receipt.WasShipmentAccepted && Recovery.IsComplete())
+            //if (Receipt.IsComplete() && !Receipt.WasShipmentAccepted && Recovery.IsComplete())
+            if (Receipt.IsComplete() && Recovery.IsComplete())
             {
                 yield return new ValidationResult(string.Format(CaptureViewModelResources.RecoveryDateCannotBeEnteredForRejected, NotificationType),
                     new[] { "Recovery.RecoveryDate" });
@@ -216,6 +224,11 @@
                 {
                     yield return new ValidationResult(string.Format(CaptureViewModelResources.RecoveredDateInfuture, GetNotificationTypeVerb(Recovery.NotificationType)), new[] { "Recovery.RecoveryDate" });
                 }
+            }
+
+            if (Receipt.ShipmentTypes == ShipmentType.Rejected)
+            {
+                Recovery.IsShipmentFullRejected = true;
             }
         }
 

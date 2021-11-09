@@ -171,9 +171,12 @@
     <Compile Include="Movement\BulkUpload\IDraftMovementRepository.cs" />
     <Compile Include="Movement\IMovementAuditRepository.cs" />
     <Compile Include="Movement\IMovementCarrierRepository.cs" />
+    <Compile Include="Movement\IMovementPartialRejectionRepository.cs" />
+    <Compile Include="Movement\IPartialRejectionMovement.cs" />
     <Compile Include="Movement\MovementAudit.cs" />
     <Compile Include="Movement\MovementDateOutOfRangeDateInPastException.cs" />
     <Compile Include="Movement\MovementDetailsFactory.cs" />
+    <Compile Include="Movement\MovementPartialRejection.cs" />
     <Compile Include="Movement\NumberOfActiveLoads.cs" />
     <Compile Include="Movement\ConsentPeriod.cs" />
     <Compile Include="Movement\IMovementDateValidator.cs" />

@@ -32,11 +32,11 @@
 
         public DateTime? OperationCompleteDate { get; set; }
 
-        public bool IsReceived { get; set; }
+        //public bool IsReceived { get; set; }
 
         public bool IsOperationCompleted { get; set; }
 
-        public bool IsRejected { get; set; }
+        //public bool IsRejected { get; set; }
 
         public MovementStatus Status { get; set; }
 

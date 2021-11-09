@@ -162,6 +162,9 @@
   <data name="ShipmentWasNotAccepted" xml:space="preserve">
     <value>No</value>
   </data>
+  <data name="ShipmentWasPartiallyAccepted" xml:space="preserve">
+    <value>Partially</value>
+  </data>
   <data name="UpdateShipmentDataLinkText" xml:space="preserve">
     <value>Edit shipment data</value>
   </data>

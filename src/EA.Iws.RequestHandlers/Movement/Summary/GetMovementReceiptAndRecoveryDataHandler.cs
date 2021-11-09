@@ -59,7 +59,7 @@
                 data.ReceiptDate = movement.Receipt.Date;
                 data.ActualQuantity = movement.Receipt.QuantityReceived.Quantity;
                 data.ReceiptUnits = movement.Receipt.QuantityReceived.Units;
-                data.IsReceived = true;
+                //data.IsReceived = true;
             }
 
             if (movement.CompletedReceipt != null)
@@ -72,7 +72,7 @@
             {
                 data.RejectionReason = movementRejection.Reason;
                 data.ReceiptDate = movementRejection.Date;
-                data.IsRejected = true;
+                //data.IsRejected = true;
             }
 
             return data;

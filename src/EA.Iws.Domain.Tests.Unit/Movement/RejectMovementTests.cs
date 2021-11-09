@@ -2,6 +2,7 @@
 {
     using Core.Movement;
     using Domain.Movement;
+    using EA.Iws.Core.Shared;
     using FakeItEasy;
     using Prsd.Core;
     using System;
@@ -49,7 +50,7 @@
             
             A.CallTo(() => movementRepository.GetById(MovementId)).Returns(movement);
 
-           var result = await rejectFactory.Reject(movement.Id, PastDate, rejectionreason);
+           var result = await rejectFactory.Reject(movement.Id, PastDate, rejectionreason, 1, ShipmentQuantityUnits.Tonnes);
            
             Assert.Equal(PastDate, result.Date);
         }
@@ -67,7 +68,7 @@
 
             A.CallTo(() => movementRepository.GetById(MovementId)).Returns(movement);
 
-            var result = await rejectFactory.Reject(movement.Id, Today, rejectionreason);
+            var result = await rejectFactory.Reject(movement.Id, Today, rejectionreason, 1, ShipmentQuantityUnits.Tonnes);
 
             Assert.Equal(Today, result.Date);
         }
@@ -84,7 +85,7 @@
 
             A.CallTo(() => movementRepository.GetById(MovementId)).Returns(movement);
 
-            await Assert.ThrowsAsync<InvalidOperationException>(() => rejectFactory.Reject(movement.Id, PastDate, rejectionreason));
+            await Assert.ThrowsAsync<InvalidOperationException>(() => rejectFactory.Reject(movement.Id, PastDate, rejectionreason, 1, ShipmentQuantityUnits.Tonnes));
         }
 
         [Fact]
@@ -100,7 +101,7 @@
 
             A.CallTo(() => movementRepository.GetById(MovementId)).Returns(movement);
 
-            var result = await rejectFactory.Reject(movement.Id, PastDate, rejectionreason);
+            var result = await rejectFactory.Reject(movement.Id, PastDate, rejectionreason, 1, ShipmentQuantityUnits.Tonnes);
 
             Assert.Equal(PastDate, result.Date);
         }
@@ -117,7 +118,7 @@
 
             A.CallTo(() => movementRepository.GetById(MovementId)).Returns(movement);
 
-            await Assert.ThrowsAsync<InvalidOperationException>(() => rejectFactory.Reject(movement.Id, FutureDate, rejectionreason));
+            await Assert.ThrowsAsync<InvalidOperationException>(() => rejectFactory.Reject(movement.Id, FutureDate, rejectionreason, 1, ShipmentQuantityUnits.Tonnes));
         }
     }
 }

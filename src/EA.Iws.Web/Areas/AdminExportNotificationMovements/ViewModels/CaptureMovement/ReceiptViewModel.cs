@@ -14,17 +14,44 @@
         [Display(Name = "ReceivedDateLabel", ResourceType = typeof(ReceiptViewModelResources))]
         public MaskedDateInputViewModel ReceivedDate { get; set; }
 
-        [Display(Name = "WasShipmentAcceptedLabel", ResourceType = typeof(ReceiptViewModelResources))]
-        public bool WasShipmentAccepted { get; set; }
+        //[Display(Name = "WasShipmentAcceptedLabel", ResourceType = typeof(ReceiptViewModelResources))]
+        //public bool WasShipmentAccepted { get; set; }
 
         [Display(Name = "ActualQuantityLabel", ResourceType = typeof(ReceiptViewModelResources))]
         [IsValidNumber(14, ErrorMessageResourceName = "MaximumActualQuantity", ErrorMessageResourceType = typeof(ReceiptViewModelResources), IsOptional = true)]
         public decimal? ActualQuantity { get; set; }
 
-        public ShipmentQuantityUnits? Units { get; set; }
+        public ShipmentQuantityUnits? ActualUnits { get; set; }
 
         [Display(Name = "RejectionReasonLabel", ResourceType = typeof(ReceiptViewModelResources))]
         public string RejectionReason { get; set; }
+
+        [Display(Name = "FullyRejectionReasonInfomationLabel1", ResourceType = typeof(ReceiptViewModelResources))]
+        public string FullyRejectionReasonInfomation1 { get; set; }
+
+        [Display(Name = "FullyRejectionReasonInfomationLabel2", ResourceType = typeof(ReceiptViewModelResources))]
+        public string FullyRejectionReasonInfomation2 { get; set; }
+
+        [Display(Name = "PartiallyRejectionReasonInfomationLabel1", ResourceType = typeof(ReceiptViewModelResources))]
+        public string PartiallyRejectionReasonInfomation1 { get; set; }
+
+        [Display(Name = "ShipmentRejectedQuantityLabel", ResourceType = typeof(ReceiptViewModelResources))]
+        public string ShipmentRejectedQuantity { get; set; }
+
+        [Display(Name = "PartiallyRejectionReasonInfomationLabel2", ResourceType = typeof(ReceiptViewModelResources))]
+        public string PartiallyRejectionReasonInfomation2 { get; set; }
+
+        [Display(Name = "WasShipmentRejectedLabel", ResourceType = typeof(ReceiptViewModelResources))]
+        public bool WasShipmentRejected { get; set; }
+
+        [Display(Name = "RejectedQuantityLabel", ResourceType = typeof(ReceiptViewModelResources))]
+        [IsValidNumber(14, ErrorMessageResourceName = "MaximumActualQuantity", ErrorMessageResourceType = typeof(ReceiptViewModelResources), IsOptional = true)]
+        public decimal? RejectedQuantity { get; set; }
+
+        public ShipmentQuantityUnits? RejectedUnits { get; set; }
+
+        [Display(Name = "RejectedQuantityInfoLabel", ResourceType = typeof(ReceiptViewModelResources))]
+        public bool RejectedQuantityInfo { get; set; }
 
         public SelectList UnitSelectList
         {
@@ -39,23 +66,29 @@
 
         public IList<ShipmentQuantityUnits> PossibleUnits { get; set; }
 
+        public ShipmentType ShipmentTypes { get; set; }
+
         public ReceiptViewModel()
         {
-            WasShipmentAccepted = true;
+            //WasShipmentAccepted = true;
             ReceivedDate = new MaskedDateInputViewModel();
             PossibleUnits = new List<ShipmentQuantityUnits>();
         }
 
         public bool IsComplete()
         {
-            if (WasShipmentAccepted)
+            if (ShipmentTypes == ShipmentType.Accepted)
             {
                 return ReceivedDate.IsCompleted
                        && ActualQuantity.HasValue
-                       && Units.HasValue;
+                       && ActualUnits.HasValue;
+            }
+            else if (ShipmentTypes == ShipmentType.Rejected)
+            {
+                return !string.IsNullOrWhiteSpace(RejectionReason) && ReceivedDate.IsCompleted;
             }
 
-            return !string.IsNullOrWhiteSpace(RejectionReason) && ReceivedDate.IsCompleted;
-        }       
+            return false;
+        }
     }
 }

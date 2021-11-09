@@ -82,7 +82,7 @@
                 ActualShipmentDate = new Web.ViewModels.Shared.MaskedDateInputViewModel(actualDate),
                 Receipt = new ReceiptViewModel
                 {
-                   WasShipmentAccepted = false,
+                   //WasShipmentAccepted = false,
                    ReceivedDate = new Web.ViewModels.Shared.MaskedDateInputViewModel(rejectedDate),
                    RejectionReason = "TestRejection"
                 }
@@ -106,10 +106,10 @@
                 ActualShipmentDate = new Web.ViewModels.Shared.MaskedDateInputViewModel(actualDate),
                 Receipt = new ReceiptViewModel
                 {
-                    WasShipmentAccepted = true,
+                    //WasShipmentAccepted = true,
                     ReceivedDate = new Web.ViewModels.Shared.MaskedDateInputViewModel(receivedDate),
                     ActualQuantity = 1,
-                    Units = ShipmentQuantityUnits.Kilograms
+                    ActualUnits = ShipmentQuantityUnits.Kilograms
                 }
             };
 
@@ -131,10 +131,10 @@
                 ActualShipmentDate = new Web.ViewModels.Shared.MaskedDateInputViewModel(actualDate),
                 Receipt = new ReceiptViewModel
                 {
-                    WasShipmentAccepted = true,
+                    //WasShipmentAccepted = true,
                     ReceivedDate = new Web.ViewModels.Shared.MaskedDateInputViewModel(receivedDate),
                     ActualQuantity = 1,
-                    Units = ShipmentQuantityUnits.Kilograms
+                    ActualUnits = ShipmentQuantityUnits.Kilograms
                 },
                 Recovery = new RecoveryViewModel
                 {
@@ -161,10 +161,10 @@
                 ActualShipmentDate = new Web.ViewModels.Shared.MaskedDateInputViewModel(actualDate),
                 Receipt = new ReceiptViewModel
                 {
-                    WasShipmentAccepted = true,
+                    //WasShipmentAccepted = true,
                     ReceivedDate = new Web.ViewModels.Shared.MaskedDateInputViewModel(receivedDate),
                     ActualQuantity = 1,
-                    Units = ShipmentQuantityUnits.Kilograms
+                    ActualUnits = ShipmentQuantityUnits.Kilograms
                 },
                 Recovery = new RecoveryViewModel
                 {

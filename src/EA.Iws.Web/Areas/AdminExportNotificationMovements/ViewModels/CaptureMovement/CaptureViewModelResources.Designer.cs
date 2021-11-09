@@ -276,5 +276,14 @@ namespace EA.Iws.Web.Areas.AdminExportNotificationMovements.ViewModels.CaptureMo
                 return ResourceManager.GetString("StatsMarking", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please select annual stats marking for rejection.
+        /// </summary>
+        public static string StatsMarkingRequired {
+            get {
+                return ResourceManager.GetString("StatsMarkingRequired", resourceCulture);
+            }
+        }
     }
 }
