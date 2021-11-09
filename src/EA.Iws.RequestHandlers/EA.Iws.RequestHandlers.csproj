@@ -454,6 +454,7 @@
     <Compile Include="Movement\IsAddedCancellableMovementValidHandler.cs" />
     <Compile Include="Movement\GetSubmittedPendingMovementsHandler.cs" />
     <Compile Include="Movement\Mappings\MovementAuditMap.cs" />
+    <Compile Include="Movement\PartialReject\RecordPartialRejectionInternalHandler.cs" />
     <Compile Include="Movement\SetMovementCommentsHandler.cs" />
     <Compile Include="Movement\SetMultipleMovementFileIdHandler.cs" />
     <Compile Include="Movement\SetMovementReceiptAndRecoveryDataHandler.cs" />

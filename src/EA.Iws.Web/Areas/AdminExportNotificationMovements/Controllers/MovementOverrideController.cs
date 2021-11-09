@@ -59,7 +59,7 @@
                 RejectionReason = model.RejectionReason,
                 Comments = model.HasComments ? model.Comments : null,
                 StatsMarking = model.HasComments ? model.StatsMarking : null,
-                IsRejected = model.IsRejected
+                //IsRejected = model.IsRejected
             };
 
             await mediator.SendAsync(new SetMovementReceiptAndRecoveryData(data));

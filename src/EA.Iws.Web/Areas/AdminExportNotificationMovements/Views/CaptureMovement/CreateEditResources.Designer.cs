@@ -19,7 +19,7 @@ namespace EA.Iws.Web.Areas.AdminExportNotificationMovements.Views.CaptureMovemen
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class CreateEditResources {
@@ -193,6 +193,15 @@ namespace EA.Iws.Web.Areas.AdminExportNotificationMovements.Views.CaptureMovemen
         public static string ShipmentWasNotAccepted {
             get {
                 return ResourceManager.GetString("ShipmentWasNotAccepted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Partially.
+        /// </summary>
+        public static string ShipmentWasPartiallyAccepted {
+            get {
+                return ResourceManager.GetString("ShipmentWasPartiallyAccepted", resourceCulture);
             }
         }
         

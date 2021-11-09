@@ -3,6 +3,7 @@
     using System;
     using System.Threading.Tasks;
     using Core.ComponentRegistration;
+    using EA.Iws.Core.Shared;
     using Prsd.Core;
 
     [AutoRegister]
@@ -20,7 +21,9 @@
 
         public async Task<MovementRejection> Reject(Guid movementId,
             DateTime rejectionDate,
-            string reason)
+            string reason,
+            decimal? quantity,
+            ShipmentQuantityUnits? unit)
         {
             var movement = await movementRepository.GetById(movementId);
 
@@ -34,7 +37,7 @@
             }
 
             var movementRejection = movement.Reject(rejectionDate,
-                reason);
+                reason, quantity, unit);
 
             movementRejectionRepository.Add(movementRejection);
 

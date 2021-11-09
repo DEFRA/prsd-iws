@@ -7,6 +7,7 @@
     using Core.Authorization.Permissions;
     using Core.Movement;
     using Core.Shared;
+    using EA.Iws.Requests.Movement.PartialReject;
     using Infrastructure;
     using Infrastructure.Authorization;
     using Prsd.Core.Mediator;
@@ -136,38 +137,49 @@
 
         private async Task SaveMovementData(Guid movementId, CaptureViewModel model, Guid notificationId)
         {
-            if (model.Receipt.IsComplete() && !model.IsReceived && !model.IsRejected)
+            if (model.Receipt.ShipmentTypes == ShipmentType.Accepted)
             {
-                if (!model.Receipt.WasShipmentAccepted)
-                {
-                    await mediator.SendAsync(new RecordRejectionInternal(movementId,
-                        model.Receipt.ReceivedDate.Date.Value,
-                        model.Receipt.RejectionReason));
+                await mediator.SendAsync(new RecordReceiptInternal(movementId,
+                    model.Receipt.ReceivedDate.Date.Value,
+                    model.Receipt.ActualQuantity.Value,
+                    model.Receipt.ActualUnits.Value));
 
-                    await this.auditService.AddMovementAudit(this.mediator,
-                        notificationId, model.ShipmentNumber.Value,
-                        User.GetUserId(),
-                        MovementAuditType.Rejected);
-                }
-                else
-                {
-                    await mediator.SendAsync(new RecordReceiptInternal(movementId,
-                        model.Receipt.ReceivedDate.Date.Value,
-                        model.Receipt.ActualQuantity.Value,
-                        model.Receipt.Units.Value));
+                await this.auditService.AddMovementAudit(this.mediator,
+                    notificationId, model.ShipmentNumber.Value,
+                    User.GetUserId(),
+                    MovementAuditType.Received);
+            }
+            else if (model.Receipt.ShipmentTypes == ShipmentType.Rejected)
+            {
+                await mediator.SendAsync(new RecordRejectionInternal(movementId,
+                    model.Receipt.ReceivedDate.Date.Value,
+                    model.Receipt.RejectionReason,
+                    model.Receipt.RejectedQuantity,
+                    model.Receipt.RejectedUnits));
 
-                    await this.auditService.AddMovementAudit(this.mediator,
-                        notificationId, model.ShipmentNumber.Value,
-                        User.GetUserId(),
-                        MovementAuditType.Received);
-                }
+                await this.auditService.AddMovementAudit(this.mediator,
+                    notificationId, model.ShipmentNumber.Value,
+                    User.GetUserId(),
+                    MovementAuditType.Rejected);
+            }
+            else
+            {
+                await mediator.SendAsync(new RecordPartialRejectionInternal(movementId,
+                                                                            model.Receipt.ReceivedDate.Date.Value,
+                                                                            model.Receipt.RejectionReason,
+                                                                            model.Receipt.ActualQuantity.Value,
+                                                                            model.Receipt.ActualUnits.Value,
+                                                                            model.Receipt.RejectedQuantity.Value,
+                                                                            model.Receipt.RejectedUnits.Value));
+
+                await this.auditService.AddMovementAudit(this.mediator,
+                                                         notificationId,
+                                                         model.ShipmentNumber.Value,
+                                                         User.GetUserId(),
+                                                         MovementAuditType.PartiallyRejected);
             }
 
-            if (model.Recovery.IsComplete()
-                && (model.Receipt.IsComplete() || model.IsReceived)
-                && !model.IsOperationCompleted
-                && !model.IsRejected
-                && model.Receipt.WasShipmentAccepted)
+            if (model.Recovery.IsComplete() && !model.IsOperationCompleted)
             {
                 await mediator.SendAsync(new RecordOperationCompleteInternal(movementId,
                     model.Recovery.RecoveryDate.Date.Value));
@@ -197,10 +209,10 @@
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> ChangeShipment(Guid id, int? shipmentNumber = null, int? newShipmentNumber = null)
-        {          
+        {
             if (newShipmentNumber.HasValue)
             {
-               var movementId = await mediator.SendAsync(new GetMovementIdIfExists(id, newShipmentNumber.Value));
+                var movementId = await mediator.SendAsync(new GetMovementIdIfExists(id, newShipmentNumber.Value));
 
                 if (movementId.HasValue)
                 {
@@ -215,8 +227,8 @@
             {
                 if (shipmentNumber.HasValue)
                 {
-                   var movementId = await mediator.SendAsync(new GetMovementIdIfExists(id, shipmentNumber.Value));
-                   if (movementId.HasValue)
+                    var movementId = await mediator.SendAsync(new GetMovementIdIfExists(id, shipmentNumber.Value));
+                    if (movementId.HasValue)
                     {
                         return RedirectToAction("Edit", new { movementId = movementId.Value });
                     }

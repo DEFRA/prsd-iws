@@ -1319,6 +1319,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>CancelViewModelResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Areas\AdminExportNotificationMovements\ViewModels\Enums\ShipmentType.cs" />
     <Compile Include="Areas\AdminExportNotificationMovements\ViewModels\ShipmentAudit\ShipmentAuditViewModel.cs" />
     <Compile Include="Areas\AdminExportNotificationMovements\Views\Cancel\CancelResources.Designer.cs">
       <AutoGen>True</AutoGen>

@@ -124,8 +124,8 @@
             }
 
             NotificationType = data.NotificationType;
-            IsRejected = data.IsRejected;
-            IsReceived = data.IsReceived;
+            //IsRejected = data.IsRejected;
+            //IsReceived = data.IsReceived;
             IsOperationCompleted = data.IsOperationCompleted;
             ActualQuantity = data.ActualQuantity;
             ReceivedDate = data.ReceiptDate;
