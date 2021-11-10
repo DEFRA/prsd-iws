@@ -151,13 +151,13 @@
     <value>Please enter a shipment number</value>
   </data>
   <data name="PrenotificationDateLabel" xml:space="preserve">
-    <value>Paperwork Uploaded</value>
+    <value>Prenotification date</value>
   </data>
   <data name="PrenotificationDateRequired" xml:space="preserve">
-    <value>Please tick the box or enter paperwork uploaded received date</value>
+    <value>Please tick the box or enter prenotification received date</value>
   </data>
   <data name="PrenotifictaionDateInfuture" xml:space="preserve">
-    <value>The "paperwork uploaded" cannot be in the future. Please enter a different date.</value>
+    <value>The "prenotification date" cannot be in the future. Please enter a different date.</value>
   </data>
   <data name="QuantityRequired" xml:space="preserve">
     <value>Please provide the actual quantity</value>

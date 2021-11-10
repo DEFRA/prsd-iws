@@ -30,17 +30,13 @@
 
             var query = from notification
                 in importNotificationContext.ImportNotifications
-                join importer in importNotificationContext.Importers on notification.Id equals importer.ImportNotificationId
+                join importer in importNotificationContext.Importers on notification.Id equals importer.ImportNotificationId into ni
+                from importer in ni.DefaultIfEmpty()
                 where (notification.CompetentAuthority == userCompetentAuthority && 
                        (notification.NotificationNumber.ToLower().Replace(" ", string.Empty).Contains(searchTerm.ToLower().Replace(" ", string.Empty)) || 
                         importer.Name.ToLower().Contains(searchTerm.ToLower())))
-                from assessment
-                in importNotificationContext.ImportNotificationAssessments
-                    .Where(a => a.NotificationApplicationId == notification.Id)
-                from exporter
-                    in importNotificationContext.Exporters
-                    .Where(e => e.ImportNotificationId == notification.Id)
-                .DefaultIfEmpty()
+                from assessment in importNotificationContext.ImportNotificationAssessments.Where(a => a.NotificationApplicationId == notification.Id)
+                from exporter in importNotificationContext.Exporters.Where(e => e.ImportNotificationId == notification.Id).DefaultIfEmpty()
                 select new
                 {
                     Notification = notification,

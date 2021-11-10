@@ -11,9 +11,15 @@ namespace EA.Iws.Domain.Reports
 
         public string Exporter { get; protected set; }
 
+        public BusinessType NotifierCompanyType { get; protected set; }
+
         public string Importer { get; protected set; }
 
+        public BusinessType ConsigneeCompanyType { get; protected set; }
+
         public string Facility { get; protected set; }
+
+        public BusinessType FacilityCompanyType { get; protected set; }
 
         public string BaselOecdCode { get; protected set; }
 
@@ -25,7 +31,7 @@ namespace EA.Iws.Domain.Reports
 
         public DateTime? ConsentTo { get; protected set; }
 
-        public DateTime? PaperworkUploaded { get; protected set; }
+        public DateTime? PrenotificationDate { get; protected set; }
 
         public DateTime? ReceivedDate { get; protected set; }
 
@@ -62,7 +68,5 @@ namespace EA.Iws.Domain.Reports
         public string HCode { get; protected set; }
 
         public string UNClass { get; protected set; }
-
-        public BusinessType CompanyType { get; protected set; }
     }
 }

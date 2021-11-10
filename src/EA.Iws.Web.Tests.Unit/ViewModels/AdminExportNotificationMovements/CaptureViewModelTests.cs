@@ -55,10 +55,10 @@
         }
 
         [Fact]
-        public void ActualShipmentDateNotBeforePrenotificationDate()
+        public void ActualShipmentDateCanBeBeforePrenotificationDate()
         {
             var model = CreateViewModelForActualDate(31, 5, 2016, false);
-            Assert.NotEmpty(ViewModelValidator.ValidateViewModel(model));
+            Assert.Empty(ViewModelValidator.ValidateViewModel(model));
         }
 
         [Fact]

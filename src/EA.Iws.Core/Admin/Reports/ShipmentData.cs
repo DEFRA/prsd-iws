@@ -13,13 +13,19 @@
         [DisplayName("Notifier")]
         public string Exporter { get; set; }
 
-        [DisplayName("Company Type")]
-        public string CompanyType { get; set; }
+        [DisplayName("Notifier Company Type")]
+        public string NotifierCompanyType { get; set; }
 
         [DisplayName("Consignee")]
         public string Importer { get; set; }
 
+        [DisplayName("Consignee Company Type")]
+        public string ConsigneeCompanyType { get; set; }
+
         public string Facility { get; set; }
+
+        [DisplayName("Facility Company Type")]
+        public string FacilityCompanyType { get; set; }
 
         [DisplayName("Basel/OECD Code and Description")]
         public string BaselOecdCode { get; set; }
@@ -32,7 +38,7 @@
 
         public DateTime? ConsentValidTo { get; set; }
 
-        public DateTime? PaperworkUploaded { get; set; }
+        public DateTime? PrenotificationDate { get; set; }
 
         [DisplayName("Shipment Received Date")]
         public DateTime? ReceivedDate { get; set; }

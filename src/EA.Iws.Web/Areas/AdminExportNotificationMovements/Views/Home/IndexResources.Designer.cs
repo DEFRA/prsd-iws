@@ -250,7 +250,7 @@ namespace EA.Iws.Web.Areas.AdminExportNotificationMovements.Views.Home {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Paperwork uploaded.
+        ///   Looks up a localized string similar to Prenotified.
         /// </summary>
         public static string SummaryTablePrenotified {
             get {
