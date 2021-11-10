@@ -26,10 +26,10 @@
         </div>
 
         <div class="overview-block-element">
-            @Resource.OrganisationTypeTitle
+            @Resource.OrganisationTypeTitle:
             @EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(Model.Details.Exporter.BusinessType)
             <br />
-            @Resource.CompanyRegistrationTitle
+            @Resource.CompanyRegistrationTitle:
             @Html.DisplayFor(m => m.Details.Exporter.RegistrationNumber)
         </div>
 

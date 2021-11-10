@@ -181,7 +181,7 @@
     <value>No.</value>
   </data>
   <data name="SummaryTablePrenotified" xml:space="preserve">
-    <value>Paperwork uploaded</value>
+    <value>Prenotified</value>
   </data>
   <data name="SummaryTableQuantity" xml:space="preserve">
     <value>Quantity</value>

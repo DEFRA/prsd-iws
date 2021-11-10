@@ -1,4 +1,5 @@
-﻿@model EA.Iws.Web.Areas.ImportNotification.ViewModels.Home.SummaryTableContainerViewModel
+﻿@using Resource = EA.Iws.Web.Areas.ImportNotification.Views.Home.IndexResources
+@model EA.Iws.Web.Areas.ImportNotification.ViewModels.Home.SummaryTableContainerViewModel
 
 <div class="overview-block">
     @if (Model.Details.Importer != null && !Model.Details.Importer.IsEmpty())
@@ -26,10 +27,10 @@
         </div>
 
         <div class="overview-block-element">
-            Organisation type:
+            @Resource.OrganisationTypeTitle:
             @EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(Model.Details.Importer.BusinessType)
             <br />
-            Company registration:
+            @Resource.CompanyRegistrationTitle:
             @Html.DisplayFor(m => m.Details.Importer.RegistrationNumber)
         </div>
 

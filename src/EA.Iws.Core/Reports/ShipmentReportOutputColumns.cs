@@ -9,13 +9,19 @@
         [Display(Name = "Notifier")]
         Exporter,
 
-        [Display(Name = "Company type")]
-        CompanyType,
+        [Display(Name = "Notifier Company Type")]
+        NotifierCompanyType,
 
         [Display(Name = "Consignee")]
         Importer,
 
+        [Display(Name = "Consignee Company Type")]
+        ConsigneeCompanyType,
+
         Facility,
+
+        [Display(Name = "Facility Company Type")]
+        FacilityCompanyType,
 
         [Display(Name = "Basel/OECD Code and Description")]
         BaselOecdCode,
@@ -32,8 +38,8 @@
         [Display(Name = "Consent Valid To")]
         ConsentValidTo,
 
-        [Display(Name = "Paperwork Uploaded")]
-        PaperworkUploaded,
+        [Display(Name = "Prenotification Date")]
+        PrenotificationDate,
 
         [Display(Name = "Shipment Received Date")]
         ReceivedDate,

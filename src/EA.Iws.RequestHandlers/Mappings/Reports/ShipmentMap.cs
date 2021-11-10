@@ -21,7 +21,7 @@
             return new ShipmentData
             {
                 Importer = source.Importer,
-                PaperworkUploaded = source.PaperworkUploaded,
+                PrenotificationDate = source.PrenotificationDate,
                 ReceivedDate = source.ReceivedDate,
                 NotificationNumber = source.NotificationNumber,
                 Exporter = source.Exporter,
@@ -51,7 +51,9 @@
                 UNClass = source.UNClass,
                 YCode = source.YCode,
                 ShipmentStatus = source.Status,
-                CompanyType = source.CompanyType.ToString()
+                NotifierCompanyType = source.NotifierCompanyType.ToString(),
+                ConsigneeCompanyType = source.ConsigneeCompanyType.ToString(),
+                FacilityCompanyType = source.FacilityCompanyType.ToString()
             };
         }
 
@@ -117,13 +119,13 @@
 
         private bool GetWasPrenotifiedThreeWorkingDaysBeforeActualDate(Shipment source, UKCompetentAuthority competentAuthority)
         {
-            if (!source.PaperworkUploaded.HasValue
+            if (!source.PrenotificationDate.HasValue
                 || !source.ActualDateOfShipment.HasValue)
             {
                 return false;
             }
 
-            return workingDayCalculator.GetWorkingDays(source.PaperworkUploaded.Value,
+            return workingDayCalculator.GetWorkingDays(source.PrenotificationDate.Value,
                 source.ActualDateOfShipment.Value,
                 false,
                 competentAuthority) >= 3;

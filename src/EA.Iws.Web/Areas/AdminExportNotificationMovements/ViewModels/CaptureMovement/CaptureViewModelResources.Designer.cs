@@ -161,7 +161,7 @@ namespace EA.Iws.Web.Areas.AdminExportNotificationMovements.ViewModels.CaptureMo
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Paperwork Uploaded.
+        ///   Looks up a localized string similar to Prenotification date.
         /// </summary>
         public static string PrenotificationDateLabel {
             get {
@@ -170,7 +170,7 @@ namespace EA.Iws.Web.Areas.AdminExportNotificationMovements.ViewModels.CaptureMo
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Please tick the box or enter paperwork uploaded received date.
+        ///   Looks up a localized string similar to Please tick the box or enter prenotification received date.
         /// </summary>
         public static string PrenotificationDateRequired {
             get {
@@ -179,7 +179,7 @@ namespace EA.Iws.Web.Areas.AdminExportNotificationMovements.ViewModels.CaptureMo
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The &quot;paperwork uploaded&quot; cannot be in the future. Please enter a different date..
+        ///   Looks up a localized string similar to The &quot;prenotification date&quot; cannot be in the future. Please enter a different date..
         /// </summary>
         public static string PrenotifictaionDateInfuture {
             get {
