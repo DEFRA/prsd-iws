@@ -38,7 +38,7 @@
                     [ActualDateOfShipment],
                     [ConsentFrom],
                     [ConsentTo],
-                    [PrenotificationDate] AS [PaperworkUploaded],
+                    [PrenotificationDate],
                     [ReceivedDate],
                     [CompletedDate],
                     [QuantityReceived],
