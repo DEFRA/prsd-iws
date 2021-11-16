@@ -50,7 +50,10 @@
                 HCode = source.HCode,
                 UNClass = source.UNClass,
                 YCode = source.YCode,
-                NotificationStatus = source.Status
+                ShipmentStatus = source.Status,
+                NotifierCompanyType = source.NotifierCompanyType.ToString(),
+                ConsigneeCompanyType = source.ConsigneeCompanyType.ToString(),
+                FacilityCompanyType = source.FacilityCompanyType.ToString()
             };
         }
 

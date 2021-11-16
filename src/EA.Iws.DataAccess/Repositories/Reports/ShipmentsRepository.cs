@@ -28,8 +28,11 @@
                     [NotificationNumber],
                     [ImportOrExport],
                     [Exporter],
+                    [NotifierCompanyType],
                     [Importer],
+                    [ConsigneeCompanyType],
                     [Facility],
+                    [FacilityCompanyType],
                     [BaselOecdCode],
                     [ShipmentNumber],
                     [ActualDateOfShipment],
@@ -67,7 +70,7 @@
                 {0}
                 ORDER BY
                     [NotificationNumber],
-                    [ShipmentNumber]";            
+                    [ShipmentNumber]";
 
             return await context.Database.SqlQuery<Shipment>(string.Format(query, textFilter),
                 new SqlParameter("@from", from),

@@ -10,6 +10,7 @@
     using Core.Shared;
     using Domain.Movement;
     using Domain.Security;
+    using EA.Prsd.Core;
 
     internal class MovementRepository : IMovementRepository
     {
@@ -117,7 +118,7 @@
             await notificationAuthorization.EnsureAccessAsync(notificationId);
 
             var movements = await context.Movements
-                .Where(m => 
+                .Where(m =>
                     m.NotificationId == notificationId
                     && movementIds.Contains(m.Id))
                 .ToArrayAsync();
@@ -135,6 +136,32 @@
                     && (m.Status == MovementStatus.Submitted
                         || m.Status == MovementStatus.Received
                         || m.Status == MovementStatus.New
+                        || m.Status == MovementStatus.Captured)).ToArrayAsync();
+
+            return currentActiveLoads;
+        }
+
+        public async Task<IEnumerable<Movement>> GetAllActiveMovementsForReceiptAndReceiptRecovery(Guid notificationId)
+        {
+            await notificationAuthorization.EnsureAccessAsync(notificationId);
+
+            var currentReceiptRecoveryMovements = await context.Movements
+                .Where(m =>
+                    m.NotificationId == notificationId
+                    && ((m.Status == MovementStatus.Submitted && m.Date < SystemTime.UtcNow)
+                        || m.Status == MovementStatus.Captured)).ToArrayAsync();
+
+            return currentReceiptRecoveryMovements;
+        }
+
+        public async Task<IEnumerable<Movement>> GetAllActiveMovementsForRecovery(Guid notificationId)
+        {
+            await notificationAuthorization.EnsureAccessAsync(notificationId);
+
+            var currentActiveLoads = await context.Movements
+                .Where(m =>
+                    m.NotificationId == notificationId
+                    && (m.Status == MovementStatus.Received
                         || m.Status == MovementStatus.Captured)).ToArrayAsync();
 
             return currentActiveLoads;

@@ -1,6 +1,7 @@
 ﻿namespace EA.Iws.Domain.ImportNotification
 {
     using System;
+    using EA.Iws.Core.Shared;
     using Prsd.Core;
     using Prsd.Core.Domain;
 
@@ -10,7 +11,7 @@
         {        
         }
     
-        public Producer(Guid importNotificationId, string businessName, Address address, Contact contact, bool isOnlyProducer)
+        public Producer(Guid importNotificationId, string businessName, Address address, Contact contact, bool isOnlyProducer, BusinessType businessType, string registrationNumber)
         {
             Guard.ArgumentNotDefaultValue(() => importNotificationId, importNotificationId);
             Guard.ArgumentNotNullOrEmpty(() => businessName, businessName);
@@ -22,6 +23,8 @@
             Address = address;
             Contact = contact;
             IsOnlyProducer = isOnlyProducer;
+            Type = businessType;
+            RegistrationNumber = registrationNumber;
         }
 
         public Guid ImportNotificationId { get; private set; }
@@ -33,5 +36,9 @@
         public Contact Contact { get; private set; }
 
         public bool IsOnlyProducer { get; private set; }
+
+        public BusinessType Type { get; set; }
+
+        public string RegistrationNumber { get; set; }
     }
 }

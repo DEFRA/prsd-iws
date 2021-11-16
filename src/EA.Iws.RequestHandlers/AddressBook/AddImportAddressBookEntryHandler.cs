@@ -112,7 +112,17 @@
             var address = await GetAddress(producer.Address);
             var contact = GetContact(producer.Contact);
 
-            FinalBusiness business = FinalBusiness.CreateOtherBusiness(producer.BusinessName, notApplicable, null, notApplicable);
+            producer.RegistrationNumber = producer.RegistrationNumber == null ? notApplicable : producer.RegistrationNumber;
+            
+            FinalBusiness business;
+            if (producer.Type == Core.Shared.BusinessType.Other)
+            {
+                business = FinalBusiness.CreateOtherBusiness(producer.BusinessName, notApplicable, null, notApplicable);
+            }
+            else
+            {
+                business = FinalBusiness.CreateBusiness(producer.BusinessName, producer.Type, producer.RegistrationNumber, null);
+            }
 
             return new AddressBookRecord(address, business, contact);
         }
@@ -122,7 +132,17 @@
             var address = await GetAddress(exporter.Address);
             var contact = GetContact(exporter.Contact);
 
-            FinalBusiness business = FinalBusiness.CreateOtherBusiness(exporter.BusinessName, notApplicable, null, notApplicable);
+            exporter.RegistrationNumber = exporter.RegistrationNumber == null ? notApplicable : exporter.RegistrationNumber;
+
+            FinalBusiness business;
+            if (exporter.Type == Core.Shared.BusinessType.Other)
+            {
+                business = FinalBusiness.CreateOtherBusiness(exporter.BusinessName, notApplicable, null, notApplicable);
+            }
+            else
+            {
+                business = FinalBusiness.CreateBusiness(exporter.BusinessName, exporter.Type, exporter.RegistrationNumber, null);
+            }
             return new AddressBookRecord(address, business, contact);
         }
 

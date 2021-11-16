@@ -21,7 +21,7 @@
             this.userContext = userContext;
         }
 
-        public async Task<IEnumerable<ImportNotificationSearchResult>> SearchByNumber(string number)
+        public async Task<IEnumerable<ImportNotificationSearchResult>> SearchBySearchTerm(string searchTerm)
         {
             var userCompetentAuthority = await context.InternalUsers
                 .Where(u => u.UserId == userContext.UserId.ToString())
@@ -30,19 +30,13 @@
 
             var query = from notification
                 in importNotificationContext.ImportNotifications
-                where notification.NotificationNumber.Replace(" ", string.Empty).Contains(number.Replace(" ", string.Empty))
-                    && notification.CompetentAuthority == userCompetentAuthority
-                from assessment 
-                    in importNotificationContext.ImportNotificationAssessments
-                        .Where(a => a.NotificationApplicationId == notification.Id)
-                from exporter
-                    in importNotificationContext.Exporters
-                    .Where(e => e.ImportNotificationId == notification.Id)
-                .DefaultIfEmpty()
-                from importer
-                    in importNotificationContext.Importers
-                    .Where(i => i.ImportNotificationId == notification.Id)
-                    .DefaultIfEmpty()
+                join importer in importNotificationContext.Importers on notification.Id equals importer.ImportNotificationId into ni
+                from importer in ni.DefaultIfEmpty()
+                where (notification.CompetentAuthority == userCompetentAuthority && 
+                       (notification.NotificationNumber.ToLower().Replace(" ", string.Empty).Contains(searchTerm.ToLower().Replace(" ", string.Empty)) || 
+                        importer.Name.ToLower().Contains(searchTerm.ToLower())))
+                from assessment in importNotificationContext.ImportNotificationAssessments.Where(a => a.NotificationApplicationId == notification.Id)
+                from exporter in importNotificationContext.Exporters.Where(e => e.ImportNotificationId == notification.Id).DefaultIfEmpty()
                 select new
                 {
                     Notification = notification,

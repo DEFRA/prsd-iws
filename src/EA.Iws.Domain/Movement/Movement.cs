@@ -247,10 +247,6 @@
             Guard.ArgumentNotDefaultValue(() => dateReceived, dateReceived);
             Guard.ArgumentNotNull(() => quantity, quantity);
 
-            if (dateReceived < Date)
-            {
-                throw new InvalidOperationException("The when the waste was received date cannot be before the actual date of shipment.");
-            }
             if (dateReceived > SystemTime.UtcNow.Date)
             {
                 throw new InvalidOperationException("The when the waste was received date cannot be in the future.");

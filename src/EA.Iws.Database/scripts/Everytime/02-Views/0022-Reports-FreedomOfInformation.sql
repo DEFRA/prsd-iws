@@ -231,10 +231,10 @@ SELECT
         MOR.[Date] AS [MovementCompletedDate],
         MR.[Unit] AS [MovementQuantityReceviedUnitId],
         MR.[Quantity] AS [MovementQuantityReceived],
-		NULL AS [NotifierType],
+		ET.[Description] AS [NotifierType],
 		E.[ContactName] As [NotifierContactName],
 		E.[Email] as [NotifierContactEmail],
-		NULL AS [ProducerType],
+		PT.[Description] AS [ProducerType],
 		P.[Email] AS [ProducerContactEmail],
 		ETS.TransitStates AS [TransitStates],
 		IT.[Description] AS [ImporterType],
@@ -279,7 +279,9 @@ SELECT
             ORDER BY	F1.IsActualSiteOfTreatment DESC
         )
     INNER JOIN [Lookup].[Country] AS C_F ON F.[CountryId] = C_F.[Id]
-	INNER JOIN [Lookup].[BusinessType] IT ON IT.Id = I.[Type] 
+	INNER JOIN [Lookup].[BusinessType] ET ON ET.Id = E.[Type]
+	INNER JOIN [Lookup].[BusinessType] PT ON PT.Id = P.[Type]
+	INNER JOIN [Lookup].[BusinessType] IT ON IT.Id = I.[Type]
     INNER JOIN [ImportNotification].[TransportRoute] TR ON TR.ImportNotificationId = N.Id
     INNER JOIN [ImportNotification].[StateOfExport] SE ON SE.TransportRouteId = TR.Id
     INNER JOIN [ImportNotification].[StateOfImport] SI ON SI.TransportRouteId = TR.Id
