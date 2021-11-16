@@ -36,5 +36,9 @@
         Task<IEnumerable<Movement>> GetRejectedMovements(Guid notificationId);
 
         Task SetMovementReceiptAndRecoveryData(MovementReceiptAndRecoveryData data, Guid createdBy);
+
+        Task<IEnumerable<Movement>> GetAllActiveMovementsForReceiptAndReceiptRecovery(Guid notificationId);
+
+        Task<IEnumerable<Movement>> GetAllActiveMovementsForRecovery(Guid notificationId);
     }
 }

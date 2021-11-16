@@ -95,9 +95,11 @@
             return new Producer
             {
                 Address = ConvertAddress(notification.Producer.Address),
+                BusinessType = notification.Producer.Type,
                 Name = notification.Producer.BusinessName,
                 Contact = Contact.FromDraftContact(notification.Producer.Contact),
-                AreMultiple = notification.Producer.AreMultiple
+                AreMultiple = notification.Producer.AreMultiple,
+                RegistrationNumber = notification.Producer.RegistrationNumber
             };
         }
 
@@ -106,8 +108,10 @@
             return new Exporter
             {
                 Address = ConvertAddress(notification.Exporter.Address),
+                BusinessType = notification.Exporter.Type,
                 Name = notification.Exporter.BusinessName,
-                Contact = Contact.FromDraftContact(notification.Exporter.Contact)
+                Contact = Contact.FromDraftContact(notification.Exporter.Contact),
+                RegistrationNumber = notification.Exporter.RegistrationNumber
             };
         }
 

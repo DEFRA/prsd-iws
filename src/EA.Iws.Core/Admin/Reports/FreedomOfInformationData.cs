@@ -27,6 +27,7 @@ namespace EA.Iws.Core.Admin.Reports
 
         public string NotifierContactName { get; set; }
 
+        [DisplayName("Notifier contact email address")]
         public string NotifierContactEmail { get; set; }
 
         [DisplayName("Producer")]
@@ -38,6 +39,7 @@ namespace EA.Iws.Core.Admin.Reports
 
         public string ProducerType { get; set; }
 
+        [DisplayName("Producer contact email address")]
         public string ProducerContactEmail { get; set; }
 
         [DisplayName("Point of Exit")]

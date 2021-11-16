@@ -35,5 +35,17 @@
 
             Assert.NotNull(results);
         }
+
+        [Fact]
+        public async Task CanPerformAdvancedSearchImportNotifications()
+        {
+            var advancedSearchRepository = new AdvancedSearchRepository(context);
+
+            var criteria = new AdvancedSearchCriteria();
+
+            var results = await advancedSearchRepository.SearchImportNotificationsByCriteria(criteria, UKCompetentAuthority.England);
+
+            Assert.NotNull(results);
+        }
     }
 }

@@ -149,12 +149,13 @@
         }
 
         [Fact]
-        public async Task ActualDateBeforePrenotificationDate_Throws()
+        public async Task ActualDateCanBeBeforePrenotificationDate()
         {
             A.CallTo(() => validator.Validate(NotificationId, A<int>.Ignored))
                 .Returns(true);
 
-            await Assert.ThrowsAsync<InvalidOperationException>(() => factory.Create(NotificationId, 56, Today, PastDate, false));
+            var result = await factory.Create(NotificationId, 58, PastDate, Today, false);
+            Assert.True(result.Date > result.PrenotificationDate);
         }
 
         [Fact]

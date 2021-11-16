@@ -11,9 +11,15 @@ namespace EA.Iws.Domain.Reports
 
         public string Exporter { get; protected set; }
 
+        public BusinessType NotifierCompanyType { get; protected set; }
+
         public string Importer { get; protected set; }
 
+        public BusinessType ConsigneeCompanyType { get; protected set; }
+
         public string Facility { get; protected set; }
+
+        public BusinessType FacilityCompanyType { get; protected set; }
 
         public string BaselOecdCode { get; protected set; }
 

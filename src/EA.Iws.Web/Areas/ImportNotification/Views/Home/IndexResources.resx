@@ -237,4 +237,10 @@
   <data name="WasteTypeTitle" xml:space="preserve">
     <value>Type of waste</value>
   </data>
+  <data name="CompanyRegistrationTitle" xml:space="preserve">
+    <value>Company registration</value>
+  </data>
+  <data name="OrganisationTypeTitle" xml:space="preserve">
+    <value>Organisation type</value>
+  </data>
 </root>

@@ -12,11 +12,11 @@
     internal class GetSubmittedMovementsByNotificationIdHandler : IRequestHandler<GetSubmittedMovementsByNotificationId, IList<MovementData>>
     {
         private readonly IMovementRepository movementRepository;
-        private readonly IMap<Movement, MovementData> mapper;
+        private readonly IMapper mapper;
 
         public GetSubmittedMovementsByNotificationIdHandler(
             IMovementRepository movementRepository,
-            IMap<Movement, MovementData> mapper)
+            IMapper mapper)
         {
             this.movementRepository = movementRepository;
             this.mapper = mapper;
@@ -24,9 +24,9 @@
 
         public async Task<IList<MovementData>> HandleAsync(GetSubmittedMovementsByNotificationId message)
         {
-            var movements = await movementRepository.GetMovementsByStatus(message.Id, MovementStatus.Submitted);
+            var movements = await movementRepository.GetAllActiveMovementsForReceiptAndReceiptRecovery(message.Id);
 
-            return movements.Where(m => m.HasShipped).Select(mapper.Map).ToArray();
+            return movements.Select(m => mapper.Map<MovementData>(m)).ToList();
         }
     }
 }

@@ -98,6 +98,7 @@
     <Compile Include="Admin\NotificationAssessment\UpdateExportAccountManagementCommentsHandlerTests.cs" />
     <Compile Include="Admin\NotificationAssessment\UpdateImportAccountManagementCommentsHandlerTests.cs" />
     <Compile Include="Admin\Reports\GetProducerReportHandlerTests.cs" />
+    <Compile Include="Admin\SearchImportNotificationsHandlerTests.cs" />
     <Compile Include="Admin\UserAdministration\CreateInternalUserHandlerTests.cs" />
     <Compile Include="Admin\FinancialGuarantee\ReleaseFinancialGuaranteeHandlerTests.cs" />
     <Compile Include="Admin\FinancialGuarantee\RefuseFinancialGuaranteeHandlerTests.cs" />
@@ -154,6 +155,8 @@
     <Compile Include="Movement\DoesQuantityReceivedExceedToleranceHandlerTests.cs" />
     <Compile Include="Movement\Edit\UpdateMovementDateHandlerTests.cs" />
     <Compile Include="Movement\GetMovementAuditByNotificationIdHandlerTests.cs" />
+    <Compile Include="Movement\GetSubmittedMovementsByNotificationIdHandlerTests.cs" />
+    <Compile Include="Movement\GetSubmittedMovementsForRecoveryByNotificationIdHandlerTests.cs" />
     <Compile Include="Movement\GetSubmittedMovementsHandlerTests.cs" />
     <Compile Include="Movement\GetNotificationIdByMovementIdHandlerTests.cs" />
     <Compile Include="Movement\Receive\SetMovementAcceptedHandlerTests.cs" />
@@ -212,6 +215,7 @@
     <Compile Include="Organisations\GetOrganisationDetailsByUserHandlerTests.cs" />
     <Compile Include="Organisations\UpdateOrganisationDetailsHandlerTests.cs" />
     <Compile Include="RequestAuthorizationAttributeTests.cs" />
+    <Compile Include="TestImportNotificationContext.cs" />
     <Compile Include="TransportRoute\GetCompetentAuthoritiesAndEntryPointsByCountryIdHandlerTests.cs" />
     <Compile Include="WasteCodes\GetWasteCodesByTypeHandlerTests.cs" />
     <Compile Include="WasteCodes\EditHCodesHandlerTests.cs" />

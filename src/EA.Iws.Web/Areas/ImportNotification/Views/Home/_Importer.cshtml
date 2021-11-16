@@ -1,12 +1,13 @@
-﻿@model EA.Iws.Web.Areas.ImportNotification.ViewModels.Home.SummaryTableContainerViewModel
+﻿@using Resource = EA.Iws.Web.Areas.ImportNotification.Views.Home.IndexResources
+@model EA.Iws.Web.Areas.ImportNotification.ViewModels.Home.SummaryTableContainerViewModel
 
 <div class="overview-block">
     @if (Model.Details.Importer != null && !Model.Details.Importer.IsEmpty())
-	{
-		if (Model.CanEditContactDetails)
-		{
-			<div class="change-answer">@Html.ActionLink("Amend importer details", "Importer", "EditContact", new { id = Model.Details.Id }, null)</div>
-		}
+    {
+        if (Model.CanEditContactDetails)
+        {
+            <div class="change-answer">@Html.ActionLink("Amend importer details", "Importer", "EditContact", new { id = Model.Details.Id }, null)</div>
+        }
 
         <div class="overview-block-element">
             @if (!string.IsNullOrWhiteSpace(Model.Details.Importer.Name))
@@ -23,6 +24,14 @@
                 @Html.DisplayFor(m => m.Details.Importer.Address.Country)
             }
 
+        </div>
+
+        <div class="overview-block-element">
+            @Resource.OrganisationTypeTitle:
+            @EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(Model.Details.Importer.BusinessType)
+            <br />
+            @Resource.CompanyRegistrationTitle:
+            @Html.DisplayFor(m => m.Details.Importer.RegistrationNumber)
         </div>
 
         if (!Model.Details.Importer.Contact.IsEmpty())
