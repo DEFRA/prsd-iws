@@ -141,7 +141,7 @@
             return currentActiveLoads;
         }
 
-        public async Task<IEnumerable<Movement>> GetAllActiveMovementsForReceiptAndReceiptRecovery(Guid notificationId)
+        public async Task<IEnumerable<Movement>> GetAllActiveMovementsForReceipt(Guid notificationId)
         {
             await notificationAuthorization.EnsureAccessAsync(notificationId);
 
@@ -159,12 +159,23 @@
             await notificationAuthorization.EnsureAccessAsync(notificationId);
 
             var currentActiveLoads = await context.Movements
-                .Where(m =>
-                    m.NotificationId == notificationId
-                    && (m.Status == MovementStatus.Received
-                        || m.Status == MovementStatus.Captured)).ToArrayAsync();
+                .Where(m => m.NotificationId == notificationId && m.Status == MovementStatus.Received).ToArrayAsync();
 
             return currentActiveLoads;
+        }
+
+        public async Task<IEnumerable<Movement>> GetAllActiveMovementsForReceiptAndRecovery(Guid notificationId)
+        {
+            await notificationAuthorization.EnsureAccessAsync(notificationId);
+
+            var currentReceiptRecoveryMovements = await context.Movements
+                .Where(m =>
+                    m.NotificationId == notificationId
+                    && ((m.Status == MovementStatus.Submitted && m.Date < SystemTime.UtcNow)
+                        || m.Status == MovementStatus.Captured
+                        || m.Status == MovementStatus.Received)).ToArrayAsync();
+
+            return currentReceiptRecoveryMovements;
         }
 
         public async Task<int> GetLatestMovementNumber(Guid notificationId)

@@ -155,6 +155,7 @@
     <Compile Include="Movement\DoesQuantityReceivedExceedToleranceHandlerTests.cs" />
     <Compile Include="Movement\Edit\UpdateMovementDateHandlerTests.cs" />
     <Compile Include="Movement\GetMovementAuditByNotificationIdHandlerTests.cs" />
+    <Compile Include="Movement\GetReceiptRecoveryMovementsByNotificationIdHandlerTests.cs" />
     <Compile Include="Movement\GetSubmittedMovementsByNotificationIdHandlerTests.cs" />
     <Compile Include="Movement\GetSubmittedMovementsForRecoveryByNotificationIdHandlerTests.cs" />
     <Compile Include="Movement\GetSubmittedMovementsHandlerTests.cs" />

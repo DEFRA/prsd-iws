@@ -37,8 +37,10 @@
 
         Task SetMovementReceiptAndRecoveryData(MovementReceiptAndRecoveryData data, Guid createdBy);
 
-        Task<IEnumerable<Movement>> GetAllActiveMovementsForReceiptAndReceiptRecovery(Guid notificationId);
+        Task<IEnumerable<Movement>> GetAllActiveMovementsForReceipt(Guid notificationId);
 
         Task<IEnumerable<Movement>> GetAllActiveMovementsForRecovery(Guid notificationId);
+
+        Task<IEnumerable<Movement>> GetAllActiveMovementsForReceiptAndRecovery(Guid notificationId);
     }
 }
