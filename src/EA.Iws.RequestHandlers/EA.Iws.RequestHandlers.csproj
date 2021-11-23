@@ -451,6 +451,7 @@
     <Compile Include="Movement\GetMovementsByIdsHandler.cs" />
     <Compile Include="Movement\GetNewMovementIdsByNotificationIdHandler.cs" />
     <Compile Include="Movement\GetNotificationNumberByMovementIdHandler.cs" />
+    <Compile Include="Movement\GetReceiptRecoveryMovementsByNotificationIdHandler.cs" />
     <Compile Include="Movement\IsAddedCancellableMovementValidHandler.cs" />
     <Compile Include="Movement\GetSubmittedPendingMovementsHandler.cs" />
     <Compile Include="Movement\Mappings\MovementAuditMap.cs" />

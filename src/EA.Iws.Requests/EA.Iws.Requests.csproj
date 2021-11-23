@@ -242,6 +242,7 @@
     <Compile Include="Movement\GetMovementsByIds.cs" />
     <Compile Include="Movement\GetNewMovementIdsByNotificationId.cs" />
     <Compile Include="Movement\GetNotificationNumberByMovementId.cs" />
+    <Compile Include="Movement\GetReceiptRecoveryMovementsByNotificationId.cs" />
     <Compile Include="Movement\IsAddedCancellableMovementValid.cs" />
     <Compile Include="Movement\GetSubmittedPendingMovements.cs" />
     <Compile Include="NotificationAssessment\AddCarrier.cs" />
