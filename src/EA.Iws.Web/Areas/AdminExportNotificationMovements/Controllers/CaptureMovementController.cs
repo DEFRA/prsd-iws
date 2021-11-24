@@ -198,6 +198,13 @@
                     StatsMarking = model.StatsMarking
                 });
             }
+            else if (!string.IsNullOrEmpty(model.StatsMarking))
+            {
+                await mediator.SendAsync(new SetMovementComments(movementId)
+                {
+                    StatsMarking = model.StatsMarking
+                });
+            }
         }
 
         [HttpGet]

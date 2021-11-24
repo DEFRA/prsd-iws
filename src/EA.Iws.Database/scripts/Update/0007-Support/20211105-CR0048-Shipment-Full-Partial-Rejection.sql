@@ -1,6 +1,6 @@
-﻿ALTER TABLE [Notification].[Movement] ADD [ShipmentType] INT NOT NULL DEFAULT 1;
+﻿INSERT INTO [Lookup].[MovementStatus] ([Id], [Status]) VALUES(8, 'PartiallyRejected')
 
-ALTER TABLE [Notification].[MovementRejection] ADD [RejectedQuantity] INT NULL;
+ALTER TABLE [Notification].[MovementRejection] ADD [RejectedQuantity] decimal(18,4) NULL;
 ALTER TABLE [Notification].[MovementRejection] ADD [RejectedUnit] INT NULL;
 
 CREATE TABLE [Notification].[MovementPartialRejection](

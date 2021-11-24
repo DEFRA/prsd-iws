@@ -36,11 +36,13 @@
 
         public NotificationType NotificationType { get; set; }
 
-        //public bool IsReceived { get; set; }
+        public bool IsReceived { get; set; }
 
         public bool IsOperationCompleted { get; set; }
 
-        //public bool IsRejected { get; set; }
+        public bool IsRejected { get; set; }
+
+        public bool IsPartiallyRejected { get; set; }
 
         [Display(Name = "HasComments", ResourceType = typeof(CaptureViewModelResources))]
         public bool HasComments { get; set; }
@@ -116,9 +118,10 @@
             }
 
             NotificationType = data.NotificationType;
-            //IsReceived = data.IsReceived;
+            IsReceived = data.IsReceived;
             IsOperationCompleted = data.IsOperationCompleted;
-            //IsRejected = data.IsRejected;
+            IsRejected = data.IsRejected;
+            IsPartiallyRejected = data.IsPartiallyRejected;
 
             Receipt = new ReceiptViewModel
             {
@@ -126,8 +129,11 @@
                 ReceivedDate = new MaskedDateInputViewModel(data.ReceiptDate),
                 ActualUnits = data.ReceiptUnits ?? data.NotificationUnits,
                 //WasShipmentAccepted = string.IsNullOrWhiteSpace(data.RejectionReason),
+                ShipmentTypes = data.IsReceived ? ShipmentType.Accepted : (data.IsRejected ? ShipmentType.Rejected : ShipmentType.Partially),
                 RejectionReason = data.RejectionReason,
-                PossibleUnits = data.PossibleUnits
+                PossibleUnits = data.PossibleUnits,
+                RejectedQuantity = data.RejectedQuantity,
+                RejectedUnits = data.RejectedUnit
             };
 
             Recovery = new RecoveryViewModel
@@ -179,7 +185,7 @@
             }
 
             //if (Receipt.IsComplete() && !Receipt.WasShipmentAccepted && Recovery.IsComplete())
-            if (Receipt.IsComplete() && Recovery.IsComplete())
+            if (Receipt.IsComplete() && Receipt.ShipmentTypes != ShipmentType.Accepted && Recovery.IsComplete())
             {
                 yield return new ValidationResult(string.Format(CaptureViewModelResources.RecoveryDateCannotBeEnteredForRejected, NotificationType),
                     new[] { "Recovery.RecoveryDate" });

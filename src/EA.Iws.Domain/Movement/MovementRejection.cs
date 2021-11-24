@@ -15,9 +15,9 @@
 
         public Guid? FileId { get; private set; }
 
-        public decimal? Quantity { get; set; }
+        public decimal? RejectedQuantity { get; set; }
 
-        public ShipmentQuantityUnits? Unit { get; set; }
+        public ShipmentQuantityUnits? RejectedUnit { get; set; }
 
         protected MovementRejection()
         {
@@ -34,8 +34,8 @@
             MovementId = movementId;
             Date = date;
             Reason = reason;
-            Quantity = quantity;
-            Unit = unit;
+            RejectedQuantity = quantity;
+            RejectedUnit = unit;
         }
 
         public void SetFile(Guid fileId)
