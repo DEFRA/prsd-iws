@@ -17,16 +17,19 @@
         private readonly INotificationApplicationRepository notificationApplicationRepository;
         private readonly IMovementRejectionRepository movementRejectionRepository;
         private readonly IShipmentInfoRepository shipmentInfoRepository;
+        private readonly IMovementPartialRejectionRepository movementPartialRejectionRepository;
 
         public GetMovementReceiptAndRecoveryDataHandler(IMovementRepository movementRepository, 
             INotificationApplicationRepository notificationApplicationRepository,
             IMovementRejectionRepository movementRejectionRepository,
-            IShipmentInfoRepository shipmentInfoRepository)
+            IShipmentInfoRepository shipmentInfoRepository,
+            IMovementPartialRejectionRepository movementPartialRejectionRepository)
         {
             this.movementRepository = movementRepository;
             this.notificationApplicationRepository = notificationApplicationRepository;
             this.movementRejectionRepository = movementRejectionRepository;
             this.shipmentInfoRepository = shipmentInfoRepository;
+            this.movementPartialRejectionRepository = movementPartialRejectionRepository;
         }
 
         public async Task<MovementReceiptAndRecoveryData> HandleAsync(GetMovementReceiptAndRecoveryData message)
@@ -36,6 +39,8 @@
             var notification = await notificationApplicationRepository.GetById(movement.NotificationId);
 
             var movementRejection = await movementRejectionRepository.GetByMovementIdOrDefault(movement.Id);
+
+            var movementPartialRejection = await movementPartialRejectionRepository.GetByMovementIdOrDefault(movement.Id);
 
             var shipmentInfo = await shipmentInfoRepository.GetByNotificationId(notification.Id);
 
@@ -59,7 +64,7 @@
                 data.ReceiptDate = movement.Receipt.Date;
                 data.ActualQuantity = movement.Receipt.QuantityReceived.Quantity;
                 data.ReceiptUnits = movement.Receipt.QuantityReceived.Units;
-                //data.IsReceived = true;
+                data.IsReceived = true;
             }
 
             if (movement.CompletedReceipt != null)
@@ -72,7 +77,19 @@
             {
                 data.RejectionReason = movementRejection.Reason;
                 data.ReceiptDate = movementRejection.Date;
-                //data.IsRejected = true;
+                data.RejectedQuantity = movementRejection.RejectedQuantity;
+                data.RejectedUnit = movementRejection.RejectedUnit;
+                data.IsRejected = true;
+            }
+
+            if (movementPartialRejection != null)
+            {
+                data.RejectionReason = movementPartialRejection.Reason;
+                data.ReceiptDate = movementPartialRejection.Date;
+                data.ActualQuantity = movementPartialRejection.ActualQuantity;
+                data.RejectedQuantity = movementPartialRejection.RejectedQuantity;
+                data.RejectedUnit = movementPartialRejection.RejectedUnit;
+                data.IsPartiallyRejected = true;
             }
 
             return data;

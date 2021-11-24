@@ -32,11 +32,13 @@
 
         public DateTime? OperationCompleteDate { get; set; }
 
-        //public bool IsReceived { get; set; }
+        public bool IsReceived { get; set; }
 
         public bool IsOperationCompleted { get; set; }
 
-        //public bool IsRejected { get; set; }
+        public bool IsRejected { get; set; }
+
+        public bool IsPartiallyRejected { get; set; }
 
         public MovementStatus Status { get; set; }
 
@@ -47,5 +49,9 @@
         public bool HasNoPrenotification { get; set; }
 
         public DateTime? RejectionDate { get; set; }
+
+        public decimal? RejectedQuantity { get; set; }
+
+        public ShipmentQuantityUnits? RejectedUnit { get; set; }
     }
 }

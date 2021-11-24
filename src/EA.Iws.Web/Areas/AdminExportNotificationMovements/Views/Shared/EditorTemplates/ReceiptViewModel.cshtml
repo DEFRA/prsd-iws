@@ -10,8 +10,7 @@
     </div>
 
     <div class="form-group">
-        @*@Html.LabelFor(m => m.WasShipmentAccepted, new { @class = "form-label-bold" })
-        @Html.Gds().ValidationMessageFor(m => m.WasShipmentAccepted)*@
+        @Html.Label(@Resource.ShipmentAcceptedLable, new { @class = "form-label-bold" })
 
         <div class="multiple-choice">
             @Html.RadioButtonFor(m => m.ShipmentTypes, ShipmentType.Accepted, new { id = "Accepted", @checked = true })

@@ -58,9 +58,9 @@
             {
                 return new SelectList(new[]
                 {
-                    "Illegal Shipment (WSR Table 5)",
-                    "Did not proceed as intended (Basel Table 9)",
-                    "Accident occurred during transport (Basel Table 10)"
+                    "Illegal Shipment",
+                    "Did not proceed as intended",
+                    "Accident occurred during transport"
                 });
             }
         }

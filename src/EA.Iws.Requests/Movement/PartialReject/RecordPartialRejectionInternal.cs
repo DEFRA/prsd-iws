@@ -24,7 +24,7 @@
         public ShipmentQuantityUnits RejectedUnits { get; private set; }
 
         public RecordPartialRejectionInternal(Guid movementId, 
-                                              DateTime receivedDate,
+                                              DateTime date,
                                               string reason,
                                               decimal actualQuantity, 
                                               ShipmentQuantityUnits actualUnits,
@@ -32,7 +32,7 @@
                                               ShipmentQuantityUnits rejectedUnits)
         {
             MovementId = movementId;
-            Date = receivedDate;
+            Date = date;
             Reason = reason;
             ActualQuantity = actualQuantity;
             ActualUnits = actualUnits;

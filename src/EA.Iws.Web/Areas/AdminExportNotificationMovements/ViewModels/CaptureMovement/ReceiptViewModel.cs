@@ -14,9 +14,6 @@
         [Display(Name = "ReceivedDateLabel", ResourceType = typeof(ReceiptViewModelResources))]
         public MaskedDateInputViewModel ReceivedDate { get; set; }
 
-        //[Display(Name = "WasShipmentAcceptedLabel", ResourceType = typeof(ReceiptViewModelResources))]
-        //public bool WasShipmentAccepted { get; set; }
-
         [Display(Name = "ActualQuantityLabel", ResourceType = typeof(ReceiptViewModelResources))]
         [IsValidNumber(14, ErrorMessageResourceName = "MaximumActualQuantity", ErrorMessageResourceType = typeof(ReceiptViewModelResources), IsOptional = true)]
         public decimal? ActualQuantity { get; set; }
@@ -70,7 +67,7 @@
 
         public ReceiptViewModel()
         {
-            //WasShipmentAccepted = true;
+            ShipmentTypes = ShipmentType.Accepted;
             ReceivedDate = new MaskedDateInputViewModel();
             PossibleUnits = new List<ShipmentQuantityUnits>();
         }
@@ -83,7 +80,7 @@
                        && ActualQuantity.HasValue
                        && ActualUnits.HasValue;
             }
-            else if (ShipmentTypes == ShipmentType.Rejected)
+            else if (ShipmentTypes == ShipmentType.Rejected || ShipmentTypes == ShipmentType.Partially)
             {
                 return !string.IsNullOrWhiteSpace(RejectionReason) && ReceivedDate.IsCompleted;
             }
