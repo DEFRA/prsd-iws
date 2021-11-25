@@ -123,10 +123,15 @@
             IsRejected = data.IsRejected;
             IsPartiallyRejected = data.IsPartiallyRejected;
 
+            if (!data.IsReceived && !data.IsRejected && !data.IsPartiallyRejected)
+            {
+                data.IsReceived = true;
+            }
+
             Receipt = new ReceiptViewModel
             {
                 ActualQuantity = data.ActualQuantity,
-                ReceivedDate = (data.ReceiptDate != null ? new MaskedDateInputViewModel(data.ReceiptDate): new MaskedDateInputViewModel(data.ActualDate)),
+                ReceivedDate = new MaskedDateInputViewModel(data.ReceiptDate),
                 ActualUnits = data.ReceiptUnits ?? data.NotificationUnits,
                 ShipmentTypes = data.IsReceived ? ShipmentType.Accepted : (data.IsRejected ? ShipmentType.Rejected : ShipmentType.Partially),
                 RejectionReason = data.RejectionReason,
@@ -151,10 +156,10 @@
 
             if (!HasNoPrenotification && !PrenotificationDate.IsCompleted)
             {
-                yield return new ValidationResult(CaptureViewModelResources.PrenotificationDateRequired, 
+                yield return new ValidationResult(CaptureViewModelResources.PrenotificationDateRequired,
                     new[] { "PrenotificationDate" });
             }
-          
+
             if ((!Receipt.ReceivedDate.IsCompleted && Receipt.ActualQuantity.HasValue) || (!Receipt.ReceivedDate.IsCompleted && !string.IsNullOrWhiteSpace(Receipt.RejectionReason)))
             {
                 yield return new ValidationResult(CaptureViewModelResources.ReceivedDateRequired, new[] { "Receipt.ReceivedDate" });

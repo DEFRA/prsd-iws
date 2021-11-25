@@ -84,7 +84,8 @@
                 {
                    //WasShipmentAccepted = false,
                    ReceivedDate = new Web.ViewModels.Shared.MaskedDateInputViewModel(rejectedDate),
-                   RejectionReason = "TestRejection"
+                   RejectionReason = "TestRejection",
+                   ShipmentTypes = ShipmentType.Rejected
                 }
             };
 
