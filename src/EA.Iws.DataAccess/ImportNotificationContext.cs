@@ -27,6 +27,8 @@
 
         public virtual DbSet<ImportMovementRejection> ImportMovementRejections { get; set; }
 
+        public virtual DbSet<ImportMovementPartialRejection> ImportMovementPartialRejections { get; set; }
+
         public virtual DbSet<ImportMovementCompletedReceipt> ImportMovementCompletedReceipts { get; set; }
 
         public virtual DbSet<ImportMovementAudit> ImportMovementAudits { get; set; }

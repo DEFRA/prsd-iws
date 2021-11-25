@@ -126,9 +126,8 @@
             Receipt = new ReceiptViewModel
             {
                 ActualQuantity = data.ActualQuantity,
-                ReceivedDate = new MaskedDateInputViewModel(data.ReceiptDate),
+                ReceivedDate = (data.ReceiptDate != null ? new MaskedDateInputViewModel(data.ReceiptDate): new MaskedDateInputViewModel(data.ActualDate)),
                 ActualUnits = data.ReceiptUnits ?? data.NotificationUnits,
-                //WasShipmentAccepted = string.IsNullOrWhiteSpace(data.RejectionReason),
                 ShipmentTypes = data.IsReceived ? ShipmentType.Accepted : (data.IsRejected ? ShipmentType.Rejected : ShipmentType.Partially),
                 RejectionReason = data.RejectionReason,
                 PossibleUnits = data.PossibleUnits,

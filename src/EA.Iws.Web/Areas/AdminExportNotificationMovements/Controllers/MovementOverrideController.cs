@@ -57,9 +57,10 @@
                 RejectionDate = (model.IsRejected) && model.ReceivedDate.HasValue ? model.ReceivedDate.Value : (DateTime?)null,
                 OperationCompleteDate = model.Date.HasValue ? model.Date.Value : (DateTime?)null,
                 RejectionReason = model.RejectionReason,
-                Comments = model.HasComments ? model.Comments : null,
-                StatsMarking = model.HasComments ? model.StatsMarking : null,
-                //IsRejected = model.IsRejected
+                Comments = model.Comments,
+                StatsMarking = model.StatsMarking,
+                RejectedQuantity = model.RejectedQuantity,
+                RejectedUnit = model.RejectedUnits
             };
 
             await mediator.SendAsync(new SetMovementReceiptAndRecoveryData(data));
