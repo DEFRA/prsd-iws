@@ -7,6 +7,7 @@
     using Core.Authorization.Permissions;
     using Core.Movement;
     using Core.Shared;
+    using EA.Iws.Requests.ImportMovement.PartialReject;
     using Infrastructure;
     using Infrastructure.Authorization;
     using Prsd.Core.Mediator;
@@ -129,29 +130,46 @@
 
         private async Task SaveMovementData(Guid movementId, CaptureViewModel model, Guid notificationId)
         {
-            if (model.Receipt.IsComplete() && !model.IsReceived && !model.IsRejected)
+            if (model.Receipt.ShipmentTypes == ShipmentType.Accepted)
             {
-                if (!model.Receipt.WasAccepted)
-                {
-                    await mediator.SendAsync(new RecordRejection(movementId,
-                        model.Receipt.ReceivedDate.Date.Value,
-                        model.Receipt.RejectionReason));
-                    await this.auditService.AddImportMovementAudit(this.mediator,
-                        notificationId, model.ShipmentNumber.Value,
-                        User.GetUserId(),
-                        MovementAuditType.Rejected);
-                }
-                else
-                {
-                    await mediator.SendAsync(new RecordReceipt(movementId,
-                        model.Receipt.ReceivedDate.Date.Value,
-                        model.Receipt.Units.Value,
-                        model.Receipt.ActualQuantity.Value));
-                    await this.auditService.AddImportMovementAudit(this.mediator,
-                        notificationId, model.ShipmentNumber.Value,
-                        User.GetUserId(),
-                        MovementAuditType.Received);
-                }
+                await mediator.SendAsync(new RecordReceipt(movementId,
+                    model.Receipt.ReceivedDate.Date.Value,
+                    model.Receipt.ActualUnits.Value,
+                    model.Receipt.ActualQuantity.Value));
+
+                await this.auditService.AddImportMovementAudit(this.mediator,
+                    notificationId, model.ShipmentNumber.Value,
+                    User.GetUserId(),
+                    MovementAuditType.Received);
+            }
+            else if (model.Receipt.ShipmentTypes == ShipmentType.Rejected)
+            {
+                await mediator.SendAsync(new RecordRejection(movementId,
+                    model.Receipt.ReceivedDate.Date.Value,
+                    model.Receipt.RejectionReason,
+                    model.Receipt.RejectedQuantity.Value,
+                    model.Receipt.RejectedUnits.Value));
+
+                await this.auditService.AddImportMovementAudit(this.mediator,
+                    notificationId, model.ShipmentNumber.Value,
+                    User.GetUserId(),
+                    MovementAuditType.Rejected);
+            }
+            else
+            {
+                await mediator.SendAsync(new RecordPartialRejection(movementId,
+                                                                            model.Receipt.ReceivedDate.Date.Value,
+                                                                            model.Receipt.RejectionReason,
+                                                                            model.Receipt.ActualQuantity.Value,
+                                                                            model.Receipt.ActualUnits.Value,
+                                                                            model.Receipt.RejectedQuantity.Value,
+                                                                            model.Receipt.RejectedUnits.Value));
+
+                await this.auditService.AddImportMovementAudit(this.mediator,
+                                                         notificationId,
+                                                         model.ShipmentNumber.Value,
+                                                         User.GetUserId(),
+                                                         MovementAuditType.PartiallyRejected);
             }
 
             if (model.Recovery.IsComplete()
@@ -174,6 +192,13 @@
                 await mediator.SendAsync(new SetMovementComments(movementId)
                 {
                     Comments = model.Comments,
+                    StatsMarking = model.StatsMarking
+                });
+            }
+            else if (!string.IsNullOrEmpty(model.StatsMarking))
+            {
+                await mediator.SendAsync(new SetMovementComments(movementId)
+                {
                     StatsMarking = model.StatsMarking
                 });
             }

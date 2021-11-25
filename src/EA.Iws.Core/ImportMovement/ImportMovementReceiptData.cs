@@ -21,5 +21,7 @@
         public bool IsReceived { get; set; }
 
         public bool IsRejected { get; set; }
+
+        public bool IsPartiallyRejected { get; set; }
     }
 }

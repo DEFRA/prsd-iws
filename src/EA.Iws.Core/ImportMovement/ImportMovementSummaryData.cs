@@ -1,5 +1,6 @@
 ﻿namespace EA.Iws.Core.ImportMovement
 {
+    using EA.Iws.Core.Shared;
     using System;
     public class ImportMovementSummaryData
     {
@@ -20,5 +21,13 @@
         public DateTime? RejectionDate { get; set; }
 
         public bool IsRejected { get; set; }
+
+        public bool IsReceived { get; set; }
+
+        public bool IsPartiallyRejected { get; set; }
+
+        public decimal? RejectedQuantity { get; set; }
+
+        public ShipmentQuantityUnits? RejectedUnit { get; set; }
     }
 }

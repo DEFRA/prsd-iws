@@ -1,0 +1,55 @@
+﻿namespace EA.Iws.Domain.ImportMovement
+{
+    using System;
+    using EA.Iws.Core.Shared;
+    using Prsd.Core;
+    using Prsd.Core.Domain;
+
+    public class ImportMovementPartialRejection : Entity
+    {
+        public Guid MovementId { get; private set; }
+
+        public decimal ActualQuantity { get; set; }
+
+        public ShipmentQuantityUnits ActualUnit { get; set; }
+
+        public decimal RejectedQuantity { get; set; }
+
+        public ShipmentQuantityUnits RejectedUnit { get; set; }
+
+        public DateTime Date { get; private set; }
+
+        public string Reason { get; private set; }
+
+        public Guid? FileId { get; private set; }
+
+        protected ImportMovementPartialRejection()
+        {
+        }
+
+        public ImportMovementPartialRejection(Guid movementId,
+            DateTime date,
+            string reason,
+            decimal actualQuantity,
+            ShipmentQuantityUnits actualUnit,
+            decimal rejectedQuantity,
+            ShipmentQuantityUnits rejectedUnit)
+        {
+            Guard.ArgumentNotNullOrEmpty(() => reason, reason);
+
+            MovementId = movementId;
+            Date = date;
+            Reason = reason;
+            ActualQuantity = actualQuantity;
+            ActualUnit = actualUnit;
+            RejectedQuantity = rejectedQuantity;
+            RejectedUnit = rejectedUnit;
+        }
+
+        public void SetFile(Guid fileId)
+        {
+            Guard.ArgumentNotDefaultValue(() => fileId, fileId);
+            FileId = fileId;
+        }
+    }
+}

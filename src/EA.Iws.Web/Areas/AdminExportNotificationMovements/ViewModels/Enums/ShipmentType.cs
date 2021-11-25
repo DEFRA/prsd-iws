@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations;
-
-public enum ShipmentType
+﻿public enum ShipmentType
 {
     Accepted,
     Partially,

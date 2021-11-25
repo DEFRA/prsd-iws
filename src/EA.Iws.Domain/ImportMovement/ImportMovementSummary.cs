@@ -10,6 +10,8 @@
 
         public ImportMovementRejection Rejection { get; private set; }
 
+        public ImportMovementPartialRejection PartialRejection { get; private set; }
+
         public ImportMovementCompletedReceipt CompletedReceipt { get; private set; }
 
         public NotificationType NotificationType { get; private set; }
@@ -24,7 +26,8 @@
             ImportMovementCompletedReceipt completedReceipt, 
             NotificationType notificationType, 
             string notificationNumber,
-            ShipmentQuantityUnits units)
+            ShipmentQuantityUnits units,
+            ImportMovementPartialRejection partialRejection)
         {
             Movement = movement;
             Receipt = receipt;
@@ -33,6 +36,7 @@
             NotificationType = notificationType;
             NotificationNumber = notificationNumber;
             Units = units;
+            PartialRejection = partialRejection;
         }
     }
 }

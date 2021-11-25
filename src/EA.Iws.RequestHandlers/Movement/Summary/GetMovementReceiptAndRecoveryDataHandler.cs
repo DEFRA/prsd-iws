@@ -87,6 +87,7 @@
                 data.RejectionReason = movementPartialRejection.Reason;
                 data.ReceiptDate = movementPartialRejection.Date;
                 data.ActualQuantity = movementPartialRejection.ActualQuantity;
+                data.ReceiptUnits = movementPartialRejection.ActualUnit;
                 data.RejectedQuantity = movementPartialRejection.RejectedQuantity;
                 data.RejectedUnit = movementPartialRejection.RejectedUnit;
                 data.IsPartiallyRejected = true;

@@ -120,14 +120,35 @@
   <data name="ActualQuantityLabel" xml:space="preserve">
     <value>Quantity received</value>
   </data>
+  <data name="FullyRejectionReasonInfomationLabel1" xml:space="preserve">
+    <value>Please enter all details that have been supplied to indicate why the shipment has been fully rejected by the receiving facility. This should be as detailed as possible.</value>
+  </data>
+  <data name="FullyRejectionReasonInfomationLabel2" xml:space="preserve">
+    <value>If applicable, please indicate the likely remediation process to follow.</value>
+  </data>
+  <data name="MaximumActualQuantity" xml:space="preserve">
+    <value>Please enter a smaller number </value>
+  </data>
+  <data name="PartiallyRejectionReasonInfomationLabel1" xml:space="preserve">
+    <value>Please enter all details that have been supplied to indicate why the shipment has been partially rejected by the receiving facility. This should be as detailed as possible.</value>
+  </data>
+  <data name="PartiallyRejectionReasonInfomationLabel2" xml:space="preserve">
+    <value>If applicable, please indicate the likely remediation process to follow.</value>
+  </data>
   <data name="QuantityRequired" xml:space="preserve">
     <value>Please provide the actual quantity</value>
   </data>
   <data name="ReceivedDateLabel" xml:space="preserve">
-    <value>When was the waste received?</value>
+    <value>When was the waste received at the Facility?</value>
   </data>
   <data name="ReceivedDateRequired" xml:space="preserve">
     <value>Please provide the received date</value>
+  </data>
+  <data name="RejectedQuantityInfoLabel" xml:space="preserve">
+    <value>Enter the quantity of waste rejected on the shipment</value>
+  </data>
+  <data name="RejectedQuantityLabel" xml:space="preserve">
+    <value>Quantity Rejected</value>
   </data>
   <data name="RejectionReasonLabel" xml:space="preserve">
     <value>Reason why the shipment was rejected and any relevant details</value>
@@ -135,13 +156,16 @@
   <data name="RejectReasonRequired" xml:space="preserve">
     <value>Please provide a reason for rejection</value>
   </data>
+  <data name="ShipmentRejectedQuantityLabel" xml:space="preserve">
+    <value>How much waste was rejected?</value>
+  </data>
   <data name="UnitsRequired" xml:space="preserve">
     <value>Please select the quantity units</value>
   </data>
   <data name="WasShipmentAcceptedLabel" xml:space="preserve">
     <value>Was the shipment accepted?</value>
   </data>
-  <data name="MaximumActualQuantity" xml:space="preserve">
-    <value>Please enter a smaller number </value>
+  <data name="WasShipmentRejectedLabel" xml:space="preserve">
+    <value>How much waste was rejected?</value>
   </data>
 </root>
