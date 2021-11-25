@@ -50,7 +50,7 @@
             movement.NotificationId = NotificationId;
             movement.Date = SystemTime.UtcNow.Date.AddDays(-number);
             movement.Number = number;
-            movement.Status = MovementStatus.Received;
+            movement.Status = MovementStatus.Submitted;
 
             return movement;
         }
