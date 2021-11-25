@@ -139,15 +139,18 @@
         {
             if (model.Receipt.ShipmentTypes == ShipmentType.Accepted)
             {
-                await mediator.SendAsync(new RecordReceiptInternal(movementId,
-                    model.Receipt.ReceivedDate.Date.Value,
-                    model.Receipt.ActualQuantity.Value,
-                    model.Receipt.ActualUnits.Value));
+                if (model.Receipt.ActualQuantity != null && model.Receipt.ReceivedDate.Date != null)
+                {
+                    await mediator.SendAsync(new RecordReceiptInternal(movementId,
+                        model.Receipt.ReceivedDate.Date.Value,
+                        model.Receipt.ActualQuantity.Value,
+                        model.Receipt.ActualUnits.Value));
 
-                await this.auditService.AddMovementAudit(this.mediator,
-                    notificationId, model.ShipmentNumber.Value,
-                    User.GetUserId(),
-                    MovementAuditType.Received);
+                    await this.auditService.AddMovementAudit(this.mediator,
+                        notificationId, model.ShipmentNumber.Value,
+                        User.GetUserId(),
+                        MovementAuditType.Received);
+                }
             }
             else if (model.Receipt.ShipmentTypes == ShipmentType.Rejected)
             {
