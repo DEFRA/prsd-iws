@@ -172,8 +172,7 @@
                 .Where(m =>
                     m.NotificationId == notificationId
                     && ((m.Status == MovementStatus.Submitted && m.Date < SystemTime.UtcNow)
-                        || m.Status == MovementStatus.Captured
-                        || m.Status == MovementStatus.Received)).ToArrayAsync();
+                        || m.Status == MovementStatus.Captured)).ToArrayAsync();
 
             return currentReceiptRecoveryMovements;
         }
