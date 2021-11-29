@@ -23,13 +23,16 @@
 
         public ShipmentQuantityUnits RejectedUnits { get; private set; }
 
+        public DateTime? WasteDisposedDate { get; private set; }
+
         public RecordPartialRejectionInternal(Guid movementId, 
                                               DateTime date,
                                               string reason,
                                               decimal actualQuantity, 
                                               ShipmentQuantityUnits actualUnits,
                                               decimal rejectedQuantity,
-                                              ShipmentQuantityUnits rejectedUnits)
+                                              ShipmentQuantityUnits rejectedUnits,
+                                              DateTime wasteDisposedDate)
         {
             MovementId = movementId;
             Date = date;
@@ -38,6 +41,7 @@
             ActualUnits = actualUnits;
             RejectedQuantity = rejectedQuantity;
             RejectedUnits = rejectedUnits;
+            WasteDisposedDate = wasteDisposedDate;
         }
     }
 }

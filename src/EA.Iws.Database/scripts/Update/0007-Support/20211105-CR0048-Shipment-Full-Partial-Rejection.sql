@@ -127,6 +127,7 @@ BEGIN
 			  ,[RejectedUnit] = @RejectedUnit
 			  ,[ActualQuantity] = @Quantity
 			  ,[ActualUnit] = @Unit
+			  ,[WasteDisposedDate] = @RecoveryDate
 		 WHERE [MovementId] = @MovementId
 
 	END

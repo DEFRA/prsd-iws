@@ -9,9 +9,10 @@
         Task<MovementPartialRejection> PartailReject(Guid movementId,
                                                      DateTime rejectionDate,
                                                      string reason,
-                                                     decimal? actualQuantity,
-                                                     ShipmentQuantityUnits? actualUnit,
-                                                     decimal? rejectedQuantity,
-                                                     ShipmentQuantityUnits? rejectedUnit);
+                                                     decimal actualQuantity,
+                                                     ShipmentQuantityUnits actualUnit,
+                                                     decimal rejectedQuantity,
+                                                     ShipmentQuantityUnits rejectedUnit,
+                                                     DateTime? wasteDisposedDate);
     }
 }

@@ -260,6 +260,24 @@ namespace EA.Iws.Web.Areas.AdminExportNotificationMovements.ViewModels.CaptureMo
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Rejected quantity can&apos;t be greater than actual qunatity.
+        /// </summary>
+        public static string RejectedQuantityCantBeGreaterThanActualQunatity {
+            get {
+                return ResourceManager.GetString("RejectedQuantityCantBeGreaterThanActualQunatity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please provide the rejected quantity.
+        /// </summary>
+        public static string RejectQuantityRequired {
+            get {
+                return ResourceManager.GetString("RejectQuantityRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Please provide a reason for rejection.
         /// </summary>
         public static string RejectReasonRequired {

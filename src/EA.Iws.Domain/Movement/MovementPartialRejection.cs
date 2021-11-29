@@ -9,19 +9,21 @@
     {
         public Guid MovementId { get; private set; }
 
-        public decimal? ActualQuantity { get; set; }
+        public decimal ActualQuantity { get; set; }
 
-        public ShipmentQuantityUnits? ActualUnit { get; set; }
+        public ShipmentQuantityUnits ActualUnit { get; set; }
 
-        public decimal? RejectedQuantity { get; set; }
+        public decimal RejectedQuantity { get; set; }
 
-        public ShipmentQuantityUnits? RejectedUnit { get; set; }
+        public ShipmentQuantityUnits RejectedUnit { get; set; }
 
         public DateTime Date { get; private set; }
 
         public string Reason { get; private set; }
 
         public Guid? FileId { get; private set; }
+
+        public DateTime? WasteDisposedDate { get; private set; }
 
         protected MovementPartialRejection()
         {
@@ -30,10 +32,11 @@
         public MovementPartialRejection(Guid movementId,
             DateTime date,
             string reason,
-            decimal? actualQuantity,
-            ShipmentQuantityUnits? actualUnit,
-            decimal? rejectedQuantity,
-            ShipmentQuantityUnits? rejectedUnit)
+            decimal actualQuantity,
+            ShipmentQuantityUnits actualUnit,
+            decimal rejectedQuantity,
+            ShipmentQuantityUnits rejectedUnit,
+            DateTime? wasteDisposedDate)
         {
             Guard.ArgumentNotNullOrEmpty(() => reason, reason);
 
@@ -44,6 +47,7 @@
             ActualUnit = actualUnit;
             RejectedQuantity = rejectedQuantity;
             RejectedUnit = rejectedUnit;
+            WasteDisposedDate = wasteDisposedDate;
         }
 
         public void SetFile(Guid fileId)

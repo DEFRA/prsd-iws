@@ -183,6 +183,12 @@
   <data name="RecoveryDateCannotBeEnteredForRejected" xml:space="preserve">
     <value>Do not provide {0} date when the prenotification has been rejected</value>
   </data>
+  <data name="RejectedQuantityCantBeGreaterThanActualQunatity" xml:space="preserve">
+    <value>Rejected quantity can't be greater than actual qunatity</value>
+  </data>
+  <data name="RejectQuantityRequired" xml:space="preserve">
+    <value>Please provide the rejected quantity</value>
+  </data>
   <data name="RejectReasonRequired" xml:space="preserve">
     <value>Please provide a reason for rejection</value>
   </data>

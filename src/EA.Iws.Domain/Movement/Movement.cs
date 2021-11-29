@@ -235,15 +235,16 @@
         internal MovementPartialRejection PartialReject(Guid movementId,
                                                      DateTime rejectionDate,
                                                      string reason,
-                                                     decimal? actualQuantity,
-                                                     ShipmentQuantityUnits? actualUnit,
-                                                     decimal? rejectedQuantity,
-                                                     ShipmentQuantityUnits? rejectedUnit)
+                                                     decimal actualQuantity,
+                                                     ShipmentQuantityUnits actualUnit,
+                                                     decimal rejectedQuantity,
+                                                     ShipmentQuantityUnits rejectedUnit,
+                                                     DateTime wasteDisposeddDate)
         {
             Guard.ArgumentNotDefaultValue(() => rejectionDate, rejectionDate);
             Guard.ArgumentNotDefaultValue(() => reason, reason);
 
-            var rejection = new MovementPartialRejection(movementId, rejectionDate, reason, actualQuantity, actualUnit, rejectedQuantity, rejectedUnit);
+            var rejection = new MovementPartialRejection(movementId, rejectionDate, reason, actualQuantity, actualUnit, rejectedQuantity, rejectedUnit, wasteDisposeddDate);
 
             stateMachine.Fire(Trigger.PartialReject);
 

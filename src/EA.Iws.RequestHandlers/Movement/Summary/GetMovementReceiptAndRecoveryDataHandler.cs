@@ -67,9 +67,9 @@
                 data.IsReceived = true;
             }
 
-            if (movement.CompletedReceipt != null)
+            if (movement.CompletedReceipt != null || (movementPartialRejection != null && movementPartialRejection.WasteDisposedDate != null))
             {
-                data.OperationCompleteDate = movement.CompletedReceipt.Date;
+                data.OperationCompleteDate = (movement.CompletedReceipt != null ? movement.CompletedReceipt.Date : movementPartialRejection.WasteDisposedDate);
                 data.IsOperationCompleted = true;
             }
 
