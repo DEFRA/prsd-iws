@@ -22,10 +22,11 @@
         public async Task<MovementPartialRejection> PartailReject(Guid movementId,
                                                      DateTime date,
                                                      string reason,
-                                                     decimal? actualQuantity,
-                                                     ShipmentQuantityUnits? actualUnit,
-                                                     decimal? rejectedQuantity,
-                                                     ShipmentQuantityUnits? rejectedUnit)
+                                                     decimal actualQuantity,
+                                                     ShipmentQuantityUnits actualUnit,
+                                                     decimal rejectedQuantity,
+                                                     ShipmentQuantityUnits rejectedUnit,
+                                                     DateTime? wasteDisposedDate)
         {
             var movement = await movementRepository.GetById(movementId);
 
@@ -38,7 +39,7 @@
                 throw new InvalidOperationException("The when the waste was received date cannot be in the future.");
             }
 
-            var movementPartialRejection = movement.PartialReject(movementId, date, reason, actualQuantity, actualUnit, rejectedQuantity, rejectedUnit);
+            var movementPartialRejection = movement.PartialReject(movementId, date, reason, actualQuantity, actualUnit, rejectedQuantity, rejectedUnit, wasteDisposedDate.Value);
 
             movementPartialRejectionRepository.Add(movementPartialRejection);
 

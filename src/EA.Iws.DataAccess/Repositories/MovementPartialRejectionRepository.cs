@@ -1,7 +1,9 @@
 ﻿namespace EA.Iws.DataAccess.Repositories
 {
     using System;
+    using System.Collections.Generic;
     using System.Data.Entity;
+    using System.Linq;
     using System.Threading.Tasks;
     using Domain.Movement;
 
@@ -32,6 +34,15 @@
         public void Add(MovementPartialRejection movementPartialRejection)
         {
             context.MovementPartialRejections.Add(movementPartialRejection);
+        }
+
+        public async Task<IEnumerable<MovementPartialRejection>> GetMovementPartialRejectionsByMovementIds(IEnumerable<Guid> movementIds)
+        {
+            var movementsPartialRejection = await context.MovementPartialRejections
+                .Where(m => movementIds.Contains(m.MovementId))
+                .ToArrayAsync();
+
+            return movementsPartialRejection;
         }
     }
 }

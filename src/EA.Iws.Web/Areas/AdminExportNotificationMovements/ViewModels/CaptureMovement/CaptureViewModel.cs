@@ -165,13 +165,11 @@
                 yield return new ValidationResult(CaptureViewModelResources.ReceivedDateRequired, new[] { "Receipt.ReceivedDate" });
             }
 
-            //if (!Receipt.ActualQuantity.HasValue && Receipt.ReceivedDate.IsCompleted && Receipt.WasShipmentAccepted)
-            if (!Receipt.ActualQuantity.HasValue && Receipt.ReceivedDate.IsCompleted && Receipt.ShipmentTypes == ShipmentType.Accepted)
+            if (!Receipt.ActualQuantity.HasValue && Receipt.ReceivedDate.IsCompleted && (Receipt.ShipmentTypes == ShipmentType.Accepted || Receipt.ShipmentTypes == ShipmentType.Partially))
             {
                 yield return new ValidationResult(CaptureViewModelResources.QuantityRequired, new[] { "Receipt.ActualQuantity" });
             }
 
-            //if (!Receipt.WasShipmentAccepted && string.IsNullOrWhiteSpace(Receipt.RejectionReason))
             if ((Receipt.ShipmentTypes == ShipmentType.Partially || Receipt.ShipmentTypes == ShipmentType.Rejected) && string.IsNullOrWhiteSpace(Receipt.RejectionReason))
             {
                 yield return new ValidationResult(CaptureViewModelResources.RejectReasonRequired, new[] { "Receipt.RejectionReason" });
@@ -188,8 +186,7 @@
                     new[] { "Recovery.RecoveryDate" });
             }
 
-            //if (Receipt.IsComplete() && !Receipt.WasShipmentAccepted && Recovery.IsComplete())
-            if (Receipt.IsComplete() && Receipt.ShipmentTypes != ShipmentType.Accepted && Recovery.IsComplete())
+            if (Receipt.IsComplete() && Receipt.ShipmentTypes == ShipmentType.Rejected && Recovery.IsComplete())
             {
                 yield return new ValidationResult(string.Format(CaptureViewModelResources.RecoveryDateCannotBeEnteredForRejected, NotificationType),
                     new[] { "Recovery.RecoveryDate" });
@@ -234,6 +231,16 @@
                 {
                     yield return new ValidationResult(string.Format(CaptureViewModelResources.RecoveredDateInfuture, GetNotificationTypeVerb(Recovery.NotificationType)), new[] { "Recovery.RecoveryDate" });
                 }
+            }
+
+            if (!Receipt.RejectedQuantity.HasValue && (Receipt.ShipmentTypes == ShipmentType.Rejected || Receipt.ShipmentTypes == ShipmentType.Partially))
+            {
+                yield return new ValidationResult(CaptureViewModelResources.RejectQuantityRequired, new[] { "Receipt.RejectedQuantity" });
+            }
+
+            if (Receipt.RejectedQuantity > Receipt.ActualQuantity && Receipt.ShipmentTypes == ShipmentType.Partially)
+            {
+                yield return new ValidationResult(CaptureViewModelResources.RejectedQuantityCantBeGreaterThanActualQunatity, new[] { "Receipt.RejectedQuantity" });
             }
 
             if (Receipt.ShipmentTypes == ShipmentType.Rejected)
