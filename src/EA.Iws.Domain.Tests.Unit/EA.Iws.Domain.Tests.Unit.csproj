@@ -83,6 +83,7 @@
     <Compile Include="ImportMovement\CompleteImportMovementTests.cs" />
     <Compile Include="ImportMovement\ImportMovementCommentsTests.cs" />
     <Compile Include="ImportMovement\ImportMovementFactoryTests.cs" />
+    <Compile Include="ImportMovement\PartialRejectImportMovementTests.cs" />
     <Compile Include="ImportMovement\ReceiveImportMovementTests.cs" />
     <Compile Include="ImportMovement\RejectImportMovementTests.cs" />
     <Compile Include="ImportNotificationAssessment\DecisionRequiredByTests.cs" />
@@ -127,6 +128,7 @@
     <Compile Include="Movement\NextAvailableMovementNumberGeneratorTests.cs" />
     <Compile Include="Movement\NumberOfActiveLoadsTests.cs" />
     <Compile Include="Movement\NumberOfMovementsTests.cs" />
+    <Compile Include="Movement\PartialRejectMovementTests.cs" />
     <Compile Include="Movement\ReceiptDateTests.cs" />
     <Compile Include="Movement\RecoveryDateTests.cs" />
     <Compile Include="Movement\RejectMovementTests.cs" />

@@ -15,6 +15,6 @@
         [Display(Name = "Pending")]
         Captured = 7,
         [Display(Name = "Partially Rejected")]
-        PartiallyRejected =8
+        PartiallyRejected = 8
     }
 }
