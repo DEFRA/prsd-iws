@@ -20,7 +20,7 @@
         public async Task<bool> HandleAsync(RecordPartialRejectionInternal message)
         {
             await partialRejectionMovement.PartailReject(message.MovementId,
-                                                         message.Date,
+                                                         message.WasteReceivedDate,
                                                          message.Reason,
                                                          message.ActualQuantity,
                                                          message.ActualUnits,

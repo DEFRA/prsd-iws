@@ -52,7 +52,7 @@
 
             var result = await partialRejectionFactory.PartailReject(movement.Id, PastDate, rejectionreason, 1, ShipmentQuantityUnits.Tonnes, 10, ShipmentQuantityUnits.Tonnes, PastDate);
 
-            Assert.Equal(PastDate, result.Date);
+            Assert.Equal(PastDate, result.WasteReceivedDate);
         }
 
         [Fact]
@@ -70,7 +70,7 @@
 
             var result = await partialRejectionFactory.PartailReject(movement.Id, Today, rejectionreason, 1, ShipmentQuantityUnits.Tonnes, 10, ShipmentQuantityUnits.Tonnes, Today);
 
-            Assert.Equal(Today, result.Date);
+            Assert.Equal(Today, result.WasteReceivedDate);
         }
 
         [Fact]
@@ -103,7 +103,7 @@
 
             var result = await partialRejectionFactory.PartailReject(movement.Id, PastDate, rejectionreason, 1, ShipmentQuantityUnits.Tonnes, 10, ShipmentQuantityUnits.Tonnes, PastDate);
 
-            Assert.Equal(PastDate, result.Date);
+            Assert.Equal(PastDate, result.WasteReceivedDate);
         }
 
         [Fact]

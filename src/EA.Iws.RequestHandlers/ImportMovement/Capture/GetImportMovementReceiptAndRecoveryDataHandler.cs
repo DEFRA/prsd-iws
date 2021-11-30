@@ -34,7 +34,7 @@
             }
             else if (data.PartialRejection != null)
             {
-                result.ReceiptData.ReceiptDate = data.PartialRejection.Date;
+                result.ReceiptData.ReceiptDate = data.PartialRejection.WasteReceivedDate;
                 result.ReceiptData.ActualQuantity = data.PartialRejection.ActualQuantity;
                 result.ReceiptData.ReceiptUnits = data.PartialRejection.ActualUnit;
                 result.ReceiptData.RejectionReason = data.PartialRejection.Reason;
