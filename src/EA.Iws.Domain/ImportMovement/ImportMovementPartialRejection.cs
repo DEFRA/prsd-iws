@@ -17,7 +17,7 @@
 
         public ShipmentQuantityUnits RejectedUnit { get; set; }
 
-        public DateTime Date { get; private set; }
+        public DateTime WasteReceivedDate { get; private set; }
 
         public string Reason { get; private set; }
 
@@ -30,7 +30,7 @@
         }
 
         public ImportMovementPartialRejection(Guid movementId,
-            DateTime date,
+            DateTime wasteReceivedDate,
             string reason,
             decimal actualQuantity,
             ShipmentQuantityUnits actualUnit,
@@ -41,7 +41,7 @@
             Guard.ArgumentNotNullOrEmpty(() => reason, reason);
 
             MovementId = movementId;
-            Date = date;
+            WasteReceivedDate = wasteReceivedDate;
             Reason = reason;
             ActualQuantity = actualQuantity;
             ActualUnit = actualUnit;

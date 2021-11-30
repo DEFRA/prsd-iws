@@ -1,6 +1,5 @@
 ﻿namespace EA.Iws.RequestHandlers.Movement.Summary
 {
-    using System;
     using System.Linq;
     using System.Threading.Tasks;
     using Core.Movement;
@@ -85,7 +84,7 @@
             if (movementPartialRejection != null)
             {
                 data.RejectionReason = movementPartialRejection.Reason;
-                data.ReceiptDate = movementPartialRejection.Date;
+                data.ReceiptDate = movementPartialRejection.WasteReceivedDate;
                 data.ActualQuantity = movementPartialRejection.ActualQuantity;
                 data.ReceiptUnits = movementPartialRejection.ActualUnit;
                 data.RejectedQuantity = movementPartialRejection.RejectedQuantity;

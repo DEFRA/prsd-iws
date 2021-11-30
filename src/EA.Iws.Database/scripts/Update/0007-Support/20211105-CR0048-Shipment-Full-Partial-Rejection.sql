@@ -11,7 +11,7 @@ CREATE TABLE [Notification].[MovementPartialRejection](
 	[ActualUnit] [int] NULL,
 	[RejectedQuantity] [decimal](18, 4) NULL,
 	[RejectedUnit] [int] NULL,
-	[Date] [date] NOT NULL,
+	[WasteReceivedDate] [date] NOT NULL,
 	[Reason] [nvarchar](max) NOT NULL,
 	[FileId] [uniqueidentifier] NULL,
 	[RowVersion] [timestamp] NOT NULL,
@@ -41,7 +41,7 @@ CREATE TABLE [ImportNotification].[MovementPartialRejection](
 	[ActualUnit] [int] NULL,
 	[RejectedQuantity] [decimal](18, 4) NULL,
 	[RejectedUnit] [int] NULL,
-	[Date] [date] NOT NULL,
+	[WasteReceivedDate] [date] NOT NULL,
 	[Reason] [nvarchar](max) NOT NULL,
 	[FileId] [uniqueidentifier] NULL,
 	[RowVersion] [timestamp] NOT NULL,
@@ -123,7 +123,7 @@ BEGIN
 	IF EXISTS(SELECT * FROM [Notification].[MovementPartialRejection] WHERE [MovementId]= @MovementId)
 	BEGIN
 		UPDATE [Notification].[MovementPartialRejection]
-		SET    [Date] = ISNULL(@RejectiontDate, [Date]) 
+		SET    [WasteReceivedDate] = ISNULL(@RejectiontDate, [WasteReceivedDate]) 
 			  ,[Reason] = ISNULL(@RejectionReason, [Reason])
 			  ,[RejectedQuantity] = @RejectedQuantity
 			  ,[RejectedUnit] = @RejectedUnit
@@ -221,7 +221,7 @@ BEGIN
 	IF EXISTS(SELECT * FROM [ImportNotification].[MovementPartialRejection] WHERE [MovementId]= @MovementId)
 	BEGIN
 		UPDATE [ImportNotification].[MovementPartialRejection]
-		SET    [Date] = ISNULL(@RejectiontDate, [Date]) 
+		SET    [WasteReceivedDate] = ISNULL(@RejectiontDate, [WasteReceivedDate]) 
 			  ,[Reason] = ISNULL(@RejectionReason, [Reason])
 			  ,[RejectedQuantity] = @RejectedQuantity
 			  ,[RejectedUnit] = @RejectedUnit
