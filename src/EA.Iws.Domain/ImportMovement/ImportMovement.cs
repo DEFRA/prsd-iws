@@ -59,12 +59,13 @@
                                                      decimal actualQuantity,
                                                      ShipmentQuantityUnits actualUnit,
                                                      decimal rejectedQuantity,
-                                                     ShipmentQuantityUnits rejectedUnit)
+                                                     ShipmentQuantityUnits rejectedUnit,
+                                                     DateTime? wasteDisposedDate)
         {
             Guard.ArgumentNotDefaultValue(() => rejectionDate, rejectionDate);
             Guard.ArgumentNotDefaultValue(() => reason, reason);
 
-            var rejection = new ImportMovementPartialRejection(movementId, rejectionDate, reason, actualQuantity, actualUnit, rejectedQuantity, rejectedUnit);
+            var rejection = new ImportMovementPartialRejection(movementId, rejectionDate, reason, actualQuantity, actualUnit, rejectedQuantity, rejectedUnit, wasteDisposedDate);
 
             return rejection;
         }

@@ -247,6 +247,11 @@
             {
                 Recovery.IsShipmentFullRejected = true;
             }
+
+            if (Receipt.ShipmentTypes == ShipmentType.Partially && !Recovery.RecoveryDate.Date.HasValue)
+            {
+                yield return new ValidationResult(CaptureViewModelResources.RecoveredDateRequired, new[] { "Recovery.RecoveryDate" });
+            }
         }
 
         private static string GetNotificationTypeVerb(NotificationType displayedType)

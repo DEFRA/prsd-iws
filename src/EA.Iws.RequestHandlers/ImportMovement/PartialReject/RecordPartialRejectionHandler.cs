@@ -25,7 +25,8 @@
                                                          message.ActualQuantity,
                                                          message.ActualUnits,
                                                          message.RejectedQuantity,
-                                                         message.RejectedUnits);
+                                                         message.RejectedUnits,
+                                                         message.WasteDisposedDate);
 
             await context.SaveChangesAsync();
 

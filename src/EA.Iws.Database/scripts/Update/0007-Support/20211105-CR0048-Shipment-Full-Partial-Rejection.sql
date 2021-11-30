@@ -14,7 +14,8 @@ CREATE TABLE [Notification].[MovementPartialRejection](
 	[Date] [date] NOT NULL,
 	[Reason] [nvarchar](max) NOT NULL,
 	[FileId] [uniqueidentifier] NULL,
-	[RowVersion] [timestamp] NOT NULL,	
+	[RowVersion] [timestamp] NOT NULL,
+	[WasteDisposedDate] [date] NULL,
  CONSTRAINT [PK_MovementPartialRejection] PRIMARY KEY CLUSTERED 
 (
 	[Id] ASC
@@ -43,7 +44,8 @@ CREATE TABLE [ImportNotification].[MovementPartialRejection](
 	[Date] [date] NOT NULL,
 	[Reason] [nvarchar](max) NOT NULL,
 	[FileId] [uniqueidentifier] NULL,
-	[RowVersion] [timestamp] NOT NULL,	
+	[RowVersion] [timestamp] NOT NULL,
+	[WasteDisposedDate] [date] NULL,
  CONSTRAINT [PK_MovementPartialRejection] PRIMARY KEY CLUSTERED 
 (
 	[Id] ASC
@@ -225,6 +227,7 @@ BEGIN
 			  ,[RejectedUnit] = @RejectedUnit
 			  ,[ActualQuantity] = @Quantity
 			  ,[ActualUnit] = @Unit
+			  ,[WasteDisposedDate] = @RecoveryDate
 		 WHERE [MovementId] = @MovementId
 
 	END

@@ -204,5 +204,14 @@ namespace EA.Iws.Web.Areas.AdminImportNotificationMovements.ViewModels.MovementO
                 return ResourceManager.GetString("WasShipmentAcceptedLabel", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please provide the date.
+        /// </summary>
+        public static string WasteDisposedDateRequired {
+            get {
+                return ResourceManager.GetString("WasteDisposedDateRequired", resourceCulture);
+            }
+        }
     }
 }
