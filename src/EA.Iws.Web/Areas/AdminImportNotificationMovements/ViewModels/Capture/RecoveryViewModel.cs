@@ -9,6 +9,8 @@
 
         public NotificationType NotificationType { get; set; }
 
+        public bool IsShipmentFullRejected { get; set; }
+
         public RecoveryViewModel()
         {
             RecoveryDate = new MaskedDateInputViewModel();

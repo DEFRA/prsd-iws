@@ -165,4 +165,7 @@
   <data name="HasNoPrenotification" xml:space="preserve">
     <value>No prenotification received</value>
   </data>
+  <data name="WasteDisposedDateRequired" xml:space="preserve">
+    <value>Please provide the date</value>
+  </data>
 </root>

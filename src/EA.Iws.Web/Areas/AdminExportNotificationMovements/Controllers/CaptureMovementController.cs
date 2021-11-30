@@ -139,7 +139,7 @@
         {
             if (model.Receipt.ShipmentTypes == ShipmentType.Accepted)
             {
-                if (model.Receipt.ActualQuantity != null && model.Receipt.ReceivedDate.Date != null && !model.Recovery.IsComplete())
+                if (model.Receipt.ActualQuantity != null && model.Receipt.ReceivedDate.Date != null && model.IsReceived == false)
                 {
                     await mediator.SendAsync(new RecordReceiptInternal(movementId,
                         model.Receipt.ReceivedDate.Date.Value,

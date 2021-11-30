@@ -41,6 +41,9 @@
                 result.RejectedQuantity = data.PartialRejection.RejectedQuantity;
                 result.RejectedUnit = data.PartialRejection.RejectedUnit;
                 result.IsPartiallyRejected = true;
+                result.ReceiptData.IsPartiallyRejected = true;
+                result.RecoveryData.OperationCompleteDate = data.PartialRejection.WasteDisposedDate;
+                result.RecoveryData.IsOperationCompleted = true;
             }
             return result;
         }

@@ -12,6 +12,7 @@
                                                      decimal actualQuantity,
                                                      ShipmentQuantityUnits actualUnit,
                                                      decimal rejectedQuantity,
-                                                     ShipmentQuantityUnits rejectedUnit);
+                                                     ShipmentQuantityUnits rejectedUnit,
+                                                     DateTime? wasteDisposedDate);
     }
 }

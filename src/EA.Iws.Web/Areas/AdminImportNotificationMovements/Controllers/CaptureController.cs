@@ -132,15 +132,18 @@
         {
             if (model.Receipt.ShipmentTypes == ShipmentType.Accepted)
             {
-                await mediator.SendAsync(new RecordReceipt(movementId,
+                if (model.Receipt.ActualQuantity != null && model.Receipt.ReceivedDate.Date != null && model.IsReceived == false)
+                {
+                    await mediator.SendAsync(new RecordReceipt(movementId,
                     model.Receipt.ReceivedDate.Date.Value,
                     model.Receipt.ActualUnits.Value,
                     model.Receipt.ActualQuantity.Value));
 
-                await this.auditService.AddImportMovementAudit(this.mediator,
-                    notificationId, model.ShipmentNumber.Value,
-                    User.GetUserId(),
-                    MovementAuditType.Received);
+                    await this.auditService.AddImportMovementAudit(this.mediator,
+                        notificationId, model.ShipmentNumber.Value,
+                        User.GetUserId(),
+                        MovementAuditType.Received);
+                }
             }
             else if (model.Receipt.ShipmentTypes == ShipmentType.Rejected)
             {
@@ -163,7 +166,8 @@
                                                                             model.Receipt.ActualQuantity.Value,
                                                                             model.Receipt.ActualUnits.Value,
                                                                             model.Receipt.RejectedQuantity.Value,
-                                                                            model.Receipt.RejectedUnits.Value));
+                                                                            model.Receipt.RejectedUnits.Value,
+                                                                            model.Recovery.RecoveryDate.Date.Value));
 
                 await this.auditService.AddImportMovementAudit(this.mediator,
                                                          notificationId,
@@ -172,11 +176,8 @@
                                                          MovementAuditType.PartiallyRejected);
             }
 
-            if (model.Recovery.IsComplete()
-                && (model.Receipt.IsComplete() || model.IsReceived)
-                && !model.IsOperationCompleted
-                && !model.IsRejected
-                && model.Receipt.WasAccepted)
+            //if (model.Recovery.IsComplete() && (model.Receipt.IsComplete() || model.IsReceived) && !model.IsOperationCompleted && model.Receipt.ShipmentTypes == ShipmentType.Accepted)
+            if (model.Recovery.IsComplete() && !model.IsOperationCompleted && model.Receipt.ShipmentTypes == ShipmentType.Accepted)
             {
                 await mediator.SendAsync(new RecordCompletedReceipt(movementId,
                     model.Recovery.RecoveryDate.Date.Value));

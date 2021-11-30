@@ -23,6 +23,8 @@
 
         public Guid? FileId { get; private set; }
 
+        public DateTime? WasteDisposedDate { get; private set; }
+
         protected ImportMovementPartialRejection()
         {
         }
@@ -33,7 +35,8 @@
             decimal actualQuantity,
             ShipmentQuantityUnits actualUnit,
             decimal rejectedQuantity,
-            ShipmentQuantityUnits rejectedUnit)
+            ShipmentQuantityUnits rejectedUnit,
+            DateTime? wasteDisposedDate)
         {
             Guard.ArgumentNotNullOrEmpty(() => reason, reason);
 
@@ -44,6 +47,7 @@
             ActualUnit = actualUnit;
             RejectedQuantity = rejectedQuantity;
             RejectedUnit = rejectedUnit;
+            WasteDisposedDate = wasteDisposedDate;
         }
 
         public void SetFile(Guid fileId)

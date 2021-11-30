@@ -175,7 +175,7 @@
                 new SqlParameter("@Comments", (object)data.Comments ?? DBNull.Value),
                 new SqlParameter("@RecoveryDate", (object)data.RecoveryData.OperationCompleteDate ?? DBNull.Value),
                 new SqlParameter("@CreatedBy", createdBy),
-                new SqlParameter("@RejectedQuantity", data.RejectedQuantity),
+                new SqlParameter("@RejectedQuantity", (object)data.RejectedQuantity ?? DBNull.Value),
                 new SqlParameter("@RejectedUnit", (object)data.RejectedUnit ?? DBNull.Value));
         }
 

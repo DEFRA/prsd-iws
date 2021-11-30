@@ -251,6 +251,15 @@ namespace EA.Iws.Web.Areas.AdminExportNotificationMovements.ViewModels.CaptureMo
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Please provide the date.
+        /// </summary>
+        public static string RecoveredDateRequired {
+            get {
+                return ResourceManager.GetString("RecoveredDateRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Do not provide {0} date when the prenotification has been rejected.
         /// </summary>
         public static string RecoveryDateCannotBeEnteredForRejected {

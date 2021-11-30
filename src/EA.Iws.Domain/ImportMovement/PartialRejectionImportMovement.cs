@@ -25,7 +25,8 @@
                                                      decimal actualQuantity,
                                                      ShipmentQuantityUnits actualUnit,
                                                      decimal rejectedQuantity,
-                                                     ShipmentQuantityUnits rejectedUnit)
+                                                     ShipmentQuantityUnits rejectedUnit,
+                                                     DateTime? wasteDisposedDate)
         {
             var movement = await movementRepository.Get(movementId);
 
@@ -38,7 +39,7 @@
                 throw new InvalidOperationException("The when the waste was received date cannot be in the future.");
             }
 
-            var partialRejection = movement.PartialReject(movementId, date, reason, actualQuantity, actualUnit, rejectedQuantity, rejectedUnit);
+            var partialRejection = movement.PartialReject(movementId, date, reason, actualQuantity, actualUnit, rejectedQuantity, rejectedUnit, wasteDisposedDate);
 
             importMovementPartailRejectionRepository.Add(partialRejection);
 
