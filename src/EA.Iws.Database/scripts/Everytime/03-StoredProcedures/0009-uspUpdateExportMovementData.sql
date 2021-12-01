@@ -17,6 +17,8 @@ ALTER PROCEDURE [Notification].[uspUpdateExportMovementData]
                 ,@Comments NVARCHAR(MAX)
 				,@RecoveryDate DATE
 				,@CreatedBy nvarchar(128)
+				,@RejectedQuantity DECIMAL(18,4)
+				,@RejectedUnit int
 				AS
 BEGIN
     SET NOCOUNT ON;
@@ -32,7 +34,6 @@ BEGIN
 	WHERE [Id]= @MovementId AND [NotificationId] = @NotificationId
 		
 	--UPDATE RECEIPT
-
 	IF EXISTS(SELECT * FROM [Notification].[MovementReceipt] WHERE [MovementId]= @MovementId)
 	BEGIN
 		UPDATE [Notification].[MovementReceipt]
@@ -42,16 +43,28 @@ BEGIN
 		WHERE [MovementId]= @MovementId 
 	END
 	
-	
 	IF EXISTS(SELECT * FROM [Notification].[MovementRejection] WHERE [MovementId]= @MovementId)
 	BEGIN
 		UPDATE [Notification].[MovementRejection]
 		SET    [Date] = ISNULL(@RejectiontDate, [Date]) 
-			  ,[Reason] = ISNULL(@RejectionReason, [Reason]) 			 
+			  ,[Reason] = ISNULL(@RejectionReason, [Reason])
+			  ,[RejectedQuantity] = @RejectedQuantity
+			  ,[RejectedUnit] = @RejectedUnit
 		 WHERE [MovementId] = @MovementId
-
 	END
-	
+
+	IF EXISTS(SELECT * FROM [Notification].[MovementPartialRejection] WHERE [MovementId]= @MovementId)
+	BEGIN
+		UPDATE [Notification].[MovementPartialRejection]
+		SET    [WasteReceivedDate] = ISNULL(@RejectiontDate, [WasteReceivedDate]) 
+			  ,[Reason] = ISNULL(@RejectionReason, [Reason])
+			  ,[RejectedQuantity] = @RejectedQuantity
+			  ,[RejectedUnit] = @RejectedUnit
+			  ,[ActualQuantity] = @Quantity
+			  ,[ActualUnit] = @Unit
+			  ,[WasteDisposedDate] = @RecoveryDate
+		 WHERE [MovementId] = @MovementId
+	END
 
 	--UPDATE RECOVERY
 	IF EXISTS(SELECT * FROM [Notification].[MovementOperationReceipt] WHERE [MovementId]= @MovementId)
@@ -69,9 +82,4 @@ BEGIN
 		
 END
 
-
-
-
 GO
-
-
