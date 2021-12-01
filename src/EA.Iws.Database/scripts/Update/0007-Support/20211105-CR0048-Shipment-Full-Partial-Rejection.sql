@@ -53,13 +53,18 @@ CREATE TABLE [ImportNotification].[MovementPartialRejection](
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
 
-/****** Object:  StoredProcedure [Notification].[uspUpdateExportMovementData]    Script Date: 01/12/2021 10:57:16 ******/
+/****** Object:  StoredProcedure [Notification].[uspUpdateExportMovementData]    Script Date: 01/12/2021 12:25:24 ******/
+DROP PROCEDURE [Notification].[uspUpdateExportMovementData]
+GO
+
+/****** Object:  StoredProcedure [Notification].[uspUpdateExportMovementData]    Script Date: 01/12/2021 12:25:24 ******/
 SET ANSI_NULLS ON
 GO
+
 SET QUOTED_IDENTIFIER ON
 GO
 
-ALTER PROCEDURE [Notification].[uspUpdateExportMovementData] 
+CREATE PROCEDURE [Notification].[uspUpdateExportMovementData] 
                 @NotificationId UNIQUEIDENTIFIER
                 ,@MovementId UNIQUEIDENTIFIER
                 ,@PrenotificationDate DATE
@@ -91,7 +96,6 @@ BEGIN
 	WHERE [Id]= @MovementId AND [NotificationId] = @NotificationId
 		
 	--UPDATE RECEIPT
-
 	IF EXISTS(SELECT * FROM [Notification].[MovementReceipt] WHERE [MovementId]= @MovementId)
 	BEGIN
 		UPDATE [Notification].[MovementReceipt]
@@ -101,7 +105,6 @@ BEGIN
 		WHERE [MovementId]= @MovementId 
 	END
 	
-	
 	IF EXISTS(SELECT * FROM [Notification].[MovementRejection] WHERE [MovementId]= @MovementId)
 	BEGIN
 		UPDATE [Notification].[MovementRejection]
@@ -110,7 +113,6 @@ BEGIN
 			  ,[RejectedQuantity] = @RejectedQuantity
 			  ,[RejectedUnit] = @RejectedUnit
 		 WHERE [MovementId] = @MovementId
-
 	END
 
 	IF EXISTS(SELECT * FROM [Notification].[MovementPartialRejection] WHERE [MovementId]= @MovementId)
@@ -124,9 +126,7 @@ BEGIN
 			  ,[ActualUnit] = @Unit
 			  ,[WasteDisposedDate] = @RecoveryDate
 		 WHERE [MovementId] = @MovementId
-
 	END
-	
 
 	--UPDATE RECOVERY
 	IF EXISTS(SELECT * FROM [Notification].[MovementOperationReceipt] WHERE [MovementId]= @MovementId)
@@ -143,18 +143,20 @@ BEGIN
 	COMMIT;
 		
 END
-
-
-
 GO
 
-/****** Object:  StoredProcedure [ImportNotification].[uspUpdateImportMovementData]    Script Date: 01/12/2021 11:52:57 ******/
+/****** Object:  StoredProcedure [ImportNotification].[uspUpdateImportMovementData]    Script Date: 01/12/2021 12:23:21 ******/
+DROP PROCEDURE [ImportNotification].[uspUpdateImportMovementData]
+GO
+
+/****** Object:  StoredProcedure [ImportNotification].[uspUpdateImportMovementData]    Script Date: 01/12/2021 12:23:21 ******/
 SET ANSI_NULLS ON
 GO
+
 SET QUOTED_IDENTIFIER ON
 GO
 
-ALTER PROCEDURE [ImportNotification].[uspUpdateImportMovementData] 
+CREATE PROCEDURE [ImportNotification].[uspUpdateImportMovementData] 
                 @NotificationId UNIQUEIDENTIFIER
                 ,@MovementId UNIQUEIDENTIFIER
                 ,@PrenotificationDate DATE
@@ -184,7 +186,6 @@ BEGIN
 	WHERE [Id]= @MovementId AND [NotificationId] = @NotificationId
 		
 	--UPDATE RECEIPT
-
 	IF EXISTS(SELECT * FROM [ImportNotification].[MovementReceipt] WHERE [MovementId]= @MovementId)
 	BEGIN
 		UPDATE [ImportNotification].[MovementReceipt]
@@ -193,7 +194,6 @@ BEGIN
 		,[Unit] = ISNULL(@Unit, [Unit])
 		WHERE [MovementId]= @MovementId 
 	END
-	
 	
 	IF EXISTS(SELECT * FROM [ImportNotification].[MovementRejection] WHERE [MovementId]= @MovementId)
 	BEGIN
@@ -219,7 +219,6 @@ BEGIN
 		 WHERE [MovementId] = @MovementId
 
 	END
-	
 
 	--UPDATE RECOVERY
 	IF EXISTS(SELECT * FROM [ImportNotification].[MovementOperationReceipt] WHERE [MovementId]= @MovementId)
@@ -236,4 +235,6 @@ BEGIN
 	COMMIT;
 		
 END
+GO
+
 
