@@ -53,20 +53,13 @@ CREATE TABLE [ImportNotification].[MovementPartialRejection](
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
 
-GO
-
-/****** Object:  StoredProcedure [Notification].[uspUpdateExportMovementData]    Script Date: 25/11/2021 14:11:07 ******/
-DROP PROCEDURE [Notification].[uspUpdateExportMovementData]
-GO
-
-/****** Object:  StoredProcedure [Notification].[uspUpdateExportMovementData]    Script Date: 25/11/2021 14:11:07 ******/
+/****** Object:  StoredProcedure [Notification].[uspUpdateExportMovementData]    Script Date: 01/12/2021 10:57:16 ******/
 SET ANSI_NULLS ON
 GO
-
 SET QUOTED_IDENTIFIER ON
 GO
 
-CREATE PROCEDURE [Notification].[uspUpdateExportMovementData] 
+ALTER PROCEDURE [Notification].[uspUpdateExportMovementData] 
                 @NotificationId UNIQUEIDENTIFIER
                 ,@MovementId UNIQUEIDENTIFIER
                 ,@PrenotificationDate DATE
@@ -150,23 +143,18 @@ BEGIN
 	COMMIT;
 		
 END
+
+
+
 GO
 
-
-GO
-
-/****** Object:  StoredProcedure [ImportNotification].[uspUpdateImportMovementData]    Script Date: 25/11/2021 14:12:31 ******/
-DROP PROCEDURE [ImportNotification].[uspUpdateImportMovementData]
-GO
-
-/****** Object:  StoredProcedure [ImportNotification].[uspUpdateImportMovementData]    Script Date: 25/11/2021 14:12:31 ******/
+/****** Object:  StoredProcedure [ImportNotification].[uspUpdateImportMovementData]    Script Date: 01/12/2021 11:52:57 ******/
 SET ANSI_NULLS ON
 GO
-
 SET QUOTED_IDENTIFIER ON
 GO
 
-CREATE PROCEDURE [ImportNotification].[uspUpdateImportMovementData] 
+ALTER PROCEDURE [ImportNotification].[uspUpdateImportMovementData] 
                 @NotificationId UNIQUEIDENTIFIER
                 ,@MovementId UNIQUEIDENTIFIER
                 ,@PrenotificationDate DATE
@@ -248,5 +236,4 @@ BEGIN
 	COMMIT;
 		
 END
-GO
 
