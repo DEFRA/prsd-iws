@@ -23,20 +23,8 @@
         [Display(Name = "RejectionReasonLabel", ResourceType = typeof(ReceiptViewModelResources))]
         public string RejectionReason { get; set; }
 
-        [Display(Name = "FullyRejectionReasonInfomationLabel1", ResourceType = typeof(ReceiptViewModelResources))]
-        public string FullyRejectionReasonInfomation1 { get; set; }
-
-        [Display(Name = "FullyRejectionReasonInfomationLabel2", ResourceType = typeof(ReceiptViewModelResources))]
-        public string FullyRejectionReasonInfomation2 { get; set; }
-
-        [Display(Name = "PartiallyRejectionReasonInfomationLabel1", ResourceType = typeof(ReceiptViewModelResources))]
-        public string PartiallyRejectionReasonInfomation1 { get; set; }
-
         [Display(Name = "ShipmentRejectedQuantityLabel", ResourceType = typeof(ReceiptViewModelResources))]
         public string ShipmentRejectedQuantity { get; set; }
-
-        [Display(Name = "PartiallyRejectionReasonInfomationLabel2", ResourceType = typeof(ReceiptViewModelResources))]
-        public string PartiallyRejectionReasonInfomation2 { get; set; }
 
         [Display(Name = "WasShipmentRejectedLabel", ResourceType = typeof(ReceiptViewModelResources))]
         public bool WasShipmentRejected { get; set; }

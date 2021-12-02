@@ -159,7 +159,27 @@
             if (ReceivedDate.HasValue && WasShipmentAccepted && !ActualQuantity.HasValue)
             {
                 yield return new ValidationResult(IndexViewModelResources.QuantityRequired, new[] { "ActualQuantity" });
-            } 
+            }
+
+            if ((IsPartiallyRejected == true || IsRejected == true) && string.IsNullOrWhiteSpace(StatsMarking))
+            {
+                yield return new ValidationResult(CaptureViewModelResources.StatsMarkingRequired, new[] { "StatsMarking" });
+            }
+
+            if (IsPartiallyRejected == true && !ActualQuantity.HasValue)
+            {
+                yield return new ValidationResult(IndexViewModelResources.QuantityRequired, new[] { "ActualQuantity" });
+            }
+
+            if ((IsPartiallyRejected == true || IsRejected == true) && !RejectedQuantity.HasValue)
+            {
+                yield return new ValidationResult(IndexViewModelResources.QuantityRequired, new[] { "RejectedQuantity" });
+            }
+
+            if ((IsPartiallyRejected == true || IsRejected == true) && string.IsNullOrEmpty(RejectionReason))
+            {
+                yield return new ValidationResult(IndexViewModelResources.RejectionReasonRequired, new[] { "RejectionReason" });
+            }
         }
 
         public void SetSummaryData(InternalMovementSummary summaryData)

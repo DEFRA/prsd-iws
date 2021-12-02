@@ -32,32 +32,32 @@
             var selectedVal = this.id;
 
             if (selectedVal == "Accepted") {
-                $('#dvPartiallyRejectedComments').hide();
-                $("#dvRejectedQuantity").hide();
                 $("#dvCommentsOptions").show();
+                $("#dvRecoveryDate").show();
+                $("#dvAcceptReceipt").show();
+                $("#dvPartiallyRejectedReceipt").hide();
+                $("#dvRejectReceipt").hide();
                 $("#dvCommentSelectReasons").hide();
                 $("#dvComments").hide();
-                $("#dvRecoveryDate").show();
+                $("#dvActualQty").hide();
             } else if (selectedVal == "Partially") {
                 $('#dvPartiallyRejectedComments').show();
-                $("#dvPartiallyRejected").show();
-                $("#dvRejected").hide();
-                $("#dvActualQuantity").show();
-                $("#dvRejectedQuantity").show();
-                $("#dvCommentsOptions").hide();
+                $("#dvAcceptReceipt").hide();
+                $("#dvPartiallyRejectedReceipt").show();
                 $("#dvCommentSelectReasons").show();
+                $("#dvCommentsOptions").hide();
                 $("#dvComments").hide();
                 $("#dvRecoveryDate").show();
+                $("#dvActualQty").show();
             } else if (selectedVal == "Rejected") {
-                $('#dvPartiallyRejectedComments').show();
+                $("#dvAcceptReceipt").hide();
                 $("#dvRejected").show();
-                $("#dvPartiallyRejected").hide();
-                $("#dvActualQuantity").hide();
                 $("#dvRejectedQuantity").show();
-                $("#dvCommentsOptions").hide();
                 $("#dvCommentSelectReasons").show();
+                $("#dvCommentsOptions").hide();
                 $("#dvComments").hide();
                 $("#dvRecoveryDate").hide();
+                $("#dvActualQty").hide();
             } else if (selectedVal == "Comments-Yes") {
                 $("#dvCommentSelectReasons").show();
                 $("#dvComments").show();
