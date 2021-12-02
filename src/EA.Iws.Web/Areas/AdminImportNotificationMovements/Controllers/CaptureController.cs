@@ -176,7 +176,6 @@
                                                          MovementAuditType.PartiallyRejected);
             }
 
-            //if (model.Recovery.IsComplete() && (model.Receipt.IsComplete() || model.IsReceived) && !model.IsOperationCompleted && model.Receipt.ShipmentTypes == ShipmentType.Accepted)
             if (model.Recovery.IsComplete() && !model.IsOperationCompleted && model.Receipt.ShipmentTypes == ShipmentType.Accepted)
             {
                 await mediator.SendAsync(new RecordCompletedReceipt(movementId,

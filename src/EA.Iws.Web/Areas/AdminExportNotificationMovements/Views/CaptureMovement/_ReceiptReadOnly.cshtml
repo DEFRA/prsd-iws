@@ -11,16 +11,11 @@
     <p>@(Model.ShipmentTypes == ShipmentType.Accepted ? "Yes" : (Model.ShipmentTypes == ShipmentType.Rejected ? "No" : "Partialy"))</p>
 </div>
 
-@if (Model.ShipmentTypes == ShipmentType.Rejected)
+@if (Model.ShipmentTypes == ShipmentType.Accepted)
 {
     <div class="form-group">
-        <h3 class="heading-small">@Html.DisplayNameFor(m => m.RejectionReason)</h3>
-        <p>@Model.RejectionReason</p>
-    </div>
-
-    <div class="form-group">
-        <h3 class="heading-small">@Html.DisplayNameFor(m => m.RejectedQuantity)</h3>
-        <p>@Model.RejectedQuantity</p>
+        <h3 class="heading-small">@Html.DisplayNameFor(m => m.ActualQuantity)</h3>
+        <p>@Model.ActualQuantity.Value.ToString("G29") @EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(Model.ActualUnits.Value)</p>
     </div>
 }
 else if (Model.ShipmentTypes == ShipmentType.Partially)
@@ -32,18 +27,23 @@ else if (Model.ShipmentTypes == ShipmentType.Partially)
 
     <div class="form-group">
         <h3 class="heading-small">@Html.DisplayNameFor(m => m.RejectedQuantity)</h3>
-        <p>@Model.RejectedQuantity</p>
+        <p>@Model.RejectedQuantity.Value.ToString("G29") @EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(Model.RejectedUnits.Value)</p>
     </div>
 
     <div class="form-group">
         <h3 class="heading-small">@Html.DisplayNameFor(m => m.ActualQuantity)</h3>
-        <p>@Model.ActualQuantity</p>
+        <p>@Model.ActualQuantity.Value.ToString("G29") @EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(Model.ActualUnits.Value)</p>
     </div>
 }
-else
+else if (Model.ShipmentTypes == ShipmentType.Rejected)
 {
     <div class="form-group">
-        <h3 class="heading-small">@Html.DisplayNameFor(m => m.ActualQuantity)</h3>
-        <p>@Model.ActualQuantity.Value.ToString("G29") @EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(Model.ActualUnits.Value)</p>
+        <h3 class="heading-small">@Html.DisplayNameFor(m => m.RejectionReason)</h3>
+        <p>@Model.RejectionReason</p>
+    </div>
+
+    <div class="form-group">
+        <h3 class="heading-small">@Html.DisplayNameFor(m => m.RejectedQuantity)</h3>
+        <p>@Model.RejectedQuantity.Value.ToString("G29") @EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(Model.RejectedUnits.Value)</p>
     </div>
 }
