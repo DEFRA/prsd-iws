@@ -73,18 +73,18 @@ namespace EA.Iws.Web.Areas.AdminExportNotificationMovements.ViewModels.CaptureMo
         /// <summary>
         ///   Looks up a localized string similar to Please enter all details that have been supplied to indicate why the shipment has been fully rejected by the receiving facility. This should be as detailed as possible..
         /// </summary>
-        public static string FullyRejectionReasonInfomationLabel1 {
+        public static string FullyRejectionReasonInfomation1 {
             get {
-                return ResourceManager.GetString("FullyRejectionReasonInfomationLabel1", resourceCulture);
+                return ResourceManager.GetString("FullyRejectionReasonInfomation1", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to If applicable, please indicate the likely remediation process to follow..
         /// </summary>
-        public static string FullyRejectionReasonInfomationLabel2 {
+        public static string FullyRejectionReasonInfomation2 {
             get {
-                return ResourceManager.GetString("FullyRejectionReasonInfomationLabel2", resourceCulture);
+                return ResourceManager.GetString("FullyRejectionReasonInfomation2", resourceCulture);
             }
         }
         
@@ -100,18 +100,18 @@ namespace EA.Iws.Web.Areas.AdminExportNotificationMovements.ViewModels.CaptureMo
         /// <summary>
         ///   Looks up a localized string similar to Please enter all details that have been supplied to indicate why the shipment has been partially rejected by the receiving facility. This should be as detailed as possible..
         /// </summary>
-        public static string PartiallyRejectionReasonInfomationLabel1 {
+        public static string PartiallyRejectionReasonInfomation1 {
             get {
-                return ResourceManager.GetString("PartiallyRejectionReasonInfomationLabel1", resourceCulture);
+                return ResourceManager.GetString("PartiallyRejectionReasonInfomation1", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to If applicable, please indicate the likely remediation process to follow..
         /// </summary>
-        public static string PartiallyRejectionReasonInfomationLabel2 {
+        public static string PartiallyRejectionReasonInfomation2 {
             get {
-                return ResourceManager.GetString("PartiallyRejectionReasonInfomationLabel2", resourceCulture);
+                return ResourceManager.GetString("PartiallyRejectionReasonInfomation2", resourceCulture);
             }
         }
         

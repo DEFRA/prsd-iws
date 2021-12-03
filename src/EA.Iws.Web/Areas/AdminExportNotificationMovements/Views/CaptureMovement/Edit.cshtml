@@ -46,8 +46,6 @@
                     @Html.HiddenFor(m => m.Receipt.RejectionReason)
                     @Html.HiddenFor(m => m.Receipt.ActualQuantity)
                     @Html.HiddenFor(m => m.Receipt.ActualUnits)
-                    @Html.HiddenFor(m => m.Receipt.RejectedQuantity)
-                    @Html.HiddenFor(m => m.Receipt.RejectedUnits)
                     @Html.Partial("_ReceiptReadOnly", Model.Receipt)
                 }
                 else
