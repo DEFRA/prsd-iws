@@ -31,7 +31,6 @@
                 @Html.HiddenFor(m => m.IsOperationCompleted)
                 @Html.HiddenFor(m => m.IsRejected)
                 @Html.HiddenFor(m => m.IsPartiallyRejected)
-                @Html.HiddenFor(m => m.Receipt.ShipmentTypes)
 
                 <h1 class="data-item bold-xlarge">@string.Format(Resource.ShipmentNumber, Model.ShipmentNumber)</h1>
 
@@ -78,11 +77,7 @@
                     @Html.Partial("_Comments")
                 }
 
-                if (Model.IsReceived || Model.Receipt.ShipmentTypes == ShipmentType.Accepted)
-                {
-                    <button class="button" type="submit">@Constants.ContinueButtonText</button>
-                }
-
+                <button class="button" type="submit">@Constants.ContinueButtonText</button>
             }
         </div>
 
