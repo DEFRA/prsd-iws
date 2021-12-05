@@ -1,4 +1,5 @@
 ﻿INSERT INTO [Lookup].[MovementStatus] ([Id], [Status]) VALUES(8, 'PartiallyRejected')
+INSERT INTO [Lookup].[MovementAuditType] ([Id], [AuditType]) VALUES(11, 'PartiallyRejected')
 
 ALTER TABLE [Notification].[MovementRejection] ADD [RejectedQuantity] decimal(18,4) NULL;
 ALTER TABLE [Notification].[MovementRejection] ADD [RejectedUnit] INT NULL;
