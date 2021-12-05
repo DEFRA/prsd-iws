@@ -147,9 +147,6 @@
   <data name="ReceivedDateLabel" xml:space="preserve">
     <value>When was the waste received?</value>
   </data>
-  <data name="ReceivedDateLabel1" xml:space="preserve">
-    <value>When was the waste received?</value>
-  </data>
   <data name="RejectionReasonLabel" xml:space="preserve">
     <value>Reason why the shipment was rejected and any relevant details</value>
   </data>
@@ -167,5 +164,8 @@
   </data>
   <data name="HasNoPrenotification" xml:space="preserve">
     <value>No prenotification received</value>
+  </data>
+  <data name="WasteDisposedDateRequired" xml:space="preserve">
+    <value>Please provide the date</value>
   </data>
 </root>

@@ -20,6 +20,7 @@
         private readonly TestableShipmentInfo shipmentInfo;
         private readonly IMovementRepository movementRepository;
         private readonly IShipmentInfoRepository shipmentRepository;
+        private readonly IMovementPartialRejectionRepository movementPartialRejectionRepository;
 
         public MovementQuantityTests()
         {
@@ -42,8 +43,9 @@
 
             movementRepository = A.Fake<IMovementRepository>();
             shipmentRepository = A.Fake<IShipmentInfoRepository>();
+            movementPartialRejectionRepository = A.Fake<IMovementPartialRejectionRepository>();
 
-            movementQuantity = new NotificationMovementsQuantity(movementRepository, shipmentRepository);
+            movementQuantity = new NotificationMovementsQuantity(movementRepository, shipmentRepository, movementPartialRejectionRepository);
         }
 
         private void SetUpRepositoryCalls(Movement[] movements, ShipmentInfo shipment)

@@ -251,11 +251,38 @@ namespace EA.Iws.Web.Areas.AdminExportNotificationMovements.ViewModels.CaptureMo
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Please provide the date.
+        /// </summary>
+        public static string RecoveredDateRequired {
+            get {
+                return ResourceManager.GetString("RecoveredDateRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Do not provide {0} date when the prenotification has been rejected.
         /// </summary>
         public static string RecoveryDateCannotBeEnteredForRejected {
             get {
                 return ResourceManager.GetString("RecoveryDateCannotBeEnteredForRejected", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Rejected quantity can&apos;t be greater than actual qunatity.
+        /// </summary>
+        public static string RejectedQuantityCantBeGreaterThanActualQunatity {
+            get {
+                return ResourceManager.GetString("RejectedQuantityCantBeGreaterThanActualQunatity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please provide the rejected quantity.
+        /// </summary>
+        public static string RejectQuantityRequired {
+            get {
+                return ResourceManager.GetString("RejectQuantityRequired", resourceCulture);
             }
         }
         
@@ -274,6 +301,15 @@ namespace EA.Iws.Web.Areas.AdminExportNotificationMovements.ViewModels.CaptureMo
         public static string StatsMarking {
             get {
                 return ResourceManager.GetString("StatsMarking", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please select annual stats marking for rejection.
+        /// </summary>
+        public static string StatsMarkingRequired {
+            get {
+                return ResourceManager.GetString("StatsMarkingRequired", resourceCulture);
             }
         }
     }

@@ -160,6 +160,7 @@
     <Compile Include="Movement\GetSubmittedMovementsForRecoveryByNotificationIdHandlerTests.cs" />
     <Compile Include="Movement\GetSubmittedMovementsHandlerTests.cs" />
     <Compile Include="Movement\GetNotificationIdByMovementIdHandlerTests.cs" />
+    <Compile Include="Movement\Partial\SetMovementPartialRejectedHandlerTests.cs" />
     <Compile Include="Movement\Receive\SetMovementAcceptedHandlerTests.cs" />
     <Compile Include="Movement\RecordMovementStatusChangeTest.cs" />
     <Compile Include="Movement\Reject\SetMovementRejectedHandlerTests.cs" />

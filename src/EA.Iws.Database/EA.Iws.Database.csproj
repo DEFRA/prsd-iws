@@ -52,6 +52,7 @@
   <ItemGroup>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Content Include="scripts\Update\0007-Support\20211105-CR0048-Shipment-Full-Partial-Rejection.sql" />
     <Content Include="missing-indexes.sql" />
     <Content Include="script-views-as-tables.sql" />
     <Content Include="scripts\Everytime\02-Views\0027-Reports-Producers.sql" />

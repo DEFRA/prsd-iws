@@ -31,20 +31,21 @@
                 @Html.HiddenFor(m => m.IsReceived)
                 @Html.HiddenFor(m => m.IsOperationCompleted)
                 @Html.HiddenFor(m => m.IsRejected)
-                
-                    <h1 class="data-item bold-xlarge">@string.Format(Resource.ShipmentNumber, Model.ShipmentNumber)</h1>
-                
+                @Html.HiddenFor(m => m.IsPartiallyRejected)
+
+                <h1 class="data-item bold-xlarge">@string.Format(Resource.ShipmentNumber, Model.ShipmentNumber)</h1>
+
                 @Html.Partial("_PrenotifyReadOnly")
 
                 <hr />
 
-                if (Model.IsReceived || Model.IsRejected)
+                if (Model.IsReceived || Model.IsRejected || Model.IsPartiallyRejected)
                 {
                     @Html.HiddenFor(m => m.Receipt.ReceivedDate.Date)
                     @Html.HiddenFor(m => m.Receipt.WasAccepted)
                     @Html.HiddenFor(m => m.Receipt.RejectionReason)
                     @Html.HiddenFor(m => m.Receipt.ActualQuantity)
-                    @Html.HiddenFor(m => m.Receipt.Units)
+                    @Html.HiddenFor(m => m.Receipt.ActualUnits)
                     @Html.Partial("_ReceiptReadOnly", Model.Receipt)
                 }
                 else
@@ -88,16 +89,17 @@
 </div>
 @section scripts {
     @Html.Partial("_Scripts")
+
     <script>
         $(function () {
             @if (!Model.IsReceived)
             {
                 @:$("#Receipt_ReceivedDate_Date").focus();
-                        }
+            }
             else if (!Model.IsOperationCompleted)
             {
                 @:$("#Recovery_RecoveryDate_Date").focus();
-                        }
+            }
         });
     </script>
 }

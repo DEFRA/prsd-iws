@@ -1,28 +1,70 @@
 ﻿<script>
-        var prenotificationDateSelector = $("#PrenotificationDate_Date");
+    var prenotificationDateSelector = $("#PrenotificationDate_Date");
 
-        function togglePrenotificationDate(checked) {
-            if (checked) {
-                prenotificationDateSelector
-                    .val('')
-                    .attr('readonly', true)
-                    .css('background-color', '#DEDEDE')
-                    .css('color', 'gray');
-            } else {
-                prenotificationDateSelector
-                    .attr('readonly', false)
-                    .css('background-color', 'white')
-                    .css('color', 'black');
-            }
+    function togglePrenotificationDate(checked) {
+        if (checked) {
+            prenotificationDateSelector
+                .val('')
+                .attr('readonly', true)
+                .css('background-color', '#DEDEDE')
+                .css('color', 'gray');
+        } else {
+            prenotificationDateSelector
+                .attr('readonly', false)
+                .css('background-color', 'white')
+                .css('color', 'black');
         }
+    }
 
-        togglePrenotificationDate($('#HasNoPrenotification').is(':checked'));
+    togglePrenotificationDate($('#HasNoPrenotification').is(':checked'));
 
-        $(function () {
-            $("#HasNoPrenotification").click(function () {
-                togglePrenotificationDate($('#HasNoPrenotification').is(':checked'));
-            });
-
-            $('.container').stickem();
+    $(function () {
+        $("#HasNoPrenotification").click(function () {
+            togglePrenotificationDate($('#HasNoPrenotification').is(':checked'));
         });
+
+        $('.container').stickem();
+    });
+
+    $(function () {
+
+        $('input:radio').change(function () {
+            var selectedVal = this.id;
+
+            if (selectedVal == "Accepted") {
+                $('#dvPartiallyRejectedComments').hide();
+                $("#dvRejectedQuantity").hide();
+                $("#dvCommentsOptions").show();
+                $("#dvCommentSelectReasons").hide();
+                $("#dvComments").hide();
+                $("#dvRecoveryDate").show();
+            } else if (selectedVal == "Partially") {
+                $('#dvPartiallyRejectedComments').show();
+                $("#dvPartiallyRejected").show();
+                $("#dvRejected").hide();
+                $("#dvActualQuantity").show();
+                $("#dvRejectedQuantity").show();
+                $("#dvCommentsOptions").hide();
+                $("#dvCommentSelectReasons").show();
+                $("#dvComments").hide();
+                $("#dvRecoveryDate").show();
+            } else if (selectedVal == "Rejected") {
+                $('#dvPartiallyRejectedComments').show();
+                $("#dvRejected").show();
+                $("#dvPartiallyRejected").hide();
+                $("#dvActualQuantity").hide();
+                $("#dvRejectedQuantity").show();
+                $("#dvCommentsOptions").hide();
+                $("#dvCommentSelectReasons").show();
+                $("#dvComments").hide();
+                $("#dvRecoveryDate").hide();
+            } else if (selectedVal == "Comments-Yes") {
+                $("#dvCommentSelectReasons").show();
+                $("#dvComments").show();
+            } else if (selectedVal == "Comments-No") {
+                $("#dvCommentSelectReasons").hide();
+                $("#dvComments").hide();
+            }
+        });
+    });
 </script>

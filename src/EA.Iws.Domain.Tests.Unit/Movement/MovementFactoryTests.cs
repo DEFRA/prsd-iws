@@ -34,6 +34,7 @@
         private readonly INotificationApplicationRepository notificationApplicationRepository;
         private readonly IMovementDateValidator dateValidator;
         private readonly Guid userId = new Guid("E45663E5-1BD0-4AC3-999B-0E9975BE86FC");
+        private readonly IMovementPartialRejectionRepository movementPartialRejectionRepository;
 
         public MovementFactoryTests()
         {
@@ -47,6 +48,7 @@
             workingDayCalculator = A.Fake<IWorkingDayCalculator>();
             notificationApplicationRepository = A.Fake<INotificationApplicationRepository>();
             financialGuaranteeRepository = A.Fake<IFinancialGuaranteeRepository>();
+            movementPartialRejectionRepository = A.Fake<IMovementPartialRejectionRepository>();
 
             dateValidator = A.Fake<IMovementDateValidator>();
 
@@ -54,7 +56,7 @@
                 movementRepository, 
                 shipmentRepository);
             var numberOfMovements = new NumberOfMovements(movementRepository, shipmentRepository);
-            var movementsQuatity = new NotificationMovementsQuantity(movementRepository, shipmentRepository);
+            var movementsQuatity = new NotificationMovementsQuantity(movementRepository, shipmentRepository, movementPartialRejectionRepository);
             var numberOfActiveLoads = new NumberOfActiveLoads(movementRepository, financialGuaranteeRepository);
             var consentPeriod = new ConsentPeriod(consentRepository, workingDayCalculator, notificationApplicationRepository);
 

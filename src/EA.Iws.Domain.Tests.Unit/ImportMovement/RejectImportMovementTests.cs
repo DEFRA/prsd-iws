@@ -41,7 +41,7 @@
 
             A.CallTo(() => movementRepository.Get(movementId)).Returns(movement);
 
-            var result = await rejectFactory.Reject(movementId, PastDate, rejectionreason);
+            var result = await rejectFactory.Reject(movementId, PastDate, rejectionreason, 15, Core.Shared.ShipmentQuantityUnits.Tonnes);
 
             Assert.Equal(PastDate, result.Date);
         }
@@ -53,7 +53,7 @@
 
             A.CallTo(() => movementRepository.Get(movementId)).Returns(movement);
 
-            var result = await rejectFactory.Reject(movementId, Today, rejectionreason);
+            var result = await rejectFactory.Reject(movementId, Today, rejectionreason, 15, Core.Shared.ShipmentQuantityUnits.Tonnes);
 
             Assert.Equal(Today, result.Date);
         }
@@ -65,7 +65,7 @@
 
             A.CallTo(() => movementRepository.Get(movementId)).Returns(movement);
 
-            await Assert.ThrowsAsync<InvalidOperationException>(() => rejectFactory.Reject(movementId, PastDate, rejectionreason));
+            await Assert.ThrowsAsync<InvalidOperationException>(() => rejectFactory.Reject(movementId, PastDate, rejectionreason, 15, Core.Shared.ShipmentQuantityUnits.Tonnes));
         }
 
         [Fact]
@@ -75,7 +75,7 @@
 
             A.CallTo(() => movementRepository.Get(movementId)).Returns(movement);
 
-            var result = await rejectFactory.Reject(movementId, PastDate, rejectionreason);
+            var result = await rejectFactory.Reject(movementId, PastDate, rejectionreason, 15, Core.Shared.ShipmentQuantityUnits.Tonnes);
 
             Assert.Equal(PastDate, result.Date);
         }
@@ -87,7 +87,7 @@
 
             A.CallTo(() => movementRepository.Get(movementId)).Returns(movement);
 
-            await Assert.ThrowsAsync<InvalidOperationException>(() => rejectFactory.Reject(movementId, FutureDate, rejectionreason));
+            await Assert.ThrowsAsync<InvalidOperationException>(() => rejectFactory.Reject(movementId, FutureDate, rejectionreason, 15, Core.Shared.ShipmentQuantityUnits.Tonnes));
         }
     }
 }

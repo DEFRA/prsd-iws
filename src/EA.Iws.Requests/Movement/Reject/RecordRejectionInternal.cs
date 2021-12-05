@@ -3,6 +3,7 @@
     using System;
     using Core.Authorization;
     using Core.Authorization.Permissions;
+    using EA.Iws.Core.Shared;
     using Prsd.Core;
     using Prsd.Core.Mediator;
 
@@ -15,15 +16,23 @@
 
         public DateTime RejectedDate { get; private set; }
 
+        public decimal? RejectedQuantity { get; set; }
+
+        public ShipmentQuantityUnits? RejectedUnits { get; set; }
+
         public RecordRejectionInternal(Guid movementId, 
             DateTime rejectedDate, 
-            string rejectionReason)
+            string rejectionReason,
+            decimal? rejectedQuantity,
+            ShipmentQuantityUnits? units)
         {
             Guard.ArgumentNotNullOrEmpty(() => rejectionReason, rejectionReason);
 
             MovementId = movementId;
             RejectedDate = rejectedDate;
             RejectionReason = rejectionReason;
+            RejectedQuantity = rejectedQuantity;
+            RejectedUnits = units;
         }
     }
 }

@@ -15,11 +15,13 @@
         private readonly MovementDetailsFactory factory;
         private readonly Guid notificationId = new Guid("83A0D663-0523-4675-ABC1-7E64330F88DC");
         private TestableMovement movement;
+        private readonly IMovementPartialRejectionRepository movementPartialRejectionRepository;
 
         public MovementsDetailsFactoryTests()
         {
             var movementRepository = A.Fake<IMovementRepository>();
             var shipmentRepository = A.Fake<IShipmentInfoRepository>();
+            movementPartialRejectionRepository = A.Fake<IMovementPartialRejectionRepository>();
 
             // Setup notification with 1000Kg intended quantity and 950Kg received
 
@@ -46,7 +48,7 @@
             A.CallTo(() => shipmentRepository.GetByNotificationId(notificationId))
                 .Returns(shipment);
 
-            var movementQuantity = new NotificationMovementsQuantity(movementRepository, shipmentRepository);
+            var movementQuantity = new NotificationMovementsQuantity(movementRepository, shipmentRepository, movementPartialRejectionRepository);
             factory = new MovementDetailsFactory(movementQuantity);
         }
 

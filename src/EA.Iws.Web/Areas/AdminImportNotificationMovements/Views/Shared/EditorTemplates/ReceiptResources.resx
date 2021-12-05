@@ -126,4 +126,7 @@
   <data name="MainHeading" xml:space="preserve">
     <value>Received</value>
   </data>
+  <data name="ShipmentAcceptedLable" xml:space="preserve">
+    <value>Was the shipment accepted?</value>
+  </data>
 </root>

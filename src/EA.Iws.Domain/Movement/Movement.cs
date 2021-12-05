@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
     using Core.Movement;
+    using EA.Iws.Core.Shared;
     using Prsd.Core;
     using Prsd.Core.Domain;
     using Prsd.Core.Extensions;
@@ -29,7 +30,8 @@
             Reject,
             Cancel,
             ReceiveInternal,
-            CompleteInternal
+            CompleteInternal,
+            PartialReject
         }
 
         protected Movement()
@@ -167,7 +169,8 @@
                 .Permit(Trigger.Receive, MovementStatus.Received)
                 .Permit(Trigger.ReceiveInternal, MovementStatus.Received)
                 .Permit(Trigger.Reject, MovementStatus.Rejected)
-                .Permit(Trigger.Cancel, MovementStatus.Cancelled);
+                .Permit(Trigger.Cancel, MovementStatus.Cancelled)
+                .Permit(Trigger.PartialReject, MovementStatus.PartiallyRejected);
 
             stateMachine.Configure(MovementStatus.Received)
                 .OnEntryFrom(acceptedTrigger, OnReceived)
@@ -184,7 +187,8 @@
                 .Permit(Trigger.Receive, MovementStatus.Received)
                 .Permit(Trigger.Reject, MovementStatus.Rejected)
                 .Permit(Trigger.SubmitInternal, MovementStatus.Submitted)
-                .Permit(Trigger.Cancel, MovementStatus.Cancelled);
+                .Permit(Trigger.Cancel, MovementStatus.Cancelled)
+                .Permit(Trigger.PartialReject, MovementStatus.PartiallyRejected);
 
             return stateMachine;
         }
@@ -217,14 +221,33 @@
             PrenotificationDate = prenotificationDate;
         }
 
-        internal MovementRejection Reject(DateTime dateReceived, string reason)
+        internal MovementRejection Reject(DateTime dateReceived, string reason, decimal? quantity, ShipmentQuantityUnits? unit)
         {
             Guard.ArgumentNotDefaultValue(() => dateReceived, dateReceived);
             Guard.ArgumentNotDefaultValue(() => reason, reason);
 
-            var rejection = new MovementRejection(Id, dateReceived, reason);
+            var rejection = new MovementRejection(Id, dateReceived, reason, quantity, unit);
 
             stateMachine.Fire(Trigger.Reject);
+
+            return rejection;
+        }
+
+        internal MovementPartialRejection PartialReject(Guid movementId,
+                                                     DateTime rejectionDate,
+                                                     string reason,
+                                                     decimal actualQuantity,
+                                                     ShipmentQuantityUnits actualUnit,
+                                                     decimal rejectedQuantity,
+                                                     ShipmentQuantityUnits rejectedUnit,
+                                                     DateTime wasteDisposeddDate)
+        {
+            Guard.ArgumentNotDefaultValue(() => rejectionDate, rejectionDate);
+            Guard.ArgumentNotDefaultValue(() => reason, reason);
+
+            var rejection = new MovementPartialRejection(movementId, rejectionDate, reason, actualQuantity, actualUnit, rejectedQuantity, rejectedUnit, wasteDisposeddDate);
+
+            stateMachine.Fire(Trigger.PartialReject);
 
             return rejection;
         }

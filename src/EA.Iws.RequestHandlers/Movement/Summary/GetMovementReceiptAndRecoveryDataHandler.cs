@@ -1,6 +1,5 @@
 ﻿namespace EA.Iws.RequestHandlers.Movement.Summary
 {
-    using System;
     using System.Linq;
     using System.Threading.Tasks;
     using Core.Movement;
@@ -17,16 +16,19 @@
         private readonly INotificationApplicationRepository notificationApplicationRepository;
         private readonly IMovementRejectionRepository movementRejectionRepository;
         private readonly IShipmentInfoRepository shipmentInfoRepository;
+        private readonly IMovementPartialRejectionRepository movementPartialRejectionRepository;
 
         public GetMovementReceiptAndRecoveryDataHandler(IMovementRepository movementRepository, 
             INotificationApplicationRepository notificationApplicationRepository,
             IMovementRejectionRepository movementRejectionRepository,
-            IShipmentInfoRepository shipmentInfoRepository)
+            IShipmentInfoRepository shipmentInfoRepository,
+            IMovementPartialRejectionRepository movementPartialRejectionRepository)
         {
             this.movementRepository = movementRepository;
             this.notificationApplicationRepository = notificationApplicationRepository;
             this.movementRejectionRepository = movementRejectionRepository;
             this.shipmentInfoRepository = shipmentInfoRepository;
+            this.movementPartialRejectionRepository = movementPartialRejectionRepository;
         }
 
         public async Task<MovementReceiptAndRecoveryData> HandleAsync(GetMovementReceiptAndRecoveryData message)
@@ -36,6 +38,8 @@
             var notification = await notificationApplicationRepository.GetById(movement.NotificationId);
 
             var movementRejection = await movementRejectionRepository.GetByMovementIdOrDefault(movement.Id);
+
+            var movementPartialRejection = await movementPartialRejectionRepository.GetByMovementIdOrDefault(movement.Id);
 
             var shipmentInfo = await shipmentInfoRepository.GetByNotificationId(notification.Id);
 
@@ -62,9 +66,9 @@
                 data.IsReceived = true;
             }
 
-            if (movement.CompletedReceipt != null)
+            if (movement.CompletedReceipt != null || (movementPartialRejection != null && movementPartialRejection.WasteDisposedDate != null))
             {
-                data.OperationCompleteDate = movement.CompletedReceipt.Date;
+                data.OperationCompleteDate = (movement.CompletedReceipt != null ? movement.CompletedReceipt.Date : movementPartialRejection.WasteDisposedDate);
                 data.IsOperationCompleted = true;
             }
 
@@ -72,7 +76,20 @@
             {
                 data.RejectionReason = movementRejection.Reason;
                 data.ReceiptDate = movementRejection.Date;
+                data.RejectedQuantity = movementRejection.RejectedQuantity;
+                data.RejectedUnit = movementRejection.RejectedUnit;
                 data.IsRejected = true;
+            }
+
+            if (movementPartialRejection != null)
+            {
+                data.RejectionReason = movementPartialRejection.Reason;
+                data.ReceiptDate = movementPartialRejection.WasteReceivedDate;
+                data.ActualQuantity = movementPartialRejection.ActualQuantity;
+                data.ReceiptUnits = movementPartialRejection.ActualUnit;
+                data.RejectedQuantity = movementPartialRejection.RejectedQuantity;
+                data.RejectedUnit = movementPartialRejection.RejectedUnit;
+                data.IsPartiallyRejected = true;
             }
 
             return data;
