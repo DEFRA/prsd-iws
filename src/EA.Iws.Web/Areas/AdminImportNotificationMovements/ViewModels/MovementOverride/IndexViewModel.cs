@@ -3,6 +3,8 @@
     using Core.ImportMovement;
     using Core.ImportNotificationMovements;
     using Core.Shared;
+    using EA.Iws.Web.Areas.AdminImportNotificationMovements.ViewModels.Capture;
+    using EA.Iws.Web.Infrastructure.Validation;
     using Prsd.Core.Helpers;
     using System;
     using System.Collections.Generic;
@@ -60,6 +62,8 @@
 
         public bool IsRejected { get; set; }
 
+        public bool IsPartiallyRejected { get; set; }
+
         [Display(Name = "HasComments", ResourceType = typeof(IndexViewModelResources))]
         public bool HasComments { get; set; }
 
@@ -88,6 +92,12 @@
         public string QuantityReceivedTotal { get; set; }
 
         public string AverageTonnage { get; set; }
+
+        [Display(Name = "RejectedQuantityLabel", ResourceType = typeof(ReceiptViewModelResources))]
+        [IsValidNumber(14, ErrorMessageResourceName = "MaximumActualQuantity", ErrorMessageResourceType = typeof(ReceiptViewModelResources), IsOptional = true)]
+        public decimal? RejectedQuantity { get; set; }
+
+        public ShipmentQuantityUnits? RejectedUnits { get; set; }
 
         public IndexViewModel()
         {
@@ -125,6 +135,9 @@
             WasAccepted = string.IsNullOrWhiteSpace(data.ReceiptData.RejectionReason);
             RejectionReason = data.ReceiptData.RejectionReason;
             PossibleUnits = data.ReceiptData.PossibleUnits;
+            IsPartiallyRejected = data.IsPartiallyRejected;
+            RejectedQuantity = data.RejectedQuantity;
+            RejectedUnits = data.RejectedUnit;
 
             NotificationType = data.Data.NotificationType;
             Date = data.RecoveryData.OperationCompleteDate.HasValue ? data.RecoveryData.OperationCompleteDate.Value.DateTime : (DateTime?)null;
@@ -150,6 +163,16 @@
             if (ReceivedDate.HasValue && WasAccepted && !ActualQuantity.HasValue)
             {
                 yield return new ValidationResult(IndexViewModelResources.QuantityRequired, new[] { "ActualQuantity" });
+            }
+
+            if (IsPartiallyRejected && !Date.HasValue)
+            {
+                yield return new ValidationResult(IndexViewModelResources.WasteDisposedDateRequired, new[] { "Date" });
+            }
+
+            if (IsReceived && ActualQuantity.HasValue &&  !Date.HasValue)
+            {
+                yield return new ValidationResult(IndexViewModelResources.WasteDisposedDateRequired, new[] { "Date" });
             }
         }
     }

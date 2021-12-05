@@ -83,7 +83,10 @@
                 {
                     WasAccepted = false,
                     ReceivedDate = new Web.ViewModels.Shared.MaskedDateInputViewModel(rejectedDate),
-                    RejectionReason = "TestRejection"
+                    RejectionReason = "TestRejection",
+                    RejectedQuantity = 1,
+                    RejectedUnits = ShipmentQuantityUnits.Tonnes,
+                    ShipmentTypes = ShipmentType.Rejected
                 }
             };
 
@@ -92,6 +95,41 @@
             var result = await controller.Create(notificationId, model);
 
             A.CallTo(() => this.auditService.AddImportMovementAudit(mediator, notificationId, 1, controller.User.GetUserId(), MovementAuditType.Rejected)).MustHaveHappened(Repeated.Exactly.Once);
+        }
+
+        [Fact]
+        public async Task Add_PartialRejectedAudit()
+        {
+            var model = new CaptureViewModel
+            {
+                NotificationId = notificationId,
+                ShipmentNumber = 1,
+                HasNoPrenotification = true,
+                ActualShipmentDate = new Web.ViewModels.Shared.MaskedDateInputViewModel(actualDate),
+                Receipt = new ReceiptViewModel
+                {
+                    WasAccepted = false,
+                    ReceivedDate = new Web.ViewModels.Shared.MaskedDateInputViewModel(rejectedDate),
+                    RejectionReason = "TestRejection",
+                    ActualQuantity = 10,
+                    ActualUnits = ShipmentQuantityUnits.Tonnes,
+                    RejectedQuantity = 5,
+                    RejectedUnits = ShipmentQuantityUnits.Tonnes,
+                    ShipmentTypes = ShipmentType.Partially
+                },
+                Recovery = new RecoveryViewModel
+                {
+                    RecoveryDate = new Web.ViewModels.Shared.MaskedDateInputViewModel(recoveredDate),
+                    NotificationType = NotificationType.Disposal,
+                    IsShipmentFullRejected = false
+                }
+            };
+
+            A.CallTo(() => mediator.SendAsync(A<GetMovementIdIfExists>.Ignored)).Returns(movementId);
+
+            var result = await controller.Create(notificationId, model);
+
+            A.CallTo(() => this.auditService.AddImportMovementAudit(mediator, notificationId, 1, controller.User.GetUserId(), MovementAuditType.PartiallyRejected)).MustHaveHappened(Repeated.Exactly.Once);
         }
 
         [Fact]
@@ -108,7 +146,7 @@
                     WasAccepted = true,
                     ReceivedDate = new Web.ViewModels.Shared.MaskedDateInputViewModel(receivedDate),
                     ActualQuantity = 1,
-                    Units = ShipmentQuantityUnits.Kilograms
+                    ActualUnits = ShipmentQuantityUnits.Kilograms
                 }
             };
 
@@ -133,7 +171,7 @@
                     WasAccepted = true,
                     ReceivedDate = new Web.ViewModels.Shared.MaskedDateInputViewModel(receivedDate),
                     ActualQuantity = 1,
-                    Units = ShipmentQuantityUnits.Kilograms
+                    ActualUnits = ShipmentQuantityUnits.Kilograms
                 },
                 Recovery = new RecoveryViewModel
                 {
@@ -163,7 +201,7 @@
                     WasAccepted = true,
                     ReceivedDate = new Web.ViewModels.Shared.MaskedDateInputViewModel(receivedDate),
                     ActualQuantity = 1,
-                    Units = ShipmentQuantityUnits.Kilograms
+                    ActualUnits = ShipmentQuantityUnits.Kilograms
                 },
                 Recovery = new RecoveryViewModel
                 {

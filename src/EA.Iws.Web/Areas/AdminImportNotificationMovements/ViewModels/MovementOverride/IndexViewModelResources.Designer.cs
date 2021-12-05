@@ -19,7 +19,7 @@ namespace EA.Iws.Web.Areas.AdminImportNotificationMovements.ViewModels.MovementO
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class IndexViewModelResources {
@@ -161,15 +161,6 @@ namespace EA.Iws.Web.Areas.AdminImportNotificationMovements.ViewModels.MovementO
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to When was the waste received?.
-        /// </summary>
-        public static string ReceivedDateLabel1 {
-            get {
-                return ResourceManager.GetString("ReceivedDateLabel1", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Reason why the shipment was rejected and any relevant details.
         /// </summary>
         public static string RejectionReasonLabel {
@@ -211,6 +202,15 @@ namespace EA.Iws.Web.Areas.AdminImportNotificationMovements.ViewModels.MovementO
         public static string WasShipmentAcceptedLabel {
             get {
                 return ResourceManager.GetString("WasShipmentAcceptedLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please provide the date.
+        /// </summary>
+        public static string WasteDisposedDateRequired {
+            get {
+                return ResourceManager.GetString("WasteDisposedDateRequired", resourceCulture);
             }
         }
     }

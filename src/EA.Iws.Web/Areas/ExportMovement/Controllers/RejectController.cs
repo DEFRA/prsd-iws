@@ -52,7 +52,9 @@
                 model.RejectionDate.AsDateTime().Value, 
                 model.RejectionReason,
                 uploadedFile,
-                fileExtension));
+                fileExtension,
+                model.RejectedQuantity,
+                model.RejectedUnits));
 
             return RedirectToAction("Success");
         }

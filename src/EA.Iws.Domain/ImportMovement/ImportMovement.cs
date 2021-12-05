@@ -1,6 +1,7 @@
 ﻿namespace EA.Iws.Domain.ImportMovement
 {
     using System;
+    using EA.Iws.Core.Shared;
     using Prsd.Core;
     using Prsd.Core.Domain;
 
@@ -47,9 +48,26 @@
             return new ImportMovementReceipt(Id, quantity, date);
         }
 
-        public ImportMovementRejection Reject(DateTime date, string reason)
+        public ImportMovementRejection Reject(DateTime date, string reason, decimal? quantity, ShipmentQuantityUnits? unit)
         {
-            return new ImportMovementRejection(Id, date, reason);
+            return new ImportMovementRejection(Id, date, reason, quantity, unit);
+        }
+
+        internal ImportMovementPartialRejection PartialReject(Guid movementId,
+                                                     DateTime rejectionDate,
+                                                     string reason,
+                                                     decimal actualQuantity,
+                                                     ShipmentQuantityUnits actualUnit,
+                                                     decimal rejectedQuantity,
+                                                     ShipmentQuantityUnits rejectedUnit,
+                                                     DateTime? wasteDisposedDate)
+        {
+            Guard.ArgumentNotDefaultValue(() => rejectionDate, rejectionDate);
+            Guard.ArgumentNotDefaultValue(() => reason, reason);
+
+            var rejection = new ImportMovementPartialRejection(movementId, rejectionDate, reason, actualQuantity, actualUnit, rejectedQuantity, rejectedUnit, wasteDisposedDate);
+
+            return rejection;
         }
 
         public ImportMovementCompletedReceipt Complete(DateTime date)

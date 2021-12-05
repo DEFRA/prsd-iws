@@ -33,6 +33,9 @@
                 from rejection
                     in context.ImportMovementRejections
                         .Where(x => x.MovementId == movementId).DefaultIfEmpty()
+                from partialRejection
+                    in context.ImportMovementPartialRejections
+                        .Where(x => x.MovementId == movementId).DefaultIfEmpty()
                 from completedReceipt
                     in context.ImportMovementCompletedReceipts
                         .Where(x => x.MovementId == movementId).DefaultIfEmpty()
@@ -46,7 +49,8 @@
                     Receipt = receipt,
                     Rejection = rejection,
                     CompletedReceipt = completedReceipt,
-                    Shipment = shipment
+                    Shipment = shipment,
+                    PartialRejection = partialRejection
                 };
 
             var data = await query.SingleAsync();
@@ -57,7 +61,8 @@
                 data.CompletedReceipt,
                 data.Notification.NotificationType,
                 data.Notification.NotificationNumber,
-                data.Shipment.Quantity.Units);
+                data.Shipment.Quantity.Units,
+                data.PartialRejection);
         }
     }
 }

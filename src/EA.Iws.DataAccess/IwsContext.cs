@@ -95,6 +95,8 @@
 
         public virtual DbSet<MovementRejection> MovementRejections { get; set; }
 
+        public virtual DbSet<MovementPartialRejection> MovementPartialRejections { get; set; }
+
         public virtual DbSet<MovementCarrier> MovementCarrier { get; set; }
 
         public virtual DbSet<MovementAudit> MovementAudits { get; set; }

@@ -14,6 +14,7 @@
         Cancelled = 7,
         Edited = 8,
         Deleted = 9,
-        Incomplete = 10
+        Incomplete = 10,
+        PartiallyRejected = 11
     }
 }

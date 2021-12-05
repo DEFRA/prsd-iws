@@ -142,6 +142,7 @@
     <Compile Include="ImportMovement\GetImportMovementAuditByNotificationId.cs" />
     <Compile Include="ImportMovement\GetNotificationIdByMovementId.cs" />
     <Compile Include="ImportMovement\IsAddedCancellableImportMovementValid.cs" />
+    <Compile Include="ImportMovement\PartialReject\RecordPartialRejection.cs" />
     <Compile Include="ImportMovement\Receipt\RecordReceipt.cs" />
     <Compile Include="ImportMovement\Reject\RecordRejection.cs" />
     <Compile Include="ImportMovement\SetImportMovementReceiptAndRecoveryData.cs" />
@@ -245,6 +246,7 @@
     <Compile Include="Movement\GetReceiptRecoveryMovementsByNotificationId.cs" />
     <Compile Include="Movement\IsAddedCancellableMovementValid.cs" />
     <Compile Include="Movement\GetSubmittedPendingMovements.cs" />
+    <Compile Include="Movement\PartialReject\RecordPartialRejectionInternal.cs" />
     <Compile Include="NotificationAssessment\AddCarrier.cs" />
     <Compile Include="NotificationAssessment\AddNotificationComment.cs" />
     <Compile Include="NotificationAssessment\CheckFinancialGuaranteeStatus.cs" />

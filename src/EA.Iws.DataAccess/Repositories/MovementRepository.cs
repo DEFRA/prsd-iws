@@ -226,7 +226,9 @@
                 ,@StatsMarking
                 ,@Comments
                 ,@RecoveryDate
-                ,@CreatedBy",
+                ,@CreatedBy
+                ,@RejectedQuantity
+                ,@RejectedUnit",
                 new SqlParameter("@NotificationId", data.NotificationId),
                 new SqlParameter("@MovementId", data.Id),
                 new SqlParameter("@PrenotificationDate", (object)data.PrenotificationDate ?? DBNull.Value),
@@ -244,7 +246,9 @@
                 new SqlParameter("@StatsMarking", (object)data.StatsMarking ?? DBNull.Value),
                 new SqlParameter("@Comments", (object)data.Comments ?? DBNull.Value),
                 new SqlParameter("@RecoveryDate", (object)data.OperationCompleteDate ?? DBNull.Value),
-                new SqlParameter("@CreatedBy", createdBy));
+                new SqlParameter("@CreatedBy", createdBy),
+                new SqlParameter("@RejectedQuantity", (object)data.RejectedQuantity ?? DBNull.Value),
+                new SqlParameter("@RejectedUnit", (object)data.RejectedUnit ?? DBNull.Value));
         }
     }
 }

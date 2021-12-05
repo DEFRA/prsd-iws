@@ -19,7 +19,7 @@ namespace EA.Iws.Web.Areas.AdminImportNotificationMovements.ViewModels.Capture {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class ReceiptViewModelResources {
@@ -71,11 +71,47 @@ namespace EA.Iws.Web.Areas.AdminImportNotificationMovements.ViewModels.Capture {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Please enter all details that have been supplied to indicate why the shipment has been fully rejected by the receiving facility. This should be as detailed as possible..
+        /// </summary>
+        public static string FullyRejectionReasonInfomationLabel1 {
+            get {
+                return ResourceManager.GetString("FullyRejectionReasonInfomationLabel1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to If applicable, please indicate the likely remediation process to follow..
+        /// </summary>
+        public static string FullyRejectionReasonInfomationLabel2 {
+            get {
+                return ResourceManager.GetString("FullyRejectionReasonInfomationLabel2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Please enter a smaller number .
         /// </summary>
         public static string MaximumActualQuantity {
             get {
                 return ResourceManager.GetString("MaximumActualQuantity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please enter all details that have been supplied to indicate why the shipment has been partially rejected by the receiving facility. This should be as detailed as possible..
+        /// </summary>
+        public static string PartiallyRejectionReasonInfomationLabel1 {
+            get {
+                return ResourceManager.GetString("PartiallyRejectionReasonInfomationLabel1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to If applicable, please indicate the likely remediation process to follow..
+        /// </summary>
+        public static string PartiallyRejectionReasonInfomationLabel2 {
+            get {
+                return ResourceManager.GetString("PartiallyRejectionReasonInfomationLabel2", resourceCulture);
             }
         }
         
@@ -89,7 +125,7 @@ namespace EA.Iws.Web.Areas.AdminImportNotificationMovements.ViewModels.Capture {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to When was the waste received?.
+        ///   Looks up a localized string similar to When was the waste received at the Facility?.
         /// </summary>
         public static string ReceivedDateLabel {
             get {
@@ -103,6 +139,42 @@ namespace EA.Iws.Web.Areas.AdminImportNotificationMovements.ViewModels.Capture {
         public static string ReceivedDateRequired {
             get {
                 return ResourceManager.GetString("ReceivedDateRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Rejected quantity can&apos;t be greater than actual quantity.
+        /// </summary>
+        public static string RejectedQuantityCantBeGreaterThanActualQuantity {
+            get {
+                return ResourceManager.GetString("RejectedQuantityCantBeGreaterThanActualQuantity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter the quantity of waste rejected on the shipment.
+        /// </summary>
+        public static string RejectedQuantityInfoLabel {
+            get {
+                return ResourceManager.GetString("RejectedQuantityInfoLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Quantity Rejected.
+        /// </summary>
+        public static string RejectedQuantityLabel {
+            get {
+                return ResourceManager.GetString("RejectedQuantityLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please provide the rejected quantity.
+        /// </summary>
+        public static string RejectedQuantityRequired {
+            get {
+                return ResourceManager.GetString("RejectedQuantityRequired", resourceCulture);
             }
         }
         
@@ -125,6 +197,15 @@ namespace EA.Iws.Web.Areas.AdminImportNotificationMovements.ViewModels.Capture {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to How much waste was rejected?.
+        /// </summary>
+        public static string ShipmentRejectedQuantityLabel {
+            get {
+                return ResourceManager.GetString("ShipmentRejectedQuantityLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Please select the quantity units.
         /// </summary>
         public static string UnitsRequired {
@@ -139,6 +220,15 @@ namespace EA.Iws.Web.Areas.AdminImportNotificationMovements.ViewModels.Capture {
         public static string WasShipmentAcceptedLabel {
             get {
                 return ResourceManager.GetString("WasShipmentAcceptedLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to How much waste was rejected?.
+        /// </summary>
+        public static string WasShipmentRejectedLabel {
+            get {
+                return ResourceManager.GetString("WasShipmentRejectedLabel", resourceCulture);
             }
         }
     }
