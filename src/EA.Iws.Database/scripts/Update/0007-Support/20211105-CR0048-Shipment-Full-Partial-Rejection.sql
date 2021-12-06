@@ -31,8 +31,8 @@ GO
 ALTER TABLE [Notification].[MovementPartialRejection] CHECK CONSTRAINT [FK_MovementPartialRejection_Movement]
 GO
 
-ALTER TABLE [ImportNotification].[MovementRejection] ADD [RejectedQuantity] decimal(18,4) NOT NULL;
-ALTER TABLE [ImportNotification].[MovementRejection] ADD [RejectedUnit] INT NOT NULL;
+ALTER TABLE [ImportNotification].[MovementRejection] ADD [RejectedQuantity] decimal(18,4) NOT NULL DEFAULT 0;
+ALTER TABLE [ImportNotification].[MovementRejection] ADD [RejectedUnit] INT NOT NULL DEFAULT 1;
 GO
 
 CREATE TABLE [ImportNotification].[MovementPartialRejection](
