@@ -233,19 +233,9 @@
                 yield return new ValidationResult(CaptureViewModelResources.RejectQuantityRequired, new[] { "Receipt.RejectedQuantity" });
             }
 
-            if (Receipt.RejectedQuantity > Receipt.ActualQuantity && Receipt.ShipmentTypes == ShipmentType.Partially)
-            {
-                yield return new ValidationResult(CaptureViewModelResources.RejectedQuantityCantBeGreaterThanActualQunatity, new[] { "Receipt.RejectedQuantity" });
-            }
-
             if (Receipt.ShipmentTypes == ShipmentType.Rejected)
             {
                 Recovery.IsShipmentFullRejected = true;
-            }
-
-            if (Receipt.ShipmentTypes == ShipmentType.Partially && !Recovery.RecoveryDate.Date.HasValue)
-            {
-                yield return new ValidationResult(CaptureViewModelResources.RecoveredDateRequired, new[] { "Recovery.RecoveryDate" });
             }
         }
 

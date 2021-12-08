@@ -94,13 +94,7 @@
                     shipment.Quantity.Units,
                     m.ActualQuantity));
 
-            var totalPartialRejected = allMovementPartialRejects.Sum(m =>
-                ShipmentQuantityUnitConverter.ConvertToTarget(
-                    m.RejectedUnit,
-                    shipment.Quantity.Units,
-                    m.RejectedQuantity));
-
-            totalReceived = totalReceived + (totalPartialActual - totalPartialRejected);
+            totalReceived = totalReceived + totalPartialActual;
 
             return new ShipmentQuantity(totalReceived, shipment.Quantity.Units);
         }

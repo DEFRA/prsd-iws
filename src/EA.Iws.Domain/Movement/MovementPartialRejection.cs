@@ -23,7 +23,7 @@
 
         public Guid? FileId { get; private set; }
 
-        public DateTime? WasteDisposedDate { get; private set; }
+        public DateTime? WasteDisposedDate { get; set; }
 
         protected MovementPartialRejection()
         {

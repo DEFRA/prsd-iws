@@ -160,7 +160,7 @@
     <value>Enter the quantity of waste rejected on the shipment</value>
   </data>
   <data name="RejectedQuantityLabel" xml:space="preserve">
-    <value>Quantity Rejected</value>
+    <value>Quantity rejected</value>
   </data>
   <data name="WasShipmentRejectedLabel" xml:space="preserve">
     <value>How much waste was rejected?</value>

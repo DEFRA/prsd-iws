@@ -46,6 +46,42 @@
             }
 
             var data = mapper.Map<NotificationMovementsSummary, Movement[], NotificationMovementsSummaryAndTable>(summaryData, notificationMovements.ToArray());
+
+            foreach (var movement in data.ShipmentTableData)
+            {
+                if (movement.Status == MovementStatus.Completed)
+                {
+                    if (!movement.CompletedDate.HasValue)
+                    {
+                        movement.CompletedDate = notificationMovements.Where(x => x.Id == movement.Id).ToList()[0].PartialRejection.ToList()[0].WasteDisposedDate;
+                    }
+
+                    if (!movement.Quantity.HasValue)
+                    {
+                        movement.Quantity = notificationMovements.Where(x => x.Id == movement.Id).ToList()[0].PartialRejection.ToList()[0].ActualQuantity;
+                    }
+
+                    if (!movement.QuantityUnits.HasValue)
+                    {
+                        movement.QuantityUnits = notificationMovements.Where(x => x.Id == movement.Id).ToList()[0].PartialRejection.ToList()[0].ActualUnit;
+                    }
+
+                    if (!movement.ReceivedDate.HasValue)
+                    {
+                        movement.ReceivedDate = notificationMovements.Where(x => x.Id == movement.Id).ToList()[0].PartialRejection.ToList()[0].WasteReceivedDate;
+                    }
+                }
+                if (movement.Status == MovementStatus.PartiallyRejected)
+                {
+                    if (movement.CompletedDate == null)
+                    {
+                        movement.Quantity = notificationMovements.Where(x => x.Id == movement.Id).ToList()[0].PartialRejection.ToList()[0].ActualQuantity;
+                        movement.QuantityUnits = notificationMovements.Where(x => x.Id == movement.Id).ToList()[0].PartialRejection.ToList()[0].ActualUnit;
+                        movement.ReceivedDate = notificationMovements.Where(x => x.Id == movement.Id).ToList()[0].PartialRejection.ToList()[0].WasteReceivedDate;
+                    }
+                }
+            }
+
             data.IsInterimNotification = isInterimNotification;
 
             data.PageSize = PageSize;

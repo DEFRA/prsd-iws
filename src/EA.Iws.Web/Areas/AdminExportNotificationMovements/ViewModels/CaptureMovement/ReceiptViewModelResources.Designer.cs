@@ -152,7 +152,7 @@ namespace EA.Iws.Web.Areas.AdminExportNotificationMovements.ViewModels.CaptureMo
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Quantity Rejected.
+        ///   Looks up a localized string similar to Quantity rejected.
         /// </summary>
         public static string RejectedQuantityLabel {
             get {

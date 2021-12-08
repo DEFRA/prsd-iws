@@ -32,7 +32,7 @@
                                               ShipmentQuantityUnits actualUnits,
                                               decimal rejectedQuantity,
                                               ShipmentQuantityUnits rejectedUnits,
-                                              DateTime wasteDisposedDate)
+                                              DateTime? wasteDisposedDate)
         {
             MovementId = movementId;
             WasteReceivedDate = wasteReceivedDate;

@@ -36,14 +36,20 @@
                 return new ShipmentQuantity(0, shipment == null ? ShipmentQuantityUnits.Tonnes : shipment.Units);
             }
 
-            var totalReceived = movements.Sum(m =>
+            var totalReceived = movements.Where(x => x.Receipt != null).Sum(m =>
                 ShipmentQuantityUnitConverter.ConvertToTarget(
                     m.Receipt.QuantityReceived.Units,
                     shipment.Units,
                     m.Receipt.QuantityReceived.Quantity));
 
             var totalPartialReceived = Convert.ToDecimal(0);
-            var totalPartialRejected = Convert.ToDecimal(0);
+            var totalPartialCompleted = Convert.ToDecimal(0);
+
+            totalPartialCompleted = movements.Where(x => x.Receipt == null).Sum(m =>
+                ShipmentQuantityUnitConverter.ConvertToTarget(
+                    m.PartialRejection.ToList()[0].ActualUnit,
+                    shipment.Units,
+                    m.PartialRejection.ToList()[0].ActualQuantity));
 
             var partialMovements = await movementRepository.GetMovementsByStatus(notificationId, MovementStatus.PartiallyRejected);
             var listOfMovementIds = partialMovements.ToArray().Select(r => r.Id);
@@ -56,15 +62,9 @@
                         m.ActualUnit,
                         shipment.Units,
                         m.ActualQuantity));
-
-                totalPartialRejected = listOfPartialRejectedMovements.Sum(m =>
-                ShipmentQuantityUnitConverter.ConvertToTarget(
-                        m.RejectedUnit,
-                        shipment.Units,
-                        m.RejectedQuantity));
             }
 
-            totalReceived = totalReceived + (totalPartialReceived - totalPartialRejected);
+            totalReceived = totalReceived + totalPartialCompleted  + totalPartialReceived;
 
             return new ShipmentQuantity(totalReceived, shipment.Units);
         }
