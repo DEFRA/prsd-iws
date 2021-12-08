@@ -97,6 +97,8 @@
 
         public virtual MovementCompletedReceipt CompletedReceipt { get; private set; }
 
+        public virtual ICollection<MovementPartialRejection> PartialRejection { get; private set; }
+
         public DateTime Date { get; internal set; }
 
         public Guid? FileId { get; private set; }
@@ -190,6 +192,12 @@
                 .Permit(Trigger.Cancel, MovementStatus.Cancelled)
                 .Permit(Trigger.PartialReject, MovementStatus.PartiallyRejected);
 
+            stateMachine.Configure(MovementStatus.PartiallyRejected)
+                .OnEntryFrom(acceptedTrigger, OnReceived)
+                .OnEntryFrom(internallyAcceptedTrigger, OnInternallyReceived)
+                .Permit(Trigger.Complete, MovementStatus.Completed)
+                .Permit(Trigger.CompleteInternal, MovementStatus.Completed);
+
             return stateMachine;
         }
 
@@ -240,7 +248,7 @@
                                                      ShipmentQuantityUnits actualUnit,
                                                      decimal rejectedQuantity,
                                                      ShipmentQuantityUnits rejectedUnit,
-                                                     DateTime wasteDisposeddDate)
+                                                     DateTime? wasteDisposeddDate)
         {
             Guard.ArgumentNotDefaultValue(() => rejectionDate, rejectionDate);
             Guard.ArgumentNotDefaultValue(() => reason, reason);

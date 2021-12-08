@@ -143,15 +143,6 @@ namespace EA.Iws.Web.Areas.AdminImportNotificationMovements.ViewModels.Capture {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Rejected quantity can&apos;t be greater than actual quantity.
-        /// </summary>
-        public static string RejectedQuantityCantBeGreaterThanActualQuantity {
-            get {
-                return ResourceManager.GetString("RejectedQuantityCantBeGreaterThanActualQuantity", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Enter the quantity of waste rejected on the shipment.
         /// </summary>
         public static string RejectedQuantityInfoLabel {
@@ -161,7 +152,7 @@ namespace EA.Iws.Web.Areas.AdminImportNotificationMovements.ViewModels.Capture {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Quantity Rejected.
+        ///   Looks up a localized string similar to Quantity rejected.
         /// </summary>
         public static string RejectedQuantityLabel {
             get {

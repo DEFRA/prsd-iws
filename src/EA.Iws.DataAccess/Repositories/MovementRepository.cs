@@ -53,6 +53,7 @@
 
             return await context.Movements
                 .Where(m => m.NotificationId == notificationId)
+                .Include(m => m.PartialRejection)
                 .OrderByDescending(m => m.Number)
                 .Skip((pageNumber - 1) * pageSize)
                 .Take(pageSize)

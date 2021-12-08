@@ -39,7 +39,7 @@
                 throw new InvalidOperationException("The when the waste was received date cannot be in the future.");
             }
 
-            var movementPartialRejection = movement.PartialReject(movementId, date, reason, actualQuantity, actualUnit, rejectedQuantity, rejectedUnit, wasteDisposedDate.Value);
+            var movementPartialRejection = movement.PartialReject(movementId, date, reason, actualQuantity, actualUnit, rejectedQuantity, rejectedUnit, wasteDisposedDate);
 
             movementPartialRejectionRepository.Add(movementPartialRejection);
 
