@@ -17,6 +17,7 @@
         private readonly IImportMovementRepository movementRepository;
         private readonly IImportMovementReceiptRepository receiptRepository;
         private readonly IImportMovementCompletedReceiptRepository completedReceiptRepository;
+        private readonly IImportMovementPartailRejectionRepository partailRejectionRepository;
         private readonly ICompleteImportMovement completeFactory;
         private ImportMovement movement;
         private ImportMovementReceipt movementReceipt;
@@ -27,7 +28,8 @@
             movementRepository = A.Fake<IImportMovementRepository>();
             receiptRepository = A.Fake<IImportMovementReceiptRepository>();
             completedReceiptRepository = A.Fake<IImportMovementCompletedReceiptRepository>();
-            completeFactory = new CompleteImportMovement(movementRepository, completedReceiptRepository, receiptRepository);
+            partailRejectionRepository = A.Fake<IImportMovementPartailRejectionRepository>();
+            completeFactory = new CompleteImportMovement(movementRepository, completedReceiptRepository, receiptRepository, partailRejectionRepository);
         }
 
         public void Dispose()

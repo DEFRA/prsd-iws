@@ -25,7 +25,7 @@
                 RecoveryData = new ImportMovementRecoveryData
                 {
                     IsOperationCompleted = source.CompletedReceipt != null,
-                    OperationCompleteDate = (source.CompletedReceipt == null) ? (DateTimeOffset?)null : source.CompletedReceipt.Date
+                    OperationCompleteDate = (source.CompletedReceipt == null) ? (DateTime?)null : source.CompletedReceipt.Date
                 },
                 ReceiptData = GetReceiptData(source),
                 Comments = source.Movement.Comments,

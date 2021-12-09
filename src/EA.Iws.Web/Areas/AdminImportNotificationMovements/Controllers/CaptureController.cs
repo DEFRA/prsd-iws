@@ -80,7 +80,7 @@
 
                 if (movementId.HasValue)
                 {
-                    await SaveMovementData(movementId.Value, model, id);
+                    await SaveMovementData(movementId.Value, model, id, false);
 
                     return RedirectToAction("Edit", new { movementId, saved = true });
                 }
@@ -123,12 +123,12 @@
                 return View(model);
             }
 
-            await SaveMovementData(movementId, model, id);
+            await SaveMovementData(movementId, model, id, true);
 
             return RedirectToAction("Edit", new { movementId, saved = true });
         }
 
-        private async Task SaveMovementData(Guid movementId, CaptureViewModel model, Guid notificationId)
+        private async Task SaveMovementData(Guid movementId, CaptureViewModel model, Guid notificationId, bool isEdit)
         {
             if (model.Receipt.ShipmentTypes == ShipmentType.Accepted)
             {
@@ -147,33 +147,79 @@
             }
             else if (model.Receipt.ShipmentTypes == ShipmentType.Rejected)
             {
-                await mediator.SendAsync(new RecordRejection(movementId,
+                var isRejectMovementAvailable = await mediator.SendAsync(new GetImportRejectionByMovementId(movementId));
+                if (isEdit == false || isRejectMovementAvailable == false)
+                {
+                    await mediator.SendAsync(new RecordRejection(movementId,
                     model.Receipt.ReceivedDate.Date.Value,
                     model.Receipt.RejectionReason,
                     model.Receipt.RejectedQuantity.Value,
                     model.Receipt.RejectedUnits.Value));
 
-                await this.auditService.AddImportMovementAudit(this.mediator,
-                    notificationId, model.ShipmentNumber.Value,
-                    User.GetUserId(),
-                    MovementAuditType.Rejected);
+                    await this.auditService.AddImportMovementAudit(this.mediator,
+                        notificationId, model.ShipmentNumber.Value,
+                        User.GetUserId(),
+                        MovementAuditType.Rejected);
+                }
             }
             else
             {
-                await mediator.SendAsync(new RecordPartialRejection(movementId,
-                                                                            model.Receipt.ReceivedDate.Date.Value,
-                                                                            model.Receipt.RejectionReason,
-                                                                            model.Receipt.ActualQuantity.Value,
-                                                                            model.Receipt.ActualUnits.Value,
-                                                                            model.Receipt.RejectedQuantity.Value,
-                                                                            model.Receipt.RejectedUnits.Value,
-                                                                            model.Recovery.RecoveryDate.Date.Value));
+                var isPartailRejectMovementAvailable = await mediator.SendAsync(new GetImportPartialRejectionByMovementId(movementId));
 
-                await this.auditService.AddImportMovementAudit(this.mediator,
-                                                         notificationId,
-                                                         model.ShipmentNumber.Value,
-                                                         User.GetUserId(),
-                                                         MovementAuditType.PartiallyRejected);
+                if (isEdit == false || isPartailRejectMovementAvailable == false)
+                {
+                    var recoveryDate = (DateTime?)null;
+                    if (model.Recovery.RecoveryDate.Date.HasValue)
+                    {
+                        recoveryDate = model.Recovery.RecoveryDate.Date.Value;
+                    }
+
+                    await mediator.SendAsync(new RecordPartialRejection(movementId,
+                                                                                model.Receipt.ReceivedDate.Date.Value,
+                                                                                model.Receipt.RejectionReason,
+                                                                                model.Receipt.ActualQuantity.Value,
+                                                                                model.Receipt.ActualUnits.Value,
+                                                                                model.Receipt.RejectedQuantity.Value,
+                                                                                model.Receipt.RejectedUnits.Value,
+                                                                                recoveryDate));
+
+                    await this.auditService.AddImportMovementAudit(this.mediator,
+                                                             notificationId,
+                                                             model.ShipmentNumber.Value,
+                                                             User.GetUserId(),
+                                                             MovementAuditType.PartiallyRejected);
+
+                    if (model.Recovery.RecoveryDate.Date.HasValue)
+                    {
+                        recoveryDate = model.Recovery.RecoveryDate.Date.Value;
+                        await mediator.SendAsync(new RecordPartialOperationCompleteInternal(movementId, recoveryDate));
+
+                        await mediator.SendAsync(new RecordCompletedReceipt(movementId, recoveryDate.Value));
+
+                        await this.auditService.AddImportMovementAudit(this.mediator,
+                                                                 notificationId,
+                                                                 model.ShipmentNumber.Value,
+                                                                 User.GetUserId(),
+                                                                 model.NotificationType == NotificationType.Disposal ? MovementAuditType.Disposed : MovementAuditType.Recovered);
+                    }
+                }
+                else
+                {
+                    var recoveryDate = (DateTime?)null;
+                    if (model.Recovery.RecoveryDate.Date.HasValue)
+                    {
+                        recoveryDate = model.Recovery.RecoveryDate.Date.Value;
+                        await mediator.SendAsync(new RecordPartialOperationCompleteInternal(movementId, recoveryDate));
+
+                        await mediator.SendAsync(new RecordCompletedReceipt(movementId, recoveryDate.Value));
+
+                        await this.auditService.AddImportMovementAudit(this.mediator,
+                                                                 notificationId,
+                                                                 model.ShipmentNumber.Value,
+                                                                 User.GetUserId(),
+                                                                 model.NotificationType == NotificationType.Disposal ? MovementAuditType.Disposed : MovementAuditType.Recovered);
+                    }
+                }
             }
 
             if (model.Recovery.IsComplete() && !model.IsOperationCompleted && model.Receipt.ShipmentTypes == ShipmentType.Accepted)
