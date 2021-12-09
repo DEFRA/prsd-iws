@@ -7,16 +7,16 @@
 
     internal class GetImportPartialRejectionByMovementIdHandler : IRequestHandler<GetImportPartialRejectionByMovementId, bool>
     {
-        private readonly IImportMovementRejectionRepository movementRejectionRepository;
+        private readonly IImportMovementPartailRejectionRepository movementPartailRejectionRepository;
 
-        public GetImportPartialRejectionByMovementIdHandler(IImportMovementRejectionRepository movementRejectionRepository)
+        public GetImportPartialRejectionByMovementIdHandler(IImportMovementPartailRejectionRepository movementPartailRejectionRepository)
         {
-            this.movementRejectionRepository = movementRejectionRepository;
+            this.movementPartailRejectionRepository = movementPartailRejectionRepository;
         }
 
         public async Task<bool> HandleAsync(GetImportPartialRejectionByMovementId message)
         {
-            var movementPartial = await movementRejectionRepository.GetByMovementIdOrDefault(message.MovementId);
+            var movementPartial = await movementPartailRejectionRepository.GetByMovementIdOrDefault(message.MovementId);
             if (movementPartial == null)
             {
                 return false;
