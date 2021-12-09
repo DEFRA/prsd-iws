@@ -140,7 +140,7 @@
             RejectedUnits = data.RejectedUnit;
 
             NotificationType = data.Data.NotificationType;
-            Date = data.RecoveryData.OperationCompleteDate.HasValue ? data.RecoveryData.OperationCompleteDate.Value.DateTime : (DateTime?)null;
+            Date = data.RecoveryData.OperationCompleteDate.HasValue ? data.RecoveryData.OperationCompleteDate.Value : (DateTime?)null;
         }
 
         public void SetSummaryData(Summary summaryData)

@@ -154,7 +154,9 @@
             }
             else if (model.Receipt.ShipmentTypes == ShipmentType.Rejected)
             {
-                if (isEdit == false)
+                var isRejectMovementAvailable = await mediator.SendAsync(new GetRejectionByMovementId(movementId));
+
+                if (isEdit == false || isRejectMovementAvailable == false)
                 {
                     await mediator.SendAsync(new RecordRejectionInternal(movementId,
                         model.Receipt.ReceivedDate.Date.Value,
@@ -170,7 +172,9 @@
             }
             else
             {
-                if (isEdit == false)
+                var isPartialRejectMovementAvailable = await mediator.SendAsync(new GetPartialRejectionByMovementId(movementId));
+
+                if (isEdit == false || isPartialRejectMovementAvailable == false)
                 {
                     var recoveryDate = (DateTime?)null;
                     if (model.Recovery.RecoveryDate.Date.HasValue)

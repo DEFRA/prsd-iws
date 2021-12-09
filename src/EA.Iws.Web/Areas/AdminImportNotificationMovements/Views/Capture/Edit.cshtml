@@ -42,10 +42,13 @@
                 if (Model.IsReceived || Model.IsRejected || Model.IsPartiallyRejected)
                 {
                     @Html.HiddenFor(m => m.Receipt.ReceivedDate.Date)
-                    @Html.HiddenFor(m => m.Receipt.WasAccepted)
                     @Html.HiddenFor(m => m.Receipt.RejectionReason)
                     @Html.HiddenFor(m => m.Receipt.ActualQuantity)
                     @Html.HiddenFor(m => m.Receipt.ActualUnits)
+                    @Html.HiddenFor(m => m.Receipt.RejectedQuantity)
+                    @Html.HiddenFor(m => m.Receipt.RejectedUnits)
+                    @Html.HiddenFor(m => m.Receipt.ShipmentTypes)
+                    @Html.HiddenFor(m => m.StatsMarking)
                     @Html.Partial("_ReceiptReadOnly", Model.Receipt)
                 }
                 else

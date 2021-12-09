@@ -152,7 +152,7 @@
             Recovery = new RecoveryViewModel
             {
                 NotificationType = data.Data.NotificationType,
-                RecoveryDate = data.RecoveryData.OperationCompleteDate.HasValue ? new MaskedDateInputViewModel(data.RecoveryData.OperationCompleteDate.Value.DateTime) : new MaskedDateInputViewModel()
+                RecoveryDate = new MaskedDateInputViewModel(data.RecoveryData.OperationCompleteDate)
             };
         }
 
