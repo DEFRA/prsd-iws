@@ -42,9 +42,9 @@
             }
             else
             {
-                var movementReceiptRepository = await importMovementPartailRejectionRepository.GetByMovementId(movementId);
+                var movementPartialReject = await importMovementPartailRejectionRepository.GetByMovementId(movementId);
 
-                if (date < movementReceiptRepository.WasteReceivedDate)
+                if (date < movementPartialReject.WasteReceivedDate)
                 {
                     throw new InvalidOperationException("The when was the waste recovered date cannot be before the when was the waste received. ");
                 }
