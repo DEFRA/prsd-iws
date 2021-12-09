@@ -36,7 +36,7 @@
 
         @if (Model.ShipmentTypes == ShipmentType.Partially || Model.ShipmentTypes == ShipmentType.Rejected)
         {
-            <div class="panel form-group @Html.Gds().FormGroupClass(m => m.RejectionReason)" id="dvPartiallyRejectedComments" style="display:block">
+            <div class="form-group @Html.Gds().FormGroupClass(m => m.RejectionReason)" id="dvPartiallyRejectedComments" style="display:block; margin-top:150px;">
                 @if (Model.ShipmentTypes == ShipmentType.Partially)
                 {
                     <div id="dvPartiallyRejected" style="display:block">
@@ -76,7 +76,7 @@
         }
         else
         {
-            <div class="panel form-group @Html.Gds().FormGroupClass(m => m.RejectionReason)" id="dvPartiallyRejectedComments" style="display:none">
+            <div class="form-group @Html.Gds().FormGroupClass(m => m.RejectionReason)" id="dvPartiallyRejectedComments" style="display:none;  margin-top:150px;">
                 <div id="dvPartiallyRejected">
                     @Html.LabelFor(m => m.RejectionReason, new { @class = "form-label-bold" })
                     @Resources.PartiallyRejectionReasonInfomation1
