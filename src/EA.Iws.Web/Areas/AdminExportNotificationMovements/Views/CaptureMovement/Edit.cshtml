@@ -48,7 +48,6 @@
                     @Html.HiddenFor(m => m.Receipt.RejectedQuantity)
                     @Html.HiddenFor(m => m.Receipt.RejectedUnits)
                     @Html.HiddenFor(m => m.Receipt.ShipmentTypes)
-                    @Html.HiddenFor(m => m.StatsMarking)
                     @Html.Partial("_ReceiptReadOnly", Model.Receipt)
                 }
                 else
@@ -74,6 +73,8 @@
 
                 if (Model.HasComments)
                 {
+                    @Html.HiddenFor(m => m.StatsMarking)
+                    @Html.HiddenFor(m => m.Comments)
                     @Html.Partial("_CommentsReadOnly")
                 }
                 else
