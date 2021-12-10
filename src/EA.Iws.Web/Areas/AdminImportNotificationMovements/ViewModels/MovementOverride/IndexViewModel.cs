@@ -188,7 +188,7 @@
 
             if ((IsPartiallyRejected == true || IsRejected == true) && !RejectedQuantity.HasValue)
             {
-                yield return new ValidationResult(IndexViewModelResources.QuantityRequired, new[] { "RejectedQuantity" });
+                yield return new ValidationResult(IndexViewModelResources.RejectedQuantityRequired, new[] { "RejectedQuantity" });
             }
 
             if ((IsPartiallyRejected == true || IsRejected == true) && string.IsNullOrEmpty(RejectionReason))

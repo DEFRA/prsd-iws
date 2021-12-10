@@ -174,4 +174,7 @@
   <data name="ReceivedDateRequired" xml:space="preserve">
     <value>Please provide the received date</value>
   </data>
+  <data name="RejectedQuantityRequired" xml:space="preserve">
+    <value>Please provide the rejected quantity</value>
+  </data>
 </root>
