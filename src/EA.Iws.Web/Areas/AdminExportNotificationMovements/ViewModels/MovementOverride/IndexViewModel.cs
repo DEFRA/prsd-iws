@@ -3,6 +3,7 @@
     using Core.Movement;
     using Core.Shared;
     using EA.Iws.Web.Areas.AdminExportNotificationMovements.ViewModels.CaptureMovement;
+    using EA.Prsd.Core;
     using Infrastructure.Validation;
     using Prsd.Core.Helpers;
     using System;
@@ -151,19 +152,29 @@
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
+            if (PrenotificationDate > SystemTime.UtcNow.Date)
+            {
+                yield return new ValidationResult(CaptureViewModelResources.PrenotifictaionDateInfuture, new[] { "PrenotificationDate" });
+            }
+
+            if (!HasNoPrenotification && !PrenotificationDate.HasValue)
+            {
+                yield return new ValidationResult(CaptureViewModelResources.PrenotificationDateRequired, new[] { "PrenotificationDate" });
+            }
+
             if (!ActualShipmentDate.HasValue)
             {
                 yield return new ValidationResult(IndexViewModelResources.ActualDateRequired, new[] { "ActualShipmentDate" });
             }
 
+            if (!ReceivedDate.HasValue)
+            {
+                yield return new ValidationResult(IndexViewModelResources.ReceivedDateRequired, new[] { "ReceivedDate" });
+            }
+
             if (ReceivedDate.HasValue && WasShipmentAccepted && !ActualQuantity.HasValue)
             {
                 yield return new ValidationResult(IndexViewModelResources.QuantityRequired, new[] { "ActualQuantity" });
-            }
-
-            if ((IsPartiallyRejected == true || IsRejected == true) && string.IsNullOrWhiteSpace(StatsMarking))
-            {
-                yield return new ValidationResult(CaptureViewModelResources.StatsMarkingRequired, new[] { "StatsMarking" });
             }
 
             if (IsPartiallyRejected == true && !ActualQuantity.HasValue)
@@ -179,6 +190,11 @@
             if ((IsPartiallyRejected == true || IsRejected == true) && string.IsNullOrEmpty(RejectionReason))
             {
                 yield return new ValidationResult(IndexViewModelResources.RejectionReasonRequired, new[] { "RejectionReason" });
+            }
+
+            if ((IsPartiallyRejected == true || IsRejected == true) && string.IsNullOrWhiteSpace(StatsMarking))
+            {
+                yield return new ValidationResult(CaptureViewModelResources.StatsMarkingRequired, new[] { "StatsMarking" });
             }
         }
 

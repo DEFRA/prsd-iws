@@ -161,6 +161,15 @@ namespace EA.Iws.Web.Areas.AdminExportNotificationMovements.ViewModels.MovementO
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Please provide the received date.
+        /// </summary>
+        public static string ReceivedDateRequired {
+            get {
+                return ResourceManager.GetString("ReceivedDateRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Reason why the shipment was rejected and any relevant details.
         /// </summary>
         public static string RejectionReasonLabel {

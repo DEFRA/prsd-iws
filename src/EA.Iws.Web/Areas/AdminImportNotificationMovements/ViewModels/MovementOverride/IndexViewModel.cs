@@ -5,6 +5,7 @@
     using Core.Shared;
     using EA.Iws.Web.Areas.AdminImportNotificationMovements.ViewModels.Capture;
     using EA.Iws.Web.Infrastructure.Validation;
+    using EA.Prsd.Core;
     using Prsd.Core.Helpers;
     using System;
     using System.Collections.Generic;
@@ -155,9 +156,24 @@
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
+            if (PrenotificationDate > SystemTime.UtcNow.Date)
+            {
+                yield return new ValidationResult(IndexViewModelResources.PrenotifictaionDateInfuture, new[] { "PrenotificationDate" });
+            }
+
+            if (!HasNoPrenotification && !PrenotificationDate.HasValue)
+            {
+                yield return new ValidationResult(IndexViewModelResources.PrenotificationDateRequired, new[] { "PrenotificationDate" });
+            }
+
             if (!ActualShipmentDate.HasValue)
             {
                 yield return new ValidationResult(IndexViewModelResources.ActualShipmentDateRequired, new[] { "ActualShipmentDate" });
+            }
+
+            if (!ReceivedDate.HasValue)
+            {
+                yield return new ValidationResult(IndexViewModelResources.ReceivedDateRequired, new[] { "ReceivedDate" });
             }
 
             if (ReceivedDate.HasValue && WasAccepted && !ActualQuantity.HasValue)
@@ -165,7 +181,32 @@
                 yield return new ValidationResult(IndexViewModelResources.QuantityRequired, new[] { "ActualQuantity" });
             }
 
-            if (IsReceived && ActualQuantity.HasValue &&  !Date.HasValue)
+            if (IsPartiallyRejected == true && !ActualQuantity.HasValue)
+            {
+                yield return new ValidationResult(IndexViewModelResources.QuantityRequired, new[] { "ActualQuantity" });
+            }
+
+            if ((IsPartiallyRejected == true || IsRejected == true) && !RejectedQuantity.HasValue)
+            {
+                yield return new ValidationResult(IndexViewModelResources.QuantityRequired, new[] { "RejectedQuantity" });
+            }
+
+            if ((IsPartiallyRejected == true || IsRejected == true) && string.IsNullOrEmpty(RejectionReason))
+            {
+                yield return new ValidationResult(IndexViewModelResources.RejectReasonRequired, new[] { "RejectionReason" });
+            }
+
+            if ((IsPartiallyRejected == true || IsRejected == true) && string.IsNullOrWhiteSpace(StatsMarking))
+            {
+                yield return new ValidationResult(CaptureViewModelResources.StatsMarkingRequired, new[] { "StatsMarking" });
+            }
+
+            if (IsReceived && ActualQuantity.HasValue && !Date.HasValue)
+            {
+                yield return new ValidationResult(IndexViewModelResources.WasteDisposedDateRequired, new[] { "Date" });
+            }
+
+            if (IsPartiallyRejected && !Date.HasValue)
             {
                 yield return new ValidationResult(IndexViewModelResources.WasteDisposedDateRequired, new[] { "Date" });
             }

@@ -143,6 +143,15 @@ namespace EA.Iws.Web.Areas.AdminImportNotificationMovements.ViewModels.MovementO
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The &quot;prenotification date&quot; cannot be in the future. Please enter a different date..
+        /// </summary>
+        public static string PrenotifictaionDateInfuture {
+            get {
+                return ResourceManager.GetString("PrenotifictaionDateInfuture", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Please provide the actual quantity.
         /// </summary>
         public static string QuantityRequired {
@@ -157,6 +166,15 @@ namespace EA.Iws.Web.Areas.AdminImportNotificationMovements.ViewModels.MovementO
         public static string ReceivedDateLabel {
             get {
                 return ResourceManager.GetString("ReceivedDateLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please provide the received date.
+        /// </summary>
+        public static string ReceivedDateRequired {
+            get {
+                return ResourceManager.GetString("ReceivedDateRequired", resourceCulture);
             }
         }
         

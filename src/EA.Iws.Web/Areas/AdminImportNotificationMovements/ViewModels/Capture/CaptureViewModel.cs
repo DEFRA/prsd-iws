@@ -160,45 +160,17 @@
         {
             if (!HasNoPrenotification && !PrenotificationDate.IsCompleted)
             {
-                yield return new ValidationResult(CaptureViewModelResources.PrenotificationDateRequired,
-                    new[] { "PrenotificationDate" });
-            }
-
-            if (!ActualShipmentDate.IsCompleted)
-            {
-                yield return new ValidationResult(CaptureViewModelResources.ActualShipmentDateRequired,
-                   new[] { "ActualShipmentDate" });
-            }
-
-            if ((!Receipt.ReceivedDate.IsCompleted && Receipt.ActualQuantity.HasValue) || (!Receipt.ReceivedDate.IsCompleted && !string.IsNullOrWhiteSpace(Receipt.RejectionReason)))
-            {
-                yield return new ValidationResult(ReceiptViewModelResources.ReceivedDateRequired, new[] { "Receipt.ReceivedDate" });
-            }
-
-            if (!Receipt.ActualQuantity.HasValue && Receipt.ReceivedDate.IsCompleted && (Receipt.ShipmentTypes == ShipmentType.Accepted || Receipt.ShipmentTypes == ShipmentType.Partially))
-            {
-                yield return new ValidationResult(ReceiptViewModelResources.QuantityRequired, new[] { "Receipt.ActualQuantity" });
-            }
-
-            if (!Receipt.RejectedQuantity.HasValue && (Receipt.ShipmentTypes == ShipmentType.Partially || Receipt.ShipmentTypes == ShipmentType.Rejected))
-            {
-                yield return new ValidationResult(ReceiptViewModelResources.RejectedQuantityRequired, new[] { "Receipt.RejectedQuantity" });
-            }
-
-            if ((Receipt.ShipmentTypes == ShipmentType.Partially || Receipt.ShipmentTypes == ShipmentType.Rejected) && string.IsNullOrWhiteSpace(StatsMarking))
-            {
-                yield return new ValidationResult(CaptureViewModelResources.StatsMarkingRequired, new[] { "StatsMarking" });
-            }
-
-            if ((Receipt.ShipmentTypes == ShipmentType.Partially || Receipt.ShipmentTypes == ShipmentType.Rejected) && string.IsNullOrWhiteSpace(Receipt.RejectionReason))
-            {
-                yield return new ValidationResult(ReceiptViewModelResources.RejectReasonRequired, new[] { "Receipt.RejectionReason" });
+                yield return new ValidationResult(CaptureViewModelResources.PrenotificationDateRequired, new[] { "PrenotificationDate" });
             }
 
             if (PrenotificationDate.IsCompleted && PrenotificationDate.Date > SystemTime.UtcNow.Date)
             {
-                yield return new ValidationResult(CaptureViewModelResources.PrenotifictaionDateInfuture,
-                   new[] { "PrenotificationDate" });
+                yield return new ValidationResult(CaptureViewModelResources.PrenotifictaionDateInfuture, new[] { "PrenotificationDate" });
+            }
+
+            if (!ActualShipmentDate.IsCompleted)
+            {
+                yield return new ValidationResult(CaptureViewModelResources.ActualShipmentDateRequired, new[] { "ActualShipmentDate" });
             }
 
             if (ActualShipmentDate.IsCompleted && PrenotificationDate.IsCompleted)
@@ -216,6 +188,18 @@
                 }
             }
 
+            if (Receipt.ShipmentTypes == ShipmentType.Accepted)
+            {
+                if ((!Receipt.ReceivedDate.IsCompleted && Receipt.ActualQuantity.HasValue) || (!Receipt.ReceivedDate.IsCompleted && !string.IsNullOrWhiteSpace(Receipt.RejectionReason)))
+                {
+                    yield return new ValidationResult(ReceiptViewModelResources.ReceivedDateRequired, new[] { "Receipt.ReceivedDate" });
+                }
+            }
+            else if (!Receipt.ReceivedDate.IsCompleted && (Receipt.ShipmentTypes == ShipmentType.Partially || Receipt.ShipmentTypes == ShipmentType.Rejected))
+            {
+                yield return new ValidationResult(ReceiptViewModelResources.ReceivedDateRequired, new[] { "Receipt.ReceivedDate" });
+            }
+
             if (Receipt.IsComplete())
             {
                 if (Receipt.ReceivedDate.Date < ActualShipmentDate.Date)
@@ -226,6 +210,32 @@
                 {
                     yield return new ValidationResult(CaptureViewModelResources.ReceivedDateInfuture, new[] { "Receipt.ReceivedDate" });
                 }
+            }
+
+            if (!Receipt.ActualQuantity.HasValue && Receipt.ReceivedDate.IsCompleted && Receipt.ShipmentTypes == ShipmentType.Accepted)
+            {
+                yield return new ValidationResult(ReceiptViewModelResources.QuantityRequired, new[] { "Receipt.ActualQuantity" });
+            }
+
+            if (!Receipt.ActualQuantity.HasValue && Receipt.ShipmentTypes == ShipmentType.Partially)
+            {
+                yield return new ValidationResult(ReceiptViewModelResources.QuantityRequired, new[] { "Receipt.ActualQuantity" });
+            }
+
+            if ((!Receipt.RejectedQuantity.HasValue && Receipt.ShipmentTypes == ShipmentType.Rejected) ||
+                (!Receipt.RejectedQuantity.HasValue && Receipt.ShipmentTypes == ShipmentType.Partially))
+            {
+                yield return new ValidationResult(ReceiptViewModelResources.RejectedQuantityRequired, new[] { "Receipt.RejectedQuantity" });
+            }
+
+            if ((Receipt.ShipmentTypes == ShipmentType.Partially || Receipt.ShipmentTypes == ShipmentType.Rejected) && string.IsNullOrWhiteSpace(Receipt.RejectionReason))
+            {
+                yield return new ValidationResult(ReceiptViewModelResources.RejectReasonRequired, new[] { "Receipt.RejectionReason" });
+            }
+
+            if ((Receipt.ShipmentTypes == ShipmentType.Partially || Receipt.ShipmentTypes == ShipmentType.Rejected) && string.IsNullOrWhiteSpace(StatsMarking))
+            {
+                yield return new ValidationResult(CaptureViewModelResources.StatsMarkingRequired, new[] { "StatsMarking" });
             }
 
             if (Recovery.IsComplete())

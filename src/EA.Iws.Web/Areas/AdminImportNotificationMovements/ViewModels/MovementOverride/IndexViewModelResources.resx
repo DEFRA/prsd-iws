@@ -168,4 +168,10 @@
   <data name="WasteDisposedDateRequired" xml:space="preserve">
     <value>Please provide the date</value>
   </data>
+  <data name="PrenotifictaionDateInfuture" xml:space="preserve">
+    <value>The "prenotification date" cannot be in the future. Please enter a different date.</value>
+  </data>
+  <data name="ReceivedDateRequired" xml:space="preserve">
+    <value>Please provide the received date</value>
+  </data>
 </root>
