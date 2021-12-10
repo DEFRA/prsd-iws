@@ -110,7 +110,7 @@
                                         </label>
                                     </div>
                                 }
-                                <div class="panel @(Model.WasShipmentAccepted ? "js-hidden" : string.Empty)" id="rejected">
+                                <div class="@(Model.WasShipmentAccepted ? "js-hidden" : string.Empty)" id="rejected">
                                     <div class="form-group @Html.Gds().FormGroupClass(m => m.RejectionReason)">
                                         @Html.LabelFor(m => m.RejectionReason, new { @class = "form-label-bold" })
                                         @Html.Gds().ValidationMessageFor(m => m.RejectionReason)

@@ -179,6 +179,15 @@ namespace EA.Iws.Web.Areas.AdminImportNotificationMovements.ViewModels.MovementO
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Please provide the rejected quantity.
+        /// </summary>
+        public static string RejectedQuantityRequired {
+            get {
+                return ResourceManager.GetString("RejectedQuantityRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Reason why the shipment was rejected and any relevant details.
         /// </summary>
         public static string RejectionReasonLabel {
