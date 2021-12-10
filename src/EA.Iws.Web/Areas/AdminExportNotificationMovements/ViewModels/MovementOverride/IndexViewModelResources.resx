@@ -150,6 +150,9 @@
   <data name="ReceivedDateLabel" xml:space="preserve">
     <value>When was the waste received?</value>
   </data>
+  <data name="ReceivedDateRequired" xml:space="preserve">
+    <value>Please provide the received date</value>
+  </data>
   <data name="RejectionReasonLabel" xml:space="preserve">
     <value>Reason why the shipment was rejected and any relevant details</value>
   </data>

@@ -149,9 +149,10 @@
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
-            if (!ActualShipmentDate.IsCompleted)
+            if (PrenotificationDate.IsCompleted && PrenotificationDate.Date > SystemTime.UtcNow.Date)
             {
-                yield return new ValidationResult(CaptureViewModelResources.ActualDateRequired, new[] { "ActualShipmentDate" });
+                yield return new ValidationResult(CaptureViewModelResources.PrenotifictaionDateInfuture,
+                   new[] { "PrenotificationDate" });
             }
 
             if (!HasNoPrenotification && !PrenotificationDate.IsCompleted)
@@ -160,14 +161,39 @@
                     new[] { "PrenotificationDate" });
             }
 
-            if ((!Receipt.ReceivedDate.IsCompleted && Receipt.ActualQuantity.HasValue) || (!Receipt.ReceivedDate.IsCompleted && !string.IsNullOrWhiteSpace(Receipt.RejectionReason)))
+            if (!ActualShipmentDate.IsCompleted)
+            {
+                yield return new ValidationResult(CaptureViewModelResources.ActualDateRequired, new[] { "ActualShipmentDate" });
+            }
+
+            if (ActualShipmentDate.IsCompleted && PrenotificationDate.IsCompleted)
+            {
+                DateTime preNotificateDate = PrenotificationDate.Date.Value;
+
+                if (ActualShipmentDate.Date > preNotificateDate.AddDays(60))
+                {
+                    yield return new ValidationResult(CaptureViewModelResources.ActualDateGreaterthanSixtyDays, new[] { "ActualShipmentDate" });
+                }
+            }
+
+            if (Receipt.ShipmentTypes == ShipmentType.Accepted)
+            {
+                if ((!Receipt.ReceivedDate.IsCompleted && Receipt.ActualQuantity.HasValue) || (!Receipt.ReceivedDate.IsCompleted && !string.IsNullOrWhiteSpace(Receipt.RejectionReason)))
+                {
+                    yield return new ValidationResult(CaptureViewModelResources.ReceivedDateRequired, new[] { "Receipt.ReceivedDate" });
+                }
+            }
+            else if (!Receipt.ReceivedDate.IsCompleted && Receipt.ShipmentTypes == ShipmentType.Partially || Receipt.ShipmentTypes == ShipmentType.Rejected)
             {
                 yield return new ValidationResult(CaptureViewModelResources.ReceivedDateRequired, new[] { "Receipt.ReceivedDate" });
             }
 
-            if (!Receipt.ActualQuantity.HasValue && Receipt.ReceivedDate.IsCompleted && (Receipt.ShipmentTypes == ShipmentType.Accepted || Receipt.ShipmentTypes == ShipmentType.Partially))
+            if (Receipt.IsComplete())
             {
-                yield return new ValidationResult(CaptureViewModelResources.QuantityRequired, new[] { "Receipt.ActualQuantity" });
+                if (Receipt.ReceivedDate.Date > SystemTime.UtcNow.Date)
+                {
+                    yield return new ValidationResult(CaptureViewModelResources.ReceivedDateInfuture, new[] { "Receipt.ReceivedDate" });
+                }
             }
 
             if ((Receipt.ShipmentTypes == ShipmentType.Partially || Receipt.ShipmentTypes == ShipmentType.Rejected) && string.IsNullOrWhiteSpace(Receipt.RejectionReason))
@@ -175,9 +201,20 @@
                 yield return new ValidationResult(CaptureViewModelResources.RejectReasonRequired, new[] { "Receipt.RejectionReason" });
             }
 
-            if ((Receipt.ShipmentTypes == ShipmentType.Partially || Receipt.ShipmentTypes == ShipmentType.Rejected) && string.IsNullOrWhiteSpace(StatsMarking))
+            if (!Receipt.ActualQuantity.HasValue && Receipt.ReceivedDate.IsCompleted && Receipt.ShipmentTypes == ShipmentType.Accepted)
             {
-                yield return new ValidationResult(CaptureViewModelResources.StatsMarkingRequired, new[] { "StatsMarking" });
+                yield return new ValidationResult(CaptureViewModelResources.QuantityRequired, new[] { "Receipt.ActualQuantity" });
+            }
+
+            if (!Receipt.ActualQuantity.HasValue && Receipt.ShipmentTypes == ShipmentType.Partially)
+            {
+                yield return new ValidationResult(CaptureViewModelResources.QuantityRequired, new[] { "Receipt.ActualQuantity" });
+            }
+
+            if ((!Receipt.RejectedQuantity.HasValue && Receipt.ShipmentTypes == ShipmentType.Rejected) ||
+                (!Receipt.RejectedQuantity.HasValue && Receipt.ShipmentTypes == ShipmentType.Partially))
+            {
+                yield return new ValidationResult(CaptureViewModelResources.RejectQuantityRequired, new[] { "Receipt.RejectedQuantity" });
             }
 
             if (Recovery.IsComplete() && !Receipt.IsComplete())
@@ -192,30 +229,6 @@
                     new[] { "Recovery.RecoveryDate" });
             }
 
-            if (PrenotificationDate.IsCompleted && PrenotificationDate.Date > SystemTime.UtcNow.Date)
-            {
-                yield return new ValidationResult(CaptureViewModelResources.PrenotifictaionDateInfuture,
-                   new[] { "PrenotificationDate" });
-            }
-
-            if (ActualShipmentDate.IsCompleted && PrenotificationDate.IsCompleted)
-            {
-                DateTime preNotificateDate = PrenotificationDate.Date.Value;
-
-                if (ActualShipmentDate.Date > preNotificateDate.AddDays(60))
-                {
-                    yield return new ValidationResult(CaptureViewModelResources.ActualDateGreaterthanSixtyDays, new[] { "ActualShipmentDate" });
-                }
-            }
-
-            if (Receipt.IsComplete())
-            {
-                if (Receipt.ReceivedDate.Date > SystemTime.UtcNow.Date)
-                {
-                    yield return new ValidationResult(CaptureViewModelResources.ReceivedDateInfuture, new[] { "Receipt.ReceivedDate" });
-                }
-            }
-
             if (Recovery.IsComplete())
             {
                 if (Recovery.RecoveryDate.Date < Receipt.ReceivedDate.Date)
@@ -228,9 +241,9 @@
                 }
             }
 
-            if (!Receipt.RejectedQuantity.HasValue && (Receipt.ShipmentTypes == ShipmentType.Rejected || Receipt.ShipmentTypes == ShipmentType.Partially))
+            if ((Receipt.ShipmentTypes == ShipmentType.Partially || Receipt.ShipmentTypes == ShipmentType.Rejected) && string.IsNullOrWhiteSpace(StatsMarking))
             {
-                yield return new ValidationResult(CaptureViewModelResources.RejectQuantityRequired, new[] { "Receipt.RejectedQuantity" });
+                yield return new ValidationResult(CaptureViewModelResources.StatsMarkingRequired, new[] { "StatsMarking" });
             }
 
             if (Receipt.ShipmentTypes == ShipmentType.Rejected)

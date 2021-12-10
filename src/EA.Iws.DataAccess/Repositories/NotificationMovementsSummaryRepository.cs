@@ -64,7 +64,8 @@
                     && (m.Status == MovementStatus.Submitted 
                         || m.Status == MovementStatus.Received
                         || m.Status == MovementStatus.New
-                        || m.Status == MovementStatus.Captured) 
+                        || m.Status == MovementStatus.Captured
+                        || m.Status == MovementStatus.PartiallyRejected) 
                     && m.Date <= SystemTime.UtcNow)
                 .CountAsync();
 
