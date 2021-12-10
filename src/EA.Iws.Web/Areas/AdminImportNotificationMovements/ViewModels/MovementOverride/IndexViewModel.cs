@@ -165,11 +165,6 @@
                 yield return new ValidationResult(IndexViewModelResources.QuantityRequired, new[] { "ActualQuantity" });
             }
 
-            if (IsPartiallyRejected && !Date.HasValue)
-            {
-                yield return new ValidationResult(IndexViewModelResources.WasteDisposedDateRequired, new[] { "Date" });
-            }
-
             if (IsReceived && ActualQuantity.HasValue &&  !Date.HasValue)
             {
                 yield return new ValidationResult(IndexViewModelResources.WasteDisposedDateRequired, new[] { "Date" });
