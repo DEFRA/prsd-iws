@@ -20,7 +20,8 @@
                 Unit = i.Unit,
                 Rejected = i.Rejected,
                 RecoveredOrDisposedOf = i.RecoveredOrDisposedOf,
-                IsCancelled = i.IsCancelled
+                IsCancelled = i.IsCancelled,
+                IsPartialRejected = i.IsPartiallyRejected
             }).ToList();
         }
     }
