@@ -50,10 +50,7 @@
                 {
                     throw new InvalidOperationException("The prenotification date cannot be in the future.");
                 }
-                if (actualShipmentDate < prenotificationDate)
-                {
-                    throw new InvalidOperationException("The actual date of shipment cannot be before the prenotification date.");
-                }
+
                 if (actualShipmentDate > prenotificationDate.Value.AddDays(60))
                 {
                     throw new InvalidOperationException("The actual date of shipment should not be more than 30 calendar days after the prenotification date.");

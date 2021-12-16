@@ -2,6 +2,7 @@
 {
     using System;
     using System.ComponentModel;
+    using EA.Iws.Core.Shared;
 
     [DisplayName("Exporter notifier")]
     public class Exporter : IDraftEntity
@@ -9,6 +10,10 @@
         public Address Address { get; set; }
 
         public string BusinessName { get; set; }
+
+        public BusinessType Type { get; set; }
+
+        public string RegistrationNumber { get; set; }
 
         public Contact Contact { get; set; }
 

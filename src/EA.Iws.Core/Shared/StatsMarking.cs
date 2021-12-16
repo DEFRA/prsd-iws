@@ -3,11 +3,11 @@
     using System.ComponentModel.DataAnnotations;
     public enum StatsMarking
     {
-        [Display(Name = "Illegal Shipment (WSR Table 5)")]
+        [Display(Name = "Illegal Shipment")]
         IllegalShipment  = 1,
-        [Display(Name = "Did not proceed as intended (Basel Table 9)")]
+        [Display(Name = "Did not proceed as intended")]
         BaselTable9 = 2,
-        [Display(Name = "Accident occurred during transport (Basel Table 10)")]
+        [Display(Name = "Accident occurred during transport")]
         BaselTable10 = 3
     }
 }

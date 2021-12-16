@@ -25,10 +25,13 @@
 
         public bool IsCancelled { get; private set; }
 
+        public bool IsPartiallyRejected { get; set; }
+
         public static MovementTableData Load(ImportMovement movement,
             ImportMovementReceipt movementReceipt,
             ImportMovementRejection movementRejection,
-            ImportMovementCompletedReceipt movementOperationReceipt)
+            ImportMovementCompletedReceipt movementOperationReceipt,
+            ImportMovementPartialRejection movementPartialRejection)
         {
             var data = new MovementTableData();
 
@@ -46,6 +49,14 @@
                 data.Received = movementReceipt.Date;
                 data.Quantity = movementReceipt.Quantity;
                 data.Unit = movementReceipt.Unit;
+            }
+
+            if (movementPartialRejection != null)
+            {
+                data.Received = movementPartialRejection.WasteReceivedDate;
+                data.Quantity = movementPartialRejection.ActualQuantity;
+                data.Unit = movementPartialRejection.ActualUnit;
+                data.IsPartiallyRejected = true;
             }
 
             if (movementRejection != null)

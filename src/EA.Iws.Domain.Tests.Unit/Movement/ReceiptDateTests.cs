@@ -61,7 +61,7 @@
         }
 
         [Fact]
-        public void WasteReceivedDateBeforeActualShipmentDate_Throws()
+        public void WasteReceivedDateCanBeBeforeActualShipmentDate()
         {
             movement = new TestableMovement
             {
@@ -71,7 +71,8 @@
                 Status = MovementStatus.Captured
             };
 
-            Assert.Throws<InvalidOperationException>(() => movement.ReceiveInternally(Today, new ShipmentQuantity(10, ShipmentQuantityUnits.Kilograms), userId));
+            movement.ReceiveInternally(Today, new ShipmentQuantity(10, ShipmentQuantityUnits.Kilograms), userId);
+            Assert.NotEqual(Today, movement.Date);
         }
 
         [Fact]

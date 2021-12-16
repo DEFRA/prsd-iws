@@ -15,5 +15,7 @@
         public ImportNotificationStatus Status { get; set; }
 
         public bool ShowShipmentSummaryLink { get; set; }
+
+        public string Importer { get; set; }
     }
 }

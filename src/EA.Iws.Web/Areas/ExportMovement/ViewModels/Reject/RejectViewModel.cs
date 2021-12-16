@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.Web;
+    using EA.Iws.Core.Shared;
     using Infrastructure.Validation;
     using Web.ViewModels.Shared;
 
@@ -24,6 +25,10 @@
         public HttpPostedFileBase File { get; set; }
 
         public DateTime MovementDate { get; set; }
+
+        public decimal? RejectedQuantity { get; set; }
+
+        public ShipmentQuantityUnits? RejectedUnits { get; set; }
 
         public RejectViewModel()
         {

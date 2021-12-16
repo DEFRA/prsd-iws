@@ -6,6 +6,7 @@
     using Domain.FileStore;
     using Domain.Movement;
     using Domain.NotificationApplication;
+    using EA.Iws.Core.Shared;
     using FakeItEasy;
     using Prsd.Core;
     using Prsd.Core.Domain;
@@ -91,7 +92,7 @@
             A.CallTo(
                     () =>
                         rejectMovement.Reject(A<Guid>.That.IsEqualTo(movementId),
-                            A<DateTime>.That.IsEqualTo(rejectDate), AnyString))
+                            A<DateTime>.That.IsEqualTo(rejectDate), AnyString, 1, ShipmentQuantityUnits.Tonnes))
                 .MustHaveHappened(Repeated.Exactly.Once);
         }
 
@@ -125,7 +126,7 @@
         private SetMovementRejected GetRequest()
         {
             SetMovement();
-            return new SetMovementRejected(movementId, rejectDate, AnyString, new byte[1], FileType);
+            return new SetMovementRejected(movementId, rejectDate, AnyString, new byte[1], FileType, 1, ShipmentQuantityUnits.Tonnes);
         }
 
         private void SetMovement()

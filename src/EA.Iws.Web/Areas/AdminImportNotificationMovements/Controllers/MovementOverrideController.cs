@@ -66,10 +66,12 @@
                 {
                     OperationCompleteDate = model.Date.HasValue ? model.Date.Value : (DateTime?)null
                 },
-                Comments = model.HasComments ? model.Comments : null,
-                StatsMarking = model.HasComments ? model.StatsMarking : null,
+                Comments = model.Comments,
+                StatsMarking = model.StatsMarking,
                 IsRejected = model.IsRejected,
-                MovementId = movementId
+                MovementId = movementId,
+                RejectedQuantity = model.RejectedQuantity,
+                RejectedUnit = model.RejectedUnits
             };
 
             await mediator.SendAsync(new SetImportMovementReceiptAndRecoveryData(data));

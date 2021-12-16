@@ -49,7 +49,9 @@
                 AreMultiple = model.AreMultiple,
                 BusinessName = model.Business.Name,
                 Contact = model.Contact.AsContact(),
-                IsAddedToAddressBook = model.IsAddedToAddressBook
+                IsAddedToAddressBook = model.IsAddedToAddressBook,
+                Type = model.BusinessType,
+                RegistrationNumber = model.Business.RegistrationNumber
             };
 
             await mediator.SendAsync(new SetDraftData<Producer>(id, producer));

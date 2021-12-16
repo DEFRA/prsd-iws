@@ -66,10 +66,15 @@
 
             var allMovementReceipts = new List<ImportMovementReceipt>();
 
+            var allMovementPartialRejects = new List<ImportMovementPartialRejection>();
+
             foreach (var movement in movements)
             {
                 var movementReceipts = await context.ImportMovementReceipts.Where(mr => mr.MovementId == movement.Id).ToListAsync();
                 allMovementReceipts = allMovementReceipts.Union(movementReceipts).ToList();
+
+                var movementPartials = await context.ImportMovementPartialRejections.Where(mr => mr.MovementId == movement.Id).ToListAsync();
+                allMovementPartialRejects = allMovementPartialRejects.Union(movementPartials).ToList();
             }
 
             if (!allMovementReceipts.Any())
@@ -82,6 +87,14 @@
                     m.Unit,
                     shipment.Quantity.Units,
                     m.Quantity));
+
+            var totalPartialActual = allMovementPartialRejects.Sum(m =>
+                ShipmentQuantityUnitConverter.ConvertToTarget(
+                    m.ActualUnit,
+                    shipment.Quantity.Units,
+                    m.ActualQuantity));
+
+            totalReceived = totalReceived + totalPartialActual;
 
             return new ShipmentQuantity(totalReceived, shipment.Quantity.Units);
         }

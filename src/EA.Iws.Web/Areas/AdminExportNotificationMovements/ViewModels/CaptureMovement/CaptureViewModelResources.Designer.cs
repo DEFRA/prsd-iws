@@ -19,7 +19,7 @@ namespace EA.Iws.Web.Areas.AdminExportNotificationMovements.ViewModels.CaptureMo
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class CaptureViewModelResources {
@@ -260,6 +260,15 @@ namespace EA.Iws.Web.Areas.AdminExportNotificationMovements.ViewModels.CaptureMo
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Please provide the rejected quantity.
+        /// </summary>
+        public static string RejectQuantityRequired {
+            get {
+                return ResourceManager.GetString("RejectQuantityRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Please provide a reason for rejection.
         /// </summary>
         public static string RejectReasonRequired {
@@ -274,6 +283,15 @@ namespace EA.Iws.Web.Areas.AdminExportNotificationMovements.ViewModels.CaptureMo
         public static string StatsMarking {
             get {
                 return ResourceManager.GetString("StatsMarking", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please select annual stats marking for rejection.
+        /// </summary>
+        public static string StatsMarkingRequired {
+            get {
+                return ResourceManager.GetString("StatsMarkingRequired", resourceCulture);
             }
         }
     }

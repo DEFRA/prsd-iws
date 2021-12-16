@@ -3,6 +3,9 @@
     using Core.ImportMovement;
     using Core.ImportNotificationMovements;
     using Core.Shared;
+    using EA.Iws.Web.Areas.AdminImportNotificationMovements.ViewModels.Capture;
+    using EA.Iws.Web.Infrastructure.Validation;
+    using EA.Prsd.Core;
     using Prsd.Core.Helpers;
     using System;
     using System.Collections.Generic;
@@ -60,6 +63,8 @@
 
         public bool IsRejected { get; set; }
 
+        public bool IsPartiallyRejected { get; set; }
+
         [Display(Name = "HasComments", ResourceType = typeof(IndexViewModelResources))]
         public bool HasComments { get; set; }
 
@@ -88,6 +93,12 @@
         public string QuantityReceivedTotal { get; set; }
 
         public string AverageTonnage { get; set; }
+
+        [Display(Name = "RejectedQuantityLabel", ResourceType = typeof(ReceiptViewModelResources))]
+        [IsValidNumber(14, ErrorMessageResourceName = "MaximumActualQuantity", ErrorMessageResourceType = typeof(ReceiptViewModelResources), IsOptional = true)]
+        public decimal? RejectedQuantity { get; set; }
+
+        public ShipmentQuantityUnits? RejectedUnits { get; set; }
 
         public IndexViewModel()
         {
@@ -125,9 +136,12 @@
             WasAccepted = string.IsNullOrWhiteSpace(data.ReceiptData.RejectionReason);
             RejectionReason = data.ReceiptData.RejectionReason;
             PossibleUnits = data.ReceiptData.PossibleUnits;
+            IsPartiallyRejected = data.IsPartiallyRejected;
+            RejectedQuantity = data.RejectedQuantity;
+            RejectedUnits = data.RejectedUnit;
 
             NotificationType = data.Data.NotificationType;
-            Date = data.RecoveryData.OperationCompleteDate.HasValue ? data.RecoveryData.OperationCompleteDate.Value.DateTime : (DateTime?)null;
+            Date = data.RecoveryData.OperationCompleteDate.HasValue ? data.RecoveryData.OperationCompleteDate.Value : (DateTime?)null;
         }
 
         public void SetSummaryData(Summary summaryData)
@@ -142,14 +156,59 @@
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
+            if (PrenotificationDate > SystemTime.UtcNow.Date)
+            {
+                yield return new ValidationResult(IndexViewModelResources.PrenotifictaionDateInfuture, new[] { "PrenotificationDate" });
+            }
+
+            if (!HasNoPrenotification && !PrenotificationDate.HasValue)
+            {
+                yield return new ValidationResult(IndexViewModelResources.PrenotificationDateRequired, new[] { "PrenotificationDate" });
+            }
+
             if (!ActualShipmentDate.HasValue)
             {
                 yield return new ValidationResult(IndexViewModelResources.ActualShipmentDateRequired, new[] { "ActualShipmentDate" });
             }
 
+            if (!ReceivedDate.HasValue)
+            {
+                yield return new ValidationResult(IndexViewModelResources.ReceivedDateRequired, new[] { "ReceivedDate" });
+            }
+
             if (ReceivedDate.HasValue && WasAccepted && !ActualQuantity.HasValue)
             {
                 yield return new ValidationResult(IndexViewModelResources.QuantityRequired, new[] { "ActualQuantity" });
+            }
+
+            if (IsPartiallyRejected == true && !ActualQuantity.HasValue)
+            {
+                yield return new ValidationResult(IndexViewModelResources.QuantityRequired, new[] { "ActualQuantity" });
+            }
+
+            if ((IsPartiallyRejected == true || IsRejected == true) && !RejectedQuantity.HasValue)
+            {
+                yield return new ValidationResult(IndexViewModelResources.RejectedQuantityRequired, new[] { "RejectedQuantity" });
+            }
+
+            if ((IsPartiallyRejected == true || IsRejected == true) && string.IsNullOrEmpty(RejectionReason))
+            {
+                yield return new ValidationResult(IndexViewModelResources.RejectReasonRequired, new[] { "RejectionReason" });
+            }
+
+            if ((IsPartiallyRejected == true || IsRejected == true) && string.IsNullOrWhiteSpace(StatsMarking))
+            {
+                yield return new ValidationResult(CaptureViewModelResources.StatsMarkingRequired, new[] { "StatsMarking" });
+            }
+
+            if (IsReceived && ActualQuantity.HasValue && !Date.HasValue)
+            {
+                yield return new ValidationResult(IndexViewModelResources.WasteDisposedDateRequired, new[] { "Date" });
+            }
+
+            if (IsPartiallyRejected && !Date.HasValue)
+            {
+                yield return new ValidationResult(IndexViewModelResources.WasteDisposedDateRequired, new[] { "Date" });
             }
         }
     }

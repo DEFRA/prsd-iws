@@ -171,4 +171,7 @@
   <data name="StatsMarking" xml:space="preserve">
     <value>WSR/Basel annual stats marking (when required)</value>
   </data>
+  <data name="StatsMarkingRequired" xml:space="preserve">
+    <value>Please select annual stats marking for rejection</value>
+  </data>
 </root>

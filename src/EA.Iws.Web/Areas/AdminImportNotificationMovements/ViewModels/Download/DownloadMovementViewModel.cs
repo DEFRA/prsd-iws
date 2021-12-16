@@ -52,6 +52,11 @@
                 return "Cancelled";
             }
 
+            if (data.IsPartialRejected && !data.RecoveredOrDisposedOf.HasValue)
+            {
+                return "Partially Rejected";
+            }
+
             if (data.RecoveredOrDisposedOf.HasValue)
             {
                 return type == NotificationType.Disposal ? "Disposed" : "Recovered";

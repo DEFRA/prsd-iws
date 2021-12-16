@@ -5,6 +5,6 @@
 
     public interface IImportNotificationSearchRepository
     {
-        Task<IEnumerable<ImportNotificationSearchResult>> SearchByNumber(string number);
+        Task<IEnumerable<ImportNotificationSearchResult>> SearchBySearchTerm(string searchTerm);
     }
 }

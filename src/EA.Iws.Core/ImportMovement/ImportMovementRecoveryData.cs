@@ -4,7 +4,7 @@
 
     public class ImportMovementRecoveryData
     {
-        public DateTimeOffset? OperationCompleteDate { get; set; }
+        public DateTime? OperationCompleteDate { get; set; }
 
         public bool IsOperationCompleted { get; set; }
     }

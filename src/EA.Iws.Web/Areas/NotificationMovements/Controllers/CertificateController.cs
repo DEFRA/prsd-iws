@@ -50,7 +50,7 @@
         {
             var notificationType = await mediator.SendAsync(new GetNotificationType(notificationId));
 
-            if (certificate == CertificateType.Receipt || certificate == CertificateType.ReceiptRecovery)
+            if (certificate == CertificateType.Receipt)
             {
                 var receivedResult = await mediator.SendAsync(new GetSubmittedMovementsByNotificationId(notificationId));
                 return View(new ShipmentViewModel(notificationId, notificationType, certificate, receivedResult));
@@ -60,6 +60,12 @@
             {
                 var recoveryResult = await mediator.SendAsync(new GetReceivedMovements(notificationId));
                 return View(new ShipmentViewModel(notificationId, notificationType, certificate, recoveryResult));
+            }
+
+            if (certificate == CertificateType.ReceiptRecovery)
+            {
+                var receiptRecoveryResult = await mediator.SendAsync(new GetReceiptRecoveryMovementsByNotificationId(notificationId));
+                return View(new ShipmentViewModel(notificationId, notificationType, certificate, receiptRecoveryResult));
             }
 
             return View();

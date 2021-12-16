@@ -30,6 +30,7 @@
                 @Html.HiddenFor(m => m.IsReceived)
                 @Html.HiddenFor(m => m.IsOperationCompleted)
                 @Html.HiddenFor(m => m.IsRejected)
+                @Html.HiddenFor(m => m.IsPartiallyRejected)
 
                 <h1 class="data-item bold-xlarge">@string.Format(Resource.ShipmentNumber, Model.ShipmentNumber)</h1>
 
@@ -38,13 +39,15 @@
 
                 <hr />
 
-                if (Model.IsReceived || Model.IsRejected)
+                if (Model.IsReceived || Model.IsRejected || Model.IsPartiallyRejected)
                 {
                     @Html.HiddenFor(m => m.Receipt.ReceivedDate.Date)
-                    @Html.HiddenFor(m => m.Receipt.WasShipmentAccepted)
                     @Html.HiddenFor(m => m.Receipt.RejectionReason)
                     @Html.HiddenFor(m => m.Receipt.ActualQuantity)
-                    @Html.HiddenFor(m => m.Receipt.Units)
+                    @Html.HiddenFor(m => m.Receipt.ActualUnits)
+                    @Html.HiddenFor(m => m.Receipt.RejectedQuantity)
+                    @Html.HiddenFor(m => m.Receipt.RejectedUnits)
+                    @Html.HiddenFor(m => m.Receipt.ShipmentTypes)
                     @Html.Partial("_ReceiptReadOnly", Model.Receipt)
                 }
                 else
@@ -52,24 +55,47 @@
                     @Html.EditorFor(m => m.Receipt)
                 }
 
-                <hr />
+                if (Model.Receipt.ShipmentTypes == ShipmentType.Rejected)
+                {
+                    <hr id="hrAfterReceipt" style="display:none" />
+                }
+                else
+                {
+                    <hr id="hrAfterReceipt" style="display:block" />
+                }
 
                 if (Model.IsOperationCompleted)
                 {
                     @Html.HiddenFor(m => m.Recovery.RecoveryDate.Date)
                     @Html.Partial("_OperationReadOnly", Model.Recovery)
 
-                    <hr />
+                    if (Model.Receipt.ShipmentTypes == ShipmentType.Rejected)
+                    {
+                        <hr id="hrAfterRecovery" style="display:none" />
+                    }
+                    else
+                    {
+                        <hr id="hrAfterRecovery" style="display:block" />
+                    }
                 }
                 else if (!Model.IsRejected)
                 {
                     @Html.EditorFor(m => m.Recovery)
 
-                    <hr />
+                    if (Model.Receipt.ShipmentTypes == ShipmentType.Rejected)
+                    {
+                        <hr id="hrAfterRecovery" style="display:none" />
+                    }
+                    else
+                    {
+                        <hr id="hrAfterRecovery" style="display:block" />
+                    }
                 }
 
                 if (Model.HasComments)
                 {
+                    @Html.HiddenFor(m => m.StatsMarking)
+                    @Html.HiddenFor(m => m.Comments)
                     @Html.Partial("_CommentsReadOnly")
                 }
                 else
@@ -78,7 +104,6 @@
                 }
 
                 <button class="button" type="submit">@Constants.ContinueButtonText</button>
-
             }
         </div>
 
@@ -91,7 +116,7 @@
 @section scripts {
     @Html.Partial("_Scripts")
 
-   <script>
+    <script>
         $(function () {
             @if (!Model.IsReceived)
             {
@@ -102,5 +127,5 @@
                 @:$("#Recovery_RecoveryDate_Date").focus();
             }
         })
-</script>
+    </script>
 }
