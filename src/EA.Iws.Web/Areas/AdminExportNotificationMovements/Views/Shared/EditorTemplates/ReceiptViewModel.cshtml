@@ -1,56 +1,121 @@
 ﻿@model EA.Iws.Web.Areas.AdminExportNotificationMovements.ViewModels.CaptureMovement.ReceiptViewModel
 @using Resource = EA.Iws.Web.Areas.AdminExportNotificationMovements.Views.Shared.EditorTemplates.ReceiptResources
+@using Resources = EA.Iws.Web.Areas.AdminExportNotificationMovements.ViewModels.CaptureMovement.ReceiptViewModelResources
 
-    <div>
+<div>
 
-        <div class="form-group @Html.Gds().FormGroupClass(m => m.ReceivedDate)">
-            @Html.LabelFor(m => m.ReceivedDate, new { @class = "form-label-bold" })
-            @Html.Gds().ValidationMessageFor(m => m.ReceivedDate)
-            @Html.EditorFor(m => m.ReceivedDate)
+    <div class="form-group @Html.Gds().FormGroupClass(m => m.ReceivedDate)">
+        @Html.LabelFor(m => m.ReceivedDate, new { @class = "form-label-bold" })
+        @Html.Gds().ValidationMessageFor(m => m.ReceivedDate)
+        @Html.EditorFor(m => m.ReceivedDate)
+    </div>
+
+    <div class="form-group">
+        @Html.Label(@Resource.ShipmentAcceptedLable, new { @class = "form-label-bold" })
+
+        <div class="multiple-choice">
+            @Html.RadioButtonFor(m => m.ShipmentTypes, ShipmentType.Accepted, new { id = "Accepted", @checked = true })
+            <label for="Accepted">
+                Yes
+            </label>
         </div>
 
-        <div class="form-group @Html.Gds().FormGroupClass(m => m.WasShipmentAccepted)">
-            @Html.LabelFor(m => m.WasShipmentAccepted, new { @class = "form-label-bold" })
-            @Html.Gds().ValidationMessageFor(m => m.WasShipmentAccepted)
-            <fieldset>
-                <div class="multiple-choice">
-                    @Html.RadioButtonFor(m => m.WasShipmentAccepted, true, new { id = "yes" })
-                    <label for="yes">
-                        Yes
-                    </label>
-                </div>
+        <div class="multiple-choice">
+            @Html.RadioButtonFor(m => m.ShipmentTypes, ShipmentType.Partially, new { id = "Partially" })
+            <label for="Partially">
+                Partially
+            </label>
+        </div>
 
-                <div class="multiple-choice" data-target="rejected">
-                    @Html.RadioButtonFor(m => m.WasShipmentAccepted, false, new { id = "no" })
-                    <label for="no">
-                        No
-                    </label>
-                </div>
+        <div class="multiple-choice">
+            @Html.RadioButtonFor(m => m.ShipmentTypes, ShipmentType.Rejected, new { id = "Rejected" })
+            <label for="Rejected">
+                No
+            </label>
+        </div>
 
-                <div class="panel @(Model.WasShipmentAccepted ? "js-hidden" : string.Empty)" id="rejected">
-
-                    <div class="form-group @Html.Gds().FormGroupClass(m => m.RejectionReason)">
+        @if (Model.ShipmentTypes == ShipmentType.Partially || Model.ShipmentTypes == ShipmentType.Rejected)
+        {
+            <div class="form-group @Html.Gds().FormGroupClass(m => m.RejectionReason)" id="dvPartiallyRejectedComments" style="display:block; margin-top:150px;">
+                @if (Model.ShipmentTypes == ShipmentType.Partially)
+                {
+                    <div id="dvPartiallyRejected" style="display:block">
                         @Html.LabelFor(m => m.RejectionReason, new { @class = "form-label-bold" })
-                        @Html.Gds().ValidationMessageFor(m => m.RejectionReason)
-                        @Html.TextAreaFor(m => m.RejectionReason, new { @class = "form-control-wide", rows = 10 })
+                        @Resources.PartiallyRejectionReasonInfomation1
+                        <br /><br />
+                        @Resources.PartiallyRejectionReasonInfomation2
                     </div>
 
-                </div>
-            </fieldset>
-        </div>
+                    <div id="dvRejected" style="display:none">
+                        @Html.LabelFor(m => m.RejectionReason, new { @class = "form-label-bold" })
+                        @Resources.FullyRejectionReasonInfomation1
+                        <br /><br />
+                        @Resources.FullyRejectionReasonInfomation2
+                    </div>
+                }
+                else
+                {
+                    <div id="dvRejected" style="display:block">
+                        @Html.LabelFor(m => m.RejectionReason, new { @class = "form-label-bold" })
+                        @Resources.FullyRejectionReasonInfomation1
+                        <br /><br />
+                        @Resources.FullyRejectionReasonInfomation2
+                    </div>
 
-        <div class="form-group @Html.Gds().FormGroupClass(m => m.ActualQuantity) @Html.Gds().FormGroupClass(m => m.Units)">
-            <h3 class="heading-small" style="margin-top: 0">@Resource.ActualQuantityQuestion</h3>
-            <p>@Resource.ActualQuantityHint</p>
-            @Html.LabelFor(m => m.ActualQuantity, new { @class = "form-label" })
-            @Html.Gds().ValidationMessageFor(m => m.ActualQuantity)
-            @Html.Gds().ValidationMessageFor(m => m.Units)
+                    <div id="dvPartiallyRejected" style="display:none">
+                        @Html.LabelFor(m => m.RejectionReason, new { @class = "form-label-bold" })
+                        @Resources.PartiallyRejectionReasonInfomation1
+                        <br /><br />
+                        @Resources.PartiallyRejectionReasonInfomation2
+                    </div>
+                }
+
+                @Html.Gds().ValidationMessageFor(m => m.RejectionReason)
+                @Html.TextAreaFor(m => m.RejectionReason, new { @class = "form-control-wide", rows = 10 })
+            </div>
+        }
+        else
+        {
+            <div class="form-group @Html.Gds().FormGroupClass(m => m.RejectionReason)" id="dvPartiallyRejectedComments" style="display:none;  margin-top:150px;">
+                <div id="dvPartiallyRejected">
+                    @Html.LabelFor(m => m.RejectionReason, new { @class = "form-label-bold" })
+                    @Resources.PartiallyRejectionReasonInfomation1
+                    <br /><br />
+                    @Resources.PartiallyRejectionReasonInfomation2
+                </div>
+
+                <div id="dvRejected">
+                    @Html.LabelFor(m => m.RejectionReason, new { @class = "form-label-bold" })
+                    @Resources.FullyRejectionReasonInfomation1
+                    <br /><br />
+                    @Resources.FullyRejectionReasonInfomation2
+                </div>
+
+                @Html.Gds().ValidationMessageFor(m => m.RejectionReason)
+                @Html.TextAreaFor(m => m.RejectionReason, new { @class = "form-control-wide", rows = 10 })
+            </div>
+        }
+    </div>
+
+    @if (Model.ShipmentTypes == ShipmentType.Partially || Model.ShipmentTypes == ShipmentType.Rejected)
+    {
+        <div class="form-group @Html.Gds().FormGroupClass(m => m.RejectedQuantity)" id="dvRejectedQuantity" style="display:block">
+            @Html.LabelFor(m => m.ShipmentRejectedQuantity, new { @class = "form-label-bold" })
+            @Html.Gds().ValidationMessageFor(m => m.ShipmentRejectedQuantity)
+            <p>
+                @Html.LabelFor(m => m.RejectedQuantityInfo, new { @class = "form-label" })
+            </p>
+
+            @Html.LabelFor(m => m.RejectedQuantity, new { @class = "form-label" })
+            @Html.Gds().ValidationMessageFor(m => m.RejectedQuantity)
+            @Html.Gds().ValidationMessageFor(m => m.RejectedUnits)
+
             <div class="grid-row">
                 <div class="column-third">
-                    @Html.Gds().TextBoxFor(m => m.ActualQuantity, new { type = "number", min = 0, step = "any", @class = "form-control form-control-wide" })
+                    @Html.Gds().TextBoxFor(m => m.RejectedQuantity, new { type = "number", min = 0, step = "any", @class = "form-control form-control-wide" })
                 </div>
                 <div class="column-third">
-                    @Html.Gds().DropDownListFor(m => m.Units, Model.UnitSelectList, new { @class = "form-control form-control-wide" })
+                    @Html.Gds().DropDownListFor(m => m.RejectedUnits, Model.UnitSelectList, new { @class = "form-control form-control-wide" })
                     @for (int i = 0; i < Model.PossibleUnits.Count; i++)
                     {
                         @Html.HiddenFor(m => m.PossibleUnits[i])
@@ -58,7 +123,77 @@
                 </div>
             </div>
         </div>
-    </div>
+    }
+    else
+    {
+        <div class="form-group @Html.Gds().FormGroupClass(m => m.RejectedQuantity)" id="dvRejectedQuantity" style="display:none">
+            @Html.LabelFor(m => m.ShipmentRejectedQuantity, new { @class = "form-label-bold" })
+            @Html.Gds().ValidationMessageFor(m => m.ShipmentRejectedQuantity)
+            <p>
+                @Html.LabelFor(m => m.RejectedQuantityInfo, new { @class = "form-label" })
+            </p>
 
+            @Html.LabelFor(m => m.RejectedQuantity, new { @class = "form-label" })
+            @Html.Gds().ValidationMessageFor(m => m.RejectedQuantity)
+            @Html.Gds().ValidationMessageFor(m => m.RejectedUnits)
 
+            <div class="grid-row">
+                <div class="column-third">
+                    @Html.Gds().TextBoxFor(m => m.RejectedQuantity, new { type = "number", min = 0, step = "any", @class = "form-control form-control-wide" })
+                </div>
+                <div class="column-third">
+                    @Html.Gds().DropDownListFor(m => m.RejectedUnits, Model.UnitSelectList, new { @class = "form-control form-control-wide" })
+                    @for (int i = 0; i < Model.PossibleUnits.Count; i++)
+                    {
+                        @Html.HiddenFor(m => m.PossibleUnits[i])
+                    }
+                </div>
+            </div>
+        </div>
+    }
 
+    @if (Model.ShipmentTypes == ShipmentType.Accepted || Model.ShipmentTypes == ShipmentType.Partially)
+    {
+        <div class="form-group @Html.Gds().FormGroupClass(m => m.ActualQuantity)" id="dvActualQuantity" style="display:block">
+            <h3 class="heading-small" style="margin-top: 0">@Resource.ActualQuantityQuestion</h3>
+            <p>@Resource.ActualQuantityHint</p>
+            @Html.LabelFor(m => m.ActualQuantity, new { @class = "form-label" })
+            @Html.Gds().ValidationMessageFor(m => m.ActualQuantity)
+            @Html.Gds().ValidationMessageFor(m => m.ActualUnits)
+            <div class="grid-row">
+                <div class="column-third">
+                    @Html.Gds().TextBoxFor(m => m.ActualQuantity, new { type = "number", min = 0, step = "any", @class = "form-control form-control-wide" })
+                </div>
+                <div class="column-third">
+                    @Html.Gds().DropDownListFor(m => m.ActualUnits, Model.UnitSelectList, new { @class = "form-control form-control-wide" })
+                    @for (int i = 0; i < Model.PossibleUnits.Count; i++)
+                    {
+                        @Html.HiddenFor(m => m.PossibleUnits[i])
+                    }
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="form-group @Html.Gds().FormGroupClass(m => m.ActualQuantity)" id="dvActualQuantity" style="display:none">
+            <h3 class="heading-small" style="margin-top: 0">@Resource.ActualQuantityQuestion</h3>
+            <p>@Resource.ActualQuantityHint</p>
+            @Html.LabelFor(m => m.ActualQuantity, new { @class = "form-label" })
+            @Html.Gds().ValidationMessageFor(m => m.ActualQuantity)
+            @Html.Gds().ValidationMessageFor(m => m.ActualUnits)
+            <div class="grid-row">
+                <div class="column-third">
+                    @Html.Gds().TextBoxFor(m => m.ActualQuantity, new { type = "number", min = 0, step = "any", @class = "form-control form-control-wide" })
+                </div>
+                <div class="column-third">
+                    @Html.Gds().DropDownListFor(m => m.ActualUnits, Model.UnitSelectList, new { @class = "form-control form-control-wide" })
+                    @for (int i = 0; i < Model.PossibleUnits.Count; i++)
+                    {
+                        @Html.HiddenFor(m => m.PossibleUnits[i])
+                    }
+                </div>
+            </div>
+        </div>
+    }
+</div>

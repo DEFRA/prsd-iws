@@ -58,14 +58,21 @@
                     (x, movementRejection) => new { x.movement, x.movementReceipt, movementRejection })
                 .SelectMany(x => x.movementRejection.DefaultIfEmpty(),
                     (x, movementRejection) => new { x.movement, x.movementReceipt, movementRejection })
+                .GroupJoin(context.ImportMovementPartialRejections, x => x.movement.Id,
+                    movementPartialRejection => movementPartialRejection.MovementId,
+                    (x, movementPartialRejection) => new { x.movement, x.movementReceipt, x.movementRejection, movementPartialRejection })
+                .SelectMany(x => x.movementPartialRejection.DefaultIfEmpty(),
+                    (x, movementPartialRejection) => new { x.movement, x.movementReceipt, x.movementRejection, movementPartialRejection })
+
                 .GroupJoin(context.ImportMovementCompletedReceipts, x => x.movement.Id,
                     movementOperationReceipt => movementOperationReceipt.MovementId,
-                    (x, movementOperationReceipt) => new { x.movement, x.movementReceipt, x.movementRejection, movementOperationReceipt })
+                    (x, movementOperationReceipt) => new { x.movement, x.movementReceipt, x.movementRejection, x.movementPartialRejection, movementOperationReceipt })
                 .SelectMany(x => x.movementOperationReceipt.DefaultIfEmpty(), (x, movementOperationReceipt) => new
                 {
                     Movement = x.movement,
                     MovementReceipt = x.movementReceipt,
                     MovementRejection = x.movementRejection,
+                    MovementPartialRejection = x.movementPartialRejection,
                     MovementOperationReceipt = movementOperationReceipt
                 });
 
@@ -77,7 +84,8 @@
                     movement.Movement,
                     movement.MovementReceipt,
                     movement.MovementRejection,
-                    movement.MovementOperationReceipt));
+                    movement.MovementOperationReceipt,
+                    movement.MovementPartialRejection));
             }
 
             return result;

@@ -50,7 +50,9 @@
 
             var movementRejection = await rejectMovement.Reject(message.MovementId,
                 message.DateReceived,
-                message.Reason);
+                message.Reason,
+                message.Quantity,
+                message.Unit);
 
             movementRejection.SetFile(fileId);
             

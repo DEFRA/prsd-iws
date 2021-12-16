@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
     using Core.Movement;
+    using EA.Iws.Core.Shared;
     using Prsd.Core;
     using Prsd.Core.Domain;
     using Prsd.Core.Extensions;
@@ -29,7 +30,8 @@
             Reject,
             Cancel,
             ReceiveInternal,
-            CompleteInternal
+            CompleteInternal,
+            PartialReject
         }
 
         protected Movement()
@@ -94,6 +96,8 @@
         public virtual MovementReceipt Receipt { get; private set; }
 
         public virtual MovementCompletedReceipt CompletedReceipt { get; private set; }
+
+        public virtual ICollection<MovementPartialRejection> PartialRejection { get; private set; }
 
         public DateTime Date { get; internal set; }
 
@@ -167,7 +171,8 @@
                 .Permit(Trigger.Receive, MovementStatus.Received)
                 .Permit(Trigger.ReceiveInternal, MovementStatus.Received)
                 .Permit(Trigger.Reject, MovementStatus.Rejected)
-                .Permit(Trigger.Cancel, MovementStatus.Cancelled);
+                .Permit(Trigger.Cancel, MovementStatus.Cancelled)
+                .Permit(Trigger.PartialReject, MovementStatus.PartiallyRejected);
 
             stateMachine.Configure(MovementStatus.Received)
                 .OnEntryFrom(acceptedTrigger, OnReceived)
@@ -181,9 +186,17 @@
 
             stateMachine.Configure(MovementStatus.Captured)
                 .Permit(Trigger.ReceiveInternal, MovementStatus.Received)
+                .Permit(Trigger.Receive, MovementStatus.Received)
                 .Permit(Trigger.Reject, MovementStatus.Rejected)
                 .Permit(Trigger.SubmitInternal, MovementStatus.Submitted)
-                .Permit(Trigger.Cancel, MovementStatus.Cancelled);
+                .Permit(Trigger.Cancel, MovementStatus.Cancelled)
+                .Permit(Trigger.PartialReject, MovementStatus.PartiallyRejected);
+
+            stateMachine.Configure(MovementStatus.PartiallyRejected)
+                .OnEntryFrom(acceptedTrigger, OnReceived)
+                .OnEntryFrom(internallyAcceptedTrigger, OnInternallyReceived)
+                .Permit(Trigger.Complete, MovementStatus.Completed)
+                .Permit(Trigger.CompleteInternal, MovementStatus.Completed);
 
             return stateMachine;
         }
@@ -216,14 +229,33 @@
             PrenotificationDate = prenotificationDate;
         }
 
-        internal MovementRejection Reject(DateTime dateReceived, string reason)
+        internal MovementRejection Reject(DateTime dateReceived, string reason, decimal? quantity, ShipmentQuantityUnits? unit)
         {
             Guard.ArgumentNotDefaultValue(() => dateReceived, dateReceived);
             Guard.ArgumentNotDefaultValue(() => reason, reason);
 
-            var rejection = new MovementRejection(Id, dateReceived, reason);
+            var rejection = new MovementRejection(Id, dateReceived, reason, quantity, unit);
 
             stateMachine.Fire(Trigger.Reject);
+
+            return rejection;
+        }
+
+        internal MovementPartialRejection PartialReject(Guid movementId,
+                                                     DateTime rejectionDate,
+                                                     string reason,
+                                                     decimal actualQuantity,
+                                                     ShipmentQuantityUnits actualUnit,
+                                                     decimal rejectedQuantity,
+                                                     ShipmentQuantityUnits rejectedUnit,
+                                                     DateTime? wasteDisposeddDate)
+        {
+            Guard.ArgumentNotDefaultValue(() => rejectionDate, rejectionDate);
+            Guard.ArgumentNotDefaultValue(() => reason, reason);
+
+            var rejection = new MovementPartialRejection(movementId, rejectionDate, reason, actualQuantity, actualUnit, rejectedQuantity, rejectedUnit, wasteDisposeddDate);
+
+            stateMachine.Fire(Trigger.PartialReject);
 
             return rejection;
         }
@@ -247,10 +279,6 @@
             Guard.ArgumentNotDefaultValue(() => dateReceived, dateReceived);
             Guard.ArgumentNotNull(() => quantity, quantity);
 
-            if (dateReceived < Date)
-            {
-                throw new InvalidOperationException("The when the waste was received date cannot be before the actual date of shipment.");
-            }
             if (dateReceived > SystemTime.UtcNow.Date)
             {
                 throw new InvalidOperationException("The when the waste was received date cannot be in the future.");

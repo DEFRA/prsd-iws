@@ -22,7 +22,7 @@
 
         public async Task<IList<ImportSearchResult>> HandleAsync(SearchImportNotifications message)
         {
-            var results = await importNotificationSearchRepository.SearchByNumber(message.NotificationNumber);
+            var results = await importNotificationSearchRepository.SearchBySearchTerm(message.SearchTerm);
 
             return results.Select(n => mapper.Map<ImportSearchResult>(n)).ToArray();
         }

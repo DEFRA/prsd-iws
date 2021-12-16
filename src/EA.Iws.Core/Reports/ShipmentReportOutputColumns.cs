@@ -9,10 +9,19 @@
         [Display(Name = "Notifier")]
         Exporter,
 
+        [Display(Name = "Notifier Company Type")]
+        NotifierCompanyType,
+
         [Display(Name = "Consignee")]
         Importer,
 
+        [Display(Name = "Consignee Company Type")]
+        ConsigneeCompanyType,
+
         Facility,
+
+        [Display(Name = "Facility Company Type")]
+        FacilityCompanyType,
 
         [Display(Name = "Basel/OECD Code and Description")]
         BaselOecdCode,
@@ -89,7 +98,7 @@
         [Display(Name = "UN Class")]
         UNClass,
 
-        [Display(Name = "Notification status")]
-        NotificationStatus,
+        [Display(Name = "Shipment Status")]
+        ShipmentStatus,
     }
 }

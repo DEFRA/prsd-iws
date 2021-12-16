@@ -21,6 +21,8 @@
                 result = new Core.Exporter
                 {
                     Name = source.Name,
+                    BusinessType = source.Type,
+                    RegistrationNumber = source.RegistrationNumber,
                     Address = mapper.Map<Core.Address>(source.Address),
                     Contact = mapper.Map<Core.Contact>(source.Contact)
                 };

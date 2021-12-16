@@ -1,8 +1,9 @@
 ﻿@using EA.Iws.Core.Shared
+@using EnumHelper = EA.Prsd.Core.Helpers.EnumHelper
 @using EA.Iws.Web.Areas.AddressBook.Views
 @using Resource = EA.Iws.Web.Areas.ImportNotification.Views.Importer.IndexResources
 @model EA.Iws.Web.Areas.ImportNotification.ViewModels.Importer.ImporterViewModel
-    
+
 @{
     ViewBag.Title = Resource.TabTitle;
 }
@@ -21,8 +22,8 @@
         @Html.Gds().ValidationMessageFor(m => m.Business.Name)
         @Html.Gds().TextBoxFor(m => m.Business.Name, new
    {
-	   data_addressbook_url = Url.Action("Index", "Search", new { area = "AddressBook" }),
-	   data_addressbook_type = "Facility"
+       data_addressbook_url = Url.Action("Index", "Search", new { area = "AddressBook" }),
+       data_addressbook_type = "Facility"
    })
     </div>
 
@@ -30,17 +31,31 @@
         @Html.Gds().LabelFor(m => m.BusinessType, false)
         @Html.Gds().ValidationMessageFor(m => m.BusinessType)
         <fieldset>
+            <div class="multiple-choice" data-target="sole-trader-number">
+                @Html.RadioButtonFor(m => m.BusinessType, "SoleTrader", new { @class = "business-type-radio-button", @id = "SoleTrader" })
+                <label for="SoleTrader">
+                    @EnumHelper.GetDisplayName(BusinessType.SoleTrader)
+                </label>
+            </div>
+
+            <div class="multiple-choice" data-target="partnership-number">
+                @Html.RadioButtonFor(m => m.BusinessType, "Partnership", new { @class = "business-type-radio-button", @id = "Partnership" })
+                <label for="Partnership">
+                    @EnumHelper.GetDisplayName(BusinessType.Partnership)
+                </label>
+            </div>
+
             <div class="multiple-choice">
                 @Html.RadioButtonFor(m => m.BusinessType, BusinessType.LimitedCompany, new { id = "LimitedCompany" })
                 <label for="LimitedCompany">
-                    @Resource.LimitedCompanyLabel
+                    @EnumHelper.GetDisplayName(BusinessType.LimitedCompany)
                 </label>
             </div>
 
             <div class="multiple-choice">
                 @Html.RadioButtonFor(m => m.BusinessType, BusinessType.Other, new { id = "Other" })
                 <label for="Other">
-                    @Resource.OtherLabel
+                    @EnumHelper.GetDisplayName(BusinessType.Other)
                 </label>
             </div>
         </fieldset>

@@ -14,11 +14,14 @@
     {
         private readonly IShipmentInfoRepository shipmentRepository;
         private readonly IMovementRepository movementRepository;
+        private readonly IMovementPartialRejectionRepository movementPartialRejectionRepository;
 
-        public NotificationMovementsQuantity(IMovementRepository movementRepository, IShipmentInfoRepository shipmentRepository)
+        public NotificationMovementsQuantity(IMovementRepository movementRepository, IShipmentInfoRepository shipmentRepository,
+            IMovementPartialRejectionRepository movementPartialRejectionRepository)
         {
             this.movementRepository = movementRepository;
             this.shipmentRepository = shipmentRepository;
+            this.movementPartialRejectionRepository = movementPartialRejectionRepository;
         }
 
         public async Task<ShipmentQuantity> Received(Guid notificationId)
@@ -26,7 +29,6 @@
             var receivedMovements = await movementRepository.GetMovementsByStatus(notificationId, MovementStatus.Received);
             var completedMovements = await movementRepository.GetMovementsByStatus(notificationId, MovementStatus.Completed);
             var movements = receivedMovements.Union(completedMovements);
-
             var shipment = await shipmentRepository.GetByNotificationId(notificationId);
 
             if (!HasSummableMovements(movements))
@@ -34,11 +36,35 @@
                 return new ShipmentQuantity(0, shipment == null ? ShipmentQuantityUnits.Tonnes : shipment.Units);
             }
 
-            var totalReceived = movements.Sum(m =>
+            var totalReceived = movements.Where(x => x.Receipt != null).Sum(m =>
                 ShipmentQuantityUnitConverter.ConvertToTarget(
                     m.Receipt.QuantityReceived.Units,
                     shipment.Units,
                     m.Receipt.QuantityReceived.Quantity));
+
+            var totalPartialReceived = Convert.ToDecimal(0);
+            var totalPartialCompleted = Convert.ToDecimal(0);
+
+            totalPartialCompleted = movements.Where(x => x.Receipt == null).Sum(m =>
+                ShipmentQuantityUnitConverter.ConvertToTarget(
+                    m.PartialRejection.ToList()[0].ActualUnit,
+                    shipment.Units,
+                    m.PartialRejection.ToList()[0].ActualQuantity));
+
+            var partialMovements = await movementRepository.GetMovementsByStatus(notificationId, MovementStatus.PartiallyRejected);
+            var listOfMovementIds = partialMovements.ToArray().Select(r => r.Id);
+            var listOfPartialRejectedMovements = await movementPartialRejectionRepository.GetMovementPartialRejectionsByMovementIds(listOfMovementIds);
+
+            if (listOfPartialRejectedMovements != null && listOfPartialRejectedMovements.Count() > 0)
+            {
+                totalPartialReceived = listOfPartialRejectedMovements.Sum(m =>
+                ShipmentQuantityUnitConverter.ConvertToTarget(
+                        m.ActualUnit,
+                        shipment.Units,
+                        m.ActualQuantity));
+            }
+
+            totalReceived = totalReceived + totalPartialCompleted  + totalPartialReceived;
 
             return new ShipmentQuantity(totalReceived, shipment.Units);
         }

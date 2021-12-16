@@ -23,8 +23,10 @@
                 {
                     AreMultiple = !source.IsOnlyProducer,
                     Name = source.Name,
+                    BusinessType = source.Type,
                     Address = mapper.Map<Core.Address>(source.Address),
-                    Contact = mapper.Map<Core.Contact>(source.Contact)
+                    Contact = mapper.Map<Core.Contact>(source.Contact),
+                    RegistrationNumber = source.RegistrationNumber
                 };
             }
 

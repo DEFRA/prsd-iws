@@ -22,7 +22,9 @@
         {
             await rejectImportMovement.Reject(message.ImportMovementId, 
                 message.Date,
-                message.Reason);
+                message.Reason,
+                message.RejectedQuantity,
+                message.RejectedUnits);
 
             await context.SaveChangesAsync();
 

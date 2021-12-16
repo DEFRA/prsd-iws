@@ -183,10 +183,16 @@
   <data name="RecoveryDateCannotBeEnteredForRejected" xml:space="preserve">
     <value>Do not provide {0} date when the prenotification has been rejected</value>
   </data>
+  <data name="RejectQuantityRequired" xml:space="preserve">
+    <value>Please provide the rejected quantity</value>
+  </data>
   <data name="RejectReasonRequired" xml:space="preserve">
     <value>Please provide a reason for rejection</value>
   </data>
   <data name="StatsMarking" xml:space="preserve">
     <value>WSR/Basel annual stats marking (when required)</value>
+  </data>
+  <data name="StatsMarkingRequired" xml:space="preserve">
+    <value>Please select annual stats marking for rejection</value>
   </data>
 </root>

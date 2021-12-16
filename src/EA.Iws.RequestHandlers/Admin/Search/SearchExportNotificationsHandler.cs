@@ -39,9 +39,8 @@
                 .Where(n => n.CompetentAuthority == userCompetentAuthority)
                 .Join(context.Exporters, n => n.Id, e => e.NotificationId,
                     (n, e) => new { Notification = n, Exporter = e })
-                .Where(p => (p.Notification.NotificationNumber.Contains(query.SearchTerm) ||
-                             p.Notification.NotificationNumber.Replace(" ", string.Empty).Contains(query.SearchTerm)) ||
-                            p.Exporter.Business.Name.Contains(query.SearchTerm))
+                .Where(p => (p.Notification.NotificationNumber.ToLower().Replace(" ", string.Empty).Contains(query.SearchTerm.ToLower().Replace(" ", string.Empty))) ||
+                            p.Exporter.Business.Name.ToLower().Contains(query.SearchTerm.ToLower()))
                 .Join(context.NotificationAssessments
                     .Where(p => p.Status != NotificationStatus.NotSubmitted), x => x.Notification.Id,
                     na => na.NotificationApplicationId, (n, na) => new { n.Notification, n.Exporter, Assessment = na })

@@ -18,7 +18,9 @@
                 source.ImportNotificationId,
                 source.BusinessName,
                 mapper.Map<Domain.ImportNotification.Address>(source.Address),
-                mapper.Map<Domain.ImportNotification.Contact>(source.Contact));
+                mapper.Map<Domain.ImportNotification.Contact>(source.Contact),
+                source.Type,
+                source.RegistrationNumber);
         }
     }
 }

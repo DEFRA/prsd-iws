@@ -19,7 +19,7 @@ namespace EA.Iws.Web.Areas.ImportNotification.Views.Home {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class IndexResources {
@@ -84,6 +84,15 @@ namespace EA.Iws.Web.Areas.ImportNotification.Views.Home {
         public static string CodesNotApplicableText {
             get {
                 return ResourceManager.GetString("CodesNotApplicableText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Company registration.
+        /// </summary>
+        public static string CompanyRegistrationTitle {
+            get {
+                return ResourceManager.GetString("CompanyRegistrationTitle", resourceCulture);
             }
         }
         
@@ -219,6 +228,15 @@ namespace EA.Iws.Web.Areas.ImportNotification.Views.Home {
         public static string OrganisationsTitle {
             get {
                 return ResourceManager.GetString("OrganisationsTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Organisation type.
+        /// </summary>
+        public static string OrganisationTypeTitle {
+            get {
+                return ResourceManager.GetString("OrganisationTypeTitle", resourceCulture);
             }
         }
         

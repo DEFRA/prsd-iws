@@ -132,6 +132,12 @@
   <data name="RecoveryDate" xml:space="preserve">
     <value>When was the waste {0}?</value>
   </data>
+  <data name="RejectedQuantityHint" xml:space="preserve">
+    <value>Enter the quantity of waste rejected on the shipment</value>
+  </data>
+  <data name="RejectedQuantityQuestion" xml:space="preserve">
+    <value>How much waste was rejected?</value>
+  </data>
   <data name="ReturnToSummary" xml:space="preserve">
     <value>Return to shipment summary</value>
   </data>

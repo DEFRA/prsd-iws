@@ -6,41 +6,56 @@
 }
 
 <div class="grid-row container">
-<div class="stickem-row stickem-container">
-    <div class="column-two-thirds">
-        <h1 class="heading-large">@Resource.MainHeading</h1>
+    <div class="stickem-row stickem-container">
+        <div class="column-two-thirds">
+            <h1 class="heading-large">@Resource.MainHeading</h1>
 
-        @using (Html.BeginForm())
-        {
-            @Html.AntiForgeryToken()
-            @Html.Gds().ValidationSummary()
-            @Html.HiddenFor(m => m.NotificationType)
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+                @Html.Gds().ValidationSummary()
+                @Html.HiddenFor(m => m.NotificationType)
 
-            <div class="form-group @Html.Gds().FormGroupClass(m => m.ShipmentNumber)">
-                @Html.Gds().LabelFor(m => m.ShipmentNumber, new { @class = "form-label-bold" })
-                @Html.Gds().ValidationMessageFor(m => m.ShipmentNumber)
-                @Html.Gds().TextBoxFor(m => m.ShipmentNumber, new { type = "number", min = 1, @class = "form-control-narrow" })
-            </div>
+                <div class="form-group @Html.Gds().FormGroupClass(m => m.ShipmentNumber)">
+                    @Html.Gds().LabelFor(m => m.ShipmentNumber, new { @class = "form-label-bold" })
+                    @Html.Gds().ValidationMessageFor(m => m.ShipmentNumber)
+                    @Html.Gds().TextBoxFor(m => m.ShipmentNumber, new { type = "number", min = 1, @class = "form-control-narrow" })
+                </div>
 
-            @Html.Partial("_Prenotify")
+                @Html.Partial("_Prenotify")
 
-            <hr/>
+                <hr />
 
-            @Html.EditorFor(m => m.Receipt)
+                @Html.EditorFor(m => m.Receipt)
 
-            <hr/>
+                if (Model.Receipt.ShipmentTypes == ShipmentType.Rejected)
+                {
+                    <hr id="hrAfterReceipt" style="display:none" />
+                }
+                else
+                {
+                    <hr id="hrAfterReceipt" style="display:block" />
+                }
 
-            @Html.EditorFor(m => m.Recovery)
-            <hr/>
+                @Html.EditorFor(m => m.Recovery)
 
-            @Html.Partial("_Comments")
+                if (Model.Receipt.ShipmentTypes == ShipmentType.Rejected)
+                {
+                    <hr id="hrAfterRecovery" style="display:none" />
+                }
+                else
+                {
+                    <hr id="hrAfterRecovery" style="display:block" />
+                }
 
-            <button class="button" type="submit">@Constants.ContinueButtonText</button>
+                @Html.Partial("_Comments")
 
-        }
+                <button class="button" type="submit">@Constants.ContinueButtonText</button>
+
+            }
         </div>
 
-    @Html.Partial("_ChangeShipment")
+        @Html.Partial("_ChangeShipment")
 
     </div>
 </div>

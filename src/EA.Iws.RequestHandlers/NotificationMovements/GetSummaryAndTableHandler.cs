@@ -46,8 +46,8 @@
             }
 
             var data = mapper.Map<NotificationMovementsSummary, Movement[], NotificationMovementsSummaryAndTable>(summaryData, notificationMovements.ToArray());
-            data.IsInterimNotification = isInterimNotification;
 
+            data.IsInterimNotification = isInterimNotification;
             data.PageSize = PageSize;
             data.PageNumber = message.PageNumber;
             data.NumberOfShipments = await movementRepository.GetTotalNumberOfMovements(message.Id, message.Status);
