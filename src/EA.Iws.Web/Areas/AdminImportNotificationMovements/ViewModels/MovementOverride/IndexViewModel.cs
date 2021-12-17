@@ -142,6 +142,11 @@
 
             NotificationType = data.Data.NotificationType;
             Date = data.RecoveryData.OperationCompleteDate.HasValue ? data.RecoveryData.OperationCompleteDate.Value : (DateTime?)null;
+
+            if (!data.ReceiptData.IsReceived && !data.ReceiptData.IsRejected && !data.IsPartiallyRejected)
+            {
+                IsReceived = true;
+            }
         }
 
         public void SetSummaryData(Summary summaryData)
@@ -171,11 +176,6 @@
                 yield return new ValidationResult(IndexViewModelResources.ActualShipmentDateRequired, new[] { "ActualShipmentDate" });
             }
 
-            if (!ReceivedDate.HasValue)
-            {
-                yield return new ValidationResult(IndexViewModelResources.ReceivedDateRequired, new[] { "ReceivedDate" });
-            }
-
             if (ReceivedDate.HasValue && WasAccepted && !ActualQuantity.HasValue)
             {
                 yield return new ValidationResult(IndexViewModelResources.QuantityRequired, new[] { "ActualQuantity" });
@@ -199,16 +199,6 @@
             if ((IsPartiallyRejected == true || IsRejected == true) && string.IsNullOrWhiteSpace(StatsMarking))
             {
                 yield return new ValidationResult(CaptureViewModelResources.StatsMarkingRequired, new[] { "StatsMarking" });
-            }
-
-            if (IsReceived && ActualQuantity.HasValue && !Date.HasValue)
-            {
-                yield return new ValidationResult(IndexViewModelResources.WasteDisposedDateRequired, new[] { "Date" });
-            }
-
-            if (IsPartiallyRejected && !Date.HasValue)
-            {
-                yield return new ValidationResult(IndexViewModelResources.WasteDisposedDateRequired, new[] { "Date" });
             }
         }
     }
