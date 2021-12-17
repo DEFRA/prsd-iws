@@ -148,6 +148,11 @@
             RejectedQuantity = data.RejectedQuantity;
             RejectedUnits = data.RejectedUnit;
             IsPartiallyRejected = data.IsPartiallyRejected;
+
+            if (!data.IsReceived && !data.IsRejected && !data.IsPartiallyRejected)
+            {
+                IsReceived = true;
+            }
         }
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
@@ -165,11 +170,6 @@
             if (!ActualShipmentDate.HasValue)
             {
                 yield return new ValidationResult(IndexViewModelResources.ActualDateRequired, new[] { "ActualShipmentDate" });
-            }
-
-            if (!ReceivedDate.HasValue)
-            {
-                yield return new ValidationResult(IndexViewModelResources.ReceivedDateRequired, new[] { "ReceivedDate" });
             }
 
             if (ReceivedDate.HasValue && WasShipmentAccepted && !ActualQuantity.HasValue)
