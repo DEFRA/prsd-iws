@@ -223,6 +223,15 @@
         }
 
         [Fact]
+        public void MarkFileClosedSetsStatusAtFileClosed()
+        {
+            SetNotificationAssessmentStatus(ImportNotificationStatus.Consented);
+            assessment.MarkFileClosed(AnyDate);
+
+            Assert.Equal(ImportNotificationStatus.Consented, assessment.Dates.StatusAtFileClosed);
+        }
+
+        [Fact]
         public void SetArchiveReference_FileClosedDateIsSet_UpdatesValue()
         {
             SetNotificationAssessmentStatus(ImportNotificationStatus.Consented);

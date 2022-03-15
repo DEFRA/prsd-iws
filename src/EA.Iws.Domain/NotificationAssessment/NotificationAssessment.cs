@@ -55,12 +55,12 @@
         private StateMachine<NotificationStatus, Trigger>.TriggerWithParameters<DateTime, string> objectTrigger;
         private StateMachine<NotificationStatus, Trigger>.TriggerWithParameters<DateTime, string> withdrawConsentTrigger;
         private StateMachine<NotificationStatus, Trigger>.TriggerWithParameters<DateTime> consentedTrigger;
-        private StateMachine<NotificationStatus, Trigger>.TriggerWithParameters<DateTime> archiveTrigger;
+        private StateMachine<NotificationStatus, Trigger>.TriggerWithParameters<DateTime, NotificationStatus> archiveTrigger;
 
         public Guid NotificationApplicationId { get; private set; }
 
         public NotificationStatus Status { get; private set; }
-        
+
         protected virtual ICollection<NotificationStatusChange> StatusChangeCollection { get; set; }
         
         public IEnumerable<NotificationStatusChange> StatusChanges
@@ -110,7 +110,7 @@
             objectTrigger = stateMachine.SetTriggerParameters<DateTime, string>(Trigger.Object);
             withdrawConsentTrigger = stateMachine.SetTriggerParameters<DateTime, string>(Trigger.WithdrawConsent);
             consentedTrigger = stateMachine.SetTriggerParameters<DateTime>(Trigger.Consent);
-            archiveTrigger = stateMachine.SetTriggerParameters<DateTime>(Trigger.Archive);
+            archiveTrigger = stateMachine.SetTriggerParameters<DateTime, NotificationStatus>(Trigger.Archive);
 
             stateMachine.OnTransitioned(OnTransitionAction);
 
@@ -255,9 +255,10 @@
             Dates.AcknowledgedDate = acknowledgedDate;
         }
 
-        private void OnFileClosed(DateTime fileClosedDate)
+        private void OnFileClosed(DateTime fileClosedDate, NotificationStatus statusAtFileClosed)
         {
             Dates.FileClosedDate = fileClosedDate;
+            Dates.StatusAtFileClosed = statusAtFileClosed;
         }
 
         public void Submit(INotificationProgressService progressService)
@@ -356,7 +357,7 @@
 
         public void MarkFileClosed(DateTime fileClosedDate)
         {
-            stateMachine.Fire(archiveTrigger, fileClosedDate);
+            stateMachine.Fire(archiveTrigger, fileClosedDate, Status);
         }
 
         public void SetArchiveReference(string reference)
