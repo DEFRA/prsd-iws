@@ -1,6 +1,7 @@
 namespace EA.Iws.Domain.NotificationAssessment
 {
     using System;
+    using Core.NotificationAssessment;
     using Prsd.Core.Domain;
 
     public class NotificationDates : Entity
@@ -40,6 +41,8 @@ namespace EA.Iws.Domain.NotificationAssessment
         public string WithdrawnReason { get; internal set; }
 
         public DateTime? FileClosedDate { get; internal set; }
+
+        public NotificationStatus? StatusAtFileClosed { get; internal set; }
 
         public string ArchiveReference { get; internal set; }
     }

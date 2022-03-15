@@ -1,6 +1,7 @@
 ﻿namespace EA.Iws.Domain.ImportNotificationAssessment
 {
     using System;
+    using Core.ImportNotificationAssessment;
     using Prsd.Core.Domain;
 
     public class ImportNotificationDates : Entity
@@ -26,6 +27,8 @@
         public string ConsentWithdrawnReasons { get; internal set; }
 
         public DateTime? FileClosedDate { get; internal set; }
+
+        public ImportNotificationStatus? StatusAtFileClosed { get; internal set; }
 
         public string ArchiveReference { get; internal set; }
 
