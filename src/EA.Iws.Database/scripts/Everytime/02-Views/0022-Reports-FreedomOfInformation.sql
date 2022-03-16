@@ -80,6 +80,7 @@ SELECT
 		I.[FullName] AS [ImporterContactName],
 		I.[Email] AS [ImporterContactEmail],
 		NS.[Description] AS [NotificationStatus],
+        ENS.[Description] as [NotificationStatusAtFileClosed],
 		 -- Decision date will be the date it was withdrawn, objected or consented and it will only be one of these.
         CAST(COALESCE(D.WithdrawnDate, COALESCE(D.[ObjectedDate], D.[ConsentedDate])) AS DATE) AS DecisionRequiredByDate,
 		CASE WHEN FG.[Status] = 4 THEN 'Y' ELSE 'N' END AS [IsFinancialGuaranteeApproved],
@@ -98,6 +99,7 @@ SELECT
     INNER JOIN [Notification].[FacilityCollection] FC ON FC.[NotificationId] = N.[Id]
     INNER JOIN [Notification].[NotificationAssessment] NA ON NA.[NotificationApplicationId] = N.[Id]
     LEFT JOIN [Notification].NotificationDates D ON D.[NotificationAssessmentId] = NA.[Id]
+    LEFT JOIN [Lookup].[NotificationStatus] ENS ON D.[StatusAtFileClosed] = ENS.[Id]
     INNER JOIN [Notification].[Exporter] E ON E.NotificationId = N.Id
     INNER JOIN [Notification].[Importer] I ON I.NotificationId = N.Id
     INNER JOIN [Notification].[Producer] P
@@ -241,6 +243,7 @@ SELECT
 		I.[ContactName] AS [ImporterContactName],
 		I.[Email] AS [ImporterContactEmail],
 		NS.[Description] as [NotificationStatus],
+        FCS.[Description] as [NotificationStatusAtFileClosed],
 		-- Decision date will be the date it was withdrawn, objected or consented and it will only be one of these.
         CAST(COALESCE(D.WithdrawnDate, COALESCE(O.[Date], D.[ConsentedDate])) AS DATE) AS DecisionRequiredByDate,
 		CASE when FG.[Status] = 4 Then 'Y' ELSE 'N' END AS [IsFinancialGuaranteeApproved],
@@ -256,6 +259,7 @@ SELECT
     INNER JOIN [ImportNotification].[FacilityCollection] FC ON FC.[ImportNotificationId] = N.[Id]
     INNER JOIN [ImportNotification].[NotificationAssessment] NA ON NA.[NotificationApplicationId] = N.[Id]
     LEFT JOIN [ImportNotification].NotificationDates D ON D.[NotificationAssessmentId] = NA.[Id]
+    LEFT JOIN [Lookup].[ImportNotificationStatus] FCS ON D.[StatusAtFileClosed] = FCS.[Id]
     INNER JOIN [ImportNotification].[Exporter] E
         INNER JOIN [Lookup].[Country] AS C_E ON E.[CountryId] = C_E.[Id]
     ON E.ImportNotificationId = N.Id
