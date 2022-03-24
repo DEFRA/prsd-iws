@@ -521,22 +521,12 @@ button:focus,
   /* shown with JS, always on for non-JS */ }
 
 #global-cookie-message {
-  width: 100%;
-  background-color: #d5e8f3;
-  padding-top: 10px;
-  padding-bottom: 10px; }
-  #global-cookie-message p {
-    font-family: "nta", Arial, sans-serif;
-    font-size: 16px;
-    line-height: 1.25;
-    font-weight: 400;
-    text-transform: none;
-    margin-top: 0;
-    margin-bottom: 0; }
-    @media (max-width: 640px) {
-      #global-cookie-message p {
-        font-size: 14px;
-        line-height: 1.14286; } }
+    width: 100%;
+    background-color: #f3f2f1;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
 
 /* Global footer */
 #footer {
@@ -677,3 +667,30 @@ button:focus,
           #footer .footer-meta .copyright a {
             background-image: url(images/govuk-crest-2x.png);
             background-size: 125px 102px; } }
+
+#global-cookie-message-p1 {
+    font-size: 48px;
+    font-weight: 700;
+    font-style: normal;
+    margin-bottom: 10px !important;
+}
+
+@media (max-width: 640px) {
+    #global-cookie-message-p1 {
+        font-size: 24px;
+        line-height: 1.14286;
+    }
+}
+
+#global-cookie-message-p2 {
+    font-size: 19px;
+    font-weight: 400;
+    font-style: normal;
+    margin-bottom: 10px !important;
+}
+
+#acceptCookies, #rejectCookies {
+    margin: 15px 15px 15px 0;
+    font-size: 18px;
+    vertical-align: initial !important;
+}
