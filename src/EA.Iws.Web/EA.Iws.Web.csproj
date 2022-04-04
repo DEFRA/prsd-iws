@@ -1202,6 +1202,7 @@
     <Content Include="Views\Shared\_ShipmentAudit.cshtml" />
     <Content Include="Views\Shared\_ShipmentGroupScript.cshtml" />
     <Content Include="Views\Errors\Maintenance.cshtml" />
+    <Content Include="Views\NewUser\Accessibility.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
