@@ -17,5 +17,12 @@
         {
             return View();
         }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public ActionResult Accessibility()
+        {
+            return View();
+        }
     }
 }
