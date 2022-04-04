@@ -46,7 +46,7 @@
         private StateMachine<ImportNotificationStatus, Trigger>.TriggerWithParameters<DateTime> consentedTrigger;
         private StateMachine<ImportNotificationStatus, Trigger>.TriggerWithParameters<DateTime> acknowledgeTrigger;
         private StateMachine<ImportNotificationStatus, Trigger>.TriggerWithParameters<DateTime, string> withdrawConsentTrigger;
-        private StateMachine<ImportNotificationStatus, Trigger>.TriggerWithParameters<DateTime> fileClosedTrigger;
+        private StateMachine<ImportNotificationStatus, Trigger>.TriggerWithParameters<DateTime, ImportNotificationStatus> fileClosedTrigger;
 
         private readonly StateMachine<ImportNotificationStatus, Trigger> stateMachine;
 
@@ -89,7 +89,7 @@
             acknowledgeTrigger = stateMachine.SetTriggerParameters<DateTime>(Trigger.Acknowledge);
             consentedTrigger = stateMachine.SetTriggerParameters<DateTime>(Trigger.Consent);
             withdrawConsentTrigger = stateMachine.SetTriggerParameters<DateTime, string>(Trigger.WithdrawConsent);
-            fileClosedTrigger = stateMachine.SetTriggerParameters<DateTime>(Trigger.FileClosed);
+            fileClosedTrigger = stateMachine.SetTriggerParameters<DateTime, ImportNotificationStatus>(Trigger.FileClosed);
 
             stateMachine.Configure(ImportNotificationStatus.New)
                 .Permit(Trigger.Receive, ImportNotificationStatus.NotificationReceived);
@@ -211,9 +211,10 @@
             Dates.NotificationReceivedDate = receivedDate;
         }
 
-        private void OnFileClosed(DateTime fileClosedDate)
+        private void OnFileClosed(DateTime fileClosedDate, ImportNotificationStatus statusAtFileClosed)
         {
             Dates.FileClosedDate = fileClosedDate;
+            Dates.StatusAtFileClosed = statusAtFileClosed;
         }
 
         public void Submit()
@@ -283,7 +284,7 @@
 
         public void MarkFileClosed(DateTime fileClosedDate)
         {
-            stateMachine.Fire(fileClosedTrigger, fileClosedDate);
+            stateMachine.Fire(fileClosedTrigger, fileClosedDate, Status);
         }
 
         public void SetArchiveReference(string reference)
