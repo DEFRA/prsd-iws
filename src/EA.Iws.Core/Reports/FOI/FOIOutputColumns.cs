@@ -124,6 +124,9 @@
         [Display(Name = "Notification status")]
         NotificationStatus,
 
+        [Display(Name = "Notification status at file closed")]
+        NotificationStatusAtFileClosed,
+
         [Display(Name = "Decision date")]
         DecisionRequiredByDate,
 

@@ -113,6 +113,8 @@ namespace EA.Iws.Core.Admin.Reports
 
         public string NotificationStatus { get; set; }
 
+        public string NotificationStatusAtFileClosed { get; set; }
+
         [DisplayName("Decision date")]
         public DateTime? DecisionRequiredByDate { get; set; }
 

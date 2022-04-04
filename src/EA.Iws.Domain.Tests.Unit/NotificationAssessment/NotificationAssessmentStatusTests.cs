@@ -517,6 +517,15 @@
         }
 
         [Fact]
+        public void MarkFileClosedSetsStatusAtFileClosed()
+        {
+            SetNotificationStatus(NotificationStatus.Consented);
+            notificationAssessment.MarkFileClosed(fileClosedDate);
+
+            Assert.Equal(NotificationStatus.Consented, notificationAssessment.Dates.StatusAtFileClosed);
+        }
+
+        [Fact]
         public void SetArchiveReference_FileClosedDateIsSet_UpdatesValue()
         {
             SetNotificationStatus(NotificationStatus.Consented);
