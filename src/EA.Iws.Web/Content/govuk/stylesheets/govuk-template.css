@@ -35,7 +35,6 @@
 
 #global-cookie-accept-message, #global-cookie-reject-message{
     padding-top: 15px;
-    padding-bottom: 15px;
 }
 
 #global-header-bar, #global-cookie-message p, #global-cookie-accept-message p, #global-cookie-reject-message p {
@@ -704,7 +703,7 @@ button:focus,
             text-align: right; } }
 
 #global-cookie-message-p1 {
-    font-size: 48px;
+    font-size: 20px;
     font-weight: 700;
     font-style: normal;
     margin-bottom: 10px !important;
@@ -712,20 +711,20 @@ button:focus,
 
 @media (max-width: 640px) {
     #global-cookie-message-p1 {
-        font-size: 24px;
+        font-size: 14px;
         line-height: 1.14286;
     }
 }
 
 #global-cookie-message-p2 {
-    font-size: 19px;
+    font-size: 15px;
     font-weight: 400;
     font-style: normal;
     margin-bottom: 10px !important;
 }
 
-#acceptCookies, #rejectCookies {
+#acceptCookies, #rejectCookies, #hideAcceptCookies, #hideRejectCookies {
     margin: 15px 15px 15px 0;
-    font-size: 18px;
+    font-size: 14px;
     vertical-align: initial !important;
 }
