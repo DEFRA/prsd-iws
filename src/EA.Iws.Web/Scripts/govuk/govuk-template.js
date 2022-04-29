@@ -65,12 +65,14 @@
 
 	GOVUK.acceptCookies = function () {
 		GOVUK.cookie('iws-cookie-consent', 'yes', { days: 28 });
-        document.getElementById("global-cookie-message").style.display = "none";
+		document.getElementById("global-cookie-message").style.display = "none";
+		document.getElementById("global-cookie-accept-message").style.display = "block";
 	}
 
 	GOVUK.rejectCookies = function () {
 		GOVUK.cookie('iws-cookie-consent', 'no', { days: 28 });
 		document.getElementById("global-cookie-message").style.display = "none";
+		document.getElementById("global-cookie-reject-message").style.display = "block";
 		GOVUK.cookie('_ga', null);
 		GOVUK.cookie('_gid', null);
 		GOVUK.cookie('_gat', null);

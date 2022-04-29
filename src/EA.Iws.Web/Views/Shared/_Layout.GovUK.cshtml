@@ -68,6 +68,7 @@
         </div>
     </div>
 
+    <!--start global-cookie-message-->
     <div id="global-cookie-message" style="display:none;">
         <p id="global-cookie-message-p1">Cookies on International Waste Shipments</p>
         <p id="global-cookie-message-p2">We'd like to use analystics cookies so we can understand how you use International Waste Shipments and make improvements.</p>
@@ -77,6 +78,26 @@
             <input type="submit" id="rejectCookies" value="Reject additional cookies" class="cookieBannerButton">
             @Html.ActionLink("View cookies", "Cookies", "NewUser", new { area = string.Empty }, null)
         </p>
+    </div>
+
+    <div id="global-cookie-accept-message" style="display:none;">
+        <p id="global-cookie-message-p2">
+            You have accepted additional cookies. You can @Html.ActionLink("change your cookie settings", "Cookies", "NewUser", new { area = string.Empty }, null) at any time.
+        </p>
+        <p>
+            <input type="submit" id="hideAcceptCookies" value="Hide this message" class="cookieBannerButton">
+        </p>
+        <p></p>
+    </div>
+
+    <div id="global-cookie-reject-message" style="display:none;">
+        <p id="global-cookie-message-p2">
+            You have rejected additional cookies. You can @Html.ActionLink("change your cookie settings", "Cookies", "NewUser", new { area = string.Empty }, null) at any time.
+        </p>
+        <p>
+            <input type="submit" id="hideRejectCookies" value="Hide this message" class="cookieBannerButton">
+        </p>
+        <p></p>
     </div>
     <!--end global-cookie-message-->
 
@@ -157,4 +178,13 @@
     $("#rejectCookies").click(function () {
         GOVUK.rejectCookies();
     });
+
+    $("#hideAcceptCookies").click(function () {
+        document.getElementById("global-cookie-accept-message").style.display = "none";
+    });
+
+    $("#hideRejectCookies").click(function () {
+        document.getElementById("global-cookie-reject-message").style.display = "none";
+    });
+    
 </script>
