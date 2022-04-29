@@ -75,7 +75,7 @@
         <p>
             <input type="submit" id="acceptCookies" value="Accept additional cookies" class="button">
             <input type="submit" id="rejectCookies" value="Reject additional cookies" class="button">
-            <a href="/new-user/cookies">View cookies</a>
+            @Html.ActionLink("View cookies", "Cookies", "NewUser", new { area = string.Empty }, null)
         </p>
     </div>
     <!--end global-cookie-message-->
