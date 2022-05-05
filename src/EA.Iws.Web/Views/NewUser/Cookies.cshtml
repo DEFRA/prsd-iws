@@ -121,13 +121,13 @@
         <h2 class="heading-medium">Do you want to accept analytics cookies?</h2>
         <fieldset>
             <div class="multiple-choice">
-                <input type="radio" id="yes" name="cookieChoices" value="True">
+                <input type="radio" id="cookieChoiceYes" name="cookieChoices" value="True" onclick="acceptCookies()">
                 <label for="yes">
                     Yes
                 </label>
             </div>
             <div class="multiple-choice">
-                <input type="radio" id="no" name="cookieChoices" value="False">
+                <input type="radio" id="cookieChoiceNo" name="cookieChoices" value="False" onclick="rejectCookies()">
                 <label for="no">
                     No
                 </label>
@@ -136,24 +136,3 @@
     </div>    
     <input id="saveCookieChoice" type="submit" value="Accept additional cookies" class="button" onclick="setCookieChoice();" style="margin-top:15px;">
 </div>
-<script>
-    function setCookieChoice() {
-        if (document.getElementById("yes").checked === false && document.getElementById("no").checked === false) {
-            return;
-        }
-
-        if (document.getElementById("saveCookieChoice").value === "Saved Cookie Settings") {
-            document.getElementById("saveCookieChoice").value = "Accept additional cookies";
-            document.getElementById("cookieSettings").style.display = "block";
-            return;
-        }
-
-        if (document.getElementById("yes").checked) {
-            GOVUK.acceptCookies();
-        } else {
-            GOVUK.rejectCookies();
-        }
-        document.getElementById("saveCookieChoice").value = "Saved Cookie Settings";
-        document.getElementById("cookieSettings").style.display = "none";
-    }
-</script>
