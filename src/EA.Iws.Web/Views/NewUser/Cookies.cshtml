@@ -1,8 +1,20 @@
 ﻿@{
     ViewBag.Title = "Cookies";
 }
+<div id="dvSuccessMessage" class="cookie-settings-confirmation" style="display: none;">
+    <div class="gem-c-success-alert govuk-notification-banner govuk-notification-banner-success">
+        <div class="govuk-notification-banner-header">
+            <h2 class="govuk-notification-banner-title">Success</h2>
+        </div>
+        <div class="govuk-notification-banner-content">
+            <h3 class="govuk-notification-banner-heading">Your cookie settings were saved</h3>
+            <p class="govuk-body">IWS services may set additional cookies and, if so, will have their own cookie policy and banner.</p>
+            <a id="previousPage" href="" class="govuk-link" style="display: inline;">Go back to the page you were looking at</a>
+        </div>
+    </div>
+</div>
 <header class="hgroup">
-    <h1 class="heading-xlarge">Details about cookies on IWS</h1>
+    <h1 class="heading-large">Details about cookies on IWS</h1>
 </header>
 <div>
     <p><a href="/" id="proposition-name">International Waste Shipments</a> puts small files (known as 'cookies') on your computer.</p>
@@ -11,12 +23,12 @@
     <p>Find out <a href="https://ico.org.uk/your-data-matters/online/cookies/" target="_blank" aria-label="Opens in a new tab">how to manage cookies</a> from the Information Commissioner's Office.</p>
 </div>
 <header class="hgroup">
-    <h1 class="heading-xlarge">Essential cookies (strictly necessary)</h1>
+    <h1 class="heading-medium">Essential cookies (strictly necessary)</h1>
 </header>
 <div>
     <p>We use essential cookies to remember when you accept or reject cookies on our website.</p>
-    <h2 class="heading-medium">IWS Application cookies</h2>
-    <table summary='Session cookies' role='presentation'>
+    <h2 class="heading-small">IWS Application cookies</h2>
+    <table id="tbSessionCookies" summary='Session cookies' role='presentation'>
         <thead>
             <tr>
                 <th>Name</th>
@@ -47,8 +59,8 @@
             </tr>
         </tbody>
     </table>
-    <h2 class="heading-medium">IPL cookies</h2>
-    <table summary='IPL cookies' role='presentation'>
+    <h2 class="heading-small">IPL cookies</h2>
+    <table id="tbIPLCookies" summary='IPL cookies' role='presentation'>
         <thead>
             <tr>
                 <th>Name</th>
@@ -71,7 +83,7 @@
     </table>
 </div>
 <header class="hgroup">
-    <h1 class="heading-xlarge">Analytics cookies (optional)</h1>
+    <h1 class="heading-medium">Analytics cookies (optional)</h1>
 </header>
 <div>
     <p>We use Google Analytics software to understand how people use IWS. We do this to help make sure the site is meeting the needs of its users and to help us make improvements.</p>
@@ -85,8 +97,8 @@
         <li>what you click on while you visit the site</li>
         <li>the device and browser you use</li>
     </ul>
-    <h2 class="heading-medium">Analytics cookies we use</h2>
-    <table summary='Google analytics cookie collection' role='presentation'>
+    <h2 class="heading-small">Analytics cookies we use</h2>
+    <table id="tbGooglrAnalytics" summary='Google analytics cookie collection' role='presentation'>
         <thead>
             <tr>
                 <th>Name</th>
@@ -118,21 +130,29 @@
         </tbody>
     </table>
     <div id="cookieSettings">
-        <h2 class="heading-medium">Do you want to accept analytics cookies?</h2>
+        <h2 class="heading-small">Do you want to accept analytics cookies?</h2>
         <fieldset>
             <div class="multiple-choice">
-                <input type="radio" id="cookieChoiceYes" name="cookieChoices" value="True" onclick="acceptCookies()">
+                <input type="radio" id="cookieChoiceYes" name="cookieChoices" value="True">
                 <label for="yes">
                     Yes
                 </label>
             </div>
             <div class="multiple-choice">
-                <input type="radio" id="cookieChoiceNo" name="cookieChoices" value="False" onclick="rejectCookies()">
+                <input type="radio" id="cookieChoiceNo" name="cookieChoices" value="False">
                 <label for="no">
                     No
                 </label>
             </div>
         </fieldset>
-    </div>    
-    <input id="saveCookieChoice" type="submit" value="Accept additional cookies" class="button" onclick="setCookieChoice();" style="margin-top:15px;">
+    </div>
+    <br />
+    <div>
+        <input id="saveCookieChoice" type="submit" value="Save cookie settings" class="button" onclick="setCookieChoice();">
+    </div>
 </div>
+
+<script type="text/javascript">
+    var a = document.getElementById('previousPage');
+    a.href = document.referrer;
+</script>
