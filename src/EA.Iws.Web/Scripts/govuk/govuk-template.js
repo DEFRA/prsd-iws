@@ -20,6 +20,15 @@
 		Deleting a cookie:
 		GOVUK.cookie('hobnob', null);
 	*/
+
+	function getDomain() {
+		var host = window.location.hostname;
+		if (host.split('.').length > 1)
+			return host.replace(host.split('.')[0], '');
+		else
+			return host;
+	}
+
 	GOVUK.cookie = function (name, value, options) {
 		if (typeof value !== 'undefined') {
 			if (value === false || value === null) {
@@ -37,7 +46,8 @@
 		if (typeof options === 'undefined') {
 			options = {};
 		}
-		var cookieString = name + "=" + value + "; path=/";
+		var currentDomain = getDomain();
+		var cookieString = name + "=" + value + ";domain=" + currentDomain + "; path=/";
 		if (options.days) {
 			var date = new Date();
 			date.setTime(date.getTime() + (options.days * 24 * 60 * 60 * 1000));
