@@ -1,17 +1,20 @@
 ﻿@RenderSection("top_of_page", required: false)
 <!DOCTYPE html>
 <!--[if lt IE 9]><html class="lte-ie8" lang="@Html.Raw(ViewBag.HtmlLang ?? "en")"><![endif]-->
-<!--[if gt IE 8]><!--><html lang="@Html.Raw(ViewBag.HtmlLang ?? "en")"><!--<![endif]-->
-  <head>
+<!--[if gt IE 8]><!-->
+<html lang="@Html.Raw(ViewBag.HtmlLang ?? "en")">
+<!--<![endif]-->
+<head>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
 
     <title>@Html.Raw(ViewBag.Title ?? "GOV.UK - The best place to find government services and information")</title>
 
     <script type="text/javascript">
-      (function(){if(navigator.userAgent.match(/IEMobile\/10\.0/)){var d=document,c="appendChild",a=d.createElement("style");a[c](d.createTextNode("@@-ms-viewport{width:auto!important}"));d.getElementsByTagName("head")[0][c](a);}})();
+        (function () { if (navigator.userAgent.match(/IEMobile\/10\.0/)) { var d = document, c = "appendChild", a = d.createElement("style"); a[c](d.createTextNode("@@-ms-viewport{width:auto!important}")); d.getElementsByTagName("head")[0][c](a); } })();
     </script>
 
-    <!--[if gt IE 8]><!--><link href="@Url.Content("~/Content/govuk/stylesheets/govuk-template.css")" media="screen" rel="stylesheet" type="text/css" /><!--<![endif]-->
+    <!--[if gt IE 8]><!-->
+    <link href="@Url.Content("~/Content/govuk/stylesheets/govuk-template.css")" media="screen" rel="stylesheet" type="text/css" /><!--<![endif]-->
     <!--[if IE 6]><link href="@Url.Content("~/Content/govuk/stylesheets/govuk-template-ie6.css")" media="screen" rel="stylesheet" type="text/css" /><![endif]-->
     <!--[if IE 7]><link href="@Url.Content("~/Content/govuk/stylesheets/govuk-template-ie7.css")" media="screen" rel="stylesheet" type="text/css" /><![endif]-->
     <!--[if IE 8]><link href="@Url.Content("~/Content/govuk/stylesheets/govuk-template-ie8.css")" media="screen" rel="stylesheet" type="text/css" /><![endif]-->
@@ -31,10 +34,8 @@
     </script>
     <![endif]-->
     <!--[if gte IE 9]><!-->
-      <link href="@Url.Content("~/Content/govuk/stylesheets/fonts.css")" media="all" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/govuk/stylesheets/fonts.css")" media="all" rel="stylesheet" type="text/css" />
     <!--<![endif]-->
-
-
     <!--[if lt IE 9]>
       <script src="@Url.Content("~/Scripts/govuk/ie.js")" type="text/javascript"></script>
     <![endif]-->
@@ -54,83 +55,198 @@
     <meta property="og:image" content="@Url.Content("~/Content/govuk/images/opengraph-image.png")">
 
     @RenderSection("head", required: false)
-  </head>
+</head>
 
-  <body class="@Html.Raw(ViewBag.BodyClasses ?? string.Empty)">
-      <script type="text/javascript">document.body.className = ((document.body.className) ? document.body.className + ' js-enabled' : 'js-enabled');</script>
+<body class="@Html.Raw(ViewBag.BodyClasses ?? string.Empty)">
+    <script type="text/javascript">document.body.className = ((document.body.className) ? document.body.className + ' js-enabled' : 'js-enabled');</script>
 
-      @RenderSection("body_start", required: false)
+    @RenderSection("body_start", required: false)
 
-      <div id="skiplink-container">
-          <div>
-              <a href="#content" class="skiplink">@Html.Raw(ViewBag.SkipLinkMessage ?? "Skip to main content")</a>
-          </div>
-      </div>
-
-      <div id="global-cookie-message">
-
-          @Html.Raw(ViewBag.CookieMessage ?? "<p>GOV.UK uses cookies to make the site simpler. <a href=\"https://www.gov.uk/help/cookies\">Find out more about cookies</a></p>")
-
-      </div>
-      <!--end global-cookie-message-->
-
-
-      <header role="banner" id="global-header" class="@Html.Raw(ViewBag.HeaderClass ?? string.Empty)">
-          <div class="header-wrapper">
-              <div class="header-global">
-                  <div class="header-logo">
-                      <a href="@Html.Raw(ViewBag.HomepageUrl ?? "https://www.gov.uk/")" title="@Html.Raw(ViewBag.LogoLinkTitle ?? "Go to the GOV.UK homepage")" id="logo" class="content">
-                          <img src="@Url.Content("~/Content/govuk/images/gov.uk_logotype_crown.png")" width="35" height="31" alt=""> @Html.Raw(ViewBag.GlobalHeaderText ?? "GOV.UK")
-                      </a>
-                  </div>
-                  @RenderSection("inside_header", required: false)
-              </div>
-              @RenderSection("proposition_header", required: false)
-          </div>
-      </header>
-      <!--end header-->
-
-
-      @RenderSection("after_header", required: false)
-
-      <div id="global-header-bar"></div>
-      <!--end global-header-bar-->
-
-      @RenderBody()
-
-      <footer class="group js-footer" id="footer" role="contentinfo">
-
-          <div class="footer-wrapper">
-              @RenderSection("footer_top", required: false)
-
-              <div class="footer-meta">
-                  <div class="footer-meta-inner">
-                      @RenderSection("footer_support_links", required: false)
-
-                      <div class="open-government-licence">
-                          <p class="logo"><a href="https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/" rel="license">Open Government Licence</a></p>
-
-                          @Html.Raw(ViewBag.LicenceMessage ?? "<p>All content is available under the <a href=\"https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/\" rel=\"license\">Open Government Licence v3.0</a>, except where otherwise stated</p>")
-
-                      </div>
-                  </div>
-
-                  <div class="copyright">
-                      <a href="https://www.nationalarchives.gov.uk/information-management/our-services/crown-copyright.htm">@Html.Raw(ViewBag.CrownCopyrightMessage ?? "&copy; Crown copyright")</a>
-                  </div>
-              </div>
-          </div>
-  </footer>
-
-  <!--end footer-->
-    <div hidden="hidden" class="hidden-for-screen-reader">
-      Version: @Startup.ApplicationVersion
+    <div id="skiplink-container">
+        <div>
+            <a href="#content" class="skiplink">@Html.Raw(ViewBag.SkipLinkMessage ?? "Skip to main content")</a>
+        </div>
     </div>
 
-      <div id="global-app-error" class="app-error hidden"></div>
+    <!--start global-cookie-message-->
+    <div id="global-cookie-message" style="display:none;">
+        <p id="global-cookie-message-p1">Cookies on International Waste Shipments</p>
+        <p id="global-cookie-message-p2">We'd like to use analystics cookies so we can understand how you use International Waste Shipments and make improvements.</p>
+        <p id="global-cookie-message-p2">We also use essential cookies to remember if you've accepted analytics cookies.</p>
+        <p>
+            <input type="submit" id="acceptCookies" value="Accept additional cookies" class="cookieBannerButton">
+            <input type="submit" id="rejectCookies" value="Reject additional cookies" class="cookieBannerButton">
+            @Html.ActionLink("View cookies", "Cookies", "NewUser", new { area = string.Empty }, null)
+        </p>
+    </div>
 
-      <script src="@Url.Content("~/Scripts/govuk/govuk-template.js")" type="text/javascript"></script>
+    <div id="global-cookie-accept-message" style="display:none;">
+        <p id="global-cookie-message-p2">
+            You have accepted additional cookies. You can @Html.ActionLink("change your cookie settings", "Cookies", "NewUser", new { area = string.Empty }, null) at any time.
+        </p>
+        <p>
+            <input type="submit" id="hideAcceptCookies" value="Hide this message" class="cookieBannerButton">
+        </p>
+    </div>
 
-      @RenderSection("body_end", required: false)
-  </body>
+    <div id="global-cookie-reject-message" style="display:none;">
+        <p id="global-cookie-message-p2">
+            You have rejected additional cookies. You can @Html.ActionLink("change your cookie settings", "Cookies", "NewUser", new { area = string.Empty }, null) at any time.
+        </p>
+        <p>
+            <input type="submit" id="hideRejectCookies" value="Hide this message" class="cookieBannerButton">
+        </p>
+    </div>
+    <!--end global-cookie-message-->
+
+
+    <header role="banner" id="global-header" class="@Html.Raw(ViewBag.HeaderClass ?? string.Empty)">
+        <div class="header-wrapper">
+            <div class="header-global">
+                <div class="header-logo">
+                    <a href="@Html.Raw(ViewBag.HomepageUrl ?? "https://www.gov.uk/")" title="@Html.Raw(ViewBag.LogoLinkTitle ?? "Go to the GOV.UK homepage")" id="logo" class="content">
+                        <img src="@Url.Content("~/Content/govuk/images/gov.uk_logotype_crown.png")" width="35" height="31" alt=""> @Html.Raw(ViewBag.GlobalHeaderText ?? "GOV.UK")
+                    </a>
+                </div>
+                @RenderSection("inside_header", required: false)
+            </div>
+            @RenderSection("proposition_header", required: false)
+        </div>
+    </header>
+    <!--end header-->
+
+
+    @RenderSection("after_header", required: false)
+
+    <div id="global-header-bar"></div>
+    <!--end global-header-bar-->
+
+    @RenderBody()
+
+    <footer class="group js-footer" id="footer" role="contentinfo">
+
+        <div class="footer-wrapper">
+            @RenderSection("footer_top", required: false)
+
+            <div class="footer-meta">
+                <div class="footer-meta-inner">
+                    @RenderSection("footer_support_links", required: false)
+
+                    <div class="open-government-licence">
+                        <p class="logo"><a href="https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/" rel="license">Open Government Licence</a></p>
+
+                        @Html.Raw(ViewBag.LicenceMessage ?? "<p>All content is available under the <a href=\"https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/\" rel=\"license\">Open Government Licence v3.0</a>, except where otherwise stated</p>")
+
+                    </div>
+                </div>
+
+                <div class="copyright">
+                    <a href="https://www.nationalarchives.gov.uk/information-management/our-services/crown-copyright.htm">@Html.Raw(ViewBag.CrownCopyrightMessage ?? "&copy; Crown copyright")</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!--end footer-->
+    <div hidden="hidden" class="hidden-for-screen-reader">
+        Version: @Startup.ApplicationVersion
+    </div>
+
+    <div id="global-app-error" class="app-error hidden"></div>
+
+    <script src="@Url.Content("~/Scripts/govuk/govuk-template.js")" type="text/javascript"></script>
+
+    @RenderSection("body_end", required: false)
+</body>
 </html>
+
+<script>
+    var self = this;
+    var cookieConsent = GOVUK.getCookie("iws-cookie-consent");
+
+    if (cookieConsent === null || cookieConsent === "null") {
+        document.getElementById("global-cookie-message").style.display = "block";
+    } else {
+        document.getElementById("global-cookie-message").style.display = "none";
+    }
+
+    $("#acceptCookies").click(function () {
+        GOVUK.cookie('iws-cookie-consent', 'yes', { days: 28 });
+        self.startGoogleTracking();
+        document.getElementById("global-cookie-message").style.display = "none";
+        document.getElementById("global-cookie-accept-message").style.display = "block";
+    });
+
+    $("#rejectCookies").click(function () {
+        GOVUK.cookie('iws-cookie-consent', 'no', { days: 28 });
+        document.getElementById("global-cookie-message").style.display = "none";
+        GOVUK.cookie('_ga', null);
+        GOVUK.cookie('_gid', null);
+        GOVUK.cookie('_gat', null);
+        GOVUK.cookie('_gat_govuk_shared', null);
+        document.getElementById("global-cookie-reject-message").style.display = "block";
+    });
+
+    $("#hideAcceptCookies").click(function () {
+        document.getElementById("global-cookie-accept-message").style.display = "none";
+    });
+
+    $("#hideRejectCookies").click(function () {
+        document.getElementById("global-cookie-reject-message").style.display = "none";
+    });
+
+    self.startGoogleTracking = function () {
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        ga('create', 'UA-145652997-1', 'auto', 'govuk_shared', { 'allowLinker': true });
+        ga('govuk_shared.require', 'linker');
+        ga('govuk_shared.linker.set', 'anonymizeIp', true);
+        ga('govuk_shared.linker.set', 'allowAdFeatures', false);
+        ga('govuk_shared.linker:autoLink', ['www.gov.uk', 'www.nationalarchives.gov.uk', 'www.daera-ni.gov.uk','www.data.gov.uk']);
+        ga('send', 'pageview');
+        ga('govuk_shared.send', 'pageview');
+    }
+
+    var element = document.getElementById('saveCookieChoice');
+    if (typeof (element) != 'undefined' && element != null) {
+        if (cookieConsent && cookieConsent === "yes") {
+            document.getElementById("cookieChoiceYes").checked = true;
+        } else {
+            document.getElementById("cookieChoiceNo").checked = true;
+        }
+    }
+
+    function acceptCookies() {
+        GOVUK.cookie('iws-cookie-consent', 'yes', { days: 28 });
+        self.startGoogleTracking();
+        document.getElementById("global-cookie-message").style.display = "none";
+    }
+
+    function rejectCookies() {
+        GOVUK.cookie('iws-cookie-consent', 'no', { days: 28 });
+        document.getElementById("global-cookie-message").style.display = "none";
+        GOVUK.cookie('_ga', null);
+        GOVUK.cookie('_gid', null);
+        GOVUK.cookie('_gat', null);
+        GOVUK.cookie('_gat_govuk_shared', null);
+    }
+
+    function setCookieChoice() {
+        if (document.getElementById("cookieChoiceYes").checked === false && document.getElementById("cookieChoiceNo").checked === false) {
+            return;
+        }
+
+        if (document.getElementById("cookieChoiceYes").checked) {            
+            acceptCookies();
+        } else {
+            rejectCookies();
+        }
+
+        window.scrollTo({ top: 0 });
+        document.getElementById("dvSuccessMessage").style.display = "block";
+        document.getElementById("global-cookie-accept-message").style.display = "none";
+        document.getElementById("global-cookie-reject-message").style.display = "none";
+    }
+</script>

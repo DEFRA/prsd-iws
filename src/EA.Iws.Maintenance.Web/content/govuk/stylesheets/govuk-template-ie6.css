@@ -36,12 +36,13 @@
     display: block;
     clear: both; }
 
-#global-header-bar, #global-cookie-message p {
-  max-width: 960px;
-  width: 960px;
-  margin: 0 15px;
-  margin: 0 30px;
-  margin: 0 auto; }
+#global-header-bar, #global-cookie-message p, #global-cookie-accept-message p, #global-cookie-reject-message p {
+    max-width: 960px;
+    width: 960px;
+    margin: 0 15px;
+    margin: 0 30px;
+    margin: 0 auto;
+}
 
 @-ms-viewport {
   width: device-width; }

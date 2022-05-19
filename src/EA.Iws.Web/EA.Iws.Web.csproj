@@ -1107,7 +1107,6 @@
     <Content Include="Views\Shared\_IwsHead.cshtml" />
     <Content Include="Views\Shared\_IwsHeader.cshtml" />
     <Content Include="Views\Shared\_IwsNavigation.cshtml" />
-    <Content Include="Views\Shared\_IwsTracking.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\RadioButtonStringCollectionBaseViewModel.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\NewNotification\CompetentAuthority.cshtml" />
@@ -1202,6 +1201,7 @@
     <Content Include="Views\Shared\_ShipmentAudit.cshtml" />
     <Content Include="Views\Shared\_ShipmentGroupScript.cshtml" />
     <Content Include="Views\Errors\Maintenance.cshtml" />
+    <Content Include="Views\NewUser\Accessibility.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
