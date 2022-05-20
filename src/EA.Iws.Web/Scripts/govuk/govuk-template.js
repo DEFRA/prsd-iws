@@ -23,8 +23,9 @@
 
 	function getDomain() {
 		var host = window.location.hostname;
-		if (host.split('.').length > 1)
+		if (host.split('.').length > 1 && host !== "international-waste-shipments.service.gov.uk") {
 			return host.replace(host.split('.')[0], '');
+		}
 		else
 			return host;
 	}
