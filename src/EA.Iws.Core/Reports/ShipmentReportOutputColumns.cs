@@ -100,5 +100,8 @@
 
         [Display(Name = "Shipment Status")]
         ShipmentStatus,
+
+        [Display(Name = "Rejected Reason")]
+        RejectedReason
     }
 }
