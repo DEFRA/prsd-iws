@@ -125,6 +125,7 @@
     <Content Include="scripts\Update\0007-Support\20210201-CR0047-Add-Consented-Unlock.sql" />
     <Content Include="scripts\Update\0007-Support\20211004-CR0048-Add-ImportNotification-Company-Type.sql" />
     <Content Include="scripts\Update\0007-Support\20220310-CCN058-Add-StatusAtFileClosed.sql" />
+    <Content Include="scripts\Update\0007-Support\20220722-CCN054-Shipment-Report-Changes.sql" />
     <Content Include="unindexed-foreign-keys.sql" />
     <Content Include="scripts\Everytime\01-Functions\0003-Reports-PricingInfo.sql" />
     <Content Include="scripts\Everytime\03-StoredProcedures\0003-uspUpdateImportNotificationKeyDates.sql" />

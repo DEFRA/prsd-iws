@@ -172,7 +172,8 @@ BEGIN
           ,[HCode]
           ,[UNClass]
 		  ,[SiteOfExportName]
-		  ,[RejectedShipmentDate] )
+		  ,[RejectedShipmentDate] 
+          ,[RejectedReason])
     SELECT [NotificationId]
           ,[NotificationNumber]
           ,[CompetentAuthorityId]
@@ -213,6 +214,7 @@ BEGIN
           ,[UNClass]
 		  ,[SiteOfExportName]
 		  ,[RejectedShipmentDate]
+          ,[RejectedReason]
       FROM [Reports].[Shipments];
 
 	DELETE FROM [Reports].[ProducerCache];

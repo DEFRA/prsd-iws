@@ -97,5 +97,8 @@
 
         [DisplayName("Shipment Status")]
         public string ShipmentStatus { get; set; }
+
+        [DisplayName("Rejected Reason")]
+        public string RejectedReason { get; set; }
     }
 }
