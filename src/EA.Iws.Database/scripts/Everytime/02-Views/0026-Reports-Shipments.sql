@@ -82,8 +82,8 @@ AS
 		CASE
 			WHEN SiteOfExport.[Id] IS NOT NULL THEN SiteOfExport.[Name]
 			ELSE ''
-		END AS [SiteOfExportName]       
-        
+		END AS [SiteOfExportName],
+        'N' AS [ActionedByExternalUser]
     
     FROM [Notification].[Movement] AS M
 
@@ -158,6 +158,7 @@ AS
     LEFT JOIN   [Notification].[WasteCodeInfo] BaselCode
                 LEFT JOIN [Lookup].[WasteCode] BaselCodeInfo ON BaselCode.WasteCodeId = BaselCodeInfo.Id
     ON          BaselCode.NotificationId = N.Id AND BaselCode.CodeType IN (1, 2)
+
 	LEFT JOIN	[Notification].[Producer] AS SiteOfExport
 	ON			SiteOfExport.Id = 
 				(
@@ -171,7 +172,7 @@ AS
 					WHERE		PC.NotificationId = N.Id 
 								AND [IsSiteOfExport] = 1
 					ORDER BY	P1.[IsSiteOfExport] DESC
-				)
+				)    
 
     UNION ALL
 
@@ -257,7 +258,8 @@ AS
             order by 1
             FOR XML PATH('')
             ), 1, 1, '' ) AS [UNClass],
-		P.[Name] [SiteOfExportName]
+		P.[Name] [SiteOfExportName],
+        'N/A' AS [ActionedByExternalUser]
     
     FROM [ImportNotification].[Movement] AS M
 

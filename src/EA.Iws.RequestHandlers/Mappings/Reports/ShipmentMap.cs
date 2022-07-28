@@ -54,7 +54,8 @@
                 NotifierCompanyType = source.NotifierCompanyType.ToString(),
                 ConsigneeCompanyType = source.ConsigneeCompanyType.ToString(),
                 FacilityCompanyType = source.FacilityCompanyType.ToString(),
-                RejectedReason = source.RejectedReason
+                RejectedReason = source.RejectedReason,
+                ActionedByExternalUser = source.ActionedByExternalUser
             };
         }
 

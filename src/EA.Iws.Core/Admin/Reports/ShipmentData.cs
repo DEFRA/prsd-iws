@@ -100,5 +100,8 @@
 
         [DisplayName("Rejected Reason")]
         public string RejectedReason { get; set; }
+
+        [DisplayName("Actioned by External User")]
+        public string ActionedByExternalUser { get; set; }
     }
 }
