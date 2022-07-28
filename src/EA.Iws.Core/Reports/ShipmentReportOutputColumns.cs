@@ -102,6 +102,9 @@
         ShipmentStatus,
 
         [Display(Name = "Rejected Reason")]
-        RejectedReason
+        RejectedReason,
+
+        [Display(Name = "Actioned by External user")]
+        ActionedByExternalUser
     }
 }
