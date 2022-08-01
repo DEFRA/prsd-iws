@@ -63,7 +63,8 @@
             var stateOfImport = GetValidStateOfImport();
             stateOfImport.CompetentAuthorityId = null;
 
-            validator.ShouldHaveValidationErrorFor(x => x.CompetentAuthorityId, stateOfImport);
+            var result = validator.TestValidate(stateOfImport);
+            result.ShouldHaveValidationErrorFor(x => x.CompetentAuthorityId);
         }
 
         [Fact]
@@ -72,7 +73,8 @@
             var stateOfImport = GetValidStateOfImport();
             stateOfImport.EntryPointId = null;
 
-            validator.ShouldHaveValidationErrorFor(x => x.EntryPointId, stateOfImport);
+            var result = validator.TestValidate(stateOfImport);
+            result.ShouldHaveValidationErrorFor(x => x.EntryPointId);
         }
 
         [Fact]
@@ -81,7 +83,8 @@
             var stateOfImport = GetValidStateOfImport();
             stateOfImport.EntryPointId = nonUkEntryPointId;
 
-            validator.ShouldHaveValidationErrorFor(x => x.EntryPointId, stateOfImport);
+            var result = validator.TestValidate(stateOfImport);
+            result.ShouldHaveValidationErrorFor(x => x.EntryPointId);
         }
 
         [Fact]
@@ -90,7 +93,8 @@
             var stateOfImport = GetValidStateOfImport();
             stateOfImport.CompetentAuthorityId = nonUkCaId;
 
-            validator.ShouldHaveValidationErrorFor(x => x.CompetentAuthorityId, stateOfImport);
+            var result = validator.TestValidate(stateOfImport);
+            result.ShouldHaveValidationErrorFor(x => x.CompetentAuthorityId);
         }
 
         private StateOfImport GetValidStateOfImport()

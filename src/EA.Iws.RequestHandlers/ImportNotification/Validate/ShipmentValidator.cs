@@ -17,33 +17,33 @@
 
             RuleFor(x => x.TotalShipments)
                 .NotNull()
-                .WithLocalizedMessage(() => ShipmentValidatorResources.TotalShipmentsNotNull)
+                .WithMessage(x => ShipmentValidatorResources.TotalShipmentsNotNull)
                 .GreaterThan(0)
-                .WithLocalizedMessage(() => ShipmentValidatorResources.TotalShipmentsPositive);
+                .WithMessage(x => ShipmentValidatorResources.TotalShipmentsPositive);
 
             RuleFor(x => x.Quantity)
                 .NotNull()
-                .WithLocalizedMessage(() => ShipmentValidatorResources.QuantityNotNull)
+                .WithMessage(x => ShipmentValidatorResources.QuantityNotNull)
                 .GreaterThan(0)
-                .WithLocalizedMessage(() => ShipmentValidatorResources.QuantityPositive);
+                .WithMessage(x => ShipmentValidatorResources.QuantityPositive);
 
             RuleFor(x => x.Unit)
                 .NotNull()
-                .WithLocalizedMessage(() => ShipmentValidatorResources.UnitNotNull);
+                .WithMessage(x => ShipmentValidatorResources.UnitNotNull);
 
             RuleFor(x => x.StartDate)
                 .NotNull()
-                .WithLocalizedMessage(() => ShipmentValidatorResources.StartDateNotNull)
+                .WithMessage(x => ShipmentValidatorResources.StartDateNotNull)
                 .LessThanOrEqualTo(s => s.EndDate)
-                .WithLocalizedMessage(() => ShipmentValidatorResources.StartDateBeforeEndDate);
+                .WithMessage(x => ShipmentValidatorResources.StartDateBeforeEndDate);
 
             RuleFor(x => x.EndDate)
                 .NotNull()
-                .WithLocalizedMessage(() => ShipmentValidatorResources.EndDateNotNull)
+                .WithMessage(x => ShipmentValidatorResources.EndDateNotNull)
                 .GreaterThanOrEqualTo(s => s.StartDate)
-                .WithLocalizedMessage(() => ShipmentValidatorResources.EndDateAfterStartDate)
+                .WithMessage(x => ShipmentValidatorResources.EndDateAfterStartDate)
                 .MustAsync(BeWithinConsentPeriod)
-                .WithLocalizedMessage(() => ShipmentValidatorResources.EndDateInConsentPeriod);
+                .WithMessage(x => ShipmentValidatorResources.EndDateInConsentPeriod);
         }
 
         private async Task<bool> BeWithinConsentPeriod(Shipment instance, DateTime? endDate, CancellationToken cancellationToken)

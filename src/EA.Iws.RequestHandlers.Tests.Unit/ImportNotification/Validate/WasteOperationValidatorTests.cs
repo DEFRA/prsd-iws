@@ -33,7 +33,8 @@
             var wasteOperation = GetValidWasteOperation();
             wasteOperation.OperationCodes = new[] { OperationCode.D1, OperationCode.D2, OperationCode.D3, OperationCode.R1, OperationCode.R2, OperationCode.R3 };
 
-            validator.ShouldHaveValidationErrorFor(x => x.OperationCodes, wasteOperation);
+            var result = validator.TestValidate(wasteOperation);
+            result.ShouldHaveValidationErrorFor(x => x.OperationCodes);
         }
 
         [Fact]
@@ -42,7 +43,8 @@
             var wasteOperation = GetValidWasteOperation();
             wasteOperation.OperationCodes = new OperationCode[] { };
 
-            validator.ShouldHaveValidationErrorFor(x => x.OperationCodes, wasteOperation);
+            var result = validator.TestValidate(wasteOperation);
+            result.ShouldHaveValidationErrorFor(x => x.OperationCodes);
         }
 
         [Theory]
@@ -54,7 +56,8 @@
             var wasteOperation = GetValidWasteOperation();
             wasteOperation.TechnologyEmployed = input;
 
-            validator.ShouldNotHaveValidationErrorFor(x => x.TechnologyEmployed, wasteOperation);
+            var result = validator.TestValidate(wasteOperation);
+            result.ShouldHaveValidationErrorFor(x => x.TechnologyEmployed);
         }
 
         [Fact]
@@ -64,7 +67,8 @@
             wasteOperation.TechnologyEmployed =
                 "123245678901232456789012324567890123245678901232456789012324567890123245678901232456789012324567890123245678901";
 
-            validator.ShouldHaveValidationErrorFor(x => x.TechnologyEmployed, wasteOperation);
+            var result = validator.TestValidate(wasteOperation);
+            result.ShouldHaveValidationErrorFor(x => x.TechnologyEmployed);
         }
 
         [Fact]
@@ -73,7 +77,8 @@
             var wasteOperation = GetValidWasteOperation();
             wasteOperation.OperationCodes = null;
 
-            validator.ShouldHaveValidationErrorFor(x => x.OperationCodes, wasteOperation);
+            var result = validator.TestValidate(wasteOperation);
+            result.ShouldHaveValidationErrorFor(x => x.OperationCodes);
         }
 
         private WasteOperation GetValidWasteOperation()

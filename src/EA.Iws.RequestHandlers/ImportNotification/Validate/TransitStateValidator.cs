@@ -21,19 +21,19 @@
 
             RuleFor(x => x.CountryId)
                 .NotNull()
-                .WithLocalizedMessage(() => TransitStateValidatorResources.CountryNotNull);
+                .WithMessage(x => TransitStateValidatorResources.CountryNotNull);
 
             RuleFor(x => x.EntryPointId)
                 .MustAsync(BeEnteringSameCountry)
-                .WithLocalizedMessage(() => TransitStateValidatorResources.EntryPointMustBeSelectedCountry);
+                .WithMessage(x => TransitStateValidatorResources.EntryPointMustBeSelectedCountry);
 
             RuleFor(x => x.ExitPointId)
                 .MustAsync(BeExitingSameCountry)
-                .WithLocalizedMessage(() => TransitStateValidatorResources.ExitPointMustBeSelectedCountry);
+                .WithMessage(x => TransitStateValidatorResources.ExitPointMustBeSelectedCountry);
 
             RuleFor(x => x.CompetentAuthorityId)
                 .MustAsync(BeInSameCountry)
-                .WithLocalizedMessage(() => TransitStateValidatorResources.CompetentAuthorityMustBeSelectedCountry);
+                .WithMessage(x => TransitStateValidatorResources.CompetentAuthorityMustBeSelectedCountry);
         }
 
         private async Task<bool> BeInSameCountry(TransitState transitState, Guid? competentAuthorityId, CancellationToken cancellationToken)

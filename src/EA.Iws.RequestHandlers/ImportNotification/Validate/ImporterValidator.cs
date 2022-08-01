@@ -11,9 +11,9 @@
             RuleFor(x => x.Address)
                 .Cascade(CascadeMode.StopOnFirstFailure)
                 .NotNull()
-                .WithLocalizedMessage(() => ImporterValidatorResources.AddressNotEmpty)
+                .WithMessage(x => ImporterValidatorResources.AddressNotEmpty)
                 .Must(BeNonEmptyAddress)
-                .WithLocalizedMessage(() => ImporterValidatorResources.AddressNotEmpty);
+                .WithMessage(x => ImporterValidatorResources.AddressNotEmpty);
 
             RuleFor(x => x.Address)
                 .SetValidator(addressValidator)
@@ -22,9 +22,9 @@
             RuleFor(x => x.Contact)
                 .Cascade(CascadeMode.StopOnFirstFailure)
                 .NotNull()
-                .WithLocalizedMessage(() => ImporterValidatorResources.ContactNotEmpty)
+                .WithMessage(x => ImporterValidatorResources.ContactNotEmpty)
                 .Must(BeNonEmptyContact)
-                .WithLocalizedMessage(() => ImporterValidatorResources.ContactNotEmpty);
+                .WithMessage(x => ImporterValidatorResources.ContactNotEmpty);
 
             RuleFor(x => x.Contact)
                 .SetValidator(contactValidator)
@@ -32,11 +32,11 @@
 
             RuleFor(x => x.BusinessName)
                 .NotEmpty()
-                .WithLocalizedMessage(() => ImporterValidatorResources.BusinessNameNotEmpty);
+                .WithMessage(x => ImporterValidatorResources.BusinessNameNotEmpty);
 
             RuleFor(x => x.Type)
                 .NotNull()
-                .WithLocalizedMessage(() => ImporterValidatorResources.BusinessTypeNotEmpty);
+                .WithMessage(x => ImporterValidatorResources.BusinessTypeNotEmpty);
         }
 
         private bool ImporterContactIsNotEmpty(Importer importer)

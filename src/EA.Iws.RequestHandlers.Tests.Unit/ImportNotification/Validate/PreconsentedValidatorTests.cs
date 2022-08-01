@@ -35,7 +35,8 @@
         {
             var preconsented = new Preconsented(importRecoveryNotificationId);
 
-            validator.ShouldHaveValidationErrorFor(x => x.AllFacilitiesPreconsented, preconsented);
+            var result = validator.TestValidate(preconsented);
+            result.ShouldHaveValidationErrorFor(x => x.AllFacilitiesPreconsented);
         }
 
         [Theory]
@@ -48,7 +49,8 @@
                 AllFacilitiesPreconsented = input
             };
 
-            validator.ShouldNotHaveValidationErrorFor(x => x.AllFacilitiesPreconsented, preconsented);
+            var result = validator.TestValidate(preconsented);
+            result.ShouldHaveValidationErrorFor(x => x.AllFacilitiesPreconsented);
         }
 
         [Fact]
@@ -56,7 +58,8 @@
         {
             var preconsented = new Preconsented(importDisposalNotificationId);
 
-            validator.ShouldNotHaveValidationErrorFor(x => x.AllFacilitiesPreconsented, preconsented);
+            var result = validator.TestValidate(preconsented);
+            result.ShouldHaveValidationErrorFor(x => x.AllFacilitiesPreconsented);
         }
 
         [Theory]
@@ -69,7 +72,8 @@
                 AllFacilitiesPreconsented = input
             };
 
-            validator.ShouldHaveValidationErrorFor(x => x.AllFacilitiesPreconsented, preconsented);
+            var result = validator.TestValidate(preconsented);
+            result.ShouldHaveValidationErrorFor(x => x.AllFacilitiesPreconsented);
         }
         
         private ImportNotification CreateImportNotification(NotificationType notificationType, Guid importNotificationId)

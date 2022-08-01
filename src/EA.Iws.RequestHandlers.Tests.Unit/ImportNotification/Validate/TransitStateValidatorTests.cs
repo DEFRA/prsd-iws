@@ -56,7 +56,8 @@
         {
             transitState.CompetentAuthorityId = TestableCompetentAuthority.EnvironmentAgency.Id;
 
-            validator.ShouldHaveValidationErrorFor(x => x.CompetentAuthorityId, transitState);
+            var result = validator.TestValidate(transitState);
+            result.ShouldHaveValidationErrorFor(x => x.CompetentAuthorityId);
         }
 
         [Fact]
@@ -64,7 +65,8 @@
         {
             transitState.ExitPointId = TestableEntryOrExitPoint.Dover.Id;
 
-            validator.ShouldHaveValidationErrorFor(x => x.ExitPointId, transitState);
+            var result = validator.TestValidate(transitState);
+            result.ShouldHaveValidationErrorFor(x => x.ExitPointId);
         }
 
         [Fact]
@@ -72,7 +74,8 @@
         {
             transitState.EntryPointId = TestableEntryOrExitPoint.Dover.Id;
 
-            validator.ShouldHaveValidationErrorFor(x => x.EntryPointId, transitState);
+            var result = validator.TestValidate(transitState);
+            result.ShouldHaveValidationErrorFor(x => x.EntryPointId);
         }
 
         [Fact]
@@ -80,7 +83,8 @@
         {
             transitState.CompetentAuthorityId = null;
 
-            validator.ShouldHaveValidationErrorFor(x => x.CompetentAuthorityId, transitState);
+            var result = validator.TestValidate(transitState);
+            result.ShouldHaveValidationErrorFor(x => x.CompetentAuthorityId);
         }
 
         [Fact]
@@ -88,7 +92,8 @@
         {
             transitState.CountryId = null;
 
-            validator.ShouldHaveValidationErrorFor(x => x.CountryId, transitState);
+            var result = validator.TestValidate(transitState);
+            result.ShouldHaveValidationErrorFor(x => x.CountryId);
         }
 
         [Fact]
@@ -96,7 +101,8 @@
         {
             transitState.ExitPointId = null;
 
-            validator.ShouldHaveValidationErrorFor(x => x.ExitPointId, transitState);
+            var result = validator.TestValidate(transitState);
+            result.ShouldHaveValidationErrorFor(x => x.ExitPointId);
         }
 
         [Fact]
@@ -104,7 +110,8 @@
         {
             transitState.EntryPointId = null;
 
-            validator.ShouldHaveValidationErrorFor(x => x.EntryPointId, transitState);
+            var result = validator.TestValidate(transitState);
+            result.ShouldHaveValidationErrorFor(x => x.EntryPointId);
         }
     }
 }

@@ -21,15 +21,15 @@
 
             RuleFor(x => x.CountryId)
                 .NotNull()
-                .WithLocalizedMessage(() => StateOfExportValidatorResources.StateOfExportCountryNotNull);
+                .WithMessage(x => StateOfExportValidatorResources.StateOfExportCountryNotNull);
 
             RuleFor(x => x.ExitPointId)
                 .MustAsync(BeInSameCountry)
-                .WithLocalizedMessage(() => StateOfExportValidatorResources.ExportExitPointMustBeInSameCountry);
+                .WithMessage(x => StateOfExportValidatorResources.ExportExitPointMustBeInSameCountry);
 
             RuleFor(x => x.CompetentAuthorityId)
                 .MustAsync(BeInCountry)
-                .WithLocalizedMessage(() => StateOfExportValidatorResources.CompetentAuthorityMustBeInSameCountry);
+                .WithMessage(x => StateOfExportValidatorResources.CompetentAuthorityMustBeInSameCountry);
         }
 
         private async Task<bool> BeInCountry(StateOfExport stateOfExport, Guid? competentAuthorityId, CancellationToken cancellationToken)

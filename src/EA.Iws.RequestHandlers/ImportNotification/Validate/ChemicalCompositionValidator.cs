@@ -9,7 +9,7 @@
         {
             RuleFor(x => x.Composition)
                 .Must(BeEntered)
-                .WithLocalizedMessage(() => ChemicalCompositionValidatorResources.CompositionRequred);
+                .WithMessage(ChemicalCompositionValidatorResources.CompositionRequred);
         }
 
         private static bool BeEntered(Core.WasteType.ChemicalComposition? arg)

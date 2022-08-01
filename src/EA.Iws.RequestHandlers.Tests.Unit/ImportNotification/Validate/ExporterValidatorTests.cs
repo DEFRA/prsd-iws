@@ -58,8 +58,9 @@
         {
             var exporter = GetValidExporter();
             exporter.Address = null;
-
-            validator.ShouldHaveValidationErrorFor(x => x.Address, exporter);
+            
+            var result = validator.TestValidate(exporter);
+            result.ShouldHaveValidationErrorFor(c => c.Address);
         }
 
         [Fact]
@@ -68,7 +69,8 @@
             var exporter = GetValidExporter();
             exporter.Address = new Address();
 
-            validator.ShouldHaveValidationErrorFor(x => x.Address, exporter);
+            var result = validator.TestValidate(exporter);
+            result.ShouldHaveValidationErrorFor(c => c.Address);
         }
 
         [Fact]
@@ -99,7 +101,8 @@
             var exporter = GetValidExporter();
             exporter.Contact  = null;
 
-            validator.ShouldHaveValidationErrorFor(x => x.Contact, exporter);
+            var result = validator.TestValidate(exporter);
+            result.ShouldHaveValidationErrorFor(c => c.Contact);
         }
 
         [Fact]
@@ -119,7 +122,8 @@
             var exporter = GetValidExporter();
             exporter.Contact = new Contact();
 
-            validator.ShouldHaveValidationErrorFor(x => x.Contact, exporter);
+            var result = validator.TestValidate(exporter);
+            result.ShouldHaveValidationErrorFor(c => c.Contact);
         }
 
         [Fact]
@@ -142,7 +146,8 @@
             var exporter = GetValidExporter();
             exporter.BusinessName = businessName;
 
-            validator.ShouldHaveValidationErrorFor(x => x.BusinessName, exporter);
+            var result = validator.TestValidate(exporter);
+            result.ShouldHaveValidationErrorFor(c => c.BusinessName);
         }
 
         private Exporter GetValidExporter()

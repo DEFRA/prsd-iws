@@ -60,7 +60,8 @@
             var facility = GetValidFacility();
             facility.Address = null;
 
-            validator.ShouldHaveValidationErrorFor(x => x.Address, facility);
+            var result = validator.TestValidate(facility);
+            result.ShouldHaveValidationErrorFor(f => f.Address);
         }
 
         [Fact]
@@ -80,7 +81,8 @@
             var facility = GetValidFacility();
             facility.Address = new Address();
 
-            validator.ShouldHaveValidationErrorFor(x => x.Address, facility);
+            var result = validator.TestValidate(facility);
+            result.ShouldHaveValidationErrorFor(f => f.Address);
         }
 
         [Fact]
@@ -100,7 +102,8 @@
             var facility = GetValidFacility();
             facility.Contact = null;
 
-            validator.ShouldHaveValidationErrorFor(x => x.Contact, facility);
+            var result = validator.TestValidate(facility);
+            result.ShouldHaveValidationErrorFor(f => f.Contact);
         }
 
         [Fact]
@@ -120,7 +123,8 @@
             var facility = GetValidFacility();
             facility.Contact = new Contact();
 
-            validator.ShouldHaveValidationErrorFor(x => x.Contact, facility);
+            var result = validator.TestValidate(facility);
+            result.ShouldHaveValidationErrorFor(f => f.Contact);
         }
 
         [Fact]
@@ -143,7 +147,8 @@
             var facility = GetValidFacility();
             facility.BusinessName = businessName;
 
-            validator.ShouldHaveValidationErrorFor(x => x.BusinessName, facility);
+            var result = validator.TestValidate(facility);
+            result.ShouldHaveValidationErrorFor(f => f.BusinessName);
         }
 
         [Fact]
@@ -152,7 +157,8 @@
             var facility = GetValidFacility();
             facility.Type = null;
 
-            validator.ShouldHaveValidationErrorFor(x => x.Type, facility);
+            var result = validator.TestValidate(facility);
+            result.ShouldHaveValidationErrorFor(f => f.Type);
         }
 
         private Facility GetValidFacility()

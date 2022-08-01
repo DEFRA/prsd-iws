@@ -43,7 +43,7 @@
             await handler.HandleAsync(request);
 
             A.CallTo(() => repository.GetPagedShipmentAuditsById(notificationId, 1, PageSize, request.ShipmentNumber))
-                .MustHaveHappened(Repeated.Exactly.Once);
+                .MustHaveHappenedOnceExactly();
         }
 
         [Fact]
@@ -55,7 +55,7 @@
 
             A.CallTo(
                     () => mapper.Map<IEnumerable<MovementAudit>, ShipmentAuditData>(A<IEnumerable<MovementAudit>>.Ignored))
-                .MustHaveHappened(Repeated.Exactly.Once);
+                .MustHaveHappenedOnceExactly();
         }
 
         private GetMovementAuditByNotificationId GetRequest(int pageNumber, int? shipmentNumber)

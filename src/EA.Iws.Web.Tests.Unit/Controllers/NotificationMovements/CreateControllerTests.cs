@@ -42,10 +42,10 @@
             var result = await controller.Index(Guid.NewGuid()) as ViewResult;
 
             A.CallTo(() => mediator.SendAsync(A<GetMovementRulesSummary>.Ignored))
-                .MustHaveHappened(Repeated.Exactly.Once);
+                .MustHaveHappenedOnceExactly();
 
             A.CallTo(() => mediator.SendAsync(A<GetShipmentInfo>.Ignored))
-                .MustHaveHappened(Repeated.Exactly.Once);
+                .MustHaveHappenedOnceExactly();
 
             Assert.NotNull(result);
             Assert.True(result.ViewName == "Index");

@@ -1,5 +1,6 @@
 ﻿namespace EA.Iws.RequestHandlers.Tests.Unit.ImportNotification.Validate
 {
+    using EA.Iws.Core.ImportNotification.Draft;
     using FluentValidation.TestHelper;
     using RequestHandlers.ImportNotification.Validate;
     using Xunit;
@@ -29,7 +30,12 @@
         [InlineData(" ")]
         public void ContactNameMissing_ReturnsFailure(string contactName)
         {
-            validator.ShouldHaveValidationErrorFor(x => x.ContactName, contactName);
+            var model = new Contact { ContactName = contactName };
+            var result = validator.TestValidate(model);
+
+            result.ShouldHaveValidationErrorFor(c => c.ContactName);
+
+            //validator.ShouldHaveValidationErrorFor(x => x.ContactName, contactName);
         }
 
         [Theory]
@@ -38,7 +44,12 @@
         [InlineData(" ")]
         public void EmailMissing_ReturnsFailure(string email)
         {
-            validator.ShouldHaveValidationErrorFor(x => x.Email, email);
+            var model = new Contact { Email = email };
+            var result = validator.TestValidate(model);
+
+            result.ShouldHaveValidationErrorFor(c => c.Email);
+
+            //validator.ShouldHaveValidationErrorFor(x => x.Email, email);
         }
 
         [Theory]
@@ -46,7 +57,12 @@
         [InlineData("test@test")]
         public void EmailInvalid_ReturnsFailure(string email)
         {
-            validator.ShouldHaveValidationErrorFor(x => x.Email, email);
+            var model = new Contact { Email = email };
+            var result = validator.TestValidate(model);
+
+            result.ShouldHaveValidationErrorFor(c => c.Email);
+
+            //validator.ShouldHaveValidationErrorFor(x => x.Email, email);
         }
 
         [Theory]
@@ -55,7 +71,12 @@
         [InlineData(" ")]
         public void TelephoneMissing_ReturnsFailure(string telephone)
         {
-            validator.ShouldHaveValidationErrorFor(x => x.Telephone, telephone);
+            var model = new Contact { Telephone = telephone };
+            var result = validator.TestValidate(model);
+
+            result.ShouldHaveValidationErrorFor(c => c.Telephone);
+
+            //validator.ShouldHaveValidationErrorFor(x => x.Telephone, telephone);
         }
 
         [Theory]
@@ -64,7 +85,12 @@
         [InlineData(" ")]
         public void TelephonePrefixMissing_ReturnsFailure(string telephonePrefix)
         {
-            validator.ShouldHaveValidationErrorFor(x => x.TelephonePrefix, telephonePrefix);
+            var model = new Contact { TelephonePrefix = telephonePrefix };
+            var result = validator.TestValidate(model);
+
+            result.ShouldHaveValidationErrorFor(c => c.TelephonePrefix);
+
+            //validator.ShouldHaveValidationErrorFor(x => x.TelephonePrefix, telephonePrefix);
         }
     }
 }

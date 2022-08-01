@@ -12,13 +12,13 @@
             RuleFor(x => x.OperationCodes)
                 .Cascade(CascadeMode.StopOnFirstFailure)
                 .NotEmpty()
-                .WithLocalizedMessage(() => WasteOperationValidatorResources.OperationCodesNotEmpty)
+                .WithMessage(x => WasteOperationValidatorResources.OperationCodesNotEmpty)
                 .Must(BeOfSameType)
-                .WithLocalizedMessage(() => WasteOperationValidatorResources.OperationCodesOfSameType);
+                .WithMessage(x => WasteOperationValidatorResources.OperationCodesOfSameType);
 
             RuleFor(x => x.TechnologyEmployed)
                 .Length(0, 70)
-                .WithLocalizedMessage(() => WasteOperationValidatorResources.TechnologyEmployedMaxLength);
+                .WithMessage(x => WasteOperationValidatorResources.TechnologyEmployedMaxLength);
         }
 
         private static bool BeOfSameType(OperationCode[] operationCodes)

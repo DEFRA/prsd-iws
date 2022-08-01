@@ -37,13 +37,15 @@
             transitStateCollection.HasNoTransitStates = true;
             transitStateCollection.TransitStates.Add(new TransitState(AnyGuid));
 
-            validator.ShouldHaveValidationErrorFor(x => x.HasNoTransitStates, transitStateCollection);
+            var result = validator.TestValidate(transitStateCollection);
+            result.ShouldHaveValidationErrorFor(x => x.HasNoTransitStates);
         }
 
         [Fact]
         public void TransitStates_NoTransitStatesInList_Fails()
         {
-            validator.ShouldHaveValidationErrorFor(x => x.HasNoTransitStates, transitStateCollection);
+            var result = validator.TestValidate(transitStateCollection);
+            result.ShouldHaveValidationErrorFor(x => x.HasNoTransitStates);
         }
 
         [Fact]
@@ -54,7 +56,8 @@
                 OrdinalPosition = 7
             });
 
-            validator.ShouldHaveValidationErrorFor(x => x.TransitStates, transitStateCollection);
+            var result = validator.TestValidate(transitStateCollection);
+            result.ShouldHaveValidationErrorFor(x => x.TransitStates);
         }
 
         [Fact]
@@ -91,7 +94,8 @@
                 new TransitState(AnyGuid) { OrdinalPosition = 5 }
             });
 
-            validator.ShouldHaveValidationErrorFor(x => x.TransitStates, transitStateCollection);
+            var result = validator.TestValidate(transitStateCollection);
+            result.ShouldHaveValidationErrorFor(x => x.TransitStates);
         }
 
         [Fact]

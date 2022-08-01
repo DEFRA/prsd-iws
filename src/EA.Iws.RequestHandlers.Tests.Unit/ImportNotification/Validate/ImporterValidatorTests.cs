@@ -60,7 +60,8 @@
             var importer = GetValidImporter();
             importer.Address = null;
 
-            validator.ShouldHaveValidationErrorFor(x => x.Address, importer);
+            var result = validator.TestValidate(importer);
+            result.ShouldHaveValidationErrorFor(i => i.Address);
         }
 
         [Fact]
@@ -80,7 +81,8 @@
             var importer = GetValidImporter();
             importer.Address = new Address();
 
-            validator.ShouldHaveValidationErrorFor(x => x.Address, importer);
+            var result = validator.TestValidate(importer);
+            result.ShouldHaveValidationErrorFor(i => i.Address);
         }
 
         [Fact]
@@ -100,7 +102,8 @@
             var importer = GetValidImporter();
             importer.Contact = null;
 
-            validator.ShouldHaveValidationErrorFor(x => x.Contact, importer);
+            var result = validator.TestValidate(importer);
+            result.ShouldHaveValidationErrorFor(i => i.Contact);
         }
 
         [Fact]
@@ -120,7 +123,8 @@
             var importer = GetValidImporter();
             importer.Contact = new Contact();
 
-            validator.ShouldHaveValidationErrorFor(x => x.Contact, importer);
+            var result = validator.TestValidate(importer);
+            result.ShouldHaveValidationErrorFor(i => i.Contact);
         }
 
         [Fact]
@@ -143,7 +147,8 @@
             var importer = GetValidImporter();
             importer.BusinessName = businessName;
 
-            validator.ShouldHaveValidationErrorFor(x => x.BusinessName, importer);
+            var result = validator.TestValidate(importer);
+            result.ShouldHaveValidationErrorFor(i => i.BusinessName);
         }
 
         [Fact]
@@ -152,7 +157,8 @@
             var importer = GetValidImporter();
             importer.Type = null;
 
-            validator.ShouldHaveValidationErrorFor(x => x.Type, importer);
+            var result = validator.TestValidate(importer);
+            result.ShouldHaveValidationErrorFor(i => i.Type);
         }
 
         private Importer GetValidImporter()

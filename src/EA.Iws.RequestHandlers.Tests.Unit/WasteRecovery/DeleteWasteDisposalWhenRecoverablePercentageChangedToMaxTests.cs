@@ -32,7 +32,7 @@
 
             await handler.HandleAsync(new PercentageChangedEvent(NotificationId, new Percentage(100)));
 
-            A.CallTo(() => repository.Delete(wasteDisposal)).MustHaveHappened(Repeated.Exactly.Once);
+            A.CallTo(() => repository.Delete(wasteDisposal)).MustHaveHappenedOnceExactly();
         }
 
         [Fact]

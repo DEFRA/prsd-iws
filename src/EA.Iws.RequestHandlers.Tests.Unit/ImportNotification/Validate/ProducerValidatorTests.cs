@@ -59,7 +59,8 @@
             var producer = GetValidProducer();
             producer.Address = null;
 
-            validator.ShouldHaveValidationErrorFor(x => x.Address, producer);
+            var result = validator.TestValidate(producer);
+            result.ShouldHaveValidationErrorFor(x => x.Address);
         }
 
         [Fact]
@@ -79,7 +80,8 @@
             var producer = GetValidProducer();
             producer.Address = new Address();
 
-            validator.ShouldHaveValidationErrorFor(x => x.Address, producer);
+            var result = validator.TestValidate(producer);
+            result.ShouldHaveValidationErrorFor(x => x.Address);
         }
 
         [Fact]
@@ -99,7 +101,8 @@
             var producer = GetValidProducer();
             producer.Contact = null;
 
-            validator.ShouldHaveValidationErrorFor(x => x.Contact, producer);
+            var result = validator.TestValidate(producer);
+            result.ShouldHaveValidationErrorFor(x => x.Contact);
         }
 
         [Fact]
@@ -119,7 +122,8 @@
             var producer = GetValidProducer();
             producer.Contact = new Contact();
 
-            validator.ShouldHaveValidationErrorFor(x => x.Contact, producer);
+            var result = validator.TestValidate(producer);
+            result.ShouldHaveValidationErrorFor(x => x.Contact);
         }
 
         [Fact]
@@ -142,7 +146,8 @@
             var producer = GetValidProducer();
             producer.BusinessName = businessName;
 
-            validator.ShouldHaveValidationErrorFor(x => x.BusinessName, producer);
+            var result = validator.TestValidate(producer);
+            result.ShouldHaveValidationErrorFor(x => x.BusinessName);
         }
 
         private Producer GetValidProducer()

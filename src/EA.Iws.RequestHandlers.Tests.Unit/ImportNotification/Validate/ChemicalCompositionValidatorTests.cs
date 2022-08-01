@@ -36,8 +36,9 @@
             {
                 Composition = null
             };
-
-            validator.ShouldHaveValidationErrorFor(x => x.Composition, chemicalComposition);
+            
+            var result = validator.TestValidate(chemicalComposition);
+            result.ShouldHaveValidationErrorFor(x => x.Composition);
         }
 
         [Fact]
@@ -48,7 +49,8 @@
                 Composition = default(Core.WasteType.ChemicalComposition)
             };
 
-            validator.ShouldHaveValidationErrorFor(x => x.Composition, chemicalComposition);
+            var result = validator.TestValidate(chemicalComposition);
+            result.ShouldHaveValidationErrorFor(x => x.Composition);
         }
     }
 }

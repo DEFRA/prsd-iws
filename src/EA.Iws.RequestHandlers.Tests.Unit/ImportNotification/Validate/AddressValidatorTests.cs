@@ -2,6 +2,7 @@
 {
     using System;
     using Domain;
+    using EA.Iws.Core.ImportNotification.Draft;
     using FakeItEasy;
     using FluentValidation.TestHelper;
     using RequestHandlers.ImportNotification.Validate;
@@ -36,7 +37,10 @@
         [InlineData(" ")]
         public void AddressLine1Missing_ReturnsFailureResult(string address1)
         {
-            validator.ShouldHaveValidationErrorFor(x => x.AddressLine1, address1);
+            var model = new Address { AddressLine1 = address1 };
+            var result = validator.TestValidate(model);
+
+            result.ShouldHaveValidationErrorFor(address => address.AddressLine1);
         }
 
         [Theory]
@@ -45,7 +49,12 @@
         [InlineData(" ")]
         public void AddressLine2Missing_ReturnsSuccessResult(string address2)
         {
-            validator.ShouldNotHaveValidationErrorFor(x => x.AddressLine2, address2);
+            var model = new Address { AddressLine2 = address2 };
+            var result = validator.TestValidate(model);
+
+            result.ShouldHaveValidationErrorFor(address => address.AddressLine2);
+
+            //validator.ShouldNotHaveValidationErrorFor(x => x.AddressLine2, address2);
         }
 
         [Theory]
@@ -54,7 +63,12 @@
         [InlineData(" ")]
         public void TownOrCityMissing_ReturnsFailureResult(string townOrCity)
         {
-            validator.ShouldHaveValidationErrorFor(x => x.TownOrCity, townOrCity);
+            var model = new Address { TownOrCity = townOrCity };
+            var result = validator.TestValidate(model);
+
+            result.ShouldHaveValidationErrorFor(address => address.TownOrCity);
+
+            //validator.ShouldHaveValidationErrorFor(x => x.TownOrCity, townOrCity);
         }
 
         [Theory]
@@ -67,7 +81,11 @@
             invalidAddress.CountryId = unitedKingdomCountryId;
             invalidAddress.PostalCode = postcode;
 
-            validator.ShouldHaveValidationErrorFor(x => x.PostalCode, invalidAddress);
+            var model = new Address { PostalCode = postcode };
+            var result = validator.TestValidate(model);
+
+            result.ShouldHaveValidationErrorFor(address => address.PostalCode);
+            //validator.ShouldHaveValidationErrorFor(x => x.PostalCode, invalidAddress);
         }
 
         [Theory]
@@ -76,13 +94,23 @@
         [InlineData(" ")]
         public void PostalCodeMissing_CountryNotUK_ReturnsSuccessResult(string postcode)
         {
-            validator.ShouldNotHaveValidationErrorFor(x => x.PostalCode, postcode);
+            var model = new Address { PostalCode = postcode };
+            var result = validator.TestValidate(model);
+
+            result.ShouldHaveValidationErrorFor(address => address.PostalCode);
+
+            //validator.ShouldNotHaveValidationErrorFor(x => x.PostalCode, postcode);
         }
 
         [Fact]
         public void CountryMissing_ReturnsFailureResult()
         {
-            validator.ShouldHaveValidationErrorFor(x => x.CountryId, null as Guid?);
+            var model = new Address { CountryId = null as Guid? };
+            var result = validator.TestValidate(model);
+
+            result.ShouldHaveValidationErrorFor(address => address.CountryId);
+
+            //validator.ShouldHaveValidationErrorFor(x => x.CountryId, null as Guid?);
         }
     }
 }

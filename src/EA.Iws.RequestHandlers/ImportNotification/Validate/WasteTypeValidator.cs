@@ -12,27 +12,27 @@
         {
             RuleFor(x => x.Name)
                 .NotEmpty()
-                .WithLocalizedMessage(() => WasteTypeValidatorResources.WasteTypeNameNotEmpty);
+                .WithMessage(x => WasteTypeValidatorResources.WasteTypeNameNotEmpty);
 
             RuleFor(x => x.SelectedBaselCode)
                 .Must(HaveBaselCodeOrNotListed)
-                .WithLocalizedMessage(() => WasteTypeValidatorResources.BaselCodeSelectedOrNotListed);
+                .WithMessage(x => WasteTypeValidatorResources.BaselCodeSelectedOrNotListed);
 
             RuleFor(x => x.SelectedEwcCodes)
                 .NotEmpty()
-                .WithLocalizedMessage(() => WasteTypeValidatorResources.EwcCodeNotEmpty);
+                .WithMessage(x => WasteTypeValidatorResources.EwcCodeNotEmpty);
 
             RuleFor(x => x.SelectedHCodes)
                 .Must(HaveHCodesOrNotApplicable)
-                .WithLocalizedMessage(() => WasteTypeValidatorResources.HCodeSelectedOrNotApplicable);
+                .WithMessage(x => WasteTypeValidatorResources.HCodeSelectedOrNotApplicable);
 
             RuleFor(x => x.SelectedUnClasses)
                 .Must(HaveUnClassesOrNotApplicable)
-                .WithLocalizedMessage(() => WasteTypeValidatorResources.UnClassSelectedOrNotApplicable);
+                .WithMessage(x => WasteTypeValidatorResources.UnClassSelectedOrNotApplicable);
 
             RuleFor(x => x.SelectedYCodes)
                 .Must(HaveYCodesOrNotApplicable)
-                .WithLocalizedMessage(() => WasteTypeValidatorResources.YCodeSelectedOrNotApplicable);
+                .WithMessage(x => WasteTypeValidatorResources.YCodeSelectedOrNotApplicable);
         }
 
         private bool HaveYCodesOrNotApplicable(WasteType instance, List<Guid> selectedYCodes)

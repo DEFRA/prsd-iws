@@ -6,7 +6,7 @@ namespace EA.Iws.Database
     using System.IO;
     using System.Reflection;
 
-    internal class Program
+    public class Program
     {
         private static readonly string DatabaseName = GetDatabaseName();
         private static readonly string DbServer = GetDatabaseServer();
@@ -14,7 +14,7 @@ namespace EA.Iws.Database
         private static void Main()
         {
             Console.Title = "AliaSQL Database Migrations Visual Studio Runner";
-
+            
             var currentDirectory = new DirectoryInfo(Environment.CurrentDirectory);
             var parentDirectory = currentDirectory.Parent.Parent.FullName;
             var scriptspath = parentDirectory + "\\Scripts\\";
@@ -27,8 +27,7 @@ namespace EA.Iws.Database
                 if (!string.IsNullOrEmpty(keySelection))
                 {
                     Console.WriteLine();
-                    var cmdArguments = string.Format("{0} {1} {2} \"{3}", keySelection, DbServer, DatabaseName,
-                        scriptspath);
+                    var cmdArguments = string.Format("{0} {1} {2} \"{3}", keySelection, DbServer, DatabaseName, scriptspath);
                     p.StartInfo.FileName = deployerpath;
                     p.StartInfo.Arguments = cmdArguments;
                     p.StartInfo.UseShellExecute = false;
@@ -64,7 +63,7 @@ namespace EA.Iws.Database
         }
 
         /// <summary>
-        ///     returns project name and removes the word ".database."
+        /// returns project name and removes the word ".database."
         /// </summary>
         /// <returns></returns>
         private static string GetDatabaseName()

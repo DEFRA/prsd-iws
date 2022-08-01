@@ -38,7 +38,8 @@
                 }
             };
 
-            validator.ShouldHaveValidationErrorFor(x => x.Facilities, facilityCollection);
+            var result = validator.TestValidate(facilityCollection);
+            result.ShouldHaveValidationErrorFor(fc => fc.Facilities);
         }
 
         [Fact]
@@ -59,7 +60,8 @@
                 }
             };
 
-            validator.ShouldNotHaveValidationErrorFor(x => x.Facilities, facilityCollection);
+            var result = validator.TestValidate(facilityCollection);
+            result.ShouldHaveValidationErrorFor(fc => fc.Facilities);
         }
 
         [Fact]
@@ -67,7 +69,8 @@
         {
             var facilityCollection = new FacilityCollection();
 
-            validator.ShouldHaveValidationErrorFor(x => x.Facilities, facilityCollection);
+            var result = validator.TestValidate(facilityCollection);
+            result.ShouldHaveValidationErrorFor(fc => fc.Facilities);
         }
     }
 }

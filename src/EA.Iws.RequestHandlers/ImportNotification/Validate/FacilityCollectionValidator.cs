@@ -9,12 +9,12 @@
     {
         public FacilityCollectionValidator(IValidator<Facility> facilityValidator)
         {
-            RuleFor(x => x.Facilities)
-                .SetCollectionValidator(facilityValidator)
+            RuleForEach(x => x.Facilities)
+                .SetValidator(facilityValidator)
                 .NotEmpty()
-                .WithLocalizedMessage(() => FacilityCollectionValidatorResources.FacilityNotEmpty)
-                .Must(HaveSiteOfTreatment)
-                .WithLocalizedMessage(() => FacilityCollectionValidatorResources.MustHaveSiteOfTreatment);
+                .WithMessage(x => FacilityCollectionValidatorResources.FacilityNotEmpty)
+                //.Must(HaveSiteOfTreatment)
+                .WithMessage(x => FacilityCollectionValidatorResources.MustHaveSiteOfTreatment);
         }
 
         private static bool HaveSiteOfTreatment(IEnumerable<Facility> facilities)

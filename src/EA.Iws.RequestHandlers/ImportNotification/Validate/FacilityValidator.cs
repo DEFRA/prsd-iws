@@ -12,9 +12,9 @@
             RuleFor(x => x.Address)
                 .Cascade(CascadeMode.StopOnFirstFailure)
                 .NotNull()
-                .WithLocalizedMessage(() => FacilityValidatorResources.AddressNotEmpty)
+                .WithMessage(x => FacilityValidatorResources.AddressNotEmpty)
                 .Must(BeNonEmptyAddress)
-                .WithLocalizedMessage(() => FacilityValidatorResources.AddressNotEmpty);
+                .WithMessage(x => FacilityValidatorResources.AddressNotEmpty);
 
             RuleFor(x => x.Address)
                 .SetValidator(addressValidator)
@@ -23,9 +23,9 @@
             RuleFor(x => x.Contact)
                 .Cascade(CascadeMode.StopOnFirstFailure)
                 .NotNull()
-                .WithLocalizedMessage(() => FacilityValidatorResources.ContactNotEmpty)
+                .WithMessage(x => FacilityValidatorResources.ContactNotEmpty)
                 .Must(BeNonEmptyContact)
-                .WithLocalizedMessage(() => FacilityValidatorResources.ContactNotEmpty);
+                .WithMessage(x => FacilityValidatorResources.ContactNotEmpty);
 
             RuleFor(x => x.Contact)
                 .SetValidator(contactValidator)
@@ -33,11 +33,11 @@
 
             RuleFor(x => x.BusinessName)
                 .NotEmpty()
-                .WithLocalizedMessage(() => FacilityValidatorResources.BusinessNameNotEmpty);
+                .WithMessage(x => FacilityValidatorResources.BusinessNameNotEmpty);
 
             RuleFor(x => x.Type)
                 .NotNull()
-                .WithLocalizedMessage(() => FacilityValidatorResources.BusinessTypeNotEmpty);
+                .WithMessage(x => FacilityValidatorResources.BusinessTypeNotEmpty);
         }
 
         private bool FacilityHasNonEmptyContact(Facility facility)

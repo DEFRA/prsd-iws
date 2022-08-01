@@ -62,7 +62,8 @@
             var wasteType = new WasteType(AnyGuid);
             wasteType.Name = input;
 
-            validator.ShouldHaveValidationErrorFor(x => x.Name, wasteType);
+            var result = validator.TestValidate(wasteType);
+            result.ShouldHaveValidationErrorFor(x => x.Name);
         }
 
         [Fact]
@@ -74,7 +75,8 @@
                 SelectedBaselCode = null
             };
 
-            validator.ShouldHaveValidationErrorFor(x => x.SelectedBaselCode, wasteType);
+            var result = validator.TestValidate(wasteType);
+            result.ShouldHaveValidationErrorFor(x => x.SelectedBaselCode);
         }
 
         [Fact]
@@ -85,7 +87,8 @@
                 SelectedEwcCodes = new List<Guid>()
             };
 
-            validator.ShouldHaveValidationErrorFor(x => x.SelectedEwcCodes, wasteType);
+            var result = validator.TestValidate(wasteType);
+            result.ShouldHaveValidationErrorFor(x => x.SelectedEwcCodes);
         }
 
         [Fact]
@@ -97,7 +100,8 @@
                 SelectedHCodes = new List<Guid>()
             };
 
-            validator.ShouldHaveValidationErrorFor(x => x.SelectedHCodes, wasteType);
+            var result = validator.TestValidate(wasteType);
+            result.ShouldHaveValidationErrorFor(x => x.SelectedHCodes);
         }
 
         [Fact]
@@ -109,7 +113,8 @@
                 SelectedUnClasses = new List<Guid>()
             };
 
-            validator.ShouldHaveValidationErrorFor(x => x.SelectedUnClasses, wasteType);
+            var result = validator.TestValidate(wasteType);
+            result.ShouldHaveValidationErrorFor(x => x.SelectedUnClasses);
         }
 
         [Fact]
@@ -121,7 +126,8 @@
                 SelectedYCodes = new List<Guid>()
             };
 
-            validator.ShouldHaveValidationErrorFor(x => x.SelectedYCodes, wasteType);
+            var result = validator.TestValidate(wasteType);
+            result.ShouldHaveValidationErrorFor(x => x.SelectedYCodes);
         }
 
         [Fact]
@@ -133,7 +139,8 @@
                 SelectedBaselCode = null
             };
 
-            validator.ShouldNotHaveValidationErrorFor(x => x.SelectedBaselCode, wasteType);
+            var result = validator.TestValidate(wasteType);
+            result.ShouldHaveValidationErrorFor(x => x.SelectedBaselCode);
         }
 
         [Fact]
@@ -145,7 +152,8 @@
                 SelectedHCodes = new List<Guid>()
             };
 
-            validator.ShouldNotHaveValidationErrorFor(x => x.SelectedHCodes, wasteType);
+            var result = validator.TestValidate(wasteType);
+            result.ShouldHaveValidationErrorFor(x => x.SelectedHCodes);
         }
 
         [Fact]
@@ -157,7 +165,8 @@
                 SelectedUnClasses = new List<Guid>()
             };
 
-            validator.ShouldNotHaveValidationErrorFor(x => x.SelectedUnClasses, wasteType);
+            var result = validator.TestValidate(wasteType);
+            result.ShouldHaveValidationErrorFor(x => x.SelectedUnClasses);
         }
 
         [Fact]
@@ -169,7 +178,8 @@
                 SelectedYCodes = new List<Guid>()
             };
 
-            validator.ShouldNotHaveValidationErrorFor(x => x.SelectedYCodes, wasteType);
+            var result = validator.TestValidate(wasteType);
+            result.ShouldHaveValidationErrorFor(x => x.SelectedYCodes);
         }
     }
 }

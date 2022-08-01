@@ -53,7 +53,8 @@
         {
             stateOfExport.CompetentAuthorityId = TestableCompetentAuthority.EnvironmentAgency.Id;
 
-            validator.ShouldHaveValidationErrorFor(x => x.CompetentAuthorityId, stateOfExport);
+            var result = validator.TestValidate(stateOfExport);
+            result.ShouldHaveValidationErrorFor(x => x.CompetentAuthorityId);
         }
 
         [Fact]
@@ -61,7 +62,8 @@
         {
             stateOfExport.ExitPointId = TestableEntryOrExitPoint.Dover.Id;
 
-            validator.ShouldHaveValidationErrorFor(x => x.ExitPointId, stateOfExport);
+            var result = validator.TestValidate(stateOfExport);
+            result.ShouldHaveValidationErrorFor(x => x.ExitPointId);
         }
 
         [Fact]
@@ -69,7 +71,8 @@
         {
             stateOfExport.CompetentAuthorityId = null;
 
-            validator.ShouldHaveValidationErrorFor(x => x.CompetentAuthorityId, stateOfExport);
+            var result = validator.TestValidate(stateOfExport);
+            result.ShouldHaveValidationErrorFor(x => x.CompetentAuthorityId);
         }
 
         [Fact]
@@ -77,7 +80,8 @@
         {
             stateOfExport.CountryId = null;
 
-            validator.ShouldHaveValidationErrorFor(x => x.CountryId, stateOfExport);
+            var result = validator.TestValidate(stateOfExport);
+            result.ShouldHaveValidationErrorFor(x => x.CountryId);
         }
 
         [Fact]
@@ -85,7 +89,8 @@
         {
             stateOfExport.ExitPointId = null;
 
-            validator.ShouldHaveValidationErrorFor(x => x.ExitPointId, stateOfExport);
+            var result = validator.TestValidate(stateOfExport);
+            result.ShouldHaveValidationErrorFor(x => x.ExitPointId);
         }
     }
 }

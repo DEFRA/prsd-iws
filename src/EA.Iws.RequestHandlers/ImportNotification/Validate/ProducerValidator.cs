@@ -11,9 +11,9 @@
             RuleFor(x => x.Address)
                 .Cascade(CascadeMode.StopOnFirstFailure)
                 .NotNull()
-                .WithLocalizedMessage(() => ProducerValidatorResources.AddressNotEmpty)
+                .WithMessage(x => ProducerValidatorResources.AddressNotEmpty)
                 .Must(BeNonEmptyAddress)
-                .WithLocalizedMessage(() => ProducerValidatorResources.AddressNotEmpty);
+                .WithMessage(x => ProducerValidatorResources.AddressNotEmpty);
 
             RuleFor(x => x.Address)
                 .SetValidator(addressValidator)
@@ -22,9 +22,9 @@
             RuleFor(x => x.Contact)
                 .Cascade(CascadeMode.StopOnFirstFailure)
                 .NotNull()
-                .WithLocalizedMessage(() => ProducerValidatorResources.ContactNotEmpty)
+                .WithMessage(x => ProducerValidatorResources.ContactNotEmpty)
                 .Must(BeNonEmptyContact)
-                .WithLocalizedMessage(() => ProducerValidatorResources.ContactNotEmpty);
+                .WithMessage(x => ProducerValidatorResources.ContactNotEmpty);
 
             RuleFor(x => x.Contact)
                 .SetValidator(contactValidator)
@@ -32,7 +32,7 @@
 
             RuleFor(x => x.BusinessName)
                 .NotEmpty()
-                .WithLocalizedMessage(() => ProducerValidatorResources.BusinessNameNotEmpty);
+                .WithMessage(x => ProducerValidatorResources.BusinessNameNotEmpty);
         }
 
         private bool ProducerContactIsNotEmpty(Producer producer)

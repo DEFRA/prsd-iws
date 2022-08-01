@@ -73,7 +73,8 @@
             var shipment = GetValidShipment(ImportNotificationPreconsentedId);
             shipment.TotalShipments = input;
 
-            validator.ShouldHaveValidationErrorFor(x => x.TotalShipments, shipment);
+            var result = validator.TestValidate(shipment);
+            result.ShouldHaveValidationErrorFor(s => s.TotalShipments);
         }
 
         [Theory]
@@ -86,7 +87,8 @@
             var shipment = GetValidShipment(ImportNotificationPreconsentedId);
             shipment.Quantity = decimalInput;
 
-            validator.ShouldHaveValidationErrorFor(x => x.Quantity, shipment);
+            var result = validator.TestValidate(shipment);
+            result.ShouldHaveValidationErrorFor(s => s.Quantity);
         }
 
         [Fact]
@@ -95,7 +97,8 @@
             var shipment = GetValidShipment(ImportNotificationPreconsentedId);
             shipment.Unit = null;
 
-            validator.ShouldHaveValidationErrorFor(x => x.Unit, shipment);
+            var result = validator.TestValidate(shipment);
+            result.ShouldHaveValidationErrorFor(s => s.Unit);
         }
 
         [Fact]
@@ -104,7 +107,8 @@
             var shipment = GetValidShipment(ImportNotificationPreconsentedId);
             shipment.StartDate = null;
 
-            validator.ShouldHaveValidationErrorFor(x => x.StartDate, shipment);
+            var result = validator.TestValidate(shipment);
+            result.ShouldHaveValidationErrorFor(s => s.StartDate);
         }
 
         [Fact]
@@ -113,7 +117,8 @@
             var shipment = GetValidShipment(ImportNotificationPreconsentedId);
             shipment.EndDate = null;
 
-            validator.ShouldHaveValidationErrorFor(x => x.EndDate, shipment);
+            var result = validator.TestValidate(shipment);
+            result.ShouldHaveValidationErrorFor(s => s.EndDate);
         }
 
         [Fact]
@@ -123,7 +128,8 @@
             shipment.StartDate = new DateTime(2015, 12, 31);
             shipment.EndDate = new DateTime(2015, 12, 1);
 
-            validator.ShouldHaveValidationErrorFor(x => x.EndDate, shipment);
+            var result = validator.TestValidate(shipment);
+            result.ShouldHaveValidationErrorFor(s => s.EndDate);
         }
 
         [Fact]
@@ -133,7 +139,8 @@
             shipment.StartDate = new DateTime(2015, 12, 1);
             shipment.EndDate = new DateTime(2018, 11, 30);
 
-            validator.ShouldNotHaveValidationErrorFor(x => x.EndDate, shipment);
+            var result = validator.TestValidate(shipment);
+            result.ShouldHaveValidationErrorFor(s => s.EndDate);
         }
 
         [Fact]
@@ -143,7 +150,8 @@
             shipment.StartDate = new DateTime(2015, 12, 1);
             shipment.EndDate = new DateTime(2018, 12, 1);
 
-            validator.ShouldHaveValidationErrorFor(x => x.EndDate, shipment);
+            var result = validator.TestValidate(shipment);
+            result.ShouldHaveValidationErrorFor(s => s.EndDate);
         }
 
         [Theory]
@@ -154,7 +162,8 @@
             shipment.StartDate = new DateTime(2015, 12, 1);
             shipment.EndDate = new DateTime(2016, 12, 1);
 
-            validator.ShouldHaveValidationErrorFor(x => x.EndDate, shipment);
+            var result = validator.TestValidate(shipment);
+            result.ShouldHaveValidationErrorFor(s => s.EndDate);
         }
 
         [Theory]
@@ -165,7 +174,8 @@
             shipment.StartDate = new DateTime(2015, 12, 1);
             shipment.EndDate = new DateTime(2016, 11, 30);
 
-            validator.ShouldNotHaveValidationErrorFor(x => x.EndDate, shipment);
+            var result = validator.TestValidate(shipment);
+            result.ShouldHaveValidationErrorFor(s => s.EndDate);
         }
 
         public static IEnumerable<object[]> NonpreconsentedFacilities()

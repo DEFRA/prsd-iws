@@ -9,21 +9,21 @@
         {
             RuleFor(x => x.ContactName)
                 .NotEmpty()
-                .WithLocalizedMessage(() => ContactValidatorResources.ContactNameNotEmpty);
+                .WithMessage(x => ContactValidatorResources.ContactNameNotEmpty);
 
             RuleFor(x => x.Email)
                 .NotEmpty()
-                .WithLocalizedMessage(() => ContactValidatorResources.EmailNotEmpty)
+                .WithMessage(x => ContactValidatorResources.EmailNotEmpty)
                 .EmailAddress()
-                .WithLocalizedMessage(() => ContactValidatorResources.EmailNotValid);
+                .WithMessage(x => ContactValidatorResources.EmailNotValid);
 
             RuleFor(x => x.Telephone)
                 .NotEmpty()
-                .WithLocalizedMessage(() => ContactValidatorResources.TelephoneNotEmpty);
+                .WithMessage(x => ContactValidatorResources.TelephoneNotEmpty);
 
             RuleFor(x => x.TelephonePrefix)
                 .NotEmpty()
-                .WithLocalizedMessage(() => ContactValidatorResources.TelephonePrefixNotEmpty);
+                .WithMessage(x => ContactValidatorResources.TelephonePrefixNotEmpty);
         }
     }
 }

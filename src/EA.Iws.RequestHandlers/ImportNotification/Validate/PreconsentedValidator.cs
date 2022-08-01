@@ -17,7 +17,7 @@
 
             RuleFor(x => x.AllFacilitiesPreconsented)
                 .MustAsync(BeEnteredForRecoveryNotification)
-                .WithLocalizedMessage(() => PreconsentedValidatorResources.PreconsentMustBeEntered);
+                .WithMessage(x => PreconsentedValidatorResources.PreconsentMustBeEntered);
         }
 
         private async Task<bool> BeEnteredForRecoveryNotification(Preconsented instance, bool? preconsentedFacilityExists, CancellationToken cancellationToken)

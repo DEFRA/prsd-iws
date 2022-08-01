@@ -16,19 +16,19 @@
 
             RuleFor(x => x.AddressLine1)
                 .NotEmpty()
-                .WithLocalizedMessage(() => AddressValidatorResources.AddressLine1NotEmpty);
+                .WithMessage(AddressValidatorResources.AddressLine1NotEmpty);
 
             RuleFor(x => x.TownOrCity)
                 .NotEmpty()
-                .WithLocalizedMessage(() => AddressValidatorResources.TownAndCityNotEmpty);
+                .WithMessage(AddressValidatorResources.TownAndCityNotEmpty);
 
             RuleFor(x => x.CountryId)
                 .NotEmpty()
-                .WithLocalizedMessage(() => AddressValidatorResources.CountryNotEmpty);
+                .WithMessage(AddressValidatorResources.CountryNotEmpty);
 
             RuleFor(x => x.PostalCode)
                 .MustAsync(BeNotEmptyWhenCountryIsUk)
-                .WithLocalizedMessage(() => AddressValidatorResources.PostcodeNotEmpty);
+                .WithMessage(AddressValidatorResources.PostcodeNotEmpty);
         }
 
         private async Task<bool> BeNotEmptyWhenCountryIsUk(Address address, string postCode, CancellationToken cancellationToken)
