@@ -21,13 +21,21 @@ AS
         C.[From] AS [ConsentFrom],
         C.[To] AS [ConsentTo],
         M.PrenotificationDate,
-        MR.Date AS ReceivedDate,
+        CASE
+			WHEN MR.Date IS NULL THEN MPR.WasteReceivedDate ELSE MR.Date 
+		END AS [ReceivedDate],
         MOR.Date AS CompletedDate,
 		MREJECT.Date AS RejectedShipmentDate,
         MREJECT.Reason AS [RejectedReason],
-        MR.Quantity AS QuantityReceived,
-        MR_U.Description AS [QuantityReceivedUnit],
-        MR_U.Id AS [QuantityReceivedUnitId],
+        CASE
+			WHEN MR.Quantity IS NULL THEN MPR.ActualQuantity ELSE MR.Quantity 
+		END AS [QuantityReceived],
+        CASE
+			WHEN MR_U.Description IS NULL THEN MPR_U.Description ELSE MR_U.Description  
+		END AS [QuantityReceivedUnit],
+        CASE
+			WHEN MR_U.Id IS NULL THEN MPR_U.Id ELSE MR_U.Id  
+		END AS [QuantityReceivedUnitId],
         WT.[ChemicalCompositionType] AS [ChemicalCompositionTypeId],
         CASE
             WHEN WT.ChemicalCompositionType = 4 THEN CCT.Description + ' - ' + WT.ChemicalCompositionName
@@ -122,11 +130,17 @@ AS
     LEFT JOIN	[Notification].[MovementOperationReceipt] AS MOR
     ON			[M].[Id] = [MOR].[MovementId]
 
+    LEFT JOIN	[Notification].[MovementPartialRejection] AS MPR
+    ON			[M].[Id] = [MPR].[MovementId]
+
 	LEFT JOIN	[Notification].[MovementRejection] AS MREJECT
 	ON			[M].[Id] = [MREJECT].[MovementId]
 
     LEFT JOIN	[Lookup].[ShipmentQuantityUnit] AS MR_U 
     ON			[MR].[Unit] = [MR_U].[Id]
+
+    LEFT JOIN	[Lookup].[ShipmentQuantityUnit] AS MPR_U 
+    ON			[MPR].[ActualUnit] = [MPR_U].[Id]
 
     LEFT JOIN	[Notification].[Consent] AS C
     ON			M.NotificationId = [C].[NotificationApplicationId]
