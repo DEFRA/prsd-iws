@@ -53,7 +53,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EA.Iws.DocumentGeneration.T
 EndProject
 Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "EA.Iws.Maintenance.Web", "EA.Iws.Maintenance.Web\", "{408623CA-1C1C-4D2C-BF47-54FEBFEB5F13}"
 	ProjectSection(WebsiteProperties) = preProject
-		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.6.1"
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.8"
 		Debug.AspNetCompiler.VirtualPath = "/EA.Iws.Maintenance.Web"
 		Debug.AspNetCompiler.PhysicalPath = "EA.Iws.Maintenance.Web\"
 		Debug.AspNetCompiler.TargetPath = "..\build\_PublishedWebsites\EA.Iws.Maintenance.Web\"
