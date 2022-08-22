@@ -31,48 +31,48 @@
         }
 
         [Fact]
-        public void RecoveryNotification_PreconsentedFacilityExistsIsNull_HasValidationError()
+        public async void RecoveryNotification_PreconsentedFacilityExistsIsNull_HasValidationError()
         {
             var preconsented = new Preconsented(importRecoveryNotificationId);
 
-            var result = validator.TestValidate(preconsented);
+            var result = await validator.TestValidateAsync(preconsented);
             result.ShouldHaveValidationErrorFor(x => x.AllFacilitiesPreconsented);
         }
 
         [Theory]
         [InlineData(true)]
         [InlineData(false)]
-        public void RecoveryNotification_PreconsentedFacilityExistsIsNotNull_HasNoValidationError(bool input)
+        public async void RecoveryNotification_PreconsentedFacilityExistsIsNotNull_HasNoValidationError(bool input)
         {
             var preconsented = new Preconsented(importRecoveryNotificationId)
             {
                 AllFacilitiesPreconsented = input
             };
 
-            var result = validator.TestValidate(preconsented);
-            result.ShouldHaveValidationErrorFor(x => x.AllFacilitiesPreconsented);
+            var result = await validator.TestValidateAsync(preconsented);
+            result.ShouldNotHaveValidationErrorFor(x => x.AllFacilitiesPreconsented);
         }
 
         [Fact]
-        public void DisposalNotification_PreconsentedFacilityExistsIsNotNull_HasNoValidationError()
+        public async void DisposalNotification_PreconsentedFacilityExistsIsNotNull_HasNoValidationError()
         {
             var preconsented = new Preconsented(importDisposalNotificationId);
 
-            var result = validator.TestValidate(preconsented);
-            result.ShouldHaveValidationErrorFor(x => x.AllFacilitiesPreconsented);
+            var result = await validator.TestValidateAsync(preconsented);
+            result.ShouldNotHaveValidationErrorFor(x => x.AllFacilitiesPreconsented);
         }
 
         [Theory]
         [InlineData(true)]
         [InlineData(false)]
-        public void DisposalNotification_PreconsentedFacilityExistsIsNotNull_HasValidationError(bool input)
+        public async void DisposalNotification_PreconsentedFacilityExistsIsNotNull_HasValidationError(bool input)
         {
             var preconsented = new Preconsented(importDisposalNotificationId)
             {
                 AllFacilitiesPreconsented = input
             };
 
-            var result = validator.TestValidate(preconsented);
+            var result = await validator.TestValidateAsync(preconsented);
             result.ShouldHaveValidationErrorFor(x => x.AllFacilitiesPreconsented);
         }
         

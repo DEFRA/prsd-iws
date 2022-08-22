@@ -23,11 +23,11 @@
         }
 
         [Fact]
-        public void ValidFacility_ReturnsSuccess()
+        public async void ValidFacility_ReturnsSuccess()
         {
             var facility = GetValidFacility();
 
-            var result = validator.Validate(facility);
+            var result = await validator.ValidateAsync(facility);
 
             Assert.True(result.IsValid);
         }
@@ -97,12 +97,12 @@
         }
 
         [Fact]
-        public void FacilityContactMissing_ReturnsFailure()
+        public async void FacilityContactMissing_ReturnsFailure()
         {
             var facility = GetValidFacility();
             facility.Contact = null;
 
-            var result = validator.TestValidate(facility);
+            var result = await validator.TestValidateAsync(facility);
             result.ShouldHaveValidationErrorFor(f => f.Contact);
         }
 
@@ -118,12 +118,12 @@
         }
 
         [Fact]
-        public void FacilityContactEmpty_ReturnsFailure()
+        public async void FacilityContactEmpty_ReturnsFailure()
         {
             var facility = GetValidFacility();
             facility.Contact = new Contact();
 
-            var result = validator.TestValidate(facility);
+            var result = await validator.TestValidateAsync(facility);
             result.ShouldHaveValidationErrorFor(f => f.Contact);
         }
 
@@ -142,22 +142,22 @@
         [InlineData(null)]
         [InlineData("")]
         [InlineData(" ")]
-        public void BusinessNameMissing_ReturnsFailure(string businessName)
+        public async void BusinessNameMissing_ReturnsFailure(string businessName)
         {
             var facility = GetValidFacility();
             facility.BusinessName = businessName;
 
-            var result = validator.TestValidate(facility);
+            var result = await validator.TestValidateAsync(facility);
             result.ShouldHaveValidationErrorFor(f => f.BusinessName);
         }
 
         [Fact]
-        public void BusinessTypeMissing_ReturnsFailure()
+        public async void BusinessTypeMissing_ReturnsFailure()
         {
             var facility = GetValidFacility();
             facility.Type = null;
 
-            var result = validator.TestValidate(facility);
+            var result = await validator.TestValidateAsync(facility);
             result.ShouldHaveValidationErrorFor(f => f.Type);
         }
 

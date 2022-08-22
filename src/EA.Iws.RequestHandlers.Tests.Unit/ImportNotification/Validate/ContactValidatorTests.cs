@@ -15,11 +15,11 @@
         }
 
         [Fact]
-        public void ValidContact_ReturnsSuccess()
+        public async void ValidContact_ReturnsSuccess()
         {
             var contact = ContactTestData.GetValidTestContact();
 
-            var result = validator.Validate(contact);
+            var result = await validator.ValidateAsync(contact);
 
             Assert.True(result.IsValid);
         }
@@ -28,69 +28,63 @@
         [InlineData(null)]
         [InlineData("")]
         [InlineData(" ")]
-        public void ContactNameMissing_ReturnsFailure(string contactName)
+        public async void ContactNameMissing_ReturnsFailure(string contactName)
         {
-            var model = new Contact { ContactName = contactName };
-            var result = validator.TestValidate(model);
+            var contact = ContactTestData.GetValidTestContact();
+            contact.ContactName = contactName;
+
+            var result = await validator.TestValidateAsync(contact);
 
             result.ShouldHaveValidationErrorFor(c => c.ContactName);
-
-            //validator.ShouldHaveValidationErrorFor(x => x.ContactName, contactName);
         }
 
         [Theory]
         [InlineData(null)]
         [InlineData("")]
         [InlineData(" ")]
-        public void EmailMissing_ReturnsFailure(string email)
+        public async void EmailMissing_ReturnsFailure(string email)
         {
             var model = new Contact { Email = email };
-            var result = validator.TestValidate(model);
+            var result = await validator.TestValidateAsync(model);
 
             result.ShouldHaveValidationErrorFor(c => c.Email);
-
-            //validator.ShouldHaveValidationErrorFor(x => x.Email, email);
         }
 
         [Theory]
         [InlineData("test")]
-        [InlineData("test@test")]
-        public void EmailInvalid_ReturnsFailure(string email)
+        [InlineData("@test.com")]
+        public async void EmailInvalid_ReturnsFailure(string email)
         {
-            var model = new Contact { Email = email };
-            var result = validator.TestValidate(model);
+            var contact = ContactTestData.GetValidTestContact();
+            contact.Email = email;
+
+            var result = await validator.TestValidateAsync(contact);
 
             result.ShouldHaveValidationErrorFor(c => c.Email);
-
-            //validator.ShouldHaveValidationErrorFor(x => x.Email, email);
         }
 
         [Theory]
         [InlineData(null)]
         [InlineData("")]
         [InlineData(" ")]
-        public void TelephoneMissing_ReturnsFailure(string telephone)
+        public async void TelephoneMissing_ReturnsFailure(string telephone)
         {
             var model = new Contact { Telephone = telephone };
-            var result = validator.TestValidate(model);
+            var result = await validator.TestValidateAsync(model);
 
             result.ShouldHaveValidationErrorFor(c => c.Telephone);
-
-            //validator.ShouldHaveValidationErrorFor(x => x.Telephone, telephone);
         }
 
         [Theory]
         [InlineData(null)]
         [InlineData("")]
         [InlineData(" ")]
-        public void TelephonePrefixMissing_ReturnsFailure(string telephonePrefix)
+        public async void TelephonePrefixMissing_ReturnsFailure(string telephonePrefix)
         {
             var model = new Contact { TelephonePrefix = telephonePrefix };
-            var result = validator.TestValidate(model);
+            var result = await validator.TestValidateAsync(model);
 
             result.ShouldHaveValidationErrorFor(c => c.TelephonePrefix);
-
-            //validator.ShouldHaveValidationErrorFor(x => x.TelephonePrefix, telephonePrefix);
         }
     }
 }

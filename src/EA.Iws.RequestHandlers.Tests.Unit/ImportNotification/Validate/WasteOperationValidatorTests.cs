@@ -57,7 +57,7 @@
             wasteOperation.TechnologyEmployed = input;
 
             var result = validator.TestValidate(wasteOperation);
-            result.ShouldHaveValidationErrorFor(x => x.TechnologyEmployed);
+            result.ShouldNotHaveValidationErrorFor(x => x.TechnologyEmployed);
         }
 
         [Fact]

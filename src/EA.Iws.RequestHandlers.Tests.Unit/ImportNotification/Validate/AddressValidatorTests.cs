@@ -22,11 +22,11 @@
         }
 
         [Fact]
-        public void ValidAddress_ReturnsSuccessResult()
+        public async void ValidAddress_ReturnsSuccessResult()
         {
             var address = AddressTestData.GetValidTestAddress();
 
-            var result = validator.Validate(address);
+            var result = await validator.ValidateAsync(address);
 
             Assert.True(result.IsValid);
         }
@@ -35,10 +35,10 @@
         [InlineData(null)]
         [InlineData("")]
         [InlineData(" ")]
-        public void AddressLine1Missing_ReturnsFailureResult(string address1)
+        public async void AddressLine1Missing_ReturnsFailureResult(string address1)
         {
             var model = new Address { AddressLine1 = address1 };
-            var result = validator.TestValidate(model);
+            var result = await validator.TestValidateAsync(model);
 
             result.ShouldHaveValidationErrorFor(address => address.AddressLine1);
         }
@@ -47,70 +47,66 @@
         [InlineData(null)]
         [InlineData("")]
         [InlineData(" ")]
-        public void AddressLine2Missing_ReturnsSuccessResult(string address2)
+        public async void AddressLine2Missing_ReturnsSuccessResult(string address2)
         {
-            var model = new Address { AddressLine2 = address2 };
-            var result = validator.TestValidate(model);
+            var invalidAddress = AddressTestData.GetValidTestAddress();
+            invalidAddress.CountryId = unitedKingdomCountryId;
+            invalidAddress.AddressLine2 = address2;
 
-            result.ShouldHaveValidationErrorFor(address => address.AddressLine2);
+            var result = await validator.TestValidateAsync(invalidAddress);
 
-            //validator.ShouldNotHaveValidationErrorFor(x => x.AddressLine2, address2);
+            result.ShouldNotHaveValidationErrorFor(address => address.AddressLine2);
         }
 
         [Theory]
         [InlineData(null)]
         [InlineData("")]
         [InlineData(" ")]
-        public void TownOrCityMissing_ReturnsFailureResult(string townOrCity)
+        public async void TownOrCityMissing_ReturnsFailureResult(string townOrCity)
         {
-            var model = new Address { TownOrCity = townOrCity };
-            var result = validator.TestValidate(model);
+            var invalidAddress = AddressTestData.GetValidTestAddress();
+            invalidAddress.CountryId = unitedKingdomCountryId;
+            invalidAddress.TownOrCity = townOrCity;
 
-            result.ShouldHaveValidationErrorFor(address => address.TownOrCity);
+            var result = await validator.TestValidateAsync(invalidAddress);
 
-            //validator.ShouldHaveValidationErrorFor(x => x.TownOrCity, townOrCity);
+            result.ShouldHaveValidationErrorFor(address => address.TownOrCity);            
         }
 
         [Theory]
         [InlineData(null)]
         [InlineData("")]
         [InlineData(" ")]
-        public void PostalCodeMissing_CountryUK_ReturnsFailureResult(string postcode)
+        public async void PostalCodeMissing_CountryUK_ReturnsFailureResult(string postcode)
         {
             var invalidAddress = AddressTestData.GetValidTestAddress();
             invalidAddress.CountryId = unitedKingdomCountryId;
             invalidAddress.PostalCode = postcode;
-
-            var model = new Address { PostalCode = postcode };
-            var result = validator.TestValidate(model);
+            
+            var result = await validator.TestValidateAsync(invalidAddress);
 
             result.ShouldHaveValidationErrorFor(address => address.PostalCode);
-            //validator.ShouldHaveValidationErrorFor(x => x.PostalCode, invalidAddress);
         }
 
         [Theory]
         [InlineData(null)]
         [InlineData("")]
         [InlineData(" ")]
-        public void PostalCodeMissing_CountryNotUK_ReturnsSuccessResult(string postcode)
+        public async void PostalCodeMissing_CountryNotUK_ReturnsSuccessResult(string postcode)
         {
             var model = new Address { PostalCode = postcode };
-            var result = validator.TestValidate(model);
+            var result = await validator.TestValidateAsync(model);
 
-            result.ShouldHaveValidationErrorFor(address => address.PostalCode);
-
-            //validator.ShouldNotHaveValidationErrorFor(x => x.PostalCode, postcode);
+            result.ShouldNotHaveValidationErrorFor(address => address.PostalCode);
         }
 
         [Fact]
-        public void CountryMissing_ReturnsFailureResult()
+        public async void CountryMissing_ReturnsFailureResult()
         {
             var model = new Address { CountryId = null as Guid? };
-            var result = validator.TestValidate(model);
+            var result = await validator.TestValidateAsync(model);
 
             result.ShouldHaveValidationErrorFor(address => address.CountryId);
-
-            //validator.ShouldHaveValidationErrorFor(x => x.CountryId, null as Guid?);
         }
     }
 }

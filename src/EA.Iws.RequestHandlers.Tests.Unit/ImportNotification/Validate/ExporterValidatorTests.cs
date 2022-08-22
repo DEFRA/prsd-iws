@@ -22,11 +22,11 @@
         }
 
         [Fact]
-        public void ValidExporter_ReturnsSuccess()
+        public async void ValidExporter_ReturnsSuccess()
         {
             var exporter = GetValidExporter();
 
-            var result = validator.Validate(exporter);
+            var result = await validator.ValidateAsync(exporter);
 
             Assert.True(result.IsValid);
         }
@@ -96,12 +96,12 @@
         }
 
         [Fact]
-        public void ExporterContactMissing_ReturnsFailure()
+        public async void ExporterContactMissing_ReturnsFailure()
         {
             var exporter = GetValidExporter();
             exporter.Contact  = null;
 
-            var result = validator.TestValidate(exporter);
+            var result = await validator.TestValidateAsync(exporter);
             result.ShouldHaveValidationErrorFor(c => c.Contact);
         }
 
@@ -117,12 +117,12 @@
         }
 
         [Fact]
-        public void ExporterContactEmpty_ReturnsFailure()
+        public async void ExporterContactEmpty_ReturnsFailure()
         {
             var exporter = GetValidExporter();
             exporter.Contact = new Contact();
 
-            var result = validator.TestValidate(exporter);
+            var result = await validator.TestValidateAsync(exporter);
             result.ShouldHaveValidationErrorFor(c => c.Contact);
         }
 
@@ -141,12 +141,12 @@
         [InlineData(null)]
         [InlineData("")]
         [InlineData(" ")]
-        public void BusinessNameMissing_ReturnsFailure(string businessName)
+        public async void BusinessNameMissing_ReturnsFailure(string businessName)
         {
             var exporter = GetValidExporter();
             exporter.BusinessName = businessName;
 
-            var result = validator.TestValidate(exporter);
+            var result = await validator.TestValidateAsync(exporter);
             result.ShouldHaveValidationErrorFor(c => c.BusinessName);
         }
 

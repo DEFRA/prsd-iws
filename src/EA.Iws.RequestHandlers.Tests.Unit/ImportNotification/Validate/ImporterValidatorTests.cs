@@ -23,11 +23,11 @@
         }
 
         [Fact]
-        public void ImporterValid_ReturnsSuccess()
+        public async void ImporterValid_ReturnsSuccess()
         {
             var importer = GetValidImporter();
 
-            var result = validator.Validate(importer);
+            var result = await validator.ValidateAsync(importer);
 
             Assert.True(result.IsValid);
         }
@@ -97,12 +97,12 @@
         }
 
         [Fact]
-        public void ImporterContactMissing_ReturnsFailure()
+        public async void ImporterContactMissing_ReturnsFailure()
         {
             var importer = GetValidImporter();
             importer.Contact = null;
 
-            var result = validator.TestValidate(importer);
+            var result = await validator.TestValidateAsync(importer);
             result.ShouldHaveValidationErrorFor(i => i.Contact);
         }
 
@@ -118,12 +118,12 @@
         }
 
         [Fact]
-        public void ImporterContactEmpty_ReturnsFailure()
+        public async void ImporterContactEmpty_ReturnsFailure()
         {
             var importer = GetValidImporter();
             importer.Contact = new Contact();
 
-            var result = validator.TestValidate(importer);
+            var result = await validator.TestValidateAsync(importer);
             result.ShouldHaveValidationErrorFor(i => i.Contact);
         }
 
@@ -142,22 +142,22 @@
         [InlineData(null)]
         [InlineData("")]
         [InlineData(" ")]
-        public void BusinessNameMissing_ReturnsFailure(string businessName)
+        public async void BusinessNameMissing_ReturnsFailure(string businessName)
         {
             var importer = GetValidImporter();
             importer.BusinessName = businessName;
 
-            var result = validator.TestValidate(importer);
+            var result = await validator.TestValidateAsync(importer);
             result.ShouldHaveValidationErrorFor(i => i.BusinessName);
         }
 
         [Fact]
-        public void BusinessTypeMissing_ReturnsFailure()
+        public async void BusinessTypeMissing_ReturnsFailure()
         {
             var importer = GetValidImporter();
             importer.Type = null;
 
-            var result = validator.TestValidate(importer);
+            var result = await validator.TestValidateAsync(importer);
             result.ShouldHaveValidationErrorFor(i => i.Type);
         }
 

@@ -44,73 +44,73 @@
         }
 
         [Fact]
-        public void ValidTransitState_ReturnsSuccess()
+        public async void ValidTransitState_ReturnsSuccess()
         {
-            var result = validator.Validate(transitState);
+            var result = await validator.ValidateAsync(transitState);
 
             Assert.True(result.IsValid);
         }
 
         [Fact]
-        public void CompetentAuthorityInWrongCountry_ReturnsFailure()
+        public async void CompetentAuthorityInWrongCountry_ReturnsFailure()
         {
             transitState.CompetentAuthorityId = TestableCompetentAuthority.EnvironmentAgency.Id;
 
-            var result = validator.TestValidate(transitState);
+            var result = await validator.TestValidateAsync(transitState);
             result.ShouldHaveValidationErrorFor(x => x.CompetentAuthorityId);
         }
 
         [Fact]
-        public void ExitPointInWrongCountry_ReturnsFailure()
+        public async void ExitPointInWrongCountry_ReturnsFailure()
         {
             transitState.ExitPointId = TestableEntryOrExitPoint.Dover.Id;
 
-            var result = validator.TestValidate(transitState);
+            var result = await validator.TestValidateAsync(transitState);
             result.ShouldHaveValidationErrorFor(x => x.ExitPointId);
         }
 
         [Fact]
-        public void EntryPointInWrongCountry_ReturnsFailure()
+        public async void EntryPointInWrongCountry_ReturnsFailure()
         {
             transitState.EntryPointId = TestableEntryOrExitPoint.Dover.Id;
 
-            var result = validator.TestValidate(transitState);
+            var result = await validator.TestValidateAsync(transitState);
             result.ShouldHaveValidationErrorFor(x => x.EntryPointId);
         }
 
         [Fact]
-        public void CompetentAuthorityMissing_ReturnsFailure()
+        public async void CompetentAuthorityMissing_ReturnsFailure()
         {
             transitState.CompetentAuthorityId = null;
 
-            var result = validator.TestValidate(transitState);
+            var result = await validator.TestValidateAsync(transitState);
             result.ShouldHaveValidationErrorFor(x => x.CompetentAuthorityId);
         }
 
         [Fact]
-        public void CountryMissing_ReturnsFailure()
+        public async void CountryMissing_ReturnsFailure()
         {
             transitState.CountryId = null;
 
-            var result = validator.TestValidate(transitState);
+            var result = await validator.TestValidateAsync(transitState);
             result.ShouldHaveValidationErrorFor(x => x.CountryId);
         }
 
         [Fact]
-        public void ExitPointMissing_ReturnsFailure()
+        public async void ExitPointMissing_ReturnsFailure()
         {
             transitState.ExitPointId = null;
 
-            var result = validator.TestValidate(transitState);
+            var result = await validator.TestValidateAsync(transitState);
             result.ShouldHaveValidationErrorFor(x => x.ExitPointId);
         }
 
         [Fact]
-        public void EntryPointMissing_ReturnsFailure()
+        public async void EntryPointMissing_ReturnsFailure()
         {
             transitState.EntryPointId = null;
 
-            var result = validator.TestValidate(transitState);
+            var result = await validator.TestValidateAsync(transitState);
             result.ShouldHaveValidationErrorFor(x => x.EntryPointId);
         }
     }

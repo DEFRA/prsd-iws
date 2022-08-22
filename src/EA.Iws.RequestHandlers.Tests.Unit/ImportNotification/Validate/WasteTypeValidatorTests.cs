@@ -140,7 +140,7 @@
             };
 
             var result = validator.TestValidate(wasteType);
-            result.ShouldHaveValidationErrorFor(x => x.SelectedBaselCode);
+            result.ShouldNotHaveValidationErrorFor(x => x.SelectedBaselCode);
         }
 
         [Fact]
@@ -153,7 +153,7 @@
             };
 
             var result = validator.TestValidate(wasteType);
-            result.ShouldHaveValidationErrorFor(x => x.SelectedHCodes);
+            result.ShouldNotHaveValidationErrorFor(x => x.SelectedHCodes);
         }
 
         [Fact]
@@ -166,7 +166,7 @@
             };
 
             var result = validator.TestValidate(wasteType);
-            result.ShouldHaveValidationErrorFor(x => x.SelectedUnClasses);
+            result.ShouldNotHaveValidationErrorFor(x => x.SelectedUnClasses);
         }
 
         [Fact]
@@ -179,7 +179,7 @@
             };
 
             var result = validator.TestValidate(wasteType);
-            result.ShouldHaveValidationErrorFor(x => x.SelectedYCodes);
+            result.ShouldNotHaveValidationErrorFor(x => x.SelectedYCodes);
         }
     }
 }

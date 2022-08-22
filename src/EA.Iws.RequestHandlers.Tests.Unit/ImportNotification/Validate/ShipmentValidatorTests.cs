@@ -55,11 +55,11 @@
         }
 
         [Fact]
-        public void ValidShipment_ResultIsValid()
+        public async void ValidShipment_ResultIsValid()
         {
             var shipment = GetValidShipment(ImportNotificationPreconsentedId);
 
-            var result = validator.Validate(shipment);
+            var result = await validator.ValidateAsync(shipment);
 
             Assert.True(result.IsValid);
         }
@@ -68,12 +68,12 @@
         [InlineData(null)]
         [InlineData(-1)]
         [InlineData(0)]
-        public void InvalidTotalShipments_HasValidationError(int? input)
+        public async void InvalidTotalShipments_HasValidationError(int? input)
         {
             var shipment = GetValidShipment(ImportNotificationPreconsentedId);
             shipment.TotalShipments = input;
 
-            var result = validator.TestValidate(shipment);
+            var result = await validator.TestValidateAsync(shipment);
             result.ShouldHaveValidationErrorFor(s => s.TotalShipments);
         }
 
@@ -81,101 +81,101 @@
         [InlineData(null)]
         [InlineData(-1.0)]
         [InlineData(0.0)]
-        public void InvalidQuantity_HasValidationError(double? input)
+        public async void InvalidQuantity_HasValidationError(double? input)
         {
             var decimalInput = Convert.ToDecimal(input);
             var shipment = GetValidShipment(ImportNotificationPreconsentedId);
             shipment.Quantity = decimalInput;
 
-            var result = validator.TestValidate(shipment);
+            var result = await validator.TestValidateAsync(shipment);
             result.ShouldHaveValidationErrorFor(s => s.Quantity);
         }
 
         [Fact]
-        public void InvalidUnit_HasValidationError()
+        public async void InvalidUnit_HasValidationError()
         {
             var shipment = GetValidShipment(ImportNotificationPreconsentedId);
             shipment.Unit = null;
 
-            var result = validator.TestValidate(shipment);
+            var result = await validator.TestValidateAsync(shipment);
             result.ShouldHaveValidationErrorFor(s => s.Unit);
         }
 
         [Fact]
-        public void StartDateNull_HasValidationError()
+        public async void StartDateNull_HasValidationError()
         {
             var shipment = GetValidShipment(ImportNotificationPreconsentedId);
             shipment.StartDate = null;
 
-            var result = validator.TestValidate(shipment);
+            var result = await validator.TestValidateAsync(shipment);
             result.ShouldHaveValidationErrorFor(s => s.StartDate);
         }
 
         [Fact]
-        public void EndDateNull_HasValidationError()
+        public async void EndDateNull_HasValidationError()
         {
             var shipment = GetValidShipment(ImportNotificationPreconsentedId);
             shipment.EndDate = null;
 
-            var result = validator.TestValidate(shipment);
+            var result = await validator.TestValidateAsync(shipment);
             result.ShouldHaveValidationErrorFor(s => s.EndDate);
         }
 
         [Fact]
-        public void EndDateBeforeStartDate_HasValidationError()
+        public async void EndDateBeforeStartDate_HasValidationError()
         {
             var shipment = GetValidShipment(ImportNotificationPreconsentedId);
             shipment.StartDate = new DateTime(2015, 12, 31);
             shipment.EndDate = new DateTime(2015, 12, 1);
 
-            var result = validator.TestValidate(shipment);
+            var result = await validator.TestValidateAsync(shipment);
             result.ShouldHaveValidationErrorFor(s => s.EndDate);
         }
 
         [Fact]
-        public void PreconsentedFacilities_ShipmentPeriodCanBe3Years()
+        public async void PreconsentedFacilities_ShipmentPeriodCanBe3Years()
         {
             var shipment = GetValidShipment(ImportNotificationPreconsentedId);
             shipment.StartDate = new DateTime(2015, 12, 1);
             shipment.EndDate = new DateTime(2018, 11, 30);
 
-            var result = validator.TestValidate(shipment);
-            result.ShouldHaveValidationErrorFor(s => s.EndDate);
+            var result = await validator.TestValidateAsync(shipment);
+            result.ShouldNotHaveValidationErrorFor(s => s.EndDate);
         }
 
         [Fact]
-        public void PreconsentedFacilities_ShipmentPeriodCantBeOver3Years()
+        public async void PreconsentedFacilities_ShipmentPeriodCantBeOver3Years()
         {
             var shipment = GetValidShipment(ImportNotificationPreconsentedId);
             shipment.StartDate = new DateTime(2015, 12, 1);
             shipment.EndDate = new DateTime(2018, 12, 1);
 
-            var result = validator.TestValidate(shipment);
+            var result = await validator.TestValidateAsync(shipment);
             result.ShouldHaveValidationErrorFor(s => s.EndDate);
         }
 
         [Theory]
         [MemberData("NonpreconsentedFacilities")]
-        public void NonpreconsentedFacilities_ShipmentPeriodCantBeOver1Year(Guid importNotificationId)
+        public async void NonpreconsentedFacilities_ShipmentPeriodCantBeOver1Year(Guid importNotificationId)
         {
             var shipment = GetValidShipment(importNotificationId);
             shipment.StartDate = new DateTime(2015, 12, 1);
             shipment.EndDate = new DateTime(2016, 12, 1);
 
-            var result = validator.TestValidate(shipment);
+            var result = await validator.TestValidateAsync(shipment);
             result.ShouldHaveValidationErrorFor(s => s.EndDate);
         }
 
         [Theory]
         [MemberData("NonpreconsentedFacilities")]
-        public void NonpreconsentedFacilities_ShipmentPeriodCanBe1Year(Guid importNotificationId)
+        public async void NonpreconsentedFacilities_ShipmentPeriodCanBe1Year(Guid importNotificationId)
         {
             var shipment = GetValidShipment(importNotificationId);
             shipment.StartDate = new DateTime(2015, 12, 1);
             shipment.EndDate = new DateTime(2016, 11, 30);
 
-            var result = validator.TestValidate(shipment);
-            result.ShouldHaveValidationErrorFor(s => s.EndDate);
+            var result = await validator.TestValidateAsync(shipment);
+            result.ShouldNotHaveValidationErrorFor(s => s.EndDate);
         }
 
         public static IEnumerable<object[]> NonpreconsentedFacilities()

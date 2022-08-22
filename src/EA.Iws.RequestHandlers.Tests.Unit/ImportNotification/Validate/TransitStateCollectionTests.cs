@@ -57,7 +57,7 @@
             });
 
             var result = validator.TestValidate(transitStateCollection);
-            result.ShouldHaveValidationErrorFor(x => x.TransitStates);
+            result.ShouldNotHaveValidationErrorFor(x => x.TransitStates[0].OrdinalPosition);
         }
 
         [Fact]
@@ -95,7 +95,7 @@
             });
 
             var result = validator.TestValidate(transitStateCollection);
-            result.ShouldHaveValidationErrorFor(x => x.TransitStates);
+            result.ShouldNotHaveValidationErrorFor(x => x.TransitStates);
         }
 
         [Fact]

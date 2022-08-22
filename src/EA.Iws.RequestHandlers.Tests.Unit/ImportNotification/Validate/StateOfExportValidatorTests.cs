@@ -41,55 +41,55 @@
         }
 
         [Fact]
-        public void ValidStateOfExport_ReturnsSuccess()
+        public async void ValidStateOfExport_ReturnsSuccess()
         {
-            var result = validator.Validate(stateOfExport);
+            var result = await validator.ValidateAsync(stateOfExport);
 
             Assert.True(result.IsValid);
         }
 
         [Fact]
-        public void CompetentAuthorityInWrongCountry_ReturnsFailure()
+        public async void CompetentAuthorityInWrongCountry_ReturnsFailure()
         {
             stateOfExport.CompetentAuthorityId = TestableCompetentAuthority.EnvironmentAgency.Id;
 
-            var result = validator.TestValidate(stateOfExport);
+            var result = await validator.TestValidateAsync(stateOfExport);
             result.ShouldHaveValidationErrorFor(x => x.CompetentAuthorityId);
         }
 
         [Fact]
-        public void ExitPointInWrongCountry_ReturnsFailure()
+        public async void ExitPointInWrongCountry_ReturnsFailure()
         {
             stateOfExport.ExitPointId = TestableEntryOrExitPoint.Dover.Id;
 
-            var result = validator.TestValidate(stateOfExport);
+            var result = await validator.TestValidateAsync(stateOfExport);
             result.ShouldHaveValidationErrorFor(x => x.ExitPointId);
         }
 
         [Fact]
-        public void CompetentAuthorityMissing_ReturnsFailure()
+        public async void CompetentAuthorityMissing_ReturnsFailure()
         {
             stateOfExport.CompetentAuthorityId = null;
 
-            var result = validator.TestValidate(stateOfExport);
+            var result = await validator.TestValidateAsync(stateOfExport);
             result.ShouldHaveValidationErrorFor(x => x.CompetentAuthorityId);
         }
 
         [Fact]
-        public void CountryMissing_ReturnsFailure()
+        public async void CountryMissing_ReturnsFailure()
         {
             stateOfExport.CountryId = null;
 
-            var result = validator.TestValidate(stateOfExport);
+            var result = await validator.TestValidateAsync(stateOfExport);
             result.ShouldHaveValidationErrorFor(x => x.CountryId);
         }
 
         [Fact]
-        public void ExitPointMissing_ReturnsFailure()
+        public async void ExitPointMissing_ReturnsFailure()
         {
             stateOfExport.ExitPointId = null;
 
-            var result = validator.TestValidate(stateOfExport);
+            var result = await validator.TestValidateAsync(stateOfExport);
             result.ShouldHaveValidationErrorFor(x => x.ExitPointId);
         }
     }

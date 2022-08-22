@@ -48,52 +48,52 @@
         }
 
         [Fact]
-        public void ValidStateOfImport_ResultIsValid()
+        public async void ValidStateOfImport_ResultIsValid()
         {
             var stateOfImport = GetValidStateOfImport();
 
-            var result = validator.Validate(stateOfImport);
+            var result = await validator.ValidateAsync(stateOfImport);
 
             Assert.True(result.IsValid);
         }
 
         [Fact]
-        public void CompetentAuthorityNull_HasValidationError()
+        public async void CompetentAuthorityNull_HasValidationError()
         {
             var stateOfImport = GetValidStateOfImport();
             stateOfImport.CompetentAuthorityId = null;
 
-            var result = validator.TestValidate(stateOfImport);
+            var result = await validator.TestValidateAsync(stateOfImport);
             result.ShouldHaveValidationErrorFor(x => x.CompetentAuthorityId);
         }
 
         [Fact]
-        public void EntryPointNull_HasValidationError()
+        public async void EntryPointNull_HasValidationError()
         {
             var stateOfImport = GetValidStateOfImport();
             stateOfImport.EntryPointId = null;
 
-            var result = validator.TestValidate(stateOfImport);
+            var result = await validator.TestValidateAsync(stateOfImport);
             result.ShouldHaveValidationErrorFor(x => x.EntryPointId);
         }
 
         [Fact]
-        public void EntryPointNotInUK_HasValidationError()
+        public async void EntryPointNotInUK_HasValidationError()
         {
             var stateOfImport = GetValidStateOfImport();
             stateOfImport.EntryPointId = nonUkEntryPointId;
 
-            var result = validator.TestValidate(stateOfImport);
+            var result = await validator.TestValidateAsync(stateOfImport);
             result.ShouldHaveValidationErrorFor(x => x.EntryPointId);
         }
 
         [Fact]
-        public void CompetentAuthorityNotInUK_HasValidationError()
+        public async void CompetentAuthorityNotInUK_HasValidationError()
         {
             var stateOfImport = GetValidStateOfImport();
             stateOfImport.CompetentAuthorityId = nonUkCaId;
 
-            var result = validator.TestValidate(stateOfImport);
+            var result = await validator.TestValidateAsync(stateOfImport);
             result.ShouldHaveValidationErrorFor(x => x.CompetentAuthorityId);
         }
 

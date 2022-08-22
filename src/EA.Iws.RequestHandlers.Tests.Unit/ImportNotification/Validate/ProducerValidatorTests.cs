@@ -22,11 +22,11 @@
         }
 
         [Fact]
-        public void ValidProducer_ReturnsSuccess()
+        public async void ValidProducer_ReturnsSuccess()
         {
             var producer = GetValidProducer();
 
-            var result = validator.Validate(producer);
+            var result = await validator.ValidateAsync(producer);
 
             Assert.True(result.IsValid);
         }
@@ -96,12 +96,12 @@
         }
 
         [Fact]
-        public void ProducerContactMissing_ReturnsFailure()
+        public async void ProducerContactMissing_ReturnsFailure()
         {
             var producer = GetValidProducer();
             producer.Contact = null;
 
-            var result = validator.TestValidate(producer);
+            var result = await validator.TestValidateAsync(producer);
             result.ShouldHaveValidationErrorFor(x => x.Contact);
         }
 
@@ -117,12 +117,12 @@
         }
 
         [Fact]
-        public void ProducerContactEmpty_ReturnsFailure()
+        public async void ProducerContactEmpty_ReturnsFailure()
         {
             var producer = GetValidProducer();
             producer.Contact = new Contact();
 
-            var result = validator.TestValidate(producer);
+            var result = await validator.TestValidateAsync(producer);
             result.ShouldHaveValidationErrorFor(x => x.Contact);
         }
 
@@ -141,12 +141,12 @@
         [InlineData(null)]
         [InlineData("")]
         [InlineData(" ")]
-        public void BusinessNameMissing_ReturnsFailure(string businessName)
+        public async void BusinessNameMissing_ReturnsFailure(string businessName)
         {
             var producer = GetValidProducer();
             producer.BusinessName = businessName;
 
-            var result = validator.TestValidate(producer);
+            var result = await validator.TestValidateAsync(producer);
             result.ShouldHaveValidationErrorFor(x => x.BusinessName);
         }
 
