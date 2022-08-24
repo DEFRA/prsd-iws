@@ -96,12 +96,6 @@
     <PackageReference Include="Microsoft.AspNet.WebApi">
       <Version>5.2.9</Version>
     </PackageReference>
-    <PackageReference Include="Microsoft.Bcl">
-      <Version>1.1.10</Version>
-    </PackageReference>
-    <PackageReference Include="Microsoft.Bcl.Build">
-      <Version>1.0.21</Version>
-    </PackageReference>
     <PackageReference Include="Newtonsoft.Json">
       <Version>13.0.1</Version>
     </PackageReference>

@@ -218,12 +218,6 @@
     <PackageReference Include="Microsoft.AspNet.WebApi.Client">
       <Version>5.2.9</Version>
     </PackageReference>
-    <PackageReference Include="Microsoft.Bcl">
-      <Version>1.1.10</Version>
-    </PackageReference>
-    <PackageReference Include="Microsoft.Bcl.Build">
-      <Version>1.0.21</Version>
-    </PackageReference>
     <PackageReference Include="Microsoft.Owin">
       <Version>4.2.2</Version>
     </PackageReference>

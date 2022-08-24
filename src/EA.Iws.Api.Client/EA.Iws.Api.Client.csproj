@@ -88,12 +88,6 @@
     <PackageReference Include="Microsoft.AspNet.WebApi.Core">
       <Version>5.2.9</Version>
     </PackageReference>
-    <PackageReference Include="Microsoft.Bcl">
-      <Version>1.1.10</Version>
-    </PackageReference>
-    <PackageReference Include="Microsoft.Bcl.Build">
-      <Version>1.0.21</Version>
-    </PackageReference>
     <PackageReference Include="Newtonsoft.Json">
       <Version>13.0.1</Version>
     </PackageReference>
@@ -107,9 +101,6 @@
     </PackageReference>
     <PackageReference Include="System.Memory">
       <Version>4.5.5</Version>
-    </PackageReference>
-    <PackageReference Include="System.Net.Http">
-      <Version>4.3.4</Version>
     </PackageReference>
     <PackageReference Include="System.Text.Json">
       <Version>6.0.5</Version>
