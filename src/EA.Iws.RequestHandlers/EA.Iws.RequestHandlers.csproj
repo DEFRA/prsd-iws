@@ -932,7 +932,7 @@
       <Version>6.4.4</Version>
     </PackageReference>
     <PackageReference Include="FluentValidation">
-      <Version>11.2.0</Version>
+      <Version>11.2.1</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.AspNet.Identity.EntityFramework">
       <Version>2.2.3</Version>
