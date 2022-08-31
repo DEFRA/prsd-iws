@@ -13,6 +13,7 @@
     {
         private readonly ProducerValidator validator;
 
+        [Obsolete]
         public ProducerValidatorTests()
         {
             var countryRepository = A.Fake<Domain.ICountryRepository>();

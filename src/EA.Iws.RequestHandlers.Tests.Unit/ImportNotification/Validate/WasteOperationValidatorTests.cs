@@ -12,6 +12,7 @@
         private readonly Guid importNotificationId = new Guid("9C117E73-FB2D-4F9B-AEF6-26908AEAEFCD");
         private readonly WasteOperationValidator validator;
 
+        [Obsolete]
         public WasteOperationValidatorTests()
         {
             validator = new WasteOperationValidator();

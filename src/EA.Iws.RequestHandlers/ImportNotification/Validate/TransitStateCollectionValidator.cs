@@ -7,6 +7,7 @@
 
     internal class TransitStateCollectionValidator : AbstractValidator<TransitStateCollection>
     {
+        [System.Obsolete]
         public TransitStateCollectionValidator(IValidator<TransitState> transitStateValidator)
         {
             RuleFor(x => x.HasNoTransitStates).Cascade(CascadeMode.StopOnFirstFailure)

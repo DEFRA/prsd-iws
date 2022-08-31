@@ -14,6 +14,7 @@
         private readonly ICompetentAuthorityRepository competentAuthorityRepository;
         private readonly IEntryOrExitPointRepository entryOrExitPointRepository;
 
+        [System.Obsolete]
         public StateOfImportValidator(ICountryRepository countryRepository,
             ICompetentAuthorityRepository competentAuthorityRepository,
             IEntryOrExitPointRepository entryOrExitPointRepository)

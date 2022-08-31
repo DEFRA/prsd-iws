@@ -15,6 +15,7 @@
         private readonly TransitStateCollectionValidator validator;
         private readonly TransitStateCollection transitStateCollection = new TransitStateCollection();
 
+        [Obsolete]
         public TransitStateCollectionTests()
         {
             var transitStateValidator = A.Fake<IValidator<TransitState>>();

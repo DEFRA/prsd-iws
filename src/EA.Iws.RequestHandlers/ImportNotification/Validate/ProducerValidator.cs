@@ -5,6 +5,7 @@
 
     public class ProducerValidator : AbstractValidator<Producer>
     {
+        [System.Obsolete]
         public ProducerValidator(IValidator<Address> addressValidator,
             IValidator<Contact> contactValidator)
         {

@@ -13,6 +13,7 @@
     {
         private readonly ExporterValidator validator;
 
+        [Obsolete]
         public ExporterValidatorTests()
         {
             var countryRepository = A.Fake<Domain.ICountryRepository>();

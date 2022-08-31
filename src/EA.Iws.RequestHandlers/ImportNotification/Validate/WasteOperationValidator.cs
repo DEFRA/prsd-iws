@@ -7,6 +7,7 @@
 
     internal class WasteOperationValidator : AbstractValidator<WasteOperation>
     {
+        [System.Obsolete]
         public WasteOperationValidator()
         {
             RuleFor(x => x.OperationCodes)

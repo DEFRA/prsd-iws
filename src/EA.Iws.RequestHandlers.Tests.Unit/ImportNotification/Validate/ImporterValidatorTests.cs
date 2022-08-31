@@ -14,6 +14,7 @@
     {
         private readonly ImporterValidator validator;
 
+        [Obsolete]
         public ImporterValidatorTests()
         {
             var countryRepository = A.Fake<Domain.ICountryRepository>();

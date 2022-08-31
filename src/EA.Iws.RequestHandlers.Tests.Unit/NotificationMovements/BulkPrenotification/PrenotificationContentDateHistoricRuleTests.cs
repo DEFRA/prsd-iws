@@ -47,7 +47,7 @@
         }
 
         [Theory]
-        [MemberData("CorrectData")]
+        [MemberData(nameof(CorrectData))]
         public async Task GetResult_DateHistoric_Success(DateTime? shipmentDate)
         {
             var result = await rule.GetResult(GetTestData(shipmentDate), notificationId);
@@ -57,7 +57,7 @@
         }
 
         [Theory]
-        [MemberData("ErrorData")]
+        [MemberData(nameof(ErrorData))]
         public async Task GetResult_DateHistoric_Error(DateTime? shipmentDate)
         {
             var result = await rule.GetResult(GetTestData(shipmentDate), notificationId);

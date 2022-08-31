@@ -21,6 +21,7 @@
         private readonly Guid ukCaId = new Guid("61879A46-8AF2-4AFE-850F-A424080C806C");
         private readonly Guid ukEntryPointId = new Guid("E085D5F9-94ED-434C-8EF3-3D0DEFB64E1C");
 
+        [Obsolete]
         public StateOfImportValidatorTests()
         {
             var countryRepo = A.Fake<ICountryRepository>();

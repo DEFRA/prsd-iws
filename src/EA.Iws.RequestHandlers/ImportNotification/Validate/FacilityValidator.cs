@@ -6,6 +6,7 @@
 
     public class FacilityValidator : AbstractValidator<Facility>
     {
+        [System.Obsolete]
         public FacilityValidator(IValidator<Address> addressValidator,
             IValidator<Contact> contactValidator)
         {

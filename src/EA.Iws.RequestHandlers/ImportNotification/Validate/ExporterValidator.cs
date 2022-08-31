@@ -5,6 +5,7 @@
 
     public class ExporterValidator : AbstractValidator<Exporter>
     {
+        [System.Obsolete]
         public ExporterValidator(IValidator<Address> addressValidator,
             IValidator<Contact> contactValidator)
         {

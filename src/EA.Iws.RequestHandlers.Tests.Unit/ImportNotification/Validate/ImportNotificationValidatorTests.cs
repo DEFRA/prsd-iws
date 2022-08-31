@@ -9,6 +9,7 @@
     {
         private readonly ImportNotificationValidator validator;
 
+        [System.Obsolete]
         public ImportNotificationValidatorTests()
         {
             var countryRepository = A.Fake<Domain.ICountryRepository>();

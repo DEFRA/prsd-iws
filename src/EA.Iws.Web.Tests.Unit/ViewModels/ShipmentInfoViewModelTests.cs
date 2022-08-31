@@ -40,7 +40,7 @@
 
             var errors = ViewModelValidator.ValidateViewModel(model);
 
-            Assert.Equal(1, errors.Count);
+            Assert.Single(errors);
             Assert.Equal("Please enter a valid number between 1 and 99999", errors[0].ErrorMessage);
         }
 
@@ -52,7 +52,7 @@
 
             var errors = ViewModelValidator.ValidateViewModel(model);
 
-            Assert.Equal(0, errors.Count);
+            Assert.Empty(errors);
         }
 
         [Theory]
@@ -68,7 +68,7 @@
 
             var errors = ViewModelValidator.ValidateViewModel(model);
 
-            Assert.Equal(0, errors.Count);
+            Assert.Single(errors);
         }
 
         [Theory]
@@ -80,7 +80,7 @@
 
             var errors = ViewModelValidator.ValidateViewModel(model);
 
-            Assert.Equal(1, errors.Count);
+            Assert.Single(errors);
             Assert.Equal("Please enter a valid number with a maximum of 4 decimal places", errors[0].ErrorMessage);
         }
 
@@ -97,7 +97,7 @@
 
             var errors = ViewModelValidator.ValidateViewModel(model);
 
-            Assert.True(errors.Any(p => p.ErrorMessage == "Please enter a valid first departure date"));
+            Assert.Contains(errors, p => p.ErrorMessage == "Please enter a valid first departure date");
         }
 
         [Fact]
@@ -113,7 +113,7 @@
 
             var errors = ViewModelValidator.ValidateViewModel(model);
 
-            Assert.True(errors.Any(p => p.ErrorMessage == "Please enter a valid last departure date"));
+            Assert.Contains(errors, p => p.ErrorMessage == "Please enter a valid last departure date");
         }
 
         [Fact]
@@ -131,7 +131,7 @@
 
             var errors = ViewModelValidator.ValidateViewModel(model);
 
-            Assert.True(errors.Any(p => p.ErrorMessage == "The first departure date cannot be in the past"));
+            Assert.Contains(errors, p => p.ErrorMessage == "The first departure date cannot be in the past");
         }
 
         [Fact]
@@ -165,7 +165,7 @@
 
             var errors = ViewModelValidator.ValidateViewModel(model);
 
-            Assert.True(errors.Any(p => p.ErrorMessage == "The first departure date must be before the last departure date"));
+            Assert.Contains(errors, p => p.ErrorMessage == "The first departure date must be before the last departure date");
         }
 
         [Fact]
@@ -183,7 +183,7 @@
 
             var errors = ViewModelValidator.ValidateViewModel(model);
 
-            Assert.True(errors.Any(p => p.ErrorMessage == "The first departure date and last departure date must be within a 12 month period"));
+            Assert.Contains(errors, p => p.ErrorMessage == "The first departure date and last departure date must be within a 12 month period");
         }
 
         [Fact]
@@ -201,7 +201,7 @@
 
             var errors = ViewModelValidator.ValidateViewModel(model);
 
-            Assert.True(errors.Any(p => p.ErrorMessage.Contains("The first departure date and last departure date must be within a 36 month period")));
+            Assert.Contains(errors, p => p.ErrorMessage.Contains("The first departure date and last departure date must be within a 36 month period"));
         }
 
         private void AddValidDateToModel()

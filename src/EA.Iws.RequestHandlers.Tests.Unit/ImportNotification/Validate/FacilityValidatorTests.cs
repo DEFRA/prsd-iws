@@ -14,6 +14,7 @@
     {
         private readonly FacilityValidator validator;
 
+        [Obsolete]
         public FacilityValidatorTests()
         {
             var countryRepository = A.Fake<Domain.ICountryRepository>();

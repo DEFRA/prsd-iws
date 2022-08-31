@@ -155,7 +155,7 @@
         }
 
         [Theory]
-        [MemberData("NonpreconsentedFacilities")]
+        [MemberData(nameof(NonpreconsentedFacilities))]
         public async void NonpreconsentedFacilities_ShipmentPeriodCantBeOver1Year(Guid importNotificationId)
         {
             var shipment = GetValidShipment(importNotificationId);
@@ -167,7 +167,7 @@
         }
 
         [Theory]
-        [MemberData("NonpreconsentedFacilities")]
+        [MemberData(nameof(NonpreconsentedFacilities))]
         public async void NonpreconsentedFacilities_ShipmentPeriodCanBe1Year(Guid importNotificationId)
         {
             var shipment = GetValidShipment(importNotificationId);
