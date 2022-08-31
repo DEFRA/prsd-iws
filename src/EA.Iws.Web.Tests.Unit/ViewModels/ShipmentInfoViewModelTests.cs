@@ -68,7 +68,7 @@
 
             var errors = ViewModelValidator.ValidateViewModel(model);
 
-            Assert.Single(errors);
+            Assert.Empty(errors);
         }
 
         [Theory]
