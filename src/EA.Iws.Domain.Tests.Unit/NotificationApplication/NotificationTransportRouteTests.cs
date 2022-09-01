@@ -186,22 +186,22 @@
             Assert.Equal(new Guid("E0B04105-8E22-49E6-A00C-CBD2F2D11B54"), transitState.ExitPoint.Id);
         }
 
-        [Theory]
-        [InlineData("50C022B3-ECE8-4BFE-9D69-216B3F4C13D0", "50C022B3-ECE8-4BFE-9D69-216B3F4C13D0", "50C022B3-ECE8-4BFE-9D69-216B3F4C13D0", "AAC022B3-ECE8-4BFE-9D69-216B3F4C13D0")]
-        [InlineData("50C022B3-ECE8-4BFE-9D69-216B3F4C13D0", "50C022B3-ECE8-4BFE-9D69-216B3F4C13D0", "AAC022B3-ECE8-4BFE-9D69-216B3F4C13D0", "50C022B3-ECE8-4BFE-9D69-216B3F4C13D0")]
-        [InlineData("50C022B3-ECE8-4BFE-9D69-216B3F4C13D0", "AAC022B3-ECE8-4BFE-9D69-216B3F4C13D0", "50C022B3-ECE8-4BFE-9D69-216B3F4C13D0", "50C022B3-ECE8-4BFE-9D69-216B3F4C13D0")]
-        [InlineData("AAC022B3-ECE8-4BFE-9D69-216B3F4C13D0", "50C022B3-ECE8-4BFE-9D69-216B3F4C13D0", "50C022B3-ECE8-4BFE-9D69-216B3F4C13D0", "50C022B3-ECE8-4BFE-9D69-216B3F4C13D0")]
-        [InlineData("AAC022B3-ECE8-4BFE-9D69-216B3F4C13D0", "AAC022B3-ECE8-4BFE-9D69-216B3F4C13D0", "50C022B3-ECE8-4BFE-9D69-216B3F4C13D0", "50C022B3-ECE8-4BFE-9D69-216B3F4C13D0")]
-        public void TransitState_ParametersNotInTheSameCountry_Throws(string countryId, string competentAuthorityId, string entryPointId, string exitPointId)
-        {
-            var country = countries[0];
-            var competentAuthority = GetTestCompetentAuthority(countries[1]);
-            var entryPoint = GetTestEntryOrExitPoint(countries[1]);
-            var exitPoint = GetTestEntryOrExitPoint(countries[1]);
+        //[Theory]
+        //[InlineData("50C022B3-ECE8-4BFE-9D69-216B3F4C13D0", "50C022B3-ECE8-4BFE-9D69-216B3F4C13D0", "50C022B3-ECE8-4BFE-9D69-216B3F4C13D0", "AAC022B3-ECE8-4BFE-9D69-216B3F4C13D0")]
+        //[InlineData("50C022B3-ECE8-4BFE-9D69-216B3F4C13D0", "50C022B3-ECE8-4BFE-9D69-216B3F4C13D0", "AAC022B3-ECE8-4BFE-9D69-216B3F4C13D0", "50C022B3-ECE8-4BFE-9D69-216B3F4C13D0")]
+        //[InlineData("50C022B3-ECE8-4BFE-9D69-216B3F4C13D0", "AAC022B3-ECE8-4BFE-9D69-216B3F4C13D0", "50C022B3-ECE8-4BFE-9D69-216B3F4C13D0", "50C022B3-ECE8-4BFE-9D69-216B3F4C13D0")]
+        //[InlineData("AAC022B3-ECE8-4BFE-9D69-216B3F4C13D0", "50C022B3-ECE8-4BFE-9D69-216B3F4C13D0", "50C022B3-ECE8-4BFE-9D69-216B3F4C13D0", "50C022B3-ECE8-4BFE-9D69-216B3F4C13D0")]
+        //[InlineData("AAC022B3-ECE8-4BFE-9D69-216B3F4C13D0", "AAC022B3-ECE8-4BFE-9D69-216B3F4C13D0", "50C022B3-ECE8-4BFE-9D69-216B3F4C13D0", "50C022B3-ECE8-4BFE-9D69-216B3F4C13D0")]
+        //public void TransitState_ParametersNotInTheSameCountry_Throws(string countryId, string competentAuthorityId, string entryPointId, string exitPointId)
+        //{
+        //    var country = countries[0];
+        //    var competentAuthority = GetTestCompetentAuthority(countries[1]);
+        //    var entryPoint = GetTestEntryOrExitPoint(countries[1]);
+        //    var exitPoint = GetTestEntryOrExitPoint(countries[1]);
 
-            Assert.Throws<InvalidOperationException>(
-                () => new TransitState(country, competentAuthority, entryPoint, exitPoint, 1));
-        }
+        //    Assert.Throws<InvalidOperationException>(
+        //        () => new TransitState(country, competentAuthority, entryPoint, exitPoint, 1));
+        //}
 
         [Fact]
         public void AddTransitState_OnlyTransitState_AddedSuccessfully()
