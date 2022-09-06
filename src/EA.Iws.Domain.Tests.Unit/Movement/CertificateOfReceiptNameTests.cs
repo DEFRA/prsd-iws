@@ -27,7 +27,7 @@
         }
 
         [Theory]
-        [MemberData("TestData")]
+        [MemberData(nameof(TestData))]
         public async Task ReturnsCorrectFormat(UKCompetentAuthority competentAuthority, int notificationNumber, int movementNumber, string expected)
         {
             var notification = new NotificationApplication(notificationId, NotificationType.Recovery, competentAuthority, notificationNumber);

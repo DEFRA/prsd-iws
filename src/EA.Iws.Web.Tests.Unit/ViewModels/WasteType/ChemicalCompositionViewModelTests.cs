@@ -43,7 +43,7 @@
             var result = ValidateViewModel(viewModel);
 
             Assert.NotEmpty(result);
-            Assert.Equal(result.First().ErrorMessage, "Description is required");
+            Assert.Equal("Description is required", result.First().ErrorMessage);
         }
 
         [Fact]

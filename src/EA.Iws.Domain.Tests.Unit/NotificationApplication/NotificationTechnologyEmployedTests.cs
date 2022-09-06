@@ -13,7 +13,7 @@
         {
             var technologyEmployed = TechnologyEmployed.CreateTechnologyEmployedWithFurtherDetails(notificationId, "text area contents", "further details");
 
-            Assert.Equal(technologyEmployed.Details, "text area contents");
+            Assert.Equal("text area contents", technologyEmployed.Details);
         }
 
         [Fact]
@@ -62,7 +62,7 @@
             var technologyEmployed = TechnologyEmployed.CreateTechnologyEmployedWithFurtherDetails(notificationId, "details", "further details");
             technologyEmployed.SetWithAnnex("details");
 
-            Assert.Equal(true, technologyEmployed.AnnexProvided);
+            Assert.True(technologyEmployed.AnnexProvided);
         }
 
         [Fact]

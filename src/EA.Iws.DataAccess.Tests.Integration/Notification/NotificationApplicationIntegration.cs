@@ -108,7 +108,7 @@
 
             await context.SaveChangesAsync();
 
-            Assert.Equal(1, notification.PackagingInfos.Count());
+            Assert.Single(notification.PackagingInfos);
         }
 
         [Fact]
@@ -141,8 +141,8 @@
             await context.SaveChangesAsync();
 
             Assert.Collection(notification.OperationInfos,
-                item => Assert.Equal(notification.OperationInfos.ElementAt(0).OperationCode, OperationCode.R3),
-                item => Assert.Equal(notification.OperationInfos.ElementAt(1).OperationCode, OperationCode.R4));
+                item => Assert.Equal(OperationCode.R3, notification.OperationInfos.ElementAt(0).OperationCode),
+                item => Assert.Equal(OperationCode.R4, notification.OperationInfos.ElementAt(1).OperationCode));
         }
 
         [Fact]
@@ -407,7 +407,7 @@
 
             await context.SaveChangesAsync();
 
-            Assert.Equal(carrierCollection.Carriers.Count(), 5);
+            Assert.Equal(5, carrierCollection.Carriers.Count());
         }
 
         [Fact]
