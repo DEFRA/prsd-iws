@@ -38,7 +38,7 @@
         {
             var result = await handler.HandleAsync(message);
 
-            Assert.Equal(result.Count, 2);
+            Assert.Equal(2, result.Count);
         }
     }
 }

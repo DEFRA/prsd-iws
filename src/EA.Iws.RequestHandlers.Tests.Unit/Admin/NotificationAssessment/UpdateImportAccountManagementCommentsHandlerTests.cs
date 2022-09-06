@@ -31,7 +31,7 @@
 
             Assert.True(result);
 
-            A.CallTo(() => repo.UpdateById(transactionId, "something")).MustHaveHappened(Repeated.Exactly.Once);
+            A.CallTo(() => repo.UpdateById(transactionId, "something")).MustHaveHappenedOnceExactly();
         }
     }
 }

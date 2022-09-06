@@ -61,7 +61,7 @@
             vm.EndMonth = 1;
             vm.EndYear = 2019;
 
-            Assert.Equal(true, ValidateModel(vm).Count == 0);
+            Assert.True(ValidateModel(vm).Count == 0);
         }
 
         [Fact]
@@ -78,7 +78,7 @@
 
             var result = ValidateModel(vm);
 
-            Assert.Equal(true, result.Count > 0);
+            Assert.True(result.Count > 0);
 
             Assert.Collection(result,
                 item => Assert.Contains(IndexResources.DayError, item.ErrorMessage),
@@ -103,7 +103,7 @@
 
             var result = ValidateModel(vm);
 
-            Assert.Equal(true, result.Count > 0);
+            Assert.True(result.Count > 0);
 
             Assert.Collection(result,
                 item => Assert.Contains(IndexResources.DayError, item.ErrorMessage),
@@ -123,7 +123,7 @@
 
             var result = ValidateModel(vm);
 
-            Assert.Equal(true, result.Count > 0);
+            Assert.True(result.Count > 0);
 
             Assert.Collection(result, item => Assert.Contains(IndexResources.FromDateAfterToDate, item.ErrorMessage));
         }
@@ -135,14 +135,14 @@
 
             foreach (var selectListItem in vm.FilterTerms.Where(p => p.Text != "Date" && p.Text != "View all"))
             {
-                Assert.Equal(true, vm.Screens.Count(p => p.ScreenName == selectListItem.Text) > 0);
-                Assert.Equal(true, vm.Screens.Count(p => p.Id == int.Parse(selectListItem.Value)) > 0);
+                Assert.True(vm.Screens.Count(p => p.ScreenName == selectListItem.Text) > 0);
+                Assert.True(vm.Screens.Count(p => p.Id == int.Parse(selectListItem.Value)) > 0);
             }
 
-            Assert.Equal(true, vm.FilterTerms.Count(p => p.Text == "View all") > 0);
-            Assert.Equal(true, vm.FilterTerms.Count(p => p.Text == "Date") > 0);
-            Assert.Equal(true, vm.FilterTerms.Count(p => p.Value == string.Empty) == 1);
-            Assert.Equal(true, vm.FilterTerms.Count(p => p.Value == "date") == 1);
+            Assert.True(vm.FilterTerms.Count(p => p.Text == "View all") > 0);
+            Assert.True(vm.FilterTerms.Count(p => p.Text == "Date") > 0);
+            Assert.True(vm.FilterTerms.Count(p => p.Value == string.Empty) == 1);
+            Assert.True(vm.FilterTerms.Count(p => p.Value == "date") == 1);
         }
     }
 }

@@ -38,7 +38,7 @@ namespace EA.Iws.RequestHandlers.Tests.Unit.Mappings
         }
 
         [Theory]
-        [MemberData("GetDataForBusinessInfoMapTests")]
+        [MemberData(memberName: nameof(GetDataForBusinessInfoMapTests))]
         public void MapBusinessType(BusinessType entityType, BusinessType businessType)
         {
             testBusiness.Type = entityType;

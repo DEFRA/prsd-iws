@@ -61,7 +61,7 @@
             await refundTransaction.Save(notificationId, new DateTime(2016, 1, 1), 100, "comment");
 
             A.CallTo(() => transactionRepository.Add(A<ImportNotificationTransaction>.Ignored))
-                .MustHaveHappened(Repeated.Exactly.Once);
+                .MustHaveHappenedOnceExactly();
         }
 
         [Fact]
@@ -70,7 +70,7 @@
             await refundTransaction.Save(notificationId, new DateTime(2016, 1, 1), 99, "comment");
 
             A.CallTo(() => transactionRepository.Add(A<ImportNotificationTransaction>.Ignored))
-                .MustHaveHappened(Repeated.Exactly.Once);
+                .MustHaveHappenedOnceExactly();
         }
 
         [Fact]
@@ -79,7 +79,7 @@
             await refundTransaction.Save(notificationId, new DateTime(2016, 1, 1), 99, "comment");
 
             A.CallTo(() => transactionRepository.Add(A<ImportNotificationTransaction>.Ignored))
-                .MustHaveHappened(Repeated.Exactly.Once);
+                .MustHaveHappenedOnceExactly();
         }
 
         [Fact]
@@ -88,7 +88,7 @@
             await refundTransaction.Save(notificationId, new DateTime(2015, 12, 31), 99, "comment");
 
             A.CallTo(() => transactionRepository.Add(A<ImportNotificationTransaction>.Ignored))
-                .MustHaveHappened(Repeated.Exactly.Once);
+                .MustHaveHappenedOnceExactly();
         }
 
         [Fact]
@@ -113,7 +113,7 @@
             await refundTransaction.Save(notificationId, new DateTime(2015, 12, 31), 99, null);
 
             A.CallTo(() => transactionRepository.Add(A<ImportNotificationTransaction>.Ignored))
-                .MustHaveHappened(Repeated.Exactly.Once);
+                .MustHaveHappenedOnceExactly();
         }
 
         [Fact]

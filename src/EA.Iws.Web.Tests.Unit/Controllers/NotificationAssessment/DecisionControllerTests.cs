@@ -56,7 +56,7 @@
 
             await decisionController.Index(notificationId, model);
 
-            A.CallTo(() => mediator.SendAsync(A<ConsentNotificationApplication>.Ignored)).MustHaveHappened(Repeated.Exactly.Once);
+            A.CallTo(() => mediator.SendAsync(A<ConsentNotificationApplication>.Ignored)).MustHaveHappenedOnceExactly();
         }
 
         [Fact]
