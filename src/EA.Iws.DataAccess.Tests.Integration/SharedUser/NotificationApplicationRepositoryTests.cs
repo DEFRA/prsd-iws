@@ -279,7 +279,7 @@
             await repository.GetLargestNumberOfShipments(notificationId);
 
             A.CallTo(() => notificationApplicationAuthorization.EnsureAccessAsync(notificationId))
-                .MustHaveHappened(Repeated.Exactly.Times(4));
+                .MustHaveHappened(4, Times.Exactly);
 
             context.DeleteOnCommit(shipmentsHistory);
             context.DeleteOnCommit(shipmentsInfo);
@@ -351,7 +351,7 @@
 
             await repository.GetIntendedShipmentDataByNotificationId(notificationId);
 
-            A.CallTo(() => notificationApplicationAuthorization.EnsureAccessAsync(notificationId)).MustHaveHappened(Repeated.Exactly.Times(2));
+            A.CallTo(() => notificationApplicationAuthorization.EnsureAccessAsync(notificationId)).MustHaveHappenedTwiceExactly();
 
             context.DeleteOnCommit(shipmentsInfo);
             context.DeleteOnCommit(assessment);

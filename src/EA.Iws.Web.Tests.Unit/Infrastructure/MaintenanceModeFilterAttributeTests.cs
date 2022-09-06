@@ -28,8 +28,8 @@
             filter.OnActionExecuted(context);
 
             var result = context.Result as RedirectToRouteResult;
-            Assert.Equal(result.RouteValues["action"], "Maintenance");
-            Assert.Equal(result.RouteValues["controller"], "Errors");
+            Assert.Equal("Maintenance", result.RouteValues["action"]);
+            Assert.Equal("Errors", result.RouteValues["controller"]);
         }
 
         [Fact]

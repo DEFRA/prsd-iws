@@ -71,7 +71,7 @@
             await controller.Index(notificationId, 0);
 
             A.CallTo(() => mediator.SendAsync(A<GetKeyDatesSummaryInformation>.That.Matches(dates => dates.NotificationId == notificationId)))
-                .MustHaveHappened(Repeated.Exactly.Once);
+                .MustHaveHappenedOnceExactly();
         }
 
         [Fact]
@@ -426,7 +426,7 @@
             A.CallTo(() => mediator.SendAsync(A<SetNotificationTransmittedDate>
                 .That.Matches(p => p.NotificationId == model.NotificationId &&
                                 p.NotificationTransmittedDate == model.NewDate.AsDateTime().Value)))
-                .MustHaveHappened(Repeated.Exactly.Once);
+                .MustHaveHappenedOnceExactly();
         }
 
         [Fact]
@@ -601,7 +601,7 @@
             A.CallTo(() => mediator.SendAsync(A<SetNotificationAcknowledgedDate>
                 .That.Matches(p => p.NotificationId == model.NotificationId &&
                                 p.AcknowledgedDate == model.NewDate.AsDateTime().Value)))
-                .MustHaveHappened(Repeated.Exactly.Once);
+                .MustHaveHappenedOnceExactly();
         }
 
         [Fact]

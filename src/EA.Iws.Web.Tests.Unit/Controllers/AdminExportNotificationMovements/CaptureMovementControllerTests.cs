@@ -50,7 +50,7 @@
 
             var result = await controller.Create(notificationId, model);
 
-            A.CallTo(() => this.auditService.AddMovementAudit(mediator, notificationId, 1, controller.User.GetUserId(), MovementAuditType.Prenotified)).MustHaveHappened(Repeated.Exactly.Once);
+            A.CallTo(() => this.auditService.AddMovementAudit(mediator, notificationId, 1, controller.User.GetUserId(), MovementAuditType.Prenotified)).MustHaveHappenedOnceExactly();
         }
 
         [Fact]
@@ -68,7 +68,7 @@
 
             var result = await controller.Create(notificationId, model);
 
-            A.CallTo(() => this.auditService.AddMovementAudit(mediator, notificationId, 1, controller.User.GetUserId(), MovementAuditType.NoPrenotificationReceived)).MustHaveHappened(Repeated.Exactly.Once);
+            A.CallTo(() => this.auditService.AddMovementAudit(mediator, notificationId, 1, controller.User.GetUserId(), MovementAuditType.NoPrenotificationReceived)).MustHaveHappenedOnceExactly();
         }
 
         [Fact]
@@ -94,7 +94,7 @@
 
             var result = await controller.Create(notificationId, model);
 
-            A.CallTo(() => this.auditService.AddMovementAudit(mediator, notificationId, 1, controller.User.GetUserId(), MovementAuditType.Rejected)).MustHaveHappened(Repeated.Exactly.Once);
+            A.CallTo(() => this.auditService.AddMovementAudit(mediator, notificationId, 1, controller.User.GetUserId(), MovementAuditType.Rejected)).MustHaveHappenedOnceExactly();
         }
 
         [Fact]
@@ -128,7 +128,7 @@
 
             var result = await controller.Create(notificationId, model);
 
-            A.CallTo(() => this.auditService.AddMovementAudit(mediator, notificationId, 1, controller.User.GetUserId(), MovementAuditType.PartiallyRejected)).MustHaveHappened(Repeated.Exactly.Once);
+            A.CallTo(() => this.auditService.AddMovementAudit(mediator, notificationId, 1, controller.User.GetUserId(), MovementAuditType.PartiallyRejected)).MustHaveHappenedOnceExactly();
         }
 
         [Fact]
@@ -152,7 +152,7 @@
 
             var result = await controller.Create(notificationId, model);
 
-            A.CallTo(() => this.auditService.AddMovementAudit(mediator, notificationId, 1, controller.User.GetUserId(), MovementAuditType.Received)).MustHaveHappened(Repeated.Exactly.Once);
+            A.CallTo(() => this.auditService.AddMovementAudit(mediator, notificationId, 1, controller.User.GetUserId(), MovementAuditType.Received)).MustHaveHappenedOnceExactly();
         }
 
         [Fact]
@@ -181,7 +181,7 @@
 
             var result = await controller.Create(notificationId, model);
 
-            A.CallTo(() => this.auditService.AddMovementAudit(mediator, notificationId, 1, controller.User.GetUserId(), MovementAuditType.Recovered)).MustHaveHappened(Repeated.Exactly.Once);
+            A.CallTo(() => this.auditService.AddMovementAudit(mediator, notificationId, 1, controller.User.GetUserId(), MovementAuditType.Recovered)).MustHaveHappenedOnceExactly();
         }
 
         [Fact]
@@ -210,7 +210,7 @@
 
             var result = await controller.Create(notificationId, model);
 
-            A.CallTo(() => this.auditService.AddMovementAudit(mediator, notificationId, 1, controller.User.GetUserId(), MovementAuditType.Disposed)).MustHaveHappened(Repeated.Exactly.Once);
+            A.CallTo(() => this.auditService.AddMovementAudit(mediator, notificationId, 1, controller.User.GetUserId(), MovementAuditType.Disposed)).MustHaveHappenedOnceExactly();
         }
     }
 }

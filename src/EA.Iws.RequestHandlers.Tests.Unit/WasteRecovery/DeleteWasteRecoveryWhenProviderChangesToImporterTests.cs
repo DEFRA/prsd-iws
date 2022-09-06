@@ -35,7 +35,7 @@
 
             await handler.HandleAsync(new ProviderChangedEvent(NotificationId, ProvidedBy.Importer));
 
-            A.CallTo(() => recoveryRepository.Delete(wasteRecovery)).MustHaveHappened(Repeated.Exactly.Once);
+            A.CallTo(() => recoveryRepository.Delete(wasteRecovery)).MustHaveHappenedOnceExactly();
         }
 
         [Fact]
@@ -49,8 +49,8 @@
 
             await handler.HandleAsync(new ProviderChangedEvent(NotificationId, ProvidedBy.Importer));
 
-            A.CallTo(() => recoveryRepository.Delete(wasteRecovery)).MustHaveHappened(Repeated.Exactly.Once);
-            A.CallTo(() => disposalRepository.Delete(wasteDisposal)).MustHaveHappened(Repeated.Exactly.Once);
+            A.CallTo(() => recoveryRepository.Delete(wasteRecovery)).MustHaveHappenedOnceExactly();
+            A.CallTo(() => disposalRepository.Delete(wasteDisposal)).MustHaveHappenedOnceExactly();
         }
 
         [Fact]

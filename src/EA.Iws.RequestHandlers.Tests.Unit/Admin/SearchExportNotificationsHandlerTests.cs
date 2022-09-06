@@ -150,7 +150,7 @@
             var results = await ResultsWhenSearchingFor("GB 0001 000000");
 
             Assert.Equal(4, results.Count);
-            Assert.True(results.Any(r => r.NotificationNumber.Contains("GB 0001 000000")));
+            Assert.Contains(results, r => r.NotificationNumber.Contains("GB 0001 000000"));
         }
 
         [Fact]

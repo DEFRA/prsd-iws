@@ -16,13 +16,13 @@
             GlobalFilters.Filters.Clear();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters, A.Fake<IAppConfiguration>());
 
-            Assert.Equal(GlobalFilters.Filters.Count(x => x.Instance.GetType() == (typeof(RequireHttpsAttribute))), 1);
-            Assert.Equal(GlobalFilters.Filters.Count(x => x.Instance.GetType() == (typeof(EmailVerificationRequiredAttribute))), 1);
-            Assert.Equal(GlobalFilters.Filters.Count(x => x.Instance.GetType() == (typeof(OrganisationRequiredAttribute))), 1);
-            Assert.Equal(GlobalFilters.Filters.Count(x => x.Instance.GetType() == (typeof(AdminApprovalRequiredAttribute))), 1);
-            Assert.Equal(GlobalFilters.Filters.Count(x => x.Instance.GetType() == (typeof(HandleApiErrorFilter))), 1);
-            Assert.Equal(GlobalFilters.Filters.Count(x => x.Instance.GetType() == (typeof(AntiForgeryErrorFilter))), 1);
-            Assert.Equal(GlobalFilters.Filters.Count(x => x.Instance.GetType() == (typeof(VirusFoundFilter))), 1);
+            Assert.Equal(1, GlobalFilters.Filters.Count(x => x.Instance.GetType() == (typeof(RequireHttpsAttribute))));
+            Assert.Equal(1, GlobalFilters.Filters.Count(x => x.Instance.GetType() == (typeof(EmailVerificationRequiredAttribute))));
+            Assert.Equal(1, GlobalFilters.Filters.Count(x => x.Instance.GetType() == (typeof(OrganisationRequiredAttribute))));
+            Assert.Equal(1, GlobalFilters.Filters.Count(x => x.Instance.GetType() == (typeof(AdminApprovalRequiredAttribute))));
+            Assert.Equal(1, GlobalFilters.Filters.Count(x => x.Instance.GetType() == (typeof(HandleApiErrorFilter))));
+            Assert.Equal(1, GlobalFilters.Filters.Count(x => x.Instance.GetType() == (typeof(AntiForgeryErrorFilter))));
+            Assert.Equal(1, GlobalFilters.Filters.Count(x => x.Instance.GetType() == (typeof(VirusFoundFilter))));
         }
 
         [Fact]
@@ -35,7 +35,7 @@
 
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters, configuration);
 
-            Assert.Equal(GlobalFilters.Filters.Count(x => x.Instance.GetType() == (typeof(MaintenanceModeFilterAttribute))), 1);
+            Assert.Equal(1, GlobalFilters.Filters.Count(x => x.Instance.GetType() == (typeof(MaintenanceModeFilterAttribute))));
         }
 
         [Fact]
@@ -48,7 +48,7 @@
 
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters, configuration);
 
-            Assert.Equal(GlobalFilters.Filters.Count(x => x.Instance.GetType() == (typeof(MaintenanceModeFilterAttribute))), 0);
+            Assert.Equal(0, GlobalFilters.Filters.Count(x => x.Instance.GetType() == (typeof(MaintenanceModeFilterAttribute))));
         }
     }
 }

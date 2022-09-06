@@ -39,7 +39,7 @@
         {
             model.SelectedNotificationStatusId = null;
 
-            Assert.Equal(null, model.GetImportNotificationStatus());
+            Assert.Null(model.GetImportNotificationStatus());
         }
 
         [Theory]
@@ -68,7 +68,7 @@
         {
             model.SelectedNotificationStatusId = null;
 
-            Assert.Equal(null, model.GetExportNotificationStatus());
+            Assert.Null(model.GetExportNotificationStatus());
         }
     }
 }

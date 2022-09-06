@@ -53,7 +53,7 @@
             var result = ValidateViewModel(vm);
 
             Assert.NotEmpty(result);
-            Assert.True(result.First().ErrorMessage.StartsWith("If you select that you're providing the details in a separate annex, please do not enter any details here"));
+            Assert.StartsWith("If you select that you're providing the details in a separate annex, please do not enter any details here", result.First().ErrorMessage);
         }
 
         [Theory]
@@ -73,7 +73,7 @@
             var result = ValidateViewModel(viewModel);
 
             Assert.NotEmpty(result);
-            Assert.True(result.First().ErrorMessage.StartsWith("Both fields must either contain 'NA' or a value"));
+            Assert.StartsWith("Both fields must either contain 'NA' or a value", result.First().ErrorMessage);
         }
 
         [Fact]
@@ -92,7 +92,7 @@
             var result = ValidateViewModel(viewModel);
 
             Assert.NotEmpty(result);
-            Assert.True(result.First().ErrorMessage.StartsWith("You've not entered any data about the waste's composition"));
+            Assert.StartsWith("You've not entered any data about the waste's composition", result.First().ErrorMessage);
         }
 
         [Fact]
@@ -109,7 +109,7 @@
             var result = ValidateViewModel(viewModel);
 
             Assert.NotEmpty(result);
-            Assert.True(result.First().ErrorMessage.StartsWith("Please enter a minimum and maximum concentration"));
+            Assert.StartsWith("Please enter a minimum and maximum concentration", result.First().ErrorMessage);
         }
 
         [Fact]
@@ -126,7 +126,7 @@
             var result = ValidateViewModel(viewModel);
 
             Assert.NotEmpty(result);
-            Assert.True(result.First().ErrorMessage.StartsWith("Please enter a minimum and maximum concentration"));
+            Assert.StartsWith("Please enter a minimum and maximum concentration", result.First().ErrorMessage);
         }
 
         [Theory]
@@ -146,7 +146,7 @@
             var result = ValidateViewModel(viewModel);
             
             Assert.NotEmpty(result);
-            Assert.True(result.Select(r => r.ErrorMessage).Any(e => e.StartsWith("The maximum concentration should be in")));
+            Assert.Contains(result.Select(r => r.ErrorMessage), e => e.StartsWith("The maximum concentration should be in"));
         }
 
         [Theory]
@@ -166,7 +166,7 @@
             var result = ValidateViewModel(viewModel);
 
             Assert.NotEmpty(result);
-            Assert.True(result.Select(r => r.ErrorMessage).Any(e => e.StartsWith("The minimum concentration level should be")));
+            Assert.Contains(result.Select(r => r.ErrorMessage), e => e.StartsWith("The minimum concentration level should be"));
         }
 
         [Fact]
@@ -190,7 +190,7 @@
             var result = ValidateViewModel(viewModel);
 
             Assert.NotEmpty(result);
-            Assert.True(result.First().ErrorMessage.StartsWith("The minimum concentration level should be"));
+            Assert.StartsWith("The minimum concentration level should be", result.First().ErrorMessage);
         }
 
         [Fact]
@@ -208,7 +208,7 @@
             var result = ValidateViewModel(viewModel);
 
             Assert.NotEmpty(result);
-            Assert.True(result.First().ErrorMessage.StartsWith("The minimum concentration level should be"));
+            Assert.StartsWith("The minimum concentration level should be", result.First().ErrorMessage);
         }
 
         [Theory]
@@ -245,7 +245,7 @@
             var result = ValidateViewModel(viewModel);
 
             Assert.NotEmpty(result);
-            Assert.True(result.First().ErrorMessage.StartsWith("Please enter a minimum and maximum concentration"));
+            Assert.StartsWith("Please enter a minimum and maximum concentration", result.First().ErrorMessage);
         }
 
         [Fact]
@@ -263,7 +263,7 @@
             var result = ValidateViewModel(viewModel);
 
             Assert.NotEmpty(result);
-            Assert.True(result.First().ErrorMessage.StartsWith("Please enter a minimum and maximum concentration"));
+            Assert.StartsWith("Please enter a minimum and maximum concentration", result.First().ErrorMessage);
         }
 
         [Fact]
@@ -281,7 +281,7 @@
             var result = ValidateViewModel(viewModel);
 
             Assert.NotEmpty(result);
-            Assert.True(result.First().ErrorMessage.StartsWith("Please enter a name for the constituent"));
+            Assert.StartsWith("Please enter a name for the constituent", result.First().ErrorMessage);
         }
 
         [Theory]
@@ -302,7 +302,7 @@
             var result = ValidateViewModel(viewModel);
 
             Assert.NotEmpty(result);
-            Assert.True(result.First().ErrorMessage.StartsWith("Both fields must either contain 'NA' or a value"));
+            Assert.StartsWith("Both fields must either contain 'NA' or a value", result.First().ErrorMessage);
         }
 
         private static ChemicalCompositionContinuedViewModel GetValidViewModel()

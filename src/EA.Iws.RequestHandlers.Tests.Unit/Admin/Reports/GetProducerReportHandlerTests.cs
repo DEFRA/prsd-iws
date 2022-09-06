@@ -46,7 +46,7 @@
         {
             await handler.HandleAsync(GetRequest());
 
-            A.CallTo(() => internalUserRepo.GetByUserId(A<Guid>.Ignored)).MustHaveHappened(Repeated.Exactly.Once);
+            A.CallTo(() => internalUserRepo.GetByUserId(A<Guid>.Ignored)).MustHaveHappenedOnceExactly();
         }
 
         [Fact]
@@ -60,7 +60,7 @@
                     () =>
                         repository.GetProducerReport(request.DateType, request.From, request.To, request.TextFieldType,
                             request.OperatorType, request.TextSearch, competentAuthority))
-                .MustHaveHappened(Repeated.Exactly.Once);
+                .MustHaveHappenedOnceExactly();
         }
 
         private static GetProducerReport GetRequest()

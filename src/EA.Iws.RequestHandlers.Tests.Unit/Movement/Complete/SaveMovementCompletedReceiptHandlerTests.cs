@@ -65,7 +65,7 @@
 
             await handler.HandleAsync(request);
 
-            A.CallTo(() => movementRepository.GetById(movementId)).MustHaveHappened(Repeated.Exactly.Once);
+            A.CallTo(() => movementRepository.GetById(movementId)).MustHaveHappenedOnceExactly();
         }
 
         [Fact]
@@ -75,7 +75,7 @@
 
             await handler.HandleAsync(request);
 
-            A.CallTo(() => fileRepository.Store(A<File>.Ignored)).MustHaveHappened(Repeated.Exactly.Once);
+            A.CallTo(() => fileRepository.Store(A<File>.Ignored)).MustHaveHappenedOnceExactly();
         }
 
         [Fact]
@@ -93,7 +93,7 @@
                         movementAuditRepository.Add(
                             A<MovementAudit>.That.Matches(
                                 m => m.NotificationId == notificationId && m.Type == (int)MovementAuditType.Recovered)))
-                .MustHaveHappened(Repeated.Exactly.Once);
+                .MustHaveHappenedOnceExactly();
         }
 
         [Fact]
@@ -111,7 +111,7 @@
                         movementAuditRepository.Add(
                             A<MovementAudit>.That.Matches(
                                 m => m.NotificationId == notificationId && m.Type == (int)MovementAuditType.Disposed)))
-                .MustHaveHappened(Repeated.Exactly.Once);
+                .MustHaveHappenedOnceExactly();
         }
 
         [Fact]

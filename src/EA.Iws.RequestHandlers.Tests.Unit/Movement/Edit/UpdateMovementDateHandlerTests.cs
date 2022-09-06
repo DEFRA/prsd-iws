@@ -48,7 +48,7 @@
             await handler.HandleAsync(request);
 
             A.CallTo(() => repository.GetById(A<Guid>.That.Matches(id => id == request.MovementId)))
-                .MustHaveHappened(Repeated.Exactly.Once);
+                .MustHaveHappenedOnceExactly();
         }
 
         [Fact]
@@ -63,7 +63,7 @@
                         movementAuditRepository.Add(
                             A<MovementAudit>.That.Matches(
                                 m => m.NotificationId == notificationId && m.Type == (int)MovementAuditType.Edited)))
-                .MustHaveHappened(Repeated.Exactly.Once);
+                .MustHaveHappenedOnceExactly();
         }
 
         private UpdateMovementDate GetRequest()

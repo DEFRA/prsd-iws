@@ -42,10 +42,10 @@
             var result = await controller.Index(Guid.NewGuid()) as ViewResult;
 
             A.CallTo(() => mediator.SendAsync(A<GetMovementRulesSummary>.Ignored))
-                .MustHaveHappened(Repeated.Exactly.Once);
+                .MustHaveHappenedOnceExactly();
 
             A.CallTo(() => mediator.SendAsync(A<GetShipmentInfo>.Ignored))
-                .MustHaveHappened(Repeated.Exactly.Once);
+                .MustHaveHappenedOnceExactly();
 
             Assert.NotNull(result);
             Assert.True(result.ViewName == "Index");
@@ -127,7 +127,7 @@
 
             Assert.NotNull(result);
             Assert.False(result.ViewData.ModelState.IsValid);
-            Assert.True(result.ViewData.ModelState.Keys.Any(k => k == NumberToCreateDisplayName));
+            Assert.Contains(result.ViewData.ModelState.Keys, k => k == NumberToCreateDisplayName);
         }
 
         [Fact]
@@ -163,7 +163,7 @@
             
             Assert.NotNull(result);
             Assert.False(result.ViewData.ModelState.IsValid);
-            Assert.True(result.ViewData.ModelState.Keys.Any(k => k == NumberToCreateDisplayName));
+            Assert.Contains(result.ViewData.ModelState.Keys, k => k == NumberToCreateDisplayName);
         }
 
         [Fact]
@@ -199,7 +199,7 @@
 
             Assert.NotNull(result);
             Assert.False(result.ViewData.ModelState.IsValid);
-            Assert.True(result.ViewData.ModelState.Keys.Any(k => k == NumberToCreateDisplayName));
+            Assert.Contains(result.ViewData.ModelState.Keys, k => k == NumberToCreateDisplayName);
         }
 
         private static ShipmentInfo GetShipmentInfo()

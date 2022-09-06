@@ -233,7 +233,7 @@ namespace EA.Iws.RequestHandlers.Tests.Unit
             }
         }
 
-        [Theory, MemberData("GetWorkingDaysData")]
+        [Theory, MemberData(nameof(GetWorkingDaysData))]
         public void GetWorkingDaysReturnsExpectedResult(DateTime start, DateTime end, bool includeStart,
             int expectedDays)
         {
@@ -242,7 +242,7 @@ namespace EA.Iws.RequestHandlers.Tests.Unit
             Assert.Equal(expectedDays, result);
         }
 
-        [Theory, MemberData("AddWorkingDayData")]
+        [Theory, MemberData(nameof(AddWorkingDayData))]
         public void AddWorkingDaysReturnsExpectedResult(DateTime start, int days, bool includeStart,
             DateTime expectedResult)
         {
