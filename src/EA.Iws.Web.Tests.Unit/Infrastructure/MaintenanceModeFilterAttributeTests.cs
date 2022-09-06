@@ -42,7 +42,7 @@
             var context = Context(routeData);
 
             filter.OnActionExecuted(context);
-            Assert.Equal(context.Result.GetType(), (typeof(EmptyResult)));
+            Assert.Equal((typeof(EmptyResult)), context.Result.GetType());
         }
 
         public ActionExecutedContext Context(RouteData route)
