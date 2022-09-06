@@ -26,8 +26,8 @@
             notification.SetOperationCodes(codes);
 
             Assert.Collection(notification.OperationInfos,
-                item => Assert.Equal(notification.OperationInfos.ElementAt(0).OperationCode, OperationCode.R1),
-                item => Assert.Equal(notification.OperationInfos.ElementAt(1).OperationCode, OperationCode.R2));
+                item => Assert.Equal(OperationCode.R1, notification.OperationInfos.ElementAt(0).OperationCode),
+                item => Assert.Equal(OperationCode.R2, notification.OperationInfos.ElementAt(1).OperationCode));
         }
 
         [Fact]
@@ -45,8 +45,8 @@
             notification.SetOperationCodes(codes);
 
             Assert.Collection(notification.OperationInfos,
-                item => Assert.Equal(notification.OperationInfos.ElementAt(0).OperationCode, OperationCode.D1),
-                item => Assert.Equal(notification.OperationInfos.ElementAt(1).OperationCode, OperationCode.D2));
+                item => Assert.Equal(OperationCode.D1, notification.OperationInfos.ElementAt(0).OperationCode),
+                item => Assert.Equal(OperationCode.D2, notification.OperationInfos.ElementAt(1).OperationCode));
         }
 
         [Fact]
@@ -105,8 +105,8 @@
             notification.SetOperationCodes(newCodes);
 
             Assert.Collection(notification.OperationInfos,
-                item => Assert.Equal(notification.OperationInfos.ElementAt(0).OperationCode, OperationCode.R3),
-                item => Assert.Equal(notification.OperationInfos.ElementAt(1).OperationCode, OperationCode.R4));
+                item => Assert.Equal(OperationCode.R3, notification.OperationInfos.ElementAt(0).OperationCode),
+                item => Assert.Equal(OperationCode.R4, notification.OperationInfos.ElementAt(1).OperationCode));
         }
     }
 }

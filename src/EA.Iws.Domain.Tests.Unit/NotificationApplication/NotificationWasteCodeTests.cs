@@ -122,13 +122,9 @@
 
             Assert.Collection(notification.EwcCodes,
                 item =>
-                    Assert.True(
-                        notification.EwcCodes.Any(
-                            p => p.WasteCode.Id == new Guid("521154F9-A265-472A-9275-8871F0DACA9F"))),
+                    Assert.Contains(notification.EwcCodes, p => p.WasteCode.Id == new Guid("521154F9-A265-472A-9275-8871F0DACA9F")),
                 item =>
-                    Assert.True(
-                        notification.EwcCodes.Any(
-                            p => p.WasteCode.Id == new Guid("369E9D15-828F-4C8D-AAF9-C2F3E4F4765E"))));
+                    Assert.Contains(notification.EwcCodes, p => p.WasteCode.Id == new Guid("369E9D15-828F-4C8D-AAF9-C2F3E4F4765E")));
         }
 
         [Fact]
@@ -212,11 +208,9 @@
 
             Assert.Collection(notification.YCodes,
                 item =>
-                    Assert.True(
-                        notification.YCodes.Any(p => p.WasteCode.Id == new Guid("521154F9-A265-472A-9275-8871F0DACA9F"))),
+                    Assert.Contains(notification.YCodes, p => p.WasteCode.Id == new Guid("521154F9-A265-472A-9275-8871F0DACA9F")),
                 item =>
-                    Assert.True(
-                        notification.YCodes.Any(p => p.WasteCode.Id == new Guid("369E9D15-828F-4C8D-AAF9-C2F3E4F4765E"))));
+                    Assert.Contains(notification.YCodes, p => p.WasteCode.Id == new Guid("369E9D15-828F-4C8D-AAF9-C2F3E4F4765E")));
         }
 
         [Fact]
@@ -300,11 +294,9 @@
 
             Assert.Collection(notification.HCodes,
                 item =>
-                    Assert.True(
-                        notification.HCodes.Any(p => p.WasteCode.Id == new Guid("521154F9-A265-472A-9275-8871F0DACA9F"))),
+                    Assert.Contains(notification.HCodes, p => p.WasteCode.Id == new Guid("521154F9-A265-472A-9275-8871F0DACA9F")),
                 item =>
-                    Assert.True(
-                        notification.HCodes.Any(p => p.WasteCode.Id == new Guid("369E9D15-828F-4C8D-AAF9-C2F3E4F4765E"))));
+                    Assert.Contains(notification.HCodes, p => p.WasteCode.Id == new Guid("369E9D15-828F-4C8D-AAF9-C2F3E4F4765E")));
         }
 
         [Fact]
@@ -388,11 +380,9 @@
 
             Assert.Collection(notification.UnClasses,
                 item =>
-                    Assert.True(
-                        notification.UnClasses.Any(p => p.WasteCode.Id == new Guid("521154F9-A265-472A-9275-8871F0DACA9F"))),
+                    Assert.Contains(notification.UnClasses, p => p.WasteCode.Id == new Guid("521154F9-A265-472A-9275-8871F0DACA9F")),
                 item =>
-                    Assert.True(
-                        notification.UnClasses.Any(p => p.WasteCode.Id == new Guid("369E9D15-828F-4C8D-AAF9-C2F3E4F4765E"))));
+                    Assert.Contains(notification.UnClasses, p => p.WasteCode.Id == new Guid("369E9D15-828F-4C8D-AAF9-C2F3E4F4765E")));
         }
 
         [Fact]
@@ -476,13 +466,9 @@
 
             Assert.Collection(notification.UnNumbers,
                 item =>
-                    Assert.True(
-                        notification.UnNumbers.Any(
-                            p => p.WasteCode.Id == new Guid("521154F9-A265-472A-9275-8871F0DACA9F"))),
+                    Assert.Contains(notification.UnNumbers, p => p.WasteCode.Id == new Guid("521154F9-A265-472A-9275-8871F0DACA9F")),
                 item =>
-                    Assert.True(
-                        notification.UnNumbers.Any(
-                            p => p.WasteCode.Id == new Guid("369E9D15-828F-4C8D-AAF9-C2F3E4F4765E"))));
+                    Assert.Contains(notification.UnNumbers, p => p.WasteCode.Id == new Guid("369E9D15-828F-4C8D-AAF9-C2F3E4F4765E")));
         }
 
         [Fact]
