@@ -1,4 +1,6 @@
-﻿@mixin accordion($menu-colour) {
+﻿@import "palette";
+
+@mixin accordion($menu-colour) {
     /*heading styles*/
     margin-top: 2.7em;
     border-top: 10px solid $menu-colour;
@@ -137,12 +139,12 @@
         padding: 5px;
 
         .assigned-area {
-            @include core-14;
+            /*@include core-14;*/
         }
     }
 }
 
-.accordion-import {
+/*.accordion-import {
     @include accordion($internal-import-colour);
 }
 
@@ -152,4 +154,4 @@
 
 .accordion-general {
     @include accordion($internal-colour);
-}
+}*/

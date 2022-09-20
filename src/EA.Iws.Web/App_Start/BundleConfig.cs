@@ -30,9 +30,14 @@
                 "~/Scripts/jquery.validate*",
                 "~/Scripts/custom-validation.js"));
 
-            bundles.Add(new ScriptBundle("~/bundles/govuk_toolkit").Include(
-                "~/Scripts/govuk_toolkit/vendor/polyfills/bind.js",
-                "~/Scripts/show-hide-content.js"));
+            bundles.Add(new ScriptBundle("~/bundles/govuk").Include(
+                "~/Scripts/govuk-template.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/govuk-frontend").Include(
+                    "~/Scripts/govuk-frontend/govuk-frontend-4.0.0.min.js",
+                    "~/Scripts/setup-govuk-frontend.js",
+                    "~/govuk/vendor/polyfills/Function/prototype/bind.js",
+                    "~/Scripts/show-hide-content.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/govuk_iws").Include(
                 "~/Scripts/vendor/modernizr.custom.77028.js",
@@ -59,6 +64,9 @@
 
             bundles.Add(new StyleBundle("~/Content/select2/css")
                 .Include("~/Content/select2/select2.css"));
+
+            bundles.Add(new StyleBundle("~/Content/iws-page").Include(                            
+                            "~/Content/iws-page.css"));
 
             // Set EnableOptimizations to false for debugging. For more information,
             // visit http://go.microsoft.com/fwlink/?LinkId=301862

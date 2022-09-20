@@ -1,4 +1,6 @@
-﻿.overview-block div.overview-block-element:not(:last-child) {
+﻿@import "palette";
+
+.overview-block div.overview-block-element:not(:last-child) {
     margin-bottom: 15px;
 }
 
