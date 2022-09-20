@@ -8,8 +8,8 @@
  *
  * http://api.jqueryui.com/category/theming/
  */
-@import url("core.css");
 
+@import url("core.css");
 @import url("accordion.css");
 @import url("autocomplete.css");
 @import url("button.css");
@@ -26,3 +26,4 @@
 @import url("spinner.css");
 @import url("tabs.css");
 @import url("tooltip.css");
+@import url("site.css");

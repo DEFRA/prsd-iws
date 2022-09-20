@@ -1,4 +1,4 @@
-(function () {
+﻿(function () {
 	"use strict"
 	var root = this;
 	if (typeof root.GOVUK === 'undefined') {
@@ -88,7 +88,7 @@
 		GOVUK.cookie('_gid', null);
 		GOVUK.cookie('_gat', null);
 		GOVUK.cookie('_gat_govuk_shared', null);
-    }
+	}
 }).call(this);
 (function () {
 	"use strict"
