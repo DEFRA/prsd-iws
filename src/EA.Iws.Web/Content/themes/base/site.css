@@ -2620,3 +2620,47 @@ ul, ol {
 #top-content-box-container ul{
     margin :0 !important;
 }
+
+.button:link, 
+.button:link:focus, 
+.button:hover, 
+.button:focus, 
+.button:visited, 
+.cookieBannerButton:link, 
+.cookieBannerButton:link:focus, 
+.cookieBannerButton:hover, 
+.cookieBannerButton:focus, 
+.cookieBannerButton:visited {
+    color: #fff;
+}
+
+.fa {
+    display: inline-block;
+    font: normal normal normal 14px/1 FontAwesome;
+    font-size: inherit;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    transform: translate(0,0);
+}
+
+.fa-plus-square:before {
+    content: "";
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: 100%;
+}
+
+@media (min-width: 641px) {
+    table th, table td {
+        font-size: 19px;
+        line-height: 1.31579;
+    }
+}
+
+table thead th {
+    font-weight: 700;
+}
