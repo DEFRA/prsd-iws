@@ -129,6 +129,9 @@
   <data name="ErrorMessage" xml:space="preserve">
     <value>Error retrieving notifications, please try again.</value>
   </data>
+  <data name="FilterByNotificationStatus" xml:space="preserve">
+	<value>Filter by notification status:</value>
+  </data>
   <data name="First" xml:space="preserve">
     <value> first.</value>
   </data>
@@ -171,6 +174,9 @@
   <data name="SearchForNotification" xml:space="preserve">
     <value>Search for one of your notifications</value>
   </data>
+  <data name="SearchForNotificationNumber" xml:space="preserve">
+    <value>Enter Notification Number:</value>
+  </data>	
   <data name="SearchHint" xml:space="preserve">
     <value>The notification number must be entered in full, for example GB0001009999</value>
   </data>

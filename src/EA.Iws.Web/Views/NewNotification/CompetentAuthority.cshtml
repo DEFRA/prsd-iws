@@ -13,7 +13,11 @@
 {
     @Html.Gds().ValidationSummary()
     @Html.AntiForgeryToken()
-
+    <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
+        <h1 class="govuk-fieldset__heading">
+            @CompetentAuthorityResources.Title
+        </h1>
+    </legend>
     <div class="form-group @Html.Gds().FormGroupClass(m => m.CompetentAuthorities.SelectedValue)">
         @Html.Gds().ValidationMessageFor(model => model.CompetentAuthorities.SelectedValue)
         @Html.EditorFor(m => m.CompetentAuthorities)
