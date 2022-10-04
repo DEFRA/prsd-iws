@@ -133,7 +133,7 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.Producer {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Site of export.
+        ///   Looks up a localized string similar to Select site of export.
         /// </summary>
         public static string ThSiteOfExport {
             get {
