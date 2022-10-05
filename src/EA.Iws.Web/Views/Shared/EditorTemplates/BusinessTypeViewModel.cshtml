@@ -35,6 +35,12 @@
 </div>
 
 <div class="form-group @Html.Gds().FormGroupClass(m => m.BusinessType)">
+    <fieldset>
+        <legend class="form-label">
+            @BusinessResources.BusinessTypeHeader
+        </legend>
+    </fieldset>
+
     @{
         if (ViewBag.Title != "Exporter - notifier")
         {
@@ -50,7 +56,7 @@
             @EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(BusinessType.SoleTrader)
         </label>
     </div>
-    
+
     <div class="panel hide-for-initial-load @(Model.BusinessType != null && Model.BusinessType.Equals("Sole trader") ? "" : "js-hidden")" id="sole-trader-number">
         @if (!string.IsNullOrWhiteSpace(soleTraderRegistrationNumber))
         {
@@ -68,7 +74,7 @@
             @EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(BusinessType.Partnership)
         </label>
     </div>
-    
+
     <div class="panel hide-for-initial-load @(Model.BusinessType != null && Model.BusinessType.Equals("Partnership") ? "" : "js-hidden")" id="partnership-number">
         @if (!string.IsNullOrWhiteSpace(partnershipRegistrationNumber))
         {
@@ -86,7 +92,7 @@
             @EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(BusinessType.LimitedCompany)
         </label>
     </div>
-    
+
     <div class="panel hide-for-initial-load @(Model.BusinessType != null && Model.BusinessType.Equals("Limited company") ? "" : "js-hidden")" id="companies-house-number">
         @if (!string.IsNullOrWhiteSpace(companyRegistrationNumber))
         {
@@ -104,7 +110,7 @@
             @EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(BusinessType.Other)
         </label>
     </div>
-    
+
     <div class="panel hide-for-initial-load @(Model.BusinessType != null && Model.BusinessType == BusinessType.Other ? "" : "js-hidden")" id="other-description">
         <div class="form-group @Html.Gds().FormGroupClass(m => m.OtherDescription)">
             @Html.Gds().LabelFor(m => m.OtherDescription)

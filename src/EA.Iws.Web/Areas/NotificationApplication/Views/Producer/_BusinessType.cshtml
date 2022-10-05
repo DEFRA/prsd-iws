@@ -15,11 +15,12 @@
 </div>
 
 <div class="form-group @Html.Gds().FormGroupClass(m => m.Business.BusinessType)">
-    <legend class="govuk-fieldset__legend govuk-fieldset__legend--l">
-        <h1 class="govuk-fieldset__heading">
+    <fieldset>
+        <legend class="form-label">
             @BusinessResources.BusinessTypeHeader
-        </h1>
-    </legend>
+        </legend>
+    </fieldset>
+
     @Html.Gds().ValidationMessageFor(m => m.Business.BusinessType)
 
     <div class="multiple-choice" data-target="sole-trader-number">
