@@ -22,11 +22,7 @@
             {
                 var competentAuthorityChoice = new CompetentAuthorityChoiceViewModel
                 {
-                    CompetentAuthorities = new RadioButtonStringCollectionViewModel
-                    {
-                        SelectedValue = "Test",
-                        PossibleValues = new[] { "Test", "String", "Value" }
-                    }
+                    AuthorityType = UKCompetentAuthority.England
                 };
                 return competentAuthorityChoice;
             }
