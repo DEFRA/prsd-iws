@@ -42,7 +42,7 @@
             return RedirectToAction("NotificationType",
                 new
                 {
-                    ca = model.CompetentAuthorities.SelectedValue,
+                    ca = model.AuthorityType,
                     cfp
                 });
         }
