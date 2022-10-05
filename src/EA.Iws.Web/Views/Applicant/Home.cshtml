@@ -60,16 +60,17 @@ else
                 @Html.Gds().ValidationSummary()
                 @Html.AntiForgeryToken()
 
-                <div id="search-container" class="form-group @Html.Gds().FormGroupClass(m => m.SearchTerm)">
-                    @Html.Label(@HomeResources.SearchForNotification)
-                    <br />
-                    @Html.Gds().ValidationMessageFor(m => m.SearchTerm)
-                    @Html.Label(@HomeResources.SearchForNotificationNumber)
-                    @Html.Gds().HintParagraph(HomeResources.SearchHint)
-                    @Html.Gds().TextBoxFor(m => m.SearchTerm, new { @title = "Search term", placeholder = HomeResources.SearchPlaceholder })
+            <div id="search-container" class="form-group @Html.Gds().FormGroupClass(m => m.SearchTerm)">
+                @Html.Label(@HomeResources.SearchForNotification)
+                <br />
+                <br />
+                @Html.Gds().ValidationMessageFor(m => m.SearchTerm)
+                @Html.Label(@HomeResources.SearchForNotificationNumber)
+                @Html.Gds().HintSpan(HomeResources.SearchHint)
+                @Html.Gds().TextBoxFor(m => m.SearchTerm, new { @title = "Search term", placeholder = HomeResources.SearchPlaceholder })
 
-                    <button name="button" value="search" class="button" type="submit">@HomeResources.Search</button>
-                </div>
+                <button name="button" value="search" class="button" type="submit">@HomeResources.Search</button>
+            </div>
             }
         </div>
     </div>

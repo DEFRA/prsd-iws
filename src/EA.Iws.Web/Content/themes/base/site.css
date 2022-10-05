@@ -2890,7 +2890,7 @@ input[type=number] {
 
 @media (min-width: 641px) {
     .form-hint {
-        font-size: 19px;
+        font-size: 16px;
         line-height: 1.31579;
     }
 }
@@ -3034,4 +3034,9 @@ input[type=number] {
     font-weight: 700;
     text-align: right;
     padding-right: 0;
+}
+
+.govuk-error-message,
+.govuk-error-summary__list {
+    font-size: 19px !important;
 }
