@@ -52,7 +52,7 @@
         {
             var model = new NotificationTypeViewModel
             {
-                CompetentAuthority = ca.GetValueFromDisplayName<UKCompetentAuthority>()
+                CompetentAuthority = (UKCompetentAuthority)Enum.Parse(typeof(UKCompetentAuthority), ca)
             };
 
             if (!string.IsNullOrWhiteSpace(nt))
