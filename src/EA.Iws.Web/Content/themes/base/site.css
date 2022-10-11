@@ -389,6 +389,7 @@ text-decoration: underline;
 
 .text-area {
     height: 200px;
+    font-size:19px;
 }
 
 /*.full-width {
@@ -2905,6 +2906,8 @@ input[type=number] {
 
 .full-width {
     width: 100%;
+    height: 30px;
+    font-size: 19px;
 }
 
 /* Internal user export notification menu */
@@ -3045,4 +3048,41 @@ input[type=number] {
     width :60% !important;
     margin-left: -30px !important;
     margin-top:-10px !important;
+}
+
+.heading-medium {
+    font-family: "nta-extended",Arial,sans-serif;
+    font-weight: 700;
+    text-transform: none;
+    font-size: 18px;
+    line-height: 1.2;
+    display: block;
+    margin-top: 1.25em;
+    margin-bottom: 0.5em;
+}
+
+@media (min-width: 641px) {
+    .heading-medium {
+        font-size: 24px !important;
+        line-height: 1.25;
+    }
+}
+
+@media (min-width: 641px) {
+    .error-summary {
+        border: 5px solid #b10e1e;
+        margin-top: 30px;
+        margin-bottom: 30px;
+        padding: 20px 15px 15px;
+    }
+}
+
+.govuk-error-summary__list a:link, .govuk-error-summary__list a:visited {
+    font-size: 19px;
+    font-family: "nta-extended",Arial,sans-serif;
+    font-weight: bold;
+}
+
+.two-thirds {
+    width: 66.66667%;
 }
