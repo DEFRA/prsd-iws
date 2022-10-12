@@ -45,7 +45,7 @@
                     .OrderBy(s => s.Text)
                     .ToList();
 
-                units.Insert(0, new SelectListItem { Text = "View all notification statuses", Value = string.Empty });
+                units.Insert(0, new SelectListItem { Text = "View all notification status'", Value = string.Empty });
                 return new SelectList(units, "Value", "Text", SelectedNotificationStatus);
             }
         }
