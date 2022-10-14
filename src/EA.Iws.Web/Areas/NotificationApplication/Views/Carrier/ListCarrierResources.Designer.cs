@@ -61,6 +61,15 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.Carrier {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Action.
+        /// </summary>
+        public static string ActionHeader {
+            get {
+                return ResourceManager.GetString("ActionHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Add a new carrier.
         /// </summary>
         public static string AddAnother {
