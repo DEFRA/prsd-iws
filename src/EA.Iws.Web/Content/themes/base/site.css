@@ -451,9 +451,9 @@ table.table-pad-bottom {
     width: 100%;
 }
 
-input[type=submit], button {
+/*input[type=submit], button {
     width: 20%;
-}
+}*/
 
 #list-item-other-container {
     margin-top: 10px;
