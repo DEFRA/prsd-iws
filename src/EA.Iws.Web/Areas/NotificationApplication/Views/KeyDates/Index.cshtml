@@ -28,13 +28,20 @@
                 <tr>
                     <th>Activities</th>
                     <th>Dates</th>
-                    <th></th>
+                    @if (Model.Decisions.Count > 0)
+                    {
+                        <th>Date Consented</th>
+                    }
+                    else
+                    {
+                        <td></td>
+                    }
                 </tr>
                 <tr>
                     <td>Notification received</td>
                     <td>
                         @if (Model.NotificationReceivedDate.HasValue)
-                    {
+                        {
                             @Html.Gds().DisplayDateFor(m => m.NotificationReceivedDate.GetValueOrDefault())
                         }
                         else
