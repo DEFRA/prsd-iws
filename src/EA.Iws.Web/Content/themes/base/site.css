@@ -81,100 +81,6 @@ ul, li {
     padding: 0;
 }
 
-.swatch-alpha {
-    background-color: $alpha-colour;
-}
-
-.swatch-beta {
-    background-color: $beta-colour;
-}
-
-.swatch-discovery {
-    background-color: $discovery-colour;
-}
-
-.swatch-live {
-    background-color: $live-colour;
-}
-
-.swatch-error {
-    background-color: $error-colour;
-}
-
-.swatch-focus {
-    background-color: $focus-colour;
-}
-
-.swatch-button-colour {
-    background-color: $button-colour;
-}
-
-.swatch-black {
-    background-color: $black;
-}
-
-.swatch-grey-1 {
-    background-color: $grey-1;
-}
-
-.swatch-grey-2 {
-    background-color: $grey-2;
-}
-
-.swatch-grey-3 {
-    background-color: $grey-3;
-}
-
-.swatch-grey-4 {
-    background-color: $grey-4;
-}
-
-.swatch-white {
-    background-color: $white;
-    border: 1px solid $grey-3;
-}
-
-.swatch-text-colour {
-    background-color: $text-colour;
-}
-
-.swatch-text-secondary {
-    background-color: $secondary-text-colour;
-}
-
-.swatch-page-colour {
-    background-color: $page-colour;
-    border: 1px solid $grey-3;
-}
-
-.swatch-button-colour {
-    background-color: $button-colour;
-}
-
-.swatch-link-colour {
-    background-color: $link-colour;
-}
-
-.swatch-link-colour-visited {
-    background-color: $link-visited-colour;
-}
-
-.swatch-link-colour-hover {
-    background-color: $link-hover-colour;
-}
-
-.swatch-border-colour {
-    background-color: $border-colour;
-}
-
-.swatch-panel-colour {
-    background-color: $panel-colour;
-}
-
-.swatch-highlight-colour {
-    background-color: $highlight-colour;
-}
-
 .heading-small {
     margin-bottom: em(10);
 }
@@ -249,10 +155,6 @@ li.clear-child {
     content: "";
     display: block;
     clear: both;
-}
-
-.return-link {
-    margin-top: $govuk-gutter;
 }
 
 .table-divider {
@@ -888,20 +790,17 @@ input[type="search"] {
 .visuallyhidden {
     position: absolute;
     left: -9999em;
-    /*
-   * Extends the .visuallyhidden class to allow the element to be
-   * focusable when navigated to via the keyboard
-   */
 }
 
-    .visuallyhidden.focusable:active, .visuallyhidden.focusable:focus {
-        clip: auto;
-        height: auto;
-        margin: 0;
-        overflow: visible;
-        position: static;
-        width: auto;
-    }
+.visuallyhidden.focusable:active,
+.visuallyhidden.focusable:focus {
+    clip: auto;
+    height: auto;
+    margin: 0;
+    overflow: visible;
+    position: static;
+    width: auto;
+}
 
 /* Hide visually and from screenreaders, but maintain layout */
 .invisible {
@@ -2925,7 +2824,7 @@ summary > h2 {
 }
 
 .list li {
-    margin-bottom: 5px;    
+    margin-bottom: 5px;
 }
 
 #dvTermandConditions ul, #dvTermandConditions li {
