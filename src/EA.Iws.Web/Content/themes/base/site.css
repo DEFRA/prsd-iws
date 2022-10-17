@@ -451,10 +451,6 @@ table.table-pad-bottom {
     width: 100%;
 }
 
-/*input[type=submit], button {
-    width: 20%;
-}*/
-
 #list-item-other-container {
     margin-top: 10px;
 }
@@ -2017,10 +2013,6 @@ fieldset {
     padding-left: 20px;
 }
 
-/*.list-bullet {
-    margin-bottom: 45px;
-}*/
-
 @media (min-width: 769px) {
     #content {
         padding-bottom: 90px;
@@ -2728,12 +2720,6 @@ input[type=number] {
     font-size: 19px !important;
 }
 
-#SelectedMovementStatus {
-    width: 60% !important;
-    margin-left: -30px !important;
-    margin-top: -10px !important;
-}
-
 .heading-medium {
     font-family: "nta-extended",Arial,sans-serif;
     font-weight: 700;
@@ -2830,6 +2816,18 @@ summary > h2 {
 
 .form-group-compound {
     margin-bottom: 10px;
+}
+
+.pager {
+    margin-top: 0.3125em;
+    margin-bottom: 1.25em;
+}
+
+@media (min-width: 641px) {
+    .pager {
+        margin-top: 0.26316em;
+        margin-bottom: 1.05263em;
+    }
 }
 
 @media (min-width: 641px) {
