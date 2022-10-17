@@ -1779,16 +1779,16 @@ button:focus,
     width: auto;
 }
 
-.button:before, .cookieBannerButton:before {
-    content: "";
-    height: 110%;
-    width: 100%;
-    display: block;
-    background: transparent;
-    position: absolute;
-    top: 0;
-    left: 0;
-}
+    .button:before, .cookieBannerButton:before {
+        content: "";
+        height: 110%;
+        width: 100%;
+        display: block;
+        background: transparent;
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
 
 .grid-row:after, .notice:after, #content:after, fieldset:after, .form-section:after, .form-group:after, .form-group-error:after, .error:after, .panel:after, .panel-indent:after, .example:after {
     content: "";
@@ -2017,9 +2017,9 @@ fieldset {
     padding-left: 20px;
 }
 
-.list-bullet {
+/*.list-bullet {
     margin-bottom: 45px;
-}
+}*/
 
 @media (min-width: 769px) {
     #content {
@@ -2898,7 +2898,7 @@ summary > h2 {
     }
 }
 
-.button{
+.button {
     width: auto;
 }
 
@@ -2906,4 +2906,38 @@ summary > h2 {
     .button {
         width: auto;
     }
+}
+
+#dvTermandConditions p {
+    text-align: justify;
+}
+
+@media (min-width: 641px) {
+    .heading-large {
+        margin-top: 1.25em;
+        margin-bottom: 0.55556em;
+    }
+}
+
+@media (min-width: 641px) {
+    .heading-medium {
+        margin-top: 1.875em;
+        margin-bottom: 0.83333em;
+    }
+}
+
+.list li {
+    margin-bottom: 5px;    
+}
+
+#dvTermandConditions ul, #dvTermandConditions li {
+    list-style-type: inherit !important;
+}
+
+#dvGoogleAnalytics ul, #dvGoogleAnalytics li {
+    list-style-type: inherit !important;
+}
+
+#dvAccessibility ul, #dvGoogleAnalytics li {
+    list-style-type: inherit !important;
 }
