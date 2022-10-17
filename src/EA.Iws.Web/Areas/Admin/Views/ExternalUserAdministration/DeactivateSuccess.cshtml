@@ -8,3 +8,7 @@
 <p>@string.Format(Resources.UserAccountDeactivated, ViewBag.Email)</p>
 
 @Html.ActionLink("Home", "Index", "Home")
+
+@section menu {
+    @Html.Action("HomeNavigation", "Menu", new { area = "Admin", section = AdminHomeNavigationSection.AccountServices })
+}
