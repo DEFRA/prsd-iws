@@ -38,7 +38,7 @@
             await handler.HandleAsync(new GetBulkUploadTemplate(notificationId, BulkType.Prenotification));
 
             A.CallTo(() => documentGenerator.GenerateBulkUploadTemplate(notificationId, BulkType.Prenotification))
-                .MustHaveHappened(Repeated.Exactly.Once);
+                .MustHaveHappenedOnceExactly();
         }
     }
 }

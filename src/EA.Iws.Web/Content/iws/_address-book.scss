@@ -1,3 +1,5 @@
+@import "palette";
+
 .autocomplete-title {
     font-weight: bold;
 }
@@ -10,11 +12,11 @@
     display: none;
 }
 
-.table-container{
-    padding: 0 $gutter;
+.table-container {
+    padding: 0 $govuk-gutter;
 }
 
-.tabbed-nav{
+.tabbed-nav {
     border-bottom: 1px solid $border-colour;
     margin-bottom: 21px;
 }

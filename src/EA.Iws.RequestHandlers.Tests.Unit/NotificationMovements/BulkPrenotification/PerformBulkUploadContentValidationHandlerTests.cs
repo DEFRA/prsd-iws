@@ -219,7 +219,7 @@
 
             Assert.True(response.IsContentRulesSuccess);
             A.CallTo(() => repository.AddPrenotifications(A<Guid>.Ignored, A<List<PrenotificationMovement>>.Ignored, "Test"))
-                .MustHaveHappened(Repeated.Exactly.Once);
+                .MustHaveHappenedOnceExactly();
         }
 
         [Fact]

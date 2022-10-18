@@ -61,7 +61,7 @@ namespace EA.Prsd.Core.Tests
         {
             var singleton = new AmbientSingleton<string>();
 
-            Assert.Equal(null, singleton.Value);
+            Assert.Null(singleton.Value);
         }
 
         [Fact]

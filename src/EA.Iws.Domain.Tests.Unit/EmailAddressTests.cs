@@ -52,7 +52,7 @@
         }
             
         [Theory]
-        [MemberData("ValidEmails")]
+        [MemberData(nameof(ValidEmails))]
         public void ValidEmailAddresses(string input)
         {
             var email = new EmailAddress(input);
@@ -61,7 +61,7 @@
         }
             
         [Theory]
-        [MemberData("InvalidEmails")]
+        [MemberData(nameof(InvalidEmails))]
         public void InvalidEmailAddresses(string input)
         {
             Action createEmail = () => new EmailAddress(input);

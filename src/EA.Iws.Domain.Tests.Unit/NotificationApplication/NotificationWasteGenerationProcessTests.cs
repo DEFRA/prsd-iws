@@ -37,7 +37,7 @@
         {
             notification.AddWasteGenerationProcess(null, true);
 
-            Assert.Equal(null, notification.WasteGenerationProcess);
+            Assert.Null(notification.WasteGenerationProcess);
         }
 
         [Fact]

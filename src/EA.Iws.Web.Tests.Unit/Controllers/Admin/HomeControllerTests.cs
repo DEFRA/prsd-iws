@@ -71,7 +71,7 @@
         {
             var result = await controller.Index(postModel);
 
-            A.CallTo(() => mediator.SendAsync(A<SearchExportNotifications>.Ignored)).MustHaveHappened(Repeated.Exactly.Once);
+            A.CallTo(() => mediator.SendAsync(A<SearchExportNotifications>.Ignored)).MustHaveHappenedOnceExactly();
         }
 
         [Fact]

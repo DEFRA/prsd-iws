@@ -53,7 +53,7 @@
         }
 
         [Theory]
-        [MemberData("CorrectData")]
+        [MemberData(nameof(CorrectData))]
         public async Task GetResult_ConsentRange_Success(DateTime? shipmentDate)
         {
             A.CallTo(() => notificationConsentRepository.GetByNotificationId(notificationId)).Returns(consent);
@@ -65,7 +65,7 @@
         }
 
         [Theory]
-        [MemberData("ErrorData")]
+        [MemberData(nameof(ErrorData))]
         public async Task GetResult_ConsentRange_Error(DateTime? shipmentDate)
         {
             A.CallTo(() => notificationConsentRepository.GetByNotificationId(notificationId)).Returns(consent);

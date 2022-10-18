@@ -51,7 +51,7 @@
         {
             notification.SetPhysicalCharacteristics(new[] { PhysicalCharacteristicsInfo.CreateOtherPhysicalCharacteristicsInfo("package description") });
 
-            Assert.Equal(1, notification.PhysicalCharacteristics.Count());
+            Assert.Single(notification.PhysicalCharacteristics);
         }
 
         [Fact]
@@ -74,8 +74,8 @@
             notification.SetPhysicalCharacteristics(newPhysicalCharacteristics);
 
             Assert.Collection(notification.PhysicalCharacteristics,
-                item => Assert.Equal(notification.PhysicalCharacteristics.ElementAt(0).PhysicalCharacteristic, PhysicalCharacteristicType.Liquid),
-                item => Assert.Equal(notification.PhysicalCharacteristics.ElementAt(1).PhysicalCharacteristic, PhysicalCharacteristicType.Powdery));
+                item => Assert.Equal(PhysicalCharacteristicType.Liquid, notification.PhysicalCharacteristics.ElementAt(0).PhysicalCharacteristic),
+                item => Assert.Equal(PhysicalCharacteristicType.Powdery, notification.PhysicalCharacteristics.ElementAt(1).PhysicalCharacteristic));
         }
     }
 }

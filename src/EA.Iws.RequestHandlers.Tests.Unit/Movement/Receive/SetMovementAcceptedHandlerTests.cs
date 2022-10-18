@@ -47,7 +47,7 @@
 
             await handler.HandleAsync(request);
 
-            A.CallTo(() => movementRepository.GetById(movementId)).MustHaveHappened(Repeated.Exactly.Once);
+            A.CallTo(() => movementRepository.GetById(movementId)).MustHaveHappenedOnceExactly();
         }
 
         [Fact]
@@ -63,7 +63,7 @@
                             A<MovementAudit>.That.Matches(
                                 m =>
                                         m.NotificationId == notificationId && m.Type == (int)MovementAuditType.Received)))
-                .MustHaveHappened(Repeated.Exactly.Once);
+                .MustHaveHappenedOnceExactly();
         }
 
         [Fact]

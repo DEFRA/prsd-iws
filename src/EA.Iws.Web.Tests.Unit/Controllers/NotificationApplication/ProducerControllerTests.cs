@@ -91,7 +91,7 @@
 
             await producerController.Add(model);
 
-            A.CallTo(() => mediator.SendAsync(A<AddProducerToNotification>._)).MustHaveHappened(Repeated.Exactly.Once);
+            A.CallTo(() => mediator.SendAsync(A<AddProducerToNotification>._)).MustHaveHappenedOnceExactly();
         }
 
         [Fact]
@@ -157,7 +157,7 @@
                 () =>
                     mediator.SendAsync(A<GetProducerForNotification>.That.Matches(
                             p => p.NotificationId == notificationId && p.ProducerId == producerId)))
-                .MustHaveHappened(Repeated.Exactly.Once);
+                .MustHaveHappenedOnceExactly();
         }
 
         [Fact]
@@ -179,7 +179,7 @@
 
             await producerController.Edit(model);
 
-            A.CallTo(() => mediator.SendAsync(A<UpdateProducerForNotification>._)).MustHaveHappened(Repeated.Exactly.Once);
+            A.CallTo(() => mediator.SendAsync(A<UpdateProducerForNotification>._)).MustHaveHappenedOnceExactly();
         }
 
         [Fact]
@@ -290,7 +290,7 @@
                 () =>
                     mediator.SendAsync(A<DeleteProducerForNotification>.That.Matches(
                             p => p.NotificationId == notificationId && p.ProducerId == producerId)))
-                .MustHaveHappened(Repeated.Exactly.Once);
+                .MustHaveHappenedOnceExactly();
         }
 
         [Fact]
@@ -372,7 +372,7 @@
                 () =>
                     mediator.SendAsync(A<GetProducersByNotificationId>
                     .That.Matches(p => p.NotificationId == notificationId)))
-                .MustHaveHappened(Repeated.Exactly.Once);
+                .MustHaveHappenedOnceExactly();
         }
 
         [Fact]
@@ -392,7 +392,7 @@
                 () =>
                     mediator.SendAsync(A<GetProducersByNotificationId>
                     .That.Matches(p => p.NotificationId == notificationId)))
-                .MustHaveHappened(Repeated.Exactly.Once);
+                .MustHaveHappenedOnceExactly();
         }
 
         [Fact]
@@ -409,7 +409,7 @@
             A.CallTo(
                 () =>
                     mediator.SendAsync(A<SetSiteOfExport>.That.Matches(p => p.NotificationId == notificationId && p.ProducerId == producerId)))
-                .MustHaveHappened(Repeated.Exactly.Once);
+                .MustHaveHappenedOnceExactly();
         }
 
         [Fact]

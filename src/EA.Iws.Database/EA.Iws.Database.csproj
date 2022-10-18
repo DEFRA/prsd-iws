@@ -2,6 +2,7 @@
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -12,7 +13,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>EA.Iws.Database</RootNamespace>
     <AssemblyName>EA.Iws.Database</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <NuGetPackageImportStamp>
@@ -52,6 +53,11 @@
   <ItemGroup>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Content Include="Readme.txt" />
+    <Content Include="scripts\AliaSQL.exe" />
+    <Content Include="scripts\Create\placeholder.txt" />
+    <Content Include="scripts\Everytime\placeholder.txt" />
+    <Content Include="scripts\TestData\placeholder.txt" />
     <Content Include="scripts\Update\0007-Support\20211105-CR0048-Shipment-Full-Partial-Rejection.sql" />
     <Content Include="missing-indexes.sql" />
     <Content Include="script-views-as-tables.sql" />
@@ -126,6 +132,7 @@
     <Content Include="scripts\Update\0007-Support\20211004-CR0048-Add-ImportNotification-Company-Type.sql" />
     <Content Include="scripts\Update\0007-Support\20220310-CCN058-Add-StatusAtFileClosed.sql" />
     <Content Include="scripts\Update\0007-Support\20220722-CCN054-Shipment-Report-Changes.sql" />
+    <Content Include="scripts\Update\placeholder.txt" />
     <Content Include="unindexed-foreign-keys.sql" />
     <Content Include="scripts\Everytime\01-Functions\0003-Reports-PricingInfo.sql" />
     <Content Include="scripts\Everytime\03-StoredProcedures\0003-uspUpdateImportNotificationKeyDates.sql" />
@@ -142,14 +149,10 @@
     <Content Include="scripts\TestData\20161128-144200-add-multiple-import-consented.sql" />
     <Content Include="scripts\TestData\20161130-081000-add-multiple-export-recovery-consented.sql" />
     <Content Include="scripts\Update\0001-Release1\Sprint28\20160316-1233-fix-bank-address-typo.sql" />
-    <Content Include="Readme.txt" />
-    <Content Include="scripts\AliaSQL.exe" />
-    <Content Include="scripts\Create\placeholder.txt" />
     <Content Include="scripts\Everytime\01-Functions\0002-Reports-PotentialRefund.sql" />
     <Content Include="scripts\Everytime\01-Functions\0001-Reports-ConcatenateAddress.sql" />
     <Content Include="scripts\Everytime\05-Permissions\0002-Permissions-Grants.sql" />
     <Content Include="scripts\Everytime\05-Permissions\0001-Permissions-AppRole.sql" />
-    <Content Include="scripts\Everytime\placeholder.txt" />
     <Content Include="scripts\Everytime\03-StoredProcedures\0001-uspNotificationProgress.sql" />
     <Content Include="scripts\Everytime\02-Views\0001-Reports-WasteCodes.sql" />
     <Content Include="scripts\Everytime\02-Views\0011-Reports-ExportStats.sql" />
@@ -180,7 +183,6 @@
     <Content Include="scripts\TestData\20151026-180000-create-consented-notification-2504.sql" />
     <Content Include="scripts\TestData\2016-01-29-102149-create-consented-import-notification.sql" />
     <Content Include="scripts\TestData\20160205-114600-test-user-claims.sql" />
-    <Content Include="scripts\TestData\placeholder.txt" />
     <Content Include="scripts\Update\0002-CI\Sprint1\20161012-141300-delete-notification-charge-column.sql" />
     <Content Include="scripts\Update\0002-CI\Sprint1\20161011-145600-create-search-schema.sql" />
     <Content Include="scripts\Update\0002-CI\Sprint1\20161013-170500-import-movement-iscancelled.sql" />
@@ -204,7 +206,6 @@
     <Content Include="scripts\Update\0002-CI\Sprint5\20161214-152500-add-inactive-user-status.sql" />
     <Content Include="scripts\Update\0002-CI\Sprint5\20161209-111900-add-created-by-to-movement.sql" />
     <Content Include="scripts\Update\0003-Migration\Sprint1\20170118-152200-add-indexes-to-foreign-keys.sql" />
-    <Content Include="scripts\Update\placeholder.txt" />
     <Content Include="scripts\Update\0001-Release1\Sprint10\20150625-103000-add-us-competent-authority.sql" />
     <Content Include="scripts\Update\0001-Release1\Sprint10\20150626-163000-link-waste-code-info-to-notification.sql" />
     <Content Include="scripts\Update\0001-Release1\Sprint10\20150626-764539-add-not-applicable-to-un-waste-codes.sql" />
@@ -466,9 +467,6 @@
     <None Include="schema_compare.ps1" />
     <Content Include="scripts\TestData\20150511-092300-Sunil-test-user.sql" />
     <Content Include="scripts\TestData\20150511-164100-SFW-test-organisation.sql" />
-    <None Include="scripts\Update\placeholder.txt.vsspell">
-      <DependentUpon>placeholder.txt</DependentUpon>
-    </None>
     <None Include="scripts\Update\0001-Release1\Sprint10\20150624-141556-add-table-recovery-info.sql" />
     <None Include="scripts\Update\0001-Release1\Sprint14\20150814-144111-delete-column-building-org-exporter-producer-importer-facility-carrier.sql" />
   </ItemGroup>
@@ -488,15 +486,15 @@
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\StyleCop.Error.MSBuild.1.0.0\build\StyleCop.Error.MSBuild.Targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\StyleCop.Error.MSBuild.1.0.0\build\StyleCop.Error.MSBuild.Targets'))" />
-    <Error Condition="!Exists('..\packages\StyleCop.MSBuild.4.7.54.0\build\StyleCop.MSBuild.Targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\StyleCop.MSBuild.4.7.54.0\build\StyleCop.MSBuild.Targets'))" />
+    <Error Condition="!Exists('..\packages\StyleCop.MSBuild.6.2.0\build\StyleCop.MSBuild.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\StyleCop.MSBuild.6.2.0\build\StyleCop.MSBuild.targets'))" />
   </Target>
   <Import Project="..\packages\StyleCop.Error.MSBuild.1.0.0\build\StyleCop.Error.MSBuild.Targets" Condition="Exists('..\packages\StyleCop.Error.MSBuild.1.0.0\build\StyleCop.Error.MSBuild.Targets')" />
-  <Import Project="..\packages\StyleCop.MSBuild.4.7.54.0\build\StyleCop.MSBuild.Targets" Condition="Exists('..\packages\StyleCop.MSBuild.4.7.54.0\build\StyleCop.MSBuild.Targets')" />
   <Import Project="$(SQLDBExtensionsRefPath)\Microsoft.Data.Tools.Schema.Sql.UnitTesting.targets" Condition="'$(SQLDBExtensionsRefPath)' != ''" />
-  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.Sql.UnitTesting.targets" Condition="'$(SQLDBExtensionsRefPath)' == ''" />
+  <!--<Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.Sql.UnitTesting.targets" Condition="'$(SQLDBExtensionsRefPath)' == ''" />-->
   <PropertyGroup>
     <SsdtUnitTestVersion>2.0</SsdtUnitTestVersion>
   </PropertyGroup>
+  <Import Project="..\packages\StyleCop.MSBuild.6.2.0\build\StyleCop.MSBuild.targets" Condition="Exists('..\packages\StyleCop.MSBuild.6.2.0\build\StyleCop.MSBuild.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

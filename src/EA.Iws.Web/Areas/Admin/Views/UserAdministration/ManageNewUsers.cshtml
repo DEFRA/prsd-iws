@@ -45,15 +45,15 @@
                 <td style="text-align: center;">
                     @if (Model.Users[i].Action == ApprovalAction.Approve)
                     {
-                        <i class="fa fa-check-circle status-circle green-text"></i>
+                        <i class="fa fa-check-circle status-circle green-text" aria-label="Green Tick"></i>
                     }
                     else if (Model.Users[i].Action == ApprovalAction.Reject)
                     {
-                        <i class="fa fa-times-circle status-circle red-text"></i>
+                        <i class="fa fa-times-circle status-circle red-text" aria-label="Red Cross"></i>
                     }
                     else
                     {
-                        <i class="fa fa-question-circle status-circle grey-text"></i>
+                        <i class="fa fa-question-circle status-circle grey-text" aria-label="Question Mark Grey"></i>
                     }
                 </td>
                 <td>
@@ -92,17 +92,17 @@
 
         $(function () {
             $(".action-dropdown").change(function () {
-                var itemToAppend = "<i class='fa fa-question-circle status-circle grey-text'></i>";
+                var itemToAppend = "<i class='fa fa-question-circle status-circle grey-text' aria-label='Question Mark Grey'></i>";
                 var roleBox = $(this).parent().parent().find(".role-dropdown");
 
                 disableRoleDropdown(roleBox);
 
                 if (this.value === "0") {
-                    itemToAppend = "<i class='fa fa-times-circle status-circle red-text'></i>";
+                    itemToAppend = "<i class='fa fa-times-circle status-circle red-text' aria-label='Red Cross'></i>";
                 }
                 else if (this.value === "1") {
                     // Approved
-                    itemToAppend = "<i class='fa fa-check-circle status-circle green-text'></i>";
+                    itemToAppend = "<i class='fa fa-check-circle status-circle green-text' aria-label='Green Tick'></i>";
 
                     roleBox.removeAttr("disabled");
                     roleBox.removeClass("visually-hidden");

@@ -46,7 +46,7 @@
 
             await handler.HandleAsync(request);
 
-            A.CallTo(() => repository.GetByNotificationId(notificationId)).MustHaveHappened(Repeated.Exactly.Once);
+            A.CallTo(() => repository.GetByNotificationId(notificationId)).MustHaveHappenedOnceExactly();
         }
 
         [Fact]
@@ -56,7 +56,7 @@
 
             await handler.HandleAsync(request);
 
-            A.CallTo(() => countryRepository.GetById(countryId)).MustHaveHappened(Repeated.Exactly.Once);
+            A.CallTo(() => countryRepository.GetById(countryId)).MustHaveHappenedOnceExactly();
         }
 
         private AddCarrier GetRequest()

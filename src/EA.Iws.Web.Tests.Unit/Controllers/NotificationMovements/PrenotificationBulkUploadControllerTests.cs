@@ -126,7 +126,7 @@
             var result = await controller.Index(Guid.NewGuid()) as ViewResult;
 
             A.CallTo(() => mediator.SendAsync(A<GetMovementRulesSummary>.Ignored))
-                .MustHaveHappened(Repeated.Exactly.Once);
+                .MustHaveHappenedOnceExactly();
 
             Assert.NotNull(result);
             Assert.True(result.ViewName == "Index");
@@ -141,7 +141,7 @@
             var result = await controller.Index(Guid.NewGuid()) as RedirectToRouteResult;
 
             A.CallTo(() => mediator.SendAsync(A<GetMovementRulesSummary>.Ignored))
-                .MustHaveHappened(Repeated.Exactly.Once);
+                .MustHaveHappenedOnceExactly();
 
             Assert.NotNull(result);
             Assert.True(result.RouteValues["action"].ToString() == "ConsentWithdrawn");
@@ -156,7 +156,7 @@
             var result = await controller.Index(Guid.NewGuid()) as RedirectToRouteResult;
 
             A.CallTo(() => mediator.SendAsync(A<GetMovementRulesSummary>.Ignored))
-                .MustHaveHappened(Repeated.Exactly.Once);
+                .MustHaveHappenedOnceExactly();
 
             Assert.NotNull(result);
             Assert.True(result.RouteValues["action"].ToString() == "TotalMovementsReached");
@@ -171,7 +171,7 @@
             var result = await controller.Index(Guid.NewGuid()) as RedirectToRouteResult;
 
             A.CallTo(() => mediator.SendAsync(A<GetMovementRulesSummary>.Ignored))
-                .MustHaveHappened(Repeated.Exactly.Once);
+                .MustHaveHappenedOnceExactly();
 
             Assert.NotNull(result);
             Assert.True(result.RouteValues["action"].ToString() == "TotalIntendedQuantityReached");
@@ -186,7 +186,7 @@
             var result = await controller.Index(Guid.NewGuid()) as RedirectToRouteResult;
 
             A.CallTo(() => mediator.SendAsync(A<GetMovementRulesSummary>.Ignored))
-                .MustHaveHappened(Repeated.Exactly.Once);
+                .MustHaveHappenedOnceExactly();
 
             Assert.NotNull(result);
             Assert.True(result.RouteValues["action"].ToString() == "TotalIntendedQuantityExceeded");
@@ -201,7 +201,7 @@
             var result = await controller.Index(Guid.NewGuid()) as RedirectToRouteResult;
 
             A.CallTo(() => mediator.SendAsync(A<GetMovementRulesSummary>.Ignored))
-                .MustHaveHappened(Repeated.Exactly.Once);
+                .MustHaveHappenedOnceExactly();
 
             Assert.NotNull(result);
             Assert.True(result.RouteValues["action"].ToString() == "ConsentPeriodExpired");
