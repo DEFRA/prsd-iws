@@ -63,7 +63,7 @@
 
             var result = await virusScanner.ScanFileAsync(A.Dummy<byte[]>(), A.Dummy<string>());
 
-            A.CallTo(() => fileAccess.DeleteFile(FileName)).MustHaveHappened(Repeated.Exactly.Once);
+            A.CallTo(() => fileAccess.DeleteFile(FileName)).MustHaveHappenedOnceExactly();
         }
 
         [Fact]

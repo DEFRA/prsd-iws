@@ -36,7 +36,7 @@
         public void CanAddCarrier()
         {
             AddCarrier();
-            Assert.Equal(CarriersCount, 1);
+            Assert.Equal(1, CarriersCount);
         }
 
         [Fact]
@@ -47,7 +47,7 @@
                 AddCarrier();
             }
 
-            Assert.Equal(CarriersCount, 5);
+            Assert.Equal(5, CarriersCount);
         }
 
         [Fact]
@@ -57,7 +57,7 @@
             EntityHelper.SetEntityId(carrierCollection.Carriers.First(), carrierId);
 
             carrierCollection.RemoveCarrier(carrierId);
-            Assert.Equal(CarriersCount, 0);
+            Assert.Equal(0, CarriersCount);
         }
 
         [Fact]
@@ -76,13 +76,13 @@
                 EntityHelper.SetEntityId(carrier, carrierIds[j]);
                 j++;
             }
-            Assert.Equal(CarriersCount, 5);
+            Assert.Equal(5, CarriersCount);
 
             for (int k = 0; k < 5; k++)
             {
                 carrierCollection.RemoveCarrier(carrierIds[k]);
             }
-            Assert.Equal(CarriersCount, 0);
+            Assert.Equal(0, CarriersCount);
         }
     }
 }

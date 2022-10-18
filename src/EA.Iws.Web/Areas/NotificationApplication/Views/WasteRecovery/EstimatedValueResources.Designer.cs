@@ -19,7 +19,7 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.WasteRecovery {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class EstimatedValueResources {
@@ -80,7 +80,7 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.WasteRecovery {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Please enter the cost of  GBP(£) for the estimated value.
+        ///   Looks up a localized string similar to Please enter the amount in GBP(£) for the estimated value.
         /// </summary>
         public static string AmountRequired {
             get {

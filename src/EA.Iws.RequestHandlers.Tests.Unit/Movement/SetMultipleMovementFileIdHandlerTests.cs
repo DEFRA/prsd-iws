@@ -62,7 +62,7 @@
             await handler.HandleAsync(GetRequest(MovementCount));
 
             A.CallTo(() => movementRepository.GetById(A<Guid>.Ignored))
-                .MustHaveHappened(Repeated.Exactly.Times(MovementCount));
+                .MustHaveHappened(MovementCount, Times.Exactly);
         }
 
         [Fact]
@@ -70,7 +70,7 @@
         {
             await handler.HandleAsync(GetRequest(MovementCount));
 
-            A.CallTo(() => fileRepository.Store(A<File>.Ignored)).MustHaveHappened(Repeated.Exactly.Once);
+            A.CallTo(() => fileRepository.Store(A<File>.Ignored)).MustHaveHappenedOnceExactly();
         }
 
         [Fact]
@@ -91,7 +91,7 @@
                         movementAuditRepository.Add(
                             A<MovementAudit>.That.Matches(
                                 m => m.NotificationId == notificationId && m.Type == (int)MovementAuditType.Prenotified)))
-                .MustHaveHappened(Repeated.Exactly.Times(MovementCount));
+                .MustHaveHappened(MovementCount, Times.Exactly);
         }
 
         private SetMultipleMovementFileId GetRequest(int movementCount)

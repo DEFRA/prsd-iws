@@ -10,6 +10,9 @@
         [Display(Name = "OrgName", ResourceType = typeof(BusinessResources))]
         public string Name { get; set; }
 
+        [Display(Name = "BusinessTypeHeader", ResourceType = typeof(BusinessResources))]
+        public string BusinessTypeHeader { get; set; }
+
         [Required(ErrorMessageResourceType = typeof(BusinessResources), ErrorMessageResourceName = "OrgTypeRequired")]
         [Display(Name = "OrgType", ResourceType = typeof(BusinessResources))]
         public BusinessType? BusinessType { get; set; }

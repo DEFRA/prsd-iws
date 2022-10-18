@@ -56,7 +56,7 @@
                     () =>
                         repository.GetMovementsByIds(notificationId,
                             A<IEnumerable<Guid>>.That.IsSameSequenceAs(request.CancelledMovements.Select(m => m.Id))))
-                .MustHaveHappened(Repeated.Exactly.Once);
+                .MustHaveHappenedOnceExactly();
         }
 
         [Fact]
@@ -71,7 +71,7 @@
                         movementAuditRepository.Add(
                             A<MovementAudit>.That.Matches(
                                 m => m.NotificationId == notificationId && m.Type == (int)MovementAuditType.Cancelled)))
-                .MustHaveHappened(Repeated.Exactly.Times(CancelMovementCount));
+                .MustHaveHappened(CancelMovementCount, Times.Exactly);
         }
 
         [Fact]
@@ -108,7 +108,7 @@
                         capturedMovementFactory.Create(A<Guid>.That.Matches(guid => guid == notificationId),
                             A<int>.That.Matches(number => addedMovements.Exists(x => x.Number == number)),
                             A<DateTime?>.Ignored, A<DateTime>.Ignored, true))
-                .MustHaveHappened(Repeated.Exactly.Times(addedMovements.Count));
+                .MustHaveHappened(addedMovements.Count, Times.Exactly);
         }
 
         [Fact]
@@ -128,7 +128,7 @@
                                     m.NotificationId == notificationId &&
                                     addedMovements.Exists(x => x.Number == m.ShipmentNumber) &&
                                     m.Type == (int)MovementAuditType.NoPrenotificationReceived)))
-                .MustHaveHappened(Repeated.Exactly.Times(addedMovements.Count));
+                .MustHaveHappened(addedMovements.Count, Times.Exactly);
         }
 
         [Fact]
@@ -143,8 +143,7 @@
                         movementAuditRepository.Add(
                             A<MovementAudit>.That.Matches(
                                 m => m.NotificationId == notificationId && m.Type == (int)MovementAuditType.Cancelled)))
-                .MustHaveHappened(
-                    Repeated.Exactly.Times(request.CancelledMovements.Count() + request.AddedMovements.Count()));
+                .MustHaveHappened(request.CancelledMovements.Count() + request.AddedMovements.Count(), Times.Exactly);
         }
 
         [Fact]

@@ -60,7 +60,6 @@
 
             Assert.NotNull(result.Countries);
             Assert.Null(result.CustomsOfficeData);
-            Assert.NotNull(result.CustomsOffices);
         }
 
         [Fact]
@@ -72,7 +71,6 @@
 
             Assert.Equal(1, result.Countries.Count);
             Assert.Equal(exitCustomsOffice.Name, result.CustomsOfficeData.Name);
-            Assert.NotNull(result.CustomsOffices);
         }
     }
 }

@@ -22,11 +22,7 @@
             {
                 var competentAuthorityChoice = new CompetentAuthorityChoiceViewModel
                 {
-                    CompetentAuthorities = new RadioButtonStringCollectionViewModel
-                    {
-                        SelectedValue = "Test",
-                        PossibleValues = new[] { "Test", "String", "Value" }
-                    }
+                    AuthorityType = UKCompetentAuthority.England
                 };
                 return competentAuthorityChoice;
             }
@@ -82,7 +78,7 @@
         public void NotificationTypeQuestion_Get_ReturnsCorrectView()
         {
             var controller = CreateNewNotificationController();
-            var result = controller.NotificationType(EnumHelper.GetDisplayName(UKCompetentAuthority.England), EnumHelper.GetDisplayName(NotificationType.Recovery)) as ViewResult;
+            var result = controller.NotificationType(UKCompetentAuthority.England.ToString(), EnumHelper.GetDisplayName(NotificationType.Recovery)) as ViewResult;
 
             Assert.Empty(result.ViewName);
             Assert.IsType<NotificationTypeViewModel>(result.Model);

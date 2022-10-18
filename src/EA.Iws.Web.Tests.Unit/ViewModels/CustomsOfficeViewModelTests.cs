@@ -31,7 +31,7 @@
 
             List<ValidationResult> result = ViewModelValidator.ValidateViewModel(model);
 
-            Assert.Equal(1, result.Count);
+            Assert.Single(result);
         }
 
         [Fact]
@@ -41,7 +41,7 @@
 
             List<ValidationResult> result = ViewModelValidator.ValidateViewModel(model);
 
-            Assert.Equal(1, result.Count);
+            Assert.Single(result);
         }
     }
 }

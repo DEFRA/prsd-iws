@@ -38,7 +38,7 @@
 
             Assert.NotNull(fileResult);
             Assert.Equal(MimeTypes.MSExcelXml, fileResult.ContentType);
-            Assert.True(fileResult.FileDownloadName.EndsWith(".xlsx"));
+            Assert.EndsWith(".xlsx", fileResult.FileDownloadName);
         }
 
         [Fact]
@@ -55,7 +55,7 @@
 
             Assert.NotNull(fileResult);
             Assert.Equal(MimeTypes.MSExcelXml, fileResult.ContentType);
-            Assert.True(fileResult.FileDownloadName.EndsWith(".xlsx"));
+            Assert.EndsWith(".xlsx", fileResult.FileDownloadName);
         }
     }
 }

@@ -32,6 +32,7 @@
             partialRejectionFactory = new PartialRejectionMovement(movementRepository, movementPartialRejectionRepository);
         }
 
+        [Fact]
         public void Dispose()
         {
             SystemTime.Unfreeze();

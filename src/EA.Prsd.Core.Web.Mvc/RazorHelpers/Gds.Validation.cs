@@ -52,14 +52,14 @@
                 return null;
             }
 
-            var cssClass = (modelState.Errors.Count > 0) ? "error" : null;
+            var cssClass = (modelState.Errors.Count > 0) ? "govuk-form-group--error" : null;
 
             return cssClass;
         }
 
         public MvcHtmlString ValidationMessageFor<TValue>(Expression<Func<TModel, TValue>> expression)
         {
-            return htmlHelper.ValidationMessageFor(expression, null, new { @class = "error-message" }, "span");
+            return htmlHelper.ValidationMessageFor(expression, null, new { @class = "govuk-error-message" }, "span");
         }
 
         public MvcHtmlString ValidationMessageFor<TValue>(Expression<Func<TModel, TValue>> expression,
@@ -71,8 +71,8 @@
 
         private string GetJavascriptEnabledBlankSummary()
         {
-            return @"<div class='error-summary-valid' data-valmsg-summary='true'>
-                        <ul class='error-summary-list'>
+            return @"<div class='govuk-error-summary__body' data-valmsg-summary='true'>
+                        <ul class='govuk-list govuk-error-summary__list'>
                             <li style='display:none'></li>
                         </ul>
                     </div>";
@@ -80,7 +80,7 @@
 
         private string GetJavascriptDisabledErrorSummary(IEnumerable<ModelErrorWithFieldId> modelErrors)
         {
-            var startErrorRegion = @"<div class='error-summary' id='error_explanation'>";
+            var startErrorRegion = @"<div class='govuk-error-summary' id='error_explanation'>";
 
             var errorTitle = GetErrorSummaryHeading(modelErrors);
 
@@ -101,8 +101,8 @@
         private string GetErrorSummaryList(IEnumerable<ModelErrorWithFieldId> modelErrors)
         {
             var errorListBuilder = new StringBuilder();
-
-            errorListBuilder.AppendLine("<ul class='error-summary-list'>");
+            errorListBuilder.AppendLine("<div class='govuk-error-summary__body'>");
+            errorListBuilder.AppendLine("<ul class='govuk-list govuk-error-summary__list'>");
 
             foreach (var modelError in modelErrors)
             {
@@ -121,6 +121,7 @@
             }
 
             errorListBuilder.AppendLine("</ul>");
+            errorListBuilder.AppendLine("</div>");
 
             return errorListBuilder.ToString();
         }
@@ -132,7 +133,7 @@
             var tagBuilder = new TagBuilder("h2");
 
             tagBuilder.AddCssClass("heading-medium");
-            tagBuilder.AddCssClass("error-summary-heading");
+            tagBuilder.AddCssClass("govuk-error-summary__title");
 
             var modelErrorsCountString = string.Empty;
             if (modelErrorsCount > 1)

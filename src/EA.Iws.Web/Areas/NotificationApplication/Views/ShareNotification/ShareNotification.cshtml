@@ -24,7 +24,7 @@
                 </div>
                 @Html.Gds().ValidationMessageFor(m => m.EmailAddress)
                 @Html.Gds().TextBoxFor(m => m.EmailAddress)
-                <button type="submit" name="command" value="addshareduser" tabindex="2" class="button-secondary">@Resources.AddSharedUser</button>
+                <button type="submit" name="command" value="addshareduser" tabindex="2" class="button">@Resources.AddSharedUser</button>
             </div>
 
             <h2 class="heading-medium">@Resources.ChosenSharedUsers</h2>
@@ -35,7 +35,7 @@
                         <tr>
                             <th>@Resources.Email</th>
                             <th></th>
-                            <th></th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     @if (Model.SelectedSharedUsers.Count < 1)

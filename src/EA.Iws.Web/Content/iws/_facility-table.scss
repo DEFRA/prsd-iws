@@ -1,8 +1,11 @@
-﻿.facility-header {
+﻿@import "../govuk-frontend/govuk/helpers/colour";
+@import "palette";
+
+.facility-header {
     display: block;
     border-top: 1px solid $border-colour;
     border-bottom: 1px solid $border-colour;
-    padding: $gutter-half 7px;
+    padding: $govuk-gutter-half 7px;
     cursor: pointer;
     margin-top: -1px;
 

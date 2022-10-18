@@ -159,4 +159,7 @@
   <data name="AddHeader" xml:space="preserve">
     <value>Enter address and organisation information of the {0}</value>
   </data>
+  <data name="BusinessTypeHeader" xml:space="preserve">
+    <value>Choose the type of organisation</value>
+  </data>
 </root>

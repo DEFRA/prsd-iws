@@ -21,3 +21,7 @@ else
 }
 
 @Html.ActionLink(Constants.ContinueOnlyButtonText, "DeactivateConfirmation", routeValues: new { userId = ViewBag.UserId }, htmlAttributes: new { @class = "button" })
+
+@section menu {
+    @Html.Action("HomeNavigation", "Menu", new { area = "Admin", section = AdminHomeNavigationSection.AccountServices })
+}

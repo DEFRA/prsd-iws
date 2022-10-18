@@ -55,7 +55,7 @@
             Assert.Equal(2, result.Count());
             // mapper.Map should be called once for each item in notificationAudits
             A.CallTo(() => mapper.Map<NotificationAuditForDisplay>(notificationAudit))
-                .MustHaveHappened(Repeated.Exactly.Times(notificationAudits.Count()));
+                .MustHaveHappened(notificationAudits.Count(), Times.Exactly);
         }
     }
 }

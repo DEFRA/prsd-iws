@@ -18,10 +18,10 @@
                 +
             </div>
             <div class="international-number-prefix">
-                @Html.Gds().TextBoxFor(m => m.TelephonePrefix, new { @title = ContactDataResources.TelephonePrefixTitle })
+                @Html.Gds().TextBoxFor(m => m.TelephonePrefix, new { @title = ContactDataResources.TelephonePrefixTitle, @type = "number" })
             </div>
             <div class="international-number-body">
-                @Html.Gds().TextBoxFor(m => m.Telephone, false)
+                @Html.Gds().TextBoxFor(m => m.Telephone, new { @type = "number" })
             </div>
         </div>
     </fieldset>
@@ -38,10 +38,10 @@
                 +
             </div>
             <div class="international-number-prefix">
-                @Html.Gds().TextBoxFor(m => m.FaxPrefix, new { @title = ContactDataResources.FaxPrefixTitle })
+                @Html.Gds().TextBoxFor(m => m.FaxPrefix, new { @title = ContactDataResources.FaxPrefixTitle, @type = "number" })
             </div>
             <div class="international-number-body">
-                @Html.Gds().TextBoxFor(m => m.Fax, false)
+                @Html.Gds().TextBoxFor(m => m.Fax, new { @type = "number" })
             </div>
         </div>
     </fieldset>
@@ -50,5 +50,5 @@
 <div class="form-group @Html.Gds().FormGroupClass(m => m.Email)">
     @Html.Gds().LabelFor(model => model.Email)
     @Html.Gds().ValidationMessageFor(model => model.Email)
-    @Html.Gds().TextBoxFor(model => model.Email)
+    @Html.Gds().TextBoxFor(model => model.Email, new { @type = "email" })
 </div>

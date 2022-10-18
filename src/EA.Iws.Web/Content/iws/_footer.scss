@@ -1,33 +1,233 @@
 ﻿/* Global footer */
-
-$footer-grey: #454a4c;
-
 #footer {
-       
-    .footer-agencies {
-        color: $footer-grey;
+    background-color: #dee0e2;
+    border-top: 1px solid #a1acb2;
+}
 
-        @include media(tablet) {
-            padding: 0px 15px 60px 15px;
-        }
+#footer .footer-wrapper {
+    margin: 0 auto;
+    width: auto;
+    max-width: 1020px;
+    padding-top: 20px;
+    background-color: #dee0e2;
+    margin: 0 auto;
+}
 
-        @include media(mobile) {
-            padding: 0px 15px 60px 15px;
-        }
+#footer .footer-agencies {
+    color: #454a4c;
+}
 
-        @include media(desktop) {
-            padding: 0px 30px 0px 30px;
-        }
+@media (min-width: 641px) {
+    #footer .footer-agencies {
+        padding: 0 15px 60px 15px;
     }
+}
 
-    hr {
-        clear: both;
-        margin: 0 15px 30px;
-        border: 1px solid $border-colour;
-        border-width: 1px 0 0 0;
+@media (min-width: 769px) {
+    #footer .footer-agencies {
+        padding: 0 30px 0 30px;
+    }
+}
 
-        @include media(tablet) {
-            margin-bottom: 0;
-        }
+@media (min-width: 641px) {
+    #footer .footer-wrapper {
+        padding-top: 60px;
+    }
+}
+
+#footer a {
+    color: #454a4c;
+}
+
+#footer a:hover {
+    color: #171819;
+}
+
+#footer h2 {
+    font-family: "nta", Arial, sans-serif;
+    font-size: 24px;
+    line-height: 1.25;
+    font-weight: 400;
+    text-transform: none;
+    font-weight: bold;
+    color: #171819;
+    margin: 0;
+}
+
+@media (max-width: 640px) {
+    #footer h2 {
+        font-size: 18px;
+        line-height: 1.2;
+    }
+}
+
+#footer h2 a {
+    color: inherit;
+}
+
+#footer .footer-meta {
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-bottom: 60px;
+    clear: both;
+    font-size: 0;
+    color: #454a4c;
+}
+
+#footer, .footer-meta, .footer-meta-inner {
+    display: inline-block;
+    vertical-align: bottom;
+    width: 100%;
+}
+
+@media (min-width: 641px) {
+    #footer .footer-meta .footer-meta-inner {
+        width: 77% !important;
+    }
+}
+
+#footer .footer-meta .footer-meta-inner ul {
+    font-family: "nta", Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.5;
+    font-weight: 400;
+    text-transform: none;
+    display: inline-block;
+    list-style: none;
+    margin: 0 0 1.5em 0;
+    padding: 0;
+}
+
+@media (max-width: 640px) {
+    #footer .footer-meta .footer-meta-inner ul {
+        font-size: 14px;
+        line-height: 1.5;
+    }
+}
+
+@media (min-width: 641px) {
+    #footer .footer-meta .footer-meta-inner ul {
+        margin: 0 0 1em 0;
+    }
+}
+
+#footer .footer-meta .footer-meta-inner ul li {
+    display: inline-block;
+    margin: 0 15px 0 0;
+}
+
+#footer .footer-meta .footer-meta-inner .open-government-licence {
+    clear: left;
+    position: relative;
+}
+
+@media (min-width: 641px) {
+    #footer .footer-meta .footer-meta-inner .open-government-licence {
+        padding-left: 53px;
+    }
+}
+
+#footer .footer-meta .footer-meta-inner .open-government-licence .logo {
+    margin-bottom: 1em;
+    padding-top: 0;
+}
+
+@media (min-width: 641px) {
+    #footer .footer-meta .footer-meta-inner .open-government-licence .logo {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 41px;
+        height: 100%;
+    }
+}
+
+#footer .footer-meta .footer-meta-inner .open-government-licence .logo a {
+    display: block;
+    width: 41px;
+    height: 17px;
+    overflow: hidden;
+    text-indent: -999em;
+    background: url(images/open-government-licence.png) 0 0 no-repeat;
+}
+
+@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 20 / 10), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
+    #footer .footer-meta .footer-meta-inner .open-government-licence .logo a {
+        background-image: url(images/open-government-licence_2x.png);
+        background-size: 41px 17px;
+    }
+}
+
+#footer .footer-meta .footer-meta-inner .open-government-licence p {
+    font-family: "nta", Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.25;
+    font-weight: 400;
+    text-transform: none;
+    margin: 0;
+    padding-top: 0.1em;
+}
+
+@media (max-width: 640px) {
+    #footer .footer-meta .footer-meta-inner .open-government-licence p {
+        font-size: 14px;
+        line-height: 1.14286;
+    }
+}
+
+#footer .footer-meta .copyright {
+    font-family: "nta", Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.25;
+    font-weight: 400;
+    text-transform: none;
+    margin: 30px 0 0 0;
+    width: 100%;
+    display: block;
+}
+
+@media (max-width: 640px) {
+    #footer .footer-meta .copyright {
+        font-size: 14px;
+        line-height: 1.14286;
+    }
+}
+
+@media (min-width: 641px) {
+    #footer .footer-meta .copyright {
+        display: inline-block;
+        text-align: inherit;
+        width: 23% !important;
+        padding-top: 15px;
+        margin-top: 0;
+    }
+}
+
+#footer .footer-meta .copyright a {
+    display: block;
+    background-image: url(./govuk-frontend/govuk/assets/images/govuk-crest.png);
+    background-repeat: no-repeat;
+    background-position: 50% 0%;
+    text-align: center;
+    text-decoration: none;
+    padding: 115px 0 0 0;
+}
+
+@media (min-width: 641px) {
+    #footer .footer-meta .copyright a {
+        background-position: 100% 0%;
+    }
+}
+
+@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 20 / 10), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
+    #footer .footer-meta .copyright a {
+        background-image: url(./govuk-frontend/govuk/assets/images/govuk-crest-2x.png);
+        background-size: 125px 102px;
+    }
+}
+
+@media (min-width: 641px) {
+    #footer .footer-meta .copyright a {
+        text-align: right;
     }
 }

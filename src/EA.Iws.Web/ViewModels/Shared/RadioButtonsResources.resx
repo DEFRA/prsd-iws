@@ -120,4 +120,7 @@
   <data name="AnswerRequired" xml:space="preserve">
     <value>Please answer this question</value>
   </data>
+  <data name="CompetentAuthorityRequired" xml:space="preserve">
+    <value>Please choose your competent authority</value>
+  </data>
 </root>

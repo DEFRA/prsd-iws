@@ -152,7 +152,7 @@
             await facilityController.Add(notificationId, null);
 
             A.CallTo(() => mediator.SendAsync(A<GetNotificationBasicInfo>.That.Matches(p => p.NotificationId == notificationId)))
-                .MustHaveHappened(Repeated.Exactly.Once);
+                .MustHaveHappenedOnceExactly();
         }
 
         [Fact]
@@ -174,7 +174,7 @@
 
             await facilityController.Add(model);
 
-            A.CallTo(() => mediator.SendAsync(A<AddFacilityToNotification>._)).MustHaveHappened(Repeated.Exactly.Once);
+            A.CallTo(() => mediator.SendAsync(A<AddFacilityToNotification>._)).MustHaveHappenedOnceExactly();
         }
 
         [Fact]
@@ -237,7 +237,7 @@
             await facilityController.Edit(notificationId, facilityId);
 
             A.CallTo(() => mediator.SendAsync(A<GetNotificationBasicInfo>.That.Matches(p => p.NotificationId == notificationId)))
-                .MustHaveHappened(Repeated.Exactly.Once);
+                .MustHaveHappenedOnceExactly();
         }
 
         [Fact]
@@ -259,7 +259,7 @@
 
             await facilityController.Edit(model);
 
-            A.CallTo(() => mediator.SendAsync(A<UpdateFacilityForNotification>._)).MustHaveHappened(Repeated.Exactly.Once);
+            A.CallTo(() => mediator.SendAsync(A<UpdateFacilityForNotification>._)).MustHaveHappenedOnceExactly();
         }
 
         [Fact]
@@ -324,7 +324,7 @@
             A.CallTo(
                 () =>
                     mediator.SendAsync(A<GetFacilitiesByNotificationId>.That.Matches(p => p.NotificationId == notificationId)))
-                .MustHaveHappened(Repeated.Exactly.Once);
+                .MustHaveHappenedOnceExactly();
         }
 
         [Fact]
@@ -335,7 +335,7 @@
             A.CallTo(
                 () =>
                     mediator.SendAsync(A<GetNotificationBasicInfo>.That.Matches(p => p.NotificationId == notificationId)))
-                .MustHaveHappened(Repeated.Exactly.Once);
+                .MustHaveHappenedOnceExactly();
         }
 
         [Fact]
@@ -354,7 +354,7 @@
             A.CallTo(
                 () =>
                     mediator.SendAsync(A<GetFacilitiesByNotificationId>.That.Matches(p => p.NotificationId == notificationId)))
-                .MustHaveHappened(Repeated.Exactly.Once);
+                .MustHaveHappenedOnceExactly();
         }
 
         [Fact]
@@ -365,7 +365,7 @@
             A.CallTo(
                 () =>
                     mediator.SendAsync(A<GetNotificationBasicInfo>.That.Matches(p => p.NotificationId == notificationId)))
-                .MustHaveHappened(Repeated.Exactly.Once);
+                .MustHaveHappenedOnceExactly();
         }
 
         [Fact]
@@ -382,7 +382,7 @@
             A.CallTo(
                 () =>
                     mediator.SendAsync(A<SetActualSiteOfTreatment>.That.Matches(p => p.NotificationId == notificationId && p.FacilityId == facilityId)))
-                .MustHaveHappened(Repeated.Exactly.Once);
+                .MustHaveHappenedOnceExactly();
         }
 
         [Fact]
@@ -501,7 +501,7 @@
                 () =>
                     mediator.SendAsync(A<SetPreconsentedRecoveryFacility>.That.Matches(
                             p => p.NotificationId == notificationId && p.IsPreconsentedRecoveryFacility)))
-                            .MustHaveHappened(Repeated.Exactly.Once);
+                            .MustHaveHappenedOnceExactly();
         }
 
         [Fact]
@@ -606,7 +606,7 @@
                 () =>
                     mediator.SendAsync(A<DeleteFacilityForNotification>.That.Matches(
                             p => p.NotificationId == notificationId && p.FacilityId == facilityId)))
-                .MustHaveHappened(Repeated.Exactly.Once);
+                .MustHaveHappenedOnceExactly();
         }
 
         [Fact]

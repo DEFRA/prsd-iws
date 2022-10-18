@@ -112,7 +112,7 @@
             var validationResults = new List<ValidationResult>();
             Validator.TryValidateObject(registerViewModel, validationContext, validationResults, true);
 
-            Assert.True(validationResults.Any(vr => vr.ErrorMessage.Equals(ApplicantRegistrationResources.ConfirmTnCs)));
+            Assert.Contains(validationResults, vr => vr.ErrorMessage.Equals(ApplicantRegistrationResources.ConfirmTnCs));
         }
 
         [Fact]

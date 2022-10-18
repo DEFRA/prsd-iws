@@ -52,7 +52,7 @@
                         Value = ((int)s).ToString()
                     }).ToList();
 
-                units.Insert(0, new SelectListItem { Text = "View all", Value = string.Empty });
+                units.Insert(0, new SelectListItem { Text = "View all shipment status'", Value = string.Empty });
 
                 return new SelectList(units, "Value", "Text", SelectedMovementStatus);
             }
