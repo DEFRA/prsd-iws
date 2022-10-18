@@ -299,7 +299,6 @@
     <Content Include="Content\images\govuk-crest.png" />
     <Content Include="Content\images\open-government-licence.png" />
     <Content Include="Content\images\open-government-licence_2x.png" />
-    <Content Include="Content\iws\_govuk-template.css" />
     <Content Include="Content\iws\_entry-or-exit-point.scss" />
     <Content Include="Content\iws\_notification-switcher.scss" />
     <Content Include="Areas\ImportNotification\Views\Facility\Add.cshtml" />
@@ -788,7 +787,7 @@
     <Content Include="Content\iws\_css3.scss" />
     <Content Include="Content\iws\_conditionals.scss" />
     <Content Include="Content\iws\_shims.scss" />
-    <Content Include="Content\iws\_govuk-template-base.scss" />
+    <Content Include="Content\iws\_cookies-banner.scss" />
     <None Include="Scripts\jquery-3.6.0.intellisense.js" />
     <Content Include="Scripts\jquery-3.6.0.js" />
     <Content Include="Scripts\jquery-3.6.0.min.js" />
