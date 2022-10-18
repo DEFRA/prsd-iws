@@ -15,6 +15,12 @@
 </div>
 
 <div class="form-group @Html.Gds().FormGroupClass(m => m.Business.BusinessType)">
+    <fieldset>
+        <legend class="form-label">
+            @BusinessResources.BusinessTypeHeader
+        </legend>
+    </fieldset>
+
     @Html.Gds().ValidationMessageFor(m => m.Business.BusinessType)
 
     <div class="multiple-choice" data-target="sole-trader-number">
@@ -37,7 +43,7 @@
             @EnumHelper.GetDisplayName(BusinessType.LimitedCompany)
         </label>
     </div>
-    
+
     <div class="panel @(Model.Business.BusinessType != null && Model.Business.BusinessType.Equals("Limited company") ? "" : "js-hidden")" id="companies-house-number">
         <div class="form-group @Html.Gds().FormGroupClass(m => m.Business.RegistrationNumber)" data-validation-behaviour="ignore-parent">
             @Html.Gds().LabelFor(m => m.Business.RegistrationNumber, false)
@@ -62,7 +68,7 @@
             @EnumHelper.GetDisplayName(BusinessType.Other)
         </label>
     </div>
-    
+
     <div class="panel hide-for-initial-load @(Model.Business.BusinessType != null && Model.Business.BusinessType == BusinessType.Other ? "" : "js-hidden")" id="other-description">
         <div class="form-group @Html.Gds().FormGroupClass(m => m.Business.OtherDescription)">
             @Html.Gds().LabelFor(m => m.Business.OtherDescription)

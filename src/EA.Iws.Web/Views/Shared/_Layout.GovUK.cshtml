@@ -70,7 +70,7 @@
             <div class="header-global">
                 <div class="header-logo">
                     <a href="@Html.Raw(ViewBag.HomepageUrl ?? "https://www.gov.uk/")" title="@Html.Raw(ViewBag.LogoLinkTitle ?? "Go to the GOV.UK homepage")" id="logo" class="content">
-                        <img src="@Url.Content("~/Content/govuk-frontend/govuk/assets/images/govuk-logotype-crown.png")" width="35" height="31" alt=""> @Html.Raw(ViewBag.GlobalHeaderText ?? "GOV.UK")
+                        <img src="@Url.Content("~/Content/govuk-frontend/govuk/assets/images/govuk-logotype-crown.png")" width="35" height="31" alt="GOV.UK Crown"> @Html.Raw(ViewBag.GlobalHeaderText ?? "GOV.UK")
                     </a>
                 </div>
                 @RenderSection("inside_header", required: false)

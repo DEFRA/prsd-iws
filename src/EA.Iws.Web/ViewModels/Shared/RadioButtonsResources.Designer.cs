@@ -68,5 +68,14 @@ namespace EA.Iws.Web.ViewModels.Shared {
                 return ResourceManager.GetString("AnswerRequired", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please choose your competent authority.
+        /// </summary>
+        public static string CompetentAuthorityRequired {
+            get {
+                return ResourceManager.GetString("CompetentAuthorityRequired", resourceCulture);
+            }
+        }
     }
 }

@@ -79,6 +79,15 @@ namespace EA.Iws.Web.ViewModels.Shared {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Choose the type of organisation.
+        /// </summary>
+        public static string BusinessTypeHeader {
+            get {
+                return ResourceManager.GetString("BusinessTypeHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Companies House number.
         /// </summary>
         public static string CompaniesHouseNumber {
