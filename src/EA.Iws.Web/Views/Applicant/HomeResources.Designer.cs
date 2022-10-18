@@ -97,6 +97,15 @@ namespace EA.Iws.Web.Views.Applicant {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Filter by notification status:.
+        /// </summary>
+        public static string FilterByNotificationStatus {
+            get {
+                return ResourceManager.GetString("FilterByNotificationStatus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to  first..
         /// </summary>
         public static string First {
@@ -219,6 +228,15 @@ namespace EA.Iws.Web.Views.Applicant {
         public static string SearchForNotification {
             get {
                 return ResourceManager.GetString("SearchForNotification", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter Notification Number:.
+        /// </summary>
+        public static string SearchForNotificationNumber {
+            get {
+                return ResourceManager.GetString("SearchForNotificationNumber", resourceCulture);
             }
         }
         

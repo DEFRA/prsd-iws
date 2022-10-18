@@ -46,9 +46,8 @@
                 </div>
             </div>
         </div>
-
-        <br/>
-        <br/>
+        
+        <br />
         @if (Model.CompetentAuthority == UKCompetentAuthority.NorthernIreland)
         {
             <p>@Resources.ListAvailablePaymentMethodsNIEA</p>
@@ -58,59 +57,89 @@
             <p>@Resources.ListAvailablePaymentMethods</p>
         }
         
-        <br/>
-        <h4 class="heading-small">@Resources.BankTransfer</h4>
+        <h2>@Resources.BankTransfer</h2>
         <p>@Resources.BankTransferReferenceDisclaimer</p>
     </div>
 </div>
 
-<div>
-    <table class="table-pad-bottom" title="Bank details">
-        <tbody>
-            <tr>
-                <td>Payment reference</td>
-                <td>@Html.DisplayFor(m => m.NotificationNumber)</td>
-            </tr>
-            <tr>
-                <td>Payment due</td>
-                <td>@Html.Raw(due.ToString("C"))</td>
-            </tr>
-            <tr>
-                <td>Account name</td>
-                <td>@Html.DisplayFor(m => m.UnitedKingdomCompetentAuthorityData.BacsDetails.AccountName)</td>
-            </tr>
-            <tr>
-                <td>Bank name</td>
-                <td>@Html.DisplayFor(m => m.UnitedKingdomCompetentAuthorityData.BacsDetails.Bank)</td>
-            </tr>
-            <tr>
-                <td>Bank address</td>
-                <td>@Html.DisplayFor(m => m.UnitedKingdomCompetentAuthorityData.BacsDetails.BankAddress)</td>
-            </tr>
-            <tr>
-                <td>Sort code</td>
-                <td>@Html.DisplayFor(m => m.UnitedKingdomCompetentAuthorityData.BacsDetails.SortCode)</td>
-            </tr>
-            <tr>
-                <td>Account number</td>
-                <td>@Html.DisplayFor(m => m.UnitedKingdomCompetentAuthorityData.BacsDetails.AccountNumber)</td>
-            </tr>
-        </tbody>
-    </table>
+<dl class="govuk-body govuk-summary-list">
+    <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+            Payment reference
+        </dt>
+        <dd class="govuk-summary-list__value">
+            @Html.DisplayFor(m => m.NotificationNumber)
+        </dd>
+    </div>
+    <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+            Payment due
+        </dt>
+        <dd class="govuk-summary-list__value">
+            @Html.Raw(due.ToString("C"))
+        </dd>
+    </div>
+    <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+            Account name
+        </dt>
+        <dd class="govuk-summary-list__value">
+            @Html.DisplayFor(m => m.UnitedKingdomCompetentAuthorityData.BacsDetails.AccountName)
+        </dd>
+    </div>
+    <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+            Bank name
+        </dt>
+        <dd class="govuk-summary-list__value">
+            @Html.DisplayFor(m => m.UnitedKingdomCompetentAuthorityData.BacsDetails.Bank)
+        </dd>
+    </div>
+    <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+            Bank address
+        </dt>
+        <dd class="govuk-summary-list__value">
+            @Html.DisplayFor(m => m.UnitedKingdomCompetentAuthorityData.BacsDetails.BankAddress)
+        </dd>
+    </div>
+    <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+            Sort code
+        </dt>
+        <dd class="govuk-summary-list__value">
+            @Html.DisplayFor(m => m.UnitedKingdomCompetentAuthorityData.BacsDetails.SortCode)
+        </dd>
+    </div>
+    <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+            Account number
+        </dt>
+        <dd class="govuk-summary-list__value">
+            @Html.DisplayFor(m => m.UnitedKingdomCompetentAuthorityData.BacsDetails.AccountNumber)
+        </dd>
+    </div>
+</dl>
 
-
-    <p>@Resources.BankTransferInternational</p>
-    <table class="table-pad-bottom" title="International banking details">
-        <tr>
-            <td>IBAN</td>
-            <td>@Html.DisplayFor(m => m.UnitedKingdomCompetentAuthorityData.BacsDetails.Iban)</td>
-        </tr>
-        <tr>
-            <td>SWIFTBIC</td>
-            <td>@Html.DisplayFor(m => m.UnitedKingdomCompetentAuthorityData.BacsDetails.SwiftBic)</td>
-        </tr>
-    </table>
-</div>
+<p style="margin-top:30px;">@Resources.BankTransferInternational</p>
+<dl class="govuk-body govuk-summary-list">
+    <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+            IBAN
+        </dt>
+        <dd class="govuk-summary-list__value">
+            @Html.DisplayFor(m => m.UnitedKingdomCompetentAuthorityData.BacsDetails.Iban)
+        </dd>
+    </div>
+    <div class="govuk-summary-list__row">
+        <dt class="govuk-summary-list__key">
+            SWIFTBIC
+        </dt>
+        <dd class="govuk-summary-list__value">
+            @Html.DisplayFor(m => m.UnitedKingdomCompetentAuthorityData.BacsDetails.SwiftBic)
+        </dd>
+    </div>
+</dl>
 
 <div class="grid-row column-two-thirds">
     @if (Model.CompetentAuthority == UKCompetentAuthority.Wales)
@@ -124,15 +153,12 @@
 
     @Html.Partial("_RemittancePost")
 
-    <h4 class="heading-small">@Resources.Post</h4>
+    <h2>@Resources.Post</h2>
     @Html.Partial("_GeneralPost")
 
     @Html.Action("CardPaymentInformation", new { competentAuthority = Model.CompetentAuthority })
 
-
-
-
-    <br/><br/>
+    <br /><br />
 
     @if (Model.Status == NotificationStatus.NotSubmitted)
     {
@@ -151,5 +177,5 @@
         </div>
     }
 
-    
+
 </div>

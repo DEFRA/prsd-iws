@@ -1,0 +1,67 @@
+﻿/* Global header bar */
+#global-header-bar {
+    height: 10px;
+    background-color: #005ea5;
+}
+
+/* Global cookie message */
+.js-enabled #global-cookie-message {
+    display: none;
+    /* shown with JS, always on for non-JS */
+}
+
+#global-cookie-message {
+    width: 100%;
+    background-color: #f3f2f1;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+#acceptCookies, #rejectCookies, #hideAcceptCookies, #hideRejectCookies {
+    margin: 0px 5px;
+    font-size: 14px;
+    vertical-align: initial !important;
+}
+
+#global-cookie-message {
+    width: 100%;
+    background-color: #f3f2f1;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+#global-cookie-message-p2 {
+    font-size: 15px;
+    font-weight: 400;
+    font-style: normal;
+    margin-bottom: 10px !important;
+}
+
+#hideAcceptCookies, #hideRejectCookies {
+    margin-bottom: 10px;
+}
+
+.cookie-settings-confirmation {
+    font-size: 16px;
+    line-height: 1.3157894737;
+    font-family: "GDS Transport",arial,sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-weight: 400;
+    line-height: 1.25;
+    display: none;
+}
+
+#global-cookie-message-p1 {
+    font-size: 20px;
+    font-weight: 700;
+    font-style: normal;
+    margin-bottom: 10px !important;
+}
+
+@media (max-width: 640px) {
+    #global-cookie-message-p1 {
+        font-size: 14px;
+        line-height: 1.14286;
+    }
+}

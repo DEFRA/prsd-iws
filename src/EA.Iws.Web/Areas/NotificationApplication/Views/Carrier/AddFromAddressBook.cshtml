@@ -16,8 +16,11 @@
 
     <div class="form-group-compound @Html.Gds().FormGroupClass(m => m.SelectedCarrier)">
         @Html.Gds().ValidationMessageFor(m => m.SelectedCarrier)
+        <label class="form-label">
+            @Resources.SelectCarrier
+        </label>
         @Html.Gds().DropDownListFor(m => m.SelectedCarrier, Model.CarriersList, string.Empty, new { title = Resources.CarrierListTitle, data_select_box = "true", tabindex = 1 })
-        <button type="submit" name="command" value="addcarrier" tabindex="2" class="button-secondary">@Resources.AddCarrier</button>
+        <button type="submit" name="command" value="addcarrier" tabindex="2" class="button">@Resources.AddCarrier</button>
     </div>
 
     <h2 class="heading-medium">@Resources.ChosenCarriers</h2>
@@ -28,7 +31,7 @@
                 <tr>
                     <th>@Resources.Carrier</th>
                     <th></th>
-                    <th></th>
+                    <th>Action</th>
                 </tr>
             </thead>
             @if (Model.SelectedCarriers.Count < 1)

@@ -26,7 +26,7 @@
             @Html.Gds().LabelFor(m => m.FurtherDetails)
             @Html.Gds().HintParagraph(@TechnologyEmployedResources.FurtherDetailsDescription)
             @Html.Gds().ValidationMessageFor(m => m.FurtherDetails)
-            @Html.TextAreaFor(m => m.FurtherDetails, new { @style = "width: 100%; height: 200px", @title = TechnologyEmployedResources.FurtherDetailsTitle })
+            @Html.TextAreaFor(m => m.FurtherDetails, new { @style = "width: 100%; height: 200px; font-size:19px;", @title = TechnologyEmployedResources.FurtherDetailsTitle })
         </div>
 
         <div class="form-group @Html.Gds().FormGroupClass(m => m.AnnexProvided)">

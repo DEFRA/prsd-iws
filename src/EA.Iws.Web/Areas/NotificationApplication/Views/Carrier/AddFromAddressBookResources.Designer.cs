@@ -134,6 +134,15 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.Carrier {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Select carrier from your address book.
+        /// </summary>
+        public static string SelectCarrier {
+            get {
+                return ResourceManager.GetString("SelectCarrier", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Add carriers from your address book.
         /// </summary>
         public static string Title {

@@ -12,7 +12,7 @@
         <th>@Resources.Name</th>
         <th>@Resources.Status</th>
         <th>@Resources.Role</th>
-        <th></th>
+        <th>Action</th>
     </tr>
     </thead>
     <tbody>
@@ -27,7 +27,7 @@
                 <td class="font-xsmall" title="@Model.Users[i].Email">@Model.Users[i].FullName</td>
                 <td class="font-xsmall">@Model.Users[i].Status</td>
                 <td>@Html.DropDownList("Role", Model.GetUserRolesList(Model.Users[i].Role), new { id = string.Format("Role{0}", i) })</td>
-                <td><button type="submit">@Resources.Update</button></td>
+                <td><button type="submit" style="width:auto">@Resources.Update</button></td>
             </tr>
         }
     }
