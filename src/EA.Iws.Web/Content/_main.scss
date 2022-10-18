@@ -4,7 +4,6 @@ $govuk-assets-path: "~/Content/govuk-frontend/govuk/assets/";
 @import "govuk-frontend/govuk/all";
 
 @import "iws/address-book";
-@import "iws/buttons";
 @import "iws/details";
 @import "iws/dialog";
 @import "iws/display-elements";
@@ -29,6 +28,5 @@ $govuk-assets-path: "~/Content/govuk-frontend/govuk/assets/";
 @import "iws/pagination";
 @import "iws/form-multiple-choice";
 @import "iws/grid_layout";
-@import "iws/govuk-template-base";
-@import "iws/govuk-template";
 @import "themes/base/all.css";
+@import "iws/_cookies-banner";
