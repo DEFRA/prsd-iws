@@ -56,10 +56,6 @@ ul, li {
     }
 }
 
-.grid-row {
-    margin: 0 -15px
-}
-
 #content, #global-header-bar {
     max-width: 960px;
     margin: 0 15px
@@ -247,18 +243,6 @@ li.clear-child {
     margin-bottom: 70px;
 }
 
-.green-text {
-    color: $button-colour;
-}
-
-.red-text {
-    color: $error-colour;
-}
-
-.grey-text {
-    color: $grey-1;
-}
-
 .status-circle {
     font-size: 21px !important;
 }
@@ -336,17 +320,6 @@ table.table-pad-bottom {
     padding-top: 10px;
     min-height: 50px;
     padding-bottom: 10px;
-}
-
-#form-menu .summary-list li {
-    font-size: inherit;
-    font-weight: normal;
-    display: inline-block;
-    padding: 0;
-    padding-top: 9px;
-    padding-bottom: 9px;
-    border-top: 1px solid $border-colour;
-    padding-bottom: 16px;
 }
 
 .form-control-wide {
@@ -1542,12 +1515,11 @@ fieldset {
 }
 
 .multiple-choice {
-    display: block;
-    float: none;
+    display: block;    
     clear: left;
     position: relative;
     padding: 0 0 0 38px;
-    margin-bottom: 10px;
+    margin-bottom: 10px !important;
 }
 
 @media (min-width: 641px) {
@@ -1736,7 +1708,6 @@ ul, ol {
     text-transform: none;
     font-size: 24px;
     line-height: 1.04167;
-    display: block;
     margin-top: 1.04167em;
     margin-bottom: 0.41667em;
 }
@@ -2141,7 +2112,7 @@ input[type=number] {
     font-family: "nta-extended",Arial,sans-serif;
     font-weight: 400;
     text-transform: none;
-    font-size: 16px;
+    font-size: 19px;
     line-height: 1.25;
     display: block;
     color: #6f777b;
@@ -2152,7 +2123,7 @@ input[type=number] {
 
 @media (min-width: 641px) {
     .form-hint {
-        font-size: 16px;
+        font-size: 19px;
         line-height: 1.31579;
     }
 }
@@ -2306,7 +2277,7 @@ input[type=number] {
 
 .heading-medium {
     font-family: "nta-extended",Arial,sans-serif;
-    font-weight: 700;
+    font-weight: 700 !important;
     text-transform: none;
     font-size: 18px;
     line-height: 1.2;
@@ -2392,6 +2363,7 @@ details {
     details .summary {
         text-decoration: underline;
         font-size: inherit;
+        font-weight: normal;
     }
 
 summary > h2 {
@@ -2463,23 +2435,6 @@ summary > h2 {
     }
 }
 
-@media (min-width: 641px) {
-    .multiple-choice {
-        float: left !important;
-    }
-}
-
-.inline .multiple-choice {
-    clear: none;
-}
-
-@media (min-width: 641px) {
-    .inline .multiple-choice {
-        margin-bottom: 0;
-        margin-right: 30px;
-    }
-}
-
 .button {
     width: auto;
 }
@@ -2503,7 +2458,7 @@ summary > h2 {
 
 @media (min-width: 641px) {
     .heading-medium {
-        margin-top: 1.875em;
+        /*margin-top: 1.875em;*/
         margin-bottom: 0.83333em;
     }
 }
@@ -2522,4 +2477,101 @@ summary > h2 {
 
 #dvAccessibility ul, #dvGoogleAnalytics li {
     list-style-type: inherit !important;
+}
+
+.visually-hidden, .visuallyhidden {
+    position: absolute;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    width: 1px;
+    margin: -1px;
+    padding: 0;
+    border: 0;
+}
+
+#submit-overview-area details > summary {
+    display: block;
+}
+
+details .show-all {
+    padding-right: 25px;
+    text-align: right;
+}
+
+details .show-all:before {
+    left: auto !important;
+    right: 0 !important;
+}
+
+details summary:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    margin: auto;
+    display: block;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-color: transparent;
+    -webkit-clip-path: polygon(0% 0%,100% 50%,0% 100%);
+    clip-path: polygon(0% 0%,100% 50%,0% 100%);
+    border-width: 7px 0 7px 12.124px;
+    border-left-color: inherit;
+}
+
+.bold-xsmall {
+    font-family: "nta-extended",Arial,sans-serif;
+    font-weight: 700;
+    text-transform: none;
+    font-size: 14px;
+    line-height: 1.14286;
+}
+
+@media (min-width: 641px) {
+    .bold-xsmall {
+        font-size: 16px;
+        line-height: 1.25;
+    }
+}
+
+.stickit {
+    margin-left: 660px;
+    position: fixed;
+    top: 0;
+}
+
+#form-menu .summary-list {
+    padding-bottom: 16px;
+}
+
+.grey-text {
+    color: #6f777b;
+}
+
+#form-menu .summary-list > li {
+    font-family: "nta-extended",Arial,sans-serif;
+    font-weight: 400;
+    text-transform: none;
+    font-size: 16px;
+    line-height: 1.25;
+    padding-top: 9px;
+    padding-bottom: 9px;
+    border-top: 1px solid #bfc1c3;
+}
+
+@media (min-width: 641px) {
+    #form-menu .summary-list>li {
+        font-size: 19px;
+        line-height: 1.31579;
+    }
+}
+
+#form-menu .summary-list > li > span {
+    font-size: inherit;
+    font-weight: normal;
+    display: inline-block;
+    padding: 0;
 }
