@@ -23,6 +23,10 @@
     vertical-align: initial !important;
 }
 
+#acceptCookies {
+    margin-left:0px !important;
+}
+
 #global-cookie-message {
     width: 100%;
     background-color: #f3f2f1;
@@ -64,4 +68,8 @@
         font-size: 14px;
         line-height: 1.14286;
     }
+}
+
+#global-cookie-accept-message, #global-cookie-reject-message {
+    padding-top: 15px;
 }
