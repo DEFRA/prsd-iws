@@ -2575,3 +2575,11 @@ details summary:before {
     display: inline-block;
     padding: 0;
 }
+
+.hgroup {
+    margin-bottom: 1.66667em;
+}
+
+#dvPrivacy ul, #dvPrivacy li {
+    list-style-type: inherit !important;
+}
