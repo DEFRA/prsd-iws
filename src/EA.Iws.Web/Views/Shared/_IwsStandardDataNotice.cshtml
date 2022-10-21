@@ -1,16 +1,18 @@
 ﻿@using EA.Iws.Web.Views.Shared
 
-<div>
-    <h2 class="heading-medium">
-        @IwsStandardDataNoticeResources.ReadCarefully
-    </h2>
+<div id="dvPrivacy">
+    <header class="hgroup">
+        <h1 class="heading-large">
+            @IwsStandardDataNoticeResources.ReadCarefully
+        </h1>
+    </header>
 
     <h2 class="heading-small">@IwsStandardDataNoticeResources.PersonalInfoHeading</h2>
     <p>
         @IwsStandardDataNoticeResources.PersonalInfoIntro
     </p>
     <h2 class="heading-small">@IwsStandardDataNoticeResources.EA</h2>
-    <h2>@IwsStandardDataNoticeResources.EASubHeading</h2>
+    <label>@IwsStandardDataNoticeResources.EASubHeading</label>
     <p>
         <a href="https://www.gov.uk/government/organisations/environment-agency/about/personal-information-charter" target="_blank">https://www.gov.uk/government/organisations/environment-agency/about/personal-information-charter</a><br>
         @IwsStandardDataNoticeResources.EAPara
