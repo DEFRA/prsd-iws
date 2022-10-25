@@ -2583,3 +2583,7 @@ details summary:before {
 #dvPrivacy ul, #dvPrivacy li {
     list-style-type: inherit !important;
 }
+
+#SelectedMovementStatus {
+    width: 55% !important;
+}
