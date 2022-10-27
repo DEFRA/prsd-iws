@@ -1514,14 +1514,6 @@ fieldset {
     width: 100%;
 }
 
-.multiple-choice {
-    display: block;    
-    clear: left;
-    position: relative;
-    padding: 0 0 0 38px;
-    margin-bottom: 10px !important;
-}
-
 @media (min-width: 641px) {
     .multiple-choice {
         float: left;
@@ -2586,4 +2578,8 @@ details summary:before {
 
 #SelectedMovementStatus {
     width: 55% !important;
+}
+
+textarea {
+    font-family: "nta-extended",Arial,sans-serif;
 }
