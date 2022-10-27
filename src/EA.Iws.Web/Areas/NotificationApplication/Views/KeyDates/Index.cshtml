@@ -29,14 +29,7 @@
                     <tr>
                         <th>Activities</th>
                         <th>Dates</th>
-                        @if (Model.Decisions.Count > 0)
-                        {
-                            <th>Date Consented</th>
-                        }
-                        else
-                        {
-                            <td></td>
-                        }
+                        <th>Date Consented</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -52,7 +45,7 @@
                                 @nullMarker
                             }
                         </td>
-                        <td></td>
+                        <td>--</td>
                     </tr>
                     <tr>
                         <td>Payment received</td>
@@ -66,7 +59,7 @@
                                 @nullMarker
                             }
                         </td>
-                        <td></td>
+                        <td>--</td>
                     </tr>
                     <tr>
                         <td>Assessment started</td>
@@ -82,7 +75,7 @@
                                 @nullMarker
                             }
                         </td>
-                        <td></td>
+                        <td>--</td>
                     </tr>
                     <tr>
                         <td>Notification complete</td>
@@ -96,7 +89,7 @@
                                 @nullMarker
                             }
                         </td>
-                        <td></td>
+                        <td>--</td>
                     </tr>
                     <tr>
                         <td>Transmitted on</td>
@@ -110,7 +103,7 @@
                                 @nullMarker
                             }
                         </td>
-                        <td></td>
+                        <td>--</td>
                     </tr>
                     <tr>
                         <td>Acknowledged on</td>
@@ -124,7 +117,7 @@
                                 @nullMarker
                             }
                         </td>
-                        <td></td>
+                        <td>--</td>
                     </tr>
                     <tr>
                         <td>Decision required by</td>
@@ -138,7 +131,7 @@
                                 @nullMarker
                             }
                         </td>
-                        <td></td>
+                        <td>--</td>
                     </tr>
                     @for (int i = 0; i < Model.Decisions.Count; i++)
                     {
@@ -154,6 +147,10 @@
                                 {
                                     @Html.Gds().DisplayShortDateRangeFor(m => m.Decisions[i].ConsentedFrom.GetValueOrDefault(), m => m.Decisions[i].ConsentedTo.GetValueOrDefault())
                                 }
+                                else
+                                {
+                                     @Html.Raw("--");
+                                }                                
                             </td>
                         </tr>
                     }
