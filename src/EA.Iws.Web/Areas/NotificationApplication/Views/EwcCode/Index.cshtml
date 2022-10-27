@@ -46,7 +46,7 @@
                         <td>@Html.HiddenFor(m => m.EnterWasteCodesViewModel.SelectedWasteCodes[i]) @Html.Raw(thisCode.Name)</td>
                         <td>@Html.Raw(thisCode.Description)</td>
                         <td><input name="EnterWasteCodesViewModel.SelectedCodesList[@i].Id" type="hidden" value="@Model.EnterWasteCodesViewModel.SelectedWasteCodes[i]" /></td>
-                        <td><button class="link-submit" type="submit" name="remove" value="@Model.EnterWasteCodesViewModel.SelectedWasteCodes[i]">@EwcCodeResources.Remove</button></td>
+                        <td><button class="link-submit" type="submit" name="remove" value="@Model.EnterWasteCodesViewModel.SelectedWasteCodes[i]" title="@Html.Raw(thisCode.Name)">@EwcCodeResources.Remove</button></td>
                     </tr>
                 }
             </table>

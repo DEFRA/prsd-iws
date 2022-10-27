@@ -172,7 +172,8 @@ BEGIN
           ,[HCode]
           ,[UNClass]
 		  ,[SiteOfExportName]
-		  ,[RejectedShipmentDate] 
+          ,[RejectedQuantity]
+		  ,[ShipmentRejectedDate] 
           ,[RejectedReason]
           ,[ActionedByExternalUser])
     SELECT [NotificationId]
@@ -214,7 +215,8 @@ BEGIN
           ,[HCode]
           ,[UNClass]
 		  ,[SiteOfExportName]
-		  ,[RejectedShipmentDate]
+          ,[RejectedQuantity]
+		  ,[ShipmentRejectedDate]
           ,[RejectedReason]
           ,[ActionedByExternalUser]
       FROM [Reports].[Shipments];
