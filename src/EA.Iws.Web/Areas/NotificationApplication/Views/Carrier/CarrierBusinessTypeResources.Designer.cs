@@ -62,6 +62,15 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.Carrier {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Choose the type of organisation.
+        /// </summary>
+        public static string OrganisationTypeTitle {
+            get {
+                return ResourceManager.GetString("OrganisationTypeTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to If none of these options apply, please select &quot;Other&quot; and add details.
         /// </summary>
         public static string OthersHint {

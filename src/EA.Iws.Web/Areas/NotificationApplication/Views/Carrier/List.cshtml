@@ -30,10 +30,10 @@
                         </td>
                         <td>
                             @Html.ActionLink(ListCarrierResources.Edit, "Edit", "Carrier",
-                                new { id = Model.Carriers[i].NotificationId, entityId = Model.Carriers[i].Id, backToOverview = ViewBag.BackToOverview }, null)
+                                new { id = Model.Carriers[i].NotificationId, entityId = Model.Carriers[i].Id, backToOverview = ViewBag.BackToOverview }, new { title = Model.Carriers[i].Business.Name })
                             <span class="table-divider">|</span>
                             @Html.ActionLink(ListCarrierResources.Remove, "Remove", "Carrier",
-                                new { id = Model.Carriers[i].NotificationId, entityId = Model.Carriers[i].Id, backToOverview = ViewBag.BackToOverview }, null)
+                                new { id = Model.Carriers[i].NotificationId, entityId = Model.Carriers[i].Id, backToOverview = ViewBag.BackToOverview }, new { title = Model.Carriers[i].Business.Name })
                         </td>
                     </tr>
                 }
