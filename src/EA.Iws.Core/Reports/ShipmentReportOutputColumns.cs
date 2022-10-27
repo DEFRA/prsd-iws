@@ -72,7 +72,7 @@
         PortOfExit,
 
         [Display(Name = "Country of Dispatch")]
-         DispatchingCountry,
+        DispatchingCountry,
 
         [Display(Name = "Point of Entry")]
         PortOfEntry,
@@ -100,6 +100,12 @@
 
         [Display(Name = "Shipment Status")]
         ShipmentStatus,
+
+        [Display(Name = "Shipment Rejected Date")]
+        ShipmentRejectedDate,
+
+        [Display(Name = "Quantity Rejected (Tonnes)")]
+        RejectedQuantity,
 
         [Display(Name = "Rejected Reason")]
         RejectedReason,

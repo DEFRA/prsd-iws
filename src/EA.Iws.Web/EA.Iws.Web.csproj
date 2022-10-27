@@ -5553,6 +5553,7 @@
     <EmbeddedResource Include="Views\Applicant\HomeResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>HomeResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\Applicant\NotFoundResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

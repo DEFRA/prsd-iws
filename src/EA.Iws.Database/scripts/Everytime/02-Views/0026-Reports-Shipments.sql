@@ -25,7 +25,8 @@ AS
 			WHEN MR.Date IS NULL THEN MPR.WasteReceivedDate ELSE MR.Date 
 		END AS [ReceivedDate],
         MOR.Date AS CompletedDate,
-		MREJECT.Date AS RejectedShipmentDate,
+        MREJECT.RejectedQuantity,
+		MREJECT.Date AS ShipmentRejectedDate,
         MREJECT.Reason AS [RejectedReason],
         CASE
 			WHEN MR.Quantity IS NULL THEN MPR.ActualQuantity ELSE MR.Quantity 
@@ -209,7 +210,8 @@ AS
         M.PrenotificationDate,
         MR.Date AS ReceivedDate,
         MOR.Date AS CompletedDate,
-		MREJECT.Date AS RejectedShipmentDate,
+		MREJECT.RejectedQuantity,
+		MREJECT.Date AS ShipmentRejectedDate,
         MREJECT.Reason AS [RejectedReason],
         MR.Quantity AS QuantityReceived,
         MR_U.Description AS [QuantityReceivedUnit],
