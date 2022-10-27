@@ -133,13 +133,13 @@
         {
             UpdateHistoryViewModel vm = this.CreateViewModel();
 
-            foreach (var selectListItem in vm.FilterTerms.Where(p => p.Text != "Date" && p.Text != "View all"))
+            foreach (var selectListItem in vm.FilterTerms.Where(p => p.Text != "Date" && p.Text != "View all updates"))
             {
                 Assert.True(vm.Screens.Count(p => p.ScreenName == selectListItem.Text) > 0);
                 Assert.True(vm.Screens.Count(p => p.Id == int.Parse(selectListItem.Value)) > 0);
             }
 
-            Assert.True(vm.FilterTerms.Count(p => p.Text == "View all") > 0);
+            Assert.True(vm.FilterTerms.Count(p => p.Text == "View all updates") > 0);
             Assert.True(vm.FilterTerms.Count(p => p.Text == "Date") > 0);
             Assert.True(vm.FilterTerms.Count(p => p.Value == string.Empty) == 1);
             Assert.True(vm.FilterTerms.Count(p => p.Value == "date") == 1);
