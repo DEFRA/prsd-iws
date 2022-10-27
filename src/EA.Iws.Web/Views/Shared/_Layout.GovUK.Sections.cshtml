@@ -57,7 +57,7 @@
     @Scripts.Render("~/bundles/jqueryval")
     @Scripts.Render("~/bundles/govuk-frontend")
     @Scripts.Render("~/bundles/govuk_iws")
-    @Scripts.Render("~/bundles/helpers")    
+    @Scripts.Render("~/bundles/helpers")
     @RenderSection("scripts", required: false)
 }
 
@@ -78,5 +78,7 @@
             </div>
         </div>
     }
-    @RenderBody()
+    <div id="renderedContent">
+        @RenderBody()
+    </div>
 </main>
