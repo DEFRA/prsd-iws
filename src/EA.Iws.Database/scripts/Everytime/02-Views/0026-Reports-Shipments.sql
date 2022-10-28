@@ -25,8 +25,16 @@ AS
 			WHEN MR.Date IS NULL THEN MPR.WasteReceivedDate ELSE MR.Date 
 		END AS [ReceivedDate],
         MOR.Date AS CompletedDate,
-        MREJECT.RejectedQuantity,
-		MREJECT.Date AS ShipmentRejectedDate,
+		CASE 
+			WHEN MS.Status = 'Rejected' THEN
+				MREJECT.RejectedQuantity				
+			ELSE
+				MPR.RejectedQuantity END AS [RejectedQuantity],
+		CASE 
+			WHEN MS.Status = 'Rejected' THEN
+				MREJECT.Date 
+			ELSE
+				MPR.WasteReceivedDate END AS [ShipmentRejectedDate],
         MREJECT.Reason AS [RejectedReason],
         CASE
 			WHEN MR.Quantity IS NULL THEN MPR.ActualQuantity ELSE MR.Quantity 
@@ -210,8 +218,8 @@ AS
         M.PrenotificationDate,
         MR.Date AS ReceivedDate,
         MOR.Date AS CompletedDate,
-		MREJECT.RejectedQuantity,
-		MREJECT.Date AS ShipmentRejectedDate,
+		CASE WHEN MREJECT.RejectedQuantity IS NOT NULL THEN MREJECT.RejectedQuantity ELSE MPR.RejectedQuantity END AS [RejectedQuantity],
+		CASE WHEN MREJECT.Date IS NOT NULL THEN MREJECT.Date ELSE MPR.WasteReceivedDate END AS [ShipmentRejectedDate],		
         MREJECT.Reason AS [RejectedReason],
         MR.Quantity AS QuantityReceived,
         MR_U.Description AS [QuantityReceivedUnit],
@@ -231,7 +239,16 @@ AS
         TR.ExportCountryName AS OriginatingCountry,
         CASE 
 			WHEN M.[IsCancelled] = 1 THEN 'Cancelled'
-			ELSE ''
+			ELSE 
+				CASE WHEN MR.Quantity IS NOT NULL THEN 'Received'
+					ELSE 
+						CASE WHEN MREJECT.RejectedQuantity IS NOT NULL THEN 'Rejected'
+					ELSE 
+						CASE WHEN MPR.RejectedQuantity IS NOT NULL THEN 'PartiallyRejected'
+						ELSE ''
+						END
+				END
+			END
 		END AS [Status],
         ND.[NotificationReceivedDate],
         STUFF(( SELECT ', ' + WC.Code AS [text()]
@@ -316,6 +333,9 @@ AS
 
     LEFT JOIN	[ImportNotification].[MovementOperationReceipt] AS MOR
     ON			[M].[Id] = [MOR].[MovementId]
+
+	LEFT JOIN	[ImportNotification].[MovementPartialRejection] AS MPR
+    ON			[M].[Id] = [MPR].[MovementId]
 
 	LEFT JOIN	[ImportNotification].[MovementRejection] AS MREJECT
 	ON			[M].[Id] = [MREJECT].[MovementId]
