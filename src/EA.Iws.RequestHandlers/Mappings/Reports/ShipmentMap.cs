@@ -55,7 +55,9 @@
                 ConsigneeCompanyType = source.ConsigneeCompanyType.ToString(),
                 FacilityCompanyType = source.FacilityCompanyType.ToString(),
                 RejectedReason = source.RejectedReason,
-                ActionedByExternalUser = source.ActionedByExternalUser
+                ActionedByExternalUser = source.ActionedByExternalUser,
+                RejectedQuantity = source.RejectedQuantity,
+                ShipmentRejectedDate = source.ShipmentRejectedDate
             };
         }
 
