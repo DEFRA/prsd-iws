@@ -62,7 +62,7 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.Facility {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Please answer this question.
+        ///   Looks up a localized string similar to Please tell us whether the recovery facilities are pre-consented.
         /// </summary>
         public static string AnswerRequired {
             get {

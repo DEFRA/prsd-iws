@@ -29,6 +29,7 @@
 {
     @Html.Gds().ValidationSummary()
     <div class="form-group @Html.Gds().FormGroupClass(m => m.CustomsOfficeRequired)">
+        @Html.Gds().ValidationMessageFor(m => m.CustomsOfficeRequired)
         <div class="multiple-choice" data-target="yes-message">
             @Html.RadioButtonFor(m => m.CustomsOfficeRequired, true, new { @class = "customs-office-required-radio-button", @id = "rdoYes" })
             <label for="rdoYes">

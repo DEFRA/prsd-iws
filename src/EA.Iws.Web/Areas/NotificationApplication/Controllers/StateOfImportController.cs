@@ -56,6 +56,12 @@
 
             if (!ModelState.IsValid && submit != ChangeCountry)
             {
+                if (ModelState["CompetentAuthorities.Selected"] != null && ModelState["CompetentAuthorities.Selected"].Errors.Count == 1)
+                {
+                    ModelState["CompetentAuthorities.Selected"].Errors.Clear();
+                    ModelState.AddModelError("CompetentAuthorities.Selected", "Please select the competent authority");
+                }
+
                 return View(model);
             }
 

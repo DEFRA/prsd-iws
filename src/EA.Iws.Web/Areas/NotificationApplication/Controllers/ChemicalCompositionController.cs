@@ -63,6 +63,11 @@
         {
             if (!ModelState.IsValid)
             {
+                if (ModelState["ChemicalCompositionType.SelectedValue"] != null && ModelState["ChemicalCompositionType.SelectedValue"].Errors.Count == 1)
+                {
+                    ModelState["ChemicalCompositionType.SelectedValue"].Errors.Clear();
+                    ModelState.AddModelError("ChemicalCompositionType.SelectedValue", "Please tell us what waste type applies");
+                }
                 return View(model);
             }
 

@@ -17,8 +17,8 @@
     @Html.Gds().ValidationSummary()
     @Html.HiddenFor(m => m.NotificationId)
 
-    <div class="form-group">
-
+    <div class="form-group @Html.Gds().FormGroupClass(m => m.PackagingTypes)">
+        @Html.Gds().ValidationMessageFor(m => m.PackagingTypes)
         <fieldset>
 
             <legend class="visuallyhidden">@PackagingTypesResources.HeaderDescription</legend>
@@ -31,14 +31,14 @@
                     @Html.CheckBoxFor(m => m.PackagingTypes.PossibleValues[i].Selected, new { id = idForThisCheckBox })
                     <label for="@idForThisCheckBox">
                         @if (Model.PackagingTypes.ShowEnumValue)
-                    {
+                        {
                             @Html.DisplayFor(m => m.PackagingTypes.PossibleValues[i].Value)
                             @Html.Raw(" - ")
                         }
                         @Html.DisplayFor(m => m.PackagingTypes.PossibleValues[i].Text)
                     </label>
                 </div>
-                
+
                 @Html.HiddenFor(m => m.PackagingTypes.PossibleValues[i].Text)
                 @Html.HiddenFor(m => m.PackagingTypes.PossibleValues[i].Value)
             }
