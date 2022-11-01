@@ -66,9 +66,9 @@
         {
             if (!ModelState.IsValid)
             {
-                if (ModelState[""] != null && ModelState[""].Errors.Count == 1)
+                if (ModelState[string.Empty] != null && ModelState[string.Empty].Errors.Count == 1)
                 {
-                    ModelState[""].Errors.Clear();
+                    ModelState[string.Empty].Errors.Clear();
                     ModelState.AddModelError("PhysicalCharacteristics", "Please choose at least one physical characteristic");
                 }
                 return View(model);
