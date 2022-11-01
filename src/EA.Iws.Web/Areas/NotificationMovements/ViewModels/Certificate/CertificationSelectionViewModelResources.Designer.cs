@@ -62,7 +62,7 @@ namespace EA.Iws.Web.Areas.NotificationMovements.ViewModels.Certificate {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Please select an option.
+        ///   Looks up a localized string similar to Please select the type of documentation that you would like to add.
         /// </summary>
         public static string CertificateTypeRequired {
             get {

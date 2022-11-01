@@ -15,7 +15,8 @@
     @Html.Gds().ValidationSummary()
     @Html.HiddenFor(m => m.NotificationId)
     @Html.HiddenFor(m => m.PhysicalCharacteristics.ShowEnumValue)
-    <div class="form-group">
+    <div class="form-group @Html.Gds().FormGroupClass(m => m.PhysicalCharacteristics)">
+        @Html.Gds().ValidationMessageFor(m => m.PhysicalCharacteristics)
         @Html.EditorFor(m => m.PhysicalCharacteristics)
         <fieldset>
             <div id="list-item-other-container" class="form-group form-group-compound">
@@ -29,7 +30,7 @@
             <div class="panel @(Model.OtherSelected ? "" : "js-hidden")" id="other-option">
                 <div class="form-group @Html.Gds().FormGroupClass(m => m.OtherDescription)">
                     <label class="form-label" for="OtherDescription">@PhysicalCharacteristicsResources.OtherRequired</label>
-                    @Html.Gds().ValidationMessageFor(m => m.OtherDescription)<br />
+                    @Html.Gds().ValidationMessageFor(m => m.OtherDescription)
                     @Html.EditorFor(m => m.OtherDescription, new { @id = "other-label" })
                 </div>
             </div>

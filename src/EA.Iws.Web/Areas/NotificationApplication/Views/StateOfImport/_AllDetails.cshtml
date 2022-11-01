@@ -12,7 +12,7 @@
 <div class="form-group @Html.Gds().FormGroupClass(m => m.CompetentAuthorities.Selected)">
     @Html.Gds().LabelFor(m => m.CompetentAuthorities, new { @class = "form-label-bold" })
     @Html.Gds().HintParagraph(StateOfImportResources.CAHint)
-    @Html.Gds().ValidationMessageFor(m => m.CompetentAuthorities.SelectedValue)
+    @Html.Gds().ValidationMessageFor(m => m.CompetentAuthorities.Selected)
     @Html.EditorFor(m => m.CompetentAuthorities, new { id = "CompetentAuthorities" })
 </div>
 

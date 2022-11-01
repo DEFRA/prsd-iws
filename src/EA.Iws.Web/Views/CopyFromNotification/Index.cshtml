@@ -17,7 +17,8 @@
         @Html.AntiForgeryToken()
         @Html.Gds().ValidationSummary()
 
-        <div class="form-group @Html.Gds().FormGroupClass(m => m.SelectedNotification)">
+        <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.SelectedNotification)">
+            @Html.Gds().ValidationMessageFor(m => m.SelectedNotification)
             <table title=@CopyFromNotificationResources.TableTitleForNotificationSummary class="odd-table">
                 <thead>
                     <tr>

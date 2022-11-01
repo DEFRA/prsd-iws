@@ -84,7 +84,7 @@
 
                 if (!selectedPackagingTypes.Any())
                 {
-                    ModelState.AddModelError(string.Empty, PackagingTypesResources.ChoosePackagingType);
+                    ModelState.AddModelError("PackagingTypes", PackagingTypesResources.ChoosePackagingType);
                     return View(model);
                 }
 

@@ -19,6 +19,7 @@
     @Html.Gds().ValidationSummary()
     @Html.HiddenFor(m => m.NotificationType)
     <div class="form-group @Html.Gds().FormGroupClass(m => m.Certificate)">
+        @Html.Gds().ValidationMessageFor(m => m.Certificate)
         <fieldset>
             <div class="multiple-choice">
                 @Html.RadioButtonFor(m => m.Certificate, CertificateType.Receipt, new { id = "ReceiptCertificate" })
