@@ -38,10 +38,6 @@ ul, ol {
     padding: 0;
 }
 
-ul, li {
-    padding: 0 0 5px 0;
-}
-
 .column-two-thirds {
     padding: 0 15px;
     -webkit-box-sizing: border-box;
@@ -77,9 +73,9 @@ ul, li {
     padding: 0;
 }
 
-.heading-small {
+/*.heading-small {
     margin-bottom: em(10);
-}
+}*/
 
 b {
     font-weight: bold;
@@ -127,12 +123,12 @@ b {
 
 .hgroup h2 .subtitle {
     margin: 0;
-    color: $secondary-text-colour;
+    /*color: $secondary-text-colour;*/
 }
 
-.account-link-banner {
+/*.account-link-banner {
     border-bottom: 1px solid $border-colour;
-}
+}*/
 
 .account-links li {
     clear: both;
@@ -153,9 +149,9 @@ li.clear-child {
     clear: both;
 }
 
-.table-divider {
+/*.table-divider {
     color: $border-colour;
-}
+}*/
 
 .validation-summary-errors {
 }
@@ -169,13 +165,13 @@ li.clear-child {
     background: none;
     border: none;
     padding: 0;
-    color: $govuk-blue;
+    /*color: $govuk-blue;*/
     cursor: pointer;
 }
 
-.link-submit-xsmall {
+/*.link-submit-xsmall {
     @extend .link-submit !optional;
-}
+}*/
 
 .text-area {
     height: 200px;
@@ -203,9 +199,9 @@ li.clear-child {
     margin-right: 12px;
 }
 
-    .inline-block-label:last-child {
+/*.inline-block-label:last-child {
         margin-right: none;
-    }
+    }*/
 
 .force-newline {
     display: block;
@@ -258,7 +254,7 @@ li.clear-child {
 
 .username-format {
     font-weight: bold;
-    color: $black;
+    /*color: $black;*/
 }
 
 #homepage-link-container {
@@ -267,13 +263,13 @@ li.clear-child {
 }
 
 .green-tick {
-    color: $button-colour;
+    /* color: $button-colour;*/
     padding-left: 10px;
 }
 
 dl.object-summary {
     padding: 9px;
-    border: 1px solid $border-colour;
+    /*border: 1px solid $border-colour;*/
     margin-bottom: 16px;
     display: inline;
     margin: 0;
@@ -315,8 +311,8 @@ table.table-pad-bottom {
 }
 
 #descriptionTextArea > div {
-    border-top: 1px solid $border-colour;
-    border-bottom: 1px solid $border-colour;
+    /* border-top: 1px solid $border-colour;
+    border-bottom: 1px solid $border-colour;*/
     padding-top: 10px;
     min-height: 50px;
     padding-bottom: 10px;
@@ -378,8 +374,8 @@ table.table-pad-bottom {
 
 .summary-error-row {
     box-sizing: border-box;
-    padding: em(15, 19);
-    border-top: 1px solid $border-colour;
+    /*padding: em(15, 19);
+    border-top: 1px solid $border-colour;*/
 }
 
 .summary-error-icon {
@@ -394,8 +390,8 @@ table.table-pad-bottom {
 
 .summary-warning-row {
     box-sizing: border-box;
-    padding: em(15, 19);
-    border-top: 1px solid $border-colour;
+    /*padding: em(15, 19);
+    border-top: 1px solid $border-colour;*/
 }
 
 .summary-warning-icon {
@@ -449,10 +445,10 @@ table.table-pad-bottom {
     -webkit-transform: rotate(45deg);
 }
 
-/* govuk_frontend_toolkit includes */
+/*govuk-frontend_toolkit includes
 @-ms-viewport {
     width: device-width;
-}
+}*/
 
 @-o-viewport {
     width: device-width;
@@ -488,7 +484,7 @@ table.table-pad-bottom {
 }
 
 #global-header .header-wrapper:after, #global-header .header-wrapper .header-global:after, #global-header .header-wrapper .header-global .header-logo:after, #global-header .header-proposition #proposition-link:after,
-#global-header .header-proposition #proposition-links:after, #footer .footer-wrapper:after, #footer .footer-meta:after {
+#global-header .header-proposition #proposition-links:after {
     content: "";
     display: block;
     clear: both;
@@ -520,7 +516,7 @@ table.table-pad-bottom {
 }
 
 #global-header .header-wrapper:after, #global-header .header-wrapper .header-global:after, #global-header .header-wrapper .header-global .header-logo:after, #global-header .header-proposition #proposition-link:after,
-#global-header .header-proposition #proposition-links:after, #footer .footer-wrapper:after, #footer .footer-meta:after {
+#global-header .header-proposition #proposition-links:after {
     content: "";
     display: block;
     clear: both;
@@ -534,13 +530,13 @@ table.table-pad-bottom {
     width: device-width;
 }
 
-/* local styleguide includes */
-/* Old depricated greys, new things should use the toolkit greys */
+local styleguide includes
+Old depricated greys, new things should use the toolkit greys
 html, body, button, input, table, td, th {
     font-family: "nta-extended", Arial, sans-serif;
 }
 
-html, body, div, h1, h2, h3, h4, h5, h6, article, aside, footer, header, hgroup, nav, section {
+html, body, div, h1, h2, h3, h4, h5, h6, article, aside, header, hgroup, nav, section {
     margin: 0;
     padding: 0;
     vertical-align: baseline;
@@ -575,32 +571,14 @@ main {
     display: block;
 }
 
-/*
- * 1. Prevents iOS text size adjust after orientation change, without disabling
- *    user zoom.
- */
 html {
     -webkit-text-size-adjust: 100%;
-    /* 1 */
     -ms-text-size-adjust: 100%;
-    /* 1 */
     background-color: #dee0e2;
 }
 
-/*
-  Force the scrollbar to always display in IE10/11
- */
 html {
     -ms-overflow-style: scrollbar;
-}
-
-body {
-    background: white;
-    color: #0b0c0c;
-    line-height: 1.5;
-    font-weight: 400;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
 }
 
 ol, ul, nav ol, nav ul {
@@ -674,36 +652,6 @@ a[rel="external"]:hover:after {
     }
 }
 
-/*
- * 1. Corrects text resizing oddly in IE6/7 when body font-size is set using em units
- *    http://clagnut.com/blog/348/#c790
- *    note - font-size reduced to 62.5% to allow simple rem/px font-sizing and fallback
- *    http://snook.ca/archives/html_and_css/font-size-with-rem
- * 2. Keeps page centred in all browsers regardless of content height
- * 3. Removes Android and iOS tap highlight color to prevent entire container being highlighted
- *    www.yuiblog.com/blog/2010/10/01/quick-tip-customizing-the-mobile-safari-tap-highlight-color/
- */
-html {
-    font-size: 62.5%;
-    /* 1 */
-    overflow-y: scroll;
-    /* 2 */
-    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-    /* 3 */
-}
-
-/*
- * 1. Font-size increased to compensate for change to html element font-size in
- *    order to support beta typography which was set in ems
- *    (62.5% * 160% = 100%)
- * 2. Addresses margins handled incorrectly in IE6/7
- */
-
-body {
-    font-size: 160%;
-    margin: 0;
-}
-
 b, strong {
     font-weight: 600;
 }
@@ -716,17 +664,10 @@ abbr[title] {
     cursor: help;
 }
 
-/*
- * 1. Addresses `appearance` set to `searchfield` in Safari 5 and Chrome.
- * 2. Addresses `box-sizing` set to `border-box` in Safari 5 and Chrome
- *    (include `-moz` to future-proof).
- */
 input[type="search"] {
     -webkit-appearance: textfield;
-    /* 1 */
     -moz-box-sizing: content-box;
     -webkit-box-sizing: content-box;
-    /* 2 */
     box-sizing: content-box;
 }
 
@@ -739,7 +680,7 @@ input[type="search"] {
         -webkit-appearance: none;
     }
 
-/* For image replacement */
+For image replacement
 .ir {
     display: block;
     text-indent: -999em;
@@ -749,17 +690,17 @@ input[type="search"] {
     direction: ltr;
 }
 
-    .ir br {
-        display: none;
-    }
+.ir br {
+    display: none;
+}
 
-/* Hide for both screenreaders and browsers */
+Hide for both screenreaders and browsers
 .hidden {
     display: none;
     visibility: hidden;
 }
 
-/* Hide only visually, but have it available for screenreaders */
+Hide only visually, but have it available for screenreaders
 .visuallyhidden {
     position: absolute;
     left: -9999em;
@@ -775,47 +716,30 @@ input[type="search"] {
     width: auto;
 }
 
-/* Hide visually and from screenreaders, but maintain layout */
+Hide visually and from screenreaders, but maintain layout
 .invisible {
     visibility: hidden;
 }
 
-/* Give a strong clear visual idea as to what is currently in focus */
+Give a strong clear visual idea as to what is currently in focus
 a {
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0.3);
 }
 
-    a:focus {
-        background-color: #ffbf47;
-        outline: 3px solid #ffbf47;
-    }
+a:focus {
+    background-color: #ffbf47;
+    outline: 3px solid #ffbf47;
+}
 
-/* Make skiplinks visible when they are tabbed to */
+Make skiplinks visible when they are tabbed to
 .skiplink {
     position: absolute;
     left: -9999em;
 }
 
-    .skiplink:focus {
-        position: static;
-    }
-
-#skiplink-container {
-    text-align: center;
-    background: #0b0c0c;
+.skiplink:focus {
+    position: static;
 }
-
-    #skiplink-container div {
-        text-align: left;
-        margin: 0 auto;
-        max-width: 1020px;
-    }
-
-    #skiplink-container .skiplink {
-        display: -moz-inline-stack;
-        display: inline-block;
-        margin: 0.75em 0 0 30px;
-    }
 
 input:focus,
 textarea:focus,
@@ -842,8 +766,10 @@ button:focus,
     width: device-width;
 }
 
-#global-header .header-wrapper:after, #global-header .header-wrapper .header-global:after, #global-header .header-wrapper .header-global .header-logo:after, #global-header .header-proposition #proposition-link:after,
-#global-header .header-proposition #proposition-links:after, #footer .footer-wrapper:after, #footer .footer-meta:after {
+#global-header .header-wrapper:after, #global-header .header-wrapper .header-global:after,
+#global-header .header-wrapper .header-global .header-logo:after,
+#global-header .header-proposition #proposition-link:after,
+#global-header .header-proposition #proposition-links:after {
     content: "";
     display: block;
     clear: both;
@@ -925,239 +851,6 @@ button:focus,
     margin: 0 15px;
 }
 
-#global-header #logo {
-    float: left;
-    position: relative;
-    top: 1px;
-    height: 30px;
-    overflow: visible;
-    vertical-align: baseline;
-    color: white;
-    font-weight: bold;
-    font-size: 30px;
-    line-height: 1em;
-    text-decoration: none;
-    text-rendering: optimizeLegibility;
-    margin-bottom: -1px;
-    padding-bottom: 1px;
-}
-
-    #global-header #logo img {
-        position: relative;
-        top: -2px;
-        width: 35px;
-        height: 31px;
-        padding-right: 6px;
-        float: left;
-        display: inline;
-        line-height: inherit;
-        border: none;
-    }
-
-    #global-header #logo:hover, #global-header #logo:focus {
-        text-decoration: none;
-        border-bottom: 1px solid;
-        padding-bottom: 0;
-    }
-
-    #global-header #logo:active {
-        color: #2b8cc4;
-    }
-
-#global-header .header-proposition {
-    padding-top: 10px;
-}
-
-@media (min-width: 769px) {
-    #global-header .header-proposition {
-        padding-top: 0;
-    }
-}
-
-#global-header .header-proposition #proposition-name {
-    font-family: "nta", Arial, sans-serif;
-    font-size: 24px;
-    line-height: 1.25;
-    font-weight: 400;
-    text-transform: none;
-    font-weight: bold;
-    color: white;
-    text-decoration: none;
-}
-
-#global-header .header-proposition a#proposition-name:hover {
-    text-decoration: underline;
-}
-
-#global-header .header-proposition a.menu {
-    font-family: "nta", Arial, sans-serif;
-    font-size: 16px;
-    line-height: 1.25;
-    font-weight: 400;
-    text-transform: none;
-    color: white;
-    display: block;
-    float: right;
-    text-decoration: none;
-    padding-top: 6px;
-}
-
-@media (max-width: 640px) {
-    #global-header .header-proposition a.menu {
-        font-size: 14px;
-        line-height: 1.14286;
-    }
-}
-
-@media (min-width: 769px) {
-    #global-header .header-proposition a.menu {
-        display: none;
-    }
-}
-
-#global-header .header-proposition a.menu:hover {
-    text-decoration: underline;
-}
-
-#global-header .header-proposition a.menu:after {
-    display: inline-block;
-    font-size: 8px;
-    height: 8px;
-    padding-left: 5px;
-    vertical-align: middle;
-    content: " \25BC";
-}
-
-#global-header .header-proposition a.menu.js-hidden:after {
-    content: " \25B2";
-}
-
-#global-header .header-proposition #proposition-menu {
-    margin-top: 5px;
-}
-
-@media (min-width: 769px) {
-    #global-header .header-proposition #proposition-menu.no-proposition-name {
-        margin-top: 37px;
-    }
-}
-
-#global-header .header-proposition #proposition-link,
-#global-header .header-proposition #proposition-links {
-    clear: both;
-    margin: 2px 0 0 0;
-    padding: 0;
-}
-
-.js-enabled #global-header .header-proposition #proposition-link, .js-enabled
-#global-header .header-proposition #proposition-links {
-    display: none;
-}
-
-@media (min-width: 769px) {
-    .js-enabled #global-header .header-proposition #proposition-link, .js-enabled
-    #global-header .header-proposition #proposition-links {
-        display: block;
-    }
-}
-
-.js-enabled #global-header .header-proposition #proposition-link.js-visible, .js-enabled
-#global-header .header-proposition #proposition-links.js-visible {
-    display: block;
-}
-
-#global-header .header-proposition #proposition-link li,
-#global-header .header-proposition #proposition-links li {
-    float: left;
-    width: 50%;
-    padding: 3px 0;
-    border-bottom: 1px solid #2e3133;
-}
-
-@media (min-width: 769px) {
-    #global-header .header-proposition #proposition-link li,
-    #global-header .header-proposition #proposition-links li {
-        display: block;
-        width: auto;
-        padding: 0 15px 0 0;
-        border-bottom: 0;
-    }
-
-        #global-header .header-proposition #proposition-link li.clear-child,
-        #global-header .header-proposition #proposition-links li.clear-child {
-            clear: left;
-        }
-}
-
-#global-header .header-proposition #proposition-link a,
-#global-header .header-proposition #proposition-links a {
-    color: white;
-    text-decoration: none;
-    font-family: "nta", Arial, sans-serif;
-    font-size: 14px;
-    line-height: 1.42857;
-    font-weight: 700;
-    text-transform: none;
-}
-
-@media (max-width: 640px) {
-    #global-header .header-proposition #proposition-link a,
-    #global-header .header-proposition #proposition-links a {
-        font-size: 12px;
-        line-height: 1.25;
-    }
-}
-
-@media (min-width: 769px) {
-    #global-header .header-proposition #proposition-link a,
-    #global-header .header-proposition #proposition-links a {
-        font-family: "nta", Arial, sans-serif;
-        font-size: 16px;
-        line-height: 1.25;
-        font-weight: 700;
-        text-transform: none;
-        line-height: 23px;
-    }
-}
-
-@media (min-width: 769px) and (max-width: 640px) {
-    #global-header .header-proposition #proposition-link a,
-    #global-header .header-proposition #proposition-links a {
-        font-size: 14px;
-        line-height: 1.14286;
-    }
-}
-
-#global-header .header-proposition #proposition-link a:hover,
-#global-header .header-proposition #proposition-links a:hover {
-    text-decoration: underline;
-}
-
-#global-header .header-proposition #proposition-link a.active,
-#global-header .header-proposition #proposition-links a.active {
-    color: #1d8feb;
-}
-
-#global-header .header-proposition #proposition-link a:focus,
-#global-header .header-proposition #proposition-links a:focus {
-    color: #0b0c0c;
-}
-
-#global-header .header-proposition #proposition-link {
-    float: right;
-    line-height: 22px;
-}
-
-.js-enabled #global-header .header-proposition #proposition-link {
-    display: block;
-}
-
-@media (min-width: 769px) {
-    #global-header .header-proposition #proposition-link {
-        float: none;
-    }
-}
-
 .govuk-notification-banner-success {
     border-color: #00703c !important;
     background-color: #00703c !important;
@@ -1211,29 +904,6 @@ button:focus,
 
 .govuk-notification-banner-success .govuk-notification-banner-link:link, .govuk-notification-banner-success .govuk-notification-banner-link:visited {
     color: #00703c;
-}
-
-.govuk-body, .govuk-body-m {
-    color: #0b0c0c;
-    font-family: "GDS Transport", arial, sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    font-weight: 400;
-    font-size: 18px !important;
-    line-height: 1.25;
-    margin-top: 0;
-    margin-bottom: 15px;
-}
-
-.govuk-link {
-    font-family: "GDS Transport", arial, sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    text-decoration: underline;
-    text-decoration-thickness: max(1px, 0.0625rem);
-    text-underline-offset: 0.1em;
-    font-size: 18px;
-    color: #00703c !important;
 }
 
 #tbSessionCookies th, #tbSessionCookies td,
@@ -1405,20 +1075,6 @@ button:focus,
     }
 }
 
-.form-control, .form-control-narrow {
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-    font-family: "nta-extended", Arial, sans-serif;
-    font-weight: 400;
-    text-transform: none;
-    font-size: 16px;
-    line-height: 1.25;
-    width: 100%;
-    padding: 5px 4px 4px;
-    border: 2px solid #0b0c0c;
-}
-
 @media (min-width: 641px) {
     .form-control, .form-control-narrow {
         font-size: 19px;
@@ -1430,11 +1086,6 @@ button:focus,
     .form-control, .form-control-narrow {
         width: 50%;
     }
-}
-
-input.form-control, input.form-control-narrow, textarea.form-control, textarea.form-control-narrow {
-    -webkit-appearance: none;
-    border-radius: 0;
 }
 
 @media (min-width: 641px) {
@@ -1514,23 +1165,22 @@ fieldset {
     width: 100%;
 }
 
-@media (min-width: 641px) {
+/*@media (min-width: 641px) {
     .multiple-choice {
         float: left;
     }
-}
+}*/
 
 .multiple-choice input {
-    position: absolute;
+    /*position: absolute;
     cursor: pointer;
     left: 0;
     top: 0;
     width: 38px;
     height: 38px;
-    z-index: 1;
+    z-index: 1;*/
     margin: 0;
     zoom: 1;
-    filter: alpha(opacity=0);
     opacity: 0;
 }
 
@@ -1561,12 +1211,6 @@ fieldset {
     padding-left: 20px;
 }
 
-@media (min-width: 769px) {
-    #content {
-        padding-bottom: 90px;
-    }
-}
-
 hr {
     display: block;
     background: #bfc1c3;
@@ -1575,19 +1219,6 @@ hr {
     margin-top: 30px;
     margin-bottom: 30px;
     padding: 0;
-}
-
-#footer hr {
-    clear: both;
-    margin: 0 15px 30px;
-    border: 1px solid #bfc1c3;
-    border-width: 1px 0 0 0;
-}
-
-@media (min-width: 641px) {
-    #footer hr {
-        margin-bottom: 0 !important;
-    }
 }
 
 .font-xsmall {
@@ -1603,16 +1234,6 @@ hr {
         font-size: 16px;
         line-height: 1.25;
     }
-}
-
-.top-content-box {
-    border-bottom: 1px solid #bfc1c3;
-    margin-bottom: 1px;
-}
-
-.top-content-box {
-    text-align: right;
-    padding: 5px;
 }
 
 #homepage-link-container {
@@ -1807,7 +1428,7 @@ ul, ol {
     width: 100%;
 }
 
-.form-date .form-group {
+.form-date .govuk-form-group {
     float: left;
     width: 50px;
     margin-right: 20px;
@@ -1815,12 +1436,12 @@ ul, ol {
     clear: none;
 }
 
-    .form-date .form-group label {
+    .form-date .govuk-form-group label {
         display: block;
         padding-bottom: 2px;
     }
 
-    .form-date .form-group input {
+    .form-date .govuk-form-group input {
         width: 100%;
     }
 
@@ -1894,7 +1515,7 @@ table thead th {
     width: 70px !important;
 }
 
-.form-date .form-group {
+.form-date .govuk-form-group {
     float: left;
     width: 50px;
     margin-right: 20px;
@@ -1902,14 +1523,14 @@ table thead th {
     clear: none;
 }
 
-/* Chrome, Safari, Edge, Opera */
+Chrome, Safari, Edge, Opera
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
 }
 
-/* Firefox */
+Firefox
 input[type=number] {
     -moz-appearance: textfield;
 }
@@ -2133,7 +1754,7 @@ input[type=number] {
     font-size: 19px;
 }
 
-/* Internal user export notification menu */
+Internal user export notification menu
 .accordion-export {
     margin-top: 2.7em;
     border-top: 10px solid #2b8cc4;
@@ -2143,54 +1764,27 @@ input[type=number] {
     padding-bottom: 15px;
 }
 
-    .accordion-export .notification-number {
-        padding: 5px;
-    }
+.accordion-export .notification-number {
+    padding: 5px;
+}
 
-    .accordion-export .current {
-        background: #2b8cc4;
-        color: #fff;
-    }
+.accordion-export .current {
+    background: #2b8cc4;
+    color: #fff;
+}
 
-    .accordion-export li {
-        list-style-type: none;
-    }
+.accordion-export li {
+    list-style-type: none;
+}
 
-    .accordion-export h3 {
-        cursor: pointer;
-        color: #0b0c0c;
-        padding: 7px 0 5px 10px;
-        cursor: pointer;
-        font-weight: bold;
-        font-size: 19px;
-    }
-
-        .accordion-export h3 span {
-            content: '';
-            margin-right: 5px;
-            display: inline-block;
-            cursor: pointer;
-            width: 0;
-            height: 0;
-            border-style: solid;
-            border-width: 0 6px 12px 6px;
-            border-color: transparent transparent #0b0c0c transparent;
-            -webkit-transform: translateY(0%) rotate(90deg);
-            -moz-transform: translateY(0%) rotate(90deg);
-            -ms-transform: translateY(0%) rotate(90deg);
-            -o-transform: translateY(0%) rotate(90deg);
-            transform: translateY(0%) rotate(90deg);
-        }
-
-    .accordion-export .current span {
-        content: '';
-        border-color: transparent transparent #fff transparent;
-        -webkit-transform: translateY(0%) rotate(180deg);
-        -moz-transform: translateY(0%) rotate(180deg);
-        -ms-transform: translateY(0%) rotate(180deg);
-        -o-transform: translateY(0%) rotate(180deg);
-        transform: translateY(0%) rotate(180deg);
-    }
+.accordion-export h3 {
+    cursor: pointer;
+    color: #0b0c0c;
+    padding: 7px 0 5px 10px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 19px;
+}
 
     .accordion-export h3 span {
         content: '';
@@ -2209,44 +1803,72 @@ input[type=number] {
         transform: translateY(0%) rotate(90deg);
     }
 
-    .accordion-export ul ul {
-        padding: 10px 0 0 0;
-        background: #fff;
+.accordion-export .current span {
+    content: '';
+    border-color: transparent transparent #fff transparent;
+    -webkit-transform: translateY(0%) rotate(180deg);
+    -moz-transform: translateY(0%) rotate(180deg);
+    -ms-transform: translateY(0%) rotate(180deg);
+    -o-transform: translateY(0%) rotate(180deg);
+    transform: translateY(0%) rotate(180deg);
+}
+
+.accordion-export h3 span {
+    content: '';
+    margin-right: 5px;
+    display: inline-block;
+    cursor: pointer;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-width: 0 6px 12px 6px;
+    border-color: transparent transparent #0b0c0c transparent;
+    -webkit-transform: translateY(0%) rotate(90deg);
+    -moz-transform: translateY(0%) rotate(90deg);
+    -ms-transform: translateY(0%) rotate(90deg);
+    -o-transform: translateY(0%) rotate(90deg);
+    transform: translateY(0%) rotate(90deg);
+}
+
+.accordion-export ul ul {
+    padding: 10px 0 0 0;
+    background: #fff;
+}
+
+    .accordion-export ul ul li {
+        padding: 3px 0 3px 15px;
+        color: #005ea5;
+        text-decoration: none;
+        cursor: pointer;
+        font-size: 16px;
     }
 
-        .accordion-export ul ul li {
-            padding: 3px 0 3px 15px;
-            color: #005ea5;
-            text-decoration: none;
-            cursor: pointer;
-            font-size: 16px;
-        }
-
-            .accordion-export ul ul li a {
-                display: block;
-                text-decoration: none;
-                color: #0b0c0c;
-                transition: all .15s;
-            }
-
-        .accordion-export ul ul:after {
-            content: '';
+        .accordion-export ul ul li a {
             display: block;
-            border-bottom: 5px solid #2b8cc4;
-            margin-top: 10px;
-            margin-bottom: 10px;
-            height: 0;
-            width: 100%;
+            text-decoration: none;
+            color: #0b0c0c;
+            transition: all .15s;
         }
 
-    .accordion-export ul ul {
-        display: none;
+    .accordion-export ul ul:after {
+        content: '';
+        display: block;
+        border-bottom: 5px solid #2b8cc4;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        height: 0;
+        width: 100%;
     }
 
-    .accordion-export li.active ul {
-        display: block;
-    }
-/* end */
+.accordion-export ul ul {
+    display: none;
+}
+
+.accordion-export li.active ul {
+    display: block;
+}
+
+end
 
 .overview-block div.overview-block-element:not(:last-child) {
     margin-bottom: 15px;
@@ -2334,7 +1956,7 @@ details {
             height: 0;
             border-style: solid;
             border-color: transparent;
-            -webkit-clip-path: polygon(0% 0%,100% 50%,0% 100%);
+            /* -webkit-clip-path: polygon(0% 0%,100% 50%,0% 100%);*/
             clip-path: polygon(0% 0%,100% 50%,0% 100%);
             border-width: 7px 0 7px 12.124px;
             border-left-color: inherit;
@@ -2346,7 +1968,7 @@ details {
         height: 0;
         border-style: solid;
         border-color: transparent;
-        -webkit-clip-path: polygon(0% 0%,50% 100%,100% 0%);
+        /*-webkit-clip-path: polygon(0% 0%,50% 100%,100% 0%);*/
         clip-path: polygon(0% 0%,50% 100%,100% 0%);
         border-width: 12.124px 7px 0 7px;
         border-top-color: inherit;
@@ -2450,7 +2072,7 @@ summary > h2 {
 
 @media (min-width: 641px) {
     .heading-medium {
-        /*margin-top: 1.875em;*/
+        margin-top: 1.875em;
         margin-bottom: 0.83333em;
     }
 }
@@ -2463,12 +2085,23 @@ summary > h2 {
     list-style-type: inherit !important;
 }
 
-#dvGoogleAnalytics ul, #dvGoogleAnalytics li {
+#dvGoogleAnalytics ul,
+#dvGoogleAnalytics li {
     list-style-type: inherit !important;
 }
 
-#dvAccessibility ul, #dvGoogleAnalytics li {
+#dvAccessibility ul {
     list-style-type: inherit !important;
+    padding-left: 50px;
+}
+
+.govuk-heading-l {
+    padding-top: 50px !important;
+}
+
+.accessibility-l {
+    padding-top: 0 !important;
+    margin-bottom: 15px !important;
 }
 
 .visually-hidden, .visuallyhidden {
@@ -2491,10 +2124,10 @@ details .show-all {
     text-align: right;
 }
 
-details .show-all:before {
-    left: auto !important;
-    right: 0 !important;
-}
+    details .show-all:before {
+        left: auto !important;
+        right: 0 !important;
+    }
 
 details summary:before {
     content: "";
@@ -2508,7 +2141,7 @@ details summary:before {
     height: 0;
     border-style: solid;
     border-color: transparent;
-    -webkit-clip-path: polygon(0% 0%,100% 50%,0% 100%);
+    /*-webkit-clip-path: polygon(0% 0%,100% 50%,0% 100%);*/
     clip-path: polygon(0% 0%,100% 50%,0% 100%);
     border-width: 7px 0 7px 12.124px;
     border-left-color: inherit;
@@ -2555,7 +2188,7 @@ details summary:before {
 }
 
 @media (min-width: 641px) {
-    #form-menu .summary-list>li {
+    #form-menu .summary-list > li {
         font-size: 19px;
         line-height: 1.31579;
     }

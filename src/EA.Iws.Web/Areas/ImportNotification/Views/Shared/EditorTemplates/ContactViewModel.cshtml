@@ -5,13 +5,13 @@
 
 <hr/>
 
-<div class="form-group @Html.Gds().FormGroupClass(m => m.FullName)">
+<div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.FullName)">
     @Html.Gds().LabelFor(m => m.FullName, false)
     @Html.Gds().ValidationMessageFor(m => m.FullName)
     @Html.Gds().TextBoxFor(m => m.FullName)
 </div>
 
-<div class="form-group @Html.Gds().FormGroupClass(m => m.Telephone) @Html.Gds().FormGroupClass(m => m.TelephonePrefix)">
+<div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.Telephone) @Html.Gds().FormGroupClass(m => m.TelephonePrefix)">
     @Html.Gds().LabelFor(m => m.Telephone, false)
     @Html.Gds().ValidationMessageFor(m => m.TelephonePrefix)
     @Html.Gds().ValidationMessageFor(m => m.Telephone)
@@ -23,11 +23,11 @@
             @Html.Gds().TextBoxFor(m => m.TelephonePrefix, new { @title = Resource.TelephonePrefixTitle, @type="number" })
         </div>
         <div class="international-number-body">
-            @Html.Gds().TextBoxFor(m => m.Telephone, new { @type = "tel" })
+            @Html.Gds().TextBoxFor(m => m.Telephone, new { @type = "number" })
         </div>
     </div>
 </div>
-<div class="form-group @Html.Gds().FormGroupClass(m => m.Email)">
+<div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.Email)">
     @Html.Gds().LabelFor(m => m.Email, false)
     @Html.Gds().ValidationMessageFor(m => m.Email)
     @Html.Gds().TextBoxFor(m => m.Email, new { @type = "email" })

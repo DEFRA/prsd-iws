@@ -43,13 +43,13 @@
 
     <div class="grid-row">
         <div class="column-two-thirds">
-            <h1 class="heading-large">@Resource.Title</h1>
+            <h1 class="govuk-heading-l">@Resource.Title</h1>
 
             @if (Model.NotificationStatus == NotificationStatus.NotSubmitted)
             {
-                <div class="form-group">@Resource.IncompleteMessage</div>
+                <div class="govuk-form-group">@Resource.IncompleteMessage</div>
 
-                @Html.ActionLink(@Resource.ContinueWithButtonText, "Index", "Home", new { id = Model.NotificationId, area = "NotificationApplication" }, new { @class = "button" })
+                @Html.ActionLink(@Resource.ContinueWithButtonText, "Index", "Home", new { id = Model.NotificationId, area = "NotificationApplication" }, new { @class = "govuk-button" })
             }
         </div>
 
@@ -227,15 +227,15 @@
                     </div>
 
                     <div class="column-half">
-                        <div class="form-group">
+                        <div class="govuk-form-group">
                             @Html.DropDownListFor(m => m.SelectedMovementStatus, Model.MovementStatuses, new { @class = "form-control view-by" })
-                            <button id="updateStatus" class="button" type="submit">Update</button>
+                            <button id="updateStatus" class="govuk-button" type="submit">Update</button>
                         </div>
                     </div>
                 }
             </div>
 
-            <div class="form-group">
+            <div class="govuk-form-group">
                 <table class="odd-table">
                     <caption class="visuallyhidden">Shipment summary</caption>
                     <thead>

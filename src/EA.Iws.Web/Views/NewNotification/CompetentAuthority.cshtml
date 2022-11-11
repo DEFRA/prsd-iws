@@ -6,8 +6,8 @@
     ViewBag.Title = CompetentAuthorityResources.Title;
 }
 
-<header class="hgroup text">
-    <h1 class="heading-large">@CompetentAuthorityResources.Header</h1>
+<header class="hgroup">
+    <h1 class="govuk-heading-l">@CompetentAuthorityResources.Header</h1>
     <p>@CompetentAuthorityResources.HeaderDescription</p>
 </header>
 
@@ -16,45 +16,45 @@
     @Html.Gds().ValidationSummary()
     @Html.AntiForgeryToken()
 
-    <div class="form-group @Html.Gds().FormGroupClass(m => m.AuthorityType)">
+    <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.AuthorityType)">
         <fieldset class="govuk-fieldset">
-            <legend class="form-label">
+            <legend class="govuk-label">
                 @CompetentAuthorityResources.Title
             </legend>
 
             @Html.Gds().ValidationMessageFor(m => m.AuthorityType)
 
-            <div class="multiple-choice">
-                @Html.RadioButtonFor(m => m.AuthorityType, "England", new { @class = "", @id = "England" })
-                <label class="" for="England">
+            <div class="govuk-radios__item">
+                @Html.RadioButtonFor(m => m.AuthorityType, "England", new { @class = "govuk-radios__input", @id = "England" })
+                <label class="govuk-label govuk-radios__label" for="England">
                     @EnumHelper.GetDisplayName(UKCompetentAuthority.England)
                 </label>
             </div>
 
-            <div class="multiple-choice">
-                @Html.RadioButtonFor(m => m.AuthorityType, "Scotland", new { @class = "", @id = "Scotland" })
-                <label class="" for="Scotland">
+            <div class="govuk-radios__item">
+                @Html.RadioButtonFor(m => m.AuthorityType, "Scotland", new { @class = "govuk-radios__input", @id = "Scotland" })
+                <label class="govuk-label govuk-radios__label" for="Scotland">
                     @EnumHelper.GetDisplayName(UKCompetentAuthority.Scotland)
                 </label>
             </div>
 
-            <div class="multiple-choice">
-                @Html.RadioButtonFor(m => m.AuthorityType, "NorthernIreland", new { @class = "", @id = "NorthernIreland" })
-                <label class="" for="NorthernIreland">
+            <div class="govuk-radios__item">
+                @Html.RadioButtonFor(m => m.AuthorityType, "NorthernIreland", new { @class = "govuk-radios__input", @id = "NorthernIreland" })
+                <label class="govuk-label govuk-radios__label" for="NorthernIreland">
                     @EnumHelper.GetDisplayName(UKCompetentAuthority.NorthernIreland)
                 </label>
             </div>
 
-            <div class="multiple-choice">
-                @Html.RadioButtonFor(m => m.AuthorityType, "Wales", new { @class = "", @id = "Wales" })
-                <label class="" for="Wales">
+            <div class="govuk-radios__item">
+                @Html.RadioButtonFor(m => m.AuthorityType, "Wales", new { @class = "govuk-radios__input", @id = "Wales" })
+                <label class="govuk-label govuk-radios__label" for="Wales">
                     @EnumHelper.GetDisplayName(UKCompetentAuthority.Wales)
                 </label>
             </div>
 
         </fieldset>
     </div>
-    <div class="form-group">
-        <button class="button" type="submit">@Constants.ContinueButtonText</button>
+    <div class="govuk-form-group">
+        <button class="govuk-button" type="submit">@Constants.ContinueButtonText</button>
     </div>
 }

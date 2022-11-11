@@ -18,7 +18,7 @@ $govuk-assets-path: "~/Content/govuk-frontend/govuk/assets/";
 @import "iws/movement-summary";
 @import "iws/notification-switcher";
 @import "iws/financial-guarantee";
-@import "iws/footer";
+/*@import "iws/footer";*/
 @import "jquery-autocomplete";
 @import "iws/import-waste-codes";
 @import "iws/internal-menu";
@@ -27,6 +27,6 @@ $govuk-assets-path: "~/Content/govuk-frontend/govuk/assets/";
 @import "iws/search";
 @import "iws/pagination";
 @import "iws/form-multiple-choice";
-@import "iws/grid_layout";
+/*@import "iws/grid_layout";*/
 @import "themes/base/all.css";
 @import "iws/_cookies-banner";

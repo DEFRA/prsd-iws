@@ -12,7 +12,7 @@
     @Html.HiddenFor(m => m.NotificationId)
 
     <header class="hgroup">
-        <h1 class="heading-large">@AddEditProducerResources.Header</h1>
+        <h1 class="govuk-heading-l">@AddEditProducerResources.Header</h1>
     </header>
 
     <fieldset>
@@ -37,7 +37,7 @@
         @Html.EditorFor(m => m.Contact)
     </fieldset>
 
-    <div class="form-group no-js-hidden">
+    <div class="govuk-form-group no-js-hidden">
         <div class="multiple-choice">
             @Html.CheckBoxFor(m => m.IsAddedToAddressBook, new { id = "addressBook" })
             <label for="addressBook">
@@ -46,5 +46,5 @@
         </div>
     </div>
 
-    <button class="button" type="submit">@Constants.ContinueButtonText</button>
+    <button class="govuk-button" type="submit">@Constants.ContinueButtonText</button>
 }

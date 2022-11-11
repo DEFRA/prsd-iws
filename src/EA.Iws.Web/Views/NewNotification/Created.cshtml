@@ -9,7 +9,7 @@
 {
     @Html.AntiForgeryToken()
     <header class="hgroup">
-        <h1 class="heading-large">@CreatedResources.Header</h1>
+        <h1 class="govuk-heading-l">@CreatedResources.Header</h1>
         <p>@CreatedResources.HeaderDescription</p>
     </header>
     <div class="panel">
@@ -18,7 +18,7 @@
         </span>
     </div>
     @Html.HiddenFor(m => m.NotificationId)
-    <div class="form-group">
+    <div class="govuk-form-group">
         <p>@CreatedResources.NotificationNumberSaved</p>
         @switch (Model.CompetentAuthority)
         {
@@ -31,7 +31,7 @@
         }
     </div>
 
-    <div class="form-group">
-        <button class="button" type="submit">@Constants.ContinueButtonText</button>
+    <div class="govuk-form-group">
+        <button class="govuk-button" type="submit">@Constants.ContinueButtonText</button>
     </div>
 }

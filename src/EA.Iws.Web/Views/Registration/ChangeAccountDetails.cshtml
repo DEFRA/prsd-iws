@@ -6,14 +6,14 @@
 
 <div class="grid-row">
     <section class="column-two-thirds">
-        <h1 class="heading-large">@ChangeAccountDetailsResources.Header</h1>
+        <h1 class="govuk-heading-l">@ChangeAccountDetailsResources.Header</h1>
 
         @using (Html.BeginForm("ChangeAccountDetails", "Registration"))
         {
             @Html.AntiForgeryToken()
             @Html.Gds().ValidationSummary()
 
-            <div class="form-group @Html.Gds().FormGroupClass(m => m.ChangeOptions)">
+            <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.ChangeOptions)">
                 @Html.Gds().ValidationMessageFor(m => m.ChangeOptions)
                 <fieldset>
                     <div class="multiple-choice">
@@ -32,8 +32,8 @@
                 </fieldset>
             </div>
 
-            <div class="form-group">
-                <input type="submit" class="button" value="@ChangeAccountDetailsResources.Continue" />
+            <div class="govuk-form-group">
+                <input type="submit" class="govuk-button" value="@ChangeAccountDetailsResources.Continue" />
             </div>
         }
     </section>

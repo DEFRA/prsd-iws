@@ -30,12 +30,12 @@
                 @Html.HiddenFor(m => m.HasHistoryItems)
                 @Html.HiddenFor(m => m.PageNumber)
 
-                <div class="form-group">
+                <div class="govuk-form-group">
                     @Html.DropDownListFor(m => m.SelectedScreen, Model.FilterTerms, new { @class = "form-control view-by" })
                 </div>
                 if (Model.SelectedScreen == "date")
                 {
-                    <div class="form-group @Html.Gds().FormGroupClass(m => m.StartDay) @Html.Gds().FormGroupClass(m => m.StartMonth) @Html.Gds().FormGroupClass(m => m.StartYear)">
+                    <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.StartDay) @Html.Gds().FormGroupClass(m => m.StartMonth) @Html.Gds().FormGroupClass(m => m.StartYear)">
                         <fieldset>
                             <legend>
                                 <span class="form-label">From</span>
@@ -44,15 +44,15 @@
                                 @Html.Gds().ValidationMessageFor(m => m.StartDay)
                                 @Html.Gds().ValidationMessageFor(m => m.StartMonth)
                                 @Html.Gds().ValidationMessageFor(m => m.StartYear)
-                                <div class="form-group form-group-day">
+                                <div class="govuk-form-group form-group-day">
                                     @Html.Gds().LabelFor(m => m.StartDay)
                                     @Html.Gds().TextBoxFor(m => m.StartDay)
                                 </div>
-                                <div class="form-group form-group-month">
+                                <div class="govuk-form-group form-group-month">
                                     @Html.Gds().LabelFor(m => m.StartMonth)
                                     @Html.Gds().TextBoxFor(m => m.StartMonth)
                                 </div>
-                                <div class="form-group form-group-year">
+                                <div class="govuk-form-group form-group-year">
                                     @Html.Gds().LabelFor(m => m.StartYear)
                                     @Html.Gds().TextBoxFor(m => m.StartYear)
                                 </div>
@@ -60,7 +60,7 @@
                         </fieldset>
                     </div>
                     <br />
-                    <div class="form-group @Html.Gds().FormGroupClass(m => m.EndDay) @Html.Gds().FormGroupClass(m => m.EndMonth) @Html.Gds().FormGroupClass(m => m.EndYear)">
+                    <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.EndDay) @Html.Gds().FormGroupClass(m => m.EndMonth) @Html.Gds().FormGroupClass(m => m.EndYear)">
                         <fieldset>
                             <legend>
                                 <span class="form-label">To</span>
@@ -69,23 +69,23 @@
                                 @Html.Gds().ValidationMessageFor(m => m.EndDay)
                                 @Html.Gds().ValidationMessageFor(m => m.EndMonth)
                                 @Html.Gds().ValidationMessageFor(m => m.EndYear)
-                                <div class="form-group form-group-day">
+                                <div class="govuk-form-group form-group-day">
                                     @Html.Gds().LabelFor(m => m.EndDay)
                                     @Html.Gds().TextBoxFor(m => m.EndDay)
                                 </div>
-                                <div class="form-group form-group-month">
+                                <div class="govuk-form-group form-group-month">
                                     @Html.Gds().LabelFor(m => m.EndMonth)
                                     @Html.Gds().TextBoxFor(m => m.EndMonth)
                                 </div>
-                                <div class="form-group form-group-year">
+                                <div class="govuk-form-group form-group-year">
                                     @Html.Gds().LabelFor(m => m.EndYear)
                                     @Html.Gds().TextBoxFor(m => m.EndYear)
                                 </div>
                             </div>
                         </fieldset>
                     </div>
-                    <div class="form-group">
-                        <button class="button" type="submit" name="command" value="search">@Resource.Search</button>
+                    <div class="govuk-form-group">
+                        <button class="govuk-button" type="submit" name="command" value="search">@Resource.Search</button>
                     </div>
                 }
             }

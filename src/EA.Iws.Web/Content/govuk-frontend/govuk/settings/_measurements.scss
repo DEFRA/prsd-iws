@@ -93,26 +93,3 @@ $govuk-focus-width: 3px !default;
 /// @access public
 
 $govuk-hover-width: 10px !default;
-
-
-$full-width: 100%;
-
-$one-quarter: calc($full-width / 4);
-
-$one-third: calc($full-width / 3);
-
-$half: calc($full-width / 2);
-
-$two-thirds: ($full-width) - ($one-third);
-
-$three-quarters: ($full-width) - ($one-quarter);
-
-$gutter: 30px;
-
-$gutter-one-quarter: calc($gutter / 4);
-
-$gutter-one-third: calc($gutter / 3);
-
-$gutter-half: calc($gutter / 2);
-
-$gutter-two-thirds: $gutter - $gutter-one-third;

@@ -7,12 +7,12 @@
     var notificationType = Model.NotificationType.ToString();
 }
 
-<h1 class="heading-large">@string.Format(ListFacilityResources.Header, notificationType)</h1>
+<h1 class="govuk-heading-l">@string.Format(ListFacilityResources.Header, notificationType)</h1>
 <p>@string.Format(ListFacilityResources.HeaderDescription, notificationType.ToLowerInvariant())</p>
 
 @if (Model != null && Model.FacilityData.Any())
 {
-    <div class="form-group">
+    <div class="govuk-form-group">
         <table title=@ListFacilityResources.TableTitle>
             <thead>
                 <tr>
@@ -34,10 +34,10 @@
                         </td>
                         <td>
                             @Html.ActionLink(ListFacilityResources.Edit, "Edit", "Facility",
-                                new { id = Model.FacilityData[i].NotificationId, entityId = Model.FacilityData[i].Id, backToOverview = ViewBag.BackToOverview }, null)
+                                new { id = Model.FacilityData[i].NotificationId, entityId = Model.FacilityData[i].Id, backToOverview = ViewBag.BackToOverview }, new { title = Model.FacilityData[i].Business.Name })
                             <span class="table-divider">|</span>
                             @Html.ActionLink(ListFacilityResources.Remove, "Remove", "Facility",
-                                new { id = Model.FacilityData[i].NotificationId, entityId = Model.FacilityData[i].Id, backToOverview = ViewBag.BackToOverview }, null)
+                                new { id = Model.FacilityData[i].NotificationId, entityId = Model.FacilityData[i].Id, backToOverview = ViewBag.BackToOverview }, new { title = Model.FacilityData[i].Business.Name })
                         </td>
                     </tr>
                 }
@@ -46,7 +46,7 @@
     </div>
 }
 
-<div class="form-group">
+<div class="govuk-form-group">
     @Html.ActionLink(ListFacilityResources.AddFacility, "Add", "Facility", new { id = Model.NotificationId, backToOverview = ViewBag.BackToOverview }, null)
 </div>
 @if (ViewBag.BackToOverview)

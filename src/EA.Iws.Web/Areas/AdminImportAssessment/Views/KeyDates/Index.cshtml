@@ -12,7 +12,7 @@
     var byText = " by ";
 }
 
-<h1 class="heading-large">@Resource.MainHeading</h1>
+<h1 class="govuk-heading-l">@Resource.MainHeading</h1>
 
 <div>
     @Resource.FirstParagraph
@@ -253,7 +253,7 @@
         if (Model.Command == KeyDatesCommand.ArchiveReference)
         {
             <fieldset>
-                <div class="form-group @Html.Gds().FormGroupClass(m => m.ArchiveReference)">
+                <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.ArchiveReference)">
                     @Html.Gds().LabelFor(m => m.ArchiveReference, false)
                     @Html.Gds().ValidationMessageFor(m => m.ArchiveReference)
                     @Html.Gds().TextBoxFor(m => m.ArchiveReference, new { @Maxlength = 100 })
@@ -264,7 +264,7 @@
         {
 
             <fieldset>
-                <div class="form-group @Html.Gds().FormGroupClass(m => m.NewDate) @Html.Gds().FormGroupClass(m => m.NewDate.Day) @Html.Gds().FormGroupClass(m => m.NewDate.Month) @Html.Gds().FormGroupClass(m => m.NewDate.Year)">
+                <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.NewDate) @Html.Gds().FormGroupClass(m => m.NewDate.Day) @Html.Gds().FormGroupClass(m => m.NewDate.Month) @Html.Gds().FormGroupClass(m => m.NewDate.Year)">
                     @EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(@Model.Command) date<br>
                     @Html.Gds().ValidationMessageFor(m => m.NewDate)
                     @Html.Gds().HintParagraph("For example, 31 3 2015")
@@ -276,7 +276,7 @@
         if (Model.Command == KeyDatesCommand.BeginAssessment)
         {
             <fieldset>
-                <div class="form-group @Html.Gds().FormGroupClass(m => m.NameOfOfficer)">
+                <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.NameOfOfficer)">
                     @Html.Gds().LabelFor(m => m.NameOfOfficer, false)
                     @Html.Gds().ValidationMessageFor(m => m.NameOfOfficer)
                     @Html.Gds().TextBoxFor(m => m.NameOfOfficer, new { @Maxlength = 30 })
@@ -290,14 +290,14 @@
 
 
         <br />
-        <div class="form-group">
+        <div class="govuk-form-group">
             @if (Model.Command == KeyDatesCommand.ArchiveReference)
             {
-                <input type="submit" class="button" value="@Resource.ArchieveReferenceButtonText" />
+                <input type="submit" class="govuk-button" value="@Resource.ArchieveReferenceButtonText" />
             }
             else
             {
-                <input type="submit" class="button" value="@Resource.ButtonText" />
+                <input type="submit" class="govuk-button" value="@Resource.ButtonText" />
             }
         </div>
 

@@ -17,7 +17,7 @@
     @Html.Gds().ValidationSummary()
     @Html.HiddenFor(m => m.NotificationId)
 
-    <div class="form-group @Html.Gds().FormGroupClass(m => m.PackagingTypes)">
+    <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.PackagingTypes)">
         @Html.Gds().ValidationMessageFor(m => m.PackagingTypes)
         <fieldset>
 
@@ -52,7 +52,7 @@
 
             <div class="panel @(Model.OtherSelected ? "" : "js-hidden")" id="other-option">
                 <label class="form-label" for="other-label">@PackagingTypesResources.Other</label>
-                <div class="form-group @Html.Gds().FormGroupClass(m => m.OtherDescription)">
+                <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.OtherDescription)">
                     @Html.Gds().ValidationMessageFor(m => m.OtherDescription)
                     @Html.Gds().TextBoxFor(m => m.OtherDescription, new { @id = "other-label" })
                 </div>
@@ -62,7 +62,7 @@
 
     </div>
 
-    <div class="form-group">
-        <button class="button" type="submit">@Constants.ContinueButtonText</button>
+    <div class="govuk-form-group">
+        <button class="govuk-button" type="submit">@Constants.ContinueButtonText</button>
     </div>
 }

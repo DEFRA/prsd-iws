@@ -4,7 +4,7 @@
     ViewBag.Title = WasteGenerationProcessResources.Title;
 }
 <header class="hgroup">
-    <h1 class="heading-large">@WasteGenerationProcessResources.Header</h1>
+    <h1 class="govuk-heading-l">@WasteGenerationProcessResources.Header</h1>
 </header>
 @using (Html.BeginForm())
 {
@@ -13,11 +13,11 @@
     @Html.HiddenFor(m => m.NotificationId)
     <div>
         <fieldset>
-            <div class="form-group @Html.Gds().FormGroupClass(m => m.ProcessDescription)">
+            <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.ProcessDescription)">
                 @Html.Gds().ValidationMessageFor(m => m.ProcessDescription)<br />
-                @Html.TextAreaFor(m => m.ProcessDescription, new { @id = "other-label", @class = "text-area full-width", @title = WasteGenerationProcessResources.ProcessDescription })
+                @Html.TextAreaFor(m => m.ProcessDescription, new { @id = "other-label", @class = "govuk-textarea full-width", @rows = 10, @title = WasteGenerationProcessResources.ProcessDescription })
             </div>
-            <div class="form-group @Html.Gds().FormGroupClass(m => m.IsDocumentAttached)">
+            <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.IsDocumentAttached)">
                 <fieldset>
                     <div>@Html.Gds().ValidationMessageFor(m => m.IsDocumentAttached)</div>
                     <div class="multiple-choice">
@@ -30,7 +30,7 @@
             </div>
         </fieldset>
     </div>
-    <div class="form-group">
-        <button class="button" type="submit">@Constants.ContinueButtonText</button>
+    <div class="govuk-form-group">
+        <button class="govuk-button" type="submit">@Constants.ContinueButtonText</button>
     </div>
 }

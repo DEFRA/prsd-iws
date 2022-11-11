@@ -7,7 +7,7 @@
 
 <div class="grid-row">
     <div class="column-two-thirds">
-        <h1 class="heading-large">@Model.ConfirmTitle</h1>
+        <h1 class="govuk-heading-l">@Model.ConfirmTitle</h1>
 
         @using (Html.BeginForm())
         {
@@ -17,7 +17,7 @@
             @Html.HiddenFor(m => m.SharedUserIds)
             @Html.HiddenFor(m => m.SharedUsers)
 
-            <div class="form-group">
+            <div class="govuk-form-group">
                 <h2 class="heading-medium">@Resources.ShareNotificationConfirmShareUsers</h2>
                 <table title="@Resources.ShareNotificationTitle">
 
@@ -38,7 +38,7 @@
             </div>
 
             <div>
-                <button class="button" type="submit">@Constants.ContinueButtonText</button>
+                <button class="govuk-button" type="submit">@Constants.ContinueButtonText</button>
             </div>
             @Html.ActionLink(@Resources.Back, "ShareNotification", "ShareNotification", new { id = Model.NotificationId, area = "NotificationApplication" }, null)
         }

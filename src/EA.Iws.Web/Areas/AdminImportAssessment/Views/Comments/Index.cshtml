@@ -10,7 +10,7 @@
 }
 
 <header>
-    <h1 class="heading-large">@Resource.CommentsHeader</h1>
+    <h1 class="govuk-heading-l">@Resource.CommentsHeader</h1>
     <p class="subtitle">@Resource.Subtitle</p>
 </header>
 
@@ -50,26 +50,26 @@
                 var nameClass = Model.SelectedFilter == "name" ? "" : "class=hidden";
 
                 <div @dateClass id="dateSection">
-                    <div class="form-group @Html.Gds().FormGroupClass(m => m.From) @Html.Gds().FormGroupClass(m => m.From.Day) @Html.Gds().FormGroupClass(m => m.From.Month) @Html.Gds().FormGroupClass(m => m.From.Year)">
+                    <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.From) @Html.Gds().FormGroupClass(m => m.From.Day) @Html.Gds().FormGroupClass(m => m.From.Month) @Html.Gds().FormGroupClass(m => m.From.Year)">
                         @Html.LabelFor(m => m.From)
                         @Html.Gds().ValidationMessageFor(m => m.From)
                         @Html.EditorFor(m => m.From)
                     </div>
                     <br />
-                    <div class="form-group @Html.Gds().FormGroupClass(m => m.To) @Html.Gds().FormGroupClass(m => m.To.Day) @Html.Gds().FormGroupClass(m => m.To.Month) @Html.Gds().FormGroupClass(m => m.To.Year)">
+                    <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.To) @Html.Gds().FormGroupClass(m => m.To.Day) @Html.Gds().FormGroupClass(m => m.To.Month) @Html.Gds().FormGroupClass(m => m.To.Year)">
                         @Html.LabelFor(m => m.To)
                         @Html.Gds().ValidationMessageFor(m => m.To)
                         @Html.EditorFor(m => m.To)
                     </div>
-                    <div class="form-group">
-                        <button class="button" type="submit" name="command" value="search">Search</button>
+                    <div class="govuk-form-group">
+                        <button class="govuk-button" type="submit" name="command" value="search">Search</button>
                     </div>
                 </div>
 
 
 
                 <div @shipmentClass id="shipmentSection">
-                    <div class="form-group @Html.Gds().FormGroupClass(m => m.ShipmentNumberStr)">
+                    <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.ShipmentNumberStr)">
 
                         @Html.Gds().ValidationMessageFor(m => m.ShipmentNumberStr)
                         <div>
@@ -79,8 +79,8 @@
                             @Html.Gds().TextBoxFor(m => m.ShipmentNumberStr)
                         </div>
                         <br />
-                        <div class="form-group">
-                            <button class="button" type="submit" name="command" value="search">Search</button>
+                        <div class="govuk-form-group">
+                            <button class="govuk-button" type="submit" name="command" value="search">Search</button>
                         </div>
                     </div>
                     <br />
@@ -95,8 +95,8 @@
                         @Html.Gds().DropDownListFor(m => m.SelectedUser, Model.UserFilters, new { @id = "nameSelectList" })
                     </div>
                     <br />
-                    <div class="form-group">
-                        <button class="button" type="submit" name="command" value="search">Search</button>
+                    <div class="govuk-form-group">
+                        <button class="govuk-button" type="submit" name="command" value="search">Search</button>
                     </div>
                     <br />
                 </div>
@@ -112,7 +112,7 @@
 
 @if (Model.Comments.Count > 0)
 {
-    <div class="form-group table-container">
+    <div class="govuk-form-group table-container">
         <table title="Comments">
             <thead>
                 <tr>
@@ -181,7 +181,7 @@ else
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    <div class="form-group">
+    <div class="govuk-form-group">
         @Html.ActionLink(Resource.GoToOverview, "Index", "Home", new { area = "ImportNotification", id = Model.NotificationId }, null)
     </div>
 }

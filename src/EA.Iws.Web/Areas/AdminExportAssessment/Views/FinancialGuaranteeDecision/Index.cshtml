@@ -4,7 +4,7 @@
     ViewBag.Title = Resources.DecisionTitle;
 }
 
-<h2 class="heading-large">@Resources.DecisionTitle</h2>
+<h2 class="govuk-heading-l">@Resources.DecisionTitle</h2>
 
 @using (Html.BeginForm())
 {
@@ -12,14 +12,14 @@
     @Html.Gds().ValidationSummary()
     @Html.HiddenFor(m => m.FinancialGuaranteeId)
 
-    <div class="form-group">
+    <div class="govuk-form-group">
         @Html.Gds().LabelFor(m => m.Decision, false)
         @Html.Gds().ValidationMessageFor(m => m.Decision)
         @Html.Gds().DropDownListFor(m => m.Decision, Model.PossibleDecisions, optionLabel: string.Empty)
     </div>
 
-    <div class="form-group">
-        <button class="button" type="submit" name="submit" value="decision">@Constants.ContinueButtonText</button>
+    <div class="govuk-form-group">
+        <button class="govuk-button" type="submit" name="submit" value="decision">@Constants.ContinueButtonText</button>
     </div>
 }
 

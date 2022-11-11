@@ -5,7 +5,7 @@
     ViewBag.Title = CreateNewOrganisationResources.Title;
 }
 
-<h1 class="heading-large">@CreateNewOrganisationResources.Header</h1>
+<h1 class="govuk-heading-l">@CreateNewOrganisationResources.Header</h1>
 <p>@CreateNewOrganisationResources.HeaderDescription</p>
 
 @using (Html.BeginForm("CreateNewOrganisation", "Registration"))
@@ -13,13 +13,13 @@
     @Html.AntiForgeryToken()
     @Html.Gds().ValidationSummary()
 
-    <div class="form-group @Html.Gds().FormGroupClass(m => m.Name)">
+    <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.Name)">
         @Html.Gds().LabelFor(m => m.Name)
         @Html.Gds().ValidationMessageFor(m => m.Name)
         @Html.Gds().TextBoxFor(m => m.Name)
     </div>
     
-    <div class="form-group @Html.Gds().FormGroupClass(m => m.BusinessType)">
+    <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.BusinessType)">
         <label class="form-label">@CreateNewOrganisationResources.OrganisationType</label>
         @Html.Gds().ValidationMessageFor(m => m.BusinessType)
 
@@ -52,7 +52,7 @@
         </div>
         
         <div class="panel @(Model.BusinessType != null && Model.BusinessType == BusinessType.Other ? "" : "js-hidden")" id="other-description">
-            <div class="form-group @Html.Gds().FormGroupClass(m => m.OtherDescription)">
+            <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.OtherDescription)">
                 @Html.Gds().LabelFor(m => m.OtherDescription)
                 @Html.Gds().ValidationMessageFor(m => m.OtherDescription)
                 @Html.Gds().TextBoxFor(m => m.OtherDescription)
@@ -60,7 +60,7 @@
         </div>
     </div>
     
-    <div class="form-group">
-        <input type="submit" class="button" value="@CreateNewOrganisationResources.Continue" />
+    <div class="govuk-form-group">
+        <input type="submit" class="govuk-button" value="@CreateNewOrganisationResources.Continue" />
     </div>
 }

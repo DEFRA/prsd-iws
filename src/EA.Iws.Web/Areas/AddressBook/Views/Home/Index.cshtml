@@ -7,7 +7,7 @@
 }
 
 <header>
-    <h1 class="heading-large">Your address book</h1>
+    <h1 class="govuk-heading-l">Your address book</h1>
     <p class="subtitle">View and manage your address book</p>
 </header>
 
@@ -20,13 +20,13 @@
 			@Html.ActionLink(@Resource.AddAddress,  "Add", "Edit", new { type = Model.Type }, new { @class = "button" })
 
             <h3 class="heading-small">@Resource.SearchHeader</h3>
-            <div id="search-container" class="form-group @Html.Gds().FormGroupClass(m => m.SearchTerm)">
+            <div id="search-container" class="govuk-form-group @Html.Gds().FormGroupClass(m => m.SearchTerm)">
                 @Html.Gds().ValidationMessageFor(m => m.SearchTerm)
                 @Html.Gds().HintParagraph(Resource.SearchHint)
                 @Html.Gds().TextBoxFor(m => m.SearchTerm, new { @title = "Search term", placeholder = Resource.SearchPlaceholder })
                 @Html.HiddenFor(m => m.Type)
                 @Html.HiddenFor(m => m.PageNumber)
-                <button name="button" value="search" class="button" type="submit">@Resource.Search</button>
+                <button name="button" value="search" class="govuk-button" type="submit">@Resource.Search</button>
             </div>
         }
     </div>
@@ -36,7 +36,7 @@
 
 @if (Model.AddressRecords.Count > 0)
 {
-    <div class="form-group table-container">
+    <div class="govuk-form-group table-container">
         <table title="Address book records">
             <thead>
               <tr>
@@ -70,10 +70,10 @@
 							<td>@Html.DisplayFor(m => m.AddressRecords[i].BusinessData.RegistrationNumber)</td>
 						}
 						<td>
-							<span style="white-space: nowrap">
-								@Html.ActionLink("Edit", "Index", "Edit", new { id = Model.AddressRecords[i].Id, type = Model.Type, page = Model.PageNumber }, null) <span>&nbsp;</span>
-								@Html.ActionLink("Delete", "Index", "Delete", new { id = Model.AddressRecords[i].Id, type = Model.Type }, null)
-							</span>
+                            <span style="white-space: nowrap">
+                                @Html.ActionLink("Edit", "Index", "Edit", new { id = Model.AddressRecords[i].Id, type = Model.Type, page = Model.PageNumber }, new { title = Model.AddressRecords[i].BusinessData.Name }) <span>&nbsp;</span>
+                                @Html.ActionLink("Delete", "Index", "Delete", new { id = Model.AddressRecords[i].Id, type = Model.Type }, new { title = Model.AddressRecords[i].BusinessData.Name })
+                            </span>
 						</td>
 					</tr>
 				}
@@ -95,7 +95,7 @@
     }
     else
     {
-        <h1 class="heading-large">Address not found</h1>
+        <h1 class="govuk-heading-l">Address not found</h1>
 
         <p>No matching organisations were found with the name you entered. Please make sure you have entered the organisation name correctly.</p>
     }
@@ -104,7 +104,7 @@
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    <div class="form-group">
+    <div class="govuk-form-group">
         @if (Model.IsInternalUser)
         {
             @Html.ActionLink(Resource.GoToHomepage, "Index", "Home", new { area = "Admin" }, null)

@@ -7,7 +7,7 @@
     ViewBag.Title = Resource.Title;
 }
 
-<h1 class="heading-large">@Resource.MainHeading</h1>
+<h1 class="govuk-heading-l">@Resource.MainHeading</h1>
 
 @using (Html.BeginForm())
 {
@@ -33,7 +33,7 @@
     }
     else
     {
-        <div class="form-group @Html.Gds().FormGroupClass(m => m.Decision)">
+        <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.Decision)">
             @Html.LabelFor(m => m.Decision, new { @class = "form-label-bold" })
             @Html.Gds().ValidationMessageFor(m => m.Decision)
             @Html.Gds().DropDownListFor(m => m.Decision, Model.PossibleDecisions, string.Empty, new { id = "decision-select" })
@@ -55,8 +55,8 @@
             @Html.Partial("_Withdraw")
         </div>
 
-        <div class="form-group">
-            <input type="submit" class="button" value="@Constants.ContinueButtonText" />
+        <div class="govuk-form-group">
+            <input type="submit" class="govuk-button" value="@Constants.ContinueButtonText" />
         </div>
     }
 }

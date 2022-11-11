@@ -3,7 +3,7 @@
     ViewBag.Title = "Import stats";
 }
 
-<h1 class="heading-large">Import stats</h1>
+<h1 class="govuk-heading-l">Import stats</h1>
 
 <p>Select your shipment received dates for this report</p>
 
@@ -12,19 +12,19 @@
     @Html.AntiForgeryToken()
     @Html.Gds().ValidationSummary()
 
-    <div class="form-group @Html.Gds().FormGroupClass(m => m.From) @Html.Gds().FormGroupClass(m => m.From.Day) @Html.Gds().FormGroupClass(m => m.From.Month) @Html.Gds().FormGroupClass(m => m.From.Year)">
+    <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.From) @Html.Gds().FormGroupClass(m => m.From.Day) @Html.Gds().FormGroupClass(m => m.From.Month) @Html.Gds().FormGroupClass(m => m.From.Year)">
         @Html.LabelFor(m => m.From)
         @Html.Gds().ValidationMessageFor(m => m.From)
         @Html.EditorFor(m => m.From)
     </div>
 
-    <div class="form-group @Html.Gds().FormGroupClass(m => m.To) @Html.Gds().FormGroupClass(m => m.To.Day) @Html.Gds().FormGroupClass(m => m.To.Month) @Html.Gds().FormGroupClass(m => m.To.Year)">
+    <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.To) @Html.Gds().FormGroupClass(m => m.To.Day) @Html.Gds().FormGroupClass(m => m.To.Month) @Html.Gds().FormGroupClass(m => m.To.Year)">
         @Html.LabelFor(m => m.To)
         @Html.Gds().ValidationMessageFor(m => m.To)
         @Html.EditorFor(m => m.To)
     </div>
 
-    <div class="form-group">
-        <button class="button" type="submit">Generate report</button>
+    <div class="govuk-form-group">
+        <button class="govuk-button" type="submit">Generate report</button>
     </div>
 }

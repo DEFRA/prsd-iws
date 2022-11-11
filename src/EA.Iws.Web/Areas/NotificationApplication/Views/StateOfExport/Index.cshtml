@@ -10,23 +10,23 @@
     @Html.Gds().ValidationSummary()
     @Html.AntiForgeryToken()
 
-    <div class="form-group">
-        <h2 class="heading-small">@StateOfExportResources.CAName</h2>
+    <div class="govuk-form-group">
+        <h2 class="govuk-heading-m" >@StateOfExportResources.CAName</h2>
         @Model.CompetentAuthorityName
     </div>
 
-    <div class="form-group @Html.Gds().FormGroupClass(m => m.EntryOrExitPointId)">
+    <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.EntryOrExitPointId)">
         @Html.Gds().LabelFor(m => m.EntryOrExitPointId, new { @class = "form-label-bold" })
         @Html.Gds().HintParagraph(StateOfExportResources.Hint)
         @Html.Gds().ValidationMessageFor(m => m.EntryOrExitPointId)
-        @Html.Gds().DropDownListFor(m => m.EntryOrExitPointId, Model.ExitPoints, string.Empty, new { @title = StateOfExportResources.ExitPoint, data_select_box = "true" })
+        @Html.Gds().DropDownListFor(m => m.EntryOrExitPointId, Model.ExitPoints, string.Empty, new { @title = StateOfExportResources.ExitPoint, @class = "form-control view-by" })
         @Html.HiddenFor(m => m.NotificationCompetentAuthority)
     </div>
 
     @Html.Partial("_PortNotListedDisclosure", new ViewDataDictionary { { "ca", Model.NotificationCompetentAuthority } })
 
-    <div class="form-group">
-        <button class="button" type="submit" value="submit" name="submit">@Constants.ContinueButtonText</button>
+    <div class="govuk-form-group">
+        <button class="govuk-button" type="submit" value="submit" name="submit">@Constants.ContinueButtonText</button>
     </div>
 
     @Html.HiddenFor(m => m.CompetentAuthorityName)

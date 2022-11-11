@@ -10,7 +10,7 @@
 
     public partial class Gds<TModel>
     {
-        private static readonly string CssLabelClass = "form-label";
+        private static readonly string CssLabelClass = "govuk-label form-label";
 
         public MvcHtmlString LabelFor<TValue>(Expression<Func<TModel, TValue>> expression, bool showOptionalLabel)
         {

@@ -4,7 +4,7 @@
     ViewBag.Title = MeansOfTransportResources.Title;
 }
 
-<h1 class="heading-large">@MeansOfTransportResources.Header</h1>
+<h1 class="govuk-heading-l">@MeansOfTransportResources.Header</h1>
 <p>@MeansOfTransportResources.HeaderDescription</p>
 
 @using (Html.BeginForm())
@@ -12,7 +12,7 @@
     @Html.AntiForgeryToken()
     @Html.Gds().ValidationSummary()
 
-    <div class="form-group">
+    <div class="govuk-form-group">
         <table title="Transport methods">
             <caption class="visuallyhidden">Transport methods</caption>
             <thead>
@@ -33,14 +33,14 @@
         </table>
     </div>
 
-    <div class="form-group @Html.Gds().FormGroupClass(m => m.SelectedMeans)">
+    <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.SelectedMeans)">
         @Html.Gds().LabelFor(m => m.SelectedMeans)
         @Html.Gds().HintSpan(MeansOfTransportResources.SelectedMeansHint)
         @Html.Gds().ValidationMessageFor(m => m.SelectedMeans)
         @Html.Gds().TextBoxFor(m => m.SelectedMeans)
     </div>
 
-    <div class="form-group">
-        <button type="submit" class="button" value="Submit" name="submit">@Constants.ContinueButtonText</button>
+    <div class="govuk-form-group">
+        <button type="submit" class="govuk-button" value="Submit" name="submit">@Constants.ContinueButtonText</button>
     </div>
 }

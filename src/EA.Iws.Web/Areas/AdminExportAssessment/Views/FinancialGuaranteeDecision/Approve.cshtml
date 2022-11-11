@@ -5,7 +5,7 @@
     ViewBag.Title = Resources.ApproveTitle;
 }
 
-<h2 class="heading-large">@Resources.ApproveTitle</h2>
+<h2 class="govuk-heading-l">@Resources.ApproveTitle</h2>
 
 @using (Html.BeginForm())
 {
@@ -14,15 +14,15 @@
     @Html.HiddenFor(m => m.FinancialGuaranteeId)
     @Html.HiddenFor(m => m.CompletedDate)
 
-    <div class="form-group @Html.Gds().FormGroupClass(m => m.DecisionMadeDate.Day) @Html.Gds().FormGroupClass(m => m.DecisionMadeDate.Month) @Html.Gds().FormGroupClass(m => m.DecisionMadeDate.Year)">
+    <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.DecisionMadeDate.Day) @Html.Gds().FormGroupClass(m => m.DecisionMadeDate.Month) @Html.Gds().FormGroupClass(m => m.DecisionMadeDate.Year)">
         <label class="form-label" for="DecisionMadeDate_Day">@Html.DisplayNameFor(m => m.DecisionMadeDate)</label>
         @Html.EditorFor(m => m.DecisionMadeDate)
     </div>
 
-    <div class="form-group @Html.Gds().FormGroupClass(m => m.IsBlanketBond)">
+    <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.IsBlanketBond)">
         <label class="form-label">@Html.DisplayNameFor(m => m.IsBlanketBond)</label>
         @Html.Gds().ValidationMessageFor(m => m.IsBlanketBond)
-        <div class="form-group">
+        <div class="govuk-form-group">
             <div class="multiple-choice" data-target="validToDate">
                 @Html.RadioButtonFor(m => m.IsBlanketBond, false, new { @class = "", @id = "rdoNo" })
                 <label for="rdoNo">
@@ -40,7 +40,7 @@
     </div>
 
     <div>
-        <div class="form-group @Html.Gds().FormGroupClass(m => m.ReferenceNumber)">
+        <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.ReferenceNumber)">
             @Html.Gds().LabelFor(m => m.ReferenceNumber, showOptionalLabel: false)
             @Html.Gds().ValidationMessageFor(m => m.ReferenceNumber)
             @Html.Gds().TextBoxFor(m => m.ReferenceNumber, new { @MaxLength = "70" })
@@ -49,14 +49,14 @@
 
     if (Model.ShowExtraData)
     {
-        <div class="form-group @Html.Gds().FormGroupClass(m => m.CoverAmount)">
+        <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.CoverAmount)">
             @Html.Gds().LabelFor(m => m.CoverAmount, false)
             @Html.Gds().ValidationMessageFor(m => m.CoverAmount)
             @Html.Gds().TextBoxFor(m => m.CoverAmount)
         </div>
     }
 
-    <div class="form-group @Html.Gds().FormGroupClass(m => m.ActiveLoadsPermitted)">
+    <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.ActiveLoadsPermitted)">
         @Html.Gds().LabelFor(m => m.ActiveLoadsPermitted, false)
         @Html.Gds().ValidationMessageFor(m => m.ActiveLoadsPermitted)
         @Html.Gds().TextBoxFor(m => m.ActiveLoadsPermitted)
@@ -64,15 +64,15 @@
 
     if (Model.ShowExtraData)
     {
-        <div class="form-group @Html.Gds().FormGroupClass(m => m.CalculationContinued)">
+        <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.CalculationContinued)">
             @Html.Gds().LabelFor(m => m.CalculationContinued, false)
             @Html.Gds().ValidationMessageFor(m => m.CalculationContinued)
             @Html.Gds().TextBoxFor(m => m.CalculationContinued)
         </div>
     }
 
-    <div class="form-group">
-        <button class="button" type="submit" name="submit" value="decision">@Constants.ContinueButtonText</button>
+    <div class="govuk-form-group">
+        <button class="govuk-button" type="submit" name="submit" value="decision">@Constants.ContinueButtonText</button>
     </div>
 }
 

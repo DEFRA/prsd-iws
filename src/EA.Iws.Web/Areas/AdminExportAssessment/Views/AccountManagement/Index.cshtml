@@ -8,7 +8,7 @@
     ViewBag.Title = @IndexResources.MainHeading;
 }
 
-<h1 class="heading-large">@IndexResources.MainHeading</h1>
+<h1 class="govuk-heading-l">@IndexResources.MainHeading</h1>
 
 @Html.Gds().ValidationSummary()
 
@@ -48,7 +48,7 @@
 
 <h2 class="heading-medium">@IndexResources.HistoryHeading</h2>
 
-<div class="form-group">
+<div class="govuk-form-group">
     <table title=@IndexResources.HistoryHeading>
         <thead>
             <tr>
@@ -88,7 +88,7 @@
     </table>
 </div>
 
-<div class="form-group">
+<div class="govuk-form-group">
     <details id="paymentDetails">
 
         <summary><span class="summary">@IndexResources.EnterPaymentHeading</span></summary>
@@ -100,7 +100,7 @@
     </details>
 </div>
 
-<div class="form-group">
+<div class="govuk-form-group">
     <details id="refundDetails">
 
         <summary><span class="summary">@IndexResources.RefundHeading</span></summary>
@@ -120,7 +120,7 @@
     var openComments = Model.CommentError != null ? "open = true" : string.Empty;
 
 
-    <div class="form-group">
+    <div class="govuk-form-group">
         <details id="comments" role="group" @openComments>
 
             <summary role="button"><span class="summary">@IndexResources.CommentSectionHeading</span></summary>
@@ -187,7 +187,7 @@
     </div>
 }
 
-<div class="form-group">
+<div class="govuk-form-group">
     @if (Model.CanDeleteTransaction && Model.HasPayments)
     {
         @Html.ActionLink(IndexResources.DeleteTransactionLink, "Index", "DeleteTransaction")

@@ -5,7 +5,7 @@
     ViewBag.Title = PhysicalCharacteristicsResources.Title;
 }
 <header class="hgroup">
-    <h1 class="heading-large">@PhysicalCharacteristicsResources.Header</h1>
+    <h1 class="govuk-heading-l">@PhysicalCharacteristicsResources.Header</h1>
     <p>@PhysicalCharacteristicsResources.HeaderDescription</p>
     <p>@PhysicalCharacteristicsResources.Select</p>
 </header>
@@ -15,11 +15,11 @@
     @Html.Gds().ValidationSummary()
     @Html.HiddenFor(m => m.NotificationId)
     @Html.HiddenFor(m => m.PhysicalCharacteristics.ShowEnumValue)
-    <div class="form-group @Html.Gds().FormGroupClass(m => m.PhysicalCharacteristics)">
+    <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.PhysicalCharacteristics)">
         @Html.Gds().ValidationMessageFor(m => m.PhysicalCharacteristics)
         @Html.EditorFor(m => m.PhysicalCharacteristics)
         <fieldset>
-            <div id="list-item-other-container" class="form-group form-group-compound">
+            <div id="list-item-other-container" class="govuk-form-group form-group-compound">
                 <div class="multiple-choice" data-target="other-option">
                     @Html.CheckBoxFor(m => m.OtherSelected, new { id = "other-option-check" })
                     <label for="other-option-check">
@@ -28,7 +28,7 @@
                 </div>
             </div>
             <div class="panel @(Model.OtherSelected ? "" : "js-hidden")" id="other-option">
-                <div class="form-group @Html.Gds().FormGroupClass(m => m.OtherDescription)">
+                <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.OtherDescription)">
                     <label class="form-label" for="OtherDescription">@PhysicalCharacteristicsResources.OtherRequired</label>
                     @Html.Gds().ValidationMessageFor(m => m.OtherDescription)
                     @Html.EditorFor(m => m.OtherDescription, new { @id = "other-label" })
@@ -36,7 +36,7 @@
             </div>
         </fieldset>
     </div>
-    <div class="form-group">
-        <button class="button" type="submit">@Constants.ContinueButtonText</button>
+    <div class="govuk-form-group">
+        <button class="govuk-button" type="submit">@Constants.ContinueButtonText</button>
     </div>
 }

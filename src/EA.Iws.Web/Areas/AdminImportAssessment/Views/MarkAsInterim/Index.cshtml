@@ -7,7 +7,7 @@
     ViewBag.Title = Resources.Title;
 }
 
-<h1 class="heading-large">@Resources.Heading</h1>
+<h1 class="govuk-heading-l">@Resources.Heading</h1>
 
 @if (Model.IsAuthorised)
 {
@@ -24,7 +24,7 @@
 
             @Html.Gds().ValidationSummary()
 
-            <div class="form-group @Html.Gds().FormGroupClass(m => m.IsInterim)">
+            <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.IsInterim)">
                 @Html.Gds().ValidationMessageFor(m => m.IsInterim)
 
                 <fieldset>
@@ -44,7 +44,7 @@
                 </fieldset>
             </div>
 
-            <button type="submit" class="button">@Constants.ContinueButtonText</button>
+            <button type="submit" class="govuk-button">@Constants.ContinueButtonText</button>
         }
 
     }

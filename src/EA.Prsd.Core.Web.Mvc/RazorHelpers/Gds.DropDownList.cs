@@ -10,9 +10,9 @@
     public partial class Gds<TModel>
     {
         public MvcHtmlString DropDownListFor<TValue>(Expression<Func<TModel, TValue>> expression,
-            IEnumerable<SelectListItem> selectList)
+            IEnumerable<SelectListItem> selectList, bool withLookAhead = false, bool useHalfWidth = true)
         {
-            return DropDownListFor(expression, selectList, new RouteValueDictionary());
+            return DropDownListFor(expression, selectList, new RouteValueDictionary(), withLookAhead, useHalfWidth);
         }
 
         public MvcHtmlString DropDownListFor<TValue>(Expression<Func<TModel, TValue>> expression,
@@ -20,33 +20,101 @@
             string optionLabel)
         {
             var routeValues = new RouteValueDictionary();
-            AddFormControlCssClass(routeValues);
+            GdsExtensions.AddFormControlCssClass(routeValues);
+            GdsExtensions.AddClass(routeValues, "govuk-select");
             return htmlHelper.DropDownListFor(expression, selectList, optionLabel: optionLabel, htmlAttributes: routeValues);
         }
 
         public MvcHtmlString DropDownListFor<TValue>(Expression<Func<TModel, TValue>> expression,
-            IEnumerable<SelectListItem> selectList, object htmlAttributes)
+            IEnumerable<SelectListItem> selectList, object htmlAttributes, bool withLookAhead = false, bool useHalfWidth = true)
         {
             var routeValueDictionary = System.Web.Mvc.HtmlHelper.AnonymousObjectToHtmlAttributes(htmlAttributes);
-            return DropDownListFor(expression, selectList, routeValueDictionary);
+            return DropDownListFor(expression, selectList, routeValueDictionary, withLookAhead, useHalfWidth);
         }
 
         public MvcHtmlString DropDownListFor<TValue>(Expression<Func<TModel, TValue>> expression,
             IEnumerable<SelectListItem> selectList,
             string optionLabel,
-            object htmlAttributes)
+            object htmlAttributes,
+            bool withLookAhead = false,
+            bool useHalfWidth = true)
         {
-            var routeValueDictionary = System.Web.Mvc.HtmlHelper.AnonymousObjectToHtmlAttributes(htmlAttributes);
-            AddFormControlCssClass(routeValueDictionary);
+            var routeValueDictionary = HtmlHelper.AnonymousObjectToHtmlAttributes(htmlAttributes);
+            GdsExtensions.AddFormControlCssClass(routeValueDictionary, useHalfWidth);
+            GdsExtensions.AddClass(routeValueDictionary, "govuk-select");
+            AddLookAhead(expression, routeValueDictionary, withLookAhead);
             return htmlHelper.DropDownListFor(expression, selectList, optionLabel: optionLabel, htmlAttributes: routeValueDictionary);
         }
 
         public MvcHtmlString DropDownListFor<TValue>(Expression<Func<TModel, TValue>> expression,
             IEnumerable<SelectListItem> selectList,
-            IDictionary<string, object> htmlAttributes)
+            IDictionary<string, object> htmlAttributes,
+            bool withLookAhead = false,
+            bool useHalfWidth = true)
         {
-            AddFormControlCssClass(htmlAttributes);
+            GdsExtensions.AddFormControlCssClass(htmlAttributes, useHalfWidth);
+            GdsExtensions.AddClass(htmlAttributes, "govuk-select");
+
+            AddLookAhead(expression, htmlAttributes, withLookAhead);
             return htmlHelper.DropDownListFor(expression, selectList, htmlAttributes);
         }
+
+        private void AddLookAhead<TValue>(Expression<Func<TModel, TValue>> expression, IDictionary<string, object> htmlAttributes, bool withLookAhead)
+        {
+            if (withLookAhead)
+            {
+                GdsExtensions.AddClass(htmlAttributes, "gds-auto-complete");
+
+                var htmlFieldName = ExpressionHelper.GetExpressionText(expression);
+                var labeledBy = $"{htmlHelper.ViewContext.ViewData.TemplateInfo.GetFullHtmlFieldId(htmlFieldName)}-label";
+                htmlAttributes.Add("aria-labelledby", labeledBy);
+            }
+        }
     }
+
+    //public partial class Gds<TModel>
+    //{
+    //    private static readonly string CssDropdownClass = "govuk-select";
+
+    //    public MvcHtmlString DropDownListFor<TValue>(Expression<Func<TModel, TValue>> expression,
+    //        IEnumerable<SelectListItem> selectList)
+    //    {
+    //        return DropDownListFor(expression, selectList, new RouteValueDictionary());
+    //    }
+
+    //    public MvcHtmlString DropDownListFor<TValue>(Expression<Func<TModel, TValue>> expression,
+    //        IEnumerable<SelectListItem> selectList,
+    //        string optionLabel)
+    //    {
+    //        var routeValues = new RouteValueDictionary();
+    //        AddFormControlCssClass(routeValues);
+    //        return htmlHelper.DropDownListFor(expression, selectList, optionLabel: optionLabel, htmlAttributes: routeValues);
+    //    }
+
+    //    public MvcHtmlString DropDownListFor<TValue>(Expression<Func<TModel, TValue>> expression,
+    //        IEnumerable<SelectListItem> selectList, object htmlAttributes)
+    //    {
+    //        var routeValueDictionary = HtmlHelper.AnonymousObjectToHtmlAttributes(htmlAttributes);
+    //        return DropDownListFor(expression, selectList, routeValueDictionary);
+    //    }
+
+    //    public MvcHtmlString DropDownListFor<TValue>(Expression<Func<TModel, TValue>> expression,
+    //        IEnumerable<SelectListItem> selectList,
+    //        string optionLabel,
+    //        object htmlAttributes)
+    //    {
+    //        var routeValueDictionary = HtmlHelper.AnonymousObjectToHtmlAttributes(htmlAttributes);
+    //        GdsExtensions.AddClass(routeValueDictionary, CssDropdownClass);
+    //        return htmlHelper.DropDownListFor(expression, selectList, optionLabel: optionLabel, htmlAttributes: routeValueDictionary);
+    //    }
+
+    //    public MvcHtmlString DropDownListFor<TValue>(Expression<Func<TModel, TValue>> expression,
+    //        IEnumerable<SelectListItem> selectList,
+    //        IDictionary<string, object> htmlAttributes)
+    //    {
+    //        //AddFormControlCssClass(htmlAttributes);
+    //        GdsExtensions.AddClass(htmlAttributes, CssDropdownClass);
+    //        return htmlHelper.DropDownListFor(expression, selectList, htmlAttributes);
+    //    }
+    //}
 }

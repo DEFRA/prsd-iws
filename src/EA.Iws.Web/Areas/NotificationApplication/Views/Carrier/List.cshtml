@@ -3,12 +3,12 @@
 @{
     ViewBag.Title = "List Carriers";
 }
-<h1 class="heading-large">@ListCarrierResources.Header</h1>
+<h1 class="govuk-heading-l">@ListCarrierResources.Header</h1>
 <p>@ListCarrierResources.HeaderDescription</p>
 
 @if (Model != null && Model.Carriers.Any())
 {
-    <div class="form-group">
+    <div class="govuk-form-group">
         <table title="Carriers">
             <thead>
                 <tr>
@@ -42,11 +42,11 @@
     </div>
 }
 
-<div class="form-group">
+<div class="govuk-form-group">
     @Html.ActionLink(ListCarrierResources.AddAnother, "Add", "Carrier", new { id = Model.NotificationId, backToOverview = ViewBag.BackToOverview }, null)
 </div>
 
-<div class="form-group">
+<div class="govuk-form-group">
     @Html.ActionLink(ListCarrierResources.AddFromAddressBook, "AddFromAddressBook", "Carrier", new { id = Model.NotificationId }, null)
 </div>
 

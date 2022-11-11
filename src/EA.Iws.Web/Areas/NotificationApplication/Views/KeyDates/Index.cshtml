@@ -11,7 +11,7 @@
 <div class="column-two-thirds">
 
     <header class="hgroup">
-        <h1 class="heading-large">Key dates and notification status </h1>
+        <h1 class="govuk-heading-l">Key dates and notification status </h1>
     </header>
 
     @Html.HiddenFor(m => m.NotificationId)
@@ -22,7 +22,7 @@
     }
     else
     {
-        <div class="form-group">
+        <div class="govuk-form-group">
             <p>These are the key dates for this notification so far:</p>
             <table title="Assessment dates currently recorded">
                 <thead>
@@ -164,6 +164,6 @@
             "Index",
             "Options",
             new { area = "NotificationApplication", id = Model.NotificationId },
-            new { @class = "button" })
+            new { @class = "govuk-button" })
     </p>
 </div>

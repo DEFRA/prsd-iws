@@ -40,7 +40,7 @@
             <div class="form-group @Html.Gds().FormGroupClass(m => m.NewShipmentNumber)">
                 @Html.Gds().ValidationMessageFor(m => m.NewShipmentNumber)
                 @Html.Gds().TextBoxFor(m => m.NewShipmentNumber, new { type = "number", min = 1, @class = "form-control", placeholder = @Resource.ChangeShipmentPlaceholder })
-                <button class="button" type="submit">@Resources.ChangeShipment</button>
+                <button class="govuk-button" type="submit">@Resources.ChangeShipment</button>
             </div>
         </p>
     }

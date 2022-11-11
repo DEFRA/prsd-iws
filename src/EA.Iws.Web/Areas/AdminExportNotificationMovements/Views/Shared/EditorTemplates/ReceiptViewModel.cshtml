@@ -4,13 +4,13 @@
 
 <div>
 
-    <div class="form-group @Html.Gds().FormGroupClass(m => m.ReceivedDate)">
+    <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.ReceivedDate)">
         @Html.LabelFor(m => m.ReceivedDate, new { @class = "form-label-bold" })
         @Html.Gds().ValidationMessageFor(m => m.ReceivedDate)
         @Html.EditorFor(m => m.ReceivedDate)
     </div>
 
-    <div class="form-group">
+    <div class="govuk-form-group">
         @Html.Label(@Resource.ShipmentAcceptedLable, new { @class = "form-label-bold" })
 
         <div class="multiple-choice">
@@ -36,7 +36,7 @@
 
         @if (Model.ShipmentTypes == ShipmentType.Partially || Model.ShipmentTypes == ShipmentType.Rejected)
         {
-            <div class="form-group @Html.Gds().FormGroupClass(m => m.RejectionReason)" id="dvPartiallyRejectedComments" style="display:block; margin-top:150px;">
+            <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.RejectionReason)" id="dvPartiallyRejectedComments" style="display:block; margin-top:150px;">
                 @if (Model.ShipmentTypes == ShipmentType.Partially)
                 {
                     <div id="dvPartiallyRejected" style="display:block">
@@ -76,7 +76,7 @@
         }
         else
         {
-            <div class="form-group @Html.Gds().FormGroupClass(m => m.RejectionReason)" id="dvPartiallyRejectedComments" style="display:none;  margin-top:150px;">
+            <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.RejectionReason)" id="dvPartiallyRejectedComments" style="display:none;  margin-top:150px;">
                 <div id="dvPartiallyRejected">
                     @Html.LabelFor(m => m.RejectionReason, new { @class = "form-label-bold" })
                     @Resources.PartiallyRejectionReasonInfomation1
@@ -99,7 +99,7 @@
 
     @if (Model.ShipmentTypes == ShipmentType.Partially || Model.ShipmentTypes == ShipmentType.Rejected)
     {
-        <div class="form-group @Html.Gds().FormGroupClass(m => m.RejectedQuantity)" id="dvRejectedQuantity" style="display:block">
+        <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.RejectedQuantity)" id="dvRejectedQuantity" style="display:block">
             @Html.LabelFor(m => m.ShipmentRejectedQuantity, new { @class = "form-label-bold" })
             @Html.Gds().ValidationMessageFor(m => m.ShipmentRejectedQuantity)
             <p>
@@ -126,7 +126,7 @@
     }
     else
     {
-        <div class="form-group @Html.Gds().FormGroupClass(m => m.RejectedQuantity)" id="dvRejectedQuantity" style="display:none">
+        <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.RejectedQuantity)" id="dvRejectedQuantity" style="display:none">
             @Html.LabelFor(m => m.ShipmentRejectedQuantity, new { @class = "form-label-bold" })
             @Html.Gds().ValidationMessageFor(m => m.ShipmentRejectedQuantity)
             <p>
@@ -154,7 +154,7 @@
 
     @if (Model.ShipmentTypes == ShipmentType.Accepted || Model.ShipmentTypes == ShipmentType.Partially)
     {
-        <div class="form-group @Html.Gds().FormGroupClass(m => m.ActualQuantity)" id="dvActualQuantity" style="display:block">
+        <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.ActualQuantity)" id="dvActualQuantity" style="display:block">
             <h3 class="heading-small" style="margin-top: 0">@Resource.ActualQuantityQuestion</h3>
             <p>@Resource.ActualQuantityHint</p>
             @Html.LabelFor(m => m.ActualQuantity, new { @class = "form-label" })
@@ -176,7 +176,7 @@
     }
     else
     {
-        <div class="form-group @Html.Gds().FormGroupClass(m => m.ActualQuantity)" id="dvActualQuantity" style="display:none">
+        <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.ActualQuantity)" id="dvActualQuantity" style="display:none">
             <h3 class="heading-small" style="margin-top: 0">@Resource.ActualQuantityQuestion</h3>
             <p>@Resource.ActualQuantityHint</p>
             @Html.LabelFor(m => m.ActualQuantity, new { @class = "form-label" })

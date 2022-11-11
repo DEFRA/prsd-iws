@@ -4,7 +4,7 @@
     ViewBag.Title = OtherWasteAdditionalInformationResources.Title;
 }
 <header class="hgroup">
-    <h1 class="heading-large">@OtherWasteAdditionalInformationResources.Header</h1>
+    <h1 class="govuk-heading-l">@OtherWasteAdditionalInformationResources.Header</h1>
 </header>
 
 @using (Html.BeginForm())
@@ -15,13 +15,13 @@
     <div>
 
     </div>
-    <div class="form-group @Html.Gds().FormGroupClass(m => m.Description)">
+    <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.Description)">
         @Html.Gds().ValidationMessageFor(m => m.Description)
         @Html.Gds().HintParagraph(OtherWasteAdditionalInformationResources.DescriptionHint1)
         @Html.Gds().HintParagraph(OtherWasteAdditionalInformationResources.DescriptionHint)
         @Html.TextAreaFor(m => m.Description, new { @class = "text-area two-thirds", @title = OtherWasteAdditionalInformationResources.OtherDescription, @MaxLength = 256 })
     </div>
-    <div class="form-group">
+    <div class="govuk-form-group">
         <fieldset>
             <div class="multiple-choice">
                 @Html.CheckBoxFor(m => m.HasAttachement, new { @id = "chkboxFurtherInfo" })
@@ -31,7 +31,7 @@
             </div>
         </fieldset>
     </div>
-    <div class="form-group">
-        <button class="button" name="Command" value="continue" type="submit">@Constants.ContinueButtonText</button>
+    <div class="govuk-form-group">
+        <button class="govuk-button" name="Command" value="continue" type="submit">@Constants.ContinueButtonText</button>
     </div>
 }

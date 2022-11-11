@@ -6,7 +6,7 @@
 }
 
 <header class="hgroup">
-    <h1 class="heading-large">@WasteRecoveryResources.Header</h1>
+    <h1 class="govuk-heading-l">@WasteRecoveryResources.Header</h1>
 </header>
 
 @using (Html.BeginForm())
@@ -19,19 +19,19 @@
 
         <p>@WasteRecoveryResources.Desc2</p>        
 
-        <div class="form-group @Html.Gds().FormGroupClass(m => m.ProvidedBy)">
+        <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.ProvidedBy)">
             <h2 class="heading-small">@WasteRecoveryResources.Header2</h2>
             @Html.Gds().ValidationMessageFor(m => m.ProvidedBy)
-            <div class="multiple-choice">
-                @Html.RadioButtonFor(m => m.ProvidedBy, ProvidedBy.Notifier, new { @class = "", @id = "rdoNotifier" })
-                <label for="rdoNotifier">
+            <div class="govuk-radios__item">
+                @Html.RadioButtonFor(m => m.ProvidedBy, ProvidedBy.Notifier, new { @class = "govuk-radios__input", @id = "rdoNotifier" })
+                <label class="govuk-label govuk-radios__label" for="rdoNotifier">
                     @EA.Prsd.Core.Helpers.EnumHelper.GetDescription(ProvidedBy.Notifier)
                 </label>
             </div>
 
-            <div class="multiple-choice" data-target="importer-note">
-                @Html.RadioButtonFor(m => m.ProvidedBy, ProvidedBy.Importer, new { @class = "", @id = "rdoImporter" })
-                <label for="rdoImporter">
+            <div class="govuk-radios__item" data-target="importer-note">
+                @Html.RadioButtonFor(m => m.ProvidedBy, ProvidedBy.Importer, new { @class = "govuk-radios__input", @id = "rdoImporter" })
+                <label class="govuk-label govuk-radios__label" for="rdoImporter">
                     @EA.Prsd.Core.Helpers.EnumHelper.GetDescription(ProvidedBy.Importer)
                 </label>
             </div>
@@ -41,8 +41,8 @@
             </div>
         </div>
 
-        <div class="form-group">
-            <button class="button" type="submit">@Constants.ContinueButtonText</button>
+        <div class="govuk-form-group">
+            <button class="govuk-button" type="submit">@Constants.ContinueButtonText</button>
         </div>
     </div>
 }

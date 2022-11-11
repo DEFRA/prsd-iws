@@ -13,7 +13,7 @@
     @Html.HiddenFor(m => m.CarrierId)
 
     <header class="hgroup">
-        <h1 class="heading-large">@AddEditCarrierResources.Header</h1>
+        <h1 class="govuk-heading-l">@AddEditCarrierResources.Header</h1>
     </header>
 
     @Html.Partial("CarrierBusinessTypeViewModel", Model)
@@ -28,7 +28,7 @@
 
     @Html.EditorFor(m => m.Contact)
 
-    <div class="form-group no-js-hidden">
+    <div class="govuk-form-group no-js-hidden">
         <div class="multiple-choice">
             @Html.CheckBoxFor(m => m.IsAddedToAddressBook, new { id = "addressBook" })
             <label for="addressBook">
@@ -37,5 +37,5 @@
         </div>
     </div>
 
-    <button class="button" type="submit">@Constants.ContinueButtonText</button>
+    <button class="govuk-button" type="submit">@Constants.ContinueButtonText</button>
 }

@@ -1,1 +1,9 @@
 @import "_main.scss";
+
+p {
+    @extend .govuk-body;
+}
+
+a {
+    @extend .govuk-link;
+}

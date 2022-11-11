@@ -9,6 +9,8 @@
 
     public partial class Gds<TModel>
     {
+        private static readonly string CssPassswordClass = "govuk-input govuk-!-width-one-half";
+
         public MvcHtmlString PasswordFor<TValue>(Expression<Func<TModel, TValue>> expression)
         {
             return PasswordFor(expression, new RouteValueDictionary());
@@ -24,6 +26,8 @@
             IDictionary<string, object> htmlAttributes)
         {
             AddFormControlCssClass(htmlAttributes);
+
+            GdsExtensions.AddClass(htmlAttributes, CssPassswordClass);
 
             if (!htmlAttributes.ContainsKey("autocomplete"))
             {

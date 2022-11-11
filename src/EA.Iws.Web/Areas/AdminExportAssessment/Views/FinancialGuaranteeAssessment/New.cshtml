@@ -4,19 +4,19 @@
     ViewBag.Title = Resources.NewTitle;
 }
 
-<h1 class="heading-large">@Resources.NewTitle</h1>
+<h1 class="govuk-heading-l">@Resources.NewTitle</h1>
 
 @using (Html.BeginForm())
 {
     @Html.Gds().ValidationSummary()
     @Html.AntiForgeryToken()
 
-    <div class="form-group @Html.Gds().FormGroupClass(m => m.ReceivedDate.Day) @Html.Gds().FormGroupClass(m => m.ReceivedDate.Month) @Html.Gds().FormGroupClass(m => m.ReceivedDate.Year)">
+    <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.ReceivedDate.Day) @Html.Gds().FormGroupClass(m => m.ReceivedDate.Month) @Html.Gds().FormGroupClass(m => m.ReceivedDate.Year)">
         <label class="form-label" for="ReceivedDate_Day">@Html.DisplayNameFor(m => m.ReceivedDate)</label>
         @Html.EditorFor(m => m.ReceivedDate)
     </div>
 
-    <button class="button" type="submit">@Constants.ContinueButtonText</button>
+    <button class="govuk-button" type="submit">@Constants.ContinueButtonText</button>
 }
 
 @section menu {

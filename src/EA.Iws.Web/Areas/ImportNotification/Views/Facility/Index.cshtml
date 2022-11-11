@@ -6,7 +6,7 @@
     var addLinkText = string.Empty;
 }
 
-<h1 class="heading-large">@string.Format(Resource.Title, Model.NotificationType.ToString().ToLower())</h1>
+<h1 class="govuk-heading-l">@string.Format(Resource.Title, Model.NotificationType.ToString().ToLower())</h1>
 
 @if (Model.Facilities.Any())
 {
@@ -21,25 +21,25 @@
         </div>
 
         addLinkText = string.Format(Resource.AddAnotherLink, Model.NotificationType.ToString().ToLower());
-        <div class="form-group">
+        <div class="govuk-form-group">
             @Html.ActionLink(addLinkText, "Add", "Facility")
         </div>
 
-        <button class="button" type="submit">@Constants.ContinueButtonText</button>
+        <button class="govuk-button" type="submit">@Constants.ContinueButtonText</button>
     }
 }
 else
 {
-    <div class="form-group">
+    <div class="govuk-form-group">
         <h2 class="heading-small">@Resource.NoFacilitiesText</h2>
     </div>
 
     addLinkText = string.Format(Resource.AddMoreButton, Model.NotificationType.ToString().ToLower());
-    <div class="form-group">
+    <div class="govuk-form-group">
         @Html.ActionLink(addLinkText, "Add", "Facility")
     </div>
 
-    <div class="form-group">
+    <div class="govuk-form-group">
         @Html.ActionLink(Constants.ContinueOnlyButtonText, "Index", "Shipment", null, new { @class = "button" })
     </div>
 }

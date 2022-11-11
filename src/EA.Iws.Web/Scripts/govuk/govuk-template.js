@@ -3,23 +3,7 @@
 	var root = this;
 	if (typeof root.GOVUK === 'undefined') {
 		root.GOVUK = {};
-	}
-
-	/*
-	  Cookie methods
-	  ==============
-
-	  Usage:
-
-		Setting a cookie:
-		GOVUK.cookie('hobnob', 'tasty', { days: 30 });
-
-		Reading a cookie:
-		GOVUK.cookie('hobnob');
-
-		Deleting a cookie:
-		GOVUK.cookie('hobnob', null);
-	*/
+	}	
 
 	function getDomain() {
 		var host = window.location.hostname;

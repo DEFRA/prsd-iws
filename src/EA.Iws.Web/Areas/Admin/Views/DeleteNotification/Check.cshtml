@@ -8,12 +8,12 @@
 
 <div class="grid-row">
     <div class="column-two-thirds">
-        <h1 class="heading-large">@Resources.MainHeading @Model.NotificationNumber.ToNonBreakingString()</h1>
+        <h1 class="govuk-heading-l">@Resources.MainHeading @Model.NotificationNumber.ToNonBreakingString()</h1>
 
         <p>@Resources.Guidance</p>
 
 
-        <div class="form-group">
+        <div class="govuk-form-group">
             @Html.ActionLink(@Resources.CancelLinkText, "Index", "Home")
         </div>
 
@@ -24,7 +24,7 @@
             @Html.HiddenFor(m => m.IsExportNotification)
             @Html.HiddenFor(m => m.NotificationNumber)
 
-            <button type="submit" class="button">@Resources.ButtonText</button>
+            <button type="submit" class="govuk-button">@Resources.ButtonText</button>
         }
 
     </div>

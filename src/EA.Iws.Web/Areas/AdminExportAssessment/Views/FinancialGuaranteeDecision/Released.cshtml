@@ -3,11 +3,11 @@
     ViewBag.Title = Resources.ReleasedTitle;
 }
 
-<h2 class="heading-large">@Resources.ReleasedTitle</h2>
+<h2 class="govuk-heading-l">@Resources.ReleasedTitle</h2>
 
 <p>@Resources.ReleasedDescription</p>
 
-<div class="form-group">
+<div class="govuk-form-group">
     @Html.ActionLink(Constants.ContinueOnlyButtonText, "Index", "FinancialGuaranteeAssessment", null, new { @class = "button" })
 </div>
 

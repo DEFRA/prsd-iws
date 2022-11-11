@@ -1,7 +1,7 @@
 ﻿@using EA.Iws.Web.Areas.NotificationApplication.Views.TransitState
 @model EA.Iws.Web.Areas.NotificationApplication.ViewModels.TransitState.TransitStateViewModel
 
-<div class="form-group @Html.Gds().FormGroupClass(m => m.CountryId)">
+<div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.CountryId)">
     @Html.Gds().LabelFor(m => m.CountryId, new { @class = "form-label-bold" })
     @Html.Gds().HintParagraph(TransitStateResources.CountryHint)
     @Html.HiddenFor(m => m.NotificationCompetentAuthority)
@@ -9,13 +9,13 @@
 
     @if (Model.CountryId != null)
     {
-        @Html.Gds().DropDownListFor(m => m.CountryId, Model.Countries, new { data_select_box = "true" })
+        @Html.Gds().DropDownListFor(m => m.CountryId, Model.Countries, null)
     }
     else
     {
-        @Html.Gds().DropDownListFor(m => m.CountryId, Model.Countries, string.Empty, new { title = TransitStateResources.ExitCountry, data_select_box = "true" })
+        @Html.Gds().DropDownListFor(m => m.CountryId, Model.Countries, string.Empty, new { title = TransitStateResources.ExitCountry })
     }
 </div>
 @Html.Partial("_CountryNotListed")
 
-<button class="button" type="submit" value="country" name="submit">@Constants.ContinueButtonText</button>
+<button class="govuk-button" type="submit" value="country" name="submit">@Constants.ContinueButtonText</button>

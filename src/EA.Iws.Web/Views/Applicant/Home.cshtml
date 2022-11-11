@@ -5,9 +5,9 @@
     ViewBag.Title = HomeResources.Title;
 }
 
-<div class="grid-row">
+<div class="govuk-grid-row">
     <div class="column-two-thirds">
-        <h1 class="heading-large">@HomeResources.Header</h1>
+        <h1 class="govuk-heading-l">@HomeResources.Header</h1>
 
         <h2 class="heading-medium">@HomeResources.HeaderStartNew</h2>
         <p>
@@ -15,6 +15,7 @@
                                     target="_blank"
                                     title="@HomeResources.TitleSupportingInfo"
                                     rel="external"
+                                    class="govuk-link"
                                     data-track="element"
                                     data-category="Export notification"
                                     data-action="Supporting information">@HomeResources.SupportingInfo</a>
@@ -23,12 +24,12 @@
                                     <span class="visuallyhidden">@HomeResources.NewBrowserMessage</span>
                                     <br />
                                     @HomeResources.OrYouCan @Html.ActionLink(HomeResources.CopyNotification, "CompetentAuthority", "NewNotification", new { cfp = 1 },
-new { data_track = "element", data_category = "Export notification", data_action = "Copy" })@HomeResources.FullStop
+new { data_track = "element", data_category = "Export notification", data_action = "Copy", @class = "govuk-link" })@HomeResources.FullStop
         </p>
 
         <p id="get-started" class="get-started group">
             @Html.ActionLink(HomeResources.StartNewNotification, "CompetentAuthority", "NewNotification", null,
-                new { @class = "button", data_track = "element", data_category = "Export notification", data_action = "Start" })
+                new { @class = "govuk-button", data_track = "element", data_category = "Export notification", data_action = "Start" })
         </p>
     </div>
     <div class="column-third" id="submit-side-bar">
@@ -53,95 +54,95 @@ new { data_track = "element", data_category = "Export notification", data_action
 }
 else
 {
-    <div class="grid-row">
+    <div class="govuk-grid-row">
         <div class="column-two-thirds">
             @using (Html.BeginForm())
             {
                 @Html.Gds().ValidationSummary()
                 @Html.AntiForgeryToken()
 
-            <div id="search-container" class="form-group @Html.Gds().FormGroupClass(m => m.SearchTerm)">
+            <div id="search-container" class="govuk-form-group @Html.Gds().FormGroupClass(m => m.SearchTerm)">
                 @Html.Label(@HomeResources.SearchForNotification)
                 <br />
                 <br />
                 @Html.Gds().ValidationMessageFor(m => m.SearchTerm)
                 @Html.Label(@HomeResources.SearchForNotificationNumber)
                 @Html.Gds().HintSpan(HomeResources.SearchHint)
-                @Html.Gds().TextBoxFor(m => m.SearchTerm, new { @title = "Search term", placeholder = HomeResources.SearchPlaceholder })
+                @Html.Gds().TextBoxFor(m => m.SearchTerm, new { @title = "Search term", placeholder = HomeResources.SearchPlaceholder, @class = "govuk-input" })
 
-                <button name="button" value="search" class="button" type="submit">@HomeResources.Search</button>
+                <button name="button" value="search" class="govuk-button" type="submit">@HomeResources.Search</button>
             </div>
             }
         </div>
     </div>
 
-    <div class="grid-row">
+    <div class="govuk-grid-row">
         <div class="column-two-thirds">
             @using (Html.BeginForm())
             {
                 @Html.AntiForgeryToken()
-                <div class="form-group">
+                <div class="govuk-form-group">
                     @Html.Label(@HomeResources.FilterByNotificationStatus)
                     <br/>
-                    @Html.DropDownListFor(m => m.SelectedNotificationStatus, Model.NotificationStatuses, new { @class = "form-control view-by" })
-                    <button id="updateStatus" class="button" type="submit">@HomeResources.Update</button>
+                    @Html.Gds().DropDownListFor(m => m.SelectedNotificationStatus, Model.NotificationStatuses, new { @class = "form-control view-by" })
+                    <button id="updateStatus" class="govuk-button" type="submit">@HomeResources.Update</button>
                 </div>
             }
         </div>
     </div>
 
-    <div class="form-group">
-        <table class="odd-table" title="@HomeResources.TitleManageNotifications">
-            <caption class="visuallyhidden">@HomeResources.TableCaption</caption>
-            <thead>
-                <tr>
-                    <th>
+    <div class="govuk-form-group">
+        <table class="govuk-table" title="@HomeResources.TitleManageNotifications">
+            <caption class="visuallyhidden govuk-table__caption govuk-table__caption--l">@HomeResources.TableCaption</caption>
+            <thead class="govuk-table__head">
+                <tr class="govuk-table__row">
+                    <th class="govuk-table__header">
                         @HomeResources.ThNotificationNumber
                     </th>
-                    <th>
+                    <th class="govuk-table__header">
                         @HomeResources.ThStatus
                     </th>
-                    <th>
+                    <th class="govuk-table__header">
                         @HomeResources.ThExporter
                     </th>
-                    <th>
+                    <th class="govuk-table__header">
                         @Html.Raw(HomeResources.ProducerTableHeader)
                     </th>
-                    <th>
+                    <th class="govuk-table__header">
                         @HomeResources.ThImporter
                     </th>
-                    <th>
+                    <th class="govuk-table__header">
                         Notification access level
                     </th>
-                    <th>
+                    <th class="govuk-table__header">
                         @HomeResources.ThAction
                     </th>
                 </tr>
             </thead>
 
-            <tbody>
+            <tbody class="govuk-table__body">
                 @for (int i = 0; i < Model.Notifications.Count; i++)
                 {
-                    <tr>
-                        <td>
+                    <tr class="govuk-table__row">
+                        <td class="govuk-table__cell">
                             @Html.Raw(Model.Notifications[i].NotificationNumber.Replace(" ", "&nbsp;"))
                         </td>
-                        <td>
+                        <td class="govuk-table__cell">
                             <span class="statusbox @Html.ExportStatus().DisplayColorClass(Model.Notifications[i].Status) table">@Html.Raw(EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(Model.Notifications[i].Status).ToUpperInvariant().Replace(" ", "&nbsp;")) </span>
                         </td>
-                        <td>
+                        <td class="govuk-table__cell">
                             @Model.Notifications[i].Exporter
                         </td>
-                        <td>
+                        <td class="govuk-table__cell">
                             @Model.Notifications[i].Producer
                         </td>
-                        <td>
+                        <td class="govuk-table__cell">
                             @Model.Notifications[i].Importer
                         </td>
-                        <td>
+                        <td class="govuk-table__cell">
                             @Model.Notifications[i].AccessLevel
                         </td>
-                        <td>
+                        <td class="govuk-table__cell">
                             <a href="@Url.Action("Index", "Options", new { id = Model.Notifications[i].Id, area = "NotificationApplication" })" title="@Model.Notifications[i].NotificationNumber">
                                 @HomeResources.LinkChoose
                                 <span class="screen-reader-text">notification  @Html.Raw(Model.Notifications[i].NotificationNumber.Replace(" ", ""))</span>
