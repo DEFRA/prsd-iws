@@ -6,7 +6,7 @@
 
 @model DateInputViewModel
 
-<h1 class="heading-large">Enter the key dates for this notification</h1>
+<h1 class="govuk-heading-l">Enter the key dates for this notification</h1>
 
 @{
     ViewBag.Title = Resources.Title;
@@ -299,7 +299,7 @@
         if (Model.Command == KeyDatesStatusEnum.ArchiveReference)
         {
             <fieldset>
-                <div class="form-group @Html.Gds().FormGroupClass(m => m.ArchiveReference)">
+                <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.ArchiveReference)">
                     @Html.Gds().LabelFor(m => m.ArchiveReference, false)
                     @Html.Gds().ValidationMessageFor(m => m.ArchiveReference)
                     @Html.Gds().TextBoxFor(m => m.ArchiveReference, new { @Maxlength = 100 })
@@ -309,7 +309,7 @@
         else
         {
             <fieldset>
-                <div class="form-group @Html.Gds().FormGroupClass(m => m.NewDate) @Html.Gds().FormGroupClass(m => m.NewDate.Day) @Html.Gds().FormGroupClass(m => m.NewDate.Month) @Html.Gds().FormGroupClass(m => m.NewDate.Year)">
+                <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.NewDate) @Html.Gds().FormGroupClass(m => m.NewDate.Day) @Html.Gds().FormGroupClass(m => m.NewDate.Month) @Html.Gds().FormGroupClass(m => m.NewDate.Year)">
                     @EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(@Model.Command) date<br>
                     @Html.Gds().ValidationMessageFor(m => m.NewDate)
                     @Html.Gds().HintParagraph("For example, 31 3 2015")
@@ -321,7 +321,7 @@
         if (Model.Command == KeyDatesStatusEnum.AssessmentCommenced)
         {
             <fieldset>
-                <div class="form-group @Html.Gds().FormGroupClass(m => m.NameOfOfficer)">
+                <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.NameOfOfficer)">
                     @Html.Gds().LabelFor(m => m.NameOfOfficer, false)
                     @Html.Gds().ValidationMessageFor(m => m.NameOfOfficer)
                     @Html.Gds().TextBoxFor(m => m.NameOfOfficer, new { @Maxlength = 30 })
@@ -336,14 +336,14 @@
 
         <br/>
 
-        <div class="form-group">
+        <div class="govuk-form-group">
             @if (Model.Command == KeyDatesStatusEnum.ArchiveReference)
             {
-                <input type="submit" class="button" value="@IndexResources.ArchieveReferenceButtonText" />
+                <input type="submit" class="govuk-button" value="@IndexResources.ArchieveReferenceButtonText" />
             }
             else
             {
-                <input type="submit" class="button" value="@IndexResources.ButtonText" />
+                <input type="submit" class="govuk-button" value="@IndexResources.ButtonText" />
             }
             
         </div>
@@ -386,8 +386,8 @@ else
         @Html.AntiForgeryToken()
 
         <br />
-        <div class="form-group">
-            <input type="submit" class="button" value="Unlock notification for updates" />
+        <div class="govuk-form-group">
+            <input type="submit" class="govuk-button" value="Unlock notification for updates" />
         </div>
     }
 }
@@ -407,13 +407,13 @@ else
 @if (Model.CurrentStatus == NotificationStatus.Reassessment)
 {
     <br />
-    <div class="form-group">
+    <div class="govuk-form-group">
         @using (Html.BeginForm("AcceptChanges", "KeyDates", FormMethod.Post, new { id = Model.NotificationId }))
         {
             @Html.HiddenFor(m => m.NotificationId)
             @Html.AntiForgeryToken()
 
-            <input type="submit" class="button" value="Accept changes" data-track="element" data-category="Export notification assessment" data-action="Accept changes" />
+            <input type="submit" class="govuk-button" value="Accept changes" data-track="element" data-category="Export notification assessment" data-action="Accept changes" />
         }
 
         @using (Html.BeginForm("RejectChanges", "KeyDates", FormMethod.Post, new { id = Model.NotificationId }))
@@ -422,7 +422,7 @@ else
 
             @Html.AntiForgeryToken()
 
-            <input type="submit" class="button" value="Reject changes" data-track="element" data-category="Export notification assessment" data-action="Reject changes" />
+            <input type="submit" class="govuk-button" value="Reject changes" data-track="element" data-category="Export notification assessment" data-action="Reject changes" />
         }
     </div>
 }

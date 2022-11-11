@@ -5,7 +5,7 @@
 }
 
 <header class="hgroup">
-    <h1 class="heading-large">@CustomWasteCodeResources.Header</h1>
+    <h1 class="govuk-heading-l">@CustomWasteCodeResources.Header</h1>
     <div>@CustomWasteCodeResources.HeaderDescription</div>
 </header>
 
@@ -20,7 +20,7 @@
             @Html.Gds().ValidationMessageFor(m => m.ExportNationalCode)
             @Html.Gds().TextBoxFor(m => m.ExportNationalCode)
         </div>
-        <div class="form-group @Html.Gds().FormGroupClass(m => m.ExportNationalCodeNotApplicable)">
+        <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.ExportNationalCodeNotApplicable)">
             @Html.Gds().ValidationMessageFor(m => m.ExportNationalCodeNotApplicable)
             <label for="ExportNationalCodeNotApplicable">
                 @Html.CheckBoxFor(m => m.ExportNationalCodeNotApplicable)
@@ -34,7 +34,7 @@
             @Html.Gds().ValidationMessageFor(m => m.ImportNationalCode)
             @Html.Gds().TextBoxFor(m => m.ImportNationalCode)
         </div>
-        <div class="form-group @Html.Gds().FormGroupClass(m => m.ImportNationalCodeNotApplicable)">
+        <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.ImportNationalCodeNotApplicable)">
             @Html.Gds().ValidationMessageFor(m => m.ImportNationalCodeNotApplicable)
             <label for="ImportNationalCodeNotApplicable">
                 @Html.CheckBoxFor(m => m.ImportNationalCodeNotApplicable)
@@ -48,7 +48,7 @@
             @Html.Gds().ValidationMessageFor(m => m.CustomsCode)
             @Html.Gds().TextBoxFor(m => m.CustomsCode)
         </div>
-        <div class="form-group @Html.Gds().FormGroupClass(m => m.CustomsCodeNotApplicable)">
+        <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.CustomsCodeNotApplicable)">
             @Html.Gds().ValidationMessageFor(m => m.CustomsCodeNotApplicable)
             <label for="CustomsCodeNotApplicable">
                 @Html.CheckBoxFor(m => m.CustomsCodeNotApplicable)
@@ -63,7 +63,7 @@
             @Html.Gds().ValidationMessageFor(m => m.OtherCode)
             @Html.Gds().TextBoxFor(m => m.OtherCode)
         </div>
-        <div class="form-group @Html.Gds().FormGroupClass(m => m.OtherCodeNotApplicable)">
+        <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.OtherCodeNotApplicable)">
             @Html.Gds().ValidationMessageFor(m => m.OtherCodeNotApplicable)
             <label for="OtherCodeNotApplicable">
                 @Html.CheckBoxFor(m => m.OtherCodeNotApplicable)
@@ -71,7 +71,7 @@
             </label>
         </div>
     </div>
-    <div class="form-group">
-        <button class="button" type="submit">@Constants.ContinueButtonText</button>
+    <div class="govuk-form-group">
+        <button class="govuk-button" type="submit">@Constants.ContinueButtonText</button>
     </div>
 }

@@ -1,3 +1,13 @@
+@import "../govuk-frontend/govuk/helpers/_grid";
+
+#main-content {
+    padding-top: govuk-spacing(7);
+}
+
+.govuk-main-wrapper {
+    padding-top: 0px;
+}
+
 @media (min-width: 641px) {
     .phase-banner .phase-tag {
         font-size: 16px;

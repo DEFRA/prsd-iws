@@ -7,7 +7,7 @@
 
 <div class="grid-row">
     <header class="hgroup">
-        <h1 class="heading-large">@EwcCodeResources.Header</h1>
+        <h1 class="govuk-heading-l">@EwcCodeResources.Header</h1>
     </header>
     @using (Html.BeginForm())
     {
@@ -20,8 +20,8 @@
                 @Html.Gds().LabelFor(m => m.EnterWasteCodesViewModel.SelectedCode, false)
                 @Html.Gds().ValidationMessageFor(m => m.EnterWasteCodesViewModel.SelectedCode)
                 @Html.Gds().DropDownListFor(m => m.EnterWasteCodesViewModel.SelectedCode, Model.EnterWasteCodesViewModel.Codes,
-                    string.Empty, new { title = EwcCodeResources.Title, data_select_box = "true", tabindex=1 })
-                <button type="submit" name="command" value="addcode" tabindex="2" class="button">@EwcCodeResources.AddCode</button>
+                    string.Empty, new { title = EwcCodeResources.Title, tabindex=1 })
+                <button type="submit" name="command" value="addcode" tabindex="2" class="govuk-button">@EwcCodeResources.AddCode</button>
             </div>
 
             <table title="Ewc codes">
@@ -52,8 +52,8 @@
             </table>
         </div>
 
-        <div class="form-group">
-            <button class="button" type="submit" name="command" value="continue">@Constants.ContinueButtonText</button>
+        <div class="govuk-form-group">
+            <button class="govuk-button" type="submit" name="command" value="continue">@Constants.ContinueButtonText</button>
         </div>
     }
 

@@ -7,7 +7,7 @@
 
 <div class="grid-row">
     <div class="column-two-thirds">
-        <h1 class="heading-large">@Resources.ShareNotificationTitle</h1>
+        <h1 class="govuk-heading-l">@Resources.ShareNotificationTitle</h1>
 
         @using (Html.BeginForm())
         {
@@ -16,7 +16,7 @@
             @Html.HiddenFor(m => m.NotificationId)
 
 
-            <div class="form-group @Html.Gds().FormGroupClass(m => m.EmailAddress)">
+            <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.EmailAddress)">
                 <p>@Resources.ConfirmResponsibility</p>
                 <p>@Resources.EnterEmail</p>
                 <div class="column bold-small">
@@ -24,12 +24,12 @@
                 </div>
                 @Html.Gds().ValidationMessageFor(m => m.EmailAddress)
                 @Html.Gds().TextBoxFor(m => m.EmailAddress)
-                <button type="submit" name="command" value="addshareduser" tabindex="2" class="button">@Resources.AddSharedUser</button>
+                <button type="submit" name="command" value="addshareduser" tabindex="2" class="govuk-button">@Resources.AddSharedUser</button>
             </div>
 
             <h2 class="heading-medium">@Resources.ChosenSharedUsers</h2>
 
-            <div class="form-group">
+            <div class="govuk-form-group">
                 <table title="@Resources.SharedUserTableTitle">
                     <thead>
                         <tr>
@@ -56,7 +56,7 @@
                 </table>
             </div>
 
-            <button class="button" type="submit" name="command" value="continue">@Constants.ContinueOnlyButtonText</button>
+            <button class="govuk-button" type="submit" name="command" value="continue">@Constants.ContinueOnlyButtonText</button>
 
             <div style="margin-top:20px;">
                 @Html.ActionLink(Resources.NotificationOption, "Index", "Options", new { area = "NotificationApplication", id = Model.NotificationId }, null)

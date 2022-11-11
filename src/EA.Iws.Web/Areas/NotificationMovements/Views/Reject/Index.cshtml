@@ -6,7 +6,7 @@
     ViewBag.Title = Resource.Title;
 }
 
-<h1 class="heading-large">@Resource.MainHeading</h1>
+<h1 class="govuk-heading-l">@Resource.MainHeading</h1>
 
 @using (Html.BeginForm())
 {
@@ -18,7 +18,7 @@
     {
         <p>@Resource.None</p>
 
-        <div class="form-group">
+        <div class="govuk-form-group">
             @Html.ActionLink("Continue", "Index", "Options",
                 new { id = Model.NotificationId, area = "NotificationApplication" },
                 new { @class = "button" })
@@ -26,7 +26,7 @@
     }
     else
     {
-        <div class="form-group @Html.Gds().FormGroupClass(m => m.Selected)">
+        <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.Selected)">
             @Html.Gds().ValidationMessageFor(m => m.Selected)
             @for (int i = 0; i < Model.Movements.Count; i++)
             {
@@ -42,7 +42,7 @@
         </div>
 
         <div class="form-group-compound">
-            <button class="button" type="submit">@Constants.ContinueButtonText</button>
+            <button class="govuk-button" type="submit">@Constants.ContinueButtonText</button>
         </div>
 
         <div>

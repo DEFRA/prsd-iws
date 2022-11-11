@@ -19,12 +19,12 @@
     <div class="column-two-thirds">
 
         <header class="hgroup">
-            <h1 class="heading-large">@Resources.MainHeading</h1>
+            <h1 class="govuk-heading-l">@Resources.MainHeading</h1>
         </header>
 
         @if (Model.Charge == 0)
         {
-            <div class="form-group">
+            <div class="govuk-form-group">
                 <div class="noti-alert no-margin">
                     <em>@Resources.AlertText</em> @Resources.ChargesNotShownAlert
                 </div>
@@ -162,14 +162,14 @@
 
     @if (Model.Status == NotificationStatus.NotSubmitted)
     {
-        <div class="form-group">
-            @Html.ActionLink("Continue", "Index", "Options", new { id = Model.Id, area = "NotificationApplication" }, new { @class = "button" })
+        <div class="govuk-form-group">
+            @Html.ActionLink("Continue", "Index", "Options", new { id = Model.Id, area = "NotificationApplication" }, new { @class = "govuk-button" })
         </div>
     }
     else
     {
-        <div class="form-group">
-            @Html.ActionLink("Continue", "Index", "Annex", new { id = Model.Id, area = "NotificationApplication" }, new { @class = "button" })
+        <div class="govuk-form-group">
+            @Html.ActionLink("Continue", "Index", "Annex", new { id = Model.Id, area = "NotificationApplication" }, new { @class = "govuk-button" })
         </div>
 
         <div>

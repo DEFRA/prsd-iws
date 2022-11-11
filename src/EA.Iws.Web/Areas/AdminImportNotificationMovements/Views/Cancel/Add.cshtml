@@ -7,11 +7,11 @@
 	<div class="stickem-row stickem-container">
 		<div class="column-two-thirds">
 		    <header class="hgroup">
-		        <h1 class="heading-large">@Resources.AddTitle</h1>
+		        <h1 class="govuk-heading-l">@Resources.AddTitle</h1>
 		        @Resources.AddDescription
 		    </header>
             
-            <div class="form-group">
+            <div class="govuk-form-group">
                 @Html.ActionLink(Resources.AddAbandon, "AddAbandon")
             </div>
 
@@ -38,19 +38,19 @@
 					<tbody>
 						<tr>
 							<td style="border-bottom: none !important">
-								<div class="form-group @Html.Gds().FormGroupClass(m => m.NewShipmentNumber)">
+								<div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.NewShipmentNumber)">
 									@Html.Gds().TextBoxFor(m => m.NewShipmentNumber, new { @style = "width: 60%;" })
 								</div>
 							</td>
 							<td style="border-bottom: none !important">
-								<div class="form-group @Html.Gds().FormGroupClass(m => m.NewActualShipmentDate)">
+								<div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.NewActualShipmentDate)">
 									@Html.Gds().TextBoxFor(m => m.NewActualShipmentDate, new { data_datable = "ddmmyy", @style = "width: 65%;" })
 								</div>
 							</td>
 							<td style="border-bottom: none !important"></td>
 							<td style="border-bottom: none !important">
-								<div class="form-group">
-									<button type="submit" name="command" value="add" class="button">@Resources.AddShipmentButton</button>
+								<div class="govuk-form-group">
+									<button type="submit" name="command" value="add" class="govuk-button">@Resources.AddShipmentButton</button>
 								</div>
 							</td>
 						</tr>
@@ -59,7 +59,7 @@
 
                 if (Model.AddedMovements.Any())
                 {
-                    <div class="form-group @Html.Gds().FormGroupClass(m => m.AddedMovements)">
+                    <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.AddedMovements)">
                         <h2 class="heading-medium">@Resources.AddSubHeader</h2>
                         <table id="AddedMovements" title="@Resources.AddSubHeader">
                             <thead>
@@ -94,7 +94,7 @@
                         </table>
                     </div>
 
-                    <div class="form-group">
+                    <div class="govuk-form-group">
                         @Html.ActionLink(@Constants.ContinueButtonText, "Index", "Cancel", null, new { @class = "button" })
                     </div>
                 }

@@ -5,7 +5,7 @@
     ViewBag.Title = IndexResources.Title;
 }
 
-<h1 class="heading-large">@IndexResources.MainHeading</h1>
+<h1 class="govuk-heading-l">@IndexResources.MainHeading</h1>
 
 @using (Html.BeginForm())
 {
@@ -16,7 +16,7 @@
         @(Model.NotificationType == NotificationType.Recovery ? IndexResources.RecoveryCodesHeading : IndexResources.DisposalCodesHeading)
     </h2>
 
-    <div class="form-group inline multi-line @Html.Gds().FormGroupClass(m => m.Codes)">
+    <div class="govuk-form-group inline multi-line @Html.Gds().FormGroupClass(m => m.Codes)">
         <fieldset>
             @for (int i = 0; i < Model.Codes.Count; i++)
             {
@@ -36,11 +36,11 @@
 
     <h2 class="heading-medium">@IndexResources.TechnologyEmployedHeading</h2>
 
-    <div class="form-group @Html.Gds().FormGroupClass(m => m.TechnologyEmployed)">
+    <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.TechnologyEmployed)">
         @Html.Gds().LabelFor(m => m.TechnologyEmployed)
         @Html.Gds().ValidationMessageFor(m => m.TechnologyEmployed)
         @Html.Gds().TextBoxFor(m => m.TechnologyEmployed, new { @class = "full-width" })
     </div>
 
-    <button class="button" type="submit">@Constants.ContinueButtonText</button>
+    <button class="govuk-button" type="submit">@Constants.ContinueButtonText</button>
 }

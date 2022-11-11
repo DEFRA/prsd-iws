@@ -9,18 +9,18 @@
     @Html.AntiForgeryToken()
 
     <header class="hgroup">
-        <h1 class="heading-large">@PercentageResources.Header</h1>
+        <h1 class="govuk-heading-l">@PercentageResources.Header</h1>
     </header>
 
     @Html.Gds().ValidationSummary()
     
-    <div class="form-group @Html.Gds().FormGroupClass(m => m.PercentageRecoverable)">
+    <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.PercentageRecoverable)">
         @Html.Gds().LabelFor(m => m.PercentageRecoverable, new { @class = "visually-hidden" })
         @Html.Gds().ValidationMessageFor(m => m.PercentageRecoverable)
         @Html.Gds().TextBoxFor(m => m.PercentageRecoverable, new { type = "number", min = 0, max = 100, step = 0.01, @class ="form-control form-control-1-4" })&nbsp;%
     </div>
 
-    <div class="form-group">
-        <button class="button" type="submit">@Constants.ContinueButtonText</button>
+    <div class="govuk-form-group">
+        <button class="govuk-button" type="submit">@Constants.ContinueButtonText</button>
     </div>
 }

@@ -4,11 +4,11 @@
 }
 
 <header class="hgroup text">
-    <h1 class="heading-large">Are you sure you want to cancel these prenotifications?</h1>
+    <h1 class="govuk-heading-l">Are you sure you want to cancel these prenotifications?</h1>
     Shipments
 </header>
 
-<div class="form-group">
+<div class="govuk-form-group">
     @foreach (var number in Model.SelectedShipmentNumbers)
     {
         <span class="operation-code-list">@number</span>
@@ -20,15 +20,15 @@
     @Html.AntiForgeryToken()
     @Html.HiddenFor(m => m.NotificationId)
 
-    <div class="form-group">
-        <button class="button" type="submit">Confirm cancellation</button>
+    <div class="govuk-form-group">
+        <button class="govuk-button" type="submit">Confirm cancellation</button>
     </div>
 }
 
-<div class="form-group">
+<div class="govuk-form-group">
     @Html.ActionLink("I would like to edit this list", "Index")
 </div>
 
-<div class="form-group">
+<div class="govuk-form-group">
     @Html.ActionLink("No I don't want to cancel these shipments", "Abandon")
 </div>

@@ -6,7 +6,7 @@
 }
 
 <div>
-    <h1 class="heading-large">@Resource.Title</h1>
+    <h1 class="govuk-heading-l">@Resource.Title</h1>
 
     <h2 class="heading-medium">@Resource.SubTitleCurrentOwner</h2>
     @Model.CurrentUser.FullName <br/>
@@ -27,15 +27,15 @@
 
         <h2 class="heading-medium">@Resource.SubTitleNewOwner</h2>
 
-        <div class="form-group @Html.Gds().FormGroupClass(m => m.SelectedUser)">
+        <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.SelectedUser)">
             @Html.Gds().LabelFor(m => m.SelectedUser)
             @Html.Gds().ValidationMessageFor(m => m.SelectedUser)
             @Html.Gds().HintParagraph(@Resource.HintText)
-            @Html.Gds().DropDownListFor(m => m.SelectedUser, Model.NewUserSelectList, string.Empty, new { title = Resource.SubTitleNewOwner, data_select_box = "true" })
+            @Html.Gds().DropDownListFor(m => m.SelectedUser, Model.NewUserSelectList, string.Empty, new { title = Resource.SubTitleNewOwner })
         </div>
 
-        <div class="form-group">
-            <button class="button" type="submit">@Constants.ContinueButtonText</button>
+        <div class="govuk-form-group">
+            <button class="govuk-button" type="submit">@Constants.ContinueButtonText</button>
         </div>
     }
 </div>

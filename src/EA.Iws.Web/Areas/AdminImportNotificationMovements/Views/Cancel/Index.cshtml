@@ -6,7 +6,7 @@
 
 <div class="column-two-thirds">
     <header class="hgroup">
-        <h1 class="heading-large">@Resources.Heading</h1>
+        <h1 class="govuk-heading-l">@Resources.Heading</h1>
         @Resources.SubHeading
     </header>
 
@@ -15,7 +15,7 @@
         @Html.Gds().ValidationSummary()
         @Html.AntiForgeryToken()
 
-        <div class="form-group">
+        <div class="govuk-form-group">
             <h2 class="heading-medium">@Resources.PrenotificationsToCancelHeading</h2>
 
             @if (Model.CancellableMovements.Count == 0)
@@ -24,7 +24,7 @@
             }
             else
             {
-                <div class="form-group @Html.Gds().FormGroupClass(m => m.CancellableMovements)">
+                <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.CancellableMovements)">
                     <table id="SubmittedMovements" title="@Resources.SelectPrenotificationsToCancel">
                         <thead>
                             <tr>
@@ -80,7 +80,7 @@
 			}
 			@if (Model.AddedMovements.Any())
 			{
-					<div class="form-group @Html.Gds().FormGroupClass(m => m.AddedMovements)">
+					<div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.AddedMovements)">
 						<h2 class="heading-medium">@Resources.AddSubHeader</h2>
 						<table id="AddedMovements" title="@Resources.AddSubHeader">
 							<thead>
@@ -118,17 +118,17 @@
 			
 				@if (Model.CancellableMovements.Any() || Model.AddedMovements.Any())
 				{
-                <div class="form-group">
-                    <button class="button" type="submit">@Constants.ContinueOnlyButtonText</button>
+                <div class="govuk-form-group">
+                    <button class="govuk-button" type="submit">@Constants.ContinueOnlyButtonText</button>
                 </div>
 				}
-			<div class="form-group">
+			<div class="govuk-form-group">
 				<button class="link-submit" type="submit" name="command" value="add">@Resources.GoToAddNewShipments</button>
 			</div>
         </div>
     }
 
-    <div class="form-group">
+    <div class="govuk-form-group">
         @Html.ActionLink(Resources.GoToShipmentSummary, "Index", "Home")
     </div>
 </div>

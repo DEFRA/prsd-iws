@@ -10,22 +10,22 @@
 <div class="grid-row">
     <div class="column-two-thirds">
         <header class="hgroup">
-            <h1 class="heading-large">@Resource.Title</h1>
+            <h1 class="govuk-heading-l">@Resource.Title</h1>
         </header>
 
-        <div class="form-group">
+        <div class="govuk-form-group">
             @Html.ActionLink(@Resource.DownloadLinkText, "GenerateNotificationDocument", "Home", new { id = Model.Id, area = "NotificationApplication" },
                 new { data_track = "link", data_category = "Export notification", data_action = "Download" })
             @Resource.AfterDownloadLinkText
         </div>
 
-        <div class="form-group">
+        <div class="govuk-form-group">
                 @Html.Partial("_Block17Disclosure")
         </div>
 
         <div>@Resource.ReferenceAnnexesTitle</div>
 
-        <div class="form-group">
+        <div class="govuk-form-group">
             <details>
                 <summary><h2 class="summary heading-xsmall">@Resource.ReferenceAnnexesDisclosureTitle</h2></summary>
                 <div class="panel">
@@ -46,7 +46,7 @@
     </div>
 </div>
 
-<div class="form-group">
+<div class="govuk-form-group">
     @Html.ActionLink("Continue", "ContractGuidance", "WhatToDoNext", new { id = Model.Id, area = "NotificationApplication" }, new { @class = "button" })
 </div>
 

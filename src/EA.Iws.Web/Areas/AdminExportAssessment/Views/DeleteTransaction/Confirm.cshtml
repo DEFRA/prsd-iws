@@ -5,9 +5,9 @@
     ViewBag.Title = Resource.MainHeading;
 }
 
-<h1 class="heading-large">@Resource.MainHeading</h1>
+<h1 class="govuk-heading-l">@Resource.MainHeading</h1>
 
-<div class="form-group">
+<div class="govuk-form-group">
     <p>@Resource.subTitle</p>
 
     <table>
@@ -41,7 +41,7 @@
     </table>
 </div>
 
-<div class="form-group">
+<div class="govuk-form-group">
     @Html.ActionLink(Resource.CancelLink, "Index", "AccountManagement")
 </div>
 
@@ -51,8 +51,8 @@
     @Html.HiddenFor(m => m.NotificationId)
     @Html.HiddenFor(m => m.TransactionId)
 
-    <div class="form-group">
-        <button class="button" type="submit">@Resource.DeleteLink</button>
+    <div class="govuk-form-group">
+        <button class="govuk-button" type="submit">@Resource.DeleteLink</button>
     </div>
 }
 

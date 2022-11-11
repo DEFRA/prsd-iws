@@ -9,7 +9,7 @@
 <div class="grid-row">
     <div class="column-full">
         <header>
-            <h1 class="heading-large">@string.Format(Resources.ErrorsHeaderText, Model.ErrorsCount)</h1>
+            <h1 class="govuk-heading-l">@string.Format(Resources.ErrorsHeaderText, Model.ErrorsCount)</h1>
         </header>
 
         <p class="bold-small">@Resources.ErrorsContactUs</p>
@@ -18,7 +18,7 @@
 
         @if (Model.ErrorsCount > 0)
         {
-            <div class="form-group">
+            <div class="govuk-form-group">
                 <details>
                     <summary class="summary-error">
                         <h2 class="summary-error-header heading-xsmall">@Resources.ViewErrors</h2>

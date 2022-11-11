@@ -5,7 +5,7 @@
     ViewBag.Title = Resource.Title;
 }
 
-<h1 class="heading-large">@Resource.MainHeading</h1>
+<h1 class="govuk-heading-l">@Resource.MainHeading</h1>
 
 @using (Html.BeginForm())
 {
@@ -17,13 +17,13 @@
             @Resource.DatesLabel
         </div>
         <div>
-            <div class="form-group @Html.Gds().FormGroupClass(m => m.From) @Html.Gds().FormGroupClass(m => m.From.Day) @Html.Gds().FormGroupClass(m => m.From.Month) @Html.Gds().FormGroupClass(m => m.From.Year)">
+            <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.From) @Html.Gds().FormGroupClass(m => m.From.Day) @Html.Gds().FormGroupClass(m => m.From.Month) @Html.Gds().FormGroupClass(m => m.From.Year)">
                 @Html.LabelFor(m => m.From)
                 @Html.Gds().ValidationMessageFor(m => m.From)
                 @Html.EditorFor(m => m.From)
             </div>
 
-            <div class="form-group @Html.Gds().FormGroupClass(m => m.To) @Html.Gds().FormGroupClass(m => m.To.Day) @Html.Gds().FormGroupClass(m => m.To.Month) @Html.Gds().FormGroupClass(m => m.To.Year)">
+            <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.To) @Html.Gds().FormGroupClass(m => m.To.Day) @Html.Gds().FormGroupClass(m => m.To.Month) @Html.Gds().FormGroupClass(m => m.To.Year)">
                 @Html.LabelFor(m => m.To)
                 @Html.Gds().ValidationMessageFor(m => m.To)
                 @Html.EditorFor(m => m.To)
@@ -54,8 +54,8 @@
 
     <br />
 
-    <div class="form-group">
-        <button class="button" type="submit">@Resource.ButtonText</button>
+    <div class="govuk-form-group">
+        <button class="govuk-button" type="submit">@Resource.ButtonText</button>
     </div>
 }
 

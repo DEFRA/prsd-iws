@@ -6,11 +6,11 @@
 
 <div class="column-two-thirds">
     <header class="hgroup text">
-        <h1 class="heading-large">@Resources.Heading</h1>
+        <h1 class="govuk-heading-l">@Resources.Heading</h1>
         @Resources.SubHeading
     </header>
 
-    <div class="form-group">
+    <div class="govuk-form-group">
         @foreach (var number in Model.SelectedShipmentNumbers)
         {
             <span class="operation-code-list">@number</span>
@@ -22,16 +22,16 @@
         @Html.AntiForgeryToken()
         @Html.HiddenFor(m => m.NotificationId)
 
-        <div class="form-group">
-            <button class="button" type="submit">@Resources.ConfirmCancellation</button>
+        <div class="govuk-form-group">
+            <button class="govuk-button" type="submit">@Resources.ConfirmCancellation</button>
         </div>
     }
 
-    <div class="form-group">
+    <div class="govuk-form-group">
         @Html.ActionLink(Resources.EditList, "Index")
     </div>
 
-    <div class="form-group">
+    <div class="govuk-form-group">
         @Html.ActionLink(Resources.AbortCancel, "Abandon")
     </div>
 </div>

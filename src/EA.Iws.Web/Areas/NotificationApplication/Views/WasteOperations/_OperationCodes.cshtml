@@ -3,7 +3,7 @@
 @Html.HiddenFor(m => m.NotificationType)
 
 <div>
-    <div class="form-group @Html.Gds().FormGroupClass(m => m.PossibleCodes)">
+    <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.PossibleCodes)">
         @Html.Gds().ValidationMessageFor(m => m.PossibleCodes)
         <fieldset>
             @for (int i = 0; i < Model.PossibleCodes.Count; i++)

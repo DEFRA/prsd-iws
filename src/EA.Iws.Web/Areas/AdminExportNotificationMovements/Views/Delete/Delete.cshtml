@@ -7,16 +7,16 @@
 
 <div class="grid-row">
     <div class="column-two-thirds">
-        <h1 class="heading-large">@String.Format(Resource.MainHeading, Model.Number)</h1>
+        <h1 class="govuk-heading-l">@String.Format(Resource.MainHeading, Model.Number)</h1>
 
-        <div class="form-group">
+        <div class="govuk-form-group">
             @using (Html.BeginForm())
             {
                 @Html.AntiForgeryToken()
                 @Html.HiddenFor(m => m.NotificationId)
                 @Html.HiddenFor(m => m.Number)
 
-                <button type="submit" class="button">@Resource.ConfirmButtonText</button>
+                <button type="submit" class="govuk-button">@Resource.ConfirmButtonText</button>
             }
         </div>
 

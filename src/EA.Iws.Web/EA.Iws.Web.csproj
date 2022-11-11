@@ -147,6 +147,9 @@
     <Reference Include="Microsoft.WindowsAzure.Configuration, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.WindowsAzure.ConfigurationManager.3.2.3\lib\net40\Microsoft.WindowsAzure.Configuration.dll</HintPath>
     </Reference>
+    <Reference Include="MvcNavigationHelpers, Version=0.0.0.5, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MvcNavigationHelpers.0.0.0.5\lib\net45\MvcNavigationHelpers.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -299,7 +302,9 @@
     <Content Include="Content\images\govuk-crest.png" />
     <Content Include="Content\images\open-government-licence.png" />
     <Content Include="Content\images\open-government-licence_2x.png" />
+    <Content Include="Content\iws-page.css" />
     <Content Include="Content\iws\_entry-or-exit-point.scss" />
+    <Content Include="Content\iws\_grid_layout.scss" />
     <Content Include="Content\iws\_notification-switcher.scss" />
     <Content Include="Areas\ImportNotification\Views\Facility\Add.cshtml" />
     <Content Include="Areas\ImportNotification\Views\Facility\Edit.cshtml" />
@@ -451,7 +456,7 @@
     <Content Include="Scripts\datable.min.js" />
     <Content Include="Scripts\decision-dropdown.js" />
     <Content Include="Scripts\customs-office-required-radio-buttons.js" />
-    <Content Include="Scripts\govuk-frontend\govuk-frontend-4.0.0.min.js" />
+    <Content Include="Scripts\govuk-frontend\govuk-frontend-4.0.1.min.js" />
     <Content Include="Scripts\govuk\govuk-template.js" />
     <Content Include="Scripts\helpers.js" />
     <Content Include="Scripts\internal-facility-table.js" />
@@ -783,11 +788,18 @@
     <Content Include="Content\govuk-frontend\package.json" />
     <Content Include="Content\govuk-frontend\README.md" />
     <Content Include="Content\iws\_palette.scss" />
-    <Content Include="Content\iws\_grid_layout.scss" />
     <Content Include="Content\iws\_css3.scss" />
     <Content Include="Content\iws\_conditionals.scss" />
     <Content Include="Content\iws\_shims.scss" />
     <Content Include="Content\iws\_cookies-banner.scss" />
+    <Compile Include="Extensions\GdsExtensions.cs" />
+    <Compile Include="RazorHelpers\AttributesHelper.cs" />
+    <Compile Include="RazorHelpers\IwsGds.BackLink.cs" />
+    <Compile Include="RazorHelpers\IwsGds.EventTracking.cs" />
+    <Compile Include="RazorHelpers\IwsGds.Forms.cs" />
+    <Compile Include="RazorHelpers\IwsGds.Label.cs" />
+    <Compile Include="RazorHelpers\IwsGds.Panel.cs" />
+    <Compile Include="RazorHelpers\IwsGds.ProgressiveDisclosure.cs" />
     <None Include="Scripts\jquery-3.6.0.intellisense.js" />
     <Content Include="Scripts\jquery-3.6.0.js" />
     <Content Include="Scripts\jquery-3.6.0.min.js" />
@@ -1613,6 +1625,22 @@
     <Compile Include="Mappings\AdminExportAssessment\EditEwcMap.cs" />
     <Compile Include="Mappings\NotificationAssessment\EditHCodeMap.cs" />
     <Compile Include="Mappings\NotificationAssessment\EditYCodeMap.cs" />
+    <Compile Include="RazorHelpers\IwsGds.ActionLink.cs" />
+    <Compile Include="RazorHelpers\IwsGds.cs" />
+    <Compile Include="RazorHelpers\IwsGds.RadioButtons.cs" />
+    <Compile Include="RazorHelpers\IwsGds.Routelink.cs" />
+    <Compile Include="RazorHelpers\IwsGds.Summary.cs" />
+    <Compile Include="RazorHelpers\IwsGds.Tab.cs" />
+    <Compile Include="RazorHelpers\IwsGds.Table.cs" />
+    <Compile Include="RazorHelpers\IwsGds.TableSummary.cs" />
+    <Compile Include="RazorHelpers\IwsGds.TextBoxWithIcon.cs" />
+    <Compile Include="RazorHelpers\IwsGds.Warning.cs" />
+    <Compile Include="RazorHelpers\IwsGdsExtensions.cs" />
+    <Compile Include="RazorHelpers\PropertyHelper.cs" />
+    <Compile Include="RazorHelpers\RadioButtonLayout.cs" />
+    <Compile Include="RazorHelpers\RadioButtonLegend.cs" />
+    <Compile Include="RazorHelpers\TagBuilderExtensions.cs" />
+    <Compile Include="RazorHelpers\TypeHelper.cs" />
     <Compile Include="Services\IAppConfiguration.cs" />
     <Compile Include="ViewModels\Registration\CreateUserViewModelBase.cs" />
     <Compile Include="ViewModels\Shared\DateEntryViewModel.cs" />
@@ -5103,6 +5131,7 @@
     <EmbeddedResource Include="Areas\NotificationApplication\Views\StateOfImport\StateOfImportResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>StateOfImportResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\NotificationApplication\Views\Submit\DisclaimerResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

@@ -30,7 +30,7 @@
             @Html.Gds().LabelFor(m => m.RegistrationNumber)
             @Html.Gds().TextBoxFor(m => m.RegistrationNumber, new { @class = "form-control form-control-full" })
         </div>
-        <div class="form-group">
+        <div class="govuk-form-group">
             @Html.Gds().LabelFor(m => m.Type, showOptionalLabel:false)
             <fieldset>
                 <div class="multiple-choice">
@@ -52,5 +52,5 @@
     <div class="column-half">
         @Html.EditorFor(m => m.Contact, "FacilityContactViewModel")
     </div>
-    <div class="form-group"></div>
+    <div class="govuk-form-group"></div>
 </div>

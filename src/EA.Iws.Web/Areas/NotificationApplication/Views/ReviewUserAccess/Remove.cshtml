@@ -11,11 +11,11 @@
 @Html.AntiForgeryToken()
 @Html.HiddenFor(m => m.NotificationId)
 @Html.HiddenFor(m => m.SharedUserId)
-<h1 class="heading-large">@RemoveResources.HeaderText</h1>
+<h1 class="govuk-heading-l">@RemoveResources.HeaderText</h1>
 <p>@string.Format(RemoveResources.ConfirmText,Model.EmailId)</p>
 <p>@RemoveResources.AdditionalText</p>
 <p>
-	<button class="button" type="submit">@RemoveResources.Confirm</button>
+	<button class="govuk-button" type="submit">@RemoveResources.Confirm</button>
 </p>
 }
 <p>

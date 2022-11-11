@@ -5,7 +5,7 @@
 }
 
 <header class="hgroup">
-    <h1 class="heading-large">@ChemicalCompositionResources.Header</h1>
+    <h1 class="govuk-heading-l">@ChemicalCompositionResources.Header</h1>
     <p>@ChemicalCompositionResources.HeaderDescription</p>
 </header>
 
@@ -15,13 +15,13 @@
     @Html.Gds().ValidationSummary()
     @Html.HiddenFor(m => m.NotificationId)
 
-    <div class="form-group @Html.Gds().FormGroupClass(m => m.ChemicalCompositionType.SelectedValue)">
+    <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.ChemicalCompositionType.SelectedValue)">
         <div class="govuk-body govuk-error-message ">
             @Html.Gds().ValidationMessageFor(m => m.ChemicalCompositionType.SelectedValue, "Please tell us what waste type applies")
         </div>        
         @Html.EditorFor(m => m.ChemicalCompositionType)
     </div>
-    <div class="form-group">
-        <button class="button" type="submit" name="submitButton" value="Continue">@Constants.ContinueButtonText</button>
+    <div class="govuk-form-group">
+        <button class="govuk-button" type="submit" name="submitButton" value="Continue">@Constants.ContinueButtonText</button>
     </div>
 }

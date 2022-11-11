@@ -4,7 +4,7 @@
     ViewBag.Title = SiteOfExportResources.Title;
 }
 
-<h1 class="heading-large">@SiteOfExportResources.Header</h1>
+<h1 class="govuk-heading-l">@SiteOfExportResources.Header</h1>
 
 @if (Model.Producers.Any())
 {
@@ -14,30 +14,32 @@
         @Html.Gds().ValidationSummary()
         @Html.HiddenFor(m => m.NotificationId)
 
-        <div class="form-group @Html.Gds().FormGroupClass(m => m.SelectedSiteOfExport)">
-            <table title=@SiteOfExportResources.TableTitle>
-                <thead>
-                    <tr>
-                        <th>@SiteOfExportResources.ThOrganisationName</th>
-                        <th>@SiteOfExportResources.ThAddress</th>
-                        <th>@SiteOfExportResources.ThSiteOfExport</th>
+        <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.SelectedSiteOfExport)">
+            <table title=@SiteOfExportResources.TableTitle class="govuk-table">
+                <thead class="govuk-table__head">
+                    <tr class="govuk-table__row">
+                        <th scope="col" class="govuk-table__header">@SiteOfExportResources.ThOrganisationName</th>
+                        <th scope="col" class="govuk-table__header">@SiteOfExportResources.ThAddress</th>
+                        <th scope="col" class="govuk-table__header">@SiteOfExportResources.ThSiteOfExport</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody class="govuk-table__body">
                     @for (var i = 0; i < Model.Producers.Count; i++)
                     {
-                        <tr>
-                            <td>
+                        <tr class="govuk-table__row">
+                            <td class="govuk-table__cell">
                                 @Html.DisplayFor(m => m.Producers[i].Business.Name)
                             </td>
-                            <td>
+                            <td class="govuk-table__cell">
                                 @Html.DisplayFor(m => m.Producers[i].Address.StreetOrSuburb),
                                 @Html.DisplayFor(m => m.Producers[i].Address.TownOrCity)
                             </td>
-                            <td>
+                            <td class="govuk-table__cell">
                                 @{
                                     var htmlAttr = new Dictionary<string, object> { { "id", Html.NameFor(m => m.Producers[i].Id) } };
-                                    htmlAttr.Add("title", SiteOfExportResources.ThSiteOfExport);
+                                    htmlAttr.Add("title", @Model.Producers[i].Business.Name);
+                                    htmlAttr.Add("style", "width:30px; height:30px");
+
                                     if (@Model.Producers[i].IsSiteOfExport)
                                     {
                                         htmlAttr.Add("checked", "checked");
@@ -51,7 +53,7 @@
             </table>
         </div>
 
-        <button class="button" type="submit">@Constants.ContinueButtonText</button>
+        <button class="govuk-button" type="submit">@Constants.ContinueButtonText</button>
     }
 }
 else

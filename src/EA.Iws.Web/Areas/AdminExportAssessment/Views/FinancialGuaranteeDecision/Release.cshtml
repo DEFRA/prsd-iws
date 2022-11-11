@@ -5,7 +5,7 @@
     ViewBag.Title = Resources.ReleaseTitle;
 }
 
-<h2 class="heading-large">@Resources.ReleaseTitle</h2>
+<h2 class="govuk-heading-l">@Resources.ReleaseTitle</h2>
 
 @using (Html.BeginForm())
 {
@@ -14,13 +14,13 @@
     @Html.HiddenFor(m => m.FinancialGuaranteeId)
     @Html.HiddenFor(m => m.CompletedDate)
 
-    <div class="form-group @Html.Gds().FormGroupClass(m => m.DecisionMadeDate.Day) @Html.Gds().FormGroupClass(m => m.DecisionMadeDate.Month) @Html.Gds().FormGroupClass(m => m.DecisionMadeDate.Year)">
+    <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.DecisionMadeDate.Day) @Html.Gds().FormGroupClass(m => m.DecisionMadeDate.Month) @Html.Gds().FormGroupClass(m => m.DecisionMadeDate.Year)">
         <label class="form-label" for="DecisionMadeDate_Day">@Html.DisplayNameFor(m => m.DecisionMadeDate)</label>
         @Html.EditorFor(m => m.DecisionMadeDate)
     </div>
 
-    <div class="form-group">
-        <button class="button" type="submit" name="submit" value="decision">@Constants.ContinueButtonText</button>
+    <div class="govuk-form-group">
+        <button class="govuk-button" type="submit" name="submit" value="decision">@Constants.ContinueButtonText</button>
     </div>
 }
 

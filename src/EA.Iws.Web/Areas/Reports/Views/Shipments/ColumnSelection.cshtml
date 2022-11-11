@@ -4,7 +4,7 @@
 	ViewBag.Title = Resources.Title;
 }
 
-<h1 class="heading-large">@Resources.ReportHeading</h1>
+<h1 class="govuk-heading-l">@Resources.ReportHeading</h1>
 
 <p>@Resources.InfoText</p>
 
@@ -15,8 +15,8 @@
 
 	@Html.EditorFor(m => m.ShipmentReportColumns);
 
-	<div class="form-group">
-		<button class="button" type="submit">@Resources.ButtonText</button>
+	<div class="govuk-form-group">
+		<button class="govuk-button" type="submit">@Resources.ButtonText</button>
 	</div>
 }
 @section scripts

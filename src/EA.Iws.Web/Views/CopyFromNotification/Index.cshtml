@@ -8,7 +8,7 @@
 @if (Model.Notifications.Any())
 {
     <header class="hgroup">
-        <h1 class="heading-large">@CopyFromNotificationResources.Header</h1>
+        <h1 class="govuk-heading-l">@CopyFromNotificationResources.Header</h1>
         <p>@CopyFromNotificationResources.HeaderDescription</p>
     </header>
 
@@ -19,44 +19,44 @@
 
         <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.SelectedNotification)">
             @Html.Gds().ValidationMessageFor(m => m.SelectedNotification)
-            <table title=@CopyFromNotificationResources.TableTitleForNotificationSummary class="odd-table">
-                <thead>
-                    <tr>
-                        <th>
+            <table title=@CopyFromNotificationResources.TableTitleForNotificationSummary class="govuk-table">
+                <thead class="govuk-table__head">
+                    <tr class="govuk-table__row">
+                        <th scope="col" class="govuk-table__header">
                             @CopyFromNotificationResources.ThNotificationNumber
                         </th>
-                        <th>
+                        <th scope="col" class="govuk-table__header">
                             @CopyFromNotificationResources.ThExporter
                         </th>
-                        <th>
+                        <th scope="col" class="govuk-table__header">
                             @CopyFromNotificationResources.ThImporter
                         </th>
-                        <th>
+                        <th scope="col" class="govuk-table__header">
                             @CopyFromNotificationResources.ThWasteType
                         </th>
-                        <th>
+                        <th scope="col" class="govuk-table__header">
                             @CopyFromNotificationResources.ThSelect
                         </th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody class="govuk-table__body">
                     @for (int i = 0; i < Model.Notifications.Count; i++)
                     {
                         var radioId = "radio" + i;
-                        <tr>
-                            <td>
+                        <tr class="govuk-table__row">
+                            <td class="govuk-table__cell">
                                 @Html.DisplayFor(m => m.Notifications[i].Number)
                             </td>
-                            <td>
+                            <td class="govuk-table__cell">
                                 @Html.DisplayFor(m => m.Notifications[i].ExporterName)
                             </td>
-                            <td>
+                            <td class="govuk-table__cell">
                                 @Html.DisplayFor(m => m.Notifications[i].ImporterName)
                             </td>
-                            <td>
+                            <td class="govuk-table__cell">
                                 @Html.DisplayFor(m => m.Notifications[i].WasteName)
                             </td>
-                            <td>
+                            <td class="govuk-table__cell">
                                 @Html.RadioButtonFor(m => m.SelectedNotification, Model.Notifications[i].Id, new { id = radioId, title = Model.Notifications[i].Number })
                             </td>
                         </tr>
@@ -74,8 +74,8 @@
             @Html.HiddenFor(m => m.Notifications[i].WasteName)
         }
 
-        <div class="form-group">
-            <button class="button" type="submit">@Constants.ContinueButtonText</button>
+        <div class="govuk-form-group">
+            <button class="govuk-button" type="submit">@Constants.ContinueButtonText</button>
         </div>
     }
 }

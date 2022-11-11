@@ -26,7 +26,7 @@ switch (Model.Tolerance)
 }
 
 <header class="hgroup">
-    <h1 class="heading-large">@Resource.MainHeading</h1>
+    <h1 class="govuk-heading-l">@Resource.MainHeading</h1>
     @DisplayMessage()
 </header>
 
@@ -40,7 +40,7 @@ switch (Model.Tolerance)
     @Html.HiddenFor(m => m.DateReceived)
     @Html.HiddenFor(m => m.Tolerance)
     @Html.HiddenFor(m => m.DateRecovered)
-    <div class="form-group @Html.Gds().FormGroupClass(m => m.Quantity)">
+    <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.Quantity)">
         @Html.LabelFor(m => m.IsCorrect, new { @class = "form-label-bold" })
         @Html.Gds().ValidationMessageFor(m => m.IsCorrect)
         <fieldset>
@@ -66,7 +66,7 @@ switch (Model.Tolerance)
         </fieldset>
     </div>
 
-    <button class="button" type="submit">@Constants.ContinueOnlyButtonText</button>
+    <button class="govuk-button" type="submit">@Constants.ContinueOnlyButtonText</button>
 }
 
 @Html.ActionLink("Go to notification options",

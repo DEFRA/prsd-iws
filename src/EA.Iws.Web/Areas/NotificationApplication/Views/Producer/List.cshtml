@@ -3,37 +3,37 @@
 @{
     ViewBag.Title = ListProducerResources.Title;
 }
-<h1 class="heading-large">@ListProducerResources.Header</h1>
+<h1 class="govuk-heading-l">@ListProducerResources.Header</h1>
 <p>@ListProducerResources.HeaderDescription</p>
 
 @if (Model != null && Model.ProducerData.Any())
 {
-    <div class="form-group">
-        <table title=@ListProducerResources.TableTitle>
-            <thead>
-                <tr>
-                    <th>@ListProducerResources.ThOrganisationName</th>
-                    <th>@ListProducerResources.ThAddress</th>
-                    <th>Action</th>
+    <div class="govuk-form-group">
+        <table title=@ListProducerResources.TableTitle class="govuk-table">
+            <thead class="govuk-table__head">
+                <tr class="govuk-table__row">
+                    <th scope="col" class="govuk-table__header">@ListProducerResources.ThOrganisationName</th>
+                    <th scope="col" class="govuk-table__header">@ListProducerResources.ThAddress</th>
+                    <th scope="col" class="govuk-table__header">Action</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody class="govuk-table__body">
                 @for (var i = 0; i < Model.ProducerData.Count; i++)
                 {
-                    <tr>
-                        <td>
+                    <tr class="govuk-table__row">
+                        <td class="govuk-table__cell">
                             @Html.DisplayFor(m => m.ProducerData[i].Business.Name)
                         </td>
-                        <td>
+                        <td class="govuk-table__cell">
                             @Html.DisplayFor(m => m.ProducerData[i].Address.StreetOrSuburb),
                             @Html.DisplayFor(m => m.ProducerData[i].Address.TownOrCity)
                         </td>
-                        <td>
+                        <td class="govuk-table__cell">
                             @Html.ActionLink(ListProducerResources.Edit, "Edit", "Producer",
-                                new { id = Model.ProducerData[i].NotificationId, entityId = Model.ProducerData[i].Id, backToOverview = ViewBag.BackToOverview }, null)
+                                new { id = Model.ProducerData[i].NotificationId, entityId = Model.ProducerData[i].Id, backToOverview = ViewBag.BackToOverview }, new { title = Model.ProducerData[i].Business.Name })
                             <span class="table-divider">|</span>
                             @Html.ActionLink(ListProducerResources.Remove, "Remove", "Producer",
-                                new { id = Model.ProducerData[i].NotificationId, entityId = Model.ProducerData[i].Id, backToOverview = ViewBag.BackToOverview }, null)
+                                new { id = Model.ProducerData[i].NotificationId, entityId = Model.ProducerData[i].Id, backToOverview = ViewBag.BackToOverview }, new { title = Model.ProducerData[i].Business.Name })
                         </td>
                     </tr>
                 }
@@ -44,7 +44,7 @@
 
  @{
      var buttonText = Model.ProducerData.Count > 0 ? ListProducerResources.AddAnother : ListProducerResources.AddFirst;
-     <div class="form-group">
+     <div class="govuk-form-group">
          @Html.ActionLink(buttonText, "Add", "Producer", new { id = Model.NotificationId, backToOverview = ViewBag.BackToOverview }, null)
      </div>
  }

@@ -40,7 +40,7 @@
 
 <div class="shipping-home">
 
-    <h1 class="heading-large">
+    <h1 class="govuk-heading-l">
         @Resources.MainHeading
     </h1>
 
@@ -97,13 +97,13 @@
 
             @if (Model.NotificationStatus == NotificationStatus.Consented && Model.FgStatus == FinancialGuaranteeStatus.Approved)
             {
-                <div class="form-group">
+                <div class="govuk-form-group">
                     <h2 class="heading-small">@Resources.OptionsRecord</h2>
                     @using (Html.BeginForm("Search", "Home"))
                     {
                         @Html.AntiForgeryToken()
                         <input id="ShipmentNumber" name="ShipmentNumber" type="number" min="1" class="form-control" placeholder="@Resources.SearchPlaceholder"/>
-                        <button class="button">@Resources.SearchButton</button>
+                        <button class="govuk-button">@Resources.SearchButton</button>
                     }
                 </div>
             }
@@ -120,9 +120,9 @@
             {
                 @Html.AntiForgeryToken()
                 <div class="column-two-thirds">
-                    <div class="form-group">
+                    <div class="govuk-form-group">
                         @Html.DropDownListFor(m => m.SelectedMovementStatus, Model.MovementStatuses, new { @class = "form-control view-by" })
-                        <button id="updateStatus" class="button" type="submit">@Resources.Update</button>
+                        <button id="updateStatus" class="govuk-button" type="submit">@Resources.Update</button>
                     </div>
                 </div>
                 <div class="column-one-third">
@@ -131,7 +131,7 @@
             }
         </div>
 
-        <div class="form-group">
+        <div class="govuk-form-group">
             <table class="odd-table">
                 <caption class="visuallyhidden">@Resources.SummaryTableHeading</caption>
                 <thead>
@@ -194,7 +194,7 @@
             }
         })
     </section>
-    <div class="form-group">
+    <div class="govuk-form-group">
         @Html.ActionLink(Resources.GoToButtonText,
             "Index",
             "Home",

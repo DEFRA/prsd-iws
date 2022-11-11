@@ -5,7 +5,7 @@
     ViewBag.Title = NewOrExistingNotificationResources.Header;
 }
 
-<h1 class="heading-large">@NewOrExistingNotificationResources.Header</h1>
+<h1 class="govuk-heading-l">@NewOrExistingNotificationResources.Header</h1>
 
 @using (Html.BeginForm())
 {
@@ -15,7 +15,7 @@
     @Html.HiddenFor(m => m.CompetentAuthority)
     @Html.HiddenFor(m => m.NotificationType)
 
-    <div class="form-group @Html.Gds().FormGroupClass(m => m.GenerateNew)">
+    <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.GenerateNew)">
         @Html.Gds().LabelFor(m => m.GenerateNew, new { @class = "visually-hidden" })
         @Html.Gds().ValidationMessageFor(m => m.GenerateNew)
         <fieldset>
@@ -35,7 +35,7 @@
         </fieldset>
     </div>
 
-    <div class="form-group">
-        <button class="button" type="submit">@Constants.ContinueButtonText</button>
+    <div class="govuk-form-group">
+        <button class="govuk-button" type="submit">@Constants.ContinueButtonText</button>
     </div>
 }

@@ -19,8 +19,8 @@
   $govuk-footer-crest-image-width-2x: 250px;
   $govuk-footer-crest-image-height-2x: 204px;
   // Half the 2x image so that it fits the regular 1x size.
-  $govuk-footer-crest-image-width: calc($govuk-footer-crest-image-width-2x / 2);
-  $govuk-footer-crest-image-height: calc($govuk-footer-crest-image-height-2x / 2);
+  $govuk-footer-crest-image-width: ($govuk-footer-crest-image-width-2x / 2);
+  $govuk-footer-crest-image-height: ($govuk-footer-crest-image-height-2x / 2);
 
   .govuk-footer {
     @include govuk-font($size: 16);
@@ -67,16 +67,12 @@
   }
 
   .govuk-footer__meta {
-    display: -ms-flexbox;
     display: flex; // Support: Flexbox
     margin-right: -$govuk-gutter-half;
     margin-left: -$govuk-gutter-half;
-    -ms-flex-wrap: wrap;
-        flex-wrap: wrap; // Support: Flexbox
-    -ms-flex-align: end;
-        align-items: flex-end; // Support: Flexbox
-    -ms-flex-pack: center;
-        justify-content: center; // Support: Flexbox
+    flex-wrap: wrap; // Support: Flexbox
+    align-items: flex-end; // Support: Flexbox
+    justify-content: center; // Support: Flexbox
   }
 
   .govuk-footer__meta-item {
@@ -86,11 +82,9 @@
   }
 
   .govuk-footer__meta-item--grow {
-    -ms-flex: 1;
-        flex: 1; // Support: Flexbox
+    flex: 1; // Support: Flexbox
     @include govuk-media-query ($until: tablet) {
-      -ms-flex-preferred-size: 320px;
-          flex-basis: 320px; // Support: Flexbox
+      flex-basis: 320px; // Support: Flexbox
     }
   }
 
@@ -167,8 +161,7 @@
     margin: 0;
     padding: 0;
     list-style: none;
-    -webkit-column-gap: $govuk-gutter;
-            column-gap: $govuk-gutter; // Support: Columns
+    column-gap: $govuk-gutter; // Support: Columns
 
     // Disable thicker underlines on hover because of a bug in Chromium
     // affecting links within columns
@@ -180,13 +173,11 @@
 
   @include govuk-media-query ($from: desktop) {
     .govuk-footer__list--columns-2 {
-      -webkit-column-count: 2;
-              column-count: 2; // Support: Columns
+      column-count: 2; // Support: Columns
     }
 
     .govuk-footer__list--columns-3 {
-      -webkit-column-count: 3;
-              column-count: 3; // Support: Columns
+      column-count: 3; // Support: Columns
     }
   }
 

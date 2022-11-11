@@ -17,7 +17,7 @@
             </th>
             @if (ViewBag.CanEditNotification)
             {
-                <th class="change">
+                <th class="change govuk-link">
                     <a href="@Url.Action("Index", "Shipment", new { id, backToOverview = true })">
                         Change
                         <span class="screen-reader-text">Amounts and dates</span>

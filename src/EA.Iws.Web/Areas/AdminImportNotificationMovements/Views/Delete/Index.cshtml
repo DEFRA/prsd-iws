@@ -7,7 +7,7 @@
 
 <div class="grid-row">
     <div class="column-two-thirds">
-        <h1 class="heading-large">@Resource.MainHeading</h1>
+        <h1 class="govuk-heading-l">@Resource.MainHeading</h1>
 
         @using (Html.BeginForm())
         {
@@ -15,11 +15,11 @@
             @Html.Gds().ValidationSummary()
             @Html.HiddenFor(m => m.NotificationId)
 
-            <div class="form-group @Html.Gds().FormGroupClass(m => m.Number)">
+            <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.Number)">
                 @Html.Gds().LabelFor(m => m.Number)
                 @Html.Gds().ValidationMessageFor(m => m.Number)
                 @Html.Gds().TextBoxFor(m => m.Number, new { type = "number", min = 1 })
-                &nbsp;&nbsp;&nbsp;<button type="submit" class="button">@Resource.ButtonText</button>
+                &nbsp;&nbsp;&nbsp;<button type="submit" class="govuk-button">@Resource.ButtonText</button>
             </div>
         }
 

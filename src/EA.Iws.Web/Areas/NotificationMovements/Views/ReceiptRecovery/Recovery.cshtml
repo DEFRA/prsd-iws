@@ -17,9 +17,9 @@
     @Html.HiddenFor(m => m.NotificationType)
     @Html.HiddenFor(m => m.Certificate)
 
-    <h1 class="heading-large">@Html.Raw(string.Format(@Resource.RecoveryTitle, recoveryLabelVerb, Model.ShipmentNumber))</h1>
+    <h1 class="govuk-heading-l">@Html.Raw(string.Format(@Resource.RecoveryTitle, recoveryLabelVerb, Model.ShipmentNumber))</h1>
 
-    <div class="form-group @Html.Gds().FormGroupClass(m => m.Day) @Html.Gds().FormGroupClass(m => m.Month) @Html.Gds().FormGroupClass(m => m.Year)">
+    <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.Day) @Html.Gds().FormGroupClass(m => m.Month) @Html.Gds().FormGroupClass(m => m.Year)">
         <fieldset>
             <h2 class="heading-small">@Html.Raw(string.Format(@Resource.RecoveredDate, labelText))</h2>
             <div class="form-date">
@@ -27,22 +27,22 @@
                 @Html.Gds().ValidationMessageFor(m => m.Day)
                 @Html.Gds().ValidationMessageFor(m => m.Month)
                 @Html.Gds().ValidationMessageFor(m => m.Year)
-                <div class="form-group form-group-day">
+                <div class="govuk-form-group form-group-day">
                     @Html.Gds().LabelFor(m => m.Day)
                     @Html.Gds().TextBoxFor(m => m.Day, new { type = "number", min = "1", max = "31" })
                 </div>
-                <div class="form-group form-group-month">
+                <div class="govuk-form-group form-group-month">
                     @Html.Gds().LabelFor(m => m.Month)
                     @Html.Gds().TextBoxFor(m => m.Month, new { type = "number", min = "1", max = "12" })
                 </div>
-                <div class="form-group form-group-year">
+                <div class="govuk-form-group form-group-year">
                     @Html.Gds().LabelFor(m => m.Year)
                     @Html.Gds().TextBoxFor(m => m.Year, new { type = "number", min = "2015" })
                 </div>
             </div>
         </fieldset>
     </div>
-    <button class="button" type="submit">@Constants.ContinueOnlyButtonText</button>
+    <button class="govuk-button" type="submit">@Constants.ContinueOnlyButtonText</button>
 }
 
 @Html.ActionLink("Go to notification options",

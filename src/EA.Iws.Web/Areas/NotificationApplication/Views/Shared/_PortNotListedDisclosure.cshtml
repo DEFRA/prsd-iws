@@ -1,13 +1,17 @@
 ﻿@using EA.Iws.Web.Areas.NotificationApplication.Views.Shared
 @using EA.Iws.Core.Notification
 @{ UKCompetentAuthorityDetails caDetails = UKCompetentAuthorityDetails.ForCompetentAuthority((UKCompetentAuthority)ViewData["ca"]); }
-<div class="form-group">
-    <details>
-        <summary><h2 class="summary heading-xsmall">@_PortNotListedDisclosureResources.PortNotListedTitle</h2></summary>
-        <div class="panel">
+<div class="govuk-form-group">
+    <details class="govuk-details" data-module="govuk-details">
+        <summary class="govuk-details__summary">
+            <span class="govuk-details__summary-text">
+                @_PortNotListedDisclosureResources.PortNotListedTitle
+            </span>
+        </summary>
+        <div class="govuk-details__text">
             <p>
-                @Html.Raw(string.Format(_PortNotListedDisclosureResources.PortNotListedText, 
-                    caDetails.IwsDepartmentDescription, 
+                @Html.Raw(string.Format(_PortNotListedDisclosureResources.PortNotListedText,
+                    caDetails.IwsDepartmentDescription,
                     caDetails.HelplineNumber,
                     Html.MailtoLink(caDetails.ContactEmail.ToString())))
             </p>

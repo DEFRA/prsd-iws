@@ -26,7 +26,7 @@
         </tr>
     </thead>
     <tbody>
-        <tr class = @exporterClass>
+        <tr class=@exporterClass>
             <td>
                 Exporter
             </td>
@@ -35,7 +35,7 @@
             </td>
             @if (ViewBag.CanEditNotification)
             {
-                <td class="change">
+                <td class="change govuk-link">                    
                     <a href="@Url.Action("Index", "Exporter", new { id, backToOverview = true })">
                         Change
                         <span class="screen-reader-text">Exporter</span>
@@ -43,7 +43,7 @@
                 </td>
             }
         </tr>
-        <tr class = @producerClass>
+        <tr class=@producerClass>
             <td>
                 Producers
             </td>
@@ -52,7 +52,7 @@
             </td>
             @if (ViewBag.CanEditNotification)
             {
-                <td class="change">
+                <td class="change govuk-link">
                     <a href="@Url.Action("List", "Producer", new { id, backToOverview = true })">
                         Change
                         <span class="screen-reader-text">Producers</span>
@@ -60,7 +60,7 @@
                 </td>
             }
         </tr>
-        <tr class = @siteOfExportClass>
+        <tr class=@siteOfExportClass>
             <td>
                 Site of export
             </td>
@@ -69,7 +69,7 @@
             </td>
             @if (ViewBag.CanEditNotification)
             {
-                <td class="change">
+                <td class="change govuk-link">
                     <a href="@Url.Action("SiteOfExport", "Producer", new { id, backToOverview = true })">
                         Change
                         <span class="screen-reader-text">Site of export</span>
@@ -77,7 +77,7 @@
                 </td>
             }
         </tr>
-        <tr class = @importerClass>
+        <tr class=@importerClass>
             <td>
                 Importer
             </td>
@@ -86,7 +86,7 @@
             </td>
             @if (ViewBag.CanEditNotification)
             {
-                <td class="change">
+                <td class="change govuk-link">
                     <a href="@Url.Action("Index", "Importer", new { id, backToOverview = true })">
                         Change
                         <span class="screen-reader-text">Importer</span>
@@ -94,7 +94,7 @@
                 </td>
             }
         </tr>
-        <tr class = @facilitiesClass>
+        <tr class=@facilitiesClass>
             <td>
                 @facilityLabel
             </td>
@@ -103,7 +103,7 @@
             </td>
             @if (ViewBag.CanEditNotification)
             {
-                <td class="change">
+                <td class="change govuk-link">
                     <a href="@Url.Action("List", "Facility", new { id, backToOverview = true })">
                         Change
                         <span class="screen-reader-text">@facilityLabel</span>
@@ -111,7 +111,7 @@
                 </td>
             }
         </tr>
-        <tr class = @actualSiteClass>
+        <tr class=@actualSiteClass>
             <td>
                 @siteLabel
             </td>
@@ -120,7 +120,7 @@
             </td>
             @if (ViewBag.CanEditNotification)
             {
-                <td class="change">
+                <td class="change govuk-link">
                     <a href="@Url.Action("SiteOfTreatment", "Facility", new { id, backToOverview = true })">
                         Change
                         <span class="screen-reader-text">@siteLabel</span>

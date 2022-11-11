@@ -6,7 +6,7 @@
     ViewBag.Title = Resource.TabTitle;
 }
 
-<h1 class="heading-large">
+<h1 class="govuk-heading-l">
     <span class="heading-secondary">@Html.DisplayTodaysDate()</span>
     @Resource.MainHeading
 </h1>
@@ -18,10 +18,10 @@
 
     <h2 class="heading-medium">@Resource.Search</h2>
 
-    <div id="search-container" class="form-group @Html.Gds().FormGroupClass(m => m.SearchTerm)">
+    <div id="search-container" class="govuk-form-group @Html.Gds().FormGroupClass(m => m.SearchTerm)">
         @Html.Gds().ValidationMessageFor(m => m.SearchTerm)
-        @Html.Gds().TextBoxFor(m => m.SearchTerm, new { @title = "Search term", placeholder = Resource.SearchPlaceholder })
-        <input type="submit" class="button" value="Go" style="width:125px; margin-bottom:15px;" />
+        @Html.Gds().TextBoxFor(m => m.SearchTerm, new { @title = "Search term", placeholder = Resource.SearchPlaceholder, @class = "govuk-input" })
+        <input type="submit" class="govuk-button" value="Go" style="width:125px; margin-bottom:15px;" />
         @Html.ActionLink(Resource.AdvancedSearch, "Index", "AdvancedSearch", null, new { @class = "" })
     </div>
 }

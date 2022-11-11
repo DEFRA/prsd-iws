@@ -6,7 +6,7 @@
     var usersNoun = Model.Users.Count != 1 ? "users" : "user";
 }
 
-<h1 class="heading-large">Manage new users</h1>
+<h1 class="govuk-heading-l">Manage new users</h1>
 
 <p>Displaying @Model.Users.Count @usersNoun</p>
 
@@ -17,7 +17,7 @@
     @Html.Gds().ValidationSummary()
     @Html.AntiForgeryToken()
 
-    <table class="form-group" title="Manage new users">
+    <table class="govuk-form-group" title="Manage new users">
         <thead>
         <tr>
             <th>Name</th>
@@ -71,8 +71,8 @@
 </tbody>
     </table>
 
-    <div class="form-group">
-        <button class="button" type="submit">@Constants.ContinueButtonText</button>
+    <div class="govuk-form-group">
+        <button class="govuk-button" type="submit">@Constants.ContinueButtonText</button>
     </div>
 }
 

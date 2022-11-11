@@ -15,6 +15,16 @@
                 "~/Scripts/datable.min.js",
                 "~/Scripts/jquery.stickem.js"));
 
+            // JQuery 3.x.x is used for all other browsers.
+            bundles.Add(new ScriptBundle("~/bundles/jquery-3").Include(
+                    "~/Scripts/jquery-3.6.0.js",
+                    "~/Scripts/jquery-3.6.0.min.js",
+                    "~/Scripts/jquery.unobtrusive-ajax.js",
+                    "~/Scripts/jquery-ui-1.13.2.js",
+                    "~/Scripts/jquery-ui-1.13.2.min.js",                    
+                    "~/Scripts/jquery.validate.js",
+                    "~/Scripts/jquery.validate.min.js"));
+
             bundles.Add(new ScriptBundle("~/bundles/jquery-ui").Include(
                 "~/Scripts/jquery-ui-{version}.js",
                 "~/Scripts/jquery-ui-autocomplete-html-extension.js"));
@@ -31,7 +41,7 @@
                 "~/Scripts/custom-validation.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/govuk").Include(
-                "~/Scripts/govuk-template.js"));
+                "~/Scripts/govuk/govuk-template.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/govuk-frontend").Include(
                     "~/Scripts/govuk-frontend/govuk-frontend-4.0.0.min.js",

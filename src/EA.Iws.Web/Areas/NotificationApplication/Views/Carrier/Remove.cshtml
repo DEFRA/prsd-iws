@@ -5,7 +5,7 @@
     ViewBag.Title = RemoveCarrierResources.Title;
 }
 
-<h2 class="heading-large">@RemoveCarrierResources.Header</h2>
+<h2 class="govuk-heading-l">@RemoveCarrierResources.Header</h2>
 
 @using (Html.BeginForm())
 {
@@ -16,7 +16,7 @@
     
     <p>@string.Format(RemoveCarrierResources.RemoveMessage, Model.CarrierName)</p>
 
-    <button class="button" type="submit">@Constants.ContinueButtonText</button>
+    <button class="govuk-button" type="submit">@Constants.ContinueButtonText</button>
 }
 
 <p>@Html.ActionLink(RemoveCarrierResources.BackToCarriers, "List", "Carrier", new { id = Model.NotificationId }, null)</p>

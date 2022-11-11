@@ -4,22 +4,22 @@
     ViewBag.Title = Resources.Title;
 }
 
-<h1 class="heading-large">@Resources.Title</h1>
+<h1 class="govuk-heading-l">@Resources.Title</h1>
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
     @Html.Gds().ValidationSummary()
 
-    <div class="form-group @Html.Gds().FormGroupClass(m => m.CountryId)">
+    <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.CountryId)">
         @Html.Gds().LabelFor(m => m.CountryId, new { @class = "form-label-bold" })
         @if (Model.CountryId != null)
         {
-            @Html.Gds().DropDownListFor(m => m.CountryId, Model.Countries, new { title = Resources.ExitCountry, data_select_box = "true" })
+            @Html.Gds().DropDownListFor(m => m.CountryId, Model.Countries, new { title = Resources.ExitCountry })
         }
         else
         {
-            @Html.Gds().DropDownListFor(m => m.CountryId, Model.Countries, string.Empty, new { title = Resources.ExitCountry, data_select_box = "true" })
+            @Html.Gds().DropDownListFor(m => m.CountryId, Model.Countries, string.Empty, new { title = Resources.ExitCountry })
         }
     </div>
 

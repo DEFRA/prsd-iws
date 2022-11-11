@@ -5,14 +5,14 @@
     ViewBag.Title = Resource.TabTitle;
 }
 
-<h1 class="heading-large">@Resource.Title</h1>
+<h1 class="govuk-heading-l">@Resource.Title</h1>
 
 @using (Html.BeginForm())
 {
     @Html.Gds().ValidationSummary()
     @Html.AntiForgeryToken()
 
-    <div class="form-group @Html.Gds().FormGroupClass(m => m.CompetentAuthorityId)">
+    <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.CompetentAuthorityId)">
         @Html.Gds().LabelFor(m => m.CompetentAuthorityId, false)
         @Html.Gds().ValidationMessageFor(m => m.CompetentAuthorityId)
         <fieldset>
@@ -22,7 +22,7 @@
                 @Html.HiddenFor(m => m.CompetentAuthorities[i].Name)
                 @Html.HiddenFor(m => m.CompetentAuthorities[i].Id)
                 var label = string.Format("{0} - {1}", Model.CompetentAuthorities[i].Code, Model.CompetentAuthorities[i].Name);
-                <div class="form-group form-group-compound">
+                <div class="govuk-form-group form-group-compound">
                     <div class="multiple-choice">
                         @Html.RadioButtonFor(m => m.CompetentAuthorityId, Model.CompetentAuthorities[i].Id, new { id = Model.CompetentAuthorities[i].Id })
                         <label for="@Model.CompetentAuthorities[i].Id">
@@ -34,7 +34,7 @@
         </fieldset>
     </div>
 
-    <div class="form-group @Html.Gds().FormGroupClass(m => m.EntryPointId)">
+    <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.EntryPointId)">
         @for (int i = 0; i < Model.EntryPoints.Count; i++)
         {
             @Html.HiddenFor(m => m.EntryPoints[i].Id)
@@ -42,8 +42,8 @@
         }
         @Html.Gds().LabelFor(m => m.EntryPointId, false)
         @Html.Gds().ValidationMessageFor(m => m.EntryPointId)
-        @Html.Gds().DropDownListFor(m => m.EntryPointId, Model.EntryPointList, string.Empty, new { data_select_box = "true" })
+        @Html.Gds().DropDownListFor(m => m.EntryPointId, Model.EntryPointList, string.Empty)
     </div>
 
-    <button class="button" type="submit">@Constants.ContinueButtonText</button>
+    <button class="govuk-button" type="submit">@Constants.ContinueButtonText</button>
 }

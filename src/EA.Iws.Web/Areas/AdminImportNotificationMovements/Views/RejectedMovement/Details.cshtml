@@ -5,9 +5,9 @@
     ViewBag.Title = Resources.Title;
 }
 
-<h1 class="heading-large">@Resources.MainHeading</h1>
+<h1 class="govuk-heading-l">@Resources.MainHeading</h1>
 
-<div class="form-group">
+<div class="govuk-form-group">
     <table>
         <caption class="visuallyhidden">@Resources.MainHeading</caption>
 
@@ -28,6 +28,6 @@
     </table>
 </div>
 
-<div class="form-group">
+<div class="govuk-form-group">
     @Html.ActionLink(Resources.LinkText, "Index", "Home", null, new { @class = "button" })
 </div>

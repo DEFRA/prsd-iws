@@ -13,7 +13,7 @@
     @Html.HiddenFor(m => m.Id)
 
     <header class="hgroup">
-        <p class="heading-large">@DisclaimerResources.Header</p>
+        <p class="govuk-heading-l">@DisclaimerResources.Header</p>
     </header>
 
     <p class="text">
@@ -23,7 +23,7 @@
         @DisclaimerResources.Paragraph2
     </p>
 
-    <div class="form-group">
+    <div class="govuk-form-group">
         <details>
             <summary>
                 <h2 class="summary heading-xsmall" data-track="disclosure" data-category="Data notice" data-action="Read">Read our privacy notice</h2>
@@ -34,7 +34,7 @@
         </details>
     </div>
     
-    <div class="form-group @Html.Gds().FormGroupClass(m => m.TermsAndConditions)">
+    <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.TermsAndConditions)">
         <fieldset>
             <div>@Html.Gds().ValidationMessageFor(m => m.TermsAndConditions)</div>
             <div class="multiple-choice">
@@ -45,7 +45,7 @@
             </div>
         </fieldset>
     </div>
-    <div class="form-group">
-        <input type="submit" class="button" value="@DisclaimerResources.Confirm" data-track="element" data-category="Export notification" data-action="Submit" />
+    <div class="govuk-form-group">
+        <input type="submit" class="govuk-button" value="@DisclaimerResources.Confirm" data-track="element" data-category="Export notification" data-action="Submit" />
     </div>
 }

@@ -7,7 +7,7 @@
 
 <div class="grid-row">
     <header class="hgroup">
-        <h1 class="heading-large">@UnNumberResources.Header</h1>
+        <h1 class="govuk-heading-l">@UnNumberResources.Header</h1>
     </header>
 @using (Html.BeginForm())
 {
@@ -16,8 +16,8 @@
 
     @Html.EditorFor(m => m.EnterWasteCodesViewModel)
 
-    <div class="form-group">
-        <button class="button" type="submit" name="command" value="continue">@Constants.ContinueButtonText</button>
+    <div class="govuk-form-group">
+        <button class="govuk-button" type="submit" name="command" value="continue">@Constants.ContinueButtonText</button>
     </div>
 }
 
