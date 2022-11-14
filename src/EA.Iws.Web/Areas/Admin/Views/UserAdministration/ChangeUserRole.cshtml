@@ -8,29 +8,29 @@
 
 <table class="govuk-form-group" title="@Resources.ChangeUserRoleTitle">
     <thead>
-    <tr>
-        <th>@Resources.Name</th>
-        <th>@Resources.Status</th>
-        <th>@Resources.Role</th>
-        <th>Action</th>
-    </tr>
+        <tr>
+            <th>@Resources.Name</th>
+            <th>@Resources.Status</th>
+            <th>@Resources.Role</th>
+            <th>Action</th>
+        </tr>
     </thead>
     <tbody>
-    @for (int i = 0; i < Model.Users.Count(); i++)
-    {
-        using (Html.BeginForm())
+        @for (int i = 0; i < Model.Users.Count(); i++)
         {
-            @Html.AntiForgeryToken()
-            @Html.Hidden("UserId", Model.Users[i].UserId)
+            using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+                @Html.Hidden("UserId", Model.Users[i].UserId)
 
-            <tr>
-                <td class="font-xsmall" title="@Model.Users[i].Email">@Model.Users[i].FullName</td>
-                <td class="font-xsmall">@Model.Users[i].Status</td>
-                <td>@Html.DropDownList("Role", Model.GetUserRolesList(Model.Users[i].Role), new { id = string.Format("Role{0}", i) })</td>
-                <td><button type="submit" style="width:auto">@Resources.Update</button></td>
-            </tr>
+                <tr>
+                    <td class="font-xsmall" title="@Model.Users[i].Email">@Model.Users[i].FullName</td>
+                    <td class="font-xsmall">@Model.Users[i].Status</td>
+                    <td>@Html.DropDownList("Role", Model.GetUserRolesList(Model.Users[i].Role), new { id = string.Format("Role{0}", i) })</td>
+                    <td><button type="submit" style="width:auto; padding: 5px!important;margin-bottom: 0px!important" class="govuk-button">@Resources.Update</button></td>
+                </tr>
+            }
         }
-    }
     </tbody>
 </table>
 

@@ -20,7 +20,7 @@
         @using (Html.BeginForm())
         {
             @Html.AntiForgeryToken()
-            @Html.ActionLink(@Resource.AddButton, "Add", "Comments", new { }, new { @class = "button" })
+            @Html.ActionLink(@Resource.AddButton, "Add", "Comments", new { }, new { @class = "govuk-button" })
         }
     </div>
 </div>
@@ -70,8 +70,6 @@
 
                 <div @shipmentClass id="shipmentSection">
                     <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.ShipmentNumberStr)">
-
-
                         <div>
                             @Resource.ShipmentNumber
                         </div>
@@ -114,46 +112,46 @@
 
 @if (Model.Comments.Count > 0)
 {
-    <div class="govuk-form-group table-container">
-        <table title="Comments">
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Date</th>
+    <div class="govuk-tabs__panel">
+        <table title="Comments" class="govuk-table">
+            <thead class="govuk-table__head">
+                <tr class="govuk-table__row">
+                    <th scope="col" class="govuk-table__header">Name</th>
+                    <th scope="col" class="govuk-table__header">Date</th>
                     @if (Model.Type == EA.Iws.Core.Admin.NotificationShipmentsCommentsType.Shipments)
                     {
-                        <th>Shipment no.</th>
+                        <th scope="col" class="govuk-table__header">Shipment no.</th>
                     }
-                    <th>Comment</th>
-                    <th>Action</th>
+                    <th scope="col" class="govuk-table__header">Comment</th>
+                    <th scope="col" class="govuk-table__header">Action</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody class="govuk-table__body">
                 @for (int i = 0; i < Model.Comments.Count; i++)
                 {
-                    <tr>
-                        <td>
+                    <tr class="govuk-table__row">
+                        <td class="govuk-table__cell">
                             <span style="white-space: nowrap">
                                 @Html.DisplayFor(m => m.Comments[i].Username)
                             </span>
                         </td>
-                        <td>
+                        <td class="govuk-table__cell">
                             <span style="white-space: nowrap">
                                 @Model.Comments[i].DateAdded.ToString("dd MMM yyyy")
                             </span>
                         </td>
                         @if (Model.Type == EA.Iws.Core.Admin.NotificationShipmentsCommentsType.Shipments)
                         {
-                            <td>
+                            <td class="govuk-table__cell">
                                 <span style="white-space: nowrap">
                                     @Html.DisplayFor(m => m.Comments[i].ShipmentNumber)
                                 </span>
                             </td>
                         }
-                        <td>
+                        <td class="govuk-table__cell">
                             @Html.DisplayFor(m => m.Comments[i].Comment)
                         </td>
-                        <td>
+                        <td class="govuk-table__cell">
                             <span style="white-space: nowrap">
                                 @Html.ActionLink("Delete", "Delete", "Comments", new { commentId = @Model.Comments[i].CommentId, type = Model.Type, @Page = Model.PageNumber, @Filter = Model.SelectedFilter }, null)
                             </span>

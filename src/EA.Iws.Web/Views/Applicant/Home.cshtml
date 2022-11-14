@@ -6,7 +6,7 @@
 }
 
 <div class="govuk-grid-row">
-    <div class="column-two-thirds">
+    <div class="govuk-grid-column-two-thirds">
         <h1 class="govuk-heading-l">@HomeResources.Header</h1>
 
         <h2 class="heading-medium">@HomeResources.HeaderStartNew</h2>
@@ -32,8 +32,8 @@ new { data_track = "element", data_category = "Export notification", data_action
                 new { @class = "govuk-button", data_track = "element", data_category = "Export notification", data_action = "Start" })
         </p>
     </div>
-    <div class="column-third" id="submit-side-bar">
-        <h3 class="heading-medium">@HomeResources.HeaderAccountServices</h3>
+    <div class="govuk-grid-column-one-third" id="submit-side-bar">
+        <h3 class="govuk-heading-m">@HomeResources.HeaderAccountServices</h3>
         <ul>
             <li>@Html.ActionLink(HomeResources.AccountDetails, "ChangeAccountDetails", "Registration")</li>
             <li>@Html.ActionLink(HomeResources.AddressBook, "Index", "Home", new { area = "AddressBook" }, null)</li>
@@ -41,7 +41,7 @@ new { data_track = "element", data_category = "Export notification", data_action
     </div>
 </div>
 
-<h2 class="heading-medium">@HomeResources.HeaderManageYourNotifications</h2>
+<h2 class="govuk-heading-m">@HomeResources.HeaderManageYourNotifications</h2>
 
 @if (ViewBag.Errors != null && ((IEnumerable<string>)ViewBag.Errors).Any())
 {
@@ -55,7 +55,7 @@ new { data_track = "element", data_category = "Export notification", data_action
 else
 {
     <div class="govuk-grid-row">
-        <div class="column-two-thirds">
+        <div class="govuk-grid-column-two-thirds">
             @using (Html.BeginForm())
             {
                 @Html.Gds().ValidationSummary()
@@ -77,7 +77,7 @@ else
     </div>
 
     <div class="govuk-grid-row">
-        <div class="column-two-thirds">
+        <div class="govuk-grid-column-two-thirds">
             @using (Html.BeginForm())
             {
                 @Html.AntiForgeryToken()

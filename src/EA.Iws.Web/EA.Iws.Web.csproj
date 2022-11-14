@@ -4797,6 +4797,7 @@
     <EmbeddedResource Include="Areas\ImportNotification\Views\Home\IndexResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\ImportNotification\Views\Importer\IndexResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

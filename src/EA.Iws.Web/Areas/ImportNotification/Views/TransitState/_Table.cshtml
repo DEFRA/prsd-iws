@@ -3,17 +3,17 @@
 
 @if (Model.TransitStates.Count > 0)
 {
-    <table class="form-group">
-        <thead>
-            <tr>
-                <th>@Resource.Country</th>
-                <th>@Resource.CompetentAuthority</th>
-                <th>@Resource.EntryPoint</th>
-                <th>@Resource.ExitPoint</th>
-                <th>@Resource.Action</th>
+    <table class="govuk-table">
+        <thead class="govuk-table__head">
+            <tr class="govuk-table__row">
+                <th scope="col" class="govuk-table__header">@Resource.Country</th>
+                <th scope="col" class="govuk-table__header">@Resource.CompetentAuthority</th>
+                <th scope="col" class="govuk-table__header">@Resource.EntryPoint</th>
+                <th scope="col" class="govuk-table__header">@Resource.ExitPoint</th>
+                <th scope="col" class="govuk-table__header">@Resource.Action</th>
             </tr>
         </thead>
-        <tbody id="sortable">
+        <tbody class="govuk-table__body">
             @for (int i = 0; i < Model.TransitStates.Count; i++)
             {
                 @Html.HiddenFor(m => m.TransitStates[i].Id)
@@ -41,24 +41,24 @@
                     @Html.HiddenFor(m => m.TransitStates[i].EntryPoint.Name)
                 }
 
-                <tr>
-                    <td>
+                <tr class="govuk-table__row">
+                    <td class="govuk-table__cell">
                         @(Model.TransitStates[i].Country != null ? Model.TransitStates[i].Country.Name : string.Empty)
                     </td>
-                    <td>
+                    <td class="govuk-table__cell">
                         @(Model.TransitStates[i].CompetentAuthority != null ? Model.TransitStates[i].CompetentAuthority.Code + " - " + Model.TransitStates[i].CompetentAuthority.Name : string.Empty)
                     </td>
-                    <td>
+                    <td class="govuk-table__cell">
                         @(Model.TransitStates[i].EntryPoint != null ? Model.TransitStates[i].EntryPoint.Name : string.Empty)
                     </td>
-                    <td>
+                    <td class="govuk-table__cell">
                         @(Model.TransitStates[i].ExitPoint != null ? Model.TransitStates[i].ExitPoint.Name : string.Empty)
                     </td>
-					<td>
+					<td class="govuk-table__cell">
 						<span style="white-space: nowrap">
 							@Html.ActionLink("Edit", "Edit", new { entityId = Model.TransitStates[i].Id })
 							|
-							<button class="link-submit in-table" type="submit" name="deleteId" onclick="deletePost(event)" value="@Model.TransitStates[i].Id">Delete</button>
+							<button class="link-submit in-table govuk-link" type="submit" name="deleteId" onclick="deletePost(event)" value="@Model.TransitStates[i].Id">Delete</button>
 						</span>
 					</td>
                 </tr>
