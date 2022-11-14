@@ -16,20 +16,22 @@
         @(Model.NotificationType == NotificationType.Recovery ? IndexResources.RecoveryCodesHeading : IndexResources.DisposalCodesHeading)
     </h2>
 
-    <div class="govuk-form-group inline multi-line @Html.Gds().FormGroupClass(m => m.Codes)">
-        <fieldset>
-            @for (int i = 0; i < Model.Codes.Count; i++)
-            {
-                var id = Model.Codes[i].Key.ToString();
-                @Html.HiddenFor(m => m.Codes[i].Key)
+    <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.Codes)">
+        <fieldset class="govuk-fieldset">
+            <div class="govuk-checkboxes" data-module="govuk-checkboxes">
+                @for (int i = 0; i < Model.Codes.Count; i++)
+                {
+                    var id = Model.Codes[i].Key.ToString();
+                    @Html.HiddenFor(m => m.Codes[i].Key)
 
-                <div class="multiple-choice">
-                    @Html.CheckBoxFor(m => m.Codes[i].Value, new { id })
-                    <label for="@id">
-                        @Html.Raw(Model.CodeDisplay[i])
-                    </label>
-                </div>
-            }  
+                    <div class="govuk-checkboxes__item">
+                        @Html.CheckBoxFor(m => m.Codes[i].Value, new { id, @class = "govuk-checkboxes__input" })
+                        <label class="govuk-label govuk-checkboxes__label" for="@id">
+                            @Html.Raw(Model.CodeDisplay[i])
+                        </label>
+                    </div>
+                }
+            </div>
         </fieldset>
 
     </div>

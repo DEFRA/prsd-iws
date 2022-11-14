@@ -17,15 +17,18 @@
         }
         @if (isDisabled)
         {
-            @Html.Gds().TextBoxFor(m => m.Day, new { type = "number", min = "1", max = "31", disabled = true })
+            @Html.Gds().TextBoxFor(m => m.Day, new { type = "number", min = "1", max = "31", disabled = true }, useHalfWidth: false)
         }
         else
         {
             @Html.Gds().TextBoxFor(m => m.Day, new
             {
-                type = "number", min = "1", max = "31", data_type = (Model.IsAutoTabEnabled) ? "date" : string.Empty,
-                placeholder = Model.ShowLabels ? string.Empty : "DD" 
-            })
+                type = "number",
+                min = "1",
+                max = "31",
+                data_type = (Model.IsAutoTabEnabled) ? "date" : string.Empty,
+                placeholder = Model.ShowLabels ? string.Empty : "DD"
+            }, useHalfWidth: false)
         }
     </div>
     <div class="govuk-form-group form-group-month">
@@ -35,15 +38,18 @@
         }
         @if (isDisabled)
         {
-            @Html.Gds().TextBoxFor(m => m.Month, new { type = "number", min = "1", max = "12", disabled = true })
+            @Html.Gds().TextBoxFor(m => m.Month, new { type = "number", min = "1", max = "12", disabled = true }, useHalfWidth: false)
         }
         else
         {
             @Html.Gds().TextBoxFor(m => m.Month, new
             {
-                type = "number", min = "1", max = "12", data_type = (Model.IsAutoTabEnabled) ? "date" : string.Empty,
+                type = "number",
+                min = "1",
+                max = "12",
+                data_type = (Model.IsAutoTabEnabled) ? "date" : string.Empty,
                 placeholder = Model.ShowLabels ? string.Empty : "MM"
-            })
+            }, useHalfWidth: false)
         }
     </div>
     <div class="govuk-form-group form-group-year">
@@ -53,15 +59,16 @@
         }
         @if (isDisabled)
         {
-            @Html.Gds().TextBoxFor(m => m.Year, new { type = "number", min = "2015", disabled = true })
+            @Html.Gds().TextBoxFor(m => m.Year, new { type = "number", min = "2015", disabled = true }, useHalfWidth: false)
         }
         else
         {
             @Html.Gds().TextBoxFor(m => m.Year, new
             {
-                type = "number", min = Model.AllowPastDates ? "1900" : "2015",
+                type = "number",
+                min = Model.AllowPastDates ? "1900" : "2015",
                 placeholder = Model.ShowLabels ? string.Empty : "YYYY"
-            })
+            }, useHalfWidth: false)
         }
     </div>
 </div>

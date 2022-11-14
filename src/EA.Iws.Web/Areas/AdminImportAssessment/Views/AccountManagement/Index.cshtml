@@ -12,86 +12,72 @@
 
 @Html.Gds().ValidationSummary()
 
-<div class="grid-row">
-
-    <div class="column-one-third">
-        <p class="bold-xsmall">@Resource.TotalHeading</p>
-    </div>
-
-    <div class="column-one-third">
-        <p class="bold-xsmall">@Resource.BalanceHeading</p>
-    </div>
-
-    <div class="column-one-third">
-        <p class="bold-xsmall">@Resource.RemainingHeading</p>
-    </div>
-
-</div>
-
-<div class="grid-row">
-
-    <div class="column-one-third bold-medium">
-        @Model.TotalCharge.ToString("C")
-    </div>
-
-    <div class="column-one-third bold-medium">
-        @Model.TotalPaid.ToString("C")
-    </div>
-
-    <div class="column-one-third bold-medium">
-        @Model.AmountRemaining.ToString("C")
-    </div>
-
-</div>
-
-<hr>
+<table class="govuk-table">
+    <thead class="govuk-table__head">
+        <tr class="govuk-table__row">
+            <th scope="col" class="govuk-table__header">@Resource.TotalHeading</th>
+            <th scope="col" class="govuk-table__header">@Resource.BalanceHeading</th>
+            <th scope="col" class="govuk-table__header">@Resource.RemainingHeading</th>
+        </tr>
+    </thead>
+    <tbody class="govuk-table__body">
+        <tr class="govuk-table__row">
+            <td class="govuk-table__cell">@Model.TotalCharge.ToString("C")</td>
+            <td class="govuk-table__cell">@Model.TotalPaid.ToString("C")</td>
+            <td class="govuk-table__cell">@Model.AmountRemaining.ToString("C")</td>
+        </tr>
+    </tbody>
+</table>
 
 <h2 class="heading-medium">@Resource.HistoryHeading</h2>
 
 <div class="govuk-form-group">
-    <table title=@Resource.HistoryHeading>
-        <thead>
-        <tr>
-            <th>@Resource.TableHeaderTranaction</th>
-            <th>@Resource.TableHeaderDate</th>
-            <th>@Resource.TableHeaderAmount</th>
-            <th>@Resource.TableHeaderType</th>
-            <th>@Resource.TableHeaderReceipt</th>
-        </tr>
+    <table class="govuk-table" title=@Resource.HistoryHeading>
+        <thead class="govuk-table__head">
+            <tr class="govuk-table__row">
+                <th scope="col" class="govuk-table__header">@Resource.TableHeaderTranaction</th>
+                <th scope="col" class="govuk-table__header">@Resource.TableHeaderDate</th>
+                <th scope="col" class="govuk-table__header">@Resource.TableHeaderAmount</th>
+                <th scope="col" class="govuk-table__header">@Resource.TableHeaderType</th>
+                <th scope="col" class="govuk-table__header">@Resource.TableHeaderReceipt</th>
+            </tr>
         </thead>
-        <tbody>
-        @{
-            for (var i = 0; i < Model.Transactions.Count(); i++)
-            {
-                var trans = Model.Transactions[i].Transaction;
-
-                Enum type;
-                if (trans == TransactionType.Refund)
+        <tbody class="govuk-table__body">
+            @{
+                for (var i = 0; i < Model.Transactions.Count(); i++)
                 {
-                    type = TransactionType.Refund;
-                }
-                else
-                {
-                    type = (PaymentMethod)Model.Transactions[i].Type;
-                }
+                    var trans = Model.Transactions[i].Transaction;
 
-                <tr>
-                    <td>@trans</td>
-                    <td>@Model.Transactions[i].Date.ToString("dd/MM/yyyy")</td>
-                    <td>@Model.Transactions[i].Amount.ToString("C")</td>
-                    <td>@EnumHelper.GetDescription(type)</td>
-                    <td>@Model.Transactions[i].ReceiptNumber</td>
-                </tr>
+                    Enum type;
+                    if (trans == TransactionType.Refund)
+                    {
+                        type = TransactionType.Refund;
+                    }
+                    else
+                    {
+                        type = (PaymentMethod)Model.Transactions[i].Type;
+                    }
+
+                    <tr class="govuk-table__row">
+                        <td class="govuk-table__cell">@trans</td>
+                        <td class="govuk-table__cell">@Model.Transactions[i].Date.ToString("dd/MM/yyyy")</td>
+                        <td class="govuk-table__cell">@Model.Transactions[i].Amount.ToString("C")</td>
+                        <td class="govuk-table__cell">@EnumHelper.GetDescription(type)</td>
+                        <td class="govuk-table__cell">@Model.Transactions[i].ReceiptNumber</td>
+                    </tr>
+                }
             }
-        }
         </tbody>
     </table>
 </div>
 
 <div class="govuk-form-group">
-    <details id="paymentDetails">
-
-        <summary><span class="summary">@Resource.EnterPaymentHeading</span></summary>
+    <details id="paymentDetails" class="govuk-details">
+        <summary class="govuk-details__summary">
+            <span class="govuk-details__summary-text">
+                @Resource.EnterPaymentHeading
+            </span>
+        </summary>
 
         <div class="panel-border-narrow">
             @Html.Partial("_PaymentDetails", Model.PaymentViewModel)
@@ -101,9 +87,12 @@
 </div>
 
 <div class="govuk-form-group">
-    <details id="refundDetails">
-
-        <summary><span class="summary">@Resource.EnterRefundHeading</span></summary>
+    <details id="refundDetails" class="govuk-details">
+        <summary class="govuk-details__summary">
+            <span class="govuk-details__summary-text">
+                @Resource.EnterRefundHeading
+            </span>
+        </summary>
 
         <div class="panel-border-narrow">
             @Html.Partial("_RefundDetails", Model.RefundViewModel)
@@ -121,8 +110,11 @@
 
     <div class="govuk-form-group">
         <details id="comments" role="group" @openComments>
-
-            <summary role="button"><span class="summary">@Resource.CommentSectionHeading</span></summary>
+            <summary role="button" class="govuk-details__summary">
+                <span class="govuk-details__summary-text">
+                    @Resource.CommentSectionHeading
+                </span>
+            </summary>
 
             <div class="panel-border-narrow">
                 <table>
@@ -135,49 +127,49 @@
 
                         @for (var i = 0; i < Model.Transactions.Count(); i++)
                         {
-                                var trans = (TransactionType)Model.Transactions[i].Transaction;
-                                var commentId = "id=comment-" + i;
-                                var editId = "id=edit-" + i;
-                                var comment = Model.Transactions[i].Comments;
+                            var trans = (TransactionType)Model.Transactions[i].Transaction;
+                            var commentId = "id=comment-" + i;
+                            var editId = "id=edit-" + i;
+                            var comment = Model.Transactions[i].Comments;
 
-                                var nonEdit = "class=";
-                                var edit = "class=";
-                                <tr>
-                                    <td class="nav-bloc">
-                                        @if (i == Model.ErrorCommentId && Model.CommentError != null)
-                                        {
-                                            edit = edit + @"";
-                                            nonEdit = nonEdit + @"hidden";
-                                        }
-                                        else
-                                        {
-                                            edit = edit + @"hidden";
-                                            nonEdit = nonEdit + @"";
-                                        }
-                                        <span>@trans&nbsp;&nbsp;&nbsp;@Model.Transactions[i].Date.ToString("dd/MM/yyyy")</span>
-                                        <div @commentId @nonEdit>
-                                            <p>
-                                                @Model.Transactions[i].Comments
-                                            </p>
-                                            <p>
-                                                <a href="#comment" + @i onclick='editComment(@i, @Model.Transactions.Count())'>Edit</a>
-                                            </p>
+                            var nonEdit = "class=";
+                            var edit = "class=";
+                            <tr>
+                                <td class="nav-bloc">
+                                    @if (i == Model.ErrorCommentId && Model.CommentError != null)
+                                    {
+                                        edit = edit + @"";
+                                        nonEdit = nonEdit + @"hidden";
+                                    }
+                                    else
+                                    {
+                                        edit = edit + @"hidden";
+                                        nonEdit = nonEdit + @"";
+                                    }
+                                    <span>@trans&nbsp;&nbsp;&nbsp;@Model.Transactions[i].Date.ToString("dd/MM/yyyy")</span>
+                                    <div @commentId @nonEdit>
+                                        <p>
+                                            @Model.Transactions[i].Comments
+                                        </p>
+                                        <p>
+                                            <a href="#comment" + @i onclick='editComment(@i, @Model.Transactions.Count())'>Edit</a>
+                                        </p>
+                                    </div>
+                                    <div @editId @edit>
+                                        <div>
+                                            @Html.TextAreaFor(m => m.Transactions[i].Comments, new { @MaxLength = 500, @display = "block", @class = "govuk-textarea", rows = "10" })
+                                            @Html.HiddenFor(m => m.Transactions[i].TransactionId)
                                         </div>
-                                        <div @editId @edit>
-                                            <div>
-                                                @Html.TextAreaFor(m => m.Transactions[i].Comments, new { @MaxLength = 500, @display = "block", @style = "width: 50%; height: 100px", @class = "form-control" })
-                                                @Html.HiddenFor(m => m.Transactions[i].TransactionId)
-                                            </div>
-                                            <div>
-                                                <button class="link-submit" type="submit" name="commentId" value="@i">Save</button>
-                                                &nbsp;&nbsp;&nbsp;
-                                                <button class="link-submit" type="submit">Cancel</button>
-                                                @*this code is for canceling the edit client side, but the view model data overrides the value. Look at later
-                                                    <a href="#cancel-" + @i onclick='cancelComment(@i, @Model.TableData.Count())'>Cancel</a>*@
-                                            </div>
+                                        <div>
+                                            <button class="govuk-button" type="submit" name="commentId" value="@i">Save</button>
+                                            &nbsp;&nbsp;&nbsp;
+                                            <button class="govuk-button" type="submit">Cancel</button>
+                                            @*this code is for canceling the edit client side, but the view model data overrides the value. Look at later
+                                                <a href="#cancel-" + @i onclick='cancelComment(@i, @Model.TableData.Count())'>Cancel</a>*@
                                         </div>
-                                    </td>
-                                </tr>
+                                    </div>
+                                </td>
+                            </tr>
                         }
                     </tbody>
                 </table>
@@ -186,31 +178,6 @@
         </details>
     </div>
 }
-
-
-@*<div class="form-group">
-    <details role="group" id="comments">
-
-        <summary role="button"><span class="summary">@Resource.CommentSectionHeading</span></summary>
-
-        <div class="panel-border-narrow">
-
-            @for (var i = 0; i < Model.Transactions.Count(); i++)
-            {
-                if (!string.IsNullOrWhiteSpace(Model.Transactions[i].Comments))
-                {
-                    var trans = (TransactionType)Model.Transactions[i].Transaction;
-                    var commentId = "id=comment-" + i;
-
-                    <span>@trans&nbsp;&nbsp;&nbsp;@Model.Transactions[i].Date.ToString("dd/MM/yyyy")</span>
-
-                    <p @commentId>@Model.Transactions[i].Comments</p>
-                }
-            }
-        </div>
-
-    </details>
-</div>*@
 
 <div class="govuk-form-group">
     @if (Model.CanDeleteTransaction && Model.HasPayments)

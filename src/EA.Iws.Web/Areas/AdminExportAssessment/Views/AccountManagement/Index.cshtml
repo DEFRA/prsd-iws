@@ -49,17 +49,17 @@
 <h2 class="heading-medium">@IndexResources.HistoryHeading</h2>
 
 <div class="govuk-form-group">
-    <table title=@IndexResources.HistoryHeading>
-        <thead>
-            <tr>
-                <th>@IndexResources.TableHeaderTranaction</th>
-                <th>@IndexResources.TableHeaderDate</th>
-                <th>@IndexResources.TableHeaderAmount</th>
-                <th>@IndexResources.TableHeaderType</th>
-                <th>@IndexResources.TableHeaderReceipt</th>
+    <table class="govuk-table" title=@IndexResources.HistoryHeading>
+        <thead class="govuk-table__head">
+            <tr class="govuk-table__row">
+                <th scope="col" class="govuk-table__header">@IndexResources.TableHeaderTranaction</th>
+                <th scope="col" class="govuk-table__header">@IndexResources.TableHeaderDate</th>
+                <th scope="col" class="govuk-table__header">@IndexResources.TableHeaderAmount</th>
+                <th scope="col" class="govuk-table__header">@IndexResources.TableHeaderType</th>
+                <th scope="col" class="govuk-table__header">@IndexResources.TableHeaderReceipt</th>
             </tr>
         </thead>
-        <tbody>
+        <tbody class="govuk-table__body">
             @{
                 for (var i = 0; i < Model.TableData.Count(); i++)
                 {
@@ -75,12 +75,12 @@
                         type = (PaymentMethod)Model.TableData[i].Type;
                     }
 
-                    <tr>
-                        <td>@trans</td>
-                        <td>@Model.TableData[i].Date.ToString("dd/MM/yyyy")</td>
-                        <td>@Model.TableData[i].Amount.ToString("C")</td>
-                        <td>@EnumHelper.GetDescription(type)</td>
-                        <td>@Model.TableData[i].ReceiptNumber</td>
+                    <tr class="govuk-table__row">
+                        <td class="govuk-table__cell">@trans</td>
+                        <td class="govuk-table__cell">@Model.TableData[i].Date.ToString("dd/MM/yyyy")</td>
+                        <td class="govuk-table__cell">@Model.TableData[i].Amount.ToString("C")</td>
+                        <td class="govuk-table__cell">@EnumHelper.GetDescription(type)</td>
+                        <td class="govuk-table__cell">@Model.TableData[i].ReceiptNumber</td>
                     </tr>
                 }
             }
@@ -89,9 +89,12 @@
 </div>
 
 <div class="govuk-form-group">
-    <details id="paymentDetails">
-
-        <summary><span class="summary">@IndexResources.EnterPaymentHeading</span></summary>
+    <details id="paymentDetails" class="govuk-details">
+        <summary class="govuk-details__summary">
+            <span class="govuk-details__summary-text">
+                @IndexResources.EnterPaymentHeading
+            </span>
+        </summary>
 
         <div class="panel-border-narrow">
             @Html.Partial("_PaymentDetails", Model.PaymentViewModel)
@@ -101,9 +104,12 @@
 </div>
 
 <div class="govuk-form-group">
-    <details id="refundDetails">
-
-        <summary><span class="summary">@IndexResources.RefundHeading</span></summary>
+    <details id="refundDetails" class="govuk-details">
+        <summary class="govuk-details__summary">
+            <span class="summary govuk-details__summary-text">
+                @IndexResources.RefundHeading
+            </span>
+        </summary>
 
         <div class="panel-border-narrow">
             @Html.Partial("_RefundDetails", Model.RefundViewModel)
@@ -121,9 +127,13 @@
 
 
     <div class="govuk-form-group">
-        <details id="comments" role="group" @openComments>
+        <details id="comments" role="group" class="govuk-details" @openComments>
 
-            <summary role="button"><span class="summary">@IndexResources.CommentSectionHeading</span></summary>
+            <summary role="button" class="govuk-details__summary">
+                <span class="summary govuk-details__summary-text">
+                    @IndexResources.CommentSectionHeading
+                </span>
+            </summary>
             <div class="panel-border-narrow">
                 <table>
                     <thead>

@@ -69,8 +69,11 @@
             bundles.Add(new StyleBundle("~/Content/iws-page").Include(
                 "~/Content/iws-page.css"));
 
-            bundles.Add(new StyleBundle("~/Content/css/font-awesome")
-                .Include("~/Content/css/font-awesome.css"));
+            bundles.Add(new StyleBundle("~/Content/iws-page")
+                .Include("~/css/font-awesome.css"));
+
+            bundles.Add(new StyleBundle("~/Content/iws-page")
+                .Include("~/css/font-awesome.min.css"));
 
             bundles.Add(new StyleBundle("~/Content/select2/css")
                 .Include("~/Content/select2/select2.css"));

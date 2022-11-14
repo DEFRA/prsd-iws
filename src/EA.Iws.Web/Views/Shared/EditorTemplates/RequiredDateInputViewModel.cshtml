@@ -17,15 +17,11 @@
         }
         @if (isDisabled)
         {
-            @Html.Gds().TextBoxFor(m => m.Day, new { disabled = true })
+            @Html.Gds().TextBoxFor(m => m.Day, new { disabled = true }, useHalfWidth: false)
         }
         else
         {
-            @Html.Gds().TextBoxFor(m => m.Day, new
-       {
-           data_type = (Model.IsAutoTabEnabled) ? "date" : string.Empty,
-           placeholder = Model.ShowLabels ? string.Empty : "DD"
-       })
+            @Html.Gds().TextBoxFor(m => m.Day, new { data_type = (Model.IsAutoTabEnabled) ? "date" : string.Empty, placeholder = Model.ShowLabels ? string.Empty : "DD" }, useHalfWidth: false)
         }
     </div>
     <div class="govuk-form-group form-group-month">
@@ -35,15 +31,11 @@
         }
         @if (isDisabled)
         {
-            @Html.Gds().TextBoxFor(m => m.Month, new { disabled = true })
+            @Html.Gds().TextBoxFor(m => m.Month, new { disabled = true }, useHalfWidth: false)
         }
         else
         {
-            @Html.Gds().TextBoxFor(m => m.Month, new
-       {
-           data_type = (Model.IsAutoTabEnabled) ? "date" : string.Empty,
-           placeholder = Model.ShowLabels ? string.Empty : "MM"
-       })
+            @Html.Gds().TextBoxFor(m => m.Month, new { data_type = (Model.IsAutoTabEnabled) ? "date" : string.Empty, placeholder = Model.ShowLabels ? string.Empty : "MM" }, useHalfWidth: false)
         }
     </div>
     <div class="govuk-form-group form-group-year">
@@ -53,14 +45,11 @@
         }
         @if (isDisabled)
         {
-            @Html.Gds().TextBoxFor(m => m.Year, new { disabled = true })
+            @Html.Gds().TextBoxFor(m => m.Year, new { disabled = true }, useHalfWidth: false)
         }
         else
         {
-            @Html.Gds().TextBoxFor(m => m.Year, new
-       {
-           placeholder = Model.ShowLabels ? string.Empty : "YYYY"
-       })
+            @Html.Gds().TextBoxFor(m => m.Year, new { placeholder = Model.ShowLabels ? string.Empty : "YYYY" }, useHalfWidth: false)
         }
     </div>
 </div>

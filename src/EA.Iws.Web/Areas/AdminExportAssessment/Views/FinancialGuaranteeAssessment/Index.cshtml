@@ -24,23 +24,23 @@
 
         <h2 class="heading-medium">@Resources.DecisionHeading</h2>
 
-        <table class="fg-decision">
-            <tbody>
-                <tr>
-                    <th>@Resources.Decision</th>
-                    <td>@EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(Model.Decision)</td>
+        <table class="govuk-table">
+            <tbody class="govuk-table__body">
+                <tr class="govuk-table__row">
+                    <th scope="row" class="govuk-table__header">@Resources.Decision</th>
+                    <td class="govuk-table__cell">@EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(Model.Decision)</td>
                 </tr>
                 <tr>
-                    <th>@Resources.CurrentStatus</th>
-                    <td>@EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(statusToUse)</td>
+                    <th scope="row" class="govuk-table__header">@Resources.CurrentStatus</th>
+                    <td class="govuk-table__cell">@EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(statusToUse)</td>
                 </tr>
                 <tr>
-                    <th>@Resources.DateReceived</th>
-                    <td>@Html.Gds().DisplayDateFor(m => m.ReceivedDate)</td>
+                    <th scope="row" class="govuk-table__header">@Resources.DateReceived</th>
+                    <td class="govuk-table__cell">@Html.Gds().DisplayDateFor(m => m.ReceivedDate)</td>
                 </tr>
                 <tr>
-                    <th>@Resources.DateCompleted</th>
-                    <td>
+                    <th scope="row" class="govuk-table__header">@Resources.DateCompleted</th>
+                    <td class="govuk-table__cell">
                         @if (Model.Status == FinancialGuaranteeStatus.ApplicationReceived)
                         {
                             @Html.ActionLink(Resources.AddLink, "Complete", new { financialGuaranteeId = Model.FinancialGuaranteeId })
@@ -67,7 +67,7 @@
 @if (Model.Status == FinancialGuaranteeStatus.ApplicationComplete)
 {
     <div class="govuk-form-group">
-        @Html.ActionLink(Resources.MakeADecisionButton, "Index", "FinancialGuaranteeDecision", new { financialGuaranteeId = Model.FinancialGuaranteeId }, new { @class = "button" })
+        @Html.ActionLink(Resources.MakeADecisionButton, "Index", "FinancialGuaranteeDecision", new { financialGuaranteeId = Model.FinancialGuaranteeId }, new { @class = "govuk-button" })
     </div>
 }
 
@@ -81,7 +81,7 @@
 @if (Model.IsNotificationStatusRecordable && (Model.Decision != FinancialGuaranteeDecision.None || Model.IsEmpty))
 {
     <div class="govuk-form-group">
-        @Html.ActionLink(Resources.RecordNew, "New", null, new { @class = "button" })
+        @Html.ActionLink(Resources.RecordNew, "New", null, new { @class = "govuk-button" })
     </div>
 }
 

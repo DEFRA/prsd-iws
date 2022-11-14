@@ -17,16 +17,16 @@
     }
     else
     {
-        <table class="fg-decision">
-            <tbody>
-            <tr>
-                <th>@Resources.Status</th>
-                <td>@EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(Model.CurrentFinancialGuarantee.Status)</td>
+        <table class="govuk-table">
+            <tbody class="govuk-table__body">
+            <tr class="govuk-table__row">
+                <th scope="row" class="govuk-table__header">@Resources.Status</th>
+                <td class="govuk-table__cell">@EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(Model.CurrentFinancialGuarantee.Status)</td>
             </tr>
 
-            <tr>
-                <th>@Resources.DecisionDate</th>
-                <td>
+            <tr class="govuk-table__row">
+                <th scope="row" class="govuk-table__header">@Resources.DecisionDate</th>
+                <td class="govuk-table__cell">
                     @if (Model.CurrentFinancialGuarantee.DecisionDate.HasValue)
                     {
                         @Html.Gds().DisplayDateFor(m => m.CurrentFinancialGuarantee.DecisionDate.Value)
@@ -37,9 +37,9 @@
                     }
                 </td>
             </tr>
-            <tr>
-                <th>@Resources.IsBlanketBond</th>
-                <td>
+            <tr class="govuk-table__row">
+                <th scope="row" class="govuk-table__header">@Resources.IsBlanketBond</th>
+                <td class="govuk-table__cell">
                     @if (Model.CurrentFinancialGuarantee.IsBlanketBond.HasValue)
                     {
                         @(Model.CurrentFinancialGuarantee.IsBlanketBond.Value ? Resources.Yes : Resources.No)
@@ -50,9 +50,9 @@
                     }
                 </td>
             </tr>
-            <tr>
-                <th>@Resources.ReferenceNumber</th>
-                <td>
+            <tr class="govuk-table__row">
+                <th scope="row" class="govuk-table__header">@Resources.ReferenceNumber</th>
+                <td class="govuk-table__cell">
                     @if (!string.IsNullOrWhiteSpace(Model.CurrentFinancialGuarantee.ReferenceNumber))
                     {
                         @Model.CurrentFinancialGuarantee.ReferenceNumber
@@ -63,9 +63,9 @@
                     }
                 </td>
             </tr>
-            <tr>
-                <th>@Resources.ActiveLoadsPermitted</th>
-                <td>
+            <tr class="govuk-table__row">
+                <th scope="row" class="govuk-table__header">@Resources.ActiveLoadsPermitted</th>
+                <td class="govuk-table__cell">
                     @if (Model.CurrentFinancialGuarantee.ActiveLoadsPermitted.HasValue)
                     {
                         @Model.CurrentFinancialGuarantee.ActiveLoadsPermitted.Value

@@ -27,19 +27,21 @@
             <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.IsInterim)">
                 @Html.Gds().ValidationMessageFor(m => m.IsInterim)
 
-                <fieldset>
-                    <div class="multiple-choice">
-                        @Html.RadioButtonFor(m => m.IsInterim, true, new { id = "yes" })
-                        <label for="yes">
-                            @Resources.Yes
-                        </label>
-                    </div>
+                <fieldset class="govuk-fieldset">
+                    <div class="govuk-radios" data-module="govuk-radios">
+                        <div class="govuk-radios__item">
+                            @Html.RadioButtonFor(m => m.IsInterim, true, new { id = "yes", @class="govuk-radios__input" })
+                            <label class="govuk-label govuk-radios__label" for="yes">
+                                @Resources.Yes
+                            </label>
+                        </div>
 
-                    <div class="multiple-choice">
-                        @Html.RadioButtonFor(m => m.IsInterim, false, new { id = "no" })
-                        <label for="no">
-                            @Resources.No
-                        </label>
+                        <div class="govuk-radios__item">
+                            @Html.RadioButtonFor(m => m.IsInterim, false, new { id = "no", @class="govuk-radios__input" })
+                            <label class="govuk-label govuk-radios__label" for="no">
+                                @Resources.No
+                            </label>
+                        </div>
                     </div>
                 </fieldset>
             </div>

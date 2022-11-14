@@ -2217,3 +2217,11 @@ textarea {
     font-family: "nta-extended",Arial,sans-serif;
     font-size: 19px;
 }
+
+.submitsidebar {
+    background-color: #f8f8f8 !important;
+    /*margin-bottom: 10px !important;
+    padding-bottom: 10px !important;
+    width: 100% !important;
+    float: right !important;*/
+}

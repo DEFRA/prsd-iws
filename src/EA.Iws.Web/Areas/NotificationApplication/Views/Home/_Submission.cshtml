@@ -4,7 +4,7 @@
 
 <section class="grid-row">
     <div class="noti-overview">
-        <div class="govuk-grid-column-one-half">
+        <div class="govuk-grid-column-two-thirds">
             <div>
                 <h1 class="govuk-heading-l" style="margin-top:30px">Notification overview</h1>
                 <h2 class="govuk-heading-m">@Model.NotificationNumber</h2>
@@ -45,7 +45,7 @@
             </div>
         </div>
 
-        <div class="govuk-grid-column-one-half">
+        <div class="govuk-grid-column-one-third">
             <div class="status">
                 <span>Overall status</span>
                 <span class="statusbox @Html.ExportStatus().DisplayColorClass(Model.Status)">@EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(Model.Status).ToUpper()</span>
@@ -94,8 +94,8 @@
 
             @if (Model.Status == NotificationStatus.NotSubmitted)
             {               
-                <div class="govuk-grid-column-full">
-                    <div id="submit-side-bar" style="background-color:#f8f8f8; margin-bottom: 15px;">
+                <div class="govuk-grid-column-full" style="padding: 0px !important">
+                    <div id="submit-side-bar" class="submitsidebar">
                         <h3 style="text-align:center;">Notification access level:</h3>
                         <h3 style="text-align:center;">@Model.AccessLevelText</h3>
                     </div>
