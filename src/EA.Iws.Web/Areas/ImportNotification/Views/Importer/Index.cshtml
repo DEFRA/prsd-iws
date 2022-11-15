@@ -72,11 +72,13 @@
     @Html.EditorFor(m => m.Contact)
 
     <div class="govuk-form-group no-js-hidden">
-        <div class="multiple-choice">
-            @Html.CheckBoxFor(m => m.IsAddedToAddressBook, new { id = "addressBook" })
-            <label for="addressBook">
-                Add as new contact and address to the address book
-            </label>
+        <div class="govuk-checkboxes" data-module="govuk-checkboxes">
+            <div class="multiple-choice govuk-checkboxes__item">
+                @Html.CheckBoxFor(m => m.IsAddedToAddressBook, new { id = "addressBook", @class = "govuk-checkboxes__input" })
+                <label class="govuk-label govuk-checkboxes__label" for="addressBook">
+                    Add as new contact and address to the address book
+                </label>
+            </div>
         </div>
     </div>
 
