@@ -24,24 +24,28 @@
     </p>
 
     <div class="govuk-form-group">
-        <details>
-            <summary>
-                <h2 class="summary heading-xsmall" data-track="disclosure" data-category="Data notice" data-action="Read">Read our privacy notice</h2>
+        <details class="govuk-details" data-module="govuk-details">
+            <summary class="govuk-details__summary">
+                <span class="govuk-details__summary-text">
+                    Read our privacy notice
+                </span>
             </summary>
-            <div class="panel">
+            <div class="govuk-details__text">
                 @Html.Partial("_IwsStandardDataNotice")
             </div>
         </details>
     </div>
     
     <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.TermsAndConditions)">
-        <fieldset>
-            <div>@Html.Gds().ValidationMessageFor(m => m.TermsAndConditions)</div>
-            <div class="multiple-choice">
-                @Html.CheckBoxFor(m => m.TermsAndConditions)
-                <label for="@Html.IdFor(m => m.TermsAndConditions)">
-                    @DisclaimerResources.Accept
-                </label>
+        <fieldset class="govuk-fieldset">
+            <div class="govuk-checkboxes" data-module="govuk-checkboxes">
+                <div>@Html.Gds().ValidationMessageFor(m => m.TermsAndConditions)</div>
+                <div class="multiple-choice govuk-checkboxes__item">
+                    @Html.CheckBoxFor(m => m.TermsAndConditions, new { @class="govuk-checkboxes__input"})
+                    <label class="govuk-label govuk-checkboxes__label" for="@Html.IdFor(m => m.TermsAndConditions)">
+                        @DisclaimerResources.Accept
+                    </label>
+                </div>
             </div>
         </fieldset>
     </div>

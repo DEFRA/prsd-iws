@@ -5,19 +5,21 @@
 <div>
     <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.PossibleCodes)">
         @Html.Gds().ValidationMessageFor(m => m.PossibleCodes)
-        <fieldset>
-            @for (int i = 0; i < Model.PossibleCodes.Count; i++)
-            {
-                MvcHtmlString idForThisCheckBox = Html.NameFor(m => m.PossibleCodes[i].Key);
-                @Html.HiddenFor(m => m.PossibleCodes[i].Key)
+        <fieldset class="govuk-fieldset">
+            <div class="govuk-checkboxes" data-module="govuk-checkboxes">
+                @for (int i = 0; i < Model.PossibleCodes.Count; i++)
+                {
+                    MvcHtmlString idForThisCheckBox = Html.NameFor(m => m.PossibleCodes[i].Key);
+                    @Html.HiddenFor(m => m.PossibleCodes[i].Key)
 
-                <div class="multiple-choice">
-                    @Html.CheckBoxFor(m => m.PossibleCodes[i].Value, new { id = idForThisCheckBox })
-                    <label for="@idForThisCheckBox" class="grid-view">
-                        @Html.Raw(Model.DisplayValues[i])
-                    </label>
-                </div>
-            }
+                    <div class="multiple-choice govuk-checkboxes__item">
+                        @Html.CheckBoxFor(m => m.PossibleCodes[i].Value, new { id = idForThisCheckBox, @class = "govuk-checkboxes__input" })
+                        <label class="govuk-label govuk-checkboxes__label" for="@idForThisCheckBox">
+                            @Html.Raw(Model.DisplayValues[i])
+                        </label>
+                    </div>
+                }
+            </div>
         </fieldset>
     </div>
 </div>

@@ -109,21 +109,21 @@
     var openComments = Model.CommentError != null ? "open = true" : string.Empty;
 
     <div class="govuk-form-group">
-        <details id="comments" role="group" @openComments>
+        <details id="comments" role="group" @openComments class="govuk-details">
             <summary role="button" class="govuk-details__summary">
                 <span class="govuk-details__summary-text">
                     @Resource.CommentSectionHeading
                 </span>
             </summary>
 
-            <div class="panel-border-narrow">
-                <table>
-                    <thead>
-                        <tr>
-                            <th></th>
+            <div class="govuk-details__text">
+                <table class="govuk-table">
+                    <thead class="govuk-table__head">
+                        <tr class="govuk-table__row">
+                            <th scope="col" class="govuk-table__header"></th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody class="govuk-table__body">
 
                         @for (var i = 0; i < Model.Transactions.Count(); i++)
                         {
@@ -134,8 +134,8 @@
 
                             var nonEdit = "class=";
                             var edit = "class=";
-                            <tr>
-                                <td class="nav-bloc">
+                            <tr class="govuk-table__row">
+                                <td class="nav-bloc govuk-table__cell">
                                     @if (i == Model.ErrorCommentId && Model.CommentError != null)
                                     {
                                         edit = edit + @"";

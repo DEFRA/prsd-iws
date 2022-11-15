@@ -1,14 +1,14 @@
 ﻿@model EA.Iws.Web.Areas.NotificationApplication.ViewModels.WasteCodes.EnterWasteCodesViewModel
 
 <div class="wastecode-block">
-    
+
     <div class="form-group-compound @Html.Gds().FormGroupClass(m => m.SelectedCode)">
         @Html.Gds().LabelFor(m => m.SelectedCode, false)
         @Html.Gds().ValidationMessageFor(m => m.SelectedCode)
-        @Html.Gds().DropDownListFor(m => m.SelectedCode, Model.Codes, string.Empty, new { title="code list", tabindex = 1 })
+        @Html.Gds().DropDownListFor(m => m.SelectedCode, Model.Codes, string.Empty, new { title = "code list", tabindex = 1 })
         <button type="submit" name="command" value="addcode" tabindex="2" class="govuk-button">Insert this code into table below</button>
     </div>
-    <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.IsNotApplicable)">
+    <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.IsNotApplicable)" style="margin-top: -30px !important">
         <label for="EnterWasteCodesViewModel_IsNotApplicable">
             @Html.Gds().ValidationMessageFor(m => m.IsNotApplicable)
             @Html.CheckBoxFor(m => m.IsNotApplicable)
@@ -16,40 +16,42 @@
         </label>
     </div>
 
-    <table title="Codes with description" id="codeTable">
-        <thead>
-            <tr>
-                <th>Code</th>
-                <th>Description</th>
-                <th></th>
-                <th>Action</th>
+    <table class="govuk-table" title="Codes with description" id="codeTable">
+        <thead class="govuk-table__head">
+            <tr class="govuk-table__row">
+                <th scope="col" class="govuk-table__header">Code</th>
+                <th scope="col" class="govuk-table__header">Description</th>
+                <th scope="col" class="govuk-table__header"></th>
+                <th scope="col" class="govuk-table__header">Action</th>
             </tr>
         </thead>
-        @if (Model.SelectedWasteCodes.Count < 1)
-        {
-            if (Model.IsNotApplicable)
+        <tbody class="govuk-table__body">
+            @if (Model.SelectedWasteCodes.Count < 1)
             {
-                <tr>
-                    <td colspan="4">Not applicable</td>
-                </tr>
-            }
-            else
-            {
-                <tr>
-                    <td colspan="4">Awaiting code...</td>
-                </tr>
-            }
+                if (Model.IsNotApplicable)
+                {
+                    <tr class="govuk-table__row">
+                        <td colspan="4" class="govuk-table__cell">Not applicable</td>
+                    </tr>
+                }
+                else
+                {
+                    <tr class="govuk-table__row">
+                        <td colspan="4" class="govuk-table__cell">Awaiting code...</td>
+                    </tr>
+                }
 
-        }
-        @for (int i = 0; i < Model.SelectedWasteCodes.Count; i++)
-        {
-            var thisCode = Model.WasteCodes.Single(wc => wc.Id == Model.SelectedWasteCodes[i]);
-            <tr>
-                <td>@Html.HiddenFor(m => m.SelectedWasteCodes[i]) @Html.Raw(thisCode.Name)</td>
-                <td>@Html.Raw(thisCode.Description)</td>
-                <td><input name="EnterWasteCodesViewModel.SelectedCodesList[@i].Id" type="hidden" value="@Model.SelectedWasteCodes[i]" /></td>
-                <td><button class="link-submit" type="submit" name="remove" value="@Model.SelectedWasteCodes[i]" title="@Html.Raw(thisCode.Name)">Remove</button></td>
-            </tr>
-        }
+            }
+            @for (int i = 0; i < Model.SelectedWasteCodes.Count; i++)
+            {
+                var thisCode = Model.WasteCodes.Single(wc => wc.Id == Model.SelectedWasteCodes[i]);
+                <tr class="govuk-table__row">
+                    <td class="govuk-table__cell">@Html.HiddenFor(m => m.SelectedWasteCodes[i]) @Html.Raw(thisCode.Name)</td>
+                    <td class="govuk-table__cell">@Html.Raw(thisCode.Description)</td>
+                    <td class="govuk-table__cell"><input name="EnterWasteCodesViewModel.SelectedCodesList[@i].Id" type="hidden" value="@Model.SelectedWasteCodes[i]" /></td>
+                    <td class="govuk-table__cell"><button class="link-submit govuk-link" type="submit" name="remove" value="@Model.SelectedWasteCodes[i]" title="@Html.Raw(thisCode.Name)">Remove</button></td>
+                </tr>
+            }
+        </tbody>
     </table>
 </div>

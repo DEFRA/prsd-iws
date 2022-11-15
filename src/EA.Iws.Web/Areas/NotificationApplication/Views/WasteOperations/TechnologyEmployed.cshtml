@@ -15,30 +15,32 @@
             <h1 class="govuk-heading-l">@TechnologyEmployedResources.Header</h1>
         </header>
 
-        <div class="form-group @Html.Gds().FormGroupClass(m => m.Details)">
+        <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.Details)">
             @Html.LabelFor(m => m.Details)
             @Html.Gds().ValidationMessageFor(m => m.Details)
             @Html.Gds().HintParagraph(TechnologyEmployedResources.TechnologyHint)
             @Html.TextBoxFor(m => m.Details, new { @class = "govuk-input", @MaxLength = 70, @title = TechnologyEmployedResources.DetailsTitle })
         </div>
 
-        <div class="form-group @Html.Gds().FormGroupClass(m => m.FurtherDetails)">
+        <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.FurtherDetails)">
             @Html.Gds().LabelFor(m => m.FurtherDetails)
             @Html.Gds().HintParagraph(@TechnologyEmployedResources.FurtherDetailsDescription)
             @Html.Gds().ValidationMessageFor(m => m.FurtherDetails)
-            @Html.TextAreaFor(m => m.FurtherDetails, new { @class = "govuk-textarea", rows = "8",  @title = TechnologyEmployedResources.FurtherDetailsTitle })
+            @Html.TextAreaFor(m => m.FurtherDetails, new { @class = "govuk-textarea", rows = "8", @title = TechnologyEmployedResources.FurtherDetailsTitle })
         </div>
 
-        <div class="form-group @Html.Gds().FormGroupClass(m => m.AnnexProvided)">
-            <div class="multiple-choice">
-                @Html.CheckBoxFor(m => m.AnnexProvided, new { @id = "AnnexProvided" })
-                <label for="AnnexProvided">
-                    @Html.DisplayNameFor(m => m.AnnexProvided)
-                </label>
+        <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.AnnexProvided)">
+            <div class="govuk-checkboxes" data-module="govuk-checkboxes">
+                <div class="multiple-choice govuk-checkboxes__item">
+                    @Html.CheckBoxFor(m => m.AnnexProvided, new { @id = "AnnexProvided", @class = "govuk-checkboxes__input" })
+                    <label class="govuk-label govuk-checkboxes__label" for="AnnexProvided">
+                        @Html.DisplayNameFor(m => m.AnnexProvided)
+                    </label>
+                </div>
             </div>
         </div>
 
-        <div class="form-group">
+        <div class="govuk-form-group">
             <input type="submit" class="govuk-button" value="@Constants.ContinueButtonText" />
         </div>
     </div>

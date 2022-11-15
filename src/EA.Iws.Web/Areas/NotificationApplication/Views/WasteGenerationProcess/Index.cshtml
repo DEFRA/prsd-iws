@@ -18,13 +18,15 @@
                 @Html.TextAreaFor(m => m.ProcessDescription, new { @id = "other-label", @class = "govuk-textarea full-width", @rows = 10, @title = WasteGenerationProcessResources.ProcessDescription })
             </div>
             <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.IsDocumentAttached)">
-                <fieldset>
-                    <div>@Html.Gds().ValidationMessageFor(m => m.IsDocumentAttached)</div>
-                    <div class="multiple-choice">
-                        @Html.CheckBoxFor(m => m.IsDocumentAttached, new { @id = "checkbox-1" })
-                        <label for="checkbox-1">
-                            @WasteGenerationProcessResources.Detail
-                        </label>
+                <fieldset class="govuk-fieldset">
+                    <div class="govuk-checkboxes" data-module="govuk-checkboxes">
+                        <div>@Html.Gds().ValidationMessageFor(m => m.IsDocumentAttached)</div>
+                        <div class="multiple-choice govuk-checkboxes__item">
+                            @Html.CheckBoxFor(m => m.IsDocumentAttached, new { @id = "checkbox-1", @class="govuk-checkboxes__input" })
+                            <label class="govuk-label govuk-checkboxes__label" for="checkbox-1">
+                                @WasteGenerationProcessResources.Detail
+                            </label>
+                        </div>
                     </div>
                 </fieldset>
             </div>

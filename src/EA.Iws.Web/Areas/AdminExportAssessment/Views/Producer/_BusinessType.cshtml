@@ -45,10 +45,13 @@
             @Html.Gds().ValidationMessageFor(m => m.Business.RegistrationNumber)
             @Html.Gds().TextBoxFor(m => m.Business.RegistrationNumber)
 
-            <details data-target="companies-house-number" class="margin-top-15">
-                <summary>
-                    <h2 class="summary heading-xsmall">@BusinessResources.WhereToFindCompanyHouse</h2></summary>
-                <div class="panel">
+            <details data-target="companies-house-number" class="govuk-details" data-module="govuk-details">
+                <summary class="govuk-details__summary">
+                    <span class="govuk-details__summary-text">
+                        @BusinessResources.WhereToFindCompanyHouse
+                    </span>
+                </summary>
+                <div class="govuk-details__text">
                     <p>
                         @Html.Raw(BusinessResources.CompanyHouseDescription)
                     </p>

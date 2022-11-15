@@ -26,9 +26,13 @@
         <div>@Resource.ReferenceAnnexesTitle</div>
 
         <div class="govuk-form-group">
-            <details>
-                <summary><h2 class="summary heading-xsmall">@Resource.ReferenceAnnexesDisclosureTitle</h2></summary>
-                <div class="panel">
+            <details class="govuk-details" data-module="govuk-details">
+                <summary class="govuk-details__summary">
+                    <span class="govuk-details__summary-text">
+                        @Resource.ReferenceAnnexesDisclosureTitle
+                    </span>
+                </summary>
+                <div class="govuk-details__text">
                     <ol class="list list-number">
                         <li>
                             @Resource.FirstListItemA
