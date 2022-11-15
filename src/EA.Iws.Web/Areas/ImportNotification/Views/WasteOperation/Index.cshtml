@@ -24,7 +24,7 @@
                     var id = Model.Codes[i].Key.ToString();
                     @Html.HiddenFor(m => m.Codes[i].Key)
 
-                    <div class="govuk-checkboxes__item">
+                    <div class="multiple-choice govuk-checkboxes__item">
                         @Html.CheckBoxFor(m => m.Codes[i].Value, new { id, @class = "govuk-checkboxes__input" })
                         <label class="govuk-label govuk-checkboxes__label" for="@id">
                             @Html.Raw(Model.CodeDisplay[i])

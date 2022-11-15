@@ -31,17 +31,17 @@
 {
     @Html.Gds().ValidationSummary()
     <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.CustomsOfficeRequired)">
-        <div class="govuk-radios__item" data-target="yes-message">
+        <div class="govuk-radios__item customs-office-required-radio-button" data-target="yes-message">
             @Html.RadioButtonFor(m => m.CustomsOfficeRequired, true, new { @class = "govuk-radios__input", @id = "rdoYes" })
             <label class="govuk-label govuk-radios__label" for="rdoYes">
                 @ExitCustomsOfficeResources.CustomsRequiredText
             </label>
         </div>
-        <div class="panel hide-for-initial-load @(Model.CustomsOfficeRequired == true ? "js-hidden" : "js-hidden")" id="other-description">
+        <div class="panel hide-for-initial-load @(Model.CustomsOfficeRequired == true ? "" : "js-hidden")" id="other-description">
             @Html.AntiForgeryToken()
             @Html.Partial("~/Areas/NotificationApplication/Views/CustomsOffice/_Index.cshtml", Model)
         </div>
-        <div class="govuk-radios__item" data-target="no-message">
+        <div class="govuk-radios__item customs-office-not-required-radio-button" data-target="no-message">
             @Html.RadioButtonFor(m => m.CustomsOfficeRequired, false, new { @class = "govuk-radios__input", @id = "rdoNo" })
             <label class="govuk-label govuk-radios__label" for="rdoNo">
                 @ExitCustomsOfficeResources.CustomsNotRequiredText

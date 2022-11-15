@@ -18,20 +18,22 @@
     <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.PhysicalCharacteristics)">
         @Html.Gds().ValidationMessageFor(m => m.PhysicalCharacteristics)
         @Html.EditorFor(m => m.PhysicalCharacteristics)
-        <fieldset>
-            <div id="list-item-other-container" class="govuk-form-group form-group-compound">
-                <div class="multiple-choice" data-target="other-option">
-                    @Html.CheckBoxFor(m => m.OtherSelected, new { id = "other-option-check" })
-                    <label for="other-option-check">
-                        @((int)PhysicalCharacteristicType.Other) - @PhysicalCharacteristicsResources.Other
-                    </label>
+        <fieldset class="govuk-fieldset">
+            <div class="govuk-checkboxes" data-module="govuk-checkboxes">
+                <div id="list-item-other-container" class="govuk-form-group form-group-compound">
+                    <div class="multiple-choice govuk-checkboxes__item" data-target="other-option">
+                        @Html.CheckBoxFor(m => m.OtherSelected, new { id = "other-option-check", @class = "govuk-checkboxes__input" })
+                        <label class="govuk-label govuk-checkboxes__label" for="other-option-check">
+                            @((int)PhysicalCharacteristicType.Other) - @PhysicalCharacteristicsResources.Other
+                        </label>
+                    </div>
                 </div>
-            </div>
-            <div class="panel @(Model.OtherSelected ? "" : "js-hidden")" id="other-option">
-                <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.OtherDescription)">
-                    <label class="form-label" for="OtherDescription">@PhysicalCharacteristicsResources.OtherRequired</label>
-                    @Html.Gds().ValidationMessageFor(m => m.OtherDescription)
-                    @Html.EditorFor(m => m.OtherDescription, new { @id = "other-label" })
+                <div class="panel @(Model.OtherSelected ? "" : "js-hidden")" id="other-option">
+                    <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.OtherDescription)">
+                        <label class="govuk-label" for="OtherDescription">@PhysicalCharacteristicsResources.OtherRequired</label>
+                        @Html.Gds().ValidationMessageFor(m => m.OtherDescription)
+                        @Html.Gds().TextBoxFor(m => m.OtherDescription, new { @id = "other-label" })
+                    </div>
                 </div>
             </div>
         </fieldset>

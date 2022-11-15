@@ -19,45 +19,44 @@
 
     <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.PackagingTypes)">
         @Html.Gds().ValidationMessageFor(m => m.PackagingTypes)
-        <fieldset>
-
+        <fieldset class="govuk-fieldset">
             <legend class="visuallyhidden">@PackagingTypesResources.HeaderDescription</legend>
+            <div class="govuk-checkboxes" data-module="govuk-checkboxes">
+                @for (int i = 0; i < Model.PackagingTypes.PossibleValues.Count; i++)
+                {
+                    MvcHtmlString idForThisCheckBox = Html.NameFor(m => m.PackagingTypes.PossibleValues[i]);
 
-            @for (int i = 0; i < Model.PackagingTypes.PossibleValues.Count; i++)
-            {
-                MvcHtmlString idForThisCheckBox = Html.NameFor(m => m.PackagingTypes.PossibleValues[i]);
+                    <div class="multiple-choice govuk-checkboxes__item">
+                        @Html.CheckBoxFor(m => m.PackagingTypes.PossibleValues[i].Selected, new { id = idForThisCheckBox, @class = "govuk-checkboxes__input" })
+                        <label class="govuk-label govuk-checkboxes__label" for="@idForThisCheckBox">
+                            @if (Model.PackagingTypes.ShowEnumValue)
+                            {
+                                @Html.DisplayFor(m => m.PackagingTypes.PossibleValues[i].Value)
+                                @Html.Raw(" - ")
+                            }
+                            @Html.DisplayFor(m => m.PackagingTypes.PossibleValues[i].Text)
+                        </label>
+                    </div>
 
-                <div class="multiple-choice">
-                    @Html.CheckBoxFor(m => m.PackagingTypes.PossibleValues[i].Selected, new { id = idForThisCheckBox })
-                    <label for="@idForThisCheckBox">
-                        @if (Model.PackagingTypes.ShowEnumValue)
-                        {
-                            @Html.DisplayFor(m => m.PackagingTypes.PossibleValues[i].Value)
-                            @Html.Raw(" - ")
-                        }
-                        @Html.DisplayFor(m => m.PackagingTypes.PossibleValues[i].Text)
+                    @Html.HiddenFor(m => m.PackagingTypes.PossibleValues[i].Text)
+                    @Html.HiddenFor(m => m.PackagingTypes.PossibleValues[i].Value)
+                }
+
+                <div class="multiple-choice govuk-checkboxes__item" data-target="other-option">
+                    @Html.CheckBoxFor(m => m.OtherSelected, new { id = "other-option-check", @class = "govuk-checkboxes__input" })
+                    <label class="govuk-label govuk-checkboxes__label" for="other-option-check">
+                        @((int)PackagingType.Other) - @PackagingTypesResources.Other
                     </label>
                 </div>
 
-                @Html.HiddenFor(m => m.PackagingTypes.PossibleValues[i].Text)
-                @Html.HiddenFor(m => m.PackagingTypes.PossibleValues[i].Value)
-            }
-
-            <div class="multiple-choice" data-target="other-option">
-                @Html.CheckBoxFor(m => m.OtherSelected, new { id = "other-option-check" })
-                <label for="other-option-check">
-                    @((int)PackagingType.Other) - @PackagingTypesResources.Other
-                </label>
-            </div>
-
-            <div class="panel @(Model.OtherSelected ? "" : "js-hidden")" id="other-option">
-                <label class="form-label" for="other-label">@PackagingTypesResources.Other</label>
-                <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.OtherDescription)">
-                    @Html.Gds().ValidationMessageFor(m => m.OtherDescription)
-                    @Html.Gds().TextBoxFor(m => m.OtherDescription, new { @id = "other-label" })
+                <div class="panel @(Model.OtherSelected ? "" : "js-hidden")" id="other-option">
+                    <label class="form-label" for="other-label">@PackagingTypesResources.Other</label>
+                    <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.OtherDescription)">
+                        @Html.Gds().ValidationMessageFor(m => m.OtherDescription)
+                        @Html.Gds().TextBoxFor(m => m.OtherDescription, new { @id = "other-label" })
+                    </div>
                 </div>
             </div>
-
         </fieldset>
 
     </div>
