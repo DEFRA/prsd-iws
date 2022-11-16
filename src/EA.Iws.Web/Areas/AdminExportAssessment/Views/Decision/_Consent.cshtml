@@ -1,13 +1,13 @@
 ﻿@model EA.Iws.Web.Areas.AdminExportAssessment.ViewModels.Decision.NotificationAssessmentDecisionViewModel
 @using Resourse = EA.Iws.Web.Areas.AdminExportAssessment.Views.Decision.DecisionResources
 
-<div class="form-group">
+<div class="govuk-form-group">
     @Resourse.MultipleDateWarning
 </div>
 
 <h2 class="heading-medium">Date decision made</h2>
 
-<div class="form-group @Html.Gds().FormGroupClass(m => m.ConsentedDate)  @Html.Gds().FormGroupClass(m => m.ConsentedDate.Day) @Html.Gds().FormGroupClass(m => m.ConsentedDate.Year)">
+<div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.ConsentedDate)  @Html.Gds().FormGroupClass(m => m.ConsentedDate.Day) @Html.Gds().FormGroupClass(m => m.ConsentedDate.Year)">
     <fieldset>
         <div class="form-date">
             @Html.Gds().ValidationMessageFor(m => m.ConsentedDate)
@@ -18,7 +18,7 @@
 
 <h2 class="heading-medium">Valid from</h2>
 
-<div class="form-group @Html.Gds().FormGroupClass(m => m.ConsentValidFromDate)  @Html.Gds().FormGroupClass(m => m.ConsentValidFromDate.Day) @Html.Gds().FormGroupClass(m => m.ConsentValidFromDate.Year)">
+<div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.ConsentValidFromDate)  @Html.Gds().FormGroupClass(m => m.ConsentValidFromDate.Day) @Html.Gds().FormGroupClass(m => m.ConsentValidFromDate.Year)">
     <fieldset>
         <div class="form-date">
             @Html.Gds().ValidationMessageFor(m => m.ConsentValidFromDate)
@@ -29,7 +29,7 @@
 
 <h2 class="heading-medium">Valid to</h2>
 
-<div class="form-group @Html.Gds().FormGroupClass(m => m.ConsentValidToDate)  @Html.Gds().FormGroupClass(m => m.ConsentValidToDate.Day) @Html.Gds().FormGroupClass(m => m.ConsentValidToDate.Year)">
+<div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.ConsentValidToDate)  @Html.Gds().FormGroupClass(m => m.ConsentValidToDate.Day) @Html.Gds().FormGroupClass(m => m.ConsentValidToDate.Year)">
     <fieldset>
         <div class="form-date">
             @Html.Gds().ValidationMessageFor(m => m.ConsentValidToDate)
@@ -40,7 +40,7 @@
 
 <h2 class="heading-medium">Conditions of consent (optional)</h2>
 
-<div class="form-group @Html.Gds().FormGroupClass(m =>m.ConsentConditions)">
+<div class="govuk-form-group @Html.Gds().FormGroupClass(m =>m.ConsentConditions)">
     @Html.Gds().ValidationMessageFor(m => m.ConsentConditions)
-    @Html.TextAreaFor(m => m.ConsentConditions, new { @class = "text-area two-thirds" })
+    @Html.TextAreaFor(m => m.ConsentConditions, new { @class = "govuk-textarea", rows = 5 })
 </div>

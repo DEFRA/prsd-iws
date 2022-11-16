@@ -16,7 +16,7 @@
             </th>
             @if (ViewBag.CanEditNotification)
             {
-                <th class="change">
+                <th class="govuk-link change-link" >
                     <a href="@Url.Action("Index", "WasteRecovery", new { id, backToOverview = true })">
                         Change
                         <span class="screen-reader-text">Waste recovery</span>

@@ -228,7 +228,7 @@
 
                     <div class="column-half">
                         <div class="govuk-form-group">
-                            @Html.DropDownListFor(m => m.SelectedMovementStatus, Model.MovementStatuses, new { @class = "form-control view-by" })
+                            @Html.Gds().DropDownListFor(m => m.SelectedMovementStatus, Model.MovementStatuses, new { @class = "govuk-select" })
                             <button id="updateStatus" class="govuk-button" type="submit">Update</button>
                         </div>
                     </div>

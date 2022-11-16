@@ -131,18 +131,20 @@
     </table>
     <div id="cookieSettings">
         <h2 class="heading-small">Do you want to accept analytics cookies?</h2>
-        <fieldset>
-            <div class="multiple-choice">
-                <input type="radio" id="cookieChoiceYes" name="cookieChoices" value="True">
-                <label for="yes">
-                    Yes
-                </label>
-            </div>
-            <div class="multiple-choice">
-                <input type="radio" id="cookieChoiceNo" name="cookieChoices" value="False">
-                <label for="no">
-                    No
-                </label>
+        <fieldset class="govuk-fieldset">
+            <div class="govuk-radios" data-module="govuk-radios">
+                <div class="govuk-radios__item">
+                    <input type="radio" id="cookieChoiceYes" name="cookieChoices" value="True" class="govuk-radios__input">
+                    <label class="govuk-label govuk-radios__label" for="yes">
+                        Yes
+                    </label>
+                </div>
+                <div class="govuk-radios__item">
+                    <input type="radio" id="cookieChoiceNo" name="cookieChoices" value="False" class="govuk-radios__input">
+                    <label class="govuk-label govuk-radios__label" for="no">
+                        No
+                    </label>
+                </div>
             </div>
         </fieldset>
     </div>

@@ -84,7 +84,7 @@ else
                 <div class="govuk-form-group">
                     @Html.Label(@HomeResources.FilterByNotificationStatus)
                     <br/>
-                    @Html.Gds().DropDownListFor(m => m.SelectedNotificationStatus, Model.NotificationStatuses, new { @class = "form-control view-by" })
+                    @Html.Gds().DropDownListFor(m => m.SelectedNotificationStatus, Model.NotificationStatuses, new { @class = "govuk-select" })
                     <button id="updateStatus" class="govuk-button" type="submit">@HomeResources.Update</button>
                 </div>
             }
