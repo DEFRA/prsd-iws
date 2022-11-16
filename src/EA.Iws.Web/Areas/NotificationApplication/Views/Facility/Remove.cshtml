@@ -27,7 +27,7 @@ else
     <p>@ViewBag.Error</p>
     <p>
         @Html.ActionLink(string.Format(RemoveFacilityResources.ChangeSite, Model.NotificationType.ToString().ToLowerInvariant()), "SiteOfTreatment", "Facility",
-            new { id = Model.NotificationId, backToList = true, backToOverview = ViewBag.BackToOverview }, new { @class = "button" })
+            new { id = Model.NotificationId, backToList = true, backToOverview = ViewBag.BackToOverview }, new { @class = "govuk-button" })
     </p>
 }
 

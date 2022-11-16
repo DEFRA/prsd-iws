@@ -51,9 +51,9 @@
 
 @if (ViewBag.BackToOverview)
 {
-    @Html.ActionLink(Constants.ContinueButtonText, "Index", "Home", new { id = Model.NotificationId }, new { @class = "button" })
+    @Html.ActionLink(Constants.ContinueButtonText, "Index", "Home", new { id = Model.NotificationId }, new { @class = "govuk-button" })
 }
 else
 {
-    @Html.ActionLink(Constants.ContinueButtonText, "SiteOfExport", "Producer", new { id = Model.NotificationId }, new { @class = "button" })
+    @Html.ActionLink(Constants.ContinueButtonText, "SiteOfExport", "Producer", new { id = Model.NotificationId }, new { @class = "govuk-button" })
 }

@@ -26,7 +26,7 @@ else
     <p>@ViewBag.Error</p>
     <p>
         @Html.ActionLink(RemoveProducerResources.ChangeSiteOfExport, "SiteOfExport", "Producer",
-        new { id = Model.NotificationId, backToList = true, backToOverview = ViewBag.BackToOverview }, new { @class = "button" })
+        new { id = Model.NotificationId, backToList = true, backToOverview = ViewBag.BackToOverview }, new { @class = "govuk-button" })
     </p>
 }
 

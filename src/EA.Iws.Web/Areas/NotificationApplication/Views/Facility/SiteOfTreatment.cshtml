@@ -79,17 +79,17 @@ else
           new { id = Model.NotificationId, backToOverview = ViewBag.BackToOverview }, null)</p>
     if (ViewBag.BackToOverview)
     {
-        @Html.ActionLink(Constants.ContinueButtonText, "Index", "Home", new { id = Model.NotificationId }, new { @class = "button" })
+        @Html.ActionLink(Constants.ContinueButtonText, "Index", "Home", new { id = Model.NotificationId }, new { @class = "govuk-button" })
     }
     else
     {
         if (Model.NotificationType == NotificationType.Recovery)
         {
-            @Html.ActionLink(Constants.ContinueButtonText, "RecoveryPreconsent", "Facility", new { id = Model.NotificationId }, new { @class = "button" })
+            @Html.ActionLink(Constants.ContinueButtonText, "RecoveryPreconsent", "Facility", new { id = Model.NotificationId }, new { @class = "govuk-button" })
         }
         else
         {
-            @Html.ActionLink(Constants.ContinueButtonText, "OperationCodes", "WasteOperations", new { id = Model.NotificationId }, new { @class = "button" })
+            @Html.ActionLink(Constants.ContinueButtonText, "OperationCodes", "WasteOperations", new { id = Model.NotificationId }, new { @class = "govuk-button" })
         }
     }
 }
