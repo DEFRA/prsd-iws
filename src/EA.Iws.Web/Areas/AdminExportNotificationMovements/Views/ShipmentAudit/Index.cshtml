@@ -19,12 +19,12 @@
                 @Html.AntiForgeryToken()
                 @Html.Gds().ValidationSummary()
                 @Html.HiddenFor(m => m.NotificationId)
-
-                <div>
-                    @Resource.FilterBy
-                </div>
-                <div>
-                    @Html.Gds().DropDownListFor(m => m.SelectedFilter, Model.FilterTerms, new { @id = "filterSelectList" })
+                
+                <div class="govuk-form-group">
+                    <label class="govuk-label" for="filterSelectList">
+                        @Resource.FilterBy
+                    </label>
+                    @Html.Gds().DropDownListFor(m => m.SelectedFilter, Model.FilterTerms, new { @id = "filterSelectList", @class = "govuk-select" })
                 </div>
 
                 <br />

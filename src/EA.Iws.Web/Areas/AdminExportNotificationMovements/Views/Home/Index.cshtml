@@ -121,7 +121,7 @@
                 @Html.AntiForgeryToken()
                 <div class="column-two-thirds">
                     <div class="govuk-form-group">
-                        @Html.DropDownListFor(m => m.SelectedMovementStatus, Model.MovementStatuses, new { @class = "form-control view-by" })
+                        @Html.DropDownListFor(m => m.SelectedMovementStatus, Model.MovementStatuses, new { @class = "govuk-select" })
                         <button id="updateStatus" class="govuk-button" type="submit">@Resources.Update</button>
                     </div>
                 </div>

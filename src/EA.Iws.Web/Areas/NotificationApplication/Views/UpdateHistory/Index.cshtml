@@ -31,7 +31,7 @@
                 @Html.HiddenFor(m => m.PageNumber)
 
                 <div class="govuk-form-group">
-                    @Html.DropDownListFor(m => m.SelectedScreen, Model.FilterTerms, new { @class = "form-control view-by" })
+                    @Html.Gds().DropDownListFor(m => m.SelectedScreen, Model.FilterTerms, new { @class = "govuk-select" })
                 </div>
                 if (Model.SelectedScreen == "date")
                 {
@@ -46,15 +46,15 @@
                                 @Html.Gds().ValidationMessageFor(m => m.StartYear)
                                 <div class="govuk-form-group form-group-day">
                                     @Html.Gds().LabelFor(m => m.StartDay)
-                                    @Html.Gds().TextBoxFor(m => m.StartDay)
+                                    @Html.Gds().TextBoxFor(m => m.StartDay, useHalfWidth: false)
                                 </div>
                                 <div class="govuk-form-group form-group-month">
                                     @Html.Gds().LabelFor(m => m.StartMonth)
-                                    @Html.Gds().TextBoxFor(m => m.StartMonth)
+                                    @Html.Gds().TextBoxFor(m => m.StartMonth, useHalfWidth: false)
                                 </div>
                                 <div class="govuk-form-group form-group-year">
                                     @Html.Gds().LabelFor(m => m.StartYear)
-                                    @Html.Gds().TextBoxFor(m => m.StartYear)
+                                    @Html.Gds().TextBoxFor(m => m.StartYear, useHalfWidth: false)
                                 </div>
                             </div>
                         </fieldset>
@@ -71,15 +71,15 @@
                                 @Html.Gds().ValidationMessageFor(m => m.EndYear)
                                 <div class="govuk-form-group form-group-day">
                                     @Html.Gds().LabelFor(m => m.EndDay)
-                                    @Html.Gds().TextBoxFor(m => m.EndDay)
+                                    @Html.Gds().TextBoxFor(m => m.EndDay, useHalfWidth: false)
                                 </div>
                                 <div class="govuk-form-group form-group-month">
                                     @Html.Gds().LabelFor(m => m.EndMonth)
-                                    @Html.Gds().TextBoxFor(m => m.EndMonth)
+                                    @Html.Gds().TextBoxFor(m => m.EndMonth, useHalfWidth: false)
                                 </div>
                                 <div class="govuk-form-group form-group-year">
                                     @Html.Gds().LabelFor(m => m.EndYear)
-                                    @Html.Gds().TextBoxFor(m => m.EndYear)
+                                    @Html.Gds().TextBoxFor(m => m.EndYear, useHalfWidth: false)
                                 </div>
                             </div>
                         </fieldset>
@@ -93,46 +93,44 @@
     </div>
     if (Model.UpdateHistoryItems.Count > 0)
     {
-
-        <table class="odd-table" title="@Resource.TitleNotificationUpdateHistorySearchResults">
+        <table class="odd-table govuk-table" title="@Resource.TitleNotificationUpdateHistorySearchResults">
             <caption class="visuallyhidden">@Resource.TableCaption</caption>
-            <thead>
-                <tr>
-                    <th>
+            <thead class="govuk-table__head">
+                <tr class="govuk-table__row">
+                    <th scope="col" class="govuk-table__header">
                         @Resource.ThName
                     </th>
-                    <th>
+                    <th scope="col" class="govuk-table__header">
                         @Resource.ThDate
                     </th>
-                    <th>
+                    <th scope="col" class="govuk-table__header">
                         @Resource.ThTime
                     </th>
-                    <th>
+                    <th scope="col" class="govuk-table__header">
                         @Resource.ThInformationChange
                     </th>
-                    <th>
+                    <th scope="col" class="govuk-table__header">
                         @Resource.ThTypeOfChange
                     </th>
                 </tr>
             </thead>
-
-            <tbody>
+            <tbody class="govuk-table__body">
                 @for (int i = 0; i < Model.UpdateHistoryItems.Count; i++)
                 {
-                    <tr>
-                        <td>
+                    <tr class="govuk-table__row">
+                        <td class="govuk-table__cell">
                             @Model.UpdateHistoryItems[i].UserName
                         </td>
-                        <td>
+                        <td class="govuk-table__cell">
                             @DisplayDate(@Model.UpdateHistoryItems[i].DateAdded)
                         </td>
-                        <td>
+                        <td class="govuk-table__cell">
                             @DisplayTime(@Model.UpdateHistoryItems[i].DateAdded)
                         </td>
-                        <td>
+                        <td class="govuk-table__cell">
                             @Model.UpdateHistoryItems[i].ScreenName
                         </td>
-                        <td>
+                        <td class="govuk-table__cell">
                             @Model.UpdateHistoryItems[i].AuditType
                         </td>
                     </tr>
@@ -142,7 +140,6 @@
     }
     else
     {
-
         <div class="margin-bottom-30 margin-top-30 ">
             <h2 style="text-align:center;">No updates available</h2>
         </div>
@@ -156,10 +153,7 @@ else
 }
 @if (Model.UpdateHistoryItems.Count > 0)
 {
-    @Html.Pager(Model.PageSize, Model.PageNumber, Model.NumberOfFilterdNotificationAudits).Options(o =>
-{
-    o.AddRouteValue("filter", Model.SelectedScreen);
-})
+    @Html.Pager(Model.PageSize, Model.PageNumber, Model.NumberOfFilterdNotificationAudits).Options(o => { o.AddRouteValue("filter", Model.SelectedScreen); })
 }
 
 @Html.ActionLink("Go to Notification Overview", "Index", "Home", new { @Model.NotificationId, backToOverview = true }, null)

@@ -2151,3 +2151,9 @@ textarea {
 .submitsidebar {
     background-color: #f8f8f8 !important;
 }
+
+.change-link {
+    text-align: right;
+    font-weight: normal;
+    vertical-align: bottom;
+}
