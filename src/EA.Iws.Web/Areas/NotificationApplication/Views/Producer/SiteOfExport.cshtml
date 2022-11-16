@@ -63,10 +63,10 @@ else
     <p>@Html.ActionLink(SiteOfExportResources.BackToProducers, "List", "Producer", new { id = Model.NotificationId, backToOverview = ViewBag.BackToOverview }, null)</p>
     if (ViewBag.BackToOverview)
     {
-        @Html.ActionLink(Constants.ContinueButtonText, "Index", "Home", new { id = Model.NotificationId }, new { @class = "button" })
+        @Html.ActionLink(Constants.ContinueButtonText, "Index", "Home", new { id = Model.NotificationId }, new { @class = "govuk-button" })
     }
     else
     {
-        @Html.ActionLink(Constants.ContinueButtonText, "Index", "Importer", new { id = Model.NotificationId }, new { @class = "button" })
+        @Html.ActionLink(Constants.ContinueButtonText, "Index", "Importer", new { id = Model.NotificationId }, new { @class = "govuk-button" })
     }
 }

@@ -7,7 +7,7 @@
 
 <p>@(string.Format(Resources.TransitStateExitPointChangedDescription, ViewBag.TransitExitPoint)).</p>
 
-@Html.ActionLink(Constants.ContinueOnlyButtonText, "Index", "Overview", routeValues: null, htmlAttributes: new { @class = "button" })
+@Html.ActionLink(Constants.ContinueOnlyButtonText, "Index", "Overview", routeValues: null, htmlAttributes: new { @class = "govuk-button" })
 
 @section menu {
     @Html.Action("ExportNavigation", "Menu", new { area = "Admin", section = ExportNavigationSection.Assessment })

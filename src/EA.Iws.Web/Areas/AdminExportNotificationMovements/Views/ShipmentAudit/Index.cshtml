@@ -55,7 +55,7 @@
 @Html.Partial("_ShipmentAudit", Model.ShipmentAuditModel, new ViewDataDictionary() { { "Filter", Model.SelectedFilter }, { "ShipmentNumber", Model.ShipmentNumber } })
 
 <div class="govuk-form-group">
-	@Html.ActionLink(Resource.ShipmentSummaryLink, "Index", "Home", new { area = "AdminExportNotificationMovements", id = Model.NotificationId }, new { @class = "button"})
+	@Html.ActionLink(Resource.ShipmentSummaryLink, "Index", "Home", new { area = "AdminExportNotificationMovements", id = Model.NotificationId }, new { @class = "govuk-button" })
 </div>
 
 <div class="govuk-form-group">
