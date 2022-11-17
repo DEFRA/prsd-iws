@@ -80,41 +80,40 @@
 
                 <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.OtherCodes[i])">
                     @Html.Gds().ValidationMessageFor(m => m.OtherCodes[i])
-                    
-                    <div><label>Name</label></div>
-                    <span>
-                        <input name="OtherCodes[@i].Constituent" class="govuk-input govuk-input--width-10" value="@Model.OtherCodes[i].Constituent" title=@ConstituentsResources.OtherConstituent id = @idText />
-                        &nbsp;&nbsp;
-                    </span>
 
-                    <span>
+                    <div>
+                        <label class="govuk-label" for="width-20">
+                            Name
+                        </label>
+                        <input name="OtherCodes[@i].Constituent" class="govuk-input govuk-input--width-10" value="@Model.OtherCodes[i].Constituent" title=@ConstituentsResources.OtherConstituent id=@idText />
+                    </div>
+                    <br />
+                    <div>
                         <input name="OtherCodes[@i].MinConcentration" class="govuk-input govuk-input--width-4" placeholder="min %" value="@Model.OtherCodes[i].MinConcentration" title=@ConstituentsResources.MinConstituent />
-                        &nbsp;&nbsp;
-                    </span>
-                    <span>
                         <input name="OtherCodes[@i].MaxConcentration" class="govuk-input govuk-input--width-4" placeholder="max %" value="@Model.OtherCodes[i].MaxConcentration" title=@ConstituentsResources.MaxConstituent />
-                        <input name="OtherCodes[@i].ChemicalCompositionCategory" type="hidden" value="@Model.OtherCodes[i].ChemicalCompositionCategory" />
-                    </span>
-
+                    </div>                    
+                    <input name="OtherCodes[@i].ChemicalCompositionCategory" type="hidden" value="@Model.OtherCodes[i].ChemicalCompositionCategory" />
                 </div>
             }
         </div>
     </div>
 
     <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.FurtherInformation)">
-        <hr/>
+        <hr />
         @Html.Gds().ValidationMessageFor(m => m.FurtherInformation)
         @ConstituentsResources.Header2
         @Html.Gds().HintParagraph(ConstituentsResources.Hint)
         @Html.TextAreaFor(m => m.FurtherInformation, new { @class = "govuk-textarea two-thirds", @title = ConstituentsResources.FurtherInformation, @MaxLength = 256, @rows = 5 })
     </div>
     <div class="govuk-form-group">
-        <fieldset>
-            <div class="multiple-choice">
-                @Html.CheckBoxFor(m => m.HasAnnex, new { @id = "chkboxFurtherInfo" })
-                <label for="chkboxFurtherInfo">
-                    @ConstituentsResources.Declaration
-                </label>
+        <fieldset class="govuk-fieldset">
+            <div class="govuk-checkboxes" data-module="govuk-checkboxes">
+                <div class="multiple-choice govuk-checkboxes__item">
+                    @Html.CheckBoxFor(m => m.HasAnnex, new { @id = "chkboxFurtherInfo", @class = "govuk-checkboxes__input" })
+                    <label class="govuk-label govuk-checkboxes__label" for="chkboxFurtherInfo">
+                        @ConstituentsResources.Declaration
+                    </label>
+                </div>
             </div>
         </fieldset>
     </div>
