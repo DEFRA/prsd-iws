@@ -22,11 +22,7 @@
     @Html.Gds().HintSpan(BusinessResources.OrgNameHint)
     @if (addressType.HasValue)
     {
-        @Html.Gds().TextBoxFor(m => m.Name, new
-   {
-       data_addressbook_url = Url.Action("Index", "Search", new { area = "AddressBook" }),
-       data_addressbook_type = addressType.Value.ToString()
-   })
+        @Html.Gds().TextBoxFor(m => m.Name, new { data_addressbook_url = Url.Action("Index", "Search", new { area = "AddressBook" }), data_addressbook_type = addressType.Value.ToString() })
     }
     else
     {
