@@ -6,14 +6,16 @@
     @Html.EditorFor(m => m.PrenotificationDate)
 </div>
 
-<div class="form-group @Html.Gds().FormGroupClass(m => m.HasNoPrenotification)">
-    <fieldset>
-        <div>@Html.Gds().ValidationMessageFor(m => m.HasNoPrenotification)</div>
-        <div class="multiple-choice">
-            @Html.CheckBoxFor(m => m.HasNoPrenotification)
-            <label for="@Html.NameFor(m => m.HasNoPrenotification)">
-                @Html.DisplayNameFor(m => m.HasNoPrenotification)
-            </label>
+<div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.HasNoPrenotification)">
+    <fieldset class="govuk-fieldset">
+        <div class="govuk-checkboxes" data-module="govuk-checkboxes">
+            <div>@Html.Gds().ValidationMessageFor(m => m.HasNoPrenotification)</div>
+            <div class="govuk-checkboxes__item">
+                @Html.Gds().CheckBoxFor(m => m.HasNoPrenotification, new { @class = "govuk-checkboxes__input" })
+                <label class="govuk-label govuk-checkboxes__label" for="@Html.NameFor(m => m.HasNoPrenotification)">
+                    @Html.DisplayNameFor(m => m.HasNoPrenotification)
+                </label>
+            </div>
         </div>
     </fieldset>
 </div>
