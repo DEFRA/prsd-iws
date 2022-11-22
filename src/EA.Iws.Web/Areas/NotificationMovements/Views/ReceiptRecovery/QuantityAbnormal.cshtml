@@ -9,18 +9,18 @@
 
 @helper DisplayMessage()
 {
-string message;
-switch (Model.Tolerance)
-{
-    case QuantityReceivedTolerance.BelowTolerance:
-        message = Resource.BelowTolerance;
-        break;
-    case QuantityReceivedTolerance.AboveTolerance:
-        message = Resource.AboveTolerance;
-        break;
-    default:
-        throw new ArgumentOutOfRangeException();
-}
+    string message;
+    switch (Model.Tolerance)
+    {
+        case QuantityReceivedTolerance.BelowTolerance:
+            message = Resource.BelowTolerance;
+            break;
+        case QuantityReceivedTolerance.AboveTolerance:
+            message = Resource.AboveTolerance;
+            break;
+        default:
+            throw new ArgumentOutOfRangeException();
+    }
 
     <p>@Html.Raw(string.Format(message, string.Format("{0} {1}", Model.Quantity, EnumHelper.GetDisplayName(Model.Unit).ToLower())))</p>
 }
@@ -43,19 +43,21 @@ switch (Model.Tolerance)
     <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.Quantity)">
         @Html.LabelFor(m => m.IsCorrect, new { @class = "form-label-bold" })
         @Html.Gds().ValidationMessageFor(m => m.IsCorrect)
-        <fieldset>
-            <div class="multiple-choice">
-                @Html.RadioButtonFor(m => m.IsCorrect, true, new { id = "yes" })
-                <label for="yes">
-                    @Resource.Confirm
-                </label>
-            </div>
+        <fieldset class="govuk-fieldset">
+            <div class="govuk-radios" data-module="govuk-radios">
+                <div class="govuk-radios__item">
+                    @Html.RadioButtonFor(m => m.IsCorrect, true, new { id = "yes", @class = "govuk-radios__input" })
+                    <label class="govuk-label govuk-radios__label" for="yes">
+                        @Resource.Confirm
+                    </label>
+                </div>
 
-            <div class="multiple-choice" data-target="change-quantity">
-                @Html.RadioButtonFor(m => m.IsCorrect, false, new { id = "no" })
-                <label for="no">
-                    @Resource.Reject
-                </label>
+                <div class="govuk-radios__item" data-target="change-quantity">
+                    @Html.RadioButtonFor(m => m.IsCorrect, false, new { id = "no", @class = "govuk-radios__input" })
+                    <label class="govuk-label govuk-radios__label" for="no">
+                        @Resource.Reject
+                    </label>
+                </div>
             </div>
 
             <div class="panel @(Model.IsCorrect.GetValueOrDefault(true) ? "js-hidden" : "")" id="change-quantity">
