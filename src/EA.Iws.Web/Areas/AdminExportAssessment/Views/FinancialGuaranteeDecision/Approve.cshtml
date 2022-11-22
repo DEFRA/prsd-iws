@@ -22,17 +22,17 @@
     <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.IsBlanketBond)">
         <label class="form-label">@Html.DisplayNameFor(m => m.IsBlanketBond)</label>
         @Html.Gds().ValidationMessageFor(m => m.IsBlanketBond)
-        <div class="govuk-form-group">
-            <div class="multiple-choice" data-target="validToDate">
-                @Html.RadioButtonFor(m => m.IsBlanketBond, false, new { @class = "", @id = "rdoNo" })
-                <label for="rdoNo">
+        <div class="govuk-radios">
+            <div class="govuk-radios__item" data-target="validToDate">
+                @Html.RadioButtonFor(m => m.IsBlanketBond, false, new { @class = "govuk-radios__input", @id = "rdoNo" })
+                <label class="govuk-label govuk-radios__label" for="rdoNo">
                     No
                 </label>
             </div>
 
-            <div class="multiple-choice">
-                @Html.RadioButtonFor(m => m.IsBlanketBond, true, new { @class = "", @id = "rdoYes" })
-                <label for="rdoYes">
+            <div class="govuk-radios__item">
+                @Html.RadioButtonFor(m => m.IsBlanketBond, true, new { @class = "govuk-radios__input", @id = "rdoYes" })
+                <label class="govuk-label govuk-radios__label" for="rdoYes">
                     Yes
                 </label>
             </div>
