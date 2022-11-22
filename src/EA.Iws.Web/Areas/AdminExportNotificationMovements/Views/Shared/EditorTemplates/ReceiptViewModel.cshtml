@@ -12,31 +12,32 @@
 
     <div class="govuk-form-group">
         @Html.Label(@Resource.ShipmentAcceptedLable, new { @class = "form-label-bold" })
+        <div class="govuk-radios" data-module="govuk-radios">
+            <div class="govuk-radios__item">
+                @Html.RadioButtonFor(m => m.ShipmentTypes, ShipmentType.Accepted, new { id = "Accepted", @checked = true, @class = "govuk-radios__input" })
+                <label class="govuk-label govuk-radios__label" for="Accepted">
+                    Yes
+                </label>
+            </div>
 
-        <div class="multiple-choice">
-            @Html.RadioButtonFor(m => m.ShipmentTypes, ShipmentType.Accepted, new { id = "Accepted", @checked = true })
-            <label for="Accepted">
-                Yes
-            </label>
-        </div>
+            <div class="govuk-radios__item">
+                @Html.RadioButtonFor(m => m.ShipmentTypes, ShipmentType.Partially, new { id = "Partially", @class = "govuk-radios__input" })
+                <label class="govuk-label govuk-radios__label" for="Partially">
+                    Partially
+                </label>
+            </div>
 
-        <div class="multiple-choice">
-            @Html.RadioButtonFor(m => m.ShipmentTypes, ShipmentType.Partially, new { id = "Partially" })
-            <label for="Partially">
-                Partially
-            </label>
-        </div>
-
-        <div class="multiple-choice">
-            @Html.RadioButtonFor(m => m.ShipmentTypes, ShipmentType.Rejected, new { id = "Rejected" })
-            <label for="Rejected">
-                No
-            </label>
+            <div class="govuk-radios__item">
+                @Html.RadioButtonFor(m => m.ShipmentTypes, ShipmentType.Rejected, new { id = "Rejected", @class = "govuk-radios__input" })
+                <label class="govuk-label govuk-radios__label" for="Rejected">
+                    No
+                </label>
+            </div>
         </div>
 
         @if (Model.ShipmentTypes == ShipmentType.Partially || Model.ShipmentTypes == ShipmentType.Rejected)
         {
-            <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.RejectionReason)" id="dvPartiallyRejectedComments" style="display:block; margin-top:150px;">
+            <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.RejectionReason)" id="dvPartiallyRejectedComments" style="display:block;margin-top:25px">
                 @if (Model.ShipmentTypes == ShipmentType.Partially)
                 {
                     <div id="dvPartiallyRejected" style="display:block">
@@ -71,12 +72,12 @@
                 }
 
                 @Html.Gds().ValidationMessageFor(m => m.RejectionReason)
-                @Html.TextAreaFor(m => m.RejectionReason, new { @class = "form-control-wide", rows = 10 })
+                @Html.TextAreaFor(m => m.RejectionReason, new { @class = "govuk-textarea", rows = 10 })
             </div>
         }
         else
         {
-            <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.RejectionReason)" id="dvPartiallyRejectedComments" style="display:none;  margin-top:150px;">
+            <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.RejectionReason)" id="dvPartiallyRejectedComments" style="display: none; margin-top: 25px">
                 <div id="dvPartiallyRejected">
                     @Html.LabelFor(m => m.RejectionReason, new { @class = "form-label-bold" })
                     @Resources.PartiallyRejectionReasonInfomation1
@@ -92,7 +93,7 @@
                 </div>
 
                 @Html.Gds().ValidationMessageFor(m => m.RejectionReason)
-                @Html.TextAreaFor(m => m.RejectionReason, new { @class = "form-control-wide", rows = 10 })
+                @Html.TextAreaFor(m => m.RejectionReason, new { @class = "govuk-textarea", rows = 10 })
             </div>
         }
     </div>

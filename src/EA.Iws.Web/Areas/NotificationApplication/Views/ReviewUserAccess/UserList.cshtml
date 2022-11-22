@@ -12,24 +12,23 @@
 @if (Model != null && Model.SharedUsers.Any())
 {
 	<div class="govuk-form-group">
-		<table title="Carriers">
-			<thead>
-				<tr>
-					<th>@UserListResources.Email</th>
-					<th>@UserListResources.Action</th>
-					<th></th>
+		<table title="Carriers" class="govuk-table">
+			<thead class="govuk-table__head">
+				<tr class="govuk-table__row">
+					<th scope="col" class="govuk-table__header">@UserListResources.Email</th>
+					<th scope="col" class="govuk-table__header">@UserListResources.Action</th>					
 				</tr>
 			</thead>
-			<tbody>
+			<tbody class="govuk-table__body">
 				@for (var i = 0; i < Model.SharedUsers.Count; i++)
 				{
-					<tr>
-						<td>
+					<tr class="govuk-table__row">
+						<td class="govuk-table__cell">
 							@Html.DisplayFor(m => m.SharedUsers[i].Email)
 						</td>
-						<td>
+						<td class="govuk-table__cell">
 							@Html.ActionLink(UserListResources.Remove, "Remove", "ReviewUserAccess",
-                                new { id = Model.SharedUsers[i].NotificationId, sharedId = Model.SharedUsers[i].Id }, null)
+                                new { id = Model.SharedUsers[i].NotificationId, sharedId = Model.SharedUsers[i].Id }, new { title = Model.SharedUsers[i].Email })
 						</td>
 					</tr>
 				}
