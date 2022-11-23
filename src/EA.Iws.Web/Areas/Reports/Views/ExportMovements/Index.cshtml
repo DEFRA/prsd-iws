@@ -36,7 +36,7 @@
             @Resource.OrganistationType
         </div>
         <div>
-            @Html.Gds().DropDownListFor(m => m.SelectedOrganistationFilter, Model.OrganisationTypesSelectList, new { @id = "organisationsSelectList" })
+            @Html.Gds().DropDownListFor(m => m.SelectedOrganistationFilter, Model.OrganisationTypesSelectList, new { @id = "organisationsSelectList", @class = "govuk-select" })
         </div>
     </div>
 

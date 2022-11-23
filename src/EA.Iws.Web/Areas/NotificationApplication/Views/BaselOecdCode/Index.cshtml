@@ -23,7 +23,7 @@
     <div class="form-group-compound @Html.Gds().FormGroupClass(m => m.SelectedCode)">
         @Html.Gds().LabelFor(m => m.SelectedCode, false)
         @Html.Gds().ValidationMessageFor(m => m.SelectedCode)
-        @Html.Gds().DropDownListFor(m => m.SelectedCode, Model.Codes, string.Empty, new { title = BaselOecdCodeResources.CodeList })
+        @Html.Gds().DropDownListFor(m => m.SelectedCode, Model.Codes, string.Empty, new { title = BaselOecdCodeResources.CodeList, data_select_box = "true" })
     </div>
     <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.NotListed)">
         @Html.Gds().ValidationMessageFor(m => m.NotListed)

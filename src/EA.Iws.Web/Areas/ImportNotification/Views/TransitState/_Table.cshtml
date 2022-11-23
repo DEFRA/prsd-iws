@@ -54,32 +54,34 @@
                     <td class="govuk-table__cell">
                         @(Model.TransitStates[i].ExitPoint != null ? Model.TransitStates[i].ExitPoint.Name : string.Empty)
                     </td>
-					<td class="govuk-table__cell">
-						<span style="white-space: nowrap">
-							@Html.ActionLink("Edit", "Edit", new { entityId = Model.TransitStates[i].Id })
-							|
-							<button class="link-submit in-table govuk-link" type="submit" name="deleteId" onclick="deletePost(event)" value="@Model.TransitStates[i].Id">Delete</button>
-						</span>
-					</td>
+                    <td class="govuk-table__cell">
+                        <span style="white-space: nowrap">
+                            @Html.ActionLink("Edit", "Edit", new { entityId = Model.TransitStates[i].Id })
+                            |
+                            <button class="link-submit in-table govuk-link" type="submit" name="deleteId" onclick="deletePost(event)" value="@Model.TransitStates[i].Id">Delete</button>
+                        </span>
+                    </td>
                 </tr>
             }
         </tbody>
     </table>
 }
 
-<div class="form-group">
+<div class="govuk-form-group">
     @Html.ActionLink("Add", "Add")
 </div>
 
 @if (Model.TransitStates.Count == 0)
 {
-    <div class="form-group @Html.Gds().FormGroupClass(m => m.HasNoTransitStates)">
+    <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.HasNoTransitStates)">
         @Html.Gds().ValidationMessageFor(m => m.HasNoTransitStates)
-        <div class="multiple-choice">
-            @Html.CheckBoxFor(m => m.HasNoTransitStates)
-            <label for="HasNoTransitStates">
-                @Resource.Checkbox
-            </label>
+        <div class="govuk-checkboxes" data-module="govuk-checkboxes">
+            <div class="multiple-choice govuk-checkboxes__item">
+                @Html.CheckBoxFor(m => m.HasNoTransitStates, new { @class = "govuk-checkboxes__input" })
+                <label class="govuk-label govuk-checkboxes__label" for="HasNoTransitStates">
+                    @Resource.Checkbox
+                </label>
+            </div>
         </div>
     </div>
 }

@@ -15,7 +15,7 @@
     <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.LocalAreaId)">
         @Html.Gds().LabelFor(m => m.LocalAreaId)
         @Html.Gds().ValidationMessageFor(m => m.LocalAreaId)
-        @Html.Gds().DropDownListFor(m => m.LocalAreaId, Model.Areas, string.Empty, null)
+        @Html.Gds().DropDownListFor(m => m.LocalAreaId, Model.Areas, string.Empty, new { data_select_box = "true" })
     </div>
 
     <div class="govuk-form-group">

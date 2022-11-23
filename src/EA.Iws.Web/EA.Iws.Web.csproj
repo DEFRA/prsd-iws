@@ -400,6 +400,7 @@
     <Content Include="Areas\AdminExportAssessment\Views\Producer\Add.cshtml" />
     <Content Include="Content\iws\_panels.scss" />
     <Content Include="Content\nta-extended.css" />
+    <Content Include="Content\select2\down_arrow.png" />
     <Content Include="Content\select2\select2-spinner.gif" />
     <Content Include="Content\select2\select2.css" />
     <Content Include="Content\select2\select2.png" />
@@ -4263,6 +4264,7 @@
     <EmbeddedResource Include="Areas\AdminExportNotificationMovements\ViewModels\MovementOverride\IndexViewModelResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>IndexViewModelResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\AdminExportNotificationMovements\Views\Cancel\CancelResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

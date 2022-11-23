@@ -65,8 +65,8 @@ function selectAutocompleteData(event, ui) {
         // Select2 changes the way we can access the values of the country.
         var countryInput = $("#Address_CountryId");
         if (countryInput.length !== 0) {
-            $('#Address_CountryId').val(data.AddressData.CountryId);
-            //countryInput.select2().val(data.AddressData.CountryId).trigger("change");
+            //$('#Address_CountryId').val(data.AddressData.CountryId);
+            countryInput.select2().val(data.AddressData.CountryId).trigger("change");
         }
 
         $.deserializeIntoNamedInputs("Address", data.AddressData);

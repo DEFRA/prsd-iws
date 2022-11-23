@@ -21,7 +21,7 @@
                     <div class="form-group @Html.Gds().FormGroupClass(m => m.PaymentMethod)">
                         @Html.Gds().LabelFor(m => m.PaymentMethod)
                         @Html.Gds().ValidationMessageFor(m => m.PaymentMethod)
-                        @Html.Gds().DropDownListFor(m => m.PaymentMethod, Model.PaymentMethodsList, new { @class = "form-control form-control-wide", title = ViewModelResource.PaymentMethod })
+                        @Html.Gds().DropDownListFor(m => m.PaymentMethod, Model.PaymentMethodsList, new { @class = "govuk-select", title = ViewModelResource.PaymentMethod })
                     </div>
                 </div>
             </div>

@@ -26,7 +26,7 @@
                 <tr class="govuk-table__row">
                     <td class="govuk-table__cell" title="@Model.Users[i].Email">@Model.Users[i].FullName</td>
                     <td class="govuk-table__cell">@Model.Users[i].Status</td>
-                    <td class="govuk-table__cell">@Html.DropDownList("Role", Model.GetUserRolesList(Model.Users[i].Role), new { id = string.Format("Role{0}", i) })</td>
+                    <td class="govuk-table__cell">@Html.DropDownList("Role", Model.GetUserRolesList(Model.Users[i].Role), new { id = string.Format("Role{0}", i), @class = "govuk-select" })</td>
                     <td class="govuk-table__cell"><button type="submit" style="width:auto; padding: 5px!important;margin-bottom: 0px!important" class="govuk-button">@Resources.Update</button></td>
                 </tr>
             }

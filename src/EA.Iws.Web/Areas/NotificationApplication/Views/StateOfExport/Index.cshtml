@@ -19,7 +19,7 @@
         @Html.Gds().LabelFor(m => m.EntryOrExitPointId, new { @class = "form-label-bold" })
         @Html.Gds().HintParagraph(StateOfExportResources.Hint)
         @Html.Gds().ValidationMessageFor(m => m.EntryOrExitPointId)
-        @Html.Gds().DropDownListFor(m => m.EntryOrExitPointId, Model.ExitPoints, string.Empty, new { @title = StateOfExportResources.ExitPoint, @class = "form-control view-by" })
+        @Html.Gds().DropDownListFor(m => m.EntryOrExitPointId, Model.ExitPoints, string.Empty, new { @title = StateOfExportResources.ExitPoint, data_select_box = "true" })
         @Html.HiddenFor(m => m.NotificationCompetentAuthority)
     </div>
 
