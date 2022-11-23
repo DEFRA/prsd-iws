@@ -35,7 +35,7 @@
     {
         <div class="govuk-form-group">
             @Html.Gds().ValidationMessageFor(m => m.SelectedDecision)
-            @Html.Gds().DropDownListFor(m => m.SelectedDecision, Model.PossibleDecisions, string.Empty, new { id = "decision-select" })
+            @Html.Gds().DropDownListFor(m => m.SelectedDecision, Model.PossibleDecisions, string.Empty, new { id = "decision-select", @class = "govuk-select" })
         </div>
 
         <div id="@Html.Raw("status" + DecisionType.Withdraw)" class="js-hidden assessment-decision">

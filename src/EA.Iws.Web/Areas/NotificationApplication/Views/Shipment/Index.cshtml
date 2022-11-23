@@ -39,7 +39,7 @@
             <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.Units)">
                 @Html.Gds().LabelFor(m => m.Units)
                 @Html.Gds().ValidationMessageFor(m => m.Units)
-                @Html.Gds().DropDownListFor(m => m.Units, Model.UnitsSelectList)
+                @Html.Gds().DropDownListFor(m => m.Units, Model.UnitsSelectList, new { @class = "govuk-select" })
             </div>
         </div>
     </div>

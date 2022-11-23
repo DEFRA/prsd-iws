@@ -73,11 +73,13 @@
     @Html.EditorFor(m => m.Contact)
 
     <div class="govuk-form-group">
-        <div class="multiple-choice">
-            @Html.CheckBoxFor(m => m.AreMultiple, new { id = "AreMultiple" })
-            <label for="AreMultiple">
-                @Resource.MultipleProducers
-            </label>
+        <div class="govuk-checkboxes" data-module="govuk-checkboxes">
+            <div class="multiple-choice govuk-checkboxes__item">
+                @Html.CheckBoxFor(m => m.AreMultiple, new { id = "AreMultiple", @class = "govuk-checkboxes__input" })
+                <label class="govuk-label govuk-checkboxes__label" for="AreMultiple">
+                    @Resource.MultipleProducers
+                </label>
+            </div>
         </div>
     </div>
 

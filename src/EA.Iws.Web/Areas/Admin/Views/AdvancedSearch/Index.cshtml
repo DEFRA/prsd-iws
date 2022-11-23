@@ -20,25 +20,25 @@
             <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.SelectedNotificationType)">
                 @Html.Gds().LabelFor(m => m.SelectedNotificationType, showOptionalLabel: false)
                 @Html.Gds().ValidationMessageFor(m => m.SelectedNotificationType)
-                @Html.Gds().DropDownListFor(m => m.SelectedNotificationType, Model.NotificationTypes, string.Empty, useHalfWidth: false)
+                @Html.Gds().DropDownListFor(m => m.SelectedNotificationType, Model.NotificationTypes, string.Empty, new { @class = "govuk-select" })
             </div>
 
             <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.SelectedTradeDirection)">
                 @Html.Gds().LabelFor(m => m.SelectedTradeDirection, showOptionalLabel: false)
                 @Html.Gds().ValidationMessageFor(m => m.SelectedTradeDirection)
-                @Html.Gds().DropDownListFor(m => m.SelectedTradeDirection, Model.TradeDirections, string.Empty, useHalfWidth: false)
+                @Html.Gds().DropDownListFor(m => m.SelectedTradeDirection, Model.TradeDirections, string.Empty, new { @class = "govuk-select" })
             </div>
 
             <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.IsInterim)">
                 @Html.Gds().LabelFor(m => m.IsInterim, showOptionalLabel: false)
                 @Html.Gds().ValidationMessageFor(m => m.IsInterim)
-                @Html.Gds().DropDownListFor(m => m.IsInterim, Model.InterimStatus, string.Empty, useHalfWidth: false)
+                @Html.Gds().DropDownListFor(m => m.IsInterim, Model.InterimStatus, string.Empty, new { @class = "govuk-select" })
             </div>
 
             <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.SelectedNotificationStatusId)">
                 @Html.Gds().LabelFor(m => m.SelectedNotificationStatusId, showOptionalLabel: false)
                 @Html.Gds().ValidationMessageFor(m => m.SelectedNotificationStatusId)
-                @Html.Gds().DropDownListFor(m => m.SelectedNotificationStatusId, Model.NotificationStatuses, string.Empty, useHalfWidth: false)
+                @Html.Gds().DropDownListFor(m => m.SelectedNotificationStatusId, Model.NotificationStatuses, string.Empty, new { @class = "govuk-select" })
             </div>
 
             <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.NotificationReceivedStart) @Html.Gds().FormGroupClass(m => m.NotificationReceivedEnd)">
@@ -58,7 +58,7 @@
             <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.LocalAreaId)">
                 @Html.Gds().LabelFor(m => m.LocalAreaId, showOptionalLabel: false)
                 @Html.Gds().ValidationMessageFor(m => m.LocalAreaId)
-                @Html.Gds().DropDownListFor(m => m.LocalAreaId, Model.Areas, string.Empty, useHalfWidth: false)
+                @Html.Gds().DropDownListFor(m => m.LocalAreaId, Model.Areas, string.Empty, new { @class = "govuk-select" })
             </div>
 
             <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.EwcCode)">

@@ -53,7 +53,7 @@
                     else
                     {
                         <td>
-                            @Html.Gds().TextBoxFor(m => m.ProcessOfGeneration, new { type = "file", @class = "form-control form-control-wide" })
+                            @Html.Gds().TextBoxFor(m => m.ProcessOfGeneration, new { type = "file", @class = "form-control form-control-wide" }, useHalfWidth: false)
                         </td>
                     }
                 </tr>
@@ -73,7 +73,7 @@
                     else
                     {
                         <td>
-                            @Html.Gds().TextBoxFor(m => m.TechnologyEmployed, new { type = "file", @class = "form-control form-control-wide" })
+                            @Html.Gds().TextBoxFor(m => m.TechnologyEmployed, new { type = "file", @class = "form-control form-control-wide" }, useHalfWidth: false)
                         </td>
                     }
                 </tr>
@@ -93,7 +93,7 @@
                     else
                     {
                         <td>
-                            @Html.Gds().TextBoxFor(m => m.Composition, new { type = "file", @class = "form-control form-control-wide" })
+                            @Html.Gds().TextBoxFor(m => m.Composition, new { type = "file", @class = "form-control form-control-wide" }, useHalfWidth: false)
                         </td>
                     }
                 </tr>

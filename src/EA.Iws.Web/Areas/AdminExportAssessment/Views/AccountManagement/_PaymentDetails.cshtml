@@ -22,7 +22,7 @@
                     <div class="form-group @Html.Gds().FormGroupClass(m => m.PaymentMethod)">
                         @Html.Gds().LabelFor(m => m.PaymentMethod)
                         @Html.Gds().ValidationMessageFor(m => m.PaymentMethod)
-                        @Html.Gds().DropDownListFor(m => m.PaymentMethod, Model.PaymentMethodsSelectList, string.Empty, new { @class = "form-control form-control-wide", title = PaymentDetailsViewModelResources.PaymentMethodLabel })
+                        @Html.Gds().DropDownListFor(m => m.PaymentMethod, Model.PaymentMethodsSelectList, string.Empty, new { @class = "govuk-select", title = PaymentDetailsViewModelResources.PaymentMethodLabel })
                     </div>
                 </div>
             </div>

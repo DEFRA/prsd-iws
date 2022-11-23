@@ -17,14 +17,14 @@
 		<h1 class="govuk-heading-l">@Html.Raw(string.Format(AddEditResource.AddHeader, titleText))</h1>
 	</header>
 
-	<h2 class="heading-medium">@AddEditResource.OrgDetails</h2>
+	<h2 class="govuk-heading-m">@AddEditResource.OrgDetails</h2>
 	<hr />
 	<fieldset>
 		<legend class="visuallyhidden">@AddEditResource.OrgDetails</legend>
 		@Html.Partial("_BusinessType", Model)
 	</fieldset>
 
-	<h2 class="heading-medium">@AddEditResource.Address</h2>
+	<h2 class="govuk-heading-m">@AddEditResource.Address</h2>
 	<hr />
 
 	<fieldset>
@@ -32,7 +32,7 @@
 		@Html.EditorFor(m => m.Address)
 	</fieldset>
 
-	<h2 class="heading-medium">@AddEditResource.Contact</h2>
+	<h2 class="govuk-heading-m">@AddEditResource.Contact</h2>
 	<hr />
 
 	<fieldset>

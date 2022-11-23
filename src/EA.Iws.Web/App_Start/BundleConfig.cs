@@ -44,7 +44,7 @@
                 "~/Scripts/govuk/govuk-template.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/govuk-frontend").Include(
-                    "~/Scripts/govuk-frontend/govuk-frontend-4.0.0.min.js",
+                    "~/Scripts/govuk-frontend/govuk-frontend-4.0.1.min.js",
                     "~/Scripts/setup-govuk-frontend.js",
                     "~/govuk/vendor/polyfills/Function/prototype/bind.js",
                     "~/Scripts/show-hide-content.js"));
@@ -71,15 +71,9 @@
 
             bundles.Add(new StyleBundle("~/Content/iws-page")
                 .Include("~/css/font-awesome.css"));
-
-            bundles.Add(new StyleBundle("~/Content/iws-page")
-                .Include("~/css/font-awesome.min.css"));
-
+                        
             bundles.Add(new StyleBundle("~/Content/select2/css")
-                .Include("~/Content/select2/select2.css"));
-
-            bundles.Add(new StyleBundle("~/Content/iws-page").Include(                            
-                            "~/Content/iws-page.css"));
+                .Include("~/Content/select2/select2.css"));            
 
             // Set EnableOptimizations to false for debugging. For more information,
             // visit http://go.microsoft.com/fwlink/?LinkId=301862

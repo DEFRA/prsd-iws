@@ -36,7 +36,7 @@
         <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.Decision)">
             @Html.LabelFor(m => m.Decision, new { @class = "form-label-bold" })
             @Html.Gds().ValidationMessageFor(m => m.Decision)
-            @Html.Gds().DropDownListFor(m => m.Decision, Model.PossibleDecisions, string.Empty, new { id = "decision-select" })
+            @Html.Gds().DropDownListFor(m => m.Decision, Model.PossibleDecisions, string.Empty, new { id = "decision-select", @class = "govuk-select" })
         </div>
 
         <div id="@Html.Raw("status" + DecisionType.Consent)" class="js-hidden assessment-decision">

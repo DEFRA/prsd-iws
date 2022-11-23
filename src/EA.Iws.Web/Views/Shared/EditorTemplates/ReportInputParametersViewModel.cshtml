@@ -4,7 +4,7 @@
 <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.SelectedDate)">
     @Html.Gds().LabelFor(m => m.SelectedDate)
     @Html.Gds().ValidationMessageFor(m => m.SelectedDate)
-    @Html.Gds().DropDownListFor(m => m.SelectedDate, Model.DateSelectList, "")
+    @Html.Gds().DropDownListFor(m => m.SelectedDate, Model.DateSelectList, string.Empty, new { @class = "govuk-select" })
 </div>
 
 <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.FromDate) @Html.Gds().FormGroupClass(m => m.FromDate.Day) @Html.Gds().FormGroupClass(m => m.FromDate.Month) @Html.Gds().FormGroupClass(m => m.FromDate.Year)">
@@ -22,14 +22,14 @@
 <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.SelectedTextField)">
     @Html.Gds().LabelFor(m => m.SelectedTextField, false)
     @Html.Gds().ValidationMessageFor(m => m.SelectedTextField)
-    @Html.Gds().DropDownListFor(m => m.SelectedTextField, Model.TextFieldSelectList, "", new { @class = "text-field-select-list"})
+    @Html.Gds().DropDownListFor(m => m.SelectedTextField, Model.TextFieldSelectList, string.Empty, new { @class = "govuk-select" })
 </div>
 
 <div class="operator-text-panel @(!string.IsNullOrEmpty(Model.SelectedTextField) && Model.SelectedTextField == "-1" ? "js-hidden" : string.Empty)">
     <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.SelectedOperator)">
         @Html.Gds().LabelFor(m => m.SelectedOperator, false)
         @Html.Gds().ValidationMessageFor(m => m.SelectedOperator)
-        @Html.Gds().DropDownListFor(m => m.SelectedOperator, Model.TextOperatorSelectList, "")
+        @Html.Gds().DropDownListFor(m => m.SelectedOperator, Model.TextOperatorSelectList, string.Empty, new { @class = "govuk-select" })
     </div>
 
     <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.TextSearch)">
