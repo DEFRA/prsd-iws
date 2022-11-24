@@ -2,40 +2,38 @@
 @using Resources = EA.Iws.Web.Areas.NotificationMovements.Views.Create.WhoAreYourCarriersResource
 
 @{
-	ViewBag.Title = Resources.Title;
-	Layout = "~/Areas/NotificationMovements/Views/Shared/_CreateSummaryLayout.cshtml";
+    ViewBag.Title = Resources.Title;
+    Layout = "~/Areas/NotificationMovements/Views/Shared/_CreateSummaryLayout.cshtml";
 }
 
 <h1 class="govuk-heading-l">@Resources.Title</h1>
 
 @using (Html.BeginForm(null, null, Model.MovementIds.ToRouteValueDictionary("movementIds"),
-				FormMethod.Post, HtmlHelper.AnonymousObjectToHtmlAttributes(new { enctype = "multipart/form-data" })))
+                FormMethod.Post, HtmlHelper.AnonymousObjectToHtmlAttributes(new { enctype = "multipart/form-data" })))
 {
-	@Html.AntiForgeryToken()
-	@Html.Gds().ValidationSummary()
+    @Html.AntiForgeryToken()
+    @Html.Gds().ValidationSummary()
 
-	<p>@Resources.IntroText</p>
+    <p>@Resources.IntroText</p>
 
+    <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.AddCarriersLater)">
+        @Html.Gds().ValidationMessageFor(m => m.AddCarriersLater)
+        <div class="form-group">
+            @Html.ActionLink(Resources.CarrierLink, "AddIntendedCarrier", "Create", Model.MovementIds.ToRouteValueDictionary("newmovementIds"), null)
+        </div>
+        <div class="govuk-checkboxes" data-module="govuk-checkboxes">
+            <div class="govuk-checkboxes__item">
+                @Html.CheckBoxFor(m => m.AddCarriersLater, new { id = "addLater", @class = "govuk-checkboxes__input" })
+                <label class="govuk-label govuk-checkboxes__label" for="addLater">
+                    @Resources.AddLaterText
+                </label>
+            </div>
+        </div>
+    </div>
 
-
-	<div class="form-group @Html.Gds().FormGroupClass(m => m.AddCarriersLater)">
-		@Html.Gds().ValidationMessageFor(m => m.AddCarriersLater)
-		<div class="form-group">
-			@Html.ActionLink(Resources.CarrierLink, "AddIntendedCarrier", "Create",Model.MovementIds.ToRouteValueDictionary("newmovementIds"), null)
-		</div>
-		<div class="multiple-choice">
-			@Html.CheckBoxFor(m => m.AddCarriersLater, new { id = "addLater" })
-			<label for="addLater">
-				@Resources.AddLaterText
-			</label>
-		</div>
-	</div>
-
-	<div class="form-group">
-		<p>
-			<button class="govuk-button" type="submit">@Constants.ContinueButtonText</button>
-		</p>
-	</div>
+    <div class="govuk-form-group">
+        <button class="govuk-button" type="submit">@Constants.ContinueButtonText</button>
+    </div>
 }
 
 
