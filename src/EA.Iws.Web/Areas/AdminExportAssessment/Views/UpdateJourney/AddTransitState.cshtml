@@ -15,11 +15,11 @@
         @Html.Gds().LabelFor(m => m.CountryId, new { @class = "form-label-bold" })
         @if (Model.CountryId != null)
         {
-            @Html.Gds().DropDownListFor(m => m.CountryId, Model.Countries, new { title = Resources.ExitCountry })
+            @Html.Gds().DropDownListFor(m => m.CountryId, Model.Countries, new { title = Resources.ExitCountry, data_select_box = "true" })
         }
         else
         {
-            @Html.Gds().DropDownListFor(m => m.CountryId, Model.Countries, string.Empty, new { title = Resources.ExitCountry })
+            @Html.Gds().DropDownListFor(m => m.CountryId, Model.Countries, string.Empty, new { title = Resources.ExitCountry, data_select_box = "true" })
         }
     </div>
 

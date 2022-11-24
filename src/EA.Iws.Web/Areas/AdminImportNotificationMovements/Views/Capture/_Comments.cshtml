@@ -24,7 +24,7 @@
         <div class="form-group @Html.Gds().FormGroupClass(m => m.StatsMarking)" id="dvCommentSelectReasons" style="display:block">
             @Html.LabelFor(m => m.StatsMarking, new { @class = "form-label-bold" })
             @Html.Gds().ValidationMessageFor(m => m.StatsMarking)
-            @Html.Gds().DropDownListFor(m => m.StatsMarking, Model.StatsMarkingSelectList, string.Empty)
+            @Html.Gds().DropDownListFor(m => m.StatsMarking, Model.StatsMarkingSelectList, string.Empty, new { @class = "govuk-select" })
         </div>
 
         <div class="form-group @Html.Gds().FormGroupClass(m => m.Comments)" id="dvComments" style="display:none">
@@ -56,7 +56,7 @@
         <div class="form-group @Html.Gds().FormGroupClass(m => m.StatsMarking)" id="dvCommentSelectReasons" style="display:none">
             @Html.LabelFor(m => m.StatsMarking, new { @class = "form-label-bold" })
             @Html.Gds().ValidationMessageFor(m => m.StatsMarking)
-            @Html.Gds().DropDownListFor(m => m.StatsMarking, Model.StatsMarkingSelectList, string.Empty)
+            @Html.Gds().DropDownListFor(m => m.StatsMarking, Model.StatsMarkingSelectList, string.Empty, new { @class = "govuk-select" })
         </div>
 
         <div class="form-group @Html.Gds().FormGroupClass(m => m.Comments)" id="dvComments" style="display:none">

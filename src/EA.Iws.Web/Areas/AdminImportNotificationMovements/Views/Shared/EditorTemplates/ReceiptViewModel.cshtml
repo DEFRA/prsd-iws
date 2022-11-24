@@ -114,7 +114,7 @@
                     @Html.Gds().TextBoxFor(m => m.RejectedQuantity, new { type = "number", min = 0, step = "any", @class = "form-control form-control-wide" })
                 </div>
                 <div class="column-third">
-                    @Html.Gds().DropDownListFor(m => m.RejectedUnits, Model.UnitSelectList, new { @class = "form-control form-control-wide" })
+                    @Html.Gds().DropDownListFor(m => m.RejectedUnits, Model.UnitSelectList, new { @class = "govuk-select" })
                     @for (int i = 0; i < Model.PossibleUnits.Count; i++)
                     {
                         @Html.HiddenFor(m => m.PossibleUnits[i])
@@ -141,7 +141,7 @@
                     @Html.Gds().TextBoxFor(m => m.RejectedQuantity, new { type = "number", min = 0, step = "any", @class = "form-control form-control-wide" })
                 </div>
                 <div class="column-third">
-                    @Html.Gds().DropDownListFor(m => m.RejectedUnits, Model.UnitSelectList, new { @class = "form-control form-control-wide" })
+                    @Html.Gds().DropDownListFor(m => m.RejectedUnits, Model.UnitSelectList, new { @class = "govuk-select" })
                     @for (int i = 0; i < Model.PossibleUnits.Count; i++)
                     {
                         @Html.HiddenFor(m => m.PossibleUnits[i])
@@ -164,7 +164,7 @@
                     @Html.Gds().TextBoxFor(m => m.ActualQuantity, new { type = "number", min = 0, step = "any", @class = "form-control form-control-wide" })
                 </div>
                 <div class="column-third">
-                    @Html.Gds().DropDownListFor(m => m.ActualUnits, Model.UnitSelectList, new { @class = "form-control form-control-wide" })
+                    @Html.Gds().DropDownListFor(m => m.ActualUnits, Model.UnitSelectList, new { @class = "govuk-select" })
                     @for (int i = 0; i < Model.PossibleUnits.Count; i++)
                     {
                         @Html.HiddenFor(m => m.PossibleUnits[i])
@@ -186,7 +186,7 @@
                     @Html.Gds().TextBoxFor(m => m.ActualQuantity, new { type = "number", min = 0, step = "any", @class = "form-control form-control-wide" })
                 </div>
                 <div class="column-third">
-                    @Html.Gds().DropDownListFor(m => m.ActualUnits, Model.UnitSelectList, new { @class = "form-control form-control-wide" })
+                    @Html.Gds().DropDownListFor(m => m.ActualUnits, Model.UnitSelectList, new { @class = "govuk-select" })
                     @for (int i = 0; i < Model.PossibleUnits.Count; i++)
                     {
                         @Html.HiddenFor(m => m.PossibleUnits[i])
