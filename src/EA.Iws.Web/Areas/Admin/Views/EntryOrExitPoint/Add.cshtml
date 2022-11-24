@@ -23,7 +23,7 @@
     <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.CountryId)">
         @Html.Gds().LabelFor(m => m.CountryId)
         @Html.Gds().ValidationMessageFor(m => m.CountryId)
-        @Html.Gds().DropDownListFor(m => m.CountryId, Model.CountryList, "")
+        @Html.Gds().DropDownListFor(m => m.CountryId, Model.CountryList, string.Empty, new { data_select_box = "true" })
     </div>
 
     <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.Name)">

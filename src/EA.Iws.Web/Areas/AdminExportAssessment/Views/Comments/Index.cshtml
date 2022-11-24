@@ -40,7 +40,7 @@
                     Filter by:
                 </div>
                 <div>
-                    @Html.Gds().DropDownListFor(m => m.SelectedFilter, Model.FilterTerms, new { @id = "filterSelectList" })
+                    @Html.Gds().DropDownListFor(m => m.SelectedFilter, Model.FilterTerms, new { @id = "filterSelectList", @class = "govuk-select" })
                 </div>
                 <br />
                 <br />
@@ -91,7 +91,7 @@
                         Name:
                     </div>
                     <div>
-                        @Html.Gds().DropDownListFor(m => m.SelectedUser, Model.UserFilters, new { @id = "nameSelectList" })
+                        @Html.Gds().DropDownListFor(m => m.SelectedUser, Model.UserFilters, new { @id = "nameSelectList", @class = "govuk-select" })
                     </div>
                     <br />
                     <div class="govuk-form-group">

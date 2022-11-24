@@ -9,14 +9,14 @@
 <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.EntryPointId)">
     @Html.Gds().LabelFor(m => m.EntryPointId, new { @class = "form-label-bold" })
     @Html.Gds().ValidationMessageFor(m => m.EntryPointId)
-    @Html.Gds().DropDownListFor(m => m.EntryPointId, Model.EntryOrExitPoints, string.Empty, new { title = "Entry point" })
+    @Html.Gds().DropDownListFor(m => m.EntryPointId, Model.EntryOrExitPoints, string.Empty, new { title = "Entry point", data_select_box = "true" })
     @*@Html.HiddenFor(m => m.NotificationCompetentAuthority)*@
 </div>
 
 <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.ExitPointId)">
     @Html.Gds().LabelFor(m => m.ExitPointId, new { @class = "form-label-bold" })
     @Html.Gds().ValidationMessageFor(m => m.ExitPointId)
-    @Html.Gds().DropDownListFor(m => m.ExitPointId, Model.EntryOrExitPoints, string.Empty, new { title = "Exit point" })
+    @Html.Gds().DropDownListFor(m => m.ExitPointId, Model.EntryOrExitPoints, string.Empty, new { title = "Exit point", data_select_box = "true" })
 </div>
 
 <div class="govuk-form-group">

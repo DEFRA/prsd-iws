@@ -31,7 +31,7 @@
             @Html.Gds().LabelFor(m => m.SelectedUser)
             @Html.Gds().ValidationMessageFor(m => m.SelectedUser)
             @Html.Gds().HintParagraph(@Resource.HintText)
-            @Html.Gds().DropDownListFor(m => m.SelectedUser, Model.NewUserSelectList, string.Empty, new { title = Resource.SubTitleNewOwner })
+            @Html.Gds().DropDownListFor(m => m.SelectedUser, Model.NewUserSelectList, string.Empty, new { title = Resource.SubTitleNewOwner, data_select_box = "true" })
         </div>
 
         <div class="govuk-form-group">
