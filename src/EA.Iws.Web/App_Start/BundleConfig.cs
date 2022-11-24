@@ -12,6 +12,7 @@
                 "~/Scripts/jquery.unobtrusive-ajax.js",
                 "~/Scripts/jquery.prevent-double-click.js",
                 "~/Scripts/select2/select2.js",
+                "~/Scripts/date-input/dateinput.js",
                 "~/Scripts/datable.min.js",
                 "~/Scripts/jquery.stickem.js"));
 

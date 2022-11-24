@@ -6,9 +6,9 @@
     {
         if (User.IsInternalUser())
         {
-            <p>
+            <div style="margin-bottom:10px;">
                 @Html.ActionLink(linkText: "Home", actionName: "Index", controllerName: "Home", routeValues: new { area = "Admin" }, htmlAttributes: new { @class = "govuk-header__link govuk-link" })
-            </p>
+            </div>
         }
     }
 </div>

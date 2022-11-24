@@ -21,7 +21,14 @@
         }
         else
         {
-            @Html.Gds().TextBoxFor(m => m.Day, new { data_type = (Model.IsAutoTabEnabled) ? "date" : string.Empty, placeholder = Model.ShowLabels ? string.Empty : "DD" }, useHalfWidth: false)
+            @Html.Gds().TextBoxFor(m => m.Day, new 
+            { 
+                data_type = (Model.IsAutoTabEnabled) ? "date" : string.Empty, 
+                placeholder = Model.ShowLabels ? string.Empty : "DD", 
+                type = "number", 
+                min = "1", 
+                max = "31" 
+            }, useHalfWidth: false)            
         }
     </div>
     <div class="govuk-form-group form-group-month">
@@ -35,7 +42,14 @@
         }
         else
         {
-            @Html.Gds().TextBoxFor(m => m.Month, new { data_type = (Model.IsAutoTabEnabled) ? "date" : string.Empty, placeholder = Model.ShowLabels ? string.Empty : "MM" }, useHalfWidth: false)
+            @Html.Gds().TextBoxFor(m => m.Month, new 
+            { 
+                data_type = (Model.IsAutoTabEnabled) ? "date" : string.Empty, 
+                placeholder = Model.ShowLabels ? string.Empty : "MM", 
+                type = "number", 
+                min = "1", 
+                max = "12" 
+            }, useHalfWidth: false)
         }
     </div>
     <div class="govuk-form-group form-group-year">
@@ -49,7 +63,7 @@
         }
         else
         {
-            @Html.Gds().TextBoxFor(m => m.Year, new { placeholder = Model.ShowLabels ? string.Empty : "YYYY" }, useHalfWidth: false)
+            @Html.Gds().TextBoxFor(m => m.Year, new { placeholder = Model.ShowLabels ? string.Empty : "YYYY", type = "number" }, useHalfWidth: false)
         }
     </div>
 </div>
