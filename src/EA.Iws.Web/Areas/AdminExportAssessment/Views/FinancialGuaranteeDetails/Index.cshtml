@@ -10,77 +10,77 @@
 <div class="govuk-form-group">
 
     <table class="fg-decision">
-        <tbody>
-        <tr>
-            <th>@Resources.Status</th>
-            <td>@EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(Model.Status)</td>
-        </tr>
-
-        <tr>
-            <th>@Resources.Decision</th>
-            <td>@EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(Model.Decision)</td>
-        </tr>
-
-        @if (Model.Decision == FinancialGuaranteeDecision.Refused)
-        {
-            <tr>
-                <th>@Resources.RefusalReason</th>
-                <td>@Model.RefusalReason</td>
+        <tbody class="govuk-table__body">
+            <tr class="govuk-table__row">
+                <th scope="row" class="govuk-table__header">@Resources.Status</th>
+                <td class="govuk-table__cell">@EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(Model.Status)</td>
             </tr>
-        }
 
-        <tr>
-            <th>@Resources.DecisionDate</th>
-            <td>
-                @if (Model.DecisionDate.HasValue)
-                {
-                    @Html.Gds().DisplayDateFor(m => m.DecisionDate.Value)
-                }
-                else
-                {
-                    @:- -
-                }
-            </td>
-        </tr>
-        <tr>
-            <th>@Resources.IsBlanketBond</th>
-            <td>
-                @if (Model.IsBlanketBond.HasValue)
-                {
-                    @(Model.IsBlanketBond.Value ? Resources.Yes : Resources.No)
-                }
-                else
-                {
-                    @:- -
-                }
-            </td>
-        </tr>
-        <tr>
-            <th>@Resources.ReferenceNumber</th>
-            <td>
-                @if (!string.IsNullOrWhiteSpace(Model.ReferenceNumber))
-                {
-                    @Model.ReferenceNumber
-                }
-                else
-                {
-                    @:- -
-                }
-            </td>
-        </tr>
-        <tr>
-            <th>@Resources.ActiveLoadsPermitted</th>
-            <td>
-                @if (Model.ActiveLoadsPermitted.HasValue)
-                {
-                    @Model.ActiveLoadsPermitted.Value
-                }
-                else
-                {
-                    @:- -
-                }
-            </td>
-        </tr>
+            <tr class="govuk-table__row">
+                <th scope="row" class="govuk-table__header">@Resources.Decision</th>
+                <td class="govuk-table__cell">@EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(Model.Decision)</td>
+            </tr>
+
+            @if (Model.Decision == FinancialGuaranteeDecision.Refused)
+            {
+                <tr class="govuk-table__row">
+                    <th scope="row" class="govuk-table__header">@Resources.RefusalReason</th>
+                    <td class="govuk-table__cell">@Model.RefusalReason</td>
+                </tr>
+            }
+
+            <tr class="govuk-table__row">
+                <th scope="row" class="govuk-table__header">@Resources.DecisionDate</th>
+                <td class="govuk-table__cell">
+                    @if (Model.DecisionDate.HasValue)
+                    {
+                        @Html.Gds().DisplayDateFor(m => m.DecisionDate.Value)
+                    }
+                    else
+                    {
+                        @:- -
+                    }
+                </td>
+            </tr>
+            <tr class="govuk-table__row">
+                <th scope="row" class="govuk-table__header">@Resources.IsBlanketBond</th>
+                <td class="govuk-table__cell">
+                    @if (Model.IsBlanketBond.HasValue)
+                    {
+                        @(Model.IsBlanketBond.Value ? Resources.Yes : Resources.No)
+                    }
+                    else
+                    {
+                        @:- -
+                    }
+                </td>
+            </tr>
+            <tr class="govuk-table__row">
+                <th scope="row" class="govuk-table__header">@Resources.ReferenceNumber</th>
+                <td class="govuk-table__cell">
+                    @if (!string.IsNullOrWhiteSpace(Model.ReferenceNumber))
+                    {
+                        @Model.ReferenceNumber
+                    }
+                    else
+                    {
+                        @:- -
+                    }
+                </td>
+            </tr>
+            <tr class="govuk-table__row">
+                <th scope="row" class="govuk-table__header">@Resources.ActiveLoadsPermitted</th>
+                <td class="govuk-table__cell">
+                    @if (Model.ActiveLoadsPermitted.HasValue)
+                    {
+                        @Model.ActiveLoadsPermitted.Value
+                    }
+                    else
+                    {
+                        @:- -
+                    }
+                </td>
+            </tr>
         </tbody>
     </table>
 </div>

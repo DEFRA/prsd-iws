@@ -13,26 +13,26 @@
 @if (Model != null && Model.FacilityData.Any())
 {
     <div class="govuk-form-group">
-        <table title=@ListFacilityResources.TableTitle>
-            <thead>
-                <tr>
-                    <th>@ListFacilityResources.ThOrgName</th>
-                    <th>@ListFacilityResources.ThAddress</th>
-                    <th>Action</th>
+        <table title=@ListFacilityResources.TableTitle class="govuk-table">
+            <thead class="govuk-table__head">
+                <tr class="govuk-table__row">
+                    <th scope="col" class="govuk-table__header">@ListFacilityResources.ThOrgName</th>
+                    <th scope="col" class="govuk-table__header">@ListFacilityResources.ThAddress</th>
+                    <th scope="col" class="govuk-table__header">Action</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody class="govuk-table__body">
                 @for (var i = 0; i < Model.FacilityData.Count; i++)
                 {
-                    <tr>
-                        <td>
+                    <tr class="govuk-table__row">
+                        <td class="govuk-table__cell">
                             @Html.DisplayFor(m => m.FacilityData[i].Business.Name)
                         </td>
-                        <td>
+                        <td class="govuk-table__cell">
                             @Html.DisplayFor(m => m.FacilityData[i].Address.StreetOrSuburb),
                             @Html.DisplayFor(m => m.FacilityData[i].Address.TownOrCity)
                         </td>
-                        <td>
+                        <td class="govuk-table__cell">
                             @Html.ActionLink(ListFacilityResources.Edit, "Edit", "Facility",
                                 new { id = Model.FacilityData[i].NotificationId, entityId = Model.FacilityData[i].Id, backToOverview = ViewBag.BackToOverview }, new { title = Model.FacilityData[i].Business.Name })
                             <span class="table-divider">|</span>

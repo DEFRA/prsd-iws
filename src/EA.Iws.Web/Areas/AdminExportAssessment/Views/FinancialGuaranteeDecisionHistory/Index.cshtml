@@ -93,20 +93,20 @@
 
     @if (Model.FinancialGuaranteeHistory.Any())
     {
-        <table>
-            <thead>
-            <tr>
-                <th>@Resources.Status</th>
-                <th>@Resources.Date</th>
-                <th/>
+        <table class="govuk-table">
+            <thead class="govuk-table__head">
+            <tr class="govuk-table__row">
+                <th scope="col" class="govuk-table__header">@Resources.Status</th>
+                <th scope="col" class="govuk-table__header">@Resources.Date</th>
+                <th scope="col" class="govuk-table__header"></th>
             </tr>
             </thead>
             <tbody>
             @foreach (var financialGuarantee in Model.FinancialGuaranteeHistory)
             {
-                <tr>
-                    <td>@EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(financialGuarantee.Status)</td>
-                    <td>
+                <tr class="govuk-table__row">
+                    <td class="govuk-table__cell">@EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(financialGuarantee.Status)</td>
+                    <td class="govuk-table__cell">
                         @if (financialGuarantee.DecisionDate.HasValue)
                         {
                             @Html.Gds().DisplayDate(financialGuarantee.DecisionDate.Value)
@@ -116,7 +116,7 @@
                             @:- -
                         }
                     </td>
-                    <td>
+                    <td class="govuk-table__cell">
                         @Html.ActionLink(Resources.DetailsLink, "Index", "FinancialGuaranteeDetails",
                             routeValues: new { financialGuaranteeId = financialGuarantee.FinancialGuaranteeId }, htmlAttributes: null)
                         @if (financialGuarantee.Status == FinancialGuaranteeStatus.Approved)

@@ -1,24 +1,26 @@
 ﻿@model EA.Iws.Web.Areas.AdminImportNotificationMovements.ViewModels.Capture.CaptureViewModel
 
-<div class="form-group @Html.Gds().FormGroupClass(m => m.PrenotificationDate)">
+<div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.PrenotificationDate)">
     @Html.LabelFor(m => m.PrenotificationDate, new { @class = "form-label-bold" })
     @Html.Gds().ValidationMessageFor(m => m.PrenotificationDate)
     @Html.EditorFor(m => m.PrenotificationDate)
 </div>
 
-<div class="form-group @Html.Gds().FormGroupClass(m => m.HasNoPrenotification)">
-    <fieldset>
-        <div>@Html.Gds().ValidationMessageFor(m => m.HasNoPrenotification)</div>
-        <div class="multiple-choice">
-            @Html.CheckBoxFor(m => m.HasNoPrenotification)
-            <label for="@Html.NameFor(m => m.HasNoPrenotification)">
-                @Html.DisplayNameFor(m => m.HasNoPrenotification)
-            </label>
+<div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.HasNoPrenotification)">
+    <fieldset class="govuk-fieldset">
+        <div class="govuk-checkboxes" data-module="govuk-checkboxes">
+            @Html.Gds().ValidationMessageFor(m => m.HasNoPrenotification)
+            <div class="multiple-choice govuk-checkboxes__item">
+                @Html.CheckBoxFor(m => m.HasNoPrenotification, new { @class = "govuk-checkboxes__input" })
+                <label class="govuk-label govuk-checkboxes__label" for="@Html.NameFor(m => m.HasNoPrenotification)">
+                    @Html.DisplayNameFor(m => m.HasNoPrenotification)
+                </label>
+            </div>
         </div>
     </fieldset>
 </div>
 
-<div class="form-group @Html.Gds().FormGroupClass(m => m.ActualShipmentDate)">
+<div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.ActualShipmentDate)">
     @Html.LabelFor(m => m.ActualShipmentDate, new { @class = "form-label-bold" })
     @Html.Gds().ValidationMessageFor(m => m.ActualShipmentDate)
     @Html.EditorFor(m => m.ActualShipmentDate)

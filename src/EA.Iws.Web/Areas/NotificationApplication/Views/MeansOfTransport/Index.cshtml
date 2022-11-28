@@ -13,20 +13,20 @@
     @Html.Gds().ValidationSummary()
 
     <div class="govuk-form-group">
-        <table title="Transport methods">
-            <caption class="visuallyhidden">Transport methods</caption>
-            <thead>
-            <tr>
-                <th>@MeansOfTransportResources.ThSymbol</th>
-                <th>@MeansOfTransportResources.ThTransportMethods</th>
+        <table title="Transport methods" class="govuk-table">
+            <caption class="visuallyhidden govuk-table__caption govuk-table__caption--m">Transport methods</caption>
+            <thead class="govuk-table__head">
+            <tr class="govuk-table__row">
+                <th scope="col" class="govuk-table__header">@MeansOfTransportResources.ThSymbol</th>
+                <th scope="col" class="govuk-table__header">@MeansOfTransportResources.ThTransportMethods</th>
             </tr>
             </thead>
-            <tbody>
+            <tbody class="govuk-table__body">
             @foreach (var means in Model.PossibleMeans)
             {
-                <tr>
-                    <td>@EA.Prsd.Core.Helpers.EnumHelper.GetShortName(means)</td>
-                    <td>@EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(means)</td>
+                <tr class="govuk-table__row">
+                    <td class="govuk-table__cell">@EA.Prsd.Core.Helpers.EnumHelper.GetShortName(means)</td>
+                    <td class="govuk-table__cell">@EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(means)</td>
                 </tr>
             }
             </tbody>
