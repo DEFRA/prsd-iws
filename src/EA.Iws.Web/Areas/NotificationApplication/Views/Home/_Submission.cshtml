@@ -24,7 +24,7 @@
             <div>
                 @if (Model.ShowSubmitButton)
                 {
-                    @Html.ActionLink("Submit notification", "Disclaimer", "Submit", null, new { @class = "govuk-button" })
+                    @Html.ActionLink("Submit notification", "Disclaimer", "Submit", null, new { id = "btnSubmitNotification", @class = "govuk-button" })
                 }
 
                 else if (Model.ShowDisabledSubmitButtonAndGuidanceText)
