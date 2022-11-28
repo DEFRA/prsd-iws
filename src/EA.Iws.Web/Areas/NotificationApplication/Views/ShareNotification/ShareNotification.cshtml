@@ -30,27 +30,27 @@
             <h2 class="heading-medium">@Resources.ChosenSharedUsers</h2>
 
             <div class="govuk-form-group">
-                <table title="@Resources.SharedUserTableTitle">
-                    <thead>
-                        <tr>
-                            <th>@Resources.Email</th>
-                            <th></th>
-                            <th>Action</th>
+                <table title="@Resources.SharedUserTableTitle" class="govuk-table">
+                    <thead class="govuk-table__head">
+                        <tr class="govuk-table__row">
+                            <th scope="col" class="govuk-table__header">@Resources.Email</th>
+                            <th scope="col" class="govuk-table__header"></th>
+                            <th scope="col" class="govuk-table__header">Action</th>
                         </tr>
                     </thead>
                     @if (Model.SelectedSharedUsers.Count < 1)
                     {
-                        <tr>
+                        <tr class="govuk-table__row">
                             <td colspan="3">@Resources.AwaitingSharedUsers</td>
                         </tr>
                     }
                     @for (int i = 0; i < Model.SelectedSharedUsers.Count; i++)
                     {
                         var sharedUser = Model.SharedUsersList.Single(c => c.Value == Model.SelectedSharedUsers[i].UserId.ToString());
-                        <tr>
-                            <td>@Html.HiddenFor(m => m.SelectedSharedUsers[i].UserId)@Html.HiddenFor(m => m.SelectedSharedUsers[i].Email)@Html.HiddenFor(m => m.SelectedSharedUsers[i].NotificationId) @Html.Raw(sharedUser.Text)</td>                       
-                            <td><input name="SelectedSharedUsers[@i].Id" type="hidden" value="@Model.SelectedSharedUsers[i].UserId" /></td>
-                            <td><button class="link-submit" type="submit" name="removeId" value="@Model.SelectedSharedUsers[i].UserId">@Resources.Remove</button></td>
+                        <tr class="govuk-table__row">
+                            <td class="govuk-table__cell">@Html.HiddenFor(m => m.SelectedSharedUsers[i].UserId)@Html.HiddenFor(m => m.SelectedSharedUsers[i].Email)@Html.HiddenFor(m => m.SelectedSharedUsers[i].NotificationId) @Html.Raw(sharedUser.Text)</td>                       
+                            <td class="govuk-table__cell"><input name="SelectedSharedUsers[@i].Id" type="hidden" value="@Model.SelectedSharedUsers[i].UserId" /></td>
+                            <td class="govuk-table__cell"><button class="link-submit" type="submit" name="removeId" value="@Model.SelectedSharedUsers[i].UserId">@Resources.Remove</button></td>
                         </tr>
                     }
                 </table>

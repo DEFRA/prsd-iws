@@ -25,34 +25,34 @@
         else
         {
             <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.SubmittedMovements)">
-                <table id="SubmittedMovements" title="Select prenotifications to cancel">
-                    <thead>
-                        <tr>
-                            <th>
+                <table id="SubmittedMovements" title="Select prenotifications to cancel" class="govuk-table">
+                    <thead class="govuk-table__head">
+                        <tr class="govuk-table__row">
+                            <th scope="col" class="govuk-table__header">
                                 @Resources.ShipmentNumber
                             </th>
-                            <th>
+                            <th scope="col" class="govuk-table__header">
                                 @Resources.DatePrenotified
                             </th>
-                            <th>
+                            <th scope="col" class="govuk-table__header">
                                 @Resources.ShipmentDue
                             </th>
-                            <th>
+                            <th scope="col" class="govuk-table__header">
                                 <label class="visuallyhidden">@Resources.Cancel</label>
                             </th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody class="govuk-table__body">
                         @for (var i = 0; i < Model.SubmittedMovements.Count; i++)
                         {
                             var idForThisCheckBox = Html.NameFor(m => m.SubmittedMovements[i].IsSelected);
 
-                            <tr>
-                                <td>
+                            <tr class="govuk-table__row">
+                                <td class="govuk-table__cell">
                                     @Html.DisplayFor(m => m.SubmittedMovements[i].Number)
                                     @Html.HiddenFor(m => m.SubmittedMovements[i].Number)
                                 </td>
-                                <td>
+                                <td class="govuk-table__cell">
                                     @if (Model.SubmittedMovements[i].PrenotificationDate.HasValue)
                                     {
                                         @Html.Gds().DisplayShortDateFor(m => m.SubmittedMovements[i].PrenotificationDate.Value)
@@ -62,10 +62,10 @@
                                         @:- -
                                     }
                                 </td>
-                                <td>
+                                <td class="govuk-table__cell">
                                     @Html.Gds().DisplayShortDateFor(m => m.SubmittedMovements[i].ShipmentDate)
                                 </td>
-                                <td>
+                                <td class="govuk-table__cell">
                                     <label for="@idForThisCheckBox">
                                         @Html.HiddenFor(m => m.SubmittedMovements[i].MovementId)
                                         @Html.CheckBoxFor(m => m.SubmittedMovements[i].IsSelected, new { id = idForThisCheckBox })
@@ -83,31 +83,31 @@
         {
             <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.AddedMovements)">
                 <h2 class="heading-medium">@Resources.AddSubHeader</h2>
-                <table id="AddedMovements" title="@Resources.AddSubHeader">
-                    <thead>
-                        <tr>
-                            <th>
+                <table id="AddedMovements" title="@Resources.AddSubHeader" class="govuk-table">
+                    <thead class="govuk-table__head">
+                        <tr class="govuk-table__row">
+                            <th scope="col" class="govuk-table__header">
                                 @Resources.ShipmentNumber
                             </th>
-                            <th>
+                            <th scope="col" class="govuk-table__header">
                                 @Resources.ActualDateOfShipment
                             </th>
-                            <th>
+                            <th scope="col" class="govuk-table__header">
                                 <label>@Constants.ActionText</label>
                             </th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody class="govuk-table__body">
                         @for (var i = 0; i < Model.AddedMovements.Count(); i++)
-                    {
-                            <tr>
-                                <td>
+                        {
+                            <tr class="govuk-table__row">
+                                <td class="govuk-table__cell">
                                     @Html.DisplayFor(m => m.AddedMovements[i].Number)
                                 </td>
-                                <td>
+                                <td class="govuk-table__cell">
                                     @Html.Gds().DisplayShortDateFor(m => m.AddedMovements[i].ShipmentDate)
                                 </td>
-                                <td>
+                                <td class="govuk-table__cell">
                                     <button class="link-submit" type="submit" name="command" value="@Model.AddedMovements[i].Number">@Constants.RemoveText</button>
                                 </td>
                             </tr>

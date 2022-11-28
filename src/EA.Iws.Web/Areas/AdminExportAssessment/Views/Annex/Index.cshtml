@@ -8,19 +8,19 @@
 
 @if (Model.HasAnnexes)
 {
-    <table class="govuk-form-group">
-        <thead>
-        <tr>
-            <th>@Resources.AnnexNameColumnTitle</th>
-            <th>@Resources.AnnexColumnTitle</th>
+    <table class="govuk-table">
+        <thead class="govuk-table__head">
+        <tr class="govuk-table__row">
+            <th scope="col" class="govuk-table__header">@Resources.AnnexNameColumnTitle</th>
+            <th scope="col" class="govuk-table__header">@Resources.AnnexColumnTitle</th>
         </tr>
         </thead>
-        <tbody>
+        <tbody class="govuk-table__body">
         @if (Model.ProcessOfGeneration.IsRequired)
         {
-            <tr>
-                <td>@Html.LabelFor(m => m.ProcessOfGeneration, Resources.ProcessOfGeneration)</td>
-                <td>
+            <tr class="govuk-table__row">
+                <td class="govuk-table__cell">@Html.LabelFor(m => m.ProcessOfGeneration, Resources.ProcessOfGeneration)</td>
+                <td class="govuk-table__cell">
                     @if (Model.ProcessOfGeneration.FileId.HasValue)
                     {
                         @Html.ActionLink(Resources.DownloadLink, "Download", new { fileId = Model.ProcessOfGeneration.FileId.Value })
@@ -34,9 +34,9 @@
         }
         @if (Model.TechnologyEmployed.IsRequired)
         {
-            <tr>
-                <td>@Html.LabelFor(m => m.TechnologyEmployed, Resources.TechnologyEmployed)</td>
-                <td>
+            <tr class="govuk-table__row">
+                <td class="govuk-table__cell">@Html.LabelFor(m => m.TechnologyEmployed, Resources.TechnologyEmployed)</td>
+                <td class="govuk-table__cell">
                     @if (Model.TechnologyEmployed.FileId.HasValue)
                     {
                         @Html.ActionLink(Resources.DownloadLink, "Download", new { fileId = Model.TechnologyEmployed.FileId.Value })
@@ -50,9 +50,9 @@
         }
         @if (Model.WasteComposition.IsRequired)
         {
-            <tr>
-                <td>@Html.LabelFor(m => m.WasteComposition, Resources.WasteComposition)</td>
-                <td>
+            <tr class="govuk-table__row">
+                <td class="govuk-table__cell">@Html.LabelFor(m => m.WasteComposition, Resources.WasteComposition)</td>
+                <td class="govuk-table__cell">
                     @if (Model.WasteComposition.FileId.HasValue)
                     {
                         @Html.ActionLink(Resources.DownloadLink, "Download", new { fileId = Model.WasteComposition.FileId.Value })
