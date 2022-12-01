@@ -6,38 +6,26 @@
     Layout = "~/Views/Shared/_Layout.GovUK.Sections.cshtml";
 }
 
-<style>
+<div class="govuk-form-group">
+    <section>
+        <div>
+            <h1 class="govuk-heading-l">@Resources.StartHeader</h1>
+            <p>@Resources.StartText1</p>
+            <p>@Html.ActionLink(Resources.TemplateLinkText, "Index", "BulkUploadTemplate", new { id = @Model.NotificationId }, null) @Resources.StartText2</p>
+            <p class="bold-small">@Resources.StartText3</p>
+        </div>
+    </section>
 
-    .start-button
+    @using (Html.BeginForm())
     {
-        padding-left: 60px !important;
-        padding-right: 60px !important;
+        @Html.AntiForgeryToken()
+
+        <div class="govuk-form-group">
+            <p>
+                <button class="govuk-button" type="submit">@Resources.StartButtonText</button>
+            </p>
+        </div>
     }
-
-</style>
-
-<div class="grid-row">
-    <div class="column-full">
-        <section class="grid-row">
-            <div class="column-full">
-                <h1 class="govuk-heading-l">@Resources.StartHeader</h1>
-                <p>@Resources.StartText1</p>
-                <p>@Html.ActionLink(Resources.TemplateLinkText, "Index", "BulkUploadTemplate", new { id = @Model.NotificationId }, null) @Resources.StartText2</p>
-                <p class="bold-small">@Resources.StartText3</p>
-            </div>
-        </section>
-
-        @using (Html.BeginForm())
-        {
-            @Html.AntiForgeryToken()
-
-            <div class="govuk-form-group">
-                <p>
-                    <button class="button start-button" type="submit">@Resources.StartButtonText</button>
-                </p>
-            </div>
-        }
-    </div>
 </div>
 
 @Html.ActionLink(Resources.NotificationOptionsLink, "Index", "Options", new { id = @Model.NotificationId, area = "NotificationApplication" }, null)
