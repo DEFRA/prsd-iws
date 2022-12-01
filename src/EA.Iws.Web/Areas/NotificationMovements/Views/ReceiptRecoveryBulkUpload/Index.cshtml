@@ -9,16 +9,6 @@
 
 }
 
-<style>
-
-    .start-button
-    {
-        padding-left: 60px !important;
-        padding-right: 60px !important;
-    }
-
-</style>
-
 <div class="grid-row">
     <div class="column-full">
         <section class="grid-row">
@@ -34,13 +24,12 @@
         {
             @Html.AntiForgeryToken()
 
-            <div class="govuk-form-group">
-                <p>
-                    <button class="button start-button" type="submit">@Resources.StartButtonText</button>
-                </p>
-            </div>
+            <button class="govuk-button" type="submit">@Resources.StartButtonText</button>
         }
     </div>
 </div>
-
-@Html.ActionLink(Resources.NotificationOptionsLink, "Index", "Options", new { id = @Model.NotificationId, area = "NotificationApplication" }, null)
+<div class="grid-row">
+    <div class="column-full">
+        @Html.ActionLink(Resources.NotificationOptionsLink, "Index", "Options", new { id = @Model.NotificationId, area = "NotificationApplication" }, null)
+    </div>
+</div>
