@@ -6,46 +6,42 @@
     var typeText = Model.NotificationType == NotificationType.Disposal ? "disposal" : "recovery";
     ViewBag.Title = string.Format(Resource.UploadReceiptRecoveryTabTitle, typeText);
     Layout = "~/Views/Shared/_Layout.GovUK.Sections.cshtml";
-
 }
 
-<div class="grid-row">
-    <div class="column-full">
-        <div>
-            <h1 class="heading-large">@string.Format(Resource.UploadReceiptRecoveryTitle, typeText)</h1>
-            <p>@string.Format(Resource.UploadReceiptRecoveryText1, typeText)</p>
-            <p>@Resource.UploadReceiptRecoveryText2</p>
-            <p>
-                <ul class="list-bullet grey-text">
-                    For example:
-                    <li>@Resource.UploadReceiptRecoveryList1</li>
-                    <li>@Resource.UploadReceiptRecoveryList2</li>
-                    <li>@Resource.UploadReceiptRecoveryList3</li>
-                    <li>@string.Format(Resource.UploadReceiptRecoveryList4, typeText)</li>
-                    <li>@Resource.UploadReceiptRecoveryList5</li>
-                    <li>@Resource.UploadReceiptRecoveryList6</li>
-                </ul>
-            </p>
-            <p>
+<div class="govuk-form-group">
+    <div>
+        <h1 class="heading-large">@string.Format(Resource.UploadReceiptRecoveryTitle, typeText)</h1>
+        <p>@string.Format(Resource.UploadReceiptRecoveryText1, typeText)</p>
+        <p>@Resource.UploadReceiptRecoveryText2</p>
+        <p>
+            <ul class="list-bullet grey-text">
+                For example:
+                <li>@Resource.UploadReceiptRecoveryList1</li>
+                <li>@Resource.UploadReceiptRecoveryList2</li>
+                <li>@Resource.UploadReceiptRecoveryList3</li>
+                <li>@string.Format(Resource.UploadReceiptRecoveryList4, typeText)</li>
+                <li>@Resource.UploadReceiptRecoveryList5</li>
+                <li>@Resource.UploadReceiptRecoveryList6</li>
+            </ul>
+        </p>
+        <p>
+    </div>
+
+    @using (Html.BeginForm("Upload", null, null, FormMethod.Post, HtmlHelper.AnonymousObjectToHtmlAttributes(new { enctype = "multipart/form-data" })))
+    {
+        @Html.AntiForgeryToken()
+        @Html.Gds().ValidationSummary()
+
+        <div class="form-group @Html.Gds().FormGroupClass(m => m.File)">
+            <label for="@Html.NameFor(m => m.File)" class="visually-hidden">@Html.DisplayNameFor(m => m.File)</label>
+            @Html.Gds().ValidationMessageFor(m => m.File)
+            @Html.Gds().TextBoxFor(m => m.File, new { type = "file" })
         </div>
 
-        @using (Html.BeginForm("Upload", null, null,
-            FormMethod.Post, HtmlHelper.AnonymousObjectToHtmlAttributes(new { enctype = "multipart/form-data" })))
-        {
-            @Html.AntiForgeryToken()
-            @Html.Gds().ValidationSummary()
-
-            <div class="form-group @Html.Gds().FormGroupClass(m => m.File)">
-                <label for="@Html.NameFor(m => m.File)" class="visually-hidden">@Html.DisplayNameFor(m => m.File)</label>
-                @Html.Gds().ValidationMessageFor(m => m.File)
-                @Html.Gds().TextBoxFor(m => m.File, new { type = "file" })
-            </div>
-
-            <div class="form-group-compound">
-                <button class="govuk-button" type="submit">@Constants.ContinueButtonText</button>
-            </div>
-        }
-    </div>
+        <div class="form-group-compound">
+            <button class="govuk-button" type="submit">@Constants.ContinueButtonText</button>
+        </div>
+    }
 </div>
 
 @Html.ActionLink(Resource.NotificationOptionsLink, "Index", "Options", new { id = @Model.NotificationId, area = "NotificationApplication" }, null)
