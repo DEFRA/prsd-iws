@@ -30,7 +30,7 @@ else
 
                     @for (int i = 0; i < Model.Shipments.Count(); i++)
                     {
-                        <div class="govuk-checkboxes__item">
+                        <div class="multiple-choice govuk-checkboxes__item">
                             @Html.HiddenFor(m => m.Shipments[i].Id)
                             @Html.HiddenFor(m => m.Shipments[i].DisplayName)
                             @Html.CheckBoxFor(m => m.Shipments[i].IsSelected, new { @class = "govuk-checkboxes__input" })
