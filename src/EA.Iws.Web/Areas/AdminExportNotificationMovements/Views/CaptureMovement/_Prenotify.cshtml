@@ -10,7 +10,7 @@
     <fieldset class="govuk-fieldset">
         <div class="govuk-checkboxes" data-module="govuk-checkboxes">
             <div>@Html.Gds().ValidationMessageFor(m => m.HasNoPrenotification)</div>
-            <div class="govuk-checkboxes__item">
+            <div class="multiple-choice govuk-checkboxes__item">
                 @Html.Gds().CheckBoxFor(m => m.HasNoPrenotification, new { @class = "govuk-checkboxes__input" })
                 <label class="govuk-label govuk-checkboxes__label" for="@Html.NameFor(m => m.HasNoPrenotification)">
                     @Html.DisplayNameFor(m => m.HasNoPrenotification)

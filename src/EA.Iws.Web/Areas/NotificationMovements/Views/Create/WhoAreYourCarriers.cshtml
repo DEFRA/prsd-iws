@@ -22,7 +22,7 @@
             @Html.ActionLink(Resources.CarrierLink, "AddIntendedCarrier", "Create", Model.MovementIds.ToRouteValueDictionary("newmovementIds"), null)
         </div>
         <div class="govuk-checkboxes" data-module="govuk-checkboxes">
-            <div class="govuk-checkboxes__item">
+            <div class="multiple-choice govuk-checkboxes__item">
                 @Html.CheckBoxFor(m => m.AddCarriersLater, new { id = "addLater", @class = "govuk-checkboxes__input" })
                 <label class="govuk-label govuk-checkboxes__label" for="addLater">
                     @Resources.AddLaterText

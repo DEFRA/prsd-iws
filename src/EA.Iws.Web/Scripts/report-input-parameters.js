@@ -1,5 +1,5 @@
 ﻿$(function () {
-    $(".text-field-select-list").change(function () {
+    $("#InputParameters_SelectedTextField").change(function () {
         var panel = $('.operator-text-panel');
 
         if (this.value === "-1") {

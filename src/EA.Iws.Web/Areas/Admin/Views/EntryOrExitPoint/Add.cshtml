@@ -36,7 +36,7 @@
         <p class="heading-small">@Resource.Warning</p>
         @Html.Gds().ValidationMessageFor(m => m.IsWarningAccepted)
         <div class="govuk-checkboxes" data-module="govuk-checkboxes">
-            <div class="govuk-checkboxes__item">
+            <div class="multiple-choice govuk-checkboxes__item">
                 @Html.CheckBoxFor(m => m.IsWarningAccepted, new { id = "warning", @class = "govuk-checkboxes__input" })
                 <label class="govuk-label govuk-checkboxes__label" for="warning">
                     @Resource.WarningLabel

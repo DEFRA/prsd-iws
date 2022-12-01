@@ -44,15 +44,15 @@
                 @Html.Gds().ValidationMessageFor(m => m.Year)
                 <div class="govuk-form-group form-group-day">
                     @Html.Gds().LabelFor(m => m.Day, false)
-                    @Html.Gds().TextBoxFor(m => m.Day, new { type = "number", min = "1", max = "31" })
+                    @Html.Gds().TextBoxFor(m => m.Day, new { type = "number", min = "1", max = "31" }, useHalfWidth: false)
                 </div>
                 <div class="govuk-form-group form-group-month">
                     @Html.Gds().LabelFor(m => m.Month, false)
-                    @Html.Gds().TextBoxFor(m => m.Month, new { type = "number", min = "1", max = "12" })
+                    @Html.Gds().TextBoxFor(m => m.Month, new { type = "number", min = "1", max = "12" }, useHalfWidth: false)
                 </div>
                 <div class="govuk-form-group form-group-year">
                     @Html.Gds().LabelFor(m => m.Year, false)
-                    @Html.Gds().TextBoxFor(m => m.Year, new { type = "number", min = "2015" })
+                    @Html.Gds().TextBoxFor(m => m.Year, new { type = "number", min = "2015" }, useHalfWidth: false)
                 </div>
             </div>
         </fieldset>
@@ -101,7 +101,7 @@
                 {
                     MvcHtmlString idForThisCheckBox = Html.NameFor(m => m.PackagingTypes.PossibleValues[i]);
 
-                    <div class="govuk-checkboxes__item">
+                    <div class="multiple-choice govuk-checkboxes__item">
                         @Html.CheckBoxFor(m => m.PackagingTypes.PossibleValues[i].Selected, new { id = idForThisCheckBox, @class = "govuk-checkboxes__input" })
                         <label class="govuk-label govuk-checkboxes__label" for="@idForThisCheckBox">
                             @if (Model.PackagingTypes.ShowEnumValue)
