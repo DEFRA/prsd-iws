@@ -28,7 +28,7 @@
                             <th style="width: 11%">
                                 @Resources.ShipmentNumber
                             </th>
-                            <th style="width: 15%">
+                            <th style="width: 25%">
                                 @Resources.ActualDateOfShipment
                             </th>
                             <th style="border-bottom: none !important; width: 1%"></th>
@@ -46,7 +46,7 @@
                             </td>
                             <td style="border-bottom: none !important">
                                 <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.NewActualShipmentDate)">
-                                    @Html.Gds().TextBoxFor(m => m.NewActualShipmentDate, new { data_datable = "ddmmyy", @style = "width: 65%;" })
+                                    @Html.Gds().TextBoxFor(m => m.NewActualShipmentDate, new { data_datable = "ddmmyy", @style = "width: 80%;" })
                                 </div>
                             </td>
                             <td style="border-bottom: none !important"></td>
