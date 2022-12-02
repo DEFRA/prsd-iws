@@ -34,7 +34,7 @@
 <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.EntryPointId)">
     @Html.Gds().LabelFor(m => m.EntryPointId, false)
     @Html.Gds().ValidationMessageFor(m => m.EntryPointId)
-    @Html.Gds().DropDownListFor(m => m.EntryPointId, Model.EntryOrExitPointList, string.Empty, new { @class = "govuk-select", data_select_box = "true" })
+    @Html.Gds().DropDownListFor(m => m.EntryPointId, Model.EntryOrExitPointList, string.Empty, new { data_select_box = "true" })
 </div>
 
 <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.ExitPointId)">
@@ -45,5 +45,5 @@
     }
     @Html.Gds().LabelFor(m => m.ExitPointId, false)
     @Html.Gds().ValidationMessageFor(m => m.ExitPointId)
-    @Html.Gds().DropDownListFor(m => m.ExitPointId, Model.EntryOrExitPointList, string.Empty, new { @class = "govuk-select", data_select_box = "true" })
+    @Html.Gds().DropDownListFor(m => m.ExitPointId, Model.EntryOrExitPointList, string.Empty, new { data_select_box = "true" })
 </div>
