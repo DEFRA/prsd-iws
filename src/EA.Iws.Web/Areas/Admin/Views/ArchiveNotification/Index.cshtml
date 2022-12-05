@@ -1,4 +1,5 @@
-﻿@using EA.Iws.Web.Areas.Admin.Views.ArchiveNotification;
+﻿@using EA.Iws.Web.Infrastructure.Paging
+@using EA.Iws.Web.Areas.Admin.Views.ArchiveNotification;
 @model EA.Iws.Web.Areas.Admin.ViewModels.ArchiveNotification.ArchiveNotificationResultViewModel
 @{
     ViewBag.Title = "Archive notifications";
@@ -71,6 +72,7 @@
             }
         </tbody>
     </table>
+    @Html.Pager(Model.PageSize, Model.PageNumber, Model.NumberOfNotifications)
 }
 else
 {
