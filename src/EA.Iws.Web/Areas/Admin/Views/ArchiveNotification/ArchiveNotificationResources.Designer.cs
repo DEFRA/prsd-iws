@@ -79,6 +79,24 @@ namespace EA.Iws.Web.Areas.Admin.Views.ArchiveNotification {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to After you archive a notification, personal data stored with it such as name and address will be shown as &apos;Archived&apos; in the system..
+        /// </summary>
+        public static string GdprBlurbEnd {
+            get {
+                return ResourceManager.GetString("GdprBlurbEnd", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to GDPR states that personal data may only be kept in a form that permits identification of the individual for no longer than is necessary for the purposes for which it was processed. Therefore, we archive personal data after 3 years..
+        /// </summary>
+        public static string GdprBlurbStart {
+            get {
+                return ResourceManager.GetString("GdprBlurbStart", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Archive notifications.
         /// </summary>
         public static string Heading {
@@ -111,6 +129,15 @@ namespace EA.Iws.Web.Areas.Admin.Views.ArchiveNotification {
         public static string Status {
             get {
                 return ResourceManager.GetString("Status", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Why are we asking you to archive notification?.
+        /// </summary>
+        public static string WhyAreWeAsking {
+            get {
+                return ResourceManager.GetString("WhyAreWeAsking", resourceCulture);
             }
         }
     }
