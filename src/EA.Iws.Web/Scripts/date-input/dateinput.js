@@ -316,6 +316,45 @@
         }
     });
 
+    //Import Notification    
+    $("#NotificationReceived_Day").keyup(function () {
+        if ($(this).val().length == 2) {
+            $("#NotificationReceived_Month").focus();
+        }
+    });
+
+    $("#NotificationReceived_Month").keyup(function () {
+        if ($(this).val().length == 2) {
+            $("#NotificationReceived_Year").focus();
+        }
+    });
+
+    //Amounts and start dates
+    $("#StartDate_Day").keyup(function () {
+        if ($(this).val().length == 2) {
+            $("#StartDate_Month").focus();
+        }
+    });
+
+    $("#StartDate_Month").keyup(function () {
+        if ($(this).val().length == 2) {
+            $("#StartDate_Year").focus();
+        }
+    });
+
+    //Amounts and end dates
+    $("#EndDate_Day").keyup(function () {
+        if ($(this).val().length == 2) {
+            $("#EndDate_Month").focus();
+        }
+    });
+
+    $("#EndDate_Month").keyup(function () {
+        if ($(this).val().length == 2) {
+            $("#EndDate_Year").focus();
+        }
+    });
+    
 });
 
 
