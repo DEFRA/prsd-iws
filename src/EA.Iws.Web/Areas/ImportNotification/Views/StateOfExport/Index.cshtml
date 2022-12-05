@@ -45,8 +45,7 @@
 
         function updateAuthoritiesAndExitPoints(html) {
             $("#ca-and-exit-point").html(html);
-            var $radios = $(".multiple-choice input[type='radio']");
-            new GOVUK.SelectionButtons($radios);
+            select2Init();
         }
     </script>
 }
