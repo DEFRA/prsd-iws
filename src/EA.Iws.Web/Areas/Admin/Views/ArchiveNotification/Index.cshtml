@@ -4,7 +4,25 @@
     ViewBag.Title = "Archive notifications";
 }
 
+@helper DisplayDate(DateTimeOffset date)
+{
+    @date.ToString("d MMM yyyy")
+}
+
 <h1 class="govuk-heading-l">@ArchiveNotificationResources.Heading</h1>
+
+<details class="govuk-details" data-module="govuk-details">
+    <summary class="govuk-details__summary">
+        <span class="govuk-details__summary-text">
+            @ArchiveNotificationResources.WhyAreWeAsking
+        </span>
+    </summary>
+    <div class="govuk-details__text">
+        @ArchiveNotificationResources.GdprBlurbStart
+        <br />
+        @ArchiveNotificationResources.GdprBlurbEnd
+    </div>
+</details>
 
 @if (Model.HasAnyResults)
 {
@@ -19,13 +37,26 @@
             </tr>
         </thead>
         <tbody class="govuk-table__body">
-            <tr class="govuk-table__row">
-                <td class="govuk-table__cell"></td>
-                <td class="govuk-table__cell"></td>
-                <td class="govuk-table__cell"></td>
-                <td class="govuk-table__cell"></td>
-                <td class="govuk-table__cell"></td>
-            </tr>
+            @foreach (var notification in Model.Notifications)
+            {
+                <tr class="govuk-table__row">
+                    <td class="govuk-table__cell">
+                        @Html.Raw(notification.NotificationNumber.Replace(" ", "&nbsp;"))
+                    </td>
+                    <td class="govuk-table__cell">
+                        <span class="statusbox @Html.ExportStatus().DisplayColorClass(notification.Status) table">@Html.Raw(EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(notification.Status).ToUpperInvariant().Replace(" ", "&nbsp;")) </span>
+                    </td>
+                    <td class="govuk-table__cell">
+                        @DisplayDate(@notification.CreatedDate)
+                    </td>
+                    <td class="govuk-table__cell">
+                        @notification.CompanyName
+                    </td>
+                    @*<td class="govuk-table__cell">
+                            @notification.
+                        </td>*@
+                </tr>
+            }
         </tbody>
     </table>
 }

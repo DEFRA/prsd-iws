@@ -123,6 +123,12 @@
   <data name="DateGenerated" xml:space="preserve">
     <value>Date generated</value>
   </data>
+  <data name="GdprBlurbEnd" xml:space="preserve">
+    <value>After you archive a notification, personal data stored with it such as name and address will be shown as 'Archived' in the system.</value>
+  </data>
+  <data name="GdprBlurbStart" xml:space="preserve">
+    <value>GDPR states that personal data may only be kept in a form that permits identification of the individual for no longer than is necessary for the purposes for which it was processed. Therefore, we archive personal data after 3 years.</value>
+  </data>
   <data name="Heading" xml:space="preserve">
     <value>Archive notifications</value>
   </data>
@@ -134,5 +140,8 @@
   </data>
   <data name="Status" xml:space="preserve">
     <value>Status</value>
+  </data>
+  <data name="WhyAreWeAsking" xml:space="preserve">
+    <value>Why are we asking you to archive notification?</value>
   </data>
 </root>
