@@ -1,6 +1,7 @@
 ﻿@using EA.Iws.Web.Infrastructure.Paging
 @using EA.Iws.Web.Areas.Admin.Views.ArchiveNotification;
 @model EA.Iws.Web.Areas.Admin.ViewModels.ArchiveNotification.ArchiveNotificationResultViewModel
+
 @{
     ViewBag.Title = "Archive notifications";
 }
@@ -12,96 +13,161 @@
 
 <h1 class="govuk-heading-l">@ArchiveNotificationResources.Heading</h1>
 
-<h1 class="govuk-heading-m">
-    @ArchiveNotificationResources.SelectNotifications
-</h1>
-
-<details class="govuk-details" data-module="govuk-details">
-    <summary class="govuk-details__summary">
-        <span class="govuk-details__summary-text">
-            @ArchiveNotificationResources.WhyAreWeAsking
-        </span>
-    </summary>
-    <div class="govuk-details__text">
-        @ArchiveNotificationResources.GdprBlurbStart
-        <br />
-        <br />
-        @ArchiveNotificationResources.GdprBlurbEnd
-    </div>
-</details>
-
-@if (Model.HasAnyResults)
+@using (Html.BeginForm())
 {
-    <table class="govuk-table" id="tblArchive">
-        <thead class="govuk-table__head">
-            <tr class="govuk-table__row">
-                @Html.Raw(Model.Notifications.Count(n => n.IsSelected == true) + " of 25 notifications selected")
-            </tr>
-        </thead>
-        <thead class="govuk-table__head">
-            <tr class="govuk-table__row">
-                <th scope="col" class="govuk-table__header">@ArchiveNotificationResources.NotificationNumber</th>
-                <th scope="col" class="govuk-table__header">@ArchiveNotificationResources.Status</th>
-                <th scope="col" class="govuk-table__header">@ArchiveNotificationResources.DateGenerated</th>
-                <th scope="col" class="govuk-table__header">@ArchiveNotificationResources.CompanyName</th>
-                <th scope="col" class="govuk-table__header">
-                    <div class="govuk-checkboxes__item govuk-checkboxes--small">
-                        <input class="govuk-checkboxes__input" id="selectAll" name="selectAll" type="checkbox">
-                        <label class="govuk-label govuk-checkboxes__label" for="selectAll" style="white-space:nowrap">
-                            Select all
-                        </label>
-                    </div>
-                </th>
-            </tr>
-        </thead>
-        <tbody class="govuk-table__body">
-            @foreach (var notification in Model.Notifications)
-            {
-                <tr class="govuk-table__row">
-                    <td class="govuk-table__cell">
-                        @Html.Raw(notification.NotificationNumber.Replace(" ", "&nbsp;"))
-                    </td>
-                    <td class="govuk-table__cell">
-                        @notification.Status
-                    </td>
-                    <td class="govuk-table__cell">
-                        @DisplayDate(@notification.CreatedDate)
-                    </td>
-                    <td class="govuk-table__cell">
-                        @notification.CompanyName
-                    </td>
-                    <td class="govuk-table__cell">
-                        <div class="govuk-checkboxes__item govuk-checkboxes--small">
-                            @*@Html.CheckBoxFor(m => notification.IsSelected,
-        new { id = notification.NotificationNumber, title = notification.NotificationNumber, @class = "govuk-label govuk-checkboxes__label" })*@
-                            @*@Html.CheckBoxFor(m => notification.IsSelected, new { id = notification.NotificationNumber, @class = "govuk-checkboxes__input" })
-        <label class="govuk-label govuk-checkboxes__label" for="@notification.NotificationNumber" />*@
+    @Html.AntiForgeryToken()
+    @Html.Gds().ValidationSummary()
 
-                            <input type="checkbox" class="govuk-checkboxes__input" id="@notification.NotificationNumber" title="@notification.NotificationNumber"/>
-                            <label class="govuk-label govuk-checkboxes__label" for="@notification.NotificationNumber"/>
-                        </div>
+    <div id="dvInformationMessage" class="archive-notification-warning" style="display: none;">
+        <div class="gem-c-success-alert govuk-notification-banner govuk-notification-banner-warning">
+            <div class="govuk-notification-banner-header">
+                <h2 class="govuk-notification-banner-title">Important</h2>
+            </div>
+            <div class="govuk-notification-banner-content">
+                <p class="govuk-body">You may only select up to 25 notifications at a time for archiving.</p>
+            </div>
+        </div>
+    </div>
+
+    <h1 class="govuk-heading-m">
+        @ArchiveNotificationResources.SelectNotifications
+    </h1>
+
+    <details class="govuk-details" data-module="govuk-details">
+        <summary class="govuk-details__summary">
+            <span class="govuk-details__summary-text">
+                @ArchiveNotificationResources.WhyAreWeAsking
+            </span>
+        </summary>
+        <div class="govuk-details__text">
+            @ArchiveNotificationResources.GdprBlurbStart
+            <br />
+            <br />
+            @ArchiveNotificationResources.GdprBlurbEnd
+        </div>
+    </details>
+
+    if (Model.HasAnyResults)
+    {
+        <div id="dvCountHeader">
+            <span id="counter"></span> of 25 notifications selected
+        </div>
+        <div id="tblArchive" class="govuk-form-group">
+            @*@Html.Gds().ValidationMessageFor(m => m.SelectedNotification)*@
+            <table class="govuk-table">
+                <thead class="govuk-table__head">
+                    <tr class="govuk-table__row">
+                        <th scope="col" class="govuk-table__header">@ArchiveNotificationResources.NotificationNumber</th>
+                        <th scope="col" class="govuk-table__header">@ArchiveNotificationResources.Status</th>
+                        <th scope="col" class="govuk-table__header">@ArchiveNotificationResources.DateGenerated</th>
+                        <th scope="col" class="govuk-table__header">@ArchiveNotificationResources.CompanyName</th>
+                        <th scope="col" class="govuk-table__header">
+                            <div class="govuk-checkboxes__item govuk-checkboxes--small">
+                                <input class="govuk-checkboxes__input" id="selectAll" name="selectAll" type="checkbox">
+                                <label class="govuk-label govuk-checkboxes__label" for="selectAll" style="white-space:nowrap">
+                                    Select all
+                                </label>
+                            </div>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody class="govuk-table__body">
+                    @for (int i = 0; i < Model.Notifications.Count; i++)
+                    {
+                        <tr class="govuk-table__row">
+                            <td class="govuk-table__cell">
+                                @Html.DisplayFor(m => m.Notifications[i].NotificationNumber)
+                            </td>
+                            <td class="govuk-table__cell">
+                                @Html.DisplayFor(m => m.Notifications[i].Status)
+                            </td>
+                            <td class="govuk-table__cell">
+                                @DisplayDate(Model.Notifications[i].CreatedDate)
+                            </td>
+                            <td class="govuk-table__cell">
+                                @Html.DisplayFor(m => m.Notifications[i].CompanyName)
+                            </td>
+                            <td class="govuk-table__cell">
+                                <div class="govuk-checkboxes__item govuk-checkboxes--small">
+                                    <input type="checkbox" class="govuk-checkboxes__input checkboxes" id="@Model.Notifications[i].NotificationNumber" title="@Model.Notifications[i].NotificationNumber" />
+                                    <label class="govuk-label govuk-checkboxes__label" for="@Model.Notifications[i].NotificationNumber">
+                                    </label>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            @Html.Pager(Model.PageSize, Model.PageNumber, Model.NumberOfNotifications)
+        </div>
+
+        <div class="govuk-form-group">
+            <p> <button class="govuk-button" type="submit">@Constants.ContinueButtonText</button></p>
+        </div>
+
+        for (int i = 0; i < Model.Notifications.Count; i++)
+        {
+            @Html.HiddenFor(m => m.Notifications[i].Id)
+            @Html.HiddenFor(m => m.Notifications[i].NotificationNumber)
+            @Html.HiddenFor(m => m.Notifications[i].CreatedDate)
+            @Html.HiddenFor(m => m.Notifications[i].CompanyName)
+        }
+    }
+    else
+    {
+        <table class="govuk-table" id="tblArchive">
+            <thead class="govuk-table__head">
+                <tr class="govuk-table__row">
+                    <th scope="col" class="govuk-table__header">@ArchiveNotificationResources.NotificationNumber</th>
+                    <th scope="col" class="govuk-table__header">@ArchiveNotificationResources.Status</th>
+                    <th scope="col" class="govuk-table__header">@ArchiveNotificationResources.DateGenerated</th>
+                    <th scope="col" class="govuk-table__header">@ArchiveNotificationResources.CompanyName</th>
+                </tr>
+            </thead>
+            <tbody class="govuk-table__body">
+                <tr class="govuk-table__row">
+                    <td class="govuk-table__cell" colspan="4">
+                        <h1 class="govuk-heading-m">@ArchiveNotificationResources.NoResults</h1>
                     </td>
                 </tr>
-            }
-        </tbody>
-    </table>
-    @Html.Pager(Model.PageSize, Model.PageNumber, Model.NumberOfNotifications)
+            </tbody>
+        </table>
+    }
 }
-else
-{
-    <h1 class="govuk-heading-m">@ArchiveNotificationResources.NoResults</h1>
-}
-
-<div class="govuk-form-group">
-    <p> <button class="govuk-button" type="submit">@Constants.ContinueButtonText</button></p>
-</div>
 
 @section scripts
 {
     <script type="text/javascript">
+        var count = 0;
+        var numberOfCheckboxesChecked = $('.checkboxes:checked').length;
+        $('#counter').html(numberOfCheckboxesChecked);
+
         $('#selectAll').click(function (e) {
             var table = $(e.target).closest('table');
             $('td input:checkbox', table).prop('checked', this.checked);
+
+            var numberOfCheckboxesChecked = $('.checkboxes:checked').length;
+            $('#counter').html(numberOfCheckboxesChecked);
         });
+
+        $(".checkboxes").click(function () {
+            var numberOfCheckboxes = $(".checkboxes").length;
+            var numberOfCheckboxesChecked = $('.checkboxes:checked').length;
+            $('#counter').html(numberOfCheckboxesChecked);
+
+            if (numberOfCheckboxes == numberOfCheckboxesChecked) {
+                $("#selectAll").prop("checked", true);
+            } else {
+                $("#selectAll").prop("checked", false);
+            }
+
+            if (numberOfCheckboxesChecked > 4) {
+                $('#dvInformationMessage').show();
+                //this.checked = false;
+            } else {
+                $('#dvInformationMessage').hide();
+            }
+        });
+
     </script>
 }
