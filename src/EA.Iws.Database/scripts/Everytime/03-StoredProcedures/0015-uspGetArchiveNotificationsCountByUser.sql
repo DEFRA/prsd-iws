@@ -1,7 +1,7 @@
 ﻿IF OBJECT_ID('[Notification].[uspGetArchiveNotificationsCountByUser]') IS NULL
     EXEC('CREATE PROCEDURE [Notification].[uspGetArchiveNotificationsCountByUser] AS SET NOCOUNT ON;')
 GO
-    ALTER PROCEDURE [Notification].[uspGetArchiveNotificationsByUser]
+    ALTER PROCEDURE [Notification].[uspGetArchiveNotificationsCountByUser]
         @UserId UNIQUEIDENTIFIER
 AS
 BEGIN
