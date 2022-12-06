@@ -18,7 +18,7 @@ BEGIN
 	    AND N.CompetentAuthority IN (select CompetentAuthority from [Person].[InternalUser] where UserId = @UserID)
     UNION 
     SELECT 
-	    N.id
+	    INN.id
     FROM [ImportNotification].[Notification] INN
         INNER JOIN [ImportNotification].[NotificationAssessment] INNA ON INN.Id = INNA .NotificationApplicationId
 	    INNER JOIN [ImportNotification].[NotificationDates] INND ON INND.NotificationAssessmentId = INNA.Id
