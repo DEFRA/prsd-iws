@@ -138,6 +138,9 @@
   <data name="NotificationNumber" xml:space="preserve">
     <value>Notification number</value>
   </data>
+  <data name="SelectNotifications" xml:space="preserve">
+    <value>Select the notifications that you want to archive</value>
+  </data>
   <data name="Status" xml:space="preserve">
     <value>Status</value>
   </data>

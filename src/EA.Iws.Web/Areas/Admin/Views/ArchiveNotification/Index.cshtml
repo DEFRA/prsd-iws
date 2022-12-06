@@ -12,6 +12,10 @@
 
 <h1 class="govuk-heading-l">@ArchiveNotificationResources.Heading</h1>
 
+<h1 class="govuk-heading-m">
+    @ArchiveNotificationResources.SelectNotifications
+</h1>
+
 <details class="govuk-details" data-module="govuk-details">
     <summary class="govuk-details__summary">
         <span class="govuk-details__summary-text">
@@ -29,6 +33,11 @@
 @if (Model.HasAnyResults)
 {
     <table class="govuk-table" id="tblArchive">
+        <thead class="govuk-table__head">
+            <tr class="govuk-table__row">
+                @Html.Raw(Model.Notifications.Count(n => n.IsSelected == true) + " of 25 notifications selected")
+            </tr>
+        </thead>
         <thead class="govuk-table__head">
             <tr class="govuk-table__row">
                 <th scope="col" class="govuk-table__header">@ArchiveNotificationResources.NotificationNumber</th>
@@ -63,9 +72,13 @@
                     </td>
                     <td class="govuk-table__cell">
                         <div class="govuk-checkboxes__item govuk-checkboxes--small">
-                            <input type="checkbox" class="govuk-checkboxes__input" id="@notification.NotificationNumber" title="@notification.NotificationNumber">
-                            <label class="govuk-label govuk-checkboxes__label" for="@notification.NotificationNumber">
-                            </label>
+                            @*@Html.CheckBoxFor(m => notification.IsSelected,
+        new { id = notification.NotificationNumber, title = notification.NotificationNumber, @class = "govuk-label govuk-checkboxes__label" })*@
+                            @*@Html.CheckBoxFor(m => notification.IsSelected, new { id = notification.NotificationNumber, @class = "govuk-checkboxes__input" })
+        <label class="govuk-label govuk-checkboxes__label" for="@notification.NotificationNumber" />*@
+
+                            <input type="checkbox" class="govuk-checkboxes__input" id="@notification.NotificationNumber" title="@notification.NotificationNumber"/>
+                            <label class="govuk-label govuk-checkboxes__label" for="@notification.NotificationNumber"/>
                         </div>
                     </td>
                 </tr>
@@ -86,7 +99,6 @@ else
 @section scripts
 {
     <script type="text/javascript">
-
         $('#selectAll').click(function (e) {
             var table = $(e.target).closest('table');
             $('td input:checkbox', table).prop('checked', this.checked);
