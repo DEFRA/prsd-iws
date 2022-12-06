@@ -2158,12 +2158,22 @@ textarea {
     vertical-align: bottom;
 }
 
-#tblArchive {
-    width : 900px;
+#tblArchive,
+#dvInformationMessage,
+#dvCountHeader {
+    width: 800px;
 }
 
 #tblArchive tr td .govuk-checkboxes__item {
     min-height: 0px !important;
     margin-top: -5px !important;
     margin-bottom: 0px !important;
+}
+
+#dvCountHeader {
+    background-color: #1d70b8;
+    height: 40px;
+    color: white;
+    padding-left: 20px;
+    padding-top: 15px;
 }

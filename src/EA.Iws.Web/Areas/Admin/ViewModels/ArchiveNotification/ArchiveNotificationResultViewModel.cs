@@ -3,7 +3,9 @@
     using DocumentFormat.OpenXml.Wordprocessing;
     using EA.Iws.Core.Admin.ArchiveNotification;
     using EA.Iws.Requests.Notification;
+    using System;
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
 
     public class ArchiveNotificationResultViewModel
     {
@@ -13,9 +15,7 @@
             PageNumber = userNotifications.PageNumber;
             PageSize = userNotifications.PageSize;
             Notifications = userNotifications.Notifications;
-        }
-
-        //public ArchiveNotificationResult[] ArchiveNotificationResults { get; set; }
+        }        
 
         public int NumberOfNotifications { get; set; }
 
@@ -24,6 +24,9 @@
         public int PageSize { get; set; }
 
         public IList<NotificationArchiveSummaryData> Notifications { get; set; }
+
+        [Required(ErrorMessage = "Select a notification to archive")]
+        public Guid? SelectedNotification { get; set; }
 
         public bool HasAnyResults
         {
