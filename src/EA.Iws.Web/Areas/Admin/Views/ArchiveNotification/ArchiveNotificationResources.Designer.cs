@@ -124,6 +124,15 @@ namespace EA.Iws.Web.Areas.Admin.Views.ArchiveNotification {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Select the notifications that you want to archive.
+        /// </summary>
+        public static string SelectNotifications {
+            get {
+                return ResourceManager.GetString("SelectNotifications", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Status.
         /// </summary>
         public static string Status {
