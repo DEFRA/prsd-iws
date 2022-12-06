@@ -9,10 +9,12 @@
 
         public string NotificationNumber { get; set; }
 
-        public NotificationStatus Status { get; set; }
+        public string Status { get; set; }
 
         public DateTimeOffset CreatedDate { get; set; }
 
         public string CompanyName { get; set; }
+
+        public bool IsSelected { get; set; }
     }
 }

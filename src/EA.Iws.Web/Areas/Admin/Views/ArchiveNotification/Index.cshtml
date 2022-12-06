@@ -62,7 +62,7 @@
                         @Html.Raw(notification.NotificationNumber.Replace(" ", "&nbsp;"))
                     </td>
                     <td class="govuk-table__cell">
-                        <span class="statusbox @Html.ExportStatus().DisplayColorClass(notification.Status) table">@Html.Raw(EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(notification.Status).ToUpperInvariant().Replace(" ", "&nbsp;")) </span>
+                        @notification.Status
                     </td>
                     <td class="govuk-table__cell">
                         @DisplayDate(@notification.CreatedDate)
