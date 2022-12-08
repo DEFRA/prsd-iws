@@ -81,10 +81,10 @@
                 </div>
             </div>
 
-            <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.SelectedOperationCodes)">
+            <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.SelectedOperationCodes)" id="advSearchRDCodes">
                 @Html.Gds().LabelFor(m => m.SelectedOperationCodes, showOptionalLabel: false)
                 @Html.Gds().ValidationMessageFor(m => m.SelectedOperationCodes)
-                @Html.ListBoxFor(m => m.SelectedOperationCodes, Model.OperationCodes)
+                @Html.ListBoxFor(m => m.SelectedOperationCodes, Model.OperationCodes, new { data_select_box = "true" })
             </div>
 
         </div>

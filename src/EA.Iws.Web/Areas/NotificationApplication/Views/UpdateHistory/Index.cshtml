@@ -31,6 +31,7 @@
                 @Html.HiddenFor(m => m.PageNumber)
 
                 <div class="govuk-form-group">
+                    @Html.Label(@Resource.SelectedScreenLabel) <br />
                     @Html.Gds().DropDownListFor(m => m.SelectedScreen, Model.FilterTerms, new { @class = "govuk-select" })
                 </div>
                 if (Model.SelectedScreen == "date")
