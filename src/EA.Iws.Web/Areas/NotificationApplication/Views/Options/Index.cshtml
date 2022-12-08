@@ -55,8 +55,13 @@
 
         <div class="column-third">
             <div id="submit-side-bar" style="background-color:#f8f8f8">
-                <h3 style="text-align:center; font-size:24px" >@Resource.AccessLevel</h3>
-                <h3 style="text-align:center; font-size:36px" >@Model.AccessLevelText</h3>
+                <p id="dvAccessLevelHeader"></p>
+                <div id="dvAccessLevelTitle">
+                    <label>@Resource.AccessLevel</label>
+                </div>
+                <div id="dvAccessLevelBody">
+                    <label>@Model.AccessLevelText</label>
+                </div>
             </div>
         </div>
     </div>
@@ -65,14 +70,14 @@
     {
         <hr />
     }
-    
+
     <div class="grid-row">
         <div class="column-half">
             <h2 class="heading-medium">@Resource.CurrentNotificationTitle @Model.NotificationNumber</h2>
             <div class="nav-bloc">
                 <nav>
                     @Html.ActionLink(Resource.ViewNotification, "Index", "Home", new { id = Model.NotificationId, area = "NotificationApplication" }, null)
-                    
+
                     @if (Model.IsOwner)
                     {
                         @Html.ActionLink(Resource.AssignNotification, "Index", "ChangeNotificationOwner", new { id = Model.NotificationId, area = string.Empty }, null)
@@ -116,11 +121,11 @@
                         new { data_track = "element", data_category = "Export notification", data_action = "Copy" })
                     <a href="https://www.gov.uk/importing-and-exporting-waste"
                        target="_blank"
-                       id="supportingInfo-link" 
+                       id="supportingInfo-link"
                        title="@Resource.TitleSupportingInfo"
                        rel="external"
                        data-track="element"
-                       data-category="Export notification" 
+                       data-category="Export notification"
                        data-action="Supporting information">@Resource.SupportingInfoLink</a>
                     <span class="visuallyhidden">@Resource.SupportingInfoMessage</span>
                 </nav>
@@ -157,13 +162,13 @@
                             @Html.ActionLink(Resource.BulkUploadTemplate, "Index", "BulkUploadTemplate", new { notificationId = Model.NotificationId, area = "NotificationMovements" }, null)
                             if (Model.ShowGenerateInterimDocumentLink)
                             {
-                                    @Html.ActionLink(Resource.GenerateInterimDoc, "GenerateInterimMovementDocument", "Home", new { id = Model.NotificationId, area = "NotificationApplication" }, null)
+                                @Html.ActionLink(Resource.GenerateInterimDoc, "GenerateInterimMovementDocument", "Home", new { id = Model.NotificationId, area = "NotificationApplication" }, null)
                             }
-                                if (Model.ShowDownloadMovementsLink)
-                                {
-                                    @Html.ActionLink(Resource.Download, "Index", "Download", new { notificationId = Model.NotificationId, area = "NotificationMovements" }, null)
-                                }
-                                @Html.ActionLink(Resource.DownloadShipmentDocuments, "Index", "Documents", new { notificationId = Model.NotificationId, area = "NotificationMovements" }, null)
+                            if (Model.ShowDownloadMovementsLink)
+                            {
+                                @Html.ActionLink(Resource.Download, "Index", "Download", new { notificationId = Model.NotificationId, area = "NotificationMovements" }, null)
+                            }
+                            @Html.ActionLink(Resource.DownloadShipmentDocuments, "Index", "Documents", new { notificationId = Model.NotificationId, area = "NotificationMovements" }, null)
                         }
                     </nav>
                 </div>
@@ -239,47 +244,47 @@
                 <table class="odd-table">
                     <caption class="visuallyhidden">Shipment summary</caption>
                     <thead>
-                    <tr>
-                        <th>No.</th>
-                        <th>Status</th>
-                        <th>Prenotified</th>
-                        <th>Shipment due</th>
-                        <th>Received</th>
-                        <th>Quantity</th>
-                        <th>@operationTitle</th>
-                    </tr>
+                        <tr>
+                            <th>No.</th>
+                            <th>Status</th>
+                            <th>Prenotified</th>
+                            <th>Shipment due</th>
+                            <th>Received</th>
+                            <th>Quantity</th>
+                            <th>@operationTitle</th>
+                        </tr>
                     </thead>
 
                     <tbody>
-                    @{
-						for (int i = 0; i < Model.TableData.Count; i++)
-						{
-							var statusText = Model.TableData[i].Status == MovementStatus.Completed ? operationTitle : EnumHelper.GetDisplayName(Model.TableData[i].Status);
-							if (Model.TableData[i].HasShipped || Model.TableData[i].IsShipmentActive)
-							{
-								statusText = statusText + " (Shipped)";
-							}
-                            <tr>
-                                <td>@Model.TableData[i].Number</td>
-                                <td>@statusText</td>
-                                <td>
-                                    @DisplayDate(Model.TableData[i].PreNotification, Model.TableData[i].Status)
-                                </td>
-                                <td>
-                                    @DisplayDate(Model.TableData[i].ShipmentDate, Model.TableData[i].Status)
-                                </td>
-                                <td>
-                                    @DisplayDate(Model.TableData[i].Received, Model.TableData[i].Status)
-                                </td>
-                                <td>
-                                    @DisplayQuantity(Model.TableData[i].Quantity, Model.TableData[i].Unit, Model.TableData[i].Status)
-                                </td>
-                                <td>
-                                    @DisplayDate(Model.TableData[i].RecoveredOrDisposedOf, Model.TableData[i].Status)
-                                </td>
-                            </tr>
+                        @{
+                            for (int i = 0; i < Model.TableData.Count; i++)
+                            {
+                                var statusText = Model.TableData[i].Status == MovementStatus.Completed ? operationTitle : EnumHelper.GetDisplayName(Model.TableData[i].Status);
+                                if (Model.TableData[i].HasShipped || Model.TableData[i].IsShipmentActive)
+                                {
+                                    statusText = statusText + " (Shipped)";
+                                }
+                                <tr>
+                                    <td>@Model.TableData[i].Number</td>
+                                    <td>@statusText</td>
+                                    <td>
+                                        @DisplayDate(Model.TableData[i].PreNotification, Model.TableData[i].Status)
+                                    </td>
+                                    <td>
+                                        @DisplayDate(Model.TableData[i].ShipmentDate, Model.TableData[i].Status)
+                                    </td>
+                                    <td>
+                                        @DisplayDate(Model.TableData[i].Received, Model.TableData[i].Status)
+                                    </td>
+                                    <td>
+                                        @DisplayQuantity(Model.TableData[i].Quantity, Model.TableData[i].Unit, Model.TableData[i].Status)
+                                    </td>
+                                    <td>
+                                        @DisplayDate(Model.TableData[i].RecoveredOrDisposedOf, Model.TableData[i].Status)
+                                    </td>
+                                </tr>
+                            }
                         }
-                    }
                     </tbody>
                 </table>
             </div>

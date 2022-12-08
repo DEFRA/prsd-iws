@@ -133,6 +133,15 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.UpdateHistory {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Filter by an update option:.
+        /// </summary>
+        public static string SelectedScreenLabel {
+            get {
+                return ResourceManager.GetString("SelectedScreenLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Notification Update History Search Results.
         /// </summary>
         public static string TableCaption {

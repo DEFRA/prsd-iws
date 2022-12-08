@@ -47,7 +47,7 @@
                                 @{
                                     var htmlAttr = new Dictionary<string, object> { { "id", Html.NameFor(m => m.Facilities[i].Id) } };
                                     htmlAttr.Add("title", @Model.Facilities[i].Business.Name);
-                                    htmlAttr.Add("style", "width:30px; height:30px");
+                                    htmlAttr.Add("class", "tableRadio");
 
                                     if (@Model.Facilities[i].IsActualSiteOfTreatment)
                                     {
