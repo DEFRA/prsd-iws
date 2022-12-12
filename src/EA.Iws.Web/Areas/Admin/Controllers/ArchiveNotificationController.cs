@@ -5,8 +5,6 @@
     using EA.Iws.Web.Infrastructure.Authorization;
     using EA.Prsd.Core.Mediator;
     using Requests.Admin.ArchiveNotification;
-    using System;
-    using System.Collections.Generic;
     using System.Threading.Tasks;
     using System.Web.Mvc;
 
@@ -25,6 +23,17 @@
         public async Task<ActionResult> Index(int page = 1)
         {
             var response = await mediator.SendAsync(new GetArchiveNotificationsByUser(page));
+
+            var model = new ArchiveNotificationResultViewModel(response);
+
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Index()
+        {
+            var response = await mediator.SendAsync(new GetArchiveNotificationsByUser(1));
 
             var model = new ArchiveNotificationResultViewModel(response);
 
