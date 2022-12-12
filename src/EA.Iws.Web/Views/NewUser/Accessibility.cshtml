@@ -179,8 +179,13 @@ else
         <!-- Sub Heading 1 -->
         <h2 class="govuk-heading-m">How accessible is this website?</h2>
         <p class="govuk-body">
-            At the time of updating this statement, we have audited the customer facing elements of the service, and taken actions to remedy the known issues. We consider the customer facing elements of the service to be accessible.
+            We know some parts of this website are not fully accessible:
         </p>
+        <ul class="govuk-list govuk-list--bullet">
+            <li>
+                some tables are not coded in a way to support accurate interpretation by screen readers
+            </li>
+        </ul>
 
         <!-- Sub Heading 2 -->
         <h2 class="govuk-heading-m">What to do if you cannot access parts of this website</h2>
@@ -226,8 +231,19 @@ else
         <!-- Sub Heading 7 -->
         <h2 class="govuk-heading-m">Compliance status</h2>
         <p class="govuk-body">
-            This website is fully compliant with the <a href="https://www.w3.org/TR/WCAG21/" target="_blank">Web Content Accessibility Guidelines</a> version 2.1 AA standard.
+            This website is partially compliant with the <a href="https://www.w3.org/TR/WCAG21/" target="_blank">Web Content Accessibility Guidelines</a> version 2.1 AA standard, due to the non-compliance listed below.
         </p>
+        <h3 class="govuk-heading-m">Non-accessible content</h3>
+        <p class="govuk-body">
+            The content listed below is non-accessible for the following reason.
+        </p>
+        <h4 class="govuk-heading-m">Non-compliance with the accessibility regulations</h4>
+        <ul>
+            <li>
+                some pages when zoomed into 400% display content (to simulate a mobile device) incorrectly and causes the screen to scroll in multiple axes. 
+                This means that some users with visual impairments are unable to resize text to read comfortably. This fails WCAG 2.1 success criterion 1.4.10 (Reflow).
+            </li>
+        </ul>
 
         <!-- Sub Heading 8 -->
         <h2 class="govuk-heading-m">Disproportionate burden</h2>
@@ -244,7 +260,7 @@ else
         <!-- Sub Heading 10 -->
         <h2 class="govuk-heading-m">What we're doing to improve accessibility</h2>
         <p class="govuk-body">
-            We will undertake a further accessibility review in the financial year of 2023/24.
+            We will review what known issues we can fix during 2023/24, and we will update this page when issues are fixed.
         </p>
 
         <!-- Sub Heading 11 -->
@@ -259,7 +275,7 @@ else
             This allowed us to ensure that any accessibility issues present in individual components would be identified and hence the fix could be applied to all components across the service.
         </p>
         <p class="govuk-body">
-            This statement was prepared on 20/09/2021. It was last reviewed on 15/11/2022.
+            This statement was prepared on 20/09/2021. It was last reviewed on 20/12/2022.
         </p>
     </div>
 }
