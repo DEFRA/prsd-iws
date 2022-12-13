@@ -94,9 +94,11 @@
                             </td>
                             <td class="govuk-table__cell">
                                 <div class="govuk-checkboxes__item govuk-checkboxes--small">
-                                    <input type="checkbox" class="govuk-checkboxes__input checkboxes" id="@Model.Notifications[i].NotificationNumber" title="@Model.Notifications[i].NotificationNumber" />
-                                    <label class="govuk-label govuk-checkboxes__label" for="@Model.Notifications[i].NotificationNumber">
-                                    </label>
+                                    @Html.CheckBoxFor(m => m.Notifications[i].IsSelected, new { id = "@Model.Notifications[i].NotificationNumber", @class = "checkboxes__input checkboxes" })
+                                    @*<input type="checkbox" class="govuk-checkboxes__input checkboxes" id="@Model.Notifications[i].IsSelected" title="@Model.Notifications[i].IsSelected" />
+                                <label class="govuk-label govuk-checkboxes__label" for="@Model.Notifications[i].IsSelected">
+                                </label>*@
+                                    @Html.HiddenFor(m => m.Notifications[i].IsSelected)
                                 </div>
                             </td>
                             <td>
