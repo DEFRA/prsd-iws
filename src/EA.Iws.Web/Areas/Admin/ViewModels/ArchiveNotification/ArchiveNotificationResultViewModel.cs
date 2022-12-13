@@ -1,21 +1,25 @@
 ﻿namespace EA.Iws.Web.Areas.Admin.ViewModels.ArchiveNotification
 {
-    using DocumentFormat.OpenXml.Wordprocessing;
-    using EA.Iws.Core.Admin.ArchiveNotification;
     using EA.Iws.Requests.Notification;
+    using EA.Iws.Web.Areas.Admin.Views.ArchiveNotification;
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using System.Linq;
 
-    public class ArchiveNotificationResultViewModel
+    public class ArchiveNotificationResultViewModel : IValidatableObject
     {
+        public ArchiveNotificationResultViewModel()
+        {
+        }
+
         public ArchiveNotificationResultViewModel(UserArchiveNotifications userNotifications)
         {
             NumberOfNotifications = userNotifications.NumberOfNotifications;
             PageNumber = userNotifications.PageNumber;
             PageSize = userNotifications.PageSize;
             Notifications = userNotifications.Notifications;
-        }        
+        }
 
         public int NumberOfNotifications { get; set; }
 
@@ -25,14 +29,27 @@
 
         public IList<NotificationArchiveSummaryData> Notifications { get; set; }
 
-        [Required(ErrorMessage = "Select a notification to archive")]
-        public Guid? SelectedNotification { get; set; }
+        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+        {
+            if (NoNotificationsSelected)
+            {
+                yield return new ValidationResult(ArchiveNotificationResources.NoNotificationsSelected);
+            }
+        }
 
         public bool HasAnyResults
         {
-            get 
+            get
             {
-                return Notifications.Count > 0; 
+                return Notifications.Count > 0;
+            }
+        }
+
+        public bool NoNotificationsSelected
+        {
+            get
+            {
+                return Notifications.Where(n => n.IsSelected == true).Count() == 0;
             }
         }
     }

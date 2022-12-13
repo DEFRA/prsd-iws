@@ -106,6 +106,15 @@ namespace EA.Iws.Web.Areas.Admin.Views.ArchiveNotification {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Please select at least 1 notification from the table below for archiving..
+        /// </summary>
+        public static string NoNotificationsSelected {
+            get {
+                return ResourceManager.GetString("NoNotificationsSelected", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to No matching results were found.
         /// </summary>
         public static string NoResults {

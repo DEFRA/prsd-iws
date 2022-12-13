@@ -1,6 +1,7 @@
-﻿@using EA.Iws.Web.Infrastructure.Paging
+﻿@model EA.Iws.Web.Areas.Admin.ViewModels.ArchiveNotification.ArchiveNotificationResultViewModel
+@using EA.Iws.Requests.Notification;
+@using EA.Iws.Web.Infrastructure.Paging;
 @using EA.Iws.Web.Areas.Admin.Views.ArchiveNotification;
-@model EA.Iws.Web.Areas.Admin.ViewModels.ArchiveNotification.ArchiveNotificationResultViewModel
 
 @{
     ViewBag.Title = "Archive notifications";
@@ -77,15 +78,19 @@
                         <tr class="govuk-table__row">
                             <td class="govuk-table__cell">
                                 @Html.DisplayFor(m => m.Notifications[i].NotificationNumber)
+                                @Html.HiddenFor(m => m.Notifications[i].NotificationNumber)
                             </td>
                             <td class="govuk-table__cell">
                                 @Html.DisplayFor(m => m.Notifications[i].Status)
+                                @Html.HiddenFor(m => m.Notifications[i].Status)
                             </td>
                             <td class="govuk-table__cell">
                                 @DisplayDate(Model.Notifications[i].CreatedDate)
+                                @Html.HiddenFor(m => m.Notifications[i].CreatedDate)
                             </td>
                             <td class="govuk-table__cell">
                                 @Html.DisplayFor(m => m.Notifications[i].CompanyName)
+                                @Html.HiddenFor(m => m.Notifications[i].CompanyName)
                             </td>
                             <td class="govuk-table__cell">
                                 <div class="govuk-checkboxes__item govuk-checkboxes--small">
@@ -94,24 +99,22 @@
                                     </label>
                                 </div>
                             </td>
+                            <td>
+                                @Html.HiddenFor(m => m.Notifications[i].Id)
+                            </td>
                         </tr>
                     }
                 </tbody>
             </table>
+            @Html.HiddenFor(m => m.PageSize)
+            @Html.HiddenFor(m => m.PageNumber)
+            @Html.HiddenFor(m => m.NumberOfNotifications)
             @Html.Pager(Model.PageSize, Model.PageNumber, Model.NumberOfNotifications)
         </div>
 
         <div class="govuk-form-group">
             <p> <button class="govuk-button" type="submit">@Constants.ContinueButtonText</button></p>
         </div>
-
-        for (int i = 0; i < Model.Notifications.Count; i++)
-        {
-            @Html.HiddenFor(m => m.Notifications[i].Id)
-            @Html.HiddenFor(m => m.Notifications[i].NotificationNumber)
-            @Html.HiddenFor(m => m.Notifications[i].CreatedDate)
-            @Html.HiddenFor(m => m.Notifications[i].CompanyName)
-        }
     }
     else
     {
@@ -168,6 +171,5 @@
                 $('#dvInformationMessage').hide();
             }
         });
-
     </script>
 }

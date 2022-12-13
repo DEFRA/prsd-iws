@@ -31,11 +31,12 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Index()
+        public async Task<ActionResult> Index(ArchiveNotificationResultViewModel model)
         {
-            var response = await mediator.SendAsync(new GetArchiveNotificationsByUser(1));
-
-            var model = new ArchiveNotificationResultViewModel(response);
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
 
             return View(model);
         }
