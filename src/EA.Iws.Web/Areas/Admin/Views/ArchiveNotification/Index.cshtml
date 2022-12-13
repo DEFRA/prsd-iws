@@ -19,6 +19,10 @@
     @Html.AntiForgeryToken()
     @Html.Gds().ValidationSummary()
 
+    @Html.HiddenFor(m => m.PageSize)
+    @Html.HiddenFor(m => m.PageNumber)
+    @Html.HiddenFor(m => m.NumberOfNotifications)
+
     <div id="dvInformationMessage" class="archive-notification-warning" style="display: none;">
         <div class="gem-c-success-alert govuk-notification-banner govuk-notification-banner-warning">
             <div class="govuk-notification-banner-header">
@@ -50,72 +54,69 @@
 
     if (Model.HasAnyResults)
     {
-        <div id="dvCountHeader">
-            <span id="counter"></span> of 25 notifications selected
-        </div>
-        <div id="tblArchive" class="govuk-form-group">
-            @*@Html.Gds().ValidationMessageFor(m => m.SelectedNotification)*@
-            <table class="govuk-table">
-                <thead class="govuk-table__head">
-                    <tr class="govuk-table__row">
-                        <th scope="col" class="govuk-table__header">@ArchiveNotificationResources.NotificationNumber</th>
-                        <th scope="col" class="govuk-table__header">@ArchiveNotificationResources.Status</th>
-                        <th scope="col" class="govuk-table__header">@ArchiveNotificationResources.DateGenerated</th>
-                        <th scope="col" class="govuk-table__header">@ArchiveNotificationResources.CompanyName</th>
-                        <th scope="col" class="govuk-table__header">
-                            <div class="govuk-checkboxes__item govuk-checkboxes--small">
-                                <input class="govuk-checkboxes__input" id="selectAll" name="selectAll" type="checkbox">
-                                <label class="govuk-label govuk-checkboxes__label" for="selectAll" style="white-space:nowrap">
-                                    Select all
-                                </label>
-                            </div>
-                        </th>
-                    </tr>
-                </thead>
-                <tbody class="govuk-table__body">
-                    @for (int i = 0; i < Model.Notifications.Count; i++)
-                    {
+        <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.NoNotificationsSelected)">
+            @Html.Gds().ValidationMessageFor(m => m.NoNotificationsSelected)
+            <div id="dvCountHeader">
+                <span id="counter"></span> of 25 notifications selected
+            </div>
+            <div id="tblArchive" class="govuk-form-group">
+                <table class="govuk-table">
+                    <thead class="govuk-table__head">
                         <tr class="govuk-table__row">
-                            <td class="govuk-table__cell">
-                                @Html.DisplayFor(m => m.Notifications[i].NotificationNumber)
-                                @Html.HiddenFor(m => m.Notifications[i].NotificationNumber)
-                            </td>
-                            <td class="govuk-table__cell">
-                                @Html.DisplayFor(m => m.Notifications[i].Status)
-                                @Html.HiddenFor(m => m.Notifications[i].Status)
-                            </td>
-                            <td class="govuk-table__cell">
-                                @DisplayDate(Model.Notifications[i].CreatedDate)
-                                @Html.HiddenFor(m => m.Notifications[i].CreatedDate)
-                            </td>
-                            <td class="govuk-table__cell">
-                                @Html.DisplayFor(m => m.Notifications[i].CompanyName)
-                                @Html.HiddenFor(m => m.Notifications[i].CompanyName)
-                            </td>
-                            <td class="govuk-table__cell">
+                            <th scope="col" class="govuk-table__header">@ArchiveNotificationResources.NotificationNumber</th>
+                            <th scope="col" class="govuk-table__header">@ArchiveNotificationResources.Status</th>
+                            <th scope="col" class="govuk-table__header">@ArchiveNotificationResources.DateGenerated</th>
+                            <th scope="col" class="govuk-table__header">@ArchiveNotificationResources.CompanyName</th>
+                            <th scope="col" class="govuk-table__header">
                                 <div class="govuk-checkboxes__item govuk-checkboxes--small">
-                                    @Html.CheckBoxFor(m => m.Notifications[i].IsSelected, new { id = "@Model.Notifications[i].NotificationNumber", @class = "checkboxes__input checkboxes" })
-                                    @*<input type="checkbox" class="govuk-checkboxes__input checkboxes" id="@Model.Notifications[i].IsSelected" title="@Model.Notifications[i].IsSelected" />
-                                <label class="govuk-label govuk-checkboxes__label" for="@Model.Notifications[i].IsSelected">
-                                </label>*@
-                                    @Html.HiddenFor(m => m.Notifications[i].IsSelected)
+                                    <input class="govuk-checkboxes__input" id="selectAll" name="selectAll" type="checkbox">
+                                    <label class="govuk-label govuk-checkboxes__label" for="selectAll" style="white-space:nowrap">
+                                        Select all
+                                    </label>
                                 </div>
-                            </td>
-                            <td>
-                                @Html.HiddenFor(m => m.Notifications[i].Id)
-                            </td>
+                            </th>
                         </tr>
-                    }
-                </tbody>
-            </table>
-            @Html.HiddenFor(m => m.PageSize)
-            @Html.HiddenFor(m => m.PageNumber)
-            @Html.HiddenFor(m => m.NumberOfNotifications)
+                    </thead>
+                    <tbody class="govuk-table__body">
+                        @for (int i = 0; i < Model.Notifications.Count; i++)
+                        {
+                            <tr class="govuk-table__row">
+                                <td class="govuk-table__cell">
+                                    @Html.DisplayFor(m => m.Notifications[i].NotificationNumber)
+                                    @Html.HiddenFor(m => m.Notifications[i].NotificationNumber)
+                                </td>
+                                <td class="govuk-table__cell">
+                                    @Html.DisplayFor(m => m.Notifications[i].Status)
+                                    @Html.HiddenFor(m => m.Notifications[i].Status)
+                                </td>
+                                <td class="govuk-table__cell">
+                                    @DisplayDate(Model.Notifications[i].CreatedDate)
+                                    @Html.HiddenFor(m => m.Notifications[i].CreatedDate)
+                                </td>
+                                <td class="govuk-table__cell">
+                                    @Html.DisplayFor(m => m.Notifications[i].CompanyName)
+                                    @Html.HiddenFor(m => m.Notifications[i].CompanyName)
+                                </td>
+                                <td class="govuk-table__cell">
+                                    <div class="govuk-checkboxes__item govuk-checkboxes--small">
+                                        @Html.CheckBoxFor(m => m.Notifications[i].IsSelected, new { id = "@Model.Notifications[i].NotificationNumber", @class = "checkboxes__input checkboxes" })
+                                        @Html.HiddenFor(m => m.Notifications[i].IsSelected)
+                                    </div>
+                                </td>
+                                <td>
+                                    @Html.HiddenFor(m => m.Notifications[i].Id)
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="govuk-form-group" style="width: 800px">
             @Html.Pager(Model.PageSize, Model.PageNumber, Model.NumberOfNotifications)
         </div>
-
         <div class="govuk-form-group">
-            <p> <button class="govuk-button" type="submit">@Constants.ContinueButtonText</button></p>
+            <button class="govuk-button" type="submit">@Constants.ContinueButtonText</button>
         </div>
     }
     else

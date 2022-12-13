@@ -2,7 +2,6 @@
 {
     using EA.Iws.Requests.Notification;
     using EA.Iws.Web.Areas.Admin.Views.ArchiveNotification;
-    using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.Linq;
@@ -33,7 +32,7 @@
         {
             if (NoNotificationsSelected)
             {
-                yield return new ValidationResult(ArchiveNotificationResources.NoNotificationsSelected);
+                yield return new ValidationResult(ArchiveNotificationResources.NoNotificationsSelected, new[] { "NoNotificationsSelected" });
             }
         }
 
@@ -44,7 +43,7 @@
                 return Notifications.Count > 0;
             }
         }
-
+        
         public bool NoNotificationsSelected
         {
             get
