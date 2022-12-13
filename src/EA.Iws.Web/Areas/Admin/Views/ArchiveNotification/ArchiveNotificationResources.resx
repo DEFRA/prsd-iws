@@ -132,6 +132,9 @@
   <data name="Heading" xml:space="preserve">
     <value>Archive notifications</value>
   </data>
+  <data name="NoNotificationsSelected" xml:space="preserve">
+    <value>Please select at least 1 notification from the table below for archiving.</value>
+  </data>
   <data name="NoResults" xml:space="preserve">
     <value>No matching results were found</value>
   </data>
