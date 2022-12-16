@@ -4,10 +4,10 @@
     using EA.Iws.Web.Areas.Admin.Views.ArchiveNotification;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-    using System.Linq;
 
     public class ArchiveNotificationResultViewModel : IValidatableObject
     {
+        private bool hasAnyNotificationSelected = true;
         public ArchiveNotificationResultViewModel()
         {
         }
@@ -30,9 +30,9 @@
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
-            if (NoNotificationsSelected)
+            if (HasAnyNotificationSelected)
             {
-                yield return new ValidationResult(ArchiveNotificationResources.NoNotificationsSelected, new[] { "NoNotificationsSelected" });
+                yield return new ValidationResult(ArchiveNotificationResources.NoNotificationsSelected, new[] { "HasAnyNotificationSelected" });
             }
         }
 
@@ -43,13 +43,22 @@
                 return Notifications.Count > 0;
             }
         }
-        
-        public bool NoNotificationsSelected
+
+        public bool HasAnyNotificationSelected
         {
             get
             {
-                return Notifications.Where(n => n.IsSelected == true).Count() == 0;
+                return hasAnyNotificationSelected;
+            }
+            set
+            {
+                hasAnyNotificationSelected = value;
             }
         }
+
+        public int NumberOfNotificationsSelected { get; set; }
+
+        [Display(Name = "Select All")]
+        public bool IsSelectAllChecked { get; set; }
     }
 }

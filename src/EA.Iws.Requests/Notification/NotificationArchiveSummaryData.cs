@@ -1,7 +1,6 @@
 ﻿namespace EA.Iws.Requests.Notification
 {
     using System;
-    using Core.NotificationAssessment;
 
     public class NotificationArchiveSummaryData
     {
