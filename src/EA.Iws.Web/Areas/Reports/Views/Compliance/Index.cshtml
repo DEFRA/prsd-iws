@@ -4,7 +4,7 @@
 	ViewBag.Title = Resources.Title;
 }
 
-<h1 class="heading-large">@Resources.Heading</h1>
+<h1 class="govuk-heading-l">@Resources.Heading</h1>
 
 @using (Html.BeginForm())
 {
@@ -13,7 +13,7 @@
 
 	@Html.EditorFor(m => m.InputParameters)
 
-	<div class="form-group">
-		<button class="button" type="submit">@Resources.ButtonText</button>
+	<div class="govuk-form-group">
+		<button class="govuk-button" type="submit">@Resources.ButtonText</button>
 	</div>
 }

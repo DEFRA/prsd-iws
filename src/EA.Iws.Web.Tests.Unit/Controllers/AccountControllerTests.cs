@@ -68,7 +68,7 @@
             A.CallTo(() => oauthClientCredentialClient.GetClientCredentialsAsync()).Returns(tokenResponse);
 
             A.CallTo(() => client.Registration.ResetPasswordRequestAsync(tokenResponse.AccessToken, A<PasswordResetRequest>._))
-                .MustHaveHappened(Repeated.Exactly.Once);
+                .MustHaveHappenedOnceExactly();
         }
 
         [Fact]
@@ -114,7 +114,7 @@
             A.CallTo(() => oauthClientCredentialClient.GetClientCredentialsAsync()).Returns(tokenResponse);
 
             A.CallTo(() => client.Registration.ResetPasswordAsync(tokenResponse.AccessToken, A<PasswordResetData>._))
-                .MustHaveHappened(Repeated.Exactly.Once);
+                .MustHaveHappenedOnceExactly();
         }
 
         [Fact]

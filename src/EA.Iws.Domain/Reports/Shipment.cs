@@ -68,5 +68,13 @@ namespace EA.Iws.Domain.Reports
         public string HCode { get; protected set; }
 
         public string UNClass { get; protected set; }
+
+        public decimal? RejectedQuantity { get; set; }
+
+        public DateTime? ShipmentRejectedDate { get; set; }
+
+        public string RejectedReason { get; protected set; }
+
+        public string ActionedByExternalUser { get; protected set; }
     }
 }

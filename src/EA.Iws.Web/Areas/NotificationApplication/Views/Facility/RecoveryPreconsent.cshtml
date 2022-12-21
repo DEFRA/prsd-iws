@@ -10,16 +10,16 @@
     @Html.Gds().ValidationSummary()
 
     <header class="hgroup">
-        <h1 class="heading-large">@RecoveryPreconsentResources.Header</h1>
+        <h1 class="govuk-heading-l">@RecoveryPreconsentResources.Header</h1>
     </header>
     <p>@RecoveryPreconsentResources.HeaderDescription</p>
 
-    <div class="form-group @Html.Gds().FormGroupClass(m => m.Value)">
+    <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.Value)">
         @Html.Gds().ValidationMessageFor(model => model.Value)
         <fieldset>
-            <div class="multiple-choice" data-target="yes-message">
-                @Html.RadioButtonFor(m => m.Value, true, new { id = "rdoYes" })
-                <label for="rdoYes">
+            <div class="govuk-radios__item" data-target="yes-message">
+                @Html.RadioButtonFor(m => m.Value, true, new { @class = "govuk-radios__input", id = "rdoYes" })
+                <label class="govuk-label govuk-radios__label" for="rdoYes">
                     @RecoveryPreconsentResources.Yes
                 </label>
             </div>
@@ -28,9 +28,9 @@
                 <p>@RecoveryPreconsentResources.YesDescription</p>
             </div>
 
-            <div class="multiple-choice" data-target="no-message">
-                @Html.RadioButtonFor(m => m.Value, false, new { id = "rdoNo" })
-                <label for="rdoNo">
+            <div class="govuk-radios__item" data-target="no-message">
+                @Html.RadioButtonFor(m => m.Value, false, new { @class = "govuk-radios__input", id = "rdoNo" })
+                <label class="govuk-label govuk-radios__label" for="rdoNo">
                     @RecoveryPreconsentResources.No
                 </label>
             </div>
@@ -41,7 +41,7 @@
         </fieldset>
     </div>
 
-    <div class="form-group">
-        <button class="button" type="submit">@Constants.ContinueButtonText</button>
+    <div class="govuk-form-group">
+        <button class="govuk-button" type="submit">@Constants.ContinueButtonText</button>
     </div>
 }

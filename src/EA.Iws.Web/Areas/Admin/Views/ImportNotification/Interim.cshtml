@@ -5,38 +5,39 @@
     ViewBag.Title = Resources.Title;
 }
 
-<h1 class="heading-large">@Resources.MainHeading</h1>
+<h1 class="govuk-heading-l">@Resources.MainHeading</h1>
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
     @Html.Gds().ValidationSummary()
-    
+
     @Html.HiddenFor(m => m.NotificationNumber)
     @Html.HiddenFor(m => m.NotificationReceivedDate)
 
-    <div class="form-group @Html.Gds().FormGroupClass(m => m.IsInterim)">
+    <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.IsInterim)">
         @Html.Gds().LabelFor(m => m.IsInterim, new { @class = "visually-hidden" })
         @Html.Gds().ValidationMessageFor(m => m.IsInterim)
-        <fieldset>
-            <div class="multiple-choice">
-                @Html.RadioButtonFor(m => m.IsInterim, true, new { id = "Interim" })
-                <label for="Interim">
-                    @Resources.Interim
-                </label>
-            </div>
-
-            <div class="multiple-choice">
-                @Html.RadioButtonFor(m => m.IsInterim, false, new { id = "NonInterim" })
-                <label for="NonInterim">
-                    @Resources.NonInterim
-                </label>
+        <fieldset class="govuk-fieldset">
+            <div class="govuk-radios" data-module="govuk-radios">
+                <div class="govuk-radios__item">
+                    @Html.RadioButtonFor(m => m.IsInterim, true, new { id = "Interim", @class = "govuk-radios__input" })
+                    <label class="govuk-label govuk-radios__label" for="Interim">
+                        @Resources.Interim
+                    </label>
+                </div>
+                <div class="govuk-radios__item">
+                    @Html.RadioButtonFor(m => m.IsInterim, false, new { id = "NonInterim", @class = "govuk-radios__input" })
+                    <label class="govuk-label govuk-radios__label" for="NonInterim">
+                        @Resources.NonInterim
+                    </label>
+                </div>
             </div>
         </fieldset>
     </div>
 
-    <div class="form-group">
-        <button class="button" type="submit">@Constants.ContinueButtonText</button>
+    <div class="govuk-form-group">
+        <button class="govuk-button" type="submit">@Constants.ContinueButtonText</button>
     </div>
 }
 

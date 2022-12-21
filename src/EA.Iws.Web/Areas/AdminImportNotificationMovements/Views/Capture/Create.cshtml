@@ -8,13 +8,13 @@
 <div class="grid-row container">
     <div class="stickem-row stickem-container">
         <div class="column-two-thirds">
-            <h1 class="heading-large">@Resource.MainHeading</h1>
+            <h1 class="govuk-heading-l">@Resource.MainHeading</h1>
             @using (Html.BeginForm())
             {
                 @Html.AntiForgeryToken()
                 @Html.Gds().ValidationSummary()
                 @Html.HiddenFor(m => m.NotificationType)
-                <div class="form-group @Html.Gds().FormGroupClass(m => m.ShipmentNumber)">
+                <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.ShipmentNumber)">
                     @Html.Gds().LabelFor(m => m.ShipmentNumber, new { @class = "form-label-bold" })
                     @Html.Gds().ValidationMessageFor(m => m.ShipmentNumber)
                     @Html.Gds().TextBoxFor(m => m.ShipmentNumber, new { type = "number", min = 1, max = int.MaxValue, @class = "form-control-narrow" })
@@ -48,7 +48,7 @@
 
                 @Html.Partial("_Comments")
 
-                <button class="button" type="submit">@Constants.ContinueButtonText</button>
+                <button class="govuk-button" type="submit">@Constants.ContinueButtonText</button>
             }
 
         </div>

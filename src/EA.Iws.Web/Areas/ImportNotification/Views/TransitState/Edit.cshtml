@@ -5,7 +5,7 @@
     ViewBag.Title = Resource.TabTitle;
 }
 
-<h1 class="heading-large">@Resource.Title</h1>
+<h1 class="govuk-heading-l">@Resource.Title</h1>
 
 @Html.Partial("_AddOrEdit", Model)
 
@@ -18,8 +18,7 @@
 
         function updateAuthoritiesAndExitPoints(html) {
             $("#ca-and-exit-point").html(html);
-            var $radios = $(".multiple-choice input[type='radio']");
-            new GOVUK.SelectionButtons($radios);
+            select2Init();
         }
     </script>
 }

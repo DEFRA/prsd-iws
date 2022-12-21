@@ -6,7 +6,7 @@
     ViewBag.Title = Resource.TabTitle;
 }
 
-<h1 class="heading-large">
+<h1 class="govuk-heading-l">
     <span class="heading-secondary">@Html.DisplayTodaysDate()</span>
     @Resource.MainHeading
 </h1>
@@ -16,12 +16,12 @@
     @Html.Gds().ValidationSummary()
     @Html.AntiForgeryToken()
 
-    <h2 class="heading-medium">@Resource.Search</h2>
+    <h2 class="govuk-heading-m">@Resource.Search</h2>
 
-    <div id="search-container" class="form-group @Html.Gds().FormGroupClass(m => m.SearchTerm)">
+    <div id="search-container" class="govuk-form-group @Html.Gds().FormGroupClass(m => m.SearchTerm)">
         @Html.Gds().ValidationMessageFor(m => m.SearchTerm)
-        @Html.Gds().TextBoxFor(m => m.SearchTerm, new { @title = "Search term", placeholder = Resource.SearchPlaceholder })
-        <input type="submit" class="button" value="Go"/>
+        @Html.Gds().TextBoxFor(m => m.SearchTerm, new { @title = "Search term", placeholder = Resource.SearchPlaceholder, @class = "govuk-input" }, false)
+        <input type="submit" class="govuk-button" value="Go" style="width:100px; margin-bottom:15px;" />
         @Html.ActionLink(Resource.AdvancedSearch, "Index", "AdvancedSearch", null, new { @class = "" })
     </div>
 }
@@ -34,37 +34,37 @@
 
     @Html.Raw(string.Format(Resource.ResultsCount, Model.ExportSearchResults.Count))
 
-    <table title="Search results">
-        <thead>
-            <tr>
-                <th>@Resource.NotificationNumberTableHeading</th>
-                <th>@Resource.StatusTableHeading</th>
-                <th>@Resource.CompanyNameTableHeading</th>
-                <th>@Resource.WasteTypeTableHeading</th>
-                <th>@Resource.ShipmentSummaryTableHeading</th>
+    <table title="Search results" class="govuk-table">
+        <thead class="govuk-table__head">
+            <tr class="govuk-table__row">
+                <th scope="col" class="govuk-table__header">@Resource.NotificationNumberTableHeading</th>
+                <th scope="col" class="govuk-table__header">@Resource.StatusTableHeading</th>
+                <th scope="col" class="govuk-table__header">@Resource.CompanyNameTableHeading</th>
+                <th scope="col" class="govuk-table__header">@Resource.WasteTypeTableHeading</th>
+                <th scope="col" class="govuk-table__header">@Resource.ShipmentSummaryTableHeading</th>
             </tr>
         </thead>
-        <tbody>
+        <tbody class="govuk-table__body">
             @for (int i = 0; i < Model.ExportSearchResults.Count; i++)
             {
-                <tr>
-                    <td>
+                <tr class="govuk-table__row">
+                    <td class="govuk-table__cell">
                         @Html.ActionLink(linkText: @Html.DisplayNonBreakingFor(m => m.ExportSearchResults[i].NotificationNumber).ToString(),
                                 actionName: "Index",
                                 controllerName: "Home",
                                 routeValues: new { id = Model.ExportSearchResults[i].Id, area = "AdminExportAssessment" },
                                 htmlAttributes: null)
                     </td>
-                    <td>
+                    <td class="govuk-table__cell">
                         @Html.DisplayFor(m => m.ExportSearchResults[i].NotificationStatus)
                     </td>
-                    <td>
+                    <td class="govuk-table__cell">
                         @Html.DisplayFor(m => m.ExportSearchResults[i].ExporterName)
                     </td>
-                    <td>
+                    <td class="govuk-table__cell">
                         @Html.DisplayFor(m => m.ExportSearchResults[i].WasteType)
                     </td>
-                    <td>
+                    <td class="govuk-table__cell">
                         @if (Model.ExportSearchResults[i].ShowShipmentSummaryLink)
                         {
                             @Html.ActionLink(@Resource.ShipmentSummaryLinkText, "Index", "Home", new { area = "AdminExportNotificationMovements", id = Model.ExportSearchResults[i].Id }, null)
@@ -89,31 +89,31 @@ else
 {
     <p>@Resource.NotificationAttentionText</p>
 
-    <table>
-        <thead>
-            <tr>
-                <th>@Resource.NotificationNumberAttentionTableHeading</th>
-                <th>@Resource.OfficerAttentionTableHeading</th>
-                <th>@Resource.AcknowledgedTableHeading</th>
-                <th>@Resource.DecisionRequiredTableHeading</th>
-                <th>@Resource.DaysRemainingTableHeading</th>
+    <table class="govuk-table">
+        <thead class="govuk-table__head">
+            <tr class="govuk-table__row">
+                <th scope="col" class="govuk-table__header">@Resource.NotificationNumberAttentionTableHeading</th>
+                <th scope="col" class="govuk-table__header">@Resource.OfficerAttentionTableHeading</th>
+                <th scope="col" class="govuk-table__header">@Resource.AcknowledgedTableHeading</th>
+                <th scope="col" class="govuk-table__header">@Resource.DecisionRequiredTableHeading</th>
+                <th scope="col" class="govuk-table__header">@Resource.DaysRemainingTableHeading</th>
             </tr>
         </thead>
-        <tbody>
+        <tbody class="govuk-table__body">
             @foreach (var row in Model.AttentionSummaryTable)
             {
-                <tr>
-                    <td>
+                <tr class="govuk-table__row">
+                    <td class="govuk-table__cell">
                         @Html.ActionLink(linkText: row.NotificationNumber.ToNonBreakingString(),
                                     actionName: "Index",
                                     controllerName: "Home",
                                     routeValues: new { id = row.NotificationId, area = "AdminExportAssessment" },
                                     htmlAttributes: null)
                     </td>
-                    <td>@row.Officer</td>
-                    <td>@Html.Gds().DisplayShortDate(row.AcknowledgedDate)</td>
-                    <td>@Html.Gds().DisplayShortDate(row.DecisionRequiredDate)</td>
-                    <td>@row.DaysRemaining</td>
+                    <td class="govuk-table__cell">@row.Officer</td>
+                    <td class="govuk-table__cell">@Html.Gds().DisplayShortDate(row.AcknowledgedDate)</td>
+                    <td class="govuk-table__cell">@Html.Gds().DisplayShortDate(row.DecisionRequiredDate)</td>
+                    <td class="govuk-table__cell">@row.DaysRemaining</td>
                 </tr>
             }
         </tbody>

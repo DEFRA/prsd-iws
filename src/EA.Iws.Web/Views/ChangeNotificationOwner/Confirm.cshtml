@@ -7,7 +7,7 @@
 <div class="grid-row">
     <div class="column-two-thirds">
 
-        <h1 class="heading-large">@string.Format(Resources.ConfirmTitle, Model.NotificationNumber)</h1>
+        <h1 class="govuk-heading-l">@string.Format(Resources.ConfirmTitle, Model.NotificationNumber)</h1>
 
         <p>
             @string.Format(Resources.NotificationWillBeAssignedTo, Model.EmailAddress)
@@ -24,7 +24,7 @@
             @Html.HiddenFor(m => m.NotificationId)
             @Html.HiddenFor(m => m.EmailAddress)
 
-            <button class="button" type="submit">@Constants.ContinueButtonText</button>
+            <button class="govuk-button" type="submit">@Constants.ContinueButtonText</button>
         }
 
         @Html.ActionLink(Resources.Cancel, "Index", "Options", routeValues: new { area = "NotificationApplication" }, htmlAttributes: null)

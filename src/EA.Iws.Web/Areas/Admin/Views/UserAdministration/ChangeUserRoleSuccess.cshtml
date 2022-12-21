@@ -4,11 +4,11 @@
     ViewBag.Title = Resources.UserRoleChangedTitle;
 }
 
-<h1 class="heading-large">@Resources.UserRoleChangedTitle</h1>
+<h1 class="govuk-heading-l">@Resources.UserRoleChangedTitle</h1>
 
 <p>@string.Format(Resources.UserRoleChangedParagraph, Model.FullName ,EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(Model.Role))</p>
 
-@Html.ActionLink(Constants.ContinueOnlyButtonText, "Index", "Home", null, new { @class = "button" })
+@Html.ActionLink(Constants.ContinueOnlyButtonText, "Index", "Home", null, new { @class = "govuk-button" })
 
 @section menu {
     @Html.Action("HomeNavigation", "Menu", new { area = "Admin", section = AdminHomeNavigationSection.AccountServices })

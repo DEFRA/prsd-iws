@@ -91,13 +91,13 @@
             }
         }
         
-        [Theory, MemberData("WorkingConversionTargets")]
+        [Theory, MemberData(nameof(WorkingConversionTargets))]
         public void CheckWorkingConversions(ShipmentQuantityUnits source, ShipmentQuantityUnits target, decimal value, decimal result)
         {
             Assert.Equal(result, ShipmentQuantityUnitConverter.ConvertToTarget(source, target, value));
         }
 
-        [Theory, MemberData("InvalidConversions")]
+        [Theory, MemberData(nameof(InvalidConversions))]
         public void CheckInvalidConversions(ShipmentQuantityUnits source, ShipmentQuantityUnits target)
         {
             try
@@ -110,7 +110,7 @@
             }
         }
 
-        [Theory, MemberData("LosingPrecisionThrows")]
+        [Theory, MemberData(nameof(LosingPrecisionThrows))]
         public void CheckLosingPrecisionThrows(ShipmentQuantityUnits source, ShipmentQuantityUnits target, decimal value)
         {
             try
@@ -123,14 +123,14 @@
             }
         }
 
-        [Theory, MemberData("LosingPrecisionThrows")]
+        [Theory, MemberData(nameof(LosingPrecisionThrows))]
         public void CanTurnThrowOnLossOfPrecisionOff(ShipmentQuantityUnits source, ShipmentQuantityUnits target,
             decimal value)
         {
             Assert.Equal(value / 1000, ShipmentQuantityUnitConverter.ConvertToTarget(source, target, value, false));
         }
 
-        [Theory, MemberData("CanConvertToSameType")]
+        [Theory, MemberData(nameof(CanConvertToSameType))]
         public void ConvertToSameType(ShipmentQuantityUnits sourceAndTarget)
         {
             Assert.Equal(10, ShipmentQuantityUnitConverter.ConvertToTarget(sourceAndTarget, sourceAndTarget, 10));

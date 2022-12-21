@@ -5,15 +5,15 @@
     ViewBag.Title = "Port or border crossings";
 }
 
-<h1 class="heading-large">@Resource.Title</h1>
+<h1 class="govuk-heading-l">@Resource.Title</h1>
 
 <p>@Resource.LeadParagraph</p>
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    <div class="form-group">
-        <button class="button" type="submit">Add new</button>
+    <div class="govuk-form-group">
+        <button class="govuk-button" type="submit">Add new</button>
     </div>
 }
 

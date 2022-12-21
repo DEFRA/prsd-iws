@@ -1,34 +1,39 @@
 ﻿@using EA.Iws.Core.Notification;
-<div class="footer-agencies">
-    <h2 class="heading-medium">Contact details</h2>
-    <div class="grid-row">
-        <div class="column-half">
-            <h3 class="heading-small">England</h3>
-            <p>
-                Environment Agency 
-                <br /> International Waste Shipments Team
-                <br /> Telephone: @Html.CompetentAuthorityHelpline(UKCompetentAuthority.England)
+
+<div class="footer_agencies">
+    <h2 class="govuk-footer__heading govuk-heading-m govuk-!-margin-bottom-2" style="border-bottom: 0px;">Contact details</h2>
+    <ul class="govuk-footer__list govuk-footer__list--columns-2">
+        <li class="govuk-footer__list-item">
+            <h3 class="govuk-heading-s">England</h3>
+            <p class="govuk-body govuk-body govuk-!-font-size-16">
+                Environment Agency <br />
+                International Waste Shipments Team <br />
+                Telephone: @Html.CompetentAuthorityHelpline(UKCompetentAuthority.England)
             </p>
-            <h3 class="heading-small">Scotland</h3>
-            <p>
-                Scottish Environment Protection Agency 
-                <br /> Producer Compliance and Waste Shipment Unit
-                <br /> Telephone: @Html.CompetentAuthorityHelpline(UKCompetentAuthority.Scotland)
+        </li>
+        <li class="govuk-footer__list-item">
+            <h3 class="govuk-heading-s">Scotland</h3>
+            <p class="govuk-body govuk-body govuk-!-font-size-16">
+                Scottish Environment Protection Agency <br />
+                Producer Compliance and Waste Shipment Unit <br />
+                Telephone: @Html.CompetentAuthorityHelpline(UKCompetentAuthority.Scotland)
             </p>
-        </div>
-        <div class="column-half">
-            <h3 class="heading-small">Northern Ireland</h3>
-            <p>
-                Northern Ireland Environment Agency 
-                <br /> Hazardous Waste/TFS Section 
-                <br /> Telephone: @Html.CompetentAuthorityHelpline(UKCompetentAuthority.NorthernIreland)
+        </li>
+        <li class="govuk-footer__list-item">
+            <h3 class="govuk-heading-s">Northern Ireland</h3>
+            <p class="govuk-body govuk-body govuk-!-font-size-16">
+                Northern Ireland Environment Agency <br />
+                Hazardous Waste/TFS Section <br />
+                Telephone: @Html.CompetentAuthorityHelpline(UKCompetentAuthority.NorthernIreland)
             </p>
-            <h3 class="heading-small">Wales</h3>
-            <p>
-                Natural Resources Wales 
-                <br /> Waste Shipment Unit
-                <br /> Telephone: @Html.CompetentAuthorityHelpline(UKCompetentAuthority.Wales)
+        </li>
+        <li class="govuk-footer__list-item">
+            <h3 class="govuk-heading-s">Wales</h3>
+            <p class="govuk-body govuk-body govuk-!-font-size-16">
+                Natural Resources Wales <br />
+                Waste Shipment Unit <br />
+                Telephone: @Html.CompetentAuthorityHelpline(UKCompetentAuthority.Wales)
             </p>
-        </div>
-    </div>
+        </li>
+    </ul>
 </div>

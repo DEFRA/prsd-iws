@@ -6,7 +6,7 @@
     ViewBag.Title = Resource.Title;
 }
 
-<h1 class="heading-large">@Resource.MainHeading</h1>
+<h1 class="govuk-heading-l">@Resource.MainHeading</h1>
 
 @using (Html.BeginForm())
 {
@@ -18,31 +18,33 @@
     {
         <p>@Resource.None</p>
 
-        <div class="form-group">
+        <div class="govuk-form-group">
             @Html.ActionLink("Continue", "Index", "Options",
                 new { id = Model.NotificationId, area = "NotificationApplication" },
-                new { @class = "button" })
+                new { @class = "govuk-button" })
         </div>
     }
     else
     {
-        <div class="form-group @Html.Gds().FormGroupClass(m => m.Selected)">
-            @Html.Gds().ValidationMessageFor(m => m.Selected)
-            @for (int i = 0; i < Model.Movements.Count; i++)
-            {
-                @Html.HiddenFor(m => m.Movements[i].Id)
-                @Html.HiddenFor(m => m.Movements[i].Number)
-                <div class="multiple-choice">
-                    @Html.RadioButtonFor(m => m.Selected, Model.Movements[i].Id, new { id = "movement-" + i })
-                    <label for="movement-@i">
-                        @Html.Raw(string.Format(Resource.ShipmentNumberDisplay, Model.Movements[i].Number))
-                    </label>
-                </div>
-            }
+        <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.Selected)">
+            <div class="govuk-radios" data-module="govuk-radios">
+                @Html.Gds().ValidationMessageFor(m => m.Selected)
+                @for (int i = 0; i < Model.Movements.Count; i++)
+                {
+                    @Html.HiddenFor(m => m.Movements[i].Id)
+                    @Html.HiddenFor(m => m.Movements[i].Number)
+                    <div class="govuk-radios__item">
+                        @Html.RadioButtonFor(m => m.Selected, Model.Movements[i].Id, new { id = "movement-" + i, @class = "govuk-radios__input" })
+                        <label class="govuk-label govuk-radios__label" for="movement-@i">
+                            @Html.Raw(string.Format(Resource.ShipmentNumberDisplay, Model.Movements[i].Number))
+                        </label>
+                    </div>
+                }
+            </div>
         </div>
 
         <div class="form-group-compound">
-            <button class="button" type="submit">@Constants.ContinueButtonText</button>
+            <button class="govuk-button" type="submit">@Constants.ContinueButtonText</button>
         </div>
 
         <div>

@@ -10,43 +10,43 @@
 
         @Html.Raw(string.Format(Resource.ResultsCount, Model.ImportSearchResults.Count))
 
-        <table title="Search results">
-            <thead>
-                <tr>
-                    <th>@Resource.NotificationNumberTableHeading</th>
-                    <th>@Resource.StatusTableHeading</th>
-                    <th>@Resource.CompanyNameTableHeading</th>
-                    <th>@Resource.NotificationTypeTableHeading</th>
-                    <th>@Resource.ShipmentSummaryTableHeading</th>
+        <table title="Search results" class="govuk-table">
+            <thead class="govuk-table__head">
+                <tr class="govuk-table__row">
+                    <th scope="col" class="govuk-table__header">@Resource.NotificationNumberTableHeading</th>
+                    <th scope="col" class="govuk-table__header">@Resource.StatusTableHeading</th>
+                    <th scope="col" class="govuk-table__header">@Resource.CompanyNameTableHeading</th>
+                    <th scope="col" class="govuk-table__header">@Resource.NotificationTypeTableHeading</th>
+                    <th scope="col" class="govuk-table__header">@Resource.ShipmentSummaryTableHeading</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody class="govuk-table__body">
                 @for (int i = 0; i < Model.ImportSearchResults.Count; i++)
                 {
-                <tr>
-                    <td>
-                        @Html.ActionLink(linkText: @Html.DisplayNonBreakingFor(m => m.ImportSearchResults[i].NotificationNumber).ToString(),
-                        actionName: "Index",
-                        controllerName: "Home",
-                        routeValues: new { id = Model.ImportSearchResults[i].Id, area = "ImportNotification" },
-                        htmlAttributes: null)
-                    </td>
-                    <td>
-                        @Html.Raw(EnumHelper.GetDisplayName(Model.ImportSearchResults[i].Status))
-                    </td>
-                    <td>
-                        @Html.DisplayFor(m => m.ImportSearchResults[i].Importer)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(m => m.ImportSearchResults[i].NotificationType)
-                    </td>
-                    <td>
-                        @if (Model.ImportSearchResults[i].ShowShipmentSummaryLink)
-                        {
-                            @Html.ActionLink(@Resource.ShipmentSummaryLinkText, "Index", "Home", new { area = "AdminImportNotificationMovements", id = Model.ImportSearchResults[i].Id }, null)
-                        }
-                    </td>
-                </tr>
+                    <tr class="govuk-table__row">
+                        <td class="govuk-table__cell">
+                            @Html.ActionLink(linkText: @Html.DisplayNonBreakingFor(m => m.ImportSearchResults[i].NotificationNumber).ToString(),
+                            actionName: "Index",
+                            controllerName: "Home",
+                            routeValues: new { id = Model.ImportSearchResults[i].Id, area = "ImportNotification" },
+                            htmlAttributes: null)
+                        </td>
+                        <td class="govuk-table__cell">
+                            @Html.Raw(EnumHelper.GetDisplayName(Model.ImportSearchResults[i].Status))
+                        </td>
+                        <td class="govuk-table__cell">
+                            @Html.DisplayFor(m => m.ImportSearchResults[i].Importer)
+                        </td>
+                        <td class="govuk-table__cell">
+                            @Html.DisplayFor(m => m.ImportSearchResults[i].NotificationType)
+                        </td>
+                        <td class="govuk-table__cell">
+                            @if (Model.ImportSearchResults[i].ShowShipmentSummaryLink)
+                            {
+                                @Html.ActionLink(@Resource.ShipmentSummaryLinkText, "Index", "Home", new { area = "AdminImportNotificationMovements", id = Model.ImportSearchResults[i].Id }, null)
+                            }
+                        </td>
+                    </tr>
                 }
             </tbody>
         </table>

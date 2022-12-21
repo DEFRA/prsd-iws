@@ -9,7 +9,7 @@
 <div class="grid-row">
     <div class="column-full">
         <header>
-            <h1 class="heading-large">@string.Format(Resources.ErrorsHeaderText, Model.ErrorsCount)</h1>
+            <h1 class="govuk-heading-l">@string.Format(Resources.ErrorsHeaderText, Model.ErrorsCount)</h1>
         </header>
 
         <p class="bold-small">@Resources.ErrorsContactUs</p>
@@ -18,7 +18,7 @@
 
         @if (Model.ErrorsCount > 0)
         {
-            <div class="form-group">
+            <div class="govuk-form-group">
                 <details>
                     <summary class="summary-error">
                         <h2 class="summary-error-header heading-xsmall">@Resources.ViewErrors</h2>
@@ -34,7 +34,7 @@
                                             @Html.Raw(EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(rule))
                                         </div>
                                         <div class="column-tenth">
-                                            <img class="summary-error-icon" src="@Url.Content("~/Content/images/error-icon.png")" alt="">
+                                            <img class="summary-error-icon" src="@Url.Content("~/Content/images/error-icon.png")" alt="File Error">
                                         </div>
                                     </div>
                                 </div>
@@ -50,7 +50,7 @@
                                             @Html.Raw(rule.ErrorMessage)
                                         </div>
                                         <div class="column-tenth">
-                                            <img class="summary-error-icon" src="@Url.Content("~/Content/images/error-icon.png")" alt="">
+                                            <img class="summary-error-icon" src="@Url.Content("~/Content/images/error-icon.png")" alt="File Content Error">
                                         </div>
                                     </div>
                                     @if (rule.Rule == PrenotificationContentRules.ThreeWorkingDaysToShipment)
@@ -89,7 +89,7 @@
                 </details>
             </div>
         }
-    @Html.ActionLink(Resources.ReturnToUpload, "UploadPrenotifications", "PrenotificationBulkUpload", new { notificationId = @Model.NotificationId, area = "NotificationMovements" }, new { @class = "button" })
+    @Html.ActionLink(Resources.ReturnToUpload, "UploadPrenotifications", "PrenotificationBulkUpload", new { notificationId = @Model.NotificationId, area = "NotificationMovements" }, new { @class = "govuk-button" })
     </div>
 </div>
 

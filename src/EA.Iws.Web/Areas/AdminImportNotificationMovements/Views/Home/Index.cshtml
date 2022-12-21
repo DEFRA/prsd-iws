@@ -36,10 +36,10 @@ else
     }
 }
 
-<div class="form-group">
+<div class="govuk-form-group">
     <div class="shipping-home">
 
-        <h1 class="heading-large">
+        <h1 class="govuk-heading-l">
             @Resource.ShipmentSummaryTitle
         </h1>
 
@@ -91,13 +91,13 @@ else
 
                     @if (Model.NotificationStatus == ImportNotificationStatus.Consented)
                     {
-                        <div class="form-group">
+                        <div class="govuk-form-group">
                             <h2 class="heading-small">@Resource.Record</h2>
                             @using (Html.BeginForm("Search", "Home"))
                             {
                                 @Html.AntiForgeryToken()
                                 <input id="ShipmentNumber" name="ShipmentNumber" type="number" min="1" class="form-control" placeholder="@Resource.SearchPlaceholder"/>
-                                <button class="button">@Resource.SearchButton</button>
+                                <button class="govuk-button">@Resource.SearchButton</button>
                             }
                         </div>
                     }
@@ -106,7 +106,7 @@ else
     </div>
 </div>
 
-<div class="form-group">
+<div class="govuk-form-group">
 
     @if (Model.ShowShipments())
     {
@@ -169,10 +169,10 @@ else
     }
 </div>
 
-<div class="form-group">
+<div class="govuk-form-group">
     @Html.ActionLink(@Resource.GoToOverview,
             "Index",
             "Home",
             new { area = "ImportNotification", id = Model.NotificationId },
-            new { @class = "button" })
+            new { @class = "govuk-button" })
 </div>

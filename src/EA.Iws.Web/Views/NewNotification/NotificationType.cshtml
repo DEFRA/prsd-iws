@@ -13,8 +13,8 @@
     @: - Telephone: @Html.CompetentAuthorityHelpline(competentAuthority)
 }
 
-<header class="hgroup text">
-    <h1 class="heading-large">@NotificationTypeResources.Header</h1>
+<header class="hgroup">
+    <h1 class="govuk-heading-l">@NotificationTypeResources.Header</h1>
 </header>
 
 @using (Html.BeginForm())
@@ -23,34 +23,36 @@
     @Html.AntiForgeryToken()
 
     @Html.HiddenFor(m => m.CompetentAuthority)
-    <div class="form-group @Html.Gds().FormGroupClass(m => m.SelectedNotificationType)">
+    <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.SelectedNotificationType)">
         @Html.Gds().ValidationMessageFor(model => model.SelectedNotificationType)
-        <fieldset>
-            @for (int i = 0; i < Model.NotificationTypes.Count; i++)
-            {
-                var labelFor = Html.NameFor(m => m.NotificationTypes[i]);
-                var notificationType = Model.NotificationTypes[i];
-                bool isDisposal = notificationType == NotificationType.Disposal.ToString();
-
-                <div class="multiple-choice" @(isDisposal ? "data-target=disposal-message" : string.Empty)>
-                    @Html.RadioButtonFor(m => m.SelectedNotificationType, notificationType, new { @id = labelFor })
-                    <label for="@labelFor">
-                        @Html.DisplayFor(m => m.NotificationTypes[i])
-                    </label>
-                </div>
-
-                if (isDisposal)
+        <fieldset class="govuk-fieldset">
+            <div class="govuk-radios" data-module="govuk-radios">
+                @for (int i = 0; i < Model.NotificationTypes.Count; i++)
                 {
-                    <div class="panel js-hidden" id="disposal-message">
-                        <p>@NotificationTypeResources.DisposalMessage</p>
-                        <p>@ContactInfo(Model.CompetentAuthority)</p>
+                    var labelFor = Html.NameFor(m => m.NotificationTypes[i]);
+                    var notificationType = Model.NotificationTypes[i];
+                    bool isDisposal = notificationType == NotificationType.Disposal.ToString();
+
+                    <div class="govuk-radios__item" @(isDisposal ? "data-target=disposal-message" : string.Empty)>
+                        @Html.RadioButtonFor(m => m.SelectedNotificationType, notificationType, new { @id = labelFor, @class = "govuk-radios__input" })
+                        <label class="govuk-label govuk-radios__label" for="@labelFor">
+                            @Html.DisplayFor(m => m.NotificationTypes[i])
+                        </label>
                     </div>
+
+                    if (isDisposal)
+                    {
+                        <div class="panel js-hidden" id="disposal-message">
+                            <p>@NotificationTypeResources.DisposalMessage</p>
+                            <p>@ContactInfo(Model.CompetentAuthority)</p>
+                        </div>
+                    }
                 }
-            }
+            </div>
         </fieldset>
     </div>
 
-    <div class="form-group">
-        <button class="button" type="submit">@Constants.ContinueButtonText</button>
+    <div class="govuk-form-group">
+        <button class="govuk-button" type="submit">@Constants.ContinueButtonText</button>
     </div>
 }

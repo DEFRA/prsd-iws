@@ -13,22 +13,22 @@
     @Html.HiddenFor(m => m.ShipmentInfoUnits)
 
     <header class="hgroup">
-        <h1 class="heading-large">@DisposalCostResources.Header</h1>
+        <h1 class="govuk-heading-l">@DisposalCostResources.Header</h1>
     </header>
 
-    <div class="form-group @Html.Gds().FormGroupClass(m => m.Amount)">
+    <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.Amount)">
         @Html.Gds().LabelFor(m => m.Amount)
         @Html.Gds().ValidationMessageFor(m => m.Amount)
         @Html.Gds().TextBoxFor(m => m.Amount)
     </div>
 
-    <div class="form-group @Html.Gds().FormGroupClass(m => m.Units)">
+    <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.Units)">
         @Html.Gds().LabelFor(m => m.Units)
         @Html.Gds().ValidationMessageFor(m => m.Units)
-        @Html.Gds().DropDownListFor(m => m.Units, Model.PossibleUnits)
+        @Html.Gds().DropDownListFor(m => m.Units, Model.PossibleUnits, new { @class = "govuk-select" })
     </div>
 
-    <div class="form-group">
-        <button class="button" type="submit">@Constants.ContinueButtonText</button>
+    <div class="govuk-form-group">
+        <button class="govuk-button" type="submit">@Constants.ContinueButtonText</button>
     </div>
 }

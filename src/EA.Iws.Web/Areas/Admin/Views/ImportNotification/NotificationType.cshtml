@@ -5,7 +5,7 @@
 }
 
 <header class="hgroup text">
-    <h1 class="heading-large">@Resources.MainHeading</h1>
+    <h1 class="govuk-heading-l">@Resources.MainHeading</h1>
 </header>
 
 @using (Html.BeginForm())
@@ -17,7 +17,7 @@
     @Html.HiddenFor(m => m.ReceivedDate)
     @Html.HiddenFor(m => m.IsInterim)
 
-    <div class="form-group">@Html.EditorFor(m => m.NotificationTypeRadioButtons)</div>
+    <div class="govuk-form-group">@Html.EditorFor(m => m.NotificationTypeRadioButtons)</div>
 
-    <button class="button" type="submit">@Constants.ContinueButtonText</button>
+    <button class="govuk-button" type="submit">@Constants.ContinueButtonText</button>
 }

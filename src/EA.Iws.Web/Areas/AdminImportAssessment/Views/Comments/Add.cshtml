@@ -11,7 +11,7 @@
 
 
 <header>
-    <h1 class="heading-large">@Resource.AddHeader</h1>
+    <h1 class="govuk-heading-l">@Resource.AddHeader</h1>
     <p class="subtitle">@Resource.AddSubtitle</p>
 </header>
 
@@ -23,11 +23,11 @@
 
     <div>
         <div class="column-two-thirds">
-            <div class="form-group @Html.Gds().FormGroupClass(m => m.SelectedType)">
+            <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.SelectedType)">
                 @Html.Gds().LabelFor(m => m.SelectedType, showOptionalLabel: false)
                 @Html.Gds().ValidationMessageFor(m => m.SelectedType)
                 @Html.HiddenFor(m => m.NotificationId)
-                @Html.Gds().DropDownListFor(m => m.SelectedType, Model.CommentTypes, "Choose a category", new { @id = "categorySelectList" })
+                @Html.Gds().DropDownListFor(m => m.SelectedType, Model.CommentTypes, "Choose a category", new { @id = "categorySelectList", @class = "govuk-select" })
             </div>
 
             @{
@@ -38,25 +38,25 @@
 
             <div id="shipmentNumberTextbox" @shipmentNumberClass>
 
-                <div class="form-group @Html.Gds().FormGroupClass(m => m.ShipmentNumberStr)">
+                <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.ShipmentNumberStr)">
                     @Html.Gds().LabelFor(m => m.ShipmentNumberStr, showOptionalLabel: false)
                     @Html.Gds().ValidationMessageFor(m => m.ShipmentNumberStr)
-                    @Html.TextBoxFor(m => m.ShipmentNumberStr, new { @MaxLength = 6, @display = "block", @style = "width: 25%; height: 50px", @class = "form-control" })
+                    @Html.TextBoxFor(m => m.ShipmentNumberStr, new { @MaxLength = 6, @display = "block", @style = "width: 25%; height: 50px", @class = "govuk-input" })
                 </div>
 
             </div>
 
             <div id="commentsTextbox" @commentsClass>
-                <div class="form-group @Html.Gds().FormGroupClass(m => m.Comment)">
+                <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.Comment)">
                     @Html.Gds().LabelFor(m => m.Comment, showOptionalLabel: false)
                     @Html.Gds().HintParagraph(Resource.CommentLimitHint)
                     @Html.Gds().ValidationMessageFor(m => m.Comment)
-                    @Html.TextAreaFor(m => m.Comment, new { @display = "block", @style = "width: 100%; height: 200px", @class = "form-control" })
+                    @Html.TextAreaFor(m => m.Comment, new { @display = "block", @class = "govuk-textarea", rows = "10" })
                 </div>
 
             </div>
             <div>
-                <button type="submit" class="button">@Resource.SaveAndContinueButton</button>
+                <button type="submit" class="govuk-button">@Resource.SaveAndContinueButton</button>
             </div>
             <div>
                 @Html.ActionLink(Resource.BackButton, "Index", "Comments", new { id = Model.NotificationId }, null)

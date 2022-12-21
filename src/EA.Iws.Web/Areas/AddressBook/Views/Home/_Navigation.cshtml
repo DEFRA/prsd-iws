@@ -1,20 +1,20 @@
 ﻿@using EA.Iws.Core.AddressBook
 @model AddressBookData
 
-<nav class="tabbed-nav">
-    @Html.ActionLink("Exporter-notifier and producer", "Index", "Home", new { type = AddressRecordType.Producer.ToString() }, 
+<nav class="tabbed-nav govuk-tabs">
+    @Html.ActionLink("Exporter-notifier and producer", "Index", "Home", new { type = AddressRecordType.Producer.ToString() },
         new
         {
-            @class = "tabbed-tab" + ((Model.Type == AddressRecordType.Producer) ? " active" : "")
+            @class = "tabbed-tab govuk-tabs__list-item" + ((Model.Type == AddressRecordType.Producer) ? " active" : "")
         })
-    @Html.ActionLink("Carriers", "Index", "Home", new { type = AddressRecordType.Carrier.ToString() }, 
+    @Html.ActionLink("Carriers", "Index", "Home", new { type = AddressRecordType.Carrier.ToString() },
         new
         {
-            @class = "tabbed-tab" + ((Model.Type == AddressRecordType.Carrier) ? " active" : "")
+            @class = "tabbed-tab govuk-tabs__list-item" + ((Model.Type == AddressRecordType.Carrier) ? " active" : "")
         })
     @Html.ActionLink("Importer-consignee and facility", "Index", "Home", new { type = AddressRecordType.Facility.ToString() },
         new
         {
-            @class = "tabbed-tab" + ((Model.Type == AddressRecordType.Facility) ? " active" : "")
+            @class = "tabbed-tab govuk-tabs__list-item" + ((Model.Type == AddressRecordType.Facility) ? " active" : "")
         })
 </nav>

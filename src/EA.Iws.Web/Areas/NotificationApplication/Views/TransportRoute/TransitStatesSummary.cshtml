@@ -1,7 +1,7 @@
 ﻿@using EA.Iws.Web.Areas.NotificationApplication.Views.TransportRoute
 @model IList<EA.Iws.Core.TransitState.TransitStateData>
 
-<h2 class="heading-medium">@TransitStatesSummaryResources.Header</h2>
+<h2 class="govuk-heading-m">@TransitStatesSummaryResources.Header</h2>
 @if (Model == null || Model.Count == 0)
 {
     <p>@TransitStatesSummaryResources.NoTransitState</p>
@@ -12,32 +12,32 @@ else
     using (Html.BeginForm("Delete", "TransitState", new { backToOverview = ViewBag.BackToOverview } ,FormMethod.Post))
     {
         @Html.AntiForgeryToken()
-        <table>
-            <thead>
-                <tr>
-                    <th>@TransitStatesSummaryResources.ThOrder</th>
-                    <th>@TransitStatesSummaryResources.ThCountry</th>
-                    <th>@TransitStatesSummaryResources.ThCA</th>
-                    <th>@TransitStatesSummaryResources.ThPortEntry</th>
-                    <th>@TransitStatesSummaryResources.ThPortExit</th>
-                    <th></th>
+        <table class="govuk-table">
+            <thead class="govuk-table__head">
+                <tr class="govuk-table__row">
+                    <th scope="col" class="govuk-table__header">@TransitStatesSummaryResources.ThOrder</th>
+                    <th scope="col" class="govuk-table__header">@TransitStatesSummaryResources.ThCountry</th>
+                    <th scope="col" class="govuk-table__header">@TransitStatesSummaryResources.ThCA</th>
+                    <th scope="col" class="govuk-table__header">@TransitStatesSummaryResources.ThPortEntry</th>
+                    <th scope="col" class="govuk-table__header">@TransitStatesSummaryResources.ThPortExit</th>
+                    <th scope="col" class="govuk-table__header">Action</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody class="govuk-table__body">
                 @for (int i = 0; i < Model.Count; i++)
 				{
-					<tr>
-						<td>@Html.Raw(Model[i].OrdinalPosition)</td>
-						<td>@Html.Raw(Model[i].Country.Name)</td>
-						<td>@Html.Raw(Model[i].CompetentAuthority.Code) - @Html.Raw(Model[i].CompetentAuthority.Name)</td>
-						<td>@Html.Raw(Model[i].EntryPoint.Name)</td>
-						<td>@Html.Raw(Model[i].ExitPoint.Name)</td>
-						<th>
+					<tr class="govuk-table__row">
+						<td class="govuk-table__cell">@Html.Raw(Model[i].OrdinalPosition)</td>
+						<td class="govuk-table__cell">@Html.Raw(Model[i].Country.Name)</td>
+						<td class="govuk-table__cell">@Html.Raw(Model[i].CompetentAuthority.Code) - @Html.Raw(Model[i].CompetentAuthority.Name)</td>
+						<td class="govuk-table__cell">@Html.Raw(Model[i].EntryPoint.Name)</td>
+						<td class="govuk-table__cell">@Html.Raw(Model[i].ExitPoint.Name)</td>
+						<td class="govuk-table__cell">
 							<span style="white-space: nowrap">
 								@Html.ActionLink(TransitStatesSummaryResources.Edit, "Index", "TransitState", new { id = ViewData["Id"], entityId = Model[i].Id, backToOverview = ViewData["BackToOverview"] }, null) |
-								<button type="submit" class="link-submit in-table" name="delete" value="@Model[i].Id">@TransitStatesSummaryResources.Delete</button>
+								<button type="submit" class="link-submit in-table govuk-link" name="delete" value="@Model[i].Id">@TransitStatesSummaryResources.Delete</button>
 							</span>
-						</th>
+						</td>
 					</tr>
 				}
             </tbody>

@@ -4,7 +4,7 @@
     ViewBag.Title = Resources.ChangeTransitStateEntryPointTitle;
 }
 
-<h1 class="heading-large">@Resources.ChangeTransitStateEntryPointTitle</h1>
+<h1 class="govuk-heading-l">@Resources.ChangeTransitStateEntryPointTitle</h1>
 
 <p>@Resources.CompetentAuthority - @(Model.CompetentAuthority).</p>
 
@@ -21,7 +21,7 @@
         @Html.Gds().DropDownListFor(m => m.SelectedEntryPoint, Model.EntryPoints, string.Empty, new { title = Resources.EntryPoint, data_select_box = "true" })
     </div>
 
-    <button class="button" type="submit">@Constants.ContinueButtonText</button>
+    <button class="govuk-button" type="submit">@Constants.ContinueButtonText</button>
 }
 
 @section menu {

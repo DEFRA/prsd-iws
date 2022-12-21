@@ -21,3 +21,29 @@ $(".customs-office-not-required-radio-button").click(function () {
 
     addressBlock.addClass('js-hidden');
 });
+
+
+$("#sole-trader").click(function () {
+    var addressBlock = $('#other-description');
+
+    addressBlock.addClass('js-hidden');
+});
+
+$("#partnership").click(function () {
+    var addressBlock = $('#other-description');
+
+    addressBlock.addClass('js-hidden');
+});
+
+$("#limited-company").click(function () {
+    var addressBlock = $('#other-description');
+
+    addressBlock.addClass('js-hidden');
+});
+
+
+$("#other").click(function () {
+    var addressBlock = $('#other-description');
+
+    addressBlock.removeClass('js-hidden');
+});

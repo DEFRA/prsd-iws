@@ -68,11 +68,11 @@
 
 			if (Model.Producers.Count > 1)
 			{
-					<details>
-						<summary class="show-all">
-							<span class="summary">View all producers</span>
+					<details class="govuk-details" data-module="govuk-details">
+						<summary class="govuk-details__summary">
+							<span class="govuk-details__summary-text">View all producers</span>
 						</summary>
-						<div class="panel">
+						<div class="govuk-details__text">
 							@for (var i = 1; i < Model.Producers.Count; i++)
 							{
 								<div class="overview-block-element">

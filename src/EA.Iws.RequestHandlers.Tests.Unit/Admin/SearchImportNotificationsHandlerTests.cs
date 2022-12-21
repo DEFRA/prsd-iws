@@ -145,7 +145,7 @@
             var results = await ResultsWhenSearchingFor(searchNotificationNumber);
 
             Assert.Equal(1, results.Count);
-            Assert.True(results.Any(r => r.NotificationNumber.Contains(searchNotificationNumber)));
+            Assert.Contains(results, r => r.NotificationNumber.Contains(searchNotificationNumber));
         }
 
         [Fact]

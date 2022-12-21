@@ -3,58 +3,57 @@
 @{
     ViewBag.Title = "Register";
 }
-<h1 class="heading-large">
+<h1 class="govuk-heading-l">
     Register for International Waste Shipments administration
 </h1>
-<h1 class="heading-large"></h1>
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
     @Html.Gds().ValidationSummary()
 
-    <div class="form-group @Html.Gds().FormGroupClass(m => m.Name)">
+    <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.Name)">
         @Html.Gds().LabelFor(m => m.Name)
         @Html.Gds().ValidationMessageFor(m => m.Name)
         @Html.Gds().TextBoxFor(m => m.Name)
     </div>
-    <div class="form-group @Html.Gds().FormGroupClass(m => m.Surname)">
+    <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.Surname)">
         @Html.Gds().LabelFor(m => m.Surname)
         @Html.Gds().ValidationMessageFor(m => m.Surname)
         @Html.Gds().TextBoxFor(m => m.Surname)
     </div>
-    <div class="form-group @Html.Gds().FormGroupClass(m => m.CompetentAuthority)">
+    <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.CompetentAuthority)">
         @Html.Gds().LabelFor(m => m.CompetentAuthority)
         @Html.Gds().ValidationMessageFor(m => m.CompetentAuthority)
         @Html.Gds().DropDownListFor(m => m.CompetentAuthority, Model.CompetentAuthorities, string.Empty, new { data_select_box = "true" })
     </div>
-    <div class="form-group @Html.Gds().FormGroupClass(m => m.LocalAreaId)">
+    <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.LocalAreaId)">
         @Html.Gds().LabelFor(m => m.LocalAreaId)
         @Html.Gds().ValidationMessageFor(m => m.LocalAreaId)
         @Html.Gds().DropDownListFor(m => m.LocalAreaId, Model.Areas, string.Empty, new { data_select_box = "true" })
     </div>
-    <div class="form-group @Html.Gds().FormGroupClass(m => m.JobTitle)">
+    <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.JobTitle)">
         @Html.Gds().LabelFor(m => m.JobTitle)
         @Html.Gds().ValidationMessageFor(m => m.JobTitle)
         @Html.Gds().TextBoxFor(m => m.JobTitle)
     </div>
-    <div class="form-group @Html.Gds().FormGroupClass(m => m.Email)">
+    <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.Email)">
         @Html.Gds().LabelFor(m => m.Email)
         @Html.Gds().ValidationMessageFor(m => m.Email)
         @Html.Gds().TextBoxFor(m => m.Email)
     </div>
-    <div class="form-group @Html.Gds().FormGroupClass(m => m.Password)">
+    <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.Password)">
         @Html.Gds().LabelFor(m => m.Password)
         @Html.Gds().ValidationMessageFor(m => m.Password)
         @Html.Gds().HintParagraph("Please check that your password has at least 8 characters and contains at least one upper case letter, one lower case letter, 1 special character and one number. The password cannot be the same as the email address.")
         @Html.Gds().PasswordFor(m => m.Password)
     </div>
-    <div class="form-group @Html.Gds().FormGroupClass(m => m.ConfirmPassword)">
+    <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.ConfirmPassword)">
         @Html.Gds().LabelFor(m => m.ConfirmPassword)
         @Html.Gds().ValidationMessageFor(m => m.ConfirmPassword)
         @Html.Gds().PasswordFor(m => m.ConfirmPassword)
     </div>
-    <div class="form-group">
-        <input type="submit" class="button" value="Continue" />
+    <div class="govuk-form-group">
+        <input type="submit" class="govuk-button" value="Continue" />
     </div>
 }

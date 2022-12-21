@@ -9,7 +9,7 @@
                     @if (User.IsInternalUser())
                     {
                         <li>
-                            @Html.ActionLink(linkText: "Home", actionName: "Index", controllerName: "Home", routeValues: new { area = "Admin" }, htmlAttributes: null)
+                            @Html.ActionLink(linkText: "Home", actionName: "Index", controllerName: "Home", routeValues: new { area = "Admin" }, htmlAttributes: new { @class = "govuk-link" })
                         </li>
                     }
                 </ul>

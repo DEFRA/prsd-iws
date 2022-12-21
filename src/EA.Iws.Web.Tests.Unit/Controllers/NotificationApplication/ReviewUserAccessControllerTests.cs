@@ -42,7 +42,7 @@
             A.CallTo(
                 () =>
                     mediator.SendAsync(A<GetSharedUsersByNotificationId>.That.Matches(p => p.NotificationId == notificationId)))
-                .MustHaveHappened(Repeated.Exactly.Once);
+                .MustHaveHappenedOnceExactly();
         }
 
         [Fact]
@@ -65,7 +65,7 @@
             await reviewUserAccessController.Remove(model);
 
             A.CallTo(() => mediator.SendAsync(A<DeleteSharedUserForNotification>.That.Matches(p => p.SharedId == sharedUserId && p.NotificationId == notificationId)))
-                .MustHaveHappened(Repeated.Exactly.Once);
+                .MustHaveHappenedOnceExactly();
         }
     }
 }

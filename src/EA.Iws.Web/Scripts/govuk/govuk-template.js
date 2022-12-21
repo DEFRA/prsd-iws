@@ -1,25 +1,9 @@
-(function () {
+﻿(function () {
 	"use strict"
 	var root = this;
 	if (typeof root.GOVUK === 'undefined') {
 		root.GOVUK = {};
-	}
-
-	/*
-	  Cookie methods
-	  ==============
-
-	  Usage:
-
-		Setting a cookie:
-		GOVUK.cookie('hobnob', 'tasty', { days: 30 });
-
-		Reading a cookie:
-		GOVUK.cookie('hobnob');
-
-		Deleting a cookie:
-		GOVUK.cookie('hobnob', null);
-	*/
+	}	
 
 	function getDomain() {
 		var host = window.location.hostname;
@@ -88,7 +72,7 @@
 		GOVUK.cookie('_gid', null);
 		GOVUK.cookie('_gat', null);
 		GOVUK.cookie('_gat_govuk_shared', null);
-    }
+	}
 }).call(this);
 (function () {
 	"use strict"

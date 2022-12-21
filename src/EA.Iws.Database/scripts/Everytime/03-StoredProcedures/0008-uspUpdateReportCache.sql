@@ -172,7 +172,10 @@ BEGIN
           ,[HCode]
           ,[UNClass]
 		  ,[SiteOfExportName]
-		  ,[RejectedShipmentDate] )
+          ,[RejectedQuantity]
+		  ,[ShipmentRejectedDate] 
+          ,[RejectedReason]
+          ,[ActionedByExternalUser])
     SELECT [NotificationId]
           ,[NotificationNumber]
           ,[CompetentAuthorityId]
@@ -212,8 +215,47 @@ BEGIN
           ,[HCode]
           ,[UNClass]
 		  ,[SiteOfExportName]
-		  ,[RejectedShipmentDate]
+          ,[RejectedQuantity]
+		  ,[ShipmentRejectedDate]
+          ,[RejectedReason]
+          ,[ActionedByExternalUser]
       FROM [Reports].[Shipments];
+
+    DECLARE @NotificationId NVARCHAR(MAX);
+	DECLARE @ShipmentNumber INT;
+	SELECT NotificationId, ShipmentNumber INTO [#ShipmentsCacheTempTable] FROM [Reports].[ShipmentsCache] WHERE ActionedByExternalUser = 'N';
+
+	WHILE (SELECT COUNT(*) FROM #ShipmentsCacheTempTable) > 0
+		BEGIN
+			SELECT TOP 1 @NotificationId=NotificationId, @shipmentNumber=ShipmentNumber FROM #ShipmentsCacheTempTable ORDER BY NotificationId, ShipmentNumber;
+    
+			SELECT UserId INTO [#MovementAuditUserTempTable] FROM [Notification].[MovementAudit] WHERE NotificationId=@NotificationId AND ShipmentNumber=@ShipmentNumber AND Type IN (1, 3, 4, 5);
+		
+			DECLARE @IsExternalUser NVARCHAR(1) = 'N';
+			DECLARE @UserId NVARCHAR(MAX);
+		
+			WHILE (SELECT COUNT(*) FROM #MovementAuditUserTempTable) > 0
+				BEGIN
+					SELECT TOP 1 @UserId=UserId FROM #MovementAuditUserTempTable;				
+				
+					IF(@UserId IS NOT NULL AND @UserId != '')
+						BEGIN 
+							IF((SELECT COUNT(*) FROM [Person].[InternalUser] WHERE UserId = @UserId) = 0)
+								BEGIN
+									SET @IsExternalUser = 'Y';
+								END
+
+							DELETE #MovementAuditUserTempTable WHERE UserId=@UserId;
+						END
+				END
+			DROP TABLE #MovementAuditUserTempTable;
+	
+			UPDATE [Reports].[ShipmentsCache] SET ActionedByExternalUser=@IsExternalUser WHERE NotificationId=@NotificationId AND ShipmentNumber=@ShipmentNumber;
+
+			DELETE #ShipmentsCacheTempTable WHERE NotificationId=@NotificationId AND ShipmentNumber=@ShipmentNumber;
+		END
+
+	DROP TABLE #ShipmentsCacheTempTable;
 
 	DELETE FROM [Reports].[ProducerCache];
 

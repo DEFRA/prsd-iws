@@ -2,7 +2,7 @@
 @model EA.Iws.Web.Areas.NotificationApplication.ViewModels.SpecialHandling.SpecialHandlingViewModel
 
 <header class="hgroup">
-    <h1 class="heading-large">@SpecialHandlingResources.Header</h1>
+    <h1 class="govuk-heading-l">@SpecialHandlingResources.Header</h1>
     <p>@SpecialHandlingResources.HeaderDescription</p>
 </header>
 
@@ -10,33 +10,33 @@
 @Html.Gds().ValidationSummary()
 @Html.HiddenFor(m => m.NotificationId)
 
-<div class="form-group @Html.Gds().FormGroupClass(m => m.HasSpecialHandlingRequirements)">
+<div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.HasSpecialHandlingRequirements)">
     @Html.Gds().ValidationMessageFor(model => model.HasSpecialHandlingRequirements)
     <fieldset>
-        <div class="multiple-choice" data-target="information-message">
-            @Html.RadioButtonFor(m => m.HasSpecialHandlingRequirements, true, new { id = "rdoYes" })
-            <label for="rdoYes">
+        <div class="govuk-radios__item" data-target="information-message">
+            @Html.RadioButtonFor(m => m.HasSpecialHandlingRequirements, true, new { @class = "govuk-radios__input", id = "rdoYes" })
+            <label class="govuk-label govuk-radios__label" for="rdoYes">
                 Yes
             </label>
         </div>
 
-        <div class="multiple-choice">
-            @Html.RadioButtonFor(m => m.HasSpecialHandlingRequirements, false, new { id = "rdoNo" })
-            <label for="rdoNo">
+        <div class="govuk-radios__item">
+            @Html.RadioButtonFor(m => m.HasSpecialHandlingRequirements, false, new { @class = "govuk-radios__input", id = "rdoNo" })
+            <label class="govuk-label govuk-radios__label" for="rdoNo">
                 No
             </label>
         </div>
     </fieldset>
 
     <div class="panel @(Model.HasSpecialHandlingRequirements.GetValueOrDefault() ? "" : "js-hidden")" id="information-message">
-        <div class="form-group @Html.Gds().FormGroupClass(m => m.SpecialHandlingDetails)">
+        <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.SpecialHandlingDetails)">
             @Html.LabelFor(m => m.SpecialHandlingDetails)
             @Html.Gds().ValidationMessageFor(m => m.SpecialHandlingDetails)
-            @Html.TextAreaFor(m => m.SpecialHandlingDetails, new { @class = "text-area two-thirds" })
+            @Html.TextAreaFor(m => m.SpecialHandlingDetails, new { @class = "govuk-textarea", @rows = "5" })
         </div>
     </div>
 </div>
 
-<div class="form-group">
-    <button class="button" type="submit">@Constants.ContinueButtonText</button>
+<div class="govuk-form-group">
+    <button class="govuk-button" type="submit">@Constants.ContinueButtonText</button>
 </div>

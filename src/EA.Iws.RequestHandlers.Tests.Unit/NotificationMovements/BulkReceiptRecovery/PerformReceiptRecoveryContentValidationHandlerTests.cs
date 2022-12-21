@@ -225,7 +225,7 @@
 
             Assert.True(response.IsContentRulesSuccess);
             A.CallTo(() => repository.AddReceiptRecovery(A<Guid>.Ignored, A<List<ReceiptRecoveryMovement>>.Ignored, "Test"))
-                .MustHaveHappened(Repeated.Exactly.Once);
+                .MustHaveHappenedOnceExactly();
         }
 
         private List<Movement> GetRepoMovements()

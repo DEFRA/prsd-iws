@@ -3,8 +3,8 @@
     ViewBag.Title = "title";
 }
 
-<h1 class="heading-large">@Resources.ExitPointChangedTitle</h1>
+<h1 class="govuk-heading-l">@Resources.ExitPointChangedTitle</h1>
 
 <p>@(string.Format(Resources.ExitPointChangedDescription, ViewBag.ExitPoint)).</p>
 
-@Html.ActionLink(Constants.ContinueOnlyButtonText, "Index", "Home", routeValues: null, htmlAttributes: new { @class = "button" })
+@Html.ActionLink(Constants.ContinueOnlyButtonText, "Index", "Home", routeValues: null, htmlAttributes: new { @class = "govuk-button" })

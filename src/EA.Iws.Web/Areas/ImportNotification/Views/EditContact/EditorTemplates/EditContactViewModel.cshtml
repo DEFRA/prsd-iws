@@ -1,7 +1,7 @@
 ﻿@using EA.Iws.Web.Areas.ImportNotification.ViewModels.EditContact
 @model EA.Iws.Web.Areas.ImportNotification.ViewModels.EditContact.EditContactViewModel
 
-<div class="form-group @Html.Gds().FormGroupClass(m => m.Name)">
+<div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.Name)">
 	@Html.Gds().LabelFor(m => m.Name)
 	@Html.Gds().ValidationMessageFor(m => m.Name)
 	@Html.Gds().HintSpan(EditContactViewModelResources.OrgNameHint)
@@ -9,13 +9,13 @@
 </div>
 <hr />
 <h2 class="heading-medium">Contact details</h2>
-<div class="form-group @Html.Gds().FormGroupClass(m => m.FullName)">
+<div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.FullName)">
 	@Html.Gds().LabelFor(model => model.FullName)
 	@Html.Gds().ValidationMessageFor(model => model.FullName)
 	@Html.Gds().TextBoxFor(model => model.FullName)
 </div>
 
-<div class="form-group @Html.Gds().FormGroupClass(m => m.Telephone) @Html.Gds().FormGroupClass(m => m.TelephonePrefix)">
+<div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.Telephone) @Html.Gds().FormGroupClass(m => m.TelephonePrefix)">
 	@Html.Gds().LabelFor(model => model.Telephone)
 	@Html.Gds().ValidationMessageFor(model => model.TelephonePrefix)
 	@Html.Gds().ValidationMessageFor(model => model.Telephone)
@@ -25,17 +25,17 @@
 				+
 			</div>
 			<div class="international-number-prefix">
-				@Html.Gds().TextBoxFor(m => m.TelephonePrefix)
+				@Html.Gds().TextBoxFor(m => m.TelephonePrefix, new { @type = "number" })
 			</div>
 			<div class="international-number-body">
-				@Html.Gds().TextBoxFor(m => m.Telephone, false)
+				@Html.Gds().TextBoxFor(m => m.Telephone, new { @type = "number" })
 			</div>
 		</div>
 	</fieldset>
 </div>
 
-<div class="form-group @Html.Gds().FormGroupClass(m => m.Email)">
+<div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.Email)">
 	@Html.Gds().LabelFor(model => model.Email)
 	@Html.Gds().ValidationMessageFor(model => model.Email)
-	@Html.Gds().TextBoxFor(model => model.Email)
+	@Html.Gds().TextBoxFor(model => model.Email, new { @type = "email" })
 </div>

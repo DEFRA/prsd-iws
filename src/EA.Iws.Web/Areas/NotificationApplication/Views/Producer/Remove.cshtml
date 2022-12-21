@@ -4,7 +4,7 @@
     ViewBag.Title = RemoveProducerResources.Title;
 }
 
-<h1 class="heading-large">@RemoveProducerResources.Header</h1>
+<h1 class="govuk-heading-l">@RemoveProducerResources.Header</h1>
 
 @if (string.IsNullOrWhiteSpace(ViewBag.Error))
 {
@@ -18,7 +18,7 @@
 
         <p>@string.Format(RemoveProducerResources.Description, Model.ProducerName)</p>
 
-        <button class="button" type="submit">@Constants.ContinueButtonText</button>
+        <button class="govuk-button" type="submit">@Constants.ContinueButtonText</button>
     }
 }
 else
@@ -26,7 +26,7 @@ else
     <p>@ViewBag.Error</p>
     <p>
         @Html.ActionLink(RemoveProducerResources.ChangeSiteOfExport, "SiteOfExport", "Producer",
-        new { id = Model.NotificationId, backToList = true, backToOverview = ViewBag.BackToOverview }, new { @class = "button" })
+        new { id = Model.NotificationId, backToList = true, backToOverview = ViewBag.BackToOverview }, new { @class = "govuk-button" })
     </p>
 }
 

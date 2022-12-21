@@ -3,18 +3,18 @@
 @{
     ViewBag.Title = "List Carriers";
 }
-<h1 class="heading-large">@ListCarrierResources.Header</h1>
+<h1 class="govuk-heading-l">@ListCarrierResources.Header</h1>
 <p>@ListCarrierResources.HeaderDescription</p>
 
 @if (Model != null && Model.Carriers.Any())
 {
-    <div class="form-group">
+    <div class="govuk-form-group">
         <table title="Carriers">
             <thead>
                 <tr>
                     <th>@ListCarrierResources.ThOrgName</th>
                     <th>@ListCarrierResources.ThAddress</th>
-                    <th></th>
+                    <th>@ListCarrierResources.ActionHeader</th>
                 </tr>
             </thead>
             <tbody>
@@ -30,10 +30,10 @@
                         </td>
                         <td>
                             @Html.ActionLink(ListCarrierResources.Edit, "Edit", "Carrier",
-                                new { id = Model.Carriers[i].NotificationId, entityId = Model.Carriers[i].Id, backToOverview = ViewBag.BackToOverview }, null)
+                                new { id = Model.Carriers[i].NotificationId, entityId = Model.Carriers[i].Id, backToOverview = ViewBag.BackToOverview }, new { title = Model.Carriers[i].Business.Name })
                             <span class="table-divider">|</span>
                             @Html.ActionLink(ListCarrierResources.Remove, "Remove", "Carrier",
-                                new { id = Model.Carriers[i].NotificationId, entityId = Model.Carriers[i].Id, backToOverview = ViewBag.BackToOverview }, null)
+                                new { id = Model.Carriers[i].NotificationId, entityId = Model.Carriers[i].Id, backToOverview = ViewBag.BackToOverview }, new { title = Model.Carriers[i].Business.Name })
                         </td>
                     </tr>
                 }
@@ -42,19 +42,19 @@
     </div>
 }
 
-<div class="form-group">
+<div class="govuk-form-group">
     @Html.ActionLink(ListCarrierResources.AddAnother, "Add", "Carrier", new { id = Model.NotificationId, backToOverview = ViewBag.BackToOverview }, null)
 </div>
 
-<div class="form-group">
+<div class="govuk-form-group">
     @Html.ActionLink(ListCarrierResources.AddFromAddressBook, "AddFromAddressBook", "Carrier", new { id = Model.NotificationId }, null)
 </div>
 
 @if (ViewBag.BackToOverview)
 {
-    @Html.ActionLink(Constants.ContinueButtonText, "Index", "Home", new { id = Model.NotificationId }, new { @class = "button" })
+    @Html.ActionLink(Constants.ContinueButtonText, "Index", "Home", new { id = Model.NotificationId }, new { @class = "govuk-button" })
 }
 else
 {
-    @Html.ActionLink(Constants.ContinueButtonText, "Index", "MeansOfTransport", new { id = Model.NotificationId }, new { @class = "button" })
+    @Html.ActionLink(Constants.ContinueButtonText, "Index", "MeansOfTransport", new { id = Model.NotificationId }, new { @class = "govuk-button" })
 }

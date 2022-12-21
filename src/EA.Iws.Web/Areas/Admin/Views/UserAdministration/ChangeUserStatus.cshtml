@@ -4,33 +4,33 @@
     ViewBag.Title = Resources.ChangeUserStatusTitle;
 }
 
-<h1 class="heading-large">@Resources.ChangeUserStatusTitle</h1>
+<h1 class="govuk-heading-l">@Resources.ChangeUserStatusTitle</h1>
 
-<table class="form-group" title="@Resources.ChangeUserStatusTitle">
+<table class="govuk-form-group" title="@Resources.ChangeUserStatusTitle">
     <thead>
-    <tr>
-        <th>@Resources.Name</th>
-        <th>@Resources.Role</th>
-        <th>@Resources.Status</th>
-        <th></th>
-    </tr>
+        <tr>
+            <th>@Resources.Name</th>
+            <th>@Resources.Role</th>
+            <th>@Resources.Status</th>
+            <th>Action</th>
+        </tr>
     </thead>
     <tbody>
-    @for (int i = 0; i < Model.Users.Count(); i++)
-    {
-        using (Html.BeginForm())
+        @for (int i = 0; i < Model.Users.Count(); i++)
         {
-            @Html.AntiForgeryToken()
-            @Html.Hidden("UserId", Model.Users[i].UserId)
+            using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+                @Html.Hidden("UserId", Model.Users[i].UserId)
 
-            <tr>
-                <td class="font-xsmall" title="@Model.Users[i].Email">@Model.Users[i].FullName</td>
-                <td class="font-xsmall">@Model.Users[i].Role</td>
-                <td>@Html.DropDownList("Status", Model.GetUserStatusList(Model.Users[i].Status), new { id = string.Format("Status{0}", i) })</td>
-                <td><button type="submit">@Resources.Update</button></td>
-            </tr>
+                <tr>
+                    <td class="font-xsmall" title="@Model.Users[i].Email">@Model.Users[i].FullName</td>
+                    <td class="font-xsmall">@Model.Users[i].Role</td>
+                    <td>@Html.DropDownList("Status", Model.GetUserStatusList(Model.Users[i].Status), new { id = string.Format("Status{0}", i), @class = "govuk-select" })</td>
+                    <td><button type="submit" style="width:auto; padding: 5px!important;margin-bottom: 0px!important" class="govuk-button">@Resources.Update</button></td>
+                </tr>
+            }
         }
-    }
     </tbody>
 </table>
 

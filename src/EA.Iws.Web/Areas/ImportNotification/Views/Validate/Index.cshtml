@@ -6,7 +6,7 @@
 
 @if (Model.HasErrors)
 {
-    <h1 class="heading-large">@Resource.HeadingIncomplete</h1>
+    <h1 class="govuk-heading-l">@Resource.HeadingIncomplete</h1>
 
     <p class="text">@Resource.GuidanceIncomplete</p>
 
@@ -27,15 +27,15 @@
 }
 else
 {
-    <h1 class="heading-large">@Resource.HeadingComplete</h1>
+    <h1 class="govuk-heading-l">@Resource.HeadingComplete</h1>
 
     <p class="text">@Resource.GuidanceComplete</p>
 
     using (Html.BeginForm("Save", "Validate"))
     {
         @Html.AntiForgeryToken()
-        <div class="form-group">
-            <button type="submit" class="button">@Constants.ContinueButtonText</button>
+        <div class="govuk-form-group">
+            <button type="submit" class="govuk-button">@Constants.ContinueButtonText</button>
         </div>
 
         @Html.ActionLink(Resource.ReturnLinkText, "Index", "Home")

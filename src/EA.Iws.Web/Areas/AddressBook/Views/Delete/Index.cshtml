@@ -3,7 +3,7 @@
     ViewBag.Title = "Delete record";
 }
 
-<h1 class="heading-large">Delete address book record</h1>
+<h1 class="govuk-heading-l">Delete address book record</h1>
 <p>Are you sure you wish to delete this @ViewBag.Type.ToString().ToLower() record?</p>
 
 @using (Html.BeginForm())
@@ -28,7 +28,7 @@
     </div>
 
     <div class="form-group-compound">
-        <button class="button" type="submit">Delete</button> 
+        <button class="govuk-button" type="submit">Delete</button> 
     </div>
     @Html.ActionLink("Cancel", "Index", "Home", new { type = ViewBag.Type }, null)
 }

@@ -1,7 +1,7 @@
 ﻿@using EA.Iws.Web.Areas.NotificationApplication.Views.StateOfImport
 @model EA.Iws.Web.Areas.NotificationApplication.ViewModels.StateOfImport.StateOfImportViewModel
 
-<div class="form-group @Html.Gds().FormGroupClass(m => m.CountryId)">
+<div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.CountryId)">
     @Html.Gds().LabelFor(m => m.CountryId, new { @class = "form-label-bold" })
     @Html.Gds().HintParagraph(StateOfImportResources.EndJourneyHint)
     @Html.HiddenFor(m => m.CountryId)
@@ -9,14 +9,14 @@
     <button class="link-submit force-newline" type="submit" value="changeCountry" name="submit">@StateOfImportResources.ChangeCountry</button>
 </div>
 
-<div class="form-group @Html.Gds().FormGroupClass(m => m.CompetentAuthorities.Selected)">
+<div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.CompetentAuthorities.Selected)">
     @Html.Gds().LabelFor(m => m.CompetentAuthorities, new { @class = "form-label-bold" })
     @Html.Gds().HintParagraph(StateOfImportResources.CAHint)
-    @Html.Gds().ValidationMessageFor(m => m.CompetentAuthorities.SelectedValue)
+    @Html.Gds().ValidationMessageFor(m => m.CompetentAuthorities.Selected)
     @Html.EditorFor(m => m.CompetentAuthorities, new { id = "CompetentAuthorities" })
 </div>
 
-<div class="form-group @Html.Gds().FormGroupClass(m => m.EntryOrExitPointId)">
+<div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.EntryOrExitPointId)">
     @Html.Gds().LabelFor(m => m.EntryOrExitPointId, new { @class = "form-label-bold" })
     @Html.Gds().HintParagraph(StateOfImportResources.PortHint)
     @Html.Gds().ValidationMessageFor(m => m.EntryOrExitPointId)
@@ -26,6 +26,6 @@
 
 @Html.Partial("_PortNotListedDisclosure", new ViewDataDictionary { { "ca", Model.NotificationCompetentAuthority } })
 
-<div class="form-group">
-    <button class="button" type="submit" value="submit" name="submit">@Constants.ContinueButtonText</button>
+<div class="govuk-form-group">
+    <button class="govuk-button" type="submit" value="submit" name="submit">@Constants.ContinueButtonText</button>
 </div>

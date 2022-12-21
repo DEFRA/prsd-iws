@@ -141,6 +141,9 @@
   <data name="Remove" xml:space="preserve">
     <value>Remove</value>
   </data>
+  <data name="SelectCarrier" xml:space="preserve">
+    <value>Select carrier from your address book</value>
+  </data>
   <data name="Title" xml:space="preserve">
     <value>Add carriers from your address book</value>
   </data>

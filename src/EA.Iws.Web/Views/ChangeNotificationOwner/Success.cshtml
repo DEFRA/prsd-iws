@@ -6,12 +6,12 @@
 
 <div class="grid-row">
     <div class="column-two-thirds">
-        <h1 class="heading-large">@Resources.SuccessTitle</h1>
+        <h1 class="govuk-heading-l">@Resources.SuccessTitle</h1>
 
         <p>
             @string.Format(Resources.NotificationReassigned, Model.NotificationNumber, Model.EmailAddress)
         </p>
 
-        @Html.ActionLink(Constants.ContinueOnlyButtonText, "Home", "Applicant", new { area = string.Empty }, new { @class = "button" })
+        @Html.ActionLink(Constants.ContinueOnlyButtonText, "Home", "Applicant", new { area = string.Empty }, new { @class = "govuk-button" })
     </div>
 </div>

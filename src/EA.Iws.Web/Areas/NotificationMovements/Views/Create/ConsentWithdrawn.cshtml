@@ -3,9 +3,9 @@
     ViewBag.Title = Resource.Title;
 }
 
-<h1 class="heading-large">@Resource.Title</h1>
+<h1 class="govuk-heading-l">@Resource.Title</h1>
 
 <p>@Resource.YouCantGenerateAnyMorePrenotificationsParagraph</p>
 
 
-@Html.ActionLink("Continue", "Index", "Options", new { area = "NotificationApplication", id = ViewContext.RouteData.Values["notificationId"] }, new { @class = "button" })
+@Html.ActionLink("Continue", "Index", "Options", new { area = "NotificationApplication", id = ViewContext.RouteData.Values["notificationId"] }, new { @class = "govuk-button" })

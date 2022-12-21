@@ -111,6 +111,7 @@
             if (isComplete)
             {
                 icon.AddCssClass("fa-check");
+                icon.Attributes.Add("aria-label", "green tick");
                 link.Attributes.Add("aria-valuenow", "100");
             }
             else

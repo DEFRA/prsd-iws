@@ -29,7 +29,7 @@
         {
             await controller.Index(Guid.Empty);
 
-            A.CallTo(() => mediator.SendAsync(A<GetSubmittedMovements>.Ignored)).MustHaveHappened(Repeated.Exactly.Once);
+            A.CallTo(() => mediator.SendAsync(A<GetSubmittedMovements>.Ignored)).MustHaveHappenedOnceExactly();
         }
 
         [Fact]
@@ -37,7 +37,7 @@
         {
             await controller.Index(Guid.Empty);
 
-            A.CallTo(() => mediator.SendAsync(A<GetSubmittedMovements>.That.Matches(r => r.NotificationId == Guid.Empty))).MustHaveHappened(Repeated.Exactly.Once);
+            A.CallTo(() => mediator.SendAsync(A<GetSubmittedMovements>.That.Matches(r => r.NotificationId == Guid.Empty))).MustHaveHappenedOnceExactly();
         }
 
         [Fact]

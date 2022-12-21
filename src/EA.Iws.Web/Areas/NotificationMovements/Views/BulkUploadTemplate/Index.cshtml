@@ -9,12 +9,12 @@
 }
 
 <header class="hgroup text">
-    <h1 class="heading-large">@Resource.Header</h1>
+    <h1 class="govuk-heading-l">@Resource.Header</h1>
 </header>
 
 <p class="text">@string.Format(@Resource.Description, @Model.NotificationNumber)</p>
 
-<div class="form-group">
+<div class="govuk-form-group">
     <ul class="list list-bullet">
         <li>
             @Html.ActionLink(@Resource.PrenotificationTemplate, "PrenotificationTemplate", "BulkUploadTemplate", new { id = @Model.NotificationId }, null)

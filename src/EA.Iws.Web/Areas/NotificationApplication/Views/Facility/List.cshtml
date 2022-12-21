@@ -7,37 +7,37 @@
     var notificationType = Model.NotificationType.ToString();
 }
 
-<h1 class="heading-large">@string.Format(ListFacilityResources.Header, notificationType)</h1>
+<h1 class="govuk-heading-l">@string.Format(ListFacilityResources.Header, notificationType)</h1>
 <p>@string.Format(ListFacilityResources.HeaderDescription, notificationType.ToLowerInvariant())</p>
 
 @if (Model != null && Model.FacilityData.Any())
 {
-    <div class="form-group">
-        <table title=@ListFacilityResources.TableTitle>
-            <thead>
-                <tr>
-                    <th>@ListFacilityResources.ThOrgName</th>
-                    <th>@ListFacilityResources.ThAddress</th>
-                    <th></th>
+    <div class="govuk-form-group">
+        <table title=@ListFacilityResources.TableTitle class="govuk-table">
+            <thead class="govuk-table__head">
+                <tr class="govuk-table__row">
+                    <th scope="col" class="govuk-table__header">@ListFacilityResources.ThOrgName</th>
+                    <th scope="col" class="govuk-table__header">@ListFacilityResources.ThAddress</th>
+                    <th scope="col" class="govuk-table__header">Action</th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody class="govuk-table__body">
                 @for (var i = 0; i < Model.FacilityData.Count; i++)
                 {
-                    <tr>
-                        <td>
+                    <tr class="govuk-table__row">
+                        <td class="govuk-table__cell">
                             @Html.DisplayFor(m => m.FacilityData[i].Business.Name)
                         </td>
-                        <td>
+                        <td class="govuk-table__cell">
                             @Html.DisplayFor(m => m.FacilityData[i].Address.StreetOrSuburb),
                             @Html.DisplayFor(m => m.FacilityData[i].Address.TownOrCity)
                         </td>
-                        <td>
+                        <td class="govuk-table__cell">
                             @Html.ActionLink(ListFacilityResources.Edit, "Edit", "Facility",
-                                new { id = Model.FacilityData[i].NotificationId, entityId = Model.FacilityData[i].Id, backToOverview = ViewBag.BackToOverview }, null)
+                                new { id = Model.FacilityData[i].NotificationId, entityId = Model.FacilityData[i].Id, backToOverview = ViewBag.BackToOverview }, new { title = Model.FacilityData[i].Business.Name })
                             <span class="table-divider">|</span>
                             @Html.ActionLink(ListFacilityResources.Remove, "Remove", "Facility",
-                                new { id = Model.FacilityData[i].NotificationId, entityId = Model.FacilityData[i].Id, backToOverview = ViewBag.BackToOverview }, null)
+                                new { id = Model.FacilityData[i].NotificationId, entityId = Model.FacilityData[i].Id, backToOverview = ViewBag.BackToOverview }, new { title = Model.FacilityData[i].Business.Name })
                         </td>
                     </tr>
                 }
@@ -46,14 +46,14 @@
     </div>
 }
 
-<div class="form-group">
+<div class="govuk-form-group">
     @Html.ActionLink(ListFacilityResources.AddFacility, "Add", "Facility", new { id = Model.NotificationId, backToOverview = ViewBag.BackToOverview }, null)
 </div>
 @if (ViewBag.BackToOverview)
 {
-    @Html.ActionLink(Constants.ContinueButtonText, "Index", "Home", new { id = Model.NotificationId }, new { @class = "button" })
+    @Html.ActionLink(Constants.ContinueButtonText, "Index", "Home", new { id = Model.NotificationId }, new { @class = "govuk-button" })
 }
 else
 {
-    @Html.ActionLink(Constants.ContinueButtonText, "SiteOfTreatment", "Facility", new { id = Model.NotificationId }, new { @class = "button" })
+    @Html.ActionLink(Constants.ContinueButtonText, "SiteOfTreatment", "Facility", new { id = Model.NotificationId }, new { @class = "govuk-button" })
 }

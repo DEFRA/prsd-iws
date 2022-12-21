@@ -21,12 +21,30 @@ AS
         C.[From] AS [ConsentFrom],
         C.[To] AS [ConsentTo],
         M.PrenotificationDate,
-        MR.Date AS ReceivedDate,
+        CASE
+			WHEN MR.Date IS NULL THEN MPR.WasteReceivedDate ELSE MR.Date 
+		END AS [ReceivedDate],
         MOR.Date AS CompletedDate,
-		MREJECT.Date AS RejectedShipmentDate,
-        MR.Quantity AS QuantityReceived,
-        MR_U.Description AS [QuantityReceivedUnit],
-        MR_U.Id AS [QuantityReceivedUnitId],
+		CASE 
+			WHEN MS.Status = 'Rejected' THEN
+				MREJECT.RejectedQuantity				
+			ELSE
+				MPR.RejectedQuantity END AS [RejectedQuantity],
+		CASE 
+			WHEN MS.Status = 'Rejected' THEN
+				MREJECT.Date 
+			ELSE
+				MPR.WasteReceivedDate END AS [ShipmentRejectedDate],
+        MREJECT.Reason AS [RejectedReason],
+        CASE
+			WHEN MR.Quantity IS NULL THEN MPR.ActualQuantity ELSE MR.Quantity 
+		END AS [QuantityReceived],
+        CASE
+			WHEN MR_U.Description IS NULL THEN MPR_U.Description ELSE MR_U.Description  
+		END AS [QuantityReceivedUnit],
+        CASE
+			WHEN MR_U.Id IS NULL THEN MPR_U.Id ELSE MR_U.Id  
+		END AS [QuantityReceivedUnitId],
         WT.[ChemicalCompositionType] AS [ChemicalCompositionTypeId],
         CASE
             WHEN WT.ChemicalCompositionType = 4 THEN CCT.Description + ' - ' + WT.ChemicalCompositionName
@@ -81,8 +99,8 @@ AS
 		CASE
 			WHEN SiteOfExport.[Id] IS NOT NULL THEN SiteOfExport.[Name]
 			ELSE ''
-		END AS [SiteOfExportName]       
-        
+		END AS [SiteOfExportName],
+        'N' AS [ActionedByExternalUser]
     
     FROM [Notification].[Movement] AS M
 
@@ -121,11 +139,17 @@ AS
     LEFT JOIN	[Notification].[MovementOperationReceipt] AS MOR
     ON			[M].[Id] = [MOR].[MovementId]
 
+    LEFT JOIN	[Notification].[MovementPartialRejection] AS MPR
+    ON			[M].[Id] = [MPR].[MovementId]
+
 	LEFT JOIN	[Notification].[MovementRejection] AS MREJECT
 	ON			[M].[Id] = [MREJECT].[MovementId]
 
     LEFT JOIN	[Lookup].[ShipmentQuantityUnit] AS MR_U 
     ON			[MR].[Unit] = [MR_U].[Id]
+
+    LEFT JOIN	[Lookup].[ShipmentQuantityUnit] AS MPR_U 
+    ON			[MPR].[ActualUnit] = [MPR_U].[Id]
 
     LEFT JOIN	[Notification].[Consent] AS C
     ON			M.NotificationId = [C].[NotificationApplicationId]
@@ -157,6 +181,7 @@ AS
     LEFT JOIN   [Notification].[WasteCodeInfo] BaselCode
                 LEFT JOIN [Lookup].[WasteCode] BaselCodeInfo ON BaselCode.WasteCodeId = BaselCodeInfo.Id
     ON          BaselCode.NotificationId = N.Id AND BaselCode.CodeType IN (1, 2)
+
 	LEFT JOIN	[Notification].[Producer] AS SiteOfExport
 	ON			SiteOfExport.Id = 
 				(
@@ -170,7 +195,7 @@ AS
 					WHERE		PC.NotificationId = N.Id 
 								AND [IsSiteOfExport] = 1
 					ORDER BY	P1.[IsSiteOfExport] DESC
-				)
+				)    
 
     UNION ALL
 
@@ -193,7 +218,9 @@ AS
         M.PrenotificationDate,
         MR.Date AS ReceivedDate,
         MOR.Date AS CompletedDate,
-		MREJECT.Date AS RejectedShipmentDate,
+		CASE WHEN MREJECT.RejectedQuantity IS NOT NULL THEN MREJECT.RejectedQuantity ELSE MPR.RejectedQuantity END AS [RejectedQuantity],
+		CASE WHEN MREJECT.Date IS NOT NULL THEN MREJECT.Date ELSE MPR.WasteReceivedDate END AS [ShipmentRejectedDate],		
+        MREJECT.Reason AS [RejectedReason],
         MR.Quantity AS QuantityReceived,
         MR_U.Description AS [QuantityReceivedUnit],
         MR_U.Id AS [QuantityReceivedUnitId],
@@ -212,7 +239,16 @@ AS
         TR.ExportCountryName AS OriginatingCountry,
         CASE 
 			WHEN M.[IsCancelled] = 1 THEN 'Cancelled'
-			ELSE ''
+			ELSE 
+				CASE WHEN MR.Quantity IS NOT NULL THEN 'Received'
+					ELSE 
+						CASE WHEN MREJECT.RejectedQuantity IS NOT NULL THEN 'Rejected'
+					ELSE 
+						CASE WHEN MPR.RejectedQuantity IS NOT NULL THEN 'PartiallyRejected'
+						ELSE ''
+						END
+				END
+			END
 		END AS [Status],
         ND.[NotificationReceivedDate],
         STUFF(( SELECT ', ' + WC.Code AS [text()]
@@ -255,7 +291,8 @@ AS
             order by 1
             FOR XML PATH('')
             ), 1, 1, '' ) AS [UNClass],
-		P.[Name] [SiteOfExportName]
+		P.[Name] [SiteOfExportName],
+        'N/A' AS [ActionedByExternalUser]
     
     FROM [ImportNotification].[Movement] AS M
 
@@ -296,6 +333,9 @@ AS
 
     LEFT JOIN	[ImportNotification].[MovementOperationReceipt] AS MOR
     ON			[M].[Id] = [MOR].[MovementId]
+
+	LEFT JOIN	[ImportNotification].[MovementPartialRejection] AS MPR
+    ON			[M].[Id] = [MPR].[MovementId]
 
 	LEFT JOIN	[ImportNotification].[MovementRejection] AS MREJECT
 	ON			[M].[Id] = [MREJECT].[MovementId]

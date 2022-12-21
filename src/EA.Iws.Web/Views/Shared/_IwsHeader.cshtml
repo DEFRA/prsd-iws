@@ -1,6 +1,14 @@
-﻿<header class="page-header group">
-    <div class="hgroup">
-        <h1>International Waste Shipments</h1>
-        <h2 class="subtitle">Layout, typography, colour, images, icons, forms, buttons and data</h2>
-    </div>
-</header>
+﻿<div class="govuk-header__content govuk-!-padding-top-2">
+    <a href="~/" class="govuk-header__link govuk-header__link--service-name">
+        International Waste Shipments (IWS)
+    </a>
+    @if (Request.IsAuthenticated)
+    {
+        if (User.IsInternalUser())
+        {
+            <div style="margin-bottom:10px;">
+                @Html.ActionLink(linkText: "Home", actionName: "Index", controllerName: "Home", routeValues: new { area = "Admin" }, htmlAttributes: new { @class = "govuk-header__link govuk-link" })
+            </div>
+        }
+    }
+</div>

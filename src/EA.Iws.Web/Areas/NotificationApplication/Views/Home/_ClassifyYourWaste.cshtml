@@ -29,7 +29,7 @@
             </td>
             @if (ViewBag.CanEditNotification)
             {
-                <td class="change">
+                <td class="change govuk-link">
                     <a href="@Url.Action("Index", "ChemicalComposition", new { id, backToOverview = true })">
                         Change
                         <span class="screen-reader-text">Chemical composition</span>
@@ -46,7 +46,7 @@
             </td>
             @if (ViewBag.CanEditNotification)
             {
-                <td class="change">
+                <td class="change govuk-link">
                     <a href="@Url.Action("Index", "WasteGenerationProcess", new { id, backToOverview = true })">
                         Change
                         <span class="screen-reader-text">Process of generation</span>
@@ -63,7 +63,7 @@
             </td>
             @if (ViewBag.CanEditNotification)
             {
-                <td class="change">
+                <td class="change govuk-link">
                     <a href="@Url.Action("Index", "PhysicalCharacteristics", new { id, backToOverview = true })">
                         Change
                         <span class="screen-reader-text">Physical characteristics</span>

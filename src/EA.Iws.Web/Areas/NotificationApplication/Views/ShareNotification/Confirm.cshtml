@@ -7,7 +7,7 @@
 
 <div class="grid-row">
     <div class="column-two-thirds">
-        <h1 class="heading-large">@Model.ConfirmTitle</h1>
+        <h1 class="govuk-heading-l">@Model.ConfirmTitle</h1>
 
         @using (Html.BeginForm())
         {
@@ -17,28 +17,27 @@
             @Html.HiddenFor(m => m.SharedUserIds)
             @Html.HiddenFor(m => m.SharedUsers)
 
-            <div class="form-group">
+            <div class="govuk-form-group">
                 <h2 class="heading-medium">@Resources.ShareNotificationConfirmShareUsers</h2>
-                <table title="@Resources.ShareNotificationTitle">
-
-                    <thead>
-                        <tr>
-                            <th>@Resources.Email</th>
+                <table title="@Resources.ShareNotificationTitle" class="govuk-table">
+                    <thead class="govuk-table__head">
+                        <tr class="govuk-table__row">
+                            <th scope="col" class="govuk-table__header">@Resources.Email</th>
                         </tr>
                     </thead>
                     @for (int i = 0; i < Model.SharedUsers.Count; i++)
                     {
                         var sharedUser = Model.SharedUsers[i];
 
-                        <tr>
-                            <td>@Html.Raw(sharedUser.Email)</td>
+                        <tr class="govuk-table__row">
+                            <td class="govuk-table__cell">@Html.Raw(sharedUser.Email)</td>
                         </tr>
                     }
                 </table>
             </div>
 
             <div>
-                <button class="button" type="submit">@Constants.ContinueButtonText</button>
+                <button class="govuk-button" type="submit">@Constants.ContinueButtonText</button>
             </div>
             @Html.ActionLink(@Resources.Back, "ShareNotification", "ShareNotification", new { id = Model.NotificationId, area = "NotificationApplication" }, null)
         }

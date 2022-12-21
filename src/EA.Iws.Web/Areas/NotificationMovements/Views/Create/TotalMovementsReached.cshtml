@@ -3,7 +3,7 @@
     ViewBag.Title = TotalMovementsReachedResources.Title;
 }
 
-<h1 class="heading-large">@TotalMovementsReachedResources.Title</h1>
+<h1 class="govuk-heading-l">@TotalMovementsReachedResources.Title</h1>
 
 <p>@TotalMovementsReachedResources.YouCantGenerateAnyMorePrenotificationsParagraph</p>
 
@@ -14,4 +14,4 @@
 
 <p>@TotalMovementsReachedResources.PleaseNoteParagraph</p>
 
-@Html.ActionLink("Continue", "Index", "Options", new { area = "NotificationApplication", id = ViewContext.RouteData.Values["notificationId"] }, new { @class = "button" })
+@Html.ActionLink("Continue", "Index", "Options", new { area = "NotificationApplication", id = ViewContext.RouteData.Values["notificationId"] }, new { @class = "govuk-button" })

@@ -7,7 +7,7 @@
 }
 
 <header class="hgroup">
-    <h1 class="heading-large">@ConstituentsResources.Header</h1>
+    <h1 class="govuk-heading-l">@ConstituentsResources.Header</h1>
 </header>
 
 @using (Html.BeginForm())
@@ -18,14 +18,14 @@
     @Html.HiddenFor(m => m.ChemicalCompositionType)
     <p>@ConstituentsResources.HeaderDescription</p>
 
-    <div class="grid-row form-group">
+    <div class="grid-row govuk-form-group">
         <div class="column-half">
 
             @for (var i = 0; i < Model.WasteComposition.Count; i++)
             {
                 var idText = "WasteComposition_" + i + "_";
 
-                <div class="form-group @Html.Gds().FormGroupClass(m => m.WasteComposition[i])">
+                <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.WasteComposition[i])">
                     @Html.Gds().ValidationMessageFor(m => m.WasteComposition[i])
                     <div class="grid-row">
                         <div class="column-two-thirds">
@@ -53,20 +53,20 @@
         </div>
     </div>
 
-    <div class="form-group">
+    <div class="govuk-form-group">
         <div>@ConstituentsResources.Question</div>
 
-        <div class="form-group">
-            <div class="multiple-choice">
-                @Html.RadioButtonFor(m => m.Choices, YesNoEnum.No, new { @class = "", @id = "rdoNo" })
-                <label for="rdoNo">
+        <div class="govuk-form-group">
+            <div class="govuk-radios__item">
+                @Html.RadioButtonFor(m => m.Choices, YesNoEnum.No, new { @class = "govuk-radios__input", @id = "rdoNo" })
+                <label class="govuk-label govuk-radios__label" for="rdoNo">
                     No
                 </label>
             </div>
 
-            <div class="multiple-choice" data-target="other-constituents">
-                @Html.RadioButtonFor(m => m.Choices, YesNoEnum.Yes, new { @class = "", @id = "rdoYes" })
-                <label for="rdoYes">
+            <div class="govuk-radios__item" data-target="other-constituents">
+                @Html.RadioButtonFor(m => m.Choices, YesNoEnum.Yes, new { @class = "govuk-radios__input", @id = "rdoYes" })
+                <label class="govuk-label govuk-radios__label" for="rdoYes">
                     Yes
                 </label>
             </div>
@@ -78,48 +78,47 @@
             {
                 var idText = "OtherCodes_" + i + "_";
 
-                <div class="form-group @Html.Gds().FormGroupClass(m => m.OtherCodes[i])">
+                <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.OtherCodes[i])">
                     @Html.Gds().ValidationMessageFor(m => m.OtherCodes[i])
-                    
-                    <div><label>Name</label></div>
-                    <span>
-                        <input name="OtherCodes[@i].Constituent" value="@Model.OtherCodes[i].Constituent" title=@ConstituentsResources.OtherConstituent id = @idText />
-                        &nbsp;&nbsp;
-                    </span>
 
-                    <span>
-                        <input name="OtherCodes[@i].MinConcentration" style="width: 65px" placeholder="min %" value="@Model.OtherCodes[i].MinConcentration" title=@ConstituentsResources.MinConstituent />
-                        &nbsp;&nbsp;
-                    </span>
-                    <span>
-                        <input name="OtherCodes[@i].MaxConcentration" style="width: 65px" placeholder="max %" value="@Model.OtherCodes[i].MaxConcentration" title=@ConstituentsResources.MaxConstituent />
-                        <input name="OtherCodes[@i].ChemicalCompositionCategory" type="hidden" value="@Model.OtherCodes[i].ChemicalCompositionCategory" />
-                    </span>
-
+                    <div>
+                        <label class="govuk-label" for="width-20">
+                            Name
+                        </label>
+                        <input name="OtherCodes[@i].Constituent" class="govuk-input govuk-input--width-10" value="@Model.OtherCodes[i].Constituent" title=@ConstituentsResources.OtherConstituent id=@idText />
+                    </div>
+                    <br />
+                    <div>
+                        <input name="OtherCodes[@i].MinConcentration" class="govuk-input govuk-input--width-4" placeholder="min %" value="@Model.OtherCodes[i].MinConcentration" title=@ConstituentsResources.MinConstituent />
+                        <input name="OtherCodes[@i].MaxConcentration" class="govuk-input govuk-input--width-4" placeholder="max %" value="@Model.OtherCodes[i].MaxConcentration" title=@ConstituentsResources.MaxConstituent />
+                    </div>                    
+                    <input name="OtherCodes[@i].ChemicalCompositionCategory" type="hidden" value="@Model.OtherCodes[i].ChemicalCompositionCategory" />
                 </div>
             }
         </div>
     </div>
 
-    <div class="form-group @Html.Gds().FormGroupClass(m => m.FurtherInformation)">
-        <hr/>
+    <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.FurtherInformation)">
+        <hr />
         @Html.Gds().ValidationMessageFor(m => m.FurtherInformation)
         @ConstituentsResources.Header2
         @Html.Gds().HintParagraph(ConstituentsResources.Hint)
-        @Html.TextAreaFor(m => m.FurtherInformation, new { @class = "text-area two-thirds", @title = ConstituentsResources.FurtherInformation, @MaxLength = 256 })
+        @Html.TextAreaFor(m => m.FurtherInformation, new { @class = "govuk-textarea two-thirds", @title = ConstituentsResources.FurtherInformation, @MaxLength = 256, @rows = 5 })
     </div>
-    <div class="form-group">
-        <fieldset>
-            <div class="multiple-choice">
-                @Html.CheckBoxFor(m => m.HasAnnex, new { @id = "chkboxFurtherInfo" })
-                <label for="chkboxFurtherInfo">
-                    @ConstituentsResources.Declaration
-                </label>
+    <div class="govuk-form-group">
+        <fieldset class="govuk-fieldset">
+            <div class="govuk-checkboxes" data-module="govuk-checkboxes">
+                <div class="multiple-choice govuk-checkboxes__item">
+                    @Html.CheckBoxFor(m => m.HasAnnex, new { @id = "chkboxFurtherInfo", @class = "govuk-checkboxes__input" })
+                    <label class="govuk-label govuk-checkboxes__label" for="chkboxFurtherInfo">
+                        @ConstituentsResources.Declaration
+                    </label>
+                </div>
             </div>
         </fieldset>
     </div>
 
-    <div class="form-group">
-        <button class="button" name="Command" value="continue" type="submit">@Constants.ContinueButtonText</button>
+    <div class="govuk-form-group">
+        <button class="govuk-button" name="Command" value="continue" type="submit">@Constants.ContinueButtonText</button>
     </div>
 }

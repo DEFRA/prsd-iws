@@ -2,21 +2,21 @@
 
 @if (Model != null)
 {
-    <fieldset>
-        @for (int i = 0; i < Model.PossibleValues.Count; i++)
-        {
-            MvcHtmlString idForThisRadioButton = Html.NameFor(m => m.PossibleValues[i]);
+    <fieldset class="govuk-fieldset">
+        <div class="govuk-radios">
+            @for (int i = 0; i < Model.PossibleValues.Count; i++)
+            {
+                MvcHtmlString idForThisRadioButton = Html.NameFor(m => m.PossibleValues[i]);
 
-            <div>@Html.HiddenFor(m => m.PossibleValues[i])</div>
+                <div>@Html.HiddenFor(m => m.PossibleValues[i])</div>
 
-            <div class="multiple-choice">
-                @Html.RadioButtonFor(m => m.SelectedValue,
-                    Model.PossibleValues[i],
-                    new { id = idForThisRadioButton })
-                <label for="@idForThisRadioButton">
-                    @Html.DisplayFor(m => m.PossibleValues[i])
-                </label>
-            </div>
-        }
+                <div class="govuk-radios__item">
+                    @Html.RadioButtonFor(m => m.SelectedValue, Model.PossibleValues[i], new { id = idForThisRadioButton, @class = "govuk-radios__input" })
+                    <label class="govuk-label govuk-radios__label" for="@idForThisRadioButton">
+                        @Html.DisplayFor(m => m.PossibleValues[i])
+                    </label>
+                </div>
+            }
+        </div>
     </fieldset>
 }

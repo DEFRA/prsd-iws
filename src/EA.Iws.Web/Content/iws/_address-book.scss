@@ -1,22 +1,25 @@
+@import "palette";
+
 .autocomplete-title {
     font-weight: bold;
 }
 
 .autocomplete-line {
     display: block;
+    color: black !important;
 }
 
 .autocomplete-data {
     display: none;
 }
 
-.table-container{
-    padding: 0 $gutter;
+.table-container {
+    padding: 0 $govuk-gutter;
 }
 
-.tabbed-nav{
+.tabbed-nav {
     border-bottom: 1px solid $border-colour;
-    margin-bottom: 21px;
+    padding-bottom: 46px;
 }
 
 .tabbed-tab {

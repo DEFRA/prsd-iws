@@ -5,7 +5,7 @@
     ViewBag.Title = NewOrExistingNotificationResources.Header;
 }
 
-<h1 class="heading-large">@NewOrExistingNotificationResources.Header</h1>
+<h1 class="govuk-heading-l">@NewOrExistingNotificationResources.Header</h1>
 
 @using (Html.BeginForm())
 {
@@ -15,27 +15,29 @@
     @Html.HiddenFor(m => m.CompetentAuthority)
     @Html.HiddenFor(m => m.NotificationType)
 
-    <div class="form-group @Html.Gds().FormGroupClass(m => m.GenerateNew)">
+    <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.GenerateNew)">
         @Html.Gds().LabelFor(m => m.GenerateNew, new { @class = "visually-hidden" })
         @Html.Gds().ValidationMessageFor(m => m.GenerateNew)
-        <fieldset>
-            <div class="multiple-choice">
-                @Html.RadioButtonFor(m => m.GenerateNew, true, new { id = "GenerateNew" })
-                <label for="GenerateNew">
-                    @NewOrExistingNotificationResources.GenerateNewNumber
-                </label>
-            </div>
+        <fieldset class="govuk-fieldset">
+            <div class="govuk-radios" data-module="govuk-radios">
+                <div class="govuk-radios__item">
+                    @Html.RadioButtonFor(m => m.GenerateNew, true, new { id = "GenerateNew", @class = "govuk-radios__input" })
+                    <label class="govuk-label govuk-radios__label" for="GenerateNew">
+                        @NewOrExistingNotificationResources.GenerateNewNumber
+                    </label>
+                </div>
 
-            <div class="multiple-choice">
-                @Html.RadioButtonFor(m => m.GenerateNew, false, new { id = "EnterNumber" })
-                <label for="EnterNumber">
-                    @NewOrExistingNotificationResources.EnterExistingNumber
-                </label>
+                <div class="govuk-radios__item">
+                    @Html.RadioButtonFor(m => m.GenerateNew, false, new { id = "EnterNumber", @class = "govuk-radios__input" })
+                    <label class="govuk-label govuk-radios__label" for="EnterNumber">
+                        @NewOrExistingNotificationResources.EnterExistingNumber
+                    </label>
+                </div>
             </div>
         </fieldset>
     </div>
 
-    <div class="form-group">
-        <button class="button" type="submit">@Constants.ContinueButtonText</button>
+    <div class="govuk-form-group">
+        <button class="govuk-button" type="submit">@Constants.ContinueButtonText</button>
     </div>
 }

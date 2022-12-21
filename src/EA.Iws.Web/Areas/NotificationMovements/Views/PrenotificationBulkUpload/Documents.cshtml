@@ -9,7 +9,7 @@
 <div class="grid-row">
     <div class="column-two-thirds">
         <div>
-            <h1 class="heading-large">@Resource.ShipmentMovementDocumentHeader</h1>
+            <h1 class="govuk-heading-l">@Resource.ShipmentMovementDocumentHeader</h1>
             <p>@Model.FileSuccessMessage</p>
             <p>@Resource.ShipmentMovementInstructions</p>
             <p>@Model.GetShipments</p>
@@ -21,14 +21,14 @@
             @Html.AntiForgeryToken()
             @Html.Gds().ValidationSummary()
 
-            <div class="form-group @Html.Gds().FormGroupClass(m => m.File)">
+            <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.File)">
                 <label for="@Html.NameFor(m => m.File)" class="visually-hidden">@Html.DisplayNameFor(m => m.File)</label>
                 @Html.Gds().ValidationMessageFor(m => m.File)
                 @Html.Gds().TextBoxFor(m => m.File, new { type = "file" })
             </div>
 
             <div class="form-group-compound">
-                <button class="button" type="submit">@Constants.ContinueButtonText</button>
+                <button class="govuk-button" type="submit">@Constants.ContinueButtonText</button>
             </div>
         }
     </div>

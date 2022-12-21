@@ -21,12 +21,12 @@
     <div id="ca-and-exit-point">
         @if (Model.IsCountrySelected)
         {
-            @Html.Partial("_CompetentAuthoritiesAndEntryAndExitPoints")
+            @Html.Partial("_CompetentAuthoritiesAndEntryAndExitPoints", Model)
         }
     </div>
 
     <div class="form-group">
-        <button class="button" type="submit">@Constants.ContinueButtonText</button>
+        <button class="govuk-button" type="submit">@Constants.ContinueButtonText</button>
     </div>
 }
 

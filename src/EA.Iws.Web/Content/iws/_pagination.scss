@@ -10,7 +10,7 @@ $module: 'pager';
   margin-top: em(5, 16);
   margin-bottom: em(20, 16);
 
-  @include media(tablet) {
+  @media(tablet) {
     margin-top: em(5);
     margin-bottom: em(20);
   }
@@ -18,7 +18,7 @@ $module: 'pager';
   &-items {
     display: none;
 
-    @include media(tablet) {
+    @media(tablet) {
       display: inline;
 
       li {
@@ -40,25 +40,25 @@ $module: 'pager';
   &-next {
     margin-right: 10px;
 
-    @include media(tablet) {
+    @media(tablet) {
       margin-right: 0;
     }
   }
 
   &-prev {
-    @include media(tablet) {
+    @media(tablet) {
       margin-right: 10px;
     }
   }
 
   &-next {
-    @include media(tablet) {
+    @media(tablet) {
       margin-left: 10px;
     }
   }
 
   &-controls {
-    @include media(tablet) {
+    @media(tablet) {
       float: right;
     }
   }

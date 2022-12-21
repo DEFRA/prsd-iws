@@ -5,11 +5,11 @@
 }
 
 <header class="hgroup">
-    <h1 class="heading-large">@Model.HeadingText</h1>
+    <h1 class="govuk-heading-l">@Model.HeadingText</h1>
 </header>
 
 <div class="form-group">
-    @Html.ActionLink("Continue", "Index", "Options", new { id = Model.NotificationId, area = "NotificationApplication" }, new { @class = "button" })
+    @Html.ActionLink("Continue", "Index", "Options", new { id = Model.NotificationId, area = "NotificationApplication" }, new { @class = "govuk-button" })
 </div>
 
 <div class="form-group">

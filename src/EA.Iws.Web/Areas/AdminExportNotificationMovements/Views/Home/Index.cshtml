@@ -40,39 +40,39 @@
 
 <div class="shipping-home">
 
-    <h1 class="heading-large">
+    <h1 class="govuk-heading-l">
         @Resources.MainHeading
     </h1>
 
     <div class="grid-row">
         <div class="column-half">
-            <table class="odd-table">
-                <caption class="visuallyhidden">@Resources.MainHeading</caption>
-                <tbody>
-                <tr>
-                    <td>@Resources.SummaryTitleIntended</td>
-                    <td>@Model.IntendedShipments</td>
-                </tr>
-                <tr>
-                    <td>@Resources.SummaryTitleNumber</td>
-                    <td>@Model.UsedShipments</td>
-                </tr>
-                <tr>
-                    <td>@Resources.SummaryTitleActive</td>
-                    <td>@Model.ActiveLoadsPermitted</td>
-                </tr>
-                <tr>
-                    <td>@Resources.SummaryTitleCurrent</td>
-                    <td>@Model.ActiveLoadsCurrent</td>
-                </tr>
-                <tr>
-                    <td>@Resources.SummaryTitleReceived</td>
-                    <td>@Model.QuantityReceivedTotal</td>
-                </tr>
-                <tr>
-                    <td>@Resources.SummaryTitleRemaining</td>
-                    <td>@Model.QuantityRemainingTotal</td>
-                </tr>
+            <table class="odd-table govuk-table">
+                <caption class="visuallyhidden govuk-table__caption govuk-table__caption--m">@Resources.MainHeading</caption>
+                <tbody class="govuk-table__body">
+                    <tr class="govuk-table__row">
+                        <td class="govuk-table__cell">@Resources.SummaryTitleIntended</td>
+                        <td class="govuk-table__cell">@Model.IntendedShipments</td>
+                    </tr>
+                    <tr class="govuk-table__row">
+                        <td class="govuk-table__cell">@Resources.SummaryTitleNumber</td>
+                        <td class="govuk-table__cell">@Model.UsedShipments</td>
+                    </tr>
+                    <tr class="govuk-table__row">
+                        <td class="govuk-table__cell">@Resources.SummaryTitleActive</td>
+                        <td class="govuk-table__cell">@Model.ActiveLoadsPermitted</td>
+                    </tr>
+                    <tr class="govuk-table__row">
+                        <td class="govuk-table__cell">@Resources.SummaryTitleCurrent</td>
+                        <td class="govuk-table__cell">@Model.ActiveLoadsCurrent</td>
+                    </tr>
+                    <tr class="govuk-table__row">
+                        <td class="govuk-table__cell">@Resources.SummaryTitleReceived</td>
+                        <td class="govuk-table__cell">@Model.QuantityReceivedTotal</td>
+                    </tr>
+                    <tr class="govuk-table__row">
+                        <td class="govuk-table__cell">@Resources.SummaryTitleRemaining</td>
+                        <td class="govuk-table__cell">@Model.QuantityRemainingTotal</td>
+                    </tr>
                 </tbody>
             </table>
         </div>
@@ -90,20 +90,20 @@
                         @Html.ActionLink(Resources.OptionsDelete, "Index", "Delete")
                     }
                     @Html.ActionLink(Resources.OptionsViewRejected, "List", "RejectedMovement")
-					@Html.ActionLink(Resources.ShipmentAuditLink, "Index", "ShipmentAudit")
+                    @Html.ActionLink(Resources.ShipmentAuditLink, "Index", "ShipmentAudit")
                     @Html.ActionLink(Resources.OptionsOverview, "Index", "Home", new { area = "AdminExportAssessment", id = Model.NotificationId }, null)
                 </nav>
             </div>
 
             @if (Model.NotificationStatus == NotificationStatus.Consented && Model.FgStatus == FinancialGuaranteeStatus.Approved)
             {
-                <div class="form-group">
+                <div class="govuk-form-group">
                     <h2 class="heading-small">@Resources.OptionsRecord</h2>
                     @using (Html.BeginForm("Search", "Home"))
                     {
                         @Html.AntiForgeryToken()
-                        <input id="ShipmentNumber" name="ShipmentNumber" type="number" min="1" class="form-control" placeholder="@Resources.SearchPlaceholder"/>
-                        <button class="button">@Resources.SearchButton</button>
+                        <input id="ShipmentNumber" name="ShipmentNumber" type="number" min="1" class="form-control govuk-input" style="width:250px" placeholder="@Resources.SearchPlaceholder" />
+                        <button class="govuk-button">@Resources.SearchButton</button>
                     }
                 </div>
             }
@@ -120,9 +120,9 @@
             {
                 @Html.AntiForgeryToken()
                 <div class="column-two-thirds">
-                    <div class="form-group">
-                        @Html.DropDownListFor(m => m.SelectedMovementStatus, Model.MovementStatuses, new { @class = "form-control view-by" })
-                        <button id="updateStatus" class="button" type="submit">@Resources.Update</button>
+                    <div class="govuk-form-group">
+                        @Html.DropDownListFor(m => m.SelectedMovementStatus, Model.MovementStatuses, new { @class = "govuk-select" })
+                        <button id="updateStatus" class="govuk-button" type="submit">@Resources.Update</button>
                     </div>
                 </div>
                 <div class="column-one-third">
@@ -131,57 +131,58 @@
             }
         </div>
 
-        <div class="form-group">
-            <table class="odd-table">
-                <caption class="visuallyhidden">@Resources.SummaryTableHeading</caption>
-                <thead>
-                <tr>
-                    <th>@Resources.SummaryTableNumber</th>
-                    <th>@Resources.SummaryTableStatus</th>
-                    <th>@Resources.SummaryTablePrenotified</th>
-                    <th>@Resources.SummaryTableDue</th>
-                    <th>@Resources.SummaryTableReceived</th>
-                    <th>@Resources.SummaryTableQuantity</th>
-                    <th>@operationTitle</th>
-                </tr>
+        <div class="govuk-form-group">
+            <table class="odd-table govuk-table">
+                <caption class="visuallyhidden govuk-table__caption govuk-table__caption--m">@Resources.SummaryTableHeading</caption>
+                <thead class="govuk-table__head">
+                    <tr class="govuk-table__row">
+                        <th scope="col" class="govuk-table__header">@Resources.SummaryTableNumber</th>
+                        <th scope="col" class="govuk-table__header">@Resources.SummaryTableStatus</th>
+                        <th scope="col" class="govuk-table__header">@Resources.SummaryTablePrenotified</th>
+                        <th scope="col" class="govuk-table__header">@Resources.SummaryTableDue</th>
+                        <th scope="col" class="govuk-table__header">@Resources.SummaryTableReceived</th>
+                        <th scope="col" class="govuk-table__header">@Resources.SummaryTableQuantity</th>
+                        <th scope="col" class="govuk-table__header">@operationTitle</th>
+                    </tr>
                 </thead>
 
-                <tbody>
-                @{
-					for (int i = 0; i < Model.TableData.Count; i++)
-					{
-						var statusText = Model.TableData[i].Status == MovementStatus.Completed ? operationTitle : EnumHelper.GetDisplayName(Model.TableData[i].Status);
-						if (Model.TableData[i].IsShipped() || Model.TableData[i].IsShipmentActive())
-						{
-							statusText = statusText + Resources.Shipped;
-						}
+                <tbody class="govuk-table__body">
+                    @{
+                        for (int i = 0; i < Model.TableData.Count; i++)
+                        {
+                            var statusText = Model.TableData[i].Status == MovementStatus.Completed ? operationTitle : EnumHelper.GetDisplayName(Model.TableData[i].Status);
+                            if (Model.TableData[i].IsShipped() || Model.TableData[i].IsShipmentActive())
+                            {
+                                statusText = statusText + Resources.Shipped;
+                            }
 
-                        <tr>
-                            <td>@Html.ActionLink(Model.TableData[i].Number.ToString(), 
-                                    actionName: "Edit", 
-                                    controllerName: "CaptureMovement", 
-                                    routeValues: new { movementId = Model.TableData[i].Id }, 
+                            <tr class="govuk-table__row">
+                                <td class="govuk-table__cell">
+                                    @Html.ActionLink(Model.TableData[i].Number.ToString(),
+                                    actionName: "Edit",
+                                    controllerName: "CaptureMovement",
+                                    routeValues: new { movementId = Model.TableData[i].Id },
                                     htmlAttributes: null)
-                            </td>
-                            <td>@statusText</td>
-                            <td>
-                                @DisplayDate(Model.TableData[i].PreNotification, Model.TableData[i].Status)
-                            </td>
-                            <td>
-                                @DisplayDate(Model.TableData[i].ShipmentDate, Model.TableData[i].Status)
-                            </td>
-                            <td>
-                                @DisplayDate(Model.TableData[i].Received, Model.TableData[i].Status)
-                            </td>
-                            <td>
-                                @DisplayQuantity(Model.TableData[i].Quantity, Model.TableData[i].Unit, Model.TableData[i].Status)
-                            </td>
-                            <td>
-                                @DisplayDate(Model.TableData[i].RecoveredOrDisposedOf, Model.TableData[i].Status)
-                            </td>
-                        </tr>
+                                </td>
+                                <td class="govuk-table__cell">@statusText</td>
+                                <td class="govuk-table__cell">
+                                    @DisplayDate(Model.TableData[i].PreNotification, Model.TableData[i].Status)
+                                </td>
+                                <td class="govuk-table__cell">
+                                    @DisplayDate(Model.TableData[i].ShipmentDate, Model.TableData[i].Status)
+                                </td>
+                                <td class="govuk-table__cell">
+                                    @DisplayDate(Model.TableData[i].Received, Model.TableData[i].Status)
+                                </td>
+                                <td class="govuk-table__cell">
+                                    @DisplayQuantity(Model.TableData[i].Quantity, Model.TableData[i].Unit, Model.TableData[i].Status)
+                                </td>
+                                <td class="govuk-table__cell">
+                                    @DisplayDate(Model.TableData[i].RecoveredOrDisposedOf, Model.TableData[i].Status)
+                                </td>
+                            </tr>
+                        }
                     }
-                }
                 </tbody>
             </table>
         </div>
@@ -194,12 +195,12 @@
             }
         })
     </section>
-    <div class="form-group">
+    <div class="govuk-form-group">
         @Html.ActionLink(Resources.GoToButtonText,
             "Index",
             "Home",
             new { area = "AdminExportAssessment", id = Model.NotificationId },
-            new { @class = "button" })
+            new { @class = "govuk-button" })
     </div>
 </div>
 

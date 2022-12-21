@@ -5,7 +5,7 @@
     ViewBag.Title = Resources.Title;
 }
 
-<h1 class="heading-large">@Resources.Title</h1>
+<h1 class="govuk-heading-l">@Resources.Title</h1>
 
 @if (Model.NotificationStatus == NotificationStatus.InAssessment || (Model.CanUpdateInterimStatus && Model.HasAcceptableStatus))
 {
@@ -19,28 +19,29 @@
 
         @Html.Gds().ValidationSummary()
 
-        <div class="form-group @Html.Gds().FormGroupClass(m => m.IsInterim)">
+        <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.IsInterim)">
             @Html.Gds().ValidationMessageFor(m => m.IsInterim)
 
-            <fieldset>
-                <div class="multiple-choice">
-                    @Html.RadioButtonFor(m => m.IsInterim, true, new { id = "yes" })
-                    <label for="yes">
-                        @Resources.Interim
-                    </label>
-                </div>
+            <fieldset class="govuk-fieldset">
+                <div class="govuk-radios" data-module="govuk-radios">
+                    <div class="govuk-radios__item">
+                        @Html.RadioButtonFor(m => m.IsInterim, true, new { id = "yes", @class="govuk-radios__input" })
+                        <label class="govuk-label govuk-radios__label" for="yes">
+                            @Resources.Interim
+                        </label>
+                    </div>
 
-                <div class="multiple-choice">
-                    @Html.RadioButtonFor(m => m.IsInterim, false, new { id = "no" })
-                    <label for="no">
-                        @Resources.NonInterim
-                    </label>
+                    <div class="govuk-radios__item">
+                        @Html.RadioButtonFor(m => m.IsInterim, false, new { id = "no", @class = "govuk-radios__input" })
+                        <label class="govuk-label govuk-radios__label" for="no">
+                            @Resources.NonInterim
+                        </label>
+                    </div>
                 </div>
-                
             </fieldset>
         </div>
 
-        <button type="submit" class="button">@Constants.ContinueButtonText</button>
+        <button type="submit" class="govuk-button">@Constants.ContinueButtonText</button>
     }
 }
 else

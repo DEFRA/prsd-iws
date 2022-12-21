@@ -26,8 +26,14 @@
             NotificationReceivedEnd = new OptionalDateInputViewModel(allowPastDates: true, showLabels: false);
             NotificationTypes = new SelectList(EnumHelper.GetValues(typeof(NotificationType)), dataTextField: "Value", dataValueField: "Key");
             TradeDirections = new SelectList(EnumHelper.GetValues(typeof(TradeDirection)), dataTextField: "Value", dataValueField: "Key");
+
             InterimStatus = new SelectList(new[]
             {
+                new SelectListItem
+                {
+                    Text = string.Empty,
+                    Value = string.Empty
+                },
                 new SelectListItem
                 {
                     Text = "Interim",
@@ -39,10 +45,9 @@
                     Value = "false"
                 }
             }, dataTextField: "Text", dataValueField: "Value");
+
             OperationCodes = new MultiSelectList(EnumHelper.GetValues(typeof(OperationCode)), dataTextField: "Value", dataValueField: "Key");
-
             NotificationStatuses = new SelectList(GetCombinedNotificationStatuses(), dataTextField: "Name", dataValueField: "StatusId", dataGroupField: "TradeDirection", selectedValue: null);
-
             SelectedOperationCodes = new OperationCode[] { };
         }
 
@@ -231,7 +236,7 @@
                     TradeDirection = TradeDirection.Import
                 };
             }
-        } 
+        }
 
         public class NotificationStatusViewModel
         {
