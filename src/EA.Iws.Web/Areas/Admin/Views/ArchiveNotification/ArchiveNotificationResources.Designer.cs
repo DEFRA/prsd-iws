@@ -61,6 +61,15 @@ namespace EA.Iws.Web.Areas.Admin.Views.ArchiveNotification {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Action.
+        /// </summary>
+        public static string Action {
+            get {
+                return ResourceManager.GetString("Action", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Company name.
         /// </summary>
         public static string CompanyName {
@@ -108,9 +117,18 @@ namespace EA.Iws.Web.Areas.Admin.Views.ArchiveNotification {
         /// <summary>
         ///   Looks up a localized string similar to Please select at least 1 notification from the table below for archiving..
         /// </summary>
-        public static string NoNotificationsSelected {
+        public static string NoNotificationSelected {
             get {
-                return ResourceManager.GetString("NoNotificationsSelected", resourceCulture);
+                return ResourceManager.GetString("NoNotificationSelected", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to There are no notifications currently selected for archive..
+        /// </summary>
+        public static string NoNotificationsToArchiveMsg {
+            get {
+                return ResourceManager.GetString("NoNotificationsToArchiveMsg", resourceCulture);
             }
         }
         
@@ -124,11 +142,56 @@ namespace EA.Iws.Web.Areas.Admin.Views.ArchiveNotification {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to NOTE.
+        /// </summary>
+        public static string Note {
+            get {
+                return ResourceManager.GetString("Note", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Notification number.
         /// </summary>
         public static string NotificationNumber {
             get {
                 return ResourceManager.GetString("NotificationNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Remove.
+        /// </summary>
+        public static string Remove {
+            get {
+                return ResourceManager.GetString("Remove", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Are you sure you want to archive the following notifications?.
+        /// </summary>
+        public static string ReviewConfirmationHeading {
+            get {
+                return ResourceManager.GetString("ReviewConfirmationHeading", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You must select notifications for archive before proceeding..
+        /// </summary>
+        public static string ReviewImportantMsg {
+            get {
+                return ResourceManager.GetString("ReviewImportantMsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Once you confirm to archive notification(s), you will not be able to retrieve the archived data..
+        /// </summary>
+        public static string ReviewNote {
+            get {
+                return ResourceManager.GetString("ReviewNote", resourceCulture);
             }
         }
         

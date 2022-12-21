@@ -15,5 +15,7 @@
         public string CompanyName { get; set; }
 
         public bool IsSelected { get; set; }
+
+        public int? PageNumber { get; set; }
     }
 }

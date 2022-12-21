@@ -4,7 +4,9 @@
     using EA.Iws.Web.Areas.Admin.ViewModels.ArchiveNotification;
     using EA.Iws.Web.Infrastructure.Authorization;
     using EA.Prsd.Core.Mediator;
+    using Newtonsoft.Json;
     using Requests.Admin.ArchiveNotification;
+    using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
@@ -25,35 +27,49 @@
         {
             var model = await GetUserArchiveNotifications(page);
             return View(model);
-        }        
-
-        [HttpPost]
-        public JsonResult SelectedNotification(string notificationId, bool isChecked)
-        {
-            var selectNotificationList = (List<string>)TempData["SelectedNotificationList"] ?? new List<string>();
-            if (isChecked && !selectNotificationList.Contains(notificationId))
-            {
-                selectNotificationList.Add(notificationId);
-            }
-            else if (!isChecked && selectNotificationList.Contains(notificationId))
-            {
-                selectNotificationList.RemoveAll(s => s == notificationId);
-            }
-
-            TempData["SelectedNotificationList"] = selectNotificationList;
-
-            return Json(selectNotificationList.Count);
         }
 
         [HttpPost]
-        public JsonResult SelectedAllNotifications(List<string> notificationIds, bool isChecked)
+        public JsonResult SelectSingleNotification(List<NotificationArchiveSummaryData> selectedNotificationData, bool isChecked)
         {
-            var selectNotificationList = new List<string>();
+            var selectNotificationList = new List<NotificationArchiveSummaryData>();
+            if (TempData["SelectedNotifications"] != null)
+            {
+                selectNotificationList = JsonConvert.DeserializeObject<List<NotificationArchiveSummaryData>>(TempData["SelectedNotifications"].ToString());
+            }
+
             if (isChecked)
             {
-                foreach (var notificationId in notificationIds)
+                var findAny = selectNotificationList.SingleOrDefault(x => x.Id == selectedNotificationData[0].Id);
+                if (findAny == null)
                 {
-                    selectNotificationList.Add(notificationId);
+                    selectNotificationList.Add(selectedNotificationData[0]);
+                }
+            }
+            else
+            {
+                var findAny = selectNotificationList.SingleOrDefault(x => x.Id == selectedNotificationData[0].Id);
+                if (findAny != null)
+                {
+                    selectNotificationList.RemoveAll(s => s.Id == selectedNotificationData[0].Id);
+                }
+            }
+
+            TempData["SelectedNotifications"] = JsonConvert.SerializeObject(selectNotificationList);
+            var response = GetResonseResult(selectNotificationList);
+
+            return Json(response);
+        }
+
+        [HttpPost]
+        public JsonResult SelectAllNotifications(List<NotificationArchiveSummaryData> selectedNotificationsData, bool isChecked)
+        {
+            var selectNotificationList = new List<NotificationArchiveSummaryData>();
+            if (isChecked)
+            {
+                foreach (var notification in selectedNotificationsData)
+                {
+                    selectNotificationList.Add(notification);
                 }
             }
             else
@@ -61,41 +77,83 @@
                 selectNotificationList.Clear();
             }
 
-            TempData["SelectedNotificationList"] = selectNotificationList;
+            TempData["SelectedNotifications"] = JsonConvert.SerializeObject(selectNotificationList);
+            var response = GetResonseResult(selectNotificationList);
 
-            return Json(selectNotificationList.Count);
+            return Json(response);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Index(ArchiveNotificationResultViewModel model)
+        public ActionResult Index(ArchiveNotificationResultViewModel model)
         {
-            var selectNotificationList = (List<string>)TempData["SelectedNotificationList"] ?? new List<string>();
-            if (selectNotificationList == null || selectNotificationList.Count == 0)
+            var selectNotificationList = new List<NotificationArchiveSummaryData>();
+            if (TempData["SelectedNotifications"] != null)
             {
-                model.HasAnyNotificationSelected = false;
+                selectNotificationList = JsonConvert.DeserializeObject<List<NotificationArchiveSummaryData>>(TempData["SelectedNotifications"].ToString());
             }
 
             if (!ModelState.IsValid)
             {
-                return View(model);
+                var reviewModel = new ArchiveNotificationReviewViewModel()
+                {
+                    SelectedNotifications = selectNotificationList
+                };
+
+                return View("Review", reviewModel);
             }
 
             return View(model);
+        }
+
+        [HttpGet]
+        public ActionResult Review(ArchiveNotificationReviewViewModel reviewModel)
+        {
+            return View(reviewModel);
+        }
+
+        [HttpGet]
+        public ActionResult Remove(Guid notificationId)
+        {
+            var selectNotificationList = new List<NotificationArchiveSummaryData>();
+            if (TempData["SelectedNotifications"] != null)
+            {
+                selectNotificationList = JsonConvert.DeserializeObject<List<NotificationArchiveSummaryData>>(TempData["SelectedNotifications"].ToString());
+            }
+
+            var findAny = selectNotificationList.SingleOrDefault(x => x.Id == notificationId);
+            if (findAny != null)
+            {
+                selectNotificationList.RemoveAll(s => s.Id == notificationId);
+            }
+
+            TempData["SelectedNotifications"] = JsonConvert.SerializeObject(selectNotificationList);
+            var response = GetResonseResult(selectNotificationList);
+
+            var reviewModel = new ArchiveNotificationReviewViewModel()
+            {
+                SelectedNotifications = selectNotificationList
+            };
+
+            return View(reviewModel);
         }
 
         private async Task<ArchiveNotificationResultViewModel> GetUserArchiveNotifications(int pageNumber = 1)
         {
             var response = await mediator.SendAsync(new GetArchiveNotificationsByUser(pageNumber));
             var model = new ArchiveNotificationResultViewModel(response);
+            var selectNotificationList = new List<NotificationArchiveSummaryData>();
 
-            //var selectNotificationList = (List<string>)HttpContext.Session["SelectedNotificationList"] ?? new List<string>();
-            var selectNotificationList = (List<string>)TempData["SelectedNotificationList"] ?? new List<string>();
+            if (TempData["SelectedNotifications"] != null)
+            {
+                selectNotificationList = JsonConvert.DeserializeObject<List<NotificationArchiveSummaryData>>(TempData["SelectedNotifications"].ToString());
+            }
+
             if (selectNotificationList != null && selectNotificationList.Count > 0)
             {
                 foreach (var notification in selectNotificationList)
                 {
-                    var selectedNotification = model.Notifications.ToList().SingleOrDefault(x => x.NotificationNumber == notification);
+                    var selectedNotification = model.Notifications.ToList().SingleOrDefault(x => x.Id == notification.Id);
                     if (selectedNotification != null)
                     {
                         selectedNotification.IsSelected = true;
@@ -119,9 +177,36 @@
                 model.NumberOfNotificationsSelected = 0;
             }
 
-            TempData["SelectedNotificationList"] = selectNotificationList;
+            TempData["SelectedNotifications"] = JsonConvert.SerializeObject(selectNotificationList);
 
             return model;
+        }
+
+        private List<int> GetResonseResult(List<NotificationArchiveSummaryData> selectNotificationList)
+        {
+            List<int> returnList = new List<int>();
+
+            foreach (var notification in selectNotificationList)
+            {
+                if (returnList.Count == 0)
+                {
+                    returnList.Add(notification.PageNumber.Value);
+                }
+                else
+                {
+                    var findAnyExits = returnList.Any(x => x.Equals(notification.PageNumber.Value));
+                    if (findAnyExits == false)
+                    {
+                        returnList.Add(notification.PageNumber.Value);
+                    }
+                }
+            }
+
+            var response = new List<int>();
+            response.Add(returnList.Count);
+            response.Add(selectNotificationList.Count);
+
+            return response;
         }
     }
 }

@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Action" xml:space="preserve">
+    <value>Action</value>
+  </data>
   <data name="CompanyName" xml:space="preserve">
     <value>Company name</value>
   </data>
@@ -132,14 +135,32 @@
   <data name="Heading" xml:space="preserve">
     <value>Archive notifications</value>
   </data>
-  <data name="NoNotificationsSelected" xml:space="preserve">
+  <data name="NoNotificationSelected" xml:space="preserve">
     <value>Please select at least 1 notification from the table below for archiving.</value>
+  </data>
+  <data name="NoNotificationsToArchiveMsg" xml:space="preserve">
+    <value>There are no notifications currently selected for archive.</value>
   </data>
   <data name="NoResults" xml:space="preserve">
     <value>No matching results were found</value>
   </data>
+  <data name="Note" xml:space="preserve">
+    <value>NOTE</value>
+  </data>
   <data name="NotificationNumber" xml:space="preserve">
     <value>Notification number</value>
+  </data>
+  <data name="Remove" xml:space="preserve">
+    <value>Remove</value>
+  </data>
+  <data name="ReviewConfirmationHeading" xml:space="preserve">
+    <value>Are you sure you want to archive the following notifications?</value>
+  </data>
+  <data name="ReviewImportantMsg" xml:space="preserve">
+    <value>You must select notifications for archive before proceeding.</value>
+  </data>
+  <data name="ReviewNote" xml:space="preserve">
+    <value>Once you confirm to archive notification(s), you will not be able to retrieve the archived data.</value>
   </data>
   <data name="SelectNotifications" xml:space="preserve">
     <value>Select the notifications that you want to archive</value>
