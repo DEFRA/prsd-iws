@@ -7,7 +7,6 @@
 
     public class ArchiveNotificationResultViewModel : IValidatableObject
     {
-        private bool hasAnyNotificationSelected = true;
         public ArchiveNotificationResultViewModel()
         {
         }
@@ -28,11 +27,13 @@
 
         public IList<NotificationArchiveSummaryData> Notifications { get; set; }
 
+        public IList<NotificationArchiveSummaryData> SelectedNotifications { get; set; }
+
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
-            if (HasAnyNotificationSelected)
+            if (HasAnyNotificationSelected == false)
             {
-                yield return new ValidationResult(ArchiveNotificationResources.NoNotificationsSelected, new[] { "HasAnyNotificationSelected" });
+                yield return new ValidationResult(ArchiveNotificationResources.NoNotificationSelected, new[] { "HasAnyNotificationSelected" });
             }
         }
 
@@ -44,6 +45,7 @@
             }
         }
 
+        private bool hasAnyNotificationSelected = false;
         public bool HasAnyNotificationSelected
         {
             get
@@ -55,6 +57,7 @@
                 hasAnyNotificationSelected = value;
             }
         }
+        public bool HasNotificationsSelectedMoreThanOne { get; set; }
 
         public int NumberOfNotificationsSelected { get; set; }
 
