@@ -6,10 +6,10 @@
 }
 
 <div>
-    <h1 class="heading-large">@Html.Raw(string.Format(Resource.Title, Model.NotificationNumber.Replace(" ", "&nbsp;")))</h1>
+    <h1 class="govuk-heading-l">@Html.Raw(string.Format(Resource.Title, Model.NotificationNumber.Replace(" ", "&nbsp;")))</h1>
 
     <h2 class="heading-medium">@Resource.SubTitleNewOwner</h2>
-    <div class="form-group">
+    <div class="govuk-form-group">
         @Model.NewUser.FullName <br/>
         @Model.NewUser.Email <br/>
         @Model.NewUser.OrganisationName <br/>
@@ -28,12 +28,12 @@
         @Html.HiddenFor(m => m.NewUser.PhoneNumber)
         @Html.HiddenFor(m => m.NotificationNumber)
 
-        <div class="form-group">
-            <button class="button" type="submit">@Constants.ContinueOnlyButtonText</button>
+        <div class="govuk-form-group">
+            <button class="govuk-button" type="submit">@Constants.ContinueOnlyButtonText</button>
         </div>
     }
 
-    <div class="form-group">
+    <div class="govuk-form-group">
         @Html.ActionLink(Resource.CancelButtonText, "Index", "Overview", new { id = Model.NotificationId, area = "AdminExportAssessment" })
     </div>
 

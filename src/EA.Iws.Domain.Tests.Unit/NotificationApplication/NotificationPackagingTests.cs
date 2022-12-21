@@ -46,7 +46,7 @@
 
             notification.SetPackagingInfo(new[] { PackagingInfo.CreateOtherPackagingInfo("package description") });
 
-            Assert.Equal(1, notification.PackagingInfos.Count());
+            Assert.Single(notification.PackagingInfos);
         }
 
         [Fact]
@@ -72,8 +72,8 @@
             notification.SetPackagingInfo(newPackagingInfos);
 
             Assert.Collection(notification.PackagingInfos,
-                item => Assert.Equal(notification.PackagingInfos.ElementAt(0).PackagingType, PackagingType.Box),
-                item => Assert.Equal(notification.PackagingInfos.ElementAt(1).PackagingType, PackagingType.Bulk));
+                item => Assert.Equal(PackagingType.Box, notification.PackagingInfos.ElementAt(0).PackagingType),
+                item => Assert.Equal(PackagingType.Bulk, notification.PackagingInfos.ElementAt(1).PackagingType));
         }
     }
 }

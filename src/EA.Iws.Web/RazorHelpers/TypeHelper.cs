@@ -1,0 +1,20 @@
+﻿namespace EA.Iws.Web.RazorHelpers
+{
+    using global::System.Web.Routing;
+
+    public class TypeHelper
+    {
+        public static RouteValueDictionary ObjectToDictionary(object value)
+        {
+            var routeValueDictionary = new RouteValueDictionary();
+            if (value != null)
+            {
+                foreach (var property in PropertyHelper.GetProperties(value))
+                {
+                    routeValueDictionary.Add(property.Name, property.GetValue(value));
+                }
+            }
+            return routeValueDictionary;
+        }
+    }
+}

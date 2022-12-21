@@ -32,7 +32,7 @@
             </td>
             @if (ViewBag.CanEditNotification)
             {
-                <td class="change">
+                <td class="change govuk-link">
                     <a href="@Url.Action("OperationCodes", "WasteOperations", new { id, backToOverview = true })">
                         Change
                         <span class="screen-reader-text">@operationCodesLabel</span>
@@ -51,7 +51,7 @@
                 </td>
                 @if (ViewBag.CanEditNotification)
                 {
-                    <td class="change">
+                    <td class="change govuk-link">
                         <a href="@Url.Action("RecoveryPreconsent", "Facility", new { id, backToOverview = true })">
                             Change
                             <span class="screen-reader-text">Pre-consented facility</span>
@@ -69,7 +69,7 @@
             </td>
             @if (ViewBag.CanEditNotification)
             {
-                <td class="change">
+                <td class="change govuk-link">
                     <a href="@Url.Action("TechnologyEmployed", "WasteOperations", new { id, backToOverview = true })">
                         Change
                         <span class="screen-reader-text">Technology employed</span>
@@ -86,7 +86,7 @@
             </td>
             @if (ViewBag.CanEditNotification)
             {
-                <td class="change">
+                <td class="change govuk-link">
                     <a href="@Url.Action("Index", "ReasonForExport", new { id, backToOverview = true })">
                         Change
                         <span class="screen-reader-text">Reason for export</span>

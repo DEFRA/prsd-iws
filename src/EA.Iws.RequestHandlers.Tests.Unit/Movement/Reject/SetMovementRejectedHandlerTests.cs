@@ -68,7 +68,7 @@
             await handler.HandleAsync(request);
 
             A.CallTo(() => movementRepository.GetById(A<Guid>.That.IsEqualTo(request.MovementId)))
-                .MustHaveHappened(Repeated.Exactly.Once);
+                .MustHaveHappenedOnceExactly();
         }
 
         [Fact]
@@ -79,7 +79,7 @@
             await handler.HandleAsync(request);
 
             A.CallTo(() => fileRepository.Store(A<File>.That.Matches(f => f.Type == FileType)))
-                .MustHaveHappened(Repeated.Exactly.Once);
+                .MustHaveHappenedOnceExactly();
         }
 
         [Fact]
@@ -93,7 +93,7 @@
                     () =>
                         rejectMovement.Reject(A<Guid>.That.IsEqualTo(movementId),
                             A<DateTime>.That.IsEqualTo(rejectDate), AnyString, 1, ShipmentQuantityUnits.Tonnes))
-                .MustHaveHappened(Repeated.Exactly.Once);
+                .MustHaveHappenedOnceExactly();
         }
 
         [Fact]
@@ -110,7 +110,7 @@
                                 m =>
                                     m.NotificationId == notificationId &&
                                     m.Type == (int)MovementAuditType.Rejected)))
-                .MustHaveHappened(Repeated.Exactly.Once);
+                .MustHaveHappenedOnceExactly();
         }
 
         [Fact]

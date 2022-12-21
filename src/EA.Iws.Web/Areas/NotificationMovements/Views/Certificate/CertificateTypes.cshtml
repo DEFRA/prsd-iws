@@ -10,7 +10,7 @@
 }
 
 <header class="hgroup">
-    <h1 class="heading-large">@Resource.CertificateTitle</h1>
+    <h1 class="govuk-heading-l">@Resource.CertificateTitle</h1>
 </header>
 
 @using (Html.BeginForm())
@@ -18,23 +18,24 @@
     @Html.AntiForgeryToken()
     @Html.Gds().ValidationSummary()
     @Html.HiddenFor(m => m.NotificationType)
-    <div class="form-group @Html.Gds().FormGroupClass(m => m.Certificate)">
+    <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.Certificate)">
+        @Html.Gds().ValidationMessageFor(m => m.Certificate)
         <fieldset>
-            <div class="multiple-choice">
-                @Html.RadioButtonFor(m => m.Certificate, CertificateType.Receipt, new { id = "ReceiptCertificate" })
-                <label for="ReceiptCertificate">
+            <div class="govuk-radios__item">
+                @Html.RadioButtonFor(m => m.Certificate, CertificateType.Receipt, new { @class = "govuk-radios__input", id = "ReceiptCertificate" })
+                <label class="govuk-label govuk-radios__label" for="ReceiptCertificate">
                     @Resource.ReceiveCertificate
                 </label>
             </div>
-            <div class="multiple-choice">
-                @Html.RadioButtonFor(m => m.Certificate, CertificateType.Recovery, new { id = "RecoveryCertificate" })
-                <label for="RecoveryCertificate">
+            <div class="govuk-radios__item">
+                @Html.RadioButtonFor(m => m.Certificate, CertificateType.Recovery, new { @class = "govuk-radios__input", id = "RecoveryCertificate" })
+                <label class="govuk-label govuk-radios__label" for="RecoveryCertificate">
                     @Html.Raw(string.Format(Resource.RecoveryCertificate, titleText))
                 </label>
             </div>
-            <div class="multiple-choice">
-                @Html.RadioButtonFor(m => m.Certificate, CertificateType.ReceiptRecovery, new { id = "ReceiptRecoveryCertificate" })
-                <label for="ReceiptRecoveryCertificate">
+            <div class="govuk-radios__item">
+                @Html.RadioButtonFor(m => m.Certificate, CertificateType.ReceiptRecovery, new { @class = "govuk-radios__input", id = "ReceiptRecoveryCertificate" })
+                <label class="govuk-label govuk-radios__label" for="ReceiptRecoveryCertificate">
                     @Html.Raw(string.Format(Resource.ReceiptRecoveryCertificate, titleText))
                 </label>
             </div>
@@ -42,8 +43,8 @@
     </div>
 
 
-    <div class="form-group">
-        <button class="button" type="submit">@Constants.ContinueOnlyButtonText</button>
+    <div class="govuk-form-group">
+        <button class="govuk-button" type="submit">@Constants.ContinueOnlyButtonText</button>
     </div>
 
     @Html.ActionLink("Go to notification options",

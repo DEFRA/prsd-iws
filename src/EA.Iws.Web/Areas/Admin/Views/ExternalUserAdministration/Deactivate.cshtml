@@ -4,18 +4,22 @@
     ViewBag.Title = Resources.DeactivateTitle;
 }
 
-<h1 class="heading-large">@Resources.DeactivateTitle</h1>
+<h1 class="govuk-heading-l">@Resources.DeactivateTitle</h1>
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
     @Html.Gds().ValidationSummary()
 
-    <div class="form-group @Html.Gds().FormGroupClass(m => m.Email)">
+    <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.Email)">
         @Html.Gds().LabelFor(m => m.Email)
         @Html.Gds().ValidationMessageFor(m => m.Email)
         @Html.Gds().TextBoxFor(m => m.Email)
     </div>
 
-    <button class="button" type="submit">@Constants.ContinueOnlyButtonText</button>
+    <button class="govuk-button" type="submit">@Constants.ContinueOnlyButtonText</button>
+}
+
+@section menu {
+    @Html.Action("HomeNavigation", "Menu", new { area = "Admin", section = AdminHomeNavigationSection.AccountServices })
 }

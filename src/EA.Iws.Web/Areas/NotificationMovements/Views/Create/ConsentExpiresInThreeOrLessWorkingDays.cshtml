@@ -6,38 +6,38 @@
     ViewBag.Title = Resource.Title;
 }
 
-<h1 class="heading-large">@Resource.Title</h1>
-
-
+<h1 class="govuk-heading-l">@Resource.Title</h1>
 
 @using (Html.BeginForm())
 {
-	@Html.AntiForgeryToken()
-	@Html.Gds().ValidationSummary()
+    @Html.AntiForgeryToken()
+    @Html.Gds().ValidationSummary()
 
-	<div class="form-group">@Resource.Body</div>
-	<div class="form-group">@Resource.Warning</div>
+    <div class="govuk-form-group">@Resource.Body</div>
+    <div class="govuk-form-group">@Resource.Warning</div>
 
-	<div class="form-group @Html.Gds().FormGroupClass(m => m.Selection)">
-		@Html.Gds().ValidationMessageFor(m => m.Selection)
-		<fieldset>
-			<div class="multiple-choice">
-				@Html.RadioButtonFor(m => m.Selection, ThreeOrLessWorkingDaysSelection.ContinueAnyway, new { @id = "one" })
-				<label for="one">
-					@Resource.ContinueAnywayOption
-				</label>
-			</div>
+    <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.Selection)">
+        @Html.Gds().ValidationMessageFor(m => m.Selection)
+        <fieldset class="govuk-fieldset">
+            <div class="govuk-radios" data-module="govuk-radios">
+                <div class="govuk-radios__item">
+                    @Html.RadioButtonFor(m => m.Selection, ThreeOrLessWorkingDaysSelection.ContinueAnyway, new { @id = "one", @class = "govuk-radios__input" })
+                    <label class="govuk-label govuk-radios__label" for="one">
+                        @Resource.ContinueAnywayOption
+                    </label>
+                </div>
 
-			<div class="multiple-choice" data-target="change-date">
-				@Html.RadioButtonFor(m => m.Selection, ThreeOrLessWorkingDaysSelection.AbandonCreation, new { @id = "two" })
-				<label for="two">
-					@Resource.AbandonOption
-				</label>
-			</div>
-		</fieldset>
-	</div>
+                <div class="govuk-radios__item" data-target="change-date">
+                    @Html.RadioButtonFor(m => m.Selection, ThreeOrLessWorkingDaysSelection.AbandonCreation, new { @id = "two", @class = "govuk-radios__input" })
+                    <label class="govuk-label govuk-radios__label" for="two">
+                        @Resource.AbandonOption
+                    </label>
+                </div>
+            </div>
+        </fieldset>
+    </div>
 
-	<div class="form-group">
-		<button class="button" type="submit">Continue</button>
-	</div>
+    <div class="govuk-form-group">
+        <button class="govuk-button" type="submit">Continue</button>
+    </div>
 }

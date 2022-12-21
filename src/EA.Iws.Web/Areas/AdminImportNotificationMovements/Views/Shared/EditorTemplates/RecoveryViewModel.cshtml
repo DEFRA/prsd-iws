@@ -10,7 +10,7 @@
 <div>
     @if (Model.IsShipmentFullRejected)
     {
-        <div class="form-group @Html.Gds().FormGroupClass(m => m.RecoveryDate)" id="dvRecoveryDate" style="display:none">
+        <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.RecoveryDate)" id="dvRecoveryDate" style="display:none">
             @Html.LabelFor(m => m.RecoveryDate, string.Format(Resource.RecoveryDate, operationLabelVerb), new { @class = "form-label-bold" })
             @Html.Gds().ValidationMessageFor(m => m.RecoveryDate)
             @Html.EditorFor(m => m.RecoveryDate)
@@ -18,7 +18,7 @@
     }
     else
     {
-        <div class="form-group @Html.Gds().FormGroupClass(m => m.RecoveryDate)" id="dvRecoveryDate" style="display:block">
+        <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.RecoveryDate)" id="dvRecoveryDate" style="display:block">
             @Html.LabelFor(m => m.RecoveryDate, string.Format(Resource.RecoveryDate, operationLabelVerb), new { @class = "form-label-bold" })
             @Html.Gds().ValidationMessageFor(m => m.RecoveryDate)
             @Html.EditorFor(m => m.RecoveryDate)

@@ -3,7 +3,7 @@
     ViewBag.Title = Resources.ConfirmationTitle;
 }
 
-<h1 class="heading-large">@Resources.ConfirmationTitle</h1>
+<h1 class="govuk-heading-l">@Resources.ConfirmationTitle</h1>
 
 <p>@string.Format(Resources.Confirmation, ViewBag.Email)</p>
 
@@ -12,7 +12,11 @@
     @Html.AntiForgeryToken()
     @Html.Hidden("UserId", (Guid)ViewBag.UserId)
     @Html.Hidden("Email", (string)ViewBag.Email)
-    <button class="button" type="submit">@Resources.ReactivateButton</button>
+    <button class="govuk-button" type="submit">@Resources.ReactivateButton</button>
 }
 
 @Html.ActionLink("Home", "Index", "Home")
+
+@section menu {
+    @Html.Action("HomeNavigation", "Menu", new { area = "Admin", section = AdminHomeNavigationSection.AccountServices })
+}

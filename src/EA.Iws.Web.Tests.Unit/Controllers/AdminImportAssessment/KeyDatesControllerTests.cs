@@ -51,7 +51,7 @@
             await controller.Index(notificationId, 0);
 
             A.CallTo(() => mediator.SendAsync(A<GetKeyDates>.That.Matches(dates => dates.ImportNotificationId == notificationId)))
-                .MustHaveHappened(Repeated.Exactly.Once);
+                .MustHaveHappenedOnceExactly();
         }
 
         [Fact]

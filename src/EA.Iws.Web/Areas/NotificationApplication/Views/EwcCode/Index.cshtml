@@ -7,7 +7,7 @@
 
 <div class="grid-row">
     <header class="hgroup">
-        <h1 class="heading-large">@EwcCodeResources.Header</h1>
+        <h1 class="govuk-heading-l">@EwcCodeResources.Header</h1>
     </header>
     @using (Html.BeginForm())
     {
@@ -20,40 +20,42 @@
                 @Html.Gds().LabelFor(m => m.EnterWasteCodesViewModel.SelectedCode, false)
                 @Html.Gds().ValidationMessageFor(m => m.EnterWasteCodesViewModel.SelectedCode)
                 @Html.Gds().DropDownListFor(m => m.EnterWasteCodesViewModel.SelectedCode, Model.EnterWasteCodesViewModel.Codes,
-                    string.Empty, new { title = EwcCodeResources.Title, data_select_box = "true", tabindex=1 })
-                <button type="submit" name="command" value="addcode" tabindex="2" class="button-secondary">@EwcCodeResources.AddCode</button>
+                    string.Empty, new { title = EwcCodeResources.Title, tabindex = 1, data_select_box = "true" })
+                <button type="submit" name="command" value="addcode" tabindex="2" class="govuk-button">@EwcCodeResources.AddCode</button>
             </div>
 
-            <table title="Ewc codes">
-                <thead>
-                    <tr>
-                        <th>@EwcCodeResources.Code</th>
-                        <th>@EwcCodeResources.Description</th>
-                        <th></th>
-                        <th></th>
+            <table class="govuk-table" title="Ewc codes">
+                <thead class="govuk-table__head">
+                    <tr class="govuk-table__row">
+                        <th scope="col" class="govuk-table__header">@EwcCodeResources.Code</th>
+                        <th scope="col" class="govuk-table__header">@EwcCodeResources.Description</th>
+                        <th scope="col" class="govuk-table__header"></th>
+                        <th scope="col" class="govuk-table__header">Action</th>
                     </tr>
                 </thead>
-                @if (Model.EnterWasteCodesViewModel.SelectedWasteCodes.Count < 1)
-                {
-                    <tr>
-                        <td colspan="4">@EwcCodeResources.AwaitingCode</td>
-                    </tr>
-                }
-                @for (int i = 0; i < Model.EnterWasteCodesViewModel.SelectedWasteCodes.Count; i++)
-                {
-                    var thisCode = Model.EnterWasteCodesViewModel.WasteCodes.Single(wc => wc.Id == Model.EnterWasteCodesViewModel.SelectedWasteCodes[i]);
-                    <tr>
-                        <td>@Html.HiddenFor(m => m.EnterWasteCodesViewModel.SelectedWasteCodes[i]) @Html.Raw(thisCode.Name)</td>
-                        <td>@Html.Raw(thisCode.Description)</td>
-                        <td><input name="EnterWasteCodesViewModel.SelectedCodesList[@i].Id" type="hidden" value="@Model.EnterWasteCodesViewModel.SelectedWasteCodes[i]" /></td>
-                        <td><button class="link-submit" type="submit" name="remove" value="@Model.EnterWasteCodesViewModel.SelectedWasteCodes[i]">@EwcCodeResources.Remove</button></td>
-                    </tr>
-                }
+                <tbody class="govuk-table__body">
+                    @if (Model.EnterWasteCodesViewModel.SelectedWasteCodes.Count < 1)
+                    {
+                        <tr class="govuk-table__row">
+                            <td colspan="4">@EwcCodeResources.AwaitingCode</td>
+                        </tr>
+                    }
+                    @for (int i = 0; i < Model.EnterWasteCodesViewModel.SelectedWasteCodes.Count; i++)
+                    {
+                        var thisCode = Model.EnterWasteCodesViewModel.WasteCodes.Single(wc => wc.Id == Model.EnterWasteCodesViewModel.SelectedWasteCodes[i]);
+                        <tr class="govuk-table__row">
+                            <td class="govuk-table__cell">@Html.HiddenFor(m => m.EnterWasteCodesViewModel.SelectedWasteCodes[i]) @Html.Raw(thisCode.Name)</td>
+                            <td class="govuk-table__cell">@Html.Raw(thisCode.Description)</td>
+                            <td class="govuk-table__cell"><input name="EnterWasteCodesViewModel.SelectedCodesList[@i].Id" type="hidden" value="@Model.EnterWasteCodesViewModel.SelectedWasteCodes[i]" /></td>
+                            <td class="govuk-table__cell"><button class="link-submit govuk-link" type="submit" name="remove" value="@Model.EnterWasteCodesViewModel.SelectedWasteCodes[i]" title="@Html.Raw(thisCode.Name)">@EwcCodeResources.Remove</button></td>
+                        </tr>
+                    }
+                </tbody>
             </table>
         </div>
 
-        <div class="form-group">
-            <button class="button" type="submit" name="command" value="continue">@Constants.ContinueButtonText</button>
+        <div class="govuk-form-group">
+            <button class="govuk-button" type="submit" name="command" value="continue">@Constants.ContinueButtonText</button>
         </div>
     }
 

@@ -54,7 +54,7 @@
 
             await controller.Scan(file);
 
-            A.CallTo(() => scanner.ScanFileAsync(file, string.Empty)).MustHaveHappened(Repeated.Exactly.Once);
+            A.CallTo(() => scanner.ScanFileAsync(file, string.Empty)).MustHaveHappenedOnceExactly();
         }
 
         [Fact]

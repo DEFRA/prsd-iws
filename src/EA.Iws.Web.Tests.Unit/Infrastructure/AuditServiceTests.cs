@@ -31,7 +31,7 @@
         {
             await auditService.AddAuditEntry(this.mediator, notificationId, userId.ToString(), NotificationAuditType.Added, NotificationAuditScreenType.Exporter);
 
-            A.CallTo(() => mediator.SendAsync(A<CreateNotificationAudit>.Ignored)).MustHaveHappened(Repeated.AtLeast.Once);
+            A.CallTo(() => mediator.SendAsync(A<CreateNotificationAudit>.Ignored)).MustHaveHappenedOnceOrMore();
         }
 
         [Fact]
@@ -39,7 +39,7 @@
         {
             await auditService.AddMovementAudit(this.mediator, notificationId, 1, userId.ToString(), MovementAuditType.Prenotified);
 
-            A.CallTo(() => mediator.SendAsync(A<AuditMovement>.Ignored)).MustHaveHappened(Repeated.AtLeast.Once);
+            A.CallTo(() => mediator.SendAsync(A<AuditMovement>.Ignored)).MustHaveHappenedOnceOrMore();
         }
 
         [Fact]
@@ -47,7 +47,7 @@
         {
             await auditService.AddImportMovementAudit(this.mediator, notificationId, 1, userId.ToString(), MovementAuditType.Prenotified);
 
-            A.CallTo(() => mediator.SendAsync(A<AuditImportMovement>.Ignored)).MustHaveHappened(Repeated.AtLeast.Once);
+            A.CallTo(() => mediator.SendAsync(A<AuditImportMovement>.Ignored)).MustHaveHappenedOnceOrMore();
         }
     }
 }

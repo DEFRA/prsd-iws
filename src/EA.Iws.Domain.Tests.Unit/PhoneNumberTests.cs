@@ -39,7 +39,7 @@
         }
 
         [Theory]
-        [MemberData("ValidPhoneNumbers")]
+        [MemberData(nameof(ValidPhoneNumbers))]
         public void ValidTelephoneNumbers(string input)
         {
             var phoneNumber = new PhoneNumber(input);
@@ -48,7 +48,7 @@
         }
 
         [Theory]
-        [MemberData("InvalidPhoneNumbers")]
+        [MemberData(nameof(InvalidPhoneNumbers))]
         public void InvalidTelephoneNumbers(string input)
         {
             Action createPhoneNumber = () => new PhoneNumber(input);

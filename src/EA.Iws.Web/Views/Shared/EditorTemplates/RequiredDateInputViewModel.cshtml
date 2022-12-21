@@ -10,57 +10,60 @@
     @Html.HiddenFor(m => m.IsAutoTabEnabled)
     @Html.HiddenFor(m => m.AllowPastDates)
 
-    <div class="form-group form-group-day">
+    <div class="govuk-form-group form-group-day">
         @if (Model.ShowLabels)
         {
             @Html.Gds().LabelFor(m => m.Day, false)
         }
         @if (isDisabled)
         {
-            @Html.Gds().TextBoxFor(m => m.Day, new { disabled = true })
+            @Html.Gds().TextBoxFor(m => m.Day, new { disabled = true }, useHalfWidth: false)
         }
         else
         {
             @Html.Gds().TextBoxFor(m => m.Day, new
-       {
-           data_type = (Model.IsAutoTabEnabled) ? "date" : string.Empty,
-           placeholder = Model.ShowLabels ? string.Empty : "DD"
-       })
+            {
+                data_type = (Model.IsAutoTabEnabled) ? "date" : string.Empty,
+                placeholder = Model.ShowLabels ? string.Empty : "DD",
+                type = "number",
+                min = "1",
+                max = "31",
+            }, useHalfWidth: false)
         }
     </div>
-    <div class="form-group form-group-month">
+    <div class="govuk-form-group form-group-month">
         @if (Model.ShowLabels)
         {
             @Html.Gds().LabelFor(m => m.Month, false)
         }
         @if (isDisabled)
         {
-            @Html.Gds().TextBoxFor(m => m.Month, new { disabled = true })
+            @Html.Gds().TextBoxFor(m => m.Month, new { disabled = true }, useHalfWidth: false)
         }
         else
         {
             @Html.Gds().TextBoxFor(m => m.Month, new
-       {
-           data_type = (Model.IsAutoTabEnabled) ? "date" : string.Empty,
-           placeholder = Model.ShowLabels ? string.Empty : "MM"
-       })
+            {
+                data_type = (Model.IsAutoTabEnabled) ? "date" : string.Empty,
+                placeholder = Model.ShowLabels ? string.Empty : "MM",
+                type = "number",
+                min = "1",
+                max = "12",
+            }, useHalfWidth: false)
         }
     </div>
-    <div class="form-group form-group-year">
+    <div class="govuk-form-group form-group-year">
         @if (Model.ShowLabels)
         {
             @Html.Gds().LabelFor(m => m.Year, false)
         }
         @if (isDisabled)
         {
-            @Html.Gds().TextBoxFor(m => m.Year, new { disabled = true })
+            @Html.Gds().TextBoxFor(m => m.Year, new { disabled = true }, useHalfWidth: false)
         }
         else
         {
-            @Html.Gds().TextBoxFor(m => m.Year, new
-       {
-           placeholder = Model.ShowLabels ? string.Empty : "YYYY"
-       })
+            @Html.Gds().TextBoxFor(m => m.Year, new { placeholder = Model.ShowLabels ? string.Empty : "YYYY", type = "number" }, useHalfWidth: false)
         }
     </div>
 </div>

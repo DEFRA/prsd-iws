@@ -14,7 +14,7 @@
     </div>
 </div>
 <header class="hgroup">
-    <h1 class="heading-large">Details about cookies on IWS</h1>
+    <h1 class="govuk-heading-l">Details about cookies on IWS</h1>
 </header>
 <div>
     <p><a href="/" id="proposition-name">International Waste Shipments</a> puts small files (known as 'cookies') on your computer.</p>
@@ -85,12 +85,12 @@
 <header class="hgroup">
     <h1 class="heading-medium">Analytics cookies (optional)</h1>
 </header>
-<div>
+<div id="dvGoogleAnalytics">
     <p>We use Google Analytics software to understand how people use IWS. We do this to help make sure the site is meeting the needs of its users and to help us make improvements.</p>
     <p>We do not collect or store your personal information (for example your name or address) so this information cannot be used to identify who you are.</p>
     <p>We do not allow Google to use or share our analytics data.</p>
     <p>Google Analytics stores information about:</p>
-    <ul class="list-bullet">
+    <ul class="govuk-list govuk-list--bullet">
         <li>the pages you visit</li>
         <li>how long you spend on each page</li>
         <li>how you arrived at the site</li>
@@ -131,24 +131,26 @@
     </table>
     <div id="cookieSettings">
         <h2 class="heading-small">Do you want to accept analytics cookies?</h2>
-        <fieldset>
-            <div class="multiple-choice">
-                <input type="radio" id="cookieChoiceYes" name="cookieChoices" value="True">
-                <label for="yes">
-                    Yes
-                </label>
-            </div>
-            <div class="multiple-choice">
-                <input type="radio" id="cookieChoiceNo" name="cookieChoices" value="False">
-                <label for="no">
-                    No
-                </label>
+        <fieldset class="govuk-fieldset">
+            <div class="govuk-radios" data-module="govuk-radios">
+                <div class="govuk-radios__item">
+                    <input type="radio" id="cookieChoiceYes" name="cookieChoices" value="True" class="govuk-radios__input">
+                    <label class="govuk-label govuk-radios__label" for="yes">
+                        Yes
+                    </label>
+                </div>
+                <div class="govuk-radios__item">
+                    <input type="radio" id="cookieChoiceNo" name="cookieChoices" value="False" class="govuk-radios__input">
+                    <label class="govuk-label govuk-radios__label" for="no">
+                        No
+                    </label>
+                </div>
             </div>
         </fieldset>
     </div>
     <br />
     <div>
-        <input id="saveCookieChoice" type="submit" value="Save cookie settings" class="button" onclick="setCookieChoice();">
+        <input id="saveCookieChoice" type="submit" value="Save cookie settings" class="govuk-button" onclick="setCookieChoice();">
     </div>
 </div>
 

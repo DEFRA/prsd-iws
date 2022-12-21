@@ -4,37 +4,33 @@
     ViewBag.Title = ChangeAccountDetailsResources.Title;
 }
 
-<div class="grid-row">
-    <section class="column-two-thirds">
-        <h1 class="heading-large">@ChangeAccountDetailsResources.Header</h1>
+<header class="hgroup">
+    <h1 class="govuk-heading-l">@ChangeAccountDetailsResources.Header</h1>
+</header>
 
-        @using (Html.BeginForm("ChangeAccountDetails", "Registration"))
-        {
-            @Html.AntiForgeryToken()
-            @Html.Gds().ValidationSummary()
+@using (Html.BeginForm())
+{
+    @Html.Gds().ValidationSummary()
+    @Html.AntiForgeryToken()
 
-            <div class="form-group @Html.Gds().FormGroupClass(m => m.ChangeOptions)">
-                @Html.Gds().ValidationMessageFor(m => m.ChangeOptions)
-                <fieldset>
-                    <div class="multiple-choice">
-                        @Html.RadioButtonFor(m => m.ChangeOptions, true, new { id = "rdoOrganisationDetails" })
-                        <label for="rdoOrganisationDetails">
-                            @ChangeAccountDetailsResources.OrgOption
-                        </label>
-                    </div>
-
-                    <div class="multiple-choice">
-                        @Html.RadioButtonFor(m => m.ChangeOptions, false, new { id = "rdoPersonalDetails" })
-                        <label for="rdoPersonalDetails">
-                            @ChangeAccountDetailsResources.ApplicantOption
-                        </label>
-                    </div>
-                </fieldset>
+    <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.ChangeOptions)">
+        <fieldset class="govuk-fieldset">
+            @Html.Gds().ValidationMessageFor(m => m.ChangeOptions)
+            <div class="govuk-radios__item">
+                @Html.RadioButtonFor(m => m.ChangeOptions, true, new { id = "rdoOrganisationDetails", @class = "govuk-radios__input" })
+                <label class="govuk-label govuk-radios__label" for="rdoOrganisationDetails">
+                    @ChangeAccountDetailsResources.OrgOption
+                </label>
             </div>
-
-            <div class="form-group">
-                <input type="submit" class="button" value="@ChangeAccountDetailsResources.Continue" />
+            <div class="govuk-radios__item">
+                @Html.RadioButtonFor(m => m.ChangeOptions, false, new { id = "rdoPersonalDetails", @class = "govuk-radios__input" })
+                <label class="govuk-label govuk-radios__label" for="rdoPersonalDetails">
+                    @ChangeAccountDetailsResources.ApplicantOption
+                </label>
             </div>
-        }
-    </section>
-</div>
+        </fieldset>
+    </div>
+    <div class="govuk-form-group">
+        <button class="govuk-button" type="submit">@ChangeAccountDetailsResources.Continue</button>
+    </div>
+}

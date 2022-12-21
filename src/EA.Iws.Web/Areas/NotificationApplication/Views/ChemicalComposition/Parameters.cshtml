@@ -7,7 +7,7 @@
 }
 
 <header class="hgroup">
-    <h1 class="heading-large">@ParametersResources.Header</h1>
+    <h1 class="govuk-heading-l">@ParametersResources.Header</h1>
     <p>@ParametersResources.HeaderDescription</p>
 </header>
 
@@ -21,7 +21,7 @@
     if (Model.ChemicalCompositionType == ChemicalComposition.Wood)
     {
         <div>@ParametersResources.DescriptionHeader</div>
-        <div class="form-group @Html.Gds().FormGroupClass(m => m.Description)">
+        <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.Description)">
             @Html.Gds().ValidationMessageFor(m => m.Description)
             @Html.Gds().HintSpan(ParametersResources.DescriptionHint)
             @Html.Gds().TextBoxFor(m => m.Description, new { @MaxLength = 70, @title = ParametersResources.DescriptionTitle })
@@ -45,7 +45,7 @@
 
             var idText = "WasteComposition_" + i + "_";
 
-            <div class="form-group @Html.Gds().FormGroupClass(m => m.WasteComposition[i])">
+            <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.WasteComposition[i])">
                 @Html.Gds().ValidationMessageFor(m => m.WasteComposition[i])
                 <div>
                     <div>
@@ -81,14 +81,16 @@
     if (Model.ChemicalCompositionType != ChemicalComposition.Wood)
     {
         <div class="grid-row">
-            <div class="form-group @Html.Gds().FormGroupClass(m => m.Energy) column-two-thirds">
+            <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.Energy) column-two-thirds">
                 @Html.Gds().ValidationMessageFor(m => m.Energy)
                 @ParametersResources.EnergyEfficiency
-                <details>
-                    <summary>
-                        <h2 class="summary heading-xsmall">@ParametersResources.GuidanceNotesTitle</h2>
+                <details class="govuk-details" data-module="govuk-details">
+                    <summary class="govuk-details__summary">
+                        <span class="govuk-details__summary-text">
+                            @ParametersResources.GuidanceNotesTitle
+                        </span>                        
                     </summary>
-                    <div class="panel">
+                    <div class="govuk-details__text">
                         <p>@ParametersResources.GuidanceTextFirstPara</p>
                         
                         <p>@ParametersResources.GuidanceTextSecondPara</p>
@@ -98,7 +100,7 @@
             </div>
         </div>
     }
-    <div class="form-group">
-        <button class="button" type="submit">@Constants.ContinueButtonText</button>
+    <div class="govuk-form-group">
+        <button class="govuk-button" type="submit">@Constants.ContinueButtonText</button>
     </div>
 }

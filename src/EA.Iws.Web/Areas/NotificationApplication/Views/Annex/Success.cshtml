@@ -10,16 +10,16 @@
     <div class="column-two-thirds">
         @if (Model.AnnexesUploaded > 1)
         {
-            <h1 class="heading-large">@Resource.MainHeadingMultiple</h1>
+            <h1 class="govuk-heading-l">@Resource.MainHeadingMultiple</h1>
         }
         else
         {
-            <h1 class="heading-large">@Resource.MainHeadingSingle</h1>
+            <h1 class="govuk-heading-l">@Resource.MainHeadingSingle</h1>
         }
         
     </div>
 </div>
 
 <div>
-    @Html.ActionLink(Constants.ContinueOnlyButtonText, "Index", "Options", new { id = Model.NotificationId, area = "NotificationApplication" }, new { @class="button"})
+    @Html.ActionLink(Constants.ContinueOnlyButtonText, "Index", "Options", new { id = Model.NotificationId, area = "NotificationApplication" }, new { @class= "govuk-button" })
 </div>

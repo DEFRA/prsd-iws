@@ -15,12 +15,12 @@
 }
 
 @section inside_header {
-
+    @Html.Partial("_IwsHeader")
 }
 
-@section proposition_header {
+@*@section proposition_header {
     @Html.Partial("_IwsNavigation")
-}
+}*@
 
 @section after_header {
 
@@ -28,25 +28,25 @@
 
 @section footer_top {
     @Html.Partial("_IwsHelpline")
-    <hr />
+    <hr class="govuk-footer__section-break">
 }
 
 @section footer_support_links {
-    <ul>
-        <li>
-            <a href="https://www.gov.uk/help">Help</a>
+    <ul class="govuk-footer__inline-list">
+        <li class="govuk-footer__inline-list-item">
+            <a href="https://www.gov.uk/help" class="govuk-footer__link">Help</a>
         </li>
-        <li>
-            @Html.ActionLink("Cookies", "Cookies", "NewUser", new { area = string.Empty }, null)
+        <li class="govuk-footer__inline-list-item">
+            @Html.ActionLink("Cookies", "Cookies", "NewUser", new { area = string.Empty }, new { @class = "govuk-footer__link" })
         </li>
-        <li>
-            @Html.ActionLink("Terms and conditions", "TermsAndConditions", "NewUser", new { area = string.Empty }, null)
+        <li class="govuk-footer__inline-list-item">
+            @Html.ActionLink("Terms and conditions", "TermsAndConditions", "NewUser", new { area = string.Empty }, new { @class = "govuk-footer__link" })
         </li>
-        <li>
-            @Html.ActionLink("Privacy notice", "Index", "PrivacyPolicy", new { area = string.Empty }, null)
+        <li class="govuk-footer__inline-list-item">
+            @Html.ActionLink("Privacy notice", "Index", "PrivacyPolicy", new { area = string.Empty }, new { @class = "govuk-footer__link" })
         </li>
-        <li>
-            @Html.ActionLink("Accessibility", "Accessibility", "NewUser", new { area = string.Empty }, null)
+        <li class="govuk-footer__inline-list-item">
+            @Html.ActionLink("Accessibility", "Accessibility", "NewUser", new { area = string.Empty }, new { @class = "govuk-footer__link" })
         </li>
     </ul>
 }
@@ -55,28 +55,32 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/jquery-ui")
     @Scripts.Render("~/bundles/jqueryval")
-    @Scripts.Render("~/bundles/govuk_toolkit")
+    @Scripts.Render("~/bundles/govuk-frontend")
     @Scripts.Render("~/bundles/govuk_iws")
     @Scripts.Render("~/bundles/helpers")
     @RenderSection("scripts", required: false)
 }
 
-<main id="content">
+<div class="govuk-width-container">
     @Html.Partial("_FeedbackBanner")
-    @if (User.Identity.IsAuthenticated)
-    {
-        <div class="top-content-box font-xsmall">
-            <div id="homepage-link-container">
-                @if (!User.IsInternalUser())
-                {
-                    @Html.ActionLink("Go to your homepage", "Home", "Applicant", new { area = string.Empty }, null)
-                }
+    <main id="content" class="govuk-main-wrapper app-main-class">
+        @if (User.Identity.IsAuthenticated)
+        {
+            <div class="top-content-box font-xsmall">
+                <div id="homepage-link-container">
+                    @if (!User.IsInternalUser())
+                    {
+                        @Html.ActionLink("Go to your homepage", "Home", "Applicant", new { area = string.Empty }, new { @class = "govuk-link" })
+                    }
+                </div>
+                <div id="top-content-box-container">
+                    @RenderSection("top_content_box", false)
+                    @Html.Action("_IwsTitle", "Home", new { area = string.Empty })
+                </div>
             </div>
-            <div id="top-content-box-container">
-                @RenderSection("top_content_box", false)
-                @Html.Action("_IwsTitle", "Home", new { area = string.Empty })
-            </div>
+        }
+        <div id="renderedContent">
+            @RenderBody()
         </div>
-    }
-    @RenderBody()
-</main>
+    </main>
+</div>

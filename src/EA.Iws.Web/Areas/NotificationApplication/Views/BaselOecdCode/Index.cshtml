@@ -5,7 +5,7 @@
     ViewBag.Title = BaselOecdCodeResources.Title;
 }
 
-<h1 class="heading-large">@BaselOecdCodeResources.Header</h1>
+<h1 class="govuk-heading-l">@BaselOecdCodeResources.Header</h1>
 
 @using (Html.BeginForm())
 {
@@ -25,7 +25,7 @@
         @Html.Gds().ValidationMessageFor(m => m.SelectedCode)
         @Html.Gds().DropDownListFor(m => m.SelectedCode, Model.Codes, string.Empty, new { title = BaselOecdCodeResources.CodeList, data_select_box = "true" })
     </div>
-    <div class="form-group @Html.Gds().FormGroupClass(m => m.NotListed)">
+    <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.NotListed)">
         @Html.Gds().ValidationMessageFor(m => m.NotListed)
         <label for="NotListed">
             @Html.CheckBoxFor(m => m.NotListed)
@@ -33,7 +33,7 @@
         </label>
     </div>
 
-    <div class="form-group">
+    <div class="govuk-form-group">
         <div id="descriptionTextArea">
             <h2 class="heading-small">@BaselOecdCodeResources.HeaderDescriptionOfCode</h2>
             @if (Model.NotListed)
@@ -47,7 +47,7 @@
         </div>
     </div>
 
-    <button class="button" type="submit">@Constants.ContinueButtonText</button>
+    <button class="govuk-button" type="submit">@Constants.ContinueButtonText</button>
 }
 
 @section scripts{

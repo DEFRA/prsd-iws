@@ -154,7 +154,7 @@
             await carrierController.Add(model, null);
 
             A.CallTo(() => mediator.SendAsync(A<AddCarrierToNotification>.That.Matches(p => p.NotificationId == notificationId)))
-                .MustHaveHappened(Repeated.Exactly.Once);
+                .MustHaveHappenedOnceExactly();
         }
 
         [Fact]
@@ -231,7 +231,7 @@
             await carrierController.Edit(model);
 
             A.CallTo(() => mediator.SendAsync(A<UpdateCarrierForNotification>.That.Matches(p => p.NotificationId == notificationId)))
-                .MustHaveHappened(Repeated.Exactly.Once);
+                .MustHaveHappenedOnceExactly();
         }
 
         [Fact]
@@ -296,7 +296,7 @@
             A.CallTo(
                 () =>
                     mediator.SendAsync(A<GetCarriersByNotificationId>.That.Matches(p => p.NotificationId == notificationId)))
-                .MustHaveHappened(Repeated.Exactly.Once);
+                .MustHaveHappenedOnceExactly();
         }
 
         [Fact]
@@ -316,7 +316,7 @@
                 () =>
                     mediator.SendAsync(A<GetCarrierForNotification>.That.Matches(
                             p => p.CarrierId == carrierId && p.NotificationId == notificationId)))
-                .MustHaveHappened(Repeated.Exactly.Once);
+                .MustHaveHappenedOnceExactly();
         }
 
         [Fact]
@@ -331,7 +331,7 @@
             await carrierController.Remove(model);
 
             A.CallTo(() => mediator.SendAsync(A<DeleteCarrierForNotification>.That.Matches(p => p.CarrierId == carrierId && p.NotificationId == notificationId)))
-                .MustHaveHappened(Repeated.Exactly.Once);
+                .MustHaveHappenedOnceExactly();
         }
 
         [Fact]

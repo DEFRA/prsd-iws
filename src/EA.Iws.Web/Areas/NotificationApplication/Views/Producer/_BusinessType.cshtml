@@ -3,7 +3,7 @@
 @using EnumHelper = EA.Prsd.Core.Helpers.EnumHelper
 @model EA.Iws.Web.Areas.NotificationApplication.ViewModels.Producer.AddProducerViewModel
 
-<div class="form-group @Html.Gds().FormGroupClass(m => m.Business.Name)">
+<div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.Business.Name)">
     @Html.Gds().LabelFor(m => m.Business.Name)
     @Html.Gds().ValidationMessageFor(m => m.Business.Name)
     @Html.Gds().HintSpan(BusinessResources.OrgNameHint)
@@ -14,57 +14,67 @@
     })
 </div>
 
-<div class="form-group @Html.Gds().FormGroupClass(m => m.Business.BusinessType)">
+<div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.Business.BusinessType)">
+    <fieldset class="govuk-fieldset">
+        <legend class="govuk-label">
+            @BusinessResources.BusinessTypeHeader
+        </legend>
+    </fieldset>
+
     @Html.Gds().ValidationMessageFor(m => m.Business.BusinessType)
 
-    <div class="multiple-choice" data-target="sole-trader-number">
-        @Html.RadioButtonFor(m => m.Business.BusinessType, "SoleTrader", new { @class = "business-type-radio-button", @id = "SoleTrader" })
-        <label for="SoleTrader">
+    <div class="govuk-radios__item" data-target="sole-trader-number">
+        @Html.RadioButtonFor(m => m.Business.BusinessType, "SoleTrader", new { @class = "govuk-radios__input", @id = "SoleTrader" })
+        <label class="govuk-label govuk-radios__label" for="SoleTrader">
             @EnumHelper.GetDisplayName(BusinessType.SoleTrader)
         </label>
     </div>
 
-    <div class="multiple-choice" data-target="partnership-number">
-        @Html.RadioButtonFor(m => m.Business.BusinessType, "Partnership", new { @class = "business-type-radio-button", @id = "Partnership" })
-        <label for="Partnership">
+    <div class="govuk-radios__item" data-target="partnership-number">
+        @Html.RadioButtonFor(m => m.Business.BusinessType, "Partnership", new { @class = "govuk-radios__input", @id = "Partnership" })
+        <label class="govuk-label govuk-radios__label" for="Partnership">
             @EnumHelper.GetDisplayName(BusinessType.Partnership)
         </label>
     </div>
 
-    <div class="multiple-choice" data-target="companies-house-number">
-        @Html.RadioButtonFor(m => m.Business.BusinessType, "LimitedCompany", new { @class = "business-type-radio-button", @id = "LimitedCompany" })
-        <label for="LimitedCompany">
+    <div class="govuk-radios__item" data-target="companies-house-number">
+        @Html.RadioButtonFor(m => m.Business.BusinessType, "LimitedCompany", new { @class = "govuk-radios__input", @id = "LimitedCompany" })
+        <label class="govuk-label govuk-radios__label" for="LimitedCompany">
             @EnumHelper.GetDisplayName(BusinessType.LimitedCompany)
         </label>
     </div>
-    
+
     <div class="panel @(Model.Business.BusinessType != null && Model.Business.BusinessType.Equals("Limited company") ? "" : "js-hidden")" id="companies-house-number">
-        <div class="form-group @Html.Gds().FormGroupClass(m => m.Business.RegistrationNumber)" data-validation-behaviour="ignore-parent">
+        <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.Business.RegistrationNumber)" data-validation-behaviour="ignore-parent">
             @Html.Gds().LabelFor(m => m.Business.RegistrationNumber, false)
             <span class="form-hint">This should be your Companies House number</span>
             @Html.Gds().ValidationMessageFor(m => m.Business.RegistrationNumber)
             @Html.Gds().TextBoxFor(m => m.Business.RegistrationNumber)
-
-            <details data-target="companies-house-number" class="margin-top-15">
-                <summary><h2 class="summary heading-xsmall">@BusinessResources.WhereToFindCompanyHouse</h2></summary>
-                <div class="panel">
-                    <p>
-                        @Html.Raw(BusinessResources.CompanyHouseDescription)
-                    </p>
+            <div>
+                <br />
+            </div>
+            <details data-target="companies-house-number" class="govuk-details" data-module="govuk-details">
+                <summary class="govuk-details__summary">
+                    <span class="govuk-details__summary-text">
+                        @BusinessResources.WhereToFindCompanyHouse
+                    </span>
+                </summary>
+                <div class="govuk-details__text">
+                    @Html.Raw(BusinessResources.CompanyHouseDescription)
                 </div>
             </details>
         </div>
     </div>
 
-    <div class="multiple-choice" data-target="other-description">
-        @Html.RadioButtonFor(m => m.Business.BusinessType, BusinessType.Other, new { @class = "business-type-radio-button", @id = "Other" })
-        <label for="Other">
+    <div class="govuk-radios__item" data-target="other-description">
+        @Html.RadioButtonFor(m => m.Business.BusinessType, BusinessType.Other, new { @class = "govuk-radios__input", @id = "Other" })
+        <label class="govuk-label govuk-radios__label" for="Other">
             @EnumHelper.GetDisplayName(BusinessType.Other)
         </label>
     </div>
-    
+
     <div class="panel hide-for-initial-load @(Model.Business.BusinessType != null && Model.Business.BusinessType == BusinessType.Other ? "" : "js-hidden")" id="other-description">
-        <div class="form-group @Html.Gds().FormGroupClass(m => m.Business.OtherDescription)">
+        <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.Business.OtherDescription)">
             @Html.Gds().LabelFor(m => m.Business.OtherDescription)
             @Html.Gds().ValidationMessageFor(m => m.Business.OtherDescription)
             @Html.Gds().TextBoxFor(m => m.Business.OtherDescription)

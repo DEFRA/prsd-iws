@@ -1,37 +1,39 @@
 ﻿@using EA.Iws.Web.Views.Shared
 
-<div>
-    <h2 class="heading-medium">
-        @IwsStandardDataNoticeResources.ReadCarefully
-    </h2>
+<div id="dvPrivacy">
+    <header class="hgroup">
+        <h1 class="govuk-heading-l">
+            @IwsStandardDataNoticeResources.ReadCarefully
+        </h1>
+    </header>
 
-    <h2 class="heading-small">@IwsStandardDataNoticeResources.PersonalInfoHeading</h2>
+    <h2 class="govuk-heading-m">@IwsStandardDataNoticeResources.PersonalInfoHeading</h2>
     <p>
         @IwsStandardDataNoticeResources.PersonalInfoIntro
     </p>
-    <h2 class="heading-small">@IwsStandardDataNoticeResources.EA</h2>
-    <h2>@IwsStandardDataNoticeResources.EASubHeading</h2>
+    <h2 class="govuk-heading-m">@IwsStandardDataNoticeResources.EA</h2>
+    <label>@IwsStandardDataNoticeResources.EASubHeading</label>
     <p>
         <a href="https://www.gov.uk/government/organisations/environment-agency/about/personal-information-charter" target="_blank">https://www.gov.uk/government/organisations/environment-agency/about/personal-information-charter</a><br>
         @IwsStandardDataNoticeResources.EAPara
     </p>
 
-    <h2 class="heading-small">@IwsStandardDataNoticeResources.SEPA</h2>
+    <h2 class="govuk-heading-m">@IwsStandardDataNoticeResources.SEPA</h2>
     <p>
         <a href="https://www.sepa.org.uk/help/privacy-policy/" target="_blank">Privacy Policy</a>
     </p>
 
-    <h2 class="heading-small">@IwsStandardDataNoticeResources.NIEA</h2>
+    <h2 class="govuk-heading-m">@IwsStandardDataNoticeResources.NIEA</h2>
     <p>
         <a href="https://www.daera-ni.gov.uk/daera-privacy-statement" target="_blank">DAERA Privacy Statement</a>
     </p>
 
-    <h2 class="heading-small">@IwsStandardDataNoticeResources.NRW</h2>
+    <h2 class="govuk-heading-m">@IwsStandardDataNoticeResources.NRW</h2>
     <p>
         <a href="https://naturalresources.wales/footer-links/privacy-notice/?lang=en" target="_blank">Privacy Notice</a>
     </p>
 
-    <h2 class="heading-small">@IwsStandardDataNoticeResources.PersonalDataHeading</h2>
+    <h2 class="govuk-heading-m">@IwsStandardDataNoticeResources.PersonalDataHeading</h2>
     <p>@IwsStandardDataNoticeResources.PersonalDataPara1</p>
     <p>@IwsStandardDataNoticeResources.PersonalDataPara2</p>
     <p>
@@ -41,10 +43,10 @@
             <li>@IwsStandardDataNoticeResources.PersonalDataListItem3</li>
         </ul>
     </p>
-    <h2 class="heading-small">@IwsStandardDataNoticeResources.ResponsibleHeading</h2>
+    <h2 class="govuk-heading-m">@IwsStandardDataNoticeResources.ResponsibleHeading</h2>
     <p>@IwsStandardDataNoticeResources.ResponsiblePara</p>
 
-    <h2 class="heading-small">@IwsStandardDataNoticeResources.WhatWeDoHeading</h2>
+    <h2 class="govuk-heading-m">@IwsStandardDataNoticeResources.WhatWeDoHeading</h2>
     <p>@IwsStandardDataNoticeResources.WhatWeDoPara1</p>
     <p>@IwsStandardDataNoticeResources.WhatWeDoPara2</p>
     <p>
@@ -54,34 +56,34 @@
         @IwsStandardDataNoticeResources.WhatWeDoPara4Part1<a href="https://data.gov.uk/dataset/fb973a82-c484-4b14-8209-01bbea39c87b/international-waste-shipments-exported-from-england" target="_blank">data.gov.uk</a>@IwsStandardDataNoticeResources.WhatWeDoPara4Part2
     </p>
 
-    <h2 class="heading-small">@IwsStandardDataNoticeResources.HowWeKeep</h2>
+    <h2 class="govuk-heading-m">@IwsStandardDataNoticeResources.HowWeKeep</h2>
     <p>@IwsStandardDataNoticeResources.HowWeKeepPara</p>
 
-    <h2 class="heading-small">@IwsStandardDataNoticeResources.WhereWeKeep</h2>
+    <h2 class="govuk-heading-m">@IwsStandardDataNoticeResources.WhereWeKeep</h2>
     <p>@IwsStandardDataNoticeResources.WhereWeKeepPara1</p>
     <p>@IwsStandardDataNoticeResources.WhereWeKeepPara2</p>
     <p>@IwsStandardDataNoticeResources.WhereWeKeepPara3</p>
     <p>@IwsStandardDataNoticeResources.WhereWeKeepPara4</p>
 
-    <h2 class="heading-small">@IwsStandardDataNoticeResources.WhoIsCollecting</h2>
+    <h2 class="govuk-heading-m">@IwsStandardDataNoticeResources.WhoIsCollecting</h2>
     <p>@IwsStandardDataNoticeResources.WhoIsCollectingPara1</p>
-    <h2 class="heading-small">@IwsStandardDataNoticeResources.EA</h2>
+    <h2 class="govuk-heading-m">@IwsStandardDataNoticeResources.EA</h2>
     @Html.Raw(IwsStandardDataNoticeResources.EAAddress)
     @IwsStandardDataNoticeResources.Email @Html.MailtoLink(IwsStandardDataNoticeResources.EAEmail)
 
     <p>
-        <h2 class="heading-small">@IwsStandardDataNoticeResources.SEPA</h2>
+        <h2 class="govuk-heading-m">@IwsStandardDataNoticeResources.SEPA</h2>
         @Html.Raw(IwsStandardDataNoticeResources.SEPAAddress)
         @IwsStandardDataNoticeResources.Email @Html.MailtoLink(IwsStandardDataNoticeResources.SEPAEmail)
     </p>
 
     <p>
-        <h2 class="heading-small">@IwsStandardDataNoticeResources.NIEA</h2>
+        <h2 class="govuk-heading-m">@IwsStandardDataNoticeResources.NIEA</h2>
         @Html.Raw(IwsStandardDataNoticeResources.NIEAAddress)
     </p>
 
     <p>
-        <h2 class="heading-small">@IwsStandardDataNoticeResources.NRW</h2>
+        <h2 class="govuk-heading-m">@IwsStandardDataNoticeResources.NRW</h2>
         @Html.Raw(IwsStandardDataNoticeResources.NRWAddress)
         @IwsStandardDataNoticeResources.Email @Html.MailtoLink(IwsStandardDataNoticeResources.NRWEmail)
     </p>

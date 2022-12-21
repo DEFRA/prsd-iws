@@ -31,7 +31,9 @@
         </tbody>
     </table>
 }
-<header class="hgroup"><h1 class="heading-large">@IndexResources.MainHeading</h1></header>
+<header class="hgroup">
+    <h1 class="govuk-heading-l">@IndexResources.MainHeading</h1>
+</header>
 
 <div id="import-waste-codes">
 
@@ -40,12 +42,12 @@
         @Html.AntiForgeryToken()
         @Html.HiddenFor(m => m.ImportNotificationId)
 
-        <div class="form-group @Html.Gds().FormGroupClass(m => m.Name)">
+        <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.Name)">
             @Html.Gds().LabelFor(m => m.Name, showOptionalLabel: false)
             @Html.Gds().TextBoxFor(m => m.Name, new { maxLength = 70 })
         </div>
 
-        <div class="form-group">
+        <div class="govuk-form-group">
             <div class="form-group-compound @Html.Gds().FormGroupClass(m => m.SelectedBaselCode)">
                 @Html.Gds().LabelFor(m => m.SelectedBaselCode, showOptionalLabel: false)
                 @Html.Gds().DropDownListFor(m => m.SelectedBaselCode, Model.BaselCodes, string.Empty, new { data_select_box = "true" })
@@ -59,13 +61,13 @@
             </div>
         </div>
 
-        <div class="form-group">
+        <div class="govuk-form-group">
             <div class="form-group-compound @Html.Gds().FormGroupClass(m => m.SelectedEwcCode)">
                 @Html.Gds().LabelFor(m => m.SelectedEwcCode, showOptionalLabel: false)
                 @Html.Gds().DropDownListFor(m => m.SelectedEwcCode, Model.EwcCodes, string.Empty, new { data_select_box = "true" })
                 @Html.HiddenFor(model => Model.SelectedEwcCodesJson)
                 <button type="button"
-                        class="add"
+                        class="govuk-button"
                         data-action="add"
                         data-json-codes-id="#SelectedEwcCodesJson"
                         data-selected-code-id="#SelectedEwcCode"
@@ -74,18 +76,18 @@
                 </button>
             </div>
 
-            <div class="form-group">
+            <div class="govuk-form-group">
                 @DisplayCodeTable("ewc-codes-table", IndexResources.EwcCodesTableHeading, "#SelectedEwcCodesJson", Model.SelectedEwcCodesDisplay)
             </div>
         </div>
 
-        <div class="form-group">
+        <div class="govuk-form-group">
             <div class="form-group-compound @Html.Gds().FormGroupClass(m => m.SelectedYCode)">
                 @Html.Gds().LabelFor(m => m.SelectedYCode, showOptionalLabel: false)
                 @Html.Gds().DropDownListFor(m => m.SelectedYCode, Model.YCodes, string.Empty, new { data_select_box = "true" })
                 @Html.HiddenFor(model => Model.SelectedYCodesJson)
                 <button type="button"
-                        class="add"
+                        class="govuk-button"
                         data-action="add"
                         data-json-codes-id="#SelectedYCodesJson"
                         data-selected-code-id="#SelectedYCode"
@@ -101,18 +103,18 @@
                 </label>
             </div>
 
-            <div class="form-group">
+            <div class="govuk-form-group">
                 @DisplayCodeTable("y-codes-table", IndexResources.YCodesTableHeading, "#SelectedYCodesJson", Model.SelectedYCodesDisplay)
             </div>
         </div>
 
-        <div class="form-group">
+        <div class="govuk-form-group">
             <div class="form-group-compound @Html.Gds().FormGroupClass(m => m.SelectedHCode)">
                 @Html.Gds().LabelFor(m => m.SelectedHCode, showOptionalLabel: false)
                 @Html.Gds().DropDownListFor(m => m.SelectedHCode, Model.HCodes, string.Empty, new { data_select_box = "true" })
                 @Html.HiddenFor(model => Model.SelectedHCodesJson)
                 <button type="button"
-                        class="add"
+                        class="govuk-button"
                         data-action="add"
                         data-json-codes-id="#SelectedHCodesJson"
                         data-selected-code-id="#SelectedHCode"
@@ -128,18 +130,18 @@
                 </label>
             </div>
 
-            <div class="form-group">
+            <div class="govuk-form-group">
                 @DisplayCodeTable("h-codes-table", IndexResources.HCodesTableHeading, "#SelectedHCodesJson", Model.SelectedHCodesDisplay)
             </div>
         </div>
 
-        <div class="form-group">
+        <div class="govuk-form-group">
             <div class="form-group-compound @Html.Gds().FormGroupClass(m => m.SelectedUnClass)">
                 @Html.Gds().LabelFor(m => m.SelectedUnClass, showOptionalLabel: false)
                 @Html.Gds().DropDownListFor(m => m.SelectedUnClass, Model.UnClasses, string.Empty, new { data_select_box = "true" })
                 @Html.HiddenFor(model => Model.SelectedUnClassesJson)
                 <button type="button"
-                        class="add"
+                        class="govuk-button"
                         data-action="add"
                         data-json-codes-id="#SelectedUnClassesJson"
                         data-selected-code-id="#SelectedUnClass"
@@ -155,13 +157,13 @@
                 </label>
             </div>
 
-            <div class="form-group">
+            <div class="govuk-form-group">
                 @DisplayCodeTable("un-classes-table", IndexResources.UnClassesTableHeading, "#SelectedUnClassesJson", Model.SelectedUnClassesDisplay)
             </div>
         </div>
 
-        <div class="form-group">
-            <button type="submit" class="button">@Constants.ContinueButtonText</button>
+        <div class="govuk-form-group">
+            <button type="submit" class="govuk-button">@Constants.ContinueButtonText</button>
         </div>
     }
 </div>

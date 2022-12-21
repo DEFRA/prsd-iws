@@ -1,7 +1,30 @@
 ﻿@using EA.Iws.Core.Admin
 @model EA.Iws.Web.Areas.AdminImportAssessment.ViewModels.Comments.CommentsViewModel
 
-<nav class="tabbed-nav">
+<div class="govuk-tabs" data-module="govuk-tabs">
+    <ul class="govuk-tabs__list">
+        @if (Model.Type == NotificationShipmentsCommentsType.Notification)
+        {
+            <li class="govuk-tabs__list-item govuk-tabs__list-item--selected">
+                @Html.ActionLink("Notification", "Index", "Comments", new { type = NotificationShipmentsCommentsType.Notification }, new { @id = "notifications", @class = "govuk-tabs__tab" })
+            </li>
+            <li class="govuk-tabs__list-item">
+                @Html.ActionLink("Shipments", "Index", "Comments", new { type = NotificationShipmentsCommentsType.Shipments }, new { @id = "shipments", @class = "govuk-tabs__tab" })
+            </li>
+        }
+        else
+        {
+            <li class="govuk-tabs__list-item">
+                @Html.ActionLink("Notification", "Index", "Comments", new { type = NotificationShipmentsCommentsType.Notification }, new { @id = "notifications", @class = "govuk-tabs__tab" })
+            </li>
+            <li class="govuk-tabs__list-item govuk-tabs__list-item--selected">
+                @Html.ActionLink("Shipments", "Index", "Comments", new { type = NotificationShipmentsCommentsType.Shipments }, new { @id = "shipments", @class = "govuk-tabs__tab" })
+            </li>
+        }
+    </ul>
+</div>
+
+@*<nav class="tabbed-nav">
     @Html.ActionLink("Notification", "Index", "Comments", new { type = NotificationShipmentsCommentsType.Notification },
         new
         {
@@ -12,4 +35,4 @@
         {
             @class = "tabbed-tab" + ((Model.Type == NotificationShipmentsCommentsType.Shipments) ? " active" : "")
         })
-</nav>
+</nav>*@

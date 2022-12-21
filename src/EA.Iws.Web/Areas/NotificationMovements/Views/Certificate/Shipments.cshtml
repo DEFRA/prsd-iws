@@ -20,7 +20,7 @@
 
     if (Model.Certificate == CertificateType.Receipt || Model.Certificate == CertificateType.ReceiptRecovery)
     {
-        <h1 class="heading-large">@Html.Raw(string.Format(@Resource.MainTitle, (Model.Certificate == CertificateType.ReceiptRecovery ? "received and " + titleText : "received")))</h1>
+        <h1 class="govuk-heading-l">@Html.Raw(string.Format(@Resource.MainTitle, (Model.Certificate == CertificateType.ReceiptRecovery ? "received and " + titleText : "received")))</h1>
 
         if (Model.ReceiveShipments == null || !Model.ReceiveShipments.PossibleValues.Any())
         {
@@ -30,12 +30,12 @@
             "Index",
             "Options",
             new { area = "NotificationApplication", id = Model.NotificationId },
-            new { @class = "button" })
+            new { @class = "govuk-button" })
         }
         else
         {
 
-            <div class="form-group @Html.Gds().FormGroupClass(m => m.ReceiveShipments)">
+            <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.ReceiveShipments)">
                 <fieldset>
                     <h2 class="heading-small">@Resource.ReceiveTitle</h2>
                     @Html.EditorFor(m => m.ReceiveShipments)
@@ -46,7 +46,7 @@
     }
     else if (Model.Certificate == CertificateType.Recovery)
     {
-        <h1 class="heading-large">@Html.Raw(string.Format(@Resource.MainTitle, titleText))</h1>
+        <h1 class="govuk-heading-l">@Html.Raw(string.Format(@Resource.MainTitle, titleText))</h1>
 
         if (Model.RecoveryShipments == null || !Model.RecoveryShipments.PossibleValues.Any())
         {
@@ -56,12 +56,12 @@
             "Index",
             "Options",
             new { area = "NotificationApplication", id = Model.NotificationId },
-            new { @class = "button" })
+            new { @class = "govuk-button" })
         }
         else
         {
 
-            <div class="form-group @Html.Gds().FormGroupClass(m => m.RecoveryShipments)">
+            <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.RecoveryShipments)">
                 <fieldset>
                     <p class="heading-small">@Resource.RecoveryShipmentTitle</p>
                     @Html.EditorFor(m => m.RecoveryShipments)
@@ -73,7 +73,7 @@
     if ((Model.ReceiveShipments != null && Model.ReceiveShipments.PossibleValues.Any()) || (Model.RecoveryShipments != null && Model.RecoveryShipments.PossibleValues.Any()))
     {
         <div class="form-group-compound">
-            <button class="button" type="submit">Continue</button>
+            <button class="govuk-button" type="submit">Continue</button>
         </div>
 
         @Html.ActionLink("Go to notification options",

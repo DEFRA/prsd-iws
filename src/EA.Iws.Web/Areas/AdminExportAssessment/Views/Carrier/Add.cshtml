@@ -11,7 +11,7 @@
     @Html.HiddenFor(m => m.NotificationId)
 
     <header class="hgroup">
-        <h1 class="heading-large">@AddCarrierResources.Header</h1>
+        <h1 class="govuk-heading-l">@AddCarrierResources.Header</h1>
     </header>
 
     @Html.Partial("CarrierBusinessTypeViewModel", Model)
@@ -26,7 +26,7 @@
 
     @Html.EditorFor(m => m.Contact)
 
-    <button class="button" type="submit">@Constants.ContinueButtonText</button>
+    <button class="govuk-button" type="submit">@Constants.ContinueButtonText</button>
 }
 
 @section menu {

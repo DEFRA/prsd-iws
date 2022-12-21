@@ -4,7 +4,7 @@
     ViewBag.Title = Resources.SummaryTitle;
 }
 
-<h1 class="heading-large">@Resources.SummaryTitle</h1>
+<h1 class="govuk-heading-l">@Resources.SummaryTitle</h1>
 
 @if (Model.NumberOfNotifications == 1)
 {
@@ -20,4 +20,8 @@ else
     }
 }
 
-@Html.ActionLink(Constants.ContinueOnlyButtonText, "DeactivateConfirmation", routeValues: new { userId = ViewBag.UserId }, htmlAttributes: new { @class = "button" })
+@Html.ActionLink(Constants.ContinueOnlyButtonText, "DeactivateConfirmation", routeValues: new { userId = ViewBag.UserId }, htmlAttributes: new { @class = "govuk-button" })
+
+@section menu {
+    @Html.Action("HomeNavigation", "Menu", new { area = "Admin", section = AdminHomeNavigationSection.AccountServices })
+}

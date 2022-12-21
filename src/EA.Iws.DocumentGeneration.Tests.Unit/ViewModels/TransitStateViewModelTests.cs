@@ -15,7 +15,7 @@
         {
             var vm = new TransitStateViewModel();
 
-            Assert.IsType(typeof(TransitStateViewModel), vm);
+            Assert.IsType<TransitStateViewModel>(vm);
         }
 
         [Fact]
@@ -45,7 +45,7 @@
             Assert.Equal(string.Empty, vm.MiddleCountry);
             Assert.Equal(string.Empty, vm.LeftCountry);
             Assert.Equal(string.Empty, vm.RightCountry);
-            Assert.Equal(1, vm.TransitStateDetails.Count);
+            Assert.Single(vm.TransitStateDetails);
             Assert.Equal("one", vm.TransitStateDetails[0].Country);
         }
 

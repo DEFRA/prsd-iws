@@ -8,19 +8,19 @@
 
 <div class="grid-row">
     <div class="column-two-thirds">
-        <div class="form-group">
+        <div class="govuk-form-group">
             @if (Model.Success)
             {
-                <h1 class="heading-large">@Html.Raw(string.Format(Resources.SuccessHeading, Model.NotificationNumber.ToNonBreakingString()))</h1>
+                <h1 class="govuk-heading-l">@Html.Raw(string.Format(Resources.SuccessHeading, Model.NotificationNumber.ToNonBreakingString()))</h1>
             }
             else
             {
-                <h1 class="heading-large">@Html.Raw(string.Format(Resources.FailureHeading, Model.NotificationNumber.ToNonBreakingString()))</h1>
+                <h1 class="govuk-heading-l">@Html.Raw(string.Format(Resources.FailureHeading, Model.NotificationNumber.ToNonBreakingString()))</h1>
             }
         </div>
 
-        <div class="form-group">
-            @Html.ActionLink(@Resources.HomeLinkText, "Index", "Home", null, new { @class = "button" })
+        <div class="govuk-form-group">
+            @Html.ActionLink(@Resources.HomeLinkText, "Index", "Home", null, new { @class = "govuk-button" })
         </div>
 
 

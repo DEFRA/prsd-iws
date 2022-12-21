@@ -5,7 +5,7 @@
 }
 
 <header class="hgroup">
-    <h1 class="heading-large">@Resources.Header</h1>
+    <h1 class="govuk-heading-l">@Resources.Header</h1>
 </header>
 
 @using (Html.BeginForm())
@@ -13,10 +13,10 @@
     @Html.AntiForgeryToken()
     @Html.Gds().ValidationSummary()
 
-    <div class="form-group">
+    <div class="govuk-form-group">
         @Html.EditorFor(m => m.ChemicalCompositionType)
     </div>
-    <div class="form-group">
-        <button class="button" type="submit" name="submitButton" value="Continue">@Constants.ContinueButtonText</button>
+    <div class="govuk-form-group">
+        <button class="govuk-button" type="submit" name="submitButton" value="Continue">@Constants.ContinueButtonText</button>
     </div>
 }

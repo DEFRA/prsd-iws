@@ -4,7 +4,7 @@
     ViewBag.Title = Resources.ChangeEntryPointTitle;
 }
 
-<h1 class="heading-large">@Resources.ChangeEntryPointTitle</h1>
+<h1 class="govuk-heading-l">@Resources.ChangeEntryPointTitle</h1>
 
 <p>@Resources.CompetentAuthority - @(Model.CompetentAuthority).</p>
 
@@ -15,11 +15,11 @@
     @Html.AntiForgeryToken()
     @Html.Gds().ValidationSummary()
 
-    <div class="form-group @Html.Gds().FormGroupClass(m => m.SelectedEntryPoint)">
+    <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.SelectedEntryPoint)">
         @Html.Gds().LabelFor(m => m.SelectedEntryPoint, new { @class = "form-label-bold" })
         @Html.Gds().ValidationMessageFor(m => m.SelectedEntryPoint)
         @Html.Gds().DropDownListFor(m => m.SelectedEntryPoint, Model.EntryPoints, string.Empty, new { title = Resources.EntryPoint, data_select_box = "true" })
     </div>
 
-    <button class="button" type="submit">@Constants.ContinueButtonText</button>
+    <button class="govuk-button" type="submit">@Constants.ContinueButtonText</button>
 }

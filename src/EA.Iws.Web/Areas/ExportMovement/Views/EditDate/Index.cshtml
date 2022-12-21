@@ -4,13 +4,13 @@
     ViewBag.Title = IndexResources.PageTitle;
 }
 
-<header><h1 class="heading-large">@IndexResources.MainHeading</h1></header>
+<header><h1 class="govuk-heading-l">@IndexResources.MainHeading</h1></header>
 
 @Html.Gds().ValidationSummary()
 
 <p>@IndexResources.GuidanceParagraph1</p>
 
-<div class="form-group">
+<div class="govuk-form-group">
     <table>
         <thead>
             <tr>
@@ -43,7 +43,7 @@
     {
         @Html.HiddenFor(m => m.DateEditHistory[i])
     }
-    <div class="form-group @Html.Gds().FormGroupClass(m => m.ActualDateofShipment) @Html.Gds().FormGroupClass(m => m.ActualDateofShipment.Day) @Html.Gds().FormGroupClass(m => m.ActualDateofShipment.Month) @Html.Gds().FormGroupClass(m => m.ActualDateofShipment.Year)">
+    <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.ActualDateofShipment) @Html.Gds().FormGroupClass(m => m.ActualDateofShipment.Day) @Html.Gds().FormGroupClass(m => m.ActualDateofShipment.Month) @Html.Gds().FormGroupClass(m => m.ActualDateofShipment.Year)">
         <fieldset>
             <legend>
                 <span class="form-label">@IndexResources.NewDateLabel</span>
@@ -56,8 +56,8 @@
         </fieldset>
     </div>
 
-    <div class="form-group">
-        <button class="button" type="submit">@Constants.ContinueButtonText</button>
+    <div class="govuk-form-group">
+        <button class="govuk-button" type="submit">@Constants.ContinueButtonText</button>
     </div>
 
     <div>

@@ -30,7 +30,7 @@
             </td>
             @if (ViewBag.CanEditNotification)
             {
-                <td class="change">
+                <td class="change govuk-link">
                     <a href="@Url.Action("List", "Carrier", new { id, backToOverview = true })">
                         Change
                         <span class="screen-reader-text">Intended carriers</span>
@@ -47,7 +47,7 @@
             </td>
             @if (ViewBag.CanEditNotification)
             {
-                <td class="change">
+                <td class="change govuk-link">
                     <a href="@Url.Action("Index", "MeansOfTransport", new { id, backToOverview = true })">
                         Change
                         <span class="screen-reader-text">Means of transport</span>
@@ -64,7 +64,7 @@
             </td>
             @if (ViewBag.CanEditNotification)
             {
-                <td class="change">
+                <td class="change govuk-link">
                     <a href="@Url.Action("Index", "PackagingTypes", new { id, backToOverview = true })">
                         Change
                         <span class="screen-reader-text">Packaging types</span>
@@ -81,7 +81,7 @@
             </td>
             @if (ViewBag.CanEditNotification)
             {
-                <td class="change">
+                <td class="change govuk-link">
                     <a href="@Url.Action("Index", "SpecialHandling", new { id, backToOverview = true })">
                         Change
                         <span class="screen-reader-text">Special handling requirements</span>

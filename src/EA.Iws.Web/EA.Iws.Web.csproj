@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -13,7 +14,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>EA.Iws.Web</RootNamespace>
     <AssemblyName>EA.Iws.Web</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort>44302</IISExpressSSLPort>
     <IISExpressAnonymousAuthentication />
@@ -23,6 +24,7 @@
     </NuGetPackageImportStamp>
     <UseGlobalApplicationHostFile />
     <Use64BitIISExpress />
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -46,33 +48,26 @@
       <HintPath>..\packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Autofac, Version=4.1.1.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
-      <HintPath>..\packages\Autofac.4.1.1\lib\net45\Autofac.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Autofac, Version=6.4.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.6.4.0\lib\netstandard2.0\Autofac.dll</HintPath>
     </Reference>
-    <Reference Include="Autofac.Integration.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
-      <HintPath>..\packages\Autofac.Mvc5.4.0.0\lib\net451\Autofac.Integration.Mvc.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Autofac.Integration.Mvc, Version=6.1.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.Mvc5.6.1.0\lib\net472\Autofac.Integration.Mvc.dll</HintPath>
     </Reference>
-    <Reference Include="Autofac.Integration.Mvc.Owin, Version=4.0.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
-      <HintPath>..\packages\Autofac.Mvc5.Owin.4.0.0\lib\net451\Autofac.Integration.Mvc.Owin.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Autofac.Integration.Mvc.Owin, Version=6.1.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.Mvc5.Owin.6.1.0\lib\net472\Autofac.Integration.Mvc.Owin.dll</HintPath>
     </Reference>
-    <Reference Include="Autofac.Integration.Owin, Version=4.0.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
-      <HintPath>..\packages\Autofac.Owin.4.0.0\lib\net45\Autofac.Integration.Owin.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Autofac.Integration.Owin, Version=7.0.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.Owin.7.0.0\lib\net472\Autofac.Integration.Owin.dll</HintPath>
     </Reference>
-    <Reference Include="Autofac.Integration.WebApi, Version=4.0.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
-      <HintPath>..\packages\Autofac.WebApi2.4.0.0\lib\net45\Autofac.Integration.WebApi.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Autofac.Integration.WebApi, Version=6.1.1.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.WebApi2.6.1.1\lib\net472\Autofac.Integration.WebApi.dll</HintPath>
     </Reference>
-    <Reference Include="ClosedXML, Version=0.88.0.0, Culture=neutral, PublicKeyToken=fd1eb21b62ae805b, processorArchitecture=MSIL">
-      <HintPath>..\packages\ClosedXML.0.88.0\lib\net452\ClosedXML.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="ClosedXML, Version=0.96.0.0, Culture=neutral, PublicKeyToken=fd1eb21b62ae805b, processorArchitecture=MSIL">
+      <HintPath>..\packages\ClosedXML.0.96.0\lib\net46\ClosedXML.dll</HintPath>
     </Reference>
-    <Reference Include="DocumentFormat.OpenXml, Version=2.7.2.0, Culture=neutral, PublicKeyToken=8fb06cb64d019a17, processorArchitecture=MSIL">
-      <HintPath>..\packages\DocumentFormat.OpenXml.2.7.2\lib\net40\DocumentFormat.OpenXml.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="DocumentFormat.OpenXml, Version=2.18.0.0, Culture=neutral, PublicKeyToken=8fb06cb64d019a17, processorArchitecture=MSIL">
+      <HintPath>..\packages\DocumentFormat.OpenXml.2.18.0\lib\net46\DocumentFormat.OpenXml.dll</HintPath>
     </Reference>
     <Reference Include="Elmah, Version=1.2.14706.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\elmah.corelibrary.1.2.2\lib\Elmah.dll</HintPath>
@@ -87,22 +82,22 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
-    <Reference Include="ExcelDataReader, Version=3.4.2.0, Culture=neutral, PublicKeyToken=93517dbe6a4012fa, processorArchitecture=MSIL">
-      <HintPath>..\packages\ExcelDataReader.3.4.2\lib\net45\ExcelDataReader.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="ExcelDataReader, Version=3.6.0.0, Culture=neutral, PublicKeyToken=93517dbe6a4012fa, processorArchitecture=MSIL">
+      <HintPath>..\packages\ExcelDataReader.3.6.0\lib\net45\ExcelDataReader.dll</HintPath>
     </Reference>
-    <Reference Include="ExcelDataReader.DataSet, Version=3.4.2.0, Culture=neutral, PublicKeyToken=93517dbe6a4012fa, processorArchitecture=MSIL">
-      <HintPath>..\packages\ExcelDataReader.DataSet.3.4.2\lib\net35\ExcelDataReader.DataSet.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="ExcelDataReader.DataSet, Version=3.6.0.0, Culture=neutral, PublicKeyToken=93517dbe6a4012fa, processorArchitecture=MSIL">
+      <HintPath>..\packages\ExcelDataReader.DataSet.3.6.0\lib\net35\ExcelDataReader.DataSet.dll</HintPath>
     </Reference>
-    <Reference Include="FastMember.Signed, Version=1.0.0.9, Culture=neutral, PublicKeyToken=9e8f22703bef9a29, processorArchitecture=MSIL">
-      <HintPath>..\packages\FastMember.Signed.1.1.0\lib\net40\FastMember.Signed.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="ExcelNumberFormat, Version=1.1.0.0, Culture=neutral, PublicKeyToken=23c6f5d73be07eca, processorArchitecture=MSIL">
+      <HintPath>..\packages\ExcelNumberFormat.1.1.0\lib\net20\ExcelNumberFormat.dll</HintPath>
+    </Reference>
+    <Reference Include="FastMember.Signed, Version=1.5.0.0, Culture=neutral, PublicKeyToken=9e8f22703bef9a29, processorArchitecture=MSIL">
+      <HintPath>..\packages\FastMember.Signed.1.5.0\lib\net461\FastMember.Signed.dll</HintPath>
     </Reference>
     <Reference Include="IdentityModel, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\IdentityModel.1.12.0\lib\net45\IdentityModel.dll</HintPath>
@@ -112,82 +107,115 @@
       <HintPath>..\packages\LowercaseDashedRoute.1.0.14\lib\LowercaseDashedRouting.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=6.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.6.0.0\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="Microsoft.IdentityModel.Logging, Version=1.0.0.127, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.IdentityModel.Logging.1.0.0\lib\net451\Microsoft.IdentityModel.Logging.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Microsoft.IdentityModel.Abstractions, Version=6.23.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IdentityModel.Abstractions.6.23.0\lib\net472\Microsoft.IdentityModel.Abstractions.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Owin, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Owin.3.0.1\lib\net45\Microsoft.Owin.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Microsoft.IdentityModel.JsonWebTokens, Version=6.23.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IdentityModel.JsonWebTokens.6.23.0\lib\net472\Microsoft.IdentityModel.JsonWebTokens.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Owin.Host.SystemWeb, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.3.0.1\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Microsoft.IdentityModel.Logging, Version=6.23.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IdentityModel.Logging.6.23.0\lib\net472\Microsoft.IdentityModel.Logging.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Owin.Security, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Owin.Security.3.0.1\lib\net45\Microsoft.Owin.Security.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Microsoft.IdentityModel.Tokens, Version=6.23.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IdentityModel.Tokens.6.23.0\lib\net472\Microsoft.IdentityModel.Tokens.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Owin.Security.Cookies, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Owin.Security.Cookies.3.0.1\lib\net45\Microsoft.Owin.Security.Cookies.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Microsoft.Owin, Version=4.2.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.4.2.2\lib\net45\Microsoft.Owin.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Owin.Security.Jwt, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Owin.Security.Jwt.3.0.1\lib\net45\Microsoft.Owin.Security.Jwt.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Microsoft.Owin.Host.SystemWeb, Version=4.2.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.4.2.2\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Owin.Security.OAuth, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Owin.Security.OAuth.3.0.1\lib\net45\Microsoft.Owin.Security.OAuth.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Microsoft.Owin.Security, Version=4.2.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.4.2.2\lib\net45\Microsoft.Owin.Security.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="Microsoft.Owin.Security.Cookies, Version=4.2.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.Cookies.4.2.2\lib\net45\Microsoft.Owin.Security.Cookies.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Jwt, Version=4.2.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.Jwt.4.2.2\lib\net45\Microsoft.Owin.Security.Jwt.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.OAuth, Version=4.2.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.OAuth.4.2.2\lib\net45\Microsoft.Owin.Security.OAuth.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.2.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.WindowsAzure.Configuration, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.WindowsAzure.ConfigurationManager.3.2.3\lib\net40\Microsoft.WindowsAzure.Configuration.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.8.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="MvcNavigationHelpers, Version=0.0.0.5, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MvcNavigationHelpers.0.0.0.5\lib\net45\MvcNavigationHelpers.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
       <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Diagnostics.DiagnosticSource, Version=6.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Diagnostics.DiagnosticSource.6.0.0\lib\net461\System.Diagnostics.DiagnosticSource.dll</HintPath>
+    </Reference>
     <Reference Include="System.IdentityModel" />
-    <Reference Include="System.IdentityModel.Tokens.Jwt, Version=4.0.30826.1200, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.IdentityModel.Tokens.Jwt.4.0.3.308261200\lib\net45\System.IdentityModel.Tokens.Jwt.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="System.IdentityModel.Tokens.Jwt, Version=6.23.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IdentityModel.Tokens.Jwt.6.23.0\lib\net472\System.IdentityModel.Tokens.Jwt.dll</HintPath>
     </Reference>
     <Reference Include="System.IO" />
     <Reference Include="System.IO.Compression" />
+    <Reference Include="System.Memory, Version=4.0.1.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Memory.4.5.5\lib\net461\System.Memory.dll</HintPath>
+    </Reference>
     <Reference Include="System.Net.Http" />
-    <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.9.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.9\lib\net45\System.Net.Http.Formatting.dll</HintPath>
     </Reference>
     <Reference Include="System.Net.Http.WebRequest" />
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.6.0.0\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Text.Encodings.Web, Version=6.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Text.Encodings.Web.6.0.0\lib\net461\System.Text.Encodings.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Text.Json, Version=6.0.0.5, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Text.Json.6.0.5\lib\net461\System.Text.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System.Threading" />
     <Reference Include="System.Threading.Tasks" />
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net47\System.ValueTuple.dll</HintPath>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
-      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.9\lib\net45\System.Web.Helpers.dll</HintPath>
     </Reference>
-    <Reference Include="System.Web.Http, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.3\lib\net45\System.Web.Http.dll</HintPath>
+    <Reference Include="System.Web.Http, Version=5.2.9.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.9\lib\net45\System.Web.Http.dll</HintPath>
     </Reference>
-    <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
-      <Private>True</Private>
+    <Reference Include="System.Web.Mvc, Version=5.2.9.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.9\lib\net45\System.Web.Mvc.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.Optimization, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
@@ -196,33 +224,30 @@
     <Reference Include="System.Web.Providers, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.Providers.Core.2.0.0\lib\net40\System.Web.Providers.dll</HintPath>
     </Reference>
-    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.9\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.9\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.9\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.9\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Xml.Linq" />
     <Reference Include="WebGrease, Version=1.6.5135.21930, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\NotificationApplication\Views\Home\_RecoveryOperation.cshtml" />
@@ -231,168 +256,55 @@
     <Content Include="Areas\NotificationApplication\Views\Home\_WasteRecovery.cshtml" />
     <Content Include="Areas\FinancialGuarantee\Views\web.config" />
     <Content Include="Areas\NotificationApplication\Views\Home\_OrganisationsInvolved.cshtml" />
-    <Content Include="Content\css\font-awesome.css" />
-    <Content Include="Content\css\font-awesome.min.css" />
-    <Content Include="Content\fonts\fontawesome-webfont.svg" />
-    <Content Include="Content\govuk\images\apple-touch-icon-120x120.png" />
-    <Content Include="Content\govuk\images\apple-touch-icon-152x152.png" />
-    <Content Include="Content\govuk\images\apple-touch-icon-60x60.png" />
-    <Content Include="Content\govuk\images\apple-touch-icon-76x76.png" />
-    <Content Include="Content\govuk\images\favicon.ico" />
-    <Content Include="Content\govuk\images\gov.uk_logotype_crown.png" />
-    <Content Include="Content\govuk\images\gov.uk_logotype_crown_invert.png" />
-    <Content Include="Content\govuk\images\gov.uk_logotype_crown_invert_trans.png" />
-    <Content Include="Content\govuk\images\opengraph-image.png" />
-    <Content Include="Content\govuk\stylesheets\external-links\external-link-24x24.png" />
-    <Content Include="Content\govuk\stylesheets\external-links\external-link-black-12x12.png" />
-    <Content Include="Content\govuk\stylesheets\external-links\external-link-black-24x24.png" />
-    <Content Include="Content\govuk\stylesheets\external-links\external-link.png" />
-    <Content Include="Content\govuk\stylesheets\fonts-ie8.css" />
-    <Content Include="Content\govuk\stylesheets\fonts.css" />
-    <Content Include="Content\govuk\stylesheets\govuk-template-ie6.css" />
-    <Content Include="Content\govuk\stylesheets\govuk-template-ie7.css" />
-    <Content Include="Content\govuk\stylesheets\govuk-template-ie8.css" />
-    <Content Include="Content\govuk\stylesheets\govuk-template-print.css" />
-    <Content Include="Content\govuk\stylesheets\govuk-template.css" />
-    <Content Include="Content\govuk\stylesheets\images\close.png" />
-    <Content Include="Content\govuk\stylesheets\images\govuk-crest-2x.png" />
-    <Content Include="Content\govuk\stylesheets\images\govuk-crest-ie.png" />
-    <Content Include="Content\govuk\stylesheets\images\govuk-crest.png" />
-    <Content Include="Content\govuk\stylesheets\images\open-government-licence.png" />
-    <Content Include="Content\govuk\stylesheets\images\open-government-licence_2x.png" />
-    <Content Include="Content\govuk_toolkit\images\accordion-arrow-2x.png" />
-    <Content Include="Content\govuk_toolkit\images\accordion-arrow.png" />
-    <Content Include="Content\govuk_toolkit\images\arrow-sprite.png" />
-    <Content Include="Content\govuk_toolkit\images\crests\bis_crest_13px.png" />
-    <Content Include="Content\govuk_toolkit\images\crests\bis_crest_13px_x2.png" />
-    <Content Include="Content\govuk_toolkit\images\crests\bis_crest_18px.png" />
-    <Content Include="Content\govuk_toolkit\images\crests\bis_crest_18px_x2.png" />
-    <Content Include="Content\govuk_toolkit\images\crests\bis_crest_27px.png" />
-    <Content Include="Content\govuk_toolkit\images\crests\bis_crest_27px_x2.png" />
-    <Content Include="Content\govuk_toolkit\images\crests\coastguard_13px.png" />
-    <Content Include="Content\govuk_toolkit\images\crests\coastguard_13px_x2.png" />
-    <Content Include="Content\govuk_toolkit\images\crests\coastguard_18px.png" />
-    <Content Include="Content\govuk_toolkit\images\crests\coastguard_18px_x2.png" />
-    <Content Include="Content\govuk_toolkit\images\crests\coastguard_27px.png" />
-    <Content Include="Content\govuk_toolkit\images\crests\coastguard_27px_x2.png" />
-    <Content Include="Content\govuk_toolkit\images\crests\dit_crest_13px.png" />
-    <Content Include="Content\govuk_toolkit\images\crests\dit_crest_13px_x2.png" />
-    <Content Include="Content\govuk_toolkit\images\crests\dit_crest_18px.png" />
-    <Content Include="Content\govuk_toolkit\images\crests\dit_crest_18px_x2.png" />
-    <Content Include="Content\govuk_toolkit\images\crests\dit_crest_27px.png" />
-    <Content Include="Content\govuk_toolkit\images\crests\dit_crest_27px_x2.png" />
-    <Content Include="Content\govuk_toolkit\images\crests\hmrc_crest_13px.png" />
-    <Content Include="Content\govuk_toolkit\images\crests\hmrc_crest_13px_x2.png" />
-    <Content Include="Content\govuk_toolkit\images\crests\hmrc_crest_18px.png" />
-    <Content Include="Content\govuk_toolkit\images\crests\hmrc_crest_18px_x2.png" />
-    <Content Include="Content\govuk_toolkit\images\crests\hmrc_crest_27px.png" />
-    <Content Include="Content\govuk_toolkit\images\crests\hmrc_crest_27px_x2.png" />
-    <Content Include="Content\govuk_toolkit\images\crests\ho_crest_13px.png" />
-    <Content Include="Content\govuk_toolkit\images\crests\ho_crest_13px_x2.png" />
-    <Content Include="Content\govuk_toolkit\images\crests\ho_crest_18px.png" />
-    <Content Include="Content\govuk_toolkit\images\crests\ho_crest_18px_x2.png" />
-    <Content Include="Content\govuk_toolkit\images\crests\ho_crest_27px.png" />
-    <Content Include="Content\govuk_toolkit\images\crests\ho_crest_27px_x2.png" />
-    <Content Include="Content\govuk_toolkit\images\crests\mod_crest_13px.png" />
-    <Content Include="Content\govuk_toolkit\images\crests\mod_crest_13px_x2.png" />
-    <Content Include="Content\govuk_toolkit\images\crests\mod_crest_18px.png" />
-    <Content Include="Content\govuk_toolkit\images\crests\mod_crest_18px_x2.png" />
-    <Content Include="Content\govuk_toolkit\images\crests\mod_crest_27px.png" />
-    <Content Include="Content\govuk_toolkit\images\crests\mod_crest_27px_x2.png" />
-    <Content Include="Content\govuk_toolkit\images\crests\org_crest_13px.png" />
-    <Content Include="Content\govuk_toolkit\images\crests\org_crest_13px_x2.png" />
-    <Content Include="Content\govuk_toolkit\images\crests\org_crest_18px.png" />
-    <Content Include="Content\govuk_toolkit\images\crests\org_crest_18px_x2.png" />
-    <Content Include="Content\govuk_toolkit\images\crests\org_crest_27px.png" />
-    <Content Include="Content\govuk_toolkit\images\crests\org_crest_27px_x2.png" />
-    <Content Include="Content\govuk_toolkit\images\crests\portcullis_13px.png" />
-    <Content Include="Content\govuk_toolkit\images\crests\portcullis_13px_x2.png" />
-    <Content Include="Content\govuk_toolkit\images\crests\portcullis_18px.png" />
-    <Content Include="Content\govuk_toolkit\images\crests\portcullis_18px_x2.png" />
-    <Content Include="Content\govuk_toolkit\images\crests\portcullis_27px.png" />
-    <Content Include="Content\govuk_toolkit\images\crests\portcullis_27px_x2.png" />
-    <Content Include="Content\govuk_toolkit\images\crests\so_crest_13px.png" />
-    <Content Include="Content\govuk_toolkit\images\crests\so_crest_13px_x2.png" />
-    <Content Include="Content\govuk_toolkit\images\crests\so_crest_18px.png" />
-    <Content Include="Content\govuk_toolkit\images\crests\so_crest_18px_x2.png" />
-    <Content Include="Content\govuk_toolkit\images\crests\so_crest_27px.png" />
-    <Content Include="Content\govuk_toolkit\images\crests\so_crest_27px_x2.png" />
-    <Content Include="Content\govuk_toolkit\images\crests\ukaea_crest_13px.png" />
-    <Content Include="Content\govuk_toolkit\images\crests\ukaea_crest_13px_x2.png" />
-    <Content Include="Content\govuk_toolkit\images\crests\ukaea_crest_18px.png" />
-    <Content Include="Content\govuk_toolkit\images\crests\ukaea_crest_18px_x2.png" />
-    <Content Include="Content\govuk_toolkit\images\crests\ukaea_crest_27px.png" />
-    <Content Include="Content\govuk_toolkit\images\crests\ukaea_crest_27px_x2.png" />
-    <Content Include="Content\govuk_toolkit\images\crests\ukho_13px.png" />
-    <Content Include="Content\govuk_toolkit\images\crests\ukho_13px_x2.png" />
-    <Content Include="Content\govuk_toolkit\images\crests\ukho_18px.png" />
-    <Content Include="Content\govuk_toolkit\images\crests\ukho_18px_x2.png" />
-    <Content Include="Content\govuk_toolkit\images\crests\ukho_27px.png" />
-    <Content Include="Content\govuk_toolkit\images\crests\ukho_27px_x2.png" />
-    <Content Include="Content\govuk_toolkit\images\crests\wales_crest_13px.png" />
-    <Content Include="Content\govuk_toolkit\images\crests\wales_crest_13px_x2.png" />
-    <Content Include="Content\govuk_toolkit\images\crests\wales_crest_18px.png" />
-    <Content Include="Content\govuk_toolkit\images\crests\wales_crest_18px_x2.png" />
-    <Content Include="Content\govuk_toolkit\images\crests\wales_crest_27px.png" />
-    <Content Include="Content\govuk_toolkit\images\crests\wales_crest_27px_x2.png" />
-    <Content Include="Content\govuk_toolkit\images\icon-arrow-left.png" />
-    <Content Include="Content\govuk_toolkit\images\icon-calendar-2x.png" />
-    <Content Include="Content\govuk_toolkit\images\icon-calendar.png" />
-    <Content Include="Content\govuk_toolkit\images\icon-file-download-2x.png" />
-    <Content Include="Content\govuk_toolkit\images\icon-file-download.png" />
-    <Content Include="Content\govuk_toolkit\images\icon-important-2x.png" />
-    <Content Include="Content\govuk_toolkit\images\icon-important.png" />
-    <Content Include="Content\govuk_toolkit\images\icon-information-2x.png" />
-    <Content Include="Content\govuk_toolkit\images\icon-information.png" />
-    <Content Include="Content\govuk_toolkit\images\icon-locator-2x.png" />
-    <Content Include="Content\govuk_toolkit\images\icon-locator.png" />
-    <Content Include="Content\govuk_toolkit\images\icon-pointer-2x.png" />
-    <Content Include="Content\govuk_toolkit\images\icon-pointer-black-2x.png" />
-    <Content Include="Content\govuk_toolkit\images\icon-pointer-black.png" />
-    <Content Include="Content\govuk_toolkit\images\icon-pointer-indexed.png" />
-    <Content Include="Content\govuk_toolkit\images\icon-pointer.png" />
-    <Content Include="Content\govuk_toolkit\images\icon-search-2x.png" />
-    <Content Include="Content\govuk_toolkit\images\icon-search.png" />
-    <Content Include="Content\govuk_toolkit\images\icon-steps\icon-step-1-2x.png" />
-    <Content Include="Content\govuk_toolkit\images\icon-steps\icon-step-1.png" />
-    <Content Include="Content\govuk_toolkit\images\icon-steps\icon-step-10-2x.png" />
-    <Content Include="Content\govuk_toolkit\images\icon-steps\icon-step-10.png" />
-    <Content Include="Content\govuk_toolkit\images\icon-steps\icon-step-11-2x.png" />
-    <Content Include="Content\govuk_toolkit\images\icon-steps\icon-step-11.png" />
-    <Content Include="Content\govuk_toolkit\images\icon-steps\icon-step-12-2x.png" />
-    <Content Include="Content\govuk_toolkit\images\icon-steps\icon-step-12.png" />
-    <Content Include="Content\govuk_toolkit\images\icon-steps\icon-step-13-2x.png" />
-    <Content Include="Content\govuk_toolkit\images\icon-steps\icon-step-13.png" />
-    <Content Include="Content\govuk_toolkit\images\icon-steps\icon-step-14-2x.png" />
-    <Content Include="Content\govuk_toolkit\images\icon-steps\icon-step-14.png" />
-    <Content Include="Content\govuk_toolkit\images\icon-steps\icon-step-2-2x.png" />
-    <Content Include="Content\govuk_toolkit\images\icon-steps\icon-step-2.png" />
-    <Content Include="Content\govuk_toolkit\images\icon-steps\icon-step-3-2x.png" />
-    <Content Include="Content\govuk_toolkit\images\icon-steps\icon-step-3.png" />
-    <Content Include="Content\govuk_toolkit\images\icon-steps\icon-step-4-2x.png" />
-    <Content Include="Content\govuk_toolkit\images\icon-steps\icon-step-4.png" />
-    <Content Include="Content\govuk_toolkit\images\icon-steps\icon-step-5-2x.png" />
-    <Content Include="Content\govuk_toolkit\images\icon-steps\icon-step-5.png" />
-    <Content Include="Content\govuk_toolkit\images\icon-steps\icon-step-6-2x.png" />
-    <Content Include="Content\govuk_toolkit\images\icon-steps\icon-step-6.png" />
-    <Content Include="Content\govuk_toolkit\images\icon-steps\icon-step-7-2x.png" />
-    <Content Include="Content\govuk_toolkit\images\icon-steps\icon-step-7.png" />
-    <Content Include="Content\govuk_toolkit\images\icon-steps\icon-step-8-2x.png" />
-    <Content Include="Content\govuk_toolkit\images\icon-steps\icon-step-8.png" />
-    <Content Include="Content\govuk_toolkit\images\icon-steps\icon-step-9-2x.png" />
-    <Content Include="Content\govuk_toolkit\images\icon-steps\icon-step-9.png" />
-    <Content Include="Content\govuk_toolkit\images\player-icon-forward.png" />
-    <Content Include="Content\govuk_toolkit\images\player-icon-pause.png" />
-    <Content Include="Content\govuk_toolkit\images\player-icon-play.png" />
-    <Content Include="Content\govuk_toolkit\images\player-icon-rewind.png" />
-    <Content Include="Content\govuk_toolkit\images\player-icon-volume.png" />
-    <Content Include="Content\govuk_toolkit\images\separator-2x.png" />
-    <Content Include="Content\govuk_toolkit\images\separator.png" />
+    <Content Include="Content\govuk-frontend\govuk\all.js" />
+    <Content Include="Content\govuk-frontend\govuk\assets\images\favicon.ico" />
+    <Content Include="Content\govuk-frontend\govuk\assets\images\govuk-apple-touch-icon-152x152.png" />
+    <Content Include="Content\govuk-frontend\govuk\assets\images\govuk-apple-touch-icon-167x167.png" />
+    <Content Include="Content\govuk-frontend\govuk\assets\images\govuk-apple-touch-icon-180x180.png" />
+    <Content Include="Content\govuk-frontend\govuk\assets\images\govuk-apple-touch-icon.png" />
+    <Content Include="Content\govuk-frontend\govuk\assets\images\govuk-crest-2x.png" />
+    <Content Include="Content\govuk-frontend\govuk\assets\images\govuk-crest.png" />
+    <Content Include="Content\govuk-frontend\govuk\assets\images\govuk-logotype-crown.png" />
+    <Content Include="Content\govuk-frontend\govuk\assets\images\govuk-mask-icon.svg" />
+    <Content Include="Content\govuk-frontend\govuk\assets\images\govuk-opengraph-image.png" />
+    <Content Include="Content\govuk-frontend\govuk\common.js" />
+    <Content Include="Content\govuk-frontend\govuk\components\accordion\accordion.js" />
+    <Content Include="Content\govuk-frontend\govuk\components\button\button.js" />
+    <Content Include="Content\govuk-frontend\govuk\components\character-count\character-count.js" />
+    <Content Include="Content\govuk-frontend\govuk\components\checkboxes\checkboxes.js" />
+    <Content Include="Content\govuk-frontend\govuk\components\details\details.js" />
+    <Content Include="Content\govuk-frontend\govuk\components\error-summary\error-summary.js" />
+    <Content Include="Content\govuk-frontend\govuk\components\header\header.js" />
+    <Content Include="Content\govuk-frontend\govuk\components\notification-banner\notification-banner.js" />
+    <Content Include="Content\govuk-frontend\govuk\components\radios\radios.js" />
+    <Content Include="Content\govuk-frontend\govuk\components\skip-link\skip-link.js" />
+    <Content Include="Content\govuk-frontend\govuk\components\tabs\tabs.js" />
+    <Content Include="Content\govuk-frontend\govuk\vendor\polyfills\Document.js" />
+    <Content Include="Content\govuk-frontend\govuk\vendor\polyfills\DOMTokenList.js" />
+    <Content Include="Content\govuk-frontend\govuk\vendor\polyfills\Element.js" />
+    <Content Include="Content\govuk-frontend\govuk\vendor\polyfills\Element\prototype\classList.js" />
+    <Content Include="Content\govuk-frontend\govuk\vendor\polyfills\Element\prototype\closest.js" />
+    <Content Include="Content\govuk-frontend\govuk\vendor\polyfills\Element\prototype\matches.js" />
+    <Content Include="Content\govuk-frontend\govuk\vendor\polyfills\Element\prototype\nextElementSibling.js" />
+    <Content Include="Content\govuk-frontend\govuk\vendor\polyfills\Element\prototype\previousElementSibling.js" />
+    <Content Include="Content\govuk-frontend\govuk\vendor\polyfills\Event.js" />
+    <Content Include="Content\govuk-frontend\govuk\vendor\polyfills\Function\prototype\bind.js" />
+    <Content Include="Content\govuk-frontend\govuk\vendor\polyfills\Object\defineProperty.js" />
+    <Content Include="Content\govuk-frontend\govuk\vendor\polyfills\Window.js" />
     <Content Include="Content\images\comments-icon.png" />
     <Content Include="Content\images\confirmation-icon.png" />
     <Content Include="Content\images\error-icon.png" />
+    <Content Include="Content\images\external-links\external-link-24x24.png" />
+    <Content Include="Content\images\external-links\external-link-black-12x12.png" />
+    <Content Include="Content\images\external-links\external-link-black-24x24.png" />
+    <Content Include="Content\images\external-links\external-link.png" />
     <Content Include="Content\images\file-icon.png" />
+    <Content Include="Content\images\govuk-crest.png" />
+    <Content Include="Content\images\open-government-licence.png" />
+    <Content Include="Content\images\open-government-licence_2x.png" />
+    <Content Include="Content\iws-page.css" />
     <Content Include="Content\iws\_entry-or-exit-point.scss" />
+    <Content Include="Content\iws\_grid_layout.scss" />
     <Content Include="Content\iws\_notification-switcher.scss" />
     <Content Include="Areas\ImportNotification\Views\Facility\Add.cshtml" />
     <Content Include="Areas\ImportNotification\Views\Facility\Edit.cshtml" />
@@ -488,42 +400,415 @@
     <Content Include="Areas\AdminExportAssessment\Views\Producer\Add.cshtml" />
     <Content Include="Content\iws\_panels.scss" />
     <Content Include="Content\nta-extended.css" />
+    <Content Include="Content\select2\down_arrow.png" />
     <Content Include="Content\select2\select2-spinner.gif" />
     <Content Include="Content\select2\select2.css" />
     <Content Include="Content\select2\select2.png" />
     <Content Include="Content\select2\select2x2.png" />
+    <Content Include="Content\themes\base\accordion.css" />
+    <Content Include="Content\themes\base\all.css" />
+    <Content Include="Content\themes\base\autocomplete.css" />
+    <Content Include="Content\themes\base\base.css" />
+    <Content Include="Content\themes\base\button.css" />
+    <Content Include="Content\themes\base\core.css" />
+    <Content Include="Content\themes\base\datepicker.css" />
+    <Content Include="Content\themes\base\dialog.css" />
+    <Content Include="Content\themes\base\draggable.css" />
+    <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Content\themes\base\images\ui-icons_222222_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_444444_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_454545_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_555555_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_777620_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_777777_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_888888_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_cc0000_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="Content\themes\base\jquery-ui.css" />
+    <Content Include="Content\themes\base\jquery-ui.min.css" />
+    <Content Include="Content\themes\base\menu.css" />
+    <Content Include="Content\themes\base\progressbar.css" />
+    <Content Include="Content\themes\base\resizable.css" />
+    <Content Include="Content\themes\base\selectable.css" />
+    <Content Include="Content\themes\base\selectmenu.css" />
+    <Content Include="Content\themes\base\site.css" />
+    <Content Include="Content\themes\base\slider.css" />
+    <Content Include="Content\themes\base\sortable.css" />
+    <Content Include="Content\themes\base\spinner.css" />
+    <Content Include="Content\themes\base\tabs.css" />
+    <Content Include="Content\themes\base\theme.css" />
+    <Content Include="Content\themes\base\tooltip.css" />
+    <Content Include="css\font-awesome.css" />
+    <Content Include="css\font-awesome.min.css" />
+    <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="Global.asax" />
     <Content Include="packages.config">
       <SubType>Designer</SubType>
     </Content>
     <Content Include="Scripts\datable.min.js" />
+    <Content Include="Scripts\date-input\dateinput.js" />
     <Content Include="Scripts\decision-dropdown.js" />
     <Content Include="Scripts\customs-office-required-radio-buttons.js" />
-    <Content Include="Scripts\govuk_elements\application.js" />
-    <Content Include="Scripts\govuk_toolkit\govuk\analytics\analytics.js" />
-    <Content Include="Scripts\govuk_toolkit\govuk\analytics\download-link-tracker.js" />
-    <Content Include="Scripts\govuk_toolkit\govuk\analytics\error-tracking.js" />
-    <Content Include="Scripts\govuk_toolkit\govuk\analytics\external-link-tracker.js" />
-    <Content Include="Scripts\govuk_toolkit\govuk\analytics\google-analytics-universal-tracker.js" />
-    <Content Include="Scripts\govuk_toolkit\govuk\analytics\govuk-tracker.js" />
-    <Content Include="Scripts\govuk_toolkit\govuk\analytics\mailto-link-tracker.js" />
-    <Content Include="Scripts\govuk_toolkit\govuk\analytics\print-intent.js" />
-    <Content Include="Scripts\govuk_toolkit\govuk\details.polyfill.js" />
-    <Content Include="Scripts\govuk_toolkit\govuk\modules.js" />
-    <Content Include="Scripts\govuk_toolkit\govuk\modules\auto-track-event.js" />
-    <Content Include="Scripts\govuk_toolkit\govuk\primary-links.js" />
-    <Content Include="Scripts\govuk_toolkit\govuk\selection-buttons.js" />
-    <Content Include="Scripts\govuk_toolkit\govuk\shim-links-with-button-role.js" />
-    <Content Include="Scripts\govuk_toolkit\govuk\show-hide-content.js" />
-    <Content Include="Scripts\govuk_toolkit\govuk\stick-at-top-when-scrolling.js" />
-    <Content Include="Scripts\govuk_toolkit\govuk\stop-scrolling-at-footer.js" />
-    <Content Include="Scripts\govuk_toolkit\govuk_toolkit.js" />
-    <Content Include="Scripts\govuk_toolkit\stageprompt.js" />
-    <Content Include="Scripts\govuk_toolkit\vendor\jquery\jquery.player.min.js" />
-    <Content Include="Scripts\govuk_toolkit\vendor\polyfills\bind.js" />
+    <Content Include="Scripts\govuk-frontend\govuk-frontend-4.0.1.min.js" />
+    <Content Include="Scripts\govuk\govuk-template.js" />
     <Content Include="Scripts\helpers.js" />
     <Content Include="Scripts\internal-facility-table.js" />
     <Content Include="Scripts\iws-tracking.js" />
+    <Content Include="fonts\FontAwesome.otf" />
+    <Content Include="fonts\fontawesome-webfont.woff2" />
+    <Content Include="fonts\fontawesome-webfont.woff" />
+    <Content Include="fonts\fontawesome-webfont.ttf" />
+    <Content Include="fonts\fontawesome-webfont.eot" />
+    <Content Include="Content\govuk-frontend\govuk-esm\all.mjs" />
+    <Content Include="Content\govuk-frontend\govuk-esm\common.mjs" />
+    <Content Include="Content\govuk-frontend\govuk-esm\components\accordion\accordion.mjs" />
+    <Content Include="Content\govuk-frontend\govuk-esm\components\button\button.mjs" />
+    <Content Include="Content\govuk-frontend\govuk-esm\components\character-count\character-count.mjs" />
+    <Content Include="Content\govuk-frontend\govuk-esm\components\checkboxes\checkboxes.mjs" />
+    <Content Include="Content\govuk-frontend\govuk-esm\components\details\details.mjs" />
+    <Content Include="Content\govuk-frontend\govuk-esm\components\error-summary\error-summary.mjs" />
+    <Content Include="Content\govuk-frontend\govuk-esm\components\header\header.mjs" />
+    <Content Include="Content\govuk-frontend\govuk-esm\components\notification-banner\notification-banner.mjs" />
+    <Content Include="Content\govuk-frontend\govuk-esm\components\radios\radios.mjs" />
+    <Content Include="Content\govuk-frontend\govuk-esm\components\skip-link\skip-link.mjs" />
+    <Content Include="Content\govuk-frontend\govuk-esm\components\tabs\tabs.mjs" />
+    <Content Include="Content\govuk-frontend\govuk-esm\vendor\polyfills\Document.mjs" />
+    <Content Include="Content\govuk-frontend\govuk-esm\vendor\polyfills\DOMTokenList.mjs" />
+    <Content Include="Content\govuk-frontend\govuk-esm\vendor\polyfills\Element.mjs" />
+    <Content Include="Content\govuk-frontend\govuk-esm\vendor\polyfills\Element\prototype\classList.mjs" />
+    <Content Include="Content\govuk-frontend\govuk-esm\vendor\polyfills\Element\prototype\closest.mjs" />
+    <Content Include="Content\govuk-frontend\govuk-esm\vendor\polyfills\Element\prototype\matches.mjs" />
+    <Content Include="Content\govuk-frontend\govuk-esm\vendor\polyfills\Element\prototype\nextElementSibling.mjs" />
+    <Content Include="Content\govuk-frontend\govuk-esm\vendor\polyfills\Element\prototype\previousElementSibling.mjs" />
+    <Content Include="Content\govuk-frontend\govuk-esm\vendor\polyfills\Event.mjs" />
+    <Content Include="Content\govuk-frontend\govuk-esm\vendor\polyfills\Function\prototype\bind.mjs" />
+    <Content Include="Content\govuk-frontend\govuk-esm\vendor\polyfills\Object\defineProperty.mjs" />
+    <Content Include="Content\govuk-frontend\govuk-esm\vendor\polyfills\Window.mjs" />
+    <Content Include="Content\govuk-frontend\govuk-prototype-kit.config.json" />
+    <Content Include="Content\govuk-frontend\govuk\all-ie8.scss" />
+    <Content Include="Content\govuk-frontend\govuk\all.scss" />
+    <Content Include="Content\govuk-frontend\govuk\assets\fonts\bold-affa96571d-v2.woff" />
+    <Content Include="Content\govuk-frontend\govuk\assets\fonts\bold-b542beb274-v2.woff2" />
+    <Content Include="Content\govuk-frontend\govuk\assets\fonts\light-94a07e06a1-v2.woff2" />
+    <Content Include="Content\govuk-frontend\govuk\assets\fonts\light-f591b13f7d-v2.woff" />
+    <Content Include="Content\govuk-frontend\govuk\components\accordion\fixtures.json" />
+    <Content Include="Content\govuk-frontend\govuk\components\accordion\macro-options.json" />
+    <Content Include="Content\govuk-frontend\govuk\components\accordion\macro.njk" />
+    <Content Include="Content\govuk-frontend\govuk\components\accordion\README.md" />
+    <Content Include="Content\govuk-frontend\govuk\components\accordion\template.njk" />
+    <Content Include="Content\govuk-frontend\govuk\components\accordion\_accordion.scss" />
+    <Content Include="Content\govuk-frontend\govuk\components\accordion\_index.scss" />
+    <Content Include="Content\govuk-frontend\govuk\components\back-link\fixtures.json" />
+    <Content Include="Content\govuk-frontend\govuk\components\back-link\macro-options.json" />
+    <Content Include="Content\govuk-frontend\govuk\components\back-link\macro.njk" />
+    <Content Include="Content\govuk-frontend\govuk\components\back-link\README.md" />
+    <Content Include="Content\govuk-frontend\govuk\components\back-link\template.njk" />
+    <Content Include="Content\govuk-frontend\govuk\components\back-link\_back-link.scss" />
+    <Content Include="Content\govuk-frontend\govuk\components\back-link\_index.scss" />
+    <Content Include="Content\govuk-frontend\govuk\components\breadcrumbs\fixtures.json" />
+    <Content Include="Content\govuk-frontend\govuk\components\breadcrumbs\macro-options.json" />
+    <Content Include="Content\govuk-frontend\govuk\components\breadcrumbs\macro.njk" />
+    <Content Include="Content\govuk-frontend\govuk\components\breadcrumbs\README.md" />
+    <Content Include="Content\govuk-frontend\govuk\components\breadcrumbs\template.njk" />
+    <Content Include="Content\govuk-frontend\govuk\components\breadcrumbs\_breadcrumbs.scss" />
+    <Content Include="Content\govuk-frontend\govuk\components\breadcrumbs\_index.scss" />
+    <Content Include="Content\govuk-frontend\govuk\components\button\fixtures.json" />
+    <Content Include="Content\govuk-frontend\govuk\components\button\macro-options.json" />
+    <Content Include="Content\govuk-frontend\govuk\components\button\macro.njk" />
+    <Content Include="Content\govuk-frontend\govuk\components\button\README.md" />
+    <Content Include="Content\govuk-frontend\govuk\components\button\template.njk" />
+    <Content Include="Content\govuk-frontend\govuk\components\button\_button.scss" />
+    <Content Include="Content\govuk-frontend\govuk\components\button\_index.scss" />
+    <Content Include="Content\govuk-frontend\govuk\components\character-count\fixtures.json" />
+    <Content Include="Content\govuk-frontend\govuk\components\character-count\macro-options.json" />
+    <Content Include="Content\govuk-frontend\govuk\components\character-count\macro.njk" />
+    <Content Include="Content\govuk-frontend\govuk\components\character-count\README.md" />
+    <Content Include="Content\govuk-frontend\govuk\components\character-count\template.njk" />
+    <Content Include="Content\govuk-frontend\govuk\components\character-count\_character-count.scss" />
+    <Content Include="Content\govuk-frontend\govuk\components\character-count\_index.scss" />
+    <Content Include="Content\govuk-frontend\govuk\components\checkboxes\fixtures.json" />
+    <Content Include="Content\govuk-frontend\govuk\components\checkboxes\macro-options.json" />
+    <Content Include="Content\govuk-frontend\govuk\components\checkboxes\macro.njk" />
+    <Content Include="Content\govuk-frontend\govuk\components\checkboxes\README.md" />
+    <Content Include="Content\govuk-frontend\govuk\components\checkboxes\template.njk" />
+    <Content Include="Content\govuk-frontend\govuk\components\checkboxes\_checkboxes.scss" />
+    <Content Include="Content\govuk-frontend\govuk\components\checkboxes\_index.scss" />
+    <Content Include="Content\govuk-frontend\govuk\components\cookie-banner\fixtures.json" />
+    <Content Include="Content\govuk-frontend\govuk\components\cookie-banner\macro-options.json" />
+    <Content Include="Content\govuk-frontend\govuk\components\cookie-banner\macro.njk" />
+    <Content Include="Content\govuk-frontend\govuk\components\cookie-banner\README.md" />
+    <Content Include="Content\govuk-frontend\govuk\components\cookie-banner\template.njk" />
+    <Content Include="Content\govuk-frontend\govuk\components\cookie-banner\_cookie-banner.scss" />
+    <Content Include="Content\govuk-frontend\govuk\components\cookie-banner\_index.scss" />
+    <Content Include="Content\govuk-frontend\govuk\components\date-input\fixtures.json" />
+    <Content Include="Content\govuk-frontend\govuk\components\date-input\macro-options.json" />
+    <Content Include="Content\govuk-frontend\govuk\components\date-input\macro.njk" />
+    <Content Include="Content\govuk-frontend\govuk\components\date-input\README.md" />
+    <Content Include="Content\govuk-frontend\govuk\components\date-input\template.njk" />
+    <Content Include="Content\govuk-frontend\govuk\components\date-input\_date-input.scss" />
+    <Content Include="Content\govuk-frontend\govuk\components\date-input\_index.scss" />
+    <Content Include="Content\govuk-frontend\govuk\components\details\fixtures.json" />
+    <Content Include="Content\govuk-frontend\govuk\components\details\implementation.md" />
+    <Content Include="Content\govuk-frontend\govuk\components\details\macro-options.json" />
+    <Content Include="Content\govuk-frontend\govuk\components\details\macro.njk" />
+    <Content Include="Content\govuk-frontend\govuk\components\details\README.md" />
+    <Content Include="Content\govuk-frontend\govuk\components\details\template.njk" />
+    <Content Include="Content\govuk-frontend\govuk\components\details\_details.scss" />
+    <Content Include="Content\govuk-frontend\govuk\components\details\_index.scss" />
+    <Content Include="Content\govuk-frontend\govuk\components\error-message\fixtures.json" />
+    <Content Include="Content\govuk-frontend\govuk\components\error-message\macro-options.json" />
+    <Content Include="Content\govuk-frontend\govuk\components\error-message\macro.njk" />
+    <Content Include="Content\govuk-frontend\govuk\components\error-message\README.md" />
+    <Content Include="Content\govuk-frontend\govuk\components\error-message\template.njk" />
+    <Content Include="Content\govuk-frontend\govuk\components\error-message\_error-message.scss" />
+    <Content Include="Content\govuk-frontend\govuk\components\error-message\_index.scss" />
+    <Content Include="Content\govuk-frontend\govuk\components\error-summary\fixtures.json" />
+    <Content Include="Content\govuk-frontend\govuk\components\error-summary\macro-options.json" />
+    <Content Include="Content\govuk-frontend\govuk\components\error-summary\macro.njk" />
+    <Content Include="Content\govuk-frontend\govuk\components\error-summary\README.md" />
+    <Content Include="Content\govuk-frontend\govuk\components\error-summary\template.njk" />
+    <Content Include="Content\govuk-frontend\govuk\components\error-summary\_error-summary.scss" />
+    <Content Include="Content\govuk-frontend\govuk\components\error-summary\_index.scss" />
+    <Content Include="Content\govuk-frontend\govuk\components\fieldset\fixtures.json" />
+    <Content Include="Content\govuk-frontend\govuk\components\fieldset\macro-options.json" />
+    <Content Include="Content\govuk-frontend\govuk\components\fieldset\macro.njk" />
+    <Content Include="Content\govuk-frontend\govuk\components\fieldset\README.md" />
+    <Content Include="Content\govuk-frontend\govuk\components\fieldset\template.njk" />
+    <Content Include="Content\govuk-frontend\govuk\components\fieldset\_fieldset.scss" />
+    <Content Include="Content\govuk-frontend\govuk\components\fieldset\_index.scss" />
+    <Content Include="Content\govuk-frontend\govuk\components\file-upload\fixtures.json" />
+    <Content Include="Content\govuk-frontend\govuk\components\file-upload\macro-options.json" />
+    <Content Include="Content\govuk-frontend\govuk\components\file-upload\macro.njk" />
+    <Content Include="Content\govuk-frontend\govuk\components\file-upload\README.md" />
+    <Content Include="Content\govuk-frontend\govuk\components\file-upload\template.njk" />
+    <Content Include="Content\govuk-frontend\govuk\components\file-upload\_file-upload.scss" />
+    <Content Include="Content\govuk-frontend\govuk\components\file-upload\_index.scss" />
+    <Content Include="Content\govuk-frontend\govuk\components\footer\fixtures.json" />
+    <Content Include="Content\govuk-frontend\govuk\components\footer\macro-options.json" />
+    <Content Include="Content\govuk-frontend\govuk\components\footer\macro.njk" />
+    <Content Include="Content\govuk-frontend\govuk\components\footer\README.md" />
+    <Content Include="Content\govuk-frontend\govuk\components\footer\template.njk" />
+    <Content Include="Content\govuk-frontend\govuk\components\footer\_footer.scss" />
+    <Content Include="Content\govuk-frontend\govuk\components\footer\_index.scss" />
+    <Content Include="Content\govuk-frontend\govuk\components\header\fixtures.json" />
+    <Content Include="Content\govuk-frontend\govuk\components\header\macro-options.json" />
+    <Content Include="Content\govuk-frontend\govuk\components\header\macro.njk" />
+    <Content Include="Content\govuk-frontend\govuk\components\header\README.md" />
+    <Content Include="Content\govuk-frontend\govuk\components\header\template.njk" />
+    <Content Include="Content\govuk-frontend\govuk\components\header\_header.scss" />
+    <Content Include="Content\govuk-frontend\govuk\components\header\_index.scss" />
+    <Content Include="Content\govuk-frontend\govuk\components\hint\fixtures.json" />
+    <Content Include="Content\govuk-frontend\govuk\components\hint\macro-options.json" />
+    <Content Include="Content\govuk-frontend\govuk\components\hint\macro.njk" />
+    <Content Include="Content\govuk-frontend\govuk\components\hint\README.md" />
+    <Content Include="Content\govuk-frontend\govuk\components\hint\template.njk" />
+    <Content Include="Content\govuk-frontend\govuk\components\hint\_hint.scss" />
+    <Content Include="Content\govuk-frontend\govuk\components\hint\_index.scss" />
+    <Content Include="Content\govuk-frontend\govuk\components\input\fixtures.json" />
+    <Content Include="Content\govuk-frontend\govuk\components\input\macro-options.json" />
+    <Content Include="Content\govuk-frontend\govuk\components\input\macro.njk" />
+    <Content Include="Content\govuk-frontend\govuk\components\input\README.md" />
+    <Content Include="Content\govuk-frontend\govuk\components\input\template.njk" />
+    <Content Include="Content\govuk-frontend\govuk\components\input\_index.scss" />
+    <Content Include="Content\govuk-frontend\govuk\components\input\_input.scss" />
+    <Content Include="Content\govuk-frontend\govuk\components\inset-text\fixtures.json" />
+    <Content Include="Content\govuk-frontend\govuk\components\inset-text\macro-options.json" />
+    <Content Include="Content\govuk-frontend\govuk\components\inset-text\macro.njk" />
+    <Content Include="Content\govuk-frontend\govuk\components\inset-text\README.md" />
+    <Content Include="Content\govuk-frontend\govuk\components\inset-text\template.njk" />
+    <Content Include="Content\govuk-frontend\govuk\components\inset-text\_index.scss" />
+    <Content Include="Content\govuk-frontend\govuk\components\inset-text\_inset-text.scss" />
+    <Content Include="Content\govuk-frontend\govuk\components\label\fixtures.json" />
+    <Content Include="Content\govuk-frontend\govuk\components\label\macro-options.json" />
+    <Content Include="Content\govuk-frontend\govuk\components\label\macro.njk" />
+    <Content Include="Content\govuk-frontend\govuk\components\label\README.md" />
+    <Content Include="Content\govuk-frontend\govuk\components\label\template.njk" />
+    <Content Include="Content\govuk-frontend\govuk\components\label\_index.scss" />
+    <Content Include="Content\govuk-frontend\govuk\components\label\_label.scss" />
+    <Content Include="Content\govuk-frontend\govuk\components\notification-banner\fixtures.json" />
+    <Content Include="Content\govuk-frontend\govuk\components\notification-banner\macro-options.json" />
+    <Content Include="Content\govuk-frontend\govuk\components\notification-banner\macro.njk" />
+    <Content Include="Content\govuk-frontend\govuk\components\notification-banner\README.md" />
+    <Content Include="Content\govuk-frontend\govuk\components\notification-banner\template.njk" />
+    <Content Include="Content\govuk-frontend\govuk\components\notification-banner\_index.scss" />
+    <Content Include="Content\govuk-frontend\govuk\components\notification-banner\_notification-banner.scss" />
+    <Content Include="Content\govuk-frontend\govuk\components\pagination\fixtures.json" />
+    <Content Include="Content\govuk-frontend\govuk\components\pagination\macro-options.json" />
+    <Content Include="Content\govuk-frontend\govuk\components\pagination\macro.njk" />
+    <Content Include="Content\govuk-frontend\govuk\components\pagination\README.md" />
+    <Content Include="Content\govuk-frontend\govuk\components\pagination\template.njk" />
+    <Content Include="Content\govuk-frontend\govuk\components\pagination\_index.scss" />
+    <Content Include="Content\govuk-frontend\govuk\components\pagination\_pagination.scss" />
+    <Content Include="Content\govuk-frontend\govuk\components\panel\fixtures.json" />
+    <Content Include="Content\govuk-frontend\govuk\components\panel\macro-options.json" />
+    <Content Include="Content\govuk-frontend\govuk\components\panel\macro.njk" />
+    <Content Include="Content\govuk-frontend\govuk\components\panel\README.md" />
+    <Content Include="Content\govuk-frontend\govuk\components\panel\template.njk" />
+    <Content Include="Content\govuk-frontend\govuk\components\panel\_index.scss" />
+    <Content Include="Content\govuk-frontend\govuk\components\panel\_panel.scss" />
+    <Content Include="Content\govuk-frontend\govuk\components\phase-banner\fixtures.json" />
+    <Content Include="Content\govuk-frontend\govuk\components\phase-banner\macro-options.json" />
+    <Content Include="Content\govuk-frontend\govuk\components\phase-banner\macro.njk" />
+    <Content Include="Content\govuk-frontend\govuk\components\phase-banner\README.md" />
+    <Content Include="Content\govuk-frontend\govuk\components\phase-banner\template.njk" />
+    <Content Include="Content\govuk-frontend\govuk\components\phase-banner\_index.scss" />
+    <Content Include="Content\govuk-frontend\govuk\components\phase-banner\_phase-banner.scss" />
+    <Content Include="Content\govuk-frontend\govuk\components\radios\fixtures.json" />
+    <Content Include="Content\govuk-frontend\govuk\components\radios\macro-options.json" />
+    <Content Include="Content\govuk-frontend\govuk\components\radios\macro.njk" />
+    <Content Include="Content\govuk-frontend\govuk\components\radios\README.md" />
+    <Content Include="Content\govuk-frontend\govuk\components\radios\template.njk" />
+    <Content Include="Content\govuk-frontend\govuk\components\radios\_index.scss" />
+    <Content Include="Content\govuk-frontend\govuk\components\radios\_radios.scss" />
+    <Content Include="Content\govuk-frontend\govuk\components\select\fixtures.json" />
+    <Content Include="Content\govuk-frontend\govuk\components\select\macro-options.json" />
+    <Content Include="Content\govuk-frontend\govuk\components\select\macro.njk" />
+    <Content Include="Content\govuk-frontend\govuk\components\select\README.md" />
+    <Content Include="Content\govuk-frontend\govuk\components\select\template.njk" />
+    <Content Include="Content\govuk-frontend\govuk\components\select\_index.scss" />
+    <Content Include="Content\govuk-frontend\govuk\components\select\_select.scss" />
+    <Content Include="Content\govuk-frontend\govuk\components\skip-link\fixtures.json" />
+    <Content Include="Content\govuk-frontend\govuk\components\skip-link\macro-options.json" />
+    <Content Include="Content\govuk-frontend\govuk\components\skip-link\macro.njk" />
+    <Content Include="Content\govuk-frontend\govuk\components\skip-link\README.md" />
+    <Content Include="Content\govuk-frontend\govuk\components\skip-link\template.njk" />
+    <Content Include="Content\govuk-frontend\govuk\components\skip-link\_index.scss" />
+    <Content Include="Content\govuk-frontend\govuk\components\skip-link\_skip-link.scss" />
+    <Content Include="Content\govuk-frontend\govuk\components\summary-list\fixtures.json" />
+    <Content Include="Content\govuk-frontend\govuk\components\summary-list\macro-options.json" />
+    <Content Include="Content\govuk-frontend\govuk\components\summary-list\macro.njk" />
+    <Content Include="Content\govuk-frontend\govuk\components\summary-list\README.md" />
+    <Content Include="Content\govuk-frontend\govuk\components\summary-list\template.njk" />
+    <Content Include="Content\govuk-frontend\govuk\components\summary-list\_index.scss" />
+    <Content Include="Content\govuk-frontend\govuk\components\summary-list\_summary-list.scss" />
+    <Content Include="Content\govuk-frontend\govuk\components\table\fixtures.json" />
+    <Content Include="Content\govuk-frontend\govuk\components\table\macro-options.json" />
+    <Content Include="Content\govuk-frontend\govuk\components\table\macro.njk" />
+    <Content Include="Content\govuk-frontend\govuk\components\table\README.md" />
+    <Content Include="Content\govuk-frontend\govuk\components\table\template.njk" />
+    <Content Include="Content\govuk-frontend\govuk\components\table\_index.scss" />
+    <Content Include="Content\govuk-frontend\govuk\components\table\_table.scss" />
+    <Content Include="Content\govuk-frontend\govuk\components\tabs\fixtures.json" />
+    <Content Include="Content\govuk-frontend\govuk\components\tabs\macro-options.json" />
+    <Content Include="Content\govuk-frontend\govuk\components\tabs\macro.njk" />
+    <Content Include="Content\govuk-frontend\govuk\components\tabs\README.md" />
+    <Content Include="Content\govuk-frontend\govuk\components\tabs\template.njk" />
+    <Content Include="Content\govuk-frontend\govuk\components\tabs\_index.scss" />
+    <Content Include="Content\govuk-frontend\govuk\components\tabs\_tabs.scss" />
+    <Content Include="Content\govuk-frontend\govuk\components\tag\fixtures.json" />
+    <Content Include="Content\govuk-frontend\govuk\components\tag\macro-options.json" />
+    <Content Include="Content\govuk-frontend\govuk\components\tag\macro.njk" />
+    <Content Include="Content\govuk-frontend\govuk\components\tag\README.md" />
+    <Content Include="Content\govuk-frontend\govuk\components\tag\template.njk" />
+    <Content Include="Content\govuk-frontend\govuk\components\tag\_index.scss" />
+    <Content Include="Content\govuk-frontend\govuk\components\tag\_tag.scss" />
+    <Content Include="Content\govuk-frontend\govuk\components\textarea\fixtures.json" />
+    <Content Include="Content\govuk-frontend\govuk\components\textarea\macro-options.json" />
+    <Content Include="Content\govuk-frontend\govuk\components\textarea\macro.njk" />
+    <Content Include="Content\govuk-frontend\govuk\components\textarea\README.md" />
+    <Content Include="Content\govuk-frontend\govuk\components\textarea\template.njk" />
+    <Content Include="Content\govuk-frontend\govuk\components\textarea\_index.scss" />
+    <Content Include="Content\govuk-frontend\govuk\components\textarea\_textarea.scss" />
+    <Content Include="Content\govuk-frontend\govuk\components\warning-text\fixtures.json" />
+    <Content Include="Content\govuk-frontend\govuk\components\warning-text\macro-options.json" />
+    <Content Include="Content\govuk-frontend\govuk\components\warning-text\macro.njk" />
+    <Content Include="Content\govuk-frontend\govuk\components\warning-text\README.md" />
+    <Content Include="Content\govuk-frontend\govuk\components\warning-text\template.njk" />
+    <Content Include="Content\govuk-frontend\govuk\components\warning-text\_index.scss" />
+    <Content Include="Content\govuk-frontend\govuk\components\warning-text\_warning-text.scss" />
+    <Content Include="Content\govuk-frontend\govuk\components\_all.scss" />
+    <Content Include="Content\govuk-frontend\govuk\core\_all.scss" />
+    <Content Include="Content\govuk-frontend\govuk\core\_global-styles.scss" />
+    <Content Include="Content\govuk-frontend\govuk\core\_links.scss" />
+    <Content Include="Content\govuk-frontend\govuk\core\_lists.scss" />
+    <Content Include="Content\govuk-frontend\govuk\core\_section-break.scss" />
+    <Content Include="Content\govuk-frontend\govuk\core\_typography.scss" />
+    <Content Include="Content\govuk-frontend\govuk\helpers\_all.scss" />
+    <Content Include="Content\govuk-frontend\govuk\helpers\_clearfix.scss" />
+    <Content Include="Content\govuk-frontend\govuk\helpers\_colour.scss" />
+    <Content Include="Content\govuk-frontend\govuk\helpers\_device-pixels.scss" />
+    <Content Include="Content\govuk-frontend\govuk\helpers\_focused.scss" />
+    <Content Include="Content\govuk-frontend\govuk\helpers\_font-faces.scss" />
+    <Content Include="Content\govuk-frontend\govuk\helpers\_grid.scss" />
+    <Content Include="Content\govuk-frontend\govuk\helpers\_links.scss" />
+    <Content Include="Content\govuk-frontend\govuk\helpers\_media-queries.scss" />
+    <Content Include="Content\govuk-frontend\govuk\helpers\_shape-arrow.scss" />
+    <Content Include="Content\govuk-frontend\govuk\helpers\_spacing.scss" />
+    <Content Include="Content\govuk-frontend\govuk\helpers\_typography.scss" />
+    <Content Include="Content\govuk-frontend\govuk\helpers\_visually-hidden.scss" />
+    <Content Include="Content\govuk-frontend\govuk\objects\_all.scss" />
+    <Content Include="Content\govuk-frontend\govuk\objects\_button-group.scss" />
+    <Content Include="Content\govuk-frontend\govuk\objects\_form-group.scss" />
+    <Content Include="Content\govuk-frontend\govuk\objects\_grid.scss" />
+    <Content Include="Content\govuk-frontend\govuk\objects\_main-wrapper.scss" />
+    <Content Include="Content\govuk-frontend\govuk\objects\_template.scss" />
+    <Content Include="Content\govuk-frontend\govuk\objects\_width-container.scss" />
+    <Content Include="Content\govuk-frontend\govuk\overrides\_all.scss" />
+    <Content Include="Content\govuk-frontend\govuk\overrides\_display.scss" />
+    <Content Include="Content\govuk-frontend\govuk\overrides\_spacing.scss" />
+    <Content Include="Content\govuk-frontend\govuk\overrides\_text-align.scss" />
+    <Content Include="Content\govuk-frontend\govuk\overrides\_typography.scss" />
+    <Content Include="Content\govuk-frontend\govuk\overrides\_width.scss" />
+    <Content Include="Content\govuk-frontend\govuk\settings\_all.scss" />
+    <Content Include="Content\govuk-frontend\govuk\settings\_assets.scss" />
+    <Content Include="Content\govuk-frontend\govuk\settings\_colours-applied.scss" />
+    <Content Include="Content\govuk-frontend\govuk\settings\_colours-organisations.scss" />
+    <Content Include="Content\govuk-frontend\govuk\settings\_colours-palette.scss" />
+    <Content Include="Content\govuk-frontend\govuk\settings\_compatibility.scss" />
+    <Content Include="Content\govuk-frontend\govuk\settings\_global-styles.scss" />
+    <Content Include="Content\govuk-frontend\govuk\settings\_ie8.scss" />
+    <Content Include="Content\govuk-frontend\govuk\settings\_links.scss" />
+    <Content Include="Content\govuk-frontend\govuk\settings\_measurements.scss" />
+    <Content Include="Content\govuk-frontend\govuk\settings\_media-queries.scss" />
+    <Content Include="Content\govuk-frontend\govuk\settings\_spacing.scss" />
+    <Content Include="Content\govuk-frontend\govuk\settings\_typography-font-families.scss" />
+    <Content Include="Content\govuk-frontend\govuk\settings\_typography-font.scss" />
+    <Content Include="Content\govuk-frontend\govuk\settings\_typography-responsive.scss" />
+    <Content Include="Content\govuk-frontend\govuk\template.njk" />
+    <Content Include="Content\govuk-frontend\govuk\tools\_all.scss" />
+    <Content Include="Content\govuk-frontend\govuk\tools\_compatibility.scss" />
+    <Content Include="Content\govuk-frontend\govuk\tools\_exports.scss" />
+    <Content Include="Content\govuk-frontend\govuk\tools\_font-url.scss" />
+    <Content Include="Content\govuk-frontend\govuk\tools\_ie8.scss" />
+    <Content Include="Content\govuk-frontend\govuk\tools\_image-url.scss" />
+    <Content Include="Content\govuk-frontend\govuk\tools\_px-to-em.scss" />
+    <Content Include="Content\govuk-frontend\govuk\tools\_px-to-rem.scss" />
+    <Content Include="Content\govuk-frontend\govuk\utilities\_all.scss" />
+    <Content Include="Content\govuk-frontend\govuk\utilities\_clearfix.scss" />
+    <Content Include="Content\govuk-frontend\govuk\utilities\_visually-hidden.scss" />
+    <Content Include="Content\govuk-frontend\govuk\vendor\_sass-mq.scss" />
+    <Content Include="Content\govuk-frontend\govuk\_base.scss" />
+    <Content Include="Content\govuk-frontend\package.json" />
+    <Content Include="Content\govuk-frontend\README.md" />
+    <Content Include="Content\iws\_palette.scss" />
+    <Content Include="Content\iws\_css3.scss" />
+    <Content Include="Content\iws\_conditionals.scss" />
+    <Content Include="Content\iws\_shims.scss" />
+    <Content Include="Content\iws\_cookies-banner.scss" />
+    <Compile Include="Extensions\GdsExtensions.cs" />
+    <Compile Include="RazorHelpers\AttributesHelper.cs" />
+    <Compile Include="RazorHelpers\IwsGds.BackLink.cs" />
+    <Compile Include="RazorHelpers\IwsGds.EventTracking.cs" />
+    <Compile Include="RazorHelpers\IwsGds.Forms.cs" />
+    <Compile Include="RazorHelpers\IwsGds.Label.cs" />
+    <Compile Include="RazorHelpers\IwsGds.Panel.cs" />
+    <Compile Include="RazorHelpers\IwsGds.ProgressiveDisclosure.cs" />
+    <None Include="Scripts\jquery-3.6.0.intellisense.js" />
+    <Content Include="Scripts\jquery-3.6.0.js" />
+    <Content Include="Scripts\jquery-3.6.0.min.js" />
+    <Content Include="Scripts\jquery-3.6.0.slim.js" />
+    <Content Include="Scripts\jquery-3.6.0.slim.min.js" />
+    <Content Include="Scripts\jquery-ui-1.13.2.js" />
+    <Content Include="Scripts\jquery-ui-1.13.2.min.js" />
     <Content Include="Scripts\jquery-ui-autocomplete-html-extension.js" />
     <Content Include="Scripts\address-book.js" />
     <Content Include="Scripts\application.js" />
@@ -543,10 +828,6 @@
     <Content Include="Content\service-design-manual\helpers\_page-header.scss" />
     <Content Include="Content\service-design-manual\styleguide\_colours.scss" />
     <Content Include="Content\jquery-autocomplete.scss" />
-    <Content Include="Content\govuk\stylesheets\fonts\GDSTransportTabular-Bold.eot" />
-    <Content Include="Content\govuk\stylesheets\fonts\GDSTransportTabular-Light.eot" />
-    <Content Include="Content\govuk\stylesheets\fonts\GDSTransportWebsite-Bold.eot" />
-    <Content Include="Content\govuk\stylesheets\fonts\GDSTransportWebsite.eot" />
     <Content Include="Areas\NotificationApplication\Views\web.config" />
     <Content Include="Areas\NotificationApplication\Views\_ViewStart.cshtml" />
     <Content Include="Areas\NotificationApplication\Views\Shared\_Layout.cshtml" />
@@ -591,6 +872,13 @@
     <Content Include="Areas\NotificationApplication\Views\Carrier\Remove.cshtml" />
     <Content Include="Scripts\jquery.prevent-double-click.js" />
     <Content Include="Scripts\jquery.stickem.js" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\report-input-parameters.js" />
     <Content Include="Scripts\select2\select2.js" />
     <Content Include="Scripts\show-hide-content.js" />
@@ -909,11 +1197,6 @@
     <Content Include="Areas\Admin\Views\Menu\_HomeNavigation.cshtml" />
     <Content Include="Areas\Admin\Views\Menu\_ReportingLinks.cshtml" />
     <Content Include="Areas\Admin\Views\Menu\_AdminLinks.cshtml" />
-    <Content Include="Content\fonts\FontAwesome.otf" />
-    <Content Include="Content\fonts\fontawesome-webfont.woff2" />
-    <Content Include="Content\fonts\fontawesome-webfont.woff" />
-    <Content Include="Content\fonts\fontawesome-webfont.ttf" />
-    <Content Include="Content\fonts\fontawesome-webfont.eot" />
     <Content Include="Content\iws\_search.scss" />
     <Content Include="Areas\Reports\Views\FinancialGuarantees\Index.cshtml" />
     <Content Include="Areas\AdminExportAssessment\Views\FinancialGuaranteeDates\Index.cshtml" />
@@ -1023,42 +1306,6 @@
     <Content Include="Areas\NotificationApplication\Views\EntryCustomsOffice\_EntryCustomsOfficeGuidance.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\DateEntryViewModel.cshtml" />
     <Content Include="Areas\AdminExportAssessment\Views\OperationCodes\Edit.cshtml" />
-    <Content Include="Content\govuk_toolkit\stylesheets\_url-helpers.scss" />
-    <Content Include="Content\govuk_toolkit\stylesheets\_typography.scss" />
-    <Content Include="Content\govuk_toolkit\stylesheets\_shims.scss" />
-    <Content Include="Content\govuk_toolkit\stylesheets\_measurements.scss" />
-    <Content Include="Content\govuk_toolkit\stylesheets\_helpers.scss" />
-    <Content Include="Content\govuk_toolkit\stylesheets\_grid_layout.scss" />
-    <Content Include="Content\govuk_toolkit\stylesheets\_font_stack.scss" />
-    <Content Include="Content\govuk_toolkit\stylesheets\_device-pixels.scss" />
-    <Content Include="Content\govuk_toolkit\stylesheets\_css3.scss" />
-    <Content Include="Content\govuk_toolkit\stylesheets\_conditionals.scss" />
-    <Content Include="Content\govuk_toolkit\stylesheets\_colours.scss" />
-    <Content Include="Content\govuk_toolkit\stylesheets\design-patterns\_media-player.scss" />
-    <Content Include="Content\govuk_toolkit\stylesheets\design-patterns\_buttons.scss" />
-    <Content Include="Content\govuk_toolkit\stylesheets\design-patterns\_breadcrumbs.scss" />
-    <Content Include="Content\govuk_toolkit\stylesheets\design-patterns\_alpha-beta.scss" />
-    <Content Include="Content\govuk_toolkit\stylesheets\colours\_palette.scss" />
-    <Content Include="Content\govuk_toolkit\stylesheets\colours\_organisation.scss" />
-    <Content Include="Content\govuk_toolkit\stylesheets\.gitkeep" />
-    <Content Include="Content\govuk_elements\_tables.scss" />
-    <Content Include="Content\govuk_elements\_reset.scss" />
-    <Content Include="Content\govuk_elements\_phase-banner.scss" />
-    <Content Include="Content\govuk_elements\_panels.scss" />
-    <Content Include="Content\govuk_elements\_lists.scss" />
-    <Content Include="Content\govuk_elements\_layout.scss" />
-    <Content Include="Content\govuk_elements\_icons.scss" />
-    <Content Include="Content\govuk_elements\_helpers.scss" />
-    <Content Include="Content\govuk_elements\_govuk-template-base.scss" />
-    <Content Include="Content\govuk_elements\_forms.scss" />
-    <Content Include="Content\govuk_elements\_elements-typography.scss" />
-    <Content Include="Content\govuk_elements\_details.scss" />
-    <Content Include="Content\govuk_elements\_components.scss" />
-    <Content Include="Content\govuk_elements\_buttons.scss" />
-    <Content Include="Content\govuk_elements\_breadcrumbs.scss" />
-    <Content Include="Content\govuk_elements\forms\_form-validation.scss" />
-    <Content Include="Content\govuk_elements\forms\_form-multiple-choice.scss" />
-    <Content Include="Content\govuk_elements\forms\_form-date.scss" />
     <Content Include="Areas\AdminExportAssessment\Views\YCode\Index.cshtml" />
     <Content Include="Areas\AdminExportAssessment\Views\Shared\EditorTemplates\EnterWasteCodesViewModel.cshtml" />
     <Content Include="Areas\AdminExportAssessment\Views\EditEwcCode\Index.cshtml" />
@@ -1080,25 +1327,9 @@
     <Content Include="Areas\ImportNotification\Views\EditContact\Importer.cshtml" />
     <Content Include="Areas\AdminImportNotificationMovements\Views\Cancel\Add.cshtml" />
     <Content Include="Areas\Admin\Views\VirusScan\Index.cshtml" />
-    <None Include="Scripts\jquery-2.1.3.intellisense.js" />
-    <Content Include="Scripts\govuk\govuk-template.js" />
-    <Content Include="Scripts\govuk\ie.js" />
-    <Content Include="Scripts\govuk\vendor\goog\webfont-debug.js" />
-    <Content Include="Scripts\jquery-2.1.3.js" />
-    <Content Include="Scripts\jquery-2.1.3.min.js" />
-    <Content Include="Scripts\jquery-ui-1.11.4.js" />
-    <Content Include="Scripts\jquery-ui-1.11.4.min.js" />
-    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
-    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
-    <None Include="Scripts\jquery.validate-vsdoc.js" />
-    <Content Include="Scripts\jquery.validate.js" />
-    <Content Include="Scripts\jquery.validate.min.js" />
-    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
-    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\vendor\details.polyfill.js" />
     <Content Include="Scripts\vendor\jquery-1.11.0.min.js" />
     <Content Include="Scripts\vendor\modernizr.custom.77028.js" />
-    <Content Include="Scripts\jquery-2.1.3.min.map" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Web.config" />
     <Content Include="Views\Shared\_Layout.GovUK.Sections.cshtml" />
@@ -1202,6 +1433,8 @@
     <Content Include="Views\Shared\_ShipmentGroupScript.cshtml" />
     <Content Include="Views\Errors\Maintenance.cshtml" />
     <Content Include="Views\NewUser\Accessibility.cshtml" />
+    <Content Include="Scripts\jquery-3.6.0.slim.min.map" />
+    <Content Include="Scripts\jquery-3.6.0.min.map" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -1394,6 +1627,22 @@
     <Compile Include="Mappings\AdminExportAssessment\EditEwcMap.cs" />
     <Compile Include="Mappings\NotificationAssessment\EditHCodeMap.cs" />
     <Compile Include="Mappings\NotificationAssessment\EditYCodeMap.cs" />
+    <Compile Include="RazorHelpers\IwsGds.ActionLink.cs" />
+    <Compile Include="RazorHelpers\IwsGds.cs" />
+    <Compile Include="RazorHelpers\IwsGds.RadioButtons.cs" />
+    <Compile Include="RazorHelpers\IwsGds.Routelink.cs" />
+    <Compile Include="RazorHelpers\IwsGds.Summary.cs" />
+    <Compile Include="RazorHelpers\IwsGds.Tab.cs" />
+    <Compile Include="RazorHelpers\IwsGds.Table.cs" />
+    <Compile Include="RazorHelpers\IwsGds.TableSummary.cs" />
+    <Compile Include="RazorHelpers\IwsGds.TextBoxWithIcon.cs" />
+    <Compile Include="RazorHelpers\IwsGds.Warning.cs" />
+    <Compile Include="RazorHelpers\IwsGdsExtensions.cs" />
+    <Compile Include="RazorHelpers\PropertyHelper.cs" />
+    <Compile Include="RazorHelpers\RadioButtonLayout.cs" />
+    <Compile Include="RazorHelpers\RadioButtonLegend.cs" />
+    <Compile Include="RazorHelpers\TagBuilderExtensions.cs" />
+    <Compile Include="RazorHelpers\TypeHelper.cs" />
     <Compile Include="Services\IAppConfiguration.cs" />
     <Compile Include="ViewModels\Registration\CreateUserViewModelBase.cs" />
     <Compile Include="ViewModels\Shared\DateEntryViewModel.cs" />
@@ -4016,6 +4265,7 @@
     <EmbeddedResource Include="Areas\AdminExportNotificationMovements\ViewModels\MovementOverride\IndexViewModelResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>IndexViewModelResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\AdminExportNotificationMovements\Views\Cancel\CancelResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -4550,6 +4800,7 @@
     <EmbeddedResource Include="Areas\ImportNotification\Views\Home\IndexResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\ImportNotification\Views\Importer\IndexResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -4884,6 +5135,7 @@
     <EmbeddedResource Include="Areas\NotificationApplication\Views\StateOfImport\StateOfImportResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>StateOfImportResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\NotificationApplication\Views\Submit\DisclaimerResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -5334,6 +5586,7 @@
     <EmbeddedResource Include="Views\Applicant\HomeResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>HomeResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\Applicant\NotFoundResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
@@ -5455,7 +5708,10 @@
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\StyleCop.Error.MSBuild.1.0.0\build\StyleCop.Error.MSBuild.Targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\StyleCop.Error.MSBuild.1.0.0\build\StyleCop.Error.MSBuild.Targets'))" />
     <Error Condition="!Exists('..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets'))" />
-    <Error Condition="!Exists('..\packages\StyleCop.MSBuild.4.7.54.0\build\StyleCop.MSBuild.Targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\StyleCop.MSBuild.4.7.54.0\build\StyleCop.MSBuild.Targets'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.props'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.targets'))" />
+    <Error Condition="!Exists('..\packages\StyleCop.MSBuild.6.2.0\build\StyleCop.MSBuild.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\StyleCop.MSBuild.6.2.0\build\StyleCop.MSBuild.targets'))" />
+    <Error Condition="!Exists('..\packages\System.Text.Json.6.0.5\build\System.Text.Json.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\System.Text.Json.6.0.5\build\System.Text.Json.targets'))" />
   </Target>
   <Import Project="..\packages\StyleCop.Error.MSBuild.1.0.0\build\StyleCop.Error.MSBuild.Targets" Condition="Exists('..\packages\StyleCop.Error.MSBuild.1.0.0\build\StyleCop.Error.MSBuild.Targets')" />
   <Import Project="..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" />
@@ -5468,10 +5724,10 @@
   -->
   <Target Name="BeforeBuild">
     <!-- Compile sass files -->
-    <Exec Command="&quot;$(MSBuildProjectDirectory)\..\..\tools\sassc\sassc.exe&quot; -I Content\govuk_toolkit\stylesheets\ Content\iws-page.scss &gt; Content\iws-page.css" />
-    <Exec Command="&quot;$(MSBuildProjectDirectory)\..\..\tools\sassc\sassc.exe&quot; -I Content\govuk_toolkit\stylesheets\ Content\iws-page-ie6.scss &gt; Content\iws-page-ie6.css" />
-    <Exec Command="&quot;$(MSBuildProjectDirectory)\..\..\tools\sassc\sassc.exe&quot; -I Content\govuk_toolkit\stylesheets\ Content\iws-page-ie7.scss &gt; Content\iws-page-ie7.css" />
-    <Exec Command="&quot;$(MSBuildProjectDirectory)\..\..\tools\sassc\sassc.exe&quot; -I Content\govuk_toolkit\stylesheets\ Content\iws-page-ie8.scss &gt; Content\iws-page-ie8.css" />
+    <Exec Command="&quot;$(MSBuildProjectDirectory)\..\..\tools\sassc\dart.exe&quot;  &quot;$(MSBuildProjectDirectory)\..\..\tools\sassc\sass.snapshot&quot; --no-source-map Content\iws-page.scss Content\iws-page.css" />
+    <Exec Command="&quot;$(MSBuildProjectDirectory)\..\..\tools\sassc\dart.exe&quot;  &quot;$(MSBuildProjectDirectory)\..\..\tools\sassc\sass.snapshot&quot; --no-source-map Content\iws-page-ie6.scss Content\iws-page-ie6.css" />
+    <Exec Command="&quot;$(MSBuildProjectDirectory)\..\..\tools\sassc\dart.exe&quot;  &quot;$(MSBuildProjectDirectory)\..\..\tools\sassc\sass.snapshot&quot; --no-source-map Content\iws-page-ie7.scss Content\iws-page-ie7.css" />
+    <Exec Command="&quot;$(MSBuildProjectDirectory)\..\..\tools\sassc\dart.exe&quot;  &quot;$(MSBuildProjectDirectory)\..\..\tools\sassc\sass.snapshot&quot; --no-source-map Content\iws-page-ie8.scss Content\iws-page-ie8.css" />
     <!-- Include css files as content -->
     <CreateItem Include="Content\iws-page.css">
       <Output ItemName="Content" TaskParameter="Include" />
@@ -5486,5 +5742,7 @@
       <Output ItemName="Content" TaskParameter="Include" />
     </CreateItem>
   </Target>
-  <Import Project="..\packages\StyleCop.MSBuild.4.7.54.0\build\StyleCop.MSBuild.Targets" Condition="Exists('..\packages\StyleCop.MSBuild.4.7.54.0\build\StyleCop.MSBuild.Targets')" />
+  <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" />
+  <Import Project="..\packages\StyleCop.MSBuild.6.2.0\build\StyleCop.MSBuild.targets" Condition="Exists('..\packages\StyleCop.MSBuild.6.2.0\build\StyleCop.MSBuild.targets')" />
+  <Import Project="..\packages\System.Text.Json.6.0.5\build\System.Text.Json.targets" Condition="Exists('..\packages\System.Text.Json.6.0.5\build\System.Text.Json.targets')" />
 </Project>

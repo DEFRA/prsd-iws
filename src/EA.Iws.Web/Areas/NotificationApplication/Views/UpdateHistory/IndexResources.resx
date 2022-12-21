@@ -183,4 +183,7 @@
   <data name="ToValid" xml:space="preserve">
     <value>Please enter a valid to date</value>
   </data>
+  <data name="SelectedScreenLabel" xml:space="preserve">
+    <value>Filter by an update option:</value>
+  </data>
 </root>

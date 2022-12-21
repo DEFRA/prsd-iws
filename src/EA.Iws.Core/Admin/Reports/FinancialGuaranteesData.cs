@@ -24,10 +24,10 @@
         [DisplayName("Blanket bond?")]
         public string IsBlanketBond { get; set; }
 
-        [DisplayName("Calculation continued")]
-        public decimal? CoverAmount { get; set; }
-
         [DisplayName("Amount of cover provided")]
+        public decimal? CoverAmount { get; set; }
+        
+        [DisplayName("Calculation continued")]
         public decimal? CalculationContinued { get; set; }
 
         [DisplayName("Over active loads (Y/N)")]

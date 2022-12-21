@@ -14,7 +14,7 @@
             NotificationTypes = Enum.GetNames(typeof(NotificationType)).ToList();
         }
 
-        [Required(ErrorMessage = "Please answer this question")]
+        [Required(ErrorMessage = "Please choose your notification type")]
         public NotificationType? SelectedNotificationType { get; set; }
 
         public UKCompetentAuthority CompetentAuthority { get; set; }

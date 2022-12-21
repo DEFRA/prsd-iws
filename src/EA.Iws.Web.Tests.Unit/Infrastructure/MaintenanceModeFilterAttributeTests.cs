@@ -28,8 +28,8 @@
             filter.OnActionExecuted(context);
 
             var result = context.Result as RedirectToRouteResult;
-            Assert.Equal(result.RouteValues["action"], "Maintenance");
-            Assert.Equal(result.RouteValues["controller"], "Errors");
+            Assert.Equal("Maintenance", result.RouteValues["action"]);
+            Assert.Equal("Errors", result.RouteValues["controller"]);
         }
 
         [Fact]
@@ -42,7 +42,7 @@
             var context = Context(routeData);
 
             filter.OnActionExecuted(context);
-            Assert.Equal(context.Result.GetType(), (typeof(EmptyResult)));
+            Assert.Equal((typeof(EmptyResult)), context.Result.GetType());
         }
 
         public ActionExecutedContext Context(RouteData route)

@@ -4,7 +4,7 @@
     ViewBag.Title = Resources.UpdateDatesTitle;
 }
 
-<h1 class="heading-large">@Resources.UpdateDatesTitle</h1>
+<h1 class="govuk-heading-l">@Resources.UpdateDatesTitle</h1>
 
 @using (Html.BeginForm())
 {
@@ -14,7 +14,7 @@
     <fieldset>
         @if (Model.ReceivedDate.IsCompleted)
         {
-            <div class="form-group @Html.Gds().FormGroupClass(m => m.ReceivedDate) @Html.Gds().FormGroupClass(m => m.ReceivedDate.Day) @Html.Gds().FormGroupClass(m => m.ReceivedDate.Month) @Html.Gds().FormGroupClass(m => m.ReceivedDate.Year)">
+            <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.ReceivedDate) @Html.Gds().FormGroupClass(m => m.ReceivedDate.Day) @Html.Gds().FormGroupClass(m => m.ReceivedDate.Month) @Html.Gds().FormGroupClass(m => m.ReceivedDate.Year)">
                 @Html.Gds().LabelFor(m => m.ReceivedDate, showOptionalLabel: false)
                 @Html.Gds().ValidationMessageFor(m => m.ReceivedDate)
                 @Html.EditorFor(m => m.ReceivedDate)
@@ -23,7 +23,7 @@
 
         @if (Model.CompletedDate.IsCompleted)
         {
-            <div class="form-group @Html.Gds().FormGroupClass(m => m.CompletedDate) @Html.Gds().FormGroupClass(m => m.CompletedDate.Day) @Html.Gds().FormGroupClass(m => m.CompletedDate.Month) @Html.Gds().FormGroupClass(m => m.CompletedDate.Year)">
+            <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.CompletedDate) @Html.Gds().FormGroupClass(m => m.CompletedDate.Day) @Html.Gds().FormGroupClass(m => m.CompletedDate.Month) @Html.Gds().FormGroupClass(m => m.CompletedDate.Year)">
                 @Html.Gds().LabelFor(m => m.CompletedDate, showOptionalLabel: false)
                 @Html.Gds().ValidationMessageFor(m => m.CompletedDate)
                 @Html.EditorFor(m => m.CompletedDate)
@@ -32,7 +32,7 @@
 
         @if (Model.DecisionDate.IsCompleted)
         {
-            <div class="form-group @Html.Gds().FormGroupClass(m => m.DecisionDate) @Html.Gds().FormGroupClass(m => m.DecisionDate.Day) @Html.Gds().FormGroupClass(m => m.DecisionDate.Month) @Html.Gds().FormGroupClass(m => m.DecisionDate.Year)">
+            <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.DecisionDate) @Html.Gds().FormGroupClass(m => m.DecisionDate.Day) @Html.Gds().FormGroupClass(m => m.DecisionDate.Month) @Html.Gds().FormGroupClass(m => m.DecisionDate.Year)">
                 @Html.Gds().LabelFor(m => m.DecisionDate, showOptionalLabel: false)
                 @Html.Gds().ValidationMessageFor(m => m.DecisionDate)
                 @Html.EditorFor(m => m.DecisionDate)
@@ -40,7 +40,7 @@
         }
     </fieldset>
 
-    <button class="button" type="submit">@Constants.ContinueButtonText</button>
+    <button class="govuk-button" type="submit">@Constants.ContinueButtonText</button>
 }
 
 @section menu {

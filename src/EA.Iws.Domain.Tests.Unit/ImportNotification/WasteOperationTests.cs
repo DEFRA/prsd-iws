@@ -67,7 +67,7 @@
             operationCodes.SetOperationCodes(new List<WasteOperationCode>(anotherValidRCodesList));
 
             Assert.All(operationCodes.Codes,
-                code => Assert.True(anotherValidRCodesList.Any(x => x.OperationCode == code.OperationCode)));
+                code => Assert.Contains(anotherValidRCodesList, x => x.OperationCode == code.OperationCode));
         }
 
         [Fact]

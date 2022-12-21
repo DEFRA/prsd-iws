@@ -6,7 +6,7 @@
 
 <div class="grid-row">
     <div class="column-two-thirds">
-        <h1 class="heading-large">@Resources.ChangeOwnerTitle</h1>
+        <h1 class="govuk-heading-l">@Resources.ChangeOwnerTitle</h1>
 
         <p>@Resources.YouAreCurrentlyTheOwner</p>
 
@@ -16,14 +16,14 @@
             @Html.Gds().ValidationSummary()
             @Html.HiddenFor(m => m.NotificationId)
 
-            <div class="form-group @Html.Gds().FormGroupClass(m => m.EmailAddress)">
+            <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.EmailAddress)">
                 @Html.Gds().LabelFor(m => m.EmailAddress)
                 @Html.Gds().HintParagraph(Resources.ChangeOwnerHint)
                 @Html.Gds().ValidationMessageFor(m => m.EmailAddress)
                 @Html.Gds().TextBoxFor(m => m.EmailAddress)
             </div>
 
-            <button class="button" type="submit">@Constants.ContinueOnlyButtonText</button>
+            <button class="govuk-button" type="submit">@Constants.ContinueOnlyButtonText</button>
         }
     </div>
 </div>

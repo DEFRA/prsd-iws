@@ -8,22 +8,22 @@
     ViewBag.Title = Resource.MainHeading;
 }
 
-<h1 class="heading-large">@Resource.MainHeading</h1>
+<h1 class="govuk-heading-l">@Resource.MainHeading</h1>
 
 <h2 class="heading-medium">@Resource.TableHeading</h2>
 
-<div class="form-group">
-    <table title=@Resource.TableHeading>
-        <thead>
-            <tr>
-                <th>@Resource.TableHeaderTranaction</th>
-                <th>@Resource.TableHeaderDate</th>
-                <th>@Resource.TableHeaderAmount</th>
-                <th>@Resource.TableHeaderType</th>
-                <th></th>
+<div class="govuk-form-group">
+    <table title=@Resource.TableHeading class="govuk-table">
+        <thead class="govuk-table__head">
+            <tr class="govuk-table__row">
+                <th scope="col" class="govuk-table__header">@Resource.TableHeaderTranaction</th>
+                <th scope="col" class="govuk-table__header">@Resource.TableHeaderDate</th>
+                <th scope="col" class="govuk-table__header">@Resource.TableHeaderAmount</th>
+                <th scope="col" class="govuk-table__header">@Resource.TableHeaderType</th>
+                <th scope="col" class="govuk-table__header">Action</th>
             </tr>
         </thead>
-        <tbody>
+        <tbody class="govuk-table__body">
             @{
                 for (var i = 0; i < Model.Transactions.Count(); i++)
                 {
@@ -38,12 +38,12 @@
                     {
                         type = (PaymentMethod)Model.Transactions[i].Type;
                     }
-                    <tr>
-                        <td>@trans</td>
-                        <td>@Model.Transactions[i].Date.ToString("dd/MM/yyyy")</td>
-                        <td>@Model.Transactions[i].Amount.ToString("C")</td>
-                        <td>@EnumHelper.GetDescription(type)</td>
-                        <td>
+                    <tr class="govuk-table__row">
+                        <td class="govuk-table__cell">@trans</td>
+                        <td class="govuk-table__cell">@Model.Transactions[i].Date.ToString("dd/MM/yyyy")</td>
+                        <td class="govuk-table__cell">@Model.Transactions[i].Amount.ToString("C")</td>
+                        <td class="govuk-table__cell">@EnumHelper.GetDescription(type)</td>
+                        <td class="govuk-table__cell">
                             @if (trans == TransactionType.Payment)
                             {
                               @Html.ActionLink(Resource.DeleteLink, "Confirm", "DeleteTransaction", new { id = Model.NotificationId, transactionId = Model.Transactions[i].TransactionId }, null)                              

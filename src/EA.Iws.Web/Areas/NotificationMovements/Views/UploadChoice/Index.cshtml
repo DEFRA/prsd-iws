@@ -6,7 +6,7 @@
     ViewBag.Title = Resource.TabTitle;
 }
 
-<h1 class="heading-large">@Resource.Title</h1>
+<h1 class="govuk-heading-l">@Resource.Title</h1>
 
 @if (Model.NoMovementsToList)
 {
@@ -14,7 +14,7 @@
 
     @Html.ActionLink(Resource.NotificationOptionsLinkText, "Index", "Options",
         new { id = Model.NotificationId, area = "NotificationApplication" },
-        new { @class = "button" })
+        new { @class = "govuk-button" })
 }
 else
 {
@@ -23,24 +23,26 @@ else
         @Html.AntiForgeryToken()
         @Html.Gds().ValidationSummary()
         @Html.HiddenFor(m => m.NotificationId)
-        <div class="form-group @Html.Gds().FormGroupClass(m => m.Shipments)">
-            <fieldset>
-                <p>@Resource.SelectPrenotificationsParagraph</p>
+        <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.Shipments)">
+            <fieldset class="govuk-fieldset">
+                <div class="govuk-checkboxes" data-module="govuk-checkboxes">
+                    <p>@Resource.SelectPrenotificationsParagraph</p>
 
-                @for (int i = 0; i < Model.Shipments.Count(); i++)
-                {
-                    <div class="multiple-choice">
-                        @Html.HiddenFor(m => m.Shipments[i].Id)
-                        @Html.HiddenFor(m => m.Shipments[i].DisplayName)
-                        @Html.CheckBoxFor(m => m.Shipments[i].IsSelected)
-                        <label for="@Html.IdFor(m => m.Shipments[i].IsSelected)">@Model.Shipments[i].DisplayName</label>
-                    </div>
-                }
+                    @for (int i = 0; i < Model.Shipments.Count(); i++)
+                    {
+                        <div class="multiple-choice govuk-checkboxes__item">
+                            @Html.HiddenFor(m => m.Shipments[i].Id)
+                            @Html.HiddenFor(m => m.Shipments[i].DisplayName)
+                            @Html.CheckBoxFor(m => m.Shipments[i].IsSelected, new { @class = "govuk-checkboxes__input" })
+                            <label class="govuk-label govuk-checkboxes__label" for="@Html.IdFor(m => m.Shipments[i].IsSelected)">@Model.Shipments[i].DisplayName</label>
+                        </div>
+                    }
+                </div>
             </fieldset>
         </div>
 
-        <div class="form-group">
-            <button class="button" type="submit">@Constants.ContinueOnlyButtonText</button>
+        <div class="govuk-form-group">
+            <button class="govuk-button" type="submit">@Constants.ContinueOnlyButtonText</button>
         </div>
 
         <div>

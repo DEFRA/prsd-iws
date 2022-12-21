@@ -29,10 +29,10 @@
     }
 }
 
-<h1 class="heading-large text">@Html.Raw(string.Format(ResubmissionSuccessResources.Title, Model.NotificationNumber.Replace(" ", "&nbsp;")))</h1>
+<h1 class="govuk-heading-l text">@Html.Raw(string.Format(ResubmissionSuccessResources.Title, Model.NotificationNumber.Replace(" ", "&nbsp;")))</h1>
 
 <p class="text">
     @GetAssessmentText(Model.CompetentAuthority)
 </p>
 
-@Html.ActionLink("Continue", "Index", "Options", new { id = Model.NotificationId }, new { @class = "button" })
+@Html.ActionLink("Continue", "Index", "Options", new { id = Model.NotificationId }, new { @class = "govuk-button" })

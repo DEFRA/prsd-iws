@@ -1,4 +1,6 @@
-﻿.overview-block div.overview-block-element:not(:last-child) {
+﻿@import "palette";
+
+.overview-block div.overview-block-element:not(:last-child) {
     margin-bottom: 15px;
 }
 
@@ -32,7 +34,7 @@
         width: 10%;
 
         a {
-            font-weight: bold;
+            /*font-weight: bold;*/
             font-size: 19px;
             text-decoration: none;
         }
@@ -65,11 +67,11 @@
         padding: 10px 10px 5px 10px;
         font-weight: bold;
         clear: right;
+        margin-top : 10px;
         
         .price{
             font-size: 40px;
             font-weight: bold;
-            float: right;
         }
         .text{
             font-size: 19px;
@@ -201,16 +203,19 @@
 }
 
 .statusbox.s-blue {
-    color: $light-blue;
-    border: 1px solid $light-blue;
+    color: $white;
+    border: 1px solid $white;
+    background-color: #005ea5;
 }
 .statusbox.s-orange {
-    color: $orange;
-    border: 1px solid $orange;
+    color: $black;
+    /*border: 1px solid $white;*/
+    background-color: $orange;
 }
 .statusbox.s-green {
-    color: $turquoise; 
-    border: 1px solid $turquoise;
+    color: $black;
+    border: 1px solid $white;
+    background-color: $turquoise;
 }
 .statusbox.s-red {
     color: $red;

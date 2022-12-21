@@ -23,15 +23,15 @@
     @Html.HiddenFor(m => m.Unit)
     @Html.HiddenFor(m => m.Certificate)
 
-    <h1 class="heading-large">@Html.Raw(string.Format(Resource.Title, operationTitleVerb, Model.ShipmentNumber))</h1>
+    <h1 class="govuk-heading-l">@Html.Raw(string.Format(Resource.Title, operationTitleVerb, Model.ShipmentNumber))</h1>
 
     <h2 class="heading-small">@Html.Raw(string.Format(Resource.QuantityLabel, EnumHelper.GetDisplayName(Model.Unit)))</h2>
-    <div class="form-group @Html.Gds().FormGroupClass(m => m.Quantity)">
+    <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.Quantity)">
         @Html.Gds().ValidationMessageFor(m => m.Quantity)
         @Html.Gds().TextBoxFor(m => m.Quantity)
     </div>
 
-    <div class="form-group @Html.Gds().FormGroupClass(m => m.Day) @Html.Gds().FormGroupClass(m => m.Month) @Html.Gds().FormGroupClass(m => m.Year)">
+    <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.Day) @Html.Gds().FormGroupClass(m => m.Month) @Html.Gds().FormGroupClass(m => m.Year)">
         <fieldset>
             <h2 class="heading-small">@Resource.ReceivedDate</h2>
             <div class="form-date">
@@ -39,15 +39,15 @@
                 @Html.Gds().ValidationMessageFor(m => m.Day)
                 @Html.Gds().ValidationMessageFor(m => m.Month)
                 @Html.Gds().ValidationMessageFor(m => m.Year)
-                <div class="form-group form-group-day">
+                <div class="govuk-form-group form-group-day">
                     @Html.Gds().LabelFor(m => m.Day)
                     @Html.Gds().TextBoxFor(m => m.Day, new { type = "number", min = "1", max = "31" })
                 </div>
-                <div class="form-group form-group-month">
+                <div class="govuk-form-group form-group-month">
                     @Html.Gds().LabelFor(m => m.Month)
                     @Html.Gds().TextBoxFor(m => m.Month, new { type = "number", min = "1", max = "12" })
                 </div>
-                <div class="form-group form-group-year">
+                <div class="govuk-form-group form-group-year">
                     @Html.Gds().LabelFor(m => m.Year)
                     @Html.Gds().TextBoxFor(m => m.Year, new { type = "number", min = "2015" })
                 </div>
@@ -55,53 +55,54 @@
         </fieldset>
     </div>
 
-        <h2 class="heading-small">@Html.Raw(string.Format(@Resource.SameAsReceived, operationLabelVerb))</h2>
-        <div class="form-group @Html.Gds().FormGroupClass(m => m.IsSameAsReceiptDate)">
-            @Html.Gds().ValidationMessageFor(model => model.IsSameAsReceiptDate)
-            <fieldset>
-                <div class="multiple-choice" data-target="yes-message">
-                    @Html.RadioButtonFor(m => m.IsSameAsReceiptDate, true, new { id = "rdoYes" })
-                    <label for="rdoYes">
+    <h2 class="heading-small">@Html.Raw(string.Format(@Resource.SameAsReceived, operationLabelVerb))</h2>
+    <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.IsSameAsReceiptDate)">
+        @Html.Gds().ValidationMessageFor(model => model.IsSameAsReceiptDate)
+        <fieldset class="govuk-fieldset">
+            <div class="govuk-radios" data-module="govuk-radios">
+                <div class="govuk-radios__item" data-target="yes-message">
+                    @Html.RadioButtonFor(m => m.IsSameAsReceiptDate, true, new { id = "rdoYes", @class = "govuk-radios__input" })
+                    <label class="govuk-label govuk-radios__label" for="rdoYes">
                         @Resource.Yes
                     </label>
                 </div>
 
-                <div class="multiple-choice" data-target="no-message">
-                    @Html.RadioButtonFor(m => m.IsSameAsReceiptDate, false, new { id = "rdoNo" })
-                    <label for="rdoNo">
+                <div class="govuk-radios__item" data-target="no-message">
+                    @Html.RadioButtonFor(m => m.IsSameAsReceiptDate, false, new { id = "rdoNo", @class = "govuk-radios__input" })
+                    <label class="govuk-label govuk-radios__label" for="rdoNo">
                         @Resource.No
                     </label>
                 </div>
-
-                <div class="panel @((Model.IsSameAsReceiptDate.HasValue && !Model.IsSameAsReceiptDate.Value) ? "" : "js-hidden")" id="no-message" id="no-message">
-                    <div class="form-group @Html.Gds().FormGroupClass(m => m.RecoveryDay) @Html.Gds().FormGroupClass(m => m.RecoveryMonth) @Html.Gds().FormGroupClass(m => m.RecoveryYear)">
-                        <fieldset>
-                            <h2 class="heading-small">@Html.Raw(string.Format(@Resource.RecoveredDate, labelText))</h2>
-                            <div class="form-date">
-                                @Html.Gds().HintParagraph(@Resource.HintParagraph)
-                                @Html.Gds().ValidationMessageFor(m => m.RecoveryDay)
-                                @Html.Gds().ValidationMessageFor(m => m.RecoveryMonth)
-                                @Html.Gds().ValidationMessageFor(m => m.RecoveryYear)
-                                <div class="form-group form-group-day">
-                                    @Html.Gds().LabelFor(m => m.Day)
-                                    @Html.Gds().TextBoxFor(m => m.RecoveryDay, new { type = "number", min = "1", max = "31" })
-                                </div>
-                                <div class="form-group form-group-month">
-                                    @Html.Gds().LabelFor(m => m.Month)
-                                    @Html.Gds().TextBoxFor(m => m.RecoveryMonth, new { type = "number", min = "1", max = "12" })
-                                </div>
-                                <div class="form-group form-group-year">
-                                    @Html.Gds().LabelFor(m => m.Year)
-                                    @Html.Gds().TextBoxFor(m => m.RecoveryYear, new { type = "number", min = "2015" })
-                                </div>
+            </div>
+            <div class="panel @((Model.IsSameAsReceiptDate.HasValue && !Model.IsSameAsReceiptDate.Value) ? "" : "js-hidden")" id="no-message" id="no-message">
+                <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.RecoveryDay) @Html.Gds().FormGroupClass(m => m.RecoveryMonth) @Html.Gds().FormGroupClass(m => m.RecoveryYear)">
+                    <fieldset>
+                        <h2 class="heading-small">@Html.Raw(string.Format(@Resource.RecoveredDate, labelText))</h2>
+                        <div class="form-date">
+                            @Html.Gds().HintParagraph(@Resource.HintParagraph)
+                            @Html.Gds().ValidationMessageFor(m => m.RecoveryDay)
+                            @Html.Gds().ValidationMessageFor(m => m.RecoveryMonth)
+                            @Html.Gds().ValidationMessageFor(m => m.RecoveryYear)
+                            <div class="govuk-form-group form-group-day">
+                                @Html.Gds().LabelFor(m => m.Day)
+                                @Html.Gds().TextBoxFor(m => m.RecoveryDay, new { type = "number", min = "1", max = "31" })
                             </div>
-                        </fieldset>
-                    </div>
+                            <div class="govuk-form-group form-group-month">
+                                @Html.Gds().LabelFor(m => m.Month)
+                                @Html.Gds().TextBoxFor(m => m.RecoveryMonth, new { type = "number", min = "1", max = "12" })
+                            </div>
+                            <div class="govuk-form-group form-group-year">
+                                @Html.Gds().LabelFor(m => m.Year)
+                                @Html.Gds().TextBoxFor(m => m.RecoveryYear, new { type = "number", min = "2015" })
+                            </div>
+                        </div>
+                    </fieldset>
                 </div>
-            </fieldset>
-        </div>
+            </div>
+        </fieldset>
+    </div>
 
-    <button class="button" type="submit">@Constants.ContinueOnlyButtonText</button>
+    <button class="govuk-button" type="submit">@Constants.ContinueOnlyButtonText</button>
 }
 
 @Html.ActionLink("Go to notification options",

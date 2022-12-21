@@ -65,7 +65,7 @@
             await handler.HandleAsync(request);
 
             A.CallTo(() => shipmentRepository.GetByNotificationId(NotificationId))
-                .MustHaveHappened(Repeated.Exactly.Once);
+                .MustHaveHappenedOnceExactly();
         }
 
         [Fact]
@@ -76,7 +76,7 @@
             await handler.HandleAsync(request);
 
             A.CallTo(() => movementRepository.GetAllMovements(NotificationId))
-                .MustHaveHappened(Repeated.Exactly.Once);
+                .MustHaveHappenedOnceExactly();
         }
 
         [Fact]
@@ -87,7 +87,7 @@
             await handler.HandleAsync(request);
 
             A.CallTo(() => financialGuaranteeRepository.GetByNotificationId(NotificationId))
-                .MustHaveHappened(Repeated.Exactly.Once);
+                .MustHaveHappenedOnceExactly();
         }
 
         [Fact]
@@ -109,7 +109,7 @@
             await handler.HandleAsync(request);
 
             A.CallTo(() => movementRepository.GetAllActiveMovements(NotificationId))
-                .MustHaveHappened(Repeated.Exactly.Once);
+                .MustHaveHappenedOnceExactly();
         }
 
         [Fact]

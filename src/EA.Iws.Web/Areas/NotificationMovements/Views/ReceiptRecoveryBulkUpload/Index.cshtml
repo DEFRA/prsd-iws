@@ -6,41 +6,25 @@
     var typeText = Model.NotificationType == NotificationType.Disposal ? "disposal" : "recovery";
     ViewBag.Title = string.Format(Resources.UploadReceiptRecoveryTabTitle, typeText);
     Layout = "~/Views/Shared/_Layout.GovUK.Sections.cshtml";
-
 }
 
-<style>
+<div class="govuk-form-group">
+    <section>
+        <div>
+            <h1 class="heading-large">@string.Format(Resources.StartHeader, typeText)</h1>
+            <p>@string.Format(Resources.StartText1, typeText)</p>
+            <p>@Html.ActionLink(Resources.TemplateLinkText, "Index", "BulkUploadTemplate", new { id = @Model.NotificationId }, null) @Resources.StartText2</p>
+            <p class="bold-small">@string.Format(Resources.StartText3, typeText)</p>
+        </div>
+    </section>
 
-    .start-button
+    @using (Html.BeginForm())
     {
-        padding-left: 60px !important;
-        padding-right: 60px !important;
+        @Html.AntiForgeryToken()
+
+        <button class="govuk-button" type="submit">@Resources.StartButtonText</button>
     }
-
-</style>
-
-<div class="grid-row">
-    <div class="column-full">
-        <section class="grid-row">
-            <div class="column-full">
-                <h1 class="heading-large">@string.Format(Resources.StartHeader, typeText)</h1>
-                <p>@string.Format(Resources.StartText1, typeText)</p>
-                <p>@Html.ActionLink(Resources.TemplateLinkText, "Index", "BulkUploadTemplate", new { id = @Model.NotificationId }, null) @Resources.StartText2</p>
-                <p class="bold-small">@string.Format(Resources.StartText3, typeText)</p>
-            </div>
-        </section>
-
-        @using (Html.BeginForm())
-        {
-            @Html.AntiForgeryToken()
-
-            <div class="form-group">
-                <p>
-                    <button class="button start-button" type="submit">@Resources.StartButtonText</button>
-                </p>
-            </div>
-        }
-    </div>
 </div>
-
-@Html.ActionLink(Resources.NotificationOptionsLink, "Index", "Options", new { id = @Model.NotificationId, area = "NotificationApplication" }, null)
+<div class="govuk-form-group">
+    @Html.ActionLink(Resources.NotificationOptionsLink, "Index", "Options", new { id = @Model.NotificationId, area = "NotificationApplication" }, null)
+</div>

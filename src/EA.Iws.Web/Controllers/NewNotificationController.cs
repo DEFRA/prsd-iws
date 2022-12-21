@@ -42,7 +42,7 @@
             return RedirectToAction("NotificationType",
                 new
                 {
-                    ca = model.CompetentAuthorities.SelectedValue,
+                    ca = model.AuthorityType,
                     cfp
                 });
         }
@@ -52,7 +52,7 @@
         {
             var model = new NotificationTypeViewModel
             {
-                CompetentAuthority = ca.GetValueFromDisplayName<UKCompetentAuthority>()
+                CompetentAuthority = (UKCompetentAuthority)Enum.Parse(typeof(UKCompetentAuthority), ca)
             };
 
             if (!string.IsNullOrWhiteSpace(nt))

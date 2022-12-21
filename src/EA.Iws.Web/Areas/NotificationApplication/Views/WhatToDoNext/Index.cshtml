@@ -6,7 +6,7 @@
 }
 
 <header class="hgroup">
-    <h1 class="heading-large">@IndexResources.MainHeading</h1>
+    <h1 class="govuk-heading-l">@IndexResources.MainHeading</h1>
 </header>
 
 <p>
@@ -25,13 +25,13 @@
     <li>@IndexResources.WhatToDoNextListItem7</li>
 </ul>
 
-<div class="form-group">
+<div class="govuk-form-group">
     @Html.Raw(string.Format(IndexResources.NotificationOptionsLinkMessage,
         Html.ActionLink("notification options", "Index", "Options", new { id = Model.Id, area = "NotificationApplication" }, null)))
 </div>
 
-<div class="form-group">
-    @Html.ActionLink(@Constants.ContinueOnlyButtonText, "Print", "WhatToDoNext", new { id = Model.Id, area = "NotificationApplication" }, new { @class = "button" })
+<div class="govuk-form-group">
+    @Html.ActionLink(@Constants.ContinueOnlyButtonText, "Print", "WhatToDoNext", new { id = Model.Id, area = "NotificationApplication" }, new { @class = "govuk-button" })
 </div>
 
 @Html.FeedbackLink()

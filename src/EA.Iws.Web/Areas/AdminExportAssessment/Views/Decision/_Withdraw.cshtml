@@ -14,5 +14,5 @@
 <div class="form-group @Html.Gds().FormGroupClass(m => m.ReasonForWithdrawal)">
     <label class="heading-medium">@Html.DisplayNameFor(m => m.ReasonForWithdrawal)</label>
     @Html.Gds().ValidationMessageFor(m => m.ReasonForWithdrawal)
-    @Html.TextAreaFor(m => m.ReasonForWithdrawal, new { @class = "text-area two-thirds", @MaxLength = "4000" })
+    @Html.TextAreaFor(m => m.ReasonForWithdrawal, new { @class = "govuk-textarea", @MaxLength = "4000", rows = 10 })
 </div>

@@ -46,7 +46,7 @@ namespace EA.Prsd.Core.DataAccess.Tests.Integration
 
                 //Both audit logs are additions
                 List<EventType> auditTypes = auditLogs.Select(a => a.EventType).ToList();
-                Assert.All(auditTypes, e => Assert.Equal(e, EventType.Added));
+                Assert.All(auditTypes, e => Assert.Equal(EventType.Added, e));
             }
         }
 
@@ -76,8 +76,8 @@ namespace EA.Prsd.Core.DataAccess.Tests.Integration
 
                 //Both audit logs are additions
                 List<EventType> auditTypes = auditLogs.Select(a => a.EventType).ToList();
-                Assert.Equal(auditTypes[0], EventType.Added);
-                Assert.Equal(auditTypes[1], EventType.Modified);
+                Assert.Equal(EventType.Added, auditTypes[0]);
+                Assert.Equal(EventType.Modified, auditTypes[1]);
             }
         }
 
@@ -107,8 +107,8 @@ namespace EA.Prsd.Core.DataAccess.Tests.Integration
 
                 //Both audit logs are additions
                 List<EventType> auditTypes = auditLogs.Select(a => a.EventType).ToList();
-                Assert.Equal(auditTypes[0], EventType.Added);
-                Assert.Equal(auditTypes[1], EventType.Deleted);
+                Assert.Equal(EventType.Added, auditTypes[0]);
+                Assert.Equal(EventType.Deleted, auditTypes[1]);
             }
         }
 

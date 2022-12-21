@@ -4,34 +4,33 @@
 
 <section class="grid-row">
     <div class="noti-overview">
-        <div class="column-half">
+        <div class="govuk-grid-column-two-thirds">
             <div>
-                <h2 class="heading-medium">@Model.NotificationNumber</h2>
-                <h1 class="heading-large">Notification overview</h1>
+                <h1 class="govuk-heading-l">Notification overview</h1>
+                <h2 class="govuk-heading-m">@Model.NotificationNumber</h2>
             </div>
             @if (Model.Status != NotificationStatus.NotSubmitted)
             {
-                <div class="column" style="width:75%">
+                <div class="column" style="width:65%">
                     <div id="submit-side-bar" style="background-color:#f8f8f8">
-                        <h3 style="text-align:center; font-size:24px">Notification access level:</h3>
-                        <h3 style="text-align:center; font-size:36px">@Model.AccessLevelText</h3>
+                        <h3 style="text-align:center;">Notification access level:</h3>
+                        <h3 style="text-align:center;">@Model.AccessLevelText</h3>
                     </div>
                 </div>
             }
             <div>
                 <br />
             </div>
-
             <div>
                 @if (Model.ShowSubmitButton)
                 {
-                    @Html.ActionLink("Submit notification", "Disclaimer", "Submit", null, new { @class = "button" })
+                    @Html.ActionLink("Submit notification", "Disclaimer", "Submit", null, new { id = "btnSubmitNotification", @class = "govuk-button" })
                 }
 
                 else if (Model.ShowDisabledSubmitButtonAndGuidanceText)
                 {
-                    <a href="#" class="button" disabled="disabled">Submit notification</a>
-                            <p>You can submit this notification once you've completed all sections</p>
+                    <a href="#" class="govuk-button" disabled="disabled">Submit notification</a>
+                    <p>You can submit this notification once you've completed all sections</p>
                 }
 
                 else if (Model.ShowResubmitButton)
@@ -40,16 +39,13 @@
                     {
                         @Html.AntiForgeryToken()
 
-                        <input type="submit" class="button" value="Resubmit notification" />
+                        <input type="submit" class="govuk-button" value="Resubmit notification" />
                     }
                 }
             </div>
         </div>
 
-
-
-        <div class="column-half charge">
-
+        <div class="govuk-grid-column-one-third">
             <div class="status">
                 <span>Overall status</span>
                 <span class="statusbox @Html.ExportStatus().DisplayColorClass(Model.Status)">@EA.Prsd.Core.Helpers.EnumHelper.GetDisplayName(Model.Status).ToUpper()</span>
@@ -57,10 +53,10 @@
 
             @if (Model.Charge > 0)
             {
-                <div class="noti-charge">
+                <div class="noti-charge govuk-body">
                     <span>Notification<br />charge</span>
                     <span class="price">&pound;@Model.Charge</span>
-                    <div class="vat-message">
+                    <div class="vat-message govuk-text">
                         All charges for environmental<br /> permits and licences are outside<br /> the scope of VAT
                     </div>
                 </div>
@@ -97,18 +93,16 @@
             </div>
 
             @if (Model.Status == NotificationStatus.NotSubmitted)
-            {
-                
-                    <div class="pull-right">
-                        <div id="submit-side-bar" style="background-color:#f8f8f8">
-                            <h3 style="text-align:center; font-size:24px">Notification access level:</h3>
-                            <h3 style="text-align:center; font-size:36px">@Model.AccessLevelText</h3>
-                        </div>
-                        <div><br /></div>
+            {               
+                <div class="govuk-grid-column-full" style="padding: 0px !important">
+                    <div id="submit-side-bar" class="submitsidebar">
+                        <h3 style="text-align:center;">Notification access level:</h3>
+                        <h3 style="text-align:center;">@Model.AccessLevelText</h3>
                     </div>
+                </div>
             }
         </div>
-        
+
     </div>
 
     @if (!Model.IsNotificationComplete)

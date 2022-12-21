@@ -45,7 +45,7 @@
         }
 
         [Theory]
-        [MemberData("NumbersGreaterThanOrEqualToSystemStart")]
+        [MemberData(nameof(NumbersGreaterThanOrEqualToSystemStart))]
         public async Task CantEnterNumbersGreaterThanOrEqualToSystemStart(NotificationType notificationType,
             UKCompetentAuthority competentAuthority, int number)
         {
@@ -54,7 +54,7 @@
         }
 
         [Theory]
-        [MemberData("NumbersLessThanSystemStart")]
+        [MemberData(nameof(NumbersLessThanSystemStart))]
         public async Task CanOnlyEnterNumbersLessThanSystemStart(NotificationType notificationType,
             UKCompetentAuthority competentAuthority, int number)
         {

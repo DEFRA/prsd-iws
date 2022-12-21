@@ -6,7 +6,7 @@
 }
 
 <header class="hgroup">
-    <h1 class="heading-large">@ReasonForExportResources.Header</h1>
+    <h1 class="govuk-heading-l">@ReasonForExportResources.Header</h1>
 </header>
 
 @using (Html.BeginForm())
@@ -14,15 +14,15 @@
     @Html.AntiForgeryToken()
     @Html.Gds().ValidationSummary()
 
-    <div class="form-group @Html.Gds().FormGroupClass(m => m.ReasonForExport)">
+    <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.ReasonForExport)">
         @Html.Gds().HintParagraph(ReasonForExportResources.Hint)
         @Html.Gds().ValidationMessageFor(m => m.ReasonForExport)
-        @Html.TextBoxFor(m => m.ReasonForExport, new { @class = "full-width", @MaxLength = 70, @title = ReasonForExportResources.TextboxTitle })
+        @Html.TextBoxFor(m => m.ReasonForExport, new { @class = "govuk-input", @MaxLength = 70, @title = ReasonForExportResources.TextboxTitle })
     </div>
 
     @Html.HiddenFor(m => m.NotificationId)
 
-    <div class="form-group">
-        <button class="button" type="submit">@Constants.ContinueButtonText</button>
+    <div class="govuk-form-group">
+        <button class="govuk-button" type="submit" id="btnSaveAndContinue">@Constants.ContinueButtonText</button>
     </div>
 }

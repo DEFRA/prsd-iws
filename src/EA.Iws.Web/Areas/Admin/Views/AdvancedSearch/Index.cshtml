@@ -4,7 +4,7 @@
     ViewBag.Title = Resources.Heading;
 }
 
-<h1 class="heading-large">
+<h1 class="govuk-heading-l">
     @Resources.Heading
 </h1>
 
@@ -17,62 +17,62 @@
 
         <div class="column-one-half">
 
-            <div class="form-group @Html.Gds().FormGroupClass(m => m.SelectedNotificationType)">
+            <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.SelectedNotificationType)">
                 @Html.Gds().LabelFor(m => m.SelectedNotificationType, showOptionalLabel: false)
                 @Html.Gds().ValidationMessageFor(m => m.SelectedNotificationType)
-                @Html.Gds().DropDownListFor(m => m.SelectedNotificationType, Model.NotificationTypes, string.Empty, new { data_select_box = "true", data_select_allow_clear = "true" })
+                @Html.Gds().DropDownListFor(m => m.SelectedNotificationType, Model.NotificationTypes, string.Empty, new { @class = "govuk-select" })
             </div>
 
-            <div class="form-group @Html.Gds().FormGroupClass(m => m.SelectedTradeDirection)">
+            <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.SelectedTradeDirection)">
                 @Html.Gds().LabelFor(m => m.SelectedTradeDirection, showOptionalLabel: false)
                 @Html.Gds().ValidationMessageFor(m => m.SelectedTradeDirection)
-                @Html.Gds().DropDownListFor(m => m.SelectedTradeDirection, Model.TradeDirections, string.Empty, new { data_select_box = "true", data_select_allow_clear = "true" })
+                @Html.Gds().DropDownListFor(m => m.SelectedTradeDirection, Model.TradeDirections, string.Empty, new { @class = "govuk-select" })
             </div>
 
-            <div class="form-group @Html.Gds().FormGroupClass(m => m.IsInterim)">
+            <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.IsInterim)">
                 @Html.Gds().LabelFor(m => m.IsInterim, showOptionalLabel: false)
                 @Html.Gds().ValidationMessageFor(m => m.IsInterim)
-                @Html.Gds().DropDownListFor(m => m.IsInterim, Model.InterimStatus, string.Empty, new { data_select_box = "true", data_select_allow_clear = "true" })
+                @Html.Gds().DropDownListFor(m => m.IsInterim, Model.InterimStatus, string.Empty, new { @class = "govuk-select" })
             </div>
 
-            <div class="form-group @Html.Gds().FormGroupClass(m => m.SelectedNotificationStatusId)">
+            <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.SelectedNotificationStatusId)">
                 @Html.Gds().LabelFor(m => m.SelectedNotificationStatusId, showOptionalLabel: false)
                 @Html.Gds().ValidationMessageFor(m => m.SelectedNotificationStatusId)
-                @Html.Gds().DropDownListFor(m => m.SelectedNotificationStatusId, Model.NotificationStatuses, string.Empty, new { data_select_box = "true", data_select_allow_clear = "true" })
+                @Html.Gds().DropDownListFor(m => m.SelectedNotificationStatusId, Model.NotificationStatuses, string.Empty, new { @class = "govuk-select" })
             </div>
 
-            <div class="form-group @Html.Gds().FormGroupClass(m => m.NotificationReceivedStart) @Html.Gds().FormGroupClass(m => m.NotificationReceivedEnd)">
+            <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.NotificationReceivedStart) @Html.Gds().FormGroupClass(m => m.NotificationReceivedEnd)">
                 @Html.Gds().LabelFor(m => m.NotificationReceivedStart, showOptionalLabel: false)
                 @Html.Gds().ValidationMessageFor(m => m.NotificationReceivedStart)
                 @Html.Gds().ValidationMessageFor(m => m.NotificationReceivedEnd)
 
-                <div class="form-group">
+                <div class="govuk-form-group">
                     @Html.EditorFor(m => m.NotificationReceivedStart)
                 </div>
-                <div class="form-group">
+                <div class="govuk-form-group">
                     @Html.Gds().LabelFor(m => m.NotificationReceivedEnd, showOptionalLabel: false)
                     @Html.EditorFor(m => m.NotificationReceivedEnd)
                 </div>
             </div>
 
-            <div class="form-group @Html.Gds().FormGroupClass(m => m.LocalAreaId)">
+            <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.LocalAreaId)">
                 @Html.Gds().LabelFor(m => m.LocalAreaId, showOptionalLabel: false)
                 @Html.Gds().ValidationMessageFor(m => m.LocalAreaId)
-                @Html.Gds().DropDownListFor(m => m.LocalAreaId, Model.Areas, string.Empty, new { data_select_box = "true", data_select_allow_clear = "true" })
+                @Html.Gds().DropDownListFor(m => m.LocalAreaId, Model.Areas, string.Empty, new { @class = "govuk-select" })
             </div>
 
-            <div class="form-group @Html.Gds().FormGroupClass(m => m.EwcCode)">
+            <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.EwcCode)">
                 @Html.Gds().LabelFor(m => m.EwcCode, showOptionalLabel: false)
                 @Html.Gds().ValidationMessageFor(m => m.EwcCode)
-                @Html.Gds().TextBoxFor(m => m.EwcCode)
+                @Html.Gds().TextBoxFor(m => m.EwcCode, false)
             </div>
 
-            <div class="form-group @Html.Gds().FormGroupClass(m => m.BaselOecdCode)">
+            <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.BaselOecdCode)">
                 @Html.Gds().LabelFor(m => m.BaselOecdCode, showOptionalLabel: false)
                 @Html.Gds().ValidationMessageFor(m => m.BaselOecdCode)
-                @Html.Gds().TextBoxFor(m => m.BaselOecdCode)
+                @Html.Gds().TextBoxFor(m => m.BaselOecdCode, false)
 
-                <div class="form-group @Html.Gds().FormGroupClass(m => m.BaselOecdCodeNotListed)">
+                <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.BaselOecdCodeNotListed)">
                     @Html.Gds().ValidationMessageFor(m => m.BaselOecdCodeNotListed)
                     <label for="@Html.IdFor(m => m.BaselOecdCodeNotListed)">
                         @Html.CheckBoxFor(m => m.BaselOecdCodeNotListed)
@@ -81,7 +81,7 @@
                 </div>
             </div>
 
-            <div class="form-group @Html.Gds().FormGroupClass(m => m.SelectedOperationCodes)">
+            <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.SelectedOperationCodes)" id="advSearchRDCodes">
                 @Html.Gds().LabelFor(m => m.SelectedOperationCodes, showOptionalLabel: false)
                 @Html.Gds().ValidationMessageFor(m => m.SelectedOperationCodes)
                 @Html.ListBoxFor(m => m.SelectedOperationCodes, Model.OperationCodes, new { data_select_box = "true" })
@@ -91,77 +91,77 @@
 
         <div class="column-one-half">
 
-            <div class="form-group @Html.Gds().FormGroupClass(m => m.ExporterName)">
+            <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.ExporterName)">
                 @Html.Gds().LabelFor(m => m.ExporterName, showOptionalLabel: false)
                 @Html.Gds().ValidationMessageFor(m => m.ExporterName)
-                @Html.Gds().TextBoxFor(m => m.ExporterName)
+                @Html.Gds().TextBoxFor(m => m.ExporterName, false)
             </div>
 
-            <div class="form-group @Html.Gds().FormGroupClass(m => m.ProducerName)">
+            <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.ProducerName)">
                 @Html.Gds().LabelFor(m => m.ProducerName, showOptionalLabel: false)
                 @Html.Gds().ValidationMessageFor(m => m.ProducerName)
-                @Html.Gds().TextBoxFor(m => m.ProducerName)
+                @Html.Gds().TextBoxFor(m => m.ProducerName, false)
             </div>
 
-            <div class="form-group @Html.Gds().FormGroupClass(m => m.FacilityName)">
+            <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.FacilityName)">
                 @Html.Gds().LabelFor(m => m.FacilityName, showOptionalLabel: false)
                 @Html.Gds().ValidationMessageFor(m => m.FacilityName)
-                @Html.Gds().TextBoxFor(m => m.FacilityName)
+                @Html.Gds().TextBoxFor(m => m.FacilityName, false)
             </div>
 
-            <div class="form-group @Html.Gds().FormGroupClass(m => m.ImporterName)">
+            <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.ImporterName)">
                 @Html.Gds().LabelFor(m => m.ImporterName, showOptionalLabel: false)
                 @Html.Gds().ValidationMessageFor(m => m.ImporterName)
-                @Html.Gds().TextBoxFor(m => m.ImporterName)
+                @Html.Gds().TextBoxFor(m => m.ImporterName, false)
             </div>
 
-            <div class="form-group @Html.Gds().FormGroupClass(m => m.ExportCountryName)">
+            <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.ExportCountryName)">
                 @Html.Gds().LabelFor(m => m.ExportCountryName, showOptionalLabel: false)
                 @Html.Gds().ValidationMessageFor(m => m.ExportCountryName)
-                @Html.Gds().TextBoxFor(m => m.ExportCountryName)
+                @Html.Gds().TextBoxFor(m => m.ExportCountryName, false)
             </div>
 
-            <div class="form-group @Html.Gds().FormGroupClass(m => m.ExitPointName)">
+            <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.ExitPointName)">
                 @Html.Gds().LabelFor(m => m.ExitPointName, showOptionalLabel: false)
                 @Html.Gds().ValidationMessageFor(m => m.ExitPointName)
-                @Html.Gds().TextBoxFor(m => m.ExitPointName)
+                @Html.Gds().TextBoxFor(m => m.ExitPointName, false)
             </div>
 
-            <div class="form-group @Html.Gds().FormGroupClass(m => m.ImportCountryName)">
+            <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.ImportCountryName)">
                 @Html.Gds().LabelFor(m => m.ImportCountryName, showOptionalLabel: false)
                 @Html.Gds().ValidationMessageFor(m => m.ImportCountryName)
-                @Html.Gds().TextBoxFor(m => m.ImportCountryName)
+                @Html.Gds().TextBoxFor(m => m.ImportCountryName, false)
             </div>
 
-            <div class="form-group @Html.Gds().FormGroupClass(m => m.EntryPointName)">
+            <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.EntryPointName)">
                 @Html.Gds().LabelFor(m => m.EntryPointName, showOptionalLabel: false)
                 @Html.Gds().ValidationMessageFor(m => m.EntryPointName)
-                @Html.Gds().TextBoxFor(m => m.EntryPointName)
+                @Html.Gds().TextBoxFor(m => m.EntryPointName, false)
             </div>
 
-            <div class="form-group @Html.Gds().FormGroupClass(m => m.ConsentValidFromStart) @Html.Gds().FormGroupClass(m => m.ConsentValidFromEnd)">
+            <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.ConsentValidFromStart) @Html.Gds().FormGroupClass(m => m.ConsentValidFromEnd)">
                 @Html.Gds().LabelFor(m => m.ConsentValidFromStart, showOptionalLabel: false)
                 @Html.Gds().ValidationMessageFor(m => m.ConsentValidFromStart)
                 @Html.Gds().ValidationMessageFor(m => m.ConsentValidFromEnd)
 
-                <div class="form-group">
+                <div class="govuk-form-group">
                     @Html.EditorFor(m => m.ConsentValidFromStart)
                 </div>
-                <div class="form-group">
+                <div class="govuk-form-group">
                     @Html.Gds().LabelFor(m => m.ConsentValidFromEnd, showOptionalLabel: false)
                     @Html.EditorFor(m => m.ConsentValidFromEnd)
                 </div>
             </div>
 
-            <div class="form-group @Html.Gds().FormGroupClass(m => m.ConsentValidToStart) @Html.Gds().FormGroupClass(m => m.ConsentValidToEnd)">
+            <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.ConsentValidToStart) @Html.Gds().FormGroupClass(m => m.ConsentValidToEnd)">
                 @Html.Gds().LabelFor(m => m.ConsentValidToStart, showOptionalLabel: false)
                 @Html.Gds().ValidationMessageFor(m => m.ConsentValidToStart)
                 @Html.Gds().ValidationMessageFor(m => m.ConsentValidToEnd)
 
-                <div class="form-group">
+                <div class="govuk-form-group">
                     @Html.EditorFor(m => m.ConsentValidToStart)
                 </div>
-                <div class="form-group">
+                <div class="govuk-form-group">
                     @Html.Gds().LabelFor(m => m.ConsentValidToEnd, showOptionalLabel: false)
                     @Html.EditorFor(m => m.ConsentValidToEnd)
                 </div>
@@ -171,9 +171,9 @@
 
     </div>
 
-    <button type="submit" class="button">@Resources.Search</button>
+    <button type="submit" class="govuk-button">@Resources.Search</button>
 
-    <button id="reset" type="reset" class="button">@Resources.Reset</button>
+    <button id="reset" type="reset" class="govuk-button">@Resources.Reset</button>
 }
 
 @section scripts {

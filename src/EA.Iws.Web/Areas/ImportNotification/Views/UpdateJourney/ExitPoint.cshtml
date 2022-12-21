@@ -4,7 +4,7 @@
     ViewBag.Title = Resources.ChangeExitPointTitle;
 }
 
-<h1 class="heading-large">@Resources.ChangeExitPointTitle</h1>
+<h1 class="govuk-heading-l">@Resources.ChangeExitPointTitle</h1>
 
 <p>@Resources.CompetentAuthority - @(Model.CompetentAuthority).</p>
 
@@ -15,11 +15,11 @@
     @Html.AntiForgeryToken()
     @Html.Gds().ValidationSummary()
 
-    <div class="form-group @Html.Gds().FormGroupClass(m => m.SelectedExitPoint)">
+    <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.SelectedExitPoint)">
         @Html.Gds().LabelFor(m => m.SelectedExitPoint, new { @class = "form-label-bold" })
         @Html.Gds().ValidationMessageFor(m => m.SelectedExitPoint)
         @Html.Gds().DropDownListFor(m => m.SelectedExitPoint, Model.ExitPoints, string.Empty, new { title = Resources.ExitPoint, data_select_box = "true" })
     </div>
 
-    <button class="button" type="submit">@Constants.ContinueButtonText</button>
+    <button class="govuk-button" type="submit">@Constants.ContinueButtonText</button>
 }

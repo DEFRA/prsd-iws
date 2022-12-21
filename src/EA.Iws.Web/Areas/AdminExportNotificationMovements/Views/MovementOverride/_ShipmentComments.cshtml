@@ -2,22 +2,24 @@
 
 @if (Model.IsReceived)
 {
-    <div class="form-group @Html.Gds().FormGroupClass(m => m.HasComments)">
+    <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.HasComments)">
         @Html.LabelFor(m => m.HasComments, new { @class = "form-label-bold" })
         @Html.Gds().ValidationMessageFor(m => m.HasComments)
-        <fieldset>
-            <div class="multiple-choice" data-target="comments">
-                @Html.RadioButtonFor(m => m.HasComments, true, new { id = "comments-yes" })
-                <label for="comments-yes">
-                    Yes
-                </label>
-            </div>
+        <fieldset class="govuk-fieldset">
+            <div class="govuk-radios" data-module="govuk-radios">
+                <div class="govuk-radios__item" data-target="comments">
+                    @Html.RadioButtonFor(m => m.HasComments, true, new { id = "comments-yes", @class = "govuk-radios__input" })
+                    <label class="govuk-label govuk-radios__label" for="comments-yes">
+                        Yes
+                    </label>
+                </div>
 
-            <div class="multiple-choice">
-                @Html.RadioButtonFor(m => m.HasComments, false, new { id = "comments-no" })
-                <label for="comments-no">
-                    No
-                </label>
+                <div class="govuk-radios__item">
+                    @Html.RadioButtonFor(m => m.HasComments, false, new { id = "comments-no", @class = "govuk-radios__input" })
+                    <label class="govuk-label govuk-radios__label" for="comments-no">
+                        No
+                    </label>
+                </div>
             </div>
 
             <div class="panel @(!Model.HasComments ? "js-hidden" : string.Empty)" id="comments">
@@ -25,13 +27,13 @@
                 <div class="form-group @Html.Gds().FormGroupClass(m => m.StatsMarking)">
                     @Html.LabelFor(m => m.StatsMarking, new { @class = "form-label-bold" })
                     @Html.Gds().ValidationMessageFor(m => m.StatsMarking)
-                    @Html.Gds().DropDownListFor(m => m.StatsMarking, Model.StatsMarkingSelectList, string.Empty)
+                    @Html.Gds().DropDownListFor(m => m.StatsMarking, Model.StatsMarkingSelectList, string.Empty, new { @class = "govuk-select" })
                 </div>
 
                 <div class="form-group @Html.Gds().FormGroupClass(m => m.Comments)">
                     @Html.LabelFor(m => m.Comments, new { @class = "form-label-bold" })
                     @Html.Gds().ValidationMessageFor(m => m.Comments)
-                    @Html.TextAreaFor(m => m.Comments, new { @class = "form-control-wide", rows = 10 })
+                    @Html.TextAreaFor(m => m.Comments, new { @class = "govuk-textarea", rows = 10 })
                 </div>
             </div>
         </fieldset>
@@ -42,6 +44,6 @@ else
     <div class="form-group @Html.Gds().FormGroupClass(m => m.StatsMarking)">
         @Html.LabelFor(m => m.StatsMarking, new { @class = "form-label-bold" })
         @Html.Gds().ValidationMessageFor(m => m.StatsMarking)
-        @Html.Gds().DropDownListFor(m => m.StatsMarking, Model.StatsMarkingSelectList, string.Empty)
+        @Html.Gds().DropDownListFor(m => m.StatsMarking, Model.StatsMarkingSelectList, string.Empty, new { @class = "govuk-select" })
     </div>
 }

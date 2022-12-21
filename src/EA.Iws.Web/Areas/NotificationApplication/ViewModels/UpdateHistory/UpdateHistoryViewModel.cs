@@ -51,7 +51,7 @@
                     Value = p.Id.ToString()
                 }).ToList();
 
-                filterTerms.Insert(0, new SelectListItem { Text = "View all", Value = string.Empty });
+                filterTerms.Insert(0, new SelectListItem { Text = "View all updates", Value = string.Empty });
                 filterTerms.Insert(1, new SelectListItem { Text = "Date", Value = "date" });
 
                 return new SelectList(filterTerms, "Value", "Text", SelectedScreen);

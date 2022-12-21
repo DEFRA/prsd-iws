@@ -58,7 +58,7 @@
         {
             var result = await editController.Index(CreateValidEditAddress());
 
-            A.CallTo(() => mediator.SendAsync(A<EditAddressBookEntry>._)).MustHaveHappened(Repeated.Exactly.Once);
+            A.CallTo(() => mediator.SendAsync(A<EditAddressBookEntry>._)).MustHaveHappenedOnceExactly();
         }
 
         [Fact]
@@ -76,7 +76,7 @@
         {
             var result = await editController.Add(CreateValidAddAddress());
 
-            A.CallTo(() => mediator.SendAsync(A<AddNewAddressBookEntry>._)).MustHaveHappened(Repeated.Exactly.Once);
+            A.CallTo(() => mediator.SendAsync(A<AddNewAddressBookEntry>._)).MustHaveHappenedOnceExactly();
         }
 
         [Fact]

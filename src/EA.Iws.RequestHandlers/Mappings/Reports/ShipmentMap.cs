@@ -53,7 +53,11 @@
                 ShipmentStatus = source.Status,
                 NotifierCompanyType = source.NotifierCompanyType.ToString(),
                 ConsigneeCompanyType = source.ConsigneeCompanyType.ToString(),
-                FacilityCompanyType = source.FacilityCompanyType.ToString()
+                FacilityCompanyType = source.FacilityCompanyType.ToString(),
+                RejectedReason = source.RejectedReason,
+                ActionedByExternalUser = source.ActionedByExternalUser,
+                RejectedQuantity = source.RejectedQuantity,
+                ShipmentRejectedDate = source.ShipmentRejectedDate
             };
         }
 

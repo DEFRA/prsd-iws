@@ -4,7 +4,7 @@
     ViewBag.Title = SummaryResources.Title;
 }
 
-<h1 class="heading-large">@SummaryResources.Header</h1>
+<h1 class="govuk-heading-l">@SummaryResources.Header</h1>
 
 @Html.Partial("StateOfExportSummary", Model.StateOfExportData, new ViewDataDictionary { { "Id", ViewBag.NotificationId }, { "BackToOverview", ViewBag.BackToOverview } })
 @Html.Partial("TransitStatesSummary", Model.TransitStatesData, new ViewDataDictionary { { "Id", ViewBag.NotificationId }, { "BackToOverview", ViewBag.BackToOverview } })
@@ -13,7 +13,7 @@
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    <div class="form-group" style="margin-top: 25px;">
-        <button class="button" type="submit">@Constants.ContinueButtonText</button>
+    <div class="govuk-form-group" style="margin-top: 25px;">
+        <button class="govuk-button" type="submit">@Constants.ContinueButtonText</button>
     </div>
 }
