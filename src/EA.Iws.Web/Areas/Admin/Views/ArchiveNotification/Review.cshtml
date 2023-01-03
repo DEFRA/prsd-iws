@@ -38,77 +38,77 @@
     </p>
 </div>
 
-@using (Html.BeginForm())
+@if (Model.HasAnyResults)
 {
-    if (Model.HasAnyResults)
-    {
-        <div class="govuk-form-group">
-            <div id="tblArchive" class="govuk-form-group">
-                <table class="govuk-table" id="tblArchive">
-                    <thead class="govuk-table__head">
-                        <tr class="govuk-table__row">
-                            <th scope="col" class="govuk-table__header">@ArchiveNotificationResources.NotificationNumber</th>
-                            <th scope="col" class="govuk-table__header">@ArchiveNotificationResources.Status</th>
-                            <th scope="col" class="govuk-table__header">@ArchiveNotificationResources.DateGenerated</th>
-                            <th scope="col" class="govuk-table__header">@ArchiveNotificationResources.CompanyName</th>
-                            <th scope="col" class="govuk-table__header">@ArchiveNotificationResources.Action</th>
-                        </tr>
-                    </thead>
-                    <tbody class="govuk-table__body">
-                        @for (int i = 0; i < Model.SelectedNotifications.Count; i++)
-                        {
-                            <tr class="govuk-table__row">
-                                <td class="govuk-table__cell">
-                                    @Html.DisplayFor(m => m.SelectedNotifications[i].NotificationNumber)
-                                </td>
-                                <td class="govuk-table__cell">
-                                    @Html.DisplayFor(m => m.SelectedNotifications[i].Status)
-                                </td>
-                                <td class="govuk-table__cell">
-                                    @DisplayDate(Model.SelectedNotifications[i].CreatedDate)
-                                </td>
-                                <td class="govuk-table__cell">
-                                    @Html.DisplayFor(m => m.SelectedNotifications[i].CompanyName)
-                                </td>
-                                <td class="govuk-table__cell">
-                                    @Html.ActionLink(ArchiveNotificationResources.Remove, "Remove", "ArchiveNotification", new { area = "Admin", id = Model.SelectedNotifications[i].Id }, null)
-                                </td>
-                                @Html.HiddenFor(m => m.SelectedNotifications[i].NotificationNumber)
-                                @Html.HiddenFor(m => m.SelectedNotifications[i].Status)
-                                @Html.HiddenFor(m => m.SelectedNotifications[i].CreatedDate)
-                                @Html.HiddenFor(m => m.SelectedNotifications[i].CompanyName)
-                                @Html.HiddenFor(m => m.SelectedNotifications[i].IsSelected)
-                                @Html.HiddenFor(m => m.SelectedNotifications[i].Id)
-                            </tr>
-                        }
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    }
-    else
-    {
-        <table class="govuk-table" id="tblArchive">
-            <thead class="govuk-table__head">
-                <tr class="govuk-table__row">
-                    <th scope="col" class="govuk-table__header">@ArchiveNotificationResources.NotificationNumber</th>
-                    <th scope="col" class="govuk-table__header">@ArchiveNotificationResources.Status</th>
-                    <th scope="col" class="govuk-table__header">@ArchiveNotificationResources.DateGenerated</th>
-                    <th scope="col" class="govuk-table__header">@ArchiveNotificationResources.CompanyName</th>
-                    <th scope="col" class="govuk-table__header">@ArchiveNotificationResources.Action</th>
-                </tr>
-            </thead>
-            <tbody class="govuk-table__body">
-                <tr class="govuk-table__row">
-                    <td class="govuk-table__cell" colspan="5">
-                        <h1 class="govuk-heading-m">@ArchiveNotificationResources.NoNotificationsToArchiveMsg</h1>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    }
-
     <div class="govuk-form-group">
-        <button class="govuk-button" type="submit">@Constants.ConfirmButtonText</button>
+        <div id="tblArchive" class="govuk-form-group">
+            <table class="govuk-table" id="tblArchive">
+                <thead class="govuk-table__head">
+                    <tr class="govuk-table__row">
+                        <th scope="col" class="govuk-table__header">@ArchiveNotificationResources.NotificationNumber</th>
+                        <th scope="col" class="govuk-table__header">@ArchiveNotificationResources.Status</th>
+                        <th scope="col" class="govuk-table__header">@ArchiveNotificationResources.DateGenerated</th>
+                        <th scope="col" class="govuk-table__header">@ArchiveNotificationResources.CompanyName</th>
+                        <th scope="col" class="govuk-table__header">@ArchiveNotificationResources.Action</th>
+                    </tr>
+                </thead>
+                <tbody class="govuk-table__body">
+                    @for (int i = 0; i < Model.SelectedNotifications.Count; i++)
+                    {
+                        <tr class="govuk-table__row">
+                            <td class="govuk-table__cell">
+                                @Html.DisplayFor(m => m.SelectedNotifications[i].NotificationNumber)
+                            </td>
+                            <td class="govuk-table__cell">
+                                @Html.DisplayFor(m => m.SelectedNotifications[i].Status)
+                            </td>
+                            <td class="govuk-table__cell">
+                                @DisplayDate(Model.SelectedNotifications[i].CreatedDate)
+                            </td>
+                            <td class="govuk-table__cell">
+                                @Html.DisplayFor(m => m.SelectedNotifications[i].CompanyName)
+                            </td>
+                            <td class="govuk-table__cell">
+                                @Html.ActionLink(ArchiveNotificationResources.Remove, "Remove", "ArchiveNotification", new { notificationId = Model.SelectedNotifications[i].Id }, null)
+                            </td>
+                            @Html.HiddenFor(m => m.SelectedNotifications[i].NotificationNumber)
+                            @Html.HiddenFor(m => m.SelectedNotifications[i].Status)
+                            @Html.HiddenFor(m => m.SelectedNotifications[i].CreatedDate)
+                            @Html.HiddenFor(m => m.SelectedNotifications[i].CompanyName)
+                            @Html.HiddenFor(m => m.SelectedNotifications[i].IsSelected)
+                            @Html.HiddenFor(m => m.SelectedNotifications[i].Id)
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
     </div>
 }
+else
+{
+    <table class="govuk-table" id="tblArchive">
+        <thead class="govuk-table__head">
+            <tr class="govuk-table__row">
+                <th scope="col" class="govuk-table__header">@ArchiveNotificationResources.NotificationNumber</th>
+                <th scope="col" class="govuk-table__header">@ArchiveNotificationResources.Status</th>
+                <th scope="col" class="govuk-table__header">@ArchiveNotificationResources.DateGenerated</th>
+                <th scope="col" class="govuk-table__header">@ArchiveNotificationResources.CompanyName</th>
+                <th scope="col" class="govuk-table__header">@ArchiveNotificationResources.Action</th>
+            </tr>
+        </thead>
+        <tbody class="govuk-table__body">
+            <tr class="govuk-table__row">
+                <td class="govuk-table__cell" colspan="5">
+                    <h1 class="govuk-heading-m">@ArchiveNotificationResources.NoNotificationsToArchiveMsg</h1>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+}
+@using (Html.BeginForm())
+{
+    <button class="govuk-button" type="submit">@Constants.ConfirmButtonText</button>
+}
+<div class="govuk-form-group">
+    @Html.ActionLink("Back", "Index", "ArchiveNotification", new { @class = "govuk-back-link" })
+</div>
