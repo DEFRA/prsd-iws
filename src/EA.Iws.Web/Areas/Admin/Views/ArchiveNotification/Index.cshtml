@@ -1,0 +1,282 @@
+﻿@model EA.Iws.Web.Areas.Admin.ViewModels.ArchiveNotification.ArchiveNotificationResultViewModel
+@using EA.Iws.Web.Infrastructure.Paging;
+@using EA.Iws.Web.Areas.Admin.Views.ArchiveNotification;
+
+@{
+    ViewBag.Title = "Archive notifications";
+}
+
+@helper DisplayDate(DateTimeOffset date)
+{
+    @date.ToString("d MMM yyyy")
+}
+
+<h1 class="govuk-heading-l">@ArchiveNotificationResources.Heading</h1>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    @Html.Gds().ValidationSummary()
+
+    @Html.HiddenFor(m => m.PageSize)
+    @Html.HiddenFor(m => m.PageNumber)
+    @Html.HiddenFor(m => m.NumberOfNotifications)
+    @Html.HiddenFor(m => m.NumberOfNotificationsSelected)
+    @Html.HiddenFor(m => m.HasAnyNotificationSelected)
+    @Html.HiddenFor(m => m.HasNotificationsSelectedMoreThanOne)
+
+    <div id="dvInformationMessage" class="archive-notification-warning" style="display: none;">
+        <div class="gem-c-success-alert govuk-notification-banner govuk-notification-banner-warning">
+            <div class="govuk-notification-banner-header">
+                <h2 class="govuk-notification-banner-title">Important</h2>
+            </div>
+            <div class="govuk-notification-banner-content">
+                <p class="govuk-body">You may only select up to 25 notifications at a time for archiving.</p>
+            </div>
+        </div>
+    </div>
+
+    <h1 class="govuk-heading-m">
+        @ArchiveNotificationResources.SelectNotifications
+    </h1>
+
+    <details class="govuk-details" data-module="govuk-details">
+        <summary class="govuk-details__summary">
+            <span class="govuk-details__summary-text">
+                @ArchiveNotificationResources.WhyAreWeAsking
+            </span>
+        </summary>
+        <div class="govuk-details__text">
+            @ArchiveNotificationResources.GdprBlurbStart
+            <br />
+            <br />
+            @ArchiveNotificationResources.GdprBlurbEnd
+        </div>
+    </details>
+
+    if (Model.HasAnyResults)
+    {
+        <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.HasAnyNotificationSelected)">
+            @Html.Gds().ValidationMessageFor(m => m.HasAnyNotificationSelected)
+            <div id="dvCountHeader">
+                <span id="SelectedNotificationCount"></span> of 25 notifications selected
+            </div>
+            <div id="tblArchive" class="govuk-form-group">
+                <table class="govuk-table">
+                    <thead class="govuk-table__head">
+                        <tr class="govuk-table__row">
+                            <th scope="col" class="govuk-table__header">@ArchiveNotificationResources.NotificationNumber</th>
+                            <th scope="col" class="govuk-table__header">@ArchiveNotificationResources.Status</th>
+                            <th scope="col" class="govuk-table__header">@ArchiveNotificationResources.DateGenerated</th>
+                            <th scope="col" class="govuk-table__header">@ArchiveNotificationResources.CompanyName</th>
+                            <th scope="col" class="govuk-table__header" style="text-align : center;">
+                                @Html.LabelFor(m => m.IsSelectAllChecked, new { @for = "SelectAll", @style = "white-space:nowrap;" })
+                                @Html.CheckBoxFor(m => m.IsSelectAllChecked, new { id = "SelectAll", name = "SelectAll", @class = "checkboxes__input checkboxes" })
+                                @Html.HiddenFor(m => m.IsSelectAllChecked)
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody class="govuk-table__body">
+                        @for (int i = 0; i < Model.Notifications.Count; i++)
+                        {
+                            <tr class="govuk-table__row">
+                                <td class="govuk-table__cell nNumber">
+                                    @Html.DisplayFor(m => m.Notifications[i].NotificationNumber)
+                                </td>
+                                <td class="govuk-table__cell status">
+                                    @Html.DisplayFor(m => m.Notifications[i].Status)
+                                </td>
+                                <td class="govuk-table__cell createdate">
+                                    @DisplayDate(Model.Notifications[i].CreatedDate)
+                                </td>
+                                <td class="govuk-table__cell companyName">
+                                    @Html.DisplayFor(m => m.Notifications[i].CompanyName)
+                                </td>
+                                <td class="govuk-table__cell">
+                                    <div class="govuk-checkboxes__item govuk-checkboxes--small">
+                                        @Html.CheckBoxFor(m => m.Notifications[i].IsSelected, new { id = @Model.Notifications[i].Id, @class = "checkboxes__input checkboxes" })
+                                    </div>
+                                </td>
+                                @Html.HiddenFor(m => m.Notifications[i].NotificationNumber)
+                                @Html.HiddenFor(m => m.Notifications[i].Status)
+                                @Html.HiddenFor(m => m.Notifications[i].CreatedDate)
+                                @Html.HiddenFor(m => m.Notifications[i].CompanyName)
+                                @Html.HiddenFor(m => m.Notifications[i].IsSelected)
+                                @Html.HiddenFor(m => m.Notifications[i].Id)
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="govuk-form-group" style="width: 800px">
+            @Html.Pager(Model.PageSize, Model.PageNumber, Model.NumberOfNotifications)
+        </div>
+        <div class="govuk-form-group">
+            <button class="govuk-button" type="submit">@Constants.ContinueButtonText</button>
+        </div>
+    }
+    else
+    {
+        <table class="govuk-table" id="tblArchive">
+            <thead class="govuk-table__head">
+                <tr class="govuk-table__row">
+                    <th scope="col" class="govuk-table__header">@ArchiveNotificationResources.NotificationNumber</th>
+                    <th scope="col" class="govuk-table__header">@ArchiveNotificationResources.Status</th>
+                    <th scope="col" class="govuk-table__header">@ArchiveNotificationResources.DateGenerated</th>
+                    <th scope="col" class="govuk-table__header">@ArchiveNotificationResources.CompanyName</th>
+                </tr>
+            </thead>
+            <tbody class="govuk-table__body">
+                <tr class="govuk-table__row">
+                    <td class="govuk-table__cell" colspan="4">
+                        <h1 class="govuk-heading-m">@ArchiveNotificationResources.NoResults</h1>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    }
+}
+
+@section scripts
+{
+    <script type="text/javascript">
+
+        $('#SelectedNotificationCount').val($('#NumberOfNotificationsSelected').val());
+        $('#SelectedNotificationCount').html($('#NumberOfNotificationsSelected').val());
+
+        $('#SelectAll').click(function (e) {
+            var pageNum = $('#PageNumber').val();
+            var hasMorePagesSelected = $('#HasNotificationsSelectedMoreThanOne').val().toLowerCase();
+            var numVal = $('#NumberOfNotificationsSelected').val();
+
+            if (this.checked) {
+                numVal = $('#NumberOfNotificationsSelected').val() + 5;
+            } else {
+                numVal = $('#NumberOfNotificationsSelected').val() - 5;
+            }
+
+            if (numVal <= 5 && hasMorePagesSelected == 'false') {
+                var table = $(e.target).closest('table');
+                $('td input:checkbox', table).prop('checked', this.checked);
+
+                var myNotificationIdsArray = [];
+                $(':checkbox').each(function () {
+                    var nNumber, status, dateGenerated, companyName, isSelected, pageNumber;
+                    nNumber = $(this).closest('tr').find('.nNumber').html();
+                    status = $(this).closest('tr').find('.status').html();
+                    dateGenerated = $(this).closest('tr').find('.createdate').html();
+                    companyName = $(this).closest('tr').find('.companyName').html();
+                    isSelected = this.checked;
+                    pageNumber = pageNum;
+
+                    if (this.id != 'SelectAll') {
+                        var item = { id: this.id, notificationNumber: nNumber, status: status, createdDate: dateGenerated, companyName: companyName, isSelected: isSelected, pageNumber: pageNumber };
+                        myNotificationIdsArray.push(item);
+                    }
+                });
+
+                $.ajax({
+                    url: '@Url.Action("SelectAllNotifications")',
+                    type: 'POST',
+                    data: { selectedNotificationsData: myNotificationIdsArray, isChecked: this.checked, __RequestVerificationToken: $("[name=__RequestVerificationToken]").val() },
+                    success: function (result) {
+                        var resultList = result;
+                        $('#SelectedNotificationCount').html(resultList[1]);
+                        $('#NumberOfNotificationsSelected').val(resultList[1]);
+                        if (resultList[0] > 1) {
+                            $('#HasNotificationsSelectedMoreThanOne').val("true");
+                        }
+                        else {
+                            $('#HasNotificationsSelectedMoreThanOne').val("false");
+                        }
+                    }
+                });
+            }
+            else {
+                $('#dvInformationMessage').show();
+                $("#SelectAll").prop("checked", false);
+            }
+        });
+
+        $(':checkbox').change(function () {
+            var pageNum = $('#PageNumber').val();
+            var myNotificationIdsArray = [];
+            var notificationId = this.id;
+            var isNotificationChecked = $(this).is(':checked');
+            var nNumber, status, dateGenerated, companyName, isSelected, pageNumber;
+
+            nNumber = $(this).closest('tr').find('.nNumber').html();
+            status = $(this).closest('tr').find('.status').html();
+            dateGenerated = $(this).closest('tr').find('.createdate').html();
+            companyName = $(this).closest('tr').find('.companyName').html();
+            isSelected = isNotificationChecked;
+            pageNumber = pageNum;
+
+            if (this.id != 'SelectAll') {
+                var item = { id: this.id, notificationNumber: nNumber, status: status, createdDate: dateGenerated, companyName: companyName, isSelected: isSelected, pageNumber: pageNumber };
+                myNotificationIdsArray.push(item);
+            }
+
+            if (notificationId != 'SelectAll') {
+                var responseVal = validateNoNotifications(isNotificationChecked);
+                if (responseVal == false) {
+                    $.ajax({
+                        url: '@Url.Action("SelectSingleNotification")',
+                        type: 'POST',
+                        data: { selectedNotificationData: myNotificationIdsArray, isChecked: isNotificationChecked, __RequestVerificationToken: $("[name=__RequestVerificationToken]").val() },
+                        success: function (result) {
+                            var resultList = result;
+                            $('#SelectedNotificationCount').html(resultList[1]);
+                            $('#NumberOfNotificationsSelected').val(resultList[1]);
+                            if (resultList[0] > 1) {
+                                $('#HasNotificationsSelectedMoreThanOne').val("true");
+                            }
+                            else {
+                                $('#HasNotificationsSelectedMoreThanOne').val("false");
+                            }
+                        }
+                    });
+                } else {
+                    $(this).prop("checked", false);
+                }
+            }
+        });
+
+        function validateNoNotifications(isNotificationChecked) {
+            var totalSelected = $('#NumberOfNotificationsSelected').val();
+            var hasMorePagesSelected = $('#HasNotificationsSelectedMoreThanOne').val().toLowerCase();
+
+            if (isNotificationChecked) {
+                totalSelected++;
+            }
+            else {
+                totalSelected--;
+            }
+
+            if (totalSelected >= 1) {
+                $('#HasAnyNotificationSelected').val("true");
+            } else {
+                $('#HasAnyNotificationSelected').val("false");
+            }
+
+            if (totalSelected > 5) {
+                $('#dvInformationMessage').show();
+                $("#SelectAll").prop("checked", false);
+                return true;
+            }
+            else if (totalSelected == 5 && hasMorePagesSelected == 'true') {
+                return false;
+            }
+            //else if (totalSelected == 5 && hasMorePagesSelected == 'false') {
+            //    $("#SelectAll").prop("checked", false);
+            //    return true;
+            //}
+            else {
+                $('#dvInformationMessage').hide();
+                $("#SelectAll").prop("checked", false);
+                return false;
+            }
+        }
+    </script>
+}

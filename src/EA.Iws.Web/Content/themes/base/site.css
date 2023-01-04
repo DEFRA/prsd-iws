@@ -2158,6 +2158,26 @@ textarea {
     vertical-align: bottom;
 }
 
+#tblArchive,
+#dvInformationMessage,
+#dvCountHeader {
+    width: 800px;
+}
+
+#tblArchive tr td .govuk-checkboxes__item {
+    min-height: 0px !important;
+    margin-top: -5px !important;
+    margin-bottom: 0px !important;
+}
+
+#dvCountHeader {
+    background-color: #1d70b8;
+    height: 40px;
+    color: white;
+    padding-left: 20px;
+    padding-top: 15px;
+}
+
 #dvAccessLevelHeader {
     border-top: 10px solid #005ea5;
     padding-top: 0.4em;
@@ -2190,5 +2210,5 @@ textarea {
 
 .tableRadio:focus {
     border-width: 4px;
-    outline-offset: 1px;
+    outline-offset: 1px;        
 }

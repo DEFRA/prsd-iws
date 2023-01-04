@@ -47,6 +47,7 @@
     <Compile Include="AddressBook\AddressBookRecordData.cs" />
     <Compile Include="AddressBook\AddressRecordType.cs" />
     <Compile Include="Admin\ApprovalAction.cs" />
+    <Compile Include="Admin\ArchiveNotification\ArchiveNotificationResult.cs" />
     <Compile Include="Admin\ChangeUserData.cs" />
     <Compile Include="Admin\ExportNotificationOwnerDisplay.cs" />
     <Compile Include="Admin\ExternalUserData.cs" />
