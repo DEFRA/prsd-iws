@@ -1,18 +1,18 @@
 ﻿namespace EA.Iws.Web.Areas.Admin.Controllers
 {
+    using EA.Iws.Core.Authorization.Permissions;
     using EA.Iws.Requests.Notification;
     using EA.Iws.Web.Areas.Admin.ViewModels.ArchiveNotification;
     using EA.Iws.Web.Infrastructure.Authorization;
     using EA.Prsd.Core.Mediator;
     using Newtonsoft.Json;
-    using Requests.Admin.ArchiveNotification;
     using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Mvc;
 
-    [AuthorizeActivity(typeof(ArchiveNotifications))]
+    [AuthorizeActivity(UserAdministrationPermissions.CanAdminUserArchiveNotifications)]
     public class ArchiveNotificationController : Controller
     {
         private readonly IMediator mediator;
@@ -30,7 +30,7 @@
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
+        [Authorize]
         public JsonResult SelectSingleNotification(List<NotificationArchiveSummaryData> selectedNotificationData, bool isChecked)
         {
             var selectNotificationList = new List<NotificationArchiveSummaryData>();
@@ -63,7 +63,7 @@
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
+        [Authorize]
         public JsonResult SelectAllNotifications(List<NotificationArchiveSummaryData> selectedNotificationsData, bool isChecked)
         {
             var selectNotificationList = new List<NotificationArchiveSummaryData>();
@@ -119,7 +119,7 @@
             return View(reviewModel);
         }
 
-        [HttpGet]        
+        [HttpGet]
         public ActionResult Remove(Guid notificationId)
         {
             var selectNotificationList = new List<NotificationArchiveSummaryData>();
