@@ -30,6 +30,7 @@
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public JsonResult SelectSingleNotification(List<NotificationArchiveSummaryData> selectedNotificationData, bool isChecked)
         {
             var selectNotificationList = new List<NotificationArchiveSummaryData>();
@@ -56,12 +57,13 @@
             }
 
             Session["SelectedNotifications"] = JsonConvert.SerializeObject(selectNotificationList);
-            var response = GetResonseResult(selectNotificationList);
+            var response = GetResponseResult(selectNotificationList);
 
             return Json(response);
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public JsonResult SelectAllNotifications(List<NotificationArchiveSummaryData> selectedNotificationsData, bool isChecked)
         {
             var selectNotificationList = new List<NotificationArchiveSummaryData>();
@@ -78,7 +80,7 @@
             }
 
             Session["SelectedNotifications"] = JsonConvert.SerializeObject(selectNotificationList);
-            var response = GetResonseResult(selectNotificationList);
+            var response = GetResponseResult(selectNotificationList);
 
             return Json(response);
         }
@@ -133,7 +135,7 @@
             }
 
             Session["SelectedNotifications"] = JsonConvert.SerializeObject(selectNotificationList);
-            var response = GetResonseResult(selectNotificationList);
+            var response = GetResponseResult(selectNotificationList);
 
             var reviewModel = new ArchiveNotificationReviewViewModel()
             {
@@ -187,7 +189,7 @@
             return model;
         }
 
-        private List<int> GetResonseResult(List<NotificationArchiveSummaryData> selectNotificationList)
+        private List<int> GetResponseResult(List<NotificationArchiveSummaryData> selectNotificationList)
         {
             List<int> returnList = new List<int>();
 
