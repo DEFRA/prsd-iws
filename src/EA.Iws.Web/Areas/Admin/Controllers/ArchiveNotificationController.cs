@@ -30,7 +30,7 @@
         }
 
         [HttpPost]
-        [Authorize]
+        [ValidateAntiForgeryToken]
         public JsonResult SelectSingleNotification(List<NotificationArchiveSummaryData> selectedNotificationData, bool isChecked)
         {
             var selectNotificationList = new List<NotificationArchiveSummaryData>();
@@ -63,7 +63,7 @@
         }
 
         [HttpPost]
-        [Authorize]
+        [ValidateAntiForgeryToken]
         public JsonResult SelectAllNotifications(List<NotificationArchiveSummaryData> selectedNotificationsData, bool isChecked)
         {
             var selectNotificationList = new List<NotificationArchiveSummaryData>();

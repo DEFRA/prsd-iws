@@ -179,7 +179,7 @@
                 $.ajax({
                     url: '@Url.Action("SelectAllNotifications")',
                     type: 'POST',
-                    data: { selectedNotificationsData: myNotificationIdsArray, isChecked: this.checked },
+                    data: { selectedNotificationsData: myNotificationIdsArray, isChecked: this.checked, __RequestVerificationToken: $("[name=__RequestVerificationToken]").val() },
                     success: function (result) {
                         var resultList = result;
                         $('#SelectedNotificationCount').html(resultList[1]);
@@ -224,7 +224,7 @@
                     $.ajax({
                         url: '@Url.Action("SelectSingleNotification")',
                         type: 'POST',
-                        data: { selectedNotificationData: myNotificationIdsArray, isChecked: isNotificationChecked },
+                        data: { selectedNotificationData: myNotificationIdsArray, isChecked: isNotificationChecked, __RequestVerificationToken: $("[name=__RequestVerificationToken]").val() },
                         success: function (result) {
                             var resultList = result;
                             $('#SelectedNotificationCount').html(resultList[1]);
