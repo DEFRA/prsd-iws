@@ -1,8 +1,10 @@
 ﻿namespace EA.Iws.Requests.Notification
 {
+    using Core.Authorization;
+    using Core.Authorization.Permissions;
     using Prsd.Core.Mediator;
 
-    //TODO JR what auth do we need?
+    [RequestAuthorization(UserAdministrationPermissions.CanAdminUserArchiveNotifications)]
     public class GetArchiveNotificationsByUser : IRequest<UserArchiveNotifications>
     {
         public GetArchiveNotificationsByUser(int pageNumber)
