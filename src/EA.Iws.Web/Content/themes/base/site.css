@@ -2177,3 +2177,38 @@ textarea {
     padding-left: 20px;
     padding-top: 15px;
 }
+
+#dvAccessLevelHeader {
+    border-top: 10px solid #005ea5;
+    padding-top: 0.4em;
+    margin-bottom: 0.5em;
+}
+
+#dvAccessLevelTitle,
+#dvAccessLevelBody {
+    text-align: center;
+    font-size: 24px;
+}
+
+#dvAccessLevelTitle {
+    font-weight: bold;
+}
+
+.tableRadio {
+    border: 5px solid white;
+    box-shadow: 0 0 0 2px black;
+    appearance: none;
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+    transition: all ease-in 0.2s;
+}
+
+.tableRadio:checked {
+    background-color: black;
+}
+
+.tableRadio:focus {
+    border-width: 4px;
+    outline-offset: 1px;        
+}
