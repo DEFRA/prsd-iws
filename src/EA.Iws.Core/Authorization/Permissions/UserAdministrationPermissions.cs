@@ -25,5 +25,7 @@
         public const string CanOverrideShipmentData = "Can Override Shipment Data";
 
         public const string CanManageExternalUsers = "Can Manage External Users";
+
+        public const string CanAdminUserArchiveNotifications = "Can Admin User Archive Notifications";
     }
 }
