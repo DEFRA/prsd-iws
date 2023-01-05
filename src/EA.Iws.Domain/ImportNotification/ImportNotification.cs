@@ -4,6 +4,7 @@
     using Core.Shared;
     using Prsd.Core;
     using Prsd.Core.Domain;
+    using System;
 
     public class ImportNotification : Entity
     {
@@ -12,6 +13,12 @@
         public NotificationType NotificationType { get; private set; }
 
         public UKCompetentAuthority CompetentAuthority { get; private set; }
+
+        public bool IsArchived { get; set; }
+
+        public DateTimeOffset ArchivedDate { get; set; }
+        
+        public string ArchivedByUserId { get; set; }
 
         protected ImportNotification()
         {
