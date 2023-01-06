@@ -32,7 +32,7 @@ AS
 			WHEN MS.Status = 'Rejected' THEN
 				MREJECT.Date 
 			ELSE
-				MPR.WasteReceivedDate END AS [ShipmentRejectedDate],
+				MPR.WasteReceivedDate END AS [RejectedShipmentDate],
         CASE 
 			WHEN MS.Status = 'Rejected' THEN
 				MREJECT.Reason
@@ -215,7 +215,7 @@ AS
         COALESCE(MR.Date, MPR.WasteReceivedDate) AS [ReceivedDate],
         MOR.Date AS CompletedDate,
         COALESCE(MREJECT.RejectedQuantity, MPR.RejectedQuantity) AS [RejectedQuantity],
-		COALESCE(MREJECT.Date, MPR.WasteReceivedDate) AS [ShipmentRejectedDate],
+		COALESCE(MREJECT.Date, MPR.WasteReceivedDate) AS [RejectedShipmentDate],
         COALESCE(MREJECT.Reason, MPR.Reason) AS [RejectedReason],
         COALESCE(MR.Quantity, MPR.ActualQuantity) AS [QuantityReceived],
         COALESCE(MR_U.Description, MPR_U.Description) AS [QuantityReceivedUnit],
