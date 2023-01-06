@@ -12,20 +12,25 @@
 
 <h1 class="govuk-heading-l">@ArchiveNotificationResources.Heading</h1>
 
+@if (!Model.HasAnyResults)
+{
+    <div id="dvInformationMessage" class="archive-notification-warning">
+        <div class="gem-c-success-alert govuk-notification-banner govuk-notification-banner-warning">
+            <div class="govuk-notification-banner-header">
+                <h2 class="govuk-notification-banner-title">Important</h2>
+            </div>
+            <div class="govuk-notification-banner-content">
+                <p class="govuk-body">
+                    You must select notifications for archive before proceeding. @Html.ActionLink("Go back to the notification list to select notifications for archiving.", "Index", "ArchiveNotification", new { @class = "govuk-link" })
+                </p>
+            </div>
+        </div>
+    </div>
+}
+
 <h2 class="govuk-heading-m">
     @ArchiveNotificationResources.ReviewConfirmationHeading
 </h2>
-
-<div id="dvInformationMessage" class="archive-notification-warning" style="display: none;">
-    <div class="gem-c-success-alert govuk-notification-banner govuk-notification-banner-warning">
-        <div class="govuk-notification-banner-header">
-            <h2 class="govuk-notification-banner-title">Important</h2>
-        </div>
-        <div class="govuk-notification-banner-content">
-            <p class="govuk-body">@ArchiveNotificationResources.ReviewImportantMsg <a id="back" href="" class="govuk-link" style="display: inline;">Go back to the notification list to select notifications for archiving.</a></p>
-        </div>
-    </div>
-</div>
 
 <div class="govuk-phase-banner">
     <p class="govuk-phase-banner__content">
@@ -69,7 +74,9 @@
                                 @Html.DisplayFor(m => m.SelectedNotifications[i].CompanyName)
                             </td>
                             <td class="govuk-table__cell">
-                                @Html.ActionLink(ArchiveNotificationResources.Remove, "Remove", "ArchiveNotification", new { notificationId = Model.SelectedNotifications[i].Id }, null)
+                                @Html.ActionLink(ArchiveNotificationResources.Remove, "Remove", "ArchiveNotification",
+                                                 new { notificationId = Model.SelectedNotifications[i].Id },
+                                                 new { title = Model.SelectedNotifications[i].NotificationNumber })
                             </td>
                             @Html.HiddenFor(m => m.SelectedNotifications[i].NotificationNumber)
                             @Html.HiddenFor(m => m.SelectedNotifications[i].Status)
@@ -105,10 +112,31 @@ else
         </tbody>
     </table>
 }
-@using (Html.BeginForm())
+
+@using (Html.BeginForm("Archive", "ArchiveNotification", FormMethod.Post, new { id = "__AjaxAntiForgeryForm" }))
 {
+    @Html.AntiForgeryToken()
     <button class="govuk-button" type="submit">@Constants.ConfirmButtonText</button>
 }
+
 <div class="govuk-form-group">
     @Html.ActionLink("Back", "Index", "ArchiveNotification", new { @class = "govuk-back-link" })
 </div>
+
+@*@section scripts
+{
+    <script type="text/javascript">
+
+        $('#btnConfirm').click(function (e) {
+
+                $.ajax({
+                    url: '@Url.Action("Archive")',
+                    type: 'POST',
+                    data: { __RequestVerificationToken: $("[name=__RequestVerificationToken]").val() },
+                    success: function (result) {
+                        alert('Success');
+                    }
+                });
+        });
+    </script>
+}*@

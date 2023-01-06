@@ -94,7 +94,10 @@
                                 </td>
                                 <td class="govuk-table__cell">
                                     <div class="govuk-checkboxes__item govuk-checkboxes--small">
-                                        @Html.CheckBoxFor(m => m.Notifications[i].IsSelected, new { id = @Model.Notifications[i].Id, @class = "checkboxes__input checkboxes" })
+                                        @Html.CheckBoxFor(m => m.Notifications[i].IsSelected, 
+                                                          new { id = @Model.Notifications[i].Id, 
+                                                                @class = "checkboxes__input checkboxes", 
+                                                                title = @Model.Notifications[i].NotificationNumber })
                                     </div>
                                 </td>
                                 @Html.HiddenFor(m => m.Notifications[i].NotificationNumber)

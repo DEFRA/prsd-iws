@@ -711,7 +711,19 @@ textarea:focus,
 select:focus,
 button:focus,
 #global-header input:focus {
-    outline: 3px solid #ffbf47;
+    outline: 3px solid #ffdd00;
+}
+
+#tblArchive input[type="checkbox" i] {
+    background-color: initial;
+    cursor: default;
+    appearance: auto;
+    box-sizing: border-box;
+    margin: 3px 3px 3px 4px;
+    padding: initial;
+    border: 2px solid black !important;
+    height: 20px !important;
+    width: 20px !important;
 }
 
 #global-header h1 a:focus {
