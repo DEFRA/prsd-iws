@@ -35,7 +35,11 @@ AS
 				MREJECT.Date 
 			ELSE
 				MPR.WasteReceivedDate END AS [ShipmentRejectedDate],
-        MREJECT.Reason AS [RejectedReason],
+        CASE 
+			WHEN MS.Status = 'Rejected' THEN
+				MREJECT.Reason
+			ELSE
+				MPR.Reason END AS [RejectedReason],
         CASE
 			WHEN MR.Quantity IS NULL THEN MPR.ActualQuantity ELSE MR.Quantity 
 		END AS [QuantityReceived],
@@ -216,14 +220,38 @@ AS
         C.[From] AS [ConsentFrom],
         C.[To] AS [ConsentTo],
         M.PrenotificationDate,
-        MR.Date AS ReceivedDate,
+        CASE
+			WHEN 
+				MR.Date IS NULL THEN MPR.WasteReceivedDate 
+			ELSE 
+				MR.Date 
+		END AS [ReceivedDate],
         MOR.Date AS CompletedDate,
 		CASE WHEN MREJECT.RejectedQuantity IS NOT NULL THEN MREJECT.RejectedQuantity ELSE MPR.RejectedQuantity END AS [RejectedQuantity],
 		CASE WHEN MREJECT.Date IS NOT NULL THEN MREJECT.Date ELSE MPR.WasteReceivedDate END AS [ShipmentRejectedDate],		
-        MREJECT.Reason AS [RejectedReason],
-        MR.Quantity AS QuantityReceived,
-        MR_U.Description AS [QuantityReceivedUnit],
-        MR_U.Id AS [QuantityReceivedUnitId],
+        CASE 
+			WHEN 
+				MREJECT.Reason IS NOT NULL THEN MREJECT.Reason
+			ELSE
+				MPR.Reason
+		END AS [RejectedReason],
+		CASE
+			WHEN 
+				MR.Quantity IS NULL THEN MPR.ActualQuantity
+			ELSE 
+				MR.Quantity 
+		END AS [QuantityReceived],
+		CASE
+			WHEN 
+				MR_U.Description IS NULL THEN MPR_U.Description
+			ELSE 
+				MR_U.Description  
+		END AS [QuantityReceivedUnit],
+        CASE
+			WHEN 
+				MR_U.Id IS NULL THEN MPR_U.Id 
+			ELSE MR_U.Id  
+		END AS [QuantityReceivedUnitId],
         WT.[ChemicalCompositionType] AS [ChemicalCompositionTypeId],
         CASE
             WHEN WT.Name IS NULL THEN CCT.Description
@@ -244,8 +272,8 @@ AS
 					ELSE 
 						CASE WHEN MREJECT.RejectedQuantity IS NOT NULL THEN 'Rejected'
 					ELSE 
-						CASE WHEN MPR.RejectedQuantity IS NOT NULL THEN 'PartiallyRejected'
-						ELSE ''
+						CASE WHEN MPR.WasteDisposedDate IS NOT NULL THEN 'Completed'
+						ELSE 'PartiallyRejected'
 						END
 				END
 			END
@@ -342,6 +370,9 @@ AS
 
     LEFT JOIN	[Lookup].[ShipmentQuantityUnit] AS MR_U 
     ON			[MR].[Unit] = [MR_U].[Id]
+
+	LEFT JOIN	[Lookup].[ShipmentQuantityUnit] AS MPR_U
+    ON			[MPR].[ActualUnit] = [MPR_U].[Id]
 
     LEFT JOIN	[ImportNotification].[Consent] AS C
     ON			M.NotificationId = [C].[NotificationId]
