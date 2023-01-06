@@ -21,9 +21,7 @@ AS
         C.[From] AS [ConsentFrom],
         C.[To] AS [ConsentTo],
         M.PrenotificationDate,
-        CASE
-			WHEN MR.Date IS NULL THEN MPR.WasteReceivedDate ELSE MR.Date 
-		END AS [ReceivedDate],
+        COALESCE(MR.Date, MPR.WasteReceivedDate) AS [ReceivedDate],
         MOR.Date AS CompletedDate,
 		CASE 
 			WHEN MS.Status = 'Rejected' THEN
@@ -40,15 +38,9 @@ AS
 				MREJECT.Reason
 			ELSE
 				MPR.Reason END AS [RejectedReason],
-        CASE
-			WHEN MR.Quantity IS NULL THEN MPR.ActualQuantity ELSE MR.Quantity 
-		END AS [QuantityReceived],
-        CASE
-			WHEN MR_U.Description IS NULL THEN MPR_U.Description ELSE MR_U.Description  
-		END AS [QuantityReceivedUnit],
-        CASE
-			WHEN MR_U.Id IS NULL THEN MPR_U.Id ELSE MR_U.Id  
-		END AS [QuantityReceivedUnitId],
+        COALESCE(MR.Quantity, MPR.ActualQuantity) AS [QuantityReceived],
+        COALESCE(MR_U.Description, MPR_U.Description) AS [QuantityReceivedUnit],
+        COALESCE(MR_U.Id, MPR_U.Id) AS [QuantityReceivedUnitId],
         WT.[ChemicalCompositionType] AS [ChemicalCompositionTypeId],
         CASE
             WHEN WT.ChemicalCompositionType = 4 THEN CCT.Description + ' - ' + WT.ChemicalCompositionName
@@ -220,38 +212,14 @@ AS
         C.[From] AS [ConsentFrom],
         C.[To] AS [ConsentTo],
         M.PrenotificationDate,
-        CASE
-			WHEN 
-				MR.Date IS NULL THEN MPR.WasteReceivedDate 
-			ELSE 
-				MR.Date 
-		END AS [ReceivedDate],
+        COALESCE(MR.Date, MPR.WasteReceivedDate) AS [ReceivedDate],
         MOR.Date AS CompletedDate,
-		CASE WHEN MREJECT.RejectedQuantity IS NOT NULL THEN MREJECT.RejectedQuantity ELSE MPR.RejectedQuantity END AS [RejectedQuantity],
-		CASE WHEN MREJECT.Date IS NOT NULL THEN MREJECT.Date ELSE MPR.WasteReceivedDate END AS [ShipmentRejectedDate],		
-        CASE 
-			WHEN 
-				MREJECT.Reason IS NOT NULL THEN MREJECT.Reason
-			ELSE
-				MPR.Reason
-		END AS [RejectedReason],
-		CASE
-			WHEN 
-				MR.Quantity IS NULL THEN MPR.ActualQuantity
-			ELSE 
-				MR.Quantity 
-		END AS [QuantityReceived],
-		CASE
-			WHEN 
-				MR_U.Description IS NULL THEN MPR_U.Description
-			ELSE 
-				MR_U.Description  
-		END AS [QuantityReceivedUnit],
-        CASE
-			WHEN 
-				MR_U.Id IS NULL THEN MPR_U.Id 
-			ELSE MR_U.Id  
-		END AS [QuantityReceivedUnitId],
+        COALESCE(MREJECT.RejectedQuantity, MPR.RejectedQuantity) AS [RejectedQuantity],
+		COALESCE(MREJECT.Date, MPR.WasteReceivedDate) AS [ShipmentRejectedDate],
+        COALESCE(MREJECT.Reason, MPR.Reason) AS [RejectedReason],
+        COALESCE(MR.Quantity, MPR.ActualQuantity) AS [QuantityReceived],
+        COALESCE(MR_U.Description, MPR_U.Description) AS [QuantityReceivedUnit],
+        COALESCE(MR_U.Id, MPR_U.Id) AS [QuantityReceivedUnitId],
         WT.[ChemicalCompositionType] AS [ChemicalCompositionTypeId],
         CASE
             WHEN WT.Name IS NULL THEN CCT.Description
