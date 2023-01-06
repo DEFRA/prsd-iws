@@ -135,6 +135,7 @@
     <Content Include="scripts\Update\0007-Support\20220310-CCN058-Add-StatusAtFileClosed.sql" />
     <Content Include="scripts\Update\0007-Support\20220722-CCN054-Shipment-Report-Changes.sql" />
     <Content Include="scripts\Update\0007-Support\20221212-Add-Bank-Holidays.sql" />
+    <Content Include="scripts\Update\0007-Support\20230105-CCN057-ArchiveNotificationChanges.sql" />
     <Content Include="scripts\Update\placeholder.txt" />
     <Content Include="unindexed-foreign-keys.sql" />
     <Content Include="scripts\Everytime\01-Functions\0003-Reports-PricingInfo.sql" />
