@@ -99,7 +99,7 @@
         public string ShipmentStatus { get; set; }
 
         [DisplayName("Shipment Rejected Date")]
-        public DateTime? ShipmentRejectedDate { get; set; }
+        public DateTime? RejectedShipmentDate { get; set; }
 
         [DisplayName("Quantity Rejected (Tonnes)")]
         public decimal? RejectedQuantity { get; set; }

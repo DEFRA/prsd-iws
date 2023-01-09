@@ -57,7 +57,7 @@
                 RejectedReason = source.RejectedReason,
                 ActionedByExternalUser = source.ActionedByExternalUser,
                 RejectedQuantity = source.RejectedQuantity,
-                ShipmentRejectedDate = source.ShipmentRejectedDate
+                RejectedShipmentDate = source.RejectedShipmentDate
             };
         }
 
