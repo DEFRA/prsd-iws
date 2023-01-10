@@ -154,12 +154,12 @@
             var numVal = $('#NumberOfNotificationsSelected').val();
 
             if (this.checked) {
-                numVal = $('#NumberOfNotificationsSelected').val() + 5;
+                numVal = $('#NumberOfNotificationsSelected').val() + 25;
             } else {
-                numVal = $('#NumberOfNotificationsSelected').val() - 5;
+                numVal = $('#NumberOfNotificationsSelected').val() - 25;
             }
 
-            if (numVal <= 5 && hasMorePagesSelected == 'false') {
+            if (numVal <= 25 && hasMorePagesSelected == 'false') {
                 var table = $(e.target).closest('table');
                 $('td input:checkbox', table).prop('checked', this.checked);
 
@@ -263,15 +263,15 @@
                 $('#HasAnyNotificationSelected').val("false");
             }
 
-            if (totalSelected > 5) {
+            if (totalSelected > 25) {
                 $('#dvInformationMessage').show();
                 $("#SelectAll").prop("checked", false);
                 return true;
             }
-            else if (totalSelected == 5 && hasMorePagesSelected == 'true') {
+            else if (totalSelected == 25 && hasMorePagesSelected == 'true') {
                 return false;
             }
-            //else if (totalSelected == 5 && hasMorePagesSelected == 'false') {
+            //else if (totalSelected == 25 && hasMorePagesSelected == 'false') {
             //    $("#SelectAll").prop("checked", false);
             //    return true;
             //}
