@@ -233,18 +233,23 @@ AS
         TR.ImportCountryName AS DestinationCountry,
         TR.ExitPoint AS ExitPort,
         TR.ExportCountryName AS OriginatingCountry,
-        CASE 
-			WHEN M.[IsCancelled] = 1 THEN 'Cancelled'
+        CASE WHEN M.[IsCancelled] = 1 THEN 'Cancelled'
 			ELSE 
-				CASE WHEN MR.Quantity IS NOT NULL THEN 'Received'
+				CASE WHEN MOR.Date IS NOT NULL THEN 'Completed'
 					ELSE 
-						CASE WHEN MREJECT.RejectedQuantity IS NOT NULL THEN 'Rejected'
-					ELSE 
-						CASE WHEN MPR.WasteDisposedDate IS NOT NULL THEN 'Completed'
-						ELSE 'PartiallyRejected'
+						CASE WHEN MR.Date IS NOT NULL THEN 'Received'
+							ELSE
+								CASE WHEN MREJECT.RejectedQuantity IS NOT NULL THEN 'Rejected'
+									ELSE 
+										CASE WHEN MPR.WasteDisposedDate IS NOT NULL THEN 'Completed'
+											ELSE 
+												CASE WHEN MPR.WasteReceivedDate IS NOT NULL THEN 'PartiallyRejected'
+													ELSE 'Pending'
+												END
+										END
+								END
 						END
 				END
-			END
 		END AS [Status],
         ND.[NotificationReceivedDate],
         STUFF(( SELECT ', ' + WC.Code AS [text()]
