@@ -61,7 +61,7 @@
 
         public int NumberOfNotificationsSelected { get; set; }
 
-        [Display(Name = "Select All")]
+        [Display(Name = "Select all")]
         public bool IsSelectAllChecked { get; set; }
     }
 }
