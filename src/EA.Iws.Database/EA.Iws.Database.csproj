@@ -58,6 +58,7 @@
     <Content Include="scripts\Create\placeholder.txt" />
     <Content Include="scripts\Everytime\03-StoredProcedures\0015-uspGetArchiveNotificationsCountByUser.sql" />
     <Content Include="scripts\Everytime\03-StoredProcedures\0014-uspGetArchiveNotificationsByUser.sql" />
+    <Content Include="scripts\Everytime\03-StoredProcedures\0016-uspArchiveNotification.sql" />
     <Content Include="scripts\Everytime\placeholder.txt" />
     <Content Include="scripts\TestData\placeholder.txt" />
     <Content Include="scripts\Update\0007-Support\20211105-CR0048-Shipment-Full-Partial-Rejection.sql" />
