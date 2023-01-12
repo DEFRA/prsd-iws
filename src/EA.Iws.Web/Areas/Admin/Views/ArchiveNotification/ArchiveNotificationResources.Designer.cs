@@ -79,11 +79,11 @@ namespace EA.Iws.Web.Areas.Admin.Views.ArchiveNotification {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Date generated.
+        ///   Looks up a localized string similar to Date actioned.
         /// </summary>
-        public static string DateGenerated {
+        public static string DateActioned {
             get {
-                return ResourceManager.GetString("DateGenerated", resourceCulture);
+                return ResourceManager.GetString("DateActioned", resourceCulture);
             }
         }
         

@@ -32,7 +32,7 @@
     @ArchiveNotificationResources.ReviewConfirmationHeading
 </h2>
 
-<div class="govuk-phase-banner">
+<div class="govuk-form-group">
     <p class="govuk-phase-banner__content">
         <strong class="govuk-tag govuk-phase-banner__content__tag">
             @ArchiveNotificationResources.Note
@@ -52,7 +52,7 @@
                     <tr class="govuk-table__row">
                         <th scope="col" class="govuk-table__header">@ArchiveNotificationResources.NotificationNumber</th>
                         <th scope="col" class="govuk-table__header">@ArchiveNotificationResources.Status</th>
-                        <th scope="col" class="govuk-table__header">@ArchiveNotificationResources.DateGenerated</th>
+                        <th scope="col" class="govuk-table__header">@ArchiveNotificationResources.DateActioned</th>
                         <th scope="col" class="govuk-table__header">@ArchiveNotificationResources.CompanyName</th>
                         <th scope="col" class="govuk-table__header">@ArchiveNotificationResources.Action</th>
                     </tr>
@@ -98,7 +98,7 @@ else
             <tr class="govuk-table__row">
                 <th scope="col" class="govuk-table__header">@ArchiveNotificationResources.NotificationNumber</th>
                 <th scope="col" class="govuk-table__header">@ArchiveNotificationResources.Status</th>
-                <th scope="col" class="govuk-table__header">@ArchiveNotificationResources.DateGenerated</th>
+                <th scope="col" class="govuk-table__header">@ArchiveNotificationResources.DateActioned</th>
                 <th scope="col" class="govuk-table__header">@ArchiveNotificationResources.CompanyName</th>
                 <th scope="col" class="govuk-table__header">@ArchiveNotificationResources.Action</th>
             </tr>
@@ -122,21 +122,3 @@ else
 <div class="govuk-form-group">
     @Html.ActionLink("Back", "Index", "ArchiveNotification", new { @class = "govuk-back-link" })
 </div>
-
-@*@section scripts
-{
-    <script type="text/javascript">
-
-        $('#btnConfirm').click(function (e) {
-
-                $.ajax({
-                    url: '@Url.Action("Archive")',
-                    type: 'POST',
-                    data: { __RequestVerificationToken: $("[name=__RequestVerificationToken]").val() },
-                    success: function (result) {
-                        alert('Success');
-                    }
-                });
-        });
-    </script>
-}*@

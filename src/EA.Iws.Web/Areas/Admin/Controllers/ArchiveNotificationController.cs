@@ -67,16 +67,32 @@
         public JsonResult SelectAllNotifications(List<NotificationArchiveSummaryData> selectedNotificationsData, bool isChecked)
         {
             var selectNotificationList = new List<NotificationArchiveSummaryData>();
+            if (HttpContext.Session["SelectedNotifications"] != null)
+            {
+                selectNotificationList = JsonConvert.DeserializeObject<List<NotificationArchiveSummaryData>>(HttpContext.Session["SelectedNotifications"].ToString());
+            }
+
             if (isChecked)
             {
                 foreach (var notification in selectedNotificationsData)
                 {
-                    selectNotificationList.Add(notification);
+                    var findAny = selectNotificationList.SingleOrDefault(x => x.Id == notification.Id);
+                    if (findAny == null)
+                    {
+                        selectNotificationList.Add(notification);
+                    }
                 }
             }
             else
             {
-                selectNotificationList.Clear();
+                foreach (var notification in selectedNotificationsData)
+                {
+                    var findAny = selectNotificationList.SingleOrDefault(x => x.Id == notification.Id);
+                    if (findAny != null)
+                    {
+                        selectNotificationList.Remove(findAny);
+                    }
+                }
             }
 
             HttpContext.Session["SelectedNotifications"] = JsonConvert.SerializeObject(selectNotificationList);
