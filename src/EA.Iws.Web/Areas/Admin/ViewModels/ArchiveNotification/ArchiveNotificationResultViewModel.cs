@@ -57,7 +57,6 @@
                 hasAnyNotificationSelected = value;
             }
         }
-        public bool HasNotificationsSelectedMoreThanOne { get; set; }
 
         public int NumberOfNotificationsSelected { get; set; }
 
