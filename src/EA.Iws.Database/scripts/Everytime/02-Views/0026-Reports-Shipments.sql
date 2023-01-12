@@ -21,9 +21,7 @@ AS
         C.[From] AS [ConsentFrom],
         C.[To] AS [ConsentTo],
         M.PrenotificationDate,
-        CASE
-			WHEN MR.Date IS NULL THEN MPR.WasteReceivedDate ELSE MR.Date 
-		END AS [ReceivedDate],
+        COALESCE(MR.Date, MPR.WasteReceivedDate) AS [ReceivedDate],
         MOR.Date AS CompletedDate,
 		CASE 
 			WHEN MS.Status = 'Rejected' THEN
@@ -34,17 +32,15 @@ AS
 			WHEN MS.Status = 'Rejected' THEN
 				MREJECT.Date 
 			ELSE
-				MPR.WasteReceivedDate END AS [ShipmentRejectedDate],
-        MREJECT.Reason AS [RejectedReason],
-        CASE
-			WHEN MR.Quantity IS NULL THEN MPR.ActualQuantity ELSE MR.Quantity 
-		END AS [QuantityReceived],
-        CASE
-			WHEN MR_U.Description IS NULL THEN MPR_U.Description ELSE MR_U.Description  
-		END AS [QuantityReceivedUnit],
-        CASE
-			WHEN MR_U.Id IS NULL THEN MPR_U.Id ELSE MR_U.Id  
-		END AS [QuantityReceivedUnitId],
+				MPR.WasteReceivedDate END AS [RejectedShipmentDate],
+        CASE 
+			WHEN MS.Status = 'Rejected' THEN
+				MREJECT.Reason
+			ELSE
+				MPR.Reason END AS [RejectedReason],
+        COALESCE(MR.Quantity, MPR.ActualQuantity) AS [QuantityReceived],
+        COALESCE(MR_U.Description, MPR_U.Description) AS [QuantityReceivedUnit],
+        COALESCE(MR_U.Id, MPR_U.Id) AS [QuantityReceivedUnitId],
         WT.[ChemicalCompositionType] AS [ChemicalCompositionTypeId],
         CASE
             WHEN WT.ChemicalCompositionType = 4 THEN CCT.Description + ' - ' + WT.ChemicalCompositionName
@@ -216,14 +212,14 @@ AS
         C.[From] AS [ConsentFrom],
         C.[To] AS [ConsentTo],
         M.PrenotificationDate,
-        MR.Date AS ReceivedDate,
+        COALESCE(MR.Date, MPR.WasteReceivedDate) AS [ReceivedDate],
         MOR.Date AS CompletedDate,
-		CASE WHEN MREJECT.RejectedQuantity IS NOT NULL THEN MREJECT.RejectedQuantity ELSE MPR.RejectedQuantity END AS [RejectedQuantity],
-		CASE WHEN MREJECT.Date IS NOT NULL THEN MREJECT.Date ELSE MPR.WasteReceivedDate END AS [ShipmentRejectedDate],		
-        MREJECT.Reason AS [RejectedReason],
-        MR.Quantity AS QuantityReceived,
-        MR_U.Description AS [QuantityReceivedUnit],
-        MR_U.Id AS [QuantityReceivedUnitId],
+        COALESCE(MREJECT.RejectedQuantity, MPR.RejectedQuantity) AS [RejectedQuantity],
+		COALESCE(MREJECT.Date, MPR.WasteReceivedDate) AS [RejectedShipmentDate],
+        COALESCE(MREJECT.Reason, MPR.Reason) AS [RejectedReason],
+        COALESCE(MR.Quantity, MPR.ActualQuantity) AS [QuantityReceived],
+        COALESCE(MR_U.Description, MPR_U.Description) AS [QuantityReceivedUnit],
+        COALESCE(MR_U.Id, MPR_U.Id) AS [QuantityReceivedUnitId],
         WT.[ChemicalCompositionType] AS [ChemicalCompositionTypeId],
         CASE
             WHEN WT.Name IS NULL THEN CCT.Description
@@ -237,18 +233,23 @@ AS
         TR.ImportCountryName AS DestinationCountry,
         TR.ExitPoint AS ExitPort,
         TR.ExportCountryName AS OriginatingCountry,
-        CASE 
-			WHEN M.[IsCancelled] = 1 THEN 'Cancelled'
+        CASE WHEN M.[IsCancelled] = 1 THEN 'Cancelled'
 			ELSE 
-				CASE WHEN MR.Quantity IS NOT NULL THEN 'Received'
+				CASE WHEN MOR.Date IS NOT NULL THEN 'Completed'
 					ELSE 
-						CASE WHEN MREJECT.RejectedQuantity IS NOT NULL THEN 'Rejected'
-					ELSE 
-						CASE WHEN MPR.RejectedQuantity IS NOT NULL THEN 'PartiallyRejected'
-						ELSE ''
+						CASE WHEN MR.Date IS NOT NULL THEN 'Received'
+							ELSE
+								CASE WHEN MREJECT.RejectedQuantity IS NOT NULL THEN 'Rejected'
+									ELSE 
+										CASE WHEN MPR.WasteDisposedDate IS NOT NULL THEN 'Completed'
+											ELSE 
+												CASE WHEN MPR.WasteReceivedDate IS NOT NULL THEN 'PartiallyRejected'
+													ELSE 'Pending'
+												END
+										END
+								END
 						END
 				END
-			END
 		END AS [Status],
         ND.[NotificationReceivedDate],
         STUFF(( SELECT ', ' + WC.Code AS [text()]
@@ -342,6 +343,9 @@ AS
 
     LEFT JOIN	[Lookup].[ShipmentQuantityUnit] AS MR_U 
     ON			[MR].[Unit] = [MR_U].[Id]
+
+	LEFT JOIN	[Lookup].[ShipmentQuantityUnit] AS MPR_U
+    ON			[MPR].[ActualUnit] = [MPR_U].[Id]
 
     LEFT JOIN	[ImportNotification].[Consent] AS C
     ON			M.NotificationId = [C].[NotificationId]

@@ -71,7 +71,7 @@ namespace EA.Iws.Domain.Reports
 
         public decimal? RejectedQuantity { get; set; }
 
-        public DateTime? ShipmentRejectedDate { get; set; }
+        public DateTime? RejectedShipmentDate { get; set; }
 
         public string RejectedReason { get; protected set; }
 
