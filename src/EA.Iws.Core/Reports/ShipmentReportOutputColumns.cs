@@ -102,7 +102,7 @@
         ShipmentStatus,
 
         [Display(Name = "Shipment Rejected Date")]
-        ShipmentRejectedDate,
+        RejectedShipmentDate,
 
         [Display(Name = "Quantity Rejected (Tonnes)")]
         RejectedQuantity,

@@ -56,7 +56,7 @@
                     [EwcCodes],
                     [OperationCodes],
                     [RejectedQuantity],
-                    [ShipmentRejectedDate],
+                    [RejectedShipmentDate],
                     [RejectedReason],
                     CASE WHEN YCode IS NULL THEN 'NA' ELSE YCode END AS [YCode],
                     CASE WHEN HCode IS NULL THEN 'NA' ELSE HCode END AS [HCode],
