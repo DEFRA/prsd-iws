@@ -120,11 +120,17 @@
   <data name="Action" xml:space="preserve">
     <value>Action</value>
   </data>
+  <data name="ArchivedNoteDescription" xml:space="preserve">
+    <value>All the archived data will be shown as "Archived", "000000" or "archived@archive.com" in the system.</value>
+  </data>
   <data name="CompanyName" xml:space="preserve">
     <value>Company name</value>
   </data>
   <data name="DateActioned" xml:space="preserve">
     <value>Date actioned</value>
+  </data>
+  <data name="Failure" xml:space="preserve">
+    <value>FAILURE</value>
   </data>
   <data name="GdprBlurbEnd" xml:space="preserve">
     <value>After you archive a notification, personal data stored with it such as name and address will be shown as 'Archived' in the system.</value>
@@ -167,6 +173,9 @@
   </data>
   <data name="Status" xml:space="preserve">
     <value>Status</value>
+  </data>
+  <data name="Success" xml:space="preserve">
+    <value>SUCCESS</value>
   </data>
   <data name="WhyAreWeAsking" xml:space="preserve">
     <value>Why are we asking you to archive notification?</value>

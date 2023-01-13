@@ -17,5 +17,7 @@
         public bool IsSelected { get; set; }
 
         public int? PageNumber { get; set; }
+
+        public bool IsArchived { get; set; }
     }
 }

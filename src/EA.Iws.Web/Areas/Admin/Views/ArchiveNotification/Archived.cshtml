@@ -1,0 +1,130 @@
+﻿@model EA.Iws.Web.Areas.Admin.ViewModels.ArchiveNotification.ArchiveNotificationArchivedViewModel
+@using EA.Iws.Web.Areas.Admin.Views.ArchiveNotification;
+
+@{
+    ViewBag.Title = "Archived";
+}
+
+@helper DisplayDate(DateTimeOffset date)
+{
+    @date.ToString("d MMM yyyy")
+}
+
+<h1 class="govuk-heading-l">@ArchiveNotificationResources.Heading</h1>
+
+@Html.AntiForgeryToken()
+@Html.Gds().ValidationSummary()
+
+@if (Model.SuccessCount > 0)
+{
+    <div class="govuk-form-group">
+        <p class="govuk-phase-banner__content">
+            <strong class="govuk-tag--green govuk-tag govuk-phase-banner__content__tag">
+                @ArchiveNotificationResources.Success
+            </strong>
+            <span class="govuk-phase-banner__text govuk-error-message" style="color:green">
+                The following @Model.SuccessCount notifications have been archived.
+            </span>
+        </p>
+    </div>
+
+    <div class="govuk-form-group">
+        <div id="tblArchive" class="govuk-form-group">
+            <table class="govuk-table" id="tblArchive">
+                <thead class="govuk-table__head">
+                    <tr class="govuk-table__row">
+                        <th scope="col" class="govuk-table__header">@ArchiveNotificationResources.NotificationNumber</th>
+                        <th scope="col" class="govuk-table__header">@ArchiveNotificationResources.Status</th>
+                        <th scope="col" class="govuk-table__header">@ArchiveNotificationResources.DateActioned</th>
+                        <th scope="col" class="govuk-table__header">@ArchiveNotificationResources.CompanyName</th>
+                    </tr>
+                </thead>
+                <tbody class="govuk-table__body">
+                    @foreach (var notification in Model.ArchivedNotifications)
+                    {
+                        if (notification.IsArchived)
+                        {
+                            <tr class="govuk-table__row">
+                                <td class="govuk-table__cell">
+                                    @Html.DisplayFor(m => notification.NotificationNumber)
+                                </td>
+                                <td class="govuk-table__cell">
+                                    @Html.DisplayFor(m => notification.Status)
+                                </td>
+                                <td class="govuk-table__cell">
+                                    @DisplayDate(notification.CreatedDate)
+                                </td>
+                                <td class="govuk-table__cell">
+                                    @Html.DisplayFor(m => notification.CompanyName)
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="govuk-form-group">
+        <p class="govuk-phase-banner__content">
+            <strong class="govuk-tag govuk-phase-banner__content__tag">
+                @ArchiveNotificationResources.Note
+            </strong>
+            <span class="govuk-phase-banner__text">
+                @ArchiveNotificationResources.ArchivedNoteDescription
+            </span>
+        </p>
+    </div>
+}
+
+@if (Model.FailuredCount > 0)
+{
+    <div class="govuk-form-group">
+        <p class="govuk-phase-banner__content">
+            <strong class="govuk-tag--red govuk-tag govuk-phase-banner__content__tag">
+                @ArchiveNotificationResources.Failure
+            </strong>
+            <span class="govuk-phase-banner__text govuk-error-message" style="color:red">
+                The following @Model.FailuredCount notifications could not be archived. <br />
+                Try again, or if the issue persists please contact <a href="mailto:askshipments@environment-agency.co.uk" style="color:red">askshipments@environment-agency.co.uk</a> quoting the failed notification numbers listed below.
+            </span>
+        </p>
+    </div>
+
+    <div class="govuk-form-group">
+        <div id="tblArchive" class="govuk-form-group">
+            <table class="govuk-table" id="tblArchive">
+                <thead class="govuk-table__head">
+                    <tr class="govuk-table__row">
+                        <th scope="col" class="govuk-table__header">@ArchiveNotificationResources.NotificationNumber</th>
+                        <th scope="col" class="govuk-table__header">@ArchiveNotificationResources.Status</th>
+                        <th scope="col" class="govuk-table__header">@ArchiveNotificationResources.DateActioned</th>
+                        <th scope="col" class="govuk-table__header">@ArchiveNotificationResources.CompanyName</th>
+                    </tr>
+                </thead>
+                <tbody class="govuk-table__body">
+                    @foreach (var notification in Model.ArchivedNotifications)
+                    {
+                        if (!notification.IsArchived)
+                        {
+                            <tr class="govuk-table__row">
+                                <td class="govuk-table__cell">
+                                    @Html.DisplayFor(m => notification.NotificationNumber)
+                                </td>
+                                <td class="govuk-table__cell">
+                                    @Html.DisplayFor(m => notification.Status)
+                                </td>
+                                <td class="govuk-table__cell">
+                                    @DisplayDate(notification.CreatedDate)
+                                </td>
+                                <td class="govuk-table__cell">
+                                    @Html.DisplayFor(m => notification.CompanyName)
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+}

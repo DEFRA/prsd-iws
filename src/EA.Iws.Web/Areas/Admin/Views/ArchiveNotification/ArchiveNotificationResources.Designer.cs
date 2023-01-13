@@ -70,6 +70,15 @@ namespace EA.Iws.Web.Areas.Admin.Views.ArchiveNotification {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to All the archived data will be shown as &quot;Archived&quot;, &quot;000000&quot; or &quot;archived@archive.com&quot; in the system..
+        /// </summary>
+        public static string ArchivedNoteDescription {
+            get {
+                return ResourceManager.GetString("ArchivedNoteDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Company name.
         /// </summary>
         public static string CompanyName {
@@ -84,6 +93,15 @@ namespace EA.Iws.Web.Areas.Admin.Views.ArchiveNotification {
         public static string DateActioned {
             get {
                 return ResourceManager.GetString("DateActioned", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to FAILURE.
+        /// </summary>
+        public static string Failure {
+            get {
+                return ResourceManager.GetString("Failure", resourceCulture);
             }
         }
         
@@ -210,6 +228,15 @@ namespace EA.Iws.Web.Areas.Admin.Views.ArchiveNotification {
         public static string Status {
             get {
                 return ResourceManager.GetString("Status", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to SUCCESS.
+        /// </summary>
+        public static string Success {
+            get {
+                return ResourceManager.GetString("Success", resourceCulture);
             }
         }
         
