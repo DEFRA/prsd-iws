@@ -33,14 +33,18 @@
 </h2>
 
 <div class="govuk-form-group">
-    <p class="govuk-phase-banner__content">
-        <strong class="govuk-tag govuk-phase-banner__content__tag">
-            @ArchiveNotificationResources.Note
-        </strong>
-        <span class="govuk-phase-banner__text">
-            @ArchiveNotificationResources.ReviewNote
-        </span>
-    </p>
+    <div id="div_orange" class="noteDiv"></div>
+    <div style="margin-left:20px; padding-top: 7px;">
+        <p class="govuk-phase-banner__content">
+            <strong class="govuk-tag govuk-phase-banner__content__tag govuk-tag--orange" style="padding: 10px;">
+                @ArchiveNotificationResources.Note
+            </strong>
+            <span class="govuk-phase-banner__text" style="font-weight: 700">
+                @ArchiveNotificationResources.ReviewNote
+            </span>
+        </p>
+    </div>
+    
 </div>
 
 @if (Model.HasAnyResults)
