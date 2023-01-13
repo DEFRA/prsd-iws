@@ -179,7 +179,24 @@
                 return View("Review", reviewModel);
             }
 
-            return View();
+            int count = 0;
+            foreach (var notification in selectNotificationList)
+            {
+                count++;
+                if (count % 2 == 0)
+                {
+                    notification.IsArchived = true;
+                }
+            }
+
+            var archivedModel = new ArchiveNotificationArchivedViewModel()
+            {
+                ArchivedNotifications = selectNotificationList,
+                SuccessCount = selectNotificationList.Where(x => x.IsArchived == true).ToList().Count,
+                FailuredCount = selectNotificationList.Where(x => x.IsArchived == false).ToList().Count
+            };
+
+            return View("Archived", archivedModel);
         }
 
         private async Task<ArchiveNotificationResultViewModel> GetUserArchiveNotifications(int pageNumber = 1)

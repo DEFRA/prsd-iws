@@ -795,6 +795,7 @@
     <Content Include="Content\iws\_shims.scss" />
     <Content Include="Content\iws\_cookies-banner.scss" />
     <Compile Include="Areas\Admin\Controllers\ArchiveNotificationController.cs" />
+    <Compile Include="Areas\Admin\ViewModels\ArchiveNotification\ArchiveNotificationArchivedViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\ArchiveNotification\ArchiveNotificationResultViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\ArchiveNotification\ArchiveNotificationReviewViewModel.cs" />
     <Compile Include="Areas\Admin\Views\ArchiveNotification\ArchiveNotificationResources.Designer.cs">
@@ -812,6 +813,7 @@
     <Compile Include="RazorHelpers\IwsGds.ProgressiveDisclosure.cs" />
     <Content Include="Areas\Admin\Views\ArchiveNotification\Index.cshtml" />
     <Content Include="Areas\Admin\Views\ArchiveNotification\Review.cshtml" />
+    <Content Include="Areas\Admin\Views\ArchiveNotification\Archived.cshtml" />
     <None Include="Scripts\jquery-3.6.0.intellisense.js" />
     <Content Include="Scripts\jquery-3.6.0.js" />
     <Content Include="Scripts\jquery-3.6.0.min.js" />
