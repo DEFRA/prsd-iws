@@ -1,6 +1,7 @@
 ﻿namespace EA.Iws.Web.Areas.Admin.Controllers
 {
     using EA.Iws.Core.Authorization.Permissions;
+    using EA.Iws.Requests.Admin.ArchiveNotification;
     using EA.Iws.Requests.Notification;
     using EA.Iws.Web.Areas.Admin.ViewModels.ArchiveNotification;
     using EA.Iws.Web.Infrastructure.Authorization;
@@ -165,7 +166,7 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Archive()
+        public async Task<ActionResult> Archive()
         {
             var selectNotificationList = new List<NotificationArchiveSummaryData>();
             if (HttpContext.Session["SelectedNotifications"] != null)
@@ -188,6 +189,9 @@
                     notification.IsArchived = true;
                 }
             }
+
+            //Pass notifications to the uspArchiveNotification, deal with any issues:
+            var results = await mediator.SendAsync(new ArchiveNotifications(selectNotificationList.Select(nl => nl.Id).ToList()));
 
             var archivedModel = new ArchiveNotificationArchivedViewModel()
             {

@@ -99,6 +99,7 @@
     <Compile Include="AddressBook\GetUserAddressBookByTypeHandler.cs" />
     <Compile Include="AddressBook\SearchAddressRecordsByNameHandler.cs" />
     <Compile Include="AddressBook\SearchAddressRecordsHandler.cs" />
+    <Compile Include="Admin\ArchiveNotificationsHandler.cs" />
     <Compile Include="Admin\CheckNotificationHasCommentsHandler.cs" />
     <Compile Include="Admin\EntryOrExitPoints\AddEntryOrExitPointHandler.cs" />
     <Compile Include="Admin\EntryOrExitPoints\CheckEntryOrExitPointUniqueHandler.cs" />
