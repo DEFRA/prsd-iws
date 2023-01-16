@@ -13,5 +13,7 @@
         public DateTime DateGenerated { get; set; }
 
         public string CompanyName { get; set; }
+
+        public string ErrorMessage { get; set; }
     }
 }
