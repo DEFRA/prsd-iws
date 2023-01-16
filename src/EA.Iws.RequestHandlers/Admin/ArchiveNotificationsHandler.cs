@@ -1,14 +1,14 @@
 ﻿namespace EA.Iws.RequestHandlers.Admin
 {
-    using EA.Iws.Core.Admin.ArchiveNotification;
     using EA.Iws.DataAccess;
     using EA.Iws.Domain;
     using EA.Iws.Requests.Admin.ArchiveNotification;
+    using EA.Iws.Requests.Notification;
     using EA.Prsd.Core.Mediator;
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
-    internal class ArchiveNotificationsHandler : IRequestHandler<ArchiveNotifications, IList<ArchiveNotificationResult>>
+    internal class ArchiveNotificationsHandler : IRequestHandler<ArchiveNotifications, IList<NotificationArchiveSummaryData>>
     {
         private readonly IwsContext context;
         private readonly IArchiveNotificationRepository repository;
@@ -19,19 +19,22 @@
             this.context = context;
         }
 
-        public async Task<IList<ArchiveNotificationResult>> HandleAsync(ArchiveNotifications message)
+        public async Task<IList<NotificationArchiveSummaryData>> HandleAsync(ArchiveNotifications message)
         {
-            var res = new List<ArchiveNotificationResult>();
-            foreach (var notificationId in message.NotificationIds)
+            var res = message.Notifications;
+            foreach (var notification in res)
             {
-                var archiveNotificationResult = await repository.ArchiveNotificationAsync(notificationId);
+                var archiveNotificationResult = await repository.ArchiveNotificationAsync(notification.Id);
                 if (archiveNotificationResult != null)
                 {
-                    if (archiveNotificationResult.ErrorMessage != null)
+                    if (archiveNotificationResult == "false")
                     {
-                        //TODO What do we want to do here? Log or just add it anyway?
+                        notification.IsArchived = false;
                     }
-                    res.Add(archiveNotificationResult);
+                    else
+                    {
+                        notification.IsArchived = true;
+                    }                    
                 }
             }
 

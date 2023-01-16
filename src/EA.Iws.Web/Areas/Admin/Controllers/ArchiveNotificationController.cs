@@ -180,24 +180,14 @@
                 return View("Review", reviewModel);
             }
 
-            int count = 0;
-            foreach (var notification in selectNotificationList)
-            {
-                count++;
-                if (count % 2 == 0)
-                {
-                    notification.IsArchived = true;
-                }
-            }
-
             //Pass notifications to the uspArchiveNotification, deal with any issues:
-            var results = await mediator.SendAsync(new ArchiveNotifications(selectNotificationList.Select(nl => nl.Id).ToList()));
+            var archiveNotificationList = await mediator.SendAsync(new ArchiveNotifications(selectNotificationList));
 
             var archivedModel = new ArchiveNotificationArchivedViewModel()
             {
-                ArchivedNotifications = selectNotificationList,
-                SuccessCount = selectNotificationList.Where(x => x.IsArchived == true).ToList().Count,
-                FailuredCount = selectNotificationList.Where(x => x.IsArchived == false).ToList().Count
+                ArchivedNotifications = archiveNotificationList,
+                SuccessCount = archiveNotificationList.Where(x => x.IsArchived).ToList().Count,
+                FailuredCount = archiveNotificationList.Where(x => !x.IsArchived).ToList().Count
             };
 
             return View("Archived", archivedModel);

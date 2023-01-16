@@ -15,18 +15,7 @@ BEGIN
 		IF ((SELECT [IsArchived] from [ImportNotification].[Notification] where Id = @NotificationId) = 1)
 		BEGIN
 			SELECT 
-				INN.Id,
-				INN.NotificationNumber,
-				LINS.[Description] as [Status],
-				INND.NotificationReceivedDate as DateGenerated,
-				INE.[Name] as CompanyName,
-				'Already archived' as ErrorMessage
-			FROM [ImportNotification].[Notification] INN
-				INNER JOIN [ImportNotification].[NotificationAssessment] INNA ON INN.Id = INNA .NotificationApplicationId
-				INNER JOIN [ImportNotification].[NotificationDates] INND ON INND.NotificationAssessmentId = INNA.Id
-				INNER JOIN [Lookup].ImportNotificationStatus LINS ON LINS.Id = INNA.[Status]
-				LEFT JOIN [ImportNotification].[Exporter] INE on INN.Id = INE.ImportNotificationId
-			WHERE INN.Id = @NotificationId
+				'false' as IsArchived
 			RETURN 
 		END 
 	BEGIN TRAN
@@ -41,7 +30,7 @@ BEGIN
 
 		UPDATE [ImportNotification].[Producer] 
 		SET ContactName = 'Archived', Telephone = '000000', Email = 'archived@archive.com'
-		WHERE ImportNotificationId = @NotificationId		
+		WHERE ImportNotificationId = @NotificationId
 		UPDATE [ImportNotification].[Producer] 
 		SET [Name] = 'Archived', Address1 = 'Archived', Address2 = 'Archived', TownOrCity = 'Archived', PostalCode = 'Archived'
 		WHERE ImportNotificationId = @NotificationId AND [Type] in (2,3)
@@ -70,48 +59,14 @@ BEGIN
 
 		update [ImportNotification].[Notification] SET IsArchived = 1, ArchivedByUserId = @CurrentUserId, ArchivedDate = SYSDATETIMEOFFSET() where Id = @NotificationId
 		
-		SELECT 
-			INN.Id,
-			INN.NotificationNumber,
-			LINS.[Description] as [Status],
-			INND.NotificationReceivedDate as DateGenerated,
-			INE.[Name] as CompanyName,
-			INN.CompetentAuthority
-		FROM [ImportNotification].[Notification] INN
-			INNER JOIN [ImportNotification].[NotificationAssessment] INNA ON INN.Id = INNA .NotificationApplicationId
-			INNER JOIN [ImportNotification].[NotificationDates] INND ON INND.NotificationAssessmentId = INNA.Id
-			INNER JOIN [Lookup].ImportNotificationStatus LINS ON LINS.Id = INNA.[Status]
-			LEFT JOIN [ImportNotification].[Exporter] INE on INN.Id = INE.ImportNotificationId
-		WHERE INN.Id = @NotificationId
+		SELECT 'true' as IsArchived
 	END 
 	ELSE 
 	BEGIN
 	--ExportNotification
-		IF ((select COUNT(*) from [Notification].[Notification] where Id = @NotificationId) = 0)
-		BEGIN
-			SELECT @NotificationId as [Id], 
-				null as NotificationNumber, 
-				null as [Status],
-				null as DateGenerated,
-				null as CompanyName,
-				'Provided NotificationId does not exist' as ErrorMessage;
-			RETURN 
-		END 
 		IF ((select [IsArchived] from [Notification].[Notification] where Id = @NotificationId) = 1)
 		BEGIN
-			SELECT
-				N.Id,
-				N.NotificationNumber,
-				LNS.[Description] AS [Status],
-				N.CreatedDate as DateGenerated,
-				E.[Name] AS CompanyName,
-				'Already archived' as ErrorMessage
-			FROM
-				[Notification].[Notification] N
-				INNER JOIN [Notification].[NotificationAssessment] NA ON N.Id = NA.NotificationApplicationId
-				INNER JOIN [Lookup].NotificationStatus LNS on LNS.Id = NA.[Status]
-				LEFT JOIN [Notification].[Exporter] E ON N.Id = E.NotificationId
-			WHERE N.Id = @NotificationId
+			SELECT 'false' as IsArchived
 			RETURN
 		END 
 		
@@ -131,7 +86,7 @@ BEGIN
 		SET [Name] = 'Archived', Address1 = 'Archived', Address2 = 'Archived', TownOrCity = 'Archived', PostalCode = 'Archived'
 		WHERE ProducerCollectionId IN (Select Id from [Notification].[ProducerCollection] where NotificationId = @NotificationId)
 		AND [Type] in (2,3)
-
+		
 		--Consignee
 		UPDATE [Notification].[Importer]
 		SET FullName = 'Archived', Telephone = '000000', Fax = '000000', Email = 'archived@archive.com'
@@ -171,19 +126,9 @@ BEGIN
 			Where MovementId in (select Id FROM [Notification].[Movement] Where NotificationId = @NotificationId))
 
 		update [Notification].[Notification] SET IsArchived = 1, ArchivedByUserId = @CurrentUserId, ArchivedDate = SYSDATETIMEOFFSET() where Id = @NotificationId
-				
-		SELECT
-			N.Id,
-			N.NotificationNumber,
-			LNS.[Description] AS [Status],
-			N.CreatedDate as DateGenerated,
-			E.[Name] AS CompanyName
-		FROM
-			[Notification].[Notification] N
-			INNER JOIN [Notification].[NotificationAssessment] NA ON N.Id = NA.NotificationApplicationId
-			INNER JOIN [Lookup].NotificationStatus LNS on LNS.Id = NA.[Status]
-			LEFT JOIN [Notification].[Exporter] E ON N.Id = E.NotificationId
-		WHERE N.Id = @NotificationId
+
+		SELECT 'true' as IsArchived
 	END
-	COMMIT
+	COMMIT	
 END
+GO
