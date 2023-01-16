@@ -1,6 +1,5 @@
 ﻿namespace EA.Iws.DataAccess.Repositories
 {
-    using EA.Iws.Core.Admin.ArchiveNotification;
     using EA.Iws.Domain;
     using EA.Iws.Domain.Security;
     using EA.Prsd.Core.Domain;
@@ -21,16 +20,23 @@
             this.authorization = authorization;
         }
 
-        public async Task<ArchiveNotificationResult> ArchiveNotificationAsync(Guid notificationId)
+        public async Task<string> ArchiveNotificationAsync(Guid notificationId)
         {
             //TODO Do we need this the EnsureAccess?
             //await authorization.EnsureAccessAsync(notificationId);
-            var result = await context.Database.SqlQuery<ArchiveNotificationResult>
-                (@"[Notification].[uspArchiveNotification] @NotificationId, @CurrentUserId",
-                new SqlParameter("@NotificationId", notificationId),
-                new SqlParameter("@CurrentUserId", userContext.UserId)).SingleAsync();
-
-            return result;
+            try
+            {
+                return await context.Database.SqlQuery<string>
+                    (@"[Notification].[uspArchiveNotification] @NotificationId, @CurrentUserId",
+                    new SqlParameter("@NotificationId", notificationId),
+                    new SqlParameter("@CurrentUserId", userContext.UserId)).SingleAsync();
+            }
+            catch (Exception ex)
+            {
+                //TODO Add some error handling
+                Console.WriteLine(ex);
+            }
+            return null;
         }
     }
 }

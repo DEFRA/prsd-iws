@@ -2,19 +2,19 @@
 {
     using Core.Authorization;
     using Core.Authorization.Permissions;
-    using EA.Iws.Core.Admin.ArchiveNotification;
+    using EA.Iws.Requests.Notification;
     using Prsd.Core.Mediator;
     using System;
     using System.Collections.Generic;
 
     [RequestAuthorization(GeneralPermissions.CanViewSearchResults)]
-    public class ArchiveNotifications : IRequest<IList<ArchiveNotificationResult>>
+    public class ArchiveNotifications : IRequest<IList<NotificationArchiveSummaryData>>
     {
-        public List<Guid> NotificationIds { get; private set; }
+        public List<NotificationArchiveSummaryData> Notifications { get; private set; }
 
-        public ArchiveNotifications(List<Guid> notificationIds)
+        public ArchiveNotifications(List<NotificationArchiveSummaryData> notifications)
         {
-            NotificationIds = notificationIds;
+            Notifications = notifications;
         }
     }
 }
