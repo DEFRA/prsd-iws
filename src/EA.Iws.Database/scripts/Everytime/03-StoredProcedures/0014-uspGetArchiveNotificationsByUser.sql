@@ -12,7 +12,7 @@ BEGIN
         N.Id,
         N.NotificationNumber,
         LNS.[Description] AS [Status],
-        CONVERT(varchar, N.CreatedDate, 23) AS [CreatedDate],
+        CONVERT(varchar, N.CreatedDate, 103) AS [CreatedDate],
         E.[Name] AS CompanyName,
 	    N.CompetentAuthority
     FROM
@@ -28,7 +28,7 @@ BEGIN
 	    INN.Id,
 	    INN.NotificationNumber,
 	    LINS.[Description] as [Status],
-        CONVERT(varchar, INND.NotificationReceivedDate, 23) AS [CreatedDate],
+        CONVERT(varchar, INND.NotificationReceivedDate, 103) AS [CreatedDate],
 	    INE.[Name] as CompanyName,
 	    INN.CompetentAuthority
     FROM [ImportNotification].[Notification] INN
