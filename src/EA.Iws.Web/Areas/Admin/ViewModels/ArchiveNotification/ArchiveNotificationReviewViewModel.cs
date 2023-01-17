@@ -5,7 +5,7 @@
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
-    public class ArchiveNotificationReviewViewModel
+    public class ArchiveNotificationReviewViewModel : IValidatableObject
     {
         public ArchiveNotificationReviewViewModel()
         {
@@ -13,11 +13,13 @@
 
         public IList<NotificationArchiveSummaryData> SelectedNotifications { get; set; }
 
-        public bool HasAnyResults
+        public bool HasAnyResults { get; set; }
+
+        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
-            get
+            if (HasAnyResults == false)
             {
-                return SelectedNotifications.Count > 0;
+                yield return new ValidationResult(ArchiveNotificationResources.NoNotificationSelected, new[] { "HasAnyResults" });
             }
         }
     }

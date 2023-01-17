@@ -1,6 +1,7 @@
 ﻿namespace EA.Iws.Web.Areas.Admin.Controllers
 {
     using EA.Iws.Core.Authorization.Permissions;
+    using EA.Iws.Requests.Admin.ArchiveNotification;
     using EA.Iws.Requests.Notification;
     using EA.Iws.Web.Areas.Admin.ViewModels.ArchiveNotification;
     using EA.Iws.Web.Infrastructure.Authorization;
@@ -34,9 +35,9 @@
         public JsonResult SelectSingleNotification(List<NotificationArchiveSummaryData> selectedNotificationData, bool isChecked)
         {
             var selectNotificationList = new List<NotificationArchiveSummaryData>();
-            if (Session["SelectedNotifications"] != null)
+            if (HttpContext.Session["SelectedNotifications"] != null)
             {
-                selectNotificationList = JsonConvert.DeserializeObject<List<NotificationArchiveSummaryData>>(Session["SelectedNotifications"].ToString());
+                selectNotificationList = JsonConvert.DeserializeObject<List<NotificationArchiveSummaryData>>(HttpContext.Session["SelectedNotifications"].ToString());
             }
 
             if (isChecked)
@@ -56,7 +57,7 @@
                 }
             }
 
-            Session["SelectedNotifications"] = JsonConvert.SerializeObject(selectNotificationList);
+            HttpContext.Session["SelectedNotifications"] = JsonConvert.SerializeObject(selectNotificationList);
             var response = GetResponseResult(selectNotificationList);
 
             return Json(response);
@@ -67,19 +68,35 @@
         public JsonResult SelectAllNotifications(List<NotificationArchiveSummaryData> selectedNotificationsData, bool isChecked)
         {
             var selectNotificationList = new List<NotificationArchiveSummaryData>();
+            if (HttpContext.Session["SelectedNotifications"] != null)
+            {
+                selectNotificationList = JsonConvert.DeserializeObject<List<NotificationArchiveSummaryData>>(HttpContext.Session["SelectedNotifications"].ToString());
+            }
+
             if (isChecked)
             {
                 foreach (var notification in selectedNotificationsData)
                 {
-                    selectNotificationList.Add(notification);
+                    var findAny = selectNotificationList.SingleOrDefault(x => x.Id == notification.Id);
+                    if (findAny == null)
+                    {
+                        selectNotificationList.Add(notification);
+                    }
                 }
             }
             else
             {
-                selectNotificationList.Clear();
+                foreach (var notification in selectedNotificationsData)
+                {
+                    var findAny = selectNotificationList.SingleOrDefault(x => x.Id == notification.Id);
+                    if (findAny != null)
+                    {
+                        selectNotificationList.Remove(findAny);
+                    }
+                }
             }
 
-            Session["SelectedNotifications"] = JsonConvert.SerializeObject(selectNotificationList);
+            HttpContext.Session["SelectedNotifications"] = JsonConvert.SerializeObject(selectNotificationList);
             var response = GetResponseResult(selectNotificationList);
 
             return Json(response);
@@ -90,9 +107,9 @@
         public ActionResult Index(ArchiveNotificationResultViewModel model)
         {
             var selectNotificationList = new List<NotificationArchiveSummaryData>();
-            if (Session["SelectedNotifications"] != null)
+            if (HttpContext.Session["SelectedNotifications"] != null)
             {
-                selectNotificationList = JsonConvert.DeserializeObject<List<NotificationArchiveSummaryData>>(Session["SelectedNotifications"].ToString());
+                selectNotificationList = JsonConvert.DeserializeObject<List<NotificationArchiveSummaryData>>(HttpContext.Session["SelectedNotifications"].ToString());
             }
 
             if (selectNotificationList != null && selectNotificationList.Count() == 0)
@@ -104,7 +121,8 @@
             {
                 var reviewModel = new ArchiveNotificationReviewViewModel()
                 {
-                    SelectedNotifications = selectNotificationList
+                    SelectedNotifications = selectNotificationList,
+                    HasAnyResults = true
                 };
 
                 return View("Review", reviewModel);
@@ -114,7 +132,7 @@
         [HttpGet]
         public ActionResult Review(ArchiveNotificationReviewViewModel reviewModel)
         {
-            Session["SelectedNotifications"] = JsonConvert.SerializeObject(reviewModel);
+            HttpContext.Session["SelectedNotifications"] = JsonConvert.SerializeObject(reviewModel.SelectedNotifications);
 
             return View(reviewModel);
         }
@@ -123,9 +141,9 @@
         public ActionResult Remove(Guid notificationId)
         {
             var selectNotificationList = new List<NotificationArchiveSummaryData>();
-            if (Session["SelectedNotifications"] != null)
+            if (HttpContext.Session["SelectedNotifications"] != null)
             {
-                selectNotificationList = JsonConvert.DeserializeObject<List<NotificationArchiveSummaryData>>(Session["SelectedNotifications"].ToString());
+                selectNotificationList = JsonConvert.DeserializeObject<List<NotificationArchiveSummaryData>>(HttpContext.Session["SelectedNotifications"].ToString());
             }
 
             var findAny = selectNotificationList.SingleOrDefault(x => x.Id == notificationId);
@@ -134,15 +152,47 @@
                 selectNotificationList.RemoveAll(s => s.Id == notificationId);
             }
 
-            Session["SelectedNotifications"] = JsonConvert.SerializeObject(selectNotificationList);
+            HttpContext.Session["SelectedNotifications"] = JsonConvert.SerializeObject(selectNotificationList);
             var response = GetResponseResult(selectNotificationList);
 
             var reviewModel = new ArchiveNotificationReviewViewModel()
             {
-                SelectedNotifications = selectNotificationList
+                SelectedNotifications = selectNotificationList,
+                HasAnyResults = (selectNotificationList.Count() > 0) ? true : false
             };
 
             return View("Review", reviewModel);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Archive()
+        {
+            var selectNotificationList = new List<NotificationArchiveSummaryData>();
+            if (HttpContext.Session["SelectedNotifications"] != null)
+            {
+                selectNotificationList = JsonConvert.DeserializeObject<List<NotificationArchiveSummaryData>>(HttpContext.Session["SelectedNotifications"].ToString());
+            }
+
+            if (selectNotificationList != null && selectNotificationList.Count() == 0)
+            {
+                var reviewModel = new ArchiveNotificationReviewViewModel() { HasAnyResults = false };
+                return View("Review", reviewModel);
+            }
+
+            //Pass notifications to the uspArchiveNotification, deal with any issues:
+            var archiveNotificationList = await mediator.SendAsync(new ArchiveNotifications(selectNotificationList));
+
+            var archivedModel = new ArchiveNotificationArchivedViewModel()
+            {
+                ArchivedNotifications = archiveNotificationList,
+                SuccessCount = archiveNotificationList.Where(x => x.IsArchived).ToList().Count,
+                FailuredCount = archiveNotificationList.Where(x => !x.IsArchived).ToList().Count
+            };
+
+            HttpContext.Session["SelectedNotifications"] = new List<NotificationArchiveSummaryData>();
+
+            return View("Archived", archivedModel);
         }
 
         private async Task<ArchiveNotificationResultViewModel> GetUserArchiveNotifications(int pageNumber = 1)
@@ -151,9 +201,9 @@
             var model = new ArchiveNotificationResultViewModel(response);
             var selectNotificationList = new List<NotificationArchiveSummaryData>();
 
-            if (Session["SelectedNotifications"] != null)
+            if (HttpContext.Session["SelectedNotifications"] != null)
             {
-                selectNotificationList = JsonConvert.DeserializeObject<List<NotificationArchiveSummaryData>>(Session["SelectedNotifications"].ToString());
+                selectNotificationList = JsonConvert.DeserializeObject<List<NotificationArchiveSummaryData>>(HttpContext.Session["SelectedNotifications"].ToString());
             }
 
             if (selectNotificationList != null && selectNotificationList.Count > 0)
@@ -184,7 +234,7 @@
                 model.NumberOfNotificationsSelected = 0;
             }
 
-            Session["SelectedNotifications"] = JsonConvert.SerializeObject(selectNotificationList);
+            HttpContext.Session["SelectedNotifications"] = JsonConvert.SerializeObject(selectNotificationList);
 
             return model;
         }
