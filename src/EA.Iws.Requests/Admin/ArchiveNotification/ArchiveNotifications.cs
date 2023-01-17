@@ -4,7 +4,6 @@
     using Core.Authorization.Permissions;
     using EA.Iws.Requests.Notification;
     using Prsd.Core.Mediator;
-    using System;
     using System.Collections.Generic;
 
     [RequestAuthorization(GeneralPermissions.CanViewSearchResults)]

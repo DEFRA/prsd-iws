@@ -28,7 +28,7 @@ BEGIN
 	    INN.Id,
 	    INN.NotificationNumber,
 	    LINS.[Description] as [Status],
-	    INND.NotificationReceivedDate,
+        CONVERT(varchar, INND.NotificationReceivedDate, 23) AS [CreatedDate],
 	    INE.[Name] as CompanyName,
 	    INN.CompetentAuthority
     FROM [ImportNotification].[Notification] INN
