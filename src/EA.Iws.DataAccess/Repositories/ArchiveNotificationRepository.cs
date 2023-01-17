@@ -22,21 +22,10 @@
 
         public async Task<string> ArchiveNotificationAsync(Guid notificationId)
         {
-            //TODO Do we need this the EnsureAccess?
-            //await authorization.EnsureAccessAsync(notificationId);
-            try
-            {
-                return await context.Database.SqlQuery<string>
-                    (@"[Notification].[uspArchiveNotification] @NotificationId, @CurrentUserId",
-                    new SqlParameter("@NotificationId", notificationId),
-                    new SqlParameter("@CurrentUserId", userContext.UserId)).SingleAsync();
-            }
-            catch (Exception ex)
-            {
-                //TODO Add some error handling
-                Console.WriteLine(ex);
-            }
-            return null;
+            return await context.Database.SqlQuery<string>
+                (@"[Notification].[uspArchiveNotification] @NotificationId, @CurrentUserId",
+                new SqlParameter("@NotificationId", notificationId),
+                new SqlParameter("@CurrentUserId", userContext.UserId)).SingleAsync();
         }
     }
 }

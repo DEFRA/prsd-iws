@@ -9,13 +9,13 @@ AS
 BEGIN
 	SET NOCOUNT ON;
     
-    IF EXISTS (select * from [ImportNotification].[Notification] where Id = @NotificationId)
+    IF EXISTS (SELECT * FROM [ImportNotification].[Notification] WHERE Id = @NotificationId)
 	--ImportNotification
 	BEGIN
-		IF ((SELECT [IsArchived] from [ImportNotification].[Notification] where Id = @NotificationId) = 1)
+		IF ((SELECT [IsArchived] FROM [ImportNotification].[Notification] WHERE Id = @NotificationId) = 1)
 		BEGIN
 			SELECT 
-				'false' as IsArchived
+				'true' AS IsArchived
 			RETURN 
 		END 
 	BEGIN TRAN
@@ -23,50 +23,54 @@ BEGIN
 		UPDATE [ImportNotification].[Exporter] 
 		SET ContactName = 'Archived', Telephone = '000000', Email = 'archived@archive.com'
 		WHERE ImportNotificationId = @NotificationId
+
 		UPDATE [ImportNotification].[Exporter] 
 		SET [Name] = 'Archived', Address1 = 'Archived', Address2 = 'Archived', TownOrCity = 'Archived', PostalCode = 'Archived'
-		WHERE ImportNotificationId = @NotificationId AND [Type] in (2,3)
+		WHERE ImportNotificationId = @NotificationId AND [Type] IN (2,3)
 		--How do we get the external user?
 
 		UPDATE [ImportNotification].[Producer] 
 		SET ContactName = 'Archived', Telephone = '000000', Email = 'archived@archive.com'
 		WHERE ImportNotificationId = @NotificationId
+
 		UPDATE [ImportNotification].[Producer] 
 		SET [Name] = 'Archived', Address1 = 'Archived', Address2 = 'Archived', TownOrCity = 'Archived', PostalCode = 'Archived'
-		WHERE ImportNotificationId = @NotificationId AND [Type] in (2,3)
+		WHERE ImportNotificationId = @NotificationId AND [Type] IN (2,3)
 
 		--Consignee
 		UPDATE [ImportNotification].[Importer] 
 		SET ContactName = 'Archived', Telephone = '000000', Email = 'archived@archive.com'
-		WHERE ImportNotificationId = @NotificationId		
+		WHERE ImportNotificationId = @NotificationId
+		
 		UPDATE [ImportNotification].[Importer] 
 		SET [Name] = 'Archived', Address1 = 'Archived', Address2 = 'Archived', TownOrCity = 'Archived', PostalCode = 'Archived'
-		WHERE ImportNotificationId = @NotificationId AND [Type] in (2,3)
+		WHERE ImportNotificationId = @NotificationId AND [Type] IN (2,3)
 		
 		UPDATE [ImportNotification].[Facility]
 		SET ContactName = 'Archived', Telephone = '000000', Email = 'archived@archive.com'
-		WHERE FacilityCollectionId IN (Select Id from [ImportNotification].[FacilityCollection] where ImportNotificationId = @NotificationId)		
+		WHERE FacilityCollectionId IN (SELECT Id FROM [ImportNotification].[FacilityCollection] WHERE ImportNotificationId = @NotificationId)
+		
 		UPDATE [ImportNotification].[Facility] 
 		SET [Name] = 'Archived', Address1 = 'Archived', Address2 = 'Archived', TownOrCity = 'Archived', PostalCode = 'Archived'
-		WHERE FacilityCollectionId IN (Select Id from [ImportNotification].[FacilityCollection] where ImportNotificationId = @NotificationId) AND [Type] in (2,3)
+		WHERE FacilityCollectionId IN (SELECT Id FROM [ImportNotification].[FacilityCollection] WHERE ImportNotificationId = @NotificationId) AND [Type] IN (2,3)
 		
 		--Is there no Carrier for Imports?
 		
 		--What recovery info needs archived? No obviously personal details present
 		
-		DELETE FROM [FileStore].[File] where Id in (select FileId FROM [ImportNotification].[MovementPartialRejection]
-			Where MovementId in (select Id FROM [Notification].[Movement] Where NotificationId = @NotificationId))
+		DELETE FROM [FileStore].[File] WHERE Id IN (SELECT FileId FROM [ImportNotification].[MovementPartialRejection]
+			WHERE MovementId IN (SELECT Id FROM [Notification].[Movement] WHERE NotificationId = @NotificationId))
 
-		update [ImportNotification].[Notification] SET IsArchived = 1, ArchivedByUserId = @CurrentUserId, ArchivedDate = SYSDATETIMEOFFSET() where Id = @NotificationId
+		UPDATE [ImportNotification].[Notification] SET IsArchived = 1, ArchivedByUserId = @CurrentUserId, ArchivedDate = SYSDATETIMEOFFSET() WHERE Id = @NotificationId
 		
-		SELECT 'true' as IsArchived
+		SELECT 'true' AS IsArchived
 	END 
 	ELSE 
 	BEGIN
 	--ExportNotification
-		IF ((select [IsArchived] from [Notification].[Notification] where Id = @NotificationId) = 1)
+		IF ((SELECT [IsArchived] FROM [Notification].[Notification] WHERE Id = @NotificationId) = 1)
 		BEGIN
-			SELECT 'false' as IsArchived
+			SELECT 'true' AS IsArchived
 			RETURN
 		END 
 		
@@ -75,57 +79,65 @@ BEGIN
 		UPDATE [Notification].[Exporter]
 		SET FullName = 'Archived', Telephone = '000000', Fax = '000000', Email = 'archived@archive.com'
 		WHERE NotificationId = @NotificationId
+
 		UPDATE [Notification].[Exporter] 
 		SET [Name] = 'Archived', Address1 = 'Archived', Address2 = 'Archived', TownOrCity = 'Archived', PostalCode = 'Archived', Region = 'Archived'
-		WHERE NotificationId = @NotificationId AND [Type] in (2,3)
+		WHERE NotificationId = @NotificationId AND [Type] IN (2,3)
 
 		UPDATE [Notification].[Producer]
 		SET FullName = 'Archived', Telephone = '000000', Fax = '000000', Email = 'archived@archive.com'
-		WHERE ProducerCollectionId IN (Select Id from [Notification].[ProducerCollection] where NotificationId = @NotificationId)
+		WHERE ProducerCollectionId IN (SELECT Id FROM [Notification].[ProducerCollection] WHERE NotificationId = @NotificationId)
+
 		UPDATE [Notification].[Producer]
 		SET [Name] = 'Archived', Address1 = 'Archived', Address2 = 'Archived', TownOrCity = 'Archived', PostalCode = 'Archived'
-		WHERE ProducerCollectionId IN (Select Id from [Notification].[ProducerCollection] where NotificationId = @NotificationId)
-		AND [Type] in (2,3)
+		WHERE ProducerCollectionId IN (SELECT Id FROM [Notification].[ProducerCollection] WHERE NotificationId = @NotificationId)
+		AND [Type] IN (2,3)
 		
 		--Consignee
 		UPDATE [Notification].[Importer]
 		SET FullName = 'Archived', Telephone = '000000', Fax = '000000', Email = 'archived@archive.com'
 		WHERE NotificationId = @NotificationId
+
 		UPDATE [Notification].[Importer]
 		SET [Name] = 'Archived', Address1 = 'Archived', Address2 = 'Archived', TownOrCity = 'Archived', PostalCode = 'Archived'
-		WHERE NotificationId = @NotificationId AND [Type] in (2,3)
+		WHERE NotificationId = @NotificationId AND [Type] IN (2,3)
 				
 		UPDATE [Notification].[Facility]
 		SET FullName = 'Archived', Telephone = '000000', Fax = '000000', Email = 'archived@archive.com'
-		WHERE FacilityCollectionId IN (Select Id from [Notification].[FacilityCollection] where NotificationId = @NotificationId)
+		WHERE FacilityCollectionId IN (SELECT Id FROM [Notification].[FacilityCollection] WHERE NotificationId = @NotificationId)
+
 		UPDATE [Notification].[Facility]
 		SET [Name] = 'Archived', Address1 = 'Archived', Address2 = 'Archived', TownOrCity = 'Archived', PostalCode = 'Archived'
-		WHERE FacilityCollectionId IN (Select Id from [Notification].[FacilityCollection] where NotificationId = @NotificationId)
-		AND [Type] in (2,3)
+		WHERE FacilityCollectionId IN (SELECT Id FROM [Notification].[FacilityCollection] WHERE NotificationId = @NotificationId)
+		AND [Type] IN (2,3)
 
 		UPDATE [Notification].[Carrier]
 		SET FullName = 'Archived', Telephone = '000000', Fax = '000000', Email = 'archived@archive.com'
-		WHERE CarrierCollectionId IN (Select Id from [Notification].[CarrierCollection] where NotificationId = @NotificationId)
+		WHERE CarrierCollectionId IN (SELECT Id FROM [Notification].[CarrierCollection] WHERE NotificationId = @NotificationId)
+
 		UPDATE [Notification].[Carrier]
 		SET [Name] = 'Archived', Address1 = 'Archived', Address2 = 'Archived', TownOrCity = 'Archived', PostalCode = 'Archived'
-		WHERE CarrierCollectionId IN (Select Id from [Notification].[CarrierCollection] where NotificationId = @NotificationId)
-		AND [Type] in (2,3)
+		WHERE CarrierCollectionId IN (SELECT Id FROM [Notification].[CarrierCollection] WHERE NotificationId = @NotificationId)
+		AND [Type] IN (2,3)
 
-		DELETE FROM [FileStore].[File] where Id in (select ProcessOfGenerationId FROM [Notification].[AnnexCollection] Where NotificationId = @NotificationId)
-		DELETE FROM [FileStore].[File] where Id in (select WasteCompositionId FROM [Notification].[AnnexCollection] Where NotificationId = @NotificationId)
-		DELETE FROM [FileStore].[File] where Id in (select TechnologyEmployedId FROM [Notification].[AnnexCollection] Where NotificationId = @NotificationId)
+		DELETE FROM [FileStore].[File] WHERE Id IN (SELECT ProcessOfGenerationId FROM [Notification].[AnnexCollection] WHERE NotificationId = @NotificationId)
+		DELETE FROM [FileStore].[File] WHERE Id IN (SELECT WasteCompositionId FROM [Notification].[AnnexCollection] WHERE NotificationId = @NotificationId)
+		DELETE FROM [FileStore].[File] WHERE Id IN (SELECT TechnologyEmployedId FROM [Notification].[AnnexCollection] WHERE NotificationId = @NotificationId)
 
-		DELETE FROM [FileStore].[File] where Id in (select FileId FROM [Notification].[Movement] Where NotificationId = @NotificationId)
-		DELETE FROM [FileStore].[File] where Id in (select FileId FROM [Notification].[MovementOperationReceipt] 
-			Where MovementId in (select Id FROM [Notification].[Movement] Where NotificationId = @NotificationId))
-		DELETE FROM [FileStore].[File] where Id in (select FileId FROM [Notification].[MovementPartialRejection]
-			Where MovementId in (select Id FROM [Notification].[Movement] Where NotificationId = @NotificationId))
-		DELETE FROM [FileStore].[File] where Id in (select FileId FROM [Notification].[MovementReceipt] 
-			Where MovementId in (select Id FROM [Notification].[Movement] Where NotificationId = @NotificationId))
-		DELETE FROM [FileStore].[File] where Id in (select FileId FROM [Notification].[MovementRejection]
-			Where MovementId in (select Id FROM [Notification].[Movement] Where NotificationId = @NotificationId))
+		DELETE FROM [FileStore].[File] where Id IN (SELECT FileId FROM [Notification].[Movement] WHERE NotificationId = @NotificationId)
+		DELETE FROM [FileStore].[File] where Id IN (SELECT FileId FROM [Notification].[MovementOperationReceipt] 
+			WHERE MovementId IN (select Id FROM [Notification].[Movement] WHERE NotificationId = @NotificationId))
 
-		update [Notification].[Notification] SET IsArchived = 1, ArchivedByUserId = @CurrentUserId, ArchivedDate = SYSDATETIMEOFFSET() where Id = @NotificationId
+		DELETE FROM [FileStore].[File] WHERE Id IN (SELECT FileId FROM [Notification].[MovementPartialRejection]
+			WHERE MovementId IN (SELECT Id FROM [Notification].[Movement] WHERE NotificationId = @NotificationId))
+
+		DELETE FROM [FileStore].[File] WHERE Id IN (SELECT FileId FROM [Notification].[MovementReceipt] 
+			WHERE MovementId IN (SELECT Id FROM [Notification].[Movement] WHERE NotificationId = @NotificationId))
+
+		DELETE FROM [FileStore].[File] WHERE Id IN (SELECT FileId FROM [Notification].[MovementRejection]
+			WHERE MovementId IN (SELECT Id FROM [Notification].[Movement] WHERE NotificationId = @NotificationId))
+
+		UPDATE [Notification].[Notification] SET IsArchived = 1, ArchivedByUserId = @CurrentUserId, ArchivedDate = SYSDATETIMEOFFSET() WHERE Id = @NotificationId
 
 		SELECT 'true' as IsArchived
 	END
