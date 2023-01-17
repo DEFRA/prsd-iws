@@ -68,10 +68,12 @@
                             <th scope="col" class="govuk-table__header">@ArchiveNotificationResources.Status</th>
                             <th scope="col" class="govuk-table__header">@ArchiveNotificationResources.DateActioned</th>
                             <th scope="col" class="govuk-table__header">@ArchiveNotificationResources.CompanyName</th>
-                            <th scope="col" class="govuk-table__header" style="text-align : center;">
-                                @Html.LabelFor(m => m.IsSelectAllChecked, new { @for = "SelectAll", @style = "white-space:nowrap;" })
-                                @Html.CheckBoxFor(m => m.IsSelectAllChecked, new { id = "SelectAll", name = "SelectAll", @class = "checkboxes__input checkboxes" })
-                                @Html.HiddenFor(m => m.IsSelectAllChecked)
+                            <th scope="col" class="govuk-table__header">
+                                <div class="govuk-checkboxes__item govuk-checkboxes--small">
+                                    @Html.LabelFor(m => m.IsSelectAllChecked, new { @for = "SelectAll", @class = "govuk-visually-hidden" })
+                                    @Html.CheckBoxFor(m => m.IsSelectAllChecked, new { id = "SelectAll", name = "SelectAll", @class = "checkboxes__input checkboxes" })
+                                    @Html.HiddenFor(m => m.IsSelectAllChecked)
+                                </div>
                             </th>
                         </tr>
                     </thead>

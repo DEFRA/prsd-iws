@@ -10,7 +10,9 @@
     @date.ToString("d MMM yyyy")
 }
 
-<h1 class="govuk-heading-l">@ArchiveNotificationResources.Heading</h1>
+@Html.ActionLink("Back", "Index", "ArchiveNotification", new { @class = "govuk-back-link" })
+
+<h1 class="govuk-heading-l" style="padding-top:20px !important">@ArchiveNotificationResources.Heading</h1>
 
 @if (!Model.HasAnyResults)
 {
@@ -44,7 +46,7 @@
             </span>
         </p>
     </div>
-    
+
 </div>
 
 @if (Model.HasAnyResults)
@@ -123,6 +125,4 @@ else
     <button class="govuk-button" type="submit">@Constants.ConfirmButtonText</button>
 }
 
-<div class="govuk-form-group">
-    @Html.ActionLink("Back", "Index", "ArchiveNotification", new { @class = "govuk-back-link" })
-</div>
+

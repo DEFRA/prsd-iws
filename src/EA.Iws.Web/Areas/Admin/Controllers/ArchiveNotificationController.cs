@@ -190,6 +190,8 @@
                 FailuredCount = archiveNotificationList.Where(x => !x.IsArchived).ToList().Count
             };
 
+            HttpContext.Session["SelectedNotifications"] = new List<NotificationArchiveSummaryData>();
+
             return View("Archived", archivedModel);
         }
 
