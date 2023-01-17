@@ -46,6 +46,8 @@
 
         public string NotificationNumber { get; private set; }
 
+        public bool IsArchived { get; private set; }
+
         public virtual WasteType WasteType { get; private set; }
 
         public bool? WasteRecoveryInformationProvidedByImporter { get; private set; }
