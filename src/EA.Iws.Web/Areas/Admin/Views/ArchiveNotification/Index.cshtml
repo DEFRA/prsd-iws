@@ -6,11 +6,6 @@
     ViewBag.Title = "Archive notifications";
 }
 
-@helper DisplayDate(DateTimeOffset date)
-{
-    @date.ToString("d MMM yyyy")
-}
-
 <h1 class="govuk-heading-l">@ArchiveNotificationResources.Heading</h1>
 
 @using (Html.BeginForm())
@@ -88,7 +83,7 @@
                                     @Html.DisplayFor(m => m.Notifications[i].Status)
                                 </td>
                                 <td class="govuk-table__cell createdate">
-                                    @DisplayDate(Model.Notifications[i].CreatedDate)
+                                    @Html.DisplayFor(m => m.Notifications[i].CreatedDate)
                                 </td>
                                 <td class="govuk-table__cell companyName">
                                     @Html.DisplayFor(m => m.Notifications[i].CompanyName)

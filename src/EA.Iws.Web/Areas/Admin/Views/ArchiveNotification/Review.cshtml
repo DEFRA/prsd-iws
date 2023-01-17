@@ -5,10 +5,6 @@
     ViewBag.Title = "Review";
 }
 
-@helper DisplayDate(DateTimeOffset date)
-{
-    @date.ToString("d MMM yyyy")
-}
 
 @Html.ActionLink("Back", "Index", "ArchiveNotification", new { @class = "govuk-back-link" })
 
@@ -74,7 +70,7 @@
                                 @Html.DisplayFor(m => m.SelectedNotifications[i].Status)
                             </td>
                             <td class="govuk-table__cell">
-                                @DisplayDate(Model.SelectedNotifications[i].CreatedDate)
+                                @Html.DisplayFor(m => m.SelectedNotifications[i].CreatedDate)
                             </td>
                             <td class="govuk-table__cell">
                                 @Html.DisplayFor(m => m.SelectedNotifications[i].CompanyName)
