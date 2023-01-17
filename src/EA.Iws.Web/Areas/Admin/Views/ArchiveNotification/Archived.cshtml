@@ -5,11 +5,6 @@
     ViewBag.Title = "Archived";
 }
 
-@helper DisplayDate(DateTimeOffset date)
-{
-    @date.ToString("d MMM yyyy")
-}
-
 <h1 class="govuk-heading-l">@ArchiveNotificationResources.Heading</h1>
 
 @Html.AntiForgeryToken()
@@ -55,7 +50,7 @@
                                     @Html.DisplayFor(m => notification.Status)
                                 </td>
                                 <td class="govuk-table__cell">
-                                    @DisplayDate(notification.CreatedDate)
+                                    @Html.DisplayFor(m => notification.CreatedDate)
                                 </td>
                                 <td class="govuk-table__cell">
                                     @Html.DisplayFor(m => notification.CompanyName)
@@ -110,7 +105,7 @@
                                     @Html.DisplayFor(m => notification.Status)
                                 </td>
                                 <td class="govuk-table__cell">
-                                    @DisplayDate(notification.CreatedDate)
+                                    @Html.DisplayFor(m => notification.CreatedDate)
                                 </td>
                                 <td class="govuk-table__cell">
                                     @Html.DisplayFor(m => notification.CompanyName)
