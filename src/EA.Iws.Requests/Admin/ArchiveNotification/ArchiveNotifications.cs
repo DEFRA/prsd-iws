@@ -1,17 +1,20 @@
 ﻿namespace EA.Iws.Requests.Admin.ArchiveNotification
 {
-    using System.Collections.Generic;
     using Core.Authorization;
     using Core.Authorization.Permissions;
-    using EA.Iws.Core.Admin.ArchiveNotification;
+    using EA.Iws.Requests.Notification;
     using Prsd.Core.Mediator;
+    using System;
+    using System.Collections.Generic;
 
     [RequestAuthorization(GeneralPermissions.CanViewSearchResults)]
-
-    public class ArchiveNotifications : IRequest<IList<ArchiveNotificationResult>>
+    public class ArchiveNotifications : IRequest<IList<NotificationArchiveSummaryData>>
     {
-        public ArchiveNotifications()
-        {            
+        public List<NotificationArchiveSummaryData> Notifications { get; private set; }
+
+        public ArchiveNotifications(List<NotificationArchiveSummaryData> notifications)
+        {
+            Notifications = notifications;
         }
     }
 }

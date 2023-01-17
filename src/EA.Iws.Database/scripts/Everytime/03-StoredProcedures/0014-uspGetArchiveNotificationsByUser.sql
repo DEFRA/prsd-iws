@@ -12,7 +12,7 @@ BEGIN
         N.Id,
         N.NotificationNumber,
         LNS.[Description] AS [Status],
-        N.CreatedDate,
+        CONVERT(varchar, N.CreatedDate, 23) AS [CreatedDate],
         E.[Name] AS CompanyName,
 	    N.CompetentAuthority
     FROM
@@ -20,7 +20,7 @@ BEGIN
         INNER JOIN [Notification].[NotificationAssessment] NA ON N.Id = NA.NotificationApplicationId
         INNER JOIN [Lookup].NotificationStatus LNS on LNS.Id = NA.[Status]
         LEFT JOIN [Notification].[Exporter] E ON N.Id = E.NotificationId
-    WHERE n.CreatedDate < dateadd(year, -3, getdate())
+    WHERE N.IsArchived = 0 AND N.CreatedDate < dateadd(year, -3, getdate())
 	    AND NA.[Status] IN (14,8,9,11)
 	    AND N.CompetentAuthority IN (select CompetentAuthority from [Person].[InternalUser] where UserId = @UserID)
     UNION 
@@ -36,7 +36,7 @@ BEGIN
 	    INNER JOIN [ImportNotification].[NotificationDates] INND ON INND.NotificationAssessmentId = INNA.Id
 		INNER JOIN [Lookup].ImportNotificationStatus LINS ON LINS.Id = INNA.[Status]
 	    LEFT JOIN [ImportNotification].[Exporter] INE on INN.Id = INE.ImportNotificationId
-    WHERE INND.NotificationReceivedDate < dateadd(year, -3, getdate())
+    WHERE INN.IsArchived = 0 AND INND.NotificationReceivedDate < dateadd(year, -3, getdate())
 	    AND INNA.[Status] IN (13,12,11,10)
 	    AND INN.CompetentAuthority IN (select CompetentAuthority from [Person].[InternalUser] where UserId = @UserID)
 

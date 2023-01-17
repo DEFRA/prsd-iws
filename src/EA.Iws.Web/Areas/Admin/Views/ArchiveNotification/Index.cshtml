@@ -23,7 +23,6 @@
     @Html.HiddenFor(m => m.NumberOfNotifications)
     @Html.HiddenFor(m => m.NumberOfNotificationsSelected)
     @Html.HiddenFor(m => m.HasAnyNotificationSelected)
-    @Html.HiddenFor(m => m.HasNotificationsSelectedMoreThanOne)
 
     <div id="dvInformationMessage" class="archive-notification-warning" style="display: none;">
         <div class="gem-c-success-alert govuk-notification-banner govuk-notification-banner-warning">
@@ -67,12 +66,14 @@
                         <tr class="govuk-table__row">
                             <th scope="col" class="govuk-table__header">@ArchiveNotificationResources.NotificationNumber</th>
                             <th scope="col" class="govuk-table__header">@ArchiveNotificationResources.Status</th>
-                            <th scope="col" class="govuk-table__header">@ArchiveNotificationResources.DateGenerated</th>
+                            <th scope="col" class="govuk-table__header">@ArchiveNotificationResources.DateActioned</th>
                             <th scope="col" class="govuk-table__header">@ArchiveNotificationResources.CompanyName</th>
-                            <th scope="col" class="govuk-table__header" style="text-align : center;">
-                                @Html.LabelFor(m => m.IsSelectAllChecked, new { @for = "SelectAll", @style = "white-space:nowrap;" })
-                                @Html.CheckBoxFor(m => m.IsSelectAllChecked, new { id = "SelectAll", name = "SelectAll", @class = "checkboxes__input checkboxes" })
-                                @Html.HiddenFor(m => m.IsSelectAllChecked)
+                            <th scope="col" class="govuk-table__header">
+                                <div class="govuk-checkboxes__item govuk-checkboxes--small">
+                                    @Html.LabelFor(m => m.IsSelectAllChecked, new { @for = "SelectAll", @class = "govuk-visually-hidden" })
+                                    @Html.CheckBoxFor(m => m.IsSelectAllChecked, new { id = "SelectAll", name = "SelectAll", @class = "checkboxes__input checkboxes" })
+                                    @Html.HiddenFor(m => m.IsSelectAllChecked)
+                                </div>
                             </th>
                         </tr>
                     </thead>
@@ -94,7 +95,13 @@
                                 </td>
                                 <td class="govuk-table__cell">
                                     <div class="govuk-checkboxes__item govuk-checkboxes--small">
-                                        @Html.CheckBoxFor(m => m.Notifications[i].IsSelected, new { id = @Model.Notifications[i].Id, @class = "checkboxes__input checkboxes" })
+                                        @Html.CheckBoxFor(m => m.Notifications[i].IsSelected,
+                                                          new
+                                                               {
+                                                                   id = @Model.Notifications[i].Id,
+                                                                @class = "checkboxes__input checkboxes",
+                                                                title = @Model.Notifications[i].NotificationNumber
+                                                               })
                                     </div>
                                 </td>
                                 @Html.HiddenFor(m => m.Notifications[i].NotificationNumber)
@@ -123,7 +130,7 @@
                 <tr class="govuk-table__row">
                     <th scope="col" class="govuk-table__header">@ArchiveNotificationResources.NotificationNumber</th>
                     <th scope="col" class="govuk-table__header">@ArchiveNotificationResources.Status</th>
-                    <th scope="col" class="govuk-table__header">@ArchiveNotificationResources.DateGenerated</th>
+                    <th scope="col" class="govuk-table__header">@ArchiveNotificationResources.DateActioned</th>
                     <th scope="col" class="govuk-table__header">@ArchiveNotificationResources.CompanyName</th>
                 </tr>
             </thead>
@@ -146,17 +153,22 @@
         $('#SelectedNotificationCount').html($('#NumberOfNotificationsSelected').val());
 
         $('#SelectAll').click(function (e) {
+            $("#SelectAll").attr("disabled", true);
             var pageNum = $('#PageNumber').val();
-            var hasMorePagesSelected = $('#HasNotificationsSelectedMoreThanOne').val().toLowerCase();
             var numVal = $('#NumberOfNotificationsSelected').val();
+            var allPagesTotalChecked = 0;
 
             if (this.checked) {
-                numVal = $('#NumberOfNotificationsSelected').val() + 5;
+                var totalCheckboxes = $('#tblArchive').find('input[type=checkbox]').length - 1;
+                var currentPageAlreadyChecked = $('#tblArchive').find('input[type=checkbox]:checked').length - 1;
+                var currentNewChecks = parseInt(totalCheckboxes) - parseInt(currentPageAlreadyChecked);
+                var allPagesTotalChecked = parseInt(numVal) + parseInt(currentNewChecks);
             } else {
-                numVal = $('#NumberOfNotificationsSelected').val() - 5;
+                var currentPageAlreadyChecked = $('#tblArchive').find('input[type=checkbox]:checked').length - 1;
+                allPagesTotalChecked = parseInt(numVal) - parseInt(currentPageAlreadyChecked);
             }
 
-            if (numVal <= 5 && hasMorePagesSelected == 'false') {
+            if (allPagesTotalChecked <= 25) {
                 var table = $(e.target).closest('table');
                 $('td input:checkbox', table).prop('checked', this.checked);
 
@@ -184,17 +196,13 @@
                         var resultList = result;
                         $('#SelectedNotificationCount').html(resultList[1]);
                         $('#NumberOfNotificationsSelected').val(resultList[1]);
-                        if (resultList[0] > 1) {
-                            $('#HasNotificationsSelectedMoreThanOne').val("true");
-                        }
-                        else {
-                            $('#HasNotificationsSelectedMoreThanOne').val("false");
-                        }
+                        $("#SelectAll").removeAttr("disabled");
                     }
                 });
             }
             else {
                 $('#dvInformationMessage').show();
+                $("#SelectAll").removeAttr("disabled");
                 $("#SelectAll").prop("checked", false);
             }
         });
@@ -229,12 +237,6 @@
                             var resultList = result;
                             $('#SelectedNotificationCount').html(resultList[1]);
                             $('#NumberOfNotificationsSelected').val(resultList[1]);
-                            if (resultList[0] > 1) {
-                                $('#HasNotificationsSelectedMoreThanOne').val("true");
-                            }
-                            else {
-                                $('#HasNotificationsSelectedMoreThanOne').val("false");
-                            }
                         }
                     });
                 } else {
@@ -244,38 +246,42 @@
         });
 
         function validateNoNotifications(isNotificationChecked) {
-            var totalSelected = $('#NumberOfNotificationsSelected').val();
-            var hasMorePagesSelected = $('#HasNotificationsSelectedMoreThanOne').val().toLowerCase();
+
+            var totalCheckboxes = parseInt($('#tblArchive').find('input[type=checkbox]').length - 1);
+            var currentPageAlreadyChecked = parseInt($('#tblArchive').find('input[type=checkbox]:checked').length - 1);
 
             if (isNotificationChecked) {
-                totalSelected++;
+                var allPagesCheckedTotoal = parseInt($('#NumberOfNotificationsSelected').val()) + 1;
+                if (allPagesCheckedTotoal > 25) {
+                    $('#dvInformationMessage').show();
+                    return true;
+                }
+                else {
+                    var totalChecked = parseInt(currentPageAlreadyChecked + 1);
+
+                    if (allPagesCheckedTotoal <= 25 && (totalCheckboxes == totalChecked)) {
+                        $('#dvInformationMessage').hide();
+                        $("#SelectAll").prop("checked", true);
+                        return false;
+                    }
+                    else {
+                        $("#SelectAll").prop("checked", false);
+                        return false;
+                    }
+                }
             }
             else {
-                totalSelected--;
-            }
+                var totalChecked = parseInt(currentPageAlreadyChecked);
 
-            if (totalSelected >= 1) {
-                $('#HasAnyNotificationSelected').val("true");
-            } else {
-                $('#HasAnyNotificationSelected').val("false");
-            }
-
-            if (totalSelected > 5) {
-                $('#dvInformationMessage').show();
-                $("#SelectAll").prop("checked", false);
-                return true;
-            }
-            else if (totalSelected == 5 && hasMorePagesSelected == 'true') {
-                return false;
-            }
-            //else if (totalSelected == 5 && hasMorePagesSelected == 'false') {
-            //    $("#SelectAll").prop("checked", false);
-            //    return true;
-            //}
-            else {
-                $('#dvInformationMessage').hide();
-                $("#SelectAll").prop("checked", false);
-                return false;
+                if (totalCheckboxes != totalChecked) {
+                    $('#dvInformationMessage').hide();
+                    $("#SelectAll").prop("checked", false);
+                    return false;
+                }
+                else {
+                    $("#SelectAll").prop("checked", true);
+                    return false;
+                }
             }
         }
     </script>
