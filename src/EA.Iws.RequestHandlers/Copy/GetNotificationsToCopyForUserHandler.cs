@@ -33,7 +33,8 @@
                 .Where(x => x.Notification.UserId == userContext.UserId
                     && x.Notification.NotificationType == notification.NotificationType
                     && x.Notification.WasteType != null
-                    && x.Notification.CompetentAuthority == notification.CompetentAuthority)
+                    && x.Notification.CompetentAuthority == notification.CompetentAuthority
+                    && x.Notification.IsArchived == false)
                 .Select(x => new
                 {
                     id = x.Notification.Id,
