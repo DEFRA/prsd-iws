@@ -106,6 +106,15 @@ namespace EA.Iws.Web.Areas.Admin.Views.ArchiveNotification {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Some notifications could not be properly archived.
+        /// </summary>
+        public static string FailureMsg {
+            get {
+                return ResourceManager.GetString("FailureMsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to After you archive a notification, personal data stored with it such as name and address will be shown as &apos;Archived&apos; in the system..
         /// </summary>
         public static string GdprBlurbEnd {

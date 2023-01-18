@@ -187,7 +187,8 @@
             {
                 ArchivedNotifications = archiveNotificationList,
                 SuccessCount = archiveNotificationList.Where(x => x.IsArchived).ToList().Count,
-                FailuredCount = archiveNotificationList.Where(x => !x.IsArchived).ToList().Count
+                FailureCount = archiveNotificationList.Where(x => !x.IsArchived).ToList().Count,
+                HasAnyNotificationFailures = (archiveNotificationList.Where(x => !x.IsArchived).ToList().Count > 0) ? true : false
             };
 
             HttpContext.Session.Remove("SelectedNotifications");
