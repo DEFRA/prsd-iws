@@ -2240,6 +2240,21 @@ textarea {
     box-shadow: none;
 }
 
+.noteBlueDiv {
+    border-width: 0px;
+    position: absolute;
+    width: 10px;
+    height: 50px;
+    background: inherit;
+    border-width: 1px;
+    border-style: solid;
+    border-color: rgba(43, 112, 185, 1);
+    border-radius: 0px;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+
 #div_orange {
     background-color: rgba(244, 119, 56, 1);
     border-color: rgba(245, 166, 35, 1);
@@ -2253,4 +2268,9 @@ textarea {
 #div_red {
     background-color: red;
     border-color: red;    
+}
+
+#div_blue {
+    background-color: rgba(43, 112, 185, 1);
+    border-color: rgba(43, 112, 185, 1);
 }
