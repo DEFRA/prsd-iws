@@ -4,6 +4,7 @@
     using EA.Iws.Requests.Admin.ArchiveNotification;
     using EA.Iws.Requests.Notification;
     using EA.Iws.Web.Areas.Admin.ViewModels.ArchiveNotification;
+    using EA.Iws.Web.Areas.Admin.Views.ArchiveNotification;
     using EA.Iws.Web.Infrastructure.Authorization;
     using EA.Prsd.Core.Mediator;
     using Newtonsoft.Json;
@@ -179,8 +180,7 @@
                 var reviewModel = new ArchiveNotificationReviewViewModel() { HasAnyResults = false };
                 return View("Review", reviewModel);
             }
-
-            //Pass notifications to the uspArchiveNotification, deal with any issues:
+            
             var archiveNotificationList = await mediator.SendAsync(new ArchiveNotifications(selectNotificationList));
 
             var archivedModel = new ArchiveNotificationArchivedViewModel()
@@ -190,6 +190,11 @@
                 FailureCount = archiveNotificationList.Where(x => !x.IsArchived).ToList().Count,
                 HasAnyNotificationFailures = (archiveNotificationList.Where(x => !x.IsArchived).ToList().Count > 0) ? true : false
             };
+
+            if (archivedModel.HasAnyNotificationFailures)
+            {
+                ModelState.AddModelError("HasAnyNotificationFailures", ArchiveNotificationResources.FailureMsg);
+            }
 
             HttpContext.Session.Remove("SelectedNotifications");
 

@@ -16,10 +16,10 @@
             this.repository = repository;
         }
 
-        public async Task<IList<NotificationArchiveSummaryData>> HandleAsync(ArchiveNotifications message)
+        public async Task<IList<NotificationArchiveSummaryData>> HandleAsync(ArchiveNotifications archiveNotifications)
         {
-            var res = message.Notifications;
-            foreach (var notification in res)
+            var archivedNotificationList = archiveNotifications.Notifications;
+            foreach (var notification in archivedNotificationList)
             {
                 try
                 {
@@ -41,7 +41,7 @@
                     notification.IsArchived = false;
                 }
             }
-            return res;
+            return archivedNotificationList;
         }
     }
 }
