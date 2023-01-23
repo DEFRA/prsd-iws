@@ -60,6 +60,7 @@ BEGIN
 		
 		DELETE FROM [FileStore].[File] WHERE Id IN (SELECT FileId FROM [ImportNotification].[MovementPartialRejection]
 			WHERE MovementId IN (SELECT Id FROM [Notification].[Movement] WHERE NotificationId = @NotificationId))
+
 		UPDATE [ImportNotification].[MovementPartialRejection] SET FileId = null
 			WHERE MovementId IN (SELECT Id FROM [Notification].[Movement] WHERE NotificationId = @NotificationId)
 
@@ -127,22 +128,30 @@ BEGIN
 		DELETE FROM [FileStore].[File] WHERE Id IN (SELECT TechnologyEmployedId FROM [Notification].[AnnexCollection] WHERE NotificationId = @NotificationId)
 
 		DELETE FROM [FileStore].[File] where Id IN (SELECT FileId FROM [Notification].[Movement] WHERE NotificationId = @NotificationId)
+
 		DELETE FROM [FileStore].[File] where Id IN (SELECT FileId FROM [Notification].[MovementOperationReceipt] 
 			WHERE MovementId IN (select Id FROM [Notification].[Movement] WHERE NotificationId = @NotificationId))
+
 		DELETE FROM [FileStore].[File] WHERE Id IN (SELECT FileId FROM [Notification].[MovementPartialRejection]
 			WHERE MovementId IN (SELECT Id FROM [Notification].[Movement] WHERE NotificationId = @NotificationId))
+
 		DELETE FROM [FileStore].[File] WHERE Id IN (SELECT FileId FROM [Notification].[MovementReceipt] 
 			WHERE MovementId IN (SELECT Id FROM [Notification].[Movement] WHERE NotificationId = @NotificationId))
+
 		DELETE FROM [FileStore].[File] WHERE Id IN (SELECT FileId FROM [Notification].[MovementRejection]
 			WHERE MovementId IN (SELECT Id FROM [Notification].[Movement] WHERE NotificationId = @NotificationId))
 
 		UPDATE [Notification].[Movement] SET FileId = null WHERE NotificationId = @NotificationId
+
 		UPDATE [Notification].[MovementOperationReceipt] SET FileId = null 
 			WHERE MovementId IN (select Id FROM [Notification].[Movement] WHERE NotificationId = @NotificationId)
+
 		UPDATE [Notification].[MovementPartialRejection]  SET FileId = null 
 			WHERE MovementId IN (SELECT Id FROM [Notification].[Movement] WHERE NotificationId = @NotificationId)
+
 		UPDATE [Notification].[MovementReceipt]  SET FileId = null 
 			WHERE MovementId IN (SELECT Id FROM [Notification].[Movement] WHERE NotificationId = @NotificationId)
+
 		UPDATE [Notification].[MovementRejection] SET FileId = null 
 			WHERE MovementId IN (SELECT Id FROM [Notification].[Movement] WHERE NotificationId = @NotificationId)
 
