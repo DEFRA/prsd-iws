@@ -49,9 +49,10 @@
                     Quantity = x.Shipment == null ? 0 : x.Shipment.Quantity,
                     Units = x.Shipment == null ? ShipmentQuantityUnits.Tonnes : x.Shipment.Units,
                     NotificationStatus = x.NotificationAssessment.Status,
-                    x.Notification.CompetentAuthority
+                    x.Notification.CompetentAuthority,
+                    x.Notification.IsArchived
                 })
-                .SingleAsync(x => x.NotificationId == notificationId);
+                .SingleAsync(x => x.NotificationId == notificationId && x.IsArchived == false);
 
             var totalMovements = await context.Movements
                 .Where(m => 

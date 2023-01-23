@@ -32,7 +32,7 @@
 
             var query =
                 from notification in db.NotificationApplications
-                where notification.Id == notificationId
+                where notification.Id == notificationId && notification.IsArchived == false
                 from wasteRecovery
                 //left join waste recovery, if it exists
                 in db.WasteRecoveries
