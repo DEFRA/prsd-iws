@@ -16,13 +16,14 @@
         private IRegistration registration;
         private IErrorLog errorLog;
 
-        public IwsClient(string baseUrl)
+        public IwsClient(string baseUrl, TimeSpan timeout)
         {
             var baseUri = new Uri(baseUrl.EnsureTrailingSlash());
 
             httpClient = new HttpClient
             {
-                BaseAddress = new Uri(baseUri, "api/")
+                BaseAddress = new Uri(baseUri, "api/"),
+                Timeout = timeout
             };
         }
 
