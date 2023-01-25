@@ -52,7 +52,7 @@
                     x.Notification.CompetentAuthority,
                     x.Notification.IsArchived
                 })
-                .SingleAsync(x => x.NotificationId == notificationId && x.IsArchived == false);
+                .SingleAsync(x => x.NotificationId == notificationId);
 
             var totalMovements = await context.Movements
                 .Where(m => 
