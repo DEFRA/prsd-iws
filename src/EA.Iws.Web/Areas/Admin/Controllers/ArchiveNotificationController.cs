@@ -1,12 +1,10 @@
 ﻿namespace EA.Iws.Web.Areas.Admin.Controllers
 {
     using EA.Iws.Api.Client;
-    using EA.Iws.Api.Client.Entities;
     using EA.Iws.Core.Authorization.Permissions;
     using EA.Iws.Requests.Admin.ArchiveNotification;
     using EA.Iws.Requests.Notification;
     using EA.Iws.Web.Areas.Admin.ViewModels.ArchiveNotification;
-    using EA.Iws.Web.Infrastructure;
     using EA.Iws.Web.Areas.Admin.Views.ArchiveNotification;
     using EA.Iws.Web.Infrastructure.Authorization;
     using EA.Prsd.Core.Mediator;
@@ -15,8 +13,6 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Net;
-    using System.Security;
     using System.Threading.Tasks;
     using System.Web.Mvc;
 
@@ -195,7 +191,7 @@
                 var reviewModel = new ArchiveNotificationReviewViewModel() { HasAnyResults = false };
                 return View("Review", reviewModel);
             }
-            
+
             var archiveNotificationList = await mediator.SendAsync(new ArchiveNotifications(selectNotificationList));
 
             var archivedModel = new ArchiveNotificationArchivedViewModel()
