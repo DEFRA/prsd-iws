@@ -18,7 +18,6 @@ BEGIN
 				'true' AS IsArchived
 			RETURN 
 		END 
-	BEGIN TRAN
 		--Notifier
 		UPDATE [ImportNotification].[Exporter] 
 		SET ContactName = 'Archived', Telephone = '000000', Email = 'archived@archive.com'
@@ -75,9 +74,8 @@ BEGIN
 		BEGIN
 			SELECT 'true' AS IsArchived
 			RETURN
-		END 
-		
-	BEGIN TRAN
+		END
+
 		--Notifier
 		UPDATE [Notification].[Exporter]
 		SET FullName = 'Archived', Telephone = '000000', Fax = '000000', Email = 'archived@archive.com'
@@ -159,6 +157,5 @@ BEGIN
 
 		SELECT 'true' as IsArchived
 	END
-	COMMIT	
 END
 GO
