@@ -57,8 +57,9 @@ BEGIN
 		
 		--What recovery info needs archived? No obviously personal details present
 		
-		DELETE FROM [FileStore].[File] WHERE Id IN (SELECT FileId FROM [ImportNotification].[MovementPartialRejection]
-			WHERE MovementId IN (SELECT Id FROM [Notification].[Movement] WHERE NotificationId = @NotificationId))
+		DELETE FROM [FileStore].[File] WHERE Id IN (
+			SELECT FileId FROM [ImportNotification].[MovementPartialRejection] 
+				WHERE MovementId IN (SELECT Id FROM [Notification].[Movement] WHERE NotificationId = @NotificationId))
 
 		UPDATE [ImportNotification].[MovementPartialRejection] SET FileId = null
 			WHERE MovementId IN (SELECT Id FROM [Notification].[Movement] WHERE NotificationId = @NotificationId)
@@ -121,9 +122,18 @@ BEGIN
 		WHERE CarrierCollectionId IN (SELECT Id FROM [Notification].[CarrierCollection] WHERE NotificationId = @NotificationId)
 		AND [Type] IN (2,3)
 
-		DELETE FROM [FileStore].[File] WHERE Id IN (SELECT ProcessOfGenerationId FROM [Notification].[AnnexCollection] WHERE NotificationId = @NotificationId)
-		DELETE FROM [FileStore].[File] WHERE Id IN (SELECT WasteCompositionId FROM [Notification].[AnnexCollection] WHERE NotificationId = @NotificationId)
-		DELETE FROM [FileStore].[File] WHERE Id IN (SELECT TechnologyEmployedId FROM [Notification].[AnnexCollection] WHERE NotificationId = @NotificationId)
+		DECLARE @tmpAnnexCollectionFiles TABLE (FileId UNIQUEIDENTIFIER);
+
+		INSERT INTO @tmpAnnexCollectionFiles (FileId) (
+			SELECT ProcessOfGenerationId FROM [Notification].[AnnexCollection] WHERE NotificationId = @NotificationId AND ProcessOfGenerationId IS NOT NULL
+			UNION
+			SELECT WasteCompositionId FROM [Notification].[AnnexCollection] WHERE NotificationId = @NotificationId AND WasteCompositionId IS NOT NULL
+			UNION
+			SELECT TechnologyEmployedId FROM [Notification].[AnnexCollection] WHERE NotificationId = @NotificationId AND TechnologyEmployedId IS NOT NULL
+		)
+		UPDATE [Notification].[AnnexCollection] SET ProcessOfGenerationId = null, WasteCompositionId = null, TechnologyEmployedId = null WHERE NotificationId = @NotificationId
+
+		DELETE FROM [FileStore].[File] WHERE Id IN (SELECT FileId FROM @tmpAnnexCollectionFiles)
 
 		DELETE FROM [FileStore].[File] where Id IN (SELECT FileId FROM [Notification].[Movement] WHERE NotificationId = @NotificationId)
 
