@@ -1,5 +1,6 @@
 ﻿namespace EA.Iws.DataAccess.Repositories
 {
+    using EA.Iws.Core.Admin;
     using EA.Iws.Domain;
     using EA.Prsd.Core.Domain;
     using System;
@@ -87,17 +88,6 @@
                     return sww.ToString();
                 }
             }
-        }
-
-        public class ElmahErrorXmlFormat
-        {
-            public string Message { get; set; }
-
-            public string ExceptionMessage { get; set; }
-
-            public string ExceptionType { get; set; }
-
-            public string StackTrace { get; set; }
         }
     }
 }
