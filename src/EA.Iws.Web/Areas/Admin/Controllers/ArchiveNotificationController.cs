@@ -271,9 +271,11 @@
                 }
             }
 
-            var response = new List<int>();
-            response.Add(returnList.Count);
-            response.Add(selectNotificationList.Count);
+            var response = new List<int>
+            {
+                returnList.Count,
+                selectNotificationList.Count
+            };
 
             return response;
         }
