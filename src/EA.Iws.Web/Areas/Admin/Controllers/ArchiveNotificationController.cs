@@ -1,14 +1,12 @@
 ﻿namespace EA.Iws.Web.Areas.Admin.Controllers
-{
-    using EA.Iws.Api.Client;
+{    
     using EA.Iws.Core.Authorization.Permissions;
     using EA.Iws.Requests.Admin.ArchiveNotification;
     using EA.Iws.Requests.Notification;
     using EA.Iws.Web.Areas.Admin.ViewModels.ArchiveNotification;
     using EA.Iws.Web.Areas.Admin.Views.ArchiveNotification;
     using EA.Iws.Web.Infrastructure.Authorization;
-    using EA.Prsd.Core.Mediator;
-    using EA.Prsd.Core.Web.OAuth;
+    using EA.Prsd.Core.Mediator;    
     using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
@@ -20,14 +18,10 @@
     public class ArchiveNotificationController : Controller
     {
         private readonly IMediator mediator;
-        private readonly IIwsClient apiClient;
-        private readonly IOAuthClientCredentialClient oauthClientCredentialClient;
 
-        public ArchiveNotificationController(IMediator mediator, IIwsClient apiClient, IOAuthClientCredentialClient oauthClientCredentialClient)
+        public ArchiveNotificationController(IMediator mediator)
         {
             this.mediator = mediator;
-            this.apiClient = apiClient;
-            this.oauthClientCredentialClient = oauthClientCredentialClient;
         }
 
         [HttpGet]
