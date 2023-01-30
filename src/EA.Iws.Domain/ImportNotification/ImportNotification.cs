@@ -16,7 +16,7 @@
 
         public bool IsArchived { get; set; }
 
-        public DateTimeOffset ArchivedDate { get; set; }
+        public DateTime? ArchivedDate { get; set; }
         
         public string ArchivedByUserId { get; set; }
 
