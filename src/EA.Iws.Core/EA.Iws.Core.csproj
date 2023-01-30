@@ -48,6 +48,7 @@
     <Compile Include="AddressBook\AddressRecordType.cs" />
     <Compile Include="Admin\ApprovalAction.cs" />
     <Compile Include="Admin\ChangeUserData.cs" />
+    <Compile Include="Admin\ElmahErrorXmlFormat.cs" />
     <Compile Include="Admin\ExportNotificationOwnerDisplay.cs" />
     <Compile Include="Admin\ExternalUserData.cs" />
     <Compile Include="Admin\ExternalUserStatus.cs" />
