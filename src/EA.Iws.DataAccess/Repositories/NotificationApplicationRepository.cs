@@ -26,7 +26,7 @@
         {
             await notificationApplicationAuthorization.EnsureAccessAsync(id);
             return await context.NotificationApplications.SingleAsync(n => n.Id == id);
-        } 
+        }
 
         public async Task<NotificationApplication> GetByMovementId(Guid movementId)
         {
@@ -51,6 +51,14 @@
             return await context.NotificationApplications
                 .Where(n => number.Replace(" ", string.Empty) == n.NotificationNumber.Replace(" ", string.Empty) && n.IsArchived == false)
                 .Select(n => (Guid?)n.Id)
+                .SingleOrDefaultAsync();
+        }
+
+        public async Task<bool> GetIsArchived(Guid id)
+        {
+            return await context.NotificationApplications
+                .Where(n => n.Id == id)
+                .Select(n => n.IsArchived)
                 .SingleOrDefaultAsync();
         }
 

@@ -24,5 +24,7 @@
         Task<bool> Delete(Guid notificationId);
 
         Task<UKCompetentAuthority> GetNotificationCompetentAuthority(Guid id);
+
+        Task<bool> GetIsArchived(Guid notificationId);
     }
 }
