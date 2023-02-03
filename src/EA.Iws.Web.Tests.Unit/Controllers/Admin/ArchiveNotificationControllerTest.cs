@@ -18,7 +18,6 @@
     {
         private readonly ArchiveNotificationController controller;
         private readonly IMediator mediator;
-        private readonly ArchiveNotificationResultViewModel searchResultViewModel;
         private readonly HttpContextBase context;
         private List<NotificationArchiveSummaryData> sampleNotifications;
 
