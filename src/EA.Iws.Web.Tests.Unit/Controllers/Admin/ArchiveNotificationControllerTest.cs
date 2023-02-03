@@ -96,9 +96,10 @@
         [Fact]
         public void PostIndex()
         {
+            controller.SelectAllNotifications(sampleNotifications, true);
+
             var res = controller.Index(new ArchiveNotificationResultViewModel
             {
-                HasAnyNotificationSelected = true,
                 IsSelectAllChecked = true,
                 Notifications = sampleNotifications,
                 NumberOfNotifications = 2,
@@ -106,19 +107,38 @@
                 PageNumber = 1,
                 PageSize = 1,
                 SelectedNotifications = sampleNotifications
-            });
+            }) as ViewResult;
 
-            
+            Assert.True(res.ViewName == "Review");
         }
 
-        public ActionResult GetReview_ReturnsActionResult()
+        [Fact]
+        public void GetReview_ReturnsActionResult()
         {
-            throw new NotImplementedException();
+            controller.SelectAllNotifications(sampleNotifications, true);
+            var selectNotificationList = JsonConvert.DeserializeObject<List<NotificationArchiveSummaryData>>
+                    (context.Session["SelectedNotifications"].ToString());
+
+            var reviewModel = new ArchiveNotificationReviewViewModel()
+            {
+                SelectedNotifications = selectNotificationList,
+                HasAnyResults = true
+            };
+
+            var result = controller.Review(reviewModel) as ViewResult;
+            var model = result.Model as ArchiveNotificationReviewViewModel;
+
+            Assert.True(model.HasAnyResults);
         }
 
-        public async Task<ActionResult> Post_Archive()
+        [Fact]
+        public async void Post_Archive()
         {
-            throw new NotImplementedException();
+            controller.SelectAllNotifications(sampleNotifications, true);
+            var result = await controller.Archive() as ViewResult;
+            var model = result.Model as ArchiveNotificationArchivedViewModel;
+
+            Assert.True(result.ViewName == "Archived");
         }
 
         private int HowManyNotificationsSelectedInHttpSession()
