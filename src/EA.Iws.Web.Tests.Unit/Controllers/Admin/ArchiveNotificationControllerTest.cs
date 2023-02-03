@@ -3,7 +3,6 @@
     using EA.Iws.Requests.Notification;
     using EA.Iws.Web.Areas.Admin.Controllers;
     using EA.Iws.Web.Areas.Admin.ViewModels.ArchiveNotification;
-    using EA.Iws.Web.Areas.Admin.ViewModels.Home;
     using EA.Prsd.Core.Mediator;
     using FakeItEasy;
     using Newtonsoft.Json;
@@ -13,7 +12,6 @@
     using System.Web;
     using System.Web.Mvc;
     using System.Web.Routing;
-    using System.Web.UI;
     using Xunit;
 
     public class ArchiveNotificationControllerTest
@@ -21,20 +19,45 @@
         private readonly ArchiveNotificationController controller;
         private readonly IMediator mediator;
         private readonly ArchiveNotificationResultViewModel searchResultViewModel;
+        private readonly HttpContextBase context;
+        private List<NotificationArchiveSummaryData> sampleNotifications;
 
         public ArchiveNotificationControllerTest()
         {
             mediator = A.Fake<IMediator>();
             controller = new ArchiveNotificationController(mediator);
+
+            context = A.Fake<HttpContextBase>();
+            context.Session["SelectedNotifications"] = JsonConvert.SerializeObject(new List<NotificationArchiveSummaryData>());
+
+            controller.ControllerContext = new ControllerContext(context, new RouteData(), controller);
+
+            sampleNotifications = new List<NotificationArchiveSummaryData>
+            {
+                new NotificationArchiveSummaryData
+                {
+                    Id = Guid.Parse("f64a5181-dee2-4e2c-bf4d-db4da2202da4"),
+                    CompanyName = "Test",
+                    IsArchived = false,
+                    NotificationNumber = "UnitTest1",
+                    PageNumber = 1,
+                    CreatedDate = "01/01/2019"
+                },
+                new NotificationArchiveSummaryData
+                {
+                    Id = Guid.Parse("c150c236-574a-4e8b-960e-bc988049bed5"),
+                    CompanyName = "Test 2",
+                    IsArchived = false,
+                    NotificationNumber = "UnitTest2",
+                    PageNumber = 1,
+                    CreatedDate = "01/01/2020"
+                }
+            };
         }
 
         [Fact]
         public async Task GetIndex_ReturnsNewViewModel()
         {
-            var context = A.Fake<HttpContextBase>();
-            context.Session["SelectedNotifications"] = JsonConvert.SerializeObject(new List<NotificationArchiveSummaryData>());
-            controller.ControllerContext = new ControllerContext(context, new RouteData(), controller);
-
             var result = await controller.Index() as ViewResult;
 
             Assert.IsType<ArchiveNotificationResultViewModel>(result.Model);
@@ -44,33 +67,70 @@
             Assert.False(model.NumberOfNotificationsSelected > 0);
         }
 
-        public JsonResult PostIndex_SelectSingleNotification()
+        [Fact]
+        public void PostIndex_SelectSingleNotification()
         {
-            throw new NotImplementedException();
+            var selectedRecordList = new List<NotificationArchiveSummaryData> { sampleNotifications[0] };
+            controller.SelectSingleNotification(selectedRecordList, true);
+
+            Assert.True(HowManyNotificationsSelectedInHttpSession() == 1);
         }
 
-        public JsonResult PostIndex_SelectAllNotifications()
+        [Fact]
+        public void PostIndex_SelectAllNotifications()
         {
-            throw new NotImplementedException();
+            controller.SelectAllNotifications(sampleNotifications, true);
+            Assert.True(HowManyNotificationsSelectedInHttpSession() == 2);
         }
 
-        public ActionResult PostIndex_Remove(Guid notificationId)
+        [Fact]
+        public void PostIndex_Remove()
         {
-            throw new NotImplementedException();
+            controller.SelectAllNotifications(sampleNotifications, true);
+            Assert.True(HowManyNotificationsSelectedInHttpSession() == 2);
+
+            controller.Remove(sampleNotifications[0].Id);
+            Assert.True(HowManyNotificationsSelectedInHttpSession() == 1);
         }
 
-        public ActionResult PostIndex()
+        [Fact]
+        public void PostIndex()
         {
-            throw new NotImplementedException();
+            var res = controller.Index(new ArchiveNotificationResultViewModel
+            {
+                HasAnyNotificationSelected = true,
+                IsSelectAllChecked = true,
+                Notifications = sampleNotifications,
+                NumberOfNotifications = 2,
+                NumberOfNotificationsSelected = 2,
+                PageNumber = 1,
+                PageSize = 1,
+                SelectedNotifications = sampleNotifications
+            });
+
+            
         }
 
         public ActionResult GetReview_ReturnsActionResult()
         {
             throw new NotImplementedException();
         }
+
         public async Task<ActionResult> Post_Archive()
         {
             throw new NotImplementedException();
+        }
+
+        private int HowManyNotificationsSelectedInHttpSession()
+        {
+            var selectNotificationList = new List<NotificationArchiveSummaryData>();
+            if (context.Session["SelectedNotifications"] != null)
+            {
+                selectNotificationList = JsonConvert.DeserializeObject<List<NotificationArchiveSummaryData>>
+                    (context.Session["SelectedNotifications"].ToString());
+            }
+
+            return selectNotificationList.Count;
         }
     }
 }
