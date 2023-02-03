@@ -14,7 +14,7 @@
     using System.Web.Routing;
     using Xunit;
 
-    public class ArchiveNotificationControllerTest
+    public class ArchiveNotificationControllerTests
     {
         private readonly ArchiveNotificationController controller;
         private readonly IMediator mediator;
@@ -22,7 +22,7 @@
         private readonly HttpContextBase context;
         private List<NotificationArchiveSummaryData> sampleNotifications;
 
-        public ArchiveNotificationControllerTest()
+        public ArchiveNotificationControllerTests()
         {
             mediator = A.Fake<IMediator>();
             controller = new ArchiveNotificationController(mediator);
