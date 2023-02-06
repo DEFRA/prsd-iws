@@ -18,7 +18,8 @@
             {
                 var cc = c.Resolve<IComponentContext>();
                 var config = cc.Resolve<AppConfiguration>();
-                return new IwsClient(config.ApiUrl);
+                TimeSpan timeout = TimeSpan.FromSeconds(config.ApiTimeoutInSeconds);
+                return new IwsClient(config.ApiUrl, timeout);
             }).As<IIwsClient>().InstancePerRequest();
  
             builder.Register(c =>
