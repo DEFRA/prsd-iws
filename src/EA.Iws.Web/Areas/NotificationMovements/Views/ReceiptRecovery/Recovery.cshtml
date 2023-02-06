@@ -29,15 +29,15 @@
                 @Html.Gds().ValidationMessageFor(m => m.Year)
                 <div class="govuk-form-group form-group-day">
                     @Html.Gds().LabelFor(m => m.Day)
-                    @Html.Gds().TextBoxFor(m => m.Day, new { type = "number", min = "1", max = "31" })
+                    @Html.Gds().TextBoxFor(m => m.Day, new { type = "number", min = "1", max = "31" }, useHalfWidth: false)
                 </div>
                 <div class="govuk-form-group form-group-month">
                     @Html.Gds().LabelFor(m => m.Month)
-                    @Html.Gds().TextBoxFor(m => m.Month, new { type = "number", min = "1", max = "12" })
+                    @Html.Gds().TextBoxFor(m => m.Month, new { type = "number", min = "1", max = "12" }, useHalfWidth: false)
                 </div>
                 <div class="govuk-form-group form-group-year">
                     @Html.Gds().LabelFor(m => m.Year)
-                    @Html.Gds().TextBoxFor(m => m.Year, new { type = "number", min = "2015" })
+                    @Html.Gds().TextBoxFor(m => m.Year, new { type = "number", min = "2015" }, useHalfWidth: false)
                 </div>
             </div>
         </fieldset>
