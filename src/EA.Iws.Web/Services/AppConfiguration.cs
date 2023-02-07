@@ -26,6 +26,8 @@
 
         public string ApiClientCredentialId { get; set; }
 
+        public double ApiTimeoutInSeconds { get; set; }
+
         [DefaultValue("~/App_Data/uploads")]
         public string FileUploadTempPath { get; set; }
 
