@@ -9,13 +9,21 @@ AS
 BEGIN
 	SET NOCOUNT ON;
     
-    IF EXISTS (SELECT * FROM [ImportNotification].[Notification] WHERE Id = @NotificationId)
+	IF NOT EXISTS (SELECT * FROM [ImportNotification].[Notification] WHERE Id = @NotificationId)
+		AND NOT EXISTS (SELECT * FROM [Notification].[Notification] WHERE Id = @NotificationId)
+	BEGIN
+		SELECT 
+			'false' AS IsArchived
+		RETURN 
+	END
+
+	IF EXISTS (SELECT * FROM [ImportNotification].[Notification] WHERE Id = @NotificationId)
 	--ImportNotification
 	BEGIN
 		IF ((SELECT [IsArchived] FROM [ImportNotification].[Notification] WHERE Id = @NotificationId) = 1)
 		BEGIN
 			SELECT 
-				'true' AS IsArchived
+				'false' AS IsArchived
 			RETURN 
 		END 
 		--Notifier
@@ -73,7 +81,7 @@ BEGIN
 	--ExportNotification
 		IF ((SELECT [IsArchived] FROM [Notification].[Notification] WHERE Id = @NotificationId) = 1)
 		BEGIN
-			SELECT 'true' AS IsArchived
+			SELECT 'false' AS IsArchived
 			RETURN
 		END
 
