@@ -46,12 +46,22 @@
                 .SingleAsync();
         }
 
-        public async Task<Guid?> GetIdOrDefault(string number)
+        public async Task<Guid?> GetIdOrDefault(string number, bool isDeleteNotification)
         {
-            return await context.NotificationApplications
-                .Where(n => number.Replace(" ", string.Empty) == n.NotificationNumber.Replace(" ", string.Empty) && n.IsArchived == false)
-                .Select(n => (Guid?)n.Id)
-                .SingleOrDefaultAsync();
+            if (isDeleteNotification)
+            {
+                return await context.NotificationApplications
+                    .Where(n => number.Replace(" ", string.Empty) == n.NotificationNumber.Replace(" ", string.Empty))
+                    .Select(n => (Guid?)n.Id)
+                    .SingleOrDefaultAsync();
+            }
+            else
+            {
+                return await context.NotificationApplications
+                    .Where(n => number.Replace(" ", string.Empty) == n.NotificationNumber.Replace(" ", string.Empty) && n.IsArchived == false)
+                    .Select(n => (Guid?)n.Id)
+                    .SingleOrDefaultAsync();
+            }
         }
 
         public async Task<bool> GetIsArchived(Guid id)

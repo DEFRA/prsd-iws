@@ -10,9 +10,12 @@
     {
         public string NotificationNumber { get; private set; }
 
-        public GetNotificationIdByNumber(string notificationNumber)
+        public bool IsDeleteNotification { get; set; }
+
+        public GetNotificationIdByNumber(string notificationNumber, bool isDeleteNotification = false)
         {
             NotificationNumber = notificationNumber;
+            IsDeleteNotification = isDeleteNotification;
         }
     }
 }
