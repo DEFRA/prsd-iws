@@ -40,7 +40,7 @@
 
             if (model.IsExportNotification.GetValueOrDefault())
             {
-                notificationId = await mediator.SendAsync(new GetNotificationIdByNumber(model.NotificationNumber));
+                notificationId = await mediator.SendAsync(new GetNotificationIdByNumber(model.NotificationNumber, true));
             }
             else
             {
