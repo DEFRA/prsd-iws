@@ -29,17 +29,17 @@
                 ProcessOfGeneration = new AnnexStatus
                 {
                     IsRequired = annexRequirements.IsProcessOfGenerationRequired,
-                    FileId = annexCollection.ProcessOfGeneration.FileId
+                    FileId = annexCollection == null ? null : annexCollection.ProcessOfGeneration.FileId
                 },
                 TechnologyEmployed = new AnnexStatus
                 {
                     IsRequired = annexRequirements.IsTechnologyEmployedRequired,
-                    FileId = annexCollection.TechnologyEmployed.FileId
+                    FileId = annexCollection == null ? null : annexCollection.TechnologyEmployed.FileId
                 },
                 WasteComposition = new AnnexStatus
                 {
                     IsRequired = annexRequirements.IsWasteCompositionRequired,
-                    FileId = annexCollection.WasteComposition.FileId
+                    FileId = annexCollection == null ? null : annexCollection.WasteComposition.FileId
                 }
             };
         }
