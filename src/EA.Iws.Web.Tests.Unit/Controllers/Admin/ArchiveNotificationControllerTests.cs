@@ -124,7 +124,7 @@
                 HasAnyResults = true
             };
 
-            var result = controller.Review(reviewModel) as ViewResult;
+            var result = controller.Review() as ViewResult;
             var model = result.Model as ArchiveNotificationReviewViewModel;
 
             Assert.True(model.HasAnyResults);
