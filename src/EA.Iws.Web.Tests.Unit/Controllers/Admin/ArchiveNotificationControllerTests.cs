@@ -106,9 +106,9 @@
                 PageNumber = 1,
                 PageSize = 1,
                 SelectedNotifications = sampleNotifications
-            }) as ViewResult;
+            }) as RedirectToRouteResult;
 
-            Assert.True(res.ViewName == "Review");
+            Assert.True(res.RouteValues.ContainsValue("Review"));
         }
 
         [Fact]
@@ -124,7 +124,7 @@
                 HasAnyResults = true
             };
 
-            var result = controller.Review(reviewModel) as ViewResult;
+            var result = controller.Review() as ViewResult;
             var model = result.Model as ArchiveNotificationReviewViewModel;
 
             Assert.True(model.HasAnyResults);
@@ -134,10 +134,9 @@
         public async void Post_Archive()
         {
             controller.SelectAllNotifications(sampleNotifications, true);
-            var result = await controller.Archive() as ViewResult;
-            var model = result.Model as ArchiveNotificationArchivedViewModel;
+            var result = await controller.Archive() as RedirectToRouteResult;
 
-            Assert.True(result.ViewName == "Archived");
+            Assert.True(result.RouteValues.ContainsValue("Archived"));
         }
 
         private int HowManyNotificationsSelectedInHttpSession()
