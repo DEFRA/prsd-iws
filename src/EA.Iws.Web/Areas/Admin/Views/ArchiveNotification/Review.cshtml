@@ -12,16 +12,17 @@
 
 @if (!Model.HasAnyResults)
 {
-    <div id="dvInformationMessage" class="archive-notification-warning">
-        <div class="gem-c-success-alert govuk-notification-banner govuk-notification-banner-warning">
-            <div class="govuk-notification-banner-header">
-                <h2 class="govuk-notification-banner-title">Important</h2>
-            </div>
-            <div class="govuk-notification-banner-content">
-                <p class="govuk-body">
-                    You must select notifications for archive before proceeding. @Html.ActionLink("Go back to the notification list to select notifications for archiving.", "Index", "ArchiveNotification", new { @class = "govuk-link" })
-                </p>
-            </div>
+    <div id="dvInformationMessage" class="govuk-notification-banner" role="region" aria-labelledby="govuk-notification-banner-title" data-module="govuk-notification-banner">
+        <div class="govuk-notification-banner__header">
+            <h2 class="govuk-notification-banner__title" id="govuk-notification-banner-title">
+                Important
+            </h2>
+        </div>
+        <div class="govuk-notification-banner__content">
+            <p class="govuk-notification-banner__heading">
+                You must select notifications for archive before proceeding.
+                @Html.ActionLink("Go back to the notification list to select notifications for archiving.", "Index", "ArchiveNotification", new { @class = "govuk-notification-banner__link" })
+            </p>
         </div>
     </div>
 }
