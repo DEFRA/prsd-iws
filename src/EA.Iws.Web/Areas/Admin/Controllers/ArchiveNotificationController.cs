@@ -1,12 +1,12 @@
 ﻿namespace EA.Iws.Web.Areas.Admin.Controllers
-{    
+{
     using EA.Iws.Core.Authorization.Permissions;
     using EA.Iws.Requests.Admin.ArchiveNotification;
     using EA.Iws.Requests.Notification;
     using EA.Iws.Web.Areas.Admin.ViewModels.ArchiveNotification;
     using EA.Iws.Web.Areas.Admin.Views.ArchiveNotification;
     using EA.Iws.Web.Infrastructure.Authorization;
-    using EA.Prsd.Core.Mediator;    
+    using EA.Prsd.Core.Mediator;
     using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
@@ -112,8 +112,7 @@
             var selectNotificationList = new List<NotificationArchiveSummaryData>();
             if (HttpContext.Session["SelectedNotifications"] != null)
             {
-                selectNotificationList = JsonConvert.DeserializeObject<List<NotificationArchiveSummaryData>>
-                    (HttpContext.Session["SelectedNotifications"].ToString());
+                selectNotificationList = JsonConvert.DeserializeObject<List<NotificationArchiveSummaryData>>(HttpContext.Session["SelectedNotifications"].ToString());
             }
 
             if (selectNotificationList != null && selectNotificationList.Count() == 0)
@@ -123,20 +122,22 @@
             }
             else
             {
-                var reviewModel = new ArchiveNotificationReviewViewModel()
-                {
-                    SelectedNotifications = selectNotificationList,
-                    HasAnyResults = true
-                };
-
-                return View("Review", reviewModel);
+                return RedirectToAction("Review");
             }
         }
 
         [HttpGet]
-        public ActionResult Review(ArchiveNotificationReviewViewModel reviewModel)
+        public ActionResult Review()
         {
-            HttpContext.Session["SelectedNotifications"] = JsonConvert.SerializeObject(reviewModel.SelectedNotifications);
+            var reviewModel = new ArchiveNotificationReviewViewModel();
+
+            if (HttpContext.Session["SelectedNotifications"] != null)
+            {
+                var selectNotificationList = JsonConvert.DeserializeObject<List<NotificationArchiveSummaryData>>(HttpContext.Session["SelectedNotifications"].ToString());
+
+                reviewModel.SelectedNotifications = selectNotificationList;
+                reviewModel.HasAnyResults = (selectNotificationList.Count() > 0) ? true : false;
+            }
 
             return View(reviewModel);
         }
@@ -147,8 +148,7 @@
             var selectNotificationList = new List<NotificationArchiveSummaryData>();
             if (HttpContext.Session["SelectedNotifications"] != null)
             {
-                selectNotificationList = JsonConvert.DeserializeObject<List<NotificationArchiveSummaryData>>
-                    (HttpContext.Session["SelectedNotifications"].ToString());
+                selectNotificationList = JsonConvert.DeserializeObject<List<NotificationArchiveSummaryData>>(HttpContext.Session["SelectedNotifications"].ToString());
             }
 
             var findAny = selectNotificationList.SingleOrDefault(x => x.Id == notificationId);
@@ -158,15 +158,8 @@
             }
 
             HttpContext.Session["SelectedNotifications"] = JsonConvert.SerializeObject(selectNotificationList);
-            var response = GetResponseResult(selectNotificationList);
 
-            var reviewModel = new ArchiveNotificationReviewViewModel()
-            {
-                SelectedNotifications = selectNotificationList,
-                HasAnyResults = (selectNotificationList.Count() > 0) ? true : false
-            };
-
-            return View("Review", reviewModel);
+            return RedirectToAction("Review");
         }
 
         [HttpPost]
@@ -188,6 +181,20 @@
 
             var archiveNotificationList = await mediator.SendAsync(new ArchiveNotifications(selectNotificationList));
 
+            HttpContext.Session["SelectedNotifications"] = JsonConvert.SerializeObject(archiveNotificationList);
+
+            return RedirectToAction("Archived");
+        }
+
+        [HttpGet]
+        public ActionResult Archived()
+        {
+            var archiveNotificationList = new List<NotificationArchiveSummaryData>();
+            if (HttpContext.Session["SelectedNotifications"] != null)
+            {
+                archiveNotificationList = JsonConvert.DeserializeObject<List<NotificationArchiveSummaryData>>(HttpContext.Session["SelectedNotifications"].ToString());
+            }
+
             var archivedModel = new ArchiveNotificationArchivedViewModel()
             {
                 ArchivedNotifications = archiveNotificationList,
@@ -203,7 +210,7 @@
 
             HttpContext.Session.Remove("SelectedNotifications");
 
-            return View("Archived", archivedModel);
+            return View(archivedModel);
         }
 
         private async Task<ArchiveNotificationResultViewModel> GetUserArchiveNotifications(int pageNumber = 1)
