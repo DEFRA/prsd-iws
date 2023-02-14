@@ -10,6 +10,9 @@
         [Display(Name = "OrgName", ResourceType = typeof(BusinessResources))]
         public string Name { get; set; }
 
+        [Display(Name = "OrgTradingName", ResourceType = typeof(BusinessResources))]
+        public string OrgTradingName { get; set; }
+
         [Display(Name = "BusinessTypeHeader", ResourceType = typeof(BusinessResources))]
         public string BusinessTypeHeader { get; set; }
 

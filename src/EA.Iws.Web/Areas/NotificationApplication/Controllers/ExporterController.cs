@@ -9,12 +9,10 @@
     using Prsd.Core.Web.Mvc.Extensions;
     using Requests.AddressBook;
     using Requests.Exporters;
-    using Requests.Notification;
-    using ViewModels.Exporter;
     using System;
-    using System.Linq;
     using System.Threading.Tasks;
     using System.Web.Mvc;
+    using ViewModels.Exporter;
 
     [Authorize]
     [NotificationReadOnlyFilter]
@@ -48,6 +46,13 @@
                 };
             }
 
+            if (model.Business?.Name?.Contains(" T/A ") == true)
+            {
+                string[] businessNames = model.Business.Name.Split(new[] { " T/A " }, StringSplitOptions.None);
+                model.Business.Name = businessNames[0];
+                model.Business.OrgTradingName = businessNames[1];
+            }
+
             await this.BindCountryList(mediator);
             model.Address.DefaultCountryId = this.GetDefaultCountryId();
             return View(model);
@@ -66,6 +71,11 @@
             try
             {
                 var exporter = await mediator.SendAsync(new GetExporterByNotificationId(model.NotificationId));
+
+                if (!string.IsNullOrEmpty(model.Business?.OrgTradingName?.Trim()))
+                {
+                    model.Business.Name = model.Business.Name + " T/A " + model.Business.OrgTradingName;
+                }
 
                 await mediator.SendAsync(model.ToRequest());
 
@@ -107,7 +117,7 @@
             }
 
             var addressRecord = addressBookMapper.Map(model, AddressRecordType.Producer);
-                
+
             await mediator.SendAsync(addressRecord);
         }
     }
