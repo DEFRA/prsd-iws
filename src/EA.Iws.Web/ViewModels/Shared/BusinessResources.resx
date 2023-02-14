@@ -175,6 +175,33 @@
     <value>If none of these options apply, please select "Other" and add details</value>
   </data>
   <data name="OrgNameHint" xml:space="preserve">
-    <value>For example, ‘Organisation Name Limited’. For "trading as" names, record it as ‘Organisation Name Limited T/A Name of Organisation’</value>
+    <value>For example 'A&amp;B Materials'</value>
+  </data>
+  <data name="OrgHelpWithNamingContent1" xml:space="preserve">
+    <value>When inputting your organisation name, the following naming conventions should be used to minimise errors:</value>
+  </data>
+  <data name="OrgHelpWithNamingTitle" xml:space="preserve">
+    <value>Help with appropriate naming conventions</value>
+  </data>
+  <data name="OrgHelpWithNamingContent2" xml:space="preserve">
+    <value>•	Company name abbreviations should always be in uppercase with no full stops</value>
+  </data>
+  <data name="OrgHelpWithNamingContent3" xml:space="preserve">
+    <value>•	There should be no spaces either side of special characters, particularly at the end of the name</value>
+  </data>
+  <data name="OrgHelpWithNamingContent4" xml:space="preserve">
+    <value>•	There should be no full stops present</value>
+  </data>
+  <data name="OrgHelpWithNamingContent5" xml:space="preserve">
+    <value>•	For example: Instead of 'a &amp; b materials', the name should be 'A&amp;B Materials'</value>
+  </data>
+  <data name="OrgNameHeader" xml:space="preserve">
+    <value>Organisation name</value>
+  </data>
+  <data name="OrgTradingName" xml:space="preserve">
+    <value>'Trading as' name</value>
+  </data>
+  <data name="OrgTradingNameHint" xml:space="preserve">
+    <value>The name your organisation trades under if different to your organisation name</value>
   </data>
 </root>

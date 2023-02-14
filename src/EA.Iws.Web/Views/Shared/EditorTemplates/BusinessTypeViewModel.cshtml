@@ -16,20 +16,6 @@
     AddressRecordType? addressType = ViewBag.AddressType;
 }
 
-<div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.Name)">
-    @Html.Gds().LabelFor(m => m.Name)
-    @Html.Gds().ValidationMessageFor(m => m.Name)
-    @Html.Gds().HintSpan(BusinessResources.OrgNameHint)
-    @if (addressType.HasValue)
-    {
-        @Html.Gds().TextBoxFor(m => m.Name, new { data_addressbook_url = Url.Action("Index", "Search", new { area = "AddressBook" }), data_addressbook_type = addressType.Value.ToString() })
-    }
-    else
-    {
-        @Html.Gds().TextBoxFor(m => m.Name)
-    }
-</div>
-
 <div class="form-group @Html.Gds().FormGroupClass(m => m.BusinessType)">
     <fieldset class="govuk-fieldset">
         <legend class="govuk-label">
@@ -159,4 +145,44 @@
             @Html.HiddenFor(m => m.DisplayAdditionalNumber)
         </div>
     }
+</div>
+
+<h2 class="heading-medium">@BusinessResources.OrgNameHeader</h2>
+<hr />
+<div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.Name)">
+    <details class="govuk-details" data-module="govuk-details">
+        <summary class="govuk-details__summary">
+            <span class="govuk-details__summary-text">
+                @BusinessResources.OrgHelpWithNamingTitle
+            </span>
+        </summary>
+        <div class="govuk-details__text">
+            @BusinessResources.OrgHelpWithNamingContent1<br />
+            @BusinessResources.OrgHelpWithNamingContent2<br />
+            @BusinessResources.OrgHelpWithNamingContent3<br />
+            @BusinessResources.OrgHelpWithNamingContent4<br />
+            @BusinessResources.OrgHelpWithNamingContent5
+        </div>
+    </details>
+    @Html.Gds().LabelFor(m => m.Name)
+    @Html.Gds().ValidationMessageFor(m => m.Name)
+    @Html.Gds().HintSpan(BusinessResources.OrgNameHint)
+
+    @if (addressType.HasValue)
+    {
+        @Html.Gds().TextBoxFor(m => m.Name, new { data_addressbook_url = Url.Action("Index", "Search", new { area = "AddressBook" }), data_addressbook_type = addressType.Value.ToString() })
+    }
+    else
+    {
+        @Html.Gds().TextBoxFor(m => m.Name)
+    }
+
+    <br />
+    <br />
+    @Html.Gds().LabelFor(m => m.OrgTradingName)
+    @Html.Gds().HintSpan(BusinessResources.OrgTradingNameHint)
+    <span>
+        T/A 
+        @Html.Gds().TextBoxFor(m => m.OrgTradingName)
+    </span>
 </div>

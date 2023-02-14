@@ -124,6 +124,60 @@ namespace EA.Iws.Web.ViewModels.Shared {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to When inputting your organisation name, the following naming conventions should be used to minimise errors:.
+        /// </summary>
+        public static string OrgHelpWithNamingContent1 {
+            get {
+                return ResourceManager.GetString("OrgHelpWithNamingContent1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to •	Company name abbreviations should always be in uppercase with no full stops.
+        /// </summary>
+        public static string OrgHelpWithNamingContent2 {
+            get {
+                return ResourceManager.GetString("OrgHelpWithNamingContent2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to •	There should be no spaces either side of special characters, particularly at the end of the name.
+        /// </summary>
+        public static string OrgHelpWithNamingContent3 {
+            get {
+                return ResourceManager.GetString("OrgHelpWithNamingContent3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to •	There should be no full stops present.
+        /// </summary>
+        public static string OrgHelpWithNamingContent4 {
+            get {
+                return ResourceManager.GetString("OrgHelpWithNamingContent4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to •	For example: Instead of &apos;a &amp; b materials&apos;, the name should be &apos;A&amp;B Materials&apos;.
+        /// </summary>
+        public static string OrgHelpWithNamingContent5 {
+            get {
+                return ResourceManager.GetString("OrgHelpWithNamingContent5", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Help with appropriate naming conventions.
+        /// </summary>
+        public static string OrgHelpWithNamingTitle {
+            get {
+                return ResourceManager.GetString("OrgHelpWithNamingTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Organisation name.
         /// </summary>
         public static string OrgName {
@@ -133,7 +187,16 @@ namespace EA.Iws.Web.ViewModels.Shared {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to For example, ‘Organisation Name Limited’. For &quot;trading as&quot; names, record it as ‘Organisation Name Limited T/A Name of Organisation’.
+        ///   Looks up a localized string similar to Organisation name.
+        /// </summary>
+        public static string OrgNameHeader {
+            get {
+                return ResourceManager.GetString("OrgNameHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to For example &apos;A&amp;B Materials&apos;.
         /// </summary>
         public static string OrgNameHint {
             get {
@@ -147,6 +210,24 @@ namespace EA.Iws.Web.ViewModels.Shared {
         public static string OrgNameRequired {
             get {
                 return ResourceManager.GetString("OrgNameRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &apos;Trading as&apos; name.
+        /// </summary>
+        public static string OrgTradingName {
+            get {
+                return ResourceManager.GetString("OrgTradingName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The name your organisation trades under if different to your organisation name.
+        /// </summary>
+        public static string OrgTradingNameHint {
+            get {
+                return ResourceManager.GetString("OrgTradingNameHint", resourceCulture);
             }
         }
         
