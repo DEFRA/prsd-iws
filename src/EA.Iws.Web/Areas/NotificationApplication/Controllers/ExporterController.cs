@@ -48,7 +48,7 @@
 
             if (model.Business?.Name?.Contains(" T/A ") == true)
             {
-                string[] businessNames = model.Business.Name.Split(new[] { " T/A " }, StringSplitOptions.None);
+                string[] businessNames = model.Business.Name.Split(new[] { " T/A " }, 2, StringSplitOptions.None);
                 model.Business.Name = businessNames[0];
                 model.Business.OrgTradingName = businessNames[1];
             }
