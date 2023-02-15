@@ -172,7 +172,7 @@
     <value>The registration number cannot be greater than 100 characters</value>
   </data>
   <data name="FormHint" xml:space="preserve">
-    <value>If none of these options apply, please select "Other" and add details</value>
+    <value>Select an organisation type and enter a registration number. If none of these options apply, select "Other" and add details.</value>
   </data>
   <data name="OrgNameHint" xml:space="preserve">
     <value>For example 'A&amp;B Materials'</value>
@@ -203,5 +203,8 @@
   </data>
   <data name="OrgTradingNameHint" xml:space="preserve">
     <value>The name your organisation trades under if different to your organisation name</value>
+  </data>
+  <data name="IsOrgUKBased" xml:space="preserve">
+    <value>Is the organisation based and registered in the UK and/or using a UK address?</value>
   </data>
 </root>
