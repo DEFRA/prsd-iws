@@ -115,11 +115,20 @@ namespace EA.Iws.Web.ViewModels.Shared {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to If none of these options apply, please select &quot;Other&quot; and add details.
+        ///   Looks up a localized string similar to Select an organisation type and enter a registration number. If none of these options apply, select &quot;Other&quot; and add details..
         /// </summary>
         public static string FormHint {
             get {
                 return ResourceManager.GetString("FormHint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Is the organisation based and registered in the UK and/or using a UK address?.
+        /// </summary>
+        public static string IsOrgUKBased {
+            get {
+                return ResourceManager.GetString("IsOrgUKBased", resourceCulture);
             }
         }
         

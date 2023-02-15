@@ -17,6 +17,9 @@
 }
 
 <div class="form-group @Html.Gds().FormGroupClass(m => m.BusinessType)">
+
+    <span class="form-hint">@BusinessResources.IsOrgUKBased</span>
+
     <fieldset class="govuk-fieldset">
         <legend class="govuk-label">
             @BusinessResources.BusinessTypeHeader

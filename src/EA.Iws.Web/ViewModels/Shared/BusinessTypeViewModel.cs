@@ -18,6 +18,10 @@
 
         [Required(ErrorMessageResourceType = typeof(BusinessResources), ErrorMessageResourceName = "OrgTypeRequired")]
         [Display(Name = "OrgType", ResourceType = typeof(BusinessResources))]
+        public bool? IsUKBased { get; set; }
+
+        [Required(ErrorMessageResourceType = typeof(BusinessResources), ErrorMessageResourceName = "OrgTypeRequired")]
+        [Display(Name = "OrgType", ResourceType = typeof(BusinessResources))]
         public BusinessType? BusinessType { get; set; }
 
         [Required(ErrorMessageResourceType = typeof(BusinessResources), ErrorMessageResourceName = "RegNumberRequired")]
