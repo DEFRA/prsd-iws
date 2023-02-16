@@ -33,7 +33,7 @@ BEGIN
 
 		UPDATE [ImportNotification].[Exporter] 
 		SET [Name] = 'Archived', Address1 = 'Archived', Address2 = 'Archived', TownOrCity = 'Archived', PostalCode = 'Archived'
-		WHERE ImportNotificationId = @NotificationId AND [Type] IN (2,3)
+		WHERE ImportNotificationId = @NotificationId AND [Type] IN (2,3,4)
 		--How do we get the external user?
 
 		UPDATE [ImportNotification].[Producer] 
@@ -42,7 +42,7 @@ BEGIN
 
 		UPDATE [ImportNotification].[Producer] 
 		SET [Name] = 'Archived', Address1 = 'Archived', Address2 = 'Archived', TownOrCity = 'Archived', PostalCode = 'Archived'
-		WHERE ImportNotificationId = @NotificationId AND [Type] IN (2,3)
+		WHERE ImportNotificationId = @NotificationId AND [Type] IN (2,3,4)
 
 		--Consignee
 		UPDATE [ImportNotification].[Importer] 
@@ -51,7 +51,7 @@ BEGIN
 		
 		UPDATE [ImportNotification].[Importer] 
 		SET [Name] = 'Archived', Address1 = 'Archived', Address2 = 'Archived', TownOrCity = 'Archived', PostalCode = 'Archived'
-		WHERE ImportNotificationId = @NotificationId AND [Type] IN (2,3)
+		WHERE ImportNotificationId = @NotificationId AND [Type] IN (2,3,4)
 		
 		UPDATE [ImportNotification].[Facility]
 		SET ContactName = 'Archived', Telephone = '000000', Email = 'archived@archive.com'
@@ -59,7 +59,7 @@ BEGIN
 		
 		UPDATE [ImportNotification].[Facility] 
 		SET [Name] = 'Archived', Address1 = 'Archived', Address2 = 'Archived', TownOrCity = 'Archived', PostalCode = 'Archived'
-		WHERE FacilityCollectionId IN (SELECT Id FROM [ImportNotification].[FacilityCollection] WHERE ImportNotificationId = @NotificationId) AND [Type] IN (2,3)
+		WHERE FacilityCollectionId IN (SELECT Id FROM [ImportNotification].[FacilityCollection] WHERE ImportNotificationId = @NotificationId) AND [Type] IN (2,3,4)
 		
 		--Is there no Carrier for Imports?
 		
@@ -92,7 +92,7 @@ BEGIN
 
 		UPDATE [Notification].[Exporter] 
 		SET [Name] = 'Archived', Address1 = 'Archived', Address2 = 'Archived', TownOrCity = 'Archived', PostalCode = 'Archived', Region = 'Archived'
-		WHERE NotificationId = @NotificationId AND [Type] IN (2,3)
+		WHERE NotificationId = @NotificationId AND [Type] IN (2,3,4)
 
 		UPDATE [Notification].[Producer]
 		SET FullName = 'Archived', Telephone = '000000', Fax = '000000', Email = 'archived@archive.com'
@@ -101,7 +101,7 @@ BEGIN
 		UPDATE [Notification].[Producer]
 		SET [Name] = 'Archived', Address1 = 'Archived', Address2 = 'Archived', TownOrCity = 'Archived', PostalCode = 'Archived'
 		WHERE ProducerCollectionId IN (SELECT Id FROM [Notification].[ProducerCollection] WHERE NotificationId = @NotificationId)
-		AND [Type] IN (2,3)
+		AND [Type] IN (2,3,4)
 		
 		--Consignee
 		UPDATE [Notification].[Importer]
@@ -110,7 +110,7 @@ BEGIN
 
 		UPDATE [Notification].[Importer]
 		SET [Name] = 'Archived', Address1 = 'Archived', Address2 = 'Archived', TownOrCity = 'Archived', PostalCode = 'Archived'
-		WHERE NotificationId = @NotificationId AND [Type] IN (2,3)
+		WHERE NotificationId = @NotificationId AND [Type] IN (2,3,4)
 				
 		UPDATE [Notification].[Facility]
 		SET FullName = 'Archived', Telephone = '000000', Fax = '000000', Email = 'archived@archive.com'
@@ -119,7 +119,7 @@ BEGIN
 		UPDATE [Notification].[Facility]
 		SET [Name] = 'Archived', Address1 = 'Archived', Address2 = 'Archived', TownOrCity = 'Archived', PostalCode = 'Archived'
 		WHERE FacilityCollectionId IN (SELECT Id FROM [Notification].[FacilityCollection] WHERE NotificationId = @NotificationId)
-		AND [Type] IN (2,3)
+		AND [Type] IN (2,3,4)
 
 		UPDATE [Notification].[Carrier]
 		SET FullName = 'Archived', Telephone = '000000', Fax = '000000', Email = 'archived@archive.com'
@@ -128,7 +128,7 @@ BEGIN
 		UPDATE [Notification].[Carrier]
 		SET [Name] = 'Archived', Address1 = 'Archived', Address2 = 'Archived', TownOrCity = 'Archived', PostalCode = 'Archived'
 		WHERE CarrierCollectionId IN (SELECT Id FROM [Notification].[CarrierCollection] WHERE NotificationId = @NotificationId)
-		AND [Type] IN (2,3)
+		AND [Type] IN (2,3,4)
 
 		DECLARE @tmpAnnexCollectionFiles TABLE (FileId UNIQUEIDENTIFIER);
 
