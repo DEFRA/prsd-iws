@@ -5,6 +5,7 @@
     using System.Web.Mvc;
     using Core.Authorization.Permissions;
     using Core.ImportNotificationAssessment;
+    using EA.Iws.Requests.Notification;
     using Infrastructure;
     using Infrastructure.Authorization;
     using Prsd.Core.Mediator;
@@ -57,6 +58,10 @@
                 authorizationService.AuthorizeActivity(typeof(SetExternalUserStatus)))
                 .Result;
 
+            var showArchiveNotificationsLink = Task.Run(() =>
+                authorizationService.AuthorizeActivity(typeof(GetArchiveNotificationsByUser)))
+                .Result;
+
             var model = new AdminLinksViewModel
             {
                 ShowApproveNewInternalUserLink = showApproveNewInternalUserLink,
@@ -64,6 +69,7 @@
                 ShowManageExistingInternalUserLink = showManageExistingInternalUserLink,
                 ShowDeleteNotificationLink = showDeleteNotificationLink,
                 ShowManageExternalUserLink = showManageExternalUserLink,
+                ShowArchiveNotificationsLink = showArchiveNotificationsLink,
                 ShowNotificationLinks = !User.IsInRole("readonly")
             };
 
