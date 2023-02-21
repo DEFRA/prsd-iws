@@ -18,7 +18,10 @@
                     <li>@Html.ActionLink("Create import notification", "Number", "ImportNotification", new { area = "Admin" }, null)</li>
                     <li>@Html.ActionLink("Create export notification", "NotificationType", "ExportNotification", new { area = "Admin" }, null)</li>
                     <li>@Html.ActionLink("Unsubmitted export notifications", "Index", "ExportNotifications", new { area = "Admin" }, null)</li>
-                    <li>@Html.ActionLink("Archive notifications", "Index", "ArchiveNotification", new { area = "Admin" }, null)</li>
+                    @if (Model.ShowArchiveNotificationsLink)
+                    {
+                        <li>@Html.ActionLink("Archive notifications", "Index", "ArchiveNotification", new { area = "Admin" }, null)</li>
+                    }                    
                 </ul>
             </li>
         }
@@ -31,23 +34,23 @@
             @Html.Partial("~/Areas/Admin/Views/Menu/_ReportingLinks.cshtml", Model)
         </li>
 
-      @if (Model.ShowNotificationLinks)
-	  {
-		<li class="@GetClassForSection(AdminHomeNavigationSection.AccountServices, "active")">
-			<h3 class="@GetClassForSection(AdminHomeNavigationSection.AccountServices, "current")">
-				<span></span>
-				Account services
-			</h3>
-			<ul>
-				<li>@Html.ActionLink("Address book", "Index", "Home", new { area = "AddressBook" }, null)</li>
+        @if (Model.ShowNotificationLinks)
+        {
+            <li class="@GetClassForSection(AdminHomeNavigationSection.AccountServices, "active")">
+                <h3 class="@GetClassForSection(AdminHomeNavigationSection.AccountServices, "current")">
+                    <span></span>
+                    Account services
+                </h3>
+                <ul>
+                    <li>@Html.ActionLink("Address book", "Index", "Home", new { area = "AddressBook" }, null)</li>
 
-				@if (Model.ShowAddNewEntryOrExitPointLink
-			   || Model.ShowApproveNewInternalUserLink)
-				{
-					@Html.Partial("~/Areas/Admin/Views/Menu/_AdminLinks.cshtml", Model)
-				}
-			</ul>
+                    @if (Model.ShowAddNewEntryOrExitPointLink
+                        || Model.ShowApproveNewInternalUserLink)
+                    {
+                        @Html.Partial("~/Areas/Admin/Views/Menu/_AdminLinks.cshtml", Model)
+                    }
+                </ul>
             </li>
-	  }
+        }
     </ul>
 </div>
