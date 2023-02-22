@@ -12,7 +12,13 @@ BEGIN
         N.Id,
         N.NotificationNumber,
         LNS.[Description] AS [Status],
-        CONVERT(VARCHAR, N.CreatedDate, 103) AS [CreatedDate],
+		CASE 
+			WHEN Na.[Status] = 14 THEN CONVERT(VARCHAR, ND.FileClosedDate, 103)
+			WHEN Na.[Status] = 8 THEN CONVERT(VARCHAR, ND.WithdrawnDate, 103)
+			WHEN Na.[Status] = 9 THEN CONVERT(VARCHAR, ND.ObjectedDate, 103)
+			WHEN Na.[Status] = 11 THEN CONVERT(VARCHAR, ND.ConsentWithdrawnDate, 103)
+			ELSE CONVERT(VARCHAR, N.CreatedDate, 103) 
+		END AS [DateActioned],
         N.CreatedDate AS OrderByDate,
         E.[Name] AS CompanyName,
 	    N.CompetentAuthority
@@ -20,6 +26,7 @@ BEGIN
         [Notification].[Notification] N
         INNER JOIN [Notification].[NotificationAssessment] NA ON N.Id = NA.NotificationApplicationId
         INNER JOIN [Lookup].NotificationStatus LNS ON LNS.Id = NA.[Status]
+		LEFT JOIN [Notification].[NotificationDates] ND on ND.NotificationAssessmentId = NA.Id
         LEFT JOIN [Notification].[Exporter] E ON N.Id = E.NotificationId
     WHERE N.IsArchived = 0 AND N.CreatedDate < dateadd(year, -3, getdate())
 	    AND NA.[Status] IN (14,8,9,11)
@@ -29,7 +36,14 @@ BEGIN
 	    INN.Id,
 	    INN.NotificationNumber,
 	    LINS.[Description] AS [Status],
-        CONVERT(VARCHAR, INND.NotificationReceivedDate, 103) AS [CreatedDate],
+		CASE 
+			WHEN INNA.[Status] = 10 THEN CONVERT(VARCHAR, INND.ConsentWithdrawnDate, 103)
+			WHEN INNA.[Status] = 12 THEN CONVERT(VARCHAR, INND.WithdrawnDate, 103)
+			WHEN INNA.[Status] = 13 THEN CONVERT(VARCHAR, INND.FileClosedDate, 103)
+			--We don't have a column in the NotificationDates that matches the Status 11, 
+			--and this doesn't seem to be a valid state for importnotifications, so ignoring
+			ELSE CONVERT(VARCHAR, INND.NotificationReceivedDate, 103) 
+		END AS [DateActioned],
         INND.NotificationReceivedDate AS OrderByDate,
 	    INE.[Name] AS CompanyName,
 	    INN.CompetentAuthority
