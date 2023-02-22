@@ -40,7 +40,7 @@
                     IsArchived = false,
                     NotificationNumber = "UnitTest1",
                     PageNumber = 1,
-                    CreatedDate = "01/01/2019"
+                    DateActioned = "01/01/2019"
                 },
                 new NotificationArchiveSummaryData
                 {
@@ -49,7 +49,7 @@
                     IsArchived = false,
                     NotificationNumber = "UnitTest2",
                     PageNumber = 1,
-                    CreatedDate = "01/01/2020"
+                    DateActioned = "01/01/2020"
                 }
             };
         }
