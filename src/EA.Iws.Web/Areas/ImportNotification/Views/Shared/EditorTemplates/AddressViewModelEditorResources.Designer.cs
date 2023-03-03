@@ -62,11 +62,47 @@ namespace EA.Iws.Web.Areas.ImportNotification.Views.Shared.EditorTemplates {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Street Name followed by Unit Number..
+        /// </summary>
+        public static string AddressLine1HintMsg {
+            get {
+                return ResourceManager.GetString("AddressLine1HintMsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to For example: Example Street, 21.
+        /// </summary>
+        public static string AddressLine1HintMsgExp {
+            get {
+                return ResourceManager.GetString("AddressLine1HintMsgExp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select the country the organisation is operating from.
+        /// </summary>
+        public static string CountryHintMsg {
+            get {
+                return ResourceManager.GetString("CountryHintMsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Their address.
         /// </summary>
         public static string Title {
             get {
                 return ResourceManager.GetString("Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Area code (typically multiple digits with two characters) followed by Town. For example: 4782 PW, Moerdijk.
+        /// </summary>
+        public static string TownOrCityHintMsg {
+            get {
+                return ResourceManager.GetString("TownOrCityHintMsg", resourceCulture);
             }
         }
     }

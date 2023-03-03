@@ -62,6 +62,24 @@ namespace EA.Iws.Web.Areas.ImportNotification.Views.Shared.EditorTemplates {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to This should be the contact person for the exporter – notifier.
+        /// </summary>
+        public static string FullNameHintMsg {
+            get {
+                return ResourceManager.GetString("FullNameHintMsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter the full telephone number including the international dialling code. For example +00 1234567890.
+        /// </summary>
+        public static string TelephoneHintMsg {
+            get {
+                return ResourceManager.GetString("TelephoneHintMsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Enter only up to 3 digits in the telephone prefix field.
         /// </summary>
         public static string TelephonePrefixTitle {

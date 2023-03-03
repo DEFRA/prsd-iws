@@ -7,12 +7,14 @@
 
 <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.FullName)">
     @Html.Gds().LabelFor(m => m.FullName, false)
+    @Html.Gds().HintSpan(@Resource.FullNameHintMsg)
     @Html.Gds().ValidationMessageFor(m => m.FullName)
     @Html.Gds().TextBoxFor(m => m.FullName)
 </div>
 
 <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.Telephone) @Html.Gds().FormGroupClass(m => m.TelephonePrefix)">
     @Html.Gds().LabelFor(m => m.Telephone, false)
+    @Html.Gds().HintSpan(@Resource.TelephoneHintMsg)
     @Html.Gds().ValidationMessageFor(m => m.TelephonePrefix)
     @Html.Gds().ValidationMessageFor(m => m.Telephone)
     <div class="international-number">
@@ -20,9 +22,9 @@
             +
         </div>
         <div class="international-number-prefix">
-            @Html.Gds().TextBoxFor(m => m.TelephonePrefix, new { @title = Resource.TelephonePrefixTitle, @type="number" })
+            @Html.Gds().TextBoxFor(m => m.TelephonePrefix, new { @title = Resource.TelephonePrefixTitle, @type = "number" })
         </div>
-        <div class="international-number-body">
+        <div class="international-number-body" style="margin-left: -40px">
             @Html.Gds().TextBoxFor(m => m.Telephone, new { @type = "number" })
         </div>
     </div>

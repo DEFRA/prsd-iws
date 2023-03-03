@@ -57,10 +57,10 @@ function autocompleteHtmlForAddressBookRecord(addressBookRecord) {
 */
 function selectAutocompleteData(event, ui) {
     try {
-        var data = JSON.parse($(ui.item.value).last().html());
+        var data = JSON.parse($(ui.item.value).last().html());        
 
         // Do not put the html content in the box.
-        $("#Business_Name").val(decodeEntities(data.BusinessData.Name));
+        //$("#Business_Name").val(decodeEntities(data.BusinessData.Name));
 
         // Select2 changes the way we can access the values of the country.
         var countryInput = $("#Address_CountryId");
@@ -72,6 +72,15 @@ function selectAutocompleteData(event, ui) {
         $.deserializeIntoNamedInputs("Address", data.AddressData);
         $.deserializeIntoNamedInputs("Business", data.BusinessData);
         $.deserializeIntoNamedInputs("Contact", data.ContactData);
+
+        if (data.BusinessData.Name.includes("T/A")) {
+            let strBusinessName = data.BusinessData.Name.split(" T/A ");
+            $("#Business_Name").val(decodeEntities(strBusinessName[0]));
+            $("#Business_OrgTradingName").val(decodeEntities(strBusinessName[1]));
+        } else {
+            $("#Business_Name").val(decodeEntities(data.BusinessData.Name));
+        }
+
     } catch (e) {
         console.log("An error occurred obtaining the JSON from string");
     } finally {
@@ -104,7 +113,14 @@ $(function () {
     focus: function (event, ui) {
         var data = JSON.parse($(ui.item.value).last().html());
 
-        $("#Business_Name").val(decodeEntities(data.BusinessData.Name));
+        //$("#Business_Name").val(decodeEntities(data.BusinessData.Name));
+        if (data.BusinessData.Name.includes("T/A")) {
+            let strBusinessName = data.BusinessData.Name.split(" T/A ");
+            $("#Business_Name").val(decodeEntities(strBusinessName[0]));
+            $("#Business_OrgTradingName").val(decodeEntities(strBusinessName[1]));
+        } else {
+            $("#Business_Name").val(decodeEntities(data.BusinessData.Name));
+        }
 
         event.preventDefault ? event.preventDefault() : event.returnValue = false;
     }
