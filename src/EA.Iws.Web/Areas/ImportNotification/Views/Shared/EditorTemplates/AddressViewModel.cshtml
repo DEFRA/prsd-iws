@@ -13,6 +13,8 @@
 
 <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.StreetOrSuburb)">
     @Html.Gds().LabelFor(m => m.StreetOrSuburb, false)
+    @Html.Gds().HintSpan(@Resource.AddressLine1HintMsg)
+    @Html.Gds().HintSpan(@Resource.AddressLine1HintMsgExp)
     @Html.Gds().ValidationMessageFor(m => m.StreetOrSuburb)
     @Html.Gds().TextBoxFor(m => m.StreetOrSuburb)
 </div>
@@ -25,12 +27,14 @@
 
 <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.TownOrCity)">
     @Html.Gds().LabelFor(m => m.TownOrCity, false)
+    @Html.Gds().HintSpan(@Resource.TownOrCityHintMsg)
     @Html.Gds().ValidationMessageFor(m => m.TownOrCity)
     @Html.Gds().TextBoxFor(m => m.TownOrCity)
 </div>
 
 <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.CountryId)">
     @Html.Gds().LabelFor(m => m.CountryId, false)
+    @Html.Gds().HintSpan(@Resource.CountryHintMsg)
     @Html.Gds().ValidationMessageFor(m => m.CountryId)
     @Html.Gds().DropDownListFor(m => m.CountryId, Model.CountrySelectList, string.Empty, new { data_select_box = "true" })
 </div>
