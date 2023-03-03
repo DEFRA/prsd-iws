@@ -48,14 +48,14 @@ BEGIN
 	    LINS.[Description] AS [Status],
 		CASE 
 			WHEN INNA.[Status] = 10 THEN CONVERT(VARCHAR, INND.ConsentWithdrawnDate, 103)
-			WHEN INNA.[Status] = 11 THEN CONVERT(VARCHAR, W.[Date], 103)
-			WHEN INNA.[Status] = 12 THEN CONVERT(VARCHAR, O.[Date], 103)
+			WHEN INNA.[Status] = 11 THEN CONVERT(VARCHAR, O.[Date], 103)
+			WHEN INNA.[Status] = 12 THEN CONVERT(VARCHAR, W.[Date], 103)
 			WHEN INNA.[Status] = 13 THEN CONVERT(VARCHAR, INND.FileClosedDate, 103)
 		END AS [DateActioned],
 		CASE 
 			WHEN INNA.[Status] = 10 THEN INND.ConsentWithdrawnDate
-			WHEN INNA.[Status] = 11 THEN W.[Date]
-			WHEN INNA.[Status] = 12 THEN O.[Date]
+			WHEN INNA.[Status] = 11 THEN O.[Date]
+			WHEN INNA.[Status] = 12 THEN W.[Date]
 			WHEN INNA.[Status] = 13 THEN INND.FileClosedDate
 		END AS [OrderByDate],
 	    INE.[Name] AS CompanyName,
@@ -70,8 +70,8 @@ BEGIN
     WHERE INN.IsArchived = 0 
 		AND CASE 
 			WHEN INNA.[Status] = 10 THEN INND.ConsentWithdrawnDate
-			WHEN INNA.[Status] = 11 THEN W.[Date]
-			WHEN INNA.[Status] = 12 THEN O.[Date]
+			WHEN INNA.[Status] = 11 THEN O.[Date]
+			WHEN INNA.[Status] = 12 THEN W.[Date]
 			WHEN INNA.[Status] = 13 THEN INND.FileClosedDate
 		END < dateadd(year, -3, getdate())
 	    AND INNA.[Status] IN (10,11,12,13)
