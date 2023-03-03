@@ -35,8 +35,8 @@ BEGIN
     WHERE INN.IsArchived = 0 
 		AND CASE 
 			WHEN INNA.[Status] = 10 THEN INND.ConsentWithdrawnDate
-			WHEN INNA.[Status] = 11 THEN W.[Date]
-			WHEN INNA.[Status] = 12 THEN O.[Date]
+			WHEN INNA.[Status] = 11 THEN O.[Date]
+			WHEN INNA.[Status] = 12 THEN W.[Date]
 			WHEN INNA.[Status] = 13 THEN INND.FileClosedDate
 		END < dateadd(year, -3, getdate())
 	    AND INNA.[Status] IN (13,12,11,10)
