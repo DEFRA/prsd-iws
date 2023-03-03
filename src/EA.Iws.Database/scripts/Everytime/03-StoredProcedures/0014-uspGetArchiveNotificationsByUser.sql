@@ -8,7 +8,6 @@ GO
 AS
 BEGIN
     SET NOCOUNT ON;
-	select [Id], [NotificationNumber], [Status], [DateActioned], [DateActioned] as [OrderByDate], [CompanyName], [CompetentAuthority] from (
     SELECT
         N.Id,
         N.NotificationNumber,
@@ -19,6 +18,12 @@ BEGIN
 			WHEN Na.[Status] = 11 THEN CONVERT(VARCHAR, ND.ConsentWithdrawnDate, 103)
 			WHEN Na.[Status] = 14 THEN CONVERT(VARCHAR, ND.FileClosedDate, 103)
 		END AS [DateActioned],
+		CASE 
+			WHEN Na.[Status] = 8 THEN ND.WithdrawnDate
+			WHEN Na.[Status] = 9 THEN ND.ObjectedDate
+			WHEN Na.[Status] = 11 THEN ND.ConsentWithdrawnDate
+			WHEN Na.[Status] = 14 THEN ND.FileClosedDate
+		END AS [OrderByDate],
         E.[Name] AS CompanyName,
 	    N.CompetentAuthority
     FROM
@@ -47,6 +52,12 @@ BEGIN
 			WHEN INNA.[Status] = 12 THEN CONVERT(VARCHAR, O.[Date], 103)
 			WHEN INNA.[Status] = 13 THEN CONVERT(VARCHAR, INND.FileClosedDate, 103)
 		END AS [DateActioned],
+		CASE 
+			WHEN INNA.[Status] = 10 THEN INND.ConsentWithdrawnDate
+			WHEN INNA.[Status] = 11 THEN W.[Date]
+			WHEN INNA.[Status] = 12 THEN O.[Date]
+			WHEN INNA.[Status] = 13 THEN INND.FileClosedDate
+		END AS [OrderByDate],
 	    INE.[Name] AS CompanyName,
 	    INN.CompetentAuthority
     FROM [ImportNotification].[Notification] INN
@@ -64,8 +75,7 @@ BEGIN
 			WHEN INNA.[Status] = 13 THEN INND.FileClosedDate
 		END < dateadd(year, -3, getdate())
 	    AND INNA.[Status] IN (10,11,12,13)
-	    AND INN.CompetentAuthority IN (SELECT CompetentAuthority FROM [Person].[InternalUser] WHERE UserId = @UserID)
-	) archiveNotifications	
+	    AND INN.CompetentAuthority IN (SELECT CompetentAuthority FROM [Person].[InternalUser] WHERE UserId = @UserID)	
     ORDER by [OrderByDate] ASC
     OFFSET (@Skip) ROWS FETCH NEXT (@Take) ROWS ONLY
 END
