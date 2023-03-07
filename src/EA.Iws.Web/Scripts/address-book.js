@@ -79,6 +79,7 @@ function selectAutocompleteData(event, ui) {
             $("#Business_OrgTradingName").val(decodeEntities(strBusinessName[1]));
         } else {
             $("#Business_Name").val(decodeEntities(data.BusinessData.Name));
+            $("#Business_OrgTradingName").val('');
         }
 
     } catch (e) {
