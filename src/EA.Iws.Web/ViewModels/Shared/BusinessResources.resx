@@ -184,16 +184,16 @@
     <value>Help with appropriate naming conventions</value>
   </data>
   <data name="OrgHelpWithNamingContent2" xml:space="preserve">
-    <value>•	Company name abbreviations should always be in uppercase with no full stops</value>
+    <value>Company name abbreviations should always be in uppercase with no full stops</value>
   </data>
   <data name="OrgHelpWithNamingContent3" xml:space="preserve">
-    <value>•	There should be no spaces either side of special characters, particularly at the end of the name</value>
+    <value>There should be no spaces either side of special characters, particularly at the end of the name</value>
   </data>
   <data name="OrgHelpWithNamingContent4" xml:space="preserve">
-    <value>•	There should be no full stops present</value>
+    <value>There should be no full stops present</value>
   </data>
   <data name="OrgHelpWithNamingContent5" xml:space="preserve">
-    <value>•	For example: Instead of 'a &amp; b materials', the name should be 'A&amp;B Materials'</value>
+    <value>For example: Instead of 'a &amp; b materials', the name should be 'A&amp;B Materials'</value>
   </data>
   <data name="OrgNameHeader" xml:space="preserve">
     <value>Organisation name</value>
@@ -203,8 +203,5 @@
   </data>
   <data name="OrgTradingNameHint" xml:space="preserve">
     <value>The name your organisation trades under if different to your organisation name</value>
-  </data>
-  <data name="IsOrgUKBased" xml:space="preserve">
-    <value>Is the organisation based and registered in the UK and/or using a UK address?</value>
   </data>
 </root>

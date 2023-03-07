@@ -124,15 +124,6 @@ namespace EA.Iws.Web.ViewModels.Shared {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Is the organisation based and registered in the UK and/or using a UK address?.
-        /// </summary>
-        public static string IsOrgUKBased {
-            get {
-                return ResourceManager.GetString("IsOrgUKBased", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to When inputting your organisation name, the following naming conventions should be used to minimise errors:.
         /// </summary>
         public static string OrgHelpWithNamingContent1 {
@@ -142,7 +133,7 @@ namespace EA.Iws.Web.ViewModels.Shared {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to •	Company name abbreviations should always be in uppercase with no full stops.
+        ///   Looks up a localized string similar to Company name abbreviations should always be in uppercase with no full stops.
         /// </summary>
         public static string OrgHelpWithNamingContent2 {
             get {
@@ -151,7 +142,7 @@ namespace EA.Iws.Web.ViewModels.Shared {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to •	There should be no spaces either side of special characters, particularly at the end of the name.
+        ///   Looks up a localized string similar to There should be no spaces either side of special characters, particularly at the end of the name.
         /// </summary>
         public static string OrgHelpWithNamingContent3 {
             get {
@@ -160,7 +151,7 @@ namespace EA.Iws.Web.ViewModels.Shared {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to •	There should be no full stops present.
+        ///   Looks up a localized string similar to There should be no full stops present.
         /// </summary>
         public static string OrgHelpWithNamingContent4 {
             get {
@@ -169,7 +160,7 @@ namespace EA.Iws.Web.ViewModels.Shared {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to •	For example: Instead of &apos;a &amp; b materials&apos;, the name should be &apos;A&amp;B Materials&apos;.
+        ///   Looks up a localized string similar to For example: Instead of &apos;a &amp; b materials&apos;, the name should be &apos;A&amp;B Materials&apos;.
         /// </summary>
         public static string OrgHelpWithNamingContent5 {
             get {

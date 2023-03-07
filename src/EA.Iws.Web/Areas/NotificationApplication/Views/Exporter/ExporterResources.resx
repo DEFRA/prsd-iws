@@ -118,7 +118,10 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="AddressDescription" xml:space="preserve">
-    <value>This should be the correspondence address for the exporter - notifier</value>
+    <value>This should be the correspondence address for the exporter - notifier.</value>
+  </data>
+  <data name="AddressDescriptionNote" xml:space="preserve">
+    <value>Note that this may be different to the registered company address so ensure you use the appropriate address.</value>
   </data>
   <data name="AddressHeader" xml:space="preserve">
     <value>Address</value>
@@ -134,6 +137,9 @@
   </data>
   <data name="Header" xml:space="preserve">
     <value>Who is the exporter - notifier?</value>
+  </data>
+  <data name="IsOrgUKBased" xml:space="preserve">
+    <value>Is the organisation based and registered in the UK and/or using a UK address?</value>
   </data>
   <data name="NonJavascriptMessage" xml:space="preserve">
     <value>For Limited company, this should be your Companies House number.
