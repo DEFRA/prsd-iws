@@ -28,10 +28,10 @@
 
         public ProducerViewModel(Producer producer)
         {
-            Address = new AddressViewModel(producer.Address);
+            Address = new AddressViewModel(producer.Address, AddressTypeEnum.Producer);
             AreMultiple = producer.AreMultiple;
             Business = new BusinessViewModel(producer.BusinessName, producer.RegistrationNumber);
-            Contact = new ContactViewModel(producer.Contact);
+            Contact = new ContactViewModel(producer.Contact, AddressTypeEnum.Producer);
             IsAddedToAddressBook = producer.IsAddedToAddressBook;
             BusinessType = producer.Type;
         }

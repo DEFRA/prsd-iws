@@ -126,6 +126,18 @@
   <data name="CountryHintMsg" xml:space="preserve">
     <value>Select the country the organisation is operating from</value>
   </data>
+  <data name="ExporterHeaderInfoMsg" xml:space="preserve">
+    <value>The correspondence address for the exporter - notifier.  Note that this may be different to the registered company address so ensure you use the appropriate address.</value>
+  </data>
+  <data name="FacilityHeaderInfoMsg" xml:space="preserve">
+    <value>This should be the site address for the recovery facility. Note that this may be different to the registered company address so ensure you use the appropriate address.</value>
+  </data>
+  <data name="ImporterHeaderInfoMsg" xml:space="preserve">
+    <value>This should be the site address for the importer – consignee. Note that this may be different to the registered company address so ensure you use the appropriate address.</value>
+  </data>
+  <data name="ProducerHeaderInfoMsg" xml:space="preserve">
+    <value>The correspondence address for the generator – producer. Note that this may be different to the registered company address so ensure you use the appropriate address.</value>
+  </data>
   <data name="Title" xml:space="preserve">
     <value>Their address</value>
   </data>

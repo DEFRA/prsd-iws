@@ -89,6 +89,42 @@ namespace EA.Iws.Web.Areas.ImportNotification.Views.Shared.EditorTemplates {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The correspondence address for the exporter - notifier.  Note that this may be different to the registered company address so ensure you use the appropriate address..
+        /// </summary>
+        public static string ExporterHeaderInfoMsg {
+            get {
+                return ResourceManager.GetString("ExporterHeaderInfoMsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This should be the site address for the recovery facility. Note that this may be different to the registered company address so ensure you use the appropriate address..
+        /// </summary>
+        public static string FacilityHeaderInfoMsg {
+            get {
+                return ResourceManager.GetString("FacilityHeaderInfoMsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This should be the site address for the importer – consignee. Note that this may be different to the registered company address so ensure you use the appropriate address..
+        /// </summary>
+        public static string ImporterHeaderInfoMsg {
+            get {
+                return ResourceManager.GetString("ImporterHeaderInfoMsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The correspondence address for the generator – producer. Note that this may be different to the registered company address so ensure you use the appropriate address..
+        /// </summary>
+        public static string ProducerHeaderInfoMsg {
+            get {
+                return ResourceManager.GetString("ProducerHeaderInfoMsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Their address.
         /// </summary>
         public static string Title {

@@ -64,9 +64,36 @@ namespace EA.Iws.Web.Areas.ImportNotification.Views.Shared.EditorTemplates {
         /// <summary>
         ///   Looks up a localized string similar to This should be the contact person for the exporter – notifier.
         /// </summary>
-        public static string FullNameHintMsg {
+        public static string ExporterFullNameHintMsg {
             get {
-                return ResourceManager.GetString("FullNameHintMsg", resourceCulture);
+                return ResourceManager.GetString("ExporterFullNameHintMsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This should be the contact person for the recovery facility.
+        /// </summary>
+        public static string FacilityFullNameHintMsg {
+            get {
+                return ResourceManager.GetString("FacilityFullNameHintMsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to his should be the contact person for the importer – consignee.
+        /// </summary>
+        public static string ImporterFullNameHintMsg {
+            get {
+                return ResourceManager.GetString("ImporterFullNameHintMsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This should be the contact person for the generator – producer.
+        /// </summary>
+        public static string ProducerFullNameHintMsg {
+            get {
+                return ResourceManager.GetString("ProducerFullNameHintMsg", resourceCulture);
             }
         }
         
