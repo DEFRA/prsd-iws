@@ -1,13 +1,29 @@
 ﻿@using Resource = EA.Iws.Web.Areas.ImportNotification.Views.Shared.EditorTemplates.ContactViewModelEditorResources
+@using AddressType = EA.Iws.Web.Areas.ImportNotification.ViewModels.Shared.AddressTypeEnum
 @model EA.Iws.Web.Areas.ImportNotification.ViewModels.Shared.ContactViewModel
 
 <h2 class="heading-medium">@Resource.Title</h2>
 
-<hr/>
+<hr />
 
 <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.FullName)">
     @Html.Gds().LabelFor(m => m.FullName, false)
-    @Html.Gds().HintSpan(@Resource.FullNameHintMsg)
+    @if (Model.AddressType == AddressType.Exporter)
+    {
+        @Html.Gds().HintSpan(@Resource.ExporterFullNameHintMsg)
+    }
+    else if (Model.AddressType == AddressType.Importer)
+    {
+        @Html.Gds().HintSpan(@Resource.ImporterFullNameHintMsg)
+    }
+    else if (Model.AddressType == AddressType.Producer)
+    {
+        @Html.Gds().HintSpan(@Resource.ProducerFullNameHintMsg)
+    }
+    else if (Model.AddressType == AddressType.Facility)
+    {
+        @Html.Gds().HintSpan(@Resource.FacilityFullNameHintMsg)
+    }
     @Html.Gds().ValidationMessageFor(m => m.FullName)
     @Html.Gds().TextBoxFor(m => m.FullName)
 </div>

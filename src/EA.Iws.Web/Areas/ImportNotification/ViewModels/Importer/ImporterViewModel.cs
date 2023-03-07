@@ -27,9 +27,9 @@
 
         public ImporterViewModel(Importer importer)
         {
-            Address = new AddressViewModel(importer.Address);
+            Address = new AddressViewModel(importer.Address, AddressTypeEnum.Importer);
             Business = new BusinessViewModel(importer.BusinessName, importer.RegistrationNumber);
-            Contact = new ContactViewModel(importer.Contact);
+            Contact = new ContactViewModel(importer.Contact, AddressTypeEnum.Importer);
             BusinessType = importer.Type;
             IsAddedToAddressBook = importer.IsAddedToAddressBook;
         }

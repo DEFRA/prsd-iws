@@ -803,6 +803,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ArchiveNotificationResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Areas\ImportNotification\ViewModels\Shared\AddressTypeEnum.cs" />
     <Compile Include="Extensions\GdsExtensions.cs" />
     <Compile Include="RazorHelpers\AttributesHelper.cs" />
     <Compile Include="RazorHelpers\IwsGds.BackLink.cs" />
