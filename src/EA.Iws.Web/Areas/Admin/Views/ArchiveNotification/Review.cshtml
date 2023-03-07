@@ -71,7 +71,7 @@
                                 @Html.DisplayFor(m => m.SelectedNotifications[i].Status)
                             </td>
                             <td class="govuk-table__cell">
-                                @Html.DisplayFor(m => m.SelectedNotifications[i].CreatedDate)
+                                @Html.DisplayFor(m => m.SelectedNotifications[i].DateActioned)
                             </td>
                             <td class="govuk-table__cell">
                                 @Html.DisplayFor(m => m.SelectedNotifications[i].CompanyName)
@@ -83,7 +83,7 @@
                             </td>
                             @Html.HiddenFor(m => m.SelectedNotifications[i].NotificationNumber)
                             @Html.HiddenFor(m => m.SelectedNotifications[i].Status)
-                            @Html.HiddenFor(m => m.SelectedNotifications[i].CreatedDate)
+                            @Html.HiddenFor(m => m.SelectedNotifications[i].DateActioned)
                             @Html.HiddenFor(m => m.SelectedNotifications[i].CompanyName)
                             @Html.HiddenFor(m => m.SelectedNotifications[i].IsSelected)
                             @Html.HiddenFor(m => m.SelectedNotifications[i].Id)
@@ -109,7 +109,7 @@ else
         <tbody class="govuk-table__body">
             <tr class="govuk-table__row">
                 <td class="govuk-table__cell" colspan="5">
-                    <h1 class="govuk-heading-m">@ArchiveNotificationResources.NoNotificationsToArchiveMsg</h1>
+                    <p class="govuk-heading-m">@ArchiveNotificationResources.NoNotificationsToArchiveMsg</p>
                 </td>
             </tr>
         </tbody>

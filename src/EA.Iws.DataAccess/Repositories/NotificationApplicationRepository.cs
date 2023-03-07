@@ -58,7 +58,7 @@
             else
             {
                 return await context.NotificationApplications
-                    .Where(n => number.Replace(" ", string.Empty) == n.NotificationNumber.Replace(" ", string.Empty) && n.IsArchived == false)
+                    .Where(n => number.Replace(" ", string.Empty) == n.NotificationNumber.Replace(" ", string.Empty))
                     .Select(n => (Guid?)n.Id)
                     .SingleOrDefaultAsync();
             }

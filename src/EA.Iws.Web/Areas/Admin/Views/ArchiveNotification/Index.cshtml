@@ -82,8 +82,8 @@
                                 <td class="govuk-table__cell status">
                                     @Html.DisplayFor(m => m.Notifications[i].Status)
                                 </td>
-                                <td class="govuk-table__cell createdate">
-                                    @Html.DisplayFor(m => m.Notifications[i].CreatedDate)
+                                <td class="govuk-table__cell dateActioned">
+                                    @Html.DisplayFor(m => m.Notifications[i].DateActioned)
                                 </td>
                                 <td class="govuk-table__cell companyName">
                                     @Html.DisplayFor(m => m.Notifications[i].CompanyName)
@@ -91,17 +91,16 @@
                                 <td class="govuk-table__cell">
                                     <div class="govuk-checkboxes__item govuk-checkboxes--small">
                                         @Html.CheckBoxFor(m => m.Notifications[i].IsSelected,
-                                                          new
-                                                               {
-                                                                   id = @Model.Notifications[i].Id,
-                                                                @class = "checkboxes__input checkboxes",
-                                                                title = @Model.Notifications[i].NotificationNumber
-                                                               })
+                                            new {
+                                                id = @Model.Notifications[i].Id,
+                                                @class = "checkboxes__input checkboxes",
+                                                title = @Model.Notifications[i].NotificationNumber
+                                            })
                                     </div>
                                 </td>
                                 @Html.HiddenFor(m => m.Notifications[i].NotificationNumber)
                                 @Html.HiddenFor(m => m.Notifications[i].Status)
-                                @Html.HiddenFor(m => m.Notifications[i].CreatedDate)
+                                @Html.HiddenFor(m => m.Notifications[i].DateActioned)
                                 @Html.HiddenFor(m => m.Notifications[i].CompanyName)
                                 @Html.HiddenFor(m => m.Notifications[i].IsSelected)
                                 @Html.HiddenFor(m => m.Notifications[i].Id)
@@ -169,16 +168,16 @@
 
                 var myNotificationIdsArray = [];
                 $(':checkbox').each(function () {
-                    var nNumber, status, dateGenerated, companyName, isSelected, pageNumber;
+                    var nNumber, status, dateActioned, companyName, isSelected, pageNumber;
                     nNumber = $(this).closest('tr').find('.nNumber').html();
                     status = $(this).closest('tr').find('.status').html();
-                    dateGenerated = $(this).closest('tr').find('.createdate').html();
+                    dateActioned = $(this).closest('tr').find('.dateActioned').html();
                     companyName = $(this).closest('tr').find('.companyName').html();
                     isSelected = this.checked;
                     pageNumber = pageNum;
 
                     if (this.id != 'SelectAll') {
-                        var item = { id: this.id, notificationNumber: nNumber, status: status, createdDate: dateGenerated, companyName: companyName, isSelected: isSelected, pageNumber: pageNumber };
+                        var item = { id: this.id, notificationNumber: nNumber, status: status, dateActioned: dateActioned, companyName: companyName, isSelected: isSelected, pageNumber: pageNumber };
                         myNotificationIdsArray.push(item);
                     }
                 });
@@ -207,17 +206,17 @@
             var myNotificationIdsArray = [];
             var notificationId = this.id;
             var isNotificationChecked = $(this).is(':checked');
-            var nNumber, status, dateGenerated, companyName, isSelected, pageNumber;
+            var nNumber, status, dateActioned, companyName, isSelected, pageNumber;
 
             nNumber = $(this).closest('tr').find('.nNumber').html();
             status = $(this).closest('tr').find('.status').html();
-            dateGenerated = $(this).closest('tr').find('.createdate').html();
+            dateActioned = $(this).closest('tr').find('.dateActioned').html();
             companyName = $(this).closest('tr').find('.companyName').html();
             isSelected = isNotificationChecked;
             pageNumber = pageNum;
 
             if (this.id != 'SelectAll') {
-                var item = { id: this.id, notificationNumber: nNumber, status: status, createdDate: dateGenerated, companyName: companyName, isSelected: isSelected, pageNumber: pageNumber };
+                var item = { id: this.id, notificationNumber: nNumber, status: status, dateActioned: dateActioned, companyName: companyName, isSelected: isSelected, pageNumber: pageNumber };
                 myNotificationIdsArray.push(item);
             }
 

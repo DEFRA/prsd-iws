@@ -49,6 +49,11 @@
 
         public static string GetDisplayName<TEnum>(TEnum value)
         {
+            if (value == null)
+            {
+                return null;
+            }
+
             var enumMetaData = enumHelperMetaDataMap.GetOrAdd(typeof(TEnum), GetAllMetaDataForType<TEnum>());
 
             string name;
