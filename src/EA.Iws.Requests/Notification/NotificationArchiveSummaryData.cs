@@ -10,7 +10,7 @@
 
         public string Status { get; set; }
 
-        public string CreatedDate { get; set; }
+        public string DateActioned { get; set; }
 
         public string CompanyName { get; set; }
 

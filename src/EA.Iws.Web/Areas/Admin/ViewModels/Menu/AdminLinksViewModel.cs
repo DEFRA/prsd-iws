@@ -16,6 +16,8 @@
 
         public bool ShowManageExternalUserLink { get; set; }
 
+        public bool ShowArchiveNotificationsLink { get; set; }
+
         public bool ShowNotificationLinks { get; set; }
     }
 }

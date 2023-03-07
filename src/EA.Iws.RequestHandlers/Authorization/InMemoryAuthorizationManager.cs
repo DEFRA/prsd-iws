@@ -96,7 +96,7 @@
             { ImportFinancialGuaranteePermissions.CanEditImportFinancialGuarantee, new[] { UserRole.Internal, UserRole.Administrator } },
             { UserAdministrationPermissions.CanOverrideShipmentData, new[] { UserRole.Administrator } },
             { UserAdministrationPermissions.CanManageExternalUsers, new[] { UserRole.Administrator } },
-            { UserAdministrationPermissions.CanAdminUserArchiveNotifications, new[] { UserRole.Internal, UserRole.Administrator } }
+            { UserAdministrationPermissions.CanAdminUserArchiveNotifications, new[] { UserRole.Administrator } }
         };
 
         public Task<bool> CheckAccessAsync(AuthorizationContext context)
