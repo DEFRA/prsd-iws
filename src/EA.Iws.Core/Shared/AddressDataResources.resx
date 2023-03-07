@@ -135,8 +135,11 @@
   <data name="Country" xml:space="preserve">
     <value>Country</value>
   </data>
+  <data name="CountryLabel" xml:space="preserve">
+    <value>Select the country the organisation is operating from</value>
+  </data>
   <data name="CountryRequired" xml:space="preserve">
-    <value>The Contry field is required.</value>
+    <value>The Country field is required.</value>
   </data>
   <data name="CountrySelect" xml:space="preserve">
     <value>Please select a country</value>

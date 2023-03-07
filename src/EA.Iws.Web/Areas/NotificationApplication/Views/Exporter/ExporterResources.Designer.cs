@@ -61,11 +61,20 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.Exporter {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This should be the correspondence address for the exporter - notifier.
+        ///   Looks up a localized string similar to This should be the correspondence address for the exporter - notifier..
         /// </summary>
         public static string AddressDescription {
             get {
                 return ResourceManager.GetString("AddressDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Note that this may be different to the registered company address so ensure you use the appropriate address..
+        /// </summary>
+        public static string AddressDescriptionNote {
+            get {
+                return ResourceManager.GetString("AddressDescriptionNote", resourceCulture);
             }
         }
         
@@ -111,6 +120,15 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.Exporter {
         public static string Header {
             get {
                 return ResourceManager.GetString("Header", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Is the organisation based and registered in the UK and/or using a UK address?.
+        /// </summary>
+        public static string IsOrgUKBased {
+            get {
+                return ResourceManager.GetString("IsOrgUKBased", resourceCulture);
             }
         }
         

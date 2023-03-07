@@ -115,7 +115,16 @@ namespace EA.Iws.Core.Shared {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The Contry field is required..
+        ///   Looks up a localized string similar to Select the country the organisation is operating from.
+        /// </summary>
+        public static string CountryLabel {
+            get {
+                return ResourceManager.GetString("CountryLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The Country field is required..
         /// </summary>
         public static string CountryRequired {
             get {
