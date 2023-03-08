@@ -50,6 +50,7 @@
                 WHERE 
                     (N.UserId = @Id OR SU.UserId = @Id)
                     AND (@Status IS NULL OR NA.Status = @Status)
+                    AND (N.IsArchived = 0)
                 ORDER BY
                     N.CreatedDate DESC
                 OFFSET (@Skip) ROWS FETCH NEXT (@Take) ROWS ONLY", 
@@ -63,7 +64,7 @@
                   FROM [Notification].[Notification] N
                   INNER JOIN [Notification].[NotificationAssessment] NA ON N.Id = NA.NotificationApplicationId
                   LEFT JOIN [Notification].[SharedUser] SU ON SU.NotificationId = N.Id AND SU.UserId =  @Id
-                  WHERE (N.UserId = @Id OR SU.UserId = @Id) AND (@Status IS NULL OR NA.Status = @Status)",
+                  WHERE (N.UserId = @Id OR SU.UserId = @Id) AND (@Status IS NULL OR NA.Status = @Status) AND (N.IsArchived = 0)",
                 new SqlParameter("@Id", userContext.UserId),
                 new SqlParameter("@Status", (object)message.NotificationStatus ?? DBNull.Value)).SingleAsync();
 

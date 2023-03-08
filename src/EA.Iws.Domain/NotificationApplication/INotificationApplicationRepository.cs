@@ -13,7 +13,7 @@
 
         Task<string> GetNumber(Guid id);
 
-        Task<Guid?> GetIdOrDefault(string number);
+        Task<Guid?> GetIdOrDefault(string number, bool isDeleteNotification = false);
 
         void Add(NotificationApplication notification);
 
@@ -24,5 +24,7 @@
         Task<bool> Delete(Guid notificationId);
 
         Task<UKCompetentAuthority> GetNotificationCompetentAuthority(Guid id);
+
+        Task<bool> GetIsArchived(Guid notificationId);
     }
 }

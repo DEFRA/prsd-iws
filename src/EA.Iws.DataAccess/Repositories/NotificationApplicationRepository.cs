@@ -26,7 +26,7 @@
         {
             await notificationApplicationAuthorization.EnsureAccessAsync(id);
             return await context.NotificationApplications.SingleAsync(n => n.Id == id);
-        } 
+        }
 
         public async Task<NotificationApplication> GetByMovementId(Guid movementId)
         {
@@ -46,11 +46,29 @@
                 .SingleAsync();
         }
 
-        public async Task<Guid?> GetIdOrDefault(string number)
+        public async Task<Guid?> GetIdOrDefault(string number, bool isDeleteNotification)
+        {
+            if (isDeleteNotification)
+            {
+                return await context.NotificationApplications
+                    .Where(n => number.Replace(" ", string.Empty) == n.NotificationNumber.Replace(" ", string.Empty))
+                    .Select(n => (Guid?)n.Id)
+                    .SingleOrDefaultAsync();
+            }
+            else
+            {
+                return await context.NotificationApplications
+                    .Where(n => number.Replace(" ", string.Empty) == n.NotificationNumber.Replace(" ", string.Empty))
+                    .Select(n => (Guid?)n.Id)
+                    .SingleOrDefaultAsync();
+            }
+        }
+
+        public async Task<bool> GetIsArchived(Guid id)
         {
             return await context.NotificationApplications
-                .Where(n => number.Replace(" ", string.Empty) == n.NotificationNumber.Replace(" ", string.Empty))
-                .Select(n => (Guid?)n.Id)
+                .Where(n => n.Id == id)
+                .Select(n => n.IsArchived)
                 .SingleOrDefaultAsync();
         }
 

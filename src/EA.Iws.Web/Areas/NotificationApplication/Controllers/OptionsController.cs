@@ -27,6 +27,12 @@
         [HttpGet]
         public async Task<ActionResult> Index(Guid id, int? status, int page = 1)
         {
+            var isArchived = await mediator.SendAsync(new GetArchivedNotificationById(id));
+            if (isArchived)
+            {
+                return RedirectToAction("NotFound", "Applicant", new { area = string.Empty });
+            }
+
             var movementsSummary = await mediator.SendAsync(new GetSummaryAndTable(id, (MovementStatus?)status, page));
 
             var model = new NotificationOptionsViewModel(id, movementsSummary);

@@ -56,6 +56,9 @@
     <Content Include="Readme.txt" />
     <Content Include="scripts\AliaSQL.exe" />
     <Content Include="scripts\Create\placeholder.txt" />
+    <Content Include="scripts\Everytime\03-StoredProcedures\0015-uspGetArchiveNotificationsCountByUser.sql" />
+    <Content Include="scripts\Everytime\03-StoredProcedures\0014-uspGetArchiveNotificationsByUser.sql" />
+    <Content Include="scripts\Everytime\03-StoredProcedures\0016-uspArchiveNotification.sql" />
     <Content Include="scripts\Everytime\placeholder.txt" />
     <Content Include="scripts\TestData\placeholder.txt" />
     <Content Include="scripts\Update\0007-Support\20211105-CR0048-Shipment-Full-Partial-Rejection.sql" />
@@ -133,6 +136,7 @@
     <Content Include="scripts\Update\0007-Support\20220310-CCN058-Add-StatusAtFileClosed.sql" />
     <Content Include="scripts\Update\0007-Support\20220722-CCN054-Shipment-Report-Changes.sql" />
     <Content Include="scripts\Update\0007-Support\20221212-Add-Bank-Holidays.sql" />
+    <Content Include="scripts\Update\0007-Support\20230105-CCN057-ArchiveNotificationChanges.sql" />
     <Content Include="scripts\Update\0007-Support\20230106-ExportNotification-Rejection-DataUpdate.sql" />
     <Content Include="scripts\Update\0007-Support\20230125-P37532-ProducerReportCacheIndex.sql" />
     <Content Include="scripts\Update\placeholder.txt" />

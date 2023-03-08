@@ -16,7 +16,7 @@
 
         public async Task<AnnexCollection> GetByNotificationId(Guid notificationId)
         {
-            return await context.AnnexCollections.SingleAsync(a => a.NotificationId == notificationId);
+            return await context.AnnexCollections.SingleOrDefaultAsync(a => a.NotificationId == notificationId);
         }
 
         public void Add(AnnexCollection annexCollection)

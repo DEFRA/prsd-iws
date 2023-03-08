@@ -37,7 +37,7 @@
                     message.NotificationId,
                     userContext.UserId));
             }
-            
+
             var overviewData = await overviewRepository.GetById(message.NotificationId);
 
             return mapper.Map<NotificationOverview>(overviewData);
