@@ -52,6 +52,7 @@
     <Compile Include="AddressBook\GetUserAddressBookByType.cs" />
     <Compile Include="AddressBook\SearchAddressRecords.cs" />
     <Compile Include="AddressBook\SearchAddressRecordsByName.cs" />
+    <Compile Include="Admin\ArchiveNotification\ArchiveNotifications.cs" />
     <Compile Include="Admin\CheckNotificationHasComments.cs" />
     <Compile Include="Admin\EntryOrExitPoints\AddEntryOrExitPoint.cs" />
     <Compile Include="Admin\EntryOrExitPoints\CheckEntryOrExitPointUnique.cs" />
@@ -355,6 +356,8 @@
     <Compile Include="Notification\GenerateNotificationPreviewDocument.cs" />
     <Compile Include="Notification\GeneratePostageLabel.cs" />
     <Compile Include="Annexes\GetAnnexes.cs" />
+    <Compile Include="Notification\GetArchivedNotificationById.cs" />
+    <Compile Include="Notification\GetArchiveNotificationsByUser.cs" />
     <Compile Include="Notification\GetNotificationAuditScreens.cs" />
     <Compile Include="Notification\GetNotificationAuditTable.cs" />
     <Compile Include="Notification\GetNotificationCompetentAuthority.cs" />
@@ -367,7 +370,9 @@
     <Compile Include="Notification\GetNotificationAudits.cs" />
     <Compile Include="Notification\GetUserNotificationsSummary.cs" />
     <Compile Include="Notification\GetWhatToDoNextDataForNotification.cs" />
+    <Compile Include="Notification\NotificationApplicationSummaryData.cs" />
     <Compile Include="Notification\ResubmitNotification.cs" />
+    <Compile Include="Notification\UserArchiveNotifications.cs" />
     <Compile Include="Notification\UserNotifications.cs" />
     <Compile Include="Notification\WhatToDoNextData.cs" />
     <Compile Include="Authorization\AuthorizeActivity.cs" />
@@ -455,7 +460,7 @@
     <Compile Include="Exporters\GetExporterByNotificationId.cs" />
     <Compile Include="Notification\GetExportNotificationsByUser.cs" />
     <Compile Include="Producers\GetProducersByNotificationId.cs" />
-    <Compile Include="Notification\NotificationApplicationSummaryData.cs" />
+    <Compile Include="Notification\NotificationArchiveSummaryData.cs" />
     <Compile Include="Shared\GetCompetentAuthoritiesByCountry.cs" />
     <Compile Include="Organisations\FindMatchingOrganisations.cs" />
     <Compile Include="Organisations\OrganisationById.cs" />

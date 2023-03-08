@@ -794,6 +794,15 @@
     <Content Include="Content\iws\_conditionals.scss" />
     <Content Include="Content\iws\_shims.scss" />
     <Content Include="Content\iws\_cookies-banner.scss" />
+    <Compile Include="Areas\Admin\Controllers\ArchiveNotificationController.cs" />
+    <Compile Include="Areas\Admin\ViewModels\ArchiveNotification\ArchiveNotificationArchivedViewModel.cs" />
+    <Compile Include="Areas\Admin\ViewModels\ArchiveNotification\ArchiveNotificationResultViewModel.cs" />
+    <Compile Include="Areas\Admin\ViewModels\ArchiveNotification\ArchiveNotificationReviewViewModel.cs" />
+    <Compile Include="Areas\Admin\Views\ArchiveNotification\ArchiveNotificationResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ArchiveNotificationResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Extensions\GdsExtensions.cs" />
     <Compile Include="RazorHelpers\AttributesHelper.cs" />
     <Compile Include="RazorHelpers\IwsGds.BackLink.cs" />
@@ -802,6 +811,9 @@
     <Compile Include="RazorHelpers\IwsGds.Label.cs" />
     <Compile Include="RazorHelpers\IwsGds.Panel.cs" />
     <Compile Include="RazorHelpers\IwsGds.ProgressiveDisclosure.cs" />
+    <Content Include="Areas\Admin\Views\ArchiveNotification\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\ArchiveNotification\Review.cshtml" />
+    <Content Include="Areas\Admin\Views\ArchiveNotification\Archived.cshtml" />
     <None Include="Scripts\jquery-3.6.0.intellisense.js" />
     <Content Include="Scripts\jquery-3.6.0.js" />
     <Content Include="Scripts\jquery-3.6.0.min.js" />
@@ -4580,6 +4592,10 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>ResultsResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Areas\Admin\Views\ArchiveNotification\ArchiveNotificationResources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>ArchiveNotificationResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Areas\Admin\Views\DeleteNotification\CheckResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>CheckResources.Designer.cs</LastGenOutput>
@@ -5421,6 +5437,7 @@
     <EmbeddedResource Include="Areas\NotificationMovements\Views\ReceiptRecovery\IndexResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>IndexResources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Areas\NotificationMovements\Views\ReceiptRecovery\QuantityAbnormalResources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

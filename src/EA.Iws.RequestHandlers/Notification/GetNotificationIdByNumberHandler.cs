@@ -14,7 +14,7 @@
         private readonly INotificationApplicationAuthorization notificationApplicationAuthorization;
         private static readonly Regex NotificationNumberRegex = new Regex(@"(GB)(\d{4})(\d{6})", RegexOptions.Compiled);
 
-        public GetNotificationIdByNumberHandler(INotificationApplicationRepository notificationApplicationRepository, 
+        public GetNotificationIdByNumberHandler(INotificationApplicationRepository notificationApplicationRepository,
             INotificationApplicationAuthorization notificationApplicationAuthorization)
         {
             this.notificationApplicationRepository = notificationApplicationRepository;
@@ -23,9 +23,7 @@
 
         public async Task<Guid?> HandleAsync(GetNotificationIdByNumber message)
         {
-            var id =
-                await
-                    notificationApplicationRepository.GetIdOrDefault(FormatNotificationNumber(message.NotificationNumber));
+            var id = await notificationApplicationRepository.GetIdOrDefault(FormatNotificationNumber(message.NotificationNumber), message.IsDeleteNotification);
 
             if (id != null)
             {

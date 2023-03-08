@@ -22,7 +22,7 @@
                     "~/Scripts/jquery-3.6.0.min.js",
                     "~/Scripts/jquery.unobtrusive-ajax.js",
                     "~/Scripts/jquery-ui-1.13.2.js",
-                    "~/Scripts/jquery-ui-1.13.2.min.js",                    
+                    "~/Scripts/jquery-ui-1.13.2.min.js",
                     "~/Scripts/jquery.validate.js",
                     "~/Scripts/jquery.validate.min.js"));
 
@@ -70,11 +70,11 @@
             bundles.Add(new StyleBundle("~/Content/iws-page").Include(
                 "~/Content/iws-page.css"));
 
-            bundles.Add(new StyleBundle("~/Content/iws-page")
-                .Include("~/css/font-awesome.css"));
-                        
+            bundles.Add(new StyleBundle("~/Content/css/font-awesome")
+                .Include("~/Content/css/font-awesome.css"));
+
             bundles.Add(new StyleBundle("~/Content/select2/css")
-                .Include("~/Content/select2/select2.css"));            
+                .Include("~/Content/select2/select2.css"));
 
             // Set EnableOptimizations to false for debugging. For more information,
             // visit http://go.microsoft.com/fwlink/?LinkId=301862
