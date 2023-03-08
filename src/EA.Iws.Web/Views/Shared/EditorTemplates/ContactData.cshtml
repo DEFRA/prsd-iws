@@ -11,7 +11,7 @@
     @Html.Gds().LabelFor(model => model.Telephone)
     @Html.Gds().ValidationMessageFor(model => model.TelephonePrefix)
     @Html.Gds().ValidationMessageFor(model => model.Telephone)
-    @Html.Gds().HintParagraph(ContactDataResources.TelephoneHint)
+    @Html.Gds().HintSpan(ContactDataResources.TelephoneHint)
     <fieldset>
         <div class="international-number">
             <div class="plus-label">
@@ -20,7 +20,7 @@
             <div class="international-number-prefix">
                 @Html.Gds().TextBoxFor(m => m.TelephonePrefix, new { @title = ContactDataResources.TelephonePrefixTitle, @type = "number" })
             </div>
-            <div class="international-number-body">
+            <div class="international-number-body" style="margin-left: -40px">
                 @Html.Gds().TextBoxFor(m => m.Telephone, new { @type = "number" })
             </div>
         </div>
@@ -31,7 +31,7 @@
     @Html.Gds().LabelFor(model => model.Fax)
     @Html.Gds().ValidationMessageFor(model => model.FaxPrefix)
     @Html.Gds().ValidationMessageFor(model => model.Fax)
-    @Html.Gds().HintParagraph(ContactDataResources.FaxHint)
+    @Html.Gds().HintSpan(ContactDataResources.FaxHint)
     <fieldset>
         <div class="international-number">
             <div class="plus-label">
@@ -40,7 +40,7 @@
             <div class="international-number-prefix">
                 @Html.Gds().TextBoxFor(m => m.FaxPrefix, new { @title = ContactDataResources.FaxPrefixTitle, @type = "number" })
             </div>
-            <div class="international-number-body">
+            <div class="international-number-body" style="margin-left: -40px">
                 @Html.Gds().TextBoxFor(m => m.Fax, new { @type = "number" })
             </div>
         </div>

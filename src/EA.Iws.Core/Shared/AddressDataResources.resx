@@ -135,7 +135,7 @@
   <data name="Country" xml:space="preserve">
     <value>Country</value>
   </data>
-  <data name="CountryLabel" xml:space="preserve">
+  <data name="CountryHint" xml:space="preserve">
     <value>Select the country the organisation is operating from</value>
   </data>
   <data name="CountryRequired" xml:space="preserve">
@@ -149,6 +149,9 @@
   </data>
   <data name="Postcode" xml:space="preserve">
     <value>Post code</value>
+  </data>
+  <data name="PostCodeHint" xml:space="preserve">
+    <value>For example: AB1 2CD</value>
   </data>
   <data name="PostcodeRequired" xml:space="preserve">
     <value>Please enter the post code</value>

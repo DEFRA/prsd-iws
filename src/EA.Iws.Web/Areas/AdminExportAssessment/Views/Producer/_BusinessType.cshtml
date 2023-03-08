@@ -41,7 +41,7 @@
     <div class="panel @(Model.Business.BusinessType != null && Model.Business.BusinessType.Equals("Limited company") ? "" : "js-hidden")" id="companies-house-number">
         <div class="form-group @Html.Gds().FormGroupClass(m => m.Business.RegistrationNumber)" data-validation-behaviour="ignore-parent">
             @Html.Gds().LabelFor(m => m.Business.RegistrationNumber, false)
-            <span class="form-hint">This should be your Companies House number</span>
+            <span class="form-hint">The 8-character code as documented by Companies House.</span>
             @Html.Gds().ValidationMessageFor(m => m.Business.RegistrationNumber)
             @Html.Gds().TextBoxFor(m => m.Business.RegistrationNumber)
 

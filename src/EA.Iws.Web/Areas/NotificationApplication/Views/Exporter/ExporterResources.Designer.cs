@@ -61,20 +61,11 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.Exporter {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This should be the correspondence address for the exporter - notifier..
+        ///   Looks up a localized string similar to This should be the correspondence address for the exporter - notifier. Note that this may be different to the registered company address so ensure you use the appropriate address..
         /// </summary>
         public static string AddressDescription {
             get {
                 return ResourceManager.GetString("AddressDescription", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Note that this may be different to the registered company address so ensure you use the appropriate address..
-        /// </summary>
-        public static string AddressDescriptionNote {
-            get {
-                return ResourceManager.GetString("AddressDescriptionNote", resourceCulture);
             }
         }
         
@@ -88,7 +79,7 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.Exporter {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This should be your Companies House number.
+        ///   Looks up a localized string similar to The 8-character code as documented by Companies House..
         /// </summary>
         public static string CompanyRegistrationNumber {
             get {
@@ -133,7 +124,7 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.Exporter {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to For Limited company, this should be your Companies House number.
+        ///   Looks up a localized string similar to For Limited company, the 8-character code as documented by Companies House.
         ///            For sole trader, partnership or any other organisation type, if you are acting on behalf of the waste generator-producer, this will be your waste broker licence number..
         /// </summary>
         public static string NonJavascriptMessage {
