@@ -121,7 +121,7 @@
     <value>Address</value>
   </data>
   <data name="AddressDescription" xml:space="preserve">
-    <value>This should be the correspondence address for the importer - consignee</value>
+    <value>This should be the correspondence address for the importer - consignee. Note that this may be different to the registered company address so ensure you use the appropriate address.</value>
   </data>
   <data name="Contact" xml:space="preserve">
     <value>Contact person</value>

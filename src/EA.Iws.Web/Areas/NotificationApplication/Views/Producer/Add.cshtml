@@ -22,7 +22,7 @@
 
     <h2 class="heading-medium">@AddEditProducerResources.Address</h2>
     <hr />
-    <span class="form-hint">@AddEditProducerResources.AddressDescription</span>
+    @Html.Gds().HintParagraph(@AddEditProducerResources.AddressDescription)
 
     <fieldset>
         <legend class="visuallyhidden">@AddEditProducerResources.Address</legend>
@@ -30,7 +30,7 @@
     </fieldset>
 
     <h2 class="heading-medium">@AddEditProducerResources.Contact</h2>
-    <hr/>
+    <hr />
 
     <fieldset>
         <legend class="visuallyhidden">@AddEditProducerResources.Contact</legend>

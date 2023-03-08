@@ -117,9 +117,9 @@ namespace EA.Iws.Core.Shared {
         /// <summary>
         ///   Looks up a localized string similar to Select the country the organisation is operating from.
         /// </summary>
-        public static string CountryLabel {
+        public static string CountryHint {
             get {
-                return ResourceManager.GetString("CountryLabel", resourceCulture);
+                return ResourceManager.GetString("CountryHint", resourceCulture);
             }
         }
         
@@ -156,6 +156,15 @@ namespace EA.Iws.Core.Shared {
         public static string Postcode {
             get {
                 return ResourceManager.GetString("Postcode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to For example: AB1 2CD.
+        /// </summary>
+        public static string PostCodeHint {
+            get {
+                return ResourceManager.GetString("PostCodeHint", resourceCulture);
             }
         }
         
