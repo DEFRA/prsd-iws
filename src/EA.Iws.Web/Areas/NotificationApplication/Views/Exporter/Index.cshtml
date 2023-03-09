@@ -25,21 +25,21 @@
     </header>
     <fieldset class="govuk-fieldset">
         <legend class="govuk-label">
-            @ExporterResources.IsOrgUKBased
+            @ExporterResources.IsUkBased
         </legend>
     </fieldset>
-    <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.IsOrgUKBased)">
+    <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.IsUkBased)">
         <fieldset class="govuk-fieldset">
             <div class="govuk-radios" data-module="govuk-radios">
                 <div class="govuk-radios__item">
-                    @Html.RadioButtonFor(m => m.IsOrgUKBased, true, new { id = "yes", @class = "govuk-radios__input" })
+                    @Html.RadioButtonFor(m => m.IsUkBased, true, new { id = "yes", @class = "govuk-radios__input" })
                     <label class="govuk-label govuk-radios__label" for="yes">
                         Yes
                     </label>
                 </div>
 
                 <div class="govuk-radios__item">
-                    @Html.RadioButtonFor(m => m.IsOrgUKBased, false, new { id = "no", @class = "govuk-radios__input" })
+                    @Html.RadioButtonFor(m => m.IsUkBased, false, new { id = "no", @class = "govuk-radios__input" })
                     <label class="govuk-label govuk-radios__label" for="no">
                         No
                     </label>
