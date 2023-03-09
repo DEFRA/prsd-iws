@@ -139,6 +139,7 @@
     <Content Include="scripts\Update\0007-Support\20230105-CCN057-ArchiveNotificationChanges.sql" />
     <Content Include="scripts\Update\0007-Support\20230106-ExportNotification-Rejection-DataUpdate.sql" />
     <Content Include="scripts\Update\0007-Support\20230125-P37532-ProducerReportCacheIndex.sql" />
+    <Content Include="scripts\Update\0007-Support\20230308-CCN059-TooltipChanges.sql" />
     <Content Include="scripts\Update\placeholder.txt" />
     <Content Include="unindexed-foreign-keys.sql" />
     <Content Include="scripts\Everytime\01-Functions\0003-Reports-PricingInfo.sql" />

@@ -16,9 +16,8 @@
         [Display(Name = "BusinessTypeHeader", ResourceType = typeof(BusinessResources))]
         public string BusinessTypeHeader { get; set; }
 
-        [Required(ErrorMessageResourceType = typeof(BusinessResources), ErrorMessageResourceName = "OrgTypeRequired")]
         [Display(Name = "OrgType", ResourceType = typeof(BusinessResources))]
-        public bool? IsUKBased { get; set; }
+        public bool? IsUkBased { get; set; }
 
         [Required(ErrorMessageResourceType = typeof(BusinessResources), ErrorMessageResourceName = "OrgTypeRequired")]
         [Display(Name = "OrgType", ResourceType = typeof(BusinessResources))]

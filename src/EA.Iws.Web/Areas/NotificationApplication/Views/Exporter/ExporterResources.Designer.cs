@@ -117,9 +117,9 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.Exporter {
         /// <summary>
         ///   Looks up a localized string similar to Is the organisation based and registered in the UK and/or using a UK address?.
         /// </summary>
-        public static string IsOrgUKBased {
+        public static string IsUkBased {
             get {
-                return ResourceManager.GetString("IsOrgUKBased", resourceCulture);
+                return ResourceManager.GetString("IsUkBased", resourceCulture);
             }
         }
         

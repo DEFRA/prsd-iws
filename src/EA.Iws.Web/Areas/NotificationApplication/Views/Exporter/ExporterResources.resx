@@ -135,7 +135,7 @@
   <data name="Header" xml:space="preserve">
     <value>Who is the exporter - notifier?</value>
   </data>
-  <data name="IsOrgUKBased" xml:space="preserve">
+  <data name="IsUkBased" xml:space="preserve">
     <value>Is the organisation based and registered in the UK and/or using a UK address?</value>
   </data>
   <data name="NonJavascriptMessage" xml:space="preserve">
