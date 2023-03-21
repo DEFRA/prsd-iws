@@ -177,7 +177,7 @@
             {
                 DateTime preNotificateDate = PrenotificationDate.Date.Value;
 
-                if (ActualShipmentDate.Date < preNotificateDate) //here
+                if (ActualShipmentDate.Date < preNotificateDate)
                 {
                     yield return new ValidationResult(CaptureViewModelResources.ActualDateBeforePrenotification, new[] { "ActualShipmentDate" });
                 }
@@ -202,7 +202,7 @@
 
             if (Receipt.IsComplete())
             {
-                if (Receipt.ReceivedDate.Date < ActualShipmentDate.Date) //here
+                if (Receipt.ReceivedDate.Date < ActualShipmentDate.Date)
                 {
                     yield return new ValidationResult(CaptureViewModelResources.ReceivedDateBeforeActualDate, new[] { "Receipt.ReceivedDate" });
                 }
