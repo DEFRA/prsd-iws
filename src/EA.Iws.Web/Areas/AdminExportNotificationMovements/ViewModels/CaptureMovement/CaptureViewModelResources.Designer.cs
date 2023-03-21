@@ -19,7 +19,7 @@ namespace EA.Iws.Web.Areas.AdminExportNotificationMovements.ViewModels.CaptureMo
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class CaptureViewModelResources {
@@ -71,7 +71,7 @@ namespace EA.Iws.Web.Areas.AdminExportNotificationMovements.ViewModels.CaptureMo
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The &quot;actual date of shipment&quot; should not be more than 30 calendar days after the &quot;prenotification date&quot;. Please advise the exporter or enter a different date..
+        ///   Looks up a localized string similar to The &quot;actual date of shipment&quot; should not be more than 60 calendar days after the &quot;prenotification date&quot;. Please advise the exporter or enter a different date..
         /// </summary>
         public static string ActualDateGreaterthanSixtyDays {
             get {
