@@ -126,6 +126,9 @@
   <data name="CompanyRegistrationNumber" xml:space="preserve">
     <value>The 8-character code as documented by Companies House.</value>
   </data>
+  <data name="CompanyRegistrationNumberNonUk" xml:space="preserve">
+    <value>This should be the registration number of the company in the country in which they are registered.</value>
+  </data>
   <data name="ContactDescription" xml:space="preserve">
     <value>This should be the contact person for the exporter - notifier</value>
   </data>

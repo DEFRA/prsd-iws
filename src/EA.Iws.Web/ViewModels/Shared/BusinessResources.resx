@@ -189,7 +189,7 @@
   <data name="OrgHelpWithNamingContent3" xml:space="preserve">
     <value>There should be no spaces either side of special characters, particularly at the end of the name</value>
   </data>
-  <data name="OrgHelpWithNamingContent4" xml:space="preserve">
+  <data name="OrgHelpWithNamingContent4Uk" xml:space="preserve">
     <value>There should be no full stops present</value>
   </data>
   <data name="OrgHelpWithNamingContent5" xml:space="preserve">
@@ -203,5 +203,14 @@
   </data>
   <data name="OrgTradingNameHint" xml:space="preserve">
     <value>The name your organisation trades under if different to your organisation name</value>
+  </data>
+  <data name="OrgHelpWithNamingContent4NonUk" xml:space="preserve">
+    <value>Company suffixes should always be uppercase with no fullstops (excluding GmbH)</value>
+  </data>
+  <data name="RegistrationNumberHintNonUK" xml:space="preserve">
+    <value>This should be the registration number of the company in the country in which they are registered.</value>
+  </data>
+  <data name="RegistrationNumberHintUK" xml:space="preserve">
+    <value>The 8-character code as documented by Companies House.</value>
   </data>
 </root>
