@@ -10,6 +10,10 @@
     using Requests.AddressBook;
     using Requests.Exporters;
     using System;
+    using System.Configuration;
+    using System.IO;
+    using System.Net;
+    using System.Security.Cryptography.X509Certificates;
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using ViewModels.Exporter;
@@ -119,6 +123,31 @@
             var addressRecord = addressBookMapper.Map(model, AddressRecordType.Producer);
 
             await mediator.SendAsync(addressRecord);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public JsonResult SearchCompanyName(string companyNumber)
+        {
+            if (!this.Request.IsAjaxRequest())
+            {
+                throw new InvalidOperationException();
+            }
+
+            string companyHouseAPIHost = ConfigurationManager.AppSettings["Iws.CompanyHouseAPIHost"];
+
+            var url = "https://" + companyHouseAPIHost + "/DEFRA/v2.1/CompaniesHouse/companies/" + companyNumber;
+
+            string filePath = Path.GetDirectoryName(AppDomain.CurrentDomain.BaseDirectory) + "\\Cert\\Boomi-IWS-TST.cer";
+
+            X509Certificate2 certificate = new X509Certificate2(filePath, "kN2S6!p6F*LH", X509KeyStorageFlags.MachineKeySet | X509KeyStorageFlags.PersistKeySet | X509KeyStorageFlags.Exportable);
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
+            request.ClientCertificates.Add(certificate);
+            request.Method = "GET";
+            HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+
+            var returnData = "test company";
+            return Json(returnData, JsonRequestBehavior.AllowGet);
         }
     }
 }
