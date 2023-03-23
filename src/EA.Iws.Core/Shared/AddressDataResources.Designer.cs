@@ -88,11 +88,29 @@ namespace EA.Iws.Core.Shared {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Street Name followed by Unit Number. For example: Example Street, 21.
+        /// </summary>
+        public static string AddressLine1HintNonUK {
+            get {
+                return ResourceManager.GetString("AddressLine1HintNonUK", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Town or city.
         /// </summary>
         public static string City {
             get {
                 return ResourceManager.GetString("City", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Area code (typically multiple digits with two characters) followed by Town. For example: 4782 PW, Moerdijk.
+        /// </summary>
+        public static string CityHintNonUK {
+            get {
+                return ResourceManager.GetString("CityHintNonUK", resourceCulture);
             }
         }
         

@@ -88,6 +88,15 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.Exporter {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to This should be the registration number of the company in the country in which they are registered..
+        /// </summary>
+        public static string CompanyRegistrationNumberNonUk {
+            get {
+                return ResourceManager.GetString("CompanyRegistrationNumberNonUk", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to This should be the contact person for the exporter - notifier.
         /// </summary>
         public static string ContactDescription {
