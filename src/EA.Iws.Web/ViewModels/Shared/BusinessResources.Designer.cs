@@ -151,11 +151,20 @@ namespace EA.Iws.Web.ViewModels.Shared {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Company suffixes should always be uppercase with no fullstops (excluding GmbH).
+        /// </summary>
+        public static string OrgHelpWithNamingContent4NonUk {
+            get {
+                return ResourceManager.GetString("OrgHelpWithNamingContent4NonUk", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to There should be no full stops present.
         /// </summary>
-        public static string OrgHelpWithNamingContent4 {
+        public static string OrgHelpWithNamingContent4Uk {
             get {
-                return ResourceManager.GetString("OrgHelpWithNamingContent4", resourceCulture);
+                return ResourceManager.GetString("OrgHelpWithNamingContent4Uk", resourceCulture);
             }
         }
         
@@ -282,6 +291,24 @@ namespace EA.Iws.Web.ViewModels.Shared {
         public static string RegistrationNumber {
             get {
                 return ResourceManager.GetString("RegistrationNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This should be the registration number of the company in the country in which they are registered..
+        /// </summary>
+        public static string RegistrationNumberHintNonUK {
+            get {
+                return ResourceManager.GetString("RegistrationNumberHintNonUK", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The 8-character code as documented by Companies House..
+        /// </summary>
+        public static string RegistrationNumberHintUK {
+            get {
+                return ResourceManager.GetString("RegistrationNumberHintUK", resourceCulture);
             }
         }
         
