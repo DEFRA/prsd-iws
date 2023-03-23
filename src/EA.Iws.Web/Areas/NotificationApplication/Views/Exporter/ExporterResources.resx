@@ -138,6 +138,9 @@
   <data name="IsUkBased" xml:space="preserve">
     <value>Is the organisation based and registered in the UK and/or using a UK address?</value>
   </data>
+  <data name="No" xml:space="preserve">
+    <value>No</value>
+  </data>
   <data name="NonJavascriptMessage" xml:space="preserve">
     <value>For Limited company, the 8-character code as documented by Companies House.
             For sole trader, partnership or any other organisation type, if you are acting on behalf of the waste generator-producer, this will be your waste broker licence number.</value>
@@ -147,5 +150,8 @@
   </data>
   <data name="Title" xml:space="preserve">
     <value>Who is the exporter-notifier?</value>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>Yes</value>
   </data>
 </root>

@@ -171,7 +171,11 @@
     </details>
     @Html.Gds().LabelFor(m => m.Name)
     @Html.Gds().ValidationMessageFor(m => m.Name)
-    @Html.Gds().HintSpan(BusinessResources.OrgNameHint)
+    <div>
+        <button id="btnImportName" class="govuk-button" type="submit">Import name</button>
+    </div>    
+    
+    @Html.Gds().HintSpan(BusinessResources.OrgNameHint, id: "hintOrgName")
 
     @if (addressType.HasValue)
     {
@@ -193,3 +197,4 @@
         </span>
     </div>
 </div>
+

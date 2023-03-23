@@ -34,14 +34,14 @@
                 <div class="govuk-radios__item">
                     @Html.RadioButtonFor(m => m.IsUkBased, true, new { id = "yes", @class = "govuk-radios__input" })
                     <label class="govuk-label govuk-radios__label" for="yes">
-                        Yes
+                        @ExporterResources.Yes
                     </label>
                 </div>
 
                 <div class="govuk-radios__item">
                     @Html.RadioButtonFor(m => m.IsUkBased, false, new { id = "no", @class = "govuk-radios__input" })
                     <label class="govuk-label govuk-radios__label" for="no">
-                        No
+                        @ExporterResources.No
                     </label>
                 </div>
             </div>
@@ -82,4 +82,90 @@
     </div>
 
     <button class="govuk-button" type="submit">@Constants.ContinueButtonText</button>
+}
+
+@section scripts {
+    <script>
+        $(function () {
+            $("#btnImportName").hide();
+            $("#hintOrgName").show();
+
+            $('#yes').click(function () {
+                var isLimitedCompany = $("input[id='LimitedCompany']:checked").val();
+                if (isLimitedCompany) {
+                    $("#btnImportName").show();
+                    $("#hintOrgName").hide();
+                    $("#Business_Name").attr('readonly', 'readonly');
+                } else {
+                    $("#btnImportName").hide();
+                    $("#hintOrgName").show();
+                    $("#Business_Name").removeAttr('readonly');
+                }
+            });
+
+            $('#no').click(function () {
+                $("#btnImportName").hide();
+                $("#hintOrgName").show();
+                $("#Business_Name").removeAttr('readonly');
+            });
+
+            $('#SoleTrader').click(function () {
+                var isUkBased = $("input[id='yes']:checked").val();
+                if (isUkBased) {
+                    if ($(this).is(':checked')) {
+                        $("#btnImportName").hide();
+                        $("#hintOrgName").show();
+                        $("#Business_Name").removeAttr('readonly');
+                    }
+                }
+            });
+
+            $('#Partnership').click(function () {
+                var isUkBased = $("input[id='yes']:checked").val();
+                if (isUkBased) {
+                    if ($(this).is(':checked')) {
+                        $("#btnImportName").hide();
+                        $("#hintOrgName").show();
+                        $("#Business_Name").removeAttr('readonly');
+                    }
+                }
+            });
+
+            $('#LimitedCompany').click(function () {
+                var isUkBased = $("input[id='yes']:checked").val();
+                if (isUkBased) {
+                    if ($(this).is(':checked')) {
+                        $("#btnImportName").show();
+                        $("#hintOrgName").hide();
+                        $("#Business_Name").attr('readonly', 'readonly');
+                    }
+                }
+            });
+
+            $('#Other').click(function () {
+                var isUkBased = $("input[id='yes']:checked").val();
+                if (isUkBased) {
+                    if ($(this).is(':checked')) {
+                        $("#btnImportName").hide();
+                        $("#hintOrgName").show();
+                        $("#Business_Name").removeAttr('readonly');
+                    }
+                }
+            });
+
+            $('#btnImportName').click(function () {
+                var regNumber = $('#Business_RegistrationNumber').val();
+                $.ajax({
+                    url: 'exporter/SearchCompanyName',
+                    type: 'POST',
+                    data: { 'companyNumber': regNumber, __RequestVerificationToken: $("[name=__RequestVerificationToken]").val() },
+                    success: function (result) {
+                        $("#Business_Name").val(result);
+                    }
+                });
+
+                event.preventDefault();
+            });
+        });
+    </script>
 }
