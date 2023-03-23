@@ -21,49 +21,7 @@
     @Html.AntiForgeryToken()
     @Html.Gds().ValidationSummary()
     @Html.HiddenFor(m => m.NotificationId)
-
-    @section Scripts {
-        <script>
-            function showHideTooltips() {
-                var isUkOrg = document.querySelector('input[name="IsUkBased"]:checked').value;
-                if (isUkOrg === 'True') {
-                    hideShowUkSpecificTooltips('block');
-                    hideShowNonUkSpecificTooltips('none');
-                }
-                else {
-                    hideShowUkSpecificTooltips('none');
-                    hideShowNonUkSpecificTooltips('block');
-                }
-            }
-
-            function hideShowUkSpecificTooltips(displayValue) {
-                if (displayValue === 'block') {
-                    document.getElementById('compRegNumHintSpan').textContent = '@ExporterResources.CompanyRegistrationNumber';
-                    document.getElementById('orgHelpWithNamingContent4Uk').style.display = '';
-                }
-                else {
-                    document.getElementById('orgHelpWithNamingContent4Uk').style.display = displayValue;
-                }
-
-                document.getElementById('compHouseDetailsBlock').style.display = displayValue;
-                document.getElementById('addressPostCodeHint').style.display = displayValue;
-            }
-
-            function hideShowNonUkSpecificTooltips(displayValue) {
-                if (displayValue === 'block') {
-                    document.getElementById('compRegNumHintSpan').textContent = '@ExporterResources.CompanyRegistrationNumberNonUk';
-                    document.getElementById('orgHelpWithNamingContent4NonUk').style.display = '';
-                }
-                else {
-                    document.getElementById('orgHelpWithNamingContent4NonUk').style.display = displayValue;
-                }
-                document.getElementById('addressLine1HintNonUk').style.display = displayValue;
-                document.getElementById('addressCityHintNonUk').style.display = displayValue;
-            }
-            document.addEventListener("DOMContentLoaded", showHideTooltips);
-        </script>
-    }
-
+    
     <header class="hgroup">
         <h1 class="govuk-heading-l">@ExporterResources.Header</h1>
     </header>
@@ -130,6 +88,44 @@
 
 @section scripts {
     <script>
+        function showHideTooltips() {
+                var isUkOrg = document.querySelector('input[name="IsUkBased"]:checked').value;
+                if (isUkOrg === 'True') {
+                    hideShowUkSpecificTooltips('block');
+                    hideShowNonUkSpecificTooltips('none');
+                }
+                else {
+                    hideShowUkSpecificTooltips('none');
+                    hideShowNonUkSpecificTooltips('block');
+                }
+            }
+
+            function hideShowUkSpecificTooltips(displayValue) {
+                if (displayValue === 'block') {
+                    document.getElementById('compRegNumHintSpan').textContent = '@ExporterResources.CompanyRegistrationNumber';
+                    document.getElementById('orgHelpWithNamingContent4Uk').style.display = '';
+                }
+                else {
+                    document.getElementById('orgHelpWithNamingContent4Uk').style.display = displayValue;
+                }
+
+                document.getElementById('compHouseDetailsBlock').style.display = displayValue;
+                document.getElementById('addressPostCodeHint').style.display = displayValue;
+            }
+
+            function hideShowNonUkSpecificTooltips(displayValue) {
+                if (displayValue === 'block') {
+                    document.getElementById('compRegNumHintSpan').textContent = '@ExporterResources.CompanyRegistrationNumberNonUk';
+                    document.getElementById('orgHelpWithNamingContent4NonUk').style.display = '';
+                }
+                else {
+                    document.getElementById('orgHelpWithNamingContent4NonUk').style.display = displayValue;
+                }
+                document.getElementById('addressLine1HintNonUk').style.display = displayValue;
+                document.getElementById('addressCityHintNonUk').style.display = displayValue;
+            }
+        document.addEventListener("DOMContentLoaded", showHideTooltips);
+
         $(function () {
             $("#btnImportName").hide();
             $("#hintOrgName").show();
