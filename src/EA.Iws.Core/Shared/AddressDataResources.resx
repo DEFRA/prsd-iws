@@ -126,8 +126,14 @@
   <data name="Address2" xml:space="preserve">
     <value>Address line 2</value>
   </data>
+  <data name="AddressLine1HintNonUK" xml:space="preserve">
+    <value>Street Name followed by Unit Number. For example: Example Street, 21</value>
+  </data>
   <data name="City" xml:space="preserve">
     <value>Town or city</value>
+  </data>
+  <data name="CityHintNonUK" xml:space="preserve">
+    <value>Area code (typically multiple digits with two characters) followed by Town. For example: 4782 PW, Moerdijk</value>
   </data>
   <data name="CityRequired" xml:space="preserve">
     <value>Please enter your town or city</value>

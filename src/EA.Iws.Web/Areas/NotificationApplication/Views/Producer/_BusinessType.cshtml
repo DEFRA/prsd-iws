@@ -37,13 +37,14 @@
     <div class="panel @(Model.Business.BusinessType != null && Model.Business.BusinessType.Equals("Limited company") ? "" : "js-hidden")" id="companies-house-number">
         <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.Business.RegistrationNumber)" data-validation-behaviour="ignore-parent">
             @Html.Gds().LabelFor(m => m.Business.RegistrationNumber, false)
-            <span class="form-hint">The 8-character code as documented by Companies House.</span>
+            <span class="form-hint" id="RegNumHintUk">@BusinessResources.RegistrationNumberHintUK</span>
+            <span class="form-hint" id="RegNumHintNonUk" style="display:none;">@BusinessResources.RegistrationNumberHintNonUK</span>
             @Html.Gds().ValidationMessageFor(m => m.Business.RegistrationNumber)
             @Html.Gds().TextBoxFor(m => m.Business.RegistrationNumber)
             <div>
                 <br />
             </div>
-            <details data-target="companies-house-number" class="govuk-details" data-module="govuk-details">
+            <details id="CompaniesHouseSummary" data-target="companies-house-number" class="govuk-details" data-module="govuk-details">
                 <summary class="govuk-details__summary">
                     <span class="govuk-details__summary-text">
                         @BusinessResources.WhereToFindCompanyHouse
@@ -87,7 +88,7 @@
                 <ul class="govuk-list govuk-list--bullet">
                     <li>@BusinessResources.OrgHelpWithNamingContent2</li>
                     <li>@BusinessResources.OrgHelpWithNamingContent3</li>
-                    <li>@BusinessResources.OrgHelpWithNamingContent4</li>
+                    <li id="orgHelpWithNamingContent4Uk">@BusinessResources.OrgHelpWithNamingContent4Uk</li>
                     <li>@BusinessResources.OrgHelpWithNamingContent5</li>
                 </ul>
             </div>

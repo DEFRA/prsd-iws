@@ -12,6 +12,8 @@
     ViewBag.CompanyRegistrationNumber = ExporterResources.CompanyRegistrationNumber;
     ViewBag.NonJavascriptMessage = ExporterResources.NonJavascriptMessage;
     ViewBag.AddressType = AddressRecordType.Producer;
+    ViewBag.UseUKAddressValidationAndTooltips = true;
+    ViewBag.UseDefaultValidationAndToolTips = false;
 }
 
 @using (Html.BeginForm())
@@ -19,6 +21,48 @@
     @Html.AntiForgeryToken()
     @Html.Gds().ValidationSummary()
     @Html.HiddenFor(m => m.NotificationId)
+
+    @section Scripts {
+        <script>
+            function showHideTooltips() {
+                var isUkOrg = document.querySelector('input[name="IsUkBased"]:checked').value;
+                if (isUkOrg === 'True') {
+                    hideShowUkSpecificTooltips('block');
+                    hideShowNonUkSpecificTooltips('none');
+                }
+                else {
+                    hideShowUkSpecificTooltips('none');
+                    hideShowNonUkSpecificTooltips('block');
+                }
+            }
+
+            function hideShowUkSpecificTooltips(displayValue) {
+                if (displayValue === 'block') {
+                    document.getElementById('compRegNumHintSpan').textContent = '@ExporterResources.CompanyRegistrationNumber';
+                    document.getElementById('orgHelpWithNamingContent4Uk').style.display = '';
+                }
+                else {
+                    document.getElementById('orgHelpWithNamingContent4Uk').style.display = displayValue;
+                }
+
+                document.getElementById('compHouseDetailsBlock').style.display = displayValue;
+                document.getElementById('addressPostCodeHint').style.display = displayValue;
+            }
+
+            function hideShowNonUkSpecificTooltips(displayValue) {
+                if (displayValue === 'block') {
+                    document.getElementById('compRegNumHintSpan').textContent = '@ExporterResources.CompanyRegistrationNumberNonUk';
+                    document.getElementById('orgHelpWithNamingContent4NonUk').style.display = '';
+                }
+                else {
+                    document.getElementById('orgHelpWithNamingContent4NonUk').style.display = displayValue;
+                }
+                document.getElementById('addressLine1HintNonUk').style.display = displayValue;
+                document.getElementById('addressCityHintNonUk').style.display = displayValue;
+            }
+            document.addEventListener("DOMContentLoaded", showHideTooltips);
+        </script>
+    }
 
     <header class="hgroup">
         <h1 class="govuk-heading-l">@ExporterResources.Header</h1>
@@ -32,14 +76,14 @@
         <fieldset class="govuk-fieldset">
             <div class="govuk-radios" data-module="govuk-radios">
                 <div class="govuk-radios__item">
-                    @Html.RadioButtonFor(m => m.IsUkBased, true, new { id = "yes", @class = "govuk-radios__input" })
+                    @Html.RadioButtonFor(m => m.IsUkBased, true, new { id = "yes", @class = "govuk-radios__input", @onchange = "showHideTooltips()" })
                     <label class="govuk-label govuk-radios__label" for="yes">
                         Yes
                     </label>
                 </div>
 
                 <div class="govuk-radios__item">
-                    @Html.RadioButtonFor(m => m.IsUkBased, false, new { id = "no", @class = "govuk-radios__input" })
+                    @Html.RadioButtonFor(m => m.IsUkBased, false, new { id = "no", @class = "govuk-radios__input", @onchange = "showHideTooltips()" })
                     <label class="govuk-label govuk-radios__label" for="no">
                         No
                     </label>
