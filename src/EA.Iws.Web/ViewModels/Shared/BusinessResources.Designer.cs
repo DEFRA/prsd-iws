@@ -178,6 +178,15 @@ namespace EA.Iws.Web.ViewModels.Shared {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Use the &apos;Import name&apos; button to import the name from Companies House using the registration number. If no organisation name is found, please check your registration number and retry. If your Organisation name is not available, you may need to change the Company type and enter the name manually..
+        /// </summary>
+        public static string OrgHelpWithNamingDescription {
+            get {
+                return ResourceManager.GetString("OrgHelpWithNamingDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Help with appropriate naming conventions.
         /// </summary>
         public static string OrgHelpWithNamingTitle {

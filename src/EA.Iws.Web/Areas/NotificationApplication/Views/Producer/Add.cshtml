@@ -52,3 +52,100 @@
 
     <button class="govuk-button" type="submit">@Constants.ContinueButtonText</button>
 }
+
+@section scripts {
+    <script type="text/javascript">
+
+        $(function () {
+            //On page load, controls hide
+            $("#btnImportName").hide();
+            $("#dvOrgNameDesction").hide();
+
+            //On page load, controls show
+            $("#hintOrgName").show();
+            $("#dvOrgNameDetails").show();
+
+            $('#SoleTrader').click(function () {
+                if ($(this).is(':checked')) {
+                    $("#btnImportName").hide();
+                    $("#hintOrgName").show();
+                    $("#Business_Name").removeAttr('readonly');
+                    $("#dvOrgNameDesction").hide();
+                    $("#dvOrgNameDetails").show();
+                }
+            });
+
+            $('#Partnership').click(function () {
+                if ($(this).is(':checked')) {
+                    $("#btnImportName").hide();
+                    $("#hintOrgName").show();
+                    $("#Business_Name").removeAttr('readonly');
+                    $("#dvOrgNameDesction").hide();
+                    $("#dvOrgNameDetails").show();
+                }
+            });
+
+            $('#LimitedCompany').click(function () {
+                if ($(this).is(':checked')) {
+                    $("#btnImportName").show();
+                    $("#hintOrgName").hide();
+                    $("#Business_Name").attr('readonly', 'readonly');
+                    $("#dvOrgNameDesction").show();
+                    $("#dvOrgNameDetails").hide();
+                }
+            });
+
+            $('#Other').click(function () {
+                if ($(this).is(':checked')) {
+                    $("#btnImportName").hide();
+                    $("#hintOrgName").show();
+                    $("#Business_Name").removeAttr('readonly');
+                    $("#dvOrgNameDesction").hide();
+                    $("#dvOrgNameDetails").show();
+                }
+            });
+
+            $('#btnImportName').click(function () {
+                var regNumber = $('#Business_RegistrationNumber').val();
+
+                let formData = {
+                    NotificationId: $("#NotificationId").val(),
+                    IsUkBased: document.querySelector('input[name="IsUkBased"]:checked').value,
+                    IsAddedToAddressBook: $("#IsAddedToAddressBook").val(),
+                    Business: { RegistrationNumber: regNumber }
+                }
+
+                if ((regNumber == null) || (regNumber == '')) {
+
+                    //$.ajax({
+                    //    url: 'exporter/IndexWithError',
+                    //    type: 'POST',
+                    //    dataType: 'json',
+                    //    contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+                    //    data: { model: formData, __RequestVerificationToken: $("[name=__RequestVerificationToken]").val() },
+                    //    success: function (response) {
+                    //        location.reload();
+                    //        alert('hellooo');
+                    //    }
+                    //});
+
+
+                } else {
+
+                    $.ajax({
+                        url: 'producer/SearchCompanyName',
+                        type: 'POST',
+                        dataType: 'json',
+                        contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+                        //data: { model: formData, __RequestVerificationToken: $("[name=__RequestVerificationToken]").val() }
+                        data: { "registrationNumber": regNumber, __RequestVerificationToken: $("[name=__RequestVerificationToken]").val() },
+                        success: function (result) {
+                            $("#Business_Name").val(result);
+                        }
+                    });
+                }
+                event.preventDefault();
+            });
+        });
+    </script>
+}

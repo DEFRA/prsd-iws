@@ -150,8 +150,12 @@
 
 <h2 class="heading-medium">@BusinessResources.OrgNameHeader</h2>
 <hr />
+<div class="govuk-form-group" id="dvOrgNameDesction">
+    @BusinessResources.OrgHelpWithNamingDescription
+</div>
+
 <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.Name)">
-    <details class="govuk-details" data-module="govuk-details">
+    <details class="govuk-details" data-module="govuk-details"  id="dvOrgNameDetails">
         <summary class="govuk-details__summary">
             <span class="govuk-details__summary-text">
                 @BusinessResources.OrgHelpWithNamingTitle
@@ -170,12 +174,14 @@
             </div>
         </div>
     </details>
+
     @Html.Gds().LabelFor(m => m.Name)
     @Html.Gds().ValidationMessageFor(m => m.Name)
-    <div>
+
+    <div class="govuk-form-group">
         <button id="btnImportName" class="govuk-button" type="submit">Import name</button>
-    </div>    
-    
+    </div>
+
     @Html.Gds().HintSpan(BusinessResources.OrgNameHint, id: "hintOrgName")
 
     @if (addressType.HasValue)

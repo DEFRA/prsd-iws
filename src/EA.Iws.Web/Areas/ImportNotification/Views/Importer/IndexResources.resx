@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="ImportName" xml:space="preserve">
+    <value>Import name</value>
+  </data>
   <data name="LimitedCompanyLabel" xml:space="preserve">
     <value>Limited Company</value>
   </data>
@@ -125,6 +128,27 @@
   </data>
   <data name="OrganisationSubtitle" xml:space="preserve">
     <value>Organisation</value>
+  </data>
+  <data name="OrgHelpSummary" xml:space="preserve">
+    <value>Help with appropriate naming conventions</value>
+  </data>
+  <data name="OrgHelpSummaryDetailsHeader" xml:space="preserve">
+    <value>When inputting your organisation name, the following naming conventions should be used to minimise errors:</value>
+  </data>
+  <data name="OrgHelpSummaryDetailsPoint1" xml:space="preserve">
+    <value>Company name abbreviations should always be in uppercase with no fullstops</value>
+  </data>
+  <data name="OrgHelpSummaryDetailsPoint2" xml:space="preserve">
+    <value>Company suffixes should alwyas be uppercase with no fullstops</value>
+  </data>
+  <data name="OrgHelpSummaryDetailsPoint3" xml:space="preserve">
+    <value>There should be no spaces either side of special characters, particularly at the end of the name</value>
+  </data>
+  <data name="OrgHelpSummaryDetailsPoint4" xml:space="preserve">
+    <value>For example: Instead of 'A &amp; b Materials c.d.' the name should be 'A&amp;B Materials CD'</value>
+  </data>
+  <data name="OrgHelpWithNamingDescription" xml:space="preserve">
+    <value>Use the 'Import name' button to import the name from Companies House using the registration number. If no organisation name is found, please check your registration number and retry. If your Organisation name is not available, you may need to change the Company type and enter the name manually.</value>
   </data>
   <data name="OrgNameHintMsg" xml:space="preserve">
     <value>For example 'A&amp;B Materials CD'</value>
