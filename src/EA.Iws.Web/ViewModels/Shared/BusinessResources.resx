@@ -213,4 +213,7 @@
   <data name="RegistrationNumberHintUK" xml:space="preserve">
     <value>The 8-character code as documented by Companies House.</value>
   </data>
+  <data name="OrgHelpWithNamingDescription" xml:space="preserve">
+    <value>Use the 'Import name' button to import the name from Companies House using the registration number. If no organisation name is found, please check your registration number and retry. If your Organisation name is not available, you may need to change the Company type and enter the name manually.</value>
+  </data>
 </root>

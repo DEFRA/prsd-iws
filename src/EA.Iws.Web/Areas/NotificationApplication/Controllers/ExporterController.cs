@@ -2,6 +2,9 @@
 {
     using Core.AddressBook;
     using Core.Notification.Audit;
+    using DocumentFormat.OpenXml.Office2019.Word.Cid;
+    using EA.Iws.Requests.NotificationAssessment;
+    using EA.Iws.Web.Infrastructure.Authorization;
     using Infrastructure;
     using Prsd.Core.Mapper;
     using Prsd.Core.Mediator;
@@ -127,27 +130,79 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public JsonResult SearchCompanyName(string companyNumber)
+        //public async Task<ActionResult> SearchCompanyName(ExporterViewModel model)
+        public ActionResult SearchCompanyName(string registrationNumber)
         {
             if (!this.Request.IsAjaxRequest())
             {
                 throw new InvalidOperationException();
             }
 
-            string companyHouseAPIHost = ConfigurationManager.AppSettings["Iws.CompanyHouseAPIHost"];
+            //string companyHouseAPIHost = ConfigurationManager.AppSettings["Iws.CompanyHouseAPIHost"];
 
-            var url = "https://" + companyHouseAPIHost + "/DEFRA/v2.1/CompaniesHouse/companies/" + companyNumber;
+            //var url = "https://" + companyHouseAPIHost + "/DEFRA/v2.1/CompaniesHouse/companies/" + registrationNumber;
 
-            string filePath = Path.GetDirectoryName(AppDomain.CurrentDomain.BaseDirectory) + "\\Cert\\Boomi-IWS-TST.cer";
+            //string filePath = Path.GetDirectoryName(AppDomain.CurrentDomain.BaseDirectory) + "\\Cert\\Boomi-IWS-TST.cer";
 
-            X509Certificate2 certificate = new X509Certificate2(filePath, "kN2S6!p6F*LH", X509KeyStorageFlags.MachineKeySet | X509KeyStorageFlags.PersistKeySet | X509KeyStorageFlags.Exportable);
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
-            request.ClientCertificates.Add(certificate);
-            request.Method = "GET";
-            HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+            //X509Certificate2 certificate = new X509Certificate2(filePath, "kN2S6!p6F*LH", X509KeyStorageFlags.MachineKeySet | X509KeyStorageFlags.PersistKeySet | X509KeyStorageFlags.Exportable);
+            //HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
+            //request.ClientCertificates.Add(certificate);
+            //request.Method = "GET";
+            //HttpWebResponse response = (HttpWebResponse)request.GetResponse();
 
-            var returnData = "test company";
+            var returnData = "A & B Test Company";
             return Json(returnData, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> IndexWithError(ExporterViewModel model)
+        {
+            //var data = await mediator.SendAsync(new GetAccountManagementData(id));
+            //var model = new AccountManagementViewModel(data);
+            //var canDeleteTransaction = await authorizationService.AuthorizeActivity(typeof(DeleteTransactionController));
+
+            //model.PaymentViewModel = new PaymentDetailsViewModel { NotificationId = id };
+            //model.RefundViewModel = await GetNewRefundDetailsViewModel(id);
+            //model.CanDeleteTransaction = canDeleteTransaction;
+
+            //model.TableData[commentId].Comments = string.Empty;
+            //model.ErrorCommentId = commentId;
+            //model.CommentError = "Enter a comment";
+            //ModelState.AddModelError("CommentError", "Enter a comment");
+
+            //ExporterViewModel model;
+            //var exporter = await mediator.SendAsync(new GetExporterByNotificationId(id));
+            //if (exporter.HasExporter)
+            //{
+            //    model = new ExporterViewModel(exporter);
+            //}
+            //else
+            //{
+            //    model = new ExporterViewModel
+            //    {
+            //        NotificationId = id
+            //    };
+            //}
+
+            foreach (var key in ModelState.Keys)
+            {
+                ModelState[key].Errors.Clear();
+            }
+
+            if (model.Business?.Name?.Contains(" T/A ") == true)
+            {
+                string[] businessNames = model.Business.Name.Split(new[] { " T/A " }, 2, StringSplitOptions.None);
+                model.Business.Name = businessNames[0];
+                model.Business.OrgTradingName = businessNames[1];
+            }
+
+            await this.BindCountryList(mediator);
+            model.Address.DefaultCountryId = this.GetDefaultCountryId();
+
+            ModelState.AddModelError("model.Business.RegistrationNumber", "Enter a Registration Number");
+
+            return View(model);
         }
     }
 }

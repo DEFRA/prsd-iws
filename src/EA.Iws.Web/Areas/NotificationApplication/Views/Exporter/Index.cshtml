@@ -21,7 +21,7 @@
     @Html.AntiForgeryToken()
     @Html.Gds().ValidationSummary()
     @Html.HiddenFor(m => m.NotificationId)
-    
+
     <header class="hgroup">
         <h1 class="govuk-heading-l">@ExporterResources.Header</h1>
     </header>
@@ -100,35 +100,47 @@
                 }
             }
 
-            function hideShowUkSpecificTooltips(displayValue) {
-                if (displayValue === 'block') {
-                    document.getElementById('compRegNumHintSpan').textContent = '@ExporterResources.CompanyRegistrationNumber';
-                    document.getElementById('orgHelpWithNamingContent4Uk').style.display = '';
-                }
-                else {
-                    document.getElementById('orgHelpWithNamingContent4Uk').style.display = displayValue;
-                }
-
-                document.getElementById('compHouseDetailsBlock').style.display = displayValue;
-                document.getElementById('addressPostCodeHint').style.display = displayValue;
+        function hideShowUkSpecificTooltips(displayValue) {
+            if (displayValue === 'block') {
+                document.getElementById('compRegNumHintSpan').textContent = '@ExporterResources.CompanyRegistrationNumber';
+                document.getElementById('orgHelpWithNamingContent4Uk').style.display = '';
+            }
+            else {
+                document.getElementById('orgHelpWithNamingContent4Uk').style.display = displayValue;
             }
 
-            function hideShowNonUkSpecificTooltips(displayValue) {
-                if (displayValue === 'block') {
-                    document.getElementById('compRegNumHintSpan').textContent = '@ExporterResources.CompanyRegistrationNumberNonUk';
-                    document.getElementById('orgHelpWithNamingContent4NonUk').style.display = '';
-                }
-                else {
-                    document.getElementById('orgHelpWithNamingContent4NonUk').style.display = displayValue;
-                }
-                document.getElementById('addressLine1HintNonUk').style.display = displayValue;
-                document.getElementById('addressCityHintNonUk').style.display = displayValue;
+            document.getElementById('compHouseDetailsBlock').style.display = displayValue;
+            document.getElementById('compHouseDetailsBlock').style.paddingTop = "20px";
+            document.getElementById('addressPostCodeHint').style.display = displayValue;
+        }
+
+        function hideShowNonUkSpecificTooltips(displayValue) {
+            if (displayValue === 'block') {
+                document.getElementById('compRegNumHintSpan').textContent = '@ExporterResources.CompanyRegistrationNumberNonUk';
+                document.getElementById('orgHelpWithNamingContent4NonUk').style.display = '';
             }
+            else {
+                document.getElementById('orgHelpWithNamingContent4NonUk').style.display = displayValue;
+            }
+            document.getElementById('addressLine1HintNonUk').style.display = displayValue;
+            document.getElementById('addressCityHintNonUk').style.display = displayValue;
+        }
         document.addEventListener("DOMContentLoaded", showHideTooltips);
 
         $(function () {
+            //On page load, controls hide
             $("#btnImportName").hide();
+            $("#dvOrgNameDesction").hide();
+
+            //On page load, controls show
             $("#hintOrgName").show();
+            $("#dvOrgNameDetails").show();
+
+            var isUkOrg = document.querySelector('input[name="IsUkBased"]:checked').value;
+            if (isUkOrg === 'True') {
+                $("#btnImportName").show();
+                $("#hintOrgName").hide();
+            }
 
             $('#yes').click(function () {
                 var isLimitedCompany = $("input[id='LimitedCompany']:checked").val();
@@ -136,10 +148,14 @@
                     $("#btnImportName").show();
                     $("#hintOrgName").hide();
                     $("#Business_Name").attr('readonly', 'readonly');
+                    $("#dvOrgNameDesction").show();
+                    $("#dvOrgNameDetails").hide();
                 } else {
                     $("#btnImportName").hide();
                     $("#hintOrgName").show();
                     $("#Business_Name").removeAttr('readonly');
+                    $("#dvOrgNameDesction").hide();
+                    $("#dvOrgNameDetails").show();
                 }
             });
 
@@ -147,6 +163,8 @@
                 $("#btnImportName").hide();
                 $("#hintOrgName").show();
                 $("#Business_Name").removeAttr('readonly');
+                $("#dvOrgNameDesction").hide();
+                $("#dvOrgNameDetails").show();
             });
 
             $('#SoleTrader').click(function () {
@@ -156,6 +174,8 @@
                         $("#btnImportName").hide();
                         $("#hintOrgName").show();
                         $("#Business_Name").removeAttr('readonly');
+                        $("#dvOrgNameDesction").hide();
+                        $("#dvOrgNameDetails").show();
                     }
                 }
             });
@@ -167,6 +187,8 @@
                         $("#btnImportName").hide();
                         $("#hintOrgName").show();
                         $("#Business_Name").removeAttr('readonly');
+                        $("#dvOrgNameDesction").hide();
+                        $("#dvOrgNameDetails").show();
                     }
                 }
             });
@@ -178,6 +200,8 @@
                         $("#btnImportName").show();
                         $("#hintOrgName").hide();
                         $("#Business_Name").attr('readonly', 'readonly');
+                        $("#dvOrgNameDesction").show();
+                        $("#dvOrgNameDetails").hide();
                     }
                 }
             });
@@ -189,21 +213,51 @@
                         $("#btnImportName").hide();
                         $("#hintOrgName").show();
                         $("#Business_Name").removeAttr('readonly');
+                        $("#dvOrgNameDesction").hide();
+                        $("#dvOrgNameDetails").show();
                     }
                 }
             });
 
             $('#btnImportName').click(function () {
                 var regNumber = $('#Business_RegistrationNumber').val();
-                $.ajax({
-                    url: 'exporter/SearchCompanyName',
-                    type: 'POST',
-                    data: { 'companyNumber': regNumber, __RequestVerificationToken: $("[name=__RequestVerificationToken]").val() },
-                    success: function (result) {
-                        $("#Business_Name").val(result);
-                    }
-                });
 
+                let formData = {
+                    NotificationId: $("#NotificationId").val(),
+                    IsUkBased: document.querySelector('input[name="IsUkBased"]:checked').value,
+                    IsAddedToAddressBook: $("#IsAddedToAddressBook").val(),
+                    Business: { RegistrationNumber: regNumber }
+                }
+
+                if ((regNumber == null) || (regNumber == '')) {
+
+                    //$.ajax({
+                    //    url: 'exporter/IndexWithError',
+                    //    type: 'POST',
+                    //    dataType: 'json',
+                    //    contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+                    //    data: { model: formData, __RequestVerificationToken: $("[name=__RequestVerificationToken]").val() },
+                    //    success: function (response) {
+                    //        location.reload();
+                    //        alert('hellooo');
+                    //    }
+                    //});
+
+
+                } else {
+
+                    $.ajax({
+                        url: 'exporter/SearchCompanyName',
+                        type: 'POST',
+                        dataType: 'json',
+                        contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+                        //data: { model: formData, __RequestVerificationToken: $("[name=__RequestVerificationToken]").val() }
+                        data: { "registrationNumber": regNumber, __RequestVerificationToken: $("[name=__RequestVerificationToken]").val() },
+                        success: function (result) {
+                            $("#Business_Name").val(result);
+                        }
+                    });
+                }
                 event.preventDefault();
             });
         });

@@ -66,3 +66,19 @@
 
     <button class="govuk-button" type="submit">@Constants.ContinueButtonText</button>
 }
+
+@section scripts {
+    <script type="text/javascript">
+
+        $(function () {
+            //On page load, controls hide
+            $("#btnImportName").hide();
+            $("#dvOrgNameDesction").hide();
+
+            //On page load, controls show
+            $("#hintOrgName").show();
+            $("#dvOrgNameDetails").show();
+        });
+
+    </script>
+}
