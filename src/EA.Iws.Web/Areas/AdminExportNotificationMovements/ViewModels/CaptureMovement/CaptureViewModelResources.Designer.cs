@@ -71,7 +71,7 @@ namespace EA.Iws.Web.Areas.AdminExportNotificationMovements.ViewModels.CaptureMo
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The &quot;actual date of shipment&quot; should not be more than 60 calendar days after the &quot;prenotification date&quot;. Please advise the exporter or enter a different date..
+        ///   Looks up a localized string similar to The &quot;actual date of shipment&quot; should not be more than 30 calendar days after the &quot;prenotification date&quot;. Please advise the exporter or enter a different date..
         /// </summary>
         public static string ActualDateGreaterthanSixtyDays {
             get {

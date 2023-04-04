@@ -121,7 +121,7 @@
     <value>The "actual date of shipment" cannot be before the prenotification date. Please enter a different date.</value>
   </data>
   <data name="ActualDateGreaterthanSixtyDays" xml:space="preserve">
-    <value>The "actual date of shipment" should not be more than 60 calendar days after the "prenotification date". Please advise the exporter or enter a different date.</value>
+    <value>The "actual date of shipment" should not be more than 30 calendar days after the "prenotification date". Please advise the exporter or enter a different date.</value>
   </data>
   <data name="ActualDateLabel" xml:space="preserve">
     <value>Actual date of shipment</value>
