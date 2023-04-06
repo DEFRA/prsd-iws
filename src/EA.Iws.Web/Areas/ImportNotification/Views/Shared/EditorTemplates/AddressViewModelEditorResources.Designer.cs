@@ -62,7 +62,7 @@ namespace EA.Iws.Web.Areas.ImportNotification.Views.Shared.EditorTemplates {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Street Name followed by Unit Number..
+        ///   Looks up a localized string similar to Street Name followed by Unit Name/Number..
         /// </summary>
         public static string AddressLine1HintMsg {
             get {

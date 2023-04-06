@@ -205,7 +205,7 @@
     <value>The name your organisation trades under if different to your organisation name</value>
   </data>
   <data name="OrgHelpWithNamingContent4NonUk" xml:space="preserve">
-    <value>Company suffixes should always be uppercase with no fullstops (excluding GmbH)</value>
+    <value>Company suffixes should always be uppercase with no full stops (excluding GmbH)</value>
   </data>
   <data name="RegistrationNumberHintNonUK" xml:space="preserve">
     <value>This should be the registration number of the company in the country in which they are registered.</value>

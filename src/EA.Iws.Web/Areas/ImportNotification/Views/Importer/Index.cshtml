@@ -36,13 +36,6 @@
                 </label>
             </div>
 
-            @*<div class="govuk-radios__item">
-                    @Html.RadioButtonFor(m => m.BusinessType, BusinessType.LimitedCompany, new { @class = "govuk-radios__input", id = "LimitedCompany" })
-                    <label class="govuk-label govuk-radios__label" for="LimitedCompany">
-                        @EnumHelper.GetDisplayName(BusinessType.LimitedCompany)
-                    </label>
-                </div>*@
-
             <div class="govuk-radios__item" data-target="companies-house-number">
                 @Html.RadioButtonFor(m => m.BusinessType, "LimitedCompany", new { @class = "govuk-radios__input", @id = "LimitedCompany" })
                 <label class="govuk-label govuk-radios__label" for="LimitedCompany">
@@ -94,7 +87,7 @@
         @Resource.OrgHelpWithNamingDescription
     </div>
 
-    <details class="govuk-details" data-module="govuk-details">
+    <details class="govuk-details" data-module="govuk-details" id="dvOrgNameDetails">
         <summary class="govuk-details__summary">
             <span class="govuk-details__summary-text">
                 @Resource.OrgHelpSummary
@@ -159,6 +152,24 @@
 @section scripts {
     <script type="text/javascript">
 
+        function hideImportFromCompHouseSection() {
+            $("#btnImportName").hide();
+            $("#hintOrgName").show();
+            $("#Business_Name").removeAttr('readonly');
+            $("#dvOrgNameDesction").hide();
+            $("#dvOrgNameDetails").show();
+            $("#dvRegNumber").show();
+        }
+
+        function showImportFromCompHouseSection() {
+            $("#btnImportName").show();
+            $("#hintOrgName").hide();
+            $("#Business_Name").attr('readonly', 'readonly');
+            $("#dvOrgNameDesction").show();
+            $("#dvOrgNameDetails").hide();
+            $("#dvRegNumber").hide();
+        }
+
         $(function () {
             //On page load, controls hide
             $("#btnImportName").hide();
@@ -169,60 +180,24 @@
             $("#dvOrgNameDetails").show();
 
             $('#SoleTrader').click(function () {
-                if ($(this).is(':checked')) {
-                    $("#btnImportName").hide();
-                    $("#hintOrgName").show();
-                    $("#Business_Name").removeAttr('readonly');
-                    $("#dvOrgNameDesction").hide();
-                    $("#dvOrgNameDetails").show();
-                    $("#dvRegNumber").show();
-                }
+                hideImportFromCompHouseSection();
             });
 
             $('#Partnership').click(function () {
-                if ($(this).is(':checked')) {
-                    $("#btnImportName").hide();
-                    $("#hintOrgName").show();
-                    $("#Business_Name").removeAttr('readonly');
-                    $("#dvOrgNameDesction").hide();
-                    $("#dvOrgNameDetails").show();
-                    $("#dvRegNumber").show();
-                }
+                hideImportFromCompHouseSection();
             });
 
             $('#LimitedCompany').click(function () {
-                if ($(this).is(':checked')) {
-                    $("#btnImportName").show();
-                    $("#hintOrgName").hide();
-                    $("#Business_Name").attr('readonly', 'readonly');
-                    $("#dvOrgNameDesction").show();
-                    $("#dvOrgNameDetails").hide();
-                    $("#dvRegNumber").hide();
-                }
+                showImportFromCompHouseSection();
             });
 
             $('#Other').click(function () {
-                if ($(this).is(':checked')) {
-                    $("#btnImportName").hide();
-                    $("#hintOrgName").show();
-                    $("#Business_Name").removeAttr('readonly');
-                    $("#dvOrgNameDesction").hide();
-                    $("#dvOrgNameDetails").show();
-                    $("#dvRegNumber").show();
-                }
+                hideImportFromCompHouseSection();
             });
 
             var isLimitedCompanyChecked = document.querySelector('input[id="LimitedCompany"]:checked').value;
             if (isLimitedCompanyChecked) {
-                $("#btnImportName").show();
-                $("#dvOrgNameDesction").show();
-
-                $("#hintOrgName").hide();
-                $("#dvOrgNameDetails").hide();
-
-                $("#Business_Name").attr('readonly', 'readonly');
-
-                $("#dvRegNumber").hide();
+                showImportFromCompHouseSection();
             }
 
             $('#btnImportName').click(function () {

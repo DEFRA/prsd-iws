@@ -97,7 +97,7 @@ namespace EA.Iws.Core.Shared {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Town or city.
+        ///   Looks up a localized string similar to Town or City.
         /// </summary>
         public static string City {
             get {

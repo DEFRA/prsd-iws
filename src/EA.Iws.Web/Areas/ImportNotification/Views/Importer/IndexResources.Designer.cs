@@ -115,7 +115,7 @@ namespace EA.Iws.Web.Areas.ImportNotification.Views.Importer {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Company name abbreviations should always be in uppercase with no fullstops.
+        ///   Looks up a localized string similar to Company name abbreviations should always be in uppercase with no full stops.
         /// </summary>
         public static string OrgHelpSummaryDetailsPoint1 {
             get {
@@ -124,7 +124,7 @@ namespace EA.Iws.Web.Areas.ImportNotification.Views.Importer {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Company suffixes should alwyas be uppercase with no fullstops.
+        ///   Looks up a localized string similar to There should be no spaces either side of special characters, particularly at the end of the name.
         /// </summary>
         public static string OrgHelpSummaryDetailsPoint2 {
             get {
@@ -133,7 +133,7 @@ namespace EA.Iws.Web.Areas.ImportNotification.Views.Importer {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to There should be no spaces either side of special characters, particularly at the end of the name.
+        ///   Looks up a localized string similar to There should be no full stops present.
         /// </summary>
         public static string OrgHelpSummaryDetailsPoint3 {
             get {
@@ -142,7 +142,7 @@ namespace EA.Iws.Web.Areas.ImportNotification.Views.Importer {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to For example: Instead of &apos;A &amp; b Materials c.d.&apos; the name should be &apos;A&amp;B Materials CD&apos;.
+        ///   Looks up a localized string similar to For example: Instead of &apos;a &amp; b materials&apos;, the name should be &apos;A&amp;B Materials&apos;.
         /// </summary>
         public static string OrgHelpSummaryDetailsPoint4 {
             get {

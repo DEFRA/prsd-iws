@@ -160,7 +160,7 @@ namespace EA.Iws.Web.ViewModels.Shared {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Company suffixes should always be uppercase with no fullstops (excluding GmbH).
+        ///   Looks up a localized string similar to Company suffixes should always be uppercase with no full stops (excluding GmbH).
         /// </summary>
         public static string OrgHelpWithNamingContent4NonUk {
             get {
