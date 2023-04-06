@@ -130,7 +130,7 @@
     <value>Street Name followed by Unit Number. For example: Example Street, 21</value>
   </data>
   <data name="City" xml:space="preserve">
-    <value>Town or city</value>
+    <value>Town or City</value>
   </data>
   <data name="CityHintNonUK" xml:space="preserve">
     <value>Area code (typically multiple digits with two characters) followed by Town. For example: 4782 PW, Moerdijk</value>

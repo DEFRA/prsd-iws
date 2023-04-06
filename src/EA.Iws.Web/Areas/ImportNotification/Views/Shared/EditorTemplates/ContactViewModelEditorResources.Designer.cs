@@ -80,7 +80,7 @@ namespace EA.Iws.Web.Areas.ImportNotification.Views.Shared.EditorTemplates {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to his should be the contact person for the importer – consignee.
+        ///   Looks up a localized string similar to This should be the contact person for the importer – consignee.
         /// </summary>
         public static string ImporterFullNameHintMsg {
             get {
