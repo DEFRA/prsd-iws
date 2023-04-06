@@ -61,7 +61,7 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.Exporter {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This should be the correspondence address for the exporter - notifier. Note that this may be different to the registered company address so ensure you use the appropriate address..
+        ///   Looks up a localized string similar to The correspondence address for the exporter – notifier. Note that this may be different to the registered company address so ensure you use the appropriate address..
         /// </summary>
         public static string AddressDescription {
             get {
@@ -152,7 +152,7 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.Exporter {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to If you&apos;re acting on behalf of the waste generator - producer, this will be your waste broker licence number.
+        ///   Looks up a localized string similar to If you&apos;re acting on behalf of the waste generator – producer, this is your waste broker licence number..
         /// </summary>
         public static string RegistrationNumberGeneralMessage {
             get {

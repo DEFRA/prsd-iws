@@ -124,6 +124,15 @@ namespace EA.Iws.Web.ViewModels.Shared {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Select an organisation type and enter a registration number if required. If none of these options apply, select &quot;Other&quot; and add details..
+        /// </summary>
+        public static string FormHintProducer {
+            get {
+                return ResourceManager.GetString("FormHintProducer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to When inputting your organisation name, the following naming conventions should be used to minimise errors:.
         /// </summary>
         public static string OrgHelpWithNamingContent1 {
@@ -169,11 +178,20 @@ namespace EA.Iws.Web.ViewModels.Shared {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to For example: Instead of &apos;A &amp; b Materials c.d.&apos; the name should be &apos;A&amp;B Materials CD&apos;.
+        /// </summary>
+        public static string OrgHelpWithNamingContent5NonUk {
+            get {
+                return ResourceManager.GetString("OrgHelpWithNamingContent5NonUk", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to For example: Instead of &apos;a &amp; b materials&apos;, the name should be &apos;A&amp;B Materials&apos;.
         /// </summary>
-        public static string OrgHelpWithNamingContent5 {
+        public static string OrgHelpWithNamingContent5Uk {
             get {
-                return ResourceManager.GetString("OrgHelpWithNamingContent5", resourceCulture);
+                return ResourceManager.GetString("OrgHelpWithNamingContent5Uk", resourceCulture);
             }
         }
         

@@ -33,6 +33,7 @@
 
     <h2 class="heading-medium">@AddEditProducerResources.Contact</h2>
     <hr />
+    <span class="form-hint">@AddEditProducerResources.ContactDescription</span>
 
     <fieldset>
         <legend class="visuallyhidden">@AddEditProducerResources.Contact</legend>
@@ -55,54 +56,58 @@
 
 @section scripts {
     <script type="text/javascript">
+        function hideImportFromCompHouseSection() {
+            $("#dvBtnImportName").hide();
+            $("#hintOrgName").show();
+            $("#Business_Name").removeAttr('readonly');
+            $("#dvOrgNameDesction").hide();
+            $("#dvOrgNameDetails").show();
+        }
+
+        function showImportFromCompHouseSection() {
+            $("#dvBtnImportName").show();
+            $("#hintOrgName").hide();
+            $("#Business_Name").attr('readonly', 'readonly');
+            $("#dvOrgNameDesction").show();
+            $("#dvOrgNameDetails").hide();
+        }
 
         $(function () {
             //On page load, controls hide
-            $("#btnImportName").hide();
+            $("#dvBtnImportName").hide();
             $("#dvOrgNameDesction").hide();
 
             //On page load, controls show
             $("#hintOrgName").show();
             $("#dvOrgNameDetails").show();
 
-            $('#SoleTrader').click(function () {
-                if ($(this).is(':checked')) {
-                    $("#btnImportName").hide();
-                    $("#hintOrgName").show();
-                    $("#Business_Name").removeAttr('readonly');
-                    $("#dvOrgNameDesction").hide();
-                    $("#dvOrgNameDetails").show();
+            $('#yes').click(function () {
+                var isLimitedCompany = $("input[id='LimitedCompany']:checked").val();
+                if (isLimitedCompany) {
+                    showImportFromCompHouseSection();
+                } else {
+                    hideImportFromCompHouseSection();
                 }
+            });
+
+            $('#no').click(function () {
+                hideImportFromCompHouseSection();
+            });
+
+            $('#SoleTrader').click(function () {
+                hideImportFromCompHouseSection();
             });
 
             $('#Partnership').click(function () {
-                if ($(this).is(':checked')) {
-                    $("#btnImportName").hide();
-                    $("#hintOrgName").show();
-                    $("#Business_Name").removeAttr('readonly');
-                    $("#dvOrgNameDesction").hide();
-                    $("#dvOrgNameDetails").show();
-                }
+                hideImportFromCompHouseSection();
             });
 
             $('#LimitedCompany').click(function () {
-                if ($(this).is(':checked')) {
-                    $("#btnImportName").show();
-                    $("#hintOrgName").hide();
-                    $("#Business_Name").attr('readonly', 'readonly');
-                    $("#dvOrgNameDesction").show();
-                    $("#dvOrgNameDetails").hide();
-                }
+                showImportFromCompHouseSection();
             });
 
             $('#Other').click(function () {
-                if ($(this).is(':checked')) {
-                    $("#btnImportName").hide();
-                    $("#hintOrgName").show();
-                    $("#Business_Name").removeAttr('readonly');
-                    $("#dvOrgNameDesction").hide();
-                    $("#dvOrgNameDetails").show();
-                }
+                hideImportFromCompHouseSection();
             });
 
             $('#btnImportName').click(function () {
@@ -110,7 +115,7 @@
 
                 let formData = {
                     NotificationId: $("#NotificationId").val(),
-                    IsUkBased: document.querySelector('input[name="IsUkBased"]:checked').value,
+                    //IsUkBased: document.querySelector('input[name="IsUkBased"]:checked').value,
                     IsAddedToAddressBook: $("#IsAddedToAddressBook").val(),
                     Business: { RegistrationNumber: regNumber }
                 }
@@ -129,11 +134,10 @@
                     //    }
                     //});
 
-
                 } else {
 
                     $.ajax({
-                        url: 'producer/SearchCompanyName',
+                        url: 'exporter/SearchCompanyName',
                         type: 'POST',
                         dataType: 'json',
                         contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
