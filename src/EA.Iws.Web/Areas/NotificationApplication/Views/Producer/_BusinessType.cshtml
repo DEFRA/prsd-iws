@@ -9,7 +9,7 @@
             @BusinessResources.BusinessTypeHeader
         </legend>
     </fieldset>
-    <span class="form-hint">@BusinessResources.FormHint</span>
+    <span class="form-hint">@BusinessResources.FormHintProducer</span>
 
     @Html.Gds().ValidationMessageFor(m => m.Business.BusinessType)
 
@@ -93,14 +93,15 @@
                     <li>@BusinessResources.OrgHelpWithNamingContent2</li>
                     <li>@BusinessResources.OrgHelpWithNamingContent3</li>
                     <li id="orgHelpWithNamingContent4Uk">@BusinessResources.OrgHelpWithNamingContent4Uk</li>
-                    <li>@BusinessResources.OrgHelpWithNamingContent5</li>
+                    <li id="orgHelpWithNamingContent5Uk">@BusinessResources.OrgHelpWithNamingContent5Uk</li>
                 </ul>
             </div>
         </div>
     </details>
     @Html.Gds().LabelFor(m => m.Business.Name)
     @Html.Gds().ValidationMessageFor(m => m.Business.Name)
-    <div>
+
+    <div id="dvBtnImportName" class="govuk-form-group">
         <button id="btnImportName" class="govuk-button" type="submit">Import name</button>
     </div>
 

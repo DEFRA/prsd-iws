@@ -67,3 +67,23 @@
 
     <button class="govuk-button" type="submit">@Constants.ContinueButtonText</button>
 }
+
+@section scripts {
+    <script type="text/javascript">
+
+        $(function () {
+            //On page load, controls hide
+            $("#dvBtnImportName").hide();
+            $("#dvOrgNameDesction").hide();
+            $("#orgHelpWithNamingContent4Uk").hide();
+            $("#orgHelpWithNamingContent5Uk").hide();
+
+            //On page load, controls show
+            $("#hintOrgName").show();
+            $("#dvOrgNameDetails").show();
+            $("#orgHelpWithNamingContent4NonUk").show();
+            $("#orgHelpWithNamingContent5NonUk").show();
+        });
+
+    </script>
+}

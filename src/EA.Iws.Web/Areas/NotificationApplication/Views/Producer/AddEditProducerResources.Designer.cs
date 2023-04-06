@@ -79,7 +79,7 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.Producer {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This should be the site address for the waste generator-producer.  Note that this may be different to the registered company address so ensure you use the appropriate address..
+        ///   Looks up a localized string similar to This should be the site address for the generator - producer. Note that this may be different to the registered company address so ensure you use the appropriate address..
         /// </summary>
         public static string AddressDescription {
             get {
@@ -93,6 +93,15 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.Producer {
         public static string Contact {
             get {
                 return ResourceManager.GetString("Contact", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This should be the contact person for the generator - producer.
+        /// </summary>
+        public static string ContactDescription {
+            get {
+                return ResourceManager.GetString("ContactDescription", resourceCulture);
             }
         }
         

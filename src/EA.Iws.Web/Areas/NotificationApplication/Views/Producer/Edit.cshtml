@@ -35,6 +35,7 @@
     <h2 class="heading-medium">@AddEditProducerResources.Contact</h2>
     <hr />
 
+    <span class="form-hint">@AddEditProducerResources.ContactDescription</span>
     <fieldset>
         <legend class="visuallyhidden">@AddEditProducerResources.Contact</legend>
         @Html.EditorFor(m => m.Contact)
@@ -52,4 +53,104 @@
     </div>
 
     <button class="govuk-button" type="submit">@Constants.ContinueButtonText</button>
+}
+
+@section scripts {
+    <script type="text/javascript">
+        function hideImportFromCompHouseSection() {
+            $("#dvBtnImportName").hide();
+            $("#hintOrgName").show();
+            $("#Business_Name").removeAttr('readonly');
+            $("#dvOrgNameDesction").hide();
+            $("#dvOrgNameDetails").show();
+        }
+
+        function showImportFromCompHouseSection() {
+            $("#dvBtnImportName").show();
+            $("#hintOrgName").hide();
+            $("#Business_Name").attr('readonly', 'readonly');
+            $("#dvOrgNameDesction").show();
+            $("#dvOrgNameDetails").hide();
+        }
+
+        $(function () {
+            //On page load, controls hide
+            $("#dvBtnImportName").hide();
+            $("#dvOrgNameDesction").hide();
+
+            //On page load, controls show
+            $("#hintOrgName").show();
+            $("#dvOrgNameDetails").show();
+
+            $('#yes').click(function () {
+                var isLimitedCompany = $("input[id='LimitedCompany']:checked").val();
+                if (isLimitedCompany) {
+                    showImportFromCompHouseSection();
+                } else {
+                    hideImportFromCompHouseSection();
+                }
+            });
+
+            $('#no').click(function () {
+                hideImportFromCompHouseSection();
+            });
+
+            $('#SoleTrader').click(function () {
+                hideImportFromCompHouseSection();
+            });
+
+            $('#Partnership').click(function () {
+                hideImportFromCompHouseSection();
+            });
+
+            $('#LimitedCompany').click(function () {
+                showImportFromCompHouseSection();
+            });
+
+            $('#Other').click(function () {
+                hideImportFromCompHouseSection();
+            });
+
+            $('#btnImportName').click(function () {
+                var regNumber = $('#Business_RegistrationNumber').val();
+
+                let formData = {
+                    NotificationId: $("#NotificationId").val(),
+                    //IsUkBased: document.querySelector('input[name="IsUkBased"]:checked').value,
+                    IsAddedToAddressBook: $("#IsAddedToAddressBook").val(),
+                    Business: { RegistrationNumber: regNumber }
+                }
+
+                if ((regNumber == null) || (regNumber == '')) {
+
+                    //$.ajax({
+                    //    url: 'exporter/IndexWithError',
+                    //    type: 'POST',
+                    //    dataType: 'json',
+                    //    contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+                    //    data: { model: formData, __RequestVerificationToken: $("[name=__RequestVerificationToken]").val() },
+                    //    success: function (response) {
+                    //        location.reload();
+                    //        alert('hellooo');
+                    //    }
+                    //});
+
+                } else {
+
+                    $.ajax({
+                        url: 'exporter/SearchCompanyName',
+                        type: 'POST',
+                        dataType: 'json',
+                        contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+                        //data: { model: formData, __RequestVerificationToken: $("[name=__RequestVerificationToken]").val() }
+                        data: { "registrationNumber": regNumber, __RequestVerificationToken: $("[name=__RequestVerificationToken]").val() },
+                        success: function (result) {
+                            $("#Business_Name").val(result);
+                        }
+                    });
+                }
+                event.preventDefault();
+            });
+        });
+    </script>
 }

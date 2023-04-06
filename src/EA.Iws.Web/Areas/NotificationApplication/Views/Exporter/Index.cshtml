@@ -88,25 +88,29 @@
 
 @section scripts {
     <script>
+        document.addEventListener("DOMContentLoaded", showHideTooltips);
+
         function showHideTooltips() {
-                var isUkOrg = document.querySelector('input[name="IsUkBased"]:checked').value;
-                if (isUkOrg === 'True') {
-                    hideShowUkSpecificTooltips('block');
-                    hideShowNonUkSpecificTooltips('none');
-                }
-                else {
-                    hideShowUkSpecificTooltips('none');
-                    hideShowNonUkSpecificTooltips('block');
-                }
+            var isUkOrg = document.querySelector('input[name="IsUkBased"]:checked').value;
+            if (isUkOrg === 'True') {
+                hideShowUkSpecificTooltips('block');
+                hideShowNonUkSpecificTooltips('none');
             }
+            else {
+                hideShowUkSpecificTooltips('none');
+                hideShowNonUkSpecificTooltips('block');
+            }
+        }
 
         function hideShowUkSpecificTooltips(displayValue) {
             if (displayValue === 'block') {
                 document.getElementById('compRegNumHintSpan').textContent = '@ExporterResources.CompanyRegistrationNumber';
                 document.getElementById('orgHelpWithNamingContent4Uk').style.display = '';
+                document.getElementById('orgHelpWithNamingContent5Uk').style.display = '';
             }
             else {
                 document.getElementById('orgHelpWithNamingContent4Uk').style.display = displayValue;
+                document.getElementById('orgHelpWithNamingContent5Uk').style.display = displayValue;
             }
 
             document.getElementById('compHouseDetailsBlock').style.display = displayValue;
@@ -118,18 +122,38 @@
             if (displayValue === 'block') {
                 document.getElementById('compRegNumHintSpan').textContent = '@ExporterResources.CompanyRegistrationNumberNonUk';
                 document.getElementById('orgHelpWithNamingContent4NonUk').style.display = '';
+                document.getElementById('orgHelpWithNamingContent5NonUk').style.display = '';
             }
             else {
                 document.getElementById('orgHelpWithNamingContent4NonUk').style.display = displayValue;
+                document.getElementById('orgHelpWithNamingContent5NonUk').style.display = displayValue;
             }
             document.getElementById('addressLine1HintNonUk').style.display = displayValue;
             document.getElementById('addressCityHintNonUk').style.display = displayValue;
         }
-        document.addEventListener("DOMContentLoaded", showHideTooltips);
+
+        function hideImportFromCompHouseSection() {
+            $("#dvBtnImportName").hide();
+            $("#hintOrgName").show();
+            $("#Business_Name").removeAttr('readonly');
+            $("#dvOrgNameDesction").hide();
+            $("#dvOrgNameDetails").show();
+        }
+
+        function showImportFromCompHouseSection() {
+            var isUkBased = $("input[id='yes']:checked").val();
+            if (isUkBased) {
+                $("#dvBtnImportName").show();
+                $("#hintOrgName").hide();
+                $("#Business_Name").attr('readonly', 'readonly');
+                $("#dvOrgNameDesction").show();
+                $("#dvOrgNameDetails").hide();
+            }
+        }
 
         $(function () {
             //On page load, controls hide
-            $("#btnImportName").hide();
+            $("#dvBtnImportName").hide();
             $("#dvOrgNameDesction").hide();
 
             //On page load, controls show
@@ -138,85 +162,37 @@
 
             var isUkOrg = document.querySelector('input[name="IsUkBased"]:checked').value;
             if (isUkOrg === 'True') {
-                $("#btnImportName").show();
+                $("#dvBtnImportName").show();
                 $("#hintOrgName").hide();
             }
 
             $('#yes').click(function () {
                 var isLimitedCompany = $("input[id='LimitedCompany']:checked").val();
                 if (isLimitedCompany) {
-                    $("#btnImportName").show();
-                    $("#hintOrgName").hide();
-                    $("#Business_Name").attr('readonly', 'readonly');
-                    $("#dvOrgNameDesction").show();
-                    $("#dvOrgNameDetails").hide();
+                    showImportFromCompHouseSection();
                 } else {
-                    $("#btnImportName").hide();
-                    $("#hintOrgName").show();
-                    $("#Business_Name").removeAttr('readonly');
-                    $("#dvOrgNameDesction").hide();
-                    $("#dvOrgNameDetails").show();
+                    hideImportFromCompHouseSection();
                 }
             });
 
             $('#no').click(function () {
-                $("#btnImportName").hide();
-                $("#hintOrgName").show();
-                $("#Business_Name").removeAttr('readonly');
-                $("#dvOrgNameDesction").hide();
-                $("#dvOrgNameDetails").show();
+                hideImportFromCompHouseSection();
             });
 
             $('#SoleTrader').click(function () {
-                var isUkBased = $("input[id='yes']:checked").val();
-                if (isUkBased) {
-                    if ($(this).is(':checked')) {
-                        $("#btnImportName").hide();
-                        $("#hintOrgName").show();
-                        $("#Business_Name").removeAttr('readonly');
-                        $("#dvOrgNameDesction").hide();
-                        $("#dvOrgNameDetails").show();
-                    }
-                }
+                hideImportFromCompHouseSection();
             });
 
             $('#Partnership').click(function () {
-                var isUkBased = $("input[id='yes']:checked").val();
-                if (isUkBased) {
-                    if ($(this).is(':checked')) {
-                        $("#btnImportName").hide();
-                        $("#hintOrgName").show();
-                        $("#Business_Name").removeAttr('readonly');
-                        $("#dvOrgNameDesction").hide();
-                        $("#dvOrgNameDetails").show();
-                    }
-                }
+                hideImportFromCompHouseSection();
             });
 
             $('#LimitedCompany').click(function () {
-                var isUkBased = $("input[id='yes']:checked").val();
-                if (isUkBased) {
-                    if ($(this).is(':checked')) {
-                        $("#btnImportName").show();
-                        $("#hintOrgName").hide();
-                        $("#Business_Name").attr('readonly', 'readonly');
-                        $("#dvOrgNameDesction").show();
-                        $("#dvOrgNameDetails").hide();
-                    }
-                }
+                showImportFromCompHouseSection();
             });
 
             $('#Other').click(function () {
-                var isUkBased = $("input[id='yes']:checked").val();
-                if (isUkBased) {
-                    if ($(this).is(':checked')) {
-                        $("#btnImportName").hide();
-                        $("#hintOrgName").show();
-                        $("#Business_Name").removeAttr('readonly');
-                        $("#dvOrgNameDesction").hide();
-                        $("#dvOrgNameDetails").show();
-                    }
-                }
+                hideImportFromCompHouseSection();
             });
 
             $('#btnImportName').click(function () {
@@ -242,7 +218,6 @@
                     //        alert('hellooo');
                     //    }
                     //});
-
 
                 } else {
 
