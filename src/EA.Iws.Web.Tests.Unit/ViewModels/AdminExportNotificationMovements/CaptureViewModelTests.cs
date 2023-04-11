@@ -55,10 +55,10 @@
         }
 
         [Fact]
-        public void ActualShipmentDateCanBeBeforePrenotificationDate()
+        public void ActualShipmentDateCannotBeBeforePrenotificationDate()
         {
             var model = CreateViewModelForActualDate(31, 5, 2016, false);
-            Assert.Empty(ViewModelValidator.ValidateViewModel(model));
+            Assert.NotEmpty(ViewModelValidator.ValidateViewModel(model));
         }
 
         [Fact]
@@ -83,10 +83,10 @@
         }
 
         [Fact]
-        public void WasteReceivedDateCanBeInThePast()
+        public void WasteReceivedDateCannotBeInThePast()
         {
             var model = CreateViewModelForReceivedDate(30, 5, 2016, true);
-            Assert.Empty(ViewModelValidator.ValidateViewModel(model));
+            Assert.NotEmpty(ViewModelValidator.ValidateViewModel(model));
         }
 
         [Fact]
@@ -97,10 +97,10 @@
         }
 
         [Fact]
-        public void WasteReceivedDateCanBeBeforeActualShipmentDate()
+        public void WasteReceivedDateCannotBeBeforeActualShipmentDate()
         {
             var model = CreateViewModelForReceivedDate(31, 5, 2016, true);
-            Assert.Empty(ViewModelValidator.ValidateViewModel(model));
+            Assert.NotEmpty(ViewModelValidator.ValidateViewModel(model));
         }
 
         [Fact]
