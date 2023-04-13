@@ -61,6 +61,15 @@ namespace EA.Iws.Web.Areas.ImportNotification.Views.Importer {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Please enter above registration number to enable &apos;Import name&apos; button..
+        /// </summary>
+        public static string ImpNameButtonHintMsg {
+            get {
+                return ResourceManager.GetString("ImpNameButtonHintMsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Import name.
         /// </summary>
         public static string ImportName {

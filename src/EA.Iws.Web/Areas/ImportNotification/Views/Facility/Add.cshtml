@@ -94,17 +94,17 @@
     <details class="govuk-details" data-module="govuk-details" id="dvOrgNameDetails">
         <summary class="govuk-details__summary">
             <span class="govuk-details__summary-text">
-                Help with appropriate naming conventions
+                @Resource.OrgHelpSummary
             </span>
         </summary>
         <div class="govuk-details__text">
-            When inputting your organisation name, the following naming conventions should be used to minimise errors:
+            @Resource.OrgHelpSummaryDetailsHeader
             <div id="dvImpNotificationOrgName">
                 <ul class="govuk-list govuk-list--bullet">
-                    <li>Company name abbreviations should always be in uppercase with no full stops</li>
-                    <li>Company suffixes should always be uppercase with no full stops</li>
-                    <li>There should be no spaces either side of special characters, particularly at the end of the name</li>
-                    <li>For example: Instead of 'A & b Materials c.d.' the name should be 'A&B Materials CD'</li>
+                    <li>@Resource.OrgHelpSummaryDetailsPoint1</li>
+                    <li>@Resource.OrgHelpSummaryDetailsPoint2</li>
+                    <li>@Resource.OrgHelpSummaryDetailsPoint3</li>
+                    <li>@Resource.OrgHelpSummaryDetailsPoint4</li>
                 </ul>
             </div>
         </div>
@@ -113,8 +113,11 @@
         @Html.Gds().LabelFor(m => m.Business.Name, false)
         @Html.Gds().ValidationMessageFor(m => m.Business.Name)
 
-        <div id="dvBtnImportName" class="govuk-form-group">
-            <button id="btnImportName" class="govuk-button" type="submit">Import name</button>
+        <div id="dvBtnImportName">
+            <span class="form-hint">
+                @Resource.ImpNameButtonHintMsg
+            </span>
+            <button id="btnImportName" class="govuk-button" type="submit" style="margin-bottom: 10px">@Resource.ImportName</button>
         </div>
 
         @Html.Gds().HintSpan(@Resource.OrgNameHintMsg, id: "hintOrgName")
