@@ -179,12 +179,15 @@
     @Html.Gds().LabelFor(m => m.Name)
     @Html.Gds().ValidationMessageFor(m => m.Name)
 
-    <div id="dvBtnImportName" class="govuk-form-group">
-        <button id="btnImportName" class="govuk-button" type="submit">Import name</button>
+    <div id="dvBtnImportName">
+        <span class="form-hint">
+            Please enter above registration number to enable 'Import name' button.
+        </span>
+        <button id="btnImportName" class="govuk-button" type="submit" style="margin-bottom: 10px">Import name</button>
     </div>
 
     @Html.Gds().HintSpan(BusinessResources.OrgNameHint, id: "hintOrgName")
-     
+
     @if (addressType.HasValue)
     {
         @Html.Gds().TextBoxFor(m => m.Name, new { data_addressbook_url = Url.Action("Index", "Search", new { area = "AddressBook" }), data_addressbook_type = addressType.Value.ToString() })

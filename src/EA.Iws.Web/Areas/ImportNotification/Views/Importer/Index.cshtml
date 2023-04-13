@@ -106,9 +106,13 @@
         </div>
     </details>
 
-    <div>
-        <button id="btnImportName" class="govuk-button" type="submit">@Resource.ImportName</button>
+    <div id="dvBtnImportName">
+        <span class="form-hint">
+            Please enter above registration number to enable 'Import name' button.
+        </span>
+        <button id="btnImportName" class="govuk-button" type="submit" style="margin-bottom: 10px">@Resource.ImportName</button>
     </div>
+
     <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.Business.Name)">
         @Html.Gds().LabelFor(m => m.Business.Name, false)
         @Html.Gds().HintSpan(@Resource.OrgNameHintMsg)
@@ -170,6 +174,14 @@
             $("#dvRegNumber").hide();
         }
 
+        function disabledImportNameButton() {
+            $('#btnImportName').attr('disabled', 'disabled');
+        }
+
+        function enabledImportNameButton() {
+            $('#btnImportName').removeAttr('disabled');
+        }
+
         $(function () {
             //On page load, controls hide
             $("#btnImportName").hide();
@@ -200,42 +212,35 @@
                 showImportFromCompHouseSection();
             }
 
+            var regNumber = $('#Business_RegistrationNumber').val();
+            if ((regNumber === null) || (regNumber === '')) {
+                disabledImportNameButton();
+            }
+
+            $("#Business_RegistrationNumber").focusout(function () {
+                var regNumber = $('#Business_RegistrationNumber').val();
+                if ((regNumber === null) || (regNumber === '')) {
+                    disabledImportNameButton();
+                } else {
+                    enabledImportNameButton();
+                }
+            });
+
             $('#btnImportName').click(function () {
                 var regNumber = $('#Business_RegistrationNumber').val();
-
-                let formData = {
-                    NotificationId: $("#NotificationId").val(),
-                    IsAddedToAddressBook: $("#IsAddedToAddressBook").val(),
-                    Business: { RegistrationNumber: regNumber }
-                }
-
-                if ((regNumber == null) || (regNumber == '')) {
-                    //$.ajax({
-                    //    url: 'exporter/IndexWithError',
-                    //    type: 'POST',
-                    //    dataType: 'json',
-                    //    contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
-                    //    data: { model: formData, __RequestVerificationToken: $("[name=__RequestVerificationToken]").val() },
-                    //    success: function (response) {
-                    //        location.reload();
-                    //        alert('hellooo');
-                    //    }
-                    //});
-                } else {
-
+                if ((regNumber !== null) && (regNumber !== '')) {
                     $.ajax({
-                        url: 'Importer/SearchCompanyName',
+                        url: 'Importer/GetCompanyName',
                         type: 'POST',
                         dataType: 'json',
                         contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
-                        //data: { model: formData, __RequestVerificationToken: $("[name=__RequestVerificationToken]").val() }
                         data: { "registrationNumber": regNumber, __RequestVerificationToken: $("[name=__RequestVerificationToken]").val() },
                         success: function (result) {
                             $("#Business_Name").val(result);
                         }
                     });
                 }
-                event.preventDefault();
+                return false;
             });
         });
     </script>

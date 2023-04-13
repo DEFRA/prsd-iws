@@ -61,7 +61,7 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult SearchCompanyName(string registrationNumber)
+        public ActionResult GetCompanyName(string registrationNumber)
         {
             if (!this.Request.IsAjaxRequest())
             {
@@ -69,9 +69,7 @@
             }
 
             //string companyHouseAPIHost = ConfigurationManager.AppSettings["Iws.CompanyHouseAPIHost"];
-
             //var url = "https://" + companyHouseAPIHost + "/DEFRA/v2.1/CompaniesHouse/companies/" + registrationNumber;
-
             //string filePath = Path.GetDirectoryName(AppDomain.CurrentDomain.BaseDirectory) + "\\Cert\\Boomi-IWS-TST.cer";
 
             //X509Certificate2 certificate = new X509Certificate2(filePath, "kN2S6!p6F*LH", X509KeyStorageFlags.MachineKeySet | X509KeyStorageFlags.PersistKeySet | X509KeyStorageFlags.Exportable);
