@@ -171,5 +171,28 @@
 
             return RedirectToAction("Index");
         }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult GetCompanyName(string registrationNumber)
+        {
+            if (!this.Request.IsAjaxRequest())
+            {
+                throw new InvalidOperationException();
+            }
+
+            //string companyHouseAPIHost = ConfigurationManager.AppSettings["Iws.CompanyHouseAPIHost"];
+            //var url = "https://" + companyHouseAPIHost + "/DEFRA/v2.1/CompaniesHouse/companies/" + registrationNumber;
+            //string filePath = Path.GetDirectoryName(AppDomain.CurrentDomain.BaseDirectory) + "\\Cert\\Boomi-IWS-TST.cer";
+
+            //X509Certificate2 certificate = new X509Certificate2(filePath, "kN2S6!p6F*LH", X509KeyStorageFlags.MachineKeySet | X509KeyStorageFlags.PersistKeySet | X509KeyStorageFlags.Exportable);
+            //HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
+            //request.ClientCertificates.Add(certificate);
+            //request.Method = "GET";
+            //HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+
+            var returnData = "A & B Test Company";
+            return Json(returnData, JsonRequestBehavior.AllowGet);
+        }
     }
 }

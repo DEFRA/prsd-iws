@@ -312,7 +312,7 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult SearchCompanyName(string registrationNumber)
+        public async Task<ActionResult> GetCompanyName(string registrationNumber)
         {
             if (!this.Request.IsAjaxRequest())
             {

@@ -130,8 +130,7 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        //public async Task<ActionResult> SearchCompanyName(ExporterViewModel model)
-        public ActionResult SearchCompanyName(string registrationNumber)
+        public ActionResult GetCompanyName(string registrationNumber)
         {
             if (!this.Request.IsAjaxRequest())
             {
@@ -152,57 +151,6 @@
 
             var returnData = "A & B Test Company";
             return Json(returnData, JsonRequestBehavior.AllowGet);
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> IndexWithError(ExporterViewModel model)
-        {
-            //var data = await mediator.SendAsync(new GetAccountManagementData(id));
-            //var model = new AccountManagementViewModel(data);
-            //var canDeleteTransaction = await authorizationService.AuthorizeActivity(typeof(DeleteTransactionController));
-
-            //model.PaymentViewModel = new PaymentDetailsViewModel { NotificationId = id };
-            //model.RefundViewModel = await GetNewRefundDetailsViewModel(id);
-            //model.CanDeleteTransaction = canDeleteTransaction;
-
-            //model.TableData[commentId].Comments = string.Empty;
-            //model.ErrorCommentId = commentId;
-            //model.CommentError = "Enter a comment";
-            //ModelState.AddModelError("CommentError", "Enter a comment");
-
-            //ExporterViewModel model;
-            //var exporter = await mediator.SendAsync(new GetExporterByNotificationId(id));
-            //if (exporter.HasExporter)
-            //{
-            //    model = new ExporterViewModel(exporter);
-            //}
-            //else
-            //{
-            //    model = new ExporterViewModel
-            //    {
-            //        NotificationId = id
-            //    };
-            //}
-
-            foreach (var key in ModelState.Keys)
-            {
-                ModelState[key].Errors.Clear();
-            }
-
-            if (model.Business?.Name?.Contains(" T/A ") == true)
-            {
-                string[] businessNames = model.Business.Name.Split(new[] { " T/A " }, 2, StringSplitOptions.None);
-                model.Business.Name = businessNames[0];
-                model.Business.OrgTradingName = businessNames[1];
-            }
-
-            await this.BindCountryList(mediator);
-            model.Address.DefaultCountryId = this.GetDefaultCountryId();
-
-            ModelState.AddModelError("model.Business.RegistrationNumber", "Enter a Registration Number");
-
-            return View(model);
         }
     }
 }
