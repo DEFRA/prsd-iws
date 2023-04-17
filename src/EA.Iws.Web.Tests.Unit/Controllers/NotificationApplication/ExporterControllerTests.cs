@@ -4,6 +4,7 @@
     using Areas.NotificationApplication.ViewModels.Exporter;
     using Core.Notification.Audit;
     using Core.Shared;
+    using EA.IWS.Api.Infrastructure.Infrastructure;
     using FakeItEasy;
     using Mappings;
     using Prsd.Core.Mediator;
@@ -20,12 +21,14 @@
         private readonly Guid notificationId = new Guid("81CBBCEE-34C0-4628-B054-E0D8135A7947");
         private readonly ExporterController exporterController;
         private readonly IAuditService auditService;
+        private readonly ElmahSqlLogger logger;
 
         public ExporterControllerTests()
         {
             client = A.Fake<IMediator>();
             auditService = A.Fake<IAuditService>();
-            exporterController = new ExporterController(client, new AddAddressBookEntryMap(), auditService);
+            logger = A.Fake<ElmahSqlLogger>();
+            exporterController = new ExporterController(client, new AddAddressBookEntryMap(), auditService, logger);
 
             A.CallTo(() => auditService.AddAuditEntry(client, notificationId, "user", NotificationAuditType.Added, NotificationAuditScreenType.Exporter));
         }
