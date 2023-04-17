@@ -805,6 +805,7 @@
     </Compile>
     <Compile Include="Areas\ImportNotification\ViewModels\Shared\AddressTypeEnum.cs" />
     <Compile Include="Extensions\GdsExtensions.cs" />
+    <Compile Include="Infrastructure\DefraCompaniesHouseApi.cs" />
     <Compile Include="RazorHelpers\AttributesHelper.cs" />
     <Compile Include="RazorHelpers\IwsGds.BackLink.cs" />
     <Compile Include="RazorHelpers\IwsGds.EventTracking.cs" />
@@ -815,6 +816,8 @@
     <Content Include="Areas\Admin\Views\ArchiveNotification\Index.cshtml" />
     <Content Include="Areas\Admin\Views\ArchiveNotification\Review.cshtml" />
     <Content Include="Areas\Admin\Views\ArchiveNotification\Archived.cshtml" />
+    <Content Include="Cert\Boomi-IWS-SND.pfx" />
+    <Content Include="Cert\Boomi-IWS-TST.pfx" />
     <None Include="Scripts\jquery-3.6.0.intellisense.js" />
     <Content Include="Scripts\jquery-3.6.0.js" />
     <Content Include="Scripts\jquery-3.6.0.min.js" />

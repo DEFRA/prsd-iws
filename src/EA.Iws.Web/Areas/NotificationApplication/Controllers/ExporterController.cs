@@ -2,9 +2,6 @@
 {
     using Core.AddressBook;
     using Core.Notification.Audit;
-    using DocumentFormat.OpenXml.Office2019.Word.Cid;
-    using EA.Iws.Requests.NotificationAssessment;
-    using EA.Iws.Web.Infrastructure.Authorization;
     using Infrastructure;
     using Prsd.Core.Mapper;
     using Prsd.Core.Mediator;
@@ -13,10 +10,7 @@
     using Requests.AddressBook;
     using Requests.Exporters;
     using System;
-    using System.Configuration;
-    using System.IO;
     using System.Net;
-    using System.Security.Cryptography.X509Certificates;
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using ViewModels.Exporter;
@@ -137,18 +131,24 @@
                 throw new InvalidOperationException();
             }
 
-            //string companyHouseAPIHost = ConfigurationManager.AppSettings["Iws.CompanyHouseAPIHost"];
-            //var url = "https://" + companyHouseAPIHost + "/DEFRA/v2.1/CompaniesHouse/companies/" + registrationNumber;
-            //string filePath = Path.GetDirectoryName(AppDomain.CurrentDomain.BaseDirectory) + "\\Cert\\Boomi-IWS-TST.cer";
-
-            //X509Certificate2 certificate = new X509Certificate2(filePath, "kN2S6!p6F*LH", X509KeyStorageFlags.MachineKeySet | X509KeyStorageFlags.PersistKeySet | X509KeyStorageFlags.Exportable);
-            //HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
-            //request.ClientCertificates.Add(certificate);
-            //request.Method = "GET";
-            //HttpWebResponse response = (HttpWebResponse)request.GetResponse();
-
-            var returnData = "A & B Test Company";
-            return Json(returnData, JsonRequestBehavior.AllowGet);
+            try
+            {
+                string orgName = DefraCompaniesHouseApi.GetOrganisationNameByRegNum(registrationNumber);
+                return Json(orgName, JsonRequestBehavior.AllowGet);
+            }
+            catch (WebException ex)
+            {
+                return Json(new
+                {
+                    success = false,
+                    responseText = "ex.Status.GetTypeCode());"
+                }, JsonRequestBehavior.AllowGet);
+                
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, responseText = "The attached file is not supported." }, JsonRequestBehavior.AllowGet);
+            }
         }
     }
 }
