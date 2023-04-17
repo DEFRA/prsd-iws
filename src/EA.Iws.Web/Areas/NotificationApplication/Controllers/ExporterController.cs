@@ -2,6 +2,8 @@
 {
     using Core.AddressBook;
     using Core.Notification.Audit;
+    using EA.Iws.Api.Client.Entities;
+    using EA.IWS.Api.Infrastructure.Infrastructure;
     using Infrastructure;
     using Prsd.Core.Mapper;
     using Prsd.Core.Mediator;
@@ -22,12 +24,15 @@
         private readonly IMediator mediator;
         private readonly IMapWithParameter<ExporterViewModel, AddressRecordType, AddAddressBookEntry> addressBookMapper;
         private readonly IAuditService auditService;
+        private readonly ElmahSqlLogger logger;
 
-        public ExporterController(IMediator mediator, IMapWithParameter<ExporterViewModel, AddressRecordType, AddAddressBookEntry> addressBookMapper, IAuditService auditService)
+        public ExporterController(IMediator mediator, IMapWithParameter<ExporterViewModel, AddressRecordType, AddAddressBookEntry> addressBookMapper,
+                                  IAuditService auditService, ElmahSqlLogger logger)
         {
             this.mediator = mediator;
             this.addressBookMapper = addressBookMapper;
             this.auditService = auditService;
+            this.logger = logger;
         }
 
         [HttpGet]
@@ -124,7 +129,7 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult GetCompanyName(string registrationNumber)
+        public async Task<ActionResult> GetCompanyName(string registrationNumber)
         {
             if (!this.Request.IsAjaxRequest())
             {
@@ -141,12 +146,18 @@
                 return Json(new
                 {
                     success = false,
-                    responseText = "ex.Status.GetTypeCode());"
+                    responseText = ex.Status.GetTypeCode()
                 }, JsonRequestBehavior.AllowGet);
-                
             }
             catch (Exception ex)
             {
+                //Need to prepare error data
+                ErrorData errorData = new ErrorData();
+                errorData.Message = ex.Message;
+
+                //Logging errors data into the database.
+                await logger.Log(errorData);
+
                 return Json(new { success = false, responseText = "The attached file is not supported." }, JsonRequestBehavior.AllowGet);
             }
         }

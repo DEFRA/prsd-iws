@@ -4058,6 +4058,10 @@
       <Project>{b772429d-709e-4978-b105-a54606acc29a}</Project>
       <Name>EA.Iws.Api.Client</Name>
     </ProjectReference>
+    <ProjectReference Include="..\EA.IWS.Api.Infrastructure\EA.Iws.Api.Infrastructure.csproj">
+      <Project>{77720566-4F8C-4284-8A91-B94495468A8F}</Project>
+      <Name>EA.Iws.Api.Infrastructure</Name>
+    </ProjectReference>
     <ProjectReference Include="..\EA.Iws.Core\EA.Iws.Core.csproj">
       <Project>{DD2A73A4-A652-4ECC-87EE-24239CE45AD4}</Project>
       <Name>EA.Iws.Core</Name>
