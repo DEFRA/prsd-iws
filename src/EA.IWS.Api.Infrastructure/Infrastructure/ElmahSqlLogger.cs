@@ -40,11 +40,6 @@ namespace EA.IWS.Api.Infrastructure.Infrastructure
     {
         private readonly IwsContext context;
 
-        public ElmahSqlLogger()
-        {
-            
-        }
-
         public ElmahSqlLogger(IwsContext context)
         {
             this.context = context;

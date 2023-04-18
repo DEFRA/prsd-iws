@@ -184,6 +184,8 @@
             Please enter above registration number to enable 'Import name' button.
         </span>
         <button id="btnImportName" class="govuk-button" type="submit" style="margin-bottom: 10px">Import name</button>
+        <span class="field-validation-error govuk-error-message" id="errorMessage">
+        </span>
     </div>
 
     @Html.Gds().HintSpan(BusinessResources.OrgNameHint, id: "hintOrgName")

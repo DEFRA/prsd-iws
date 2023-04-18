@@ -2,6 +2,7 @@
 {
     using System;
     using System.Linq;
+    using System.Net;
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Core.ImportNotification.Draft;
@@ -182,9 +183,30 @@
                 throw new InvalidOperationException();
             }
 
-            var orgName = DefraCompaniesHouseApi.GetOrganisationNameByRegNum(registrationNumber);
-
-            return Json(orgName, JsonRequestBehavior.AllowGet);
+            try
+            {
+                string orgName = DefraCompaniesHouseApi.GetOrganisationNameByRegNum(registrationNumber);
+                return Json(new { success = true, companyName = orgName });
+            }
+            catch (WebException ex)
+            {
+                if (ex.Status == WebExceptionStatus.ProtocolError)
+                {
+                    return Json(new { success = false, errorMsg = "Please enter valid company registration number and try again." });
+                }
+                else if (ex.Status == WebExceptionStatus.ConnectFailure)
+                {
+                    return Json(new { success = false, errorMsg = "Service is unavailable, please contatct system administator." });
+                }
+                else
+                {
+                    return Json(new { success = false, errorMsg = ex.Message });
+                }
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, errorMsg = ex.Message });
+            }
         }
     }
 }

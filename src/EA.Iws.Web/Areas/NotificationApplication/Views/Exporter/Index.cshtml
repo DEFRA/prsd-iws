@@ -208,7 +208,7 @@
                 disabledImportNameButton();
             }
 
-            $("#Business_RegistrationNumber").focusout(function () {
+            $("#Business_RegistrationNumber").change(function () {
                 var regNumber = $('#Business_RegistrationNumber').val();
                 if ((regNumber === null) || (regNumber === '')) {
                     disabledImportNameButton();
@@ -227,7 +227,13 @@
                         contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
                         data: { "registrationNumber": regNumber, __RequestVerificationToken: $("[name=__RequestVerificationToken]").val() },
                         success: function (result) {
-                            $("#Business_Name").val(result);
+                            if (result.success) {
+                                $("#Business_Name").val(result.companyName);
+                                $("#errorMessage").text("");
+                            } else {
+                                $("#errorMessage").text(result.errorMsg);
+                                $("#Business_Name").val("");
+                            }
                         },
                         error: function (xhr, textStatus, errorThrown) {
                             console.log("Error: " + errorThrown);

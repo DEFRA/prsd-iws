@@ -2,9 +2,6 @@
 {
     using Core.AddressBook;
     using Core.Notification.Audit;
-    using EA.Iws.Api.Client.Entities;
-    using EA.Iws.Web.Logging;
-    using EA.IWS.Api.Infrastructure.Infrastructure;
     using Infrastructure;
     using Prsd.Core.Mapper;
     using Prsd.Core.Mediator;
@@ -25,15 +22,13 @@
         private readonly IMediator mediator;
         private readonly IMapWithParameter<ExporterViewModel, AddressRecordType, AddAddressBookEntry> addressBookMapper;
         private readonly IAuditService auditService;
-        private readonly IElmahSqlLogger logger;
 
-        public ExporterController(IMediator mediator, IMapWithParameter<ExporterViewModel, AddressRecordType, AddAddressBookEntry> addressBookMapper,
-                                  IAuditService auditService, IElmahSqlLogger logger)
+        public ExporterController(IMediator mediator, IMapWithParameter<ExporterViewModel, AddressRecordType,
+                                  AddAddressBookEntry> addressBookMapper, IAuditService auditService)
         {
             this.mediator = mediator;
             this.addressBookMapper = addressBookMapper;
             this.auditService = auditService;
-            this.logger = logger;
         }
 
         [HttpGet]
@@ -130,7 +125,7 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> GetCompanyNameAsync(string registrationNumber)
+        public ActionResult GetCompanyName(string registrationNumber)
         {
             if (!this.Request.IsAjaxRequest())
             {
@@ -140,61 +135,26 @@
             try
             {
                 string orgName = DefraCompaniesHouseApi.GetOrganisationNameByRegNum(registrationNumber);
-                return Json(new { success = true, message = orgName });
+                return Json(new { success = true, companyName = orgName });
             }
             catch (WebException ex)
             {
-                //Need to prepare error data
-                ErrorData errorData = new ErrorData()
+                if (ex.Status == WebExceptionStatus.ProtocolError)
                 {
-                    Id = Guid.NewGuid(),
-                    ApplicationName = "ExporterControllerDefraCompHouseCall",
-                    Date = DateTime.Now,
-                    ErrorXml = ErrorUtils.GetExceptionAsXml(ex, "DefraCompaniesHouseApi.GetOrganisationNameByRegNum(" + registrationNumber + ")"),
-                    User = User.GetEmailAddress(),
-                    Message = ex.Message,
-                    Source = ex.Source,
-                    Type = ex.GetType().Name,
-                    StatusCode = 400,
-                    HostName = string.Empty
-                };
-
-                ////Logging errors data into the database.
-                await logger.Log(errorData);
-
-                //HttpContext.Response.StatusCode = (int)HttpStatusCode.BadRequest;
-
-                //return Json(new
-                //{
-                //    status = false,
-                //    message = ex.Status.GetTypeCode()
-                //}, JsonRequestBehavior.AllowGet);
-                return Json(new { success = false, error = ex.Message });
+                    return Json(new { success = false, errorMsg = "Please enter valid company registration number and try again." });
+                }
+                else if (ex.Status == WebExceptionStatus.ConnectFailure)
+                {
+                    return Json(new { success = false, errorMsg = "Service is unavailable, please contatct system administator." });
+                }
+                else
+                {
+                    return Json(new { success = false, errorMsg = ex.Message });
+                }
             }
             catch (Exception ex)
             {
-                //Need to prepare error data
-                ErrorData errorData = new ErrorData()
-                {
-                    Id = Guid.NewGuid(),
-                    ApplicationName = "ExporterControllerDefraCompHouseCall",
-                    Date = DateTime.Now,
-                    ErrorXml = ErrorUtils.GetExceptionAsXml(ex, "DefraCompaniesHouseApi.GetOrganisationNameByRegNum(" + registrationNumber + ")"),
-                    User = User.GetEmailAddress(),
-                    Message = ex.Message,
-                    Source = ex.Source,
-                    Type = ex.GetType().Name,
-                    StatusCode = 0,
-                    HostName = string.Empty
-                };
-
-                //Logging errors data into the database.
-                await logger.Log(errorData);
-
-                //HttpContext.Response.StatusCode = (int)HttpStatusCode.BadRequest;
-
-                //return Json(new { status = false, message = "Exception occured" }, JsonRequestBehavior.AllowGet);
-                return Json(new { success = false, error = ex.Message });
+                return Json(new { success = false, errorMsg = ex.Message });
             }
         }
     }

@@ -118,6 +118,8 @@
                 @Resource.ImpNameButtonHintMsg
             </span>
             <button id="btnImportName" class="govuk-button" type="submit" style="margin-bottom: 10px">@Resource.ImportName</button>
+            <span class="field-validation-error govuk-error-message" id="errorMessage">
+            </span>
         </div>
 
         @Html.Gds().HintSpan(@Resource.OrgNameHintMsg, id: "hintOrgName")
@@ -243,7 +245,16 @@
                         contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
                         data: { "registrationNumber": regNumber, __RequestVerificationToken: $("[name=__RequestVerificationToken]").val() },
                         success: function (result) {
-                            $("#Business_Name").val(result);
+                            if (result.success) {
+                                $("#Business_Name").val(result.companyName);
+                                $("#errorMessage").text("");
+                            } else {
+                                $("#errorMessage").text(result.errorMsg);
+                                $("#Business_Name").val("");
+                            }
+                        },
+                        error: function (xhr, textStatus, errorThrown) {
+                            console.log("Error: " + errorThrown);
                         }
                     });
                 }
