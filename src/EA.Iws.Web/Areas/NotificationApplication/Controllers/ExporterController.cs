@@ -3,8 +3,8 @@
     using Core.AddressBook;
     using Core.Notification.Audit;
     using EA.Iws.Api.Client.Entities;
-    using EA.Iws.Api.Infrastructure.Infrastructure;
     using EA.Iws.Web.Logging;
+    using EA.IWS.Api.Infrastructure.Infrastructure;
     using Infrastructure;
     using Prsd.Core.Mapper;
     using Prsd.Core.Mediator;
