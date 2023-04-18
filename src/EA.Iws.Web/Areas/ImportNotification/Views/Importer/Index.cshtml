@@ -219,7 +219,7 @@
                 disabledImportNameButton();
             }
 
-            $("#Business_RegistrationNumber").change(function () {
+            $("#Business_RegistrationNumber").keyup(function () {
                 var regNumber = $('#Business_RegistrationNumber').val();
                 if ((regNumber === null) || (regNumber === '')) {
                     disabledImportNameButton();
