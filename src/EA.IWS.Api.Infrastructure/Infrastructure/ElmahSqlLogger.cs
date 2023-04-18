@@ -1,6 +1,6 @@
 ﻿/*
  * Modified from https://github.com/elmah/Elmah/blob/master/src/Elmah.SqlServer/SqlErrorLog.cs
- * 
+ *
  * ELMAH - Error Logging Modules and Handlers for ASP.NET
  * Copyright (c) 2004-9 Atif Aziz. All rights reserved.
  *
@@ -20,10 +20,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 namespace EA.IWS.Api.Infrastructure.Infrastructure
 {
     using EA.Iws.Api.Client.Entities;
     using EA.Iws.DataAccess;
+    using Elmah;
     using System;
     using System.Collections.Generic;
     using System.Data;
@@ -33,9 +35,8 @@ namespace EA.IWS.Api.Infrastructure.Infrastructure
     using System.Text;
     using System.Threading.Tasks;
     using System.Xml;
-    using Elmah;
 
-    public class ElmahSqlLogger
+    public class ElmahSqlLogger : IElmahSqlLogger
     {
         private readonly IwsContext context;
 

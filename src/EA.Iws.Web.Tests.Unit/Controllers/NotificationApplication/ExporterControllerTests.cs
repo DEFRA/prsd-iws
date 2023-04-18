@@ -4,6 +4,7 @@
     using Areas.NotificationApplication.ViewModels.Exporter;
     using Core.Notification.Audit;
     using Core.Shared;
+    using EA.IWS.Api.Infrastructure.Infrastructure;
     using FakeItEasy;
     using Mappings;
     using Prsd.Core.Mediator;

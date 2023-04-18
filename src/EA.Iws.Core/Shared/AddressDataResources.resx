@@ -126,8 +126,14 @@
   <data name="Address2" xml:space="preserve">
     <value>Address line 2</value>
   </data>
+  <data name="AddressLine1HintNonUK" xml:space="preserve">
+    <value>Street Name followed by Unit Number. For example: Example Street, 21</value>
+  </data>
   <data name="City" xml:space="preserve">
-    <value>Town or city</value>
+    <value>Town or City</value>
+  </data>
+  <data name="CityHintNonUK" xml:space="preserve">
+    <value>Area code (typically multiple digits with two characters) followed by Town. For example: 4782 PW, Moerdijk</value>
   </data>
   <data name="CityRequired" xml:space="preserve">
     <value>Please enter your town or city</value>
@@ -135,8 +141,11 @@
   <data name="Country" xml:space="preserve">
     <value>Country</value>
   </data>
+  <data name="CountryHint" xml:space="preserve">
+    <value>Select the country the organisation is operating from</value>
+  </data>
   <data name="CountryRequired" xml:space="preserve">
-    <value>The Contry field is required.</value>
+    <value>The Country field is required.</value>
   </data>
   <data name="CountrySelect" xml:space="preserve">
     <value>Please select a country</value>
@@ -146,6 +155,9 @@
   </data>
   <data name="Postcode" xml:space="preserve">
     <value>Post code</value>
+  </data>
+  <data name="PostCodeHint" xml:space="preserve">
+    <value>For example: AB1 2CD</value>
   </data>
   <data name="PostcodeRequired" xml:space="preserve">
     <value>Please enter the post code</value>

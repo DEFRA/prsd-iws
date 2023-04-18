@@ -16,21 +16,8 @@
     AddressRecordType? addressType = ViewBag.AddressType;
 }
 
-<div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.Name)">
-    @Html.Gds().LabelFor(m => m.Name)
-    @Html.Gds().ValidationMessageFor(m => m.Name)
-    @Html.Gds().HintSpan(BusinessResources.OrgNameHint)
-    @if (addressType.HasValue)
-    {
-        @Html.Gds().TextBoxFor(m => m.Name, new { data_addressbook_url = Url.Action("Index", "Search", new { area = "AddressBook" }), data_addressbook_type = addressType.Value.ToString() })
-    }
-    else
-    {
-        @Html.Gds().TextBoxFor(m => m.Name)
-    }
-</div>
-
 <div class="form-group @Html.Gds().FormGroupClass(m => m.BusinessType)">
+
     <fieldset class="govuk-fieldset">
         <legend class="govuk-label">
             @BusinessResources.BusinessTypeHeader
@@ -92,7 +79,7 @@
     <div class="panel hide-for-initial-load @(Model.BusinessType != null && Model.BusinessType.Equals("Limited company") ? "" : "js-hidden")" id="companies-house-number">
         @if (!string.IsNullOrWhiteSpace(companyRegistrationNumber))
         {
-            <span class="form-hint">@companyRegistrationNumber</span>
+            <span class="form-hint" id="compRegNumHintSpan">@companyRegistrationNumber</span>
         }
         @if (!string.IsNullOrWhiteSpace(companyAdditionalRegistrationNumber))
         {
@@ -129,14 +116,14 @@
         @Html.Gds().LabelFor(m => m.RegistrationNumber)
         @if (!string.IsNullOrWhiteSpace(nonJavascriptMessage))
         {
-            <span class="form-hint js-hidden">@nonJavascriptMessage</span>
+            <span id="compHouseNonJSMessage" class="form-hint js-hidden">@nonJavascriptMessage</span>
         }
         @Html.Gds().ValidationMessageFor(m => m.RegistrationNumber)
         @Html.Gds().TextBoxFor(m => m.RegistrationNumber)
 
         @if (Model.DisplayCompaniesHouseHint)
         {
-            <details data-target="companies-house-number" class="govuk-details" data-module="govuk-details">
+            <details id="compHouseDetailsBlock" data-target="companies-house-number" class="govuk-details" data-module="govuk-details">
                 <summary class="govuk-details__summary">
                     <span class="govuk-details__summary-text">
                         @BusinessResources.WhereToFindCompanyHouse
@@ -160,3 +147,67 @@
         </div>
     }
 </div>
+
+<h2 class="heading-medium">@BusinessResources.OrgNameHeader</h2>
+<hr />
+<div class="govuk-form-group" id="dvOrgNameDesction">
+    @BusinessResources.OrgHelpWithNamingDescription
+</div>
+
+<div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.Name)">
+    <details class="govuk-details" data-module="govuk-details" id="dvOrgNameDetails">
+        <summary class="govuk-details__summary">
+            <span class="govuk-details__summary-text">
+                @BusinessResources.OrgHelpWithNamingTitle
+            </span>
+        </summary>
+        <div class="govuk-details__text">
+            @BusinessResources.OrgHelpWithNamingContent1
+            <div id="dvImpNotificationOrgName">
+                <ul class="govuk-list govuk-list--bullet">
+                    <li>@BusinessResources.OrgHelpWithNamingContent2</li>
+                    <li>@BusinessResources.OrgHelpWithNamingContent3</li>
+                    <li id="orgHelpWithNamingContent4Uk">@BusinessResources.OrgHelpWithNamingContent4Uk</li>
+                    <li id="orgHelpWithNamingContent4NonUk" style="display: none;">@BusinessResources.OrgHelpWithNamingContent4NonUk</li>
+                    <li id="orgHelpWithNamingContent5Uk">@BusinessResources.OrgHelpWithNamingContent5Uk</li>
+                    <li id="orgHelpWithNamingContent5NonUk" style="display: none;">@BusinessResources.OrgHelpWithNamingContent5NonUk</li>
+                </ul>
+            </div>
+        </div>
+    </details>
+
+    @Html.Gds().LabelFor(m => m.Name)
+    @Html.Gds().ValidationMessageFor(m => m.Name)
+
+    <div id="dvBtnImportName">
+        <span class="form-hint">
+            Please enter above registration number to enable 'Import name' button.
+        </span>
+        <button id="btnImportName" class="govuk-button" type="submit" style="margin-bottom: 10px">Import name</button>
+        <span class="field-validation-error govuk-error-message" id="errorMessage">
+        </span>
+    </div>
+
+    @Html.Gds().HintSpan(BusinessResources.OrgNameHint, id: "hintOrgName")
+
+    @if (addressType.HasValue)
+    {
+        @Html.Gds().TextBoxFor(m => m.Name, new { data_addressbook_url = Url.Action("Index", "Search", new { area = "AddressBook" }), data_addressbook_type = addressType.Value.ToString() })
+    }
+    else
+    {
+        @Html.Gds().TextBoxFor(m => m.Name)
+    }
+
+    <br />
+    <br />
+    <div class="govuk-form-group">
+        @Html.Gds().LabelFor(m => m.OrgTradingName)
+        @Html.Gds().HintSpan(BusinessResources.OrgTradingNameHint)
+        <span>
+            <input class="govuk-input govuk-input--width-2" id="width-2" name="width-2" type="text" value="T/A" readonly>
+            @Html.Gds().TextBoxFor(m => m.OrgTradingName, new { @class = "orgTradingName" })
+        </span>
+    </div>
+</div>
+

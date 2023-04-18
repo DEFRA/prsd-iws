@@ -4,7 +4,7 @@
   .govuk-error-summary {
     @include govuk-text-colour;
     @include govuk-responsive-padding(4);
-    @include govuk-responsive-margin(8, "bottom");
+    /*@include govuk-responsive-margin(8, "bottom");*/
 
     border: $govuk-border-width solid $govuk-error-colour;
 
@@ -17,7 +17,7 @@
     @include govuk-font($size: 24, $weight: bold);
 
     margin-top: 0;
-    @include govuk-responsive-margin(4, "bottom");
+    /*@include govuk-responsive-margin(4, "bottom");*/
   }
 
   .govuk-error-summary__body {
@@ -25,7 +25,7 @@
 
     p {
       margin-top: 0;
-      @include govuk-responsive-margin(4, "bottom");
+      /*@include govuk-responsive-margin(4, "bottom");*/
     }
   }
 

@@ -2,6 +2,7 @@
 @using EA.Iws.Web.Areas.AddressBook.Views
 @using EnumHelper = EA.Prsd.Core.Helpers.EnumHelper
 @using Resource = EA.Iws.Web.Areas.ImportNotification.Views.Facility.AddResources
+@using BusinessResources = EA.Iws.Web.ViewModels.Shared.BusinessResources
 @model EA.Iws.Web.Areas.ImportNotification.ViewModels.Facility.FacilityViewModel
 
 @{
@@ -21,16 +22,6 @@
     @Html.AntiForgeryToken()
 
     <h2 class="heading-medium">@Resource.OrganisationHeading</h2>
-
-    <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.Business.Name)">
-        @Html.Gds().LabelFor(m => m.Business.Name, false)
-        @Html.Gds().ValidationMessageFor(m => m.Business.Name)
-        @Html.Gds().TextBoxFor(m => m.Business.Name, new
-   {
-       data_addressbook_url = Url.Action("Index", "Search", new { area = "AddressBook" }),
-       data_addressbook_type = "Facility"
-   })
-    </div>
 
     <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.BusinessType)">
         @Html.Gds().LabelFor(m => m.BusinessType, false)
@@ -57,6 +48,29 @@
                 </label>
             </div>
 
+            <div class="panel @(Model.BusinessType != null && Model.BusinessType.Equals("Limited company") ? "" : "js-hidden")" id="companies-house-number">
+                <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.Business.RegistrationNumber)" data-validation-behaviour="ignore-parent">
+                    @Html.Gds().LabelFor(m => m.Business.RegistrationNumber, false)
+                    <span class="form-hint" id="RegNumHintUk">@BusinessResources.RegistrationNumberHintUK</span>
+                    <span class="form-hint" id="RegNumHintNonUk" style="display:none;">@BusinessResources.RegistrationNumberHintNonUK</span>
+                    @Html.Gds().ValidationMessageFor(m => m.Business.RegistrationNumber)
+                    @Html.Gds().TextBoxFor(m => m.Business.RegistrationNumber)
+                    <div>
+                        <br />
+                    </div>
+                    <details id="CompaniesHouseSummary" data-target="companies-house-number" class="govuk-details" data-module="govuk-details">
+                        <summary class="govuk-details__summary">
+                            <span class="govuk-details__summary-text">
+                                @BusinessResources.WhereToFindCompanyHouse
+                            </span>
+                        </summary>
+                        <div class="govuk-details__text">
+                            @Html.Raw(BusinessResources.CompanyHouseDescription)
+                        </div>
+                    </details>
+                </div>
+            </div>
+
             <div class="govuk-radios__item">
                 @Html.RadioButtonFor(m => m.BusinessType, BusinessType.Other, new { @class = "govuk-radios__input", id = "Other" })
                 <label class="govuk-label govuk-radios__label" for="Other">
@@ -66,10 +80,63 @@
         </fieldset>
     </div>
 
-    <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.Business.RegistrationNumber)">
+    <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.Business.RegistrationNumber)" id="dvRegNumber">
         @Html.Gds().LabelFor(m => m.Business.RegistrationNumber)
         @Html.Gds().ValidationMessageFor(m => m.Business.RegistrationNumber)
         @Html.Gds().TextBoxFor(m => m.Business.RegistrationNumber)
+    </div>
+
+    <h2 class="heading-medium">@Resource.OrganisationNameTitle</h2>
+    <hr />
+    <div class="govuk-form-group" id="dvOrgNameDesction">
+        @Resource.OrgHelpWithNamingDescription
+    </div>
+    <details class="govuk-details" data-module="govuk-details" id="dvOrgNameDetails">
+        <summary class="govuk-details__summary">
+            <span class="govuk-details__summary-text">
+                @Resource.OrgHelpSummary
+            </span>
+        </summary>
+        <div class="govuk-details__text">
+            @Resource.OrgHelpSummaryDetailsHeader
+            <div id="dvImpNotificationOrgName">
+                <ul class="govuk-list govuk-list--bullet">
+                    <li>@Resource.OrgHelpSummaryDetailsPoint1</li>
+                    <li>@Resource.OrgHelpSummaryDetailsPoint2</li>
+                    <li>@Resource.OrgHelpSummaryDetailsPoint3</li>
+                    <li>@Resource.OrgHelpSummaryDetailsPoint4</li>
+                </ul>
+            </div>
+        </div>
+    </details>
+    <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.Business.Name)">
+        @Html.Gds().LabelFor(m => m.Business.Name, false)
+        @Html.Gds().ValidationMessageFor(m => m.Business.Name)
+
+        <div id="dvBtnImportName">
+            <span class="form-hint">
+                @Resource.ImpNameButtonHintMsg
+            </span>
+            <button id="btnImportName" class="govuk-button" type="submit" style="margin-bottom: 10px">@Resource.ImportName</button>
+            <span class="field-validation-error govuk-error-message" id="errorMessage">
+            </span>
+        </div>
+
+        @Html.Gds().HintSpan(@Resource.OrgNameHintMsg, id: "hintOrgName")
+        @Html.Gds().TextBoxFor(m => m.Business.Name, new
+        {
+            data_addressbook_url = Url.Action("Index", "Search", new { area = "AddressBook" }),
+            data_addressbook_type = "Facility"
+        })
+    </div>
+
+    <div class="govuk-form-group">
+        @Html.Gds().LabelFor(m => m.Business.OrgTradingName)
+        @Html.Gds().HintSpan(@Resource.OrgTradingNameHint)
+        <span>
+            <input class="govuk-input govuk-input--width-2" id="width-2" name="width-2" type="text" value="T/A" readonly>
+            @Html.Gds().TextBoxFor(m => m.Business.OrgTradingName, new { @class = "orgTradingName" })
+        </span>
     </div>
 
     @Html.EditorFor(m => m.Address)
@@ -85,9 +152,114 @@
                 </label>
             </div>
         </div>
-    </div>    
+    </div>
 
     <div class="govuk-form-group">
         <button class="govuk-button" type="submit">@Constants.ContinueButtonText</button>
     </div>
+}
+
+@section scripts {
+    <script type="text/javascript">
+        document.addEventListener("DOMContentLoaded", function () {
+            var isLimitedCompanyChecked = document.querySelector('input[id="LimitedCompany"]:checked').value;
+            if (isLimitedCompanyChecked) {
+                showImportFromCompHouseSection();
+            }
+        });
+
+        function hideImportFromCompHouseSection() {
+            $("#btnImportName").hide();
+            $("#hintOrgName").show();
+            $("#Business_Name").removeAttr('readonly');
+            $("#dvOrgNameDesction").hide();
+            $("#dvOrgNameDetails").show();
+            $("#dvRegNumber").show();
+            $('#companies-house-number').hide();
+        }
+
+        function showImportFromCompHouseSection() {
+            $("#btnImportName").show();
+            $("#hintOrgName").hide();
+            $("#Business_Name").attr('readonly', 'readonly');
+            $("#dvOrgNameDesction").show();
+            $("#dvOrgNameDetails").hide();
+            $("#dvRegNumber").hide();
+            $('#companies-house-number').show();
+        }
+
+        function disabledImportNameButton() {
+            $('#btnImportName').attr('disabled', 'disabled');
+        }
+
+        function enabledImportNameButton() {
+            $('#btnImportName').removeAttr('disabled');
+        }
+
+        $(function () {
+            //On page load, controls hide
+            $("#btnImportName").hide();
+            $("#dvOrgNameDesction").hide();
+
+            //On page load, controls show
+            $("#hintOrgName").show();
+            $("#dvOrgNameDetails").show();
+
+            $('#SoleTrader').click(function () {
+                hideImportFromCompHouseSection();
+            });
+
+            $('#Partnership').click(function () {
+                hideImportFromCompHouseSection();
+            });
+
+            $('#LimitedCompany').click(function () {
+                showImportFromCompHouseSection();
+            });
+
+            $('#Other').click(function () {
+                hideImportFromCompHouseSection();
+            });
+
+            var regNumber = $('#Business_RegistrationNumber').val();
+            if ((regNumber === null) || (regNumber === '')) {
+                disabledImportNameButton();
+            }
+
+            $("#Business_RegistrationNumber").keyup(function () {
+                var regNumber = $('#Business_RegistrationNumber').val();
+                if ((regNumber === null) || (regNumber === '')) {
+                    disabledImportNameButton();
+                } else {
+                    enabledImportNameButton();
+                }
+            });
+
+            $('#btnImportName').click(function () {
+                var regNumber = $('#Business_RegistrationNumber').val();
+                if ((regNumber !== null) && (regNumber !== '')) {
+                    $.ajax({
+                        url: 'GetCompanyName',
+                        type: 'POST',
+                        dataType: 'json',
+                        contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+                        data: { "registrationNumber": regNumber, __RequestVerificationToken: $("[name=__RequestVerificationToken]").val() },
+                        success: function (result) {
+                            if (result.success) {
+                                $("#Business_Name").val(result.companyName);
+                                $("#errorMessage").text("");
+                            } else {
+                                $("#errorMessage").text(result.errorMsg);
+                                $("#Business_Name").val("");
+                            }
+                        },
+                        error: function (xhr, textStatus, errorThrown) {
+                            console.log("Error: " + errorThrown);
+                        }
+                    });
+                }
+                return false;
+            });
+        });
+    </script>
 }

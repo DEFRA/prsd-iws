@@ -31,9 +31,9 @@
 
             BusinessType = exporter.Type;
 
-            Address = new AddressViewModel(exporter.Address);
+            Address = new AddressViewModel(exporter.Address, AddressTypeEnum.Exporter);
 
-            Contact = new ContactViewModel(exporter.Contact);
+            Contact = new ContactViewModel(exporter.Contact, AddressTypeEnum.Exporter);
 
             IsAddedToAddressBook = exporter.IsAddedToAddressBook;
         }

@@ -2,9 +2,11 @@
 {
     using System;
     using System.Linq;
+    using System.Net;
     using System.Threading.Tasks;
     using System.Web.Mvc;
     using Core.ImportNotification.Draft;
+    using EA.Iws.Web.Infrastructure;
     using Infrastructure.Authorization;
     using Prsd.Core.Mediator;
     using Requests.ImportNotification;
@@ -86,7 +88,7 @@
             var newFacility = new Facility(id)
             {
                 Address = model.Address.AsAddress(),
-                BusinessName = model.Business.Name,
+                BusinessName = (string.IsNullOrEmpty(model.Business.OrgTradingName) ? model.Business.Name : (model.Business.Name + " T/A " + model.Business.OrgTradingName)),
                 Contact = model.Contact.AsContact(),
                 RegistrationNumber = model.Business.RegistrationNumber,
                 Type = model.BusinessType,
@@ -170,6 +172,41 @@
             }
 
             return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult GetCompanyName(string registrationNumber)
+        {
+            if (!this.Request.IsAjaxRequest())
+            {
+                throw new InvalidOperationException();
+            }
+
+            try
+            {
+                string orgName = DefraCompaniesHouseApi.GetOrganisationNameByRegNum(registrationNumber);
+                return Json(new { success = true, companyName = orgName });
+            }
+            catch (WebException ex)
+            {
+                if (ex.Status == WebExceptionStatus.ProtocolError)
+                {
+                    return Json(new { success = false, errorMsg = "Please enter valid company registration number and try again." });
+                }
+                else if (ex.Status == WebExceptionStatus.ConnectFailure)
+                {
+                    return Json(new { success = false, errorMsg = "Service is unavailable, please contatct system administator." });
+                }
+                else
+                {
+                    return Json(new { success = false, errorMsg = ex.Message });
+                }
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, errorMsg = ex.Message });
+            }
         }
     }
 }

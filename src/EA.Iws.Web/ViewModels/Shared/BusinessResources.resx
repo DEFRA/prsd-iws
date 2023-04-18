@@ -127,7 +127,7 @@
     <value>Companies House number</value>
   </data>
   <data name="CompanyHouseDescription" xml:space="preserve">
-    <value>Your Companies House number is on your organisation's certificate of incorporation. You can also get the number from your organisation's accountant or accounts department, or &lt;a href="https://beta.companieshouse.gov.uk/" target="_blank" rel="external"&gt;search the Companies House online services&lt;/a&gt;.</value>
+    <value>Your Companies House number is on your organisation's certificate of incorporation. You can also get the number from your organisation's accountant or accounts department.</value>
   </data>
   <data name="CompanyHouseRequired" xml:space="preserve">
     <value>Companies house number is required</value>
@@ -172,9 +172,54 @@
     <value>The registration number cannot be greater than 100 characters</value>
   </data>
   <data name="FormHint" xml:space="preserve">
-    <value>If none of these options apply, please select "Other" and add details</value>
+    <value>Select an organisation type and enter a registration number. If none of these options apply, select "Other" and add details.</value>
   </data>
   <data name="OrgNameHint" xml:space="preserve">
-    <value>For example, ‘Organisation Name Limited’. For "trading as" names, record it as ‘Organisation Name Limited T/A Name of Organisation’</value>
+    <value>For example 'A&amp;B Materials'</value>
+  </data>
+  <data name="OrgHelpWithNamingContent1" xml:space="preserve">
+    <value>When inputting your organisation name, the following naming conventions should be used to minimise errors:</value>
+  </data>
+  <data name="OrgHelpWithNamingTitle" xml:space="preserve">
+    <value>Help with appropriate naming conventions</value>
+  </data>
+  <data name="OrgHelpWithNamingContent2" xml:space="preserve">
+    <value>Company name abbreviations should always be in uppercase with no full stops</value>
+  </data>
+  <data name="OrgHelpWithNamingContent3" xml:space="preserve">
+    <value>There should be no spaces either side of special characters, particularly at the end of the name</value>
+  </data>
+  <data name="OrgHelpWithNamingContent4Uk" xml:space="preserve">
+    <value>There should be no full stops present</value>
+  </data>
+  <data name="OrgHelpWithNamingContent5Uk" xml:space="preserve">
+    <value>For example: Instead of 'a &amp; b materials', the name should be 'A&amp;B Materials'</value>
+  </data>
+  <data name="OrgNameHeader" xml:space="preserve">
+    <value>Organisation name</value>
+  </data>
+  <data name="OrgTradingName" xml:space="preserve">
+    <value>'Trading as' name</value>
+  </data>
+  <data name="OrgTradingNameHint" xml:space="preserve">
+    <value>The name your organisation trades under if different to your organisation name</value>
+  </data>
+  <data name="OrgHelpWithNamingContent4NonUk" xml:space="preserve">
+    <value>Company suffixes should always be uppercase with no full stops (excluding GmbH)</value>
+  </data>
+  <data name="RegistrationNumberHintNonUK" xml:space="preserve">
+    <value>This should be the registration number of the company in the country in which they are registered.</value>
+  </data>
+  <data name="RegistrationNumberHintUK" xml:space="preserve">
+    <value>The 8-character code as documented by Companies House.</value>
+  </data>
+  <data name="OrgHelpWithNamingDescription" xml:space="preserve">
+    <value>Use the 'Import name' button to import the name from Companies House using the registration number. If no organisation name is found, please check your registration number and retry. If your Organisation name is not available, you may need to change the Company type and enter the name manually.</value>
+  </data>
+  <data name="FormHintProducer" xml:space="preserve">
+    <value>Select an organisation type and enter a registration number if required. If none of these options apply, select "Other" and add details.</value>
+  </data>
+  <data name="OrgHelpWithNamingContent5NonUk" xml:space="preserve">
+    <value>For example: Instead of 'A &amp; b Materials c.d.' the name should be 'A&amp;B Materials CD'</value>
   </data>
 </root>
