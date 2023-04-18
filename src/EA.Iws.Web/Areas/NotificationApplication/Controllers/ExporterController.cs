@@ -3,7 +3,8 @@
     using Core.AddressBook;
     using Core.Notification.Audit;
     using EA.Iws.Api.Client.Entities;
-    using EA.IWS.Api.Infrastructure.Infrastructure;
+    using EA.Iws.Api.Infrastructure.Infrastructure;
+    using EA.Iws.Web.Logging;
     using Infrastructure;
     using Prsd.Core.Mapper;
     using Prsd.Core.Mediator;
@@ -24,10 +25,10 @@
         private readonly IMediator mediator;
         private readonly IMapWithParameter<ExporterViewModel, AddressRecordType, AddAddressBookEntry> addressBookMapper;
         private readonly IAuditService auditService;
-        private readonly ElmahSqlLogger logger;
+        private readonly IElmahSqlLogger logger;
 
         public ExporterController(IMediator mediator, IMapWithParameter<ExporterViewModel, AddressRecordType, AddAddressBookEntry> addressBookMapper,
-                                  IAuditService auditService, ElmahSqlLogger logger)
+                                  IAuditService auditService, IElmahSqlLogger logger)
         {
             this.mediator = mediator;
             this.addressBookMapper = addressBookMapper;
@@ -129,7 +130,7 @@
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> GetCompanyName(string registrationNumber)
+        public async Task<ActionResult> GetCompanyNameAsync(string registrationNumber)
         {
             if (!this.Request.IsAjaxRequest())
             {
@@ -139,26 +140,61 @@
             try
             {
                 string orgName = DefraCompaniesHouseApi.GetOrganisationNameByRegNum(registrationNumber);
-                return Json(orgName, JsonRequestBehavior.AllowGet);
+                return Json(new { success = true, message = orgName });
             }
             catch (WebException ex)
             {
-                return Json(new
+                //Need to prepare error data
+                ErrorData errorData = new ErrorData()
                 {
-                    success = false,
-                    responseText = ex.Status.GetTypeCode()
-                }, JsonRequestBehavior.AllowGet);
+                    Id = Guid.NewGuid(),
+                    ApplicationName = "ExporterControllerDefraCompHouseCall",
+                    Date = DateTime.Now,
+                    ErrorXml = ErrorUtils.GetExceptionAsXml(ex, "DefraCompaniesHouseApi.GetOrganisationNameByRegNum(" + registrationNumber + ")"),
+                    User = User.GetEmailAddress(),
+                    Message = ex.Message,
+                    Source = ex.Source,
+                    Type = ex.GetType().Name,
+                    StatusCode = 400,
+                    HostName = string.Empty
+                };
+
+                ////Logging errors data into the database.
+                await logger.Log(errorData);
+
+                //HttpContext.Response.StatusCode = (int)HttpStatusCode.BadRequest;
+
+                //return Json(new
+                //{
+                //    status = false,
+                //    message = ex.Status.GetTypeCode()
+                //}, JsonRequestBehavior.AllowGet);
+                return Json(new { success = false, error = ex.Message });
             }
             catch (Exception ex)
             {
                 //Need to prepare error data
-                ErrorData errorData = new ErrorData();
-                errorData.Message = ex.Message;
+                ErrorData errorData = new ErrorData()
+                {
+                    Id = Guid.NewGuid(),
+                    ApplicationName = "ExporterControllerDefraCompHouseCall",
+                    Date = DateTime.Now,
+                    ErrorXml = ErrorUtils.GetExceptionAsXml(ex, "DefraCompaniesHouseApi.GetOrganisationNameByRegNum(" + registrationNumber + ")"),
+                    User = User.GetEmailAddress(),
+                    Message = ex.Message,
+                    Source = ex.Source,
+                    Type = ex.GetType().Name,
+                    StatusCode = 0,
+                    HostName = string.Empty
+                };
 
                 //Logging errors data into the database.
                 await logger.Log(errorData);
 
-                return Json(new { success = false, responseText = "The attached file is not supported." }, JsonRequestBehavior.AllowGet);
+                //HttpContext.Response.StatusCode = (int)HttpStatusCode.BadRequest;
+
+                //return Json(new { status = false, message = "Exception occured" }, JsonRequestBehavior.AllowGet);
+                return Json(new { success = false, error = ex.Message });
             }
         }
     }
