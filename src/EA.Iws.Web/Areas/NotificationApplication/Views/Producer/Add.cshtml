@@ -123,7 +123,7 @@
                 disabledImportNameButton();
             }
 
-            $("#Business_RegistrationNumber").focusout(function () {
+            $("#Business_RegistrationNumber").keyup(function () {
                 var regNumber = $('#Business_RegistrationNumber').val();
                 if ((regNumber === null) || (regNumber === '')) {
                     disabledImportNameButton();
