@@ -32,6 +32,13 @@
                 NotificationId = id
             };
 
+            if (model.Business?.Name?.Contains(" T/A ") == true)
+            {
+                string[] businessNames = model.Business.Name.Split(new[] { " T/A " }, 2, StringSplitOptions.None);
+                model.Business.Name = businessNames[0];
+                model.Business.OrgTradingName = businessNames[1];
+            }
+
             await this.BindCountryList(mediator);
             model.Address.DefaultCountryId = this.GetDefaultCountryId();
 
@@ -48,6 +55,11 @@
                 model.Address.DefaultCountryId = this.GetDefaultCountryId();
 
                 return View(model);
+            }
+
+            if (!string.IsNullOrEmpty(model.Business?.OrgTradingName?.Trim()))
+            {
+                model.Business.Name = model.Business.Name + " T/A " + model.Business.OrgTradingName;
             }
 
             var request = new AddProducer

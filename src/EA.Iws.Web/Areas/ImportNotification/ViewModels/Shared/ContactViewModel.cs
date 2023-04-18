@@ -21,11 +21,18 @@
         [Display(Name = "Email", ResourceType = typeof(ContactViewModelResources))]
         public string Email { get; set; }
 
+        public AddressTypeEnum AddressType { get; set; }
+
         public ContactViewModel()
         {
         }
 
-        public ContactViewModel(Contact contact)
+        public ContactViewModel(AddressTypeEnum addressType)
+        {
+            this.AddressType = addressType;
+        }
+
+        public ContactViewModel(Contact contact, AddressTypeEnum addressType)
         {
             if (contact != null)
             {
@@ -34,6 +41,7 @@
                 Email = contact.Email;
                 TelephonePrefix = contact.TelephonePrefix;
             }
+            AddressType = addressType;
         }
 
         public Contact AsContact()

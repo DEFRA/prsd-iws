@@ -5,19 +5,17 @@ using Microsoft.Owin;
 
 namespace EA.Iws.Web
 {
+    using Autofac;
+    using Autofac.Integration.Mvc;
+    using IdentityModel;
+    using Infrastructure;
+    using Owin;
+    using Services;
     using System.Net;
     using System.Reflection;
     using System.Web;
     using System.Web.Helpers;
     using System.Web.Mvc;
-    using Autofac;
-    using Autofac.Integration.Mvc;
-    using IdentityModel;
-    using Infrastructure;
-    using Infrastructure.Paging;
-    using Owin;
-    using Prsd.Core.Mediator;
-    using Services;
 
     public partial class Startup
     {

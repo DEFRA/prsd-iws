@@ -54,7 +54,7 @@
         private readonly CopyToNotificationHandler handler;
         private readonly Guid[] preRunNotifications;
 
-        private readonly ITransportRouteValidator validator = new MockValidator { Return = true};
+        private readonly ITransportRouteValidator validator = new MockValidator { Return = true };
 
         public CopyToNotificationHandlerTests()
         {
@@ -151,7 +151,7 @@
 
         private void AddExporter(Guid id)
         {
-            var exporter = new Exporter(id, TestableAddress.AddlestoneAddress, TestableBusiness.WasteSolutions, TestableContact.SinclairSimms);
+            var exporter = new Exporter(id, false, TestableAddress.AddlestoneAddress, TestableBusiness.WasteSolutions, TestableContact.SinclairSimms);
 
             context.Exporters.Add(exporter);
         }

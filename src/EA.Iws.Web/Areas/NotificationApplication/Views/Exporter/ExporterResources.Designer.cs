@@ -61,7 +61,7 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.Exporter {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This should be the correspondence address for the exporter - notifier.
+        ///   Looks up a localized string similar to The correspondence address for the exporter – notifier. Note that this may be different to the registered company address so ensure you use the appropriate address..
         /// </summary>
         public static string AddressDescription {
             get {
@@ -79,11 +79,20 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.Exporter {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This should be your Companies House number.
+        ///   Looks up a localized string similar to The 8-character code as documented by Companies House..
         /// </summary>
         public static string CompanyRegistrationNumber {
             get {
                 return ResourceManager.GetString("CompanyRegistrationNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This should be the registration number of the company in the country in which they are registered..
+        /// </summary>
+        public static string CompanyRegistrationNumberNonUk {
+            get {
+                return ResourceManager.GetString("CompanyRegistrationNumberNonUk", resourceCulture);
             }
         }
         
@@ -115,7 +124,25 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.Exporter {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to For Limited company, this should be your Companies House number.
+        ///   Looks up a localized string similar to Is the organisation based and registered in the UK and/or using a UK address?.
+        /// </summary>
+        public static string IsUkBased {
+            get {
+                return ResourceManager.GetString("IsUkBased", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No.
+        /// </summary>
+        public static string No {
+            get {
+                return ResourceManager.GetString("No", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to For Limited company, the 8-character code as documented by Companies House.
         ///            For sole trader, partnership or any other organisation type, if you are acting on behalf of the waste generator-producer, this will be your waste broker licence number..
         /// </summary>
         public static string NonJavascriptMessage {
@@ -125,7 +152,7 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.Exporter {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to If you&apos;re acting on behalf of the waste generator - producer, this will be your waste broker licence number.
+        ///   Looks up a localized string similar to If you&apos;re acting on behalf of the waste generator – producer, this is your waste broker licence number..
         /// </summary>
         public static string RegistrationNumberGeneralMessage {
             get {
@@ -139,6 +166,15 @@ namespace EA.Iws.Web.Areas.NotificationApplication.Views.Exporter {
         public static string Title {
             get {
                 return ResourceManager.GetString("Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Yes.
+        /// </summary>
+        public static string Yes {
+            get {
+                return ResourceManager.GetString("Yes", resourceCulture);
             }
         }
     }

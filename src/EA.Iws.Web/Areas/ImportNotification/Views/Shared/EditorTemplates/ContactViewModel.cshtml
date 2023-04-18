@@ -1,18 +1,36 @@
 ﻿@using Resource = EA.Iws.Web.Areas.ImportNotification.Views.Shared.EditorTemplates.ContactViewModelEditorResources
+@using AddressType = EA.Iws.Web.Areas.ImportNotification.ViewModels.Shared.AddressTypeEnum
 @model EA.Iws.Web.Areas.ImportNotification.ViewModels.Shared.ContactViewModel
 
 <h2 class="heading-medium">@Resource.Title</h2>
 
-<hr/>
+<hr />
 
 <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.FullName)">
     @Html.Gds().LabelFor(m => m.FullName, false)
+    @if (Model.AddressType == AddressType.Exporter)
+    {
+        @Html.Gds().HintSpan(@Resource.ExporterFullNameHintMsg)
+    }
+    else if (Model.AddressType == AddressType.Importer)
+    {
+        @Html.Gds().HintSpan(@Resource.ImporterFullNameHintMsg)
+    }
+    else if (Model.AddressType == AddressType.Producer)
+    {
+        @Html.Gds().HintSpan(@Resource.ProducerFullNameHintMsg)
+    }
+    else if (Model.AddressType == AddressType.Facility)
+    {
+        @Html.Gds().HintSpan(@Resource.FacilityFullNameHintMsg)
+    }
     @Html.Gds().ValidationMessageFor(m => m.FullName)
     @Html.Gds().TextBoxFor(m => m.FullName)
 </div>
 
 <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.Telephone) @Html.Gds().FormGroupClass(m => m.TelephonePrefix)">
     @Html.Gds().LabelFor(m => m.Telephone, false)
+    @Html.Gds().HintSpan(@Resource.TelephoneHintMsg)
     @Html.Gds().ValidationMessageFor(m => m.TelephonePrefix)
     @Html.Gds().ValidationMessageFor(m => m.Telephone)
     <div class="international-number">
@@ -20,9 +38,9 @@
             +
         </div>
         <div class="international-number-prefix">
-            @Html.Gds().TextBoxFor(m => m.TelephonePrefix, new { @title = Resource.TelephonePrefixTitle, @type="number" })
+            @Html.Gds().TextBoxFor(m => m.TelephonePrefix, new { @title = Resource.TelephonePrefixTitle, @type = "number" })
         </div>
-        <div class="international-number-body">
+        <div class="international-number-body" style="margin-left: -40px">
             @Html.Gds().TextBoxFor(m => m.Telephone, new { @type = "number" })
         </div>
     </div>

@@ -12,6 +12,9 @@
         [Display(Name = "OrganisationName", ResourceType = typeof(AddEditProducerResources))]
         public string Name { get; set; }
 
+        [Display(Name = "OrgTradingName", ResourceType = typeof(BusinessResources))]
+        public string OrgTradingName { get; set; }
+
         [Required(ErrorMessageResourceName = "OrganisationTypeRequired", ErrorMessageResourceType = typeof(AddEditProducerResources))]
         [Display(Name = "OrganisationType", ResourceType = typeof(AddEditProducerResources))]
         public BusinessType? BusinessType { get; set; }

@@ -123,6 +123,18 @@
   <data name="OrganisationHeading" xml:space="preserve">
     <value>Organisation</value>
   </data>
+  <data name="OrganisationNameTitle" xml:space="preserve">
+    <value>Organisation name</value>
+  </data>
+  <data name="OrgHelpWithNamingDescription" xml:space="preserve">
+    <value>Use the 'Import name' button to import the name from Companies House using the registration number. If no organisation name is found, please check your registration number and retry. If your Organisation name is not available, you may need to change the Company type and enter the name manually.</value>
+  </data>
+  <data name="OrgNameHintMsg" xml:space="preserve">
+    <value>For example 'A&amp;B Materials CD'</value>
+  </data>
+  <data name="OrgTradingNameHint" xml:space="preserve">
+    <value>The name your organisation trades under if different to your organisation name</value>
+  </data>
   <data name="OtherLabel" xml:space="preserve">
     <value>Other</value>
   </data>

@@ -1,8 +1,8 @@
 ﻿namespace EA.Iws.Domain.NotificationApplication.Exporter
 {
-    using System;
     using Prsd.Core;
     using Prsd.Core.Domain;
+    using System;
 
     public class Exporter : Entity
     {
@@ -10,17 +10,20 @@
         {
         }
 
-        public Exporter(Guid notificationId, Address address, Business business, Contact contact)
+        public Exporter(Guid notificationId, bool isUkBased, Address address, Business business, Contact contact)
         {
             Guard.ArgumentNotNull(() => business, business);
             Guard.ArgumentNotNull(() => address, address);
             Guard.ArgumentNotNull(() => contact, contact);
 
+            IsUkBased = isUkBased;
             Business = business;
             Address = address;
             Contact = contact;
             NotificationId = notificationId;
         }
+
+        public bool IsUkBased { get; private set; }
 
         public Business Business { get; private set; }
 
@@ -30,12 +33,13 @@
 
         public Guid NotificationId { get; private set; }
 
-        public void Update(Address address, Business business, Contact contact)
+        public void Update(bool isUkBased, Address address, Business business, Contact contact)
         {
             Guard.ArgumentNotNull(() => business, business);
             Guard.ArgumentNotNull(() => address, address);
             Guard.ArgumentNotNull(() => contact, contact);
 
+            IsUkBased = isUkBased;
             Business = business;
             Address = address;
             Contact = contact;

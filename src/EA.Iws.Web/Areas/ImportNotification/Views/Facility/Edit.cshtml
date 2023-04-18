@@ -23,16 +23,6 @@
 
     <h2 class="heading-medium">@Resource.OrganisationHeading</h2>
 
-    <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.Business.Name)">
-        @Html.Gds().LabelFor(m => m.Business.Name, false)
-        @Html.Gds().ValidationMessageFor(m => m.Business.Name)
-        @Html.Gds().TextBoxFor(m => m.Business.Name, new
-   {
-       data_addressbook_url = Url.Action("Index", "Search", new { area = "AddressBook" }),
-       data_addressbook_type = "Facility"
-   })
-    </div>
-
     <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.BusinessType)">
         @Html.Gds().LabelFor(m => m.BusinessType, false)
         @Html.Gds().ValidationMessageFor(m => m.BusinessType)
@@ -67,10 +57,58 @@
         </fieldset>
     </div>
 
-    <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.Business.RegistrationNumber)">
+    <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.Business.RegistrationNumber)" id="dvRegNumber">
         @Html.Gds().LabelFor(m => m.Business.RegistrationNumber)
         @Html.Gds().ValidationMessageFor(m => m.Business.RegistrationNumber)
         @Html.Gds().TextBoxFor(m => m.Business.RegistrationNumber)
+    </div>
+
+    <h2 class="heading-medium">@Resource.OrganisationNameTitle</h2>
+    <hr />
+    <div class="govuk-form-group" id="dvOrgNameDesction">
+        @Resource.OrgHelpWithNamingDescription
+    </div>
+    <details class="govuk-details" data-module="govuk-details" id="dvOrgNameDetails">
+        <summary class="govuk-details__summary">
+            <span class="govuk-details__summary-text">
+                Help with appropriate naming conventions
+            </span>
+        </summary>
+        <div class="govuk-details__text">
+            When inputting your organisation name, the following naming conventions should be used to minimise errors:
+            <div id="dvImpNotificationOrgName">
+                <ul class="govuk-list govuk-list--bullet">
+                    <li>Company name abbreviations should always be in uppercase with no full stops</li>
+                    <li>Company suffixes should always be uppercase with no full stops</li>
+                    <li>There should be no spaces either side of special characters, particularly at the end of the name</li>
+                    <li>For example: Instead of 'A & b Materials c.d.' the name should be 'A&B Materials CD'</li>
+                </ul>
+            </div>
+        </div>
+    </details>
+    <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.Business.Name)">
+        @Html.Gds().LabelFor(m => m.Business.Name, false)
+        @Html.Gds().ValidationMessageFor(m => m.Business.Name)
+
+        <div id="dvBtnImportName" class="govuk-form-group">
+            <button id="btnImportName" class="govuk-button" type="submit">Import name</button>
+        </div>
+
+        @Html.Gds().HintSpan(@Resource.OrgNameHintMsg, id: "hintOrgName")
+        @Html.Gds().TextBoxFor(m => m.Business.Name, new
+        {
+            data_addressbook_url = Url.Action("Index", "Search", new { area = "AddressBook" }),
+            data_addressbook_type = "Facility"
+        })
+    </div>
+
+    <div class="govuk-form-group">
+        @Html.Gds().LabelFor(m => m.Business.OrgTradingName)
+        @Html.Gds().HintSpan(@Resource.OrgTradingNameHint)
+        <span>
+            <input class="govuk-input govuk-input--width-2" id="width-2" name="width-2" type="text" value="T/A" readonly>
+            @Html.Gds().TextBoxFor(m => m.Business.OrgTradingName, new { @class = "orgTradingName" })
+        </span>
     </div>
 
     @Html.EditorFor(m => m.Address)
@@ -86,9 +124,101 @@
                 </label>
             </div>
         </div>
-    </div>    
+    </div>
 
     <div class="govuk-form-group">
         <button class="govuk-button" type="submit">@Constants.ContinueButtonText</button>
     </div>
+}
+
+@section scripts {
+    <script type="text/javascript">
+
+        function hideImportFromCompHouseSection() {
+            $("#btnImportName").hide();
+            $("#hintOrgName").show();
+            $("#Business_Name").removeAttr('readonly');
+            $("#dvOrgNameDesction").hide();
+            $("#dvOrgNameDetails").show();
+            $("#dvRegNumber").show();
+        }
+
+        function showImportFromCompHouseSection() {
+            $("#btnImportName").show();
+            $("#hintOrgName").hide();
+            $("#Business_Name").attr('readonly', 'readonly');
+            $("#dvOrgNameDesction").show();
+            $("#dvOrgNameDetails").hide();
+            $("#dvRegNumber").hide();
+        }
+
+        $(function () {
+            //On page load, controls hide
+            $("#btnImportName").hide();
+            $("#dvOrgNameDesction").hide();
+
+            //On page load, controls show
+            $("#hintOrgName").show();
+            $("#dvOrgNameDetails").show();
+
+            $('#SoleTrader').click(function () {
+                hideImportFromCompHouseSection();
+            });
+
+            $('#Partnership').click(function () {
+                hideImportFromCompHouseSection();
+            });
+
+            $('#LimitedCompany').click(function () {
+                showImportFromCompHouseSection();
+            });
+
+            $('#Other').click(function () {
+                hideImportFromCompHouseSection();
+            });
+
+            var isLimitedCompanyChecked = document.querySelector('input[id="LimitedCompany"]:checked').value;
+            if (isLimitedCompanyChecked) {
+                showImportFromCompHouseSection();
+            }
+
+            $('#btnImportName').click(function () {
+                var regNumber = $('#Business_RegistrationNumber').val();
+
+                let formData = {
+                    NotificationId: $("#NotificationId").val(),
+                    IsAddedToAddressBook: $("#IsAddedToAddressBook").val(),
+                    Business: { RegistrationNumber: regNumber }
+                }
+
+                if ((regNumber == null) || (regNumber == '')) {
+                    //$.ajax({
+                    //    url: 'exporter/IndexWithError',
+                    //    type: 'POST',
+                    //    dataType: 'json',
+                    //    contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+                    //    data: { model: formData, __RequestVerificationToken: $("[name=__RequestVerificationToken]").val() },
+                    //    success: function (response) {
+                    //        location.reload();
+                    //        alert('hellooo');
+                    //    }
+                    //});
+                } else {
+
+                    $.ajax({
+                        url: 'Importer/SearchCompanyName',
+                        type: 'POST',
+                        dataType: 'json',
+                        contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+                        //data: { model: formData, __RequestVerificationToken: $("[name=__RequestVerificationToken]").val() }
+                        data: { "registrationNumber": regNumber, __RequestVerificationToken: $("[name=__RequestVerificationToken]").val() },
+                        success: function (result) {
+                            $("#Business_Name").val(result);
+                        }
+                    });
+                }
+                event.preventDefault();
+            });
+        });
+    </script>
 }

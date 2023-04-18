@@ -70,6 +70,15 @@ namespace EA.Iws.Web.Areas.ImportNotification.ViewModels.Shared {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to &apos;Trading as&apos; name.
+        /// </summary>
+        public static string OrgTradingName {
+            get {
+                return ResourceManager.GetString("OrgTradingName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Registration number.
         /// </summary>
         public static string RegistrationNumber {

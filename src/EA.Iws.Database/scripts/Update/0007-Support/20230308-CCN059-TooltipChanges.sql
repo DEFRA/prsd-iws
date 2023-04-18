@@ -1,0 +1,1 @@
+﻿ALTER TABLE [Notification].[Exporter] ADD IsUkBased BIT NOT NULL DEFAULT 1;

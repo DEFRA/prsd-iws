@@ -61,11 +61,38 @@ namespace EA.Iws.Web.Areas.ImportNotification.Views.Exporter {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Organisation name.
+        /// </summary>
+        public static string OrganisationNameTitle {
+            get {
+                return ResourceManager.GetString("OrganisationNameTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Organisation.
         /// </summary>
         public static string OrganisationSubtitle {
             get {
                 return ResourceManager.GetString("OrganisationSubtitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to For example &apos;A&amp;B Materials CD&apos;.
+        /// </summary>
+        public static string OrgNameHintMsg {
+            get {
+                return ResourceManager.GetString("OrgNameHintMsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The name your organisation trades under if different to your organisation name.
+        /// </summary>
+        public static string OrgTradingNameHint {
+            get {
+                return ResourceManager.GetString("OrgTradingNameHint", resourceCulture);
             }
         }
         
@@ -84,6 +111,15 @@ namespace EA.Iws.Web.Areas.ImportNotification.Views.Exporter {
         public static string Title {
             get {
                 return ResourceManager.GetString("Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The name your organisation trades under if different to your organisation name.
+        /// </summary>
+        public static string TradeNameHintMsg {
+            get {
+                return ResourceManager.GetString("TradeNameHintMsg", resourceCulture);
             }
         }
     }

@@ -47,7 +47,7 @@
             {
                 Address = model.Address.AsAddress(),
                 AreMultiple = model.AreMultiple,
-                BusinessName = model.Business.Name,
+                BusinessName = (string.IsNullOrEmpty(model.Business.OrgTradingName) ? model.Business.Name : (model.Business.Name + " T/A " + model.Business.OrgTradingName)),
                 Contact = model.Contact.AsContact(),
                 IsAddedToAddressBook = model.IsAddedToAddressBook,
                 Type = model.BusinessType,

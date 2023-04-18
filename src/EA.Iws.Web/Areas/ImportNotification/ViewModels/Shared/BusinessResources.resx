@@ -120,6 +120,9 @@
   <data name="BusinessName" xml:space="preserve">
     <value>Organisation name</value>
   </data>
+  <data name="OrgTradingName" xml:space="preserve">
+    <value>'Trading as' name</value>
+  </data>
   <data name="RegistrationNumber" xml:space="preserve">
     <value>Registration number</value>
   </data>

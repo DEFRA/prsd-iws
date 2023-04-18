@@ -79,6 +79,42 @@ namespace EA.Iws.Web.Areas.ImportNotification.Views.Facility {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Organisation name.
+        /// </summary>
+        public static string OrganisationNameTitle {
+            get {
+                return ResourceManager.GetString("OrganisationNameTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Use the &apos;Import name&apos; button to import the name from Companies House using the registration number. If no organisation name is found, please check your registration number and retry. If your Organisation name is not available, you may need to change the Company type and enter the name manually..
+        /// </summary>
+        public static string OrgHelpWithNamingDescription {
+            get {
+                return ResourceManager.GetString("OrgHelpWithNamingDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to For example &apos;A&amp;B Materials CD&apos;.
+        /// </summary>
+        public static string OrgNameHintMsg {
+            get {
+                return ResourceManager.GetString("OrgNameHintMsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The name your organisation trades under if different to your organisation name.
+        /// </summary>
+        public static string OrgTradingNameHint {
+            get {
+                return ResourceManager.GetString("OrgTradingNameHint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Other.
         /// </summary>
         public static string OtherLabel {

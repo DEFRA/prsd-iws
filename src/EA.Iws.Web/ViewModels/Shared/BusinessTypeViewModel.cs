@@ -10,8 +10,14 @@
         [Display(Name = "OrgName", ResourceType = typeof(BusinessResources))]
         public string Name { get; set; }
 
+        [Display(Name = "OrgTradingName", ResourceType = typeof(BusinessResources))]
+        public string OrgTradingName { get; set; }
+
         [Display(Name = "BusinessTypeHeader", ResourceType = typeof(BusinessResources))]
         public string BusinessTypeHeader { get; set; }
+
+        [Display(Name = "OrgType", ResourceType = typeof(BusinessResources))]
+        public bool? IsUkBased { get; set; }
 
         [Required(ErrorMessageResourceType = typeof(BusinessResources), ErrorMessageResourceName = "OrgTypeRequired")]
         [Display(Name = "OrgType", ResourceType = typeof(BusinessResources))]

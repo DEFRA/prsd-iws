@@ -88,11 +88,29 @@ namespace EA.Iws.Core.Shared {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Town or city.
+        ///   Looks up a localized string similar to Street Name followed by Unit Number. For example: Example Street, 21.
+        /// </summary>
+        public static string AddressLine1HintNonUK {
+            get {
+                return ResourceManager.GetString("AddressLine1HintNonUK", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Town or City.
         /// </summary>
         public static string City {
             get {
                 return ResourceManager.GetString("City", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Area code (typically multiple digits with two characters) followed by Town. For example: 4782 PW, Moerdijk.
+        /// </summary>
+        public static string CityHintNonUK {
+            get {
+                return ResourceManager.GetString("CityHintNonUK", resourceCulture);
             }
         }
         
@@ -115,7 +133,16 @@ namespace EA.Iws.Core.Shared {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The Contry field is required..
+        ///   Looks up a localized string similar to Select the country the organisation is operating from.
+        /// </summary>
+        public static string CountryHint {
+            get {
+                return ResourceManager.GetString("CountryHint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The Country field is required..
         /// </summary>
         public static string CountryRequired {
             get {
@@ -147,6 +174,15 @@ namespace EA.Iws.Core.Shared {
         public static string Postcode {
             get {
                 return ResourceManager.GetString("Postcode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to For example: AB1 2CD.
+        /// </summary>
+        public static string PostCodeHint {
+            get {
+                return ResourceManager.GetString("PostCodeHint", resourceCulture);
             }
         }
         
