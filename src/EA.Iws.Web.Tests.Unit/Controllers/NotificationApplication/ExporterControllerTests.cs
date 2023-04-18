@@ -21,14 +21,12 @@
         private readonly Guid notificationId = new Guid("81CBBCEE-34C0-4628-B054-E0D8135A7947");
         private readonly ExporterController exporterController;
         private readonly IAuditService auditService;
-        private readonly ElmahSqlLogger logger;
 
         public ExporterControllerTests()
         {
             client = A.Fake<IMediator>();
             auditService = A.Fake<IAuditService>();
-            logger = A.Fake<ElmahSqlLogger>();
-            exporterController = new ExporterController(client, new AddAddressBookEntryMap(), auditService, logger);
+            exporterController = new ExporterController(client, new AddAddressBookEntryMap(), auditService);
 
             A.CallTo(() => auditService.AddAuditEntry(client, notificationId, "user", NotificationAuditType.Added, NotificationAuditScreenType.Exporter));
         }
