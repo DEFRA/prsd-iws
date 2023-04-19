@@ -41,14 +41,37 @@
                 </label>
             </div>
 
-            <div class="govuk-radios__item">
-                @Html.RadioButtonFor(m => m.BusinessType, BusinessType.LimitedCompany, new { @class = "govuk-radios__input", id = "LimitedCompany" })
+            <div class="govuk-radios__item" data-target="companies-house-number">
+                @Html.RadioButtonFor(m => m.BusinessType, BusinessType.LimitedCompany, new { @class = "govuk-radios__input", @id = "LimitedCompany" })
                 <label class="govuk-label govuk-radios__label" for="LimitedCompany">
                     @EnumHelper.GetDisplayName(BusinessType.LimitedCompany)
                 </label>
             </div>
 
-            <div class="govuk-radios__item">
+            <div class="panel @(Model.BusinessType != null && Model.BusinessType.Equals("Limited company") ? "" : "js-hidden")" id="companies-house-number">
+                <div class="govuk-form-group @Html.Gds().FormGroupClass(m => m.Business.RegistrationNumber)" data-validation-behaviour="ignore-parent">
+                    @Html.Gds().LabelFor(m => m.Business.RegistrationNumber, false)
+                    <span class="form-hint" id="RegNumHintUk">@Resource.RegistrationNumberHintUK</span>
+                    <span class="form-hint" id="RegNumHintNonUk" style="display:none;">@Resource.RegistrationNumberHintNonUK</span>
+                    @Html.Gds().ValidationMessageFor(m => m.Business.RegistrationNumber)
+                    @Html.Gds().TextBoxFor(m => m.Business.RegistrationNumber)
+                    <div>
+                        <br />
+                    </div>
+                    <details id="CompaniesHouseSummary" data-target="companies-house-number" class="govuk-details" data-module="govuk-details">
+                        <summary class="govuk-details__summary">
+                            <span class="govuk-details__summary-text">
+                                @Resource.WhereToFindCompanyHouse
+                            </span>
+                        </summary>
+                        <div class="govuk-details__text">
+                            @Html.Raw(Resource.CompanyHouseDescription)
+                        </div>
+                    </details>
+                </div>
+            </div>
+
+            <div class="govuk-radios__item" data-target="other-description">
                 @Html.RadioButtonFor(m => m.BusinessType, BusinessType.Other, new { @class = "govuk-radios__input", id = "Other" })
                 <label class="govuk-label govuk-radios__label" for="Other">
                     @EnumHelper.GetDisplayName(BusinessType.Other)
@@ -90,8 +113,13 @@
         @Html.Gds().LabelFor(m => m.Business.Name, false)
         @Html.Gds().ValidationMessageFor(m => m.Business.Name)
 
-        <div id="dvBtnImportName" class="govuk-form-group">
-            <button id="btnImportName" class="govuk-button" type="submit">Import name</button>
+        <div id="dvBtnImportName">
+            <span class="form-hint">
+                Please enter above registration number to enable 'Import name' button.
+            </span>
+            <button id="btnImportName" class="govuk-button" type="submit" style="margin-bottom: 10px">Import name</button>
+            <span class="field-validation-error govuk-error-message" id="errorMessage">
+            </span>
         </div>
 
         @Html.Gds().HintSpan(@Resource.OrgNameHintMsg, id: "hintOrgName")
@@ -134,8 +162,8 @@
 @section scripts {
     <script type="text/javascript">
 
-        function hideImportFromCompHouseSection() {
-            $("#btnImportName").hide();
+        function hideFacilityFromCompanyHouseSection() {
+            $("#dvBtnImportName").hide();
             $("#hintOrgName").show();
             $("#Business_Name").removeAttr('readonly');
             $("#dvOrgNameDesction").hide();
@@ -143,13 +171,22 @@
             $("#dvRegNumber").show();
         }
 
-        function showImportFromCompHouseSection() {
+        function showFacilityFromCompanyHouseSection() {
+            $("#dvBtnImportName").show();
+            $("#hintOrgName").show();
             $("#btnImportName").show();
-            $("#hintOrgName").hide();
             $("#Business_Name").attr('readonly', 'readonly');
             $("#dvOrgNameDesction").show();
             $("#dvOrgNameDetails").hide();
             $("#dvRegNumber").hide();
+        }
+
+        function disabledFacilityImportNameButton() {
+            $('#btnImportName').attr('disabled', 'disabled');
+        }
+
+        function enabledFacilityImportNameButton() {
+            $('#btnImportName').removeAttr('disabled');
         }
 
         $(function () {
@@ -162,62 +199,66 @@
             $("#dvOrgNameDetails").show();
 
             $('#SoleTrader').click(function () {
-                hideImportFromCompHouseSection();
+                hideFacilityFromCompanyHouseSection();
             });
 
             $('#Partnership').click(function () {
-                hideImportFromCompHouseSection();
+                hideFacilityFromCompanyHouseSection();
             });
 
             $('#LimitedCompany').click(function () {
-                showImportFromCompHouseSection();
+                showFacilityFromCompanyHouseSection();
             });
 
             $('#Other').click(function () {
-                hideImportFromCompHouseSection();
+                hideFacilityFromCompanyHouseSection();
             });
 
-            var isLimitedCompanyChecked = document.querySelector('input[id="LimitedCompany"]:checked').value;
-            if (isLimitedCompanyChecked) {
-                showImportFromCompHouseSection();
+            var isLimitedCompany = $("input[id='LimitedCompany']:checked").val();
+            if (isLimitedCompany) {
+                showFacilityFromCompanyHouseSection();
+            } else {
+                hideFacilityFromCompanyHouseSection();
             }
+
+            var regNumber = $('#Business_RegistrationNumber').val();
+            if ((regNumber === null) || (regNumber === '')) {
+                disabledFacilityImportNameButton();
+            }
+
+            $("#Business_RegistrationNumber").keyup(function () {
+                var regNumber = $('#Business_RegistrationNumber').val();
+                if ((regNumber === null) || (regNumber === '')) {
+                    disabledFacilityImportNameButton();
+                } else {
+                    enabledFacilityImportNameButton();
+                }
+            });
 
             $('#btnImportName').click(function () {
                 var regNumber = $('#Business_RegistrationNumber').val();
-
-                let formData = {
-                    NotificationId: $("#NotificationId").val(),
-                    IsAddedToAddressBook: $("#IsAddedToAddressBook").val(),
-                    Business: { RegistrationNumber: regNumber }
-                }
-
-                if ((regNumber == null) || (regNumber == '')) {
-                    //$.ajax({
-                    //    url: 'exporter/IndexWithError',
-                    //    type: 'POST',
-                    //    dataType: 'json',
-                    //    contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
-                    //    data: { model: formData, __RequestVerificationToken: $("[name=__RequestVerificationToken]").val() },
-                    //    success: function (response) {
-                    //        location.reload();
-                    //        alert('hellooo');
-                    //    }
-                    //});
-                } else {
-
+                if ((regNumber !== null) && (regNumber !== '')) {
                     $.ajax({
-                        url: 'Importer/SearchCompanyName',
+                        url: '@Url.Action("GetCompanyName")',
                         type: 'POST',
                         dataType: 'json',
                         contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
-                        //data: { model: formData, __RequestVerificationToken: $("[name=__RequestVerificationToken]").val() }
                         data: { "registrationNumber": regNumber, __RequestVerificationToken: $("[name=__RequestVerificationToken]").val() },
                         success: function (result) {
-                            $("#Business_Name").val(result);
+                            if (result.success) {
+                                $("#Business_Name").val(result.companyName);
+                                $("#errorMessage").text("");
+                            } else {
+                                $("#errorMessage").text(result.errorMsg);
+                                $("#Business_Name").val("");
+                            }
+                        },
+                        error: function (xhr, textStatus, errorThrown) {
+                            console.log("Error: " + errorThrown);
                         }
                     });
                 }
-                event.preventDefault();
+                return false;
             });
         });
     </script>
