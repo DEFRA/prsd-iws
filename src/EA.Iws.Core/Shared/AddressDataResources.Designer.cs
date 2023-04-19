@@ -70,7 +70,7 @@ namespace EA.Iws.Core.Shared {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Please enter the first line of your address.
+        ///   Looks up a localized string similar to Enter an address (line 1) using letters and numbers only.
         /// </summary>
         public static string Address1Required {
             get {
@@ -115,7 +115,7 @@ namespace EA.Iws.Core.Shared {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Please enter your town or city.
+        ///   Looks up a localized string similar to Enter a town/city using letters and numbers only.
         /// </summary>
         public static string CityRequired {
             get {
@@ -142,7 +142,7 @@ namespace EA.Iws.Core.Shared {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The Country field is required..
+        ///   Looks up a localized string similar to Enter a county using letters only.
         /// </summary>
         public static string CountryRequired {
             get {
@@ -187,7 +187,7 @@ namespace EA.Iws.Core.Shared {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Please enter the post code.
+        ///   Looks up a localized string similar to Enter a postcode using letters and numbers only.
         /// </summary>
         public static string PostcodeRequired {
             get {

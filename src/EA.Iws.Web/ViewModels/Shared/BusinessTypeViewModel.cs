@@ -16,7 +16,6 @@
         [Display(Name = "BusinessTypeHeader", ResourceType = typeof(BusinessResources))]
         public string BusinessTypeHeader { get; set; }
 
-        [Display(Name = "OrgType", ResourceType = typeof(BusinessResources))]
         public bool? IsUkBased { get; set; }
 
         [Required(ErrorMessageResourceType = typeof(BusinessResources), ErrorMessageResourceName = "OrgTypeRequired")]
