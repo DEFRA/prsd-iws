@@ -61,6 +61,15 @@ namespace EA.Iws.Web.Areas.ImportNotification.Views.Facility {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Your Companies House number is on your organisation&apos;s certificate of incorporation. You can also get the number from your organisation&apos;s accountant or accounts department..
+        /// </summary>
+        public static string CompanyHouseDescription {
+            get {
+                return ResourceManager.GetString("CompanyHouseDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Limited Company.
         /// </summary>
         public static string LimitedCompanyLabel {
@@ -124,6 +133,24 @@ namespace EA.Iws.Web.Areas.ImportNotification.Views.Facility {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to This should be the registration number of the company in the country in which they are registered..
+        /// </summary>
+        public static string RegistrationNumberHintNonUK {
+            get {
+                return ResourceManager.GetString("RegistrationNumberHintNonUK", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The 8-character code as documented by Companies House..
+        /// </summary>
+        public static string RegistrationNumberHintUK {
+            get {
+                return ResourceManager.GetString("RegistrationNumberHintUK", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Edit a facility.
         /// </summary>
         public static string TabTitle {
@@ -138,6 +165,15 @@ namespace EA.Iws.Web.Areas.ImportNotification.Views.Facility {
         public static string Title {
             get {
                 return ResourceManager.GetString("Title", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Where can I find my Companies House number?.
+        /// </summary>
+        public static string WhereToFindCompanyHouse {
+            get {
+                return ResourceManager.GetString("WhereToFindCompanyHouse", resourceCulture);
             }
         }
     }

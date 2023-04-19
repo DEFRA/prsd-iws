@@ -73,6 +73,14 @@
             $("#dvOrgNameDetails").hide();
         }
 
+        function disabledImportNameButton() {
+            $('#btnImportName').attr('disabled', 'disabled');
+        }
+
+        function enabledImportNameButton() {
+            $('#btnImportName').removeAttr('disabled');
+        }
+
         $(function () {
             //On page load, controls hide
             $("#dvBtnImportName").hide();
@@ -82,18 +90,12 @@
             $("#hintOrgName").show();
             $("#dvOrgNameDetails").show();
 
-            $('#yes').click(function () {
-                var isLimitedCompany = $("input[id='LimitedCompany']:checked").val();
-                if (isLimitedCompany) {
-                    showImportFromCompHouseSection();
-                } else {
-                    hideImportFromCompHouseSection();
-                }
-            });
-
-            $('#no').click(function () {
+            var isLimitedCompany = $("input[id='LimitedCompany']:checked").val();
+            if (isLimitedCompany) {
+                showImportFromCompHouseSection();
+            } else {
                 hideImportFromCompHouseSection();
-            });
+            }
 
             $('#SoleTrader').click(function () {
                 hideImportFromCompHouseSection();
@@ -111,45 +113,44 @@
                 hideImportFromCompHouseSection();
             });
 
+            var regNumber = $('#Business_RegistrationNumber').val();
+            if ((regNumber === null) || (regNumber === '')) {
+                disabledImportNameButton();
+            }
+
+            $("#Business_RegistrationNumber").keyup(function () {
+                var regNumber = $('#Business_RegistrationNumber').val();
+                if ((regNumber === null) || (regNumber === '')) {
+                    disabledImportNameButton();
+                } else {
+                    enabledImportNameButton();
+                }
+            });
+
             $('#btnImportName').click(function () {
                 var regNumber = $('#Business_RegistrationNumber').val();
-
-                let formData = {
-                    NotificationId: $("#NotificationId").val(),
-                    //IsUkBased: document.querySelector('input[name="IsUkBased"]:checked').value,
-                    IsAddedToAddressBook: $("#IsAddedToAddressBook").val(),
-                    Business: { RegistrationNumber: regNumber }
-                }
-
-                if ((regNumber == null) || (regNumber == '')) {
-
-                    //$.ajax({
-                    //    url: 'exporter/IndexWithError',
-                    //    type: 'POST',
-                    //    dataType: 'json',
-                    //    contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
-                    //    data: { model: formData, __RequestVerificationToken: $("[name=__RequestVerificationToken]").val() },
-                    //    success: function (response) {
-                    //        location.reload();
-                    //        alert('hellooo');
-                    //    }
-                    //});
-
-                } else {
-
+                if ((regNumber !== null) && (regNumber !== '')) {
                     $.ajax({
-                        url: 'exporter/SearchCompanyName',
+                        url: '@Url.Action("GetCompanyName")',
                         type: 'POST',
                         dataType: 'json',
                         contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
-                        //data: { model: formData, __RequestVerificationToken: $("[name=__RequestVerificationToken]").val() }
                         data: { "registrationNumber": regNumber, __RequestVerificationToken: $("[name=__RequestVerificationToken]").val() },
                         success: function (result) {
-                            $("#Business_Name").val(result);
+                            if (result.success) {
+                                $("#Business_Name").val(result.companyName);
+                                $("#errorMessage").text("");
+                            } else {
+                                $("#errorMessage").text(result.errorMsg);
+                                $("#Business_Name").val("");
+                            }
+                        },
+                        error: function (xhr, textStatus, errorThrown) {
+                            console.log("Error: " + errorThrown);
                         }
                     });
                 }
-                event.preventDefault();
+                return false;
             });
         });
     </script>
